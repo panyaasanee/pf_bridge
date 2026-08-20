@@ -415,4 +415,8 @@ Panya เคาะ **cadence รายชั่วโมง แต่ต้อ�
 > รอบ 91 อ่านทรี รันเทสซ้ำจนเขียว แล้ว commit `d4ed4d4` (HYP-PF-024 ลงจริง 16 path) +
 > เปิด RUNTIMERES-LATCHONLY-001 (`47c7211`) ตามที่ผู้เทสขอ · บทเรียนหลัก: **guard ที่แดงคือ guard ที่ทำงาน**
 > และ **takeover แล้วให้อ่านทรีก่อน อย่าเขียนทับ**
+
 - R112 2026-08-20 ~18:00 UTC v4 live ครั้งแรก: probe ผ่าน (MCP อ่าน API ได้ · gh ไม่มี · ทาง D มีชีวิต) · เขียว(cloud sanity) 948 pass ที่ server 2842fb9 · พบ clone เป็น shallow ต้อง --unshallow · PR ใบนี้ = ทดสอบ merge-claude-pr ฝั่ง bridge ครั้งแรก -> rounds/R112_v4_first_live_round_probe_and_pipeline.md
+- R112(xt9cn1) 2026-08-20 ~18:0xZ **รอบ 112 ตัวที่สอง รันพร้อมกันกับตัวบน** (routine ยิงสองเซสชัน ทั้งคู่เห็นล็อกว่างพร้อมกัน) — ท่อ automerge **พิสูจน์ครบสองขาแล้ว**: PR #3 merge เอง ไม่มี 403 · PR #4 ชน merge แล้วถูก bot ปิด+เก็บ branch · เพิ่ม: `curl` ยิง GitHub API ได้จริง (หักล้าง R109/R110) -> rounds/R112_xt9cn1_automerge_proven_and_concurrent_round_evidence.md
+  🔴 กฎ "หนึ่งรอบหนึ่งไฟล์" กันการชนนี้ไม่ได้ เพราะสองเซสชันเลือก**เลขรอบและชื่อไฟล์เดียวกันเป๊ะ** ⇒ เสนอ v5: ใส่ท้าย branch ที่สุ่มไม่ซ้ำลงในชื่อไฟล์ทุกใบ
+
