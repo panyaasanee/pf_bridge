@@ -1,0 +1,21 @@
+CONSUMED by chief round 110 on 2026-08-20 ~21:00.
+Copy kept at notes_to_chief/consumed/ (original left in place, per house norm: nothing is deleted).
+
+Where the content went:
+  - four answers + the three questions that could NOT be answered
+        -> pf_bridge/PANYA_REPORT_20260820_answers_PR_lock.md
+  - the merge/close workflow (order item 2)
+        -> Pirate Force ServerProject/.github/workflows/merge-claude-pr.yml   (code repo)
+        -> pf_bridge/drafts/WORKFLOW_bridge_merge-claude-pr.yml               (docs repo, DRAFT)
+        -> pf_bridge/drafts/INSTALL_merge_workflows_20260820.md               (how to install, both)
+  - prompt v4 (order item 3, A-prime and the file guard replaced)
+        -> pf_bridge/agent_kit/chief_task_prompt_CLOUD_v4_20260820.md
+  - cloud_round_lock.json decision (order item 4): KEPT as a tombstone, not deleted
+        -> pf_bridge/cloud_round_lock.json
+  - the round-108 wrong conclusion ("the Actions API cannot be read from the sandbox")
+        -> CORRECTION block + 11 in-place markers in
+           pf_bridge/FINDINGS_R108_A_PRIME_HOW_TO_READ_ACTIONS.md
+  - round log -> pf_bridge/CHIEF_CONTINUATION.md
+
+Scope respected: nothing pushed, nothing merged, no PR touched, no routine touched,
+no index staged in either repository.
