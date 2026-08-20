@@ -1,0 +1,611 @@
+# pf_git_sync.ps1 - the Windows side of the two-machine split.  ASCII only.
+#
+# WHY THIS EXISTS (chief round 108, 2026-08-20, ordered by Panya at ~18:00 in
+# notes_to_chief\20260820_1800_PANYA-DECISION-sync-design-approved.md).
+# The chief is moving off this machine and onto a cloud routine that clones the
+# two repositories at the start of every run.  From there it can see exactly one
+# thing: what has been pushed.  The tester keeps working on this machine, and the
+# tester's results - letters in notes_to_chief\ and screenshots in
+# evidence_screens\ - are the only things this machine has to say back.  So this
+# script carries mail in both directions on a five minute clock and does nothing
+# else.  Every design decision below is written down in DESIGN_R107_WINDOWS_SYNC.md;
+# what follows are the ones that shape the code.
+#
+# THE FLAG SYSTEM DOES NOT CROSS MACHINES AND MUST NOT.  Both flags guard one
+# machine's physical resources - ports, the server process, the game window, the
+# canonical database, this worktree's git index - and a cloud chief can reach none
+# of them, so a flag it held would protect nothing.  What replaces it is disjoint
+# write sets plus the push rejection git already performs atomically on the server.
+# That rejection is the only real mutual exclusion this system has, which is the
+# single reason --force is forbidden outright, here and in the cloud prompt.
+# It also means the flags must never travel: if a pull ever overwrote LOCK_GAME.txt
+# the whole flag system would fail silently, which is worse than having no flags.
+# Hence guard [0], which refuses to do anything at all on a day when .gitignore has
+# stopped ignoring the three flag files.
+#
+# WHAT IT MAY PUSH: notes_to_chief/** and evidence_screens/** and nothing else.
+# Both are new files with timestamps in their names, so a rebase cannot collide by
+# construction rather than by luck.  CHIEF_CONTINUATION.md and GAME_TEST_QUEUE.md
+# are deliberately NOT in the allowlist: the chief owns them, and if they are
+# edited on this machine the fast-forward pull fails loudly and this script stops
+# and says so, with nothing lost - the edits are still on the disk.
+#
+# WHAT IT REFUSES: deletions, files over 2 MB, proprietary extensions and names,
+# anything outside the allowlist, --force, reset, clean, stash, checkout, restore,
+# add -A, commit -a, editing .gitignore, running pytest or the gate, and starting
+# or stopping the server or the game.  Out of script means stop and shout, never
+# repair - the same rule the watchdog follows when it fails to kill a frozen bridge.
+#
+# TWO BUGS THIS FILE IS BUILT AROUND, both measured on this machine:
+#  - PS 5.1 Out-File -Encoding utf8 writes a BOM.  LOCK_GIT.txt carried one, and
+#    the guard $firstLine -cmatch '^HELD:' in done\169_*.ps1:83 therefore failed to
+#    match WHILE THE FLAG WAS HELD.  Every flag read here strips U+FEFF first, and
+#    every write in this file uses -Encoding ascii.
+#  - A character outside cp874 in console output turns the gate red on Windows only
+#    (round 86).  Everything that reaches sync.log passes through AsciiSafe first,
+#    including git's own output, which may carry Thai from a chief commit message.
+#
+# MODES
+#   (no switch)  the real thing: pull, commit the allowlist, push, pull the server
+#   -DryRun      fetches and reports, but never merges, commits, pushes or writes
+#                the real heartbeat.  Safe to run while someone else is working.
+#   -SelfCheck   guards and a receipt only.  Touches no network and no index.
+#   -NoServer    skip step [5] entirely (used by the self test harness)
+#   -BridgeRepo / -ServerRepo  point at scratch clones instead of the real ones,
+#                which is how pf_git_sync_selftest.ps1 proves the refusals without
+#                going anywhere near GitHub.
+#
+# EXIT CODES
+#   0  round completed, or deliberately skipped (flag held, index.lock, offline)
+#   2  .gitignore no longer ignores all three flags - PERMANENT HALT
+#   3  SYNC_NEEDS_HUMAN.txt exists - halted until a human deletes it
+#   4  bridge pull blocked by local modifications to chief-owned files
+#   5  commit refused by a content guard (deletion, size, proprietary)
+#   6  push failed and one rebase did not fix it
+#   7  rebase conflicted - PERMANENT HALT, the disjoint-write-sets rule has broken
+#   9  bad invocation (missing repo, git not found)
+
+param(
+    [string]$BridgeRepo = 'C:\Users\Panya\Desktop\Pirate Force\pf_bridge',
+    [string]$ServerRepo = 'C:\Users\Panya\Desktop\Pirate Force\Pirate Force ServerProject',
+    [string]$Branch     = 'main',
+    [switch]$DryRun,
+    [switch]$SelfCheck,
+    [switch]$NoServer
+)
+
+$ErrorActionPreference = 'Continue'
+
+# A credential prompt inside a hidden scheduled task hangs forever and nobody sees
+# it.  Fail fast instead; a failed push is a line in the log, a wedged one is not.
+$env:GIT_TERMINAL_PROMPT = '0'
+
+$SIZE_LIMIT_BYTES  = 2MB
+$BAD_EXTENSIONS    = @('.bin', '.sqlite3', '.db', '.pcap', '.exe', '.dll')
+$BAD_NAME_PARTS    = @('gameclient', 'capture', 'pirateforce.sqlite')
+$ALLOWLIST         = @('notes_to_chief', 'evidence_screens')
+
+$logPath      = Join-Path $BridgeRepo 'sync.log'
+$hbPath       = Join-Path $BridgeRepo 'sync_last_check.txt'
+if ($DryRun) { $hbPath = Join-Path $BridgeRepo 'sync_last_check.dryrun.txt' }
+$ordersPath   = Join-Path $BridgeRepo 'NEW_ORDERS.txt'
+$haltPath     = Join-Path $BridgeRepo 'SYNC_NEEDS_HUMAN.txt'
+$attnPath     = Join-Path $BridgeRepo 'SYNC_ATTENTION.txt'
+$lockGamePath = Join-Path $BridgeRepo 'LOCK_GAME.txt'
+$lockGitPath  = Join-Path $BridgeRepo 'LOCK_GIT.txt'
+
+$script:Verdict = 'UNKNOWN'
+$script:Mode    = if ($SelfCheck) { 'SELFCHECK' } elseif ($DryRun) { 'DRYRUN' } else { 'LIVE' }
+
+# ---------------------------------------------------------------------------
+# helpers
+# ---------------------------------------------------------------------------
+
+function AsciiSafe([string]$s) {
+    if ($null -eq $s) { return '' }
+    # Anything outside printable ASCII becomes '?'.  Tabs and newlines survive.
+    return ($s -replace '[^\x09\x0A\x0D\x20-\x7E]', '?')
+}
+
+function Stamp() { return (Get-Date -Format 'yyyy-MM-dd HH:mm:ss') }
+
+function Log([string]$step, [string]$msg) {
+    $line = AsciiSafe ("$(Stamp)  [$($script:Mode)] $step  $msg")
+    Write-Output $line
+    try { $line | Out-File -FilePath $logPath -Encoding ascii -Append } catch { }
+}
+
+function Shout([string]$step, [string]$msg) {
+    Log $step ('SHOUT  ' + $msg)
+}
+
+function WriteAsciiFile([string]$path, [string[]]$lines) {
+    $safe = @()
+    foreach ($l in $lines) { $safe += (AsciiSafe ([string]$l)) }
+    $safe | Out-File -FilePath $path -Encoding ascii
+}
+
+function GitRun([string]$repo, [string[]]$cmd) {
+    $all = @('--no-optional-locks', '-C', $repo) + $cmd
+    $raw = & git @all 2>&1
+    $code = $LASTEXITCODE
+    $text = ''
+    if ($null -ne $raw) { $text = (($raw | ForEach-Object { AsciiSafe ([string]$_) }) -join "`n") }
+    return [pscustomobject]@{ Code = $code; Out = $text; Cmd = ($cmd -join ' ') }
+}
+
+# Read the first line of a flag file with the BOM stripped, because a BOM makes
+# '^HELD:' fail to match exactly when the flag IS held - the worst possible time.
+function FlagFirstLine([string]$path) {
+    if (-not (Test-Path -LiteralPath $path)) { return '' }
+    $first = ''
+    try { $first = [string](Get-Content -LiteralPath $path -TotalCount 1 -ErrorAction Stop) } catch { return '' }
+    if ($null -eq $first) { return '' }
+    $first = $first.TrimStart([char]0xFEFF)
+    return $first.Trim()
+}
+
+function FlagIsHeld([string]$path) {
+    $l = FlagFirstLine $path
+    return ($l -cmatch '^HELD:')
+}
+
+# porcelain paths are quoted only when they contain something unusual; renames
+# arrive as 'old -> new'.  Both shapes are handled so a surprise cannot be read
+# as an ordinary filename and silently staged.
+function ParsePorcelainPath([string]$rest) {
+    $p = $rest
+    if ($p -match ' -> ') { $p = ($p -split ' -> ')[-1] }
+    $p = $p.Trim()
+    if ($p.StartsWith('"') -and $p.EndsWith('"') -and $p.Length -ge 2) {
+        $p = $p.Substring(1, $p.Length - 2)
+    }
+    return $p
+}
+
+function Finish([int]$code, [string]$verdict, [string]$note) {
+    $script:Verdict = $verdict
+    if (-not $SelfCheck) {
+        $state = "$(Stamp)  $verdict"
+        try { WriteAsciiFile $hbPath @($state) } catch { }
+    }
+    Log '[7]' ("heartbeat  $verdict  $note")
+    Write-Output ''
+    Write-Output ('SYNC_MODE=' + $script:Mode)
+    Write-Output ('SYNC_VERDICT=' + $verdict)
+    Write-Output ('SYNC_EXIT=' + $code)
+    exit $code
+}
+
+# ---------------------------------------------------------------------------
+# preflight
+# ---------------------------------------------------------------------------
+
+Write-Output ("=== pf_git_sync  " + (Stamp) + "  mode=" + $script:Mode + " ===")
+
+$gitv = & git --version 2>&1
+if ($LASTEXITCODE -ne 0) {
+    Write-Output 'FATAL: git not found on PATH'
+    exit 9
+}
+Write-Output ('git: ' + (AsciiSafe ([string]$gitv)))
+
+if (-not (Test-Path -LiteralPath (Join-Path $BridgeRepo '.git'))) {
+    Write-Output ("FATAL: not a git repository: " + (AsciiSafe $BridgeRepo))
+    exit 9
+}
+
+# A previous round decided a human is needed.  Refuse to run until the human
+# deletes the file - a halt that heals itself is not a halt.
+if ((Test-Path -LiteralPath $haltPath) -and (-not $SelfCheck)) {
+    Log '[-]' ('halted: ' + (Split-Path -Leaf $haltPath) + ' exists - delete it to resume')
+    Finish 3 'HALTED_NEEDS_HUMAN' 'waiting for a human'
+}
+
+# ---------------------------------------------------------------------------
+# [0] the flags must still be ignored, or nothing else may happen
+# ---------------------------------------------------------------------------
+
+$flagNames = @('LOCK_GAME.txt', 'LOCK_GIT.txt', 'PANYA_PRESENT.txt')
+$ci = GitRun $BridgeRepo (@('check-ignore', '-v', '--no-index', '--') + $flagNames)
+$missing = @()
+foreach ($f in $flagNames) {
+    if ($ci.Out -notmatch [regex]::Escape($f)) { $missing += $f }
+}
+if ($missing.Count -gt 0) {
+    Shout '[0]' ('.gitignore no longer ignores: ' + ($missing -join ' ') + ' - a pull would overwrite a held flag')
+    if (-not $SelfCheck) {
+        WriteAsciiFile $haltPath @(
+            "SYNC HALTED  $(Stamp)"
+            ''
+            'Reason: .gitignore stopped ignoring one or more flag files:'
+            ('  ' + ($missing -join ' '))
+            ''
+            'Why this stops everything: a flag that travels between machines can be'
+            'overwritten by a pull while it is HELD, and the whole flag system then'
+            'fails silently, which is worse than having no flags at all.'
+            ''
+            'Fix the ignore rules, confirm with:'
+            '  git check-ignore -v --no-index -- LOCK_GAME.txt LOCK_GIT.txt PANYA_PRESENT.txt'
+            'then delete this file.  pf_git_sync.ps1 will not run until it is gone.'
+        )
+    }
+    Finish 2 'HALT_FLAGS_NOT_IGNORED' ($missing -join ' ')
+}
+Log '[0]' 'flag guard ok - all three flag files are ignored'
+
+# ---------------------------------------------------------------------------
+# [1] LOCK_GIT held means a human or a job owns the index right now
+# ---------------------------------------------------------------------------
+
+if (FlagIsHeld $lockGitPath) {
+    Log '[1]' ('LOCK_GIT is HELD (' + (FlagFirstLine $lockGitPath) + ') - skipping this round, not an error')
+    Finish 0 'SKIP_LOCK_GIT_HELD' 'someone owns the index'
+}
+Log '[1]' 'LOCK_GIT free'
+
+# ---------------------------------------------------------------------------
+# [2] a real index.lock means git itself is mid-operation
+# ---------------------------------------------------------------------------
+
+$idxLock = Join-Path $BridgeRepo '.git\index.lock'
+if (Test-Path -LiteralPath $idxLock) {
+    Log '[2]' 'index.lock present - another git process is running, skipping this round'
+    Finish 0 'SKIP_INDEX_LOCK' 'git busy'
+}
+Log '[2]' 'no index.lock'
+
+# ---------------------------------------------------------------------------
+# snapshot for [6]: what did the tester have before the pull
+# ---------------------------------------------------------------------------
+
+$notesDir = Join-Path $BridgeRepo 'notes_to_chief'
+$queueFile = Join-Path $BridgeRepo 'GAME_TEST_QUEUE.md'
+$beforeOrders = @()
+if (Test-Path -LiteralPath $notesDir) {
+    $beforeOrders = @(Get-ChildItem -LiteralPath $notesDir -Filter 'FROM_CHIEF_*' -File -ErrorAction SilentlyContinue |
+                      ForEach-Object { $_.Name })
+}
+$beforeQueue = $null
+if (Test-Path -LiteralPath $queueFile) { $beforeQueue = (Get-Item -LiteralPath $queueFile).LastWriteTimeUtc }
+$beforeHead = (GitRun $BridgeRepo @('rev-parse', 'HEAD')).Out.Trim()
+
+# ---------------------------------------------------------------------------
+# candidate scan - shared by SelfCheck, DryRun and the real run
+# ---------------------------------------------------------------------------
+
+$st = GitRun $BridgeRepo (@('status', '--porcelain', '--untracked-files=all', '--') + $ALLOWLIST)
+$candidates = @()
+$deletions  = @()
+foreach ($line in ($st.Out -split "`n")) {
+    if ($line.Trim().Length -lt 4) { continue }
+    $xy = $line.Substring(0, 2)
+    $path = ParsePorcelainPath $line.Substring(3)
+    if ($path.Length -eq 0) { continue }
+    if ($xy -match 'D' -or $xy -match 'R') { $deletions += ($xy.Trim() + ' ' + $path); continue }
+    $candidates += $path
+}
+
+$refusals = @()
+foreach ($rel in $candidates) {
+    $full = Join-Path $BridgeRepo ($rel -replace '/', '\')
+    $leaf = (Split-Path -Leaf $rel).ToLower()
+    $ext  = [System.IO.Path]::GetExtension($leaf)
+    if ($BAD_EXTENSIONS -contains $ext) { $refusals += ('extension ' + $ext + ' : ' + $rel); continue }
+    $hit = $false
+    foreach ($part in $BAD_NAME_PARTS) { if ($leaf.Contains($part)) { $hit = $true } }
+    if ($hit) { $refusals += ('name looks proprietary : ' + $rel); continue }
+    if (Test-Path -LiteralPath $full) {
+        $len = (Get-Item -LiteralPath $full).Length
+        if ($len -gt $SIZE_LIMIT_BYTES) { $refusals += ('size ' + $len + ' bytes > 2 MB : ' + $rel); continue }
+    }
+}
+
+Log '[4]' ('candidates=' + $candidates.Count + '  deletions=' + $deletions.Count + '  refusals=' + $refusals.Count)
+
+# ---------------------------------------------------------------------------
+# -SelfCheck stops here with a receipt and touches nothing
+# ---------------------------------------------------------------------------
+
+if ($SelfCheck) {
+    Write-Output ''
+    Write-Output '=== SELFCHECK RECEIPT ==='
+    Write-Output ('bridge repo : ' + (AsciiSafe $BridgeRepo))
+    Write-Output ('server repo : ' + (AsciiSafe $ServerRepo))
+    Write-Output ('branch      : ' + $Branch)
+    Write-Output ('remote      : ' + (GitRun $BridgeRepo @('remote', 'get-url', 'origin')).Out.Trim())
+    Write-Output ('head        : ' + $beforeHead)
+    Write-Output ('halt file   : ' + (Test-Path -LiteralPath $haltPath))
+    Write-Output ('LOCK_GAME   : ' + (FlagFirstLine $lockGamePath))
+    Write-Output ('LOCK_GIT    : ' + (FlagFirstLine $lockGitPath))
+    Write-Output 'check-ignore:'
+    foreach ($l in ($ci.Out -split "`n")) { Write-Output ('  ' + $l) }
+    Write-Output ('candidates  : ' + $candidates.Count)
+    foreach ($c in $candidates) { Write-Output ('  + ' + $c) }
+    Write-Output ('deletions   : ' + $deletions.Count)
+    foreach ($d in $deletions) { Write-Output ('  ! ' + $d) }
+    Write-Output ('refusals    : ' + $refusals.Count)
+    foreach ($r in $refusals) { Write-Output ('  X ' + $r) }
+    $serverDirty = 'n/a'
+    if (Test-Path -LiteralPath (Join-Path $ServerRepo '.git')) {
+        $sv = GitRun $ServerRepo @('status', '--porcelain')
+        $serverDirty = ('' + (@($sv.Out -split "`n" | Where-Object { $_.Trim() -ne '' })).Count + ' dirty path(s)')
+    }
+    Write-Output ('server      : ' + $serverDirty)
+    $v = 'SELFCHECK_OK'
+    if ($deletions.Count -gt 0 -or $refusals.Count -gt 0) { $v = 'SELFCHECK_WOULD_REFUSE' }
+    Finish 0 $v ('candidates=' + $candidates.Count)
+}
+
+# ---------------------------------------------------------------------------
+# [3] bridge pull - fast forward only, because it is the loudest thing that
+#     can happen and loud is the whole point
+# ---------------------------------------------------------------------------
+
+$fetch = GitRun $BridgeRepo @('fetch', 'origin', $Branch)
+if ($fetch.Code -ne 0) {
+    # Offline, or no credentials.  Neither is an emergency and neither is fixable
+    # from here; the next round in five minutes will try again.
+    Log '[3]' ('fetch failed (offline or no credentials) - skipping round: ' + ($fetch.Out -replace "`n", ' | '))
+    Finish 0 'SKIP_FETCH_FAILED' 'fetch failed'
+}
+
+$counts = (GitRun $BridgeRepo @('rev-list', '--left-right', '--count', ('HEAD...origin/' + $Branch))).Out.Trim()
+$ahead = 0
+$behind = 0
+if ($counts -match '^(\d+)\s+(\d+)$') { $ahead = [int]$matches[1]; $behind = [int]$matches[2] }
+Log '[3]' ('ahead=' + $ahead + ' behind=' + $behind)
+
+if ($behind -gt 0 -and $ahead -eq 0) {
+    if ($DryRun) {
+        Log '[3]' 'DRYRUN: would fast-forward the bridge repo'
+    } else {
+        $mg = GitRun $BridgeRepo @('merge', '--ff-only', ('origin/' + $Branch))
+        if ($mg.Code -ne 0) {
+            # By design this means a chief-owned file was edited on this machine.
+            # Nothing is lost: the edit is still on the disk.  Say so and stop.
+            Shout '[3]' ('fast-forward refused - a file the chief owns is modified here: ' + ($mg.Out -replace "`n", ' | '))
+            WriteAsciiFile $attnPath @(
+                "SYNC NEEDS ATTENTION  $(Stamp)"
+                ''
+                'git merge --ff-only was refused on the pf_bridge repository.'
+                'The usual cause is a locally modified file that the chief owns'
+                '(CHIEF_CONTINUATION.md or GAME_TEST_QUEUE.md are the two that matter).'
+                'Those files are not in the push allowlist on purpose, so local edits'
+                'to them can never travel and will block every pull until resolved.'
+                ''
+                'Nothing has been lost.  Your edits are still on the disk.'
+                'git said:'
+                ($mg.Out)
+                ''
+                'This file disappears by itself on the first round that succeeds.'
+            )
+            Finish 4 'STOP_LOCAL_EDITS_BLOCK_PULL' 'ff-only refused'
+        }
+        Log '[3]' 'fast-forwarded'
+    }
+} elseif ($behind -gt 0 -and $ahead -gt 0) {
+    Log '[3]' 'diverged - leaving it to the rebase in [4]'
+} else {
+    Log '[3]' 'already up to date'
+}
+
+# ---------------------------------------------------------------------------
+# [4] bridge push - allowlist only, explicit adds, no deletions, ever
+# ---------------------------------------------------------------------------
+
+if ($deletions.Count -gt 0) {
+    Shout '[4]' ('refusing the whole commit: ' + $deletions.Count + ' deletion or rename inside the allowlist')
+    foreach ($d in $deletions) { Log '[4]' ('  ! ' + $d) }
+    Log '[4]' 'a deletion is never committed by this script.  Move the file back, or let a human commit it deliberately.'
+    Finish 5 'REFUSED_DELETION' ($deletions.Count.ToString() + ' deletion(s)')
+}
+
+if ($refusals.Count -gt 0) {
+    Shout '[4]' ('refusing the whole commit: ' + $refusals.Count + ' file(s) failed the proprietary guard')
+    foreach ($r in $refusals) { Log '[4]' ('  X ' + $r) }
+    Log '[4]' 'one bad file cancels the commit - it is not skipped and the rest are not pushed.'
+    Finish 5 'REFUSED_PROPRIETARY' ($refusals.Count.ToString() + ' file(s)')
+}
+
+$committed = 0
+if ($candidates.Count -gt 0) {
+    if ($DryRun) {
+        Log '[4]' ('DRYRUN: would stage and commit ' + $candidates.Count + ' file(s)')
+        foreach ($c in $candidates) { Log '[4]' ('  + ' + $c) }
+    } else {
+        # read-tree HEAD makes the index exactly HEAD without touching the working
+        # tree, so nothing anyone left staged can ride along.  Then every path is
+        # named explicitly - add -A is forbidden here.
+        $rt = GitRun $BridgeRepo @('read-tree', 'HEAD')
+        if ($rt.Code -ne 0) {
+            Shout '[4]' ('read-tree failed: ' + $rt.Out)
+            Finish 5 'REFUSED_READTREE_FAILED' 'read-tree'
+        }
+        foreach ($c in $candidates) {
+            $ad = GitRun $BridgeRepo @('add', '--', $c)
+            if ($ad.Code -ne 0) { Shout '[4]' ('add failed for ' + $c + ': ' + $ad.Out) }
+        }
+        $staged = GitRun $BridgeRepo @('diff', '--cached', '--name-status')
+        $stagedLines = @($staged.Out -split "`n" | Where-Object { $_.Trim() -ne '' })
+        $stagedDel = @($stagedLines | Where-Object { $_ -cmatch '^D' })
+        if ($stagedDel.Count -gt 0) {
+            Shout '[4]' ('the index contains ' + $stagedDel.Count + ' deletion(s) after an explicit add - aborting')
+            GitRun $BridgeRepo @('read-tree', 'HEAD') | Out-Null
+            Finish 5 'REFUSED_STAGED_DELETION' 'staged deletion'
+        }
+        if ($stagedLines.Count -ne $candidates.Count) {
+            # Not fatal: git may consider a file unchanged.  But the numbers are
+            # printed side by side so a silent mismatch cannot pass unnoticed.
+            Log '[4]' ('note: staged ' + $stagedLines.Count + ' path(s) for ' + $candidates.Count + ' candidate(s)')
+        }
+        if ($stagedLines.Count -gt 0) {
+            $msg = 'sync: ' + $stagedLines.Count + ' file(s) from the Windows bridge, ' + (Stamp) + ' (pf_git_sync.ps1, allowlist only)'
+            $cm = GitRun $BridgeRepo @('commit', '-m', $msg)
+            if ($cm.Code -ne 0) {
+                Shout '[4]' ('commit failed: ' + ($cm.Out -replace "`n", ' | '))
+                Finish 5 'REFUSED_COMMIT_FAILED' 'commit'
+            }
+            $committed = $stagedLines.Count
+            Log '[4]' ('committed ' + $committed + ' path(s)')
+        } else {
+            Log '[4]' 'nothing actually changed - no commit'
+        }
+    }
+} else {
+    Log '[4]' 'nothing new under the allowlist'
+}
+
+if (-not $DryRun) {
+    $counts2 = (GitRun $BridgeRepo @('rev-list', '--left-right', '--count', ('HEAD...origin/' + $Branch))).Out.Trim()
+    $ahead2 = 0
+    if ($counts2 -match '^(\d+)\s+(\d+)$') { $ahead2 = [int]$matches[1] }
+    if ($ahead2 -gt 0) {
+        $ps = GitRun $BridgeRepo @('push', 'origin', ($Branch + ':' + $Branch))
+        if ($ps.Code -ne 0) {
+            $rejected = ($ps.Out -match 'non-fast-forward' -or $ps.Out -match 'rejected' -or $ps.Out -match 'fetch first')
+            if (-not $rejected) {
+                Shout '[4]' ('push failed and it is not a race: ' + ($ps.Out -replace "`n", ' | '))
+                Finish 6 'PUSH_FAILED' 'push error'
+            }
+            # Losing the race is normal and means only "get in line again".  The
+            # local commits touch nothing but new timestamped files, which is why
+            # a rebase here is safe by construction and not by luck.
+            Log '[4]' 'push rejected as non-fast-forward - the chief got there first; rebasing once'
+            GitRun $BridgeRepo @('fetch', 'origin', $Branch) | Out-Null
+            $rb = GitRun $BridgeRepo @('rebase', ('origin/' + $Branch))
+            if ($rb.Code -ne 0) {
+                # A real conflict here is evidence that the disjoint write sets rule
+                # has broken.  That is a design failure, not a merge to be resolved
+                # by a script at three in the morning.
+                GitRun $BridgeRepo @('rebase', '--abort') | Out-Null
+                Shout '[4]' ('rebase conflicted - the disjoint write sets rule has broken: ' + ($rb.Out -replace "`n", ' | '))
+                WriteAsciiFile $haltPath @(
+                    "SYNC HALTED  $(Stamp)"
+                    ''
+                    'Reason: git rebase onto origin/' + $Branch + ' conflicted, and the rebase'
+                    'was aborted.  Nothing was lost and no commit was discarded.'
+                    ''
+                    'This is not an ordinary conflict.  This script may only ever commit new'
+                    'files under notes_to_chief/ and evidence_screens/, whose names carry'
+                    'timestamps, so a conflict means two machines wrote the same thing - the'
+                    'assumption the whole two-machine design stands on has broken somewhere.'
+                    'A human must look at it and decide, and this script must not guess.'
+                    ''
+                    'git said:'
+                    ($rb.Out)
+                    ''
+                    'When it is resolved, delete this file to let the sync run again.'
+                )
+                Finish 7 'HALT_REBASE_CONFLICT' 'rebase conflict'
+            }
+            $ps2 = GitRun $BridgeRepo @('push', 'origin', ($Branch + ':' + $Branch))
+            if ($ps2.Code -ne 0) {
+                Shout '[4]' ('push failed again after a clean rebase: ' + ($ps2.Out -replace "`n", ' | '))
+                WriteAsciiFile $attnPath @(
+                    "SYNC NEEDS ATTENTION  $(Stamp)"
+                    ''
+                    'The push was rejected, the rebase succeeded, and the second push failed'
+                    'as well.  The script stops here rather than looping, because a push that'
+                    'keeps losing is either a very busy remote or something structurally wrong,'
+                    'and only one of those gets better by trying harder.'
+                    ''
+                    'git said:'
+                    ($ps2.Out)
+                )
+                Finish 6 'PUSH_FAILED_AFTER_REBASE' 'push twice'
+            }
+            Log '[4]' 'pushed after one rebase'
+        } else {
+            Log '[4]' ('pushed ' + $ahead2 + ' commit(s)')
+        }
+    } else {
+        Log '[4]' 'nothing to push'
+    }
+} else {
+    Log '[4]' 'DRYRUN: no push'
+}
+
+# ---------------------------------------------------------------------------
+# [5] server repo - pull only, and never while the game flag is held
+# ---------------------------------------------------------------------------
+
+if ($NoServer) {
+    Log '[5]' 'skipped by -NoServer'
+} elseif (-not (Test-Path -LiteralPath (Join-Path $ServerRepo '.git'))) {
+    Log '[5]' 'server repo not found - skipped'
+} elseif (FlagIsHeld $lockGamePath) {
+    # This is the promise the design makes to the tester in one line: the code
+    # under your feet cannot change in the middle of a test round.
+    Log '[5]' 'LOCK_GAME is HELD - not touching the server repo during a test round'
+} else {
+    $sv = GitRun $ServerRepo @('status', '--porcelain')
+    $dirty = @($sv.Out -split "`n" | Where-Object { $_.Trim() -ne '' })
+    if ($dirty.Count -gt 0) {
+        Log '[5]' ('server worktree has ' + $dirty.Count + ' dirty path(s) - skipping, never stashing')
+    } elseif ($DryRun) {
+        Log '[5]' 'DRYRUN: server worktree clean, would fetch and fast-forward'
+    } else {
+        $sf = GitRun $ServerRepo @('fetch', 'origin', $Branch)
+        if ($sf.Code -ne 0) {
+            Log '[5]' ('server fetch failed: ' + ($sf.Out -replace "`n", ' | '))
+        } else {
+            $sm = GitRun $ServerRepo @('merge', '--ff-only', ('origin/' + $Branch))
+            if ($sm.Code -ne 0) {
+                Log '[5]' ('server fast-forward refused: ' + ($sm.Out -replace "`n", ' | '))
+            } else {
+                Log '[5]' 'server repo up to date'
+            }
+        }
+    }
+}
+
+# ---------------------------------------------------------------------------
+# [6] tell the tester, but only when there is something to tell - the mtime of
+#     NEW_ORDERS.txt is itself the signal, so it must not be touched otherwise
+# ---------------------------------------------------------------------------
+
+$afterOrders = @()
+if (Test-Path -LiteralPath $notesDir) {
+    $afterOrders = @(Get-ChildItem -LiteralPath $notesDir -Filter 'FROM_CHIEF_*' -File -ErrorAction SilentlyContinue |
+                     ForEach-Object { $_.Name })
+}
+$newOrders = @($afterOrders | Where-Object { $beforeOrders -notcontains $_ })
+$afterQueue = $null
+if (Test-Path -LiteralPath $queueFile) { $afterQueue = (Get-Item -LiteralPath $queueFile).LastWriteTimeUtc }
+$queueMoved = ($beforeQueue -ne $afterQueue)
+$afterHead = (GitRun $BridgeRepo @('rev-parse', 'HEAD')).Out.Trim()
+
+if ($newOrders.Count -gt 0 -or $queueMoved) {
+    $lines = @()
+    $lines += ("NEW ORDERS  " + (Stamp))
+    $lines += ''
+    $lines += 'The sync pulled something the chief wrote.  Read this before you start.'
+    $lines += ''
+    if ($newOrders.Count -gt 0) {
+        $lines += ('New letters in notes_to_chief\ (' + $newOrders.Count + '):')
+        foreach ($n in $newOrders) { $lines += ('  ' + $n) }
+    } else {
+        $lines += 'No new letters.'
+    }
+    $lines += ''
+    if ($queueMoved) { $lines += 'GAME_TEST_QUEUE.md changed - re-read the queue, do not work from memory.' }
+    $lines += ''
+    if ($beforeHead -ne $afterHead -and $beforeHead -ne '' -and $afterHead -ne '') {
+        $lines += ('commits pulled ' + $beforeHead.Substring(0, [math]::Min(7, $beforeHead.Length)) + '..' + $afterHead.Substring(0, [math]::Min(7, $afterHead.Length)) + ':')
+        $lg = GitRun $BridgeRepo @('log', '--oneline', '--no-decorate', ($beforeHead + '..' + $afterHead))
+        foreach ($l in ($lg.Out -split "`n")) { if ($l.Trim() -ne '') { $lines += ('  ' + $l) } }
+    }
+    if (-not $DryRun) { WriteAsciiFile $ordersPath $lines }
+    Log '[6]' ('NEW_ORDERS.txt written: ' + $newOrders.Count + ' new letter(s), queue moved=' + $queueMoved)
+} else {
+    Log '[6]' 'nothing new for the tester - NEW_ORDERS.txt left untouched on purpose'
+}
+
+# A round that got this far means whatever needed attention is over.
+if ((Test-Path -LiteralPath $attnPath) -and (-not $DryRun)) {
+    Remove-Item -LiteralPath $attnPath -Force -ErrorAction SilentlyContinue
+    Log '[7]' 'cleared SYNC_ATTENTION.txt - the round completed'
+}
+
+Finish 0 'OK' ('committed=' + $committed + ' newletters=' + $newOrders.Count)
