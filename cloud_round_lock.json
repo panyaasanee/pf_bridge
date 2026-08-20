@@ -1,0 +1,31 @@
+{
+  "_readme": "Cloud round lock. ONE cloud chief round works at a time. This file is tracked on purpose - it is the only lock in this project that travels between machines, because it is not guarding a machine's resources but the right to be the round that is running. It is won by PUSHING it, never by writing it: git rejects a non-fast-forward push atomically, and that rejection is the only real mutual exclusion this system has. If your push is rejected, another round won and YOU END YOUR ROUND IMMEDIATELY - no retry, no force, no rebase-and-try-again. Losing is the correct answer.",
+  "_procedure": [
+    "1. git pull --ff-only in pf_bridge",
+    "2. read this file. state HELD and heartbeat_utc newer than stale_after_hours => END THE ROUND NOW. Write one line saying which round holds it. Do not clone the code repo, do not read source, do not spawn subagents, do not plan work.",
+    "3. free => write HELD + round + session + utc, commit, push",
+    "4. push rejected => another round won => END THE ROUND NOW",
+    "5. push accepted => you hold it => start working",
+    "6. during a long round, refresh heartbeat_utc and push about every 20 minutes",
+    "7. at the end, write RELEASED, commit and push - ALWAYS, including when the round failed"
+  ],
+  "_takeover": "A round may take the lock from a holder only when heartbeat_utc is older than stale_after_hours. Record takeover_of with the abandoned round number. Never take it because it 'looks dead' - cloud sessions die silently and that is exactly why the threshold exists.",
+  "_field_notes": {
+    "state": "HELD or RELEASED",
+    "round": "integer round number, e.g. 109",
+    "session": "any string that identifies the run; used only to tell two rounds apart",
+    "held_utc": "when the lock was taken",
+    "heartbeat_utc": "refreshed about every 20 minutes while working",
+    "released_utc": "when the round ended",
+    "note": "one line for a human"
+  },
+  "stale_after_hours": 3,
+  "state": "RELEASED",
+  "round": 108,
+  "session": "bridge-side round 108 (not a cloud round)",
+  "held_utc": null,
+  "heartbeat_utc": null,
+  "released_utc": "2026-08-20T12:20:00Z",
+  "takeover_of": null,
+  "note": "Bootstrap value written by chief round 108 on Panya's bridge, so the first cloud round finds a well formed file instead of deciding what to do about a missing one. No cloud round has ever held this lock."
+}

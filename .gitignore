@@ -24,6 +24,16 @@
 !/FACTPACK_L2_CLASSCENSUS001_20260820.tsv
 !/DRAFT_gitignore_runtime_state.txt
 !/DRAFT_gitignore_REPO2_20260820.txt
+
+# ---- the cloud round lock (Panya order 2026-08-20 18:45) ----
+# This one MUST be tracked, unlike every other lock in this project.  The two
+# flag files guard one machine's ports, processes and index and must never
+# travel; this file is the opposite - it is how two cloud rounds that cannot
+# see each other take turns, and it works only because a push that is not a
+# fast-forward is rejected atomically by the server.  A lock you win by writing
+# a file is not a lock; a lock you win by pushing is.  Deliberately not named
+# LOCK_* and deliberately not .txt, so the /LOCK_*.txt deny above cannot eat it.
+!/cloud_round_lock.json
 !/*.ps1
 !/*.bat
 !/*.py

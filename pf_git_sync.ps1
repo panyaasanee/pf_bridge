@@ -207,10 +207,18 @@ if ((Test-Path -LiteralPath $haltPath) -and (-not $SelfCheck)) {
 # ---------------------------------------------------------------------------
 
 $flagNames = @('LOCK_GAME.txt', 'LOCK_GIT.txt', 'PANYA_PRESENT.txt')
+# The verdict is taken from the EXIT CODE of one check-ignore per file, never from
+# reading the -v output.  Measured while writing this: `check-ignore -v` prints a
+# line for a file that a negation rule has RE-OPENED as well, because verbose mode
+# reports the deciding pattern rather than the decision, and that pattern begins
+# with '!'.  A guard that only looked for the filename in the output would have
+# called an un-ignored flag ignored - the exact failure it exists to prevent.
+# -q is silent and answers 0 for ignored, 1 for not ignored, 128 for broken.
 $ci = GitRun $BridgeRepo (@('check-ignore', '-v', '--no-index', '--') + $flagNames)
 $missing = @()
 foreach ($f in $flagNames) {
-    if ($ci.Out -notmatch [regex]::Escape($f)) { $missing += $f }
+    $one = GitRun $BridgeRepo @('check-ignore', '-q', '--no-index', '--', $f)
+    if ($one.Code -ne 0) { $missing += ($f + ' (check-ignore exit ' + $one.Code + ')') }
 }
 if ($missing.Count -gt 0) {
     Shout '[0]' ('.gitignore no longer ignores: ' + ($missing -join ' ') + ' - a pull would overwrite a held flag')
