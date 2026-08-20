@@ -6,3 +6,6 @@
 timestamp	subsystem	what_was_needed	lane_that_stalled	workaround
 2026-08-20T00:10+07:00	RE/classes	RTTI class census 1,367 ตัว ช่วง 0x00C1786C-0x00C29514	FACTPACK-L2-CLASSCENSUS-001	yes (ทำได้จาก strings_ascii.tsv ที่ดูดไว้แล้ว ไม่ต้องมีอิมเมจอีก)
 2026-08-20T00:2x+07:00	gate	check 7 ตัวต้องใช้อิมเมจ รันบน CI ไม่ได้	Windows gate on Actions	no (CI แทน gate เต็มไม่ได้ ต้อง skip อย่างเปิดเผย)
+2026-08-21T04:30+07:00	loot/Door3	0x6E9D derived bits 0x04 (+0x24) และ 0x08 (+0x20) - ยังไม่มีใครเปิดอ่าน	LOOT-GROUND-OBJECT (Door 3)	no (ไม่มีอิมเมจ = ไม่มีทางรู้ transport - เข้าคิว STATIC-ON-BRIDGE)
+2026-08-21T04:30+07:00	loot/Door3	reconcile/removal pass 0x446FE1..0x4470E5 (lifetime ของ object)	LOOT-GROUND-OBJECT (Door 3) + TENSION V91 vs count-1	no (ต้องแกะจากอิมเมจ)
+2026-08-21T04:30+07:00	loot/Door4	serializer ของ PickupTerrainThing (มีแค่ชื่อ 0xF3093C + registration 0xBEE5E5)	PICKUP-REQUEST (Door 4)	no (รายงาน USE_DROP_SELL001 พิมพ์ disasm ให้ StallOperateVital แต่ไม่ให้ตัวนี้)
