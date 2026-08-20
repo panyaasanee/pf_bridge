@@ -20,6 +20,12 @@
 + ภาคผนวก 9 ใน `FINDINGS_R106_R12_MEASURED_ON_A_SECOND_MACHINE.md` (**run #4 GREEN** · R12 ปิด)
 + หัว SUPERSEDED บน `chief_task_prompt_CLOUD_DRAFT.md` (เนื้อเดิมไม่ถูกแก้แม้แต่ตัวเดียว)
 
+**commit ของรอบนี้ (จ็อบ 171 บนสะพาน · ไม่ push):** `pf_bridge` HEAD `2accb96` → **`3b99475`**
+34 path · tracked 228 → **257** · **worktree สะอาด** · commit ที่สองของ repo นี้
+🔴 **`pirate-force-server` ไม่ถูกแตะเลยทั้งรอบ** — ยังสะอาดที่ `9045978`
+(จ็อบ 170 ตายที่ parser: **trailing comma ใน array ของ PowerShell** — บทเรียนเล็ก ๆ ที่ควรจำ
+`@( 'a', 'b', )` ใช้ไม่ได้ ต่างจาก Python · จ็อบ 171 คือตัวเดียวกันที่แก้แล้ว)
+
 ### 🔴 สามอย่างที่ Panya ต้องเคาะ (chief จะไม่เดาแทน)
 1. **branch ของ repo โค้ด: ทาง A หรือ B** — A = `pf_bridge` commit ลง `main` ตรง ๆ (เอกสารล้วน ผู้เทสต้องได้ใบสั่งเร็ว)
    แต่ `pirate-force-server` ไปทาง `claude/rNNN-*` + PR **เพื่อให้ Actions ยิงก่อนแตะ `main`** ⭐ chief แนะนำ A
