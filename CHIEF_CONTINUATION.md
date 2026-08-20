@@ -410,3 +410,5 @@ Panya เคาะ **cadence รายชั่วโมง แต่ต้อ�
   🔴 กฎ "หนึ่งรอบหนึ่งไฟล์" กันการชนนี้ไม่ได้ เพราะสองเซสชันเลือก**เลขรอบและชื่อไฟล์เดียวกันเป๊ะ** ⇒ เสนอ v5: ใส่ท้าย branch ที่สุ่มไม่ซ้ำลงในชื่อไฟล์ทุกใบ
 
 - R113 2026-08-20 ~18:40 UTC LOOT-ROLL-001 (GT-037) build เสร็จ เขียว(cloud sanity) 992 pass · **แก้ข้อเท็จจริง: xt9cn1 ไม่ได้ถูกทิ้ง** — มันเปิด PR #5 ใหม่แล้ว merge สำเร็จ 18:09Z (ดูบรรทัดบน) · PR รอบนี้ = ทดสอบท่อ server ครั้งแรก -> rounds/R113_loot_roller_and_first_server_pipeline_test.md
+
+- R114 2026-08-20 ~20:0xZ (=2026-08-21 ~03:0x +07:00) GT-039 pointer fix: เดิมชี้ outbox/178 (gitignored) -> "บูต origin/main HEAD ล่าสุดที่ ci-status=success" + วิธี re-derive SHA · เก็บ HYP-PF-029 · prereq① เติม 'Navy Transfer' · headless 97 guards + 129 dispatch tests เขียว(cloud sanity) · **mailbox สะอาดอยู่แล้ว ไม่ backfill** (ดราฟต์แรกเข้าใจผิดเพราะ glob บั๊ก) · pf-adversary revert 2 จุดที่เกือบแก้ของถูกให้ผิด · **ไม่แตะ code repo** -> rounds/R114_lij8pk_gt039_sha_pointer_and_backfilled_mailbox_stubs.md
