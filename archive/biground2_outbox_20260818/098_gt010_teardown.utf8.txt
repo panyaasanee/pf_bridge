@@ -1,0 +1,33 @@
+﻿=== 098 GT-010 TEARDOWN  20260818_020541 ===
+02:05:42.505  parsed keys = clientpid,console,rundb,server,stamp,title
+02:05:42.973  from 097: client=20576 console=10720 server=14124 rundb=C:\Users\Panya\Desktop\Pirate Force\Pirate Force ServerProject\state\pirateforce_gt010_20260818_015927.sqlite3
+02:05:43.087  guard window = 01:58:27 .. 02:04:27
+02:05:43.298    server pid=14124 name=python start=01:59:32 hasExited=False
+02:05:43.345    console pid=10720 name=py start=01:59:32 hasExited=False
+02:05:43.409    client pid=20576 NOT RUNNING
+02:05:43.457  client already exited (if it closed ITSELF after the exit-game button, that is the subcode-01 PASS signal)
+02:05:43.523  GameClient processes now = 0
+02:05:45.126  ctrl-c helper exit = 0
+02:05:45.154  server exited=True
+02:05:45.169  console exited=True
+02:05:50.736  AFTER listeners = 0
+02:05:50.770  capture root = capture_gt010_20260818_015927
+02:05:50.871  GAME_LIVE: capture_v141\GAME_LIVE.txt bytes=9898
+02:05:50.904    HYP_PF_015 marker lines = 1
+02:05:50.914    DeleteActor mentions    = 1
+02:05:50.923    CREATE lines            = 0
+02:05:51.081    mk> 2026-08-18T02:04:21.729 SENT label=HYP_PF_015_DELETE_ACTOR_SELECTOR00_SOFT_DELETE_COMMITTED frame_bytes=77 delay=0.00 late_ms=0.3
+02:05:51.098  GAME_EVENTS: bytes=102
+02:05:51.263  --- DB AFTER (run copy) ---
+02:05:51.590    sessions with char   : 5
+02:05:51.601    open sessions        : 0
+02:05:51.609    max lease_generation : 6
+02:05:51.621    integrity            : ok
+02:05:51.629    chars active         : 0
+02:05:51.638    chars deleted        : 1
+02:05:51.647    C (1, 0, 'Arena01', 268500993, 1)
+02:05:51.657    positions rows       : 1
+02:05:51.664    backpack item rows   : 3
+02:05:51.947  canonical sha now = D08A89BF19D1C2888A22FA9AEBFB6B718DE906094CAA78C6B3CD614FCFBD08E2
+02:05:51.957  expected (must be UNCHANGED) = FA794D0B1B69C6DCF0C7BCF0869FBEDC18138890C623547275952B3FEFE14400
+02:05:51.969  === 098 TEARDOWN DONE ===

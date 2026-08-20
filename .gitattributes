@@ -1,0 +1,23 @@
+# ============================================================================
+# .gitattributes for the pf_bridge coordination repo
+# ============================================================================
+# WHY: this repo carries evidence whose BYTES are the evidence (hash manifests,
+# tsv fact packs, receipts). If git rewrites line endings on checkout, a fresh
+# clone on another machine gets different bytes than the machine that produced
+# the file, and every content-sha pin silently disagrees. That is the same
+# class of bug as FINDINGS R12 (gate not reproducible from git).
+#
+# Default is therefore NO conversion. The overrides below match the main repo's
+# .gitattributes exactly for the file types both repos share.
+
+* -text
+
+*.py   text eol=lf
+*.md   text eol=lf
+*.json text eol=lf
+*.sql  text eol=lf
+*.ps1  text eol=crlf
+*.bat  text eol=crlf
+
+*.png binary
+*.jpg binary

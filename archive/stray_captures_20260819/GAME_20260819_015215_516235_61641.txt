@@ -1,0 +1,42 @@
+GAME_CONNECTED peer=127.0.0.1:61641 local_port=10189
+FRAME magic=0x5F253EAC compressed_len=47
+00000000  AC 3E 25 5F 2F 00 00 00 2D B0 12 3A 45 14 00 00  |.>%_/...-..:E...|
+00000010  00 00 08 00 0B 02 12 01 00 12 84 37 0B 00 0B 68  |...........7...h|
+00000020  48 04 00 00 00 0E 00 00 00 44 09 00 00 00 6C 6F  |H........D....lo|
+00000030  63 61 6C 74 65 73 74                             |caltest|
+DECOMPRESSED 45
+00000000  12 3A 45 14 00 00 00 00 08 00 0B 02 12 01 00 12  |.:E.............|
+00000010  84 37 0B 00 0B 68 48 04 00 00 00 0E 00 00 00 44  |.7...hH........D|
+00000020  09 00 00 00 6C 6F 63 61 6C 74 65 73 74           |....localtest|
+STRUCTURAL_IDS [(0, 17722, 'GSCN_LoginProtocol'), (15, 14212, 'LoginVerifyVital')] OUTER version=0 mask=0x02 count=1 nested_version=0
+SENT LOGIN_VERIFY_ACK_ONCE bytes=55
+PC 45
+00000000  12 3A 45 14 00 00 00 00 08 00 0B 02 12 01 00 12  |.:E.............|
+00000010  84 37 0B 00 0B 68 48 04 00 00 00 0E 00 00 00 44  |.7...hH........D|
+00000020  09 00 00 00 6C 6F 63 61 6C 74 65 73 74           |....localtest|
+FRAME
+00000000  AC 3E 25 5F 2F 00 00 00 2D B0 12 3A 45 14 00 00  |.>%_/...-..:E...|
+00000010  00 00 08 00 0B 02 12 01 00 12 84 37 0B 00 0B 68  |...........7...h|
+00000020  48 04 00 00 00 0E 00 00 00 44 09 00 00 00 6C 6F  |H........D....lo|
+00000030  63 61 6C 74 65 73 74                             |caltest|
+SENT FOUNDATION_CHARACTER_LIST_ONCE bytes=55
+PC 45
+00000000  12 9D 6E 14 00 00 00 00 08 04 0B 02 12 01 00 12  |..n.............|
+00000010  EF 36 0B 0A 0B 00 14 00 00 00 00 14 00 00 00 00  |.6..............|
+00000020  1F 00 00 00 00 0B 00 0B 00 0B 00 0B 00           |.............|
+FRAME
+00000000  AC 3E 25 5F 2F 00 00 00 2D B0 12 9D 6E 14 00 00  |.>%_/...-...n...|
+00000010  00 00 08 04 0B 02 12 01 00 12 EF 36 0B 0A 0B 00  |...........6....|
+00000020  14 00 00 00 00 14 00 00 00 00 1F 00 00 00 00 0B  |................|
+00000030  00 0B 00 0B 00 0B 00                             |.......|
+STATE rx=1 login_ack=True select_sent=True notify_count=0 last_notify=None create_seen=False create_reply=False start_seen=False start_reply=False world_info=False teleport=False runtime_ack=False npc_sweep=False equipment_capture_count=0 equipment_value32_mapped=None equipment_item_identity=None quest_conversation=False quest_accept_ui=False quest_accept_success=False quest_op1_count=0 quest_op2_count=0 quest_capture_count=0 quest_last_fields=None post_action1_request_count=0 post_action1_last_request=None v136_docking_pending=False v136_marker1_prompt=False v136_marker1_confirm_count=0 v136_marker1_confirm_value=None v137_marker1_transport_sent=False v137_marker1_transport_count=0 v138_marker1_ready_count=0 v138_marker1_population_sent=False v138_marker1_population_count=0 v139_marker_targetpos_count=0 v139_p86_armed=False v139_p86_choose_count=0 v139_p86_face_sent=False v139_p86_conversation_sent=False v141_population_refresh_count=0 population_membership=None population_anchor=None p30_action_armed=False action_capture_count=0 action_last_fields=None
+FRAME magic=0x5F253EAC compressed_len=36
+00000000  AC 3E 25 5F 24 00 00 00 22 84 12 3A 45 14 00 00  |.>%_$..."..:E...|
+00000010  00 00 08 00 0B 02 12 01 00 12 DB 36 0B 01 08 01  |...........6....|
+00000020  08 00 14 00 00 00 00 44 00 00 00 00              |.......D....|
+DECOMPRESSED 34
+00000000  12 3A 45 14 00 00 00 00 08 00 0B 02 12 01 00 12  |.:E.............|
+00000010  DB 36 0B 01 08 01 08 00 14 00 00 00 00 44 00 00  |.6...........D..|
+00000020  00 00                                            |..|
+STRUCTURAL_IDS [(0, 17722, 'GSCN_LoginProtocol'), (15, 14043, '0x36DB')] OUTER version=0 mask=0x02 count=1 nested_version=1
+STATE rx=2 login_ack=True select_sent=True notify_count=0 last_notify=None create_seen=False create_reply=False start_seen=False start_reply=False world_info=False teleport=False runtime_ack=False npc_sweep=False equipment_capture_count=0 equipment_value32_mapped=None equipment_item_identity=None quest_conversation=False quest_accept_ui=False quest_accept_success=False quest_op1_count=0 quest_op2_count=0 quest_capture_count=0 quest_last_fields=None post_action1_request_count=0 post_action1_last_request=None v136_docking_pending=False v136_marker1_prompt=False v136_marker1_confirm_count=0 v136_marker1_confirm_value=None v137_marker1_transport_sent=False v137_marker1_transport_count=0 v138_marker1_ready_count=0 v138_marker1_population_sent=False v138_marker1_population_count=0 v139_marker_targetpos_count=0 v139_p86_armed=False v139_p86_choose_count=0 v139_p86_face_sent=False v139_p86_conversation_sent=False v141_population_refresh_count=0 population_membership=None population_anchor=None p30_action_armed=False action_capture_count=0 action_last_fields=None

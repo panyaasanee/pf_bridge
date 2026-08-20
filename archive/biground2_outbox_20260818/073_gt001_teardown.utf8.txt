@@ -1,0 +1,51 @@
+﻿=== 073 TEARDOWN (GT-001 attended)  20260818_021107 ===
+02:11:08.083  parsed keys = clientpid,server,shim,stamp,title
+02:11:08.206  from 072: client=20740 shim=10708 server=6732 stamp=20260818_020703
+02:11:08.256  guard window = 02:06:03 .. 02:12:03
+02:11:08.365  BEFORE GameClient processes = 0
+02:11:11.645    BEFORE listener port=10189 owningPid=6732
+02:11:11.656    BEFORE listener port=10188 owningPid=6732
+02:11:11.666  BEFORE listeners = 2
+02:11:11.749    server pid=6732 name=python start=02:07:15 hasExited=False
+02:11:11.773    shim pid=10708 name=py start=02:07:14 hasExited=False
+02:11:11.815    client pid=20740 NOT RUNNING (Exception calling "GetProcessById" with "1" argument(s): "Process with an Id of 20740 is not running.")
+02:11:11.853  client already gone or guard failed (expected: closed via in-game X)
+02:11:11.871  GameClient processes after close = 0
+02:11:13.395  ctrl-c helper exit = 0
+02:11:13.459  server exited=True code=
+02:11:13.495  shim   exited=True code=
+02:11:16.277  AFTER listeners = 0
+02:11:16.404  AFTER GameClient processes = 0
+02:11:16.544  capture root = capture_gt001_20260818_020703
+02:11:16.667  console out bytes = 34285
+02:11:16.713  stopped markers   = 1
+02:11:16.723  ready markers     = 2
+02:11:16.732  traceback markers = 0
+02:11:16.743  TargetPos mentions in console   = 6
+02:11:16.754  StartGameReq mentions           = 2
+02:11:16.797  console tail (120 lines) written -> 073_console_tail_20260818_021107.txt
+02:11:16.818  stderr = 0 bytes  (NOTE: -1 means file absent, not a byte count)
+02:11:16.844  GAME_LIVE.txt files = 1
+02:11:16.875    GAME_LIVE: capture_v141\GAME_LIVE.txt bytes=16301
+02:11:16.898  capture files total = 6
+02:11:16.930    cap: GAME_20260818_020841_874104_59589.txt bytes=111363
+02:11:16.938    cap: server_console_live.out.txt bytes=34285
+02:11:16.947    cap: GAME_LIVE.txt bytes=16301
+02:11:16.957    cap: LOGIN_20260818_020801_989412_59586.txt bytes=2326
+02:11:16.966    cap: GAME_EVENTS_LIVE.txt bytes=357
+02:11:16.977    cap: server_console_live.err.txt bytes=0
+02:11:16.988  --- DB AFTER (post-stop) ---
+02:11:17.591    POS (1, 'Arena01', 1, 0, -8094.60791015625, -3207.83056640625, 186.0, 2.4992544651031494, '2026-08-17T05:32:03.064945+00:00')
+02:11:18.231    sessions with char   : 6
+02:11:18.243    sessions blank-conn  : 0
+02:11:18.257    open sessions        : 0
+02:11:18.271    max lease_generation : 6
+02:11:18.292    backpack items       : [(0, 1, 2600001, 2), (1, 2, 2400901, 1), (3, 4, 2200002, 1)]
+02:11:18.312    integrity            : ok
+02:11:18.324    fk_check rows        : 0
+02:11:18.932  db sha AFTER = B5557E9F3874BFA452B14A01495C4F7E0EA8176AF9C14BE09CF66865A597C9ED
+02:11:18.941  old canonical (pre-GT001 rerun) = CACE7F7755E79AF0C2E637BC6C09C131E6152436F3141E136BC457ECA74DF493
+02:11:18.951  NOTE: sha is EXPECTED to differ (new sessions row from GT-001 login) - not a failure
+02:11:18.990    -wal present, 0 bytes
+02:11:19.014    -shm present, 32768 bytes
+02:11:19.021  === 073 TEARDOWN DONE ===

@@ -1,0 +1,8 @@
+# IMAGE_ACCESS_COST.tsv - บันทึกต้นทุนของการอยู่ห่างจาก GameClient.local.bin
+# ที่มา: ใบสั่ง notes_to_chief\20260819_2310_ORDER-cloud-readiness.md ข้อ 6 (Panya สั่งผ่านผู้เทส ~23:0x)
+# วิธีใช้: ทุกครั้งที่ "อยากได้ข้อมูลจากอิมเมจแล้วไม่มี" ให้เติมหนึ่งแถว - อย่ารอให้จำได้ทีหลัง
+# เป้าหมาย: สองสัปดาห์แล้ว Panya จะมีตัวเลขจริงว่าการอยู่ห่างอิมเมจแพงแค่ไหน แทนการเถียงด้วยความรู้สึก
+# คอลัมน์คั่นด้วย TAB - workaround: yes/no/partial
+timestamp	subsystem	what_was_needed	lane_that_stalled	workaround
+2026-08-20T00:10+07:00	RE/classes	RTTI class census 1,367 ตัว ช่วง 0x00C1786C-0x00C29514	FACTPACK-L2-CLASSCENSUS-001	yes (ทำได้จาก strings_ascii.tsv ที่ดูดไว้แล้ว ไม่ต้องมีอิมเมจอีก)
+2026-08-20T00:2x+07:00	gate	check 7 ตัวต้องใช้อิมเมจ รันบน CI ไม่ได้	Windows gate on Actions	no (CI แทน gate เต็มไม่ได้ ต้อง skip อย่างเปิดเผย)

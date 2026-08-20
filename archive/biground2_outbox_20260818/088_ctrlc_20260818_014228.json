@@ -1,0 +1,10 @@
+{
+  "target_pid": 19064,
+  "free_console": true,
+  "attach_console": true,
+  "attach_error": null,
+  "ctrl_c_sent": true,
+  "ctrl_c_error": null,
+  "started_utc": "2026-08-17T18:42:31",
+  "finished_utc": "2026-08-17T18:42:32"
+}

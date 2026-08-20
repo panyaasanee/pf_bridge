@@ -1,0 +1,120 @@
+﻿[G< #38] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[HB>] exact empty RuntimeRes v4 #39
+[G< #39] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[G>] HYP_PF_009_SECOND_PASSWORD_OK_KEEPALIVE (44 bytes; late=0.3 ms)
+00000000  12 9D 6E 14 00 00 00 00 08 04 0B 02 12 01 00 12  |..n.............|
+00000010  98 4B 0B 00 08 01 19 00 00 00 00 44 00 00 00 00  |.K.........D....|
+00000020  0B 00                                            |..|
+[G< #40] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[HB>] exact empty RuntimeRes v4 #40
+[G< #41] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[HB>] exact empty RuntimeRes v4 #41
+[G< #42] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[G>] HYP_PF_009_SECOND_PASSWORD_OK_KEEPALIVE (44 bytes; late=0.3 ms)
+00000000  12 9D 6E 14 00 00 00 00 08 04 0B 02 12 01 00 12  |..n.............|
+00000010  98 4B 0B 00 08 01 19 00 00 00 00 44 00 00 00 00  |.K.........D....|
+00000020  0B 00                                            |..|
+[G< #43] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[HB>] exact empty RuntimeRes v4 #42
+[G< #44] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[G>] HYP_PF_009_SECOND_PASSWORD_OK_KEEPALIVE (44 bytes; late=0.4 ms)
+00000000  12 9D 6E 14 00 00 00 00 08 04 0B 02 12 01 00 12  |..n.............|
+00000010  98 4B 0B 00 08 01 19 00 00 00 00 44 00 00 00 00  |.K.........D....|
+00000020  0B 00                                            |..|
+[G< #45] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[HB>] exact empty RuntimeRes v4 #43
+[G< #46] 261 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq'), (15, 3841, 'UserSetting_UpdateServerSettingVital')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 02 12 02 00 12  |.on.............|
+00000010  01 0F 0B 00 0B 01 0B FF 32 00 00 00 00 00 00 00  |........2.......|
+00000020  00 26 FF FF FF FF 0B 19 0B 00 0B 00 05 01 32 00  |.&............2.|
+00000030  00 00 00 00 00 00 00 26 01 00 00 00 0B 0C 0B 0C  |.......&........|
+00000040  0B 0C 0B 03 08 01 2A 1F AB 3B 3F 2A F8 DC 72 3F  |......*..;?*..r?|
+00000050  0B 02 0B 04 0B 00 32 6F 00 00 00 00 00 00 00 0B  |......2o........|
+00000060  04 0B 01 32 6E 00 00 00 00 00 00 00 08 02 2A 1F  |...2n.........*.|
+00000070  AB 3B 3F 2A 3E B7 64 3F 0B 00 08 03 2A 1F AB 3B  |.;?*>.d?....*..;|
+00000080  3F 2A 84 91 56 3F 0B 00 0B 00 12 01 0F 0B 00 0B  |?*..V?..........|
+00000090  01 0B FF 32 00 00 00 00 00 00 00 00 26 FF FF FF  |...2........&...|
+000000A0  FF 0B 19 0B 00 0B 00 05 01 32 00 00 00 00 00 00  |.........2......|
+000000B0  00 00 26 01 00 00 00 0B 0C 0B 0C 0B 0C 0B 03 08  |..&.............|
+000000C0  01 2A 1F AB 3B 3F 2A F8 DC 72 3F 0B 02 0B 04 0B  |.*..;?*..r?.....|
+000000D0  00 32 6F 00 00 00 00 00 00 00 0B 04 0B 01 32 6E  |.2o...........2n|
+000000E0  00 00 00 00 00 00 00 08 02 2A 1F AB 3B 3F 2A 3E  |.........*..;?*>|
+000000F0  B7 64 3F 0B 00 08 03 2A 1F AB 3B 3F 2A 84 91 56  |.d?....*..;?*..V|
+00000100  3F 0B 00 0B 00                                   |?....|
+[HB>] exact empty RuntimeRes v4 #44
+[G< #47] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[G>] HYP_PF_009_SECOND_PASSWORD_OK_KEEPALIVE (44 bytes; late=1.3 ms)
+00000000  12 9D 6E 14 00 00 00 00 08 04 0B 02 12 01 00 12  |..n.............|
+00000010  98 4B 0B 00 08 01 19 00 00 00 00 44 00 00 00 00  |.K.........D....|
+00000020  0B 00                                            |..|
+[G< #48] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[HB>] exact empty RuntimeRes v4 #45
+[G< #49] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[HB>] exact empty RuntimeRes v4 #46
+[G< #50] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[G>] HYP_PF_009_SECOND_PASSWORD_OK_KEEPALIVE (44 bytes; late=0.5 ms)
+00000000  12 9D 6E 14 00 00 00 00 08 04 0B 02 12 01 00 12  |..n.............|
+00000010  98 4B 0B 00 08 01 19 00 00 00 00 44 00 00 00 00  |.K.........D....|
+00000020  0B 00                                            |..|
+[G< #51] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[HB>] exact empty RuntimeRes v4 #47
+[G< #52] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[HB>] exact empty RuntimeRes v4 #48
+[G< #53] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[G>] HYP_PF_009_SECOND_PASSWORD_OK_KEEPALIVE (44 bytes; late=0.3 ms)
+00000000  12 9D 6E 14 00 00 00 00 08 04 0B 02 12 01 00 12  |..n.............|
+00000010  98 4B 0B 00 08 01 19 00 00 00 00 44 00 00 00 00  |.K.........D....|
+00000020  0B 00                                            |..|
+[G< #54] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[HB>] exact empty RuntimeRes v4 #49
+[G< #55] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[G>] HYP_PF_009_SECOND_PASSWORD_OK_KEEPALIVE (44 bytes; late=0.8 ms)
+00000000  12 9D 6E 14 00 00 00 00 08 04 0B 02 12 01 00 12  |..n.............|
+00000010  98 4B 0B 00 08 01 19 00 00 00 00 44 00 00 00 00  |.K.........D....|
+00000020  0B 00                                            |..|
+[G< #56] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[HB>] exact empty RuntimeRes v4 #50
+[G< #57] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[G>] HYP_PF_009_SECOND_PASSWORD_OK_KEEPALIVE (44 bytes; late=2.8 ms)
+00000000  12 9D 6E 14 00 00 00 00 08 04 0B 02 12 01 00 12  |..n.............|
+00000010  98 4B 0B 00 08 01 19 00 00 00 00 44 00 00 00 00  |.K.........D....|
+00000020  0B 00                                            |..|
+[G< #58] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[HB>] exact empty RuntimeRes v4 #51
+[G< #59] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[G>] HYP_PF_009_SECOND_PASSWORD_OK_KEEPALIVE (44 bytes; late=0.4 ms)
+00000000  12 9D 6E 14 00 00 00 00 08 04 0B 02 12 01 00 12  |..n.............|
+00000010  98 4B 0B 00 08 01 19 00 00 00 00 44 00 00 00 00  |.K.........D....|
+00000020  0B 00                                            |..|
+[G< #60] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[HB>] exact empty RuntimeRes v4 #52
+[G< #61] 12 bytes IDs=[(0, 28271, 'GSCN_RunTimeProtocolReq')]
+00000000  12 6F 6E 14 00 00 00 00 08 00 0B 00              |.on.........|
+[*] game client closed
+[+] closed game log capture_v141\GAME_20260818_020841_874104_59589.txt
+[*] login client closed
+[+] closed login log capture_v141\LOGIN_20260818_020801_989412_59586.txt
+[FOUNDATION] stopped
+

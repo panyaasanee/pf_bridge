@@ -1,0 +1,5 @@
+timestamp	subsystem	lane_that_parked	kind	answerable_from_existing	note
+2026-08-20T02:35+07:00	damage	GT-027 DAMAGE-ON-NPC-001	xref	n	NPC identity 0x2001 allocated in the actor map at runtime? need the WRITER of [0x102C6C0+0x0C], round 93 only followed readers
+2026-08-20T02:35+07:00	damage	DAMAGE-MODEL flags	disasm	n	what 0x7504A0 does (identity 64-bit in, bool out) - if it is a party/guild filter it hits the multiplayer design directly
+2026-08-20T02:35+07:00	damage	DAMAGE-MODEL display gate	disasm	n	what [localplayer+0x420] is - it is a gate that suppresses every damage number
+2026-08-20T02:35+07:00	names	FACTPACK-L2-CLASSCENSUS-001	search	n	48 rows never run through the thunk matcher (3 new + 30 tsv-only + 15 no-RTTI) - one batch, asked once, correct forever

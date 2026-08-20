@@ -1,0 +1,34 @@
+﻿=== 088 GT-008 TEARDOWN  20260818_014826 ===
+01:48:27.173  parsed keys = clientpid,console,rundb,server,stamp,title
+01:48:27.279  from 087: client=13084 console=17876 server=12544 rundb=C:\Users\Panya\Desktop\Pirate Force\Pirate Force ServerProject\state\pirateforce_gt008_20260818_014313.sqlite3
+01:48:27.327  guard window = 01:42:13 .. 01:48:13
+01:48:27.385    server pid=12544 name=python start=01:43:18 hasExited=False
+01:48:27.406    console pid=17876 name=py start=01:43:18 hasExited=False
+01:48:27.497    client pid=13084 NOT RUNNING
+01:48:27.532  client already exited (if it closed ITSELF after the exit-game button, that is the subcode-01 PASS signal)
+01:48:27.581  GameClient processes now = 0
+01:48:29.289  ctrl-c helper exit = 0
+01:48:29.318  server exited=True
+01:48:29.332  console exited=True
+01:48:35.191  AFTER listeners = 0
+01:48:35.226  capture root = capture_gt008_20260818_014313
+01:48:35.339  GAME_LIVE: capture_v141\GAME_LIVE.txt bytes=18427
+01:48:35.369    HYP_PF_013 marker lines = 1
+01:48:35.383    LogoutVital mentions    = 1
+01:48:35.442    SOCKET_CLOSED lines     = 0
+01:48:35.512    mk> 2026-08-18T01:47:20.327 SENT label=HYP_PF_013_LOGOUT_SUBCODE01_ACK_THEN_SERVER_SOCKET_CLOSE frame_bytes=46 delay=0.00 late_ms=0.3
+01:48:35.532  GAME_EVENTS: bytes=1208
+01:48:35.625    ev> 2026-08-18T01:45:00.555 SESSION_START peer=127.0.0.1:56898 raw=GAME_20260818_014500_531397_56898.txt
+01:48:35.652    ev> 2026-08-18T01:47:20.289 EVENT seq=3 frame=62 delta_ms=22089.3 name=UNKNOWN_0x1B40 id=0x1B40 version=0 vital_count=1 post_action1=0 payload_bytes=14 payload_hex=0801080014000000001400000000
+01:48:35.699  --- DB AFTER (run copy) ---
+01:48:36.162    sessions with char   : 6
+01:48:36.171    open sessions        : 0
+01:48:36.180    max lease_generation : 6
+01:48:36.189    integrity            : ok
+01:48:36.198    S ('b88cc7a2978040bd8fdaf22a7d99bf60', 1, 3, '2026-08-17T05:37:51.858705+00:00', '2026-08-17T05:39:52.858518+00:00')
+01:48:36.207    S ('7ede44a3d81d46c88be83b167730fa25', 1, 4, '2026-08-17T07:35:46.686762+00:00', '2026-08-17T07:39:11.447381+00:00')
+01:48:36.216    S ('dba83b2c4a9242dfa1831148ff0130e3', 1, 5, '2026-08-17T12:23:07.820894+00:00', '2026-08-17T12:24:36.773543+00:00')
+01:48:36.224    S ('a1f6db74359c4dcbbde03830546e86fb', 1, 6, '2026-08-17T18:45:00.479460+00:00', '2026-08-17T18:47:20.306190+00:00')
+01:48:36.657  canonical sha now = D08A89BF19D1C2888A22FA9AEBFB6B718DE906094CAA78C6B3CD614FCFBD08E2
+01:48:36.665  expected (must be UNCHANGED) = FA794D0B1B69C6DCF0C7BCF0869FBEDC18138890C623547275952B3FEFE14400
+01:48:36.687  === 088 TEARDOWN DONE ===

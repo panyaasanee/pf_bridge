@@ -1,0 +1,106 @@
+# ============================================================================
+# .gitignore for the SECOND repository (root = pf_bridge\)
+# deny-all + allowlist, per chief verdict 2026-08-20 condition (1)
+# Panya decisions 2026-08-20 ~12:1x: VITAL_REGISTRY = IN, evidence_screens = IN
+# ============================================================================
+# Rule of this file: line 1 denies everything; every `!` below re-opens one
+# thing by name; git does NOT descend into an excluded directory, so each
+# directory is opened before its contents. Last matching line wins, so the
+# hard-deny block at the bottom is the final word.
+
+/*
+
+# ---- root: docs, findings, factpacks, queue, continuation ----
+!/.gitignore
+!/.gitattributes
+!/*.md
+
+# ---- root: our own derived data + tools (NOT byte copies of the binary) ----
+!/CANON_SHA.txt
+!/NEW_SESSION_OPENER.txt
+!/IMAGE_ACCESS_COST.tsv
+!/VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv
+!/FACTPACK_L2_CLASSCENSUS001_20260820.json
+!/FACTPACK_L2_CLASSCENSUS001_20260820.tsv
+!/DRAFT_gitignore_runtime_state.txt
+!/DRAFT_gitignore_REPO2_20260820.txt
+!/*.ps1
+!/*.bat
+!/*.py
+
+# ---- directories that carry the project's memory ----
+!/agent_kit/
+!/agent_kit/**
+!/notes_to_chief/
+!/notes_to_chief/**
+!/archive/
+!/archive/**
+!/templates/
+!/templates/**
+!/staged/
+!/staged/**
+!/drafts/
+!/drafts/**
+!/codex_orders/
+!/codex_orders/**
+!/image_queries/
+!/image_queries/**
+!/evidence_screens/
+!/evidence_screens/**
+
+# ---- factpack_L1: open the folder, keep ONLY the four safe members ----
+!/factpack_L1/
+/factpack_L1/*
+!/factpack_L1/MANIFEST.md
+!/factpack_L1/TIMING.md
+!/factpack_L1/blocks_256.tsv
+!/factpack_L1/make_factpack_l1.py
+
+# ---- runtime flags: whoever holds the machine owns these, never sync ----
+/LOCK.txt
+/LOCK_*.txt
+/PANYA_PRESENT.txt
+/bridge_loop_state.txt
+/watchdog_last_check.txt
+
+# ============================================================================
+# HARD DENIES - last word. Nothing above may re-open these.
+# ============================================================================
+**/*.log
+**/*.bin
+**/*.bi_
+**/*.dmp
+**/*.exe
+**/*.dll
+**/*.pyd
+**/*.zip
+**/*.7z
+**/*.rar
+**/*.tar.gz
+**/*.tgz
+**/*.pcap
+**/*.cap
+**/*.sqlite3
+**/*.sqlite3-wal
+**/*.sqlite3-shm
+**/*.db
+**/__pycache__/
+**/*.pyc
+**/*.bak_*
+**/*.tmp
+**/*.part
+
+# images: denied everywhere, allowed only in the curated evidence folder
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.mp4
+!/evidence_screens/**
+
+# ----------------------------------------------------------------------------
+# NEVER ON A REMOTE: byte-for-byte extracts of the third-party client binary.
+# chief verdict condition (2). These stay on Panya's machine forever.
+# ----------------------------------------------------------------------------
+/factpack_L1/strings_*.tsv
+/factpack_L1/pe_*.tsv

@@ -1,0 +1,143 @@
+GAME_CONNECTED peer=127.0.0.1:61636 local_port=10189
+FRAME magic=0x5F253EAC compressed_len=47
+00000000  AC 3E 25 5F 2F 00 00 00 2D B0 12 3A 45 14 00 00  |.>%_/...-..:E...|
+00000010  00 00 08 00 0B 02 12 01 00 12 84 37 0B 00 0B 68  |...........7...h|
+00000020  48 04 00 00 00 0E 00 00 00 44 09 00 00 00 6C 6F  |H........D....lo|
+00000030  63 61 6C 74 65 73 74                             |caltest|
+DECOMPRESSED 45
+00000000  12 3A 45 14 00 00 00 00 08 00 0B 02 12 01 00 12  |.:E.............|
+00000010  84 37 0B 00 0B 68 48 04 00 00 00 0E 00 00 00 44  |.7...hH........D|
+00000020  09 00 00 00 6C 6F 63 61 6C 74 65 73 74           |....localtest|
+STRUCTURAL_IDS [(0, 17722, 'GSCN_LoginProtocol'), (15, 14212, 'LoginVerifyVital')] OUTER version=0 mask=0x02 count=1 nested_version=0
+SENT LOGIN_VERIFY_ACK_ONCE bytes=55
+PC 45
+00000000  12 3A 45 14 00 00 00 00 08 00 0B 02 12 01 00 12  |.:E.............|
+00000010  84 37 0B 00 0B 68 48 04 00 00 00 0E 00 00 00 44  |.7...hH........D|
+00000020  09 00 00 00 6C 6F 63 61 6C 74 65 73 74           |....localtest|
+FRAME
+00000000  AC 3E 25 5F 2F 00 00 00 2D B0 12 3A 45 14 00 00  |.>%_/...-..:E...|
+00000010  00 00 08 00 0B 02 12 01 00 12 84 37 0B 00 0B 68  |...........7...h|
+00000020  48 04 00 00 00 0E 00 00 00 44 09 00 00 00 6C 6F  |H........D....lo|
+00000030  63 61 6C 74 65 73 74                             |caltest|
+SENT FOUNDATION_CHARACTER_LIST_ONCE bytes=55
+PC 45
+00000000  12 9D 6E 14 00 00 00 00 08 04 0B 02 12 01 00 12  |..n.............|
+00000010  EF 36 0B 0A 0B 00 14 00 00 00 00 14 00 00 00 00  |.6..............|
+00000020  1F 00 00 00 00 0B 00 0B 00 0B 00 0B 00           |.............|
+FRAME
+00000000  AC 3E 25 5F 2F 00 00 00 2D B0 12 9D 6E 14 00 00  |.>%_/...-...n...|
+00000010  00 00 08 04 0B 02 12 01 00 12 EF 36 0B 0A 0B 00  |...........6....|
+00000020  14 00 00 00 00 14 00 00 00 00 1F 00 00 00 00 0B  |................|
+00000030  00 0B 00 0B 00 0B 00                             |.......|
+STATE rx=1 login_ack=True select_sent=True notify_count=0 last_notify=None create_seen=False create_reply=False start_seen=False start_reply=False world_info=False teleport=False runtime_ack=False npc_sweep=False equipment_capture_count=0 equipment_value32_mapped=None equipment_item_identity=None quest_conversation=False quest_accept_ui=False quest_accept_success=False quest_op1_count=0 quest_op2_count=0 quest_capture_count=0 quest_last_fields=None post_action1_request_count=0 post_action1_last_request=None v136_docking_pending=False v136_marker1_prompt=False v136_marker1_confirm_count=0 v136_marker1_confirm_value=None v137_marker1_transport_sent=False v137_marker1_transport_count=0 v138_marker1_ready_count=0 v138_marker1_population_sent=False v138_marker1_population_count=0 v139_marker_targetpos_count=0 v139_p86_armed=False v139_p86_choose_count=0 v139_p86_face_sent=False v139_p86_conversation_sent=False v141_population_refresh_count=0 population_membership=None population_anchor=None p30_action_armed=False action_capture_count=0 action_last_fields=None
+FRAME magic=0x5F253EAC compressed_len=242
+00000000  AC 3E 25 5F F2 00 00 00 EE 01 F0 ED 12 3A 45 14  |.>%_.........:E.|
+00000010  00 00 00 00 08 00 0B 02 12 01 00 12 CF 36 0B 08  |.............6..|
+00000020  08 01 0B 01 32 00 00 00 00 00 00 00 00 0B 00 48  |....2..........H|
+00000030  0C 00 00 00 74 00 65 00 73 00 74 00 30 00 31 00  |....t.e.s.t.0.1.|
+00000040  0B 01 0B 01 19 01 00 00 00 12 01 00 12 01 00 44  |...............D|
+00000050  20 00 00 00 35 35 42 38 36 38 39 32 46 39 33 34  | ...55B86892F934|
+00000060  34 37 39 39 38 30 44 46 39 44 37 39 43 31 32 34  |479980DF9D79C124|
+00000070  37 46 37 41 48 0E 00 00 00 74 00 65 00 73 00 74  |7F7AH....t.e.s.t|
+00000080  00 30 00 30 00 31 00 0B FF 32 01 00 00 00 00 00  |.0.0.1...2......|
+00000090  00 00 26 FF FF FF FF 14 00 00 00 00 14 09 40 11  |..&...........@.|
+000000A0  00 14 F0 EF 10 00 14 1A F0 10 00 14 00 00 00 00  |................|
+000000B0  14 7A 18 23 00 14 7B 18 23 00 14 00 00 00 00 14  |.z.#..{.#.......|
+000000C0  00 00 00 00 14 00 00 00 00 14 C2 91 21 00 14 C2  |............!...|
+000000D0  91 21 00 0B 01 08 1E 08 1E 44 00 00 00 00 0B 00  |.!.......D......|
+000000E0  14 00 00 00 00 0B 01 0B 01 14 00 00 00 00 0B 00  |................|
+000000F0  14 00 00 00 00 14 00 00 00 00                    |..........|
+DECOMPRESSED 238
+00000000  12 3A 45 14 00 00 00 00 08 00 0B 02 12 01 00 12  |.:E.............|
+00000010  CF 36 0B 08 08 01 0B 01 32 00 00 00 00 00 00 00  |.6......2.......|
+00000020  00 0B 00 48 0C 00 00 00 74 00 65 00 73 00 74 00  |...H....t.e.s.t.|
+00000030  30 00 31 00 0B 01 0B 01 19 01 00 00 00 12 01 00  |0.1.............|
+00000040  12 01 00 44 20 00 00 00 35 35 42 38 36 38 39 32  |...D ...55B86892|
+00000050  46 39 33 34 34 37 39 39 38 30 44 46 39 44 37 39  |F934479980DF9D79|
+00000060  43 31 32 34 37 46 37 41 48 0E 00 00 00 74 00 65  |C1247F7AH....t.e|
+00000070  00 73 00 74 00 30 00 30 00 31 00 0B FF 32 01 00  |.s.t.0.0.1...2..|
+00000080  00 00 00 00 00 00 26 FF FF FF FF 14 00 00 00 00  |......&.........|
+00000090  14 09 40 11 00 14 F0 EF 10 00 14 1A F0 10 00 14  |..@.............|
+000000A0  00 00 00 00 14 7A 18 23 00 14 7B 18 23 00 14 00  |.....z.#..{.#...|
+000000B0  00 00 00 14 00 00 00 00 14 00 00 00 00 14 C2 91  |................|
+000000C0  21 00 14 C2 91 21 00 0B 01 08 1E 08 1E 44 00 00  |!....!.......D..|
+000000D0  00 00 0B 00 14 00 00 00 00 0B 01 0B 01 14 00 00  |................|
+000000E0  00 00 0B 00 14 00 00 00 00 14 00 00 00 00        |..............|
+STRUCTURAL_IDS [(0, 17722, 'GSCN_LoginProtocol'), (15, 14031, 'CreateActorVital')] OUTER version=0 mask=0x02 count=1 nested_version=8
+CREATE_ACTOR op=1 has_actor=1 actor_wire_len=214
+CREATE_ACTOR_DECODE {'identity_lo': 0, 'identity_hi': 0, 'selector': 0, 'name': 'test01', 'appearance1': 1, 'appearance2': 1, 'create_context': 1, 'field20': 1, 'field22': 1, 'token_ascii': '55B86892F934479980DF9D79C1247F7A', 'second_name': 'test001', 'avatar_base_flags': 255, 'avatar_base_id': 1, 'avatar_mask': 4294967295, 'avatar_u32': {44: 0, 48: 1130505, 52: 1110000, 56: 1110042, 60: 0, 64: 2300026, 68: 2300027, 72: 0, 76: 0, 80: 0, 84: 2200002, 88: 2200002}, 'avatar_misc': {92: 1, 93: 30, 94: 30, 100: '', 96: 0, 128: 0, 95: 1, 132: 1, 136: 0}, 'nested_present': 0, 'f4': 0, 'f8': 0, 'wire_len': 214}
+SENT FOUNDATION_CREATE_COMMITTED bytes=250
+PC 238
+00000000  12 3A 45 14 00 00 00 00 08 00 0B 02 12 01 00 12  |.:E.............|
+00000010  CF 36 0B 08 08 01 0B 01 32 01 00 01 10 00 00 00  |.6......2.......|
+00000020  00 0B 00 48 0C 00 00 00 74 00 65 00 73 00 74 00  |...H....t.e.s.t.|
+00000030  30 00 31 00 0B 01 0B 01 19 01 00 00 00 12 01 00  |0.1.............|
+00000040  12 01 00 44 20 00 00 00 35 35 42 38 36 38 39 32  |...D ...55B86892|
+00000050  46 39 33 34 34 37 39 39 38 30 44 46 39 44 37 39  |F934479980DF9D79|
+00000060  43 31 32 34 37 46 37 41 48 0E 00 00 00 74 00 65  |C1247F7AH....t.e|
+00000070  00 73 00 74 00 30 00 30 00 31 00 0B FF 32 01 00  |.s.t.0.0.1...2..|
+00000080  01 10 00 00 00 00 26 FF FF FF FF 14 00 00 00 00  |......&.........|
+00000090  14 09 40 11 00 14 F0 EF 10 00 14 1A F0 10 00 14  |..@.............|
+000000A0  00 00 00 00 14 7A 18 23 00 14 7B 18 23 00 14 00  |.....z.#..{.#...|
+000000B0  00 00 00 14 00 00 00 00 14 00 00 00 00 14 C2 91  |................|
+000000C0  21 00 14 C2 91 21 00 0B 01 08 1E 08 1E 44 00 00  |!....!.......D..|
+000000D0  00 00 0B 00 14 00 00 00 00 0B 01 0B 01 14 00 00  |................|
+000000E0  00 00 0B 00 14 00 00 00 00 14 00 00 00 00        |..............|
+FRAME
+00000000  AC 3E 25 5F F2 00 00 00 EE 01 F0 ED 12 3A 45 14  |.>%_.........:E.|
+00000010  00 00 00 00 08 00 0B 02 12 01 00 12 CF 36 0B 08  |.............6..|
+00000020  08 01 0B 01 32 01 00 01 10 00 00 00 00 0B 00 48  |....2..........H|
+00000030  0C 00 00 00 74 00 65 00 73 00 74 00 30 00 31 00  |....t.e.s.t.0.1.|
+00000040  0B 01 0B 01 19 01 00 00 00 12 01 00 12 01 00 44  |...............D|
+00000050  20 00 00 00 35 35 42 38 36 38 39 32 46 39 33 34  | ...55B86892F934|
+00000060  34 37 39 39 38 30 44 46 39 44 37 39 43 31 32 34  |479980DF9D79C124|
+00000070  37 46 37 41 48 0E 00 00 00 74 00 65 00 73 00 74  |7F7AH....t.e.s.t|
+00000080  00 30 00 30 00 31 00 0B FF 32 01 00 01 10 00 00  |.0.0.1...2......|
+00000090  00 00 26 FF FF FF FF 14 00 00 00 00 14 09 40 11  |..&...........@.|
+000000A0  00 14 F0 EF 10 00 14 1A F0 10 00 14 00 00 00 00  |................|
+000000B0  14 7A 18 23 00 14 7B 18 23 00 14 00 00 00 00 14  |.z.#..{.#.......|
+000000C0  00 00 00 00 14 00 00 00 00 14 C2 91 21 00 14 C2  |............!...|
+000000D0  91 21 00 0B 01 08 1E 08 1E 44 00 00 00 00 0B 00  |.!.......D......|
+000000E0  14 00 00 00 00 0B 01 0B 01 14 00 00 00 00 0B 00  |................|
+000000F0  14 00 00 00 00 14 00 00 00 00                    |..........|
+MILESTONE CREATE_ACTOR_SUCCESS_ECHO_SENT
+STATE rx=2 login_ack=True select_sent=True notify_count=0 last_notify=None create_seen=True create_reply=True start_seen=False start_reply=False world_info=False teleport=False runtime_ack=False npc_sweep=False equipment_capture_count=0 equipment_value32_mapped=None equipment_item_identity=None quest_conversation=False quest_accept_ui=False quest_accept_success=False quest_op1_count=0 quest_op2_count=0 quest_capture_count=0 quest_last_fields=None post_action1_request_count=0 post_action1_last_request=None v136_docking_pending=False v136_marker1_prompt=False v136_marker1_confirm_count=0 v136_marker1_confirm_value=None v137_marker1_transport_sent=False v137_marker1_transport_count=0 v138_marker1_ready_count=0 v138_marker1_population_sent=False v138_marker1_population_count=0 v139_marker_targetpos_count=0 v139_p86_armed=False v139_p86_choose_count=0 v139_p86_face_sent=False v139_p86_conversation_sent=False v141_population_refresh_count=0 population_membership=None population_anchor=None p30_action_armed=False action_capture_count=0 action_last_fields=None
+FRAME magic=0x5F253EAC compressed_len=36
+00000000  AC 3E 25 5F 24 00 00 00 22 84 12 3A 45 14 00 00  |.>%_$..."..:E...|
+00000010  00 00 08 00 0B 02 12 01 00 12 DB 36 0B 01 08 01  |...........6....|
+00000020  08 00 14 00 00 00 00 44 00 00 00 00              |.......D....|
+DECOMPRESSED 34
+00000000  12 3A 45 14 00 00 00 00 08 00 0B 02 12 01 00 12  |.:E.............|
+00000010  DB 36 0B 01 08 01 08 00 14 00 00 00 00 44 00 00  |.6...........D..|
+00000020  00 00                                            |..|
+STRUCTURAL_IDS [(0, 17722, 'GSCN_LoginProtocol'), (15, 14043, '0x36DB')] OUTER version=0 mask=0x02 count=1 nested_version=1
+SENT HYP_PF_021_DELETE_ACTOR_SELECTOR00_SOFT_DELETE_COMMITTED bytes=46
+PC 36
+00000000  12 9D 6E 14 00 00 00 00 08 04 0B 02 12 01 00 12  |..n.............|
+00000010  DB 36 0B 01 08 01 08 00 14 00 00 00 00 44 00 00  |.6...........D..|
+00000020  00 00 0B 00                                      |....|
+FRAME
+00000000  AC 3E 25 5F 26 00 00 00 24 8C 12 9D 6E 14 00 00  |.>%_&...$...n...|
+00000010  00 00 08 04 0B 02 12 01 00 12 DB 36 0B 01 08 01  |...........6....|
+00000020  08 00 14 00 00 00 00 44 00 00 00 00 0B 00        |.......D......|
+SENT HYP_PF_021_DELETE_ACTOR_LIST_REBUILD_0x36EF bytes=55
+PC 45
+00000000  12 9D 6E 14 00 00 00 00 08 04 0B 02 12 01 00 12  |..n.............|
+00000010  EF 36 0B 0A 0B 00 14 00 00 00 00 14 00 00 00 00  |.6..............|
+00000020  1F 00 00 00 00 0B 00 0B 00 0B 00 0B 00           |.............|
+FRAME
+00000000  AC 3E 25 5F 2F 00 00 00 2D B0 12 9D 6E 14 00 00  |.>%_/...-...n...|
+00000010  00 00 08 04 0B 02 12 01 00 12 EF 36 0B 0A 0B 00  |...........6....|
+00000020  14 00 00 00 00 14 00 00 00 00 1F 00 00 00 00 0B  |................|
+00000030  00 0B 00 0B 00 0B 00                             |.......|
+STATE rx=3 login_ack=True select_sent=True notify_count=0 last_notify=None create_seen=True create_reply=True start_seen=False start_reply=False world_info=False teleport=False runtime_ack=False npc_sweep=False equipment_capture_count=0 equipment_value32_mapped=None equipment_item_identity=None quest_conversation=False quest_accept_ui=False quest_accept_success=False quest_op1_count=0 quest_op2_count=0 quest_capture_count=0 quest_last_fields=None post_action1_request_count=0 post_action1_last_request=None v136_docking_pending=False v136_marker1_prompt=False v136_marker1_confirm_count=0 v136_marker1_confirm_value=None v137_marker1_transport_sent=False v137_marker1_transport_count=0 v138_marker1_ready_count=0 v138_marker1_population_sent=False v138_marker1_population_count=0 v139_marker_targetpos_count=0 v139_p86_armed=False v139_p86_choose_count=0 v139_p86_face_sent=False v139_p86_conversation_sent=False v141_population_refresh_count=0 population_membership=None population_anchor=None p30_action_armed=False action_capture_count=0 action_last_fields=None
+FRAME magic=0x5F253EAC compressed_len=36
+00000000  AC 3E 25 5F 24 00 00 00 22 84 12 3A 45 14 00 00  |.>%_$..."..:E...|
+00000010  00 00 08 00 0B 02 12 01 00 12 DB 36 0B 01 08 02  |...........6....|
+00000020  08 00 14 00 00 00 00 44 00 00 00 00              |.......D....|
+DECOMPRESSED 34
+00000000  12 3A 45 14 00 00 00 00 08 00 0B 02 12 01 00 12  |.:E.............|
+00000010  DB 36 0B 01 08 02 08 00 14 00 00 00 00 44 00 00  |.6...........D..|
+00000020  00 00                                            |..|
+STRUCTURAL_IDS [(0, 17722, 'GSCN_LoginProtocol'), (15, 14043, '0x36DB')] OUTER version=0 mask=0x02 count=1 nested_version=1
+STATE rx=4 login_ack=True select_sent=True notify_count=0 last_notify=None create_seen=True create_reply=True start_seen=False start_reply=False world_info=False teleport=False runtime_ack=False npc_sweep=False equipment_capture_count=0 equipment_value32_mapped=None equipment_item_identity=None quest_conversation=False quest_accept_ui=False quest_accept_success=False quest_op1_count=0 quest_op2_count=0 quest_capture_count=0 quest_last_fields=None post_action1_request_count=0 post_action1_last_request=None v136_docking_pending=False v136_marker1_prompt=False v136_marker1_confirm_count=0 v136_marker1_confirm_value=None v137_marker1_transport_sent=False v137_marker1_transport_count=0 v138_marker1_ready_count=0 v138_marker1_population_sent=False v138_marker1_population_count=0 v139_marker_targetpos_count=0 v139_p86_armed=False v139_p86_choose_count=0 v139_p86_face_sent=False v139_p86_conversation_sent=False v141_population_refresh_count=0 population_membership=None population_anchor=None p30_action_armed=False action_capture_count=0 action_last_fields=None

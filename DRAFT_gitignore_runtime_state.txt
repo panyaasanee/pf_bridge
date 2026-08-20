@@ -1,0 +1,295 @@
+================================================================================
+DRAFT ONLY - ยังไม่ได้แก้ .gitignore ตัวจริง
+================================================================================
+ไฟล์นี้เป็น "ร่าง" ของบล็อกที่จะเอาไปต่อท้าย .gitignore ของจริง
+ไม่ได้แตะ  Pirate Force ServerProject\.gitignore  (20,593 ไบต์ / 369 บรรทัด) เลย
+
+ผู้ร่าง : ลูกมือ chief architect (scope-only)
+วันที่   : 2026-08-20
+ทดสอบ  : ทุก pattern ผ่าน `git check-ignore -q --no-index` ใน repo ทดสอบชั่วคราว
+          ที่ copy .gitignore ตัวจริงมาแล้วต่อท้ายบล็อกนี้
+          ผลรวม 44 assertion (ก) + 44 assertion (ข) = FAIL 0 ราย
+          (ดูตาราง VERIFY ท้ายไฟล์)
+
+--------------------------------------------------------------------------------
+🔴 เรื่องที่ต้องรู้ก่อนอ่านบล็อกข้างล่าง
+--------------------------------------------------------------------------------
+.gitignore ตัวจริง **บรรทัดที่ 1 คือ `/*`**  แปลว่ารีโปนี้เป็นแบบ
+"ปิดหมดก่อน แล้วค่อยเปิดทีละอัน" (deny-all + allowlist) มี 269 บรรทัดที่ขึ้นต้น
+ด้วย `!` เป็นตัวเปิด
+
+ผลที่ตามมา 2 ข้อ ที่คนมักพลาด:
+
+  (1) ตอนนี้ถ้าย้าย pf_bridge เข้ามาเฉย ๆ  **ทุกไฟล์จะถูกกันหมด** โดย `/*`
+      พิสูจน์แล้ว: pf_bridge/GAME_TEST_QUEUE.md => .gitignore:1:/*
+      ⇒ ไม่ได้แปลว่า "ปลอดภัยแล้ว" แต่แปลว่า "commit ไม่เข้าเลยสักไฟล์"
+        ต้องมีบรรทัด `!` เปิดประตูก่อน บล็อกข้างล่างจึงเริ่มด้วยการเปิด
+
+  (2) git **ไม่เดินเข้าไปในโฟลเดอร์ที่ถูก exclude ไปแล้ว**
+      ดังนั้น `!/pf_bridge/GAME_TEST_QUEUE.md` เดี่ยว ๆ จะ "ตายฟรี"
+      ต้องเปิดตัวโฟลเดอร์ก่อน (`!/pf_bridge/`) แล้วค่อยเปิดข้างใน
+
+  (3) กติกา git คือ **บรรทัดท้ายสุดที่ match ชนะ** บล็อกนี้ถูกต่อท้ายไฟล์
+      แปลว่า `!/pf_bridge/**` ของเรา จะ "ชนะ" บรรทัด `**/*.png` `**/*.zip`
+      `**/capture*/` ที่อยู่บรรทัด 163-177 ของเดิม
+      ⇒ จึงต้องเขียนกันไบนารีซ้ำอีกรอบในบล็อกนี้ ไม่ใช่พึ่งของเดิม
+      (ข้อนี้คือกับดักที่ทำให้ไฟล์เกม 9 MB หลุดขึ้น remote ได้จริง)
+
+================================================================================
+บล็อก (ก) — ใช้เมื่อ Panya เลือก "ย้าย pf_bridge เข้ารีโปเดิม"
+ต่อท้าย .gitignore ตัวจริง (จะกลายเป็นบรรทัด 370 เป็นต้นไป)
+================================================================================
+
+# ============================================================================
+# pf_bridge — พื้นที่ประสานงาน chief <-> ผู้เทส
+# เพิ่มเมื่อ 2026-08-__ ตาม PROPOSAL_VCS_MIGRATION_20260819.md ทางเลือก (ก)
+# ============================================================================
+
+# --- ขั้น 1: เปิดประตู ---------------------------------------------------
+# บรรทัด 1 ของไฟล์นี้คือ `/*` (ปิดทุกอย่างที่รากรีโป) และ git จะไม่เดินเข้า
+# โฟลเดอร์ที่ปิดไปแล้ว ⇒ ถ้าไม่มีสองบรรทัดนี้ ทุกบรรทัด `!` ข้างล่างเป็นโมฆะ
+!/pf_bridge/
+!/pf_bridge/**
+
+# --- ขั้น 2: ปิดกลับเฉพาะของที่ห้ามเข้า -----------------------------------
+
+# ธง LOCK: ใครถือเครื่องอยู่คนนั้นเป็นเจ้าของไฟล์นี้ ห้าม sync ข้ามเครื่อง
+# ถ้าหลุดเข้าไป -> `git pull` จะเขียนทับ lock ที่ผู้เทสกำลังถืออยู่จริง
+# (หรือ pull ล้มเพราะไฟล์ถูกแก้ในเครื่อง แล้วผู้เทสรับใบสั่งใหม่ไม่ได้เลย)
+/pf_bridge/LOCK.txt
+/pf_bridge/LOCK_*.txt
+
+# ธงบอกว่า Panya นั่งอยู่หน้าจอหรือเปล่า — เป็นความจริงของ "เครื่องนี้ ตอนนี้"
+/pf_bridge/PANYA_PRESENT.txt
+
+# ตัวนับรอบของ bridge loop (27 ไบต์ เขียนใหม่ทุกรอบ) — commit แล้วจะ dirty ตลอด
+/pf_bridge/bridge_loop_state.txt
+/pf_bridge/watchdog_last_check.txt
+
+# log ทุกชนิดใน pf_bridge (watchdog.log ฯลฯ) — append ตลอดเวลา, conflict ทุก pull
+/pf_bridge/**/*.log
+
+# --- สายพานลำเลียง: เป็น "ท่อ" ไม่ใช่ "เอกสาร" -----------------------------
+# ของในนี้มีอายุเป็นนาที และเป็นตัวโตเร็วที่สุด
+# (วัดจริง: outbox 665 ไฟล์ / 4.54 MiB ใน ~3 วัน  ≈ 218 ไฟล์/วัน)
+# แต่ยัง track ตัวโฟลเดอร์ไว้ผ่าน .gitkeep เพื่อให้ clone ใหม่มีโครงสร้างครบ
+/pf_bridge/inbox/*
+!/pf_bridge/inbox/.gitkeep
+/pf_bridge/outbox/*
+!/pf_bridge/outbox/.gitkeep
+/pf_bridge/done/*
+!/pf_bridge/done/.gitkeep
+/pf_bridge/staged/*
+!/pf_bridge/staged/.gitkeep
+
+# --- ฐานข้อมูลและสำเนา run ------------------------------------------------
+# ห้ามให้ DB เข้าไปเด็ดขาด: ไฟล์ไบนารี merge ไม่ได้ และถ้า pull ทับ DB
+# ที่ server เปิดค้างอยู่บน Windows = pull error หรือ DB พัง
+/pf_bridge/**/*.sqlite3
+/pf_bridge/**/*.sqlite3-wal
+/pf_bridge/**/*.sqlite3-shm
+/pf_bridge/**/*.db
+/pf_bridge/backup/
+
+# --- ของที่ derive มาจากไบนารีเกม (ลิขสิทธิ์บุคคลที่สาม) --------------------
+# factpack_L1/ = 9,042,375 ไบต์ สกัดจาก GameClient.local.bin โดยตรง
+#   strings_ascii.tsv  : 97,990 สตริงคัดลอกมาตรง ๆ จากไฟล์เกม
+#   blocks_256.tsv     : SHA-256 ราย 256 ไบต์ 57,654 บล็อก
+# 🔴 ห้ามขึ้น remote จนกว่า Panya จะเคาะเรื่องลิขสิทธิ์
+/pf_bridge/factpack_L1/
+
+# --- โฟลเดอร์ capture (ของเดิมบรรทัด 163 กันไว้แล้ว แต่ `!/pf_bridge/**`
+#     ของเราอยู่ท้ายกว่า จึงชนะบรรทัด 163 -> ต้องเขียนซ้ำ) ------------------
+/pf_bridge/**/capture*/
+
+# --- ภาพหลักฐาน: หนัก, merge ไม่ได้, และเป็นภาพหน้าจอเกม -------------------
+/pf_bridge/evidence_screens/
+/pf_bridge/report_images/
+
+# --- ไบนารี/สื่อ ทุกชนิด (เขียนซ้ำเพราะบรรทัด 164-177 ของเดิมถูกเราทับ) -----
+/pf_bridge/**/*.png
+/pf_bridge/**/*.jpg
+/pf_bridge/**/*.jpeg
+/pf_bridge/**/*.gif
+/pf_bridge/**/*.mp4
+/pf_bridge/**/*.zip
+/pf_bridge/**/*.7z
+/pf_bridge/**/*.rar
+/pf_bridge/**/*.tar.gz
+/pf_bridge/**/*.tgz
+/pf_bridge/**/*.exe
+/pf_bridge/**/*.dll
+/pf_bridge/**/*.pyd
+/pf_bridge/**/*.bin
+/pf_bridge/**/*.bi_
+/pf_bridge/**/*.dmp
+/pf_bridge/**/*.pcap
+/pf_bridge/**/*.cap
+
+# --- ขยะจาก python / editor ------------------------------------------------
+/pf_bridge/**/__pycache__/
+/pf_bridge/**/*.pyc
+/pf_bridge/**/*.bak_*
+/pf_bridge/**/*.tmp
+/pf_bridge/**/*.part
+
+# ============================================================================
+# ผลลัพธ์ที่วัดได้จากบล็อกนี้ (ยิงพาธจริงทั้ง 1,107 พาธของ pf_bridge เข้าไป)
+#   เข้ารีโป : 146 ไฟล์ /  2,450,222 ไบต์ (2.34 MiB)
+#   ถูกกัน  : 961 ไฟล์ / 26,717,021 ไบต์ (25.48 MiB)
+# ของที่เข้า: GAME_TEST_QUEUE.md, CHIEF_CONTINUATION.md, FINDINGS_R*.md,
+#            notes_to_chief/**, agent_kit/**, archive/**, drafts/**,
+#            codex_orders/**, templates/**, *.ps1, VITAL_REGISTRY_*.tsv
+# ============================================================================
+
+
+================================================================================
+บล็อก (ข) — ใช้เมื่อ Panya เลือก "รีโปที่สองแยกต่างหาก"
+เป็น .gitignore ทั้งไฟล์ของรีโปใหม่ (pf_bridge เป็นรากของรีโปนั้น)
+================================================================================
+
+🔴 ข้อควรระวังของทางนี้: รีโปใหม่ **ไม่มี** บรรทัด `/*` แบบรีโปเดิม
+   แปลว่า default คือ "อนุญาตทุกอย่าง" ไม่ใช่ "ปิดทุกอย่าง"
+   พลาดหนึ่งบรรทัด = ไฟล์หลุดเข้าไปเงียบ ๆ (ตรงข้ามกับรีโปเดิมที่พลาดแล้ว
+   ไฟล์แค่ "ไม่เข้า") ถ้าเลือกทางนี้ ควรพิจารณาเริ่มด้วย `/*` + allowlist
+   เหมือนรีโปเดิม เพื่อรักษาท่า deny-by-default ไว้
+
+# ---- runtime flags ----
+LOCK.txt
+LOCK_*.txt
+PANYA_PRESENT.txt
+bridge_loop_state.txt
+watchdog_last_check.txt
+**/*.log
+
+# ---- transport spool (คง .gitkeep ไว้ให้ clone ใหม่มีโฟลเดอร์) ----
+/inbox/*
+!/inbox/.gitkeep
+/outbox/*
+!/outbox/.gitkeep
+/done/*
+!/done/.gitkeep
+/staged/*
+!/staged/.gitkeep
+
+# ---- databases / run copies ----
+**/*.sqlite3
+**/*.sqlite3-wal
+**/*.sqlite3-shm
+**/*.db
+/backup/
+
+# ---- derived from licensed client binary ----
+/factpack_L1/
+
+# ---- capture dirs / heavy evidence ----
+**/capture*/
+/evidence_screens/
+/report_images/
+
+# ---- binaries & media ----
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.mp4
+**/*.zip
+**/*.7z
+**/*.rar
+**/*.tar.gz
+**/*.tgz
+**/*.exe
+**/*.dll
+**/*.pyd
+**/*.bin
+**/*.bi_
+**/*.dmp
+**/*.pcap
+**/*.cap
+
+# ---- scratch ----
+**/__pycache__/
+**/*.pyc
+**/*.bak_*
+**/*.tmp
+**/*.part
+
+
+================================================================================
+VERIFY — ผลทดสอบจริง (git check-ignore -q --no-index ; exit 0 = ถูกกัน)
+================================================================================
+หมายเหตุวิธีทดสอบ: **ต้องดู exit code ไม่ใช่ดูว่ามี output หรือไม่**
+`git check-ignore -v` พิมพ์บรรทัดที่ match ออกมาแม้บรรทัดนั้นเป็น `!` (negation)
+เช่น `STATUS.md => .gitignore:5:!/STATUS.md` — มี output แต่ **ไม่ได้ถูกกัน**
+ตอนแรกผู้ร่างอ่านผิดด้วยวิธีนี้ จึงบันทึกไว้กันคนถัดไปพลาดซ้ำ
+
+[ก] ต้องถูกกัน — ผ่านทั้ง 27/27
+  pf_bridge/LOCK.txt                                -> :374 /pf_bridge/LOCK.txt
+  pf_bridge/LOCK_GAME.txt                           -> :375 /pf_bridge/LOCK_*.txt
+  pf_bridge/LOCK_GIT.txt                            -> :375 /pf_bridge/LOCK_*.txt
+  pf_bridge/PANYA_PRESENT.txt                       -> :376
+  pf_bridge/bridge_loop_state.txt                   -> :377
+  pf_bridge/watchdog_last_check.txt                 -> :378
+  pf_bridge/watchdog.log                            -> :379 /pf_bridge/**/*.log
+  pf_bridge/inbox/order.md                          -> :380 /pf_bridge/inbox/*
+  pf_bridge/outbox/x.txt                            -> :382
+  pf_bridge/done/y.md                               -> :384
+  pf_bridge/staged/z.ps1                            -> :386
+  pf_bridge/backup/pirateforce_before_gt020.sqlite3 -> :392 /pf_bridge/backup/
+  pf_bridge/state/pirateforce.sqlite3               -> :388 **/*.sqlite3
+  pf_bridge/factpack_L1/strings_ascii.tsv           -> :393
+  pf_bridge/outbox/capture_r11/capture_v141/a.txt   -> :394 **/capture*/
+  pf_bridge/evidence_screens/biground7/x.png        -> :395
+  pf_bridge/report_images/GT019.png                 -> :396
+  pf_bridge/notes_to_chief/shot.png                 -> :397 **/*.png
+  pf_bridge/x/y/GameClient.local.bin                -> :410 **/*.bin
+  pf_bridge/dump.dmp                                -> :412
+  pf_bridge/gameclient.bi_                          -> :411
+  pf_bridge/tool.exe                                -> :407
+  pf_bridge/lib.dll                                 -> :408
+  pf_bridge/replay/__pycache__/m.pyc                -> :415
+  pf_bridge/pf_bridge.ps1.bak_20260819              -> :417 **/*.bak_*
+  pf_bridge/a.zip                                   -> :402
+  pf_bridge/b.tar.gz                                -> :405
+
+[ก] ต้อง track ได้ — ผ่านทั้ง 17/17
+  pf_bridge/GAME_TEST_QUEUE.md              pf_bridge/CHIEF_CONTINUATION.md
+  pf_bridge/ATTENDED_SESSION_RUNBOOK.md     pf_bridge/notes_to_chief/20260819_x.md
+  pf_bridge/notes_to_chief/consumed/a.md    pf_bridge/agent_kit/00_START_HERE.md
+  pf_bridge/templates/t.md                  pf_bridge/pf_bridge.ps1
+  pf_bridge/pf_bridge_watchdog.ps1          pf_bridge/VITAL_REGISTRY_..._20260817.tsv
+  pf_bridge/codex_orders/READY/o.md         pf_bridge/drafts/d.md
+  pf_bridge/archive/a.md                    pf_bridge/inbox/.gitkeep
+  pf_bridge/outbox/.gitkeep                 pf_bridge/done/.gitkeep
+  pf_bridge/staged/.gitkeep
+
+[ก] REGRESSION — พฤติกรรมเดิมของรีโปไม่เปลี่ยน
+  STATUS.md                                        TRACKABLE (:5   !/STATUS.md)
+  README.md                                        TRACKABLE (:4)
+  AGENTS.md                                        TRACKABLE (:6)
+  docs/PF_VITAL_NAMES.json                         TRACKABLE (:93  !/docs/**)
+  current/pf_login_game_server_v141.py             TRACKABLE (:153)
+  state/pirateforce.sqlite3                        IGNORED   (:1   /*)
+  PirateForce_NewChat_Handoff_20260813_1358_V71.zip IGNORED  (:164 **/*.zip)
+  PirateForce_NewChat_Handoff_Package_V1_to_V54.zip IGNORED  (:164)
+  GameClient/GameClient.local.bin                  IGNORED   (:1   /*)
+  GameClient/x.dmp                                 IGNORED   (:1)
+  GameClient/gameclient.bi_                        IGNORED   (:1)
+  logs/server.log                                  IGNORED   (:1)
+  tests/__pycache__/a.pyc                          IGNORED   (:155)
+
+[ข] ต้องถูกกัน 27/27 ผ่าน , ต้อง track ได้ 17/17 ผ่าน  (FAIL 0)
+
+================================================================================
+สิ่งที่บล็อกนี้ยัง "ไม่ได้ตัดสินให้"  — ต้องให้ Panya เคาะ
+================================================================================
+1. archive/ (1,099,556 B / 38 ไฟล์) — ตอนนี้ร่างนี้ให้ "เข้า" เพราะเป็น .md ล้วน
+   ถ้าไม่อยากได้ ให้เพิ่ม `/pf_bridge/archive/`
+2. VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv (11,388 B) — ร่างนี้ให้ "เข้า"
+   เพราะ tools/pf_vital_name_thunk_static.py:127 ต้องใช้เป็น input จริง
+   แต่ชื่อไฟล์ก็บอกเองว่า derive มาจากไบนารีเกม -> เป็นคำถามลิขสิทธิ์
+3. staged/ (200,090 B / 17 ไฟล์) — ร่างนี้ "กัน" ตามใบสั่ง แต่ข้างในเป็นสคริปต์
+   .ps1 ของจริง (boot/teardown ราวน์ต่าง ๆ) ไม่ใช่ของชั่วคราวล้วน
+   ถ้าอยากได้เข้า ให้ลบสองบรรทัด /pf_bridge/staged/* และ !/.gitkeep ออก
+4. ต้องสร้างไฟล์ .gitkeep เปล่า 4 ไฟล์ (inbox, outbox, done, staged) เอง
+   บล็อกนี้ทำให้ track ได้แล้ว แต่ไม่ได้สร้างไฟล์ให้

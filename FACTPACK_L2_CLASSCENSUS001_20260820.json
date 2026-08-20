@@ -1,0 +1,696 @@
+{
+ "milestone": "FACTPACK-L2-CLASSCENSUS-001",
+ "generated_at": "2026-08-20T01:27:22+07:00",
+ "generated_by": "make_factpack_l2_classcensus.py",
+ "report_only": true,
+ "wrote_into_repo": false,
+ "opened_the_image": false,
+ "disassembled": false,
+ "inputs": {
+  "strings_ascii_tsv": {
+   "path": "/sessions/funny-nifty-bardeen/mnt/Pirate Force/pf_bridge/factpack_L1/strings_ascii.tsv",
+   "sha256": "ddad39f182544feaa56af2b451c0acf96cc028ad27224588779bd5d2a8051b94",
+   "data_rows": 97989
+  },
+  "names_table": {
+   "path": "/sessions/funny-nifty-bardeen/mnt/Pirate Force/Pirate Force ServerProject/docs/PF_VITAL_NAMES.json",
+   "entry_count": 298
+  },
+  "round86_census": {
+   "path": "/sessions/funny-nifty-bardeen/mnt/Pirate Force/Pirate Force ServerProject/reports/PF_NAMES_FOLD003_LEGACY_SLOTS_AND_THUNK_CENSUS_20260819.census.json",
+   "rows": 209,
+   "registration_thunks_in_image": 519
+  },
+  "round38_tsv": {
+   "path": "/sessions/funny-nifty-bardeen/mnt/Pirate Force/pf_bridge/VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv",
+   "rows": 327
+  }
+ },
+ "hash_selfcheck": {
+  "names_table_rows_checked": 298,
+  "names_table_mismatches": 0,
+  "census_rows_checked": 209,
+  "census_mismatches": 0,
+  "r38_rows_checked": 327,
+  "r38_mismatches": 0
+ },
+ "population_A_rtti": {
+  "descriptor_rows": 1368,
+  "sections": [
+   ".data"
+  ],
+  "file_offset_min": "0x00C1786C",
+  "file_offset_max": "0x00C29514",
+  "va_min": "0x0101A06C",
+  "va_max": "0x0102BD14",
+  "simple_global_names": 1328,
+  "template_or_namespaced": 40,
+  "third_party_scoped": 17,
+  "game_template_instantiations": 23,
+  "crt_global_excluded": [
+   "type_info"
+  ],
+  "game_class_names": 1327
+ },
+ "population_B_literals": {
+  "rdata_rows_total": 9213,
+  "identifier_shaped_by_section": {
+   ".text": 8012,
+   ".code": 1,
+   ".rdata": 4344,
+   ".rsrc": 17,
+   ".reloc": 112
+  },
+  "rdata_distinct_identifier_literals": 4271
+ },
+ "join": {
+  "strict_standalone": 517,
+  "pooled_tail_recovered": 4,
+  "pooled_names": [
+   "ArenaModule_Client",
+   "CGCTracePathModule",
+   "NavigationExAttr",
+   "StorageModule_Client"
+  ],
+  "pooled_names_corroborated_by_r86_literal_va": [
+   "ArenaModule_Client",
+   "CGCTracePathModule",
+   "NavigationExAttr",
+   "StorageModule_Client"
+  ],
+  "unguarded_rule_would_add": 10,
+  "unguarded_rule_extra_names": [
+   "GameWorldData",
+   "Marker",
+   "PcZipFile",
+   "PetAttr",
+   "PosData",
+   "RenderObject",
+   "TerrainThing",
+   "Trigger",
+   "TriggerModule_Client",
+   "WorldData"
+  ],
+  "unguarded_rule_extra_corroborated_by_r86_literal_va": [
+   "TriggerModule_Client"
+  ],
+  "class_names_with_literal": 521,
+  "class_names_without_literal": 806
+ },
+ "gap_vs_names_table": {
+  "class_names_with_literal": 521,
+  "already_in_names_table": 297,
+  "not_in_names_table": 224,
+  "of_which_in_round86_census": 191,
+  "of_which_in_round38_tsv_only": 30,
+  "of_which_novel_to_this_round": 3,
+  "novel_names": [
+   "EmptyScene",
+   "QuestLuaProxy_Client",
+   "Scene"
+  ],
+  "table_entries_with_no_literal_at_all": [
+   "ItemOperateVital"
+  ]
+ },
+ "no_rtti_wire_shaped_literals": {
+  "count": 15,
+  "not_in_names_table": 15,
+  "rows": [
+   {
+    "name": "Community_GSRequestChangeFriendshipValueVital",
+    "family": "wire_vital",
+    "literal_va": "0x00F0B254",
+    "wire_id": "0x9EE4",
+    "wire_id_dec": 40676,
+    "in_names_table": false,
+    "in_round86_census": false,
+    "in_round38_tsv": true
+   },
+   {
+    "name": "Community_GetActorCommunityDataFromDBVital",
+    "family": "wire_vital",
+    "literal_va": "0x00F0B284",
+    "wire_id": "0x60C6",
+    "wire_id_dec": 24774,
+    "in_names_table": false,
+    "in_round86_census": false,
+    "in_round38_tsv": true
+   },
+   {
+    "name": "Community_QuerySoulMateCandidateVital",
+    "family": "wire_vital",
+    "literal_va": "0x00F0B22C",
+    "wire_id": "0x1922",
+    "wire_id_dec": 6434,
+    "in_names_table": false,
+    "in_round86_census": false,
+    "in_round38_tsv": true
+   },
+   {
+    "name": "Community_SSRequestLetterInABottleDataVital",
+    "family": "wire_vital",
+    "literal_va": "0x00F0B1E0",
+    "wire_id": "0x73DD",
+    "wire_id_dec": 29661,
+    "in_names_table": false,
+    "in_round86_census": false,
+    "in_round38_tsv": true
+   },
+   {
+    "name": "Community_SSRequestPenpalLetterDataVital",
+    "family": "wire_vital",
+    "literal_va": "0x00F0B1B4",
+    "wire_id": "0x4742",
+    "wire_id_dec": 18242,
+    "in_names_table": false,
+    "in_round86_census": false,
+    "in_round38_tsv": true
+   },
+   {
+    "name": "Community_SendSystemMailVital",
+    "family": "wire_vital",
+    "literal_va": "0x00F0B20C",
+    "wire_id": "0xAF5F",
+    "wire_id_dec": 44895,
+    "in_names_table": false,
+    "in_round86_census": false,
+    "in_round38_tsv": true
+   },
+   {
+    "name": "Community_UpdateActorCommunityDataToDBVital",
+    "family": "wire_vital",
+    "literal_va": "0x00F0B188",
+    "wire_id": "0x71AD",
+    "wire_id_dec": 29101,
+    "in_names_table": false,
+    "in_round86_census": false,
+    "in_round38_tsv": true
+   },
+   {
+    "name": "Community_UpdateLetterInABottleDataToDBVital",
+    "family": "wire_vital",
+    "literal_va": "0x00F0B158",
+    "wire_id": "0x79E4",
+    "wire_id_dec": 31204,
+    "in_names_table": false,
+    "in_round86_census": false,
+    "in_round38_tsv": true
+   },
+   {
+    "name": "Community_UpdatePenpalLetterDataToDBVital",
+    "family": "wire_vital",
+    "literal_va": "0x00F0B12C",
+    "wire_id": "0x4C74",
+    "wire_id_dec": 19572,
+    "in_names_table": false,
+    "in_round86_census": false,
+    "in_round38_tsv": true
+   },
+   {
+    "name": "Express_GSAddNewExpressVital",
+    "family": "wire_vital",
+    "literal_va": "0x00F0B0E4",
+    "wire_id": "0xA1E1",
+    "wire_id_dec": 41441,
+    "in_names_table": false,
+    "in_round86_census": false,
+    "in_round38_tsv": true
+   },
+   {
+    "name": "Express_GSConfirmActorExpressDataVital",
+    "family": "wire_vital",
+    "literal_va": "0x00F0B0BC",
+    "wire_id": "0x278C",
+    "wire_id_dec": 10124,
+    "in_names_table": false,
+    "in_round86_census": false,
+    "in_round38_tsv": true
+   },
+   {
+    "name": "Express_GSSendSystemExpressVital",
+    "family": "wire_vital",
+    "literal_va": "0x00F0B098",
+    "wire_id": "0xD6F1",
+    "wire_id_dec": 55025,
+    "in_names_table": false,
+    "in_round86_census": false,
+    "in_round38_tsv": true
+   },
+   {
+    "name": "Express_GetActorExpressDataFromDBVital",
+    "family": "wire_vital",
+    "literal_va": "0x00F0B104",
+    "wire_id": "0x1F14",
+    "wire_id_dec": 7956,
+    "in_names_table": false,
+    "in_round86_census": false,
+    "in_round38_tsv": true
+   },
+   {
+    "name": "GuildStorageOpenVital",
+    "family": "wire_vital",
+    "literal_va": "0x00F38708",
+    "wire_id": "0x5CAD",
+    "wire_id_dec": 23725,
+    "in_names_table": false,
+    "in_round86_census": false,
+    "in_round38_tsv": true
+   },
+   {
+    "name": "GuildStorageResultVital",
+    "family": "wire_vital",
+    "literal_va": "0x00F386F0",
+    "wire_id": "0x70D0",
+    "wire_id_dec": 28880,
+    "in_names_table": false,
+    "in_round86_census": false,
+    "in_round38_tsv": true
+   }
+  ]
+ },
+ "brief_filter_coverage": [
+  {
+   "filter": "C* prefix",
+   "hits_in_class_census": 322,
+   "hits_in_join": 147,
+   "join_rows_missed": 374
+  },
+  {
+   "filter": "GSCN_ prefix",
+   "hits_in_class_census": 15,
+   "hits_in_join": 15,
+   "join_rows_missed": 506
+  },
+  {
+   "filter": "LSCN_ prefix",
+   "hits_in_class_census": 6,
+   "hits_in_join": 6,
+   "join_rows_missed": 515
+  },
+  {
+   "filter": "*Vital suffix",
+   "hits_in_class_census": 276,
+   "hits_in_join": 270,
+   "join_rows_missed": 251
+  },
+  {
+   "filter": "any of the four",
+   "hits_in_class_census": 524,
+   "hits_in_join": 346,
+   "join_rows_missed": 175
+  }
+ ],
+ "families_gap": {
+  "counts": {
+   "module_subsystem": 75,
+   "attr_state_block": 45,
+   "wire_vital": 35,
+   "other_unclassified": 14,
+   "item_inventory_economy": 13,
+   "wire_scn_client_server": 10,
+   "scene_world_move": 7,
+   "persistence_record": 5,
+   "social_channel": 5,
+   "task_quest": 5,
+   "combat_skill_buff": 4,
+   "effect_fx_missile": 3,
+   "actor_npc": 2,
+   "ui_widget": 1
+  },
+  "examples": {
+   "other_unclassified": [
+    "AbilityDepoly",
+    "AbilityDepolyAll",
+    "Attribute",
+    "BuildingCrystal_UpdateNextAbsorbTime",
+    "CWebGMVital_GSGC",
+    "DBAttribute",
+    "DailyActivityState",
+    "InstanceBonusNotify",
+    "InstanceLeave",
+    "PcProtocol"
+   ],
+   "module_subsystem": [
+    "AccuseModule_Client",
+    "ActivityModule_Client",
+    "ActorEffectsModule_Client",
+    "AppraisalModule_Client",
+    "ArenaModule_Client",
+    "BasicModule_Client",
+    "BehaviorSoundModule",
+    "BkDisplayModule_Client",
+    "BlackMarketModule_Client",
+    "BuildingCrystalModule"
+   ],
+   "wire_vital": [
+    "ActorActivity_UpdateDailyActivityStateVital",
+    "CBuffVital",
+    "CHitParadeActorDataVital",
+    "CHitParadeVital",
+    "CLearnSkillResultVital",
+    "CNSS_BoardcastToAllActorVtial",
+    "CNSS_BoardcastToSpecifiedActorVtial",
+    "CStartCooldownVital",
+    "CTracePathVital",
+    "Channel_ForbidTalkNotificationVtial"
+   ],
+   "persistence_record": [
+    "ActorCommunityDataSet",
+    "ActorCommunityProperty",
+    "FriendshipDataSet",
+    "LetterInABottleDataSet",
+    "PenpalLetterDataSet"
+   ],
+   "social_channel": [
+    "ActorExpressData",
+    "ActorMailData",
+    "ActorRelationshipData",
+    "PartyPickTypeSetting",
+    "VowLockData"
+   ],
+   "attr_state_block": [
+    "ActorGatheringInfoAttr",
+    "ActorPetsCommonAttr",
+    "ActorTreasureHuntExcavatingInfoAttr",
+    "AvatarAttr",
+    "BasicAttr",
+    "CAchievementsAttr",
+    "CBuffAttr",
+    "CCooldownAttr",
+    "CGuildStorageAttr",
+    "CSkillAttr"
+   ],
+   "combat_skill_buff": [
+    "ActorLearnedPetsSkillData",
+    "CBuffConditionState",
+    "CHitResult",
+    "FightingDropNotify"
+   ],
+   "item_inventory_economy": [
+    "BlackMarketItem",
+    "CustomItem",
+    "InstanceChooseRewardReq",
+    "InstanceChooseRewardRes",
+    "ItemBagAttr_Equiped",
+    "ItemMallBagItemTransfer",
+    "ItemMallBagOpenReq",
+    "ItemMallBagOpenRes",
+    "ItemMallBagUpdate",
+    "ItemMallGetIMSDataReq"
+   ],
+   "effect_fx_missile": [
+    "CMissileHitResult",
+    "CollectionEffectData",
+    "UpdateResidentEffect"
+   ],
+   "scene_world_move": [
+    "CWarpResult",
+    "EmptyScene",
+    "ForcePos",
+    "NavigationEx_EndSalvaging",
+    "NavigationEx_StartSalvaging",
+    "PickupTerrainThing",
+    "Scene"
+   ],
+   "wire_scn_client_server": [
+    "GSCN_BlackMarketBuy",
+    "GSCN_BlackMarketOffSale",
+    "GSCN_BlackMarketPutOnSale",
+    "GSCN_BlackMarketReply",
+    "GSCN_BlackMarketSearach",
+    "GSCN_BlackMarketSearchMyItem",
+    "GSCN_BlackMarketSearchReply",
+    "GSCN_ClientExecuteSQL",
+    "GSCN_GetGameWorldData",
+    "LSCN_Protocol"
+   ],
+   "ui_widget": [
+    "OpenTranslatePortalUI"
+   ],
+   "actor_npc": [
+    "PetsData",
+    "PetsMergingData"
+   ],
+   "task_quest": [
+    "QuestFailResult",
+    "QuestFlagRangeChange",
+    "QuestLuaProxy_Client",
+    "QuestShareResult",
+    "UpdateQuestFlag"
+   ]
+  }
+ },
+ "families_full_census": {
+  "wire_vital": 316,
+  "ui_event_handler": 310,
+  "other_unclassified": 204,
+  "module_subsystem": 77,
+  "task_quest": 59,
+  "attr_state_block": 58,
+  "persistence_record": 41,
+  "ui_widget": 41,
+  "item_inventory_economy": 40,
+  "scene_world_move": 39,
+  "data_blob": 31,
+  "combat_skill_buff": 24,
+  "actor_npc": 22,
+  "social_channel": 18,
+  "effect_fx_missile": 18,
+  "wire_scn_client_server": 15,
+  "ai_behavior": 12,
+  "wire_inter_server": 2
+ },
+ "routing_prefixes_full_census": {
+  "GSCN": 15,
+  "GSSS": 8,
+  "LSCN": 6,
+  "DBSS": 4,
+  "GM": 4,
+  "CNSS": 2,
+  "GCGSSS": 2,
+  "GCGS": 1,
+  "GCSS": 1,
+  "NPC": 1,
+  "UI": 1
+ },
+ "routing_prefixes_gap": {
+  "GSCN": 9,
+  "GSSS": 7,
+  "CNSS": 2,
+  "LSCN": 2,
+  "DBSS": 1,
+  "GCGSSS": 1,
+  "GCSS": 1,
+  "NPC": 1,
+  "UI": 1
+ },
+ "hash_collisions": {
+  "gap_names_colliding_with_a_registered_id": 0,
+  "detail": [],
+  "gap_internal_duplicate_ids": {}
+ },
+ "priority": [
+  {
+   "name": "ForcePos",
+   "wire_id": "0x0E80",
+   "family": "scene_world_move",
+   "literal_va": "0x00F30828",
+   "rtti_va": "0x0101F864",
+   "in_round86_census": true,
+   "in_round38_tsv": false,
+   "why": "server-authoritative position correction; the shape the move-authority lane (R20/R22, pf_move_authority_targetpos_static.py) still has no server-to-client counterpart for"
+  },
+  {
+   "name": "CHitResult",
+   "wire_id": "0x16F7",
+   "family": "combat_skill_buff",
+   "literal_va": "0x00F0B5F8",
+   "rtti_va": "0x0101ADD8",
+   "in_round86_census": true,
+   "in_round38_tsv": false,
+   "why": "hit resolution result object; the damage lane (pf_damage_hit_result_static.py, pf_hit_result_probe.py) currently infers this shape instead of naming it"
+  },
+  {
+   "name": "CNSS_BoardcastToAllActorVtial",
+   "wire_id": "0xAB38",
+   "family": "wire_vital",
+   "literal_va": "0x00F0B6BC",
+   "rtti_va": "0x0102544C",
+   "in_round86_census": true,
+   "in_round38_tsv": false,
+   "why": "server-side broadcast-to-all fanout; the missing half of every multiplayer 'other players see it' claim"
+  },
+  {
+   "name": "CNSS_BoardcastToSpecifiedActorVtial",
+   "wire_id": "0xF9CB",
+   "family": "wire_vital",
+   "literal_va": "0x00F0B698",
+   "rtti_va": "0x01025418",
+   "in_round86_census": true,
+   "in_round38_tsv": false,
+   "why": "targeted broadcast; pairs with the above and pins the addressing model"
+  },
+  {
+   "name": "CBuffVital",
+   "wire_id": "0x15E0",
+   "family": "wire_vital",
+   "literal_va": "0x00F0B574",
+   "rtti_va": "0x0102452C",
+   "in_round86_census": false,
+   "in_round38_tsv": true,
+   "why": "buff application on the wire; combat state that outlives a single hit and must be replicated"
+  },
+  {
+   "name": "CStartCooldownVital",
+   "wire_id": "0x4DDA",
+   "family": "wire_vital",
+   "literal_va": "0x00F0B538",
+   "rtti_va": "0x01026C34",
+   "in_round86_census": false,
+   "in_round38_tsv": true,
+   "why": "cooldown start on the wire; the server-side gate that stops skill spam"
+  },
+  {
+   "name": "CLearnSkillResultVital",
+   "wire_id": "0x673C",
+   "family": "wire_vital",
+   "literal_va": "0x00F0B54C",
+   "rtti_va": "0x01021F14",
+   "in_round86_census": false,
+   "in_round38_tsv": true,
+   "why": "skill acquisition result; a progression write path with no current model"
+  },
+  {
+   "name": "CTracePathVital",
+   "wire_id": "0x2F92",
+   "family": "wire_vital",
+   "literal_va": "0x00F0B5D4",
+   "rtti_va": "0x0101D564",
+   "in_round86_census": false,
+   "in_round38_tsv": true,
+   "why": "server-driven path following; what pf_remote_movement_projection_static.py needs to stop guessing"
+  },
+  {
+   "name": "FightingDropNotify",
+   "wire_id": "0x466A",
+   "family": "combat_skill_buff",
+   "literal_va": "0x00F0B504",
+   "rtti_va": "0x01025508",
+   "in_round86_census": true,
+   "in_round38_tsv": false,
+   "why": "loot produced by combat death; joins the death lane (HP-DEATH-002) to the item lane"
+  },
+  {
+   "name": "GSCN_ClientExecuteSQL",
+   "wire_id": "0x56EA",
+   "family": "wire_scn_client_server",
+   "literal_va": "0x00F30BB8",
+   "rtti_va": "0x0101FF48",
+   "in_round86_census": true,
+   "in_round38_tsv": false,
+   "why": "explicit SQL execution path between game server and CN node; the strongest persistence-architecture evidence in the whole census"
+  },
+  {
+   "name": "GSCN_GetGameWorldData",
+   "wire_id": "0x5819",
+   "family": "wire_scn_client_server",
+   "literal_va": "0x00F30BA0",
+   "rtti_va": "0x0101FF24",
+   "in_round86_census": true,
+   "in_round38_tsv": false,
+   "why": "world data pull at session start; sits next to the already-decoded GetWorldInfoVital (0x3D4B)"
+  },
+  {
+   "name": "LSCN_ReloginVerifyVital",
+   "wire_id": "0x6F03",
+   "family": "wire_vital",
+   "literal_va": "0x00F0B058",
+   "rtti_va": "0x01022E68",
+   "in_round86_census": false,
+   "in_round38_tsv": true,
+   "why": "relogin/reconnect verification; R19 proved reconnect works but nothing persists - this is the shape that would carry session identity"
+  },
+  {
+   "name": "ServerAddedInfoVital",
+   "wire_id": "0x52D4",
+   "family": "wire_vital",
+   "literal_va": "0x00F0B3A8",
+   "rtti_va": "0x0101FC60",
+   "in_round86_census": false,
+   "in_round38_tsv": true,
+   "why": "server-appended payload on an existing message; an envelope shape, so mis-modelling it corrupts everything inside it"
+  },
+  {
+   "name": "BasicAttr",
+   "wire_id": "0x1244",
+   "family": "attr_state_block",
+   "literal_va": "0x00F0E820",
+   "rtti_va": "0x01020094",
+   "in_round86_census": true,
+   "in_round38_tsv": false,
+   "why": "the base state block an actor carries; the persistence schema depends on its layout"
+  },
+  {
+   "name": "FightAttr",
+   "wire_id": "0x1285",
+   "family": "attr_state_block",
+   "literal_va": "0x00F0E920",
+   "rtti_va": "0x0101B55C",
+   "in_round86_census": true,
+   "in_round38_tsv": false,
+   "why": "combat stat block; the damage formula reads from this shape"
+  },
+  {
+   "name": "AvatarAttr",
+   "wire_id": "0x16A0",
+   "family": "attr_state_block",
+   "literal_va": "0x00F0E754",
+   "rtti_va": "0x0101B1A4",
+   "in_round86_census": true,
+   "in_round38_tsv": false,
+   "why": "appearance/identity block that must round-trip through the DB"
+  },
+  {
+   "name": "ItemBagAttr",
+   "wire_id": "0x19FF",
+   "family": "attr_state_block",
+   "literal_va": "0x00F0ED00",
+   "rtti_va": "0x0101F488",
+   "in_round86_census": true,
+   "in_round38_tsv": false,
+   "why": "inventory container state; the backpack write path (R21) is one-shot and still unnamed at the container level"
+  },
+  {
+   "name": "ActorCommunityDataSet",
+   "wire_id": "0x5D0E",
+   "family": "persistence_record",
+   "literal_va": "0x00F35728",
+   "rtti_va": "0x0101B7EC",
+   "in_round86_census": true,
+   "in_round38_tsv": false,
+   "why": "DB-side aggregate for one actor's social data; a DataSet is a persistence unit, not a message"
+  },
+  {
+   "name": "PcProtocol",
+   "wire_id": "0x16F1",
+   "family": "other_unclassified",
+   "literal_va": "0x00F5A4D0",
+   "rtti_va": "0x0101F2DC",
+   "in_round86_census": true,
+   "in_round38_tsv": false,
+   "why": "the engine-level protocol base class; naming it pins what every Vital derives from"
+  },
+  {
+   "name": "GSSS_GuildStorageCmdVital",
+   "wire_id": "0x7F5B",
+   "family": "wire_vital",
+   "literal_va": "0x00F0B604",
+   "rtti_va": "0x010264B4",
+   "in_round86_census": false,
+   "in_round38_tsv": true,
+   "why": "game-server to storage-server command; evidence of a shard/service split the project has never modelled"
+  }
+ ],
+ "total_rows_emitted": 1327
+}

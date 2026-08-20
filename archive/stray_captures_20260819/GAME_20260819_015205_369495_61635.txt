@@ -1,0 +1,1 @@
+GAME_CONNECTED peer=127.0.0.1:61635 local_port=10189

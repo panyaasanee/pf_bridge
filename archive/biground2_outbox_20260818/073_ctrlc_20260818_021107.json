@@ -1,0 +1,10 @@
+{
+  "target_pid": 10708,
+  "free_console": true,
+  "attach_console": true,
+  "attach_error": null,
+  "ctrl_c_sent": true,
+  "ctrl_c_error": null,
+  "started_utc": "2026-08-17T19:11:12",
+  "finished_utc": "2026-08-17T19:11:13"
+}
