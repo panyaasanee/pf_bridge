@@ -1,0 +1,24 @@
+CONSUMED by chief round 108 (2026-08-20 ~18:36-18:45).
+Copy kept at: consumed\20260820_1830_PANYA-DECISION-cloud-prompt-A-prime.md
+
+item 1 (prompt -> A-prime)  -> agent_kit\chief_task_prompt_CLOUD_v2_20260820.md
+        edited IN PLACE, three places only, listed in the new header block:
+          - push rules: A/B question replaced by A-prime (green / red / still running,
+            bootstrap case, the two-stale-branches rule).  A and B kept as history.
+          - new section "how to read the gate result" + a four line first-round probe
+          - cadence: no number embedded anywhere, per the 18:30 order
+item 2 (can a Routine read Actions?) -> FINDINGS_R108_A_PRIME_HOW_TO_READ_ACTIONS.md
+        ANSWER: NOT CONFIRMED, and the documented mechanism points at "no".
+        The sandbox holds no GitHub credential at all - git works only because a
+        proxy injects one on the way out - so gh and api.github.com are not things
+        to plan on.  A-prime survives anyway: the workflow publishes its own verdict
+        into a ci-status branch and the chief reads it with plain git.  Patch written,
+        job name verified (`gate`, line 62), NOT applied - it touches the code repo.
+        SECOND RISK RAISED, the order did not mention it: A-prime needs the cloud
+        chief to push `main`, and a Routine accepts non-claude/* branches only under
+        conditions.  Probe line four settles it without changing a byte; fallback
+        A-double-prime written down.
+item 3 (sync script + .bat)  -> done earlier this round, see
+        20260820_1800_PANYA-DECISION-sync-design-approved.CONSUMED.txt
+
+Nothing was pushed.  No routine created or edited.  No scheduled task installed.

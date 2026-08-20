@@ -1,0 +1,8 @@
+CONSUMED in an earlier round (stub backfilled by chief round 108, 2026-08-20 18:5x).
+Copy kept at: consumed\20260820_1130_GT027-028-029-RESULTS.md
+
+This stub carries no summary because it was written after the fact.  The round
+that consumed this letter recorded what it did in CHIEF_CONTINUATION.md and in
+its FROM_CHIEF_* letter of the day; this file exists only so that the rule
+"a .md with no .CONSUMED.txt beside it is unread mail" answers correctly for
+the letters that predate the rule.

@@ -1,0 +1,32 @@
+CONSUMED by chief round 108 (2026-08-20 ~18:45-18:53).
+Copy kept at: consumed\20260820_1845_PANYA-DECISION-hourly-plus-overlap-guard.md
+
+item 1 (overlap guard) -> agent_kit\chief_task_prompt_CLOUD_v3_20260820.md
+        new section, first thing every round does, before anything else.
+        The lock is WON BY A SUCCESSFUL PUSH and never by writing a file:
+        push rejected = another round won = end this round now, no retry,
+        no force, no rebase-and-try-again.  Heartbeat every ~20 min, release
+        always - including when the round failed.  Takeover only past the
+        stale threshold (3 h), never because it "looks dead".
+     -> pf_bridge\.gitignore : one line, !/cloud_round_lock.json, so the file
+        is actually tracked.  Deliberately not LOCK_* and not .txt, which the
+        deny-all would have eaten silently - the exact failure the guard exists
+        to prevent.  LOCK_GIT was held for this edit and released after.
+     -> pf_bridge\cloud_round_lock.json : bootstrap value, state RELEASED,
+        procedure and takeover rule carried inside the file itself.
+     -> the money argument is written into the prompt, not just the order:
+        hitting the weekly ceiling stops everything rather than costing more,
+        so the correctness AND the cheapness of a skipped round is load bearing,
+        and the first real skip must report its token cost as a number.
+item 2 (A-prime + can Actions be read) -> done earlier this round, see
+        20260820_1830_PANYA-DECISION-cloud-prompt-A-prime.CONSUMED.txt
+        ANSWER IN ONE LINE: not confirmed, and the documented mechanism says the
+        sandbox holds no GitHub credential at all - so the plan does not depend
+        on it.  The workflow publishes its own verdict into a ci-status branch
+        and the chief reads it with plain git.
+item 3 (short summary of v3 vs v2) -> the header block of v3, four bullets,
+        no second long diff document.  v2 keeps its body and gains a SUPERSEDED
+        header pointing at v3.
+
+Nothing was committed.  Nothing was pushed.  No routine created or edited.
+No scheduled task installed.  Panya does all four.

@@ -1,0 +1,27 @@
+CONSUMED by chief round 109 - 2026-08-20 ~19:2x
+
+Panya approved path D: the workflow publishes its own verdict to git and a cloud
+chief reads it with plain git.  All four of her named failure modes were answered
+in the patch itself, not in prose about the patch:
+
+  (1) verdict bound to the SHA -> ci/<sha>.json, and ci/latest.json was REMOVED
+      from the draft entirely, so the stale-read mistake has no file to happen
+      through.  A negative guard in job 175 keeps it removed.
+  (2) no loop -> branches-ignore: ['ci-status'] at the trigger AND a ref guard on
+      the publish job.  GitHub's GITHUB_TOKEN rule is a third line, not the only.
+  (3) not counted by A' -> ci-status is an orphan branch and the prompt's branch
+      scan is refs/remotes/origin/claude/, where it cannot appear at all.
+  (4) no verdict = not merged -> written into prompt v3 as one of four reading
+      rules, alongside "skipped and cancelled are not green either".
+
+Also carried out: prompt v3 gained the three-line read protocol, the four reading
+rules, an explicit branch-scan command, and a PRE-WRITTEN fallback table for the
+probe's push-main question, so the first cloud round never has to improvise.
+
+Deliverables: .github/workflows/gate-windows.yml (patched, gated, committed by
+job 175), pf_bridge\FINDINGS_R109_PATH_D_APPLIED_AND_REHEARSED.md (six deltas
+from the draft + the rehearsal evidence + nonclaims), agent_kit\chief_task_
+prompt_CLOUD_v3_20260820.md (edited in place).
+
+NOT claimed, per Panya's own acceptance criterion: path D is NOT proven until the
+ci-status branch is seen to exist on GitHub.  Nothing was pushed by this round.

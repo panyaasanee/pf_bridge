@@ -1,0 +1,24 @@
+CONSUMED by chief round 108 (2026-08-20 ~17:55-19:0x).
+Copy kept at: consumed\20260820_1800_PANYA-DECISION-sync-design-approved.md
+
+Executed, all three items of "งานรอบถัดไปของ chief":
+  item 1 (write pf_git_sync.ps1)      -> pf_git_sync.ps1        (30.5 KB, ascii, no BOM)
+        + condition (1) WakeToRun off  -> honoured in the installer, not the script
+        + condition (2) logon/unlock   -> honoured in the installer
+        + mandatory guard              -> check-ignore per flag, by EXIT CODE
+        + no --force / checkout / reset -> none of those verbs appear in the file
+        + allowlist notes_to_chief/**, evidence_screens/** only
+        + LOCK_GAME gates the server pull
+  item 2 (installer .bat, one file)   -> SETUP_GIT_SYNC.bat + setup_git_sync_admin.ps1
+  item 3 (acceptance, must be proven) -> pf_git_sync_selftest.ps1  (14 tests)
+        + jobs 172 and 173 RAN IT      -> outbox\172_*.out.txt, outbox\173_*.out.txt
+        + non-fast-forward REPORTED    -> T8, asserted against sync.log text itself
+
+Not done, on purpose:
+  planted red  - Panya cancelled it; PROPOSAL_R107_PLANTED_RED.md kept, not deleted
+  routine / cloud prompt - untouched, they are waiting for Panya to read them
+  push         - nothing was pushed.  Panya pushes, always.
+  install      - nothing was installed.  Panya runs the .bat as administrator.
+
+Round report: FINDINGS_R108_SYNC_PROVEN_ON_FIXTURES.md
+How to install and how to check it:  HOWTO_INSTALL_GIT_SYNC.md
