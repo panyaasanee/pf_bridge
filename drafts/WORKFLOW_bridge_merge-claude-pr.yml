@@ -1,0 +1,274 @@
+# pf_bridge - merge a cloud chief's pull request as soon as it is opened.
+#
+# INSTALL PATH (this file is a DRAFT and does nothing where it currently sits):
+#   pf_bridge/.github/workflows/merge-claude-pr.yml
+# It also needs two lines in pf_bridge/.gitignore - see
+#   drafts/INSTALL_merge_workflows_20260820.md
+# Line 1 of that .gitignore is `/*`, so .github/ is invisible to git until it is
+# opened by name.  This is the exact trap that kept the Windows gate workflow
+# unrunnable from round 87 to round 103: "the file exists on the author's
+# machine" is not "the file is in the repository".
+#
+# ---------------------------------------------------------------------------
+# WHY THIS REPOSITORY NEEDS ITS OWN COPY.  Panya's ruling of 2026-08-20 ~20:35
+# makes AN OPEN `claude/*` PULL REQUEST the round lock for the cloud chief.  A
+# cloud round cannot push `main` in EITHER repository - the refusal is at the
+# sandbox layer, not at GitHub - so its documents (CHIEF_CONTINUATION.md,
+# GAME_TEST_QUEUE.md, letters to the tester) have to arrive by pull request too.
+# Without this file those pull requests sit open, and every later round ends on
+# sight because it sees a lock nobody will ever clear.
+#
+# ---------------------------------------------------------------------------
+# THIS MERGE IS UNGUARDED, AND THAT IS A DELIBERATE CHOICE WITH A CONDITION.
+# There is no gate in this repository because there is nothing here to gate: it
+# holds markdown, letters, PowerShell jobs that only ever run when a human
+# stages them, and derived TSV.  Nothing in it is imported by the server, and
+# nothing in it runs on a schedule.
+#
+# THE CONDITION: the day anything in this repository is EXECUTED by something
+# other than a person who chose to run it - a workflow that sources a .ps1 from
+# here, a tool the server imports, a scheduled anything - this file becomes a
+# way to run unreviewed code by opening a pull request, and it must be replaced
+# with the gated version used in the server repository.  Written down here
+# rather than in a document nobody will re-read at that moment.
+#
+# ---------------------------------------------------------------------------
+# `pull_request_target`, not `pull_request`, and the difference is the point: a
+# `pull_request` run executes the workflow file AS IT EXISTS IN THE PULL
+# REQUEST, so a pull request could rewrite the rules that decide whether to
+# merge it and then merge itself.  `pull_request_target` runs the copy on the
+# base branch and gets a write token.  Its usual danger - checking out and
+# running untrusted code with that token - does not apply here, because this
+# job NEVER CHECKS THE PULL REQUEST OUT.  It only makes API calls.
+#
+# THE SAME-REPOSITORY CHECK IS LOAD-BEARING HERE IN A WAY IT IS NOT ELSEWHERE.
+# Both eligibility signals - a branch called `claude/*` and a marker line in the
+# body - are chosen by whoever opens the pull request.  On a fork pull request
+# they are therefore attacker-chosen and prove nothing whatever, and since this
+# repository merges WITHOUT A GATE, a missing fork check would mean anyone able
+# to open a pull request could put anything into `main`.  The check is
+# `head.repo.full_name == this repository`, and it is why that line exists.
+# Found by review before this file ever ran.
+#
+# ASCII only, on purpose, like every other file in this pipeline.
+# ---------------------------------------------------------------------------
+
+name: merge-claude-pr
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize, edited]
+  # The reaper: for a pull request that cannot merge and would otherwise sit
+  # there as a lock nobody can clear.
+  schedule:
+    - cron: '23 * * * *'
+  workflow_dispatch:
+
+# `opened` and `edited` can arrive seconds apart on one pull request, and two
+# jobs merging the same PR produce one success and one confusing failure.
+# Serialised rather than cancelled: the loser must still be able to see that the
+# PR is already merged and exit cleanly.
+concurrency:
+  group: merge-claude-pr-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  # A pull request must carry this line in its BODY to be eligible.  Opt-in and
+  # fail closed, the same pattern as every hypothesis in this project - and the
+  # reason installing this file cannot retroactively merge a pull request that
+  # was opened before it existed.
+  PF_MARKER: 'PF-AUTOMERGE: v4'
+  PF_STALE_HOURS: '6'
+
+jobs:
+  merge:
+    if: github.event_name == 'pull_request_target'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Merge a marked claude/* pull request
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+          # Through env: rather than interpolated into the script text, so that a
+          # value which ever contains a quote is data and not code.  Same rule as
+          # publish-status in the server repository's gate workflow.
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+
+          # An API call that fails must never look like an API call that
+          # returned nothing.  `|| true` on a gh call is how a job dies quietly
+          # while its own log says it is fine.
+          api() {
+            local out rc
+            out=$(gh api "$@" 2>&1) && rc=0 || rc=$?
+            if [ "$rc" -ne 0 ]; then
+              echo "::error::gh api $* FAILED (exit ${rc})" >&2
+              echo "$out" >&2
+              return "$rc"
+            fi
+            printf '%s' "$out"
+          }
+
+          META=$(api "repos/${REPO}/pulls/${PR}")
+          STATE=$(printf '%s' "$META" | jq -r '.state')
+          HEAD_REF=$(printf '%s' "$META" | jq -r '.head.ref')
+          HEAD_SHA=$(printf '%s' "$META" | jq -r '.head.sha')
+          HEAD_REPO=$(printf '%s' "$META" | jq -r '.head.repo.full_name // ""')
+          BASE_REF=$(printf '%s' "$META" | jq -r '.base.ref')
+          BODY=$(printf '%s' "$META" | jq -r '.body // ""')
+          DRAFT=$(printf '%s' "$META" | jq -r '.draft')
+          echo "PR #${PR} ${HEAD_REF} -> ${BASE_REF} state=${STATE} draft=${DRAFT} headrepo=${HEAD_REPO}"
+
+          [ "$STATE" = "open" ] || { echo "not open - nothing to do"; exit 0; }
+          [ "$DRAFT" = "false" ] || { echo "draft - skipped"; exit 0; }
+          # Same repository only.  See the header: without this line, `claude/*`
+          # plus a marker line are things a stranger can write for themselves,
+          # and this repository has no gate standing behind them.
+          [ "$HEAD_REPO" = "$REPO" ] || {
+            echo "head repo '${HEAD_REPO}' is not ${REPO} (fork) - skipped"; exit 0; }
+          [ "$BASE_REF" = "$DEFAULT_BRANCH" ] || {
+            echo "base is not the default branch - skipped"; exit 0; }
+          case "$HEAD_REF" in
+            claude/*) : ;;
+            *) echo "head '${HEAD_REF}' is not a claude/ branch - skipped"; exit 0 ;;
+          esac
+          case "$BODY" in
+            *"$PF_MARKER"*) : ;;
+            *) echo "body does not carry the marker '${PF_MARKER}' - skipped, ON PURPOSE"; exit 0 ;;
+          esac
+
+          # `mergeable` is computed asynchronously and is null until ready.
+          MERGEABLE=null
+          for attempt in 1 2 3 4 5 6; do
+            MERGEABLE=$(api "repos/${REPO}/pulls/${PR}" | jq -r '.mergeable')
+            [ "$MERGEABLE" = "null" ] || break
+            echo "mergeable not computed yet (attempt ${attempt}) - waiting"
+            sleep 5
+          done
+
+          if [ "$MERGEABLE" != "true" ]; then
+            gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
+              "**This pull request does not merge cleanly (\`mergeable=${MERGEABLE}\`) - closing it.**" \
+              "" \
+              "\`main\` moved underneath \`${HEAD_REF}\` and the two versions disagree line by line. A cloud round can only push its own branch, so it cannot rebase this one, and leaving it open would leave the round lock stuck for every later round." \
+              "" \
+              "**The branch \`${HEAD_REF}\` is kept and nothing on it is lost.**" \
+              "" \
+              "Note for whoever reads this twice: on this repository the collision is almost always \`CHIEF_CONTINUATION.md\`, because every round inserts a block at line 3 and the Windows bridge commits to the same file every few minutes. Two writers appending to the same line of one document will collide forever. The fix is one file per round plus a thin index, not a better merge.")"
+            gh pr close "$PR" --repo "$REPO"
+            echo "not mergeable -> commented and closed; branch kept"
+            exit 0
+          fi
+
+          # A merge commit, not a squash: the commit messages in this project
+          # are the record.  --match-head-commit makes GitHub refuse if the head
+          # moved since the check above, which closes the last race here.
+          #
+          # `|| true` is CORRECT here and nowhere else in this file: the merge is
+          # allowed to fail, and what follows is the handling of that failure.
+          # Under `set -e` without it, a lost race would kill this script with
+          # the pull request still open - and an open pull request is the cloud
+          # chief's round lock, so that is the one outcome this file may never
+          # produce.
+          MERGE_OUT=$(gh pr merge "$PR" --repo "$REPO" --merge --match-head-commit "$HEAD_SHA" 2>&1) && MRC=0 || MRC=$?
+          printf '%s\n' "$MERGE_OUT" | sed 's/^/  merge> /'
+
+          if [ "$MRC" -eq 0 ]; then
+            echo "merged"
+            api -X DELETE "repos/${REPO}/git/refs/heads/${HEAD_REF}" >/dev/null 2>&1 \
+              && echo "branch ${HEAD_REF} deleted" \
+              || echo "branch ${HEAD_REF} could not be deleted (already gone?) - harmless"
+            exit 0
+          fi
+
+          STATE=$(api "repos/${REPO}/pulls/${PR}" | jq -r '.state')
+          if [ "$STATE" != "open" ]; then
+            echo "merge failed but the PR is already ${STATE} - another run got there first, fine"
+            exit 0
+          fi
+          echo "::warning::merge of #${PR} failed (exit ${MRC}) - closing it to release the round lock"
+          gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
+            "**The merge call failed - closing this pull request to release the round lock.**" \
+            "" \
+            '```' \
+            "${MERGE_OUT}" \
+            '```' \
+            "" \
+            "**If that text mentions HTTP 403, this repository is refusing \`pull-requests: write\` to \`GITHUB_TOKEN\`, and no pull request will ever merge here until a setting changes.** Check Settings -> Actions -> General -> Workflow permissions." \
+            "" \
+            "**The branch \`${HEAD_REF}\` is kept.**")" || echo "::warning::could not comment - closing anyway"
+          gh pr close "$PR" --repo "$REPO" \
+            || echo "::error::COULD NOT CLOSE #${PR}. The round lock is STUCK until a human closes it."
+
+  reap:
+    if: github.event_name != 'pull_request_target'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Close marked claude/* pull requests that have gone stale
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          api() {
+            local out rc
+            out=$(gh api "$@" 2>&1) && rc=0 || rc=$?
+            if [ "$rc" -ne 0 ]; then
+              echo "::error::gh api $* FAILED (exit ${rc})" >&2
+              echo "$out" >&2
+              return "$rc"
+            fi
+            printf '%s' "$out"
+          }
+
+          NOW=$(date -u +%s)
+          LIMIT=$(( PF_STALE_HOURS * 3600 ))
+
+          OPEN=$(api "repos/${REPO}/pulls?state=open&per_page=100" | jq -r '.[].number')
+          if [ -z "${OPEN}" ]; then echo "no open pull requests"; exit 0; fi
+
+          for PR in $OPEN; do
+            META=$(api "repos/${REPO}/pulls/${PR}")
+            HEAD_REF=$(printf '%s' "$META" | jq -r '.head.ref')
+            HEAD_REPO=$(printf '%s' "$META" | jq -r '.head.repo.full_name // ""')
+            BODY=$(printf '%s' "$META" | jq -r '.body // ""')
+            CREATED=$(printf '%s' "$META" | jq -r '.created_at')
+            [ "$HEAD_REPO" = "$REPO" ] || continue
+            case "$HEAD_REF" in claude/*) : ;; *) continue ;; esac
+            case "$BODY" in *"$PF_MARKER"*) : ;; *) continue ;; esac
+            # A date that will not parse must not kill the loop and leave every
+            # later pull request unreaped.  Default to age 0: the cost of
+            # skipping one round is one hour; the cost of aborting is the lock.
+            CSEC=$(date -u -d "$CREATED" +%s 2>/dev/null || echo "$NOW")
+            AGE=$(( NOW - CSEC ))
+            echo "--- #${PR} ${HEAD_REF} age=$(( AGE / 3600 ))h ---"
+            [ "$AGE" -ge "$LIMIT" ] || { echo "  young enough - left alone"; continue; }
+
+            gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
+              "**Open for more than ${PF_STALE_HOURS} hours without merging - closing it.**" \
+              "" \
+              "There is no gate in this repository, so a pull request here should merge within seconds of being opened. One that is still open after ${PF_STALE_HOURS} hours means the merge job never ran or was refused - and an open \`claude/*\` pull request is the round lock, so it has to go." \
+              "" \
+              "**The branch \`${HEAD_REF}\` is kept.** Check the Actions tab of this repository before assuming the round did anything wrong: if \`merge-claude-pr\` is failing, closing pull requests will not fix it.")"
+            if gh pr close "$PR" --repo "$REPO"; then
+              echo "  REAPED -> commented and closed; branch kept"
+            else
+              echo "::error::COULD NOT CLOSE #${PR}. The round lock is STUCK until a human closes it."
+            fi
+          done

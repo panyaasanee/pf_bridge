@@ -66,6 +66,19 @@
 !/factpack_L1/blocks_256.tsv
 !/factpack_L1/make_factpack_l1.py
 
+# ---- workflows: merge a cloud round's pull request (chief round 110) ----
+# Line 1 of this file is `/*`, so git does not even descend into .github/
+# unless the directory is opened by name BEFORE its contents.  Both lines are
+# needed; the first one alone opens an empty door.
+!/.github/
+!/.github/**
+
+# ---- one file per round, so two pull requests never touch one line ----
+# prompt v4 sends each cloud round's log to rounds/R<NNN>_*.md instead of
+# inserting at line 3 of CHIEF_CONTINUATION.md, which collided every time.
+!/rounds/
+!/rounds/**
+
 # ---- runtime flags: whoever holds the machine owns these, never sync ----
 /LOCK.txt
 /LOCK_*.txt
