@@ -1,0 +1,15 @@
+CONSUMED by chief round 109 - 2026-08-20 ~19:4x  (late; the note is from 2026-08-19 17:52)
+
+Stub written because the note had none and a mailbox with an unstubbed letter in
+it reads, correctly, as "not cleared" - which is what the round-109 verification
+pass found and reported.  This is a bookkeeping catch-up, not a new decision.
+
+The letter: STOP the duplicate chief run - two scheduled chief rounds were live
+at once on 2026-08-19 after the account move.  RESOLVED and superseded twice:
+  - the account move settled on ONE hourly scheduled task (0 * * * *), the
+    decision recorded in 20260819_1605_NEW-ACCOUNT-cron-hourly.md (consumed)
+  - and the general case - two rounds that cannot see each other - now has a
+    real mechanism rather than a warning: pf_bridge\cloud_round_lock.json, the
+    push-won lock ordered by Panya at 18:45 on 2026-08-20.  A lock is won by
+    pushing it; a rejected push means another round won and this one ends.
+Nothing in the note is actionable today.  The original stays where it is.
