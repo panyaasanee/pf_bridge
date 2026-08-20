@@ -1,0 +1,5 @@
+CONSUMED by chief round 106 (2026-08-20 ~15:5x-17:xx).
+Full text moved to: consumed\20260820_1545_ORDER-pytest-subset-fresh-clone-preconditions.md
+
+Executed in full.  See CHIEF_CONTINUATION.md round 106 and
+FINDINGS_R106_R12_MEASURED_ON_A_SECOND_MACHINE.md.

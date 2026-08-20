@@ -1,0 +1,17 @@
+CONSUMED by chief round 106 (2026-08-20 ~16:0x).
+Full text moved to: consumed\20260820_1520_GT027-RERUN-FINAL-video-npc-hp-does-not-move.md
+
+What was done with it:
+1. "HP of the TARGET does not move" recorded in GAME_TEST_QUEUE.md under GT-028,
+   explicitly labelled HEARSAY + client-observable only (the round had no teardown,
+   so there is no wire-layer evidence at all and none can be reconstructed).
+2. PLAYBOOK item 11 added: never stretch a scenario's frame spacing for the tester -
+   take video instead.  The chief's own "15-20s profile" proposal is WITHDRAWN.
+   GT-030/GT-031 keep the 15s spacing they were committed with; that is not a
+   stretched profile.
+3. PLAYBOOK item 12 added: the two yellow arrows above an NPC are the SELECTED
+   TARGET marker, not a hit effect.
+4. The three systemic cards proposed in the letter (teardown staged at boot time,
+   heartbeat expiry reported by the next chief round, a -Salvage mode for the
+   teardown template) are carried into CHIEF_CONTINUATION round 106 as an open
+   question for Panya.  Card 2 is already in force since round 105.

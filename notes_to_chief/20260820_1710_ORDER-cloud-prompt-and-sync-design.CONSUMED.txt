@@ -1,0 +1,14 @@
+CONSUMED by chief round 107 (2026-08-20 ~17:0x-18:xx).
+Copy kept at: consumed\20260820_1710_ORDER-cloud-prompt-and-sync-design.md
+
+Executed:
+  item 1 (rebase cloud prompt) -> agent_kit\chief_task_prompt_CLOUD_v2_20260820.md
+                                + agent_kit\DIFF_CLOUD_PROMPT_v1_to_v2_20260820.md
+                                + SUPERSEDED header on chief_task_prompt_CLOUD_DRAFT.md
+  item 2 (Windows sync design) -> DESIGN_R107_WINDOWS_SYNC.md
+                                + FACTPACK_R107_SYNC_MECHANICS.md (measurements)
+  item 3 (planted red)         -> PROPOSAL_R107_PLANTED_RED.md
+  run #4 GREEN recorded        -> appendix 9 of
+                                  FINDINGS_R106_R12_MEASURED_ON_A_SECOND_MACHINE.md
+
+Nothing was pushed.  No routine was created or edited.  Panya decides.

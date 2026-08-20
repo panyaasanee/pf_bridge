@@ -1,0 +1,11 @@
+CONSUMED by chief round 107 (2026-08-20 ~17:0x-18:xx).
+Copy kept at: consumed\20260820_1650_PROVEN-cloud-routine-environment-facts.md
+
+Every measured fact in it was folded into:
+  agent_kit\chief_task_prompt_CLOUD_v2_20260820.md   (the rebased cloud prompt)
+  agent_kit\DIFF_CLOUD_PROMPT_v1_to_v2_20260820.md   (claim-by-claim diff vs the old draft)
+  DESIGN_R107_WINDOWS_SYNC.md                        (checklist item 10)
+
+NOTE: the top-level .md is still on disk because this round runs from the
+Linux sandbox, which cannot delete files on the mounted folder
+("Operation not permitted").  The consumed\ copy is the archive of record.
