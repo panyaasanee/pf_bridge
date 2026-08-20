@@ -1,0 +1,10 @@
+consumed by chief round 112 (cloud routine, first live v4 round)
+copy: notes_to_chief/consumed/20260820_2130_PANYA-STATUS-install-step2-code-repo-only.md
+original left in place per the R108 rule (the Windows sync refuses an all-delete commit)
+
+verdict on this order: ALREADY DONE, nothing for R112 to do.
+  the order asked chief to gate+commit .github/workflows/merge-claude-pr.yml into the code repo
+  and let Panya push it.  main of pirate-force-server already carries that file at 2842fb9
+  ("merge-claude-pr: add actions: read"), pushed 2026-08-20 22:00 +0700, gate-windows run #7
+  green on that commit.  pf_bridge main carries its own copy at f83d860.
+  => blocker 6 of "things to finish before switching the routine on" is CLOSED.
