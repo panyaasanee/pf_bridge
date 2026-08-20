@@ -12,6 +12,44 @@ searched and absent; [DERIVED] = computed here from a validated project algorith
 
 ---
 
+## ERRATUM (chief cloud round 115, 2026-08-21 ~04:2x +07:00) -- two corrections
+
+The original text below is left exactly as written; these two lines correct it.
+
+**E1. "names proven present in the 521-class registration table" is over-stated for
+two of the three DropThing classes.** The bullet in section "hop 3 / ground items"
+says `DropThingGameObj` / `DropThingBoard` / `DropThingModule_Client` are all
+"proven present in the 521-class registration table". Re-derived from the primary
+this round:
+
+| class | `literal_kind` | `in_round86_census` | in the 521 join? |
+|---|---|---|---|
+| `DropThingBoard` (`FACTPACK_L2_CLASSCENSUS001_20260820.tsv:482`) | `none` | `False` | **NO** |
+| `DropThingGameObj` (`...tsv:483`) | `none` | `False` | **NO** |
+| `DropThingModule_Client` (`...tsv:484`) | `standalone 0x00F0BAD0` | `True` | yes |
+| `PickupTerrainThing` (`...tsv:1003`) | `standalone 0x00F3093C` | `True` | yes |
+
+The 521 population is defined at `FACTPACK_L2_CLASSCENSUS001_20260820.md:34` as
+classes that carry **both** an RTTI type descriptor **and** a runtime name literal
+in `.rdata`. `DropThingBoard` and `DropThingGameObj` have no runtime literal at
+all, so they are RTTI type descriptors only and cannot be in that join. The same
+census warns at `:134` that even a row inside the join "is not proof that any
+particular row is registered".
+The last bullet of the same section already said "registration proven for
+PickupTerrainThing and the Stall family" -- i.e. the file contradicted itself.
+**This makes the NEGATIVE verdict on hop 3 stronger, not weaker.** Nothing that
+depends on it changes direction; a future round must not cite these two names as
+registration evidence.
+
+**E2. `runtime.py:164-174` (cited for the merge-lane guarded-exception pattern) is
+STALE.** At `pirate-force-server` HEAD `cc46a03` those lines are the
+`make_state_class` keyword signature. The guarded pattern is now
+`src/pirateforce_foundation/runtime.py:586-596` (`try: merge_v111_stack()` /
+`except Exception` / state-unchanged assertion / event + `return []`). The rule the
+line states is unchanged and still binding.
+
+---
+
 ## 1. ITEM/BACKPACK WIRE -- every proven message
 
 ### 1.1 Client -> server
