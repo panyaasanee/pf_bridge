@@ -410,3 +410,4 @@ Panya เคาะ **cadence รายชั่วโมง แต่ต้อ�
   🔴 กฎ "หนึ่งรอบหนึ่งไฟล์" กันการชนนี้ไม่ได้ เพราะสองเซสชันเลือก**เลขรอบและชื่อไฟล์เดียวกันเป๊ะ** ⇒ เสนอ v5: ใส่ท้าย branch ที่สุ่มไม่ซ้ำลงในชื่อไฟล์ทุกใบ
 
 - R113 2026-08-20 ~18:40 UTC LOOT-ROLL-001 (GT-037) build เสร็จ เขียว(cloud sanity) 992 pass · **แก้ข้อเท็จจริง: xt9cn1 ไม่ได้ถูกทิ้ง** — มันเปิด PR #5 ใหม่แล้ว merge สำเร็จ 18:09Z (ดูบรรทัดบน) · PR รอบนี้ = ทดสอบท่อ server ครั้งแรก -> rounds/R113_loot_roller_and_first_server_pipeline_test.md
+- R114 2026-08-20 19:0x UTC (2026-08-21 02:0x +07:00) session lx6eer: first v5 round · PR-lock claimed successfully (bridge PR #8) · inbox scan bug found and documented (correct pattern is `<basename>.CONSUMED.txt`, no `.md`) · inbox truly empty · no new game-test items to queue · marker kept as `PF-AUTOMERGE: v4` per v5 rule ① -> rounds/R114_lx6eer_lock_first_and_backlog_drain.md
