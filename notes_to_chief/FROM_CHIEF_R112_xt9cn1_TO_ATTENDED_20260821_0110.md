@@ -1,4 +1,10 @@
-# จาก chief รอบ 112 → ผู้เทส / Panya
+[ถึง: Panya + ผู้เทส]
+
+# จาก chief รอบ 112 (เซสชัน `xt9cn1`) → ผู้เทส / Panya
+
+> ⚠️ **รอบ 112 มีสองตัวรันพร้อมกัน** — อีกใบคือเซสชัน `fps3tp` ซึ่ง merge เข้า `main` ไปก่อนแล้ว
+> อ่านคู่กัน: `rounds/R112_v4_first_live_round_probe_and_pipeline.md` (ของเขา) และ
+> `rounds/R112_xt9cn1_automerge_proven_and_concurrent_round_evidence.md` (ของใบนี้ — มีผลการทดลองที่เขามองไม่เห็น)
 **2026-08-20 ~18:0x UTC (~01:0x +07 ของวันที่ 21)** · รอบแรกที่รันจริงบน Routine ด้วย prompt v4
 
 ---
@@ -48,7 +54,7 @@ curl https://api.github.com/rate_limit        -> 200  core.limit = 15000/hr  (au
 🟡 ที่ proxy **ยังปิด** อยู่: path ตั้งค่าของ Actions (`/actions/permissions*`) → *"not permitted through this proxy"*
 ⇒ **อ่านค่า `default_workflow_permissions` มาตอบคำถาม 403 ล่วงหน้าไม่ได้** ดูข้อ ③
 
-### ③ `pull-requests: write` — **ยังไม่ถูกพิสูจน์** และรอบนี้กำลังพิสูจน์ให้
+### ③ ✅ `pull-requests: write` — **พิสูจน์แล้วว่าใช้ได้ ไม่มี 403** (คำถามนี้ปิดได้เลย)
 
 `merge-claude-pr` รันไปแล้ว 5 ครั้ง (repo โค้ด) + 2 ครั้ง (`pf_bridge`) — **เขียวหมด แต่เขียวเปล่า**
 log ของ job `reap` จบที่ `no open pull requests` ⇒ พิสูจน์แล้วแค่ **`read`**
@@ -58,8 +64,11 @@ log ของ job `reap` จบที่ `no open pull requests` ⇒ พิส�
 และ **จงใจยังไม่เปิดที่ repo โค้ด** ⇒ ถ้า 403 จริง จะค้างแค่ใบเดียว ไม่ใช่สองใบ
 **ผลจริงเขียนไว้ท้ายไฟล์** `rounds/R112_first_live_v4_round_probe_and_automerge_test.md`
 
-**ถ้าเจอ 403 ให้ลองอันนี้ก่อน (ถูกและจบในคลิกเดียว):**
-> repo → Settings → Actions → General → Workflow permissions → **"Read and write permissions"**
+**ผลจริง: ไม่มี 403 ไม่ต้องแก้ setting อะไรเลย**
+- **PR #3** (เซสชันอีกตัว) เปิด 18:01:22Z → **merge เองโดย workflow 18:01:30Z** ≈ 8 วินาที ⇒ **ขา merge ผ่าน**
+- **PR #4** (ของใบนี้) ชน merge → bot comment + **ปิด** + **เก็บ branch ไว้ครบ** ⇒ **ขาปิดผ่าน**
+⇒ **ท่อพิสูจน์ครบสองขาแล้ว ล็อกไม่มีวันค้างถาวร** · blocker ก่อนสับสวิตช์ **ปิดครบทุกข้อ**
+⚠️ ยังไม่พิสูจน์: ท่อฝั่ง **repo โค้ด** (gate → `workflow_run` → merge) — รอรอบที่มีงานโค้ดจริง
 
 ---
 

@@ -1,10 +1,11 @@
-consumed by chief round 112 (cloud routine, first live v4 round)
-copy: notes_to_chief/consumed/20260820_2130_PANYA-STATUS-install-step2-code-repo-only.md
-original left in place per the R108 rule (the Windows sync refuses an all-delete commit)
+CONSUMED 2026-08-20 ~22:1x
 
-verdict on this order: ALREADY DONE, nothing for R112 to do.
-  the order asked chief to gate+commit .github/workflows/merge-claude-pr.yml into the code repo
-  and let Panya push it.  main of pirate-force-server already carries that file at 2842fb9
-  ("merge-claude-pr: add actions: read"), pushed 2026-08-20 22:00 +0700, gate-windows run #7
-  green on that commit.  pf_bridge main carries its own copy at f83d860.
-  => blocker 6 of "things to finish before switching the routine on" is CLOSED.
+ใบนี้เขียนถึง **chief ตัวบนเครื่อง (bridge)** เท่านั้น และงานในนั้นเสร็จหมดแล้ว:
+merge-claude-pr ติดตั้งครบทั้งสอง repo · เขียวทั้งคู่ · actions: read เติมแล้ว
+
+🔴 บทเรียน: cloud round แรกหลัง v4 ไปเจอใบนี้ค้างอยู่ แล้ว "เชื่อฟังแล้วหยุด"
+ทั้งที่ไม่ได้เขียนถึงมัน — ถูกต้องตามพฤติกรรมที่เราต้องการ แต่ผิดเป้าหมาย
+
+⇒ กติกาใหม่: **จดหมายทุกใบต้องระบุผู้รับที่บรรทัดแรก**
+   [ถึง: cloud chief]  /  [ถึง: chief บนเครื่อง]  /  [ถึง: ผู้เทส]
+   ใบที่ไม่ระบุ = ถือว่าเป็นของ cloud chief (ตัวที่เดินเป็นหลักจากนี้ไป)
