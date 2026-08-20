@@ -331,10 +331,13 @@
 
 ตาม ORDER ลำดับ 3 · โครง: ทำซ้ำ GT-031 (HYP-PF-026) แต่ ladder ใช้ HP baseline ของตัวที่เลือก (เช่น Tornado Eagle lvl 27 = 3,857) · nonclaim เดิมทุกตัว + HP เป็น baseline ฝั่ง client
 
-## 🆕 GT-037 LOOT-ROLL-001: server-side loot roller จาก client tables  [✅ **DONE — chief รอบ 113 (cloud) build เสร็จ · เขียว(cloud sanity) 992 pass · รอ gate Actions ตัดสินใน PR ของรอบ 113**]
+## 🆕 GT-037 LOOT-ROLL-001: server-side loot roller จาก client tables  [✅ **DONE — chief รอบ 113 (cloud) build เสร็จ · เขียว(cloud sanity) 992 pass · gate Actions ตัดสินแล้ว: โค้ดอยู่บน `main` ที่ `74b8add` พร้อมคำตัดสิน `conclusion=success` (ยืนยันรอบ 117) — ไม่มีอะไรค้างรอใครอีก**]
 
 ตาม ORDER ลำดับ 4 = ดราฟต์ R100 §3 ประตู 2 · pure logic + unit tests ถึง Grade A ได้โดยไม่มี client · ไม่มีอะไรให้ผู้เทสทำในรายการนี้
 ✅ **รอบ 113 ส่งมอบ:** `src/pirateforce_foundation/loot_roll.py` + 66 เทส + verifier 30 guards + fixture + `reports/PF_LOOT_ROLL001_SERVER_SIDE_ROLLER_20260820.md` · DROPS_QUEST = named refusal โดยเจตนา (client มี 311/2478 ชุด) · **ยังไม่มีทางส่งผล roll ถึงผู้เล่น** (Door 3/4 ไม่มี wire path) · coverage `monster_spawn_and_loot` ยัง `not_started` — ถูกต้องตามกติกา (ไม่มี client เห็นสักไบต์)
+🔎 **re-derive คำตัดสินได้ตลอด:** `git show origin/ci-status:ci/74b8add309cd2f7b5e7626393652c36582cb00dd.json`
+ต้องเห็น `"conclusion": "success"` และ `"sha"` ตรงกับชื่อไฟล์ · ถ้าอยากได้ commit เขียวล่าสุดของ `main` ใช้
+`py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch` (เครื่องมือรอบ 117)
 
 ## 🆕 GT-038 DAMAGE-TARGET-AB-001: A/B — การคลิกเลือกเป้าเกี่ยวอะไรกับเลขที่มองเห็นไหม  [🟢 **PENDING — โปรโตคอลพร้อม · static R102 ทำนายผลไว้ล่วงหน้าแล้ว**]
 
@@ -347,12 +350,25 @@
 **ข้อบังคับทั้งสองแขน:** กล้องเห็นผู้เล่น+NPC เต็มตัว · **ห้ามพิมพ์อะไรนอกช่องแชตที่โฟกัสแล้ว** (กัน hotkey 0x27) · ใช้ client ที่เพิ่งเปิดใหม่ (toggle default ON)
 **คำทำนาย static:** ทั้งสองแขน**ควรเห็นเลขเท่ากัน** — ถ้าแขน A มืดแต่ B เห็น = static ผิด จดละเอียด · ถ้ามืดทั้งคู่บน client ใหม่ = ปัญหาคือ resolve-timing ไม่ใช่ toggle
 **pass criteria สองชั้น:** ① wire: เฟรมครบทั้งสองแขน ② client: บันทึกเลขเห็น/ไม่เห็น ต่อแขน + มี/ไม่มี `TargetVital` ในล็อกต่อแขน
-## 🆕⭐ GT-039 NPC-HP-LINK-001: **หลอดเลือดของ "เป้าหมาย" ลดจริงไหม** — ชิ้นกลางที่วิดีโอรอบใหญ่ #10 พิสูจน์ว่าหายไป  [🟢 **PENDING (HYP-PF-029) — บูตด้วย `origin/main` HEAD ล่าสุดที่ ci-status = `success`** · โมดูล + scenario + dispatcher + CLI flag เข้า main ตั้งแต่ `cc46a03` (CI success run 32406182274) · แก้ pointer chief รอบ 114 (เดิมชี้ `outbox\178_round111_*` ซึ่ง gitignored หา SHA ไม่ได้)]
+## 🆕⭐ GT-039 NPC-HP-LINK-001: **หลอดเลือดของ "เป้าหมาย" ลดจริงไหม** — ชิ้นกลางที่วิดีโอรอบใหญ่ #10 พิสูจน์ว่าหายไป  [🟢 **PENDING (HYP-PF-029) — บูตที่ commit ที่ `pf_resolve_green_boot.py` ชี้ให้ (ดูบล็อก 🔎 ใต้หัวข้อ)** · โมดูล + scenario + dispatcher + CLI flag เข้า main ตั้งแต่ `cc46a03` (CI success run 32406182274) · แก้ pointer chief รอบ 114 (เดิมชี้ `outbox\178_round111_*` ซึ่ง gitignored หา SHA ไม่ได้) · แก้ท่าบูต chief รอบ 117 (ประโยคเดิม "HEAD ล่าสุดที่ ci-status = success" **รันไม่ได้แล้ว** — เหตุผลอยู่ในบล็อกใต้หัวข้อ) · เนื้อการทดสอบและ pass criteria ไม่เปลี่ยนแม้แต่ตัวเดียว]
 
-> 🔎 **หา SHA ที่จะบูต (re-derive ทุกครั้ง — ห้าม hard-pin เพราะ main ขยับได้):**
-> `git fetch origin main ci-status` → `SHA=$(git rev-parse origin/main)` → `git show "origin/ci-status:ci/$SHA.json"`
-> ต้องเห็น `"sha"` ตรงกับ `$SHA` **และ** `"conclusion":"success"` (สี่กฎการอ่าน ci-status) → บูต `$SHA` นั้น
-> ถ้า verdict ของ HEAD ยังไม่มา/ไม่ success ให้ไล่ลง commit ก่อนหน้าที่ยังมีโมดูล `npc_hp_link_hypothesis.py` (มีตั้งแต่ `cc46a03`)
+> 🔎 **หา SHA ที่จะบูต — ใช้เครื่องมือรอบ 117 อย่า hard-pin และอย่าอ่านที่ HEAD:**
+> `py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch`
+> (รันจากโฟลเดอร์ `pf_bridge` · แทน `C:\path\to\pirate-force-server` ด้วยพาธ clone จริงบนสะพาน · คำสั่งเป็น ASCII ล้วน ปลอดภัยกับคอนโซล cp874)
+> - **exit 0** + บรรทัด `BOOT_COMMIT: <sha>` ⇒ บูต sha นั้น: `git checkout <sha>` (detached HEAD ถูกแล้ว — เราบูต *คำตัดสิน* ไม่ใช่ branch)
+> - **exit 3** + `BOOT_COMMIT: NONE` ⇒ **ห้ามบูต** · จดในผลว่า "ใบนี้รอ gate ไม่ได้รอผู้เทส" · **exit 2** = พาธผิด/git ล้ม
+> - 🔴 มีบรรทัด `THE GATE JUDGED ... AS FAILED` ⇒ **จดลงในผลด้วย** (มี commit แดงบนสาย main เหนือคำตอบ)
+> - ⚠️ `success` ที่เครื่องมือส่งต่อ = **subset ของ gate บน GitHub runner** ไม่ใช่ "ผ่าน gate เต็ม" (gate จริงอยู่บนสะพาน)
+> 🔴 **ทำไมประโยคเดิม ("บูต `origin/main` HEAD ล่าสุดที่ ci-status = success") รันไม่ได้แล้ว:** HEAD ของ `main` หลัง automerge เป็น
+> **merge commit** ที่ push ด้วย `GITHUB_TOKEN` ⇒ **ไม่ trigger workflow ⇒ ไม่มีใครเขียน `ci/<sha>.json` ให้มันเลย ตลอดไป**
+> (วัดรอบ 116 จาก Actions API · ยืนยันซ้ำรอบ 117 ที่ HEAD `520e2cf`) — นี่ไม่ใช่ "คำตัดสินยังไม่มา" แต่คือ "จะไม่มีใครเขียนให้"
+> ⇒ คนที่ทำตามประโยคเดิมจะไม่เจอไฟล์คำตัดสิน แล้ว **ปฏิเสธการบูตอย่างถูกกฎ** ทั้งที่โค้ดเขียวนั่งอยู่ต่ำลงไปแค่คอมมิตเดียว
+> ⇒ เครื่องมือจึง **เดินไล่ ancestor** ให้ แทนการ lookup ที่ HEAD (ค่าปริยาย: `origin/main` · `origin/ci-status` · ย้อน 60 commit)
+> **ยืนยันด้วยมือ (ทำได้ ไม่บังคับ · แทน `<SHA>` ด้วยเลขที่เครื่องมือให้):**
+> `git show origin/ci-status:ci/<SHA>.json` ต้องเห็น `"sha"` ตรงชื่อไฟล์ **และ** `"conclusion": "success"` (สี่กฎการอ่าน ci-status)
+> `git grep -n "npc-hp-link-hypothesis-scenario" <SHA> -- src/pirateforce_foundation/app.py` ต้องเจอบรรทัดจริง
+> 🔴 **ห้ามใช้ `--help` เป็นหลักฐานว่ามี flag** (คืน 0 บรรทัดผ่านสะพาน — บทเรียนรอบใหญ่ #7 ข้อ 6)
+> ถ้า sha ที่เครื่องมือชี้ **ไม่มี** โมดูล `npc_hp_link_hypothesis.py` (มีตั้งแต่ `cc46a03`) ⇒ **หยุดและรายงาน** อย่าไล่ลง commit เองด้วยมือ
 
 **ที่มา (นี่คือเทสที่เกิดจากผลของพวกท่านโดยตรง):** รอบใหญ่ #10 ที่ Panya ขับเอง ยิงใส่ `Navy Transfer` `0x2001` โดย**คลิกเลือกเป้าก่อน** ⇒ แถบ HP ของเป้าอยู่บนจอตลอดทั้งรอบ · ดาเมจสะสม **63 + 379 + 63 = 505** · **แถบไม่ขยับแม้แต่หน่วยเดียว** (100 Lv.1 เต็มหลอด ทั้งก่อนและหลัง) ⇒ ตอกย้ำรอบ 83: **client ไม่ลบเลขเอง เป็นตัวแสดงผลล้วน ๆ**
 ⇒ เลนใหม่นี้คือคำตอบตรง ๆ ของผลนั้น: **เซิร์ฟเวอร์พูดทั้งสองครึ่งเอง** — ทำเลขคณิต HP ของ *เป้าหมาย* เอง (100 − 63 = 37 → clamp 0) แล้วสลับสองสายพานส่งออก 8 เฟรม
@@ -429,7 +445,7 @@
   0 hit ใน `pf_bridge\VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv` และ 0 hit ใน
   `pirate-force-server\docs\PF_VITAL_NAMES.json` ⇒ **อย่าไปค้นสองไฟล์นั้นซ้ำ** ต้องอ่านอิมเมจอย่างเดียว
 
-### 📌 ข้อแก้ที่ต้องอ่านก่อนหยิบ citation เก่า (⏳ **รอ merge ก่อน** — อยู่ใน PR เดียวกับใบนี้)
+### 📌 ข้อแก้ที่ต้องอ่านก่อนหยิบ citation เก่า (✅ **merge แล้ว** — ฝั่ง repo โค้ดเข้า `main` ที่ `24d5b94` ซึ่งมีคำตัดสิน `conclusion=success` · ยืนยันรอบ 117)
 `DropThingBoard` และ `DropThingGameObj` **ไม่ได้อยู่ใน 521-class registration join** — ทั้งคู่ `literal_kind=none`
 และ `in_round86_census=False` (`pf_bridge\FACTPACK_L2_CLASSCENSUS001_20260820.tsv:482,483`)
 ส่วน 521 join นิยามไว้ว่า "มี **ทั้ง** RTTI type descriptor **และ** runtime name literal ใน `.rdata`"
@@ -548,26 +564,52 @@ bit `0x02`/obj `+0x1C` = actor-entry collection = **decode แล้ว ไม�
 
 - **result:** (ผู้รับงาน static บนสะพานกรอก: ผลรายท่อน + VA/span/sha + เวลา + sha อิมเมจก่อน-หลัง)
 
-## 🆕⭐ GT-041 MOVE-AUTHORITY-002: เซิร์ฟเวอร์ "ไม่ยอมเขียน" ตำแหน่งที่ client รายงาน — ผู้เล่นเห็นอะไรไหม  [🔴 **BLOCKED — รอ merge ก่อน** · กลายเป็น 🟢 PENDING ทันทีที่ยืนยันได้ว่าโค้ดรอบ 116 อยู่บน `main` แล้ว]
+## 🆕⭐ GT-041 MOVE-AUTHORITY-002: เซิร์ฟเวอร์ "ไม่ยอมเขียน" ตำแหน่งที่ client รายงาน — ผู้เล่นเห็นอะไรไหม  [🟢 **PENDING — merge แล้ว (ยืนยันรอบ 117)** · โค้ดรอบ 116 อยู่บน `main` และมีคำตัดสินเขียวของตัวเอง · **บูตที่ `cdc52f11b8d93b0eec9db42c83a06f0ed57e2050`** ไม่ใช่ที่ HEAD — ดูบล็อกท่าบูตด้านล่าง]
 
 **ที่มา:** chief รอบ 116 (HYP-PF-030) — เลนแรกของโปรเจกต์ที่เซิร์ฟเวอร์ **ปฏิเสธการเขียนตำแหน่งที่ client รายงาน** ได้
 (`reports/PF_MOVE_AUTHORITY002_SERVER_SIDE_GATE_20260821.md` · `src/pirateforce_foundation/move_authority_hypothesis.py`)
 ชั้น wire/DB พิสูจน์จบแบบ headless แล้ว (63 เทส + verifier 87 guards) · **ชั้น client-observable = ศูนย์** นั่นคือใบนี้
 
-### ⏳ รอ merge ก่อน — ยืนยันสามข้อก่อนบูต (re-derive ทุกครั้ง ห้าม hard-pin SHA)
+### ✅ merge แล้ว (ยืนยันรอบ 117) — ท่าบูต: SHA ตรง ๆ + วิธี re-derive ถ้า `main` ขยับไปอีก
 
-🔴 **ท่าอ่าน ci-status เปลี่ยนแล้ว อ่านให้จบก่อน:** `origin/main` หลัง automerge เป็น **merge commit** ซึ่ง
-**ไม่มีวันมี `ci/<sha>.json`** (push ด้วย GITHUB_TOKEN ไม่ trigger Actions — chief ยืนยันจาก Actions API รอบ 116)
-⇒ ให้ดูที่ **parent ฝั่ง PR** ไม่ใช่ที่ HEAD:
+🔴 **ขั้นแรกคือรันเครื่องมือ ไม่ใช่ก๊อป SHA** — SHA ข้างล่างเป็น *คำตอบที่คาดไว้* ไว้เทียบ ไม่ใช่คำสั่ง
+(เหตุผล: `git checkout <sha เก่า>` สำเร็จเงียบ ๆ เสมอ ต่อให้ `main` เดินไปอีกสามรอบแล้ว — ผู้เทสจะบูตของเก่า
+โดยไม่มีสัญญาณอะไรเลย นี่คือความพังชิ้นเดียวกับที่เครื่องมือถูกเขียนขึ้นมาเพื่อฆ่า · `pf-adversary` ชี้ให้รอบ 117)
+
 ```
-git fetch origin main ci-status
-git rev-parse origin/main^2                      # head ของ PR ที่เพิ่ง merge
-git show origin/ci-status:ci/<SHA-นั้น>.json      # ต้อง conclusion=success และ sha ในไฟล์ตรงกับชื่อไฟล์
-git grep -n "move-authority-hypothesis-scenario" origin/main -- src/pirateforce_foundation/app.py
-git cat-file -e origin/main:scenarios/move_authority_hypothesis_speed_gate.json && echo SCENARIO_PRESENT
+py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch
 ```
-- **ห้ามใช้ `--help` เป็นหลักฐานว่ามี flag** (คืน 0 บรรทัดผ่านสะพาน — บทเรียนรอบใหญ่ #7 ข้อ 6) ใช้ `git grep` เท่านั้น
-- ยังไม่ครบสามข้อ = ใบนี้ยัง BLOCKED **ปล่อยไว้ที่เดิม ห้ามลบ ห้ามย้าย**
+- รันจากโฟลเดอร์ `pf_bridge` · แทน `C:\path\to\pirate-force-server` ด้วยพาธ clone จริง (คำสั่ง ASCII ล้วน ปลอดภัยกับคอนโซล cp874)
+- **exit 0** + `BOOT_COMMIT: <sha>` ⇒ บูต sha นั้น: `git checkout <sha>` (detached HEAD ถูกแล้ว — เราบูต *คำตัดสิน* ไม่ใช่ branch)
+- **exit 3** + `BOOT_COMMIT: NONE` ⇒ **ห้ามบูต** · จดในผลว่า "ใบนี้รอ gate ไม่ได้รอผู้เทส" · **exit 2** = พาธผิด/git ล้ม
+- 🔴 ถ้า output มีบรรทัด `THE GATE JUDGED ... AS FAILED` ⇒ **จดลงในผลด้วยเสมอ** (มี commit แดงอยู่บนสาย main
+  เหนือคำตอบ — เป็นปัญหาของ chief ไม่ใช่ของคุณ แต่รายงานที่ไม่พูดถึงมันจะดูเหมือนไม่เคยเกิดขึ้น)
+
+**คำตอบที่คาดไว้ ณ วันที่เขียนใบนี้ (รอบ 117):** `cdc52f11b8d93b0eec9db42c83a06f0ed57e2050`
+= head ของ PR รอบ 116 (MOVE-AUTHORITY-002) · `conclusion=success` run_id `32426106992` · `2026-08-20T22:54:09Z`
+· และเครื่องมือยืนยันเองว่า **tree ของมันเท่ากับ tree ของ `520e2cf` (HEAD ของ main) ทุกไบต์** ⇒ โค้ดที่ถูก gate
+กับโค้ดที่อยู่บน branch เป็นก้อนเดียวกันจริง (วัด ไม่ใช่สมมติ)
+- ได้ SHA เดียวกัน ⇒ เดินต่อได้เลย · ได้ SHA **ใหม่กว่า** ⇒ ปกติ (มีรอบใหม่ merge เข้าไป) ให้ยืนยันสามข้อข้างล่างกับตัวใหม่
+- รันเซิร์ฟเวอร์จาก working tree ของ checkout นี้เท่านั้น · บล็อก **server args** ด้านล่างไม่เปลี่ยนแม้แต่ตัวอักษรเดียว
+- ⚠️ คำว่า `success` ที่เครื่องมือส่งต่อ = **subset ของ gate บน GitHub runner** (เก้า check รันบนนั้นไม่ได้)
+  **ไม่ใช่ "ผ่าน gate เต็ม"** — gate ตัวจริงยังเป็นจ็อบบนสะพานของคุณ
+
+🔴 **ห้ามบูต HEAD ของ `origin/main` เฉย ๆ และห้ามตีความว่า "คำตัดสินยังไม่มา":**
+HEAD (รอบ 117 = `520e2cf`) เป็น **merge commit** ที่ automerge push ด้วย `GITHUB_TOKEN` ⇒ ไม่ trigger Actions
+⇒ **ไม่มี `ci/520e2cf....json` และจะไม่มีตลอดไป** (วัดรอบ 116 จาก Actions API · ยืนยันซ้ำรอบ 117)
+⇒ ของที่ถูก gate จริงคือ **parent ฝั่ง PR** = SHA ข้างบน · ใครก็ตามที่ไปอ่านคำตัดสินที่ HEAD จะไม่เจอไฟล์
+แล้วปฏิเสธการบูตอย่างถูกกฎ ทั้งที่โค้ดเขียวอยู่ต่ำลงไปแค่คอมมิตเดียว — **นี่คือกับดัก ไม่ใช่ความผิดของผู้เทส**
+
+**ยืนยันสามข้อก่อนบูต (ต้องผ่านครบสามข้อ · แทน `<SHA>` ด้วย commit ที่จะบูตจริง):**
+```
+git show origin/ci-status:ci/<SHA>.json
+git grep -n "move-authority-hypothesis-scenario" <SHA> -- src/pirateforce_foundation/app.py
+git cat-file -e <SHA>:scenarios/move_authority_hypothesis_speed_gate.json && echo SCENARIO_PRESENT
+```
+1. ไฟล์คำตัดสินต้องมี `"conclusion": "success"` **และ** `"sha"` ตรงกับชื่อไฟล์
+2. `git grep` ต้องเจอ flag จริง — **ห้ามใช้ `--help` เป็นหลักฐานว่ามี flag** (คืน 0 บรรทัดผ่านสะพาน — บทเรียนรอบใหญ่ #7 ข้อ 6) ใช้ `git grep` เท่านั้น
+3. ต้องเห็นคำว่า `SCENARIO_PRESENT`
+- ไม่ครบสามข้อ = **ห้ามบูต** ใบนี้กลับไป BLOCKED · **ปล่อยไว้ที่เดิม ห้ามลบ ห้ามย้าย**
 
 ### 🔴 อ่านก่อนออกแบบท่าทำงาน — เลนนี้ "เงียบสองทาง"
 
