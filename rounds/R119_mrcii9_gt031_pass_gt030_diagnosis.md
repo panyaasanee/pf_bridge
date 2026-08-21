@@ -36,7 +36,29 @@
 (ถ้า wire ไม่เคยส่ง name-render bit — "ไม่เห็นป้ายชื่อ" คือพฤติกรรมที่ถูกของ wire ไม่ใช่ความล้มเหลวของเทส
 และคำทำนายในคิวคือส่วนที่ผิด) → ผล static อยู่ท่อนถัดไป
 
-<!-- STATIC_RESULTS_PLACEHOLDER -->
+### ผล static (ลูกมือ pf-static-re — ทุกข้อมี file:line ใน repo โค้ด · ชั้น wire/composition เท่านั้น)
+
+1. **ชื่ออยู่ในไบต์ขาออกจริง 3/5 เฟรม** (SPAWN_BARE · SPAWN_AVATAR · NEGATIVE_CONTROL):
+   BasicAttr bit `0x0001` + wstring tag `0x48` UTF-16LE (`remote_player_hypothesis.py:668` · `pf_login_game_server_v141.py:590-592`)
+   · encoder **ปฏิเสธ compose ถ้า bit หาย** (`remote_player_hypothesis.py:651-652`) · mask จริง `0x030D` มี bit ชื่อ
+   · **ขนาด 181 B re-derive แล้วตรงกับ "มีชื่อ" เท่านั้น** (ไม่มีชื่อจะเป็น 150 B) — cross-check 72/77/218 B ตรงหมด
+   ⇒ "ไม่เห็นป้ายชื่อ" **ไม่ใช่ความล้มเหลวของ wire**
+2. **โน้ต "ไม่มี name bit" ของ GT-032 ใช้กับเลนนี้ไม่ได้** — นั่นคือ npc_hostile lane (mask `0x030C`) คนละท่อ
+3. **ไม่มี claim ที่ commit ไว้ว่า nameplate ลอยหัวจะเรนเดอร์สำหรับ actor_type 2** — consumer เดียวที่พิสูจน์ static คือ
+   **target panel** (`0x51F920` copy BasicAttr+0x28 → LABEL_NAME `0x5BD624`) ⇒ วิธีระบุตัวที่ถูกคือ คลิก/Tab แล้วอ่าน target panel
+   · หมายเหตุความเป็นธรรม: คิวฉบับ commit เขียนตารางไว้เป็น "คำทำนาย ไม่ใช่ข้อเท็จจริง" อยู่แล้ว — ที่ผิดจริงคือบรรทัดพิกัด (ข้อ 4)
+4. 🔴 **บรรทัดพิกัดในคิว (เดิม line 816) stale สองชั้น:** probe ผูกกับ placement-0 **'Navy Transfer'**
+   (`-9139.957, -2780.045, 223.292` — `pf_login_game_server_v141.py:1324`) ไม่ใช่จุดที่ผู้เทสยืน:
+   - "~112–412 หน่วยทาง +X" จริงเฉพาะเมื่อยืนที่ frozen v135 spawn (`-9239.957, -2830.045`) — ผู้เทสจริงอยู่ห่างจุดนั้น ~731 หน่วย
+   - **ProbeControl03 อยู่ฝั่ง −X (หลังกล้องที่หัน +X) ห่าง 70.7 หน่วย** — คำสั่ง "หัน +X" ทำให้ negative control อยู่หลังกล้องตั้งแต่ต้น
+   - จากจุดที่ผู้เทสยืนจริง (`-8553, -2579`): probe ทุกตัวห่าง **350–765 หน่วย ทางฝั่ง −X ทั้งหมด** — อาจพ้นระยะเรนเดอร์ (render distance = [UNKNOWN])
+   - แถม: **ProbePlayer01 spawn ทับตำแหน่ง NPC Navy Transfer เป๊ะ** — confound การระบุตัวอีกชั้น
+5. **สิ่งที่ static ตอบไม่ได้ (ต้อง attended):** nameplate ลอยหัวมีจริงไหมสำหรับ actor_type 2 · render distance ·
+   ทำไม client วางผู้เล่นที่ `-8553,-2579` แทน frozen spawn · AvatarAttr ถูกยอมรับใต้ identity B ไหม · เฟรม MOVE ขยับอะไรไหม
+
+**ข้อสรุปของรอบ:** GT-030 ไม่ต้องแก้โค้ดสักบรรทัด — แก้**โปรโตคอลรัน**: ให้ผู้เทสเดินไปที่ NPC Navy Transfer (landmark หาเจอได้)
+ก่อนยิง · ถ่าย before/after เฟรมเดียวกัน · ระบุตัวด้วยตำแหน่งเทียบ landmark + target panel ไม่ใช่ป้ายชื่อ ·
+ข้อเสนอผู้เทสเรื่อง "client console พิมพ์ identity" ทำไม่ได้ (client binary แตะไม่ได้) — วิธี landmark แทนคำตอบเดียวกัน
 
 ## 4) บทเรียนเครื่องมือรอบใหญ่ #12 → ลงคิวแล้ว
 
