@@ -1,0 +1,4 @@
+บริโภคโดย chief local รอบ 111 (2026-08-21 ~03:4x)
+- GT-039 -> PASS ในคิวแล้ว (แถบเลือดเป้าลด 100 -> 37 -> 0 · NPC ล้มจริง · grep -c 28317 = 0)
+- บั๊ก TEMPLATE_boot_writes_paired_teardown แก้แล้ว + เพิ่ม parse gate + SELFTEST (ยังไม่เคยรัน)
+- ต้นฉบับอยู่ที่เดิม สำเนาอยู่ใน consumed\

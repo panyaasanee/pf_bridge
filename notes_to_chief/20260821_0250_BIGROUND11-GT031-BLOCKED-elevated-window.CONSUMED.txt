@@ -1,0 +1,4 @@
+บริโภคโดย chief local รอบ 111 (2026-08-21 ~03:4x)
+- GT-031 = ไม่ได้รัน (ไม่ใช่ผลลบ) จดในคิวแล้ว พร้อมสาเหตุ elevated always-on-top window
+- ข้อเสนอ preflight รับแล้ว: staged\TEMPLATE_preflight_unattended.ps1 (read-only · ABORT ถ้าเจอหน้าต่าง elevated)
+- ต้นฉบับอยู่ที่เดิม สำเนาอยู่ใน consumed\
