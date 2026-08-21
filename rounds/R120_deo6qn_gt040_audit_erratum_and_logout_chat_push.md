@@ -62,15 +62,28 @@
 แล้ว server **push** `ReturnSelectServerVital 0x709E` (เฟรม 48 ไบต์แช่แข็ง sha256 pin เดิมของ HYP-PF-028)
 **โดยไม่รอ request** — ตอบคำถามว่า transition ต้องการ request pairing ไหมในตัว
 · pre-approved ใต้ policy #3/#4 (ปุ่ม gameplay + pattern มาตรฐาน: opt-in · fail closed · ledger · headless proof)
-**สถานะ:** [จะเติมเมื่อลูกมือ implement รายงาน]
+**สถานะ: build เสร็จ commit `7b80025` push แล้ว · PR pirate-force-server#5 เปิดแล้ว (มี `PF-AUTOMERGE: v4`) — รอ gate**
+- 9 ไฟล์: scenario JSON ใหม่ · dispatch ใน runtime (guard order เลียน hostile เป๊ะ) · ledger HYP-PF-031 (verifier PASS entries=38)
+  · เทสใหม่ 15 ใบ · replay tool 31 guards PASS · seam test ผ่าน (แตะ `.gitignore` หนึ่งบรรทัด allowlist)
+- **pf-adversary ตรวจแล้ว: ไม่มีจุดบล็อก commit** · แก้ก่อน commit หนึ่งจุด (D2 — ถ้อยคำ "request body never read"
+  overstate: จริงคือ classifier อ่าน payload เพื่อเช็ค ascii12 แต่ไม่มีไบต์ request ตัวไหนถูก copy ไป response/store
+  — แก้ ledger + comment แล้ว re-pin canonical sha ใน verifier · verifier PASS ซ้ำ)
+- ช่องว่างที่รู้และบันทึก (ไม่บล็อก · รอบหน้าเก็บได้): D1 compose-refusal branch ยังไม่มีเทส (design ตรง precedent
+  remote-player แต่ coverage ขาด · event จริงมี suffix `{exc!r}` ต่างจากชื่อใน ledger) · D4 one-shot latch เป็นราย
+  connection (relog = push ซ้ำได้ — ลงคาเวียตในคิวแล้ว) · D5 LogoutVital ใต้ scenario นี้ไม่แยก wrong_envelope/payload
+  · **confound สำคัญ: ผลลบของ variant C กำกวม** (client อาจ consume 0x709E เฉพาะ state ที่เราสร้างไม่ได้) — ลงคิวแล้ว
 
 ### ④ คิว + งานแม่บ้าน
 
 - GT-032 ✅ PASS · GT-033 🔴 BLOCKED-INPUT + บล็อก variant C · GT-040 ✅ DONE (ผลยังไม่ re-derive → GT-042)
 - ใบใหม่: **GT-042** (re-derive GT-040 A/B/C + decode `0x402A20` ปิด scope `[mgr+0x24]`) · **GT-043**
   (observation แถม: ประชากรรอดไหมหลังเฟรม count-1 bit `0x02` — จาก decode ท่อน B เฟรมพวกนี้ควรกวาดประชากร
-  แต่ไม่เคยมีใครรายงาน wipe · yes/no ตัดสินได้ทั้งคู่) — [สถานะ: จะเติมเมื่อ pf-queue-author ส่งร่าง]
+  แต่ไม่เคยมีใครรายงาน wipe · yes/no ตัดสินได้ทั้งคู่) — **ทั้งสองใบร่างโดย pf-queue-author ลงคิวแล้ว** (ท้ายไฟล์คิว)
 - `IMAGE_ACCESS_COST.tsv` +2 แถว (scope `[mgr+0x24]` ต้องอิมเมจ · id จริง `PickupTerrainThing` ต้องอ่านตอนรัน)
+- 🔴 **งานแม่บ้านที่พบ (รอบหน้า):** สวีตเต็มบนคลาวด์วันนี้ = **192 failed / 1854 passed / 30 skipped / 70 errors**
+  (วัดเอง 62 วิ) — แดงทั้งหมดคือเทส static ที่ต้องการ client image / capture corpus แล้ว **fail แทนที่จะ skip**
+  ขัดวินัย SKIP-CENSUS-001 · ขัดกับบันทึก R118 ("0 failed ทุกความลึก" — คนละ scope หรือ discipline หลุดหลัง R118 ก็ยังไม่รู้)
+  · ไม่กระทบรอบนี้ (fail set เทียบ baseline ก่อนแตะโค้ด byte-identical) แต่ควรเก็บเข้าท่อ precondition ในรอบถัดไป
 
 ## สิ่งที่ไม่ได้พิสูจน์ / nonclaims
 
