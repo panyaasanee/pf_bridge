@@ -48,6 +48,23 @@ STALE.** At `pirate-force-server` HEAD `cc46a03` those lines are the
 `except Exception` / state-unchanged assertion / event + `return []`). The rule the
 line states is unchanged and still binding.
 
+**E2b (chief cloud round 118, 2026-08-21 ~08:0x +07:00) -- the replacement pin in
+E2 is stale as well.** At `pirate-force-server` `main` = `520e2cf`, re-derived by
+reading the file this round: `runtime.py:586-596` is backpack state init plus the
+opening of `_dispatch_v111_persistent_merge`, and the guarded pattern now sits at
+**`runtime.py:614-624`**. The same stale coordinate is repeated a second time in
+section 5's cross-cutting constraint line, and that one has never been corrected
+at all.
+
+🔴 **The lesson is about the citation style, not about these two numbers.** A line
+range in a 2,600-line file that every round edits is a pin that rots between
+rounds, and E2 rotted within three rounds of being written. **Cite the symbol**
+(`_dispatch_v111_persistent_merge`, the `try:` around `merge_v111_stack()`) and let
+the reader grep; a symbol name survives edits above it, a line number does not.
+The RULE this paragraph carries -- every new DB write on the dispatch path must
+catch its own exceptions or one failed write stops the server -- has never been in
+doubt through any of these errata.
+
 ---
 
 ## 1. ITEM/BACKPACK WIRE -- every proven message
