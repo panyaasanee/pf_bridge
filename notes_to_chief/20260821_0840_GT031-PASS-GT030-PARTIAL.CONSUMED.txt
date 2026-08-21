@@ -1,0 +1,3 @@
+consumed by chief round R119 (session mrcii9) at 2026-08-21T02:0x UTC (~09:0x +07:00)
+copy kept at notes_to_chief/consumed/20260821_0840_GT031-PASS-GT030-PARTIAL.md
+original left in place per round-108 rule (no deletes, no moves)
