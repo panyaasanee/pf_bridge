@@ -194,7 +194,8 @@
 10. 🆕🔴 **รอบเทสที่จบเพราะคนเลิกเล่น ไม่ใช่เพราะเทสจบ ก็ยังต้อง teardown** (คำสั่ง Panya 1440 ข้อ B ·
    บทเรียนรอบใหญ่ #10: บูต 11:37 แล้วเลิกกลางคัน ไม่มี teardown · LOCK_GAME ค้าง HELD ~3 ชม.
    ไม่มีใครตรวจ canonical guard เลยทั้งรอบ) — สองข้อย่อยที่ต้องรู้:
-   - ⚠️ **teardown template ปฏิเสธรอบที่ถูกทิ้ง >180 นาที โดยดีไซน์** (stamp age guard → exit 12 —
+   - ⚠️ **teardown template ปฏิเสธรอบที่ถูกทิ้ง >420 นาที โดยดีไซน์** (เดิม 180 — ยกเป็น 420 เมื่อ 2026-08-20 ·
+     `TEMPLATE_teardown_generic.ps1:135` · แก้ stale โดย chief R119) (stamp age guard → exit 12 —
      จ็อบ 0947 เป็นใบเสร็จจริง) ⇒ แท่นที่ถูกทิ้งข้ามคืน/ข้ามชั่วโมง **อย่าฝืน template** ให้ใช้
      `staged\TOOL_stop_stale_server.ps1` (ทางกู้ที่ออกแบบมาเพื่อกรณีนี้ ไม่อ่าน info file) แล้วตามด้วย
      receipt อ่านอย่างเดียว `staged\0949_gt027_stalepad_canonical_guard.ps1` (แบบร่างพร้อมใช้ รอบ 105)
@@ -534,7 +535,7 @@ citation ผิดไปอ้างว่า "DropThingBoard/GameObj ถูก 
   sha256 `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623` · PE32 · ImageBase `0x00400000`
   (ค่าอ้างอิงจาก `pf_bridge\factpack_L1\MANIFEST.md:21-22`) — 🔴 **จด sha ก่อนเริ่มและหลังจบ ต้องตรงกันทั้งสองครั้ง เปิดอ่านอย่างเดียวเสมอ**
 - **ไม่ต้องมี:** เซิร์ฟเวอร์ · client ที่บูตแล้ว · canonical DB · สำเนา DB · `LOCK_GAME` · teardown · boot stamp
-  ⇒ ใบนี้ **ไม่ใช่รอบเทสในเกม** กติกา stamp 180 นาที/teardown ไม่เกี่ยวกับใบนี้เลย
+  ⇒ ใบนี้ **ไม่ใช่รอบเทสในเกม** กติกา stamp 420 นาที (เดิม 180)/teardown ไม่เกี่ยวกับใบนี้เลย
 - **capture corpus:** ไม่บังคับ · หยิบมาได้ถ้าอยากเช็คว่าเคยมีเฟรมรูปร่างนี้ผ่านสายจริงไหม (คาดว่า 0 — ถ้าเจอ **นั่นคือข่าวใหญ่ จดทันที**)
 - **ท่าทำงาน:** ตามวินัยของ `pf-static-re` (`pf_bridge\.claude\agents\pf-static-re.md`) และเมธอดของ
   RUNTIMERES-ACTOR-ENTRY-001: 🔴 **ห้ามใช้ linear disassembler เป็นหลักฐานของ negative** (มันหยุดที่ไบต์แรกที่ decode ไม่ได้
@@ -758,7 +759,7 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
 13. **ถ่าย B0 ทันทีที่เข้าแมพ ให้เห็น X/Y** — คำตอบของคำถามที่สอง
     เทียบสามค่า: **A4** (ที่ผู้เล่นยืนตอนออก) vs **T6** (แถวใน DB) vs **B0** (ที่ client วางเราไว้)
 14. ยืนนิ่ง 30 วินาที → ออกตามข้อ 10 → ปิด server เก็บหลักฐาน → **T7** + `PRAGMA integrity_check;`
-15. **teardown เสมอ** แม้เลิกกลางคัน (boot stamp เกิน 180 นาที template จะปฏิเสธ exit 12 — ใช้ `staged\TOOL_stop_stale_server.ps1`)
+15. **teardown เสมอ** แม้เลิกกลางคัน (boot stamp เกิน 420 นาที template จะปฏิเสธ exit 12 — เพดานยกจาก 180 เมื่อ 2026-08-20 · ใช้ `staged\TOOL_stop_stale_server.ps1`)
 16. เทียบ sha256 canonical กับ `CANON_SHA.txt` อีกครั้ง **ต้องเท่าเดิม**
 
 ### pass criteria — สองชั้น แยกกันเด็ดขาด
@@ -819,6 +820,11 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
 >   grep `compose_refused` / `already_sent` = ไม่พบ
 > - **ชั้น client: ยังตัดสินไม่ได้** — ผู้เทสไม่พบป้ายชื่อ `ProbePlayer01/02/ProbeControl03` ที่ไหนเลย
 >   คลิกตัวที่สงสัยแล้ว target panel ไม่ขึ้น ⇒ **ระบุ identity ไม่ได้** (ไม่ใช่ "ไม่เรนเดอร์" — ผู้เทสติด nonclaim นี้ไว้เอง ถูกต้องแล้ว)
+> - ⭐ **การพบเห็นที่ยังไม่อธิบาย (ห้ามหล่นหาย — chief R119 เติมกลับตามผล adversary):** ผู้เทสเห็น
+>   **ตัวละครหน้าตาแบบผู้เล่น (ชายหนุ่มชุดน้ำเงิน-ขาว) ยืนที่ X ≈ `-8681`** — ต่างจาก NPC Navy Transfer ที่คุ้นเคย
+>   คลิกแล้ว target panel ไม่ขึ้น · จุดนั้นห่างตำแหน่ง ProbePlayer01 หลัง MOVE (`-8839.957`) ~159 หน่วยทาง +X
+>   ⇒ **อาจเป็น actor_type 2 ตัวแรกที่เรนเดอร์จริงในประวัติโปรเจกต์ หรืออาจเป็น NPC ประจำแมพ — ยังตัดสินไม่ได้ทั้งสองทาง**
+>   รอบ rerun มีขั้นตรวจจุดนี้ซ้ำโดยเฉพาะ (steps ข้อ 7)
 > - เกณฑ์หยุดทั้งเลน (ชื่อ `ProbeControl03` โผล่) **ไม่ถูกยิง** · ไม่มี `ErrorData=28317`
 > - ผู้เทสยิงจากจุดเกิดที่รายงาน X `-8553` Y `-2579` กวาดกล้อง 360° แล้วเดิน +X ถึงช่วง X `-8681..-8414`
 >
@@ -830,7 +836,9 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
 >    ที่พิสูจน์ static ได้มีตัวเดียวคือ **target panel** (updater `0x51F920` → `LABEL_NAME 0x5BD624`)
 >    ⇒ วิธีระบุตัวในรอบ rerun ต้องเป็น **"คลิก/Tab → อ่าน target panel"** ไม่ใช่ "มองหาป้ายลอยหัว"
 > 3. **พิกัดจริงของ probe** — ยึด placement-0 NPC **'Navy Transfer'** ที่ X `-9139.957` Y `-2780.045` Z `223.292`
->    (`pf_login_game_server_v141.py:1324`):
+>    (`pf_login_game_server_v141.py:1324`) · 🔴 **NPC ตัวนี้คือ actor identity `0x2001`** — ตัวเดียวกับที่
+>    **GT-032 ทำให้ขึ้นศัตรู** และ GT-022/025 เคยฆ่า ⇒ **ในรอบใหญ่เดียวกัน ให้รัน GT-030 ก่อน GT-032 เสมอ**
+>    (landmark ที่เพิ่งถูกทำให้แดง/ตาย ใช้เป็นจุดอ้างอิงกลาง ๆ ไม่ได้):
 >    `ProbePlayer01` = **ทับตำแหน่ง Navy Transfer เป๊ะ (ตั้งใจ — จะเห็นตัวซ้อนกัน)** · `ProbePlayer02` = X+150 (`-8989.957`)
 >    · `ProbeControl03` = X−150 (`-9289.957`) · A หลัง MOVE = X+300 (`-8839.957`)
 > 4. 🔴 **บรรทัดเดิม "probe อยู่แนว +X ~112–412 หน่วยจากจุดเกิด" ผิด/ค้างสองทาง:** (ก) จริงเฉพาะเมื่อยืนที่ค่าคงที่
@@ -839,7 +847,10 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
 >    (ระยะเรนเดอร์ของ client = **[UNKNOWN]**)
 > 5. ข้อเสนอของผู้เทสข้อ 1 (ให้ client console พิมพ์ identity ของ actor) **ทำไม่ได้ — client binary แก้ไม่ได้**
 >    ⇒ แทนด้วยวิธี landmark + target panel ตามโปรโตคอลด้านล่าง
-> - **rerun ไม่ต้องแก้โค้ด** — one-shot flag เป็นของต่อบูตเซิร์ฟเวอร์ บูตใหม่ = flag รีเซ็ตเอง
+> - **rerun ไม่ต้องแก้โค้ด** — one-shot flag เป็นของ**ต่อ GAME connection** (`remote_player_sweep_count` อยู่ใน
+>   session state ที่สร้างใหม่ต่อ connection ที่ accept — `runtime.py:509` · accept loop `pf_login_game_server_v141.py:7399`)
+>   ⇒ บูตใหม่ = connection ใหม่ = flag รีเซ็ตแน่นอน · แต่ **reconnect ในบูตเดียวกันก็ได้ sweep ชุดใหม่ได้เช่นกัน** —
+>   ถ้าเกิด reconnect กลางรอบ จดไว้ว่า probe อาจถูก spawn ซ้ำ (ตัวเก่าไม่ despawn)
 
 - **objective:** พิสูจน์หนึ่งข้อ: **client เรนเดอร์และให้ระบุตัว actor_type 2 (remote player) ที่เซิร์ฟเวอร์ spawn ได้หรือไม่**
   (ทุกเฟรม "ตัวอื่นในโลก" ก่อนหน้านี้ = actor_type 4 ทั้งหมด · นี่คือ actor_type 2 = `CNetActor` สาขา remote player ครั้งแรกของโปรเจกต์)
@@ -848,7 +859,8 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
 - **server args:** `--remote-player-hypothesis-scenario scenarios\remote_player_hypothesis_visibility_probe.json` (+ `--db` สำเนา)
   ท่าบูตเดียวกับ GT-024/027 เป๊ะ เปลี่ยนแค่ flag · console label = `HYP_PF_025_REMOTE_PLAYER_<STEP>` ·
   event = `remote_player_hypothesis_visibility_probe_sent` — เห็นชื่ออื่น = บูตผิดไฟล์
-  **one-shot ต่อบูต** — ยิงซ้ำในบูตเดียวได้ `..._already_sent_no_reply` · compose ถูกปฏิเสธ = `..._compose_refused_no_reply_<เหตุผล>` และไม่มีไบต์ออกเลย
+  **one-shot ต่อ GAME connection** — ยิงซ้ำใน connection เดียวได้ `..._already_sent_no_reply` · **reconnect = ยิงใหม่ได้**
+  (ดูโน้ตในบล็อกวินิจฉัยข้างบน) · compose ถูกปฏิเสธ = `..._compose_refused_no_reply_<เหตุผล>` และไม่มีไบต์ออกเลย
 - **steps:**
   1. preflight จอว่าง (การ์ด elevated ของรอบ 111) → **สตาร์ตเซิร์ฟเวอร์ก่อน แล้วค่อยบูต client** (client ไร้เซิร์ฟเวอร์ตายใน ~3.5 นาที ·
      ถ้ารอบก่อนเพิ่งฆ่า client ไป **ต้อง restart เซิร์ฟเวอร์ก่อน** ไม่งั้นค้าง "connecting")
@@ -862,7 +874,10 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
      ทั้งสองฝั่ง ตามตารางคำทำนายข้างล่าง
   7. หลังจบชุด: **ระบุตัวด้วยตำแหน่งเทียบ Navy Transfer + คลิกซ้าย (ลอง Tab ด้วยถ้าคลิกไม่ติด) → อ่านชื่อใน target panel**
      ทีละตัว: จุดทับ Navy Transfer (คาด ProbePlayer01 ซ้อน — คลิกอาจโดน NPC ก่อน จดว่าโดนตัวไหน) · X+150/X+300 · X−150
-  8. จบเทส: ปิด client → teardown ตามปกติ **ภายใน 180 นาทีจาก boot stamp** (template ปฏิเสธ stamp เก่ากว่านั้น) · run copy ทิ้งได้ ·
+     · ⭐ **เทียบหน้าตากับ "ชายหนุ่มชุดน้ำเงิน-ขาว" ที่รอบ #12 เห็นที่ X ≈ −8681** — ตัวแบบเดียวกันโผล่อีกไหม
+     ที่จุดไหน ขยับตาม MOVE ไหม ถ่ายภาพเสมอแม้ target panel ไม่ขึ้น
+  8. จบเทส: ปิด client → teardown ตามปกติ **ภายใน 420 นาทีจาก boot stamp** (เพดานถูกยกจาก 180 → 420 เมื่อ 2026-08-20 —
+     `staged\TEMPLATE_teardown_generic.ps1:135` · เลข 180 ที่เห็นในใบเก่า ๆ = stale) · run copy ทิ้งได้ ·
      restart เซิร์ฟเวอร์ก่อนบูตรอบถัดไป
 - **สิ่งที่ควรเห็นทีละเฟรม (คำทำนาย — ไม่ใช่ข้อเท็จจริง · พิกัดแก้เป็นค่าจริงยึด Navy Transfer แล้ว):**
   | t | เฟรม | ถ่ายอะไร |
@@ -875,7 +890,9 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
   | หลังจบ | ขั้นระบุตัวตาม steps ข้อ 7 | target panel ขึ้นไหม / ชื่อในพาเนลคือ `ProbePlayer01`/`ProbePlayer02` ไหม / ตัวจม-ลอยพื้น (ground Z ไม่ได้ตรวจ — ไม่ falsify) |
 - **pass criteria (สองชั้น แยกกัน — ห้ามอ้างชั้นหนึ่งแทนอีกชั้น):**
   - **wire/DB (headless ได้ ไม่ต้องมีคน):**
-    - 5 เฟรมออกครบตาม label + delay 15 วิ · ขนาด **181/288/72/77/218 B ตามลำดับ** (ตรงกับรอบ #12 — เบี่ยงจากนี้ = จดทันที)
+    - 5 เฟรมออกครบตาม label + delay 15 วิ · ขนาด **181/288/72/77/218 B ตามลำดับ** (ตรงกับรอบ #12 — เบี่ยงจากนี้ = จดทันที
+      **ยกเว้น 288 B ของ `SPAWN_AVATAR`**: หาง avatar เป็น replay ของตัวละครที่เลือกอยู่ scenario ตั้งใจไม่พินหาง
+      (`avatar_tail_excluded_from_pin: true` — พินเฉพาะโครง 172 B) ⇒ 288 เป็นตัวเลขผูกตัวละคร ณ รอบ #12 เปลี่ยนได้โดยไม่ผิด)
     - ไม่มี `compose_refused` / `already_sent` (ในบูตแรกของรอบ) · ไม่มี `ErrorData=28317`
     - sessions +1 ต่อการเข้าเกม · `PRAGMA integrity_check` = `ok` · sha256 canonical ก่อน-หลังตรงกัน
     - **ชั้นนี้ตอบไม่ได้ว่าจอเห็นอะไร** — 181 B พิสูจน์ว่า *ชื่ออยู่ในไบต์* ไม่ใช่ว่า *ชื่อเรนเดอร์*
@@ -884,7 +901,9 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
       **(ข)** target panel ของตัวที่ X+150 (หรือ X+300 หลัง MOVE) ขึ้นชื่อ `ProbePlayer02`/`ProbePlayer01` หรือไม่
       **(ค)** ฝั่ง X−150 มีตัวโผล่หรือไม่ และถ้าโผล่ target panel ว่าง/ไม่ขึ้นหรือไม่
     - ภาพบังคับ: baseline 2 ใบ + before/after ทุกเฟรม (กรอบกล้องเดิม) + ภาพ target panel ทุกครั้งที่เปิดได้
-    - **ผลลบมีค่าเท่าผลบวก:** ยืนติด Navy Transfer แล้ว**ไม่มีอะไรโผล่เลยทุกเฟรม** = "actor_type 2 spawn แล้วไม่เรนเดอร์ด้วย mask ชุดนี้"
+    - **ผลลบมีค่าเท่าผลบวก:** ข้อสรุป "ไม่เรนเดอร์" ให้ยึดจาก **B (X+150) และ A หลัง MOVE (X+300) เท่านั้น** —
+      เฟรม +0/+15 ของ A ทับตัว NPC จึงอาจถูกโมเดล NPC บังทั้งตัว (ตัดสินจากจุด stack ไม่ได้) ·
+      ถ้า B และ A-หลัง-MOVE **ไม่โผล่ทั้งคู่** = "actor_type 2 spawn แล้วไม่เรนเดอร์ด้วย mask ชุดนี้"
       — เป็น**ผลเต็มใบ ไม่ใช่ fail** · redirect: chief สอบ mask bit ฝั่ง render แบบ static ก่อนออกใบใหม่ (ห้ามเดา bit ในใบนี้)
       ส่วน "โผล่แต่ target panel ไม่ขึ้นชื่อ" = ผลอีกแบบ (เรนเดอร์ได้แต่ bind ชื่อไม่ถึงพาเนล) — จดแยกข้อ ห้ามยุบรวม
 - **เกณฑ์หยุดทั้งเลนทันที (คงเดิม):** ⛔ ชื่อ **`ProbeControl03` โผล่ที่ไหนก็ตาม** (ป้ายหรือพาเนล) = ข้ออ้าง bind-gate ของก้อน 1 ผิด —
@@ -899,6 +918,9 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
   - **ไม่ claim ว่า nameplate ลอยหัวมีอยู่สำหรับ actor_type 2** — ผู้บริโภคชื่อที่พิสูจน์แล้วมีแค่ target panel · "ไม่เห็นป้าย" ตัดสินอะไรไม่ได้
   - **ระยะเรนเดอร์ของ client = [UNKNOWN]** — ใบนี้ลดตัวแปรด้วยการยืนติด landmark ไม่ใช่การวัดระยะ
   - "ระบุตัวไม่ได้" (รอบ #12) ≠ "ไม่เรนเดอร์" — สองประโยคนี้ห้ามใช้แทนกันในทุกผลของใบนี้
+  - **ยังไม่มีหลักฐาน static ว่า click/Tab targeting bind กับ actor_type 2 ได้เลย** — เส้น `0x51F920→LABEL_NAME`
+    พิสูจน์เฉพาะ "copy ชื่อหลัง bind แล้ว" ไม่ใช่ "bind ได้" · ถ้า rerun จบที่ "พาเนลไม่ขึ้นทุกตัว" อีก
+    **อย่ารันซ้ำรอบสาม** — chief ต้องสอบ selection path ฝั่ง client แบบ static ก่อน (จดเป็นงาน static รอบหน้าแล้ว)
 - **result:** (ผู้เทสกรอกรอบ rerun: คำตอบ (ก)(ข)(ค) · ภาพ baseline + before/after ทุกเฟรม + target panel พร้อม sha256 ·
   เวลา · sha canonical ก่อน-หลัง · path raw GAME log — *ผลรอบ #12 ถูกจดไว้ในบล็อกหัวใบแล้ว ห้ามลบ*)
 
@@ -969,6 +991,8 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
 - console label = `HYP_PF_027_NPC_HOSTILE_HOSTILE_SPAWN` · event = `npc_hostile_hypothesis_faction_pairing_sent` — เห็นชื่ออื่น = บูตผิดไฟล์ · **one-shot** (ยิงซ้ำ `..._already_sent_no_reply`)
 - ⚠️ ตอน StartGame ควรเห็น event `npc_hostile_hypothesis_player_faction1_start_game_sent` ใน console **ก่อน** ยิง — ยืนยันว่าครึ่ง entry ลงแล้ว
 - ก่อนยิง: เดินให้ NPC `0x2001` (ตัวแรกของ Port Royal ใกล้จุดเกิด — XYZ อยู่ในเฟรม SPAWN) อยู่ในเฟรมกล้อง เห็นทั้งชื่อ/ตัว NPC
+- 🔴 **โน้ตข้ามใบ (chief R119):** `0x2001` = NPC **'Navy Transfer'** = **landmark ของ GT-030 rerun** ⇒
+  **ในรอบใหญ่เดียวกัน รัน GT-030 ให้จบก่อนใบนี้เสมอ** — ใบนี้ทำให้ landmark ขึ้นศัตรู ใช้เป็นจุดอ้างอิงกลาง ๆ ต่อไม่ได้
 
 **สิ่งที่ควรเห็น (คำทำนาย — ไม่ใช่ข้อเท็จจริง):**
 - **หลังยิง 1 เฟรม:** NPC `0x2001` เปลี่ยนเป็น **ขึ้นศัตรู** — เส้นขอบแดง · กด Tab เลือกแล้วได้ **ลูกศร/แผง target สีแดง** เหมือนตอน SCENE-005 ทำกับ NPC `0x203D`

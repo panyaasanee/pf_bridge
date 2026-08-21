@@ -39,7 +39,7 @@
 ### ผล static (ลูกมือ pf-static-re — ทุกข้อมี file:line ใน repo โค้ด · ชั้น wire/composition เท่านั้น)
 
 1. **ชื่ออยู่ในไบต์ขาออกจริง 3/5 เฟรม** (SPAWN_BARE · SPAWN_AVATAR · NEGATIVE_CONTROL):
-   BasicAttr bit `0x0001` + wstring tag `0x48` UTF-16LE (`remote_player_hypothesis.py:668` · `pf_login_game_server_v141.py:590-592`)
+   BasicAttr bit `0x0001` + wstring tag `0x48` UTF-16LE (`remote_player_hypothesis.py:668` · `pf_login_game_server_v141.py:588-590`)
    · encoder **ปฏิเสธ compose ถ้า bit หาย** (`remote_player_hypothesis.py:651-652`) · mask จริง `0x030D` มี bit ชื่อ
    · **ขนาด 181 B re-derive แล้วตรงกับ "มีชื่อ" เท่านั้น** (ไม่มีชื่อจะเป็น 150 B) — cross-check 72/77/218 B ตรงหมด
    ⇒ "ไม่เห็นป้ายชื่อ" **ไม่ใช่ความล้มเหลวของ wire**
@@ -59,6 +59,32 @@
 **ข้อสรุปของรอบ:** GT-030 ไม่ต้องแก้โค้ดสักบรรทัด — แก้**โปรโตคอลรัน**: ให้ผู้เทสเดินไปที่ NPC Navy Transfer (landmark หาเจอได้)
 ก่อนยิง · ถ่าย before/after เฟรมเดียวกัน · ระบุตัวด้วยตำแหน่งเทียบ landmark + target panel ไม่ใช่ป้ายชื่อ ·
 ข้อเสนอผู้เทสเรื่อง "client console พิมพ์ identity" ทำไม่ได้ (client binary แตะไม่ได้) — วิธี landmark แทนคำตอบเดียวกัน
+
+## 3b) ผลตรวจ pf-adversary (7 ข้อ — แก้ครบก่อน push)
+
+1. **หลักฐานหล่นตอนบริโภคจดหมาย (ข้อร้ายแรงสุด):** ผู้เทสเห็น "ชายหนุ่มชุดน้ำเงิน-ขาว" ที่ X ≈ −8681
+   (ห่าง ProbePlayer01 หลัง MOVE ~159 หน่วย) — ดราฟต์แรกของรอบนี้ทำหลักฐานชิ้นเดียวที่เป็นบวกหายเงียบ ๆ
+   ⇒ เติมกลับใน result block ของ GT-030 + ขั้นตรวจซ้ำใน steps ข้อ 7 แล้ว
+2. **เพดาน teardown 180 นาที = stale:** ของจริงถูกยกเป็น **420** ตั้งแต่ 2026-08-20 (`TEMPLATE_teardown_generic.ps1:135`)
+   — แก้ในใบใหม่ + จุด stale เดิมในคิว (บรรทัด ~197/537/761) + `.claude/agents/pf-queue-author.md`
+3. **"one-shot ต่อบูต" ผิด scope:** flag `remote_player_sweep_count` อยู่ใน session state ที่สร้าง**ต่อ GAME connection**
+   (`runtime.py:509` · accept loop `pf_login_game_server_v141.py:7399`) — reconnect ในบูตเดียว = ยิงใหม่ได้ ⇒ แก้ถ้อยคำสองจุด
+4. **Navy Transfer = `0x2001` = เป้า hostility ของ GT-032:** เติมโน้ตข้ามใบทั้งสองฝั่ง + กติกา "GT-030 ก่อน GT-032 ในรอบใหญ่เดียวกัน"
+   + จำกัดข้อสรุป "ไม่เรนเดอร์" ให้ยึดจาก B/A-หลัง-MOVE เท่านั้น (เฟรม stack ตัดสินไม่ได้ — NPC อาจบังทั้งตัว)
+5. **สองมือเขียน worktree เดียว:** ดูหมวด 3c ข้างล่าง — push เฉพาะสถานะที่ตรวจแล้ว + diff ก่อน mark ready
+6. **288 B ของ SPAWN_AVATAR เป็นเลขผูกตัวละคร** (scenario ตั้งใจไม่พินหาง avatar — `avatar_tail_excluded_from_pin: true`) ⇒ annotate แล้ว
+7. citation `590-592` → `588-590` — แก้แล้ว
+
+**คำถามที่ adversary เปิดไว้ (งาน static รอบหน้า — จดลง nonclaims ของใบแล้ว):**
+ยังไม่มีหลักฐาน static ว่า click/Tab targeting **bind** กับ actor_type 2 ได้เลย — เส้น `0x51F920→LABEL_NAME`
+พิสูจน์แค่ครึ่งหลัง (copy ชื่อหลัง bind) ⇒ ถ้า rerun จบที่ "พาเนลไม่ขึ้นทุกตัว" อีก ให้สอบ selection path ก่อน ห้ามรันรอบสาม
+
+## 3c) เหตุการณ์ประหลาดของรอบ: บรรทัด append หายจาก worktree โดยไม่มีคำสั่งอธิบาย
+
+ต่อท้ายบรรทัดดัชนี R119 ลง `CHIEF_CONTINUATION.md` ด้วย `printf >>` แล้ว **verify ด้วย `tail` เห็นบรรทัดอยู่จริง**
+— สองเทิร์นถัดมา ไฟล์กลับไม่มีบรรทัดนั้น (`git status` สะอาด ไม่มี modification) ทั้งที่ระหว่างนั้นไม่มีคำสั่งใดแตะไฟล์นี้
+· ไฟล์อื่นที่แก้ในช่วงเดียวกัน (จดหมาย, คิว) อยู่ครบ · สาเหตุ = **[UNKNOWN]** (สงสัย interaction ของ harness/hook แต่พิสูจน์ไม่ได้)
+· ทางแก้ที่ใช้: เขียนซ้ำแล้ว **commit ในคำสั่งเดียวกัน** (`fd436c1`) — บทเรียน: **การ verify worktree ไม่พอ ต้อง verify จาก `git show HEAD:`**
 
 ## 4) บทเรียนเครื่องมือรอบใหญ่ #12 → ลงคิวแล้ว
 
