@@ -2,11 +2,11 @@
 
 > 📌 **R120 (2026-08-21 ~10:4x +07:00 · chief cloud) — บริโภครอบใหญ่ #12 ต่อ + จดหมายผู้ช่วย GT-040 สามฉบับ · คิวขยับ 5 จุด:**
 > ① **GT-032 → ✅ PASS** (ทั้งสองชั้น · เกณฑ์ console-event เดิมของ chief สังเกตไม่ได้โดยโครงสร้าง — แก้แล้ว ดูบล็อกผลใน entry)
-> ② **GT-033 → 🔴 BLOCKED-INPUT** (เมนู HOME→`ออก` ไม่รับคลิกสังเคราะห์ · variant C = HYP-PF-031 chat-push กำลัง build — ดูบล็อกท้าย entry)
+> ② **GT-033 → 🟢 variant C พร้อมรัน** (HYP-PF-031 merge แล้ว · ปลดโดย chief R121 — ท่าบูตในบล็อก variant C ท้าย entry · A/B ยัง BLOCKED-INPUT)
 > ③ **GT-040 → ✅ DONE** (ผู้ช่วยปิดครบ A/B/C · ผลยังไม่ผ่าน re-derive ปฏิปักษ์)
 > ④ 🆕 **GT-042** DROPTHING-REDERIVE-001 [STATIC-ON-BRIDGE] = ใบตรวจซ้ำ GT-040 + decode `0x402A20` (ท้ายไฟล์)
 > ⑤ 🆕 **GT-043** POP-SURVIVAL-001 = observation พ่วงเลนบิต `0x02` รอบใหญ่หน้า: ประชากรหายไหมหลังเฟรม count-1 (ท้ายไฟล์)
-> ที่ค้าง: **GT-030(rerun) · GT-038 · GT-041 · GT-001 · GT-042 · GT-043** · GT-033 รอ HYP-PF-031 merge · GT-034 รอ Panya เคาะ · GT-035/036 BLOCKED
+> ที่ค้าง: **GT-030(rerun) · GT-033(variant C) · GT-038 · GT-041 · GT-001 · GT-042 · GT-043** · GT-034 รอ Panya เคาะ · GT-035/036 BLOCKED
 > จดหมายรอบนี้: `notes_to_chief\FROM_CHIEF_R120_TO_ATTENDED_20260821_1055.md`
 
 > 📌 **R119 (2026-08-21 ~09:2x +07:00 · chief cloud) — บริโภคผลรอบใหญ่ #12 แล้ว คิวขยับ 3 จุด:**
@@ -307,7 +307,7 @@
 
 ---
 
-## GT-033 LOGOUT-TRANSITION A/B: response ไหนทำให้ client เปลี่ยนหน้าจริง  [🔴 **BLOCKED-INPUT (รอบใหญ่ #12 ต่อ · จ็อบ 968/969) — เมนู HOME→`ออก` ไม่รับคลิกสังเคราะห์ ⇒ client ไม่เคยส่ง LogoutVital · ห้ามอ่านเป็นผลลบของ variant ใด · ทางออก = variant C (chat push · HYP-PF-031 chief R120 กำลัง build) ดูบล็อกท้าย entry**]
+## GT-033 LOGOUT-TRANSITION A/B: response ไหนทำให้ client เปลี่ยนหน้าจริง  [🟢 **variant C พร้อมรัน (HYP-PF-031 merge แล้ว · ปลดโดย chief R121 — ท่าบูตในบล็อก variant C ท้าย entry)** · A/B ยัง 🔴 BLOCKED-INPUT (รอบใหญ่ #12 ต่อ · จ็อบ 968/969) — เมนู HOME→`ออก` ไม่รับคลิกสังเคราะห์ ⇒ client ไม่เคยส่ง LogoutVital · ห้ามอ่านเป็นผลลบของ variant ใด]
 
 > **เปิดโดย chief รอบ 100** จากผล GT-026 ท่อน B + static RE agent D (`pf_bridge\FACTPACK_R100_LOGOUT_TRANSITION_STATIC.md`)
 > 🎯 **ปมที่ต้องปลด:** client ส่ง `LogoutVital 0x1B40` (subcode 03=char-select / 01=exit) แล้ว **รอ** อะไรบางอย่างจาก server เพื่อ transition · **echo (HYP-PF-012) พิสูจน์แล้วว่าไม่ทำงาน และรอบ 100 พบกลไกว่าทำไม** — inbound handler `0x446F30` เป็น actor-vital reconcile pass ล้วน ไม่มี branch เปลี่ยน scene/state/connection · การ transition จริงขับโดย session/connection orchestrator (vtable `0xf45030`) ที่ **รอแล้ว tear down connection** (gate ที่ mode +0x28 ∈ {1,4} + timestamp +0x24)
@@ -326,7 +326,7 @@
 > 🔴 **สถานะรอบใหญ่ #12 ต่อ (จ็อบ 968/969 · บริโภคโดย chief R120):** บูต variant B ได้ เข้าแมพได้ เปิดเมนู HOME ได้
 > **แต่รายการ `ออก` ไม่รับคลิกสังเคราะห์ 4 ครั้งติด** (zoom ยืนยันพิกัด · mouse_move ก่อนคลิก · double-click — เงียบ) ·
 > `Return` ช่วยไม่ได้เพราะรายการเมนูไม่ใช่ปุ่ม default ⇒ **client ไม่เคยส่ง LogoutVital ⇒ ไม่มีผล variant ใดทั้งสิ้น — ห้ามอ่านเป็นผลลบ**
-> 🆕 **variant C (chief R120 build · HYP-PF-031 LOGOUT-CHAT-PUSH-001 · รอ gate เขียว + merge ก่อน):**
+> 🆕 **variant C (chief R120 build · HYP-PF-031 LOGOUT-CHAT-PUSH-001 · ✅ gate เขียว + merge แล้ว — ปลดโดย chief R121):**
 > ตัด HOME→`ออก` ออกจากสมการ — บูต `--logout-hypothesis-scenario scenarios\logout_hypothesis_chat_push_return_select.json`
 > แล้วพิมพ์แชต ascii 12 ตัว (ท่า trigger เดียวกับ GT-032 ที่ผู้เทสทำได้แน่ผ่าน `Return`) ⇒ server **push**
 > `ReturnSelectServerVital 0x709E` (เฟรม 48 ไบต์แช่แข็งตัวเดียวกับ variant B · sha256 pin เดิม) **โดยไม่รอ LogoutVital** ·
@@ -337,7 +337,11 @@
 > (state ที่เราไปไม่ถึงเพราะเมนูกดไม่ได้ — ตัวบล็อกเดียวกันที่ทำให้ต้องมีใบนี้) ⇒ ผลลบแยกไม่ออกว่า
 > "0x709E ไม่ใช่ trigger" หรือ "เป็น trigger เฉพาะ state ที่เราสร้างไม่ได้" · **ผลลบห้ามสรุปข้ามไปหา connection-teardown ทันที** — จดว่า client ทำอะไร (เมิน? แชตค้าง? อาการใด ๆ)
 > ② **one-shot latch เป็นราย connection** — ถ้า relog/reconnect ระหว่างเทส แชตอีกครั้งจะ push ซ้ำได้ ⇒ ถ้าเห็น push ครั้งที่สอง **จดว่ามี relog เกิดขึ้น** อย่าอ่านเป็นบั๊ก
-> ห้ามรัน variant C จนกว่าบรรทัดนี้จะถูกแทนด้วย commit sha ที่ merge แล้ว + ท่าบูตยืนยันโดย chief รอบถัดไป  [✅ **PASS ทั้งสามใบ — ⤴ ย้ายเนื้อหาเต็มไป archive แล้ว (chief รอบ 111)**]
+> ✅ **ปลดแล้ว (chief R121 · 2026-08-21 ~11:1x +07:00):** HYP-PF-031 merge เข้า `main` แล้ว (merge commit `c6146a3`) ·
+> **ท่าบูต: `git checkout 7b8002522fedeecf9bcd5ea9d0d4ec5e732e4034` (detached HEAD — บูตคำตัดสิน ไม่ใช่ branch)**
+> commit นี้มีคำตัดสินเขียวของตัวเอง (`conclusion=success` run 32444037989 · 2026-08-21T03:44:20Z UTC = ~10:44 +07:00)
+> และ tree byte-identical กับ main `c6146a3` (วัดโดย `pf_resolve_green_boot.py` — จะยืนยันสดก่อนบูตก็ได้:
+> `py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch`) · เขียวนี้คือ subset บน Actions ไม่ใช่ gate เต็ม  [✅ **PASS ทั้งสามใบ — ⤴ ย้ายเนื้อหาเต็มไป archive แล้ว (chief รอบ 111)**]
 
 เนื้อหาเต็ม (ผล · หลักฐาน · nonclaims · ข้อความตอน PENDING) อยู่ที่ `pf_bridge\archive\GAME_TEST_QUEUE_ARCHIVE_20260821_R111_GT027_028_029_CLOSED.md` — **ไม่มีอะไรถูกลบ**
 - **GT-027 DAMAGE-ON-NPC-001** ✅ PASS (รอบใหญ่ #10 rerun ที่ Panya ขับเอง) — เลขเรนเดอร์ครบ แต่ **HP ของเป้าไม่ขยับแม้แต่หน่วยเดียวทั้งที่ดาเมจสะสม 505** ⇒ รายงานที่ re-derive ได้: `ServerProject\reports\PF_NPC_HP_LINK029_GT027_RERUN_ATTENDED_RESULT_20260820.md` ⇒ เป็นที่มาของ **GT-039** ด้านล่าง
