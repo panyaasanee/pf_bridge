@@ -105,17 +105,18 @@ clone ใหม่ที่ **depth 1** แล้วรันสวีตเด�
 🔴 **`5cc0eda` อยู่ห่างจาก HEAD 38 commit ⇒ depth 53 มีมัน แต่ depth 1 ไม่มี**
 นี่คือเหตุผลที่รอบคลาวด์ก่อน ๆ เห็นแค่ใบเดียว และเป็นเหตุผลที่ **ต้องเป็นล็อกสองดอก ไม่ใช่ดอกเดียว**
 
-### 3.3 ของที่ ship (แก้ 6 ไฟล์ · **ไม่มีไฟล์ใหม่ ไม่มีการลบ**)
+### 3.3 ของที่ ship (แก้ 7 ไฟล์ · **ไม่มีไฟล์ใหม่ ไม่มีการลบ** · ตารางนี้คือรูปสุดท้ายหลังข้อ 6 แล้ว ไม่ใช่ดราฟต์แรก)
 
 | path | ทำอะไร |
 |---|---|
-| `tests/pf_preconditions.py` | คลาสใหม่ `HistoricalGitObject` — precondition ตัวแรกที่ artifact **อยู่ใน git** ไม่ใช่ข้าง ๆ git · ถามด้วย `git cat-file -e <sha>^{commit}` · คำนวณใหม่ทุกครั้ง ไม่ cache · `git` ไม่มีในเครื่อง = ตอบ "ไม่มี" ไม่ใช่พังซ้ำ · **จงใจถาม `^{commit}` ไม่ใช่ `<sha>:<path>`** เพราะ path หายทั้งที่ commit อยู่ = ประวัติถูกเขียนทับ ต้องแดงดัง ๆ ห้ามกลายเป็น skip เงียบ |
+| `tests/pf_preconditions.py` | คลาสใหม่ `HistoricalGitObject` — precondition ตัวแรกที่ artifact **อยู่ใน git** ไม่ใช่ข้าง ๆ git · เป็น **state machine สี่สถานะ (PRESENT/SHALLOW/PARTIAL/BROKEN)** ไม่ใช่บูลีน — skip ได้เฉพาะ SHALLOW/PARTIAL ที่วัดได้จริง · BROKEN (ไม่มี git · ไม่ใช่ repo · timeout · SHA ผิด) = **fail ดัง ๆ เสมอ** · ระบุทั้ง commit และ **blob ที่ผู้ใช้อ่านจริง** (partial clone มี commit แต่ไม่มี blob) · คำนวณใหม่ทุกครั้ง ไม่ cache · มี timeout กัน promisor remote ค้าง — ทั้งหมดนี้คือผลจากข้อ 6 (ดราฟต์แรกที่เป็นบูลีนถูกหักล้างทั้งก้อน) |
 | ” | สองรายการใหม่: `ORIGINAL_SCHEMA_HISTORY` (`5c200e2`) · `AUDIT_HEAD_HISTORY` (`5cc0eda`) — **แยกคีย์กัน** เพราะ clone หนึ่งอาจมีดอกหนึ่งแต่ไม่มีอีกดอก คีย์รวมจะ skip เทสที่รันได้ = อ่อนลงเงียบ ๆ |
 | `tests/test_foundation.py` | เรียก `ORIGINAL_SCHEMA_HISTORY.require(self)` ก่อนแตะ git · เลิก hard-code sha ในสตริง ใช้ค่าจาก registry |
 | `tests/test_multiplayer_readiness_audit.py` | สามใบข้างบนเรียก `AUDIT_HEAD_HISTORY.require(self)` · `test_two_runs_produce_identical_output` **ไม่ใส่การ์ด โดยตั้งใจ** — มันเทียบผลสองรอบของเครื่องมือกันเอง จริงบนทุกเครื่อง |
 | `docs/PYTEST_SKIP_PINS.json` | ปักทั้งสองคีย์ (1 ใบ · 3 ใบ) พร้อมเหตุผลและชื่อเทสครบ ⇒ census แดงทั้งสองทิศ: skip เกินก็แดง · หายไปก็แดง |
 | `tests/test_pytest_precondition_census.py` | คลาสเทสใหม่ `HistoricalGitObjectTests` — สร้าง git repo ของเล่นเอง · เทสว่าไม่ cache · revision ที่ไม่มีวันมี · โฟลเดอร์ที่ไม่ใช่ repo · `git` หาย · `require` skip พร้อม token · **และห้ามตัวเองยืนยัน `present` ของรายการจริง** (มันคือสิ่งที่ต่างกันระหว่างเครื่อง) |
 | `tools/pf_npc_hp_link_headless_replay.py` | **erratum ในหัวไฟล์เท่านั้น** (ดูข้อ 4) |
+| `tools/pf_pytest_precondition_census.py` | ความกว้างคอลัมน์คำนวณจากคีย์ที่ยาวที่สุด (D15) |
 
 ### 3.4 หลักฐาน — วัดสามความลึก ไม่ใช่เล่าลอย ๆ (สูตร gate เดิม exclusion 43 โมดูล)
 
