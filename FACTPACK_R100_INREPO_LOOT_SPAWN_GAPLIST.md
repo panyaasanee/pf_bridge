@@ -48,6 +48,53 @@ STALE.** At `pirate-force-server` HEAD `cc46a03` those lines are the
 `except Exception` / state-unchanged assertion / event + `return []`). The rule the
 line states is unchanged and still binding.
 
+## ERRATUM (chief cloud round R120/deo6qn, 2026-08-21 ~10:2x +07:00) -- GT-040 letters vs section 4.2, three corrections
+
+Source of truth for these: the three GT-040 result letters
+(`notes_to_chief/20260821_09{36,51,56}_GT040-PART-{A,B,C}-RESULTS-from-assistant.md`,
+static work on the bridge, span+sha256 attached per claim, adversarial re-derivation
+still pending -> GT-042) plus a cross-check of both repos by a static-re subagent this
+round. Section text below is left as written; grep anchors, not line numbers.
+
+**E3. The section-4.2 sentence attributing the "previous-frame collection copy
+(singleton `[0x01081A90]+0x154`)" diff to `0x446F30`'s reconcile loop (grep `01081A90`
+in section 4.2) is a MIS-ATTRIBUTION -- and it is this file's error, not CHUNK2-Q2's.**
+CHUNK2-Q2 (`drafts/CHUNK2_Q2_MOVEMENT_MERGE_FINDINGS.md`, call chain at the
+`0x5E406E call 0x5DCB40` block) located the cache-diff in `0x5DCB40`, the PRE-BIND
+merge stage inside handler `0x5E4060` -- a different child function than `0x446F30`
+(called later at `0x5E4085`). `remote_player_hypothesis.py:60-65` carries the correct
+attribution. GT-040 Part B byte-scanned `0x446F30`'s full span and found ZERO
+references to `0x01081A90` -- which refutes THIS FILE's paraphrase, and does NOT
+refute CHUNK2-Q2 (Part B never examined `0x5DCB40`). Part B's letter itself asks to
+record "CHUNK2-Q2 ไม่ตรงกับสิ่งที่โค้ดทำ" -- that wording overreaches for the same
+reason; this erratum supersedes it.
+
+**E4. `0x446F30`'s actual mechanism is now decoded (NEW, was "explicitly not
+examined"): generation stamping, not any frame-copy diff.** `inc [mgr+0x04]` per
+call; loop 1 stamps every entry present in the incoming bit-`0x02` collection; loop 2
+removes every object in `[mgr+0x24]` whose stamp is stale, unless it passes IsKindOf
+against the class descriptor at `0x0102CB04` (name not recoverable statically).
+Removal is immediate in the same call (`0x441C40`: deregister from
+`[0x01093198]+0x180`, then flag `[obj+0x70] |= 0x100000`). The whole reconcile is
+GATED: skipped entirely when the frame has no bit-`0x02` sub-object
+(`je` on `[res+0x1C]==0`). Consequence for section 4.2's TENSION: V91 membership
+IS authoritative per generation, count-1 bit-`0x02` frames DO sweep -- the missing
+piece is the scope of `[mgr+0x24]` (needs `0x402A20`, queued as GT-042; bounded
+observation queued as GT-043). Wire/static layer only; not adversarially re-derived
+yet.
+
+**E5. Gate 5 of section 5 ("no serializer pinned" for `PickupTerrainThing`) is now
+FILLED, pending GT-042 re-derivation:** vtable `0x00F3005C`, Serialize (+0x18)
+`0x005E5E30` (two fields: tag `0x14` len 4 at `+0x14`; tag `0x08` len 1 at `+0x18`),
+inbound handler (+0x1C) `0x005EF640` -- NOT a stub: it switches on the `+0x18` byte
+(`0xFC/0xFD/0xFE` -> three different client messages), so the vital is
+bidirectional, not a one-way request. GetId (+0x10) `0x005E46A0` reads
+`ds:0x0108202C`, written once at runtime -- so the registration-site row stands
+(`0xBEE5E0/E1/E5` are three addresses inside the same 24-byte thunk, no
+contradiction) and the derived id `0x4543` stays [DERIVED], statically unprovable,
+exactly as this file already flagged. Writing an encoder from these facts stays
+FORBIDDEN until GT-042 closes.
+
 **E2b (chief cloud round 118, 2026-08-21 ~08:0x +07:00) -- the replacement pin in
 E2 is stale as well.** At `pirate-force-server` `main` = `520e2cf`, re-derived by
 reading the file this round: `runtime.py:586-596` is backpack state init plus the

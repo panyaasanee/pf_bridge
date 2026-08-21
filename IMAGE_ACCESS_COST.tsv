@@ -9,3 +9,5 @@ timestamp	subsystem	what_was_needed	lane_that_stalled	workaround
 2026-08-21T04:30+07:00	loot/Door3	0x6E9D derived bits 0x04 (+0x24) และ 0x08 (+0x20) - ยังไม่มีใครเปิดอ่าน	LOOT-GROUND-OBJECT (Door 3)	no (ไม่มีอิมเมจ = ไม่มีทางรู้ transport - เข้าคิว STATIC-ON-BRIDGE)
 2026-08-21T04:30+07:00	loot/Door3	reconcile/removal pass 0x446FE1..0x4470E5 (lifetime ของ object)	LOOT-GROUND-OBJECT (Door 3) + TENSION V91 vs count-1	no (ต้องแกะจากอิมเมจ)
 2026-08-21T04:30+07:00	loot/Door4	serializer ของ PickupTerrainThing (มีแค่ชื่อ 0xF3093C + registration 0xBEE5E5)	PICKUP-REQUEST (Door 4)	no (รายงาน USE_DROP_SELL001 พิมพ์ disasm ให้ StallOperateVital แต่ไม่ให้ตัวนี้)
+2026-08-21T10:10+07:00	loot/TENSION	scope ของ [mgr+0x24] - ต้อง decode 0x402A20 (มี SEH) จึงปิด TENSION ได้ 100% - GT-040 ท่อน B ตอบทุกอย่างยกเว้นชิ้นนี้	LOOT-DESPAWN design + membership-omission	partial (GT-042 ร่างแล้ว - ผู้ช่วยบนสะพานเดินต่อได้)
+2026-08-21T10:10+07:00	loot/Door4	เลข id จริงของ PickupTerrainThing - .data เป็นศูนย์ในไฟล์ ค่าถูกสร้างตอนรัน (ds:0x0108202C) - static พิสูจน์ไม่ได้ตลอดกาล	PICKUP-REQUEST (Door 4) การยืนยัน id	no (ต้องอ่าน memory ตอน client บูต - นอกขอบเขต STATIC-ON-BRIDGE)

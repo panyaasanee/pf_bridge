@@ -298,7 +298,7 @@
 
 ---
 
-## GT-033 LOGOUT-TRANSITION A/B: response ไหนทำให้ client เปลี่ยนหน้าจริง  [🟢 **PENDING — พร้อมรันทั้งสอง variant แล้ว (chief รอบ 101 build เสร็จ · commit หลัง job 163)**]
+## GT-033 LOGOUT-TRANSITION A/B: response ไหนทำให้ client เปลี่ยนหน้าจริง  [🔴 **BLOCKED-INPUT (รอบใหญ่ #12 ต่อ · จ็อบ 968/969) — เมนู HOME→`ออก` ไม่รับคลิกสังเคราะห์ ⇒ client ไม่เคยส่ง LogoutVital · ห้ามอ่านเป็นผลลบของ variant ใด · ทางออก = variant C (chat push · HYP-PF-031 chief R120 กำลัง build) ดูบล็อกท้าย entry**]
 
 > **เปิดโดย chief รอบ 100** จากผล GT-026 ท่อน B + static RE agent D (`pf_bridge\FACTPACK_R100_LOGOUT_TRANSITION_STATIC.md`)
 > 🎯 **ปมที่ต้องปลด:** client ส่ง `LogoutVital 0x1B40` (subcode 03=char-select / 01=exit) แล้ว **รอ** อะไรบางอย่างจาก server เพื่อ transition · **echo (HYP-PF-012) พิสูจน์แล้วว่าไม่ทำงาน และรอบ 100 พบกลไกว่าทำไม** — inbound handler `0x446F30` เป็น actor-vital reconcile pass ล้วน ไม่มี branch เปลี่ยน scene/state/connection · การ transition จริงขับโดย session/connection orchestrator (vtable `0xf45030`) ที่ **รอแล้ว tear down connection** (gate ที่ mode +0x28 ∈ {1,4} + timestamp +0x24)
@@ -314,8 +314,16 @@
 - **nonclaims:** ไม่ claim ว่า response ของเรา = ของ server ต้นฉบับ (กู้ไม่ได้) · echo ถูกหักล้างพร้อมกลไกแล้ว · 0x709E เป็น candidate ไม่ใช่ข้อพิสูจน์ · field values ของ 0x709E = zero default ไม่มี producer · static ตัดสิน response shape ไม่ได้ (agent D) — นี่คือเหตุที่ต้อง attended A/B · **ยังไม่เคยมี client เห็น 0x709E แม้แต่ไบต์เดียว**
 - **evidence (chief รอบ 101):** `reports\PF_LOGOUT_RETURN_SELECT001_HYP028_20260820.md` · ledger HYP-PF-028 · `tools\verify_logout_return_select_encoder.py` (34) · `tools\pf_logout_return_select_headless_replay.py` (45)
 
-
-## GT-027 / GT-028 / GT-029  [✅ **PASS ทั้งสามใบ — ⤴ ย้ายเนื้อหาเต็มไป archive แล้ว (chief รอบ 111)**]
+> 🔴 **สถานะรอบใหญ่ #12 ต่อ (จ็อบ 968/969 · บริโภคโดย chief R120):** บูต variant B ได้ เข้าแมพได้ เปิดเมนู HOME ได้
+> **แต่รายการ `ออก` ไม่รับคลิกสังเคราะห์ 4 ครั้งติด** (zoom ยืนยันพิกัด · mouse_move ก่อนคลิก · double-click — เงียบ) ·
+> `Return` ช่วยไม่ได้เพราะรายการเมนูไม่ใช่ปุ่ม default ⇒ **client ไม่เคยส่ง LogoutVital ⇒ ไม่มีผล variant ใดทั้งสิ้น — ห้ามอ่านเป็นผลลบ**
+> 🆕 **variant C (chief R120 build · HYP-PF-031 LOGOUT-CHAT-PUSH-001 · รอ gate เขียว + merge ก่อน):**
+> ตัด HOME→`ออก` ออกจากสมการ — บูต `--logout-hypothesis-scenario scenarios\logout_hypothesis_chat_push_return_select.json`
+> แล้วพิมพ์แชต ascii 12 ตัว (ท่า trigger เดียวกับ GT-032 ที่ผู้เทสทำได้แน่ผ่าน `Return`) ⇒ server **push**
+> `ReturnSelectServerVital 0x709E` (เฟรม 48 ไบต์แช่แข็งตัวเดียวกับ variant B · sha256 pin เดิม) **โดยไม่รอ LogoutVital** ·
+> คำถามที่ใบนี้ตอบ: client transition จาก push เดี่ยว ๆ ไหม — **yes = 0x709E คือ trigger จริงและไม่ต้องการ request pairing** ·
+> no = transition ต้องการ pairing/ตัวอื่น (แล้ว variant A close-path ยังต้องรอเมนูหรือคนกดจริง ⇒ ยกเป็นใบที่ต้องมี Panya หน้าจอ)
+> ห้ามรัน variant C จนกว่าบรรทัดนี้จะถูกแทนด้วย commit sha ที่ merge แล้ว + ท่าบูตยืนยันโดย chief รอบถัดไป  [✅ **PASS ทั้งสามใบ — ⤴ ย้ายเนื้อหาเต็มไป archive แล้ว (chief รอบ 111)**]
 
 เนื้อหาเต็ม (ผล · หลักฐาน · nonclaims · ข้อความตอน PENDING) อยู่ที่ `pf_bridge\archive\GAME_TEST_QUEUE_ARCHIVE_20260821_R111_GT027_028_029_CLOSED.md` — **ไม่มีอะไรถูกลบ**
 - **GT-027 DAMAGE-ON-NPC-001** ✅ PASS (รอบใหญ่ #10 rerun ที่ Panya ขับเอง) — เลขเรนเดอร์ครบ แต่ **HP ของเป้าไม่ขยับแม้แต่หน่วยเดียวทั้งที่ดาเมจสะสม 505** ⇒ รายงานที่ re-derive ได้: `ServerProject\reports\PF_NPC_HP_LINK029_GT027_RERUN_ATTENDED_RESULT_20260820.md` ⇒ เป็นที่มาของ **GT-039** ด้านล่าง
@@ -488,7 +496,7 @@
 - ไม่ claim path คืนชีพ/ลูท/XP
 - **ผลของรอบใหญ่ #10 ที่เป็นที่มาของเลนนี้ = ชั้น client-observable เท่านั้น** (ไม่มี teardown ⇒ ไม่มีหลักฐานชั้น wire เลย) — บันทึกเต็มพร้อม sha256 ของภาพทั้งห้าใบอยู่ที่ `reports\PF_NPC_HP_LINK029_GT027_RERUN_ATTENDED_RESULT_20260820.md` (ของใหม่รอบ 111)
 
-## 🆕🔬 GT-040 DROPTHING-TRANSPORT-PROBE-001 [STATIC-ON-BRIDGE]: "วัตถุลูทบนพื้น" มี transport อยู่ในอิมเมจจริงไหม — สามจุดที่ยังไม่มีใครเปิดสักครั้ง  [🟢 **PENDING — งาน static RE บนสะพาน · ไม่ต้องบูตเกม ไม่ต้องมีคนเฝ้าจอ ไม่แตะ canonical DB ไม่จับ `LOCK_GAME`**]
+## 🆕🔬 GT-040 DROPTHING-TRANSPORT-PROBE-001 [STATIC-ON-BRIDGE]: "วัตถุลูทบนพื้น" มี transport อยู่ในอิมเมจจริงไหม — สามจุดที่ยังไม่มีใครเปิดสักครั้ง  [✅ **DONE — ผู้ช่วยของ Panya ปิดครบสามท่อน A/B/C (2026-08-21 09:36-09:56 +07:00) · ผลเต็ม: `notes_to_chief/20260821_09{36,51,56}_GT040-PART-{A,B,C}-RESULTS-from-assistant.md` · บริโภค+ตรวจสอบเอกสารโดย chief R120 · 🔴 ผลยังไม่ผ่านการ re-derive แบบปฏิปักษ์บนอิมเมจ (span+sha256 แนบครบสำหรับเดินซ้ำ) — ใบตรวจซ้ำ = GT-042 ด้านล่าง · ห้ามเขียนโมดูล/encoder จาก span พวกนี้จนกว่า GT-042 จะปิด**]
 
 **หมวด:** `STATIC-ON-BRIDGE` — งานที่ **ต้องเปิด `GameClient.local.bin`** จึงทำบน cloud clone ไม่ได้เลย
 ผู้รับงานคือคนที่นั่งอยู่หน้าสะพาน ไม่ใช่ผู้เทสหน้าจอเกม · **ใบนี้ไม่มีอะไรให้ดูบนจอเกมแม้แต่อย่างเดียว** (ดู "ชั้น ②" ด้านล่าง)
@@ -979,7 +987,20 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
 🔴 หลังหน้าต่าง Common_Death เปิด: ถ่ายภาพแล้ว **End task** ปิด client (ห้ามกด "กลับจุดเกิด"/"คืนชีพที่เดิม" — พฤติกรรมปุ่มพวกนั้นยังไม่มี server path และไม่ใช่คำถามของเทสนี้) · teardown ตามปกติ · run copy ทิ้งได้
 **nonclaims บังคับ:** สูตร/การเชื่อมเป็นของเรา · ไม่ claim ว่า HP persist (ไม่มีคอลัมน์ HP ใน DB — balance ตายพร้อม sweep) · ไม่ claim path คืนชีพ · ไม่ใช่ combat จริง (ไม่มี NPC โจมตี — น่ันคือแถว mob_aggro ที่ยัง not_started)
 
-## GT-032 NPC-HOSTILE-001: NPC ตัวแรกของ Port Royal "ขึ้นศัตรู (แดง)" ไหม — Door A ของ mob-aggro  [🟢 **PENDING — พร้อมรันหลัง commit ของ chief รอบ 99 (`87f0769` · HYP-PF-027)**]
+## GT-032 NPC-HOSTILE-001: NPC ตัวแรกของ Port Royal "ขึ้นศัตรู (แดง)" ไหม — Door A ของ mob-aggro  [✅ **PASS — รอบใหญ่ #12 ต่อ (2026-08-21 ~09:00 +07:00 · จ็อบ 966/967) · ผลเต็มบริโภคโดย chief R120**]
+
+> ✅ **ผล (chief R120 บริโภคจาก `notes_to_chief/20260821_0900_GT032-PASS-GT033-BLOCKED-input.md`):**
+> wire = 1 เฟรม `HYP_PF_027_NPC_HOSTILE_HOSTILE_SPAWN` (190 bytes · late 0.5ms · ไม่มี refusal) ·
+> client = NPC `0x2001` กด Tab เลือกเป็นศัตรูได้จริง — **แถบเป้าหมายสีแดง `HP 100/100 Lv.1` + ไอคอนศัตรู** ·
+> ไม่มีป้ายชื่อแดง (ตรงคำทำนาย — เฟรมนี้ไม่มี name bit) · ภาพ `outputs\screenshot-1787276810199-d317fb3d.jpg`
+> 🔴 **แก้เกณฑ์ที่ chief เขียนผิดเอง (สืบโดย R120):** ข้อ "ควรเห็น event `..._start_game_sent` ใน console" **สังเกตไม่ได้โดยโครงสร้าง**
+> — `self.events` เป็น list ในหน่วยความจำ ไม่มีบรรทัดไหนใน src/ พิมพ์มันออก console (ตัวพิมพ์เดียวคือ `[G>] label (N bytes)`
+> ที่ `current/pf_login_game_server_v141.py:7762` ซึ่งพิมพ์เฉพาะเฟรมขาออก) ⇒ การ grep ไม่เจอของผู้เทส = พฤติกรรมปกติ ไม่ใช่ความผิดปกติ
+> ✅ **pairing ครบทั้งสองข้างพิสูจน์ทางอ้อมได้แน่น:** dispatch มี guard `runtime.py` — ถ้า faction-1 StartGame ไม่ถูกส่ง
+> จะปฏิเสธ `npc_hostile_hypothesis_player_faction_not_applied_no_reply` และไม่มีไบต์ออก ⇒ **การที่ HOSTILE_SPAWN ออกไปได้เลย = faction-1 ลงแล้วจริง**
+> (ทางเลือก (ค) ของผู้เทส "hostility ไม่ต้องพึ่ง player faction" ตกไปด้วย arena-v2 อยู่แล้ว: NPC 6 เดี่ยว vs player faction 0 = เป็นกลาง 1,023 ครั้ง)
+> 🟡 **ค้างหนึ่งข้อ (ยกเป็นเกณฑ์แถมของรอบใหญ่หน้า ไม่เปิดใบใหม่):** แยกไม่ออกว่า "เส้นขอบแดงรอบตัว" เป็นผลของ hostility
+> หรือของการเลือกเป้า — ผู้เทสถ่ายก่อน Tab (ไม่มีขอบ) กับหลัง Tab (มีขอบ) ⇒ ครั้งหน้าถ้าแวะเลนนี้ **ถ่ายหลังยิงแต่ก่อนกด Tab** หนึ่งภาพ
 
 **ที่มา:** ดราฟต์ mob-aggro รอบ 98 แยกการสู้เป็นสามประตู — **hostility · attack · hit-lands** — และมีแค่ประตู hostility (Door A) กับ hit-lands ที่พิสูจน์บนสายแล้ว · SCENE-005 เคยทำ **ชื่อแดง + เส้นขอบแดง + แผง target แดง** บนจอจริง โดยจับคู่ faction: **ผู้เล่น 1 vs NPC 6** · แต่ arena-v2 พิสูจน์ว่า **NPC 6 เดี่ยว ๆ กับผู้เล่น faction 0 (ค่าคอนสตรัคเตอร์) = เป็นกลาง** (นับ 1,023 ครั้ง) ⇒ ต้องส่งสองข้าง เลนนี้ทำครบสองข้าง แล้วยิง NPC `0x2001` ตัวเดิมที่ GT-022/025 ทำให้ตาย
 ⭐ **nonclaim ที่ต้องติดทุกผล: faction 1 และ 6 เป็นดีไซน์ของเรา ไม่ใช่ของเซิร์ฟเวอร์ต้นฉบับ ซึ่งกู้ไม่ได้ตลอดกาล** · เลนนี้พิสูจน์ hostility เท่านั้น — **ยังไม่มี NPC โจมตี** (Door B ยังปิด)
