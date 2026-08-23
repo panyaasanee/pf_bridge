@@ -7,6 +7,7 @@
 **🎮 ต้องเปิดเกม / ต้องใช้ตา Panya** — ⏸ **พักทั้งหมดตามคำสั่ง 16:56 · 🔴 ห้ามปิดด้วยรอบ unattended** (กติกาอยู่ใน `AGENTS.md` แล้ว)
 - `GT-001` smoke recurring (🟢 pending · re-arm ค้าง) · `GT-030` (ห้ามรันรอบสาม — ทางต่อเป็น static) · `GT-033` A/B (BLOCKED-input)
 - `GT-034` (NO-RESULT) · `GT-035` / `GT-036` (BLOCKED รอ GT-034/045) · `GT-045` v2 (⏸ พร้อมบูตทันทีที่ Panya ว่าง — merge แล้ว)
+- 🆕 `GT-058` LEARN-SKILL-RESULT client-observe (⏸ PAUSED-รอ-Panya 16:56 · 🔴 BLOCKED-รอ gate เขียว+merge · branch `claude/amazing-goodall-bcc9z5` PR ยังไม่ merge — เกิดรอบ R138)
 
 **🔬 งาน static — ทำเมื่อไรก็ได้ ไม่ต้องมีคนเฝ้า ไม่ต้องจับ `LOCK_GAME` · ขนานกับรอบเทสเกมได้:**
 - ใบเก่าในไฟล์นี้: `GT-047` (TOOL-GUARD-GAP + จ็อบ 0) · `GT-049` (LOOT-CHAT-TEMPLATE · ✂️ scope-cut R132: จ็อบ 1 ปิดแล้ว — template = MESSAGE id 131 · เหลือหาตัวยิง)
@@ -2278,3 +2279,123 @@ gap ที่ต้องปิด      ไม่พบ static link จาก 0x
 ---
 
 📇 **ใบ static ใหม่ตั้งแต่ R128 เป็นต้นไปไม่อยู่ไฟล์นี้แล้ว** — อยู่ที่ **`CLIENT_RE_QUEUE.md`** (คำสั่ง Panya 18:22 · ตอนนี้: GT-053 · GT-052 · GT-050) · ใบเทสเกม attended ยังเปิดที่ไฟล์นี้เช่นเดิม
+
+---
+
+## ⭐ GT-058 LEARN-SKILL-RESULT-001 [attended, in-game]: ไคลเอนต์ "ทำอะไร" กับเฟรม CLearnSkillResultVital (0x673C) เมื่อรับ sweep 5 สเต็ป — อัปเดตหน้าต่างสกิล / ขึ้นบรรทัดแชต / ไม่เห็นอะไร / หลุด  [⏸ PAUSED-รอ-Panya (คำสั่ง 16:56 — ใบ eye-dependent ห้ามรัน/ห้ามปิด unattended) · 🔴 BLOCKED-รอ gate เขียว + merge ก่อน (เลนอยู่ branch `claude/amazing-goodall-bcc9z5` · PR ยังไม่ merge) — ห้ามบูตจนกว่า resolver จะให้ commit ที่มีเลนนี้บน `main`]
+
+> 🔴 **รอ gate เขียว + merge ก่อน:** เลน server (opt-in scenario) ยังอยู่บน branch `claude/amazing-goodall-bcc9z5` · PR ยังไม่ merge เข้า `main` — **ใบนี้ยังบูตไม่ได้** จนกว่า (ก) PR merge แล้ว และ (ข) resolver คืน BOOT_COMMIT ที่มีเลนนี้ · **และ** (ค) เลน attended ถูกปลดพักโดย Panya — ทั้งสามข้อต้องครบ
+
+**ที่มา:** ครึ่ง wire ปิดแล้วที่ **GT-050** (`CLearnSkillResultVital` codec CLOSED · จดหมาย `notes_to_chief\20260824_0055_*`):
+รูปสายจริงคือ `count u16` (tag `0x12`) + records ยาว 12 ไบต์ `(u32 tag 0x14 / u16 tag 0x12 / u32 tag 0x14)` + trailing `u8` (tag `0x0B`) ·
+msg tag `0x673C` · **version byte = 0 เป็นดีไซน์ของเรา ยัง unpinned** · 🔴 **ความหมายของฟิลด์ใน record (u32/u16/u32) ยังไม่รู้ — opaque** ·
+ครึ่งที่ใบนี้ตอบคือ **client-observable: ไคลเอนต์ทำอะไรกับเฟรมพวกนี้** (อัปเดต skill window? ขึ้นบรรทัดแชต? ไม่เห็นอะไรบนจอ? disconnect?) —
+คำตอบ "จอไม่ขึ้นอะไร" เป็นผลที่ใช้ได้จริง (bounds ว่า `0x673C` เดี่ยว ๆ ทำอะไรได้/ไม่ได้)
+
+### objective (claim เดียว)
+**เมื่อเซิร์ฟเวอร์ตอบ chat-input trigger หนึ่งครั้งด้วย sweep 5 เฟรมของ `CLearnSkillResultVital` (`0x673C`) ที่ count/trailing ต่างกันตามพินด้านล่าง ไคลเอนต์แสดงพฤติกรรมอะไรบนจอ และ NO-CRASH หรือ CRASH**
+(ใบนี้พิสูจน์พฤติกรรม client เท่านั้น — ไม่ตีความว่าฟิลด์ใน record หมายถึงอะไร)
+
+### 5 เฟรมของ sweep (พินตามลำดับที่เซิร์ฟเวอร์ต้องยิง · count = u16 record count · TRAIL = trailing u8 ที่ +0x2C ค่า 0/1)
+```
+1. LEARN_SKILL_RESULT_SWEEP_COUNT0_TRAIL0   (count=0, trail=0)
+2. LEARN_SKILL_RESULT_SWEEP_COUNT1_TRAIL0   (count=1, trail=0)
+3. LEARN_SKILL_RESULT_SWEEP_COUNT1_TRAIL1   (count=1, trail=1)
+4. LEARN_SKILL_RESULT_SWEEP_COUNT3_TRAIL0   (count=3, trail=0)
+5. LEARN_SKILL_RESULT_SWEEP_COUNT3_TRAIL1   (count=3, trail=1)
+```
+- เฟรมเว้นระยะแบบเดียวกับ stats sweep (spacing เดียวกัน) ⇒ **ต้องอัดวิดีโอ/continuous capture** ไม่ใช่ภาพนิ่งอย่างเดียว
+- 🔴 **version byte 0 เป็นดีไซน์ของเรา ยัง unpinned:** ถ้าไคลเอนต์ reject/หลุดตั้งแต่เฟรมแรก **จุดต้องสงสัยอันดับหนึ่งคือ version byte** ไม่ใช่ record semantics — จดให้ชัด
+
+### คำทำนาย (คำทำนายที่ผิด = ผล ไม่ใช่ความล้มเหลว)
+- **P1:** จอมี skill window / รายการสกิล อัปเดต (เพิ่ม/เปลี่ยน) ที่เฟรม count>0 · เฟรม count=0 อาจเป็น no-op หรือ clear
+- **P2:** ไม่มีอะไรบนจอเปลี่ยนเลยทั้ง 5 เฟรม — เป็นผลลบที่สมบูรณ์ (bounds ว่า `0x673C` เดี่ยว ๆ ไม่พอจะขยับ UI ที่ตามองเห็น)
+- **P3:** ขึ้นบรรทัดแชต/ข้อความระบบแทนที่จะแตะ skill window
+- **P4:** ไคลเอนต์ reject/หลุดที่เฟรมใดเฟรมหนึ่ง ⇒ ชี้ version byte 0 ก่อน (ดูข้อ pin ด้านบน)
+
+### 🔴 ก่อนบูต — resolve commit เขียว (ท่าเดียวกับ GT-045 · รันเครื่องมือ ไม่ใช่ก๊อป SHA)
+```
+py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch
+```
+- รันจากโฟลเดอร์ `pf_bridge` · **exit 0** + `BOOT_COMMIT: <sha>` ⇒ `git checkout <sha>` (detached HEAD ถูกแล้ว)
+- **exit 3** + `BOOT_COMMIT: NONE` ⇒ ห้ามบูต จดว่า "ใบนี้รอ gate ไม่ได้รอผู้เทส" · **exit 2** = พาธผิด/git ล้ม
+- 🔴 บรรทัด `THE GATE JUDGED ... AS FAILED` ⇒ จดลงผลเสมอ
+- **ยืนยันสี่ข้อกับ `<SHA>` ที่จะบูตจริง (ต้องครบทั้งสี่):**
+```
+git show origin/ci-status:ci/<SHA>.json
+git grep -n "learn-skill-result-hypothesis-scenario" <SHA> -- src/pirateforce_foundation/app.py
+git cat-file -e <SHA>:scenarios/learn_skill_result_hypothesis_learn_sweep.json && echo SCENARIO_PRESENT
+git grep -n "COUNT3_TRAIL1" <SHA> -- src/pirateforce_foundation/ scenarios/
+```
+1. ไฟล์คำตัดสินมี `"conclusion": "success"` และ `"sha"` ตรงชื่อไฟล์ (success = subset บน Actions ไม่ใช่ gate เต็ม)
+2. `git grep` เจอ flag จริง — **ห้ามใช้ `--help` เป็นหลักฐาน** (คืน 0 บรรทัดผ่านสะพาน — บทเรียนรอบใหญ่ #7 ข้อ 6)
+3. เห็นคำว่า `SCENARIO_PRESENT`
+4. เจอ label สเต็ปที่ 5 (`COUNT3_TRAIL1`) ในซอร์ส — ยืนยันว่าเป็น sweep 5 สเต็ปจริง ไม่ใช่เลนเก่า
+- **อ่านค่า pin ต่อเฟรม (label + sha256) จาก manifest ของ scenario ที่ merge แล้ว** (จดหมาย `20260824_0055_*` เป็นแหล่งอ้างอิง wire shape · **ค่า sha ตัวจริงอ่านจาก scenario ตอน merge — ห้ามฝังเลขเดาในใบนี้**)
+- ไม่ครบสี่ข้อ + ยังไม่ได้ค่า pin = **ห้ามบูต** ใบนี้อยู่ BLOCKED ต่อ
+
+### db (สำเนาเสมอ ห้ามแตะตัวจริง)
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-058_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt058.sqlite3
+```
+- เทียบ sha256 canonical กับ `CANON_SHA.txt` **ก่อนเริ่มและหลังจบ ต้องตรงทั้งสองครั้ง** (canonical เปิดอ่านไม่ได้ตลอดรอบ)
+- เลนนี้ **read-only by design** — DB สำเนา (`run_gt058.sqlite3`) ต้อง **ไบต์ตรงกันก่อน-หลัง** ด้วย (ดู pass criteria ชั้น 1)
+- ตำแหน่งตัวละครรีเซ็ตกลับจุดเกิดทุกบูต (สำเนา DB ใหม่ทุกครั้ง — เผื่อเวลาเดินไว้)
+
+### server args (เป๊ะ — opt-in เท่านั้น · `production_allowed=false`)
+```
+py -3 -u -m pirateforce_foundation.app --db state\run_gt058.sqlite3 --learn-skill-result-hypothesis-scenario scenarios\learn_skill_result_hypothesis_learn_sweep.json
+```
+- **opt-in เท่านั้น ห้าม default-on** (บังคับในโค้ด: mutually exclusive กับ scenario โหมดอื่นทุกโหมด + ต้องมี `--db` ชี้ไฟล์ที่มีจริง + `production_allowed=false`)
+- หัวหน้าต่าง console ของ server จะขึ้น mode `learn-skill-result-hypothesis` — ใช้เช็คว่าบูตถูกโหมด
+- ⚠️ **การยิงมาจาก chat trigger หนึ่งบรรทัดเท่านั้น** — sweep 5 เฟรมออกหลังจากเซิร์ฟเวอร์รับ chat-input frame ที่ตรง predicate
+
+### 🔴 ตัว trigger แชต — 12 ตัวอักษร printable ASCII เป๊ะ (บทเรียนที่เคยเสียเวลาโปรเจกต์)
+- predicate ของ chat trigger คือ **12 ตัวอักษร printable ASCII พอดี** — สั้นกว่านั้นถึงเซิร์ฟเวอร์แต่ **เงื่อนไขเงียบ ๆ ไม่ผ่าน** (ไม่มี error) ⇒ sweep ไม่ออกและดูเหมือนเลนพัง
+- **อ่านสตริงจริง 12 ตัวจากซอร์สก่อนพิมพ์:** `git grep -n "trigger" <SHA> -- src/pirateforce_foundation/learn_skill_result*.py` — จดสตริงเป๊ะ นับให้ครบ 12 ตัว
+- 🔴 **ตัวอักษรที่พิมพ์ตอนช่องแชตไม่โฟกัส = hotkey** ⇒ ต้อง **คลิกเข้าช่องแชตให้โฟกัสก่อน** แล้วค่อยพิมพ์ · พิมพ์ครบ 12 ตัวแล้วกด Enter หนึ่งครั้ง
+
+### steps
+**ก่อนเริ่ม:** ถือ `LOCK_GAME` · จด boot stamp · เทียบ sha canonical · copy DB สองใบตามบล็อก db
+1. เปิด server ก่อน client เสมอ (`Get-NetTCPConnection -State Established` พอร์ต 10188/10189 = 0 ก่อนเปิด client) — ขึ้น mode `learn-skill-result-hypothesis`
+2. เปิด client (`Invoke-CimMethod Win32_Process Create`) → เลือกเซิร์ฟเวอร์ → dialog PVP ปุ่มซ้าย → หน้าเลือกตัวละคร
+   → **ปุ่มกลางสุดจาก 5 ปุ่มแถวล่าง = เข้าเกม** (ปุ่มซ้ายสุด = ลบตัวละคร **ห้ามกด**)
+3. เข้าแมพ เห็น HP/minimap/ชื่อแมพ/`[ระบบ] : Pirate Force local server online` → **ถ่าย S0** (สภาพก่อนยิง · ถ้ามีปุ่ม/หน้าต่างสกิล เปิดค้างไว้ให้เห็น baseline)
+4. **เริ่มอัดวิดีโอ/continuous capture ก่อน** (เฟรม spacing แบบ stats sweep — ภาพนิ่งพลาดได้)
+5. **คลิกช่องแชตให้โฟกัส** → พิมพ์ trigger 12 ตัว ASCII (อ่านจากซอร์สตามบล็อกด้านบน · นับให้ครบ 12) → กด Enter หนึ่งครั้ง
+6. **มองจอต่อเนื่อง ~30 วินาที** ระหว่าง sweep 5 เฟรมทยอยออก → ถ่าย **S1..S5** ทีละสเต็ป (COUNT0_TRAIL0 → ... → COUNT3_TRAIL1)
+   จดต่อสเต็ป: หน้าต่างสกิล/รายการสกิลเปลี่ยนไหม · มีบรรทัดแชต/ข้อความระบบไหม · ไม่มีอะไรเลยไหม
+7. **จับ NO-CRASH / CRASH ชัดเจน:** client ยังอยู่และตอบสนอง (ขยับกล้อง `Q/E` ได้) = NO-CRASH · ถ้าหลุด/ค้าง/หน้าต่างปิด = CRASH + จดว่าหลุดที่เฟรมที่เท่าไร (ชี้ version byte 0 ก่อน)
+8. ออกจากเกม: **X** มุมขวาบน (ตรวจก่อนว่าหน้าต่างแอปตัวเองไม่บังปุ่ม X) → dialog ยืนยัน → ปุ่มซ้าย
+9. ปิด server เก็บ raw GAME log + console out/err → `PRAGMA integrity_check;`
+10. **teardown เสมอ** แม้เลิกกลางคัน (boot stamp เกิน 420 นาที template ปฏิเสธ exit 12 — เพดานยกจาก 180 เมื่อ 2026-08-20 · `TEMPLATE_teardown_generic.ps1:135` · ใช้ `staged\TOOL_stop_stale_server.ps1` สำหรับแท่นที่ถูกทิ้งข้ามชั่วโมง)
+11. เทียบ sha256 canonical กับ `CANON_SHA.txt` อีกครั้ง ต้องเท่าเดิม
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+**ชั้น (1) wire/DB (ไม่ต้องใช้สายตาคนหน้าจอ · ทำ headless ได้)**
+- raw GAME log มี **5 เฟรม `0x673C`** ที่เซิร์ฟเวอร์ dispatch จริง เรียงตามลำดับพิน:
+  `..._COUNT0_TRAIL0` → `..._COUNT1_TRAIL0` → `..._COUNT1_TRAIL1` → `..._COUNT3_TRAIL0` → `..._COUNT3_TRAIL1` อย่างละ 1 ครั้ง
+- แต่ละเฟรมตรง **label + sha256 พิน** ที่อ่านจาก manifest ของ scenario ตอน merge (ค่า pin มาจาก scenario — ไม่ใช่เลขเดาในใบ) · เก็บ hexdump ทั้งไฟล์ **ห้ามลบ**
+- โครงสาย (GT-050-proven) ที่ต้องเห็นในทุกเฟรม: `count u16 tag 0x12` · record 12 ไบต์ `(u32 0x14 / u16 0x12 / u32 0x14)` · trailing `u8 0x0B` · msg tag `0x673C`
+- **DB สำเนา `run_gt058.sqlite3` ไบต์ตรงกันก่อน-หลัง** (เลน read-only by design) + `PRAGMA integrity_check` = `ok`
+- `sessions`: `count(*) WHERE selected_character_id IS NOT NULL` +1 ต่อการเข้าเกมหนึ่งครั้ง · sha256 canonical ก่อน-หลังตรงกัน
+- **ชั้นนี้ตอบไม่ได้:** จอทำอะไร (การมีเฟรมออกไม่พิสูจน์ว่าไคลเอนต์วาด/อัปเดต/หลุด) ⇒ **ห้ามอ้างชั้นนี้แทนชั้น (2)**
+
+**ชั้น (2) client-observable (ต้องมีคนหน้าจอ)**
+- ภาพ **S0..S5** + วิดีโอต่อเนื่องช่วง sweep · sha256 ทุกไฟล์
+- ตอบเป็นภาษาคน **ต่อสเต็ป:** หน้าต่างสกิล/รายการเปลี่ยนไหม · บรรทัดแชต/ข้อความระบบขึ้นไหม · ไม่มีอะไรเลยไหม
+- **NO-CRASH / CRASH verdict ชัดเจน** (ถ้า CRASH: หลุดที่เฟรมที่เท่าไร)
+- **ชั้นนี้ตอบไม่ได้:** ภาพหน้าจอไม่ใช่หลักฐานว่าเฟรมออกจากเซิร์ฟเวอร์จริง **ห้ามอ้างชั้นหนึ่งแทนอีกชั้น**
+
+### 🔴 ผลลบมีค่าเท่าผลบวก
+- **wire ครบ 5 เฟรมแต่จอไม่ขึ้น/ไม่เปลี่ยนอะไรทั้ง 5 สเต็ป** = ผลลบที่สมบูรณ์ **ไม่ใช่ FAIL** ⇒ bounds ว่า `0x673C` เดี่ยว ๆ ไม่พอจะขยับ UI ที่สังเกตได้ · redirect: ต้องหา trigger/สถานะประกอบอื่น (จดว่าเลนถัดไปควรลองอะไร)
+- **NO-CRASH โดยไม่มีการเปลี่ยนบนจอ** = ยืนยันว่า client รับเฟรมได้ (version byte 0 ผ่าน) แต่ไม่มี UI hook ที่ตามองเห็น — เป็นข้อเท็จจริงที่ใช้ได้
+- **CRASH ที่เฟรมแรก** = ชี้ version byte 0 (ดีไซน์เรา ยัง unpinned) ก่อน record semantics
+
+### nonclaims (ติดไปกับผลทุกกรณี)
+- **ไม่ตีความว่าฟิลด์ใน record (u32/u16/u32) หมายถึงอะไร** — semantics ยัง opaque · ใบนี้วัดพฤติกรรม client เท่านั้น
+- **ไม่ claim ว่าเซิร์ฟเวอร์ต้นฉบับ (ปิดไปแล้ว กู้ไม่ได้ตลอดกาล) เคยใช้เฟรมนี้แบบนี้** — การประกอบเฟรม/version byte เป็นดีไซน์ของเรา
+- **ไม่ claim ว่า count/trailing ที่ต่างกัน map กับความหมายเชิงเกมใด ๆ** — sweep นี้ทดสอบ tolerance/พฤติกรรม ไม่ใช่ decode ความหมาย
+- **ไม่พิสูจน์ทิศทาง (client ส่งกลับหรือไม่)** — ใบนี้ inbound-only observe
+- **result:** (ผู้เทสกรอก: ภาพ S0..S5 + วิดีโอ พร้อม sha256 · คำตอบต่อสเต็ป "จอเปลี่ยนอะไร" ภาษาคน · NO-CRASH/CRASH verdict (+เฟรมที่หลุดถ้ามี) · path raw GAME log + label/sha 5 เฟรม · เวลา · sha canonical ก่อน-หลัง · sha `run_gt058.sqlite3` ก่อน-หลัง)
