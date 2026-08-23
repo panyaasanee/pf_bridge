@@ -1,5 +1,14 @@
 # GAME TEST QUEUE — คิวเทสในเกม
 
+> 📌 **R124 (2026-08-23 ~10:4x +07:00 · chief cloud) — GT-045 ปลดจาก "รอ chief" · คิวขยับใบเดียว:**
+> **GT-045 → 🟡 BLOCKED-รอ-merge** — เลนเซิร์ฟเวอร์สร้างแล้ว (HYP-PF-032 GROUND-LOOT-001 · PR รอ gate)
+> ชื่อจริง: flag `--ground-loot-hypothesis-scenario` · scenario `scenarios/ground_loot_hypothesis_bit08_render.json`
+> (ชื่อเสนอเดิม `groundloot-render-*` **เลิกใช้**) · ดีไซน์จริง: สองเฟรม เฟรมละหนึ่ง element ยิงเองตอนเข้าแมพ —
+> **อ่านใบ GT-045 ฉบับแก้ใหม่ทั้งใบก่อนบูต** (steps/พิกัด/pass criteria เปลี่ยนหมด)
+> ที่ค้างไม่เปลี่ยน: **GT-047 → GT-046 → GT-045 (เมื่อ merge) → GT-001 re-arm** · GT-034/035/036 รอคำเคาะ
+> ⚠️ erratum เวลา: ทุกที่ที่ R123 เขียน "~16:xx +07:00" ให้อ่านเป็น **~09:0x +07:00** (แปลงโซนซ้ำ — ดูจดหมาย R124)
+> จดหมายรอบนี้: `notes_to_chief\FROM_CHIEF_R124_TO_ATTENDED_20260823_1030.md`
+
 > 📌 **R123 (2026-08-23 ~16:xx +07:00 · chief cloud) — บริโภครอบใหญ่ #13 (14 ใบ) · flip 11 รายการ + ใบใหม่ 3:**
 > ✅ PASS: **GT-038** (selection ไม่ใช่เงื่อนไขของเลข) · **GT-041** (no-rejection · relog = last-wire) · **GT-043** (survival · 0–3.524s unobserved) · **GT-042** (re-derive + erratum handler len 47) · **GT-044** (BG0001 = scene id 1) · **GT-001** (smoke `cf81730` · CANON_SHA ใหม่ `23FD885A…`)
 > 🟡 **GT-034 NO-RESULT** (ไปถึงพิกัดคาดแต่ไม่เห็นตัว — GT-035/036 คง BLOCKED · รอ Panya เคาะทางไป) · 🟡 **GT-033C** ผลลบมีค่า (ไม่ transition · A/B ยัง BLOCKED-INPUT) · 🟠 **GT-030 CLIENT NO-RENDER** — ห้ามรันรอบสาม
@@ -1542,7 +1551,7 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
 - **result:** (ผู้รับงาน static บนสะพานกรอก: เลข id + เส้นทาง join · path TSV + sha256 · sha อิมเมจก่อน-หลัง · เวลา)
 
 
-## 🆕⭐ GT-045 GROUNDDROP-RENDER-001 [attended, in-game]: บิต `0x08` ของ `0x5F85B0` คือ "วัตถุลูทบนพื้น" ไหม — ยิงเรคคอร์ดที่มีพิกัดโลกเข้าไปแล้วดูว่าไคลเอนต์วาดอะไร  [🔴 **BLOCKED — รอ chief สร้างเลนเซิร์ฟเวอร์ใหม่ + รอ gate เขียว + merge ก่อน · ห้ามบูตจนกว่าจะครบ** · สิทธิ์เขียน encoder จาก span นี้ปลดแล้วโดย GT-042 PASS (R123)]
+## 🆕⭐ GT-045 GROUNDDROP-RENDER-001 [attended, in-game]: บิต `0x08` ของ `0x5F85B0` คือ "วัตถุลูทบนพื้น" ไหม — ยิงเรคคอร์ดที่มีพิกัดโลกเข้าไปแล้วดูว่าไคลเอนต์วาดอะไร  [🟡 **BLOCKED-รอ-merge — เลนสร้างแล้ว (R124 · HYP-PF-032 GROUND-LOOT-001) · รอ gate เขียว + merge เข้า `main` ก่อนบูต** · สิทธิ์เขียน encoder จาก span นี้ปลดแล้วโดย GT-042 PASS (R123)]
 
 **ที่มา:** ร่างผู้ช่วย `notes_to_chief\20260823_0805_GT-TICKET-DRAFT-ground-drop-and-pickup-direction.md`
 (อ่านคู่กับหลักฐานวัดเฟรม `notes_to_chief\20260823_0800_GROUND-DROP-FRAME-MEASUREMENT-pickup-is-not-contact.md`)
@@ -1550,12 +1559,20 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
 ของหาย + บรรทัด `ได้รับ [Red leaves Hammer] * 1` เกิดเฟรมเดียวกัน ⇒ คำถามเดิม "เดินทับ/กดปุ่ม" ตายทั้งคู่
 ใบนี้ตอบคำถามที่แคบลง: **ไคลเอนต์รับเรคคอร์ดบิต `0x08` แล้ววาดของบนพื้นออกมาไหม**
 
-### 🔴🔴 ทำไม BLOCKED — สองสิ่งที่ต้องเกิดก่อน (ห้ามบูตถ้าไม่ครบ)
-1. **เลนเซิร์ฟเวอร์ใบนี้ยังไม่มี** — chief ต้องสร้าง scenario opt-in ที่ยิง element เดียวของ `0x5F85B0`
-   ที่ mask `0x10 | 0x02` (พิกัด + dword id) เข้าไปตอน scene-load · เลนนี้ **ยังไม่ได้เขียน**
-2. **ต้องผ่าน gate เขียว + merge เข้า `main`** ก่อน — เหมือน GT-034/GT-041 (บูตคำตัดสิน ไม่ใช่ branch)
+### 🟡 สถานะ BLOCKED-รอ-merge (อัปเดต R124 — เหลือข้อเดียว)
+1. ✅ **เลนเซิร์ฟเวอร์สร้างแล้ว (R124):** HYP-PF-032 GROUND-LOOT-001 — flag จริงคือ
+   `--ground-loot-hypothesis-scenario` · scenario จริงคือ `scenarios/ground_loot_hypothesis_bit08_render.json`
+   (ชื่อที่เสนอไว้เดิม `groundloot-render-...`/`groundloot_render_...bit08.json` **เลิกใช้** — เปลี่ยนตาม house convention)
+   ดีไซน์ที่ลงจริง: **สองเฟรม เฟรมละหนึ่ง element** (ใกล้ก่อน แล้วไกลตามใน 0.10 วินาที) ออกอัตโนมัติที่
+   TargetPos แรกหลัง runtime ack ครั้งเดียวต่อเซสชัน — ผู้เทสไม่ต้องกดอะไรเพื่อยิง
+   (เฟรมละ element เดียวโดยเจตนา: V43 เคยวัดจริงว่า collection หลาย record ในเฟรมเดียวทำ client ยิง
+   `ErrorData=28317` — adversary ของ R124 จับดราฟต์ count=2 ได้ก่อน commit) ·
+   element mask `0x12` (`0x10` พิกัด + `0x02` dword `2600001`)
+   พิกัดใกล้ = จุดเกิด +30X `(-9209.95703125, -2830.045166015625, 223.29209899902344)` ·
+   พิกัดไกล = จุดเกิด +800X `(-8439.95703125, -2830.045166015625, 223.29209899902344)`
+2. 🔴 **ยังต้องรอ: gate เขียว + merge เข้า `main`** — เหมือน GT-034/GT-041 (บูตคำตัดสิน ไม่ใช่ branch)
 ✅ เงื่อนไขที่สามเดิม (GT-042 ต้อง PASS เพื่อปลดสิทธิ์เขียน encoder) **ครบแล้ว** — GT-042 PASS 2026-08-23 (+erratum handler len 47) · สิทธิ์ปลดเฉพาะแถวที่รอด re-derive ซึ่งรวม `0x5F85B0` ทั้งตาราง
-🔴 **ปล่อยใบนี้ไว้ที่เดิม ห้ามลบ ห้ามย้าย** จนกว่าทั้งสองข้อจะครบ · ถ้าใครเปิดคิวมาเจอใบนี้ยัง BLOCKED = ยังไม่ถึงคิวมัน
+🔴 **ปล่อยใบนี้ไว้ที่เดิม ห้ามลบ ห้ามย้าย** จนกว่า merge จะเกิด · ถ้าใครเปิดคิวมาเจอใบนี้ยัง BLOCKED-รอ-merge = เช็ค resolver ก่อน ถ้าได้ commit ที่มีเลนนี้ = ถึงคิวมันแล้ว
 
 ### สมมติฐาน (จาก GT-040 ท่อน A · เฉพาะตารางฟิลด์ของ `0x5F85B0` ผ่าน re-derive ปฏิปักษ์ใน GT-042 — VA ประกอบอื่น (`0xF313C4`/`0x5F34D0`) มาจาก GT-040 ยังไม่ผ่านปฏิปักษ์ · verify sha ก่อนพึ่งเสมอ)
 `0x5F85B0` (บิต `0x08` / obj `+0x20`) = list แบบ dirty-mask · element ยาว `0x2C` ไบต์ · vtable `0xF313C4`
@@ -1563,7 +1580,9 @@ float 3 ตัวที่ `+0x1C/+0x20/+0x24` = ตำแหน่งในโ�
 mask: `0x02`->`+0x14` tag `0x14` · `0x04`->`+0x18` tag `0x0F` · `0x08`->`+0x1B` tag `0x05` · `0x10`->ตำแหน่ง · `0x20`->`+0x1A` tag `0x08`
 
 ### objective (claim เดียว)
-**เมื่อเซิร์ฟเวอร์ส่ง element เดียวของ `0x5F85B0` (mask `0x10|0x02`) ที่พิกัดใกล้ตัวผู้เล่น ไคลเอนต์วาดป้ายชื่อ/โมเดลบนพื้นที่จุดนั้นหรือไม่**
+**เมื่อเซิร์ฟเวอร์ส่ง element ของ `0x5F85B0` (mask `0x10|0x02`) ที่พิกัดใกล้ตัวผู้เล่น ไคลเอนต์วาดป้ายชื่อ/โมเดลบนพื้นที่จุดนั้นหรือไม่**
+(ดีไซน์จริง R124: สองเฟรม เฟรมละหนึ่ง element — ใกล้ +30X และไกล +800X ห่างกัน 0.10s — เพื่อแยก "ไม่วาด" จาก
+"วาดนอกจอ" · เฟรมละ element เดียวตามบทเรียน V43 กัน `ErrorData=28317` จาก collection หลาย record)
 
 ### คำทำนาย (คำทำนายที่ผิด = ผล ไม่ใช่ความล้มเหลว)
 - **P1 — ถ้าสมมติฐานถูก:** จอขึ้นป้ายชื่อสีขาวลอยเหนือพื้น และ/หรือ โมเดลชิ้นเล็กวางบนพื้น ที่พิกัดที่ยิง
@@ -1579,14 +1598,14 @@ py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch
 - **ยืนยันสามข้อกับ `<SHA>` ที่จะบูตจริง (ต้องครบสามข้อ · flag/scenario ชื่อจริงตามที่ chief ตั้งตอนสร้างเลน):**
 ```
 git show origin/ci-status:ci/<SHA>.json
-git grep -n "groundloot-render-hypothesis-scenario" <SHA> -- src/pirateforce_foundation/app.py
-git cat-file -e <SHA>:scenarios/groundloot_render_hypothesis_bit08.json && echo SCENARIO_PRESENT
+git grep -n "ground-loot-hypothesis-scenario" <SHA> -- src/pirateforce_foundation/app.py
+git cat-file -e <SHA>:scenarios/ground_loot_hypothesis_bit08_render.json && echo SCENARIO_PRESENT
 ```
 1. ไฟล์คำตัดสินมี `"conclusion": "success"` และ `"sha"` ตรงชื่อไฟล์ (`success` = subset บน Actions ไม่ใช่ gate เต็ม)
 2. `git grep` เจอ flag จริง — **ห้ามใช้ `--help` เป็นหลักฐาน** (คืน 0 บรรทัดผ่านสะพาน — บทเรียนรอบใหญ่ #7 ข้อ 6)
 3. เห็นคำว่า `SCENARIO_PRESENT`
 - ไม่ครบสามข้อ = **ห้ามบูต** ใบนี้อยู่ BLOCKED ต่อ
-🔴 **ชื่อ flag/scenario ข้างบนเป็น "ชื่อที่เสนอ"** — chief ยืนยัน/แก้ชื่อจริงตอนสร้างเลน แล้วอัปเดตบล็อกนี้ก่อนปลด BLOCKED
+✅ **ชื่อ flag/scenario ข้างบนเป็นชื่อจริงแล้ว (R124 ยืนยันจากโค้ดที่ commit)** — ไม่ใช่ชื่อเสนออีกต่อไป
 
 ### db (สำเนาเสมอ ห้ามแตะตัวจริง)
 ```
@@ -1596,24 +1615,32 @@ copy state\pirateforce.sqlite3 state\run_gt045.sqlite3
 - เทียบ sha256 canonical กับ `CANON_SHA.txt` **ก่อนเริ่มและหลังจบ ต้องตรงทั้งสองครั้ง** (canonical เปิดอ่านไม่ได้ตลอดรอบ)
 - เลนนี้ควรเป็น read-only session ถ้าออกแบบได้ · ตำแหน่งตัวละครรีเซ็ตกลับจุดเกิดทุกบูต (สำเนา DB ใหม่ทุกครั้ง)
 
-### server args (เป๊ะ — placeholder จนกว่า chief ยืนยันชื่อจริง)
+### server args (เป๊ะ — ชื่อจริง ยืนยันแล้ว R124)
 ```
-py -3 -u -m pirateforce_foundation.app --db state\run_gt045.sqlite3 --groundloot-render-hypothesis-scenario scenarios\groundloot_render_hypothesis_bit08.json
+py -3 -u -m pirateforce_foundation.app --db state\run_gt045.sqlite3 --ground-loot-hypothesis-scenario scenarios\ground_loot_hypothesis_bit08_render.json
 ```
-- **ต้องเป็น opt-in flag เท่านั้น ห้าม default-on** · flag นี้ห้ามใช้ร่วมกับ scenario โหมดอื่น
-- ⚠️ **ไม่มี chat trigger** — ไม่ต้องพิมพ์อะไร · ตัวอักษรตอนช่องแชตไม่โฟกัส = hotkey ⇒ ใช้แค่ `W/A/S/D`, `Q/E`, `spacebar`
+- **opt-in เท่านั้น ห้าม default-on** (บังคับในโค้ด: mutually exclusive กับ scenario โหมดอื่น + ต้องมี `--db` ชี้ไฟล์ที่มีจริง)
+- หัวหน้าต่าง console ของ server จะขึ้น mode `ground-loot-hypothesis` — ใช้เช็คว่าบูตถูกโหมด
+- ⚠️ **ไม่มี chat trigger และไม่มีปุ่มยิง** — เฟรมออกเองที่ TargetPos แรกหลัง runtime ack (= เกือบทันทีที่เข้าแมพ)
+  ครั้งเดียวต่อเซสชัน · ตัวอักษรตอนช่องแชตไม่โฟกัส = hotkey ⇒ ใช้แค่ `W/A/S/D`, `Q/E`, `spacebar`
 
 ### steps
 **ก่อนเริ่ม:** ถือ `LOCK_GAME` · จด boot stamp · เทียบ sha canonical · copy DB สองใบตามบล็อก db
 1. เปิด server ก่อน client เสมอ (`Get-NetTCPConnection -State Established` พอร์ต 10188/10189 = 0 ก่อนเปิด client)
 2. เปิด client (`Invoke-CimMethod Win32_Process Create`) → เลือกเซิร์ฟเวอร์ → dialog PVP ปุ่มซ้าย → หน้าเลือกตัวละคร
    → **ปุ่มกลางสุดจาก 5 ปุ่มแถวล่าง = เข้าเกม** (ปุ่มซ้ายสุด = ลบตัวละคร **ห้ามกด**)
-3. เข้าแมพ เห็น HP/minimap/ชื่อแมพ → **ถ่าย G0 (BEFORE) ให้เห็น X/Y บน HUD และพื้นที่รอบตัว** ก่อนเลนยิง element
-4. เลนยิง **element ที่พิกัดที่ 1 (ใกล้ตัว ในระยะกล้อง)** → **จับเวลาที่ยิง** → ถ่าย **G1** ที่มุมเดิม (เทียบกับ G0)
-5. **รอ/เดินเข้าไปดูจุดนั้น** → ถ่าย **G1b** — ถ้ามีอะไรโผล่ ให้เห็นทั้งป้ายชื่อและ/หรือโมเดลจากระยะใกล้
-6. เลนยิง **element ที่พิกัดที่ 2 (ห่างออกไป นอกกล้องแรกเข้า)** → หมุน `Q/E`/เดินไปหา → ถ่าย **G2**
-   (สองพิกัดเพื่อแยก "ไม่วาด" ออกจาก "วาดแต่อยู่นอกจอ")
+3. เข้าแมพ เห็น HP/minimap/ชื่อแมพ → **ถ่าย G0 ทันทีที่ควบคุมได้** ให้เห็น X/Y บน HUD และพื้นที่รอบตัว
+   ⚠️ เฟรม element **ออกไปแล้วตั้งแต่วินาทีแรกที่เข้าแมพ** (ยิงเองที่ TargetPos แรก) — G0 จึงไม่ใช่ "ก่อนยิง"
+   แต่คือ "มุมกว้างที่จุดเกิด" · **จดเวลาที่เข้าแมพ** ใช้แทนเวลายิง
+4. **พิกัดใกล้ (+30X จากจุดเกิด · HUD ควรอ่าน X≈-9210, Y≈-2830):** หมุนกล้อง `Q/E` กวาด 360° หาอะไรที่โผล่
+   บนพื้น/ป้ายชื่อลอย → ถ่าย **G1** มุมที่เห็น (หรือมุมที่ควรเห็นแล้วไม่มี)
+5. **เดินเข้าไปถึงจุดนั้น** (`W/A/S/D` ไปทาง +X ประมาณ 30 หน่วย) → ถ่าย **G1b** ระยะใกล้ —
+   ถ้ามีอะไรโผล่ ให้เห็นทั้งป้ายชื่อและ/หรือโมเดลชัด ๆ
+6. **พิกัดไกล (+800X · HUD ควรอ่าน X≈-8440, Y≈-2830):** เดินต่อไปทาง +X จนถึง → ถ่าย **G2**
+   (สองพิกัดเพื่อแยก "ไม่วาด" ออกจาก "วาดแต่อยู่นอกจอ/นอกระยะ culling" — ถ้าตัวใกล้วาดแต่ตัวไกลตอนแรกไม่วาด
+   แล้วมาวาดเมื่อเดินเข้าใกล้ = จดแยกเป็นเรื่อง culling)
 7. บันทึกว่า element อยู่ค้างหรือถูกลบเอง — ถ้าหายเอง จับเวลาว่าอยู่กี่วินาที (เทียบกับ 0.633 s ในหลักฐานคลิป)
+   ⚠️ เซิร์ฟเวอร์เรา **ไม่เคยส่งเฟรมลบ/หมดอายุ** — ถ้าของหายเอง นั่นคือพฤติกรรม client ล้วน จดให้ชัด
 8. ออกจากเกม: **X** มุมขวาบน (ตรวจก่อนว่าหน้าต่างแอปตัวเองไม่บังปุ่ม X) → dialog ยืนยัน → ปุ่มซ้าย
 9. ปิด server เก็บ raw GAME log + console out/err → `PRAGMA integrity_check;`
 10. **teardown เสมอ** แม้เลิกกลางคัน (boot stamp เกิน 420 นาที template ปฏิเสธ exit 12 — เพดานยกจาก 180 เมื่อ 2026-08-20 ·
@@ -1622,8 +1649,14 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt045.sqlite3 --groundloot
 
 ### pass criteria — สองชั้น แยกกันเด็ดขาด
 **ชั้น (1) wire/DB (ไม่ต้องใช้สายตาคนหน้าจอ)**
-- raw GAME log มีเฟรมที่เซิร์ฟเวอร์เขียน element ออกไปจริง **ทั้งสองพิกัด** — ไบต์ตรงกับที่เลนตั้งใจส่ง
-  (id, mask `0x10|0x02`, float 3 ตัวของแต่ละพิกัด) · เก็บ hexdump ทั้งไฟล์ **ห้ามลบ**
+- raw GAME log มี **สองเฟรม** ที่เซิร์ฟเวอร์เขียน element ออกไปจริง (เฟรมละพิกัด · ใกล้ก่อน ไกลตาม 0.10s) — ไบต์ตรง pin (pc เฟรมละ 44 ไบต์):
+  เฟรมใกล้ sha256 `A3570BC9185BEF70ABB3810448F6E3F605437B2F1BFAB1DF474882AD3661EA03`
+  hex: `129d6e140000000008040b000b0812010014010000000b121441ac27002ad4e70fc62ab9e030c52ac74a5f43`
+  เฟรมไกล sha256 `4B14A026763F53FFD65210C2F2BCC0122B096A6877455C84DAAED71366F07F3A`
+  hex: `129d6e140000000008040b000b0812010014020000000b121441ac27002ad4df03c62ab9e030c52ac74a5f43`
+  (อ่าน: msg `0x6E9D` v4 · base mask 0 · derived `0x08` · count 1 · element: key 1/2 · mask `0x12` · dword `2600001` · f32 x,y,z)
+  · action labels ฝั่ง server: `GROUND_LOOT_BIT08_RENDER_NEAR_ONCE` แล้ว `GROUND_LOOT_BIT08_RENDER_FAR_ONCE`
+  · event: `hyp_pf_032_ground_loot_bit08_pair_committed` · เก็บ hexdump ทั้งไฟล์ **ห้ามลบ**
 - `sessions`: `count(*) WHERE selected_character_id IS NOT NULL` +1 ต่อการเข้าเกมหนึ่งครั้ง · `PRAGMA integrity_check` = `ok` ·
   sha256 canonical ก่อน-หลังตรงกัน
 - **ชั้นนี้ตอบไม่ได้:** จอวาดอะไร (การมีเฟรมออกไม่พิสูจน์ว่าไคลเอนต์วาด) ⇒ **ห้ามอ้างชั้นนี้แทนชั้น (2)**
