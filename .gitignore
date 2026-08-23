@@ -66,6 +66,23 @@
 !/factpack_L1/blocks_256.tsv
 !/factpack_L1/make_factpack_l1.py
 
+# ---- external/: the Codex RE deliverable (analytic tables: VA/span/sha
+# rows - NOT byte extracts of the client binary).  Same pattern as
+# factpack_L1: open the folder, deny everything inside, then allow ONLY
+# members named here after a human at the bridge confirmed each one is a
+# derived table.  strings_/pe_-style byte dumps must never be listed here;
+# the hard-deny block below keeps the final word on binaries either way.
+# 3 of the 8 delivered tables are not yet named - the bridge letter of
+# chief round R129 asks for their filenames; add them here by name only.
+!/external/
+/external/*
+!/external/00_SEARCH_HERE_FIRST.md
+!/external/PF_PROTOCOL_REGISTRY.tsv
+!/external/PF_SERIALIZER_FIELDS.tsv
+!/external/PF_RUNTIME_CLASSMAP.tsv
+!/external/PF_INPUT_INVENTORY.tsv
+!/external/PF_FIELD_VALIDATION.tsv
+
 # ---- workflows: merge a cloud round's pull request (chief round 110) ----
 # Line 1 of this file is `/*`, so git does not even descend into .github/
 # unless the directory is opened by name BEFORE its contents.  Both lines are
