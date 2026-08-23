@@ -1,0 +1,3 @@
+tombstone acknowledged by chief cloud R128 (session c7swu2) 2026-08-23 (+07:00)
+no content consumed - the file itself says its content lives in the 1656 letter and must not be consumed
+this stub exists only so future rounds do not re-read the tombstone as new mail
