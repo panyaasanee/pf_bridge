@@ -62,8 +62,40 @@
 - 🆕 ใบ **RE-058 LEARNSKILL-DIRECTION-001** เข้า `CLIENT_RE_QUEUE.md` — direction census ของ 0x36AA บนสะพาน
   (ครึ่งหลักฐานที่ decoder ยังไม่มี · วิธีลอก GT-050 job 4 · ผลจะแก้สถานะ nonclaim ของ HYP-PF-034)
 
-## adversary
-- (กำลังรอ) pf-adversary ตรวจก่อน commit — ผลจะบันทึกท้ายรอบ
+## adversary — 7 defect (1 HIGH · 2 MED · 4 LOW) แก้ครบก่อน commit
+- **D1 (HIGH):** ร่างแรก re-pin canonical sha ของ ledger ทับประโยค tree-scoped ใน entry 41 (HYP-PF-033)
+  ที่กลายเป็นเท็จ ("inbound 0x36AA has no handler anywhere in this tree") ⇒ แก้ด้วย **dated amendment**
+  ใน evidence_gap ของ entry 41 (ไม่ลบประวัติ) + re-pin canonical ใหม่ + ขยาย lineage paragraph ให้เล่าเหตุ
+- **D2 (MED):** coverage `stats_and_progression` มีตัวเลขเท็จสองจุด ("four of the five have zero in src/" ·
+  "the other four verbs remain unimplemented in both directions") ⇒ แก้เป็น three/FIRST exception +
+  แจกแจง 0x673C outbound-only / 0x36AA inbound-only / อีกสามตัวว่างทั้งสองทิศ
+- **D3 (MED):** เทส fallthrough เดิมเป็น tautology (`assertGreaterEqual(rx_frames, ...)` ล้มไม่ได้) ⇒
+  เขียนใหม่เป็น **การเทียบ baseline จริง**: state ที่ไม่มี scenario กับ state จาก make_state_class เปล่า
+  dispatch เฟรม 0x36AA เดียวกัน ต้องได้ actions และ events ใหม่เท่ากันทุกไบต์
+- **D4 (LOW/MED · จดไว้ ไม่แก้):** การ์ด CLI/exclusion ของเลนนี้พิสูจน์ด้วย string-presence ไม่ใช่ behavior test —
+  ช่องเดียวกับเลนพี่ (R138) ทุกเลน · adversary รันจริงด้วยมือแล้วทำงานถูกที่ HEAD · ยกเป็นคำถามค้างเชิงดีไซน์
+  (กติกากลางควรมี harness test ของ app.main wiring) — จดลงจดหมาย
+- **D5 (LOW):** comment lineage ใน seam pin นับ triple ผิด (second → third/second owning module) ⇒ แก้
+- **D6 (LOW):** capability string "no_state_change" ขัดกับ counter ต่อ session ⇒ เปลี่ยนเป็น
+  `no_reply_no_persisted_state_change` + regen scenario JSON
+- **D7 (LOW):** rejection tuple ปนเหตุผลฝั่ง encoder ที่ wire ไม่มีวัน trip ⇒ กำกับ comment แยกสองชั้น
+- ข้อสังเกตเชิงดีไซน์ของ adversary (ไม่ใช่ defect): falsification ของ HYP-PF-034 ยังไม่ครอบเคสที่สาม
+  "RE-058 ตอบ undecidable" — จดเป็นคำถามค้างถึง Panya ในจดหมาย
+
+## ผลแก้ defect + สถานะ commit/PR (ปิดรอบ)
+- หลังแก้: ชุดเต็ม **2017/324/0** เขียว(cloud sanity) · census PASS · verifier PASS ทั้งคู่ (entries=42)
+- commit server: `7613ad8` (11 ไฟล์ตามประกาศ · staged=11 · deletion=0 · HEAD ขยับจริง) · **PR #15** เปิดพร้อม
+  marker — gate ตัดสิน (ตอนปิดรอบ gate ยังไม่จบ — รอบถัดไปอ่านผลตาม convention R139)
+- pf_bridge: ใบ RE-058 + ไฟล์รอบนี้ + archive continuation + ดัชนี + จดหมาย R140 — commit/push แล้ว
+  draft PR #41 ปลดท้ายรอบ
+
+## คำถามค้าง (ยกยอดเดิม + ใหม่สองข้อ)
+- 🆕 **falsification เคสที่สามของ HYP-PF-034:** ถ้า RE-058 ตอบ "bounded negative — ตัดสินไม่ได้แม้บนสะพาน"
+  เลน decoder จะไม่มีทางทั้ง confirm และ falsify ในชั้น static — เสนอ Panya เคาะว่าจะให้เลนคง active
+  ในฐานะ wire-layer capability พร้อม nonclaim ถาวร หรือ freeze
+- 🆕 **การ์ด wiring เป็น string-presence ทุกเลน (adversary D4):** rename kwarg ใน app.py จะเขียวทั้งสวีต
+  ทั้งที่ flag บูตโดยไม่มีเลน — ควรมี harness test กลางของ app.main หรือไม่ (แตะทุกเลน = สถาปัตยกรรม รอเคาะ)
+- ยกยอด: guard ฝาแฝด tools/tests (R138) · provenance ชั้น 4 PF_VITAL_NAMES (R134) · นัด rename external→clientbin (R135)
 
 ## คิวเทสเกม
 - ✅ ตอบกฎข้อ ⑤: รอบนี้เพิ่มใบ **RE-058** ใน `CLIENT_RE_QUEUE.md` (งานสะพาน static) · **ไม่เพิ่มใบ attended ใหม่**
