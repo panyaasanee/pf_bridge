@@ -1,0 +1,639 @@
+n_ID	s_NAME	s_COMMON	s_EQUIPED	s_USED
+1	Sky Lantern	โคมไฟที่ Robinson ทำขึ้นเองกับมือ ด้านบนมีข้อความเขียนไว้		
+2	Dead Soul Tooth Piece	ชิ้นส่วนที่สามารถเรียกวิญญาณร่อนเร่ [Dead Soul Tooth] ได้		
+3	Navy Reward Bill	บิลที่สามารถนำไปแลกรางวัลทหารเรือได้		
+4	Pottery Pot	กระถางดินเผาที่ใช้มาแต่โบราณ		
+5	Crimson Pigeon Egg	เพรชล้ำค่า		
+6	Lucky Canine	ฟันของสัตว์ร้าย สามารภนำมาทำเป็นยาได้		
+7	Princess Sick Leave	ใช้สำหรับการลาป่วยขององศ์หญิง		
+8	History Exam	ข้อทดสอบที่ Willes ทำขึ้น		
+9	First Conscription Poster	โพสเตอร์ที่แปะไว้ข้างทาง		
+10	Carnival Night Poster	โพสเตอร์ที่แปะไว้ข้างทาง		
+11	Evidence Confession	เอกสารสำคัญ		
+12	Prison Transfer Requisition	เอกสารสำคัญ		
+13	Cheat Death Pill	ยาที่ผิดกฏหมาย		
+14	Warm Muffler	ผ้าพันคอแฮนด์เมดสีฟ้า		
+15	Ice Hammer	ค้อนที่เต็มไปด้วยพลังสังหาร		
+16	Limited Edition Poseidon Gold	ทองที่มีรูปโพไซดอนอยู่		
+17	Second Conscription Poster	โพสเตอร์ที่แปะไว้ข้างทาง		
+18	Leftover Bone	มีกระดูกแพะติดอยู่		
+19	Princess Envoy Order	คำสั่งจากองค์หญิง Rosemary ผู้ที่มีสิ่งนี้สามารถผ่าอาณาจักร Atlantis ได้อย่างอิสระ		
+20	Cage Key	กุญแจสำหรับเปิดกรง		
+21	Snow Deer Steak	เนื้อสเต็กติดมัน		
+22	Poison needle	หนามแหลมสีเขียว		
+23	13 Die Cage Key No.1	กุญแจสำหรับเปิดกรง		
+24	13 Die Cage Key No.1	กุญแจสำหรับเปิดกรง		
+25	13 Die Cage Key	กุญแจสำหรับเปิดกรง		
+26	Shell Stone	กระดองเต่า สามารถนำมาทำยาได้		
+27	Green Coconut	มะพร้าวทั่วไป		
+28	Yellow Mud Water	น้ำสกปรก		
+29	Maggot Biscuit	ขนมขบเคี้ยว		
+30	Sheep First Horn	เขาของแพะภูเขา		
+31	Royal Secret File	เอกสารลับ		
+32	Earthy Dewclaw	เล็บของสัตว์ร้าย สามารถทำเป็นยาได้		
+33	South Sea Pepper	ถุงใส่เครื่องเทศ		
+34	Hook Bait	เบ็ดที่ใช้ตกปลา		
+35	New Navy Female Photobook	สมุดภาพที่มรูปผู้หญิง		
+36	Royal Rum	เหล้ารสดี		
+37	Folder Piece	เศษกระดาษ		
+38	Kraus Captain Hat	หมวกกัปตัน		
+39	Ancient Inscription	ม้วนกระดาษที่พบในสถานที่โบราณ มีตัวหนังสือโบราณอยู่		
+40	Blue Moon Spice	ถุงที่ใส่เครื่องเทศ		
+41	Sweetheart Berry	ผลไม้ทั่วไป		
+42	Mushroom Spices	ถุงที่ใส่เครื่องเทศ		
+43	Merchant marine Chamber Flag rag	เศษผ้าที่ถูกฉีดขาดเป็นชิ้นๆ		
+44	Merchant marine Chamber Badge	เหรียญที่เป็นสัญลักษณ์ของกิลด์		
+45	Ancient Machine Gear	เกียร์ที่ต้องการในการขับเคลื่อนเครื่องจักร		
+46	Dirty Navy Female Photobook	สมุดภาพที่มรูปผู้หญิง		
+47	Very Dirty Navy Female Photobook	สมุดภาพที่มรูปผู้หญิง		
+48	Sun Type Gear	มีหนังสือโบราณสลักอยู่		
+49	Solar Crystal	ผลึกโบราณ สามารถใช้เปิดอาวุธเทพได้ และเพิ่มพลังผลึกสีส้ม		
+50	Sky Hometown Chronicle	ม้วนกระดาษที่พบในสถานที่โบราณ มีตัวหนังสือโบราณอยู่		
+51	Jadeite Bracelet	เครื่องประดับหยกหรูหรา		
+52	Musk Coconut	มะพร้าวทั่วไป		
+53	Lenka Egg	ไข่หลากสี สามารถฟักเป็นสัตว์เลี้ยงแสนน่ารัก		
+54	Sweet Honey	โหลที่บรรจุน้ำผึ้ง		
+55	Gold Shark Chamber Bride Price	ห่อของขวัญ		
+56	Pineapple Juice Price	น้ำผลไม้ 100%		
+57	Tiger Steak	สเต็กซี่โครง		
+58	Raspberry Bibi Egg	ไข่หลากสี สามารถฟักเป็นสัตว์เลี้ยงแสนน่ารัก		
+59	Paradise Flowers Petal	ดอกไม้ที่บานเวลากลางคืน		
+60	Ancient Stone Piece	ชิ้นส่วนศิลา		
+61	Alert Weapon Part	เกียร์ที่ต้องการในการขับเคลื่อนเครื่องจักร		
+62	Red Wisdom Crystal	ผลึกโบราณ สามารถใช้เปิดอาวุธเทพได้ และเพิ่มพลังผลึกสีแดง		
+63	Silver Bone Necklace	สร้อยคอหรูหรา		
+64	Grandmother Beryl Cup	แก้วเหล้า		
+65	Small Empty Paper Roll	กระดาษเปล่า		
+66	Diary Missing Page	ชิ้นส่วนกระดาษ		
+67	Diary Key	กุญแจใช้เปิดสมุดบัญทึก		
+68	Third Conscription Poster	โพสเตอร์ที่แปะไว้ข้างทาง		
+69	Super Dirty Navy Female Photobook	สมุดภาพที่มรูปผู้หญิง		
+70	Black Heart Wing	ปีกของนก สามารถนำมาทำเป็นยาได้		
+71	Royal Necklace	สร้อยราชวงศ์		
+72	Firebird Feather	ปีกของนก สามารถนำมาทำเป็นยาได้		
+73	Heil Herb	ถุงที่ใส่สมุนไพรไว้		
+74	Fighting Soul Doping 	ยาที่ผิดกฏหมาย		
+75	Skyhook Talon	เล็บของสัตว์ร้าย สามารถทำเป็นยาได้		
+76	Snake Saliva	ถุงสีเขียวที่ใส่พิษไว้		
+77	Biogas Wine	เหล้ารสชาติดี		
+78	Carlos Helmet	หมวกนักรบ		
+79	Carlos Footwear	รองเท้านักรบ		
+80	Carlos Hammer	ค้อนนักรบ		
+81	Gladiator Earring	ตุ้มหูที่มีคนทำหล่นไว้		
+82	Gladiator Cup	แก้วเหล้าเงิน		
+83	Thorn Love Flower	ดอกไม้สีแดงสด		
+84	Fluttering Maple Leaf	ใบไม้ธรรมดาๆ		
+85	Second Hand Broken Boot	รองเท้าขาดๆ		
+86	Freshwater Fish	ปลาตัวใหญ่ที่จับได้		
+87	Orange Wisdom Crystal	ผลึกโบราณ สามารถใช้เปิดอาวุธเทพได้ และเพิ่มพลังผลึกสรส้ม		
+88	Gladiator Battle Card	บัตรประจำตัวนักรบ		
+89	White Mushroom Powder	เห็ดที่นำมาบดเป็นผง		
+90	Viper Tooth	ฟันของสัตว์ร้าย สามารถนำมาทำเป็นยาได้		
+91	Sacrifice Turtle Shell	กระดองของเต่า สามารถนำมาทำเป็นยาได้		
+92	Slave Bondage Deed	เอกสารสำคัญ		
+93	Orc Eyes	ตาของมอนสเตอร์		
+94	Prison Break Plan Book	แผนการแหกคุกของ Odyssey		
+95	Intoxicate Spice	ถุงที่ใส่เครื่องเทศ		
+96	Odyssey Jail Bulletin	โพสเตอร์ที่แปะไว้ข้างทาง		
+97	Complete Star Diamond	เพรชล้ำค่า		
+98	Second Secret Signal Bulletin	โพสเตอร์ที่แปะไว้ข้างทาง		
+99	Third Secret Signal Bulletin	โพสเตอร์ที่แปะไว้ข้างทาง		
+100	Star Diamond	เพรชล้ำค่า		
+101	Material Girl Ring	แหวนหรูหรา		
+102	Odyssey Wanted	ใบประกาศจับโจรสลัด		
+103	Odyssey Topknot	ผมเปียของผู้หญิงผมยาว		
+104	Black Braid Landmine Detonator	ของจาก Landmine		
+105	Skeleton Bomb	ลูกปืนที่ใช้ในเรือ		
+106	Turtle Meat	เนื้อเต่าที่แสนไม่อร่อย		
+107	Black Braid Pirate Flag	ธงของโจรสลัด Black Braid		
+108	Admiral Red Beard Pirate Flag	ธงของโจรสลัด Admiral Red Beard		
+109	First Secret Signal Bulletin	โพสเตอร์ที่แปะไว้ข้างทาง		
+110	Garlic Raw Meat	สเต็กซี่โครง		
+111	Blink Skin	ขนของสัตว์ร้าย สามารถนำมาทำเป็นเครื่องประดับได้		
+112	Ferret Muffler	ผ้าพันคอแฮนด์เมดสีฟ้า		
+113	Handsome Navy Cap	หมวกกัปตัน		
+114	Gold Tiger Claw	เล็บทอง		
+115	Noctilucent Opal	ผลึกแดง		
+116	Navy Shoulder Badge	ตรายศที่ประดับอยู่บนไหล่		
+117	Seven Sea V Secret Signal No.1	โพสเตอร์ที่แปะไว้ข้างทาง		
+118	Crimson Wing	ปีกของนก สามารถนำมาทำเป็นยาได้		
+119	Agate Bell	กระดิ่งหรูหรา		
+120	Merchant Marine Stone	หินธรรมดาทั่วไป		
+121	Siren Spoon	ช้อนซุปธรรมดา		
+122	Yellow Wisdom Crystal	ผลึกโบราณ สามารถใช้เปิดอาวุธเทพได้ และเพิ่มพลังผลึกสีเหลือง		
+123	Royal Wine Glass	แก้วสีทองสำหรับราชา		
+124	Seven Sea V Secret Signal No.2	โพสเตอร์ที่แปะไว้ข้างทาง		
+125	Seven Sea V Secret Signal No.3	โพสเตอร์ที่แปะไว้ข้างทาง		
+126	Medium Empty Paper Roll	กระดาษเปล่า		
+127	Big Empty Paper Roll	กระดาษเปล่า		
+128	Fortress Cannon Part 1	เกียร์ที่ต้องการในการขับเคลื่อนเครื่องจักร		
+129	 EXP ert Original Sin Piece	ชิ้นส่วนผลึกที่ส่องแสงแวววาว		
+130	Silver Fishbone	กระดูกปลาทั่วไป		
+131	Evill Light Ore	แร่ที่ส่องแสงแวววาว		
+132	Advanced Original Sin Piece	ชิ้นส่วนที่ส่องแสงดั่งเปลวเพลิง		
+133	Cave Treasury Key	กุญแจใช้เปิดคลังทอง		
+134	Navigation Sponsor Gold	เงินสนับสนุนการเดินเรือ		
+135	Cold Mushroom	เห็ดสีเขียว		
+136	Rosemary Silkworm	หนอนที่เพิ่งลืมตาดูโลก		
+137	Dizzy Seed	เมล็กพืช		
+138	Beast Canine	ฟันของสัตว์ร้าย สามารถนำมาทำเป็นยาได้		
+139	Lost Heart Method	ถุงสีเขียวที่ใส่ยาวิเศษ		
+140	Cat Eyedrop	ยาที่สร้างตามสูตรเวทย์มนต์		
+141	Refreshing Bile	ยาที่สร้างตามสูตรเวทย์มนต์		
+142	Clear Heart Panacea	ยาที่สร้างตามสูตรเวทย์มนต์		
+143	Dead Red Gem	ผลึกแดง		
+144	Theft Privateer Gold	rganทองที่มีรูปโพไซดอน		
+145	Fortress Cannon Part 2 	เกียร์ที่ต้องการในการขับเคลื่อนเครื่องจักร		
+146	Seaweed Green Gem	ผลึกเขียว		
+147	Collagen Frozen Fish	พุดดิ้งใสสีเขียว		
+148	Cold Blood Cream	ถุงสีเขียวที่ใส่ครีมไว้		
+149	Navy Doll	ตุ๊กตาแกะสลักทหารเรือ		
+150	Strange Pirate Challenge Book	หนังสือท้าสู้ของ Strange Pirate Lupin ที่ส่งไปให้ทะเลเจ็ด		
+151	Royal Silver	เงินที่ใช้ใน Atlantis 		
+152	Morgan Topknot	ถ้วยที่ได้จากการเอาชนะ Morgan		
+153	Lion Meat	สเต็กซี่โครง		
+154	streaky Lion Meat	สเต็กซี่โครง		
+155	Embed Jewelry	สร้อยคอหรูหรา		
+156	Troll Earring	ตุ้มหูที่มีคนทำหล่นไว้		
+157	Green Wisdom Crystal	ผลึกโบราณ สามารถใช้เปิดอาวุธเทพได้ และเพิ่มพลังผลึกสีเขียว		
+158	Morgan Boot	ถ้วยที่ได้จากการเอาชนะ Morgan		
+159	Friendship Swearer	เอกสารสำคัญ		
+160	Riddle Black Bone	กระดูกสีดำ		
+161	Nectar of Evil Flower	น้ำหวานที่มีสีเขียว		
+162	Emeral Horn	เขาที่ได้มาจากแกะภูเขา		
+163	Voodoo Doll	ตุ๊กตาที่มีคำสาป		
+164	Riddle Wing	ปีกของนก สามารถนำมาทำเป็นยาได้		
+165	Lion Heart	หัวใจสัตว์		
+166	Black Heart's Lion	หัวใจสัตว์		
+167	Old Turtle Shell	กระดองของเต่า สามารถนำมาทำเป็นยาได้		
+168	Predict Turtle Shell	กระดองของเต่า สามารถใช้ในการทำนายได้		
+169	Smiling Skull	กระดูกธรรมดา		
+170	Sparkling Skull	ผลึกรูปกระโหลก		
+171	Prophylactic Herb	ถุงที่ใส่สมุนไพรไว้		
+172	Big Meat	สเต็กซี่โครง		
+173	Herbal Soup	หม้อที่บรรจุซุปร้อน		
+174	Tomb Mud	ดินเหนียวที่เป็นสีเทา		
+175	Blood Rose	ยาที่สร้างตามสูตรเวทย์มนต์		
+176	Illegality Herb	ถุงที่ใส่สมุนไพรไว้		
+178	Pa Kana's Talisman	ยันต์จากนักบวชลึกลับ		
+179	Shipwreck Spices	ถุงที่ใส่เครื่องเทศ		
+180	Harpy Heart	หัวใจสัตว์		
+181	Black Heart's Bird	หัวใจสัตว์		
+182	Toxic Talisman	ยันต์จากนักบวชลึกลับ		
+183	Deadly Venom	น้ำที่มีสีเขียว		
+184	Rubber Band's Frist Love	ผมเปียของผู้หญิงผมยาว		
+185	Insect Death	หนอนที่เพิ่งลืมตาดูโลก		
+186	Pa Kana's Heart	หัวใจที่ได้มาจาก Pa Kana		
+187	Curse Talisman	ยันต์จากนักบวชลึกลับ		
+190	Ancient Gold	แก้วเหล้า		
+191	Antler Spirits	เหล้ารสชาติดี		
+192	Penguin Emblem	ตรายศที่ประดับอยู่บนไหล่		
+193	Polar Snow	ดอกไม้สีขาวที่เต็มไปด้วยน้ำแข็ง		
+194	Snow Needle 0 ºc	หนามแหลมสีเงิน		
+195	Princess Hand - Woven Scarves	ผ้าพันคอสีขาว		
+196	Frozen Tuna	ปลาตัวใหญ่ที่จับได้		
+197	Frozen Venison	สเต็กซี่โครง		
+198	Millennium Fruit	ผลไม้ทั่วไป		
+199	Rare Permafrost	ดินที่อยู่ในแดนหนาว		
+200	Arctic Monkey Leather	ขนของสัตว์ร้าย สามารถนำมาทำเป็นเครื่องประดับได้		
+201	Frost Egg	ไข่หลากสี สามารถฟักเป็นสัตว์เลี้ยงแสนน่ารัก		
+202	Turtle Meat Salt Away	อาหารทะเลปรุงพิเศษ		
+203	Deep Sea Fishbone	กระดูกปลาทั่วไป		
+204	Ice Turtle Shell	กระดองสีฟ้า		
+205	Golden Horn	เขาสีทองเหลือง		
+206	Blue Wisdom Crystal	ผลึกโบราณ สามารถใช้เปิดอาวุธเทพได้ และเพิ่มพลังผลึกสีฟ้า		
+207	Sea Phantom's Coat 	เศษผ้าที่ถูกฉีดขาดเป็นชิ้นๆ		
+208	Endurance Bell	กระดิ่งหรูหรา		
+209	Winter Spices	ถุงที่ใส่เครื่องเทศ		
+210	Deluxe Soup Pot	หม้อที่บรรจุซุปร้อน		
+211	Elder Scrolls	ม้วนกระดาษที่พบในสถานที่โบราณ มีตัวหนังสือโบราณอยู่		
+212	Ousailuo Spike Tailsman	ยันต์จากนักบวชลึกลับ		
+213	Ousailuo Evil Talisman	ยันต์จากนักบวชลึกลับ		
+214	Ousailuo Venom Talisman	ยันต์จากนักบวชลึกลับ		
+220	Bracelet of Death	เครื่องประดับหยกหรูหรา		
+221	Coral	ดอกไม้สีแดงสด		
+222	Steak Meat in Party	สเต็กซี่โครง		
+223	Stolen Diamon	เพรชล้ำค่า		
+224	Sinda' s Necklace	สร้อยคอหรูหรา		
+225	Mariner Cannon	ปืนที่สามารถพกติดตัวได้		
+226	Part of Harpoon Turret	เกียร์ที่ต้องการในการขับเคลื่อนเครื่องจักร		
+227	Stink Bug Meat	หนอนที่เพิ่งลืมตาดูโลก		
+228	Soul Stone of Redemption	แร่ที่ส่องแสงแวววาว		
+229	Onelisk Meat	เนื้อที่มีสีแปลกๆ		
+230	Soul Stone of Warth	แร่ที่ส่องแสงแวววาว		
+231	Sunken Timber	สามารถใช้จุดไฟหรือสร้างเรือได้		
+232	Star Sand of Thanks	ขวดที่บรรจุ Star Sand		
+233	Star Sand of Friendship	ขวดที่บรรจุ Star Sand		
+234	Military Supplies	ขนมขบเคี้ยว		
+235	Canned Pickle Squid	อาหารที่สามารถเก็บไว้ได้นาน		
+236	 Robinson 's Statement 	เอกสารสำคัญ		
+237	Stew Bone	โบราณกระดูกขนาดใหญ่ทั่วไป		
+238	Crispy Pupae	หนอนที่เพิ่งลืมตาดูโลก		
+239	Rot Cauliflower	ดอกไม้นรกสีดำ		
+240	Doom Day Pot	หม้อที่บรรจุซุปร้อน		
+241	Inferno Spicy Egg	ไข่สีแดง		
+242	Original sin Soul Stone	แร่ที่ส่องแสงแวววาว		
+250	Skeleton Landmine Detonator	ของจาก Landmine		
+251	Skeleton Bomb	ลูกปืนที่ใช้ในเรือ		
+252	Halitosis Gas Cylinder	ระเบิดที่มีกลิ่นเหม็น		
+253	Funerary Helmet	หมวกหรูหรา		
+254	Funerary Footwear	รองเท้าหรูหรา		
+255	Funerary Armor	เกราะหรูหรา		
+256	Mech Soldier Gear	เกียร์ที่ต้องการในการขับเคลื่อนเครื่องจักร		
+257	Temple Gate Keys	กุญแจที่ใช้เปิดสถานที่ศักดิ์สิทธิ์		
+258	Capitulate Book	เอกสารสำคัญ		
+259	Jumping Fish	ปลาตัวใหญ่ที่จับได้		
+260	Old Map	แผลที่การเดินเรืรอ		
+261	Royal Emblem	เหรียญราชวงศ์		
+262	Temple Flag	ธงทหารราชวงศ์		
+263	Ritual Wine	แก้วสีทองสำหรับราชา		
+264	Ritual Pot	หม้อรูปทรงสวย		
+265	Royal Chest Key	กุญแจที่สามารถเปิดหีบสมบัติได้		
+266	Heritage Ring	แหวนหรูหรา		
+269	Spicy Powder	ถุงที่ใส่เครื่องเทศ		
+270	Eye Berry	ตาของมอนสเตอร์		
+271	Immortality ShoChu	เหล้าหายาก		
+272	Original Sin Helmet	หมวกของ Hachi		
+273	Original Sin Sword	ดาบของ Hachi		
+274	Original Sin Armor	เกราะของ Hachi		
+275	Obsidian Whetstone	แร่ที่ส่องแสงแวววาว		
+276	Fury Dragon Teeth	ฟันของสัตว์ร้าย สามารถนำมาทำเป็นยาได้		
+277	Magma	แร่ที่ส่องแสงแวววาว		
+278	Fire Refining Crystal	ผลึกโบราณ สามารถใช้เปิดอาวุธเทพได้ และเพิ่มพลังผลึกไฟ		
+280	Blueberry Sour	ผลไม้ทั่วไป		
+281	Golden Apple	แอ๊ปเปิ้ลสีทอง		
+282	Ancient Clay Pot	หม้อที่ใช้ในโบราญ		
+283	Ancient Stone	ศิลาที่มีตัวหนังสือโบราญเขียนไว้		
+284	Ancient Clay Pot's Fragments	ชิ้นส่วนหม้อ		
+285	Ancient Stone Piece	ชิ้นส่วนศิลา		
+287	Eden Holy Fruit	ผลไม้เทพ		
+288	Curse of Witch	ยันต์จากนักบวชลึกลับ		
+289	Wing of Charm	ปีกของนก สามารถนำมาทำเป็นยาได้		
+290	Eden Holy Grail	แก้วเหล้าศักดิ์สิทธิ์		
+291	Sky passport	พาสปอร์ต		
+292	Wind Plate	เกราะที่แข็งแกร่ง		
+293	Lubricant	ใช้หล่อลื่นเครื่องจักร		
+294	Anti Gravity Crystal	ผลึกโบราณ สามารถใช้เปิดอาวุธเทพได้ และเพิ่มพลังผลึกพิเศษ		
+295	Indigo Wisdom Crystal	ผลึกโบราณ สามารถใช้เปิดอาวุธเทพได้ และเพิ่มพลังผลึกใส		
+296	Empty Paper Roll	เอกสารสำคัญ		
+297	Inscription Rubbing	เอกสารสำคัญ		
+300	หมวกกัปตัน H ijack	หมวกกัปตัน		
+301	Ancient Gear	เกียร์ที่ต้องการในการขับเคลื่อนเครื่องจักร		
+302	Morgan Pirate Flag	ธงรูปกระโหลก		
+303	Plato Sky Passport	พาสปอร์ต		
+304	Love Gem	ผลึกแดง		
+305	Truth White Flowers	ดอกไม้สีขาว		
+306	Handsome love Gift	ห่อของขวัญ		
+307	Cleaner	ใช้ทำความสะอาดสิ่งสกปรก		
+308	Superalloy Gear	เกียร์ที่ต้องการในการขับเคลื่อนเครื่องจักร		
+309	Iron Helmet	หมวกหรูหรา		
+310	 Da Vinci  Design	แบบแปลนที่ Da Vinci วาดขึ้นมาเอง		
+311	Driver Crystal	ผลึกโบราณ สามารถใช้เปิดอาวุธเทพได้ และเพิ่มพลังผลึกสีส้ม		
+312	Rune Badge	เหรียญสัญลักษณ์		
+315	Precious Necklace	สร้อยคอหรูหรา		
+316	Precious Ring	แหวนหรูหรา		
+317	Aral Sea Water Bottle	ขวดทั่วไป		
+318	Filtered Light Water Bottle	ขวดทั่วไป		
+319	Deep sea Diamond	เพรชล้ำค่า		
+320	Crusader Badge	เหรียญสัญลักษณ์ Crusader		
+321	Fiery Machine Gun	ปืนที่มีพลังไฟ		
+322	Mermaid Meat	อาหารทะเลปรุงพิเศษ		
+323	Skeleton Big Bone	โบราณกระดูกขนาดใหญ่ทั่วไป		
+324	Flash Crystal Piece	ชิ้นส่วนผลึกที่ส่องแสงแวววาว		
+325	King Clay Pot	แก้วสีทองสำหรับราชา		
+326	Royal Gold	เหรียญของ Atlantis 		
+327	Frozen Marine Fish	ปลาตัวใหญ่ที่จับได้		
+328	Cool Beer	แก้วเหล้าที่มีกลิ่นเหล้าคละคลุ้ง		
+329	Revelation Piece	ชิ้นส่วนกระดาษ		
+330	Dead Original Sin Stone	แร่ที่ส่องแสงแวววาว		
+331	Conductive Antenna	หนามแหลมสีเงิน		
+332	King Sword	แก้วสีทองสำหรับราชา		
+333	King Gold Cup	แก้วสีทองสำหรับราชา		
+335	Spiced Maggot	หนอนที่เพิ่งลืมตาดูโลก		
+336	Dirty Soup Spoon	ช้อนซุปธรรมดา		
+337	Eagle Eye Drop	ยาที่สร้างตามสูตรเวทย์มนต์		
+338	Ghost Blue Eye	ตาของมอนสเตอร์		
+339	Shark Hacksaw	สิ่งมีคม		
+340	Heinous Canine	ฟันของสัตว์ร้าย สามารถนำมาทำเป็นยาได้		
+341	Magma Miso Soup	หม้อที่บรรจุซุปร้อน		
+342	Slime Pudding	พุดดิ้งสีฟ้า		
+343	Dragon Blood Lord War Book	หนังสือท้ารบ		
+344	Hot Blood	ยาสีเลือด		
+345	Devil Red Egg	ไข่หลากสี สามารถฟักเป็นสัตว์เลี้ยงแสนน่ารัก		
+346	Small Pieces Poseidon Pearl	ไข่มุกหายาก		
+347	Hell Soul Stone	แร่ที่ส่องแสงแวววาว		
+348	Tear Craw	เล็บของสัตว์ร้าย สามารถทำเป็นยาได้		
+349	Butcher Knife	มีดของคนขายเนื้อ		
+350	Protein Mucus	ยาที่สร้างตามสูตรเวทย์มนต์		
+351	Medium Pieces Poseidon Pearl	ไข่มุกหายาก		
+352	Extra Pieces Poseidon Pearl	ไข่มุกหายาก		
+355	Taboo Flower	ดอกไม้นรกสีดำ		
+356	Whitening Snake Tooth	ฟันของสัตว์ร้าย สามารถนำมาทำเป็นยาได้		
+357	Wild Incubation	ไข่หลากสี สามารถฟักเป็นสัตว์เลี้ยงแสนน่ารัก		
+358	Desert Island Build Material	ถุงที่ใส่วัสดุ		
+359	Poseidon Nightlights	ของชอบของ Siren		
+360	Eden Spice	ถุงที่ใส่เครื่องเทศ		
+361	Ancient Reel Left Fragment	ม้วนกระดาษเก่าแก่ ได้จากการค้นพบของนักโบราณคดี		
+362	Ancient Reel Right Fragment	ม้วนกระดาษเก่าแก่ ได้จากการค้นพบของนักโบราณคดี		
+363	Complete Ancient Reel	ม้วนกระดาษที่พบในสถานที่โบราณ มีตัวหนังสือโบราณอยู่		
+364	Remain Pottery	หม้อที่ใช้ในสมัยโบราณ		
+365	Indigo Wisdom Crystal	ผลึกโบราณ สามารถใช้เปิดอาวุธเทพได้ และเพิ่มพลังผลึกใส		
+366	Prophet Revelation	ภัยพิบัติเท่านั้นถึงจะเปิดมันได้		
+367	Angel Lamb Chop	สเต็กซี่โครง		
+368	Evil Thought Eye	ตาของมอนสเตอร์		
+369	Crystal Mask Glue	พุดดิ้งใสสีเขียว		
+370	Petal Bouquet	ถุงที่ใส่กลีบดอกไม้		
+371	God Love Safflower	ดอกไม้สีแดงสด		
+372	Pirate Smelly Boot	รองเท้าของโจรสลัด		
+373	Mad Cow Pirate Hat	หมวกกัปตัน		
+374	Sleeping Energy Drink	ยาที่สร้างตามสูตรเวทย์มนต์		
+375	Fan Letter	จดหมายทั่วไป		
+376	Purple Wisdom Crystal	ผลึกโบราณ สามารถใช้เปิดอาวุธเทพได้ และเพิ่มพลังผลึกสีม่วง		
+377	Rattled Earring	ตุ้มหูที่มีคนทำหล่นไว้		
+378	Mech Factory Sign	นามบัตรของหุ่นยนต์		
+379	Grace Diamond	เพรชล้ำค่า		
+380	Deserted City Gear	เกียร์ที่ต้องการในการขับเคลื่อนเครื่องจักร		
+381	Deserted Book	ม้วนกระดาษโบราณ		
+382	Deserted Ore	แร่ที่ทิ้งไว้กระจัดกระจาย		
+383	Rosemary Photo Album	รูปของ Rosemary ได้รับความนิยมอย่างมาก		
+384	Navy Pay bag	ซองเงินเดือนของเจ้าหน้าที่		
+385	Super Nutrition Ration	สารอาหารครบถ้วน และมีรสชาติที่อร่อย		
+386	Subjugation Necklace	สร้อยคอจากจักรวรรดิที่ล่มสลาย		
+387	Subjugation Ring	แหวนจากจักรวรรดิที่ล่มสลาย		
+388	Subjugation Vault Key	กุญแจเข้าสู่จักรวรรดิที่ล่มสลาย		
+400	Soul Diamond	เพรชที่สามารถปล่อยพลังวิญญาณออกมาได้		
+405	Empire of Mu Crystal	ผลึกที่มีพลังทำลายล้าง		
+406	Pirate King Fortress Treasure	ของที่ทำขึ้นมาให้เหมือนของจริง		
+407	Odyssey Earring	ตุ้มหูของ Odyssey		
+408	Poseidon Instrument	มีพลังของโพไซดอน		
+409	Sky Machine Gun	ปืนพลังทำลายสูงของ Hijack 		
+410	Sky Serum	เซรั่มที่ Hijack คิดค้นขึ้นมา		
+411	Sky Engine oil	น้ำมันเครื่องที่ Hijack ใช้		
+412	Navigator Tonic	ยาสำหรับนักเดินเรือ		
+413	Navigator Luck	ของนำโชค		
+414	Salty Dead Bacon	เบคอนที่ผ่านการปรุงที่ผิดพลาด จึงต้องนำมาล้างน้ำเป็นจำนวนมาก		
+415	Dry Bacon	เบคอนแสนอร่อย		
+416	Rare Wing	ขนนกจากนกหายาก		
+417	Rare Pollen	เกษรจากพืชพิเศษ		
+418	Rare Red Meat	เนื้อแดงที่หาได้ยากจากที่นี่		
+419	Rare Black Meat	เนื้อสีดำดูหรูหรา		
+420	Snow White Meat	เนื้อสีขาวอันน่ากิน		
+421	Ice Scale	เกล็ดที่มาจากสิ่งมีชีวิตในทะเล สะท้อนแสงแวววาว		
+422	Tiger Tooth	ฟันที่หลุดออกมาเป็นเวลานาน แต่ยังมีความแหลมคมอยู่		
+423	white Tooth	ฟันแปลกประหลาด		
+424	Doom Live Fish	ปลาที่มีรูปร่างน่ากลัว ปากยังขยับอยู่ตลอดเวลา		
+425	Doom Dead Fish	ปลาที่มีรูปร่างน่ากลัว สายตาจับจ้องไม่กระพริบ		
+426	Hell Feather	ขนที่มาจากโลกแห่งความมืด		
+427	Hell Corner	สามารถแทงทะลุตัวคนได้อย่างง่ายดาย		
+428	Hell Carrion	มีกลิ่นเหม็น		
+429	Eden Berry	ผลไม้ที่ได้จาก Eden รสชาติเป็นที่ชื่นชอบของใครหลายๆคน		
+430	Eden Claw	เขาที่ได้จากสิ่งมีชีวิตใน Eden		
+431	Eden Poison	พิษที่ได้จาก Great VenomในEden		
+433	South Sea Pepper	เครื่องปรุงที่มีรสเผ็ด		
+434	South Sea Pepper Transaction Receipt	ไอเทมนี้สามารถรับรองได้ว่าทำธุระทางการเงินเสร็จสิ้น		
+435	Silver Chamber Silver Ticket 1 W	ตั๋วเงินที่ได้จาก Merchant marine Federation สามารถนำไปแลกเป็นทองได้		
+436	Silver Chamber Silver Ticket 5 W	ตั๋วเงินที่ได้จาก Merchant marine Federation สามารถนำไปแลกเป็นทองได้		
+437	Silver Chamber Silver Ticket 10 W	ตั๋วเงินที่ได้จาก Merchant marine Federation สามารถนำไปแลกเป็นทองได้		
+438	Brand Silk	ด้านบนปักลายสวยงาม		
+439	Brand Silk Transaction Receipt	ไอเทมนี้สามารถรับรองได้ว่าทำธุระทางการเงินเสร็จสิ้น		
+440	Silver Chamber Silver Ticket 5 W	ตั๋วเงินที่ได้จาก Merchant marine Federation สามารถนำไปแลกเป็นทองได้		
+441	Silver Chamber Silver Ticket 10 W	ตั๋วเงินที่ได้จาก Merchant marine Federation สามารถนำไปแลกเป็นทองได้		
+442	Silver Chamber Silver Ticket 15 W	ตั๋วเงินที่ได้จาก Merchant marine Federation สามารถนำไปแลกเป็นทองได้		
+443	 Special Wine	ไวน์ที่ใช้สูตรพิเศษในการหมัก		
+444	 Special Wine Transaction Receipt	ไอเทมนี้สามารถรับรองได้ว่าทำธุระทางการเงินเสร็จสิ้น		
+445	Silver Chamber Silver Ticket 10 W	ตั๋วเงินที่ได้จาก Merchant marine Federation สามารถนำไปแลกเป็นทองได้		
+446	Silver Chamber Silver Ticket 15 W	ตั๋วเงินที่ได้จาก Merchant marine Federation สามารถนำไปแลกเป็นทองได้		
+447	Silver Chamber Silver Ticket 20 W	ตั๋วเงินที่ได้จาก Merchant marine Federation สามารถนำไปแลกเป็นทองได้		
+448	Rare Musket	ปืนที่ผ่านการปรับปรุงมาแล้ว		
+449	Rare Musket Transaction Receipt	ไอเทมนี้สามารถรับรองได้ว่าทำธุระทางการเงินเสร็จสิ้น		
+450	Silver Chamber Silver Ticket 15 W	ตั๋วเงินที่ได้จาก Merchant marine Federation สามารถนำไปแลกเป็นทองได้		
+451	Silver Chamber Silver Ticket 20 W	ตั๋วเงินที่ได้จาก Merchant marine Federation สามารถนำไปแลกเป็นทองได้		
+452	Silver Chamber Silver Ticket 25 W	ตั๋วเงินที่ได้จาก Merchant marine Federation สามารถนำไปแลกเป็นทองได้		
+453	Warrior Soul-Trusty	ผู้กล้าเต็มไปด้วยจิตแห่งนักรบ สามารถบรรลุถึงแก่นแท้ของแก่นแท้ของความน่าเชื่อถือ		
+454	Warrior Soul-Brave	ผู้กล้าเต็มไปด้วยจิตแห่งนักรบ สามารถบรรลุถึงแก่นแท้ของความกล้าหาญ		
+455	Warrior Soul-Benevolence	ผู้กล้าเต็มไปด้วยจิตแห่งนักรบ สามารถบรรลุถึงแก่นแท้ของเมตตา		
+456	Warrior Soul-Courtesy	ผู้กล้าเต็มไปด้วยจิตแห่งนักรบ สามารถบรรลุถึงแก่นแท้ของมารยาท		
+457	Warrior Soul-Sincere	ผู้กล้าเต็มไปด้วยจิตแห่งนักรบ สามารถบรรลุถึงแก่นแท้ของความจริงใจ		
+458	Warrior Soul-Reputation	ผู้กล้าเต็มไปด้วยจิตแห่งนักรบ สามารถบรรลุถึงแก่นแท้ของชื่อเสียง		
+459	Warrior Soul-Loyal	ผู้กล้าเต็มไปด้วยจิตแห่งนักรบ สามารถบรรลุถึงแก่นแท้ของความภักดี		
+460	Warrior Soul-Subdue	ผู้กล้าเต็มไปด้วยจิตแห่งนักรบ สามารถบรรลุถึงแก่นแท้ของเผด็จการ		
+461	Wolf Soul-Hunting	หมาป่าที่ผอมและมีแต่ซี่โครงเต็มไปด้วยจิตแห่งความคลั่ง สามารถรับรู้ความจริงของการไล่		
+462	Wolf Soul-Hunt	หมาป่าที่ผอมและมีแต่ซี่โครงเต็มไปด้วยจิตแห่งความคลั่ง สามารถรับรู้ความจริงของการล่า		
+463	Wolf Soul-Fight	หมาป่าที่ผอมและมีแต่ซี่โครงเต็มไปด้วยจิตแห่งความคลั่ง สามารถรับรู้ความจริงของการต่อสู้		
+464	Wolf Soul-Dispute	หมาป่าที่ผอมและมีแต่ซี่โครงเต็มไปด้วยจิตแห่งความคลั่ง สามารถรับรู้ความจริงของการขัดแย้ง		
+465	Wolf Soul-Mad	หมาป่าที่ผอมและมีแต่ซี่โครงเต็มไปด้วยจิตแห่งความคลั่ง สามารถรับรู้ความจริงของความคลั่ง		
+466	Wolf Soul-Turmoil	หมาป่าที่ผอมและมีแต่ซี่โครงเต็มไปด้วยจิตแห่งความคลั่ง สามารถรับรู้ความจริงของความวุ่นวาย		
+467	Wolf Soul-Fierce	หมาป่าที่ผอมและมีแต่ซี่โครงเต็มไปด้วยจิตแห่งความคลั่ง สามารถรับรู้ความจริงของความชั่วร้าย		
+468	Wolf Soul-Evil	หมาป่าที่ผอมและมีแต่ซี่โครงเต็มไปด้วยจิตแห่งความคลั่ง สามารถรับรู้ความจริงของความน่ากลัว		
+469	Wolf Soul-Violent	หมาป่าที่ผอมและมีแต่ซี่โครงเต็มไปด้วยจิตแห่งความคลั่ง สามารถรับรู้ความจริงของความรุนแรง		
+470	Wolf Soul-Against	หมาป่าที่ผอมและมีแต่ซี่โครงเต็มไปด้วยจิตแห่งความคลั่ง สามารถรับรู้ความจริงของการต่อต้าน		
+471	Wolf Soul-Free	หมาป่าที่ผอมและมีแต่ซี่โครงเต็มไปด้วยจิตแห่งความคลั่ง สามารถรับรู้ความจริงของอิสระ		
+500	Shipbuilding Timber	ไม้ที่นำมาทำเรือ		
+501	Iron Ore	Iron Ore ที่ได้จากการหลอม		
+502	Not Broken Feather	ขนนกที่ไม่มีวันสูญสิ้น		
+503	Oil Coconut	มะพร้าวที่สามารถกลั่นกะทิออกมาได้		
+504	Doom Pudding	พุดดิ้งที่หากินได้ยาก		
+505	Doom Sashimi	เนื้อปลาซาซิมิที่หากินได้ยาก		
+506	Doom Spirit	เหล้าที่หากินได้ยาก		
+507	Organic Apple	รับลองว่าไม่มียาพิษ		
+508	Heaven Eye	ตาที่สามารภมองเห็นประตูสวรรค์		
+509	Magic Tree Timber	ไม้ที่ได้จากต้นไม้ในตำนาน		
+510	Super Fuel	น้ำมันคุณภาพดี		
+511	Possession Musket	ปืนที่ยิงได้แม่นยำ		
+512	Red Wine	เหล้าเข้มข้น แต่ไม่ดีต่อสุขภาพ		
+513	Rampant Pirate Flag	Pirate Flag ที่เต็มไปด้วยความน่าสพรึง		
+514	Prestige Bomb	ระเบิดอานุภาพสูง		
+515	Vested gun	อานุภาพเหมือนปืนใหญ่		
+516	Damp Wood	ท่อนไม้ที่ใกล้จะมีราขึ้น		
+517	Damp Mushroom	เห็ดที่เกิดจาความชื้น		
+518	Cold Timber	ท่อนไม้ที่ถูกความเย็นผนึกไว้		
+519	Cold Meat	เนื้อแข็ง		
+520	Dead Flower	ดอกไม้จากทะเลแห่งความตาย		
+521	Dead Worm	แมลงที่เต็มไปด้วยกลิ่นอายของธรรมชาติ		
+522	Dead Claw	เล็บของสัตว์ร้าย		
+523	Hell Coin	เหรียญที่โดนคำสาป		
+524	Hell Captain Cap 	หมวกกัปตันที่มาจากนรก		
+525	Hell Blood Diamond 	เพรชที่มีแสงแห่งคำสาป		
+526	 Hijack  bomb	ระเบิดที่ Hijack คิดค้นขึ้น		
+527	 Hijack  Doping	ยาที่ Hijack ใช้เพิ่มพลัง		
+528	 Hijack  Food Stock	เสบียงของ Hijack 		
+529	Justice Flag	ธงทหาร		
+530	Thunder Bomb 	ระเบิดที่มีพลังทำลายล้างสูง		
+531	Officer Nameplate	นามบัตรเจ้าหน้าที่		
+532	Deteriorated Fruit	ผลไมม้ที่มีรสชาติดี		
+533	Licorice Gel	มีกลิ่นหอม		
+534	Cheated Jewelry	ของล้ำค่าที่ Jewelry Lady ทำหาย		
+535	Suspicious Stone	หินที่มีลายสลักอยู่		
+536	Suspicious Parchment 	หินที่มีลายสลักอยู่		
+537	Low Pearl	มุกคุณภาพต่ำ		
+538	Dietrich Gold 	ตำนานเล่าว่า บนเหรียญมีเบาะแสของสมบัติอยู่ แต่ดูยังไงก็ดูไม่ออก		
+539	Red Berry 	ผลไม้สีแดงน่ากิน		
+540	Missing Cargo	ของที่ได้กลับคืน		
+541	Caisson	กล่องที่บรรจุลูกระเบิดไว้		
+542	Fire Crystal	ผลึกที่มีไฟลุกไหม้อยู่ด้านในตลอดเวลา		
+543	Strengthen Steel	เหล็กที่มีความแข็งแกร่งมาก		
+544	High Energy crystal	ผลึกที่มีพลังงานสูง		
+545	Propeller Design(1)	แบบแปลนเครื่องจักรใหม่ล่าสุด		
+546	Propeller Design(2)	แบบแปลนเครื่องจักรใหม่ล่าสุด		
+547	Blessing God	รูปปั้นเทพที่คอยให้คำอวยพร		
+548	Brass Bell	กระดิ่งสีทอง		
+549	gold Bullion	เหรียญที่ส่องแสงแวววาว		
+550	Blue Conifer Cone	ผลไม้สีฟ้า สีของมันน่ากินมาก		
+551	Red Conifer Cone	ผลไม้สีแดง สีของมันน่ากินมาก		
+552	Head Mushroom	เห็ดรูปร่างน่ารัก		
+553	Volvacea	ไม่แน่ใจว่ากินได้หรือไม่		
+554	Dried Pineapple	สับปะรดอบแห้ง สามารถเก็บไว้ได้นานขึ้น		
+555	Hard Mushroom	เห็ดแข็งและรสชาติไม่ดี		
+556	Raft Material	ไม้คุณภาพดี สามารถนำไปสร้างเรือได้		
+557	Coconut Turtle  Juice	ได้ยินมาว่า Coconut Turtle มันจะมีน้ำตาแห่งการขอบคุณ ซึ่งมีรสชาติหวาน		
+558	Thick Fur	หนังของ Cold Bristle Ape เมื่อสวยใส่มันจะอบอุ่นมาก		
+559	Polar Deer Fur	ขนของ Plar deer ขายได้ในราคาแพง		
+560	Bone Sheep Steak	เนื้อฉ่ำไปด้วยน้ำอันแสนอร่อย		
+561	Black Organization Command	จดหมายน่าสงสัย อาจเกี่ยวข้องกับชายชุดดำ		
+562	Talu Ya Coconut	ผลไม้ที่ต้องมีบนตัวของ Rock turtle		
+563	Blue Stone	หินสีฟ้า		
+564	Pirate Order Signage	มีพลังลึกลับ มีโจรสลัดบางคนเท่านั้นที่จะครอบครองได้		
+565	Ship Contraband	ของที่โจรสลัดปล้นมา		
+566	Secret Book	บันทึกเรื่องลับอยู่มากมาย		
+567	Flying Bird Egg 	ไข่ของ Flying Bird ขายได้ราคาแพง		
+568	Hammer of Judgment	เครื่องจักรที่ทหารเรือพัฒนาขึ้น หากได้อยู่ในมือของโจรสลัด..จบเห่แน่		
+569	Free Emblem	สัญลักษณ์ของทหารเรือ		
+570	Poseidon Feast	ของล้ำค่าที่สามารถหมักได้เหล้ารสชาติดี		
+571	Frost Giant Tortoise Blood	เลือดของ Frost Giant Tortoise		
+572	Dust Dragon Turtle Blood	เลือดของ Dragon Turtle		
+573	Signboard Black Beer	เบียร์ที่จะต้องมีพร้อมทุกงานปาร์ตี้		
+574	Banana Wine	เหล้าผลไม้ที่มีรสหวาน เป็นที่นิยมของผู้หญิง		
+575	Fallen Commander	เหล้าที่เก็บไว้ในห้องเก็บเหล้าของบาร์ ว่ากันว่าเมื่อกินแล้วจะลืมเรื่องทุกข์โศกทันที		
+576	Grandfather Antique Armor	อาจเป็นสมบัติล้ำค่าของใครบางคน		
+577	Grandfather Tattered Armor	เกราะที่บิดเบี้ยว		
+578	Burning Vodka	เหล้าหมักสไตล์ Foreign ดีกรีของมันสูงมาก		
+579	Bloody Mary	เหล้าที่มีชื่อเสียงในเมืองๆหนึ่ง		
+580	Purgatory Whisky	เหล้าแรงที่สามารถทำให้คนคอแข็งเมาได้ในพริบตา		
+581	Deadly Maguey	เหล้าที่มีรสชาติเป็นเอกลักษณ์		
+582	Aged Plum Wine	เหล้าผลไม้ที่หมักจากลูกพลัม มีกลิ่นผลไม้หอม		
+583	Lost Eagle Feather	ขนของ Desert Eagle		
+584	Ancyn Hammer	เครื่องมือช่างในตำนาน ชิ้นส่วนสมบัติของ Ancyn		
+585	Ancyn Awl	เครื่องมือช่างในตำนาน ชิ้นส่วนสมบัติของ Ancyn		
+586	Ancyn Toolkit	เครื่องมือช่างในตำนาน สมบัติของ Ancyn		
+587	Kenbal Ring	แหวนลึกลับ อาจมีพลังแฝงอยู่		
+588	Legacy Warm Cloth	เสื้อที่โจนสลัดทิ้งไว้ ดูแล้วน่าจะเป็นของผู้หญิง		
+589	Morning Light Ring	หนึ่งในสมบัติที่ราชวงศ์ทำหาย		
+590	Twilight Crown	หนึ่งในสมบัติที่ราชวงศ์ทำหาย		
+591	Royal Necklace	สร้อยคอที่สละกรูปโพไซดอน เจ้าหญิง Angelina สวมใส่อยู่		
+592	Air Route Map	แผนที่ติดตามโจรสลัด		
+593	Antiquity Mech Key	กุญแจที่สามารถขัยเคลื่อนเครื่องจักโบราณได้		
+594	Smelter Core	แก่นเตาหลอมที่ใช้ในการสร้าง Fly Airship		
+595	Roam Red Crystal	ผลึกสีแดงที่ใช้เสริม Fly Airship		
+596	Hematite	แร่ที่ใข้สร้างเกราะ Fly Airship		
+597	Stimulus Mechanism	เครื่องมือที่ Hijack พัฒนาขึ้นเพื่อการต่อสู้		
+598	Power Core	แก่นพลังงานที่สามารถนำมาใช้ขับเคลื่อน Fly Airship ได้		
+599	Melt Block	กล่องสี่เหลี่ยมที่ถูกแปรรูป		
+600	BurnBomb	ระเบิดที่ใช้ได้ดีกับแมลง		
+601	Heaven Spice	เครื่องเทศจาก Spice Paradise Island  สามารถหาได้จากมอนสเตอรบางตัวในเกาะ		
+602	Preciou Wool	ขนของ Angel Sheep สามารถให้ความอุ่นได้		
+603	Queen Corpse	ซากของราชินี ได้ยินมาว่าสามารถนำไปทำยาได้		
+604	Empire of Mu Runestone	หินแกะสลักบนตัว Al Timo มาจากสถานที่โบราณใน Empire of Mu		
+605	Arrear Tip	เงินติ๊บ Judge Beirut		
+606	Mystery Gift	ของขวัญที่พันริบบิ้นไว้		
+607	Prison Passage Key	กุญแจห้องขังอาชญากรร้าย		
+608	Felon Key	กุญแจห้องขังอาชญากรร้าย		
+609	Navy Ship Cap	หมวกทหารเรือ		
+610	Strong Blood	เลือดของนักรบผู้กล้าหาญ		
+611	Ancient Pirate Bones	กระดูกโจรสลัดโบราณ 		
+612	Guard Stone	ศิลาโบราณของ Empire of Mu เป็นคีย์ของกิจกรรมประเภทAl Timo		
+613	Sinner Flame	ไฟนรกที่ไม่มีวันมอด		
+614	Mech Control Panel	เครื่องประกอบเทคโนโลยีของ Empire of Mu		
+615	Rupture Rough Diamond	มีส่วนของเพรชดิบทที่แตกออก		
+616	Polish Tool	เครื่องมือที่สามารถนำมาเปิดศิลาได้		
+617	Platinum	จี้ที่นำมาใส่ศิลา		
+618	Silver Star Chain	สร้อยที่ทำมาจากเงินขาว		
+619	Rupture Rough Diamond	มีส่วนของเพรชดิบทที่แตกออก		
+620	Friendship Pendant	ผ่านการทดสอบกับเพื่อน สามารถเพิ่มระดับเป็นเพื่อนร่วมเดินทางได้		
+621	Friendship Pendant	ผ่านการทดสอบกับเพื่อน สามารถเพิ่มระดับเป็นเพื่อนร่วมเดินทางได้		
+622	Oz Reward Bill	บิลรางวัลของ Navy Spy [Elephant Oz] 		
+623	Nautical Chart Upper Half	มีรายงานที่ต้องไปถึง [Rough Sea Fortress] และต้องประกอบเป็นสองชิ้น		
+624	Nautical Chart Lower Half	มีรายงานที่ต้องไปถึง [Rough Sea Fortress] และต้องประกอบเป็นสองชิ้น		
+625	Counterfeit File	ลายมือของ [Jason] ต้องนำจดหมายนี้ไปให้ Khayredin		
+626	Rough Sea Compass	จะต้องใช้ถาดนี้ จึงจะอ่านแผนที่ได้		
+627	Champions Cup	รางวัลชนะ Football กิลด์ Pirates Fan Boy [Jim] อยากได้ของสิ่งนี้		
+628	True Crystal	ผลึกที่เต็มไปด้วยความความจริงใจ (สามารถส่งให้เพื่อน เพื่อสำเร็จภารกิจ)		
+629	Warmly Crystal	ผลึกที่เต็มไปด้วยความความกระตือรือร้น (สามารถส่งให้เพื่อน เพื่อสำเร็จภารกิจ)		
+630	Theft Poseidon Instrument	อาวุธของ Poseidon ที่มาจากโลกคู่ขนาน ไม่รู้ว่าจะส่งผลกระทบด้านลบหรือเปล่า		
+631	Toy Pack	ของขวัญสำหรับเด็ก ด้านในเป็นของเล่น		
+632	Sooty	ของรับรองการส่งของขวัญ		
+633	Deer milk	ประโยชน์ทางโภชนาการสูง		
+634	Ganoderma	เห็ดที่ใช้ทำเป็นยา สามารถห้ามเลือดได้		
+635	Alienation Scale	เกล็ดของ Alienation Wolf สามารถใช้ทำเป็นยาชาได้		
+636	Navy Vulnerary	ยารักษาสำหรับทหารเรือ		
+637	Fresh Fruit	ผลไม้สดแสนอร่อย		
+638	Beetle Egg	ไข่แมลง		
+639	Advanced Tobacco	ใบยาสูบอบแห้ง มีกลิ่นหอมโดดเด่น		
+640	Tender	เนื้อที่มีรสชาติดี		
+641	Filet Lamb Chop	เนื้อแพะฉ่ำน้ำ		
+642	Cold Meat	เนื้ออ่อนของสัตว์ มีรสฝาด		
+643	Fishy Honey	น้ำผึ้งที่มีกลิ่นเลือดแฝงอยู่		
+644	Burnt Steak	สเต็กที่มีกลิ่นอายความมืด		
+645	Fire Bud	ต้นอ่อนของ Volcano 		
+646	Fruity Raw Meat	เนื้อที่มีกลิ่นของผลไม้แฝงอยู่		
+647	Super Nutrition Dragon Blood	เลือดสดของเผ่ามังกร มีประโยชน์ทางโภชนาการ		
+648	Energy Crystal	ผลึกคริสตัลที่มีพลังลึกลับ		
+649	Thermal Wine	เหล้านี้ ไม่เย็นเลยซักนิด		
+650	Urgent Intelligence	ไม่เกี่ยวกับผู้เปิด การตัดสินของศาล		
+651	Princess Love Letter	มีกลิ่มหอมที่เป็นเอกลักษณ์		
+652	Important Part	เครื่องมือที่มีวิธีการใช้ซับซ้อน		
+653	Banquet Order	ออเดอร์หมาปึก ด้านบนเขียนรายการอาหารไว้มากมาย		
+654	Instruction Book	หนังสือลับ		
+655	Affliction Bean	ถั่ว Wang Willie เป็นวัสดุสำหรับทำชอคโกแลตของ Wang Willie		
+656	Sweet Milk	น้ำตาลที่มีคุณภาพ เป็นวัสดุสำหรับทำชอคโกแลตของ Wang Willie		
+657	Tasty Granulated Sugar	น้ำตาลที่มีคุณภาพ เป็นวัสดุสำหรับทำชอคโกแลตของ Wang Willie		
+658	Perceptual Gratitude	จดหมายขอบคุณจากคนที่ได้รับชอคโกแลต		
+659	Playful Gratitude	จดหมายขอบคุณจากคนที่ได้รับชอคโกแลต		
+660	Reset Crystal	มีน้ำหนักมาก ได้ยินมาว่ามันสามารถฟื้นฟูผลึกให้กลับคงเดิมได้		
+661	Sea Phantom Map Trail	เก่าแก่ไปบ้าง แต่ด้านบนมีแผนที่ที่ไม่ทราบที่สลักอยู่		
+662	Jasmine			
+701	Al Timo Reply	ใบรับรองการให้ความช่วยเหลือ [Al Timo] กรุณาส่งให้เจ้าหน้าที่กิลด์		
+702	Medea Reply	ใบรับรองการให้ความช่วยเหลือ [Medea] กรุณาส่งให้เจ้าหน้าที่กิลด์		
+703	Empire Armoured Car Reply	ใบรับรองการให้ความช่วยเหลือ [Empire Armoured Car] กรุณาส่งให้เจ้าหน้าที่กิลด์		
+704	Dante Reply	ใบรับรองการให้ความช่วยเหลือ [Dante] กรุณาส่งให้เจ้าหน้าที่กิลด์		
+705	 Nora Jana Sword Reply	ใบรับรองการให้ความช่วยเหลือ [ Nora Jana Sword] กรุณาส่งให้เจ้าหน้าที่กิลด์		
+720	Graphene Gear	กราฟิน เป็นวัตถุที่มีความแข็งแกร่งทนทานที่สุดในปัจจุบัน		
+721	Walrus Fat	นำไปรวมกับเกลือสามารถทำเป็นน้ำมันได้		
+722	Poseidon Keel	ความทนทานสูงกว่าเหล็กกล้าหลายเท่า		
+723	Mecha Chain	สามารถนำไปขับเคลื่อนเครื่องกลได้		
+724	Akejim Blueprint	ทำตำในแบบพิมพ์เขียวสามารถสร้าง Akejim ได้		
+725	Nuclear Ship Powerplant	มีรังสีอันตราย กรุณาใส่เครื่องป้องกันให้แน่นหนา		
+726	High Carbon Steel	ความแกร่งสูง ทุนสร้างต่ำ คือเครื่องกลที่ต้องการในปัจจุบัน		
+727	Tough Hair	ผม 1 เส้น ดึงก็ขาด แต่ผม 1 มัดสามารถนำไปลากรถได้ อย่าดูถูกความสามัคคี		
+728	Beef Tallow	น้ำมันที่ใช้สำหรับกิน มีผลต่อเครื่องยนต์กลไกเป็นอย่างดี		
+729	Titanium Gear	แร่แกร่งที่ดาวินชี่ออกแบบ สูตรของแร่มีเพียง 3 คนบนโลกนี้เท่านั้นที่รู้...		
+730	Navy Tiger Mech Blueprint	ทำตำในแบบพิมพ์เขียวสามารถสร้าง Navy Tiger Mech ได้		
+731	Zero Energy	แหล่งรวมพลังงาน Zero สามารถผลิตพลังงานได้อย่างไม่มีที่สิ้นสุด		
+732	Martensitic Steel Plate	สร้างจากความร้อนอย่างรวดเร็ว มีความแกร่งสูง		
+733	機油	通過KMA皇家油品認證的高級機油。		
+734	鮭魚口糧	由返鄉的鮭魚精製而成的口糧。		
+735	金屬材料	輕金屬，密度僅是鐵三分之一左右。在攝氏300度左右失去抗張強度，熔點約660度。		
+736	秘密帳冊	只要有神秘人士簽名過的，都會被列為機密。		
+737	海皇龍戰士的頭	這個頭看起來有一點龍的樣貌。		
+738	走私贓物	上面印著大大的「絕無不法」字樣。		
+739	通訊錄	封面的一小角好像寫著什麼CLOUD?		
+740	牛排	這是三分熟的，還帶有點兒血。		
+741	隱寧精華	有時候是固體，有時候是液體。你抓不住它。		
+742	奈米精沙	直徑大約是十的負九次方的一粒砂。		
+743	堅韌的髮辮	一大束的頭髮可是比繩子還堅固。		
+744	磁爆線圈	又稱特斯拉線圈，被它電到的話可不只是有點痛可以形容了。		
+900	Success Certificate	ใบรับรองนี้สามารถรับรองว่าท่านผ่าน [Falling Sun] มาแล้ว		
+901	Challenge Exchange Reward  Coupon	คูปองแลกรับรางวัล สามารถได้รับรางวัล BIG CBT		
+3001	Guild Happy Cup	เอาไปให้ Chairman เพื่อสำเร็จภาพกิจ~~		
+3002	Guild Happy Cup	เอาไปให้ Chairman เพื่อสำเร็จภาพกิจ~~		
+3003	Guild Happy Cup	เอาไปให้ Chairman เพื่อสำเร็จภาพกิจ~~		
+3004	Guild Happy Cup	เอาไปให้ Chairman เพื่อสำเร็จภาพกิจ~~		
+3005	Ono Plum	เปรี้ยวๆหวานๆ มีประโยชน์!เมื่อกินจะเพิ่มค่าพลัง 2 แต้ม เป็นเวลา 10 นาที		คลิกขวาใช้จะเกิดผลทันที
+3006	Green Honey Nut	ผลไม้หวานหอม เด็กๆชื่นชอบ~เมื่อกินจะเพิ่มค่าว่องไว 2 แต้ม เป็นเวลา 10 นาที		คลิกขวาใช้จะเกิดผลทันที
+3007	Cape Mount Banana	ผลไม้ในพื้นที่ รสชาติมีเอกลักษณ์ เป็นของโปรดของพวกอุรังอุตัง!เมื่อกินจะเพิ่มค่ากาย 2 แต้ม เป็นเวลา 10 นาที		คลิกขวาใช้จะเกิดผลทันที
+3008	Pear	มีรสหวาน แก้กระหายได้!เมื่อกินจะเพิ่มค่าปัญญา 2 แต้มเป็นเวลา 10 นาที		คลิกขวาใช้จะเกิดผลทันที
+3009	Loquat Fruit	ผลไม้เปลืองบาง มีรสหวานและน้ำเยอะ เมื่อกินจะเพิ่มค่ารู้สึก 2 แต้ม เป็นเวลา 10 นาที		คลิกขวาใช้จะเกิดผลทันที
+7000	Flares	ไอเทมสำหรับการสำรวจถ้ำลึก		เมื่อใช้และคลิกที่พื้น สามารถสร้างพื้นที่ที่แมลงไม่สามารถเข้าใกล้ได้ เป็นเวลา 10 วินาที
+7001	Weapon Box  Key	สามารถเปิดกล่องได้บางกล่อง		
+7002	Relic Chamber Key	สามารถเปิดประตูได้บางประตู		
+7003	Treasury Key	สามารถเปิดประตูได้บางประตู		
+7004	Pyrotechnics	เมื่อใช้สามารถเรียกเรือรบมาเป็นกำลังเสริมได้		กดใช้ และคลิกที่พื้น สามารถยกเลิกโหมดผู้ลี้ภัยใน [Nora Jana Sword] ได้

@@ -1,0 +1,1683 @@
+n_ID	s_TITLE_BUFF	s_DESCRIPTION	s_CACULATE
+1	Sea Mile	ท่านอยู่ในทะเล ไม่สามารถใช้สกิลหรือต่อสู้ได้	
+17	debuff_3	debuff_3	
+18	debuff_10	debuff_10	
+19	debuff_11	debuff_11	
+20	Net Power Up	ค่า HP สูงสุด และสเตตัสทั้งหมดของท่านเพิ่มขึ้น 5%	
+21	buff_2	buff_2	
+22	buff_3	buff_3	
+23	buff_4	buff_4	
+24	buff_5	buff_5	
+25	buff_6	buff_6	
+26	buff_7	buff_7	
+27	buff_8	buff_8	
+28	buff_9	buff_9	
+29	buff_10	buff_10	
+30	buff_11	buff_11	
+31	buff_12	buff_12	
+32	buff_13	buff_13	
+33	buff_14	buff_14	
+34	buff_15	buff_15	
+35	buff_16	buff_16	
+36	buff_17	buff_17	
+37	buff_18	buff_18	
+38	buff_19	buff_19	
+39	buff_20	buff_20	
+40	buff_21	buff_21	
+41	debuff_1	debuff_1	
+42	debuff_2	debuff_2	
+44	debuff_4	debuff_4	
+45	debuff_5	debuff_5	
+46	debuff_6	debuff_6	
+47	debuff_7	debuff_7	
+48	debuff_8	debuff_8	
+49	debuff_9	debuff_9	
+50	debuff_10	debuff_10	
+89	Wound Healing	เมื่ออยู่ในสถานะต่อเนื่อง หากโดนโจมตีจะตายทันที!	
+101	Losers	ท่านถูกผู้เล่นอื่นฆ่า ท่านแพ้ หากฆ่า Losers จะไม่ได้รางวัล PVP ใดๆ	
+104			ADD_DAMMIPHYSICS(1)
+140			
+144			ADD_DAMPLUS_PHYSICS(1)
+162			
+182			ADD_AC_PHYSICS(1)
+201			
+298	 Soul Gather 	สถานะ Soul Gather เมื่อใช้สกิลจะได้รับพลังยิ่งใหญ่	
+301	Regenaration	เพิ่มความเร็วในการฟื้นฟูค่าเวทย์ $ADD_RECOVER_STAMINA ในเวลาที่ต่อเนื่อง	ADD_RECOVER_STAMINA(1)
+500	Rebirth Protection	ท่านเกิดใหม่ใน Arena ตอนนี้ท่านจะไม่โดนโจมตี	
+552	Armor Warship	เสริมพลังป้องกัน ลดความเสียหายที่ได้รับ 50%。	
+556	Accelerate	เพิ่มความเร็วในการเคลื่อนที่ $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+604	Iron Ball	ได้รับผลกระทบการบอลเหล็ก ลดความเร็วเคลื่อนที่ $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+1003	Close to your partner!	อยู่ห่างจากเพื่อน 2 เมตร สามารถทำการเก็บพลังได้ ไม่ต้องกลัวลูกไฟที่พุ่งเข้ามาทำร้าย!	
+1004	Gather Courage	เก็บพลังกับเพื่อนเพื่อไม่ให้โดนโจมตี!	
+1039	Swordplay	ท่านกำลังวาดลวดลาย!	
+1870	Slow Speed	ส่งความเย็นให้เป้าหมายทำให้ความเร็วเคลื่อนที่ลดลง $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+2950	Joint Jump	ให้ผู้เล่นท่านอื่นช่วยท่านให้กระโดดสูงขึ้นอีกสิ!	
+2951	Joint Jump	ท่านเตรียมพร้อมในการช่วยให้ผู้อื่นกระโดด	
+2955	Magic Circle	เพื่อนในทีมกำลังใช้พลังวงแหวนในการย้ายท่านไปที่อื่น	
+2960	Team Energy Call	ตอบกลับการ Team Energy Call ของเพื่อนในทีม สามารถฟื้นฟูค่าเวทย์ได้อย่างรวดเร็ว	
+2961	Team Energy Call	เพิ่มความเร็วในการฟื้นฟูค่าเวทย์ $ADD_RECOVER_STAMINA เพิ่มค่าเวทย์สูงสุด $ADD_STAMINAMAX	ADD_RECOVER_STAMINA(1); ADD_STAMINAMAX(1)
+2965	Team Defensive Call	เพิ่มพลังชีวิตสูงสุด $ADD_HPMAX ต้านมึนงง และต้านคำสาปเพิ่มขึ้น $ADD_ANTI_STUN	ADD_HPMAX(1)(1); ADD_ANTI_STUN(2)(1)
+2966	Team Defensive Call	ตอบกลับการ Team Defensive Call ของเพื่อนในทีม สามารถเพิ่มค่าป้องกันให้กับเพื่อนในทีมได้	
+2968	Team Attacking Call	พลังโจมตีกายภาพและโจมตีเวทย์เพิ่มขึ้น $ADD_DAMMIMAGIC	ADD_DAMMIPHYSICS(1)(1); ADD_DAMMIMAGIC(1)(1)
+2969	Team Attacking Call	ตอบกลับการ Team Attacking Call ของเพื่อนในทีม สามารถเพิ่มค่าโจมตีได้	
+2971	Sunbeam	เพื่อนในทีมต้องการให้ท่าน Sunbeam	
+2972	Sunbeam	เพื่อนกำลังช่วยท่าน Sunbeam	
+2975	Pray All	เพื่อนของท่านต้องการให้ท่านช่วยเหลือ เพื่อทำการ Pray All	
+2976	Pray All	เพื่อนกำลังช่วยท่าน Pray All	
+3003	Attack Strengthen	เพิ่มพลังโจมตี $ADD_DAMMIPHYSICS	ADD_DAMMIPHYSICS(1)(1)
+3004	Defense Strengthen	เพิ่มพลังป้องกัน $ADD_AC_PHYSICS	ADD_AC_PHYSICS(1)(1)
+3005	Provoke	ตัดสมาธิทำให้ท่านสูญเสียการป้องกัน\nลดพลังป้องกัน $ADD_AC_PHYSICS	ADD_AC_PHYSICS(1)(1)
+3006	Break Point Bone	ผ่อนคลาย!\nเพิ่มพลังป้องกัน $ADD_AC_PHYSICS เพิ่มความเร็วในการเพิ่มเลือด $ADD_RECOVER_HP	ADD_AC_PHYSICS(1)(1); ADD_RECOVER_HP(1)(1)
+3008	Black Fire Claw	เวทย์มนต์ดำและเล็บแห่งเพลิง\nเพิ่มโจมตีเวทย์	
+3009	Etching	ทะลุเกราะ\nพลังป้องกันลดลง $ADD_AC_PHYSICS	ADD_AC_PHYSICS(1)(1)
+3010	Bleed	บาดแผลของท่านเลือดออกเรื่อยๆ\nพลังชีวิตลดลงเรื่อยๆ	
+3013	Rock turtleShield	กระดองที่แข็งแกร่งเพิ่มพลังห้องกัน $ADD_AC_PHYSICS แต้ม	ADD_AC_PHYSICS(1)(1)
+3014	Iron Turtle Shield	กระดองที่แข็งแกร่งเพิ่มพลังห้องกัน $ADD_AC_PHYSICS แต้ม	ADD_AC_PHYSICS(1)(1)
+3015	Slight Poisoning	ร่างกายรู้สึกไม่สบาย\nพลังชีวิตลดลงอย่างช้าๆ	
+3016	Poisoning	ท่านถูกพิษ!\nพลังชีวิตกำลังลด	
+3017	Great Venom	พิษจากเขี้ยวกำลังกลืนกินท่าน\nพลังชีวิตลดลงอย่างหนัก	
+3018	Searing	ไฟที่ร้อนแรงลุกไหม้บนตัวท่าน\nพลังชีวิตลดลงอย่างช้าๆ	
+3019	Burn	ตัวของท่านถูกเผาไหม้!\nพลังชีวิตกำลังลด	
+3020	Flame Ridden	เปลวเพลิงร้อนแรงลุกเต็มตัวของท่าน!\nพลังชีวิตลดลงอย่างหนัก	
+3021	Cold	ลมอันหนาวเหน็บทำให้ท่านตัวสั่น!\nพลังชีวิตลดลงช้าๆ ความเร็วเคลื่อนที่ลดลง 120	
+3022	Frost	ร่างกายของท่านเริ่มแข็ง\nพลังชีวิตลดลงช้าๆ ความเร็วเคลื่อนที่ลดลง 120	
+3023	Frozen	ร่างกายแข็งไม่ยอมทำตามคำสั่ง!\nพลังชีวิตลดลงอย่างมาก ความเร็วเคลื่อนที่ลดลง 120	
+3025	Slow Speed	การก้าวขาของท่านหน่วงขึ้น ความเร็วเคลื่อนที่ลดลง $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+3026	Slow Speed	การก้าวขาของท่านหน่วงขึ้น ความเร็วเคลื่อนที่ลดลง $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+3027	Slow Speed	การก้าวขาของท่านหน่วงขึ้น ความเร็วเคลื่อนที่ลดลง $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+3031	Debilitating needle	ท่านถูกฉีดด้วยยาอะไรบางอย่าง\nความเร็วเคลื่อนที่ลดลง 300 พลัง กาย ลดว่องไว	
+3032	Wraith Curse	ท่านถูกคำสาป!\nท่านโดนโจมตีตลอดเวลา, ความเร็วเคลื่อนที่ลดลง $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+3033	Float Bubble	ท่านถูกบอลขนาดใหญ่ล้อมลอบ ไม่สามารถยิงได้!	
+3042	Judgement	สัญญาณแห่งความตายสว่างอยู่บนตัวท่าน!	
+3043	Ice Barrier	เกราะน้ำแข็งทำให้ท่านไม่สามารถเคลื่อนที่ได้!\nความเร็วเคลื่อนที่ลดลง 	ADD_SPEED_RUN(1)(1)
+3044	Slow Speed	การก้าวขาของท่านหน่วงขึ้น ความเร็วเคลื่อนที่ลดลง $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+3045	Slow Speed	การก้าวขาของท่านหน่วงขึ้น ความเร็วเคลื่อนที่ลดลง $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+3046	Slow Speed	การก้าวขาของท่านหน่วงขึ้น ความเร็วเคลื่อนที่ลดลง $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+3047	Slow Speed	การก้าวขาของท่านหน่วงขึ้น ความเร็วเคลื่อนที่ลดลง $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+3048	Slow Speed	การก้าวขาของท่านหน่วงขึ้น ความเร็วเคลื่อนที่ลดลง $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+3049	Slow Speed	การก้าวขาของท่านหน่วงขึ้น ความเร็วเคลื่อนที่ลดลง $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+3053	Hallow	พลังจากนรกมาครอบงำท่านไว้	
+3081	Icy Hell	น้ำ/น้ำลดความเร็ว ทำให้ความเร็วเคลื่อนที่ลดลง $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+3093	Ice Critical	ป้องกันเวทย์ลดลง	
+3094	Polar Blessing	เพิ่มพลังป้องกัน และความเร็วในการฟื้นฟูพลังชีวิต	
+5104	Lydiana Melody	เสียงเพลงอันไพรเราะ ช่วยให้ท่านผ่อนคลาย\nเพิ่มอัตราต้านมึนงง, เพิ่มอัตราต้านคำสาป, เพิ่มอัตราหลบหลีก	
+5105	Lydiana Melody	เสียงเพลงอันไพรเราะ ช่วยให้ท่านผ่อนคลาย\nเพิ่มความเร็วเคลื่อนที่, เพิ่มความเร็วในการฟื้นฟูค่าเวทย์	
+5122	Destroy Atom	เพิ่มค่าพลัง $ADD_STRENGH	ADD_STRENGH(1)(1)
+5123	Cold Ice Crystal	เพิ่มค่าว่องไว $ADD_AGILITY	ADD_AGILITY(1)(1)
+5124	Seven Sea Pearl	เพิ่มค่าปัญญา $ADD_INTELLECT	ADD_INTELLECT(1)(1)
+5125	Paine Bottle	เพิ่มค่ารู้สึก $ADD_PERCEPTION	ADD_PERCEPTION(1)(1)
+5138	#Treasure-Impersonate Tree	แปลงร่างเป็นต้นไม้	
+5139	#Treasure-Fort	แปลงร่างเป็นปืนใหญ่	
+5140	#Treasure-Spring Bed	แปลงร่างเป็นเตียงสปริง	
+5141	#Treasure-Alert Jump	Bounce!	
+5142	#Treasure-Repent	คุกเข่า!	
+5143	#Treasure-Repent	คุกเข่า!	
+5161	Christmas Guard	เมอร์รี่คริสต์มาส!\nเพิ่มค่าเวทย์ 2 หน่วย	
+6601	Viciously Of wind Lv.1	เพิ่มค่าพลัง $ADD_STRENGH\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_STRENGH(1)\nADD_HPMAX(1)
+6602	Protect Of Brave Lv.1	เพิ่มค่ากาย $ADD_CONSITUTION\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_CONSITUTION(1)\nADD_HPMAX(1)
+6603	Curvet Of Horn Lv.1	เพิ่มค่าว่องไว $ADD_AGILITY\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_AGILITY(1)\nADD_HPMAX(1)
+6604	Lv1Soul Of Protect	เพิ่มค่ารู้สึก $ADD_PERCEPTION\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_PERCEPTION(1)\nADD_HPMAX(1)
+6605	Civilization Of World Lv.1	เพิ่มค่าปัญญา $ADD_INTELLECT\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_INTELLECT(1)\nADD_HPMAX(1)
+6606	Attention Rum Lv.1	เพิ่มอัตราแม่นยำ $ADD_HITRATE%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_HITRATE(2)\nADD_HPMAX(1)
+6607	Swallow Nest Rum Lv.1	เพิ่มอัตราหลบหลีก $ADD_DODGE%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_DODGE(2)\nADD_HPMAX(1)
+6608	Mad Rum Lv.1	เพิ่มอัตราคริติคอล $ADD_POWERHIT%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_POWERHIT(2)\nADD_HPMAX(1)
+6609	Devil Rum Lv.1	เพิ่มอัตราต้านคริติคอล $ADD_ANTI_POWERHIT%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_ANTI_POWERHIT(2)\nADD_HPMAX(1)
+6610	Attention Rum Lv.2	เพิ่มอัตราแม่นยำ $ADD_HITRATE%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_HITRATE(2)\nADD_HPMAX(1)
+6611	Swallow Nest Rum Lv.2	เพิ่มอัตราหลบหลีก $ADD_DODGE%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_DODGE(2)\nADD_HPMAX(1)
+6612	Mad Rum Lv.2	เพิ่มอัตราคริติคอล $ADD_POWERHIT%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_POWERHIT(2)\nADD_HPMAX(1)
+6613	Devil Rum Lv.2	เพิ่มอัตราต้านคริติคอล $ADD_ANTI_POWERHIT%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_ANTI_POWERHIT(2)\nADD_HPMAX(1)
+6614	Attention Rum Lv.3	เพิ่มอัตราแม่นยำ $ADD_HITRATE%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_HITRATE(2)\nADD_HPMAX(1)
+6615	Swallow Nest Rum Lv.3	เพิ่มอัตราหลบหลีก $ADD_DODGE%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_DODGE(2)\nADD_HPMAX(1)
+6616	Mad Rum Lv.3	เพิ่มอัตราคริติคอล $ADD_POWERHIT%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_POWERHIT(2)\nADD_HPMAX(1)
+6617	Devil Rum Lv.3	เพิ่มอัตราต้านคริติคอล $ADD_ANTI_POWERHIT%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_ANTI_POWERHIT(2)\nADD_HPMAX(1)
+6618	Forest Protect	เพิ่มค่าพลัง $ADD_STRENGH\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_STRENGH(1)\nADD_HPMAX(1)
+6619	Poseidon Protect	เพิ่มค่ากาย $ADD_CONSITUTION\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_CONSITUTION(1)\nADD_HPMAX(1)
+6620	Deep sea Protect	เพิ่มค่าว่องไว $ADD_AGILITY\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_AGILITY(1)\nADD_HPMAX(1)
+6621	Purgatory Protect	เพิ่มค่ารู้สึก $ADD_PERCEPTION\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_PERCEPTION(1)\nADD_HPMAX(1)
+6622	Sky Protect	เพิ่มค่าปัญญา $ADD_INTELLECT\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_INTELLECT(1)\nADD_HPMAX(1)
+6623	Event Brew Lv.1	เพิ่มสเตตัสทั้งหมด $ADD_INTELLECT แต้ม	ADD_INTELLECT(1)
+6624	Event Brew Lv.2	เพิ่มสเตตัสทั้งหมด $ADD_INTELLECT แต้ม	ADD_INTELLECT(1)
+6625	Event Brew Lv.3	เพิ่มสเตตัสทั้งหมด $ADD_INTELLECT แต้ม	ADD_INTELLECT(1)
+6626	Event Brew Lv.4	เพิ่มสเตตัสทั้งหมด $ADD_INTELLECT แต้ม	ADD_INTELLECT(1)
+6627	Event Brew Lv.5	เพิ่มสเตตัสทั้งหมด $ADD_INTELLECT แต้ม	ADD_INTELLECT(1)
+6628	Event Brew Lv.6	เพิ่มสเตตัสทั้งหมด $ADD_INTELLECT แต้ม	ADD_INTELLECT(1)
+6629	Event Brew Lv.7	เพิ่มสเตตัสทั้งหมด $ADD_INTELLECT แต้ม	ADD_INTELLECT(1)
+6630	Event Brew Lv.8	เพิ่มสเตตัสทั้งหมด $ADD_INTELLECT แต้ม	ADD_INTELLECT(1)
+6631	Event Brew Lv.9	เพิ่มสเตตัสทั้งหมด $ADD_INTELLECT แต้ม	ADD_INTELLECT(1)
+6632	Event Brew Lv.10	เพิ่มสเตตัสทั้งหมด $ADD_INTELLECT แต้ม	ADD_INTELLECT(1)
+6633	Ono Plum	เพิ่มค่าพลัง $ADD_STRENGH	ADD_STRENGH(1)
+6634	Green Honey Nut	เพิ่มค่าว่องไว $ADD_AGILITY	ADD_AGILITY(1)
+6635	Cape Mount Banana	เพิ่มค่ากาย$ADD_CONSITUTION	ADD_CONSITUTION(1)
+6636	Pear	เพิ่มค่าปัญญา$ADD_INTELLECT	ADD_INTELLECT(1)
+6637	Loquat Fruit	เพิ่มค่ารู้สึก $ADD_PERCEPTION	ADD_PERCEPTION(1)
+6638	Primary Potion Lv.1	เพิ่มอัตราคริติคอล $ADD_POWERHIT%	ADD_POWERHIT(2)
+6639	Primary Potion Lv.2	เพิ่มอัตราคริติคอล $ADD_POWERHIT%	ADD_POWERHIT(2)
+6640	Primary Potion Lv.3	เพิ่มอัตราคริติคอล $ADD_POWERHIT%	ADD_POWERHIT(2)
+6641	Chaotic Potion Lv.1	เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM	ADD_MULTIPLY_POWERDAM(2)
+6642	Chaotic Potion Lv.2	เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM	ADD_MULTIPLY_POWERDAM(2)
+6643	Chaotic Potion Lv.3	เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM	ADD_MULTIPLY_POWERDAM(2)
+6644	Sky Mirror Potion Lv.1	เพิ่มอัตราแม่นยำ$ADD_HITRATE%	ADD_HITRATE(2)
+6645	Sky Mirror Potion Lv.2	เพิ่มอัตราแม่นยำ$ADD_HITRATE%	ADD_HITRATE(2)
+6646	Sky Mirror Potion Lv.3	เพิ่มอัตราแม่นยำ$ADD_HITRATE%	ADD_HITRATE(2)
+6647	Adroit Potion Lv.1	เพิ่มอัตราหลบหลีก$ADD_DODGE%	ADD_DODGE(2)
+6648	Adroit Potion Lv.2	เพิ่มอัตราหลบหลีก$ADD_DODGE%	ADD_DODGE(2)
+6649	Adroit Potion Lv.3	เพิ่มอัตราหลบหลีก$ADD_DODGE%	ADD_DODGE(2)
+6650	Pumpkin Wine	สเตตัสทั้งหมด +$ADD_STRENGH	ADD_STRENGH(1)
+6651	Christmas Wine	สเตตัสทั้งหมด +$ADD_STRENGH	ADD_STRENGH(1)
+6652	Attention Rum Lv.4	เพิ่มอัตราแม่นยำ$ADD_HITRATE%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_HITRATE(2)\nADD_HPMAX(1)
+6653	Swallow Nest Rum Lv.4	เพิ่มอัตราหลบหลีก$ADD_DODGE%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_DODGE(2)\nADD_HPMAX(1)
+6654	Mad Rum Lv.4	เพิ่มอัตราคริติคอล $ADD_POWERHIT%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_POWERHIT(2)\nADD_HPMAX(1)
+6655	Devil Rum Lv.4	เพิ่มอัตราต้านคริติคอล $ADD_ANTI_POWERHIT%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_ANTI_POWERHIT(2)\nADD_HPMAX(1)
+6656	Attention Rum Lv.5	เพิ่มอัตราแม่นยำ$ADD_HITRATE%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_HITRATE(2)\nADD_HPMAX(1)
+6657	Swallow Nest Rum Lv.5	เพิ่มอัตราหลบหลีก$ADD_DODGE%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_DODGE(2)\nADD_HPMAX(1)
+6658	Mad Rum Lv.5	เพิ่มอัตราคริติคอล $ADD_POWERHIT%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_POWERHIT(2)\nADD_HPMAX(1)
+6659	Devil Rum Lv.5	เพิ่มอัตราต้านคริติคอล $ADD_ANTI_POWERHIT%\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_ANTI_POWERHIT(2)\nADD_HPMAX(1)
+6660	Viciously Of wind Lv.2	เพิ่มค่าพลัง $ADD_STRENGH\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_STRENGH(1)\nADD_HPMAX(1)
+6661	Protect Of Brave Lv.2	เพิ่มค่ากาย$ADD_CONSITUTION\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_CONSITUTION(1)\nADD_HPMAX(1)
+6662	Curvet Of Horn Lv.2	เพิ่มค่าว่องไว $ADD_AGILITY\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_AGILITY(1)\nADD_HPMAX(1)
+6663	Soul Of Protect Lv.2	เพิ่มค่ารู้สึก $ADD_PERCEPTION\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_PERCEPTION(1)\nADD_HPMAX(1)
+6664	Civilization Of World Lv.2	เพิ่มค่าปัญญา$ADD_INTELLECT\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_INTELLECT(1)\nADD_HPMAX(1)
+6665	Viciously Of wind Lv.3	เพิ่มค่าพลัง $ADD_STRENGH\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_STRENGH(1)\nADD_HPMAX(1)
+6666	Protect Of Brave Lv.3	เพิ่มค่ากาย$ADD_CONSITUTION\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_CONSITUTION(1)\nADD_HPMAX(1)
+6667	Curvet Of Horn Lv.3	เพิ่มค่าว่องไว $ADD_AGILITY\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_AGILITY(1)\nADD_HPMAX(1)
+6668	Soul Of Protect Lv.3	เพิ่มค่ารู้สึก $ADD_PERCEPTION\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_PERCEPTION(1)\nADD_HPMAX(1)
+6669	Civilization Of World Lv.3	เพิ่มค่าปัญญา$ADD_INTELLECT\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_INTELLECT(1)\nADD_HPMAX(1)
+6670	Viciously Of wind Lv.4	เพิ่มค่าพลัง $ADD_STRENGH\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_STRENGH(1)\nADD_HPMAX(1)
+6671	Protect Of Brave Lv.4	เพิ่มค่ากาย$ADD_CONSITUTION\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_CONSITUTION(1)\nADD_HPMAX(1)
+6672	Curvet Of Horn Lv.4	เพิ่มค่าว่องไว $ADD_AGILITY\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_AGILITY(1)\nADD_HPMAX(1)
+6673	Soul Of Protect Lv.4	เพิ่มค่ารู้สึก $ADD_PERCEPTION\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_PERCEPTION(1)\nADD_HPMAX(1)
+6674	Civilization Of World Lv.4	เพิ่มค่าปัญญา$ADD_INTELLECT\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_INTELLECT(1)\nADD_HPMAX(1)
+6675	Viciously Of wind Lv.5	เพิ่มค่าพลัง $ADD_STRENGH\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_STRENGH(1)\nADD_HPMAX(1)
+6676	Protect Of Brave Lv.5	เพิ่มค่ากาย$ADD_CONSITUTION\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_CONSITUTION(1)\nADD_HPMAX(1)
+6677	Curvet Of Horn Lv.5	เพิ่มค่าว่องไว $ADD_AGILITY\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_AGILITY(1)\nADD_HPMAX(1)
+6678	Soul Of Protect Lv.5	เพิ่มค่ารู้สึก $ADD_PERCEPTION\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_PERCEPTION(1)\nADD_HPMAX(1)
+6679	Civilization Of World Lv.5	เพิ่มค่าปัญญา$ADD_INTELLECT\nเพิ่ม HP สูงสุด $ADD_HPMAX	ADD_INTELLECT(1)\nADD_HPMAX(1)
+8013	Cold Chill	Cold Chill ขังท่านไว้ หยุดการฟื้นฟูค่าเวทย์ และความเร็วเคลื่อนที่ลดลง 	
+8014	Venom	Venom ที่น่าขยะแขยง ทำให้ท่ายรู้สึกไม่สบาย	
+8015	Searing	อากาสร้อนรุ่ม ทำให้ท่ายรู้สึกไม่สบาย	
+8016	Magma	ลาวาอันร้อนระอุ มันอาจชีวิตไปจากท่านได้	
+8027	Hammer of Judgment - Tester	ใช้อาวุธที่ทหารเรือให้มาโจมตีนักโทษที่อยู่ในคุก	
+8104	Sprint	เพิ่มความเร็วปืนใหญ่ 25% เป็นเวลา 5 วินาที	
+8105	Red Team	ทีมแดง	
+8106	Blue Team	ทีมน้ำเงิน	
+8142	Reduce Damage	ลดความเสียหายที่ได้รับ -50%	
+8500	NPC will turn into monster team-Permanent		
+8501	NPC will turn into monster team-60 Second		
+8502	NPC will turn into monster team-30 Second		
+8503	NPC will turn into monster team-20 Second		
+8504	NPC will turn into target(Non battle type)		
+8505	NPC  will turn into target(battle type)		
+8506	Transport Seafood	ท่านกำลังแล่นเรือส่งของ\nหากกระโดด, น้ำเข้า หรือใช้สกิล สินค้าจะตกลงพื้น	
+8507	I'm Cheer Beer Girl	สเน่ห์เหลือร้าย	
+8508	Ego Original Sin	พลังของท่านลดลง, จิตใจอ่อนแอ ทำให้ความเร็วเคลื่อนที่ลดลง 	
+8509	Unsavory	จะตายอยู่แล้ว!	
+8510	Transport Spice Barrel	ท่านกำลังแล่นเรือส่งของ\nหากกระโดด, น้ำเข้า หรือใช้สกิล สินค้าจะตกลงพื้น	
+8511	Slave Prince	ราชาที่เป็นทาส มีเกียรติสูงส่ง แต่ถึงยังไงก็เป็นทาส	
+8512	Transport Stowaway	ท่านกำลังแล่นเรือส่งของ\nหากกระโดด, น้ำเข้า หรือใช้สกิล สินค้าจะตกลงพื้น	
+8513	Gunpowder 1	บนตัวท่านมีแต่เขม่าดินปืน	
+8514	Gunpowder 2	บนตัวท่านมีแต่เขม่าดินปืน	
+8515	Gunpowder 3	บนตัวท่านมีแต่เขม่าดินปืน	
+8516	Transport Black market Spice Barrel	ท่านกำลังแล่นเรือส่งของ\nหากกระโดด, น้ำเข้า หรือใช้สกิล สินค้าจะตกลงพื้น	
+8517	Advanced Harem Impersonate	ท่านกำลังสองจิตสองใจว่าจะตกหลุมรักตัวเองรึเปล่า	
+8518	Beginner Harem Impersonate	อย่าไปส่องกระจก บอกแล้วว่าอย่าไป!	
+8519	Transport Poseidon Gold	ท่านกำลังแล่นเรือส่งของ\nหากกระโดด, น้ำเข้า หรือใช้สกิล สินค้าจะตกลงพื้น	
+8520	Transport Private Gold	ท่านกำลังแล่นเรือส่งของ\nหากกระโดด, น้ำเข้า หรือใช้สกิล สินค้าจะตกลงพื้น	
+8521	Ancestral Spirit Guard	ท่าถูกคุ้มครอง	
+8522	I'm Pirate Princess	ท่านและเจ้าหญิงAngelinaดูแล้วแยกไม่ออกเลย	
+8523	Zero Degree EXP 	Cold Chill ขังท่านไว้ หยุดการฟื้นฟูค่าเวทย์ และความเร็วเคลื่อนที่ลดลง 	
+8524	Transport Unsalable Spice Barrel	ท่านกำลังแล่นเรือส่งของ\nหากกระโดด, น้ำเข้า หรือใช้สกิล สินค้าจะตกลงพื้น	
+8525	Food Poisoning	ท่านรู้สึกว่าร่างกายไม่ปกติ	
+8526	Transport Tinderbox	ท่านกำลังแล่นเรือส่งของ\nหากกระโดด, น้ำเข้า หรือใช้สกิล สินค้าจะตกลงพื้น	
+8527	Blast Break Spell	พายุล้อมรอบตัวท่าน	
+8528	Thunder Break Spell	พายุสายฟ้าล้อมรอบตัวท่าน	
+8529	Blitz Break Spell	สายฟ้าฟาดล้อมรอบตัวท่าน	
+8530	Eden Blessing	ท่านได้รับ Eden Blessing เพิ่มพลัง เพิ่มความแข็งแกร่ง	
+8531	Downhill Original sin	พลัง, ความแข็งแกร่ง ของท่านเพิ่มขึ้น	
+8532	Empty Village Cannon First Bomb	บนตัวท่านมีแต่เขม่าดินปืน	
+8533	Empty Village Cannon Second Bomb	บนตัวท่านมีแต่เขม่าดินปืน	
+8534	Empty Village Cannon Third Bomb	บนตัวท่านมีแต่เขม่าดินปืน	
+8535	I'm debt ghost	มองดูแล้วไม่ค่อยจะถูกชะตาด้วยเท่าไหร่	
+8536	I'm Handsome	เปลี่ยนเป็น Drakeแล้ว รู้สึกไม่ค่อยสบายเท่าไหร่	
+8537	Charcoal Taste	ตัวท่านควันขึ้นน่ะ เหอ เหอ	
+8538	Transport Eden Box	ท่านกำลังแล่นเรือส่งของ\nหากกระโดด, น้ำเข้า หรือใช้สกิล สินค้าจะตกลงพื้น	
+8539	Rotten Peach Retreat	โอมมมมม ถอยให้ห่างดอกท้อ	
+8542	Holy Water	ร่างของท่านถูกล้างด้วยน้ำมนต์ศักิด์สิทธิ์ สามารถมองสิ่งที่มองไม่เห็นได้	
+8545	Ego Original Sin Blessing	ในตัวของท่านเต็มไปด้วยพลังบาปกำเนิด-[อัตตา] 	
+8546	logic Original Sin Blessing	ในตัวของท่านเต็มไปด้วยพลังบาปกำเนิด-[ตระกะ] 	
+8547	Lust Original Sin Blessing	ในตัวของท่านเต็มไปด้วยพลังบาปกำเนิด-[ราคะ] 	
+8548	Envious Original Sin Blessing	ในตัวของท่านเต็มไปด้วยพลังบาปกำเนิด-[ริษยา] 	
+8549	Lazy Original Sin Blessing	ในตัวของท่านเต็มไปด้วยพลังบาปกำเนิด-[เกียจคร้าน] 	
+8550	Rage Original Sin Blessing	ในตัวของท่านเต็มไปด้วยพลังบาปกำเนิด-[โทสะ] 	
+8551	Greed Original Sin Blessing	ในตัวของท่านเต็มไปด้วยพลังบาปกำเนิด-[โลภะ] 	
+8552	Truth Challenger	ท่านเข้าร่วมเป็นผู้ต่อสู้!	
+8553	Truth Trainer	ท่านเข้าร่วมเป็นผู้ฝึกฝน!	
+8554	Opened	ท่านดึงไปแล้ว ถึงตาเพื่อนร่วมเดินทางของท่านไปเปิดอีกอันนึงแล้ว	
+8555	Opened	ท่านดึงไปแล้ว ถึงตาเพื่อนร่วมเดินทางของท่านไปเปิดอีกอันนึงแล้ว	
+8577	Nitrogen Jet	หวังว่าท่านจะมีเข็มขัดนิรภัยนะ!	
+8765	Cactus worm	ท่านกลายเป็นแมลงปีกแข็ง	
+8788	Handling Woodpile	ท่านกำลังแล่นเรือส่งของ\nหากกระโดด, น้ำเข้า หรือใช้สกิล สินค้าจะตกลงพื้น	
+8789	Deer	ท่านกลายเป็นกวางน้อย	
+9903	Battle Fatigue	เมื่ออยู่ในสถานะนี้จะไม่สามารถเข้าร่วมสงครามได้	
+10901	Upset	ลูกเรือของท่านเกิดความไม่พอใจ	
+10902	General 	อากาศวันนี้ดีจัง	
+10903	Happy 	ฮี่ๆๆๆ...	
+10904	Joyful	บุก~บุกเลย~อ้ากกกกกกกกกกส์	
+11002	Odyssey Heart	เนื่องด้วยผลจาก Odyssey Heart เพิ่มค่าพลังให้ตัวละคร $ADD_STRENGH	ADD_STRENGH(1)
+11004	Olivia Heart	เนื่องด้วยผลจาก Olivia Heart เพิ่มค่าว่องไวตัวละคร $ADD_AGILITY	ADD_AGILITY(1)
+11006	Elizabeth Heart	เนื่องด้วยผลจาก Elizabeth Heart เพิ่มค่าปัญญาให้ตัวละคร $ADD_INTELLECT	ADD_INTELLECT(1)
+11801	Power Soul Lv.1	เมื่อได้รับผลแล้ว เพิ่มค่าพลัง +$ADD_STRENGH	ADD_STRENGH(1)
+11802	Power Soul Lv.2	เมื่อได้รับผลแล้ว เพิ่มค่าพลัง +$ADD_STRENGH	ADD_STRENGH(1)
+11803	Power Soul Lv.3	เมื่อได้รับผลแล้ว เพิ่มค่าพลัง +$ADD_STRENGH	ADD_STRENGH(1)
+11804	Power Soul Lv.4	เมื่อได้รับผลแล้ว เพิ่มค่าพลัง +$ADD_STRENGH	ADD_STRENGH(1)
+11805	Power Soul Lv.5	เมื่อได้รับผลแล้ว เพิ่มค่าพลัง +$ADD_STRENGH	ADD_STRENGH(1)
+11806	Power Soul Lv.6	เมื่อได้รับผลแล้ว เพิ่มค่าพลัง +$ADD_STRENGH	ADD_STRENGH(1)
+11807	Power Soul Lv.7	เมื่อได้รับผลแล้ว เพิ่มค่าพลัง +$ADD_STRENGH	ADD_STRENGH(1)
+11808	Power Soul Lv.8	เมื่อได้รับผลแล้ว เพิ่มค่าพลัง +$ADD_STRENGH	ADD_STRENGH(1)
+11809	Power Soul Lv.9	เมื่อได้รับผลแล้ว เพิ่มค่าพลัง +$ADD_STRENGH	ADD_STRENGH(1)
+11810	Power Soul Lv.10	เมื่อได้รับผลแล้ว เพิ่มค่าพลัง +$ADD_STRENGH	ADD_STRENGH(1)
+11811	Intellect Soul Lv.1	เมื่อได้รับผลแล้ว เพิ่มปัญญา +$ADD_INTELLECT	ADD_INTELLECT(1)
+11812	Intellect Soul Lv.2	เมื่อได้รับผลแล้ว เพิ่มปัญญา +$ADD_INTELLECT	ADD_INTELLECT(1)
+11813	Intellect Soul Lv.3	เมื่อได้รับผลแล้ว เพิ่มปัญญา +$ADD_INTELLECT	ADD_INTELLECT(1)
+11814	Intellect Soul Lv.4	เมื่อได้รับผลแล้ว เพิ่มปัญญา +$ADD_INTELLECT	ADD_INTELLECT(1)
+11815	Intellect Soul Lv.5	เมื่อได้รับผลแล้ว เพิ่มปัญญา +$ADD_INTELLECT	ADD_INTELLECT(1)
+11816	Intellect Soul Lv.6	เมื่อได้รับผลแล้ว เพิ่มปัญญา +$ADD_INTELLECT	ADD_INTELLECT(1)
+11817	Intellect Soul Lv.7	เมื่อได้รับผลแล้ว เพิ่มปัญญา +$ADD_INTELLECT	ADD_INTELLECT(1)
+11818	Intellect Soul Lv.8	เมื่อได้รับผลแล้ว เพิ่มปัญญา +$ADD_INTELLECT	ADD_INTELLECT(1)
+11819	Intellect Soul Lv.9	เมื่อได้รับผลแล้ว เพิ่มปัญญา +$ADD_INTELLECT	ADD_INTELLECT(1)
+11820	Intellect Soul Lv.10	เมื่อได้รับผลแล้ว เพิ่มปัญญา +$ADD_INTELLECT	ADD_INTELLECT(1)
+11821	Agility Soul Lv.1	เมื่อได้รับผลแล้ว เพิ่มว่องไว +$ADD_AGILITY	ADD_AGILITY(1)
+11822	Agility Soul Lv.2	เมื่อได้รับผลแล้ว เพิ่มว่องไว +$ADD_AGILITY	ADD_AGILITY(1)
+11823	Agility Soul Lv.3	เมื่อได้รับผลแล้ว เพิ่มว่องไว +$ADD_AGILITY	ADD_AGILITY(1)
+11824	Agility Soul Lv.4	เมื่อได้รับผลแล้ว เพิ่มว่องไว +$ADD_AGILITY	ADD_AGILITY(1)
+11825	Agility Soul Lv.5	เมื่อได้รับผลแล้ว เพิ่มว่องไว +$ADD_AGILITY	ADD_AGILITY(1)
+11826	Agility Soul Lv.6	เมื่อได้รับผลแล้ว เพิ่มว่องไว +$ADD_AGILITY	ADD_AGILITY(1)
+11827	Agility Soul Lv.7	เมื่อได้รับผลแล้ว เพิ่มว่องไว +$ADD_AGILITY	ADD_AGILITY(1)
+11828	Agility Soul Lv.8	เมื่อได้รับผลแล้ว เพิ่มว่องไว +$ADD_AGILITY	ADD_AGILITY(1)
+11829	Agility Soul Lv.9	เมื่อได้รับผลแล้ว เพิ่มว่องไว +$ADD_AGILITY	ADD_AGILITY(1)
+11830	Agility Soul Lv.10	เมื่อได้รับผลแล้ว เพิ่มว่องไว +$ADD_AGILITY	ADD_AGILITY(1)
+11831	Perceive Soul Lv.1	เมื่อได้รับผลแล้ว เพิ่มรู้สึก +$ADD_PERCEPTION	ADD_PERCEPTION(1)
+11832	Perceive Soul Lv.2	เมื่อได้รับผลแล้ว เพิ่มรู้สึก +$ADD_PERCEPTION	ADD_PERCEPTION(1)
+11833	Perceive Soul Lv.3	เมื่อได้รับผลแล้ว เพิ่มรู้สึก +$ADD_PERCEPTION	ADD_PERCEPTION(1)
+11834	Perceive Soul Lv.4	เมื่อได้รับผลแล้ว เพิ่มรู้สึก +$ADD_PERCEPTION	ADD_PERCEPTION(1)
+11835	Perceive Soul Lv.5	เมื่อได้รับผลแล้ว เพิ่มรู้สึก +$ADD_PERCEPTION	ADD_PERCEPTION(1)
+11836	Perceive Soul Lv.6	เมื่อได้รับผลแล้ว เพิ่มรู้สึก +$ADD_PERCEPTION	ADD_PERCEPTION(1)
+11837	Perceive Soul Lv.7	เมื่อได้รับผลแล้ว เพิ่มรู้สึก +$ADD_PERCEPTION	ADD_PERCEPTION(1)
+11838	Perceive Soul Lv.8	เมื่อได้รับผลแล้ว เพิ่มรู้สึก +$ADD_PERCEPTION	ADD_PERCEPTION(1)
+11839	Perceive Soul Lv.9	เมื่อได้รับผลแล้ว เพิ่มรู้สึก +$ADD_PERCEPTION	ADD_PERCEPTION(1)
+11840	Perceive Soul Lv.10	เมื่อได้รับผลแล้ว เพิ่มรู้สึก +$ADD_PERCEPTION	ADD_PERCEPTION(1)
+11841	body Soul Lv.1	เมื่อได้รับผลแล้ว เพิ่มกาย +$ADD_CONSITUTION	ADD_CONSITUTION(1)
+11842	body Soul Lv.2	เมื่อได้รับผลแล้ว เพิ่มกาย +$ADD_CONSITUTION	ADD_CONSITUTION(1)
+11843	body Soul Lv.3	เมื่อได้รับผลแล้ว เพิ่มกาย +$ADD_CONSITUTION	ADD_CONSITUTION(1)
+11844	body Soul Lv.4	เมื่อได้รับผลแล้ว เพิ่มกาย +$ADD_CONSITUTION	ADD_CONSITUTION(1)
+11845	body Soul Lv.5	เมื่อได้รับผลแล้ว เพิ่มกาย +$ADD_CONSITUTION	ADD_CONSITUTION(1)
+11846	body Soul Lv.6	เมื่อได้รับผลแล้ว เพิ่มกาย +$ADD_CONSITUTION	ADD_CONSITUTION(1)
+11847	body Soul Lv.7	เมื่อได้รับผลแล้ว เพิ่มกาย +$ADD_CONSITUTION	ADD_CONSITUTION(1)
+11848	body Soul Lv.8	เมื่อได้รับผลแล้ว เพิ่มกาย +$ADD_CONSITUTION	ADD_CONSITUTION(1)
+11849	body Soul Lv.9	เมื่อได้รับผลแล้ว เพิ่มกาย +$ADD_CONSITUTION	ADD_CONSITUTION(1)
+11850	body Soul Lv.10	เมื่อได้รับผลแล้ว เพิ่มกาย +$ADD_CONSITUTION	ADD_CONSITUTION(1)
+12008	Sea Shield	เพิ่มอัตราแม่นยำ $ADD_HITRATE%	ADD_HITRATE(2)(1)
+12010	Dead Consciousness	เพิ่มอัตราคริติคอล $ADD_POWERHIT%	ADD_POWERHIT(2)(1)
+12014	Boldness	เพิ่มอัตราหลบหลีก$ADD_DODGE%	ADD_DODGE(2)(1)
+13001		พลังพื้นฐาน +3%	
+13002		พลังพื้นฐาน +6%	
+13003		พลังพื้นฐาน +9%	
+13004		พลังพื้นฐาน +12%	
+13005		พลังพื้นฐาน +15%	
+13006		พลังพื้นฐาน +18%	
+13007		พลังพื้นฐาน +21%	
+13008		พลังพื้นฐาน +24%	
+13009		พลังพื้นฐาน +27%	
+13010		พลังพื้นฐาน +30%	
+13011		ว่องไวพื้นฐาน +3%	
+13012		ว่องไวพื้นฐาน +6%	
+13013		ว่องไวพื้นฐาน +9%	
+13014		ว่องไวพื้นฐาน +12%	
+13015		ว่องไวพื้นฐาน +15%	
+13016		ว่องไวพื้นฐาน +18%	
+13017		ว่องไวพื้นฐาน +21%	
+13018		ว่องไวพื้นฐาน +24%	
+13019		ว่องไวพื้นฐาน +27%	
+13020		ว่องไวพื้นฐาน +30%	
+13021		กายพื้นฐาน +3%	
+13022		กายพื้นฐาน +6%	
+13023		กายพื้นฐาน +9%	
+13024		กายพื้นฐาน +12%	
+13025		กายพื้นฐาน +15%	
+13026		กายพื้นฐาน +18%	
+13027		กายพื้นฐาน +21%	
+13028		กายพื้นฐาน +24%	
+13029		กายพื้นฐาน +27%	
+13030		กายพื้นฐาน +30%	
+13031		ปัญญาพื้นฐาน +3%	
+13032		ปัญญาพื้นฐาน +6%	
+13033		ปัญญาพื้นฐาน +9%	
+13034		ปัญญาพื้นฐาน +12%	
+13035		ปัญญาพื้นฐาน +15%	
+13036		ปัญญาพื้นฐาน +18%	
+13037		ปัญญาพื้นฐาน +21%	
+13038		ปัญญาพื้นฐาน +24%	
+13039		ปัญญาพื้นฐาน +27%	
+13040		ปัญญาพื้นฐาน +30%	
+13041		รู้สึกพื้นฐาน +3%	
+13042		รู้สึกพื้นฐาน +6%	
+13043		รู้สึกพื้นฐาน +9%	
+13044		รู้สึกพื้นฐาน +12%	
+13045		รู้สึกพื้นฐาน +15%	
+13046		รู้สึกพื้นฐาน +18%	
+13047		รู้สึกพื้นฐาน +21%	
+13048		รู้สึกพื้นฐาน +24%	
+13049		รู้สึกพื้นฐาน +27%	
+13050		รู้สึกพื้นฐาน +30%	
+17114	Water Dungeon	เป้าหมายถูกคุกใต้น้ำขังไว้	
+17502	Suit Effect	เมื่อโจมตีจะมีโอกาสปล่อย [Red Chain] 5%	
+17504	Suit Effect	เมื่อโจมตีจะมีโอกาสปล่อย [Glory Shooting] 5%	
+17506	Suit Effect	เมื่อโจมตี หากเป้าหมายมีเลือดเยอะหว่า 90% จะปล่อย [Light Bubble] 	
+17508	Suit Effect	เมื่อโจมตีจะมีโอกาสปล่อย [Flower Thunder] 5%	
+17509	Red Chain	ความเร็วเคลื่อนที่สูงสุดในเวลาสั้นๆ	
+17510	Light Bubble	ได้รับความเสียหายสูงขึ้นในเวลาสั้นๆ	
+18001	Good	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18002	Refined	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18003	Graceful	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18004	Extreme	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18005	Good	เมื่อพลังถึง $STR_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18006	Refined	เมื่อพลังถึง $STR_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18007	Graceful	เมื่อพลังถึง $STR_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18008	Extreme	เมื่อพลังถึง $STR_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18009	Good	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18010	Refined	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18011	Graceful	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18012	Extreme	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18013	Good	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล 1.5%	STR_CHECK(3); ADD_POWERHIT(2)
+18014	Refined	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล 2.5%	STR_CHECK(3); ADD_POWERHIT(2)
+18015	Graceful	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล 4%	STR_CHECK(3); ADD_POWERHIT(2)
+18016	Extreme	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล 6%	STR_CHECK(3); ADD_POWERHIT(2)
+18017	Good	เมื่อพลังถึง $STR_CHECK อัตราคริติคอลเพิ่มขึ้น 0.05	STR_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18018	Refined	เมื่อพลังถึง $STR_CHECK อัตราคริติคอลเพิ่มขึ้น 0.08	STR_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18019	Graceful	เมื่อพลังถึง $STR_CHECK อัตราคริติคอลเพิ่มขึ้น 0.12	STR_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18020	Extreme	เมื่อพลังถึง $STR_CHECK อัตราคริติคอลเพิ่มขึ้น 0.2	STR_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18021	Good	เมื่อพลังถึง $STR_CHECK มองข้ามการป้องกันเพิ่มขึ้น 1%	STR_CHECK(3); ADD_BYPASS(1)
+18022	Refined	เมื่อพลังถึง $STR_CHECK มองข้ามการป้องกันเพิ่มขึ้น 2%	STR_CHECK(3); ADD_BYPASS(1)
+18023	Graceful	เมื่อพลังถึง $STR_CHECK มองข้ามการป้องกันเพิ่มขึ้น 3%	STR_CHECK(3); ADD_BYPASS(1)
+18024	Extreme	เมื่อพลังถึง $STR_CHECK มองข้ามการป้องกันเพิ่มขึ้น 4%	STR_CHECK(3); ADD_BYPASS(1)
+18025	Good	เมื่อพลังถึง $STR_CHECK อัตราสังหารเพิ่มขึ้น 1%	STR_CHECK(3); ADD_OVERHIT(1)
+18026	Refined	เมื่อพลังถึง $STR_CHECK อัตราสังหารเพิ่มขึ้น 2%	STR_CHECK(3); ADD_OVERHIT(1)
+18027	Graceful	เมื่อพลังถึง $STR_CHECK อัตราสังหารเพิ่มขึ้น 3%	STR_CHECK(3); ADD_OVERHIT(1)
+18028	Extreme	เมื่อพลังถึง $STR_CHECK อัตราสังหารเพิ่มขึ้น 4%	STR_CHECK(3); ADD_OVERHIT(1)
+18029	Good	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราแม่นยำ 4%	STR_CHECK(3); ADD_HITRATE(2)
+18030	Refined	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราแม่นยำ 6%	STR_CHECK(3); ADD_HITRATE(2)
+18031	Graceful	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราแม่นยำ 10%	STR_CHECK(3); ADD_HITRATE(2)
+18032	Extreme	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราแม่นยำ 14%	STR_CHECK(3); ADD_HITRATE(2)
+18033	Good	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18034	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18035	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18036	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18037	Good	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18038	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18039	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18040	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18041	Good	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18042	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18043	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18044	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18045	Good	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล 1.5%	AGI_CHECK(3); ADD_POWERHIT(2)
+18046	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล 2.5%	AGI_CHECK(3); ADD_POWERHIT(2)
+18047	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล 4%	AGI_CHECK(3); ADD_POWERHIT(2)
+18048	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล 6%	AGI_CHECK(3); ADD_POWERHIT(2)
+18049	Good	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราคริติคอลเพิ่มขึ้น 0.05	AGI_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18050	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราคริติคอลเพิ่มขึ้น 0.08	AGI_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18051	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราคริติคอลเพิ่มขึ้น 0.12	AGI_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18052	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราคริติคอลเพิ่มขึ้น 0.2	AGI_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18053	Good	เมื่อค่าว่องไวถึง $AGI_CHECK มองข้ามการป้องกันเพิ่มขึ้น 1%	AGI_CHECK(3); ADD_BYPASS(1)
+18054	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK มองข้ามการป้องกันเพิ่มขึ้น 2%	AGI_CHECK(3); ADD_BYPASS(1)
+18055	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK มองข้ามการป้องกันเพิ่มขึ้น 3%	AGI_CHECK(3); ADD_BYPASS(1)
+18056	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK มองข้ามการป้องกันเพิ่มขึ้น 4%	AGI_CHECK(3); ADD_BYPASS(1)
+18057	Good	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราสังหารเพิ่มขึ้น 1%	AGI_CHECK(3); ADD_OVERHIT(1)
+18058	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราสังหารเพิ่มขึ้น 2%	AGI_CHECK(3); ADD_OVERHIT(1)
+18059	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราสังหารเพิ่มขึ้น 3%	AGI_CHECK(3); ADD_OVERHIT(1)
+18060	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราสังหารเพิ่มขึ้น 4%	AGI_CHECK(3); ADD_OVERHIT(1)
+18061	Good	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราแม่นยำ 4%	AGI_CHECK(3); ADD_HITRATE(2)
+18062	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราแม่นยำ 6%	AGI_CHECK(3); ADD_HITRATE(2)
+18063	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราแม่นยำ 10%	AGI_CHECK(3); ADD_HITRATE(2)
+18064	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราแม่นยำ 14%	AGI_CHECK(3); ADD_HITRATE(2)
+18065	Good	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18066	Refined	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18067	Graceful	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18068	Extreme	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18069	Good	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18070	Refined	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18071	Graceful	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18072	Extreme	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18073	Good	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18074	Refined	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18075	Graceful	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18076	Extreme	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18077	Good	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล 1.5%	CON_CHECK(3); ADD_POWERHIT(2)
+18078	Refined	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล 2.5%	CON_CHECK(3); ADD_POWERHIT(2)
+18079	Graceful	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล 4%	CON_CHECK(3); ADD_POWERHIT(2)
+18080	Extreme	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล 6%	CON_CHECK(3); ADD_POWERHIT(2)
+18081	Good	เมื่อค่ากายถึง $CON_CHECK อัตราคริติคอลเพิ่มขึ้น 0.05	CON_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18082	Refined	เมื่อค่ากายถึง $CON_CHECK อัตราคริติคอลเพิ่มขึ้น 0.08	CON_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18083	Graceful	เมื่อค่ากายถึง $CON_CHECK อัตราคริติคอลเพิ่มขึ้น 0.12	CON_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18084	Extreme	เมื่อค่ากายถึง $CON_CHECK อัตราคริติคอลเพิ่มขึ้น 0.2	CON_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18085	Good	เมื่อค่ากายถึง $CON_CHECK มองข้ามการป้องกันเพิ่มขึ้น 1%	CON_CHECK(3); ADD_BYPASS(1)
+18086	Refined	เมื่อค่ากายถึง $CON_CHECK มองข้ามการป้องกันเพิ่มขึ้น 2%	CON_CHECK(3); ADD_BYPASS(1)
+18087	Graceful	เมื่อค่ากายถึง $CON_CHECK มองข้ามการป้องกันเพิ่มขึ้น 3%	CON_CHECK(3); ADD_BYPASS(1)
+18088	Extreme	เมื่อค่ากายถึง $CON_CHECK มองข้ามการป้องกันเพิ่มขึ้น 4%	CON_CHECK(3); ADD_BYPASS(1)
+18089	Good	เมื่อค่ากายถึง $CON_CHECK อัตราสังหารเพิ่มขึ้น 1%	CON_CHECK(3); ADD_OVERHIT(1)
+18090	Refined	เมื่อค่ากายถึง $CON_CHECK อัตราสังหารเพิ่มขึ้น 2%	CON_CHECK(3); ADD_OVERHIT(1)
+18091	Graceful	เมื่อค่ากายถึง $CON_CHECK อัตราสังหารเพิ่มขึ้น 3%	CON_CHECK(3); ADD_OVERHIT(1)
+18092	Extreme	เมื่อค่ากายถึง $CON_CHECK อัตราสังหารเพิ่มขึ้น 4%	CON_CHECK(3); ADD_OVERHIT(1)
+18093	Good	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราแม่นยำ 4%	CON_CHECK(3); ADD_HITRATE(2)
+18094	Refined	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราแม่นยำ 6%	CON_CHECK(3); ADD_HITRATE(2)
+18095	Graceful	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราแม่นยำ 10%	CON_CHECK(3); ADD_HITRATE(2)
+18096	Extreme	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราแม่นยำ 14%	CON_CHECK(3); ADD_HITRATE(2)
+18097	Good	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18098	Refined	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18099	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18100	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18101	Good	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18102	Refined	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18103	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18104	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18105	Good	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18106	Refined	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18107	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18108	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18109	Good	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล 1.5%	INT_CHECK(3); ADD_POWERHIT(2)
+18110	Refined	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล 2.5%	INT_CHECK(3); ADD_POWERHIT(2)
+18111	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล 4%	INT_CHECK(3); ADD_POWERHIT(2)
+18112	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล 6%	INT_CHECK(3); ADD_POWERHIT(2)
+18113	Good	เมื่อค่าปัญญาถึง $INT_CHECK อัตราคริติคอลเพิ่มขึ้น 0.05	INT_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18114	Refined	เมื่อค่าปัญญาถึง $INT_CHECK อัตราคริติคอลเพิ่มขึ้น 0.08	INT_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18115	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK อัตราคริติคอลเพิ่มขึ้น 0.12	INT_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18116	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK อัตราคริติคอลเพิ่มขึ้น 0.2	INT_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18117	Good	เมื่อค่าปัญญาถึง $INT_CHECK มองข้ามการป้องกันเพิ่มขึ้น 1%	INT_CHECK(3); ADD_BYPASS(1)
+18118	Refined	เมื่อค่าปัญญาถึง $INT_CHECK มองข้ามการป้องกันเพิ่มขึ้น 2%	INT_CHECK(3); ADD_BYPASS(1)
+18119	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK มองข้ามการป้องกันเพิ่มขึ้น 3%	INT_CHECK(3); ADD_BYPASS(1)
+18120	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK มองข้ามการป้องกันเพิ่มขึ้น 4%	INT_CHECK(3); ADD_BYPASS(1)
+18121	Good	เมื่อค่าปัญญาถึง $INT_CHECK อัตราสังหารเพิ่มขึ้น 1%	INT_CHECK(3); ADD_OVERHIT(1)
+18122	Refined	เมื่อค่าปัญญาถึง $INT_CHECK อัตราสังหารเพิ่มขึ้น 2%	INT_CHECK(3); ADD_OVERHIT(1)
+18123	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK อัตราสังหารเพิ่มขึ้น 3%	INT_CHECK(3); ADD_OVERHIT(1)
+18124	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK อัตราสังหารเพิ่มขึ้น 4%	INT_CHECK(3); ADD_OVERHIT(1)
+18125	Good	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราแม่นยำ 4%	INT_CHECK(3); ADD_HITRATE(2)
+18126	Refined	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราแม่นยำ 6%	INT_CHECK(3); ADD_HITRATE(2)
+18127	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราแม่นยำ 10%	INT_CHECK(3); ADD_HITRATE(2)
+18128	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราแม่นยำ 14%	INT_CHECK(3); ADD_HITRATE(2)
+18129	Good	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18130	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18131	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18132	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18133	Good	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18134	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18135	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18136	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18137	Good	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18138	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18139	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18140	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18141	Good	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล 1.5%	PER_CHECK(3); ADD_POWERHIT(2)
+18142	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล 2.5%	PER_CHECK(3); ADD_POWERHIT(2)
+18143	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล 4%	PER_CHECK(3); ADD_POWERHIT(2)
+18144	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล 6%	PER_CHECK(3); ADD_POWERHIT(2)
+18145	Good	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราคริติคอลเพิ่มขึ้น 0.05	PER_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18146	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราคริติคอลเพิ่มขึ้น 0.08	PER_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18147	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราคริติคอลเพิ่มขึ้น 0.12	PER_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18148	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราคริติคอลเพิ่มขึ้น 0.2	PER_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18149	Good	เมื่อค่ารู้สึกถึง $PER_CHECK มองข้ามการป้องกันเพิ่มขึ้น 1%	PER_CHECK(3); ADD_BYPASS(1)
+18150	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK มองข้ามการป้องกันเพิ่มขึ้น 2%	PER_CHECK(3); ADD_BYPASS(1)
+18151	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK มองข้ามการป้องกันเพิ่มขึ้น 3%	PER_CHECK(3); ADD_BYPASS(1)
+18152	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK มองข้ามการป้องกันเพิ่มขึ้น 4%	PER_CHECK(3); ADD_BYPASS(1)
+18153	Good	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราสังหารเพิ่มขึ้น 1%	PER_CHECK(3); ADD_OVERHIT(1)
+18154	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราสังหารเพิ่มขึ้น 2%	PER_CHECK(3); ADD_OVERHIT(1)
+18155	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราสังหารเพิ่มขึ้น 3%	PER_CHECK(3); ADD_OVERHIT(1)
+18156	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราสังหารเพิ่มขึ้น 4%	PER_CHECK(3); ADD_OVERHIT(1)
+18157	Good	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราแม่นยำ 4%	PER_CHECK(3); ADD_HITRATE(2)
+18158	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราแม่นยำ 6%	PER_CHECK(3); ADD_HITRATE(2)
+18159	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราแม่นยำ 10%	PER_CHECK(3); ADD_HITRATE(2)
+18160	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราแม่นยำ 14%	PER_CHECK(3); ADD_HITRATE(2)
+18161	Good	โจมตีศัตรูด้วยการฟันแนวราบ ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18162	Refined	โจมตีศัตรูด้วยการฟันแนวราบ ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18163	Graceful	โจมตีศัตรูด้วยการฟันแนวราบ ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18164	Extreme	โจมตีศัตรูด้วยการฟันแนวราบ ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18165	Good	โจมตีศัตรูด้วยการพุ่งแทง ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18166	Refined	โจมตีศัตรูด้วยการพุ่งแทง ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18167	Graceful	โจมตีศัตรูด้วยการพุ่งแทง ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18168	Extreme	โจมตีศัตรูด้วยการพุ่งแทง ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18169	Good	โจมตีศัตรูด้วยการฟัน ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18170	Refined	โจมตีศัตรูด้วยการฟัน ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18171	Graceful	โจมตีศัตรูด้วยการฟัน ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18172	Extreme	โจมตีศัตรูด้วยการฟัน ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18173	Good	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18174	Refined	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18175	Graceful	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18176	Extreme	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18177	Good	โจมตีศัตรูด้วยการฟันแนวราบ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 9 วินาที	
+18178	Refined	โจมตีศัตรูด้วยการฟันแนวราบ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 7 วินาที	
+18179	Graceful	โจมตีศัตรูด้วยการฟันแนวราบ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 5 วินาที	
+18180	Extreme	โจมตีศัตรูด้วยการฟันแนวราบ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 3 วินาที	
+18181	Good	โจมตีศัตรูด้วยการพุ่งแทง จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 9 วินาที	
+18182	Refined	โจมตีศัตรูด้วยการพุ่งแทง จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 7 วินาที	
+18183	Graceful	โจมตีศัตรูด้วยการพุ่งแทง จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 5 วินาที	
+18184	Extreme	โจมตีศัตรูด้วยการพุ่งแทง จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 3 วินาที	
+18185	Good	โจมตีศัตรูด้วยการฟัน จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 9 วินาที	
+18186	Refined	โจมตีศัตรูด้วยการฟัน จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 7 วินาที	
+18187	Graceful	โจมตีศัตรูด้วยการฟัน จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 5 วินาที	
+18188	Extreme	โจมตีศัตรูด้วยการฟัน จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 3 วินาที	
+18189	Good	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 9 วินาที	
+18190	Refined	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 7 วินาที	
+18191	Graceful	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 5 วินาที	
+18192	Extreme	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 3 วินาที	
+18193	Good	โจมตีศัตรูด้วยการฟันแนวราบ 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18194	Refined	โจมตีศัตรูด้วยการฟันแนวราบ 1 อย่างจะฟื้นฟูค่ากำลัง 2 แต้ม	
+18195	Graceful	โจมตีศัตรูด้วยการฟันแนวราบ 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18196	Extreme	โจมตีศัตรูด้วยการฟันแนวราบ 1 อย่างจะฟื้นฟูค่ากำลัง 4 แต้ม	
+18197	Good	โจมตีศัตรูด้วยการพุ่งแทง 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18198	Refined	โจมตีศัตรูด้วยการพุ่งแทง 1 อย่างจะฟื้นฟูค่ากำลัง 2 แต้ม	
+18199	Graceful	โจมตีศัตรูด้วยการพุ่งแทง 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18200	Extreme	โจมตีศัตรูด้วยการพุ่งแทง 1 อย่างจะฟื้นฟูค่ากำลัง 4 แต้ม	
+18201	Good	โจมตีศัตรูด้วยการฟัน 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18202	Refined	โจมตีศัตรูด้วยการฟัน 1 อย่างจะฟื้นฟูค่ากำลัง 2 แต้ม	
+18203	Graceful	โจมตีศัตรูด้วยการฟัน 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18204	Extreme	โจมตีศัตรูด้วยการฟัน 1 อย่างจะฟื้นฟูค่ากำลัง 4 แต้ม	
+18205	Good	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18206	Refined	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน 1 อย่างจะฟื้นฟูค่ากำลัง 2 แต้ม	
+18207	Graceful	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18208	Extreme	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน 1 อย่างจะฟื้นฟูค่ากำลัง 4 แต้ม	
+18209	Good	โจมตีศัตรูด้วยการฟันแนวราบ จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 5 วินาที	
+18210	Refined	โจมตีศัตรูด้วยการฟันแนวราบ จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 4 วินาที	
+18211	Graceful	โจมตีศัตรูด้วยการฟันแนวราบ จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 3 วินาที	
+18212	Extreme	โจมตีศัตรูด้วยการฟันแนวราบ จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 2 วินาที	
+18213	Good	โจมตีศัตรูด้วยการพุ่งแทง จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 5 วินาที	
+18214	Refined	โจมตีศัตรูด้วยการพุ่งแทง จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 4 วินาที	
+18215	Graceful	โจมตีศัตรูด้วยการพุ่งแทง จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 3 วินาที	
+18216	Extreme	โจมตีศัตรูด้วยการพุ่งแทง จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 2 วินาที	
+18217	Good	โจมตีศัตรูด้วยการฟัน จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 5 วินาที	
+18218	Refined	โจมตีศัตรูด้วยการฟัน จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 4 วินาที	
+18219	Graceful	โจมตีศัตรูด้วยการฟัน จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 3 วินาที	
+18220	Extreme	โจมตีศัตรูด้วยการฟัน จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 2 วินาที	
+18221	Good	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 5 วินาที	
+18222	Refined	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 4 วินาที	
+18223	Graceful	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 3 วินาที	
+18224	Extreme	โจมตีศัตรูด้วยการฟันแนวราบ, พุ่งแทงและการฟัน จะฟื้นฟูค่ากำลัง 8 แต้ม, เวลารีเซ็ท 2 วินาที	
+18225	Good	โจมตีดูดเลือด 1%	NULL; DRAIN_LIFE(1); DRAIN_LIFE(1)
+18226	Refined	โจมตีดูดเลือด 2%	NULL; DRAIN_LIFE(1); DRAIN_LIFE(1)
+18227	Graceful	โจมตีดูดเลือด 3%	NULL; DRAIN_LIFE(1); DRAIN_LIFE(1)
+18228	Extreme	โจมตีดูดเลือด 5%	NULL; DRAIN_LIFE(1); DRAIN_LIFE(1)
+18229	Good	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18230	Refined	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18231	Graceful	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18232	Extreme	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18233	Good	เมื่อพลังถึง $STR_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18234	Refined	เมื่อพลังถึง $STR_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18235	Graceful	เมื่อพลังถึง $STR_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18236	Extreme	เมื่อพลังถึง $STR_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18237	Good	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18238	Refined	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18239	Graceful	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18240	Extreme	เมื่อพลังถึง $STR_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18241	Good	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล 2%	STR_CHECK(3); ADD_POWERHIT(2)
+18242	Refined	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล 4%	STR_CHECK(3); ADD_POWERHIT(2)
+18243	Graceful	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล 6%	STR_CHECK(3); ADD_POWERHIT(2)
+18244	Extreme	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล 10%	STR_CHECK(3); ADD_POWERHIT(2)
+18245	Good	เมื่อพลังถึง $STR_CHECK อัตราคริติคอลเพิ่มขึ้น 0.08	STR_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18246	Refined	เมื่อพลังถึง $STR_CHECK อัตราคริติคอลเพิ่มขึ้น 0.15	STR_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18247	Graceful	เมื่อพลังถึง $STR_CHECK อัตราคริติคอลเพิ่มขึ้น 0.22	STR_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18248	Extreme	เมื่อพลังถึง $STR_CHECK อัตราคริติคอลเพิ่มขึ้น 0.35	STR_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18249	Good	เมื่อพลังถึง $STR_CHECK มองข้ามการป้องกันเพิ่มขึ้น 1%	STR_CHECK(3); ADD_BYPASS(1)
+18250	Refined	เมื่อพลังถึง $STR_CHECK มองข้ามการป้องกันเพิ่มขึ้น 3%	STR_CHECK(3); ADD_BYPASS(1)
+18251	Graceful	เมื่อพลังถึง $STR_CHECK มองข้ามการป้องกันเพิ่มขึ้น 5%	STR_CHECK(3); ADD_BYPASS(1)
+18252	Extreme	เมื่อพลังถึง $STR_CHECK มองข้ามการป้องกันเพิ่มขึ้น 7%	STR_CHECK(3); ADD_BYPASS(1)
+18253	Good	เมื่อพลังถึง $STR_CHECK อัตราสังหารเพิ่มขึ้น 1%	STR_CHECK(3); ADD_OVERHIT(1)
+18254	Refined	เมื่อพลังถึง $STR_CHECK อัตราสังหารเพิ่มขึ้น 3%	STR_CHECK(3); ADD_OVERHIT(1)
+18255	Graceful	เมื่อพลังถึง $STR_CHECK อัตราสังหารเพิ่มขึ้น 5%	STR_CHECK(3); ADD_OVERHIT(1)
+18256	Extreme	เมื่อพลังถึง $STR_CHECK อัตราสังหารเพิ่มขึ้น 7%	STR_CHECK(3); ADD_OVERHIT(1)
+18257	Good	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราแม่นยำ 6%	STR_CHECK(3); ADD_HITRATE(2)
+18258	Refined	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราแม่นยำ 10%	STR_CHECK(3); ADD_HITRATE(2)
+18259	Graceful	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราแม่นยำ 18%	STR_CHECK(3); ADD_HITRATE(2)
+18260	Extreme	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราแม่นยำ 25%	STR_CHECK(3); ADD_HITRATE(2)
+18261	Good	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18262	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18263	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18264	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18265	Good	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18266	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18267	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18268	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18269	Good	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18270	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18271	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18272	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18273	Good	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล 2%	AGI_CHECK(3); ADD_POWERHIT(2)
+18274	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล 4%	AGI_CHECK(3); ADD_POWERHIT(2)
+18275	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล 6%	AGI_CHECK(3); ADD_POWERHIT(2)
+18276	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล 10%	AGI_CHECK(3); ADD_POWERHIT(2)
+18277	Good	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราคริติคอลเพิ่มขึ้น 0.08	AGI_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18278	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราคริติคอลเพิ่มขึ้น 0.15	AGI_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18279	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราคริติคอลเพิ่มขึ้น 0.22	AGI_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18280	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราคริติคอลเพิ่มขึ้น 0.35	AGI_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18281	Good	เมื่อค่าว่องไวถึง $AGI_CHECK มองข้ามการป้องกันเพิ่มขึ้น 1%	AGI_CHECK(3); ADD_BYPASS(1)
+18282	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK มองข้ามการป้องกันเพิ่มขึ้น 3%	AGI_CHECK(3); ADD_BYPASS(1)
+18283	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK มองข้ามการป้องกันเพิ่มขึ้น 5%	AGI_CHECK(3); ADD_BYPASS(1)
+18284	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK มองข้ามการป้องกันเพิ่มขึ้น 7%	AGI_CHECK(3); ADD_BYPASS(1)
+18285	Good	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราสังหารเพิ่มขึ้น 1%	AGI_CHECK(3); ADD_OVERHIT(1)
+18286	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราสังหารเพิ่มขึ้น 3%	AGI_CHECK(3); ADD_OVERHIT(1)
+18287	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราสังหารเพิ่มขึ้น 5%	AGI_CHECK(3); ADD_OVERHIT(1)
+18288	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK อัตราสังหารเพิ่มขึ้น 7%	AGI_CHECK(3); ADD_OVERHIT(1)
+18289	Good	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราแม่นยำ 6%	AGI_CHECK(3); ADD_HITRATE(2)
+18290	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราแม่นยำ 10%	AGI_CHECK(3); ADD_HITRATE(2)
+18291	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราแม่นยำ 18%	AGI_CHECK(3); ADD_HITRATE(2)
+18292	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราแม่นยำ 25%	AGI_CHECK(3); ADD_HITRATE(2)
+18293	Good	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18294	Refined	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18295	Graceful	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18296	Extreme	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18297	Good	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18298	Refined	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18299	Graceful	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18300	Extreme	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18301	Good	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18302	Refined	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18303	Graceful	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18304	Extreme	เมื่อค่ากายถึง $CON_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18305	Good	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล 2%	CON_CHECK(3); ADD_POWERHIT(2)
+18306	Refined	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล 4%	CON_CHECK(3); ADD_POWERHIT(2)
+18307	Graceful	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล 6%	CON_CHECK(3); ADD_POWERHIT(2)
+18308	Extreme	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล 10%	CON_CHECK(3); ADD_POWERHIT(2)
+18309	Good	เมื่อค่ากายถึง $CON_CHECK อัตราคริติคอลเพิ่มขึ้น 0.08	CON_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18310	Refined	เมื่อค่ากายถึง $CON_CHECK อัตราคริติคอลเพิ่มขึ้น 0.15	CON_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18311	Graceful	เมื่อค่ากายถึง $CON_CHECK อัตราคริติคอลเพิ่มขึ้น 0.22	CON_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18312	Extreme	เมื่อค่ากายถึง $CON_CHECK อัตราคริติคอลเพิ่มขึ้น 0.35	CON_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18313	Good	เมื่อค่ากายถึง $CON_CHECK มองข้ามการป้องกันเพิ่มขึ้น 1%	CON_CHECK(3); ADD_BYPASS(1)
+18314	Refined	เมื่อค่ากายถึง $CON_CHECK มองข้ามการป้องกันเพิ่มขึ้น 3%	CON_CHECK(3); ADD_BYPASS(1)
+18315	Graceful	เมื่อค่ากายถึง $CON_CHECK มองข้ามการป้องกันเพิ่มขึ้น 5%	CON_CHECK(3); ADD_BYPASS(1)
+18316	Extreme	เมื่อค่ากายถึง $CON_CHECK มองข้ามการป้องกันเพิ่มขึ้น 7%	CON_CHECK(3); ADD_BYPASS(1)
+18317	Good	เมื่อค่ากายถึง $CON_CHECK อัตราสังหารเพิ่มขึ้น 1%	CON_CHECK(3); ADD_OVERHIT(1)
+18318	Refined	เมื่อค่ากายถึง $CON_CHECK อัตราสังหารเพิ่มขึ้น 3%	CON_CHECK(3); ADD_OVERHIT(1)
+18319	Graceful	เมื่อค่ากายถึง $CON_CHECK อัตราสังหารเพิ่มขึ้น 5%	CON_CHECK(3); ADD_OVERHIT(1)
+18320	Extreme	เมื่อค่ากายถึง $CON_CHECK อัตราสังหารเพิ่มขึ้น 7%	CON_CHECK(3); ADD_OVERHIT(1)
+18321	Good	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราแม่นยำ 6%	CON_CHECK(3); ADD_HITRATE(2)
+18322	Refined	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราแม่นยำ 10%	CON_CHECK(3); ADD_HITRATE(2)
+18323	Graceful	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราแม่นยำ 18%	CON_CHECK(3); ADD_HITRATE(2)
+18324	Extreme	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราแม่นยำ 25%	CON_CHECK(3); ADD_HITRATE(2)
+18325	Good	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18326	Refined	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18327	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18328	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18329	Good	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18330	Refined	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18331	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18332	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18333	Good	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18334	Refined	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18335	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18336	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18337	Good	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล 2%	INT_CHECK(3); ADD_POWERHIT(2)
+18338	Refined	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล 4%	INT_CHECK(3); ADD_POWERHIT(2)
+18339	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล 6%	INT_CHECK(3); ADD_POWERHIT(2)
+18340	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล 10%	INT_CHECK(3); ADD_POWERHIT(2)
+18341	Good	เมื่อค่าปัญญาถึง $INT_CHECK อัตราคริติคอลเพิ่มขึ้น 0.08	INT_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18342	Refined	เมื่อค่าปัญญาถึง $INT_CHECK อัตราคริติคอลเพิ่มขึ้น 0.15	INT_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18343	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK อัตราคริติคอลเพิ่มขึ้น 0.22	INT_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18344	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK อัตราคริติคอลเพิ่มขึ้น 0.35	INT_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18345	Good	เมื่อค่าปัญญาถึง $INT_CHECK มองข้ามการป้องกันเพิ่มขึ้น 1%	INT_CHECK(3); ADD_BYPASS(1)
+18346	Refined	เมื่อค่าปัญญาถึง $INT_CHECK มองข้ามการป้องกันเพิ่มขึ้น 3%	INT_CHECK(3); ADD_BYPASS(1)
+18347	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK มองข้ามการป้องกันเพิ่มขึ้น 5%	INT_CHECK(3); ADD_BYPASS(1)
+18348	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK มองข้ามการป้องกันเพิ่มขึ้น 7%	INT_CHECK(3); ADD_BYPASS(1)
+18349	Good	เมื่อค่าปัญญาถึง $INT_CHECK อัตราสังหารเพิ่มขึ้น 1%	INT_CHECK(3); ADD_OVERHIT(1)
+18350	Refined	เมื่อค่าปัญญาถึง $INT_CHECK อัตราสังหารเพิ่มขึ้น 3%	INT_CHECK(3); ADD_OVERHIT(1)
+18351	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK อัตราสังหารเพิ่มขึ้น 5%	INT_CHECK(3); ADD_OVERHIT(1)
+18352	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK อัตราสังหารเพิ่มขึ้น 7%	INT_CHECK(3); ADD_OVERHIT(1)
+18353	Good	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราแม่นยำ 6%	INT_CHECK(3); ADD_HITRATE(2)
+18354	Refined	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราแม่นยำ 10%	INT_CHECK(3); ADD_HITRATE(2)
+18355	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราแม่นยำ 18%	INT_CHECK(3); ADD_HITRATE(2)
+18356	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราแม่นยำ 25%	INT_CHECK(3); ADD_HITRATE(2)
+18357	Good	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18358	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18359	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18360	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพเพิ่มขึ้น $ADD_DAMPLUS_PHYSIC 	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1)
+18361	Good	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18362	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18363	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18364	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_MAGIC(1)
+18365	Good	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18366	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18367	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18368	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK โจมตีหนักกายภาพและโจมตีหนักเวทย์เพิ่มขึ้น $ADD_DAMPLUS_MAGIC	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18369	Good	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล 2%	PER_CHECK(3); ADD_POWERHIT(2)
+18370	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล 4%	PER_CHECK(3); ADD_POWERHIT(2)
+18371	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล 6%	PER_CHECK(3); ADD_POWERHIT(2)
+18372	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล 10%	PER_CHECK(3); ADD_POWERHIT(2)
+18373	Good	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราคริติคอลเพิ่มขึ้น 0.08 หน่วย	PER_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18374	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราคริติคอลเพิ่มขึ้น 0.15 หน่วย	PER_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18375	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราคริติคอลเพิ่มขึ้น 0.22 หน่วย	PER_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18376	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราคริติคอลเพิ่มขึ้น 0.35 หน่วย	PER_CHECK(3); ADD_MULTIPLY_POWERDAM(2)
+18377	Good	เมื่อค่ารู้สึกถึง $PER_CHECK มองข้ามการป้องกันเพิ่มขึ้น 1%	PER_CHECK(3); ADD_BYPASS(1)
+18378	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK มองข้ามการป้องกันเพิ่มขึ้น 3%	PER_CHECK(3); ADD_BYPASS(1)
+18379	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK มองข้ามการป้องกันเพิ่มขึ้น 5%	PER_CHECK(3); ADD_BYPASS(1)
+18380	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK มองข้ามการป้องกันเพิ่มขึ้น 7%	PER_CHECK(3); ADD_BYPASS(1)
+18381	Good	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราสังหารเพิ่มขึ้น 1%	PER_CHECK(3); ADD_OVERHIT(1)
+18382	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราสังหารเพิ่มขึ้น 3%	PER_CHECK(3); ADD_OVERHIT(1)
+18383	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราสังหารเพิ่มขึ้น 5%	PER_CHECK(3); ADD_OVERHIT(1)
+18384	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK อัตราสังหารเพิ่มขึ้น 7%	PER_CHECK(3); ADD_OVERHIT(1)
+18385	Good	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราแม่นยำ 6%	PER_CHECK(3); ADD_HITRATE(2)
+18386	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราแม่นยำ 10%	PER_CHECK(3); ADD_HITRATE(2)
+18387	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราแม่นยำ 18%	PER_CHECK(3); ADD_HITRATE(2)
+18388	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราแม่นยำ 25%	PER_CHECK(3); ADD_HITRATE(2)
+18389	Good	โจมตีดูดเลือด 1%	DRAIN_LIFE(1)
+18390	Refined	โจมตีดูดเลือด 3%	DRAIN_LIFE(1)
+18391	Graceful	โจมตีดูดเลือด 5%	DRAIN_LIFE(1)
+18392	Extreme	โจมตีดูดเลือด 8%	DRAIN_LIFE(1)
+18393	Good	โจมตีศัตรูด้วยสายฟ้า จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18394	Refined	โจมตีศัตรูด้วยสายฟ้า จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18395	Graceful	โจมตีศัตรูด้วยสายฟ้า จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18396	Extreme	โจมตีศัตรูด้วยสายฟ้า จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18397	Good	โจมตีศัตรูด้วยการแช่แข็ง จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18398	Refined	โจมตีศัตรูด้วยการแช่แข็ง จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18399	Graceful	โจมตีศัตรูด้วยการแช่แข็ง จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18400	Extreme	โจมตีศัตรูด้วยการแช่แข็ง จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18401	Good	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18402	Refined	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18403	Graceful	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18404	Extreme	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18405	Good	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18406	Refined	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18407	Graceful	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18408	Extreme	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18409	Good	โจมตีศัตรูด้วยสายฟ้า จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 9 วินาที	
+18410	Refined	โจมตีศัตรูด้วยสายฟ้า จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 7 วินาที	
+18411	Graceful	โจมตีศัตรูด้วยสายฟ้า จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 5 วินาที	
+18412	Extreme	โจมตีศัตรูด้วยสายฟ้า จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 3 วินาที	
+18413	Good	โจมตีศัตรูด้วยการแช่แข็ง จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 9 วินาที	
+18414	Refined	โจมตีศัตรูด้วยการแช่แข็ง จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 7 วินาที	
+18415	Graceful	โจมตีศัตรูด้วยการแช่แข็ง จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 5 วินาที	
+18416	Extreme	โจมตีศัตรูด้วยการแช่แข็ง จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 3 วินาที	
+18417	Good	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 9 วินาที	
+18418	Refined	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 7 วินาที	
+18419	Graceful	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 5 วินาที	
+18420	Extreme	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 3 วินาที	
+18421	Good	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 9 วินาที	
+18422	Refined	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 7 วินาที	
+18423	Graceful	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 5 วินาที	
+18424	Extreme	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 3 วินาที	
+18425	Good	โจมตีศัตรูด้วยสายฟ้า 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18426	Refined	โจมตีศัตรูด้วยสายฟ้า 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18427	Graceful	โจมตีศัตรูด้วยสายฟ้า 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18428	Extreme	โจมตีศัตรูด้วยสายฟ้า 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18429	Good	โจมตีศัตรูด้วยการแช่แข็ง 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18430	Refined	โจมตีศัตรูด้วยการแช่แข็ง 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18431	Graceful	โจมตีศัตรูด้วยการแช่แข็ง 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18432	Extreme	โจมตีศัตรูด้วยการแช่แข็ง 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18433	Good	โจมตีศัตรูด้วยระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18434	Refined	โจมตีศัตรูด้วยระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18435	Graceful	โจมตีศัตรูด้วยระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18436	Extreme	โจมตีศัตรูด้วยระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18437	Good	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18438	Refined	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18439	Graceful	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18440	Extreme	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18441	Good	โจมตีศัตรูด้วยสายฟ้า จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18442	Refined	โจมตีศัตรูด้วยสายฟ้า จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18443	Graceful	โจมตีศัตรูด้วยสายฟ้า จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18444	Extreme	โจมตีศัตรูด้วยสายฟ้า จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18445	Good	โจมตีศัตรูด้วยการแช่แข็ง จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18446	Refined	โจมตีศัตรูด้วยการแช่แข็ง จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18447	Graceful	โจมตีศัตรูด้วยการแช่แข็ง จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18448	Extreme	โจมตีศัตรูด้วยการแช่แข็ง จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18449	Good	โจมตีศัตรูด้วยระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18450	Refined	โจมตีศัตรูด้วยระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18451	Graceful	โจมตีศัตรูด้วยระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18452	Extreme	โจมตีศัตรูด้วยระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18453	Good	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18454	Refined	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18455	Graceful	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18456	Extreme	โจมตีศัตรูด้วยการแช่แข็ง, สายฟ้าและระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18457	Good	โจมตีศัตรูด้วยการพุ่งแทง ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18458	Refined	โจมตีศัตรูด้วยการพุ่งแทง ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18459	Graceful	โจมตีศัตรูด้วยการพุ่งแทง ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18460	Extreme	โจมตีศัตรูด้วยการพุ่งแทง ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18461	Good	โจมตีศัตรูด้วยพิษ ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18462	Refined	โจมตีศัตรูด้วยพิษ ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18463	Graceful	โจมตีศัตรูด้วยพิษ ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18464	Extreme	โจมตีศัตรูด้วยพิษ ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18465	Good	โจมตีศัตรูด้วยระเบิด ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18466	Refined	โจมตีศัตรูด้วยระเบิด ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18467	Graceful	โจมตีศัตรูด้วยระเบิด ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18468	Extreme	โจมตีศัตรูด้วยระเบิด ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18469	Good	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18470	Refined	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18471	Graceful	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18472	Extreme	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด ทำให้เกิดความเสียหายจากโจมตีกายภาพและโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18473	Good	โจมตีศัตรูด้วยการพุ่งแทง จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 9 วินาที	
+18474	Refined	โจมตีศัตรูด้วยการพุ่งแทง จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 7 วินาที	
+18475	Graceful	โจมตีศัตรูด้วยการพุ่งแทง จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 5 วินาที	
+18476	Extreme	โจมตีศัตรูด้วยการพุ่งแทง จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 3 วินาที	
+18477	Good	โจมตีศัตรูด้วยพิษ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 9 วินาที	
+18478	Refined	โจมตีศัตรูด้วยพิษ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 7 วินาที	
+18479	Graceful	โจมตีศัตรูด้วยพิษ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 5 วินาที	
+18480	Extreme	โจมตีศัตรูด้วยพิษ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 3 วินาที	
+18481	Good	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 9 วินาที	
+18482	Refined	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 7 วินาที	
+18483	Graceful	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 5 วินาที	
+18484	Extreme	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 3 วินาที	
+18485	Good	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 9 วินาที	
+18486	Refined	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 7 วินาที	
+18487	Graceful	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 5 วินาที	
+18488	Extreme	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 3 วินาที	
+18489	Good	โจมตีศัตรูด้วยการพุ่งแทง 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18490	Refined	โจมตีศัตรูด้วยการพุ่งแทง 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18491	Graceful	โจมตีศัตรูด้วยการพุ่งแทง 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18492	Extreme	โจมตีศัตรูด้วยการพุ่งแทง 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18493	Good	โจมตีศัตรูด้วยพิษ 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18494	Refined	โจมตีศัตรูด้วยพิษ 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18495	Graceful	โจมตีศัตรูด้วยพิษ 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18496	Extreme	โจมตีศัตรูด้วยพิษ 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18497	Good	โจมตีศัตรูด้วยระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18498	Refined	โจมตีศัตรูด้วยระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18499	Graceful	โจมตีศัตรูด้วยระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18500	Extreme	โจมตีศัตรูด้วยระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18501	Good	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18502	Refined	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18503	Graceful	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18504	Extreme	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18505	Good	โจมตีศัตรูด้วยการพุ่งแทง จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18506	Refined	โจมตีศัตรูด้วยการพุ่งแทง จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18507	Graceful	โจมตีศัตรูด้วยการพุ่งแทง จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18508	Extreme	โจมตีศัตรูด้วยการพุ่งแทง จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18509	Good	โจมตีศัตรูด้วยพิษ จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18510	Refined	โจมตีศัตรูด้วยพิษ จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18511	Graceful	โจมตีศัตรูด้วยพิษ จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18512	Extreme	โจมตีศัตรูด้วยพิษ จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18513	Good	โจมตีศัตรูด้วยระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18514	Refined	โจมตีศัตรูด้วยระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18515	Graceful	โจมตีศัตรูด้วยระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18516	Extreme	โจมตีศัตรูด้วยระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18517	Good	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18518	Refined	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18519	Graceful	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18520	Extreme	โจมตีศัตรูด้วยการพุ่งแทง, พิษและระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18521	Good	โจมตีศัตรูด้วยวิญญาณ จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18522	Refined	โจมตีศัตรูด้วยวิญญาณ จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18523	Graceful	โจมตีศัตรูด้วยวิญญาณ จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18524	Extreme	โจมตีศัตรูด้วยวิญญาณ จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18525	Good	โจมตีศัตรูด้วยพิษ จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18526	Refined	โจมตีศัตรูด้วยพิษ จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18527	Graceful	โจมตีศัตรูด้วยพิษ จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18528	Extreme	โจมตีศัตรูด้วยพิษ จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18529	Good	โจมตีศัตรูด้วยการพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18530	Refined	โจมตีศัตรูด้วยการพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18531	Graceful	โจมตีศัตรูด้วยการพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18532	Extreme	โจมตีศัตรูด้วยการพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18533	Good	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18534	Refined	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18535	Graceful	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18536	Extreme	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18537	Good	โจมตีศัตรูด้วยวิญญาณ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 9 วินาที	
+18538	Refined	โจมตีศัตรูด้วยวิญญาณ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 7 วินาที	
+18539	Graceful	โจมตีศัตรูด้วยวิญญาณ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 5 วินาที	
+18540	Extreme	โจมตีศัตรูด้วยวิญญาณ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 3 วินาที	
+18541	Good	โจมตีศัตรูด้วยพิษ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 9 วินาที	
+18542	Refined	โจมตีศัตรูด้วยพิษ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 7 วินาที	
+18543	Graceful	โจมตีศัตรูด้วยพิษ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 5 วินาที	
+18544	Extreme	โจมตีศัตรูด้วยพิษ จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 3 วินาที	
+18545	Good	โจมตีศัตรูด้วยการพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 9 วินาที	
+18546	Refined	โจมตีศัตรูด้วยการพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 7 วินาที	
+18547	Graceful	โจมตีศัตรูด้วยการพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 5 วินาที	
+18548	Extreme	โจมตีศัตรูด้วยการพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 3 วินาที	
+18549	Good	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 9 วินาที	
+18550	Refined	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 7 วินาที	
+18551	Graceful	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 5 วินาที	
+18552	Extreme	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 3 วินาที	
+18553	Good	โจมตีศัตรูด้วยวิญญาณ 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18554	Refined	โจมตีศัตรูด้วยวิญญาณ 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18555	Graceful	โจมตีศัตรูด้วยวิญญาณ 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18556	Extreme	โจมตีศัตรูด้วยวิญญาณ 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18557	Good	โจมตีศัตรูด้วยพิษ 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18558	Refined	โจมตีศัตรูด้วยพิษ 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18559	Graceful	โจมตีศัตรูด้วยพิษ 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18560	Extreme	โจมตีศัตรูด้วยพิษ 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18561	Good	โจมตีศัตรูด้วยการพุ่งโจมตี 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18562	Refined	โจมตีศัตรูด้วยการพุ่งโจมตี 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18563	Graceful	โจมตีศัตรูด้วยการพุ่งโจมตี 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18564	Extreme	โจมตีศัตรูด้วยการพุ่งโจมตี 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18565	Good	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18566	Refined	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18567	Graceful	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18568	Extreme	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18569	Good	โจมตีศัตรูด้วยวิญญาณ จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18570	Refined	โจมตีศัตรูด้วยวิญญาณ จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18571	Graceful	โจมตีศัตรูด้วยวิญญาณ จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18572	Extreme	โจมตีศัตรูด้วยวิญญาณ จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18573	Good	โจมตีศัตรูด้วยพิษ จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18574	Refined	โจมตีศัตรูด้วยพิษ จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18575	Graceful	โจมตีศัตรูด้วยพิษ จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18576	Extreme	โจมตีศัตรูด้วยพิษ จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18577	Good	โจมตีศัตรูด้วยการพุ่งโจมตี จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18578	Refined	โจมตีศัตรูด้วยการพุ่งโจมตี จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18579	Graceful	โจมตีศัตรูด้วยการพุ่งโจมตี จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18580	Extreme	โจมตีศัตรูด้วยการพุ่งโจมตี จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18581	Good	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18582	Refined	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18583	Graceful	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18584	Extreme	เมื่อโจมตีศัตรูด้วยวิญญาณ, พิษ และพุ่งโจมตี จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18585	Good	เมื่อโจมตีศัตรูด้วยความร้อน จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18586	Refined	เมื่อโจมตีศัตรูด้วยความร้อน จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18587	Graceful	เมื่อโจมตีศัตรูด้วยความร้อน จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18588	Extreme	เมื่อโจมตีศัตรูด้วยความร้อน จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18589	Good	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18590	Refined	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18591	Graceful	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18592	Extreme	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18593	Good	โจมตีเป้าหมายด้วยความร้อน, ระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 9 วินาที	
+18594	Refined	โจมตีเป้าหมายด้วยความร้อน, ระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 7 วินาที	
+18595	Graceful	โจมตีเป้าหมายด้วยความร้อน, ระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 5 วินาที	
+18596	Extreme	โจมตีเป้าหมายด้วยความร้อน, ระเบิด จะทำให้เกิดความเสียหายจากโจมตีเวทย์และโจมตีหนัก 100%, เวลารีเซ็ท 3 วินาที	
+18597	Good	เมื่อโจมตีศัตรูด้วยความร้อน จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 9 วินาที	
+18598	Refined	เมื่อโจมตีศัตรูด้วยความร้อน จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 7 วินาที	
+18599	Graceful	เมื่อโจมตีศัตรูด้วยความร้อน จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 5 วินาที	
+18600	Extreme	เมื่อโจมตีศัตรูด้วยความร้อน จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 3 วินาที	
+18601	Good	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 9 วินาที	
+18602	Refined	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 7 วินาที	
+18603	Graceful	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 5 วินาที	
+18604	Extreme	โจมตีศัตรูด้วยระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 3 วินาที	
+18605	Good	โจมตีเป้าหมายด้วยความร้อน, ระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 9 วินาที	
+18606	Refined	โจมตีเป้าหมายด้วยความร้อน, ระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 7 วินาที	
+18607	Graceful	โจมตีเป้าหมายด้วยความร้อน, ระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 5 วินาที	
+18608	Extreme	โจมตีเป้าหมายด้วยความร้อน, ระเบิด จะทำให้เกิดความเสียหายจากโจมตีหนักกายภาพและโจมตีหนักเวทย์ 160%, เวลารีเซ็ท 3 วินาที	
+18609	Good	เมื่อโจมตีศัตรูด้วยสกิลฟื้นฟู 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18610	Refined	เมื่อโจมตีศัตรูด้วยสกิลฟื้นฟู 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18611	Graceful	เมื่อโจมตีศัตรูด้วยสกิลฟื้นฟู 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18612	Extreme	เมื่อโจมตีศัตรูด้วยสกิลฟื้นฟู 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18613	Good	เมื่อโจมตีศัตรูด้วยความร้อน 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18614	Refined	เมื่อโจมตีศัตรูด้วยความร้อน 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18615	Graceful	เมื่อโจมตีศัตรูด้วยความร้อน 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18616	Extreme	เมื่อโจมตีศัตรูด้วยความร้อน 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18617	Good	โจมตีศัตรูด้วยระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18618	Refined	โจมตีศัตรูด้วยระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18619	Graceful	โจมตีศัตรูด้วยระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18620	Extreme	โจมตีศัตรูด้วยระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18621	Good	โจมตีศัตรูด้วยสกิลฟื้นฟู, ความร้อน, ระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 1 แต้ม	
+18622	Refined	โจมตีศัตรูด้วยสกิลฟื้นฟู, ความร้อน, ระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 3 แต้ม	
+18623	Graceful	โจมตีศัตรูด้วยสกิลฟื้นฟู, ความร้อน, ระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 5 แต้ม	
+18624	Extreme	โจมตีศัตรูด้วยสกิลฟื้นฟู, ความร้อน, ระเบิด 1 อย่างจะฟื้นฟูค่ากำลัง 7 แต้ม	
+18625	Good	เมื่อโจมตีศัตรูด้วยสกิลฟื้นฟู จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18626	Refined	เมื่อโจมตีศัตรูด้วยสกิลฟื้นฟู จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18627	Graceful	เมื่อโจมตีศัตรูด้วยสกิลฟื้นฟู จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18628	Extreme	เมื่อโจมตีศัตรูด้วยสกิลฟื้นฟู จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18629	Good	เมื่อโจมตีศัตรูด้วยความร้อน จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18630	Refined	เมื่อโจมตีศัตรูด้วยความร้อน จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18631	Graceful	เมื่อโจมตีศัตรูด้วยความร้อน จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18632	Extreme	เมื่อโจมตีศัตรูด้วยความร้อน จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18633	Good	โจมตีศัตรูด้วยระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18634	Refined	โจมตีศัตรูด้วยระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18635	Graceful	โจมตีศัตรูด้วยระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18636	Extreme	โจมตีศัตรูด้วยระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18637	Good	โจมตีศัตรูด้วยสกิลฟื้นฟู, ความร้อน, ระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 5 วินาที	
+18638	Refined	โจมตีศัตรูด้วยสกิลฟื้นฟู, ความร้อน, ระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 4 วินาที	
+18639	Graceful	โจมตีศัตรูด้วยสกิลฟื้นฟู, ความร้อน, ระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 3 วินาที	
+18640	Extreme	โจมตีศัตรูด้วยสกิลฟื้นฟู, ความร้อน, ระเบิด จะฟื้นฟูค่ากำลัง 14 แต้ม, เวลารีเซ็ท 2 วินาที	
+18641	Good	เมื่อพลังถึง $STR_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	STR_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18642	Refined	เมื่อพลังถึง $STR_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	STR_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18643	Graceful	เมื่อพลังถึง $STR_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	STR_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18644	Extreme	เมื่อพลังถึง $STR_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	STR_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18645	Good	เมื่อพลังถึง $STR_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	STR_CHECK(3); ADD_ABSORB_MAGIC(1)
+18646	Refined	เมื่อพลังถึง $STR_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	STR_CHECK(3); ADD_ABSORB_MAGIC(1)
+18647	Graceful	เมื่อพลังถึง $STR_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	STR_CHECK(3); ADD_ABSORB_MAGIC(1)
+18648	Extreme	เมื่อพลังถึง $STR_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	STR_CHECK(3); ADD_ABSORB_MAGIC(1)
+18649	Good	เมื่อพลังถึง $STR_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	STR_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18650	Refined	เมื่อพลังถึง $STR_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	STR_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18651	Graceful	เมื่อพลังถึง $STR_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	STR_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18652	Extreme	เมื่อพลังถึง $STR_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	STR_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18653	Good	เมื่อพลังถึง $STR_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	STR_CHECK(3); ADD_HPMAX(1)
+18654	Refined	เมื่อพลังถึง $STR_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	STR_CHECK(3); ADD_HPMAX(1)
+18655	Graceful	เมื่อพลังถึง $STR_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	STR_CHECK(3); ADD_HPMAX(1)
+18656	Extreme	เมื่อพลังถึง $STR_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	STR_CHECK(3); ADD_HPMAX(1)
+18657	Good	เมื่อพลังถึง $STR_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 3 หน่วย	STR_CHECK(3); ADD_RECOVER_STAMINA(1)
+18658	Refined	เมื่อพลังถึง $STR_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 4 หน่วย	STR_CHECK(3); ADD_RECOVER_STAMINA(1)
+18659	Graceful	เมื่อพลังถึง $STR_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 5 หน่วย	STR_CHECK(3); ADD_RECOVER_STAMINA(1)
+18660	Extreme	เมื่อพลังถึง $STR_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 6 หน่วย	STR_CHECK(3); ADD_RECOVER_STAMINA(1)
+18661	Good	เมื่อพลังถึง $STR_CHECK เพิ่มโจมตีดูดเลือด 1%	STR_CHECK(3); DRAIN_LIFE(1)
+18662	Refined	เมื่อพลังถึง $STR_CHECK เพิ่มโจมตีดูดเลือด 2%	STR_CHECK(3); DRAIN_LIFE(1)
+18663	Graceful	เมื่อพลังถึง $STR_CHECK เพิ่มโจมตีดูดเลือด 3%	STR_CHECK(3); DRAIN_LIFE(1)
+18664	Extreme	เมื่อพลังถึง $STR_CHECK เพิ่มโจมตีดูดเลือด 4%	STR_CHECK(3); DRAIN_LIFE(1)
+18665	Good	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล 2.5%, แม่นยำ 7.5%	STR_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18666	Refined	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล 3.5%, แม่นยำ 10%	STR_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18667	Graceful	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล 5%, แม่นยำ 16%	STR_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18668	Extreme	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล 7.5%, แม่นยำ 25%	STR_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18669	Good	เมื่อพลังถึง $STR_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	STR_CHECK(3); ADD_HPMAX(1)
+18670	Refined	เมื่อพลังถึง $STR_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	STR_CHECK(3); ADD_HPMAX(1)
+18671	Graceful	เมื่อพลังถึง $STR_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	STR_CHECK(3); ADD_HPMAX(1)
+18672	Extreme	เมื่อพลังถึง $STR_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	STR_CHECK(3); ADD_HPMAX(1)
+18673	Good	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	STR_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18674	Refined	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	STR_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18675	Graceful	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	STR_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18676	Extreme	เมื่อพลังถึง $STR_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	STR_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18677	Good	เมื่อพลังถึง $STR_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18678	Refined	เมื่อพลังถึง $STR_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18679	Graceful	เมื่อพลังถึง $STR_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18680	Extreme	เมื่อพลังถึง $STR_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	STR_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18681	Good	เมื่อพลังถึง $STR_CHECK เพิ่มหลบหลีก 5%, อัตราต้านคริติคอล 5%	STR_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18682	Refined	เมื่อพลังถึง $STR_CHECK เพิ่มหลบหลีก 7.5%, อัตราต้านคริติคอล 7.5%	STR_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18683	Graceful	เมื่อพลังถึง $STR_CHECK เพิ่มหลบหลีก 10%, อัตราต้านคริติคอล 10%	STR_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18684	Extreme	เมื่อพลังถึง $STR_CHECK เพิ่มหลบหลีก 15%, อัตราต้านคริติคอล 15%	STR_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18685	Good	เมื่อพลังถึง $STR_CHECK พลังพื้นฐาน +4%	STR_CHECK(3); MUL_STR(1)
+18686	Refined	เมื่อพลังถึง $STR_CHECK พลังพื้นฐาน +6%	STR_CHECK(3); MUL_STR(1)
+18687	Graceful	เมื่อพลังถึง $STR_CHECK พลังพื้นฐาน +10%	STR_CHECK(3); MUL_STR(1)
+18688	Extreme	เมื่อพลังถึง $STR_CHECK พลังพื้นฐาน +15%	STR_CHECK(3); MUL_STR(1)
+18689	Good	เมื่อพลังถึง $STR_CHECK ว่องไวพื้นฐาน +4%	STR_CHECK(3); MUL_AGI(1)
+18690	Refined	เมื่อพลังถึง $STR_CHECK ว่องไวพื้นฐาน +6%	STR_CHECK(3); MUL_AGI(1)
+18691	Graceful	เมื่อพลังถึง $STR_CHECK ว่องไวพื้นฐาน +10%	STR_CHECK(3); MUL_AGI(1)
+18692	Extreme	เมื่อพลังถึง $STR_CHECK ว่องไวพื้นฐาน +15%	STR_CHECK(3); MUL_AGI(1)
+18693	Good	เมื่อพลังถึง $STR_CHECK กายพื้นฐาน +4%	STR_CHECK(3); MUL_CON(1)
+18694	Refined	เมื่อพลังถึง $STR_CHECK กายพื้นฐาน +6%	STR_CHECK(3); MUL_CON(1)
+18695	Graceful	เมื่อพลังถึง $STR_CHECK กายพื้นฐาน +10%	STR_CHECK(3); MUL_CON(1)
+18696	Extreme	เมื่อพลังถึง $STR_CHECK กายพื้นฐาน +15%	STR_CHECK(3); MUL_CON(1)
+18697	Good	เมื่อพลังถึง $STR_CHECK ปัญญาพื้นฐาน +4%	STR_CHECK(3); MUL_INT(1)
+18698	Refined	เมื่อพลังถึง $STR_CHECK ปัญญาพื้นฐาน +6%	STR_CHECK(3); MUL_INT(1)
+18699	Graceful	เมื่อพลังถึง $STR_CHECK ปัญญาพื้นฐาน +10%	STR_CHECK(3); MUL_INT(1)
+18700	Extreme	เมื่อพลังถึง $STR_CHECK ปัญญาพื้นฐาน +15%	STR_CHECK(3); MUL_INT(1)
+18701	Good	เมื่อพลังถึง $STR_CHECK รู้สึกพื้นฐาน +4%	STR_CHECK(3); MUL_PER(1)
+18702	Refined	เมื่อพลังถึง $STR_CHECK รู้สึกพื้นฐาน +6%	STR_CHECK(3); MUL_PER(1)
+18703	Graceful	เมื่อพลังถึง $STR_CHECK รู้สึกพื้นฐาน +10%	STR_CHECK(3); MUL_PER(1)
+18704	Extreme	เมื่อพลังถึง $STR_CHECK รู้สึกพื้นฐาน +15%	STR_CHECK(3); MUL_PER(1)
+18705	Good	เมื่อพลังถึง $STR_CHECK ค่า HP สูงสุด +8%	STR_CHECK(3); MUL_HPMAX(1)
+18706	Refined	เมื่อพลังถึง $STR_CHECK ค่า HP สูงสุด +12%	STR_CHECK(3); MUL_HPMAX(1)
+18707	Graceful	เมื่อพลังถึง $STR_CHECK ค่า HP สูงสุด +16%	STR_CHECK(3); MUL_HPMAX(1)
+18708	Extreme	เมื่อพลังถึง $STR_CHECK ค่า HP สูงสุด +15%	STR_CHECK(3); MUL_HPMAX(1)
+18709	Good	เมื่อพลังถึง $STR_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	STR_CHECK(3); ADD_AC_PHYSICS(1)
+18710	Refined	เมื่อพลังถึง $STR_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	STR_CHECK(3); ADD_AC_PHYSICS(1)
+18711	Graceful	เมื่อพลังถึง $STR_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	STR_CHECK(3); ADD_AC_PHYSICS(1)
+18712	Extreme	เมื่อพลังถึง $STR_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	STR_CHECK(3); ADD_AC_PHYSICS(1)
+18713	Good	เมื่อพลังถึง $STR_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	STR_CHECK(3); ADD_AC_MAGIC(1)
+18714	Refined	เมื่อพลังถึง $STR_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	STR_CHECK(3); ADD_AC_MAGIC(1)
+18715	Graceful	เมื่อพลังถึง $STR_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	STR_CHECK(3); ADD_AC_MAGIC(1)
+18716	Extreme	เมื่อพลังถึง $STR_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	STR_CHECK(3); ADD_AC_MAGIC(1)
+18717	Good	เมื่อพลังถึง $STR_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	STR_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18718	Refined	เมื่อพลังถึง $STR_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	STR_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18719	Graceful	เมื่อพลังถึง $STR_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	STR_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18720	Extreme	เมื่อพลังถึง $STR_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	STR_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18721	Good	เมื่อพลังถึง $STR_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	STR_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18722	Refined	เมื่อพลังถึง $STR_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	STR_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18723	Graceful	เมื่อพลังถึง $STR_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	STR_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18724	Extreme	เมื่อพลังถึง $STR_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	STR_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18725	Good	เมื่อค่าว่องไวถึง $AGI_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	AGI_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18726	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	AGI_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18727	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	AGI_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18728	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	AGI_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18729	Good	เมื่อค่าว่องไวถึง $AGI_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	AGI_CHECK(3); ADD_ABSORB_MAGIC(1)
+18730	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	AGI_CHECK(3); ADD_ABSORB_MAGIC(1)
+18731	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	AGI_CHECK(3); ADD_ABSORB_MAGIC(1)
+18732	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	AGI_CHECK(3); ADD_ABSORB_MAGIC(1)
+18733	Good	เมื่อค่าว่องไวถึง $AGI_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	AGI_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18734	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	AGI_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18735	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	AGI_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18736	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	AGI_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18737	Good	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	AGI_CHECK(3); ADD_HPMAX(1)
+18738	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	AGI_CHECK(3); ADD_HPMAX(1)
+18739	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	AGI_CHECK(3); ADD_HPMAX(1)
+18740	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	AGI_CHECK(3); ADD_HPMAX(1)
+18741	Good	เมื่อค่าว่องไวถึง $AGI_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 3 หน่วย	AGI_CHECK(3); ADD_RECOVER_STAMINA(1)
+18742	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 4 หน่วย	AGI_CHECK(3); ADD_RECOVER_STAMINA(1)
+18743	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 5 หน่วย	AGI_CHECK(3); ADD_RECOVER_STAMINA(1)
+18744	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 6 หน่วย	AGI_CHECK(3); ADD_RECOVER_STAMINA(1)
+18745	Good	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มโจมตีดูดเลือด 1%	AGI_CHECK(3); DRAIN_LIFE(1)
+18746	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มโจมตีดูดเลือด 2%	AGI_CHECK(3); DRAIN_LIFE(1)
+18747	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มโจมตีดูดเลือด 3%	AGI_CHECK(3); DRAIN_LIFE(1)
+18748	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มโจมตีดูดเลือด 4%	AGI_CHECK(3); DRAIN_LIFE(1)
+18749	Good	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล 2.5%, แม่นยำ 7.5%	AGI_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18750	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล 3.5%, แม่นยำ 10%	AGI_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18751	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล 5%, แม่นยำ 16%	AGI_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18752	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล 7.5%, แม่นยำ 25%	AGI_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18753	Good	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	AGI_CHECK(3); ADD_HPMAX(1)
+18754	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	AGI_CHECK(3); ADD_HPMAX(1)
+18755	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	AGI_CHECK(3); ADD_HPMAX(1)
+18756	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	AGI_CHECK(3); ADD_HPMAX(1)
+18757	Good	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	AGI_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18758	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	AGI_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18759	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	AGI_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18760	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	AGI_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18761	Good	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18762	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18763	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18764	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	AGI_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18765	Good	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มหลบหลีก 5%, อัตราต้านคริติคอล 5%	AGI_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18766	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มหลบหลีก 7.5%, อัตราต้านคริติคอล 7.5%	AGI_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18767	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มหลบหลีก 10%, อัตราต้านคริติคอล 10%	AGI_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18768	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK เพิ่มหลบหลีก 15%, อัตราต้านคริติคอล 15%	AGI_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18769	Good	เมื่อค่าว่องไวถึง $AGI_CHECK พลังพื้นฐาน +4%	AGI_CHECK(3); MUL_STR(1)
+18770	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK พลังพื้นฐาน +6%	AGI_CHECK(3); MUL_STR(1)
+18771	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK พลังพื้นฐาน +10%	AGI_CHECK(3); MUL_STR(1)
+18772	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK พลังพื้นฐาน +15%	AGI_CHECK(3); MUL_STR(1)
+18773	Good	เมื่อค่าว่องไวถึง $AGI_CHECK ว่องไวพื้นฐาน +4%	AGI_CHECK(3); MUL_AGI(1)
+18774	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK ว่องไวพื้นฐาน +6%	AGI_CHECK(3); MUL_AGI(1)
+18775	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK ว่องไวพื้นฐาน +10%	AGI_CHECK(3); MUL_AGI(1)
+18776	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK ว่องไวพื้นฐาน +15%	AGI_CHECK(3); MUL_AGI(1)
+18777	Good	เมื่อค่าว่องไวถึง $AGI_CHECK กายพื้นฐาน +4%	AGI_CHECK(3); MUL_CON(1)
+18778	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK กายพื้นฐาน +6%	AGI_CHECK(3); MUL_CON(1)
+18779	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK กายพื้นฐาน +10%	AGI_CHECK(3); MUL_CON(1)
+18780	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK กายพื้นฐาน +15%	AGI_CHECK(3); MUL_CON(1)
+18781	Good	เมื่อค่าว่องไวถึง $AGI_CHECK ปัญญาพื้นฐาน +4%	AGI_CHECK(3); MUL_INT(1)
+18782	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK ปัญญาพื้นฐาน +6%	AGI_CHECK(3); MUL_INT(1)
+18783	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK ปัญญาพื้นฐาน +10%	AGI_CHECK(3); MUL_INT(1)
+18784	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK ปัญญาพื้นฐาน +15%	AGI_CHECK(3); MUL_INT(1)
+18785	Good	เมื่อค่าว่องไวถึง $AGI_CHECK รู้สึกพื้นฐาน +4%	AGI_CHECK(3); MUL_PER(1)
+18786	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK รู้สึกพื้นฐาน +6%	AGI_CHECK(3); MUL_PER(1)
+18787	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK รู้สึกพื้นฐาน +10%	AGI_CHECK(3); MUL_PER(1)
+18788	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK รู้สึกพื้นฐาน +15%	AGI_CHECK(3); MUL_PER(1)
+18789	Good	เมื่อค่าว่องไวถึง $AGI_CHECK ค่า HP สูงสุด +8%	AGI_CHECK(3); MUL_HPMAX(1)
+18790	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK ค่า HP สูงสุด +12%	AGI_CHECK(3); MUL_HPMAX(1)
+18791	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK ค่า HP สูงสุด +16%	AGI_CHECK(3); MUL_HPMAX(1)
+18792	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK ค่า HP สูงสุด +15%	AGI_CHECK(3); MUL_HPMAX(1)
+18793	Good	เมื่อค่าว่องไวถึง $AGI_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	AGI_CHECK(3); ADD_AC_PHYSICS(1)
+18794	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	AGI_CHECK(3); ADD_AC_PHYSICS(1)
+18795	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	AGI_CHECK(3); ADD_AC_PHYSICS(1)
+18796	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	AGI_CHECK(3); ADD_AC_PHYSICS(1)
+18797	Good	เมื่อค่าว่องไวถึง $AGI_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	AGI_CHECK(3); ADD_AC_MAGIC(1)
+18798	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	AGI_CHECK(3); ADD_AC_MAGIC(1)
+18799	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	AGI_CHECK(3); ADD_AC_MAGIC(1)
+18800	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	AGI_CHECK(3); ADD_AC_MAGIC(1)
+18801	Good	เมื่อค่าว่องไวถึง $AGI_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	AGI_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18802	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	AGI_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18803	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	AGI_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18804	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	AGI_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18805	Good	เมื่อค่าว่องไวถึง $AGI_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	AGI_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18806	Refined	เมื่อค่าว่องไวถึง $AGI_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	AGI_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18807	Graceful	เมื่อค่าว่องไวถึง $AGI_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	AGI_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18808	Extreme	เมื่อค่าว่องไวถึง $AGI_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	AGI_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18809	Good	เมื่อค่ากายถึง $CON_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	CON_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18810	Refined	เมื่อค่ากายถึง $CON_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	CON_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18811	Graceful	เมื่อค่ากายถึง $CON_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	CON_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18812	Extreme	เมื่อค่ากายถึง $CON_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	CON_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18813	Good	เมื่อค่ากายถึง $CON_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	CON_CHECK(3); ADD_ABSORB_MAGIC(1)
+18814	Refined	เมื่อค่ากายถึง $CON_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	CON_CHECK(3); ADD_ABSORB_MAGIC(1)
+18815	Graceful	เมื่อค่ากายถึง $CON_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	CON_CHECK(3); ADD_ABSORB_MAGIC(1)
+18816	Extreme	เมื่อค่ากายถึง $CON_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	CON_CHECK(3); ADD_ABSORB_MAGIC(1)
+18817	Good	เมื่อค่ากายถึง $CON_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	CON_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18818	Refined	เมื่อค่ากายถึง $CON_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	CON_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18819	Graceful	เมื่อค่ากายถึง $CON_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	CON_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18820	Extreme	เมื่อค่ากายถึง $CON_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	CON_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18821	Good	เมื่อค่ากายถึง $CON_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	CON_CHECK(3); ADD_HPMAX(1)
+18822	Refined	เมื่อค่ากายถึง $CON_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	CON_CHECK(3); ADD_HPMAX(1)
+18823	Graceful	เมื่อค่ากายถึง $CON_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	CON_CHECK(3); ADD_HPMAX(1)
+18824	Extreme	เมื่อค่ากายถึง $CON_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	CON_CHECK(3); ADD_HPMAX(1)
+18825	Good	เมื่อค่ากายถึง $CON_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 3 หน่วย	CON_CHECK(3); ADD_RECOVER_STAMINA(1)
+18826	Refined	เมื่อค่ากายถึง $CON_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 4 หน่วย	CON_CHECK(3); ADD_RECOVER_STAMINA(1)
+18827	Graceful	เมื่อค่ากายถึง $CON_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 5 หน่วย	CON_CHECK(3); ADD_RECOVER_STAMINA(1)
+18828	Extreme	เมื่อค่ากายถึง $CON_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 6 หน่วย	CON_CHECK(3); ADD_RECOVER_STAMINA(1)
+18829	Good	เมื่อค่ากายถึง $CON_CHECK เพิ่มโจมตีดูดเลือด 1%	CON_CHECK(3); DRAIN_LIFE(1)
+18830	Refined	เมื่อค่ากายถึง $CON_CHECK เพิ่มโจมตีดูดเลือด 2%	CON_CHECK(3); DRAIN_LIFE(1)
+18831	Graceful	เมื่อค่ากายถึง $CON_CHECK เพิ่มโจมตีดูดเลือด 3%	CON_CHECK(3); DRAIN_LIFE(1)
+18832	Extreme	เมื่อค่ากายถึง $CON_CHECK เพิ่มโจมตีดูดเลือด 4%	CON_CHECK(3); DRAIN_LIFE(1)
+18833	Good	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล 2.5%, แม่นยำ 7.5%	CON_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18834	Refined	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล 3.5%, แม่นยำ 10%	CON_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18835	Graceful	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล 5%, แม่นยำ 16%	CON_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18836	Extreme	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล 7.5%, แม่นยำ 25%	CON_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18837	Good	เมื่อค่ากายถึง $CON_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	CON_CHECK(3); ADD_HPMAX(1)
+18838	Refined	เมื่อค่ากายถึง $CON_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	CON_CHECK(3); ADD_HPMAX(1)
+18839	Graceful	เมื่อค่ากายถึง $CON_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	CON_CHECK(3); ADD_HPMAX(1)
+18840	Extreme	เมื่อค่ากายถึง $CON_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	CON_CHECK(3); ADD_HPMAX(1)
+18841	Good	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	CON_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18842	Refined	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	CON_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18843	Graceful	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	CON_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18844	Extreme	เมื่อค่ากายถึง $CON_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	CON_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18845	Good	เมื่อค่ากายถึง $CON_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18846	Refined	เมื่อค่ากายถึง $CON_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18847	Graceful	เมื่อค่ากายถึง $CON_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18848	Extreme	เมื่อค่ากายถึง $CON_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	CON_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18849	Good	เมื่อค่ากายถึง $CON_CHECK เพิ่มหลบหลีก 5%, อัตราต้านคริติคอล 5%	CON_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18850	Refined	เมื่อค่ากายถึง $CON_CHECK เพิ่มหลบหลีก 7.5%, อัตราต้านคริติคอล 7.5%	CON_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18851	Graceful	เมื่อค่ากายถึง $CON_CHECK เพิ่มหลบหลีก 10%, อัตราต้านคริติคอล 10%	CON_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18852	Extreme	เมื่อค่ากายถึง $CON_CHECK เพิ่มหลบหลีก 15%, อัตราต้านคริติคอล 15%	CON_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18853	Good	เมื่อค่ากายถึง $CON_CHECK พลังพื้นฐาน +4%	CON_CHECK(3); MUL_CON(1)
+18854	Refined	เมื่อค่ากายถึง $CON_CHECK พลังพื้นฐาน +6%	CON_CHECK(3); MUL_CON(1)
+18855	Graceful	เมื่อค่ากายถึง $CON_CHECK พลังพื้นฐาน +10%	CON_CHECK(3); MUL_CON(1)
+18856	Extreme	เมื่อค่ากายถึง $CON_CHECK พลังพื้นฐาน +15%	CON_CHECK(3); MUL_CON(1)
+18857	Good	เมื่อค่ากายถึง $CON_CHECK ว่องไวพื้นฐาน +4%	CON_CHECK(3); MUL_AGI(1)
+18858	Refined	เมื่อค่ากายถึง $CON_CHECK ว่องไวพื้นฐาน +6%	CON_CHECK(3); MUL_AGI(1)
+18859	Graceful	เมื่อค่ากายถึง $CON_CHECK ว่องไวพื้นฐาน +10%	CON_CHECK(3); MUL_AGI(1)
+18860	Extreme	เมื่อค่ากายถึง $CON_CHECK ว่องไวพื้นฐาน +15%	CON_CHECK(3); MUL_AGI(1)
+18861	Good	เมื่อค่ากายถึง $CON_CHECK กายพื้นฐาน +4%	CON_CHECK(3); MUL_CON(1)
+18862	Refined	เมื่อค่ากายถึง $CON_CHECK กายพื้นฐาน +6%	CON_CHECK(3); MUL_CON(1)
+18863	Graceful	เมื่อค่ากายถึง $CON_CHECK กายพื้นฐาน +10%	CON_CHECK(3); MUL_CON(1)
+18864	Extreme	เมื่อค่ากายถึง $CON_CHECK กายพื้นฐาน +15%	CON_CHECK(3); MUL_CON(1)
+18865	Good	เมื่อค่ากายถึง $CON_CHECK ปัญญาพื้นฐาน +4%	CON_CHECK(3); MUL_INT(1)
+18866	Refined	เมื่อค่ากายถึง $CON_CHECK ปัญญาพื้นฐาน +6%	CON_CHECK(3); MUL_INT(1)
+18867	Graceful	เมื่อค่ากายถึง $CON_CHECK ปัญญาพื้นฐาน +10%	CON_CHECK(3); MUL_INT(1)
+18868	Extreme	เมื่อค่ากายถึง $CON_CHECK ปัญญาพื้นฐาน +15%	CON_CHECK(3); MUL_INT(1)
+18869	Good	เมื่อค่ากายถึง $CON_CHECK รู้สึกพื้นฐาน +4%	CON_CHECK(3); MUL_PER(1)
+18870	Refined	เมื่อค่ากายถึง $CON_CHECK รู้สึกพื้นฐาน +6%	CON_CHECK(3); MUL_PER(1)
+18871	Graceful	เมื่อค่ากายถึง $CON_CHECK รู้สึกพื้นฐาน +10%	CON_CHECK(3); MUL_PER(1)
+18872	Extreme	เมื่อค่ากายถึง $CON_CHECK รู้สึกพื้นฐาน +15%	CON_CHECK(3); MUL_PER(1)
+18873	Good	เมื่อค่ากายถึง $CON_CHECK ค่า HP สูงสุด +8%	CON_CHECK(3); MUL_HPMAX(1)
+18874	Refined	เมื่อค่ากายถึง $CON_CHECK ค่า HP สูงสุด +12%	CON_CHECK(3); MUL_HPMAX(1)
+18875	Graceful	เมื่อค่ากายถึง $CON_CHECK ค่า HP สูงสุด +16%	CON_CHECK(3); MUL_HPMAX(1)
+18876	Extreme	เมื่อค่ากายถึง $CON_CHECK ค่า HP สูงสุด +15%	CON_CHECK(3); MUL_HPMAX(1)
+18877	Good	เมื่อค่ากายถึง $CON_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	CON_CHECK(3); ADD_AC_PHYSICS(1)
+18878	Refined	เมื่อค่ากายถึง $CON_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	CON_CHECK(3); ADD_AC_PHYSICS(1)
+18879	Graceful	เมื่อค่ากายถึง $CON_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	CON_CHECK(3); ADD_AC_PHYSICS(1)
+18880	Extreme	เมื่อค่ากายถึง $CON_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	CON_CHECK(3); ADD_AC_PHYSICS(1)
+18881	Good	เมื่อค่ากายถึง $CON_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	CON_CHECK(3); ADD_AC_MAGIC(1)
+18882	Refined	เมื่อค่ากายถึง $CON_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	CON_CHECK(3); ADD_AC_MAGIC(1)
+18883	Graceful	เมื่อค่ากายถึง $CON_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	CON_CHECK(3); ADD_AC_MAGIC(1)
+18884	Extreme	เมื่อค่ากายถึง $CON_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	CON_CHECK(3); ADD_AC_MAGIC(1)
+18885	Good	เมื่อค่ากายถึง $CON_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	CON_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18886	Refined	เมื่อค่ากายถึง $CON_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	CON_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18887	Graceful	เมื่อค่ากายถึง $CON_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	CON_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18888	Extreme	เมื่อค่ากายถึง $CON_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	CON_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18889	Good	เมื่อค่ากายถึง $CON_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	CON_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18890	Refined	เมื่อค่ากายถึง $CON_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	CON_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18891	Graceful	เมื่อค่ากายถึง $CON_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	CON_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18892	Extreme	เมื่อค่ากายถึง $CON_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	CON_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18893	Good	เมื่อค่าปัญญาถึง $INT_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	INT_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18894	Refined	เมื่อค่าปัญญาถึง $INT_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	INT_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18895	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	INT_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18896	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	INT_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18897	Good	เมื่อค่าปัญญาถึง $INT_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	INT_CHECK(3); ADD_ABSORB_MAGIC(1)
+18898	Refined	เมื่อค่าปัญญาถึง $INT_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	INT_CHECK(3); ADD_ABSORB_MAGIC(1)
+18899	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	INT_CHECK(3); ADD_ABSORB_MAGIC(1)
+18900	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	INT_CHECK(3); ADD_ABSORB_MAGIC(1)
+18901	Good	เมื่อค่าปัญญาถึง $INT_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	INT_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18902	Refined	เมื่อค่าปัญญาถึง $INT_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	INT_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18903	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	INT_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18904	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	INT_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18905	Good	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	INT_CHECK(3); ADD_HPMAX(1)
+18906	Refined	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	INT_CHECK(3); ADD_HPMAX(1)
+18907	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	INT_CHECK(3); ADD_HPMAX(1)
+18908	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	INT_CHECK(3); ADD_HPMAX(1)
+18909	Good	เมื่อค่าปัญญาถึง $INT_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 3 หน่วย	INT_CHECK(3); ADD_RECOVER_STAMINA(1)
+18910	Refined	เมื่อค่าปัญญาถึง $INT_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 4 หน่วย	INT_CHECK(3); ADD_RECOVER_STAMINA(1)
+18911	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 5 หน่วย	INT_CHECK(3); ADD_RECOVER_STAMINA(1)
+18912	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 6 หน่วย	INT_CHECK(3); ADD_RECOVER_STAMINA(1)
+18913	Good	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มโจมตีดูดเลือด 1%	INT_CHECK(3); DRAIN_LIFE(1)
+18914	Refined	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มโจมตีดูดเลือด 2%	INT_CHECK(3); DRAIN_LIFE(1)
+18915	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มโจมตีดูดเลือด 3%	INT_CHECK(3); DRAIN_LIFE(1)
+18916	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มโจมตีดูดเลือด 4%	INT_CHECK(3); DRAIN_LIFE(1)
+18917	Good	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล 2.5%, แม่นยำ 7.5%	INT_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18918	Refined	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล 3.5%, แม่นยำ 10%	INT_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18919	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล 5%, แม่นยำ 16%	INT_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18920	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล 7.5%, แม่นยำ 25%	INT_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+18921	Good	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	INT_CHECK(3); ADD_HPMAX(1)
+18922	Refined	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	INT_CHECK(3); ADD_HPMAX(1)
+18923	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	INT_CHECK(3); ADD_HPMAX(1)
+18924	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	INT_CHECK(3); ADD_HPMAX(1)
+18925	Good	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	INT_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18926	Refined	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	INT_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18927	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	INT_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18928	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	INT_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+18929	Good	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18930	Refined	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18931	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18932	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	INT_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+18933	Good	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มหลบหลีก 5%, อัตราต้านคริติคอล 5%	INT_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18934	Refined	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มหลบหลีก 7.5%, อัตราต้านคริติคอล 7.5%	INT_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18935	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มหลบหลีก 10%, อัตราต้านคริติคอล 10%	INT_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18936	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK เพิ่มหลบหลีก 15%, อัตราต้านคริติคอล 15%	INT_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+18937	Good	เมื่อค่าปัญญาถึง $INT_CHECK พลังพื้นฐาน +4%	INT_CHECK(3); MUL_STR(1)
+18938	Refined	เมื่อค่าปัญญาถึง $INT_CHECK พลังพื้นฐาน +6%	INT_CHECK(3); MUL_STR(1)
+18939	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK พลังพื้นฐาน +10%	INT_CHECK(3); MUL_STR(1)
+18940	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK พลังพื้นฐาน +15%	INT_CHECK(3); MUL_STR(1)
+18941	Good	เมื่อค่าปัญญาถึง $INT_CHECK ว่องไวพื้นฐาน +4%	INT_CHECK(3); MUL_AGI(1)
+18942	Refined	เมื่อค่าปัญญาถึง $INT_CHECK ว่องไวพื้นฐาน +6%	INT_CHECK(3); MUL_AGI(1)
+18943	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK ว่องไวพื้นฐาน +10%	INT_CHECK(3); MUL_AGI(1)
+18944	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK ว่องไวพื้นฐาน +15%	INT_CHECK(3); MUL_AGI(1)
+18945	Good	เมื่อค่าปัญญาถึง $INT_CHECK กายพื้นฐาน +4%	INT_CHECK(3); MUL_CON(1)
+18946	Refined	เมื่อค่าปัญญาถึง $INT_CHECK กายพื้นฐาน +6%	INT_CHECK(3); MUL_CON(1)
+18947	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK กายพื้นฐาน +10%	INT_CHECK(3); MUL_CON(1)
+18948	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK กายพื้นฐาน +15%	INT_CHECK(3); MUL_CON(1)
+18949	Good	เมื่อค่าปัญญาถึง $INT_CHECK ปัญญาพื้นฐาน +4%	INT_CHECK(3); MUL_INT(1)
+18950	Refined	เมื่อค่าปัญญาถึง $INT_CHECK ปัญญาพื้นฐาน +6%	INT_CHECK(3); MUL_INT(1)
+18951	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK ปัญญาพื้นฐาน +10%	INT_CHECK(3); MUL_INT(1)
+18952	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK ปัญญาพื้นฐาน +15%	INT_CHECK(3); MUL_INT(1)
+18953	Good	เมื่อค่าปัญญาถึง $INT_CHECK รู้สึกพื้นฐาน +4%	INT_CHECK(3); MUL_PER(1)
+18954	Refined	เมื่อค่าปัญญาถึง $INT_CHECK รู้สึกพื้นฐาน +6%	INT_CHECK(3); MUL_PER(1)
+18955	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK รู้สึกพื้นฐาน +10%	INT_CHECK(3); MUL_PER(1)
+18956	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK รู้สึกพื้นฐาน +15%	INT_CHECK(3); MUL_PER(1)
+18957	Good	เมื่อค่าปัญญาถึง $INT_CHECK ค่า HP สูงสุด +8%	INT_CHECK(3); MUL_HPMAX(1)
+18958	Refined	เมื่อค่าปัญญาถึง $INT_CHECK ค่า HP สูงสุด +12%	INT_CHECK(3); MUL_HPMAX(1)
+18959	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK ค่า HP สูงสุด +16%	INT_CHECK(3); MUL_HPMAX(1)
+18960	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK ค่า HP สูงสุด +15%	INT_CHECK(3); MUL_HPMAX(1)
+18961	Good	เมื่อค่าปัญญาถึง $INT_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	INT_CHECK(3); ADD_AC_PHYSICS(1)
+18962	Refined	เมื่อค่าปัญญาถึง $INT_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	INT_CHECK(3); ADD_AC_PHYSICS(1)
+18963	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	INT_CHECK(3); ADD_AC_PHYSICS(1)
+18964	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	INT_CHECK(3); ADD_AC_PHYSICS(1)
+18965	Good	เมื่อค่าปัญญาถึง $INT_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	INT_CHECK(3); ADD_AC_MAGIC(1)
+18966	Refined	เมื่อค่าปัญญาถึง $INT_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	INT_CHECK(3); ADD_AC_MAGIC(1)
+18967	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	INT_CHECK(3); ADD_AC_MAGIC(1)
+18968	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	INT_CHECK(3); ADD_AC_MAGIC(1)
+18969	Good	เมื่อค่าปัญญาถึง $INT_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	INT_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18970	Refined	เมื่อค่าปัญญาถึง $INT_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	INT_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18971	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	INT_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18972	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	INT_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+18973	Good	เมื่อค่าปัญญาถึง $INT_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	INT_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18974	Refined	เมื่อค่าปัญญาถึง $INT_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	INT_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18975	Graceful	เมื่อค่าปัญญาถึง $INT_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	INT_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18976	Extreme	เมื่อค่าปัญญาถึง $INT_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	INT_CHECK(3); ADD_PENETRATE_MAGIC(1)
+18977	Good	เมื่อค่ารู้สึกถึง $PER_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	PER_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18978	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	PER_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18979	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	PER_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18980	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK ลดความเสียหายกายภาพเพิ่มขึ้น $ADD_ABSORB_PHYSIC 	PER_CHECK(3); ADD_ABSORB_PHYSICS(1)
+18981	Good	เมื่อค่ารู้สึกถึง $PER_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	PER_CHECK(3); ADD_ABSORB_MAGIC(1)
+18982	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	PER_CHECK(3); ADD_ABSORB_MAGIC(1)
+18983	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	PER_CHECK(3); ADD_ABSORB_MAGIC(1)
+18984	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK ลดความเสียหายเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	PER_CHECK(3); ADD_ABSORB_MAGIC(1)
+18985	Good	เมื่อค่ารู้สึกถึง $PER_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	PER_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18986	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	PER_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18987	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	PER_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18988	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK ลดความเสียหายจากกายภาพและเวทย์เพิ่มขึ้น $ADD_ABSORB_MAGIC	PER_CHECK(3); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+18989	Good	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	PER_CHECK(3); ADD_HPMAX(1)
+18990	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	PER_CHECK(3); ADD_HPMAX(1)
+18991	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	PER_CHECK(3); ADD_HPMAX(1)
+18992	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	PER_CHECK(3); ADD_HPMAX(1)
+18993	Good	เมื่อค่ารู้สึกถึง $PER_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 3 หน่วย	PER_CHECK(3); ADD_RECOVER_STAMINA(1)
+18994	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 4 หน่วย	PER_CHECK(3); ADD_RECOVER_STAMINA(1)
+18995	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 5 หน่วย	PER_CHECK(3); ADD_RECOVER_STAMINA(1)
+18996	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK ความเร็วในการฟื้นฟูค่าเวทย์เพิ่มขึ้น 6 หน่วย	PER_CHECK(3); ADD_RECOVER_STAMINA(1)
+18997	Good	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มโจมตีดูดเลือด 1%	PER_CHECK(3); DRAIN_LIFE(1)
+18998	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มโจมตีดูดเลือด 2%	PER_CHECK(3); DRAIN_LIFE(1)
+18999	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มโจมตีดูดเลือด 3%	PER_CHECK(3); DRAIN_LIFE(1)
+19000	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มโจมตีดูดเลือด 4%	PER_CHECK(3); DRAIN_LIFE(1)
+19001	Good	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล 2.5%, แม่นยำ 7.5%	PER_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+19002	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล 3.5%, แม่นยำ 10%	PER_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+19003	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล 5%, แม่นยำ 16%	PER_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+19004	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล 7.5%, แม่นยำ 25%	PER_CHECK(3); ADD_HITRATE(2); ADD_POWERHIT(2)
+19005	Good	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	PER_CHECK(3); ADD_HPMAX(1)
+19006	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	PER_CHECK(3); ADD_HPMAX(1)
+19007	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	PER_CHECK(3); ADD_HPMAX(1)
+19008	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่ม HP สูงสุด $ADD_HPMAX	PER_CHECK(3); ADD_HPMAX(1)
+19009	Good	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	PER_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+19010	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	PER_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+19011	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	PER_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+19012	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มอัตราคริติคอล $ADD_MULTIPLY_POWERDAM และลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	PER_CHECK(3); ADD_ABSORB_POWERDAM(2); ADD_MULTIPLY_POWERDAM(2)
+19013	Good	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+19014	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+19015	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+19016	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มโจมตีหนักกายภาพและโจมตีหนักเวทย์ $ADD_DAMPLUS_PHYSIC 	PER_CHECK(3); ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1)
+19017	Good	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มหลบหลีก 5%, อัตราต้านคริติคอล 5%	PER_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+19018	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มหลบหลีก 7.5%, อัตราต้านคริติคอล 7.5%	PER_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+19019	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มหลบหลีก 10%, อัตราต้านคริติคอล 10%	PER_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+19020	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK เพิ่มหลบหลีก 15%, อัตราต้านคริติคอล 15%	PER_CHECK(3); ADD_DODGE(1); ADD_ANTI_POWERHIT(2)
+19021	Good	เมื่อค่ารู้สึกถึง $PER_CHECK พลังพื้นฐาน +4%	PER_CHECK(3); MUL_STR(1)
+19022	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK พลังพื้นฐาน +6%	PER_CHECK(3); MUL_STR(1)
+19023	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK พลังพื้นฐาน +10%	PER_CHECK(3); MUL_STR(1)
+19024	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK พลังพื้นฐาน +15%	PER_CHECK(3); MUL_STR(1)
+19025	Good	เมื่อค่ารู้สึกถึง $PER_CHECK ว่องไวพื้นฐาน +4%	PER_CHECK(3); MUL_AGI(1)
+19026	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK ว่องไวพื้นฐาน +6%	PER_CHECK(3); MUL_AGI(1)
+19027	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK ว่องไวพื้นฐาน +10%	PER_CHECK(3); MUL_AGI(1)
+19028	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK ว่องไวพื้นฐาน +15%	PER_CHECK(3); MUL_AGI(1)
+19029	Good	เมื่อค่ารู้สึกถึง $PER_CHECK กายพื้นฐาน +4%	PER_CHECK(3); MUL_CON(1)
+19030	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK กายพื้นฐาน +6%	PER_CHECK(3); MUL_CON(1)
+19031	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK กายพื้นฐาน +10%	PER_CHECK(3); MUL_CON(1)
+19032	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK กายพื้นฐาน +15%	PER_CHECK(3); MUL_CON(1)
+19033	Good	เมื่อค่ารู้สึกถึง $PER_CHECK ปัญญาพื้นฐาน +4%	PER_CHECK(3); MUL_INT(1)
+19034	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK ปัญญาพื้นฐาน +6%	PER_CHECK(3); MUL_INT(1)
+19035	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK ปัญญาพื้นฐาน +10%	PER_CHECK(3); MUL_INT(1)
+19036	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK ปัญญาพื้นฐาน +15%	PER_CHECK(3); MUL_INT(1)
+19037	Good	เมื่อค่ารู้สึกถึง $PER_CHECK รู้สึกพื้นฐาน +4%	PER_CHECK(3); MUL_PER(1)
+19038	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK รู้สึกพื้นฐาน +6%	PER_CHECK(3); MUL_PER(1)
+19039	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK รู้สึกพื้นฐาน +10%	PER_CHECK(3); MUL_PER(1)
+19040	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK รู้สึกพื้นฐาน +15%	PER_CHECK(3); MUL_PER(1)
+19041	Good	เมื่อค่ารู้สึกถึง $PER_CHECK ค่า HP สูงสุด +8%	PER_CHECK(3); MUL_HPMAX(1)
+19042	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK ค่า HP สูงสุด +12%	PER_CHECK(3); MUL_HPMAX(1)
+19043	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK ค่า HP สูงสุด +16%	PER_CHECK(3); MUL_HPMAX(1)
+19044	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK ค่า HP สูงสุด +15%	PER_CHECK(3); MUL_HPMAX(1)
+19045	Good	เมื่อค่ารู้สึกถึง $PER_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	PER_CHECK(3); ADD_AC_PHYSICS(1)
+19046	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	PER_CHECK(3); ADD_AC_PHYSICS(1)
+19047	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	PER_CHECK(3); ADD_AC_PHYSICS(1)
+19048	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK ป้องกันกายภาพ +$ADD_AC_PHYSIC 	PER_CHECK(3); ADD_AC_PHYSICS(1)
+19049	Good	เมื่อค่ารู้สึกถึง $PER_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	PER_CHECK(3); ADD_AC_MAGIC(1)
+19050	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	PER_CHECK(3); ADD_AC_MAGIC(1)
+19051	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	PER_CHECK(3); ADD_AC_MAGIC(1)
+19052	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK ป้องกันเวทย์ +$ADD_AC_MAGIC	PER_CHECK(3); ADD_AC_MAGIC(1)
+19053	Good	เมื่อค่ารู้สึกถึง $PER_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	PER_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+19054	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	PER_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+19055	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	PER_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+19056	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSIC 	PER_CHECK(3); ADD_PENETRATE_PHYSICS(1)
+19057	Good	เมื่อค่ารู้สึกถึง $PER_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	PER_CHECK(3); ADD_PENETRATE_MAGIC(1)
+19058	Refined	เมื่อค่ารู้สึกถึง $PER_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	PER_CHECK(3); ADD_PENETRATE_MAGIC(1)
+19059	Graceful	เมื่อค่ารู้สึกถึง $PER_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	PER_CHECK(3); ADD_PENETRATE_MAGIC(1)
+19060	Extreme	เมื่อค่ารู้สึกถึง $PER_CHECK เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC	PER_CHECK(3); ADD_PENETRATE_MAGIC(1)
+19061			
+19062			
+19063			
+19064			
+19065			
+19066			
+19067			
+19068			
+19069			
+19070			
+19071			
+19072			
+19073			
+19074			
+19075			
+19076			
+19077			
+19078			
+19079			
+19080			
+19081			
+19082			
+19083			
+19084			
+19085			
+19086			
+19087			
+19088			
+19089			
+19090			
+19091			
+19092			
+19093			
+19094			
+19095			
+19096			
+19097			
+19098			
+19099			
+19100			
+19101			
+19102			
+19103			
+19104			
+19105			
+19106			
+19107			
+19108			
+19109			
+19110			
+19111			
+19112			
+19113			
+19114			
+19115			
+19116			
+19117			
+19118			
+19119			
+19120			
+19121			
+19122			
+19123			
+19124			
+19125			
+19126			
+19127			
+19128			
+19129			
+19130			
+19131			
+19132			
+19133			
+19134			
+19135			
+19136			
+19137			
+19138			
+19139			
+19140			
+19141			
+19142			
+19143			
+19144			
+19145			
+19146			
+19147			
+19148			
+19149			
+19150			
+19151			
+19152			
+19153			
+19154			
+19155			
+19156			
+19157			
+19158			
+19159			
+19160			
+19161			
+19162			
+19163			
+19164			
+19165			
+19166			
+19167			
+19168			
+19169			
+19170			
+19171			
+19172			
+19173			
+19174			
+19175			
+19176			
+19501	Remain Guard	ค่ากำลังสูงสุด +20, เมื่อ HP สูงกว่า 70% เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC, โจมตีหนักเวทย์ +$ADD_DAMPLUS_MAGIC	ADD_DAMPLUS_MAGIC(1); ADD_PENETRATE_MAGIC(1); ADD_STAMINAMAX(1)
+19502	Bloodthirsty Killer	โจมตีดูดเลือด +2%, คริติคอล +2.5% เมื่อ HP สูงกว่า 70% กายภาพทะลุเกราะ +$ADD_PENETRATE_PHYSICS โจมตีหนักกายภาพ +$ADD_DAMPLUS_PHYSICS	ADD_DAMPLUS_PHYSICS(1); ADD_PENETRATE_PHYSICS(1); DRAIN_LIFE(1); ADD_POWERHIT(2)
+19503	Waves Phantom	ป้องกันกายภาพและป้องกันเวทย์ +$ADD_AC_PHYSICS, โจมตีหนักเวทย์ +10%, ทุกครั้งที่ใช้สกิลฟื้นฟูจะทำให้เป้าหมายฟื้นฟูระดับโจมตีกายภาพและโจมตีเวทย์ 75%	ADD_AC_PHYSICS(1); ADD_AC_MAGIC(1); MUL_DAMPLUS_MAGIC(1)
+19504	Deep Sea Djinn	ค่า HP สูงสุด +$ADD_HPMAX เมื่อ HP สูงกว่า 33% ลดความเสียหายการรับมือ +$ADD_ABSORB_SHIELD	ADD_ABSORB_SHIELD(2); ADD_HPMAX(1)
+19505	Machine Teeth	กายภาพทะลุเกราะและเวทย์ทะลุเกราะ +$ADD_PENETRATE_PHYSICSเมื่อ HP สูงกว่า 66% อัตราคริติคอล +0.25	ADD_MULTIPLY_POWERDAM(2); ADD_PENETRATE_PHYSICS(1); ADD_PENETRATE_MAGIC(1)
+19506	Fever War	โจมตีหนักกายภาพและโจมตีหนักเวทย์ +10%, เมื่อ HP ต่ำกว่า 33% โจมตีดูดเลือด +40%	
+19507	Ancient Guardian	ค่ากำลังสูงสุด +35, คริติคอล +4% เมื่อ HP สูงกว่า 70% ความเร็วในการฟื้นฟูค่าเวทย์ +25, เวทย์ทะลุเกราะ +$ADD_PENETRATE_MAGIC, โจมตีหนักเวทย์ +$ADD_DAMPLUS_MAGIC, มึนงงและคำสาป +15%	ADD_RECOVER_STAMINA(1); ADD_DAMPLUS_MAGIC(1); ADD_PENETRATE_MAGIC(1); ADD_STUN(1); ADD_CURSE(1); ADD_STAMINAMAX(1)
+19508	Killing Envoy	โจมตีดูดเลือด +6%, คริติคอล +4% เมื่อ HP สูงกว่า 70% กายภาพทะลุเกราะและโจมตีหนักกายภาพ +15%, ความเร็วเคลื่อนที่+60	MUL_DAMPLUS_PHYSICS(1); MUL_PENETRATE_PHYSICS(1); ADD_SPEED_RUN(1); DRAIN_LIFE(1); ADD_POWERHIT(2)
+19509	Blue Sea Beauty	ป้องกันกายภาพและป้องกันเวทย์ +$ADD_AC_PHYSICS, โจมตีเวทย์และโจมตีหนัก +10%, ทุกครั้งที่ใช้สกิลฟื้นฟูจะทำให้เป้าหมายฟื้นฟูระดับโจมตีกายภาพและโจมตีเวทย์ 100%	ADD_AC_PHYSICS(1); ADD_AC_MAGIC(1); MUL_DAMMIMAGIC(1); MUL_DAMPLUS_MAGIC(1)
+19510	Abyss Alien	ค่า HP สูงสุด +$ADD_HPMAX เมื่อ HP สูงกว่า 33% ลดความเสียหายการรับมือ +$ADD_ABSORB_SHIELD, ป้องกันกายภาพและป้องกันเวทย์ +15%	ADD_ABSORB_SHIELD(2); MUL_AC_PHYSICS(1); MUL_AC_MAGIC(1); ADD_HPMAX(1)
+19511	Mech Canine	แม่นยำ +20%, กายภาพทะลุเกราะและเวทย์ทะลุเกราะ +$ADD_PENETRATE_PHYSICS, โจมตีหนักกายภาพและโจมตีหนักเวทย์ +20% เมื่อ HP สูงกว่า 66% อัตราคริติคอล +0.4	ADD_MULTIPLY_POWERDAM(2); ADD_HITRATE(2); ADD_PENETRATE_PHYSICS(1); ADD_PENETRATE_MAGIC(1); MUL_DAMPLUS_MAGIC(1); MUL_DAMPLUS_PHYSICS(1)
+19512	Fury Murderous	โจมตีหนักกายภาพและโจมตีหนักเวทย์ +20%, เมื่อ HP ต่ำกว่า 33% โจมตีดูดเลือด +66%	DRAIN_LIFE(1); DRAIN_LIFE(1); MUL_DAMPLUS_PHYSICS(1); MUL_DAMPLUS_MAGIC(1)
+19513	Red-Hot Sun	โจมตีเวทย์ +$ADD_DAMMIMAGIC, โจมตีหนักเวทย์ +$ADD_DAMPLUS_MAGIC, ใช้สกิลโจมตีสามารถทำให้เป้าหมายได้รับความเสียหายอื่นๆจากโจมตีเวทย์และโจมตีหนักเวทย์ 100% เวลารีเซ็ท 4 วินาที	ADD_DAMMIMAGIC(1); ADD_DAMPLUS_MAGIC(1)
+19514	Red-Hot Sun	โจมตีกายภาพ +$ADD_DAMMIPHYSICS, โจมตีหนักกายภาพ +$ADD_DAMPLUS_PHYSICS, หลบหลีก+3%, ใช้สกิลโจมตีสามารถทำให้เป้าหมายได้รับความเสียหายอื่นๆจากโจมตีเวทย์และโจมตีหนักเวทย์ 100% เวลารีเซ็ท 6 วินาที	ADD_DAMMIPHYSICS(1); ADD_DAMPLUS_PHYSICS(1); ADD_DODGE(1)
+19515	Red-Hot Sun	โจมตีเวทย์ +$ADD_DAMMIMAGIC, โจมตีหนักเวทย์ +$ADD_DAMPLUS_MAGIC, ใช้สกิลโจมตีสามารถทำให้เป้าหมายได้รับความเสียหายอื่นๆจากโจมตีเวทย์และโจมตีหนักเวทย์ 100%, เวลารีเซ็ท 4 วินาที	ADD_DAMMIMAGIC(1); ADD_DAMPLUS_MAGIC(1)
+19516	Red-Hot Sun	กายพื้นฐาน +100%, ป้องกันกายภาพและป้องกันเวทย์ +$ADD_AC_PHYSICS, ลดความเสียหายจากกายภาพและเวทย์ +$ADD_ABSORB_MAGIC เมื่อโดนสกิลโจมตีหรือรักษาจะฟื้นฟูค่ากำลัง 2 แต้ม	ADD_CON(1); ADD_AC_PHYSICS(1); ADD_AC_MAGIC(1); ADD_ABSORB_PHYSICS(1); ADD_ABSORB_MAGIC(1)
+19517	Red-Hot Sun	โจมตีหนักกายภาพและโจมตีหนักเวทย์ +$ADD_DAMPLUS_PHYSICS, คริติคอล +5% ใช้สกิลโจมตีสามารถทำให้เป้าหมายได้รับความเสียหายอื่นๆจากโจมตีเวทย์และโจมตีหนักเวทย์ 100% เวลารีเซ็ท 5 วินาที	ADD_DAMPLUS_PHYSICS(1); ADD_DAMPLUS_MAGIC(1); ADD_POWERHIT(2)
+19518	Red-Hot Sun	โจมตีกายภาพ +$ADD_DAMMIPHYSICS, โจมตีหนักกายภาพ +$ADD_DAMPLUS_PHYSICS, ความเร็วเคลื่อนที่+90ใช้สกิลโจมตีสามารถทำให้เป้าหมายได้รับความเสียหายอื่นๆจากโจมตีเวทย์และโจมตีหนักเวทย์ 100% เวลารีเซ็ท 6 วินาที	ADD_DAMMIPHYSICS(1); ADD_DAMPLUS_PHYSICS(1); ADD_SPEED_RUN(1)
+19996	Set Effect	ใส่ [เครื่องประดับ Hermes] ทั้งชุด, สามารถเพิ่ม:\nอัตราหลบหลีก $ADD_DODGE\nอัตราต้านคริติคอล $ADD_ANTI_POWERHIT\nลดความเสียหายคริติคอล $ADD_ABSORB_POWERDAM	ADD_DODGE(2); ADD_ANTI_POWERHIT(2); ADD_ABSORB_POWERDAM(2)
+19997	Set Effect	ใส่ [เครื่องประดับ  Apollo] ทั้งชุด, สามารถเพิ่ม:\nอัตราแม่นยำ $ADD_HITRATE\nอัตราคริติคอล $ADD_POWERHIT\nคูณความเสียหายคริติคอล $ADD_MULTIPLY_POWERDAM	ADD_HITRATE(2); ADD_POWERHIT(2); ADD_MULTIPLY_POWERDAM(2)
+19998	Set Effect	ใส่ [เครื่องสวมใส่  Hercules] ทั้งชุด, สามารถเพิ่ม:\nกาย $ADD_CONSITUTION\nป้องกันกายภาพ $ADD_AC_PHYSICS\nป้องกันเวทย์ $ADD_AC_MAGIC\nค่าพลังชีวิตสูงสุด $ADD_HPMAX	ADD_CONSITUTION(1); ADD_AC_PHYSICS(1); ADD_AC_MAGIC(1); ADD_HPMAX(1)
+19999	Set Effect	ใส่ [เครื่องสวมใส่  Muse] ทั้งชุด, แต่ละส่วนสามารถเพิ่ม:\nปัญญา $ADD_INTELLECT\nความเสียหายจากเวทย์ $ADD_DAMMIMAGIC\nเวทย์ทะลุเกราะ $ADD_PENETRATE_MAGIC	ADD_INTELLECT(1); ADD_DAMMIMAGIC(1); ADD_PENETRATE_MAGIC(1)
+20000	Set Effect	ใส่ [เครื่องสวมใส่ Aris] ทั้งชุด, สามารถเพิ่ม:\nพลัง $ADD_STRENGH\nความเสียหายจากกายภาพ $ADD_DAMMIPHYSICS\nกายภาพทะลุเกราะ $ADD_PENETRATE_PHYSICS	ADD_STRENGH(1); ADD_DAMMIPHYSICS(1); ADD_PENETRATE_PHYSICS(1)
+33101	Blazing Armor	แสง/เพิ่มประสิทธิภาพแสง เมื่อโดนโจมตีจะแผดเผาศัตรู 5 คนที่อยู่ในรัศมี 3 เมตร ทำให้เกิดความเสียหายจากเวทย์มน 150% ทุกๆ 5 วินาที	
+33102	Ape King Fury	เพิ่มพลังโจมตีกายภาพ 25% และเพิ่มความเร็วในการเคลื่อนที่	MUL_DAMPLUS_PHYSICS(1);ADD_SPEED_RUN(1)
+33117	緩速詛咒	移動速度$ADD_SPEED_RUN。	ADD_SPEED_RUN(1)(1)
+40017	Blast Gesture	อัตราหลบหลีกของท่าน เพิ่ม $ADD_DODGE อัตราคริติคอลเพิ่ม $ADD_POWERHIT ความเร็วในการฟื้นฟูพลัง $ADD_RECOVER_STAMINA\nเมื่อทำการโจมตีจะยกเลิกทันที	ADD_DODGE(2)(1); ADD_POWERHIT(2)(1); ADD_RECOVER_STAMINA(1)(1)
+40018	Skip Step	อัตราหลบหลีกของท่านเพิ่มขึ้น $ADD_DODGE	ADD_DODGE(2)(1)
+40019	Breath Attention 	อัตราหลบหลีกของท่านเพิ่มขึ้น $ADD_DODGE	ADD_DODGE(2)(1)
+40020	Wake	เพิ่มผลทางกายภาพ เพิ่มโจมตีกายภาพและโจมตีเวทย์ $ADD_DAMMIPHYSICS เพิ่มอัตราต้านมึนงง $ADD_ANTI_STUN	ADD_DAMMIPHYSICS(1)(1); ADD_ANTI_STUN(2)(1)
+40021	Fighting Vitality	ทุกครั้งที่ทำการโจมตี, พุ่งแทง, การฟัน จะฟื้นฟูค่าเวทย์ มีพลัง: [Honor] สามารถเพิ่มความเร็วในการฟื้นฟูพลังชีวิต	
+40100	Medical Injection	ประโยชน์ของปลาทูน่า สามารถฟื้นฟูพลังชีวิตทุกๆ 3 วินาที	
+40101	Weak Injection	ลดคำสาป อัตราแม่นยำ, หลบหลีก, ความเร็วเคลื่อนที่, ลดโจมตีกายภาพและโจมตีเวทย์	
+40102	Warrior Signet	เพิ่มผลทางกายภาพ เพิ่มโจมตีกายภาพและโจมตีเวทย์ $ADD_DAMMIPHYSIC 	ADD_DAMMIPHYSICS(1)(1)
+40103	Shield Signet	เพิ่มผลทางกายภาพ เพิ่มป้องกันกายภาพและป้องกันเวทย์ $ADD_AC_PHYSIC 	ADD_AC_PHYSICS(1)(1)
+40130	Disability	เพิ่มผลทางคำสาป โจมตีกายภาพและโจมตีเวทย์ $ADD_DAMMIPHYSICS, ลดอัตราแม่นยำ 33%	ADD_DAMMIPHYSICS(1)(1)
+40131	緩速致殘	巫毒與咒術減益效果。攻擊力 + $ADD_DAMMIPHYSICS，命中率減少33%。移動速度減少33%	ADD_DAMMIPHYSICS(1)(1)
+40132	破甲致殘	巫毒與咒術減益效果。防禦力 + $ADD_AC_PHYSICS，迴避率減少33%。	ADD_AC_PHYSICS(1)(1)
+40150	Bloodlust Sword	อัตราหลบหลีกของท่านเพิ่มขึ้น $ADD_DODGE	ADD_DODGE(2)(1)
+40160	Hell Chili Powder	ลดคำสาปและพิษ อัตราแม่นยำลดลง 30%	
+40161	地獄辣椒粉	吃了辣椒攻擊力增加$ADD_DAMMIPHYSICS	ADD_DAMMIPHYSICS(1)(1)
+40180	Frenzy Attack	เพิ่มผลทางกายภาพ เมื่อใช้สกิลที่เกี่ยวกับการฟัน หรือพุ่งโจมตี โจมตีโดนเป้าหมาย สามารถฟื้นฟูค่ากำลัง 8 แต้ม	
+40190	Bloody Wave	ลดผลทางกายภาพ Bloody Wave ทำให้เลือดไหล และเสียพลังชีวิต	
+40200	Circle Rip	อัตราหลบหลีกของท่านเพิ่มขึ้น $ADD_DODGE	ADD_DODGE(2)(1)
+40201	Circle Rip	อัตราหลบหลีกของท่านเพิ่มขึ้น $ADD_DODGE	ADD_DODGE(2)(1)
+40211	Bladestorm	อัตราหลบหลีกของท่านเพิ่มขึ้น $ADD_DODGE	ADD_DODGE(2)(1)
+40270	Blast Gesture	เพิ่มผลทางกายภาพ เพิ่มอัตราแม่นยำ 20% ต่อเนื่อง เมื่อโจมตีกายภาพมีโอกาสทำให้เป้าหมายล้ม	
+40280	Skip Step	เพิ่มผลทางกายภาพ อัตราหลบหลีกของท่านเพิ่มขึ้น 20% เมื่อมีพลังสูงสามารถเพิ่มอัตราหลบหลีก 20%	
+40300	Wake	เพิ่มผลทางกายภาพ โจมตีกายภาพ และเวทย์เพิ่มขึ้น $ADD_DAMMIPHYSICS อัตราต้านมึนงงเพิ่มขึ้น $ADD_ANTI_STUN	ADD_DAMMIPHYSICS(1)(1); ADD_ANTI_STUN(2)(1)
+40301	Wake	เพิ่มผลทางกายภาพ โจมตีกายภาพ และเวทย์เพิ่มขึ้น $ADD_DAMMIPHYSICS อัตราต้านมึนงงเพิ่มขึ้น $ADD_ANTI_STUN	ADD_DAMMIPHYSICS(1)(1); ADD_ANTI_STUN(2)(1)
+40302	Wake	เพิ่มผลทางกายภาพ โจมตีกายภาพ และเวทย์เพิ่มขึ้น $ADD_DAMMIPHYSICS อัตราต้านมึนงงเพิ่มขึ้น $ADD_ANTI_STUN	ADD_DAMMIPHYSICS(1)(1); ADD_ANTI_STUN(2)(1)
+40330	Fixing knife	ความเร็วเคลื่อนที่ $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+41003	Accelerate	เพิ่มผลทางกายภาพ เพิ่มความเร็วเคลื่อนที่ 300	
+41004	Deadly Aim	เพิ่มผลทางกายภาพ เพิ่มอัตราคริติคอล 100%	
+41005	Bullet Run	เพิ่มผลทางกายภาพ เพิ่มความเสียหายจากคริติคอล 100%	
+41006	Ballistics	เพิ่มผลสายฟ้า/พลัง เพิ่มอัตราคริติคอล 25%	
+41260	Etching Mucus	เพิ่มผลทางคำสาป เกิดความเสียหายทุกๆ 3 วินาที	
+41270	Plastic Dynamite	ความเร็วเคลื่อนที่ในเวลาที่กำหนด $ADD_SPEED_RUN จะระเบิดในเวลาต่อมา	ADD_SPEED_RUN(1)(1)
+41290	Smoke Grenade	เพิ่มผลทางคำสาป หมอกหนาทำให้เกิดอัตราแม่นยำ $ADD_HITRATE	ADD_HITRATE(2)(1)
+41320	Mount Landmine	ความเร็วเคลื่อนที่ $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+41330	Frost Landmine	ไม่สามารถเคลื่อนที่ได้	ADD_SPEED_RUN(1)(1)
+41340	Chicken Nails	เสียพลังชีวิต	
+42005	Power Armor	เพิ่มผลสายฟ้า/พลัง เมื่อใช้สกิลที่เกี่ยวกับพุ่งโจมตี, พุ่งแทง, การฟันจะเพิ่มความเสียหายจากสายฟ้า	
+42006	Lightning Dominated	เพิ่มผลสายฟ้า/พลัง เมื่อโจมตีจะเพิ่มความเสียหายจากสายฟ้า	
+42012	Oriented Tornado	โดนพายุหมุนไม่ให้ยิงปืนได้!	
+42150	Power Armor	เพิ่มผลสายฟ้า/พลัง เมื่อใช้สกิลที่เกี่ยวกับพุ่งโจมตี, พุ่งแทง, การฟันจะเพิ่มความเสียหายจากสายฟ้า เพิ่มพลังโจมตีเวทย์ $ADD_DAMMIMAGIC	ADD_DAMMIMAGIC(1)(1)
+42160	Lightning Dominated	เพิ่มผลสายฟ้า/พลัง โจมตีปะเภทสายฟ้าจะเพิ่มความเสียหายที่เกิดจากสายฟ้า	
+42190	Electrostatic Wound	เพิ่มผลสายฟ้า/พลัง ป้องกันเวทย์ $ADD_AC_MAGIC, โจมตีเวทย์ $ADD_DAMMIMAGIC, ต้านมึนงง $ADD_ANTI_STUN	ADD_AC_MAGIC(1)(1); ADD_DAMMIMAGIC(1)(1); ADD_ANTI_STUN(2)(1)
+42200	Ice Wound	ลดผลจากน้ำ/น้ำแข็ง ป้องกันกายภาพ $ADD_AC_PHYSICS, โจมตีกายภาพ $ADD_DAMMIPHYSICS, ความเร็วเคลื่อนที่ $ADD_SPEED_RUN	ADD_AC_PHYSICS(1)(1); ADD_DAMMIPHYSICS(1)(1); ADD_SPEED_RUN(1)(1)
+42280	Ice Cold	ลดผลจากน้ำ/น้ำแข็ง ความเร็วเคลื่อนที่ลดลง $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+42310	Snow Judgment	ลดผลจากน้ำ/น้ำแข็ง ความเร็วเคลื่อนที่ลดลง $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+42330	Ice Armor	เพิ่มผลจากน้ำ/น้ำแข็ง เพิ่ม $ADD_AC_MAGIC ป้องกันกายภาพและป้องกันเวทย์ และเมื่โดนโจมตีจะทำให้ศัตรู 3 คนที่อยู่รอบๆเกิดความเสียหาย	ADD_AC_MAGIC(1)(1)
+42340	Storm Armor	เพิ่มผลสายฟ้า/พลัง เพิ่มอัตราหลบหลีก 10% เมื่อโดนโจมตีจะทำให้ศัตรู 3 คนที่อยู่รอบๆกระเด็นและเกิดความเสียหาย	
+43001	Shield Gesture	เพิ่มอัตราป้องกัน 50%, เพิ่มการลดการป้องกัน $ADD_ABSORB_SHIELD และลดการป้องกัน 5%, ความเร็วเคลื่อนที่ลดลง 300 หน่วย, เมื่อโดนโจมตีใช้พลังเวทย์ 1 แต้มเป็นเกราะป้องกัน จะยกเลิหสถานะนี้	ADD_ABSORB_SHIELD(2)(1)
+43002	Parry	ป้องกันด่วน, เพิ่มอัตราป้องกัน 100% เป็นเวลา 2 วินาที	
+43004	Enchant Weapon	เพิ่มอัตราคริติคอล 5% และพลังโมตี $ADD_DAMMIPHYSICS และมีโอกาสโจมตีเป็นวงกว้างทำให้ศัตรูได้รับความเสียหายจากกายภาพและเวทย์ 50%	ADD_DAMMIPHYSICS(1)(1)
+43012	Advance Batter Roar	ป้องกันกายภาพและป้องกันเวทย์เพิ่มขึ้น $ADD_AC_PHYSICS	ADD_AC_PHYSICS(1)(1)
+43014	Protective Aura	เพิ่มป้องกันกายภาพและป้องกันเวทย์ $ADD_AC_PHYSICS	ADD_AC_PHYSICS(1)(1)
+43015	Attack Aura	เพิ่มโจมตีกายภาพและโจมตีเวทย์ $ADD_DAMMIPHYSICS	ADD_DAMMIPHYSICS(1)(1)
+43016	Divine Aura	ลบสถานะด้านลบในตัวทุกๆ 15 วินาที เพิ่มอัตราแม่นยำ 15% ทำให้ศัตรูที่อยู่ในระยะ 4 เมตรเกิดความเสียหายจากโจมตีกายภาพและเวทย์ 50% ทุกๆ 10 วินาที 	
+43017	Divine Light 	พลังศักดิ์สิทธิ์ช่วยเพิ่มพลังให้ท่าน ทำให้ท่านรู้สึกแข็งแกร่ง\nอัตราคริติคอลเพิ่มขึ้น $ADD_POWERHIT%\nอัตราป้องกันเพิ่มขึ้น $ADD_BLOCKRATE%\nพลังป้องกันเพิ่มขึ้น $ADD_AC_PHYSICS\nอัตราแม่นยำเพิ่มขึ้น $ADD_HITRATE%\nป้องกันการลดบาดเจ็บเพิ่มขึ้น $ADD_ABSORB_SHIELD\nเพิ่มความเร็วในการเคลื่อนที่ $ADD_SPEED_RUN\nลดบาดเจ็บ 30%\nอัตราต้านมึนงงเพิ่มขึ้น $ADD_ANTI_STUN%\nอัตราต้านคำสาปเพิ่มขึ้น $ADD_ANTI_CURSE%\nเพิ่มพลังเวทย์เร็วขึ้น และเกิดผล Soul Gather	ADD_AC_PHYSICS(1)(1); ADD_ABSORB_SHIELD(2); ADD_SPEED_RUN(1)(1); ADD_HITRATE(2); ADD_BLOCKRATE(2); ADD_POWERHIT(2); ADD_ANTI_STUN(2); ADD_ANTI_CURSE(2)
+43018	Light Guard	ลดความเสียหาย 70%	
+43021	Shield Throw	เป้าหมายโดนยั่วยุ, พลังป้องกัน $ADD_AC_PHYSICS	ADD_AC_PHYSICS(1)(1)
+43100	Thunderclap	ลดผลทางกายภาพ ความเร็วในการเคลื่อนที่ $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+43123	Parry Enhanced 	เพิ่มผลอัตราป้องกันทางกายภาพ 20% พลังป้องกัน 3%	
+43132	Struggling Hammer	เพิ่มผลทางกายภาพ เพิ่มพลังโจมตี $ADD_DAMMIPHYSICS	ADD_DAMMIPHYSICS(1)(1)
+43133	Rage	เป้าหมายเข้าสู่สถานะโกรธ สามารถโจมตีเป้าหมายที่มีค่ายั่วยุสูงสุดเท่านั้น	
+43150	Smash Earth	ลดผลทางกายภาพ ความเร็วในการเคลื่อนที่ $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+43160	Sunder Armor	ลดผลกายภาพ ป้องกันกายภาพและป้องกันเวทย์ $ADD_AC_PHYSICS	ADD_AC_PHYSICS(1)(1)
+43172	Weak	ลดผลกายภาพ โจมตีกายภาพและโจมตีเวทย์ลดลง $ADD_DAMMIPHYSICS	ADD_DAMMIPHYSICS(1)(1)
+43190	Bleed	ลดผลกายภาพ โจมตีทให้เลือดไหล และสูญเสียพลังชีวิตต่อเนื่อง	
+43191	Triple Hammer	เพิ่มผลทางกายภาพ ป้องกันกายภาพและป้องกันเวทย์ $ADD_AC_PHYSICS	ADD_AC_PHYSICS(1)(1)
+43210	ยกเลิกการใช้งาน		
+43220	Advance Batter Roar	เพิ่มผลทางกายภาพ ความเร็วในการเคลื่อนที่ $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+43233	Fury Strike	โจมตีบ้าคลั่งทำให้เกิดป้องกันกายภาพและป้องกันเวทย์ $ADD_AC_PHYSICS	ADD_AC_PHYSICS(1)(1)
+43252	Sunder Armor	ป้องกันกายภาพและป้องกันเวทย์ $ADD_AC_PHYSICS	ADD_AC_PHYSICS(1)(1)
+43260	Holy Purpose	พลังศักดิ์สิทธิ์ โจมตีทุกๆ 10 วินาที ในรัศมี 4 เมตร และสร้างDivine Auraคุ้มครองเพื่อนของท่าน	ADD_AC_MAGIC(1)(1)
+43261	Silence Heart	ทุกครั้งที่โจมตีมีโอกาสฟื้นฟูค่าเวทย์	
+43280	War Cut down	พลังป้องกันกายภาพลดลง, ป้องกันเวทย์ลดลง	
+43240	Guard Heart	ให้เพื่อนของท่านอยู่ใน Protective Aura เพื่อเสริมพลังป้องกัน	
+43241	Holy Light Healing	ทุกครั้งที่โจมตี จะมีโอกาสรักษาตัวเอง	
+43250	Battle Heart	ให้ท่านและเพื่อนของท่านอยู่ใน Protective Aura เพื่อเสริมพลังป้องกัน	
+43251	Battle Commandment	ทุกครั้งที่โจมตีมีโอกาสปล่อย Sunder Armor	
+44014	Dedicate	เพิ่มพลังไฟ/แสง พลังเวทย์สูงสุด $ADD_STAMINAMAX ฟื้นฟูพลังเวทย์เพิ่มขึ้น $ADD_RECOVER_STAMINA และเพิ่มพลังชีวิตให้เพื่อนที่อยู่ในระยะ 12 เมตร\n\nเสริมพลังไฟ: ทำให้โจมตีแบบไฟจะทำความเสียหายเพิ่มขึ้น\n\nเสียงพลังรักษา: ได้รับพลังรักษาอื่นๆเพิ่มเติม	ADD_STAMINAMAX(1)(1); ADD_RECOVER_STAMINA(1)(1)
+44016	Solar Vigor	เพิ่มผลไฟ/แสง เมื่อใช้สกิลประเภทความร้อนหรือฟื้นฟู สามารถฟื้นฟูค่ากำลัง 8 แต้ม	
+44017	Regenerative Energy	เพิ่มอานุภาพกาย เพิ่มความเร็วนการฟื้นฟูพลังเวทย์ต่อเนื่อง +$ADD_RECOVER_STAMINA, เพิ่มความเร็วในการฟื้นฟูพลังชีวิตต่อเนื่อง +$ADD_RECOVER_HP	ADD_RECOVER_STAMINA(1)(1); ADD_RECOVER_HP(1)(1)
+44130	Eclipse	ลดผลไฟ/แสง ได้รับความเสียหายจากเวทย์ทุกๆ 3 วินาที	
+44160	Blazing Armor	เพิ่มพลังไฟ/แสง เมื่อโดนโจมตี จะทำให้ศัตรูที่อยู่ในระยะ 3 เมตรเกิดความเสียหายจากโจมตีเวทย์ 150% 1 ครั้งทุกๆ 5 วินาที	
+44161	Heat Armor	เพิ่มพลังไฟ/แสง โจมตีกายภาพและเวทย์เพิ่มขึ้น15%	ADD_DAMMIPHYSICS(1)(1)
+44190	Coronal	เพิ่มผลไฟ/แสง แสงอบอุ่นของพระอาทิตย์ช่วยฟื้นฟูพลังชีวิต ทุก 3 วินาที	
+44230	Sun Shield	เพิ่มพลังไฟ/แสง ลดความเสียหายที่ได้รับ 20%	
+44260	Punish Marking	ลดผลจากไฟ/แสง เมื่อโดนโจมตี 10 ครั้งด้วยพลังความร้อน จะโดนโจมตีเพิ่ม และโดนโจมตีให้ล้ม	
+44371	Regenerative Energy Enhanced	เพิ่มอานุภาพกาย เพิ่มความเร็วนการฟื้นฟูพลังเวทย์ต่อเนื่อง +$ADD_RECOVER_STAMINA	ADD_RECOVER_STAMINA(1)(1)
+45002	附身詛咒	死靈/毒性減益效果\n被巫毒娃娃附身，防禦力$ADD_AC_PHYSICS	ADD_AC_PHYSICS(1)(1)
+45006	闇靈防護	死靈/毒性增益效果\n以黑暗的力量守護自身，防禦力 + $ADD_AC_PHYSICS	ADD_AC_PHYSICS(1)(1)
+45007	詛咒增益	死靈/毒性增益效果\n以黑暗的力量強化自身，攻擊力 + $ADD_DAMMIPHYSICS、重擊 + $ADD_DAMPLUS_MAGIC	ADD_DAMMIPHYSICS(1)(1);ADD_DAMPLUS_MAGIC(1)(1)
+45009	黑暗重力	死靈/毒性增益效果\n黑暗的力量籠罩，移動速度 - 420、防禦力$ADD_AC_PHYSICS	ADD_AC_PHYSICS(1)(1)
+45015	巫毒領域	死靈/毒性增益效果\n受到巫毒的加護，攻擊力 + $ADD_DAMMIPHYSICS、重擊 + $ADD_DAMPLUS_MAGIC，造成的傷害會有20%轉換為自己的生命。	ADD_AC_PHYSICS(1)(1);ADD_DAMMIPHYSICS(1)(1);ADD_DAMPLUS_MAGIC(1)(1)
+45020	魁儡魔裝	死靈/毒性增益效果\n與巫毒娃娃產生共鳴。\n攻擊力 + $ADD_DAMMIPHYSICS\n重擊 + $ADD_DAMPLUS_MAGIC\n造成的傷害會有50%轉換為自己的生命\n精力恢復速度 + $ADD_RECOVER_STAMINA\n防禦力 - $ADD_AC_PHYSICS	ADD_AC_PHYSICS(1)(1);ADD_RECOVER_STAMINA(1)(1);ADD_DAMMIPHYSICS(1)(1);ADD_DAMPLUS_MAGIC(1)(1)
+45102	Evil Bomb - Slow	ลดพิษและวิญญาณ ได้รับผลจากวิญญาณ ลดความเร็วในการเคลื่อนที่ $ADD_SPEED_RUN	ADD_SPEED_RUN(1)(1)
+45103	Evil Bomb - Damage	ลดพิษและวิญญาณ ได้รับผลจากวิญญาณ เพิ่มความเสียหายที่ได้รับ 5%	
+45120	詛咒連結	死靈/毒性增益效果\n精力恢復速度+$ADD_RECOVER_STAMINA\n受到的傷害20%轉移至詛咒目標身上	ADD_RECOVER_STAMINA(1)(1)
+45140	弱效毒素	死靈/毒性減益效果\n中毒了，每3秒受到中毒傷害	
+45150	毒素衝擊	死靈/毒性減益效果\n中毒了，每3秒受到中毒傷害	
+45153	劇毒	死靈/毒性減益效果\n猛烈的劇毒迅速消耗你的體力，每秒受到中毒傷害	
+45160	闇靈防護	死靈/毒性增益效果\n以黑暗的力量守護自身，受到的傷害減少 30%	
+45170	詛咒增益	死靈/毒性增益效果\n以黑暗的力量強化自身，攻擊力與重擊+20%	
+45320			
+49191	Triple Hammer	เพิ่มผลทางกายภาพ ป้องกันเพิ่มขึ้น $ADD_AC_PHYSIC 	ADD_AC_PHYSICS(1)(1)
+51091	Mithril Burner	ค่าหลบหลีกเพิ่มขึ้น $ADD_DODGE	ADD_DODGE(2)

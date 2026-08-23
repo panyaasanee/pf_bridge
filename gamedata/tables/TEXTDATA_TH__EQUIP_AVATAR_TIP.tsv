@@ -1,0 +1,423 @@
+n_ID	s_NAME	s_COMMON	s_EQUIPED	s_USED
+1	Admiral-Headdress	ชุดระดับต้นของอาชีพ Sharpshooter		เปิด Beginner Class Capsule จะมีโอกาสได้รับ
+2	Admiral-Armor	ชุดระดับต้นของอาชีพ Sharpshooter		เปิด Beginner Class Capsule จะมีโอกาสได้รับ
+3	Admiral-Legging	ชุดระดับต้นของอาชีพ Sharpshooter		เปิด Beginner Class Capsule จะมีโอกาสได้รับ
+4	Splendid Yuppie-Headdress	ชุดระดับสูงของอาชีพ Sharpshooter		เปิด Expert Class Capsule จะมีโอกาสได้รับ
+5	Splendid Yuppie-Armor	ชุดระดับสูงของอาชีพ Sharpshooter		เปิด Expert Class Capsule จะมีโอกาสได้รับ
+6	Splendid Yuppie-Legging	ชุดระดับสูงของอาชีพ Sharpshooter		เปิด Expert Class Capsule จะมีโอกาสได้รับ
+7	Round Red Day-Headdress	สีแดงดั่งดวงตะวันทอแสง		เปิด Arcane Capsule จะมีโอกาสได้รับ
+8	Round Red Day-Armor	สีแดงดั่งดวงตะวันทอแสง		เปิด Arcane Capsule จะมีโอกาสได้รับ
+9	Round Red Day-Legging	สีแดงดั่งดวงตะวันทอแสง		เปิด Arcane Capsule จะมีโอกาสได้รับ
+10	Flying Eagle-Headdress	เมื่อใส่แล้ว ดั่งลอยล่องอยู่กลางมหาสมุทร		เปิด Glory Capsule จะมีโอกาสได้รับ
+11	Flying Eagle-Armor	เมื่อใส่แล้ว ดั่งลอยล่องอยู่กลางมหาสมุทร		เปิด Glory Capsule จะมีโอกาสได้รับ
+12	Flying Eagle-Legging	เมื่อใส่แล้ว ดั่งลอยล่องอยู่กลางมหาสมุทร		เปิด Glory Capsule จะมีโอกาสได้รับ
+13	Sailor Suit-Headdress	ชุดระดับต้นของอาชีพ Solar Priest		เปิด Beginner Class Capsule จะมีโอกาสได้รับ
+14	Sailor Suit-Armor	ชุดระดับต้นของอาชีพ Solar Priest		เปิด Beginner Class Capsule จะมีโอกาสได้รับ
+15	Sailor Suit-Legging	ชุดระดับต้นของอาชีพ Solar Priest		เปิด Beginner Class Capsule จะมีโอกาสได้รับ
+16	Elegant England-Headdress	ยามบ่ายแบบนี้ ของว่างแบบไหนจะทำให้คนดูหรูหราได้อีก		เปิด Arcane Capsule จะมีโอกาสได้รับ
+17	Elegant England-Armor	ยามบ่ายแบบนี้ ของว่างแบบไหนจะทำให้คนดูหรูหราได้อีก		เปิด Arcane Capsule จะมีโอกาสได้รับ
+18	Elegant England-Legging	ยามบ่ายแบบนี้ ของว่างแบบไหนจะทำให้คนดูหรูหราได้อีก		เปิด Arcane Capsule จะมีโอกาสได้รับ
+19	Sentimental Scout-Headdress	ชุดระดับสูงของอาชีพ Solar Priest		เปิด Expert Class Capsule จะมีโอกาสได้รับ
+20	Sentimental Scout-Armor	ชุดระดับสูงของอาชีพ Solar Priest		เปิด Expert Class Capsule จะมีโอกาสได้รับ
+21	Sentimental Scout-Legging	ชุดระดับสูงของอาชีพ Solar Priest		เปิด Expert Class Capsule จะมีโอกาสได้รับ
+22	Soul Tutor-Headdress	นักผจญภัยที่หายตัวไป จงหลับให้สบายในคำอวยพรของข้าเถิด		เปิด Glory Capsule จะมีโอกาสได้รับ
+23	Soul Tutor-Armor	นักผจญภัยที่หายตัวไป จงหลับให้สบายในคำอวยพรของข้าเถิด		เปิด Glory Capsule จะมีโอกาสได้รับ
+24	Soul Tutor-Legging	นักผจญภัยที่หายตัวไป จงหลับให้สบายในคำอวยพรของข้าเถิด		เปิด Glory Capsule จะมีโอกาสได้รับ
+25	Pirate Attire-Headdress	ชุดระดับต้นของอาชีพ Gladiator		เปิด Beginner Class Capsule จะมีโอกาสได้รับ
+26	Pirate Attire-Armor	ชุดระดับต้นของอาชีพ Gladiator		เปิด Beginner Class Capsule จะมีโอกาสได้รับ
+27	Pirate Attire-Legging	ชุดระดับต้นของอาชีพ Gladiator		เปิด Beginner Class Capsule จะมีโอกาสได้รับ
+28	Impossible Blue Sky-Headdress	ชุดระดับสูงของอาชีพ Gladiator		เปิด Expert Class Capsule จะมีโอกาสได้รับ
+29	Impossible Blue Sky-Armor	ชุดระดับสูงของอาชีพ Gladiator		เปิด Expert Class Capsule จะมีโอกาสได้รับ
+30	Impossible Blue Sky-Legging	ชุดระดับสูงของอาชีพ Gladiator		เปิด Expert Class Capsule จะมีโอกาสได้รับ
+31	Fury Wild Tiger-Headdress	มันไม่ใช่แต่ภายนอก มันเข้าถึงจิตวิญญาณ		เปิด Glory Capsule จะมีโอกาสได้รับ
+32	Fury Wild Tiger-Armor	มันไม่ใช่แต่ภายนอก มันเข้าถึงจิตวิญญาณ		เปิด Glory Capsule จะมีโอกาสได้รับ
+33	Fury Wild Tiger-Legging	มันไม่ใช่แต่ภายนอก มันเข้าถึงจิตวิญญาณ		เปิด Glory Capsule จะมีโอกาสได้รับ
+34	Glory Army Of Light-Headdress	ชุดที่เทพเคยใส่มาก่กอน ผู้มีเกียรติเท่านั้นที่จะครอบครองมัน		เปิด Old Capsule จะมีโอกาสได้รับ
+35	Glory Army Of Light-Armor	ชุดที่เทพเคยใส่มาก่กอน ผู้มีเกียรติเท่านั้นที่จะครอบครองมัน		เปิด Old Capsule จะมีโอกาสได้รับ
+36	Glory Army Of Light-Legging	ชุดที่เทพเคยใส่มาก่กอน ผู้มีเกียรติเท่านั้นที่จะครอบครองมัน		เปิด Old Capsule จะมีโอกาสได้รับ
+37	Knight Soldier-Headdress	ชุดระดับต้นของอาชีพ Knight		เปิด Beginner Class Capsule จะมีโอกาสได้รับ
+38	Knight Soldier-Armor	ชุดระดับต้นของอาชีพ Knight		เปิด Beginner Class Capsule จะมีโอกาสได้รับ
+39	Knight Soldier-Legging	ชุดระดับต้นของอาชีพ Knight		เปิด Beginner Class Capsule จะมีโอกาสได้รับ
+40	Royal Officer-Headdress	ชุดระดับสูงของอาชีพ Knight		เปิด Expert Class Capsule จะมีโอกาสได้รับ
+41	Royal Officer-Armor	ชุดระดับสูงของอาชีพ Knight		เปิด Expert Class Capsule จะมีโอกาสได้รับ
+42	Royal Officer-Legging	ชุดระดับสูงของอาชีพ Knight		เปิด Expert Class Capsule จะมีโอกาสได้รับ
+43	Heavy Armor Priest-Headdress	กายของเราสามารถฝึกได้ ข้าจะต้องพยายาม		เปิด Glory Capsule จะมีโอกาสได้รับ
+44	Heavy Armor Priest-Armor	กายของเราสามารถฝึกได้ ข้าจะต้องพยายาม		เปิด Glory Capsule จะมีโอกาสได้รับ
+45	Heavy Armor Priest-Legging	กายของเราสามารถฝึกได้ ข้าจะต้องพยายาม		เปิด Glory Capsule จะมีโอกาสได้รับ
+46	Odd Alchemist-Headdress	เอลฟ์ที่กระโดดโลดเต้นอยู่ในมือ แปลงร่างเป็ยสิ่งต่างๆที่ทำให้แปลกใจได้		เปิด Arcane Capsule จะมีโอกาสได้รับ
+47	Odd Alchemist-Armor	เอลฟ์ที่กระโดดโลดเต้นอยู่ในมือ แปลงร่างเป็ยสิ่งต่างๆที่ทำให้แปลกใจได้		เปิด Arcane Capsule จะมีโอกาสได้รับ
+48	Odd Alchemist-Legging	เอลฟ์ที่กระโดดโลดเต้นอยู่ในมือ แปลงร่างเป็ยสิ่งต่างๆที่ทำให้แปลกใจได้		เปิด Arcane Capsule จะมีโอกาสได้รับ
+49	Wilderness Passing-Headdress	เป้าหมายอยู่ที่ไหน ก็ไปให้ถึงที่นั่น การหยุดคือการพักหายในเพียงสั้นๆเท่านั้น		เปิด Mystic Capsule จะมีโอกาสได้รับ
+50	Wilderness Passing-Armor	เป้าหมายอยู่ที่ไหน ก็ไปให้ถึงที่นั่น การหยุดคือการพักหายในเพียงสั้นๆเท่านั้น		เปิด Mystic Capsule จะมีโอกาสได้รับ
+51	Wilderness Passing-Legging	เป้าหมายอยู่ที่ไหน ก็ไปให้ถึงที่นั่น การหยุดคือการพักหายในเพียงสั้นๆเท่านั้น		เปิด Mystic Capsule จะมีโอกาสได้รับ
+52	New World Emissary-Headdress	การข้ามผ่านก็เหมือนเป็นอาชีพของข้า จงเก็บพื้นที่นี้ไว้เถิด!		เปิด Old Capsule จะมีโอกาสได้รับ
+53	New World Emissary-Armor	การข้ามผ่านก็เหมือนเป็นอาชีพของข้า จงเก็บพื้นที่นี้ไว้เถิด!		เปิด Old Capsule จะมีโอกาสได้รับ
+54	New World Emissary-Legging	การข้ามผ่านก็เหมือนเป็นอาชีพของข้า จงเก็บพื้นที่นี้ไว้เถิด!		เปิด Old Capsule จะมีโอกาสได้รับ
+55	Silver Magic Fox-Headdress	ชุดระดับต้นของอาชีพ Puppeteer		
+56	Silver Magic Fox-Armor	ชุดระดับต้นของอาชีพ Puppeteer		
+57	Silver Magic Fox-Legging	ชุดระดับต้นของอาชีพ Puppeteer		
+58	Strong Sun Of Magic-Headdress	ชุดระดับสูงของอาชีพ Puppeteer		
+59	Strong Sun Of Magic-Armor	ชุดระดับสูงของอาชีพ Puppeteer		
+60	Strong Sun Of Magic-Legging	ชุดระดับสูงของอาชีพ Puppeteer		
+61	Star Dew-Headdress			
+62	Star Dew-Armor			
+63	Star Dew-Legging			
+64	Instructor-Headdress	ผู้แนะนำที่ชาญฉลาด หัวไวและมั่นใจในตัวเอง		เปิด Mystic Capsule จะมีโอกาสได้รับ
+65	Instructor-Armor	ผู้แนะนำที่ชาญฉลาด หัวไวและมั่นใจในตัวเอง		เปิด Mystic Capsule จะมีโอกาสได้รับ
+66	Instructor-Legging	ผู้แนะนำที่ชาญฉลาด หัวไวและมั่นใจในตัวเอง		เปิด Mystic Capsule จะมีโอกาสได้รับ
+67	Sakura Millennium-Headdress	ดอกซากุระที่ร่งโรยคือสัญญาณที่ดีแห่งรัก		
+68	Sakura Millennium-Armor	ดอกซากุระที่ร่งโรยคือสัญญาณที่ดีแห่งรัก		
+69	Sakura Millennium-Legging	ดอกซากุระที่ร่งโรยคือสัญญาณที่ดีแห่งรัก		
+70	Dream Of Seal-Headdress	ดินแดนที่ถูกผนึกไว้ อาจมีวันนึงที่โพล่งออกมา		
+71	Dream Of Seal-Armor	ดินแดนที่ถูกผนึกไว้ อาจมีวันนึงที่โพล่งออกมา		
+72	Dream Of Seal-Legging	ดินแดนที่ถูกผนึกไว้ อาจมีวันนึงที่โพล่งออกมา		
+73	Red Flame Armor-Headdress	ดั่งไฟแผดเผา ไม่ว่าจะเย็นชาขนาดไหนเมื่อได้เข้าใกล้ก็จะร้อมรุ่ม		
+74	Red Flame Armor-Armor	ดั่งไฟแผดเผา ไม่ว่าจะเย็นชาขนาดไหนเมื่อได้เข้าใกล้ก็จะร้อมรุ่ม		
+75	Red Flame Armor-Legging	ดั่งไฟแผดเผา ไม่ว่าจะเย็นชาขนาดไหนเมื่อได้เข้าใกล้ก็จะร้อมรุ่ม		
+76	Curse Of Graveyard-Headdress	คำสาปของธรรมชาติ ยังคงหลงเหลืออยู่ในเครื่องแต่งกายนี้		
+77	Curse Of Graveyard-Armor	คำสาปของธรรมชาติ ยังคงหลงเหลืออยู่ในเครื่องแต่งกายนี้		
+78	Curse Of Graveyard-Legging	คำสาปของธรรมชาติ ยังคงหลงเหลืออยู่ในเครื่องแต่งกายนี้		
+79	Ice Beast Tooth-Headdress	สัตว์ร้ายในพื้นที่หนาวเย็น เขี้ยวของมันแสดงความการป้องกันที่แข็งแกร่ง		
+80	Ice Beast Tooth-Armor	สัตว์ร้ายในพื้นที่หนาวเย็น เขี้ยวของมันแสดงความการป้องกันที่แข็งแกร่ง		
+81	Ice Beast Tooth-Legging	สัตว์ร้ายในพื้นที่หนาวเย็น เขี้ยวของมันแสดงความการป้องกันที่แข็งแกร่ง		
+82	Royal Noble-Headdress	ชุดระดับต้นของอาชีพ Agents of Storm		เปิด Beginner Class Capsule จะมีโอกาสได้รับ
+83	Royal Noble-Armor	ชุดระดับต้นของอาชีพ Agents of Storm		เปิด Beginner Class Capsule จะมีโอกาสได้รับ
+84	Royal Noble-Legging	ชุดระดับต้นของอาชีพ Agents of Storm		เปิด Beginner Class Capsule จะมีโอกาสได้รับ
+85	Heaven Feather-Headdress	ชุดระดับสูงของอาชีพ Agents of Storm		เปิด Expert Class Capsule จะมีโอกาสได้รับ
+86	Heaven Feather-Armor	ชุดระดับสูงของอาชีพ Agents of Storm		เปิด Expert Class Capsule จะมีโอกาสได้รับ
+87	Heaven Feather-Legging	ชุดระดับสูงของอาชีพ Agents of Storm		เปิด Expert Class Capsule จะมีโอกาสได้รับ
+88	Dark Element-Headdress	หยิ่งผยองเป็นอารมณ์ และยังเป็นเครื่องสวมใส่ได้อีก ช่างมีค่ายิ่งนัก		เปิด Glory Capsule จะมีโอกาสได้รับ
+89	Dark Element-Armor	หยิ่งผยองเป็นอารมณ์ และยังเป็นเครื่องสวมใส่ได้อีก ช่างมีค่ายิ่งนัก		เปิด Glory Capsule จะมีโอกาสได้รับ
+90	Dark Element-Legging	หยิ่งผยองเป็นอารมณ์ และยังเป็นเครื่องสวมใส่ได้อีก ช่างมีค่ายิ่งนัก		เปิด Glory Capsule จะมีโอกาสได้รับ
+91	Punch Squad-Headdress	เพื่อความปลอดภัย การป้องกันตัวเป็นเรื่องที่สำคัญ		เปิด Arcane Capsule จะมีโอกาสได้รับ
+92	Punch Squad-Armor	เพื่อความปลอดภัย การป้องกันตัวเป็นเรื่องที่สำคัญ		เปิด Arcane Capsule จะมีโอกาสได้รับ
+93	Punch Squad-Legging	เพื่อความปลอดภัย การป้องกันตัวเป็นเรื่องที่สำคัญ		เปิด Arcane Capsule จะมีโอกาสได้รับ
+94	Cupid-Headdress	ความรักที่สมหวังเป็นความปรารถนาของเทวดาแห่งความรัก		
+95	Cupid-Armor	ความรักที่สมหวังเป็นความปรารถนาของเทวดาแห่งความรัก		
+96	Cupid-Legging	ความรักที่สมหวังเป็นความปรารถนาของเทวดาแห่งความรัก		
+97	War Machine-Headdress	พลังเพลิงอันทรงพลัง คนที่ไม่มีความพร้อมไม่เหมาะสมที่จะอยู่ในสนามรบ		เปิด Mystic Capsule จะมีโอกาสได้รับ
+98	War Machine-Armor	พลังเพลิงอันทรงพลัง คนที่ไม่มีความพร้อมไม่เหมาะสมที่จะอยู่ในสนามรบ		เปิด Mystic Capsule จะมีโอกาสได้รับ
+99	War Machine-Legging	พลังเพลิงอันทรงพลัง คนที่ไม่มีความพร้อมไม่เหมาะสมที่จะอยู่ในสนามรบ		เปิด Mystic Capsule จะมีโอกาสได้รับ
+100	Voodoo Priest-Headdress			
+101	Voodoo Priest-Armor			
+102	Voodoo Priest-Legging			
+103	Burst Method-Headdress			
+104	Burst Method-Armor			
+105	Burst Method-Legging			
+106	Night Wizard-Headdress	นักเวทย์ท่ามกลางความมืดมน ของที่ส่งมาจะต้องไม่ใช่คำอวยพรอย่างแน่นอน		เปิด Arcane Capsule จะมีโอกาสได้รับ
+107	Night Wizard-Armor	นักเวทย์ท่ามกลางความมืดมน ของที่ส่งมาจะต้องไม่ใช่คำอวยพรอย่างแน่นอน		เปิด Arcane Capsule จะมีโอกาสได้รับ
+108	Night Wizard-Legging	นักเวทย์ท่ามกลางความมืดมน ของที่ส่งมาจะต้องไม่ใช่คำอวยพรอย่างแน่นอน		เปิด Arcane Capsule จะมีโอกาสได้รับ
+109	Bard Poet-Headdress	มีข้าอยู่ก็ต้องเต้น! ไม่มีที่ไหนที่ไม่สนุก!		
+110	Bard Poet-Armor	มีข้าอยู่ก็ต้องเต้น! ไม่มีที่ไหนที่ไม่สนุก!		
+111	Bard Poet-Legging	มีข้าอยู่ก็ต้องเต้น! ไม่มีที่ไหนที่ไม่สนุก!		
+112	God Fire-Headdress	เวลาช่วงก่อนที่ไฟจะมอดลง เป็นเวลาที่สวยงามที่สุด!		เปิด Mystic Capsule จะมีโอกาสได้รับ
+113	God Fire-Armor	เวลาช่วงก่อนที่ไฟจะมอดลง เป็นเวลาที่สวยงามที่สุด!		เปิด Mystic Capsule จะมีโอกาสได้รับ
+114	God Fire-Legging	เวลาช่วงก่อนที่ไฟจะมอดลง เป็นเวลาที่สวยงามที่สุด!		เปิด Mystic Capsule จะมีโอกาสได้รับ
+115	Heaven Beast Armor-Headdress	ผู้กล้าใต้ฟ้าสีคราม ฝุ่งจากการเริ่มสงคราม		เปิด Old Capsule จะมีโอกาสได้รับ
+116	Heaven Beast Armor-Armor	ผู้กล้าใต้ฟ้าสีคราม ฝุ่งจากการเริ่มสงคราม		เปิด Old Capsule จะมีโอกาสได้รับ
+117	Heaven Beast Armor-Legging	ผู้กล้าใต้ฟ้าสีคราม ฝุ่งจากการเริ่มสงคราม		เปิด Old Capsule จะมีโอกาสได้รับ
+118	Purgatory Of Flower-Headdress	ดอกไม้ที่แบ่งบานพร้อมกับไฟที่ร้อนระอุ		
+119	Purgatory Of Flower-Armor	ดอกไม้ที่แบ่งบานพร้อมกับไฟที่ร้อนระอุ		
+120	Purgatory Of Flower-Legging	ดอกไม้ที่แบ่งบานพร้อมกับไฟที่ร้อนระอุ		
+121	Abyss Armor-Headdress	ปีศาจที่เกิดใหม่จากนรก ถึงเวลาแล้ว		เปิด Mystic Capsule จะมีโอกาสได้รับ
+122	Abyss Armor-Armor	ปีศาจที่เกิดใหม่จากนรก ถึงเวลาแล้ว		เปิด Mystic Capsule จะมีโอกาสได้รับ
+123	Abyss Armor-Legging	ปีศาจที่เกิดใหม่จากนรก ถึงเวลาแล้ว		เปิด Mystic Capsule จะมีโอกาสได้รับ
+124	Blue Wind-Headdress	ดูน่าเกรงขาม ไม่ง่ายเลยที่จะข้ามผ่านความรู้สึกอันเฉยชานั้นได้		
+125	Blue Wind-Armor	ดูน่าเกรงขาม ไม่ง่ายเลยที่จะข้ามผ่านความรู้สึกอันเฉยชานั้นได้		
+126	Blue Wind-Legging	ดูน่าเกรงขาม ไม่ง่ายเลยที่จะข้ามผ่านความรู้สึกอันเฉยชานั้นได้		
+127	Dante-Headdress	ชุดประจำตัวของ Dante		
+128	Dante-Cloth	ชุดประจำตัวของ Dante		
+129	Purgatory Queen-Headdress			
+130	Purgatory Queen-Cloth			
+131	Dark Armor Knight-Headdress			
+132	Dark Armor Knight-Armor			
+133	Dark Armor Knight-Legging			
+134	Morgan-Headdress	ชุดประจำตัวของ Pirate Knight-Morgan		
+135	Morgan-Armor	ชุดประจำตัวของ Pirate Knight-Morgan		
+136	Morgan-Legging	ชุดประจำตัวของ Pirate Knight-Morgan		
+137	Adventure Duke-Headdress			
+138	Adventure Duke-Armor			
+139	Adventure Duke-Legging			
+140	Laura-Headdress	ชุดประจำตัวของ Treasure Hunter-Laura		
+141	Laura-Armor	ชุดประจำตัวของ Treasure Hunter-Laura		
+142	Laura-Legging	ชุดประจำตัวของ Treasure Hunter-Laura		
+143	Sephiroth-Headdress	ชุดประจำตัวของ Sephiroth		
+144	Sephiroth-Armor	ชุดประจำตัวของ Sephiroth		
+145	Sephiroth-Legging	ชุดประจำตัวของ Sephiroth		
+146	Fiona-Goggles	ชุดประจำตัวของ Fiona		
+147	Fiona-Armor	ชุดประจำตัวของ Fiona		
+148	Fiona-Legging	ชุดประจำตัวของ Fiona		
+149	Siren-Headdress	ชุดประจำตัวของ Siren		
+150	Siren-Cloth	ชุดประจำตัวของ Siren		
+151	Siren-Wing	ชุดประจำตัวของ Siren		
+152	Silva-Headdress	ชุดประจำตัวของ Heroic Captain-Silva		
+153	Silva-Armor	ชุดประจำตัวของ Heroic Captain-Silva		
+154	Silva-Legging	ชุดประจำตัวของ Heroic Captain-Silva		
+155	Da Vinci-Headdress			
+156	Da Vinci-Armor			
+157	Da Vinci-Legging			
+158	Beautiful Armor Knight-Headdress	เมื่อสวมใส่กับเครื่องสวมใส่ต่อไปนี้จะทำให้ได้รับสกิล [Glory Shooting] 1 ชุด:\n [Beautiful Armor Knight-Headdress]\n [Beautiful Armor Knight-Armor]\n [Beautiful Armor Knight-Legging] 	เมื่อโจมตีมีโอกาสปล่อย [Glory Shooting] ทำให้เป้าหมายเกิดความเสียหาย และมีโอกาสโจมตีให้ล้ม	
+159	Beautiful Armor Knight-Armor	เมื่อสวมใส่กับเครื่องสวมใส่ต่อไปนี้จะทำให้ได้รับสกิล [Glory Shooting] 1 ชุด:\n [Beautiful Armor Knight-Headdress]\n [Beautiful Armor Knight-Armor]\n [Beautiful Armor Knight-Legging] 	เมื่อโจมตีมีโอกาสปล่อย [Glory Shooting] ทำให้เป้าหมายเกิดความเสียหาย และมีโอกาสโจมตีให้ล้ม	
+160	Beautiful Armor Knight-Legging	เมื่อสวมใส่กับเครื่องสวมใส่ต่อไปนี้จะทำให้ได้รับสกิล [Glory Shooting] 1 ชุด:\n [Beautiful Armor Knight-Headdress]\n [Beautiful Armor Knight-Armor]\n [Beautiful Armor Knight-Legging] 	เมื่อโจมตีมีโอกาสปล่อย [Glory Shooting] ทำให้เป้าหมายเกิดความเสียหาย และมีโอกาสโจมตีให้ล้ม	
+161	Skeleton Captain-Headdress	ใช้ความพยาม! กะลาสีผู้เชื่อฟังจะได้ร่วมงานเลี้ยงหลังการปล้นได้อย่างสบายใจ!		
+162	Skeleton Captain-Cloth	ใช้ความพยาม! กะลาสีผู้เชื่อฟังจะได้ร่วมงานเลี้ยงหลังการปล้นได้อย่างสบายใจ!		
+163	Concentration Walker-Headdress			
+164	Concentration Walker-Armor			
+165	Concentration Walker-Legging			
+166	Water Light Monk-Headdress			
+167	Water Light Monk-Armor			
+168	Water Light Monk-Legging			
+169	Silver Knight Army-Headdress			
+170	Silver Knight Army-Armor			
+171	Silver Knight Army-Legging			
+172	Guard Phantom-Headdress			
+173	Guard Phantom-Armor			
+174	Guard Phantom-Legging			
+175	Red Dance Feather-Headdress			
+176	Red Dance Feather-Armor			
+177	Red Dance Feather-Legging			
+178	Swimming Singer-Headdress			
+179	Swimming Singer-Armor			
+180	Swimming Singer-Legging			
+181	Hunting Devil Horn-Headdress			
+182	Hunting Devil Horn-Armor			
+183	Hunting Devil Horn-Legging			
+184	Fire Warsong-Headdress			
+185	Fire Warsong-Armor			
+186	Fire Warsong-Legging			
+187	Sacrifice Of Hand-Headdress			
+188	Sacrifice Of Hand-Armor			
+189	Sacrifice Of Hand-Legging			
+190	Yellow Ghost Witch-Headdress			
+191	Yellow Ghost Witch-Armor			
+192	Yellow Ghost Witch-Legging			
+193	Nasca-Headdress			
+194	Nasca-Armor			
+195	Nasca-Legging			
+196	Whelp Division-Headdress			
+197	Whelp Division-Armor			
+198	Whelp Division-Legging			
+199	God Wing-Headdress			
+200	God Wing-Armor			
+201	God Wing-Legging			
+202	God Wing-Backside			
+203	Sacred Feather-Headdress			
+204	Sacred Feather-Armor			
+205	Sacred Feather-Legging			
+206	Sacred Feather-Backside			
+207	Law Execution-Headdress			
+208	Law Execution-Armor			
+209	Law Execution-Legging			
+210	Remain Intruder-Headdress			
+211	Remain Intruder-Armor			
+212	Remain Intruder-Legging			
+213	Sails Fighter-Headdress			
+214	Sails Fighter-Armor			
+215	Sails Fighter-Legging			
+216	Leaving Dragon Assassin-Headdress			
+217	Leaving Dragon Assassin-Armor			
+218	Leaving Dragon Assassin-Legging			
+219	Skeleton  Captain-Goggles	ใช้ความพยาม! กะลาสีผู้เชื่อฟังจะได้ร่วมงานเลี้ยงหลังการปล้นได้อย่างสบายใจ!		
+220	Christmas Lover(Warm)-Armor			
+221	Christmas Lover(Warm)-Legging			
+222	Christmas Lover(Pretty)-Armor			
+223	Christmas Lover(Pretty)-Legging			
+224	Romantic Lover-Headdress			
+225	Romantic Lover-Armor			
+226	Romantic Lover-Legging			
+227	Pink Beauty-Headdress			
+228	Pink Beauty-Armor			
+229	Pink Beauty-Legging			
+230	Guard-Headdress	ชุดทหารทั่วไป		เปิด Old Capsule จะมีโอกาสได้รับ
+231	Guard-Armor	ชุดทหารทั่วไป		เปิด Old Capsule จะมีโอกาสได้รับ
+232	Guard-Legging	ชุดทหารทั่วไป		เปิด Old Capsule จะมีโอกาสได้รับ
+233	Flame Cross-Headdress	บนชุดมีรูปกากบาทสีแดง เป็นความหวังแห่งการฟื้นฟูสถานที่ศักดิ์สิทธิ์		
+234	Flame Cross-Armor	บนชุดมีรูปกากบาทสีแดง เป็นความหวังแห่งการฟื้นฟูสถานที่ศักดิ์สิทธิ์		
+235	Flame Cross-Legging	บนชุดมีรูปกากบาทสีแดง เป็นความหวังแห่งการฟื้นฟูสถานที่ศักดิ์สิทธิ์		
+236	Indigo Guard-Headdress	ฉันเป็นใคร? ฉันเป็นผู้คุ้มกัน		เปิด Old Capsule จะมีโอกาสได้รับ
+237	Indigo Guard-Armor	ฉันเป็นใคร? ฉันเป็นผู้คุ้มกัน		เปิด Old Capsule จะมีโอกาสได้รับ
+238	Indigo Guard-Legging	ฉันเป็นใคร? ฉันเป็นผู้คุ้มกัน		เปิด Old Capsule จะมีโอกาสได้รับ
+239	Prisoner-Headdress	ชุดที่นักโทษสวมใส่ รูปแบบของชุดจะมีบางคนเท่านั้นที่ชื่นชอบมัน ดังนั้นจึงมีการทำเลี้ยนแบบขึ้นมามาก		
+240	Prisoner-Armor	ชุดที่นักโทษสวมใส่ รูปแบบของชุดจะมีบางคนเท่านั้นที่ชื่นชอบมัน ดังนั้นจึงมีการทำเลี้ยนแบบขึ้นมามาก		
+241	Prisoner-Legging	ชุดที่นักโทษสวมใส่ รูปแบบของชุดจะมีบางคนเท่านั้นที่ชื่นชอบมัน ดังนั้นจึงมีการทำเลี้ยนแบบขึ้นมามาก		
+242	Freedom-Headdress	ลายสีฟ้า เปรียบเสมือนอิสระภาพ		
+243	Freedom-Armor	ลายสีฟ้า เปรียบเสมือนอิสระภาพ		
+244	Freedom-Legging	ลายสีฟ้า เปรียบเสมือนอิสระภาพ		
+245	聖鎧騎士-頭飾			
+246	聖鎧騎士-上身			
+247	聖鎧騎士-下身			
+248	凡赫辛-頭飾			
+249	凡赫辛-上身			
+250	凡赫辛-下身			
+251	刺客教袍-頭飾			
+252	刺客教袍-上身			
+253	刺客教袍-下身			
+254	神槍牛仔-頭飾			
+255	神槍牛仔-上身			
+256	神槍牛仔-下身			
+257	神槍警長-頭飾			
+258	神槍警長-上身			
+259	神槍警長-下身			
+260	海賊輓歌-頭飾			
+261	海賊輓歌-上身			
+262	海賊輓歌-下身			
+263	海賊帽：パイレーツハット	A/P制作、Captain Schwarzパイレーツハット(男性専用)		
+264	上半身：アズールベスト	A/P制作、アズールベスト(男性専用)		
+265	長褲：ルシフェルパンツ	A/P制作、Luciferパンツ(男性専用)		
+266	蝴蝶王冠緞帶髮飾	BABY制作、王冠ヘッドドレス(女性専用)		
+267	HAWASE洋裝	BABY制作、はわせドールワンピース(女性専用)		
+268	HAWASE襪子＆鞋子	BABY制作、はわせドールシューズ、ソックス付き(女性専用)		
+269	薔薇的葬列-頭飾	A/P制作、薔薇の葬列柄ハット(男性専用)		
+270	薔薇的葬列-上身	A/P制作、薔薇の葬列柄ベスト(男性専用)		
+271	薔薇的葬列-下身	A/P制作、薔薇の葬列柄パンツ(男性専用)		
+272	伊莉莎白蝴蝶結髮箍	BABY制作、リボンカチューシャ(女性専用)		
+273	伊莉莎白洋裝	BABY制作、エリザベスワンピース(女性専用)		
+274	伊莉莎白襪子＆鞋子	BABY制作、シューズ(女性専用)		
+275	Traditional Garments (Men) - Headdress			
+276	Traditional Garments (Men)-Armor			
+277	Traditional Garments (Men)-Legging			
+278	Traditional Garments (Women) - Headdress			ไอเทมทดสอบ ใช้ภายใน ห้ามเผยแพร่!!
+279	Traditional Garments (Women)-Armor			
+280	Traditional Garments (Women)-Legging			ไอเทมทดสอบ ใช้ภายใน ห้ามเผยแพร่!!
+281	メルティスイーツデビルミニミニハット(青)			
+282	ギルティーメルティースイーツタウン柄ベスト			
+283	ギルティーメルティースイーツタウン柄パンツ＆ブーツ			
+284	ギルティメルティスイーツタウン柄リボンカチューシャ			
+285	ギルティーメルティースイーツタウンジャンパースカートⅠ			
+286	ダイヤ柄タイツ(白) ＆シューズ			
+287	時計うさぎのシルクハット			
+288	アルフレッドジャケット＋アルフレッドブラウス			
+289	アルフレッドパンツ＆ブーツ			
+290	メルティスイーツデビルミニミニハット(赤)			
+291	ギルティーメルティースイーツタウンジャンパースカートⅡ			
+292	ダイヤ柄タイツ(赤)＆シューズ			
+293	(白)DMM-頭飾			
+294	(黑)DMM-頭飾			
+295	2014_12_1_M-頭飾			
+296	2014_12_1_M-上身			
+297	2014_12_1_M-下身			
+298	2014_12_1_F-頭飾			
+299	2014_12_1_F-上身			
+300	2014_12_1_F-下身			
+301	2014_12_2_M-頭飾			
+302	2014_12_2_M-上身			
+303	2014_12_2_M-下身			
+304	2014_12_2_F-頭飾			
+305	2014_12_2_F-上身			
+306	2014_12_2_F-下身			
+307	2015_1_1_M-頭飾			
+308	2015_1_1_M-上身			
+309	2015_1_1_M-下身			
+310	2015_1_1_F-頭飾			
+311	2015_1_1_F-上身			
+312	2015_1_1_F-下身			
+313	2015_1_2_M-頭飾			
+314	2015_1_2_M-上身			
+315	2015_1_2_M-下身			
+316	2015_1_2_F-頭飾			
+317	2015_1_2_F-上身			
+318	2015_1_2_F-下身			
+319	DMM神火-頭飾			
+320	DMM神火-上身			
+321	DMM神火-下身			
+322	黛安娜-頭飾			
+323	黛安娜-上身			
+324	黛安娜-下身			
+325	亞米克絲-頭飾			
+326	亞米克絲-上身			
+327	亞米克絲-下身			
+328	愛朵拉-頭飾			
+329	愛朵拉-上身			
+330	愛朵拉-下身			
+2001	Goggle	ตอนบินรู้สึกว่าลืมตาไม่ขึ้นบ้างไหม? ลองใส่แว่นกันแดดนี่ดูสิ ป้องกันการเป็นต้อลมได้ด้วยนะ(แนะนำ: ไม่ต้องตกใจไป หากใส่แล้วทำให้มองเห็นภาพไม่ชัด เพราะเป็นเรื่องปกติ)		
+2002	Antelope Red Horn	เขาสีแดงหายาก นำมาล้างแล้วสามารถสวมใส่ได้		
+2003	Beast Bone Face	กระดูกที่ไม่รู้ว่าช่างใหญ่ [Jason] นำมาจากไหน แต่เมื่อนำมาตัดแต่งแล้วสามารถสวมใส่เป็นหน้ากากได้		
+2004	Guawa Decoration	หน้ากากของ Guawa family Dlansman เมื่อใส่จะทำให้ไม่กลายเป็น Guawa family Dlansman		
+2005	Seven herb	เมื่อเคี้ยวจะรู้รสถึงความหอมของมัน เหมาะกับการเคี้ยวก่อนออกเดท		
+2201	Purple Snake Wing	[งานฝีมือ] งานปีกอันล้ำค่า ดูตัวอย่างจากของจริงตามธรรมชาติ		
+2202	Gold Midge Wing	[งานฝีมือ] งานปีกอันล้ำค่า ดูตัวอย่างจากของจริงตามธรรมชาติ		
+2203	Jet Equipment	[งานฝีมือ] อุปกรณ์ไอพ่นชั้นดี แต่น่าเสียดายที่ปัจจุบันยังไม่มีพลังงานมากขนาดใช้งานมันได้ ตอนนี้ได้เพียงแค่สวมใส่มันไปก่อน		
+2204	Little Angel	[งานฝีมือ] งานปีกอันล้ำค่า ดูตัวอย่างจากของจริงตามธรรมชาติ		
+2205	Tiamat Wing	[งานฝีมือ] งานปีกอันล้ำค่า ดูตัวอย่างจากของจริงตามธรรมชาติ		
+2206	Velvet Long Ears			
+2207	Bat Wing Ears			
+2208	Dust Mask			
+2209	Fam Thin Wing			
+2210	Skysea Fin			
+2211	Holy Light Hoop			
+2212	Ancient Civilization Fragment			
+2213	兔子背包	BABY制作、うさくみゃリュック白(背中装備)		
+2214	粉紅兔子背包	BABY制作、うさくみゃリュックピンク(背中装備)		
+2215	紅色眼帶	BABY制作、Captain hollowアイパッチ赤(女性専用)		
+2216	Black Rabbit Bag			
+2217	Black Eye With			
+2218	測試特效			測試用道具，內部使用，請勿外流！！
+2219	測試滑翔翼特效			測試用道具，內部使用，請勿外流！！
+2501	Miracle Chest	รางวัลกิจกรรม ขอบคุณทุกท่านที่ให้ความสนใจ ทางเราขอตอบแทนด้วยหีมสมบัตล้ำค่า ขอให้ผู้เล่นทุกท่านโชคดีและร่ำรวย!		
+2502	Pumpkin Headdress	รางวัลกิจกรรมวันฮาโลวีน		
+2503	Christmas Hat	รางวัลกิจกรรมวันคริสมาสต์		
+2700	Canvas Wing	ปีกที่ทำจากผ้า เมื่อใส่สามารถบินไปในที่ต่างๆได้		
+2701	Gargantia	ใช้ทดสอบ สามารถย้อมสีได้		
+2702	Gargantia-Purple	ใช้ทดสอบ		
+2703	Freedom Wing	สร้างขึ้นตามปีกที่ปรมจารย์ออกแบบไว้ เปรียบถึงความมีเกรียติ ดั่งมีเทวดาคอบคุ้มกัน		
+2704	妖精的翅膀	由小頹老師特別設計的滑翔翼，特色是蘿莉妖精。		
+2999	Unknown Glider	อุปกรณ์ที่ไม่ทราบชื่อ ปัจจุบันไม่สามารถเก็บสะสมได้		
+3001	Gray Boy - Underwear			
+3002	Camouflage-Underwear			
+3003	Underpants 3			
+3004	Pink Girl-Underwear			
+3005	Pink Girl-Underclothes			
+3006	Purple Wave-Underwear			
+3007	Purple Wave-Underclothes			
+3008	Pure Lily-Underwear			
+3009	Pure Lily-Underclothes			
+8001	Olivia Cap	เครื่องประดับหัวของ Olivia		
+8002	Olivia Cloth	เสื้อตัวโปรดของ Olivia		
+8003	Elizabeth Cap	เครื่องประดับหัวของ Elizabeth		
+8004	Elizabeth Cloth	เสื้อตัวโปรดของ Elizabeth		
+8005	Diana-Headdress			
+8006	Diana-Armor			
+8007	Diana-Legging			
+8008	Yamicks-Headdress			
+8009	Yamicks-Armor			
+8010	Yamicks-Legging			
+8011	Adora-Headdress			
+8012	Adora-Armor			
+8013	Adora-Legging			
+8014	伊莉莎白帽_聖誕	伊莉莎白為了慶祝聖誕節，特別換上的頭飾。		
+8015	伊莉莎白服_聖誕	伊莉莎白為了慶祝聖誕節，特別換上的連身衣裝。		
+8016	卡蓮-頭飾			測試用道具，內部使用，請勿外流！！
+8017	卡蓮-上身			測試用道具，內部使用，請勿外流！！
+8018	卡蓮-下身			測試用道具，內部使用，請勿外流！！
+9001	Old Siren Wing	เครื่องประดับหลัง		
+9005	New Siren Cap	เครื่องสวมใส่ภายนอกรูปแบบต่างๆ		
+9006	New Siren Cloth	เครื่องสวมใส่ภายนอกรูปแบบต่างๆ		
+9901	Testing Underwear	เครื่องสวมใส่ภายนอกรูปแบบต่างๆ		
+9902	但丁-頭飾	狂人-但丁的標準穿著。\n穿著以下裝備可觸發套裝技能-【漿紅鎖鍊】：\n【但丁-頭飾】\n【但丁-衣裝】	攻擊時有機率觸發【漿紅鎖鍊】使目標造成傷害，並有機會牽制目標，持續3秒。	測試用道具，內部使用，請勿外流！！
+9903	但丁-衣裝	狂人-但丁的標準穿著。\n穿著以下裝備可觸發套裝技能-【漿紅鎖鍊】：\n【但丁-頭飾】\n【但丁-衣裝】	攻擊時有機率觸發【漿紅鎖鍊】使目標造成傷害，並有機會牽制目標，持續3秒。	測試用道具，內部使用，請勿外流！！
+9904	煉獄女王-頭飾	穿著以下裝備可觸發套裝技能-【漿紅鎖鍊】：\n【煉獄女王-頭飾】\n【煉獄女王-衣裝】	攻擊時有機率觸發【漿紅鎖鍊】使目標造成傷害，並有機會牽制目標，持續3秒。	測試用道具，內部使用，請勿外流！！
+9905	煉獄女王-衣裝	穿著以下裝備可觸發套裝技能-【漿紅鎖鍊】：\n【煉獄女王-頭飾】\n【煉獄女王-衣裝】	攻擊時有機率觸發【漿紅鎖鍊】使目標造成傷害，並有機會牽制目標，持續3秒。	測試用道具，內部使用，請勿外流！！
+9906	闇鎧騎士-頭飾	穿著以下裝備可觸發套裝技能-【榮耀射擊】：\n【闇鎧騎士-頭飾】\n【闇鎧騎士-上身】\n【闇鎧騎士-下身】	攻擊時有機率觸發【榮耀射擊】使目標造成傷害，並有機會擊倒目標。	測試用道具，內部使用，請勿外流！！
+9907	闇鎧騎士-上身	穿著以下裝備可觸發套裝技能-【榮耀射擊】：\n【闇鎧騎士-頭飾】\n【闇鎧騎士-上身】\n【闇鎧騎士-下身】	攻擊時有機率觸發【榮耀射擊】使目標造成傷害，並有機會擊倒目標。	測試用道具，內部使用，請勿外流！！
+9908	闇鎧騎士-下身	穿著以下裝備可觸發套裝技能-【榮耀射擊】：\n【闇鎧騎士-頭飾】\n【闇鎧騎士-上身】\n【闇鎧騎士-下身】	攻擊時有機率觸發【榮耀射擊】使目標造成傷害，並有機會擊倒目標。	測試用道具，內部使用，請勿外流！！
+9909	冒險公爵-頭飾	穿著以下裝備可觸發套裝技能-【鏡花游雷】：\n【冒險公爵-頭飾】\n【冒險公爵-上身】\n【冒險公爵-下身】	攻擊時有機率觸發【鏡花游雷】，擊飛目標並造成傷害。	測試用道具，內部使用，請勿外流！！
+9910	冒險公爵-上身	穿著以下裝備可觸發套裝技能-【鏡花游雷】：\n【冒險公爵-頭飾】\n【冒險公爵-上身】\n【冒險公爵-下身】	攻擊時有機率觸發【鏡花游雷】，擊飛目標並造成傷害。	測試用道具，內部使用，請勿外流！！
+9911	冒險公爵-下身	穿著以下裝備可觸發套裝技能-【鏡花游雷】：\n【冒險公爵-頭飾】\n【冒險公爵-上身】\n【冒險公爵-下身】	攻擊時有機率觸發【鏡花游雷】，擊飛目標並造成傷害。	測試用道具，內部使用，請勿外流！！
+9912	賽費羅斯-頭飾	賞金獵人-賽費羅斯的標準穿著。\n穿著以下裝備可觸發套裝技能-【沁光泡沫】：\n【賽費羅斯-頭飾】\n【賽費羅斯-上身】\n【賽費羅斯-下身】	攻擊時若目標血量大於90%時，會觸發【沁光泡沫】使目標受到的傷害增加，持續5秒。	測試用道具，內部使用，請勿外流！！
+9913	賽費羅斯-上身	賞金獵人-賽費羅斯的標準穿著。\n穿著以下裝備可觸發套裝技能-【沁光泡沫】：\n【賽費羅斯-頭飾】\n【賽費羅斯-上身】\n【賽費羅斯-下身】	攻擊時若目標血量大於90%時，會觸發【沁光泡沫】使目標受到的傷害增加，持續5秒。	測試用道具，內部使用，請勿外流！！
+9914	賽費羅斯-下身	賞金獵人-賽費羅斯的標準穿著。\n穿著以下裝備可觸發套裝技能-【沁光泡沫】：\n【賽費羅斯-頭飾】\n【賽費羅斯-上身】\n【賽費羅斯-下身】	攻擊時若目標血量大於90%時，會觸發【沁光泡沫】使目標受到的傷害增加，持續5秒。	測試用道具，內部使用，請勿外流！！
+9915	菲歐娜-眼罩	賞金獵人-菲歐娜的標準穿著。\n穿著以下裝備可觸發套裝技能-【沁光泡沫】：\n【菲歐娜-眼罩】\n【菲歐娜-上身】\n【菲歐娜-下身】	攻擊時若目標血量大於90%時，會觸發【沁光泡沫】使目標受到的傷害增加，持續5秒。	測試用道具，內部使用，請勿外流！！
+9916	菲歐娜-上身	賞金獵人-菲歐娜的標準穿著。\n穿著以下裝備可觸發套裝技能-【沁光泡沫】：\n【菲歐娜-眼罩】\n【菲歐娜-上身】\n【菲歐娜-下身】	攻擊時若目標血量大於90%時，會觸發【沁光泡沫】使目標受到的傷害增加，持續5秒。	測試用道具，內部使用，請勿外流！！
+9917	菲歐娜-下身	賞金獵人-菲歐娜的標準穿著。\n穿著以下裝備可觸發套裝技能-【沁光泡沫】：\n【菲歐娜-眼罩】\n【菲歐娜-上身】\n【菲歐娜-下身】	攻擊時若目標血量大於90%時，會觸發【沁光泡沫】使目標受到的傷害增加，持續5秒。	測試用道具，內部使用，請勿外流！！
+9918	賽蓮-頭飾	海神之女-賽蓮的標準穿著。\n穿著以下裝備可觸發套裝技能-【鏡花游雷】：\n【賽蓮-頭飾】\n【賽蓮-衣裝】\n【賽蓮-背翅】	攻擊時有機率觸發【鏡花游雷】，擊飛目標並造成傷害。	測試用道具，內部使用，請勿外流！！
+9919	賽蓮-衣裝	海神之女-賽蓮的標準穿著。\n穿著以下裝備可觸發套裝技能-【鏡花游雷】：\n【賽蓮-頭飾】\n【賽蓮-衣裝】\n【賽蓮-背翅】	攻擊時有機率觸發【鏡花游雷】，擊飛目標並造成傷害。	測試用道具，內部使用，請勿外流！！
+9920	賽蓮-背翅	海神之女-賽蓮的標準穿著。\n穿著以下裝備可觸發套裝技能-【鏡花游雷】：\n【賽蓮-頭飾】\n【賽蓮-衣裝】\n【賽蓮-背翅】	攻擊時有機率觸發【鏡花游雷】，擊飛目標並造成傷害。	測試用道具，內部使用，請勿外流！！
+9921	麗鎧騎士-頭飾	穿著以下裝備可觸發套裝技能-【榮耀射擊】：\n【麗鎧騎士-頭飾】\n【麗鎧騎士-上身】\n【麗鎧騎士-下身】	攻擊時有機率觸發【榮耀射擊】使目標造成傷害，並有機會擊倒目標。	測試用道具，內部使用，請勿外流！！
+9922	麗鎧騎士-上身	穿著以下裝備可觸發套裝技能-【榮耀射擊】：\n【麗鎧騎士-頭飾】\n【麗鎧騎士-上身】\n【麗鎧騎士-下身】	攻擊時有機率觸發【榮耀射擊】使目標造成傷害，並有機會擊倒目標。	測試用道具，內部使用，請勿外流！！
+9923	麗鎧騎士-下身	穿著以下裝備可觸發套裝技能-【榮耀射擊】：\n【麗鎧騎士-頭飾】\n【麗鎧騎士-上身】\n【麗鎧騎士-下身】	攻擊時有機率觸發【榮耀射擊】使目標造成傷害，並有機會擊倒目標。	測試用道具，內部使用，請勿外流！！
+9951	囚犯-頭飾	監獄中的犯人穿的服裝，樣式受到某一部分人的喜歡，所以特別模仿製作。		測試用道具，內部使用，請勿外流！！
+9952	囚犯-上身	監獄中的犯人穿的服裝，樣式受到某一部分人的喜歡，所以特別模仿製作。		測試用道具，內部使用，請勿外流！！
+9953	囚犯-下身	監獄中的犯人穿的服裝，樣式受到某一部分人的喜歡，所以特別模仿製作。		測試用道具，內部使用，請勿外流！！
+9954	囚犯-頭飾	監獄中的犯人穿的服裝，樣式受到某一部分人的喜歡，所以特別模仿製作。		測試用道具，內部使用，請勿外流！！
+9955	囚犯-上身	監獄中的犯人穿的服裝，樣式受到某一部分人的喜歡，所以特別模仿製作。		測試用道具，內部使用，請勿外流！！
+9956	囚犯-下身	監獄中的犯人穿的服裝，樣式受到某一部分人的喜歡，所以特別模仿製作。		測試用道具，內部使用，請勿外流！！

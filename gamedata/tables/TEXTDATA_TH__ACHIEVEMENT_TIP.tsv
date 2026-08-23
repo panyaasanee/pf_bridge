@@ -1,0 +1,338 @@
+n_ID	s_NAME	s_TIP
+1	Kraken:Lv30	กำจัด Kraken ที่ Atlantis ส่งภารกิจ และได้รับ Hunter Rubik's Cube
+10	Crew:Lv.40	ได้รับ Gobao จากรางวัลภารกิจ และเก็บไว้ที่ชั้นวางของ
+20	Penfriend:Lv.45	เพิ่มเพื่อนทางจดหมาย 5 คน
+30	Lucky Collect:Lv50	เก็บ Meteor Brass Ring 3 อัน
+40	Brewing:Lv.55	หมักเหล้า 10 ขวด
+50	Treasure Map:Lv.60	ผ่านแผนที่ขุมทรัพย์ 5 อัน
+60	Strengthen:Lv65	ตีบวกสำเร็จ 30 ครั้ง
+70	Pirate Flagship:Lv70	ขับไล่ Pirate Flagship ที่ Outer space Ocean ส่งภานกิจ และได้รับ Pirate Rubik Cube
+80	Dungeon Treasure Map:Lv75	ผ่านแผนที่ขุมทรัพย์ Rough Sea Fortress
+90	Evolution:Lv.80	ผสมสัตว์สวยงามสำเร็จ 3 ตัว ได้รับ Crew-Nalu Sase และเก็บไว้ในชั้นวางของ
+100	SaLv.age:Lv.80	สำรวจใน Outer Space Ocean ได้รับ [Ice Fish Fossil] 1 ตัว
+110	Conqueror:Lv85	ได้รับความสำเร็จเกี่ยวกับการบิน 6 อย่าง
+120	Challenge Again:Lv90	กำจัด Floating Island Jellyfish เพื่อนในทีมไม่มีใครบาดเจ็บหนัก
+130	Treasure:Lv.100	ได้รับสมบัติ Hammer of Judgment, Poseidon servant, Ancyn Grip
+140	Dragon Merchant:Lv115	ซื้อ Seabed Crusader Rubik's Cube ที่ Sky Dragon Trader และเปิดให้ได้ Crew-Tuna เก็บลงชั้นวางของ
+150	Poseidon Gold:Lv.120	ได้รับ Poseidon Gold 1000 แท่ง
+160	Ultimate Target:Lv???	สะสมสมบัติทั้งแปด
+1001	Navy Recruit	ผ่านการฝึกฝนและแจ้งพิธีการ
+1002	Training Master	เมื่อผ่านการฝึกฝน และเริ่มการต่อสู้
+1051	Silently Cultivation	คะแนนความสำเร็จถึง 100 คะแนน
+1052	Touch Everyting	คะแนนความสำเร็จถึง 500 คะแนน
+1053	Forever Endure	คะแนนความสำเร็จถึง 1000 คะแนน
+1101	Part Time!	ได้รับตำแหน่งพิเศษ
+1102	Melt Crystal Plate EXP ansion	เปิดช่องถาดหลอม 15 ช่อง
+1103	Thank Support!	ใช้จ่ายคุกกี้ 500 แต้ม
+1104	Go back to where you came from	ใช้จ่าย Token 100 แต้ม
+1105	Penny and penny laid up will be many	ได้รับ Token ฟรี 15 ครั้ง
+1106	Water live people Life!	ใช้ยาฟื้นฟู HP 10,0000 แต้ม
+1107	Burn universe	ฟื้นคืนชีพที่เดิม 20 ครั้ง
+1108	Enhanced Lv.10	ตีบวกเครื่องสวมใส่สีขาวเลเวล 10
+1109	Lucky guy	Lucky Gathering 10 ครั้ง
+1110	Enhanced Lv.12	ตีบวกเครื่องสวมใส่ 1 อย่างถึงเลเวล 12
+1111	Burn Universe (2)	คืนชีพที่เดิม ใช้ได้ 50 ครั้ง
+1201	Conquest Port Royal 	เหาะเหินใน Port Royal 1 ครั้ง เป็นเวลา 31 วินาที
+1202	Conquest Prison Exile Island 	เหาะเหินใน Prison Exile Island 1 ครั้ง เป็นเวลา 41 วินาที
+1203	Conquest Spice Paradise Island 	เหาะเหินใน Spice Paradise Island 1 ครั้ง เป็นเวลา 40 วินาที
+1204	Conquest Slave Market Island 	เหาะเหินใน Slave Market Island 1 ครั้ง เป็นเวลา 19 วินาที
+1205	Conquest Evil Port 	เหาะเหินใน Evil Port 1 ครั้ง เป็นเวลา 30 วินาที
+1206	Conquest Ocean Walled City 	เหาะเหินใน Ocean Walled City 1 ครั้ง เป็นเวลา 45 วินาที
+1207	Conquest Voodoo Island	เหาะเหินใน Voodoo Island 1 ครั้ง เป็นเวลา 42 วินาที
+1208	Conquest Silver Harbour	เหาะเหินใน Silver Harbour 1 ครั้ง เป็นเวลา 33 วินาที
+1209	Conquest Death City Sea	เหาะเหินใน Death City Sea 1 ครั้ง เป็นเวลา 22 วินาที
+1210	Conquest Drake empty Walled	เหาะเหินใน Drake empty Walled 1 ครั้ง เป็นเวลา 32 วินาที
+1211	Conquest Hell Volcanic Island	เหาะเหินใน Hell Volcanic Island 1 ครั้ง เป็นเวลา 31 วินาที
+1212	Conquest Lost Eden	เหาะเหินใน Lost Eden 1 ครั้ง เป็นเวลา 53 วินาที
+1213	Conquest Sunset Deserted	เหาะเหินใน Sunset Deserted 1 ครั้ง เป็นเวลา 79 วินาที
+1251	VIP Challenge Port Royal 	เลเวลถึง Lv.45 เหาะเหินใน Port Royal 1 ครั้ง เป็นเวลา 40 วินาที
+1252	VIP Conquest Port Royal 	เลเวลถึง Lv.50 เหาะเหินใน Port Royal 1 ครั้ง เป็นเวลา 61 วินาที
+1253	VIP Challenge Prison Exile Island 	เลเวลถึง Lv.45 เหาะเหินใน Prison Exile Island 1 ครั้ง เป็นเวลา 46 วินาที
+1254	VIP Conquest Prison Exile Island 	เลเวลถึง Lv.50 เหาะเหินใน Prison Exile Island 1 ครั้ง เป็นเวลา 52 วินาที
+1255	VIP Challenge Spice Paradise Island 	เลเวลถึง Lv.45 เหาะเหินใน Spice Paradise Island 1 ครั้ง เป็นเวลา 54 วินาที
+1256	VIP Conquest Spice Paradise Island 	เลเวลถึง Lv.50 เหาะเหินใน Spice Paradise Island 1 ครั้ง เป็นเวลา 70 วินาที
+1257	VIP Challenge Slave Market Island 	เหาะเหินใน Slave Market Island 1 ครั้ง เป็นเวลา 29 วินาที
+1258	VIP Conquest Slave Market Island 	เลเวลถึง Lv.50 เหาะเหินใน Slave Market Island 1 ครั้ง เป็นเวลา 44 วินาที
+1259	VIP Challenge Evil Port 	เหาะเหินใน Evil Port 1 ครั้ง เป็นเวลา 55 วินาที
+1260	VIP Conquest Evil Port 	เหาะเหินใน Evil Port 1 ครั้ง เป็นเวลา 66 วินาที
+1261	VIP Challenge Ocean Walled City 	เหาะเหินใน Ocean Walled City 1 ครั้ง เป็นเวลา 50 วินาที
+1262	VIP Conquest Ocean Walled City 	เหาะเหินใน Ocean Walled City 1 ครั้ง เป็นเวลา 65 วินาที
+1263	VIP Challenge Voodoo Island	เหาะเหินใน Voodoo Island 1 ครั้ง เป็นเวลา 68 วินาที
+1264	VIP Conquest Voodoo Island	เหาะเหินใน Voodoo Island 1 ครั้ง เป็นเวลา 84 วินาที
+1265	VIP Challenge Silver Harbour	เหาะเหินใน Silver Harbour 1 ครั้ง เป็นเวลา 38 วินาที
+1266	VIP Conquest Silver Harbour	เหาะเหินใน Silver Harbour 1 ครั้ง เป็นเวลา 45 วินาที
+1267	VIP Challenge Death City Sea	เหาะเหินใน Death City Sea 1 ครั้ง เป็นเวลา 40 วินาที
+1268	VIP Conquest Death City Sea	เหาะเหินใน Death City Sea 1 ครั้ง เป็นเวลา 43 วินาที
+1269	VIP Challenge Drake empty Walled	เหาะเหินใน Drake empty Walled 1 ครั้ง เป็นเวลา 45 วินาที
+1270	VIP Conquest Drake empty Walled	เหาะเหินใน Drake empty Walled 1 ครั้ง เป็นเวลา 57 วินาที
+1271	VIP Challenge Hell Volcanic Island	เหาะเหินใน Hell Volcanic Island 1 ครั้ง เป็นเวลา 55 วินาที
+1272	VIP Conquest Hell Volcanic Island	เหาะเหินใน Hell Volcanic Island 1 ครั้ง เป็นเวลา 72 วินาที
+1273	VIP Challenge Lost Eden	เหาะเหินใน Lost Eden 1 ครั้ง เป็นเวลา 61 วินาที
+1274	VIP Conquest Lost Eden	เหาะเหินใน Lost Eden 1 ครั้ง เป็นเวลา 64 วินาที
+1275	VIP Challenge Sunset Deserted	เหาะเหินใน Sunset Deserted 1 ครั้ง เป็นเวลา 90 วินาที
+1276	VIP Conquest Sunset Deserted	เหาะเหินใน Sunset Deserted 1 ครั้ง เป็นเวลา 103 วินาที
+1301	Flying high	เหาะเหินรวมเป็นเวลา 10 นาที
+1302	How long to fly I'm not tired	เหาะเหินรวมเป็นเวลา 1 ชั่วโมง
+1303	How long does it	เหาะเหินรวมเป็นเวลา 6 ชั่วโมง
+1304	With their lives glide	เหาะเหินรวมเป็นเวลา 1 วัน
+1305	Port Royal  Fly 3600 Second	เหาะเหินใน Port Royal รวมเป็นเวลา 3600 วินาที
+1306	Roaming Fly 3600 Second	เหาะเหินไปเรื่อย รวมเป็นเวลา 3600 วินาที
+1401	Every day shoping every day buy	ซื้อไอเทมในประมูลครบ 100 ครั้ง
+1402	Shopping to buy thing	ซื้อไอเทมในประมูลครบ 500 ครั้ง
+1403	Revitalize the economy	ซื้อไอเทมในประมูลครบ 1000 ครั้ง
+2001	Super Challenge 	กำจัดมอนสเตอร์ที่มีเลเวลเยอะกว่าตัวเอง 10 เลเวล 100 ครั้ง
+2002	Seckill	กำจัดมอนสเตอร์ได้ในเวลา 2 วินาที 100 ครั้ง
+2003	Perfect Kill	กำจัด Al Timo โดยไม่มีคนในทีมตาย
+2004	First met BOSS 	กำจัด BOSS 1 ตัว
+2005	5 minutes Dinner	ทำเงื่อนไขในการกำจัด Al Timo สำเร็จภายใน 300 วินาที
+2006	 Challenge 1 Star Al Timo	กำจัด Al Timo โดยในทีมจะต้องมีจำนวนคนน้อยกว่า 4 คน
+2007	 Challenge Media	ในการกำจัด Media เพื่อนในทีมจะต้องตายน้อยกว่า 2 คน และHP ของตนเองเหลือสูงกว่า 70%
+2008	Failure is the mother of success	ผ่านดันเจี้ยน Falling Sun 1 ดาว 10 ครั้ง
+2009	step to success	ผ่านดันเจี้ยน Poseidon Hall 1 ดาว 10 ครั้ง
+2010	1 Star Falling Sun:finished	ผ่านดันเจี้ยน 1 ดาว: Falling Sun ในเกรด SSS และตัวละครต้องไม่อยู่ในสถานะบาดเจ็บหนัก
+2011	Limit Challenge:Falling Sun	ผ่านดันเจี้ยน Falling Sun ระดับ 1 ดาวด้วยตัวคนเดียว
+2012	Falling Sun 2Star 3S complete	ได้รับเกรด SSS ใน Falling Sun ระดับ 2 ดาว
+2013	Falling Sun 3Star 3S complete	ได้รับเกรด SSS ใน Falling Sun ระดับ 3 ดาว
+2014	Limit Challenge:Supernatural  Arena 	ผ่านดันเจี้ยน Supernatural Arena ระดับ 1 ดาว ด้วยตัวคนเดียว
+2015	Supernatural Arena 3S	ได้รับเกรด SSS ใน Supernatural Arena 
+2016	Limit Challenge:Poseidon Hall	ผ่านดันเจี้ยน Poseidon Hall ด้วยตัวคนเดียวในระดับ 1 ดาว
+2017	Poseidon Hall 2Star 3S complete	ได้รับเกรด SSS ใน Poseidon Hall ระดับ 2 ดาว
+2018	Poseidon Hall 3Star 3S complete	ได้รับเกรด SSS ใน Poseidon Hall ระดับ 3 ดาว
+2019	Limit Challenge:Rough Sea Fortress	ผ่านดันเจี้ยน Rough Sea Fortress ด้วยตัวคนเดียวในระดับ 1 ดาว
+2020	Rough Sea Fortress 2Star 3S complete	ผ่านดันเจี้ยน Rough Sea Fortress ด้วยตัวคนเดียวในระดับ 2 ดาว
+2021	Rough Sea Fortress 3Star 3S complete	ผ่านดันเจี้ยน Rough Sea Fortress ด้วยตัวคนเดียวในระดับ 3 ดาว
+2022	Limit Challenge:Kraken Lair	ผ่านดันเจี้ยน Kraken Lair ด้วยตัวคนเดียว ในระดับ 1 ดาว
+2023	Kraken Lair 2Star 3S complete	ผ่านดันเจี้ยน Kraken Lair ด้วยตัวคนเดียว ในระดับ 2 ดาว
+2024	Kraken Lair 3Star 3S complete	ผ่านดันเจี้ยน Kraken Lair ด้วยตัวคนเดียว ในระดับ 3 ดาว
+2025	Doom Church 2Star 3S complete	ได้รับเกรด SSS ใน Doom Church ระดับ 2 ดาว
+2026	Doom Church 3Star 3S complete	ได้รับเกรด SSS ใน Doom Church ระดับ 3 ดาว
+2027	Limit Challenge:Hell Trial	ผ่านดันเจี้ยน Hell Trial ด้วยตัวคนเดียว ในระดับ 1 ดาว
+2028	Hell Trial 2Star 3S complete	ได้รับเกรด SSS ใน Hell Trial ในระดับ 2 ดาว
+2029	Hell Trial 3Star 3S complete	ได้รับเกรด SSS ใน Hell Trial ในระดับ 3 ดาว
+2030	Limit Challenge:Skyfire Tower	ผ่านดันเจี้ยน Skyfire Tower ด้วยตัวคนเดียว ในระดับ 1 ดาว
+2031	Skyfire Tower 2Star 3S complete	ผ่านดันเจี้ยน Skyfire Tower ด้วยตัวคนเดียว ในระดับ 2 ดาว
+2032	Skyfire Tower 3Star 3S complete	ผ่านดันเจี้ยน Skyfire Tower ด้วยตัวคนเดียว ในระดับ 3 ดาว
+2051	Timothy To die	กำจัด Al Timo10 ครั้ง
+2052	Go To Town Fight Tiger	กำจัด Emerald Tornado 15 ครั้งด้วยตัวคนเดียว
+2053	Adjudicator Trial	กำจัด Beirut 20 ครั้ง
+2054	Extremely popular	กำจัด Red Blood Giant Anchor-Roon 15 ครั้งด้วยตัวคนเดียว
+2055	Cannon Buster	กำจัด Cannon Tower 20 ครั้ง
+2101	Rebel Jungle Grup	ผ่านการสำรวจโบราญสถาน และสำรวจป่าใน Spice Paradise Island 3 ครั้ง
+2102	Kill five into five	ผ่านการสำรวจโบราญสถาน และสำรวจป่าใน Spice Paradise Island 5 ครั้ง
+2201	I want to kill 10	กำจัดผู้เล่น 10 คน
+2202	Sinner	กำจัดผู้เล่น 100 คน
+2203	Beheaded 1000	กำจัดผู้เล่น 1000 คน
+2204	Gutman	กำจัดผู้เล่น 10000 คน
+2210	Warrior Flurry	กำจัดผู้เล่น 5 ครั้ง ภายใน 10 วินาที
+2220	Level as a cloud	กำจัดผู้เล่นที่มีเลเวลมากกว่าตนเอง 10 เลเวล 5 ครั้ง
+2230	Bloody battle	เลือดเหลือน้อยกว่า 10%, กำจัดผู้เล่นที่มีเลเวลมากกว่าตนเอง 3 ครั้ง
+2240	Bloody battle	เลือดเหลือน้อยกว่า 10%，กำจัดผู้เล่นที่มีเลเวลมากกว่าตนเอง 3 ครั้ง
+2241	Bloody battle	เลือดเหลือน้อยกว่า 10%，กำจัดผู้เล่นที่มีเลเวลมากกว่าตนเอง 3 ครั้ง
+2242	Bloody battle	เลือดเหลือน้อยกว่า 10%，กำจัดผู้เล่นที่มีเลเวลมากกว่าตนเอง 3 ครั้ง
+2701	Victory Flavor	ชนะใน Arena 1 ครั้ง
+2702	Ten wins Mileage	ชนะใน Arena 10 ครั้ง
+2703	100 Winner	ชนะใน Arena 100 ครั้ง
+2704	Winner Champion	ชนะใน Arena 1000 ครั้ง
+2705	Rule Game	ฆ่า 15 ครั้งในสนามเดียว 1 ครั้ง
+2706	Arena  Overlord	ฆ่า 15 ครั้งในสนามเดียว 25 ครั้ง
+2707	Arena  Ares	ฆ่า 15 ครั้งในสนามเดียว 200 ครั้ง
+2708	MVP	ได้รับ MVP ใน Arena 1 ครั้ง
+2709	Ever Victorious	ได้รับ MVP ใน Arena 10 ครั้ง
+2710	Elite warrior	ได้รับ MVP ใน Arena 100 ครั้ง
+2711	Legend Warrior	ได้รับ MVP ใน Arena 1000 ครั้ง
+2712	Athletic Started	จำนวนกำจัดในสนามต่อสู้รวม 10 ครั้ง
+2713	Centurion	จำนวนกำจัดในสนามต่อสู้รวม 100 ครั้ง
+2714	Chiliarch	จำนวนกำจัดในสนามต่อสู้รวม 1000 ครั้ง
+2715	Army Chief	จำนวนกำจัดในสนามต่อสู้รวม 10000 ครั้ง
+2801	First Blood	เลเวล 45 ขึ้นไป กำจัดผู้เล่นที่อยู่ค่ายศัตรู 1 คน
+2802	Practice makes perfect	เลเวล 50 ขึ้นไป กำจัดผู้เล่นที่อยู่ค่ายศัตรู 5 คน
+2803	Gladiator	เลเวล 55 ขึ้นไป กำจัดผู้เล่นที่อยู่ค่ายศัตรู 10 คน
+2804	No mercy	เลเวล 60 ขึ้นไป กำจัดผู้เล่นที่อยู่ค่ายศัตรู 15 คน
+2805	Ruthless Killer	เลเวล 65 ขึ้นไป กำจัดผู้เล่นที่อยู่ค่ายศัตรู 20 คน
+2806	Reviving	เลเวล 70 ขึ้นไป กำจัดผู้เล่นที่อยู่ค่ายศัตรู 25 คน
+3001	Poseidon Mission	ทำภารกิจมือใหม่สำเร็จ
+3002	Tiger Return	แหกคุก Odyssey สำเร็จ
+3003	Merchant Marine Start	การเริ่มต้นใหม่ของ Magellan  ออกเดินเรือสู่มหาสมุทรอันกว้างใหญ่
+3004	Fall Short	เหจ้าหญิงโดน Pirate King แห่ง Evil Port จับตัวไป
+3005	Call On Poseidon	คะแนนของท่านทำให้ท่านมีสิทธิ์ได้ชมโพไซดอน
+3006	Princess Not Go Home	เจ้าหญิงตัดสินใจตาม Sea Phantom
+3007	Chenyaojin	Odyssey ขโมย Ram Scepter ของ Plato ไป
+3008	Kill Brave Enemies	ต่อสู้กับ Sea Phantom  จากนั้นขาดเบาะแสจาก Sea Phantom
+3009	Rebel Temple	ต่อสู่ร่วมกับเจ้าหญิง เข้าไปยัง Deep Sea Temple เพื่อหาตัว Sea Phantom
+3010	Princess Decide	เจ้าหญิง Angelina ตัดสินใจช่วยโลกนี้ไว้
+3011	Across World Promise	Angelina กับ Rosemary และท่าน บอกลาโลกนี้
+3012	True And Dream Choose One	จะต้องเลือกระหว่าง Odyssey และ Plato
+3013	World Guard	บอกลา Siren แต่ต้องมีสักวันที่เราต้องเจอกันอีก
+3014	Original Sin Seven Hero	ทำ Field Guide บุคคลสำเร็จ
+3015	Royal Sister Flower	ทำ Field Guide บุคคลสำเร็จ
+3016	 Port Royal  Navy	ทำ Field Guide บุคคลสำเร็จ
+3017	 Port Royal  EXP lorer	ทำ Field Guide บุคคลสำเร็จ
+3018	God Area	ทำ Field Guide บุคคลสำเร็จ
+3101	原罪七英雄	完成相關人物的圖鑑人物誌
+3102	皇室姐妹花	完成相關人物的圖鑑人物誌
+3103	皇家港海軍	完成相關人物的圖鑑人物誌
+3104	皇家港探險家	完成相關人物的圖鑑人物誌
+3105	神之領域	完成相關人物的圖鑑人物誌
+4001	 Rich Man	ได้รับ 100 ทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น
+4002	Custom Field Guide Collect	ทำ Field Guide สภาพแวดล้อม สำเร็จ 5 ครั้ง
+4003	Poseidon Gold Collect	ได้รับ Poseidon Gold 1000 หน่วย
+4004	Decomposition Successful	ได้รับ World Essence ระดับ 1 100 อัน
+4100	Not enough!	สะสมอุปกรณ์รูปลักษณ์ 9 ชุด
+4101	Which one is good？	สะสมอุปกรณ์รูปลักษณ์ 23 ชุด
+4102	Forever Lose One	สะสมอุปกรณ์รูปลักษณ์ 42 ชุด
+4103	Come on baby!	สะสมสัตว์สวยงาม 4 ชุด
+4104	Cute animal house	สะสมสัตว์สวยงาม 11 ชุด
+4105	I have a zoo	สะสมสัตว์สวยงาม 20 ชุด
+4201	Wilderness Bartender	ได้รับเหล้าจากการหมัก 10 ขวด
+4202	Clever Bartender	ได้รับเหล้าจากการหมัก 10 ขวด
+4203	Magic Bartender	ได้รับเหล้าจากการหมัก 10 ขวด
+4204	Wilderness Wine Stall	ได้รับเหล้าจากการหมัก 20 ขวด
+4205	Clever Wine Stall	ได้รับเหล้าจากการหมัก 20 ขวด
+4206	Magic Wine Stall	ได้รับเหล้าจากการหมัก 20 ขวด
+4207	Wilderness Bar	ได้รับเหล้าจากการหมัก 30 ขวด
+4208	Clever Bar	ได้รับเหล้าจากการหมัก 30 ขวด
+4209	Magic Bar	ได้รับเหล้าจากการหมัก 30 ขวด
+4301	Upper Class	ซื้อ Lord Red Potion 500 อัน
+4302	Purchase Master	ซื้อ Advanced Unidentified Item 10 อัน
+4303	Lavish	ซื้อ Elf Rubik's Cube อาชีพ 50 อัน
+4304	EXP Eriment Madman	ซื้อ Test Slime 100 อัน
+4305	Big Spender	ซื้อ Special Unidentified Item 20 อัน 
+5001	Rescue Beginner	ช่วยเหลือเพื่อน 10 ครั้ง
+5002	Rescue Master	ช่วยเหลือเพ่อนที่เลเวล 60 ขึ้นไป 10 ครั้ง
+5003	Hang by a hair	ช่วยเหลือเพื่อนเมื่อตัวเองเหลือเลือดน้อยกว่า 5% 5 ครั้ง
+5004	Invite wet nurse	เลเวลตนเองเกิน 50 ถูกผู้เล่นอื่นที่มีเลเวลมากกว่า 50 ช่วยเหลือ 10 ครั้ง
+5005	Pair Pair And Pair	เป็นเพื่อนร่วมเดินทางกับผู้เล่น 3 คน
+5006	Unveil the Mysteries	เปลี่ยนเพื่อนทางจดหมาย เป็นเพื่อน 3 คน
+6001	CB Pirates King	กิจกรรม CB: เมื่อ OB เริ่มขึ้นจะได้รับรางวัล CB
+6051	Halloween Pumpkin King	กิลกรรมวันฮาโลวีน: เก็บรวบรวม Kindly Pumpkin 500 อัน
+6101	In The Dark Island	กิลกรรมวันฮาโลวีน: ในระยะเวลกิจกรรม สะสมแผนที่ขุมทรัพย์ครบ 4 แผ่น
+6102	Far Exceed One's Power	กิลกรรมวันฮาโลวีน: ในระยะเวลกิจกรรม สะสมแผนที่ขุมทรัพย์ครบ 4 แผ่นล้มเหลว
+6151	White Christmas	Christmas Event: สะสม Christmas Box Gashapon 80 อัน
+6152	Santa Claus	Christmas Event: ได้รับจดหมายขอบคุณ 10 ฉบับบ
+8001	Brewing-Fruit Wine	Viciously Of Wind Lv.1
+8002	Brewing-Fruit Wine	Protect Of Brave Lv.1
+8003	Brewing-Fruit Wine	Curvet Of Horn Lv.1
+8004	Brewing-Fruit Wine	Lv1Soul Of Protect
+8005	Brewing-Fruit Wine	Civilization Of World Lv.1
+8006	Brewing-Special Wine	Attention Rum Lv.1
+8007	Brewing-Special Wine	Swallow Nest Rum Lv.1
+8008	Brewing-Special Wine	Mad Rum Lv.1
+8009	Brewing-Special Wine	Devil Rum Lv.1
+8011	Complete Treasure Map	Port Royal 
+8012	Complete Treasure Map	Prison Exile Island 
+8013	Complete Treasure Map	Spice Paradise Island 
+8014	Complete Treasure Map	Slave Market Island 
+8015	Complete Treasure Map	Evil Port 
+8016	Complete Treasure Map	Falling Sun
+8017	Complete Treasure Map	Poseidon Hall
+8018	Complete Treasure Map	Kraken Lair
+8021	Get Treasure	Hammer of Judgment
+8022	Get Treasure	Poseidon servant
+8023	Get Treasure	Ancyn Grip
+8024	Get Treasure	Lydiana Melody
+8025	Get Treasure	Treasure Hunter Bag
+8026	Get Treasure	Night  Evilteeth
+8027	Get Treasure	Caille Assault Boat Key
+8028	Get Treasure	Judge Certificate
+8031	Conquest Port Royal	เหาะเหินใน Port Royal 31 วินาที
+8032	Conquest Prison Exile Island	เหาะเหินใน Prison Exile Island 41 วินาที
+8033	Conquest Spice Paradise Island	เหาะเหินใน Spice Paradise Island 40 วินาที
+8034	Conquest Slave Market Island	เหาะเหินใน Slave Market Island 19 วินาที
+8035	Conquest Evil Port 	เหาะเหินใน Evil Port 30 วินาที
+8036	Conquest Ocean Walled City	เหาะเหินใน Ocean Walled City 45 วินาที
+8201	5 minute knock down Al Timo	กำจัด Al Timo ภายใน 300 วินาที และในทีมจะต้องมีจำนวนคนน้อยกว่า 2 คน
+8202	Dodge Cannon	หลบหลีกสกิล Dodge Cannon 3 ครั้ง
+8307	Greedy Man Plato	สำเร็จ Figures: Plato
+8308	Greed Sea Phantom	สำเร็จ Figures: Sea Phantom
+8309	Jealous ManMedea	สำเร็จ Figures: Medea
+8310	Rage Nelson	สำเร็จ Figures: Nelson
+8311	Lazy Drake	สำเร็จ Figures: Drake
+8312	Ego Odyssey	สำเร็จ Figures: Odyssey
+8313	Lust Jason	สำเร็จ Figures: Jason
+8314	 Figures:Rosemary Chapter	สำเร็จ Figures: Rosemary
+8315	 Figures:Angelina Chapter	สำเร็จ Figures: Angelina
+8316	 Figures:Bismarck Chapter	สำเร็จ Figures: Bismarck
+8317	 Figures:Isoroku Yamamoto Chapter	สำเร็จ Figures：Isoroku Yamamoto Chapter
+8318	 Figures:Columbus Chapter	สำเร็จ Figures: Columbus
+8319	 Figures:Magellan Chapter	สำเร็จ Figures: Magellan
+8320	 Figures:Siren Chapter	สำเร็จ Figures: Siren
+8321	 Figures:Death Girl Chapter	สำเร็จ Figures: Angel of Death
+8401	Brewing-Fruit Wine	หมักเหล้า ได้รับ Viciously Of Wind Lv.2
+8402	Brewing-Fruit Wine	หมักเหล้า ได้รับ Protect Of Brave Lv.2
+8403	Brewing-Fruit Wine	หมักเหล้า ได้รับ Curvet Of Horn Lv.2
+8404	Brewing-Fruit Wine	หมักเหล้า ได้รับ Soul Of Protect Lv.2
+8405	Brewing-Fruit Wine	หมักเหล้า ได้รับ Civilization Of World Lv.2
+8406	Brewing-Special Wine	หมักเหล้า ได้รับ Attention Rum Lv.2
+8407	Brewing-Special Wine	หมักเหล้า ได้รับ Swallow Nest Rum Lv.2
+8408	Brewing-Special Wine	หมักเหล้า ได้รับ Mad Rum Lv.2
+8409	Brewing-Special Wine	หมักเหล้า ได้รับ Devil Rum Lv.2
+8410	Brewing-Fruit Wine	หมักเหล้า ได้รับ Viciously Of Wind Lv.3
+8411	Brewing-Fruit Wine	หมักเหล้า ได้รับ Protect Of Brave Lv.3
+8412	Brewing-Fruit Wine	หมักเหล้า ได้รับ Curvet Of Horn Lv.3
+8413	Brewing-Fruit Wine	หมักเหล้า ได้รับ Soul Of Protect Lv.3
+8414	Brewing-Fruit Wine	หมักเหล้า ได้รับ Civilization Of World Lv.3
+8415	Brewing-Special Wine	หมักเหล้า ได้รับ Attention Rum Lv.3
+8416	Brewing-Special Wine	หมักเหล้า ได้รับ Swallow Nest Rum Lv.3
+8417	Brewing-Special Wine	หมักเหล้า ได้รับ Mad Rum Lv.3
+8418	Brewing-Special Wine	หมักเหล้า ได้รับ Devil Rum Lv.3
+8419	Brewing-Fruit Wine	หมักเหล้า ได้รับ Viciously Of Wind Lv.4
+8420	Brewing-Fruit Wine	หมักเหล้า ได้รับ Protect Of Brave Lv.4
+8421	Brewing-Fruit Wine	หมักเหล้า ได้รับ Curvet Of Horn Lv.4
+8422	Brewing-Fruit Wine	หมักเหล้า ได้รับ Soul Of Protect Lv.4
+8423	Brewing-Fruit Wine	หมักเหล้า ได้รับ Civilization Of World Lv.4
+8424	Brewing-Special Wine	หมักเหล้า ได้รับ Attention Rum Lv.4
+8425	Brewing-Special Wine	หมักเหล้า ได้รับ Swallow Nest Rum Lv.4
+8426	Brewing-Special Wine	หมักเหล้า ได้รับ Mad Rum Lv.4
+8427	Brewing-Special Wine	หมักเหล้า ได้รับ Devil Rum Lv.4
+9901	Achievement Score 1	100
+9902	Achievement Score 2	500
+9950	Rich Man 1G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 1 ทอง
+9951	Rich Man 2G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 2 ทอง
+9952	Rich Man 3G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 3 ทอง
+9953	Rich Man 4G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 4 ทอง
+9954	Rich Man 5G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 5 ทอง
+9955	Rich Man 6G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 6 ทอง
+9956	Rich Man 7G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 7 ทอง
+9957	Rich Man 8G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 8 ทอง
+9958	Rich Man 9G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 9 ทอง
+9959	Rich Man 10G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 10 ทอง
+9960	Rich Man 11G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 11 ทอง
+9961	Rich Man 12G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 12 ทอง
+9962	Rich Man 13G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 13 ทอง
+9963	Rich Man 14G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 14 ทอง
+9964	Rich Man 15G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 15 ทอง
+9965	Rich Man 16G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 16 ทอง
+9966	Rich Man 17G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 17 ทอง
+9967	Rich Man 18G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 18 ทอง
+9968	Rich Man 19G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 19 ทอง
+9969	Rich Man 20G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 20 ทอง
+9970	Rich Man 21G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 21 ทอง
+9971	Rich Man 22G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 22 ทอง
+9972	Rich Man 23G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 23 ทอง
+9973	Rich Man 24G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 24 ทอง
+9974	Rich Man 25G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 25 ทอง
+9975	Rich Man Group1	Rich Man Group 1(1G-5G)
+9976	Rich Man Group2	Rich Man Group 2(6G-10G)
+9977	Rich Man Group3	Rich Man Group 3(11G-15G)
+9978	Rich Man Group4	Rich Man Group 4(16G-20G)
+9979	Rich Man Group5	Rich Man Group 5(21G-25G)
+9980	Rich Man 100G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 1 ทอง
+9981	RichMan 200G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 2 ทอง
+9982	RichMan 300G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 3 ทอง
+9983	RichMan 400G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 4 ทอง
+9984	RichMan 500G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 5 ทอง
+9985	RichMan 600G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 6 ทอง
+9986	RichMan 700G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 7 ทอง
+9987	RichMan 800G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 8 ทอง
+9988	RichMan 900G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 9 ทอง
+9989	RichMan 1000G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 10 ทอง
+9990	RichMan 1100G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 11 ทอง
+9991	RichMan 1200G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 12 ทอง
+9992	RichMan 1300G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 13 ทอง
+9993	RichMan 1400G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 14 ทอง
+9994	RichMan 1500G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 15 ทอง
+9995	RichMan 1600G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 16 ทอง
+9996	RichMan 1700G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 17 ทอง
+9997	RichMan 1800G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 18 ทอง
+9998	RichMan 1900G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 19 ทอง
+9999	RichMan 2000G	ได้รับทองที่ไม่ใช่ได้มาจากการแลกเปลี่ยนระหว่างผู้เล่น 20 ทอง

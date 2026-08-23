@@ -1,0 +1,118 @@
+n_ID	s_VARIABLENAME	s_VARIABLECONTENT	s_SHOWTEXT
+1	n_TAG_TRADE	1	ไม่สามารถยกเลิกทิ้งได้
+2	n_TAG_TRADE	2	ไม่สามารถทำการแลกเปลี่ยนระหว่างผู้เล่นได้
+3	n_TAG_TRADE	3	ไม่สามารถทำการแลกเปลี่ยนระหว่างผู้เล่นได้, ยกเลิก
+4	n_TAG_TRADE	4	ไม่สามารถแลกเปลี่ยนกับร้านค้าได้
+5	n_TAG_TRADE	7	ไม่สามารถแลกเปลี่ยน หรือทิ้งได้
+6	n_TAG_TRADE	8	สามารถใส่ลงในคลังส่วนตัวได้เท่านั้น
+7	n_TAG_TRADE	10	ไม่สามารถแลกเปลี่ยนระหว่างผู้เล่นได้ สามารถใส่ลงในคลังส่วนตัวได้เท่านั้น
+8	n_TAG_TRADE	11	ไม่สามารถแลกเปลี่ยนระหว่างผู้เล่น หรือทิ้งได้ สามารถใส่ลงในคลังส่วนตัวได้เท่านั้น
+9	n_TAG_TRADE	12	ไม่สามารถแลกเปลี่ยนกับร้านค้าได้ สามารถใส่ลงในคลังส่วนตัวได้เท่านั้น
+10	n_TAG_TRADE	13	ไม่สามารถแลกเปลี่ยนกับร้านค้า หรือทิ้งได้ สามารถใส่ลงในคลังส่วนตัวได้เท่านั้น
+11	n_TAG_TRADE	14	ไม่สามารถทำการแลกเปลี่ยนได้ สามารถใส่ลงในคลังส่วนตัวได้เท่านั้น
+12	n_TAG_TRADE	15	ไม่สามารถแลกเปลี่ยน หรือทิ้งได้ สามารถใส่ลงในคลังส่วนตัวได้เท่านั้น
+13	n_TAG_TRADE	16	ไม่สามารถใส่ลงในคลังได้
+14	n_TAG_TRADE	20	ไม่สามารถแลกเปลี่ยนกับร้านค้า หรือใส่ลงในคลังได้
+15	n_TAG_TRADE	22	ไม่สามารถทำการแลกเปลี่ยน หรือเคลื่อนย้ายได้
+16	n_TAG_TRADE	23	ไม่สามารถทำการแลกเปลี่ยน, เคลื่อนย้าย หรือทิ้งได้
+17	n_TAG_TRADE	32	อย่างใดอย่างหนึ่ง
+18	n_TAG_TRADE	37	ไม่สามารถขาย หรือทิ้งได้ อย่างใดอย่างหนึ่ง
+19	n_TAG_TRADE	42	ไม่สามารถแลกเปลี่ยนระหว่างผู้เล่นได้ สามารถใส่ลงในคลังส่วนตัวได้เท่านั้น, อย่างใดอย่างหนึ่ง
+20	n_TAG_TRADE	46	ไม่สามารถทำการแลกเปลี่ยนได้ สามารถใส่ลงในคลังส่วนตัวได้เท่านั้น, อย่างใดอย่างหนึ่ง
+21	n_TAG_TRADE	47	ไม่สามารถแลกเปลี่ยน หรือทิ้งได้ สามารถใส่ลงในคลังส่วนตัวได้เท่านั้น, อย่างใดอย่างหนึ่ง
+22	n_TAG_TRADE	54	ไม่สามารถทำการแลกเปลี่ยน หรือเคลื่อนย้ายได้, อย่างใดอย่างหนึ่ง
+23	n_TAG_TRADE	55	ไม่สามารถทำการแลกเปลี่ยน, เคลื่อนย้าย หรือทิ้งได้, อย่างใดอย่างหนึ่ง
+101	n_CONDITION_CLASS	1	อาชีพที่ต้องการ: Gladiator
+102	n_CONDITION_CLASS	2	อาชีพที่ต้องการ: Knight
+103	n_CONDITION_CLASS	3	อาชีพที่ต้องการ: Gladiator, Knight
+104	n_CONDITION_CLASS	4	อาชีพที่ต้องการ: Sharpshooter
+105	n_CONDITION_CLASS	8	อาชีพที่ต้องการ: Voodoo
+106	n_CONDITION_CLASS	16	อาชีพที่ต้องการ: Agents of Storm
+107	n_CONDITION_CLASS	32	อาชีพที่ต้องการ: Priest
+201	n_EQUIPTYPE	1	ดาบ(มือเดียว)
+202	n_EQUIPTYPE	2	ค้อน(มือเดียว)
+203	n_EQUIPTYPE	4	โล่(มือซ้าย)
+204	n_EQUIPTYPE	8	หินแมกม่า(สองมือ)
+205	n_EQUIPTYPE	16	ปืนคู่(สองมือ)
+206	n_EQUIPTYPE	32	ตุ๊กตาวูดู(สองมือ)
+207	n_EQUIPTYPE	64	ไม้เท้า(สองมือ)
+208	n_EQUIPTYPE	128	Sword Soul (เลเวลตีบวกที่ยังไม่ถดถอย：$V2，ค่าถดถอย：$V1)
+209	n_EQUIPTYPE	256	เครื่องประดับหัว
+210	n_EQUIPTYPE	512	เสื้อ
+211	n_EQUIPTYPE	1024	กางเกง
+212	n_EQUIPTYPE	2048	ถุงมือ
+213	n_EQUIPTYPE	4096	รองเท้า
+214	n_EQUIPTYPE	8192	สร้อย
+215	n_EQUIPTYPE	16384	เหรียญ
+216	n_EQUIPTYPE	32768	แหวน
+217	n_EQUIPTYPE	65536	ข้อมือ
+218	n_EQUIPTYPE	131072	อุปกรณ์รูปลักษณ์
+219	n_EQUIPTYPE	262144	อุปกรณ์รูปลักษณ์
+220	n_EQUIPTYPE	524288	สัตว์ศักดิ์สิทธิ์
+301	s_CONSTANT_BUFF	ADD_HPMAX	พลังชีวิตสูงสุด
+302	s_CONSTANT_BUFF	ADD_RECOVER_HP	ฟื้นฟูพลังชีวิต
+303	s_CONSTANT_BUFF	ADD_STAMINAMAX	ค่าเวทย์สูงสุด
+304	s_CONSTANT_BUFF	ADD_RECOVER_STAMINA	ฟื้นฟูค่าเวทย์
+305	s_CONSTANT_BUFF	ADD_STRENGH	พลัง 
+306	s_CONSTANT_BUFF	ADD_CONSITUTION	กาย 
+307	s_CONSTANT_BUFF	ADD_AGILITY	ว่องไว 
+308	s_CONSTANT_BUFF	ADD_PERCEPTION	รู้สึก 
+309	s_CONSTANT_BUFF	ADD_INTELLECT	ปัญญา 
+310	s_CONSTANT_BUFF	ADD_DAMMIPHYSICS	โจมตีกายภาพ
+311	s_CONSTANT_BUFF	ADD_DAMMIMAGIC	โจมตีเวทย์
+312	s_CONSTANT_BUFF	ADD_DAMPLUS_PHYSICS	โจมตีหนักกายภาพ
+313	s_CONSTANT_BUFF	ADD_DAMPLUS_MAGIC	โจมตีหนักเวทย์
+314	s_CONSTANT_BUFF	ADD_AC_PHYSICS	ป้องกันกายภาพ
+315	s_CONSTANT_BUFF	ADD_AC_MAGIC	ป้องกันเวทย์
+316	s_CONSTANT_BUFF	ADD_ABSORB_PHYSICS	ลดความเสียหายกายภาพ
+317	s_CONSTANT_BUFF	ADD_ABSORB_MAGIC	ลดความเสียหายเวทย์
+318	s_CONSTANT_BUFF	ADD_PENETRATE_PHYSICS	กายภาพทะลุเกราะ
+319	s_CONSTANT_BUFF	ADD_PENETRATE_MAGIC	เวทย์ทะลุเกราะ
+320	s_CONSTANT_BUFF	ADD_ANTI_STUN	ต้านมึนงง
+321	s_CONSTANT_BUFF	ADD_STUN	มึนงง
+322	s_CONSTANT_BUFF	ADD_ANTI_CURSE	ต้านคำสาป
+323	s_CONSTANT_BUFF	ADD_CURSE	คำสาป
+324	s_CONSTANT_BUFF	ADD_HITRATE	แม่นยำ
+325	s_CONSTANT_BUFF	ADD_DODGE	หลบหลีก
+326	s_CONSTANT_BUFF	ADD_POWERHIT	คริติคอล
+327	s_CONSTANT_BUFF	ADD_ANTI_POWERHIT	ต้านอัตราคริติคอล 
+328	s_CONSTANT_BUFF	ADD_BYPASS	มองข้ามการป้องกัน
+329	s_CONSTANT_BUFF	ADD_OVERHIT	อัตราสังหาร
+330	s_CONSTANT_BUFF	ADD_MULTIPLY_POWERDAM	อัตราสังหาร
+331	s_CONSTANT_BUFF	ADD_ABSORB_POWERDAM	ลดความเสียหายคริติคอล
+332	s_CONSTANT_BUFF	ADD_ABSORB_SHIELD	ลดความเสียหายการรับมือ
+333	s_CONSTANT_BUFF	ADD_BLOCKRATE	รับมือ
+334	s_CONSTANT_BUFF	ADD_SPEED_RUN	ความเร็วเคลื่อนที่
+335	s_CONSTANT_BUFF	MUL_HPMAX	พลังชีวิตสูงสุด
+336	s_CONSTANT_BUFF	MUL_STR	พลัง 
+337	s_CONSTANT_BUFF	MUL_CON	กาย 
+338	s_CONSTANT_BUFF	MUL_AGI	ว่องไว 
+339	s_CONSTANT_BUFF	MUL_PER	รู้สึก 
+340	s_CONSTANT_BUFF	MUL_INT	ปัญญา 
+341	s_CONSTANT_BUFF	MUL_DAMMIPHYSICS	โจมตีกายภาพ
+342	s_CONSTANT_BUFF	MUL_DAMMIMAGIC	โจมตีเวทย์
+343	s_CONSTANT_BUFF	MUL_DAMPLUS_PHYSICS	โจมตีหนักกายภาพ
+344	s_CONSTANT_BUFF	MUL_DAMPLUS_MAGIC	โจมตีหนักเวทย์
+345	s_CONSTANT_BUFF	MUL_AC_PHYSICS	ป้องกันกายภาพ
+346	s_CONSTANT_BUFF	MUL_AC_MAGIC	ป้องกันเวทย์
+347	s_CONSTANT_BUFF	MUL_ABSORB_PHYSICS	ลดความเสียหายกายภาพ
+348	s_CONSTANT_BUFF	MUL_ABSORB_MAGIC	ลดความเสียหายเวทย์
+349	s_CONSTANT_BUFF	MUL_PENETRATE_PHYSICS	กายภาพทะลุเกราะ
+350	s_CONSTANT_BUFF	MUL_PENETRATE_MAGIC	เวทย์ทะลุเกราะ
+351	s_CONSTANT_BUFF	MUL_ABSORB_SHIELD	ลดความเสียหายการรับมือ
+352	s_CONSTANT_BUFF	DRAIN_LIFE	ดูดเลือด
+401	s_TAG_EXTRA	3	หินตีบวก
+402	s_TAG_EXTRA	7	ผลึกฝังประดับ
+403	s_TAG_EXTRA	11	ส่วนบำรุง
+404	s_TAG_EXTRA	17	สูตรหมักเหล้า
+405	s_TAG_EXTRA	20	ชิ้นส่วน Field Guide 
+406	s_TAG_EXTRA	29	ไอเทมหล่อ
+407	s_TAG_EXTRA	31	หนังสือสกิลลูกเรือ
+408	s_TAG_EXTRA	32	ไอเทมชั้นวางของ
+409	s_TAG_EXTRA	34	จำนวนความจุที่เหลือ: 
+410	s_TAG_EXTRA	35	ไอเทมเรียก
+411	s_TAG_EXTRA	36	ไอเทมเรียก
+501	n_TAG_LOOT	4	ย้อมสีได้
+502	n_TAG_LOOT	2048	ไอเทมภารกิจ
+601	n_CONDITION_GENDER	1	เพศ: ชาย
+602	n_CONDITION_GENDER	2	เพศ: หญิง

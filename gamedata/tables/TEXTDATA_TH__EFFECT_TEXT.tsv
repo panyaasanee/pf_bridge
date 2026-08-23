@@ -1,0 +1,183 @@
+n_ID	s_TITLE	s_TIP
+1	Success Rate	เมื่อหลอมผลึก เพิ่มอัตราสำเร็จ 30%
+2	กระโดด VIP	สามารถใช้กระโดด VIP สามารถกระโดดได้สูงมากๆ!
+3	กระโดด VIP	สามารถใช้กระโดด VIP สามารถกระโดดได้สูงมากๆ!
+4	Refined Guarantee	เพิ่มจำนวนประกันการหลอม
+5	กระโดด VIP	สามารถใช้กระโดด VIP สามารถกระโดดได้สูงมากๆ!
+8	EXP Stone Lv.1( Element Exchange)	Exp ที่ได้จากการต่อสู้ +2%
+9	EXP Stone Lv.2( Element Exchange)	Exp ที่ได้จากการต่อสู้ +4%
+10	EXP Stone Lv.3( Element Exchange)	Exp ที่ได้จากการต่อสู้ +6%
+11	EXP Stone Lv.4( Element Exchange)	Exp ที่ได้จากการต่อสู้ +8%
+12	EXP Stone Lv.5( Element Exchange)	Exp ที่ได้จากการต่อสู้ +10%
+13	Skill Stone Lv.1( Element Exchange)	แต้มสกิลที่ได้จากการต่อสู้ +2%
+14	Skill Stone Lv.2( Element Exchange)	แต้มสกิลที่ได้จากการต่อสู้ +4%
+15	Skill Stone Lv.3( Element Exchange)	แต้มสกิลที่ได้จากการต่อสู้ +6%
+16	Skill Stone Lv.4( Element Exchange)	แต้มสกิลที่ได้จากการต่อสู้ +8%
+17	Skill Stone Lv.5( Element Exchange)	แต้มสกิลที่ได้จากการต่อสู้ +10%
+73	Growing Soul Lv.1	EXP ที่ได้จากการต่อสู้ +2%
+74	Growing Soul Lv.2	EXP ที่ได้จากการต่อสู้ +4%
+75	Growing Soul Lv.3	EXP ที่ได้จากการต่อสู้ +6%
+76	Growing Soul Lv.4	EXP ที่ได้จากการต่อสู้ +8%
+77	Growing Soul Lv.5	EXP ที่ได้จากการต่อสู้ +10%
+78	Growing Soul Lv.6	EXP ที่ได้จากการต่อสู้ +12%
+79	Growing Soul Lv.7	EXP ที่ได้จากการต่อสู้ +14%
+80	Growing Soul Lv.8	EXP ที่ได้จากการต่อสู้ +16%
+81	Growing Soul Lv.9	EXP ที่ได้จากการต่อสู้ +18%
+82	Growing Soul Lv.10	EXP ที่ได้จากการต่อสู้ +20%
+85	Bag Hire	ได้รับบริการเช่ากระเป๋า 40 ช่อง
+86	Lucky Strengthen	การตีบวกครั้งต่อไป มีโอกาสได้รับLucky Strengthen
+87	Bag Hire	ได้รับบริการเช่ากระเป๋า 40 ช่อง
+89	Warehouse Hire	ได้รับบริการเช่าคลัง 40 ช่อง
+90	Crew Special Skill Grid Hire	เช่าช่องสกิลพิเศษ
+91	VIP-Variable Grid Reward	มีสิทธิ์ในการใช้ช่องVIP
+92	Auction Limit	เพิ่มช่องไอเทมการประมูล 15 ช่อง
+93	EXP Bonus(Task)	EXP ที่ได้จากการต่อสู้ +5%
+94	Skill Point Bonus(Task)	แต้มสกิลที่ได้จากการต่อสู้ +5%
+95	Special Soul Lv.1	แต้มสกิลที่ได้จากการต่อสู้ +2%
+96	Special Soul Lv.2	แต้มสกิลที่ได้จากการต่อสู้ +4%
+97	Special Soul Lv.3	แต้มสกิลที่ได้จากการต่อสู้ +6%
+98	Special Soul Lv.4	แต้มสกิลที่ได้จากการต่อสู้ +8%
+99	Special Soul Lv.5	แต้มสกิลที่ได้จากการต่อสู้ +10%
+100	Special Soul Lv.6	แต้มสกิลที่ได้จากการต่อสู้ +12%
+101	Special Soul Lv.7	แต้มสกิลที่ได้จากการต่อสู้ +14%
+102	Special Soul Lv.8	แต้มสกิลที่ได้จากการต่อสู้ +16%
+103	Special Soul Lv.9	แต้มสกิลที่ได้จากการต่อสู้ +18%
+104	Special Soul Lv.10	แต้มสกิลที่ได้จากการต่อสู้ +20%
+105	Artisan Soul Lv.1	อัตราสำเร็จในการหลอม +1%
+106	Artisan Soul Lv.2	อัตราสำเร็จในการหลอม +2%
+107	Artisan Soul Lv.3	อัตราสำเร็จในการหลอม +3%
+108	Artisan Soul Lv.4	อัตราสำเร็จในการหลอม +4%
+109	Artisan Soul Lv.5	อัตราสำเร็จในการหลอม +5%
+110	Artisan Soul Lv.6	อัตราสำเร็จในการหลอม +6%
+111	Artisan Soul Lv.7	อัตราสำเร็จในการหลอม +7%
+112	Artisan Soul Lv.8	อัตราสำเร็จในการหลอม +8%
+113	Artisan Soul Lv.9	อัตราสำเร็จในการหลอม +9%
+114	Artisan Soul Lv.10	อัตราสำเร็จในการหลอม +10%
+115	Friend Soul Lv.1	ค่าความสนิทที่ได้รับจากการต่อสู้ +10%
+116	Friend Soul Lv.2	ค่าความสนิทที่ได้รับจากการต่อสู้ +20%
+117	Friend Soul Lv.3	ค่าความสนิทที่ได้รับจากการต่อสู้ +30%
+118	Friend Soul Lv.4	ค่าความสนิทที่ได้รับจากการต่อสู้ +40%
+119	Friend Soul Lv.5	ค่าความสนิทที่ได้รับจากการต่อสู้ +50%
+120	Friend Soul Lv.6	ค่าความสนิทที่ได้รับจากการต่อสู้ +60%
+121	Friend Soul Lv.7	ค่าความสนิทที่ได้รับจากการต่อสู้ +70%
+122	Friend Soul Lv.8	ค่าความสนิทที่ได้รับจากการต่อสู้ +80%
+123	Friend Soul Lv.9	ค่าความสนิทที่ได้รับจากการต่อสู้ +90%
+124	Friend Soul Lv.10	ค่าความสนิทที่ได้รับจากการต่อสู้ +100%
+125	EXP lore Soul Lv.1	อัตราโชคลาภในการดรอปของ +1%
+126	EXP lore Soul Lv.2	อัตราโชคลาภในการดรอปของ +2%
+127	EXP lore Soul Lv.3	อัตราโชคลาภในการดรอปของ +3%
+128	EXP lore Soul Lv.4	อัตราโชคลาภในการดรอปของ +4%
+129	EXP lore Soul Lv.5	อัตราโชคลาภในการดรอปของ +5%
+130	EXP lore Soul Lv.6	อัตราโชคลาภในการดรอปของ +6%
+131	EXP lore Soul Lv.7	อัตราโชคลาภในการดรอปของ +7%
+132	EXP lore Soul Lv.8	อัตราโชคลาภในการดรอปของ +8%
+133	EXP lore Soul Lv.9	อัตราโชคลาภในการดรอปของ +9%
+134	EXP lore Soul Lv.10	อัตราโชคลาภในการดรอปของ +10%
+135	Thorough Eye	EXP ที่ได้จากการต่อสู้ +5%
+136	Chic Cap	แต้มสกิลที่ได้จากการต่อสู้ +5%
+138	Lucky Gathering	อัตราโชคลาภในการดรอปของ +10%
+139	Lucky Gathering	อัตราโชคลาภในการดรอปของ +10%
+140	EXP Bonus(VIP)	EXP ที่ได้จากการต่อสู้ +30%
+141	Skill Point Bonus(VIP)	แต้มสกิลที่ได้จากการต่อสู้ +30%
+142	Dungeon Reset	เข้าดันเจี้ยน 2 ดาวไม่ต้องใช้แต้ม
+143	Statas Reset	รีเซ็ทค่าสเตตัสไม่ต้องใช้แต้ม
+144	Bag Hire	สามารถเช่าช่องในกระเป๋าได้ 40 ช่อง
+145	VIP-Variable Grid Reward	มีสิทธิ์ในการใช้ช่อง VIP
+146	Auction Limit	เพิ่มช่องไอเทมการประมูล 15 ช่อง
+147	EXP Bonus(VIP)	EXP ที่ได้จากการต่อสู้ +30%
+148	Skill Point Bonus(VIP)	แต้มสกิลที่ได้จากการต่อสู้ +30%
+149	Dungeon Reset	เข้าดันเจี้ยน 2 ดาวไม่ต้องใช้แต้ม
+150	Statas Reset	รีเซ็ทค่าสเตตัสไม่ต้องใช้แต้ม
+151	Lucky Gathering	อัตราโชคลาภในการดรอปของ +10％
+152	Crew Special Skill Grid Hire	เช่าช่องสกิลพิเศษ
+153	EXP Bonus(Iten Mall)	EXP ที่ได้จากการต่อสู้ +20%
+154	Skill Point Bonus(Iten Mall)	แต้มสกิลที่ได้จากการต่อสู้ +20%
+155	Crew Special Skill Grid Hire	เช่าช่องสกิลพิเศษ
+156	Penfriend Receiving Bonus	ได้รับจดหมายจากเพื่อนทางจดหมาย, EXP ที่ได้จากการต่อสู้ และแต้มสกิล +1%
+157	Penfriend Receiving Bonus	ได้รับจดหมายจากเพื่อนทางจดหมาย, EXP ที่ได้จากการต่อสู้ และแต้มสกิล +1%
+158	Penfriend Receiving Bonus	ได้รับจดหมายจากเพื่อนทางจดหมาย, EXP ที่ได้จากการต่อสู้ และแต้มสกิล +1%
+159	Penfriend Receiving Bonus	ได้รับจดหมายจากเพื่อนทางจดหมาย, EXP ที่ได้จากการต่อสู้ และแต้มสกิล +1%
+160	Penfriend Receiving Bonus	ได้รับจดหมายจากเพื่อนทางจดหมาย, EXP ที่ได้จากการต่อสู้ และแต้มสกิล +1%
+161	Penfriend Skill Point Bonus	
+162	Penfriend Skill Point Bonus	
+163	Penfriend Skill Point Bonus	
+164	Penfriend Skill Point Bonus	
+165	Penfriend Skill Point Bonus	
+166	Instant Warehouse	สามารถใช้ Instant Warehouse
+167	Instant Box	สามารถใช้ Instant Box
+168	Instant Shop	สามารถใช้ Instant Shop
+169	Instant Warehouse	สามารถใช้ Instant Warehouse
+170	Instant Box	สามารถใช้ Instant Box
+171	Instant Shop	สามารถใช้ Instant Shop
+172	Instant Warehouse	สามารถใช้ Instant Warehouse
+173	Instant Box	สามารถใช้ Instant Box
+174	Instant Shop	สามารถใช้ Instant Shop
+175	Editing Character Service	ฟังก์ชั่นที่ใช้ในหน้าเลือกตัวละคร
+176	Instant Box	สามารถใช้ Instant Box
+177	Crew Special Skill Grid Hire	เช่าช่องสกิลพิเศษ
+178	EXP Bonus(Iten Mall)	EXP ที่ได้จากการต่อสู้ +20%
+179	Skill Point Bonus(Iten Mall)	แต้มสกิลที่ได้จากการต่อสู้ +20%
+180	Bag Hire	สามารถเช่าช่องในกระเป๋าได้ 40 ช่อง
+181	Auction Limit	เพิ่มช่องไอเทมการประมูล 15 ช่อง
+182	Dungeon Reset	เข้าดันเจี้ยน 2 ดาวไม่ต้องใช้แต้ม
+183	Statas Reset	รีเซ็ทค่าสเตตัสไม่ต้องใช้แต้ม
+184	Regenaration	เมื่อฟื้นคืนชีพไม่ต้องใช้แต้ม
+185	Regenaration	เมื่อฟื้นคืนชีพไม่ต้องใช้แต้ม
+186	Regenaration	เมื่อฟื้นคืนชีพไม่ต้องใช้แต้ม
+187	Treasure Bowl	ทุกๆ 10 วินาที ได้รับ 5 ทองแดง
+188	Treasure Bowl	ทุกๆ 10 วินาที ได้รับ 10 ทองแดง
+189	Treasure Bowl	ทุกๆ 10 วินาที ได้รับ 15 ทองแดง
+190	Treasure Bowl	ทุกๆ 10 วินาที ได้รับ 10 ทองแดง
+191	Treasure Bowl	ทุกๆ 10 วินาที ได้รับ 20 ทองแดง
+192	Treasure Bowl	ทุกๆ 10 วินาที ได้รับ 30 ทองแดง
+193	Treasure Bowl	ทุกๆ 10 วินาที ได้รับ 20 ทองแดง
+194	Treasure Bowl	ทุกๆ 10 วินาที ได้รับ 35 ทองแดง
+195	Treasure Bowl	ทุกๆ 10 วินาที ได้รับ 50 ทองแดง
+196	Treasure Bowl	ทุกๆ 10 วินาที ได้รับ 35 ทองแดง
+197	Treasure Bowl	ทุกๆ 10 วินาที ได้รับ 55 ทองแดง
+198	Treasure Bowl	ทุกๆ 10 วินาที ได้รับ 75 ทองแดง
+199	EXP Bonus(CCB)	EXP ที่ได้จากการต่อสู้ +100%
+200	Instant Warehouse	สามารถใช้ Instant Warehouse
+201	Instant Shop	สามารถใช้ Instant Shop
+202	Settlement Chest Choice	จำนวนการเลือกสมบัติเมื่อจบดันเจี้ยน
+203	Settlement Chest Choice	จำนวนการเลือกสมบัติเมื่อจบดันเจี้ยน
+204	Settlement Chest Choice	จำนวนการเลือกสมบัติเมื่อจบดันเจี้ยน
+205	Settlement Chest Choice	จำนวนการเลือกสมบัติเมื่อจบดันเจี้ยน
+206	EXP Bonus(VIP)	EXP ที่ได้จากการต่อสู้ +30%
+207	Skill Point Bonus(VIP)	แต้มสกิลที่ได้จากการต่อสู้ +30%
+208	Settlement Chest  Choice	จำนวนการเลือกสมบัติเมื่อจบดันเจี้ยน
+209	EXP Bonus(Battle)	EXP ที่ได้จากการต่อสู้ +20%
+210	Warehouse Hire	ได้รับบริการเช่าคลัง 40 ช่อง
+211	Warehouse Hire	ได้รับบริการเช่าคลัง 40 ช่อง
+212	Instant Warehouse	สามารถใช้ Instant Warehouse
+251	รีเซ็ทแต้มชั้นวางของ	สามารถรีเซ็ทฟรี 1 ครั้ง
+252	(不使用)	(不使用)
+2001	Penfriend Send Bonus	ส่งจดหมายเพื่อนทางจดหมาย, EXP ที่ได้จากการต่อสู้ และแต้มสกิล +1%
+2002	Penfriend Send Bonus	ส่งจดหมายเพื่อนทางจดหมาย, EXP ที่ได้จากการต่อสู้ และแต้มสกิล +1%
+2003	Penfriend Send Bonus	ส่งจดหมายเพื่อนทางจดหมาย, EXP ที่ได้จากการต่อสู้ และแต้มสกิล +1%
+2004	Penfriend Send Bonus	ส่งจดหมายเพื่อนทางจดหมาย, EXP ที่ได้จากการต่อสู้ และแต้มสกิล +1%
+2005	Penfriend Send Bonus	ส่งจดหมายเพื่อนทางจดหมาย, EXP ที่ได้จากการต่อสู้ และแต้มสกิล +1%
+2501		
+2502		
+2503		
+2504		
+2505		
+2506		
+2507		
+2508		
+2509		
+2510		
+8001	EXP  Bonus(Net Café)	ได้รับ EXP จากการต่อสู้ +10%
+8002	Skill Point Bonus(Net Café)	ได้รับแต้มสกิลจากการต่อสู้ +10%
+8003	เพิ่มความเร็วฟื้นฟูค่าขวัญ(Net Café)	เพิ่มความเร็วฟื้นฟูค่าขวัญ 20%
+9001	Crew Special Skill Grid Hire	เช่าช่องสกิลพิเศษ
+9002	Settlement Chest  Choice	ใช้ทดสอบ, จำนวนที่สามารถเลือกสมบัติอื่นๆ
+9003	Get Money	ใช้ทดสอบ, ทุกๆ 10 วินาที ได้รับ 100 ทองแดง
+9005	General Bag Hire 10 Point	ใช้ทดสอบ, General Bag Hire(40 ช่อง)
+9006	VIP Bag Hire10 Point	ใช้ทดสอบ, VIPBag Hire(80 ช่อง)
+9007	Warehouse Hire10 Point	ใช้ทดสอบ, Warehouse Hire(40 ช่อง)
+9008	Instant Warehouse(3 Day)	ใช้ทดสอบ, Instant Warehouse
+9009	Instant Box(3 Day)	ใช้ทดสอบ, Instant Box
+9010	Instant Shop(3 Day)	ใช้ทดสอบ, Instant Shop
+9011	Regenaration	ใช้ทดสอบ, เมื่อฟื้นคืนชีพไม่ต้องใช้แต้ม
+9012	เช่ากระดานแผงลอย	ใช้ทดสอบ, เช่าป้ายแผงลอย

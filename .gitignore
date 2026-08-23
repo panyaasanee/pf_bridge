@@ -88,6 +88,29 @@
 !/external/PF_DATA_EVIDENCE.tsv
 !/external/PF_TAG_CENSUS.tsv
 
+# ---- gamedata/: every table from the game's own data files, extracted by
+# pf_extract_gamedata.py (188 tables / 2,365 columns from the 4 B_*.pc_
+# files).  Panya ruled 2026-08-23 that derived material may go to the
+# remote, and this repo is private.
+#
+# Why this block uses shapes and not one line per file, unlike external/:
+# external/ mixes derived tables with extractor scripts that carry
+# hardcoded byte guards, so every member there needs a human eye.  This
+# folder holds nothing but one script's output.  Swept before opening it:
+# columns whose size is not 1/2/4/8 (the only path that would emit
+# raw.hex()) = 0, and long hex blobs across all 188 TSVs = 0.  Every value
+# is an int, a float or a game string.  Anything that is not one of the
+# shapes below stays ignored, so a stray file cannot ride along.
+!/gamedata/
+/gamedata/*
+!/gamedata/00_SEARCH_HERE_FIRST.md
+!/gamedata/PF_GAMEDATA_INDEX.tsv
+!/gamedata/PF_GAMEDATA_COLUMNS.tsv
+!/gamedata/pf_extract_gamedata.py
+!/gamedata/_*_meta.json
+!/gamedata/tables/
+!/gamedata/tables/*.tsv
+
 # ---- workflows: merge a cloud round's pull request (chief round 110) ----
 # Line 1 of this file is `/*`, so git does not even descend into .github/
 # unless the directory is opened by name BEFORE its contents.  Both lines are

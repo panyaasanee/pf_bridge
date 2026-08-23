@@ -1,0 +1,5 @@
+n_ID	n_FRIENDLY_MIN	n_FRIENDLY_MAX	n_BUFFID	s_EMOTION
+1	0	25	10901	Icon_Emotion_Furious
+2	26	50	10902	Icon_Emotion_Despondent
+3	51	75	10903	Icon_Emotion_Cheerful
+4	76	100	10904	Icon_Emotion_Love

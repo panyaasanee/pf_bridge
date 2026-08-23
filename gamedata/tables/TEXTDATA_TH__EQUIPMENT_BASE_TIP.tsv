@@ -1,0 +1,1342 @@
+n_ID	s_NAME	s_COMMON	s_EQUIPED	s_USED
+1	Experience Sword Soul	ขอบขวัญที่ผู้เชี่ยวชาญให้ มีพลังงานลึกลับแฝงอยู่ Sword Soul ที่ทำการตีบวกแล้ว สามารถทำให้อาวุธเพิ่มประสิทธิภาพได้	ค่าตีบวกของ Sword Soul ที่สวมใส่อยู่จะมีผลต่อ เลเวลตีบวกของอาวุธ! (เลเวลตีบวกไม่สามารถเยอะกว่าค่าจำกัดของการตีบวกได้)\nค่าตีบวกของ Sword Soul ไม่สามารถโอนย้ายได้	
+2	Create Character Blade			
+3	Create Character Hammer			
+4	Create Character Shield			
+5	Create Character Pumice			
+6	Create Character Short Gun			
+7	Create Character Rabbit			
+8	Create Character Staff			
+9	Sword Soul	Sword Soul ที่หาซื้อได้จากร้านค้า มีพลังงานลึกลับแฝงอยู่ Sword Soul ที่ทำการตีบวกแล้ว สามารถทำให้อาวุธเพิ่มประสิทธิภาพได้ ค่าตีบวกเริ่มต้น: 10	ค่าตีบวกของ Sword Soul ที่สวมใส่อยู่จะมีผลต่อ เลเวลตีบวกของอาวุธ! (เลเวลตีบวกไม่สามารถเยอะกว่าค่าจำกัดของการตีบวกได้)\nค่าตีบวกของ Sword Soul ไม่สามารถโอนย้ายได้	
+10	Sword Soul	Sword Soul ที่ตีบวกถึงขั้นสูงสุด แต่ว่านานแล้วที่ไม่ใช้มัน จะต้องใช้คนที่มีความสามารถมาฟื้นฟูมัน แต่ก็อาจอยู่ได้แค่ 3 ชั่วโมงเท่านั้น	ค่าตีบวกของSword Soulที่สวมใส่อยู่จะช่วยให้อาวุธมีพลังมากขึ้น!(เลเวลตีบวกของอาวุธไม่สามารถเยอะไปกว่าจำนวนสูงสุดของเลเวลตีบวกสูงสุดของอาวุธได้)	
+11	High Sword Soul	มีพลังงานลึกลับแฝงอยู่ Sword Soul ที่ทำการตีบวกแล้ว สามารถทำให้อาวุธเพิ่มประสิทธิภาพได้ ค่าตีบวกเริ่มต้น: 15\nเมื่อตีบวก Sword Soul ถึงเลเวล 16 แล้ว เมื่อใช้สกิลจะมีโอกาสได้รับค่าถดถอย 1 แต้ม เมื่อค่าถดถอยถึง 100 แต้ม Sword Soul จะถูกลดเลเวลลงมา 1 เลเวล สามารถใช้ [Energy Crystal] มาฟื้นฟูค่าถดถอยได้	ค่าตีบวกของ Sword Soul ที่สวมใส่อยู่จะมีผลต่อ เลเวลตีบวกของอาวุธ! (เลเวลตีบวกไม่สามารถเยอะกว่าค่าจำกัดของการตีบวกได้)\nค่าตีบวกของ Sword Soul ไม่สามารถโอนย้ายได้	
+12	High Sword Soul	มีพลังงานลึกลับแฝงอยู่ Sword Soul ที่ทำการตีบวกแล้ว สามารถทำให้อาวุธเพิ่มประสิทธิภาพได้ ค่าตีบวกเริ่มต้น：15\nเมื่อตีบวก Sword Soul ถึงเลเวล 16 แล้ว เมื่อใช้สกิลจะมีโอกาสได้รับค่าถดถอย 1 แต้ม เมื่อค่าถดถอยถึง 100 แต้ม Sword Soul จะถูกลดเลเวลลงมา 1 เลเวล สามารถใช้ [Energy Crystal] มาฟื้นฟูค่าถดถอยได้	ค่าตีบวกของ Sword Soul ที่สวมใส่อยู่จะมีผลต่อ เลเวลตีบวกของอาวุธ! (เลเวลตีบวกไม่สามารถเยอะกว่าค่าจำกัดของการตีบวกได้)\nค่าตีบวกของ Sword Soul ไม่สามารถโอนย้ายได้	
+13	God Sword Soul	มีพลังงานลึกลับแฝงอยู่ Sword Soul ที่ทำการตีบวกแล้ว สามารถทำให้อาวุธเพิ่มประสิทธิภาพได้ ค่าตีบวกเริ่มต้น：20\nเมื่อตีบวก Sword Soul ถึงเลเวล 16 แล้ว เมื่อใช้สกิลจะมีโอกาสได้รับค่าถดถอย 1 แต้ม เมื่อค่าถดถอยถึง 100 แต้ม Sword Soul จะถูกลดเลเวลลงมา 1 เลเวล สามารถใช้ [Energy Crystal] มาฟื้นฟูค่าถดถอยได้	ค่าตีบวกของ Sword Soul ที่สวมใส่อยู่จะมีผลต่อ เลเวลตีบวกของอาวุธ! (เลเวลตีบวกไม่สามารถเยอะกว่าค่าจำกัดของการตีบวกได้)\nค่าตีบวกของ Sword Soul ไม่สามารถโอนย้ายได้	
+14	God Sword Soul	มีพลังงานลึกลับแฝงอยู่ Sword Soul ที่ทำการตีบวกแล้ว สามารถทำให้อาวุธเพิ่มประสิทธิภาพได้ ค่าตีบวกเริ่มต้น：20\nเมื่อตีบวก Sword Soul ถึงเลเวล 16 แล้ว เมื่อใช้สกิลจะมีโอกาสได้รับค่าถดถอย 1 แต้ม เมื่อค่าถดถอยถึง 100 แต้ม Sword Soul จะถูกลดเลเวลลงมา 1 เลเวล สามารถใช้ [Energy Crystal] มาฟื้นฟูค่าถดถอยได้	ค่าตีบวกของ Sword Soul ที่สวมใส่อยู่จะมีผลต่อ เลเวลตีบวกของอาวุธ! (เลเวลตีบวกไม่สามารถเยอะกว่าค่าจำกัดของการตีบวกได้)\nค่าตีบวกของ Sword Soul ไม่สามารถโอนย้ายได้	
+15	Holy Sword Soul	มีพลังงานลึกลับแฝงอยู่ Sword Soul ที่ทำการตีบวกแล้ว สามารถทำให้อาวุธเพิ่มประสิทธิภาพได้ ค่าตีบวกเริ่มต้น：25\nเมื่อตีบวก Sword Soul ถึงเลเวล 16 แล้ว เมื่อใช้สกิลจะมีโอกาสได้รับค่าถดถอย 1 แต้ม เมื่อค่าถดถอยถึง 100 แต้ม Sword Soul จะถูกลดเลเวลลงมา 1 เลเวล สามารถใช้ [Energy Crystal] มาฟื้นฟูค่าถดถอยได้	ค่าตีบวกของ Sword Soul ที่สวมใส่อยู่จะมีผลต่อ เลเวลตีบวกของอาวุธ! (เลเวลตีบวกไม่สามารถเยอะกว่าค่าจำกัดของการตีบวกได้)\nค่าตีบวกของ Sword Soul ไม่สามารถโอนย้ายได้	
+16	Holy Sword Soul	มีพลังงานลึกลับแฝงอยู่ Sword Soul ที่ทำการตีบวกแล้ว สามารถทำให้อาวุธเพิ่มประสิทธิภาพได้ ค่าตีบวกเริ่มต้น：25\nเมื่อตีบวก Sword Soul ถึงเลเวล 16 แล้ว เมื่อใช้สกิลจะมีโอกาสได้รับค่าถดถอย 1 แต้ม เมื่อค่าถดถอยถึง 100 แต้ม Sword Soul จะถูกลดเลเวลลงมา 1 เลเวล สามารถใช้ [Energy Crystal] มาฟื้นฟูค่าถดถอยได้	ค่าตีบวกของ Sword Soul ที่สวมใส่อยู่จะมีผลต่อ เลเวลตีบวกของอาวุธ! (เลเวลตีบวกไม่สามารถเยอะกว่าค่าจำกัดของการตีบวกได้)\nค่าตีบวกของ Sword Soul ไม่สามารถโอนย้ายได้	
+20	Willeson	อาวุธดีเยี่ยม ทุกคนบนเกาะกลัวมัน มันสามารถกำจัดมอนสเตอร์ได้อย่างเฉียบขาด!		
+201	Dagger	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+202	Sharp Dagger	เป็นไม้คุนภาพดีจากการหล่อ สามารถนำมาทำเป็นมีดคุณภาพสูงได้		
+203	Colorful Wing	นกที่ป้องกันป่าเขาลำเนาไพร ใช้เสียงเรียกความอุดมสมบูรณ์กลับคือสู่ป่า		
+204	Red Feather Hook	ความเย่อหยิ่งของราชาแห่งท้องฟ้า		
+205	Blood Sickle	เสียงของความตายเริ่มใกล้เข้ามาแล้ว		
+206	Low Dagger	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+207	War Dagger Lv.5	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+208	Fire Of Sharp	ดาบที่หลอมด้วยไฟที่เดือดดาล พิชิตสัตว์ร้าย แม้แต่ผู้พิชิตยังต้องระวังในความสวยงามของมัน		
+209	Sharp Dagger	เป็นไม้คุนภาพดีจากการหล่อ สามารถนำมาทำเป็นมีดคุณภาพสูงได้		
+210	1War Dagger Lv.5	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+211	2War Dagger Lv.5	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+212	War Sharp Dagger Lv.35	เป็นไม้คุนภาพดีจากการหล่อ สามารถนำมาทำเป็นมีดคุณภาพสูงได้		
+213	Kingfisher Hook	นักผจญภัยแห่งท้องฟ้าผู้ไม่เคยพ่ายแพ้ใคร แม้แต่ลมพายุก็ไม่เคยเกรงกลัว		
+214	Iron Fine sword			
+215	Pirate Sword			
+216	Colorful Wing	ได้จากนกที่ป้องกันป่าเขาลำเนาไพร		
+217	Colorful Wing	ได้จากนกที่ป้องกันป่าเขาลำเนาไพร		
+218	Colorful Wing	ได้จากนกที่ป้องกันป่าเขาลำเนาไพร		
+219	Colorful Wing	ได้จากนกที่ป้องกันป่าเขาลำเนาไพร		
+220	Colorful Wing	ได้จากนกที่ป้องกันป่าเขาลำเนาไพร		
+221	War Sharp Dagger Lv.40	เป็นไม้คุนภาพดีจากการหล่อ สามารถนำมาทำเป็นมีดคุณภาพสูงได้		
+222	Soldier Sword	ดาบที่ต้องพกติดตัวตลอดของทหารปลดเกษียน แต่มันก็เก่ามากแล้ว เอามาตัดฟืนจะดีกว่า		
+223	Uranium Sword	ดาบหล่อทองพิเศษ เต็มไปด้วยความน่าเกรงขาม สีของมันอาจทำให้คนตกใจได้		
+224	Strong Iron sword	เหมาะกับการโจมตีไว มีน้ำหนักเบา สามารถตีรำฟันแทงไปได้ทุกทิศ		
+225	Ghost Magic Blade	ดาบวิญญาณได้มาจากการหล่อจากไฟนรก	สามารถทดลองสกิลในอนาคตได้!	
+401	Guard Hammer	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+402	Red Hammer	หล่อมาจากทองสีแดง หากใช้เป็น แม้แต่ก้อนหินยังสามารถฟันให้แตกได้		
+403	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้ หากใครใช้มันถือว่ามีความผิด		
+404	Lion Guard	ศักดิ์ศรีของสิงโต แสดงให้เห็นถึงความน่าเกรงขาม		
+405	Red Disaster	เมื่อความน่ากลัวก่อเกิดขึ้น ความตายเป็นย่อมมาเยือน		
+406	Low Guard Hammer	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+407	War Guard Hammer Lv.5	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+408	Blue Star Angel	ได้ยินมาว่าเป็นค้อนที่ Blue Star Angel มีไว้ในครอบครอง เมื่อใช้ค้อนนี้กำจัดเหล่าปีศาจร้าย จะถูกส่งไปยังสถานที่ที่สุขสม		
+409	Red Hammer	หล่อมาจากทองสีแดง หากใช้เป็นแม้แต่ก้อนหินยังสามารถทุบให้แตกได้		
+410	1 War Guard Hammer Lv.5	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+411	2 War Guard Hammer Lv.5	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+412	3 War Red Hammer Lv.5	หล่อมาจากทองสีแดง หากใช้เป็นแม้แต่ก้อนหินยังสามารถทุบให้แตกได้		
+413	Lion Guard 	สิงโตที่ดุร้าย ทางที่ดีเมื่อเดินผ่านมันต้องทำเงียบให้เงียบกริบ		
+414	Chinese Seal Hammer			
+415	War Strength Hammer			
+416	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้		
+417	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้		
+418	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้		
+419	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้		
+420	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้		
+421	War Red Hammer Lv.40	หล่อมาจากทองสีแดง หากใช้เป็นแม้แต่ก้อนหินยังสามารถทุบให้แตกได้		
+422	Obtuse Hammer	เพื่อความอยู่รอด อัศวินจึงใช้ค้อนนี้ แต่ว่าอย่าดูถูกความน่าเกรงขามของมันล่ะ		
+423	Red leaves Hammer	สีแดงแวววาวของค้อน ทำให้ผู้คนจับจ้องมัน		
+424	Flint Hammer	เป็นค้อนที่ทำมาจากอุกาบาต มีน้ำหนักมาก จะต้องเป็นคนที่มีกำลังแขนเยอะเท่านั้นจึงจะยกขึ้นได้		
+425	Broken Star	ค้อนในตำนาน	สามารถทดลองสกิลในอนาคตได้!	
+601	Shield	โล่ที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+602	Shield	ให้ทองพิเศษในการหล่อ สามารถป้องกันการโจมตีจากการถูกโจมตีได้		
+603	Moonlight	ไม่ว่าจะอยู่ในเหตุการณ์ใด มันก็จะปกป้องท่าน		
+604	Lion Guard	ศักดิ์ศรีของราชสีห์ แสดงให้เห็นถึงความน่าเกรงขาม		
+605	Red Guard	บนโลกที่ถูกระเรงไปด้วยสีแดง จะต้องมีมุ่มมุมหนึ่งที่ยางขาวสะอาด		
+606	Low Shield	โล่ที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+607	War Shield Lv.5	โล่ที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+608	Angel Guard	ตำนานกล่าวไว้ว่า เป็นโล่ศักดิ์สิทธิ์ของเทวดานางฟ้า ป้องกันการโจมตีของปีศาจ		
+609	Shield	ให้ทองพิเศษในการหล่อ สามารถป้องกันการโจมตีจากการถูกโจมตีได้		
+610	1War Shield Lv.5	โล่ที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+611	2War Shield Lv.5	โล่ที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+612	3War Shield Lv.5	ให้ทองพิเศษในการหล่อ สามารถป้องกันการโจมตีจากการโจมตีมืดได้		
+613	Lion Guard 	สิงโตที่ดุร้าย ทางที่ดีเมื่อเดินผ่านมันต้องทำเงียบให้เงียบกริบ		
+614	Chinese Seal Shield			
+615	War Strength Shield			
+616	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้		
+617	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้		
+618	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้		
+619	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้		
+620	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้		
+621	War Shield Lv.40	ให้ทองพิเศษในการหล่อ สามารถป้องกันการโจมตีจากการถูกโจมตีได้		
+622	Obtuse Shield	เพื่อความอยู่รอด อัศวินจึงใช้ค้อนนี้ แต่ว่าอย่าดูถูกความน่าเกรงขามของมันล่ะ		
+623	Red Leaves Shield	สีแดงแวววาวของโล่ ทำให้ผู้คนจับจ้องมัน		
+624	Flint Shield	เป็นโล่ที่ทำมาจากอุกาบาต มีน้ำหนักมาก จะต้องเป็นคนที่มีกำลังแขนเยอะเท่านั้นจึงจะยกขึ้นได้		
+625	Black Lion Barrier	โล่ในตำนาน	สามารถทดลองสกิลในอนาคตได้!	
+801	Sky Stone	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+802	Mountain Pumice	หินแมกมาที่ทำมาจากคริสตัล เมื่อ Attention ได้เห็น เขารู้ถึงพลังอันแข็งแกร่งของมันทันที		
+803	Bull King Skull	อุณหภูมิรอบกายลดลง มีเสียงอันน่าหวาดกลัว ความรู้สึกนี้ผู้ที่มีชีวิตอยู่รู้สึกได้เท่านั้น		
+804	Flame Amethyst	เปลวเพลิงและคริสตัลหลอมรวม แสงนั้นไม่ใช่แสงอันน่าหลงไหล		
+805	Death Gaze	เป็นหรือตาย? มัวลังเลอะไรล่ะ		
+806	Low Sky Stone	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+807	War Sky Stone Lv.5	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+808	Gold Skull	กระดูกที่สร้างมาจากทอง เป็นการทดสอบของผู้มีตาวิเศษ มันคือของจริงหรือปลอมกันแน่?		
+809	Mountain Pumice	หินแมกม่าที่ทำมาจากคริสตัล เมื่อ Attention ได้เห็น เขารู้ถึงพลังอันแข็งแกร่งของมันทันที		
+810	1War Sky Stone Lv.5	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+811	2War Sky Stone Lv.5	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+812	War Mountain Pumice Lv.35	หินแมกม่าที่ทำมาจากคริสตัล เมื่อ Attention ได้เห็น เขารู้ถึงพลังอันแข็งแกร่งของมันทันที		
+813	Ghastly Crystal	เชื้อเพลงที่ใช้ไม่มีวันหมด ได้มาจากผู้บูชา		
+814	Angel Enticement			
+815	Night Guide			
+816	Bull King Skull	ผู้โหดเหี้ยมที่ยังมีชีวิตจะมองเห็น		
+817	Bull King Skull	ผู้โหดเหี้ยมที่ยังมีชีวิตจะมองเห็น		
+818	Bull King Skull	ผู้โหดเหี้ยมที่ยังมีชีวิตจะมองเห็น		
+819	Bull King Skull	ผู้โหดเหี้ยมที่ยังมีชีวิตจะมองเห็น		
+820	Bull King Skull	ผู้โหดเหี้ยมที่ยังมีชีวิตจะมองเห็น		
+821	War Mountain Pumice Lv.40	หินแมกม่าที่ทำมาจากคริสตัล เมื่อ Attention ได้เห็น เขารู้ถึงพลังอันแข็งแกร่งของมันทันที		
+822	Ground Horse Timepiece	 ม้าเหลืองที่เฝ้าคุ้มครองประตู เมื่อเริ่มวิ่งจะได้ยินเสียงฝีเท้ามันอย่างไม่หยุดหย่อน		
+823	Morning Ground	ท้าฟ้าสว่างไสว แต่ยังมองเห็นดาวระยิบระยับ คือการจากลาและการต้อนรับ		
+824	Sincerity Prayer	ขาดแต่คำอวยพรของนางฟ้า ยังคงต้องพึ่ง Sincerity Prayer หวังว่าสักวันคงเกิดขึ้น		
+825	Fallacy Skull	กระดูกที่เต็มไปด้วยคำสาป	สามารถทดลองสกิลในอนาคตได้!	
+1001	Fist Gun	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+1002	Strength Gun	ปืนคู่ที่ทำมาจากวัสดุขั้นพิเศษ เป็นการผสมผสานอย่างสมบูรณ์ เหมือนของปลอม		
+1003	Gully Lion	สิงโตที่ชอบกินชอคโกแลตเหมือนเด็กๆ ว่าแต่มีคนอยากแก่ด้วยเหรอ?		
+1004	Indigo Cannon	ซ่อนอยู่ในความลับของทะเลทั้งเจ็ด		
+1005	Fighting Double Dragon	สงครามที่ลงตัว ดั่งเปลวเพลิงที่ร้อนระอุกับการต่อสู้อันดุเดือด		
+1006	Low Fist Gun	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+1007	War Fist Gun Lv.5	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+1008	Colorful Cone	ใครบอกว่าอาวุธไม่สามารถลิ้มรสได้？ หากดูถูกอำนาจมัน นั่นหมายความว่าความซวยมาเยือนหล่ะ!		
+1009	Strength Gun	ปืนคู่ที่ทำมาจากวัสดุขั้นพิเศษ เป็นการผสมผสานอย่างสมบูรณ์ เหมือนของปลอม		
+1010	1War Fist Gun Lv.5	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+1011	2War Fist Gun Lv.5	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+1012	War Strength Gun Lv.35	ปืนคู่ที่ทำมาจากวัสดุขั้นพิเศษ เป็นการผสมผสานอย่างสมบูรณ์ เหมือนของปลอม		
+1013	Black Cannon	ไม่ว่าพื้นที่นั้นจะแข็งแกร่งสักเท่าไหร่ เมื่อเจอปืนใหญ่นี้ไป วอดวายแน่		
+1014	Classic Wooden Gun			
+1015	Blue Machine Gun			
+1016	Gully Lion	สิงโตที่ชอบกินชอคโกแลตเหมือนเด็กๆ		
+1017	Gully Lion	สิงโตที่ชอบกินชอคโกแลตเหมือนเด็กๆ		
+1018	Gully Lion	สิงโตที่ชอบกินชอคโกแลตเหมือนเด็กๆ		
+1019	Gully Lion	สิงโตที่ชอบกินชอคโกแลตเหมือนเด็กๆ		
+1020	Gully Lion	สิงโตที่ชอบกินชอคโกแลตเหมือนเด็กๆ		
+1021	War Strength Gun Lv.40	ปืนคู่ที่ทำมาจากวัสดุขั้นพิเศษ เป็นการผสมผสานอย่างสมบูรณ์ เหมือนของปลอม		
+1022	Pirate Short Tube	ปืนสั้นที่ได้มาจากโจรสลัด เนื่องจากใช้ถนัดมือ จึงขอให้ช่างในเมืองทำขาย		
+1023	Rebellion Short Tube	ปืนที่เคยมีการปรับเปลี่ยน แต่ยังคงความแกร่ง แต่ถ้าหนักกว่านี้คงจะดี		
+1024	Storm Fine Gun	ปืดที่มีชื่อเสียง เคยผ่านมือนักเล่นปืนมาแล้ว เล็งและเหนี่ยวไกได้อย่างแม่นยำ		
+1025	Dragon Detonation Gun	ปืนที่สามารถยิงทะลุเกล็ดมังกรได้	สามารถทดลองสกิลในอนาคตได้!	
+1201	Wood Stick	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+1202	Gray Stick	ไม้คฑาที่ทำมาจากไม้ขั้นสูง ในไม้ฝังขนนกป่าไว้เป็นเครื่องราง		
+1203	Rose	หน้าหนังสือมีกลิ่นดอกกุหลาบ สามารถพกไปในที่ต่างๆได้!		
+1204	Forest Movement	เมื่อหดหู่ก็จงหลับตาและร้องมันออกมา!		
+1205	Devil  Dungeon	อยากจะลองดีกับเผ่าความตายงั้นเหรอ? มาเลย!		
+1206	Low Wood Stick	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+1207	War Wood Stick Lv.5	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+1208	Smiling Mask	รอยยิ้มคือคำอวยพร สามารถกำจัดความเย็นชาได้ แล้วรอยยิ้มแบบนี้ล่ะ?		
+1209	Gray Stick	ไม้คฑาที่ทำมาจากไม้ขั้นสูง ในไม้ฝังขนนกป่าไว้เป็นเครื่องราง		
+1210	1War Wood Stick Lv.5	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+1211	2War Wood Stick Lv.5	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+1212	War Gray Stick Lv.35	ไม้คฑาที่ทำมาจากไม้ขั้นสูง ในไม้ฝังขนนกป่าไว้เป็นเครื่องราง		
+1213	Ocean Note	หน้าหนังสือที่ทำอย่างประณีต สามารถสัมผัสได้ถึงกลิ่นอายของทะเล		
+1214	Angel Wand			
+1215	Devil Feather			
+1216	Rose	ต้องการมันในช่วงเวลาน้ำชา จงเพลิดเพลินไปกับมัน!		
+1217	Rose	ต้องการมันในช่วงเวลาน้ำชา จงเพลิดเพลินไปกับมัน!		
+1218	Rose	ต้องการมันในช่วงเวลาน้ำชา จงเพลิดเพลินไปกับมัน!		
+1219	Rose	ต้องการมันในช่วงเวลาน้ำชา จงเพลิดเพลินไปกับมัน!		
+1220	Rose	ต้องการมันในช่วงเวลาน้ำชา จงเพลิดเพลินไปกับมัน!		
+1221	War Gray Stick Lv.40	ไม้คฑาที่ทำมาจากไม้ขั้นสูง ในไม้ฝังขนนกป่าไว้เป็นเครื่องราง		
+1222	Green Wisp	ป่าที่เขียวขจี มีแสงเล็ดลอดมาเล็กน้อย หรือนั่นคือล่องรอยของElfกันนะ		
+1223	Morning Sun	ดวงอาทิตย์แรกแย้ม อุ่นและอ่อนโยน		
+1224	Dream hippocampus	ของที่เทพแห่งทะเลลืมเอาไว้ ปัจจุบันยังไม่สามารถทราบได้ว่ามีพลังสถิตอยู่หรือไม่		
+1225	Soul Stick	มีพลังเวทย์แข็งแกร่ง สามารถใช้ต่อสู้กับเบื้องบนได้อย่างสบาย	สามารถทดลองสกิลในอนาคตได้!	
+1401	Puppet Bunny			
+1402	Gloomy Bunny			
+1403	Elegant maid	สาวน้อยผู้อ่อนโยน จับมือกันเถอะ!		
+1404	Hot Girl	ในความแกร่งของเกราะนั่น จงต่อสู้!		
+1405	Gothic Lolita	ไม้กางแขนที่แขวนอยู่บนชุดกระโปรง ขอพรสิ		
+1406	Archeopteryx			
+1407	Uncle Pudding			
+1408	Munai meow			
+1409	Pluto Spirit	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+1410	Low Puppet Bunny			
+1411	Normal Puppet Bunny			
+1412	War Puppet Bunny Lv.15			
+1413	War Puppet Bunny Lv.25			
+1414	War Gloomy Bunny Lv.35			
+1415	Skill Exp Doll	ตุ๊กตาลึกลับ สามารถแสดงพลังได้!	สามารถทดลองสกิลในอนาคตได้!	
+1416	Clown Bunny			
+1417	King Firewood			
+4001	Exile Headdress	เครื่องสวมใส่พื้นฐานสามารถป้องกันตนเองได้ในโลกใบใหม่		
+4002	Ocean Headdress	เหมือนอยู่ในอ้อมกอดของมหาสมุทร อบอุ่นและทั่วถึง		
+4003	Bloody Headdress	จะต้องฆ่าอีกเท่าไหร่ถึงจะเป็นสีแดงสด ทางที่ดีตอนนี้อย่าเพิ่งเข้าใกล้จะดีกว่า		
+4004	Wild Headdress	ทำมาจากผ้าที่สวยงามจากสถานที่อันไกลห่าง ขอขอบคุณที่ฟ้าประทานสิ่งนี้มาให้		
+4005	Star Headdress			
+4006	Navy Headdress Lv5	ชุดฝึกทหารเรือ มีพลังป้องกันเป็นพื้นฐาน		
+4007	Navy Headdress Lv15	ชุดฝึกทหารเรือ มีพลังป้องกันเป็นพื้นฐาน		
+4008	Navy Headdress Lv25	ชุดฝึกทหารเรือ มีพลังป้องกันเป็นพื้นฐาน		
+4009	Navy Headdress Lv35	ชุดฝึกทหารเรือ มีพลังป้องกันเป็นพื้นฐาน		
+4010	Aris Headdress	เครื่องประดับหัวที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4011	Aris Headdress	เครื่องประดับหัวที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4012	Aris Headdress	เครื่องประดับหัวที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4013	Aris Headdress	เครื่องประดับหัวที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4014	Aris Headdress	เครื่องประดับหัวที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4015	Muse Headdress	เครื่องประดับหัวที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4016	Muse Headdress	เครื่องประดับหัวที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4017	Muse Headdress	เครื่องประดับหัวที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4018	Muse Headdress	เครื่องประดับหัวที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4019	Muse Headdress	เครื่องประดับหัวที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4020	Hercules Headdress	รองเท้าที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4021	Hercules Headdress	รองเท้าที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4022	Hercules Headdress	รองเท้าที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4023	Hercules Headdress	รองเท้าที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4024	Hercules Headdress	รองเท้าที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4025	War Bloody Headdress Lv.40	อุปกรณ์ที่ทำมาจากผ้าที่มีความทนทาน		
+4026	Misty Headdress	น้ำหวานที่หยดจากดอกสวรรค์สีม่วงลงบนผ้า และทิ้งร่องรอยเอาไว้		
+4027	Soft Headdress	เครื่องประดับผมที่ออกแบบมาอย่างสวยงาม ดูแล้วสบายตา		
+4028	Cloud Headdress	แสงแดดที่ส่องลงมายามหนาวเหน็บ ช่างอบอุ่นและผ่อนคลายเหลือเกิน!		
+4029	Asura Headdress	เงาของคนที่โผล่มาจากความมืดมิด บนตัวสวมใส่ความพ่ายแพ้และวอดวาย		
+4030	Inca Headdress			
+4201	Exile Armor	เครื่องสวมใส่พื้นฐานสามารถป้องกันตนเองได้ในโลกใบใหม่		
+4202	Ocean Armor	เหมือนอยู่ในอ้อมกอดของมหาสมุทร อบอุ่นและทั่วถึง		
+4203	Bloody Armor	จะต้องฆ่าอีกเท่าไหร่ถึงจะเป็นสีแดงสด ทางที่ดีตอนนี้อย่าเพิ่งเข้าใกล้จะดีกว่า		
+4204	Wild Armor	ทำมาจากผ้าที่สวยงามจากสถานที่อันไกลห่าง ขอขอบคุณที่ฟ้าประทานสิ่งนี้มาให้		
+4205	Star Armor			
+4206	Navy Armor Lv5	ชุดฝึกทหารเรือ มีพลังป้องกันเป็นพื้นฐาน		
+4207	Navy Armor Lv15	ชุดฝึกทหารเรือ มีพลังป้องกันเป็นพื้นฐาน		
+4208	Navy Armor Lv25	ชุดฝึกทหารเรือ มีพลังป้องกันเป็นพื้นฐาน		
+4209	Navy Armor Lv35	ชุดฝึกทหารเรือ มีพลังป้องกันเป็นพื้นฐาน		
+4210	Aris Armor	เกราะที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4211	Aris Armor	เกราะที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4212	Aris Armor	เกราะที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4213	Aris Armor	เกราะที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4214	Aris Armor	เกราะที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4215	Muse Armor	เกราะที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4216	Muse Armor	เกราะที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4217	Muse Armor	เกราะที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4218	Muse Armor	เกราะที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4219	Muse Armor	เกราะที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4220	Hercules Armor	เกราะที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4221	Hercules Armor	เกราะที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4222	Hercules Armor	เกราะที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4223	Hercules Armor	เกราะที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4224	Hercules Armor	เกราะที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4225	War Bloody Armor Lv.40	อุปกรณ์ที่ทำมาจากผ้าที่มีความทนทาน		
+4226	Misty Armor	น้ำหวานที่หยดจากดอกสวรรค์สีม่วงลงบนผ้า และทิ้งร่องรอยเอาไว้		
+4227	Soft Armor	เครื่องประดับผมที่ออกแบบมาอย่างสวยงาม ดูแล้วสบายตา		
+4228	Cloud Armor	แสงแดดที่ส่องลงมายามหนาวเหน็บ ช่างอบอุ่นและผ่อนคลายเหลือเกิน!		
+4229	Asura Armor	เงาของคนที่โผล่มาจากความมืดมิด บนตัวสวมใส่ความพ่ายแพ้และวอดวาย		
+4230	Inca Armor			
+4401	Exile Legging	เครื่องสวมใส่พื้นฐานสามารถป้องกันตนเองได้ในโลกใบใหม่		
+4402	Ocean Legging	เหมือนอยู่ในอ้อมกอดของมหาสมุทร อบอุ่นและทั่วถึง		
+4403	Bloody Legging	จะต้องฆ่าอีกเท่าไหร่ถึงจะเป็นสีแดงสด ทางที่ดีตอนนี้อย่าเพิ่งเข้าใกล้จะดีกว่า		
+4404	Wild Legging	ทำมาจากผ้าที่สวยงามจากสถานที่อันไกลห่าง ขอขอบคุณที่ฟ้าประทานสิ่งนี้มาให้		
+4405	Star Legging			
+4406	Navy Legging Lv5	ชุดฝึกทหารเรือ มีพลังป้องกันเป็นพื้นฐาน		
+4407	Navy Legging Lv15	ชุดฝึกทหารเรือ มีพลังป้องกันเป็นพื้นฐาน		
+4408	Navy Legging Lv25	ชุดฝึกทหารเรือ มีพลังป้องกันเป็นพื้นฐาน		
+4409	Navy Legging Lv35	ชุดฝึกทหารเรือ มีพลังป้องกันเป็นพื้นฐาน		
+4410	Aris Legging	กางเกงที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4411	Aris Legging	กางเกงที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4412	Aris Legging	กางเกงที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4413	Aris Legging	กางเกงที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4414	Aris Legging	กางเกงที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4415	Muse Legging	กางเกงที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4416	Muse Legging	กางเกงที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4417	Muse Legging	กางเกงที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4418	Muse Legging	กางเกงที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4419	Muse Legging	กางเกงที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4420	Hercules Legging	กางเกงที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4421	Hercules Legging	กางเกงที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4422	Hercules Legging	กางเกงที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4423	Hercules Legging	กางเกงที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4424	Hercules Legging	กางเกงที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4425	War Bloody Legging Lv.40	อุปกรณ์ที่ทำมาจากผ้าที่มีความทนทาน		
+4426	Misty Legging	น้ำหวานที่หยดจากดอกสวรรค์สีม่วงลงบนผ้า และทิ้งร่องรอยเอาไว้		
+4427	Soft Legging	เครื่องประดับผมที่ออกแบบมาอย่างสวยงาม ดูแล้วสบายตา		
+4428	Cloud Legging	แสงแดดที่ส่องลงมายามหนาวเหน็บ ช่างอบอุ่นและผ่อนคลายเหลือเกิน!		
+4429	Asura Legging	เงาของคนที่โผล่มาจากความมืดมิด บนตัวสวมใส่ความพ่ายแพ้และวอดวาย		
+4430	Inca Legging			
+4601	Exile Glove	เครื่องสวมใส่พื้นฐานสามารถป้องกันตนเองได้ในโลกใบใหม่		
+4602	Ocean Glove	เหมือนอยู่ในอ้อมกอดของมหาสมุทร อบอุ่นและทั่วถึง		
+4603	Bloody Glove	จะต้องฆ่าอีกเท่าไหร่ถึงจะเป็นสีแดงสด ทางที่ดีตอนนี้อย่าเพิ่งเข้าใกล้จะดีกว่า		
+4604	Wild Glove	ทำมาจากผ้าที่สวยงามจากสถานที่อันไกลห่าง ขอขอบคุณที่ฟ้าประทานสิ่งนี้มาให้		
+4605	Star Glove			
+4606	Aris Glove	ถุงมือที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4607	Aris Glove	ถุงมือที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4608	Aris Glove	ถุงมือที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4609	Aris Glove	ถุงมือที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4610	Aris Glove	ถุงมือที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4611	Muse Glove	ถุงมือที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4612	Muse Glove	ถุงมือที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4613	Muse Glove	ถุงมือที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4614	Muse Glove	ถุงมือที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4615	Muse Glove	ถุงมือที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4616	Hercules Glove	ถุงมือที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4617	Hercules Glove	ถุงมือที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4618	Hercules Glove	ถุงมือที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4619	Hercules Glove	ถุงมือที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4620	Hercules Glove	ถุงมือที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4621	Misty Glove	น้ำหวานที่หยดจากดอกสวรรค์สีม่วงลงบนผ้า และทิ้งร่องรอยเอาไว้		
+4622	Soft Glove	ถุงมืออันอ่อนนุ่ม ให้ความรู้สึกเบาสบาย		
+4623	Cloud Glove	แสงแดดที่ส่องลงมายามหนาวเหน็บ ช่างอบอุ่นและผ่อนคลายเหลือเกิน!		
+4624	Needle Glove	ไม่เหมือนถุงมือธรรมดา ตำนานกล่าวว่าเคยมีแม่มดเคยใช้มัน แถมยังทิ้งกลิ่นน้ำหอมไว้ด้วย		
+4625	Spiked Glove	ไม่เหมือนถุงมือธรรมดา ตำนานกล่าวว่าเคยมีแม่มดเคยใช้มัน แถมยังทิ้งกลิ่นน้ำหอมไว้ด้วย		
+4626	Thorn Glove	ไม่เหมือนถุงมือธรรมดา ตำนานกล่าวว่าเคยมีแม่มดเคยใช้มัน แถมยังทิ้งกลิ่นน้ำหอมไว้ด้วย		
+4627	Cockroach Glove	ถุงมือที่ [Cockroach]ใช้บ่อยๆ แต่ดูแล้วเหมือนใหม่ น่าจะพึ่งซักได้ไม่นาน		
+4628	Thin Ralph Glove	ถุงมือที่ [Thin Ralph] ใช้บ่อยๆ อาจมีรูเล็กน้อย แต่ถ้าไม่สังเกตก็ไม่เห็นมัน		
+4629	Fertilizer Glove	ถุงมือที่ [Fertilizer] ใช้บ่อยๆ ถึงแม้ว่าจะเปื้อนรอยน้ำมันไปนิด แต่ก็ยังถือว่าสะอาดอยู่นะ		
+4630	Rescue Glove	ถุงมือของกลุ่ม Madisen เมื่อสวมใส่จะทำให้ดูทะมัดทะแมงขึ้นมาทันที		
+4631	Search Glove	ถุงมือของกลุ่ม Madisen เมื่อสวมใส่จะทำให้ดูทะมัดทะแมงขึ้นมาทันที		
+4632	Explore Glove	ถุงมือของกลุ่ม Madisen เมื่อสวมใส่จะทำให้ดูทะมัดทะแมงขึ้นมาทันที		
+4633	Asura Glove	เงาของคนที่โผล่มาจากความมืดมิด บนตัวสวมใส่ความพ่ายแพ้และวอดวาย		
+4634	Inca Glove			
+4801	Exile Sandal	เครื่องสวมใส่พื้นฐานสามารถป้องกันตนเองได้ในโลกใบใหม่		
+4802	Ocean Sandal	เหมือนอยู่ในอ้อมกอดของมหาสมุทร อบอุ่นและทั่วถึง		
+4803	Bloody Sandal	จะต้องฆ่าอีกเท่าไหร่ถึงจะเป็นสีแดงสด ทางที่ดีตอนนี้อย่าเพิ่งเข้าใกล้จะดีกว่า		
+4804	Wild Sandal	ทำมาจากผ้าที่สวยงามจากสถานที่อันไกลห่าง ขอขอบคุณที่ฟ้าประทานสิ่งนี้มาให้		
+4805	Star Sandal			
+4806	Aris Shoe	รองเท้าที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4807	Aris Shoe	รองเท้าที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4808	Aris Shoe	รองเท้าที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4809	Aris Shoe	รองเท้าที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4810	Aris Shoe	รองเท้าที่ได้มาจากพลังของ Aris เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Aris：\n\nAris Headdress\nAris Armor\nAris Legging\nAris Glove\nAris Shoe		
+4811	Muse Boot	รองเท้าที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4812	Muse Boot	รองเท้าที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4813	Muse Boot	รองเท้าที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4814	Muse Boot	รองเท้าที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4815	Muse Boot	รองเท้าที่ได้มาจากพลังของ Muse เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Muse：\n\nMuse Headdress\nMuse Armor\nMuse Legging\nMuse Glove\nMuse Boot		
+4816	Hercules Footwear	รองเท้าที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4817	Hercules Footwear	รองเท้าที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4818	Hercules Footwear	รองเท้าที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4819	Hercules Footwear	รองเท้าที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4820	Hercules Footwear	รองเท้าที่ได้มาจากพลังของ Hercules เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว สามารถรับพรของ Hercules：\n\nHercules Headdress\nHercules Armor\nHercules Legging\nHercules Glove\nHercules Footwear		
+4821	Misty Sandal	น้ำหวานที่หยดจากดอกสวรรค์สีม่วงลงบนผ้า และทิ้งร่องรอยเอาไว้		
+4822	Soft Sandal	รองเท้าใส่สบายที่ทำมาจากไหมธรรมชาติ ให้ความรู้สึกนุ่มนวล		
+4823	Cloud Sandal	แสงแดดที่ส่องลงมายามหนาวเหน็บ ช่างอบอุ่นและผ่อนคลายเหลือเกิน!		
+4824	Cage Sandal	มันไม่เหมือนรองเท้าธรรมดาๆทั้งไป Paulเคยบอกว่ามีแม่มดเคยสวมมันมาก่อน		
+4825	Imprisonment Sandal	มันไม่เหมือนรองเท้าธรรมดาๆทั้งไป Paulเคยบอกว่ามีแม่มดเคยสวมมันมาก่อน		
+4826	Restrain Sandal	มันไม่เหมือนรองเท้าธรรมดาๆทั้งไป Paulเคยบอกว่ามีแม่มดเคยสวมมันมาก่อน		
+4827	Travel Sandal	[Rosemary] อยากจะใส่คู่นี้ไปทั่วทุกปฐพี		
+4828	Bound Sandal	เป็นสัญลักษณ์ของ [Rosemary] ทายาทราชวงศ์จะต้องแสดงความเคารพ		
+4829	Dream Sandal	[Rosemary] ที่อยู่ในวังมานานหลายใน ได้แต่ฝันกลางวันว่าจะมีคนมาปลอบใจ		
+4830	Despair Sandal	[Rosemary] เมื่อเขารู้สึกเศร้าหรือสนุก เขามักจะชอบตั้งชื่อให้กับชุดเสื้อผ้าของเขา		
+4831	Sad Sandal	[Rosemary] เมื่อเขารู้สึกเศร้าหรือสนุก เขามักจะชอบตั้งชื่อให้กับชุดเสื้อผ้าของเขา		
+4832	Grieved Sandal	[Rosemary] เมื่อเขารู้สึกเศร้าหรือสนุก เขามักจะชอบตั้งชื่อให้กับชุดเสื้อผ้าของเขา		
+4833	Asura Sandal	เงาของคนที่โผล่มาจากความมืดมิด บนตัวสวมใส่ความพ่ายแพ้และวอดวาย		
+4834	Inca Sandal			
+5001	Blue Necklace	เครื่องประดับสุดทันสมัย เรียบง่ายและดูไม่เบื่อ		
+5002	Gold Necklace	เครื่องประดับที่มีสีทองแวววาว ใส่แล้วดูหรูหรา		
+5003	Eielson Necklace	งานสร้อยที่ได้จากช่าง [Eielson] ในสร้อยเต็มไปด้วยกลิ่นอายของป่าไม้		
+5004	House Necklace	งานสร้อยที่ได้จากพี่น้องของ [House] พวกเขาชอบออกแบบงานที่เรียบง่าย และดูหรูหรา		
+5005	Loie Necklace	ผลงานจาก [Loie] จากสร้อยนี้สามารถดูออกเลยว่าเขามีความชำนาญขนาดไหน		
+5006	Apollo Necklace	สร้อยที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5007	Apollo Necklace	สร้อยที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5008	Apollo Necklace	สร้อยที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5009	Apollo Necklace	สร้อยที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5010	Apollo Necklace	สร้อยที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5011	Hermes Necklace	สร้อยที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5012	Hermes Necklace	สร้อยที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5013	Hermes Necklace	สร้อยที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5014	Hermes Necklace	สร้อยที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5015	Hermes Necklace	สร้อยที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5016	Forest Blue Necklace	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5017	Hippocampal Gold Necklace	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5018	Mechanical Moonstar Necklace	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5019	Volcano Totem Necklace	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5020	Moonstar Necklace	ไม่ต้องกังวลเรื่องความมืด พระจันทร์และดาวจะนำทางท่าน		
+5021	Totem Necklace	อารยธรรมที่ไม่สามารถระบุได้ แต่สามารถดึงดูดความสนใจของผู้คนได้ แต่ละรายละเอียดดูออกเลยว่าใช้ความตั้งใจและแน่วแน่		
+5022	Demon Wolf Of Chain	อาจเป็นเครื่องประดับที่ Sea Phantom หลงเหลือไว้ในตัวของ Demon Wolf ก็เป็นได้ (ไอเทมนี้ไม่สามารถแยกได้)		
+5023	Remain Of Chain			
+5024	Yellow Moon Necklace			
+5025	Evil Chain			
+5026	Dark Totem Necklace	สร้อยที่ได้จากการกำจัดมอนสเตอร์ที่บุกรุกเข้ามาใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5027	Feather Necklace	ไอเทมที่ระลึกจากการกำจัด Tornado Eagle (ไอเทมที่ไม่สามารถหลอมซ้ำได้)		
+5028	Ape Necklace	ไอเทมที่ระลึกจากการกำจัด Ward Apes (ไอเทมที่ไม่สามารถหลอมซ้ำได้)		
+5029	Hard Blade Necklace	ไอเทมที่ระลึกจากการกำจัด Hard Blade Eagle (ไอเทมที่ไม่สามารถหลอมซ้ำได้)		
+5201	Blue Ring	เครื่องประดับสุดทันสมัย เรียบง่ายและดูไม่เบื่อ		
+5202	Gold Ring	เครื่องประดับที่มีสีทองแวววาว ใส่แล้วดูหรูหรา		
+5203	Eielson Ring	งานแหวนที่ได้จากช่าง [Eielson] ในสร้อยเต็มไปด้วยกลิ่นอายของป่าไม้		
+5204	House Ring	งานแหวนที่ได้จากพี่น้องของ [House] พวกเขาชอบออกแบบงานที่เรียบง่าย และดูหรูหรา		
+5205	Loie Ring	ผลงานจาก [Loie] จากแหวนนี้สามารถดูออกเลยว่าเขามีความชำนาญขนาดไหน		
+5206	Apollo Ring	แหวนที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5207	Apollo Ring	แหวนที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5208	Apollo Ring	แหวนที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5209	Apollo Ring	แหวนที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5210	Apollo Ring	แหวนที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5211	Hermes Ring	แหวนที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5212	Hermes Ring	แหวนที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5213	Hermes Ring	แหวนที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5214	Hermes Ring	แหวนที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5215	Hermes Ring	แหวนที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5216	Forest Blue Ring	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5217	Hippocampal Gold Ring	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5218	Mechanical Moonstar Ring	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5219	Volcano Totem Ring	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5220	Moonstar Ring	ไม่ต้องกังวลเรื่องความมืด พระจันทร์และดาวจะนำทางท่าน		
+5221	Totem Ring	อารยธรรมที่ไม่สามารถระบุได้ แต่สามารถดึงดูดความสนใจของผู้คนได้ แต่ละรายละเอียดดูออกเลยว่าใช้ความตั้งใจและแน่วแน่		
+5222	Prosperity Ring	แหวนที่ Magellan ทำเองกับมือ เป็นสัญลักษณ์ความรุ่งเรืองของกลุ่ม		
+5223	Honor Ring	แหวนที่ Magellan ชื่นชอบที่สุด เป็นสัญลักษณ์ความมีเกียรติของกลุ่ม		
+5224	Carry On Ring	แหวนที่พ่อของ Magellan ให้ไว้ เต็มไปด้วยการรอคอยวันที่ลูกสาวกลับมา		
+5225	Secret Sea Ring	หนึ่งในแหวนที่สะสมจากทะเลทั้งเจ็ดของ Odyssey แหวนนี้เป็นสัญลักษณ์เกียรติแห่งสงครามเมื่อ 20 ปีที่แล้ว		
+5226	Deep Black Ring	หนึ่งในแหวนที่สะสมจากทะเลทั้งเจ็ดของ Odyssey แหวนนี้เป็นสัญลักษณ์เกียรติแห่งสงครามเมื่อ 20 ปีที่แล้ว		
+5227	Beast Ring	หนึ่งในแหวนที่สะสมจากทะเลทั้งเจ็ดของ Odyssey แหวนนี้เป็นสัญลักษณ์เกียรติแห่งสงครามเมื่อ 20 ปีที่แล้ว		
+5228	Anger Ring	หนึ่งในแหวนที่สะสมจากทะเลทั้งเจ็ดของ Odyssey แหวนนี้เป็นสัญลักษณ์เกียรติแห่งสงครามเมื่อ 20 ปีที่แล้ว		
+5229	Boom Shell Ring	แหวนที่ Sea Phantom ออกค้นหาทั่วทุกสารทิศ แต่สถานที่ค้นพบไม่แน่ชัด ดูแล้วมีค่ามีราคา		
+5230	Turbine Ring	แหวนที่ Sea Phantom ออกค้นหาทั่วทุกสารทิศ แต่สถานที่ค้นพบไม่แน่ชัด ดูแล้วมีค่ามีราคา		
+5231	Layer Ring	แหวนที่ Sea Phantom ออกค้นหาทั่วทุกสารทิศ แต่สถานที่ค้นพบไม่แน่ชัด ดูแล้วมีค่ามีราคา		
+5232	Spider Ring	แหวนที่Sea Phantomออกค้นหาทั่วทุกสารทิศ แต่สถานที่ค้นพบไม่แน่ชัด ดูแล้วมีค่ามีราคา		
+5233	Volcano Ring	แหวนที่ใช้หินแมกม่าหล่อขึ้นมา เมื่อลูบดูจะหยาบและร้อน แต่เมื่อใส่จนชินแล้วท่านจะอึ้งถึงพลังความร้อนของมัน		
+5234	Flame Kilin Ring	แหวนที่ใช้หินแมกม่าหล่อขึ้นมา เมื่อลูบดูจะหยาบและร้อน แต่เมื่อใส่จนชินแล้วท่านจะอึ้งถึงพลังความร้อนของมัน		
+5235	Burst Lock Ring	แหวนที่ใช้หินแมกม่าหล่อขึ้นมา เมื่อลูบดูจะหยาบและร้อน แต่เมื่อใส่จนชินแล้วท่านจะอึ้งถึงพลังความร้อนของมัน		
+5236	Spray Chain Ring	แหวนที่ใช้หินแมกม่าหล่อขึ้นมา เมื่อลูบดูจะหยาบและร้อน แต่เมื่อใส่จนชินแล้วท่านจะอึ้งถึงพลังความร้อนของมัน		
+5237	Skyfire Ring	ของโบราญจากสมัยก่อน นำพลังจากทุกพื้นที่มารวมเป็นหนึ่งในแหวนนี้		
+5238	Strong Ring	ของโบราญจากสมัยก่อน นำพลังจากทุกพื้นที่มารวมเป็นหนึ่งในแหวนนี้		
+5239	Light Ring	ของโบราญจากสมัยก่อน นำพลังจากทุกพื้นที่มารวมเป็นหนึ่งในแหวนนี้	 	
+5240	Large Ring	ของโบราญจากสมัยก่อน นำพลังจากทุกพื้นที่มารวมเป็นหนึ่งในแหวนนี้		
+5241	Demon Wolf Ring	อาจเป็นเครื่องประดับที่ Sea Phantom หลงเหลือไว้ในตัวของ Demon Wolf ก็เป็นได้ (ไอเทมนี้ไม่สามารถแยกได้)		
+5242	Remain Ring			
+5243	Yellow Moon Ring			
+5244	Evil Ring			
+5245	Dark Totem Ring	แหวนที่ได้จากการกำจัดมอนสเตอร์ที่บุกรุกเข้ามาใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5246	Green Eagle Ring	ของระลึกจากการกำจัด Mutant Green Eagle (ไอเทมที่ไม่สามารถหลอมซ้ำได้)		
+5247	Red Devil Ring	ของระลึกจากการกำจัด Red Devil (ไอเทมที่ไม่สามารถหลอมซ้ำได้)		
+5248	Lion Ring	ของระลึกจากการกำจัด Anger Lion (ไอเทมที่ไม่สามารถหลอมซ้ำได้)		
+5401	Blue Talisman	เครื่องประดับสุดทันสมัย เรียบง่ายและดูไม่เบื่อ		
+5402	Gold Talisman	เครื่องประดับที่มีสีทองแวววาว ใส่แล้วดูหรูหรา		
+5403	Eielson Talisman	เหรียญตราที่ได้จากช่าง [Eielson] ในสร้อยเต็มไปด้วยกลิ่นอายของป่าไม้		
+5404	House Talisman	เหรียญตราที่ได้จากพี่น้องของ [House] พวกเขาชอบออกแบบงานที่เรียบง่าย และดูหรูหรา		
+5405	Loie Talisman	ผลงานจาก [Loie] จากเหรียญตรานี้สามารถดูออกเลยว่าเขามีความชำนาญขนาดไหน		
+5406	Apollo Talisman	เหรียญตราที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5407	Apollo Talisman	เหรียญตราที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5408	Apollo Talisman	เหรียญตราที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5409	Apollo Talisman	เหรียญตราที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5410	Apollo Talisman	เหรียญตราที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5411	Hermes Talisman	เหรียญตราที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5412	Hermes Talisman	เหรียญตราที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5413	Hermes Talisman	เหรียญตราที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5414	Hermes Talisman	เหรียญตราที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5415	Hermes Talisman	เหรียญตราที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5416	Forest Blue Talisman	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5417	Hippocampal Gold Talisman	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5418	Mechanical Moonstar Talisman	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5419	Volcano Totem Talisman	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5420	Moonstar Talisman	ไม่ต้องกังวลเรื่องความมืด พระจันทร์และดาวจะนำทางท่าน		
+5421	Totem Talisman	อารยธรรมที่ไม่สามารถระบุได้ แต่สามารถดึงดูดความสนใจของผู้คนได้ แต่ละรายละเอียดดูออกเลยว่าใช้ความตั้งใจและแน่วแน่		
+5422	Sky Island Talisman	เหรียญตราที่ใช้เวลาการทำนานแสนนาน		
+5423	Hometown Talisman	เหรียญตราที่ใช้เวลาการทำนานแสนนาน		
+5424	Foreign Talisman	เหรียญตราที่ใช้เวลาการทำนานแสนนาน		
+5425	Billow Talisman	น้ำทะเลยามค่ำคืน เสียงคลื่นซัดสาด และทุกอย่างเงียบสงบ		
+5426	Night Sea Talisman	น้ำทะเลยามค่ำคืน เสียงคลื่นซัดสาด และทุกอย่างเงียบสงบ		
+5427	Turbulent Talisman	น้ำทะเลยามค่ำคืน เสียงคลื่นซัดสาด และทุกอย่างเงียบสงบ		
+5428	Discrete Talisman	ชีวิตเร่ร่อน รอคอยโชคลาภเข้ามาหา		
+5429	Stream Talisman	ชีวิตเร่ร่อน รอคอยโชคลาภเข้ามาหา		
+5430	Pro Talisman	ชีวิตเร่ร่อน รอคอยโชคลาภเข้ามาหา		
+5431	Red Talisman	ในความร้อนที่กลืนกินนั้นไม่ใช่เลือดเนื้อ แต่มันเป็นชีวิต		
+5432	Broken Talisman	ในความร้อนที่กลืนกินนั้นไม่ใช่เลือดเนื้อ แต่มันเป็นชีวิต		
+5433	God Talisman	ในความร้อนที่กลืนกินนั้นไม่ใช่เลือดเนื้อ แต่มันเป็นชีวิต		
+5434	Light Talisman	ผู้คนที่ถูกละเลย การแสดงตัวของพระเจ้าไม่ใช่ความบังเอิญ		
+5435	Chaste Talisman	ผู้คนที่ถูกละเลย การแสดงตัวของพระเจ้าไม่ใช่ความบังเอิญ		
+5436	Great Night Talisman	ผู้คนที่ถูกละเลย การแสดงตัวของพระเจ้าไม่ใช่ความบังเอิญ		
+5437	Demon Wolf Talisman	อาจเป็นเครื่องประดับที่ Sea Phantom หลงเหลือไว้ในตัวของ Demon Wolf ก็เป็นได้ (ไอเทมนี้ไม่สามารถแยกได้)		
+5438	Remain Of Symbol			
+5439	Yellow Moon Talisman			
+5440	Evil symbol			
+5441	Dark Totem Talisman	เหรียญตราที่ได้จากการกำจัดมอนสเตอร์ที่บุกรุกเข้ามาใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5442	Chief Talisman	ไอเทมที่ระลึกจากการกำจัด Orc Chief  (ไอเทมที่ไม่สามารถหลอมซ้ำได้)		
+5443	Ned Talisman	ไอเทมที่ระลึกจากการกำจัด Ned Apes (ไอเทมที่ไม่สามารถหลอมซ้ำได้)		
+5601	Blue Wristband	เครื่องประดับสุดทันสมัย เรียบง่ายและดูไม่เบื่อ		
+5602	Gold Wristband	เครื่องประดับที่มีสีทองแวววาว ใส่แล้วดูหรูหรา		
+5603	Eielson Wristband	ข้อมือที่ได้จากช่าง [Eielson] ในสร้อยเต็มไปด้วยกลิ่นอายของป่าไม้		
+5604	House Wristband	ข้อมือที่ได้จากพี่น้องของ [House] พวกเขาชอบออกแบบงานที่เรียบง่าย และดูหรูหรา		
+5605	Loie Wristband	ผลงานจาก [Loie] จากข้อมือนี้สามารถดูออกเลยว่าเขามีความชำนาญขนาดไหน		
+5606	Apollo Wristband	ข้อมือที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5607	Apollo Wristband	ข้อมือที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5608	Apollo Wristband	ข้อมือที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5609	Apollo Wristband	ข้อมือที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5610	Apollo Wristband	ข้อมือที่ได้มาจากพลังของ Apollo เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Apollo：\n\nApollo Necklace\nApollo Ring\nApollo Talisman\nApollo Wristband		
+5611	Hermes Wristband	ข้อมือที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5612	Hermes Wristband	ข้อมือที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5613	Hermes Wristband	ข้อมือที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5614	Hermes Wristband	ข้อมือที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5615	Hermes Wristband	ข้อมือที่ได้มาจากพลังของ Hermes เมื่อสวมใส่กับเครื่องสวมใส่ดังกล่าว จะได้รับพรของ Hermes：\n\nHermes Necklace\nHermes Ring\nHermes Talisman\nHermes Wristband		
+5616	Forest Blue Wristband	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5617	Hippocampal Gold Wristband	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5618	Mechanical Moonstar Wristband	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5619	Volcano Totem Wristband	ได้มาจากการตีมอนสเตอร์พิเศษใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5620	Moonstar Wristband	ไม่ต้องกังวลเรื่องความมืด พระจันทร์และดาวจะนำทางท่าน		
+5621	Totem Wristband	อารยธรรมที่ไม่สามารถระบุได้ แต่สามารถดึงดูดความสนใจของผู้คนได้ แต่ละรายละเอียดดูออกเลยว่าใช้ความตั้งใจและแน่วแน่		
+5622	Demon Wolf Wristband	อาจเป็นเครื่องประดับที่ Sea Phantom หลงเหลือไว้ในตัวของ Demon Wolf ก็เป็นได้ (ไอเทมนี้ไม่สามารถแยกได้)		
+5623	Remain Of Hoop			
+5624	Yellow Moon Wristband			
+5625	Evil Ring			
+5626	Dark Totem Wristband	กำไลที่ได้จากการกำจัดมอนสเตอร์ที่บุกรุกเข้ามาใน Guild Island (ไอเทมนี้ไม่สามารถทำการหลอมซ้ำได้)		
+5627	Sergeant Wristband	ไอเทมที่ระลึกจากการกำจัด Fighting Fish Sergeant (ไอเทมที่ไม่สามารถหลอมซ้ำได้)		
+5628	Big Tiger Wristband	ไอเทมที่ระลึกจากการกำจัด Jungle Big Tiger (ไอเทมที่ไม่สามารถหลอมซ้ำได้)		
+5629	Black Wool Wristband	ไอเทมที่ระลึกจากการกำจัด Black Jack (ไอเทมที่ไม่สามารถหลอมซ้ำได้)		
+5630	Two Horns Wristband	ไอเทมที่ระลึกจากการกำจัด Crull Two Horns (ไอเทมที่ไม่สามารถหลอมซ้ำได้)		
+5801	Chairman Badge	สำหรับหัวหน้ากิล	จะมีประสิทธิผล	
+5802	Vice Chairman Badge	สำหรับรองหัวหน้ากิล	จะมีประสิทธิผล	
+5803	Cadres Badge	สำหรับสมาชิก	จะมีประสิทธิผล	
+5804	Rank 2 Member Badge	สำหรับสมาชิกระดับ 2	จะมีประสิทธิผล	
+5805	Rank 3 Member Badge	สำหรับสมาชิกระดับ 3	จะมีประสิทธิผล	
+5806	Rank 4 Member Badge	สำหรับสมาชิกระดับ 4	จะมีประสิทธิผล	
+5807	Rank 5 Member Badge	สำหรับสมาชิกระดับ 5	จะมีประสิทธิผล	
+5808	Rank 6 Member Badge	สำหรับสมาชิกระดับ 6	จะมีประสิทธิผล	
+5809	Romeo Guard	ของขวัญจากRomeo	เพิ่มป้องกันกายภาพ, ป้องกันเวทย์	
+5810	Fighting Soul	แสงส่องจากวิหารศักดิ์สิทธิ์ อุปกรณ์ระดับต้นที่นักบวชฝึกหัดลงมนต์ขลังไว้เมื่อนานมาแล้ว เมื่อใส่สามารถทำให้ Gladiator มีกำลังมากขึ้น	เพิ่มโจมตีหนักกายภาพ, กายภาพทะลุเกราะเป็นจำนวนมาก	
+5811	Holy Soul Guard	แสงส่องจากวิหารศักดิ์สิทธิ์ อุปกรณ์ระดับต้นที่นักบวชฝึกหัดลงมนต์ขลังไว้เมื่อนานมาแล้ว เมื่อใส่สามารถทำให้ Knight มีความอึดมากขึ้น	เพิ่มป้องกันกายภาพ, ป้องกันเวทย์, ลดความเสียหายกายภาพ, ลดความเสียหายเวทย์เป็นจำนวนมาก	
+5812	Hero Soul Guard	แสงส่องจากวิหารศักดิ์สิทธิ์ อุปกรณ์ระดับต้นที่นักบวชฝึกหัดลงมนต์ขลังไว้เมื่อนานมาแล้ว เมื่อใส่สามารถทำให้ Sharpshooter มีความนิ่งมากขึ้น	เพิ่มพลังชีวิตสูงสุด, โจมตีกายภาพเป็นจำนวนมาก	
+5813	Ghost Soul Guard	แสงส่องจากวิหารศักดิ์สิทธิ์ อุปกรณ์ระดับต้นที่นักบวชฝึกหัดลงมนต์ขลังไว้เมื่อนานมาแล้ว เมื่อใส่สามารถทำให้ Agents of Storm มีสติยิ่งขึ้น	เพิ่มโจมตีหนักเวทย์, เวทย์ทะลุเกราะเป็นจำนวนมาก	
+5814	Red Soul Guard	แสงส่องจากวิหารศักดิ์สิทธิ์ อุปกรณ์ระดับต้นที่นักบวชฝึกหัดลงมนต์ขลังไว้เมื่อนานมาแล้ว เมื่อใส่สามารถทำให้ Priest มีอำนาจมากขึ้น	เพิ่มพลังชีวิตสูงสุด, โจมตีเวทย์เป็นจำนวนมาก	
+5815	Fighting SoulProtect	แสงส่องจากวิหารศักดิ์สิทธิ์ อุปกรณ์ระดับกลางที่นักบวชลงมนต์ขลังไว้เมื่อนานมาแล้ว เมื่อใส่สามารถทำให้ Gladiator มีกำลังมากขึ้น	เพิ่มโจมตีหนักกายภาพ, กายภาพทะลุเกราะเป็นจำนวนมาก	
+5816	Holy SoulProtect	แสงส่องจากวิหารศักดิ์สิทธิ์ อุปกรณ์ระดับกลางที่นักบวชลงมนต์ขลังไว้เมื่อนานมาแล้ว เมื่อใส่สามารถทำให้ Knight มีความอึดมากขึ้น	เพิ่มป้องกันกายภาพ, ป้องกันเวทย์, ลดความเสียหายกายภาพ、ลดความเสียหายเวทย์เป็นจำนวนมาก	
+5817	Hero SoulProtect	แสงส่องจากวิหารศักดิ์สิทธิ์ อุปกรณ์ระดับกลางที่นักบวชลงมนต์ขลังไว้เมื่อนานมาแล้ว เมื่อใส่สามารถทำให้ Sharpshooter มีความนิ่งมากขึ้น	เพิ่มพลังชีวิตสูงสุด, โจมตีกายภาพเป็นจำนวนมาก	
+5818	Ghost SoulProtect	แสงส่องจากวิหารศักดิ์สิทธิ์ อุปกรณ์ระดับกลางที่นักบวชลงมนต์ขลังไว้เมื่อนานมาแล้ว เมื่อใส่สามารถทำให้ Agents of Storm มีสติยิ่งขึ้น	เพิ่มโจมตีหนักเวทย์, เวทย์ทะลุเกราะเป็นจำนวนมาก	
+5819	Red SoulProtect	แสงส่องจากวิหารศักดิ์สิทธิ์ อุปกรณ์ระดับกลางที่นักบวชลงมนต์ขลังไว้เมื่อนานมาแล้ว เมื่อใส่สามารถทำให้ Priest มีอำนาจมากขึ้น	เพิ่มพลังชีวิตสูงสุด, โจมตีเวทย์เป็นจำนวนมาก	
+5820	Fighting Soul Elf	แสงส่องจากวิหารศักดิ์สิทธิ์ อุปกรณ์ระดับสูงที่นักบวชผู้เชี่ยวชาญลงมนต์ขลังไว้เมื่อนานมาแล้ว เมื่อ Gladiator ใส่แล้วสามารถมองเห็นเอลฟ์บินอยู่ข้างๆ	เพิ่มโจมตีหนักกายภาพ, กายภาพทะลุเกราะเป็นจำนวนมากและมีประสิทธิผลพิเศษ	
+5821	Holy Soul Elf	แสงส่องจากวิหารศักดิ์สิทธิ์ อุปกรณ์ระดับสูงที่นักบวชผู้เชี่ยวชาญลงมนต์ขลังไว้เมื่อนานมาแล้ว เมื่อ Knight ใส่แล้วสามารถมองเห็นเอลฟ์บินอยู่ข้างๆ	เพิ่มป้องกันกายภาพ, ป้องกันเวทย์, ลดความเสียหายกายภาพ, ลดความเสียหายเวทย์เป็นจำนวนมากและมีประสิทธิผลพิเศษ	
+5822	Hero Soul Elf	แสงส่องจากวิหารศักดิ์สิทธิ์ อุปกรณ์ระดับสูงที่นักบวชผู้เชี่ยวชาญลงมนต์ขลังไว้เมื่อนานมาแล้ว เมื่อ Sharpshooter ใส่แล้วสามารถมองเห็นเอลฟ์บินอยู่ข้างๆ	เพิ่มพลังชีวิตสูงสุด, โจมตีกายภาพเป็นจำนวนมาก	
+5823	Ghost Soul Elf	แสงส่องจากวิหารศักดิ์สิทธิ์ อุปกรณ์ระดับสูงที่นักบวชผู้เชี่ยวชาญลงมนต์ขลังไว้เมื่อนานมาแล้ว เมื่อ Agents of Storm ใส่แล้วสามารถมองเห็นเอลฟ์บินอยู่ข้างๆ	เพิ่มโจมตีหนักเวทย์, เวทย์ทะลุเกราะเป็นจำนวนมาก	
+5824	Red Soul Elf	แสงส่องจากวิหารศักดิ์สิทธิ์ อุปกรณ์ระดับสูงที่นักบวชผู้เชี่ยวชาญลงมนต์ขลังไว้เมื่อนานมาแล้ว เมื่อ Priest ใส่แล้วสามารถมองเห็นเอลฟ์บินอยู่ข้างๆ	เพิ่มพลังชีวิตสูงสุด, โจมตีเวทย์เป็นจำนวนมาก	
+6001	ไอเทมยังไม่ประเมิน สีฟ้า LV.40	ไอเทมที่ถูกควันสีฟ้าบดบัง ไอเทมที่ต้องทำการประเมิน จึงจะรู้ถึงพลังอำนาจของมันได้		
+6002	ไอเทมยังไม่ประเมิน สีฟ้า LV.50	ไอเทมที่ถูกควันสีฟ้าบดบัง ไอเทมที่ต้องทำการประเมิน จึงจะรู้ถึงพลังอำนาจของมันได้		
+6003	ไอเทมยังไม่ประเมิน สีฟ้า LV.60	ไอเทมที่ถูกควันสีฟ้าบดบัง ไอเทมที่ต้องทำการประเมิน จึงจะรู้ถึงพลังอำนาจของมันได้		
+6004	ไอเทมยังไม่ประเมิน สีฟ้า LV.70	ไอเทมที่ถูกควันสีฟ้าบดบัง ไอเทมที่ต้องทำการประเมิน จึงจะรู้ถึงพลังอำนาจของมันได้		
+6005	ไอเทมยังไม่ประเมิน สีฟ้า LV.80	ไอเทมที่ถูกควันสีฟ้าบดบัง ไอเทมที่ต้องทำการประเมิน จึงจะรู้ถึงพลังอำนาจของมันได้		
+6006	ไอเทมยังไม่ประเมิน สีฟ้า LV.90	ไอเทมที่ถูกควันสีฟ้าบดบัง ไอเทมที่ต้องทำการประเมิน จึงจะรู้ถึงพลังอำนาจของมันได้		
+6007	ไอเทมยังไม่ประเมิน สีฟ้า LV.100	ไอเทมที่ถูกควันสีฟ้าบดบัง ไอเทมที่ต้องทำการประเมิน จึงจะรู้ถึงพลังอำนาจของมันได้		
+6008	ไอเทมยังไม่ประเมิน สีฟ้า LV.110	ไอเทมที่ถูกควันสีฟ้าบดบัง ไอเทมที่ต้องทำการประเมิน จึงจะรู้ถึงพลังอำนาจของมันได้		
+6009	ไอเทมยังไม่ประเมิน สีฟ้า LV.115	ไอเทมที่ถูกควันสีฟ้าบดบัง ไอเทมที่ต้องทำการประเมิน จึงจะรู้ถึงพลังอำนาจของมันได้		
+6101	Red Feather Hook	ความเย่อหยิ่งของราชาแห่งท้องฟ้า	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6102	Lion King Guard 	ศักดิ์ศรีของสิงโต แสดงให้เห็นถึงความน่าเกรงขาม	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6103	Lion Deep Guard 	สิงโตที่ดุร้าย ทางที่ดีเมื่อเดินผ่านมันต้องทำเงียบให้เงียบกริบ	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6104	Flame Amethyst	เปลวเพลิงและคริสตัลหลอมรวม แสงนั้นไม่ใช่แสงอันน่าหลงไหล	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6105	Indigo Cannon	ซ่อนอยู่ในความลับของทะเลทั้งเจ็ด	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6106	Forest Movement	เมื่อหดหู่ก็จงหลับตาและร้องมันออกมา!	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6107	焰火烈女	戰鬥吧，鐵甲護衛下的堅強！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6111	Red Feather Hook	ความเย่อหยิ่งของราชาแห่งท้องฟ้า	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6112	Lion King Guard 	ศักดิ์ศรีของสิงโต แสดงให้เห็นถึงความน่าเกรงขาม	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6113	Lion Deep Guard 	สิงโตที่ดุร้าย ทางที่ดีเมื่อเดินผ่านมันต้องทำเงียบให้เงียบกริบ	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6114	Flame Amethyst	เปลวเพลิงและคริสตัลหลอมรวม แสงนั้นไม่ใช่แสงอันน่าหลงไหล	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6115	Indigo Cannon	ซ่อนอยู่ในความลับของทะเลทั้งเจ็ด	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6116	Forest Movement	เมื่อหดหู่ก็จงหลับตาและร้องมันออกมา!	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6117	焰火烈女	戰鬥吧，鐵甲護衛下的堅強！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6121	Red Feather Hook	ความเย่อหยิ่งของราชาแห่งท้องฟ้า	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6122	Lion King Guard 	ศักดิ์ศรีของสิงโต แสดงให้เห็นถึงความน่าเกรงขาม	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6123	Lion Deep Guard 	สิงโตที่ดุร้าย ทางที่ดีเมื่อเดินผ่านมันต้องทำเงียบให้เงียบกริบ	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6124	Flame Amethyst	เปลวเพลิงและคริสตัลหลอมรวม แสงนั้นไม่ใช่แสงอันน่าหลงไหล	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6125	Indigo Cannon	ซ่อนอยู่ในความลับของทะเลทั้งเจ็ด	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6126	Forest Movement	เมื่อหดหู่ก็จงหลับตาและร้องมันออกมา!	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+6127	焰火烈女	戰鬥吧，鐵甲護衛下的堅強！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6131	紅羽鉤	天空王者的驕傲。	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6132	獅王護	雄獅的威嚴，不可侵犯的領域。	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6133	獅冥護	雄獅盤據的領域，經過時最好噤聲。	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6134	烈焰紫晶	火焰與紫系水晶，照耀的不是熱情。	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6135	靛藍炮	藏在七海中的秘密。	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6136	森林樂章	情緒低落時，閉上眼吟唱吧！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6137	焰火烈女	戰鬥吧，鐵甲護衛下的堅強！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6141	紅羽鉤	天空王者的驕傲。	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6142	獅王護	雄獅的威嚴，不可侵犯的領域。	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6143	獅冥護	雄獅盤據的領域，經過時最好噤聲。	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6144	烈焰紫晶	火焰與紫系水晶，照耀的不是熱情。	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6145	靛藍炮	藏在七海中的秘密。	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6146	森林樂章	情緒低落時，閉上眼吟唱吧！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+6147	焰火烈女	戰鬥吧，鐵甲護衛下的堅強！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+7001	Serpent Headdress	ไอเทมที่ระลึกจากการกำจัด Tunnel Serpent (ไอเทมนี้ไม่สามารถหลอมซ้ำได้)		
+7002	Serpent Armor	ไอเทมที่ระลึกจากการกำจัด Tunnel Serpent (ไอเทมนี้ไม่สามารถหลอมซ้ำได้)		
+7003	Serpent Legging	ไอเทมที่ระลึกจากการกำจัด Tunnel Serpent (ไอเทมนี้ไม่สามารถหลอมซ้ำได้)		
+7004	Serpent Glove	ไอเทมที่ระลึกจากการกำจัด Tunnel Serpent (ไอเทมนี้ไม่สามารถหลอมซ้ำได้)		
+7005	Serpent Gaiter	ไอเทมที่ระลึกจากการกำจัด Tunnel Serpent (ไอเทมนี้ไม่สามารถหลอมซ้ำได้)		
+7006	Serpent Necklace	ไอเทมที่ระลึกจากการกำจัด Tunnel Serpent (ไอเทมนี้ไม่สามารถหลอมซ้ำได้)		
+7007	Serpent Ring	ไอเทมที่ระลึกจากการกำจัด Tunnel Serpent (ไอเทมนี้ไม่สามารถหลอมซ้ำได้)		
+7008	Serpent Talisman	ไอเทมที่ระลึกจากการกำจัด Tunnel Serpent (ไอเทมนี้ไม่สามารถหลอมซ้ำได้)		
+7009	Serpent Bracelet	ไอเทมที่ระลึกจากการกำจัด Tunnel Serpent (ไอเทมนี้ไม่สามารถหลอมซ้ำได้)		
+7010	Serpent Sword	ไอเทมที่ระลึกจากการกำจัด Tunnel Serpent (ไอเทมนี้ไม่สามารถหลอมซ้ำได้)		
+7011	Serpent Hammer	ไอเทมที่ระลึกจากการกำจัด Tunnel Serpent (ไอเทมนี้ไม่สามารถหลอมซ้ำได้)		
+7012	Serpent Shield	ไอเทมที่ระลึกจากการกำจัด Tunnel Serpent (ไอเทมนี้ไม่สามารถหลอมซ้ำได้)		
+7013	Serpent Stick	ไอเทมที่ระลึกจากการกำจัด Tunnel Serpent (ไอเทมนี้ไม่สามารถหลอมซ้ำได้)		
+7014	Serpent Stone	ไอเทมที่ระลึกจากการกำจัด Tunnel Serpent (ไอเทมนี้ไม่สามารถหลอมซ้ำได้)		
+7015	Serpent Gun	ไอเทมที่ระลึกจากการกำจัด Tunnel Serpent (ไอเทมนี้ไม่สามารถหลอมซ้ำได้)		
+7016	巨蛇娃娃	擊倒坑道巨蛇而獲得的寶物(此裝備無法進行重煉)		
+8905	玫瑰	書頁翻動時散發的玫瑰香，隨時隨地擁有悠閒的午茶時光！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+8906	優雅女僕	牽手吧，溫柔的鄰家女孩！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+8907	優雅女僕	牽手吧，溫柔的鄰家女孩！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+8908	優雅女僕	牽手吧，溫柔的鄰家女孩！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+8909	優雅女僕	牽手吧，溫柔的鄰家女孩！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+8910	優雅女僕	牽手吧，溫柔的鄰家女孩！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+8911	優雅女僕	牽手吧，溫柔的鄰家女孩！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+8912	優雅女僕	牽手吧，溫柔的鄰家女孩！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+8913	優雅女僕	牽手吧，溫柔的鄰家女孩！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+8914	焰火烈女	戰鬥吧，鐵甲護衛下的堅強！	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+8915	哥德蘿莉	祈禱吧，懸掛在裙襬上的聖十字。	似乎隱藏著未知的力量，需鑑定後才可裝備。	
+8916	Rose	เมื่อพลิกหน้ากระดาษจะได้กลิ่นดอกกุหลาบอ่อนๆ สามารถพกไปในที่ต่างๆได้!	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+8917	Gully Lion	สิงโตที่ชอบกินชอคโกแลตเหมือนเด็กๆ ว่าแต่ใครจะอยากแก่ล่ะ?	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+8918	Bull King Skull	อุณหภูมิรอบกายลดลง มีเสียงอันน่าหวาดกลัว ความรู้สึกนี้ผู้ที่มีชีวิตอยู่รู้สึกได้เท่านั้น	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+8919	Moonlight	ไม่ว่าจะอยู่ในเหตุการณ์ใด มันก็จะปกป้องท่าน	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+8920	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้ หากใครใช้มันถือว่ามีความผิด	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+8921	Colorful Wing	นกที่ป้องกันป่าเขาลำเนาไพร ใช้เสียงเรียกความอุดมสมบูรณ์กลับคือสู่ป่า	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการประเมินก่อนจึงจะสวมใส่ได้	
+8922	Red Feather Hook	ความเย่อหยิ่งของราชาแห่งท้องฟ้า	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8923	Blood Sickle	เสียงของความตายเริ่มใกล้เข้ามาแล้ว	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8924	Lion Guard	ศักดิ์ศรีของสิงโต แสดงให้เห็นถึงความน่าเกรงขาม	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8925	Red Disaster	เมื่อความน่ากลัวก่อเกิดขึ้น ความตายเป็นย่อมมาเยือน	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8926	Lion Guard	ศักดิ์ศรีของราชสีห์ แสดงให้เห็นถึงความน่าเกรงขาม	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8927	Red Guard	บนโลกที่ถูกระเรงไปด้วยสีแดง จะต้องมีมุ่มมุมหนึ่งที่ยางขาวสะอาด	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8928	Flame Amethyst	เปลวเพลิงและคริสตัลหลอมรวม แสงนั้นไม่ใช่แสงอันน่าหลงไหล	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8929	Death Gaze	เป็นหรือตาย? มัวลังเลอะไรล่ะ	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8930	Indigo Cannon	ซ่อนอยู่ในความลับของทะเลทั้งเจ็ด	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8931	Fighting Double Dragon	สงครามที่ลงตัว ดั่งเปลวเพลิงที่ร้อนระอุกับการต่อสู้อันดุเดือด	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8932	Forest Movement	เมื่อหดหู่ก็จงหลับตาและร้องมันออกมา!	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8933	Devil  Dungeon	อยากจะลองดีกับเผ่าความตายงั้นเหรอ? มาเลย!	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8934	Asura Headdress	เงาของคนที่โผล่มาจากความมืดมิด บนตัวสวมใส่ความพ่ายแพ้และวอดวาย	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8935	Asura Armor	เงาของคนที่โผล่มาจากความมืดมิด บนตัวสวมใส่ความพ่ายแพ้และวอดวาย	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8936	Asura Legging	เงาของคนที่โผล่มาจากความมืดมิด บนตัวสวมใส่ความพ่ายแพ้และวอดวาย	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8937	Asura Glove	เงาของคนที่โผล่มาจากความมืดมิด บนตัวสวมใส่ความพ่ายแพ้และวอดวาย	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8938	Asura Sandal	เงาของคนที่โผล่มาจากความมืดมิด บนตัวสวมใส่ความพ่ายแพ้และวอดวาย	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8939	Rose	หน้าหนังสือมีกลิ่นดอกกุหลาบ สามารถพกไปในที่ต่างๆได้!	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8940	Rose	หน้าหนังสือมีกลิ่นดอกกุหลาบ สามารถพกไปในที่ต่างๆได้!	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8941	Rose	หน้าหนังสือมีกลิ่นดอกกุหลาบ สามารถพกไปในที่ต่างๆได้!	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8942	Rose	หน้าหนังสือมีกลิ่นดอกกุหลาบ สามารถพกไปในที่ต่างๆได้!	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8943	Rose	หน้าหนังสือมีกลิ่นดอกกุหลาบ สามารถพกไปในที่ต่างๆได้!	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8944	Rose	หน้าหนังสือมีกลิ่นดอกกุหลาบ สามารถพกไปในที่ต่างๆได้!	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8945	Rose	หน้าหนังสือมีกลิ่นดอกกุหลาบ สามารถพกไปในที่ต่างๆได้!	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8946	Gully Lion	สิงโตที่ชอบกินชอคโกแลตเหมือนเด็กๆ ว่าแต่มีคนอยากแก่ด้วยเหรอ?	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8947	Gully Lion	สิงโตที่ชอบกินชอคโกแลตเหมือนเด็กๆ ว่าแต่มีคนอยากแก่ด้วยเหรอ?	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8948	Gully Lion	สิงโตที่ชอบกินชอคโกแลตเหมือนเด็กๆ ว่าแต่มีคนอยากแก่ด้วยเหรอ?	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8949	Gully Lion	สิงโตที่ชอบกินชอคโกแลตเหมือนเด็กๆ ว่าแต่มีคนอยากแก่ด้วยเหรอ?	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8950	Gully Lion	สิงโตที่ชอบกินชอคโกแลตเหมือนเด็กๆ ว่าแต่มีคนอยากแก่ด้วยเหรอ?	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8951	Gully Lion	สิงโตที่ชอบกินชอคโกแลตเหมือนเด็กๆ ว่าแต่มีคนอยากแก่ด้วยเหรอ?	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8952	Gully Lion	สิงโตที่ชอบกินชอคโกแลตเหมือนเด็กๆ ว่าแต่มีคนอยากแก่ด้วยเหรอ?	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8953	Bull King Skull	อุณหภูมิรอบกายลดลง มีเสียงอันน่าหวาดกลัว ความรู้สึกนี้ผู้ที่มีชีวิตอยู่รู้สึกได้เท่านั้น	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8954	Bull King Skull	อุณหภูมิรอบกายลดลง มีเสียงอันน่าหวาดกลัว ความรู้สึกนี้ผู้ที่มีชีวิตอยู่รู้สึกได้เท่านั้น	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8955	Bull King Skull	อุณหภูมิรอบกายลดลง มีเสียงอันน่าหวาดกลัว ความรู้สึกนี้ผู้ที่มีชีวิตอยู่รู้สึกได้เท่านั้น	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8956	Bull King Skull	อุณหภูมิรอบกายลดลง มีเสียงอันน่าหวาดกลัว ความรู้สึกนี้ผู้ที่มีชีวิตอยู่รู้สึกได้เท่านั้น	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8957	Bull King Skull	อุณหภูมิรอบกายลดลง มีเสียงอันน่าหวาดกลัว ความรู้สึกนี้ผู้ที่มีชีวิตอยู่รู้สึกได้เท่านั้น	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8958	Bull King Skull	อุณหภูมิรอบกายลดลง มีเสียงอันน่าหวาดกลัว ความรู้สึกนี้ผู้ที่มีชีวิตอยู่รู้สึกได้เท่านั้น	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8959	Bull King Skull	อุณหภูมิรอบกายลดลง มีเสียงอันน่าหวาดกลัว ความรู้สึกนี้ผู้ที่มีชีวิตอยู่รู้สึกได้เท่านั้น	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8960	Moonlight	ไม่ว่าจะอยู่ในเหตุการณ์ใด มันก็จะปกป้องท่าน	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8961	Moonlight	ไม่ว่าจะอยู่ในเหตุการณ์ใด มันก็จะปกป้องท่าน	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8962	Moonlight	ไม่ว่าจะอยู่ในเหตุการณ์ใด มันก็จะปกป้องท่าน	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8963	Moonlight	ไม่ว่าจะอยู่ในเหตุการณ์ใด มันก็จะปกป้องท่าน	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8964	Moonlight	ไม่ว่าจะอยู่ในเหตุการณ์ใด มันก็จะปกป้องท่าน	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8965	Moonlight	ไม่ว่าจะอยู่ในเหตุการณ์ใด มันก็จะปกป้องท่าน	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8966	Moonlight	ไม่ว่าจะอยู่ในเหตุการณ์ใด มันก็จะปกป้องท่าน	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8967	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้ หากใครใช้มันถือว่ามีความผิด	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8968	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้ หากใครใช้มันถือว่ามีความผิด	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8969	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้ หากใครใช้มันถือว่ามีความผิด	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8970	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้ หากใครใช้มันถือว่ามีความผิด	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8971	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้ หากใครใช้มันถือว่ามีความผิด	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8972	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้ หากใครใช้มันถือว่ามีความผิด	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8973	Serenity Horn	โลกอันมืดมิด เป็นเสียงที่ห้ามมีอยู่ในโลกนี้ หากใครใช้มันถือว่ามีความผิด	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8974	Colorful Wing	นกที่ป้องกันป่าเขาลำเนาไพร ใช้เสียงเรียกความอุดมสมบูรณ์กลับคือสู่ป่า	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8975	Colorful Wing	นกที่ป้องกันป่าเขาลำเนาไพร ใช้เสียงเรียกความอุดมสมบูรณ์กลับคือสู่ป่า	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8976	Colorful Wing	นกที่ป้องกันป่าเขาลำเนาไพร ใช้เสียงเรียกความอุดมสมบูรณ์กลับคือสู่ป่า	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8977	Colorful Wing	นกที่ป้องกันป่าเขาลำเนาไพร ใช้เสียงเรียกความอุดมสมบูรณ์กลับคือสู่ป่า	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8978	Colorful Wing	นกที่ป้องกันป่าเขาลำเนาไพร ใช้เสียงเรียกความอุดมสมบูรณ์กลับคือสู่ป่า	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8979	Colorful Wing	นกที่ป้องกันป่าเขาลำเนาไพร ใช้เสียงเรียกความอุดมสมบูรณ์กลับคือสู่ป่า	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8980	Colorful Wing	นกที่ป้องกันป่าเขาลำเนาไพร ใช้เสียงเรียกความอุดมสมบูรณ์กลับคือสู่ป่า	มีพลังรุนแรงที่ไม่อาจมีใครรู้แฝงอยู่ จะต้องทำการชี้ขาดก่อนจึงจะสวมใส่ได้	
+8981	Advanced Unidentified Item(Secret)	ไอเทมที่เต็มไปด้วยหมอกควันสีฟ้า ยังไม่ได้ชี้ขาดมัน ก็รับรองได้ว่าเป็นที่น่าประทับใจอย่างแน่นอน		
+8982	Special Unidentified Item(Secret)	ไอเทมที่เต็มไปด้วยหมอกควันสีม่วง ยังไม่ได้ชี้ขาดมัน ก็รับรองได้ว่าเป็นที่น่าประทับใจอย่างแน่นอน		
+8983	1 Star Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการชี้ขาด จึงจะเห็นกำลังที่แท้จริงของมัน		
+8984	1 Star Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการชี้ขาด จึงจะเห็นกำลังที่แท้จริงของมัน		
+8985	1 Star Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการชี้ขาด จึงจะเห็นกำลังที่แท้จริงของมัน		
+8986	1 Star Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการชี้ขาด จึงจะเห็นกำลังที่แท้จริงของมัน		
+8987	1 Star Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการชี้ขาด จึงจะเห็นกำลังที่แท้จริงของมัน		
+8988	1 Star Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการชี้ขาด จึงจะเห็นกำลังที่แท้จริงของมัน		
+8989	1 Star Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการชี้ขาด จึงจะเห็นกำลังที่แท้จริงของมัน		
+8990	1 Star Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการชี้ขาด จึงจะเห็นกำลังที่แท้จริงของมัน		
+8991	1 Star Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการชี้ขาด จึงจะเห็นกำลังที่แท้จริงของมัน		
+8992	1 Star Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการชี้ขาด จึงจะเห็นกำลังที่แท้จริงของมัน		
+8993	1 Star Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการชี้ขาด จึงจะเห็นกำลังที่แท้จริงของมัน		
+8994	1 Star Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการชี้ขาด จึงจะเห็นกำลังที่แท้จริงของมัน		
+8995	2 Star Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการชี้ขาด จึงจะเห็นกำลังที่แท้จริงของมัน		
+8996	3 Star Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการชี้ขาด จึงจะเห็นกำลังที่แท้จริงของมัน		
+8997	Advanced Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันสีฟ้า ยังไม่ได้ชี้ขาดมัน ก็รับรองได้ว่าเป็นที่น่าประทับใจอย่างแน่นอน		
+8998	Special Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันสีม่วง ยังไม่ได้ชี้ขาดมัน ก็รับรองได้ว่าเป็นที่น่าประทับใจอย่างแน่นอน		
+8999	Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการชี้ขาด จึงจะเห็นกำลังที่แท้จริงของมัน		
+9000	Unknown Item	ไอเทมที่ถูกควันสีฟ้าบดบัง ไอเทมที่ต้องทำการประเมิน จึงจะรู้ถึงพลังอำนาจของมันได้		
+9001	Unknown Item	ไอเทมที่ถูกควันสีฟ้าบดบัง ไอเทมที่ต้องทำการประเมิน จึงจะรู้ถึงพลังอำนาจของมันได้		
+9002	Unknown Item	ไอเทมที่ถูกควันสีฟ้าบดบัง ไอเทมที่ต้องทำการประเมิน จึงจะรู้ถึงพลังอำนาจของมันได้		
+9003	Unknown Item	ไอเทมที่ถูกควันสีฟ้าบดบัง ไอเทมที่ต้องทำการประเมิน จึงจะรู้ถึงพลังอำนาจของมันได้		
+9011	Unidentified Item (Headdress )	ไอเทมที่ถูกพลังงานบางอย่างปกคลุม จะต้องทำการตีราคาก่อนจึงจะรู้ถึงพลังที่แท้จริงของมันได้		
+9012	Unidentified Item (Armor)	ไอเทมที่ถูกพลังงานบางอย่างปกคลุม จะต้องทำการตีราคาก่อนจึงจะรู้ถึงพลังที่แท้จริงของมันได้		
+9013	Unidentified Item (Legging)	ไอเทมที่ถูกพลังงานบางอย่างปกคลุม จะต้องทำการตีราคาก่อนจึงจะรู้ถึงพลังที่แท้จริงของมันได้		
+9014	Unidentified Item (Gauntlets)	ไอเทมที่ถูกพลังงานบางอย่างปกคลุม จะต้องทำการตีราคาก่อนจึงจะรู้ถึงพลังที่แท้จริงของมันได้		
+9015	Unidentified Item (Gaiter)	ไอเทมที่ถูกพลังงานบางอย่างปกคลุม จะต้องทำการตีราคาก่อนจึงจะรู้ถึงพลังที่แท้จริงของมันได้		
+9016	Unidentified Item (Necklace)	ไอเทมที่ถูกพลังงานบางอย่างปกคลุม จะต้องทำการตีราคาก่อนจึงจะรู้ถึงพลังที่แท้จริงของมันได้		
+9017	Unidentified Item (Ring)	ไอเทมที่ถูกพลังงานบางอย่างปกคลุม จะต้องทำการตีราคาก่อนจึงจะรู้ถึงพลังที่แท้จริงของมันได้		
+9018	Unidentified Item (Talisman)	ไอเทมที่ถูกพลังงานบางอย่างปกคลุม จะต้องทำการตีราคาก่อนจึงจะรู้ถึงพลังที่แท้จริงของมันได้		
+9019	Unidentified Item (Bracelet)	ไอเทมที่ถูกพลังงานบางอย่างปกคลุม จะต้องทำการตีราคาก่อนจึงจะรู้ถึงพลังที่แท้จริงของมันได้		
+9020	Unidentified Item (Sword)	ไอเทมที่ถูกพลังงานบางอย่างปกคลุม จะต้องทำการตีราคาก่อนจึงจะรู้ถึงพลังที่แท้จริงของมันได้		
+9021	Unidentified Item (Hammer)	ไอเทมที่ถูกพลังงานบางอย่างปกคลุม จะต้องทำการตีราคาก่อนจึงจะรู้ถึงพลังที่แท้จริงของมันได้		
+9022	Unidentified Item (Shield)	ไอเทมที่ถูกพลังงานบางอย่างปกคลุม จะต้องทำการตีราคาก่อนจึงจะรู้ถึงพลังที่แท้จริงของมันได้		
+9023	Unidentified Item (Staff)	ไอเทมที่ถูกพลังงานบางอย่างปกคลุม จะต้องทำการตีราคาก่อนจึงจะรู้ถึงพลังที่แท้จริงของมันได้		
+9024	Unidentified Item (Stone)	ไอเทมที่ถูกพลังงานบางอย่างปกคลุม จะต้องทำการตีราคาก่อนจึงจะรู้ถึงพลังที่แท้จริงของมันได้		
+9025	Unidentified Item (Gun)	ไอเทมที่ถูกพลังงานบางอย่างปกคลุม จะต้องทำการตีราคาก่อนจึงจะรู้ถึงพลังที่แท้จริงของมันได้		
+9026	Unidentified Item (Doll)	ไอเทมที่เต็มไปด้วยหมอกควันแปลกประหลาด จำเป็นต้องทำการประเมิน จึงจะเห็นกำลังที่แท้จริงของมัน		
+9101	Iron Sword 45-use	มีดยาวที่ดูแหลมคม		ใช้แล้ว+คลั่ง
+9102	Guard Hammer 45	ไม้เท้าสั้นที่ดูธรรมดาสามัญ		
+9103	Shield 45	โล่ที่ดูแข็งแกร่งและมั่นคง		
+9104	Wood Stick 45	ไม้เท้ายาวที่ดูธรรมดาสามัญ		
+9105	Blue Sky Headdress 45	มันคือเครื่องสวมใส่นักโทษ!		
+9106	Blue Sky Armor 45	มันคือเครื่องสวมใส่นักโทษ!		
+9107	Blue Sky Legging 45	มันคือเครื่องสวมใส่นักโทษ!		
+9108	Blue Sky Gauntlets 45	มันคือเครื่องสวมใส่นักโทษ!		
+9109	Blue Sky Gaiter45	มันคือเครื่องสวมใส่นักโทษ!		
+9110	Blue Sky Necklace45	ของที่แขวนไว้ที่คอ		
+9111	Blue Sky Ring45	ของที่ใช้สวมนิ้ว		
+9112	Wide Blade 110	มีดยาวที่ดูแหลมคม		
+9113	Red Rock Hammer 110	ไม้เท้าสั้นที่ดูธรรมดาสามัญ		
+9114	Red Rock Shield 110	โล่ที่ดูแข็งแกร่งและมั่นคง		
+9115	Butterfly Stick 110	ไม้เท้ายาวที่ดูธรรมดาสามัญ		
+9116	Orchid Headdress 110	มันคือเครื่องสวมใส่นักโทษ!		
+9117	Orchid Armor 110	มันคือเครื่องสวมใส่นักโทษ!		
+9118	Orchid Legging 110	มันคือเครื่องสวมใส่นักโทษ!		
+9119	Orchid Glove 110	มันคือเครื่องสวมใส่นักโทษ!		
+9120	Orchid Boot 110	มันคือเครื่องสวมใส่นักโทษ!		
+9121	Orchid Of Chain 110	ของที่แขวนไว้ที่คอ		
+9122	Orchid Ring 110	ของที่ใช้สวมนิ้ว		
+9123	Orchid Talisman 110	ของที่พกไว้ในซอกกระเป๋าตังค์		
+9124	Orchid Bracelet 110	ของที่ใส่คู่กับกำไล		
+9125	Iron Sword 45 P	มีดยาวที่ดูแหลมคม สีม่วง!		
+9126	Guard Hammer 45 P	ไม้เท้าสั้นที่ดูธรรมดาสามัญ สีม่วง!		
+9127	Shield 45 P	โล่ที่ดูแข็งแกร่งและมั่นคง สีม่วง!		
+9128	Wood Stick 45 P	ไม้เท้ายาวที่ดูธรรมดาสามัญ สีม่วง!		
+9129	Blue Sky Headdress 45 P	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9130	Blue Sky Armor 45 P	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9131	Blue Sky Legging 45 P	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9132	Blue Sky Gauntlets 45 P	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9133	Blue Sky Gaiter 45 P	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9134	Blue Sky Necklace 45 P	ของที่แขวนไว้ที่คอ สีม่วง!		
+9135	Blue Sky Ring 45 P	ของที่ใช้สวมนิ้ว สีม่วง!		
+9136	Wide Blade 110 P	มีดยาวที่ดูแหลมคม สีม่วง!		
+9137	Red Rock Hammer 110 P	ไม้เท้าสั้นที่ดูธรรมดาสามัญ สีม่วง!		
+9138	Red Rock Shield 110 P	โล่ที่ดูแข็งแกร่งและมั่นคง สีม่วง!		
+9139	Butterfly Stick 110 P	ไม้เท้ายาวที่ดูธรรมดาสามัญ สีม่วง!		
+9140	Orchid Headdress 110 P	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9141	Orchid Armor 110 P	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9142	Orchid Legging 110 P	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9143	Orchid Glove 110 P	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9144	Orchid Boot 110 P	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9145	Orchid Of Chain 110 P	ของที่แขวนไว้ที่คอ สีม่วง!		
+9146	Orchid Ring 110 P	ของที่ใช้สวมนิ้ว สีม่วง!		
+9147	Orchid Talisman 110 P	ของที่พกไว้ในซอกกระเป๋าตังค์ สีม่วง!		
+9148	Orchid Bracelet 110 P	ของที่ใส่คู่กับกำไล สีม่วง!		
+9149	Lightsaber 110 P	ข้าคือไม้เท้าสั้นพิเศษ สีม่วง!		
+9150	Puppet Bunny	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+9151	Pirate meow	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+9152	Indian Bird	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+9153	Ceramic Doll	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+9154	Spitfire Dragon	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+9155	Ghost Ah	อาวุธที่ลักษณะเหมาะมือ เดินทางไกลจำเป็นต้องพกไว้		
+9156	Slave Headdress 6	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9157	Slave Headdress 7	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9158	Slave Headdress 8	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9159	Slave Armor 0	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9160	Slave Armor 1	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9161	Slave Armor 2	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9162	Slave Armor 3	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9163	Slave Armor 4	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9164	Slave Armor 5	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9165	Slave Armor 6	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9166	Slave Armor 7	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9167	Slave Armor 8	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9168	Slave Legging 0	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9169	Slave Legging 1	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9170	Slave Legging 2	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9171	Slave Legging 3	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9172	Slave Legging 4	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9173	Slave Legging 5	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9174	Slave Legging 6	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9175	Slave Legging 7	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9176	Slave Legging 8	มันคือเครื่องสวมใส่นักโทษ! สีม่วง!		
+9177	Small Gun 110	ปืนสีเขียว		
+9178	Small Gun 110 P	ปืนสีม่วง		
+9179	Blessing Shine 110	กระดูกสีเขียว		
+9180	Blessing Shine 110 P	กระดูกสีม่วง		
+9181	Teatime 45	กระดูกสีเขียว		
+9182	Teatime 45 P	กระดูกสีม่วง		
+9183	Dark Sanction45	ปืนสีเขียว		
+9184	Dark Sanction 45 P	ปืนสีม่วง		
+9185	Sky Ring	แหวนลึกลับ	ใส่มันแล้วบินได้นะ!	
+9186	Wind Whisper Headdress60	เครื่องประดับหัว! สีเขียว!		
+9187	Hold Knife 80 B	มีดยาวที่ดูแหลมคม สีฟ้า!		
+9188	Half Water Hammer 80 B	ไม้เท้าสั้นที่ดูธรรมดาสามัญ สีฟ้า!		
+9189	Half Water Shield 80 B	โล่ที่ดูแข็งแกร่งและมั่นคง สีฟ้า!		
+9190	Wood Stick 80 B	ไม้เท้ายาวที่ดูธรรมดาสามัญ สีฟ้า!		
+9191	Teatime 80 B	กระดูกสีฟ้า		
+9192	Fist Gun 80 B	กระดูกสีฟ้าปืนสีฟ้า		
+9193	Morning Light Headdress 80 B	มันคือเครื่องสวมใส่นักโทษ! สีฟ้า!		
+9194	Morning Light Armor 80 B	มันคือเครื่องสวมใส่นักโทษ! สีฟ้า!		
+9195	Morning Light Legging 80 B	มันคือเครื่องสวมใส่นักโทษ! สีฟ้า!		
+9196	Morning Light Glove 80 B	มันคือเครื่องสวมใส่นักโทษ! สีฟ้า!		
+9197	Morning Light Boot 80 B	มันคือเครื่องสวมใส่นักโทษ! สีฟ้า!		
+9198	Morning Light Of Chain 80 B	ของที่แขวนไว้ที่คอ สีฟ้า!		
+9199	Morning Light Ring 80 B	ของที่ใช้สวมนิ้ว สีฟ้า!		
+9200	Morning Light Talisman 80 B	ของที่พกไว้ในซอกกระเป๋าตังค์ สีฟ้า!		
+9201	Morning Light Bracelet 80 B	ของที่ใส่คู่กับกำไล สีฟ้า!		
+9202	Silver Sword 90 B	มีดยาวที่ดูแหลมคม สีฟ้า!		
+9203	Forest Light Hammer 90 B	ไม้เท้าสั้นที่ดูธรรมดาสามัญ สีฟ้า!		
+9204	Forest Light Shield 90 B	โล่ที่ดูแข็งแกร่งและมั่นคง สีฟ้า!		
+9205	Feather Stick 90 B	ไม้เท้ายาวที่ดูธรรมดาสามัญ สีฟ้า!		
+9206	Time Meter 90 B	กระดูกสีฟ้า		
+9207	Blade Gun 90 B	กระดูกสีฟ้า ปืนสีฟ้า		
+9208	Star Headdress 90 B	มันคือเครื่องสวมใส่นักโทษ! สีฟ้า!		
+9209	Star Armor 90 B	มันคือเครื่องสวมใส่นักโทษ! สีฟ้า!		
+9210	Star Legging 90 B	มันคือเครื่องสวมใส่นักโทษ! สีฟ้า!		
+9211	Star Glove 90 B	มันคือเครื่องสวมใส่นักโทษ! สีฟ้า!		
+9212	Star Boot 90 B	มันคือเครื่องสวมใส่นักโทษ! สีฟ้า!		
+9213	Star Of Chain 90 B	ของที่แขวนไว้ที่คอ สีฟ้า!		
+9214	Star Ring 90 B	ของที่ใช้สวมนิ้ว สีฟ้า!		
+9215	Star Talisman 90 B	ของที่พกไว้ในซอกกระเป๋าตังค์ สีฟ้า!		
+9216	Star Bracelet 90 B	ของที่ใส่คู่กับกำไล สีฟ้า!		
+9217	Silver Sword 120 G	มีดยาวที่ดูแหลมคม สีเขียว!		
+9218	Forest Light Hammer 120 G	ไม้เท้าสั้นที่ดูธรรมดาสามัญ สีเขียว!		
+9219	Forest Light Shield 120 G	โล่ที่ดูแข็งแกร่งและมั่นคง สีเขียว!		
+9220	Feather Stick 120 G	ไม้เท้ายาวที่ดูธรรมดาสามัญ สีเขียว!		
+9221	Time Meter 120 G	กระดูกสีเขียว		
+9222	Blade Gun 120 G	ปืนสีเขียว		
+9223	Bloody Headdress 120 G	มันคือเครื่องสวมใส่นักโทษ! สีเขียว!		
+9224	Bloody Armor 120 G	มันคือเครื่องสวมใส่นักโทษ! สีเขียว!		
+9225	Bloody Legging 120 G	มันคือเครื่องสวมใส่นักโทษ! สีเขียว!		
+9226	Bloody Glove 120 G	มันคือเครื่องสวมใส่นักโทษ! สีเขียว!		
+9227	Bloody Boot 120 G	มันคือเครื่องสวมใส่นักโทษ! สีเขียว!		
+9228	Bloody Of Chain 120 G	ของที่แขวนไว้ที่คอ สีเขียว!		
+9229	Bloody Ring 120 G	ของที่ใช้สวมนิ้ว สีเขียว!		
+9230	Bloody Talisman 120 G	ของที่พกไว้ในซอกกระเป๋าตังค์ สีเขียว!		
+9231	Bloody Bracelet 120 G	ของที่ใส่คู่กับกำไล สีเขียว!		
+9232	PK Sword	PK only		
+9233	PK Hammer	PK only		
+9234	PK Shield	PK only		
+9235	PK Staff	PK only		
+9236	PK Stone	PK only		
+9237	PK Gun	PK only		
+9238	PK Headdress	PK only		
+9239	PK Armor	PK only		
+9240	PK Legging	PK only		
+9241	PK Glove	PK only		
+9242	PK Boot	PK only		
+9243	PK Of Chain	PK only		
+9244	PK Ring	PK only		
+9245	PK Talisman	PK only		
+9246	PK Bracelet	PK only		
+9247	Knockdown Bracelet	โจมตีพื้นฐานก็สามารถโจมตีโดนมอนสเตอร์ได้!		
+9301	2 Star Unidentified Item 45			
+9302	2 Star Unidentified Item 50			
+9303	2 Star Unidentified Item 60			
+9304	2 Star Unidentified Item 70			
+9305	2 Star Unidentified Item 90			
+9311	3 Star Unidentified Item 45			
+9312	3 Star Unidentified Item 50			
+9313	3 Star Unidentified Item 60			
+9314	3 Star Unidentified Item 70			
+9315	3 Star Unidentified Item 80			
+9316	3 Star Unidentified Item 90			
+9317	3 Star Unidentified Item 100			
+9506	Secret SeaSoldier Sword-Not moving	ใช้ในการทดลองการเปลี่ยนรูปร่าง		
+9507	Secret SeaSoldier Sword-continue	ใช้ในการทดลองการเปลี่ยนรูปร่าง		
+9508	Secret SeaSoldier Sword-battle	ใช้ในการทดลองการเปลี่ยนรูปร่าง		
+9509	Deformation Stick Skill	ใช้ในการทดลองการเปลี่ยนรูปร่าง		
+9510	Machine Gun-Not moving	ใช้ในการทดลองการเปลี่ยนรูปร่าง		
+9511	Machine Gun-continue	ใช้ในการทดลองการเปลี่ยนรูปร่าง		
+9512	Machine Gun-battle	ใช้ในการทดลองการเปลี่ยนรูปร่าง		
+9513	Machine Gun-skill	ใช้ในการทดลองการเปลี่ยนรูปร่าง		
+9514	H Special Sword Soul	เลเวล 50 เลย!		
+9801	Holy Knight Armor-Cap	สไตล์ยุโรป		
+9802	Holy Knight Armor-Armor	สไตล์ยุโรป		
+9803	Holy Knight Armor-Legging	สไตล์ยุโรป		
+9804	Black Knight Armor-Cap	สไตล์ยุโรป		
+9805	Black Knight Armor-Armor	สไตล์ยุโรป		
+9806	Black Knight Armor-Legging	สไตล์ยุโรป		
+9807	Van Helsing-Cap	สไตล์ยุโรป		
+9808	Van Helsing-Armor	สไตล์ยุโรป		
+9809	Van Helsing-Legging	สไตล์ยุโรป		
+9810	Fanhera-Cap	สไตล์ยุโรป		
+9811	Fanhera-Armor	สไตล์ยุโรป		
+9812	Fanhera-Legging	สไตล์ยุโรป		
+9813	Assassin Ferraiolone-Cap	สไตล์ยุโรป		
+9814	Assassin Ferraiolone-Armor	สไตล์ยุโรป		
+9815	Assassin Ferraiolone-Legging	สไตล์ยุโรป		
+9816	Assassin Teach-Cap	สไตล์ยุโรป		
+9817	Assassin Teach-Armor	สไตล์ยุโรป		
+9818	Assassin Teach-Legging	สไตล์ยุโรป		
+9819	Gunslinger Cowboy-Cap	สไตล์ยุโรป		
+9820	Gunslinger Cowboy-Armor	สไตล์ยุโรป		
+9821	Gunslinger Cowboy-Legging	สไตล์ยุโรป		
+9822	Gunslinger Sheriff-Cap	สไตล์ยุโรป		
+9823	Gunslinger Sheriff-Armor	สไตล์ยุโรป		
+9824	Gunslinger Sheriff-Legging	สไตล์ยุโรป		
+9825	Pirates Elegy-Cap	สไตล์ยุโรป		
+9826	Pirates Elegy-Armor	สไตล์ยุโรป		
+9827	Pirates Elegy-Legging	สไตล์ยุโรป		
+9828	Rogue Elegy-Cap	สไตล์ยุโรป		
+9829	Rogue Elegy-Armor	สไตล์ยุโรป		
+9830	Rogue Elegy-Legging	สไตล์ยุโรป		
+9905	Apple Knocker	อย่าเห็นข้าเป็น Willeson!		
+9961	LV.1加速鞋			測試用道具，內部使用，請勿外流！！
+9962	LV.2加速鞋			測試用道具，內部使用，請勿外流！！
+9963	LV.3加速鞋			測試用道具，內部使用，請勿外流！！
+9964	LV.4加速鞋			測試用道具，內部使用，請勿外流！！
+9965	LV.5加速鞋			測試用道具，內部使用，請勿外流！！
+9966	LV.6加速鞋			測試用道具，內部使用，請勿外流！！
+9967	LV.7加速鞋			測試用道具，內部使用，請勿外流！！
+9968	LV.8加速鞋			測試用道具，內部使用，請勿外流！！
+9969	LV.9加速鞋			測試用道具，內部使用，請勿外流！！
+9970	LV.10加速鞋			測試用道具，內部使用，請勿外流！！
+9971	LV.11加速鞋			測試用道具，內部使用，請勿外流！！
+9972	LV.12加速鞋			測試用道具，內部使用，請勿外流！！
+9973	LV.13加速鞋			測試用道具，內部使用，請勿外流！！
+9974	LV.14加速鞋			測試用道具，內部使用，請勿外流！！
+9975	LV.15加速鞋			測試用道具，內部使用，請勿外流！！
+9976	LV.16加速鞋			測試用道具，內部使用，請勿外流！！
+9977	LV.17加速鞋			測試用道具，內部使用，請勿外流！！
+9978	LV.18加速鞋			測試用道具，內部使用，請勿外流！！
+9979	LV.19加速鞋			測試用道具，內部使用，請勿外流！！
+9980	LV.20加速鞋			測試用道具，內部使用，請勿外流！！
+9984	劍魂	10		測試用道具，內部使用，請勿外流！！
+9985	劍魂	20		測試用道具，內部使用，請勿外流！！
+9986	Da Vinci-Headdress	เครื่องประดับหัวที่ Da Vinci ใส่		
+9987	Da Vinci Headdress Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันสีฟ้า ยังไม่ได้ชี้ขาดมัน ก็รับรองได้ว่าเป็นที่น่าประทับใจอย่างแน่นอน		
+9988	Da Vinci Headdress Unidentified Item	ไอเทมที่เต็มไปด้วยหมอกควันสีม่วง ยังไม่ได้ชี้ขาดมัน ก็รับรองได้ว่าเป็นที่น่าประทับใจอย่างแน่นอน		
+9989	Ignore Defense Hand	อะไรคือป้องกัน?		
+9990	Winner Foot	อะไรคือลดบาดเจ็บ?		
+9991	Good Burst Ring	Good Burst!	คริติคอล++	
+9992	Good Defense Bracelet	แข็งแรง!	ป้องกัน++	
+9993	Good Resistant Talisman	เป็นงาน!	อัตราต้านทาน++	
+9994	Good Dodge Necklace	แวววาว!	อัตราหลบหลีก++	
+9995	Dual World Of Key-Staff Type	ใช้เดินทางผ่านห้วงเวลา ถูกเฝ้าครองโดยโพไซดอน		
+9996	Dual World Of Key-Pumice Type	ใช้เดินทางผ่านห้วงเวลา ถูกเฝ้าครองโดยโพไซดอน		
+9997	Spike Cone	ยิ่งใหญ่!		
+9998	Spike Lightsaber	ยิ่งใหญ่!		
+9999	Good Hammer	ถึงชื่อจะเรียบง่าย แต่รับรองคุณภาพ!		
+10001	鐵匠利劍	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10002	鐵匠戰鎚	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10003	鐵匠巨盾	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10004	鐵匠長杖	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10005	鐵匠浮石	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10006	鐵匠火槍	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10007	鐵匠娃娃	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10011	鐵匠利劍	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10012	鐵匠戰鎚	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10013	鐵匠巨盾	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10014	鐵匠長杖	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10015	鐵匠浮石	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10016	鐵匠火槍	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10017	鐵匠娃娃	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10021	鐵匠利劍	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10022	鐵匠戰鎚	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10023	鐵匠巨盾	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10024	鐵匠長杖	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10025	鐵匠浮石	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10026	鐵匠火槍	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10027	鐵匠娃娃	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10031	鐵匠利劍	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10032	鐵匠戰鎚	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10033	鐵匠巨盾	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10034	鐵匠長杖	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10035	鐵匠浮石	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10036	鐵匠火槍	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10037	鐵匠娃娃	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10041	鐵匠利劍	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10042	鐵匠戰鎚	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10043	鐵匠巨盾	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10044	鐵匠長杖	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10045	鐵匠浮石	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10046	鐵匠火槍	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10047	鐵匠娃娃	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10051	鐵匠利劍	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10052	鐵匠戰鎚	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10053	鐵匠巨盾	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10054	鐵匠長杖	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10055	鐵匠浮石	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10056	鐵匠火槍	融合海神之力與原罪之力所製，宛如傳說中的武器		
+10057	鐵匠娃娃	融合海神之力與原罪之力所製，宛如傳說中的武器		
+15001	80鐵匠頭	融合海神之力與原罪之力所製，宛如傳說中的武器		
+15002	80鐵匠上身	融合海神之力與原罪之力所製，宛如傳說中的武器		
+15003	80鐵匠下身	融合海神之力與原罪之力所製，宛如傳說中的武器		
+15004	80鐵匠手	融合海神之力與原罪之力所製，宛如傳說中的武器		
+15005	80鐵匠腳	融合海神之力與原罪之力所製，宛如傳說中的武器		
+15021	100鐵匠頭	融合海神之力與原罪之力所製，宛如傳說中的武器		
+15022	100鐵匠上身	融合海神之力與原罪之力所製，宛如傳說中的武器		
+15023	100鐵匠下身	融合海神之力與原罪之力所製，宛如傳說中的武器		
+15024	100鐵匠手	融合海神之力與原罪之力所製，宛如傳說中的武器		
+15025	100鐵匠腳	融合海神之力與原罪之力所製，宛如傳說中的武器		
+90001	40藍物攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90002	40藍物攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90003	40藍物攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90004	40藍物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90005	40藍物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90006	40藍防禦頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90007	40藍防禦上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90008	40藍防禦下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90009	40藍防禦手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90010	40藍防禦腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90011	40藍魔攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90012	40藍魔攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90013	40藍魔攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90014	40藍魔攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90015	40藍魔攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90016	40藍物攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90017	40藍物攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90018	40藍物攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90019	40藍物攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90020	40藍防禦之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90021	40藍防禦之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90022	40藍防禦護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90023	40藍防禦手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90024	40藍魔攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90025	40藍魔攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90026	40藍魔攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90027	40藍魔攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90028	40藍劍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90029	40藍鎚	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90030	40藍盾	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90031	40藍杖	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90032	40藍石	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90033	40藍槍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90101	60藍物攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90102	60藍物攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90103	60藍物攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90104	60藍物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90105	60藍物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90106	60藍防禦頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90107	60藍防禦上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90108	60藍防禦下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90109	60藍防禦手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90110	60藍防禦腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90111	60藍魔攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90112	60藍魔攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90113	60藍魔攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90114	60藍魔攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90115	60藍魔攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90116	60藍物攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90117	60藍物攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90118	60藍物攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90119	60藍物攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90120	60藍防禦之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90121	60藍防禦之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90122	60藍防禦護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90123	60藍防禦手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90124	60藍魔攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90125	60藍魔攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90126	60藍魔攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90127	60藍魔攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90128	60藍劍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90129	60藍鎚	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90130	60藍盾	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90131	60藍杖	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90132	60藍石	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90133	60藍槍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90201	70藍物攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90202	70藍物攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90203	70藍物攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90204	70藍物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90205	70藍物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90206	70藍防禦頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90207	70藍防禦上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90208	70藍防禦下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90209	70藍防禦手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90210	70藍防禦腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90211	70藍魔攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90212	70藍魔攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90213	70藍魔攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90214	70藍魔攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90215	70藍魔攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90216	70藍物攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90217	70藍物攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90218	70藍物攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90219	70藍物攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90220	70藍防禦之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90221	70藍防禦之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90222	70藍防禦護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90223	70藍防禦手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90224	70藍魔攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90225	70藍魔攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90226	70藍魔攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90227	70藍魔攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90228	70藍劍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90229	70藍鎚	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90230	70藍盾	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90231	70藍杖	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90232	70藍石	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90233	70藍槍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90301	80藍物攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90302	80藍物攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90303	80藍物攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90304	80藍物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90305	80藍物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90306	80藍防禦頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90307	80藍防禦上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90308	80藍防禦下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90309	80藍防禦手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90310	80藍防禦腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90311	80藍魔攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90312	80藍魔攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90313	80藍魔攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90314	80藍魔攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90315	80藍魔攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90316	80藍物攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90317	80藍物攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90318	80藍物攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90319	80藍物攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90320	80藍防禦之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90321	80藍防禦之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90322	80藍防禦護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90323	80藍防禦手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90324	80藍魔攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90325	80藍魔攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90326	80藍魔攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90327	80藍魔攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90328	80藍劍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90329	80藍鎚	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90330	80藍盾	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90331	80藍杖	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90332	80藍石	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90333	80藍槍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90401	90藍物攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90402	90藍物攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90403	90藍物攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90404	90藍物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90405	90藍物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90406	90藍防禦頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90407	90藍防禦上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90408	90藍防禦下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90409	90藍防禦手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90410	90藍防禦腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90411	90藍魔攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90412	90藍魔攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90413	90藍魔攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90414	90藍魔攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90415	90藍魔攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90416	90藍物攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90417	90藍物攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90418	90藍物攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90419	90藍物攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90420	90藍防禦之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90421	90藍防禦之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90422	90藍防禦護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90423	90藍防禦手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90424	90藍魔攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90425	90藍魔攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90426	90藍魔攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90427	90藍魔攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90428	90藍劍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90429	90藍鎚	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90430	90藍盾	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90431	90藍杖	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90432	90藍石	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90433	90藍槍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90501	100藍物攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90502	100藍物攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90503	100藍物攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90504	100藍物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90505	100藍物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90506	100藍防禦頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90507	100藍防禦上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90508	100藍防禦下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90509	100藍防禦手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90510	100藍防禦腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90511	100藍魔攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90512	100藍魔攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90513	100藍魔攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90514	100藍魔攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90515	100藍魔攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90516	100藍物攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90517	100藍物攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90518	100藍物攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90519	100藍物攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90520	100藍防禦之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90521	100藍防禦之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90522	100藍防禦護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90523	100藍防禦手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90524	100藍魔攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90525	100藍魔攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90526	100藍魔攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90527	100藍魔攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90528	100藍劍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90529	100藍鎚	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90530	100藍盾	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90531	100藍杖	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90532	100藍石	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90533	100藍槍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90601	110藍物攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90602	110藍物攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90603	110藍物攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90604	110藍物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90605	110藍物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90606	110藍防禦頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90607	110藍防禦上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90608	110藍防禦下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90609	110藍防禦手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90610	110藍防禦腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90611	110藍魔攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90612	110藍魔攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90613	110藍魔攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90614	110藍魔攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90615	110藍魔攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90616	110藍物攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90617	110藍物攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90618	110藍物攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90619	110藍物攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90620	110藍防禦之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90621	110藍防禦之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90622	110藍防禦護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90623	110藍防禦手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90624	110藍魔攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90625	110藍魔攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90626	110藍魔攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90627	110藍魔攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90628	110藍劍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90629	110藍鎚	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90630	110藍盾	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90631	110藍杖	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90632	110藍石	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90633	110藍槍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90701	115藍物攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90702	115藍物攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90703	115藍物攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90704	115藍物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90705	115藍物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90706	115藍防禦頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90707	115藍防禦上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90708	115藍防禦下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90709	115藍防禦手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90710	115藍防禦腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90711	115藍魔攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90712	115藍魔攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90713	115藍魔攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90714	115藍魔攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90715	115藍魔攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90716	115藍物攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90717	115藍物攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90718	115藍物攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90719	115藍物攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90720	115藍防禦之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90721	115藍防禦之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90722	115藍防禦護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90723	115藍防禦手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90724	115藍魔攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90725	115藍魔攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90726	115藍魔攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90727	115藍魔攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90728	115藍劍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90729	115藍鎚	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90730	115藍盾	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90731	115藍杖	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90732	115藍石	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+90733	115藍槍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92001	105紫物攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92002	105紫物攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92003	105紫物攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92004	105紫物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92005	105紫物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92006	105紫防禦頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92007	105紫防禦上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92008	105紫防禦下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92009	105紫物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92010	105紫物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92011	105紫魔攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92012	105紫魔攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92013	105紫魔攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92014	105紫物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92015	105紫物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92016	105紫物攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92017	105紫物攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92018	105紫物攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92019	105紫物攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92020	105紫防禦之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92021	105紫防禦之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92022	105紫防禦護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92023	105紫防禦手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92024	105紫魔攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92025	105紫魔攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92026	105紫魔攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92027	105紫魔攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92028	105紫劍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92029	105紫鎚	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92030	105紫盾	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92031	105紫杖	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92032	105紫石	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92033	105紫槍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92101	110紫物攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92102	110紫物攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92103	110紫物攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92104	110紫物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92105	110紫物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92106	110紫防禦頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92107	110紫防禦上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92108	110紫防禦下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92109	110紫物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92110	110紫物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92111	110紫魔攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92112	110紫魔攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92113	110紫魔攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92114	110紫物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92115	110紫物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92116	110紫物攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92117	110紫物攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92118	110紫物攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92119	110紫物攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92120	110紫防禦之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92121	110紫防禦之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92122	110紫防禦護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92123	110紫防禦手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92124	110紫魔攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92125	110紫魔攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92126	110紫魔攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92127	110紫魔攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92128	110紫劍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92129	110紫鎚	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92130	110紫盾	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92131	110紫杖	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92132	110紫石	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92133	110紫槍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92201	115紫物攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92202	115紫物攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92203	115紫物攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92204	115紫物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92205	115紫物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92206	115紫防禦頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92207	115紫防禦上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92208	115紫防禦下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92209	115紫物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92210	115紫物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92211	115紫魔攻頭	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92212	115紫魔攻上身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92213	115紫魔攻下身	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92214	115紫物攻手	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92215	115紫物攻腳	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92216	115紫物攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92217	115紫物攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92218	115紫物攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92219	115紫物攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92220	115紫防禦之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92221	115紫防禦之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92222	115紫防禦護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92223	115紫防禦手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92224	115紫魔攻之鍊	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92225	115紫魔攻之戒	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92226	115紫魔攻護符	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92227	115紫魔攻手鐲	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92228	115紫劍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92229	115紫鎚	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92230	115紫盾	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92231	115紫杖	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92232	115紫石	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
+92233	115紫槍	測試副本好用裝備，脫下後可打//itemvary 0 7 x 改變裝備等級。		測試用道具，內部使用，請勿外流！！
