@@ -96,7 +96,7 @@ u8  tag 0x0B  object+0x2C
 ## Probe ที่เพิ่มเพื่อทำซ้ำ
 
 - `Pirate Force ServerProject\tools\pf_gt050_skill_wire_probe.py`
-- SHA ตอนจบ `d429c230b77f1578b3011085db52f73313d6676fe32c49005aff59af6bd09420` (ให้ final audit re-hash อีกครั้ง)
+- SHA ตอนจบ `325ca7d8bd088c615ab84eee9f2253eff873764fd981376f8ac8152f8eadcf0b`
 - run ล่าสุด: expected span guards `5/5`, executable sections `2`, constructor candidates `3`, recursive decode errors ของ focal spans `0`, exit `0`
 - สคริปต์/ผล re-derive อยู่ใต้ `tools\` ตามเขตที่อนุญาต; `.gitignore` ครอบ `/tools/*` จึงไม่ปรากฏใน tracked diff และไม่มี commit/push
 
