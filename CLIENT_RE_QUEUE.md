@@ -515,3 +515,124 @@ py -3 tools\pf_external_registry.py --verify-spans ..\GameClient\GameClient.loca
   🔴 ช่องบังคับข้อสอง (R132): `ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ` ·
   (ผู้รับงานกรอก: คำตอบจ็อบ 0 + แถวคำตอบรูปเต็ม (ก)(ข) + hex paste · ไฟล์/offset ที่ใช้ · เวลา ·
   sha อิมเมจ+TSV ก่อน-หลัง)
+
+---
+## 🆕🔬 RE-056 SKILLCAST-DIRECTION-002 [STATIC-ON-BRIDGE]: ตัดสินทิศทาง (outbound/inbound) ของ `TriggerCastSkillVital` ด้วยวิธีที่ "ผ่านด่านตัวควบคุมก่อน" — ไล่ generic registrar `0x5F3DF0` ว่าเก็บ prototype ที่ตารางไหนและใครเดินตารางนั้น (สายที่ GT-050 ยัง exclude ไม่ได้)  [🟠 PENDING — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี LOCK_GAME/teardown · ไม่มีอะไรให้ดูบนจอเกม]
+
+> 🔢 หมายเหตุเลข (chief): จดหมายต้นเรื่อง `notes_to_chief\20260824_0126_RE055-DRAFT-outbound-census-is-blind-measured-against-a-known-control.md`
+> ร่างใบนี้ไว้เป็น RE-055 แต่ 055 ถูกออกเป็น GT-055 (STRING-CODEC-DECISION-001) ไปแล้วใน R134 ก่อนคำสั่งถึงมือ chief
+> ตามกฎหัวไฟล์ (ห้ามเปลี่ยนชื่อใบที่ commit แล้ว · prefix RE- เริ่มจริงที่ 056) => ใบนี้คือ RE-056
+> เนื้อหาคงตามร่าง 0126 ทุกประการ
+
+ที่มา:
+- `notes_to_chief\20260824_0126_RE055-DRAFT-outbound-census-is-blind-measured-against-a-known-control.md` (ร่างใบ + ผลวัดเพดาน)
+- ต่อจาก GT-050 จ็อบ 4 (bounded negative · direction ของ `TriggerCastSkillVital` ชนเพดาน static) และ
+  `notes_to_chief\20260824_0055_GT050-RESULT-CLEARNRESULT-CLOSED-TRIGGER-DIRECTION-UNRESOLVED.md`
+
+พื้นเรื่อง (re-derive จากไบต์แล้วทั้งหมด · จดหมาย 0126): ปม direction ของ `TriggerCastSkillVital` ไม่ได้อยู่ที่ "ของไม่มี"
+แต่อยู่ที่ "วิธีที่ใช้อยู่มองไม่เห็นแม้กับของที่รู้คำตอบ" — จดหมาย 0126 เอาข้อความที่รู้แน่ว่า outbound (`PickupTerrainThing`)
+มาผ่านสองวิธีเดินย้อน แล้วทั้งคู่พลาดตัวควบคุม:
+- direct `E8/E9` เข้า submit `0x005DD800` ทั้งอิมเมจ = 277 จุด (re-derive อิสระตรงกับ GT-050)
+- vtable-literal window scan (0x200 ไบต์ก่อนจุดเรียก submit) ครอบ 23/502 (4.6%) · 🔴 ไม่พบตัวควบคุม
+- id_global window scan ครอบ 5/519 (1.0%) · 🔴 ไม่พบตัวควบคุม
+- จุดสร้างตัวควบคุม (`0x006B0610`-`0x006B0660`) ไม่อ้าง vtable ของมัน (`0x00F3005C`) และไม่อ้าง id_global ของมัน (`0x0108202C`) เลย
+  => การเดินย้อนจาก vtable/id_global โครงสร้างไปไม่ถึงอยู่แล้ว
+🔴 สมมติฐานที่ตายแล้ว (จดไว้เพื่อไม่ให้ใครเดินซ้ำ · ห้าม re-walk): literal `0x00F0A8D0` (push 683 จุด) และ `0x00F0A90C`
+(push 1,276 จุด) ทั่วไปเกินกว่าจะเป็นตัวระบุรายข้อความ (น่าจะเป็น RTTI/exception record หรือ literal ร่วมของ MSVC)
+
+หมวด: `STATIC-ON-BRIDGE` — เปิด `GameClient.local.bin` อ่านอย่างเดียวบนเครื่องสะพาน จึงทำบน cloud clone ไม่ได้ ·
+ผู้รับงานคือคนหน้าสะพาน ไม่ใช่ผู้เทสหน้าจอเกม · ใบนี้ไม่มีอะไรให้ดูบนจอเกมแม้แต่อย่างเดียว
+
+### 🔴 ช่องบังคับ (กฎ 18:22): ค้นใน pf_bridge\external\ แล้ว
+(ผู้รับงานกรอก: เจอ <อะไร> / ไม่เจอ) — แถว `TriggerCastSkillVital` (serializer `0x00600A60` · vtable `0x00F3175C` ·
+id_global `0x0108284C`) อยู่ใน `PF_PROTOCOL_REGISTRY.tsv`/`PF_SERIALIZER_FIELDS.tsv` แล้ว แต่ตารางบอกฟิลด์ ไม่ได้บอกทิศทาง —
+ต้องเดินอิมเมจเอง · ถ้าชุดส่งมอบมีแถวที่ระบุ registrar `0x5F3DF0` หรือ dispatch table ใด ให้จดว่ามันตอบอะไรได้ก่อนไปเปิดอิมเมจ
+### 🔴 ช่องบังคับข้อสอง (R132): ค้น gamedata แล้ว
+(ผู้รับงานกรอก: เจอ <อะไร> / ไม่เจอ) — ชั้น Lua ของ `gamedata\` เห็นจุดเรียกร่ายสกิล 97 จุด (`Player.CastSkillAt` 69 ·
+`Trigger.CastSkillXYZ` 11 · `Trigger.CastSkill` 9 · `Trigger.CastSkillBy` 5 · `Party.CastSkillAt` 3) ·
+🔴 นี่คือหลักฐานชั้นสคริปต์ ไม่ใช่หลักฐานทิศทางบน wire — คนละชั้น อ้างอิงได้แต่ห้ามเอามาแทนคำตอบของใบนี้
+
+### objective (claim เดียว)
+ตัดสินทิศทางของ `TriggerCastSkillVital` (outbound = ไคลเอนต์ส่ง / inbound = ไคลเอนต์รับ) ด้วยวิธีที่ผ่านด่านตัวควบคุม
+`PickupTerrainThing` ก่อน — โดยไล่ generic registrar `0x5F3DF0` ว่ามันเก็บ prototype ไว้ที่ตารางไหน และใครเดินตารางนั้น
+แล้วสายนั้นวิ่งเข้า outbound submit `0x005DD800` (WRITE) หรือ inbound path (READ)
+🔴 คำตอบต้องเป็นประโยคเดียว: `outbound ผ่าน <สาย> ตัวจุดชนวน = <input/timer/...>` หรือ `inbound ผ่าน <สาย>`
+หรือ `registrar 0x5F3DF0 ไม่ได้ถือ dispatch ของ outbound (ตัดแนวนี้ทิ้ง)` — ห้ามตอบสองทาง
+
+### db / server args
+ไม่ใช้ DB · ไม่บูตเซิร์ฟเวอร์ · ไม่บูต client — เปิดอ่านอิมเมจ + TSV ส่งมอบอย่างเดียว
+🔴 ห้ามแก้ อิมเมจ / capture / TSV ส่งมอบ — เปิดอ่านอย่างเดียวทั้งหมด
+
+### สิ่งที่ต้องมี (precondition · verify ก่อนเริ่ม)
+- อิมเมจ (sha/size เดียวกับที่ GT-046/GT-048/GT-049/GT-050 พิน): `GameClient\GameClient.local.bin` · size `14759424` ·
+  sha256 `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623` · PE32 · ImageBase `0x00400000`
+  🔴 จด sha ก่อนเริ่มและหลังจบ ต้องตรงกันทั้งสองครั้ง เปิดอ่านอย่างเดียวเสมอ
+- ตัวควบคุม `PickupTerrainThing` (พิสูจน์แล้ว GT-046 · outbound แน่นอน): สร้างที่ `0x006B0639` · เข้าคิวส่งออกที่
+  `0x006B0653` · direct `E8 call 0x005DD800` ที่ `0x006B0653` (file offset `0x002AFA53` · bytes `e8 a8 d1 f2 ff`) ·
+  ตัวจุดชนวน `WM_LBUTTONDOWN 0x201` · vtable `0x00F3005C` · id_global `0x0108202C`
+- เป้า `TriggerCastSkillVital` (จาก GT-050 · verify sha span ก่อนพึ่ง): serializer `0x00600A60` · span `[0x00600A60,0x00600AD7)` ·
+  vtable `0x00F3175C` · id_global `0x0108284C` · stream primitive `0x0089A600` (WRITE/outbound) · `0x0089A640` (READ/inbound)
+- ท่าทำงาน: ตามวินัย `pf-static-re` · 🔴 ห้ามใช้ linear disassembler เป็นหลักฐานของ negative (บทเรียนรอบ 83) ·
+  census ด้วย byte matching (`E8`/`E9 rel32` ทุกออฟเซ็ต) + dword refs + vtable slots
+
+### จ็อบ (ทำตามลำดับ 0 -> 1 -> 2 -> 3 · 🔴 ห้ามข้ามจ็อบ 0)
+0. 🔴 ด่านตัวควบคุม (บังคับก่อนแตะเป้า): เอาวิธีที่จะใช้ตอบทิศทาง (ไล่ registrar `0x5F3DF0` ตามจ็อบ 1) มารันกับ
+   `PickupTerrainThing` ก่อน — วิธีนั้นต้องบอกได้ว่า `PickupTerrainThing` เป็น outbound (วิ่งเข้า `0x005DD800` ผ่านสายที่
+   registrar/dispatch table ชี้) 🔴 ถ้าวิธีนั้นบอกไม่ได้ว่าตัวควบคุมเป็น outbound = วิธีตก หยุดทั้งใบ รายงานว่าวิธีตก
+   ห้ามเดินต่อไปที่เป้า (ตัวควบคุมคือของที่เรารู้คำตอบ — ถ้ามองไม่เห็นมัน ผลกับเป้าเชื่อไม่ได้)
+1. ไล่ generic registrar `0x5F3DF0` (สายที่ GT-050 บอกเองว่ายัง exclude ไม่ได้): หาว่ามันเขียน prototype ลงตาราง/โครงสร้างไหน
+   (dword store ปลายทาง) แล้วใครอ่าน/เดินตารางนั้น (dword ref เข้ามา) · สายที่เดินตารางไปจบที่ `0x005DD800` (WRITE) หรือ
+   inbound consumer (READ) · จด VA/file offset/hex +- รอบจุด store และจุด walk ทุกจุด
+2. ใช้สายที่จ็อบ 1 พบ ตัดสินเป้า `TriggerCastSkillVital`: prototype ของมัน (vtable `0x00F3175C` / id_global `0x0108284C`)
+   ถูก register ผ่าน `0x5F3DF0` ไหม · ถ้าใช่ สายเดียวกันพา object เข้า `0x0089A600` (WRITE) หรือ `0x0089A640` (READ) ·
+   ระบุตัวจุดชนวนถ้าเป็น WRITE (input callback แบบ `0x201` ที่ GT-046 เจอ / timer / passive)
+3. จดคำตอบเป็นประโยคเดียวตาม objective + สถานะการไล่ indirect (E8/E9 + dword ref + vtable slot · ครบ/ค้าง) ·
+   ทุกคำตัดสินต้องชี้กลับไปที่ VA/offset/hex ที่ paste ไว้
+
+### 🔴 ห้ามทำซ้ำ (เพดานวัดแล้ว · จดหมาย 0126)
+- ห้ามรัน direct-call census แบบ vtable-literal / id_global window scan ซ้ำแล้วคาดหวังคำตอบอื่น — เพดานถูกวัดแล้ว
+  (4.6% / 1.0% · พลาดตัวควบคุมทั้งคู่)
+- ห้าม re-walk literal `0x00F0A8D0` (683) / `0x00F0A90C` (1,276) — สมมติฐานตายแล้ว
+
+### pass criteria — STATIC-ON-BRIDGE (VA + offset + hex + re-derive · สองชั้นตามกฎบ้าน)
+ชั้น wire/DB (ชั้นเดียวที่ใบนี้ผลิต):
+- จ็อบ 0 ต้องผ่านก่อน: วิธีระบุ `PickupTerrainThing` เป็น outbound ได้ พร้อม VA/offset/hex ที่ re-derive ตามได้ ·
+  🔴 ถ้าจ็อบ 0 ตก = ใบตกที่วิธี (ไม่ใช่คำตอบเรื่องเป้า) — บันทึกว่าวิธีตกและหยุด
+- ตอบทิศทาง `TriggerCastSkillVital` เป็นประโยคเดียว: `outbound ผ่าน 0x0089A600 ตัวจุดชนวน = ...` หรือ
+  `inbound ผ่าน 0x0089A640 = ...` หรือ `registrar 0x5F3DF0 ไม่ได้ถือ dispatch ของ outbound => ตัดแนวนี้`
+- แนบ VA + file offset + hex +- 16 ไบต์ + (span/sha256 ถ้าอ้าง span) ของ registrar `0x5F3DF0` · จุด store prototype ·
+  จุด walk table · และทุกฟังก์ชันที่อ้าง (รูปแบบเดียวกับ GT-046/GT-048/GT-050) ·
+  ระบุสถานะการไล่ indirect (ครบ/ค้าง) · sha อิมเมจ+TSV ก่อน-หลังตรงกัน ·
+  ถ้าเขียนสคริปต์ commit ลง `tools/` แบบรันซ้ำได้พร้อม guard count + exit 0
+- 🔴 ทุกอย่างที่ tool print ลง console ต้องเป็น ASCII (console cp874 บนสะพาน)
+
+ชั้น client-observable: 🔴 ว่างเปล่าโดยเจตนา — ใบนี้ไม่ผลิตหลักฐานชั้นนี้ (เหมือน GT-046/GT-047/GT-048/GT-049/GT-050/GT-055) ·
+ไม่มีเกมให้บูต ไม่มีอะไรให้ถ่าย · ผู้เทสหน้าจอไม่ต้องทำอะไรกับใบนี้เลย ·
+🔴 ห้ามใครอ้าง static เป็นหลักฐานว่าจอเห็นการร่ายสกิลหรือค่าลด MP/cooldown ใด — คนละชั้นหลักฐาน
+
+### 🔴 ผลลบมีค่าเท่าผลบวก
+- "registrar `0x5F3DF0` ไม่ได้ถือ dispatch ของ outbound" = คำตอบที่ใช้ได้เต็ม => ปิดแนว registrar อย่างมีหลักฐาน
+  (ต้องแนบว่าไล่ store/walk ครบแล้วจริง · "ไม่พบ" ต้องมากับสถานะ census ครบ ไม่ใช่ค้าง)
+- จ็อบ 0 ตก (วิธีมองตัวควบคุมไม่เห็น) = ข่าวที่มีค่า => วิธีนี้ใช้ตอบเรื่องเป้าไม่ได้ · บันทึกว่าวิธีตกที่ไหน
+- "ไล่ registrar ครบแล้วยังตัดสินทิศทางเป้าไม่ได้" = ผลที่ใช้ได้ => ดูเกณฑ์จบด้านล่าง
+
+### 🔴 เกณฑ์จบ (บังคับ · ห้ามให้ใบค้างไร้ทางออก)
+ถ้า RE-056 ตก (จ็อบ 0 ตก · หรือไล่ registrar ครบแล้วยังตัดสินทิศทาง `TriggerCastSkillVital` ไม่ได้) =>
+ปมนี้ออกจากเลน static อย่างถาวร ไม่เปิดใบ static เพิ่มเพื่อไล่ปมเดิมอีก ·
+ขั้นต่อไปคือ observe-only attended probe ที่เขียนไว้แล้วแต่ยังไม่เคยรันใน
+`pirate-force-server\reports\PF_SKILL001_TRIGGER_AND_STATE_STATIC_CHECKPOINT_20260816.md`
+(เลนนั้นวัด runtime ได้จริง ซึ่ง static พิสูจน์ไม่ได้)
+
+### nonclaims (ติดไปกับผลทุกกรณี)
+- static image พิสูจน์ได้แค่ว่ามี/ไม่มีเส้นทางในอิมเมจ — ไม่พิสูจน์ว่า runtime เดินสายไหนจริงตอนร่ายสกิล
+  (ข้อนั้นเป็นของเลน headless/attended)
+- 97 จุดเรียกร่ายสกิลชั้น Lua เป็นหลักฐานว่ามีเส้นทาง "สคริปต์สั่งร่ายสกิล" — ไม่ใช่หลักฐานทิศทางบน wire ·
+  ยังไม่มีใครผูกชื่อ API ฝั่งสคริปต์เข้ากับชื่อข้อความฝั่ง wire ได้สักคู่ · ห้ามเอามาแทนคำตอบ
+- ตารางมีทั้งแถว W และ R เพราะ serializer ตัวเดียวทำสองทาง — ไม่ได้แปลว่าไคลเอนต์ส่งจริง
+- ไม่ claim เรื่องเซิร์ฟเวอร์ต้นฉบับ ซึ่งปิดไปแล้ว กู้ไม่ได้ตลอดกาล
+
+- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\external\ แล้ว: เจอ <อะไร> / ไม่เจอ` ·
+  🔴 ช่องบังคับข้อสอง (R132): `ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ` ·
+  (ผู้รับงานกรอก: ผลจ็อบ 0 = วิธีระบุตัวควบคุม outbound ได้/ตก · คำตอบทิศทาง `TriggerCastSkillVital` ประโยคเดียว ·
+  VA/offset/hex ของ registrar `0x5F3DF0` + store + walk · สถานะ census indirect · ถ้าตกให้ระบุว่าเข้าเกณฑ์จบ
+  (ย้ายไป observe-only probe) หรือไม่ · เวลา · sha อิมเมจ+TSV ก่อน-หลัง)
