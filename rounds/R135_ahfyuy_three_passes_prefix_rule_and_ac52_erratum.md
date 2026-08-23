@@ -67,10 +67,25 @@
 - `pf-static-re` ไม่ใช้ (ไม่มีการ derive ข้อเท็จจริงใหม่จาก artifact)
 - `pf-queue-author` ไม่ใช้ — รอบนี้ไม่มีใบ attended ใหม่ (บันทึกผล + แก้หัวคิวเป็นงานเลขานุการของ chief)
 
+## ภาคผนวก R135b — จดหมายอีก 2 ใบมาถึงกลางรอบ (sync ระหว่างทำงาน · merge origin/main แล้วบริโภคต่อ)
+1. **GT-050 → 🟡 PARTIAL** (`20260824_0055_GT050-RESULT-…`): จ็อบ 1–3 ปิด (span PASS · re-derive ปฏิปักษ์ PASS
+   รวม `PF_TAG_CENSUS.tsv` · **`CLearnSkillResultVital` codec CLOSED**: `count u16/0x12` + N×12 ไบต์ `(u32·u16·u32)` +
+   trailing `u8/0x0B @+0x2C` — UNKNOWN 7 จุดจำแนกเป็น container guard หมด) · จ็อบ 4 bounded negative:
+   `TriggerCastSkillVital` มี inbound consumer จริงแต่ไม่พบ chain ไป outbound submit และ indirect ยังปิดไม่ได้
+   ⇒ direction/trigger UNRESOLVED ที่เพดาน static เดียวกับ checkpoint 20260816 — ทางต่อ = observe-only attended (เลนพัก)
+   ⇒ **เลน headless สกิลปลดล็อกบางส่วน:** ฝั่ง `CLearnSkillResultVital` มี wire shape พิสูจน์แล้วให้เขียนโค้ดได้
+2. **LUA-NPC-EXTRACTED** (`20260824_0055_LUA-NPC-…`): Lua 616/616 + `.npc` 289/289 exact-EOF บนสะพาน
+   (`gamedata\lua\`, `gamedata\scene\` — **ยังไม่เข้า git** รอกวาดตรวจ+whitelist) · **correction สำคัญ:** u16@0x2
+   ของ `.npc` = definition_count ไม่ใช่ placement_count (bg0001: def 113 / actual 149 · GT-048 anchor 0x1D46 ยังตรงที่
+   placement index 30) · **Bg0002 actual placements = 106 ตรงกับ N ของ GT-053 โดยอิสระ** ✓ (สอง parser คนละตัว) ·
+   Lua API census 160 ชื่อ / 12,653 calls (`Player.MobAppear` 3,532 · `Quest.RewardItemSelect` 1,335)
+   ⇒ วัตถุดิบใหม่ของเลน quest/NPC — รอเข้า git ก่อนจึงอ้างจากโค้ดได้
+
 ## คิวเทสเกม (พันธะข้อ ⑤)
-รอบนี้แก้คิวจริง: ปิด 3 ใบ + กฎ prefix ใหม่ · **ไม่มีใบใหม่** — เหตุผล: ใบ static ที่เปิดอยู่ (GT-050 · GT-055)
-ยังพอสำหรับหน้าสะพานรอบถัดไป และใบใหม่ที่คิดออก (ตามหา legend ของ `n_TARGET` ในอิมเมจ) ควรรอผล GT-050
-(ทิศทาง+ตัวจุดชนวน skill wire) ก่อน จะได้เขียนใบที่แคบจริง ไม่เดา · ใบ attended ทั้งเลนยังพักตามคำสั่ง 16:56
+รอบนี้แก้คิวจริง: ปิด 3 ใบ + GT-050 → PARTIAL + กฎ prefix ใหม่ · **ไม่มีใบใหม่** — เหตุผล: ใบเปิดจริงเหลือ GT-055
+(จ็อบ 1 จบเร็ว) และงานสะพานก้อนถัดไปที่ชัดคือกวาดตรวจ+whitelist `gamedata\lua\`/`scene\` (ผู้ช่วยประกาศแผนเองในจดหมาย 0025 ข้อ ④) ·
+ใบใหม่ที่คิดออก (ตามหา legend ของ `n_TARGET` ในอิมเมจ) รอผล observe-probe สกิลก่อนจะได้เขียนแคบจริง ·
+ใบ attended ทั้งเลนยังพักตามคำสั่ง 16:56
 
 ## สิ่งที่รอบนี้ไม่ได้พิสูจน์
 - ไม่มี claim ชั้น client-observable ใด ๆ · การปิด 3 ใบเป็นการบันทึกผลของหน้าสะพาน ไม่ใช่การ re-derive เอง

@@ -46,7 +46,7 @@ R133 ยืนยันที่ commit `1e0b20b` (= `origin/main` ณ เวล
 **เพิ่มเติม (R134):** 🆕 **GT-055 STRING-CODEC-DECISION-001** (ท้ายไฟล์) — cross-check R134 พบโค้ดเรากับตาราง Codex
 อ่าน string บน wire คนละแบบ 2 จุด (DeleteActorVital 0x36DB · chat 0xAC52) · จ็อบ 1 เป็น grep capture อย่างเดียว จบเร็ว ·
 ผล (ก) ชี้ขาดว่า parser เรามีบั๊กหรือไม่ · รายละเอียด `FINDINGS_R134_EXTERNAL_XCHECK.md`
-**สถานะ (R135 · 2026-08-24 ~08:1x +07:00):** ✅ **ปิดแล้ว 3 ใบ — GT-054 PASS (392/392) · GT-053 PASS (H1 รอด) · GT-052 PASS** (ผลหน้าสะพาน 00:33/00:38/00:44 +07:00) · **เหลือเปิด: GT-050 (ถัดไปตามลำดับ R128) · GT-055**
+**สถานะ (R135 · 2026-08-24 ~08:4x +07:00):** ✅ **ปิดแล้ว 3 ใบ — GT-054 PASS (392/392) · GT-053 PASS (H1 รอด) · GT-052 PASS** (ผลหน้าสะพาน 00:33/00:38/00:44 +07:00) · 🟡 **GT-050 PARTIAL** (00:55: จ็อบ 1–3 ปิด · `CLearnSkillResultVital` codec CLOSED · direction ของ `TriggerCastSkillVital` ชนเพดาน static — ทางต่อเป็น observe-only attended) · **เหลือเปิดจริง: GT-055 ใบเดียว** · 📦 ของใหม่บนสะพาน (จดหมาย 0055 อีกใบ): `gamedata\lua\` 616 ไฟล์ + `gamedata\scene\` 289 placement TSV — ยังไม่เข้า git · correction: u16@0x2 ของ `.npc` = definition_count ไม่ใช่ placement_count (bg0001: def 113 / actual 149) · Bg0002 actual = 106 **ตรงกับ GT-053 โดยอิสระ** ✓
 
 ---
 ## 🆕🔬 GT-052 CLASS-SKILL-TABLE-001 [STATIC-ON-BRIDGE]: ~~dump ตารางอาชีพ + ตารางสกิล~~ ✂️ **ตีความคอลัมน์ + ผูก TEXTDATA + ผูกไอคอน** — ตาราง dump แล้วทั้งคู่ (`gamedata\` · จดหมาย 2150)  [✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 00:44 (+07:00) · บันทึกโดย chief R135 · ผลลบติดใบ: ไม่พบ legend ของ `n_TARGET` ในชุดที่ค้น — ห้ามตั้ง label ("ไม่พบ" ≠ "ไม่มีใน client")**]
@@ -138,7 +138,7 @@ R133 ยืนยันที่ commit `1e0b20b` (= `origin/main` ณ เวล
   🔴 **ผลลบ: `n_TARGET` codes `0:1904 1:167 2:30 4:62 5:2` — ไม่พบ legend ในชุดที่ค้น ห้ามตั้ง label** ("ไม่พบ" ≠ "ไม่มีใน client") · sha ทุกไฟล์ก่อน/หลังตรงกัน
 
 
-## 🆕🔬 GT-050 SKILLCAST-WIRE-001 [STATIC-ON-BRIDGE]: **ตรวจแล้วใช้** (ไม่ใช่ไปถอดใหม่) แถวสกิลจากชุดส่งมอบ RE ของ Codex — verify sha ของ `TriggerCastSkillVital`/`CLearnSkillVital` · re-derive ปฏิปักษ์ · ปิด `CLearnSkillResultVital` · หาทิศทาง+ตัวจุดชนวนของ `TriggerCastSkillVital`  [🟠 **PENDING — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี `LOCK_GAME`/teardown · ไม่มีอะไรให้ดูบนจอเกม**]
+## 🆕🔬 GT-050 SKILLCAST-WIRE-001 [STATIC-ON-BRIDGE]: **ตรวจแล้วใช้** (ไม่ใช่ไปถอดใหม่) แถวสกิลจากชุดส่งมอบ RE ของ Codex — verify sha ของ `TriggerCastSkillVital`/`CLearnSkillVital` · re-derive ปฏิปักษ์ · ปิด `CLearnSkillResultVital` · หาทิศทาง+ตัวจุดชนวนของ `TriggerCastSkillVital`  [🟡 **PARTIAL — ผลหน้าสะพาน 2026-08-24 00:55 (+07:00) · บันทึกโดย chief R135 · จ็อบ 1–3 ปิด (span PASS · re-derive PASS · `CLearnSkillResultVital` CLOSED) · จ็อบ 4 = bounded negative ชนเพดาน static: direction/trigger ของ `TriggerCastSkillVital` ยังตัดสินไม่ได้ — ทางต่อเป็น observe-only probe แบบ attended (เลนพักตามคำสั่ง 16:56)**]
 
 **ที่มา:**
 - `notes_to_chief\20260823_1656_PANYA-DIRECTION-pause-attended-open-class-skill-lane.md` **ท่อน ③ + ④** (เปิดเลนสกิล · ร่าง GT-050 ฉบับเดิม "ไปถอด")
@@ -236,8 +236,13 @@ stream primitive  0x0089A600 (WRITE / outbound)  ·  0x0089A640 (READ / inbound)
 - **ไม่ claim ว่ารู้ชื่อคลาส** — vtable ไม่มี RTTI/name literal · ห้ามเดาชื่อ = ห้ามประดิษฐ์ wire format · **ไม่พึ่ง `PF_RUNTIME_CLASSMAP.tsv` เป็นชื่อคลาส**
 - **ไม่ claim เรื่องเพ็ตสกิล** (`Pets_*`) — เป็นของแถมในทะเบียน ไม่ใช่เป้าใบนี้
 - **ขั้นต่อไปที่ตั้งใจไว้ (ยังไม่ใช่คำสั่งให้เขียนโค้ด):** พอรู้รูปแบบไบต์แล้ว ทำ **เลน headless replay ของการร่ายสกิล** พิสูจน์ MP/cooldown/ผลลัพธ์จบในตัว **โดยไม่ต้องเปิดเกมเลย**
-- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\\external\\ แล้ว: เจอ <อะไร> / ไม่เจอ` · 🔴 ช่องบังคับข้อสอง (R132): `ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: ผล verify sha สาม span · ผล re-derive ปฏิปักษ์ · ประโยคทิศทาง+ตัวจุดชนวนของ `TriggerCastSkillVital` +VA ·
-  สถานะ `CLearnSkillResultVital` · xref chain span/file-offset/len/sha256 ทุกฟังก์ชัน · สถานะ census indirect · เวลา · sha อิมเมจ+TSV ก่อน-หลัง)
+- **result:** 🟡 **PARTIAL STATIC / BOUNDED NEGATIVE (2026-08-24 00:55 +07:00)** — จดหมายเต็ม
+  `notes_to_chief/20260824_0055_GT050-RESULT-CLEARNRESULT-CLOSED-TRIGGER-DIRECTION-UNRESOLVED.md` ·
+  ค้น external แล้ว: เจอสามชื่อครบ (field rows 6+4+20) · ค้น gamedata แล้ว: เจอ `SKILL_CONTEXT` แต่ไม่ตอบ wire direction ·
+  **จ็อบ 1 PASS:** span SHA ทั้งสองตรง pin · **จ็อบ 2 PASS:** re-derive ปฏิปักษ์ได้ TSV byte-identical ทั้งสามไฟล์ (รวม `PF_TAG_CENSUS.tsv` `63bc9a03…`) ·
+  **จ็อบ 3 CLOSED:** `CLearnSkillResultVital` wire shape พิสูจน์ครบ — `count u16/tag 0x12` + N records ขนาด 12 ไบต์ `(u32 0x14 · u16 0x12 · u32 0x14)` + trailing `u8/tag 0x0B @+0x2C` · UNKNOWN 7 จุด = `_invalid_parameter_noinfo` (container guard ไม่ใช่ field) · `0x0077FC30` = vector append หลัง READ ·
+  **จ็อบ 4 UNRESOLVED (bounded negative):** `TriggerCastSkillVital` มี inbound-capable consumer `0x00601810` → local slot setter `0x00449110` · **ไม่พบ chain ไป outbound submit `0x005DD800`** แต่ indirect generic-registry dispatch ยังปิดไม่ได้ ⇒ ห้ามสรุปว่า client ส่งจริง/รับอย่างเดียว/trigger เป็นอะไร (เพดานเดียวกับ checkpoint 20260816) · ทางต่อ = observe-only probe แบบ attended ·
+  probe ทำซ้ำได้: `tools\pf_gt050_skill_wire_probe.py` sha `325ca7d8…` (อยู่นอก git โดย `.gitignore /tools/*` ฝั่งสะพาน) · sha อิมเมจ+TSV ทุกไฟล์ก่อน/หลังตรงกัน
 
 ## 🆕🔬 GT-053 SCENE2-NATIVE-IDENTITY-CROSSCHECK-001 [STATIC-ON-BRIDGE]: ไฟล์ฉาก native ของ scene 2 มี placement index 60 (`0x203D` Fighting Fish soldier) จริงไหม — จุดเดียวที่ตรวจแล้วอาจฆ่า H1 ได้ทันที  [✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 00:38 (+07:00) · บันทึกโดย chief R135 · N=106 ≥ 61 ⇒ `0x203D` in-band ⇒ H1 รอด**]
 
