@@ -24,8 +24,9 @@
 
 **📊 รายการค้างที่ Panya ขอให้มองเห็นได้ (คำสั่ง 18:22 ข้อ ⑤):** ชุดส่งมอบ RE = **8 ตาราง 17,618 แถว data** ·
 ผ่าน re-derive ปฏิปักษ์แล้ว (GT-042) · ✅ **ปิดแล้ว R131 (2026-08-23 ~21:0x):** ผู้อ่านฝั่งโค้ดตัวแรกคือ
-`pirate-force-server/tools/pf_external_registry.py` (pin sha256 ทั้ง 5 ตาราง + cross-check 6 ข้อ + เทส 13 ใบ —
-รอ gate/merge ณ เวลาเขียน) · เลน headless สกิลยังต่อคิวหลัง GT-050 ปิดตามเดิม
+`pirate-force-server/tools/pf_external_registry.py` (pin sha256 ทั้ง 5 ตาราง + cross-check 6 ข้อ + เทส 16 ใบ —
+✅ **merge เข้า `main` แล้ว** merge commit `1e0b20b` · PR #12 · head `53ca7ef` เขียว(Actions run 32645331917 · subset) ·
+R133 ยืนยันที่ commit `1e0b20b` (= `origin/main` ณ เวลาตรวจ · HEAD ของ clone รอบนั้น): tool มีจริง + เทส external 16/16 เขียว(cloud sanity)) · เลน headless สกิลยังต่อคิวหลัง GT-050 ปิดตามเดิม
 
 > 🔎 **สถานะการเข้าถึงชุดส่งมอบ (อัปเดต R131 · 2026-08-23 ~21:0x +07:00):**
 > ✅ **5/8 ตาราง + ดัชนีเข้า `main` แล้ว** (commit `284d986` · Panya ruling 20:39 "push ทั้งไฟล์ ไม่ mask") —
@@ -37,6 +38,8 @@
 > `pf_extract_protocol.py` มีสตริงไบต์ฝังเป็นการ์ดค่าคาดหวังมากกว่าในตารางเสียอีก
 
 **ลำดับที่เสนอ (R128):** **GT-053 (ถูกสุด · ชี้ขาด H1) → GT-052 → GT-050** · รายละเอียด H1 อยู่ `FINDINGS_R128_GT051_RENDER_SYNTHESIS.md`
+**เพิ่มเติม (R133):** **GT-054 ปลดจาก "รอ merge" เป็น runnable แล้ว** — เป็นใบเดียวในคิวนี้ที่จบด้วยคำสั่งเดียว (`--verify-spans`)
+แทรกก่อนหรือขนานใบไหนก็ได้ · ถ้ามีเวลาหน้าสะพานจำกัด แนะนำรัน GT-054 ก่อนเพราะผลของมัน (span ตรง/ไม่ตรง) ตัดสินว่าใบอื่นพึ่งตารางส่งมอบได้แค่ไหน
 
 ---
 ## 🆕🔬 GT-052 CLASS-SKILL-TABLE-001 [STATIC-ON-BRIDGE]: ~~dump ตารางอาชีพ + ตารางสกิล~~ ✂️ **ตีความคอลัมน์ + ผูก TEXTDATA + ผูกไอคอน** — ตาราง dump แล้วทั้งคู่ (`gamedata\` · จดหมาย 2150)  [🟠 **PENDING ✂️ SCOPE-CUT R132 — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี `LOCK_GAME`/teardown · ไม่มีอะไรให้ดูบนจอเกม**]
@@ -346,9 +349,11 @@ tool ใหม่ `tools/pf_external_registry.py` ใน `pirate-force-server` =
 **หมวด:** `STATIC-ON-BRIDGE` — ต้องเปิด `GameClient.local.bin` จึงรันบน cloud clone ไม่ได้ · ผู้รับงานคือคนหน้าสะพาน ไม่ใช่ผู้เทสหน้าจอเกม ·
 **ใบนี้ไม่มีอะไรให้ดูบนจอเกมแม้แต่อย่างเดียว** · stamp 420 / teardown / canonical DB ไม่เกี่ยวกับใบนี้ (ไม่บูตอะไรทั้งสิ้น)
 
-### 🔴 Dependency — "รอ merge ก่อน" (ใบนี้ยังรันไม่ได้จนกว่าจะ merge)
-tool อยู่บน PR ที่ **ต้องผ่าน gate และ merge เข้า `pirate-force-server` main ก่อน** ใบนี้ถึงจะ runnable ·
-🔴 ก่อนเริ่ม runner ต้อง **pull main ล่าสุด** แล้วยืนยันว่า `tools\pf_external_registry.py` มีอยู่จริง (ถ้าไม่มี = ใบยัง BLOCKED · หยุด รายงานว่ายังไม่ merge)
+### ✅ Dependency ปิดแล้ว (R133 · 2026-08-23) — **ใบนี้ runnable แล้ว**
+~~tool อยู่บน PR ที่ ต้องผ่าน gate และ merge เข้า `pirate-force-server` main ก่อน~~ ✅ **merge แล้ว:**
+PR #12 · head `53ca7ef` เขียว(Actions run 32645331917 · subset) · merge commit `1e0b20b` ·
+R133 ยืนยันฝั่ง cloud ที่ commit `1e0b20b` (= `origin/main` ณ เวลาตรวจ — อย่า re-verify ด้วย `git checkout main` บน clone เก่าโดยไม่ fast-forward ก่อน): `tools/pf_external_registry.py` มีจริง + เทส external 16/16 เขียว(cloud sanity) ·
+🔴 ก่อนเริ่ม runner ยังต้อง **pull main ล่าสุด** แล้วยืนยันว่า `tools\pf_external_registry.py` มีอยู่จริงบนเครื่องตัวเอง (ถ้าไม่มี = pull ยังไม่ถึง `1e0b20b` · หยุด รายงาน commit ที่ตัวเองเห็น)
 
 ### 🔴 ช่องบังคับ (กฎ 18:22): ค้นใน pf_bridge\external\ แล้ว
 **เจอ** — ชุดส่งมอบเองคือ object under test ของใบนี้: `PF_SERIALIZER_FIELDS.tsv` (6,931 field rows) ให้ 392 distinct spans ·
@@ -374,7 +379,11 @@ py -3 tools\pf_external_registry.py --verify-spans ..\GameClient\GameClient.loca
 ### expected output shape (prediction — เขียนไว้ล่วงหน้า)
 บรรทัดเดียว: `spans=392 verified=V mismatched=M unreadable=U`
 คาดว่า `spans=392 verified=392 mismatched=0 unreadable=0` · **exit code 0 ก็ต่อเมื่อ M=0 และ U=0 เท่านั้น** (M>0 หรือ U>0 => exit 1) ·
-🔴 ถ้า tool ตอบ `REFUSED ... exit 3` = อิมเมจไม่อยู่ที่ path นั้น (ยังไม่ได้รันจริง) — แก้ path อย่านับเป็นผล
+🔴 ถ้า tool ตอบ `REFUSED ... exit 3` — **exit 3 มีสองทาง อ่านข้อความก่อนแก้** (R133 ตามที่ adversary จับ):
+① `REFUSED: the deliverable tables are not present at ...pf_bridge\external` = tool หา TSV ส่งมอบไม่เจอ —
+มันบังคับว่า clone `pf_bridge` ต้องเป็น**โฟลเดอร์พี่น้องชื่อ `pf_bridge` เป๊ะ** ข้างโฟลเดอร์ clone เซิร์ฟเวอร์ (เช็คนี้ยิง**ก่อน**เช็คอิมเมจ) — แก้ตำแหน่ง/ชื่อโฟลเดอร์ bridge ไม่ใช่ path อิมเมจ
+② `REFUSED` ที่พูดถึงอิมเมจ = อิมเมจไม่อยู่ที่ path ที่ให้ — แก้ path อิมเมจ
+ทั้งสองแบบ = ยังไม่ได้รันจริง อย่านับเป็นผล
 
 ### pass criteria — สองชั้นตามบ้าน (ปรับให้เข้ากับใบ static)
 **ชั้น 1 (artifact / wire-equivalent — headless ได้ ไม่ต้องพึ่งคน):**
