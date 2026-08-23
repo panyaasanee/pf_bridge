@@ -1,0 +1,40 @@
+{
+  "bg0001_self_check": {
+    "definition_count_at_file_offset_2": 113,
+    "offset_0x1D46_owner_indices": [
+      30
+    ],
+    "offset_0x1D46_xyz_indices": [
+      30
+    ],
+    "pass_definition_count_113": true,
+    "pass_version_2": true,
+    "pass_xyz_index_30": true,
+    "placement_count": 149,
+    "placement_count_offset": "0x11C8",
+    "version": 2
+  },
+  "definition_count_total": 3745,
+  "errors": [],
+  "failed": 0,
+  "files": 289,
+  "files_outside_data_scene": [
+    "Data/Palettes/PlayerViewer/PlayerViewer.npc"
+  ],
+  "files_under_data_scene": 288,
+  "generated_at_plus07": "2026-08-24T00:53:32+07:00",
+  "output_bytes": 1529875,
+  "placement_count_total": 6248,
+  "script": "pf_decode_lua_npc.py",
+  "script_version": "1.0.0",
+  "source_bytes": 831018,
+  "source_integrity_changed": [],
+  "source_integrity_rechecked": 289,
+  "source_manifest_sha256": "47fbf59d311bfecac92c3f2487c84a36a1cfa8acabc9577f5e0963b9f618d3bc",
+  "source_root": ".",
+  "succeeded": 289,
+  "versions": {
+    "1": 6,
+    "2": 283
+  }
+}

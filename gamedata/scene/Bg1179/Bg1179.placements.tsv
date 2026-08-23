@@ -1,0 +1,2 @@
+index	name	offset	end_offset	xyz_offset	x	y	z	xyz_raw_hex	f32_3	f32_4	f32_5	u16_0	u16_1	u16_2	u16_3	u16_4	u16_5	u16_6	version2_byte	set_names	template_ids	extra_triple_count	extra_triples_xyz
+0	Mob_Set_01 01	0x000003EE	0x0000044F	0x0000040C	-1474.728515625	-1549.086181640625	3982.670654296875	5057b8c4c2a2c1c4bbea7845	0.0	500.0	800.0	2	1	1	1	1	10	1	0	Mob_Set_01	1	0	

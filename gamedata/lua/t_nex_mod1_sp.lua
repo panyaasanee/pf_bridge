@@ -1,0 +1,17 @@
+--# Var1 = 要檢查生或死怪物的配置區ID
+
+
+function ScriptStart()
+
+  local M = Scene.CheckPlacementAlive(Trigger.Var1);
+
+
+ if(M == false)then
+    return 0
+
+  else
+  Trigger.NextStatus();
+  return 1
+  end
+
+end

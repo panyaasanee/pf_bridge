@@ -1,0 +1,20 @@
+--# Var1 = 所要開啟的場景配置區ID-1
+--# Var2 = 所要開啟的場景配置區ID-2
+--# Var3 = 要檢查生或死怪物的配置區ID-1
+--# Var4 = 要檢查生或死怪物的配置區ID-2
+
+
+function ScriptStart()
+  local M1 = Scene.CheckPlacementAlive(Trigger.Var3);
+  local M2 = Scene.CheckPlacementAlive(Trigger.Var4);
+
+  if((M1 == true)or(M2 == true))then
+    return 0
+
+  else
+  Scene.PlacementON(Trigger.Var1);
+  Scene.PlacementON(Trigger.Var2); 
+  Trigger.NextStatus();
+  return 1
+  end
+end

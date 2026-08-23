@@ -1,0 +1,24 @@
+--# Var1 = 給予玩家道具的ID
+--# Var2 = 道具最多持有數量
+--# Var3 = 所要檢查任務的ID
+--# Var4 = 所要檢查任務的旗標值
+--# Var5 = 動態起始Frame
+--# Var6 = 動態結束Frame
+
+function ScriptStart()
+  local I = Player.GetItemNum(Trigger.Var1);
+  local Q = Quest.GetQuestFlag(Trigger.Var3)
+
+  if(I >= Trigger.Var2)then
+    Player.ShowMessage(855)
+    return 0
+  elseif(Q ~= Trigger.Var4)then
+    Player.ShowMessage(856)  
+    return 0
+  else
+  Player.AddItem(Trigger.Var1,1)
+  Trigger.StartAnimation(Trigger.Var5,Trigger.Var6,1,1); 
+  Trigger.NextStatus();
+    return 1
+  end
+end

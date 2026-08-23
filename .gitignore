@@ -111,6 +111,34 @@
 !/gamedata/tables/
 !/gamedata/tables/*.tsv
 
+# ---- gamedata/lua/ + gamedata/scene/: the game's own scripts and native
+# scene files, decoded by pf_decode_lua_npc.py on 2026-08-24 (616 Lua from
+# .lu_ $pcz containers, 289 .npc scene files parsed to exact EOF).
+# Swept before opening it, across all 616 .lua and all 289 .tsv:
+#   absolute paths 0, UNC paths 0, emails 0, URLs 0, IPv4 0,
+#   password/secret/token/licence words 0, hex blobs >=32 chars 0,
+#   dofile/loadfile/require/io.open/os.execute call sites 0.
+# pf_decode_lua_npc.py inspected separately (766 lines): no hardcoded byte
+# guards, no long hex literals - only the "$pcz" magic and text regexes.
+# Shapes are pinned the same way tables/ is: everything under lua/ and
+# scene/ is re-ignored, then only directories plus *.lua / *.placements.tsv
+# are re-opened, so a stray .bin, .dec, .bak or .log cannot ride along.
+# Verified with git check-ignore on a mock tree before being written here.
+!/gamedata/PF_GAMEDATA_LUA_INDEX.tsv
+!/gamedata/PF_GAMEDATA_SCENE_INDEX.tsv
+!/gamedata/pf_decode_lua_npc.py
+!/gamedata/pf_lua_api_census.py
+!/gamedata/PF_GAMEDATA_LUA_API.tsv
+!/gamedata/PF_LUA_API_SPEC.md
+!/gamedata/lua/
+/gamedata/lua/**
+!/gamedata/lua/**/
+!/gamedata/lua/**/*.lua
+!/gamedata/scene/
+/gamedata/scene/**
+!/gamedata/scene/**/
+!/gamedata/scene/**/*.placements.tsv
+
 # ---- workflows: merge a cloud round's pull request (chief round 110) ----
 # Line 1 of this file is `/*`, so git does not even descend into .github/
 # unless the directory is opened by name BEFORE its contents.  Both lines are

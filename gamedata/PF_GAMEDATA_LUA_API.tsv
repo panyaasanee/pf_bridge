@@ -1,0 +1,161 @@
+api	namespace	method	call_count	file_count	arity_min	arity_max	arity_mode	arg_shape_top	arg_shape_top_count	distinct_arg_shapes	example_files
+Player.MobAppear	Player	MobAppear	3532	295	2	2	2	var|bool	3532	1	Quest/q_add_equip.lua;Quest/q_add_mobbuff1.lua;Quest/q_add_mobbuff2.lua
+Player.AddItem	Player	AddItem	1430	272	2	2	2	var|var	1393	4	Quest/q_add_equip.lua;Quest/q_add_mobbuff1.lua;Quest/q_add_mobbuff2.lua
+Quest.RewardItemSelect	Quest	RewardItemSelect	1335	221	2	2	2	var|var	1335	1	Quest/q_add_equip.lua;Quest/q_add_mobbuff1.lua;Quest/q_add_mobbuff2.lua
+Mob.ShowAnimation	Mob	ShowAnimation	716	295	1	1	1	var	716	1	Quest/q_add_equip.lua;Quest/q_add_mobbuff1.lua;Quest/q_add_mobbuff2.lua
+Quest.GetQuestFlag	Quest	GetQuestFlag	508	366	1	1	1	var	496	3	Quest/q_add_equip.lua;Quest/q_add_mobbuff1.lua;Quest/q_add_mobbuff2.lua
+Quest.SetFlag	Quest	SetFlag	417	304	1	1	1	var	417	1	Quest/q_add_equip.lua;Quest/q_add_mobbuff1.lua;Quest/q_add_mobbuff2.lua
+Mob.AddBuff	Mob	AddBuff	411	239	2	2	2	var|num	406	2	Quest/q_add_mobbuff1.lua;Quest/q_add_mobbuff2.lua;Quest/q_add_mobbuff3.lua
+Player.RemoveItem	Player	RemoveItem	367	137	2	2	2	var|var	306	6	Quest/q_con_new.lua;Quest/q_day_business.lua;Quest/q_day_choose1.lua
+Trigger.NextStatus	Trigger	NextStatus	353	269	0	0	0		353	1	t_2exch1&setq_q1.lua;t_2exch1_q1.lua;t_adbuff&catsklxyz_q1.lua
+Player.CheckItemNum	Player	CheckItemNum	211	105	2	2	2	var|var	168	5	Quest/q_con_new.lua;Quest/q_day_choose1.lua;Quest/q_day_choose2.lua
+Scene.PlacementOFF	Scene	PlacementOFF	173	19	1	1	1	num	112	2	t_cls2plc.lua;t_cls2plc_tim_t1.lua;t_cls3plc.lua
+Quest.AddCriteriaExp	Quest	AddCriteriaExp	166	166	0	0	0		166	1	Quest/q_add_equip.lua;Quest/q_add_mobbuff1.lua;Quest/q_add_mobbuff2.lua
+Quest.AddCriteriaSkillPoint	Quest	AddCriteriaSkillPoint	166	166	0	0	0		166	1	Quest/q_add_equip.lua;Quest/q_add_mobbuff1.lua;Quest/q_add_mobbuff2.lua
+Quest.AddCriteriaCash	Quest	AddCriteriaCash	165	165	0	0	0		165	1	Quest/q_add_equip.lua;Quest/q_add_mobbuff1.lua;Quest/q_add_mobbuff2.lua
+Quest.CheckMobKillCount	Quest	CheckMobKillCount	138	70	2	2	2	var|var	136	2	Quest/q_add_skill2.lua;Quest/q_con_new.lua;Quest/q_day_choose3.lua
+Trigger.GetTriggerStatus	Trigger	GetTriggerStatus	134	71	1	1	1	var	122	2	t_bg2017_msg.lua;t_cancplc2_t1.lua;t_cancplc_t1.lua
+Quest.MobKillCount	Quest	MobKillCount	128	70	2	2	2	var|var	126	2	Quest/q_add_skill2.lua;Quest/q_con_new.lua;Quest/q_day_choose3.lua
+Quest.PlayNPCMovie	Quest	PlayNPCMovie	100	54	2	2	2	var|num	100	1	Quest/q_class_item.lua;Quest/q_con_new.lua;Quest/q_day_gather_new.lua
+Player.GetItemNum	Player	GetItemNum	99	72	1	1	1	var	98	2	Quest/q_day_gather_new.lua;Quest/q_day_send_new.lua;Quest/q_gather_anticlass.lua
+Scene.PlacementON	Scene	PlacementON	96	46	1	1	1	var	94	2	Quest/q_con_new.lua;Quest/q_repeat_con_new.lua;t_canc6plc_opn6plc_mod1.lua
+Player.GetLv	Player	GetLv	91	89	0	0	0		91	1	Quest/q_check_lv.lua;Quest/q_con_new.lua;Quest/q_day_business.lua
+Quest.SetQuestFlag	Quest	SetQuestFlag	90	51	2	2	2	var|num	61	4	Quest/q_con_new.lua;Quest/q_day_business.lua;Quest/q_day_choose1.lua
+Player.CastSkillAt	Player	CastSkillAt	69	46	1	1	1	var	57	3	Quest/q_add_skill1.lua;Quest/q_add_skill2.lua;Quest/q_checkbuff1.lua
+Quest.GetFlag	Quest	GetFlag	67	67	0	0	0		67	1	Quest/q_add_mobbuff3.lua;Quest/q_add_skill1.lua;Quest/q_avatar_change.lua
+Scene.CheckPlacementAlive	Scene	CheckPlacementAlive	65	36	1	1	1	var	64	2	t_canc2plc_mod1.lua;t_canc6plc_opn6plc_mod1.lua;t_cancplc_mod1.lua
+Trigger.HideModel	Trigger	HideModel	62	47	0	0	0		62	1	t_adbuff&himdlfx_buff2.lua;t_cancplc_himdfx_q1.lua;t_cat&himd.lua
+Player.ShowMessage	Player	ShowMessage	61	45	1	1	1	num	54	2	Quest/q_boat_health.lua;Quest/q_enter_instance6.lua;Quest/q_sea_join.lua
+Quest.CanReportDailyQuest	Quest	CanReportDailyQuest	61	61	0	0	0		61	1	Quest/q_day_business.lua;Quest/q_day_choose1.lua;Quest/q_day_collect1.lua
+Quest.ReportDailyQuest	Quest	ReportDailyQuest	61	61	0	0	0		61	1	Quest/q_day_business.lua;Quest/q_day_choose1.lua;Quest/q_day_collect1.lua
+Player.GetClass	Player	GetClass	60	14	0	0	0		60	1	Quest/q_class.lua;Quest/q_class2.lua;Quest/q_class_item.lua
+Quest.AddLvCriteriaExp	Quest	AddLvCriteriaExp	59	59	0	0	0		59	1	Quest/q_day_business.lua;Quest/q_day_choose1.lua;Quest/q_day_choose2.lua
+Quest.AddLvCriteriaSkillPoint	Quest	AddLvCriteriaSkillPoint	59	59	0	0	0		59	1	Quest/q_day_business.lua;Quest/q_day_choose1.lua;Quest/q_day_choose2.lua
+Quest.AddLvCriteriaCash	Quest	AddLvCriteriaCash	58	58	0	0	0		58	1	Quest/q_day_business.lua;Quest/q_day_choose1.lua;Quest/q_day_choose2.lua
+Trigger.PlayFx	Trigger	PlayFx	57	44	0	0	0		57	1	t_adbuff&himdlfx_buff2.lua;t_cancplc_himdfx_q1.lua;t_cancplc_mobpos_sp.lua
+Trigger.TriggerShowMessage	Trigger	TriggerShowMessage	55	8	2	2	2	num|var	44	2	t_bg2017_msg.lua;t_indanix2_msg.lua;t_msg_mod.lua
+Quest.CountDownTime	Quest	CountDownTime	54	54	1	1	1	var	53	2	Quest/q_con2.lua;Quest/q_con_new.lua;Quest/q_day_gather4.lua
+Trigger.SetTriggerStatus	Trigger	SetTriggerStatus	52	29	2	2	2	var|var	42	2	t_cat&indani_q1.lua;t_catskl_indani.lua;t_for_bg2001.lua
+Player.AddAndEquip	Player	AddAndEquip	48	11	2	2	2	num|num	29	2	Quest/q_add_equip.lua;Quest/q_class_item.lua;Quest/q_enter_instance6.lua
+Quest.GetWeekDay	Quest	GetWeekDay	48	27	0	0	0		48	1	Quest/q_con_new.lua;Quest/q_repeat_con_new.lua;Quest/q_sea_chooseside.lua
+Player.CheckBuff	Player	CheckBuff	47	25	1	1	1	var	25	3	Quest/q_add_skill1.lua;Quest/q_checkbuff1.lua;Quest/q_checkbuff3.lua
+Trigger.StartTriggerAnimation	Trigger	StartTriggerAnimation	43	23	4	5	4	var|var|var|num	40	3	t_cat&indani_q1.lua;t_catskl_indani.lua;t_dani&indanix4_colct_lv.lua
+Player.Teleport	Player	Teleport	35	34	1	1	1	var	33	2	Quest/q_class_item.lua;Quest/q_con3.lua;Quest/q_con_new.lua
+Player.AddBuff	Player	AddBuff	32	17	2	2	2	var|var	15	3	Quest/q_con_new.lua;Quest/q_repeat_con_new.lua;Quest/q_teleport_new.lua
+Player.EnterInstance	Player	EnterInstance	32	17	1	1	1	var	30	2	Quest/q_con_new.lua;Quest/q_day_choose2.lua;Quest/q_day_enter_instance2.lua
+Scene.PlacementCancel	Scene	PlacementCancel	32	15	1	1	1	var	31	2	t_canc2plc_ki1.lua;t_canc2plc_mod1.lua;t_canc4plc.lua
+Player.OpenUI	Player	OpenUI	31	31	0	2	0		26	2	Quest/q_avatar_change.lua;Quest/q_avatar_fusion.lua;Quest/q_brew.lua
+Player.OpenHelpUI	Player	OpenHelpUI	26	23	1	1	1	var	22	2	Quest/q_add_equip.lua;Quest/q_add_skill2.lua;Quest/q_arch1.lua
+Player.Addmoralized	Player	Addmoralized	21	12	1	1	1	expr	11	2	Quest/q_day_business.lua;Quest/q_day_hunt.lua;Quest/q_day_watch.lua
+Quest.GetMobKillCount	Quest	GetMobKillCount	20	1	1	1	1	var	20	1	Quest/q_day_kill4.lua
+Trigger.StartAnimation	Trigger	StartAnimation	19	18	3	4	4	var|var|num|num	11	3	t_adbuff&dani_q1.lua;t_cat&dani_q1.lua;t_dani&indanix4_colct_lv.lua
+Player.CameraFocus	Player	CameraFocus	16	11	1	1	1	var	14	2	Quest/q_con_new.lua;Quest/q_repeat_con_new.lua;t_catsklxyz_q1orq1.lua
+Guild.GetGuildLevel	Guild	GetGuildLevel	15	12	0	0	0		15	1	Quest/q_day_gather1.lua;Quest/q_guild_boss1.lua;Quest/q_guild_boss2.lua
+Instance.AddKeyEvent	Instance	AddKeyEvent	15	13	1	1	1	var	15	1	t_inskyev.lua;t_inskyev_danifx.lua;t_inskyev_danifx_mod1.lua
+Mob.CallMob	Mob	CallMob	15	15	2	2	2	var|var	15	1	Quest/q_callmob1.lua;Quest/q_guild_boss1.lua;Quest/q_guild_boss2.lua
+Mob.EndMove	Mob	EndMove	15	8	0	1	1		6	3	Quest/q_add_mobbuffend1.lua;Quest/q_con_new.lua;Quest/q_guard.lua
+Player.CheckGuild	Player	CheckGuild	15	15	0	0	0		15	1	Quest/q_day_con.lua;Quest/q_guild_boss1.lua;Quest/q_guild_boss2.lua
+Instance.GetInstanceID	Instance	GetInstanceID	14	7	0	0	0		14	1	t_bg2017_msg.lua;t_drp_himdfx_ui1_sp.lua;t_for_bg2001.lua
+Player.CheckEquipItem	Player	CheckEquipItem	14	2	1	1	1	num	14	1	Quest/q_con3.lua;Quest/q_kill1_2.lua
+Player.CheckMoralized	Player	CheckMoralized	14	14	1	1	1	var	14	1	Quest/q_check_moralized.lua;Quest/q_day_business.lua;Quest/q_day_hunt.lua
+Trigger.HideTriggerModel	Trigger	HideTriggerModel	13	6	0	1	1	num	8	3	t_adbuff&himdlfx_buff2.lua;t_clsplc&hitmd.lua;t_for_bg2001.lua
+Instance.CallScoreCount	Instance	CallScoreCount	12	12	0	0	0		12	1	t_inscnt.lua;t_inscnt_mod1.lua;t_inscnt_mod1_t1.lua
+Player.CheckCollect	Player	CheckCollect	11	11	1	1	1	var	11	1	Quest/q_day_collect1.lua;Quest/q_day_collect2.lua;Quest/q_day_collect3.lua
+Player.OutVehicle	Player	OutVehicle	11	5	0	0	0		11	1	Quest/q_con_new.lua;Quest/q_kill_skxyz.lua;Quest/q_kill_skxyzr.lua
+Trigger.CastSkillXYZ	Trigger	CastSkillXYZ	11	6	4	4	4	var|var|var|var	11	1	t_adbuff&catsklxyz_q1.lua;t_catsklxyz.lua;t_catsklxyz_q1orq1.lua
+Player.Warp	Player	Warp	10	10	4	4	4	var|var|var|var	10	1	t_wap&adbuff_q1orq1.lua;t_wap&adbuff_t1&itm6.lua;t_wap&adbuff_t1.lua
+Player.DropProcess	Player	DropProcess	9	8	1	1	1	var	9	1	t_drp&dani_colct_save.lua;t_drp&insbospnt_himdfx.lua;t_drp.lua
+Quest.CheckOpenTime	Quest	CheckOpenTime	9	3	2	2	2	num|num	7	2	Quest/q_arena2.lua;Quest/q_con5.lua;Quest/q_sea_join.lua
+Trigger.CastSkill	Trigger	CastSkill	9	9	1	1	1	var	9	1	t_catskl.lua;t_catskl_himd.lua;t_catskl_indani.lua
+Mob.CheckApproachTarget	Mob	CheckApproachTarget	8	8	0	0	0		8	1	Quest/q_add_mobbuffend1.lua;Quest/q_con_new.lua;Quest/q_guard.lua
+Mob.StartMove	Mob	StartMove	8	8	1	1	1	var	5	2	Quest/q_add_mobbuffend1.lua;Quest/q_con_new.lua;Quest/q_guard.lua
+Player.TeleportThenPlayMovie	Player	TeleportThenPlayMovie	8	7	2	2	2	var|var	6	2	Quest/q_con_new.lua;Quest/q_movie_teach5.lua;Quest/q_repeat_con_new.lua
+Quest.PlayNPCVoice	Quest	PlayNPCVoice	8	2	1	1	1	expr	8	1	Quest/q_con_new.lua;Quest/q_repeat_con_new.lua
+Scene.ChangeMainMusic	Scene	ChangeMainMusic	8	6	0	2	2	var|expr	4	2	Quest/q_con_new.lua;Quest/q_repeat_con_new.lua;t_chanmmsc_mod1.lua
+Trigger.QuestActiveProgress	Trigger	QuestActiveProgress	8	8	1	1	1	var	8	1	t_opnq&clsq.lua;t_opnq.lua;t_opnq_ki1&clsq.lua
+Guild.CheckPlayerGuildJob	Guild	CheckPlayerGuildJob	7	7	1	1	1	var	7	1	Quest/q_guild_boss1.lua;Quest/q_guild_boss2.lua;Quest/q_guild_con1.lua
+Instance.GetLastingTime	Instance	GetLastingTime	7	7	0	0	0		7	1	t_cls2plc_tim_t1.lua;t_nex_tim.lua;t_opn&cls2plc_tim_t1.lua
+Player.CheckGender	Player	CheckGender	7	7	1	1	1	var	7	1	Quest/q_gender_con.lua;Quest/q_gender_equip1.lua;Quest/q_gender_equip2.lua
+Player.GetCash	Player	GetCash	7	7	0	0	0		7	1	Quest/q_boat_health.lua;Quest/q_class.lua;Quest/q_class2.lua
+Player.PlayMovie	Player	PlayMovie	7	7	1	1	1	var	5	2	Quest/q_con_new.lua;Quest/q_instance_add_mobbuff2.lua;Quest/q_movie_teach1.lua
+Player.ResetMarker	Player	ResetMarker	7	7	1	1	1	var	5	2	Quest/q_bornagain.lua;Quest/q_gender_equip3.lua;Quest/q_gender_equip4.lua
+Guild.AddMeritExp	Guild	AddMeritExp	6	6	1	1	1	var	6	1	Quest/q_guild_d_gather1.lua;Quest/q_guild_levelup1.lua;Quest/q_guild_levelup2.lua
+Mob.CheckMobPosition	Mob	CheckMobPosition	6	2	5	5	5	var|var|var|var|var	6	1	t_cancplc_mobpos_sp.lua;t_opnplc_mobpos_sp.lua
+Mob.CheckMobalive	Mob	CheckMobalive	6	6	1	1	1	var	6	1	t_drp&dani_colct_save.lua;t_getm_q1_mob1.lua;t_getm_q1_mob1_himdlfx.lua
+Player.AddCash	Player	AddCash	6	6	1	1	1	var	4	2	Quest/q_boat_health.lua;Quest/q_class.lua;Quest/q_class2.lua
+Player.CheckSkill	Player	CheckSkill	6	1	1	1	1	var	6	1	Quest/q_skill3.lua
+Player.EnterInstanceThenPlayMovie	Player	EnterInstanceThenPlayMovie	6	5	2	2	2	var|var	4	2	Quest/q_con_new.lua;Quest/q_enter_instance7.lua;Quest/q_repeat_con_new.lua
+Player.ItemAddon	Player	ItemAddon	6	4	3	3	3	var|var|var	4	2	Quest/q_con1.lua;Quest/q_con4.lua;Quest/q_con_new.lua
+Player.LoadInstanceGroup	Player	LoadInstanceGroup	6	5	1	1	1	var	6	1	Quest/q_instancegroup.lua;Quest/q_teleport_new.lua;t_ins_pt.lua
+Player.TeleportWithVehicle	Player	TeleportWithVehicle	6	5	1	1	1	var	6	1	Quest/q_tele_with_vehicle1.lua;Quest/q_tele_with_vehicle2.lua;Quest/q_teleport_new.lua
+Party.EnterInstance	Party	EnterInstance	5	5	1	1	1	var	5	1	Quest/q_enter_instance11.lua;Quest/q_enter_instance4.lua;Quest/q_enter_instance6.lua
+Trigger.CastSkillBy	Trigger	CastSkillBy	5	5	1	1	1	var	5	1	t_catsklby.lua;t_catsklby_ki1.lua;t_catsklby_npld.lua
+Guild.GetPVPFaction	Guild	GetPVPFaction	4	4	0	0	0		4	1	Quest/q_con_new.lua;Quest/q_repeat_con_new.lua;Quest/q_sea_chooseside.lua
+Player.CheckAchievement	Player	CheckAchievement	4	1	1	1	1	var	4	1	Quest/q_arch1.lua
+Player.CheckPartyLeader	Player	CheckPartyLeader	4	4	0	0	0		4	1	Quest/q_trafrd0.lua;t_catskl_pld.lua;t_catsklby_npld.lua
+Player.CheckSoulmate	Player	CheckSoulmate	4	4	0	0	0		4	1	Quest/q_day_con.lua;Quest/q_day_social.lua;Quest/q_day_social2.lua
+Player.LeaveInstance	Player	LeaveInstance	4	4	0	0	0		4	1	t_inslev.lua;t_inslev_q1.lua;t_inslev_q1orq1.lua
+Mob.CheckMobbuff	Mob	CheckMobbuff	3	3	2	2	2	var|var	3	1	Quest/q_add_mobbuffend1.lua;Quest/q_instance_add_mobbuff1.lua;Quest/q_instance_add_mobbuff2.lua
+Party.CastSkillAt	Party	CastSkillAt	3	3	1	1	1	var	3	1	t_cat_pt.lua;t_indani_l_cat_pt.lua;t_indani_l_cat_pt_rat.lua
+Player.LoadStore	Player	LoadStore	3	3	1	1	1	var	3	1	Quest/q_gather8.lua;Quest/q_store1.lua;Quest/q_store3.lua
+Trigger.QuestFinishProgress	Trigger	QuestFinishProgress	3	3	1	1	1	var	3	1	t_clsq.lua;t_opnq&clsq.lua;t_opnq_ki1&clsq.lua
+Guild.CheckMeritExp	Guild	CheckMeritExp	2	2	1	1	1	var	2	1	Quest/q_guildfire.lua;Quest/q_guildskill.lua
+Instance.AddBonusPoint	Instance	AddBonusPoint	2	2	0	1	0		1	2	t_drp&insbospnt_himdfx.lua;t_insbospnt_himdfx.lua
+Instance.RemoveKeyEvent	Instance	RemoveKeyEvent	2	2	1	1	1	var	2	1	t_remvkyev.lua;t_remvkyev_mod1.lua
+Party.CheckPartyItem	Party	CheckPartyItem	2	2	2	2	2	var|var	2	1	Quest/q_teleport_new.lua;Quest/q_trafrd0.lua
+Party.GetNum	Party	GetNum	2	2	0	0	0		2	1	Quest/q_enter_instance11.lua;Quest/q_enter_instance6.lua
+Party.Love	Party	Love	2	2	1	1	1	var	2	1	Quest/q_ocean_kill3.lua;Quest/q_repeat_gather7.lua
+Party.PlayMovie	Party	PlayMovie	2	2	1	1	1	var	2	1	t_plymov.lua;t_plymov_chanmsc.lua
+Party.RemovePartyItem	Party	RemovePartyItem	2	2	2	2	2	expr|expr	1	2	Quest/q_teleport_new.lua;Quest/q_trafrd0.lua
+Party.SignUpArena	Party	SignUpArena	2	2	0	0	0		2	1	Quest/q_arena1.lua;Quest/q_arena2.lua
+Player.AddExp	Player	AddExp	2	2	1	1	1	call	2	1	t_getm_rat_exp&sp.lua;t_inskyev_getm_rat_exp&sp.lua
+Player.AddPpClass	Player	AddPpClass	2	2	1	1	1	var	2	1	Quest/q_class.lua;Quest/q_class2.lua
+Player.AddSkillPoint	Player	AddSkillPoint	2	2	1	1	1	call	2	1	t_getm_rat_exp&sp.lua;t_inskyev_getm_rat_exp&sp.lua
+Player.CastSkillXYZ	Player	CastSkillXYZ	2	2	4	4	4	var|var|var|var	2	1	Quest/q_kill_skxyz.lua;Quest/q_kill_skxyzr.lua
+Player.CheckParty	Player	CheckParty	2	2	0	0	0		2	1	Quest/q_repeat_gather7.lua;Quest/q_trafrd0.lua
+Player.CheckThrowAnyPenpalLetter	Player	CheckThrowAnyPenpalLetter	2	2	0	0	0		2	1	Quest/q_letter.lua;Quest/q_letter1.lua
+Player.GetGuildRank	Player	GetGuildRank	2	2	0	0	0		2	1	Quest/q_guild_kill1.lua;Quest/q_sea_chooseside.lua
+Player.RemoveBuff	Player	RemoveBuff	2	2	1	1	1	var	2	1	t_getm&himdlfx_buf&t1.lua;t_remvbuf.lua
+Scene.CamaraShake	Scene	CamaraShake	2	2	2	2	2	var|var	2	1	t_indani_l_shkcam_t1.lua;t_shkcam.lua
+Trigger.SetStatus	Trigger	SetStatus	2	2	1	1	1	var	2	1	t_indani_l_cat_pt_rat.lua;t_opnplc_rat_setoth.lua
+Guild.GiveDailySalary	Guild	GiveDailySalary	1	1	0	0	0		1	1	Quest/q_guildpay.lua
+Guild.OpenGuildStorage	Guild	OpenGuildStorage	1	1	0	0	0		1	1	Quest/q_guildstorage.lua
+Guild.SetPVPFaction	Guild	SetPVPFaction	1	1	1	1	1	var	1	1	Quest/q_sea_chooseside.lua
+Instance.AddBonusReward	Instance	AddBonusReward	1	1	0	0	0		1	1	t_insbosev_himdfx.lua
+Instance.GetInstanceId	Instance	GetInstanceId	1	1	0	0	0		1	1	t_indanix2_colct_ins.lua
+Instance.SetLastingTime	Instance	SetLastingTime	1	1	1	1	1	var	1	1	t_setinstime.lua
+Mob.CheckMobAlive	Mob	CheckMobAlive	1	1	1	1	1	var	1	1	t_inskyev_danifx_mod1.lua
+Party.CheckSoulmate	Party	CheckSoulmate	1	1	0	0	0		1	1	Quest/q_enter_instance8.lua
+Party.PartySoul	Party	PartySoul	1	1	0	0	0		1	1	Quest/q_trafrd0.lua
+Party.ShowMessage	Party	ShowMessage	1	1	1	1	1	var	1	1	t_opnplc_rat_setoth.lua
+Player.AddHP	Player	AddHP	1	1	1	1	1	var	1	1	t_recovhp_ful.lua
+Player.AddST	Player	AddST	1	1	1	1	1	var	1	1	t_recovst_ful.lua
+Player.AppraiseCollectPiece	Player	AppraiseCollectPiece	1	1	0	0	0		1	1	Quest/q_collectpiece.lua
+Player.AppraiseItem	Player	AppraiseItem	1	1	0	0	0		1	1	Quest/q_equipment.lua
+Player.BoatHealth	Player	BoatHealth	1	1	1	1	1	var	1	1	Quest/q_boat_health.lua
+Player.BookBattleField	Player	BookBattleField	1	1	1	1	1	var	1	1	Quest/q_sea_join.lua
+Player.ChangeShip	Player	ChangeShip	1	1	1	1	1	var	1	1	Quest/q_ship.lua
+Player.CheckAllCollectItemSynthesisBuff	Player	CheckAllCollectItemSynthesisBuff	1	1	0	0	0		1	1	Quest/q_avatar_refund.lua
+Player.EnableGlide	Player	EnableGlide	1	1	0	0	0		1	1	t_enablglide.lua
+Player.GetBoatHealth	Player	GetBoatHealth	1	1	0	0	0		1	1	Quest/q_boat_health.lua
+Player.GetCurrentHP	Player	GetCurrentHP	1	1	0	0	0		1	1	t_recovhp_ful.lua
+Player.GetCurrentST	Player	GetCurrentST	1	1	0	0	0		1	1	t_recovst_ful.lua
+Player.GetMaxHP	Player	GetMaxHP	1	1	0	0	0		1	1	t_recovhp_ful.lua
+Player.GetMaxST	Player	GetMaxST	1	1	0	0	0		1	1	t_recovst_ful.lua
+Player.GetPpClass	Player	GetPpClass	1	1	0	0	0		1	1	Quest/q_class2.lua
+Player.GiveLvCriteriaPercentageEXP	Player	GiveLvCriteriaPercentageEXP	1	1	0	0	0		1	1	Quest/q_guild_kill1.lua
+Player.HasAnySailorBeenSummoned	Player	HasAnySailorBeenSummoned	1	1	0	0	0		1	1	Quest/q_tele_4.lua
+Player.LoadConditionStore	Player	LoadConditionStore	1	1	1	1	1	var	1	1	Quest/q_store2.lua
+Player.LoadItemExchangeStore	Player	LoadItemExchangeStore	1	1	1	1	1	var	1	1	Quest/q_store4.lua
+Player.LoadSmithStore	Player	LoadSmithStore	1	1	1	1	1	var	1	1	Quest/q_snithstore.lua
+Player.OpenStorage	Player	OpenStorage	1	1	0	0	0		1	1	Quest/q_warehouse.lua
+Player.SuveryOwner	Player	SuveryOwner	1	1	0	0	0		1	1	t_getm_himdlfx_sp1.lua
+Player.TeleportCheck	Player	TeleportCheck	1	1	1	1	1	var	1	1	t_telchk_lv.lua
+Player.WarpNearestMarker	Player	WarpNearestMarker	1	1	0	0	0		1	1	t_wapnearmarker.lua
+Quest.CheckGuildOfflineQuest	Quest	CheckGuildOfflineQuest	1	1	0	0	0		1	1	Quest/q_guildskill3.lua
+Quest.CheckWishQuest	Quest	CheckWishQuest	1	1	0	0	0		1	1	Quest/q_wish.lua
+Quest.ReportGuildOfflineQuest	Quest	ReportGuildOfflineQuest	1	1	0	0	0		1	1	Quest/q_guildskill3.lua
+Quest.StartGuildOfflineQuest	Quest	StartGuildOfflineQuest	1	1	0	0	0		1	1	Quest/q_guildskill3.lua
+Scene.CheckPlacementCombat	Scene	CheckPlacementCombat	1	1	1	1	1	var	1	1	t_msg_modc.lua
+Trigger.GetContactMode	Trigger	GetContactMode	1	1	1	1	1	num	1	1	t_popmo_ui1.lua
+Trigger.GetTeiggerStatus	Trigger	GetTeiggerStatus	1	1	1	1	1	var	1	1	t_getm_t1.lua
