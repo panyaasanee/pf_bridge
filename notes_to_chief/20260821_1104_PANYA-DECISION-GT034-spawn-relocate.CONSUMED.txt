@@ -1,0 +1,8 @@
+DUPLICATE STUB - read this before trusting any date in this file.
+Content of 1104 was consumed by R122 (2026-08-21), NOT R126.
+The original stub exists since R122 under the OLD naming convention:
+  20260821_1104_PANYA-DECISION-GT034-spawn-relocate.md.CONSUMED.txt
+(see rounds/R123_3fyvv8_biround13... line ~16: mailbox-empty check must match BOTH conventions).
+R126 (session sweet-ride-4gsdik) created this new-convention twin by mistake on 2026-08-23,
+then corrected the content after pf-adversary caught it (defect D1).
+Kept (not deleted) so that single-convention checks also see it; it asserts no new consumption event.
