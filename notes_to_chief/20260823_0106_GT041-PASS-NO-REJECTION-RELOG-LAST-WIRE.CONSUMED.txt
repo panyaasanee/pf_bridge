@@ -1,0 +1,2 @@
+consumed by chief round R123 (session 3fyvv8) at 2026-08-23 ~15:4x (+07:00)
+original kept in place per R108 rule; copy in consumed/
