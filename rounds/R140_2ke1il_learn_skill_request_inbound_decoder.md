@@ -34,8 +34,39 @@
   ไป `archive/CHIEF_CONTINUATION_ARCHIVE_20260824_R108_R111.md` ทิ้ง pointer (ไฟล์เหลือ 45.3KB ·
   ผลรวม archive+ไฟล์ใหม่ = ต้นฉบับ+stub ไม่มีเนื้อหาย)
 
-## สิ่งที่ทำ (จะเติมระหว่างรอบ)
-- (กำลังทำ) สำรวจ pattern บ้านใน server repo ด้วยลูกมือ Explore ก่อนเขียนโค้ด
+## สิ่งที่ทำ
+
+### 1) LEARN-SKILL-REQUEST-001 / HYP-PF-034 — inbound strict decoder + opt-in dispatch (repo โค้ด)
+- ลูกมือ Explore สำรวจ pattern บ้านก่อนเขียน (โมดูลแม่แบบ: `delete_actor.py` pure decoder ·
+  `chat_input_hypothesis.py` classifier · `learn_skill_result_hypothesis.py` scenario gate)
+- ไฟล์ใหม่ 3: `src/pirateforce_foundation/learn_skill_request_hypothesis.py` (strict decoder ของ body 7 ไบต์
+  `u32 tag 0x14` + `u8 tag 0x0B` · encoder ฝั่งเทส decoder-inverse-checked · classifier envelope ·
+  probe pins 3 ชุด ZERO/MID/MAX คำนวณสด) · `scenarios/learn_skill_request_hypothesis_decode_probe.json`
+  (permission token · exact allowlist) · `tests/test_learn_skill_request_hypothesis.py` (41 เทส รวม dispatch จริง
+  ผ่าน make_state_class + ASCII/cp874 guard)
+- นโยบาย dispatch: **decode-count-and-record เท่านั้น** — ไม่ตอบ ไม่เขียน DB ไม่เรียก composer 0x673C
+  (semantics ของ field ทั้งสองยัง opaque ⇒ การออกแบบ response = เดา จึงไม่ทำ) · ทุก refusal เป็น event ชื่อชัด
+- governance: ตาม stop_rule ของ HYP-PF-033 ("inbound 0x36AA = new version หรือ entry ใหม่") ⇒ เปิด **entry ใหม่
+  HYP-PF-034** (ledger 42 entries · canonical sha re-pin + lineage paragraph) · coverage `skill_use` เติม refs+notes ·
+  `stats_and_progression` แก้ประโยค "inbound of all five unimplemented" ที่จะกลายเป็นเท็จ
+- twin-guard (บทเรียน R138 D1): เติม triple `("learn_skill_request_hypothesis.py","CLearnSkillVital",1)`
+  ทั้งฝั่ง tool และ test ใน commit เดียว · แก้ prose "inbound 0 for all five" ของ tool ·
+  ขยาย context-restriction loop ของ test 24 ให้ resolve docstring ต่อไฟล์ (ของเดิมอ่าน owner ตายตัวไฟล์เดียว)
+- grade digest ของ coverage re-pin ใน `test_foundation_legacy_seam.py` (ท่าเดียวกับที่ R138 ทำ) พร้อม
+  paragraph ประวัติตาม convention
+- ผลเทส: ชุดเต็ม **2017 passed / 324 skipped / 0 failed** เขียว(cloud sanity) · skip census PASS ·
+  `verify_hypothesis_ledger` PASS (entries=42) · `verify_functional_coverage` PASS (8 open domains)
+
+### 2) แม่บ้าน + คิว (repo เอกสาร)
+- continuation archive (ดูหัวข้อ "แม่บ้าน" ด้านบน)
+- 🆕 ใบ **RE-058 LEARNSKILL-DIRECTION-001** เข้า `CLIENT_RE_QUEUE.md` — direction census ของ 0x36AA บนสะพาน
+  (ครึ่งหลักฐานที่ decoder ยังไม่มี · วิธีลอก GT-050 job 4 · ผลจะแก้สถานะ nonclaim ของ HYP-PF-034)
+
+## adversary
+- (กำลังรอ) pf-adversary ตรวจก่อน commit — ผลจะบันทึกท้ายรอบ
 
 ## คิวเทสเกม
-- (จะเติมท้ายรอบ)
+- ✅ ตอบกฎข้อ ⑤: รอบนี้เพิ่มใบ **RE-058** ใน `CLIENT_RE_QUEUE.md` (งานสะพาน static) · **ไม่เพิ่มใบ attended ใหม่**
+  เพราะเลน attended พักตามคำสั่ง Panya 16:56 และครึ่ง client-observable ของเลนสกิลมี GT-058 รออยู่แล้ว —
+  ใบ attended ของ "client ยิง 0x36AA ตอนเรียนสกิลจริง" จะเปิดได้ก็ต่อเมื่อ RE-058 พิสูจน์ direction ก่อน
+  (เปิดตอนนี้ = ใบที่ยืนบนสมมติฐานที่ยังไม่พิสูจน์)

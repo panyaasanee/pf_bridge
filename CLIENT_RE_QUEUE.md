@@ -50,7 +50,10 @@ R133 ยืนยันที่ commit `1e0b20b` (= `origin/main` ณ เวล
 ผล (ก) ชี้ขาดว่า parser เรามีบั๊กหรือไม่ · รายละเอียด `FINDINGS_R134_EXTERNAL_XCHECK.md`
 **สถานะ (R135 · 2026-08-24 ~08:4x +07:00):** ✅ **ปิดแล้ว 3 ใบ — GT-054 PASS (392/392) · GT-053 PASS (H1 รอด) · GT-052 PASS** (ผลหน้าสะพาน 00:33/00:38/00:44 +07:00) · 🟡 **GT-050 PARTIAL** (00:55: จ็อบ 1–3 ปิด · `CLearnSkillResultVital` codec CLOSED · direction ของ `TriggerCastSkillVital` ชนเพดาน static — ทางต่อเป็น observe-only attended) · **เหลือเปิดจริง: GT-055 ใบเดียว** · 📦 ของใหม่บนสะพาน (จดหมาย 0055 อีกใบ): `gamedata\lua\` 616 ไฟล์ + `gamedata\scene\` 289 placement TSV — ยังไม่เข้า git · correction: u16@0x2 ของ `.npc` = definition_count ไม่ใช่ placement_count (bg0001: def 113 / actual 149) · Bg0002 actual = 106 **ตรงกับ GT-053 โดยอิสระ** ✓
 **สถานะ (R136 · 2026-08-24):** ✅ `gamedata\lua\`+`scene\`+API spec **เข้า git แล้ว** (commit `0801541`) · 🆕 **RE-056 SKILLCAST-DIRECTION-002** เปิดท้ายไฟล์ (ตามร่างจดหมาย 0126 — เลขขยับจาก RE-055 เพราะ 055 ถูก GT-055 ใช้แล้ว) · ⏳ external/ ยังอยู่ที่ **5/8 ตาราง** — สามตาราง (`PF_PROTOCOL_PRIORITY` · `PF_DATA_EVIDENCE` · `PF_TAG_CENSUS`) ยังรอคนหน้าสะพาน `git add` (ตามจดหมาย `FROM_CHIEF_R131_*`)
-**สถานะ (R137 · 2026-08-24 ~03:0x +07:00):** 🆕 **RE-057 PLACEMENT-INDEX-CROSSWALK-001** เปิดท้ายไฟล์ (Panya เลือก "ทาง ก." จดหมาย 0159 · ร่างเดิมใช้เลข 056 — ขยับเป็น 057 เพราะ 056 ถูก SKILLCAST-DIRECTION-002 ใช้แล้วใน R136) · จ็อบ crosswalk-ในตาราง-commit ของร่างถูกปิดบน cloud แล้ว: **ทั้ง 188 ตารางไม่มีตารางไหนอ้างสคริปต์ที่เรียก `PlacementOFF` เลย (grep ด้วยชื่อไฟล์ — การอ้างด้วย ID ตัวเลขยังตัดไม่ได้จนกว่าจะมี map ชื่อ→ID จากอิมเมจ)** (crosswalk เดียวที่มีคือ `QUEST.s_LUASCRIPT` — ครอบเฉพาะสาย `Quest/`) — ดู `FINDINGS_R137_QUEST_CROSSWALK_HUNT.md` · Panya ยืนยันซ้ำ (จดหมาย 0159 ข้อ ①): **GT-055 ไม่ต้องเปลี่ยนชื่อ** — จุดเริ่ม `RE-` คือ 056 ตามที่หัวไฟล์เขียนไว้แล้ว · ใบเปิดจริงตอนนี้: **GT-055 · RE-056 · RE-057**
+**สถานะ (R137 · 2026-08-24 ~03:0x +07:00):** 🆕 **RE-057 PLACEMENT-INDEX-CROSSWALK-001** เปิดท้ายไฟล์ (Panya เลือก "ทาง ก." จดหมาย 0159 · ร่างเดิมใช้เลข 056 — ขยับเป็น 057 เพราะ 056 ถูก SKILLCAST-DIRECTION-002 ใช้แล้วใน R136) · จ็อบ crosswalk-ในตาราง-commit ของร่างถูกปิดบน cloud แล้ว: **ทั้ง 188 ตารางไม่มีตารางไหนอ้างสคริปต์ที่เรียก `PlacementOFF` เลย (grep ด้วยชื่อไฟล์ — การอ้างด้วย ID ตัวเลขยังตัดไม่ได้จนกว่าจะมี map ชื่อ→ID จากอิมเมจ)** (crosswalk เดียวที่มีคือ `QUEST.s_LUASCRIPT` — ครอบเฉพาะสาย `Quest/`) — ดู `FINDINGS_R137_QUEST_CROSSWALK_HUNT.md` · Panya ยืนยันซ้ำ (จดหมาย 0159 ข้อ ①): **GT-055 ไม่ต้องเปลี่ยนชื่อ** — จุดเริ่ม `RE-` คือ 056 ตามที่หัวไฟล์เขียนไว้แล้ว · ใบเปิดจริงตอนนี้: **GT-055 · RE-056 · RE-057 · RE-058**
+**สถานะ (R140 · 2026-08-24 ~06:xx +07:00):** 🆕 **RE-058 LEARNSKILL-DIRECTION-001** เปิดท้ายไฟล์ — direction census
+ของ `CLearnSkillVital 0x36AA` (ครึ่งหลักฐานของเลนโค้ด LEARN-SKILL-REQUEST-001 / HYP-PF-034 ที่ R140 เปิด —
+decoder ฝั่ง server ยืนบน W codec ที่ commit แล้ว แต่ยังไม่มีใครพิสูจน์ว่า client ส่งจริง)
 
 ---
 ## 🆕🔬 GT-052 CLASS-SKILL-TABLE-001 [STATIC-ON-BRIDGE]: ~~dump ตารางอาชีพ + ตารางสกิล~~ ✂️ **ตีความคอลัมน์ + ผูก TEXTDATA + ผูกไอคอน** — ตาราง dump แล้วทั้งคู่ (`gamedata\` · จดหมาย 2150)  [✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 00:44 (+07:00) · บันทึกโดย chief R135 · ผลลบติดใบ: ไม่พบ legend ของ `n_TARGET` ในชุดที่ค้น — ห้ามตั้ง label ("ไม่พบ" ≠ "ไม่มีใน client")**]
@@ -776,3 +779,65 @@ trigger data / scene section / placement namespace ให้จดว่าม�
   (ผู้รับงานกรอก: binding ที่พบ + ที่มา (ไฟล์/offset/hex) · namespace ที่ 59/60/61 ชี้ · คำตอบ objective ประโยคเดียว ·
   ตัวอย่างชี้ตัว >=3 จุดถ้ามี · คำตอบจ็อบ 4 พร้อมป้าย "ยืนยัน/อนุมานรูปแบบ" · ถ้าตกให้ระบุว่าเข้าเกณฑ์จบหรือไม่ ·
   เวลา · sha อิมเมจ+ไฟล์ฉาก+TSV ก่อน-หลัง)
+
+---
+## 🆕🔬 RE-058 LEARNSKILL-DIRECTION-001 [STATIC-ON-BRIDGE]: ตัดสิน natural direction ของ `CLearnSkillVital 0x36AA` — client เคย submit มันเข้าเส้น outbound จริงไหม (ครึ่งหลักฐานที่ decoder ฝั่ง server ของ R140 ยังไม่มี)  [🟠 PENDING — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี LOCK_GAME/teardown · ไม่มีอะไรให้ดูบนจอเกม]
+
+ที่มา:
+- R140 เปิดเลนโค้ด **LEARN-SKILL-REQUEST-001 (HYP-PF-034)** — strict decoder ฝั่ง server ของ body 0x36AA
+  (`u32 tag 0x14 @+0x14` · `u8 tag 0x0B @+0x18` · 7 ไบต์ · จากแถว W/R สมมาตรใน `external\PF_SERIALIZER_FIELDS.tsv`
+  ที่ GT-050 job 1-2 ยืนยัน/re-derive แล้ว) · decoder ยืนบน "client **เขียน** shape นี้ได้" — **ยังไม่มีใครพิสูจน์ว่า client
+  เคย **ส่ง** มันจริง** · nonclaim ข้อแรกของโมดูลคือใบนี้
+- วิธีวัดลอกจาก GT-050 job 4 (ที่ทำกับ `TriggerCastSkillVital` แล้วได้ bounded negative) — คราวนี้ทำกับ 0x36AA
+- `IMAGE_ACCESS_COST.tsv` แถว 2026-08-24T06:1x บันทึกความต้องการนี้ไว้แล้ว
+
+หมวด: `STATIC-ON-BRIDGE` — ต้องเปิดอิมเมจ client จริง (cloud ไม่มีอิมเมจ) · ผู้รับงานคือคนหน้าสะพาน ไม่ใช่ผู้เทสหน้าจอเกม
+
+### 🔴 ช่องบังคับ (กฎ 18:22): ค้นใน pf_bridge\external\ แล้ว
+(ผู้รับงานกรอก: เจอ <อะไร> / ไม่เจอ) — จุดตั้งต้นที่รู้แล้ว: `PF_PROTOCOL_REGISTRY.tsv` + `PF_SERIALIZER_FIELDS.tsv`
+มีแถว `CLearnSkillVital` (4 field rows) · สิ่งที่ตารางส่งมอบ **ไม่ตอบ** คือ direction — ถ้าเจอแถว/ตารางอื่นที่พูดถึง
+producer/consumer ของ 0x36AA ให้จดก่อนเปิดอิมเมจ
+### 🔴 ช่องบังคับข้อสอง (R132): ค้น gamedata แล้ว
+(ผู้รับงานกรอก) — คาดว่าไม่ตอบ direction (ตารางข้อมูลเกมไม่ใช่โค้ด) แต่ต้องกรอกช่องนี้ตามกฎ
+
+### objective (claim เดียว)
+**มี decoded chain จาก object/vtable ของ `CLearnSkillVital` เข้า generic outbound vital submit `0x005DD800` หรือไม่**
+คำตอบต้องเป็นประโยคเดียว: `พบ chain outbound (พิกัด: <va ทุก hop>)` หรือ
+`bounded negative แบบเดียวกับ GT-050 job 4 — ไม่พบ exact chain และยัง exclude indirect generic-registry ไม่ได้` หรือ
+`พบหลักฐานว่าเป็น inbound-only (consumer path + ไม่มี W producer)` — ห้ามตอบสองทาง · ผลลบมีค่าเท่าผลบวก
+
+### db / server args
+ไม่ใช้ DB · ไม่บูตอะไรทั้งสิ้น — อ่านอิมเมจอย่างเดียว · sha ก่อน-หลังต้องตรง
+
+### สิ่งที่ต้องมี (precondition)
+- อิมเมจ `GameClient\GameClient.local.bin` · size `14759424` · sha256
+  `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
+- pin ตั้งต้น (จาก `tools/pf_stats_progression_static.py` COHORT + `external\PF_SERIALIZER_FIELDS.tsv`):
+  serializer `CLearnSkillVital` span `[0x00755AC0,0x00755B13)` len 83 sha256
+  `b99487413ffa79784deda46283aafc2f3954d98a85362d35304b745d6c062fc4` · vtable `0xF48F00` · sizeof `0x1C` ·
+  get-id stub `0x755AA0` · serializer slot `+0x18` — ยืนยัน pin ก่อนเริ่ม (แบบ GT-050 job 1)
+- probe แม่แบบ: `tools\pf_gt050_skill_wire_probe.py` (sha ใน GT-050 letter) — ดัดแปลงเป้าจาก 0x5CD2 → 0x36AA ได้
+  แต่ต้องรันในไดเรกทอรีใหม่และห้ามแตะตัวเดิม
+
+### จ็อบ (ลำดับ 1 → 2 → 3)
+1. ไล่ slots ของ vtable `0xF48F00` (getter/factory/serializer/consumer) + registration block ที่ยัด literal vtable
+   เข้า generic registrar `0x5F3DF0` — จด span/sha ทุกฟังก์ชัน (แบบ GT-050 job 4)
+2. **census producer:** byte-wise E8/E9 census หา exact direct caller ของ serializer + factory + chain เข้า
+   `0x005DD800` (outbound vital submit) · dword refs ของ vtable literal ใน executable sections ·
+   🔴 ห้ามใช้ linear disassembler เป็นหลักฐานของผลลบ (บทเรียนรอบ 83) · recursive CFG decode error ต้อง = 0
+3. **census consumer:** slot consumer/handler ของ 0x36AA มี READ path ไหม (แบบเดียวกับที่ GT-050 พบ `0x601810`
+   ของ Trigger) — ถ้ามี ให้จดว่า candidate ไปลง state ไหน
+- ทุกฟังก์ชันที่อ้าง: แนบ `[start,end)` + file offset + len + sha256 · sha อิมเมจก่อน-หลังตรงกัน
+
+### pass criteria — ชั้น static ชั้นเดียว
+- คำตอบ objective หนึ่งประโยค + หลักฐาน span/sha ครบทุก hop ที่อ้าง · ผลลบต้องแนบ census ที่แสดงว่าไล่ครบ
+  (จำนวน candidate ที่ตรวจ · เหตุที่แต่ละตัวตก)
+- ⚠️ ผลของใบนี้ **แก้สถานะ nonclaim ของ HYP-PF-034**: พบ outbound chain ⇒ decoder ยืนบนหลักฐานจริง (chief จะ
+  อัปเดต ledger รอบถัดไป) · พิสูจน์ inbound-only ⇒ เข้าเกณฑ์ falsification ของ entry — **ห้ามผู้รับงานแก้ ledger เอง**
+
+### nonclaims
+- ใบนี้ไม่ตอบว่า UI ปุ่มไหนยิง 0x36AA (นั่นคือชั้น runtime/attended) · ไม่ตอบ semantics ของ field ทั้งสอง ·
+  ไม่อ้างพฤติกรรมเซิร์ฟเวอร์ต้นฉบับ ซึ่งกู้ไม่ได้ตลอดกาล
+
+### result:
+(ผู้รับงานกรอก — จดหมายเข้า `notes_to_chief/` ตามปกติ)
