@@ -1,5 +1,14 @@
 # GAME TEST QUEUE — คิวเทสในเกม
 
+> 📌 **R125 (2026-08-23 ~12:0x +07:00 · chief cloud) — GT-045 ปลดจาก "รอ merge" → 🟢 PENDING-พร้อมบูต · คิวขยับใบเดียว:**
+> PR #9 ของ repo โค้ด merge เข้า `main` แล้ว (merge `9e42cb7`) · resolver ให้ **BOOT_COMMIT `1343305`**
+> เขียว(Actions run 32616696590 · subset บน runner ไม่ใช่ gate เต็ม) · chief ยืนยันสามข้อฝั่งคลาวด์ครบแล้ว
+> (verdict ตรง SHA · flag `--ground-loot-hypothesis-scenario` อยู่ใน `app.py` จริง · `SCENARIO_PRESENT`)
+> — **ผู้เทสยังต้องรัน resolver เองก่อนบูตตามบล็อก "ก่อนบูต" ในใบ เหมือนเดิม** (บูตคำตัดสิน ไม่ใช่ตัวเลขจากความจำ)
+> ลำดับที่ค้าง: **GT-047 → GT-046 → GT-045 → GT-001 re-arm** (re-arm ยิงแล้วรอบนี้ — PR #9 แตะ `src/` · บูตจาก resolver ใหม่เสมอ อย่าก๊อปเลขจากแบนเนอร์)
+> · GT-034/035/036 รอคำเคาะ Panya เหมือนเดิม
+> จดหมายรอบนี้: `notes_to_chief\FROM_CHIEF_R125_TO_ATTENDED_20260823_1205.md`
+
 > 📌 **R124 (2026-08-23 ~10:4x +07:00 · chief cloud) — GT-045 ปลดจาก "รอ chief" · คิวขยับใบเดียว:**
 > **GT-045 → 🟡 BLOCKED-รอ-merge** — เลนเซิร์ฟเวอร์สร้างแล้ว (HYP-PF-032 GROUND-LOOT-001 · PR รอ gate)
 > ชื่อจริง: flag `--ground-loot-hypothesis-scenario` · scenario `scenarios/ground_loot_hypothesis_bit08_render.json`
@@ -259,7 +268,7 @@
 > · GT-022/025 พิสูจน์ท่านอน = DYING_LATCH (`_F_DIE_000` ยังไม่เคยถูกสังเกต — ห้าม flip HYP-PF-023)
 > · GT-024 พิสูจน์เลขเรนเดอร์บนผู้เล่น + HP ไม่ลด (สองปาก) — ที่มาของ GT-031
 
-## GT-001 Smoke: full-loop บน canonical DB หลังทุก commit สำคัญ  [🟢 PENDING (recurring) — 🔁 re-arm หลัง merge สำคัญถัดไป · **PASS ล่าสุดที่ `cf81730` 2026-08-23 01:14 (+07:00)**] 🔁
+## GT-001 Smoke: full-loop บน canonical DB หลังทุก commit สำคัญ  [🟢 PENDING (recurring) — 🔁 **re-arm ยิงแล้ว R125** (PR #9 แตะ `src/`) · บูต HEAD จาก resolver · **PASS ล่าสุดที่ `cf81730` 2026-08-23 01:14 (+07:00)**] 🔁
 
 > ✅ **RESULT 2026-08-23 01:10–01:14 (+07:00) — PASS บน main HEAD `cf81730` (worktree clean)** · full loop: login → Channel 1 → PVP → Arena01 → เข้าแมพ (HP 100/100 · Port Royal · chat online) → ออกด้วย X+ยืนยัน → Ctrl+C สะอาด
 > canonical DB SHA เปลี่ยน**แบบคาดหมาย** (session +1): `6BFCEDD5…FE498FC7` → `23FD885AC4CBBFAC5E06C9B11506F6EA9F985DA82F4522383DFCC14A91C1816A` · `CANON_SHA.txt` อัปเดตแล้วโดยผู้เทส · backup ค่าเก่ายังอยู่
@@ -270,6 +279,10 @@
 > - 🔁 **re-arm รอบ 78:** commit รอบ 78 แตะ `src/` (app.py + runtime.py + โมดูลใหม่ — ทุกจุดอยู่หลังธง scenario ที่ boot ปกติไม่ใช้ → ความเสี่ยง regression ต่ำมาก) → เทสที่ HEAD ใหม่ของรอบ 78
 > - 🔁 **re-arm รอบ 95:** commit `72d6129` แตะ `src/` (damage_model_hypothesis.py + runtime.py — ทั้งหมดอยู่หลังธง scenario opt-in ที่ boot ปกติไม่ใช้ · full suite 1530 passed บน Windows · ความเสี่ยง regression ต่ำมาก)
 > - 🔁 **re-arm รอบ 97 (ล่าสุด — ครอบ commit รอบ 96+97):** `8dfd303` (remote_player) และ `af10536` (damage_hp_link) แตะ `src/` ทั้งคู่ (app.py + runtime.py + โมดูลใหม่ — ทุกจุดอยู่หลังธง scenario opt-in ที่ boot ปกติไม่ใช้ · full suite **1803 passed 1 skipped** บน Windows · ความเสี่ยง regression ต่ำมาก) → **GT-001 = PENDING ที่ `af10536`** รันในรอบใหญ่ถัดไปตามท่ามาตรฐาน PLAYBOOK
+> - 🔁 **re-arm R125 (ล่าสุด):** PR #9 GROUND-LOOT-001 merge เข้า `main` แตะ `src/` (app.py + runtime.py + โมดูลใหม่ —
+>   ทุกจุดอยู่หลังธง scenario opt-in ที่ mutually exclusive กับโหมดอื่น · boot ปกติไม่เปลี่ยน · เขียว(Actions run 32616696590 · subset))
+>   → **GT-001 = PENDING** · **บูต commit จาก `pf_resolve_green_boot.py` ตอนจะรันจริง — จงใจไม่พิน hash ในใบนี้**
+>   (ทุก merge ระหว่างหน้าต่างไม่เฝ้าเครื่องจะขยับ HEAD ได้อีก · resolver คือคำตอบเดียวที่ไม่ stale)
 
 > 🗂 **ประวัติ re-arm รอบ 52 / 53 / 65 (superseded โดย re-arm รอบ 78 ด้านบน) ย้ายไป
 > `pf_bridge\archive\GAME_TEST_QUEUE_ARCHIVE_20260819_R85_HOUSEKEEPING.md`** (chief รอบ 85)
@@ -1551,7 +1564,7 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
 - **result:** (ผู้รับงาน static บนสะพานกรอก: เลข id + เส้นทาง join · path TSV + sha256 · sha อิมเมจก่อน-หลัง · เวลา)
 
 
-## 🆕⭐ GT-045 GROUNDDROP-RENDER-001 [attended, in-game]: บิต `0x08` ของ `0x5F85B0` คือ "วัตถุลูทบนพื้น" ไหม — ยิงเรคคอร์ดที่มีพิกัดโลกเข้าไปแล้วดูว่าไคลเอนต์วาดอะไร  [🟡 **BLOCKED-รอ-merge — เลนสร้างแล้ว (R124 · HYP-PF-032 GROUND-LOOT-001) · รอ gate เขียว + merge เข้า `main` ก่อนบูต** · สิทธิ์เขียน encoder จาก span นี้ปลดแล้วโดย GT-042 PASS (R123)]
+## 🆕⭐ GT-045 GROUNDDROP-RENDER-001 [attended, in-game]: บิต `0x08` ของ `0x5F85B0` คือ "วัตถุลูทบนพื้น" ไหม — ยิงเรคคอร์ดที่มีพิกัดโลกเข้าไปแล้วดูว่าไคลเอนต์วาดอะไร  [🟢 **PENDING-พร้อมบูต (R125) — merge เข้า `main` แล้ว · บูตจาก resolver ตามบล็อก "ก่อนบูต" เสมอ (หลักฐาน merge/verdict ณ R125 อยู่ในบล็อกสถานะ — ห้ามก๊อป SHA จากหัวใบ)** · สิทธิ์เขียน encoder จาก span นี้ปลดแล้วโดย GT-042 PASS (R123)]
 
 **ที่มา:** ร่างผู้ช่วย `notes_to_chief\20260823_0805_GT-TICKET-DRAFT-ground-drop-and-pickup-direction.md`
 (อ่านคู่กับหลักฐานวัดเฟรม `notes_to_chief\20260823_0800_GROUND-DROP-FRAME-MEASUREMENT-pickup-is-not-contact.md`)
@@ -1559,7 +1572,7 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
 ของหาย + บรรทัด `ได้รับ [Red leaves Hammer] * 1` เกิดเฟรมเดียวกัน ⇒ คำถามเดิม "เดินทับ/กดปุ่ม" ตายทั้งคู่
 ใบนี้ตอบคำถามที่แคบลง: **ไคลเอนต์รับเรคคอร์ดบิต `0x08` แล้ววาดของบนพื้นออกมาไหม**
 
-### 🟡 สถานะ BLOCKED-รอ-merge (อัปเดต R124 — เหลือข้อเดียว)
+### 🟢 สถานะ PENDING-พร้อมบูต (อัปเดต R125 — เงื่อนไขครบทุกข้อแล้ว)
 1. ✅ **เลนเซิร์ฟเวอร์สร้างแล้ว (R124):** HYP-PF-032 GROUND-LOOT-001 — flag จริงคือ
    `--ground-loot-hypothesis-scenario` · scenario จริงคือ `scenarios/ground_loot_hypothesis_bit08_render.json`
    (ชื่อที่เสนอไว้เดิม `groundloot-render-...`/`groundloot_render_...bit08.json` **เลิกใช้** — เปลี่ยนตาม house convention)
@@ -1570,9 +1583,12 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
    element mask `0x12` (`0x10` พิกัด + `0x02` dword `2600001`)
    พิกัดใกล้ = จุดเกิด +30X `(-9209.95703125, -2830.045166015625, 223.29209899902344)` ·
    พิกัดไกล = จุดเกิด +800X `(-8439.95703125, -2830.045166015625, 223.29209899902344)`
-2. 🔴 **ยังต้องรอ: gate เขียว + merge เข้า `main`** — เหมือน GT-034/GT-041 (บูตคำตัดสิน ไม่ใช่ branch)
+2. ✅ **merge เกิดแล้ว (R125 · 2026-08-23 ~11:0x +07:00):** PR #9 merge เข้า `main` (merge `9e42cb7`) ·
+   คำตัดสิน gate: `success` ที่ SHA `134330591554d3323c14353b11f2f632c7f4a677` (Actions run 32616696590 ·
+   subset บน runner ไม่ใช่ gate เต็ม) · resolver ให้ `BOOT_COMMIT: 1343305…` (tree ตรงกับ mainline แบบวัดจริง) ·
+   chief รันสามข้อยืนยันฝั่งคลาวด์ผ่านครบ (verdict ตรง SHA · flag อยู่ใน `app.py` · `SCENARIO_PRESENT`)
+   — **ผู้เทสยังต้องรัน resolver + สามข้อยืนยันเองบนสะพานก่อนบูต ตามบล็อก "ก่อนบูต" ข้างล่าง เหมือนเดิม**
 ✅ เงื่อนไขที่สามเดิม (GT-042 ต้อง PASS เพื่อปลดสิทธิ์เขียน encoder) **ครบแล้ว** — GT-042 PASS 2026-08-23 (+erratum handler len 47) · สิทธิ์ปลดเฉพาะแถวที่รอด re-derive ซึ่งรวม `0x5F85B0` ทั้งตาราง
-🔴 **ปล่อยใบนี้ไว้ที่เดิม ห้ามลบ ห้ามย้าย** จนกว่า merge จะเกิด · ถ้าใครเปิดคิวมาเจอใบนี้ยัง BLOCKED-รอ-merge = เช็ค resolver ก่อน ถ้าได้ commit ที่มีเลนนี้ = ถึงคิวมันแล้ว
 
 ### สมมติฐาน (จาก GT-040 ท่อน A · เฉพาะตารางฟิลด์ของ `0x5F85B0` ผ่าน re-derive ปฏิปักษ์ใน GT-042 — VA ประกอบอื่น (`0xF313C4`/`0x5F34D0`) มาจาก GT-040 ยังไม่ผ่านปฏิปักษ์ · verify sha ก่อนพึ่งเสมอ)
 `0x5F85B0` (บิต `0x08` / obj `+0x20`) = list แบบ dirty-mask · element ยาว `0x2C` ไบต์ · vtable `0xF313C4`
