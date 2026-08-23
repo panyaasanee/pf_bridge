@@ -7,7 +7,7 @@
 **🎮 ต้องเปิดเกม / ต้องใช้ตา Panya** — ⏸ **พักทั้งหมดตามคำสั่ง 16:56 · 🔴 ห้ามปิดด้วยรอบ unattended** (กติกาอยู่ใน `AGENTS.md` แล้ว)
 - `GT-001` smoke recurring (🟢 pending · re-arm ค้าง) · `GT-030` (ห้ามรันรอบสาม — ทางต่อเป็น static) · `GT-033` A/B (BLOCKED-input)
 - `GT-034` (NO-RESULT) · `GT-035` / `GT-036` (BLOCKED รอ GT-034/045) · `GT-045` v2 (⏸ พร้อมบูตทันทีที่ Panya ว่าง — merge แล้ว)
-- 🆕 `GT-058` LEARN-SKILL-RESULT client-observe (⏸ PAUSED-รอ-Panya 16:56 · 🔴 BLOCKED-รอ gate เขียว+merge · branch `claude/amazing-goodall-bcc9z5` PR ยังไม่ merge — เกิดรอบ R138)
+- 🆕 `GT-058` LEARN-SKILL-RESULT client-observe (⏸ PAUSED-รอ-Panya 16:56 — เงื่อนไข merge หมดแล้ว: PR #14 merge เข้า `main` `9691bcc` · เขียว(Actions run 32668480284 · subset) — เหลือ (ข) เช็ค BOOT_COMMIT ตอนบูต + (ค) Panya ปลดพัก · ปลดโดย R139)
 
 **🔬 งาน static — ทำเมื่อไรก็ได้ ไม่ต้องมีคนเฝ้า ไม่ต้องจับ `LOCK_GAME` · ขนานกับรอบเทสเกมได้:**
 - ใบเก่าในไฟล์นี้: `GT-047` (TOOL-GUARD-GAP + จ็อบ 0) · `GT-049` (LOOT-CHAT-TEMPLATE · ✂️ scope-cut R132: จ็อบ 1 ปิดแล้ว — template = MESSAGE id 131 · เหลือหาตัวยิง)
@@ -2282,9 +2282,11 @@ gap ที่ต้องปิด      ไม่พบ static link จาก 0x
 
 ---
 
-## ⭐ GT-058 LEARN-SKILL-RESULT-001 [attended, in-game]: ไคลเอนต์ "ทำอะไร" กับเฟรม CLearnSkillResultVital (0x673C) เมื่อรับ sweep 5 สเต็ป — อัปเดตหน้าต่างสกิล / ขึ้นบรรทัดแชต / ไม่เห็นอะไร / หลุด  [⏸ PAUSED-รอ-Panya (คำสั่ง 16:56 — ใบ eye-dependent ห้ามรัน/ห้ามปิด unattended) · 🔴 BLOCKED-รอ gate เขียว + merge ก่อน (เลนอยู่ branch `claude/amazing-goodall-bcc9z5` · PR ยังไม่ merge) — ห้ามบูตจนกว่า resolver จะให้ commit ที่มีเลนนี้บน `main`]
+## ⭐ GT-058 LEARN-SKILL-RESULT-001 [attended, in-game]: ไคลเอนต์ "ทำอะไร" กับเฟรม CLearnSkillResultVital (0x673C) เมื่อรับ sweep 5 สเต็ป — อัปเดตหน้าต่างสกิล / ขึ้นบรรทัดแชต / ไม่เห็นอะไร / หลุด  [⏸ PAUSED-รอ-Panya (คำสั่ง 16:56 — ใบ eye-dependent ห้ามรัน/ห้ามปิด unattended) · ✅ เงื่อนไข merge หมดแล้ว (R139) — เหลือ (ข) ตอนบูต: resolver คืน BOOT_COMMIT ที่มี `9691bcc` เป็น ancestor **และ** ผ่านบล็อกยืนยันก่อนบูตของใบนี้ (บล็อกยืนยันคือส่วนหนึ่งของ (ข) — กัน main ที่ revert เลนทีหลัง) + (ค) Panya ปลดพัก attended]
 
-> 🔴 **รอ gate เขียว + merge ก่อน:** เลน server (opt-in scenario) ยังอยู่บน branch `claude/amazing-goodall-bcc9z5` · PR ยังไม่ merge เข้า `main` — **ใบนี้ยังบูตไม่ได้** จนกว่า (ก) PR merge แล้ว และ (ข) resolver คืน BOOT_COMMIT ที่มีเลนนี้ · **และ** (ค) เลน attended ถูกปลดพักโดย Panya — ทั้งสามข้อต้องครบ
+> 📎 **สถานะแวดล้อม (R139 · 2026-08-24 04:5x +07:00): เงื่อนไข (ก) ปิดแล้ว** — PR โค้ด #14 merge เข้า `main` แล้ว (merge commit `9691bcc` · commit เลน `e34d91f` เป็น ancestor ของ `origin/main` ยืนยันด้วย `merge-base --is-ancestor`) · gate เขียว(Actions run 32668480284 · **subset ไม่ใช่ gate เต็ม** · verdict `success` จาก `ci-status:ci/e34d91f….json` · ref `refs/pull/14/merge`) · ยืนยันซ้ำบน clone `main` ฝั่ง cloud: โมดูลเทสของเลน 84 passed / 22 skipped เปิดเผย / 220 subtests และสวีตเต็ม เขียว(cloud sanity 1976/324/0) ⇒ **(ก) จบ** · **ใบยังพักตามคำสั่ง 16:56 — ห้ามบูตจนกว่า Panya ปลดพัก** และตอนบูตต้องเช็ค (ข) BOOT_COMMIT มี `9691bcc` เป็น ancestor
+
+> 🔴 ~~**รอ gate เขียว + merge ก่อน:** เลน server (opt-in scenario) ยังอยู่บน branch `claude/amazing-goodall-bcc9z5` · PR ยังไม่ merge เข้า `main` — **ใบนี้ยังบูตไม่ได้** จนกว่า (ก) PR merge แล้ว~~ *(ปิดแล้ว — ดู 📎 R139 ข้างบน)* และ (ข) resolver คืน BOOT_COMMIT ที่มีเลนนี้ · **และ** (ค) เลน attended ถูกปลดพักโดย Panya — ~~ทั้งสามข้อต้องครบ~~ **เหลือ (ข)+(ค)**
 
 **ที่มา:** ครึ่ง wire ปิดแล้วที่ **GT-050** (`CLearnSkillResultVital` codec CLOSED · จดหมาย `notes_to_chief\20260824_0055_*`):
 รูปสายจริงคือ `count u16` (tag `0x12`) + records ยาว 12 ไบต์ `(u32 tag 0x14 / u16 tag 0x12 / u32 tag 0x14)` + trailing `u8` (tag `0x0B`) ·
