@@ -16,17 +16,19 @@
   "verify sha → re-derive ปฏิปักษ์ → ใช้ต่อ"** (แบบเดียวกับ GT-050)
 - ผลส่งกลับทางเดิม: จดหมายใน `notes_to_chief/` + กรอกช่อง **result:** ท้ายใบ · sha ก่อน-หลังของทุกไฟล์ที่พึ่งต้องตรงกัน
 
-**📊 รายการค้างที่ Panya ขอให้มองเห็นได้ (คำสั่ง 18:22 ข้อ ⑤):** ชุดส่งมอบ RE = **8 ตาราง 17,626 แถว** ·
-ผ่าน re-derive ปฏิปักษ์แล้ว (GT-042) · 🔴 **ยังไม่มีโค้ดใน `src/` `tools/` `tests/` อ่านมันแม้แต่บรรทัดเดียว**
-(ข้อห้ามเขียนโมดูล/encoder เพิ่งปลด 2026-08-23 02:03 · GT-050 คือผู้ใช้รายแรกที่วางแผนไว้ · เลน headless สกิลจะเป็นผู้ใช้ฝั่งโค้ดรายแรกหลัง GT-050 ปิด)
+**📊 รายการค้างที่ Panya ขอให้มองเห็นได้ (คำสั่ง 18:22 ข้อ ⑤):** ชุดส่งมอบ RE = **8 ตาราง 17,618 แถว data** ·
+ผ่าน re-derive ปฏิปักษ์แล้ว (GT-042) · ✅ **ปิดแล้ว R131 (2026-08-23 ~21:0x):** ผู้อ่านฝั่งโค้ดตัวแรกคือ
+`pirate-force-server/tools/pf_external_registry.py` (pin sha256 ทั้ง 5 ตาราง + cross-check 6 ข้อ + เทส 13 ใบ —
+รอ gate/merge ณ เวลาเขียน) · เลน headless สกิลยังต่อคิวหลัง GT-050 ปิดตามเดิม
 
-> 🔎 **สถานะการเข้าถึงชุดส่งมอบ (R129 · 2026-08-23 ~19:00 +07:00):** `external/` **ยังไม่เคยเข้า git เลย** —
-> `.gitignore` ของ repo นี้เป็น deny-all และไม่เคย whitelist โฟลเดอร์นี้ ⇒ ตาราง 8 ใบอยู่บนดิสก์เครื่องสะพานเท่านั้น
-> (คนหน้าสะพานเปิดอ่านได้ตามปกติ — path `pf_bridge\external\` ในใบทุกใบหมายถึงสำเนาบนดิสก์นั้น)
-> แต่ **ฝั่ง cloud/CI มองไม่เห็น จึงยังเขียนโค้ด/เทสที่อ่านตารางไม่ได้** · R129 whitelist รายชื่อไฟล์แล้ว
-> **เฉพาะ 5/8 ตารางที่รู้ชื่อ + ดัชนี** — ขั้นถัดไป: **คนหน้าสะพาน `git add` รายไฟล์ตามจดหมาย `FROM_CHIEF_R129_*`**
-> (ปลด 5 ตารางแรก ≈16,803 แถว) · อีก 3 ตาราง (~823 แถว) ยังไม่รู้ชื่อไฟล์ ⇒ ต้องรอคำตอบชื่อจริงจากหน้าเครื่อง
-> แล้ว chief whitelist เพิ่มอีกหนึ่งรอบ — **เลนนี้เปิดครบจริงเมื่อครบ 8 ตาราง ไม่ใช่หลัง add รอบแรก**
+> 🔎 **สถานะการเข้าถึงชุดส่งมอบ (อัปเดต R131 · 2026-08-23 ~21:0x +07:00):**
+> ✅ **5/8 ตาราง + ดัชนีเข้า `main` แล้ว** (commit `284d986` · Panya ruling 20:39 "push ทั้งไฟล์ ไม่ mask") —
+> cloud/CI อ่านได้แล้ว · ❌ อีก **3 ตาราง (820 แถว): `PF_PROTOCOL_PRIORITY.tsv` · `PF_DATA_EVIDENCE.tsv` ·
+> `PF_TAG_CENSUS.tsv`** — จดหมาย 20:39 ยืนยันชื่อ+สะอาดแล้ว · R131 whitelist ใน `.gitignore` ให้แล้ว
+> ⇒ เหลือขั้นเดียว: **คนหน้าสะพาน `git add` สามไฟล์นี้** (ดูจดหมาย `FROM_CHIEF_R131_*`) —
+> **เลนนี้เปิดครบจริงเมื่อครบ 8 ตาราง**
+> 🔴 คำเตือนที่จดหมาย 20:39 ฝากไว้: **ห้าม whitelist ไฟล์ `.py` ในโฟลเดอร์นี้โดยไม่ตรวจแยกอีกรอบ** —
+> `pf_extract_protocol.py` มีสตริงไบต์ฝังเป็นการ์ดค่าคาดหวังมากกว่าในตารางเสียอีก
 
 **ลำดับที่เสนอ (R128):** **GT-053 (ถูกสุด · ชี้ขาด H1) → GT-052 → GT-050** · รายละเอียด H1 อยู่ `FINDINGS_R128_GT051_RENDER_SYNTHESIS.md`
 
@@ -306,3 +308,76 @@ wire override template/พิกัดของ identity ใน band ได้�
 - **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\\external\\ แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: ชื่อโฟลเดอร์+ไฟล์ฉาก scene 2 + เส้นทาง resolve จาก GT-044 · N placement ทั้งหมด ·
   index 60: identity/template/preset + offset + f32 triple · ผลเทียบ triple กับค่า authentic P60 (`21421.0059/9277.1123/590.6788`) ·
   คำตัดสิน H1 รอด/ตาย (band membership) หรือ "ตอบไม่ได้" · เวลา · sha ไฟล์ฉาก+TSV ก่อน-หลัง)
+
+---
+
+## 🆕🔬 GT-054 SPAN-VERIFY-EXTERNAL-REGISTRY [STATIC-ON-BRIDGE]: รัน span verification ของ reader ตัวใหม่กับอิมเมจ client บนสะพาน — พิสูจน์ span_sha256 ของชุดส่งมอบตรงกับไบต์จริงในอิมเมจ  [🟠 **PENDING — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี `LOCK_GAME`/teardown · ไม่มีอะไรให้ดูบนจอเกม**]
+
+**Background:** ตาราง `pf_bridge\external\` merge เข้า main แล้ว 2026-08-23 (คำตัดสิน Panya 20:39 +07:00) ·
+tool ใหม่ `tools/pf_external_registry.py` ใน `pirate-force-server` = โค้ด reader ตัวแรกที่อ่านชุดส่งมอบจริง ·
+มัน pin sha256 ของไฟล์และ cross-check ความสอดคล้องภายในได้บน cloud **แต่ span_sha256 เทียบกับอิมเมจจริงตรวจได้เฉพาะบนสะพานเท่านั้น**
+(อิมเมจไม่เคยออกจากเครื่องนั้น) · 🔴 **กฎยืน: verify span sha ก่อนพึ่งแถวใด ๆ เสมอ** — ใบนี้คือการทำกฎนั้นครั้งแรกด้วยโค้ด
+
+**หมวด:** `STATIC-ON-BRIDGE` — ต้องเปิด `GameClient.local.bin` จึงรันบน cloud clone ไม่ได้ · ผู้รับงานคือคนหน้าสะพาน ไม่ใช่ผู้เทสหน้าจอเกม ·
+**ใบนี้ไม่มีอะไรให้ดูบนจอเกมแม้แต่อย่างเดียว** · stamp 420 / teardown / canonical DB ไม่เกี่ยวกับใบนี้ (ไม่บูตอะไรทั้งสิ้น)
+
+### 🔴 Dependency — "รอ merge ก่อน" (ใบนี้ยังรันไม่ได้จนกว่าจะ merge)
+tool อยู่บน PR ที่ **ต้องผ่าน gate และ merge เข้า `pirate-force-server` main ก่อน** ใบนี้ถึงจะ runnable ·
+🔴 ก่อนเริ่ม runner ต้อง **pull main ล่าสุด** แล้วยืนยันว่า `tools\pf_external_registry.py` มีอยู่จริง (ถ้าไม่มี = ใบยัง BLOCKED · หยุด รายงานว่ายังไม่ merge)
+
+### 🔴 ช่องบังคับ (กฎ 18:22): ค้นใน pf_bridge\external\ แล้ว
+**เจอ** — ชุดส่งมอบเองคือ object under test ของใบนี้: `PF_SERIALIZER_FIELDS.tsv` (6,931 field rows) ให้ 392 distinct spans ·
+ใบนี้ไม่ได้ไปถอดของใหม่ แต่เป็น "verify span sha ของชุดส่งมอบด้วยอิมเมจจริง" ตามกฎยืน
+
+### objective (claim เดียว)
+**span_sha256 ของทั้ง 392 distinct spans ในชุดส่งมอบตรงกับไบต์จริงที่ map มาจากอิมเมจ client บนสะพาน** (mismatched=0 และ unreadable=0)
+
+### db / server args
+**ไม่ใช้ DB · ไม่บูตเซิร์ฟเวอร์ · ไม่บูต client** — รัน tool อ่านอิมเมจ + TSV ส่งมอบอย่างเดียว
+🔴 **ห้ามแก้อิมเมจ / TSV ส่งมอบ — tool เปิดอ่านอย่างเดียว · จด sha อิมเมจ+TSV ก่อน-หลังต้องตรงกัน**
+
+### exact command (Windows bridge · cp874-safe · ASCII output)
+```
+cd <pirate-force-server clone>
+py -3 tools\pf_external_registry.py --verify-spans ..\GameClient\GameClient.local.bin
+```
+สำหรับแนบลงจดหมาย (JSON เต็ม รวม image_sha256 + รายการ mismatched/unreadable):
+```
+py -3 tools\pf_external_registry.py --verify-spans ..\GameClient\GameClient.local.bin --json
+```
+
+### expected output shape (prediction — เขียนไว้ล่วงหน้า)
+บรรทัดเดียว: `spans=392 verified=V mismatched=M unreadable=U`
+คาดว่า `spans=392 verified=392 mismatched=0 unreadable=0` · **exit code 0 ก็ต่อเมื่อ M=0 และ U=0 เท่านั้น** (M>0 หรือ U>0 => exit 1) ·
+🔴 ถ้า tool ตอบ `REFUSED ... exit 3` = อิมเมจไม่อยู่ที่ path นั้น (ยังไม่ได้รันจริง) — แก้ path อย่านับเป็นผล
+
+### pass criteria — สองชั้นตามบ้าน (ปรับให้เข้ากับใบ static)
+**ชั้น 1 (artifact / wire-equivalent — headless ได้ ไม่ต้องพึ่งคน):**
+- exit code = 0 · `spans=392` · `verified=392` · `mismatched=0` · `unreadable=0`
+- ต้องบันทึกค่า `image_sha256` จากผล tool ลงในจดหมายผล (field มาในโหมด `--json`)
+- sha อิมเมจ + TSV ส่งมอบ ก่อน-หลัง ตรงกัน
+
+**ชั้น 2 (human-observable — คนหน้าสะพานต้องทำเอง):**
+- runner **paste บรรทัดสรุปเต็ม** (`spans=... verified=... mismatched=... unreadable=...`) **+ `image_sha256`** ลงในจดหมาย
+  `notes_to_chief/` ที่ตั้งชื่อด้วย timestamp
+- runner **ระบุ commit ของ `pirate-force-server` ที่รัน** (commit hash ที่ pull มา) ในจดหมายเดียวกัน
+
+### 🔴 Failure protocol (ถ้า mismatched>0 หรือ unreadable>0)
+- **ห้าม retry ด้วยการ tweak ใด ๆ** · paste รายการ `mismatched_spans` / `unreadable_spans` (จากโหมด `--json`) ลงจดหมายแล้ว **หยุด**
+- mismatch = อย่างใดอย่างหนึ่งผิด: **คำอ้างของชุดส่งมอบ** หรือ **การ map section-delta ของเรา (`0x400C00`)** ผิดสำหรับ span เหล่านั้น ·
+  chief ต้องเห็นว่าเป็น span ไหนก่อน ห้ามให้อะไรพึ่งแถวเหล่านั้นจนกว่าจะตัดสิน
+
+### 🔴 ผลลบมีค่าเท่าผลบวก
+- **mismatched>0** = ข่าวที่มีค่า => ชุดส่งมอบเพี้ยน/อิมเมจคนละตัว/section-delta ผิด — redirect ไปตรวจว่าฝั่งไหนผิดก่อนใช้แถวใด
+- **unreadable>0** = ข่าวที่มีค่า => span map ออกนอกไฟล์ => delta หรือ span bound ผิด — จดว่าตัวไหน
+- **verified=392 พอดี** = ยืนยันว่าชุดส่งมอบพึ่งได้ที่ระดับ byte-of-span (แต่ดู nonclaims — ไม่ได้แปลว่ารู้ความหมาย)
+
+### nonclaims (ติดไปกับผลทุกกรณี)
+- **ผ่านไม่ได้พิสูจน์ความหมายของฟิลด์ (field MEANINGS)** — พิสูจน์แค่ว่าไบต์ของ span ตรง sha
+- **ไม่พิสูจน์ว่า client ส่งแถว W จริง** — W row แปลว่า serializer เขียนฟิลด์ได้ ไม่ใช่ว่าไคลเอนต์ส่งจริง
+- **ครอบเฉพาะ 392 spans ของ 503 known-serializer messages** — 16 UNKNOWN-serializer messages **ไม่มี span ให้ verify โดยเจตนา** (spanless 32 field rows คือ W+R ของ 16 ตัวนั้น)
+- **ไม่ claim เรื่องเซิร์ฟเวอร์ต้นฉบับ** ซึ่งปิดไปแล้ว กู้ไม่ได้ตลอดกาล
+
+- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\external\ แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: ยืนยัน `tools\pf_external_registry.py` มีจริงหลัง pull main + commit hash ที่รัน ·
+  บรรทัดสรุปเต็ม `spans/verified/mismatched/unreadable` + exit code · `image_sha256` · ชื่อจดหมาย timestamp ที่ paste ผล ·
+  ถ้า M>0/U>0: รายการ `mismatched_spans`/`unreadable_spans` แล้วหยุด · เวลา · sha อิมเมจ+TSV ก่อน-หลัง)
