@@ -40,6 +40,9 @@ R133 ยืนยันที่ commit `1e0b20b` (= `origin/main` ณ เวล
 **ลำดับที่เสนอ (R128):** **GT-053 (ถูกสุด · ชี้ขาด H1) → GT-052 → GT-050** · รายละเอียด H1 อยู่ `FINDINGS_R128_GT051_RENDER_SYNTHESIS.md`
 **เพิ่มเติม (R133):** **GT-054 ปลดจาก "รอ merge" เป็น runnable แล้ว** — เป็นใบเดียวในคิวนี้ที่จบด้วยคำสั่งเดียว (`--verify-spans`)
 แทรกก่อนหรือขนานใบไหนก็ได้ · ถ้ามีเวลาหน้าสะพานจำกัด แนะนำรัน GT-054 ก่อนเพราะผลของมัน (span ตรง/ไม่ตรง) ตัดสินว่าใบอื่นพึ่งตารางส่งมอบได้แค่ไหน
+**เพิ่มเติม (R134):** 🆕 **GT-055 STRING-CODEC-DECISION-001** (ท้ายไฟล์) — cross-check R134 พบโค้ดเรากับตาราง Codex
+อ่าน string บน wire คนละแบบ 2 จุด (DeleteActorVital 0x36DB · chat 0xAC52) · จ็อบ 1 เป็น grep capture อย่างเดียว จบเร็ว ·
+ผล (ก) ชี้ขาดว่า parser เรามีบั๊กหรือไม่ · รายละเอียด `FINDINGS_R134_EXTERNAL_XCHECK.md`
 
 ---
 ## 🆕🔬 GT-052 CLASS-SKILL-TABLE-001 [STATIC-ON-BRIDGE]: ~~dump ตารางอาชีพ + ตารางสกิล~~ ✂️ **ตีความคอลัมน์ + ผูก TEXTDATA + ผูกไอคอน** — ตาราง dump แล้วทั้งคู่ (`gamedata\` · จดหมาย 2150)  [🟠 **PENDING ✂️ SCOPE-CUT R132 — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี `LOCK_GAME`/teardown · ไม่มีอะไรให้ดูบนจอเกม**]
@@ -415,3 +418,81 @@ py -3 tools\pf_external_registry.py --verify-spans ..\GameClient\GameClient.loca
 - **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\external\ แล้ว: เจอ <อะไร> / ไม่เจอ` · 🔴 ช่องบังคับข้อสอง (R132): `ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: ยืนยัน `tools\pf_external_registry.py` มีจริงหลัง pull main + commit hash ที่รัน ·
   บรรทัดสรุปเต็ม `spans/verified/mismatched/unreadable` + exit code · `image_sha256` · ชื่อจดหมาย timestamp ที่ paste ผล ·
   ถ้า M>0/U>0: รายการ `mismatched_spans`/`unreadable_spans` แล้วหยุด · เวลา · sha อิมเมจ+TSV ก่อน-หลัง)
+
+---
+
+## 🆕🔬 GT-055 STRING-CODEC-DECISION-001 [STATIC-ON-BRIDGE]: ชี้ขาด "รูปเต็ม" ของ string บน wire 2 จุดที่โค้ดเรากับตารางส่งมอบ Codex ขัดกัน — DeleteActorVital 0x36DB และ chat 0xAC52 + ตอบว่าป้าย `UNTAGGED_*` ของชุดส่งมอบแปลว่าอะไรกันแน่  [🟠 **PENDING — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี `LOCK_GAME`/teardown · ไม่มีอะไรให้ดูบนจอเกม**]
+
+**Background (R134 · `FINDINGS_R134_EXTERNAL_XCHECK.md` §3):** cross-check โค้ดเรา vs ชุดส่งมอบพบข้อขัดแย้ง
+2 จุด และข้อเท็จจริงเชิงระบบหนึ่งข้อที่ครอบทั้งคู่:
+- 🔴 **ข้อเท็จจริงเชิงระบบ:** ทั้ง 6,931 แถวของ `PF_SERIALIZER_FIELDS.tsv` ไม่มีแถวไหนมี string tag เลย —
+  string ทุกแถวเป็น `UNTAGGED_WSTRING16LE` (348) / `UNTAGGED_STRING8` (60) · แต่ capture เกรด A ของเรา
+  บนอิมเมจเดียวกันเห็น wstring **มี tag `0x48` จริง** (GT-006) ⇒ ป้าย `UNTAGGED_*` ผิดเชิงระบบในฐานะ wire claim
+  **หรือ**ไม่เคยเป็น wire claim (primitive string อาจปล่อย tag เองข้างใน มุมมอง extractor เลยไม่เห็น)
+- **(ก) DeleteActorVital 0x36DB string ท้าย frame:** โค้ดเรา = tag `0x44` + u32 len + UTF-16LE 2 byte/char ·
+  ปฏิเสธ len คี่ (`src/pirateforce_foundation/delete_actor.py:90-94`) · ตาราง Codex = `UNTAGGED_STRING8_LEN32LE`
+  (1 byte/char) · เคสที่ระบบสองทางมองไม่เห็นและอาจจริงที่สุด: **wire = tag `0x44` + u32 len + string8** —
+  ถ้าใช่ parser เราปฏิเสธชื่อความยาวคี่ทุกใบ และอ่านชื่อ ASCII ความยาวคู่เป็น UTF-16 ผิด ๆ = **บั๊กจริง**
+- **(ข) chat 0xAC52 wstring header:** ป้าย UNTAGGED ถูกหักล้างในฐานะ wire claim ด้วย capture GT-006 แล้ว
+  (byte แรก `0x48` เป็น len=72 ไม่ได้กับ payload 34 ไบต์) — เหลือยืนยันระดับ serializer ในอิมเมจ
+
+**หมวด:** `STATIC-ON-BRIDGE` — ต้องใช้ capture corpus + `GameClient.local.bin` · ผู้รับงานคือคนหน้าสะพาน ไม่ใช่ผู้เทสหน้าจอเกม
+
+### 🔴 ช่องบังคับ (กฎ 18:22): ค้นใน pf_bridge\external\ แล้ว
+**เจอ** — แถว `DeleteActorVital` และ `Channel_LocalTalkMessageVital` ใน `PF_SERIALIZER_FIELDS.tsv` คือคู่กรณีของใบนี้เอง
+### 🔴 ช่องบังคับข้อสอง (R132): ค้น gamedata แล้ว
+**ไม่เจอ** — ใบนี้เป็นเรื่อง wire codec ไม่ใช่ตารางข้อมูลเกม
+
+### objective (claim เดียว)
+**บันทึก "รูปเต็มที่วัดได้" ของ string ในสองจุดนี้จากหลักฐาน binary/capture — จุดละหนึ่งแถวคำตอบในรูป
+`(tag: 0x44 / 0x48 / ไม่มี) + (ความกว้าง: 1 หรือ 2 byte/char) + (len นับอะไร)` พร้อมไบต์อ้างอิง —
+และตอบว่าป้าย `UNTAGGED_*` ของ extractor หมายถึง wire จริงหรือมุมมอง serializer-body**
+🔴 **ห้ามตอบเป็น "tagged/untagged" สองทาง** — ระบบคำตอบสองทางทำใบนี้ปิดเขียวปลอมได้ (adversary R134 D2/D3)
+
+### db / server args
+**ไม่ใช้ DB · ไม่บูตอะไรทั้งสิ้น** — grep capture corpus + เปิดอิมเมจ/สคริปต์ส่งมอบอ่านอย่างเดียว
+
+### จ็อบ (ทำตามลำดับ)
+0. **ความหมายของป้าย UNTAGGED (ตอบก่อน — ราคาถูกสุด):** เปิดเอกสาร .md ประกบตารางในโฟลเดอร์ส่งมอบ
+   บนดิสก์สะพาน (`PF_SERIALIZER_FIELDS.md` ฯลฯ) + สคริปต์ `pf_extract_protocol.py` — หาว่า extractor
+   สร้างป้าย `UNTAGGED_*` จากอะไร (มัน model tag ไหม หรือมองไม่เห็น tag โดยโครงสร้าง) · paste บรรทัด/โค้ด
+   ที่ตัดสินลงจดหมาย
+1. **capture (ชี้ขาดเร็วสุดถ้าเจอ):** ค้น corpus (ชุดเดียวกับที่ GT-042 ใช้ · อยู่บนดิสก์สะพาน) หา frame
+   0x36DB ที่มี string ไม่ว่าง · **ตำแหน่งที่ดู:** ใน nested vital record ลำดับ field บน wire คือ
+   `0x12 id · 0x0B version · 0x08 · 0x08 · 0x14 + ค่า 4 ไบต์` — string เริ่ม **ไบต์ถัดจากค่า 4 ไบต์ของ
+   field tag-0x14** (อย่านับ "u32 ที่สาม" — บน wire มี tag-0x14 แค่ตัวเดียว)
+   🔴 **deliverable คือ hex paste ± 16 ไบต์รอบจุดนั้น + parse ทีละไบต์ในจดหมาย** — ห้ามรายงานเป็น
+   คำตัดสินเปล่า ๆ จากไบต์เดียว (เคสชน: string len 68 = `0x44` ทำ "เห็น 0x44" เกิดได้ทั้งสองสมมติฐาน)
+   วัดจาก hex: มี tag ไหม · len นับอะไร · อักขระกว้างกี่ไบต์ (ดูจากมี `00` สลับหรือไม่ + ความยาวรวม)
+   · 0xAC52 ใช้ capture GT-006 ที่มีอยู่แล้ว ทำ parse เดียวกันซ้ำเพื่อบันทึกเป็นหลักฐานในใบนี้
+2. **ถ้า corpus ไม่มี frame 0x36DB แบบมี string:** ไปที่อิมเมจตรงจุดที่ตารางชี้ให้แล้ว —
+   แถว DeleteActorVital ใน `PF_SERIALIZER_FIELDS.tsv` ฝัง `string_wire_call@0x005E4E52 file_off=0x001E4252`
+   และ `@0x005E4E85 file_off=0x001E4285` · เปิดอิมเมจที่ file_off ทั้งสอง ดูไบต์รอบ call site ว่ามีการเขียน
+   tag ก่อน len หรือไม่ และ primitive ที่ถูกเรียกคือตัว 1-byte หรือ 2-byte (เทียบ pattern กับ call site ของ
+   0xAC52: หา `string_wire_call` ในแถว `Channel_LocalTalkMessageVital` แบบเดียวกัน — ตัวนั้นรู้คำตอบแล้ว
+   จาก capture ว่าเป็น tag `0x48` + wstring ⇒ ใช้เป็น **ตัวเทียบรูป opcode** ของ "แบบมี tag + 2 byte")
+   · จด opcode/hex ± รอบจุด พร้อม file offset — ไม่ต้องใช้ disassembler เต็มตัว เทียบ byte pattern พอ
+3. จดคำตอบข้อละแถวตาม objective + คำตอบจ็อบ 0 · ทุกแถวต้องชี้กลับไปที่ hex ที่ paste ไว้
+
+### pass criteria — STATIC-ON-BRIDGE (ชั้นเดียว: หลักฐาน byte-level)
+- (ก) และ (ข) มีแถวคำตอบรูปเต็มครบสามช่อง + hex/opcode evidence ที่คนอื่น re-derive ตามได้
+  (ระบุไฟล์ capture หรือ file offset ในอิมเมจ) · จ็อบ 0 มีคำตอบพร้อม paste จากเอกสาร/สคริปต์ส่งมอบ
+- sha อิมเมจ + TSV ก่อน-หลัง ตรงกัน (เปิดอ่านอย่างเดียว)
+
+### 🔴 ผลลบมีค่าเท่าผลบวก
+- **รูปจริง (ก) ≠ ที่ parser เราคาด** (เช่น tag 0x44 + string8): = บั๊กจริงใน `delete_actor.py` —
+  chief จะเสนอแพตช์ parser + เทสเป็น PR ผ่าน gate ตาม pattern มาตรฐานเมื่อผลมาถึง
+  (แก้ตามหลักฐาน byte-level · fail closed เดิม · ไม่ลบของที่พิสูจน์แล้ว — ถ้า Panya เห็นต่างค้านได้ที่ PR)
+- **รูปจริง (ก) = ที่ parser เราคาด**: = ป้าย `UNTAGGED_STRING8` ของชุดส่งมอบผิดในฐานะ wire claim
+  อย่างน้อยหนึ่งจุด — รวมกับคำตอบจ็อบ 0 จะบอกว่าแถว `UNTAGGED_*` ทั้ง 408 แถวต้องอ่านยังไงทั้งชั้น
+- **หา frame ตัดสิน (ก) ไม่ได้ทั้งสองทาง:** จดว่าค้นอะไรไปบ้าง — เป็นข้อมูลว่า corpus ไม่ครอบ 0x36DB-with-string
+
+### nonclaims (ติดไปกับผลทุกกรณี)
+- ใบนี้ตัดสิน **รูป string สองจุดนี้ + ความหมายป้าย UNTAGGED เท่านั้น** — ไม่ตัดสินความหมายฟิลด์
+  ไม่ตัดสินแถวอื่นของตารางเป็นรายแถว
+- ไม่ claim เรื่องเซิร์ฟเวอร์ต้นฉบับ ซึ่งปิดไปแล้ว กู้ไม่ได้ตลอดกาล
+
+- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\external\ แล้ว: เจอ <อะไร> / ไม่เจอ` ·
+  🔴 ช่องบังคับข้อสอง (R132): `ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ` ·
+  (ผู้รับงานกรอก: คำตอบจ็อบ 0 + แถวคำตอบรูปเต็ม (ก)(ข) + hex paste · ไฟล์/offset ที่ใช้ · เวลา ·
+  sha อิมเมจ+TSV ก่อน-หลัง)
