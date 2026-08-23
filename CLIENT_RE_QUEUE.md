@@ -8,7 +8,10 @@
 **กติกาไฟล์นี้:**
 - ทุกใบในไฟล์นี้ **ไม่ต้องเปิดเกม · ไม่ต้องจับ `LOCK_GAME` · ไม่มี teardown · ไม่แตะ canonical DB · ไม่มีอะไรให้ดูบนจอเกมเลย**
   ⇒ ทำขนานกับรอบเทสเกมได้เสมอ ไม่แย่งทรัพยากรกัน
-- **เลข `GT-xxx` เป็นชุดเดียวกับ `GAME_TEST_QUEUE.md` ต่อเนื่องกัน** — ห้ามแยกชุดเลข (การอ้างข้ามใบต้องไม่พัง)
+- 🔤 **ตัวนับเลขเป็นชุดเดียวกับ `GAME_TEST_QUEUE.md` ต่อเนื่องกัน ห้ามแยกตัวนับ** (การอ้างข้ามใบต้องไม่พัง) ·
+  **แต่ใบใหม่ในไฟล์นี้ใช้ prefix `RE-` ตั้งแต่ใบ 056 เป็นต้นไป** (คำสั่ง Panya 2026-08-24 ~00:2x · จดหมาย `20260824_0025_*`) ·
+  ใบเก่า **GT-050/052/053/054/055 คงชื่อเดิมตลอดกาล** — จดหมายสั่ง "เริ่มที่ 055" แต่ใบ 055 ถูกออกเป็น `GT-055` ใน R134
+  ก่อนคำสั่งถึงมือ chief ⇒ ตามกฎห้ามเปลี่ยนชื่อใบที่ commit แล้ว จุดเริ่มจริงของ prefix ใหม่คือ **056**
 - คิวเทสเกม (attended · ขับ UI · ใช้ตา) อยู่ที่ **`GAME_TEST_QUEUE.md`** เช่นเดิม
 - 🔴 **กฎบังคับ (คำสั่ง 18:22 ข้อ ④): ก่อนถอด/parse อะไรใหม่ ต้องค้นชุดส่งมอบ RE ของ Codex ก่อนเสมอ**
   เริ่มที่ดัชนี **`pf_bridge\external\00_SEARCH_HERE_FIRST.md`** · ทุกใบต้องกรอกช่อง
@@ -43,9 +46,10 @@ R133 ยืนยันที่ commit `1e0b20b` (= `origin/main` ณ เวล
 **เพิ่มเติม (R134):** 🆕 **GT-055 STRING-CODEC-DECISION-001** (ท้ายไฟล์) — cross-check R134 พบโค้ดเรากับตาราง Codex
 อ่าน string บน wire คนละแบบ 2 จุด (DeleteActorVital 0x36DB · chat 0xAC52) · จ็อบ 1 เป็น grep capture อย่างเดียว จบเร็ว ·
 ผล (ก) ชี้ขาดว่า parser เรามีบั๊กหรือไม่ · รายละเอียด `FINDINGS_R134_EXTERNAL_XCHECK.md`
+**สถานะ (R135 · 2026-08-24 ~08:4x +07:00):** ✅ **ปิดแล้ว 3 ใบ — GT-054 PASS (392/392) · GT-053 PASS (H1 รอด) · GT-052 PASS** (ผลหน้าสะพาน 00:33/00:38/00:44 +07:00) · 🟡 **GT-050 PARTIAL** (00:55: จ็อบ 1–3 ปิด · `CLearnSkillResultVital` codec CLOSED · direction ของ `TriggerCastSkillVital` ชนเพดาน static — ทางต่อเป็น observe-only attended) · **เหลือเปิดจริง: GT-055 ใบเดียว** · 📦 ของใหม่บนสะพาน (จดหมาย 0055 อีกใบ): `gamedata\lua\` 616 ไฟล์ + `gamedata\scene\` 289 placement TSV — ยังไม่เข้า git · correction: u16@0x2 ของ `.npc` = definition_count ไม่ใช่ placement_count (bg0001: def 113 / actual 149) · Bg0002 actual = 106 **ตรงกับ GT-053 โดยอิสระ** ✓
 
 ---
-## 🆕🔬 GT-052 CLASS-SKILL-TABLE-001 [STATIC-ON-BRIDGE]: ~~dump ตารางอาชีพ + ตารางสกิล~~ ✂️ **ตีความคอลัมน์ + ผูก TEXTDATA + ผูกไอคอน** — ตาราง dump แล้วทั้งคู่ (`gamedata\` · จดหมาย 2150)  [🟠 **PENDING ✂️ SCOPE-CUT R132 — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี `LOCK_GAME`/teardown · ไม่มีอะไรให้ดูบนจอเกม**]
+## 🆕🔬 GT-052 CLASS-SKILL-TABLE-001 [STATIC-ON-BRIDGE]: ~~dump ตารางอาชีพ + ตารางสกิล~~ ✂️ **ตีความคอลัมน์ + ผูก TEXTDATA + ผูกไอคอน** — ตาราง dump แล้วทั้งคู่ (`gamedata\` · จดหมาย 2150)  [✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 00:44 (+07:00) · บันทึกโดย chief R135 · ผลลบติดใบ: ไม่พบ legend ของ `n_TARGET` ในชุดที่ค้น — ห้ามตั้ง label ("ไม่พบ" ≠ "ไม่มีใน client")**]
 
 > 🔢 **หมายเหตุเลข (chief):** ร่างในจดหมาย 1656 ข้อ ④ เสนอใบนี้เป็น **GT-049** แต่ **GT-049 ถูกใช้ไปแล้ว**
 > (LOOT-CHAT-TEMPLATE-001 · เปิดใน R127) ⇒ ใบนี้ขยับเลขเป็น **GT-052** · เนื้อหาคงตามร่าง 1656 ข้อ ④ ทุกประการ
@@ -127,11 +131,14 @@ R133 ยืนยันที่ commit `1e0b20b` (= `origin/main` ณ เวล
 - ไม่พิสูจน์ว่า runtime *ใช้* ค่าเหล่านี้ตอนร่ายสกิลจริง — พิสูจน์แค่ mapping/ค่าในไฟล์ข้อมูล (การพิสูจน์ runtime = เลน headless replay ทีหลัง)
 - **ห้าม join ข้ามตารางเพียงเพราะเลข id เท่ากัน** (บทเรียน GT-044) — ต้องมี crosswalk field จริง
 - **ไม่พึ่ง `PF_RUNTIME_CLASSMAP.tsv` เป็นชื่อคลาส** — UNKNOWN 100% (บันทึกผลลบ ไม่ใช่แหล่งชื่อ)
-- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\\external\\ แล้ว: เจอ <อะไร> / ไม่เจอ` · 🔴 ช่องบังคับข้อสอง (R132): `ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: จำนวนอาชีพ/สกิล + ไอดี + ฟิลด์ + ตัวอย่างแถวจริง · path TSV + sha256 ทุกไฟล์ ·
-  ผลผูก 6 ไอคอน (ตรง/ต่างตรงไหน) · สถานะ census ดัชนีตาราง · เวลา · sha ไฟล์ constdata ก่อน-หลัง)
+- **result:** ✅ **PASS/DONE (2026-08-24 00:44 +07:00)** — จดหมายเต็ม `notes_to_chief/20260824_0044_GT052-RESULT-CLASS-SKILL-TABLE-CROSSWALKS.md` ·
+  ค้น external แล้ว: เจอ skill protocol/serializer 10 ชื่อ 88 field rows (แต่ `CSkillModule`/`CSkillAttr` EMPTY · CLASSMAP ค้น Skill = 0) — ไม่ใช่ตารางค่า/ชื่อ · ค้น gamedata แล้ว: เจอครบ (`CHARCREATE_CLASS` 5×38 · `SKILL_CONTEXT` 2165×20 · `CURRICULUM` 137×7 · `SKILL_TEXT` 940×6 · `CONTENT_CLASS` 6×3) ·
+  อาชีพ 5 แถว `n_ID=1,2,4,16,32` ผูกไอคอนตรงทั้งหมด · bit 8 = Voodoo/Voodooist มีข้อมูลสามชั้น (CONTENT_CLASS row 8 · 35 skill rows · icon voodooist) แต่ไม่มีแถวสร้างตัวละคร · ชื่อสกิลผูกได้ 898 จุดตัด (`SKILL_CONTEXT.n_ID = SKILL_TEXT.n_ID` · unique 100% ทั้งสองข้าง) · `n_ISCLASS` เป็น bitmask (row 99 = 63) ·
+  `CURRICULUM.n_SKILL` 137/137 + `CHARCREATE_CLASS.s_SKILL_1..4` 20/20 resolve ครบ · `n_PASSIVE` codes 0..5 ไม่ใช่ boolean · `s_CAST_CONDITION`/`s_CAST_BEHAVIOR` เป็น DSL (`GO`/`BUFF_I`/`RANGE` · `CHASE`/`SKIP`) ·
+  🔴 **ผลลบ: `n_TARGET` codes `0:1904 1:167 2:30 4:62 5:2` — ไม่พบ legend ในชุดที่ค้น ห้ามตั้ง label** ("ไม่พบ" ≠ "ไม่มีใน client") · sha ทุกไฟล์ก่อน/หลังตรงกัน
 
 
-## 🆕🔬 GT-050 SKILLCAST-WIRE-001 [STATIC-ON-BRIDGE]: **ตรวจแล้วใช้** (ไม่ใช่ไปถอดใหม่) แถวสกิลจากชุดส่งมอบ RE ของ Codex — verify sha ของ `TriggerCastSkillVital`/`CLearnSkillVital` · re-derive ปฏิปักษ์ · ปิด `CLearnSkillResultVital` · หาทิศทาง+ตัวจุดชนวนของ `TriggerCastSkillVital`  [🟠 **PENDING — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี `LOCK_GAME`/teardown · ไม่มีอะไรให้ดูบนจอเกม**]
+## 🆕🔬 GT-050 SKILLCAST-WIRE-001 [STATIC-ON-BRIDGE]: **ตรวจแล้วใช้** (ไม่ใช่ไปถอดใหม่) แถวสกิลจากชุดส่งมอบ RE ของ Codex — verify sha ของ `TriggerCastSkillVital`/`CLearnSkillVital` · re-derive ปฏิปักษ์ · ปิด `CLearnSkillResultVital` · หาทิศทาง+ตัวจุดชนวนของ `TriggerCastSkillVital`  [🟡 **PARTIAL — ผลหน้าสะพาน 2026-08-24 00:55 (+07:00) · บันทึกโดย chief R135 · จ็อบ 1–3 ปิด (span PASS · re-derive PASS · `CLearnSkillResultVital` CLOSED) · จ็อบ 4 = bounded negative ชนเพดาน static: direction/trigger ของ `TriggerCastSkillVital` ยังตัดสินไม่ได้ — ทางต่อเป็น observe-only probe แบบ attended (เลนพักตามคำสั่ง 16:56)**]
 
 **ที่มา:**
 - `notes_to_chief\20260823_1656_PANYA-DIRECTION-pause-attended-open-class-skill-lane.md` **ท่อน ③ + ④** (เปิดเลนสกิล · ร่าง GT-050 ฉบับเดิม "ไปถอด")
@@ -229,10 +236,15 @@ stream primitive  0x0089A600 (WRITE / outbound)  ·  0x0089A640 (READ / inbound)
 - **ไม่ claim ว่ารู้ชื่อคลาส** — vtable ไม่มี RTTI/name literal · ห้ามเดาชื่อ = ห้ามประดิษฐ์ wire format · **ไม่พึ่ง `PF_RUNTIME_CLASSMAP.tsv` เป็นชื่อคลาส**
 - **ไม่ claim เรื่องเพ็ตสกิล** (`Pets_*`) — เป็นของแถมในทะเบียน ไม่ใช่เป้าใบนี้
 - **ขั้นต่อไปที่ตั้งใจไว้ (ยังไม่ใช่คำสั่งให้เขียนโค้ด):** พอรู้รูปแบบไบต์แล้ว ทำ **เลน headless replay ของการร่ายสกิล** พิสูจน์ MP/cooldown/ผลลัพธ์จบในตัว **โดยไม่ต้องเปิดเกมเลย**
-- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\\external\\ แล้ว: เจอ <อะไร> / ไม่เจอ` · 🔴 ช่องบังคับข้อสอง (R132): `ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: ผล verify sha สาม span · ผล re-derive ปฏิปักษ์ · ประโยคทิศทาง+ตัวจุดชนวนของ `TriggerCastSkillVital` +VA ·
-  สถานะ `CLearnSkillResultVital` · xref chain span/file-offset/len/sha256 ทุกฟังก์ชัน · สถานะ census indirect · เวลา · sha อิมเมจ+TSV ก่อน-หลัง)
+- **result:** 🟡 **PARTIAL STATIC / BOUNDED NEGATIVE (2026-08-24 00:55 +07:00)** — จดหมายเต็ม
+  `notes_to_chief/20260824_0055_GT050-RESULT-CLEARNRESULT-CLOSED-TRIGGER-DIRECTION-UNRESOLVED.md` ·
+  ค้น external แล้ว: เจอสามชื่อครบ (field rows 6+4+20) · ค้น gamedata แล้ว: เจอ `SKILL_CONTEXT` แต่ไม่ตอบ wire direction ·
+  **จ็อบ 1 PASS:** span SHA ทั้งสองตรง pin · **จ็อบ 2 PASS:** re-derive ปฏิปักษ์ได้ TSV byte-identical ทั้งสามไฟล์ (รวม `PF_TAG_CENSUS.tsv` `63bc9a03…`) ·
+  **จ็อบ 3 CLOSED:** `CLearnSkillResultVital` wire shape พิสูจน์ครบ — `count u16/tag 0x12` + N records ขนาด 12 ไบต์ `(u32 0x14 · u16 0x12 · u32 0x14)` + trailing `u8/tag 0x0B @+0x2C` · UNKNOWN 7 จุด = `_invalid_parameter_noinfo` (container guard ไม่ใช่ field) · `0x0077FC30` = vector append หลัง READ ·
+  **จ็อบ 4 UNRESOLVED (bounded negative):** `TriggerCastSkillVital` มี inbound-capable consumer `0x00601810` → local slot setter `0x00449110` · **ไม่พบ chain ไป outbound submit `0x005DD800`** แต่ indirect generic-registry dispatch ยังปิดไม่ได้ ⇒ ห้ามสรุปว่า client ส่งจริง/รับอย่างเดียว/trigger เป็นอะไร (เพดานเดียวกับ checkpoint 20260816) · ทางต่อ = observe-only probe แบบ attended ·
+  probe ทำซ้ำได้: `tools\pf_gt050_skill_wire_probe.py` sha `325ca7d8…` (อยู่นอก git โดย `.gitignore /tools/*` ฝั่งสะพาน) · sha อิมเมจ+TSV ทุกไฟล์ก่อน/หลังตรงกัน
 
-## 🆕🔬 GT-053 SCENE2-NATIVE-IDENTITY-CROSSCHECK-001 [STATIC-ON-BRIDGE]: ไฟล์ฉาก native ของ scene 2 มี placement index 60 (`0x203D` Fighting Fish soldier) จริงไหม — จุดเดียวที่ตรวจแล้วอาจฆ่า H1 ได้ทันที  [🟠 **PENDING — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี `LOCK_GAME`/teardown · ไม่มีอะไรให้ดูบนจอเกม**]
+## 🆕🔬 GT-053 SCENE2-NATIVE-IDENTITY-CROSSCHECK-001 [STATIC-ON-BRIDGE]: ไฟล์ฉาก native ของ scene 2 มี placement index 60 (`0x203D` Fighting Fish soldier) จริงไหม — จุดเดียวที่ตรวจแล้วอาจฆ่า H1 ได้ทันที  [✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 00:38 (+07:00) · บันทึกโดย chief R135 · N=106 ≥ 61 ⇒ `0x203D` in-band ⇒ H1 รอด**]
 
 **ที่มา:**
 - `FINDINGS_R128_GT051_RENDER_SYNTHESIS.md` **ท่อน ② (H1) + ④ ข้อ 1** — chief ทำ GT-051 เสร็จแล้ว · ระบุ SCENE-005 เป็น **ช่องว่างหลักฐานเดียวที่ชี้ขาด H1 ได้**
@@ -336,13 +348,15 @@ wire override template/พิกัดของ identity ใน band ได้�
 - **band `0x2000+p+1` ยืนยันจริงเฉพาะ bg0001** (GT-022/GT-048) ก่อนใบนี้ — การอ่าน `0x203D` = index 60 สำหรับ scene 2 เป็น **การอนุมานรูปแบบที่ใบนี้ต้องพิสูจน์** ไม่ใช่ของที่รู้แล้ว
 - **ไม่ claim เรื่องเซิร์ฟเวอร์ต้นฉบับ** ซึ่งปิดไปแล้ว กู้ไม่ได้ตลอดกาล · faction 1 ของ scenario เป็น `candidate_not_authentic_player_faction` ตาม SCENE-005 (ไม่เกี่ยวกับใบนี้ แต่ห้ามยกมาอ้างเป็นของแท้)
 - **ไม่พึ่ง `PF_RUNTIME_CLASSMAP.tsv` เป็นชื่อคลาส** — UNKNOWN 100%
-- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\\external\\ แล้ว: เจอ <อะไร> / ไม่เจอ` · 🔴 ช่องบังคับข้อสอง (R132): `ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: ชื่อโฟลเดอร์+ไฟล์ฉาก scene 2 + เส้นทาง resolve จาก GT-044 · N placement ทั้งหมด ·
-  index 60: identity/template/preset + offset + f32 triple · ผลเทียบ triple กับค่า authentic P60 (`21421.0059/9277.1123/590.6788`) ·
-  คำตัดสิน H1 รอด/ตาย (band membership) หรือ "ตอบไม่ได้" · เวลา · sha ไฟล์ฉาก+TSV ก่อน-หลัง)
+- **result:** ✅ **PASS/DONE (2026-08-24 00:38 +07:00)** — จดหมายเต็ม `notes_to_chief/20260824_0038_GT053-RESULT-SCENE2-N106-H1-SURVIVES.md` ·
+  ค้น external แล้ว: เจอ inventory/capture scene 2 + `PF_DATA_EVIDENCE.tsv` (Bg0002) แต่ไม่มี placement roster · ค้น gamedata แล้ว: เจอ `SCENE_NAME` แถว `n_ID=2 → s_MODLE_ID=BG0002` + `MOBS n_ID=34` (ยังไม่มี `gamedata\scene\` — `.npc` decode ยังไม่มา) ·
+  resolve โฟลเดอร์ด้วย crosswalk จริง: `scene_id 2 → SCENE_NAME → BG0002 → Data\Scene\Save\Bg0002\Bg0002.npc` (11,652 bytes · sha `a649f4af…`) ·
+  **N=106 placements** (count field @`0x6E0` = `6A 00`) · parse guard ครบ 106 records จบ exact EOF · index 60 @`0x1CAE`: instance `MOBSET_34 03` · XYZ f32 @`0x1CCA` ตรง P60 authentic **bit-exact** · template key 34 → `MOBS n_ID=34` → preset `M025_001_000_N` ตรง scenario · record attrs มี `3D 00` (=61) ·
+  **คำตัดสิน: `0x203D` in-band ของ index 60 ⇒ H1 รอด** (ไม่ยกสูตร `0x2000+p+1` เป็นกฎสากล) · cross-check ท่าอ่านกับ bg0001 GT-048 anchor ตรง · sha ทุกไฟล์ก่อน/หลังตรงกัน
 
 ---
 
-## 🆕🔬 GT-054 SPAN-VERIFY-EXTERNAL-REGISTRY [STATIC-ON-BRIDGE]: รัน span verification ของ reader ตัวใหม่กับอิมเมจ client บนสะพาน — พิสูจน์ span_sha256 ของชุดส่งมอบตรงกับไบต์จริงในอิมเมจ  [🟠 **PENDING — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี `LOCK_GAME`/teardown · ไม่มีอะไรให้ดูบนจอเกม**]
+## 🆕🔬 GT-054 SPAN-VERIFY-EXTERNAL-REGISTRY [STATIC-ON-BRIDGE]: รัน span verification ของ reader ตัวใหม่กับอิมเมจ client บนสะพาน — พิสูจน์ span_sha256 ของชุดส่งมอบตรงกับไบต์จริงในอิมเมจ  [✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 00:33 (+07:00) · บันทึกโดย chief R135 · spans 392/392 verified · mismatch 0 · unreadable 0**]
 
 **Background:** ตาราง `pf_bridge\external\` merge เข้า main แล้ว 2026-08-23 (คำตัดสิน Panya 20:39 +07:00) ·
 tool ใหม่ `tools/pf_external_registry.py` ใน `pirate-force-server` = โค้ด reader ตัวแรกที่อ่านชุดส่งมอบจริง ·
@@ -415,9 +429,11 @@ py -3 tools\pf_external_registry.py --verify-spans ..\GameClient\GameClient.loca
 - **ครอบเฉพาะ 392 spans ของ 503 known-serializer messages** — 16 UNKNOWN-serializer messages **ไม่มี span ให้ verify โดยเจตนา** (spanless 32 field rows คือ W+R ของ 16 ตัวนั้น)
 - **ไม่ claim เรื่องเซิร์ฟเวอร์ต้นฉบับ** ซึ่งปิดไปแล้ว กู้ไม่ได้ตลอดกาล
 
-- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\external\ แล้ว: เจอ <อะไร> / ไม่เจอ` · 🔴 ช่องบังคับข้อสอง (R132): `ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: ยืนยัน `tools\pf_external_registry.py` มีจริงหลัง pull main + commit hash ที่รัน ·
-  บรรทัดสรุปเต็ม `spans/verified/mismatched/unreadable` + exit code · `image_sha256` · ชื่อจดหมาย timestamp ที่ paste ผล ·
-  ถ้า M>0/U>0: รายการ `mismatched_spans`/`unreadable_spans` แล้วหยุด · เวลา · sha อิมเมจ+TSV ก่อน-หลัง)
+- **result:** ✅ **PASS/DONE (2026-08-24 00:33 +07:00)** — จดหมายเต็ม `notes_to_chief/20260824_0033_GT054-RESULT-SPANS-392-VERIFIED.md` ·
+  ค้น external แล้ว: เจอ `PF_SERIALIZER_FIELDS.tsv` (object under test) · ค้น gamedata แล้ว: ไม่เจอ (มีแต่ pointer กลับไป external — ถูกต้อง) ·
+  รันที่ server main `1e0b20bd240b…` (`pull --ff-only` = Already up to date) · คำสั่งเดียว `--verify-spans … --json` · exit 0 ·
+  **`spans=392 verified=392 mismatched=0 unreadable=0`** · `image_sha256 9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623` ·
+  sha อิมเมจ + TSV ทั้ง 5 + tool ก่อน/หลังตรงกันหมด · **ผลนี้ยก span ทั้ง 392 ของ `PF_SERIALIZER_FIELDS.tsv` จาก static-static เป็น verified-กับ-อิมเมจ** (nonclaim: พิสูจน์เฉพาะไบต์ span ไม่ใช่ความหมายฟิลด์/ทิศทาง W · คอลัมน์ VA ของ `PF_PROTOCOL_REGISTRY.tsv` และตารางอื่นของชุดส่งมอบไม่ได้ถูก verify โดยใบนี้)
 
 ---
 

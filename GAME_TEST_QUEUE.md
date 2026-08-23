@@ -1,5 +1,7 @@
 # GAME TEST QUEUE — คิวเทสในเกม
 
+> 🔤 **กฎชื่อใบ (คำสั่ง Panya 2026-08-24 ~00:2x · จดหมาย `20260824_0025_*`):** ใบในไฟล์นี้ใช้ prefix **`GT-`** (เทสเกม — เปิดเกม · จับ `LOCK_GAME` · ใช้ตาคน) · **ตัวนับเลขเป็นชุดเดียวร่วมกับ `CLIENT_RE_QUEUE.md`** (ใบ static ที่นั่นใช้ prefix **`RE-`** ตั้งแต่ใบ **056** เป็นต้นไป) — เห็น `RE-0xx` ที่ไหนแปลว่าเป็นใบ static ให้ข้ามไปดูไฟล์นั้น · ใบเก่า (รวม `GT-050`/`052`/`053`/`054`/`055` ที่เป็น static แต่ชื่อ GT-) **คงชื่อเดิมตลอดกาล**
+
 ## 📇 สารบัญใบที่ยังไม่ปิด (คำสั่ง Panya 18:22 · อัปเดตทุกครั้งที่เปิด/ปิดใบ · เป็นดัชนีชี้ลงข้างล่าง — เนื้อใบไม่ถูกย้าย)
 
 **🎮 ต้องเปิดเกม / ต้องใช้ตา Panya** — ⏸ **พักทั้งหมดตามคำสั่ง 16:56 · 🔴 ห้ามปิดด้วยรอบ unattended** (กติกาอยู่ใน `AGENTS.md` แล้ว)
@@ -8,7 +10,7 @@
 
 **🔬 งาน static — ทำเมื่อไรก็ได้ ไม่ต้องมีคนเฝ้า ไม่ต้องจับ `LOCK_GAME` · ขนานกับรอบเทสเกมได้:**
 - ใบเก่าในไฟล์นี้: `GT-047` (TOOL-GUARD-GAP + จ็อบ 0) · `GT-049` (LOOT-CHAT-TEMPLATE · ✂️ scope-cut R132: จ็อบ 1 ปิดแล้ว — template = MESSAGE id 131 · เหลือหาตัวยิง)
-- 🆕 ใบใหม่ตั้งแต่ R128 อยู่ไฟล์ใหม่ **`CLIENT_RE_QUEUE.md`** (คำสั่ง 18:22 ข้อ ③): `GT-053` (ชี้ขาด H1 · ถูกสุด) → `GT-052` → `GT-050` · `GT-054` (span-verify ชุดส่งมอบด้วย reader ใหม่ · ✅ **runnable แล้ว R133 — merge เข้า main แล้ว `1e0b20b`** · จบด้วยคำสั่งเดียว แนะนำรันก่อน/ขนานใบอื่น) · 🆕 `GT-055` (R134: ชี้ขาด string codec 2 จุดที่โค้ดเราขัดกับตาราง Codex — จ็อบ 1 grep capture จบเร็ว · ผลอาจ = บั๊ก parser เรา)
+- 🆕 ใบใหม่ตั้งแต่ R128 อยู่ไฟล์ใหม่ **`CLIENT_RE_QUEUE.md`** (คำสั่ง 18:22 ข้อ ③): ✅ **ปิดแล้ว 3 ใบ (ผลหน้าสะพาน 2026-08-24 ~00:3x–00:4x +07:00 · บันทึก R135):** `GT-054` PASS (spans **392/392** ตรงอิมเมจ · mismatch 0) · `GT-053` PASS (**N=106 ≥ 61 ⇒ `0x203D` in-band ⇒ H1 รอด**) · `GT-052` PASS (crosswalk class/skill ครบ · ผลลบ: ไม่พบ legend ของ `n_TARGET` ในชุดที่ค้น — ห้ามตั้ง label) — 🟡 `GT-050` **PARTIAL** (00:55: จ็อบ 1–3 ปิด · `CLearnSkillResultVital` CLOSED · direction `TriggerCastSkillVital` ชนเพดาน static — ทางต่อ observe-only attended) — **ที่ยังเปิดจริง:** 🆕 `GT-055` (R134: ชี้ขาด string codec 2 จุดที่โค้ดเราขัดกับตาราง Codex — จ็อบ 1 grep capture จบเร็ว · ผลอาจ = บั๊ก parser เรา)
 - 📊 ค้างที่ต้องมองเห็น: ชุดส่งมอบ RE **8 ตาราง 17,618 แถว data** ผ่าน re-derive แล้ว · ✅ **โค้ดอ่านตัวแรกมาแล้ว R131** (`tools/pf_external_registry.py` · ✅ merge เข้า `main` แล้ว R133 — `1e0b20b`) · 5/8 ตารางเข้า `main` แล้ว — เหลือ 3 ตารางรอหน้าสะพาน `git add` (ดูหัว `CLIENT_RE_QUEUE.md`)
 
 🔴 ก่อนสั่งถอดอะไรใหม่: ค้น `pf_bridge\external\` ก่อนเสมอ — เริ่มที่ `external\00_SEARCH_HERE_FIRST.md` (คำสั่ง 18:22 ข้อ ④)
@@ -16,6 +18,21 @@
 เริ่มที่ `gamedata\00_SEARCH_HERE_FIRST.md` · ⚠️ โฟลเดอร์นี้อยู่บนดิสก์สะพานเท่านั้น **ยังไม่เข้า git** (รอ Panya เคาะ whitelist)
 
 ---
+
+> 📌 **R135 (2026-08-24 ~08:1x +07:00 · chief cloud) — บริโภคผลหน้าสะพาน 3 ใบ + คำสั่ง prefix:**
+> ✅ **GT-054 → PASS/DONE** (span verify: **392/392 distinct spans ตรงไบต์จริงในอิมเมจ** · mismatch 0 · unreadable 0 · image_sha256 `96272114…8623` · รันที่ server main `1e0b20b`) ⇒ **spans ทั้ง 392 ของ `PF_SERIALIZER_FIELDS.tsv` verified กับอิมเมจแล้ว** — AGREE ที่ยืนบน span ใน `FINDINGS_R134_EXTERNAL_XCHECK.md` (เช่น CHitResult §2.1) แข็งขึ้นหนึ่งชั้น · ⚠️ คอลัมน์ VA ของ `PF_PROTOCOL_REGISTRY.tsv` (AGREE §2.2) และตารางอื่นของชุดส่งมอบ **ไม่ได้ถูก verify โดยใบนี้**
+> ✅ **GT-053 → PASS/DONE** (`Bg0002.npc` มี **N=106 placements ≥ 61** · index 60 f32 triple ตรง scenario bit-exact ⇒ `0x203D` in-band ⇒ **H1 รอด** — SCENE-005 เข้าตารางเคส in-band ของ GT-051 · สูตร band ยืนยันที่ scene 2 เพิ่มจาก bg0001)
+> ✅ **GT-052 → PASS/DONE** (CHARCREATE_CLASS 5 แถว bit 1/2/4/16/32 · SKILL_CONTEXT 2165×20 · ชื่อผูกได้ 898 จุดตัด · bit 8 = Voodoo/Voodooist มีข้อมูลแต่ไม่มีแถวสร้างตัวละคร · **ผลลบ: ไม่พบ legend ของ `n_TARGET` codes 0/1/2/4/5 — ห้ามตั้ง label**)
+> 🟡 **GT-050 → PARTIAL** (ผล 00:55 มาถึงกลางรอบ): จ็อบ 1–3 ปิด — span PASS · re-derive PASS ·
+> **`CLearnSkillResultVital` codec CLOSED** (`count u16/0x12` + records 12 ไบต์ `(u32·u16·u32)` + trailing `u8/0x0B`) ·
+> จ็อบ 4 bounded negative: direction/trigger ของ `TriggerCastSkillVital` ชนเพดาน static (ไม่พบ chain ไป outbound `0x005DD800` ·
+> indirect ยังปิดไม่ได้) — ทางต่อเป็น observe-only probe แบบ attended (เลนพักตามคำสั่ง 16:56)
+> 📦 **Lua/NPC ถอดครบบนสะพาน** (จดหมาย 0055 ใบสอง): Lua 616/616 · `.npc` 289/289 exact-EOF · correction:
+> u16@0x2 = **definition_count** ไม่ใช่ placement_count (bg0001 def 113 / actual 149) · **Bg0002 actual placements = 106
+> ตรง GT-053 โดยอิสระ** ✓ · ยังไม่เข้า git (รอกวาดตรวจ + whitelist) · Lua API census: 160 ชื่อ 12,653 calls
+> (`Player.MobAppear` 3,532 · `Quest.RewardItemSelect` 1,335 · `Player.AddItem` 1,430)
+> 🔤 กฎ prefix `GT-`/`RE-` มีผลแล้ว (หัวไฟล์) — ใบ static ใหม่เริ่ม `RE-056` ใน `CLIENT_RE_QUEUE.md`
+> จดหมายผล: `notes_to_chief\20260824_0033_*` · `_0038_*` · `_0044_*` · `_0055_*` ×2 · คำสั่ง: `_0025_*`
 
 > 📌 **R132 (2026-08-23 ~22:0x +07:00 · chief cloud) — บริโภคจดหมาย 21:50: gamedata แกะครบ 188 ตาราง ⇒ scope-cut 3 ใบ + กฎใหม่:**
 > 📦 **ข้อเท็จจริงใหม่ (ชั้น client-static · จดหมาย `20260823_2150_GAMEDATA-EXTRACTED-…`):** ผู้ช่วยแกะตารางข้อมูลเกมจาก 4 ไฟล์
