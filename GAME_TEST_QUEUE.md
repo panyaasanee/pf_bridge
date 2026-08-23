@@ -1,5 +1,15 @@
 # GAME TEST QUEUE — คิวเทสในเกม
 
+> 📌 **R127 (2026-08-23 ~16:xx +07:00 · chief cloud) — บริโภครอบใหญ่ #14 (5 ใบ) · flip 4 + ใบใหม่ 1:**
+> ✅ **GT-046 → PASS/DONE** (outbound คลิกเมาส์ · จาก live runtime drop-object · nonclaim สองระบบติดผล — สมมติฐาน "ของวางล่วงหน้า" ของผู้ช่วยถูกถอน)
+> ✅ **GT-048 → PASS** (native scene-placement จาก `bg0001.npc` มีจริง ไม่ผ่าน wire · **GT-034 ไม่ปิด** — รอ GT-045 อ่านคู่)
+> 🟠 **GT-047 → คง PENDING / TOOL-GUARD-GAP** — การ์ด `field_offset` ไม่แดงจริงตามที่ tester วัด · 🆕 **จ็อบ 0**: ส่ง source `pf_validate_capture_fields.py` เข้า repo ให้ chief patch (ดูใน entry)
+> 🔴 **GT-045 → BLOCKED-รอ-merge v2** — รอบแรก wire exact แต่ geometry ตาย (spawn drift ~700 หน่วยจาก V135) + เกณฑ์ event เป็นเกณฑ์ที่สังเกตไม่ได้ (ตัดแล้ว — บั๊กใบสั่งของ chief) ⇒ เลนแก้เป็น **พิกัดอิง trigger** (PR R127 รอ gate) · **ห้ามบูต v1 ซ้ำ** · pass criteria ชั้น wire เปลี่ยนเป็น masked-template — อ่านใบใหม่ทั้งใบ
+> ✅ **GT-001 PASS** (sessions 8->9 · `CANON_SHA.txt` ใหม่ `EE785A79…` tester อัปเดตแล้ว) · **re-arm ยิงใหม่รอบนี้** — PR R127 แตะ `src/` ⇒ หลัง merge บูตจาก resolver ใหม่เสมอ · ✅ **controls PASS: W/A/S/D/Q/E/wheel ใช้ได้จริง** (S 120ms ไม่ขยับ HUD — กดสั้นชนภูมิประเทศ · click-to-walk ปิดตามคำ Panya)
+> 🆕 ท้ายไฟล์: **GT-049 LOOT-CHAT-TEMPLATE-001** [STATIC-ON-BRIDGE · พร้อม] — ใครยิงบรรทัดสีเขียว `ได้รับ [ชื่อ] * จำนวน` (ช่องว่างที่ GT-046 เปิดไว้ · ถ้า inbound = เซิร์ฟเวอร์ตัดสินการเก็บ = เปลี่ยนดีไซน์เลนลูท)
+> ลำดับที่ค้าง: **GT-049 → GT-047 จ็อบ 0 → GT-045 v2 (เมื่อ merge) → GT-001 re-arm (หลัง merge เดียวกัน)** · GT-034/035/036 รอผล GT-045 v2 (+GT-048 ปิดแล้ว — อ่านคู่)
+> จดหมายรอบนี้: `notes_to_chief\FROM_CHIEF_R127_TO_ATTENDED_20260823_1700.md`
+
 > 📌 **R126 (2026-08-23 ~14:1x +07:00 · chief cloud) — คำเคาะ Panya 13:15 บริโภคแล้ว · ใบใหม่ 1 + แก้ขอบเขต 2:**
 > 🆕 ท้ายไฟล์: **GT-048** NATIVE-SPAWN-CONDITION [STATIC-ON-BRIDGE · พร้อม] — GT-034 เดินทาง ① ตามคำเคาะ:
 > หาว่าอิมเมจ client มีเส้นทาง native spawn ตอน scene-load ไหม หรือ entity ทุกตัวต้องมาจาก wire ·
@@ -1573,7 +1583,20 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
 - **result:** (ผู้รับงาน static บนสะพานกรอก: เลข id + เส้นทาง join · path TSV + sha256 · sha อิมเมจก่อน-หลัง · เวลา)
 
 
-## 🆕⭐ GT-045 GROUNDDROP-RENDER-001 [attended, in-game]: บิต `0x08` ของ `0x5F85B0` คือ "วัตถุลูทบนพื้น" ไหม — ยิงเรคคอร์ดที่มีพิกัดโลกเข้าไปแล้วดูว่าไคลเอนต์วาดอะไร  [🟢 **PENDING-พร้อมบูต (R125) — merge เข้า `main` แล้ว · บูตจาก resolver ตามบล็อก "ก่อนบูต" เสมอ (หลักฐาน merge/verdict ณ R125 อยู่ในบล็อกสถานะ — ห้ามก๊อป SHA จากหัวใบ)** · สิทธิ์เขียน encoder จาก span นี้ปลดแล้วโดย GT-042 PASS (R123)]
+## ⭐ GT-045 GROUNDDROP-RENDER-001 [attended, in-game]: บิต `0x08` ของ `0x5F85B0` คือ "วัตถุลูทบนพื้น" ไหม — ยิงเรคคอร์ดที่มีพิกัดโลกเข้าไปแล้วดูว่าไคลเอนต์วาดอะไร  [🔴 **BLOCKED-รอ-merge v2 (R127) — รอบแรกรันแล้ว 2026-08-23: wire exact แต่ geometry ตายเพราะ spawn drift ⇒ เลนแก้เป็นพิกัดอิง trigger แล้ว รอ gate+merge · ห้ามบูต v1 ซ้ำ** · สิทธิ์เขียน encoder จาก span นี้ปลดแล้วโดย GT-042 PASS (R123)]
+
+### 🟡 บล็อกผลรอบแรก (2026-08-23 14:52-15:08 · ผลเต็ม: `notes_to_chief\20260823_1530_gt-results.md` §GT-045) — `[DONE: WIRE EXACT / CLIENT NO-RESULT]` ไม่ใช่ FAIL
+- **ชั้น wire ผ่านเป๊ะตามดีไซน์ v1:** label near/far อย่างละ 1 ครั้ง เรียงใกล้ก่อนไกล ·
+  pc 44 ไบต์ sha ตรง pin เดิมทั้งคู่ · ออกหลัง TargetPos แรกจาก `W` จริง · teardown/canonical สะอาดครบ
+- **แต่ geometry ของใบตาย:** ใบสั่ง (และเลน v1) คาด spawn ที่ V135 `(-9239.9, -2830.0, 223.2)` —
+  spawn จริงจาก HUD/DB คือ `(-8553.947265625, -2579.68896484375, 186.0)` ⇒ จุด "ใกล้ +30X" จริง ๆ อยู่ห่างผู้เล่น
+  ~700 หน่วย เส้นทาง G1/G1b/G2 ที่วางไว้ใช้ไม่ได้ · **ความผิดของดีไซน์เลน/ใบสั่ง (chief R124) ไม่ใช่ผู้เทส**
+- **ชั้น client = NO-RESULT (ไม่ใช่ผลลบ):** ภาพแรกหลัง trigger อยู่ที่ +3.560s ไม่มี continuous capture 0-3.56s ·
+  ไม่เห็นโมเดล/ป้ายชื่อในภาพที่เก็บ แต่**ห้ามสรุปว่าบิต `0x08` ไม่วาด** — เหตุการณ์ตัวอย่างในคลิปจริงสั้น 0.633s
+- **เกณฑ์ event `hyp_pf_032_ground_loot_bit08_pair_committed` count=0 = บั๊กใบสั่งของ chief:** เซิร์ฟเวอร์จริง
+  **ไม่เคยเขียน `state.events` ลงดิสก์/แคปเจอร์** (chief ยืนยันจากซอร์ส R127 — events เป็น in-memory อ่านได้เฉพาะ
+  headless replay) ⇒ เกณฑ์นี้สังเกตไม่ได้โดยโครงสร้างในรัน attended · **ตัดออกจาก pass criteria แล้ว** (แบบเดียวกับ
+  บทเรียน console-event ของ GT-032) · action labels ใน raw GAME log สังเกตได้จริง — ใช้ตัวนั้นแทน
 
 **ที่มา:** ร่างผู้ช่วย `notes_to_chief\20260823_0805_GT-TICKET-DRAFT-ground-drop-and-pickup-direction.md`
 (อ่านคู่กับหลักฐานวัดเฟรม `notes_to_chief\20260823_0800_GROUND-DROP-FRAME-MEASUREMENT-pickup-is-not-contact.md`)
@@ -1581,23 +1604,21 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
 ของหาย + บรรทัด `ได้รับ [Red leaves Hammer] * 1` เกิดเฟรมเดียวกัน ⇒ คำถามเดิม "เดินทับ/กดปุ่ม" ตายทั้งคู่
 ใบนี้ตอบคำถามที่แคบลง: **ไคลเอนต์รับเรคคอร์ดบิต `0x08` แล้ววาดของบนพื้นออกมาไหม**
 
-### 🟢 สถานะ PENDING-พร้อมบูต (อัปเดต R125 — เงื่อนไขครบทุกข้อแล้ว)
-1. ✅ **เลนเซิร์ฟเวอร์สร้างแล้ว (R124):** HYP-PF-032 GROUND-LOOT-001 — flag จริงคือ
-   `--ground-loot-hypothesis-scenario` · scenario จริงคือ `scenarios/ground_loot_hypothesis_bit08_render.json`
-   (ชื่อที่เสนอไว้เดิม `groundloot-render-...`/`groundloot_render_...bit08.json` **เลิกใช้** — เปลี่ยนตาม house convention)
-   ดีไซน์ที่ลงจริง: **สองเฟรม เฟรมละหนึ่ง element** (ใกล้ก่อน แล้วไกลตามใน 0.10 วินาที) ออกอัตโนมัติที่
-   TargetPos แรกหลัง runtime ack ครั้งเดียวต่อเซสชัน — ผู้เทสไม่ต้องกดอะไรเพื่อยิง
-   (เฟรมละ element เดียวโดยเจตนา: V43 เคยวัดจริงว่า collection หลาย record ในเฟรมเดียวทำ client ยิง
-   `ErrorData=28317` — adversary ของ R124 จับดราฟต์ count=2 ได้ก่อน commit) ·
-   element mask `0x12` (`0x10` พิกัด + `0x02` dword `2600001`)
-   พิกัดใกล้ = จุดเกิด +30X `(-9209.95703125, -2830.045166015625, 223.29209899902344)` ·
-   พิกัดไกล = จุดเกิด +800X `(-8439.95703125, -2830.045166015625, 223.29209899902344)`
-2. ✅ **merge เกิดแล้ว (R125 · 2026-08-23 ~11:0x +07:00):** PR #9 merge เข้า `main` (merge `9e42cb7`) ·
-   คำตัดสิน gate: `success` ที่ SHA `134330591554d3323c14353b11f2f632c7f4a677` (Actions run 32616696590 ·
-   subset บน runner ไม่ใช่ gate เต็ม) · resolver ให้ `BOOT_COMMIT: 1343305…` (tree ตรงกับ mainline แบบวัดจริง) ·
-   chief รันสามข้อยืนยันฝั่งคลาวด์ผ่านครบ (verdict ตรง SHA · flag อยู่ใน `app.py` · `SCENARIO_PRESENT`)
-   — **ผู้เทสยังต้องรัน resolver + สามข้อยืนยันเองบนสะพานก่อนบูต ตามบล็อก "ก่อนบูต" ข้างล่าง เหมือนเดิม**
-✅ เงื่อนไขที่สามเดิม (GT-042 ต้อง PASS เพื่อปลดสิทธิ์เขียน encoder) **ครบแล้ว** — GT-042 PASS 2026-08-23 (+erratum handler len 47) · สิทธิ์ปลดเฉพาะแถวที่รอด re-derive ซึ่งรวม `0x5F85B0` ทั้งตาราง
+### 🔴 สถานะ BLOCKED-รอ-merge v2 (อัปเดต R127)
+1. ✅ **เลน v2 สร้างแล้ว (R127):** ดีไซน์เดิมทุกอย่าง **ยกเว้นพิกัด** — สองเฟรม เฟรมละหนึ่ง element
+   (ใกล้ก่อน ไกลตาม 0.10s) ออกอัตโนมัติที่ TargetPos แรกหลัง runtime ack ครั้งเดียวต่อเซสชัน ·
+   element mask `0x12` (`0x10` พิกัด + `0x02` dword `2600001`) · เฟรมละ element เดียว (บทเรียน V43)
+   🆕 **พิกัดเป็นแบบอิง trigger แล้ว:** ใกล้ = **ตำแหน่ง TargetPos ที่เป็น trigger +30X** · ไกล = **+800X**
+   (Y/Z ตามตำแหน่งจริง) ⇒ จุดใกล้/ไกลอยู่ถูกที่เสมอไม่ว่าตัวละครใน DB ยืนอยู่ไหน —
+   แก้เหตุ spawn drift ที่ฆ่ารอบแรก · pin เปลี่ยนจาก sha ทั้งเฟรมเป็น **masked-template sha**
+   (เฟรมทุกไบต์ pin ยกเว้น 12 ไบต์พิกัด — ดู pass criteria ใหม่) · headless proof: 34 guards + เทสเลน
+   33 ใบ เขียว(cloud sanity R127) รวมเทสใหม่ที่พิสูจน์ว่าเฟรมตาม trigger ที่ขยับ ไม่ใช่ค่าคงที่
+2. 🔴 **รอ gate + merge:** commit เลน v2 = `4f31956` push แล้วบน branch `claude/wizardly-wright-347fg4` ·
+   PR #10 เปิดแล้ว (มี marker · workflow จะ merge เองเมื่อ gate เขียว) —
+   **ห้ามบูตจนกว่า resolver จะให้ commit ที่มี v2** · วิธีเช็คว่าได้ v2: ข้อยืนยันสามข้อก่อนบูตข้อ ②
+   เปลี่ยนเป็น `git grep -n "x_offset" <SHA> -- src/pirateforce_foundation/ground_loot_hypothesis.py`
+   ต้องเจอ (v1 ไม่มีคำนี้) + สองข้อเดิม (verdict ตรง SHA · `SCENARIO_PRESENT`)
+✅ เงื่อนไข GT-042 (สิทธิ์เขียน encoder) ครบแล้วเหมือนเดิม — ไม่เปลี่ยนจาก R125
 
 ### สมมติฐาน (จาก GT-040 ท่อน A · เฉพาะตารางฟิลด์ของ `0x5F85B0` ผ่าน re-derive ปฏิปักษ์ใน GT-042 — VA ประกอบอื่น (`0xF313C4`/`0x5F34D0`) มาจาก GT-040 ยังไม่ผ่านปฏิปักษ์ · verify sha ก่อนพึ่งเสมอ)
 `0x5F85B0` (บิต `0x08` / obj `+0x20`) = list แบบ dirty-mask · element ยาว `0x2C` ไบต์ · vtable `0xF313C4`
@@ -1606,7 +1627,8 @@ mask: `0x02`->`+0x14` tag `0x14` · `0x04`->`+0x18` tag `0x0F` · `0x08`->`+0x1B
 
 ### objective (claim เดียว)
 **เมื่อเซิร์ฟเวอร์ส่ง element ของ `0x5F85B0` (mask `0x10|0x02`) ที่พิกัดใกล้ตัวผู้เล่น ไคลเอนต์วาดป้ายชื่อ/โมเดลบนพื้นที่จุดนั้นหรือไม่**
-(ดีไซน์จริง R124: สองเฟรม เฟรมละหนึ่ง element — ใกล้ +30X และไกล +800X ห่างกัน 0.10s — เพื่อแยก "ไม่วาด" จาก
+(ดีไซน์จริง R124 แก้ R127: สองเฟรม เฟรมละหนึ่ง element — ใกล้ **trigger+30X** และไกล **trigger+800X** ห่างกัน 0.10s
+โดย trigger = TargetPos แรกหลัง runtime ack — เพื่อแยก "ไม่วาด" จาก
 "วาดนอกจอ" · เฟรมละ element เดียวตามบทเรียน V43 กัน `ErrorData=28317` จาก collection หลาย record)
 
 ### คำทำนาย (คำทำนายที่ผิด = ผล ไม่ใช่ความล้มเหลว)
@@ -1646,22 +1668,34 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt045.sqlite3 --ground-loo
 ```
 - **opt-in เท่านั้น ห้าม default-on** (บังคับในโค้ด: mutually exclusive กับ scenario โหมดอื่น + ต้องมี `--db` ชี้ไฟล์ที่มีจริง)
 - หัวหน้าต่าง console ของ server จะขึ้น mode `ground-loot-hypothesis` — ใช้เช็คว่าบูตถูกโหมด
-- ⚠️ **ไม่มี chat trigger และไม่มีปุ่มยิง** — เฟรมออกเองที่ TargetPos แรกหลัง runtime ack (= เกือบทันทีที่เข้าแมพ)
-  ครั้งเดียวต่อเซสชัน · ตัวอักษรตอนช่องแชตไม่โฟกัส = hotkey ⇒ ใช้แค่ `W/A/S/D`, `Q/E`, `spacebar`
+- ⚠️ **ไม่มี chat trigger และไม่มีปุ่มยิง** — เฟรมออกเองที่ TargetPos แรกหลัง runtime ack ครั้งเดียวต่อเซสชัน
+  🔴 **ข้อเท็จจริงที่วัดแล้วรอบแรก (จดหมาย 1530): TargetPos แรก "ไม่ได้" ออกตอนเข้าแมพ — มันออกตอนผู้เล่นขยับครั้งแรก
+  (กด `W` ครั้งแรก)** ⇒ **ผู้เทสคือคนคุมจังหวะยิงเอง: ตราบใดที่ยังไม่แตะปุ่มเดิน เฟรมยังไม่ออก** — นี่คือหัวใจของ steps v2
+  · ตัวอักษรตอนช่องแชตไม่โฟกัส = hotkey ⇒ ใช้แค่ `W/A/S/D`, `Q/E`, `spacebar`
 
 ### steps
 **ก่อนเริ่ม:** ถือ `LOCK_GAME` · จด boot stamp · เทียบ sha canonical · copy DB สองใบตามบล็อก db
 1. เปิด server ก่อน client เสมอ (`Get-NetTCPConnection -State Established` พอร์ต 10188/10189 = 0 ก่อนเปิด client)
 2. เปิด client (`Invoke-CimMethod Win32_Process Create`) → เลือกเซิร์ฟเวอร์ → dialog PVP ปุ่มซ้าย → หน้าเลือกตัวละคร
    → **ปุ่มกลางสุดจาก 5 ปุ่มแถวล่าง = เข้าเกม** (ปุ่มซ้ายสุด = ลบตัวละคร **ห้ามกด**)
-3. เข้าแมพ เห็น HP/minimap/ชื่อแมพ → **ถ่าย G0 ทันทีที่ควบคุมได้** ให้เห็น X/Y บน HUD และพื้นที่รอบตัว
-   ⚠️ เฟรม element **ออกไปแล้วตั้งแต่วินาทีแรกที่เข้าแมพ** (ยิงเองที่ TargetPos แรก) — G0 จึงไม่ใช่ "ก่อนยิง"
-   แต่คือ "มุมกว้างที่จุดเกิด" · **จดเวลาที่เข้าแมพ** ใช้แทนเวลายิง
-4. **พิกัดใกล้ (+30X จากจุดเกิด · HUD ควรอ่าน X≈-9210, Y≈-2830):** หมุนกล้อง `Q/E` กวาด 360° หาอะไรที่โผล่
-   บนพื้น/ป้ายชื่อลอย → ถ่าย **G1** มุมที่เห็น (หรือมุมที่ควรเห็นแล้วไม่มี)
-5. **เดินเข้าไปถึงจุดนั้น** (`W/A/S/D` ไปทาง +X ประมาณ 30 หน่วย) → ถ่าย **G1b** ระยะใกล้ —
+3. เข้าแมพ เห็น HP/minimap/ชื่อแมพ → **ห้ามแตะปุ่มเดินเด็ดขาด และเลี่ยงการหมุนกล้องก่อนขั้น 4**
+   (`[ตีความจากรอบแรก]` ว่าเฉพาะการเดินยิง TargetPos — รอบแรกเฟรมออกหลัง `W` — แต่ยังไม่มีการวัดแยกว่ากล้อง
+   ยิงหรือไม่ ⇒ เลี่ยงไว้ก่อนปลอดภัยกว่า · ถ้าเฟรมเผลอออกก่อนกำหนด **รอบไม่เสีย** — พิกัดอิง trigger เสมอ
+   แค่จดจาก log ว่า trigger เกิดตอนไหน) → **ถ่าย G0** ให้เห็น X/Y บน HUD และพื้นที่รอบตัว
+   — ตราบใดที่ trigger ยังไม่ออก G0 คือ "ก่อนยิง" จริง ๆ
+4. **จังหวะยิง (หัวใจของ v2 — แก้เหตุ NO-RESULT รอบแรกที่ภาพแรกช้าไป 3.56s):**
+   ① **เริ่มอัดวิดีโอ/continuous capture ก่อน** หันกล้องไปทาง +X (ทางที่ของจะโผล่ · ทาง 'Navy Transfer')
+   ② **แล้วค่อยกด `W` สั้นที่สุด (~120ms) หนึ่งครั้ง** — เฟรมทั้งสองออกที่ TargetPos ของการขยับครั้งนี้
+   ③ **อัดต่อเนื่องอย่างน้อย 5 วินาทีหลังกด** (เหตุการณ์ตัวอย่างในคลิปจริงสั้น 0.633s — ภาพนิ่งอย่างเดียวพลาดได้)
+   ⚠️ การวัด controls รอบแรก: `W` 120ms เลื่อน ~51.6 หน่วย ⇒ **trigger X ≈ X(G0)+~50 ไม่ใช่ X(G0)**
+   **จุดใกล้ = X(trigger)+30 · จุดไกล = X(trigger)+800 · Y/Z ของ trigger** — ค่า trigger เป๊ะอ่านจาก
+   **hexdump ของเฟรม TargetPos ใน raw GAME log บรรทัดก่อน `SENT GROUND_LOOT_BIT08_RENDER_NEAR_ONCE`**
+   (แหล่งเดียวกับที่ pass criteria ชั้น (1) ให้ decode อยู่แล้ว — **ห้ามใช้ "X ตอนเข้าแมพ" หรือ HUD เป็นฐานคำนวณ**)
+   ระหว่างเทสใช้ค่าประมาณ "HUD หลังหยุด +30" นำทางได้ แล้วค่อยยืนยันเลขจริงจาก log ตอนเขียนผล
+   → หมุนกล้อง `Q/E` กวาด 360° หาอะไรที่โผล่บนพื้น/ป้ายชื่อลอย → ถ่าย **G1** มุมที่เห็น (หรือมุมที่ควรเห็นแล้วไม่มี)
+5. **เดินเข้าไปถึงจุดใกล้** (`W/A/S/D` ไปทาง +X ประมาณ 30 หน่วยจากจุดที่หยุด) → ถ่าย **G1b** ระยะใกล้ —
    ถ้ามีอะไรโผล่ ให้เห็นทั้งป้ายชื่อและ/หรือโมเดลชัด ๆ
-6. **พิกัดไกล (+800X · HUD ควรอ่าน X≈-8440, Y≈-2830):** เดินต่อไปทาง +X จนถึง → ถ่าย **G2**
+6. **พิกัดไกล (จุดไกล = X(trigger)+800 · Y เดิม — ฐานเดียวกับข้อ 4):** เดินต่อไปทาง +X จนถึง → ถ่าย **G2**
    (สองพิกัดเพื่อแยก "ไม่วาด" ออกจาก "วาดแต่อยู่นอกจอ/นอกระยะ culling" — ถ้าตัวใกล้วาดแต่ตัวไกลตอนแรกไม่วาด
    แล้วมาวาดเมื่อเดินเข้าใกล้ = จดแยกเป็นเรื่อง culling)
 7. บันทึกว่า element อยู่ค้างหรือถูกลบเอง — ถ้าหายเอง จับเวลาว่าอยู่กี่วินาที (เทียบกับ 0.633 s ในหลักฐานคลิป)
@@ -1673,15 +1707,22 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt045.sqlite3 --ground-loo
 11. เทียบ sha256 canonical กับ `CANON_SHA.txt` อีกครั้ง ต้องเท่าเดิม
 
 ### pass criteria — สองชั้น แยกกันเด็ดขาด
-**ชั้น (1) wire/DB (ไม่ต้องใช้สายตาคนหน้าจอ)**
-- raw GAME log มี **สองเฟรม** ที่เซิร์ฟเวอร์เขียน element ออกไปจริง (เฟรมละพิกัด · ใกล้ก่อน ไกลตาม 0.10s) — ไบต์ตรง pin (pc เฟรมละ 44 ไบต์):
-  เฟรมใกล้ sha256 `A3570BC9185BEF70ABB3810448F6E3F605437B2F1BFAB1DF474882AD3661EA03`
-  hex: `129d6e140000000008040b000b0812010014010000000b121441ac27002ad4e70fc62ab9e030c52ac74a5f43`
-  เฟรมไกล sha256 `4B14A026763F53FFD65210C2F2BCC0122B096A6877455C84DAAED71366F07F3A`
-  hex: `129d6e140000000008040b000b0812010014020000000b121441ac27002ad4df03c62ab9e030c52ac74a5f43`
+**ชั้น (1) wire/DB (ไม่ต้องใช้สายตาคนหน้าจอ · เกณฑ์ v2 — pin แบบ masked template)**
+- raw GAME log มี **สองเฟรม** ที่เซิร์ฟเวอร์เขียน element ออกไปจริง (เฟรมละพิกัด · ใกล้ก่อน ไกลตาม 0.10s)
+  pc เฟรมละ 44 ไบต์ · **ทุกไบต์ต้องตรง template นี้ ยกเว้น `xx` = 12 ไบต์พิกัด (f32 LE สามตัว):**
+  เฟรมใกล้ hex: `129d6e140000000008040b000b0812010014010000000b121441ac27002axxxxxxxx2axxxxxxxx2axxxxxxxx`
+  เฟรมไกล hex: `129d6e140000000008040b000b0812010014020000000b121441ac27002axxxxxxxx2axxxxxxxx2axxxxxxxx`
+  ตรวจด้วย sha256 หลัง zero ไบต์พิกัด (pc[30:34]/[35:39]/[40:44]):
+  ใกล้ `915331D5103215675E246B0011B054C9D4F7D2C4D48C8E2B010A45C3D0F5FC33` ·
+  ไกล `DC6A8FE62BC2C89B92AFA8060D2CEC5DCCDF23D81A242F95AA354C5BD48F8A14`
   (อ่าน: msg `0x6E9D` v4 · base mask 0 · derived `0x08` · count 1 · element: key 1/2 · mask `0x12` · dword `2600001` · f32 x,y,z)
-  · action labels ฝั่ง server: `GROUND_LOOT_BIT08_RENDER_NEAR_ONCE` แล้ว `GROUND_LOOT_BIT08_RENDER_FAR_ONCE`
-  · event: `hyp_pf_032_ground_loot_bit08_pair_committed` · เก็บ hexdump ทั้งไฟล์ **ห้ามลบ**
+- **เกณฑ์พิกัด (ใหม่ v2):** decode f32 จาก 12 ไบต์นั้นแล้วต้องได้ **ใกล้ = trigger+30X · ไกล = trigger+800X ·
+  Y/Z = ของ trigger เป๊ะ** โดย trigger = TargetPos แรกหลัง runtime ack (อ่านได้จาก raw GAME log เอง) —
+  เทียบที่ความละเอียด f32
+- action labels ฝั่ง server: `GROUND_LOOT_BIT08_RENDER_NEAR_ONCE` แล้ว `GROUND_LOOT_BIT08_RENDER_FAR_ONCE`
+  อย่างละ 1 ครั้ง · เก็บ hexdump ทั้งไฟล์ **ห้ามลบ**
+  🔴 **เกณฑ์ event `hyp_pf_032_ground_loot_bit08_pair_committed` ถูกตัดออก (R127):** เซิร์ฟเวอร์จริงไม่ persist
+  `state.events` — เกณฑ์นั้นสังเกตได้เฉพาะ headless replay ห้ามเอากลับมาใส่ในใบ attended
 - `sessions`: `count(*) WHERE selected_character_id IS NOT NULL` +1 ต่อการเข้าเกมหนึ่งครั้ง · `PRAGMA integrity_check` = `ok` ·
   sha256 canonical ก่อน-หลังตรงกัน
 - **ชั้นนี้ตอบไม่ได้:** จอวาดอะไร (การมีเฟรมออกไม่พิสูจน์ว่าไคลเอนต์วาด) ⇒ **ห้ามอ้างชั้นนี้แทนชั้น (2)**
@@ -1716,7 +1757,19 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt045.sqlite3 --ground-loo
   การวาดกับการหยิบเป็นคนละเรื่อง (ทิศทางการหยิบ = GT-046)
 
 
-## 🆕🔬 GT-046 PICKUP-DIRECTION-001 [STATIC-ON-BRIDGE]: `PickupTerrainThing` เป็นข้อความที่ไคลเอนต์ "ส่งออก" หรือ "รับเข้าอย่างเดียว" — หาจุดสร้าง/จุดส่ง  [🟠 **PENDING — งาน static บนเครื่องสะพานล้วน · ไม่ต้องมี server/client/DB/`LOCK_GAME`/teardown**]
+## 🔬 GT-046 PICKUP-DIRECTION-001 [STATIC-ON-BRIDGE]: `PickupTerrainThing` เป็นข้อความที่ไคลเอนต์ "ส่งออก" หรือ "รับเข้าอย่างเดียว" — หาจุดสร้าง/จุดส่ง  [✅ **PASS / DONE (STATIC) — ปิดโดย chief R127 จากผล 2026-08-23 14:28-14:35 (+07:00)**]
+
+### ✅ บล็อกผล (R127 · ผลเต็ม: `notes_to_chief\20260823_1435_GT046-PASS-outbound-mouseclick-runtime-drop-object.md`)
+- **outbound พิสูจน์แล้ว:** `PickupTerrainThing` ถูกสร้างที่ call `0x006B0639` เติมค่าจาก **live runtime drop-object
+  ที่ module เลือก** (`[esi+0x7C]` -> `[ptr+0x10]`) เข้าคิวส่งที่ `0x006B0653` · serializer `0x005E5E30`
+  เขียนสองฟิลด์ผ่าน WRITE `0x0089A600`
+- **ตัวจุดชนวน:** callback ของ `DropThingModule_Client` เทียบ `WM_LBUTTONDOWN (0x201)` ที่ `0x006B0570` —
+  ส่งเฉพาะเส้นทาง in-range · **คลิกเมาส์ ไม่ใช่ timer/passive**
+- **response mapping:** `0xFC->0x1F` (bounded = too-far) · `0xFD->0x03` · `0xFE->0x22` (ความหมายสองตัวหลังยังไม่ผูก) ·
+  🔴 **ไม่พบ static link จากสามตัวนี้ไปบรรทัดสีเขียว `ได้รับ [ชื่อ] * จำนวน`** — ช่องว่างนี้กลายเป็นใบ **GT-049**
+- 🔴 **nonclaim บังคับติดผล:** มี `FightingDropModule_Client` + `FightingDropNotify` แยกอีกครอบครัว (ยังไม่ decode) ⇒
+  **ห้ามอ้างว่าผลนี้อธิบายการเก็บของมอนดรอป** — ระบบเก็บของมี ≥2 เลนตามจดหมาย 1335/1350 ·
+  static ไม่พิสูจน์ว่าเลนนี้รันจริงในเฟรมคลิป (สมมติฐาน "ของวางไว้ล่วงหน้า" ของผู้ช่วยถูกถอนแล้ว — ERRATUM 15:20)
 
 **ที่มา:** ร่างผู้ช่วย `notes_to_chief\20260823_0805_GT-TICKET-DRAFT-ground-drop-and-pickup-direction.md` (ท่อน GT-046)
 ทำไมสำคัญกว่าที่เห็น: ถ้าไคลเอนต์ **ส่ง** เอง ⇒ มีตัวจุดชนวนฝั่งไคลเอนต์ (auto-loot/เพ็ต/ระยะ) เซิร์ฟเวอร์แค่ตอบ ·
@@ -1815,7 +1868,25 @@ GT-046 อาจถามผิดระบบ: มีระบบเก็บ�
   สถานะการไล่ indirect · เวลา · sha อิมเมจก่อน-หลัง)
 
 
-## 🆕🔬 GT-047 RUNTIMEPROTO-CAPTURE-VALIDATE-001 [STATIC-ON-BRIDGE]: parse เฟรม `GSCN_RunTimeProtocolReq`/`Res` จาก capture corpus ด้วย schema ของ Codex — ปิด F2 ของใบตรวจปฏิปักษ์  [🟠 **PENDING — งาน static บนเครื่องสะพานล้วน · ไม่ต้องมี server/client/DB/`LOCK_GAME`/teardown · ต้องรันบน Windows (ชั้น capture รันบน Linux mount ไม่ได้)**]
+## 🔬 GT-047 RUNTIMEPROTO-CAPTURE-VALIDATE-001 [STATIC-ON-BRIDGE]: parse เฟรม `GSCN_RunTimeProtocolReq`/`Res` จาก capture corpus ด้วย schema ของ Codex — ปิด F2 ของใบตรวจปฏิปักษ์  [🟠 **PENDING / TOOL-GUARD-GAP (R127) — จ็อบ 1-2 รันแล้ว · จ็อบ 3 พบช่องโหว่ validator จริง · เหลือ "จ็อบ 0 ใหม่" ข้างล่างก่อน rerun**]
+
+### 🟠 สถานะ R127 (ผลรัน 2026-08-23 14:21-14:27 · ผลเต็ม: `notes_to_chief\20260823_1427_GT047-GUARD-GAP-fieldoffset-mutation-accepted.md`)
+- จ็อบ 1: frozen view 1,772 ไฟล์ validator exit 0 · `mismatch=0` · แต่สองข้อความเป้าหมาย **ยังค้าง `A2_STATIC_OPEN` ทั้งคู่**
+  (W observed 40,747 · R observed 10,073 — สถานะไม่ขยับเป็น `VALIDATED`) ⇒ **F2 ยังไม่ปิด**
+- จ็อบ 2: re-derive ตรงไบต์ต่อไบต์ครบสาม TSV · image sha ไม่เปลี่ยน ✅
+- จ็อบ 3 (การ์ดบังคับ): กลายพันธุ์ `TargetPosVital:W:1 field_offset +0x14 -> +0x99` แล้ว validator **ยังเขียว
+  (mismatch=0 ตัวเลขเดิมเป๊ะ)** = **การ์ดไม่ครอบคลุม `field_offset` จริงตามที่ใบตรวจ 07:30 เตือน** ·
+  ผู้เทสไม่ patch เอง (นอกบทบาท) — **เจ้าของเครื่องมือ (chief) ต้อง patch จนแดง แล้วค่อย rerun ใบนี้**
+- 🔴 **จุดติด:** `pf_validate_capture_fields.py` อยู่ที่ `pf_bridge\external\` บนสะพานเท่านั้น **ไม่อยู่ใน VCS** ⇒
+  chief บนคลาวด์มองไม่เห็น source จึง patch แบบมีหลักฐานไม่ได้
+- 🆕 **จ็อบ 0 (ทำก่อน rerun · ฝั่งสะพาน · ไม่ต้องบูตอะไร):** ส่ง source ของ `pf_validate_capture_fields.py`
+  (และไฟล์ที่มันเรียกใช้ เช่นตัว `validate_schema_mutation_regressions()` ถ้าแยกไฟล์) เข้า repo `pf_bridge`
+  ทางใดทางหนึ่ง: ① วางสำเนาเป็นไฟล์ใหม่ใต้ `notes_to_chief\` ชื่อ `<YYYYMMDD_HHMM>_GT047-validator-source.py.md`
+  (เนื้อไฟล์ทั้งดุ้นใน fenced code block · ห้ามแนบ capture/TSV) หรือ ② เพิ่มพาธนั้นใน allowlist ของ
+  `pf_git_sync.ps1` ถ้า Panya อนุญาต · แล้ว chief จะเขียนการ์ด + เทสการ์ด (ต้องแดงบน mutation `field_offset`)
+  ส่งกลับเป็น patch ในรอบถัดไป
+- สถานะปลายทางของใบ: **ห้ามอ่าน `mismatch=0` รอบนี้เป็นการยืนยัน schema** — validator ที่ไม่แดงบน corruption
+  ยังไม่มีสิทธิ์ promote อะไร (D4/D5 รอบ 118)
 
 **ที่มา:** ใบตรวจปฏิปักษ์ `notes_to_chief\20260823_0705_ADVERSARY-VERDICT-on-codex-RE-handoff.md` (F2) +
 `notes_to_chief\20260823_0730_ADVERSARY-FOLLOWUP-plus-GROUND-DROP-evidence.md` (ข้อ 2 · การ์ด mutation `field_offset`)
@@ -1893,7 +1964,17 @@ F2: สองใบที่สำคัญที่สุดในโปรเ�
   sha256 re-derive จ็อบ 2 · log การ์ด mutation ก่อน/หลัง (+patch ถ้าต้องแก้) · เวลา · sha อิมเมจ+capture ก่อน-หลัง)
 
 
-## 🆕🔬 GT-048 NATIVE-SPAWN-CONDITION-001 [STATIC-ON-BRIDGE]: อิมเมจ client มีเส้นทาง "สร้าง/วาง entity hostile ตอน scene-load จากข้อมูลที่ ship มากับ client เอง" หรือ entity ทุกตัวต้องมาจากเรคคอร์ด wire ของเซิร์ฟเวอร์ — ตอบด้วย VA/span/sha  [🟠 **PENDING — งาน static บนเครื่องสะพานล้วน · ไม่ต้องมี server/client/DB/`LOCK_GAME`/teardown**]
+## 🔬 GT-048 NATIVE-SPAWN-CONDITION-001 [STATIC-ON-BRIDGE]: อิมเมจ client มีเส้นทาง "สร้าง/วาง entity hostile ตอน scene-load จากข้อมูลที่ ship มากับ client เอง" หรือ entity ทุกตัวต้องมาจากเรคคอร์ด wire ของเซิร์ฟเวอร์ — ตอบด้วย VA/span/sha  [✅ **PASS (STATIC) — ปิดโดย chief R127 จากผล 2026-08-23 14:20-14:50 (+07:00) · GT-034 ไม่ปิด**]
+
+### ✅ บล็อกผล (R127 · ผลเต็ม: `notes_to_chief\20260823_1450_GT048-PASS-native-scene-npc-placement-path.md`)
+- **native path มีจริง:** client อ่าน placement จาก `Data\Scene\Save\bg0001\bg0001.npc` ตอน scene-load
+  ผ่าน `SceneNPCCreation` (`0x0043A9D0` trigger · loader `0x00439E90` · parser `0x00439780` ·
+  per-placement create `0x0043A6F0`) — ชื่อคลาสจาก RTTI จริง ไม่ใช่ชื่อเดา · **ไม่รอ wire และไม่ผ่าน `0x0089A640`**
+- **แถว P30/TID31 Tornado Eagle เจอเป๊ะ:** f32 triple `(1747.524..., -7837.697..., 931.041...)` พบครั้งเดียว
+  ใน `bg0001.npc` offset `0x1D46` — Y/Z ตรง GT-034 ทุกบิต X ต่าง +100 ตาม scenario
+- indirect census ครบ (`E8/E9` ทุกไบต์ + dword refs = 0 ค้าง) · image sha ไม่เปลี่ยน
+- 🔴 **สิ่งที่ผลนี้ไม่พิสูจน์:** ไม่พิสูจน์ว่า path นี้รันจริง/render Tornado Eagle ใน GT-034 · **GT-034 ยังไม่ปิด**
+  ต้องอ่านคู่ GT-045 (แหล่งป้อน wire) — GT-048 = แหล่งป้อนข้อมูล client · คนละแหล่ง ห้ามอ่านแทนกัน
 
 **ที่มา:** คำตัดสิน Panya `notes_to_chief\20260823_1315_PANYA-DECISION-GT034-option1-static-spawn-condition.md`
 (ทาง ① — ร่างใบ STATIC-ON-BRIDGE หาเงื่อนไข spawn ก่อนตัดสินระหว่างทาง ② กับ ③) ·
@@ -2000,3 +2081,100 @@ GT-034 กรณี 3 = "ไม่เห็นตัวนกเลย" ซึ�
 - **การย้ายจุดวาง/ตีความ placement เป็นดีไซน์ของเรา** — ห้าม claim ว่าผู้เล่นจริงเคยเกิดตรงนั้น
 - **result:** (ผู้รับงาน static บนสะพานกรอก: ประโยคทิศทาง native-spawn/ไม่พบ + VA · span/file-offset/len/sha256 ทุกฟังก์ชัน ·
   สถานะการไล่ indirect · เวลา · sha อิมเมจก่อน-หลัง)
+
+
+## 🆕🔬 GT-049 LOOT-CHAT-TEMPLATE-001 [STATIC-ON-BRIDGE]: หา template ของบรรทัดสีเขียว `ได้รับ [<ชื่อ>] * <จำนวน>` ในตารางข้อความ/`B_CONSTDATA` แล้วไล่ static ว่า "ใครยิง id นั้น" — เลนคลิกเมาส์ของ GT-046 (0x1F/0x03/0x22) หรือเลนที่สอง (อาจ inbound ผ่าน READ 0x0089A640)  [🟠 **PENDING — งาน static บนเครื่องสะพานล้วน · ไม่ต้องมี server/client/DB/`LOCK_GAME`/teardown · ไม่มีอะไรให้ดูบนจอเกม**]
+
+**พ่อของใบนี้:** GT-046 PICKUP-DIRECTION-001 (**PASS · ปิด R127**) · ใบนี้ปิดช่องว่างที่ GT-046 จดไว้เองด้วยคำนี้:
+> *"No static link from any of these three message IDs (`0x1F`/`0x03`/`0x22`) to the green `received [name] * quantity` chat template was found."*
+
+**ที่มา:**
+- `notes_to_chief\20260823_1520_ERRATUM-my-terrainthing-hypothesis-is-dead-plus-missing-chat-template-lane.md` **ท่อน ④** (ข้อเสนอที่ใบนี้ลงมือทำ — คำต่อคำ)
+- `notes_to_chief\20260823_1435_GT046-PASS-outbound-mouseclick-runtime-drop-object.md` (ผล GT-046 ที่เปิดช่องว่าง · จ็อบ 4 + nonclaim)
+
+ทำไมสำคัญกว่าที่เห็น: คลิปเห็นบรรทัด `ได้รับ [ Red leaves Hammer ] * 1` **สีเขียว** โผล่ในเฟรมเดียวกับตอนค้อนหาย
+แต่เลนคลิกเมาส์ที่ GT-046 พิสูจน์แล้ว (outbound · `WM_LBUTTONDOWN` · response `0xFC->0x1F` `0xFD->0x03` `0xFE->0x22`)
+**ต่อไม่ถึงบรรทัดนั้นเลย** · ถ้าเลนที่ยิงบรรทัดสีเขียวเป็น **inbound (server-push ผ่าน READ `0x0089A640`)**
+⇒ เซิร์ฟเวอร์เป็นคนตัดสินผลการเก็บ **⇒ เปลี่ยนดีไซน์เซิร์ฟเวอร์ทั้งเลนลูท**
+
+**หมวด:** `STATIC-ON-BRIDGE` — ต้องเปิด `GameClient.local.bin` + TSV ส่งมอบของ Codex บนสะพาน จึงทำบน cloud clone ไม่ได้ ·
+ผู้รับงานคือคนที่นั่งหน้าสะพาน ไม่ใช่ผู้เทสหน้าจอเกม · **ใบนี้ไม่มีอะไรให้ดูบนจอเกมแม้แต่อย่างเดียว** ·
+กติกา stamp 420 นาที / teardown / canonical DB ไม่เกี่ยวกับใบนี้ (ไม่บูตอะไรทั้งสิ้น)
+
+### objective (claim เดียว)
+**หา template ของบรรทัดสีเขียว `ได้รับ [<ชื่อ>] * <จำนวน>` (received `[<name>] * <qty>`) ใน string table / `B_CONSTDATA`
+ของอิมเมจ ระบุ template/message id + VA ของสตริง แล้วไล่ static ว่า id นั้นถูกยิงจากที่ใด —
+ชี้ให้ได้ว่าเชื่อมกับข้อความใดใน 3 ตัวของ GT-046 (`0x1F`/`0x03`/`0x22`) หรือมาจากเลนแยกตัวที่สอง
+(สงสัย inbound ผ่าน READ `0x0089A640`) หรือรายงานว่าไม่พบ template / ไม่พบ static link เลยหลัง census indirect ครบ**
+
+### db / server args
+**ไม่ใช้ DB · ไม่บูตเซิร์ฟเวอร์ · ไม่บูต client** — เปิดอ่านอิมเมจ + อ่าน TSV ส่งมอบอย่างเดียว
+🔴 **ห้ามแก้ อิมเมจ / capture / TSV ส่งมอบ — เปิดอ่านอย่างเดียวทั้งหมด**
+
+### สิ่งที่ต้องมี (precondition · verify ก่อนเริ่ม)
+- **อิมเมจ (sha/size เดียวกับที่ GT-046/GT-048 พิน):** `GameClient\GameClient.local.bin` · size `14759424` ·
+  sha256 `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623` · PE32 · ImageBase `0x00400000`
+  🔴 **จด sha ก่อนเริ่มและหลังจบ ต้องตรงกันทั้งสองครั้ง เปิดอ่านอย่างเดียวเสมอ**
+- **ตารางข้อความ/B_CONSTDATA:** ไฟล์ฝั่งภาษาไทยที่แสดง `ได้รับ` (เช่น `B_CONSTDATA_TH.pc_` ที่ decode แล้ว) ·
+  จด offset/ขนาด/sha256 ของไฟล์ที่พึ่ง
+- **TSV ส่งมอบ RE ของ Codex ที่ `pf_bridge\external\`** (verify จำนวนแถวตามที่ใบตรวจ 07:05 นับ):
+  `PF_PROTOCOL_REGISTRY.tsv` 520 บรรทัด · `PF_SERIALIZER_FIELDS.tsv` 6,932 · `PF_TAG_CENSUS.tsv` · `PF_FIELD_VALIDATION.tsv` ·
+  `PF_RUNTIME_CLASSMAP.tsv` 6,244 แถว (UNKNOWN 100% — ห้ามพึ่งเป็นชื่อคลาส)
+- **ท่าทำงาน:** ตามวินัย `pf-static-re` · 🔴 **ห้ามใช้ linear disassembler เป็นหลักฐานของ negative**
+  (หยุดที่ไบต์แรกที่ decode ไม่ได้แล้วรายงาน negative มั่นใจ = ความผิดพลาดรอบ 83) ·
+  census ด้วย byte matching (`E8`/`E9 rel32` ทุกออฟเซ็ต) + dword refs (data xref ไปยัง VA ของ id/สตริง) + vtable slots ·
+  สวีป exec section ทั้งสอง: `.text` (`0x00401000`, Vsize `0x00838A2C`) และ `.code` (`0x00C3A000`, Vsize `0x2E1`)
+- **verify sha ของทุก span ก่อนพึ่งด้วยตัวเอง** · sha ไม่ตรงแม้ตัวเดียว = หยุด รายงาน span ที่เพี้ยน ห้าม re-derive ทับ
+
+### ของที่มีอยู่แล้ว (จาก GT-046 PASS · verify sha ก่อนพึ่ง)
+```
+response mapping    status 0xFC -> message 0x1F  ·  0xFD -> 0x03  ·  0xFE -> 0x22
+handler             [0x005EF640,0x005EF66F) len 47  sha 5d17fc4fdeeafde0a4a34e900e76d0336e404f8d2f058ba085044ae8d88d602e
+serializer          [0x005E5E30,0x005E5E83) len 83  sha 8e439d4f3ff1479e723b220d8dd78a262b41df3b74839da9d4cb728f69773066
+stream primitive    0x0089A600 (WRITE / outbound)  ·  0x0089A640 (READ / inbound)  [GT-040]
+gap ที่ต้องปิด      ไม่พบ static link จาก 0x1F/0x03/0x22 -> บรรทัดสีเขียว `ได้รับ`
+```
+
+### จ็อบ (ทำตามลำดับ 1 -> 2 -> 3 -> 4)
+1. **หา template สตริง** `ได้รับ [%s] * %d` (หรือรูปแบบเทียบเท่า — `[` `]` `*` เป็นตัวยึด · ตัว `ได้รับ` เป็นไบต์ cp874/UTF-8
+   ตามที่ไฟล์ตารางข้อความเก็บ) · ระบุ **VA ของสตริง** + **template/message id** ที่ผูกกับแถวนั้นในตารางข้อความ
+   🔴 **ค้นด้วยไบต์จริงของ `ได้รับ` + ตัวยึด ไม่ใช่ glyph บนจอ** · ถ้าไม่พบ ให้ลอง encoding อื่นก่อนประกาศไม่พบ
+2. **ไล่ว่าใครอ้าง VA ของสตริง/แถวนั้น** — census `E8/E9` + dword ref ที่โหลด VA สตริง/ดัชนี template นั้นเข้ารีจิสเตอร์
+3. **ตามขึ้นไปหาตัวยิง** — ฟังก์ชันที่ format บรรทัดนี้ลง chat log ถูกเรียกจากที่ใด · เทียบว่า
+   (ก) มาจาก handler/เลนของ `0x1F`/`0x03`/`0x22` (เลนคลิกเมาส์ของ GT-046) หรือ
+   (ข) มาจากเลนแยกที่ป้อนผ่าน READ `0x0089A640` (server-push · actor-entry/notify) · ระบุ VA + span ของจุดยิง
+4. **ตัดสินทิศทางเลน** — ถ้าจุดยิง (จ็อบ 3) ขี่ผ่าน READ `0x0089A640` = **inbound (เซิร์ฟเวอร์ตัดสิน)** ·
+   ถ้าขี่ผ่านเลน outbound-response ของ GT-046 = **เลนเดียวกัน (ไคลเอนต์แสดงผลจาก response ของตัวเอง)** · จดพร้อม xref chain
+
+### pass criteria — **STATIC-ON-BRIDGE (span + sha256 + census · สองชั้น)**
+**ชั้น static (ชั้นที่ผลิตตัวเลขของใบนี้):**
+- verify sha ของ **ทุก** span/ไฟล์ที่พึ่งก่อน re-derive · 🔴 **sha ไม่ตรงแม้ตัวเดียว = หยุด รายงาน span ที่เพี้ยน ห้าม re-derive ทับ**
+- ตอบ objective เป็นประโยคเดียวได้อย่างใดอย่างหนึ่ง:
+  `template ได้รับ อยู่ที่สตริง <VA> id <id> ถูกยิงจาก <VA> ซึ่งขี่เลน inbound READ 0x0089A640` **หรือ**
+  `... ถูกยิงจากเลน response 0x1F/0x03/0x22 (เลนเดียวกับ GT-046)` **หรือ**
+  `ไม่พบ template ในตารางข้อความ (ไล่ทุก encoding แล้ว)` **หรือ**
+  `พบ template ที่ <VA> แต่ไม่พบ static link ไปตัวยิงใด (census E8/E9 + dword ref + vtable slot ครบทั้ง .text/.code แล้ว)`
+- แนบ **template id + VA สตริง + xref chain (VA/span/sha256 ของทุกฟังก์ชันที่อ้าง)** รูปแบบเดียวกับ GT-040/GT-042/GT-046/GT-048
+- ระบุ **สถานะการไล่ indirect ให้ชัด** (E8/E9 direct + dword refs + vtable slots — ครบ/ไม่ครบ + ที่ยังค้าง · สไตล์ census ของ GT-048)
+- sha256 อิมเมจ + ไฟล์ B_CONSTDATA + TSV ก่อน-หลังตรงกัน · ถ้าเขียนสคริปต์ commit ลง `tools/` แบบรันซ้ำได้พร้อม guard count + exit 0
+
+**ชั้น client-observable:** 🔴 **ว่างเปล่าโดยเจตนา — ใบนี้ไม่ผลิตหลักฐานชั้นนี้** (เหมือน GT-047/GT-048) ·
+ไม่มีเกมให้บูต ไม่มีอะไรให้ถ่าย · ผู้เทสหน้าจอ **ไม่ต้องทำอะไรกับใบนี้เลย** ·
+🔴 **ห้ามใครอ้าง static เป็นหลักฐานว่าจอเห็นบรรทัดสีเขียวจากเลนใด** — คนละชั้นหลักฐานกับคลิป
+
+### 🔴 ผลลบมีค่าเท่าผลบวก
+- **"ยิงจากเลน inbound READ `0x0089A640`"** = ข่าวใหญ่ ⇒ เซิร์ฟเวอร์ตัดสินผลการเก็บ ⇒ **redirect ดีไซน์เซิร์ฟเวอร์เลนลูททันที**
+- **"ยิงจากเลน response `0x1F/0x03/0x22`"** = ปิดช่องว่าง GT-046 ⇒ ไคลเอนต์แสดงบรรทัดจาก response ของตัวเอง (เลนเดียว)
+- **"ไม่พบ template" / "ไม่พบ static link"** = ผลที่มีค่าเท่าการเจอ ⇒ **แต่ต้องเขียนกำกับว่า census ไล่ไปถึงไหน**
+  (E8/E9 direct + dword refs + vtable slots ครบทั้ง `.text`/`.code` หรือยัง) · "ไม่พบ" ≠ "ไม่มี" ถ้ายังไล่ indirect ไม่ครบ
+
+### nonclaims (ติดไปกับผลทุกกรณี)
+- **static ไม่พิสูจน์ว่าเลนใดรันจริงในเฟรมที่คลิปเห็นบรรทัดสีเขียว** — พิสูจน์ได้แค่ว่ามี/ไม่มีเส้นทางในอิมเมจ
+- **การเจอ template ไม่พิสูจน์ว่าเลนใดวิ่งในเฟรมที่วัด** (`~163 s`) — คนละชั้นหลักฐานกับคลิป
+- **ไม่ claim เรื่องเพ็ต** ว่าเกี่ยวหรือไม่เกี่ยวกับการยิงบรรทัดนี้ — pet UI ในคลิปถูก facecam บังจนอ่านโหมดไม่ได้ (ERRATUM 15:20 §③)
+- **ไม่ claim เรื่องเซิร์ฟเวอร์ต้นฉบับ** ซึ่งปิดไปแล้ว กู้ไม่ได้ตลอดกาล · การตีความเลน/ดีไซน์เซิร์ฟเวอร์เป็น **งานออกแบบของเรา**
+- **ไม่ claim ว่ารู้ชื่อคลาส** ของ record/notify — vtable ไม่มี RTTI/name literal · ห้ามเดาชื่อ = ห้ามประดิษฐ์ wire format
+- **ไม่พึ่ง `PF_RUNTIME_CLASSMAP.tsv` เป็นชื่อคลาส** — UNKNOWN 100% (บันทึกผลลบ ไม่ใช่แหล่งชื่อ)
+- **"ไม่พบ static link" ≠ "ไม่มีเลนที่สอง"** ถ้ายังไล่ indirect ไม่ครบ — ต้องระบุสถานะการไล่
+- **result:** (ผู้รับงาน static บนสะพานกรอก: ประโยคทิศทางเลน + template id + VA สตริง · xref chain span/file-offset/len/sha256 ทุกฟังก์ชัน ·
+  สถานะการไล่ indirect (E8/E9 + dword ref + vtable slot · ครบ/ค้าง) · เวลา · sha อิมเมจ+B_CONSTDATA+TSV ก่อน-หลัง)
