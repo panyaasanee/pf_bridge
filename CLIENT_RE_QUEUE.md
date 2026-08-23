@@ -14,6 +14,12 @@
   เริ่มที่ดัชนี **`pf_bridge\external\00_SEARCH_HERE_FIRST.md`** · ทุกใบต้องกรอกช่อง
   `ค้นใน pf_bridge\external\ แล้ว: เจอ <อะไร> / ไม่เจอ` ในผล · **ถ้าเจอ ⇒ ใบเปลี่ยนจาก "ไปถอด" เป็น
   "verify sha → re-derive ปฏิปักษ์ → ใช้ต่อ"** (แบบเดียวกับ GT-050)
+- 🔴 🆕 **กฎบังคับข้อสอง (R132 · จากจดหมาย 2150): ก่อนเปิดใบขุด "ข้อมูลเกม" (ตาราง/ข้อความ/ค่าตัวเลข) ต้องค้น
+  `pf_bridge\gamedata\` ก่อนเสมอ** — ตารางข้อมูลเกมแกะครบแล้ว **188 ตาราง / 2,365 คอลัมน์** จาก CONSTDATA_TH/TEXTDATA_TH/
+  QUESTDATA_TH/QUESTTEXT_TH (ดัชนี `gamedata\00_SEARCH_HERE_FIRST.md` · `PF_GAMEDATA_INDEX.tsv` · `PF_GAMEDATA_COLUMNS.tsv` ·
+  ตารางเต็ม `gamedata\tables\*.tsv` grep ได้ตรง ๆ) · ทุกใบต้องกรอกช่อง `ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ` ในผล
+  ⚠️ **โฟลเดอร์นี้อยู่บนดิสก์สะพานเท่านั้น — ยังไม่เข้า git** (เนื้อหาเกมโดยตรง · รอ Panya เคาะ whitelist — จดหมาย `FROM_CHIEF_R132_*`)
+  ⇒ ฝั่ง cloud/CI ยังอ้างได้แค่ผ่านจดหมาย ห้ามเขียนโค้ดที่พึ่งไฟล์พวกนี้จนกว่าจะเข้า git
 - ผลส่งกลับทางเดิม: จดหมายใน `notes_to_chief/` + กรอกช่อง **result:** ท้ายใบ · sha ก่อน-หลังของทุกไฟล์ที่พึ่งต้องตรงกัน
 
 **📊 รายการค้างที่ Panya ขอให้มองเห็นได้ (คำสั่ง 18:22 ข้อ ⑤):** ชุดส่งมอบ RE = **8 ตาราง 17,618 แถว data** ·
@@ -33,10 +39,25 @@
 **ลำดับที่เสนอ (R128):** **GT-053 (ถูกสุด · ชี้ขาด H1) → GT-052 → GT-050** · รายละเอียด H1 อยู่ `FINDINGS_R128_GT051_RENDER_SYNTHESIS.md`
 
 ---
-## 🆕🔬 GT-052 CLASS-SKILL-TABLE-001 [STATIC-ON-BRIDGE]: dump ตารางอาชีพ + ตารางสกิลจาก `B_CONSTDATA_TH.pc_.dec` (ท่าเดียวกับ GT-044) แล้วผูกกับ 6 อาชีพที่เห็นจากไอคอน  [🟠 **PENDING — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี `LOCK_GAME`/teardown · ไม่มีอะไรให้ดูบนจอเกม**]
+## 🆕🔬 GT-052 CLASS-SKILL-TABLE-001 [STATIC-ON-BRIDGE]: ~~dump ตารางอาชีพ + ตารางสกิล~~ ✂️ **ตีความคอลัมน์ + ผูก TEXTDATA + ผูกไอคอน** — ตาราง dump แล้วทั้งคู่ (`gamedata\` · จดหมาย 2150)  [🟠 **PENDING ✂️ SCOPE-CUT R132 — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี `LOCK_GAME`/teardown · ไม่มีอะไรให้ดูบนจอเกม**]
 
 > 🔢 **หมายเหตุเลข (chief):** ร่างในจดหมาย 1656 ข้อ ④ เสนอใบนี้เป็น **GT-049** แต่ **GT-049 ถูกใช้ไปแล้ว**
 > (LOOT-CHAT-TEMPLATE-001 · เปิดใน R127) ⇒ ใบนี้ขยับเลขเป็น **GT-052** · เนื้อหาคงตามร่าง 1656 ข้อ ④ ทุกประการ
+
+> ✂️ **SCOPE-CUT (chief R132 · 2026-08-23 ~22:0x +07:00 · จากจดหมาย `20260823_2150_GAMEDATA-EXTRACTED-…`):**
+> ขา "ไปดึงตาราง" ของใบนี้ **ปิดแล้ว** — ตัวถอดใหม่ `gamedata\pf_extract_gamedata.py` dump ครบ:
+> - `CONSTDATA_TH__CHARCREATE_CLASS.tsv` — **5 แถว x 38 คอลัมน์** · `n_ID` เป็น **bitmask** (1=Gladiator 2=Paladin 4=Sniper
+>   16=Necromancer 32=Sorcerer) · 🔴 **voodooist ไม่อยู่ในตารางสร้างตัวละคร** — ผลผูกไอคอน (step 4 เดิม) ออกแล้วบางส่วน:
+>   ตาราง 5 ≠ ไอคอน 6 · เหลืออธิบายว่า voodooist เป็นอะไร (อย่าเดา — จดเป็นคำถามเปิด)
+> - `CONSTDATA_TH__SKILL_CONTEXT.tsv` — **2,165 แถว x 20 คอลัมน์** · ฟิลด์ที่เห็นชื่อแล้ว: `n_ID` · `n_LEVEL_LEARN` · `n_PASSIVE` ·
+>   `n_ISCLASS` (bitmask อาชีพ) · `n_LEVELS` · `f_SP_LEVE1` · `f_SP_LEVEL2PLUS` · `n_CD` · `n_TARGET` · `n_STAMINA_COST` ·
+>   `n_EQUIPTYPE` · `n_EQUIPTYPE_LHAND` · `s_CAST_CONDITION` · `s_CAST_BEHAVIOR`
+> **งานที่เหลือของใบ (แทน steps 2-3 เดิม):** ① ตีความคอลัมน์ — ค่าจริงของ `n_TARGET`/`s_CAST_CONDITION`/`s_CAST_BEHAVIOR` ฯลฯ
+> แปลว่าอะไร (🔴 **รู้ชื่อคอลัมน์ ≠ รู้ความหมายค่า — ห้ามเดา** · ตีความจากข้อมูลจริง + cross-ref เท่านั้น) ·
+> ② ผูกชื่อสกิลจากฝั่ง **TEXTDATA_TH** (ตารางข้อความ) เข้ากับ `n_ID` — ระบุ crosswalk field จริง ห้าม join ด้วยเลขเท่ากันเฉย ๆ (บทเรียน GT-044) ·
+> ③ ผูก `n_ISCLASS` bitmask กับ 6 ไอคอน + ปมค่า bitmask 8 หายไป (1,2,4,16,32 — ไม่มี 8) — เกี่ยวกับ voodooist ไหม **ห้ามเดา ให้รายงานที่เจอ** ·
+> ④ ตัวอย่างแถวจริง ≥3 แถวต่อข้อสรุปหนึ่งข้อ + sha256 ของ TSV ที่พึ่ง · precondition ไฟล์ `.dec` เดิมยังใช้ได้ถ้า re-derive
+> แต่ทางหลักตอนนี้คืออ่าน `gamedata\tables\*.tsv` ตรง ๆ · ช่องบังคับใหม่: กรอก `ค้น gamedata แล้ว: …` ในผลด้วย
 
 **ที่มา:** `notes_to_chief\20260823_1656_PANYA-DIRECTION-pause-attended-open-class-skill-lane.md` **ท่อน ③ + ④** (เลนอาชีพ/สกิล · ร่างใบ) ·
 กำกับวิธีทำงานจาก `notes_to_chief\20260823_1718_GT050-SCOPE-CUT-codex-registry-already-has-the-skill-answer.md` (ข้อสังเกตท้ายจดหมาย)
@@ -67,7 +88,11 @@
   ⇒ **จด sha256 ของไฟล์ที่พึ่งจริง** และระบุว่าใช้สำเนาไหน · จด sha ก่อนเริ่มและหลังจบ ต้องตรงกันทั้งสองครั้ง
 - **6 อาชีพที่อ่านจากไอคอน (สำรวจไว้ให้แล้ว):** `gladiator` · `necromancer` · `paladin` · `sniper` · `sorcerer` · `voodooist`
   จากไฟล์ `GameClient\Data\GUI\ICON\icon_class_*.tg_` (6 ไฟล์) · ไอคอนที่ชื่อมี skill = 14 ไฟล์
-- **เครื่องมือ:** `parse_pc_tables.py` (ตัวเดิมที่ GT-044 ใช้ parse SCENE_NAME/MAP_SCENE_LIST และ STANDARD_MOB) ·
+- **เครื่องมือ:** ~~`parse_pc_tables.py`~~ 🔴 **R132: ห้ามใช้ตัวนี้** — จดหมาย 2150 ②: พังกับ CONSTDATA มาตั้งแต่ 13 ส.ค.
+  (อ่านชนิดฟิลด์หลัง version ผิด · `UnicodeDecodeError` กลางไฟล์ — traceback บน console cp874 อาจตายซ้อนใน print) ⇒
+  ใช้ **`gamedata\pf_extract_gamedata.py`** (ตัวใหม่ · ตรวจชนิดอัตโนมัติ · re-derive 1.4 วิ) หรืออ่าน `gamedata\tables\*.tsv` ตรง ๆ ·
+  ⚠️ **คำถามเปิด (adversary R132):** GT-044 เคย PASS ด้วยตัวเก่ากับไฟล์เดียวกัน — ขัดกับ "พังตั้งแต่ตารางแรก" ·
+  ค่า derive ของ GT-044 ควร re-verify เทียบ `gamedata\tables\` (ถามผู้ช่วยแล้วในจดหมาย R132 — ห้ามเดาคำตอบ) ·
   ดัชนีเลขตารางดูจาก `FACTPACK_R100_CONSTDATA_MONSTER_LOOT.md` หัวข้อดัชนีตาราง (ท่าเดียวกับ GT-044 ที่ SCENE_NAME=007 / MAP_SCENE_LIST=101)
 
 ### steps
@@ -96,7 +121,7 @@
 - ไม่พิสูจน์ว่า runtime *ใช้* ค่าเหล่านี้ตอนร่ายสกิลจริง — พิสูจน์แค่ mapping/ค่าในไฟล์ข้อมูล (การพิสูจน์ runtime = เลน headless replay ทีหลัง)
 - **ห้าม join ข้ามตารางเพียงเพราะเลข id เท่ากัน** (บทเรียน GT-044) — ต้องมี crosswalk field จริง
 - **ไม่พึ่ง `PF_RUNTIME_CLASSMAP.tsv` เป็นชื่อคลาส** — UNKNOWN 100% (บันทึกผลลบ ไม่ใช่แหล่งชื่อ)
-- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\\external\\ แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: จำนวนอาชีพ/สกิล + ไอดี + ฟิลด์ + ตัวอย่างแถวจริง · path TSV + sha256 ทุกไฟล์ ·
+- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\\external\\ แล้ว: เจอ <อะไร> / ไม่เจอ` · 🔴 ช่องบังคับข้อสอง (R132): `ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: จำนวนอาชีพ/สกิล + ไอดี + ฟิลด์ + ตัวอย่างแถวจริง · path TSV + sha256 ทุกไฟล์ ·
   ผลผูก 6 ไอคอน (ตรง/ต่างตรงไหน) · สถานะ census ดัชนีตาราง · เวลา · sha ไฟล์ constdata ก่อน-หลัง)
 
 
@@ -198,7 +223,7 @@ stream primitive  0x0089A600 (WRITE / outbound)  ·  0x0089A640 (READ / inbound)
 - **ไม่ claim ว่ารู้ชื่อคลาส** — vtable ไม่มี RTTI/name literal · ห้ามเดาชื่อ = ห้ามประดิษฐ์ wire format · **ไม่พึ่ง `PF_RUNTIME_CLASSMAP.tsv` เป็นชื่อคลาส**
 - **ไม่ claim เรื่องเพ็ตสกิล** (`Pets_*`) — เป็นของแถมในทะเบียน ไม่ใช่เป้าใบนี้
 - **ขั้นต่อไปที่ตั้งใจไว้ (ยังไม่ใช่คำสั่งให้เขียนโค้ด):** พอรู้รูปแบบไบต์แล้ว ทำ **เลน headless replay ของการร่ายสกิล** พิสูจน์ MP/cooldown/ผลลัพธ์จบในตัว **โดยไม่ต้องเปิดเกมเลย**
-- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\\external\\ แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: ผล verify sha สาม span · ผล re-derive ปฏิปักษ์ · ประโยคทิศทาง+ตัวจุดชนวนของ `TriggerCastSkillVital` +VA ·
+- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\\external\\ แล้ว: เจอ <อะไร> / ไม่เจอ` · 🔴 ช่องบังคับข้อสอง (R132): `ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: ผล verify sha สาม span · ผล re-derive ปฏิปักษ์ · ประโยคทิศทาง+ตัวจุดชนวนของ `TriggerCastSkillVital` +VA ·
   สถานะ `CLearnSkillResultVital` · xref chain span/file-offset/len/sha256 ทุกฟังก์ชัน · สถานะ census indirect · เวลา · sha อิมเมจ+TSV ก่อน-หลัง)
 
 ## 🆕🔬 GT-053 SCENE2-NATIVE-IDENTITY-CROSSCHECK-001 [STATIC-ON-BRIDGE]: ไฟล์ฉาก native ของ scene 2 มี placement index 60 (`0x203D` Fighting Fish soldier) จริงไหม — จุดเดียวที่ตรวจแล้วอาจฆ่า H1 ได้ทันที  [🟠 **PENDING — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี `LOCK_GAME`/teardown · ไม่มีอะไรให้ดูบนจอเกม**]
@@ -305,7 +330,7 @@ wire override template/พิกัดของ identity ใน band ได้�
 - **band `0x2000+p+1` ยืนยันจริงเฉพาะ bg0001** (GT-022/GT-048) ก่อนใบนี้ — การอ่าน `0x203D` = index 60 สำหรับ scene 2 เป็น **การอนุมานรูปแบบที่ใบนี้ต้องพิสูจน์** ไม่ใช่ของที่รู้แล้ว
 - **ไม่ claim เรื่องเซิร์ฟเวอร์ต้นฉบับ** ซึ่งปิดไปแล้ว กู้ไม่ได้ตลอดกาล · faction 1 ของ scenario เป็น `candidate_not_authentic_player_faction` ตาม SCENE-005 (ไม่เกี่ยวกับใบนี้ แต่ห้ามยกมาอ้างเป็นของแท้)
 - **ไม่พึ่ง `PF_RUNTIME_CLASSMAP.tsv` เป็นชื่อคลาส** — UNKNOWN 100%
-- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\\external\\ แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: ชื่อโฟลเดอร์+ไฟล์ฉาก scene 2 + เส้นทาง resolve จาก GT-044 · N placement ทั้งหมด ·
+- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\\external\\ แล้ว: เจอ <อะไร> / ไม่เจอ` · 🔴 ช่องบังคับข้อสอง (R132): `ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: ชื่อโฟลเดอร์+ไฟล์ฉาก scene 2 + เส้นทาง resolve จาก GT-044 · N placement ทั้งหมด ·
   index 60: identity/template/preset + offset + f32 triple · ผลเทียบ triple กับค่า authentic P60 (`21421.0059/9277.1123/590.6788`) ·
   คำตัดสิน H1 รอด/ตาย (band membership) หรือ "ตอบไม่ได้" · เวลา · sha ไฟล์ฉาก+TSV ก่อน-หลัง)
 
@@ -378,6 +403,6 @@ py -3 tools\pf_external_registry.py --verify-spans ..\GameClient\GameClient.loca
 - **ครอบเฉพาะ 392 spans ของ 503 known-serializer messages** — 16 UNKNOWN-serializer messages **ไม่มี span ให้ verify โดยเจตนา** (spanless 32 field rows คือ W+R ของ 16 ตัวนั้น)
 - **ไม่ claim เรื่องเซิร์ฟเวอร์ต้นฉบับ** ซึ่งปิดไปแล้ว กู้ไม่ได้ตลอดกาล
 
-- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\external\ แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: ยืนยัน `tools\pf_external_registry.py` มีจริงหลัง pull main + commit hash ที่รัน ·
+- **result:** · 🔴 ช่องบังคับ (คำสั่ง 18:22): `ค้นใน pf_bridge\external\ แล้ว: เจอ <อะไร> / ไม่เจอ` · 🔴 ช่องบังคับข้อสอง (R132): `ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ` · (ผู้รับงาน static บนสะพานกรอก: ยืนยัน `tools\pf_external_registry.py` มีจริงหลัง pull main + commit hash ที่รัน ·
   บรรทัดสรุปเต็ม `spans/verified/mismatched/unreadable` + exit code · `image_sha256` · ชื่อจดหมาย timestamp ที่ paste ผล ·
   ถ้า M>0/U>0: รายการ `mismatched_spans`/`unreadable_spans` แล้วหยุด · เวลา · sha อิมเมจ+TSV ก่อน-หลัง)

@@ -1,0 +1,4 @@
+consumed by chief cloud R132 (wimf46) 2026-08-23 21:55 (+07:00)
+actions: GT-049 scope-cut (job 1 closed) / GT-046 addendum (msg id meanings) /
+GT-052 scope-cut / gamedata search rule added to CLIENT_RE_QUEUE.md /
+whitelist decision escalated to Panya in FROM_CHIEF_R132 letter
