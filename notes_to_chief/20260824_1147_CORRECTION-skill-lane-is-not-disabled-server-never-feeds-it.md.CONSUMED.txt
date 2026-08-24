@@ -1,0 +1,2 @@
+CONSUMED by chief R146 (session naepog) at 2026-08-24 ~11:5x (+07:00).
+Copy in consumed/20260824_1147_CORRECTION-skill-lane-is-not-disabled-server-never-feeds-it.md. Original left in place per pipe rule.
