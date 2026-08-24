@@ -58,6 +58,13 @@
 !/evidence_screens/
 !/evidence_screens/**
 
+# ---- patches/: chief-authored tool patches travelling cloud -> bridge ----
+# (GT-047 job 0: the validator source came IN via a notes_to_chief letter;
+# the patched file goes BACK via this folder so it travels with an exact
+# sha256 instead of being re-pasted through a fenced code block.)
+!/patches/
+!/patches/**
+
 # ---- factpack_L1: open the folder, keep ONLY the four safe members ----
 !/factpack_L1/
 /factpack_L1/*
