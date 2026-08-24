@@ -80,6 +80,8 @@ decoder ฝั่ง server ยืนบน W codec ที่ commit แล้�
 
 **สถานะ (R156 · 2026-08-25 ~00:0x +07:00):** ✅ **RE-064 DONE — PINNED** (ผลหน้าสะพาน 2026-08-24 22:41 +07:00 · จดหมาย `notes_to_chief\20260824_2241_RE-064-RESULT-R13-INSIDE-LOOP-PREDICTION-FALSIFIED.md`) — element = tag `0x32` กว้าง 8 แล้ว tag `0x08` กว้าง 1 · R13 `0x005ED2F0` = **INSIDE loop** และเป็น collection-insert helper (ไม่กิน wire tag — คำทำนาย TRAILER **ผิด**) · count R10 อ่านเป็น u8 tag `0x08` มี signed initial gate · rider 15-byte PC prefix: **IDENTICAL 15/15** (capture PC #101 vs v141 candidate) ⇒ ErrorData บน control frame ของ GT-063 จะชี้ session context ไม่ใช่ envelope prefix · chief R156 บันทึกลง ledger HYP-PF-037 แล้ว (3 ฟิลด์ · re-pin canonical sha 5629F715 · ผ่าน pf-adversary — 3 defect แก้ครบก่อน commit) · 🔴 **ยังไม่ compose เฟรม count>0** — stop_rule + expiry decision ของ ledger บังคับรอผลตา GT-063 + คำเคาะ Panya ก่อนเปิด NEW VERSION (คำถามเสนอ Panya อยู่ในจดหมาย R156) · **ใบเปิดจริงตอนนี้: 0 ใบ**
 
+**สถานะ (R157 · 2026-08-25 ~00:3x +07:00):** 🆕 เปิด **RE-065 ACTORTASK-USEBEHAVIOR-CTOR-WALK-001** (ท้ายไฟล์) — ครึ่งที่หายของ Door B (attack/action) ตาม draft R98 หัวข้อ 7 ข้อ 1 · NEEDS-BRIDGE-IMAGE · กุญแจปลด `INTENT_ATTACK_UNDELIVERABLE` ของ MOB-AGGRO-001 (เลน pure-logic ใหม่ของ R157) · หมายเหตุเลข: 064 ถูกออกซ้ำสองใบ (RE-064/GT-064) ตามกฎห้ามเปลี่ยนชื่อ ทั้งคู่คงเดิม ⇒ เลขว่างถัดไปคือ 065 · **ใบเปิดจริงตอนนี้: RE-065 ใบเดียว**
+
 ---
 ## 🆕🔬 GT-052 CLASS-SKILL-TABLE-001 [STATIC-ON-BRIDGE]: ~~dump ตารางอาชีพ + ตารางสกิล~~ ✂️ **ตีความคอลัมน์ + ผูก TEXTDATA + ผูกไอคอน** — ตาราง dump แล้วทั้งคู่ (`gamedata\` · จดหมาย 2150)  [✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 00:44 (+07:00) · บันทึกโดย chief R135 · ผลลบติดใบ: ไม่พบ legend ของ `n_TARGET` ในชุดที่ค้น — ห้ามตั้ง label ("ไม่พบ" ≠ "ไม่มีใน client")**]
 
@@ -1188,3 +1190,90 @@ objective หนึ่งประโยค: **ตัดสินจากอิ
 
 ### result:
 🔴 `ค้นใน pf_bridge\external\ แล้ว: ___` · 🔴 `ค้น gamedata แล้ว: ___` · (ผู้รับงานกรอก: objective ประโยคเดียว · ผลจ็อบ 1 control gate (reproduce loop เดิมตรง/ไม่ตรง) · จำแนก R13 0x005ED2F0 + span/off/len/sha · loop bound VA + verdict INSIDE/TRAILER · ลำดับ element tag/width · sha อิมเมจ+TSV ก่อน-หลัง · จดหมายเข้า notes_to_chief/)
+
+---
+
+## 🆕🔬 RE-065 ACTORTASK-USEBEHAVIOR-CTOR-WALK-001 [STATIC-ON-BRIDGE]: เดิน ctor ของ `CActorTask_UseBehavior` / `CActorTask_PlayActionEvent` (custom RTTI ไม่ใช่ MSVC — vtable->name resolve จาก static ไม่ได้) — ครึ่งที่หายของ Door B: เฟรม behavior-id ขาเข้าจากเซิร์ฟเวอร์เรา **สร้าง attack task ให้ `CNetNPC` ที่ project ไว้** ได้ไหม  [🟢 **PENDING** — เปิดโดย chief R157 · เหตุ: MOB-AGGRO-001 (pure-logic decision slice) เข้าแล้ว · intent โจมตีของมันถูกตั้งชื่อ `INTENT_ATTACK_UNDELIVERABLE` จนกว่าใบนี้จะตอบ]
+
+> 🔢 **หมายเหตุเลข (chief R157):** ตัวนับชุดเดียวกับ `GAME_TEST_QUEUE.md` — 063 ถูกใช้โดย GT-063 (R153) · 064 ถูกออก **สองครั้ง** (RE-064 ใน R154 และ GT-064 ใน R155 — ชนกันแล้วในไฟล์ ตามกฎห้ามเปลี่ยนชื่อใบที่ commit แล้ว ทั้งคู่คงชื่อเดิม) ⇒ เลขว่างถัดไปคือ **065** ใบนี้จึงเป็น RE-065
+
+**ที่มา:** `pirate-force-server\drafts\MOB_AGGRO_SERVER_AI_STATIC_AND_DESIGN_R98_20260820.md` **หัวข้อ 7 ข้อ 1** (open static-RE question มูลค่าสูงสุดของเลน mob-aggro) + บริบทหัวข้อ 3 (task-id space) · draft ระบุเองว่า "walking those two ctors is the single highest-value next static step for Door B"
+
+**ทำไมตอนนี้:** เลนเซิร์ฟเวอร์ MOB-AGGRO-001 (สไลซ์ตัดสินใจ pure-logic) เข้าแล้ว — มันตัดสินใจ "จะโจมตี" ได้ แต่ **ส่งมอบ intent นั้นให้ไคลเอนต์ render ไม่ได้** เพราะ Door B (attack/action) ยังไม่มีเส้นทาง server->client ที่พิสูจน์แล้ว · ใบนี้คือคำถามชี้ขาดฝั่ง static: เฟรม behavior-id ที่เรามีอยู่สองตระกูล ไปจบที่การสร้าง task `UseBehavior`/`PlayActionEvent` ให้ actor แบบ `CNetNPC` หรือไม่ — ไม่มี `CActorTask_Attack` ในอิมเมจ การโจมตีขี่สองตัวนี้ผ่านแถว BEHAVIOR เท่านั้น (draft หัวข้อ 3)
+
+**หมวด:** `STATIC-ON-BRIDGE` — **NEEDS-BRIDGE-IMAGE**: อิมเมจ client ไม่มีบน cloud clone ⇒ ใบนี้ทำได้เฉพาะคนหน้าเครื่องสะพานที่มีอิมเมจ (เส้นทาง pf-static-re บน artifact ที่ commit แล้วใช้ไม่ได้ — ไบต์ที่ต้องใช้ไม่เคย commit) · อ่านอิมเมจ read-only ล้วน · 🔴 ไม่บูตเซิร์ฟเวอร์/client · ไม่มี `LOCK_GAME` · ไม่แตะ DB ใด · กติกา stamp 420 นาที / teardown / canonical DB ไม่เกี่ยวกับใบนี้
+
+### 🔴 ช่องบังคับ (18:22): ค้นใน pf_bridge\external\ แล้ว
+(ผู้รับงานกรอก: เจอ <อะไร> / ไม่เจอ) — ที่ chief รู้ตอนเปิดใบ: ตารางส่งมอบครอบ **vital serializer** ไม่ครอบครอบครัว `CActorTask_*` (task ไม่ใช่ wire object) · 🔴 `PF_RUNTIME_CLASSMAP.tsv` = UNKNOWN 100% ห้ามพึ่งเป็นชื่อคลาส — การผูก vtable->name ต้องมาจาก custom RTTI ในอิมเมจเอง ไม่ใช่จากตาราง
+
+### 🔴 ช่องบังคับข้อสอง (R132): ค้น gamedata แล้ว
+(ผู้รับงานกรอก) — คาดว่า gamedata\ ไม่ตอบใบนี้ (control flow ของ ctor ไม่ใช่ตารางข้อมูลเกม) แต่ต้องกรอกตามกฎ · ถ้าไปแตะแถว BEHAVIOR/`.beh` ให้จดว่าเจออะไร — แต่การ populate แถว BEHAVIOR จริงเป็นคำถามแยก (draft หัวข้อ 7 ข้อ 3 — **ไม่ใช่ของใบนี้**)
+
+### objective (claim เดียว)
+**เดินไบต์บนอิมเมจ (recursive CFG · byte-exact) เพื่อระบุ ctor VA + vtable + custom-RTTI linkage ของ `CActorTask_UseBehavior` และ `CActorTask_PlayActionEvent` แล้ว pin ว่าเส้นทางขาเข้า (inbound) เส้นไหน — ถ้ามี — เป็นผู้สร้าง task สองตัวนี้ให้ actor แบบ `CNetNPC` (ไม่ใช่แค่ local player)** และตอบคำถามเดียวของ Door B:
+🔴 คำตอบต้องเป็นประโยคเดียว รูปใดรูปหนึ่ง:
+- `YES — vital behavior-id จากเซิร์ฟเวอร์สร้าง attack task ให้ projected NPC ได้: เส้นทาง <carrier> -> <VAs> -> ctor <VA> · type gate ที่ผ่าน = <หลักฐาน>`
+- `NO — ทุกเส้นทางขาเข้าที่ถึง ctor ติด gate เฉพาะ local player / ไม่มีเส้นทางถึง ctor เลย: ตันที่ <VA> เพราะ <ข้อเท็จจริง>`
+- `UNRESOLVED — <ส่วนที่ได้> · ตันที่ <instruction ไหน เพราะอะไร> · เข้าเกณฑ์จบ`
+
+### db / server args
+ไม่ใช้ DB · ไม่บูตเซิร์ฟเวอร์/client — เปิดอ่านอิมเมจอย่างเดียว · 🔴 ห้ามแก้อิมเมจ/ตารางส่งมอบ · sha256 ของทุกไฟล์ที่พึ่ง ก่อน-หลัง ต้องตรงกัน
+
+### สิ่งที่ต้องมี (precondition · verify ก่อนเริ่ม)
+- **อิมเมจตัวเดียวกับทุกใบ static:** `GameClient\GameClient.local.bin` · sha256
+  `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623` · ImageBase `0x400000` ·
+  🔴 จด sha ก่อนเริ่มและหลังจบ ต้องตรงกันทั้งสองครั้ง
+- **ข้อเท็จจริงตั้งต้น (พินแล้วใน draft R98 + SCENE/COMBAT reports — verify ก่อนพึ่ง):**
+```
+carrier 1: CHitResult (0x16F7)
+  reaction factory 0x48D870 อ่าน behavior id จาก CHitResult+0x22 · selector +0x28
+  -> BEHAVIOR lookup 0x702A10 (singleton 0x102DAD8) · missing row fallback 0x48AE40
+carrier 2: CKnockdownVital (0x3123)
+  consumer 0x750700 ใช้ raw +0x20 เป็น BEHAVIOR key -> 0x47CAD0
+  -> wrapper vtable 0xF0F7DC (flags 0x40000005) -> task queue ที่ actor+0x40
+task-id ctor cluster: 0x472000-0x476000 เขียน 0x800000XX ลง [task+0x10]
+  (kind ที่พบมีสี่: 0x80000002 / 04 / 05 / 06 · CActorTask_Dead = vtable 0xF0F048 kind 05)
+RTTI: custom ไม่ใช่ MSVC — ชื่อครอบครัว CActorTask_* มีเป็น name record แต่ vtable->name
+  resolve จาก static ไม่ได้สำหรับส่วนใหญ่ (นี่แหละคือกำแพงที่ใบนี้ต้องเดินอ้อม)
+ไม่มี CActorTask_Attack — attack ขี่ UseBehavior/PlayActionEvent ผ่านแถว BEHAVIOR (draft หัวข้อ 3)
+```
+- **ท่าทำงาน:** วินัย pf-static-re · recursive CFG · byte-exact · 🔴 **ห้ามใช้ linear disassembler เป็นหลักฐานของผลลบ** (บทเรียนรอบ 83) · census ด้วย `E8`/`E9 rel32` ทุกออฟเซ็ต + dword refs + vtable slots
+
+### คำทำนาย (🔴 นี่คือ **คำทำนาย** ไม่ใช่ข้อเท็จจริง — ทำนายผิด = ผลงาน)
+- **ทำนายว่า** ctor ทั้งสองอยู่ในหรือใกล้ cluster `0x472000-0x476000` และเขียน kind หนึ่งในสี่ค่าที่รู้จักลง `[task+0x10]`
+- **ทำนายว่า** เส้นทาง `CKnockdownVital` (0x750700 -> 0x47CAD0 -> queue ที่ `actor+0x40`) ไปจบที่ ctor หนึ่งในสองตัวนี้ — เพราะมันเข้าคิว task ให้ actor อยู่แล้ว
+- **ผลรวมไม่แน่ (uncertain by design):** โอกาสออก NO/UNRESOLVED สูง — ทุก behavior lookup ที่เคยสังเกตใน runtime คืน null (SCENE-013 corpus negative) และ `ActionVital` inbound พิสูจน์แล้วว่า inert (SCENE-008) · ทำนายผิดทางไหนก็เป็น finding
+
+### จ็อบ (ทำตามลำดับ · control gate ข้อ 1)
+1. **[control gate] reproduce ของที่รู้แล้วก่อน** — ด้วย method เดียวกับที่จะใช้ทั้งใบ ให้เดินถึง `CActorTask_Dead` (kind `0x80000005` · vtable `0xF0F048` · token `_F_DIE_000` ที่ `0xF0F060`) จาก cluster ได้ถูก · 🔴 method ที่หาของที่รู้คำตอบแล้วไม่เจอ = verdict ที่เหลือเชื่อไม่ได้ หยุดรายงาน
+2. **ผูกชื่อ -> vtable -> ctor** — เริ่มจาก custom-RTTI name record ของ `CActorTask_UseBehavior` และ `CActorTask_PlayActionEvent` (registrar/typeinfo ในอิมเมจ) เดินไปหา vtable และ ctor ของแต่ละตัว · จด: ctor VA · vtable VA · kind `0x800000XX` ที่เขียนลง `[task+0x10]` · span `[start,end)` + file offset + len + sha256 ของทุกฟังก์ชันที่อ้าง · ถ้าผูกไม่ได้ (กำแพง RTTI จริง) จดว่าตันที่ record/instruction ไหน
+3. **ไล่ call site ของ ctor ขึ้นทางขาเข้า** — ใครเรียก ctor ทั้งสอง (census E8/E9 + indirect + vtable slot) · ตัดแยกให้ชัดว่า call site ไหนอยู่บนเส้นทาง inbound vital (สองตระกูล carrier ข้างบน + เส้นอื่นถ้าเจอ) และเส้นไหนเป็นเส้น local-input/script
+4. **pin actor-type gate** — บนเส้นทางขาเข้าที่ถึง ctor: มี type check แบบ `CMyActor`-only ไหม (บทเรียน RE-062: bind thunk type-check ก่อนใช้ slot) หรือรับ actor ทั่วไป/`CNetNPC` ได้ · queue ปลายทางคือ `actor+0x40` ของ actor ตัวไหน (performer จากเฟรม หรือ local player เสมอ)
+5. **ตอบ objective ประโยคเดียว** (YES/NO/UNRESOLVED ตามรูปข้างบน)
+
+### pass criteria — 🔴 สองชั้น
+**ชั้น wire/DB (ชั้นเดียวที่ใบนี้ผลิตหลักฐานได้ — static ทำ headless บนสะพานได้ ไม่ต้องมีคนหน้าจอเกม):**
+- จ็อบ 1 (control gate) ผ่าน: เดินถึง `CActorTask_Dead` ด้วย method เดียวกันได้ถูก
+- ctor VA + vtable VA + kind ของทั้งสองคลาส (หรือประกาศผูกไม่ได้พร้อมจุดตัน) · span `[start,end)` + file_off + len + sha256 ของ **ทุก** ฟังก์ชันที่อ้าง · recursive CFG decode error = 0
+- verdict ต่อ carrier: `CHitResult` path และ `CKnockdownVital` path แต่ละเส้น ถึง/ไม่ถึง ctor · actor-type gate = <หลักฐาน VA>
+- คำตอบ objective ประโยคเดียว (YES/NO/UNRESOLVED)
+- sha อิมเมจก่อน-หลังตรงกัน · ทุกข้อสรุป re-derive ได้ · ถ้าเขียนสคริปต์ commit ลง `tools/` รันซ้ำได้ + exit 0 · 🔴 print ต้อง ASCII ล้วน (console cp874)
+**ชั้น client-observable: 🔴 ว่างเปล่าโดยเจตนา** — อ่านอิมเมจบนดิสก์ล้วน ไม่บูตอะไร ไม่มีจอ · 🔴 ห้ามใครอ้างผล static ของใบนี้เป็นหลักฐานว่า NPC เล่นท่าโจมตีบนจอ — นั่นเป็นใบ attended คนละใบ (แนว HYP-PF-028) และต้องมีคนหน้าจอเสมอ
+
+### 🔴 ผลลบมีค่าเท่าผลบวก
+- **NO (มี gate local-player-only / ไม่มีเส้นทางถึง ctor)** = ข่าวใหญ่ที่สุดที่ใบนี้ให้ได้ ⇒ Door B ปิดเชิงโครงสร้างสำหรับ carrier ที่มี — `INTENT_ATTACK_UNDELIVERABLE` คงชื่อถาวรจนกว่าจะเจอ carrier/เส้นทางอื่น · redirect: เลน MOB-AGGRO หยุดลงทุนกับ attack frame แล้วไปเข้มที่ Door A/C ที่พิสูจน์แล้ว · ผลลบแบบนี้สอดคล้อง prior ทั้งหมด (SCENE-013: ทุก behavior lookup คืน null)
+- **UNRESOLVED (กำแพง RTTI/control flow)** = ผลที่ใช้ได้ ⇒ จดจุดตันให้ใบถัดไปหยิบต่อ และคำถามอาจต้องออกจากเลน static (ดูเกณฑ์จบ)
+- **YES** ก็ยังไม่ใช่ชัยชนะบนจอ — ดู nonclaims
+
+### 🔴 เกณฑ์จบ (บังคับ)
+ถ้าจบที่ UNRESOLVED เพราะ control flow/RTTI ตันแม้เปิดอิมเมจ ⇒ **ไม่เปิดใบ static เพิ่มในคำถามเดิม** · เส้นทางสำรอง (🔴 ยังไม่เปิด จดเป็นคำถามเปิดรอ chief): probe แบบ attended ตามร่าง HYP-PF-028 ใน draft (ยิง `CKnockdownVital` key ชี้แถว `.beh` ที่เชื่อว่ามีของ เช่น `7101.beh` แล้วดูจอ) — นั่นเป็นชั้น attended คนละรอบ คนละใบ
+
+### nonclaims (ติดไปกับผลทุกกรณี)
+- **YES ฝั่ง static ≠ NPC โจมตีบนจอ** — static พิสูจน์แค่ "มีเส้นทางในอิมเมจ" · runtime lookup `0x702A10` อาจคืน null เหมือนทุกครั้งที่ผ่านมา (SCENE-013) · การ populate แถว BEHAVIOR จริงเป็นคำถามแยก (draft หัวข้อ 7 ข้อ 3)
+- ไม่ claim ว่าเซิร์ฟเวอร์ต้นฉบับ (ปิดแล้ว กู้ไม่ได้ตลอดกาล) เคยส่งเฟรม behavior-id แบบใด — ทุกเฟรมที่จะตามมาเป็นดีไซน์เราล้วน
+- ไม่ตั้ง semantics ให้ฟิลด์ใดเกินที่ carrier พิสูจน์แล้ว (`+0x22`/`+0x28`/`+0x20` คือออฟเซ็ตที่ code อ่าน ไม่ใช่ชื่อความหมาย)
+- ใบนี้ **ไม่ compose เฟรม ไม่แก้ encoder ไม่เปิด HYP-PF-028 เอง** — รายงานอย่างเดียว การเปิดรอบต่อเป็นของ chief + คำเคาะ Panya
+- ไม่แตะคำถาม `CAIStateCombatProxy` (draft หัวข้อ 7 ข้อ 2) — คนละใบ ห้ามลากมารวม
+
+### result:
+🔴 `ค้นใน pf_bridge\external\ แล้ว: ___` · 🔴 `ค้น gamedata แล้ว: ___` · (ผู้รับงานกรอก: objective ประโยคเดียว YES/NO/UNRESOLVED · ผลจ็อบ 1 control gate · ctor/vtable/kind ของทั้งสองคลาส + span/off/len/sha ทุกฟังก์ชัน · verdict ต่อ carrier + actor-type gate VA · sha อิมเมจก่อน-หลัง · จดหมายเข้า `notes_to_chief/`)
