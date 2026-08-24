@@ -582,7 +582,14 @@ if (-not $info) {
     }
 
     if ($kv.ContainsKey('stamp') -and -not [string]::IsNullOrWhiteSpace($kv['stamp'])) {
-        try { $bootTime = [datetime]::ParseExact($kv['stamp'], 'yyyyMMdd_HHmmss', $null) }
+        try {
+            $bootTime = [datetime]::ParseExact(
+                $kv['stamp'],
+                'yyyyMMdd_HHmmss',
+                [System.Globalization.CultureInfo]::InvariantCulture,
+                [System.Globalization.DateTimeStyles]::None
+            )
+        }
         catch {
             $bootTime = $null
             if (-not $Salvage) { Fail "stamp '$($kv['stamp'])' is not yyyyMMdd_HHmmss - cannot build the guard window" 14 }
