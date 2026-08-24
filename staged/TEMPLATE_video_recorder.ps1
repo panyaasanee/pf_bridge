@@ -10,7 +10,7 @@
 #
 # BOOT USAGE (the caller writes the returned fields into its info file):
 #   . (Join-Path $bridge 'staged\TEMPLATE_video_recorder.ps1')
-#   $rec = Start-PfRoundRecorder -BridgeRoot $bridge -EvidenceDir $evidence `
+#   $rec = Start-PfRoundRecorder -BridgeRoot $bridge `
 #       -FfmpegPath $ffmpeg -FfprobePath $ffprobe -JobTag '1066_gt034' -FrameRate 30
 #
 # TEARDOWN USAGE (call after the game/server teardown, then grade ResultCode):
@@ -35,7 +35,6 @@ function Start-PfRoundRecorder {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)][string]$BridgeRoot,
-        [Parameter(Mandatory = $true)][string]$EvidenceDir,
         [Parameter(Mandatory = $true)][string]$FfmpegPath,
         [Parameter(Mandatory = $true)][string]$FfprobePath,
         [Parameter(Mandatory = $true)][string]$JobTag,
@@ -52,8 +51,11 @@ function Start-PfRoundRecorder {
             throw ("recorder dependency missing: {0}" -f $required)
         }
     }
-    if (-not (Test-Path -LiteralPath $EvidenceDir)) {
-        New-Item -ItemType Directory -Path $EvidenceDir -Force | Out-Null
+    # Round videos are always local-only. Keep them outside evidence_screens,
+    # whose contents are candidates for git sync under AGENTS.md section 5.
+    $videoDir = Join-Path $BridgeRoot 'evidence_video'
+    if (-not (Test-Path -LiteralPath $videoDir)) {
+        New-Item -ItemType Directory -Path $videoDir -Force | Out-Null
     }
 
     $existing = @(Get-Process -Name 'ffmpeg' -ErrorAction SilentlyContinue)
@@ -66,7 +68,7 @@ function Start-PfRoundRecorder {
         [System.Globalization.CultureInfo]::InvariantCulture
     )
     $safeTag = $JobTag -replace '[^A-Za-z0-9._-]', '_'
-    $videoFile = Join-Path $EvidenceDir ("{0}_FULLROUND_{1}.mkv" -f $safeTag, $stamp)
+    $videoFile = Join-Path $videoDir ("{0}_FULLROUND_{1}.mkv" -f $safeTag, $stamp)
     $durationArg = ''
     if ($DurationSeconds -gt 0) { $durationArg = (' -t {0}' -f $DurationSeconds) }
     $videoCmd = (
@@ -83,7 +85,7 @@ function Start-PfRoundRecorder {
     $created = Invoke-CimMethod -ClassName Win32_Process -MethodName Create `
         -Arguments @{
             CommandLine = $videoCmd
-            CurrentDirectory = $EvidenceDir
+            CurrentDirectory = $videoDir
             ProcessStartupInformation = $startup
         }
     $videoPid = [int]$created.ProcessId

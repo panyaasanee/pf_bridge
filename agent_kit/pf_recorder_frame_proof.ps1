@@ -81,12 +81,26 @@ if ($marks.Count -gt $MaxFrames) {
 $stamp = (Get-Date).ToString('yyyyMMdd_HHmmss', [System.Globalization.CultureInfo]::InvariantCulture)
 $failed = 0
 foreach ($m in $marks) {
-    $name = ('FRAME_{0}_{1}s_{2}.png' -f $JobTag, ([string]$m).Replace('.', 'p'), $stamp)
+    $name = ('FRAME_{0}_{1}s_{2}.jpg' -f $JobTag, ([string]$m).Replace('.', 'p'), $stamp)
     $out = Join-Path $EvidenceDir $name
     # -ss before -i seeks fast; -frames:v 1 takes exactly one picture.
-    $null = & $ff.Source -hide_banner -loglevel error -y -ss $m -i "$VideoPath" -frames:v 1 "$out" 2>&1
+    # 2026-08-24 fix: a full-resolution 1920x1080 PNG frame runs 1.5-2.4 MB, which is
+    # OVER the 2 MB proprietary-guard cap in pf_git_sync.ps1.  Seven such files stalled
+    # every commit for five rounds on 2026-08-24 09:4x-10:0x.  Frames exist to TRAVEL,
+    # so they are written scaled and as JPEG (typically 150-400 KB) and stay well
+    # under the cap.  Nothing is lost: the source video keeps every pixel.
+    $null = & $ff.Source -hide_banner -loglevel error -y -ss $m -i "$VideoPath" -frames:v 1 `
+            -vf "scale=1280:-2" -q:v 3 "$out" 2>&1
     if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $out)) {
         Write-Output ("FRAME at={0}s STATUS=FAIL" -f $m); $failed++; continue
+    }
+    $sz = (Get-Item -LiteralPath $out).Length
+    if ($sz -gt 1900000) {
+        # Still too close to the cap - drop resolution once more rather than ship a
+        # file that will stall the whole bridge commit.
+        $null = & $ff.Source -hide_banner -loglevel error -y -ss $m -i "$VideoPath" -frames:v 1 `
+                -vf "scale=960:-2" -q:v 4 "$out" 2>&1
+        Write-Output ("FRAME at={0}s NOTE=rescaled_to_960_wide" -f $m)
     }
     $len = (Get-Item -LiteralPath $out).Length
     $sha = (Get-FileHash -LiteralPath $out -Algorithm SHA256).Hash
