@@ -100,8 +100,12 @@ $ALLOWLIST         = @('notes_to_chief', 'evidence_screens')
 # uncommitted for 17 hours because of exactly the deadlock this list fixes.
 # The cloud can never see the DB itself, so main's copy is informational; a
 # value that travels is strictly better than one that silently rots.
+# 'staged' added 2026-08-24 10:5x: the tester writes reusable job templates there
+# (TEMPLATE_video_recorder.ps1, TEMPLATE_teardown_generic.ps1).  Leaving it out made
+# a modified template a permanently dirty tracked file, which blocks every rebase,
+# which blocks every push - the same trap this list exists to remove.
 $SHARED_TRACKED    = @('AGENTS.md', '.gitignore', 'pf_git_sync.ps1', 'CANON_SHA.txt',
-                       'agent_kit', 'external', 'gamedata')
+                       'agent_kit', 'external', 'gamedata', 'staged')
 
 $logPath      = Join-Path $BridgeRepo 'sync.log'
 $hbPath       = Join-Path $BridgeRepo 'sync_last_check.txt'
@@ -326,17 +330,18 @@ foreach ($line in ($stShared.Out -split "`n")) {
 }
 
 $refusals = @()
+$refusedPaths = @()
 foreach ($rel in $candidates) {
     $full = Join-Path $BridgeRepo ($rel -replace '/', '\')
     $leaf = (Split-Path -Leaf $rel).ToLower()
     $ext  = [System.IO.Path]::GetExtension($leaf)
-    if ($BAD_EXTENSIONS -contains $ext) { $refusals += ('extension ' + $ext + ' : ' + $rel); continue }
+    if ($BAD_EXTENSIONS -contains $ext) { $refusals += ('extension ' + $ext + ' : ' + $rel); $refusedPaths += $rel; continue }
     $hit = $false
     foreach ($part in $BAD_NAME_PARTS) { if ($leaf.Contains($part)) { $hit = $true } }
-    if ($hit) { $refusals += ('name looks proprietary : ' + $rel); continue }
+    if ($hit) { $refusals += ('name looks proprietary : ' + $rel); $refusedPaths += $rel; continue }
     if (Test-Path -LiteralPath $full) {
         $len = (Get-Item -LiteralPath $full).Length
-        if ($len -gt $SIZE_LIMIT_BYTES) { $refusals += ('size ' + $len + ' bytes > 2 MB : ' + $rel); continue }
+        if ($len -gt $SIZE_LIMIT_BYTES) { $refusals += ('size ' + $len + ' bytes > 2 MB : ' + $rel); $refusedPaths += $rel; continue }
     }
 }
 
@@ -466,16 +471,22 @@ if ($deletions.Count -gt 0) {
 # A file that fails the guard cancels the COMMIT.  It must not cancel the ROUND:
 # on 2026-08-24 one oversized round video in evidence_screens/ stopped the push
 # for every already-committed letter as well, and the bridge went silent.
-$skipCommit = $false
+# 2026-08-24 10:5x - second correction.  The first version cancelled the WHOLE
+# commit when any file failed the guard.  That looked safe but deadlocked the
+# bridge one layer deeper: a single 3 MB screenshot stopped AGENTS.md, gamedata and
+# CANON_SHA.txt from committing, they stayed modified, a modified tracked file
+# blocks git rebase, and a blocked rebase blocks every push.  Skipping ONLY the
+# offending paths is strictly safer - the bad file still never reaches the remote
+# and everything clean keeps moving.  The guard is per-file, so per-file is honest.
 if ($refusals.Count -gt 0) {
-    Shout '[4]' ('skipping the commit: ' + $refusals.Count + ' file(s) failed the proprietary guard')
+    Shout '[4]' ('skipping ' + $refusals.Count + ' file(s) that failed the proprietary guard - the rest still commit')
     foreach ($r in $refusals) { Log '[4]' ('  X ' + $r) }
-    Log '[4]' 'the commit is cancelled - commits already made are still pushed below.'
-    $skipCommit = $true
+    $candidates = @($candidates | Where-Object { $refusedPaths -notcontains $_ })
+    Log '[4]' ('candidates after the guard: ' + $candidates.Count)
 }
 
 $committed = 0
-if (-not $skipCommit -and $candidates.Count -gt 0) {
+if ($candidates.Count -gt 0) {
     if ($DryRun) {
         Log '[4]' ('DRYRUN: would stage and commit ' + $candidates.Count + ' file(s)')
         foreach ($c in $candidates) { Log '[4]' ('  + ' + $c) }
