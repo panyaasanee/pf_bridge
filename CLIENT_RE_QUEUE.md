@@ -33,12 +33,16 @@
 ✅ **merge เข้า `main` แล้ว** merge commit `1e0b20b` · PR #12 · head `53ca7ef` เขียว(Actions run 32645331917 · subset) ·
 R133 ยืนยันที่ commit `1e0b20b` (= `origin/main` ณ เวลาตรวจ · HEAD ของ clone รอบนั้น): tool มีจริง + เทส external 16/16 เขียว(cloud sanity)) · เลน headless สกิลยังต่อคิวหลัง GT-050 ปิดตามเดิม
 
-> 🔎 **สถานะการเข้าถึงชุดส่งมอบ (อัปเดต R131 · 2026-08-23 ~21:0x +07:00):**
-> ✅ **5/8 ตาราง + ดัชนีเข้า `main` แล้ว** (commit `284d986` · Panya ruling 20:39 "push ทั้งไฟล์ ไม่ mask") —
-> cloud/CI อ่านได้แล้ว · ❌ อีก **3 ตาราง (820 แถว): `PF_PROTOCOL_PRIORITY.tsv` · `PF_DATA_EVIDENCE.tsv` ·
-> `PF_TAG_CENSUS.tsv`** — จดหมาย 20:39 ยืนยันชื่อ+สะอาดแล้ว · R131 whitelist ใน `.gitignore` ให้แล้ว
-> ⇒ เหลือขั้นเดียว: **คนหน้าสะพาน `git add` สามไฟล์นี้** (ดูจดหมาย `FROM_CHIEF_R131_*`) —
-> **เลนนี้เปิดครบจริงเมื่อครบ 8 ตาราง**
+> 🔎 **สถานะการเข้าถึงชุดส่งมอบ — ✅ ครบ 8/8 แล้ว (อัปเดต R145 · 2026-08-24 ~11:0x +07:00):**
+> 5 ตารางแรกเข้า `main` ตั้งแต่ R131 (commit `284d986`) · **สามตารางท้ายเข้าแล้วที่ commit `579b468`**
+> (`external: publish the last 3 Codex RE deliverable tables` · 2026-08-24 09:29 +07:00 — คนหน้าสะพาน `git add` ให้ตามที่ R131 ขอ)
+> **นับแถวจริงบน cloud clone รอบนี้:** `PF_PROTOCOL_PRIORITY.tsv` 519 · `PF_DATA_EVIDENCE.tsv` 290 ·
+> `PF_TAG_CENSUS.tsv` 11 (ไม่นับหัวตาราง) = **820 แถว data ตรงกับที่จดหมาย 20:39 พินไว้เป๊ะ**
+> ⇒ **เลนชุดส่งมอบเปิดครบจริงแล้ว** — cloud/CI อ่านได้ทั้ง 8 ตาราง ไม่มีอะไรค้างรอหน้าสะพานในเลนนี้อีก
+> 📌 ของที่ `PF_TAG_CENSUS.tsv` เพิ่งเปิดให้ cloud เห็น (มีผลต่อทุกใบที่เขียน codec): 11 tag แบบ FIXED-len
+> `0x05/0x08/0x0B`=1B · `0x0F/0x12`=2B · `0x14/0x19/0x1F/0x26/0x2A`=4B · `0x32`=8B ·
+> 🔴 **คอลัมน์ `proven_semantics` เป็น `UNKNOWN` ทุกตัวยกเว้นสองตัว** (`0x12`=uint16 · `0x2A`=float32)
+> ⇒ **ห้ามตั้งชื่อชนิดให้ tag ที่เหลือจากความยาวอย่างเดียว** — ความยาวคือความยาว ไม่ใช่ชนิด
 > 🔴 คำเตือนที่จดหมาย 20:39 ฝากไว้: **ห้าม whitelist ไฟล์ `.py` ในโฟลเดอร์นี้โดยไม่ตรวจแยกอีกรอบ** —
 > `pf_extract_protocol.py` มีสตริงไบต์ฝังเป็นการ์ดค่าคาดหวังมากกว่าในตารางเสียอีก
 
@@ -60,6 +64,11 @@ decoder ฝั่ง server ยืนบน W codec ที่ commit แล้�
 (งาน static บนอิมเมจล้วน) แต่ผลของใบนี้จะถูก chief ใช้แก้สถานะ nonclaim ของ **HYP-PF-034 ที่อยู่บน main แล้ว** —
 ผู้รับงานกรอกผลตามใบได้เลย ไม่ต้องรออะไรอีก
 **สถานะ (R143 · 2026-08-24 ~09:xx +07:00):** ✅ **GT-055 PASS/DONE** (ผลหน้าสะพาน 02:41: `0x36DB` = **string8** tag `0x44` + uint32le byte_len · `0xAC52` = UTF-16LE tag `0x48` · ป้าย `UNTAGGED_*` = ขอบเขต helper ของ serializer body ไม่ใช่ full-wire absence claim) ⇒ **parser เราผิดจริงฝั่ง `0x36DB`** — chief แก้ในรอบเดียวกัน (`opaque_string8` + เลิกบังคับความยาวคู่ + dated amendment HYP-PF-015/021 รวม 5 จุด) · สถานะโค้ด ณ ตอนเขียน: **PR โค้ด #16 (commit `fa1e804`) เปิดแล้ว รอ gate — ยังไม่เข้า `main`** · merge อัตโนมัติเมื่อเขียว · ถ้ารอบหน้าไม่เห็น merge ให้เช็ค PR #16 (branch `claude/amazing-goodall-mmtl2a` — งานอยู่บน branch ครบแม้ PR ถูกปิด) · ✅ **RE-056 DONE/METHOD-FAIL** (ผล 07:28: registrar `0x5F3DF0` = inbound prototype tree สำหรับ `CreateById` — จำแนก outbound ไม่ได้ ตกที่ control ⇒ เลน static ของ direction **ปิดถาวรตามเกณฑ์จบใบ** · direction `TriggerCastSkillVital` **ยังไม่ตัดสิน** · ทางต่อ = observe-only attended ตาม checkpoint `PF_SKILL001_...20260816.md` — พักตามคำสั่ง 16:56) · **ใบเปิดจริงตอนนี้: RE-057 · RE-058**
+
+**สถานะ (R145 · 2026-08-24 ~11:xx +07:00):** ✅ **RE-057 DONE/STATIC-LANE-CLOSED** + ✅ **RE-058 DONE/BOUNDED-NEGATIVE** (ปิดโดย R144 — ป้ายอยู่บนหัวใบทั้งสองแล้ว) ⇒ **คิวนี้ไม่มีใบเปิดค้างเลยชั่วขณะ** · 🆕 เปิดใหม่สองใบท้ายไฟล์ **ทั้งคู่อยู่บนเลนลูท (loot lane)** ซึ่งเป็นเลนเดียวที่มี "ของจริงรออยู่แล้ว" ไม่ต้องไปถอดใหม่:
+  · 🆕 **RE-059 ITEMOPERATE-RES-CAPTURE-BYTES-001** — `PF_FIELD_VALIDATION.tsv` แถว `ItemOperateVitalRes:R` บอกว่ามี **เฟรมจริง 5 เฟรมใน 4 ไฟล์ capture** บนสะพาน · `parse_success=0` แต่ 🔴 **`mismatch_frames=0`** ⇒ "ถอดไม่ได้" ไม่ใช่ "ขัดกัน" · ใบนี้ไปเอา **ไบต์ดิบ** ออกมา ไม่ใช่ไปถอด serializer ซ้ำ (GT-054 verify span ให้แล้ว 392/392)
+  · 🆕 **RE-060 ITEM-TEMPLATE-CODE-SCHEMA-001** — คอมเมนต์ `current/pf_login_game_server_v141.py:2470` (`2600001 # STORE_NORMAL row 1 -> ITEM_MISC row 1`) **ผิดอย่างน้อยสองจุด** (พบโดยลูกมือ static) · ใบนี้ pin สคีม `<table_code><5 หลัก>` ด้วยหลักฐาน · 🔴 `current/` เป็น v141 immutable — ใบนี้ **หาหลักฐาน ไม่ใช่แก้โค้ด**
+  · 📎 หมายเหตุข้ามใบ: **RE-060 เป็น precondition เชิงความหมายของ RE-059 แต่ไม่ใช่ precondition เชิงเทคนิค** — รันขนานกันได้ ไม่ต้องรอกัน · **ใบเปิดจริงตอนนี้: RE-059 · RE-060** · 📌 ที่มาของคำตอบเลนลูท: `ItemOperateVitalRes 0x4C13` encoder มีอยู่แล้วใน `pirate-force-server/src/pirateforce_foundation/inventory.py` 3 ทรง ⇒ ไม่เปิดเลนโค้ดใหม่
 
 ---
 ## 🆕🔬 GT-052 CLASS-SKILL-TABLE-001 [STATIC-ON-BRIDGE]: ~~dump ตารางอาชีพ + ตารางสกิล~~ ✂️ **ตีความคอลัมน์ + ผูก TEXTDATA + ผูกไอคอน** — ตาราง dump แล้วทั้งคู่ (`gamedata\` · จดหมาย 2150)  [✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 00:44 (+07:00) · บันทึกโดย chief R135 · ผลลบติดใบ: ไม่พบ legend ของ `n_TARGET` ในชุดที่ค้น — ห้ามตั้ง label ("ไม่พบ" ≠ "ไม่มีใน client")**]
@@ -847,3 +856,133 @@ producer/consumer ของ 0x36AA ให้จดก่อนเปิดอิ
 
 ### result:
 (ผู้รับงานกรอก — จดหมายเข้า `notes_to_chief/` ตามปกติ)
+
+---
+## 🆕🔬 RE-059 ITEMOPERATE-RES-CAPTURE-BYTES-001 [STATIC-ON-BRIDGE]: ดึงไบต์จริงของ 5 เฟรม `ItemOperateVitalRes` ขา R ที่มีอยู่แล้วใน capture corpus ออกมาเป็น hex — แล้วบอกให้ได้ว่าแต่ละเฟรม `bag_present_flag` เท่าไหร่ · `affected_identity_count` เท่าไหร่ · ItemBagAttr ข้างในหน้าตาอย่างไร  [⏳ **PENDING**]
+
+ที่มา:
+- `external\PF_FIELD_VALIDATION.tsv` แถว `ItemOperateVitalRes` ทิศ R:
+  `observed_frames=5 · parse_success_frames=0 · a2_static_open_frames=5 · mismatch_frames=0 · capture_file_count=4 · status=A2_STATIC_OPEN · source=CAPTURE`
+  ⇒ 🔴 **เฟรมจริงมีอยู่แล้ว 5 เฟรม กระจายใน 4 ไฟล์ capture บนเครื่องสะพาน และไม่เคยถูก parse สำเร็จสักเฟรม** · `mismatch_frames=0` = "ถอดไม่ได้" ไม่ใช่ "ขัดกัน"
+- GT-054 PASS (392/392) ยืนยัน span ของ serializer `0x005EDA20` แล้ว ⇒ ใบนี้ **ไม่ต้องไปถอด serializer ซ้ำ**
+- GT-049 (PASS · ปิดแล้ว) พิสูจน์ static ว่า handler `0x005EF5E0` -> chat emitter `0x005CC309` ยิงข้อความ id 131 `ได้รับ [ $V1 ] * $V2` ได้ — **แต่ไม่ได้พิสูจน์ว่า payload หน้าตาแบบไหนทำให้มันยิง** · ใบนี้คือครึ่งที่หายไปนั้นในชั้นที่ static ทำได้
+
+หมวด: `STATIC-ON-BRIDGE` — capture corpus อยู่บนดิสก์สะพานเท่านั้น (cloud มีแต่ตารางสรุป) · ผู้รับงานคือคนหน้าสะพาน · **ใบนี้ไม่บูตอะไรทั้งสิ้น ไม่มีอะไรให้ดูบนจอเกม** · กติกา stamp/teardown/canonical ไม่เกี่ยวกับใบนี้
+
+### 🔴 ช่องบังคับ (กฎ 18:22): ค้นใน pf_bridge\external\ แล้ว
+(ผู้รับงานกรอก: `เจอ <อะไร> / ไม่เจอ`) — สิ่งที่ค้นให้แล้ว ไม่ต้องค้นซ้ำ:
+- `PF_PROTOCOL_REGISTRY.tsv`: `ItemOperateVitalRes` · `serializer_va=0x005EDA20` · `handler_va=0x005EF5E0` · `getter_va=0x005EBF70` · `vtable_va=0x00F30668`
+- `PF_SERIALIZER_FIELDS.tsv` แถว R เต็ม (ตารางข้างล่าง)
+- `PF_PROTOCOL_PRIORITY.tsv`: `serializer_status=OPEN` · blocker 5 ตัว **เป็น blocker ของแถว call ทั้งหมด ไม่ใช่แถวฟิลด์**
+- `PF_INPUT_INVENTORY.tsv` = บัญชี capture + sha256 ⇒ ใช้ยืนยันว่า 4 ไฟล์ที่เจอเป็นไฟล์เดิม
+- 🔴 สิ่งที่ชุดส่งมอบ **ไม่มี**: **ไบต์ดิบของ 5 เฟรมนั้น** — ตารางเก็บแค่ตัวนับ
+
+### 🔴 ช่องบังคับข้อสอง (R132): ค้น gamedata แล้ว
+(ผู้รับงานกรอก) — คาดว่า `gamedata\` ไม่ตอบใบนี้ (ตารางข้อมูลเกมไม่ใช่เฟรม wire) แต่ต้องกรอกตามกฎ · ถ้าถอด `template_id` ออกมาได้ ให้ลองค้นเลขนั้นใน `gamedata\tables\` แล้วจดว่าเจอตารางไหน — 🔴 **แต่ห้ามใช้ผลนั้นสรุปสคีมรหัสไอเทม นั่นเป็นงาน RE-060**
+
+### objective (claim เดียว)
+**ไบต์จริงของ 5 เฟรม `ItemOperateVitalRes` ทิศ R ที่มีอยู่ใน capture ถูกถอดออกมาเป็น hex ครบทุกเฟรม พร้อมระบุต่อเฟรมว่า `bag_present_flag` · `affected_identity_count` · ItemBagAttr ข้างในหน้าตาอย่างไร** — หรือรายงานเป็นตัวเลขว่าถอดไม่ได้เพราะอะไร (เฟรมไหนตกที่ไบต์ที่เท่าไหร่ ด้วยเหตุใด)
+🔴 คำตอบต้องเป็นประโยคเดียว: `ถอดครบ 5/5` · `ถอดได้ N/5 — เฟรมที่เหลือตกที่ <ออฟเซ็ต> เพราะ <เหตุผลข้อเท็จจริง>` · `ถอดไม่ได้ 0/5 — สาเหตุ <ระบุ> · หาไฟล์เจอ/ไม่เจอ <ระบุ>`
+
+### db / server args
+ไม่ใช้ DB · ไม่บูตเซิร์ฟเวอร์/client — เปิดอ่าน capture + TSV + (ถ้าจำเป็น) อิมเมจ อย่างเดียว · 🔴 **ห้ามแก้ capture · ห้ามแก้ตารางส่งมอบ · ห้ามบูตเกม** · sha256 ของทุกไฟล์ที่พึ่ง ก่อน-หลัง ต้องตรงกัน
+
+### shape ขา R ที่ derive แล้ว (🔴 ห้าม re-derive ซ้ำ · เรียงตาม `file_off_claim` ไม่ใช่ `order` · VA = file_off + 0x400C00)
+serializer `0x005EDA20` span `[0x005EDA20, 0x005EDC31)` sha256 `b5f6a1586a810c0a98ceb7c925a0d4afa10cff41db661eb0947b8918f3a11d54` (GT-054 verify แล้ว 392/392) · opcode `ITEM_OPERATE_RES_VITAL = 0x4C13`
+
+| # | file_off | VA | tag | field_offset | len | หมายเหตุ |
+|---|---|---|---|---|---|---|
+| R1 | 0x001ECE91 | 0x005EDA91 | (indirect call) | `DEREF(DEREF(DEREF(OBJ+0x14))+0x34)` | N/A | blocker |
+| R2/R3 | 0x001ECED2/0x001ECEF8 | | (IAT call) | `MSVCR90!_invalid_parameter_noinfo` | N/A | blocker |
+| **R4** | 0x001ECF33 | 0x005EDB33 | **0x08** | `+0x30` | 1 | ฟิลด์จริงตัวแรก |
+| **R5** | 0x001ECF48 | 0x005EDB48 | **0x0B** | `STACK@0x005EDA20+0x58` | 1 | **= `bag_present_flag`** |
+| R6 | 0x001ECF61 | 0x005EDB61 | (direct call) | `0x0046F4D0` | N/A | **nested ItemBagAttr** |
+| R7/R8 | 0x001ECF73/0x001ECF81 | | (refcount) | `InterlockedDecrement/Increment` | N/A | blocker |
+| R9 | 0x001ECF90 | 0x005EDB90 | (indirect call) | เหมือน R1 | N/A | blocker |
+| **R10** | 0x001ECFA2 | 0x005EDBA2 | **0x08** | `STACK@0x005EDA20+0x54` | 1 | **= `affected_identity_count`** |
+| **R11** | 0x001ECFBD | 0x005EDBBD | **0x32** | `STACK@0x005EDA20+0x1C` | 8 | ต่อ element — 🔴 `UNKNOWN` ห้ามตั้งชื่อ |
+| **R12** | 0x001ECFCD | 0x005EDBCD | **0x08** | `STACK@0x005EDA20+0x1B` | 1 | ต่อ element — 🔴 `UNKNOWN` ห้ามตั้งชื่อ |
+| R13 | 0x001ED006 | 0x005EDC06 | (direct call) | `0x005ED2F0` | N/A | blocker |
+
+🔴 **สามข้อควรระวัง:** ① blocker 5 ตัวเป็นของ "แถว call" ทั้งหมด แถวฟิลด์ R4/R5/R10/R11/R12 ไม่ถูกแตะ ② ขา R อ่าน element ลง stack temp (`+0x1C`/`+0x1B`) ส่วนขา W เขียนจากตัว element เอง (`elem+0x10`/`+0x18`) — **อย่าเอาออฟเซ็ตขา W ไปเดินไบต์ขา R** ③ "ItemBagAttr ขนาด `0x68`" = ขนาดในหน่วยความจำ **ไม่ใช่ความยาว wire** — ความยาว wire ต้องออกมาจากเดินไบต์จริง
+
+### คำทำนาย (🔴 นี่คือ **คำทำนาย** ไม่ใช่ข้อเท็จจริง — ทำนายผิด = ผลงาน)
+encoder ฝั่งเรา `src/pirateforce_foundation/inventory.py` ประกอบ payload = `u8tag(0x08,0) + u8tag(0x0B,1) + item_bag + u8tag(0x08,0)` ⇒ **ทำนายว่า** ทั้ง 5 เฟรมจะได้ `bag_present_flag=1` และ `affected_identity_count=0` (ไม่มี element R11/R12) · 🔴 **ถ้าเฟรมจริงไม่เป็นตามนี้แม้เฟรมเดียว = ข่าวใหญ่** ⇒ encoder 3 ทรงของเรา (move-delta/swap/merge) สร้างเฟรมที่ client จริงไม่เคยได้รับ — **ผู้รับงานแค่รายงาน ห้ามแก้ encoder/ledger เอง**
+
+### จ็อบ (1 -> 2 -> 3 · จ็อบ 3 รันเมื่อ 2 ติดที่ nested bag)
+1. **หา 5 เฟรมให้เจอ** — เดินตามทางที่ `pf_validate_capture_fields.py` ใช้นับ · ระบุ 4 ไฟล์ + sha256 + จำนวนเฟรมต่อไฟล์ (รวม 5) · 🔴 รวมไม่เท่า 5 = หยุดรายงานทันที (ตารางกับ corpus เดินคนละทาง เป็นผลมีค่าในตัว)
+2. **dump ไบต์ดิบต่อเฟรม** — เดินไบต์ด้วยมือ R4->R5->R6(nested)->R10->(R11,R12)xcount · จดต่อเฟรม: `0x08@R4` · `bag_present_flag` · ความยาว+hex ของ nested bag · `affected_identity_count` · ค่า R11/R12 · 🔴 ไบต์ไม่ลงตัว = หยุดที่ไบต์นั้น จดออฟเซ็ต/ไบต์ที่เห็น/ไบต์ที่คาด ห้าม "ปรับ" ให้ลงตัว
+3. **(เมื่อจ็อบ 2 ติดที่ nested bag)** เปิดอิมเมจอ่าน `0x0046F4D0` · แนบ `[start,end)` + file offset + len + sha256 · recursive CFG decode error = 0 · 🔴 ห้ามใช้ linear disassembler เป็นหลักฐานผลลบ (บทเรียนรอบ 83)
+
+### pass criteria — 🔴 สองชั้น
+**ชั้น wire/DB (ชั้นเดียวที่ใบนี้ผลิตหลักฐานได้):** คำตอบ objective ประโยคเดียว · ตารางต่อเฟรม 5 แถว (ไฟล์·sha256·index·opcode·ความยาว·hex เต็ม·`0x08@R4`·`bag_present_flag`·nested-bag len+hex·`affected_identity_count`·element) · ทุกข้อสรุป re-derive ได้ · ถ้าเขียนสคริปต์ commit ลง `tools/` รันซ้ำได้ + guard `frames==5` + exit 0 · 🔴 print ต้อง ASCII ล้วน (cp874)
+**ชั้น client-observable: 🔴 ว่างเปล่าโดยเจตนา** — อ่านไฟล์บนดิสก์ล้วน ไม่บูตอะไร ไม่มีจอ · 🔴 ห้ามอ้างผล static เป็นหลักฐานว่าจอเห็นข้อความสีเขียว id 131
+
+### 🔴 ผลลบมีค่าเท่าผลบวก
+- ถอดไม่ได้ 0/5 + ตัวเลข = redirect เลนลูททันที (shape จากอิมเมจอธิบายเฟรมจริงไม่ได้) · หาไฟล์/เฟรมไม่ครบ = ตาราง `PF_FIELD_VALIDATION` กับ corpus ไม่ตรง กระทบทุกใบที่พึ่งตัวนับในตารางนั้น รายงานเด่น ๆ · ถอดได้แต่ค่าไม่ตรงคำทำนาย = ข่าวดีที่สุด (encoder เราผิด รู้ก่อนเอาไปให้คนหน้าจอ)
+
+### 🔴 เกณฑ์จบ (บังคับ)
+ถ้าจบที่ `ถอดไม่ได้ 0/5` หรือ `ติดที่ nested bag แม้เปิดอิมเมจ` ⇒ คำถาม "payload แบบไหน" ออกจากเลน static (capture หมด + อิมเมจหมด) · **ไม่เปิดใบ static เพิ่ม** · ขั้นต่อไปคือ capture ใหม่แบบ attended (ให้เซิร์ฟเวอร์เราส่ง `0x4C13` แล้วดู client) — 🔴 **ยังไม่เปิดใบนั้น** จดเป็นคำถามเปิดรอ Panya
+
+### nonclaims
+ไม่พิสูจน์ความหมายฟิลด์ (R11/R12 ยัง UNKNOWN) · ไม่พิสูจน์ว่า encoder เราถูก/ผิด (แค่ "เฟรมจริงหน้าตาอย่างนี้") · ไม่พิสูจน์ทิศทาง · ไม่พิสูจน์อะไรเกี่ยวกับข้อความบนจอ · capture = สิ่งที่ client เคยได้รับ ไม่ใช่กฎเซิร์ฟเวอร์ต้นฉบับ · 5 เฟรมไม่ครอบทุกทรงของ 0x4C13
+
+### result:
+🔴 `ค้นใน pf_bridge\external\ แล้ว: ___` · 🔴 `ค้น gamedata แล้ว: ___` · (ผู้รับงานกรอก: objective ประโยคเดียว · พาธ root capture corpus แบบเต็ม · 4 ไฟล์+sha256+เฟรมต่อไฟล์ · ตารางต่อเฟรม 5 แถว+hex · ผลเทียบคำทำนาย · sha ก่อน-หลัง · จดหมายเข้า notes_to_chief/)
+
+---
+## 🆕🔬 RE-060 ITEM-TEMPLATE-CODE-SCHEMA-001 [STATIC-ON-BRIDGE]: pin สคีมรหัสไอเทม `<table_code><5 หลัก>` — `table_code` ตัวไหนหมายถึงตาราง CONSTDATA ตัวไหน (คอมเมนต์ v141:2470 ผิดอย่างน้อยสองจุด)  [⏳ **PENDING**]
+
+ที่มา:
+- `current/pf_login_game_server_v141.py:2470`: `V103_ITEM_TEMPLATE = 2600001  # STORE_NORMAL row 1 -> ITEM_MISC row 1, Adventure Key` · บรรทัด 2474: `V110_CASK_TEMPLATE = 2400901  # ... ITEM_CONSUMABLES row 901`
+- **ลูกมือ static ตรวจแล้ว คอมเมนต์ 2470 ผิดอย่างน้อยสองจุด** (🔴 ห้ามตรวจซ้ำ): ① `2600001` **ไม่ปรากฏเป็น `n_ID` ในตาราง CONSTDATA ใดเลย** (grep = 0 hit) — เป็นค่าที่ถูกอ้างถึง ไม่ใช่คีย์ · ② ไม่ได้อยู่ row 1: อยู่ที่ `STORE_NORMAL.tsv` บรรทัด 2 คอลัมน์ `n_ID_ITEM15` และ `STORE_GOODS.tsv` บรรทัด 154 คอลัมน์ `n_ID_ITEM1`
+- ส่วนที่อาจถูก: `ITEM_MISC.tsv` บรรทัด 2 `n_ID=1 · s_NAME=冒險之鑰` · `TEXTDATA_TH__ITEM_MISC_TIP.tsv` บรรทัด 2 `n_ID=1 · s_NAME=Adventure Key` · 🔴 **แต่ไม่มีตารางไหนผูก `26` กับ ITEM_MISC** · `PF_GAMEDATA_INDEX.tsv` ให้ index ITEM_MISC = **042** (ไม่ใช่ 26) · ITEM_CONSUMABLES = **041** (ไม่ใช่ 24) ⇒ `table_code` **ไม่ใช่ index** และ **ไม่ใช่ index+ค่าคงที่** (041->24 ต่าง 1 แต่ 042->26 ต่าง 2)
+- prefix ที่วัดได้ในตาราง store: **`26` x261 · `24` x115 · `22` x10 · `35` x4** ⇒ มีสคีม `<table_code><5 หลัก>` แน่ แต่ `table_code -> ชื่อตาราง` ยังไม่มีหลักฐาน
+- 🔴 `current/` เป็น **v141 immutable — ห้ามแก้** ⇒ ใบนี้ **หาหลักฐาน ไม่ใช่แก้โค้ด**
+
+### ทำไมสำคัญกว่าที่หน้าตามันดู
+`$V1` ในข้อความ id 131 `ได้รับ [ $V1 ] * $V2` **คือชื่อไอเทมที่ไคลเอนต์ resolve เอง** จาก template id ที่เซิร์ฟเวอร์ส่ง (เซิร์ฟเวอร์ไม่ได้ส่งชื่อ) ⇒ **ตีความสคีมผิด = ข้อความขึ้นชื่อผิดตัวหรือไม่ขึ้น** และเลนลูททั้งเลนขี่อยู่บนเรื่องนี้ · 🔴 นี่เป็นข้อผิดที่ **ไม่แสดงอาการตอนเทส wire** — เฟรมถูกทุกไบต์ แต่คนหน้าจอเห็นชื่อผิด
+
+### หมวด
+`STATIC-ON-BRIDGE` — จ็อบ 1/3/4 ทำบน cloud ได้ (`gamedata\` เข้า git ครบที่ `0801541`) · **จ็อบ 2 ต้องเปิดอิมเมจ ทำบนสะพานเท่านั้น** · ไม่บูตอะไร ไม่มีจอ
+
+### 🔴 ช่องบังคับ (18:22): ค้นใน external\ แล้ว
+(กรอก) — ลอง `PF_DATA_EVIDENCE.tsv` (290 แถวไฟล์ข้อมูลเกม parse แล้ว) · `PF_PROTOCOL_REGISTRY.tsv`/`PF_RUNTIME_CLASSMAP.tsv` คำว่า `Item` · 🔴 `PF_RUNTIME_CLASSMAP.tsv` มี 6,244 แถวแต่ `class_name` เกือบทั้งหมด UNKNOWN
+
+### 🔴 ช่องบังคับข้อสอง (R132): ค้น gamedata แล้ว
+(กรอกละเอียด — ใบนี้ค้น gamedata เป็นเนื้องานหลัก) · ค้นให้แล้ว: `2600001` เป็น `n_ID` = 0 hit · `PF_GAMEDATA_INDEX.tsv` คอลัมน์ `start`/`end` = **ออฟเซ็ตในไฟล์ `.dec` ไม่ใช่ VA** · คอลัมน์ `flags` = **ชื่อตาราง TIP คู่ของมัน** (ITEM_MISC -> `ITEM_MISC_TIP`) = crosswalk จริงที่มีชื่อ ไม่ใช่จับคู่เพราะเลขเท่ากัน (บทเรียน GT-044)
+
+### objective (claim เดียว)
+**ตาราง `table_code -> ชื่อตาราง CONSTDATA` ถูก pin ด้วยหลักฐาน** — รับได้ 3 ชนิด: (ก) ตัวถอดในไคลเอนต์ · (ข) ตาราง/โครงสร้าง index ที่ผูก code เข้าตาราง · (ค) การนับที่ falsifiable (มาพร้อมกำลังแยกแยะ) — หรือรายงานว่า static ปิดเลนนี้ไม่ได้ พร้อมเหตุผล+รายการที่ค้นครบ
+🔴 ประโยคเดียว: `pin ได้ — 26=<ตาราง> 24=<ตาราง> ... (หลักฐาน ก/ข/ค: <ที่อยู่>)` · `pin ได้บางส่วน — ...` · `pin ไม่ได้จากชั้น static — เข้าเกณฑ์จบ`
+
+### db / server args
+ไม่ใช้ DB · ไม่บูต — เปิดอ่าน `gamedata\`+`external\`+อิมเมจ · 🔴 **ห้ามแก้ v141 · ห้ามแก้ตาราง · ห้ามแก้อิมเมจ** · sha ก่อน-หลังตรง
+
+### สิ่งที่ต้องมี
+`gamedata\` @ `0801541` · อิมเมจ `GameClient.local.bin` size 14759424 sha256 `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623` · ไฟล์ `.dec` ของ CONSTDATA · 🔴 **ห้ามใช้ `parse_pc_tables.py`** (พังกับ CONSTDATA · UnicodeDecodeError) — ใช้ `pf_extract_gamedata.py` หรืออ่าน `tables\*.tsv` ตรง ๆ
+
+### จ็อบ (1 กับ 2 อิสระ)
+1. **การนับ falsifiable (ถูกสุด · cloud ทำได้)** — รวบรวมรหัส 7 หลักทุกตัวจากคอลัมน์ไอเทม (STORE_NORMAL.n_ID_ITEM1..20 · STORE_GOODS · DROPS_* · COMBINE · DECOMPOSITION · DAILY_REWARD · ITEM_USING) · จดจำนวนรหัส+ตาราง/คอลัมน์ที่ scan · แยก (code, remainder) · เมทริกซ์ hit rate: code x ตาราง CONSTDATA ที่มี n_ID · 🔴 **hit rate 100% ไม่พอถ้าหลายตารางได้ 100%** (ตาราง n_ID ต่อเนื่อง N ใหญ่ได้ 100% กับอะไรที่เล็กกว่า N — กับดัก GT-044 รูปแบบใหม่) ⇒ รายงานจำนวนตารางที่ได้ 100% ต่อ code · ได้ตารางเดียว = หลักฐาน (ค) ใช้ได้ · หลายตาราง = ตัดสินไม่ได้ พูดตรง ๆ · คำทำนาย (🔴 คำทำนาย): `26->ITEM_MISC` `24->ITEM_CONSUMABLES` (จากคอมเมนต์ที่รู้ว่าไม่น่าเชื่อถือ — เป็นเป้าให้ยิงตก) · `22`/`35` ไม่มีคำทำนาย (น้อยเกิน)
+2. **หาตัวถอดในไคลเอนต์ (หลักฐาน ก — แข็งสุด · บนสะพาน)** — หาโค้ดแยกรหัส 2+5 หลักแล้วเลือกตาราง · ร่องรอยให้ลอง (🔴 จุดตั้งต้น ต้องเปิด disassembler ยืนยันเอง): literal `0x000186A0` (=100000) · magic หาร unsigned `0xA7C5AC47` (÷100000) / `0xD1B71759` (÷10000) · switch case `0x16/0x18/0x1A/0x23` · ตัวโหลด CONSTDATA ต่อตาราง · แนบ `[start,end)`+file offset+len+sha256 · CFG decode error = 0 · 🔴 linear disassembler ไม่ใช่หลักฐานผลลบ · "grep ไม่เจอ" ต้องมากับว่า grep อะไร ครอบเท่าไหร่
+3. **ทดสอบข้อจำกัดเก่าอาจหมดอายุ** — `tools/pf_split_operate_verb_panels_static.py:33-36` อ้างว่า caption ปิดตายเพราะ `B_TEXTDATA_TH.pc_` packed · 🔴 อาจไม่จริงแล้ว (gamedata แตกออกมา 188 ตาราง + lua 616 ไฟล์) · เช็คสองครึ่ง: (ก) `B_TEXTDATA_TH.pc_` ปิดไหม — หลักฐานว่าไม่ปิด: `TEXTDATA_TH__ITEM_MISC_TIP.tsv` 1,922 แถวอ่าน plaintext ได้ · (ข) UI Lua `.lu_` ปิดไหม — `gamedata\lua\` 616 ไฟล์เป็น UI จริงหรือ quest/trigger (⚠️ กับดัก R137: มีโฟลเดอร์ `Quest\` 306 ไฟล์ · glob ไม่ recursive มองไม่เห็น) · ผลเขียนเป็นข้อเสนอ amend docstring · 🔴 ห้ามผู้รับงานแก้ไฟล์เอง
+4. **เดินเส้นทางชื่อจนสุด** — `2600001 -> ITEM_MISC n_ID=1 -> ชื่อ` · 🔴 `ITEM_MISC.s_NAME` = `冒險之鑰` (จีน) แต่ `ITEM_MISC_TIP.s_NAME` = `Adventure Key` ⇒ **ไคลเอนต์ไทยหยิบชื่อจากตารางไหน** คือสิ่งที่ `$V1` แสดงจริง · crosswalk ต้องมีชื่อจริง (`PF_GAMEDATA_INDEX.flags` ผูก ITEM_MISC->ITEM_MISC_TIP) · 🔴 พิสูจน์ว่า join ด้วย `n_ID` ไม่ใช่ลำดับแถว (ITEM_MISC 1,646 vs TIP 1,922 แถว — join ลำดับแถวผิดแน่) ยืนยัน >=3 คู่
+
+### 🔴 ห้ามทำ
+ห้ามแก้ v141 · ห้าม grep `2600001` เป็น n_ID ซ้ำ (0 hit แล้ว) · ห้าม join เพราะเลขอยู่พิสัยเดียวกัน (GT-044) · ห้ามสรุปจาก hit rate โดยไม่รายงานกำลังแยกแยะ · ห้ามเดา `table_code`=index (หักล้างแล้ว)
+
+### pass criteria — 🔴 สองชั้น
+**ชั้น wire/DB (static/data-equivalent):** objective ประโยคเดียว · ตาราง `table_code->ตาราง` พร้อมป้ายชนิดหลักฐาน (ก/ข/ค) · code ที่ pin ด้วย (ค) ล้วนติดป้าย "หลักฐานเชิงนับ ไม่ใช่ตัวถอด" · เมทริกซ์ hit rate เต็ม + จำนวนรหัส/ตารางที่ scan · คำตอบจ็อบ 3 แยก (ก)/(ข) · จ็อบ 4 + ตัวอย่าง >=3 คู่ · re-derive ได้ · sha ก่อน-หลังตรง · 🔴 print ASCII ล้วน — **สำคัญพิเศษ:** ข้อมูลมีจีน+ไทย ⇒ **ห้าม print `s_NAME` ดิบลง console** ให้ escape/hex หรือเขียนไฟล์ UTF-8
+**ชั้น client-observable: 🔴 ว่างเปล่าโดยเจตนา** — อ่านตาราง+อิมเมจบนดิสก์ล้วน ไม่มีจอ · 🔴 ห้ามอ้างเป็นหลักฐานว่า `$V1` ขึ้นชื่อถูกบนจอ — ต้องเป็นใบ attended ใน `GAME_TEST_QUEUE.md` เท่านั้น (ยังไม่เปิด)
+
+### 🔴 ผลลบมีค่าเท่าผลบวก
+การนับตัดสินไม่ได้ = บอกเราว่าห้ามใช้การนับ pin สคีมอีก ต้องไปทางตัวถอด · ไม่พบตัวถอด + census = ผลเต็ม · จ็อบ 3 พบข้อจำกัดเก่ายังจริง = docstring ไม่ต้อง amend · คำทำนาย `26->ITEM_MISC` ถูกยิงตก = ข่าวใหญ่สุด (คอมเมนต์ v141 ผิดสามจุด)
+
+### 🔴 เกณฑ์จบ (บังคับ)
+จบที่ `pin ไม่ได้จากชั้น static` ⇒ คำถามออกจากเลน static (ตาราง+อิมเมจหมด) · ไม่เปิดใบ static เพิ่ม · ขั้นต่อไป = วัด attended (ส่ง `0x4C13` มี template_id ที่เลือกเอง แล้วดูจอขึ้นชื่ออะไร) — 🔴 ยังไม่เปิดใบนั้น จดคำถามเปิดรอ Panya
+
+### nonclaims
+ไม่พิสูจน์ว่าเซิร์ฟเวอร์ต้นฉบับใช้สคีมนี้ (พิสูจน์แค่ไคลเอนต์/ข้อมูลเกมที่ ship มาเข้าใจแบบไหน) · ไม่พิสูจน์ว่าจอขึ้นชื่อถูก · ไม่พิสูจน์ความหมายคอลัมน์อื่น (GT-052) · ไม่แก้ ledger/HYP · ไม่ครอบ table_code ที่ไม่อยู่ในตาราง store (วัดได้แค่ 4 code — 🔴 ห้ามสรุปว่ามีแค่ 4 code ในเกม)
+
+### result:
+🔴 `ค้นใน external\ แล้ว: ___` · 🔴 `ค้น gamedata แล้ว: ___` · (กรอก: objective · ตาราง table_code->ตาราง+ป้ายชนิด · เมทริกซ์ hit rate+จำนวน scan · VA/span/sha ตัวถอด (หรือ census) · จ็อบ 3 แยก (ก)/(ข)+ข้อเสนอ docstring · จ็อบ 4 ว่า `$V1` มาจากคอลัมน์ไหน+>=3 คู่ · ผลคำทำนาย 26->ITEM_MISC · sha ก่อน-หลัง · จดหมาย notes_to_chief/)
