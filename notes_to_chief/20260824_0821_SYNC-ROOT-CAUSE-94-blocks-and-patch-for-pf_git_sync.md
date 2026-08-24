@@ -1,8 +1,27 @@
 # ต้นเหตุจริงของ sync ที่ตัน 94 ครั้ง + แพตช์ `pf_git_sync.ps1` (ให้ chief ลงมือ)
 
 **ผู้เขียน:** ผู้ช่วย (cloud) · **ถึง:** chief (cc) และ Panya
-**สถานะ:** ผู้ช่วยเขียนแพตช์ให้ครบ **แต่แตะ `pf_git_sync.ps1` เองไม่ได้** — มันเป็นไฟล์ที่ track แล้วแต่อยู่นอก
-push allowlist ⇒ ผู้ช่วยแก้บนดิสก์เมื่อไหร่ = สร้างการตันครั้งที่ 95 ทันที (นั่นคืออาการที่จดหมายนี้กำลังอธิบาย)
+> # 🟢 อัปเดต 2026-08-24 ~08:4x — **แพตช์ทั้งหมดลงมือไปแล้ว chief ไม่ต้องทำอะไร**
+>
+> **ห้ามเปิดใบเพื่อทำแพตช์ในจดหมายนี้ — มันถูกเขียนลงไฟล์จริงแล้วทั้ง 5 จุด + ④**
+> Panya สั่ง "แพตให้หมดทุกข้อ" เมื่อ ~08:3x · ผู้ช่วยแก้ `pf_git_sync.ps1` และ `AGENTS.md` โดยตรง
+> แล้วส่งพรอมป์ให้ Codex ตรวจ (`-SelfCheck` → `-DryRun` → commit → ลบไฟล์ halt)
+>
+> **จดหมายนี้เปลี่ยนบทบาทเป็น "บันทึกเหตุผล" ไม่ใช่ "ใบสั่ง"** — สิ่งที่ chief ต้องรู้มีสามอย่าง:
+> 1. พฤติกรรมของ `pf_git_sync.ps1` **เปลี่ยนไปแล้ว** อ่าน §③ ให้ครบก่อนวิเคราะห์ `sync.log` ครั้งต่อไป
+>    โดยเฉพาะ: ไฟล์ที่ track แล้วใน `AGENTS.md` `.gitignore` `pf_git_sync.ps1` `agent_kit` `external`
+>    `gamedata` **ถูก commit + push อัตโนมัติ** ตั้งแต่นี้ไป
+> 2. อาจเห็นจดหมายชื่อ `SYNC_STUCK_*.md` โผล่มาเอง = ของใหม่จากแพตช์ ③ ไม่ใช่ของใครเขียน
+> 3. `AGENTS.md` บน main **เคยขาดกฎไป 7 ก้อน ~18 KB** (สามก้อนเป็นกฎตั้งแต่ 23 ส.ค.) —
+>    คืนกลับครบแล้ว · ถ้า chief เคยตัดสินใจอะไรโดยอ้าง `AGENTS.md` ระหว่าง 23-24 ส.ค.
+>    **ควรทบทวนว่ายังถูกอยู่ไหมภายใต้กฎครบชุด**
+>
+> ผู้ช่วยทบทวนแล้วว่า "แตะ `pf_git_sync.ps1` เองไม่ได้" เป็นข้อจำกัดที่ผู้ช่วยคิดไปเอง —
+> แตะได้ ตราบใดที่มีคน commit ให้ทันที ซึ่งเป็นท่าเดียวกับที่ใช้กับ `agent_kit\*.ps1` มาแล้ว
+
+**สถานะเดิมตอนเขียนฉบับแรก (เก็บไว้เป็นบันทึก):** ผู้ช่วยเขียนแพตช์ให้ครบ แต่คิดว่าแตะ `pf_git_sync.ps1`
+เองไม่ได้เพราะเป็นไฟล์ที่ track แล้วแต่อยู่นอก push allowlist — **การประเมินนั้นผิด** ปัญหาจริงไม่ใช่
+"ห้ามแก้" แต่คือ "แก้แล้วต้องมีคน commit" ซึ่งจัดการได้ในพรอมป์เดียว
 
 ---
 
@@ -168,3 +187,75 @@ if (-not (Test-Path -LiteralPath $stuckLetter)) {
 - เลข 94 / 56 / 40 มาจาก `sync.log` บนดิสก์เครื่องสะพานเท่านั้น ถ้าล็อกเคยถูกตัด ตัวเลขจริงจะมากกว่านี้
 - แพตช์ ① เปลี่ยน **ขอบเขตของสิ่งที่ถูก push อัตโนมัติ** ⇒ เป็นเรื่องที่ **Panya ต้องเคาะ** ไม่ใช่ chief ตัดสินเอง
 - ไม่ได้พิสูจน์ว่า 94 ครั้งนั้นไม่มีสาเหตุอื่นปนอยู่ — พิสูจน์แค่ว่าไฟล์ที่ git ระบุชื่อมีสองไฟล์นี้เท่านั้น
+
+---
+
+## ⑦ เพิ่มเติม 08:2x — ข้อบกพร่องข้อที่ 5 ที่เพิ่งโผล่ (แพตช์ ⑤)
+
+รอบ 08:22 ผ่าน guard แล้ว `committed 9 path(s)` แล้ว push โดนปฏิเสธ non-ff (ปกติ) แล้ว rebase **แล้วตาย**:
+
+```
+error: cannot rebase: You have unstaged changes.
+error: Please commit or stash them.
+```
+
+แล้วสคริปต์เขียน `SYNC_NEEDS_HUMAN.txt` ซึ่งประกาศว่า:
+
+> *"a conflict means two machines wrote the same thing - the assumption the whole
+> two-machine design stands on has broken somewhere"*
+
+🔴 **นี่คือการวินิจฉัยผิด** — `cannot rebase: You have unstaged changes` **ไม่ใช่ conflict**
+มันคือ **precondition ของ rebase ไม่ครบ** (worktree สกปรก) ซึ่งเป็นคนละเรื่องกันโดยสิ้นเชิงกับ
+"สองเครื่องเขียนไฟล์เดียวกัน" · ตัวจริงในเคสนี้คือไฟล์ tracked ที่ถูกแก้ค้างไว้ในเครื่อง
+(ผู้ช่วยแก้ `external\00_SEARCH_HERE_FIRST.md` เมื่อ ~01:01 แล้วไม่มีใคร commit)
+
+**ผลเสีย:** สคริปต์ยก **HALT ถาวร** (`Finish 7`) ให้กับอาการที่แก้ได้ด้วย `git commit` หนึ่งบรรทัด
+⇒ ต้องมีคนมาลบไฟล์ halt ด้วยมือ ⇒ ระบบหยุดยาวอีกรอบ
+
+### แพตช์ ⑤ — แยก "worktree สกปรก" ออกจาก "conflict จริง"
+
+```powershell
+$rb = GitRun $BridgeRepo @('rebase', ('origin/' + $Branch))
+if ($rb.Code -ne 0) {
+    GitRun $BridgeRepo @('rebase', '--abort') | Out-Null
+
+    # อาการนี้ไม่ใช่ conflict: rebase ไม่ยอมเริ่มเพราะ worktree สกปรก
+    # แก้ได้ด้วยการ commit ไฟล์ที่ค้าง - ไม่ใช่เหตุให้ HALT ถาวร
+    if ($rb.Out -match 'cannot rebase' -and $rb.Out -match 'unstaged changes') {
+        $dirty = (GitRun $BridgeRepo @('status','--porcelain','--untracked-files=no')).Out.Trim()
+        Shout '[4]' 'rebase could not start - the worktree has modified tracked files:'
+        foreach ($d in ($dirty -split "`n")) { Log '[4]' ('  ~ ' + $d) }
+        WriteAsciiFile $attnPath @(
+            "SYNC NEEDS ATTENTION  $(Stamp)"
+            ''
+            'The rebase could not START.  This is NOT a content conflict and the'
+            'two-machine assumption has not broken.  A tracked file is modified on'
+            'this machine and was never committed.  Commit it (or discard it) and'
+            'the next round goes through by itself.'
+            ''
+            'modified tracked files:'
+            ($dirty)
+        )
+        Finish 4 'STOP_DIRTY_WORKTREE_BLOCKS_REBASE' 'unstaged changes'   # <- ไม่ใช่ HALT ถาวร
+    }
+
+    # ที่เหลือคือ conflict จริง - HALT ถาวรเหมือนเดิม ถูกต้องแล้ว
+    ...
+}
+```
+
+🔴 **และไม่ว่าจะแพตช์หรือไม่ ก็ควรแก้ที่ต้นทางด้วย: แพตช์ ① ทำให้ `external\00_SEARCH_HERE_FIRST.md`
+ตกอยู่ในกลุ่มไฟล์ที่ push ออกได้** ⇒ มันจะถูก commit อัตโนมัติตั้งแต่รอบแรก และไม่มีวันค้างเป็น
+worktree สกปรกให้ rebase สะดุด · เคสนี้จึงเป็นหลักฐานชิ้นที่สามในวันเดียวว่าหลุม "tracked แต่ push ไม่ได้"
+คือต้นเหตุร่วมของทุกอาการ
+
+### สรุปตารางใหม่
+
+| อาการ | ครั้ง | แพตช์ที่ปิด |
+|---|---:|---|
+| `AGENTS.md` แก้ในเครื่อง -> ff ตัน | 56 | ① |
+| `CHIEF_CONTINUATION.md` แก้ในเครื่อง -> ff ตัน | 40 | ③ |
+| ไฟล์ใหญ่ 1 ไฟล์ปิดทั้งรอบ | 1 | ② |
+| ตันแล้วเงียบ | ทั้งหมด | ③ |
+| วิดีโออยู่ในโฟลเดอร์เพดาน 2 MB | 1 | ④ |
+| **worktree สกปรก -> HALT ถาวรโดยไม่จำเป็น** | **1** | **⑤ (+ ① ที่ต้นทาง)** |
