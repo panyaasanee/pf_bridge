@@ -57,28 +57,58 @@
   echo-list เท่ากับ list ปกติ · เส้นทาง make_state_class จริง: event ฝั่ง accept และฝั่ง refuse
   ของเลน pickup ถึง exporter ทั้งคู่ · default = list ธรรมดา ไม่มี output · CLI wiring (ast-bound)
 
-### ผลรวมเทส
+### ผลรวมเทส (ตัวเลขสุดท้าย หลังแก้ defect ของ adversary)
 
-- สวีตเต็ม: **2164 passed / 324 skipped / 4437 subtests เขียว(cloud sanity)** — เพิ่ม +14 จาก main
-  (2150) = เทสใหม่พอดี (pickup: −2 +6 ⇒ +3? จริง 47→50 = +3 · event_export +11)
-- skip count **ไม่ขยับ** (324 ตรงพิน SKIP-CENSUS)
-- ไฟล์ที่แตะ 6: `src/pirateforce_foundation/app.py` · `src/pirateforce_foundation/runtime.py` ·
+- สวีตเต็ม: **2166 passed / 324 skipped / 4437 subtests เขียว(cloud sanity)** — เพิ่ม +16 จาก main
+  (2150): pickup 47→50 (+3 — ถอด 2 เติม 6 แต่มี 1 เทสในไฟล์เกิด runtime) · event_export ใหม่ +13
+- skip count **ไม่ขยับ** (324 — `docs/PYTEST_SKIP_PINS.json` ไม่แตะ · หมายเหตุจาก adversary D6:
+  ไฟล์นั้น pin design-skip ตัวเดียว ส่วน 324 คือ skip ระดับสวีต — สองข้อเท็จจริงคนละชั้น)
+- ไฟล์ที่แตะ 7: `src/pirateforce_foundation/app.py` · `src/pirateforce_foundation/runtime.py` ·
   `tests/test_pickup_listener_hypothesis.py` · `tests/test_event_export.py` (ใหม่) ·
+  `tests/test_foundation_legacy_seam.py` (docstring — ตามกฎ same-commit ของไฟล์เอง · adversary D4) ·
   `docs/HYPOTHESIS_LEDGER.json` · `tools/verify_hypothesis_ledger.py`
+- **commit `99bfa96` บน `claude/amazing-goodall-0zrl6i` → PR โค้ด #23** (มี marker · รอ gate ·
+  workflow merge เองเมื่อเขียว) — รอบถัดไปอ่านคำตัดสิน gate ของ head นี้ตามทาง D
 
-## adversary (บังคับก่อน commit)
+## adversary (รันจบก่อน commit จริง · defect 6 ข้อ — แก้ครบ D1–D5 · D6 แก้ที่ถ้อยคำเอกสารรอบนี้)
 
-- ⏳ pf-adversary กำลังรัน ณ เวลาที่เขียนบล็อกนี้ — ผลจะเติมท้ายไฟล์นี้ก่อนเปิด PR โค้ด
-  (กติกา: commit โค้ดเกิดหลัง adversary จบและแก้ defect ครบเท่านั้น)
+- **D1 (medium):** exporter ฉบับแรก raise ทะลุเข้า dispatch ได้ (stream ตาย/BrokenPipe) —
+  สาธิตแล้วว่า latch one-shot ถูกเผาและ **game listener thread ตายเงียบทั้งเส้น**
+  ⇒ แก้: ห่อ export ทั้งก้อนด้วย try/except — เสียบรรทัด diagnostic หนึ่งบรรทัด ดีกว่า dispatch เปลี่ยนพฤติกรรม
+  + เทสใหม่ dead-stream
+- **D2:** อักขระควบคุม ASCII (`\x0b` `\x0c` `\x1c`–`\x1e`) รอด backslashreplace ⇒ หนึ่ง event
+  แตกเป็นสองบรรทัดได้ ⇒ แก้: escape ทุกตัวนอกช่วง printable เป็น `\xNN` + เทส
+- **D3:** docstring อ้าง "seq ทั้ง process" แต่ implementation เป็นต่อ exporter ⇒ แก้ docstring ให้ตรงจริง
+- **D4:** กฎใน docstring ของ seam file ("ทำ mode ให้ประกอบกันได้ ต้องประกาศใน commit เดียวกัน")
+  ⇒ เติมบล็อกประกาศลงวันที่ใน docstring (ไม่มีเทสของไฟล์นั้นขยับ)
+- **D5 (info):** เส้น `stream=None → sys.stdout` ไม่เคยถูกเทส ⇒ เติมเทส redirect_stdout ·
+  ส่วน **เส้น CLI composed happy-path เต็ม (app.main + --db จริง) ยังไม่เคยรัน** — จดเป็น nonclaim ข้างล่าง
+- **D6 (info):** ข้ออ้าง "ทุกไฟล์ที่แตะ ascii+cp874" เป็นเท็จสำหรับ 2 ไฟล์ที่มีไทยอยู่ก่อนแล้ว
+  (ledger/tool — ของเดิม ไม่ใช่ diff รอบนี้ · บรรทัดที่เพิ่มรอบนี้ ASCII ล้วนทุกบรรทัด) + ถ้อยคำ skip-pin ข้างบน
+- **ข้ออ้างที่ adversary พยายามหักแล้วหักไม่ได้ (verify เองทั้งหมด):** กวาดครบ 276 คู่ + 22 สามตัว —
+  มีคู่เดียวผ่าน gate · ไม่มีทางเขียน/แทน `self.events` นอก append (grep ครบทั้ง src/ current/) ·
+  default boot ไม่เปลี่ยน · สองเลน disjoint จริง (ชื่อ event ไม่ชนกัน — วินัย attribution ใช้ได้) ·
+  ledger amendment ตรงจดหมายและ pin เดินถูก · ลำดับด่าน CLI พิสูจน์เทส CLI-pair จริง ·
+  adversary รันสวีตเต็มซ้ำเอง exit 0 ตรงตัวเลข
 
-## คิว / ใบเทส
+## คิว / ใบเทส (ผล pf-queue-author — ใส่ลง GAME_TEST_QUEUE.md แล้วในรอบนี้)
 
-- ⏳ pf-queue-author กำลังร่าง **GT-063** (เลขยืนยันว่างแล้วจากคิว ณ ต้นรอบ) + snippet แก้เงื่อนไข (ข)
-  ของ **GT-060** (คำเคาะ composition มาแล้ว ⇒ (ข) เหลือ GT-045 เทสตา PASS + รอ merge โค้ด composed)
-- ทั้ง GT-060/GT-063 ยังติด (ค) ปลดพัก attended — Panya ยังไม่ปลด (จดหมาย 1831 ข้อ ④)
+- **GT-063 ITEMOPERATE-RES-GREENLINE-SHAPE-001** เปิดแล้ว (เลขยืนยันว่างจากคิว ณ ต้นรอบ):
+  sweep 3 ทรงของ `0x4C13` (control count=0 ตรง capture · count=1 id `2400901` qty 1 · qty 5) ·
+  P1–P4 · pass criteria สองชั้น · **BLOCKED (ก) เลน sweep ฝั่ง server ยังไม่มีในโค้ด — เลนโค้ดรอบถัดไป
+  แล้วรอ merge · ชื่อ flag/label ในใบเป็น [เสนอ] ทั้งหมด ห้ามบูตด้วยชื่อเดา** · (ข) รอปลดพัก attended
+- **GT-060 เงื่อนไข (ข) แคบลง:** คำเคาะ composition มาแล้ว ⇒ เหลือ GT-045 เทสตา PASS (นัด 26 ส.ค.)
+  + โค้ด composed-boot (PR #23) merge เข้า main
+- ข้อควรระวังที่จดไว้ในใบ: การรวม GT-063 เข้าบูตคู่ GT-060 = composition **สามเลน** ซึ่งเกิน
+  allow-list ปัจจุบัน (อนุมัติแค่คู่) — ต้องขอ Panya เพิ่มทีละคู่ ห้าม chief อนุมัติเอง
 
 ## สิ่งที่ยังไม่ได้พิสูจน์ (nonclaims ของรอบ)
 
 - ไม่ได้พิสูจน์ว่า client จริงยิง `0x4543` หรือวาด drop-object — นั่นคือหน้าที่ GT-045/GT-060/GT-063
-- เขียว(cloud sanity) ไม่ใช่ gate ตัวจริง — gate = Actions (subset) ตอน PR + gate เต็มบนสะพาน
+- เขียว(cloud sanity) ไม่ใช่ gate ตัวจริง — gate = Actions (subset) ตอน PR #23 + gate เต็มบนสะพาน
 - exporter ยังไม่เคยถูกเห็นบน console cp874 จริง — พิสูจน์ด้วยเครื่องมือ encode ในเทสเท่านั้น
+- **เส้น CLI composed happy-path เต็ม** (app.main ด้วยสอง flag + `--db` มีจริง จนถึงบูต) ยังไม่เคยรัน —
+  พิสูจน์ถึงชั้น make_state_class + ลำดับด่าน CLI เท่านั้น (adversary D5) · ป้าย mode composed
+  บน console ก็ยังไม่เคยแสดงจริงเช่นกัน — ผู้เทสตรวจหัวหน้าต่างตอนบูต composed ครั้งแรก
+- ตัวเลขรอบ: จบรอบโดยใช้ ~290k token (วัดจาก budget ของเซสชัน ณ จุดเขียนบรรทัดนี้ — จดตามกติกา
+  "รอบข้ามต้องถูก" เพื่อให้มีฐานเทียบ; รอบนี้เป็นรอบทำงานเต็ม ไม่ใช่รอบข้าม)
