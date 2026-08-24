@@ -94,7 +94,17 @@ $BAD_NAME_PARTS    = @('gameclient', 'capture', 'pirateforce.sqlite')
 # The extension check and the 2 MB size check still apply to a waived path, and
 # every path outside this list still gets the full guard.
 # Adding an entry widens what may be committed - Panya rules on each one.
-$NAME_GUARD_WAIVER = @('notes_to_chief/|.md')
+# 2026-08-24 19:2x - Panya ruled the same waiver for the four tool files whose
+# names carry 'capture' because they VALIDATE captures, they are not captures.
+# Why widening to external/ and staged/ is safe: both live in SHARED_TRACKED,
+# which is scanned with --untracked-files=no, so only a file ALREADY IN GIT can
+# become a candidate there - a renamed proprietary file dropped in cannot ride
+# along.  And GameClient.bin is 14,759,424 bytes, so the 2 MB size check below
+# refuses it regardless.  Two independent backstops, neither one waived here.
+$NAME_GUARD_WAIVER = @('notes_to_chief/|.md',
+                       'external/|.py',
+                       'staged/|.py',
+                       'staged/|.ps1')
 $ALLOWLIST         = @('notes_to_chief', 'evidence_screens')
 # Paths that two parties legitimately write: the chief edits them on main, and the
 # assistant or the tester edits them on this disk.  Until 2026-08-24 they were
