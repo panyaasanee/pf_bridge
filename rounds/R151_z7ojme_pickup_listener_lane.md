@@ -96,4 +96,27 @@
 2. คำถามเดิมที่ยังค้าง: ทรง `0x4C13` แบบไหนยิงบรรทัดเขียว id 131 — เลน static ประกาศหมดแล้ว ต้องเป็นใบ attended
    (ยังไม่เปิดใบ รอคุณเคาะตามเกณฑ์จบของใบ RE-059)
 
-(commit/PR · คิว GT-060 · จดหมาย จะเติมท้ายรอบ)
+## commit / push / PR
+
+- repo โค้ด: commit `a64d589` (10 ไฟล์: ใหม่ 3 แก้ 7 · staged นับตรงประกาศ · ไม่มี deletion · HEAD ขยับยืนยันแล้ว)
+  → push `claude/amazing-goodall-z7ojme` → **PR #22** (marker `PF-AUTOMERGE: v4` ครบ · non-draft) — รอ gate ·
+  workflow merge เอง · **รอบหน้าเช็คผล gate ของ PR #22 ด้วยทาง D (`ci/<sha>.json` เทียบ sha ตามสี่กฎ)**
+- `pf_bridge`: ใบ GT-060 เข้า `GAME_TEST_QUEUE.md` (ท้ายไฟล์ + บรรทัดสารบัญ) · จดหมาย
+  `FROM_CHIEF_R151_TO_ATTENDED_20260824_1741.md` · ไฟล์รอบนี้ · ดัชนีต่อท้าย `CHIEF_CONTINUATION.md`
+
+## ลูกมือที่ใช้ (ครบตามกติกา ④)
+
+pf-static-re (ขุดข้อเท็จจริง — เปลี่ยนขอบเขตรอบจริง) · general-purpose (implement + แก้ defect สองรอบ) ·
+pf-adversary (บังคับก่อน commit — จับ 4 แก้ 4) · pf-queue-author (ใบ GT-060)
+
+## เรื่องที่ไม่ได้พิสูจน์ (nonclaims ของรอบ)
+
+- opcode `0x4543` เป็นค่า derive จาก name-hash — **ไม่เคยเห็นบนสาย** · ถ้าผิด เฟรมจริงจะไหลลง frozen v141
+  dispatch เงียบ ๆ (จดพฤติกรรมนี้ไว้ใน docstring แล้ว — รอบ attended ต้องเก็บ wire capture เสมอถึงอ่านผลได้)
+- ไม่พิสูจน์ว่า client ใส่อะไรใน `object_ref_u32` · ไม่แตะคำถาม id-131 · ไม่พิสูจน์การเก็บของสำเร็จ
+- ยังไม่มีบูตใดที่พิสูจน์แล้วว่ามี drop-object วาดจริงให้คลิก — GT-060 จึง BLOCKED-CONDITIONAL ทั้งใบ
+- เขียวทั้งหมดในรอบ = **เขียว(cloud sanity)** — gate จริงคือ Actions (PR #22 ยังรอ)
+
+## สรุปเวลา/กลไก
+
+- เริ่ม ~16:50 จบ ~17:4x (+07:00) · จบรอบ: push ครบ → ปลด draft PR #52 → แก้หัวข้อ/บอดี้ (ลำดับ ①②③ ตาม v5)
