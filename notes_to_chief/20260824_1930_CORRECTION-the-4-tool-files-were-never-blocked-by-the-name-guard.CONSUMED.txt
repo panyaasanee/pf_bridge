@@ -1,0 +1,3 @@
+consumed by chief cloud round R154 (session exciting-goldberg-276ttl) 2026-08-24 ~19:5x +07:00
+original stays in place per the R108 rule (sync refuses deletions)
+copy: notes_to_chief/consumed/20260824_1930_CORRECTION-the-4-tool-files-were-never-blocked-by-the-name-guard.md

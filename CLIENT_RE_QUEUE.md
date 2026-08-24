@@ -76,6 +76,8 @@ decoder ฝั่ง server ยืนบน W codec ที่ commit แล้�
 
 **สถานะ (R152 · 2026-08-24 ~18:2x +07:00):** ✅ **RE-062 DONE** (ผลหน้าสะพาน 17:01 +07:00 · จดหมาย `notes_to_chief\20260824_1701_RE-062-RESULT-INBOUND-OTHER-PATH-NO-SLOT-WRITE.md`) — คำตอบ **(ค) เส้นทางอื่น**: inbound สร้าง `CSkillAttr` ชั่วคราวได้ผ่าน factory แต่ resolve/insert ลง **generic attribute map** ด้วย class id `0x1661` เท่านั้น · **ไม่มีแขนงใดเขียน `[actor+0x3E8]`** (slot มาจาก `CMyActor` ctor · bind ตอน null = no-op ไม่ repair) ⇒ กุญแจอ่านผลลบ GT-059 พร้อมแล้ว (ดูใบ GT-059 ใน `GAME_TEST_QUEUE.md` — อัปเดต R152) · **ไฟล์นี้ไม่มีใบเปิดค้างแล้ว — 0 ใบ**
 
+**สถานะ (R154 · 2026-08-24 ~20:xx +07:00):** 🆕 เปิด **RE-064 ITEMOPERATE-RES-AFFECTED-ELEMENT-SHAPE-001** (ท้ายไฟล์) — ชี้ขาดทรง per-element ของ `0x4C13` ตอน `affected_identity_count>0` (R13 `0x005ED2F0` อยู่ใน loop ไหม) · เหตุ: chief R154 เปิดเลนโค้ด GT-063 (HYP-PF-037) โดยตรึง count=0 ทุกเฟรมเพราะทรงนี้ยังเปิด — ปิดใบนี้ = ปลดล็อก sweep variant count>0 · **ใบเปิดจริงตอนนี้: RE-064 ใบเดียว**
+
 ---
 ## 🆕🔬 GT-052 CLASS-SKILL-TABLE-001 [STATIC-ON-BRIDGE]: ~~dump ตารางอาชีพ + ตารางสกิล~~ ✂️ **ตีความคอลัมน์ + ผูก TEXTDATA + ผูกไอคอน** — ตาราง dump แล้วทั้งคู่ (`gamedata\` · จดหมาย 2150)  [✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 00:44 (+07:00) · บันทึกโดย chief R135 · ผลลบติดใบ: ไม่พบ legend ของ `n_TARGET` ในชุดที่ค้น — ห้ามตั้ง label ("ไม่พบ" ≠ "ไม่มีใน client")**]
 
@@ -1112,3 +1114,75 @@ objective หนึ่งประโยค: **ตัดสินจากอิ
   3. **ไม่มีแขนงใดใน decode/handler/lookup/insert/bind/apply เขียน `[actor+0x3E8]`** — exhaustive overlapping decode รอบ displacement `0x3E8` พบ write 13 จุดทั้งอิมเมจ แต่ intersection กับ inbound spans = **0** (ผลลบไม่ได้อาศัย linear disassembly)
   4. slot สร้างที่ `CMyActor` ctor (`0x44CA71` zero · `0x44CBC1` เขียน pointer + register เข้า live manager) — เกิดก่อนรับเฟรม · bind `0x4698B0` อ่าน slot ที่ `0x4698DF` โดยไม่สร้าง · apply `0x751C70` ตรวจ null แล้ว return
   ⇒ **ผลต่อ GT-059:** sender ซ่อม slot null ไม่ได้เชิงโครงสร้าง แต่ normal construction สร้าง slot ไว้ก่อนแล้ว — ผลลบ GT-059 ต้องแยกเคส `slot null` / `slot non-null + gate อื่น` ด้วยหลักฐาน runtime · nonclaims เต็มอยู่ในจดหมาย (ไม่อ้างว่า slot เป็น null จริงใน runtime · ไม่อ้างว่า slot ไม่มีทางถูก clear หลัง construction)
+
+## 🆕🔬 RE-064 ITEMOPERATE-RES-AFFECTED-ELEMENT-SHAPE-001 [STATIC-ON-BRIDGE]: pin ทรง wire ต่อ element ของ affected-identity ใน ItemOperateVitalRes (0x4C13) ตอน R10 (affected_identity_count) > 0 — เดินไบต์บนอิมเมจ read-only ของเครื่องสะพาน · ตัดสินว่า call ไม่จำแนก R13 (0x005ED2F0) อยู่ "ใน" loop ต่อ element หรือเป็น trailer ของ message · และ tag/width order ของหนึ่ง element  [PENDING — ใบเปิดโดย chief R154 · 2026-08-24 ~20:xx +07:00]
+
+ที่มา:
+- RE-059 (DONE · EXTRACTED 5/5) พิสูจน์แล้ว: ทั้ง 5 เฟรมจริงใน capture corpus มี affected_identity_count (R10) = 0 ทุกเฟรม ⇒ **ไม่มีเฟรมจริงสักเฟรมที่ walk ทรง element ต่อ R10>0 ได้** · ทรง element วันนี้จึงเป็น candidate ล้วน ไม่เคยเดินกับ record จริง
+- candidate ปัจจุบัน (จาก PF_SERIALIZER_FIELDS.tsv แถว file_off_claim 769-794 + ความกว้างจาก PF_TAG_CENSUS.tsv):
+    R11 = tag 0x32 qword (u64, 8 ไบต์) `STACK@0x005EDA20+0x1C` file_off 0x001ECFBD VA 0x005EDBBD
+    R12 = tag 0x08 u8 (1 ไบต์)       `STACK@0x005EDA20+0x1B` file_off 0x001ECFCD VA 0x005EDBCD
+    R13 = CALL_UNCLASSIFIED:0x005ED2F0 file_off 0x001ED006 VA 0x005EDC06 (direct_call_not_proven_serializer)
+  ⇒ candidate เรียง "u64 tag 0x32 (R11) แล้ว u8 tag 0x08 (R12) ต่อ element" · 🔴 R13 ยังไม่รู้ว่าอยู่ในหรือนอก loop
+- serializer 0x4C13 ขา R = 0x005EDA20 span [0x005EDA20, 0x005EDC31) sha256 b5f6a1586a810c0a98ceb7c925a0d4afa10cff41db661eb0947b8918f3a11d54 (GT-054 verify 392/392) — 🔴 ห้าม re-derive span ซ้ำ
+
+ทำไมสำคัญกว่าที่หน้าตามันดู:
+- รอบ cloud R154 ของ chief สร้างเลน sweep ฝั่งเซิร์ฟเวอร์ GT-063 (ITEMOP-RES-GREENLINE-001 · HYP-PF-037) โดย **ตรึง affected_identity_count = 0 ในทุกเฟรม** เพราะทรงนี้ยังเปิดอยู่
+- เฟรม count=1 ที่ร่างไว้ในตั๋วนั้น **ประกอบแบบ fail-closed ไม่ได้** จนกว่าใบนี้จะปิด — ปิดใบนี้ = ปลดล็อก sweep variant count>0 (HYP-PF-037 เวอร์ชันใหม่ ภายใต้ stop_rule เดิม ต้องมีรอบของตัวเอง · ใบนี้ไม่เปิดรอบนั้น)
+
+หมวด: STATIC-ON-BRIDGE — อ่านอิมเมจ read-only + TSV บนดิสก์สะพานล้วน · 🔴 ไม่บูตเซิร์ฟเวอร์/client · ไม่มี LOCK_GAME · ไม่ต้อง capture · กติกา stamp/teardown/canonical/DB-copy ไม่เกี่ยวกับใบนี้
+
+### 🔴 ช่องบังคับ (18:22): ค้นใน pf_bridge\external\ แล้ว
+(ผู้รับงานกรอก: เจอ <อะไร> / ไม่เจอ) — chief ค้นให้แล้วตอนเปิดใบ ไม่ต้องค้นซ้ำ:
+- PF_SERIALIZER_FIELDS.tsv แถว 769-794 = ทรงขา R/W ของ 0x4C13 เต็ม (R11/R12/R13 ตามข้างบน)
+- PF_PROTOCOL_REGISTRY.tsv: ItemOperateVitalRes serializer_va=0x005EDA20 · ItemBagAttr (nested) serializer_va=0x0046EC10 · call site ใน 0x4C13 R-side (R6) = 0x0046F4D0
+- PF_TAG_CENSUS.tsv = ความกว้างต่อ tag (0x32 -> 8 · 0x08 -> 1)
+- PF_PROTOCOL_PRIORITY.tsv: serializer_status=OPEN · blocker "direct_call_not_proven_serializer" = ของแถว call รวมถึง R13 0x005ED2F0
+- 🔴 สิ่งที่ชุดส่งมอบ **ไม่มี**: การจำแนกว่า 0x005ED2F0 (R13) เป็น serializer/nested/loop-internal และ loop bound ที่กิน R10 element
+
+### 🔴 ช่องบังคับข้อสอง (R132): ค้น gamedata แล้ว
+(ผู้รับงานกรอก) — คาดว่า gamedata\ ไม่ตอบใบนี้ (ตารางข้อมูลเกมไม่ใช่ control flow ของ serializer) แต่ต้องกรอกตามกฎ
+
+### objective (claim เดียว)
+**เดินไบต์บนอิมเมจ (recursive CFG · byte-exact) เพื่อ pin ทรง wire ต่อ element ของ affected-identity ใน 0x4C13 ขา R ตอน R10>0 ให้ครบ: (ก) loop ที่กิน R10 element เริ่ม-จบที่ instruction ไหน (bound) · (ข) call ไม่จำแนก R13 (0x005ED2F0) อยู่ INSIDE loop นั้นหรือเป็น trailer หลัง loop · (ค) tag/width order ของหนึ่ง element ตามที่ code เขียน/อ่านจริง**
+🔴 คำตอบต้องเป็นประโยคเดียว รูปใดรูปหนึ่ง:
+- `pin ได้ — element = <ลำดับ tag/width> · R13 0x005ED2F0 = INSIDE-loop|TRAILER · loop bound [<start VA>, <end VA>) กิน R10 รอบ · หลักฐาน span+sha`
+- `pin ได้บางส่วน — <ส่วนที่ได้> · ส่วนที่ตัน <ที่ instruction ไหน เพราะอะไร>`
+- `pin ไม่ได้จากชั้น static — control flow ตันที่ <VA> เพราะ <เหตุผลข้อเท็จจริง> · เข้าเกณฑ์จบ`
+
+### db / server args
+ไม่ใช้ DB · ไม่บูตเซิร์ฟเวอร์/client — เปิดอ่านอิมเมจ + TSV อย่างเดียว · 🔴 ห้ามแก้อิมเมจ · ห้ามแก้ตารางส่งมอบ · ห้ามบูตอะไร · sha256 ของทุกไฟล์ที่พึ่ง ก่อน-หลัง ต้องตรงกัน (อิมเมจ GameClient.local.bin sha256 9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623 ค่าเดี่ยว ต้องไม่ขยับ)
+
+### คำทำนาย (🔴 นี่คือ **คำทำนาย** ไม่ใช่ข้อเท็จจริง — ทำนายผิด = ผลงาน)
+จาก field order candidate (R11 ก่อน R12) และตำแหน่ง R13 ที่เขียนหลัง R12 ในลำดับ serializer:
+- **ทำนายว่า** loop ต่อ element กิน R11 (0x32 u64) แล้ว R12 (0x08 u8) เป็นคู่ต่อ element และวน R10 รอบ
+- **ทำนายว่า** R13 (0x005ED2F0) เป็น **TRAILER** หลัง loop จบ (call เดียวท้าย message) ไม่ใช่ loop-internal — เพราะ file_off ของมัน (0x001ED006) อยู่หลังทั้ง R11/R12 และไม่มี tag ฟิลด์คั่น
+- 🔴 **ถ้ากลับกัน** (R13 อยู่ใน loop / element เป็นลำดับอื่น / loop กินมากกว่าคู่ R11-R12) = ข่าวใหญ่: เฟรม count=1 ที่เคยร่างไว้จะมีจำนวน call/element ผิด ⇒ ผู้รับงานแค่รายงาน 🔴 **ห้ามแก้ encoder/ledger/เฟรมร่างเอง**
+
+### จ็อบ (control gate: 1 ต้องผ่านก่อนถึงจะเชื่อ verdict ของ 2/3)
+1. **[control gate] reproduce loop ที่รู้แล้วก่อน** — เดิน per-element loop ที่ RE-059 ถอดสำเร็จ (update collection ใน nested ItemBagAttr เข้าถึงผ่าน call R6 0x0046F4D0 · element = 32 qword + 14 u32 + 0F + 0F + 08 + 08 + 0B) ด้วยวิธี recursive CFG เดียวกับที่จะใช้กับ R11-R13 · แสดงว่า method ระบุ loop bound + counter ของ loop ที่ "รู้คำตอบแล้ว" ได้ถูก · 🔴 method ที่ reproduce loop เดิมไม่ได้ = verdict ต่อ R11-R13 เชื่อไม่ได้ หยุดรายงาน
+2. **จำแนก R13 0x005ED2F0** — เปิดอิมเมจอ่าน 0x005ED2F0 · ตอบว่าเป็น (i) serializer ฟิลด์ · (ii) nested serializer (เรียก sub-serializer) · (iii) loop-internal helper ของ element · (iv) trailer helper เดียวท้าย message · แนบ [start,end) + file offset + len + sha256 ของ 0x005ED2F0 · recursive CFG decode error = 0 · 🔴 ห้ามใช้ linear disassembler เป็นหลักฐานผลลบ (บทเรียนรอบ 83)
+3. **pin loop bound + element order** — ในช่วง [0x005EDBBD (R11), 0x005EDC31) หา back-edge/counter ที่กิน R10 (STACK@...+0x54) · จด: instruction ที่เพิ่ม counter · การเปรียบเทียบกับ R10 · call R13 อยู่ในหรือนอก body · ลำดับ tag/width ที่ถูก emit/consume จริงต่อรอบ · 🔴 ถ้า control flow ไม่ลงตัว = หยุดที่ instruction นั้น จด VA/opcode/ที่คาด ห้าม "ปรับ" ให้ลงตัว
+
+4. **[rider · 15 ไบต์เดียว] เทียบ PC prefix ของเฟรม capture #1 กับ prefix ของ envelope v141** — เปิด capture file (sha256 2e43b706... · PC index 101 · wrapper off 15 — extractor ของ RE-059 หาอยู่แล้ว) อ่าน 15 ไบต์แรกของ PC block แล้วเทียบกับ prefix ที่ `make_runtime_vitals` ของ v141 สร้าง (`129D6E140000000008040B02120100`) · ตอบ: `identical` / `differs ที่ offset <n>: capture=<hex> v141=<hex>` · เหตุ: เลน HYP-PF-037 replay byte-exact ได้แค่ชั้น message — ถ้า attended เจอ ErrorData ที่เฟรม control จะแยกไม่ออกว่า prefix หรือ session context จนกว่าจะเทียบ 15 ไบต์นี้ (falsification clause ของ ledger ชี้มาที่ rider นี้)
+
+### pass criteria — 🔴 สองชั้น
+**ชั้น wire/DB (ชั้นเดียวที่ใบนี้ผลิตหลักฐานได้):**
+- คำตอบ objective ประโยคเดียว
+- จ็อบ 1 (control gate) ผ่าน: loop ที่รู้แล้ว (ItemBagAttr update collection) ถูก reproduce bound/counter ตรง RE-059
+- จำแนก R13 0x005ED2F0 หนึ่งใน (i)-(iv) + [start,end)+file_off+len+sha256 · CFG decode error = 0
+- loop bound ต่อ R10: back-edge VA + counter VA + compare VA · verdict INSIDE|TRAILER ของ R13 · ลำดับ element (tag/width)
+- ทุกข้อสรุป re-derive ได้ · ถ้าเขียนสคริปต์ commit ลง tools/ รันซ้ำได้ + exit 0 · 🔴 print ต้อง ASCII ล้วน (cp874)
+**ชั้น client-observable: 🔴 ว่างเปล่าโดยเจตนา** — อ่านอิมเมจบนดิสก์ล้วน ไม่บูตอะไร ไม่มีจอ · 🔴 ห้ามอ้างผล static เป็นหลักฐานว่าจอเห็นอะไร หรือว่า green line/id 131 อ่านฟิลด์นี้
+
+### 🔴 ผลลบมีค่าเท่าผลบวก
+- `R13 = TRAILER` (ตรงคำทำนาย) = เฟรม count=1 ต้องมี 1 call ท้าย ปลดล็อก sweep variant count>0 · `R13 = INSIDE-loop` (ผิดคำทำนาย) = ข่าวดีที่สุด: เฟรมร่าง count=1 มีจำนวน call ผิด รู้ก่อนเอาเข้ารอบ sweep · `pin ไม่ได้ (control flow ตัน)` = คำถามทรง element ออกจากเลน static ⇒ ต้องพึ่งเส้นทางอื่น (ดูเกณฑ์จบ) กระทบทุกใบที่พึ่ง candidate นี้ รายงานเด่น ๆ
+
+### 🔴 เกณฑ์จบ (บังคับ)
+ถ้าจบที่ `pin ไม่ได้จากชั้น static` (control flow ตันแม้เปิดอิมเมจ) ⇒ คำถาม "ทรง element ตอน R10>0" ออกจากเลน static (candidate เดินกับ record จริงไม่ได้เพราะ corpus มีแต่ count=0) · **ไม่เปิดใบ static เพิ่ม** · เส้นทางสำรอง (🔴 ยังไม่เปิด จดเป็นคำถามเปิดรอ chief): capture ใหม่แบบ attended ที่ทำให้เซิร์ฟเวอร์เราส่ง 0x4C13 ที่ affected_identity_count>0 แล้วเดินไบต์เฟรมจริง — ทางนี้ก็ปิดใบนี้ได้ แต่เป็นชั้น attended คนละรอบ
+
+### nonclaims
+ไม่ตั้ง semantics ของค่า R11/R12/R13 (ห้ามตั้งชื่อ ยัง UNKNOWN — ความยาว/ลำดับ คือความยาว/ลำดับ ไม่ใช่ชนิด) · ไม่อ้างว่าเซิร์ฟเวอร์ต้นฉบับเคยส่ง count>0 (กู้ไม่ได้ตลอดกาล) · ไม่อ้างว่า green line/handler อ่านฟิลด์นี้ · ไม่พิสูจน์ทิศทาง runtime · candidate ทรงจาก serializer ไม่ใช่กฎเซิร์ฟเวอร์ต้นฉบับ · ไม่พิสูจน์ว่า encoder เราถูก/ผิด (แค่ "code อ่าน/เขียนทรงนี้")
+
+### result:
+🔴 `ค้นใน pf_bridge\external\ แล้ว: ___` · 🔴 `ค้น gamedata แล้ว: ___` · (ผู้รับงานกรอก: objective ประโยคเดียว · ผลจ็อบ 1 control gate (reproduce loop เดิมตรง/ไม่ตรง) · จำแนก R13 0x005ED2F0 + span/off/len/sha · loop bound VA + verdict INSIDE/TRAILER · ลำดับ element tag/width · sha อิมเมจ+TSV ก่อน-หลัง · จดหมายเข้า notes_to_chief/)
