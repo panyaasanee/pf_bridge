@@ -2327,6 +2327,8 @@ gap ที่ต้องปิด      ไม่พบ static link จาก 0x
 
 > 🔬 **หมายเหตุ chief R146 (2026-08-24 ~11:5x +07:00 · ไม่ปิดใบ ไม่แก้ pass criteria — เพิ่มเส้นทางปลดล็อกเท่านั้น):** finding "หน้าต่างสกิล (K) เปิดไม่ได้" มี **สมมติฐานต้นเหตุ (ยังไม่พิสูจน์)** จากจดหมาย correction `1147`: client มีข้อมูลสกิลครบ แต่ **server เราไม่เคยส่ง skill STATE (`CSkillModule`/`CSkillAttr`)** ⇒ หน้าต่างอาจไม่มีอะไร populate · pf-static-re R146 ยืนยันว่ารูปไบต์ของสองคลาสนี้ **ปิดบน cloud ไม่ได้** (serializer row EMPTY · capture NOT_OBSERVED · id เป็น name-hash candidate) ⇒ เปิดใบ **RE-061 SKILLSTATE-WIRE-DIRECTION-001** (`CLIENT_RE_QUEUE.md`) เป็นใบทดสอบสมมติฐาน · **ลำดับปลดล็อก GT-058:** RE-061 ปิด wire (static) + ตอบจากอิมเมจว่าไคลเอนต์มี inbound decoder + skill-window-open ขึ้นกับ state ไหม → **บวก** chief เปิดเลนโค้ด sender (opt-in · headless proof) แล้ว rerun GT-058 attended · **ลบ** ตัวขวางมีสาเหตุอื่น ไม่เปิด sender · **UNANSWERABLE** (corpus เป็น emulator-only ตอบ direction ต้นฉบับไม่ได้ — SCENE-013) → รอ Panya ตัดสิน · 🔴 **ใบนี้ยังพัก/ค้างเหมือนเดิม ไม่ถูกปิดด้วยรอบ unattended**
 
+> 🔬 **หมายเหตุ chief R149 (2026-08-24 ~22:xx +07:00 · ไม่ปิดใบ):** เส้นทางปลดล็อกที่ R146 วางไว้ **เดินครบแล้ว** — RE-061 ปิดออกทาง **บวก** (gate `0x761ED0` บน `CSkillAttr` พิสูจน์จากอิมเมจ) ⇒ chief เปิดเลนโค้ด sender แล้ว (**HYP-PF-035** · PR #21 รอ gate) ⇒ ใบ attended ตัวต่อคือ **GT-059 SKILL-ATTR-WINDOW-GATE-001** (ถัดจากใบนี้ในไฟล์) · ผล GT-059 คือสิ่งที่จะตัดสินว่า GT-058 ปิดที่ bounded-negative หรือ rerun ได้จริง
+
 > 🔴 ~~**รอ gate เขียว + merge ก่อน:** เลน server (opt-in scenario) ยังอยู่บน branch `claude/amazing-goodall-bcc9z5` · PR ยังไม่ merge เข้า `main` — **ใบนี้ยังบูตไม่ได้** จนกว่า (ก) PR merge แล้ว~~ *(ปิดแล้ว — ดู 📎 R139 ข้างบน)* และ (ข) resolver คืน BOOT_COMMIT ที่มีเลนนี้ · **และ** (ค) เลน attended ถูกปลดพักโดย Panya — ~~ทั้งสามข้อต้องครบ~~ **เหลือ (ข)+(ค)**
 
 **ที่มา:** ครึ่ง wire ปิดแล้วที่ **GT-050** (`CLearnSkillResultVital` codec CLOSED · จดหมาย `notes_to_chief\20260824_0055_*`):
@@ -2442,3 +2444,112 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt058.sqlite3 --learn-skil
 - **ไม่ claim ว่า count/trailing ที่ต่างกัน map กับความหมายเชิงเกมใด ๆ** — sweep นี้ทดสอบ tolerance/พฤติกรรม ไม่ใช่ decode ความหมาย
 - **ไม่พิสูจน์ทิศทาง (client ส่งกลับหรือไม่)** — ใบนี้ inbound-only observe
 - **result:** (ผู้เทสกรอก: ภาพ S0..S5 + วิดีโอ พร้อม sha256 · คำตอบต่อสเต็ป "จอเปลี่ยนอะไร" ภาษาคน · NO-CRASH/CRASH verdict (+เฟรมที่หลุดถ้ามี) · path raw GAME log + label/sha 5 เฟรม · เวลา · sha canonical ก่อน-หลัง · sha `run_gt058.sqlite3` ก่อน-หลัง)
+
+
+## GT-059 SKILL-ATTR-WINDOW-GATE-001 [attended, in-game]: ส่ง `CSkillAttr` (attr block `0x1661` ขี่ `UpdateAttrVital` `0x309A`) แล้วหน้าต่างสกิล (K / ปุ่ม `Bt_main_Skill` ล่างซ้าย -> `Skill_Main2`) เปิดได้ไหม  [🔴 **PENDING — รอ merge ก่อน:** เลน server อยู่บน PR #21 (`claude/amazing-goodall-zip9tr`) ยังไม่เข้า `main` (รอ PR gate + auto-merge) — **ใบนี้ยังบูตไม่ได้** จนกว่า (ก) PR #21 merge เข้า `main` + gate เขียว · (ข) resolver คืน BOOT_COMMIT ที่มีเลนนี้ · (ค) เลน attended ถูกปลดพักโดย Panya — ต้องครบทั้งสามข้อ]
+
+**ที่มา (สองใบที่ใบนี้ต่อยอด — อ่านก่อนบูต):**
+- **GT-058 finding (correction `1037` + addendum `1056`):** local baseline เปิดหน้าต่างสกิล **(K) ไม่ได้เลย** — hotkey K และคลิกไอคอนตรง ๆ ไม่เปิด ทั้งที่ `C`/`Quest(J)`/`Reward` เปิดได้ปกติ · ช่วงกด K ไม่มี application request วิ่งเลย (C2S เป็น heartbeat 12 ไบต์ล้วน) ⇒ อาการอยู่ฝั่ง client
+- **RE-061 (DONE · จดหมาย `notes_to_chief\20260824_1437_RE-061-RESULT-SKILLATTR-GATE-PINNED.md`):** พินจากอิมเมจ (static) ว่า controller init ของ `Skill_Main2` ที่ `0x761ED0` **return false เมื่อ `[actor+0x3E8]` (`CSkillAttr`) ยังไม่พร้อม** (ctor `0x760DE0` อ่าน slot นี้) · `CSkillAttr` ไม่ใช่ vital เดี่ยว — เป็น attr block `class_id 0x1661` ขี่ `UpdateAttrVital 0x309A` · เส้นทาง apply ฝั่งรับมีจริง (`0x5F2400` -> `0x751C70`) · 🔴 **NONCLAIM ของ RE-061 ที่ใบนี้เกิดมาทดสอบ: หนึ่งแพ็กเก็ตยังไม่ถูกพิสูจน์ว่า "พอ" ให้หน้าต่างเปิด** — init มี base/UI check อื่นก่อน/หลัง gate
+- **เลน server (R149 · HYP-PF-035 SKILL-ATTR-001):** โมดูล `src/pirateforce_foundation/skill_attr_hypothesis.py` · scenario id `skill_attr_hypothesis_attr_sweep` · flag `--skill-attr-hypothesis-scenario` · `production_allowed=false` · ต้องมี `--db` ชี้ไฟล์ที่มีจริง · mutually exclusive กับทุกโหมดอื่น · `database_write=none` (read-only by design)
+- 🔴 **คำถามเปิดจาก adversary R149 (เปิดเป็นใบ RE-062 ใน `CLIENT_RE_QUEUE.md`):** ยังไม่มีใครพิสูจน์ว่าเฟรม `0x1661` **สร้าง** container ที่ `[actor+0x3E8]` ได้เมื่อ slot เป็น null หรือได้แค่ **อัปเดต** ของที่มีอยู่ — ถ้า bind thunk `0x4698B0` no-op ตอน slot null, sweep นี้พลิก gate ไม่ได้เชิงโครงสร้าง ⇒ ผลลบของใบนี้ต้องอ่านคู่กับ RE-062 เสมอ
+
+### objective (claim เดียว)
+**เมื่อไคลเอนต์รับ attr block `CSkillAttr` (`0x1661` ใน `0x309A`) จากเซิร์ฟเวอร์เราแล้ว พฤติกรรมการเปิดหน้าต่างสกิล (K / `Bt_main_Skill`) เปลี่ยนจาก baseline ของ GT-058 หรือไม่ — เปิดได้ (มี/ไม่มีรายการ) หรือยังเปิดไม่ได้เหมือนเดิม**
+(ใบนี้ทดสอบ "sufficiency" ของการรับ `CSkillAttr` ต่อ window gate เท่านั้น — ไม่ตีความความหมายของฟิลด์ใด)
+
+### sweep 2 เฟรมต่อหนึ่ง trigger (พินตามลำดับ · spacing 3.0 s · ยิงซ้ำได้ ไม่ one-shot)
+```
+1. HYP_PF_035_SKILL_ATTR_COUNT0_EMPTY   (record_count=0 · body ว่างที่สุดที่ well-formed · frame 57 bytes)
+2. HYP_PF_035_SKILL_ATTR_COUNT1_KEY1    (1 record: key=1, opaque_u16=0, opaque_u32=0 · ค่า probe ตามใจเรา ความหมายไม่รู้ · frame 68 bytes)
+```
+- 🔴 **ข้อจำกัดเชิงดีไซน์ที่ต้องรู้ก่อนวางมือ:** trigger หนึ่งครั้ง = ออก **ทั้งสองเฟรม** ห่างกัน 3.0 วินาที — แยกยิงทีละ variant ไม่ได้ ⇒ การเทียบ A/B ทำผ่าน (ก) กด K ในหน้าต่าง 3 วิ ระหว่างเฟรม (best-effort · ให้วิดีโอตัดสินทีหลังว่า K ลงก่อน/หลังเฟรม 2) และ (ข) สถานะหลัง sweep จบ (ตัวที่ apply ล่าสุด = COUNT1_KEY1) · **ถ้ากด K ไม่ทันหน้าต่าง 3 วิ ให้จดว่า "A/B แยกไม่ได้ในรอบนี้" ตรง ๆ ห้ามแต่งผล**
+- 🔴 **identity guard:** เลนยิงเฉพาะเมื่อตัวละครที่ select คือ probe identity ที่พิน (`identity_lo 0x10010001` = ตัวละครแรกของ account แรกบน store สำเนาสด) — **ต้องเลือกตัวละครช่องแรก** · ถ้าไม่ตรง เลนปฏิเสธเงียบ (event `skill_attr_hypothesis_identity_not_pinned_no_reply`)
+- 🔴 **version byte 0 ของ vital เป็นดีไซน์เรา ยัง unpinned** — ถ้า client reject/หลุดตั้งแต่เฟรมแรก จุดต้องสงสัยอันดับหนึ่งคือ version byte ไม่ใช่ตัว attr block
+
+### คำทำนาย (คำทำนายที่ผิด = ผล ไม่ใช่ความล้มเหลว)
+- **P1:** หลังรับเฟรม K เปิดหน้าต่างได้ — COUNT0_EMPTY ให้หน้าต่าง**ว่าง** · COUNT1_KEY1 ให้มีอะไรโผล่ 1 แถว/ช่อง
+- **P2:** K ยังเปิดไม่ได้เหมือนเดิมทั้งก่อน-หลัง — **ผลลบที่สมบูรณ์** ⇒ falsify "รับ `CSkillAttr` แล้วพอ" (ตรง NONCLAIM ของ RE-061 — gate `0x761ED0` มี check อื่นขวางอยู่ หรือ `[actor+0x3E8]` ไม่ได้ populate จากเลนรับนี้ — อ่านคู่ RE-062)
+- **P3:** เปิดไม่ได้ใน session ที่รับเฟรม แต่**เปิดได้หลัง relog ที่รับเฟรมก่อนกด K ครั้งแรก** — ชี้ว่า gate อ่าน slot ตอน controller construction (จังหวะสำคัญกว่าการรับ)
+- **P4:** client reject/หลุด — ชี้ version byte 0 ก่อน record semantics
+
+### 🔴 ก่อนบูต — resolve commit เขียว (ท่าเดียวกับ GT-058 · รันเครื่องมือ ไม่ใช่ก๊อป SHA)
+```
+py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch
+```
+- **exit 0** + `BOOT_COMMIT: <sha>` ⇒ `git checkout <sha>` · **exit 3** = ใบนี้รอ gate ไม่ได้รอผู้เทส ห้ามบูต
+- **ยืนยันสี่ข้อกับ `<SHA>` ที่จะบูตจริง (ต้องครบทั้งสี่):**
+```
+git show origin/ci-status:ci/<SHA>.json
+git grep -n "skill-attr-hypothesis-scenario" <SHA> -- src/pirateforce_foundation/app.py
+git cat-file -e <SHA>:scenarios/skill_attr_hypothesis_attr_sweep.json && echo SCENARIO_PRESENT
+git grep -n "COUNT1_KEY1" <SHA> -- src/pirateforce_foundation/ scenarios/
+```
+1. ไฟล์คำตัดสินมี `"conclusion": "success"` และ `"sha"` ตรงชื่อไฟล์ · 2. เจอ flag จริง (**ห้ามใช้ `--help` เป็นหลักฐาน**) · 3. เห็น `SCENARIO_PRESENT` · 4. เจอ label `COUNT1_KEY1` ในซอร์ส
+- **อ่านค่า pin ต่อเฟรมจาก scenario ที่ merge แล้ว:** `scenarios/skill_attr_hypothesis_attr_sweep.json` -> `probe.per_step.<LABEL>.frame_sha256` / `frame_size` (พินซ้ำในโมดูลที่ `SKILL_ATTR_PROBE_FRAME_SHA256`) — **ค่า sha ตัวจริงอ่านจากไฟล์ตอน merge ห้ามฝังเลขในใบนี้**
+- ไม่ครบสี่ข้อ + ยังไม่ได้ค่า pin = **ห้ามบูต** ใบนี้อยู่ PENDING ต่อ
+
+### db (สำเนาเสมอ ห้ามแตะตัวจริง)
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-059_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt059.sqlite3
+```
+- เทียบ sha256 canonical กับ `CANON_SHA.txt` **ก่อนเริ่มและหลังจบ ต้องตรงทั้งสองครั้ง** (canonical ไม่ถูกเปิดตลอดรอบ)
+- เลนนี้ `database_write=none` · เกณฑ์ DB สำเนาใช้แบบที่ผู้เทส GT-058 เสนอและ chief เห็นด้วย: **row-diff ทุกตารางต่างได้เฉพาะ `sessions` +1 แถวต่อการเข้าเกมหนึ่งครั้ง** (ไม่ใช้ "byte-identical" ซึ่งขัดกับ session persist)
+- ตำแหน่งตัวละครรีเซ็ตกลับจุดเกิดทุกบูต (สำเนา DB ใหม่ทุกครั้ง)
+
+### server args (เป๊ะ — opt-in เท่านั้น · `production_allowed=false`)
+```
+py -3 -u -m pirateforce_foundation.app --db state\run_gt059.sqlite3 --skill-attr-hypothesis-scenario scenarios\skill_attr_hypothesis_attr_sweep.json
+```
+- หัวหน้าต่าง console ของ server ต้องขึ้น mode `skill-attr-hypothesis` — ใช้เช็คว่าบูตถูกโหมด
+
+### 🔴 ตัว trigger แชต — 12 ตัวอักษร printable ASCII เป๊ะ (บทเรียนที่เคยเสียเวลาโปรเจกต์)
+- เลนนี้ trigger ด้วย **รูปร่าง** ไม่ใช่สตริงตายตัว: chat-input frame ที่ตัวข้อความเป็น **printable ASCII 12 ตัวพอดี** (classifier `classify_chat_input_attempt` -> `ascii12` — ท่าเดียวกับเลน learn-skill-result) · **สั้น/ยาวกว่านั้นถึงเซิร์ฟเวอร์แต่เงื่อนไขเงียบ ๆ ไม่ผ่าน ไม่มี error** — sweep ไม่ออกเฉย ๆ
+- ใช้สตริงมาตรฐานของใบนี้เพื่อให้ log อ่านง่าย: `skillattr001` (นับ: s-k-i-l-l-a-t-t-r-0-0-1 = 12 ตัว)
+- 🔴 **คลิกช่องแชตให้โฟกัสก่อนพิมพ์** (ตัวอักษรตอนไม่โฟกัส = hotkey) · พิมพ์ครบ 12 ตัวแล้ว Enter หนึ่งครั้ง · **ก่อนกด K ทุกครั้งต้องเอาโฟกัสออกจากช่องแชตก่อน** (คลิกพื้นว่าง) ไม่งั้น K กลายเป็นตัวอักษรในช่องแชต
+- โหมดนี้**ไม่มี echo lane** — บรรทัดที่พิมพ์อาจไม่เด้งกลับในแชต **ไม่ใช่สัญญาณว่า trigger พัง** · หลักฐานว่า trigger ผ่านอยู่ชั้น wire (event `skill_attr_hypothesis_attr_sweep_sent` ใน server log) · ถ้า sweep ไม่ออก เช็ค event ปฏิเสธ: `..._wrong_length/_wrong_text/_wrong_envelope/_no_selected/_wrong_sequence/_identity_not_pinned_no_reply`
+
+### steps
+**ก่อนเริ่ม:** ถือ `LOCK_GAME` · จด boot stamp · เทียบ sha canonical · copy DB สองใบตามบล็อก db
+1. เปิด server ก่อน client เสมอ (`Get-NetTCPConnection -State Established` พอร์ต 10188/10189 = 0 ก่อนเปิด client) — console ขึ้น mode `skill-attr-hypothesis` (🔴 client ที่บูตโดยไม่มี server ตายเองใน ~3.5 นาที)
+2. เปิด client → เลือกเซิร์ฟเวอร์ → dialog PVP ปุ่มซ้าย → หน้าเลือกตัวละคร → **เลือกตัวละครช่องแรก** (identity guard ข้างบน) → **ปุ่มกลางสุดจาก 5 ปุ่มแถวล่าง = เข้าเกม** (ปุ่มซ้ายสุด = ลบตัวละคร **ห้ามกด**)
+3. เข้าแมพ เห็น HP/minimap/ชื่อแมพ → **เริ่มอัดวิดีโอ/continuous capture ตั้งแต่ตรงนี้ยาวจนจบ session** (หน้าต่าง 3 วิ ระหว่างเฟรมต้องพึ่งวิดีโอ)
+4. **BASELINE (ต้องทำก่อนยิงเฟรมใด ๆ — replicate GT-058):** คลิกพื้นว่างให้แน่ใจว่าแชตไม่โฟกัส → กด **K** → คลิกปุ่มสกิลล่างซ้าย (`Bt_main_Skill` · tooltip `สกิล (K)`) → ถ่าย **S0** · คาดว่า**ไม่เปิด**ตาม GT-058 — ถ้า baseline เปิดได้เฉย ๆ ให้จดใหญ่ ๆ (เงื่อนไขใบเปลี่ยน) แล้วทำต่อ
+5. คลิกช่องแชตให้โฟกัส → พิมพ์ `skillattr001` → Enter หนึ่งครั้ง → **คลิกพื้นว่างทันที** (ปลดโฟกัส)
+6. **หน้าต่าง 3 วิ หลังเฟรม 1 (best-effort):** กด **K** หนึ่งครั้งให้เร็วที่สุดหลัง Enter+ปลดโฟกัส → ถ่าย **S1** · วิดีโอจะตัดสินทีหลังว่า K นี้ลงก่อนหรือหลังเฟรม COUNT1_KEY1 — ถ้าไม่ทัน จดว่าไม่ทัน
+7. **หลัง sweep จบ (>5 วิ หลัง Enter):** กด **K** → ถ่าย **S2** · คลิก `Bt_main_Skill` → ถ่าย **S3** · จดผลเป็น tri-state: **เปิด+มีรายการ / เปิด+ว่าง / ไม่เปิด** (ถ้าเปิด: ถ่ายให้เห็นเนื้อในหน้าต่างชัด ๆ ว่ามีอะไร)
+8. ยิง trigger ซ้ำอีกหนึ่งครั้ง (เลนไม่ one-shot) แล้วกด K อีกรอบ → ถ่าย **S4** — กันเคส "ต้องรับมากกว่าหนึ่ง sweep"
+9. จับ NO-CRASH / CRASH: client ยังตอบสนอง (ขยับกล้อง `Q/E` ได้) = NO-CRASH · หลุด/ค้าง = CRASH + จดเฟรม (ชี้ version byte 0 ก่อน)
+10. **SESSION 2 — relog variant (ทดสอบ gate ตอน controller construction):** ออกจากเกมด้วย **X** มุมขวาบน → dialog ยืนยัน → ปุ่มซ้าย → **ปิด server ด้วย** (🔴 server เก็บ session ค้าง — ถ้าไม่ restart server ก่อน client ตัวถัดไปจะค้าง "connecting" ตลอดกาล) → เก็บ raw GAME log/console ของ session 1 → copy DB สำเนาใหม่ (`run_gt059b.sqlite3`) → บูต server (args เดิม เปลี่ยน `--db`) → บูต client → เข้าเกมตัวละครช่องแรก → **ห้ามกด K ก่อน** → ยิง trigger (ข้อ 5) → รอ sweep จบ → ค่อยกด **K** ครั้งแรกของ session → ถ่าย **S5** + ปุ่ม → **S6** · จดว่าผลต่างจาก session 1 ไหม
+11. ออกจากเกม + ปิด server → เก็บ raw GAME log + console out/err ทั้งสอง session → `PRAGMA integrity_check;` ทั้งสองสำเนา
+12. **teardown เสมอ** แม้เลิกกลางคัน (boot stamp เกิน 420 นาที template ปฏิเสธ exit 12 — เพดานยกจาก 180 เมื่อ 2026-08-20 · `TEMPLATE_teardown_generic.ps1:135` · แท่นถูกทิ้งข้ามชั่วโมงใช้ `staged\TOOL_stop_stale_server.ps1`)
+13. เทียบ sha256 canonical กับ `CANON_SHA.txt` อีกครั้ง ต้องเท่าเดิม
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+**ชั้น (1) wire/DB (ไม่ต้องใช้สายตาคนหน้าจอ · ทำ headless ได้)**
+- raw GAME log ต่อ trigger หนึ่งครั้ง มี **2 เฟรม** เรียง `HYP_PF_035_SKILL_ATTR_COUNT0_EMPTY` (57 bytes) → `HYP_PF_035_SKILL_ATTR_COUNT1_KEY1` (68 bytes) ห่าง ~3.0 s · server events มี `skill_attr_hypothesis_attr_sweep_sent` ครั้งละหนึ่ง
+- sha256 ของแต่ละเฟรมที่ dispatch **ตรง pin** `probe.per_step.<LABEL>.frame_sha256` ใน `scenarios/skill_attr_hypothesis_attr_sweep.json` ของ commit ที่บูต (พินเดียวกับ `SKILL_ATTR_PROBE_FRAME_SHA256` ในโมดูล) · เก็บ hexdump ทั้งไฟล์ **ห้ามลบ**
+- โครงสาย (RE-061-proven) ที่ต้องเห็น: carrier `0x309A` · attr_count 1 · class id `0x1661` · body: `u8 0x0B mask=0x01` → `u64 0x32 identity` → `u16 0x12 count` → record 11 ไบต์ `(u16 0x12 key / u16 0x12 / u32 0x14)`
+- DB สำเนาทั้งสองใบ: `PRAGMA integrity_check` = `ok` · **row-diff ทุกตารางต่างเฉพาะ `sessions` +1 แถวต่อการเข้าเกมหนึ่งครั้ง** · sha256 canonical ก่อน-หลังตรงกัน
+- **ชั้นนี้ตอบไม่ได้:** หน้าต่างเปิดหรือไม่ (เฟรมออก ≠ client รับ/ใช้) ⇒ **ห้ามอ้างชั้นนี้แทนชั้น (2)**
+
+**ชั้น (2) client-observable (ต้องมีคนหน้าจอ)**
+- ภาพ **S0..S6** + วิดีโอต่อเนื่องทั้งสอง session · sha256 ทุกไฟล์
+- ตอบ **tri-state ต่อจุดวัด** (S0 baseline · S1 ระหว่างเฟรม-ถ้าทัน · S2/S3 หลัง sweep · S4 หลัง sweep ที่สอง · S5/S6 session 2): **เปิด+มีรายการ / เปิด+ว่าง / ไม่เปิด** — ทั้งทาง K และทางปุ่ม `Bt_main_Skill` แยกกัน
+- ถ้าเปิดได้: บรรยายเนื้อในเป็นภาษาคน (มีกี่แถว/ช่อง · ว่างไหม) — **ห้ามตีความว่าค่าที่เห็นหมายถึงอะไร**
+- NO-CRASH / CRASH verdict ชัดเจน + คำตอบ "relog เปลี่ยนผลไหม" (session 1 vs session 2)
+- **ชั้นนี้ตอบไม่ได้:** เฟรมออกจากเซิร์ฟเวอร์จริงไหม **ห้ามอ้างชั้นหนึ่งแทนอีกชั้น**
+
+### 🔴 ผลลบมีค่าเท่าผลบวก
+- **wire ครบแต่ K ยังไม่เปิดทุกจุดวัดรวมทั้ง session 2** = ผลลบที่สมบูรณ์ **ไม่ใช่ FAIL** ⇒ **falsify "รับ `CSkillAttr` หนึ่งครั้งแล้วพอ"** (ยืนยัน NONCLAIM ของ RE-061 ด้วยหลักฐาน runtime) · redirect: **RE-062** (null branch ของ bind thunk `0x4698B0` — inbound สร้าง container ได้ไหม) + ตรวจ base/UI check อื่นใน `0x761ED0`
+- **เปิดได้เฉพาะ session 2 (trigger ก่อน K แรก)** = ผลบวกแบบมีเงื่อนไขจังหวะ — จุดอ่านคือ controller construction · redirect: เลน server ควรส่ง `CSkillAttr` ตอน entry flow ไม่ใช่รอ trigger
+- **เปิดได้แต่ว่างที่ COUNT0/มีของที่ COUNT1 แยกไม่ได้** (กด K ไม่ทันหน้าต่าง 3 วิ) = จดว่า A/B UNRESOLVED — ยัง PASS ชั้น observable ได้ในคำถามหลัก (gate เปิด/ไม่เปิด)
+- **CRASH ที่เฟรมแรก** = ชี้ version byte 0 (ดีไซน์เรา ยัง unpinned) ก่อน record semantics
+
+### nonclaims (ติดไปกับผลทุกกรณี)
+- **ไม่ตีความความหมายของ `opaque_u16`/`opaque_u32`/ค่า `key`** — key=1 เป็นค่า probe ตามใจเรา ไม่ claim ว่าเป็นสกิลจริงตัวใด
+- **ไม่ claim ว่าเซิร์ฟเวอร์ต้นฉบับ (ปิดแล้ว กู้ไม่ได้ตลอดกาล) เคยส่ง `CSkillAttr` แบบนี้/จังหวะนี้** — step plan, ค่า record, db_mask policy, spacing, trigger policy เป็นดีไซน์ของเราทั้งหมด (ไม่มี capture ของ block นี้ทิศทางใดเลย)
+- **ไม่พิสูจน์ว่าสกิล "ใช้งานได้"** — ใบนี้วัดแค่ window gate เปิด/ไม่เปิด ไม่แตะการกดใช้สกิล
+- **ผลบวกไม่พิสูจน์ว่า `CSkillAttr` เป็นเงื่อนไข "เดียว"** — พิสูจน์แค่ว่าในสภาพแวดล้อมนี้การรับมัน (ร่วมกับสภาพ baseline เดิม) เพียงพอ
+- **result:** (ผู้เทสกรอก: ภาพ S0..S6 + วิดีโอ พร้อม sha256 · tri-state ต่อจุดวัด ทาง K และทางปุ่มแยกกัน · K ระหว่างเฟรมทัน/ไม่ทัน · session 1 vs 2 ต่างไหม · NO-CRASH/CRASH · path raw GAME log + label/sha 2 เฟรมต่อ trigger + event `skill_attr_hypothesis_attr_sweep_sent` · เวลา · sha canonical ก่อน-หลัง · row-diff ของ `run_gt059*.sqlite3`)
