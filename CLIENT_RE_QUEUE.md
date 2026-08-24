@@ -68,7 +68,9 @@ decoder ฝั่ง server ยืนบน W codec ที่ commit แล้�
 **สถานะ (R145 · 2026-08-24 ~11:xx +07:00):** ✅ **RE-057 DONE/STATIC-LANE-CLOSED** + ✅ **RE-058 DONE/BOUNDED-NEGATIVE** (ปิดโดย R144 — ป้ายอยู่บนหัวใบทั้งสองแล้ว) ⇒ **คิวนี้ไม่มีใบเปิดค้างเลยชั่วขณะ** · 🆕 เปิดใหม่สองใบท้ายไฟล์ **ทั้งคู่อยู่บนเลนลูท (loot lane)** ซึ่งเป็นเลนเดียวที่มี "ของจริงรออยู่แล้ว" ไม่ต้องไปถอดใหม่:
   · 🆕 **RE-059 ITEMOPERATE-RES-CAPTURE-BYTES-001** — `PF_FIELD_VALIDATION.tsv` แถว `ItemOperateVitalRes:R` บอกว่ามี **เฟรมจริง 5 เฟรมใน 4 ไฟล์ capture** บนสะพาน · `parse_success=0` แต่ 🔴 **`mismatch_frames=0`** ⇒ "ถอดไม่ได้" ไม่ใช่ "ขัดกัน" · ใบนี้ไปเอา **ไบต์ดิบ** ออกมา ไม่ใช่ไปถอด serializer ซ้ำ (GT-054 verify span ให้แล้ว 392/392)
   · 🆕 **RE-060 ITEM-TEMPLATE-CODE-SCHEMA-001** — คอมเมนต์ `current/pf_login_game_server_v141.py:2470` (`2600001 # STORE_NORMAL row 1 -> ITEM_MISC row 1`) **ผิดอย่างน้อยสองจุด** (พบโดยลูกมือ static) · ใบนี้ pin สคีม `<table_code><5 หลัก>` ด้วยหลักฐาน · 🔴 `current/` เป็น v141 immutable — ใบนี้ **หาหลักฐาน ไม่ใช่แก้โค้ด**
-  · 📎 หมายเหตุข้ามใบ: **RE-060 เป็น precondition เชิงความหมายของ RE-059 แต่ไม่ใช่ precondition เชิงเทคนิค** — รันขนานกันได้ ไม่ต้องรอกัน · **ใบเปิดจริงตอนนี้: RE-059 · RE-060** · 📌 ที่มาของคำตอบเลนลูท: `ItemOperateVitalRes 0x4C13` encoder มีอยู่แล้วใน `pirate-force-server/src/pirateforce_foundation/inventory.py` 3 ทรง ⇒ ไม่เปิดเลนโค้ดใหม่
+  · 📎 หมายเหตุข้ามใบ: **RE-060 เป็น precondition เชิงความหมายของ RE-059 แต่ไม่ใช่ precondition เชิงเทคนิค** — รันขนานกันได้ ไม่ต้องรอกัน · 📌 ที่มาของคำตอบเลนลูท: `ItemOperateVitalRes 0x4C13` encoder มีอยู่แล้วใน `pirate-force-server/src/pirateforce_foundation/inventory.py` 3 ทรง ⇒ ไม่เปิดเลนโค้ดใหม่
+
+**สถานะ (R146 · 2026-08-24 ~11:5x +07:00):** 🆕 เปิด **RE-061 SKILLSTATE-WIRE-DIRECTION-001** (ท้ายไฟล์) — prerequisite ของเลนโค้ด skill-state sender ที่จะปลดล็อก GT-058 (หน้าต่างสกิลเปิดไม่ได้) · pf-static-re R146 ยืนยัน **NEEDS-BRIDGE-IMAGE**: `CSkillModule`/`CSkillAttr` serializer row = EMPTY, capture = NOT_OBSERVED, id `0x1F7B`/`0x1661` = name-hash candidate ไม่ใช่ opcode ⇒ ปิด wire+direction จากอิมเมจเท่านั้น · **ใบเปิดจริงตอนนี้: RE-059 · RE-060 · RE-061**
 
 ---
 ## 🆕🔬 GT-052 CLASS-SKILL-TABLE-001 [STATIC-ON-BRIDGE]: ~~dump ตารางอาชีพ + ตารางสกิล~~ ✂️ **ตีความคอลัมน์ + ผูก TEXTDATA + ผูกไอคอน** — ตาราง dump แล้วทั้งคู่ (`gamedata\` · จดหมาย 2150)  [✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 00:44 (+07:00) · บันทึกโดย chief R135 · ผลลบติดใบ: ไม่พบ legend ของ `n_TARGET` ในชุดที่ค้น — ห้ามตั้ง label ("ไม่พบ" ≠ "ไม่มีใน client")**]
@@ -986,3 +988,88 @@ encoder ฝั่งเรา `src/pirateforce_foundation/inventory.py` ปร�
 
 ### result:
 🔴 `ค้นใน external\ แล้ว: ___` · 🔴 `ค้น gamedata แล้ว: ___` · (กรอก: objective · ตาราง table_code->ตาราง+ป้ายชนิด · เมทริกซ์ hit rate+จำนวน scan · VA/span/sha ตัวถอด (หรือ census) · จ็อบ 3 แยก (ก)/(ข)+ข้อเสนอ docstring · จ็อบ 4 ว่า `$V1` มาจากคอลัมน์ไหน+>=3 คู่ · ผลคำทำนาย 26->ITEM_MISC · sha ก่อน-หลัง · จดหมาย notes_to_chief/)
+
+## 🆕🔬 RE-061 SKILLSTATE-WIRE-DIRECTION-001 [STATIC-ON-BRIDGE]: ปิด outbound wire shape ของ `CSkillModule` (vtable 0x00F48D88 slot +0x18) แบบไบต์เป๊ะ + หา carrier ของ `CSkillAttr` (vtable 0x00F48B78, chains DBAttribute) + ตัดสิน direction S->C จาก capture — ทดสอบ wire premise ของ root-cause "server ไม่เคยส่ง skill state"  [⏳ **PENDING**]
+
+ที่มา (ทำไมใบนี้ถึงเกิด — ฉบับสั้น):
+- ใบ attended **GT-058** (คิว `GAME_TEST_QUEUE.md`) ค้าง เพราะหน้าต่าง Skill (ฮอตคีย์ **K**) ไม่ยอมเปิดใน baseline ท้องถิ่นของเรา
+- cloud audit (จดหมาย `20260824_1119` + CORRECTION `20260824_1147`) root-cause ว่า: **server ของเราไม่เคยส่ง skill STATE ให้ client เลย** — คลาส `CSkillModule` และ `CSkillAttr` · client มีข้อมูลสกิลครบ (`SKILL_CONTEXT` 2,165 แถว + ไอคอน จาก GT-052) ⇒ **ฟีเจอร์ไม่ได้ถูกปิด** · หน้าต่างไม่มีอะไรให้ populate เพราะไม่มี skill-state vital วิ่งมาถึง
+- 🔴 root-cause นี้เป็น **HYPOTHESIS ยังไม่ได้พิสูจน์** · ใบนี้คือใบที่ทดสอบ **wire premise** ของมัน
+- แก้จริงเป็นงานเลนโค้ดฝั่ง server (ตัวส่ง) แต่เลนโค้ด **สร้าง sender ไม่ได้** จนกว่า outbound WIRE SHAPE ของสองคลาสนี้จะถูกปิดจากอิมเมจ client — ท่าเดียวกับ GT-050
+- บน cloud clone ปิดไม่ได้ (bounded-negative แล้ว · ยืนยันด้วย pf-static-re R146): **ชุดส่งมอบ RE ของ Codex มี `CSkillModule`/`CSkillAttr` เป็น serializer row EMPTY** (`PF_SERIALIZER_FIELDS.tsv`) และ **capture = NOT_OBSERVED 0 เฟรม** (`PF_FIELD_VALIDATION.tsv`) และ `PF_RUNTIME_CLASSMAP` ค้น "Skill" = 0 แถว ⇒ **ต้องปิดจากอิมเมจบนสะพาน** ไม่ใช่จากชุดส่งมอบ
+
+ข้อเท็จจริงที่ resolve แล้ว (ส่งให้ผู้รับงาน จะได้ไม่ derive ซ้ำ — 🔴 pin ทุกตัวยังต้อง verify-first แบบ GT-050 job 1):
+- `CSkillModule`: `FACTPACK_L2_CLASSCENSUS001_20260820.tsv` **row 300** — family `module_subsystem` · vtable **0x00F48D88** · RTTI `.?AVCSkillModule@@` · rtti_va `0x0101E180`
+  🔴 **id `0x1F7B` เป็น name-hash candidate เท่านั้น ไม่ใช่ opcode ที่พิสูจน์แล้ว** — FACTPACK L4 เขียนเอง: *"wire_id is DERIVED from the name by the round-62 hash. It is NOT read from any table in the image"* · แถวนี้ `in_names_table=False` และ `in_round38_tsv=False` (ไม่อยู่ทั้งใน registry และ name table) ⇒ **ห้ามใช้ 0x1F7B เป็น opcode จนกว่าจะเจอในตาราง dispatch จริงในอิมเมจ**
+  🔴 **`0x00F48E84` ที่ FACTPACK บันทึกคือ `literal_va` (name-literal VA) ไม่ใช่ vtable ตัวที่สอง** — ระวังเหมือน erratum RE-058 (`0xF48F00` เคยถูกเขียนผิดเป็น vtable ทั้งที่เป็น name literal) · vtable จริงที่จะไล่ serializer คือ `0x00F48D88`
+- `CSkillAttr`: family `attr_state_block` (Attr — state block ผูกกับ actor · sibling ของ `BasicAttr` / `CBuffAttr` / `CCooldownAttr`) ⇒ **น่าจะขี่มากับ collection แบบ ActorAttr ไม่ใช่ standalone opcode** — 🔴 ผู้รับงานต้องยืนยันเอง
+  pin ที่มีแล้ว (จาก `external/PF_PROTOCOL_REGISTRY.tsv` L503 + reports STATS-PROG001/MPAUDIT/CHUNK2): vtable **0x00F48B78** · `Serialize` **0x7520B0** · chains `DBAttribute` · bind กับ `CMyActor` ที่ `actor+0x3E8` · bind thunk `0x4698B0` · 🔴 id/hash `0x1661` เป็น name-hash candidate (ไม่ใช่ opcode) · 🔴 STATS-PROG001 report ปฏิเสธ object offset ไว้ชัด (*"No CSkillAttr object offset is claimed"* — serializer stage ค่าผ่าน stack temp, displacement เป็น ESP/EBX-relative)
+  รูปบางส่วนที่จดไว้แล้ว (`EXPERIMENT_LEDGER.md` L45 SKILL-001): `u16 count` + container ของ `(key u16, opaque u16, opaque u32)` — **แต่ไม่มี opcode และไม่มี object offset ⇒ ประกอบเฟรม byte-exact ไม่ได้** ⇒ นี่คือสิ่งที่ใบนี้ต้องปิดให้ครบ
+- 🔴 **caution — serializer stub ในอิมเมจ:** `PF_SERIALIZER_FIELDS.tsv` บันทึก serializer ของสองตัวนี้เป็น EMPTY stub: `CSkillModule` `@0x00710440` = `write_al_1_then_ret_4` (ตั้ง AL=1 แล้ว ret 4 — ไม่ปล่อย field เลย) · `CSkillAttr` `@0x0043BB80` = empty arg copier · **สอง address นี้อาจไม่ใช่ serializer จริงของ skill-state** (อาจเป็น container/ตัวห่อ) ⇒ ต้องไล่จาก vtable slot +0x18 เอง · **ถ้า serializer จริงก็เป็น stub ที่ไม่ปล่อย field จริง = ข่าวใหญ่** (แปลว่า skill state อาจเดินทางทางอื่นทั้งหมด เช่นใน ActorAttr collection)
+- วิธีพิสูจน์แล้วสามครั้ง (GT-040/042/046/050): vtable -> serializer slot **+0x18** -> เดิน field tag/offset/len · W serializer อยู่แถบ **0x0089A600** · R serializer อยู่แถบ **0x0089A640** (ตาม GT-050)
+
+หมวด: `STATIC-ON-BRIDGE` — ต้องเปิดอิมเมจ client จริง + capture corpus บนสะพาน (cloud ไม่มีทั้งอิมเมจและ corpus) · ผู้รับงานคือคนหน้าเครื่องสะพานของ Panya ไม่ใช่ผู้เทสหน้าจอเกม · **ใบนี้ไม่บูตเกม · ไม่จับ `LOCK_GAME` · ไม่มี teardown · ไม่แตะ canonical DB · ไม่มีอะไรให้ดูบนจอเกมแม้แต่อย่างเดียว**
+
+### 🔴 ช่องบังคับ (กฎ 18:22): ค้นใน pf_bridge\external\ แล้ว
+(ผู้รับงานกรอก: `เจอ <อะไร> / ไม่เจอ`) — จุดตั้งต้นที่รู้แล้ว จาก GT-052 + pf-static-re R146: `PF_PROTOCOL_REGISTRY.tsv` มี `CSkillAttr` (L503, vtable 0x00F48B78) + `CSkillModule` (L504, vtable 0x00F48D88) · `PF_SERIALIZER_FIELDS.tsv` field rows ของทั้งสอง = **EMPTY** · `PF_FIELD_VALIDATION.tsv` = **NOT_OBSERVED 0 เฟรม** · `PF_RUNTIME_CLASSMAP.tsv` ค้น "Skill" = **0 แถว**
+- 🔴 งานของใบนี้คือ **ปิด span จากอิมเมจ** ไม่ใช่ปิดจากชุดส่งมอบ (ชุดส่งมอบว่างแล้ว)
+
+### 🔴 ช่องบังคับข้อสอง (R132): ค้น gamedata แล้ว
+(ผู้รับงานกรอก) — คาดว่า `gamedata\` **ไม่ตอบ wire shape/direction** (ตารางข้อมูลเกมไม่ใช่โค้ด/เฟรม · GT-052 ปิด SKILL_CONTEXT แล้ว) แต่ต้องกรอกช่องนี้ตามกฎ · 🔴 ห้ามใช้ค่าในตารางข้อมูลเกมมาตั้งชื่อ/ชนิด field บน wire
+
+### objective (claim เดียว)
+**outbound serializer field layout ของ `CSkillModule` (จาก vtable 0x00F48D88 slot +0x18) ถูกปิดแบบไบต์เป๊ะ · carrier ของ `CSkillAttr` ถูก resolve (เป็น attr block ใน collection หรือ standalone) · และมี/ไม่มีเฟรม S->C ใน capture corpus ที่แบก body ของสองคลาสนี้จริง**
+🔴 คำตอบต้องเป็นประโยคเดียว 3 ส่วน:
+- `CSkillModule W layout = [tag/offset/len ...] span [start,end) sha <...>` (หรือ "serializer เป็น stub ไม่ปล่อย field — <span/sha>")
+- `CSkillAttr carrier = attr block ใน <collection id / mask bit / tag chain>` **หรือ** `standalone opcode <id>` **หรือ** `resolve ไม่ได้ + census ที่ไล่ครบ`
+- `direction = พบเฟรม S->C จริง (ไฟล์ <...> hex <...>)` **หรือ** `bounded negative — ไม่มีเฟรม S->C ที่แบก skill-state body ใน corpus (ขอบเขตค้น: <...>)`
+
+### db / server args
+ไม่ใช้ DB · ไม่บูตเซิร์ฟเวอร์ · ไม่บูต client — เปิดอ่านอิมเมจ + capture + TSV ส่งมอบอย่างเดียว
+🔴 **ห้ามแก้ อิมเมจ / capture / TSV ส่งมอบ — เปิดอ่านอย่างเดียวทั้งหมด** · sha256 ของทุกไฟล์ที่พึ่ง ก่อน-หลัง ต้องตรงกัน
+
+### สิ่งที่ต้องมี (precondition · verify ก่อนเริ่ม)
+- อิมเมจ (sha/size เดียวกับ GT-046/048/049/050/058): `GameClient\GameClient.local.bin` · size `14759424` · sha256 `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623` · PE32 · ImageBase `0x00400000` · 🔴 จด sha ก่อนเริ่มและหลังจบ ต้องตรงกันทั้งสองครั้ง
+- stream primitive (พิสูจน์แล้วตั้งแต่ GT-040): `0x0089A600` (WRITE / outbound) · `0x0089A640` (READ / inbound)
+- capture corpus บนสะพาน: `PF_INPUT_INVENTORY.tsv` = บัญชี capture + sha256 · ระบุ **พาธ root corpus แบบเต็ม** ในผล
+- ท่าทำงาน `pf-static-re` · probe แม่แบบ `tools\pf_gt050_skill_wire_probe.py` (sha ในจดหมาย GT-050) — ดัดแปลงเป้าได้ แต่รันในไดเรกทอรีใหม่ ห้ามแตะตัวเดิม
+- 🔴 **ห้ามใช้ linear disassembler เป็นหลักฐานของ negative** (บทเรียนรอบ 83) · census ด้วย byte matching (E8/E9 rel32) + dword refs + vtable slots · recursive CFG decode error ต้อง = 0
+
+### จ็อบ (ลำดับ 1 -> 2 -> 3 -> 4 · 🔴 ห้ามข้ามข้อ 1)
+1. **verify pin ก่อน** — ยืนยัน vtable `0x00F48D88` เป็นของ `CSkillModule` จริง (RTTI `.?AVCSkillModule@@`) และ vtable `0x00F48B78` เป็นของ `CSkillAttr` จริง · 🔴 ไม่ตรง = หยุด รายงาน pin ที่เพี้ยน ห้าม derive ทับ · 🔴 อย่าเชื่อ id 0x1F7B/0x1661 เป็น opcode
+2. **trace outbound serializer ของ `CSkillModule`** — จาก vtable `0x00F48D88` slot `+0x18` เดิน field: tag/offset/len · ลำดับ body · ความกว้างต่อ field · แนบ span `[start,end)` + file offset + len + sha256 ของ **ทุก** ฟังก์ชันที่อ้าง · 🔴 ถ้า slot +0x18 ชี้ไป stub `0x00710440` (write_al_1_then_ret_4) จริง ให้ยืนยันว่าเป็น stub ไม่ปล่อย field แล้วไล่ว่าใครเรียก serializer จริงของ skill state แทน
+3. **resolve wire form ของ `CSkillAttr`** — จาก vtable `0x00F48B78` / `Serialize 0x7520B0`: เป็น attr block ที่ emit ใน collection แบบ ActorAttr (ระบุ **mask bit / collection id / tag chain**) หรือ standalone · แนบ span+sha · 🔴 resolve ไม่ได้ = รายงาน census ที่ไล่ครบ (candidate + เหตุที่ตก)
+4. **DIRECTION จาก capture** — server ต้นฉบับส่งสองคลาสนี้ S->C จริงไหม และเมื่อไหร่ (login / character-select / scene-enter)? อ้างเฟรมจริงใน corpus ที่แบก body ในทิศ **S->C** พร้อม hex · 🔴 ไม่มี = ประกาศ **EMPTY อย่างชัดเจน** พร้อมขอบเขตที่ค้น (ไฟล์กี่ไฟล์ · opcode/tag ที่ scan · id ที่ค้น) — ผลลบมีค่าเท่าผลบวก
+
+### pass criteria — 🔴 สองชั้น (Tier A / Tier B แยกกัน ห้ามเอาชั้นหนึ่งเป็นหลักฐานของอีกชั้น)
+**Tier A (wire/static):**
+- serializer field layout ของ `CSkillModule` ปิดแบบไบต์เป๊ะ (หรือพิสูจน์ว่าเป็น stub ไม่ปล่อย field พร้อมชี้ตัวปล่อยจริง) + span `[start,end)` + file offset + len + sha256 ครบทุกฟังก์ชันที่อ้าง
+- carrier ของ `CSkillAttr` resolve (attr block ใน collection พร้อม mask/collection-id/tag-chain · หรือ standalone · หรือ census-ไล่ครบ-แต่ปิดไม่ได้พร้อมเหตุ)
+- image sha256 ก่อน==หลัง · TSV ส่งมอบที่เปิดอ่าน sha ก่อน==หลัง
+- 🔴 linear disassembler ไม่ถูกใช้เป็นหลักฐานของผลลบ (รอบ 83) · CFG decode error = 0 · ถ้าเขียนสคริปต์ commit ลง `tools/` รันซ้ำได้ + guard count + exit 0 · 🔴 print ASCII ล้วน (cp874)
+**Tier B (capture / direction):**
+- เฟรม S->C จริงที่แบก body ถูก quote เป็น **hex** (ไฟล์+sha256+index+opcode+ทิศ+hex) **หรือ** bounded-negative "ไม่มีเฟรมแบบนั้นใน corpus" พร้อม **ขอบเขตค้นที่ระบุชัด**
+- 🔴 Tier A **ไม่ใช่** หลักฐานของ Tier B และกลับกัน — มี serializer ในอิมเมจ ไม่ได้แปลว่า server เคยส่ง · ไม่มีเฟรม ไม่ได้แปลว่าอิมเมจไม่มี serializer
+
+**ชั้น client-observable: 🔴 ว่างเปล่าโดยเจตนา** — อ่านอิมเมจ+capture บนดิสก์ล้วน ไม่บูตอะไร ไม่มีจอ (เหมือน GT-046/050/058/059/060) · ผู้เทสหน้าจอ **ไม่ต้องทำอะไรกับใบนี้เลย** · 🔴 ห้ามใครอ้าง static/capture เป็นหลักฐานว่าหน้าต่าง Skill (K) เปิดหรือ populate ได้ — นั่นเป็นชั้น attended ของ GT-058
+
+### 🔴 ผลลบมีค่าเท่าผลบวก
+- **"ไม่มีเฟรม S->C skill-state ใน corpus"** = คำตอบที่ใช้ได้เต็มร้อย ⇒ **แปลว่าตัวขวางหน้าต่างมีสาเหตุอื่น** และการสร้าง sender **จะไม่ปลดล็อก GT-058** — redirect ทั้งเลนทันที (ต้องระบุขอบเขตค้นที่ทำให้ negative นี้ falsifiable)
+- **`CSkillAttr` resolve ไม่ได้จาก static** = ผลที่มีค่า ⇒ ระบุ census ที่ไล่ครบเพื่อให้ใบถัดไปหยิบต่อ
+- **serializer ของ `CSkillModule` เป็น stub ไม่ปล่อย field / ป้าย field ต่างจาก FACTPACK** = ข่าวใหญ่ ⇒ FACTPACK row 300 + สมมติฐาน "vital เดี่ยว" ต้อง re-verify
+
+### 🔴 เกณฑ์จบ + ขั้นต่อไปที่ตั้งใจไว้ (ยังไม่ใช่คำสั่งให้เขียนโค้ด)
+- **ถ้า Tier B เป็นบวก** (มีเฟรม S->C จริง): ขั้นต่อไปคือ **เปิด hypothesis เลนโค้ดฝั่ง server** ให้ emit skill state หลัง opt-in scenario (`production_allowed=false` · fail-closed · พิสูจน์ headless ก่อน) แล้วค่อย rerun attended **GT-058** — 🔴 **ยังไม่เปิดใบนั้น** จดเป็นคำถามเปิดรอ Panya
+- **ถ้า Tier B เป็นลบ**: สมมติฐาน root-cause (server-ไม่เคยส่ง-skill-state) **ยังไม่ถูกยืนยันว่าเป็นตัวขวาง** ⇒ ห้ามเปิดเลน sender · คำถามตัวขวาง GT-058 ออกจากเลน static นี้ · จดคำถามเปิดรอ Panya
+
+### nonclaims (ติดไปกับผลทุกกรณี)
+- **ผลลบมีค่าเท่าผลบวก** — "ไม่มีเฟรม S->C skill-state ใน corpus" เป็นคำตอบที่ใช้ได้ และจะแปลว่าตัวขวางหน้าต่างมีสาเหตุอื่น การสร้าง sender จะ **ไม่** ปลด GT-058
+- **ตาราง/serializer ในไคลเอนต์ = สิ่งที่ client รู้ ไม่ใช่กฎของเซิร์ฟเวอร์ต้นฉบับ** ซึ่งปิดไปแล้ว กู้ไม่ได้ตลอดกาล
+- **root-cause ของ cloud (server-ไม่เคยส่ง-skill-state) เป็น HYPOTHESIS ไม่ใช่ข้อพิสูจน์** — ใบนี้คือใบที่ทดสอบ wire premise ของมัน ไม่ได้ยืนยันมัน
+- **id 0x1F7B / 0x1661 เป็น name-hash candidate ไม่ใช่ opcode** — ห้ามอ้างเป็น wire id จนกว่าจะเจอในตาราง dispatch จริง
+- **ห้ามตั้งชื่อ semantics ของ field ใด ๆ เกินกว่าที่ serializer/capture พิสูจน์** — ความยาวคือความยาว ไม่ใช่ชนิด
+- static ไม่พิสูจน์ว่า runtime ส่ง/รับจริง · capture = สิ่งที่ client เคยได้รับ ไม่ใช่กฎ server ต้นฉบับ · ไม่พึ่ง `PF_RUNTIME_CLASSMAP.tsv` เป็นชื่อคลาส (UNKNOWN 100%)
+- ใบนี้ไม่ตอบว่าหน้าต่าง Skill (K) จะเปิด/populate ได้จริงไหม (ชั้น attended · GT-058)
+
+### result:
+🔴 `ค้นใน pf_bridge\external\ แล้ว: ___` · 🔴 `ค้น gamedata แล้ว: ___` · (ผู้รับงานกรอก: objective 3 ส่วนประโยคเดียว · CSkillModule W layout + span/offset/len/sha ทุกฟังก์ชัน · CSkillAttr carrier + census · พาธ root capture corpus เต็ม + ไฟล์+sha256 · Tier B: เฟรม S->C hex หรือ bounded-negative + ขอบเขตค้น · sha อิมเมจ+TSV ก่อน-หลัง · จดหมายเข้า notes_to_chief/)
