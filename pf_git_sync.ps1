@@ -180,6 +180,13 @@ function GitRun([string]$repo, [string[]]$cmd) {
 
 # Read the first line of a flag file with the BOM stripped, because a BOM makes
 # '^HELD:' fail to match exactly when the flag IS held - the worst possible time.
+# sha256 of one file, or a word that says why there is no sha.  Used by the
+# agent-def mirror check in [5b]; deliberately never throws.
+function FileSha([string]$path) {
+    if (-not (Test-Path -LiteralPath $path)) { return 'MISSING' }
+    try { return (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash } catch { return 'ERROR' }
+}
+
 function FlagFirstLine([string]$path) {
     if (-not (Test-Path -LiteralPath $path)) { return '' }
     $first = ''
@@ -690,6 +697,51 @@ if ($NoServer) {
             }
         }
     }
+}
+
+# ---------------------------------------------------------------------------
+# [5b] agent-def mirror check.  Panya ruled 2026-08-24 ~21:1x, option (a) of
+#      the R148 question 'what forces the agent defs in the two repos to stay
+#      byte-identical?'.  Nothing did: the gate is a single-repo checkout, so
+#      it cannot see its sibling, and a round that edits one side and forgets
+#      the other goes green on both while the two clones run different rules.
+#      Drift was already present the day this was written - pf-queue-author.md
+#      said 180 minutes on the server side and 420 on the bridge side, stale
+#      since 2026-08-20.
+#      This step only REPORTS.  It never copies, never commits and never picks
+#      a winner: which side is right is a content decision and belongs to a
+#      person.  AGENTS.md is deliberately NOT compared - the two AGENTS.md are
+#      different documents on purpose.
+# ---------------------------------------------------------------------------
+
+$bridgeAgents = Join-Path $BridgeRepo '.claude\agents'
+$serverAgents = Join-Path $ServerRepo '.claude\agents'
+if ((Test-Path -LiteralPath $bridgeAgents) -and (Test-Path -LiteralPath $serverAgents)) {
+    $defNames = @()
+    foreach ($f in (Get-ChildItem -LiteralPath $bridgeAgents -Filter '*.md' -File -ErrorAction SilentlyContinue)) {
+        if ($defNames -notcontains $f.Name) { $defNames += $f.Name }
+    }
+    foreach ($f in (Get-ChildItem -LiteralPath $serverAgents -Filter '*.md' -File -ErrorAction SilentlyContinue)) {
+        if ($defNames -notcontains $f.Name) { $defNames += $f.Name }
+    }
+    $defMismatch = @()
+    foreach ($n in $defNames) {
+        $bh = FileSha (Join-Path $bridgeAgents $n)
+        $sh = FileSha (Join-Path $serverAgents $n)
+        if ($bh -ne $sh) {
+            $bs = $bh.Substring(0, [Math]::Min(12, $bh.Length))
+            $ss = $sh.Substring(0, [Math]::Min(12, $sh.Length))
+            $defMismatch += ($n + '  bridge=' + $bs + '  server=' + $ss)
+        }
+    }
+    if ($defMismatch.Count -gt 0) {
+        Shout '[5b]' ('agent defs DIFFER between the two repos: ' + $defMismatch.Count + ' of ' + $defNames.Count + ' file(s) - a person must decide which side is right')
+        foreach ($m in $defMismatch) { Log '[5b]' ('  != ' + $m) }
+    } else {
+        Log '[5b]' ('agent defs mirror OK - ' + $defNames.Count + ' file(s) identical')
+    }
+} else {
+    Log '[5b]' 'agent defs mirror skipped - one side has no .claude\agents'
 }
 
 # ---------------------------------------------------------------------------

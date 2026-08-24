@@ -94,6 +94,10 @@
 !/external/PF_PROTOCOL_PRIORITY.tsv
 !/external/PF_DATA_EVIDENCE.tsv
 !/external/PF_TAG_CENSUS.tsv
+# Panya ruled 2026-08-24 ~21:1x: the validator/extractor scripts that PRODUCE
+# the tables above belong in the repo too - they are derived-metadata tooling,
+# the same class the 2026-08-23 20:39 ruling permits.  Name-only, never a glob.
+!/external/pf_validate_capture_fields.py
 
 # ---- gamedata/: every table from the game's own data files, extracted by
 # pf_extract_gamedata.py (188 tables / 2,365 columns from the 4 B_*.pc_
