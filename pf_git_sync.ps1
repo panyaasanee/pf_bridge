@@ -130,6 +130,31 @@ $SHARED_TRACKED    = @('AGENTS.md', '.gitignore', 'pf_git_sync.ps1', 'CANON_SHA.
                        'agent_kit', 'external', 'gamedata', 'staged')
 
 $logPath      = Join-Path $BridgeRepo 'sync.log'
+
+# Log rotation.  Added 2026-08-24 ~21:5x, the same hour Panya moved this task
+# from a 5-minute to a 2-minute cadence.  Measured before the change: sync.log
+# reached 833,786 bytes in the 4.1 days since 2026-08-20 18:30, about 202 KB a
+# day, and nothing had ever trimmed it.  At 2 minutes that becomes roughly
+# 505 KB a day and still unbounded, so the faster schedule needs this.
+# One generation is kept and the older one is overwritten.  The rolled file is
+# named sync_prev.log, NOT sync.log.1, because .gitignore ignores '**/*.log' -
+# a name ending in .1 would show up as an untracked file in the repo root.
+# This runs before the first Log() call, so it uses Write-Output, and it is
+# wrapped in try/catch: a log that cannot be rolled must never stop a sync.
+$LOG_ROLL_BYTES = 4MB
+try {
+    if (Test-Path -LiteralPath $logPath) {
+        $logLen = (Get-Item -LiteralPath $logPath).Length
+        if ($logLen -gt $LOG_ROLL_BYTES) {
+            $logPrev = Join-Path $BridgeRepo 'sync_prev.log'
+            if (Test-Path -LiteralPath $logPrev) {
+                Remove-Item -LiteralPath $logPrev -Force -ErrorAction SilentlyContinue
+            }
+            Move-Item -LiteralPath $logPath -Destination $logPrev -Force -ErrorAction SilentlyContinue
+            Write-Output ('sync.log rolled to sync_prev.log at ' + $logLen + ' bytes')
+        }
+    }
+} catch { }
 $hbPath       = Join-Path $BridgeRepo 'sync_last_check.txt'
 if ($DryRun) { $hbPath = Join-Path $BridgeRepo 'sync_last_check.dryrun.txt' }
 $ordersPath   = Join-Path $BridgeRepo 'NEW_ORDERS.txt'
