@@ -989,7 +989,7 @@ encoder ฝั่งเรา `src/pirateforce_foundation/inventory.py` ปร�
 ### result:
 🔴 `ค้นใน external\ แล้ว: ___` · 🔴 `ค้น gamedata แล้ว: ___` · (กรอก: objective · ตาราง table_code->ตาราง+ป้ายชนิด · เมทริกซ์ hit rate+จำนวน scan · VA/span/sha ตัวถอด (หรือ census) · จ็อบ 3 แยก (ก)/(ข)+ข้อเสนอ docstring · จ็อบ 4 ว่า `$V1` มาจากคอลัมน์ไหน+>=3 คู่ · ผลคำทำนาย 26->ITEM_MISC · sha ก่อน-หลัง · จดหมาย notes_to_chief/)
 
-## 🆕🔬 RE-061 SKILLSTATE-WIRE-DIRECTION-001 [STATIC-ON-BRIDGE]: ปิด outbound wire shape ของ `CSkillModule` (vtable 0x00F48D88 slot +0x18) แบบไบต์เป๊ะ + หา carrier ของ `CSkillAttr` (vtable 0x00F48B78, chains DBAttribute) + ตัดสิน direction S->C จาก capture — ทดสอบ wire premise ของ root-cause "server ไม่เคยส่ง skill state"  [⏳ **PENDING**]
+## 🆕🔬 RE-061 SKILLSTATE-WIRE-DIRECTION-001 [STATIC-ON-BRIDGE]: ปิด outbound wire shape ของ `CSkillModule` (vtable 0x00F48D88 slot +0x18) แบบไบต์เป๊ะ + หา carrier ของ `CSkillAttr` (vtable 0x00F48B78, chains DBAttribute) + ตัดสินจากอิมเมจว่าไคลเอนต์มี inbound decoder + skill-window-open ขึ้นกับ skill state ไหม (🔴 corpus เป็น emulator-only ตอบ direction ของ server ต้นฉบับไม่ได้ — SCENE-013) — ทดสอบ wire premise ของ root-cause "server ไม่เคยส่ง skill state"  [⏳ **PENDING**]
 
 ที่มา (ทำไมใบนี้ถึงเกิด — ฉบับสั้น):
 - ใบ attended **GT-058** (คิว `GAME_TEST_QUEUE.md`) ค้าง เพราะหน้าต่าง Skill (ฮอตคีย์ **K**) ไม่ยอมเปิดใน baseline ท้องถิ่นของเรา
@@ -1018,11 +1018,11 @@ encoder ฝั่งเรา `src/pirateforce_foundation/inventory.py` ปร�
 (ผู้รับงานกรอก) — คาดว่า `gamedata\` **ไม่ตอบ wire shape/direction** (ตารางข้อมูลเกมไม่ใช่โค้ด/เฟรม · GT-052 ปิด SKILL_CONTEXT แล้ว) แต่ต้องกรอกช่องนี้ตามกฎ · 🔴 ห้ามใช้ค่าในตารางข้อมูลเกมมาตั้งชื่อ/ชนิด field บน wire
 
 ### objective (claim เดียว)
-**outbound serializer field layout ของ `CSkillModule` (จาก vtable 0x00F48D88 slot +0x18) ถูกปิดแบบไบต์เป๊ะ · carrier ของ `CSkillAttr` ถูก resolve (เป็น attr block ใน collection หรือ standalone) · และมี/ไม่มีเฟรม S->C ใน capture corpus ที่แบก body ของสองคลาสนี้จริง**
+**outbound serializer field layout ของ `CSkillModule` (จาก vtable 0x00F48D88 slot +0x18) ถูกปิดแบบไบต์เป๊ะ · carrier ของ `CSkillAttr` ถูก resolve (เป็น attr block ใน collection หรือ standalone) · และไคลเอนต์มี inbound decode/apply path ของสองคลาสนี้ไหม + โค้ดเปิดหน้าต่าง Skill (K) ขึ้นกับ state นั้นไหม (static จากอิมเมจ)**
 🔴 คำตอบต้องเป็นประโยคเดียว 3 ส่วน:
 - `CSkillModule W layout = [tag/offset/len ...] span [start,end) sha <...>` (หรือ "serializer เป็น stub ไม่ปล่อย field — <span/sha>")
 - `CSkillAttr carrier = attr block ใน <collection id / mask bit / tag chain>` **หรือ** `standalone opcode <id>` **หรือ** `resolve ไม่ได้ + census ที่ไล่ครบ`
-- `direction = พบเฟรม S->C จริง (ไฟล์ <...> hex <...>)` **หรือ** `bounded negative — ไม่มีเฟรม S->C ที่แบก skill-state body ใน corpus (ขอบเขตค้น: <...>)`
+- `client apply = มี inbound decoder ของ CSkillModule/CSkillAttr ที่ <VA> และโค้ดเปิด skill-window อ่าน state นั้นที่ <VA/gate>` **หรือ** `ไม่พบ decoder/ไม่พบ gate (census ไล่ครบ)` — 🔴 **นี่คือหลักฐาน direction ที่ falsifiable ได้จริง ไม่ใช่ corpus** (ดู 🔴 CORPUS ELIGIBILITY)
 
 ### db / server args
 ไม่ใช้ DB · ไม่บูตเซิร์ฟเวอร์ · ไม่บูต client — เปิดอ่านอิมเมจ + capture + TSV ส่งมอบอย่างเดียว
@@ -1031,7 +1031,9 @@ encoder ฝั่งเรา `src/pirateforce_foundation/inventory.py` ปร�
 ### สิ่งที่ต้องมี (precondition · verify ก่อนเริ่ม)
 - อิมเมจ (sha/size เดียวกับ GT-046/048/049/050/058): `GameClient\GameClient.local.bin` · size `14759424` · sha256 `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623` · PE32 · ImageBase `0x00400000` · 🔴 จด sha ก่อนเริ่มและหลังจบ ต้องตรงกันทั้งสองครั้ง
 - stream primitive (พิสูจน์แล้วตั้งแต่ GT-040): `0x0089A600` (WRITE / outbound) · `0x0089A640` (READ / inbound)
-- capture corpus บนสะพาน: `PF_INPUT_INVENTORY.tsv` = บัญชี capture + sha256 · ระบุ **พาธ root corpus แบบเต็ม** ในผล
+- capture corpus บนสะพาน: `PF_INPUT_INVENTORY.tsv` = บัญชี capture + sha256 · ระบุ **พาธ root corpus แบบเต็ม** ในผล — 🔴 อ่าน CORPUS ELIGIBILITY ก่อนใช้
+- 🔴 **CORPUS ELIGIBILITY (บังคับอ่านก่อนแตะ capture):** corpus ที่มีทั้งหมดเป็น **client ↔ emulator ของเราเอง** ไม่ใช่ traffic ของ server ต้นฉบับ (`pirate-force-server/docs/EXPERIMENT_LEDGER.md` **SCENE-013**: *"All six are GameClient -> local-emulator receive logs; eligible original server -> client frames are zero … `bounded_target_negative=false`: this proves the curated corpus cannot answer the inbound question, not that any packet is absent from the real protocol"*) · ⇒ **corpus พิสูจน์ไม่ได้ว่า server ต้นฉบับส่ง skill state หรือไม่** — emulator เราไม่เคยส่ง (นั่นคือ premise ของใบนี้) ดังนั้น "ไม่เจอเฟรมใน corpus" = **การยืนยัน premise ซ้ำ ไม่ใช่หลักฐาน** · corpus ใช้ได้แค่ **corroboration** และ **ต้องทำ eligibility pre-check ก่อน:** corpus มีเฟรม S->C ของ server ต้นฉบับ (ไม่ใช่ emulator) แม้แต่เฟรมเดียวไหม — ถ้าไม่มี ให้บันทึกว่า **corpus UNANSWERABLE** ห้ามบันทึกเป็น bounded-negative
+- 🔴 **ระวัง false positive:** corpus มีเฟรม S->C `0x673C` (CLearnSkillResultVital) จริง 5 เฟรมอยู่แล้ว (GT-058) — แต่นั่นคนละ vital · เพราะ id ของ CSkillModule/CSkillAttr เป็น name-hash candidate จึง **ไม่มี opcode filter ที่เชื่อได้** ⇒ ห้ามนับเฟรม skill-family ใด ๆ เป็น positive จนกว่าจะพิสูจน์ด้วยรูป body จาก Tier A ว่าเป็น body ของสองคลาสนี้จริง
 - ท่าทำงาน `pf-static-re` · probe แม่แบบ `tools\pf_gt050_skill_wire_probe.py` (sha ในจดหมาย GT-050) — ดัดแปลงเป้าได้ แต่รันในไดเรกทอรีใหม่ ห้ามแตะตัวเดิม
 - 🔴 **ห้ามใช้ linear disassembler เป็นหลักฐานของ negative** (บทเรียนรอบ 83) · census ด้วย byte matching (E8/E9 rel32) + dword refs + vtable slots · recursive CFG decode error ต้อง = 0
 
@@ -1039,7 +1041,8 @@ encoder ฝั่งเรา `src/pirateforce_foundation/inventory.py` ปร�
 1. **verify pin ก่อน** — ยืนยัน vtable `0x00F48D88` เป็นของ `CSkillModule` จริง (RTTI `.?AVCSkillModule@@`) และ vtable `0x00F48B78` เป็นของ `CSkillAttr` จริง · 🔴 ไม่ตรง = หยุด รายงาน pin ที่เพี้ยน ห้าม derive ทับ · 🔴 อย่าเชื่อ id 0x1F7B/0x1661 เป็น opcode
 2. **trace outbound serializer ของ `CSkillModule`** — จาก vtable `0x00F48D88` slot `+0x18` เดิน field: tag/offset/len · ลำดับ body · ความกว้างต่อ field · แนบ span `[start,end)` + file offset + len + sha256 ของ **ทุก** ฟังก์ชันที่อ้าง · 🔴 ถ้า slot +0x18 ชี้ไป stub `0x00710440` (write_al_1_then_ret_4) จริง ให้ยืนยันว่าเป็น stub ไม่ปล่อย field แล้วไล่ว่าใครเรียก serializer จริงของ skill state แทน
 3. **resolve wire form ของ `CSkillAttr`** — จาก vtable `0x00F48B78` / `Serialize 0x7520B0`: เป็น attr block ที่ emit ใน collection แบบ ActorAttr (ระบุ **mask bit / collection id / tag chain**) หรือ standalone · แนบ span+sha · 🔴 resolve ไม่ได้ = รายงาน census ที่ไล่ครบ (candidate + เหตุที่ตก)
-4. **DIRECTION จาก capture** — server ต้นฉบับส่งสองคลาสนี้ S->C จริงไหม และเมื่อไหร่ (login / character-select / scene-enter)? อ้างเฟรมจริงใน corpus ที่แบก body ในทิศ **S->C** พร้อม hex · 🔴 ไม่มี = ประกาศ **EMPTY อย่างชัดเจน** พร้อมขอบเขตที่ค้น (ไฟล์กี่ไฟล์ · opcode/tag ที่ scan · id ที่ค้น) — ผลลบมีค่าเท่าผลบวก
+4. **CLIENT APPLY + WINDOW-OPEN GATE (static · หลักฐาน direction ตัวหลัก)** — จากอิมเมจ: ไคลเอนต์มี inbound decoder ของ `CSkillModule`/`CSkillAttr` ไหม (VA) · โค้ดที่เปิดหน้าต่าง Skill (K) อ่าน/gate บน skill state นั้นไหม (VA/เงื่อนไข) · 🔴 นี่ตอบคำถามจริงที่ต้องการ: "ถ้า server ส่ง state จะปลดหน้าต่างไหม" ได้แบบ falsifiable โดยไม่พึ่ง corpus · ถ้าไม่พบ decoder หรือ window-open ไม่ขึ้นกับ state = census ต้องไล่ครบ (candidate + เหตุที่ตก)
+   - **corpus = corroboration only:** หลัง eligibility pre-check (ดู precondition) ถ้า corpus มีเฟรม S->C ของ server ต้นฉบับจริง ค่อยค้น body ของสองคลาสนี้ พร้อม hex · 🔴 ถ้า corpus เป็น emulator-only = บันทึก **UNANSWERABLE** ไม่ใช่ bounded-negative
 
 ### pass criteria — 🔴 สองชั้น (Tier A / Tier B แยกกัน ห้ามเอาชั้นหนึ่งเป็นหลักฐานของอีกชั้น)
 **Tier A (wire/static):**
@@ -1047,23 +1050,26 @@ encoder ฝั่งเรา `src/pirateforce_foundation/inventory.py` ปร�
 - carrier ของ `CSkillAttr` resolve (attr block ใน collection พร้อม mask/collection-id/tag-chain · หรือ standalone · หรือ census-ไล่ครบ-แต่ปิดไม่ได้พร้อมเหตุ)
 - image sha256 ก่อน==หลัง · TSV ส่งมอบที่เปิดอ่าน sha ก่อน==หลัง
 - 🔴 linear disassembler ไม่ถูกใช้เป็นหลักฐานของผลลบ (รอบ 83) · CFG decode error = 0 · ถ้าเขียนสคริปต์ commit ลง `tools/` รันซ้ำได้ + guard count + exit 0 · 🔴 print ASCII ล้วน (cp874)
-**Tier B (capture / direction):**
-- เฟรม S->C จริงที่แบก body ถูก quote เป็น **hex** (ไฟล์+sha256+index+opcode+ทิศ+hex) **หรือ** bounded-negative "ไม่มีเฟรมแบบนั้นใน corpus" พร้อม **ขอบเขตค้นที่ระบุชัด**
-- 🔴 Tier A **ไม่ใช่** หลักฐานของ Tier B และกลับกัน — มี serializer ในอิมเมจ ไม่ได้แปลว่า server เคยส่ง · ไม่มีเฟรม ไม่ได้แปลว่าอิมเมจไม่มี serializer
+**Tier B (client apply + window-open gate · static · corpus = corroboration only):**
+- หลักฐานตัวหลักคือ static จากอิมเมจ: มี/ไม่มี inbound decoder ของ CSkillModule/CSkillAttr (VA) และ skill-window-open ขึ้นกับ state นั้นหรือไม่ (VA/gate) — census ไล่ครบพร้อม span/sha
+- corpus (ถ้าผ่าน eligibility) = corroboration: เฟรม S->C ของ server ต้นฉบับที่แบก body ถูก quote เป็น hex (ไฟล์+sha256+index+ทิศ+hex, พิสูจน์ว่าเป็น body สองคลาสนี้ด้วยรูปจาก Tier A) · 🔴 corpus emulator-only = **UNANSWERABLE** ไม่ใช่ bounded-negative
+- 🔴 Tier A **ไม่ใช่** หลักฐานของ Tier B และกลับกัน — มี serializer ในอิมเมจ ไม่ได้แปลว่า server เคยส่ง · ไม่พบ decoder/gate ไม่ได้แปลว่า serializer ไม่มี
 
 **ชั้น client-observable: 🔴 ว่างเปล่าโดยเจตนา** — อ่านอิมเมจ+capture บนดิสก์ล้วน ไม่บูตอะไร ไม่มีจอ (เหมือน GT-046/050/058/059/060) · ผู้เทสหน้าจอ **ไม่ต้องทำอะไรกับใบนี้เลย** · 🔴 ห้ามใครอ้าง static/capture เป็นหลักฐานว่าหน้าต่าง Skill (K) เปิดหรือ populate ได้ — นั่นเป็นชั้น attended ของ GT-058
 
 ### 🔴 ผลลบมีค่าเท่าผลบวก
-- **"ไม่มีเฟรม S->C skill-state ใน corpus"** = คำตอบที่ใช้ได้เต็มร้อย ⇒ **แปลว่าตัวขวางหน้าต่างมีสาเหตุอื่น** และการสร้าง sender **จะไม่ปลดล็อก GT-058** — redirect ทั้งเลนทันที (ต้องระบุขอบเขตค้นที่ทำให้ negative นี้ falsifiable)
+- **ไคลเอนต์ไม่มี inbound decoder ของสองคลาสนี้ / skill-window-open ไม่ขึ้นกับ state นั้น** (static census ไล่ครบ) = คำตอบที่ใช้ได้เต็มร้อย ⇒ **การส่ง state จะไม่ปลดหน้าต่าง** ⇒ ตัวขวางมีสาเหตุอื่น การสร้าง sender จะไม่ปลด GT-058
+- 🔴 **"ไม่เจอเฟรมใน corpus" ตัวมันเอง ไม่ใช่ผลลบที่ใช้ได้** — corpus เป็น emulator-only (SCENE-013) จึงได้ผลนี้แน่นอนไม่ว่าความจริงจะเป็นอย่างไร ⇒ บันทึกเป็น **UNANSWERABLE** และ **ห้ามใช้มันสรุปว่าตัวขวางมีสาเหตุอื่น**
 - **`CSkillAttr` resolve ไม่ได้จาก static** = ผลที่มีค่า ⇒ ระบุ census ที่ไล่ครบเพื่อให้ใบถัดไปหยิบต่อ
 - **serializer ของ `CSkillModule` เป็น stub ไม่ปล่อย field / ป้าย field ต่างจาก FACTPACK** = ข่าวใหญ่ ⇒ FACTPACK row 300 + สมมติฐาน "vital เดี่ยว" ต้อง re-verify
 
-### 🔴 เกณฑ์จบ + ขั้นต่อไปที่ตั้งใจไว้ (ยังไม่ใช่คำสั่งให้เขียนโค้ด)
-- **ถ้า Tier B เป็นบวก** (มีเฟรม S->C จริง): ขั้นต่อไปคือ **เปิด hypothesis เลนโค้ดฝั่ง server** ให้ emit skill state หลัง opt-in scenario (`production_allowed=false` · fail-closed · พิสูจน์ headless ก่อน) แล้วค่อย rerun attended **GT-058** — 🔴 **ยังไม่เปิดใบนั้น** จดเป็นคำถามเปิดรอ Panya
-- **ถ้า Tier B เป็นลบ**: สมมติฐาน root-cause (server-ไม่เคยส่ง-skill-state) **ยังไม่ถูกยืนยันว่าเป็นตัวขวาง** ⇒ ห้ามเปิดเลน sender · คำถามตัวขวาง GT-058 ออกจากเลน static นี้ · จดคำถามเปิดรอ Panya
+### 🔴 เกณฑ์จบ + ขั้นต่อไปที่ตั้งใจไว้ (ยังไม่ใช่คำสั่งให้เขียนโค้ด) — **สามผลลัพธ์ ไม่ใช่สอง**
+- **(บวก) ไคลเอนต์มี inbound decoder + skill-window-open ขึ้นกับ skill state** (พิสูจน์จากอิมเมจ · id ที่อ้างพิสูจน์ด้วยรูป body จาก Tier A ไม่ใช่ name-hash): ขั้นต่อไป **เปิด hypothesis เลนโค้ดฝั่ง server** ให้ emit skill state หลัง opt-in scenario (`production_allowed=false` · fail-closed · headless proof) แล้ว rerun attended **GT-058** — 🔴 **ยังไม่เปิดใบนั้น** จดเป็นคำถามเปิดรอ Panya
+- **(ลบ) ไคลเอนต์ไม่มี decoder / window-open ไม่ขึ้นกับ state** (static census ไล่ครบ): การส่ง state ไม่ปลดหน้าต่าง ⇒ ห้ามเปิดเลน sender · ตัวขวาง GT-058 มีสาเหตุอื่น · จดคำถามเปิดรอ Panya
+- **(UNANSWERABLE) static ตอบไม่ขาด + corpus เป็น emulator-only:** 🔴 **ห้ามสรุปทั้งบวกและลบ** · direction เป็นคำถามที่หลักฐานที่มีตอบไม่ได้ ⇒ ส่งการตัดสินใจให้ Panya (สร้าง sender แบบ opt-in เพื่อทดลองกับ client จริง เป็น "ทางเดียวที่เหลือ" หรือหา original-server capture) · **ห้าม auto-abandon สมมติฐานด้วยผล UNANSWERABLE**
 
 ### nonclaims (ติดไปกับผลทุกกรณี)
-- **ผลลบมีค่าเท่าผลบวก** — "ไม่มีเฟรม S->C skill-state ใน corpus" เป็นคำตอบที่ใช้ได้ และจะแปลว่าตัวขวางหน้าต่างมีสาเหตุอื่น การสร้าง sender จะ **ไม่** ปลด GT-058
+- **ผลลบที่ใช้ได้คือ static** ("ไคลเอนต์ไม่มี decoder / window-open ไม่ขึ้นกับ state") ไม่ใช่ผลจาก corpus — 🔴 "ไม่เจอเฟรมใน corpus" เป็น **UNANSWERABLE** เพราะ corpus เป็น emulator-only (SCENE-013) ห้ามใช้สรุปว่าตัวขวางมีสาเหตุอื่น
 - **ตาราง/serializer ในไคลเอนต์ = สิ่งที่ client รู้ ไม่ใช่กฎของเซิร์ฟเวอร์ต้นฉบับ** ซึ่งปิดไปแล้ว กู้ไม่ได้ตลอดกาล
 - **root-cause ของ cloud (server-ไม่เคยส่ง-skill-state) เป็น HYPOTHESIS ไม่ใช่ข้อพิสูจน์** — ใบนี้คือใบที่ทดสอบ wire premise ของมัน ไม่ได้ยืนยันมัน
 - **id 0x1F7B / 0x1661 เป็น name-hash candidate ไม่ใช่ opcode** — ห้ามอ้างเป็น wire id จนกว่าจะเจอในตาราง dispatch จริง
@@ -1072,4 +1078,4 @@ encoder ฝั่งเรา `src/pirateforce_foundation/inventory.py` ปร�
 - ใบนี้ไม่ตอบว่าหน้าต่าง Skill (K) จะเปิด/populate ได้จริงไหม (ชั้น attended · GT-058)
 
 ### result:
-🔴 `ค้นใน pf_bridge\external\ แล้ว: ___` · 🔴 `ค้น gamedata แล้ว: ___` · (ผู้รับงานกรอก: objective 3 ส่วนประโยคเดียว · CSkillModule W layout + span/offset/len/sha ทุกฟังก์ชัน · CSkillAttr carrier + census · พาธ root capture corpus เต็ม + ไฟล์+sha256 · Tier B: เฟรม S->C hex หรือ bounded-negative + ขอบเขตค้น · sha อิมเมจ+TSV ก่อน-หลัง · จดหมายเข้า notes_to_chief/)
+🔴 `ค้นใน pf_bridge\external\ แล้ว: ___` · 🔴 `ค้น gamedata แล้ว: ___` · (ผู้รับงานกรอก: objective 3 ส่วนประโยคเดียว · CSkillModule W layout + span/offset/len/sha ทุกฟังก์ชัน · CSkillAttr carrier + census · Tier B (static): inbound decoder VA + skill-window-open gate VA หรือ census-ไล่ครบ · corpus eligibility pre-check (มีเฟรม server ต้นฉบับไหม) + ถ้าใช่ hex เฟรม/ถ้าไม่ = UNANSWERABLE · พาธ root corpus เต็ม + sha · sha อิมเมจ+TSV ก่อน-หลัง · จดหมายเข้า notes_to_chief/)
