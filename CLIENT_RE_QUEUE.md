@@ -74,6 +74,8 @@ decoder ฝั่ง server ยืนบน W codec ที่ commit แล้�
 
 **สถานะ (R149 · 2026-08-24 ~22:xx +07:00):** ✅ **ปิดครบสามใบในวันเดียว — RE-059 · RE-060 · RE-061 DONE ทั้งหมด** (ผลเต็มอยู่ในบล็อกของแต่ละใบท้ายไฟล์) · RE-061 ออกทาง **บวก**: `CSkillAttr` ขี่ `UpdateAttrVital 0x309A` class_id `0x1661` + gate หน้าต่าง Skill พิสูจน์จากอิมเมจ ⇒ **chief เปิดเลนโค้ด sender แล้วในรอบเดียวกัน** (opt-in · headless proof · ดู `GAME_TEST_QUEUE.md` ใบเทสใหม่ GT-059) · 🆕 เปิด **RE-062 SKILLATTR-BIND-NULL-BRANCH-001** (ท้ายไฟล์ — คำถามเปิดจาก pf-adversary: inbound `0x1661` **สร้าง** container ที่ `[actor+0x3E8]` ได้ไหมตอน null · กุญแจอ่านผลลบของ GT-059) · **ใบเปิดจริงตอนนี้: RE-062 ใบเดียว**
 
+**สถานะ (R152 · 2026-08-24 ~18:2x +07:00):** ✅ **RE-062 DONE** (ผลหน้าสะพาน 17:01 +07:00 · จดหมาย `notes_to_chief\20260824_1701_RE-062-RESULT-INBOUND-OTHER-PATH-NO-SLOT-WRITE.md`) — คำตอบ **(ค) เส้นทางอื่น**: inbound สร้าง `CSkillAttr` ชั่วคราวได้ผ่าน factory แต่ resolve/insert ลง **generic attribute map** ด้วย class id `0x1661` เท่านั้น · **ไม่มีแขนงใดเขียน `[actor+0x3E8]`** (slot มาจาก `CMyActor` ctor · bind ตอน null = no-op ไม่ repair) ⇒ กุญแจอ่านผลลบ GT-059 พร้อมแล้ว (ดูใบ GT-059 ใน `GAME_TEST_QUEUE.md` — อัปเดต R152) · **ไฟล์นี้ไม่มีใบเปิดค้างแล้ว — 0 ใบ**
+
 ---
 ## 🆕🔬 GT-052 CLASS-SKILL-TABLE-001 [STATIC-ON-BRIDGE]: ~~dump ตารางอาชีพ + ตารางสกิล~~ ✂️ **ตีความคอลัมน์ + ผูก TEXTDATA + ผูกไอคอน** — ตาราง dump แล้วทั้งคู่ (`gamedata\` · จดหมาย 2150)  [✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 00:44 (+07:00) · บันทึกโดย chief R135 · ผลลบติดใบ: ไม่พบ legend ของ `n_TARGET` ในชุดที่ค้น — ห้ามตั้ง label ("ไม่พบ" ≠ "ไม่มีใน client")**]
 
@@ -1094,7 +1096,7 @@ encoder ฝั่งเรา `src/pirateforce_foundation/inventory.py` ปร�
 
 ---
 
-## 🆕🔬 RE-062 SKILLATTR-BIND-NULL-BRANCH-001 [STATIC-ON-BRIDGE]: null branch ของ bind thunk `0x4698B0` / target-resolve ใน handler `0x5F2400` — เฟรม `0x1661` ขาเข้า **สร้าง** container ที่ `[actor+0x3E8]` ได้ไหม หรือได้แค่ **อัปเดต** ของที่มีอยู่  [⏳ **PENDING**]
+## 🆕🔬 RE-062 SKILLATTR-BIND-NULL-BRANCH-001 [STATIC-ON-BRIDGE]: null branch ของ bind thunk `0x4698B0` / target-resolve ใน handler `0x5F2400` — เฟรม `0x1661` ขาเข้า **สร้าง** container ที่ `[actor+0x3E8]` ได้ไหม หรือได้แค่ **อัปเดต** ของที่มีอยู่  [✅ **DONE — คำตอบ (ค) เส้นทางอื่น: inbound ไม่เขียน slot เลย** (ผลหน้าสะพาน 2026-08-24 17:01 +07:00 · บันทึก R152)]
 
 ที่มา (คำถามเปิดจาก pf-adversary R149 — ข้อเดียวที่ดีไซน์ HYP-PF-035 ยังตอบไม่ได้):
 - RE-061 พิสูจน์แล้ว: inbound apply ของ `CSkillAttr` มีจริง (`UpdateAttrVital` handler `0x5F2400` iterate attr blocks → resolve live target → เรียก incoming attr `vtable+0x24 = 0x751C70` copy DB base + record tree) · bind thunk `0x4698B0` type-check `CMyActor` แล้ว **อ่าน `[actor+0x3E8]`** ก่อนส่ง target เข้า apply
@@ -1104,4 +1106,9 @@ encoder ฝั่งเรา `src/pirateforce_foundation/inventory.py` ปร�
 objective หนึ่งประโยค: **ตัดสินจากอิมเมจ (recursive CFG · byte-exact) ว่าเส้นทางรับ `0x1661` ตอน `[actor+0x3E8]` = null ทำอะไร: (ก) allocate/construct `CSkillAttr` ใหม่แล้วเก็บลง slot · (ข) no-op/drop block · (ค) เส้นทางอื่น (ระบุ)** — พร้อม span + sha ของทุกฟังก์ชันที่อ้าง
 
 ขอบเขต/กติกา (เหมือน RE-061): STATIC-ON-BRIDGE ล้วน · ไม่บูตอะไร · ไม่แตะ DB · read-only SHA before=after · ค้น `pf_bridge\external\` และ gamedata ก่อนถอด (ช่องบังคับ เจอ/ไม่เจอ) · ห้าม linear disassembly เป็นหลักฐานผลลบ · จุดเริ่ม: `0x5F2400` (handler) · `0x4698B0` (bind thunk) · `0x751C70` (apply) · ctor `CSkillAttr 0x751B90` (ใครเรียกบ้าง — มี call site จาก path รับไหม) · ระบุด้วยว่า target resolution ของ handler ผูกกับ identity ใน DBAttribute (`0x32` qword) อย่างไร
-- **result:** (ผู้รับงานกรอก)
+- **result:** ✅ DONE (2026-08-24 17:01 +07:00 · จดหมายเต็ม `notes_to_chief\20260824_1701_RE-062-RESULT-INBOUND-OTHER-PATH-NO-SLOT-WRITE.md` · วิธี: recursive CFG + byte-exact census · read-only: input manifest before/after IDENTICAL 7/7 ไฟล์ — SHA อิมเมจค่าเดี่ยว `9627...B623` ไม่ขยับ) — คำตอบ **(ค) เส้นทางอื่น**:
+  1. decoder สร้าง `CSkillAttr` **ชั่วคราว** ได้จริงผ่าน registry/factory → clone → pool/ctor (ctor `0x751B90` มี call site 3 จุดเท่านั้น: `0x44B3A4` · `0x44B422` · `0x5F8BB8` — ไม่มีใน receive decoder ตรง ๆ)
+  2. handler `0x5F2400` resolve target ด้วย **class id `0x1661` ใน generic attribute map** (lookup `0x463800` / insert `0x463720`) — ไม่ใช้ `[actor+0x3E8]` และไม่ใช้ identity tag `0x32` เป็น lookup key (qword `0x32` เป็น payload ที่ถูก copy ภายหลัง ไม่ใช่ key)
+  3. **ไม่มีแขนงใดใน decode/handler/lookup/insert/bind/apply เขียน `[actor+0x3E8]`** — exhaustive overlapping decode รอบ displacement `0x3E8` พบ write 13 จุดทั้งอิมเมจ แต่ intersection กับ inbound spans = **0** (ผลลบไม่ได้อาศัย linear disassembly)
+  4. slot สร้างที่ `CMyActor` ctor (`0x44CA71` zero · `0x44CBC1` เขียน pointer + register เข้า live manager) — เกิดก่อนรับเฟรม · bind `0x4698B0` อ่าน slot ที่ `0x4698DF` โดยไม่สร้าง · apply `0x751C70` ตรวจ null แล้ว return
+  ⇒ **ผลต่อ GT-059:** sender ซ่อม slot null ไม่ได้เชิงโครงสร้าง แต่ normal construction สร้าง slot ไว้ก่อนแล้ว — ผลลบ GT-059 ต้องแยกเคส `slot null` / `slot non-null + gate อื่น` ด้วยหลักฐาน runtime · nonclaims เต็มอยู่ในจดหมาย (ไม่อ้างว่า slot เป็น null จริงใน runtime · ไม่อ้างว่า slot ไม่มีทางถูก clear หลัง construction)
