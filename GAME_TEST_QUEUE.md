@@ -20,6 +20,15 @@
 
 ---
 
+> 📌 **R145 (2026-08-24 ~11:xx +07:00 · chief cloud) — บริโภคผลหน้าสะพาน 6 ใบ (GT-001/GT-045/GT-058×3/Lua census) + ปิดของค้าง external 8/8 + แก้เลนโค้ดตัวอ่าน:**
+> ✅ **GT-001 → PASS** (recurring · green `fa1e804` · selected 9→10 · CANON_SHA อัปเดตโดยสะพาน `670CE534…`)
+> 🟡 **GT-058 → WIRE PASS / CLIENT BOUNDED-NEGATIVE / NO-CRASH** (5 เฟรม `0x673C` รับครบ frame-sha ตรง pin · จอไม่ขึ้นอะไร · 🔴 **finding: หน้าต่างสกิล K เปิดไม่ได้เลยใน local baseline** — C/Quest/Reward เปิดได้ เฉพาะ Skill ตาย · กด K ไม่มี application request วิ่ง = อาการฝั่ง client ล้วน) · ยังปิดใบไม่ได้ (เทียบ content ในหน้าต่างสกิลไม่ได้) — คำถามถึง Panya
+> 🔴 **GT-045 v2 → WIRE PASS / CLIENT NO-RESULT** (near/far masked-sha ตรง pin · แต่กล้องถูก geometry บัง + control ไปจุดอื่นไม่ได้ ⇒ ห้ามปิดเป็นผลลบ · รอเทสตา Panya)
+> 📦 **ชุดส่งมอบ RE ครบ 8/8 บน git** (3 ใบท้ายเข้า `579b468` · 820 แถวตรงพิน) ⇒ `tools/pf_external_registry.py` ครอบ 8 ตาราง + internal-consistency check (🔴 หลัง adversary: priority/census เป็น projection ของ serializer table — **ไม่ใช่ derivation อิสระ** · check ยืนยัน projection ไม่หลุด sync + grammar gate + evidence→inventory join จริง 290/290) · สวีต 2035/324/0 เขียว(cloud sanity) · SKIP-CENSUS 12→26 · **PR โค้ดรอ gate**
+> 📌 **คำถามค้าง #1 ของ R144 (เลนลูท) — ตอบแล้ว: `ItemOperateVitalRes` encoder มีอยู่แล้วใน `inventory.py` 3 ทรง** ⇒ ไม่ต้องเปิดเลนใหม่ · ที่ขาดคือ 2 ใบสะพาน (RE-059 ไบต์จริง Res · RE-060 สคีมรหัสไอเทม `26xxxxx`)
+> 📖 **Lua API census (จดหมาย `0951`):** 59/160 ชื่อผูกกับ stub no-op `0x0045FA00` (รวม `Player.MobAppear` 3,532 calls!) ⇒ **ห้ามใช้ call_count เดี่ยว ๆ เป็นลำดับความสำคัญ** ต้องอ่านคู่ `binding_status` · 47 IMPLEMENTED · 51 UNRESOLVED
+> ⏱️ **erratum:** บล็อกเวลา R144 เพี้ยน 7 ชม. (จริง 09:51–10:21 +07:00 ไม่ใช่ 16:4x–17:4x) — แก้ในบล็อกสถานะ GT-047
+
 > 📌 **R143 (2026-08-24 ~09:0x +07:00 · chief cloud) — บริโภคจดหมาย 6 ใบหลัง sync ฝั่งสะพานกลับมาเดิน · ปิด 2 ใบ static + แก้บั๊ก parser:**
 > ✅ **GT-055 → PASS/DONE** (ผล 02:41: `0x36DB` string field = **tag `0x44` + uint32le byte_len + string8** — 32 ASCII bytes ไม่มี `00` สลับ (GT-018 · corroborate GT-010/011) · `0xAC52` = **tag `0x48` + uint32le byte_len + UTF-16LE** (GT-019) · ป้าย `UNTAGGED_*` ของชุดส่งมอบ = ขอบเขต helper ไม่ใช่ full-wire claim)
 > ⇒ **parser เราผิดจริงฝั่ง `0x36DB`** — chief แก้ในรอบเดียวกัน: `opaque_utf16le`→`opaque_string8` · เลิกบังคับความยาวคู่ · dated amendment HYP-PF-015/021 (5 จุด) + re-pin ledger sha · **PR โค้ด #16 (`fa1e804`) เปิดแล้ว รอ gate — ยังไม่เข้า `main` ณ ตอนเขียน · ถ้ารอบหน้าไม่เห็น merge ให้เช็ค PR #16** · ฝั่ง `0xAC52` โค้ดเราถูกอยู่แล้ว ไม่แตะ
@@ -357,7 +366,9 @@
 > · GT-022/025 พิสูจน์ท่านอน = DYING_LATCH (`_F_DIE_000` ยังไม่เคยถูกสังเกต — ห้าม flip HYP-PF-023)
 > · GT-024 พิสูจน์เลขเรนเดอร์บนผู้เล่น + HP ไม่ลด (สองปาก) — ที่มาของ GT-031
 
-## GT-001 Smoke: full-loop บน canonical DB หลังทุก commit สำคัญ  [🟢 PENDING (recurring) — 🔁 **re-arm ยิงแล้ว R125** (PR #9 แตะ `src/`) · บูต HEAD จาก resolver · **PASS ล่าสุดที่ `cf81730` 2026-08-23 01:14 (+07:00)**] 🔁
+## GT-001 Smoke: full-loop บน canonical DB หลังทุก commit สำคัญ  [🟢 PENDING (recurring) — 🔁 **re-arm ยิงแล้ว R125** (PR #9 แตะ `src/`) · บูต HEAD จาก resolver · **PASS ล่าสุดที่ green `fa1e804` 2026-08-24 09:41 (+07:00) · R145 บันทึก**] 🔁
+
+> ✅ **PASS R145 (ผลหน้าสะพาน 2026-08-24 09:41 +07:00 · Codex LOCAL):** full loop บน resolver-green `fa1e804` (tree ตรง main HEAD `94f0ce3`) — login → Port Royal → ออกด้วย X · selected sessions `9→10` · max lease `10→11` · open sessions หลังหยุด 0 · `integrity_check=ok` FK 0 · frame proof 3/3 · **`CANON_SHA.txt` อัปเดตแล้วโดยสะพาน** `EE785A79…` → `670CE534…` (การเข้าเกมเพิ่ม selected session/lease ตามที่ใบคาด)
 
 > ✅ **RESULT 2026-08-23 01:10–01:14 (+07:00) — PASS บน main HEAD `cf81730` (worktree clean)** · full loop: login → Channel 1 → PVP → Arena01 → เข้าแมพ (HP 100/100 · Port Royal · chat online) → ออกด้วย X+ยืนยัน → Ctrl+C สะอาด
 > canonical DB SHA เปลี่ยน**แบบคาดหมาย** (session +1): `6BFCEDD5…FE498FC7` → `23FD885AC4CBBFAC5E06C9B11506F6EA9F985DA82F4522383DFCC14A91C1816A` · `CANON_SHA.txt` อัปเดตแล้วโดยผู้เทส · backup ค่าเก่ายังอยู่
@@ -1653,7 +1664,11 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt041.sqlite3 --move-autho
 - **result:** (ผู้รับงาน static บนสะพานกรอก: เลข id + เส้นทาง join · path TSV + sha256 · sha อิมเมจก่อน-หลัง · เวลา)
 
 
-## ⭐ GT-045 GROUNDDROP-RENDER-001 [attended, in-game]: บิต `0x08` ของ `0x5F85B0` คือ "วัตถุลูทบนพื้น" ไหม — ยิงเรคคอร์ดที่มีพิกัดโลกเข้าไปแล้วดูว่าไคลเอนต์วาดอะไร  [⏸ **PAUSED-รอ-Panya (R128 · คำสั่ง 16:56 — ใบ eye-dependent ห้ามรัน/ห้ามปิด unattended)** · v2 **merge เข้า `main` แล้ว** (PR #10 · เขียว(Actions run 32631974238) · merge `e51bdac`) — เงื่อนไข "รอ merge" หมดไป พร้อมบูตทันทีที่ Panya ว่าง · **ห้ามบูต v1 ซ้ำ** · สิทธิ์เขียน encoder จาก span นี้ปลดแล้วโดย GT-042 PASS (R123) · อ่านคู่ FINDINGS_R128 (GT-045 v2 = ตัวทดสอบข้างเคียงของ H1)]
+## ⭐ GT-045 GROUNDDROP-RENDER-001 [attended, in-game]: บิต `0x08` ของ `0x5F85B0` คือ "วัตถุลูทบนพื้น" ไหม — ยิงเรคคอร์ดที่มีพิกัดโลกเข้าไปแล้วดูว่าไคลเอนต์วาดอะไร  [⏸ **PAUSED-รอ-Panya · WIRE PASS / CLIENT NO-RESULT (viewpoints unreached · ผลหน้าสะพาน 2026-08-24 10:06 +07:00 · R145 บันทึก — 🔴 ห้ามปิดเป็นผลลบ)** · v2 merge เข้า `main` แล้ว (PR #10 · merge `e51bdac`) · **ห้ามบูต v1 ซ้ำ** · อ่านคู่ FINDINGS_R128 (GT-045 v2 = ตัวทดสอบข้างเคียงของ H1)]
+
+> 🟡 **สถานะ R145 (ผลหน้าสะพาน 2026-08-24 09:54–10:06 +07:00 · Codex LOCAL · บริโภคจดหมาย `1009`):**
+> **ชั้น wire:** ✅ PASS ตรง v2 — near PC 44 bytes decoded `trigger+30X` · far `trigger+800X` · masked sha256 ตรง pin ทั้งคู่ · `GROUND_LOOT_BIT08_RENDER_NEAR_ONCE`/`FAR_ONCE` อย่างละครั้ง
+> **ชั้น client-observable:** 🔴 **NO-RESULT — ห้ามปิดเป็นผลลบ** — กล้องถูกชั้นไม้/ถังบังพื้นที่ข้างหน้า · computer-control สูญเสีย enumerate หน้าต่างช่วงท้าย ⇒ ไปจุด G1b/G2 หรือกวาด 360° ไม่ได้ ⇒ **แยก "ไม่วาด" ออกจาก "วาดนอกมุม/ถูก geometry บัง" ไม่ได้** · นัดเทสตา Panya (เดิม 26 ส.ค.) ยังจำเป็น
 
 ### 🟡 บล็อกผลรอบแรก (2026-08-23 14:52-15:08 · ผลเต็ม: `notes_to_chief\20260823_1530_gt-results.md` §GT-045) — `[DONE: WIRE EXACT / CLIENT NO-RESULT]` ไม่ใช่ FAIL
 - **ชั้น wire ผ่านเป๊ะตามดีไซน์ v1:** label near/far อย่างละ 1 ครั้ง เรียงใกล้ก่อนไกล ·
@@ -2297,7 +2312,14 @@ gap ที่ต้องปิด      ไม่พบ static link จาก 0x
 
 ---
 
-## ⭐ GT-058 LEARN-SKILL-RESULT-001 [attended, in-game]: ไคลเอนต์ "ทำอะไร" กับเฟรม CLearnSkillResultVital (0x673C) เมื่อรับ sweep 5 สเต็ป — อัปเดตหน้าต่างสกิล / ขึ้นบรรทัดแชต / ไม่เห็นอะไร / หลุด  [⏸ PAUSED-รอ-Panya (คำสั่ง 16:56 — ใบ eye-dependent ห้ามรัน/ห้ามปิด unattended) · ✅ เงื่อนไข merge หมดแล้ว (R139) — เหลือ (ข) ตอนบูต: resolver คืน BOOT_COMMIT ที่มี `9691bcc` เป็น ancestor **และ** ผ่านบล็อกยืนยันก่อนบูตของใบนี้ (บล็อกยืนยันคือส่วนหนึ่งของ (ข) — กัน main ที่ revert เลนทีหลัง) + (ค) Panya ปลดพัก attended]
+## ⭐ GT-058 LEARN-SKILL-RESULT-001 [attended, in-game]: ไคลเอนต์ "ทำอะไร" กับเฟรม CLearnSkillResultVital (0x673C) เมื่อรับ sweep 5 สเต็ป — อัปเดตหน้าต่างสกิล / ขึ้นบรรทัดแชต / ไม่เห็นอะไร / หลุด  [🟡 **WIRE PASS / CLIENT BOUNDED-NEGATIVE / NO-CRASH (ผลหน้าสะพาน 2026-08-24 · Panya-driven · R145 บันทึก)** — sweep 5 เฟรมรับครบ ไม่ crash · จอไม่ขึ้นอะไรทั้ง 5 สเต็ป · 🔴 **แต่ยังปิดใบไม่ได้:** baseline เปิดหน้าต่างสกิล (K) ไม่ได้ ⇒ เทียบ content ภายในหน้าต่างสกิลไม่ได้เลย — รอ Panya ตัดสินว่าจะปิดที่ bounded-negative หรือรอเลน skill-window ก่อน]
+
+> 🟡 **สถานะ R145 (2026-08-24 ~11:xx +07:00 · chief cloud — บริโภคผลหน้าสะพาน 3 ใบ: `0953` + correction `1037` + addendum `1056`):**
+> **ชั้น wire:** ✅ PASS — client รับ sweep `0x673C` ครบ 5 เฟรม (37/50/50/77/77 bytes · frame sha256 ตรง pin ทั้ง 5 · raw `GAME_20260824_094807_404629_62314.txt`) · version byte `0` ไม่ทำให้ reject/crash
+> **ชั้น client-observable:** 🟡 **BOUNDED-NEGATIVE** — ทั้ง 5 สเต็ปไม่มี skill window/list เปลี่ยน · ไม่มีแถวแชต/system message ใหม่ · HP/HUD/แมพเดิม · หลัง sweep client ยังรับ input Q/X ได้ = **NO-CRASH / responsive**
+> 🔴 **finding ใหม่ (correction `1037` หลัง Panya ทัก · addendum `1056`):** หน้าต่างสกิล **(K) เปิดไม่ได้เลยใน local baseline นี้** — tooltip `สกิล (K)` แสดงแต่ทั้ง hotkey K และคลิกไอคอนตรง ๆ ไม่เปิดหน้าต่าง ทั้งก่อนและหลัง sweep · **control พิสูจน์ว่าไม่ใช่ input/focus พัง:** `C`=CHARACTER เปิดได้ · `Quest(J)`/`Reward` เปิดได้ · เฉพาะเส้นทางเปิด Skill window ที่ตาย · **wire control:** ช่วงกด K ทุก C2S frame (#21–#178, 158 เฟรม) เป็น `GSCN_RunTimeProtocolReq` heartbeat 12 ไบต์ล้วน — **ไม่มี application request วิ่งตอนกด K** ⇒ อาการอยู่ฝั่ง client ล้วน ไม่ถึง server · สาเหตุภายในยังไม่พิสูจน์
+> ⇒ **เทียบ content ภายใน skill window ไม่ได้** เพราะเปิดหน้าต่างไม่ได้ ⇒ **NO-RESULT ต่อ objective หลักของใบ (ไคลเอนต์อัปเดตอะไรใน skill window)** · คำถามถึง Panya: ปิดใบที่ bounded-negative (0x673C เดี่ยวไม่ขยับ UI) หรือค้างรอเปิด skill-window ให้ได้ก่อน?
+> 🔧 **ผู้เทสเสนอแก้ pass criteria:** ใบสั่งกำหนดทั้ง "sessions selected +1" และ "run-copy ไบต์ตรงก่อน-หลัง" ซึ่งขัดกันเอง (session ถูก persist ⇒ ไบต์ต้องเปลี่ยน) — ผลจริงคือ **row-diff ทุกตารางต่างเฉพาะ `sessions` +1 แถว (selected char 1, lease 12) ตามที่ใบเองคาด** ⇒ เสนอเปลี่ยน "byte-identical" เป็น "row-diff-except-one-expected-session" · **chief เห็นด้วย** — บันทึกเป็นข้อเสนอถึง Panya (ไม่แก้ pass criteria เองเพราะเป็น attended ที่ Panya ขับ)
 
 > 📎 **สถานะแวดล้อม (R139 · 2026-08-24 04:5x +07:00): เงื่อนไข (ก) ปิดแล้ว** — PR โค้ด #14 merge เข้า `main` แล้ว (merge commit `9691bcc` · commit เลน `e34d91f` เป็น ancestor ของ `origin/main` ยืนยันด้วย `merge-base --is-ancestor`) · gate เขียว(Actions run 32668480284 · **subset ไม่ใช่ gate เต็ม** · verdict `success` จาก `ci-status:ci/e34d91f….json` · ref `refs/pull/14/merge`) · ยืนยันซ้ำบน clone `main` ฝั่ง cloud: โมดูลเทสของเลน 84 passed / 22 skipped เปิดเผย / 220 subtests และสวีตเต็ม เขียว(cloud sanity 1976/324/0) ⇒ **(ก) จบ** · **ใบยังพักตามคำสั่ง 16:56 — ห้ามบูตจนกว่า Panya ปลดพัก** และตอนบูตต้องเช็ค (ข) BOOT_COMMIT มี `9691bcc` เป็น ancestor
 

@@ -62,15 +62,26 @@
 | 6 | `PF_DATA_EVIDENCE`: evidence_id ไม่ซ้ำ · sha256 UPPER-case 64 ตัว · parse_status | 290 แถว · 287 PASS / 3 NONSTANDARD_GRAMMAR |
 | 7 | `proven_semantics` = `UNKNOWN` ทุก tag ยกเว้น `0x12`=uint16 · `0x2A`=float32 | pin ไว้ กันตารางรุ่นหลัง "อัปเกรด" ชนิดเงียบ ๆ |
 
-**ข้อ 5 คือข้อที่มีค่าที่สุด:** การ์ด `field_offset` ที่ R144 ส่งไปให้สะพาน pin ชุด static-open ไว้ด้วย membership digest
-โดย derive จากคอลัมน์ `field_offset` ของตารางใบหนึ่ง · ตาราง priority เดินคนละคอลัมน์ของคนละไฟล์แล้วได้ **181 ใบเดียวกัน**
-⇒ เทสยืนยัน **ความเท่ากันของเซ็ต ไม่ใช่แค่จำนวน** เพราะการโจมตีที่ adversary ของ R144 หาเจอคือชนิดที่รักษาจำนวนแล้วสลับสมาชิก
+🔴 **แก้ตัวเองหลัง adversary (สำคัญ — เดิมรอบนี้เขียนผิดในทางที่โปรเจกต์เกลียด):**
+เดิมผมโฆษณาว่าข้อ 2/5 เป็น "corroboration จากสอง derivation อิสระ" — **ผิด** · adversary regenerate คอลัมน์
+`serializer_status`/`serializer_blockers` ของ priority ได้ครบ **519/519 จาก `field_offset` ของ serializer table ตัวเดียว**
+(มันคือ projection: `OPEN ⟺ blockers ≠ N/A` · blockers = เซ็ต reason ของ `UNKNOWN(...)` ใน field_offset) ·
+census ก็เป็น **group-by** ของ serializer table เดียวกัน ⇒ **ทั้ง 8 ตารางมาจาก image เดียว pass เดียว** (`source=IMAGE` ทุกแถว)
+⇒ cross-check เหล่านี้ยืนยัน **internal consistency** (projection ไม่ถูกแก้มือให้หลุด sync · ไม่มีอะไร malformed ·
+foreign join จริงหนึ่งเส้น evidence→inventory) **ไม่ใช่ corroboration** — re-run ของ Codex pass เดิมจะผ่านทุกข้อโดยปริยาย ·
+สิ่งเดียวที่แยก "self-consistent" ออกจาก "true" ได้คือ `--verify-spans` กับอิมเมจจริง ซึ่งรันบนสะพานเท่านั้น
+ผมเขียนความจริงข้อนี้ลง docstring/เทส/จดหมายทุกที่แล้ว และ **ลบคำว่า independent/corroboration ออกหมด**
 
-**เทสใหม่ 9 ใบ** (6 ใบเป็น mutation ที่ต้องแดง: census len ขัดแถวจริง · frequency drift · การอัปเกรด semantics ·
-membership swap แบบรักษาจำนวน · evidence_id ซ้ำ · sha256 ที่ถูกแปลงเป็นตัวพิมพ์เล็ก)
-**สวีตเต็ม:** `2030 passed / 324 skipped / 0 failed` เขียว(cloud sanity) · `--verify` exit 0 ·
+**สิ่งที่ทำให้ check ยังมีค่า (แม้ไม่ independent) — เพิ่มตาม adversary:**
+- 🆕 **field_offset grammar gate:** ทุก cell (6,931) ต้อง match 1 ใน 9 class (`+0x`/`DEREF`/`STACK@`/`N/A`/`N+_bytes`/`UNKNOWN`/`PHI`/`RET`/`OBJ+`) · pin count ต่อ class ⇒ garbage offset สอดเข้าไม่ได้ (เดิมอ่านแค่ substring `UNKNOWN(` · 75% ของ cell แก้เป็นขยะได้เงียบ ๆ)
+- 🆕 **priority self-consistency:** ต่อแถว `OPEN ⟺ blockers≠N/A` **และ** blockers = เซ็ต reason ของ `UNKNOWN(...)` ใน field_offset ของ message นั้น ⇒ จับ priority ที่ถูกแก้มือให้หลุด sync (จับ self-contradiction แถวเดียว C2 ที่เดิมมองไม่เห็น)
+- 🆕 **evidence→inventory join (foreign join จริงเส้นเดียว):** ทุกแถว 290 ต้องตรง inventory ที่ id/path/size/digest (case-fold) · parse split pin เต็ม 287 PASS / 3 NONSTANDARD_GRAMMAR ⇒ จับ D1/D2 ที่เดิม shape check ปล่อยผ่าน
+- **nonclaim ที่จดชัด:** check เหล่านี้ **ไม่จับ** same-width tag swap (0x14↔0x19 · semantics UNKNOWN ทั้งคู่) และครอบแค่ 11/401 tag ที่ census ตั้งชื่อ — งานพวกนั้นเป็นของ `--verify-spans` กับอิมเมจ
+
+**เทสใหม่ 14 ใบ** (11 เป็น mutation ที่ต้องแดง — รวม: garbage field_offset · reason desync · OPEN-ไม่มี-blocker · evidence digest ไม่ตรง inventory · NONSTANDARD_GRAMMAR ถูก relabel · census len/frequency/semantics · membership swap · evidence_id ซ้ำ · sha ตัวพิมพ์เล็ก)
+**สวีตเต็ม:** `2035 passed / 324 skipped / 0 failed` เขียว(cloud sanity) · `--verify` exit 0 ·
 `verify_hypothesis_ledger.py` PASS entries=42 (รอบนี้ไม่เปิด hypothesis ใหม่ จึงไม่แตะ ledger/coverage)
-**SKIP-CENSUS:** pin ขยับ 12 → 21 (เทสใหม่ทุกใบอยู่ใต้ precondition `external_re_tables` ซึ่งตอนนี้ตั้งชื่อครบ 8 ไฟล์)
+**SKIP-CENSUS:** pin ขยับ 12 → 26 (เทสใหม่ทุกใบอยู่ใต้ precondition `external_re_tables` ซึ่งตอนนี้ตั้งชื่อครบ 8 ไฟล์ · reason ของ precondition เพิ่มชื่อไฟล์ที่ขาด กันสะพาน 5/8 dark เงียบ ๆ)
 **pin commit:** `PF_BRIDGE_PIN_COMMIT` 284d986 → **579b468** (ตรวจแล้วว่า `579b468:external` กับ `origin/main:external`
 เป็น tree object เดียวกัน `206370d`)
 
