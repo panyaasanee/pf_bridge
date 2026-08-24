@@ -1,6 +1,6 @@
-# R152 (ag6141) — บริโภคผล RE-062 (no-slot-write) + ปิดเงื่อนไข (ก) ของ GT-060
+# R152 (ag6141) — บริโภคผล RE-062 (no-slot-write) + ปิดเงื่อนไข (ก) ของ GT-060 + บริโภคผล GT-059 unattended (ครึ่งหลัง)
 
-- เวลา: 2026-08-24 ~17:5x-18:2x (+07:00) · (~10:5x-11:2xZ UTC)
+- เวลา: 2026-08-24 ~17:5x-19:0x (+07:00) · (~10:5x-12:0xZ UTC) — รวมครึ่งหลัง (จดหมาย GT-059 เข้าระหว่างรอบ)
 - session branch: `claude/exciting-goldberg-ag6141` (pf_bridge) — ล็อกรอบ = draft PR #53 เปิดก่อนทำงานตาม v5
 - ไม่แตะ repo โค้ด (`pirate-force-server`) — รอบนี้เป็นการอ่านคำตัดสิน + บริโภคผล + อัปเดตคิวล้วน
 
@@ -56,6 +56,8 @@
 
 ## สถานะที่ทิ้งไว้ให้รอบถัดไป
 
+- 🔴 **งานแรกของรอบถัดไป: EVENT-EXPORT-001** (เลนโค้ด `pirate-force-server` · pre-approved) — exporter พิมพ์
+  scenario event หนึ่งบรรทัด ASCII ต่อ event **ทั้ง dispatch และ reject** ออก console (ดูบล็อกครึ่งหลัง + adversary D1/D2)
 - **GT-060:** เหลือ (ข) GT-045 เทสตา PASS + คำเคาะ composition จากคุณ Panya · (ค) ปลดพัก attended
 - **GT-059:** เหลือ (ข) BOOT_COMMIT ตอนบูต · (ค) ปลดพัก — กุญแจอ่านผลลบครบแล้ว
 - **คิว RE (static):** เปิด 0 ใบ — งาน static ทั้งเลนว่าง รอผล attended เป็นตัวเปิดใบถัดไป
@@ -83,3 +85,71 @@
 ผลลบจะจบที่ UNRESOLVED ระหว่างสองเคส · จดลงจดหมาย R152 เป็นคำถามค้างข้อ 3 ถึงคุณ Panya/รอบถัดไป
 (ทางเลือกที่เห็น: ออกแบบใบ RE/เครื่องมือฝั่งสะพานหลังผลลบจริงเกิดขึ้น — ไม่บล็อกการบูต GT-059 เพราะผลบวก
 ไม่ต้องใช้ตัววัดนี้)
+
+---
+
+# ครึ่งหลังของรอบ (หลัง commit แรก `d1cfdd4`) — จดหมาย GT-059 unattended เข้ามาระหว่างรอบ
+
+**เหตุการณ์:** ระหว่างรอบ `main` ขยับด้วย sync สามก้อน (386fbfb · f7f4e9e · 51309f7 — เขตเขียนของผู้เทสล้วน
+รวม 13 ไฟล์: จดหมาย 1 ใบ + `evidence_screens/` 12 jpg) ⇒ chief merge `origin/main` เข้า branch รอบ (merge commit
+ไม่ rewrite history · เขตเขียนไม่ทับกัน · adversary ยืนยัน diff เป็น A ล้วน ไม่มี M/D — ไม่ทับ/ไม่ทิ้งของฝั่งใด)
+แล้วบริโภคจดหมายใหม่ในรอบเดียวกัน · 🔴 **หลักฐานชิ้นหลักไม่ได้เข้า repo:** วิดีโอ FULLROUND 2 ไฟล์ · raw GAME
+log · console log · DB backups อยู่บนเครื่องสะพานเท่านั้น (sync allowlist ไม่พาเข้ามา) — cloud ตรวจซ้ำได้เฉพาะ
+9 jpg (sha ตรงตารางจดหมายครบ — adversary คำนวณเอง) ⇒ ขอสะพานเก็บไฟล์จนใบปิด (จดในจดหมาย R152b)
+
+**จดหมายที่บริโภคเพิ่ม (ใบที่ 2):** `20260824_1757_GT059-NO-RESULT-unattended-no-skill-window-wire-exact.md`
+(ผู้เทส local · **UNATTENDED ตามคำสั่ง Panya** · 17:31-17:55 +07:00 · สอง session รวม relog variant)
+
+- **ชั้น wire: byte-exact PASS** — 3 triggers = 6 เฟรม `57→68 bytes` ห่าง 3.000-3.001s · SHA256 ทั้งสองเฟรมตรง pin
+  ทุก occurrence · DB row-diff = `sessions` +1 ต่อ session (selected_character=1) · integrity ok · canonical ไม่ขยับ
+  (`670CE534...FEC21` ก่อน-หลังทุกจุด) · teardown สะอาดทั้งสอง session
+- **ชั้น client: provisional** — "ไม่พบ Skill window ในรอบนี้" ทุกจุดวัด S0/S2/S3/S4 (session 1) และ S5/S6
+  (session 2 — trigger ก่อน K แรก ตาม P3 variant) · positive control `C` เปิด CHARACTER ได้ทั้งสอง session (NO-CRASH)
+  · **S1 เก็บไม่ทัน** (round-trip computer-use ยาวกว่าหน้าต่าง 3 วิ — tooling ไม่ใช่ product) ⇒ A/B UNRESOLVED
+- **สถานะที่ chief บันทึก: GT-059 คง PENDING/NO-RESULT** — ตามกฎ AGENTS.md §9 รอบ unattended ห้ามปิดใบ attended
+  เป็น P2/falsify · ตัวปิด = Panya ยืนยันภาพ negative หรือรัน attended
+- **คำขอ 3 ข้อของผู้เทส — chief ตอบครบ:**
+  1. รับ artifacts เข้าคิว + คง PENDING/NO-RESULT ✅ (แก้หัวใบ + สารบัญแล้ว)
+  2. ไม่ใช้ S2 แทน S1 ✅ (จดใน caveat หัวใบ)
+  3. **คำเคาะเรื่อง event string:** build ปัจจุบันไม่ serialize `skill_attr_hypothesis_attr_sweep_sent` ออกไฟล์ —
+     chief เคาะ **ยอมรับ `[G>]` labels + raw SENT/frame hexdump ที่ SHA ตรง pin เป็นหลักฐาน dispatch** (raw frame
+     ตรง pin คือหลักฐานปฐมภูมิ · event string เป็นตัวรอง) · adversary รอบสองพิสูจน์จากซอร์สยืนยัน: `self.events`
+     append 179 จุดใน `runtime.py` **ไม่มีจุดอ่าน/พิมพ์/เขียนไฟล์เลย** (ผู้บริโภคเดียว = เทส) — เกณฑ์ event เดิม
+     ของใบไม่เคยเป็นจริงได้ตั้งแต่วันเขียนใบ ทั้งฝั่ง dispatch และฝั่ง reject 6 ตัว · เปิดงานเลนโค้ดรอบถัดไป:
+     **EVENT-EXPORT-001 — console exporter พิมพ์ scenario event หนึ่งบรรทัด ASCII ต่อ event ทั้ง dispatch และ
+     reject** (สโคปต้องครอบ reject ด้วย ไม่งั้นเส้นวินิจฉัย "sweep ไม่ออก" ยังมืด — defect D1/D2 ของ adversary
+     รอบสอง) · งานเล็ก pre-approved pattern เดิม · ยังไม่เริ่ม — **รอบถัดไปหยิบข้อนี้ก่อน** · แก้ใบ GT-059
+     บรรทัด trigger/result template ให้เลิกชี้ event ที่ไม่มีวันโผล่แล้ว (ทำในรอบนี้)
+
+**ความหมายเชิงเนื้อหา (อ่านคู่ RE-062 — จดหมายผู้เทสก็อ่านคู่เองแล้ว):** wire ครบ + ไม่พบ window (provisional)
+ตรงเงา P2 แต่**ยังไม่ตัดสิน** — ถ้า Panya ยืนยันภาพ ⇒ P2 จริง แล้วคำถามถัดไปคือเคส `slot null` vs
+`slot non-null + gate อื่น` ซึ่ง (คำถามค้างข้อ ③) ตัววัด runtime ยังไม่ถูกนิยาม — สองเรื่องนี้บรรจบเป็นงานเดียว
+
+**ไฟล์ที่แตะเพิ่มในครึ่งหลัง (5 path):** `GAME_TEST_QUEUE.md` (หัวใบ GT-059 + เกณฑ์ wire + สารบัญ) ·
+`rounds/R152_...md` (ไฟล์นี้) · `notes_to_chief/FROM_CHIEF_R152_...md` (ภาคผนวก) · stub `.CONSUMED.txt` ใบที่ 2 ·
+สำเนา `consumed/` ใบที่ 2 · (+`CHIEF_CONTINUATION.md` แก้บรรทัด R152 เดิมให้ครอบครึ่งหลัง)
+
+**ผล pf-adversary รอบสอง (ครึ่งหลัง — รันจบก่อน commit ที่สอง):**
+
+**ยืนยันว่าถูก (พยายามหักล้างแล้วล้มเหลว):** merge ถูกต้อง (diff = A ล้วน · ของสองฝั่งครบ) · เส้น "ห้ามปิด P2
+จากจดหมายฉบับเดียว" เคารพครบทั้ง 4 ที่ · ตัวเลขทุกตัวตรงต้นฉบับ (3 triggers/6 เฟรม · 57→68B · 3.000-3.001s ·
+sessions 11→12 · canonical ตรง `CANON_SHA.txt`) · เกณฑ์ `[G>]`+hexdump ไม่อ่อนกว่า event string (forge ง่ายเท่ากัน
+· อยู่ชั้นเดียวกัน) · sha ภาพ 9/9 ตรงตาราง (adversary คำนวณเอง + เปิดดู 2 เฟรมสอดคล้อง timeline)
+
+**Defect D1-D7 — แก้ครบก่อน commit ที่สอง:**
+- D1 (สูง): ใบ GT-059 อีก 2 จุด (บรรทัด trigger + result template) ยังชี้ event ที่ไม่เคยถูกเขียนออกไฟล์
+  (adversary พิสูจน์จากซอร์ส: in-memory เท่านั้น) — แก้ทั้งสองจุดแล้ว: หลักฐาน = `[G>]`+hexdump · เส้นวินิจฉัย
+  reject ปัจจุบันมืด ให้จดข้อเท็จจริงส่งกลับ chief
+- D2 (สูง): EVENT-EXPORT-001 สโคปต้องครอบ reject events ด้วย — ขยายแล้ว · งานไม่มี card ในคิว (โดยดีไซน์:
+  เป็นเลนโค้ดของ chief ไม่ใช่ใบสะพาน/ใบเทส) — กันหายด้วยการเขียนใน CHIEF_CONTINUATION บรรทัด R152 +
+  บล็อก "สถานะที่ทิ้งไว้" ให้รอบถัดไปหยิบก่อน
+- D3 (กลาง-สูง): "รับ artifacts เข้าคิวแล้ว" เกินจริง — mkv/raw/DB backups อยู่เครื่องสะพานเท่านั้น ไม่เข้า repo
+  — แก้ถ้อยคำ + ขอสะพานเก็บไฟล์จนใบปิด
+- D4 (กลาง): "ปิด P2 ได้ทันที" จากภาพนิ่งได้ — อันตราย (point-sample) — แก้: ต้องยืนยันจาก**วิดีโอต่อเนื่อง**
+  เท่านั้น + คำยืนยันต้องเขียนเป็นจดหมายลง notes_to_chief เพื่อ audit
+- D5 (ต่ำ-กลาง): อ้างผล adversary รอบสองก่อนมีผล — แก้ด้วยบล็อกนี้ (เขียนหลังผลจริงมาแล้ว)
+- D6 (ต่ำ): เวลาหัวไฟล์ไม่ครอบครึ่งหลัง + สารบัญไม่มี +07:00 — แก้แล้ว
+- D7 (ต่ำ): "พิสูจน์แล้วชั้น wire" ต่อหน้า Panya ไม่บอกแหล่ง — แก้เป็น "ตามจดหมาย 1757 · cloud ตรวจซ้ำได้เฉพาะภาพ"
+
+**คำถามที่ adversary เปิดและคำตอบของรอบนี้:** เส้นวินิจฉัยเหตุปฏิเสธเมื่อ sweep ไม่ออก — ปิดด้วยสโคปใหม่ของ
+EVENT-EXPORT-001 (พิมพ์ reject ด้วย) + ระหว่างที่ยังไม่มี ให้ผู้เทสจดข้อเท็จจริงฝั่ง input แล้ว chief วินิจฉัยจากซอร์ส
