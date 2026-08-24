@@ -9,7 +9,8 @@
 - `GT-034` (NO-RESULT ×2 — รอบสอง 2026-08-24 02:28: computer-use `list_apps` timeout ×3 หยุดก่อน input แรก · scenario ยังไม่ถูกยิง (`StartGameReq=0`) · ผู้เทสเสนอรอ **Panya เทสด้วยตา 2026-08-26** · tooling blocker "ffmpeg console ทับจอ" แก้แล้ว — ดู R143) · `GT-035` / `GT-036` (BLOCKED รอ GT-034/045) · `GT-045` v2 (⏸ merge แล้ว — ก่อนบูตต้องผ่าน (ข) เช็ค resolver/BOOT_COMMIT ว่า clone ที่บูตมีเลน v2 จริง + (ค) Panya ปลดพัก · ถ้อยคำเดิม "พร้อมบูตทันที" ตัดเงื่อนไข (ข) ทิ้ง — แก้โดย R142 ให้ตรงจดหมาย R141)
 - 🆕 `GT-058` LEARN-SKILL-RESULT client-observe (⏸ PAUSED-รอ-Panya 16:56 — เงื่อนไข merge หมดแล้ว: PR #14 merge เข้า `main` `9691bcc` · เขียว(Actions run 32668480284 · subset) — เหลือ (ข) เช็ค BOOT_COMMIT ตอนบูต + (ค) Panya ปลดพัก · ปลดโดย R139)
 - 🆕 `GT-059` SKILL-ATTR-WINDOW-GATE-001 (⏸ PAUSED-รอ-Panya 16:56 · 🟡 เงื่อนไข (ก) merge ปิดแล้ว R150 — PR #21 เข้า `main` `543382c` · เขียว(Actions run 32706893952 · subset) · เหลือ (ข) BOOT_COMMIT ตอนบูต + (ค) Panya ปลดพัก · ใบเปิดโดย R149 แต่ไม่ได้เติมสารบัญ — เติมโดย R150 · ตัวตัดสินว่า GT-058 ปิดที่ bounded-negative หรือ rerun ได้ · 🆕 R152: กุญแจอ่านผลลบพร้อมแล้ว — RE-062 DONE: inbound เขียน `[actor+0x3E8]` ไม่ได้เชิงโครงสร้าง ผลลบต้องแยกเคส slot-null/slot-non-null ด้วย runtime · 🆕 R152b: **มีรอบ UNATTENDED แล้ว (17:31-17:55 +07:00) — wire byte-exact PASS ×3 triggers แต่ไม่พบ window ทุกจุดวัดรวม relog (provisional) · ใบคง PENDING/NO-RESULT รอ Panya ยืนยันจากวิดีโอต่อเนื่องหรือรัน attended · A/B unresolved** — ดูหัวใบ)
-- 🆕 `GT-060` PICKUP-CLICK-CAPTURE-001 (🔴 BLOCKED-CONDITIONAL — ใบเปิดโดย R151 ท้ายไฟล์ · จับเฟรม `PickupTerrainThing` ตัวจริงตัวแรกจากคลิกซ้ายบน drop-object ที่วาดจริง — ตัดสิน id derive `0x4543` ถูก/ผิด · เงื่อนไข 3 ข้อ: ✅ (ก) ปิดแล้ว R152 — PR #22 merge เข้า `main` `2c0e3ba` (head `a64d589` เขียว(Actions run 32717828631 · subset) · tree-identical กับ merge commit · re-verify สี่ข้อบน `main` ผ่านครบ) · (ข) มี drop-object วาดจริงคลิกได้ในบูตเดียวกัน — ต้องรอ GT-045 เทสตา PASS **และ** คำเคาะ composition spawner+listener จากคุณ Panya (mutual exclusion โดยโค้ด) · (ค) ปลดพัก 16:56 · P4 ไม่มีวัตถุ = NO-RESULT ห้ามอ่านเป็นผลลบ)
+- 🆕 `GT-060` PICKUP-CLICK-CAPTURE-001 (🔴 BLOCKED-CONDITIONAL — ใบเปิดโดย R151 ท้ายไฟล์ · จับเฟรม `PickupTerrainThing` ตัวจริงตัวแรกจากคลิกซ้ายบน drop-object ที่วาดจริง — ตัดสิน id derive `0x4543` ถูก/ผิด · เงื่อนไข 3 ข้อ: ✅ (ก) ปิดแล้ว R152 — PR #22 merge เข้า `main` `2c0e3ba` (head `a64d589` เขียว(Actions run 32717828631 · subset) · tree-identical กับ merge commit · re-verify สี่ข้อบน `main` ผ่านครบ) · (ข) มี drop-object วาดจริงคลิกได้ในบูตเดียวกัน — 🟡 ครึ่ง composition ปิดแล้ว: **คำเคาะ Panya มาแล้ว (2026-08-24 ~18:3x +07:00 · จดหมาย `notes_to_chief\20260824_1831_PANYA-RULINGS-combine-scenarios-and-open-GT-063.md` §①): allow-list คู่ `ground-loot + pickup-listener` ร่วมบูตเดียวกันได้** (22 เลนที่เหลือ exclusive เหมือนเดิม · วินัยบังคับ: ทุกข้อสังเกตต้องระบุเลนผู้ก่อ ไม่งั้น NO-RESULT) · โค้ด composed-boot อยู่ใน **PR R153 — รอ merge เข้า `main` ก่อน** ⇒ (ข) เหลือสองอย่าง: **GT-045 เทสตา PASS (นัด 2026-08-26) + โค้ด composed-boot merge เข้า `main`** · (ค) ปลดพัก 16:56 · P4 ไม่มีวัตถุ = NO-RESULT ห้ามอ่านเป็นผลลบ)
+- 🆕 `GT-063` ITEMOPERATE-RES-GREENLINE-SHAPE-001 (🔴 BLOCKED — ใบเปิดตามคำตัดสิน Panya 2026-08-24 ~18:3x +07:00 §② (จดหมาย `notes_to_chief\20260824_1831_PANYA-RULINGS-combine-scenarios-and-open-GT-063.md`) · ยิง `ItemOperateVitalRes` `0x4C13` สามทรงแล้วดูจอจริงว่าทรงไหนทำให้บรรทัดเขียว `ได้รับ [<ชื่อ>] * <จำนวน>` ขึ้น · เงื่อนไข 3 ข้อ: (ก) **เลน server สำหรับ sweep 3 ทรงนี้ยังไม่มีในโค้ด** — encoder `0x4C13` มีแล้วใน `src/pirateforce_foundation/inventory.py` (3 ทรง golden-pinned — R147 D1) แต่ scenario/flag สำหรับ sweep ชุดนี้ต้องเปิดเลนโค้ดรอบถัดไป + **รอ merge เข้า `main` ก่อน** · (ข) ⏸ เลน attended ยังพักตามคำสั่ง 16:56 ของ 23 ส.ค. — Panya ต้องปลดพักชัดเจน (จดหมาย 1831 §④ ยืนยันว่ายังไม่ปลด) · (ค) [เสนอ] รวมบูตกับ GT-060 ตาม §③ — ถ้ารวม ใช้วินัย attribution ของ §①: ทุกข้อสังเกตต้องระบุเลนผู้ก่อ ไม่งั้น NO-RESULT · ปิดใบได้เฉพาะเห็นข้อความบนจอที่อ่านออก — "ไม่ขึ้น" ทุกแบบ = NO-RESULT ห้ามเขียนว่า "ไม่มี/ไม่เกิด")
 
 **🔬 งาน static — ทำเมื่อไรก็ได้ ไม่ต้องมีคนเฝ้า ไม่ต้องจับ `LOCK_GAME` · ขนานกับรอบเทสเกมได้:**
 - ใบเก่าในไฟล์นี้: `GT-047` (🟠 จ็อบ 0 ปิดแล้ว 09:16 — source เข้ามือ chief · **R144 ส่ง patch การ์ด `field_offset` กลับแล้วที่ `patches/gt047/` (เขียว 8 ด่านบน cloud) · เหลือฝั่งสะพาน apply patch แล้ว rerun จ็อบ 1–3**) · `GT-049` (✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 09:23 · บันทึก R144:** id 131 ยิงจาก **inbound** `ItemOperateVitalRes` handler `0x005EF5E0` → chat emitter `0x005CC309` — คนละเลนกับ `PickupTerrainThing` 0x1F/0x03/0x22 ของ GT-046 ⇒ **บรรทัดลูทสีเขียว = เซิร์ฟเวอร์ตัดสินการเก็บ** — ดีไซน์เลนลูทฝั่งเราต้องส่ง `ItemOperateVitalRes` เอง)
@@ -2570,7 +2571,7 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt059.sqlite3 --skill-attr
 
 ### 🔴 เงื่อนไขปลดบล็อก (ต้องครบ **ทั้งสามข้อ** ก่อนบูต — ขาดข้อเดียว = ใบอยู่ BLOCKED ต่อ)
 - ✅ **(ก) ปิดแล้ว (R152 · 2026-08-24 ~18:2x +07:00):** PR #22 (เลน HYP-PF-036) **merge เข้า `main` แล้ว** — merge commit `2c0e3ba` · head `a64d589` เขียว(Actions run 32717828631 · subset · อ่านทาง ci-status · sha ตรงชื่อไฟล์ · conclusion `success`) · `git diff head..merge` ว่าง (tree-identical ⇒ คำตัดสินของ head ใช้กับ `main` ได้) · R152 re-verify สี่ข้อบน `main` ผ่านครบ: flag `app.py:107` · `SCENARIO_PRESENT` (`scenarios/pickup_listener_hypothesis_decode_probe.json` ชื่อตรงกับใบ) · `0x4543` ในซอร์สเลน · เขียว(cloud sanity re-derive บน main clone — ดู rounds/R152) — **ตอนบูตยังต้องเช็คว่า BOOT_COMMIT จาก resolver มีเลนนี้จริง** (บล็อก "ก่อนบูต" ข้างล่าง)
-- **(ข)** มี **drop-object ที่วาดจริงและคลิกได้** อยู่ในบูตเดียวกัน — **ตอนนี้ยังไม่มีในบูตใดที่พิสูจน์แล้ว:** ตัว spawn ฝั่ง server ตัวเดียวที่มีคือ GROUND-LOOT-001 (`--ground-loot-hypothesis-scenario`) ซึ่ง (1) **mutually exclusive กับ boot ของ listener โดยโค้ด** และ (2) ตัวมันเอง GT-045 = WIRE PASS / CLIENT NO-RESULT (render ยังไม่ยืนยัน · เทสตาเลื่อนไป 2026-08-26) · งาน static GT-046 **ไม่พิสูจน์** ว่า runtime drop-object list ของ client เคยถูก populate ในเซสชันของเรา ⇒ ข้อนี้ปิดได้ต่อเมื่อ **GT-045 เทสตา PASS** และ **Panya เคาะว่า spawner+listener จะอยู่ร่วมบูตกันอย่างไร** (คำเคาะ composition — **ไม่ใช่อำนาจ chief**)
+- **(ข)** มี **drop-object ที่วาดจริงและคลิกได้** อยู่ในบูตเดียวกัน — **ตอนนี้ยังไม่มีในบูตใดที่พิสูจน์แล้ว:** ตัว spawn ฝั่ง server ตัวเดียวที่มีคือ GROUND-LOOT-001 (`--ground-loot-hypothesis-scenario`) ซึ่งตัวมันเอง GT-045 = WIRE PASS / CLIENT NO-RESULT (render ยังไม่ยืนยัน · เทสตาเลื่อนไป 2026-08-26) · งาน static GT-046 **ไม่พิสูจน์** ว่า runtime drop-object list ของ client เคยถูก populate ในเซสชันของเรา · 🟡 **อัปเดต 2026-08-24 ~18:3x +07:00 — ครึ่ง composition ปิดแล้ว: Panya เคาะแล้ว** (จดหมาย `notes_to_chief\20260824_1831_PANYA-RULINGS-combine-scenarios-and-open-GT-063.md` §①): **allow-list คู่เดียว `ground-loot-hypothesis + pickup-listener-hypothesis` อยู่ร่วมบูตกันได้** — ไม่ใช่ยกเลิก mutual exclusion · 22 เลนที่เหลือ exclusive เหมือนเดิม · คู่ใหม่ต้องขอ Panya ทีละคู่ · 🔴 **วินัยบังคับเมื่อรวม:** จดหมายผลต้องระบุต่อหนึ่งข้อสังเกตว่าเลนไหนเป็นผู้ทำให้เกิด — แยกไม่ออก = ข้อสังเกตนั้น `NO-RESULT` · โค้ดแก้ด่าน `app.py` ~398-402 อยู่ใน **PR R153 (โซน chief) — รอ merge เข้า `main` ก่อน** ตามกติกาเดิม + ต้องมีเทสพิสูจน์ว่าคู่ที่ไม่อยู่ใน allow-list ยังถูกปฏิเสธเหมือนเดิม ⇒ **(ข) เหลือสองอย่าง: (ข1) GT-045 เทสตา PASS (นัด 2026-08-26) · (ข2) โค้ด composed-boot ของ PR R153 merge เข้า `main` แล้ว re-verify บน BOOT_COMMIT** — ครบสองอย่างแล้ว chief เติมบล็อก "ท่า spawn drop-object" ในหัวข้อก่อนบูตข้างล่างจากของจริงที่ merge
 - **(ค)** Panya **ปลดพักเลน attended** (คำสั่ง 16:56 ของ 23 ส.ค. ยังคุมทุกใบที่ใช้ตาคน)
 
 ### objective (claim เดียว)
@@ -2659,3 +2660,133 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt060.sqlite3 --pickup-lis
 - **การเทียบ `object_ref_u32` กับ `element_key` ที่ spawn = งานวิเคราะห์ตอนบริโภคผล** ไม่ใช่ claim ของใบ — ห้ามเขียนผลราวกับพิสูจน์ mapping แล้ว
 - **ไม่ claim ว่าเซิร์ฟเวอร์ต้นฉบับ (ปิดแล้ว กู้ไม่ได้ตลอดกาล) เคยรับ/ตอบเฟรมนี้แบบใด** — listener และการไม่ตอบเป็นดีไซน์ของเราล้วน
 - **result:** (ผู้เทสกรอก: กรณีที่ออก P1/P2/P3/P4 · ภาพ S0..S4 + วิดีโอ พร้อม sha256 · จำนวนคลิก+timestamp จากวิดีโอ · path raw GAME log + hexdump เฟรม C2S ช่วงคลิก + nested id ที่วัดได้ · บรรทัด listener/refusal ที่เห็น (ก๊อปมาทั้งบรรทัด) · ค่า `object_ref_u32`/`opaque_u8` ถ้ามี · NO-CRASH/CRASH · เวลา · sha canonical ก่อน-หลัง · row-diff ของ `run_gt060.sqlite3` · `max(lease_generation)` ก่อน-หลัง)
+
+---
+## GT-063 ITEMOPERATE-RES-GREENLINE-SHAPE-001 [attended, in-game]: ยิง `ItemOperateVitalRes` (`0x4C13`) สามทรงจากเซิร์ฟเวอร์เรา แล้วตัดสินด้วยตาคนว่า **ทรงไหนทำให้บรรทัดเขียว `ได้รับ [<ชื่อ>] * <จำนวน>` ขึ้นบนแชตจริง**  [🔴 **BLOCKED — ห้ามบูตจนกว่าเงื่อนไข (ก)(ข) ข้างล่างครบ** · ใบเปิดตามคำอนุมัติ Panya 2026-08-24 ~18:3x +07:00 §② (จดหมาย `notes_to_chief\20260824_1831_PANYA-RULINGS-combine-scenarios-and-open-GT-063.md`) · (ก) **เลน server sweep 3 ทรงนี้ยังไม่ถูก implement — ต้องเปิดเลนโค้ดรอบถัดไปแล้วรอ merge เข้า `main` ก่อน** · (ข) ⏸ เลน attended ยังพักตามคำสั่ง 16:56 ของ 23 ส.ค. (จดหมาย 1831 §④ ยืนยันว่ายังไม่ปลด) · (ค) การรวมบูตกับ GT-060 เป็น [เสนอ] ตาม §③ — chief ตัดสินเอง]
+
+**ที่มา (สามใบที่ปิดแล้ว 2026-08-24 — อ่านก่อนบูต):**
+- **GT-049** (PASS/DONE · ผลหน้าสะพาน 2026-08-24 09:23 +07:00 · บันทึก R144): ข้อความ id 131 (template `ได้รับ [ $V1 ] * $V2`) ยิงจาก **inbound** `ItemOperateVitalRes` handler `0x005EF5E0` -> chat emitter `0x005CC309` ⇒ **เซิร์ฟเวอร์เป็นผู้ตัดสินว่าเก็บสำเร็จ** ไม่ใช่ไคลเอนต์ — บรรทัดเขียวขึ้นได้ก็ต่อเมื่อฝั่งเราส่งเฟรมนี้เอง
+- **RE-059** (DONE · 2026-08-24 14:13 +07:00): ถอดเฟรม capture จริงครบ 5/5 — ทั้งห้าเป็น `version 2` · `R4=0` · `bag_present_flag=1` · `ItemBagAttr` ยาว 43/52/69/69/43 ไบต์ · 🔴 **`affected_identity_count = 0` ทุกเฟรม** ⇒ เราไม่มี capture ของทรงที่ `count>0` เลยสักเฟรม
+- **RE-060** (DONE · 2026-08-24 14:22 +07:00): pin รหัสตารางไอเทม `22=EQUIPMENT_BASE` · `24=ITEM_CONSUMABLES` · `25=ITEM_QUEST` · `26=ITEM_MISC` · `35=ITEM_ITEMMALL` · สคีม `full_id / 100000 -> table` · `full_id % 100000 -> n_ID` · 🔴 หลักฐานชนิด **ค (candidate 100%-hit) — ไม่ใช่การยืนยันบนสาย**
+
+🔴 **ช่องว่างที่ใบนี้ปิด:** เรามีไบต์ของ 5 เฟรมจริงครบ **แต่ไม่มีใครบันทึกว่าตอนนั้นบนจอขึ้นอะไร** — มีซองจดหมาย ไม่รู้ว่าฉบับไหนทำให้เกิดอะไร · เลน static หมดทางแล้ว (GT-049/RE-059/RE-060 ปิดครบ) ⇒ ต้องยิงจริงแล้วดูจอ
+
+**หมวด:** attended, in-game — ต้องมีคนหน้าจอ · จับ `LOCK_GAME` ตามปกติ
+
+### 🔴 เงื่อนไขปลดบล็อก (ขาดข้อเดียว = ใบอยู่ BLOCKED ต่อ · (ก)(ข) บังคับ · (ค) เป็นทางเลือก)
+- **(ก) เลน server ยังไม่มี — นี่คือข้อเท็จจริง ณ 2026-08-24 ~19:0x +07:00:** encoder `ItemOperateVitalRes` **มีอยู่แล้ว** ใน `src/pirateforce_foundation/inventory.py` (3 ทรง golden-pinned — R147 D1 · คำถามค้าง #1 ของ R144 ตอบแล้วในบันทึก R145) **แต่ scenario สำหรับ sweep 3 ทรงเฉพาะของใบนี้ยังไม่ถูกเขียน** — ไม่มี flag, ไม่มีไฟล์ scenario, ไม่มี frame pin ใน `main` · ⇒ ต้องเปิด **เลนโค้ดรอบถัดไป** (โซนของ chief · `src/` — ผู้ช่วยไม่แตะ) แล้ว **รอ merge เข้า `main` ก่อน** ตามกติกาเดิมทุกใบ · 🔴 **ชื่อ flag/scenario/label ทั้งหมดในใบนี้เป็น `[เสนอ]` — ห้ามบูตด้วยชื่อเดา** ตอนเลนโค้ด merge แล้ว chief ต้องกลับมาแก้ชื่อในใบนี้ให้ตรงของจริง (ท่าเดียวกับที่ GT-060 ทำกับ HYP-PF-036)
+- **(ข)** ⏸ Panya **ยังไม่ได้ปลดพักเลน attended** — คำสั่ง 16:56 ของ 23 ส.ค. ยังคุมทุกใบที่ใช้ตาคน และจดหมาย 1831 §④ ยืนยันว่าคำอนุมัติเปิดใบนี้ **ไม่ใช่** คำปลดพัก ⇒ ห้ามบูตจนกว่ามีคำสั่งปลดพักชัดเจน
+- **(ค) [เสนอ — chief ตัดสินเอง] รวมบูตกับ GT-060 ตามข้อสังเกต §③ ของจดหมาย 1831:** คำตัดสิน §① อนุญาต allow-list **คู่เดียว** `ground-loot-hypothesis + pickup-listener-hypothesis` ร่วมบูตกันได้ (22 เลนที่เหลือ exclusive เหมือนเดิม · โค้ดแก้ด่าน `app.py` ~398-402 อยู่ใน **PR R153 — รอ merge เข้า `main` ก่อน**) · flow ถ้ารวม: คลิกเก็บของ (GT-060) -> ดูเฟรมขาออก -> เลนใบนี้ส่ง `0x4C13` -> ดูบรรทัดเขียว (GT-063) · 🔴 **ข้อระวังที่ต้องเคลียร์ก่อนรวม:** เลน sweep ของใบนี้เป็น scenario ตัวที่สาม — allow-list ปัจจุบันอนุมัติแค่**คู่** ⇒ การเอาเลนใบนี้เข้าบูตเดียวกับคู่นั้นเป็น composition ใหม่ที่ **ต้องขอ Panya เพิ่มทีละคู่ตามกติกา §①** (ห้าม chief อนุมัติเอง) · 🔴 **วินัย attribution (บังคับถ้ารวม):** ทุกข้อสังเกตในจดหมายผลต้องระบุว่า **เลนไหนเป็นผู้ทำให้เกิด** — แยกไม่ออก ⇒ ข้อสังเกตนั้นเป็น `NO-RESULT` ห้ามนับให้เลนใด · ถ้าไม่รวม ใบนี้บูตเดี่ยวได้ตามปกติ (sweep ยิงด้วย chat trigger ไม่ต้องมีของบนพื้น)
+
+### objective (claim เดียว)
+**ทรงไหนของ `ItemOperateVitalRes` (`0x4C13`) ที่ทำให้บรรทัดเขียว `ได้รับ [<ชื่อ>] * <จำนวน>` (ข้อความ id 131) ขึ้นบนแชตของไคลเอนต์จริง**
+(ใบนี้วัด "ทรงไหนทำให้ข้อความขึ้น" เท่านั้น — ไม่ตีความความหมายของฟิลด์ใด ๆ)
+
+### sweep 3 เฟรมต่อหนึ่ง trigger (spacing 3.0 s ตาม convention เลน sweep อื่น · ยิงซ้ำได้ ไม่ one-shot · 🔴 ต้องอัดวิดีโอต่อเนื่อง) — ชื่อ label เป็น `[เสนอ]` รอเลนโค้ด
+```
+1. ITEMOP_RES_CTRL_COUNT0_BAG1        (ตัวควบคุม: ทรงตรง capture เป๊ะ — version 2, R4=0,
+                                       bag_present_flag=1, affected_identity_count=0 ·
+                                       แนะนำ replay byte-exact หนึ่งในห้าเฟรมของ RE-059
+                                       เช่นตัว ItemBagAttr 43 ไบต์ — control แข็งที่สุด)
+2. ITEMOP_RES_COUNT1_ID2400901_QTY1   (affected_identity_count=1 · item id จริงจาก RE-060:
+                                       2400901 -> table 24 = ITEM_CONSUMABLES, n_ID 901 —
+                                       id เดียวกับที่อยู่ใน golden backpack ของ inventory.py ·
+                                       quantity=1 — ทรงที่คาดว่าทำให้บรรทัดเขียวขึ้น)
+3. ITEMOP_RES_COUNT1_ID2400901_QTY5   (เหมือน #2 แต่ quantity=5 — ทดสอบช่อง "* <จำนวน>"
+                                       ของ template id 131)
+```
+- เหตุผลเฟรม 1: ถ้าทรงที่มีอยู่จริงในสาย (count=0) ไม่ทำให้เกิดอะไรบนจอ แปลว่า `count=0` ไม่พอ — **เป็นผลที่มีค่า** ไม่ใช่เฟรมทิ้ง
+- 🔴 **version byte ต้องเป็น 2 ตาม capture (RE-059)** — ถ้า client reject/หลุดตั้งแต่เฟรมแรก จุดต้องสงสัยอันดับหนึ่งคือ version/โครงซอง ไม่ใช่ semantics (บทเรียนเดียวกับ GT-058/059)
+- `[เสนอ]` ข้อกำหนดดีไซน์เลน (chief เคาะตอนเขียนโค้ด): identity guard แบบ GT-059 (ยิงเฉพาะเมื่อตัวละครที่ select คือ probe identity ที่พิน — เลือกตัวละครช่องแรก) · `production_allowed=false` · `database_write=none` (read-only by design) · frame_sha256 pin ต่อ label ในไฟล์ scenario
+
+### คำทำนาย (คำทำนายที่ผิด = ผล ไม่ใช่ความล้มเหลว · ท่องก่อนบูต)
+- **P1:** บรรทัดเขียวขึ้นที่เฟรม 2 หรือ 3 ⇒ **ปิดใบได้** — แนบว่าเฟรมไหน + ข้อความที่อ่านได้ทั้งบรรทัด (ชื่อไอเทม + จำนวน เป๊ะ) · ถ้าเฟรม 3 แสดง `* 5` = ช่อง `$V2` ผูกกับ quantity ที่เราส่งจริง
+- **P2:** ไม่ขึ้นเลยทั้งสามเฟรม ⇒ **`NO-RESULT` ตามกติกา Panya 2026-08-24 — 🔴 ห้ามเขียนคำว่า "ไม่มี" หรือ "ไม่เกิด"** · อ่านว่า "ทรงที่ลองยังไม่พอ" · ใบไม่ปิด — redirect: ออกแบบทรงชุดถัดไป (เช่น bag delta จริงใน ItemBagAttr) เป็น sweep รอบใหม่
+- **P3:** ขึ้น**ข้อความอื่น**แทน (ถุงเต็ม / ของคนอื่น / นอกระยะ — โค้ด `0xFD`/`0xFE`/`0xFC` ที่ GT-046 ถอดไว้ผูก `TEXTDATA_TH__MESSAGE.tsv`) ⇒ **ผลที่มีค่ามาก** — จดข้อความเป๊ะ + เฟรมไหนทำให้ขึ้น · ชี้ว่า handler อ่านฟิลด์ status ที่เรายังไม่ได้ตีความ
+- **P4:** client reject/หลุด ⇒ ชี้ **version byte / โครงซองก่อน semantics** (บทเรียน GT-058/059) — จดว่าหลุดที่เฟรมไหน
+
+### 🔴 ก่อนบูต — resolve commit เขียว (ท่าเดียวกับ GT-058/059/060 · รันเครื่องมือ ไม่ใช่ก๊อป SHA · ทำได้ต่อเมื่อ (ก) ปิดแล้ว)
+```
+py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch
+```
+- **exit 0** + `BOOT_COMMIT: <sha>` ⇒ `git checkout <sha>` · **exit 3** = ใบนี้รอ gate ไม่ได้รอผู้เทส ห้ามบูต
+- **ยืนยันสี่ข้อกับ `<SHA>` ที่จะบูตจริง (ชื่อ flag/scenario ด้านล่างเป็น `[เสนอ]` — แทนด้วยชื่อจริงหลังเลน merge):**
+```
+git show origin/ci-status:ci/<SHA>.json
+git grep -n "item-operate-res-hypothesis-scenario" <SHA> -- src/pirateforce_foundation/app.py
+git cat-file -e <SHA>:scenarios/item_operate_res_greenline_sweep.json && echo SCENARIO_PRESENT
+git grep -n "ITEMOP_RES_COUNT1_ID2400901_QTY1" <SHA> -- src/pirateforce_foundation/ scenarios/
+```
+1. ไฟล์คำตัดสินมี `"conclusion": "success"` และ `"sha"` ตรงชื่อไฟล์ · 2. เจอ flag จริง (**ห้ามใช้ `--help` เป็นหลักฐาน**) · 3. เห็น `SCENARIO_PRESENT` · 4. เจอ label ในซอร์ส
+- **ยืนยันเพิ่มว่า `--export-events` มีจริงใน `<SHA>`** (แลนด์ใน PR R153): `git grep -n "export-events" <SHA> -- src/pirateforce_foundation/app.py` — ถ้าไม่เจอ ให้จดไว้ว่า evidence ฝั่ง event จะอ่านจาก console ไม่ได้ (ตกกลับไปท่า `[G>]` labels + hexdump แบบ GT-059)
+- **อ่านค่า pin ต่อเฟรมจากไฟล์ scenario ที่ merge แล้ว** (`frame_sha256`/`frame_size` ต่อ label) — **ค่า sha ตัวจริงอ่านจากไฟล์ตอน merge ห้ามฝังเลขในใบนี้**
+- ไม่ครบ = **ห้ามบูต** ใบอยู่ BLOCKED ต่อ
+
+### db (สำเนาเสมอ ห้ามแตะตัวจริง)
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-063_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt063.sqlite3
+```
+- เทียบ sha256 canonical กับ `CANON_SHA.txt` **ก่อนเริ่มและหลังจบ ต้องตรงทั้งสองครั้ง** (canonical ไม่ถูกเปิดตลอดรอบ)
+- เกณฑ์สำเนาแบบ GT-059/060: **row-diff ทุกตารางต่างได้เฉพาะ `sessions` +1 แถวต่อการเข้าเกมหนึ่งครั้ง** (ไม่ใช้ byte-identical ซึ่งขัดกับ session persist) · จด `max(lease_generation)` ก่อน-หลัง
+- ตำแหน่งตัวละครรีเซ็ตกลับจุดเกิดทุกบูต (สำเนา DB ใหม่ทุกครั้ง)
+
+### server args (เป๊ะ — opt-in เท่านั้น · `production_allowed=false` · ชื่อ flag/scenario เป็น `[เสนอ]` จนกว่าเลน merge)
+**บูตเดี่ยว (default):**
+```
+py -3 -u -m pirateforce_foundation.app --db state\run_gt063.sqlite3 --item-operate-res-hypothesis-scenario scenarios\item_operate_res_greenline_sweep.json --export-events
+```
+**บูตรวมกับ GT-060 (เฉพาะเมื่อ (ค) ผ่านครบ: PR R153 merge แล้ว + Panya อนุมัติ composition ที่รวมเลนใบนี้เพิ่มจากคู่ allow-list):**
+```
+py -3 -u -m pirateforce_foundation.app --db state\run_gt063.sqlite3 --ground-loot-hypothesis-scenario scenarios\<ตามใบ GT-045> --pickup-listener-hypothesis-scenario scenarios\pickup_listener_hypothesis_decode_probe.json --item-operate-res-hypothesis-scenario scenarios\item_operate_res_greenline_sweep.json --export-events
+```
+- 🆕 **`--export-events` (แลนด์ใน PR R153 — เลนโค้ด EVENT-EXPORT-001):** สั่งให้ server พิมพ์บรรทัด `PF-EVENT` ออก console **ทั้ง dispatch และ reject** — ใช้เป็นหลักฐานชั้น wire ว่า sweep ออกจริง/ถูกปฏิเสธเพราะอะไร (ปิดช่องที่รอบ unattended ของ GT-059 เจอ: build เก่าเก็บ event ใน memory เท่านั้น) · ถ้า flag ยังไม่อยู่ใน BOOT_COMMIT ให้ตัดออกจากคำสั่งแล้วจดว่า evidence ฝั่ง event ใช้ไม่ได้รอบนี้
+- หัวหน้าต่าง console ต้องขึ้น mode ของเลนนี้ — ใช้เช็คว่าบูตถูกโหมด
+
+### 🔴 ตัว trigger แชต — 12 ตัวอักษร printable ASCII เป๊ะ (บทเรียนที่เคยเสียเวลาโปรเจกต์)
+- ใช้สตริงมาตรฐานของใบนี้: `greenline001` (นับ: g-r-e-e-n-l-i-n-e-0-0-1 = 12 ตัวพอดี) — **สั้น/ยาวกว่านั้นถึงเซิร์ฟเวอร์แต่เงื่อนไขเงียบ ๆ ไม่ผ่าน ไม่มี error** sweep ไม่ออกเฉย ๆ
+- 🔴 **คลิกช่องแชตให้โฟกัสก่อนพิมพ์** (ตัวอักษรตอนไม่โฟกัส = hotkey) · พิมพ์ครบ 12 ตัวแล้ว Enter หนึ่งครั้ง · หลัง Enter **คลิกพื้นว่างปลดโฟกัสทันที**
+- บรรทัดที่พิมพ์อาจไม่เด้งกลับในแชต (ไม่มี echo lane) — **ไม่ใช่สัญญาณว่า trigger พัง** · ตัวยืนยัน = บรรทัด `PF-EVENT` dispatch/reject บน console (`--export-events`) + raw SENT/hexdump ตรง pin
+
+### steps
+**ก่อนเริ่ม:** ถือ `LOCK_GAME` · จด boot stamp · เทียบ sha canonical · copy DB สองใบตามบล็อก db
+1. เปิด server ก่อน client เสมอ (`Get-NetTCPConnection -State Established` พอร์ต 10188/10189 = 0 ก่อนเปิด client) — console ขึ้น mode ของเลนนี้ (🔴 client ที่บูตโดยไม่มี server ตายเองใน ~3.5 นาที)
+2. เปิด client → เลือกเซิร์ฟเวอร์ → dialog PVP ปุ่มซ้าย → หน้าเลือกตัวละคร → **เลือกตัวละครช่องแรก** (identity guard) → **ปุ่มกลางสุดจาก 5 ปุ่มแถวล่าง = เข้าเกม** (ปุ่มซ้ายสุด = ลบตัวละคร **ห้ามกด**)
+3. เข้าแมพ เห็น HP/minimap/ชื่อแมพ → **เริ่มอัดวิดีโอต่อเนื่องตั้งแต่ตรงนี้ยาวจนจบ session** ลง `evidence_video\` (spacing 3.0 s ต่อเฟรม — ตาคนถ่ายภาพนิ่งไม่ทันต่อเฟรม **วิดีโอคือกรรมการว่าบรรทัดไหนขึ้นหลังเฟรมไหน**)
+4. ถ่าย **S0** = พื้นที่แชต baseline ก่อนยิงอะไร (เห็นบรรทัดล่าสุดในแชตชัด)
+5. คลิกช่องแชตให้โฟกัส → พิมพ์ `greenline001` → Enter หนึ่งครั้ง → **คลิกพื้นว่างทันที** (ปลดโฟกัส) → **จ้องพื้นที่แชตนิ่ง ๆ ตลอด ~10 วิของ sweep** ห้ามพิมพ์/กดปุ่มใด (ตัวอักษรตอนไม่โฟกัส = hotkey)
+6. หลัง sweep จบ (>10 วิหลัง Enter): ถ่าย **S1** = พื้นที่แชตเต็ม ๆ อ่านออกทุกบรรทัดที่เพิ่มมา (บรรทัดเขียวค้างใน chat log — ภาพนี้คือหลักฐานปิดใบ ส่วน "ขึ้นหลังเฟรมไหน" ให้วิดีโอตัดสิน)
+7. ยิง trigger ซ้ำอีกหนึ่งครั้ง (เลนไม่ one-shot) → จ้องแชต → ถ่าย **S2** — กันเคสข้อความขึ้นเฉพาะครั้งแรก/สะสม
+8. จับ NO-CRASH / CRASH: client ยังตอบสนอง (ขยับกล้อง `Q/E` ได้) = NO-CRASH · หลุด/ค้าง = CRASH + จดว่าหลังเฟรมไหน (ชี้ version byte ก่อน — P4)
+9. **ถ้าเป็นบูตรวมกับ GT-060:** ทำ steps ของ GT-060 ก่อน (spawn → คลิกเก็บ) แล้วค่อยยิง trigger ของใบนี้ · 🔴 จดต่อทุกข้อสังเกตว่า **มาจากเลนไหน** (เช่น บรรทัดเขียวหลังคลิกแต่ก่อน trigger = ต้องอธิบายได้ว่าเลนไหนส่ง `0x4C13` ตอนนั้น — ถ้าแยกไม่ออก ข้อสังเกตนั้นเป็น NO-RESULT ตามวินัย §①)
+10. ออกจากเกมด้วย **X** มุมขวาบน → dialog ยืนยัน → ปุ่มซ้าย → **ปิด server ด้วย** (🔴 server เก็บ session ค้าง — client ตัวถัดไปจะค้าง "connecting" ตลอดกาลถ้าไม่ restart server ก่อน)
+11. เก็บ raw GAME log ทั้งไฟล์ + console out/err (รวมบรรทัด `PF-EVENT` ทั้งหมด) → `PRAGMA integrity_check;` บนสำเนา
+12. **teardown เสมอ** แม้เลิกกลางคัน (boot stamp เกิน 420 นาที template ปฏิเสธ exit 12 — เพดานยกจาก 180 เมื่อ 2026-08-20 · `TEMPLATE_teardown_generic.ps1:135` · แท่นถูกทิ้งข้ามชั่วโมงใช้ `staged\TOOL_stop_stale_server.ps1`)
+13. เทียบ sha256 canonical กับ `CANON_SHA.txt` อีกครั้ง ต้องเท่าเดิม
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+**ชั้น (1) wire/DB (ไม่ต้องใช้สายตาคนหน้าจอ · ทำ headless ได้)**
+- raw GAME log ต่อ trigger หนึ่งครั้ง มี **3 เฟรม** เรียงตาม label (CTRL_COUNT0 → COUNT1_QTY1 → COUNT1_QTY5) ห่าง ~3.0 s · sha256 ของแต่ละเฟรมที่ dispatch **ตรง pin** `frame_sha256` ในไฟล์ scenario ของ commit ที่บูต · เก็บ hexdump ทั้งไฟล์ **ห้ามลบ** · นับจำนวนเฟรมที่ออกจริงให้ตรงจำนวน trigger x 3
+- console มีบรรทัด `PF-EVENT` dispatch หนึ่งบรรทัดต่อเฟรม (จาก `--export-events`) · ถ้า trigger ไม่ออก: บรรทัด `PF-EVENT` reject ต้องบอกเหตุ — เก็บมาทั้งบรรทัด (เป็นผลเหมือนกัน) · ถ้า build ที่บูตไม่มี flag นี้ ให้ยึด raw SENT/hexdump ตรง pin เป็นหลักฐานปฐมภูมิแทน (ท่า GT-059 R152)
+- DB สำเนา: `PRAGMA integrity_check` = `ok` · row-diff ทุกตารางต่างเฉพาะ `sessions` +1 แถวต่อการเข้าเกมหนึ่งครั้ง · จด `max(lease_generation)` ก่อน-หลัง · sha256 canonical ก่อน-หลังตรงกัน
+- **ชั้นนี้ตอบไม่ได้:** บรรทัดเขียวขึ้นบนจอหรือไม่ (เฟรมออก != client รับ/แสดง) ⇒ **ห้ามอ้างชั้นนี้แทนชั้น (2) — ห้ามปิดใบด้วยชั้นนี้**
+**ชั้น (2) client-observable (ต้องมีคนหน้าจอ — ตัวปิดใบอยู่ชั้นนี้ชั้นเดียว)**
+- 🔴 **ปิดใบได้เฉพาะกรณีเห็นข้อความบนจอและอ่านออก** (กติกา Panya 2026-08-24) — ตอบต่อเฟรม (1/2/3): ข้อความอะไรขึ้น (ก๊อปคำเป๊ะ ชื่อไอเทม+จำนวน) / ข้อความอื่น (P3 — คำเป๊ะ+สี) / ยังไม่เห็นข้อความในรอบนี้
+- "ไม่ขึ้น" ทุกแบบ = **`NO-RESULT / รอ Panya`** · 🔴 **ห้ามเขียนคำว่า "ไม่มี" หรือ "ไม่เกิด"**
+- หลักฐานบังคับ: ภาพ **S0..S2** เป็น **JPEG กว้าง <=1280 px · ต่ำกว่า 500 KB ต่อไฟล์** ลง `evidence_screens\` + วิดีโอต่อเนื่องทั้ง session ลง `evidence_video\` (กฎ 2026-08-24) · sha256 ทุกไฟล์ · การผูก "บรรทัดไหนขึ้นหลังเฟรมไหน" ต้องอ่านจาก timestamp วิดีโอเทียบ log — ห้ามเดาจากความจำ
+- ถ้าบูตรวม GT-060: ทุกข้อสังเกตต้องระบุเลนผู้ก่อ — แยกไม่ออก = NO-RESULT ต่อข้อสังเกตนั้น
+- NO-CRASH / CRASH verdict ชัดเจน
+- **ชั้นนี้ตอบไม่ได้:** เฟรมออกจากเซิร์ฟเวอร์จริงไหม ไบต์ตรง pin ไหม **ห้ามอ้างชั้นหนึ่งแทนอีกชั้น**
+
+### 🔴 ผลลบมีค่าเท่าผลบวก
+- **wire ครบ 3 เฟรมตรง pin แต่จอไม่ขึ้นอะไรเลย (P2)** = ข้อมูลจริงว่า "สามทรงนี้ยังไม่พอ" — บันทึกเป็น NO-RESULT ตามกติกา (ห้ามคำว่า "ไม่มี/ไม่เกิด") · redirect: ออกแบบทรงชุดถัดไป (เช่น ItemBagAttr มี delta จริง / ค่า R4 อื่น) เป็นใบ sweep ใหม่ — ไม่ใช่รันซ้ำทรงเดิม
+- **P3 (ข้อความอื่นขึ้น)** = ผลบวกของใบในความหมายกว้าง — เราได้ mapping ทรง->ข้อความ ชิ้นแรกของโปรเจกต์ · redirect: เปิดใบ static ตีความฟิลด์ status ที่ต้องสงสัย
+- **P4 (reject/หลุด)** = ชี้ version byte/โครงซองก่อน semantics — เทียบไบต์เรากับ capture RE-059 ทีละฟิลด์ก่อนสงสัยอย่างอื่น
+
+### nonclaims (ติดไปกับผลทุกกรณี)
+- พิสูจน์ **"ทรงไหนทำให้ข้อความขึ้น"** เท่านั้น — **ไม่ตีความความหมายของฟิลด์ใด ๆ** (R4, mask, โครง ItemBagAttr ฯลฯ)
+- **ไม่ claim ว่าเซิร์ฟเวอร์ต้นฉบับ (ปิดแล้ว กู้ไม่ได้ตลอดกาล) เคยส่งทรง count>0 แบบนี้** — เฟรม 2/3 เป็นดีไซน์ของเราล้วน (capture มีแต่ count=0)
+- item id `2400901` ที่ใช้เป็น probe อิงสคีม RE-060 ซึ่ง pin ด้วยหลักฐานชนิด **ค (candidate 100%-hit) — ไม่ใช่การยืนยันบนสาย** · ถ้าชื่อไอเทมบนจอไม่ตรงตาราง = finding ใหม่ ไม่ใช่ความผิดของใบ
+- **ไม่พิสูจน์ว่าไอเทมเข้ากระเป๋า/DB จริง** — ใบนี้วัดแค่บรรทัดแชต (เลนอ่าน bag state เป็นคำถามแยก)
+- **ไม่แตะ claim ของ GT-060** (`PickupTerrainThing` `0x4543` ขาออก) — ต่อให้บูตรวมกัน ผลของสองใบแยกกันเด็ดขาดตามวินัย attribution
+- **result:** (ผู้เทสกรอก: ทรงไหนทำให้ข้อความอะไรขึ้น — ต่อเฟรม 1/2/3 · คำเป๊ะของบรรทัดที่ขึ้น + สี · ภาพ S0..S2 (JPEG <=1280 · <500 KB · `evidence_screens\`) + วิดีโอ (`evidence_video\`) พร้อม sha256 · timestamp วิดีโอเทียบเฟรมจาก log · จำนวน trigger x เฟรมที่ออกจริง + sha ตรง pin ไหม · บรรทัด `PF-EVENT` dispatch/reject ที่เห็น (ก๊อปทั้งบรรทัด) · ถ้าบูตรวม: attribution ต่อข้อสังเกต · NO-CRASH/CRASH · เวลา +07:00 · sha canonical ก่อน-หลัง · row-diff + `max(lease_generation)` ของ `run_gt063.sqlite3`)

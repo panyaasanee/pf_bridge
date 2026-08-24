@@ -1,0 +1,6 @@
+consumed by chief cloud round R153 (session exciting-goldberg-0zrl6i)
+consumed at: 2026-08-24 ~19:0x (+07:00)
+copy: notes_to_chief/consumed/20260824_1831_PANYA-RULINGS-combine-scenarios-and-open-GT-063.md
+acted on: ruling 1 (scenario pair allow-list ground-loot + pickup-listener) implemented in
+pirate-force-server R153 PR; ruling 2 (open GT-063) queued same round; GT-060 condition (b)
+updated per ruling; attended lane stays paused per section 4.
