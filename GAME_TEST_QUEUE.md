@@ -10,7 +10,7 @@
 - 🆕 `GT-058` LEARN-SKILL-RESULT client-observe (⏸ PAUSED-รอ-Panya 16:56 — เงื่อนไข merge หมดแล้ว: PR #14 merge เข้า `main` `9691bcc` · เขียว(Actions run 32668480284 · subset) — เหลือ (ข) เช็ค BOOT_COMMIT ตอนบูต + (ค) Panya ปลดพัก · ปลดโดย R139)
 
 **🔬 งาน static — ทำเมื่อไรก็ได้ ไม่ต้องมีคนเฝ้า ไม่ต้องจับ `LOCK_GAME` · ขนานกับรอบเทสเกมได้:**
-- ใบเก่าในไฟล์นี้: `GT-047` (TOOL-GUARD-GAP + จ็อบ 0) · `GT-049` (LOOT-CHAT-TEMPLATE · ✂️ scope-cut R132: จ็อบ 1 ปิดแล้ว — template = MESSAGE id 131 · เหลือหาตัวยิง)
+- ใบเก่าในไฟล์นี้: `GT-047` (🟠 จ็อบ 0 ปิดแล้ว 09:16 — source เข้ามือ chief · **R144 ส่ง patch การ์ด `field_offset` กลับแล้วที่ `patches/gt047/` (เขียว 8 ด่านบน cloud) · เหลือฝั่งสะพาน apply patch แล้ว rerun จ็อบ 1–3**) · `GT-049` (✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 09:23 · บันทึก R144:** id 131 ยิงจาก **inbound** `ItemOperateVitalRes` handler `0x005EF5E0` → chat emitter `0x005CC309` — คนละเลนกับ `PickupTerrainThing` 0x1F/0x03/0x22 ของ GT-046 ⇒ **บรรทัดลูทสีเขียว = เซิร์ฟเวอร์ตัดสินการเก็บ** — ดีไซน์เลนลูทฝั่งเราต้องส่ง `ItemOperateVitalRes` เอง)
 - 🆕 ใบใหม่ตั้งแต่ R128 อยู่ไฟล์ใหม่ **`CLIENT_RE_QUEUE.md`** (คำสั่ง 18:22 ข้อ ③): ✅ **ปิดแล้ว 3 ใบ (ผลหน้าสะพาน 2026-08-24 ~00:3x–00:4x +07:00 · บันทึก R135):** `GT-054` PASS (spans **392/392** ตรงอิมเมจ · mismatch 0) · `GT-053` PASS (**N=106 ≥ 61 ⇒ `0x203D` in-band ⇒ H1 รอด**) · `GT-052` PASS (crosswalk class/skill ครบ · ผลลบ: ไม่พบ legend ของ `n_TARGET` ในชุดที่ค้น — ห้ามตั้ง label) — 🟡 `GT-050` **PARTIAL** (00:55: จ็อบ 1–3 ปิด · `CLearnSkillResultVital` CLOSED · direction `TriggerCastSkillVital` ชนเพดาน static — ทางต่อ observe-only attended) — ✅ `GT-055` **PASS/DONE** (ผลหน้าสะพาน 2026-08-24 02:41 · บันทึก R143: `0x36DB` = **string8** tag `0x44` · `0xAC52` = UTF-16LE tag `0x48` ⇒ parser เราผิดจริงฝั่ง `0x36DB` — แก้แล้ว: PR โค้ด #16 รอ gate ยังไม่เข้า main ณ R143) — **ที่ยังเปิดจริงในไฟล์นั้น:** `RE-057` · `RE-058` (`RE-056` ปิด DONE/METHOD-FAIL โดยผล 07:28 — ดูหัว `CLIENT_RE_QUEUE.md`)
 - 📊 ค้างที่ต้องมองเห็น: ชุดส่งมอบ RE **8 ตาราง 17,618 แถว data** ผ่าน re-derive แล้ว · ✅ **โค้ดอ่านตัวแรกมาแล้ว R131** (`tools/pf_external_registry.py` · ✅ merge เข้า `main` แล้ว R133 — `1e0b20b`) · 5/8 ตารางเข้า `main` แล้ว — เหลือ 3 ตารางรอหน้าสะพาน `git add` (ดูหัว `CLIENT_RE_QUEUE.md`)
 
@@ -1949,7 +1949,15 @@ GT-046 อาจถามผิดระบบ: มีระบบเก็บ�
   สถานะการไล่ indirect · เวลา · sha อิมเมจก่อน-หลัง)
 
 
-## 🔬 GT-047 RUNTIMEPROTO-CAPTURE-VALIDATE-001 [STATIC-ON-BRIDGE]: parse เฟรม `GSCN_RunTimeProtocolReq`/`Res` จาก capture corpus ด้วย schema ของ Codex — ปิด F2 ของใบตรวจปฏิปักษ์  [🟠 **PENDING / TOOL-GUARD-GAP (R127) — จ็อบ 1-2 รันแล้ว · จ็อบ 3 พบช่องโหว่ validator จริง · เหลือ "จ็อบ 0 ใหม่" ข้างล่างก่อน rerun**]
+## 🔬 GT-047 RUNTIMEPROTO-CAPTURE-VALIDATE-001 [STATIC-ON-BRIDGE]: parse เฟรม `GSCN_RunTimeProtocolReq`/`Res` จาก capture corpus ด้วย schema ของ Codex — ปิด F2 ของใบตรวจปฏิปักษ์  [🟠 **PENDING / PATCH-SHIPPED (R144) — จ็อบ 0 ปิดแล้ว (source เข้ามือ chief 09:16) · chief ส่งการ์ด `field_offset` กลับแล้วที่ `patches/gt047/` · เหลือฝั่งสะพาน: apply patch → รันจ็อบ 3 ต้องแดง → rerun จ็อบ 1–2**]
+
+### 🟠 สถานะ R144 (2026-08-24 ~16:5x–17:3x +07:00 · chief cloud)
+- จ็อบ 0 ปิด: จดหมาย `20260824_0916_GT047-validator-source.py.md` ส่ง source ครบ (sha256 `0166337C…B793D8C8` ตรงกับที่จดหมายพิน · AST parse PASS)
+- **การ์ดใหม่ (`validate_field_offset_mirror`) อยู่ที่ `patches/gt047/pf_validate_capture_fields.py`** — หลักการ: W/R legs ของ message ที่ closed ต้อง mirror กัน (field_offset/tag/span_start/span_end raw — ยกเว้น 40 คู่ที่ pin ว่า VA-dependent ใช้ normalized · len/span_sha256 raw เสมอ) + pin census 181 static-open / 859 คู่ กัน mutation หนี้เข้า skip set
+- เขียว(cloud sanity) 8 ด่าน: pristine ผ่าน · mutation จ็อบ 3 ของ tester (`+0x14→+0x99`) **แดง** · flip `UNKNOWN(`, one-leg VA edit, span_sha256 tamper, membership swap (นับเท่าเดิมแต่สลับสมาชิก) แดงหมด · self-test จับการ์ดที่ถูกปิดได้ — ตัวรัน `patches/gt047/verify_gt047_guard_patch.py` (echo sha256 ของ validator ที่โหลดจริงบรรทัดแรก — **ให้ quote บรรทัดนั้นในผล rerun**)
+- adversary สองรอบก่อน commit (รอบแรกจับ 4 defect: `.gitignore` กิน `patches/` · flip เข้า static_open · normalization laundering · span columns — แก้ครบ)
+- nonclaims ของการ์ด: ไม่ครอบ mutation สมมาตรสองขา · ไม่ครอบ VA ฝังในคู่ pinned 40 คู่ (ชั้นนั้นพึ่ง span_sha256 + GT-054) · ไม่ครอบ `gate_condition`/`file_off_claim` (legs ต่างกันเกิน mirror โดยชอบ — validator ไม่เคยอ่านสองคอลัมน์นี้)
+- **ฝั่งสะพานทำต่อ:** ① pull main หลัง PR รอบนี้ merge ② ตรวจ sha256 ของ `patches/gt047/pf_validate_capture_fields.py` ตรงกับที่จดหมาย `FROM_CHIEF_R144_*` พิน ③ สำเนาทับตัวเดิมใน `pf_bridge\external\` ④ รัน `verify_gt047_guard_patch.py --external <โฟลเดอร์ external>` ต้องได้ `ALL 8 CHECKS PASS` ⑤ rerun จ็อบ 3 (mutation ต้องแดง — log ทั้งก่อน/หลัง) แล้วจ็อบ 1–2 ตามใบเดิม
 
 ### 🟠 สถานะ R127 (ผลรัน 2026-08-23 14:21-14:27 · ผลเต็ม: `notes_to_chief\20260823_1427_GT047-GUARD-GAP-fieldoffset-mutation-accepted.md`)
 - จ็อบ 1: frozen view 1,772 ไฟล์ validator exit 0 · `mismatch=0` · แต่สองข้อความเป้าหมาย **ยังค้าง `A2_STATIC_OPEN` ทั้งคู่**
@@ -2164,7 +2172,7 @@ GT-034 กรณี 3 = "ไม่เห็นตัวนกเลย" ซึ�
   สถานะการไล่ indirect · เวลา · sha อิมเมจก่อน-หลัง)
 
 
-## 🆕🔬 GT-049 LOOT-CHAT-TEMPLATE-001 [STATIC-ON-BRIDGE]: หา template ของบรรทัดสีเขียว `ได้รับ [<ชื่อ>] * <จำนวน>` ในตารางข้อความ/`B_CONSTDATA` แล้วไล่ static ว่า "ใครยิง id นั้น" — เลนคลิกเมาส์ของ GT-046 (0x1F/0x03/0x22) หรือเลนที่สอง (อาจ inbound ผ่าน READ 0x0089A640)  [🟠 **PENDING ✂️ SCOPE-CUT R132 — จ็อบ 1 ปิดแล้ว (template = MESSAGE id 131 · จดหมาย 2150) · เหลือจ็อบ 2-4: หาตัวยิง id 131 · ยังเป็นงาน static บนเครื่องสะพานล้วน · ไม่ต้องมี server/client/DB/`LOCK_GAME`/teardown · ไม่มีอะไรให้ดูบนจอเกม**]
+## 🆕🔬 GT-049 LOOT-CHAT-TEMPLATE-001 [STATIC-ON-BRIDGE]: หา template ของบรรทัดสีเขียว `ได้รับ [<ชื่อ>] * <จำนวน>` ในตารางข้อความ/`B_CONSTDATA` แล้วไล่ static ว่า "ใครยิง id นั้น" — เลนคลิกเมาส์ของ GT-046 (0x1F/0x03/0x22) หรือเลนที่สอง (อาจ inbound ผ่าน READ 0x0089A640)  [✅ **PASS/DONE — จ็อบ 2–4 ปิดโดยผลหน้าสะพาน 2026-08-24 09:23 (+07:00) · บันทึกโดย chief R144 · จุดยิง id 131 (`0x83`) มี 2 จุด: `0x005CC309` (global chat emitter — ตัวจริง) + `0x00578E00` (local UI object) · chain: `ItemOperateVitalRes` vtable `0x00F30668` slot `+0x1C` handler `0x005EF5E0` → `0x005A8A00` → extractors → emitter — serializer มีขา READ 5 จุด + capture เห็น R 5/5 W 0/0 ⇒ เลน inbound · template สตริงไม่ resident ใน PE (packed) จึงไม่มี static string VA — ใช้ id immediate เป็น anchor · nonclaim: ไม่พิสูจน์ runtime occurrence ของเฟรมคลิป**]
 
 > ✂️ **SCOPE-CUT (chief R132 · 2026-08-23 ~22:0x +07:00 · จากจดหมาย `20260823_2150_GAMEDATA-EXTRACTED-…`):**
 > **จ็อบ 1 ปิดแล้ว — ไม่ต้องหา template อีก:** ตาราง `pf_bridge\gamedata\tables\TEXTDATA_TH__MESSAGE.tsv` (907 แถว 4 คอลัมน์ · อ่านครบ 907/907)

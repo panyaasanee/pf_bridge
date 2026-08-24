@@ -648,7 +648,7 @@ id_global `0x0108284C`) อยู่ใน `PF_PROTOCOL_REGISTRY.tsv`/`PF_SERIAL
   (ย้ายไป observe-only probe) หรือไม่ · เวลา · sha อิมเมจ+TSV ก่อน-หลัง)
 
 ---
-## 🆕🔬 RE-057 PLACEMENT-INDEX-CROSSWALK-001 [STATIC-ON-BRIDGE]: หา binding จริง trigger → สคริปต์ → ฉาก บนเครื่องสะพาน แล้วตัดสินว่า literal ใน `Scene.PlacementOFF(N)` ชี้ namespace ไหน (ตัวชี้ขาด: 59/60/61 ของ Bg3002 ที่ไม่มีตาราง commit ใดรองรับ)  [🟠 PENDING — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี LOCK_GAME/teardown · ไม่มีอะไรให้ดูบนจอเกม]
+## 🆕🔬 RE-057 PLACEMENT-INDEX-CROSSWALK-001 [STATIC-ON-BRIDGE]: หา binding จริง trigger → สคริปต์ → ฉาก บนเครื่องสะพาน แล้วตัดสินว่า literal ใน `Scene.PlacementOFF(N)` ชี้ namespace ไหน (ตัวชี้ขาด: 59/60/61 ของ Bg3002 ที่ไม่มีตาราง commit ใดรองรับ)  [✅ **DONE/STATIC-LANE-CLOSED — ผลหน้าสะพาน 2026-08-24 09:30 (+07:00) · บันทึกโดย chief R144 · `Scene.PlacementOFF`/`ON`/`Cancel` ทั้งสามผูก delegate no-op ตัวเดียวกัน `0x0045FA00` (`xor eax,eax; ret 4`) — ไม่อ่าน argument เลย ⇒ 59/60/61 ไม่มี namespace ใน shipped build · ด่านตัวควบคุมผ่าน (Bg3003/4 ที่อยู่ในช่วงก็ถูก ignore แบบเดียวกัน) · จ็อบ 3–4 N/A — ห้ามผูก band `0x2000+N+1` กับ literal ฝั่งสคริปต์ · ห้ามเปิดใบ static ซ้ำเพื่อไล่ namespace เดิม (งาน prework 09:01 ที่พบ literal เกินขอบทั้งสองแบบ ถูกอธิบายด้วยกลไกเดียวกันนี้)**]
 
 > 🔢 หมายเหตุเลข (chief): จดหมายต้นเรื่อง `notes_to_chief\20260824_0159_PANYA-RULINGS-3-and-RE056-DRAFT-placement-index-crosswalk.md`
 > ร่างใบนี้ไว้เป็น RE-056 แต่เลข 056 ถูกออกเป็น **RE-056 SKILLCAST-DIRECTION-002** ไปแล้วใน R136 ก่อนจดหมายถึงมือ chief
@@ -787,7 +787,7 @@ trigger data / scene section / placement namespace ให้จดว่าม�
   เวลา · sha อิมเมจ+ไฟล์ฉาก+TSV ก่อน-หลัง)
 
 ---
-## 🆕🔬 RE-058 LEARNSKILL-DIRECTION-001 [STATIC-ON-BRIDGE]: ตัดสิน natural direction ของ `CLearnSkillVital 0x36AA` — client เคย submit มันเข้าเส้น outbound จริงไหม (ครึ่งหลักฐานที่ decoder ฝั่ง server ของ R140 ยังไม่มี)  [🟠 PENDING — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี LOCK_GAME/teardown · ไม่มีอะไรให้ดูบนจอเกม]
+## 🆕🔬 RE-058 LEARNSKILL-DIRECTION-001 [STATIC-ON-BRIDGE]: ตัดสิน natural direction ของ `CLearnSkillVital 0x36AA` — client เคย submit มันเข้าเส้น outbound จริงไหม (ครึ่งหลักฐานที่ decoder ฝั่ง server ของ R140 ยังไม่มี)  [✅ **DONE/BOUNDED-NEGATIVE — ผลหน้าสะพาน 2026-08-24 09:14 (+07:00) · บันทึกโดย chief R144 · ไม่พบ exact chain จาก object/vtable `0x00F48E94` เข้า outbound submit `0x005DD800` (constructor callers 3 จุด = pool/registration เท่านั้น) · handler `+0x1C/+0x20` = `return true` stub · แต่ยัง exclude indirect generic-registry path ไม่ได้ ⇒ ไม่ใช่หลักฐาน inbound-only · direction ยังไม่ตัดสิน — nonclaim ของ decoder R140 (LEARN-SKILL-REQUEST-001) คงเดิมทุกตัว · pin correction ติดใบ: vtable จริง `0x00F48E94` (ใบเดิมเขียน `0xF48F00` ซึ่งเป็น name literal)**]
 
 ที่มา:
 - R140 เปิดเลนโค้ด **LEARN-SKILL-REQUEST-001 (HYP-PF-034)** — strict decoder ฝั่ง server ของ body 0x36AA
