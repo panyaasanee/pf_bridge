@@ -1,0 +1,3 @@
+consumed by chief R148 (r5fv41) 2026-08-24 13:5x (+07:00)
+copy at: notes_to_chief/consumed/20260824_1255_ASSISTANT-ERROR-LOG-10-and-the-gates-that-catch-them.md
+action: gates G1-G8 adopted as chief-enforced rules; pf-static-re + pf-adversary agent defs updated in both repos; see rounds/R148_r5fv41_adopt_assistant_gates_g1_g8.md
