@@ -1964,7 +1964,9 @@ GT-046 อาจถามผิดระบบ: มีระบบเก็บ�
   สถานะการไล่ indirect · เวลา · sha อิมเมจก่อน-หลัง)
 
 
-## 🔬 GT-047 RUNTIMEPROTO-CAPTURE-VALIDATE-001 [STATIC-ON-BRIDGE]: parse เฟรม `GSCN_RunTimeProtocolReq`/`Res` จาก capture corpus ด้วย schema ของ Codex — ปิด F2 ของใบตรวจปฏิปักษ์  [🟠 **PENDING / PATCH-SHIPPED (R144) — จ็อบ 0 ปิดแล้ว (source เข้ามือ chief 09:16) · chief ส่งการ์ด `field_offset` กลับแล้วที่ `patches/gt047/` · เหลือฝั่งสะพาน: apply patch → รันจ็อบ 3 ต้องแดง → rerun จ็อบ 1–2**]
+## 🔬 GT-047 RUNTIMEPROTO-CAPTURE-VALIDATE-001 [STATIC-ON-BRIDGE]: parse เฟรม `GSCN_RunTimeProtocolReq`/`Res` จาก capture corpus ด้วย schema ของ Codex — ปิด F2 ของใบตรวจปฏิปักษ์  [✅ **DONE / GUARD-GAP FIXED / METHOD-RUN COMPLETE — แต่ claim F2 คง OPEN (ผลหน้าสะพาน 2026-08-24 14:43 +07:00 · R149 บันทึก)**]
+
+> ✅ **ผลปิดใบ (จดหมาย `20260824_1443`):** patched validator (`CAFA…011B` จาก `patches/gt047/`) ผ่านการ์ด **8/8** บนสะพาน · จ็อบ 3 mutation `TargetPosVital:W:1 field_offset +0x14→+0x99` **แดงจริง** (`exit 1`) ⇒ ช่องโหว่ TOOL-GUARD-GAP เดิมปิดแล้ว · จ็อบ 2 re-derive สดตรง byte-for-byte สามไฟล์ · จ็อบ 1 frozen corpus 1,772 ไฟล์ exit 0 — **แต่** `Req/W 40,747` และ `Res/R 10,073` เฟรม ยัง `A2_STATIC_OPEN` ทั้งหมด (parse success 0) ⇒ 🔴 **claim F2 ยัง OPEN**: `A2_STATIC_OPEN 50,820/50,820` จนกว่าจะมี parser เข้าถึง body สองข้อความนี้จริง · `mismatch=0` ของรอบนี้ **ไม่ใช่** หลักฐาน schema (เฟรมถูกจัด static-open ก่อน parse) · external/ ต้นทางไม่ถูกแตะ (SHA เดิม)
 
 ### 🟠 สถานะ R144 (2026-08-24 ~09:5x–10:2x +07:00 · chief cloud) — ⏱️ **erratum R145:** บรรทัดนี้เคยเขียน `~16:5x–17:3x +07:00` ซึ่งเพี้ยนไป 7 ชั่วโมง (commit จริงของ R144 คือ `02:51`–`03:21` UTC = `09:51`–`10:21` +07:00 · ตรวจด้วย `git show -s --date=iso 0ad4f1a fbd1cfd`) — สาเหตุ: R144 เอาเวลา +07:00 ไปติดป้าย `Z` แล้วบวก 7 ซ้ำอีกชั้น
 - จ็อบ 0 ปิด: จดหมาย `20260824_0916_GT047-validator-source.py.md` ส่ง source ครบ (sha256 `0166337C…B793D8C8` ตรงกับที่จดหมายพิน · AST parse PASS)

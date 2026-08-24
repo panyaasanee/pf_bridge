@@ -72,6 +72,8 @@ decoder ฝั่ง server ยืนบน W codec ที่ commit แล้�
 
 **สถานะ (R146 · 2026-08-24 ~11:5x +07:00):** 🆕 เปิด **RE-061 SKILLSTATE-WIRE-DIRECTION-001** (ท้ายไฟล์) — prerequisite ของเลนโค้ด skill-state sender ที่จะปลดล็อก GT-058 (หน้าต่างสกิลเปิดไม่ได้) · pf-static-re R146 ยืนยัน **NEEDS-BRIDGE-IMAGE**: `CSkillModule`/`CSkillAttr` serializer row = EMPTY, capture = NOT_OBSERVED, id `0x1F7B`/`0x1661` = name-hash candidate ไม่ใช่ opcode ⇒ ปิด wire+direction จากอิมเมจเท่านั้น · **ใบเปิดจริงตอนนี้: RE-059 · RE-060 · RE-061**
 
+**สถานะ (R149 · 2026-08-24 ~22:xx +07:00):** ✅ **ปิดครบสามใบในวันเดียว — RE-059 · RE-060 · RE-061 DONE ทั้งหมด** (ผลเต็มอยู่ในบล็อกของแต่ละใบท้ายไฟล์) · RE-061 ออกทาง **บวก**: `CSkillAttr` ขี่ `UpdateAttrVital 0x309A` class_id `0x1661` + gate หน้าต่าง Skill พิสูจน์จากอิมเมจ ⇒ **chief เปิดเลนโค้ด sender แล้วในรอบเดียวกัน** (opt-in · headless proof · ดู `GAME_TEST_QUEUE.md` ใบเทสใหม่) · **ไม่มีใบ RE เปิดค้างในไฟล์นี้แล้ว**
+
 ---
 ## 🆕🔬 GT-052 CLASS-SKILL-TABLE-001 [STATIC-ON-BRIDGE]: ~~dump ตารางอาชีพ + ตารางสกิล~~ ✂️ **ตีความคอลัมน์ + ผูก TEXTDATA + ผูกไอคอน** — ตาราง dump แล้วทั้งคู่ (`gamedata\` · จดหมาย 2150)  [✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 00:44 (+07:00) · บันทึกโดย chief R135 · ผลลบติดใบ: ไม่พบ legend ของ `n_TARGET` ในชุดที่ค้น — ห้ามตั้ง label ("ไม่พบ" ≠ "ไม่มีใน client")**]
 
@@ -860,7 +862,9 @@ producer/consumer ของ 0x36AA ให้จดก่อนเปิดอิ
 (ผู้รับงานกรอก — จดหมายเข้า `notes_to_chief/` ตามปกติ)
 
 ---
-## 🆕🔬 RE-059 ITEMOPERATE-RES-CAPTURE-BYTES-001 [STATIC-ON-BRIDGE]: ดึงไบต์จริงของ 5 เฟรม `ItemOperateVitalRes` ขา R ที่มีอยู่แล้วใน capture corpus ออกมาเป็น hex — แล้วบอกให้ได้ว่าแต่ละเฟรม `bag_present_flag` เท่าไหร่ · `affected_identity_count` เท่าไหร่ · ItemBagAttr ข้างในหน้าตาอย่างไร  [⏳ **PENDING**]
+## 🆕🔬 RE-059 ITEMOPERATE-RES-CAPTURE-BYTES-001 [STATIC-ON-BRIDGE]: ดึงไบต์จริงของ 5 เฟรม `ItemOperateVitalRes` ขา R ที่มีอยู่แล้วใน capture corpus ออกมาเป็น hex — แล้วบอกให้ได้ว่าแต่ละเฟรม `bag_present_flag` เท่าไหร่ · `affected_identity_count` เท่าไหร่ · ItemBagAttr ข้างในหน้าตาอย่างไร  [✅ **DONE — EXTRACTED 5/5 (ผลหน้าสะพาน 2026-08-24 14:13 +07:00 · R149 บันทึก)**]
+
+> ✅ **ผล (จดหมาย `20260824_1413`):** ทั้งห้าเฟรม opcode `0x4C13` ver 2 · `R4=0` · `bag_present_flag=1` ตรงคำทำนาย 5/5 · `affected_identity_count=0` ทุกเฟรม (ไม่มี R11/R12 ให้ตั้งชื่อ) · nested `ItemBagAttr` ยาว 43/52/69/69/43 ไบต์ โครงลงตัวทุกเฟรม: base(`0B u8`,`32 qword`) → update collection(element = `32 qword + 14 u32 + 0F + 0F + 08 + 08 + 0B`) → removal collection · `template_id` ที่พบ: `2600001`, `2400901` (ความหมาย → RE-060) · full hex ทั้งห้าเฟรมอยู่ในจดหมาย · nonclaim: จำกัดที่ 5 เฟรมนี้ ไม่ยกระดับเป็น encoder ทุกทรง
 
 ที่มา:
 - `external\PF_FIELD_VALIDATION.tsv` แถว `ItemOperateVitalRes` ทิศ R:
@@ -933,7 +937,9 @@ encoder ฝั่งเรา `src/pirateforce_foundation/inventory.py` ปร�
 🔴 `ค้นใน pf_bridge\external\ แล้ว: ___` · 🔴 `ค้น gamedata แล้ว: ___` · (ผู้รับงานกรอก: objective ประโยคเดียว · พาธ root capture corpus แบบเต็ม · 4 ไฟล์+sha256+เฟรมต่อไฟล์ · ตารางต่อเฟรม 5 แถว+hex · ผลเทียบคำทำนาย · sha ก่อน-หลัง · จดหมายเข้า notes_to_chief/)
 
 ---
-## 🆕🔬 RE-060 ITEM-TEMPLATE-CODE-SCHEMA-001 [STATIC-ON-BRIDGE]: pin สคีมรหัสไอเทม `<table_code><5 หลัก>` — `table_code` ตัวไหนหมายถึงตาราง CONSTDATA ตัวไหน (คอมเมนต์ v141:2470 ผิดอย่างน้อยสองจุด)  [⏳ **PENDING**]
+## 🆕🔬 RE-060 ITEM-TEMPLATE-CODE-SCHEMA-001 [STATIC-ON-BRIDGE]: pin สคีมรหัสไอเทม `<table_code><5 หลัก>` — `table_code` ตัวไหนหมายถึงตาราง CONSTDATA ตัวไหน (คอมเมนต์ v141:2470 ผิดอย่างน้อยสองจุด)  [✅ **DONE — PINNED 5 CODES (ผลหน้าสะพาน 2026-08-24 14:22 +07:00 · R149 บันทึก)**]
+
+> ✅ **ผล (จดหมาย `20260824_1422`):** `22=EQUIPMENT_BASE` · `24=ITEM_CONSUMABLES` · `25=ITEM_QUEST` · `26=ITEM_MISC` · `35=ITEM_ITEMMALL` (หลักฐานชนิด ค: matrix 7,210 occurrences จาก 120 ตาราง `CONSTDATA_TH` ที่มี `n_ID` — แต่ละ code เหลือ candidate 100%-hit ตารางเดียว) · image ยืนยันกลไกถอด: `full_id / 100000 → runtime table map` (magic จริง `0x14F8B589` — ไม่ใช่ magic ใน hint) · `full_id % 100000 → n_ID` · crosswalk ชื่อ Thai build: join ด้วย `n_ID` (ไม่ใช่ row order — คู่ n_ID=10 พิสูจน์) ผ่าน `PF_GAMEDATA_INDEX.flags: ITEM_MISC → ITEM_MISC_TIP` เช่น `2600001 → Adventure Key` · โบนัส: ข้ออ้าง "packed" ของ TEXTDATA/Lua **หมดอายุแล้ว** (แตกได้จริง) แต่ decoded Lua corpus ไม่มี UI caption assets · nonclaim: ไม่สรุปว่าทั้งเกมมีแค่ห้า code
 
 ที่มา:
 - `current/pf_login_game_server_v141.py:2470`: `V103_ITEM_TEMPLATE = 2600001  # STORE_NORMAL row 1 -> ITEM_MISC row 1, Adventure Key` · บรรทัด 2474: `V110_CASK_TEMPLATE = 2400901  # ... ITEM_CONSUMABLES row 901`
@@ -989,7 +995,13 @@ encoder ฝั่งเรา `src/pirateforce_foundation/inventory.py` ปร�
 ### result:
 🔴 `ค้นใน external\ แล้ว: ___` · 🔴 `ค้น gamedata แล้ว: ___` · (กรอก: objective · ตาราง table_code->ตาราง+ป้ายชนิด · เมทริกซ์ hit rate+จำนวน scan · VA/span/sha ตัวถอด (หรือ census) · จ็อบ 3 แยก (ก)/(ข)+ข้อเสนอ docstring · จ็อบ 4 ว่า `$V1` มาจากคอลัมน์ไหน+>=3 คู่ · ผลคำทำนาย 26->ITEM_MISC · sha ก่อน-หลัง · จดหมาย notes_to_chief/)
 
-## 🆕🔬 RE-061 SKILLSTATE-WIRE-DIRECTION-001 [STATIC-ON-BRIDGE]: ปิด outbound wire shape ของ `CSkillModule` (vtable 0x00F48D88 slot +0x18) แบบไบต์เป๊ะ + หา carrier ของ `CSkillAttr` (vtable 0x00F48B78, chains DBAttribute) + ตัดสินจากอิมเมจว่าไคลเอนต์มี inbound decoder + skill-window-open ขึ้นกับ skill state ไหม (🔴 corpus เป็น emulator-only ตอบ direction ของ server ต้นฉบับไม่ได้ — SCENE-013) — ทดสอบ wire premise ของ root-cause "server ไม่เคยส่ง skill state"  [⏳ **PENDING**]
+## 🆕🔬 RE-061 SKILLSTATE-WIRE-DIRECTION-001 [STATIC-ON-BRIDGE]: ปิด outbound wire shape ของ `CSkillModule` (vtable 0x00F48D88 slot +0x18) แบบไบต์เป๊ะ + หา carrier ของ `CSkillAttr` (vtable 0x00F48B78, chains DBAttribute) + ตัดสินจากอิมเมจว่าไคลเอนต์มี inbound decoder + skill-window-open ขึ้นกับ skill state ไหม (🔴 corpus เป็น emulator-only ตอบ direction ของ server ต้นฉบับไม่ได้ — SCENE-013) — ทดสอบ wire premise ของ root-cause "server ไม่เคยส่ง skill state"  [✅ **DONE — STATIC POSITIVE `CSkillAttr` / STATIC NEGATIVE `CSkillModule` (ผลหน้าสะพาน 2026-08-24 14:37 +07:00 · R149 บันทึก)**]
+
+> ✅ **ผล (จดหมาย `20260824_1437` · ผู้ทำ: Codex local):** ผลออกทาง **บวก** ตามเงื่อนไข R146 ⇒ chief เปิดเลนโค้ด sender แล้ว (R149):
+> - **`CSkillModule` ว่างจริง**: vtable `0xF48D88+0x18` = `mov al,1; ret 4` (0 fields · 0 body bytes) · `+0x1C` = bare `ret 4` ⇒ ไม่มี frame body และไม่มี inbound apply · `0x1F7B` เป็น name-hash ไม่ใช่ opcode
+> - **`CSkillAttr` ขี่ `UpdateAttrVital 0x309A`** เป็น attr block `class_id 0x1661` (ไม่ใช่ standalone opcode): frame = `0x309A → 0x12 attr_count → 0x12 class_id(0x1661) → 0x14 body_len → [0x0B db_mask → (bit0: 0x32 identity) → 0x12 record_count → N×(0x12 key · 0x12 opaque_u16 · 0x14 opaque_u32)]` · serializer `0x7520B0` · inbound apply มีจริง (`0x5F2400` → `+0x24 = 0x751C70` · bind thunk อ่าน `[actor+0x3E8]`)
+> - **gate ของหน้าต่าง Skill พิสูจน์แล้ว**: K (key 75 → `ABILITY`) และปุ่ม `Bt_main_Skill` เปิดชื่อเดียวกัน `Skill_Main2` · controller ctor `0x760DE0` อ่าน `[actor+0x3E8]` (=`CSkillAttr`) · init `0x761ED0` **คืน false ถ้า `controller+0x88` เป็น null** ⇒ `CSkillAttr` เป็น prerequisite ที่ falsifiable
+> - nonclaims สำคัญ: one packet ไม่ถูกพิสูจน์ว่า "เพียงพอ" ให้ K เปิด (มี base/UI checks อื่น) · opaque u16/u32 ยังไม่มีชื่อ · corpus ตอบ direction ต้นฉบับไม่ได้ (UNANSWERABLE ตาม SCENE-013)
 
 ที่มา (ทำไมใบนี้ถึงเกิด — ฉบับสั้น):
 - ใบ attended **GT-058** (คิว `GAME_TEST_QUEUE.md`) ค้าง เพราะหน้าต่าง Skill (ฮอตคีย์ **K**) ไม่ยอมเปิดใน baseline ท้องถิ่นของเรา
