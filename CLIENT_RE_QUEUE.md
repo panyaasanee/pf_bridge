@@ -59,6 +59,7 @@ decoder ฝั่ง server ยืนบน W codec ที่ commit แล้�
 บน main clone เขียว(cloud sanity 2017/324/0 · ledger PASS entries=42) ⇒ ใบ RE-058 ตัวมันเองไม่เคยติด merge
 (งาน static บนอิมเมจล้วน) แต่ผลของใบนี้จะถูก chief ใช้แก้สถานะ nonclaim ของ **HYP-PF-034 ที่อยู่บน main แล้ว** —
 ผู้รับงานกรอกผลตามใบได้เลย ไม่ต้องรออะไรอีก
+**สถานะ (R143 · 2026-08-24 ~09:xx +07:00):** ✅ **GT-055 PASS/DONE** (ผลหน้าสะพาน 02:41: `0x36DB` = **string8** tag `0x44` + uint32le byte_len · `0xAC52` = UTF-16LE tag `0x48` · ป้าย `UNTAGGED_*` = ขอบเขต helper ของ serializer body ไม่ใช่ full-wire absence claim) ⇒ **parser เราผิดจริงฝั่ง `0x36DB`** — chief แก้ในรอบเดียวกัน (`opaque_string8` + เลิกบังคับความยาวคู่ + dated amendment HYP-PF-015/021 รวม 5 จุด) · สถานะโค้ด ณ ตอนเขียน: **PR โค้ด #16 (commit `fa1e804`) เปิดแล้ว รอ gate — ยังไม่เข้า `main`** · merge อัตโนมัติเมื่อเขียว · ถ้ารอบหน้าไม่เห็น merge ให้เช็ค PR #16 (branch `claude/amazing-goodall-mmtl2a` — งานอยู่บน branch ครบแม้ PR ถูกปิด) · ✅ **RE-056 DONE/METHOD-FAIL** (ผล 07:28: registrar `0x5F3DF0` = inbound prototype tree สำหรับ `CreateById` — จำแนก outbound ไม่ได้ ตกที่ control ⇒ เลน static ของ direction **ปิดถาวรตามเกณฑ์จบใบ** · direction `TriggerCastSkillVital` **ยังไม่ตัดสิน** · ทางต่อ = observe-only attended ตาม checkpoint `PF_SKILL001_...20260816.md` — พักตามคำสั่ง 16:56) · **ใบเปิดจริงตอนนี้: RE-057 · RE-058**
 
 ---
 ## 🆕🔬 GT-052 CLASS-SKILL-TABLE-001 [STATIC-ON-BRIDGE]: ~~dump ตารางอาชีพ + ตารางสกิล~~ ✂️ **ตีความคอลัมน์ + ผูก TEXTDATA + ผูกไอคอน** — ตาราง dump แล้วทั้งคู่ (`gamedata\` · จดหมาย 2150)  [✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 00:44 (+07:00) · บันทึกโดย chief R135 · ผลลบติดใบ: ไม่พบ legend ของ `n_TARGET` ในชุดที่ค้น — ห้ามตั้ง label ("ไม่พบ" ≠ "ไม่มีใน client")**]
@@ -449,7 +450,7 @@ py -3 tools\pf_external_registry.py --verify-spans ..\GameClient\GameClient.loca
 
 ---
 
-## 🆕🔬 GT-055 STRING-CODEC-DECISION-001 [STATIC-ON-BRIDGE]: ชี้ขาด "รูปเต็ม" ของ string บน wire 2 จุดที่โค้ดเรากับตารางส่งมอบ Codex ขัดกัน — DeleteActorVital 0x36DB และ chat 0xAC52 + ตอบว่าป้าย `UNTAGGED_*` ของชุดส่งมอบแปลว่าอะไรกันแน่  [🟠 **PENDING — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี `LOCK_GAME`/teardown · ไม่มีอะไรให้ดูบนจอเกม**]
+## 🆕🔬 GT-055 STRING-CODEC-DECISION-001 [STATIC-ON-BRIDGE]: ชี้ขาด "รูปเต็ม" ของ string บน wire 2 จุดที่โค้ดเรากับตารางส่งมอบ Codex ขัดกัน — DeleteActorVital 0x36DB และ chat 0xAC52 + ตอบว่าป้าย `UNTAGGED_*` ของชุดส่งมอบแปลว่าอะไรกันแน่  [✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 02:41 (+07:00) · บันทึกโดย chief R143 · `0x36DB` = string8 (tag `0x44`) · `0xAC52` = UTF-16LE (tag `0x48`) · `UNTAGGED_*` = ขอบเขต helper ไม่ใช่ full-wire claim · parser เราผิดจริงฝั่ง `0x36DB` — แก้แล้ว: PR โค้ด #16 (`fa1e804`) รอ gate ยังไม่เข้า main ณ R143**]
 
 **Background (R134 · `FINDINGS_R134_EXTERNAL_XCHECK.md` §3):** cross-check โค้ดเรา vs ชุดส่งมอบพบข้อขัดแย้ง
 2 จุด และข้อเท็จจริงเชิงระบบหนึ่งข้อที่ครอบทั้งคู่:
@@ -526,7 +527,7 @@ py -3 tools\pf_external_registry.py --verify-spans ..\GameClient\GameClient.loca
   sha อิมเมจ+TSV ก่อน-หลัง)
 
 ---
-## 🆕🔬 RE-056 SKILLCAST-DIRECTION-002 [STATIC-ON-BRIDGE]: ตัดสินทิศทาง (outbound/inbound) ของ `TriggerCastSkillVital` ด้วยวิธีที่ "ผ่านด่านตัวควบคุมก่อน" — ไล่ generic registrar `0x5F3DF0` ว่าเก็บ prototype ที่ตารางไหนและใครเดินตารางนั้น (สายที่ GT-050 ยัง exclude ไม่ได้)  [🟠 PENDING — งาน static บนเครื่องสะพานล้วน · ไม่บูต server/client/DB · ไม่มี LOCK_GAME/teardown · ไม่มีอะไรให้ดูบนจอเกม]
+## 🆕🔬 RE-056 SKILLCAST-DIRECTION-002 [STATIC-ON-BRIDGE]: ตัดสินทิศทาง (outbound/inbound) ของ `TriggerCastSkillVital` ด้วยวิธีที่ "ผ่านด่านตัวควบคุมก่อน" — ไล่ generic registrar `0x5F3DF0` ว่าเก็บ prototype ที่ตารางไหนและใครเดินตารางนั้น (สายที่ GT-050 ยัง exclude ไม่ได้)  [✅ **DONE/METHOD-FAIL — ผลหน้าสะพาน 2026-08-24 07:28 (+07:00) · บันทึกโดย chief R143 · จ็อบ 0 ตก: registrar = inbound `CreateById` tree — control `PickupTerrainThing` ก็ถูก register ทั้งที่ outbound จริงคือ `0x006B0639`→`0x005DD800` นอก tree ⇒ วิธีนี้จำแนก outbound ไม่ได้ · เลน static ของ direction ปิดถาวรตามเกณฑ์จบใบ · direction `TriggerCastSkillVital` ยังไม่ตัดสิน**]
 
 > 🔢 หมายเหตุเลข (chief): จดหมายต้นเรื่อง `notes_to_chief\20260824_0126_RE055-DRAFT-outbound-census-is-blind-measured-against-a-known-control.md`
 > ร่างใบนี้ไว้เป็น RE-055 แต่ 055 ถูกออกเป็น GT-055 (STRING-CODEC-DECISION-001) ไปแล้วใน R134 ก่อนคำสั่งถึงมือ chief
