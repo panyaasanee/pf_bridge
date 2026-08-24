@@ -69,4 +69,31 @@
   **ในบูตเดียวไม่ได้** — คุณค่า "บันทึกคลิกจริง" จึงมีเงื่อนไข · การอนุญาต compose scenario เป็นเรื่อง
   สถาปัตยกรรม = ต้องให้คุณ Panya เคาะ ไม่ตัดสินเองในรอบนี้
 
-(ผล adversary · queue · commit/PR จะเติมท้ายรอบ)
+## ผล pf-adversary (บังคับก่อน commit — จับ defect จริง 4 + noted 1)
+
+- **D1 (MEDIUM · แก้แล้ว):** `expiry.decision`/`falsification` ของ HYP-PF-036 ตั้งอยู่บน "คลิกจริงในรอบ attended"
+  ซึ่งกติกาปัจจุบันทำให้เกิดไม่ได้ — spawner (`ground-loot`) ถูก mutual exclusion กันออกจากบูตเดียวกัน ·
+  GT-045 render ยังไม่ยืนยัน · clickable ตาม scene ไม่เคยพิสูจน์ ⇒ "ศูนย์เฟรม" แยกไม่ออกระหว่าง
+  "opcode DERIVED ผิด" กับ "ไม่มีของให้คลิก" ⇒ เขียนขั้น attended เป็น **CONDITIONAL** (ต่อคิวหลัง
+  eye-test GT-045) และการ compose spawner+listener ในบูตเดียว = **รอคุณ Panya เคาะ** (ไม่แตะ pattern
+  mutual exclusion เอง)
+- **D2 (LOW-MED · แก้แล้ว):** เทส gate ของเลนเป็น source-substring ไม่ใช่ behavioral — เพิ่ม pairing test
+  (pickup+ground_loot) แบบพี่น้อง (`make_state_class` ต้อง ValueError · CLI ต้อง exit 2)
+- **D3 (LOW · แก้แล้ว):** amendment ใน `loot_roll.py` อ้าง serializer pin ไปที่ GT-046 ผิดใบ — ที่มาจริงคือ
+  GT-040 part C + re-derive GT-042 (rows 859-862) · GT-046 คือ producer+trigger+ทิศ outbound เท่านั้น
+- **D4 (LOW · แก้แล้ว):** "proven natural direction is client-outbound" เกินหลักฐานหนึ่งขั้น — แก้เป็น
+  "**the only proven producer** is client-outbound" (class มี R codec เต็ม + อยู่ใน CreateById tree ตาม RE-056)
+- **D5 (VERY LOW · จดไว้ ไม่แก้):** เฟรม 0x4543 ก่อน ready ถูกจำแนกแบบอสมมาตร (malformed ลง refusal ·
+  well-formed เหลือแค่ `wrong_sequence`) — เหมือน HYP-PF-034 ทุกประการ เป็นพฤติกรรม template
+- ของที่รอดการโจมตี (adversary ยืนยันด้วยการรันจริง): codec ตรง TSV byte-for-byte · nonclaim opcode ดังครบทุกชั้น ·
+  containment แน่น (ไม่มี legacy vital ชน 0x4543 · ทุก path คืน `[]`) · pin ทุกตัว recompute ตรง · ASCII ล้วน
+- scar #4 เตือน committer: ไฟล์ใหม่ 3 ไฟล์ un-ignored แล้วแต่ยัง untracked — ต้อง `git add` ระบุ path ตอน commit
+
+## คำถามเปิดถึงคุณ Panya (จากรอบนี้)
+
+1. **compose scenario:** จะให้ spawner (`ground-loot`) กับ listener (`pickup`) อยู่บูตเดียวกันด้วยกลไกไหน —
+   เวอร์ชัน tracked ใหม่ / combined scenario / หรือไม่อนุญาต (mutual exclusion เป็น pattern บ้าน chief ไม่แตะเอง)
+2. คำถามเดิมที่ยังค้าง: ทรง `0x4C13` แบบไหนยิงบรรทัดเขียว id 131 — เลน static ประกาศหมดแล้ว ต้องเป็นใบ attended
+   (ยังไม่เปิดใบ รอคุณเคาะตามเกณฑ์จบของใบ RE-059)
+
+(commit/PR · คิว GT-060 · จดหมาย จะเติมท้ายรอบ)
