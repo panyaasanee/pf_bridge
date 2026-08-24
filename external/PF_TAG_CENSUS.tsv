@@ -1,0 +1,12 @@
+tag	len	len_status_for_tag	frequency_in_A2	proven_semantics	example_1	example_2	example_3	source
+0x05	1	FIXED	56	UNKNOWN	GSCN_RunTimeProtocolRes:W:49@file_off=0x001F7AC6	GSCN_RunTimeProtocolRes:R:67@file_off=0x001F7BBD	NotifyEnterCreateActor:W:1@file_off=0x002B7FF3	IMAGE
+0x08	1	FIXED	378	UNKNOWN	GSCN_RunTimeProtocolRes:W:54@file_off=0x001F7AEC	GSCN_RunTimeProtocolRes:R:72@file_off=0x001F7BE3	CreateActorVital:W:1@file_off=0x001EA7CB	IMAGE
+0x0B	1	FIXED	555	UNKNOWN	GSCN_RunTimeProtocolReq:W:1@file_off=0x001F349A	GSCN_RunTimeProtocolReq:W:11@file_off=0x001F2D93	GSCN_RunTimeProtocolReq:R:1@file_off=0x001F34C4	IMAGE
+0x0F	2	FIXED	231	UNKNOWN	GSCN_RunTimeProtocolRes:W:48@file_off=0x001F7AB2	GSCN_RunTimeProtocolRes:R:66@file_off=0x001F7BA9	StartGameRes:W:4@file_off=0x001EE5F1	IMAGE
+0x12	2	FIXED	275	uint16	CNSS_BoardcastToSpecifiedActorVtial:W:1@file_off=0x001E2769	CNSS_BoardcastToSpecifiedActorVtial:W:8@file_off=0x001E2803	CNSS_BoardcastToSpecifiedActorVtial:R:6@file_off=0x001E2838	IMAGE
+0x14	4	FIXED	505	UNKNOWN	GSCN_RunTimeProtocolRes:W:29@file_off=0x001E1D80	GSCN_RunTimeProtocolRes:W:43@file_off=0x001F7A62	GSCN_RunTimeProtocolRes:W:47@file_off=0x001F7A9E	IMAGE
+0x19	4	FIXED	78	UNKNOWN	SelectActorVital:W:16@file_off=0x001DF3C6	SelectActorVital:R:21@file_off=0x001DF4B9	CreateActorVital:W:9@file_off=0x001DF3C6	IMAGE
+0x1F	4	FIXED	2	UNKNOWN	SelectActorVital:W:4@file_off=0x001EAF4F	SelectActorVital:R:8@file_off=0x001EB01A		IMAGE
+0x26	4	FIXED	14	UNKNOWN	GSSS_GuildEventVitalReq:W:4@file_off=0x0009EBB3	GSSS_GuildEventVitalReq:R:39@file_off=0x0009EF32	GSSS_GuildEventVitalRes:W:4@file_off=0x0009EBB3	IMAGE
+0x2A	4	FIXED	148	float32	GSCN_RunTimeProtocolRes:W:35@file_off=0x001E1E18	GSCN_RunTimeProtocolRes:W:51@file_off=0x001F28A1	GSCN_RunTimeProtocolRes:W:52@file_off=0x001F28B0	IMAGE
+0x32	8	FIXED	541	UNKNOWN	CNSS_BoardcastToSpecifiedActorVtial:W:5@file_off=0x001E27B9	CNSS_BoardcastToSpecifiedActorVtial:R:7@file_off=0x001E285B	SelectActorVital:W:11@file_off=0x001DF37F	IMAGE
