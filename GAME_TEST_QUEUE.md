@@ -6,7 +6,7 @@
 
 **🎮 ต้องเปิดเกม / ต้องใช้ตา Panya** — ⏸ **พักทั้งหมดตามคำสั่ง 16:56 · 🔴 ห้ามปิดด้วยรอบ unattended** (กติกาอยู่ใน `AGENTS.md` แล้ว)
 - `GT-001` smoke recurring (🟢 pending · re-arm ค้าง) · `GT-030` (ห้ามรันรอบสาม — ทางต่อเป็น static) · `GT-033` A/B (BLOCKED-input)
-- `GT-034` (NO-RESULT) · `GT-035` / `GT-036` (BLOCKED รอ GT-034/045) · `GT-045` v2 (⏸ พร้อมบูตทันทีที่ Panya ว่าง — merge แล้ว)
+- `GT-034` (NO-RESULT) · `GT-035` / `GT-036` (BLOCKED รอ GT-034/045) · `GT-045` v2 (⏸ merge แล้ว — ก่อนบูตต้องผ่าน (ข) เช็ค resolver/BOOT_COMMIT ว่า clone ที่บูตมีเลน v2 จริง + (ค) Panya ปลดพัก · ถ้อยคำเดิม "พร้อมบูตทันที" ตัดเงื่อนไข (ข) ทิ้ง — แก้โดย R142 ให้ตรงจดหมาย R141)
 - 🆕 `GT-058` LEARN-SKILL-RESULT client-observe (⏸ PAUSED-รอ-Panya 16:56 — เงื่อนไข merge หมดแล้ว: PR #14 merge เข้า `main` `9691bcc` · เขียว(Actions run 32668480284 · subset) — เหลือ (ข) เช็ค BOOT_COMMIT ตอนบูต + (ค) Panya ปลดพัก · ปลดโดย R139)
 
 **🔬 งาน static — ทำเมื่อไรก็ได้ ไม่ต้องมีคนเฝ้า ไม่ต้องจับ `LOCK_GAME` · ขนานกับรอบเทสเกมได้:**
@@ -16,7 +16,7 @@
 
 🔴 ก่อนสั่งถอดอะไรใหม่: ค้น `pf_bridge\external\` ก่อนเสมอ — เริ่มที่ `external\00_SEARCH_HERE_FIRST.md` (คำสั่ง 18:22 ข้อ ④)
 🔴 🆕 R132: และค้น **`pf_bridge\gamedata\`** (ตารางข้อมูลเกม 188 ตาราง — จดหมาย 2150) ก่อนเปิดใบขุดข้อมูลเกมทุกใบ —
-เริ่มที่ `gamedata\00_SEARCH_HERE_FIRST.md` · ⚠️ โฟลเดอร์นี้อยู่บนดิสก์สะพานเท่านั้น **ยังไม่เข้า git** (รอ Panya เคาะ whitelist)
+เริ่มที่ `gamedata\00_SEARCH_HERE_FIRST.md` · ✅ **เข้า git แล้ว** (commit `0801541` · ตาราง+`lua/`+`scene/`+API spec — สถานะจริงดูหัว `CLIENT_RE_QUEUE.md` · บรรทัดนี้เคยเขียนว่า "ยังไม่เข้า git" ซึ่งล้าสมัย — แก้โดย R142)
 
 ---
 
