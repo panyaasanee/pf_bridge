@@ -84,6 +84,24 @@ $SIZE_LIMIT_BYTES  = 2MB
 $BAD_EXTENSIONS    = @('.bin', '.sqlite3', '.db', '.pcap', '.exe', '.dll')
 $BAD_NAME_PARTS    = @('gameclient', 'capture', 'pirateforce.sqlite')
 $ALLOWLIST         = @('notes_to_chief', 'evidence_screens')
+# Paths that two parties legitimately write: the chief edits them on main, and the
+# assistant or the tester edits them on this disk.  Until 2026-08-24 they were
+# tracked but outside the push allowlist, which turned every local edit into a
+# one-way deadlock - it could not travel out, and it blocked every pull in.
+# sync.log recorded 94 such halts on exactly two files (AGENTS.md 56,
+# CHIEF_CONTINUATION.md 40).  Only ALREADY TRACKED and MODIFIED paths are picked
+# up from here (the scan below uses --untracked-files=no), so a brand new file
+# still cannot ride along, and the proprietary guard still applies to every one.
+# Chief-owned single-writer files (CHIEF_CONTINUATION.md and the three queues)
+# are deliberately NOT listed: editing them here stays a mistake.
+# CANON_SHA.txt is the guard for the canonical DB.  It is written on the bridge
+# when the DB is deliberately re-baselined (last time 2026-08-23 15:19 +07:00,
+# recorded in notes_to_chief/20260823_1530_gt-results.md) and had sat
+# uncommitted for 17 hours because of exactly the deadlock this list fixes.
+# The cloud can never see the DB itself, so main's copy is informational; a
+# value that travels is strictly better than one that silently rots.
+$SHARED_TRACKED    = @('AGENTS.md', '.gitignore', 'pf_git_sync.ps1', 'CANON_SHA.txt',
+                       'agent_kit', 'external', 'gamedata')
 
 $logPath      = Join-Path $BridgeRepo 'sync.log'
 $hbPath       = Join-Path $BridgeRepo 'sync_last_check.txt'
@@ -294,6 +312,19 @@ foreach ($line in ($st.Out -split "`n")) {
     $candidates += $path
 }
 
+# Modified tracked files in the shared paths.  --untracked-files=no is the whole
+# safety argument: a file that is not already in git cannot appear here, so this
+# widens what can be UPDATED without widening what can be INTRODUCED.
+$stShared = GitRun $BridgeRepo (@('status', '--porcelain', '--untracked-files=no', '--') + $SHARED_TRACKED)
+foreach ($line in ($stShared.Out -split "`n")) {
+    if ($line.Trim().Length -lt 4) { continue }
+    $xy = $line.Substring(0, 2)
+    $path = ParsePorcelainPath $line.Substring(3)
+    if ($path.Length -eq 0) { continue }
+    if ($xy -match 'D' -or $xy -match 'R') { $deletions += ($xy.Trim() + ' ' + $path); continue }
+    if ($candidates -notcontains $path) { $candidates += $path }
+}
+
 $refusals = @()
 foreach ($rel in $candidates) {
     $full = Join-Path $BridgeRepo ($rel -replace '/', '\')
@@ -388,9 +419,32 @@ if ($behind -gt 0 -and $ahead -eq 0) {
                 ''
                 'This file disappears by itself on the first round that succeeds.'
             )
-            Finish 4 'STOP_LOCAL_EDITS_BLOCK_PULL' 'ff-only refused'
+            # Do NOT Finish here.  Pull and push are independent, and Finish used
+            # to run before the push block, so the one component that could see
+            # the deadlock was the only one that could not report it.  Leave a
+            # letter instead: the push below still runs, so the letter travels and
+            # the chief sees it on the next round.
+            $stuck = Join-Path $notesDir ('SYNC_STUCK_' + (Get-Date -Format 'yyyyMMdd_HHmm') + '.md')
+            if (-not (Test-Path -LiteralPath $stuck)) {
+                WriteAsciiFile $stuck @(
+                    '# SYNC STUCK - the bridge cannot fast-forward'
+                    ''
+                    ('time   : ' + (Stamp))
+                    ('behind : ' + $behind + '    ahead : ' + $ahead)
+                    ''
+                    'A tracked file the chief owns is modified on the bridge machine.'
+                    'Nothing is lost - the edit is still on that disk.  Resolve by'
+                    'committing or discarding the file git names below.  The bridge is'
+                    'still pushing, which is how this letter reached you.'
+                    ''
+                    'git said:'
+                    ($mg.Out)
+                )
+                Log '[3]' ('wrote ' + $stuck)
+            }
+        } else {
+            Log '[3]' 'fast-forwarded'
         }
-        Log '[3]' 'fast-forwarded'
     }
 } elseif ($behind -gt 0 -and $ahead -gt 0) {
     Log '[3]' 'diverged - leaving it to the rebase in [4]'
@@ -409,15 +463,19 @@ if ($deletions.Count -gt 0) {
     Finish 5 'REFUSED_DELETION' ($deletions.Count.ToString() + ' deletion(s)')
 }
 
+# A file that fails the guard cancels the COMMIT.  It must not cancel the ROUND:
+# on 2026-08-24 one oversized round video in evidence_screens/ stopped the push
+# for every already-committed letter as well, and the bridge went silent.
+$skipCommit = $false
 if ($refusals.Count -gt 0) {
-    Shout '[4]' ('refusing the whole commit: ' + $refusals.Count + ' file(s) failed the proprietary guard')
+    Shout '[4]' ('skipping the commit: ' + $refusals.Count + ' file(s) failed the proprietary guard')
     foreach ($r in $refusals) { Log '[4]' ('  X ' + $r) }
-    Log '[4]' 'one bad file cancels the commit - it is not skipped and the rest are not pushed.'
-    Finish 5 'REFUSED_PROPRIETARY' ($refusals.Count.ToString() + ' file(s)')
+    Log '[4]' 'the commit is cancelled - commits already made are still pushed below.'
+    $skipCommit = $true
 }
 
 $committed = 0
-if ($candidates.Count -gt 0) {
+if (-not $skipCommit -and $candidates.Count -gt 0) {
     if ($DryRun) {
         Log '[4]' ('DRYRUN: would stage and commit ' + $candidates.Count + ' file(s)')
         foreach ($c in $candidates) { Log '[4]' ('  + ' + $c) }
@@ -487,6 +545,29 @@ if (-not $DryRun) {
                 # has broken.  That is a design failure, not a merge to be resolved
                 # by a script at three in the morning.
                 GitRun $BridgeRepo @('rebase', '--abort') | Out-Null
+
+                # "cannot rebase: You have unstaged changes" is NOT a conflict.
+                # The rebase never started; a tracked file is simply modified and
+                # uncommitted.  That is fixed by one git commit, so it must not
+                # raise the permanent halt reserved for a real two-machine clash.
+                if ($rb.Out -match 'cannot rebase' -and $rb.Out -match 'unstaged changes') {
+                    $dirty = (GitRun $BridgeRepo @('status', '--porcelain', '--untracked-files=no')).Out.Trim()
+                    Shout '[4]' 'rebase could not start - modified tracked files in the worktree:'
+                    foreach ($d in ($dirty -split "`n")) { if ($d.Trim() -ne '') { Log '[4]' ('  ~ ' + $d.Trim()) } }
+                    WriteAsciiFile $attnPath @(
+                        "SYNC NEEDS ATTENTION  $(Stamp)"
+                        ''
+                        'The rebase could not START.  This is NOT a content conflict and the'
+                        'two-machine assumption has not broken.  A tracked file is modified on'
+                        'this machine and was never committed.  Commit it or discard it and the'
+                        'next round goes through by itself.  No halt file was written.'
+                        ''
+                        'modified tracked files:'
+                        ($dirty)
+                    )
+                    Finish 4 'STOP_DIRTY_WORKTREE_BLOCKS_REBASE' 'unstaged changes'
+                }
+
                 Shout '[4]' ('rebase conflicted - the disjoint write sets rule has broken: ' + ($rb.Out -replace "`n", ' | '))
                 WriteAsciiFile $haltPath @(
                     "SYNC HALTED  $(Stamp)"
