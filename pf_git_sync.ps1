@@ -83,6 +83,18 @@ $env:GIT_TERMINAL_PROMPT = '0'
 $SIZE_LIMIT_BYTES  = 2MB
 $BAD_EXTENSIONS    = @('.bin', '.sqlite3', '.db', '.pcap', '.exe', '.dll')
 $BAD_NAME_PARTS    = @('gameclient', 'capture', 'pirateforce.sqlite')
+# --- name-guard waiver (2026-08-24, ruled by Panya) ---------------------------
+# BAD_NAME_PARTS is a guess about a file's CONTENT made from its NAME, so it
+# misfires on prose: a letter titled '...capture-validated...' is text ABOUT a
+# capture, it is not a capture.  notes_to_chief/20260824_1222_BETTER-PLAN-use-
+# the-29-capture-validated-messages-not-static-only.md was refused 74 cycles in
+# a row and could never reach the chief, and renaming it is not an option
+# because sync refuses any commit that carries a deletion.
+# Format: '<folder-prefix>/|<lowercase ext>'.  This waives ONLY the name check.
+# The extension check and the 2 MB size check still apply to a waived path, and
+# every path outside this list still gets the full guard.
+# Adding an entry widens what may be committed - Panya rules on each one.
+$NAME_GUARD_WAIVER = @('notes_to_chief/|.md')
 $ALLOWLIST         = @('notes_to_chief', 'evidence_screens')
 # Paths that two parties legitimately write: the chief edits them on main, and the
 # assistant or the tester edits them on this disk.  Until 2026-08-24 they were
@@ -338,6 +350,16 @@ foreach ($rel in $candidates) {
     if ($BAD_EXTENSIONS -contains $ext) { $refusals += ('extension ' + $ext + ' : ' + $rel); $refusedPaths += $rel; continue }
     $hit = $false
     foreach ($part in $BAD_NAME_PARTS) { if ($leaf.Contains($part)) { $hit = $true } }
+    if ($hit) {
+        foreach ($w in $NAME_GUARD_WAIVER) {
+            $wf = ($w -split '\|')[0]
+            $wx = ($w -split '\|')[1]
+            if ($rel.ToLower().StartsWith($wf) -and $ext -eq $wx) {
+                Log '[4]' ('name guard waived - text letter, not a binary : ' + $rel)
+                $hit = $false
+            }
+        }
+    }
     if ($hit) { $refusals += ('name looks proprietary : ' + $rel); $refusedPaths += $rel; continue }
     if (Test-Path -LiteralPath $full) {
         $len = (Get-Item -LiteralPath $full).Length
