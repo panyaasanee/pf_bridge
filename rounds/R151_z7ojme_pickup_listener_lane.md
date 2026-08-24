@@ -45,4 +45,28 @@
 - แก้ doc stale 2 จุดเป็น dated amendment
 - baseline สวีตเต็มบน clone สดก่อนแตะอะไร: **2103/324/0 เขียว(cloud sanity)** ✅
 
-(ผล implement · adversary · queue · รายการไฟล์ จะเติมท้ายรอบ)
+## ผล implement (ลูกมือ general-purpose · ยังไม่ commit จนกว่า adversary ผ่าน)
+
+- โมดูลใหม่ `src/pirateforce_foundation/pickup_listener_hypothesis.py`: strict decoder 2 ฟิลด์
+  (`object_ref_u32` tag `0x14` @+0x14 · `opaque_u8` tag `0x08` @+0x18 · body 7 ไบต์ · pin span sha
+  `8e439d4f…773066`) · decode-count-and-record ล้วน — ไม่ตอบ ไม่เขียน DB ไม่ตั้ง timer
+- gating ตามแบบ HYP-PF-034 เป๊ะ: opt-in `--pickup-listener-hypothesis-scenario` + allowlist JSON +
+  บังคับ `--db` ที่มีจริง + mutual exclusion กับทุกโหมด · ไม่มีแฟล็ก = บูต byte-identical baseline (มีเทสเทียบ)
+- hook ใน `runtime.py` ที่จุดเดียวกับ `0x36AA` · **ข้อเท็จจริงที่จดไว้ในโมดูล:** เฟรม nested vital id
+  ที่ไม่ match branch ไหนตกลง frozen v141 dispatch = ไม่มี reply/ไม่มี error (นอกจาก one-time ack เฟรมแรก)
+  ⇒ ถ้า opcode DERIVED ผิด รอบ attended ยังอ่านผลได้ (เฟรมโผล่นอก branch เรา)
+- เทสใหม่ 45 (golden + refusal ครบ 4 ทรง + nonclaim opcode DERIVED เป็นชื่อเทส + containment)
+- ledger HYP-PF-036 (append-only · verifier PASS **entries=44**) · pin ขยับพร้อมกันในชุดเดียว:
+  `CANONICAL_CONTENT_SHA256 → 22CFE14E…` · `GRADE_SUBSET_SHA256 → BC582520…` (บทเรียน R147)
+- แก้ doc stale 2 จุดเป็น dated amendment (`loot_roll.py` · `FUNCTIONAL_COVERAGE.json` แถว
+  `monster_spawn_and_loot` — ถอนถ้อยคำ pre-placed · คง caution FightingDrop* · เติม evidence_refs)
+- **สวีตเต็มหลังงาน: 2148 passed / 324 skipped / 0 failed — เขียว(cloud sanity)** (จาก baseline 2103+45)
+- guard ที่สะดุดระหว่างทาง: seam scan token `ShowMessage` ใน docstring — แก้ถ้อยคำโมดูล ไม่แตะ guard
+
+## ประเด็นที่ chief ส่งให้ adversary ชั่งเป็นพิเศษ
+
+- mutual exclusion ⇒ เปิด listener พร้อม `--ground-loot-hypothesis-scenario` (ตัว spawn ของให้คลิก)
+  **ในบูตเดียวไม่ได้** — คุณค่า "บันทึกคลิกจริง" จึงมีเงื่อนไข · การอนุญาต compose scenario เป็นเรื่อง
+  สถาปัตยกรรม = ต้องให้คุณ Panya เคาะ ไม่ตัดสินเองในรอบนี้
+
+(ผล adversary · queue · commit/PR จะเติมท้ายรอบ)
