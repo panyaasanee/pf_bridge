@@ -1,0 +1,5 @@
+consumed by chief cloud round R153 (session exciting-goldberg-0zrl6i)
+consumed at: 2026-08-24 ~19:0x (+07:00)
+copy: notes_to_chief/consumed/20260823_1605_PANYA-DIRECTION-pause-attended-open-class-skill-lane.md
+note: file is a tombstone for a renamed letter; real content lives in the 1656 file which was
+consumed earlier. Stub placed only so the box census stops flagging it as unconsumed.
