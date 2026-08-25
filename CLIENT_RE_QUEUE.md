@@ -80,6 +80,9 @@ decoder ฝั่ง server ยืนบน W codec ที่ commit แล้�
 
 **สถานะ (R156 · 2026-08-25 ~00:0x +07:00):** ✅ **RE-064 DONE — PINNED** (ผลหน้าสะพาน 2026-08-24 22:41 +07:00 · จดหมาย `notes_to_chief\20260824_2241_RE-064-RESULT-R13-INSIDE-LOOP-PREDICTION-FALSIFIED.md`) — element = tag `0x32` กว้าง 8 แล้ว tag `0x08` กว้าง 1 · R13 `0x005ED2F0` = **INSIDE loop** และเป็น collection-insert helper (ไม่กิน wire tag — คำทำนาย TRAILER **ผิด**) · count R10 อ่านเป็น u8 tag `0x08` มี signed initial gate · rider 15-byte PC prefix: **IDENTICAL 15/15** (capture PC #101 vs v141 candidate) ⇒ ErrorData บน control frame ของ GT-063 จะชี้ session context ไม่ใช่ envelope prefix · chief R156 บันทึกลง ledger HYP-PF-037 แล้ว (3 ฟิลด์ · re-pin canonical sha 5629F715 · ผ่าน pf-adversary — 3 defect แก้ครบก่อน commit) · 🔴 **ยังไม่ compose เฟรม count>0** — stop_rule + expiry decision ของ ledger บังคับรอผลตา GT-063 + คำเคาะ Panya ก่อนเปิด NEW VERSION (คำถามเสนอ Panya อยู่ในจดหมาย R156) · **ใบเปิดจริงตอนนี้: 0 ใบ**
 
+**สถานะ (R158 · 2026-08-25 ~08:0x +07:00):** ✅ **RE-065 ปิดแล้วเป็น DONE/YES (static)** พร้อม erratum ต่อ factpack R100 (ดูท้ายไฟล์) · 🆕 **เปิด RE-066 หนึ่งใบ (ท้ายไฟล์)** ⇒ **ใบเปิดจริงตอนนี้: RE-066 ใบเดียว**
+> RE-066 ไม่ได้เปิดเพื่อหางานให้ทำ — มันมาจาก **ข้อค้านของ `pf-adversary` ต่อเลนโค้ด GT-045 v3 ของรอบนี้เอง**: เราไม่มีหลักฐานชั้นไหนเลยว่าไคลเอนต์ **อ่าน** ฟิลด์ `+0x14` และถ้ามันไม่อ่าน รอบ attended ถัดไปจะฆ่าสมมติฐานที่ถูก ด้วยเหตุผลที่ผิด ⇒ ใบนี้ตอบก่อนได้ **โดยไม่ต้องเผารอบ attended**
+
 **สถานะ (R157 · 2026-08-25 ~00:3x +07:00):** 🆕 เปิด **RE-065 ACTORTASK-USEBEHAVIOR-CTOR-WALK-001** (ท้ายไฟล์) — ครึ่งที่หายของ Door B (attack/action) ตาม draft R98 หัวข้อ 7 ข้อ 1 · NEEDS-BRIDGE-IMAGE · กุญแจปลด `INTENT_ATTACK_UNDELIVERABLE` ของ MOB-AGGRO-001 (เลน pure-logic ใหม่ของ R157) · หมายเหตุเลข: 064 ถูกออกซ้ำสองใบ (RE-064/GT-064) ตามกฎห้ามเปลี่ยนชื่อ ทั้งคู่คงเดิม ⇒ เลขว่างถัดไปคือ 065 · **ใบเปิดจริงตอนนี้: RE-065 ใบเดียว**
 
 ---
@@ -1193,7 +1196,9 @@ objective หนึ่งประโยค: **ตัดสินจากอิ
 
 ---
 
-## 🆕🔬 RE-065 ACTORTASK-USEBEHAVIOR-CTOR-WALK-001 [STATIC-ON-BRIDGE]: เดิน ctor ของ `CActorTask_UseBehavior` / `CActorTask_PlayActionEvent` (custom RTTI ไม่ใช่ MSVC — vtable->name resolve จาก static ไม่ได้) — ครึ่งที่หายของ Door B: เฟรม behavior-id ขาเข้าจากเซิร์ฟเวอร์เรา **สร้าง attack task ให้ `CNetNPC` ที่ project ไว้** ได้ไหม  [🟢 **PENDING** — เปิดโดย chief R157 · เหตุ: MOB-AGGRO-001 (pure-logic decision slice) เข้าแล้ว · intent โจมตีของมันถูกตั้งชื่อ `INTENT_ATTACK_UNDELIVERABLE` จนกว่าใบนี้จะตอบ]
+## 🆕🔬 RE-065 ACTORTASK-USEBEHAVIOR-CTOR-WALK-001 [STATIC-ON-BRIDGE]: เดิน ctor ของ `CActorTask_UseBehavior` / `CActorTask_PlayActionEvent` (custom RTTI ไม่ใช่ MSVC — vtable->name resolve จาก static ไม่ได้) — ครึ่งที่หายของ Door B: เฟรม behavior-id ขาเข้าจากเซิร์ฟเวอร์เรา **สร้าง attack task ให้ `CNetNPC` ที่ project ไว้** ได้ไหม  [✅ **DONE/YES (static) — ผลหน้าสะพาน 2026-08-25 02:50 (+07:00) · จดหมาย `20260825_0250_RE-065-RESULT-ACTIONVITAL-CONSTRUCTS-NPC-TASK.md` · บันทึกโดย chief R158** — `ActionVital` handler `0x007516C0` resolve actor จาก handle (`0x00402A20`/`0x00446170`) · lookup BEHAVIOR `0x00702A10` · เรียก ctor `CActorTask_UseBehavior` `0x0047AB30` · type gate ที่ผ่านคือ `CActorBaseClient` token `0x0102CE88` ซึ่ง `CNetNPC` (actor_type 4) เป็นลูกอยู่ใต้ (verifier 111 guards) · task ถูก commit เป็น vtable `0x00F0EF10` + flags `8` **ก่อน** gate `[actor+0x14]` ⇒ gate ตกก็ยังคืน task · control gate ผ่าน (`CActorTask_Dead` เดินซ้ำได้ตรง) · `CHitResult` = bounded direct negative · `CKnockdownVital` = UNRESOLVED static (virtual builder) — ห้ามตั้งชื่อ task ของเส้นนั้น
+> 🔴 **ERRATUM ต่อ `FACTPACK_R100_DOORB_ATTACK_TASK_CTORS_STATIC.md` (ลงโดย chief R158 ตามที่ผู้รันขอ — ไม่แก้ไฟล์เก่า):** ข้อความเดิม *"ctor ของ `CActorTask_PlayActionEvent` NOT FOUND / ฟังก์ชัน ~`0x471E90` เป็น dtor"* **ผิด** · ctor มีจริง byte-exact ที่ `[0x00471EB0,0x00471F47)` (base ctor `0x00485D40` ที่ `0x00471EDD` · ติดตั้ง vtable `0x00F0EF28` ที่ `0x00471EEE` · `ret 0x14` ที่ `0x00471F44`) · `0x471E90..0x471EAC` เป็น tail ของเมท็อดอื่น
+> 🔴 **nonclaim ที่ต้องติดไปกับผลนี้เสมอ:** YES ฝั่ง static แปลว่า *"มีเส้นทางสร้าง task อยู่ในอิมเมจ"* เท่านั้น · **ไม่**พิสูจน์ว่า lookup `0x00702A10` คืนแถว BEHAVIOR จริงตอน runtime (SCENE-013 null prior ยังเป็นความเสี่ยงแยก) และ **ไม่**พิสูจน์ว่ามอนสเตอร์โจมตีบนจอแล้ว ⇒ `INTENT_ATTACK_UNDELIVERABLE` ของ MOB-AGGRO-001 **ยังห้ามเลื่อนเป็น runtime-deliverable จากผลนี้ลำพัง** ต้องมีแถว BEHAVIOR ที่ resolve ได้ + การสังเกตแบบ attended ก่อน]
 
 > 🔢 **หมายเหตุเลข (chief R157):** ตัวนับชุดเดียวกับ `GAME_TEST_QUEUE.md` — 063 ถูกใช้โดย GT-063 (R153) · 064 ถูกออก **สองครั้ง** (RE-064 ใน R154 และ GT-064 ใน R155 — ชนกันแล้วในไฟล์ ตามกฎห้ามเปลี่ยนชื่อใบที่ commit แล้ว ทั้งคู่คงชื่อเดิม) ⇒ เลขว่างถัดไปคือ **065** ใบนี้จึงเป็น RE-065
 
@@ -1277,3 +1282,44 @@ RTTI: custom ไม่ใช่ MSVC — ชื่อครอบครัว CA
 
 ### result:
 🔴 `ค้นใน pf_bridge\external\ แล้ว: ___` · 🔴 `ค้น gamedata แล้ว: ___` · (ผู้รับงานกรอก: objective ประโยคเดียว YES/NO/UNRESOLVED · ผลจ็อบ 1 control gate · ctor/vtable/kind ของทั้งสองคลาส + span/off/len/sha ทุกฟังก์ชัน · verdict ต่อ carrier + actor-type gate VA · sha อิมเมจก่อน-หลัง · จดหมายเข้า `notes_to_chief/`)
+
+---
+
+## 🆕🔬 RE-066 GROUNDLOOT-DWORD-IS-IT-READ-001 [STATIC-ON-BRIDGE]: เส้นทางอ่าน list `0x5F85B0` (read path `0x89A640`) **อ่านฟิลด์ `+0x14` แล้วเอาไปทำอะไรหรือเปล่า** — โดยเฉพาะว่ามันไปถึง item decoder ที่ RE-060 พินไว้ (`0x00892530` → `0x00890FC0` → `0x00890EF0`) ไหม  [🟢 **PENDING** — เปิดโดย chief R158 · 2026-08-25 ~09:0x (+07:00)]
+
+**ที่มาของใบ (สำคัญ — อย่าอ่านข้ามช่วงนี้):** `pf-adversary` หักล้างเลนโค้ด GT-045 v3 ของรอบนี้ด้วยข้อค้านหนึ่งที่ยังไม่มีใครตอบได้:
+รอบ attended 1104 ส่ง `2600001` ซึ่ง **ไม่มี drop model** แล้ว **ยังได้ฝุ่น "ของตกพื้น"** ⇒ ทฤษฎีสองอันอธิบายผลนั้นได้ดีเท่ากัน
+
+| ทฤษฎี | ทำนายอะไรถ้าเปลี่ยนเลขไอเทม |
+|---|---|
+| **T1** ไคลเอนต์เอา `+0x14` ไปเปิดตารางไอเทมแล้ววาดโมเดลตามแถวนั้น | เปลี่ยนเป็นไอเทมที่มี drop model ⇒ **เห็นโมเดล** |
+| **T2** handler เล่นเอฟเฟกต์ตามตำแหน่งตอนเรคคอร์ดมาถึง **โดยไม่เคยแตะ dword เลย** | เปลี่ยนเลขอะไรก็ได้ผลเหมือนเดิม ⇒ **ฝุ่นอย่างเดียวตลอดไป** |
+
+🔴 **ทำไมต้องตอบก่อน:** ถ้า T2 จริง รอบ attended ถัดไปจะได้ "ฝุ่นอย่างเดียว" แล้วเกณฑ์ปิดใบจะ**ฆ่าสมมติฐาน "เลขไอเทมคือสาเหตุ"
+ทั้งที่สมมติฐานนั้นไม่เคยถูกทดสอบเลย** เพราะ dword ไม่เคยถูกอ่าน · **ใบนี้ตอบได้จาก static ล้วน ไม่ต้องเปิดเกม ไม่ต้องใช้รอบ attended**
+
+### objective (ประโยคเดียว)
+**ในอิมเมจไคลเอนต์ ค่าที่ถูกอ่านจากออฟเซ็ต `+0x14` ของ element ใน list `0x5F85B0` ถูกใช้ต่อในเส้นทางใด — และเส้นทางนั้นไปถึง
+item-table decoder ที่ RE-060 พินไว้หรือไม่ (`0x00892530` → `0x00890FC0` → `0x00890EF0`)**
+
+### จ็อบ (ทำตามลำดับ · หยุดได้ทันทีที่ตอบ objective ได้พร้อมหลักฐาน)
+0. **ด่านตัวควบคุมก่อนเสมอ:** verify sha ของอิมเมจ + verify span ของ `[0x005F85B0,0x005F8869)` (sha `ce0a58f7…` ที่ GT-042 พินไว้)
+   และของ read path `0x89A640` · ถ้า sha ไม่ตรงกับที่พินไว้ **หยุดและรายงาน ห้ามเดินต่อ**
+1. เดิน read path `0x89A640` แบบ recursive CFG · หา store ของฟิลด์ `+0x14` ลงโครงสร้าง element แล้ว **ตามตัวที่อ่านมันกลับออกมา**
+   (dword ref / call census) — ผลลัพธ์ที่ต้องการคือรายชื่อ **ผู้อ่าน `+0x14` ทุกตัว** พร้อม VA
+2. สำหรับผู้อ่านแต่ละตัว: ไปถึง `0x00892530` (หรือ `0x0046B3E0` / `0x00892580` ตามที่ RE-060 พิน) ได้ไหม — ตอบด้วย call chain ที่เดินได้จริง
+3. ถ้าไม่มีผู้อ่านเลย ⇒ **นั่นคือคำตอบ (T2) และเป็นผลลบที่มีค่าสูงมาก** — แต่ต้องเป็น **bounded negative** ที่ระบุขอบเขตชัด
+   (ค้นอะไรบ้าง · exclude indirect/virtual path ได้หรือไม่ได้) **ห้ามเขียน "ไม่มี" ลอย ๆ** (ด่าน G1)
+4. ถ้ามีผู้อ่านและไปถึง decoder ⇒ ระบุด้วยว่า **ฟิลด์ไหนของแถวถูกอ่าน** (`n_ID_MODEL` / `n_DROPMODEL_TYPE` / อื่น ๆ)
+   — ถ้าตอบข้อนี้ได้ **คำถามเรื่องฟิลด์ที่ GT-045 v3 ตอบไม่ได้โดยดีไซน์ จะถูกตอบด้วย static แทน**
+
+### เกณฑ์จบใบ
+ตอบ objective ได้พร้อม **VA + span + sha ต่อฟังก์ชันที่พึ่ง + recursive CFG errors 0** · หรือชน **bounded negative** ที่ระบุขอบเขตครบ
+
+### nonclaims ที่ต้องติดไปกับผล
+- ผล static ไม่บอกว่า runtime จะเดินเส้นนั้นจริง (SCENE-013 null prior ยังเป็นความเสี่ยงแยก)
+- ผลใบนี้ **ไม่แทนที่รอบ attended GT-045** — มันแค่ทำให้อ่านผลรอบนั้นถูก
+- ห้ามผูกเลข/ชื่อจาก `gamedata` เข้ากับเส้น code เพื่อพิสูจน์ control flow (กติกาเดิม)
+- เซิร์ฟเวอร์ต้นฉบับปิดไปแล้วและกู้ไม่ได้ — ใบนี้พูดถึงพฤติกรรมของไคลเอนต์ที่ ship มาเท่านั้น
+
+> 🔢 **หมายเหตุเลข (chief R158):** ตัวนับชุดเดียวกับ `GAME_TEST_QUEUE.md` — 065 ถูกใช้โดย RE-065 (R157) ⇒ เลขว่างถัดไปคือ **066**
