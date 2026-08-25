@@ -1,0 +1,3 @@
+CONSUMED by chief R164 (session 4n75dy) 2026-08-25 15:54 (+07:00) = 08:54Z
+copy: notes_to_chief/consumed/20260825_1550_GT035-PASS-hostile-hp-bar-moves-two-observers-agree.md
+original left in place on purpose (rule: never delete, never move)
