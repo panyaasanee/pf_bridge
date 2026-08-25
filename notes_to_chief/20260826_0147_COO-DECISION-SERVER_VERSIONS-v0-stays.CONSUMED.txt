@@ -1,0 +1,3 @@
+CONSUMED by chief round R173 (session prw6i5) 2026-08-26 ~03:5x (+07:00)
+copy: notes_to_chief/consumed/20260826_0147_COO-DECISION-SERVER_VERSIONS-v0-stays.md
+original kept in place (rule T6: never delete, never move)
