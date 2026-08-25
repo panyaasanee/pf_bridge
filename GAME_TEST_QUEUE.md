@@ -527,6 +527,12 @@
 
 ## GT-001 Smoke: full-loop บน canonical DB หลังทุก commit สำคัญ  [🟢 PENDING (recurring) — 🔁 **re-arm ยิงแล้ว R125** (PR #9 แตะ `src/`) · บูต HEAD จาก resolver · **PASS ล่าสุดที่ green `fa1e804` 2026-08-24 09:41 (+07:00) · R145 บันทึก**] 🔁
 
+> 🔁 **อัปเดต chief R167 · 2026-08-25 ~19:xx (+07:00) — ใบนี้ *ถึงกำหนดจริง* ไม่ใช่ของแถม**
+> ตั้งแต่ PASS ล่าสุด (`fa1e804`) `main` ขยับไปแล้วทั้ง PR #24–#32 **และ R167 กำลัง merge เลนใหม่ที่แตะ `src/` อีกก้อน**
+> (`ground_loot_nameprop_hypothesis.py` + wiring ใน `app.py`/`runtime.py` + เพดานเวอร์ชัน ledger ทั้งไฟล์)
+> ⇒ บูตที่ commit **หลัง merge ของ R167** · `CANON_SHA` จะขยับตามที่ใบคาดไว้เพราะใบนี้รันบน canonical DB จริง (ต่างจากรอบ GT-033 ที่รันบนสำเนา)
+
+
 > ✅ **PASS R145 (ผลหน้าสะพาน 2026-08-24 09:41 +07:00 · Codex LOCAL):** full loop บน resolver-green `fa1e804` (tree ตรง main HEAD `94f0ce3`) — login → Port Royal → ออกด้วย X · selected sessions `9→10` · max lease `10→11` · open sessions หลังหยุด 0 · `integrity_check=ok` FK 0 · frame proof 3/3 · **`CANON_SHA.txt` อัปเดตแล้วโดยสะพาน** `EE785A79…` → `670CE534…` (การเข้าเกมเพิ่ม selected session/lease ตามที่ใบคาด)
 
 > ✅ **RESULT 2026-08-23 01:10–01:14 (+07:00) — PASS บน main HEAD `cf81730` (worktree clean)** · full loop: login → Channel 1 → PVP → Arena01 → เข้าแมพ (HP 100/100 · Port Royal · chat online) → ออกด้วย X+ยืนยัน → Ctrl+C สะอาด
@@ -1363,6 +1369,17 @@ $LASTEXITCODE
 **④ ลำดับ label ยืนยันแล้วว่าตรงกับที่ใบเขียนไว้** — 7 ใบจบที่ `..._TARGET_HP_AFTER_STRONG` (ไม่มี `TARGET_HP_ZERO_DYING` / `TARGET_DYING_ELAPSED` ในเลนนี้) · ค่า `max_hp` ในทุกเฟรม actor = **3857** · เฟรม `TARGET_SPAWN` มี ASCII `Tornado Eagle` + preset `M011_000_000_SP3` และเป็นเฟรมเดียวที่มี MovementAttr
 
 ## 🆕 GT-036 KILL-HOSTILE-001: วงเต็ม "ตี → เลือด → ตาย" บน hostile ที่มี HP จริงจาก STANDARD_MOB  [🔴 **คง BLOCKED — เหตุผลถูกเปลี่ยนโดย chief R164 (2026-08-25 ~16:xx +07:00) · GT-035 ปิดเป็น PASS แล้วแต่ ใบนี้ *ไม่* ถูกปลด** · 🔴🔴 **ห้ามอ่านว่า "GT-035 ปิดแล้ว ⇒ ปลดได้" — ตัวบล็อกไม่ใช่ GT-035 อีกต่อไป** · ตัวบล็อกใหม่มีสองชั้นซ้อนกัน: ① **ไม่มีเลนโค้ดที่มีครึ่งตาย** — `HYP-PF-038` ตัดครึ่งตายทิ้งโดยเจตนา (การ์ด lethal-field ของแผนแม่ ที่ซอร์สเรียกว่า `HOSTILE_HP_LINK_HP_FLOOR` และประกาศว่า FORBIDDEN · ladder จบที่ `771`) ② **ต้องให้คุณ Panya เคาะก่อน** — การปลดการ์ดนั้นคือ "เปลี่ยนของที่พิสูจน์แล้ว" ตามนโยบายข้อ 3 · คำถามถูกวางไว้ในจดหมาย `FROM_CHIEF_R164_TO_ATTENDED_20260825_1600.md` §⑤ **และยังไม่มีคำตอบ** · 🔴 **ห้ามอ้างผล GT-035 เป็นหลักฐานของใบนี้ไม่ว่ารูปแบบใด** — เลนนั้นไม่มีเฟรม hp=0 ไม่มี death timer ไม่มี dying latch และหลอดจบที่ `771` ไม่เคยแตะ `0`] *(สถานะเดิมก่อนเปลี่ยนเหตุผล:* [🔴 **BLOCKED — รอ GT-035 (GT-034 ตอบแล้ว 2026-08-25 · chief R158) · ยังไม่ปลด**]
+
+> 🟢 **อัปเดต chief R167 · 2026-08-25 ~19:xx (+07:00) — ชั้นที่ ② ปลดแล้วโดยเจ้าของ ชั้นที่ ① ยังอยู่**
+> คำเคาะ ~18:15 (+07:00) (จดหมาย `notes_to_chief\consumed\20260825_1815_PANYA-RULINGS-FOUR-quota-cap5-GT036-lethal-scoped-GT030-rerun.md` ข้อ ③): *"ใช้การข้ามข้อจำกัดเฉพาะกิจ ให้เทส GT-036 นกตายได้"*
+> 🔴 **ยกเว้นเฉพาะสองวลีใน `HYP-PF-038.stop_rule` เท่านั้น: `alive at the end` และ `a lethal frame`** (รวม death timer เท่าที่จำเป็นต่อการตาย)
+> 🔴 **ที่ยังบังคับเหมือนเดิม ห้ามอ่านว่าถูกปลดไปด้วย:** ห้าม `a second target` · ห้าม `widen the attacker profiles` · `one shot per connection` · identity `0x201F` เท่าเดิม · `production_allowed=false` · ห้ามเอื้อมไป allowlist ของเลน arena
+> **ชั้นที่ยังบล็อกอยู่จริง (①):** ยังไม่มีเลนโค้ดที่มีครึ่งตาย — ต้องมี **`HYP-PF-038` v2** ก่อน (เพดานเวอร์ชันขยับ 3→5 ในรอบนี้แล้ว ⇒ `HYP-PF-038` อยู่ที่ 1/5 มีที่ว่าง 4 ⇒ **ไม่ต้องเปิด entry ใหม่**)
+> 🔴 **R167 ยังไม่สร้าง v2 และนี่คือเหตุผล:** รอบนี้ถือ PR ที่เป็น merge ก้อนใหญ่ (เลน nameprop 2,523 บรรทัด + เพดาน ledger ทั้งไฟล์) อยู่แล้ว · เอาเฟรมตายที่ยังไม่เคยมีใครออกแบบไปกองรวมใน PR เดียวกัน = ถ้า gate แดงจะแยกไม่ออกว่าใครทำแดง **และเสียสล็อตเวอร์ชันฟรี ๆ ถ้าออกแบบผิด**
+> ⇒ **แบบร่างของ v2 ถูกเขียนไว้ให้รอบถัดไปหยิบไปทำทันที** ใน `rounds/R167_2kn5o7_merge-stranded-nameprop-lane-and-raise-version-ceiling.md` §④
+> 🔴 **เมื่อรอบตายผ่าน สิ่งที่พิสูจน์คือ "เป้าที่เราสร้างตายได้" ไม่ใช่ "ศัตรูตายได้"** — คำว่า hostile ยังไม่ถูกพิสูจน์ (ป้ายชื่อขึ้นเขียว = สีผู้เล่นของเซิร์ฟเวอร์เดิม · `RE-067`) **เขียนผลให้ตรงชั้นนี้ตั้งแต่ต้น**
+> **ขั้นถัดไปที่เจ้าของประกาศล่วงหน้า (จดไว้ อย่าทำก่อน):** ถ้าวงตายผ่านบน `0x201F` แล้ว **ค่อย** เปลี่ยนเป้าเป็น mob จริงจากตารางเกม — **ห้ามรวบสองขั้นเป็นรอบเดียว**
+
 
 ตาม ORDER ลำดับ 3 · โครง: ทำซ้ำ GT-031 (HYP-PF-026) แต่ ladder ใช้ HP baseline ของตัวที่เลือก (เช่น Tornado Eagle lvl 27 = 3,857) · nonclaim เดิมทุกตัว + HP เป็น baseline ฝั่ง client
 
@@ -3949,6 +3966,16 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt064.sqlite3 --skill-attr
 ---
 
 ## GT-069 GROUNDLOOT-NAMELABEL-TEXTPROP-SELECTOR-001 [attended, in-game]: ยิง **เฟรมคุม (mask `0x12`) กับเฟรมทดลอง (mask `0x3A` · gate `+0x1B`=1 · index `+0x1A`=6) ที่พิกัดเดียวกัน** แล้วดูว่า **หน้าตาของป้ายชื่อไอเทมบนจอต่างกันหรือไม่**  [🔴 **BLOCKED ×2 — ต้องปลดครบทั้งสองข้อ:** **(1) เจ้าของเคาะว่าเลนนี้เกิดได้หรือไม่** (ดูบล็อก "งบเวอร์ชัน" ข้างล่าง — **ข้อนี้ยังไม่ถูกเคาะ**) · **(2) ผ่านด่านเจ็ดข้อบน commit ที่ gate ตัดสินแล้ว** · โค้ดถูก push ขึ้น branch และ **จงใจยังไม่ merge เพราะข้อ (1)** ⇒ **ถ้าเจ้าของยังไม่เคาะ ใบนี้รอเจ้าของ ไม่ได้รอผู้เทส และไม่ได้รอ CI** · เปิดใบโดย chief R165 (2026-08-25 ~17:0x +07:00) ตามบรรทัดปิดท้ายของ `RE-067`]
+
+> 🟢🟢 **อัปเดต chief R167 · 2026-08-25 ~19:xx (+07:00) — บล็อกทั้งสองข้อขยับ อ่านให้ครบก่อนบูต**
+> **ข้อ (1) ปลดแล้ว** โดยคำเคาะเจ้าของ ~17:5x (+07:00) (จดหมาย `notes_to_chief\consumed\20260825_1800_PANYA-RULING-GT069-new-entry-HYP-PF-039-plus-attended-queue-is-drained.md`):
+> เลนนี้เกิดเป็น **entry ใหม่ `HYP-PF-039`** (checkpoint `GROUND-LOOT-NAMEPROP-001`) พร้อมงบเวอร์ชันของตัวเอง · **`HYP-PF-032` ไม่ถูกแตะ ไม่ถูก override** และได้ **หมายเหตุ scoped** เขียนลง `evidence_gap` ของมันแล้วในรอบนี้
+> **ข้อ (2):** 🔴 **สิ่งที่ค้างจริงไม่ใช่ CI — โค้ดเขียวอยู่แล้ว แต่ไม่เคยมีใครเปิด PR ให้มันเลย**
+> วัดในรอบนี้: branch `claude/elegant-lamport-ywug3f` sha `13baff27` · `ci/13baff27….json` = `"conclusion":"success"` (run `32838572131`, 2026-08-25 10:47 UTC = 17:47 +07:00) · `list_pull_requests` ด้วย head นั้น = **ว่างเปล่า** ⇒ R165 **จงใจไม่เปิด PR** เพราะรอคำเคาะงบเวอร์ชัน (ถูกแล้ว) **แต่ไม่มีกลไกไหนพามันกลับเข้าเส้นทางหลังคำเคาะมาถึง**
+> ⇒ **R167 เอาเลนนี้มา merge บน branch ของตัวเองแล้วเปิด PR ให้** (แก้ conflict สองไฟล์: pin `GRADE_SUBSET_SHA256` และ `CANONICAL_CONTENT_SHA256` คำนวณใหม่บนเนื้อที่ merge แล้ว)
+> 🔴 **ก่อนบูต ต้องเช็คว่า `main` มี `src/pirateforce_foundation/ground_loot_nameprop_hypothesis.py` จริง** (`BOOT_COMMIT` ต้องอยู่หลัง merge ของ R167) — ถ้าไม่มี แปลว่า PR ยังไม่ merge **ห้ามบูต** เพราะ flag `--ground-loot-nameprop-scenario` จะไม่มีอยู่
+> **สถานะใบตอนนี้:** 🟠 **รอ merge อย่างเดียว — ไม่รอเจ้าของ ไม่รอผู้เทส**
+
 
 **ที่มา (สามแหล่ง อ่านก่อนบูต — ทั้งหมดวัดแล้ว ห้าม re-derive ระหว่างรอบ):**
 - **`RE-067` (CLOSED PASS/MIXED · 2026-08-25 16:26 +07:00 · static · verifier `re067_static_verify.py` 54/54 exit 0):** พิน selector ของป้ายชื่อไอเทมบนพื้นในไคลเอนต์ที่ ship มา — element **`+0x1B` = GATE** (`cmp byte [element+0x1B],0` · ศูนย์ ⇒ push **default UI text property `0x34`**) · element **`+0x1A` = INDEX** (signed · รับเฉพาะ `1..6`) lookup `dword [index*4 + 0x00F30EC4]` ⇒ map `1..6 -> 0x5D..0x62` · นอกช่วง ⇒ กลับไป `0x34` · ctor ของ element ตั้ง default **`+0x1B=0`, `+0x1A=1`** · ใน list codec: dirty-mask bit **`0x08` -> `+0x1B`** · bit **`0x20` -> `+0x1A`**
