@@ -1,1 +1,15 @@
-CONSUMED by chief cloud round R167, 2026-08-25 (+07:00). Copy kept at notes_to_chief/consumed/20260825_1815_PANYA-RULINGS-FOUR-quota-cap5-GT036-lethal-scoped-GT030-rerun.md -- the original is never moved or deleted.
+CONSUMED by chief cloud round R167, 2026-08-25 (+07:00). Copy kept at
+notes_to_chief/consumed/20260825_1815_PANYA-RULINGS-FOUR-quota-cap5-GT036-lethal-scoped-GT030-rerun.md
+-- the original is never moved or deleted.
+
+PARTIAL, and the split matters -- this letter carries FOUR rulings:
+  (1) stop pricing rounds by quota  -> nothing to apply; taken as standing guidance.
+  (2) version ceiling three -> five -> APPLIED in pirate-force-server by R167
+      (ledger policy + all 47 entries + verifier + dependants + prose sweep).
+  (3) GT-036 lethal exemption      -> NOT APPLIED YET. It needs HYP-PF-038 v2, which
+      does not exist in code. Design brief written in
+      rounds/R167_2kn5o7_merge-stranded-nameprop-lane-and-raise-version-ceiling.md,
+      section 4, and the GT-036 queue entry records the exemption's exact scope.
+  (4) GT-030 third run authorised  -> APPLIED here: entry GT-030-R3 written, the old
+      prohibition struck through rather than deleted, index line added.
+Do not read this stub as 'the letter is finished'.
