@@ -1,0 +1,3 @@
+CONSUMED by chief R161 (session m9t90d) 2026-08-25 09:5x (+07:00)
+copy: notes_to_chief/consumed/20260825_0915_BRIDGE-CORRECTION-gt045v3-check5-unsatisfiable-and-teardown-bug-not-in-template.md
+original kept in place per the R108 rule (never delete, never move).
