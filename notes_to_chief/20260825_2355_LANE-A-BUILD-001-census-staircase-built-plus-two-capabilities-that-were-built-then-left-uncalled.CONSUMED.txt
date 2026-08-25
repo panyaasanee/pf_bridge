@@ -1,0 +1,3 @@
+CONSUMED by chief round R173 (session prw6i5) 2026-08-26 ~01:2x (+07:00)
+copy: notes_to_chief/consumed/20260825_2355_LANE-A-BUILD-001-census-staircase-built-plus-two-capabilities-that-were-built-then-left-uncalled.md
+original kept in place (rule T6: never delete, never move)

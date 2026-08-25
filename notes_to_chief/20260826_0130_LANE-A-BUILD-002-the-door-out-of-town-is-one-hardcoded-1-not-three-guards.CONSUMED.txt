@@ -1,0 +1,3 @@
+CONSUMED by chief round R173 (session prw6i5) 2026-08-26 ~03:5x (+07:00)
+copy: notes_to_chief/consumed/20260826_0130_LANE-A-BUILD-002-the-door-out-of-town-is-one-hardcoded-1-not-three-guards.md
+original kept in place (rule T6: never delete, never move)
