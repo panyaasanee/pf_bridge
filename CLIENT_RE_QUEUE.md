@@ -80,7 +80,9 @@ decoder ฝั่ง server ยืนบน W codec ที่ commit แล้�
 
 **สถานะ (R156 · 2026-08-25 ~00:0x +07:00):** ✅ **RE-064 DONE — PINNED** (ผลหน้าสะพาน 2026-08-24 22:41 +07:00 · จดหมาย `notes_to_chief\20260824_2241_RE-064-RESULT-R13-INSIDE-LOOP-PREDICTION-FALSIFIED.md`) — element = tag `0x32` กว้าง 8 แล้ว tag `0x08` กว้าง 1 · R13 `0x005ED2F0` = **INSIDE loop** และเป็น collection-insert helper (ไม่กิน wire tag — คำทำนาย TRAILER **ผิด**) · count R10 อ่านเป็น u8 tag `0x08` มี signed initial gate · rider 15-byte PC prefix: **IDENTICAL 15/15** (capture PC #101 vs v141 candidate) ⇒ ErrorData บน control frame ของ GT-063 จะชี้ session context ไม่ใช่ envelope prefix · chief R156 บันทึกลง ledger HYP-PF-037 แล้ว (3 ฟิลด์ · re-pin canonical sha 5629F715 · ผ่าน pf-adversary — 3 defect แก้ครบก่อน commit) · 🔴 **ยังไม่ compose เฟรม count>0** — stop_rule + expiry decision ของ ledger บังคับรอผลตา GT-063 + คำเคาะ Panya ก่อนเปิด NEW VERSION (คำถามเสนอ Panya อยู่ในจดหมาย R156) · **ใบเปิดจริงตอนนี้: 0 ใบ**
 
-**สถานะ (R158 · 2026-08-25 ~08:0x +07:00):** ✅ **RE-065 ปิดแล้วเป็น DONE/YES (static)** พร้อม erratum ต่อ factpack R100 (ดูท้ายไฟล์) · 🆕 **เปิด RE-066 หนึ่งใบ (ท้ายไฟล์)** ⇒ **ใบเปิดจริงตอนนี้: RE-066 ใบเดียว**
+**สถานะ (R161 · 2026-08-25 ~09:5x +07:00):** ✅ **RE-066 ปิดแล้วเป็น DONE/PASS — YES · T2 หักล้าง · T1 ทดสอบได้** (ผลกลับ 09:38 +07:00 · บล็อก **result** ท้ายไฟล์)
+⇒ 🟢 **ใบ static เปิดอยู่ตอนนี้ = 0 ใบ** · ของแถมที่ได้มาฟรี: ฟิลด์ที่ไคลเอนต์เปิดอ่านคือ **`n_DROPMODEL_TYPE`** ไม่ใช่ `n_ID_MODEL` ⇒ เกณฑ์เลือกไอเทมของ GT-045 v3 เล็งถูกฟิลด์
+*(สถานะเดิม R158 · 2026-08-25 ~08:0x: ✅ RE-065 ปิดแล้วเป็น DONE/YES (static) พร้อม erratum ต่อ factpack R100 · 🆕 เปิด RE-066 หนึ่งใบ ⇒ ใบเปิดจริงตอนนั้น: RE-066 ใบเดียว)*
 > RE-066 ไม่ได้เปิดเพื่อหางานให้ทำ — มันมาจาก **ข้อค้านของ `pf-adversary` ต่อเลนโค้ด GT-045 v3 ของรอบนี้เอง**: เราไม่มีหลักฐานชั้นไหนเลยว่าไคลเอนต์ **อ่าน** ฟิลด์ `+0x14` และถ้ามันไม่อ่าน รอบ attended ถัดไปจะฆ่าสมมติฐานที่ถูก ด้วยเหตุผลที่ผิด ⇒ ใบนี้ตอบก่อนได้ **โดยไม่ต้องเผารอบ attended**
 
 **สถานะ (R157 · 2026-08-25 ~00:3x +07:00):** 🆕 เปิด **RE-065 ACTORTASK-USEBEHAVIOR-CTOR-WALK-001** (ท้ายไฟล์) — ครึ่งที่หายของ Door B (attack/action) ตาม draft R98 หัวข้อ 7 ข้อ 1 · NEEDS-BRIDGE-IMAGE · กุญแจปลด `INTENT_ATTACK_UNDELIVERABLE` ของ MOB-AGGRO-001 (เลน pure-logic ใหม่ของ R157) · หมายเหตุเลข: 064 ถูกออกซ้ำสองใบ (RE-064/GT-064) ตามกฎห้ามเปลี่ยนชื่อ ทั้งคู่คงเดิม ⇒ เลขว่างถัดไปคือ 065 · **ใบเปิดจริงตอนนี้: RE-065 ใบเดียว**
@@ -1285,7 +1287,7 @@ RTTI: custom ไม่ใช่ MSVC — ชื่อครอบครัว CA
 
 ---
 
-## 🆕🔬 RE-066 GROUNDLOOT-DWORD-IS-IT-READ-001 [STATIC-ON-BRIDGE]: เส้นทางอ่าน list `0x5F85B0` (read path `0x89A640`) **อ่านฟิลด์ `+0x14` แล้วเอาไปทำอะไรหรือเปล่า** — โดยเฉพาะว่ามันไปถึง item decoder ที่ RE-060 พินไว้ (`0x00892530` → `0x00890FC0` → `0x00890EF0`) ไหม  [🟢 **PENDING** — เปิดโดย chief R158 · 2026-08-25 ~09:0x (+07:00)]
+## 🆕🔬 RE-066 GROUNDLOOT-DWORD-IS-IT-READ-001 [STATIC-ON-BRIDGE]: เส้นทางอ่าน list `0x5F85B0` (read path `0x89A640`) **อ่านฟิลด์ `+0x14` แล้วเอาไปทำอะไรหรือเปล่า** — โดยเฉพาะว่ามันไปถึง item decoder ที่ RE-060 พินไว้ (`0x00892530` → `0x00890FC0` → `0x00890EF0`) ไหม  [✅ **DONE / PASS — YES · T2 หักล้างแล้ว · T1 ทดสอบได้** — ผลกลับ 2026-08-25 09:38:47 (+07:00) · RE runner LOCAL · จดหมาย `notes_to_chief\consumed\20260825_0938_RE-066-RESULT-ITEM-ID-REACHES-DROPMODEL.md` · บันทึกโดย chief R161 (2026-08-25 ~09:5x +07:00) — ดูบล็อก **result** ท้ายใบ]
 
 **ที่มาของใบ (สำคัญ — อย่าอ่านข้ามช่วงนี้):** `pf-adversary` หักล้างเลนโค้ด GT-045 v3 ของรอบนี้ด้วยข้อค้านหนึ่งที่ยังไม่มีใครตอบได้:
 รอบ attended 1104 ส่ง `2600001` ซึ่ง **ไม่มี drop model** แล้ว **ยังได้ฝุ่น "ของตกพื้น"** ⇒ ทฤษฎีสองอันอธิบายผลนั้นได้ดีเท่ากัน
@@ -1323,3 +1325,40 @@ item-table decoder ที่ RE-060 พินไว้หรือไม่ (`0x
 - เซิร์ฟเวอร์ต้นฉบับปิดไปแล้วและกู้ไม่ได้ — ใบนี้พูดถึงพฤติกรรมของไคลเอนต์ที่ ship มาเท่านั้น
 
 > 🔢 **หมายเหตุเลข (chief R158):** ตัวนับชุดเดียวกับ `GAME_TEST_QUEUE.md` — 065 ถูกใช้โดย RE-065 (R157) ⇒ เลขว่างถัดไปคือ **066**
+
+### ✅ result (บันทึกโดย chief R161 · 2026-08-25 ~09:5x +07:00 · จากจดหมาย `20260825_0938`)
+
+**คำตอบ objective: YES — `+0x14` ถูกอ่านกลับเป็น full item ID จริง และเดินถึง item-row decoder ที่ RE-060 พินไว้**
+⇒ **T2 หักล้างเชิงโครงสร้างแล้ว** (สำหรับอิมเมจไคลเอนต์ที่ ship มา) · **T1 กลายเป็นสมมติฐานที่ทดสอบได้จริง**
+
+**ผู้อ่าน `+0x14` — สามกลุ่ม (concrete inbound graph):**
+
+| เส้นทาง | จุดอ่าน | decoder chain | ฟิลด์ที่ query |
+|---|---|---|---|
+| compare/update decision `0x006AF970` | `0x006AFCF8` · `cmp` ที่ `0x006AFD0D` | — (ตัดสินไป update branch) | — |
+| **create path A** `0x005F41E0` | `0x005F46FA` | `0x00892580 → 0x00890FC0 → 0x00890EF0 → 0x00890E70` | **`s_NAME`** (`0x00F0C294`) |
+| **create path B** `0x005F41E0` | `0x005F426D` | `0x00892DD0 → 0x00892610 → 0x00890FC0 → 0x00890E70` | **`n_DROPMODEL_TYPE`** (`0x00F30F88`) |
+| update `0x005F4C00` | `0x005F4CAC` | `0x00892DD0` | `s_TAG_EXTRA` · `n_QUALITY` |
+
+🔴 **ผลข้างเคียงที่ตอบจ็อบ 4 และปิดคำถามที่ GT-045 v3 ตอบไม่ได้โดยดีไซน์:**
+**ฟิลด์ที่ graph นี้เปิดอ่านคือ `n_DROPMODEL_TYPE` — ไม่มี named lookup ของ `n_ID_MODEL` เลยในสาม concrete span**
+(`n_ID_MODEL` มี UTF-16 occurrence เดียวที่ `0x00F1D3C8` · raw dword refs ทั้งอิมเมจ 21 จุด · **แต่ใน `CREATE`/`UPDATE`/`CONSUMER` = 0**)
+⇒ ยืนยันคำแก้ของ chief R158 (§⑥ ข้อ ①) โดยอิสระ: **`n_DROPMODEL_TYPE` คือฟิลด์ที่ถือความหมาย ไม่ใช่ `n_ID_MODEL`**
+⇒ **เกณฑ์เลือกไอเทมของ GT-045 v3 เล็งถูกฟิลด์แล้ว** (ทั้ง `2200423` และ `2200003` มี `n_DROPMODEL_TYPE=1`)
+
+**ด่านตัวควบคุมผ่านครบ:** image sha `9627211412ac…7028b623` (14,759,424 B) ก่อน=หลัง · list codec span sha `ce0a58f7…8a4f1b5b` ตรง pin ของ GT-042 ·
+recursive CFG **17 span · gap 0 · decode errors 0 ทุกแถว** · verifier `pf_bridge\staged\re066_static_verify.py` sha `676c5837…af511308` exit 0 สองรอบ · ASCII output ·
+sha ของ external/gamedata/จดหมายที่พึ่งทุกไฟล์ ก่อน=หลัง ตรงหมด · **ไม่แตะคิว/ซอร์ส/DB ใด**
+
+**census ที่ทำให้ผลลบย่อยเชื่อถือได้:** `0x005F41E0` มี rel32 caller จุดเดียว (`0x006B01A0`) raw dword refs 0 ·
+`0x005F4C00` caller จุดเดียว (`0x006AFDE9`) refs 0 · `0x005F85B0` callers `0x005E3F63`/`0x005E4042` refs 0 ·
+element vtable `0x00F313C4` refs สามจุดอยู่ใน dtor/allocator ล้วน
+
+**nonclaims ที่ต้องพกไปกับผลนี้ (ยกมาจากจดหมาย ห้ามตัด):**
+- static ไม่บอกว่า **runtime** จะเดินเส้นนี้จริง — `SCENE-013` null prior ยังเป็นความเสี่ยงแยก
+- **ไม่แทนที่รอบ attended GT-045** — ทำให้ *อ่านผล* รอบนั้นถูกเท่านั้น
+- ไม่อ้างว่า `n_ID_MODEL` ไม่ถูกอ่านที่อื่นในโปรแกรม — รายงานเฉพาะ named lookup ใน concrete graph นี้
+- ไม่ตัด indirect alias ที่ไม่มี literal/rel32 ทั่วทั้งโปรแกรมด้วยชื่อชนิดอย่างเดียว
+- ไม่ใช้ join ของ `gamedata` พิสูจน์ control flow · ไม่พูดถึง original server (ปิดและกู้ไม่ได้)
+
+**สถานะคิวหลังใบนี้:** 🟢 **ใบ static เปิดอยู่ = 0 ใบ**
