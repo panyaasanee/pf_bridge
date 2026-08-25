@@ -748,13 +748,17 @@ py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch
 ```
 git show origin/ci-status:ci/<SHA>.json
 git grep -n "hostile-hp-link-hypothesis-scenario" <SHA> -- src/pirateforce_foundation/app.py
-git cat-file -e <SHA>:scenarios/hostile_hp_link_hypothesis_p30_sweep.json && echo SCENARIO_PRESENT
+git cat-file -e <SHA>:scenarios/hostile_hp_link_hypothesis_p30_sweep.json
+$LASTEXITCODE
 git grep -n -e "0x201F" -e "3857" <SHA> -- src/pirateforce_foundation/hostile_hp_link_hypothesis.py
 git grep -n "HYP-PF-038" <SHA> -- docs/HYPOTHESIS_LEDGER.json src/pirateforce_foundation/hostile_hp_link_hypothesis.py
 ```
 1. ไฟล์คำตัดสินมี `"conclusion": "success"` และ `"sha"` ตรงชื่อไฟล์ (`success` = subset บน Actions ไม่ใช่ gate เต็ม)
 2. `git grep` เจอ flag จริง — **ห้ามใช้ `--help` เป็นหลักฐาน** (คืน 0 บรรทัดผ่านสะพาน)
-3. เห็นคำว่า `SCENARIO_PRESENT`
+3. บรรทัดถัดจากคำสั่งพิมพ์ `0` (ไฟล์ scenario มีอยู่ใน commit นั้นจริง) — 🆕 **R162 เปลี่ยนรูปคำสั่งข้อนี้**
+   จากเดิมที่ใช้ `&& echo SCENARIO_PRESENT` เพราะ `&&` **ไม่ใช่ตัวคั่นคำสั่งบน PowerShell 5.1** (`The token '&&' is not a valid statement separator in this version`)
+   ⇒ ด่านเดิมอาจตายกลางคันบนสะพานโดยไม่มีใครรู้ · รูปใหม่ใช้ `$LASTEXITCODE` ซึ่งรันได้ทั้ง PS 5.1 และ PS 7
+   *(ใบอื่นในไฟล์นี้ยังใช้รูปเดิมอยู่ — chief จะไล่แก้เป็นงานแยก ไม่ใช่รอบนี้ · ถ้าผู้เทสเจอ error นี้ที่ใบไหน ให้จดไว้ในผล)*
 4. เจอทั้ง `0x201F` และ `3857` ในโมดูลของเลน — **ถ้าเจอ `0x2001` แทน แปลว่ากำลังจะบูตเลนแม่ ห้ามบูต**
 5. เจอ `HYP-PF-038` ทั้งใน ledger และในโมดูล
 - **ไม่ครบห้าข้อ = ห้ามบูต** ใบนี้อยู่ BLOCKED ต่อ **ปล่อยไว้ที่เดิม ห้ามลบ ห้ามย้าย** แล้วให้ผู้เทสไปทำใบอื่น
@@ -874,6 +878,53 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt035.sqlite3 --hostile-hp
 - 🔴 **ไม่ claim ว่ามีการปฏิเสธตามชื่อเกิดขึ้น จากการที่คอนโซลเงียบ** — เหตุผลอยู่ในชั้น (1)
 
 - **result:** (ผู้เทสกรอก: ① `BOOT_COMMIT` + ผลเช็คห้าข้อ (โดยเฉพาะข้อ 4: เจอ `0x201F`+`3857`, ไม่เจอ `0x2001`) ② label ทั้ง 7 ใบ + ขนาดไบต์ + เวลาที่ออก ③ ผล hexdump: `1F 20 00 …` ปรากฏกี่เฟรม · `01 20 00 …` = 0 เฟรมหรือไม่ · ASCII `Tornado Eagle` · `max_hp` 3857 ④ พิกัด `TARGET_SPAWN` ที่ decode ได้ เทียบผู้เล่น +100X/+50Y ⑤ **ผลของ positive control (แถวไหนในตาราง)** ⑥ คำตอบ (ก)–(ฉ) เป็นภาษาคน ⑦ ภาพ H0–H6 + วิดีโอต่อเนื่อง พร้อม sha256 ทุกไฟล์ ⑧ sha canonical ก่อน-หลัง · sessions/lease_generation/integrity_check ของสำเนา ⑨ path ของ raw GAME log + console out/err ⑩ teardown exit code)
+
+
+### 🆕 อัปเดต R162 (2026-08-25 ~11:3x +07:00) — ข้อบังคับ placement + ด่านข้อ 6 + ข้อห้ามแตะ allowlist ของ arena
+
+**ที่มา:** จดหมายหน้าสะพาน `20260825_1010_GT035-DESIGN-CONSTRAINT-hyp038-must-inherit-arena-player-relative-placement.md` §②③ · chief ตรวจซ้ำเองบน clone รอบนี้ครบทุกข้อ
+**สถานะไม่เปลี่ยน: 🟠 BLOCKED ON CODE LANE** · บล็อกนี้ **เพิ่มด่าน** ไม่ได้แทนที่ห้าข้อเดิม · ไม่มีรายการใดถูกลบ/ย่อ/ย้าย
+
+**① placement เป็น "เงื่อนไขก่อนรอบ" ไม่ใช่ทางเลือกของคนบูต** (ยกระดับจาก §⑤ ข้างบน — เนื้อเดิมคงไว้ทั้งหมด)
+- เส้น default บังคับพิกัดโลกคงที่ **โดยโครงสร้าง ไม่ใช่โดยการตั้งค่า**: `make_v112_monster_shop_population_state()` นิยาม `v141:1908` · **signature ไม่มี argument ตำแหน่งผู้เล่นเลย** (`:1908-1912`) · ถูกเรียกที่ `:4294` ใต้เงื่อนไข `:4293` (`not self.npc_spawn_sent`) · label ที่ `:4296` ⇒ ได้ `(1747.5244140625, -7837.69775390625, 931.0413208007812)` จากแถว `v141:1349` เสมอ ไม่ว่าผู้เทสยืนตรงไหน
+- เส้น arena เป็นเส้นเดียวที่คำนวณจากผู้เล่น: `arena_v1.json:10-14` `"mode":"player_relative","dx":100,"dy":50,"dz":0` → `scenario.py:94 make_p30_target()` คิดที่ **`:97-98`** · heading derive จากผู้เล่นที่ `:117`
+- ปิดเส้น default ต่อเซสชัน: `runtime.py:3638-3642` (`arena_spawned=True` · `npc_spawn_sent=True` · `population_indices=(legacy.V112_MONSTER_INDEX,)`) · กันซ้อนอีกชั้นที่ `runtime.py:3608-3615`
+- ⇒ **ข้อบังคับ:** เลน `HYP-PF-038` ต้องมีทั้ง (ก) วางเป้าแบบ `player_relative` และ (ข) suppress เส้น V134 ของตัวเอง · **เลนที่ merge มาโดยไม่มีสองข้อนี้ = ห้ามบูต ใบอยู่ BLOCKED ต่อ ไม่ใช่ให้ผู้เทสลองดูก่อน**
+- 📎 identity ไม่ขึ้นกับ placement: สูตร `aid = 0x2000 + idx + 1` เขียนซ้ำ **4 ที่** (`v141:1095` · `v141:1459` · `v141:1917` · `scenario.py:101` ที่มี assert เทียบ `legacy.V112_MONSTER_ACTOR_ID`) และอีกจุดที่ `population.py:46` ⇒ ย้ายพิกัดได้ **แต่ `0x201F` ยังผูกกับ idx 30 เหมือนเดิมทุกเลน**
+
+**② 🔴 ด่านก่อนบูต "ข้อ 6" — static ล้วน รันได้ก่อนบูต (ต่อจากห้าข้อในบล็อก "ด่าน 2" ข้างบน ซึ่งคงไว้ทั้งหมด)**
+เหตุผลที่ต้องเป็น static: ถ้าเลนวางเป้าผิดท่า ผู้เทสจะรู้ตอนที่ยืนอยู่ในเกมแล้ว = **เผารอบ attended ทิ้งทั้งรอบ ทั้งที่โค้ดทำงานถูกทุกบรรทัด**
+🔴 **กติกาการเขียนคำสั่ง (พังมาแล้ว 4 ครั้งติดที่ด่านของ GT-045):** ต้องรันบน **PowerShell 5.1** ได้ · **ห้ามไปป์ยูนิกซ์** (`| awk`, `| wc`) · **ห้ามมีอักขระ `"` อยู่ในตัว regex** (ใช้ `.?` แทน) · **ห้ามใช้ `&&`** · พิมพ์ `$LASTEXITCODE` ต่อท้ายทุกคำสั่ง (`0` = เจอ · `1` = รันแล้วไม่เจอ · อย่างอื่น = คำสั่งล้ม/rev ผิด)
+```
+git grep -n -e "mode.?: .?player_relative" <SHA> -- scenarios/hostile_hp_link_hypothesis_p30_sweep.json
+$LASTEXITCODE
+git grep -n -e "1747.5" -e "7837.6" <SHA> -- scenarios/hostile_hp_link_hypothesis_p30_sweep.json src/pirateforce_foundation/hostile_hp_link_hypothesis.py
+$LASTEXITCODE
+git grep -n -e "player_relative" <SHA> -- scenarios/arena_v1.json
+$LASTEXITCODE
+```
+- **6a ต้อง exit 0 และมีอย่างน้อยหนึ่งบรรทัด** — ไฟล์ scenario ของเลนใหม่ระบุ `player_relative` จริง
+- **6b ต้อง exit 1 และไม่มีบรรทัดใดออกมาเลย** — ไม่มีพิกัดโลกคงที่ `1747.5` / `-7837.6` ฝังอยู่ในไฟล์ scenario หรือโมดูลของเลน · **เจอแม้บรรทัดเดียว = เลนกำลังจะวางนกที่ placement จริง = ห้ามบูต** (ผลจะซ้ำ GT-045: จุด minimap ไม่มีตัว)
+- **6c = positive control ต้อง exit 0 เสมอ** — ถ้า 6c ออก 0 บรรทัด แปลว่า **คำสั่งไม่ได้รันจริง / `<SHA>` ผิด / path ผิด** ⇒ ผลของ 6b เป็นโมฆะ **ห้ามอ่าน 6b ว่า "ผ่าน"**
+- **หน้าตาผลที่จะเห็นจริง:** ใส่ rev ในคำสั่ง ⇒ ทุกบรรทัดขึ้นต้นด้วย `<SHA>:` เช่น `<SHA>:scenarios/arena_v1.json:12:      "mode": "player_relative",` (ไม่ใช่ขึ้นต้นด้วยชื่อไฟล์เปล่า) · ถ้าเห็นบรรทัดที่ **ไม่มี** `<SHA>:` นำหน้า แปลว่ากำลัง grep working tree ไม่ใช่ commit ที่จะบูต — รันใหม่
+- **ไม่ครบ 6a/6b/6c = ห้ามบูต** เหมือนห้าข้อเดิม · ชื่อไฟล์ข้างบนยังเป็นชื่อ "เสนอ" ⇒ ยืนยันชื่อจริงจากผล PR ก่อน อย่าเดา
+
+**③ 🔴 ข้อห้ามเด็ดขาด — ห้ามเติม `"damage"` เข้า `caps` ของ arena เพื่อให้เลนใหม่ผ่าน**
+- กฎจริงอยู่ที่ `scenario.py:82-83` (`caps != ("spawn","target")` · `nonclaims != ("authentic_position","tab","combat","ai","damage","loot")`) แล้ว `raise ValueError` ที่ `:86`
+- ผู้บริโภคของ allowlist นี้ **3 ไฟล์**: `app.py:63,235` · `runtime.py:164,3635,3713` · `tests/test_arena.py` (13 จุด · **`:110-113` วัด allowlist ตัวนี้ตรง ๆ**) ⇒ แก้ทีเดียว **ความหมายของเลนที่พิสูจน์และ merge ไปแล้วเปลี่ยนเงียบ ๆ โดยไม่มีรอบไหนวัดการขยายนั้น**
+- 🔴 **ของเน่าที่จะหลอกคนแก้:** `scenario.py:28-29` มี `_CAPABILITIES` / `_NONCLAIMS` เป็น **set ที่ไม่มีใครอ้างถึงเลยทั้ง repo** ⇒ เป็นแหล่งความจริงคู่ขนานกับบรรทัด 82-83 · **ใครแก้ set สองตัวนี้แล้วนึกว่าแก้กฎ จะได้กฎเดิมแบบเงียบ ๆ**
+- ⇒ `HYP-PF-038` ต้องเป็น **slot ใหม่ที่มี allowlist ของตัวเอง ยืม geometry ของ arena มาใช้** ไม่ใช่แก้ arena · ยืนยันสถานะ slot (วัด R162): `HYP-PF-029` เต็ม **3/3** · `HYP-PF-032` เต็ม **3/3** · ทั้งคู่ `extension_approval_ref: null` · slot สูงสุดที่ใช้แล้ว = `HYP-PF-037` (`docs/HYPOTHESIS_LEDGER.json:3410`)
+- 🔴 **กับดักการอ่าน ledger:** `tracked_versions` อยู่ **ใต้คีย์ `expiry`** ไม่ใช่ระดับ entry ⇒ ต้องอ่าน `e["expiry"]["tracked_versions"]` · อ่านผิดระดับจะเห็นเป็น "ยังไม่เต็ม" ทั้งที่เต็มแล้ว
+
+**④ ช่องกรอกผลเพิ่ม — แยก "ไม่เห็นตัวนก" ออกจาก "damage ไม่ทำงาน" ตั้งแต่แรก** (เพิ่มเติม ไม่แก้ตาราง positive control และไม่แก้ข้อ (ก)-(ฉ))
+ผู้เทสกรอกสามข้อนี้ **ก่อน** เขียนคำตอบ (ค)-(ฉ) ทุกกรณี:
+- **R6-1 [ข้อเท็จจริงจากคอนโซล]** เฟรม `..._TARGET_SPAWN` ออกจริงหรือไม่ (`[G>] <label> (N bytes)`) · N = เท่าไร · เวลา
+- **R6-2 [ข้อเท็จจริงจาก hexdump]** พิกัดที่ decode ได้จาก `TARGET_SPAWN` = **ผู้เล่น +100X/+50Y/+0Z** หรือ = **`(1747.52, -7837.70, 931.04)`** · แนบ HUD X/Y จากภาพ H0 มาเทียบ
+- **R6-3 [การอ่านผล — เลือกหนึ่งข้อ ห้ามเว้น]**
+  1. เฟรมออก + พิกัด player-relative + **เห็นตัวนก** ⇒ ประตูชั้น (2) เปิด อ่านคำตอบ (ค)-(ฉ) ได้เต็มปาก
+  2. เฟรมออก + พิกัด player-relative + **ไม่เห็นตัวนก (เห็นแค่จุด/ไม่เห็นเลย)** ⇒ 🔴 **นี่คือข้อมูลใหม่เรื่องระยะวาด/เงื่อนไขเรนเดอร์ของ `0x201F` ไม่ใช่ความล้มเหลวของ damage** · (ค)-(ฉ) ต้องกรอกว่า **non-observed** · **ห้ามเขียนว่า "หลอดไม่ลด"** · **ห้ามปิด GT-035 หรือ GT-036 เป็นผลลบจากข้อนี้** ⇒ redirect: ใบ static เรื่องเพดานระยะวาดโมเดล + ทดลอง dx/dy ที่สั้นลง **ก่อน**กลับมา attended
+  3. เฟรมไม่ออก **หรือ** พิกัดเป็น placement จริง ⇒ **เลนผิดท่า/บูตผิดเลน = NO-RESULT เชิงโครงสร้าง** ยกเลิกรอบ · **ห้ามอ่านเป็นข้อมูลเรื่องระยะวาด** (ข้อ 6b ควรดักได้ตั้งแต่ก่อนบูต — ถ้าหลุดมาถึงตรงนี้ ให้จดว่าข้อ 6 พลาดตรงไหน)
+- 🔴 **nonclaim ใหม่ที่ต้องติดไปกับผลทุกกรณี:** `dx100/dy50` (~111 หน่วย) **ยังไม่เคยมีใครยืนยันด้วยตาว่าอยู่ในระยะวาดโมเดล** — เป็นค่าที่เลน arena ใช้อยู่เท่านั้น ไม่ใช่ระยะที่พิสูจน์แล้ว ⇒ P1 ยังเป็นคำทำนายจริง และ R6-3 ข้อ 2 คือผลที่มีค่าในตัวเอง ไม่ใช่ความล้มเหลว
 
 
 ## 🆕 GT-036 KILL-HOSTILE-001: วงเต็ม "ตี → เลือด → ตาย" บน hostile ที่มี HP จริงจาก STANDARD_MOB  [🔴 **BLOCKED — รอ GT-035 (GT-034 ตอบแล้ว 2026-08-25 · chief R158) · ยังไม่ปลด**]
