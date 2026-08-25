@@ -1374,6 +1374,7 @@ element vtable `0x00F313C4` refs สามจุดอยู่ใน dtor/alloc
 🔴 **อัปเดต R165 (2026-08-25 ~17:0x +07:00): `RE-067` ปิดแล้ว (PASS/MIXED) · เปิด `RE-068` ท้ายไฟล์ ⇒ ใบ static เปิดอยู่ = 1 ใบ**
 🔴 **อัปเดต R167 (2026-08-25 ~19:0x +07:00): `RE-068` ปิดแล้ว (PASS-MIXED · ครึ่ง actor ชนเพดาน static) · `RE-070` (orchestrator) เปิดอยู่ตั้งแต่ R166 ⇒ **ใบ static เปิดอยู่ = 1 ใบ** และเป็นใบเดียวที่รอคนหน้าสะพาน**
 🔴 **อัปเดต R168 (2026-08-25 ~20:2x +07:00): `RE-070` ปิดแล้ว (DONE/PASS-MIXED · ผลอยู่ท้ายใบ) · เปิด `RE-071` (BasicAttr ของ actor ที่เพิ่ง spawn) ท้ายไฟล์ ⇒ **ใบ static เปิดอยู่ = 1 ใบ** · ใบพี่น้อง attended ของรอบเดียวกันคือ `GT-072` ⇒ **เลขว่างถัดไปคือ 073***
+🔴 **อัปเดต R170 (2026-08-25 ~22:2x +07:00): `RE-071` ปิดแล้ว (DONE / STATIC-CONTRADICTION-PINNED · ผลอยู่ท้ายใบ) · เปิด `RE-075` RETURNSELECT-APPLY-0x5F1190 ท้ายไฟล์ (คำเคาะเจ้าของข้อ 2 · ทาง (ข))** ⇒ **ใบ static เปิดอยู่ = 2 ใบ** (`RE-073` · `RE-075`) · 🔴 **เลขว่างถัดไป = 076** (074 ถูกจองโดย `GT-074` ในรอบเดียวกัน)
 🔴 **อัปเดต R169 (2026-08-25 ~21:0x +07:00): เปิด `RE-073` TEST-STAGE-GEOMETRY-SURVEY-001 ท้ายไฟล์** (คำขอ "แมพเทส" ของเจ้าของ · ครึ่ง crosswalk ทำจบบนคลาวด์แล้ว เหลือเรขาคณิตที่ต้องใช้ดิสก์ไคลเอนต์) · **แก้ขอบเขต `RE-071`** (ตัดครึ่ง "ชื่อว่าง" ออก — **แผงของผู้เล่นเองก็ไม่มีชื่อ** ในภาพควบคุมของ `GT-030-R3` ⇒ วิดเจ็ตนี้ไม่มีแถวชื่อเลย) ⇒ **ใบ static เปิดอยู่ = 2 ใบ** (`RE-071` · `RE-073`) ⇒ **เลขว่างถัดไปคือ 074**
 
 ---
@@ -1953,7 +1954,7 @@ verifier `staged/re070_static_verify.py` **104/104 guards · failed 0** · ว�
 
 ---
 
-## 🆕🔬 RE-071 SPAWNED-ACTOR-BASICATTR-PROVENANCE-001 [STATIC-ON-BRIDGE]: **actor ที่เกิดจาก `SPAWN_BARE` มี `BasicAttr` อะไรผูกอยู่จริง — และ ctor default ของ `+0x44` (current HP) / `+0x48` (max HP) คือเท่าไหร่**  [🟢 **OPEN — เปิดโดย chief R168 · 2026-08-25 ~20:2x (+07:00)**]
+## 🆕🔬 RE-071 SPAWNED-ACTOR-BASICATTR-PROVENANCE-001 [STATIC-ON-BRIDGE]: **actor ที่เกิดจาก `SPAWN_BARE` มี `BasicAttr` อะไรผูกอยู่จริง — และ ctor default ของ `+0x44` (current HP) / `+0x48` (max HP) คือเท่าไหร่**  [✅ **DONE / STATIC-CONTRADICTION-PINNED — ปิดโดย chief R170 · 2026-08-25 ~22:0x (+07:00)** · ผลอยู่ท้ายใบ · **คำตอบกลับด้าน: resident ต้องเป็น 100/100 ⇒ ที่เห็นบนจอไม่ใช่ผลปกติของ `ActorAttr` ใบเดียวกัน** · เปิดโดย chief R168 · 2026-08-25 ~20:2x (+07:00)]
 
 > 🔢 **หมายเหตุเลข:** ตัวนับเป็นชุดเดียวกับ `GAME_TEST_QUEUE.md` **ห้ามแยกตัวนับ** · grep `GT-071`/`RE-071` ทั้งสองไฟล์ = ไม่มีใบอื่น ⇒ **071 ว่าง**
 > ใบพี่น้องของรอบเดียวกันคือ **`GT-072`** (attended · actor-slot displacement) — **072 ก็ว่างและถูกจองแล้ว** ⇒ ใบถัดไปเริ่มที่ **073**
@@ -2134,7 +2135,37 @@ T7  0x472850 / 0x4765C0 (สองที่ที่ push L"_F_DIE_000") -> ท�
 (ledger เขียนไว้เองว่า *"the GT-036 lethal exemption, which needs a HYP-PF-038 v2 that does not exist yet"* — `docs/HYPOTHESIS_LEDGER.json:13`)
 ⇒ 🎯 **ตอนนี้ยังไม่มีโค้ดใดต้องถอน และ scoped override ที่เจ้าของให้ ยังไม่ถูกใช้ไปแม้แต่บรรทัดเดียว** — การวัดก่อนสร้างจึงไม่มีต้นทุนจม
 
-### result (ยังไม่มี — ใบเปิดอยู่)
+### 🟢 result — **DONE / STATIC-CONTRADICTION-PINNED** (ปิดโดย chief R170 · 2026-08-25 ~22:0x +07:00)
+
+**ที่มา:** `notes_to_chief\consumed\20260825_2121_RE-071-RESULT-STATIC-CONTRADICTION-PINNED.md` · runner LOCAL · `2026-08-25T21:21+07:00`
+**อิมเมจ:** `GameClient.local.bin` 14,759,424 B · `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
+**วิธี:** PE section mapping รายเซกชัน + byte-exact guards + bounded/recursive CFG · 🟢 **ไม่ได้ใช้ linear disassembler เป็นหลักฐานของผลลบ** · guards `15/15` ผ่าน
+**ช่องบังคับสองช่องทำครบ:** ค้น `pf_bridge\external\` แล้ว (เจอ `BasicAttr`/`ActorAttr`/`MovementAttr` ใน 3 TSV · `BasicAttr`/`ActorAttr` = `NOT_OBSERVED` · **และเจอกับดักตามใบว่า `0x0043BB80` เป็น stub ร่วม จึงไม่ใช้ EMPTY เป็นผลลบ**) · ค้น `gamedata` แล้ว (template คู่ควบคุมครบ: MESSAGE 413/414 · MESSAGE_BATTLE 13/14 · `_F_DIE_000`)
+
+**คำตอบ T1–T7 (ย่อ — รายละเอียดและ span pins อยู่ในจดหมาย):**
+
+| # | คำตอบ |
+|---|---|
+| T1 | `actor_type=2` → jump-table case `0x4469E1` → `CNetActor` · `init` เรียก attr-list loop `0x5DF080` ที่ `0x454949` เดินสมาชิกจริงจาก vector `[entry+0x30..+0x34)` ⇒ **`ActorAttr` ของ `SPAWN_BARE` ไม่ถูกข้ามโดย construction path** |
+| T2 | ctor เก็บผล pool `0x1031500` ที่ `[actor+0x348]` · allocator `0x456D20` จอง `0x1C0` B แล้วเรียก `ActorAttr::ctor 0x464BE0` → chain `BasicAttr::ctor 0x464A80` ⇒ **ปิดป้าย INFERRED เดิมของ CHUNK2** · **ctor defaults ยืนยันจากไบต์:** name `L""` · `+0x44` HP `0` · `+0x48` maxHP `0` · `+0x58` timer `0.0f` · `+0x5E` level `1` |
+| T3 | `ActorAttr` vtable `+0x38 = 0x469760` · `0x46978F` อ่าน `[actor+0x348]` · `0x469795` เรียก `incoming->CopyTo(resident)` (`0x464F30` → `BasicAttr::CopyTo 0x464B40`) ซึ่งก๊อป name `+0x28` และ HP `+0x44/+0x48` **โดยไม่ดู mask** |
+| T4 | `HP==0 && timer<=0` → true (vt `+0x3C = 0x454A70`) ⇒ gate `0x443990` เปิด ⇒ `0x4439E9` สร้าง `CActorTask_Dead 0x472810` ⇒ **กลไกตายเมื่อ resident เป็น ctor-default ยืนยันแล้ว แต่ไม่อธิบายว่าทำไม incoming 100/100 ไม่ถูก CopyTo** |
+| T5 | producer `ตาย!` `0x5CB830` (id `0x019E`/`0x032E`) และ downed `0x5CB9A0` (id `0x019D`/`0x032D`) **ส่ง GetName เป็น `$V1` ทั้งคู่** ⇒ **ข้อความไม่มีชื่อนำหน้า = GetName ว่างจริง ไม่ใช่ template ไม่มีช่องชื่อ** |
+| T6 | target panel `0x51F150` อ่าน resident `+0x44`/`+0x48` · helper `0x5AA5E0` **บังคับ max=0 ให้เป็น 1** และ **ไม่มี branch ซ่อน denominator** ใน CFG เต็ม ⇒ 🔴 **`HP. 0` สนับสนุน current=0 แต่ "ไม่เห็น `/max`" ไม่พิสูจน์ max=0** — widget/layout/crop ยังเป็นตัวแปรเปิด |
+| T7 | `CActorTask_Dead` vtable `0xF0F048` slots `+0x08 = 0x4765C0` และ `+0x0C = 0x472850` **push literal เดียวกัน `L"_F_DIE_000"`** ⇒ ภาพนิ่งแยกไม่ได้ว่าท่านอนมาจาก slot ไหน |
+
+🎯 **คำตอบของใบ — static ให้คำตอบ *กลับด้าน* อย่างชี้ขาด:**
+> actor ที่ถูกสร้างจาก `SPAWN_BARE` และรับ `ActorAttr` ที่มี name + HP `100/100` **สำเร็จ** ต้องมี resident name + HP `100/100`
+> ⇒ name ว่าง/HP 0 คือ **ค่า fresh ctor** ซึ่งเกิดได้เมื่อ CopyTo ไม่ได้เขียนก้อนนั้น หรือมี actor/attr **คนละก้อน** หรือมีการเขียนทับภายหลัง
+
+⇒ 🔴 **สิ่งที่ถูกหักล้างคือการเท่ากันโดยปริยายระหว่าง "ไบต์ `SPAWN_BARE` identity A ที่เซิร์ฟเวอร์ประกอบ" กับ "actor ที่ถูก target/นอนตายในภาพ"**
+⇒ **จอ name ว่าง/HP 0 อธิบายเป็น "ผลปกติของ `ActorAttr` ใน `SPAWN_BARE` เดียวกัน" ไม่ได้อีกต่อไป**
+⇒ จุดแยกที่เหลือ **ต้องวัด runtime identity/slot/wire** — static จากอิมเมจใบนี้ **ไปต่อไม่ได้โดยไม่เดา**
+
+**nonclaims ที่ติดมากับผล (ยกมาทั้งดุ้น ห้ามตัด):** ① ไม่พิสูจน์ว่า actor ในภาพคือ identity A — ตรงกันด้านตำแหน่ง/เวลา **ไม่ใช่ identity crosswalk** ② ไม่พิสูจน์ว่า wire ที่ client รับตรงกับไบต์ที่ encoder ฝั่งเรา re-derive (รอบนี้ไม่เปิด capture ไม่เปิดเกม) ③ **ไม่ exclude การ overwrite resident `ActorAttr` ภายหลังจากเส้นอื่น** ที่ไม่อยู่ใน actor-entry list ของห้าเฟรมนี้ ④ ไม่ตัดสิน `GT-036` ไม่ออกแบบ `HYP-PF-038` v2 ไม่แตะ `GT-072` ⑤ เป็นกฎของ **shipped client image ใบนี้** ไม่ใช่กฎของ original server
+
+🔴 **หมายเหตุที่ chief ต้องส่งต่อ ไม่ใช่กลบ:** `tools/pf_runtimeres_actor_entry_static.py --json` **exit 1** ในรอบนี้ — binary controls (รวม `0x446F30`) ตรงหมด แต่ **source-census รุ่นเก่าคาดจำนวน call/module ก่อนงานใหม่ใน `src/`** ⇒ **ไม่ใช่ binary mismatch แต่เป็นเครื่องมือที่ค้างรุ่น** ⇒ ใบสั่งซ่อมอยู่ในจดหมาย `FROM_CHIEF_R170_*`
+🔴 **read-only integrity:** before ตรงทั้ง image sha/size/guards · `external` tree 30 files `cad40e79...` · `gamedata` tree 1,109 files `a3d01a9f...` · **บรรทัด `AFTER` ใน `logs/re_runner.log` ต้อง IDENTICAL — chief ตรวจจากคลาวด์ไม่ได้ ผู้รันยืนยันแล้วว่าตรวจก่อนปล่อย lock**
 
 ---
 
@@ -2249,3 +2280,133 @@ T7  0x472850 / 0x4765C0 (สองที่ที่ push L"_F_DIE_000") -> ท�
 🟢 **ตรวจแล้วว่ายังไม่มีผู้บริโภคตัวไหนพัง** — grep `placements` ทั้งสองรีโป: ผู้ใช้เดียวคือตัวถอดเอง ส่วนฝั่งเซิร์ฟเวอร์อ่าน placement จากตาราง v141 ไม่ใช่จาก TSV ⇒ **เป็นกับดักที่ยังไม่ระเบิด ไม่ใช่บั๊กที่ต้องแก้ตอนนี้**
 
 ### result (ยังไม่มี — ใบเปิดอยู่ · ครึ่ง crosswalk ถูกกรอกจากคลาวด์แล้วในหัวใบ)
+
+---
+
+## 🆕🔬 RE-075 RETURNSELECT-APPLY-0x5F1190-WHAT-DOES-IT-DO-001 [STATIC-ON-BRIDGE]: apply ของ `ReturnSelectServerVital 0x709E` ที่ VA `0x005F1190` **ทำอะไรจริง** เมื่อเฟรมมาถึง และทำอะไรเมื่อ live state ไม่ใช่ `cStateCreateActor`  [🟢 **OPEN — เปิดโดย chief R170 · 2026-08-25 ~22:2x (+07:00)** · ร่างใบโดย `pf-static-re`]
+
+> 🔢 **หมายเหตุเลข:** ตัวนับชุดเดียวกับ `GAME_TEST_QUEUE.md` **ห้ามแยกตัวนับ** · **073 ถูกจองโดย `RE-073`** (R169) และ **074 ถูกจองโดย `GT-074`** (ใบเก็บตกมุมกล้องของ `GT-072` · รอบเดียวกันนี้) ⇒ **ใบนี้คือ `RE-075`** · **เลขว่างถัดไป = 076**
+> 🔴 ร่างของลูกมือเขียนเลขเป็น `RE-074` เพราะ grep ตอนที่ `GT-074` ยังไม่ถูกวาง — **chief แก้เป็น `RE-075` ตอนวาง** ถ้าเจอ `RE-074` ที่ไหน นั่นคือใบนี้
+
+### ที่มา — คำเคาะเจ้าของโดยตรง
+คุณ Panya 2026-08-25 ~21:10 (+07:00) จดหมาย `notes_to_chief\consumed\20260825_2110_PANYA-RULINGS-FIVE-plus-GT001-heading-finding-and-a-criterion-defect.md` ข้อ 2:
+ทางเลือก (ก) เติม `evidence_gap` ของ `HYP-PF-028` แล้วเดินต่อ vs (ข) เปิดใบ static ถาม `0x005F1190` ก่อน
+⇒ **เจ้าของเคาะ (ข)** · ใบนี้คือใบนั้น · **สถานะของ `HYP-PF-028` ห้ามขยับจนกว่าใบนี้จะมีผล**
+
+### อ่านก่อนอย่างอื่น — ครึ่งหนึ่งของคำถามมีคำตอบที่ commit ไว้แล้ว อย่าขุดซ้ำ
+`[STATIC]` `reports\PF_UI_REFRESH001_CHARACTER_SELECT_STATE_MACHINE_STATIC_20260819.md` (รีโปเซิร์ฟเวอร์) พินไว้ตั้งแต่ 2026-08-19 ว่า:
+1. `0x5F1190` = **inbound apply ของ `ReturnSelectServerVital`** อ่านจาก vtable `0xF304DC` slot `+0x1C`
+   (`+0x10` = id getter `0x5E6960` · `+0x18` = serializer `0x5E69F0`) — ทั้งสามข้อมี guard ใน `tools\pf_ui_state_refresh_static.py`
+2. มันเป็น 1 ใน **ห้า** vital ที่ apply มี gate "live state เป็น `cStateCreateActor`" — call site ของ token getter `0x4C0110` อยู่ที่ `0x5F11AC`
+   (getter มี **8** call site เป๊ะ: `0x4E61D4, 0x510D45, 0x5D118B, 0x5EFD88, 0x5EFDDC, 0x5EFECC, 0x5F11AC, 0x5F334B`)
+3. `CState::RequestNext 0x4C7320` มี **18** call site แจกแจงครบทีละบรรทัด (`:140-158`) — **ไม่มีจุดไหนอยู่ใน `0x5F1190`**
+4. **รายงานเขียน nonclaim ของตัวเองไว้ที่ `:237`**: *"Not decoded: ... ReturnSelectServerVital 0x5F1190 ... bodies. They are pinned by address and by state gate, not analysed."*
+⇒ **นั่นคือช่องว่างที่ใบนี้ปิด และมีแค่ช่องนั้น**
+
+`[MEASURED — ลูกมือ `pf-static-re` re-derive จากตารางเอง ไม่ได้ quote]` **สองข้อที่แก้ถ้อยคำของ R168 (chief รับทั้งสองข้อ):**
+- คอลัมน์ `handler_va` ใน `external\PF_PROTOCOL_REGISTRY.tsv` **เท่ากับ `vtable + 0x1C` แบบกลไกใน 502/502 แถวที่ parse ได้** (`serializer_va` = `vtable + 0x18` เช่นกัน)
+  ⇒ มันคือ **"ค่าใน vtable slot"** ไม่ใช่หลักฐานว่ามี dispatch เข้ามาจริง หรือมี producer
+- `0x005F1190` ปรากฏแถวเดียวจริง **แต่ uniqueness ไม่ใช่สัญญาณพิเศษ**: นับทั้ง 519 แถว (รวม `UNKNOWN` เป็นหนึ่งค่า) ได้ distinct `handler_va` = **194** และ unique = **162** · 🔴 **นับเฉพาะ 502 แถวที่ parse เป็นเลขได้ — ซึ่งเป็นฐานเดียวกับประโยคก่อนหน้า — ได้ `191 / 160`** (`pf-adversary` จับความไม่ตรงของตัวหารนี้ · ข้อสรุปไม่เปลี่ยน ~31–32% ของ handler ก็ unique เหมือนกัน) · ค่าที่แชร์มากสุดคือ `0x00710440` (69 แถว) ซึ่งคือ no-op `mov al,1; ret 4`
+  ⇒ สิ่งที่แข็งจริงมีข้อเดียว: **`0x005F1190` ไม่ใช่ no-op `0x710440`**
+
+### objective (claim เดียว)
+
+> **`0x005F1190` ทำอะไรกับสถานะของไคลเอนต์เมื่อเฟรม `0x709E` ถูกบริโภค — และเมื่อ live state ไม่ใช่ `cStateCreateActor` (ซึ่งคือสภาพของทั้ง `GT-033` variant B และ C) มันตกสาขาไหน**
+
+ตอบให้ได้แค่นี้ก็พอ · chief จะเอาไปเคาะสถานะของ `HYP-PF-028` ต่อเอง
+
+### ช่องบังคับก่อนขุด (กฎบ้าน สองช่อง กรอกในผลเสมอ)
+- `ค้นใน pf_bridge\external\ แล้ว: เจอ <อะไร> / ไม่เจอ`
+  **[chief R170 ทำครึ่งนี้แล้ว อย่าทำซ้ำ]** `PF_PROTOCOL_REGISTRY.tsv:73` (VA ครบชุด) · `PF_SERIALIZER_FIELDS.tsv:1123-1128`
+  (W: `0x08@+0x14 len1` · `0x32@+0x18 len8` · `UNTAGGED_STRING8_LEN32LE@+0x20` · R: สามฟิลด์เดียวกัน · span `0x005E69F0..0x005E6AE7`
+  sha `1fd3684282291e2accb94171f0d532e239d38f736e1cb1455a633e7ad567774a`) — **กฎ 7 ผ่าน ไม่ใช่ EMPTY stub** ·
+  `PF_FIELD_VALIDATION.tsv:144-145` (`W observed 2 VALIDATED` · `R observed 0 NOT_OBSERVED`) · `PF_PROTOCOL_PRIORITY.tsv:73` (`CLOSED`)
+- `ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ` — ใบนี้ไม่ใช่คำถามข้อมูลเกม กรอกว่า "ไม่เกี่ยว" ได้ถ้าค้นแล้วไม่มี
+
+### S0 ด่านคุม (ทำก่อนเสมอ · ล้มที่ด่านไหนให้หยุดและรายงาน)
+
+```
+S0a  image sha 9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623
+     size 14,759,424 B - check sha before AND after (read-only), both must match
+S0b  G7: VA -> file offset must map through the PE section table per section
+     (.text 0x400C00 | .rdata 0x401C00 | .data 0x402800) - never one delta across sections
+     control for this ticket: 0x005F1190 - 0x400C00 = file offset 0x001F0590
+     DO NOT trust that number from this ticket - read the section table from the image
+     (note: factpack_L1\pe_sections.tsv referenced by MANIFEST is NOT in VCS)
+S0c  256-byte guards from factpack_L1\blocks_256.tsv (already committed, use as-is):
+       block 7940  file_offset 0x001F0400  sha e10cc48248fc2fa0982981018740535ee35ab60be908ca20211980c3d550b123
+       block 7941  file_offset 0x001F0500  sha e24b47d6ca8ed4d701bc69232a0bb33e862f2ce5ffa165e6b892f5b4488732ff
+     (0x001F0590 falls inside block 7941) - must match before reading any byte
+S0d  positive control, the most on-target one the project owns:
+       pirate-force-server\tools\pf_ui_state_refresh_static.py   (stdlib only, exit 0 = PASS)
+     it checks vtable 0xF304DC +0x1C == 0x5F1190 and the 8 call sites of 0x4C0110 directly
+     if it does NOT pass => image or tooling is off, STOP, report no T results
+S0e  negative results must come from recursive CFG / census, NOT a linear disassembler
+     (lesson: RE-068 T1)
+```
+
+### จ็อบ (ลำดับบังคับ · หยุดได้ทุกจุด เขียน bounded negative แล้วปิด)
+
+```
+T1  disassemble 0x005F1190 as a complete function
+    -> span [start,end) | file offset | len | instr count | recursive CFG error count | gaps | indirect count | sha256 of span
+    -> report the first mnemonic (control: it must NOT be B0 01 C2 04 00, the no-op at 0x710440)
+
+T2  the gate at 0x5F11AC (call to token getter 0x4C0110)
+    -> shape of the gate: read live state from [0x1093198]+0x34C then is-a via 0x88F2B0, or another shape
+    -> **WHAT THE FALSE BRANCH DOES** (bare ret / ret 4 / writes something first / jumps where)
+    *** this is the decisive job of the ticket: GT-033 variant B and C both ran while the client
+        was in the map, which is NOT cStateCreateActor ***
+
+T3  the true branch - answer as a list of measurable side effects only:
+    -> which vital fields it reads (+0x14 u8 / +0x18 8-byte / +0x20 string per PF_SERIALIZER_FIELDS)
+       and **which value it branches on** - if it branches on a field our lane sends as all-zero,
+       that is the biggest answer this ticket can produce
+    -> writes page variable 0x107A2C0? | calls which cStateCreateActor method? |
+       touches [0x1093198]+0x34C? | opens/closes which UI window (the L"..." literal pushed)?
+
+T4  reachability from 0x005F1190 to CState::RequestNext 0x4C7320 - RECURSIVE, not just direct
+    base: PF_UI_REFRESH001 pins all 18 direct call sites of 0x4C7320 and none is inside 0x5F1190
+    but the same report shows an apply CAN reach it through a helper (0x4323FA lives in helper 0x432290)
+    -> answer "reaches / does not reach" with the graph, the depth, and how many indirects were unresolved
+    control: walk the same way from TeleportVital apply 0x5F14B0 - it must find 0x5F16C9 -> 0x4C7320
+             (a positive control whose answer is known in advance)
+
+T5  (if budget remains) caller census of 0x005F1190
+    -> any entry other than the indirect through vtable 0xF304DC +0x1C?
+    -> confirm ON THE IMAGE that the dword at 0xF304F8 (= 0xF304DC + 0x1C) really holds 0x005F1190
+```
+
+### อะไรนับเป็นผลลบ (และผลลบข้อไหนมีค่าที่สุด)
+- 🎯 **ผลลบที่มีค่าที่สุด:** `T2` พบว่าเมื่อ live state ไม่ใช่ `cStateCreateActor` ฟังก์ชัน **return โดยไม่ทำอะไร** และ `T4` เดินไม่ถึง `0x4C7320`
+  ⇒ อธิบายผลลบของ `GT-033` variant B และ C **ได้ครบโดยไม่ต้องมีสมมติฐานใหม่** และตอบคำถามของ R168 ว่า `0x005F1190` **เป็น apply จริง (ไม่ใช่ artifact) แต่ไม่มีอำนาจเปลี่ยนหน้าจอ** — ปิดใบได้ทันที
+- **ผลลบชนิดที่สอง (bounded negative):** ถอดต่อไม่ได้เพราะ indirect / RTTI / jump table ตัน ⇒ ต้องเขียนขอบเขตครบ: กราฟไหน · อิมเมจ sha อะไร · วิธีค้นอะไร · ตันที่ VA ไหน กี่จุด · **"ไม่พบ" ไม่เท่ากับ "ไม่มี"**
+- 🔴 **ห้ามเขียนคำว่า UNRESOLVED เฉย ๆ** โดยไม่มีตัวเลขสามตัว (instr count · CFG error count · indirect ที่ resolve ไม่ได้)
+
+### nonclaims ที่ต้องพกไปกับผลทุกกรณี
+1. ใบนี้เป็น **ชั้น static image ล้วน** — ห้ามเสนอผลของมันแทนชั้น client-observable · `GT-033` variant B (จ็อบ 1143-1146) และ variant C **วัดแล้วเป็นลบทั้งคู่** และนั่นเป็นคนละชั้นคนละใบ
+2. คอลัมน์ `handler_va` ในตาราง Codex **คือ vtable slot `+0x1C`** ไม่ใช่การลงทะเบียน handler — ห้ามอ้างการมีอยู่ของคอลัมน์นี้ว่าเป็นหลักฐานว่ามี producer หรือมี inbound dispatch
+3. `0x005F1190` unique ใน 519 แถว **ไม่ใช่สัญญาณพิเศษ** — 162 จาก 194 ค่า distinct ก็ unique เหมือนกัน
+4. ผลของใบนี้ **ไม่ตัดสินว่า `0x709E` ถูกหรือผิดในฐานะ trigger** — nonclaim ของ `GT-033` ยังบังคับ: วัดมาเฉพาะ composition ที่ทุกฟิลด์เป็นศูนย์ · wrong-vital / wrong-field-values / needs-something-alongside **แยกกันไม่ออก**
+5. **ห้ามอ้างอะไรเกี่ยวกับเซิร์ฟเวอร์ต้นฉบับ** — ปิดและกู้ไม่ได้ตลอดกาล
+6. ใบนี้ **ไม่ตอบ** ปมสองเฟรมขา W ใน corpus (`PF_FIELD_VALIDATION.tsv:144` `observed 2 VALIDATED`) — เป็น rider ที่ค้างจาก `RE-070` ต้องเปิดไฟล์ capture สองไฟล์ (`PF_INPUT_INVENTORY.tsv:693` sha `2a43616b..a3ab` · `:927` sha `b79b22f9..3ee3`) — **คนละใบ ห้ามยุบรวม**
+7. `PF_UI_REFRESH001` nonclaim ข้อ 8 ยังบังคับ: อ่านเฉพาะ `GameClient.local.bin` **ไม่เคย verify parity กับ `GameClient.bin`**
+8. **ห้าม join ตัวเลขเพราะมันดูคล้ายกัน** — โดยเฉพาะ `0xF304DC` / `0xF304EC` / `0xF304F4` / `0xF304F8` เป็นคนละช่องในตารางเดียวกัน
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+ไม่เปิดเกม · ไม่จับ `LOCK_GAME` · ไม่แตะ canonical DB · ไม่แก้ `src\` หรือคิว · ไม่ทำ git operation ·
+อ่านอิมเมจ read-only พร้อม sha ก่อน/หลัง + 256-byte guards · ทุกคำตอบต้องมี span + sha256 + instr count + CFG error count + gap
+
+### เกณฑ์จบใบ
+ปิดได้เมื่อ **objective มีคำตอบ หรือมี bounded negative ที่เขียนขอบเขตครบ**
+ไม่ต้องรอให้ใครตัดสินชะตาของ `HYP-PF-028` ก่อนจึงจะปิดใบนี้ — ใบนี้ตอบ *"ฟังก์ชันนั้นทำอะไร"* ส่วน *"แล้วเลนนั้นจะอยู่หรือไป"* เป็นคำเคาะของ chief กับเจ้าของ
+
+### สิ่งที่ใบนี้ *ไม่* ทำ
+ไม่ออกแบบ variant D · ไม่แก้ `docs\HYPOTHESIS_LEDGER.json` · ไม่ตัดสินสถานะของ `HYP-PF-028` หรือ `HYP-PF-031` ·
+ไม่แตะครึ่ง corpus/capture (ข้อ 6 ของ nonclaims) · ไม่เสนอ composition ใหม่ของ `0x709E` (นั่นคือการ WIDEN ซึ่ง stop_rule ของ ledger ห้ามไว้)
+
+### 🔴 ของที่ chief ต้องทำ *ตอนปิดใบนี้* (จดไว้เพราะมันจะถูกลืม)
+`docs\HYPOTHESIS_LEDGER.json` **ไม่มีคำว่า `0x005F1190` เลยทั้งไฟล์** `[MEASURED]` — ปมนี้อยู่แต่ในคอมเมนต์ `src\pirateforce_foundation\logout_hypothesis.py:219-233` กับจดหมาย
+⇒ ใครอ่าน ledger อย่างเดียว **มองไม่เห็นว่ามีคำถามค้าง** ⇒ **ตอนปิดใบนี้ต้อง amend `evidence_gap` ของ `HYP-PF-028` ให้ชี้มาที่ใบนี้**
+
+### result (ยังไม่มี — ใบเปิดอยู่)
