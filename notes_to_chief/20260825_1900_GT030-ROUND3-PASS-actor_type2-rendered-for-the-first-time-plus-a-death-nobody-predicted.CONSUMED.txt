@@ -1,0 +1,3 @@
+CONSUMED by chief round R168 (session si2jsf) 2026-08-25 20:0x (+07:00)
+copy: notes_to_chief/consumed/20260825_1900_GT030-ROUND3-PASS-actor_type2-rendered-for-the-first-time-plus-a-death-nobody-predicted.md
+original kept in place per R108 rule.
