@@ -654,7 +654,10 @@ git cat-file -e <SHA>:scenarios/port_royal_tornado_eagle_p30_load_only.json && e
 
 ⚠️ **เลขชนกัน (ประวัติ — คงไว้):** จดหมายผู้เทส 12:00 (2026-08-20) เสนอ "GT-034 DAMAGE-TARGET-AB-001" — **คำสั่ง Panya ชนะเลขนี้** · ข้อเสนอผู้เทสได้เลขใหม่ = **GT-038**
 
-## 🆕⭐ GT-035 DAMAGE-ON-HOSTILE-001: หลอดเลือดของ **hostile ตัวจริง** `0x201F` Tornado Eagle (HP baseline 3,857) ลดตามเลขคณิตของเซิร์ฟเวอร์ไหม  [🟠 **BLOCKED ON CODE LANE (chief R159, 2026-08-25)**]
+## 🆕⭐ GT-035 DAMAGE-ON-HOSTILE-001: หลอดเลือดของ **hostile ตัวจริง** `0x201F` Tornado Eagle (HP baseline 3,857) ลดตามเลขคณิตของเซิร์ฟเวอร์ไหม  [🟢 **READY-CONDITIONAL — ปลดจาก BLOCKED ON CODE LANE แล้วโดย chief R162 (2026-08-25 ~12:1x +07:00)**
+· เลน `HYP-PF-038` **merge เข้า `main` แล้ว**: PR โค้ด **#30** → merge commit `4b36ae8` (เนื้อคือ `d856ff4`)
+· **เขียว(Actions run 32811533781 · subset · อ่านทาง `ci-status`)** — ไฟล์คำตัดสิน `ci/d856ff4….json` มี `"conclusion":"success"` และ `"sha"` ตรงกับที่ขอเป๊ะ
+· 🔴 **เงื่อนไขที่เหลือ ห้ามข้าม:** รัน `pf_resolve_green_boot.py` เอง แล้ว `BOOT_COMMIT` ที่ได้ **ต้องผ่านห้าข้อในบล็อก "ด่าน 2" + ด่านข้อ 6 (บล็อก R162)** ครบทุกข้อ · **ห้ามเทียบเลข commit ด้วยตา** ให้ตัดสินด้วยเนื้อเหมือนที่ GT-045 เรียนรู้มา (resolver คืนหัว branch ไม่ใช่ merge commit โดยดีไซน์)]
 
 **ตัวบล็อกหนึ่งประโยค:** สองครึ่งที่จำเป็นถูกพินอยู่คนละที่ — เลนที่ *spawn* `0x201F` ได้ (arena/P30) ประกาศ `damage` เป็น **nonclaim** ในตัว allowlist เอง (`src/pirateforce_foundation/scenario.py:83`, caps ได้แค่ `("spawn","target")` ที่ `:82`) ส่วนเลนเดียวที่ *ขยับ HP ของเป้า* ได้ (HYP-PF-029) ถูกพินไว้กับ **identity คนละตัว** `0x2001` Navy Transfer (`src/pirateforce_foundation/npc_hp_link_hypothesis.py:422`) พร้อม byte pins ที่คำนวณจาก ladder 100 ⇒ **ยังไม่มีเลนไหนที่ทั้ง spawn 0x201F และพูดเรื่อง damage ได้ในเลนเดียว**
 
