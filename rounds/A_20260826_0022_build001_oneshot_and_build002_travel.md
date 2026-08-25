@@ -1,10 +1,102 @@
-# LANE-A round jjxgz3 - WIP round claim (lock held)
+# รอบ `A_20260826_0022` · สาย A · WORLD (`pf-builder`)
+# `BUILD-001` รับคำสั่ง 115 ทีเดียว · `BUILD-002` เจอว่าประตูออกจากเมืองห่างไปหนึ่งบรรทัด · และ RED หักล้างข้ออ้างหลักของผมเอง
 
-Opened 2026-08-26 00:22 (+07:00). This file is the lane lock marker; it is
-rewritten with the real round report before the draft flag comes off.
+**เวลา:** 2026-08-26 00:22 → 01:4x (+07:00) · **รอบ:** cloud routine `jjxgz3`
+**ล็อกของสาย:** PR หัวข้อ `[LANE-A]` ที่เปิดค้าง = 0 ใบทั้งสองรีโป ⇒ จับล็อกด้วย draft PR `pf_bridge#80`
+**ไม่แตะ PR ของสายอื่น** (`pf_bridge#79` · `pirate-force-server#38` เป็นของ LANE-E)
+**ไม่ได้บูตเซิร์ฟเวอร์ ไม่ได้เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB**
+**branch:** `claude/compassionate-gauss-jjxgz3` (pf_bridge) · `claude/affectionate-shannon-jjxgz3` (pirate-force-server จาก `main` `53d8447`)
 
-Round intent (from CHARTER-02, 2026-08-25 23:45):
-  1. BUILD-001 amendment - the staircase is cancelled by owner order; the
-     census ships as one shot of 115 with a pre-send assembled count.
-  2. BUILD-002 - leave town: scene travel for a live character, target
-     n_ID 278 Bg1177 beach football field (TEST).
+---
+
+## ① 🔴🔴 ประตูออกจากเมืองไม่ได้ถูกล็อกด้วยการ์ดสามชั้นอย่างที่บันทึกไว้
+
+`RE-073` (R169) บันทึกว่ามี **การ์ดฝั่งเราสามชั้นตรึง `scene_id`** · ผมไปเปิดทั้งสามที่ **ทั้งสามอยู่บนเลนหัววัด**
+
+| ที่ | อยู่ในฟังก์ชัน | ใครเรียกถึงได้ |
+|---|---|---|
+| `player_wire.py:65` `scene_id not in (1, 2)` | `make_actor_attr_with_basic_faction` | เลน **faction-1 probe** เท่านั้น |
+| `npc_wire.py:27` `scene_id != 1` | serializer วินิจฉัย **faction 6 · โปรไฟล์ P30 ครบใบ** | เลนวินิจฉัย NPC |
+| `scene_load.py:117` | ตัวโหลด **scenario** | ต้องมีแฟล็ก |
+
+🎯 **เส้นทางปกติ (`make_actor_attr_with_name` → `legacy_bridge.start_game` `legacy_bridge.py:47-62`) ไม่มีการ์ด `scene_id` เลย** และอ่าน `p.scene_id` จาก **แถวตำแหน่งของตัวละคร** ตรง ๆ · `store.py:266` รับ `0..0xFFFF` ⇒ **ชั้นเก็บของรองรับ 278 มาตั้งแต่ต้น**
+
+### สิ่งที่ตรึงผู้เล่นไว้ที่ Port Royal จริง ๆ — **หนึ่งบรรทัด**
+```
+src/pirateforce_foundation/runtime.py:3675    tp_pc, tp_frame = legacy.make_login_teleport(1, 0)
+```
+🔴 บรรทัดนั้นอยู่ในไฟล์ของ chief ⇒ สาย A แตะไม่ได้ตาม `CHARTER-02 §⑥`
+⇒ **ครึ่งแรกของ `M2` ห่างไปหนึ่งบรรทัด · ครึ่งหลัง (ย้ายตัวละครที่ live อยู่) ยังต้องรอ `RE-077`**
+
+---
+
+## ② 🔴🔴 `pf-adversary` — **ไม่อนุมัติ · 14 ข้อ** และข้อที่ใหญ่ที่สุดคือข้อที่ผมเถียงไม่ได้
+
+ผมเรียก RED ก่อน commit ตามกติกา · **มันวัดเองซ้ำได้ทุกข้อ** สรุปข้อที่เปลี่ยนของจริง:
+
+| # | สิ่งที่ RED ยิง | ผล |
+|---|---|---|
+| **D1** 🔴 | *"`scene_id` = คอลัมน์ `n_ID`"* **ยังไม่ใช่ข้อสรุป** — แถว 1 กับ 2 เป็น **สองในสิบสองแถว** ที่ `n_MARKER` และ `n_CLINE_TYPE` เท่ากับ `n_ID` พอดี และเป็นแถวข้อมูลที่ 1/2 ของไฟล์ด้วย ⇒ **การอ่านค่าคู่แข่งสามแบบเข้ากันได้เท่ากันเป๊ะ** (marker: `Bg1177` ไม่มีค่าเลย · cline: `0xFFFFFFFF` · ลำดับแถว: **252**) | ✅ **ยอมรับ แก้ถ้อยคำทั้งโมดูลและพินเป็น `candidate` เขียนคู่แข่งทั้งสามลงไฟล์** · ส่ง rider เข้า `RE-077` ให้ตอบขา hit · ใส่ **"HUD บอกว่าแมพอะไร"** เป็นข้อ `C1` ของ `GT-078` (ตัวแยกสี่ทาง) |
+| **D4** 🔴 | **บั๊กจริง วัดซ้ำได้** — `assembled_count` นับ *อินพุตของ encoder* ไม่ใช่ของบนสาย · RED ฉีด entry ว่างหนึ่งตัวแล้วได้เฟรมสั้นไป 148 ไบต์ ที่ยังพิมพ์ `115/115 shortfall=none` (= stream-tail misalignment ที่ `28317` ตอบพอดี) | ✅ **แก้แล้ว** — `dispatch_report` เทียบสามเลข: ที่ประกอบ / ที่ header บอก (ถอดจากไบต์) / ผลรวมความยาว body · บรรทัดคอนโซลมี `wire=` และ `bodies=ok|SHORT` · และ entry ที่ว่าง **ถูกปฏิเสธตั้งแต่ตอน build** |
+| **D3** 🔴 | `population_source()` **รายงาน** ในที่ที่ `runtime.py:3278` **ลงมือ** · และ `build_world_population` ไม่รับ `scene_id` เลย ⇒ การเดินสายตามที่ผมขอเองจะข้ามการ์ดนี้ทั้งอัน | ✅ **แก้แล้ว** — `build_world_population(..., scene_id=...)` **บังคับ ไม่มีดีฟอลต์** และ raise ทุกฉากที่ไม่ใช่ 1 ⇒ การ์ดอยู่ตรงที่ประกอบเฟรม ไม่ใช่แค่ในรายงาน |
+| **D2** 🔴 | **เก้าคอลัมน์** ของแถว 278 ต่างจากทั้งสองฉากที่วัดแล้ว และพินไม่ได้เก็บสักคอลัมน์ (`n_CAMERA_TYPE=0` มีแค่ 10/271 แถว · `n_LIMIT_HEIGHT=0` · `n_SAVE=0` · `n_MARKER=0`) | ✅ **พินทั้งแถวแล้วทั้งสามฉาก** + สี่ตัวที่สำคัญขึ้นมาอยู่บน `SceneDestination` และบนบรรทัดคอนโซล |
+| **D6** | **จุดยืนที่ผมเลือก (centroid) ห่างจาก placement ที่ใกล้ที่สุด 705 หน่วย** = จุดเดียวในฉากที่ไม่มีใครวางอะไรไว้ · และ z ถูก calibrate ได้แค่ ±863 หน่วย (จาก 18 แถว marker ของฉาก 2) แต่พินไว้ละเอียดถึง 1/1024 | ✅ **เปลี่ยนจุดยืนเป็น native placement 4 (`Mob_set_02 04`)** — ตำแหน่งที่นักพัฒนาวางของไว้จริง · centroid เก็บไว้ในพินเป็น `superseded_spawn` พร้อมเหตุผล (ห้ามลบประวัติ) |
+| **คำถามปิดท้าย** 🔴🔴 | *"ตัวละครจะออกจากฉาก 278 ยังไง"* — `n_SAVE=0` · `n_MARKER=0` · `RE-077` ยังเปิด ⇒ **ตัวละครที่ถูกเขียนแถวเป็น 278 เดินกลับเมืองเองไม่ได้** = ทำ `v1` พังตาม `CHARTER-02 §⑤` กฎข้อ 2 | ✅ **ยอมรับเต็ม ๆ** — เพิ่ม `home_return_position()` ในโมดูลเดียวกัน · บรรทัดคอนโซลขึ้น `return_ticket=REQUIRED` · และ **`GT-078` มีขั้นตอนบังคับเขียนแถวกลับตอน teardown พร้อมใบเสร็จ** |
+| **D5** | เหตุผลของการส่งน้อยกว่า 115 ถูก **เดาจากตัวเลข** ⇒ rung 20 ที่ตั้งใจ จะถูกรายงานว่าเป็นเพดานของไคลเอนต์ | ✅ **แก้แล้ว** — `count_source` เป็นสิ่งที่ผู้เรียก **บันทึก** ไม่ใช่สิ่งที่รายงาน **อนุมาน** · `census_count_for_dispatch()` คืน (จำนวน, เหตุผล) มาให้พร้อมกัน |
+| **D7 · D8 · D10 · D14** | พินเรียกฟังก์ชันที่ไม่มีอยู่จริง · ไม่มีอะไร re-derive พินได้เลย · เทสเจ็ดตัวเป็น tautology หรือชื่อไม่ตรงกับสิ่งที่ตรวจ · `ground` ครึ่งใบให้ `KeyError` แทน `ValueError` | ✅ แก้ carrier ให้ตรงของจริง · ใส่คำสั่ง `reverify_on_the_bridge` ลงพิน · เปลี่ยนชื่อ/รื้อเทสที่หลอกตัวเอง แล้วเพิ่มเทสที่หักล้างได้แทน · ตรวจคีย์ของ `ground` และ `table_row` ครบทั้งชุด |
+| **D11** 🔴 | **"ผู้เล่นเห็นอะไรต่างจากเมื่อวาน" = ไม่มี** — ไม่มีใคร import โมดูลไหนเลย และครึ่งที่นิยาม `v2` (travel) คือครึ่งที่ผมเลื่อนออกไป | ✅ **ไม่เถียง** — เขียนตรง ๆ ในข้อ ⑥ และในจดหมาย และ **ไม่ประกาศ `v2`** |
+| **D9 · D12 · D13** | ความแบนอาจอ่านผิดถ้าสามคอลัมน์ f32 ที่ไม่มีใครถอดคือรัศมี spawn · record 5-7 เป็น 73 ไบต์ ไม่มีชื่อชุด ทำให้ extent ขยับ 10% · และผมเขียนผิดสองที่ว่า *"เคยส่ง 2 ครั้งเดียว"* กับ *"ไม่เคย populate ฉากอื่น"* (SCENE-002..005 + `GT-053` หักล้าง) | ✅ พินทั้ง extent สองแบบ + บันทึกคอลัมน์ที่ยังไม่ถอด · แก้ถ้อยคำที่ผิดทั้งสองที่ |
+
+🟢 **สิ่งที่ RED พยายามหักแล้วหักไม่ลง (ตัวคุมที่มีค่า):** hash ทั้งสี่ตรงกับไฟล์จริงทั้งหมด · centroid คำนวณถูกทุกหลัก · **ความแบนของ `Bg1177` เป็นสัญญาณจริง — จาก 251 ฉากที่มี placement ≥ 2 มีแค่ 6 ฉากที่แบนขนาดนี้** · `BgNull` เป็นค่าปกติ (237/271 แถว) · และ `.gitignore` ไม่ได้กลืนไฟล์ใหม่
+
+---
+
+## ③ ของที่ commit จริง
+
+**`BUILD-001` (`world_population.py`) — รับคำสั่ง `CHARTER-02 §④` "115 ทีเดียว"**
+ดีฟอลต์เป็น 115 อยู่แล้ว · ที่เพิ่มคือ **การนับก่อนส่งที่หักล้างตัวเองได้**:
+```
+WORLD_CENSUS assembled=115/115 wire=115 bodies=ok pc=17928B frame=17942B anchor=(x,y,z) reapply_ms=3000 source=full_census shortfall=none
+```
+ขั้นบันไดไม่ถูกลบ **ลดชั้นเป็นเครื่องมือวินิจฉัย** · docstring เดิมคงไว้ ต่อท้ายด้วยบล็อก `AMENDMENT` ลงวันที่
+
+**`BUILD-002` (`world_scene_travel.py` + `scenarios/world_scene_registry_001.json` + เทส)**
+- ฉากปลายทางเป็นของที่เรียกได้ · `login_teleport_fields()` คืน `(1, 0, 0.0, 0.0, 0.0)` **เป๊ะตัวต่อตัวสำหรับบ้าน** ⇒ เดินสายแล้วผู้เล่นที่อยู่ Port Royal ได้ไบต์ชุดเดิม (มีเทสคุม)
+- `entry_position()` เขียนแถวตำแหน่ง · `home_return_position()` เขียนกลับ · `population_source()` บอกว่าฉากไหนใช้ census ได้
+- **จุดยืน `Bg1177` = native placement 4 `(-13270.058, 22794.273, -2492.769)`**
+
+**เกต cloud:** `pytest 2,467 passed · 324 skipped · 4,493 subtests · 0 failed` (ก่อนรอบนี้ 2,422) · `verify_hypothesis_ledger PASS(47)` · `verify_functional_coverage exit 0` · `git diff --check` เงียบ · ไฟล์ใหม่ ASCII+LF ล้วน — 🔴 ไม่ใช่ gate เต็มของ Windows
+
+---
+
+## ④ ใบที่เปิด/แก้ในรอบนี้
+| ใบ | เรื่อง | สถานะ |
+|---|---|---|
+| `GT-076` | **AMENDMENT: บันได → ยิง 115 ทีเดียว** ตาม `CHARTER-02 §④` (ขีดฆ่าของเดิม ไม่ลบ) + บรรทัดคอนโซลใหม่ | 🔴 BLOCKED-ON-WIRING |
+| `GT-078` | **เข้าฉาก 278 ครั้งแรกในประวัติโปรเจกต์** · หกข้อตรวจด้วยตา · `C1` ถามชื่อแมพเพื่อแยกการอ่านค่าสี่แบบ · **มีขั้นตอนทางกลับบ้านบังคับ** | 🔴 BLOCKED-ON-WIRING |
+| `RE-077` | rider: `T2` ต้องตอบขา **hit** + ตารางคู่แข่งสี่แบบ + แก้ข้อความเรื่องการ์ดสามชั้น (ต่อท้าย ไม่ลบ) | 🟢 ยังเปิด |
+
+## ⑤ คำขอถึง `chief` — สองจุด เขียนให้แล้วทั้งคู่
+**(A)** เส้นทางดีฟอลต์: `npc_spawn_sent = True` แล้วคิว
+`world_population.build_world_population(legacy, xyz, count, scene_id=p.scene_id, count_source=source)` โดย `count, source = world_population.census_count_for_dispatch()`
+เป็น `WORLD_CENSUS_INITIAL` (0.0s) + `WORLD_CENSUS_REAPPLY` (3.00s) · **พิมพ์ `census_console_line(generation)` ก่อนส่ง**
+**(B)** `runtime.py:3675`:
+```
+เดิม : tp_pc, tp_frame = legacy.make_login_teleport(1, 0)
+ใหม่ : p = self.foundation.selected.position
+       target = world_scene_travel.destination(p.scene_id)
+       tp_pc, tp_frame = legacy.make_login_teleport(*world_scene_travel.login_teleport_fields(target))
+```
+🟢 บ้านได้ไบต์เดิมเป๊ะ · 🔴 ฉากที่ไม่มีในพิน = `KeyError` ดัง ๆ ตอนบูต (ตั้งใจ)
+**(C)** ปลายทางเลือกจาก **แถวตำแหน่งใน `state\play.sqlite3`** ผ่าน `entry_position()` · 🔴 **และใครเขียน 278 ลงไป ต้องรับผิดชอบ `home_return_position()` ด้วย**
+
+## ⑥ nonclaims
+1. **ไม่ได้บูตอะไรเลย** — ไม่มีหลักฐานชั้นตาในรอบนี้
+2. **ไม่ได้พิสูจน์ว่าไคลเอนต์รับ `scene_id = 278`** — และ **การอ่านค่า `n_ID` เองก็ยังเป็น candidate ไม่ใช่ identity** (D1)
+3. **ไม่ได้พิสูจน์ว่า `Bg1177` เรียบ ขาว หรือเดินได้** — วัดได้แค่ z ของเก้า placement และคอลัมน์ f32 ที่เหลือยังไม่มีใครถอด
+4. **เข้าฉาก ≠ ย้ายฉาก** — `RE-077` ยังเปิด ⇒ **ครึ่งที่นิยาม `v2` ยังไม่ถูกสร้าง**
+5. 🔴 **ผู้เล่นวันนี้เห็นเหมือนเมื่อวานทุกอย่าง** — ไม่มีใคร import โมดูลไหนเลย
+6. **ไม่แตะ `runtime.py` · `app.py` · `player_wire.py` · v141 · canonical DB · PR ของสายอื่น · ไม่ลบถ้อยคำเดิมของเอกสารใด**
+
+## ⑦ สภาพแท่นตอนจบ
+ไม่ได้เปิดเซิร์ฟเวอร์ ไม่ได้เปิดเกม · listener 0 · canonical DB ไม่ถูกแตะ
