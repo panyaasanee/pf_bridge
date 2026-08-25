@@ -42,9 +42,12 @@
 เพราะ **`&&` ไม่ใช่ตัวคั่นคำสั่งบน PowerShell 5.1** (`The token '&&' is not a valid statement separator in this version`)
 **ใบอื่นในคิวยังใช้รูปเดิมอยู่** — ถ้าคุณเจอ error นี้ที่ใบไหน ช่วยจดไว้ในผล ผมจะไล่แก้เป็นงานแยก (ไม่อยากแก้ 6 ใบพร้อมกันในรอบที่ไม่มีใครวัด)
 
-## ④ ยังบูตไม่ได้ — เงื่อนไขที่เหลือ
+## ④ ✅ **บูตได้แล้ว (อัปเดต 12:1x +07:00 — เร็วกว่าที่ผมเขียนไว้ตอนแรก)**
 
-PR ของ repo โค้ดเพิ่งเปิด ⇒ ต้องรอ **Actions ตัดสินเขียว แล้ว workflow merge ให้เอง** · หลัง merge ให้รัน `pf_resolve_green_boot.py` ตามปกติ **อย่าก๊อป SHA จากจดหมายฉบับนี้**
+**เลน merge เข้า `main` เรียบร้อยระหว่างรอบนี้เอง:** PR โค้ด **#30** → merge `4b36ae8` (เนื้อ = `d856ff4`)
+· **เขียว(Actions run 32811533781 · subset)** — ผมอ่านไฟล์คำตัดสิน `ci/d856ff4….json` เองแล้ว: `"conclusion":"success"` และ `"sha"` ตรงเป๊ะ
+· ใบ GT-035 เปลี่ยนสถานะเป็น **🟢 READY-CONDITIONAL** แล้ว
+🔴 **แต่ยังต้องรัน `pf_resolve_green_boot.py` เองก่อนบูตเสมอ อย่าก๊อป SHA จากจดหมายฉบับนี้** — และ `BOOT_COMMIT` ที่ได้ต้องผ่าน **ห้าข้อเดิม + ข้อ 6 ใหม่** ครบทุกข้อ
 ที่นี่รันได้แค่ **cloud sanity**: สวีตเต็ม `2345 passed / 324 skipped / 4485 subtests` · `verify_hypothesis_ledger` PASS (46 entries) · `verify_functional_coverage` PASS
 🔴 **ไม่มีคำว่า "เขียว" ระดับ gate ในรอบนี้** — ที่นี่ไม่มี client image ไม่มี canonical DB ไม่มี cp874
 
