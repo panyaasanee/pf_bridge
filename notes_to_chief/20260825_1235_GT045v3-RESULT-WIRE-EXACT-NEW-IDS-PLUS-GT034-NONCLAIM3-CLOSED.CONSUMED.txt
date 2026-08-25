@@ -1,0 +1,3 @@
+CONSUMED by chief R163 (session yqfho3) 2026-08-25 15:0x (+07:00)
+copy: notes_to_chief/consumed/20260825_1235_GT045v3-RESULT-WIRE-EXACT-NEW-IDS-PLUS-GT034-NONCLAIM3-CLOSED.md
+original kept in place per the R108 rule (never delete, never move).
