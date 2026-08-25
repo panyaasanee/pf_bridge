@@ -1373,6 +1373,7 @@ element vtable `0x00F313C4` refs สามจุดอยู่ใน dtor/alloc
 🔴 **อัปเดต R163 (2026-08-25 ~15:xx +07:00): ไม่ใช่ 0 อีกแล้ว — เปิด `RE-067` ท้ายไฟล์**
 🔴 **อัปเดต R165 (2026-08-25 ~17:0x +07:00): `RE-067` ปิดแล้ว (PASS/MIXED) · เปิด `RE-068` ท้ายไฟล์ ⇒ ใบ static เปิดอยู่ = 1 ใบ**
 🔴 **อัปเดต R167 (2026-08-25 ~19:0x +07:00): `RE-068` ปิดแล้ว (PASS-MIXED · ครึ่ง actor ชนเพดาน static) · `RE-070` (orchestrator) เปิดอยู่ตั้งแต่ R166 ⇒ **ใบ static เปิดอยู่ = 1 ใบ** และเป็นใบเดียวที่รอคนหน้าสะพาน**
+🔴 **อัปเดต R168 (2026-08-25 ~20:2x +07:00): `RE-070` ปิดแล้ว (DONE/PASS-MIXED · ผลอยู่ท้ายใบ) · เปิด `RE-071` (BasicAttr ของ actor ที่เพิ่ง spawn) ท้ายไฟล์ ⇒ **ใบ static เปิดอยู่ = 1 ใบ** · ใบพี่น้อง attended ของรอบเดียวกันคือ `GT-072` ⇒ **เลขว่างถัดไปคือ 073***
 
 ---
 
@@ -1948,3 +1949,125 @@ verifier `staged/re070_static_verify.py` **104/104 guards · failed 0** · ว�
 ⇒ **ไม่ขัด** กับ nonclaim ว่า client ยังไม่เคยรับ `0x709E` ขา R · **แต่หักล้าง**ถ้อยคำกว้างใน `logout_hypothesis.py` ที่ว่า *"0x709E has no client producer"*
 ✅ **chief R168 แก้ถ้อยคำแล้วสามจุด** (`src/pirateforce_foundation/logout_hypothesis.py` ×2 + `tests/test_logout_return_select_hypothesis.py` ×1)
 พร้อมบล็อก erratum ที่พิน sha256 ของ capture ทั้งสองไฟล์ไว้ในซอร์ส · **ไบต์ของเลนไม่ขยับแม้ไบต์เดียว** (comment/docstring ล้วน)
+
+---
+
+## 🆕🔬 RE-071 SPAWNED-ACTOR-BASICATTR-PROVENANCE-001 [STATIC-ON-BRIDGE]: **actor ที่เกิดจาก `SPAWN_BARE` มี `BasicAttr` อะไรผูกอยู่จริง — และ ctor default ของ `+0x44` (current HP) / `+0x48` (max HP) คือเท่าไหร่**  [🟢 **OPEN — เปิดโดย chief R168 · 2026-08-25 ~20:2x (+07:00)**]
+
+> 🔢 **หมายเหตุเลข:** ตัวนับเป็นชุดเดียวกับ `GAME_TEST_QUEUE.md` **ห้ามแยกตัวนับ** · grep `GT-071`/`RE-071` ทั้งสองไฟล์ = ไม่มีใบอื่น ⇒ **071 ว่าง**
+> ใบพี่น้องของรอบเดียวกันคือ **`GT-072`** (attended · actor-slot displacement) — **072 ก็ว่างและถูกจองแล้ว** ⇒ ใบถัดไปเริ่มที่ **073**
+
+### 🔴🔴 อ่านก่อนอย่างอื่น — **คำถามเปลี่ยนรูปแล้ว อย่าหยิบคำถามเวอร์ชันแรกไปทำ**
+
+จดหมาย `GT-030` รอบสาม (§⑧ ข้อ 1) เสนอไว้ว่า *"วัดว่าฟิลด์ไหนใน `MovementAttr mask 0x03` ที่ไคลเอนต์อ่านเป็นตาย"*
+🔴 **chief วัดคำถามนั้นจบแล้วบนคลาวด์ในรอบ R168 — คำตอบคือ ไม่มีฟิลด์ไหนเลย** ⇒ **ห้ามเปิดใบตามถ้อยคำเดิม**
+
+**หลักฐาน (re-derive เองจาก encoder จริง hash ตรง pin ทุกตัว ไม่ใช่การ quote):**
+- `MOVE_A_2` = actor entry เดียว · attr เดียว · **`MovementAttr` field mask `0x03` = position(3×f32) + heading(1×f32) เท่านั้น**
+  `src/pirateforce_foundation/remote_player_hypothesis.py:250-251,359-363,391-408,1513-1519`
+- ตาราง bit→offset→tag ของ `MovementAttr` ตรงกันสามชั้น (server source `current/pf_login_game_server_v141.py:1211-1218,1231-1244` ·
+  walker อิสระ `remote_player_hypothesis.py:1162-1165` · static image `reports/PF_MOVE_PROJECT001_*.md:42-56`)
+  ⇒ `0x01` position · `0x02` heading · `0x04` mode · `0x08` flags · `0x10/0x20/0x40` f32 ×3
+  🔴 **ไม่มี bit ไหนแตะ HP · ชื่อ · หรือสถานะเป็นตาย เลยแม้แต่ bit เดียว**
+- predicate การตายทั้งสี่ตัวอ่านเฉพาะ `BasicAttr +0x44` (current HP) และ `+0x58` (death timer) ผ่าน `GetAttr`
+  (`vt+0x74` → `0x44C630` = `mov eax,[ecx+0x348]`) — `reports/PF_HP_DEATH001_*.md:9`
+- **ตัวควบคุมเชิงบวก:** `TARGET_SPAWN` ของ `HYP-PF-038` ประกอบด้วยวิธีเดียวกัน **มี HP อยู่ในไบต์จริง** (hash ตรง pin ทั้ง 7 แถว)
+  ⇒ พิสูจน์ว่า walker อ่าน HP เจอเมื่อมันมีอยู่ ⇒ การไม่เจอใน `MOVE_A_*` เป็นผลลบจริง ไม่ใช่เครื่องมือบอด
+
+### 🔴 และ "ผลที่ไม่มีใครทำนาย" — **มีคนทำนายไว้แล้วสามที่ ทั้งหมด commit แล้วก่อนรอบสามหลายวัน**
+
+| # | claim | provenance | เกรด |
+|---|---|---|---|
+| ① | *"ใบแรกจะไม่ทำอะไร แต่ **ใบที่สองของ identity เดิม (เช่น MovementAttr update) จะเจอ HP==0 แล้วเข้าเส้นตาย**"* | `reports/PF_CHUNK2_Q1_ACTORATTR_MASK_FINDINGS_20260819.md:380` | ติดป้าย `[INFERRED]` เอง |
+| ② | *"`0x4446F0` calls the dead-state sync `0x4437C0` on EVERY update-path frame... a probe with HP 0 walks into the death chain **the moment its identity is re-sent**"* | `src/pirateforce_foundation/remote_player_hypothesis.py:225-230` | โมดูลของเลนนี้เอง |
+| ③ | *"**An actor cannot be born dead.** ... **the death sequence needs at least two actor-entries for the same identity**"* | `reports/PF_RUNTIMERES_ACTOR_ENTRY001_STATIC_20260819.md:5` | `[PROVEN]` (census 1 caller / 0 pointer) |
+| ④ | ctor default ของ death timer `+0x58` = **`0.0f`** เขียนโดย BasicAttr ctor `0x464B0E` | `src/pirateforce_foundation/stats_progression_hypothesis.py:1330-1334` | static image |
+| ⑤ | predicate คู่: `vt+0x40` (`0x454AC0`) = `HP==0 && timer>0` → dying latch · `vt+0x3C` (`0x454A70`) = `HP==0 && timer<=0` → death task `0x443990`→`0x4439E9`→`0x472810` `CActorTask_Dead` → `L"_F_DIE_000"` | `reports/PF_HP_DEATH001_*.md:428` (ERRATUM) · `stats_progression_hypothesis.py:1338-1370` | static image |
+
+⇒ 🎯 **ประกอบกัน:** actor ที่ HP=0 + timer=0.0 (ctor default) + **actor-entry ใบที่สองของ identity เดิม** = ตรง predicate `vt+0x3C` เป๊ะ
+⇒ death task + ท่านอน + `HP. 0` บนแผง · และลำดับจริงคือ `SPAWN_BARE`(ใบแรก) → `MOVE_A_1`(**ใบที่สอง** `t=252.37`) → `MOVE_A_2`(ใบที่สาม `t=267.37`)
+🔴 **nonclaim ② ของจดหมายเองบอกว่าช่วง `t=222.4→267.4` กล้องคุมไม่ครบ ⇒ การตายอาจเกิดตั้งแต่ `MOVE_A_1` แล้ว ไม่ใช่ `MOVE_A_2`**
+**อย่าออกแบบใบนี้บนสมมติฐานว่า `MOVE_A_2` เป็นตัวทริก**
+
+### objective (claim เดียว — ตอบคำถามที่เหลืออยู่จริง)
+
+> 🔴 **`SPAWN_BARE` ส่ง `current_hp = 100` / `max_hp = 100` ออกไปในไบต์จริง (ยืนยันด้วยการ re-derive จาก encoder แล้ว)
+> แล้วทำไม attr ที่ผูกกับ actor ตัวนั้นบนไคลเอนต์ถึงเป็น `HP 0` และชื่อว่าง?**
+
+สองข้อนี้ **ขัดกันโดยยังไม่มีคำอธิบายที่วัดแล้ว** — และมันคือกุญแจของทั้ง `GT-036` และเลน nameplate/RE-067
+
+### จ็อบ (ลำดับบังคับ · หยุดได้ทุกจุดถ้าชนเพดาน static — เขียน bounded negative แล้วปิด)
+
+```
+S0  ด่านคุม: image sha 9627211412ac60d5...b157028b623 · 14,759,424 B
+    + rerun verifier ท่าเดียวกับ RE-068/RE-070 T0 (positive control 0x446F30 ต้องตรง GT-040)
+S0b G7: VA->file offset ต้องแมปผ่าน PE section table รายเซกชัน
+    (.text 0x400C00 · .rdata 0x401C00 · .data 0x402800) ห้ามใช้ delta เดียวข้ามเซกชัน
+
+T1  0x446990 (spawn-not-found) + jump table 0x446B2C ช่อง index 2
+    -> สาขา CNetActor ใช้ vtable slot ไหน apply attr (รายงานว่า +0x10) และมันวน attr list
+       ของ entry จริงไหม  => ActorAttr/BasicAttr ของ SPAWN_BARE ถึง [actor+0x348] หรือไม่
+T2  0x457340 CNetActor::ctor + bind site 0x4573CA
+    -> ตอนสร้าง actor ผูก attr object ตัวไหน และ BasicAttr::ctor 0x464B0E เขียนอะไรลง
+       +0x44 (current hp) / +0x48 (max hp) / +0x58 (timer)
+    *** ปักค่า ctor default ของ +0x44 และ +0x48 ให้เป็นตัวเลข -- นี่คือจ็อบที่ชี้ขาดที่สุดของใบ ***
+T3  0x469760 (bind thunk ActorAttr, gate CNetActor) -> ผ่านสำหรับ actor ที่เพิ่ง spawn ไหม
+    และ 0x464F30 (CopyTo, vt+0x24) เขียนปลายทางเป็น [actor+0x348] จริงหรือเขียนที่อื่น
+T4  0x4446F0 -> 0x4437C0 : อ่าน gate สองตัว
+    bl         <- vt+0x40 = 0x454AC0 (HP==0 && timer>0)  คุม 0x44384C ([actor+0x70] |= 0x200)
+    [esp+0x13] <- vt+0x3C = 0x454A70 (HP==0 && timer<=0) คุม 0x443990 -> 0x4439E9 -> 0x472810
+    => ยืนยันว่า (HP==0, timer==0.0f) ตกสาขาไหน
+T5  ผู้ผลิตข้อความลอย: หา call site ที่ฟอร์แมต MESSAGE row 414 (n_TYPE=2) หรือ
+    MESSAGE_BATTLE row 14 (n_TYPE=3) แล้วดูว่ามันเอาอะไรใส่ $V1
+    *** เส้นเดียวที่เชื่อ "ข้อความบนจอ" กับ "ฟิลด์ชื่อของ actor" ได้โดยตรง ***
+    control: แถว 413/13 ($V1 บาดเจ็บล้มลง!) ต้องมาจาก producer เดียวกันคนละ id
+T6  target panel 0x51F920 -> LABEL_NAME 0x5BD624 : ฟิลด์ไหนป้อนตัวเลข HP
+    และตัวส่วน "/max" ถูกกดหายเมื่อ max==0 หรือไม่
+    control: แผงผู้เล่นในเฟรมเดียวกันอ่าน "100 /100" (ภาพ sha 9048ad4f...)
+T7  0x472850 / 0x4765C0 (สองที่ที่ push L"_F_DIE_000") -> ท่านอนมาจากตัวไหน
+```
+
+**เกณฑ์หยุด/ผลลบที่อ่านได้ทันที:** ถ้า **T2** พบว่า `BasicAttr` ctor เขียน `+0x44 = 0` **และ** **T1/T3** พบว่า attr ของ `SPAWN_BARE`
+**ไม่**ถึง `[actor+0x348]` ⇒ อธิบายครบทั้ง `HP. 0` · ชื่อว่าง · `$V1` ว่าง · ท่านอน **โดยไม่ต้องมีสมมติฐานใหม่เลย** ⇒ ปิดใบได้
+
+### 🎁 ของที่ chief ทำให้เสร็จแล้วบนคลาวด์ — หน้าสะพานข้ามได้เลย
+
+- **ไบต์ของ `MOVE_A_1`/`MOVE_A_2`/`SPAWN_BARE`** re-derive แล้ว hash ตรง pin ทั้งหมด (ไม่ต้องประกอบซ้ำ)
+- **ตาราง bit→offset→tag ของ `MovementAttr`** ยืนยันตรงกันสามชั้นแล้ว
+- **`gamedata` ค้นแล้ว:** `ตาย!` เป็น **template ที่มีช่องชื่อ** — `gamedata/tables/TEXTDATA_TH__MESSAGE_BATTLE.tsv:15` (`n_ID=14 · n_TYPE=3 · "$V1 ตาย!"`)
+  และ `gamedata/tables/TEXTDATA_TH__MESSAGE.tsv:361` (`n_ID=414 · n_TYPE=2 · " $V1  ตาย!"`)
+  🆕 แถวข้างบนของทั้งสองไฟล์เป็นข้อความคนละตัว: `$V1 บาดเจ็บล้มลง!` (id 13/413) = *downed*
+  ⇒ **ไคลเอนต์แยก "ล้ม" กับ "ตาย" เป็นสองสตริง และผู้เทสเห็นตัวหลัง** ⇒ ใช้เป็น control ของ T5
+- **อ่านภาพที่ commit แล้วเอง:** `evidence_screens/GT030R3_1159_DEAD_LABEL_TAI_t268.0s.jpg` — ข้อความลอยอ่านได้ **`ตาย!` เฉย ๆ ไม่มีชื่อนำหน้า**
+  ⇒ `$V1` ถูกแทนด้วย **สตริงว่าง** ⇒ สอดคล้องกับ ctor default `name = L""` ที่ `PF_CHUNK2_Q1:29` ทำนายคู่กับ `HP=0` พอดี
+- 🆕 **ของที่จดหมายยังไม่ได้จด:** `evidence_screens/GT030R3_1159_TARGET_PANEL_CROP_t280.5s.png` — แผงเป้าหมายอ่าน **`HP.  0` เดี่ยว ๆ ไม่มีตัวส่วน**
+  ขณะที่แผงผู้เล่นในภาพเดียวกันอ่าน **`100 /100`** ⇒ น่าสงสัยว่า **max HP (`+0x48`) ก็เป็น 0 ด้วย** ไม่ใช่แค่ current
+  ⚠️ **นี่เป็นการอ่านภาพ ไม่ใช่กฎการฟอร์แมตที่พิสูจน์แล้ว** — ใช้เป็นสมมติฐานของ T6 เท่านั้น
+
+### 🔴 กับดักที่ต้องเขียนใส่หัวรายงาน (เจอจริงระหว่างเตรียมใบนี้)
+
+`external/PF_SERIALIZER_FIELDS.tsv:12-13` เขียน `MovementAttr W/R = EMPTY` ที่ `0x0043BB80`
+🔴 **ห้ามอ่านว่า "MovementAttr ไม่เขียนอะไรลงสาย"** — `0x0043BB80` เป็น **stub ร่วม** ที่ `AvatarAttr`/`BasicAttr`/`ActorAttr`/`NPCAttr`/`DBAttribute`/`MovementAttr`
+ใช้ช่อง `serializer_va` ตัวเดียวกันหมด (`external/PF_PROTOCOL_REGISTRY.tsv:3-8`) · **Serial จริงคือ `0x4671C0`** (vtable `0xF0D0F8 +0x34` · span `0x4671C0..0x467288` sha `6A6571BB..180A`)
+⇒ **การใช้กฎ 7 กับแถวนี้แบบตรง ๆ จะได้ false negative**
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+ไม่เปิดเกม · ไม่จับ `LOCK_GAME` · ไม่แตะ canonical DB · ไม่แก้ `src/`/คิว · ไม่ทำ git operation ·
+อ่านอิมเมจ **read-only** พร้อม sha ก่อน/หลัง + 256-byte guards · **วิธี negative ต้องเป็น recursive CFG / census ไม่ใช่ linear disassembler** ·
+ค้น `pf_bridge\external\` และ `pf_bridge\gamedata\` ก่อนเปิดงานขุด (🎁 chief ทำให้แล้วบางส่วน ดูบล็อกข้างบน)
+
+### เกณฑ์จบใบ
+ปิดได้เมื่อ **objective มีคำตอบ หรือมี bounded negative ที่เขียนขอบเขตครบ** ·
+🔴 **ไม่ต้องรอให้เลนตายของ `GT-036` ถูกออกแบบก่อนจึงจะปิดใบนี้** — ใบนี้ตอบ *"actor เกิดมาพร้อมอะไร"* ส่วน *"เราจะยิงอะไรไปให้มันตาย"* เป็นใบถัดไป
+
+### สิ่งที่ใบนี้ *ไม่* ทำ
+ไม่ออกแบบ `HYP-PF-038` v2 · ไม่ตัดสินว่า `GT-036` ควรเดินหรือไม่ (เจ้าของอนุมัติไปแล้ว **chief ไม่มีสิทธิ์ถอน**) ·
+ไม่แตะผลข้างเคียงข้อ ④ ของ `GT-030-R3` (NPC หายหลัง `SPAWN_BARE`) — **นั่นคือใบ `GT-072`**
+
+### 🟢 หมายเหตุงบเวอร์ชัน (ตรวจแล้วในรอบ R168 ไม่ได้เชื่อคำบอก)
+`HOSTILE_HP_LINK_HP_FLOOR = 0` (`src/pirateforce_foundation/hostile_hp_link_hypothesis.py:644`) และ
+`HOSTILE_HP_LINK_LETHAL_STEP_LABELS = ()` (`:703`) ⇒ **ยังไม่มี `HYP-PF-038` v2 ที่ปล่อย HP ถึง 0 อยู่ในซอร์ส**
+(ledger เขียนไว้เองว่า *"the GT-036 lethal exemption, which needs a HYP-PF-038 v2 that does not exist yet"* — `docs/HYPOTHESIS_LEDGER.json:13`)
+⇒ 🎯 **ตอนนี้ยังไม่มีโค้ดใดต้องถอน และ scoped override ที่เจ้าของให้ ยังไม่ถูกใช้ไปแม้แต่บรรทัดเดียว** — การวัดก่อนสร้างจึงไม่มีต้นทุนจม
+
+### result (ยังไม่มี — ใบเปิดอยู่)
