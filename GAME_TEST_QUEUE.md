@@ -1746,9 +1746,12 @@ py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch
 - รันจากโฟลเดอร์ `pf_bridge` · **exit 0** + `BOOT_COMMIT: <sha>` ⇒ `git checkout <sha>` (detached HEAD ถูกแล้ว)
 - **exit 3** + `BOOT_COMMIT: NONE` ⇒ ห้ามบูต จดว่า "ใบนี้รอ gate ไม่ได้รอผู้เทส" · **exit 2** = พาธผิด/git ล้ม
 - 🔴 บรรทัด `THE GATE JUDGED ... AS FAILED` ⇒ จดลงผลเสมอ
-- 🆕 **R158: เครื่องมือยอมรับ commit ที่ tree ต่างจาก main ได้แล้ว ถ้าไฟล์ที่ต่างเป็นของที่เซิร์ฟเวอร์รันไม่ได้**
-  (`docs/ tests/ tools/ reports/ drafts/ .github/` + markdown ระดับบนสุด) และมันจะ **พิมพ์รายชื่อไฟล์ที่ต่างออกมาเสมอ**
-  ⇒ commit เอกสารของ chief ไม่ปิดหน้าต่างเทสอีกต่อไป · แต่ถ้าต่างที่ `src/ scenarios/ current/` **ยังปฏิเสธเหมือนเดิม**
+- 🆕 **R158: เครื่องมือยอมรับ commit ที่ tree ต่างจาก `main` ได้แล้ว ถ้าไฟล์ที่ต่างเป็นของที่เซิร์ฟเวอร์รันไม่ได้**
+  (`docs/ tests/ reports/ drafts/ .github/ .claude/` + markdown ระดับบนสุด + ไฟล์ verifier ที่ระบุชื่อทีละไฟล์สองตัว) และมันจะ **พิมพ์รายชื่อไฟล์ที่ต่างออกมาเสมอ**
+  ⇒ commit เอกสารของ chief ไม่ปิดหน้าต่างเทสอีกต่อไป
+  · 🔴 **`tools/` นับเป็นโค้ด** เพราะ `tools\run_foundation_visible.ps1` **คือคำสั่งบูตเอง** (มันตั้ง `PYTHONPATH` และเลือก DB)
+  · ถ้าต่างที่ `src/ scenarios/ current/ tools/ migrations/` **ยังปฏิเสธเหมือนเดิม**
+  · 🔴 **เทียบกับ `main` ปัจจุบัน ไม่ใช่กับ merge commit** ⇒ ถ้า main ขยับหลัง merge ด้วย commit ที่แตะ `src/` มันจะปฏิเสธ ซึ่งถูกแล้ว
 - **ยืนยันห้าข้อกับ `<SHA>` ที่จะบูตจริง (ต้องครบทั้งห้า — ข้อ 4/5 เป็นของใหม่ v3 และเป็นด่านกัน "บูตเลนเก่า"):**
 ```
 git show origin/ci-status:ci/<SHA>.json
