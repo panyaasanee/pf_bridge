@@ -1,0 +1,3 @@
+CONSUMED by chief R166 (session o5hhjm) 2026-08-25 ~17:5x (+07:00)
+copy: notes_to_chief/consumed/20260825_1745_GT033-SUBCODE01-RESULT-three-of-four-cells-measured-ticket-answered.md
+original left in place per R108 rule (never delete, never move)
