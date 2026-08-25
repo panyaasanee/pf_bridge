@@ -84,6 +84,7 @@ complete recursive CFG ของ switch-scene cleanup slot `0x004C7160` แล�
 - gamedata tree ก่อน/หลัง: `1,109 files / 15,319,585 bytes`, fingerprint `9ba992357c2e6a7edbd366b996a801d3b354930babf695f35b615251bce3a3ab`
 - `AGENTS.md` SHA `5ff41a9d897b288325b822186bc5ec3cc96b0087c31e79c1a2be2aa4d74b8519`; `CLIENT_RE_QUEUE.md` final SHA `df3216ff2fe592bc6dec60b8f1bb3ae88177ac5de30b087417597947d8d8af0d`; ไม่แก้ทั้งคู่
 - ระหว่างรอบ sync เปลี่ยน `NEW_ORDERS.txt` จาก SHA `c53c56235b91ccd1238ceb18682da4bb21a80f894dd38ee1cd2f144fbea79363` เป็น `b146fa44c078d13636f54c39977b27bb6bca4a86866ceb6ede5612d795fbd536` เวลา 01:16 (+07). จึงอ่าน `CLIENT_RE_QUEUE.md` ทั้งไฟล์ซ้ำและอ่านจดหมายล่าสุด `20260826_0130_LANE-A-BUILD-002-...md`; ไม่มี result letter ของ RE-077 ก่อนจดหมายฉบับนี้ และ rider ขา hit ถูกใส่ใน T2 ด้านบน
+- interpreter สร้าง cache byproduct ในเขต `staged\__pycache__` สองไฟล์ระหว่าง probe (`re075_static_probe.cpython-314.pyc`, `re075_static_verify.cpython-314.pyc`); ไม่ใช่ input/evidence และไม่ได้แก้ `.py` ต้นทาง. Final verifier ใช้ `python -B` เพื่อไม่สร้างเพิ่ม
 
 ## nonclaims (ตามใบ)
 
