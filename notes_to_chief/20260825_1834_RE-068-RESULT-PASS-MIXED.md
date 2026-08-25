@@ -14,7 +14,7 @@
 - image: `GameClient.local.bin` ขนาด `14,759,424 B`, SHA-256 `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
 - T0 `re067_static_verify.py`: `54/54` guards ผ่าน, exit 0
 - control เพิ่มเติม `pf_ui_state_refresh_static.py`: `292/292` guards ผ่าน, exit 0
-- verifier ใบนี้: `pf_bridge/staged/re068_static_verify.py`, SHA-256 `5c97efbdb7a2519a4bc4f42cb2999ba8f6de88cee43357abe393c60e20382e07`, `46/46` guards ผ่าน, exit 0
+- verifier ใบนี้: `pf_bridge/staged/re068_static_verify.py`, SHA-256 `b17b5411f2b99abacf4ab8a12904726871f5fcada1d08212d0f7c96847e1edbd`, `46/46` guards ผ่าน, exit 0
 
 # ค้นสองที่ก่อนถอด (ช่องบังคับ)
 
