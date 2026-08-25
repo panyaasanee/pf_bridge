@@ -31,7 +31,26 @@ that is actually on the branch -- newest first, and for each commit asks:
      tree?  then the gated code and the code on main are the same code, and
      the parent is bootable.  The tree comparison is MEASURED, not assumed:
      if a commit landed on main between the pull request opening and merging,
-     the trees differ, this tool says so and refuses that candidate.
+     the trees differ.
+  b2) when the trees differ, the tool does NOT stop at "differ".  It asks the
+     question the tester actually has -- "is the code I would BOOT the same
+     code that is on main RIGHT NOW" -- and it asks it AGAINST THE BRANCH
+     HEAD, not against the merge commit the candidate landed in, because main
+     keeps moving after a merge and a claim about the merge is not a claim
+     about the branch.  It lists the differing paths and checks every one
+     against a fail-closed allow-list of paths a booted server cannot execute
+     (docs/, tests/, reports/, drafts/, .github/, .claude/, top-level
+     markdown, and two individually-named verifier tools).  If EVERY differing
+     path is inert, the candidate is bootable and the differing paths are
+     printed with the answer.  If even one runnable path differs -- src/,
+     scenarios/, current/ (the frozen v141 module IS loaded at boot), tools/
+     (which holds the boot launcher itself), or any directory nobody has
+     classified -- it is refused and the offending paths are named.  If the
+     measurement cannot be TAKEN, or comes back empty while the trees are
+     known to differ, that is also a refusal: an unmeasured difference is
+     never a safe difference.  Round 1106 (2026-08-25) is why any of this
+     exists: a doc-only chief commit moved main and this tool aborted an
+     attended round whose runnable code had not changed by a byte.
 
 Walking by --topo-order (the first draft did) is wrong for exactly that case:
 it dives down the pull request branch and can return a commit whose tree is
@@ -135,6 +154,132 @@ def git(repo, args, allow_fail=False, warnings=None):
             if line and line not in warnings:
                 warnings.append("git said (while succeeding): %s" % line)
     return out
+
+
+# --- CODE-DELTA: which differing paths can a boot actually run? ------------
+# A tree comparison answers "is this the same tree", which is NOT the question
+# the tester is asking.  The question is "is the code I would BOOT the same
+# code that is on main RIGHT NOW".  Round 1106 (2026-08-25) measured the cost
+# of conflating them: a chief commit touching only docs/HYPOTHESIS_LEDGER.json
+# and tools/verify_hypothesis_ledger.py moved main, the trees stopped
+# matching, and this tool ABORTED an attended round whose runnable code had
+# not changed by a single byte.
+#
+# The lists below are ALLOW-lists on purpose, and they are the fail-closed
+# half of this tool: a path is inert ONLY if it is named here.  Anything
+# unrecognised -- src/, scenarios/, current/ (the frozen v141 module IS loaded
+# at boot), migrations/ (globbed at boot), state/, a new top-level directory
+# nobody has classified yet -- counts as code and refuses.
+#
+# WHAT WOULD FALSIFY AN ENTRY, so this stays a claim and not a habit: a prefix
+# belongs here only while NOTHING the tester boots reads or executes anything
+# under it.  tools/ was on this list for one commit and was WRONG -- the
+# attended boot command itself is tools/run_foundation_visible.ps1 (server
+# README, and pf_bridge/staged/072_gt001_boot.ps1 invokes it), and
+# tools/scene_db_guard.py runs alongside the live server.  A launcher that
+# sets PYTHONPATH and picks the database decides what code is loaded, so the
+# whole directory is code.  The two verifier files below are named
+# INDIVIDUALLY, and only because every mention of them under src/ is a
+# comment while the real callers are .github/workflows/gate-windows.yml and
+# tests/.  Re-check that before adding a third.
+INERT_PATH_PREFIXES = (
+    "docs/",
+    "tests/",
+    "reports/",
+    "drafts/",
+    ".github/",
+    ".claude/",
+)
+INERT_EXACT_PATHS = (
+    "tools/verify_hypothesis_ledger.py",
+    "tools/verify_functional_coverage.py",
+)
+INERT_TOP_LEVEL_SUFFIXES = (".md",)
+
+
+def _is_inert_path(path):
+    """True only for a path a booted server provably cannot execute."""
+    if not path:
+        return False
+    if path in INERT_EXACT_PATHS:
+        return True
+    for prefix in INERT_PATH_PREFIXES:
+        if path.startswith(prefix):
+            return True
+    if "/" not in path:
+        for suffix in INERT_TOP_LEVEL_SUFFIXES:
+            if path.endswith(suffix):
+                return True
+    return False
+
+
+def _ascii(text):
+    """Console-safe rendering of a path that may carry any byte.
+
+    The bridge console is cp874 and this project has Thai filenames, so a raw
+    path in the report is a way to lose the report.  Escaping here keeps the
+    tool's pure-ASCII stdout invariant true for real repositories, not only
+    for the selftest's ASCII fixtures.
+    """
+    return text.encode("ascii", "backslashreplace").decode("ascii")
+
+
+def code_delta(repo, left, right, warnings=None):
+    """Paths that differ between two commits, split inert vs runnable.
+
+    Returns (all_paths, code_paths), or (None, None) if the measurement could
+    not be taken -- the caller must treat that as a refusal, never as "nothing
+    differs".
+
+    Every flag here closes a hole that was measured, not imagined:
+
+    * ``--no-renames`` and ``-c diff.renames=false``.  git detects renames by
+      default since 2.9 and ``--name-only`` prints only the DESTINATION, so a
+      ``git mv src/legacy_bridge.py drafts/`` on main showed up as one inert
+      drafts/ path and the deletion of a module app.py imports was invisible.
+      Rename detection is also abandoned above diff.renameLimit, which made
+      the verdict depend on how big the diff happened to be.
+    * ``-z`` and ``-c core.quotePath=false``.  With git's default quoting a
+      Thai-named docs/ file arrives as ``"docs/\340\270..."``, which starts
+      with a quote, matches no prefix, and is reported to the tester as
+      runnable code -- closing the window this function exists to keep open.
+    * ``--ignore-submodules=none`` and its config twin.  A repo-local
+      ``diff.ignoreSubmodules=all`` produced an EMPTY path list for trees that
+      genuinely differ, which the first version read as "nothing runnable
+      differs" and booted.
+    * ``allow_fail`` on the call itself.  A stale personal ``diff.orderFile``
+      makes git exit 128, and before this the exception escaped and killed
+      the whole report -- the round-1106 harm relocated, not removed.  It
+      cannot be overridden away either (``-c diff.orderFile=`` makes git try
+      to open a file named ""), so the answer is to refuse this candidate and
+      keep walking rather than to abort.
+
+    The point of the -c overrides is that the answer must be a function of the
+    commits alone.  Any of these knobs left to user config makes two people
+    running this tool on the same history get different verdicts.
+    """
+    out = git(
+        repo,
+        ["-c", "diff.renames=false",
+         "-c", "core.quotePath=false",
+         "-c", "diff.ignoreSubmodules=none",
+         "diff", "--no-renames", "--ignore-submodules=none",
+         "-z", "--name-only", left, right],
+        allow_fail=True, warnings=warnings,
+    )
+    if out is None:
+        return None, None
+    paths = [part for part in out.split("\0") if part]
+    code = [path for path in paths if not _is_inert_path(path)]
+    return paths, code
+
+
+def _path_list(paths, limit=12):
+    """ASCII, truncated, and HONEST about having truncated."""
+    shown = ", ".join(_ascii(path) for path in paths[:limit]) or "(none)"
+    if len(paths) > limit:
+        shown += ", ... (%d paths total)" % len(paths)
+    return shown
 
 
 def check_repo(repo):
@@ -264,25 +409,73 @@ def resolve(repo, branch, status_ref, max_commits):
 
         head_sha = parents[2]
         p_state, p_detail, _ = read_verdict(repo, status_ref, head_sha, known, warnings)
-        merge_tree = git(repo, ["rev-parse", "%s^{tree}" % sha], warnings=warnings).strip()
-        head_tree = git(repo, ["rev-parse", "%s^{tree}" % head_sha], warnings=warnings).strip()
-        same_tree = merge_tree == head_tree
+        # THE ENDPOINT IS THE BRANCH HEAD, NOT THE MERGE COMMIT.  The tester
+        # boots this commit while main keeps moving, so "same as the merge it
+        # landed in" is not the question and answering it while PRINTING "the
+        # same code as what is on the branch" is worse than not measuring:
+        # main can gain a src/ hotfix after the merge and every word of the
+        # old sentence stayed true while the claim it made was false.
+        branch_head = mainline[0]
+        head_tree = git(repo, ["rev-parse", "%s^{tree}" % head_sha],
+                        warnings=warnings).strip()
+        branch_tree = git(repo, ["rev-parse", "%s^{tree}" % branch_head],
+                          warnings=warnings).strip()
+        same_tree = head_tree == branch_tree
 
+        code_equal = same_tree
         if p_state == "green" and not same_tree:
-            p_detail = (p_detail + " -- BUT its tree differs from the mainline "
-                        "commit it was merged into, so booting it would boot code "
-                        "that is NOT what is on the branch. Refused.")
-            p_state = "unusable"
+            changed, code_changed = code_delta(
+                repo, head_sha, branch_head, warnings)
+            if changed is None:
+                p_detail = (
+                    p_detail + " -- BUT its tree differs from the branch head "
+                    "%s and this tool COULD NOT MEASURE which paths differ "
+                    "(the git diff failed). An unmeasured difference is not a "
+                    "safe difference. Refused." % branch_head[:12])
+                p_state = "unusable"
+            elif not changed:
+                p_detail = (
+                    p_detail + " -- BUT its tree differs from the branch head "
+                    "%s while the list of differing paths came back EMPTY. "
+                    "That is a broken measurement, not an absence of "
+                    "difference (a repo-local diff.ignoreSubmodules can do "
+                    "it). Refused." % branch_head[:12])
+                p_state = "unusable"
+            elif code_changed:
+                p_detail = (
+                    p_detail + " -- BUT its tree differs from the branch head "
+                    "%s IN CODE THE SERVER RUNS, so booting it would boot "
+                    "code that is NOT what is on the branch. Refused. "
+                    "Runnable paths that differ: %s. All differing paths: %s."
+                    % (branch_head[:12], _path_list(code_changed),
+                       _path_list(changed)))
+                p_state = "unusable"
+            else:
+                code_equal = True
+                p_detail = (
+                    p_detail + " -- its tree differs from the branch head %s, "
+                    "but ONLY in paths a booted server cannot execute, so the "
+                    "running code is the same code. Differing paths: %s."
+                    % (branch_head[:12], _path_list(changed)))
         row2 = {"sha": head_sha, "state": p_state, "detail": p_detail,
                 "subject": subject_of(repo, head_sha, warnings),
                 "role": "merged pull request head of %s" % sha[:12]}
         examined.append(row2)
         if p_state == "red":
             reds_above.append(head_sha)
-        if p_state == "green" and same_tree:
-            boot = dict(row2, how=("its tree is byte-identical to mainline commit %s, "
-                                   "so the gated code and the code on the branch are "
-                                   "the same code (measured, not assumed)" % sha[:12]))
+        if p_state == "green" and code_equal:
+            if same_tree:
+                how = ("its tree is byte-identical to the branch head %s, "
+                       "so the gated code and the code on the branch are "
+                       "the same code (measured, not assumed)"
+                       % branch_head[:12])
+            else:
+                how = ("its tree differs from the branch head %s ONLY in paths "
+                       "a booted server cannot execute, so the gated code and "
+                       "the code on the branch are the same code (measured, "
+                       "not assumed -- the differing paths are printed above)"
+                       % branch_head[:12])
+            boot = dict(row2, how=how)
             break
 
     if boot and boot["sha"] in reds_above:
@@ -381,7 +574,11 @@ def _init(path):
 
 
 def _commit(repo, name, message=None):
-    with open(os.path.join(repo, name), "w") as fh:
+    target = os.path.join(repo, name)
+    parent = os.path.dirname(target)
+    if parent and not os.path.isdir(parent):
+        os.makedirs(parent)
+    with open(target, "w") as fh:
         fh.write(name + "\n")
     _sh(repo, ["add", "--", name])
     _sh(repo, ["commit", "-q", "-m", message or name])
@@ -477,6 +674,162 @@ def selftest():
         check("and the walk does not stop there", res2["boot_commit"], b2)
         check("main-only commit was examined, not skipped",
               any(r["sha"] == main_only for r in res2["examined"]), True)
+
+        # --- case 2b: the same shape, but the main-only commit is INERT ----
+        # This is the round-1106 case: a chief commit that touches only files
+        # a booted server cannot execute must NOT close the tester's window.
+        repo2b = os.path.join(tmp, "two_b")
+        _init(repo2b)
+        b2b = _commit(repo2b, "base")
+        _sh(repo2b, ["checkout", "-q", "-b", "pr"])
+        pr2b = _commit(repo2b, "src/feature.py")
+        _sh(repo2b, ["checkout", "-q", "main"])
+        _commit(repo2b, "docs/LEDGER_AMENDMENT.md")
+        _sh(repo2b, ["merge", "-q", "--no-ff", "pr", "-m", "Merge pull request #2b"])
+        status2b = os.path.join(tmp, "two_b_status")
+        _init(status2b)
+        _sh(status2b, ["checkout", "-q", "-b", "ci-status"])
+        _publish(status2b, {pr2b: _verdict(pr2b, "success")})
+        _sh(repo2b, ["fetch", "-q", status2b, "ci-status:ci-status"])
+        res2b = resolve(repo2b, "main", "ci-status", 10)
+        check("inert-only tree drift is bootable", res2b["boot_commit"], pr2b)
+        check("and the tool says WHY it is bootable",
+              "cannot execute" in (res2b["boot_how"] or ""), True)
+        check("and it prints the differing paths",
+              "docs/LEDGER_AMENDMENT.md" in
+              " ".join(r["detail"] or "" for r in res2b["examined"]), True)
+
+        # --- case 2c: one runnable path is enough to refuse ----------------
+        # The allow-list is fail-closed: docs/ alongside a src/ change does
+        # not launder the src/ change.
+        repo2c = os.path.join(tmp, "two_c")
+        _init(repo2c)
+        b2c = _commit(repo2c, "base")
+        _sh(repo2c, ["checkout", "-q", "-b", "pr"])
+        pr2c = _commit(repo2c, "src/feature.py")
+        _sh(repo2c, ["checkout", "-q", "main"])
+        _commit(repo2c, "docs/note.md")
+        _commit(repo2c, "src/other.py")
+        _sh(repo2c, ["merge", "-q", "--no-ff", "pr", "-m", "Merge pull request #2c"])
+        status2c = os.path.join(tmp, "two_c_status")
+        _init(status2c)
+        _sh(status2c, ["checkout", "-q", "-b", "ci-status"])
+        _publish(status2c, {pr2c: _verdict(pr2c, "success"),
+                            b2c: _verdict(b2c, "success")})
+        _sh(repo2c, ["fetch", "-q", status2c, "ci-status:ci-status"])
+        res2c = resolve(repo2c, "main", "ci-status", 10)
+        check("a runnable path still refuses",
+              [r["state"] for r in res2c["examined"] if r["sha"] == pr2c],
+              ["unusable"])
+        check("and it names the runnable path that refused it",
+              "src/other.py" in
+              " ".join(r["detail"] or "" for r in res2c["examined"]), True)
+        check("scenarios/ current/ and unclassified dirs are NOT inert",
+              (_is_inert_path("scenarios/x.json"),
+               _is_inert_path("current/pf_login_game_server_v141.py"),
+               _is_inert_path("src/a.py"), _is_inert_path("unclassified/a.py"),
+               _is_inert_path("migrations/005_x.sql"),
+               _is_inert_path("state/pirateforce.sqlite3")),
+              (False, False, False, False, False, False))
+        check("docs/ tests/ .claude/ and top-level markdown are inert",
+              (_is_inert_path("docs/a.json"), _is_inert_path("tests/a.py"),
+               _is_inert_path(".claude/agents/pf-adversary.md"),
+               _is_inert_path("reports/x/y.txt"), _is_inert_path("README.md")),
+              (True, True, True, True, True))
+        # tools/ was on the prefix list for exactly one commit and it was
+        # WRONG: tools/run_foundation_visible.ps1 IS the attended boot command
+        # and it decides PYTHONPATH and the database.  Only the two verifier
+        # files are named, individually.
+        check("tools/ is code, and only the named verifiers are exempt",
+              (_is_inert_path("tools/run_foundation_visible.ps1"),
+               _is_inert_path("tools/scene_db_guard.py"),
+               _is_inert_path("tools/verify_hypothesis_ledger.py"),
+               _is_inert_path("tools/verify_functional_coverage.py")),
+              (False, False, True, True))
+
+        # --- case 2d: a rename OUT of a runnable path must still refuse ----
+        # git detects renames by default and --name-only prints only the
+        # destination, so `git mv src/legacy_bridge.py drafts/` looked like one
+        # inert drafts/ path while the module app.py imports vanished from the
+        # booted tree.  A correct refusal had become a false green.
+        repo2d = os.path.join(tmp, "two_d")
+        _init(repo2d)
+        _commit(repo2d, "src/keep.py")
+        _commit(repo2d, "src/legacy_bridge.py",
+                message="a module the app imports")
+        _sh(repo2d, ["checkout", "-q", "-b", "pr"])
+        pr2d = _commit(repo2d, "docs/prnote.md")
+        _sh(repo2d, ["checkout", "-q", "main"])
+        _sh(repo2d, ["mv", "src/legacy_bridge.py", "drafts_legacy.py"])
+        _sh(repo2d, ["commit", "-q", "-m", "move it out of src"])
+        _sh(repo2d, ["merge", "-q", "--no-ff", "pr", "-m", "Merge pull request #2d"])
+        status2d = os.path.join(tmp, "two_d_status")
+        _init(status2d)
+        _sh(status2d, ["checkout", "-q", "-b", "ci-status"])
+        _publish(status2d, {pr2d: _verdict(pr2d, "success")})
+        _sh(repo2d, ["fetch", "-q", status2d, "ci-status:ci-status"])
+        res2d = resolve(repo2d, "main", "ci-status", 10)
+        check("a rename out of src/ is still seen as a src/ path",
+              [r["state"] for r in res2d["examined"] if r["sha"] == pr2d],
+              ["unusable"])
+        check("and the deleted runnable path is named",
+              "src/legacy_bridge.py" in
+              " ".join(r["detail"] or "" for r in res2d["examined"]), True)
+
+        # --- case 2e: the endpoint is the BRANCH HEAD, not the merge --------
+        # main can gain a src/ hotfix AFTER the merge.  Comparing against the
+        # merge commit stayed true while the sentence it printed ("the same
+        # code as what is on the branch") became false.
+        repo2e = os.path.join(tmp, "two_e")
+        _init(repo2e)
+        _commit(repo2e, "src/app.py")
+        _sh(repo2e, ["checkout", "-q", "-b", "pr"])
+        pr2e = _commit(repo2e, "src/feature.py")
+        _sh(repo2e, ["checkout", "-q", "main"])
+        _commit(repo2e, "docs/LEDGER.md")
+        _sh(repo2e, ["merge", "-q", "--no-ff", "pr", "-m", "Merge pull request #2e"])
+        with open(os.path.join(repo2e, "src", "app.py"), "w") as fh:
+            fh.write("hotfix that only exists on main\n")
+        _sh(repo2e, ["add", "--", "src/app.py"])
+        _sh(repo2e, ["commit", "-q", "-m", "hotfix on main after the merge"])
+        status2e = os.path.join(tmp, "two_e_status")
+        _init(status2e)
+        _sh(status2e, ["checkout", "-q", "-b", "ci-status"])
+        _publish(status2e, {pr2e: _verdict(pr2e, "success")})
+        _sh(repo2e, ["fetch", "-q", status2e, "ci-status:ci-status"])
+        res2e = resolve(repo2e, "main", "ci-status", 10)
+        check("a src/ commit landing after the merge still refuses the head",
+              [r["state"] for r in res2e["examined"] if r["sha"] == pr2e],
+              ["unusable"])
+        check("and it names the path main moved on", "src/app.py" in
+              " ".join(r["detail"] or "" for r in res2e["examined"]), True)
+        check("no answer is better than a wrong one here",
+              res2e["boot_commit"], None)
+
+        # --- case 2f: a non-ASCII path must not be misread as code ----------
+        # git's default quoting turns a Thai docs/ file into a \"-prefixed
+        # string that matches no prefix, so the tool told the tester a Thai
+        # markdown file was runnable code and closed the window.
+        repo2f = os.path.join(tmp, "two_f")
+        _init(repo2f)
+        _commit(repo2f, "src/app.py")
+        _sh(repo2f, ["checkout", "-q", "-b", "pr"])
+        pr2f = _commit(repo2f, "src/feature.py")
+        _sh(repo2f, ["checkout", "-q", "main"])
+        _commit(repo2f, "docs/\u0e2a\u0e23\u0e38\u0e1b_R1106.md")
+        _sh(repo2f, ["merge", "-q", "--no-ff", "pr", "-m", "Merge pull request #2f"])
+        status2f = os.path.join(tmp, "two_f_status")
+        _init(status2f)
+        _sh(status2f, ["checkout", "-q", "-b", "ci-status"])
+        _publish(status2f, {pr2f: _verdict(pr2f, "success")})
+        _sh(repo2f, ["fetch", "-q", status2f, "ci-status:ci-status"])
+        res2f = resolve(repo2f, "main", "ci-status", 10)
+        check("a Thai-named docs/ file is inert, not runnable",
+              res2f["boot_commit"], pr2f)
+        code2f, out2f, _ = _run_tool(repo2f, [])
+        check("and the report is still pure ASCII", out2f.isascii(), True)
+        check("and it escaped the path instead of dropping it",
+              "\\u0e2a" in out2f, True)
 
         # --- case 3: red on the mainline must be printed, not swallowed ----
         repo3 = os.path.join(tmp, "three")
