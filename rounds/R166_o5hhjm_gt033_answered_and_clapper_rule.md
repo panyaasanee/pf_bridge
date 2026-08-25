@@ -2,7 +2,7 @@
 
 - **เวลา:** 2026-08-25 ~17:5x–18:xx (+07:00) = ~10:5x–11:xxZ · chief cloud (Routine)
 - **branch:** `pf_bridge` `claude/epic-franklin-o5hhjm` · `pirate-force-server` `claude/elegant-lamport-o5hhjm`
-  (repo โค้ดถูกแตะ **หนึ่ง commit เอกสาร/pin** ที่ไล่เจอระหว่างทาง — ดูข้อ ⑥ · ไม่มีการเปลี่ยนพฤติกรรมของเซิร์ฟเวอร์แม้แต่บรรทัดเดียว)
+  (repo โค้ดถูกแตะ **สอง commit เอกสาร/ledger/pin** ที่ไล่เจอระหว่างทาง — ดูข้อ ⑥ และ ⑧ · **ไม่มีการเปลี่ยนพฤติกรรมของเซิร์ฟเวอร์แม้แต่บรรทัดเดียว** · commit ที่สองคือการแก้ commit แรกหลัง `pf-adversary`)
 - **การ์ดกันรอบซ้อน:** `git fetch --all` **ทั้งสอง repo** (กฎ R165 §②) → ถาม GitHub API ทั้งสอง repo
   ⇒ **ไม่มี PR เปิดค้างเลยสักใบ** ⇒ จับล็อกด้วย empty commit `round claim: o5hhjm` → push →
   เปิด **PR draft #70** (`pf_bridge`) พร้อม marker `PF-AUTOMERGE: v4` **ก่อนทำงานใด ๆ** · ยืนยันแล้วว่า `draft: true` จริง
@@ -212,5 +212,56 @@ prose ยังหยุดอยู่ที่ **2026-08-18** และยั�
 📌 **บทเรียนกระบวนการของรอบนี้ (จดไว้ให้รอบหน้า):** ลูกมือจับได้ว่าจดหมายฉบับร่างของผมเขียนว่า *"ใบ RE-070 อยู่ท้าย `CLIENT_RE_QUEUE.md` แล้ว"* **ก่อน** ที่ไฟล์นั้นจะถูกเขียนจริง (ห่างกัน ~4 นาที)
 รอบนี้ไม่เจ็บเพราะจดหมายยังไม่ถูก push ตอนนั้น **แต่รูปทรง "เขียนว่าเสร็จ → ค่อยทำ" คือของที่เคยกัดโปรเจกต์นี้มาแล้ว**
 ⇒ 🔴 **เกณฑ์ที่ควรใช้: จดหมายที่อ้างว่าไฟล์มีอยู่ ต้องออกหลัง `git ls-files` ยืนยัน**
+
+---
+
+## ⑧ 🥊 รอบ `pf-adversary` ตัวที่สอง (repo โค้ด) — **gate เขียวแต่ข้อเท็จจริงผิด · แก้ครบในรอบเดียวกัน**
+
+ผมส่ง commit `b4cf0c8` (refresh แถว `clean_logout` + ย้าย grade pin) ให้ลูกมือหักล้าง · **มันไม่ทำ gate แดง** (2345 passed · coverage rc=0 · ledger rc=0)
+🔴 **แต่ลูกมือสรุปได้ตรงจุด: "green ที่ถูกต้องเชิงกลไกและผิดเชิงข้อเท็จจริง" เพราะ *ไม่มีด่านไหนในรีโปเทียบ `notes` กับหลักฐาน***
+
+**🔴 D1 — คำอ้าง "first time in project history" เป็นเท็จ และหักล้างได้ด้วยไฟล์ในรีโปเดียวกัน**
+`docs/HYPOTHESIS_LEDGER.json` แถว `HYP-PF-031.evidence_gap` — **ซึ่ง chief R123 amend ไว้เองเมื่อ 2026-08-23** — เขียนว่า
+*"the push HAS now been shown to a real client. Attended GT-033 variant C … delivered the one pinned unsolicited 0x709E (PC and frame SHA equal to the pins) to a runtime-ready client"*
+**ผมยืนยันเองด้วยการเปิด ledger อ่านตรง ๆ ก่อนแก้ ไม่ได้เชื่อลูกมือ**
+⇒ 📌 **บทเรียนถาวร: superlative จากแหล่งเดียว (จดหมายสะพาน) ถูกยกเข้าทะเบียนโดยไม่ grep ledger ที่นั่งอยู่ในรีโปเดียวกัน — ห้ามเขียน "ครั้งแรก / ไม่เคยมี" โดยไม่เปิด ledger ก่อน**
+**แก้แล้วห้าที่:** ใบ GT-033 · ไฟล์รอบนี้ · `CHIEF_CONTINUATION` · `notes` ของ coverage · lineage comment ของ pin
+
+**🔴 D4 — ledger `HYP-PF-028` ค้างเป็นเท็จ ณ HEAD และ commit แรกไม่แตะมัน**
+`evidence_gap` ยังอ่านว่า **"NO CLIENT HAS EVER BEEN SHOWN ONE BYTE OF THIS PROFILE"** และ **"GT-033 variant B, WHICH HAS NOT RUN"**
+⇒ รอบถัดไปที่ grep ledger เพื่อเลือกใบ attended ใบต่อไป **จะคิว GT-033 variant B ใหม่ = เผา 1 บูต + 1 เย็นของผู้เทส**
+🔴 **และ precedent ของรีโปตรงข้ามกับที่ commit แรกทำ** — `HYP-PF-031` ถูก AMENDED ทันทีที่ variant C รัน (R123)
+**แก้แล้ว:** amend `HYP-PF-028` (ไม่แทนที่ ตาม house precedent) + ย้าย `CANONICAL_CONTENT_SHA256` `ACD07AA9..` → `8C700D42..` ในการเปลี่ยนแปลงเดียวกัน พร้อม lineage · **count คงที่ 46 ไม่มี entry เพิ่ม/ลบ/ขยับ index**
+
+**🔴 D2 — แถว coverage ตีพิมพ์ประโยคที่ผมขีดฆ่าเองว่า "ผิด" 10 นาทีต่อมา**
+`notes` เขียน *"a static question that booting the game cannot move"* ขณะที่ใบ GT-033 เขียนว่าประโยคนี้ **ผิดและถอนแล้ว**
+· และพก nonclaim ไป **1 จาก 8** ทั้งที่ใบสั่งว่า *"ห้ามอ้างผลใบนี้ที่ไหนโดยไม่พกไปด้วย"* ⇒ **แก้แล้ว: `notes` พกครบแปดข้อ + หกกิ่ง + ประโยค "row is in_progress and NOT blocked"**
+
+**🔴 D3 — "both are falsified" แข็งเกินไปสำหรับทรง ack+close** (ไม่มีใครตรวจว่ายาถึงคนไข้ · `HYP-PF-013.evidence_gap` เขียนไว้ตั้งแต่ GT-008 ว่า *"the real client never detects the clean server-side socket close at all"*) ⇒ **แก้ถ้อยคำแล้วทั้ง `notes` · report · STATUS.md**
+
+**🟠 D5** ช่องที่สี่ไม่ถูกเอ่ยชื่อใน `notes` เลย (silent skip) ⇒ **เขียนชื่อช่องและเหตุผลลงไปแล้ว**
+**🟠 D6** *"same-boot control … and again on subcode 01"* — สามรอบเป็น **สามบูตแยกกันที่ใช้ boot commit เดียวกัน** (ตัวควบคุมระดับ **commit** ไม่ใช่ระดับ boot) · และ subcode 01 **ไม่มี B ให้ต่างด้วย** ⇒ **แก้แล้ว**
+**🟡 D7** *"the 48 wire bytes … sha ตรงทั้งสามชิ้น"* — 48 B คือ **frame** ไม่ใช่ PC · และหนึ่งใน "สามชิ้น" คือ **request ที่ไคลเอนต์ส่งมาเอง** ผูกกับ "the client received" ไม่ได้ ⇒ **แยกตัวเลข PC/frame ให้ชัดแล้ว**
+**🟡 D8** evidence_refs ทั้งหกเป็นหลักฐานของ **"สิ่งที่สร้าง"** ไม่ใช่ **"สิ่งที่วัด"** — ไม่มี artifact ของ GT-033 ในรีโปเลย ทั้งที่ precedent มีครบ (GT-007 · GT-008 มี report)
+⇒ **เขียน `reports/PF_GT033_LOGOUT_TRANSITION_AB_CLIENT_OBSERVABLE_NEGATIVE_20260825.md`** (บันทึกเต็ม + nonclaim แปดข้อ + หกกิ่ง + ประโยค "the claim that must not be made") · เติม `!/reports/...` ลง `.gitignore` (repo นี้ใช้ allow-list) · อ้างจากแถว
+**🟡 D9** `STATUS.md` ยังบอกว่าทางต่อคือ content-bearing response ที่เพิ่งตายไปเมื่อคืน — **โรคเดียวกับที่ commit แรกอ้างว่าต้องแก้ JSON** ⇒ **แก้แล้ว**
+**🟡 D10** `notes` ยื่นเลข hex ของ orchestrator เป็น "ทางต่อ" โดยไม่บอกว่า `FACTPACK_R100` **verify ไม่ได้เลย** ⇒ **เติมคำเตือนนั้นเข้า `notes` และ report แล้ว**
+**🔵 D11** ธรรมเนียม lineage ถูกโครง ผิดสามรายละเอียด (ย่อ pin เป็น `8..7` แทน `8..4` · บรรทัดยาว 95 อักขระ · นับ ref ผิดเพราะ report อยู่ใน `evidence_refs`) ⇒ **แก้ครบ** · 🟢 **แต่ลูกมือ grep `39034397` ทั้งรีโปแล้วยืนยันว่า *ไม่มี pin ค้างที่อื่น* ⇒ commit แรกไม่ทำ gate แดงจริง**
+**🔵 D12** *"the wire/DB layer passed **every time**"* — รอบ B วัดข้ามสองแหล่ง (26 ms) แต่รอบ A ทั้งสองพิงชื่อ `PF-EVENT` ของเซิร์ฟเวอร์เอง (**รายงานลำดับ ไม่ได้พิสูจน์ลำดับ**) ⇒ **เขียนกำกับความต่างนี้ลงทั้ง `notes` และ report**
+
+**🟢 ข้อที่ลูกมือพยายามหักแล้วหักไม่ลง:** pin ใหม่ re-derive ได้จริง · ไม่มี pin ค้าง · `evidence_refs` ทั้งหกเกี่ยวกับ clean_logout จริงและไม่มี ref เกิน · เทส digest สองตัวไม่เพี้ยนความหมาย (มัน mutate `inventory/backpack_open_display` ไม่เคยแตะแถวนี้เลย) · `_manifest_debt` ไม่แตะแถว `in_progress` · **ไม่มีอักขระนอก cp874 หลุดเข้าไฟล์ที่ commit แตะ (ตรวจด้วยการ encode ไม่ใช่รันแล้วดู)** · และรันจริงด้วย `PYTHONIOENCODING=cp874` แล้วทุกเครื่องมือผ่าน
+
+**ผลรวมหลังแก้:** `coverage rc=0` · `ledger rc=0 entries=46` · seam test **56 passed / 224 subtests** · สวีตเต็ม **2345 passed / 324 skipped / 4486 subtests = เขียว(cloud sanity)**
+
+---
+
+## ⑨ 🔴 คำถามที่ลูกมือทิ้งไว้และผมตอบไม่ได้ในรอบนี้ — **ยกให้คุณ Panya**
+
+> **อะไรบังคับให้ `docs/FUNCTIONAL_COVERAGE.json` · `docs/HYPOTHESIS_LEDGER.json` · `STATUS.md` และใบใน `GAME_TEST_QUEUE.md` พูดตรงกันเรื่องเดียวกัน ณ HEAD?**
+
+`GRADE_SUBSET_SHA256` บังคับได้แค่ *"ถ้าขยับ grade ต้องพิมพ์ hash ใหม่"* — **มันไม่รู้เลยว่า `notes` พูดอะไร และไม่รู้จัก ledger เลยแม้แต่นิดเดียว**
+รอบนี้ทั้งสี่แหล่งขัดกันเองพร้อมกันโดยไม่มีอะไรแดงสักดวง และผมเป็นคนทำมันเองทั้งสี่จุด
+⇒ **ตราบใดที่ยังไม่มีคำตอบ "gate เขียว" แปลว่า *hash ตรง* ไม่ใช่ *เรื่องเล่าตรงกัน*** และรอบต่อไปจะเลือกใบถัดไปจากเรื่องเล่าที่ขัดกันสี่ฉบับ
+🔴 **ผมไม่แก้เองรอบนี้** — มันคือการเพิ่มด่านใหม่เข้า gate ซึ่งเป็นสถาปัตยกรรม ต้องให้คุณเคาะ · **เขียนคำถามไว้ในจดหมายแล้วเดินงานอื่นต่อ ตามกติกาโหมดกลางคืน**
 
 ---
