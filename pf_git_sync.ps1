@@ -770,6 +770,65 @@ if ((Test-Path -LiteralPath $bridgeAgents) -and (Test-Path -LiteralPath $serverA
 }
 
 # ---------------------------------------------------------------------------
+# [5c] stuck round-claim detector.  Panya ruled 2026-08-25 ~09:4x after cc lost
+#      seven scheduled runs overnight and nobody noticed for six hours.
+#      What happened: the 00:51 run took the round lock with an empty commit
+#      'round claim: 7ejlam', pushed it, opened the lock PR - and died right
+#      there.  Every hourly run after that saw an open claude/* PR, decided a
+#      round was already in flight, and backed out.  The runs went green.  The
+#      work stopped.  Nothing on this side could tell the difference between
+#      'a round is working' and 'a round died holding the lock', because from
+#      git both look identical: a claude/* branch whose tip is a bare claim.
+#      The one thing that DOES separate them is age.  A healthy round pushes
+#      its work within ~40-55 minutes; a dead one sits on the bare claim until
+#      cc's own reap closes stale PRs at 6 hours.  So the alert window is
+#      exactly between those two numbers - long enough that no live round is
+#      ever accused, short enough to save most of the six hours.
+#      Outside the window this step stays silent on purpose: under 75 minutes
+#      a round is probably just working, and past 6 hours reap has it, plus
+#      the branch itself outlives the closed PR forever and would otherwise
+#      shout every 2 minutes for the rest of time.
+#      This step only REPORTS.  It never closes a PR, deletes a branch or
+#      touches the lock - that is a person's call, and mine was wrong once
+#      already: last night I called this outage 'cc is down' from this side
+#      alone, when the run history said cc ran fine every hour.  This step
+#      reports the branch, not the health of cc.  Do not confuse them again.
+# ---------------------------------------------------------------------------
+
+$CLAIM_STUCK_MIN = 75
+$CLAIM_REAP_MIN  = 360
+
+$cf = GitRun $BridgeRepo @('fetch', 'origin', '--prune', '+refs/heads/claude/*:refs/remotes/origin/claude/*')
+if ($cf.Code -ne 0) {
+    Log '[5c]' ('round-claim check skipped - fetch of claude/* failed: ' + ($cf.Out -replace "`n", ' | '))
+} else {
+    $nowUtc = [int64](((Get-Date).ToUniversalTime() - [DateTime]'1970-01-01').TotalSeconds)
+    $cr = GitRun $BridgeRepo @('for-each-ref', '--format=%(refname:short)|%(committerdate:unix)|%(contents:subject)', 'refs/remotes/origin/claude/*')
+    $claimStuck = @()
+    $claimLive  = 0
+    if ($cr.Code -eq 0 -and $cr.Out -ne '') {
+        foreach ($line in ($cr.Out -split "`n")) {
+            $parts = $line -split '\|'
+            if ($parts.Count -lt 3) { continue }
+            if ($parts[2] -notlike 'round claim:*') { continue }
+            $ageMin = [int](($nowUtc - [int64]$parts[1]) / 60)
+            if ($ageMin -lt $CLAIM_STUCK_MIN) { $claimLive++; continue }
+            if ($ageMin -ge $CLAIM_REAP_MIN) { continue }
+            $claimStuck += ($parts[0] + '  age=' + $ageMin + 'min  tip="' + $parts[2] + '"')
+        }
+    }
+    if ($claimStuck.Count -gt 0) {
+        Shout '[5c]' ('round died holding the lock: ' + $claimStuck.Count + ' claude/* branch(es) whose tip is still a bare round claim after ' + $CLAIM_STUCK_MIN + ' min - every scheduled run since then is backing out of a lock nobody is using')
+        foreach ($c in $claimStuck) { Log '[5c]' ('  !! ' + $c) }
+        Log '[5c]' 'a person must close that lock PR - this step will not touch it'
+    } elseif ($claimLive -gt 0) {
+        Log '[5c]' ('round claim held and still young - ' + $claimLive + ' branch(es) under ' + $CLAIM_STUCK_MIN + ' min, not an alert')
+    } else {
+        Log '[5c]' 'no bare round claim outstanding'
+    }
+}
+
+# ---------------------------------------------------------------------------
 # [6] tell the tester, but only when there is something to tell - the mtime of
 #     NEW_ORDERS.txt is itself the signal, so it must not be touched otherwise
 # ---------------------------------------------------------------------------
