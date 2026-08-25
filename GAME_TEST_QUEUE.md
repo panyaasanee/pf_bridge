@@ -618,7 +618,14 @@
 >
 > **ชั้น (1) wire/DB — ✅ PASS ครบทุกรอบ**
 > - ไคลเอนต์ส่ง `LogoutVital 0x1B40` จริง · PC 34 B · discriminator `08 03` / `08 01` ตรงปุ่มที่กด · **byte-identical ระหว่างรอบ A/03 กับ B/03**
-> - รอบ B: sha256 ตรง pin **สามชิ้น** (request 34 B `EC5B53DC…` · `return_select_first` 38 B `A4C8DF42…` · ack 36 B `FC8B9E2C…`) ⇒ 🎯 **ครั้งแรกในประวัติโปรเจกต์ที่ไคลเอนต์ตัวจริงได้รับไบต์ของ `ReturnSelectServerVital 0x709E`** (48 B บนสาย) — บรรทัดเดิมของใบที่ว่า *"ยังไม่เคยมี client เห็น `0x709E` แม้แต่ไบต์เดียว"* **ตายแล้ว**
+> - รอบ B: sha256 ตรง pin **สามชิ้น** (request 34 B `EC5B53DC…` · `return_select_first` 38 B `A4C8DF42…` · ack 36 B `FC8B9E2C…`) ⇒ 🎯 **ครั้งแรกที่ไคลเอนต์ตัวจริงได้รับ `0x709E` *ในฐานะ response ต่อ `LogoutVital` ตัวจริง*** (เฟรม 48 B บนสาย)
+> 🔴🔴 **แก้โดย chief R166 หลัง `pf-adversary` ตัวที่สอง — ถ้อยคำเดิมของบล็อกนี้เขียนว่า "ครั้งแรกในประวัติโปรเจกต์" ซึ่ง *เป็นเท็จ*:**
+> **`GT-033 variant C` ส่งเฟรม `0x709E` ชุดเดียวกันเป๊ะถึงไคลเอนต์ตัวจริงไปแล้วตั้งแต่ 2026-08-23 00:06 (+07:00)** (บูตเขียว `7b80025` · PC/frame sha ตรง pin เดียวกัน)
+> หลักฐานอยู่ในรีโปเราเอง: `pirate-force-server/docs/HYPOTHESIS_LEDGER.json` แถว `HYP-PF-031.evidence_gap` ซึ่ง **chief R123 amend ไว้เองเมื่อ 2026-08-23** ว่า *"the push HAS now been shown to a real client"*
+> 🔴 **สิ่งที่ต่างจริงระหว่าง C กับ B คือ *การจับคู่*:** C เป็น **unsolicited push** (ยิงด้วยแชต · ไม่มี request) · B เป็น **response ต่อ `LogoutVital` ตัวจริงที่ผู้เทสกดเอง** ⇒ **นั่นคือความใหม่ของรอบ B ไม่ใช่ "ไบต์แรก"**
+> 🔴 **และ `external/PF_FIELD_VALIDATION.tsv:144` บอกว่า `ReturnSelectServerVital` มี `observed_frames=2` ใน capture corpus ที่แช่แข็งไว้ตั้งแต่ 2026-08-15/16** — **ก่อน** variant B/C ทุกครั้ง ⇒ **ยังไม่มีใครแยกว่าเป็นของจริงหรือ schema collision** (rider ของ `RE-070`)
+> ⇒ 📌 **บทเรียน: superlative จากแหล่งเดียว (จดหมายสะพาน) ถูกยกเข้าทะเบียนโดยไม่เปิด ledger ที่นั่งอยู่ในรีโปเดียวกัน — ห้ามเขียน "ครั้งแรก/ไม่เคยมี" โดยไม่ grep ledger ก่อน**
+> ⇒ บรรทัดเดิมของใบที่ว่า *"ยังไม่เคยมี client เห็น `0x709E` แม้แต่ไบต์เดียว"* **ตายไปตั้งแต่ variant C แล้ว ไม่ใช่ตายคืนนี้**
 > - รอบ A: **census เฟรมขาออกทั้งรอบ** ยืนยันว่า **ไม่มี `0x709E` แม้แต่ไบต์เดียว** ⇒ A กับ B ต่างกัน **ตัวแปรเดียวเป๊ะ**
 > - `sessions.closed_at` ถูกเขียน **ก่อน** ไบต์ response ถูกคิว (รอบ B วัดได้ 26 ms) ตรงกับที่ scenario ประกาศ · `OPEN_SESSIONS 0 · INTEGRITY ok · FK_ROWS 0` · **CANON ไม่ขยับ** · teardown exit 0 ทุกรอบ
 >
