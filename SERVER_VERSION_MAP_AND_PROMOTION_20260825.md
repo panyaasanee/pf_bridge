@@ -132,9 +132,34 @@ current/pf_login_game_server_v141.py      <- โมดูล frozen (382,913 ไ
 - **9 แถว** อยู่หลังธง opt-in จริง — เป็นเป้าของ promotion ตัวจริง
 - **11 แถว** **ไม่มีธงเลยใน `src/`** ⇒ ติดมากับบูตปกติอยู่แล้ว **"promote" ไม่ได้เพราะมันเปิดอยู่แล้ว**
   (สอดคล้องกับ §① ที่เขียนถูกอยู่แล้วว่ามีห้า capability ติดมากับบูตปกติ)
-- **4 แถว** **ไม่มีการ implement ใน `src/` เลย** — แถว `npc_locomotion_presentation` · `teleport_transport`
-  · `npc_conversation_handshake` · `conversation_operation_sequence` ⇒ เป็นของ **v141** ที่ไม่เคยถูก port มา
-  **ของสี่อันนี้ต้อง port ก่อน ไม่ใช่ promote**
+- **4 แถว** ~~ไม่มีการ implement ใน `src/` เลย ⇒ ต้อง port ก่อน ไม่ใช่ promote~~
+
+🔴🔴 **แก้ซ้ำโดย chief R160 (2026-08-25 ~09:5x +07:00) — บรรทัด "4 แถวไม่มี implement" ข้างบนของผมเองก็ผิด**
+`pf-adversary` วัดจริงแล้วหักล้าง · **ตัวเลขที่ถูกคือ 9 / 14 / 1 ไม่ใช่ 9 / 11 / 4**
+
+**ต้นเหตุที่ผมพลาด:** `src/pirateforce_foundation/runtime.py:697` เขียนว่า
+`class PersistentGameSessionState(legacy.GameSessionState):` — **runtime ของเรา subclass ตัว dispatcher ของ v141**
+⇒ **"ไม่มีโมดูลใน `src/` ที่ประกอบเฟรมพวกนั้น" ไม่ได้แปลว่า "เซิร์ฟเวอร์ของเราทำไม่ได้"**
+มันทำได้ผ่านทางที่สืบทอดมา และ **มันทำอยู่แล้วตอนบูตเปล่า ๆ ไม่ต้องมีธงสักตัว**
+
+**วัดจริง (บูตเดียว ไม่ใส่ธงอะไรเลย · login + StartGame จริง):**
+| ทริกเกอร์ | เฟรมที่ออกมาจริง |
+|---|---|
+| `TargetPos` | `V134_P0_P30_P91_ISOLATED_INITIAL_READY` · `..._REAPPLY_READY` |
+| `ChooseNPC P0` **(แถว 23)** | `V98_NPC_FACE_PLAYER_POSITION_HEADING_P0` · `V134_P0_Q3020_NPC_CONVERSATION_ONCE` |
+| `QuestOp1/Op2` **(แถว 24)** | `V134_BOUNDED_HYPOTHESIS_Q3020_OP1_TO_ACTION6_ONCE` · `V134_QUEST3020_P0_ACTION1_ACCEPT_SUCCESS_ONCE` |
+| ยืนยัน V136 **(แถว 13)** | `V137_ISOLATED_COMPOSITIONAL_MARKER1_TELEPORTVITAL_TRANSPORT_PROBE_ONCE` |
+
+กลไก: ไม่มี `population_scenario`/`scene_load_scenario` ⇒ `runtime.py:787-799` ไม่เคยบังคับ `npc_spawn_sent = True`
+⇒ ทางที่สืบทอดจาก v141 (`:4295-4310`) ติดตั้ง P0/P30/P91 ตอน TargetPos แรก แล้วปลดล็อกลูกโซ่ ChooseNPC → quest → V136 → V137
+· และ **เทสของ repo เองก็ยืนยันอยู่แล้ว**: `tests/test_teleport_transport_wire.py` + `tests/test_npc_interaction_wire.py`
+ขับ `make_state_class` จาก `src/` แล้ว assert เฟรมพวกนี้ — **30 passed** (รันซ้ำแล้วรอบ R160)
+
+**เหลือแถวเดียวที่ไม่มีทางไปถึงจริง:** `npc_locomotion_presentation` — และ tracker เขียนไว้เองว่า
+*"the Foundation population path never requests a movement speed … and a test pins that absence"*
+
+🔴 **ผลที่ตามมาและอันตรายกว่าตัวเลข:** §④ ของเอกสาร shortlist **ข้ามการตรวจความปลอดภัย P5 ของสี่แถวนี้ไป**
+เพราะเชื่อว่า "ไม่ได้ implement" ⇒ **มีสามเลนที่เปิดอยู่ทุกวันนี้โดยไม่มีใครเคยตรวจว่าปลอดภัยไหมที่จะเปิด**
 
 ⇒ 🔴 **ใครสร้าง shortlist บนสมมติฐาน "ทั้ง 24 อยู่หลังธง" จะ scope P4 ผิดทันที**
 รายละเอียดครบ + คะแนน P1–P5 รายแถว + shortlist + ราคาเป็นจำนวน PR: **`PROMOTION_SHORTLIST_R159_20260825.md`**
