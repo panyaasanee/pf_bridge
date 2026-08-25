@@ -1784,7 +1784,7 @@ verifier ของใบนี้ `pf_bridge\staged\re068_static_verify.py` sha 
 
 ---
 
-## 🆕🔬 RE-070 ORCHESTRATOR-TRANSITION-GATE-001 [STATIC-ON-BRIDGE]: **อะไรเป็นตัวเซ็ต MODE `[orch+0x28]`** ของ session/connection orchestrator (vtable `0xf45030`) — และ `[orch+0x24]` เป็น **ตัวตัดสิน** หรือแค่ **ตัวแสดงผล**  [🟢 **OPEN — เปิดโดย chief R166 · 2026-08-25 ~18:0x (+07:00)**]
+## 🆕🔬 RE-070 ORCHESTRATOR-TRANSITION-GATE-001 [STATIC-ON-BRIDGE]: **อะไรเป็นตัวเซ็ต MODE `[orch+0x28]`** ของ session/connection orchestrator (vtable `0xf45030`) — และ `[orch+0x24]` เป็น **ตัวตัดสิน** หรือแค่ **ตัวแสดงผล**  [✅ **DONE / PASS-MIXED — ปิดโดย chief R168 · 2026-08-25 ~20:0x (+07:00)** · ผลหน้าสะพาน 19:24 · เปิดโดย chief R166 · 2026-08-25 ~18:0x (+07:00) · ดู `### result — RE-070` ท้ายใบ]
 
 > 🔢 **หมายเหตุเลข (chief R166 · อ่านก่อนแก้เป็น 069):** ตัวนับเป็นชุดเดียวกับ `GAME_TEST_QUEUE.md` **ห้ามแยกตัวนับ**
 > `CLIENT_RE_QUEUE.md` ลำพังไม่มี `RE-069` **แต่ `GT-069` มีอยู่จริง** (`GAME_TEST_QUEUE.md` · GROUNDLOOT-NAMELABEL-TEXTPROP-SELECTOR-001)
@@ -1905,3 +1905,46 @@ corpus ถูกแช่แข็ง **2026-08-15/16** ⇒ **ก่อน** var
 ### สิ่งที่ใบนี้ *ไม่* ทำ
 ไม่เปิดเกม · ไม่จับ `LOCK_GAME` · ไม่แตะ canonical DB · **ไม่ออกแบบ variant D** (ปิด socket โดยไม่ ack / ack แล้วเงียบไม่ปิด) —
 variant D เป็น **nonclaim ของ GT-033 ไม่ใช่งาน** และการออกแบบมันก่อนรู้ผลใบนี้คือการเดา
+
+---
+
+### result — RE-070 (ผลหน้าสะพาน 2026-08-25T19:24:13+07:00 · บันทึกโดย chief R168 · 2026-08-25 ~20:0x (+07:00))
+
+**สถานะ: `DONE / PASS-MIXED`** — objective ทั้งสามข้อมีคำตอบแบบ static
+จดหมายฉบับเต็ม: `notes_to_chief\consumed\20260825_1924_RE-070-RESULT-PASS-MIXED.md`
+
+**① writer ของ `[object+0x28]` (MODE) — census recursive CFG ครบทั้ง 31 slots ของ vtable พบสี่จุดเท่านั้น:**
+`0x7197D0` (clear ใน UI-init · slot `+0x18` entry `0x719780`) · `0x7199EA` (คัดลอก `event_record+0x2C` · slot `+0x30` entry `0x719990`)
+คู่ของ `+0x24` อยู่ที่ `0x7197CD` (clear) และ `0x7199E4` (`event_record+0x30 -> object+0x24`)
+**ไม่มี writer จาก inbound handler หรือจาก tick ในกราฟที่วัด**
+
+**② `+0x28` ไม่ใช่เซตปิด `{1,4}`** — handler รับ dword ใด ๆ แล้วทำ `dec; cmp 3; ja default` + jump-table สำหรับค่าเดิม `1..4` · ค่านอกช่วงไป default ได้
+
+**③ `+0x24` เป็นทั้ง display และ gate (ไม่ใช่ display-only):** `delta = [object+0x24] - [app+0x7BC]` ·
+`0x719990` ใช้ delta ในแขนงแสดงผล (MODE 1/4) · `0x719620` เทียบ `delta` กับค่าคงที่ **`3`** และถ้า `delta <= 3` และ `[object+0x18] != NULL`
+จะเรียก virtual `[vtable+0xF4](false)` ของ sub-object · **writer/gate ไม่อ่าน `GetTickCount` / `timeGetTime` / QPC โดยตรง**
+
+🔴 **erratum ต่อฐาน R100 — สามข้อ ต้องพกไปทุกที่ที่อ้าง R100:**
+1. `0x719AB0` และ `0x719B90` **ไม่ใช่หัวฟังก์ชัน** — เป็น basic block ภายในฟังก์ชันเดียวที่เริ่ม `0x719990`
+   ขอบเขตจริง `[0x00719990,0x00719C11)` · offset `0x00318D90` · len `641` · instr `176` · CFG errors `0` · gap `19` · indirect `1`
+   · sha256 `a55288cb6a345d5c12d4d558dc7b13185f44bbc4cb6a2ac12188dbe1608e7576`
+2. vtable `0xF45030` resolve ชื่อจาก factory `0x721700` ได้ตรง ๆ เป็น UTF-16 **`SystemSetting_LogoutConfirm`**
+   ⇒ คำเรียก *session/connection orchestrator* ของ R100 **กว้างเกินหลักฐาน** · ของจริงคือ **UI logout-confirm handler ที่ถือ sub-object connection และมี transition logic**
+3. `[vtable+0xF4]` ที่ `0x719BD0/0x719BE7` เป็น slot ของ sub-object `[object+0x1C]/[object+0x18]` ตาม correction R166 **ไม่ใช่ slot ของ `0xF45030`**
+
+**MODE branch map (behavior ล้วน ไม่ตั้งชื่อ semantic):** `1` → res `0x2C4` + elapsed-display + `[+0x1C]` close=true ·
+`2` → res `0x59D` · `3` → res `0x59C` · `4` → res `0x59E` + elapsed-display + `[+0x1C]` close=true + `[+0x18]` close=false · อื่น ๆ → default `0x2C4`
+🔴 **ตารางนี้ไม่ใช่ mapping `1=exit` / `4=char-select`** — ใบนี้ไม่มีหลักฐานพอให้ตั้งชื่อสองค่านั้น **ห้ามเขียน**
+
+**T0/reproducibility:** image sha ก่อน/หลัง `9627211412ac60d5…` ตรง · 256-byte guards ผ่านทั้งห้า · positive control `0x446F30` ตรง GT-040 ·
+verifier `staged/re070_static_verify.py` **104/104 guards · failed 0** · วิธี negative ใช้ recursive CFG + 31-slot vtable walk ไม่ใช่ linear disassembler
+
+**nonclaims ที่ต้องพกต่อ (แปดข้อในจดหมาย · สามข้อที่สำคัญที่สุด):**
+① ไม่พิสูจน์ semantic ของ MODE ② writer census ครบภายใน factory + vtable graph แต่ **ไม่ exclude pointer alias จากโค้ดนอกกราฟทั้งโปรแกรม**
+③ **ไม่ตั้งชื่อ `+0x24` ว่า timestamp/deadline/wall clock** — พิสูจน์เฉพาะ copy · subtraction · display · threshold gate
+
+**🔴 rider — `ReturnSelectServerVital 0x709E` สองเฟรมขา W (chief ลงมือแล้วในรอบเดียวกัน):**
+`PF_FIELD_VALIDATION.tsv`: `W = observed 2 / parsed 2 / files 2 / VALIDATED` · `R = observed 0 / NOT_OBSERVED`
+⇒ **ไม่ขัด** กับ nonclaim ว่า client ยังไม่เคยรับ `0x709E` ขา R · **แต่หักล้าง**ถ้อยคำกว้างใน `logout_hypothesis.py` ที่ว่า *"0x709E has no client producer"*
+✅ **chief R168 แก้ถ้อยคำแล้วสามจุด** (`src/pirateforce_foundation/logout_hypothesis.py` ×2 + `tests/test_logout_return_select_hypothesis.py` ×1)
+พร้อมบล็อก erratum ที่พิน sha256 ของ capture ทั้งสองไฟล์ไว้ในซอร์ส · **ไบต์ของเลนไม่ขยับแม้ไบต์เดียว** (comment/docstring ล้วน)
