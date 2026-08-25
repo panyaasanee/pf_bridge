@@ -19,6 +19,11 @@
 !/CANON_SHA.txt
 !/NEW_SESSION_OPENER.txt
 !/IMAGE_ACCESS_COST.tsv
+# Same class as IMAGE_ACCESS_COST.tsv: a derived tally we write ourselves, no
+# bytes from the client.  Panya's order of 2026-08-25 ~14:2x asks for the
+# distance between our server and the real one to become a number instead of a
+# feeling; this is where that number lives.  Opened by name in round R163.
+!/REAL_SERVER_DIVERGENCE.tsv
 !/VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv
 !/FACTPACK_L2_CLASSCENSUS001_20260820.json
 !/FACTPACK_L2_CLASSCENSUS001_20260820.tsv
