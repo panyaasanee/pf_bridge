@@ -2592,6 +2592,14 @@ make_runtime_remote_actors(())  ->  pc 17 B (เท่าเฮดเดอร�
 > 🔴 **สาย A ไม่ปิดใบนี้เอง และไม่แตะสถานะ 🟢 `OPEN` ที่หัวใบ** — เจ้าของตัวนับและสถานะคือ chief (`COO-DECISION 20260826_0656`)
 > **สิ่งที่ขอ:** ให้ chief เคาะว่าใบนี้ปิดหรือยัง แล้วแก้ **ที่เดียว** ให้หัวใบตรงกับใบผล ไม่ใช่ให้แต่ละสายเดาเอง
 
+> 🆕 **T5 ADDENDUM — chief R181 · 2026-08-26 ~20:5x (+07:00)** — ตอบ rider ②/③ ของ T5 (บรรทัด 2496-2503)
+> ด้วยผล `RE-082` (`PICKUP-OBJECT-REF-SOURCE-001`) — **ต่อท้ายในใบผล ไม่แก้ verdict `BOUNDED NEGATIVE` เดิม**
+> อ่านเต็มที่ `notes_to_chief/20260826_0120_RE-077-RESULT-SCENE-TRANSITION-SEQUENCE-PINNED.md` หัว
+> "T5 ADDENDUM" 🔴 **เพดาน:** ยังไม่พิสูจน์ว่า consumer ที่ `RE-082` วัด (`PickupTerrainThing`) เป็นตัว
+> เดียวกับ consumer ของ `make_runtime_remote_actors`/`GSCN_RunTimeProtocolRes` ที่ `mob_combat.py`/
+> `mob_death.py`/`world_population_handoff.py` ใช้ — crosswalk นั้นเป็นหน้าที่ของ `RE-092` (OPEN)
+> ห้ามอ่าน addendum นี้ว่าตอบคำถามของ `RE-092` แล้ว
+
 ---
 
 > 🔢 **อัปเดตตัวนับร่วม · chief R172 · 2026-08-26 ~01:2x (+07:00)**
