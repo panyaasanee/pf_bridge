@@ -805,6 +805,15 @@ if ($runDb -and (Test-Path -LiteralPath $runDb)) {
 }
 
 # ---------- 7) canonical DB must be untouched (expected sha from CANON_SHA.txt) ----------
+# STRUCTURAL RULE (AGENTS.md, chief R175, 2026-08-26): this block cannot tell
+# "CANON_SHA.txt is missing because nothing ever needed it" apart from
+# "CANON_SHA.txt is missing because the job that owns it aborted before
+# finishing the write" - both read as RED here, on purpose (fail safe, do
+# not soften this check). The fix belongs to whichever job WRITES
+# CANON_SHA.txt / LOCK_GAME.txt / LOCK_GIT.txt / LOCK_RE_RUNNER.txt: wrap the
+# write in try/finally (or trap) and write atomically (temp file + move),
+# so a job that ABORTs never leaves this file half-written or missing and
+# never makes an unrelated later job fail here through no fault of its own.
 $canonMoved = $false
 $canon = Join-Path $main 'state\pirateforce.sqlite3'
 if (Test-Path -LiteralPath $canon) {

@@ -2283,7 +2283,15 @@ T7  0x472850 / 0x4765C0 (สองที่ที่ push L"_F_DIE_000") -> ท�
 
 ---
 
-## 🆕🔬 RE-075 RETURNSELECT-APPLY-0x5F1190-WHAT-DOES-IT-DO-001 [STATIC-ON-BRIDGE]: apply ของ `ReturnSelectServerVital 0x709E` ที่ VA `0x005F1190` **ทำอะไรจริง** เมื่อเฟรมมาถึง และทำอะไรเมื่อ live state ไม่ใช่ `cStateCreateActor`  [🟢 **OPEN — เปิดโดย chief R170 · 2026-08-25 ~22:2x (+07:00)** · ร่างใบโดย `pf-static-re`]
+## ✅ RE-075 RETURNSELECT-APPLY-0x5F1190-WHAT-DOES-IT-DO-001 [STATIC-ON-BRIDGE]: apply ของ `ReturnSelectServerVital 0x709E` ที่ VA `0x005F1190` **ทำอะไรจริง** เมื่อเฟรมมาถึง และทำอะไรเมื่อ live state ไม่ใช่ `cStateCreateActor`  [✅ **DONE / PASS — ปิดโดย chief R175 · 2026-08-26** (RE runner ส่งผล `2026-08-25T23:18:08+07:00` · เห็นด้วยแล้วโดย chief R172 0030 · เพิ่งอัปเดตหัวใบให้ตรงสถานะจริงในรอบนี้) · เปิดโดย chief R170 · 2026-08-25 ~22:2x (+07:00) · ร่างใบโดย `pf-static-re`]
+
+> ### ✅ RESULT (chief R175 บริโภคจดหมาย `20260825_2318_RE-075-RESULT-FALSE-BRANCH-NOOP-ZERO-FIELD-GATE.md`)
+> **คำตอบ objective:** `0x005F1190` อ่าน live state จาก `[0x1093198]+0x34C` แล้ว gate ด้วย `cStateCreateActor` (ผ่าน `0x4C0110` + `0x88F2B0` is-a predicate)
+> ถ้า live state เป็น null หรือไม่ใช่ `cStateCreateActor` → ตก **common return `0x005F11CB`** (`mov al,1; ret 4`) **ไม่เขียนค่า ไม่เรียก helper `0x004B2A50` ไม่ร้องขอ state transition** — ตรงกับสภาพจริงของ `GT-033` variant B/C (อยู่ในแมพ ไม่ใช่ char-select) พอดี ⇒ **อธิบายผลลบของ `GT-033` ได้โดยไม่ต้องเพิ่มสมมติฐานใหม่**
+> ถ้า gate แรกผ่าน (live state = `cStateCreateActor`) helper `0x004B2A50` ยัง **gate ซ้ำ** ว่า `vital+0x14 == 0x1E` — **composition ปัจจุบันของ `HYP-PF-028` ส่ง `+0x14 = 0`** (all-zero body ไม่มี producer) ⇒ **แม้ live state จะถูกก็ยังไม่ผ่านด่านสอง** T4 = bounded negative (ไม่พบ `CState::RequestNext` ในกราฟที่ไล่ได้ แต่มี indirect call/jump ที่ไล่ไม่ถึงเหลืออยู่ ห้ามอ่านเป็น "ไม่มีทางไปถึงเลย")
+> S0 ผ่านทุกด่าน (image sha ตรง pin ก่อน/หลัง · PE section table อ่านจากอิมเมจเอง · 256-byte block guard ตรง · positive control `TeleportVital apply 0x5F14B0` เจอ path ไป `0x4C7320` จริงที่ depth 0 — พิสูจน์ว่าเครื่องมือหาทางเจอเมื่อทางมีจริง) · verifier ใหม่ `staged/re075_static_verify.py` 58/58 guards
+> **ผลใหญ่ต่อ `HYP-PF-028`:** amend แล้วที่ `pirate-force-server/docs/HYPOTHESIS_LEDGER.json` (chief R175) — ดูรายละเอียดที่นั่น ห้าม duplicate เนื้อ evidence_gap มาไว้สองที่
+> nonclaims ครบ 9 ข้อของใบ RE runner ยังมีผลทั้งหมด (ไม่ตัดสิน 0x709E ถูก/ผิดในฐานะ trigger · ไม่อ้างอะไรเกี่ยวกับเซิร์ฟเวอร์ต้นฉบับ · T4 เป็น bounded negative เท่านั้น) — อ่านเต็มที่ `notes_to_chief/consumed/20260825_2318_RE-075-RESULT-FALSE-BRANCH-NOOP-ZERO-FIELD-GATE.md`
 
 > 🔢 **หมายเหตุเลข:** ตัวนับชุดเดียวกับ `GAME_TEST_QUEUE.md` **ห้ามแยกตัวนับ** · **073 ถูกจองโดย `RE-073`** (R169) และ **074 ถูกจองโดย `GT-074`** (ใบเก็บตกมุมกล้องของ `GT-072` · รอบเดียวกันนี้) ⇒ **ใบนี้คือ `RE-075`** · **เลขว่างถัดไป = 076**
 > 🔴 ร่างของลูกมือเขียนเลขเป็น `RE-074` เพราะ grep ตอนที่ `GT-074` ยังไม่ถูกวาง — **chief แก้เป็น `RE-075` ตอนวาง** ถ้าเจอ `RE-074` ที่ไหน นั่นคือใบนี้

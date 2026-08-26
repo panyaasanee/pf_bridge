@@ -355,6 +355,40 @@ if (Test-Path -LiteralPath $queueFile) { $beforeQueue = (Get-Item -LiteralPath $
 $beforeHead = (GitRun $BridgeRepo @('rev-parse', 'HEAD')).Out.Trim()
 
 # ---------------------------------------------------------------------------
+# [2c] bridge heartbeat (COO-DECISION OPS-002, 2026-08-26 05:52 +07:00)
+# ---------------------------------------------------------------------------
+# Chief runs on the cloud and cannot tell "the bridge is quiet because
+# nothing happened" apart from "the bridge is dead" by watching this repo
+# alone - that gap let a real 25-minute outage on 2026-08-25 go unnoticed
+# until someone happened to look.  This file is the fix: one ASCII line,
+# a +07:00 timestamp, refreshed here so it rides out inside the same
+# allowlist commit as everything else this round (notesDir is already in
+# $ALLOWLIST, so no allowlist change is needed).  Sync itself keeps waking
+# every 2 minutes as before; only the FILE write is throttled to once per
+# 15 minutes, so a healthy bridge does not flood history with empty-content
+# commits.  COO's read rule once this file exists: missing, or older than
+# 30 minutes, means the bridge is dead - say so immediately, do not wait for
+# the old 3-hour rule (that rule is what let the 25-minute outage hide).
+# Skipped under -SelfCheck / -DryRun on purpose: a check run must not create
+# a commit nothing else can reproduce.
+$heartbeatFile = Join-Path $notesDir '_BRIDGE_HEARTBEAT.txt'
+if (-not $SelfCheck -and -not $DryRun) {
+    $heartbeatStale = $true
+    if (Test-Path -LiteralPath $heartbeatFile) {
+        $hbAgeMin = (New-TimeSpan -Start (Get-Item -LiteralPath $heartbeatFile).LastWriteTime -End (Get-Date)).TotalMinutes
+        if ($hbAgeMin -lt 15) { $heartbeatStale = $false }
+    }
+    if ($heartbeatStale) {
+        $hbStamp = (Get-Date -Format 'yyyy-MM-ddTHH:mm:ss') + '+07:00'
+        $hbHead = $beforeHead.Substring(0, [Math]::Min(7, $beforeHead.Length))
+        WriteAsciiFile $heartbeatFile @($hbStamp + '  pf_git_sync woke and finished a round, HEAD ' + $hbHead)
+        Log '[2c]' ('heartbeat refreshed: ' + $hbStamp)
+    } else {
+        Log '[2c]' 'heartbeat still fresh (< 15 min), not rewriting'
+    }
+}
+
+# ---------------------------------------------------------------------------
 # candidate scan - shared by SelfCheck, DryRun and the real run
 # ---------------------------------------------------------------------------
 
