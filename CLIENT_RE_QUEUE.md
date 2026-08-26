@@ -2974,7 +2974,7 @@ field layout ของ `TeleportVital`+`ForcePos` ครบ (`CWarpResult`/`Tele
 
 ---
 
-## 🆕🔬 RE-093 BG0001-SERVICE-NPC-PLACEMENT-001 [STATIC-ON-BRIDGE]: **ถอดรหัส placement block ที่สองของ `bg0001.npc` (นอกเหนือจาก "Mob_Set" ที่ decode แล้ว) เพื่อหาพิกัดจริงของ service-NPC ที่ไม่อยู่ใน `bg0001.placements.tsv` — เริ่มจาก Hields (n_ID 159) / Sase (n_ID 796) เป็น positive control**  [🟢 **OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-26 ~20:4x (+07:00) ตามคำขอใน `notes_to_chief/20260826_1933_LANE-A-REQUEST-open-RE-ticket-bg0001-service-npc-identity.md`**]
+## 🆕🔬 RE-093 BG0001-SERVICE-NPC-PLACEMENT-001 [STATIC-ON-BRIDGE]: **ถอดรหัส placement block ที่สองของ `bg0001.npc` (นอกเหนือจาก "Mob_Set" ที่ decode แล้ว) เพื่อหาพิกัดจริงของ service-NPC ที่ไม่อยู่ใน `bg0001.placements.tsv` — เริ่มจาก Hields (n_ID 159) / Sase (n_ID 796) เป็น positive control**  [~~🟢 OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-26 ~20:4x (+07:00) ตามคำขอใน `notes_to_chief/20260826_1933_LANE-A-REQUEST-open-RE-ticket-bg0001-service-npc-identity.md`~~] [✅ **BOUNDED-NEGATIVE — ปิดแล้ว 2026-08-27 01:56 (+07:00) · ปิดหัวใบโดยสาย A รอบ `A_20260827_0228` (แก้ตาม pf-adversary รอบเดียวกัน ที่ชี้ว่าหัวใบยังค้าง OPEN ทั้งที่มีผลแล้ว) · ผล: `bg0001.npc` มี placement block เดียว 149 แถว reuse 113 definitions — สมมติฐาน "บล็อกที่สอง 36 แถว" ที่ใบนี้เปิดไว้ไม่จริง T1-T3 = N/A เพราะบล็อกนั้นไม่มี ไม่ใช่ตอบไม่ครบ · ยังไม่ให้ identity crosswalk ของ Hields/Sase/Columbus — ดู `notes_to_chief/20260827_0156_RE-093-RESULT-NO-SECOND-PLACEMENT-BLOCK.md` ฉบับเต็ม**]
 
 > 🔢 **หมายเหตุเลข:** ตัวนับเป็น**ชุดเดียวร่วมกับ** `GAME_TEST_QUEUE.md` — prefix สองแบบ ตัวนับเดียว · grep ยืนยันก่อนจอง: `GT-093`/`RE-093` = **0 hit ทั้งสองไฟล์** ⇒ **ใบนี้คือ `RE-093`** · **เลขว่างถัดไปหลังใบนี้ = 094**
 > 🔴 ใบ `RE-085`-`RE-092` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
@@ -3029,11 +3029,11 @@ placement ผิดตัว)
 เกี่ยวข้องกับ NPC ท่าเรือเลย (อาจเป็นชื่อ mob ทั่วไปที่ใช้ซ้ำ ไม่ใช่ NPC เดียวกับที่เจ้าของหมายถึง) และไม่ได้เปิดใบ
 ใหม่หรือขยับตัวนับเลข `RE-094`
 
-### result (ยังไม่มี — ใบเปิดอยู่)
+### result (ปิดแล้ว — ดู `notes_to_chief/20260827_0156_RE-093-RESULT-NO-SECOND-PLACEMENT-BLOCK.md` ฉบับเต็ม, สรุปในหัวใบด้านบน)
 
 ---
 
-## 🆕🔬 RE-094 NPCCONVERSATION-OP1-GENERIC-SEMANTICS-001 [STATIC-ON-BRIDGE]: **ถอดรหัส op1/op2 ของ `NPCConversation` เป็นกลไกทั่วไป แยกจาก quest-3020/actor-P0 singleton ที่มีอยู่แล้ว**  [🟢 **OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-26 ~22:1x (+07:00) ตาม `COO-DECISION 20260826_2046` ①**]
+## 🆕🔬 RE-094 NPCCONVERSATION-OP1-GENERIC-SEMANTICS-001 [STATIC-ON-BRIDGE]: **ถอดรหัส op1/op2 ของ `NPCConversation` เป็นกลไกทั่วไป แยกจาก quest-3020/actor-P0 singleton ที่มีอยู่แล้ว**  [~~🟢 OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-26 ~22:1x (+07:00) ตาม `COO-DECISION 20260826_2046` ①~~] [✅ **PASS/GENERIC-CONFIRMED — ปิดแล้ว 2026-08-27 01:56 (+07:00) · ปิดหัวใบโดยสาย A รอบ `A_20260827_0228` · ผล: `QuestOperateVital op1` เป็น generic dispatch จริง อ่าน quest id แบบไดนามิกจาก UI record ไม่ hardcode `3020` — แต่ยังไม่ให้ quest id จริงของ Columbus (ดู `RE-095` ต่อยอด) — ดู `notes_to_chief/20260827_0156_RE-094-RESULT-OP1-USES-DYNAMIC-QUEST-ID.md` ฉบับเต็ม**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-094`/`RE-094` = **0 hit ทั้งสองไฟล์** (เฉพาะ exact token
 > ไม่นับเลขวันที่/timestamp ที่บังเอิญมี `094` อยู่ในตัว) ⇒ **ใบนี้คือ `RE-094`** · เลขว่างถัดไปหลังใบนี้ = 095
@@ -3092,5 +3092,99 @@ negative แล้วปิด ไม่เดาต่อ · ไม่เปิ
 ### เกณฑ์จบใบ
 ตอบ T0/T1 ด้วยหลักฐาน (dispatch table หรือ bounded negative ว่าผูกกับ `V129_QUEST_ID` แน่นอน) ⇒ ปิดใบ
 พร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
+
+### result (ปิดแล้ว — ดู `notes_to_chief/20260827_0156_RE-094-RESULT-OP1-USES-DYNAMIC-QUEST-ID.md` ฉบับเต็ม, สรุปในหัวใบด้านบน)
+
+---
+
+## 🆕🔬 RE-095 NPCCONVERSATION-COLUMBUS-QUESTID-CROSSWALK-001 [STATIC-ON-BRIDGE]: **หา quest id / nested descriptor (u16 `+0x10`, u8 `+0x12`) ที่ NPC Columbus ใช้จริงใน `NPCConversation`, แยกจาก quest `3020` (actor `0x2001`/P0 singleton) ที่เซิร์ฟเวอร์ hardcode อยู่ตอนนี้**  [🟢 **OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-27 ~02:2x (+07:00) ต่อยอดจากผล `RE-094`**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-095`/`RE-095` = **0 hit ทั้งสองไฟล์** ⇒ **ใบนี้คือ `RE-095`** · เลขว่างถัดไปหลังใบนี้ = 096
+> 🔴 ใบ `RE-085`-`RE-094` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`RE-094` result (`notes_to_chief/20260827_0156_RE-094-RESULT-OP1-USES-DYNAMIC-QUEST-ID.md`) พิสูจน์ว่า
+`QuestOperateVital op=1` เป็น generic dispatch — client อ่าน quest id แบบไดนามิกจาก UI record `+0x94` ไม่ได้
+hardcode `3020` ในไบนารี และ `NPCConversation` เขียน actor qword ที่ `+0x18` กับ nested descriptor ที่มี quest
+id u16 ที่ `+0x10` และ u8 ที่ `+0x12` แต่ RESULT เขียนตรงๆ ใน nonclaims ว่า **"ไม่ได้พิสูจน์ quest id ของ Columbus
+หรือ descriptor byte `+0x12`"** — เซิร์ฟเวอร์ปัจจุบัน (`current/pf_login_game_server_v141.py:768-798`) สร้าง
+descriptor เฉพาะ `qid=3020` บังคับ actor `0x2001` (=P0) เท่านั้น ไม่มีพารามิเตอร์ให้สลับเป็น Columbus
+
+RESULT เดียวกันยังพบว่า `QUESTDATA_TH__QUEST.tsv` มี quest `3020` (`Q_TELEPORT_WITH_VEHICLE1`) และ "quest
+vehicle อื่น `3301..3303` พร้อม quest text ต่างกัน" — นี่เป็น candidate ที่ยังไม่ตรวจ ไม่ใช่คำตอบ
+
+### objective (claim เดียว)
+ระบุว่า NPC Columbus (ตัวจริงตามคำอธิบายเจ้าของ "จุดเดียวที่ท่าเรือ", ดู `RE-093` rider สำหรับสถานะที่ยังไม่พบ
+placement ของ Columbus ใน block เดียวของ `bg0001`) ใน `NPCConversation` ของไคลเอนต์ใช้ quest id ใด (จาก
+`{3020, 3301, 3302, 3303}` หรือค่าอื่น) ที่ descriptor `+0x10`/`+0x12` ต้องใส่ เพื่อให้ op1 ที่เซิร์ฟเวอร์ตอบกลับ
+นำไปสู่ลำดับที่ตรงกับคำอธิบายเจ้าของ (`notes_to_chief/20260826_1600_PANYA-DECISION-*.md`: เรือ → เทียบท่า →
+หน้าต่างรายงานกัปตัน)
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยันว่า `QUESTDATA_TH__QUEST.tsv` แถว `3301`-`3303` มี field ที่ระบุ NPC ผู้มอบเควสต์/
+  บทสนทนา (giver NPC id หรือ dialogue key) ให้เทียบกับ Columbus
+- **T1** — ถ้ามี giver NPC field: เทียบกับ template/actor id ของ Columbus ตรงกันหรือไม่ (ขอบเขต placement
+  ของ `bg0001` = block เดียว 149 placements ตาม `RE-093` result — ห้ามสมมติ block ที่สอง)
+- **T2** — ถ้าไม่มี giver field ใน gamedata: ค้น call sites ของ `NPCConversation` constructor/serializer
+  (`0x622A00`/`0x622F10`) ในไคลเอนต์ ว่ามี lookup ตัวไหนผูก actor Columbus กับ quest id ที่ไม่ใช่ `3020`
+  หรือไม่ (bounded — ไม่ต้อง exhaustive ทั้งไบนารี)
+- **T3 · ริเดอร์** — ถ้าเวลาเหลือ: server reply sequence ที่ op1 คาดหวังสำหรับ quest ที่ไม่ใช่ `3020` (action6
+  เดิม หรือ opcode อื่น) ระบุแค่ระดับ field ไม่ต้อง implement
+
+### nonclaims
+① ไม่อ้างว่า `3301`-`3303` คือคำตอบแน่นอน — เป็นแค่ candidate ที่ `RE-094` result ทิ้งไว้ ② ไม่ตัดสินว่า
+`src/pirateforce_foundation/` ต้องเปลี่ยนโครงสร้างอย่างไร — สาย A ตัดสินใจเองเมื่อได้ข้อมูล ③ ไม่ปิดคำสั่ง
+`COO-DECISION 1645` ข้อ 3 เอง — ใบนี้ตอบแค่ชั้น wire/data ไม่ใช่ทั้งเส้นทาง M2 ④ ถ้าเพดาน static ชนก่อนตอบได้
+ให้เขียน bounded negative ตามกฎ ไม่เดาต่อ
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์ gamedata อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative
+แล้วปิด ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ตอบ T0/T1 ด้วยหลักฐาน (quest id ที่ผูกกับ Columbus จริง) **หรือ** bounded negative ว่า gamedata/ไคลเอนต์ไม่มี
+crosswalk นี้ ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-096 VEHICLE-ROW-SEASCENE-CROSSWALK-001 [STATIC-ON-BRIDGE]: **หา `VEHICLE` table row + ความหมายของ `CVehicleVital.+0x18` qword ที่ผูกกับกลุ่มฉากทะเล (`Bg1001`-`Bg1007`, `SCENE_TYPE=4`)**  [🟢 **OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-27 ~02:2x (+07:00) ต่อยอดจากผล `RE-085`**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-096`/`RE-096` = **0 hit ทั้งสองไฟล์** ⇒ **ใบนี้คือ `RE-096`** · เลขว่างถัดไปหลังใบนี้ = 097
+> 🔴 ใบ `RE-085`-`RE-095` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`RE-085` result (`notes_to_chief/20260827_0156_RE-085-RESULT-SAME-ACTOR-VEHICLE-MODULE.md`) พิสูจน์ actor-local
+vehicle binding (`CGCVehicleModule` ผูก actor เดิมกับ `CVehicleAttr` ที่มีอยู่แล้ว ไม่สร้าง actor เรือแยก) แต่
+nonclaims เขียนตรงๆ ว่า **"ไม่ได้พิสูจน์ ship model/vehicle row ที่ใช้จริง"** และ `BUILD_IMPACT` บอกว่า "ต้องหา
+crosswalk จริงจาก sea-scene/quest response ไป vehicle row และความหมาย `CVehicleVital.+0x18`" — ตาราง
+`VEHICLE` มี 79 rows แยกต่างหากจากตาราง `SCENE_NAME` (rows 17-23 = sea family, `n_SCENE_TYPE=4`,
+`n_CANRIDE=0`) ไม่มี crosswalk field ที่ผูกสองตารางนี้เข้าด้วยกันที่ `RE-085` เจอ
+
+### objective (claim เดียว)
+ระบุ `VEHICLE` table row (จาก 79 rows) ที่ตรงกับ "เรือ" ที่ผู้เล่นควรได้ใน sea scene family (`Bg1001`-`Bg1007`)
+และความหมายจริงของ qword ที่ `CVehicleVital.+0x18` (vehicle catalog id? model id? หรืออื่น)
+
+### จ็อบ
+- **T0** — กรอง `VEHICLE` table 79 rows หา row ที่ประเภท/ชื่อตรงกับ "เรือเดินทะเล" (ไม่ใช่ม้า/พาหนะบก) เทียบ
+  column ที่มีอยู่ (model, ประเภท, ความเร็ว ฯลฯ)
+- **T1** — ถอด write site ของ `CVehicleVital` handler (`0x00710440`) ว่าค่า `+0x18` ถูกใช้ทำอะไรต่อ (lookup
+  table ไหน, index เข้าโมเดล/แอนิเมชันอะไร) เพื่อยืนยันว่าเป็น vehicle row id จริงหรือความหมายอื่น
+- **T2 · ริเดอร์** — ถ้าเวลาเหลือ: ตรวจซ้ำว่า `SCENE_NAME` rows 17-23 มี column ใดอ้างถึง `VEHICLE` row
+  โดยตรงหรือไม่ (เน้น column ที่ `RE-085` ยังไม่ได้ dump ทั้งหมด)
+
+### nonclaims
+① ไม่อ้างว่าเรือต้องเป็น row เดียวตายตัว — อาจมีมากกว่าหนึ่ง row ที่ใช้ได้ (เช่นตามแฟกชัน/ระดับผู้เล่น) ② ไม่
+ตัดสินโครงสร้าง `src/pirateforce_foundation/` เอง ③ ถ้าเพดาน static ชนก่อนตอบได้ ให้เขียน bounded negative
+ตามกฎ ไม่เดาต่อ
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์ gamedata อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative
+แล้วปิด ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ตอบ T0/T1 ด้วยหลักฐาน (vehicle row + ความหมาย `+0x18`) **หรือ** bounded negative ว่า gamedata/ไคลเอนต์ไม่มี
+crosswalk นี้ ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
 
 ### result (ยังไม่มี — ใบเปิดอยู่)
