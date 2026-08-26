@@ -3188,3 +3188,51 @@ crosswalk จริงจาก sea-scene/quest response ไป vehicle row แ�
 crosswalk นี้ ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
 
 ### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-097 COLUMBUS-BG0001-PLACEMENT-IDENTITY-001 [STATIC-ON-BRIDGE]: **หา placement/actor identity ของ Columbus (`MOBS.n_ID=36`) ใน 149 placements ของ `bg0001.npc`, แยกจากการตัดสมมติฐานที่ `RE-093` ทำไปแล้ว**  [🟢 **OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-27 ~03:3x (+07:00) ต่อยอดจากผล `RE-095`**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-097`/`RE-097` = **0 hit ทั้งสองไฟล์** ⇒ **ใบนี้คือ `RE-097`** · เลขว่างถัดไปหลังใบนี้ = 098
+> 🔴 ใบ `RE-085`-`RE-096` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`RE-095` result (`notes_to_chief/20260827_0310_RE-095-RESULT-COLUMBUS-QUEST-3023.md`) พิสูจน์ crosswalk เควสต์
+ของ Columbus แล้ว (`MOBS.n_ID=36` ใช้ quest `3023`, `Q_TELEPORT1`, ปลายทาง scene 19/`Bg1003`) แต่ nonclaims ของ
+ใบนั้นเขียนตรงๆ ว่า **"ยังไม่พิสูจน์ว่า Columbus ใน `bg0001` placement block คือ template/actor identity ใด"**
+`RE-093` (ปิดแล้ว, `notes_to_chief/20260827_0156_RE-093-RESULT-NO-SECOND-PLACEMENT-BLOCK.md`) ตอบเป็น bounded
+negative เท่านั้น: bg0001.npc มี placement block เดียว 149 แถว reuse 113 definitions ไม่ใช่ "113 + บล็อกที่สอง 36
+แถว" ตามสมมติฐานที่ใบนั้นเปิดไว้แต่แรก — คือตัดสมมติฐานหนึ่งทิ้ง **ไม่ได้ให้ identity บวก** ว่าแถวไหนใน 149 แถวคือ
+Columbus จริง ใบนี้เปิดต่อยอดเพื่อขอ identity บวกที่ยังไม่มีใครถาม
+
+### objective (claim เดียว)
+ระบุว่า placement/definition แถวใดใน 113 definitions ที่ 149 placements ของ `bg0001.npc` อ้างอิง (หรือ actor
+identity คู่กัน ถ้ามี) คือ NPC Columbus — โดยใช้ crosswalk field จริงหรือ client-observable evidence เท่านั้น
+ห้ามใช้เลขลำดับ (ordinal arithmetic) เป็นหลักฐานเพียงอย่างเดียว ตามที่ `RE-093` result เตือนไว้ตรงๆ
+
+### จ็อบ
+- **T0 · ด่านคุม** — สำรวจว่า `bg0001.npc`/`bg0001.placements.tsv` (หรือไฟล์ decode คู่กัน) มีคอลัมน์ที่อ้างอิง
+  `MOBS.n_ID` โดยตรงหรือไม่ (เช่น template id, mob id, หรือชื่อที่ match `s_ID_MODEL_CLASS=M055` ของ Columbus)
+- **T1** — ถ้ามีคอลัมน์อ้างอิงตรง: จับคู่แถวที่ `n_ID_MODEL`/template ตรงกับ Columbus (`MOBS 36`) แล้วรายงานตำแหน่ง
+  (index, x/y/z) ของ placement นั้นในบล็อกเดียว 149 แถว
+- **T2** — ถ้าไม่มีคอลัมน์อ้างอิงตรง: ค้นว่ามี metadata อื่นในไฟล์ decode (ชื่อ spawn set, comment, หรือ field ที่ยัง
+  ไม่ได้อ่าน) ที่ระบุตัวตนได้ โดยไม่ใช้เลขลำดับเปล่าๆ เป็นเกณฑ์ตัดสิน
+- **T3 · ริเดอร์** — ถ้าเวลาเหลือ: ทำซ้ำ T0-T2 สำหรับ NPC อื่นที่ `GT-078` ต้องการระบุตัวตนด้วย (เช่น Hields
+  n_ID=159, Sase n_ID=796 ถ้ามีอยู่ใน `MOBS`) เพื่อให้ `world_population.py` มีข้อมูลตั้งชื่อเพิ่มโดยไม่ต้องเปิดใบใหม่ทีละตัว
+
+### nonclaims
+① ไม่อ้างว่า placement ต้องมีอยู่แน่นอน — ถ้า gamedata/ไฟล์ decode ไม่มี field ที่ผูก placement กับ MOBS id
+โดยตรงเลย ให้เขียน bounded negative ว่า "ไม่มี crosswalk field ในข้อมูลชุดนี้" แล้วปิดใบ ไม่เดาต่อด้วยเลขลำดับ
+② ไม่ตัดสินโครงสร้าง `src/pirateforce_foundation/` เอง ③ ไม่ปิดคำถามว่า `world_population.py` ควรแก้อย่างไร —
+สาย A ตัดสินใจเองเมื่อได้ข้อมูล (และตามที่ `A_20260827_0335` รายงานไว้ อาจมีเงื่อนไขเพิ่มเติมจากขอบเขตของ
+`test_npc_interaction_wire.py` ที่สาย A พบระหว่างรอบนี้ ซึ่งเป็นคำถามคนละชั้นจากใบนี้)
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์ scene/gamedata อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded
+negative แล้วปิด ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ตอบ T0/T1 ด้วยหลักฐาน (placement/actor identity ของ Columbus) **หรือ** bounded negative ว่าไม่มี crosswalk
+field ในข้อมูลชุดนี้ ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
