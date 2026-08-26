@@ -6,7 +6,7 @@
 - ใบ: `RE-082 PICKUP-OBJECT-REF-SOURCE-001`
 - หมวด: `STATIC-ON-BRIDGE` ล้วน · ไม่เปิดเกม/เซิร์ฟเวอร์ · ไม่จับ `LOCK_GAME` · ไม่แตะ canonical DB
 - image: `GameClient\GameClient.local.bin`, ImageBase `0x00400000`, size `14,759,424`, sha256 `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
-- verifier: `pf_bridge\staged\re082_static_verify.py`, sha256 `9132e5defe911600880d3e6d5071983f79f6a2627e3673f356c1627b404e3a33` · final exit 0 สองรอบ · 10 recursive-CFG spans, gap 0 / decode errors 0 ทุก span
+- verifier: `pf_bridge\staged\re082_static_verify.py`, sha256 `b72e39aa29906f23bcd33a02298ef0e9a67730a4a33a3c27399b3756ca6d70ab` · final exit 0 สองรอบ · 10 recursive-CFG spans, gap 0 / decode errors 0 ทุก span
 
 ## คำตอบ objective ประโยคเดียว
 
@@ -89,7 +89,7 @@ PICKUP_PRODUCER  [0x006B03F0,0x006B069B) off 0x002AF7F0 len  683 sha a393f3d41b7
 - gamedata index `a9ab5efd...0b5bc`; gamedata columns `6f1a00dc...94d89`
 - GT-046 letter `f8221b8d...6247`; RE-066 letter `f12dbce2...ee4fb`; RE-066 verifier `676c5837...1308`
 
-ค่าทั้งหมดที่พึ่งตรงก่อน–หลัง. ระหว่างเริ่มรอบ sync เพิ่ม RE-082 ทำให้ snapshot queue แรกถูกทิ้ง แล้วอ่าน queue ใหม่ทั้งไฟล์ก่อนเลือกใบ; หลังเลือกใบไม่มี input/source mutation จาก runner. Verifier อ่าน image อย่างเดียว.
+image/external/gamedata/จดหมายอ้างอิงทั้งหมดที่พึ่งตรงก่อน–หลัง. ระหว่างเริ่มรอบ sync เพิ่ม RE-082 ทำให้ snapshot queue แรกถูกทิ้ง แล้วอ่าน queue ใหม่ทั้งไฟล์ก่อนเลือกใบ. หลังเขียนผลมี sync อิสระอีกครั้งเวลา `10:18`: queue `b57fd56b...0002c -> a8a44640...35be`, `NEW_ORDERS d216cfbb...39f7 -> d311e10f...73c3`; อ่าน queue/RE-082 ใหม่แล้ว objective/จ็อบ/nonclaims ของใบไม่เปลี่ยน และ NEW_ORDERS ระบุว่าไม่มีจดหมายใหม่. การเปลี่ยนนี้ไม่ใช่ของ runner; verifier อ่าน image อย่างเดียว.
 
 ## Nonclaims บังคับ
 
@@ -104,4 +104,4 @@ PICKUP_PRODUCER  [0x006B03F0,0x006B069B) off 0x002AF7F0 len  683 sha a393f3d41b7
 
 ## สรุปส่ง chief
 
-`RE-082 PASS/DONE — OBJECT-REF-IS-ELEMENT-KEY · T0/T1/T3/T4 ปิด · T2 N/A · integrity identical · static-only.`
+`RE-082 PASS/DONE — OBJECT-REF-IS-ELEMENT-KEY · T0/T1/T3/T4 ปิด · T2 N/A · integrity identical except documented concurrent queue sync · static-only.`
