@@ -51,3 +51,17 @@
 5. **LOW (ยืนยันจริง)** — header comment ของไฟล์ capture ใส่ `account_name` ดิบไม่ผ่านการกรอง ⇒ ชื่อบัญชีที่มี `\n` ปลอมบรรทัด header เพิ่มได้ (เช่นปลอมบรรทัด `account=` อีกอัน) แก้ด้วย `str.encode("unicode_escape")` ก่อนเขียนลง header (ไบต์จริงยังอ่านได้ครบจาก hex dump ด้านล่างเหมือนเดิม) + เทสคุม (`test_account_name_cannot_forge_extra_header_lines`)
 
 เทสรวมสุดท้าย: 59 · สวีตเต็ม 3273 เทส 18 error เดิมเท่าเดิม ไม่มี regression ใหม่ — เขียว(cloud sanity)
+
+## ปิดรอบ — gate แดงจริงหนึ่งรอบ (ไม่ใช่ของ `pf-adversary`), แก้แล้ว, merge สำเร็จ
+
+หลังปิด draft และแก้หัวข้อ PR (ขั้นตอนปกติ) ต่อสาย `wake gate` commit ตามกฎ — **`gate-windows` แดงจริง** (run `32960112999`, job `gate`, ตรวจแล้วว่าไม่ใช่ flake):
+`pytest_subset` ล้มตั้งแต่ collection เพราะ `gm/scene_catalog.py` เช็ค sha256 ของ `gm/data/gm_scene_name_tip.tsv` ไม่ผ่าน — ไฟล์ commit ด้วย LF แต่ runner Windows เช็คเอาต์เป็น CRLF (`.gitattributes` ไม่มีกฎ `*.tsv` เลย ทั้งที่มีกฎ `text eol=lf` ให้ `.py`/`.md`/`.json`/`.sql` อยู่แล้วด้วยเหตุผลเดียวกัน) `skip_census` แดงตามเป็นผลพวง (pytest collection ล้มก่อนถึงโมดูลอื่น)
+
+แก้ด้วยการเพิ่ม `*.tsv text eol=lf` ใน `.gitattributes` (บรรทัดเดียว เนื้อไฟล์ไม่เปลี่ยน sha256 เดิม) — **นี่คือไฟล์นอกเขตเขียนที่ประกาศไว้ของสายนี้** (`.gitattributes` ไม่อยู่ใน `src/pirateforce_foundation/gm/`/`scenarios/gm_*.json`/`tests/test_gm_*.py`/`docs/GM_LANE.md`) แต่แก้เพราะเป็นบั๊กที่ไฟล์ของสายนี้เองสร้างขึ้น เป็นบรรทัดเดียวไม่กระทบใคร และ CI แดงเป็นงานตอนนี้เสมอตามกฎ — แจ้งไว้ตรงนี้เพื่อความโปร่งใส
+
+ระหว่างนั้น PR ถูก `merge-claude-pr.yml` ปิดอัตโนมัติ (ตามกฎ "gate แดง = ปิด PR กันล็อกค้าง" — branch ไม่หาย) เปิด PR เดิม (`#66`) กลับด้วย API (ไม่ใช่ PR ใหม่ ไม่เสียเลขคอมเมนต์เดิม) หลัง push ตัวแก้ — gate รอบใหม่ (commit `e9cc3a8`) เขียวหมด **PR #66 merge สำเร็จโดย `merge-claude-pr.yml`** เวลา `10:56:37Z` · pf_bridge PR #123 merge ไปแล้วก่อนหน้า (`10:49:24Z`)
+
+**ทั้งสอง repo อยู่บน `main` แล้ว ณ จบรอบ — ไม่มีอะไรค้างบน branch ที่ยังไม่ merge**
+
+## บทเรียนสำหรับรอบถัดไปของสายนี้ (หรือสายอื่นที่จะ commit ไฟล์ข้อมูลใหม่)
+ไฟล์ข้อมูลที่ pin sha256 (แบบ `gm/data/*.tsv`) ต้องเช็ค `.gitattributes` ให้มีกฎ `eol=lf` **ก่อน** commit เสมอ ไม่ใช่หลัง gate แดง — `main` merge ไปแล้วก่อนจะทันเพิ่มเช็คลิสต์นี้ลง `docs/GM_LANE.md` เอง รอบถัดไปของสาย GM ที่จะเพิ่มตารางจาก gamedata อีก (เช่น `CONSTDATA_TH__MOBS`/`QUESTDATA_TH__QUEST` สำหรับ `npc on|off`) ควรเปิด `docs/GM_LANE.md` เพิ่มหัวข้อนี้เป็นข้อแรกก่อนสร้างไฟล์ข้อมูลใหม่
