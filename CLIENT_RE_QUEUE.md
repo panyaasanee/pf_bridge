@@ -2666,7 +2666,9 @@ make_runtime_remote_actors(())  ->  pc 17 B (เท่าเฮดเดอร�
 
 ---
 
-## 🆕🔬 RE-083 PROJECTED-ACTOR-WALKS-OR-JUMPS-001 [STATIC-ON-BRIDGE]: **ส่ง actor body ของ NPC ที่ project ไว้ซ้ำด้วย "พิกัดใหม่" — ไคลเอนต์ทำให้มัน *เดิน* ไปหรือ *กระตุก* ไป**  [✅ **PASS/DONE — (ข) สำหรับ existing `actor_type 2`/`CNetActor`: body ใหม่คัดลอกไป mirror `actor+0x100`, gate ด้วย `actor+0x70 bit2` ข้ามทาง seed แล้วสร้าง `CActorTask_ActorMove` ที่มี destination แยกที่ `task+0x40`, updater ขับ movement controller จริง (ไม่ใช่ snap-only) · `BasicAttr` gait `+0x54` bounded negative เฉพาะ `actor_type 2` (ไม่พบใน task chain ที่ถอดครบ, ยัง exclude ทั่วอิมเมจไม่ได้) · BUILD_IMPACT: ส่งมอนสเตอร์ aggro เดินเข้าหา/กลับ leash ผ่าน `actor_type 2` ได้ในบิลด์ถัดไป · ปิดโดย chief รอบ `h53n8f` 2026-08-27 จากผล RE runner local `notes_to_chief/20260826_1123_RE-083-RESULT-EXISTING-CNETACTOR-USES-ACTORMOVE.md`**]
+## 🆕🔬 RE-083 PROJECTED-ACTOR-WALKS-OR-JUMPS-001 [STATIC-ON-BRIDGE]: **ส่ง actor body ของ NPC ที่ project ไว้ซ้ำด้วย "พิกัดใหม่" — ไคลเอนต์ทำให้มัน *เดิน* ไปหรือ *กระตุก* ไป**  [✅ **PASS/DONE — (ข) สำหรับ existing `actor_type 2`/`CNetActor`: body ใหม่คัดลอกไป mirror `actor+0x100`, gate ด้วย `actor+0x70 bit2` ข้ามทาง seed แล้วสร้าง `CActorTask_ActorMove` ที่มี destination แยกที่ `task+0x40`, updater ขับ movement controller จริง (ไม่ใช่ snap-only) · `BasicAttr` gait `+0x54` bounded negative เฉพาะ `actor_type 2` (ไม่พบใน task chain ที่ถอดครบ, ยัง exclude ทั่วอิมเมจไม่ได้) · BUILD_IMPACT: **สาม**มอนสเตอร์ (`3/13` ใน `bg0001` ที่ใช้ `AI_WANDER` row `11` offensive — ไม่ใช่ทั้งสนาม) จะเดิน
+เข้าหา/กลับ leash ได้ผ่าน `actor_type 2` **หลังมี encoder + attended verification** (ยังไม่ใช่แค่ "บิลด์ถัดไป"
+เฉย ๆ) · ปิดโดย chief รอบ `h53n8f` 2026-08-27 จากผล RE runner local `notes_to_chief/20260826_1123_RE-083-RESULT-EXISTING-CNETACTOR-USES-ACTORMOVE.md`**]
 
 > 🔢 **หมายเหตุเลข:** ตัวนับชุดเดียวกับ `GAME_TEST_QUEUE.md` **ห้ามแยกตัวนับ** · grep ก่อนจอง: **`GT-083` = 0 hit · `RE-083` = 0 hit ทั้งสองไฟล์** · เลขสูงสุดที่ใช้ไปคือ `RE-082` (ใบก่อนหน้าในไฟล์นี้) และ `GT-081` (`GAME_TEST_QUEUE.md`) ⇒ **ใบนี้คือ `RE-083`** · **เลขว่างถัดไป = 084**
 
