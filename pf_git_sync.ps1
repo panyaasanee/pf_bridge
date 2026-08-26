@@ -361,7 +361,11 @@ $beforeHead = (GitRun $BridgeRepo @('rev-parse', 'HEAD')).Out.Trim()
 # nothing happened" apart from "the bridge is dead" by watching this repo
 # alone - that gap let a real 25-minute outage on 2026-08-25 go unnoticed
 # until someone happened to look.  This file is the fix: one ASCII line,
-# a +07:00 timestamp, refreshed here so it rides out inside the same
+# an ISO-8601 timestamp with the machine's REAL offset (zzz format
+# specifier, not a hardcoded +07:00 - this machine is expected to sit in
+# Thailand, but hardcoding the string would silently mislabel every
+# heartbeat if that ever stops being true, with no visible symptom),
+# refreshed here so it rides out inside the same
 # allowlist commit as everything else this round (notesDir is already in
 # $ALLOWLIST, so no allowlist change is needed).  Sync itself keeps waking
 # every 2 minutes as before; only the FILE write is throttled to once per
@@ -370,7 +374,12 @@ $beforeHead = (GitRun $BridgeRepo @('rev-parse', 'HEAD')).Out.Trim()
 # 30 minutes, means the bridge is dead - say so immediately, do not wait for
 # the old 3-hour rule (that rule is what let the 25-minute outage hide).
 # Skipped under -SelfCheck / -DryRun on purpose: a check run must not create
-# a commit nothing else can reproduce.
+# a commit nothing else can reproduce.  Written with the plain WriteAsciiFile
+# helper below, NOT the try/finally + atomic-write pattern the AGENTS.md
+# ABORT rule (chief R175) requires for CANON_SHA.txt/LOCK_*.txt: this file is
+# an observability signal only, nothing reads it to decide whether to boot,
+# so a torn write here cannot cascade into another job's teardown failing -
+# the exact harm that rule exists to prevent.
 $heartbeatFile = Join-Path $notesDir '_BRIDGE_HEARTBEAT.txt'
 if (-not $SelfCheck -and -not $DryRun) {
     $heartbeatStale = $true
@@ -379,7 +388,7 @@ if (-not $SelfCheck -and -not $DryRun) {
         if ($hbAgeMin -lt 15) { $heartbeatStale = $false }
     }
     if ($heartbeatStale) {
-        $hbStamp = (Get-Date -Format 'yyyy-MM-ddTHH:mm:ss') + '+07:00'
+        $hbStamp = Get-Date -Format 'yyyy-MM-ddTHH:mm:sszzz'
         $hbHead = $beforeHead.Substring(0, [Math]::Min(7, $beforeHead.Length))
         WriteAsciiFile $heartbeatFile @($hbStamp + '  pf_git_sync woke and finished a round, HEAD ' + $hbHead)
         Log '[2c]' ('heartbeat refreshed: ' + $hbStamp)
