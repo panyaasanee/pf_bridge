@@ -2943,7 +2943,7 @@ field layout ของ `TeleportVital`+`ForcePos` ครบ (`CWarpResult`/`Tele
 
 ---
 
-## 🆕🔬 RE-092 REMOTE-ACTOR-LIST-CONSUMER-REPLACE-OR-MERGE-001 [STATIC-ON-BRIDGE]: **ไคลเอนต์อ่านคอลเลกชัน `make_runtime_remote_actors([entry])` (nonempty, one-entry) อย่างไร — แทนที่นักแสดงอื่นทั้งหมดในต้นไม้เดียวกัน (replace-by-omission) หรือรวมเข้ากับที่มีอยู่ (merge)**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-r6hhp6`/`optimistic-mccarthy-r6hhp6` · R179 · 2026-08-26 ~18:1x (+07:00) ตามคำขอ `LANE-B-URGENT` (`notes_to_chief/20260826_1746_LANE-B-URGENT-*.md`, pirate-force-server `#67`)**]
+## 🆕🔬 RE-092 REMOTE-ACTOR-LIST-CONSUMER-REPLACE-OR-MERGE-001 [STATIC-ON-BRIDGE]: **ไคลเอนต์อ่านคอลเลกชัน `make_runtime_remote_actors([entry])` (nonempty, one-entry) อย่างไร — แทนที่นักแสดงอื่นทั้งหมดในต้นไม้เดียวกัน (replace-by-omission) หรือรวมเข้ากับที่มีอยู่ (merge)**  [✅ **PASS/DONE — (ก) REPLACE-BY-OMISSION · NETWORK-ACTOR-REGISTRY-SCOPE · OBJECTIVE MASK CORRECTED 0x08→0x02 (ใบเรียกคอลเลกชันเดิมพิมพ์ derived-mask ผิด — ตัวจริงที่ `bar_frames()`/`death_frames()` ใช้คือ `0x02` ไม่ใช่ `0x08` ซึ่งเป็นคนละ consumer/key-shape กับ `RE-082`) · ปิดโดย chief รอบ `q4z3vi` 2026-08-26 ~22:5x (+07:00) จากผล RE runner local `notes_to_chief/20260826_2223_RE-092-RESULT-REPLACE-BY-OMISSION-NETWORK-ACTOR-SCOPE.md` (recursive CFG เต็ม, gap 0/0, image sha ก่อน=หลังตรง) · 🔴 ผลนี้เป็นชั้น static ล้วน ยืนยัน/ปฏิเสธด้วยชั้น client-observable ต้องรอ `GT-084` `RIDER-084-A` (OW1-OW3) แยกต่างหาก ห้ามใช้ใบนี้ปิดใบนั้นหรือกลับกัน**]
 
 > 🔢 **หมายเหตุเลข:** เลขว่างถัดไปหลัง `RE-091` (ใบสุดท้ายของชุด `RE-085`-`RE-091`) คือ `092` — ยืนยันสด: `GT-092`/`RE-092` = 0 hit ทั้งสองไฟล์ก่อนเปิดใบนี้ · **เลขว่างถัดไปหลังใบนี้ = 093**
 
