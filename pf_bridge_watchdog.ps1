@@ -103,6 +103,76 @@ $hbState = if ($frozen) { 'bridge-frozen-restarting' }
 "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')  $hbState" |
     Out-File -FilePath $hbf -Encoding ascii
 
+# --- sync health (added 2026-08-26, COO / OPS-001) ---------------------------
+# THE GAP THIS CLOSES.  On the night of 25 Aug the git sync stopped at 23:53 and
+# nobody noticed for 25 minutes.  One tracked file was missing from the worktree,
+# so `rebase` refused, so NOT ONE LETTER from any lane reached chief for the whole
+# window - and from outside it looked completely normal: the bridge was alive, the
+# task was running, the log was being written.  Silence and health are identical
+# from a distance, which is exactly why this has to be checked and not assumed.
+#
+# This watchdog knew nothing about the sync (grep 'sync' returned 0 hits) even
+# though it is the only thing on this machine that runs unattended every 5 minutes.
+# It does now.  It REPAIRS exactly one failure - the stale index.lock, which has
+# happened twice and has a mechanical fix - and otherwise only makes the failure
+# LOUD.  Anything needing judgement (a deleted tracked file, a real conflict) is
+# left for a person: a watchdog that guesses at git is worse than a stopped sync.
+$SYNC_STALE_MIN = 12          # the sync task repeats every 2 minutes
+$syncState = Join-Path $bridge 'sync_last_check.txt'
+$attn      = Join-Path $bridge 'SYNC_ATTENTION.txt'
+if (Test-Path -LiteralPath $syncState) {
+    $sraw = (Get-Content -LiteralPath $syncState -Raw -ErrorAction SilentlyContinue)
+    if ($sraw -and $sraw -match '(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})') {
+        $sts = [datetime]::ParseExact($matches[1], 'yyyy-MM-dd HH:mm:ss', $null)
+        $sAge = [math]::Round(((Get-Date) - $sts).TotalMinutes, 1)
+        if ($sAge -gt $SYNC_STALE_MIN) {
+            Log "SYNC STALE: sync_last_check.txt is $sAge min old (> $SYNC_STALE_MIN)"
+
+            # The one repair this is allowed to make.  A 0-byte index.lock with no
+            # git process alive is a corpse, not a lock - it is what a git command
+            # killed by a timeout leaves behind on the mounted worktree.
+            $lock = Join-Path $bridge '.git\index.lock'
+            if (Test-Path -LiteralPath $lock) {
+                $gitAlive = @(Get-Process -Name 'git' -ErrorAction SilentlyContinue).Count
+                $lockAge  = [math]::Round(((Get-Date) - (Get-Item -LiteralPath $lock).LastWriteTime).TotalMinutes, 1)
+                if ($gitAlive -eq 0 -and $lockAge -gt 3) {
+                    $dest = Join-Path $bridge ('_to_delete\stale_index_lock_' + (Get-Date -Format 'yyyyMMdd_HHmmss'))
+                    New-Item -ItemType Directory -Path $dest -Force | Out-Null
+                    Move-Item -LiteralPath $lock -Destination $dest -Force
+                    Log "  REPAIRED: moved a $lockAge min old index.lock aside (no git process alive) -> $dest"
+                } else {
+                    Log "  index.lock present but NOT touched: gitProcesses=$gitAlive lockAge=$lockAge min"
+                }
+            }
+
+            # Make it loud either way.  This file is what a human or the COO round
+            # sees; the repair above only covers one of several ways to get here.
+            @(
+                "SYNC STALE as of $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') (+07:00)",
+                "sync_last_check.txt is $sAge minutes old; the task repeats every 2 minutes.",
+                "Nothing written by any lane has reached chief since then.",
+                "Look at the tail of sync.log - the usual causes are:",
+                "  STOP_DIRTY_WORKTREE_BLOCKS_REBASE  a tracked file was changed or deleted in the worktree",
+                "  SKIP_INDEX_LOCK                    a git command died and left .git/index.lock behind",
+                "This watchdog repairs only the second one, and only when no git process is alive."
+            ) | Out-File -FilePath $attn -Encoding ascii
+        } else {
+            # Clear ONLY an alert this watchdog wrote.  pf_git_sync writes and clears
+            # SYNC_ATTENTION.txt for its own reasons; deleting someone else's alert
+            # because our own check happens to be green would erase a live warning.
+            if (Test-Path -LiteralPath $attn) {
+                $first = (Get-Content -LiteralPath $attn -TotalCount 1 -ErrorAction SilentlyContinue)
+                if ($first -match '^SYNC STALE as of') {
+                    Remove-Item -LiteralPath $attn -Force -ErrorAction SilentlyContinue
+                    Log 'sync healthy again - cleared the watchdog SYNC_ATTENTION alert'
+                }
+            }
+        }
+    }
+} else {
+    Log 'SYNC STATE MISSING: sync_last_check.txt not found - the sync task may never have run'
+}
+
 if ($alive.Count -gt 0 -and -not $frozen) { exit 0 }
 
 if ($frozen) {
