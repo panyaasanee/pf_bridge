@@ -1,0 +1,5 @@
+Consumed by chief round h53n8f (2026-08-27, +07:00).
+Action taken: closed all 5 RE headers in CLIENT_RE_QUEUE.md (RE-073/083/086/087/088) this round;
+wrote Action-taken stubs for RE-073/083/086/087 (group (1) and (2)); FROM_CHIEF_R185 has one-line summary.
+v6.2 wording proposal (RE/GT-RESULT letters must close the queue header same round to count as consumed)
+is COO's call, not mine to decide -- flagged in FROM_CHIEF_R185 for COO/Panya.

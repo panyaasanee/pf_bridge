@@ -1,0 +1,3 @@
+Consumed by chief round h53n8f (2026-08-27, +07:00).
+Action taken: evaluated branch-protection / required-status-check on pirate-force-server this round;
+see FROM_CHIEF_R185 for the permissions finding and next step.
