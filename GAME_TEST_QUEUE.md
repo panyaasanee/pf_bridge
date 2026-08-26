@@ -7766,3 +7766,250 @@ TEMPLATE_teardown_generic.ps1.
 ```
 
 ```
+
+---
+
+## GT-093 CENSUS-NAME-LINE-PARTIAL-FIX-001: does the frozen source_name now reach the wire and render as a yellow name-line under the existing blue title-line, at the two GT-078 comparison points plus two more spot-checks -- identity/template correctness is NOT retested by this ticket  [BLOCKED -- pending merge to main]
+
+> numbering: shared counter with CLIENT_RE_QUEUE.md, one counter, two prefixes, do not split it.
+> highest used so far: GT-084 (this file) and RE-092 (CLIENT_RE_QUEUE.md, which recorded "next free = 093").
+> re-checked live before writing this ticket: grep "093" in both files -- 0 ticket hits in either file
+> (only unrelated hex literals such as 0x00F3093C / 0x1093198 matched). GT-093/RE-093 = both 0 hit before
+> this reservation. This ticket is GT-093. Next free after this ticket = 094.
+> Every older entry in this file stays exactly where it is, untouched, including GT-078 itself.
+
+### what this ticket is and is not
+This ticket retests exactly ONE HALF of GT-078's rejection: the owner's photo showed every NPC in town
+carrying only a blue title line with NO yellow name line under it at all (notes_to_chief\consumed\
+20260826_1430_GT078-RESULT-census-115-on-the-wire-town-full-of-the-WRONG-npcs-owner-does-not-accept-v1.md,
+section (8) PLAYBOOK-13 table: "ไม่พบป้ายสีเหลืองแม้แต่ป้ายเดียวทั้งรอบ"). It does NOT retest the OTHER
+half of the same rejection: that the NPC standing at each placement is the wrong template/identity
+entirely (Hields/Sase expected at the plaza bench, Columbus expected at the Navy Transfer dock -- see
+addendum notes_to_chief\consumed\20260826_1440_GT078-ADDENDUM-original-server-capture-of-the-same-plaza-
+Hields-Sase-two-line-labels.md). That second problem is explicitly NOT fixed by the change under test here
+and remains open per COO-DECISION 20260826_1442 ("GT-078 wire-pass identity-wrong M1-not-declared"): a new
+bridge-side RE ticket for a placement-index -> NPC identity/name/title mapping mechanism has been requested
+(notes_to_chief/20260826_1933_LANE-A-REQUEST-open-RE-ticket-bg0001-service-npc-identity.md, proposed number
+RE-093 pending chief's confirmation) but is not yet numbered/opened as of this writing.
+
+### what changed since GT-078 (source, not restated from memory)
+pirate-force-server commits 72a0ac8 / f6580e0 / 00299dd on branch claude/eloquent-thompson-yxbbc4
+(pushed as PR #73, NOT yet merged to main as of this writing) change exactly one call site:
+src/pirateforce_foundation/world_population.py:338-341 (_entry()):
+    basic_name=(
+        legacy.V119_P30_TARGET_NAME if is_monster
+        else placement.source_name
+    )
+Before this change every non-monster placement passed basic_name="". The module's own docstring amendment
+(world_population.py:123-146) states the client only draws the yellow NPC-name line when BasicAttr bit
+0x0001 is set (static-RE-confirmed via make_npc_attr's docstring, current/pf_login_game_server_v141.py,
+0x51F920) -- so a dropped source_name is exactly why GT-078's addendum photo shows a lone blue title line
+with nothing under it. This fix does NOT touch which template_id/visual_preset is sent at any placement --
+only whether the name the frozen table already carries for that placement reaches the wire. Full local
+test suite reported green (3291 passed) by the lane that wrote the fix; that is a headless dev-test result
+and is NOT evidence for this ticket's own pass criteria -- this ticket's own wire proof must come from
+THIS boot's own capture bytes, not from the unit suite.
+
+Wiring re-confirmed this session (do not assume, re-grep against the actual merge SHA in step 3 below):
+runtime.py:865-866  world_census_enabled = (not active_lanes and second_password_mode == "required")
+runtime.py:4527      if world_census_enabled: ... :4563 calls world_population.build_world_population(...)
+app.py:138-139       '--second-password-mode' default='required'
+=> a plain default (zero-flag) boot already satisfies both conditions on its own. If this changes when the
+   PR actually merges, STOP and report -- do not assume it still holds.
+
+### objective (single claim)
+On a plain default boot (zero --*-scenario flags, zero extra population flags), at the exact positions
+where GT-078 already put an actor, does a second, yellow name-line now render underneath each NPC's
+existing blue title-line -- and, where the frozen table happens to hold a real personal name, is that text
+readable and countable as a name rather than as more title text.
+Falsifier: any of the observed points still shows a single blue line with nothing under it, exactly as
+GT-078 photographed -- that is a full negative result for this fix, not a partial one, and is worth exactly
+as much as a PASS (see pass criteria).
+Not the claim of this ticket: whether the NPC standing there is the CORRECT NPC for that spot (nonclaim,
+see below) -- position and template identity are both out of scope here.
+
+### source of the retest points
+- Dock point (P0, "Navy Transfer"): current/pf_login_game_server_v141.py:1324 --
+  (0, 1, -9139.957, -2780.045, 223.292, 'P_MALE_002_000_SP1', 'Navy Transfer')
+  actor_identity = 0x2000 + 0 + 1 = 0x2001. This is the exact spot GT-078's S1/S1b already photographed
+  the "Marine Transport Station" blue-only title on a blonde woman in black (GT078_S1_FULLRES_
+  20260826_131609.png / GT078_S1b_FULLRES_20260826_132030.png).
+- Plaza point: the owner's own standing order after GT-078 (result section (10).2, quoted): "ไปเทสต์ใจกลาง
+  เมือง ... คราวหน้าอย่ามาเทสต์แถวนี้อีก" (go test the city center ... do not test around the dock again
+  next time) -- narrow pier, camera-blocking objects, easy to fall in water (the mid-round tester did fall
+  in at 13:22 during GT-078 and lost ~3 minutes). Standard point going forward: S-CENTER = X 11865, Y 6147.
+  This is the same plaza the owner's addendum capture (REF_ORIGINAL_SERVER_PortRoyal_plaza_Hields_Sase_
+  v1.41.0100.jpg, HUD X 11510 Y 6951) shows Hields/Sase standing at, matched by owner-confirmed landmarks
+  (cannon, bench, flower bed).
+- Two additional spot-check placements near S-CENTER, both close enough to the mandated route to add no
+  meaningful extra walking time:
+    index 19 "Jefferson", template 20, current/pf_login_game_server_v141.py:1342 --
+      (19, 20, 11361.492, 5364.102, 2231.169, 'P_MALE_009_000_JEFFERY', 'Jefferson')
+      actor_identity = 0x2014. ~931 units from S-CENTER.
+    index 4 "Pike", template 5, current/pf_login_game_server_v141.py:1327 --
+      (4, 5, 10768.067, 6792.432, 2200.444, 'P_MALE_002_000_PAK', 'Pike')
+      actor_identity = 0x2005. ~1273 units from S-CENTER.
+
+### predictions (a wrong prediction here is a finding, not a failure -- read before booting)
+- P1 [wire, headless-checkable from this boot's own capture]: the raw capture for this boot (GAME_LIVE.txt
+  / capture_v141 hexdump) contains the literal ASCII bytes "Navy Transfer" somewhere in the frame carrying
+  actor identity 0x2001, and "Jefferson" / "Pike" in the frames for 0x2014 / 0x2005, if/when the tester
+  reaches those points. world_population.py's own docstring already measured that rung-3's frame grew from
+  504/517 bytes to 564/577 bytes specifically because of two added name tags (P0 and P91) -- so the bytes
+  existing on the wire is close to certain; whether they RENDER is the actual open question of this ticket.
+- P2 [main claim of the ticket]: at the dock point and at S-CENTER, at least one NPC shows two stacked
+  lines on screen -- an unchanged blue title line plus a new yellow line beneath it -- where GT-078
+  photographed only one line.
+- P3 [corrected prediction, sourced this session -- NOT "Columbus"]: the text on the new line at the dock
+  point will read "Navy Transfer" literally, because that is the literal source_name field the frozen
+  table carries for that exact coordinate (current/pf_login_game_server_v141.py:1324). The three
+  placements whose source_name really is "Columbus" (indices 35/65/140) sit 2,190 to ~21,900 units away
+  from the dock -- none of them is this placement. If "Columbus" appears at the dock point instead of
+  "Navy Transfer", that is an unexplained anomaly worth flagging loudly, not the expected outcome of this
+  fix -- do not assume it is a bonus improvement without saying so explicitly.
+- P4 [expected negative, grounded, not a failure]: "Hields" and "Sase" will NOT appear anywhere in this
+  boot, at any point, under any circumstance -- grep of the full frozen PORT_ROYAL_UNAMBIGUOUS_PLACEMENTS
+  table for both strings returns zero hits. Seeing neither name is not evidence this fix failed; it is
+  confirmation that the identity-mismatch half of GT-078's rejection is exactly as open as it was, and this
+  ticket was never able to close it.
+- P5 [regression check]: everything GT-078 already proved at the wire layer (115/115 composed/sent, no
+  traceback, ErrorData=28317 count of 0, session stays up >=10 minutes) still holds, since this fix changes
+  one keyword argument in one function and nothing else.
+
+### unblock checklist -- BLOCKED until all pass, do not boot until then
+1. py -3 pf_resolve_green_boot.py --repo <path to pirate-force-server> --fetch
+   exit 0 + BOOT_COMMIT: <sha> required. exit 3 = still blocked, write "waiting on merge, not on tester"
+   and stop. Do not hand-pick a commit.
+2. git grep -n "basic_name=(" <SHA> -- src/pirateforce_foundation/world_population.py
+   must show the ternary using placement.source_name, not the old basic_name="".
+3. git grep -n "world_census_enabled = (" <SHA> -- src/pirateforce_foundation/runtime.py
+   must still read: not active_lanes and second_password_mode == "required"
+4. git grep -n "default='required'" <SHA> -- src/pirateforce_foundation/app.py
+   confirms the default (zero-flag) boot still satisfies the census condition on its own.
+5. git grep -n "V134_P0_P30_P91_ISOLATED" <SHA> -- current/pf_login_game_server_v141.py
+   frozen file must be untouched -- expect the same 4 lines GT-078 already recorded.
+Any of 2-5 coming back empty or different from what is quoted above = STOP, report to chief, do not guess.
+
+### db (copy only, canonical never opened)
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-093_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt093.sqlite3
+- sha256 of canonical vs CANON_SHA.txt before and after, must match both times.
+- fresh copy each boot -> character resets to spawn (X -8553.947, Y -2579.689, Z 186.0),
+  same as every prior attended ticket on this DB.
+- this is not play mode -- do not touch state\play.sqlite3 or PLAY_PIRATE_FORCE.bat during this round.
+
+### server args (exact -- lesson carried over from GT-078's own recorded mistake)
+py -3 -u -m pirateforce_foundation.app --db state\run_gt093.sqlite3 --capture-root state\capture_gt093_<yyyyMMdd_HHmmss>
+- no --*-scenario, no --export-events, no --world-census-actors (that flag selects a GT-076 rung, it is not
+  what is under test here), no --second-password-mode on either server or client. GT-078's own result (item
+  1) recorded that adding --second-password-mode bypass mid-instruction was a mistake because the census
+  requires second_password_mode == "required", which is already the default with zero flags -- do not
+  repeat that mistake in either direction.
+- capture-root is required so the raw wire bytes for step "pass criteria: wire/DB" below actually exist to
+  grep after the round.
+- collect the full CommandLine of the server process immediately after boot, exactly as GT-078 did:
+  Get-CimInstance Win32_Process -Filter "Name='python.exe'" | Select-Object ProcessId,CommandLine | Format-List
+
+### steps
+Before start: hold LOCK_GAME, record boot stamp (+07:00), compare canonical sha, copy DB, prepare teardown
+from TEMPLATE_teardown_generic.ps1, confirm boot stamp will not exceed 420 minutes before teardown runs.
+
+1. Start server first, confirm ports 10188/10189 show 0 established connections, then start client.
+   A client started with no server dies in about 3.5 minutes; if the client is killed mid-round, restart
+   the server before opening a new client, or the new client hangs on "connecting" forever.
+2. Login -> character select (first slot) -> enter game (middle of the 5 bottom buttons; leftmost button
+   deletes the character, never press it). Start continuous video recording before pressing enter-game.
+3. T0 = first frame with HP bar + minimap + map name + chat online, all visible.
+4. Walk toward the dock point (X -9140, Y -2780 on HUD). This is a brief, careful visit only -- per the
+   owner's standing order after GT-078, do not linger at the dock and do not repeat the fall-into-water
+   incident (narrow pier, camera-blocking objects). Take one full-res screenshot of the NPC there and its
+   full label block the moment it is in frame, then leave immediately.
+5. Walk to S-CENTER (X 11865, Y 6147). This is now the standard tour point for every attended ticket after
+   GT-078 -- spend the bulk of tour time here. Full-res screenshot of every NPC label visible from this
+   point, from at least two camera angles (right-click-drag to rotate camera only -- this does not move the
+   character's facing and emits nothing on the wire, it is safe at any point including before any of the
+   above; never use Q/E as the "is it alive" check).
+6. From S-CENTER, walk the short distance to the Jefferson point (X 11361, Y 5364) and the Pike point
+   (X 10768, Y 6792). Full-res screenshot of each NPC's label block at each point.
+7. Hold in the map at least 10 minutes total from T0, watching for disconnect/hang, same as GT-078's HOLD
+   window.
+8. NO-CRASH check: right-click-drag camera rotation only. Never Q/E for this check.
+9. Exit, stop video, stop server, run teardown per TEMPLATE_teardown_generic.ps1, re-compare canonical sha.
+10. After the round: for every full-res screenshot taken at steps 4-6, record one line per name label per
+    image: exact text of every line in the label block (title line, and name line if present), and the
+    colour of each line. Write "none" explicitly if a line is absent -- never leave it blank. Read colour
+    only from full-resolution stills, never from a contact sheet, downscaled image, or video (Panya's order,
+    binding on every attended entry since R163). Any label whose two-line structure, text, or colour
+    differs from the reference original-server capture goes into REAL_SERVER_DIVERGENCE.tsv, one row per
+    label -- send the values in the result letter, do not edit the tsv file from the bridge side.
+
+### pass criteria -- two layers, kept separate, neither substitutes for the other
+
+wire/DB layer (headless-derivable from this boot's own capture files, not from the unit test suite):
+- [G>] WORLD_CENSUS_INITIAL_115 and [G>] WORLD_CENSUS_REAPPLY_115 both appear after the first step taken
+  (unchanged mechanism from GT-078 -- if either is missing or the isolated-3 label appears instead, this is
+  a boot-level regression, stop and report, do not read the screen as a result).
+- grep the raw capture (GAME_LIVE.txt / capture_v141 hexdump) for this boot for the literal ASCII strings
+  "Navy Transfer", "Jefferson", "Pike" -- report which are present, quote the surrounding bytes/hex context
+  for each hit found.
+- grep the same raw capture for "Hields", "Sase", "Columbus" -- expected to be absent (P4); report the
+  actual grep result plainly either way.
+- no new traceback, stderr 0 bytes, ErrorData=28317 count same as GT-078's own baseline (0).
+- DB copy: PRAGMA integrity_check = ok, sessions +1 row for this login, max(lease_generation) does not go
+  backward, canonical sha256 identical before and after.
+- this layer alone can never answer whether anything rendered on screen.
+
+client-observable layer (a human at the screen only, video + full-res stills as evidence):
+- at the dock point: how many stacked lines are visible in the NPC's label block (1 = still exactly what
+  GT-078 photographed, 2 = the fix is visible) -- exact text and colour of each line, full-res screenshot,
+  sha256 of the file.
+- at S-CENTER: same count-and-colour reading for every NPC label visible in frame, from at least two
+  camera angles, full-res screenshots, sha256 of each file.
+- same at the Jefferson and Pike points.
+- NO-CRASH / CRASH verdict, decided by right-click-drag only.
+- video coverage of the full session, sha256 of the file.
+- this layer alone can never answer what the server actually sent, or why a label looks the way it does.
+
+Named outcomes (write which one applies, do not blend them):
+- FULL POSITIVE: every point shows two stacked lines, name line matches the frozen source_name for that
+  placement (or is "Navy Transfer" per P3, or something else entirely -- report the actual text either way).
+  This closes only the name-line half of GT-078's rejection. It does NOT reopen GT-078 as PASS and does NOT
+  declare v1 or M1 -- the identity-mismatch half is still open and this ticket cannot touch it.
+- PARTIAL: some points show two lines, some still show one. Report per-point, do not average into a single
+  verdict.
+- FULL NEGATIVE: every point still shows exactly one blue line, nothing under it, unchanged from GT-078.
+  This is worth exactly as much as a full positive -- it means the BasicAttr bit gating described in
+  make_npc_attr's docstring (0x51F920) needs re-inspection, or the specific template_ids at these
+  placements do not support the name line for a reason nobody has found yet. Redirect: do not touch
+  world_population.py again until that gating is re-read; this ticket's job is done once this is reported.
+- Under no outcome of this ticket may the result be written as "GT-078 PASS" or "M1 reached" or "v1
+  shipped" -- this is a partial-fix verification of one half of one rejected ticket, not a re-acceptance.
+
+### nonclaims
+- Does not retest or resolve the identity/template mismatch from GT-078 (Hields/Sase/Columbus-at-the-wrong-
+  spot) -- that stays open, tracked by a new RE ticket (placement-index -> NPC identity/name/title mapping)
+  that COO-DECISION 20260826_1442 ordered lane A + RE to produce; unnumbered as of this writing.
+- Does not change GT-078's own status, does not close it, does not declare v1 or M1 under any outcome.
+- Does not retest composed/sent counts, the actor ceiling (GT-076), or anything else GT-078 already
+  measured at the wire layer -- assumes those still hold and only spot-checks P5's regression prediction.
+- Does not test quest-gated hide/unhide, NPC wandering/patrol, or any other item from the owner's GT-078
+  wishlist besides the name line.
+- Does not test scene_id != 1 (GT-079's territory).
+- Colour of every label is recorded as a fact, cause is never inferred -- RE-067 (and RE-068 for actor
+  identity) stay the open questions that decide it.
+- Single tester, single machine, one tour -- not a claim about client behaviour in general.
+- The reference original-server capture may be a different client build/region (GT-078 nonclaim (10)) --
+  "differs from the reference image" is not automatically "ours is wrong".
+
+### BUILD_IMPACT
+BUILD_IMPACT: if client-observable layer is FULL POSITIVE or PARTIAL -> cc records in SERVER_VERSIONS.md
+              that the name-line half of GT-078's rejection is resolved; GT-078 itself stays RAN /
+              OWNER-REJECTED (identity) until the placement->identity RE ticket lands and a fresh
+              acceptance round runs. If FULL NEGATIVE -> BUILD_IMPACT is "none", write which layer failed
+              (wire bytes absent vs bytes present but not rendered) and redirect to make_npc_attr's BasicAttr
+              gating, not to world_population.py's source_name plumbing.
+
+### result: (the tester fills this in)
+```
+
+```
