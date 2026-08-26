@@ -162,7 +162,7 @@ UNPINNABLE และ exclude ไม่ได้นับผ่าน. หกเ�
 
 ## integrity
 
-- image ก่อน/หลัง: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`,
+- image `GameClient.local.bin` ก่อน/หลัง: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`,
   size `14,759,424` B.
 - external tree ก่อน/หลัง: `30 files`, fingerprint
   `180424fe457e680e47b38b5b8e9a8094d2dc33c0c9c1f904b9f5a9a040dd11c5`.
