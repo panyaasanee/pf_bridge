@@ -2857,7 +2857,7 @@ Door B คือการ **โจมตี** (`CActorTask_UseBehavior` / `PlayA
 
 ---
 
-## 🆕🔬 RE-089 GM-STATE-VISUAL-001 [STATIC-ON-BRIDGE]: **`GM_UpdateGMStateVital` (`0x5A19`, handler `0x00729F00`) — ไบต์ไหนคือ is_gm, u32 คืออะไร (level?), และเมื่อ on แล้วไคลเอนต์เปลี่ยนอะไรบนจอ**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-6js9ye`/`optimistic-mccarthy-6js9ye` · 2026-08-26 ~16:5x (+07:00) ตาม `COO-DECISION 20260826_1646` ข้อ ④.2**]
+## 🆕🔬 RE-089 GM-STATE-VISUAL-001 [STATIC-ON-BRIDGE]: **`GM_UpdateGMStateVital` (`0x5A19`, handler `0x00729F00`) — ไบต์ไหนคือ is_gm, u32 คืออะไร (level?), และเมื่อ on แล้วไคลเอนต์เปลี่ยนอะไรบนจอ**  [🟠 **DONE/BOUNDED-NEGATIVE — wire `+0x14/+0x15` normalize ด้วยเงื่อนไข "เท่ากับ 1 เท่านั้น" แล้วเก็บที่ `GMModule_Client+0x18/+0x19`, u32 `+0x18` ก๊อปตรงไป `+0x1C`; ไม่พบ semantic label (is_gm/level) หรือ direct render/visibility crosswalk · เบาะแส `bm_gm.tga` หักล้างแล้ว (glyph `0x29` "green minus" ใน `FxNumberCache` คนละเรื่อง) · ปิดโดย chief รอบ `kdx85r` 2026-08-26/27 จากผล RE runner local `notes_to_chief/20260827_0016_RE-089-RESULT-STATE-PROPAGATION-PINNED-BMGM-FALSE-LEAD.md` (recursive CFG ครบ 93/93 และ 137/137, gap/error 0/0)**]
 
 > 🔢 **หมายเหตุเลข:** ส่วนหนึ่งของชุด `RE-085`-`RE-091` — ดูหมายเหตุเลขเต็มที่หัวใบ `RE-085`
 
@@ -2886,7 +2886,7 @@ Door B คือการ **โจมตี** (`CActorTask_UseBehavior` / `PlayA
 
 ---
 
-## 🆕🔬 RE-090 TELEPORT-FORCEPOS-WARP-FIELDS-001 [STATIC-ON-BRIDGE]: **field layout ของ `TeleportVital` (`0x005EB470`), `ForcePos` (`0x005E4250`) และ `CWarpResult` — ใช้ร่วมกันทั้งเส้นทางเดินทางจริง (Columbus→ทะเล→เกาะ) และ GM warp**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-6js9ye`/`optimistic-mccarthy-6js9ye` · 2026-08-26 ~16:5x (+07:00) ตาม `COO-DECISION 20260826_1645` ข้อ 4 + `COO-DECISION 20260826_1646` ข้อ ④.3**]
+## 🆕🔬 RE-090 TELEPORT-FORCEPOS-WARP-FIELDS-001 [STATIC-ON-BRIDGE]: **field layout ของ `TeleportVital` (`0x005EB470`), `ForcePos` (`0x005E4250`) และ `CWarpResult` — ใช้ร่วมกันทั้งเส้นทางเดินทางจริง (Columbus→ทะเล→เกาะ) และ GM warp**  [✅ **PASS/DONE — T0-T2 ปิดครบ, T3 (optional `TeleportCheckVital`) ปิดเพิ่ม · `ForcePos` = vec3 เท่านั้น (`tag 0x2A/4B` ×3) · `CWarpResult` = `tag 0x32/8B@+0x18` → `tag 0x2A/4B` ×3 @+0x20/+0x24/+0x28 → `tag 0x12/2B@+0x2C` · `TeleportVital` มี scene/sequence/vec3 + optional auxiliary object + controls (UNKNOWN หกแถวเดิมใน `PF_SERIALIZER_FIELDS.tsv` ปิดแล้ว: เป็น object-pool allocation + refcount ไม่ใช่ wire field) · ชื่อ/shape ต่างกันชัดเจน แต่ไม่พิสูจน์ semantic ของการใช้งาน (ในฉาก vs ข้ามฉาก) เพียงลำพัง · ปิดโดย chief รอบ `kdx85r` 2026-08-26/27 จากผล RE runner local `notes_to_chief/20260826_2346_RE-090-RESULT-TELEPORT-FORCEPOS-WARP-FIELDS-PINNED.md`**]
 
 > 🔢 **หมายเหตุเลข:** ส่วนหนึ่งของชุด `RE-085`-`RE-091` — ดูหมายเหตุเลขเต็มที่หัวใบ `RE-085`
 
@@ -2915,7 +2915,7 @@ field layout ของ `TeleportVital`+`ForcePos` ครบ (`CWarpResult`/`Tele
 
 ---
 
-## 🆕🔬 RE-091 CHEAT-CHAT-TRIGGER-001 [STATIC-ON-BRIDGE]: **แชทเข้า (client input) ไปถึงการส่ง `GM_RunGMCommandVital` (`0x51E9`) เมื่อไร — มี prefix เฉพาะ หรือขึ้นกับสถานะ GM ที่ client ถืออยู่แล้ว**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-6js9ye`/`optimistic-mccarthy-6js9ye` · 2026-08-26 ~16:5x (+07:00) ตาม `COO-DECISION 20260826_1646` ข้อ ④.4**]
+## 🆕🔬 RE-091 CHEAT-CHAT-TRIGGER-001 [STATIC-ON-BRIDGE]: **แชทเข้า (client input) ไปถึงการส่ง `GM_RunGMCommandVital` (`0x51E9`) เมื่อไร — มี prefix เฉพาะ หรือขึ้นกับสถานะ GM ที่ client ถืออยู่แล้ว**  [✅ **PASS/DONE — objective เดิมเป็น false dichotomy: ไคลเอนต์ไม่ตรวจ prefix ใน main chat แล้วสลับไป `GM_RunGMCommandVital` เลย — อิมเมจมีช่อง editor ของ GM UI โดยเฉพาะที่สร้าง `GM_RunGMCommandVital` เมื่อกด Enter บนข้อความไม่ว่าง ส่วน main chat ใช้ตระกูล `Channel_*MessageVital` แยกต่างหาก · ปิดโดย chief รอบ `kdx85r` 2026-08-26/27 จากผล RE runner local `notes_to_chief/20260826_2322_RE-091-RESULT-DEDICATED-GM-UI-NO-CHAT-PREFIX.md`**]
 
 > 🔢 **หมายเหตุเลข:** ส่วนหนึ่งของชุด `RE-085`-`RE-091` — ดูหมายเหตุเลขเต็มที่หัวใบ `RE-085` · **นี่คือใบสุดท้ายของชุด เลขว่างถัดไปหลังใบนี้ = 092**
 
