@@ -2714,3 +2714,217 @@ Door B คือการ **โจมตี** (`CActorTask_UseBehavior` / `PlayA
 ไม่แตะโค้ดเซิร์ฟเวอร์ · ไม่เปิดเกม · ไม่ตัดสิน opcode · ไม่ยุบรวมกับ `RE-065` (Door B) — **คนละประตู และนั่นคือทั้งหมดของใบนี้**
 
 ### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕📊 CLOUD-DERIVED SCENE-ID CROSSWALK (ไม่ใช่ใบ RE — ผลสำรวจ `pf-static-re` รอบ `keen-pasteur-6js9ye` 2026-08-26 ~16:5x (+07:00) ทำจาก `gamedata/tables/*.tsv` ที่ commit แล้ว ไม่ต้องเปิดอิมเมจ)
+
+**[วัดแล้ว]** `gamedata/tables/TEXTDATA_TH__SCENE_NAME_TIP.tsv` (331 แถว คอลัมน์ `n_ID`/`s_SCENE_NAME`/`s_GM_SCENE_NAME`) ให้ชื่อฉาก GM-facing ครบ — Port Royal=1 · Prison Exile Island=2 · Spice Paradise Island=3 · Slave Market Island=4 · Evil Port=5 · Ocean Walled City=6 · Voodoo Island=7 · Silver Harbour=8 · Death City Sea=9 · "Ship in the Sea" (สถานะเรือ ไม่ใช่เกาะจอด) = id 17-23 · "Ship in the Sky" = id 24-30 (มีชุด reskin/mission ซ้ำที่ id 62-73, 186-215, 229) · เกาะ "faction" อีก 13 ใบที่ id 254-270 · เกาะกระจาย/procedural อีกหลายสิบ id (31-61, 74-111, 147-185, 193-253)
+
+**[วัดแล้ว]** ตาราง `CONSTDATA_TH__SCENE_NAME.tsv` (271 แถว, sha256 `e38114a8…` ตรงกับที่ `world_scene_registry_001.json` pin ไว้) ยืนยันชื่อ id 1-4, 17-30 ตรงกับ TIP — แต่ **ขาด 59 id ที่ TIP มี** (รวม id 31, 219) — ยังไม่รู้ว่า client อ่านตารางไหนจริง
+
+**🔴🔴 ข้อควรระวังที่สำคัญที่สุด — อ่านก่อนอ้างเลข id ใดในชุดนี้เป็น wire `scene_id`:** `world_scene_registry_001.json` เขียนไว้เองว่าความเชื่อมโยง `n_ID -> wire scene_id` เป็น **"CANDIDATE, NOT ESTABLISHED"** — พิสูจน์แล้วเฉพาะแถว 1 (Port Royal) และ 2 (Prison Exile Island) เท่านั้น จาก 4 ทฤษฎีที่แข่งกัน (`n_MARKER`, `n_CLINE_TYPE`, row-ordinal, `n_ID` ตรง ๆ) มีแค่สองแถวแรกที่ทุกทฤษฎีเห็นพ้อง ⇒ **id 3, 4, 5-9, 17-30 และทุก id อื่นในตารางนี้ยังไม่ถูกพิสูจน์ว่า = wire scene_id จริง** — `RE-090` (`TeleportVital`/`ForcePos` field layout) คือทางเดียวที่จะปิดช่องว่างนี้ได้ ไม่ใช่การอ่านชื่อคอลัมน์เพิ่ม
+
+**สิ่งที่ยังไม่ตอบ (นอกขอบเขตของการสำรวจนี้ ต้องเปิดอิมเมจ — ดู `RE-085`-`RE-087` ด้านล่าง):** กลไก "กลายเป็นเรือ" · trigger เทียบท่า · packet หน้าต่างรายงานกัปตัน — ตารางชื่อฉากให้แค่ id↔ชื่อ ไม่ให้กลไกใด ๆ
+
+ที่มาเต็ม: `gamedata/tables/TEXTDATA_TH__SCENE_NAME_TIP.tsv` · `gamedata/tables/CONSTDATA_TH__SCENE_NAME.tsv` · `pirate-force-server/scenarios/world_scene_registry_001.json` · `pirate-force-server/src/pirateforce_foundation/world_scene_travel.py`
+
+---
+
+## 🆕🔬 RE-085 SEA-SHIP-TRANSFORM-001 [STATIC-ON-BRIDGE]: **เมื่อผู้เล่นถูกย้ายไป "แมพทะเล" ไคลเอนต์ทำให้ตัวละครกลายเป็นเรือด้วยกลไกอะไร — สลับโมเดล/actor_type หรือแค่ผูก vehicle เข้ากับ actor เดิม**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-6js9ye`/`optimistic-mccarthy-6js9ye` · 2026-08-26 ~16:5x (+07:00) ตาม `COO-DECISION 20260826_1645` ข้อ 4**]
+
+> 🔢 **หมายเหตุเลข:** ตัวนับชุดเดียวกับ `GAME_TEST_QUEUE.md` **ห้ามแยกตัวนับ** · grep ก่อนจอง: `GT-085`..`GT-091` = 0 hit, `RE-085`..`RE-091` = 0 hit ทั้งสองไฟล์ (ตรวจสด 2026-08-26) · เลขสูงสุดที่ใช้ไปคือ `RE-083`/`GT-084` (ใบก่อนหน้า) ⇒ **ชุดใบนี้คือ `RE-085`-`RE-091`** · **เลขว่างถัดไปหลังชุดนี้ = 092**
+
+### ที่มา
+`PANYA-DECISION 20260826_1600` (คำต่อคำ): "วิธีออกจากเมือง port royal คือคุยกับ npc Columbus ... แล้วจะถูกย้ายไปยัง Maps ทะเล (ที่ตัวละครจะกลายเป็นเรือล่องไปในทะเลได้)" · `COO-DECISION 20260826_1645` อนุมัติเปิดใบ RE ทั้ง 4 หัวข้อของใบนี้ (สนาม/กลไกเรือ, trigger เทียบท่า, packet รายงานกัปตัน, เกาะ↔scene id) — **เกาะ↔scene id ถูกแยกออกจากชุดนี้แล้ว เพราะตอบได้จากตารางที่ commit แล้วบนคลาวด์** (ดูกล่อง CLOUD-DERIVED SCENE-ID CROSSWALK ด้านบน) เหลือ 3 หัวข้อที่ต้องเปิดอิมเมจจริง = ใบนี้ + `RE-086` + `RE-087`
+
+### objective (claim เดียว)
+จากอิมเมจไคลเอนต์ล้วน ๆ: เมื่อ `TeleportVital`/mechanism ที่ย้ายผู้เล่นไป scene ทะเล (ดูกล่อง crosswalk ด้านบนสำหรับ scene id ที่เป็นไปได้ — ช่วง "Ship in the Sea" 17-23 ตาม `s_GM_SCENE_NAME`, **ยังไม่พิสูจน์เป็น wire scene_id**) มาถึง ไคลเอนต์ทำให้ตัวละครดูเหมือนเรือด้วยกลไกไหน: **(ก)** สลับ `actor_type`/model ของ actor เดิมเป็นโมเดลเรือ · **(ข)** สร้าง vehicle actor แยกแล้วซ่อน/ผูก actor ผู้เล่นเข้ากับมัน (เทียบ pattern เดียวกับ mount/มีพาหนะถ้ามี RTTI) · **(ค)** เป็นแค่ scene fixture (ทุกคนเห็น "เรือ" เป็นฉาก ไม่ใช่ actor ของผู้เล่นเอง)
+
+### จ็อบ
+- **T0 · ด่านคุม** — หาว่า scene ทะเล (จากช่วง id ที่กล่อง crosswalk ชี้มา) มี `n_SCENE_TYPE`/flag พิเศษไหมที่ต่างจากฉากเมืองปกติ (เทียบ pattern `n_SCENE_TYPE==8` ที่ `RE-077` พินไว้แล้วสำหรับ StateNavigation) — ถ้าไม่มีเบาะแสอะไรใน const data เลย ให้เปิด binary หา string/RTTI ที่เกี่ยวกับ "ship"/"boat"/"เรือ" โดยตรง
+- **T1** — หา RTTI/class name ที่เกี่ยวกับพาหนะ/เรือ (คล้ายที่ `GM_UpdateGMStateVital` ใช้ xref `bm_gm.tga` เป็นทาง) — ระบุ VA ของ class/handler ที่เกี่ยวข้อง
+- **T2** — ถ้าพบกลไก vehicle: ผู้เล่นยังควบคุมด้วย movement packet เดิม (`TargetPosVital`) หรือมี packet เคลื่อนที่แบบเรือแยกต่างหาก (เทียบกับที่ `Player.Teleport/Warp/TeleportWithVehicle` เป็น STUB_NOOP บน client ตามที่ attended สำรวจไว้แล้ว 16:30 — ถ้า client ไม่มีโค้ดฝั่งนี้เลย ให้เขียน bounded negative และหยุด)
+- **T3 · ริเดอร์** — ถ้าเจอ actor_type ใหม่สำหรับเรือ: มันอยู่ใน `VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv` แล้วหรือยัง (ถ้าไม่มี ให้บันทึกเป็นข้อเสนอเพิ่มแถว ไม่ใช่แก้ทะเบียนเอง — ทะเบียนเป็น read-only)
+
+### nonclaims
+① ใบนี้ไม่ตอบว่าเรือ "แล่น" ยังไง (ความเร็ว/เส้นทาง) นอกจาก T2 พบ packet เคลื่อนที่จริง ② ใบนี้ไม่ตอบ trigger เทียบท่า — นั่นคือ `RE-086` ③ ไม่ตอบว่า scene id ของเกาะปลายทาง = wire scene_id จริงหรือไม่ — ยังไม่พิสูจน์ (ดูกล่อง crosswalk) ห้าม re-derive ซ้ำในใบนี้
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจอ่านอย่างเดียว · ทุก VA มี ImageBase `0x400000` กำกับ · ทุกข้อสรุปมี provenance (VA + วิธีที่ได้มา) · ชนเพดานให้เขียน **bounded negative** แล้วปิด **ห้ามเดาต่อ** · **ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB**
+
+### เกณฑ์จบใบ
+ตอบ T1/T2 (กลไกคือ ก/ข/ค) **หรือ** bounded negative ว่าเพดาน static อยู่ตรงไหน ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-086 ISLAND-DOCK-TRIGGER-001 [STATIC-ON-BRIDGE]: **อะไรทำให้ไคลเอนต์/เซิร์ฟเวอร์รู้ว่า "เรือถึงท่าเกาะแล้ว" — จุดพิกัดคงที่ (เหมือน travel gate เดิม) หรือ packet เฉพาะ**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-6js9ye`/`optimistic-mccarthy-6js9ye` · 2026-08-26 ~16:5x (+07:00) ตาม `COO-DECISION 20260826_1645` ข้อ 4**]
+
+> 🔢 **หมายเหตุเลข:** ส่วนหนึ่งของชุด `RE-085`-`RE-091` — ดูหมายเหตุเลขเต็มที่หัวใบ `RE-085`
+
+### ที่มา
+เดียวกับ `RE-085` — คำเจ้าของ 16:00: "บังคับให้เรือไปจอดเทียบท่ากับเกาะอื่นๆ ... เมื่อเทียบท่าเกาะนั่นนั้นแล้วจะมีหน้าต่างรายงานกัปตันขึ้นมา" **🔴 ระวังการวนซ้ำผิดพลาดของ `world_travel_gate.py` เดิม:** ใบนั้นเคยออกแบบเป็น "หยุดยืนในเขตที่พินไว้" ซึ่งเจ้าของเพิ่งบอกว่าไม่ใช่กลไกจริง — ใบนี้ **ห้าม** สมมติว่าเทียบท่าใช้กลไกเดียวกัน (พิกัด+dwell) โดยไม่มีหลักฐานจากอิมเมจ
+
+### objective (claim เดียว)
+เมื่อผู้เล่นควบคุม "เรือ" (ผล `RE-085`) เข้าใกล้พื้นที่ท่าเกาะ อะไรเป็นตัวจุดชนวนหน้าต่างรายงานกัปตัน: **(ก)** ไคลเอนต์ตรวจระยะ/โซนเองแล้วส่ง packet ขอ dock · **(ข)** เซิร์ฟเวอร์ต้องเป็นฝ่ายส่ง packet บอกว่า dock ได้แล้ว (ไคลเอนต์รอ) · **(ค)** เป็น trigger แบบ interact (ผู้เล่นกดปุ่ม/คลิกที่ท่าเรือเอง ไม่ใช่ auto)
+
+### จ็อบ
+- **T0** — หา string/opcode ที่เกี่ยวกับ "dock"/"anchor"/"เทียบท่า" ใน binary (คล้ายวิธีที่หา `bm_gm.tga` เจอ `GMModule_Client`)
+- **T1** — ถ้าเจอ packet: ทิศทาง (client→server หรือ server→client) และ field ที่มันพก (island id? position?)
+- **T2** — เทียบกับ `TeleportVital`/`ForcePos` (ผล `RE-090`) ว่า dock ใช้กลไกเดียวกับ teleport ทั่วไปหรือมี vital แยกเฉพาะเรือ
+
+### nonclaims
+① ไม่ตอบว่าแผนที่ทะเลมีกี่จุดจอด/เกาะ (นั่นคือผลจากตาราง scene id ที่ตอบแล้วบนคลาวด์) ② ไม่ตอบเนื้อหาหน้าต่างรายงานกัปตัน (`RE-087`) ③ ถ้า static หา trigger ไม่เจอเลย ให้เขียน bounded negative ว่า "ต้องจับ capture ตอนเล่นจริงเพื่อดู" แทนการเดา
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจอ่านอย่างเดียว · ทุก VA มี ImageBase `0x400000` กำกับ · ทุกข้อสรุปมี provenance · ชนเพดานให้เขียน bounded negative แล้วปิด · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ตอบ (ก)/(ข)/(ค) ด้วยหลักฐาน VA **หรือ** bounded negative ⇒ ปิดใบพร้อม `BUILD_IMPACT:`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-087 CAPTAIN-REPORT-WINDOW-001 [STATIC-ON-BRIDGE]: **packet/UI ของ "หน้าต่างรายงานกัปตัน" ที่ขึ้นตอนเทียบท่า — โครงสร้าง field และปุ่มยืนยันส่งอะไรกลับ**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-6js9ye`/`optimistic-mccarthy-6js9ye` · 2026-08-26 ~16:5x (+07:00) ตาม `COO-DECISION 20260826_1645` ข้อ 4**]
+
+> 🔢 **หมายเหตุเลข:** ส่วนหนึ่งของชุด `RE-085`-`RE-091` — ดูหมายเหตุเลขเต็มที่หัวใบ `RE-085`
+
+### ที่มา
+เดียวกับ `RE-085`/`RE-086` — เจ้าของ 16:00: "จะมีหน้าต่างรายงานกัปตันขึ้นมาให้กด ยืนยันเพื่อเข้าไปยัง Maps นั้นๆ"
+
+### objective (claim เดียว)
+หา packet/UI class ที่สร้างหน้าต่าง "รายงานกัปตัน" (ชื่อจริงในไฟล์ text อาจต่างจากคำแปลนี้ — ลอง grep คำที่เกี่ยวกับ "กัปตัน"/"captain"/"report"/"เข้าเกาะ" ใน text tables ก่อน แล้วค่อยหา class/handler): มันเป็นแค่ local UI confirm (ไม่มี round-trip) หรือต้องส่ง packet ยืนยันไปเซิร์ฟเวอร์ก่อนเปลี่ยนฉากจริง — ถ้าต้องส่ง ปุ่ม "ยืนยัน" ส่ง field อะไร (island id? confirm flag?)
+
+### จ็อบ
+- **T0** — grep ตาราง text (`TEXTDATA_TH__*`) หาคำที่เกี่ยวกับรายงานกัปตัน/เข้าเกาะ เพื่อได้ scene/message id ที่เป็นจุดเริ่มค้นใน binary
+- **T1** — ถ้าพบ UI/packet: ทิศทางและ field ครบ (เทียบวิธีเดียวกับที่ `RE-071`/`RE-082` พินฟิลด์ pickup ไว้)
+- **T2** — เชื่อมกับ `RE-086`: หน้าต่างนี้ขึ้นจาก event เดียวกับ dock trigger หรือคนละจังหวะ (เช่น dock เกิดก่อน แล้วค่อยกดปุ่มแยกเพื่อขอหน้าต่าง)
+
+### nonclaims
+① ไม่ตอบว่ากดยืนยันแล้วเปลี่ยนฉากด้วยกลไกอะไร (นั่นคือ `TeleportVital`/`ForcePos`, ผล `RE-090`) ② ไม่ตอบเนื้อหาข้อความในหน้าต่าง (ไม่ใช่เป้าหมายของใบนี้ เว้นแต่จำเป็นต่อการยืนยัน field)
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจอ่านอย่างเดียว · ทุก VA มี ImageBase `0x400000` กำกับ · ทุกข้อสรุปมี provenance · ชนเพดานให้เขียน bounded negative แล้วปิด · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ตอบโครงสร้าง packet/field ของปุ่มยืนยัน **หรือ** bounded negative ⇒ ปิดใบพร้อม `BUILD_IMPACT:`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-088 GM-COMMAND-WIRE-001 [STATIC-ON-BRIDGE]: **layout ของ `GM_RunGMCommandVital` (`0x51E9`, serializer `0x00729E10`, client→server) และ `GM_RunGMCommandResultVital` (`0x8C77`, serializer `0x00729790`, server→client)**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-6js9ye`/`optimistic-mccarthy-6js9ye` · 2026-08-26 ~16:5x (+07:00) ตาม `COO-DECISION 20260826_1646` (CHARTER-03 [LANE-GM]) ข้อ ④.1**]
+
+> 🔢 **หมายเหตุเลข:** ส่วนหนึ่งของชุด `RE-085`-`RE-091` — ดูหมายเหตุเลขเต็มที่หัวใบ `RE-085`
+
+### ที่มา
+`PANYA-ORDER 20260826_1630` (Lane GM) ตาราง ② — vital id/ทิศ/serializer VA มาจาก `VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv` แล้ว (อ่านคลาวด์ได้) แต่ **ยังไม่มีแถวใน `PF_SERIALIZER_FIELDS`** สำหรับทั้งคู่ ⇒ ต้องถอด field layout จากอิมเมจจริง
+
+### objective (claim เดียว)
+ถอด field layout ของทั้งสอง vital ให้ครบพอลง `PF_SERIALIZER_FIELDS` ได้ตามวิธีมาตรฐานของโปรเจกต์ (เทียบวิธีที่ Codex ถอด `CheatVital` — string8 len32LE @+0x14 — เป็นตัวอย่างขนาดเล็กที่ทำสำเร็จแล้ว): `GM_RunGMCommandVital` คือคำสั่งดิบที่ client พิมพ์ (ตามข้อสังเกตของ attended ว่าไม่พบสตริงคำสั่ง `/xxx` ใน client ⇒ น่าจะเป็น string ดิบส่งไปให้ server ตีความ — **ต้องพิสูจน์ ไม่ใช่สมมติ**) ส่วน `GM_RunGMCommandResultVital` คือผลลัพธ์กลับ (success/fail? ข้อความ?)
+
+### จ็อบ
+- **T0** — เปิด serializer `0x00729E10` (write ฝั่ง client สำหรับ `0x51E9`) ไล่ field ตามลำดับ เหมือนที่ทำกับ `CheatVital`/`ground_loot` fields ก่อนหน้า
+- **T1** — เปิด serializer `0x00729790` (write ฝั่ง client... หรือ read ฝั่ง client ถ้าเป็น server→client — ตรวจทิศทางให้ตรงก่อนอ้าง) สำหรับ `0x8C77`
+- **T2** — ยืนยันว่า handler ฝั่ง client ของ `0x51E9` เป็น default จริง (`0x00A106C0`) ไม่มี custom handler — ถ้าใช่ นี่คือหลักฐานว่า client "แค่ส่ง" ไม่ตีความเอง (สอดคล้องข้อสังเกตของ attended)
+- **T3 · ริเดอร์** — field ใดใน `0x51E9` อาจเป็นตัวบอกคำสั่งย่อย (opcode ย่อยในสตริง หรือ field แยก) — ถ้าตอบได้ ให้บันทึกไว้เป็นข้อเสนอ ไม่ใช่ข้อสรุปสุดท้ายของใบนี้
+
+### nonclaims
+① ใบนี้ไม่นิยามชุดคำสั่ง GM ของเซิร์ฟเวอร์เรา (นั่นคือ GM-003 ในแผนของ attended ซึ่งเป็นงานออกแบบของเราเอง ไม่ใช่ RE) — ใบนี้แค่บอกว่า client ส่ง/รับอะไรได้ ② ไม่ตัดสินว่า client มีคลังคำสั่งซ่อนอยู่หรือไม่ — ถ้า T2 ยืนยัน handler เป็น default จริง ให้ปิดคำถามนั้นด้วยหลักฐาน ไม่ใช่คาดเดา
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจอ่านอย่างเดียว · ทุก VA มี ImageBase `0x400000` กำกับ · ทุกข้อสรุปมี provenance · ชนเพดานให้เขียน bounded negative แล้วปิด · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ได้ field layout ของทั้งสอง vital พอลง `PF_SERIALIZER_FIELDS` **หรือ** bounded negative ต่อ vital ⇒ ปิดใบพร้อม `BUILD_IMPACT:`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-089 GM-STATE-VISUAL-001 [STATIC-ON-BRIDGE]: **`GM_UpdateGMStateVital` (`0x5A19`, handler `0x00729F00`) — ไบต์ไหนคือ is_gm, u32 คืออะไร (level?), และเมื่อ on แล้วไคลเอนต์เปลี่ยนอะไรบนจอ**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-6js9ye`/`optimistic-mccarthy-6js9ye` · 2026-08-26 ~16:5x (+07:00) ตาม `COO-DECISION 20260826_1646` ข้อ ④.2**]
+
+> 🔢 **หมายเหตุเลข:** ส่วนหนึ่งของชุด `RE-085`-`RE-091` — ดูหมายเหตุเลขเต็มที่หัวใบ `RE-085`
+
+### ที่มา
+`PANYA-ORDER 20260826_1630` ตาราง ② — layout บางส่วนรู้แล้ว (`0x0B@+0x14` 1B, `0x0B@+0x15` 1B, `0x14@+0x18` 4B, span `0x00729720`-`0x00729785` sha `03b18673…`) แต่ **ความหมายของแต่ละไบต์ยังไม่พิสูจน์** — นี่คือช่องว่างที่ใบนี้ต้องปิด
+
+### objective (claim เดียว)
+จาก handler `0x00729F00` (`GMModule_Client`): ไบต์/field ใดคือ flag is_gm (on/off), field `u32`@+0x18 มีความหมายอะไร (gm level? permission bitmask? อย่างอื่น?) และเมื่อ client ได้รับสถานะ GM=on มันเปลี่ยนอะไรที่มองเห็นได้ (ไอคอน `bm_gm.tga` ปรากฏที่ไหน, UI element ใหม่, chat prefix)
+
+### จ็อบ
+- **T0** — เปิด handler `0x00729F00` เต็ม ไล่ทีละ field ตาม offset ที่รู้แล้ว ระบุว่าแต่ละไบต์ถูกใช้ไปที่ไหนต่อ (assignment ไปยัง member ไหนของ object)
+- **T1** — xref `bm_gm.tga` (สตริงที่ attended เจอแล้ว) — โยงกลับมาที่ field ไหนใน struct นี้เป็นตัวสั่งวาด/ซ่อนไอคอนนั้น
+- **T2** — เช็คว่ามี UI class อื่นที่ตรวจ flag นี้ (chat window, name label, target panel) — ถ้ามีมากกว่าจุดเดียว ให้ระบุทุกจุด ไม่ใช่แค่จุดแรกที่เจอ
+- **T3 · ริเดอร์** — ถ้าพบว่า `u32`@+0x18 คือ level มากกว่า 1 ระดับ ให้บันทึกไว้ (มีผลต่อ GM-003 ว่าเราต้อง generic level หรือ boolean พอ)
+
+### nonclaims
+① ใบนี้ไม่ตัดสินว่า server เราควรส่ง field เหล่านี้ค่าอะไร — นั่นคือ GM-001/GM-003 (งานสร้างของเราเอง) ② ถ้า static หาความหมายไบต์บางตัวไม่ได้ ให้ bounded negative เฉพาะไบต์นั้น ไม่ต้องปิดทั้งใบถ้าไบต์อื่นตอบได้แล้ว
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจอ่านอย่างเดียว · ทุก VA มี ImageBase `0x400000` กำกับ · ทุกข้อสรุปมี provenance · ชนเพดานให้เขียน bounded negative แล้วปิด · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ตอบความหมายของ is_gm byte + u32 field ได้ (หรือ bounded negative ต่อ field) **และ** ระบุจุดที่ UI เปลี่ยนอย่างน้อยหนึ่งจุด ⇒ ปิดใบพร้อม `BUILD_IMPACT:`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-090 TELEPORT-FORCEPOS-WARP-FIELDS-001 [STATIC-ON-BRIDGE]: **field layout ของ `TeleportVital` (`0x005EB470`), `ForcePos` (`0x005E4250`) และ `CWarpResult` — ใช้ร่วมกันทั้งเส้นทางเดินทางจริง (Columbus→ทะเล→เกาะ) และ GM warp**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-6js9ye`/`optimistic-mccarthy-6js9ye` · 2026-08-26 ~16:5x (+07:00) ตาม `COO-DECISION 20260826_1645` ข้อ 4 + `COO-DECISION 20260826_1646` ข้อ ④.3**]
+
+> 🔢 **หมายเหตุเลข:** ส่วนหนึ่งของชุด `RE-085`-`RE-091` — ดูหมายเหตุเลขเต็มที่หัวใบ `RE-085`
+
+### ที่มา
+`PANYA-ORDER 20260826_1630` ตาราง ② แถวสุดท้าย: "`TeleportVital`/`ForcePos`/`CWarpResult`/`TeleportCheckVital` — registry มี serializer/handler VA ครบ field layout ยังไม่มี ⇒ ต้องถอด (ใช้ร่วมกับเส้นทางเดินทางจริงของใบ 1600 ด้วย)" · **หมายเหตุ `RE-077` พินไว้แล้ว**ว่า `TeleportVital` ที่ scene ปลายทางไม่มีแถวในทะเบียนฉากทำให้ค้างที่ status 2 (ไม่มี fallback) — ใบนี้ไม่ re-derive ข้อนั้นซ้ำ แค่ต้องการ field layout ระดับไบต์ · **ผลของใบนี้คือทางเดียวที่จะยืนยัน/หักล้าง candidate mapping ใน CLOUD-DERIVED SCENE-ID CROSSWALK ด้านบนได้จริง**
+
+### objective (claim เดียว)
+ถอด field layout ของ `TeleportVital` (`0x005EB470`), `ForcePos` (`0x005E4250`), และ `CWarpResult` ให้ครบพอสร้าง/ตีความ packet เหล่านี้ได้จริงในโค้ดของเรา (ทั้งสำหรับ GM warp และสำหรับ Columbus→ทะเล→เกาะ เมื่อฝั่งเซิร์ฟเวอร์ต้องส่งจริง)
+
+### จ็อบ
+- **T0** — เปิด `0x005EB470` และ `0x005E4250` แยกกัน ระบุว่าเป็น encode (write) หรือ decode (read) ฝั่ง client ของแต่ละตัว และ field ทั้งหมดตามลำดับ offset
+- **T1** — `CWarpResult` — หา VA ของ serializer/handler ที่เกี่ยวข้อง (ยังไม่มีในใบ 16:30 ต้องหาเอง) แล้วถอด field เหมือนกัน
+- **T2** — เทียบ `ForcePos` กับ `TeleportVital`: field ต่างกันตรงไหน (ชื่อบ่งบอกว่า `ForcePos` อาจเป็น within-scene, `TeleportVital` เป็น cross-scene — ต้องพิสูจน์จาก field ไม่ใช่เดาจากชื่อ)
+- **T3** — `TeleportCheckVital` (`0x4477`, ตามที่ `RE-083` เคยกล่าวถึงว่า "decoded schema only, never answered") — ถ้ามีเวลาเหลือในใบนี้ ให้ถอด field ด้วย ไม่งั้นเปิดเป็นข้อเสนอ ticket แยกภายหลัง
+
+### nonclaims
+① ใบนี้ไม่ตัดสินว่า dock trigger (`RE-086`) หรือ captain-report confirm (`RE-087`) ใช้ vital ไหนใน 3 ตัวนี้ — เชื่อมกันทีหลังเมื่อทุกใบปิด ② ไม่แตะโค้ด `mob_ai_control`/`world_travel_gate` ที่มีอยู่แล้ว
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจอ่านอย่างเดียว · ทุก VA มี ImageBase `0x400000` กำกับ · ทุกข้อสรุปมี provenance · ชนเพดานให้เขียน bounded negative แล้วปิด · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+field layout ของ `TeleportVital`+`ForcePos` ครบ (`CWarpResult`/`TeleportCheckVital` อย่างน้อย bounded negative ถ้าไม่ทัน) ⇒ ปิดใบพร้อม `BUILD_IMPACT:`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-091 CHEAT-CHAT-TRIGGER-001 [STATIC-ON-BRIDGE]: **แชทเข้า (client input) ไปถึงการส่ง `GM_RunGMCommandVital` (`0x51E9`) เมื่อไร — มี prefix เฉพาะ หรือขึ้นกับสถานะ GM ที่ client ถืออยู่แล้ว**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-6js9ye`/`optimistic-mccarthy-6js9ye` · 2026-08-26 ~16:5x (+07:00) ตาม `COO-DECISION 20260826_1646` ข้อ ④.4**]
+
+> 🔢 **หมายเหตุเลข:** ส่วนหนึ่งของชุด `RE-085`-`RE-091` — ดูหมายเหตุเลขเต็มที่หัวใบ `RE-085` · **นี่คือใบสุดท้ายของชุด เลขว่างถัดไปหลังใบนี้ = 092**
+
+### ที่มา
+`PANYA-ORDER 20260826_1630` ④.4: "แชทเข้า → ไปที่ `0x51E9` เมื่อใด (prefix? สถานะ GM?) — xref id global `0x01088F8C`"
+
+### objective (claim เดียว)
+ไล่ xref จาก global `0x01088F8C` หาเส้นทางที่ chat input กลายเป็น `0x51E9`: มี prefix ตัวอักษรพิเศษ (เช่น `/`) ที่ client ตรวจเองก่อนส่งเป็น GM command แทนที่จะเป็นแชทธรรมดา หรือ client ส่งทุกอย่างเป็นแชทปกติเสมอและ**เซิร์ฟเวอร์เป็นฝ่ายตัดสินใจตีความเป็นคำสั่ง** (ซึ่งจะเป็นหลักฐานสำคัญเพิ่มเติมที่ยืนยันข้อสังเกตของ attended ว่า client ไม่มีคลังคำสั่งเอง)
+
+### จ็อบ
+- **T0** — ไล่ xref ของ `0x01088F8C` ทั้งหมด ระบุทุกฟังก์ชันที่อ่าน/เขียนค่านี้
+- **T1** — หาจุดที่ chat input path แยกออกเป็นสองทาง (แชทปกติ vs `0x51E9`) — ถ้าไม่มีจุดแยกเลย (ทุกอย่างไปทางเดียว) ให้บันทึกเป็นหลักฐานว่า client ไม่กรอง/ไม่ตีความเอง
+- **T2 · ริเดอร์** — ถ้ามี prefix: ตัวอักษรคืออะไร และมันถูกตัดออกก่อนส่งหรือส่งติดไปด้วย (มีผลต่อ field layout ที่ `RE-088` ถอดไว้)
+
+### nonclaims
+① ใบนี้ไม่นิยามชุดคำสั่งของเซิร์ฟเวอร์เรา (`GM-003`) ② ถ้า T0/T1 พบว่า path เดียวกับแชทธรรมดาทั้งหมดโดยไม่มีจุดแยกให้เห็น ให้เขียนเป็นผลบวก (ไม่ใช่ bounded negative) — "ไม่มีจุดแยก" คือคำตอบที่วัดได้ ไม่ใช่ความล้มเหลวของใบ
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจอ่านอย่างเดียว · ทุก VA มี ImageBase `0x400000` กำกับ · ทุกข้อสรุปมี provenance · ชนเพดานให้เขียน bounded negative แล้วปิด · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ตอบว่ามี prefix หรือไม่ (ก/ข ตาม objective) ด้วยหลักฐาน xref **หรือ** bounded negative ⇒ ปิดใบพร้อม `BUILD_IMPACT:`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
