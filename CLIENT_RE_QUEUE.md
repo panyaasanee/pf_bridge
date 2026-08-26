@@ -2928,3 +2928,32 @@ field layout ของ `TeleportVital`+`ForcePos` ครบ (`CWarpResult`/`Tele
 ตอบว่ามี prefix หรือไม่ (ก/ข ตาม objective) ด้วยหลักฐาน xref **หรือ** bounded negative ⇒ ปิดใบพร้อม `BUILD_IMPACT:`
 
 ### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-092 REMOTE-ACTOR-LIST-CONSUMER-REPLACE-OR-MERGE-001 [STATIC-ON-BRIDGE]: **ไคลเอนต์อ่านคอลเลกชัน `make_runtime_remote_actors([entry])` (nonempty, one-entry) อย่างไร — แทนที่นักแสดงอื่นทั้งหมดในต้นไม้เดียวกัน (replace-by-omission) หรือรวมเข้ากับที่มีอยู่ (merge)**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-r6hhp6`/`optimistic-mccarthy-r6hhp6` · R179 · 2026-08-26 ~18:1x (+07:00) ตามคำขอ `LANE-B-URGENT` (`notes_to_chief/20260826_1746_LANE-B-URGENT-*.md`, pirate-force-server `#67`)**]
+
+> 🔢 **หมายเหตุเลข:** เลขว่างถัดไปหลัง `RE-091` (ใบสุดท้ายของชุด `RE-085`-`RE-091`) คือ `092` — ยืนยันสด: `GT-092`/`RE-092` = 0 hit ทั้งสองไฟล์ก่อนเปิดใบนี้ · **เลขว่างถัดไปหลังใบนี้ = 093**
+
+### ที่มา
+`mob_combat.bar_frames()` และ `mob_death.death_frames()` (เรียกจาก `dying_frames`/`dead_frames`) ต่างประกอบคอลเลกชัน `make_runtime_remote_actors([entry])` แบบ **nonempty หนึ่งรายการ** และโค้ดนี้ถูกต่อสายเข้าเส้นทางไม่มีแฟล็กแล้วโดย pirate-force-server `#63` (merged 2026-08-26 16:49+07:00) · `notes_to_chief/20260826_0910_LANE-A-CORE-REQUEST-the-town-must-not-follow-you-out-of-town.md` §4.bis เตือนรูปแบบนี้ไว้ล่วงหน้า · `notes_to_chief/20260826_1017_RE-082-RESULT-OBJECT-REF-IS-ELEMENT-KEY.md` พิสูจน์แล้วว่าคอลเลกชัน**พี่น้อง**ตัวหนึ่ง (`PickupTerrainThing`) ผู้บริโภคอ่านแบบ nonempty=replace-by-omission, zero-entry=no-op — แต่ยังไม่มีใครสอบเส้นทางเดียวกันกับผู้บริโภคคอลเลกชันนี้โดยเฉพาะ · `GT-084` (การโจมตีจริงครั้งแรก) หลุดบล็อกและพร้อมยิงจากรอบเดียวกัน โดยยังไม่มีใบเทสไหนสั่งให้ผู้เทสสังเกตนักแสดงอื่นที่อาจหายไปจากจอ
+
+### objective (claim เดียว)
+จากอิมเมจไคลเอนต์ล้วน ๆ: ผู้บริโภค `RunTimeProtocolRes` derived-mask `0x08` (list) ตัวเดียวกับที่ `bar_frames`/`death_frames` ใช้ อ่านคอลเลกชัน **nonempty หนึ่งรายการ** อย่างไร — **(ก)** replace-by-omission (แทนที่ทั้งต้นไม้ด้วยรายการที่ส่งมา ⇒ นักแสดงอื่นที่ไม่อยู่ในรายการหายจากจอ) หรือ **(ข)** merge/upsert (เพิ่ม/อัปเดตเฉพาะรายการที่ส่งมา นักแสดงอื่นไม่กระทบ) — เทียบวิธีเดียวกับที่ `RE-082` พิสูจน์กับ `PickupTerrainThing` ไว้แล้ว
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยันว่าผู้บริโภคของ derived-mask `0x08` list ที่ `bar_frames`/`death_frames` ใช้เป็น **ตัวเดียวกัน** หรือ **คนละตัว** กับผู้บริโภคที่ `RE-082` พิสูจน์ไว้กับ `PickupTerrainThing` (element key tag ต่างกันหรือไม่ — `PickupTerrainThing` ใช้ tag ใด เทียบกับ tag ที่ `mob_combat`/`mob_death` ประกอบ) — ถ้าคนละตัว ผลของ `RE-082` **ใช้แทนกันไม่ได้** และใบนี้ต้องสอบใหม่ทั้งเส้นทาง ห้ามยืมคำตอบ
+- **T1** — ไล่ตัวจัดการที่รับ derived-mask `0x08` list element (key tag ตามที่ T0 ยืนยัน) หา loop/logic ที่ตัดสินใจ replace vs merge บนต้นไม้นักแสดงที่มีอยู่แล้วในฉาก
+- **T2** — ถ้าเป็น **(ก) replace-by-omission**: ระบุ scope ของการแทนที่ชัดเจน — แทนที่ **ทุกนักแสดงในฉาก** หรือแทนที่เฉพาะ **กลุ่มย่อยที่คอลเลกชันนี้เป็นเจ้าของ** (เช่น เฉพาะ field mob ที่เคยส่งผ่าน collection เดียวกัน ไม่แตะผู้เล่นอื่น/NPC ที่มาจากคอลเลกชันอื่น) — เส้นแบ่งนี้คือคำตอบที่ `GT-084` ต้องการก่อนยิง
+- **T3 · ริเดอร์** — ถ้าเวลาเหลือ: `PickupTerrainThing` (`RE-082`) กับคอลเลกชันของใบนี้ใช้ element key tag ต่างกันจริงหรือไม่ (ถ้าต่าง แปลว่าเป็นคอลเลกชันคนละประเภทที่บังเอิญ derived-mask เดียวกัน — สำคัญต่อการอ่าน `RE-082` ในอนาคต)
+
+### nonclaims
+① ใบนี้ไม่ตัดสินว่าโค้ด `mob_combat`/`mob_death` ที่ merge ไปแล้ว (`#63`) ต้องแก้ — นั่นเป็นการตัดสินใจของ chief/COO เมื่อได้คำตอบ ไม่ใช่ผลของใบ static ② ไม่อ้างว่า `RE-082` ผิด — แค่ยังไม่พิสูจน์ว่าใช้แทนกันได้กับคอลเลกชันนี้ ③ ไม่บล็อก `GT-084` เอง — attended เป็นผู้ตัดสินว่าจะยิงก่อนใบนี้ปิดหรือไม่ โดยเห็นความเสี่ยงนี้ล่วงหน้าจาก `mob_combat.py`/`mob_death.py` docstring ที่ต่อสายไว้แล้ว
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจอ่านอย่างเดียว · ทุก VA มี ImageBase `0x400000` กำกับ · ทุกข้อสรุปมี provenance (VA + วิธีที่ได้มา) · ชนเพดานให้เขียน **bounded negative** แล้วปิด **ห้ามเดาต่อ** · **ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB**
+
+### เกณฑ์จบใบ
+ตอบ T1/T2 (ก/ข + scope ถ้าเป็น ก) ด้วยหลักฐาน **หรือ** bounded negative ว่าเพดาน static อยู่ตรงไหน ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
