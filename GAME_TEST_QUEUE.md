@@ -7533,20 +7533,24 @@ BUILD_IMPACT: RX9 -> the gate's arrival detector cannot see a real arrival on th
 
 ---
 
-## GT-084 MOB-COMBAT-001 / MOB-DEATH-001 FIRST-REAL-ATTACK-001: การโจมตีจริงจากผู้เล่นครั้งแรกที่ไปถึง mob_combat/mob_death บนบูตไร้แฟล็ก -- เลือดมอนสเตอร์ลดจริงไหม และ 0x201F ตายไหม  [BLOCKED -- รอ merge ก่อน]
+## GT-084 MOB-COMBAT-001 / MOB-DEATH-001 FIRST-REAL-ATTACK-001: การโจมตีจริงจากผู้เล่นครั้งแรกที่ไปถึง mob_combat/mob_death บนบูตไร้แฟล็ก -- เลือดมอนสเตอร์ลดจริงไหม และ 0x201F ตายไหม  [READY -- merged, ด่านสองชั้นยังต้องผ่านตอนบูต]
 
 > เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md, prefix สองแบบ ห้ามแยกตัวนับ.
 > เลขสูงสุดที่ใช้ไปแล้ว ณ เวลาเขียนใบนี้: GT-081 (GAME_TEST_QUEUE.md) และ RE-083 (CLIENT_RE_QUEUE.md,
 > บันทึกไว้เองว่า "เลขว่างถัดไป = 084"). grep ซ้ำทั้งสองไฟล์ก่อนจอง: GT-084 = 0 hit, RE-084 = 0 hit.
 > ใบเก่าทุกใบอยู่ที่เดิม ไม่ถูกแตะ ไม่ถูกย้าย.
 
-### รอ merge ก่อน -- ใบนี้บูตไม่ได้จนกว่าเลนโค้ดจะลง main
+### merge แล้ว -- ผ่านด่าน merge แล้ว เหลือด่าน resolver/git-grep ตอนบูต
 เนื้อหาที่ใบนี้ทดสอบมาจาก pirate-force-server commit 6105d26 บนแบรนช์
 claude/optimistic-mccarthy-mdj01v (CORE-REQUEST-005 / MOB-COMBAT-001, อนุมัติโดย
-COO-DECISION 20260826_0402). ณ เวลาที่เขียนใบนี้ แบรนช์นี้ยังไม่ merge เข้า main.
-ห้ามบูตใบนี้จนกว่า PR ของแบรนช์นี้จะ merge เข้า main จริง และ pf_resolve_green_boot.py
-คืน BOOT_COMMIT ที่ผ่านการตรวจข้อ 1-5 ข้างล่างครบ. ปล่อยใบไว้ที่เดิม ห้ามลบ ห้ามย้าย
-ห้ามย่อ ระหว่างรอ.
+COO-DECISION 20260826_0402). ยืนยันแล้วว่า commit 6105d26 merge เข้า main จริงแล้ว
+ผ่าน PR #63 (merge commit c101b2d) -- ตรวจด้วย git log/git merge-base
+--is-ancestor บน repo pirate-force-server เมื่อ 2026-08-26. ตัวบล็อกเดิม "ยังไม่
+merge" ปิดแล้ว ไม่ใช่เหตุผลให้ใบนี้ค้างอีกต่อไป.
+ใบนี้ยังบูตไม่ได้จนกว่า pf_resolve_green_boot.py คืน BOOT_COMMIT ที่ผ่านการตรวจ
+ข้อ 1-5 ของด่าน 2 ข้างล่างครบ -- สองด่านนั้นยังต้องรันทุกครั้งตอนบูตเหมือนเดิม
+ไม่ใช่ว่า merge แล้วข้ามได้. ยังไม่มีรอบ attended จริงของใบนี้ ห้ามเปลี่ยนสถานะเป็น
+PASS/DONE จนกว่าจะมีผลจากรอบจริง.
 
 ### ที่มา -- อ่านจากซอร์สจริง ห้าม re-derive ระหว่างรอบ
 - src/pirateforce_foundation/mob_combat.py -- production_allowed = True, ไม่มีแฟล็ก,
