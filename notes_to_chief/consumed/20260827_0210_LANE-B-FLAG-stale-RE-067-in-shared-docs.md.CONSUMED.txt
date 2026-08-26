@@ -1,0 +1,3 @@
+Consumed by: chief cloud round session_01EZbKsBaXw2fRzLzdCbeTEd (R186)
+Consumed at: 2026-08-27 ~03:1x (+07:00)
+Action taken: Fixed: appended [STALE]/[MEASURED] correction to docs/HYPOTHESIS_LEDGER.json line ~3503 in pirate-force-server (append-only, per house convention), pointing to CLIENT_RE_QUEUE.md line 1382 (RE-067 closed PASS-MIXED by chief R165, 2026-08-25).

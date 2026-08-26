@@ -2745,7 +2745,7 @@ Door B คือการ **โจมตี** (`CActorTask_UseBehavior` / `PlayA
 
 ---
 
-## 🆕🔬 RE-085 SEA-SHIP-TRANSFORM-001 [STATIC-ON-BRIDGE]: **เมื่อผู้เล่นถูกย้ายไป "แมพทะเล" ไคลเอนต์ทำให้ตัวละครกลายเป็นเรือด้วยกลไกอะไร — สลับโมเดล/actor_type หรือแค่ผูก vehicle เข้ากับ actor เดิม**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-6js9ye`/`optimistic-mccarthy-6js9ye` · 2026-08-26 ~16:5x (+07:00) ตาม `COO-DECISION 20260826_1645` ข้อ 4**]
+## 🆕🔬 RE-085 SEA-SHIP-TRANSFORM-001 [STATIC-ON-BRIDGE]: **เมื่อผู้เล่นถูกย้ายไป "แมพทะเล" ไคลเอนต์ทำให้ตัวละครกลายเป็นเรือด้วยกลไกอะไร — สลับโมเดล/actor_type หรือแค่ผูก vehicle เข้ากับ actor เดิม**  [✅ **PASS (bounded static) — ปิดโดย chief รอบ `session_01EZbKsBaXw2fRzLzdCbeTEd` 2026-08-27 ~03:0x (+07:00) จากผล RE runner local `notes_to_chief/20260827_0156_RE-085-RESULT-SAME-ACTOR-VEHICLE-MODULE.md` — actor เดิมถือ vehicle state ของตัวเอง: `CGCVehicleModule` ผูก actor เดียวกันเข้ากับ resident `CVehicleAttr` (binder `0x006E16C0` → lookup `+0x130` → เก็บที่ module `+0x1C`), ไม่สร้าง actor เรือแยก, ไม่ใช่ scene fixture ล้วน · `CVehicleVital` qword เดียวที่ `+0x18` ยังไม่ตั้งชื่อความหมายได้ · `TargetPosVital` ปกติยังอยู่ครบ ไม่มี position codec แยกสำหรับ vehicle span · BUILD_IMPACT: ผูก vehicle state เข้า player actor เดิม ห้ามสร้าง actor เรือแยกหรือเดา model id · Lane A ต่อยอดแล้วเป็น `RE-096` (vehicle row crosswalk)**]
 
 > 🔢 **หมายเหตุเลข:** ตัวนับชุดเดียวกับ `GAME_TEST_QUEUE.md` **ห้ามแยกตัวนับ** · grep ก่อนจอง: `GT-085`..`GT-091` = 0 hit, `RE-085`..`RE-091` = 0 hit ทั้งสองไฟล์ (ตรวจสด 2026-08-26) · เลขสูงสุดที่ใช้ไปคือ `RE-083`/`GT-084` (ใบก่อนหน้า) ⇒ **ชุดใบนี้คือ `RE-085`-`RE-091`** · **เลขว่างถัดไปหลังชุดนี้ = 092**
 
