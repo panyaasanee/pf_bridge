@@ -62,7 +62,9 @@ complete recursive CFG ของ switch-scene cleanup slot `0x004C7160` แล�
 ### T5 ADDENDUM (chief R181, 2026-08-26) — ตอบ rider sub-question ②/③ เท่านั้น, ไม่แตะ verdict เดิมของ T5
 
 คำตอบ T5 เดิม (BOUNDED NEGATIVE, scene-cleanup slot `0x004C7160`/`0x004C6920`) ยังเป็นอย่างนั้น ไม่เปลี่ยน.
-Addendum นี้ตอบเฉพาะ rider ②/③ ที่แทรกใน `GAME_TEST_QUEUE.md` ใต้ RIDER-081-A (บรรทัด 2496-2503),
+Addendum นี้ตอบเฉพาะ rider ②/③ ที่แทรกใน `CLIENT_RE_QUEUE.md` บรรทัด 2483-2528 ("rider ที่สอง" ต่อท้าย
+`RE-075` ในไฟล์ตามลำดับการแทรก แต่เนื้อหาเป็นของ `RE-077 T5` ตามที่รอบ `k69t3b` เขียนกำกับไว้เอง —
+ไม่ใช่ `GAME_TEST_QUEUE.md`/`RIDER-081-A` ซึ่งเป็นริเดอร์คนละใบที่ฝั่ง attended ตอบขนานกันอยู่),
 โดยใช้ผล RE-082 (PICKUP-OBJECT-REF-SOURCE-001, `notes_to_chief/20260826_1017_RE-082-RESULT-OBJECT-REF-IS-ELEMENT-KEY.md`):
 
 ใน **consumer ที่ RE-082 วัด** (`CONSUMER [0x006AF970,0x006B03E3)`, รับ element list ผ่าน
@@ -72,7 +74,8 @@ drop-object บนพื้นที่ `PickupTerrainThing` อ่าน elemen
 - generation ที่ **nonempty** ⇒ **replace-by-omission**: key เดิมที่ไม่อยู่ใน generation ใหม่ถูก erase
   (`0x006AFF84` -> `0x005E0D40`), key ที่ match ถูก update (`0x006AFDE9` -> `0x005F4C00`),
   key ใหม่ถูก insert (`0x006B014F`..`0x006B0211`)
-- generation ที่ **count=0** (nonempty pointer, zero entries) ⇒ **no-op**: branch
+- generation ที่ **count=0** ([PROPOSED interpretation ของ RE-082 T4 — "nonempty pointer" เป็นการตีความ
+  ของ chief ไม่ใช่คำที่ RE-082 T4 เขียนตรงตัว] zero entries) ⇒ **no-op**: branch
   `0x006AF9B4`/`0x006AF9BF` ไปตรง epilogue `0x006B03BC`, ไม่ clear live tree
 - incoming pointer เป็น **null** ⇒ เส้นทางที่สาม แยกจากทั้งสองข้างบน: clear/erase ทั้ง tree
   (`0x006B024F`..`0x006B0368` -> `0x005E0D40`)
@@ -87,10 +90,17 @@ drop-object บนพื้นที่ `PickupTerrainThing` อ่าน elemen
    (T0 ของ `RE-092`: เทียบ element key tag ของ `PickupTerrainThing` consumer กับของ
    derived-mask `0x08` consumer) — **ห้ามอ่าน addendum นี้ว่าได้คำตอบของ mob_combat/mob_death/
    world_population_handoff แล้ว จนกว่า `RE-092` T0 จะปิด**
-3. เข้ากันได้ (consistent) เท่านั้นกับสมมติฐานของ `world_population_handoff.py` (sha `51faa81`)
-   ที่ว่า generation ว่างไม่ลบใคร — **ไม่ใช่การพิสูจน์ข้าม consumer**
+3. 🔴 **แก้คำ 2026-08-26 ~21:1x — เวอร์ชันแรกของข้อนี้เขียนกลับทิศ ตัวโมดูลอ้างตรงกันข้าม:**
+   `world_population_handoff.py` (sha `51faa81`) เขียนสมมติฐานของตัวเอง (docstring, ติดป้าย
+   `[INFERENCE, NOT MEASURED]`) ว่า **generation ว่างทำให้ไคลเอนต์ล้างลิสต์ actor ออก** (กลไก
+   `KIND_CLEAR`) — **ไม่ใช่ "ไม่ลบใคร"** ตามที่แก้ไขนี้เคยเขียนผิด
+   ⇒ **ถ้า** consumer ที่ `RE-082` วัด (`PickupTerrainThing`) เป็นตัวเดียวกับที่โมดูลนี้ใช้จริง (ยังไม่พิสูจน์
+   — ข้อ 1/2 ข้างบน) ผล "zero-entry ⇒ no-op" ของ `RE-082` จะ **ขัดกันตรง ๆ** กับสมมติฐานของโมดูลนี้:
+   เฟรม 0-entry ที่ตั้งใจส่งไปล้างคนของท่าเรืออาจไม่ทำอะไรเลยบนจอจริง ๆ — **นี่คือคำถามเปิดที่สำคัญที่สุด
+   ของ addendum นี้ ไม่ใช่จุดที่ปิดแล้ว และห้ามอ่านว่า "เข้ากันได้" อีกต่อไป**
 4. layer = static image (CFG) ล้วน — ไม่พิสูจน์ client-observable despawn/render และไม่แตะ
-   nonclaim เดิมของ T5 ข้อ 6 (RE-077 letter บรรทัด 96)
+   nonclaim เดิมของ T5 ข้อ 6 (ท้ายใบนี้ หัวข้อ "nonclaims (ตามใบ)" รายการที่ 6 — เลขบรรทัดขยับทุกครั้งที่
+   ใบนี้ถูกต่อท้าย ห้ามผูกเลขบรรทัดตายตัว)
 
 ## span pins / reproducibility
 
