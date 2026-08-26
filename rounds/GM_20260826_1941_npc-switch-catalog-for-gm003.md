@@ -52,3 +52,15 @@ MCP GitHub tool ไม่พร้อมใช้งานตอนต้นร�
 
 - `RE-091` (ของสาย RE) · `CORE-REQUEST-006` รอ chief ต่อสาย (ยังไม่ทำตาม R179) — ทั้งสองไม่ใช่ของใหม่
 - `item`/`spawn` GM-specific data source ยังไม่เจอ — ยังไม่เปิดใบขอเพิ่ม เพราะยังไม่ชัดว่าเป็น RE-request หรือแค่ยังไม่ค้นละเอียดพอ (ค้นรอบต่อไป)
+
+## อัปเดตหลังพยายามจบรอบ (19:50+07:00) — เอา draft ออกไม่สำเร็จ ห้ามเดา ห้าม force
+
+ทำตามลำดับจบรอบ: (1) push โค้ด+จดหมายครบทั้งสอง repo แล้ว (2) เอา draft ออก — **ล้ม** (3) แก้หัวข้อ — ทำสำเร็จ (ทั้งสอง PR ขึ้นต้น `[LANE-GM]` แล้ว, ไม่ใช่ "WIP round claim" อีกต่อไป)
+
+รายละเอียดข้อ (2): MCP GitHub tool ไม่เชื่อมต่อได้ตลอดทั้งรอบ (`ToolSearch` คืนค่าว่างทุกครั้งที่ลอง รวมครั้งสุดท้ายตอนจะปิด draft) เอา draft ออกได้ทางเดียวคือ GraphQL mutation `markPullRequestReadyForReview` — ลองครั้งเดียวผ่าน `curl` ตรงไปยัง `api.github.com/graphql` ได้ `HTTP 403`: `"This GraphQL query is not enabled for this session — only the pinned set of PR-review operations is served. Use REST via gh api ... instead."` ลองทาง REST ตามคำแนะนำ (`PATCH .../pulls/131` body `{"draft": false}`) — GitHub รับคำขอ (`HTTP 200`) แต่ค่า `draft` ไม่เปลี่ยน (REST ไม่รองรับฟิลด์นี้จริง เป็นข้อจำกัดของ GitHub API เอง ไม่ใช่ของ proxy) — **ไม่ retry ซ้ำตามกฎ "ห้าม retry ห้าม force"**
+
+หลักฐานว่านี่เป็นปัญหาเฉพาะรอบนี้ ไม่ใช่ปัญหาระบบทั้งสาย: รอบก่อนหน้า (`uj00h3`) ปิด draft ของ `pirate-force-server#69`/`pf_bridge#128` ได้สำเร็จและ merge ไปแล้วจริง (`cc27c02` ใน git log) — เครื่องมือใช้ได้ตอนนั้น แค่ session นี้ MCP GitHub tool ไม่ต่อ
+
+**ผล**: `pf_bridge#131` และ `pirate-force-server#72` ยังเป็น draft — โค้ด/จดหมายของรอบนี้อยู่บน branch แล้วปลอดภัย ไม่หาย แต่ merge-gate workflow น่าจะไม่หยิบ PR ที่เป็น draft ไปทำงาน (อิงจากที่ใบ 1755 วินิจฉัยไว้เรื่อง draft ค้าง) — **ข้ามขั้น 4 (commit เปล่า "wake gate")** เพราะปลุก gate ตอน PR ยังเป็น draft ไม่น่าช่วยอะไร มีแต่เปลืองรัน CI เปล่า ๆ
+
+**ไม่ได้ทำ**: ปิด PR เอง, เปิด PR ใหม่แทน, force อะไรก็ตาม — เก็บ PR ทั้งสองไว้ตามเดิม รอ session ถัดไปที่ MCP GitHub tool ต่อติด หรือ chief/COO ช่วยกดปุ่ม "Ready for review" ให้ตรง ๆ ในเว็บ
