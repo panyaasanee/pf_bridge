@@ -3236,3 +3236,54 @@ negative แล้วปิด ไม่เดาต่อ · ไม่เปิ
 field ในข้อมูลชุดนี้ ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
 
 ### result (ยังไม่มี — ใบเปิดอยู่)
+
+## 🆕🔬 RE-098 FIELD-MOB-DEFINITION-PAYLOAD-LEVEL-RANK-001 [STATIC-ON-BRIDGE]: **หา parser สำหรับ definition payload 16 ไบต์ต่อ `.npc` (`b5`/`b15`/`u32@11`) join กับ level/rank/spawn-rate จริงของมอนสเตอร์ต่อฉาก**  [🟢 **OPEN — เปิดโดย chief cloud ตามคำขอ LANE-B (สาย B · COMBAT) 2026-08-27 ~10:3x (+07:00)**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-098`/`RE-098` = **0 hit ทั้งสองไฟล์** ⇒ **ใบนี้คือ `RE-098`** · เลขว่างถัดไปหลังใบนี้ = 099
+> 🔴 ใบ `RE-085`-`RE-097` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`notes_to_chief/20260827_1030_LANE-B-REPLY-PANYA-ORDER-npc-scene-file-field-interpretation.md` — สาย B ทำ
+PANYA-ORDER `0440` (ตีความ field ของสนามมอนสเตอร์) แบบ static/read-only ครบสี่ข้อที่ถูกถามไว้: ข้อ 1
+(f32_4/f32_5 ไม่ใช่รัศมี aggro — วัดได้, negative) ข้อ 2 (กลุ่ม placement "101+" ไม่ใช่มอนสเตอร์เป็นส่วนใหญ่ —
+วัดได้, Bg0015) ข้อ 3 (u16_1/u16_3 = จำนวนตัวต่อชุด — สมมติฐาน สนับสนุนบางส่วน 78%) แต่ข้อ 4 (definition
+payload `b5`/`b15`/`u32@11` เทียบ level/rank/spawn-rate) **ตอบไม่ได้**: สาย B ไม่มีเครื่องมืออ่าน raw payload
+16 ไบต์ของ definition (`.npc` header) ที่ join กับ per-monster level/rank ได้โดยตรงใน `src/` ตอนนี้ —
+`field_mob_tables_bg0015.py`/`field_mob_ai_tables.py` มีแค่ field ระดับ placement/AI-row (level, rank,
+ai_wander, ai_combat, n_AGGRO ฯลฯ) ที่ join จากตาราง MOBS ไม่ใช่จาก definition payload ที่ Panya ถอดไว้
+(b0/b5/b6-10/u32@11/b15) สายนี้ไม่มีสิทธิ์เขียน `CLIENT_RE_QUEUE.md` ในเขตของตัวเอง — ฝากให้ chief/RE runner
+เปิดใบแทน
+
+### objective (claim เดียว)
+ระบุว่า definition payload 16 ไบต์ของ `.npc` (`GameClient/Data/Scene/Save/*/*.npc`) — โดยเฉพาะไบต์ `b5`
+(ช่วง 0..3), `b15` (ช่วง 0..12), และ `u32@11` (มักเป็น 100, บางทีเป็น 50/200/400/500/800) — สัมพันธ์กับ
+level/rank/อัตราเกิด (spawn-rate) จริงของมอนสเตอร์หรือไม่ โดยใช้ crosswalk field จริงหรือ client-observable
+evidence เท่านั้น ห้ามเดาความหมายจากช่วงค่าเปล่าๆ
+
+### จ็อบ
+- **T0 · ด่านคุม** — เขียน parser อ่าน definition payload 16 ไบต์ต่อ `.npc` แล้ว join `set_names`/template
+  name เข้ากับ `n_ID`/`n_LEVEL_MIN`/`n_RANK` ของ MOBS ต่อฉาก (ใช้ตารางที่สาย B มีอยู่แล้ว
+  `field_mob_tables_bg0015.py`/`field_mob_ai_tables.py` เป็นจุดเทียบ ไม่ต้องสร้างตารางใหม่)
+- **T1** — เทียบค่า `b5` กับ `n_LEVEL_MIN`/`n_LEVEL_MAX` ต่อ placement ที่ join ได้ทุกจุด รายงานว่าตรงกันเป็น
+  สัดส่วนเท่าไหร่ (แบบเดียวกับที่ `LANE-B-REPLY-PANYA-ORDER` รายงานสัดส่วนของข้อ 3 — ตัวเลขวัดได้ ไม่ใช่ทฤษฎี)
+- **T2** — เทียบค่า `b15` กับ `n_RANK` ด้วยวิธีเดียวกับ T1
+- **T3** — เทียบค่า `u32@11` กับสัญญาณ spawn-rate ที่มีอยู่จริงในข้อมูล (เช่น จำนวน placement ต่อ set,
+  ความถี่ที่ set นั้นซ้ำในฉาก) — ถ้าไม่มีสัญญาณ spawn-rate ที่วัดได้เลยในข้อมูลชุดนี้ ให้เขียน bounded negative
+  แทนการเดา
+
+### nonclaims
+① ไม่อ้างว่า `b5`/`b15`/`u32@11` ต้องสัมพันธ์กับ level/rank/spawn-rate แน่นอน — ถ้า join แล้วไม่พบความสัมพันธ์
+ที่วัดได้ (เหมือนที่ข้อ 1 ของ `LANE-B-REPLY-PANYA-ORDER` พบว่า f32_4/f32_5 ไม่ใช่รัศมี aggro) ให้เขียน bounded
+negative แล้วปิด ไม่เดาต่อ ② ไม่ตัดสินว่า field_mob_tables_bg0015.py/field_mob_ai_tables.py ควรแก้อย่างไร —
+สาย B ตัดสินใจเองเมื่อได้ข้อมูล (เขตของสาย B ไม่ใช่ของใบนี้) ③ ไม่อ้างว่าข้อ 1-3 ของ
+`LANE-B-REPLY-PANYA-ORDER` (ที่ตอบสำเร็จแล้ว) ต้องพิสูจน์ซ้ำ — ใบนี้เปิดเฉพาะข้อ 4 ที่ยังตอบไม่ได้เท่านั้น
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์ scene/gamedata อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded
+negative แล้วปิด ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ตอบ T0-T3 ด้วยหลักฐาน (สัดส่วนที่ตรง/ไม่ตรงต่อค่าที่เทียบ) **หรือ** bounded negative ว่าไม่มี crosswalk
+field ในข้อมูลชุดนี้ ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
