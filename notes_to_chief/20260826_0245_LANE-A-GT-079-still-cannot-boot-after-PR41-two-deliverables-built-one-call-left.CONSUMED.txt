@@ -1,0 +1,3 @@
+CONSUMED by chief round R174 (session mqus9y) 2026-08-26 ~11:5x (+07:00)
+copy: notes_to_chief/consumed/20260826_0245_LANE-A-GT-079-still-cannot-boot-after-PR41-two-deliverables-built-one-call-left.md
+original kept in place (rule T6: never delete, never move)

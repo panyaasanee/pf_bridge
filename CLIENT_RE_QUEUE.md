@@ -2522,7 +2522,7 @@ make_runtime_remote_actors(())  ->  pc 17 B (เท่าเฮดเดอร�
 
 ---
 
-## 🆕🔬 RE-077 SCENE-TRANSITION-SEQUENCE-001 [STATIC-ON-BRIDGE]: **ไคลเอนต์ต้องการอะไร "ตามลำดับ" เพื่อย้ายตัวละครที่ live อยู่จากฉากหนึ่งไปอีกฉาก — และมันทำอะไรกับ `scene_id` ที่ไม่มีแถวในตารางฉาก**  [🟢 **OPEN — เปิดโดยสาย A (LANE-A · `pf-builder`) รอบ `dhisbj` · 2026-08-25 ~23:2x (+07:00)**]
+## 🆕🔬 RE-077 SCENE-TRANSITION-SEQUENCE-001 [STATIC-ON-BRIDGE]: **ไคลเอนต์ต้องการอะไร "ตามลำดับ" เพื่อย้ายตัวละครที่ live อยู่จากฉากหนึ่งไปอีกฉาก — และมันทำอะไรกับ `scene_id` ที่ไม่มีแถวในตารางฉาก**  [✅ **DONE — T0-T4 PINNED · T5 BOUNDED-NEGATIVE — ผลหน้าสะพาน 2026-08-26 01:20 (+07:00) · บันทึกโดย chief R174 · ลำดับ StateRunTime/Navigation -> TeleportVital -> cStateSwitchScene -> SCENE_NAME lookup -> n_SCENE_TYPE==8 ? StateNavigation : StateRunTime พินครบด้วย span+SHA256 · miss คือ status +0x0C=2 ไม่มี fallback · T5 (remote actor cleanup) ปิดเป็น bounded negative โดยตั้งใจ ห้ามอ่านว่า preserve หรือ drop แน่นอน**]
 
 > 🔢 **หมายเหตุเลข:** ตัวนับชุดเดียวกับ `GAME_TEST_QUEUE.md` **ห้ามแยกตัวนับ** · `RE-073`/`RE-075` เปิดอยู่ · **076 ถูกจองโดย `GT-076`** (ใบ attended ของ `BUILD-001` รอบเดียวกันนี้) ⇒ **ใบนี้คือ `RE-077`** · **เลขว่างถัดไป = 078**
 
@@ -2570,7 +2570,7 @@ make_runtime_remote_actors(())  ->  pc 17 B (เท่าเฮดเดอร�
 ### สิ่งที่ใบนี้ *ไม่* ทำ
 ไม่แตะโค้ดเซิร์ฟเวอร์ · ไม่เปิดเกม · ไม่ตัดสินฉากปลายทาง · ไม่ยุบรวมกับ `RE-073`
 
-### result ~~(ยังไม่มี — ใบเปิดอยู่)~~ — **ผลมาแล้วตั้งแต่ 2026-08-26 01:20 · ช่องนี้ค้างอัปเดต**
+### result ~~(ยังไม่มี — ใบเปิดอยู่)~~ ~~(ผลมาแล้วตั้งแต่ 2026-08-26 01:20 · ช่องนี้ค้างอัปเดต)~~ — **ปิดแล้ว chief R174 2026-08-26 ~11:5x (+07:00): หัวใบแก้เป็น DONE ตรงกับใบผลข้างล่างนี้แล้ว**
 
 > 🔴🔴 **บรรทัดนี้คือการชี้ไปที่ใบผล ไม่ใช่การปิดใบ — สาย A รอบ `yw2f6h` 2026-08-26 09:4x (+07:00)**
 > **ใบผล:** `notes_to_chief/20260826_0120_RE-077-RESULT-SCENE-TRANSITION-SEQUENCE-PINNED.md`
@@ -2594,7 +2594,7 @@ make_runtime_remote_actors(())  ->  pc 17 B (เท่าเฮดเดอร�
 
 ---
 
-## 🆕🔬 RE-082 PICKUP-OBJECT-REF-SOURCE-001 [STATIC-ON-BRIDGE]: **dword ที่ไคลเอนต์ก๊อปจาก `[drop-object+0x10]` ตอนคลิกของบนพื้น — มันคือ "คีย์ของ element" ที่เซิร์ฟเวอร์เขียนที่ `element+0x10` หรือเปล่า**  [🟢 **OPEN — เปิดโดยสาย B (LANE-B · COMBAT · `pf-builder`) รอบ `vvkff9` · 2026-08-26 ~08:0x (+07:00)**]
+## 🆕🔬 RE-082 PICKUP-OBJECT-REF-SOURCE-001 [STATIC-ON-BRIDGE]: **dword ที่ไคลเอนต์ก๊อปจาก `[drop-object+0x10]` ตอนคลิกของบนพื้น — มันคือ "คีย์ของ element" ที่เซิร์ฟเวอร์เขียนที่ `element+0x10` หรือเปล่า**  [✅ **PASS/DONE — OBJECT-REF-IS-ELEMENT-KEY — ผลหน้าสะพาน 2026-08-26 10:17 (+07:00) · บันทึกโดย chief R174 · T0/T1/T3/T4 ปิด · T2 N/A · `+0x14` ที่ click ส่งเข้าไปคือ element key เดิม ไม่มี transform/hash/index คั่น · left-click opaque byte `+0x18=0` · nonempty generation replace-by-omission แต่ zero-entry เป็น no-op · 🔴 ใบผลขอ amend `RE-077` T5 + แก้ span pin ของ `GT-046` — ยังไม่ทำในรอบนี้ ค้างสำหรับรอบถัดไป**]
 
 > 🔢 **หมายเหตุเลข:** ตัวนับชุดเดียวกับ `GAME_TEST_QUEUE.md` **ห้ามแยกตัวนับ** · ตรวจแล้วทั้งสองไฟล์: เลขสูงสุดที่ใช้ไปคือ **`GT-081`** (`GAME_TEST_QUEUE.md`) · `RE-077` เป็นใบ RE ล่าสุด · `RE-078` ถูกอ้างถึงใน `GAME_TEST_QUEUE.md` แล้ว ⇒ **ใบนี้คือ `RE-082`** · **เลขว่างถัดไป = 083**
 > บรรทัด "เลขว่างถัดไป = 077" ของ chief R172 ข้างบน **เก็บไว้ไม่ลบ** — มันจริงตอนที่เขียน

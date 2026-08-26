@@ -1,0 +1,3 @@
+CONSUMED by chief round R174 (session mqus9y) 2026-08-26 ~11:5x (+07:00)
+copy: notes_to_chief/consumed/20260826_0645_LANE-A-CORE-REQUEST-004-v2-the-three-questions-are-answered.md
+original kept in place (rule T6: never delete, never move)
