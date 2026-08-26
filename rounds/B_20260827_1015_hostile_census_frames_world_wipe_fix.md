@@ -107,4 +107,71 @@ C ผ่านจดหมาย ไม่ได้แก้ `CLIENT_RE_QUEUE.md
 เข้า `runtime.py` เลย (รอ CORE-REQUEST-008) จึงไม่มีความเสี่ยงต่อ production path ใด ๆ จากรอบนี้จนกว่า chief
 จะต่อสายเอง `pf_bridge` คือไฟล์รอบนี้เอง -- ลบได้โดยไม่กระทบโค้ด
 
+## 9 `pf-adversary` รอบสอง -- หนึ่ง HIGH, สอง MODERATE/LOW, แก้ครบก่อน push
+
+รีวิวรอบสอง (บน `claude/serene-darwin-sifsfg` / `claude/relaxed-goldberg-sifsfg`, PR #89/#161 ยัง draft ไม่
+merge) พบสามข้อจริง แก้ทั้งหมดด้วยคอมมิตใหม่ ไม่แก้ history เดิม
+
+1. **HIGH, พิสูจน์ด้วยการรันจริง.** `hostile_census_frames` forward `ledger` เข้า `full_roster_override(...,
+   ledger=ledger, ...)` ตรง ๆ -- ถ้า caller ลืมส่ง `ledger` (ค่า default ของฟังก์ชันเองคือ `None`) มอนสเตอร์ที่
+   ยังไม่ตายแต่โดนตีจนเลือดลดจะถูกส่งกลับไปที่ HP เต็มบนสายเงียบ ๆ (ตัว bug class เดียวกับที่รอบนี้เปิดมาแก้
+   สำหรับ "existence" แต่คราวนี้เป็น "HP") พิสูจน์ด้วยการรันจริง: ตี mob ด้วย `Combatant(level=7,
+   ability_str=132, ability_con=0)` เหลือ 2893/3857 HP แล้วเรียก `hostile_census_frames(...)` โดยไม่ส่ง
+   `ledger` -- ผลลัพธ์คือ body เต็มเลือด ไม่ใช่ 2893 **แก้แล้ว**: `hostile_census_frames` ปฏิเสธ `ledger=None`
+   ด้วยชื่อ (`REFUSE_CENSUS_FRAME_WITHOUT_A_LEDGER`, `MobDeathContractError`) -- ตัดสินใจไม่ให้ `None` แปลว่า
+   "ยอมให้ทุกตัวเรนเดอร์ที่ HP เต็มแบบเงียบ ๆ" เพราะฟังก์ชันนี้ (ต่างจาก `full_roster_override`/
+   `repopulation_entries` ที่ตระกูลเดียวกันซึ่ง `ledger=None` ยังคงเป็นความหมายที่รองรับจริง สำหรับ caller ที่
+   ยังไม่มี ledger เปิดอยู่) ถูกออกแบบมาให้เรียกทุกครั้งที่มี hit/death frame ตาม docstring ของตัวเอง และ
+   `strike()` การันตีอยู่แล้วว่าต้องมี `CombatLedger` typed ก่อนจะมี hit/death frame เกิดขึ้นได้ -- caller จริง
+   ทุกจุดของฟังก์ชันนี้จึงมี ledger อยู่แล้วเสมอ การไม่ส่งมาคือบั๊ก ไม่ใช่ caller ที่ชอบธรรม เพิ่มย่อหน้า
+   docstring อธิบายการตัดสินใจนี้ตรง ๆ (LEDGER IS REQUIRED HERE...) เพิ่มเทส 2 ตัวใน `tests/test_mob_death.py`:
+   `test_hostile_census_frames_refuses_a_missing_ledger_by_name` (เรียกไม่ส่ง ledger ต้อง raise) และ
+   `test_hostile_census_frames_carries_the_true_damaged_hp_not_the_ceiling` (repro บั๊กจริงของ adversary --
+   ตี mob บางส่วน, threads ledger, ยืนยันว่า body ที่คอมโพสตรงกับ `field_mobs.hostile_actor_entry(...,
+   current_hp=damaged_hp)` ไม่ใช่ ceiling) ตรวจ manual นอกเทสด้วยว่าถ้าไม่มีการแก้นี้ เทสที่สองจะ fail จริง
+   (`entry == expected_ceiling` เป็น `True`, `entry == expected_damaged` เป็น `False` ก่อนแก้)
+2. **MODERATE, พิสูจน์ด้วยการสร้าง test case.** `apply_identity_override`'s guard (`offset !=
+   len(generation.pc)`) เช็คแค่ผลรวมของ `entry_bytes` ตรงกับ `len(pc)` ไม่จับ permutation ที่สลับความยาวของ
+   สอง entry แต่ผลรวมเท่าเดิม -- ถ้าเกิดขึ้นจะ splice byte ผิดตำแหน่งแบบเงียบ ไม่ raise ช่องโหว่นี้สืบทอดมาจาก
+   `runtime.py`'s private original (`_apply_mob_death_census_override`) ไม่ใช่ของใหม่ที่รอบนี้สร้าง แต่รอบนี้
+   ทำให้มันเป็น public utility ที่ตั้งใจให้ caller อื่นใน lane B reuse ได้ ซึ่งขยาย exposure โดยไม่ได้เพิ่ม
+   การป้องกัน **ไม่ release-blocking** -- เส้นทางเรียกจริงเพียงเส้นเดียววันนี้สร้าง `generation` สดผ่าน
+   `build_world_population` ซึ่งไม่มีทางสร้าง misalignment แบบนี้ได้ **ตัดสินใจ**: ไม่แก้โครงสร้าง (ต้องมี
+   known-good source มา validate `entry_bytes` แยกจาก `generation` เอง ซึ่งไม่มี caller ไหนขอวันนี้) แต่บันทึก
+   ช่องโหว่ไว้ตรง ๆ ใน docstring ส่วน NONCLAIM ใหม่ ระบุชัดว่า caller ที่สร้าง/แก้ `WorldPopulationGeneration`
+   เองมือ (ไม่ผ่าน `build_world_population`) ห้ามเชื่อ guard นี้ว่าจะจับ permutation ได้
+3. **LOW-MODERATE, พิสูจน์ด้วย mutation testing.** คอมเมนต์ใน
+   `test_hostile_census_frames_matches_independent_recomposition` เดิมอ้างว่า "not tautological with the
+   implementation" -- adversary ทำลาย `apply_identity_override` (ให้มันเมิน override dict) แล้วรันเทสใหม่:
+   เทสตัวนี้ยังผ่านอยู่ (เพราะ "expected" ถูกคำนวณผ่าน `apply_identity_override` ตัวเดียวกับที่โค้ดที่ทดสอบก็
+   เรียก บั๊กเลยหักล้างกันทั้งสองฝั่ง) ส่วนอีก 4 เทสจับได้ถูกต้อง **แก้แล้ว**: เพิ่ม loop ท้ายเทสที่ walk
+   offset เองจาก `plain_generation.actor_identities`/`entry_bytes` (ที่ `apply_identity_override` ไม่เคย
+   แตะ) เทียบ byte ตรงกับ `override` dict ดิบจาก `full_roster_override` โดยตรง -- ไม่ผ่าน
+   `apply_identity_override` เลยทั้งสองฝั่ง พร้อมแก้คอมเมนต์ให้บอกตรงว่าข้อกล่าวอ้างเดิมพิสูจน์อะไรได้จริง
+   (การต่อสายอาร์กิวเมนต์ให้ถูก sub-call ไม่ใช่ความถูกต้องของ `apply_identity_override` เอง)
+
+**แก้เพิ่มด้วย (cosmetic, hygiene):** `apply_identity_override`'s key-type check มี dead clause: `type(key)
+is not int or type(key) is bool` -- `type(True) is not int` เป็น `True` อยู่แล้ว (type ของ `True` คือ `bool`
+ไม่ใช่ `int`) ครึ่งหลัง `or type(key) is bool` เลย unreachable ตัดออกเหลือ `type(key) is not int` เท่าเดิม
+(เทส `test_apply_identity_override_refuses_bad_keys_and_values` ที่ pin `{True: b"x"}` ยังผ่านเหมือนเดิม)
+
+**ตรวจแล้วไม่พบ (ยืนยันตามที่ adversary บอกไว้ ไม่ต้องทำซ้ำ):** `bar_frames`/`death_frames` เป็น
+docstring-only diff จริง เทสเดิม+ใหม่ทั้งหมด (147 ก่อนรอบนี้ -> 149 หลังเพิ่ม 2 ตัว) ผ่านจริงกับข้อมูลจริง
+ไม่ใช่ mock ข้อจำกัด one-corpse ที่บันทึกไว้ยืนยันจริงที่ HEAD (`grep` หา `kill()`/`widened=`) การอ้าง `RE-092`
+และ CHIEF-URGENT citation ตรงกับของจริง ไม่มีการฟอกชั้นหลักฐาน `count_source` default ถูกต้องและเป็น
+diagnostics-only
+
+**หลังแก้ครบสามข้อ:** `python3 -m unittest tests.test_mob_death tests.test_world_population
+tests.test_mob_combat`: **149 ผ่าน** (ของเดิม 147 + เทสใหม่ 2 ตัวจากข้อ 1)
+`python3 -m unittest discover -s tests -p "test_*.py"`: **3367 ทั้งหมด, error 18 ตัวเดิม (capstone import
+ล้วน, ไม่มี FAIL ใหม่), skip 212** -- ตรวจ `grep "^ERROR:\|^FAIL:"` แล้วว่า error ทั้ง 18 ตัวเป็น
+`ModuleNotFoundError: capstone` ในไฟล์ static-RE ชุดเดิมทั้งหมด ไม่มี `FAIL:` เกิดใหม่เลย
+cp874-encodability ของทั้งสามไฟล์ที่แตะ (`mob_death.py`, `world_population.py`, `tests/test_mob_death.py`)
+ตรวจแล้วผ่าน (`.encode("cp874")` ไม่ throw)
+
+**ไฟล์ที่แตะรอบสอง:** `src/pirateforce_foundation/mob_death.py`, `src/pirateforce_foundation/world_population.py`,
+`tests/test_mob_death.py` (ทั้งสาม `pirate-force-server`) และไฟล์ round นี้เอง (`pf_bridge`)
+**ยังไม่ commit/push** -- ตาม hard limit ของสาย B (never `git commit`/`git push`) ปล่อยให้ chief/orchestrator
+เป็นคนคอมมิตและเปิด/อัปเดต PR ต่อ
+
 -- **สาย B · COMBAT**
