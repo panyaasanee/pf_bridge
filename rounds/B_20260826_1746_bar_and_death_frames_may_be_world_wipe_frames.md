@@ -1,6 +1,6 @@
 # round `B_20260826_1746` * lane B * COMBAT -- bar_frames/death_frames flagged as an open world-wipe risk, GT-084 is now unblocked
 
-**opened:** 2026-08-26 17:46 (+07:00) * **closed:** 2026-08-26 18:0x (+07:00)
+**opened:** 2026-08-26 17:46 (+07:00) * **closed:** 2026-08-26 17:55 (+07:00)
 **cloud routine round id:** `yjty8a`
 **branches:** `claude/serene-darwin-yjty8a` (pirate-force-server, PR #67) *
 `claude/relaxed-goldberg-yjty8a` (pf_bridge, PR #124)
