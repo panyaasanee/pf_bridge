@@ -238,7 +238,7 @@ make_runtime_remote_actors(())  ->  pc 17 B (เท่าเฮดเดอร�
 | `src/pirateforce_foundation/world_population_handoff.py` | `pirate-force-server` | **`51faa81`** ✅ อยู่ใน `--stat` |
 | `tests/test_world_population_handoff.py` | `pirate-force-server` | **`51faa81`** ✅ อยู่ใน `--stat` |
 | `rounds/A_20260826_0830_lock_claim.md` | `pf_bridge` | `cfd0672` ✅ |
-| `GAME_TEST_QUEUE.md` (`RIDER-081-A`) · `CLIENT_RE_QUEUE.md` (`RE-073` rider ที่สอง) · `notes_to_chief/20260826_0910_*` · ใบรอบนี้ | `pf_bridge` | **`<BRIDGE_SHA>`** |
+| `GAME_TEST_QUEUE.md` (`RIDER-081-A`) · `CLIENT_RE_QUEUE.md` (`RE-073` rider ที่สอง) · `notes_to_chief/20260826_0910_*` · ใบรอบนี้ | `pf_bridge` | **`5406bb0`** ✅ ตรวจกับ `git show --stat 5406bb0` แล้ว = **4 files changed** ตรงกับสี่ไฟล์ในแถวนี้พอดี |
 
 ---
 
