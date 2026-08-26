@@ -2169,7 +2169,7 @@ T7  0x472850 / 0x4765C0 (สองที่ที่ push L"_F_DIE_000") -> ท�
 
 ---
 
-## 🆕🔬 RE-073 TEST-STAGE-GEOMETRY-SURVEY-001 [STATIC-ON-BRIDGE]: **สามฉากที่ addressable และน่าจะโล่ง — วัดเรขาคณิตจริงว่าฉากไหนใช้เป็น "เวทีเทสโมเดล" ได้**  [🟢 **OPEN — เปิดโดย chief R169 · 2026-08-25 ~21:0x (+07:00)**]
+## 🆕🔬 RE-073 TEST-STAGE-GEOMETRY-SURVEY-001 [STATIC-ON-BRIDGE]: **สามฉากที่ addressable และน่าจะโล่ง — วัดเรขาคณิตจริงว่าฉากไหนใช้เป็น "เวทีเทสโมเดล" ได้**  [🟠 **DONE/GEOMETRY-PASS-WHITE-FAIL — ไม่มีฉากใดตรงครบ "พื้นขาว เรียบ ไม่มีเอฟเฟกต์": `FilmScene` ชนะด้านเรขาคณิต (height payload 0 ทุกไบต์, 11 entities, NPC placement 0) แต่เป็น green-screen `RGB(0,255,0)` ไม่ใช่ขาว และ `UseFog=TRUE` · เสนอ static candidate `(1000,1000,0)` หลบ trigger origin (`Contact Range=500`) · รอ Panya เคาะรับ green-screen หรือขอเวทีขาวจริง (asset ใหม่) · ปิดโดย chief รอบ `h53n8f` 2026-08-27 จากผล RE runner local `notes_to_chief/20260825_2220_RE-073-RESULT-FILMSCENE-GEOMETRY-PASS-WHITE-FAIL.md`**]
 
 > 🔢 **หมายเหตุเลข:** ตัวนับเป็นชุดเดียวกับ `GAME_TEST_QUEUE.md` **ห้ามแยกตัวนับ** · grep `GT-073`/`RE-073` ทั้งสองไฟล์ = 0 hit ⇒ **073 ว่างจริง** ⇒ ใบถัดไปเริ่มที่ **074**
 
@@ -2666,7 +2666,9 @@ make_runtime_remote_actors(())  ->  pc 17 B (เท่าเฮดเดอร�
 
 ---
 
-## 🆕🔬 RE-083 PROJECTED-ACTOR-WALKS-OR-JUMPS-001 [STATIC-ON-BRIDGE]: **ส่ง actor body ของ NPC ที่ project ไว้ซ้ำด้วย "พิกัดใหม่" — ไคลเอนต์ทำให้มัน *เดิน* ไปหรือ *กระตุก* ไป**  [🟢 **OPEN — เปิดโดยสาย B (LANE-B · COMBAT · `pf-builder`) รอบ `ywm4v1` · 2026-08-26 ~10:1x (+07:00)**]
+## 🆕🔬 RE-083 PROJECTED-ACTOR-WALKS-OR-JUMPS-001 [STATIC-ON-BRIDGE]: **ส่ง actor body ของ NPC ที่ project ไว้ซ้ำด้วย "พิกัดใหม่" — ไคลเอนต์ทำให้มัน *เดิน* ไปหรือ *กระตุก* ไป**  [✅ **PASS/DONE — (ข) สำหรับ existing `actor_type 2`/`CNetActor`: body ใหม่คัดลอกไป mirror `actor+0x100`, gate ด้วย `actor+0x70 bit2` ข้ามทาง seed แล้วสร้าง `CActorTask_ActorMove` ที่มี destination แยกที่ `task+0x40`, updater ขับ movement controller จริง (ไม่ใช่ snap-only) · `BasicAttr` gait `+0x54` bounded negative เฉพาะ `actor_type 2` (ไม่พบใน task chain ที่ถอดครบ, ยัง exclude ทั่วอิมเมจไม่ได้) · BUILD_IMPACT: **สาม**มอนสเตอร์ (`3/13` ใน `bg0001` ที่ใช้ `AI_WANDER` row `11` offensive — ไม่ใช่ทั้งสนาม) จะเดิน
+เข้าหา/กลับ leash ได้ผ่าน `actor_type 2` **หลังมี encoder + attended verification** (ยังไม่ใช่แค่ "บิลด์ถัดไป"
+เฉย ๆ) · ปิดโดย chief รอบ `h53n8f` 2026-08-27 จากผล RE runner local `notes_to_chief/20260826_1123_RE-083-RESULT-EXISTING-CNETACTOR-USES-ACTORMOVE.md`**]
 
 > 🔢 **หมายเหตุเลข:** ตัวนับชุดเดียวกับ `GAME_TEST_QUEUE.md` **ห้ามแยกตัวนับ** · grep ก่อนจอง: **`GT-083` = 0 hit · `RE-083` = 0 hit ทั้งสองไฟล์** · เลขสูงสุดที่ใช้ไปคือ `RE-082` (ใบก่อนหน้าในไฟล์นี้) และ `GT-081` (`GAME_TEST_QUEUE.md`) ⇒ **ใบนี้คือ `RE-083`** · **เลขว่างถัดไป = 084**
 
@@ -2772,7 +2774,7 @@ Door B คือการ **โจมตี** (`CActorTask_UseBehavior` / `PlayA
 
 ---
 
-## 🆕🔬 RE-086 ISLAND-DOCK-TRIGGER-001 [STATIC-ON-BRIDGE]: **อะไรทำให้ไคลเอนต์/เซิร์ฟเวอร์รู้ว่า "เรือถึงท่าเกาะแล้ว" — จุดพิกัดคงที่ (เหมือน travel gate เดิม) หรือ packet เฉพาะ**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-6js9ye`/`optimistic-mccarthy-6js9ye` · 2026-08-26 ~16:5x (+07:00) ตาม `COO-DECISION 20260826_1645` ข้อ 4**]
+## 🆕🔬 RE-086 ISLAND-DOCK-TRIGGER-001 [STATIC-ON-BRIDGE]: **อะไรทำให้ไคลเอนต์/เซิร์ฟเวอร์รู้ว่า "เรือถึงท่าเกาะแล้ว" — จุดพิกัดคงที่ (เหมือน travel gate เดิม) หรือ packet เฉพาะ**  [✅ **PASS/DONE — hybrid (ก)+gate: server ส่ง `NavigationEx_AddSurveyDataVtial` (XYZ+opaque u16), client เช็คระยะเองในทางอัปเดตของตัวเอง (threshold `500` หน่วย, `250000.0` squared), เมื่อ callback result `==1` จึงคัดลอก u16 แล้วส่ง `NavigationEx_EnterInstanceVital(u16, byte=6)` · ไม่ใช่ dwell แบบ travel gate เดิม ไม่ใช่ dedicated dock packet ชื่อเฉพาะ (ค้นชื่อ dock/anchor/berth/moor = 0 hit) · เชื่อมกับ `RE-087` (คนละเฟสในโมดูลเดียวกัน) แต่ยังไม่พิสูจน์ UI timeline ร่วม · ปิดโดย chief รอบ `h53n8f` 2026-08-27 จากผล RE runner local `notes_to_chief/20260827_0115_RE-086-RESULT-CLIENT-PROXIMITY-THEN-ENTER-INSTANCE.md`**]
 
 > 🔢 **หมายเหตุเลข:** ส่วนหนึ่งของชุด `RE-085`-`RE-091` — ดูหมายเหตุเลขเต็มที่หัวใบ `RE-085`
 
@@ -2800,7 +2802,7 @@ Door B คือการ **โจมตี** (`CActorTask_UseBehavior` / `PlayA
 
 ---
 
-## 🆕🔬 RE-087 CAPTAIN-REPORT-WINDOW-001 [STATIC-ON-BRIDGE]: **packet/UI ของ "หน้าต่างรายงานกัปตัน" ที่ขึ้นตอนเทียบท่า — โครงสร้าง field และปุ่มยืนยันส่งอะไรกลับ**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-6js9ye`/`optimistic-mccarthy-6js9ye` · 2026-08-26 ~16:5x (+07:00) ตาม `COO-DECISION 20260826_1645` ข้อ 4**]
+## 🆕🔬 RE-087 CAPTAIN-REPORT-WINDOW-001 [STATIC-ON-BRIDGE]: **packet/UI ของ "หน้าต่างรายงานกัปตัน" ที่ขึ้นตอนเทียบท่า — โครงสร้าง field และปุ่มยืนยันส่งอะไรกลับ**  [✅ **PASS/DONE — `Main_Sail_Lookout` ผูก `MainSailLookoutEventHandler`; action `Survey` ไม่ local-only สร้าง `NavigationEx_RequestSurveyVtial` (body 1 byte tag `0x0B` @`+0x14 = 5`) แล้วส่ง outbound จริง · byte `5` ยัง opaque ห้ามตั้งชื่อ `confirm_flag`/`island_id` · dock trigger ที่เปิดหน้าต่างยังเป็นเขต `RE-086` (คนละเฟสในโมดูลเดียวกัน) · ปิดโดย chief รอบ `h53n8f` 2026-08-27 จากผล RE runner local `notes_to_chief/20260827_0056_RE-087-RESULT-CAPTAIN-REPORT-SURVEY-REQUEST-BYTE5.md`**]
 
 > 🔢 **หมายเหตุเลข:** ส่วนหนึ่งของชุด `RE-085`-`RE-091` — ดูหมายเหตุเลขเต็มที่หัวใบ `RE-085`
 
@@ -2828,7 +2830,7 @@ Door B คือการ **โจมตี** (`CActorTask_UseBehavior` / `PlayA
 
 ---
 
-## 🆕🔬 RE-088 GM-COMMAND-WIRE-001 [STATIC-ON-BRIDGE]: **layout ของ `GM_RunGMCommandVital` (`0x51E9`, serializer `0x00729E10`, client→server) และ `GM_RunGMCommandResultVital` (`0x8C77`, serializer `0x00729790`, server→client)**  [🟢 **OPEN — เปิดโดย chief รอบ `keen-pasteur-6js9ye`/`optimistic-mccarthy-6js9ye` · 2026-08-26 ~16:5x (+07:00) ตาม `COO-DECISION 20260826_1646` (CHARTER-03 [LANE-GM]) ข้อ ④.1**]
+## 🆕🔬 RE-088 GM-COMMAND-WIRE-001 [STATIC-ON-BRIDGE]: **layout ของ `GM_RunGMCommandVital` (`0x51E9`, serializer `0x00729E10`, client→server) และ `GM_RunGMCommandResultVital` (`0x8C77`, serializer `0x00729790`, server→client)**  [✅ **PASS/DONE — STRUCTURAL-LAYOUT-PINNED: `0x51E9` = presence byte + nested `u32,u32,u8,wstring,wstring`; `0x8C77` = tagged byte เดียว @`+0x14` · handler ของ `0x51E9` เป็น default (`xor al,al; ret 4`) ใช้ร่วม 11 message ⇒ ไม่มี custom inbound interpretation · semantics ของ scalar/string/result byte ยัง `NOT_OBSERVED` (0 capture frame), bounded ห้าม execute/ตั้งชื่อ command จนกว่า `RE-091`/capture จริงปิด · ปิดโดย chief รอบ `h53n8f` 2026-08-27 จากผล RE runner local `notes_to_chief/20260826_1811_RE-088-RESULT-GM-COMMAND-WIRE-PINNED.md`**]
 
 > 🔢 **หมายเหตุเลข:** ส่วนหนึ่งของชุด `RE-085`-`RE-091` — ดูหมายเหตุเลขเต็มที่หัวใบ `RE-085`
 
