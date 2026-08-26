@@ -2974,7 +2974,7 @@ field layout ของ `TeleportVital`+`ForcePos` ครบ (`CWarpResult`/`Tele
 
 ---
 
-## 🆕🔬 RE-093 BG0001-SERVICE-NPC-PLACEMENT-001 [STATIC-ON-BRIDGE]: **ถอดรหัส placement block ที่สองของ `bg0001.npc` (นอกเหนือจาก "Mob_Set" ที่ decode แล้ว) เพื่อหาพิกัดจริงของ service-NPC ที่ไม่อยู่ใน `bg0001.placements.tsv` — เริ่มจาก Hields (n_ID 159) / Sase (n_ID 796) เป็น positive control**  [🟢 **OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-26 ~20:4x (+07:00) ตามคำขอใน `notes_to_chief/20260826_1933_LANE-A-REQUEST-open-RE-ticket-bg0001-service-npc-identity.md`**]
+## 🆕🔬 RE-093 BG0001-SERVICE-NPC-PLACEMENT-001 [STATIC-ON-BRIDGE]: **ถอดรหัส placement block ที่สองของ `bg0001.npc` (นอกเหนือจาก "Mob_Set" ที่ decode แล้ว) เพื่อหาพิกัดจริงของ service-NPC ที่ไม่อยู่ใน `bg0001.placements.tsv` — เริ่มจาก Hields (n_ID 159) / Sase (n_ID 796) เป็น positive control**  [~~🟢 OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-26 ~20:4x (+07:00) ตามคำขอใน `notes_to_chief/20260826_1933_LANE-A-REQUEST-open-RE-ticket-bg0001-service-npc-identity.md`~~] [✅ **BOUNDED-NEGATIVE — ปิดแล้ว 2026-08-27 01:56 (+07:00) · ปิดหัวใบโดยสาย A รอบ `A_20260827_0228` (แก้ตาม pf-adversary รอบเดียวกัน ที่ชี้ว่าหัวใบยังค้าง OPEN ทั้งที่มีผลแล้ว) · ผล: `bg0001.npc` มี placement block เดียว 149 แถว reuse 113 definitions — สมมติฐาน "บล็อกที่สอง 36 แถว" ที่ใบนี้เปิดไว้ไม่จริง T1-T3 = N/A เพราะบล็อกนั้นไม่มี ไม่ใช่ตอบไม่ครบ · ยังไม่ให้ identity crosswalk ของ Hields/Sase/Columbus — ดู `notes_to_chief/20260827_0156_RE-093-RESULT-NO-SECOND-PLACEMENT-BLOCK.md` ฉบับเต็ม**]
 
 > 🔢 **หมายเหตุเลข:** ตัวนับเป็น**ชุดเดียวร่วมกับ** `GAME_TEST_QUEUE.md` — prefix สองแบบ ตัวนับเดียว · grep ยืนยันก่อนจอง: `GT-093`/`RE-093` = **0 hit ทั้งสองไฟล์** ⇒ **ใบนี้คือ `RE-093`** · **เลขว่างถัดไปหลังใบนี้ = 094**
 > 🔴 ใบ `RE-085`-`RE-092` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
@@ -3029,11 +3029,11 @@ placement ผิดตัว)
 เกี่ยวข้องกับ NPC ท่าเรือเลย (อาจเป็นชื่อ mob ทั่วไปที่ใช้ซ้ำ ไม่ใช่ NPC เดียวกับที่เจ้าของหมายถึง) และไม่ได้เปิดใบ
 ใหม่หรือขยับตัวนับเลข `RE-094`
 
-### result (ยังไม่มี — ใบเปิดอยู่)
+### result (ปิดแล้ว — ดู `notes_to_chief/20260827_0156_RE-093-RESULT-NO-SECOND-PLACEMENT-BLOCK.md` ฉบับเต็ม, สรุปในหัวใบด้านบน)
 
 ---
 
-## 🆕🔬 RE-094 NPCCONVERSATION-OP1-GENERIC-SEMANTICS-001 [STATIC-ON-BRIDGE]: **ถอดรหัส op1/op2 ของ `NPCConversation` เป็นกลไกทั่วไป แยกจาก quest-3020/actor-P0 singleton ที่มีอยู่แล้ว**  [🟢 **OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-26 ~22:1x (+07:00) ตาม `COO-DECISION 20260826_2046` ①**]
+## 🆕🔬 RE-094 NPCCONVERSATION-OP1-GENERIC-SEMANTICS-001 [STATIC-ON-BRIDGE]: **ถอดรหัส op1/op2 ของ `NPCConversation` เป็นกลไกทั่วไป แยกจาก quest-3020/actor-P0 singleton ที่มีอยู่แล้ว**  [~~🟢 OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-26 ~22:1x (+07:00) ตาม `COO-DECISION 20260826_2046` ①~~] [✅ **PASS/GENERIC-CONFIRMED — ปิดแล้ว 2026-08-27 01:56 (+07:00) · ปิดหัวใบโดยสาย A รอบ `A_20260827_0228` · ผล: `QuestOperateVital op1` เป็น generic dispatch จริง อ่าน quest id แบบไดนามิกจาก UI record ไม่ hardcode `3020` — แต่ยังไม่ให้ quest id จริงของ Columbus (ดู `RE-095` ต่อยอด) — ดู `notes_to_chief/20260827_0156_RE-094-RESULT-OP1-USES-DYNAMIC-QUEST-ID.md` ฉบับเต็ม**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-094`/`RE-094` = **0 hit ทั้งสองไฟล์** (เฉพาะ exact token
 > ไม่นับเลขวันที่/timestamp ที่บังเอิญมี `094` อยู่ในตัว) ⇒ **ใบนี้คือ `RE-094`** · เลขว่างถัดไปหลังใบนี้ = 095
@@ -3093,7 +3093,7 @@ negative แล้วปิด ไม่เดาต่อ · ไม่เปิ
 ตอบ T0/T1 ด้วยหลักฐาน (dispatch table หรือ bounded negative ว่าผูกกับ `V129_QUEST_ID` แน่นอน) ⇒ ปิดใบ
 พร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
 
-### result (ยังไม่มี — ใบเปิดอยู่)
+### result (ปิดแล้ว — ดู `notes_to_chief/20260827_0156_RE-094-RESULT-OP1-USES-DYNAMIC-QUEST-ID.md` ฉบับเต็ม, สรุปในหัวใบด้านบน)
 
 ---
 
