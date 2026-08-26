@@ -105,6 +105,17 @@ claim/release — ยังไม่มี inbound request path แต่โม�
 เลนเดียวที่เหลือ: `world_scene_density` — ไม่มี `CORE-REQUEST` ค้างจากสาย A สำหรับเลนนี้ ณ ตอนเขียน
 รอบนี้ (ตรวจ `notes_to_chief/` แล้ว)
 
+## ⑤.5 `LANE-B-REQUEST` (`full_roster_override`) — ลองแล้ว revert แล้ว ไม่ push
+
+ระหว่างรอบ `main` ของ `pirate-force-server` ขยับ (`pirate-force-server#70` merge, `full_roster_override`
+เข้ามาจริง) พร้อมจดหมายขอสลับหนึ่งบรรทัดที่ `runtime.py:4819` (`corpse_override` →
+`full_roster_override`) — ลองสลับตามที่ขอ รันสวีตเต็มก่อน push แล้วเจอ **12 เทสแดง** ใน
+`tests/test_world_census_wiring.py` (census บนบูตปริยายที่ยังไม่มีใครถูกตีเลยก็เปลี่ยนไบต์แล้ว เพราะ
+`full_roster_override` ไม่เคยคืนค่าว่างต่างจาก `corpse_override` ที่คืนว่างเมื่อ ledger/register ยังสด)
+— คำอ้าง "byte-identical กับพาธเดิม" ในจดหมายขอ ถูกแค่ระดับ per-identity ไม่ใช่ระดับ census โดยรวม
+**revert กลับเป็น `corpse_override()` ก่อน push** (ไม่มีการสลับนี้ในสิ่งที่ push ไปจริง) เขียนตอบกลับ
+พร้อมหลักฐาน: `notes_to_chief/20260826_2015_CHIEF-REPLY-LANE-B-full_roster_override-not-byte-identical-at-integration.md`
+
 ## ⑥ ค้าง
 
 - `RE-092` ยังเปิดอยู่ (ต้อง RE runner บนสะพาน)
