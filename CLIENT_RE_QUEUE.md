@@ -2957,3 +2957,39 @@ field layout ของ `TeleportVital`+`ForcePos` ครบ (`CWarpResult`/`Tele
 ตอบ T1/T2 (ก/ข + scope ถ้าเป็น ก) ด้วยหลักฐาน **หรือ** bounded negative ว่าเพดาน static อยู่ตรงไหน ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
 
 ### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-093 BG0001-SERVICE-NPC-PLACEMENT-001 [STATIC-ON-BRIDGE]: **ถอดรหัส placement block ที่สองของ `bg0001.npc` (นอกเหนือจาก "Mob_Set" ที่ decode แล้ว) เพื่อหาพิกัดจริงของ service-NPC ที่ไม่อยู่ใน `bg0001.placements.tsv` — เริ่มจาก Hields (n_ID 159) / Sase (n_ID 796) เป็น positive control**  [🟢 **OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-26 ~20:4x (+07:00) ตามคำขอใน `notes_to_chief/20260826_1933_LANE-A-REQUEST-open-RE-ticket-bg0001-service-npc-identity.md`**]
+
+> 🔢 **หมายเหตุเลข:** ตัวนับเป็น**ชุดเดียวร่วมกับ** `GAME_TEST_QUEUE.md` — prefix สองแบบ ตัวนับเดียว · grep ยืนยันก่อนจอง: `GT-093`/`RE-093` = **0 hit ทั้งสองไฟล์** ⇒ **ใบนี้คือ `RE-093`** · **เลขว่างถัดไปหลังใบนี้ = 094**
+> 🔴 ใบ `RE-085`-`RE-092` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`GT-078` (M1 acceptance) เจ้าของปฏิเสธด้วยสองเหตุผลแยกกัน (`notes_to_chief/consumed/20260826_1440_GT078-ADDENDUM-*.md`): ① ไม่มี NPC ตัวไหนมีป้ายชื่อเลย — **แก้แล้ว** (`pirate-force-server` PR #73, `world_population.py::_entry()` ส่ง `placement.source_name` เป็น `basic_name`) ② NPC บางตัวเป็นคนละตัวกับเซิร์ฟเวอร์ต้นฉบับ — **ยังไม่แก้ เพราะไม่มีข้อมูลให้แก้** ⇒ ใบนี้ขอเปิดสำหรับข้อ ②
+
+สาย A ตรวจในคลาวด์ก่อนเปิดใบ (ทุกจุด [STATIC], ยืนยันซ้ำ 2026-08-26):
+- `TEXTDATA_TH__MOBS_TIP.tsv` มี n_ID 159 = `Hields` (title `Guild Administrator`), n_ID 796 = `Sase` (title `Guild Assistant`) — ยืนยันด้วย `CONSTDATA_TH__MOBS.tsv` (แต่ละตัวมี `s_OUTFIT` เดี่ยว ไม่กำกวม)
+- `bg0001.placements.tsv` (149 แถว, คอลัมน์ `template_ids`) **ไม่มีแถวไหนเลยที่ template_id = 159 หรือ 796** (grep whole-field match ตรง = 0 hit, ตรวจซ้ำด้วยการ dump คอลัมน์ทั้งหมด — มีแต่เลข 1-113)
+- grep ชื่อ "Hields"/"Sase" ทั่ว `gamedata/lua/` (312 ไฟล์) = 0 hit เช่นกัน
+- ธงที่ชี้ทาง: บล็อก "Mob_Set" ของ `bg0001.npc` เอง มี `definition_count = 113` แต่ placement จริงมี **149 แถว** — ช่องว่าง 36 แถวนี้น่าจะเป็นที่อยู่ของ NPC ประเภทบริการ (guild NPC, dock NPC ฯลฯ) ที่ decoder ปัจจุบันของโปรเจกต์ยังไม่ได้แตะ
+
+### objective (claim เดียว)
+จากไฟล์ scene ต้นทางของไคลเอนต์ (`bg0001.npc`, เปิดได้เฉพาะที่สะพาน — คลาวด์ไม่มีไฟล์นี้): ถอดรหัส placement block ที่สอง (นอกเหนือจาก "Mob_Set" 113 รายการที่ decode แล้ว) เพื่อหาพิกัดจริง + template mapping ของอีก 36 แถว โดยใช้ Hields (159) และ Sase (796) เป็น positive control — คำตอบต้องระบุพิกัด XYZ จริงของทั้งสองตัวเทียบกับพิกัดที่เจ้าของให้มา (Hields ≈ X 11,510 Y 6,951 จาก HUD ขณะยืนดู — เป็นพิกัดจุดยืน ไม่ใช่พิกัด NPC เป๊ะ)
+
+### จ็อบ
+- **T0 · ด่านคุม** — เปิด `bg0001.npc` บนสะพาน ยืนยันว่ามี placement block ที่สองอยู่จริงนอกเหนือจาก "Mob_Set" (ชื่อบล็อก/รูปแบบ/จำนวนรายการ)
+- **T1** — ถอดรหัส template_id/พิกัดของทุกแถวในบล็อกที่สอง หา n_ID 159 (Hields) และ 796 (Sase) เป็น positive control
+- **T2** — เทียบพิกัดที่ถอดได้ของ Hields กับพิกัด HUD ที่เจ้าของให้ (≈ 11,510 / 6,951) — ระยะห่างที่ยอมรับได้เท่าไรถือว่าตรงตัว (ดู candidate อ่อน P4 "Pike" title "Unemployed Sailor" ห่าง 758.7 หน่วยที่สาย A เจอ — เป็นแค่ตัวเทียบระยะ ไม่ใช่คำตอบ)
+- **T3 · ริเดอร์** — ถ้าเวลาเหลือ: รายชื่อ+พิกัดของอีก 34 แถวที่เหลือในบล็อกที่สอง (ให้สาย A ต่อยอดตารางประชากรเต็มโดยไม่ต้องเปิดใบเพิ่ม)
+
+### nonclaims
+① ใบนี้ไม่ตัดสินว่า `world_population.py` ต้องแก้โครงสร้างอย่างไร — เป็นการตัดสินใจของสาย A เมื่อได้ข้อมูล ② ไม่อ้างว่า Hields/Sase ต้องอยู่ในฉาก `bg0001` แน่นอน — ถ้า `bg0001.npc` ไม่มีบล็อกที่สองเลย ให้เขียนเป็น bounded negative (NPC เหล่านี้อาจผูกกับฉากอื่นหรือ spawn ผ่านกลไกอื่นที่ไม่ใช่ placement ไฟล์) ③ ไม่ปิดใบ `GT-078` เอง — attended/COO เป็นคนตัดสินใจว่าจะ retest เมื่อไร
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์ scene อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (ไฟล์ + offset/แถว) · ชนเพดานให้เขียน bounded negative แล้วปิด ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ตอบ T0/T1/T2 ด้วยหลักฐาน (พิกัด+template mapping ของ Hields/Sase อย่างน้อย) **หรือ** bounded negative ว่าบล็อกที่สองไม่มีอยู่จริง ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
