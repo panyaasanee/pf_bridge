@@ -43,3 +43,11 @@
 4. **LOW (ยืนยันจริง)** — ตัวกรองชื่อบัญชีของ `command_capture.py` ใช้ `str.isalnum()` (Unicode-aware) ทำให้ชื่อไทยถูกตัดกลาง grapheme และไม่มี length cap (เสี่ยง `ENAMETOOLONG`) แก้เป็น ASCII-only whitelist + ตัดความยาว 40 ตัวอักษร + fallback `"unnamed"` เมื่อไม่เหลืออะไรเลย + เทสคุม
 
 เทสรวมหลังแก้: 58 (จากเดิม 50) ผ่านทั้งหมด · สวีตเต็ม 3272 เทส (จากเดิม 3264) 18 error เดิมเท่าเดิม (capstone/pefile/pytest ไม่เกี่ยวกับรอบนี้) ไม่มี regression ใหม่ — เขียว(cloud sanity)
+
+## ตรวจซ้ำครั้งที่สอง — `pf-adversary` ยืนยันการแก้ทั้งสี่ข้อ + จับได้อีก 1 ข้อ LOW
+
+รัน `pf-adversary` รอบสองบน diff ที่แก้แล้ว (ไม่ใช่ตรวจใหม่ทั้งหมด) — ยืนยันทั้งสี่ข้อข้างบนแก้จริง (ทดสอบ race condition จริงด้วย 16 โปรเซส × 200 เรียก ไม่ชนกันเลย, ตรวจ `grep`/`git log` เองบน `pf_bridge` ยืนยัน commit/sha ที่อ้างถูกทุกตัว) พบเพิ่มอีก 1 ข้อ:
+
+5. **LOW (ยืนยันจริง)** — header comment ของไฟล์ capture ใส่ `account_name` ดิบไม่ผ่านการกรอง ⇒ ชื่อบัญชีที่มี `\n` ปลอมบรรทัด header เพิ่มได้ (เช่นปลอมบรรทัด `account=` อีกอัน) แก้ด้วย `str.encode("unicode_escape")` ก่อนเขียนลง header (ไบต์จริงยังอ่านได้ครบจาก hex dump ด้านล่างเหมือนเดิม) + เทสคุม (`test_account_name_cannot_forge_extra_header_lines`)
+
+เทสรวมสุดท้าย: 59 · สวีตเต็ม 3273 เทส 18 error เดิมเท่าเดิม ไม่มี regression ใหม่ — เขียว(cloud sanity)
