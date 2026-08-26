@@ -59,6 +59,49 @@ scene change **ไม่ใช่ StartGame-only**: `TeleportVital apply` มี
 
 complete recursive CFG ของ switch-scene cleanup slot `0x004C7160` และ helper `0x004C6920` แสดงการ clear world/app collections และเรียก cleanup หลายตัวจริง แต่ยังมี indirect calls และไม่มี identity-membership crosswalk ที่พิสูจน์ว่า “remote actor ทุกตัวถูกทำลาย” หรือ “ต้องส่ง population census ใหม่ทุกครั้ง”. ปิด T5 เป็น **BOUNDED NEGATIVE**: หลักฐาน static ชุดนี้ไม่พอให้ claim ทั้งสองด้าน; ห้ามย่อเป็นว่า remote actors ถูก preserve หรือถูก drop แน่นอน.
 
+### T5 ADDENDUM (chief R181, 2026-08-26) — ตอบ rider sub-question ②/③ เท่านั้น, ไม่แตะ verdict เดิมของ T5
+
+คำตอบ T5 เดิม (BOUNDED NEGATIVE, scene-cleanup slot `0x004C7160`/`0x004C6920`) ยังเป็นอย่างนั้น ไม่เปลี่ยน.
+Addendum นี้ตอบเฉพาะ rider ②/③ ที่แทรกใน `CLIENT_RE_QUEUE.md` บรรทัด 2483-2528 ("rider ที่สอง" ต่อท้าย
+`RE-075` ในไฟล์ตามลำดับการแทรก แต่เนื้อหาเป็นของ `RE-077 T5` ตามที่รอบ `k69t3b` เขียนกำกับไว้เอง —
+ไม่ใช่ `GAME_TEST_QUEUE.md`/`RIDER-081-A` ซึ่งเป็นริเดอร์คนละใบที่ฝั่ง attended ตอบขนานกันอยู่),
+โดยใช้ผล RE-082 (PICKUP-OBJECT-REF-SOURCE-001, `notes_to_chief/20260826_1017_RE-082-RESULT-OBJECT-REF-IS-ELEMENT-KEY.md`):
+
+ใน **consumer ที่ RE-082 วัด** (`CONSUMER [0x006AF970,0x006B03E3)`, รับ element list ผ่าน
+`LIST_CODEC 0x005F85B0` / `ELEMENT_KEY_FIND 0x005F8400` — consumer นี้เชื่อมกับ list ของ
+drop-object บนพื้นที่ `PickupTerrainThing` อ่าน element key มา, ไม่ใช่ consumer ที่รับ
+`make_runtime_remote_actors` โดยตรง):
+- generation ที่ **nonempty** ⇒ **replace-by-omission**: key เดิมที่ไม่อยู่ใน generation ใหม่ถูก erase
+  (`0x006AFF84` -> `0x005E0D40`), key ที่ match ถูก update (`0x006AFDE9` -> `0x005F4C00`),
+  key ใหม่ถูก insert (`0x006B014F`..`0x006B0211`)
+- generation ที่ **count=0** ([PROPOSED interpretation ของ RE-082 T4 — "nonempty pointer" เป็นการตีความ
+  ของ chief ไม่ใช่คำที่ RE-082 T4 เขียนตรงตัว] zero entries) ⇒ **no-op**: branch
+  `0x006AF9B4`/`0x006AF9BF` ไปตรง epilogue `0x006B03BC`, ไม่ clear live tree
+- incoming pointer เป็น **null** ⇒ เส้นทางที่สาม แยกจากทั้งสองข้างบน: clear/erase ทั้ง tree
+  (`0x006B024F`..`0x006B0368` -> `0x005E0D40`)
+
+🔴 **เพดานของ addendum นี้ (บังคับอ่านคู่กับผลข้างบน):**
+1. ผลนี้ **ยังไม่พิสูจน์ว่าเป็น consumer เดียวกัน** กับที่รับ `make_runtime_remote_actors` /
+   `GSCN_RunTimeProtocolRes` derived-mask `0x08` (ตัวที่ `mob_combat.py`/`mob_death.py`/
+   `world_population_handoff.py` ใช้อยู่จริง) — ไม่มี artifact ที่ commit แล้ว
+   (`PF_PROTOCOL_REGISTRY.tsv`/`PF_FIELD_VALIDATION.tsv`/จดหมาย RE-082 เอง) ผูก consumer span
+   นี้กับ `GSCN_RunTimeProtocolRes` โดยชื่อ/message id
+2. **`RE-092` (OPEN ณ วันที่เขียน addendum นี้)** เปิดขึ้นเพื่อตอบ crosswalk ข้อ 1 โดยตรง
+   (T0 ของ `RE-092`: เทียบ element key tag ของ `PickupTerrainThing` consumer กับของ
+   derived-mask `0x08` consumer) — **ห้ามอ่าน addendum นี้ว่าได้คำตอบของ mob_combat/mob_death/
+   world_population_handoff แล้ว จนกว่า `RE-092` T0 จะปิด**
+3. 🔴 **แก้คำ 2026-08-26 ~21:1x — เวอร์ชันแรกของข้อนี้เขียนกลับทิศ ตัวโมดูลอ้างตรงกันข้าม:**
+   `world_population_handoff.py` (sha `51faa81`) เขียนสมมติฐานของตัวเอง (docstring, ติดป้าย
+   `[INFERENCE, NOT MEASURED]`) ว่า **generation ว่างทำให้ไคลเอนต์ล้างลิสต์ actor ออก** (กลไก
+   `KIND_CLEAR`) — **ไม่ใช่ "ไม่ลบใคร"** ตามที่แก้ไขนี้เคยเขียนผิด
+   ⇒ **ถ้า** consumer ที่ `RE-082` วัด (`PickupTerrainThing`) เป็นตัวเดียวกับที่โมดูลนี้ใช้จริง (ยังไม่พิสูจน์
+   — ข้อ 1/2 ข้างบน) ผล "zero-entry ⇒ no-op" ของ `RE-082` จะ **ขัดกันตรง ๆ** กับสมมติฐานของโมดูลนี้:
+   เฟรม 0-entry ที่ตั้งใจส่งไปล้างคนของท่าเรืออาจไม่ทำอะไรเลยบนจอจริง ๆ — **นี่คือคำถามเปิดที่สำคัญที่สุด
+   ของ addendum นี้ ไม่ใช่จุดที่ปิดแล้ว และห้ามอ่านว่า "เข้ากันได้" อีกต่อไป**
+4. layer = static image (CFG) ล้วน — ไม่พิสูจน์ client-observable despawn/render และไม่แตะ
+   nonclaim เดิมของ T5 ข้อ 6 (ท้ายใบนี้ หัวข้อ "nonclaims (ตามใบ)" รายการที่ 6 — เลขบรรทัดขยับทุกครั้งที่
+   ใบนี้ถูกต่อท้าย ห้ามผูกเลขบรรทัดตายตัว)
+
 ## span pins / reproducibility
 
 | function | span | instr | gap/errors | SHA-256 |

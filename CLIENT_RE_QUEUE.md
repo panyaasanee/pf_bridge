@@ -2592,6 +2592,18 @@ make_runtime_remote_actors(())  ->  pc 17 B (เท่าเฮดเดอร�
 > 🔴 **สาย A ไม่ปิดใบนี้เอง และไม่แตะสถานะ 🟢 `OPEN` ที่หัวใบ** — เจ้าของตัวนับและสถานะคือ chief (`COO-DECISION 20260826_0656`)
 > **สิ่งที่ขอ:** ให้ chief เคาะว่าใบนี้ปิดหรือยัง แล้วแก้ **ที่เดียว** ให้หัวใบตรงกับใบผล ไม่ใช่ให้แต่ละสายเดาเอง
 
+> 🆕 **T5 ADDENDUM — chief R181 · 2026-08-26 ~21:1x (+07:00)** — ตอบ rider ②/③ ของ T5 (บรรทัดนี้เอง
+> ข้างบน 2483-2528 "rider ที่สอง" — ไม่ใช่ `GAME_TEST_QUEUE.md`/`RIDER-081-A` ซึ่งเป็นคนละใบ)
+> ด้วยผล `RE-082` (`PICKUP-OBJECT-REF-SOURCE-001`) — **ต่อท้ายในใบผล ไม่แก้ verdict `BOUNDED NEGATIVE` เดิม**
+> อ่านเต็มที่ `notes_to_chief/20260826_0120_RE-077-RESULT-SCENE-TRANSITION-SEQUENCE-PINNED.md` หัว
+> "T5 ADDENDUM" 🔴 **เพดาน:** ยังไม่พิสูจน์ว่า consumer ที่ `RE-082` วัด (`PickupTerrainThing`) เป็นตัว
+> เดียวกับ consumer ของ `make_runtime_remote_actors`/`GSCN_RunTimeProtocolRes` ที่ `mob_combat.py`/
+> `mob_death.py`/`world_population_handoff.py` ใช้ — crosswalk นั้นเป็นหน้าที่ของ `RE-092` (OPEN)
+> 🔴 **ถ้าเป็นตัวเดียวกัน**: ผล RE-082 (zero-entry ⇒ no-op) **ขัดกับสมมติฐานของ `world_population_handoff.py`
+> เอง** ที่ว่า generation ว่างทำให้ไคลเอนต์ล้าง actor ออก (`[INFERENCE, NOT MEASURED]` ในโมดูลนั้น) —
+> ไม่ใช่ "เข้ากันได้" ตามที่ addendum เวอร์ชันแรกเขียนผิดทิศ ดูรายละเอียดที่ใบผล
+> ห้ามอ่าน addendum นี้ว่าตอบคำถามของ `RE-092` แล้ว
+
 ---
 
 > 🔢 **อัปเดตตัวนับร่วม · chief R172 · 2026-08-26 ~01:2x (+07:00)**
@@ -2991,5 +3003,92 @@ field layout ของ `TeleportVital`+`ForcePos` ครบ (`CWarpResult`/`Tele
 
 ### เกณฑ์จบใบ
 ตอบ T0/T1/T2 ด้วยหลักฐาน (พิกัด+template mapping ของ Hields/Sase อย่างน้อย) **หรือ** bounded negative ว่าบล็อกที่สองไม่มีอยู่จริง ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
+
+### 🆕 rider (สาย A · 2026-08-26 ~22:0x +07:00) — เพิ่มขอบเขตให้ T3: เช็ค "Navy Transfer" (P0) เทียบ "Columbus" ด้วย ไม่ใช่แค่ Hields/Sase
+
+`GT-078` addendum (`notes_to_chief/consumed/20260826_1440_GT078-ADDENDUM-*.md` ②) เขียนว่าตำแหน่งท่าเรือ
+"Navy Transfer" คือจุดที่เจ้าของบอก [stated] ว่า NPC ตัวจริงชื่อ **Columbus** (title `Marine Transport
+Station` — ตรงกับ title ที่เราส่งอยู่แล้วก่อนแก้บั๊กชื่อ) ตรวจสดในคลาวด์ก่อนเขียนไรเดอร์นี้:
+`PORT_ROYAL_UNAMBIGUOUS_PLACEMENTS` (`current/pf_login_game_server_v141.py:1324,1352,1373,1430`) —
+placement 0 (`template_id=1`, X -9139.957 Y -2780.045 Z 223.292, visual_preset `P_MALE_002_000_SP1`)
+มี `source_name="Navy Transfer"` ส่วน `source_name="Columbus"` มีอยู่แล้วที่ placement 35/65/140
+(`template_id` 36/67/105 ทั้งสามตัว, visual_preset `M055_000_000_N` เหมือนกันทั้งสาม) — **คนละ
+template_id กับ placement 0 แน่นอน** และพิกัดของทั้งสามต่างจาก Navy Transfer อย่างชัดเจน (ไม่ต้องวัด
+ระยะเพื่อสรุปข้อนี้ — คนละกลุ่ม template)
+⇒ **ยังไม่มีแถวไหนใน Mob_Set 113 รายการที่ decode แล้วตรงกับคำอธิบายของเจ้าของ** (จุดเดียวที่ท่าเรือ ชื่อ
+Columbus ไม่ใช่สามจุดกระจายในเมืองชื่อซ้ำกัน) — จึงมีความเป็นไปได้ที่ Columbus ตัวจริงอยู่ใน placement block
+ที่สองเช่นเดียวกับ Hields/Sase ไม่ใช่ placement 0
+**ขอเพิ่มใน T3 (ไม่เปิดใบใหม่ ไม่ขยับตัวนับ):** เมื่อถอด 34 แถวที่เหลือของ block ที่สองแล้ว ให้เช็คด้วยว่ามีแถวไหน
+อยู่ใกล้ Navy Transfer (X -9139.957 Y -2780.045) หรือมีชื่อ/title ที่ตรงกับ `Columbus`/`Marine Transport
+Station` — ถ้ามี นั่นน่าจะเป็นคำตอบของ P0 มากกว่า placement 0 เดิม (รูปแบบเดียวกับ Hields/Sase ที่ยืนพิกัดใกล้
+placement ผิดตัว)
+🔴 nonclaim ของริเดอร์นี้เอง: **ไม่ได้อ้างว่า "Navy Transfer" ที่ placement 0 ผิดแน่นอน** — แค่ทำเครื่องหมายว่า
+เป็นคำถามชนิดเดียวกับ Hields/Sase ที่ยังตอบไม่ได้จากข้อมูลที่มีวันนี้ ไม่ได้อ้างว่าสามแถว "Columbus" ที่มีอยู่
+เกี่ยวข้องกับ NPC ท่าเรือเลย (อาจเป็นชื่อ mob ทั่วไปที่ใช้ซ้ำ ไม่ใช่ NPC เดียวกับที่เจ้าของหมายถึง) และไม่ได้เปิดใบ
+ใหม่หรือขยับตัวนับเลข `RE-094`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-094 NPCCONVERSATION-OP1-GENERIC-SEMANTICS-001 [STATIC-ON-BRIDGE]: **ถอดรหัส op1/op2 ของ `NPCConversation` เป็นกลไกทั่วไป แยกจาก quest-3020/actor-P0 singleton ที่มีอยู่แล้ว**  [🟢 **OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-26 ~22:1x (+07:00) ตาม `COO-DECISION 20260826_2046` ①**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-094`/`RE-094` = **0 hit ทั้งสองไฟล์** (เฉพาะ exact token
+> ไม่นับเลขวันที่/timestamp ที่บังเอิญมี `094` อยู่ในตัว) ⇒ **ใบนี้คือ `RE-094`** · เลขว่างถัดไปหลังใบนี้ = 095
+> 🔴 ใบ `RE-085`-`RE-093` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`COO-DECISION 20260826_1646` ④(ค) เคยสั่งสาย A ว่า `NPCConversation` op1/op2 "V134/V135 พิสูจน์แล้ว
+เป็นฐาน" สำหรับ Columbus conversation trigger สาย A ตรวจซอร์สจริงแล้วพบว่าไม่จริง — ใบ
+`notes_to_chief/20260826_2045_LANE-A-ASK-COO-columbus-conversation-base-is-not-generic.md` ส่งขึ้นไป
+และ `COO-DECISION 20260826_2046` (merged PR #138) รับการแก้ไขเต็มที่ ถอนคำว่า "พิสูจน์แล้ว" ออก แล้ว
+สั่งข้อ ① ตรงๆ ว่า "สาย A: เปิดใบ RE เพิ่มสำหรับ wire format ทั่วไปของ NPCConversation (constructor
+`0x622A00` / serializer `0x622F10`) แยกจากบริบทเควสต์ 3020 — อนุมัติแล้วตามที่เสนอ" ⇒ ใบนี้คือใบนั้น
+
+สาย A ตรวจสดในคลาวด์ก่อนเปิดใบ (ทุกจุด [STATIC]):
+- `current/pf_login_game_server_v141.py:768-778` (`make_npc_conversation_empty`) — คอนสตรัคเตอร์
+  `0x622A00`/serializer `0x622F10` ของ collection **ว่างเปล่า** proven แล้วตั้งแต่ V97 ("invokes the
+  client's authentic MOBS_TIP default-talk path without inventing quest/service data") — นี่คือฐานที่
+  proven จริง แต่เป็นแค่กรณี **count=0** เท่านั้น ไม่ครอบคลุม op1/op2
+- `:780-798` (`make_npc_conversation_quest3020`) — เดินสายเฉพาะ `qid=3020`, actor default `0x2001`
+  (= P0) ผ่าน descriptor serializer `0x606890` เพิ่มเติมเหนือฐาน — **ไม่มีพารามิเตอร์ NPC/quest อื่นให้สลับ**
+- `:224-232` (คอมเมนต์ระดับไฟล์ของ V134) เขียนเองตรงๆ ว่า "What that operation-1 request asks the
+  server to do in this combined path **has not been observed live**" — คือสมมติฐานที่มีขอบเขต ไม่ใช่
+  ข้อเท็จจริงทั่วไป
+- `:3958-3970` (`exact_conversation_op1_request`/`exact_action6_op2_request`) — ตัวจับคู่ wire ทั้งคู่
+  match ด้วย **exact tuple** `fields==(V129_QUEST_ID,1,0,0,0,0)` / `(...,2,0,0,0,0)` — ผูกกับ
+  `V129_QUEST_ID` ตัวเดียวเป๊ะ ไม่มีช่องให้ NPC อื่น/เควสต์อื่นผ่านเข้ามาได้เลย
+
+### objective (claim เดียว)
+จาก `GameClient.local.bin` (เปิดได้เฉพาะที่สะพาน — คลาวด์ไม่มีไฟล์นี้): ถอดรหัสว่า handler ฝั่งไคลเอนต์ที่รับ
+`QuestOperate operation 1` (หลัง `NPCConversation` แบบไม่ว่าง) ตีความ **envelope fields ที่ไม่ใช่
+`(V129_QUEST_ID,1,0,0,0,0)`** อย่างไร — คือมีเส้นทางทั่วไปสำหรับ `(quest_id อื่น, 1, 0,0,0,0)` หรือไม่ หรือ
+op1 ผูกกับ `V129_QUEST_ID` แน่นอนในระดับไบนารี (ไม่ใช่แค่ที่เซิร์ฟเวอร์เรา match แคบ) คำตอบต้องระบุว่า
+handler อ่าน quest id จาก field ไหนของ envelope และใช้ตัดสินอะไรต่อ (เนื้อหาบทสนทนา/การเปลี่ยนฉาก/อื่นๆ)
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยันว่า handler ฝั่งไคลเอนต์สำหรับ `QuestOperate op1` เป็น dispatcher ที่ตีความ
+  quest id จาก envelope จริง (ไม่ใช่ hardcode 3020 ในไบนารีเองด้วย)
+- **T1** — ถอด dispatch table/switch ของ op1: มี quest id อื่นที่ไบนารีรู้จักไหม แต่ละอันนำไปสู่ผลอะไร
+  (เปิด UI ชนิดไหน, ส่ง response อะไรกลับ) — โฟกัสเฉพาะกรณีที่ "conversation → เปลี่ยนฉาก/ทะเล" ปรากฏ
+- **T2** — ถ้ามีเส้นทางที่ตรงกับ "Columbus → ทะเล": ระบุ exact fields/opcode ที่ต้องส่งจากเซิร์ฟเวอร์
+  (เทียบเคียงรูปแบบ `exact_conversation_op1_request` ที่มีอยู่ ว่าต้องเปลี่ยนอะไรบ้าง)
+- **T3 · ริเดอร์** — ถ้าเวลาเหลือ: actor identity qword (`+0x18/+0x1C` ตาม docstring `0x622A00`) ผูกกับ
+  NPC ตัวไหนได้บ้าง นอกเหนือจาก actor `0x2001`/P0
+
+### nonclaims
+① ใบนี้ไม่อ้างว่า Columbus ต้องใช้กลไกนี้แน่นอน — ถ้า RE พบว่า op1 ผูกกับ `V129_QUEST_ID` แน่นอนใน
+ไบนารี (bounded negative) แปลว่ากลไกนี้ใช้กับ Columbus ไม่ได้เลย ต้องหาทางอื่น ② ไม่ตัดสินว่า
+`src/pirateforce_foundation/` ต้องเปลี่ยนโครงสร้างอย่างไร — สาย A ตัดสินใจเองเมื่อได้ข้อมูล ③ ไม่ปิดคำสั่ง
+`COO-DECISION 1645` ข้อ 3 (Columbus conversation ต้องนำไปทะเลจริง ไม่ใช่แค่เปิดหน้าต่าง) — ใบนี้ตอบแค่
+ชั้น wire ไม่ใช่ทั้งเส้นทาง M2
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์ scene อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/บรรทัด) · ชนเพดานให้เขียน bounded
+negative แล้วปิด ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ตอบ T0/T1 ด้วยหลักฐาน (dispatch table หรือ bounded negative ว่าผูกกับ `V129_QUEST_ID` แน่นอน) ⇒ ปิดใบ
+พร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
 
 ### result (ยังไม่มี — ใบเปิดอยู่)

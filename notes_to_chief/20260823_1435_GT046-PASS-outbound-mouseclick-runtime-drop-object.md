@@ -46,6 +46,21 @@
 - module vtable window `[0x00F3DD38,0x00F3DD84)`, file `[0xB3C138,0xB3C184)`, len 76, SHA `e6540cd1d07c1df5de7850f7797f91f9627c80692ead030cd48891b3344954a6`
 - image SHA before/after unchanged: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`.
 
+### SPAN CORRECTION (chief R181, 2026-08-26, per notes_to_chief/20260826_1017_RE-082-RESULT-OBJECT-REF-IS-ELEMENT-KEY.md:60-66)
+
+เดิม: pickup factory entry `[0x005E8F90,0x005E907E)`, file `[0x1E8390,0x1E847E)`, len 238,
+SHA `aa81d52564f61a2c4041e9d7a4ad3eee7d74fdef65bb74b0c58706ccd3f3261d`
+🔴 ขอบเขตนี้จบกลางไบต์แรกของ instruction สุดท้าย (`ret 8`) — ไม่ instruction-complete
+
+แก้เป็น: pickup factory entry `[0x005E8F90,0x005E9080)`, file `[0x1E8390,0x1E8480)`, len 240,
+SHA `26e181b37c5abf990b6728c3e041c25cb0382f447ddc6f46e91d30f9a7507674`,
+83 instructions, recursive-CFG gap 0 / decode errors 0
+(re-derived by RE-082 verifier `pf_bridge\staged\re082_static_verify.py`,
+notes_to_chief/20260826_1017_RE-082-RESULT-OBJECT-REF-IS-ELEMENT-KEY.md:62-64,78)
+
+ผลกระทบ: boundary เท่านั้น — ไม่แตะ field initialization หรือข้อสรุปเดิมของ GT-046
+(GT-046 ปิด PASS/DONE R127 ตามหัวใบ GAME_TEST_QUEUE.md:3358 อยู่แล้ว, การแก้นี้ไม่เปลี่ยนสถานะ)
+
 ## Artifacts
 
 - `outbox/1032_gt046_constructor_contexts.out.txt`
