@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): status, lane B consumed GT-084-R2 attended result, updated GT-084/GT-084-R2 ticket headers, opened and later closed RE-107/RE-108 (bounded negative); flagged that chief must set the final PASS/MIXED verdict on GT-084-R2 -- as of round f9pzed, GAME_TEST_QUEUE.md still shows that verdict waiting on chief, not yet set

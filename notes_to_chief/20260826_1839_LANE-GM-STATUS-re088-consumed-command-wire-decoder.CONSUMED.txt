@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): status report, RE-088 consumed and GM-002 upgraded to schema-aware command_wire.py decoder; CORE-REQUEST-006 not yet wired at write time -- wired later per registry row 006-010

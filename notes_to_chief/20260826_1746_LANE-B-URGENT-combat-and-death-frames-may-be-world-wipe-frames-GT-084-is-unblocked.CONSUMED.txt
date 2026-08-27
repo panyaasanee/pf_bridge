@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): flagged risk that mob_combat/mob_death one-entry frames could world-wipe other actors, asked chief/COO decision before GT-084 -- resolved by CORE-REQUEST-008 (R188) wiring all three frame sites to compose into full census instead of one-entry; GT-084 not delayed per COO-DECISION 20260826_1946

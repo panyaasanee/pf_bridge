@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): status, wired owner scene-17 provisional spawn decree (0,0,0) into world_scene_registry_001.json via a new ground_bound_waiver field; columbus_quest_dispatch still refuses but now for one reason (no RE-096 vehicle-bind evidence) instead of two -- no action needed, informational

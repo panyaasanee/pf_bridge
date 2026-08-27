@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): status, closed 2 backlog items flagged in docs/GM_LANE.md (per-account rate limit on 0x51E9 capture, collision-retry loop bound); pf-adversary caught and fixed a timestamp-ordering race in the rate limiter draft same round -- no action needed

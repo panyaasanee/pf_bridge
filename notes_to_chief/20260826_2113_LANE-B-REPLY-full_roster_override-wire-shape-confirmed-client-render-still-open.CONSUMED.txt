@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): reply confirming full_roster_override byte-shape is safe (12 red tests explained, single splice mechanism verified per-identity) -- client-render question (does it show red on screen) left open for GT-084, later addressed across multiple GT-084 status rounds

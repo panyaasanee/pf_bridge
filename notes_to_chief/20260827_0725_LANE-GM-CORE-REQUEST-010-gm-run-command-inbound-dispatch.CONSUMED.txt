@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): CORE-REQUEST-010 proposal, GM_RunGMCommandVital inbound dispatch with authorization gate (gm/dispatch.py) -- wired, per CHIEF_CONTINUATION.md registry row 010 and rounds/R190_*_core-request-010-plus-mob-loot-token-plus-player-faction1-flagless.md

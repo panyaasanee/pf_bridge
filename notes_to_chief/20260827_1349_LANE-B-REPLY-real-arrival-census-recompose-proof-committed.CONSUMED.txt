@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): reply, world-wipe fix (PANYA-ORDER item 3) was already wired before this round (mob_death.hostile_census_frames on both BAR and DYING/DEAD paths) so lane B added a headless regression proof instead of the special-permission edit; also registered the bg0001 death-scope widening COO approved mid-round -- no further action needed

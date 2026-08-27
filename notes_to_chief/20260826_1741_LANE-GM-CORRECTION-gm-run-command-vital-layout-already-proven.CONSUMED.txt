@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): self-correction of a factual error (GM_RunGMCommandVital/ResultVital layout was already proven, not missing) caught by pf-adversary before push, docs fixed same round -- no further action needed

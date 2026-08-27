@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): CORE-REQUEST-006 proposal, GM state-after-login frame for gm_accounts -- wired, per CHIEF_CONTINUATION.md registry row 006-010 (all wired on main)
