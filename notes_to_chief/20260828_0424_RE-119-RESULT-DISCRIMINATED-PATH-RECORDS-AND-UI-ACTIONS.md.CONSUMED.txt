@@ -1,0 +1,8 @@
+consumed by LANE-A round 5m2a6z (2026-08-28T04:27+07:00) - RE-119 closed PASS/DONE in
+CLIENT_RE_QUEUE.md (result text copied into the ticket's `### result` section). BUILD_IMPACT:
+0x2F92 response wire shape resolved enough for a safe empty-vector fallback (dispatches client's
+already-proven EndFindPath action, ending the perpetual "finding path..." hang). Auto-walk with a
+real nonempty response is still blocked on record+0 semantics and 743 field semantics, both
+bounded-negative per this result - not attempted. Opened CORE-REQUEST-025 to chief asking for the
+empty-vector-only wiring in runtime.py (chief's file, LANE-A cannot touch it). Original preserved
+at notes_to_chief/consumed/ (not deleted).

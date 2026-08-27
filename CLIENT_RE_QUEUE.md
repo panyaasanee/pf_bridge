@@ -1472,7 +1472,7 @@ client จริงได้เลยจนกว่าใบนี้จะต�
 
 ---
 
-## 🆕🔬 RE-119 TRACEPATH-GO-BUTTON-REQREPLY-LAYOUT-001 [STATIC-ON-BRIDGE]: **`CTracePathReqVital` (`0x4391`, ขาไป) กับ `CTracePathVital` (`0x2F92`, ขากลับที่เราไม่เคยส่ง) — ต้องตอบฟิลด์อะไรกลับให้ปุ่ม GO! ในหน้าต่างแผนที่เดินได้จริงแทนที่จะค้าง "กำลังค้นหาเส้นทาง..." ตลอด**  [🟡 OPEN]
+## 🆕🔬 RE-119 TRACEPATH-GO-BUTTON-REQREPLY-LAYOUT-001 [STATIC-ON-BRIDGE]: **`CTracePathReqVital` (`0x4391`, ขาไป) กับ `CTracePathVital` (`0x2F92`, ขากลับที่เราไม่เคยส่ง) — ต้องตอบฟิลด์อะไรกลับให้ปุ่ม GO! ในหน้าต่างแผนที่เดินได้จริงแทนที่จะค้าง "กำลังค้นหาเส้นทาง..." ตลอด**  [🔴 **CLOSED PASS/DONE — ปิดโดย LANE-A (สาย A · WORLD) รอบ `5m2a6z` 2026-08-28 ~04:2x (+07:00), ดูผลด้านล่าง**]
 
 > 🔢 **หมายเหตุเลข:** จองครั้งแรกเป็น `RE-117` (grep ยืนยัน ณ ตอนนั้น 2026-08-28T03:30+07:00 ว่าง 0 hit) แต่
 > เมื่อ merge `origin/main` เข้ามาพบว่าทั้งสาย B (`RE-117 NPCATTR-LEVEL-MP-BIT-001`, `pf_bridge#263`) และสาย
@@ -1538,3 +1538,26 @@ negative ที่แยกข้อ 1/2/3 ชัดเจนว่าต้อ�
 **ทำไมมีค่า:** GO! คือทางลัดที่มีอยู่แล้วในไคลเอนต์สำหรับ "เดินไปหา NPC ตัวไหนก็ได้อัตโนมัติ" — ถ้าต่อ handler
 ตอบ 0x2F92 ได้จริง (ด้วยตำแหน่งจาก roster ที่มีอยู่แล้วสำหรับเกาะคุก) ผู้เทส attended ทุกรอบจะประหยัดเวลาเดินเอง
 ทุกครั้ง และเป็นหลักฐาน client-observable ตัวแรกว่าเซิร์ฟเวอร์ตอบ pathfinding request ได้จริง
+
+### result — CLOSED PASS/DONE, wire shape resolved + safe fallback identified, auto-walk semantics bounded
+
+รายละเอียดเต็ม: `notes_to_chief/20260828_0424_RE-119-RESULT-DISCRIMINATED-PATH-RECORDS-AND-UI-ACTIONS.md`. สรุป:
+
+- **T1/T2** [PASS]: `0x2F92` เป็น `u16` record-count ตามด้วย records ขนาด logical `0x18`: discriminator
+  `u8@+0x16` (`kind=2 -> +0/+4/+8`, `kind=1 -> +0/+C`, อื่น -> `+0` เท่านั้น) ไม่ใช่ `vec3+scalar` พร้อมกันตามที่
+  ตั้งสมมติฐานไว้ตอนเปิดใบ — response consumer `0x006EAC47..ACB3` แปลง signed `i16@+0x10/+0x12/+0x14` เป็น
+  float vec3 ผ่าน `cvtsi2ss`
+- **T3** [PASS]: response handler `[0x006EA9E0,0x006EACD3)` proven ชัด — vector ว่าง ⇒ dispatch UI action
+  `EndFindPath` (จบสถานะ "กำลังค้นหาเส้นทาง..." ทันที); vector ไม่ว่าง ⇒ `RunFindPath` แล้ว consume ต่อเป็น
+  state machine (`0x006EACE0`) ไม่ใช่รอ waypoint ทีละอันจากเซิร์ฟเวอร์ — **ไม่อ้างว่า action ใดลบข้อความไทยบนจอ
+  โดยตรง** (proven แค่ dispatch ไม่ใช่ rendering)
+- **T4** [bounded negative]: `u16@+0x14=743` ใน request ชนทั้ง `QUEST.n_ID=743` และ `MOBS.n_ID=743` พร้อมกัน —
+  semantic (quest id / NPC id / list index) **ยังปิดไม่ได้จาก static** ห้ามใช้ 743 hardcode เป็น NPC id
+- **BUILD_IMPACT** (จาก RE runner เอง): สาย A เขียน encoder `0x2F92` เป็น `u16 count` ตามด้วย records ได้แล้ว
+  ตามตาราง T2 ข้างบน; **safe fallback วันนี้คือ empty vector เท่านั้น** (ให้ client เข้า `EndFindPath` ทันที) —
+  auto-walk จริง (nonempty response) ต้องรอ provenance ของ `record+0` semantic และ discriminator persistence
+  จาก attended differential ก่อน ห้ามส่ง nonempty response จาก 743 หรือเลขเดา
+
+CORE-REQUEST เปิดจากผลนี้: `notes_to_chief/20260828_0427_LANE-A-CORE-REQUEST-025-wire-tracepath-empty-response-fallback.md`
+(ขอ chief ต่อ handler ใน `runtime.py` ตอบ `CTracePathVital` เป็น empty vector ทุกครั้งที่ได้รับ
+`CTracePathReqVital` — แก้บั๊กค้าง "กำลังค้นหาเส้นทาง..." ถาวรที่ผู้เล่นเห็นจริงในรอบ M1-P)
