@@ -1195,7 +1195,22 @@ layout ของ nested reader พร้อม provenance **หรือ** bound
 
 ---
 
-## 🔬 RE-115 MAPWINDOW-SCENE-NPC-LIST-SOURCE-001 [STATIC-ON-BRIDGE]: **หน้าต่างแผนที่ในเกม (M) มีรายการ "ค้นหาตัวละครในฉาก" เรียง `MOBS.n_ID` ต่อเนื่อง + ปุ่ม GO! — รายการนี้ไคลเอนต์ได้มาจาก packet ของเซิร์ฟเวอร์ (เช่น census/actor collection ที่ส่งอยู่แล้ว) หรือจากตารางฝั่งไคลเอนต์เอง** [🟡 OPEN]
+## 🔬 RE-115 MAPWINDOW-SCENE-NPC-LIST-SOURCE-001 [STATIC-ON-BRIDGE]: **หน้าต่างแผนที่ในเกม (M) มีรายการ "ค้นหาตัวละครในฉาก" เรียง `MOBS.n_ID` ต่อเนื่อง + ปุ่ม GO! — รายการนี้ไคลเอนต์ได้มาจาก packet ของเซิร์ฟเวอร์ (เช่น census/actor collection ที่ส่งอยู่แล้ว) หรือจากตารางฝั่งไคลเอนต์เอง** [🟢 **CLOSED PASS/DONE — CLIENT-LOCAL: scene `.npc` file + `MOBS`/`MOBS_TIP` crosswalk, NOT a server packet/census; GO! also resolves the picked NPC id locally, no X/Y and no network-send call in the traced CFG, ปิดโดย RE runner LOCAL 2026-08-28T02:21+07:00**]
+
+> **ผลสรุป (เต็มดู `notes_to_chief/20260828_0221_RE-115-RESULT-SCENE-NPC-STATIC-LOCAL-GO.md`):**
+> client โหลด scene-local file `Data\Scene\Save\<scene>\<model>.npc`, แยกเป็น record `{NPC id, X, Y}` ต่อ
+> `MOBSET`, แล้ว list builder (`[0x0052A050,0x0052A4E3)`) เดิน collection นั้น กรองด้วย `MOBS.n_CAPABILITY==1`
+> lookup ชื่อ/title/icon จาก `MOBS`/`MOBS_TIP` — ไม่ใช่ census/actor packet ที่เซิร์ฟเวอร์ส่ง และไม่พบ
+> opcode/handler แยกของรายการนี้ทั่ว `external/` (30 files, 29,900,221 bytes, fingerprint pinned) T4: ปุ่ม GO!
+> เก็บ NPC id ที่เลือกไว้ (`item+0x94` -> `map+0x9C`) แล้ว dispatch **local event type `0x14`** เท่านั้น — CFG
+> ที่ตรวจสมบูรณ์ **ไม่มี X/Y และไม่มี network-send call**; พิกัดมาจาก record ที่แยกไว้แล้วตอนโหลดไฟล์ ไม่ใช่จาก
+> request ใหม่ ณ จุดคลิก (`0x14` นี้เป็น internal UI event, คนละตัวกับ `CTracePathReqVital`/`0x4391` ที่ RE-119
+> พิสูจน์ว่าออกวิ่งทางเน็ตเวิร์กจริง — ไม่ขัดกัน: การส่ง `0x4391` เป็นสิ่งที่เกิด**ต่อจาก**ที่ event `0x14`
+> ภายในนี้ทริกเกอร์ ไม่ใช่ path เดียวกันที่ RE-115 เดินตาม CFG ถึง)
+> **BUILD_IMPACT:** เซิร์ฟเวอร์ไม่ต้องประดิษฐ์ packet รายชื่อ NPC ใหม่ให้หน้าต่างแผนที่เลย — client มี source +
+> display metadata + พิกัดอยู่แล้วจาก scene `.npc`/`MOBS`/`MOBS_TIP` เอง สิ่งที่เซิร์ฟเวอร์ต้องรักษาคือ scene
+> identity/transition กับ NPC id ที่ compatible กับข้อมูลไคลเอนต์เท่านั้น (census ไม่จำเป็นต้องครบทุกชื่อเพื่อให้
+> list แสดง) — ไม่มี build item ใหม่สำหรับสาย A จากใบนี้โดยตรง
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง (2026-08-28T01:xx+07:00, รวม `notes_to_chief/`, `rounds/`):
 > `RE-115`/`GT-115` = 0 hit ทั้ง `CLIENT_RE_QUEUE.md` และ `GAME_TEST_QUEUE.md` — เลขสูงสุดที่ใช้แล้วคือ
