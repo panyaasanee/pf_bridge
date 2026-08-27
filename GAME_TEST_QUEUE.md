@@ -5300,7 +5300,7 @@ clear, the whole entry is BLOCKED, not NO-RESULT/FAIL.
 
 ---
 
-## GT-116 CORE-REQUEST-022 CLASS-LEVEL-LOGIN-SKILLWINDOW-UNBLOCK-001: after CORE-REQUEST-022 wires class_id=1 (Gladiator) + level=1 into every login's ActorAttr/BasicAttr frames, does a real client's skill window (K / `Bt_main_Skill`) finally open, and does the wire actually carry those two fields byte-exact -- the one field GT-058/GT-059/GT-064 (all CLOSED, archived) could never get past because class was always 0  [BLOCKED -- รอ merge ก่อน, ไม่ใช่รอผู้เทส: PR ยังไม่เข้า main ณ ตอนเขียนใบ]
+## GT-116 CORE-REQUEST-022 CLASS-LEVEL-LOGIN-SKILLWINDOW-UNBLOCK-001: after CORE-REQUEST-022 wires class_id=1 (Gladiator) + level=1 into every login's ActorAttr/BasicAttr frames, does a real client's skill window (K / `Bt_main_Skill`) finally open, and does the wire actually carry those two fields byte-exact -- the one field GT-058/GT-059/GT-064 (all CLOSED, archived) could never get past because class was always 0  [PENDING -- merge confirmed chief round 2y0zil (2026-08-28T09:53+07:00): `pirate-force-server#162` merged=true 2026-08-27T19:48:29Z, commit `8017c71` verified present on `origin/main` HEAD-ancestry (`git log origin/main` on this round's fresh clone). Ready for an attended session.]
 
 > NUMBERING NOTE: grep confirmed before reserving -- `GT-116`/`RE-116` = 0 hits in `GAME_TEST_QUEUE.md`,
 > `CLIENT_RE_QUEUE.md`, and both `archive/*_closed.md` files (checked this round). Highest number in use
@@ -5336,13 +5336,12 @@ clear, the whole entry is BLOCKED, not NO-RESULT/FAIL.
   `archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md`. None of the three could ever isolate "was it timing,
   was it the wrong trigger, or was the client simply never told it had a class" -- class was 0 in every one
   of those sessions. This entry is the first attended shot with class != 0.
-- 🔴 **Not confirmed from this repo's own text:** the requesting brief cites branch
-  `claude/awesome-darwin-9do841` and commit `8017c71` on `pirate-force-server`. Grep of this entire
-  `pf_bridge` checkout (including `notes_to_chief/`, `rounds/`, both archive files) finds **zero** hits for
-  the literal string `8017c71`. The branch-name *pattern* (`claude/awesome-darwin-<session>`) matches this
-  round's session id and is consistent with `R201`/`R202`'s own naming, so it is plausible -- but treat the
-  sha as **unverified** until ด่าน 0/1/2 below confirm it live. Do not boot against a sha copied from any
-  letter without resolving it yourself.
+- ✅ **Verified chief round 2y0zil (2026-08-28T09:53+07:00):** branch `claude/awesome-darwin-9do841` /
+  commit `8017c71` confirmed on `pirate-force-server` -- `pirate-force-server#162` shows `merged: true`,
+  `merged_at: 2026-08-27T19:48:29Z` via the GitHub API, and `git log origin/main` on this round's fresh
+  clone shows `8017c71` as an ancestor of HEAD (`08e9f4f Merge pull request #162 ...` -> `8017c71
+  CORE-REQUEST-022: send class+level at login...`). No longer unverified; ด่าน 0/1/2 below can boot against
+  current `origin/main` directly.
 
 ### objective (claim เดียว)
 On a completely ordinary, flagless login (no `--*-scenario`), does the client now (a) receive
