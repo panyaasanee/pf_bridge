@@ -4309,7 +4309,7 @@ canonical, copy DB สองใบตามบล็อก db, เตรีย�
 
 ---
 
-## GT-103 GM-002 COMMAND-WIRE-CAPTURE-MATRIX-001: ล็อกอินด้วยบัญชี GM แล้วหา/เปิด GM editor widget พิมพ์ข้อความหลายแบบ -- capture file ของ `0x51E9` ขึ้นที่ `capture/gm_command_capture/` ไหม (path นี้ live บน production ครั้งแรกรอบนี้)  [PENDING]
+## GT-103 GM-002 COMMAND-WIRE-CAPTURE-MATRIX-001: ล็อกอินด้วยบัญชี GM แล้วหา/เปิด GM editor widget พิมพ์ข้อความหลายแบบ -- capture file ของ `0x51E9` ขึ้นที่ `capture/gm_command_capture/` ไหม (path นี้ live บน production ครั้งแรกรอบนี้)  [PENDING -- BLOCKED-ON RE-117: GT-107-R3 (2026-08-28T02:15) พบว่าปุ่ม BT_GM โผล่จริงแต่คลิกแล้วเงียบสนิท ไม่มีเฟรม/หน้าต่างใด ๆ, ดู RE-117 (CLIENT_RE_QUEUE.md) และ GT-107-R3's result]
 
 > เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md. grep ยืนยันก่อนจอง: GT-103 = 0 hit ⇒ ใบนี้คือ GT-103 (RE-104
 > ถูกใช้แล้วในรอบเดียวกัน โดยใบพี่น้อง). เลขว่างถัดไป = 105. ใบเก่าทุกใบอยู่ที่เดิม ห้ามแตะ.
@@ -5226,7 +5226,14 @@ client-observable: five separate readings, none substituting for another -- D0 p
 
 ---
 
-## GT-107-R3 GM-001-R3 LOGIN-STATE-VISUAL-PROBE-003: after RE-113 (trailing change-mask byte) + CORE-REQUEST-020 (field_0x0b_second=1) both landed on main, does a real client now accept GM_UpdateGMStateVital cleanly, and does BT_GM actually appear  [PENDING]
+## GT-107-R3 GM-001-R3 LOGIN-STATE-VISUAL-PROBE-003: after RE-113 (trailing change-mask byte) + CORE-REQUEST-020 (field_0x0b_second=1) both landed on main, does a real client now accept GM_UpdateGMStateVital cleanly, and does BT_GM actually appear  [RESULT -- outcome (a)/(b)/(c) ไม่ตรงเป๊ะสักข้อ, ดูผลด้านล่าง]
+
+> 🔴 **หมายเหตุการอ้างชื่อรอบ (round `y2nhzz`):** ผลที่เข้ามาจริงถูกส่งในจดหมายชื่อ
+> `notes_to_chief/20260828_0215_GT101R3-RESULT-*.md` (ผู้เทสอ้างเป็น "GT-101-R3" ไม่ใช่ "GT-107-R3") แต่
+> ทุกรายละเอียด (account `localtest`, RE-113 + CORE-REQUEST-020, hex tail prediction, ขอบเขต "Port Royal
+> เท่านั้น ไม่รวม GT-110") ตรงกับใบนี้ (`GT-107-R3`) เป๊ะทุกจุด ไม่ใช่ GT-101 เดิม (ซึ่งผลของมันคือ R1's
+> negative จาก error 23065, อยู่ที่เดิมด้านล่าง ไม่ถูกแตะ) — ใบนี้บันทึกผลไว้ที่ `GT-107-R3` ตามที่ entry
+> นี้นิยามไว้เอง ไม่ย้ายไป `GT-101`
 
 > เลขใบ: reuses GT-107's number with `-R3` (house precedent: `GT-030-R3`), not a fresh draw from the
 > shared counter -- grep confirmed 2026-08-28: `GT-107-R3` = 0 hits repo-wide including `archive/`.
@@ -5296,7 +5303,26 @@ in force). Headless 235/235 is cited evidence, not reproduced by the human teste
 clear, the whole entry is BLOCKED, not NO-RESULT/FAIL.
 
 ### result
-(tester fills this in)
+
+**RESULT 2026-08-28T02:15+07:00, owner-observed** (เต็มใบ:
+`notes_to_chief/20260828_0215_GT101R3-RESULT-GM-frame-accepted-BT_GM-button-visible-click-does-nothing-no-packet.md`,
+วิดีโอ+ภาพ+คอนโซล cite ในนั้น):
+
+wire/DB: PASS เต็ม — เฟรม 41 ไบต์ ท้ายตรง 🔮 prediction เป๊ะไบต์ต่อไบต์:
+`12 19 5A 0B 00 0B 00 0B 01 14 00 00 00 00 0B 00` ไม่มี `gm_account_lookup_failed_*` ไม่มี socket
+reset/close ที่ไม่ใช่เจ้าของออกเอง ทั้ง 23065 (`GT-101`) และ 28317 (`GT-107`) ไม่เกิดซ้ำเลย
+
+client-observable: **ไม่ตรงกับ (a)/(b)/(c) ที่ตั้งไว้สักข้อ — ผลลัพธ์ที่สี่ที่ใบนี้ไม่ได้เผื่อไว้**: ไม่มี
+modal (ตัด (c) ออก) + พบปุ่ม `BT_GM` จริงที่แถบระบบล่าง (ตัด (b) ออก, ไม่ใช่ "หาไม่เจอ") **แต่คลิก 2 ครั้ง
+ไม่มีอะไรเกิดขึ้นเลย ไม่ถึง `GMUI_BASIC`** (ไม่ครบเงื่อนไข (a) ที่ต้อง "clickable through to GMUI_BASIC
+without error") — คอนโซลไม่เห็นเฟรมขาเข้าใหม่ระหว่างคลิกด้วย (ไม่ใช่แค่ UI ไม่วาด แต่ client ไม่ส่งอะไรออก
+สายเลย)
+
+**ต่อ:** เปิด `RE-117` (`CLIENT_RE_QUEUE.md`) สืบจาก `RE-104` หา gate ที่ทำให้คลิกเงียบ — `GT-103` และ
+outcome (a) ของใบนี้ยังไม่ปิดจนกว่า `RE-117` จะตอบหรือชี้ทางสำรวจ
+
+nonclaim: ไม่ระบุสาเหตุที่คลิกไม่ทำงาน (ขอบเขตของ `RE-117`) · ไม่สำรวจอะไรบนจอนอกปุ่ม `BT_GM` (เจ้าของไม่ได้
+สำรวจต่อ) · ไม่ claim ว่า `GM_UpdateGMStateVital` ทำอย่างอื่นบนจอนอกจากทำให้ปุ่มนี้โผล่
 
 ---
 
