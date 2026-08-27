@@ -4592,3 +4592,100 @@ canonical, copy DB สองใบตามบล็อก db, เตรีย�
 ```
 
 ```
+
+---
+
+## GT-105 CORE-REQUEST-014-PARTIAL SCENE17-PROVISIONAL-ARRIVAL-001: เดินทางเข้าฉาก 17 (Bg1001, "เรือกลางทะเล") ด้วยพิกัดชั่วคราวที่เจ้าของเคาะเอง (0,0,0) -- ไคลเอนต์วางผู้เล่นได้อย่างเป็นปกติไหม หรือจมพื้น/หลุดขอบแมพ/ค้าง  [PENDING -- ไม่บล็อก M4/M5, ไม่ใช่การปิด CORE-REQUEST-014 เต็ม]
+
+> เลขใบ: ตัวนับร่วมกับ CLIENT_RE_QUEUE.md, ยืนยัน 105 ว่าง ณ 2026-08-27T15:xx+07:00 (grep 0 hit ทั้งสองไฟล์
+> รวม archive/) เปิดโดย chief รอบ `e0daaa`.
+
+### ที่มา
+`PANYA-DECISION 2026-08-27T14:45+07:00` (`notes_to_chief/20260827_1445_PANYA-DECISION-scene17-provisional-
+arrival-xyz-0-0-0-owner-decree-ka1-B.md`) เจ้าของเคาะเองว่า scene 17 (Bg1001) ใช้พิกัดขาเข้าชั่วคราว
+`(0,0,0)` ได้ ป้าย `PROVISIONAL-OWNER-DECREE-20260827-1445` -- **ไม่ใช่ค่าที่วัด** (`Bg1001.placements.tsv`
+มีแค่ 8 แถว monster-spawn ไม่มีแถว player-arrival เลย) เป็นข้อยกเว้นครั้งเดียวของเจ้าของต่อกฎ "ห้ามปั้นพิกัด"
+รอบ `e0daaa`: `scenarios/world_scene_registry_001.json` ใส่ spawn นี้แล้ว, `world_scene_entry.py`'s
+`resolve_entry` พิมพ์ token `SCENE_ENTRY scene=17 xyz=0.000,0.000,0.000
+source=PROVISIONAL-OWNER-DECREE-20260827-1445` ทุกครั้งที่ใช้ค่านี้จริง, `columbus_quest_dispatch.
+resolve_columbus_arrival()` สำเร็จแล้ว (headless, ยืนยันด้วย `tests/test_columbus_quest_dispatch.py::
+ResolveColumbusArrivalTests::test_succeeds_on_the_owner_decreed_provisional_spawn` และ wiring test คู่กัน)
+
+### สองชั้นหลักฐาน
+- **wire/DB (พิสูจน์แล้ว headless รอบนี้)**: `resolve_entry`/`resolve_columbus_arrival` คืนตำแหน่ง (0,0,0)
+  ที่ scene 17 จริง ไม่ refuse อีกต่อไป พิมพ์ token ด้านบนจริง (grep ยืนยันที่ `<SHA>` ก่อนบูต:
+  `git grep -n "PROVISIONAL-OWNER-DECREE-20260827-1445" <SHA> -- src/pirateforce_foundation`)
+- **client-observable (ใบนี้ต้องตอบ)**: เข้าฉาก 17 ด้วยพิกัดนี้แล้วไคลเอนต์วางผู้เล่นที่ไหน -- ยืนบนผิวน้ำ/ดาดฟ้า
+  ปกติ, จมพื้น, หลุดขอบแมพ, หรือค้าง/ไม่โหลดฉากเลย (n_SCENE_TYPE=4 "sea" ไม่เคยถูกส่งให้ไคลเอนต์เลยในโปรเจกต์นี้
+  n_MARKER=0 ด้วย -- ไม่มีจุดขาเข้าที่ผู้พัฒนาเกมกำหนดไว้เลย)
+
+### objective (claim เดียว)
+เมื่อผู้เล่นถูกส่งเข้าฉาก 17 ด้วยพิกัดชั่วคราวของเจ้าของ ไคลเอนต์วางผู้เล่นในสภาพที่เล่นต่อได้จริงหรือไม่ --
+ใบนี้ตอบแค่ "วางได้ปกติ" vs "วางแล้วมีปัญหา" เท่านั้น **ไม่ปิด** CORE-REQUEST-014 เต็ม (ครึ่งผูก vehicle ยัง
+บล็อกด้วย RE-096 ที่เปิดอยู่ ไม่เกี่ยวกับใบนี้)
+
+### nonclaim บังคับ (คำของเจ้าของ)
+พิกัดขาเข้าฉาก 17 เป็นค่าชั่วคราวจากเจ้าของ ยังไม่พิสูจน์ว่าไคลเอนต์วางผู้เล่นบนผิวน้ำ/ในขอบแมพ -- ถ้าเข้าแล้ว
+ตกขอบ/ค้าง **ให้รายงานเป็นผล ไม่ใช่ FAIL ของกฎ**
+
+### หมดอายุ
+ใบนี้ (และค่าพิกัดชั่วคราวเอง) ถูกแทนที่ทันทีที่ `RE-103` T3 มีหลักฐานจริง (client-observable capture หรือ
+wire evidence ของจุดขาเข้าจริง) -- ตอนนั้นให้ปิดใบนี้และแก้ registry กลับเป็นค่าที่วัดจริง อย่าปล่อยให้ทั้งใบ
+ชั่วคราวนี้และใบหลักฐานจริงเปิดพร้อมกัน
+
+### addendum (pf-queue-author, เติมตอนเปิดใบเดียวกัน -- ห้ามแก้ข้อความเดิมด้านบน แค่เติมฟิลด์บังคับที่ขาด)
+
+**เกตก่อนบูต (ด่าน 0 พิเศษของใบนี้):** ณ วันที่เปิดใบ **ไม่มีทาง production/debug ใดที่พาไคลเอนต์ไปถึง
+ฉาก 17 ได้จริงในบูตเดียว** -- `dispatch_columbus_quest3021` refuse เสมอ (vehicle-bind gap `RE-096`,
+ไม่เคยส่ง `TeleportVital` จริง), `--scene-load-scenario` เป็น allowlist ปิดเฉพาะฉาก 1/2
+(`src/pirateforce_foundation/scene_load.py`) ไม่มีฉาก 17, เส้นทาง `gm_login_scene` ที่ `PANYA-ORDER
+20260827_1425` เสนอไว้ (ทาง ก) ยังไม่ถูกเขียน (grep 0 hit ทั่ว `src/`) ก่อนบูตใบนี้ ต้อง grep สามคำสั่งนี้
+บน `<SHA>` จริงก่อนเสมอ (ห้ามเชื่อบรรทัดนี้แทนซอร์ส):
+```
+git grep -n "gm_login_scene" <SHA> -- src/
+git grep -n "expected_scene" <SHA> -- src/pirateforce_foundation/scene_load.py
+git grep -n "resolve_columbus_arrival\|world_scene_entry.resolve_entry" <SHA> -- src/pirateforce_foundation/runtime.py
+```
+ไม่พบทางเข้าฉาก 17 จริงในบูตเดียว = ทั้งใบยังคง **PENDING -- รอ wiring ทางเข้าจริง** (ไม่ใช่ BLOCKED ถาวร
+ไม่ใช่ NO-RESULT -- ยังไม่ได้ล็อกอินเลย) ห้ามเขียน `TeleportVital` มือเปล่า ห้ามแก้ `src/` เอง ไปทำใบอื่นแล้ว
+กลับมาเช็คซ้ำ พบทางแล้ว -> จดชื่อ flag/config/commit ที่ใช้ได้ลงผลก่อนไปด่าน 1/2 มาตรฐาน
+(`pf_resolve_green_boot.py --fetch` แล้ว grep ซ้ำบน `<SHA>` ที่บูตจริง)
+
+### db (สำเนาเสมอ ห้ามเปิด canonical)
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-105_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt105.sqlite3
+```
+เทียบ sha256 canonical กับ `CANON_SHA.txt` ก่อน/หลัง ต้องตรงทั้งสองครั้ง
+
+### server args
+ขึ้นกับเส้นทางที่ด่าน 0 พิเศษหาเจอจริง (flag/config ต่างกันไปตามทางที่ merge เข้ามา) -- **เขียนบรรทัดคำสั่งที่
+ใช้จริงเป๊ะ ๆ ลงผลก่อนบูต** ห้ามคัดลอกจากใบอื่นเดา ห้ามพ่วง `--*-scenario` ตัวอื่นเข้าบูตเดียวกัน
+
+### steps (คลิกต่อคลิก)
+1. LOCK_GAME, ผ่านเกตด่าน 0 พิเศษ + ด่าน 1/2 มาตรฐาน, จด BOOT_COMMIT + คำสั่งบูตจริง
+2. เข้าเกมด้วยเส้นทางที่พบ จนถึงจุดที่ `resolve_entry`/`resolve_columbus_arrival` ทำงานสำหรับฉาก 17
+3. ยืนยันคอนโซลพิมพ์ `SCENE_ENTRY scene=17 xyz=0.000,0.000,0.000 source=PROVISIONAL-OWNER-DECREE-20260827-1445`
+   ก่อนดูจอ -- ไม่มีบรรทัดนี้ = ยังไม่ถึงจุดที่ต้องสังเกต กลับไปด่าน 0
+4. NO-CRASH: คลิกขวาลากกวาดกล้อง 360 องศา (ห้าม Q/E -- Q/E หันตัวละครจริงและยิง `TargetPosVital`; คลิกขวา
+   ลากหมุนกล้องอย่างเดียวไม่ยิงอะไรออกสาย ปลอดภัยเสมอ)
+5. บันทึก: ฉากโหลดสำเร็จไหม (ไม่ค้างจอดำ), มีพื้น/น้ำให้ยืนไหม, ผู้เล่นลอย/จม/ตกขอบไหม, HUD X/Y/Z ตรง
+   (0,0,0) ไหม ถ่ายภาพนิ่ง full-res ของจอ + ป้ายชื่อตัวเอง
+6. ลองเดิน (W/A/S/D คาดว่ายิง `TargetPosVital` ทุกครั้ง -- คาดหมาย ไม่ใช่ความเสี่ยง) 10-20 วินาที บันทึกว่า
+   เคลื่อนที่ปกติหรือค้าง/ตกต่อ
+7. NO-CRASH ซ้ำ -> teardown -> เทียบ sha canonical
+
+### pass criteria (สองชั้น แยกกันเสมอ)
+wire/DB: token `SCENE_ENTRY scene=17 xyz=0.000,0.000,0.000 source=PROVISIONAL-OWNER-DECREE-20260827-1445`
+ปรากฏก่อนตัวละครถูกวาง (ปิดแล้วที่ headless ตาม tests ที่ "ที่มา" อ้างถึง -- ใบนี้แค่ยืนยันซ้ำว่าบูตจริงพิมพ์
+บรรทัดเดียวกัน) + `sessions`/`max(lease_generation)` ไม่ถอยหลัง + sha256 canonical ตรงก่อน/หลัง +
+`PRAGMA integrity_check`=ok
+client-observable: อย่างใดอย่างหนึ่งที่เห็นจริง (ไม่เดา) -- ยืนบนผิวน้ำ/ดาดฟ้าปกติ, จมพื้น, ลอยกลางอากาศ,
+หลุดขอบแมพ, หรือค้าง/ไม่โหลดฉากเลย + เดินได้ปกติไหม + สีป้ายชื่อทุกป้ายในทุกภาพ full-res (บรรทัดเดียวต่อป้าย,
+"none" เขียนออกมาถ้าไม่มี, ห้ามชี้สาเหตุ -- `RE-067` เปิดอยู่) ผลลบ (ตกขอบ/ค้าง) มีค่าเท่ากับผลบวก ตาม
+nonclaim บังคับด้านบนของใบนี้
+
+### result (ผู้เทสกรอก)
+```
+
+```

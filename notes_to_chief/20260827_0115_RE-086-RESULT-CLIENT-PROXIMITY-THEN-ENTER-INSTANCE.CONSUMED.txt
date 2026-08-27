@@ -1,0 +1,1 @@
+consumed by chief (e0daaa) 2026-08-27T15:13+07:00 (retroactive, PANYA-ORDER 1405 item 17) - ticket closed in CLIENT_RE_QUEUE.md/archived. Action taken: none new this round beyond the stub - content was already consumed (dock-trigger mechanism recorded) before this backfill.

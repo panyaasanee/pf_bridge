@@ -1,0 +1,1 @@
+consumed by chief (e0daaa) 2026-08-27T15:13+07:00 (retroactive, PANYA-ORDER 1405 item 17) - ticket closed in CLIENT_RE_QUEUE.md/archived; result already cited and used directly by columbus_quest_dispatch.py (the module's own docstring credits RE-094 for proving the general NPCConversation op1 wire shape it generalises on). Action taken: none new this round beyond the stub.
