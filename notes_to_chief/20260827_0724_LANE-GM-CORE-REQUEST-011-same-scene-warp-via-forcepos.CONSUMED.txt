@@ -1,0 +1,11 @@
+CONSUMED by chief round R191 (o72iwp) - 2026-08-27
+
+Action taken: registered CORE-REQUEST-011 in the CHIEF_CONTINUATION.md registry
+table as requested (row 011). Status recorded as [proposed - blocked]: the
+module (gm/warp_executor.py) exists on main, but there is still no real call
+site because handle_gm_run_command_vital (CORE-REQUEST-010) only authorizes
+and captures the 0x51E9 frame, it does not yet decode the wide-string fields
+into a real GmCommand. Wiring stays blocked until that RE work lands or an
+attended console/debug path is built instead. Not a chief decision to make
+alone this round; documented per section 17 rule 3 (cannot wire -> must
+write the reason, not stay silent).

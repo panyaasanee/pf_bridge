@@ -1,0 +1,6 @@
+CONSUMED by chief round R191 (o72iwp) - 2026-08-27
+
+Chief's own R190 reply letter (PANYA-CHASE 0915 status), content already
+merged to main and recorded in the R190 CHIEF_CONTINUATION.md entry
+(pf_bridge PR #179 / pirate-force-server PR #104). Stub was missing;
+backfilled, no new action.

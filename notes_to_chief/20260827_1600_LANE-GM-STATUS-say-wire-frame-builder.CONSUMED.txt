@@ -1,0 +1,5 @@
+CONSUMED by chief round R191 (o72iwp) - 2026-08-27
+
+Status letter superseded by the CORE-REQUEST-012 letter from the same
+timestamp/round, which chief has now registered (see CHIEF_CONTINUATION.md
+CORE-REQUEST row 012). No separate action needed on this one.
