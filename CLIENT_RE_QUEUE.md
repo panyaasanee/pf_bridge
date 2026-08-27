@@ -638,3 +638,50 @@ brute-force จากไคลเอนต์จริง ⇒ ปิดใบพ
 ได้อีกจนกว่าจะปิด — เฟรมเวอร์ชัน `1` ฆ่าเซสชันเจ้าของไปแล้วหนึ่งครั้ง (`GT-101`, `ErrorData=23065`)
 
 ### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-106 QUEST-FLAG-SYNC-MECHANISM-001 [STATIC-ON-BRIDGE]: **`Quest.GetQuestFlag` อ่านค่าจากไหน — ต้องมี wire vital ส่ง flag state จริงหรือ client เก็บ local ล้วน** [🟢 **OPEN — เปิดโดย chief 2026-08-27T15:xx+07:00 ต่อยอดจาก `PANYA-DECISION 1510` (M2 quest-gate skip)**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-106`/`GT-106` = 0 hit ทั้งสองไฟล์ (2026-08-27T15:4x+07:00)
+> เลขสูงสุดที่ใช้แล้วคือ `105` (`RE-105`/lane GM) ⇒ ใบนี้คือ `106` (ชนกับ `GT-106` ของ chief เอง — คนละไฟล์
+> คนละ prefix ไม่ใช่การชนจริง ตัวนับร่วมแค่กันเลขซ้ำข้าม prefix)
+> 🔴 ใบ `RE-085`-`RE-105` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`PANYA-DECISION 2026-08-27T15:10+07:00` (`notes_to_chief/20260827_1510_...`) สั่ง chief: บนเส้นทางไร้แฟล็ก
+ให้เซิร์ฟเวอร์ถือว่าเควส 110/739/111 = Finish เพื่อให้ `Accept_Check` ของเควส 3021
+(`Quest.GetQuestFlag(111) == Finish`) ผ่าน chief ตรวจ static ก่อนเขียนโค้ด (ตามกฎห้ามปั้น wire field) พบว่า:
+- `gamedata/PF_GAMEDATA_LUA_API.tsv:7,23` — `Quest.SetFlag`/`Quest.SetQuestFlag` เป็น **STUB_NOOP บนไคลเอนต์**
+  (`delegate_va=0x0045FA00`, body `xor eax,eax; ret 4; int3`) — เรียกแล้วไม่ทำอะไรจริงฝั่งไคลเอนต์
+- `PF_GAMEDATA_LUA_API.tsv:6` — `Quest.GetQuestFlag` เป็น **IMPLEMENTED จริง** (`delegate_va=0x006083C0`,
+  body ไม่ว่าง) ใช้จริงใน `gamedata/lua/Quest/q_con_new.lua:107,119,142`
+- สรุป: ใครก็ตามที่เขียนค่าที่ `GetQuestFlag` อ่าน ไม่ใช่ Lua ทั้งสองฟังก์ชันข้างต้น (พิสูจน์เป็น stub แล้ว)
+  เหลือสองทางที่ static เห็นไม่พอแยก: (ก) ไคลเอนต์เก็บ state ภายในเอง ไม่ต้องมี wire sync เลย หรือ
+  (ข) มี wire vital ส่งจริง — ผู้สมัครที่มีรูปร่างพอ (ไม่ EMPTY, ไม่ใช่แค่ candidate name) คือ
+  `UpdateQuestMiscDataVital` (`0x76A5`) และ `UpdateDailyQuestVital` (`0x5DEB`) — ทั้งคู่ยังไม่ decode ความหมาย
+- `docs/FUNCTIONAL_COVERAGE.json` แถว `quest_accept_and_progress` = `in_progress` ("no quest state is stored
+  server-side") ยืนยันตรงกับที่พบ — เซิร์ฟเวอร์นี้ไม่เคยส่งอะไรเกี่ยวกับ quest flag เลยจนถึงตอนนี้
+
+### objective
+1. xref `Quest.GetQuestFlag`'s handler (`0x006083C0`) หาว่ามันอ่านจากที่ไหน (struct field ในเมมโมรีไคลเอนต์
+   ที่ไม่เคยถูกเขียนโดย network handler ใด ๆ = ทาง ก, หรือ struct ที่ handler ของ vital ใดวุ่นเขียน = ทาง ข)
+2. ถ้าทาง ข: xref `UpdateQuestMiscDataVital` (`0x00622940` ตามที่ตรวจเจอ) และ `UpdateDailyQuestVital`
+   (`0x00621AE0`) ว่าเขียนโครงสร้างเดียวกับที่ข้อ 1 อ่านหรือไม่ ถ้าใช่ ถอด field layout ให้พอประกอบเฟรมได้
+3. ถ้า static เห็นไม่พอแยกทาง ก/ข ให้บันทึกเป็น bounded negative ชัดเจน พร้อมข้อเสนอ: attended capture คลิก
+   ตัวเลือกเควส 3021 ด้วยตัวละครเลเวลต่ำ (ไม่เคยผ่าน 110/739/111) แล้วดูว่าไคลเอนต์ปฏิเสธตัวเลือกเงียบ ๆ
+   (แปลว่าเช็คจริง ต้องมี wire) หรือปล่อยผ่าน (แปลว่า server-authoritative พอ ไม่ต้องมี wire เลย)
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative แล้วปิด
+ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+กลไกจริงของ `GetQuestFlag` พร้อม provenance **หรือ** bounded negative ที่เสนอ attended capture ตามข้อ
+objective 3 ชัดเจน ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+
+**ไม่บล็อก M2 คืนนี้ตามคำเจ้าของ**: `chief` เขียนโค้ด quest-gate-skip ไม่ได้จนกว่าใบนี้จะปิด (จะเป็นการปั้น
+wire field ที่ไม่มีหลักฐาน) — M2 ไปต่อด้วยส่วนที่ไม่ต้องรอใบนี้ (เข้าฉาก 17, ไม่ต้องเป็นเรือ) ดู
+`CHIEF-STATUS` รอบเดียวกันนี้สำหรับข้อเสนอทางเลือก
+
+### result (ยังไม่มี — ใบเปิดอยู่)
