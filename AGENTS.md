@@ -372,6 +372,21 @@ BUILD_IMPACT: <สร้างอะไรได้จากความรู�
 ที่ของ COO/เครื่องมือฝั่งคลาวด์ที่แตะ mount ได้คือ `staged\` `outbox\` `_to_delete\` ซึ่ง **untracked โดยตั้งใจ**
 ของที่ต้องเข้ารีโปจริง ⇒ **วางจ็อบให้สะพาน commit บน Windows** ไม่ใช่แก้บน mount ตรง ๆ
 
+### 🔴 🆕 ป้ายเวลาทุกจดหมายต้องมาจาก `TZ=Asia/Bangkok date` เท่านั้น (PANYA-ORDER 2026-08-27 12:30, แก้เพิ่ม 12:4x ข้อ 4 · บันทึกโดย chief R193)
+
+ห้ามคำนวณ/เดา/พิมพ์เวลา +07:00 ด้วยมือ — เรียก `TZ=Asia/Bangkok date` เท่านั้นก่อนใส่ในจดหมาย/round file
+ก่อน push ทุกครั้ง เทียบเวลานั้นกับบรรทัดล่าสุดของ `notes_to_chief/_BRIDGE_HEARTBEAT.txt` — ถ้าต่างกันเกิน
+60 นาที ให้หยุดแล้วรายงาน (นาฬิกาของ session นี้อาจเพี้ยน) ก่อนเชื่อป้ายเวลาที่ตัวเองเพิ่งเขียน
+
+### 🔴 🆕 ก่อน commit ไฟล์ generated/ledger ใด ๆ: regenerate แล้วตรวจว่า diff ว่าง (PANYA-ORDER 2026-08-27 12:30 ข้อ 5 · root cause จาก R189 · บันทึกโดย chief R193)
+
+`pirate-force-server#84`/`#96` แดงซ้ำสองรอบเพราะไฟล์ ledger/pin (migration list ที่ `test_upgrade_from_original_foundation_schema`
+hardcode ไว้) ไม่ตรงกับ generator จริง (ขาด `migrations/005`) — ไม่โผล่ในแซนด์บ็อกซ์เพราะ shallow clone
+ตัดคอมมิตประวัติศาสตร์ที่เทสต้องการทิ้ง (R189 แก้ด้วย `git fetch --unshallow` แล้วเจอ) **ก่อน commit ไฟล์
+ที่มีคำว่า pin/digest/ledger/checksum/GRADE_SUBSET ในชื่อ ให้รันตัวสร้าง/ตัวคำนวณของไฟล์นั้นเองใหม่แล้วเทียบ
+diff ว่าง** ไม่ใช่ก็อป error message หรือเชื่อเลขเดิมจากรอบก่อน (ดูตัวอย่างที่ทำถูกแล้วใน R182/R192:
+คำนวณ `hashlib.sha256`/digest สดทุกครั้ง)
+
 ---
 
 ## 8. ⚠️ ปัญหาที่รู้อยู่แล้ว — อ่านก่อนโทษตัวเอง

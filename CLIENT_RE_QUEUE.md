@@ -389,9 +389,13 @@ capture ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ต
 
 ### ที่มา
 `notes_to_chief/20260826_2322_RE-091-RESULT-DEDICATED-GM-UI-NO-CHAT-PREFIX.md` nonclaim ② เขียนไว้เองว่า
-"ไม่ claim ว่า UI นี้เข้าถึงได้ใน runtime โดยผู้เล่นทั่วไป ... หรือวิธีเปิด UI เป็นขอบเขต RE-089 ไม่ claim
-ข้ามใบ" — RE-091 พิสูจน์แค่ตัว *producer* (`[0x00729410,0x0072957D)`, gates: event code `0x0D` = Enter บน
-widget ที่ active/visible อยู่แล้ว) แต่ไม่พิสูจน์ว่าอะไรทำให้ widget นั้น active/visible ตั้งแต่แรก. ช่องว่าง
+"ไม่ claim ว่า UI นี้เข้าถึงได้ใน runtime โดยผู้เล่นทั่วไป หรือ `GM_UpdateGMStateVital` field ใดคือ is_gm/level
+— เป็น `RE-089`" -- ไม่ใช่คำถามเดียวกับใบนี้โดยตรง แต่หัวข้อ "แยกจาก main chat และขอบเขต GM state" ของไฟล์
+เดียวกัน (คนละย่อหน้า) เขียนกำกับไว้อีกจุดว่า "ส่วนความหมาย `is_gm`/level และวิธีเปิด UI เป็นขอบเขต `RE-089`
+ไม่ claim ข้ามใบ" -- **สองประโยคนี้แยกกันคนละจุดในไฟล์เดิม ไม่ใช่ประโยคต่อเนื่องเดียวกัน** ยกมาทั้งคู่เพื่อยืนยัน
+ว่า RE-091 ไม่ได้ตอบว่าอะไรเปิด widget: RE-091 พิสูจน์แค่ตัว *producer* (`[0x00729410,0x0072957D)`, gates:
+event code `0x0D` = Enter บน widget ที่ active/visible อยู่แล้ว) แต่ไม่พิสูจน์ว่าอะไรทำให้ widget นั้น
+active/visible ตั้งแต่แรก. ช่องว่าง
 นี้บล็อกใบเทส attended ที่จะเปิดรอบนี้ (`GAME_TEST_QUEUE.md` `GT-103`, GM-002 capture matrix): ผู้เทสต้อง
 รู้วิธีเปิด GM editor widget ในไคลเอนต์จริงก่อนจะพิมพ์อะไรเข้าไปทดสอบได้ ไม่งั้นใบ `GT-103` ทำได้แค่
 exploration แบบสุ่ม ไม่ใช่ procedure ที่ระบุขั้นตอนได้จริง.

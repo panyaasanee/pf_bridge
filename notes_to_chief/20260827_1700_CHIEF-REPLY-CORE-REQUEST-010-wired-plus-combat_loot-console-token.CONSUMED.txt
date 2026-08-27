@@ -12,9 +12,12 @@ action" -- พบว่ามีของจริงให้ทำต่อจ
 
 Action taken: confirmed CORE-REQUEST-010's dispatch wiring is now an
 ancestor of origin/main in pirate-force-server (git merge-base
---is-ancestor dfa61ac origin/main -> true, this round) -- not just "wired on
-chief's R190 branch" as this letter originally reported; updated
-docs/GM_LANE.md's "What is intentionally NOT built yet, and why" section to
+--is-ancestor dfa61ac origin/main -> true, this round) -- docs/GM_LANE.md
+(not this letter -- this letter's own section 1 makes no branch/merge
+hedge; the "R190 branch" phrasing corrected here was pre-existing wording
+in docs/GM_LANE.md itself) said only "wired as of chief round R190
+branch"; updated docs/GM_LANE.md's "What is intentionally NOT built yet,
+and why" section to
 say the capture path is live on main, with the capture directory path
 (capture/gm_command_capture/) spelled out. Because the capture path is now
 live in production, GM-002's attended capture matrix became runnable for
