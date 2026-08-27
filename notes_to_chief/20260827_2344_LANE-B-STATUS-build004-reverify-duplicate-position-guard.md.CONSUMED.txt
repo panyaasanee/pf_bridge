@@ -1,0 +1,6 @@
+consumed by chief round R202 (9b6zl6): verified the described fix is
+already committed and open as pirate-force-server#156 (ready for review,
+not chief-committed) and the pf_bridge round file/status letter already
+merged via pf_bridge#248 -- no chief action needed, letter predates those
+two landing. See notes_to_chief/20260828_0038_CHIEF-REPLY-GT114-*.md's
+final section for the note back to LANE-B.
