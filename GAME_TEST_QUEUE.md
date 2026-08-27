@@ -4301,6 +4301,75 @@ canonical, copy DB สองใบตามบล็อก db, เตรีย�
 ```
 
 ```
+
+---
+
+## GT-103 GM-002 COMMAND-WIRE-CAPTURE-MATRIX-001: ล็อกอินด้วยบัญชี GM แล้วหา/เปิด GM editor widget พิมพ์ข้อความหลายแบบ -- capture file ของ `0x51E9` ขึ้นที่ `capture/gm_command_capture/` ไหม (path นี้ live บน production ครั้งแรกรอบนี้)  [PENDING]
+
+> เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md. grep ยืนยันก่อนจอง: GT-103 = 0 hit ⇒ ใบนี้คือ GT-103 (RE-104
+> ถูกใช้แล้วในรอบเดียวกัน โดยใบพี่น้อง). เลขว่างถัดไป = 105. ใบเก่าทุกใบอยู่ที่เดิม ห้ามแตะ.
+
+### ลิงก์ (รายละเอียดเต็มอยู่ที่นี่ ไม่ใช่ในใบนี้)
+- wiring/capture path: `notes_to_chief/20260827_1700_CHIEF-REPLY-CORE-REQUEST-010-...md`, `docs/GM_LANE.md`
+- widget-trigger ยังไม่รู้: `RE-091`, ใบพี่น้อง `CLIENT_RE_QUEUE.md` `RE-104` (เปิดรอบนี้ ยังไม่ตอบ -- ไม่รอ)
+- บัญชี/config อนุมัติแล้ว (ใช้ซ้ำ): `notes_to_chief/20260827_1200_CHIEF-REPLY-GT101-gm-accounts-test-config-approved.md`
+- decode field pin: `RE-088` (positional names only, no semantics)
+
+### objective (claim เดียว)
+ส่งข้อความอย่างน้อยหนึ่งครั้งผ่าน GM editor widget ของไคลเอนต์จริงด้วยบัญชี `attended_test` -- ไฟล์ capture
+ตรงจำนวน/ตรงชื่อบัญชีปรากฏที่ `capture/gm_command_capture/` (relative กับ CWD ของ server process ตอนบูต)
+จริงหรือไม่. ไม่มี reply frame ส่งกลับ (`0x8C77` ยังไม่ต่อสาย) -- ใบนี้ไม่ทดสอบว่าคำสั่งใดทำงาน (GM-003
+คนละใบ).
+
+### ด่าน 0 (ใช้ซ้ำ GT-101 ไม่ขอใหม่) / ด่าน 1 (green boot) / ด่าน 2 (grep ยืนยันสาย ที่ `<SHA>` จริง)
+```
+py -3 pf_resolve_green_boot.py --repo "C:\path\to\pirate-force-server" --fetch
+git grep -n "GM_RUN_GM_COMMAND_VITAL_ID" <SHA> -- src/pirateforce_foundation/runtime.py
+git grep -n "handle_gm_run_command_vital" <SHA> -- src/pirateforce_foundation/runtime.py
+git grep -n "def capture_raw_gm_command" <SHA> -- src/pirateforce_foundation/gm/command_capture.py
+```
+ขาดข้อใดข้อหนึ่ง = BLOCKED (precondition gate) -- ไปทำใบอื่น. (คนละแบบกับ "หา widget ไม่เจอ" ข้างล่าง)
+
+### db / server args
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-103_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt103.sqlite3
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+$env:PF_GM_ACCOUNTS_CONFIG = "<path จากด่าน 0>"
+py -3 -u -m pirateforce_foundation.app --db state\run_gt103.sqlite3
+```
+ไม่มี `--*-scenario`. `--export-events` เป็นแฟล็กเสริมไม่บังคับ (คอนโซลไม่พิมพ์ event นี้ถ้าไม่เติม --
+หลักฐานหลักคือไฟล์ capture บนดิสก์เสมอ). เทียบ sha256 canonical กับ `CANON_SHA.txt` ก่อน/หลัง.
+
+### steps (สืบเนื่องจาก GT-101 เซสชันเดียวกันได้ ไม่ต้อง relogin)
+1. เข้าเกม, NO-CRASH กวาดกล้อง (เหมือน GT-101 ขั้น 1-3).
+2. **สำรวจหา GM editor widget แบบมีงบ (สูงสุด 10 การลอง)**: ไล่ดูไอคอน/เมนูที่เห็นทั้งหมดครั้งเดียว ->
+   right-click ป้ายชื่อตัวเอง -> ลอง hotkey สามัญทีละตัว (backtick, F1-F4, Ctrl+G, Enter เปล่า) เว้น 3
+   วินาที/ครั้ง, จดผลทุกครั้ง (แม้ไม่มีอะไรเกิดขึ้น). พบ -> ข้อ 3. ไม่พบครบ 10 -> บันทึก **NO-RESULT
+   (widget not found, bounded exploration)** พร้อมรายการที่ลอง แล้วข้ามไป teardown (ไม่ใช่ FAIL/BLOCKED).
+3. ถ้าพบ: พิมพ์ 4-8 ข้อความทดสอบ (สั้น/มีอาร์กิวเมนต์/ว่างเปล่า/ยาว+ไทย) กด Enter ทีละอัน เว้น 3 วินาที
+   จดเวลาส่งแต่ละอัน (+07:00).
+4. ยืนยันจอไม่มีปฏิกิริยาต่อเนื้อหาข้อความ (คาดหมายอยู่แล้ว) -- ถ่ายภาพนิ่งท้ายสุด.
+5. NO-CRASH ซ้ำ -> teardown -> เทียบ sha canonical -> ลบสำเนา config/env -> **เก็บทั้งโฟลเดอร์
+   `capture/gm_command_capture/` แนบผล**.
+
+### pass criteria (สองชั้น แยกกันเสมอ)
+wire/DB: พบ widget+ส่ง N ข้อความ ⇒ `capture/gm_command_capture/` มีไฟล์ `.txt` ใหม่ N ไฟล์ ชื่อมี
+`attended_test`/`_0x51E9`, มี header+decode section (FAILED-pin ก็นับเป็นผลถูกต้อง)+hex dump. ไม่พบ widget ⇒
+โฟลเดอร์ไม่มีไฟล์ใหม่เลย (ผลลบสมบูรณ์ ไม่ตอบคำถามหลักแต่ไม่ใช่ FAIL). sha256 canonical ตรงก่อน/หลัง,
+`PRAGMA integrity_check`=ok, raw log/console เก็บครบ.
+client-observable: ปกติ**ไม่มีอะไรเปลี่ยนบนจอ**ตอบสนองเนื้อหาคำสั่ง (nonclaim ล่วงหน้า ไม่ใช่ FAIL) --
+สิ่งเดียวที่สังเกตคือผลของการสำรวจหา widget เอง (บันทึกทุกจุดที่ลอง+ผล, ถ่ายภาพรูปร่าง/ตำแหน่ง widget ถ้าพบ).
+สีป้ายชื่อในภาพ (ถ้าเห็น) บันทึกแบบ "none" ถ้าไม่มี ไม่ชี้สาเหตุ (`RE-067` เปิดอยู่).
+
+### nonclaims
+🔴 เก็บข้อมูลดิบ ไม่ใช่พิสูจน์ว่าคำสั่ง GM ทำงาน -- ไม่มี reply frame เลย. 🔴 "หา widget ไม่เจอ" =
+NO-RESULT ที่สมบูรณ์ ไม่ใช่ FAIL/BLOCKED (BLOCKED = ด่าน 0/1/2 เท่านั้น). ไม่ตั้ง semantic ให้
+`string_0x1c`/`string_0x38`/`field_0x10`/`field_0x14`/`field_0x18` จากสิ่งที่พิมพ์เอง. ไม่ claim ว่า `RE-104`
+ถูกตอบแล้ว. ผู้เทสคนเดียว บัญชี GM เดียว เซสชันเดียว (ต่อจาก GT-101 ได้). สำเนา config ลบทิ้งตอน teardown.
+ไม่ชี้สาเหตุสีป้ายชื่อ. NO-RESULT ของขั้น 2 จ. ไม่แยก "widget ไม่มีจริง" จาก "รายการที่ลองผิดตัว" -- อาศัย
+บันทึกรายการที่ลองครบ (steps) ให้รอบถัดไปแยกเอง.
+
 ---
 
 ## GT-104 MOB-DEATH-002 WIDEN-DEATH-SCOPE-BG0001-FIRST-WIDENED-KILL-001: โจมตี field-mob ตัวหนึ่งใน bg0001 ที่ไม่ใช่ 0x201F จนถึง 0 HP บนบูตไร้แฟล็ก -- widening ruling ที่เพิ่งต่อสายทำให้ตายจริงบนจอไหม (ไม่ใช่ค้างที่ 0 HP ตลอดกาลแบบก่อนรอบนี้) และของดรอปตามมาปรากฏ/เก็บได้ไหม  [PENDING -- ไม่บล็อก M4 (29 ส.ค. 23:59), งานเสริมหลัง ruling ผ่าน COO]
