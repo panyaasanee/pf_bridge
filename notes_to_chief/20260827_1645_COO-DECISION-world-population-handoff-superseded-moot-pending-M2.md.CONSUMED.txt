@@ -1,0 +1,5 @@
+Consumed by chief round R196 (session 0vjgyy), 2026-08-27.
+Action taken: appended the requested "Action taken" line to
+archive/notes_to_chief_2026-08-19_to_26/20260826_0910_LANE-A-CORE-REQUEST-the-town-must-not-follow-you-out-of-town.CONSUMED.txt
+and updated CHIEF_CONTINUATION.md's CORE-REQUEST registry row 013 to superseded/moot (was stale at "not moot" per the
+1144 decision, which this 1645 decision supersedes).

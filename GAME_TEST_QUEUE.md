@@ -4890,3 +4890,104 @@ dialog ตามปกติ, **restart server ก่อนเปิด client �
 ```
 
 ```
+
+---
+
+## GT-109 CORE-REQUEST-017-1 GM-LOGIN-SCENE-OVERRIDE-VISUAL-001: per-account login-scene override for GM accounts, wired into START_GAME_REQ this round -- does a real client actually render the overridden scene on login  [PENDING]
+
+> เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md. grep ยืนยันก่อนจอง (2026-08-27): GT-109 = 0 hit ทุกที่ใน
+> pf_bridge (รวม archive/). RE-108 (SELECT-TARGET-UI-PANEL-REQUIRED-FRAME-001, เปิด 2026-08-27T16:37+07:00)
+> ใช้เลข 108 ไปแล้ว ⇒ เลขว่างถัดไปในตัวนับร่วมคือ 109 ไม่มีใบเดิมถูกย้ายหรือแก้
+
+- objective: (claim เดียว) เมื่อบัญชี GM ถูกลงทะเบียนทั้งใน config/gm_accounts.json (หรือ
+  PF_GM_ACCOUNTS_CONFIG) และ config/gm_login_scene.json (หรือ PF_GM_LOGIN_SCENE_CONFIG) ชี้ไป scene_id ที่รู้จัก
+  GameClient จริงจะ render ฉากที่ override ไว้บนจอไหม -- ฉาก/พื้นถูกต้องตรงกับ scene_id นั้น ตัวละครยืนที่จุด
+  spawn ที่ปักหมุดของฉากนั้น ไม่มี glitch -- แทนที่จะเป็นฉากเดิมที่บัญชีนั้นเคยบันทึกไว้ นี่คือสิ่งเดียวที่ยังไม่ถูก
+  พิสูจน์: การสลับค่าฝั่งเซิร์ฟเวอร์เอง (login_scene_override.py ต่อสายเข้า runtime.py's START_GAME_REQ
+  handler รอบนี้) พิสูจน์แบบ headless แล้วผ่าน tests/test_gm_login_scene_override_wiring.py (6/6 ข้อ ขับผ่าน
+  dispatcher จริง รวมเทสระดับไบต์ที่ยืนยันว่าเฟรม ActorAttr/MovementAttr กับ teleport ตรงกัน ไม่ใช่แค่ teleport
+  ฝ่ายเดียว -- pf-adversary สองรอบ พบบั๊กจริงในดราฟต์แรกและแก้แล้ว) full suite เขียว(cloud sanity) ไม่มี
+  regression -- ใบนี้ไม่พิสูจน์ซ้ำส่วนนั้น ถามแค่ว่ามนุษย์ที่จอเห็นผลจริงไหม
+
+- db: default_state\pirateforce.sqlite3 (สำเนาเท่านั้น ห้ามแตะตัวจริง) สำเนาไป
+  pf_bridge\backup\pirateforce_before_GT-109_<yyyyMMdd_HHmmss>.sqlite3 แล้วไป state\run_gt109.sqlite3
+  sha256 ของ canonical เทียบกับ CANON_SHA.txt ทั้งก่อนและหลัง · PRAGMA integrity_check=ok บนสำเนาที่ใช้ทำงาน
+  ทั้งสองครั้ง
+
+- server args:
+```
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+$env:PF_GM_ACCOUNTS_CONFIG = "<สำเนาทิ้งใต้ pf_bridge\backup\ ระบุบัญชี GM จริงที่ยืนยันแล้ว>"
+$env:PF_GM_LOGIN_SCENE_CONFIG = "<สำเนาทิ้งใต้ pf_bridge\backup\ map บัญชีนั้น -> scene_id 2>"
+py -3 -u -m pirateforce_foundation.app --db state\run_gt109.sqlite3
+```
+  ไม่มีแฟล็ก --*-scenario ใด ๆ -- override ขับด้วย config รอบนี้ ไม่ใช่ scenario-gated ห้ามแก้
+  config/gm_accounts.json หรือ config/gm_login_scene.json ตัวจริง ให้ env var ชี้ไปสำเนาทิ้งแล้วลบตอน teardown
+
+  เงื่อนไขก่อนบูต ต้องผ่านก่อนเปิดเกม ไม่งั้นทั้งใบ BLOCKED (ไม่ใช่ NO-RESULT):
+  1. resolve commit ที่บูตเขียวตามวิธีมาตรฐานของ repo แล้วยืนยันว่า commit นั้นมีของรอบนี้จริง:
+     git grep -n "login_scene_override" <SHA> -- src/pirateforce_foundation/runtime.py
+     git grep -n "gm_login_scene_override_applied_" <SHA> -- src/pirateforce_foundation/gm/login_scene_override.py
+     git grep -n "gm_login_scene_override_lookup_failed_" <SHA> -- src/pirateforce_foundation/gm/login_scene_override.py
+     git grep -n "PF_GM_LOGIN_SCENE_CONFIG" <SHA> -- src/pirateforce_foundation/gm/login_scene_override.py
+     ผลลัพธ์ 0 hit ข้อไหน = BLOCKED ห้ามบูต
+  2. ยืนยันชื่อบัญชีจริงที่ล็อกอินแล้วผ่าน is_gm_account()==True บน build นี้จริง -- GT-101/GT-107 เจอว่าชื่อ
+     ตัวอย่าง (attended_test) กับบัญชีจริงไม่ตรงกันมาก่อน ห้ามเดา ต้องยืนยันซ้ำก่อนเขียนสำเนา gm_accounts.json
+  3. ห้ามชี้ PF_GM_LOGIN_SCENE_CONFIG ไปที่ scene_id=17 หรือฉากใดที่ปักหมุด login_entry_allowed=False -- จะทำให้
+     login ทั้งครั้งถูกปฏิเสธไม่มี reply เลย (client ค้างที่ "connecting" ตลอดไป) ซึ่งเป็นพฤติกรรม fail-closed
+     ที่ตั้งใจ ไม่ใช่บั๊ก แต่เผารอบทดสอบทิ้งเปล่า ๆ ใช้ scene_id=2 (Prison Exile Island, BG0002) แทน: พิสูจน์แล้ว
+     ฝั่งเซิร์ฟเวอร์ว่ามี spawn ปักหมุดแต่ไม่มี ground evidence ที่ x/y จริงของบัญชี ⇒ login จะลงที่ spawn ปักหมุด
+     (26905.0, 21185.0, 1680.0) เสมอ ไม่ว่าตำแหน่งจริงที่บันทึกไว้ล่าสุดจะเป็นตรงไหน
+
+- steps:
+  1. เปิดเซิร์ฟเวอร์ก่อน ยืนยันพอร์ต 10188/10189 ไม่มี ESTABLISHED ค้างก่อนเปิด client (client เปิดโดยไม่มี
+     server รันตายในราว 3.5 นาที)
+  2. เปิด client -> เลือกเซิร์ฟเวอร์ -> กล่อง PVP ปุ่มซ้าย -> เลือกตัวละคร -> ช่องตัวละครแรกของบัญชี GM ที่
+     ยืนยันแล้ว -> ปุ่มกลางจาก 5 ปุ่มล่าง = เข้าเกม (ห้ามปุ่มซ้ายสุดเด็ดขาด -- ปุ่มนั้นลบตัวละคร)
+  3. นับจากจอโหลดจางหาย รอดู 10 วินาทีเต็มก่อนทำอะไรต่อ
+  4. เข้าเกมแล้ว: จด HUD X/Y ถ่ายภาพนิ่งความละเอียดเต็ม เช็กว่าพื้น/ฉากบนจอตรงกับ Prison Exile Island / BG0002
+     ไหม (ไม่ใช่บ้านหรือฉากที่บันทึกไว้ล่าสุดของบัญชีนั้น) และตัวละครยืนที่จุด spawn ปักหมุด
+     (26905.0, 21185.0, 1680.0) ไหม -- ไม่ตกพื้น ไม่ลอย ไม่ค้างจอโหลด
+  5. เช็ก NO-CRASH: ลากขวาหมุนกล้องครบ 360 องศา หมุนแค่กล้องเท่านั้น ตัวละครไม่หัน ไม่มีอะไรออกทางสาย
+     ปลอดภัยทำได้ทุกจุด ห้ามใช้ Q/E หรือ W/A/S/D สำหรับเช็กนี้ -- ปุ่มพวกนั้นหมุนตัวละครจริงและส่ง TargetPosVital
+  6. จดสีของป้ายชื่อทุกป้ายในทุกภาพความละเอียดเต็ม บรรทัดเดียวต่อป้ายต่อภาพ เขียน "none" ถ้าไม่มี อ่านสีจากภาพ
+     ความละเอียดเต็มเท่านั้น ห้ามอ่านจาก contact sheet ภาพย่อ หรือวิดีโอ ห้ามชี้สาเหตุของสี (RE-067 เปิดอยู่
+     เป็นที่เดียวที่คำถามนั้นอยู่) บันทึกความต่างจากเซิร์ฟเวอร์ต้นฉบับลง REAL_SERVER_DIVERGENCE.tsv บรรทัดละรายการ
+  7. ถือค้างอย่างน้อย 60 วินาทีดูว่ามีอะไรเปลี่ยนไหม (texture pop-in, พื้นโหลดช้า, ป้ายชื่อแมพบน HUD ถ้ามี)
+  8. ลากขวาหมุนกล้องอีกครั้ง (ทำซ้ำเช็ก NO-CRASH) แล้วออกจากเกม/ปิด client
+  9. teardown ผ่าน TEMPLATE_teardown_generic.ps1 (ป้ายเวลาบูตต้องอายุไม่เกิน 420 นาทีตอน teardown) เช็ก
+     sha256 canonical กับ CANON_SHA.txt ซ้ำ ลบสำเนาทิ้ง gm_accounts.json/gm_login_scene.json ทั้งคู่ และ
+     unset ทั้งสอง env var
+
+- pass criteria: (สองชั้น แยกกัน)
+    wire/DB          : การสลับค่าฝั่งเซิร์ฟเวอร์เองพิสูจน์แบบ headless แล้วรอบนี้โดย
+                        tests/test_gm_login_scene_override_wiring.py (6/6 ข้อ ขับผ่าน dispatcher จริง รวม
+                        เทสระดับไบต์ full suite เขียว ไม่มี regression) -- อ้างที่นี่ ไม่พิสูจน์ซ้ำ ชั้น wire/DB
+                        ของใบนี้เอง (อ่านจาก console/event log ของการบูตจริงเท่านั้น ไม่ดูจอ) ต้องมีเพิ่ม:
+                        console พิมพ์บรรทัด WORLD_SCENE scene_id=2 และ event log บันทึก
+                        gm_login_scene_override_applied_2 ครั้งเดียวสำหรับ login นี้ ไม่มี event
+                        gm_login_scene_override_lookup_failed_* เลย · sessions ได้แถวใหม่ 1 แถวที่มี
+                        selected_character_id สำหรับ login นี้ · max(lease_generation) ไม่ถอยหลัง · sha256
+                        canonical ตรงกับ CANON_SHA.txt ก่อน/หลัง · PRAGMA integrity_check=ok บนสำเนาทำงาน
+                        ทั้งสองครั้ง
+    client-observable: มนุษย์ที่จอเห็นตัวละครยืนบนพื้น/ฉาก Prison Exile Island / BG0002 ที่จุด (หรือใกล้เคียง
+                        สอดคล้องกับ) spawn ปักหมุด (26905.0, 21185.0, 1680.0) ไม่ใช่บ้านหรือฉากที่บันทึกไว้ล่าสุด
+                        ของบัญชีนั้น ไม่มี glitch ทางสายตา (ไม่ตกพื้น ไม่ลอย ไม่ค้างจอโหลด) เช็ก NO-CRASH ทั้ง
+                        สองครั้งผ่าน สีป้ายชื่อบันทึกตามกฎด้านบนครบทุกภาพความละเอียดเต็ม เขียน "none" ที่ไม่มี
+
+- nonclaims: ใบนี้พิสูจน์ override สำหรับปลายทางเดียว (scene_id=2) บัญชี GM เดียว login ครั้งเดียว เซสชันเดียว
+  ไม่พิสูจน์ว่า override ใช้ได้กับ scene_id อื่น ไม่ทดสอบปลายทางที่ปักหมุด login_entry_allowed=False (วันนี้:
+  ฉาก 17) เส้นทางนั้นถูกบันทึกไว้ว่าทำให้ login ทั้งครั้งถูกปฏิเสธไม่มี reply เลย (fail-closed ที่ตั้งใจ) และอยู่
+  นอกขอบเขตใบนี้ -- config ของใบนี้ต้องไม่ชี้ไปฉาก 17 ไม่ทดสอบ reconnect, relogin, มากกว่าหนึ่งบัญชี GM หรือสิ่ง
+  ที่ผู้เล่นคนอื่นเห็น ไม่ตรวจสอบ config/gm_accounts.json หรือ config/gm_login_scene.json เกินกว่า mapping เดียว
+  ที่ใช้ที่นี่ สำเนาทิ้งถูกลบตอน teardown ใบนี้ไม่พิสูจน์อะไรเรื่องความคงอยู่ของมัน ไม่ชี้สาเหตุของสีป้ายชื่อใด ๆ
+  ที่สังเกตได้ (RE-067 เปิดอยู่) ไม่ทำซ้ำหลักฐาน headless ที่ปิดไปแล้วรอบนี้ (tests/test_gm_login_scene_override_wiring.py,
+  6/6, full-suite เขียว) -- อ้างเป็นหลักฐานที่มีอยู่แล้ว ไม่ต้องให้มนุษย์รันซ้ำ ผลลบ (เช่น client โชว์ฉากเดิม/บ้าน
+  ของบัญชี, โชว์ความเสียหายทางภาพ, หรือค้าง) มีค่าเท่าผลบวก -- จะชี้ไปที่ว่าอะไรฝั่ง client บริโภค scene_id หลัง
+  login (คู่ขนานกับคำถามเปิดของ RE-089 เรื่องฟิลด์ GM-login อื่นที่ไม่มี render consumer ที่รู้จัก) ไม่ใช่ที่การ
+  สลับค่าฝั่งเซิร์ฟเวอร์ ซึ่งพิสูจน์ถูกต้องแล้วที่ชั้น wire/DB
+
+- result: (ผู้เทสกรอก)
+```
+
+```

@@ -1,2 +1,3 @@
 Consumed by chief round R175 (session t9veaa), 2026-08-26.
 Action taken: superseded by CORE-REQUEST-013 (COO-DECISION 1043, 1144, 1350 27 Aug).
+Action taken (round 0vjgyy, 2026-08-27): superseded/moot per COO-DECISION 1645 -- reopen as new CORE-REQUEST when M2 travel gate goes live. See notes_to_chief/20260827_1645_COO-DECISION-world-population-handoff-superseded-moot-pending-M2.md.
