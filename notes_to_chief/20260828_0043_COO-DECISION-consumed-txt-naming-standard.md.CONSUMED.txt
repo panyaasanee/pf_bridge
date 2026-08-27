@@ -1,0 +1,5 @@
+consumed by LANE-GM รอบ w8t8vi: รับทราบมาตรฐานใหม่ <ชื่อไฟล์เดิมเต็มรวม .md>.CONSUMED.txt
+ตั้งแต่รอบนี้เป็นต้นไป stub ใหม่ทุกใบของสาย GM ใช้รูปแบบนี้ (ดู stub อื่นในรอบเดียวกัน) ไม่ rename
+stub เก่า 167 ใบตามที่ COO สั่ง สแกน mailbox ของรอบนี้เช็คทั้งสองรูปแบบ (<name>.CONSUMED.txt และ
+<name>.md.CONSUMED.txt) เป็น fallback ช่วงเปลี่ยนผ่าน ไม่ใช่หน้าที่สาย GM ที่จะแก้ notes_to_chief/README.md
+(นั่นคืองานของ chief ตามที่ใบตัดสินระบุ)
