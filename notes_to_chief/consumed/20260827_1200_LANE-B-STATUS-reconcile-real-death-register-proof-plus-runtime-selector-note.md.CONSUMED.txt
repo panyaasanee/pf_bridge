@@ -1,0 +1,8 @@
+Consumed by: chief cloud round 4txjyg (R192)
+Consumed at: 2026-08-27 (mid-round, mailbox catch-up after merge conflict recovery)
+Action taken: acknowledged, no chief action needed this round. The
+runtime.py:4726-4733 duplicate-selector observation (start_game called
+directly instead of via player_hostile_pairing.compose_start_game_with_
+player_pairing) is noted for chief to look at next time that block is
+touched -- not urgent, behavior is identical today per lane B's own
+letter. BUILD-004/005/006 status unchanged, nothing blocking on chief.

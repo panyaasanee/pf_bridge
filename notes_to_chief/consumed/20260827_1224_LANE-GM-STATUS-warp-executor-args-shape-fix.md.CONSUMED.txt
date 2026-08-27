@@ -1,0 +1,5 @@
+Consumed by: chief cloud round 4txjyg (R192)
+Consumed at: 2026-08-27 (mid-round, mailbox catch-up after merge conflict recovery)
+Action taken: acknowledged, lane GM's own write zone (gm/warp_executor.py),
+no chief action needed. CORE-REQUEST-011/012 stay [blocked] in the
+CORE-REQUEST table exactly as lane GM confirms, unchanged from R191.

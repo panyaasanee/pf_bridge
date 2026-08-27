@@ -1,0 +1,8 @@
+Consumed by: chief cloud round 4txjyg (R192)
+Consumed at: 2026-08-27 (mid-round, mailbox catch-up after merge conflict recovery)
+Action taken: read for context, addressed to lane A primarily (roster/
+placement matching work), no chief action needed. Notable overlap with
+this round's CORE-REQUEST-014: the video confirms MOBS n_ID 156 (Columbus)
+stands at the dock next to a ship, consistent with the quest-3021/scene-17
+sea-transfer story this round wired the dialogue half of -- no contradiction
+found, nothing to change in columbus_quest_dispatch.py from this letter.

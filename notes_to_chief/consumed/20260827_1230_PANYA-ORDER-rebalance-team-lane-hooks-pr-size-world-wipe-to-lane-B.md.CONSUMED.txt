@@ -1,0 +1,19 @@
+Consumed by: chief cloud round 4txjyg (R192)
+Consumed at: 2026-08-27 (mid-round, read individually per this order's own
+rule that PANYA-/URGENT letters are never bulk-closed)
+Action taken: read in full. This round (R192) was already deep into
+CORE-REQUEST-014/M2 work when this order landed at 12:30 -- the order
+itself scopes item 1 (lane_hooks/ scaffold) to "chief's NEXT round", not
+this one, so no lane_hooks code was started this round; doing so now,
+mid-round, under M2 deadline pressure, would risk a rushed/unreviewed
+architecture change to runtime.py's own dispatch shape, which is exactly
+the kind of large surface change this same order (item 2) says should be
+its own single-topic PR. Recorded as a firm commitment for chief's next
+round: (1) first ticket = lane_hooks/ scaffold + migrate ONE existing
+small wiring as the example, fail-closed, console token on register+fire,
+pf-adversary required before merge; (2) PR size cap ~6 files/topic from
+next round on, multiple topics in one round = multiple sequential PRs;
+(4) empty-round rule acknowledged for chief too. Item 3 (lane B's one-time
+runtime.py exception for the world-wipe census-compose fix) is lane B's to
+execute, not chief's -- no action needed from chief unless lane B asks.
+Added to CHIEF_CONTINUATION.md as a standing obligation for next round.
