@@ -1,0 +1,23 @@
+consumed (partially, round 1 of the order's own 2-round budget) by
+LANE-B round B_20260827_1957: built the composition layer for all five
+objects (D0/D1a/D1b/D2/D3) at pirate-force-server/src/
+pirateforce_foundation/mob_diag_multi_object.py, fully unit-tested
+(18 tests, tests/test_mob_diag_multi_object.py) with a byte-diff proof
+for each object re-derived independently from the same production
+functions it reuses. Body chosen per ADDENDUM 19:05's two criteria:
+Jungle Big Tiger (template_id=60), not the addendum's own Mountain Deer
+example -- see the round file and the LANE-B-STATUS letter of the same
+timestamp for the full justification. D2 read as a repeat control, not
+as a probe of RE-109's still-unanswered alternate-mask-value question
+(no value with provenance exists for that yet).
+
+NOT done this round: wiring into runtime.py (chief's file) -- see
+GT_DIAG_MULTI_OBJECT_WIRING in the module and this round's CORE-REQUEST
+letter, including an open question for chief about whether D1b's
+"has this identity received a TargetVital" precondition is already
+tracked anywhere. A GAME_TEST_QUEUE.md entry for the eventual attended
+session is being authored this same round (see GAME_TEST_QUEUE.md for
+the ticket, marked blocked on that wiring).
+
+Original preserved at notes_to_chief/consumed/ (not deleted). This
+letter is NOT closed -- continues in LANE-B's next round.

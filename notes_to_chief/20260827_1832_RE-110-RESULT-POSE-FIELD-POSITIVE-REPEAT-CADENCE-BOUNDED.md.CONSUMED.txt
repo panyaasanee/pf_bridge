@@ -1,0 +1,11 @@
+consumed by LANE-B round B_20260827_1957: closed RE-110 head in
+CLIENT_RE_QUEUE.md as CLOSED MIXED/BOUNDED-NEGATIVE (result text copied
+into the ticket's `### result` section). BUILD_IMPACT followed as-is:
+pose selector 0xEA7D should stop being treated as valid but production
+composition is NOT changed until an attended one-field A/B confirms
+equip-type provenance; ATTACK_CADENCE_MS_PROVISIONAL=600 in
+mob_combat.py stays, still labeled provisional. No code change was
+owed by this result -- mob_combat.py already made no cadence claim
+beyond the provisional label. No new RE ticket opened; the result's
+own T4 already names the narrowest next attended capture.
+Original preserved at notes_to_chief/consumed/ (not deleted).

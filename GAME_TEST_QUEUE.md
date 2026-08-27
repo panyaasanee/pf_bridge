@@ -5132,3 +5132,52 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt109.sqlite3
 ```
 
 ```
+
+---
+
+## GT-114 DIAG-MULTI-OBJECT-001 [attended, in-game]: five diagnostic objects at the city-center test point (X=11865, Y=6147), each one field away from control D0 -- does each single-field difference produce the on-screen effect that field is predicted to control, jointly closing the attended half of RE-107/RE-108/RE-109's own proposed follow-ups  [BLOCKED -- BLOCKED-ON-WIRING: GT_DIAG_MULTI_OBJECT_WIRING not yet called from runtime.py]
+
+> NUMBERING NOTE: grep confirmed before reserving -- `GT-114`/`RE-114` = 0 hits in both files, archive included (2026-08-27, this round). Highest number in use is `113` (`RE-113`, CLOSED PASS/DONE) => this entry is `114`.
+> Entries `RE-085`-`RE-113` and `GT-101`-`GT-110` stay exactly where they are, unchanged -- this is a new entry, not a replacement for any of them.
+
+### source
+PANYA-ORDER 18:55+07:00 + ADDENDUM 19:05 (`notes_to_chief/20260827_1855_PANYA-ORDER-diag-multi-object-boot-one-round-answers-RE107-108-109.md`) asked for one boot, five objects, each one field from a shared control D0, byte-diff-proven before any human round. LANE-B built the composition layer this round: `src/pirateforce_foundation/mob_diag_multi_object.py` (new, `tests/test_mob_diag_multi_object.py` all green). Builds the five `DiagObject` records, prints `describe_boot()`; sends nothing, not called from `runtime.py` yet. RE-107/108/109 are each CLOSED BOUNDED-NEGATIVE/DONE, each proposing this kind of narrow attended capture as its own next step -- this entry is that follow-up.
+
+### objective
+One boot, five position-distinguished objects, each one field from D0, five independent readings in one sitting:
+- D0: does a left-click open the target panel, does Tab (RE-108)
+- D1a: does the corpse fall/animate once DEAD is held back 20s instead of 700ms, or freeze like production (RE-107 "DEAD too fast" branch)
+- D1b: does a dead-only frame (no DYING), sent only after a prior TargetVital for that identity, fall/animate or freeze (RE-107 "model-loaded bit" branch)
+- D2: a second on-screen D0 at another position -- a repeat-control reference point, NOT a new value (nonclaim 4)
+- D3: a body without the hostile faction splice (plain-town-NPC shape, same template/HP/name) -- clickable/hittable at all? what name colour?
+A reading on one object never substitutes for another (nonclaim 3).
+
+### db
+default_state\pirateforce.sqlite3 -- copy only, canonical never opened. Copy to `pf_bridge\backup\pirateforce_before_GT-114_<yyyyMMdd_HHmmss>.sqlite3`, then `state\run_gt114.sqlite3`. sha256 vs `CANON_SHA.txt` before/after; `PRAGMA integrity_check=ok` on the working copy both times.
+
+### server args
+NOT YET KNOWN -- BLOCKED. `GT_DIAG_MULTI_OBJECT_WIRING` (in `mob_diag_multi_object.py`) is what chief still owes: (1) diagnostic-only boot config gate (env var, shape of `PF_GM_ACCOUNTS_CONFIG`, off by default); (2) census assembly adds `alive_entry(legacy, obj)` per `diagnostic_objects()`, prints `describe_diag_object(obj)` per object (5 lines: `DIAG object=<D#> variant=<...> identity=<...> pos=(<x>,<y>,<z>)`); (3) `_dispatch_mob_combat`'s target resolution must resolve these five identities while active; (4) on death, dispatch by `obj.label`: D0/D2 -> `kill_schedule`; D1a -> `dying_timer_hold_schedule` (20s hold); D1b -> `dead_only_schedule(..., target_vital_seen=?)` -- if nothing tracks a prior TargetVital per identity, the reply must say so rather than pass `True`; D3 needs no death handling. Whoever wires this fills in the real command line here -- no guessing. Stays BLOCKED until then.
+
+### steps (fill in once server args above holds a real command line)
+1. LOCK_GAME; confirm exactly 5 `DIAG object=...` console lines before opening the client -- otherwise BLOCKED, do not boot.
+2. Boot, log in, reach (X=11865, Y=6147); record HUD X/Y.
+3. NO-CRASH: right-click-drag camera 360 degrees only (never WASD/Q/E -- those move the character and emit TargetPosVital).
+4. Per object: visible immediately or late (model-load lag, free data).
+5. D0: photo (name colour), click once, photo, Tab, photo; attack to 0 HP, photo death + result.
+6. D1a: attack to 0 HP, wait a full 25s, photo result.
+7. D1b: click once (emits TargetVital), then attack to 0 HP, photo result.
+8. D2: photo name colour before click / after click / after death.
+9. D3: photo name colour; try one click and one attack; record if either registers.
+10. NO-CRASH again; log out; teardown via `TEMPLATE_teardown_generic.ps1` (stamp under 420 min); recheck canonical sha256; sha256 every capture.
+
+Colour rule (per Panya's order 2026-08-25): one line per label per image, write "none" not blank, full-res stills only (never a contact sheet/video), never infer a cause -- RE-067 is open and is the only place that question lives.
+
+### pass criteria (two layers)
+wire/DB: (a) exactly 5 `DIAG object=...` lines matching `describe_boot()`; (b) the module's own pre-human byte-diff (signed off per pf-adversary, run before this ticket is ever booted) shows D1a/D2/D3 differ from D0 only in the one named field, D1a/D1b death frames differ only in schedule timing; (c)/(d) canonical sha256 + integrity_check ok before/after.
+client-observable: five separate readings, none substituting for another -- D0 panel/click/Tab + name colour; D1a fall/freeze after 20s hold (either is a finding, not a failure); D1b fall/freeze on dead-only-after-TargetVital; D2 name colour before/after click/death; D3 name colour + does click/attack register at all. All colours per the colour rule.
+
+### nonclaims
+(1) BLOCKED pending chief wiring `GT_DIAG_MULTI_OBJECT_WIRING`; per queue rule stays listed regardless. (2) Does not itself produce the required pre-human byte-diff proof. (3) Bundles five readings into one boot on the owner's own instruction; each stays independently reported. (4) D2 here is a byte-identical repeat of D0, NOT the GT-032 alternate-faction-value object the original order's table named -- that needs a value with provenance RE has not produced yet. (5) Does not test the player's own orange name (ADDENDUM 19:05 excludes it). (6) Does not decide the cause of any colour observed -- RE-067 only. (7) City-center placement is diagnostic only, not a real field-placement claim. (8) D1b's gate is only as good as whatever session state the eventual wiring actually tracks -- if it tracks nothing, the wiring reply must say so. (9) `DIAG_CENTER_Z` (2231.17) is a nearest-neighbour estimate from `population.py`'s own census (~931 units away), not a terrain query at this exact point -- objects rendering mid-air/underground is itself a result to record, not a reason to abort silently. (10) DOUBLY BLOCKED as of ADDENDUM 20:18 (+07:00, same day, landed after this ticket was drafted): the owner named Mountain Deer (MOBS n_ID 27) as the body for all five objects, superseding this round's Jungle Big Tiger (template 60) pick -- Mountain Deer needs a fresh mine (not in bg0001's roster) and a new `mob_death.WIDENING_RULINGS` entry (template 27 not covered by the existing bg0001 ruling). Next LANE-B round's work; do not boot this ticket against the current module without that swap landing first.
+
+### result
+(tester fills this in)

@@ -950,7 +950,7 @@ direct-call แบบเดิม `BUILD_IMPACT: NONE — ห้าม hard-code
 
 ---
 
-## 🆕🔬 RE-110 AUTO-ATTACK-CADENCE-AND-POSE-FRAME-001 [STATIC-ON-BRIDGE]: **เฟรมตอบ ActionVital แบบไหนสั่งท่าโจมตีปกติของ performer และ client ส่ง ActionVital ซ้ำเองเมื่อได้เฟรมตอบแบบไหน (ต่างจากของเราที่ตีไม่ออกท่า/สแปมคลิกได้ดาเมจรัว)** [🟢 **OPEN — เปิดโดย LANE-B 2026-08-27T17:34+07:00 ต่อยอดจาก PANYA-REFERENCE 16:35+07:00**]
+## 🆕🔬 RE-110 AUTO-ATTACK-CADENCE-AND-POSE-FRAME-001 [STATIC-ON-BRIDGE]: **เฟรมตอบ ActionVital แบบไหนสั่งท่าโจมตีปกติของ performer และ client ส่ง ActionVital ซ้ำเองเมื่อได้เฟรมตอบแบบไหน (ต่างจากของเราที่ตีไม่ออกท่า/สแปมคลิกได้ดาเมจรัว)** [🟢 **CLOSED MIXED/BOUNDED-NEGATIVE — ปิดโดย RE runner 2026-08-27T18:32+07:00, บริโภคโดย LANE-B 2026-08-27T19:57+07:00, ดูผลด้านล่าง**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-110`/`GT-110` = 0 hit ทั้งสองไฟล์ (2026-08-27T17:34+07:00)
 > เลขสูงสุดที่ใช้แล้วคือ `109` (`RE-109`, ใบก่อนหน้าในรอบเดียวกัน) ⇒ ใบนี้คือ `110`
@@ -991,11 +991,17 @@ PROVISIONAL ฝั่งเซิร์ฟเวอร์ชั่วครา�
 เฟรม auto-repeat + เฟรมท่าโจมตี + ค่า cadence จริงจาก gamedata (ถ้ามี) พร้อม provenance **หรือ** bounded
 negative ที่เสนอ attended capture แคบที่สุด ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
 
-### result (ยังไม่มี — ใบเปิดอยู่)
+### result
+`notes_to_chief/20260827_1832_RE-110-RESULT-POSE-FIELD-POSITIVE-REPEAT-CADENCE-BOUNDED.md` (2026-08-27T18:32+07:00) — mixed:
+- **pose (positive):** `ActionVital +0x30` selects attack animation via `EQUIP_VALUE.n_ATTACK_SKILL -> BEHAVIOR.n_ID -> s_ANIMATION`; current server echoes inbound `0xEA7D`, which does not resolve in this gamedata snapshot (no `BEHAVIOR.n_ID=60029`), explaining the missing pose. Six real weapon-type rows resolve; the reply still needs equip-type provenance for Arena01 before picking one, so **no production change this round**.
+- **auto-repeat (bounded negative):** complete `CActorTask_UseBehavior::update` body has no direct edge to the local ActionVital producer or action queue. Method ceiling; needs an attended observe-only probe capture, not static.
+- **cadence (bounded negative):** all six matched player-attack `BEHAVIOR` rows carry `n_MOB_CD=0`; no named cadence/interval column exists anywhere in `PF_GAMEDATA_COLUMNS.tsv` or the gamedata snapshot. `ATTACK_CADENCE_MS_PROVISIONAL=600` (`mob_combat.py`) has **no real value to replace it with** from this ticket.
+
+`BUILD_IMPACT` (RE runner's own line, followed as-is): server reply should stop treating observed `0xEA7D` as a valid pose selector and prepare to resolve `equipped weapon type -> EQUIP_VALUE.n_ATTACK_SKILL -> ActionVital +0x30`, but should NOT change production composition until an attended one-field A/B confirms actor/equipment provenance; `ATTACK_CADENCE_MS_PROVISIONAL=600` stays, still labeled provisional. **LANE-B consumption:** `mob_combat.py` already carries the provisional label and makes no cadence claim beyond it -- no code change was owed by this result. The pose-selector fix needs equip-type provenance this ticket does not have, so it is not a self-decidable buildable increment either; it stays a `PROVISIONAL`-tagged gap in `mob_combat.py` until that provenance exists. No new RE ticket opened -- the result's own T4 already names the narrowest next attended capture, and re-opening it as a fresh ticket would just restate that.
 
 ---
 
-## 🆕🔬 RE-111 LOOT-DROP-RENDER-REQUIRED-FIELDS-001 [STATIC-ON-BRIDGE]: **client ต้องการฟิลด์อะไรใน `MOB_LOOT_DROP` ถึงจะวาดถุงเรืองแสง+ป้ายชื่อสี rarity บนพื้น — เซิร์ฟเวอร์ส่งไปแล้ว 2 ใบ (54B) แต่เจ้าของไม่เห็นอะไรบนจอเลย** [🟢 **OPEN — เปิดโดย LANE-B 2026-08-27T17:34+07:00 ต่อยอดจาก PANYA-REFERENCE 16:35/ADDENDUM 16:45+07:00**]
+## 🆕🔬 RE-111 LOOT-DROP-RENDER-REQUIRED-FIELDS-001 [STATIC-ON-BRIDGE]: **client ต้องการฟิลด์อะไรใน `MOB_LOOT_DROP` ถึงจะวาดถุงเรืองแสง+ป้ายชื่อสี rarity บนพื้น — เซิร์ฟเวอร์ส่งไปแล้ว 2 ใบ (54B) แต่เจ้าของไม่เห็นอะไรบนจอเลย** [🟢 **CLOSED BOUNDED-NEGATIVE — ปิดโดย RE runner 2026-08-27T18:39+07:00, บริโภคโดย LANE-B 2026-08-27T19:57+07:00, ดูผลด้านล่าง**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-111`/`GT-111` = 0 hit ทั้งสองไฟล์ (2026-08-27T17:34+07:00)
 > เลขสูงสุดที่ใช้แล้วคือ `110` (`RE-110`, ใบก่อนหน้าในรอบเดียวกัน) ⇒ ใบนี้คือ `111`
@@ -1034,7 +1040,11 @@ ADDENDUM 16:45/16:5x — เซิร์ฟเวอร์เดิม: ขอ�
 field ที่ขาด/ผิด shape พร้อม provenance **หรือ** bounded negative ที่เสนอ attended capture แคบที่สุด ⇒ ปิดใบ
 พร้อมบรรทัด `BUILD_IMPACT:`
 
-### result (ยังไม่มี — ใบเปิดอยู่)
+### result
+`notes_to_chief/20260827_1839_RE-111-RESULT-54B-GROUND-LIST-COMPLETE-PERSISTENT-BAG-UNRESOLVED.md` (2026-08-27T18:39+07:00) — bounded negative:
+current 54B is a **complete** generic `GSCN_RunTimeProtocolRes` ground-list element (key + dirty mask 0x12 + full item id + XYZ); `MOB_LOOT_DROP` is our own server-side event name, not a recovered client class. The concrete create/update/consumer graph has zero named lookup of `n_ID_MODEL`; both GT-084-R2 items (2400046/2400047) resolve to `n_ID_MODEL=0` in gamedata, a candidate but not a causal proof. A separate, unresolved family (`FightingDropModule_Client`/`FightingDropNotify`) may be the original loot transport but has no serializer/handler/capture yet.
+
+`BUILD_IMPACT` (RE runner's own line, followed as-is): must not add guessed name/rarity/model bytes to the 54B or change its mask; production must keep telling the truth that there is no persistent/clickable loot object yet. **LANE-B consumption:** checked `mob_loot.py` for any such guess -- none found (it already documents the `n_ID_MODEL=0` ambiguity in its own comments rather than picking a value). No code change owed. The two follow-ups RE-111 itself names (a one-variable item-row A/B, and recovering the `FightingDrop*` family) both need an attended capture this lane cannot run standalone; not re-opened as a fresh ticket since RE-111's own T3 already states them precisely enough to act on later.
 
 ---
 
