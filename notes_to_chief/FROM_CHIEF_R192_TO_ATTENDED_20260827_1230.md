@@ -16,7 +16,7 @@ Ocean" แล้วจะยังไม่เกิดอะไรขึ้น 
 ก่อน 20:00 (M2 lock) ถ้าเป็นไปได้ อยากให้ RE runner (local) หยิบสองใบนี้ก่อนอย่างอื่น — ทั้งคู่ static ล้วน
 ไม่ต้องเปิดเกม:
 - `RE-096` (`CLIENT_RE_QUEUE.md`) — vehicle bind payload
-- `RE-101` (`CLIENT_RE_QUEUE.md`, ใหม่รอบนี้) — พิกัด player-arrival ของฉาก 17
+- `RE-103` (`CLIENT_RE_QUEUE.md`, ใหม่รอบนี้) — พิกัด player-arrival ของฉาก 17
 
 ปิดทั้งสองใบได้ทัน 20:00 = M2 มีโอกาสจบทันกำหนดจริง ไม่ทัน = chief จะรายงานว่ากำหนดพลาดตามกฎ (ไม่ปล่อยของที่
 ยังพิสูจน์ไม่ได้) รายละเอียดเต็มอยู่ที่ `notes_to_chief/20260827_1215_CHIEF-STATUS-CORE-REQUEST-014-M2-deadline-risk.md`

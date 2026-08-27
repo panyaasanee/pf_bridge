@@ -8276,7 +8276,7 @@ canonical, copy DB สองใบตามบล็อก db, เตรีย�
 ## GT-102 CORE-REQUEST-014 COLUMBUS-NPCCONVERSATION-QUEST3021-DIALOGUE-001: คลิก Columbus ที่ Port Royal (MOBS n_ID 156, bg0001 placement index 1) ครั้งแรกหลัง CORE-REQUEST-014 -- เห็นบทสนทนาเควสต์ 3021 จริงไหม (เมื่อวานคลิกแล้วเงียบ)  [PENDING]
 
 > เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md, prefix สองแบบ ห้ามแยกตัวนับ.
-> เลขสูงสุดที่ใช้ไปแล้ว ณ เวลาเขียนใบนี้: GT-101 (GAME_TEST_QUEUE.md) และ RE-101 (CLIENT_RE_QUEUE.md,
+> เลขสูงสุดที่ใช้ไปแล้ว ณ เวลาเขียนใบนี้: GT-101 (GAME_TEST_QUEUE.md) และ RE-103 (CLIENT_RE_QUEUE.md,
 > บันทึกไว้เองว่า "เลขว่างถัดไป = 102"). grep ยืนยันก่อนจอง: GT-102 = 0 hit, RE-102 = 0 hit ทั้งสองไฟล์
 > (ยืนยัน 2026-08-27). ใบเก่าทุกใบอยู่ที่เดิม ไม่ถูกแตะ ไม่ถูกย้าย.
 
@@ -8296,7 +8296,7 @@ canonical, copy DB สองใบตามบล็อก db, เตรีย�
 - `src/pirateforce_foundation/columbus_quest_dispatch.py` (pirate-force-server, ยังไม่ merge -- ดูด่าน 0):
   `production_allowed = True`, ไม่มีแฟล็ก. `dispatch_columbus_quest3021()` เขียนไว้เองว่า **ปฏิเสธเสมอวันนี้**
   ด้วยเหตุผลสองข้อที่แยกกัน (`scene17_teleport_refused_scene_has_no_pinned_spawn` จาก `world_scene_entry
-  .resolve_entry` เพราะ scene 17 ไม่มี pinned spawn -- ดู RE-101 เปิดอยู่ -- และ
+  .resolve_entry` เพราะ scene 17 ไม่มี pinned spawn -- ดู RE-103 เปิดอยู่ -- และ
   `no_re096_vehicle_row_evidence` เพราะยังไม่มี wire evidence ของ payload ผูกเรือ -- ดู RE-096 เปิดอยู่) --
   **แต่ทั้งสองเหตุผลนี้เกี่ยวกับ op1 (`QuestOperateVital`) เท่านั้น ไม่เกี่ยวกับการคลิกครั้งแรกที่ใบนี้ทดสอบ**.
 - `src/pirateforce_foundation/runtime.py::_dispatch_columbus_quest3021` (บรรทัด ~4186-4301): แขนแรก (คลิก)
@@ -8462,7 +8462,7 @@ canonical, copy DB สองใบตามบล็อก db, เตรีย�
 
 ### nonclaims
 - 🔴 **ใบนี้ไม่ทดสอบว่ากดตอบรับ ("มุ่งหน้าไป Atlantic Ocean") แล้วเกิดอะไรต่อ** -- op1/`QuestOperateVital`
-  เขียนไว้แล้วในซอร์สว่าปฏิเสธเสมอวันนี้ด้วยเหตุผลสองข้อที่เปิดอยู่ (`RE-101` พิกัด player-arrival ของ scene
+  เขียนไว้แล้วในซอร์สว่าปฏิเสธเสมอวันนี้ด้วยเหตุผลสองข้อที่เปิดอยู่ (`RE-103` พิกัด player-arrival ของ scene
   17, `RE-096` payload ผูกเรือ) -- **ไม่ใช่คำถามของใบนี้** ถ้าผู้เทสกดพลาดแล้วเห็นพฤติกรรมตาม P4 ให้จดไว้เป็น
   ข้อมูลเสริมเท่านั้น ห้ามใช้ตัดสิน PASS/FAIL ของใบนี้เอง (ตามคำสั่งตรงของ chief letter R192).
 - ข้อผูก "placement index 1 = Columbus (MOBS 156)" เป็น **owner testimony** ไม่ใช่ table crosswalk (ดู "ที่มา")

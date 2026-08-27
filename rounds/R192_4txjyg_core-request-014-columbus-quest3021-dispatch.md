@@ -42,7 +42,7 @@
      append-only (status ไม่ขยับทั้งคู่) + re-pin `GRADE_SUBSET_SHA256` (คำนวณ digest ใหม่จริงด้วยฟังก์ชันของ
      ไฟล์เอง `034304EA...3ABB3`, ไม่ใช่ copy จาก error message, พิน `test_refs` เท่านั้นที่ขยับ)
    - push `pirate-force-server@5d9cfd3`
-8. **เปิด `RE-101`** (`CLIENT_RE_QUEUE.md`) — หาพิกัด player-arrival ของฉาก 17 (`Bg1001`) ให้ RE runner
+8. **เปิด `RE-103`** (`CLIENT_RE_QUEUE.md`) — หาพิกัด player-arrival ของฉาก 17 (`Bg1001`) ให้ RE runner
    (STATIC-ON-BRIDGE, ไม่ต้องเปิดเกม) คู่กับ `RE-096` (vehicle payload) ที่เปิดค้างอยู่แล้ว
 9. **เขียน `CHIEF-STATUS`** แจ้ง COO/Panya ว่า M2 20:00 เสี่ยงพลาดกำหนดจริง เพราะสองช่องว่างที่เหลือเป็นงาน
    RE runner (local) ล้วน — chief cloud เร่งเองไม่ได้ ขอ priority ให้สองใบนี้ ไม่ใช่ขอเลื่อนกำหนด
@@ -55,7 +55,7 @@
 ### nonclaims
 
 - ไม่ได้อ้างว่าผู้เล่นย้ายฉากได้แล้ว หรือกลายเป็นเรือได้แล้ว — ยังปฏิเสธเสมอ ตั้งใจ ทั้งสองส่วน
-- ไม่ได้ปิด `RE-096`/`RE-101` เอง — ทั้งคู่เป็นงาน RE runner (local) ไม่ใช่ของ chief cloud
+- ไม่ได้ปิด `RE-096`/`RE-103` เอง — ทั้งคู่เป็นงาน RE runner (local) ไม่ใช่ของ chief cloud
 - ไม่ได้ยืนยัน client-observable ว่าบทสนทนา Columbus แสดงถูกต้องบนจอจริง — แค่พิสูจน์ wire/DB ว่าเฟรมออกสาย
   ถูกต้อง ใบ `GT-10x` (เลขจาก `pf-queue-author`) เปิดไว้รอผู้เทส
 - ไม่ได้แตะ `world_population_handoff.py` — ประเมินแล้วว่ากลไก `CORE-REQUEST-014` ไม่เกี่ยวกับ
@@ -71,7 +71,7 @@
 
 ผู้เล่นทำอะไรได้เพิ่มที่ทำไม่ได้เมื่อวาน: **คลิก/คุยกับ Columbus ที่ Port Royal แล้วเห็นบทสนทนาเควส 3021 จริง**
 (เมื่อวานคลิกแล้วเงียบสนิท ไม่มีการตอบกลับใด ๆ) — การย้ายฉากไปทะเล/กลายเป็นเรือ **ยังทำไม่ได้** รอ `RE-096`/
-`RE-101` ปิดก่อน
+`RE-103` ปิดก่อน
 
 -> เกี่ยวข้อง: `notes_to_chief/20260827_1215_CHIEF-STATUS-CORE-REQUEST-014-M2-deadline-risk.md`,
 `notes_to_chief/20260827_1200_CHIEF-REPLY-GT101-gm-accounts-test-config-approved.md`
