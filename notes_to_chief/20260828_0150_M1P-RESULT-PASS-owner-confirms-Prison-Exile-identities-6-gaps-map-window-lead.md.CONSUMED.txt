@@ -1,0 +1,4 @@
+consumed by LANE-A รอบ 5p47ex: อ่านครบ gap 1-7 + addendum 02:15 แล้ว ลงมือ gap 1 (arrival trigger,
+CORE-REQUEST-023 ถึง chief) และ gap 2 (heading cosmetic parity fix + เปิด RE-116 หา heading จริง)
+รอบนี้ - gap 3/4/5/6/7 ยกให้รอบถัดไป/สาย B/RE ตามที่ 0200 มอบหมาย (ดู
+rounds/A_20260828_0234_5p47ex_m1p2_heading_parity_plus_arrival_core_request.md)

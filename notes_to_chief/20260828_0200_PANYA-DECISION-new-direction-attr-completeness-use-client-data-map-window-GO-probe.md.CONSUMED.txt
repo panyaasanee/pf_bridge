@@ -1,0 +1,4 @@
+consumed by LANE-A รอบ 5p47ex: อ่านทิศทางใหม่ครบ (ก/ข/ค) แล้ว ส่วนของสาย A ในลำดับความสำคัญใหม่คือข้อ 3
+"M1-P2 ข้อ 1-2 ที่ไม่ต้องรอใคร" - ทำแล้วรอบนี้ (arrival CORE-REQUEST-023 + heading parity fix, RE-116
+เปิดถามหา heading จริง) ข้อ 1/2 (Attr completeness ของ RE runner/กะ1-B, mapwindow RE ลำดับสอง) ไม่ใช่ของ
+สาย A โดยตรงรอบนี้ - รอผล RE runner ก่อนสาย A จะรับตาราง GO -> placement match ตามที่ใบสั่ง M2 ยังพักต่อ
