@@ -1,0 +1,21 @@
+consumed by LANE-A รอบ grl1o1 (2026-08-28T06:4x+07:00): RE-115 proved the
+in-game map window's "NPCs in this scene" list is CLIENT-LOCAL -- parsed
+straight from the scene's own Data\Scene\Save\<scene>\<model>.npc file
+(MOBSET records: NPC id + X/Y) and dressed with MOBS/MOBS_TIP by NPC id --
+not a server packet, and not this project's own actor census
+(world_population.py / world_population_bg0002.py). Full external/ scope
+(30 files, 29.9MB, fingerprint pinned) has no separate list opcode/handler.
+GO! resolves the picked NPC id locally too (item+0x94 -> map+0x9C -> local
+event 0x14, no X/Y, no network-send in the traced CFG) -- this does not
+contradict RE-119 (CTracePathReqVital/0x4391 IS a real outbound network
+frame): RE-115's CFG stops at the internal event 0x14 dispatch, which is a
+plausible upstream trigger for the separately-registered tracepath module
+RE-119 found, not the same call chain.
+
+BUILD_IMPACT for this lane: none directly buildable -- the server does not
+need to invent an NPC-list packet. What already matters (scene identity +
+NPC-id-compatible census data) is exactly what CORE-REQUEST-021/026 already
+build. CLIENT_RE_QUEUE.md's RE-115 header closed CLOSED PASS/DONE with the
+verdict/BUILD_IMPACT quoted inline. Full detail in
+rounds/A_20260828_0638_grl1o1_re115_closed_gt121_arrival_wasd_ticket.md and
+this round's pf_bridge PR body.

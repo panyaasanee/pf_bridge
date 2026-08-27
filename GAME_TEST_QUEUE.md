@@ -5723,3 +5723,163 @@ client-observable (a human at the screen only, never inferred from the console):
 ```
 
 ```
+
+---
+
+## GT-121 CORE-REQUEST-026 BG0002-ARRIVAL-CENSUS-NO-WASD-001: after CORE-REQUEST-026 makes the Bg0002 (Prison Exile Island) census fire on `teleport_sent + runtime_ack_sent` (arrival) instead of waiting for the first `TargetPosVital`, does a real client actually show NPCs/monsters standing on screen the moment the loading screen clears -- **before the player presses any movement key at all** -- closing gap ① from M1-P's own PASS result (`20260828_0150_M1P-RESULT-PASS-*.md`: "เข้าฉากแล้วไม่มีอะไรเกิดขึ้นจนกว่าจะกด Q/E/A/S/D/W หนึ่งครั้ง")
+
+> NUMBERING NOTE: grep confirmed before reserving (2026-08-28T06:38+07:00, this round) -- `GT-121`/`RE-120` = 0
+> hits in `GAME_TEST_QUEUE.md`, `CLIENT_RE_QUEUE.md`, and `archive/`. Highest number in use anywhere in the
+> shared counter is `120` (`GT-120`, above) -- => this entry is `121`. `GT-101`-`GT-120` and `RE-085`-`RE-119`
+> stay exactly where they are, unchanged -- this is a new entry, not a replacement for any of them.
+
+### source (links only -- see cited files for full detail, not re-derived here)
+- `notes_to_chief/20260828_0150_M1P-RESULT-PASS-owner-confirms-Prison-Exile-identities-6-gaps-map-window-lead.md`
+  gap ①: the owner's own M1-P session (00:2x-00:5x+07:00, boot commit `6406a05`, BEFORE this fix existed)
+  measured the census arriving only after the client's first `TargetPosVital` (console L260 -> L264-265) --
+  the scene sat empty from load until the player's first WASD press. This entry is the first attended shot at
+  the fix for exactly that gap.
+- `rounds/R207_confident-ride-sf9kel_core-request-026-bg0002-census-arrival-trigger.md` /
+  `notes_to_chief/consumed/20260828_0234_LANE-A-CORE-REQUEST-024-bg0002-census-trigger-on-arrival.md` (the
+  build request, filed under the shadow-collided number `024`, re-registered `026` per
+  `CHIEF_CONTINUATION.md` row 026): chief wired `pirate-force-server@13fe3aa` same round -- confirmed on
+  `origin/main` ancestry as of this entry (`git log origin/main --oneline | grep 13fe3aa`, merged via
+  `pirate-force-server#177`). WORLD-CENSUS-001's bg0002 branch now triggers on
+  `teleport_sent and runtime_ack_sent` alone, anchored on
+  `world_scene_travel.spawn_position(world_scene_travel.destination(scene_id, scene_entry_registry))`
+  when no `TargetPosVital` has arrived yet; a real `TargetPosVital` that does arrive first still wins as the
+  anchor, unchanged. bg0001 (Port Royal) is untouched -- still waits for `TargetPosVital` exactly as before,
+  not in scope of this entry.
+- `notes_to_chief/consumed/20260827_2240_KA1A-NOTE-GT110-unsafe-until-0x5A19-payload-fixed-plus-M1P-jobs-staged.md`
+  and the M1-P result above: the run-DB-copy seed procedure this entry reuses (`character_positions.scene_id`
+  1->2 on a throwaway copy, never canonical) is not new -- it is the exact procedure M1-P's own jobs
+  `1311`-`1314` already ran successfully once today. This entry does not invent a new seed method.
+
+### objective (single claim -- identity/roster correctness is a separate, already-PASSED claim from M1-P)
+On a character whose stored position row names `scene_id=2` (seeded the same way M1-P seeded it), does the
+Prison Exile Island census (NPCs, monsters) appear on screen **before the player has pressed any movement
+key** -- specifically, does the very first `RuntimeProtocolReq` poll after arrival already carry the full
+roster, rather than the roster appearing only after the first WASD-triggered `TargetPosVital`. The wire/DB
+layer of this claim (does the dispatcher's guard actually admit an arrival with `last_target_pos is None`) is
+already proven headless this round in `tests/test_bg0002_census_wiring.py::
+test_the_scene2_census_arrives_with_no_target_pos_vital_ever_sent` (cited above, NOT re-proven here). This
+entry is the client-observable layer only: the first human eyes on this specific fix, and specifically the
+first time anyone tests it WITHOUT pressing a movement key first (M1-P's own PASS session did press WASD,
+which is exactly why it could see gap ① at all).
+
+### predictions (a wrong prediction is a finding, not a failure)
+- P1 [primary, proposed]: NPCs/monsters are visible standing on the ground the moment the loading screen
+  clears and the HUD becomes interactive, with the character standing still and no key pressed yet -- not the
+  empty scene M1-P's own PASS session described for the first few seconds.
+- P2 [expected non-event, explicitly NOT a requirement]: the actors' facing direction is still the same
+  cosmetic four-way round-robin RE-116 already bounded as synthetic (not real client data) -- do not treat
+  uniform facing as a new finding, it is gap ② from the same M1-P letter and already understood, unrelated to
+  this fix.
+- P3 [falsifier]: the scene is still empty until the first movement key is pressed -- a real negative, not a
+  failure. It would mean either this client build never received `pirate-force-server@13fe3aa`, the seed did
+  not actually land on `scene_id=2` before boot, or the arrival trigger's own anchor fallback
+  (`world_scene_travel.spawn_position`) failed silently and latched `world_census_refused` -- redirect to a
+  new RE/GT entry naming which of those three (check the console for `world_census_bg0002_arrival_anchor_
+  refused_*` specifically -- its presence points at the third), do not re-run this one guessing.
+
+### ก่อนบูต -- ด่าน 0 (merge status, MUST clear first), ด่าน 1 (green boot), ด่าน 2 (grep confirms the branch)
+**ด่าน 0 -- merge status:** commit `pirate-force-server@13fe3aa` is confirmed on `origin/main` ancestry as of
+this entry's writing (`git log origin/main --oneline` lists it, merged via `pirate-force-server#177`) --
+unlike GT-120 at the time it was opened, this fix does not need a fresh re-check before ด่าน 1, but
+`pf_resolve_green_boot.py` still follows `origin/main` at boot time, not this entry's writing time, so
+re-confirm anyway.
+
+**ด่าน 1:**
+```
+py -3 pf_resolve_green_boot.py --repo "C:\path\to\pirate-force-server" --fetch
+```
+Only `exit 0` + printed `BOOT_COMMIT: <sha>` means bootable.
+
+**ด่าน 2 (need at least 1 line from every command; missing any one = BLOCKED, do not boot):**
+```
+git grep -n "CORE-REQUEST-026" <SHA> -- src/pirateforce_foundation/runtime.py
+git grep -n "world_census_bg0002_arrival_anchor_refused" <SHA> -- src/pirateforce_foundation/runtime.py
+git grep -n "SCENE2_N_ID" <SHA> -- src/pirateforce_foundation/world_population_bg0002.py
+git grep -n "test_the_scene2_census_arrives_with_no_target_pos_vital_ever_sent" <SHA> -- tests/test_bg0002_census_wiring.py
+```
+
+### db -- seed procedure reused from M1-P jobs 1311-1314, not new
+default_state\pirateforce.sqlite3 -- copy only, canonical never opened. Copy to
+`pf_bridge\backup\pirateforce_before_GT-121_<yyyyMMdd_HHmmss>.sqlite3`, then `state\run_gt121.sqlite3`. sha256
+vs `CANON_SHA.txt` before/after; `PRAGMA integrity_check=ok` on the working copy both times.
+
+Seed, on the working copy only, before first boot:
+```
+UPDATE character_positions
+   SET scene_id=2, scene_seq=0, x=26905, y=21185, z=1680
+ WHERE character_id=<the test character's id>;
+```
+(`26905,21185,1680` is `scenarios/world_scene_registry_001.json`'s own pinned scene-2 spawn -- the same value
+`world_scene_travel.spawn_position` reads as the arrival-trigger's anchor fallback, and the same coordinate
+M1-P's own seed used.) Print the row before and after the UPDATE as the SEED_BEFORE/SEED_AFTER receipt, the
+same convention M1-P's job `1312_m1p_boot_video` used.
+
+### server args (flagless -- the dispatch branch is unconditional/production, no `--*-scenario` of any kind)
+```
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+py -3 -u -m pirateforce_foundation.app --db state\run_gt121.sqlite3
+```
+No scenario flag, no other entry piggybacked onto this boot.
+
+### steps (click by click -- record continuous video for the whole LOCK_GAME window)
+Before start: hold `LOCK_GAME`, note boot stamp (+07:00, must be under 420 min old at teardown), compare
+canonical sha, copy DB per the db block above, run the seed UPDATE and print SEED_BEFORE/AFTER, stage
+`TEMPLATE_teardown_generic.ps1`, confirm ด่าน 0-2 all cleared (record the resolved SHA).
+1. Start the server first (ports 10188/10189 must show 0 established connections before opening the client).
+2. Open client, log in to the seeded character. **Start continuous recording BEFORE the loading screen
+   clears** -- the whole point of this entry is what is on screen in the first few seconds, before any input.
+3. **Do not press any key and do not move the mouse over the game viewport** from the moment the loading
+   screen clears until step 5 is done. No W/A/S/D, no Q/E, no camera drag -- any of those can emit a
+   `TargetPosVital` and would make this test indistinguishable from what M1-P already ran once.
+4. Photograph full-res the instant the HUD becomes interactive (T0), and again at +1s, +2s, +5s -- record
+   whether any actor (NPC or monster) is visible at each still, and if visible only starting at some later
+   still than T0, record which one.
+5. Once step 4's stills are captured, THEN it is safe to do the normal M1-P-style tour (WASD to Navy
+   Transfer/Sebastian/Pike/etc.) if useful corroboration, but that part is not required for this entry's own
+   pass/fail -- it is already what M1-P proved once.
+6. If the server console is visible, copy verbatim the first `WORLD_SCENE scene_id=2` line and the first
+   `WORLD_CENSUS assembled=.../...` line, and note whether either appears before or after step 3's first
+   possible player input (there should be none) -- supplementary corroboration only, not a substitute for the
+   client-observable answer.
+7. Log out, teardown via `TEMPLATE_teardown_generic.ps1` (stamp still under 420 min), recheck canonical
+   sha256, sha256 every capture.
+
+### pass criteria (two layers, never mixed)
+
+wire/DB: the actual claim this layer answers -- "does the dispatcher admit an arrival census with
+`last_target_pos is None`" -- is already CLOSED headless this round by
+`tests/test_bg0002_census_wiring.py`'s 4 new tests (cited above, not reproduced by this entry). This entry's
+own wire/DB obligations are only: canonical sha256 matches `CANON_SHA.txt` before/after; `PRAGMA
+integrity_check` = `ok` on the working copy both times; the seed UPDATE's before/after row is printed.
+
+client-observable (a human at the screen only, never inferred from the console):
+- Primary reading: are NPCs/monsters visible at T0 (the instant the HUD becomes interactive, before any
+  player input) -- P1 vs P3, both are complete, valid answers; write whichever actually happened, and if
+  P3, record exactly how many seconds/inputs elapsed before actors did appear (if they ever did).
+- Secondary: record which specific NPC(s) are visible at T0 by name/title if legible (does not need to match
+  every one of the 97 -- a handful visible near spawn is enough to answer this entry's own question).
+- No crash, no stuck loading screen, no error dialog during the no-input observation window (steps 3-4).
+
+### nonclaims
+- Does not re-test M1-P's own identity/roster-correctness claim (already PASSED, see the source letter) --
+  this entry only tests WHEN the roster appears, not WHETHER it is the right roster.
+- Does not test bg0001 (Port Royal) -- CORE-REQUEST-026 deliberately left that branch untouched, still
+  requiring `TargetPosVital` exactly as before; a separate entry would be needed if that behavior is ever
+  wanted there too.
+- Does not prove the arrival-trigger's anchor fallback is correct for any scene OTHER than 2 -- it is scoped
+  to `SCENE2_N_ID` only, by the runtime.py branch structure itself, not by anything this entry checks.
+- Does not attempt to close gaps ②-⑦ from the M1-P letter (heading, name colour, density, Mirage Reel, pose,
+  Attr completeness) -- separate, already-tracked items, out of scope here.
+- Single account, single login, single session -- no reconnect/relogin, no second character.
+- If ด่าน 0/1/2 don't clear (functions not found at the resolved SHA) -> the entire entry is **BLOCKED**, not
+  NO-RESULT/FAIL -- record it as "รอ merge" and stop.
+
+### result (ผู้เทสกรอก)
+```
+
+```
