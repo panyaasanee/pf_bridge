@@ -1,1 +1,2 @@
 Consumed by chief round R175 (session t9veaa), 2026-08-26.
+Action taken: superseded by CORE-REQUEST-013 (COO-DECISION 1043, 1144, 1350 27 Aug).

@@ -4301,3 +4301,225 @@ canonical, copy DB สองใบตามบล็อก db, เตรีย�
 ```
 
 ```
+---
+
+## GT-104 MOB-DEATH-002 WIDEN-DEATH-SCOPE-BG0001-FIRST-WIDENED-KILL-001: โจมตี field-mob ตัวหนึ่งใน bg0001 ที่ไม่ใช่ 0x201F จนถึง 0 HP บนบูตไร้แฟล็ก -- widening ruling ที่เพิ่งต่อสายทำให้ตายจริงบนจอไหม (ไม่ใช่ค้างที่ 0 HP ตลอดกาลแบบก่อนรอบนี้) และของดรอปตามมาปรากฏ/เก็บได้ไหม  [PENDING -- ไม่บล็อก M4 (29 ส.ค. 23:59), งานเสริมหลัง ruling ผ่าน COO]
+
+> เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md, prefix สองแบบ ห้ามแยกตัวนับ.
+> เลขสูงสุดที่ใช้ไปแล้ว ณ เวลาเขียนใบนี้: GT-102 (GAME_TEST_QUEUE.md) และ RE-103 (CLIENT_RE_QUEUE.md,
+> ตามที่ erratum ของ RE-103 เองอธิบายไว้ว่าเลขว่างถัดไปคือ 104). grep ยืนยันก่อนจอง: GT-104 = 0 hit,
+> RE-104 = 0 hit ทั้งสองไฟล์ (รวม archive/) (ยืนยัน 2026-08-27). ใบเก่าทุกใบอยู่ที่เดิม ไม่ถูกแตะ ไม่ถูกย้าย.
+
+### ที่มา -- อ่านจากซอร์สจริง ห้าม re-derive ระหว่างรอบ
+- `src/pirateforce_foundation/mob_death.py` (ก่อนรอบนี้, ที่มาเดิมยืนยันแล้วที่ `GT-084`): `kill()` มี
+  `SANCTIONED_FIRST_TARGET_IDENTITY = 0x201F` เดียว (Tornado Eagle) ตัวอื่นทุกตัวใน 13-placement bg0001
+  roster ที่ถึง 0 HP จะค้างอยู่ที่นั่น ไม่มีเฟรมตาย ไม่มีวันตาย -- ปฏิเสธด้วย event ชื่อ
+  `mob_death_refused_target_outside_the_sanctioned_scope_no_death_frames`.
+- รอบนี้: `COO-DECISION 2026-08-27 13:50 +07:00 "widen-death-scope-bg0001-full-roster-approved"` อนุมัติ
+  ASK-COO ของ LANE-B (🔴 **หมายเหตุลำดับเวลา ไม่แก้ไขเอง**: เอกสารต้นทางที่ใบนี้ได้รับมาระบุว่า decision เวลา
+  13:50 อนุมัติ ASK-COO "จาก 15:00" ซึ่งมาหลัง decision ตามเวลาที่เขียน -- ใบนี้ไม่พยายามสมานความขัดแย้งนี้
+  เอง เขียนไว้ตามที่ได้รับมาเป๊ะ ๆ ผู้ใช้ผลใบนี้ควรยืนยันเวลาจริงกับ `notes_to_chief`/`rounds` ต้นฉบับก่อนอ้าง
+  ต่อที่อื่น). **LANE-B** ต่อ `WIDENING_RULINGS` entry ใหม่ชื่อ `"COO-RULING-20260827-1350 widen-death-scope-bg0001"`
+  เข้า `mob_death.py` เอง (`pirate-force-server#119`, ไฟล์นี้เป็นเขตเขียนของสาย B) ครอบคลุม 10 template id
+  ที่ประกอบเป็น 13 placement ของ bg0001 roster (`field_mob_tables.py`): 31 Tornado Eagle (= 0x201F เดิม,
+  1 placement), 34 Fighting Fish soldier, 35 Fighting Fish Sergeant, 60 Jungle Big Tiger, 61 Toxic Vine,
+  62 Ancient Civilization Alert Weapon, 65 Ward Apes, 94 An Gebo Little Firebird, 97 Mutant Green Eagle
+  (4 placements), 103 Orc Chief.
+- `src/pirateforce_foundation/runtime.py` (เขตเขียนของ chief คนเดียว, LANE-B เจตนาเว้นไว้ให้): **chief**
+  ต่อจุดเรียก production เดียว (single call site) ส่งชื่อ ruling นี้แบบ **unconditional** เข้า
+  `mob_death.kill()` -- ไม่มีสวิตช์ ไม่มี `--*-scenario` -- ต่างจากตอน `GT-084` ถูกเขียนที่ยังไม่มีการ
+  widen เลย.
+- `CORE-REQUEST-007`/`MOB-LOOT-001` (ต่อสายไว้ก่อนรอบนี้แล้ว ไม่ใช่งานของรอบนี้): ทุก kill ที่ "จบจริง"
+  (ไม่ว่า sanctioned เดิมหรือ widened ใหม่) มี loot roll ต่อท้ายเสมอ.
+- หลักฐานชั้น wire/DB ที่มีอยู่แล้ว **(headless เท่านั้น ไม่ใช่ client)**: `tests/test_mob_combat_dispatch.py`
+  สองเทสต์ -- `test_a_killing_blow_on_a_bg0001_roster_identity_now_finishes_a_kill` (พิสูจน์ผ่าน synthetic
+  dispatch harness ว่าตี non-sanctioned bg0001 roster identity ลงไปถึง 1 HP แล้วโดนอีกจนถึง 0 HP ผลิตเฟรม
+  `MOB_COMBAT_ANNOUNCE -> MOB_DEATH_DYING -> MOB_DEATH_DEAD` (+ `MOB_LOOT_DROP` ถ้ามี) จริง, death register
+  จริง, `mob_combat_kill_count` เพิ่มจริง) และ `test_a_killing_blow_on_a_template_no_ruling_names_still_finishes_no_kill`
+  (คู่ควบคุมเชิงลบ -- ยืนยันว่า template นอก 10 ตัวนี้ยังถูกปฏิเสธเหมือนเดิม -- widening ไม่ได้เปิดประตูทั้งหมด
+  แบบไม่มีขอบเขต). full suite เขียว 3358 ผ่าน 0 พังใหม่ (17 capstone-import collection error เดิมที่ไม่เกี่ยว
+  เป็น baseline).
+- commit: push แล้วรอ merge — ดู `rounds/R193_mnw8z1_widen-death-scope-bg0001-plus-addendum-v62-item-g.md`
+  (pf_bridge) สำหรับคอมมิตจริงและสถานะ merge ณ เวลาที่จะรันใบนี้.
+- 🔴 **สถานะ `GT-084`/`GT-084-R2` ณ ตอนเขียนใบนี้**: ทั้งสองใบยังไม่มีรอบ attended จริงปิดผล (`GT-084`
+  สถานะล่าสุดคือ `[READY -- merged, ด่านสองชั้นยังต้องผ่านตอนบูต]`) ⇒ **ใบนี้อาจกลายเป็นการสังเกตความตายของ
+  field-mob ครั้งแรกในโปรเจกต์บนจอจริง ไม่ว่าจะเป็นเป้า sanctioned เดิม (0x201F) หรือ widened ใหม่** -- ไม่มี
+  baseline ภาพอ้างอิงของ "ความตายที่สำเร็จ" ให้เทียบมาก่อนเลย บันทึกสิ่งที่เห็นให้ละเอียดที่สุดโดยไม่ประเมิน
+  ว่า "ควรจะเป็นแบบนี้" จากคำทำนายของใบอื่น.
+
+### objective (claim เดียว)
+เมื่อผู้เล่นโจมตี field-mob ตัวหนึ่งใน bg0001 ที่ **ไม่ใช่** 0x201F (Tornado Eagle) จนถึง 0 HP บนบูตไร้แฟล็ก --
+widening ruling ที่เพิ่งต่อสาย (`WIDENING_RULINGS["COO-RULING-20260827-1350 widen-death-scope-bg0001"]`) ทำให้
+การตายจบจริงบนจอ (โมเดลล้ม/มีอนิเมชัน ไม่ใช่ค้างที่ 0 HP ตลอดกาลแบบก่อนรอบนี้) พร้อมของดรอปที่ตามมาจากการตาย
+เดียวกันปรากฏและเก็บได้จริงหรือไม่ -- ทั้งชั้น wire (เฟรม `MOB_DEATH_DYING`/`MOB_DEATH_DEAD` + เฟรมของดรอป
+แทนที่จะเป็น event ปฏิเสธเดิม) และชั้น client-observable (สิ่งที่ตาเห็นบนจอ). ใบนี้ **ไม่ทดสอบ** มอนสเตอร์ตัวอื่น
+ในบรรดา 9 template ที่เหลือ (ต้องเปิดใบแยกต่างหากถ้าต้องการความครอบคลุมเต็มโรสเตอร์ -- หนึ่งใบพิสูจน์หนึ่ง claim)
+และ **ไม่ทดสอบ** 0x201F เอง (มันเป็นเป้าที่ sanctioned อยู่แล้วก่อนรอบนี้ -- คนละใบ ดู `GT-084`).
+
+### คำทำนาย (คำทำนายที่ผิด = ผล ไม่ใช่ความล้มเหลว)
+- P1 [เสนอ, หัวใจของใบ] ตีเป้าที่ไม่ใช่ 0x201F จนถึง 0 HP -> คอนโซลพิมพ์ "MOB-DEATH-001 kill: performer
+  0x... -> target 0x..." (identity ที่ไม่ใช่ 0x201F) ตามด้วย `[G>] MOB_DEATH_DYING` แล้ว `[G>] MOB_DEATH_DEAD`
+  -- **แทนที่จะเป็น** event ปฏิเสธเดิม `mob_death_refused_target_outside_the_sanctioned_scope_no_death_frames`
+  ที่เคยเห็นมาตลอดก่อนรอบนี้ -- นี่คือหลักฐานว่า widening ไปถึง runtime จริง ไม่ใช่แค่ผ่าน headless test.
+- P2 [เสนอ] ถ้า P1 จริง -- โมเดลล้มลงนอนราบบนจอจริง (ท่าที่ `GT-084` เคยทำนายไว้สำหรับ 0x201F แต่ยังไม่มีใคร
+  ยืนยันด้วยตาจริงกับตัวไหนเลยในโปรเจกต์นี้ ณ จุดที่เขียนใบนี้ -- ดูหมายเหตุ "สถานะ GT-084" ใน "ที่มา").
+- P3 [เสนอ] ตามด้วยเฟรมของดรอป (`CORE-REQUEST-007`/`MOB-LOOT-001`) ปรากฏในคอนโซล และไอเทมปรากฏบนพื้นใกล้ซาก
+  เก็บได้ด้วยท่าเดียวกับที่กลไก pickup ทั่วไปเคยพิสูจน์แล้ว (`GT-060`/`GT-063`/`RE-082`) -- ใบนี้ไม่พิสูจน์
+  กลไก pickup ทั่วไปซ้ำ (ดู nonclaims) แค่สังเกตว่ามันทำงานกับ of ที่มาจาก widened kill เหมือนกัน.
+- P4 [เสนอ, ตัวหักล้าง] ถ้าตีถึง 0 HP แล้ว event ปฏิเสธเดิมยังขึ้นอยู่
+  (`mob_death_refused_target_outside_the_sanctioned_scope_no_death_frames`) ทั้งที่ headless test สองตัว
+  ผ่านแล้ว -- แปลว่า call site จริงใน `runtime.py` บน SHA ที่บูตยังไม่ได้ส่งชื่อ ruling
+  (`"COO-RULING-20260827-1350 widen-death-scope-bg0001"`) เข้าไปจริง (merge ไม่ครบ/ชื่อ ruling พิมพ์ผิด/
+  threading ผิดจุด) -- นี่คือผลลบที่มีค่าที่สุดของใบนี้ ต้องเขียนให้เด่นเท่ากับ PASS พร้อม redirect ให้ diff
+  `runtime.py` จริงเทียบ `rounds/R193_mnw8z1_widen-death-scope-bg0001-plus-addendum-v62-item-g.md`.
+- P5 [ข้อมูลเสริม, ไม่ตัดสิน pass/fail ของใบนี้เอง] ถ้าเจอมอนสเตอร์ตัวอื่นในโรสเตอร์ 13 ตัวโดยบังเอิญระหว่าง
+  เดินทาง (เช่น Mutant Green Eagle ที่มี 4 placement) -- **ไม่ต้องเปลี่ยนเป้าหมายกลางคัน** บันทึกไว้เป็นข้อ
+  สังเกตเสริมเท่านั้น (ป้ายชื่อ/สถานะ) เพราะใบนี้ locked เป้าเดียวตาม step 4.
+
+### ก่อนบูต -- ด่าน 0 (สถานะ commit), ด่าน 1 (green boot), ด่าน 2 (grep ยืนยันสาย)
+
+**ด่าน 0 -- สถานะ commit:** เปิด `rounds/R193_mnw8z1_widen-death-scope-bg0001-plus-addendum-v62-item-g.md`
+ก่อนเริ่มเพื่ออ่านคอมมิตจริงและสถานะ merge (merge เข้า `main` แล้วหรือยังอยู่บนแบรนช์). ถ้ายัง merge ไม่ครบ --
+ใบนี้ **BLOCKED -- รอ merge ไม่ได้รอผู้เทส** ไปทำใบอื่นแล้วกลับมาเช็คภายหลัง (`pf_resolve_green_boot.py`
+เดินตาม `origin/main` เท่านั้น เช่นเดียวกับทุกใบอื่นในคิวนี้).
+
+**ด่าน 1 -- resolve commit เขียว:**
+```
+py -3 pf_resolve_green_boot.py --repo "C:\path\to\pirate-force-server" --fetch
+```
+รันจากโฟลเดอร์ pf_bridge, exit 0 + `BOOT_COMMIT: <sha>` เท่านั้นถึงบูตได้ (git checkout `<sha>` แบบ detached
+HEAD). exit 3 = ห้ามบูต. ห้ามเทียบเลข commit ด้วยตา -- resolver คืนหัวแบรนช์ที่ผ่านเกต ไม่ใช่ merge commit เสมอไป.
+
+**ด่าน 2 -- ยืนยันสายจริงของ `<SHA>` (ห้ามเชื่อชื่อฟังก์ชัน/เลขบรรทัดในเอกสารนี้ ต้อง grep ของจริงเสมอ):**
+```
+git grep -n "WIDENING_RULINGS" <SHA> -- src/pirateforce_foundation/mob_death.py
+git grep -n "COO-RULING-20260827-1350 widen-death-scope-bg0001" <SHA> -- src/pirateforce_foundation/mob_death.py
+git grep -n "SANCTIONED_FIRST_TARGET_IDENTITY = 0x201F" <SHA> -- src/pirateforce_foundation/mob_death.py
+git grep -n "widen-death-scope-bg0001" <SHA> -- src/pirateforce_foundation/runtime.py
+git grep -n "test_a_killing_blow_on_a_bg0001_roster_identity_now_finishes_a_kill" <SHA> -- tests/test_mob_combat_dispatch.py
+git grep -n "test_a_killing_blow_on_a_template_no_ruling_names_still_finishes_no_kill" <SHA> -- tests/test_mob_combat_dispatch.py
+```
+ต้องได้อย่างน้อย 1 บรรทัดต่อคำสั่งทั้ง 6 คำสั่ง. ขาดข้อใดข้อหนึ่ง = **BLOCKED** -- คอมมิตที่จะบูตยังไม่มี
+widening ต่อสายจริง ห้ามบูต ห้ามหาคอมมิตเอง ไปทำใบอื่นแล้วรอ merge.
+
+### db (สำเนาเสมอ ห้ามเปิด canonical, ห้ามแตะ state\play.sqlite3)
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-104_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt104.sqlite3
+```
+- เทียบ sha256 ของ canonical กับ `CANON_SHA.txt` ก่อนเริ่มและหลังจบ ต้องตรงทั้งสองครั้ง.
+- สำเนาใหม่ทุกบูต ⇒ ตำแหน่งตัวละครรีเซ็ตกลับจุดเกิดเสมอ (X -8553.9473, Y -2579.6890, Z 186.0 ตามที่
+  `GT-084`/`GT-101`/`GT-102` ใช้).
+
+### server args (เป๊ะ -- ไม่มี --*-scenario เพราะ call site ทำงานเสมอ ไม่มีสวิตช์)
+```
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+py -3 -u -m pirateforce_foundation.app --db state\run_gt104.sqlite3
+```
+ห้ามมี `--*-scenario` แม้แต่ตัวเดียว, ห้ามพ่วงใบอื่นเข้าบูตนี้. หลักฐานว่าไม่มีแฟล็กจริง เก็บทันทีหลัง
+เซิร์ฟเวอร์ขึ้น แปะทั้งบรรทัดลงผล:
+```
+Get-CimInstance Win32_Process -Filter "Name='python.exe'" | Select-Object ProcessId,CommandLine | Format-List
+```
+
+### steps (คลิกต่อคลิก -- อัดวิดีโอต่อเนื่องตลอดช่วงถือ LOCK_GAME)
+ก่อนเริ่ม: ถือ LOCK_GAME, จด boot stamp (+07:00, ต้องไม่เก่ากว่า 420 นาทีตอนรัน teardown), เทียบ sha
+canonical, copy DB สองใบตามบล็อก db, เตรียม teardown จาก `TEMPLATE_teardown_generic.ps1`. ยืนยันด่าน 0-2
+ผ่านครบ (จด SHA ที่บูต + ผลของ 6 คำสั่ง grep).
+
+1. สตาร์ตเซิร์ฟเวอร์ก่อนเสมอ (`Get-NetTCPConnection -State Established` พอร์ต 10188/10189 = 0 ก่อนเปิด
+   client). client ที่บูตโดยไม่มีเซิร์ฟเวอร์ตายเองใน ~3.5 นาที. ถ้าต้องฆ่า client กลางคัน ต้อง restart
+   server ก่อนเปิด client ใหม่เสมอ (server ถือ session ค้าง ⇒ client ตัวถัดไปค้างที่ "connecting" ตลอดกาล).
+2. เปิด client -> เลือกเซิร์ฟเวอร์ -> dialog PVP ปุ่มซ้าย -> หน้าเลือกตัวละคร -> เลือกช่องแรก -> ปุ่มกลาง
+   สุดจาก 5 ปุ่มแถวล่าง = เข้าเกม (ปุ่มซ้ายสุด = ลบตัวละคร ห้ามกด). เริ่มอัดวิดีโอต่อเนื่องตั้งแต่ก่อนกดเข้า
+   เกม.
+3. T0 -- เห็น HP bar/minimap/ชื่อแมพครบ. จด HUD X/Y. คลิกขวาค้างลากกวาดกล้อง 360 องศาหนึ่งรอบ (ตัวเช็ค
+   NO-CRASH ตัวเดียวที่ใบนี้ยอมรับ -- คลิกขวาลากหมุนกล้องอย่างเดียว ทิศหันตัวละครไม่ขยับ ไม่ยิงอะไรออกสาย
+   ปลอดภัยเสมอ -- **ห้ามใช้ Q/E เป็นตัวเช็คนี้เด็ดขาด** เพราะ Q/E หันตัวละครจริงและยิง `TargetPosVital`).
+4. เปิด `field_mob_tables.py:46-59` ที่ `<SHA>` จริง (บล็อกเดียวกับที่ `GT-084` อ้างไว้แล้ว) แล้วเลือก
+   placement ที่ใกล้จุดเกิดที่สุดในบรรดา **12 placement ที่เหลือ (ห้ามเลือก 0x201F Tornado Eagle ที่
+   (1747.5244, -7837.6978, 931.0413) -- นั่นคือเป้าที่ sanctioned อยู่แล้ว ไม่ใช่คำถามของใบนี้)**. จดชื่อ
+   template/identity/พิกัดที่เลือกไว้ในผลตั้งแต่ต้น. เดินไปทางพิกัดนั้นโดยอ่าน HUD X/Y เทียบทุกช่วง (W/A/S/D
+   คาดว่ายิง `TargetPosVital` ทุกครั้งที่ขยับ/หันตัว -- คาดหมายและไม่ใช่ความเสี่ยงของใบนี้). งบเวลาเดินทาง
+   20 นาที. ถ้าครบ 20 นาทีแล้วยังไม่เห็น/เลือกโมเดลได้ ให้ลองตัวถัดไปที่ใกล้กว่าในบรรดา 12 ตัวเดียวกัน แล้ว
+   จดว่าใช้ตัวไหนและทำไม.
+5. เมื่อเห็นโมเดล: single-click เปิดแผงเป้า. ถ่ายภาพนิ่ง full-res ของแผงเป้า + ป้ายชื่อบนหัวมอนสเตอร์ +
+   ป้ายชื่อตัวเอง ก่อนโจมตีข้อแรก -- นี่คือภาพที่ต้องบันทึกสีป้ายทุกป้าย.
+6. ดับเบิลคลิกโมเดลเดิมเพื่อโจมตี. หลังดับเบิลคลิกแต่ละครั้ง จด (ก) บรรทัดคอนโซลเซิร์ฟเวอร์ทั้งหมดที่ขึ้น
+   ใหม่ ("MOB-COMBAT-001 hit" + `[G>] MOB_COMBAT_ANNOUNCE`/`MOB_COMBAT_BAR`) (ข) สิ่งที่เห็นบนจอ (เลขดาเมจ
+   ลอย, หลอด/เลข HP บนแผงเป้า). ทำซ้ำจนมอนสเตอร์ถึง 0 HP หรือครบ 10 หมัด (กันเวลาไม่จบ) แล้วแต่อย่างไหน
+   ถึงก่อน.
+7. ถ้าถึง 0 HP: เฝ้าดู 5 วินาทีถัดไป จดว่ามีอนิเมชัน/ท่าล้มไหม, มีบรรทัด `MOB-DEATH-001 kill` +
+   `MOB_DEATH_DYING`/`MOB_DEATH_DEAD` หรือ event ปฏิเสธเดิมขึ้นแทน. ถ่ายภาพนิ่ง full-res ของโมเดลหลังถึง
+   0 HP + ป้ายชื่อ (ถ้ายังอ่านได้). จากนั้นเฝ้าดูอีก 10 วินาทีว่ามีเฟรม/บรรทัดของดรอปตามมาไหม -- ถ้ามีของ
+   ปรากฏบนพื้น ถ่ายภาพนิ่ง full-res แล้วลองเก็บด้วยท่าเดียวกับที่ `GT-060`/`GT-063` เคยใช้ (คลิกซ้ายบน
+   วัตถุ) จดว่าเก็บสำเร็จไหม (ไอเทมหายจากพื้น/ขึ้นในกระเป๋าหรือไม่).
+8. NO-CRASH check ซ้ำ: คลิกขวาลากอีกครั้ง -- ยืนยันไคลเอนต์ยังตอบสนอง.
+9. ออกเกม -> teardown ตาม `TEMPLATE_teardown_generic.ps1` -> เทียบ sha canonical รอบสุดท้าย.
+
+### pass criteria (สองชั้น แยกกันเสมอ ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น)
+
+ชั้น wire/DB (อ่านจาก server console/event log ล้วน ๆ ไม่ต้องพึ่งสิ่งที่เห็นบนจอ):
+- หลักฐาน headless ที่มีอยู่แล้ว (บริบทที่ใบนี้ต่อยอด ไม่ใช่หลักฐานของรอบ attended นี้เอง): เทสต์
+  `test_a_killing_blow_on_a_bg0001_roster_identity_now_finishes_a_kill` และ
+  `test_a_killing_blow_on_a_template_no_ruling_names_still_finishes_no_kill` (`tests/test_mob_combat_dispatch.py`)
+  ผ่านแล้วบนคอมมิตที่ `rounds/R193_mnw8z1_widen-death-scope-bg0001-plus-addendum-v62-item-g.md` อ้างถึง,
+  full suite 3358 ผ่าน 0 พังใหม่.
+- อย่างน้อยหนึ่งดับเบิลคลิกที่ลงบนโมเดลเป้าหมาย (ไม่ใช่ 0x201F) ทำให้คอนโซลพิมพ์บรรทัด "MOB-COMBAT-001 hit"
+  + `[G>] MOB_COMBAT_ANNOUNCE`/`MOB_COMBAT_BAR`.
+- เมื่อถึง 0 HP: บรรทัด "MOB-DEATH-001 kill: performer 0x... -> target 0x..." (identity ที่ไม่ใช่ 0x201F)
+  + `[G>] MOB_DEATH_DYING` แล้ว `[G>] MOB_DEATH_DEAD` ปรากฏ **แทนที่** event ปฏิเสธเดิม
+  `mob_death_refused_target_outside_the_sanctioned_scope_no_death_frames`.
+- เฟรม/บรรทัดของดรอป (`CORE-REQUEST-007`/`MOB-LOOT-001`) ปรากฏตามหลังเฟรมตาย.
+- `sessions`: `count(*) WHERE selected_character_id IS NOT NULL` +1 ต่อการเข้าเกมหนึ่งครั้ง, `max(lease_
+  generation)` ไม่ถอยหลัง, `PRAGMA integrity_check` = `ok` บนสำเนา, sha256 canonical ก่อน-หลังตรงกับ
+  `CANON_SHA.txt` ทั้งสองครั้ง.
+- raw GAME log ทั้งไฟล์ + console out/err เก็บทั้งก่อน/หลัง ไม่ตัดทอน.
+- 🔴 **ผลลบที่สมบูรณ์เท่ากับ PASS**: ตีเป้าที่ไม่ใช่ 0x201F ลงถึง 0 HP แล้ว event ปฏิเสธเดิมยังขึ้นอยู่
+  (ไม่มี `MOB_DEATH_DYING`/`MOB_DEATH_DEAD` เลย) ⇒ เขียนเป็นผลลบเต็มรูป พร้อมบรรทัดคอนโซลทั้งหมดที่ขึ้นแทน
+  เพื่อช่วยชี้ว่า widening ไม่ถึง runtime จริงบน SHA นี้ (ดู P4).
+
+ชั้น client-observable (ต้องมีคนหน้าจอ, ห้ามอนุมานจากบรรทัดคอนโซล):
+- เลขดาเมจสีแดงลอยเหนือหัวมอนสเตอร์หลังดับเบิลคลิกแต่ละครั้ง, หลอด/เลข HP บนแผงเป้าลดลงตามลำดับ.
+- ถ้าถึง 0 HP: โมเดลล้มลง/เล่นอนิเมชันตายบนจอจริง (ไม่ใช่ยืนนิ่งค้างที่หลอด/เลข 0 หรือค่าสุดท้ายก่อนตายแบบ
+  ที่ทุกมอนสเตอร์นอกเหนือ 0x201F เคยทำก่อนรอบนี้) -- **หรือถ้ายังค้างเหมือนเดิม ก็เป็นผลลบที่มีค่าเท่ากัน**
+  ตราบใดที่ตรงกับสิ่งที่ชั้น wire รายงานไว้ (event ปฏิเสธยังขึ้นอยู่) -- อย่าตัดสินแยกจากชั้น wire.
+- ของดรอปปรากฏให้เห็นบนพื้นใกล้ซาก (หรือไม่ปรากฏ -- ทั้งสองผลมีค่าเท่ากันถ้าตรงกับที่ชั้น wire รายงานไว้)
+  และถ้าปรากฏ: ลองเก็บแล้วบันทึกว่าสำเร็จ/ไม่สำเร็จ (ไอเทมหายจากพื้น และ/หรือขึ้นในกระเป๋าที่เห็นได้จริง
+  บนจอ).
+- สีของป้ายชื่อทุกป้ายในทุกภาพนิ่ง full-res (ป้ายมอนสเตอร์ก่อน/หลังตาย, ป้ายตัวเอง, ป้ายของดรอปถ้ามี) บันทึก
+  เป็นบรรทัดเดียวต่อป้ายต่อภาพ ("none" เขียนออกมาถ้าไม่มี ห้ามเว้นว่าง) -- อ่านจากภาพนิ่ง full-res เท่านั้น
+  ห้ามอ่านจาก contact sheet/ภาพย่อ/วิดีโอ ห้ามอนุมานสาเหตุของสี (`RE-067` เปิดอยู่). ไม่มีภาพอ้างอิงของ
+  เซิร์ฟเวอร์ต้นฉบับที่รู้จักสำหรับมอนสเตอร์ตัวนี้โดยเฉพาะ ณ ตอนเขียนใบนี้ -- ใช้
+  `compared_and_matched=no-reference` ถ้าไม่มีภาพอ้างอิงจริง ๆ.
+- 🔴 **G-OBS บังคับ**: จดหมายผลของใบนี้ต้องมีบรรทัด `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>` ตัวอักษร
+  เป๊ะ ก่อน chief จะบริโภคเป็นผลปิดใบได้ (กติกาเดิมของทั้งไฟล์นี้ที่หัวไฟล์) -- ถ้ารันครบ หลักฐานครบ แต่ขาด
+  ลายเซ็นตาคนอย่างเดียว ให้ใช้สถานะ `AWAITING-OBSERVER` แทน `PENDING`/`PASS`.
+
+### nonclaims
+- ใบนี้พิสูจน์แค่ **หนึ่ง** template จากบรรดา 9 template ที่ไม่ใช่ 0x201F -- ไม่ครอบคลุมทั้ง 10 template/13
+  placement ของ ruling นี้ -- ถ้าต้องการความครอบคลุมเต็มโรสเตอร์ ต้องเปิดใบเพิ่มทีละใบ (หนึ่งใบพิสูจน์หนึ่ง
+  claim).
+- ใบนี้ไม่ทดสอบ 0x201F เอง (คนละใบ ดู `GT-084`) และไม่ทดสอบว่า widening "ปิดประตูถูกที่" สำหรับ template
+  นอกรายการ 10 ตัว -- คำถามนั้นปิดแล้วที่ชั้น headless โดย
+  `test_a_killing_blow_on_a_template_no_ruling_names_still_finishes_no_kill` และไม่มี field mob นอก
+  roster ให้คลิกใน bg0001 อยู่แล้ว (roster ครอบทั้ง 13 placement) จึงไม่มีทางทดซ้ำที่ชั้น client ได้จริง.
+- ใบนี้ไม่พิสูจน์ความถูกต้องของตาราง loot (ไอเทม/อัตราดรอปที่ "ควร" ออกจากมอนสเตอร์ตัวนี้) -- แค่สังเกตว่า
+  มีของดรอปปรากฏและเก็บได้หรือไม่เท่านั้น.
+- ใบนี้ไม่พิสูจน์กลไก pickup ทั่วไปซ้ำ -- นั่นคือขอบเขตของ `GT-060`/`GT-063`/`RE-082` ที่ปิดไปแล้ว ใบนี้แค่
+  สังเกตว่ามันทำงานกับของที่มาจาก widened kill เหมือนกันหรือไม่.
+- ใบนี้พิสูจน์แค่ผู้เล่นคนเดียวที่ต่ออยู่ -- ไม่ทดสอบสองผู้เล่นตีมอนสเตอร์ตัวเดียวกันพร้อมกัน, ไม่ทดสอบ
+  aggro/threat (dispatch ส่ง aggro handle เป็น None เสมอในบูตนี้ตามที่ `GT-084` บันทึกไว้), ไม่ทดสอบว่าซาก
+  ยังอยู่ทนข้าม reconnect/census rebuild (claim แยก).
+- 🔴 **ใบนี้ไม่บล็อกกำหนดส่ง M4 (29 ส.ค. 23:59)** -- widening นี้เป็นงานเสริมที่ COO อนุมัติแล้วต่างหาก
+  พร้อมทดสอบได้ทันทีที่ผู้เทสมีเวลา ไม่ใช่ประตูของ milestone ใด ๆ ที่กำลังจะถึงกำหนด.
+- ไม่ชี้สาเหตุของสีป้ายชื่อ (`RE-067` เปิดอยู่).
+- ถ้าด่าน 0/1/2 ไปไม่ถึง (ยังไม่ merge/BLOCKED) => ทั้งใบเป็น "รอ merge"/BLOCKED ไม่ใช่ NO-RESULT/FAIL --
+  ยังไม่ได้ล็อกอินเลย.
+- 🔴 ชื่อฟังก์ชัน/ตัวแปร/event ที่ใช้ในใบนี้ (ด่าน 2, pass criteria) เป็นค่าที่สรุปจากคำอธิบายที่ chief ได้รับ
+  มา ผู้เทสต้อง grep ของจริงที่ด่าน 2 เสมอ ห้ามเชื่อถ้อยคำในใบนี้แทนซอร์ส.
+
+### result (ผู้เทสกรอก)
+```
+
+```
