@@ -64,6 +64,18 @@ NPCCONVERSATION-COLUMBUS-156-QUESTID-3021-WIRE-CONFIRM-001` ขอ RE runner ย
 - `pf_bridge/notes_to_chief/20260827_1123_LANE-A-STATUS-re097-corrected-re102-opened.md`
 - `pirate-force-server` - 0 ไฟล์ (ไม่มีโค้ดให้แก้ในเขตสาย A รอบนี้ - ตรวจครบตาม ① แล้ว)
 
+## ของใหม่ที่เพิ่งมาระหว่างรอบ (จาก `git fetch`/merge ก่อน push) — ยังไม่วิเคราะห์ลึก แค่บันทึกไว้
+
+`notes_to_chief/20260827_1240_PANYA-EVIDENCE-video2-Port-Royal-NPC-tour-*.md` (คลิป `vAD8TuO3ApA`, เพิ่งเข้า
+main ระหว่างรอบนี้) มีหลักฐาน**เป็นอิสระจากคำยืนยันของเจ้าของ** (วิดีโอทัวร์เมือง ไม่ใช่เซสชัน attended เดิม
+ของ `0925`/`0950`) ที่สนับสนุนตรงกัน: หน้าต่างแผนที่ในเกมแสดงรายชื่อ NPC ของฉากเรียงตาม `n_ID` 156-163 แถวแรก
+= "Marine Transport Station Columbus" และเฟรม `4:10` ยืนยันภาพ Columbus (156)/Loie (802) ที่ท่าเรือข้างปืน
+ใหญ่ฐานแดง "ตรง REF #2 และคำเจ้าของ index 1/65" ตรงกับ crosswalk ที่รอบนี้และรอบ `8pfksm` ใช้อยู่แล้วเป๊ะ —
+**ไม่เปลี่ยนอะไรที่ทำไปแล้ว** (index 1 = MOBS 156 = Columbus ยังถูกต้อง) แต่เป็นชั้นหลักฐานที่แข็งแรงกว่าเดิม
+(video-observable อิสระ ไม่ใช่แค่ testimony) รอบหน้าค่อยพิจารณาว่าจะอัปเดตข้อความ provenance ใน
+`world_travel_gates_001.json`/`world_scene_registry_001.json` ให้อ้างวิดีโอนี้เพิ่มหรือไม่ (ไม่ใช่ตัวบล็อก
+CORE-REQUEST เดิม) — ไม่ได้เปิดใบ/แก้ไฟล์อะไรเพิ่มรอบนี้เพราะเพิ่งเห็นตอนใกล้ปิดรอบ ไม่อยากรีบวิเคราะห์ผิด
+
 ## CORE-REQUEST
 
 none ใหม่ - CORE-REQUEST เดิมจากจดหมาย `1052` (ต่อสาย `NPCConversation` op1 สำหรับ MOBS 156 -> quest 3021 ->
