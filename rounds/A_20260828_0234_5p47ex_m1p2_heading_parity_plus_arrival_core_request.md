@@ -5,7 +5,7 @@
 ไม่มีอะไรบนจอวันนี้ (bg0002 census ยัง unreachable บนบูตใด ๆ — รอ chief seed run DB ตาม CORE-REQUEST-021's
 reply เดิม). รอบนี้แก้สองช่องว่างที่ owner ชี้ไว้ใน M1-P attended test (0150) ให้พร้อมก่อน DB ถูก seed:
 เมื่อ chief seed แล้ว NPC เกาะคุกจะ (1) ปรากฏทันทีที่เข้าฉาก ไม่ต้องรอผู้เล่นกด WASD ก่อน (รอ chief ต่อสาย
-ตาม CORE-REQUEST-023) และ (2) หันหน้าคนละทิศแทนที่จะหันทางเดียวกันหมด (แก้แล้วรอบนี้).
+ตาม CORE-REQUEST-024) และ (2) หันหน้าคนละทิศแทนที่จะหันทางเดียวกันหมด (แก้แล้วรอบนี้).
 
 ## Protocol A: PR รอบก่อน
 
@@ -45,7 +45,7 @@ claim ว่า RE แล้ว.
 
 อ่าน `runtime.py:5574-5651` (บล็อก `WORLD-CENSUS-001`, chief's) จนเจอเหตุจริง: เงื่อนไขส่งสำมะโนต้องการ
 `self.last_target_pos is not None` ซึ่งตั้งจาก `TargetPosVital` เท่านั้น — ตรงกับที่ owner เห็น ("เข้าฉาก
-แล้วไม่มีอะไรจนกว่าจะกด WASD"). เปิด `CORE-REQUEST-023` ขอ chief เปลี่ยนเงื่อนไขให้ทริกเกอร์ตอน
+แล้วไม่มีอะไรจนกว่าจะกด WASD"). เปิด `CORE-REQUEST-024` ขอ chief เปลี่ยนเงื่อนไขให้ทริกเกอร์ตอน
 `teleport_sent and runtime_ack_sent` (arrival) แทน โดยใช้พิกัด spawn ที่ pin ไว้แล้ว
 (`world_scene_travel.destination`) เป็น anchor สำรองเมื่อยังไม่มี `last_target_pos` — ระบุบรรทัดที่ต้องแก้
 ชัดเจน, ขอบเขตเฉพาะ bg0002 branch เท่านั้น.
@@ -69,7 +69,7 @@ unittest discover -s tests -q`): 3819 tests, errors=18 (baseline `capstone` impo
 
 `pf_bridge`:
 - `CLIENT_RE_QUEUE.md` (RE-116 ใหม่)
-- `notes_to_chief/20260828_0234_LANE-A-CORE-REQUEST-023-bg0002-census-trigger-on-arrival.md`
+- `notes_to_chief/20260828_0234_LANE-A-CORE-REQUEST-024-bg0002-census-trigger-on-arrival.md`
 - `notes_to_chief/20260828_0150_M1P-RESULT-*.md.CONSUMED.txt`
 - `notes_to_chief/20260828_0200_PANYA-DECISION-new-direction-*.md.CONSUMED.txt`
 - `rounds/A_20260828_0234_5p47ex_m1p2_heading_parity_plus_arrival_core_request.md` (ไฟล์นี้)

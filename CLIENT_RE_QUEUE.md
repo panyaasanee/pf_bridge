@@ -1324,3 +1324,68 @@ bg0001 และ bg0002 จนถึงรอบนี้)
 **ทำไมมีค่า:** ตอนนี้ทั้งเมือง (bg0001) และเกาะคุก (bg0002) ใช้ heading ประดิษฐ์วนสี่ทิศเหมือนกัน — เจ้าของ
 เพิ่งยืนยันด้วยตาว่านี่คือช่องว่างที่สังเกตเห็นได้จริง (M1-P gap ②) ถ้ามี heading จริงในข้อมูลไคลเอนต์
 จะทำให้ทั้งสองฉากดูเป็นธรรมชาติขึ้นทันทีโดยไม่ต้องเดาเพิ่ม
+
+## 🆕🔬 RE-117 TRACEPATH-GO-BUTTON-REQREPLY-LAYOUT-001 [STATIC-ON-BRIDGE]: **`CTracePathReqVital` (`0x4391`, ขาไป) กับ `CTracePathVital` (`0x2F92`, ขากลับที่เราไม่เคยส่ง) — ต้องตอบฟิลด์อะไรกลับให้ปุ่ม GO! ในหน้าต่างแผนที่เดินได้จริงแทนที่จะค้าง "กำลังค้นหาเส้นทาง..." ตลอด**  [🟡 OPEN]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง (2026-08-28T03:30+07:00, รวม `notes_to_chief/`, `rounds/`,
+> `CLIENT_RE_QUEUE.md`, `GAME_TEST_QUEUE.md`): `RE-117`/`GT-117` = **0 hit** ทั้งสองไฟล์ — เลขสูงสุดที่ใช้แล้ว
+> คือ `116` (`RE-116`, ใบด้านบน) ⇒ ใบนี้คือ `117`
+> 🔴 ใบ `RE-085`-`RE-116` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`notes_to_chief/20260828_0235_KA1A-FOUND-GO-button-sends-CTracePathReqVital-0x4391-server-must-answer-0x2F92.md`
+(ADDENDUM ต่อ `PANYA-DECISION` 0200 ข้อ ข) — เจ้าของกด GO! ในหน้าต่างแผนที่แล้วจอค้างข้อความสีส้ม
+"กำลังค้นหาเส้นทาง..." ตลอด (เห็นรอบ M1-P, ภาพ `M1P_ingame_20260828_prison_exile_pike_deer_*.png`) คอนโซล
+M1-P L8925 จับเฟรมขาไปได้จริง 1 เฟรม แต่เราไม่เคยตอบขากลับเลย จึงค้างถาวร ใบ `chief` R204 (2y0zil) consume
+จดหมายนี้แล้วแต่ระบุชัดว่า "payload layout ของ 0x4391/0x2F92 และการต่อ handler เป็นงาน RE/LANE-A ไม่ใช่ chief"
+(`notes_to_chief/consumed/...KA1A-FOUND...md.CONSUMED.txt`) — ใบนี้คือการเปิดคิวอย่างเป็นทางการตามที่ยังไม่มี
+ใครทำ
+
+รอบนี้ (LANE-A) หา static-only ในคลังนี้ก่อนเปิดใบ (ผลติดไว้ให้ RE runner ไม่ต้องทำซ้ำ):
+- capture เดียวที่มี: 45 ไบต์ `0x4391` จากคอนโซล M1-P L8925 —
+  `12 6F 6E 14 00 00 00 00 08 00 0B 02 12 01 00 12 91 43 0B 00 | 0F E7 02 | 0F 00 00 | 14 00 00 00 00 |
+  0F 00 00 | 0F 00 00 | 0F 00 00 | 0F 00 00 | 08 00` — ไม่เคยเห็นเฟรม `0x2F92` เลยทั้งคลัง (สอดคล้องกับที่
+  client ไม่เคยได้คำตอบ)
+- `VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv:107` = `0x4391 CTracePathReqVital`, `:63` =
+  `0x2F92 CTracePathVital` · `external/PF_PROTOCOL_REGISTRY.tsv:376-378` มี registry/serializer/handler VA
+  ครบทั้งสองคลาส บวก `CGCTracePathModule`
+- `external/PF_SERIALIZER_FIELDS.tsv:5521-5536`: **`CTracePathReqVital` resolve แล้วครบ 8 ฟิลด์ทั้ง W/R**
+  (ไม่มี `EMPTY`), gate `ALWAYS`, span เดียว `[0x006EBAF0,0x006EBBF7)` — ถอด capture ตาม layout นี้ตรงกัน:
+  `u16@+0x14=0x02E7(743)`, ที่เหลืออีก 7 ฟิลด์ (`u16@+0x16`, `u32@+0x18`, `u16@+0x1C/+0x1E/+0x20/+0x22`,
+  `u8@+0x24`) = 0 ทั้งหมด — ความหมายของ `743` ยังไม่รู้ (เลขตรงทั้ง `QUEST.n_ID=743` ฉาก 5 และ
+  `MOBS.n_ID=743` "Jail Dead Prisoner" — **ห้ามสรุปจากเลขตรงกันเฉย ๆ**)
+- **`CTracePathVital` (ขากลับ) ยังไม่ปิด** — `external/PF_PROTOCOL_PRIORITY.tsv:377` = `serializer_status=OPEN`
+  บล็อกที่ `direct_call_not_proven_serializer` / `invalid_parameter_import_call_wire_effect_unproved` /
+  `invalid_parameter_singleton_register_call_wire_effect_unproved`; `PF_SERIALIZER_FIELDS.tsv:5491-5520` มี
+  18 W-field / 12 R-field ที่ไม่ใช่ stub ว่าง — สี่ฟิลด์ `tag 0x14` (f32/u32) ติดกันที่ `+0x0,+0x4,+0x8,+0xC`
+  มีรูปร่างเหมือน vec3+scalar (x/y/z/heading?) แต่**ยังไม่ผ่านเกณฑ์ CLOSED** ห้ามใช้เป็น layout จริง
+- `external/PF_FIELD_VALIDATION.tsv:752-755`: `CTracePathReqVital W` = `VALIDATED` (observed_frames=1, capture
+  ข้างบนนี่เอง) ส่วน `CTracePathReqVital R` / `CTracePathVital W` / `CTracePathVital R` = `NOT_OBSERVED` ทั้งหมด
+- gamedata/queue ค้นแล้ว: `TracePath`/`4391`/`2F92` ไม่มีใน `GAME_TEST_QUEUE.md`, `gamedata/PF_GAMEDATA_LUA_INDEX.tsv` — ยังไม่มีใครจองคิวนี้มาก่อน
+- roster lookup ที่มีอยู่แล้ว (สาย A ใช้ได้ทันทีถ้า layout ปิด, ไม่ต้องเขียนใหม่): `scene2_prison_exile_tables.py`
+  `_by_n_id()` (bg0002, private, :545) และ `population.py` `load_port_royal_placements()` (bg0001, :89) — เป็น
+  per-scene ทั้งคู่ ยังไม่มี dispatcher กลางข้ามฉาก แต่ข้อมูลตำแหน่งมีพร้อมสำหรับเกาะคุกแล้ว (Bg0002 97/97)
+
+### objective
+1. ปิด `CTracePathVital` (`0x2F92`) serializer ให้พ้น `OPEN` — สาว `SUBCALL`/`PE_IMPORT_INVALID_PARAMETER`
+   blocker ที่ `PF_PROTOCOL_PRIORITY.tsv:377` ชี้ไว้จนถึง writer/reader จริง แล้วยืนยันว่าสี่ฟิลด์ `tag 0x14`
+   ที่ `+0x0/+0x4/+0x8/+0xC` เป็น vec3(+scalar) จริงไหม หรือเป็นอย่างอื่น
+2. ตั้งสมมติฐาน semantic ของ `u16@+0x14=743` ใน `CTracePathReqVital` (quest id / NPC `n_ID` / list index ที่
+   client เลือกในหน้าต่างแผนที่) แล้วทดสอบกับตาราง `QUEST`/`MOBS` — ต้องแยกให้ชัดว่าเป็น semantic ที่พิสูจน์แล้ว
+   หรือ bounded negative เพราะเลข `743` ชนทั้งสองตารางพร้อมกัน (ห้ามสรุปมั่ว)
+3. หา xref ของ handler `0x00710440`/`CGCTracePathModule`: client ทำอะไรกับ response หลังได้รับ (auto-walk
+   ด้วย navmesh เอง หรือรอ waypoint หลายจุดจากเซิร์ฟเวอร์) และตรงไหนซ่อนข้อความ "กำลังค้นหาเส้นทาง..."
+4. ถ้า T1-T3 ชนเพดาน static ล้วน (ต้องใช้ `GameClient.local.bin` บนเครื่องสะพานที่ clone คลาวด์นี้ไม่มี) ให้เขียน
+   bounded negative แยกข้อ พร้อมระบุว่าต้องใช้เครื่องสะพานจริงถึงจะปิดต่อได้
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว/span SHA) · ชนเพดานให้เขียน bounded negative
+แล้วปิด ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+layout ของ `CTracePathVital` (0x2F92) พร้อม provenance พอให้สาย A เขียน handler ตอบจริงได้ **หรือ** bounded
+negative ที่แยกข้อ 1/2/3 ชัดเจนว่าต้องใช้เครื่องสะพาน ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+
+**ทำไมมีค่า:** GO! คือทางลัดที่มีอยู่แล้วในไคลเอนต์สำหรับ "เดินไปหา NPC ตัวไหนก็ได้อัตโนมัติ" — ถ้าต่อ handler
+ตอบ 0x2F92 ได้จริง (ด้วยตำแหน่งจาก roster ที่มีอยู่แล้วสำหรับเกาะคุก) ผู้เทส attended ทุกรอบจะประหยัดเวลาเดินเอง
+ทุกครั้ง และเป็นหลักฐาน client-observable ตัวแรกว่าเซิร์ฟเวอร์ตอบ pathfinding request ได้จริง

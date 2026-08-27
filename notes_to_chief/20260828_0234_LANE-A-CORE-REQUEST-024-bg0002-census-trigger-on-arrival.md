@@ -2,7 +2,12 @@
 [ตอบ: `20260828_0150_M1P-RESULT-PASS-owner-confirms-Prison-Exile-identities-6-gaps-map-window-lead.md` gap ①
 · ลำดับความสำคัญ 3 ของ `20260828_0200_PANYA-DECISION-new-direction-*.md` ("M1-P2 ข้อ 1-2 ที่ไม่ต้องรอใคร")]
 
-# LANE-A-CORE-REQUEST-023 — ส่งสำมะโน Bg0002 ตอน arrival แทนตอน TargetPosVital ใบแรก
+# LANE-A-CORE-REQUEST-024 — ส่งสำมะโน Bg0002 ตอน arrival แทนตอน TargetPosVital ใบแรก
+
+> 🔴 **เลขนี้เดิมเขียนไว้ว่า `023` ตอนร่าง (PR รอบ `5p47ex` เดิม ค้าง draft แล้วโดนปิดเพราะ merge conflict
+> ก่อนถึง main) — กู้คืนมาต่อในรอบ `7s6wbh` แล้วพบว่า `023` ถูก chief R203 ใช้ไปแล้ว (class/level login fix,
+> ดู `CHIEF_CONTINUATION.md` บรรทัดที่อ้าง R203) จึงเปลี่ยนเป็น `024` ทั้งใบ ก่อน push จริง — grep ยืนยัน
+> (2026-08-28T03:30+07:00): `CORE-REQUEST-024` = 0 hit ในคลังก่อนใบนี้ เลขสูงสุดที่ใช้แล้วคือ `023`.**
 
 ## บริบท
 

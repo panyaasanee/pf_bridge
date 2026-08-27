@@ -2,7 +2,7 @@
 `5p47ex` · 2026-08-28T02:34+07:00]
 [ตอบ: `20260828_0150_M1P-RESULT-PASS-*.md`, `20260828_0200_PANYA-DECISION-new-direction-*.md`]
 
-# LANE-A STATUS — M1-P2 ข้อ 1-2: heading parity fix ปิดแล้ว, arrival trigger เปิด CORE-REQUEST-023
+# LANE-A STATUS — M1-P2 ข้อ 1-2: heading parity fix ปิดแล้ว, arrival trigger เปิด CORE-REQUEST-024
 
 ## สรุปสั้น
 
@@ -12,7 +12,7 @@ M1-P2 ข้อ 2 (heading, gap ② ของ 0150): **ปิดในเขต�
 ในคลังนี้ไม่พอ — ต้องเครื่องสะพาน)
 
 M1-P2 ข้อ 1 (arrival timing, gap ① ของ 0150): หาสาเหตุจริงใน `runtime.py` (chief's file, ไม่แตะ) แล้ว —
-เปิด `CORE-REQUEST-023` ระบุบรรทัดที่ต้องแก้ตรง ๆ
+เปิด `CORE-REQUEST-024` ระบุบรรทัดที่ต้องแก้ตรง ๆ
 
 ## หลักฐานสองชั้น
 
@@ -21,7 +21,7 @@ M1-P2 ข้อ 1 (arrival timing, gap ① ของ 0150): หาสาเห�
   `{0:25,1:23,2:24,3:25}` สมดุลจริงไม่ยุบเหลือค่าเดียว) · full suite 3819 tests, 0 FAIL, errors=18
   (baseline capstone เดิมทุกตัว — grep ชื่อ error ตรง baseline)
 - **client-observable**: ยังไม่มี — bg0002 census unreachable บนบูตใด ๆ วันนี้ (รอ CORE-REQUEST-021's
-  seed DB เดิม + CORE-REQUEST-023 นี้) รอ chief ต่อสายทั้งสองก่อนถึงจะมีอะไรให้ attended test เห็น
+  seed DB เดิม + CORE-REQUEST-024 นี้) รอ chief ต่อสายทั้งสองก่อนถึงจะมีอะไรให้ attended test เห็น
 
 ## pf-adversary
 
@@ -40,7 +40,7 @@ M1-P2 ข้อ 1 (arrival timing, gap ① ของ 0150): หาสาเห�
 
 ## ขอให้ chief ทำอะไรต่อ
 
-`CORE-REQUEST-023` (แนบเต็มในจดหมายแยก) — เปลี่ยนเงื่อนไข trigger ของบล็อก `WORLD-CENSUS-001` bg0002
+`CORE-REQUEST-024` (แนบเต็มในจดหมายแยก) — เปลี่ยนเงื่อนไข trigger ของบล็อก `WORLD-CENSUS-001` bg0002
 branch (`runtime.py:5574` เป็นต้นไป) จาก "รอ `last_target_pos`" เป็น "ทันทีที่ arrival (`teleport_sent
 and runtime_ack_sent`)" โดยใช้ pin spawn coordinate เป็น anchor สำรอง
 
@@ -50,7 +50,7 @@ none
 
 ## CORE-REQUEST
 
-`CORE-REQUEST-023` (ดูจดหมายแยก `20260828_0234_LANE-A-CORE-REQUEST-023-*.md`)
+`CORE-REQUEST-024` (ดูจดหมายแยก `20260828_0234_LANE-A-CORE-REQUEST-024-*.md`)
 
 Round file: `rounds/A_20260828_0234_5p47ex_m1p2_heading_parity_plus_arrival_core_request.md`
 
