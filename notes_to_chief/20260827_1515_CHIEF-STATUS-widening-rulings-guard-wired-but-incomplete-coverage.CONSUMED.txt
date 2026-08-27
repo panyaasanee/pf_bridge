@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: chief's own progress report (guard field_mobs.assert_single_scene_tables() wired per COO-DECISION 1441, R194) flagging a remaining gap at kill() itself. Closed by COO-DECISION 20260827_2045_COO-DECISION-widening-guard-move-into-kill-closes-gap.md, assigning Lane B to add the scene check directly into kill() as part of the M1-P bg0002 work - no further chief action needed.

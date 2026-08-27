@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: this letter is itself the record of completed work (pf_bridge#197 merged 13:29) - verified directly: archive/notes_to_chief_2026-08-19_to_26/ holds 545 files as described, plus archive/rounds_to_2026-08-25/, archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md, and archive/CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md all exist on disk. The permanent housekeeping rules (items 7-12) became standing chief obligations from that round on.

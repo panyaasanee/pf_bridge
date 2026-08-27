@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: this is chief's own broadcast fixing the PR-merge-check method; it is the action itself, already in effect. Confirmed followed the same day - R193's log entry explicitly used pull_request_read to verify pf_bridge#192/#196 and pirate-force-server PRs were merged=true despite list_pull_requests reporting false.

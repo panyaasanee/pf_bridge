@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: Decision adopted immediately - all subsequent rounds (R179 onward per CHIEF_CONTINUATION.md CORE-REQUEST registry / WIRED tracking) used the 10-lane definition, reaching WIRED=10/10 at R182. No further action needed beyond adoption, which happened.

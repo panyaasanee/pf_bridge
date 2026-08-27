@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: Answered by COO-DECISION 20260826_2146 (next letter): 148 pre-R180 letters closed as handled-by-history (no backfill), 74 same-day letters also not backfilled, but all lanes required to stub going forward. Chief recorded the group closure in CHIEF-CLOSE 20260826_2200.

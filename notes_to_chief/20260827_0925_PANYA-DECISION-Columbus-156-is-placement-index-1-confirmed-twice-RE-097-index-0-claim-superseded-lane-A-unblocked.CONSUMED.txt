@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: RE-097 header/content updated to reflect index-1/MOBS 156 = Columbus (now archived, see CLIENT_RE_QUEUE.md line ~519 and archive/CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md). Lane A used this as the crosswalk anchor in rounds/A_20260827_1052_columbus_m2_identity_correction.md with pinned tests.

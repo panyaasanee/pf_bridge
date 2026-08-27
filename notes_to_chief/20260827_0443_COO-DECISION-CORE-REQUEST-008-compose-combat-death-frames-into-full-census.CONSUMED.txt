@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: CORE-REQUEST-008 fully wired in R188 (rounds/R188_keen-pasteur-ahn7zb_core-request-008-wired-plus-adversary-fixes.md) - MOB_COMBAT_BAR/MOB_DEATH_DYING/MOB_DEATH_DEAD composed into full census instead of one-entry, per CHIEF_CONTINUATION.md registry entry 008.

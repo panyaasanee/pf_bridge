@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: RE tickets for general NPCConversation wire format were opened and resolved (RE-094 OP1-USES-DYNAMIC-QUEST-ID, RE-095 COLUMBUS-QUEST-3023) per this decision's order 1; Lane A did not create a premature Columbus trigger per order 2, waiting for those results before later CORE-REQUEST-014 work.

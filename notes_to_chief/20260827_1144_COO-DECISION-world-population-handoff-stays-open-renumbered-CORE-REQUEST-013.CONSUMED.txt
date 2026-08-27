@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: registered world_population_handoff as CORE-REQUEST-013 per this letter (registry table entry 013 in CHIEF_CONTINUATION.md cites this decision by number). This "still open" ruling was itself later reversed by COO-DECISION 20260827_1645: 013 is now recorded as superseded/moot until M2 travel gate actually opens, at which point it reopens under a new number, not 013.
