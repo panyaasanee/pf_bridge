@@ -266,11 +266,19 @@ crosswalk นี้ ⇒ ปิดใบพร้อมบรรทัด `BUILD_
 มี helper ที่สแกน `+0x18..+0x47` เพื่อเช็คว่าง — เลข offset `+0x18` ที่ตรงกันข้าม type **ไม่ใช่ crosswalk**
 
 BUILD_IMPACT: guard เชิงโครงสร้างสำหรับสาย A/เซิร์ฟเวอร์ — scene 19/`Bg1003` ≠ vehicle id, `VEHICLE` ≠ `SHIP`,
-`CVehicleVital.+0x18` ต้องคงชื่อ `UNKNOWN_QWORD` จนกว่าจะมี capture จริง `columbus_quest_dispatch.py`
+`CVehicleVital.+0x18` ต้องคงชื่อ `UNKNOWN_QWORD` จนกว่าจะมี capture จริง ~~`columbus_quest_dispatch.py`
 (chief, `CORE-REQUEST-014`) ใช้ผลนี้ตรงๆ อยู่แล้ว: `VEHICLE_BIND_REFUSED_NO_VEHICLE_ROW` ยังคง refuse
-เหมือนเดิม — ปิดใบนี้ไม่ปลดล็อกอะไร มันแค่ยืนยันว่าเพดาน static ถึงที่สุดแล้วจริง (COO-DECISION `20260827_1350`
-เร่งใบนี้เป็นลำดับสูงสุดของ RE runner ก่อน 20:00 — ปิดทันตามกำหนด) ทางเดียวที่เหลือคือ attended capture ของ
-`CVehicleVital` เฟรมจริง ไม่มีเส้นทาง static เพิ่มเติมในข้อมูลที่ commit ไว้
+เหมือนเดิม — ปิดใบนี้ไม่ปลดล็อกอะไร~~ ทางเดียวที่เหลือคือ attended capture ของ
+`CVehicleVital` เฟรมจริง ไม่มีเส้นทาง static เพิ่มเติมในข้อมูลที่ commit ไว้ (COO-DECISION `20260827_1350`
+เร่งใบนี้เป็นลำดับสูงสุดของ RE runner ก่อน 20:00 — ปิดทันตามกำหนด)
+
+> **UPDATE (สาย A รอบ `jafskv`, 2026-08-27T17:37+07:00)**: บรรทัดที่ขีดฆ่าข้างบนล้าสมัยแล้ว —
+> `M2-NO-VEHICLE-OWNER-20260827-1525` (`notes_to_chief/20260827_1525_PANYA-DECISION-M2-accept-scene17-entry-without-vehicle-fix-later-*.md`)
+> ถอด `VEHICLE_BIND_REFUSED_NO_VEHICLE_ROW` ออกจากจุดเรียกใช้ทั้งหมดใน `columbus_quest_dispatch.py` แล้ว
+> (ค่าคงที่ยังอยู่ในไฟล์แต่เป็น dead code — grep ยืนยัน 0 call site) ฟังก์ชันนี้**ไม่ refuse ด้วยเหตุผลนี้อีก
+> ต่อไป** — M2 ไม่ต้องรอ vehicle-bind ปิดแล้วตามคำเคาะเจ้าของ ผลลัพธ์หลักของใบนี้ (T0/T1/T2 bounded-negative
+> + "ทางเดียวที่เหลือคือ attended capture") **ยังยืนอยู่เหมือนเดิม ไม่เปลี่ยน** — เปิดใบเทส `GT-109` แล้วรอ
+> capture ตามนั้น
 
 ---
 

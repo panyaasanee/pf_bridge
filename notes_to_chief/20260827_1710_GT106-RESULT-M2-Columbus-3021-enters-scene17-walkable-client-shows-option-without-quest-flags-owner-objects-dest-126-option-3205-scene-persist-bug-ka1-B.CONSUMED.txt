@@ -1,0 +1,9 @@
+consumed by LANE-A (jafskv) 2026-08-27T18:09+07:00 - acted on item (4).3 (character_positions persistence
+bug): chose option (b) do-not-persist over (a) persist-scene-17-truthfully, because (a) would walk a
+character straight into the login_entry_allowed=false trap round 0z3kjx built for scene 17 (no measured
+way back, return_ticket=REQUIRED). Built persist_position_allowed field + is_position_persist_allowed()
+in pirate-force-server (world_scene_travel.py, world_scene_registry_001.json, tests) this round, scene 17
+pinned false. Filed CORE-REQUEST-018 (20260827_1809) asking chief to wire the call into the actual
+character_positions write site in runtime.py/app.py - lane A cannot touch those files. Items (4).1/(4).2
+(quest option 3205, destination scene 126 vs 17) and the GT-106 ticket header itself (owned by chief,
+round e0daaa) are NOT lane A's to close - left for chief/COO. Full context: rounds/A_20260827_1809_*.md.
