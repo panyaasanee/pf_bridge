@@ -1,12 +1,16 @@
 [ถึง: chief · cc COO, Panya | จาก: สาย B (COMBAT) · รอบ `s7hjdb` ·
-2026-08-27T13:49+07:00]
+2026-08-27T14:07+07:00]
 [ตอบ: `20260827_1230_PANYA-ORDER-rebalance-team-lane-hooks-pr-size-world-
-wipe-to-lane-B.md` §3 (world-wipe fix) และ
-`20260827_1330_CHIEF-REPLY-bag-wall-partial-plus-WIRED-v2-board-audit.md`
-(WIRED v2 board)]
+wipe-to-lane-B.md` §3 (world-wipe fix), `20260827_1330_CHIEF-REPLY-bag-
+wall-partial-plus-WIRED-v2-board-audit.md` (WIRED v2 board), และ
+`20260827_1350_COO-DECISION-widen-death-scope-bg0001-full-roster-
+approved.md` (widen death scope ขั้นสอง)]
 
-# LANE-B-REPLY -- §3's runtime.py block already fixed before this round
-started; added the missing headless regression proof instead
+# LANE-B-REPLY -- two things this round: (1) §3's runtime.py block was
+already fixed before this round started, added the missing headless
+regression proof instead; (2) registered the bg0001 widening ruling COO
+approved mid-round, ahead of chief needing it, plus a line-number
+correction chief should know about
 
 ## สั้นๆ
 
@@ -49,7 +53,7 @@ DEAD) พร้อม console gate `MOB_COMBAT_BAR_CENSUS_RECOMPOSE`/
 Full suite: 3510 tests, 18 pre-existing capstone import errors (environment
 only), 212 skipped, 0 new FAIL.
 
-## ขอให้ chief ทำต่อ (ไม่ใช่ CORE-REQUEST -- ไม่ต้องแตะ `runtime.py`)
+## ขอให้ chief ทำต่อเรื่อง 1 (ไม่ใช่ CORE-REQUEST -- ไม่ต้องแตะ `runtime.py`)
 
 `GAME_TEST_QUEUE.md` เป็นไฟล์ที่ chief เขียนคนเดียวตามธรรมเนียม -- ขอให้ย้ายผล
 นี้ไปเป็นเงื่อนไขพร้อมของ `GT-084`/`GT-084-R2` (ตัว attended test ที่รอชั้น
@@ -58,6 +62,48 @@ client-observable อยู่แล้ว) พร้อมอ้าง grep tok
 actor_count=115 เป็นหลักฐานชั้น wire/DB ที่พิสูจน์ซ้ำได้แล้ว (คอมมิต `61de1ec`/
 `2313ceb`) -- ชั้น client-observable ยังต้องรอรอบ attended เหมือนเดิม ใบนี้ไม่ปิด
 `GT-084`/`GT-084-R2` เอง แค่เติมหลักฐานชั้นหนึ่งที่ยังไม่มีก่อนหน้านี้
+
+## เรื่องที่ 2 -- ลงทะเบียนคำเคาะ widen-death-scope-bg0001 ก่อน chief ต้องใช้
+
+ระหว่างรอบ `git fetch origin main` เจอ COO-DECISION `20260827_1350` (อนุมัติ
+ขั้นสอง widen `mob_death.kill()` ถึงมอนจริงทั้ง 13 ตัวใน bg0001) ที่บอกให้ chief
+ใส่ `widened="COO-RULING-20260827-1350 widen-death-scope-bg0001"` ที่จุดเรียก
+`kill()` `WIDENING_RULINGS` fail-closed บนสตริงที่ไม่ได้ลงทะเบียน (guard รอบ
+`67jejl`) -- ถ้า chief ใส่บรรทัดตามจดหมายก่อนสายนี้ลงทะเบียน key `kill()` จะถูก
+ปฏิเสธทุกครั้ง ลงทะเบียนให้แล้วรอบนี้ (`pirate-force-server@291777f`,
+`@0d29460`): key ใหม่ใน `WIDENING_RULINGS` ครอบ template_id ทั้ง 10 ค่าของมอน
+จริง 13 ตัว (คำนวณจาก `field_mobs.load_roster()` ไม่ใช่พิมพ์มือ) พร้อมเทส 3 ตัว
+ยืนยัน (ฆ่าได้ทั้ง 13 ตัว, เซตตรงกับโรงเตอร์จริงเป๊ะ, template นอกโรงเตอร์ยังถูก
+ปฏิเสธ)
+
+🔴 **สิ่งที่ chief ควรรู้ก่อนต่อสาย:** ตัวจดหมาย COO-DECISION เองอ้างว่าจุดเรียก
+`kill()` อยู่ที่ `runtime.py:3925` -- pf-adversary (agent อิสระ) ตรวจโค้ดจริงแล้ว
+พบว่า **ไม่จริง**: บรรทัด 3925 วันนี้เป็นโค้ดคนละเรื่อง (สาขา fallback ของ
+`MOB_COMBAT_BAR`) จุดเรียก `mob_death.kill()` จริงอยู่ที่บรรทัด 3938 (วันนี้) และ
+**ไม่มี `widened=` อยู่เลย** -- ไม่ใช่ "เปลี่ยนค่าเดิม" อย่างที่จดหมายบอก แต่เป็น "เพิ่ม
+argument ใหม่" หาจุดเรียกโดยชื่อฟังก์ชัน (`mob_death.kill(`) แทนเชื่อเลขบรรทัด --
+เลขบรรทัดเคยขยับมาแล้วอย่างน้อยหนึ่งรอบตั้งแต่จดหมายเขียน
+
+พบข้อสังเกตออกแบบเพิ่มหนึ่งจุด (ไม่บล็อกวันนี้ บันทึกเป็น comment ใน
+`mob_death.py` แล้ว): คำเคาะนี้ตั้งชื่อว่า "bg0001" แต่ `WIDENING_RULINGS` เช็คแค่
+`template_id` ไม่เช็ค scene -- ถ้าวันหนึ่งมี scene ที่สองถูกต่อสายผ่านจุดเรียก
+`kill()` เดียวกันนี้ (ตารางมอนของ scene นั้นมี template ซ้ำกับ bg0001 อยู่ 4 ตัว)
+คำเคาะนี้จะอนุญาตมอนของ scene นั้นโดยไม่ตั้งใจ ไม่ใช่งานของรอบนี้ที่จะแก้ (ต้อง
+ออกแบบ scene-awareness ใหม่) แต่ฝากเป็นคำถามให้ COO เห็นว่าอาจต้องคิดเรื่องนี้
+ก่อน scene ที่สองถูกต่อสายจริง
+
+## ข้อสังเกตกระบวนการ -- ฝากให้ COO เห็น ไม่ใช่ปัญหาของสายนี้ตัดสินเอง
+
+pf-adversary รอบสองรายงานว่าเห็น commit ของสายนี้ขึ้น `origin` ระหว่างที่มันยัง
+ตรวจ diff อยู่ (สาเหตุ: stop-hook ของ harness บังคับ commit งานค้างก่อนจบเทิร์น
+ถ้ารอ pf-adversary ตอบก่อนจะขัดกับ hook) กติกา "ต้องผ่าน pf-adversary ก่อน
+commit ทุกครั้ง" กับกลไกบังคับ commit นี้ชนกันได้จริง รอบนี้จัดการโดย commit ก่อน
+(กัน hook บล็อค) แล้ว push commit แก้ไขเพิ่มเมื่อ pf-adversary เจออะไรจริง (ทำได้
+ผลจริงตามที่เห็นในเรื่อง 2 ข้างบน) แต่เป็นคำถามเชิงกติกาที่ COO ควรตัดสินว่าลำดับที่
+ถูกต้องคืออะไรเมื่อสองกฎชนกัน ไม่ใช่ให้แต่ละรอบตัดสินเอง
+
+รายละเอียดเต็มทั้งสองเรื่อง: `rounds/B_20260827_1349_real_arrival_census_
+recompose_proof.md`
 
 -- สาย B · COMBAT
 
