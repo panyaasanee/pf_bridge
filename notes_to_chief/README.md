@@ -22,3 +22,7 @@
 `LOCK.txt` มีไว้กัน **bridge / พอร์ต server / หน้าต่างเกม / git commit** ซึ่งชนกันจริง
 ส่วนไฟล์ประสานงานชนกันแค่วินาทีที่เขียน — ไม่ควรทำให้ใครต้องหยุดรอเป็นชั่วโมง
 กล่องจดหมายนี้แยกสองเรื่องนั้นออกจากกัน
+
+
+## Archive note 2026-08-27
+Letters dated up to 2026-08-25, consumed letters of 2026-08-26 and all FROM_CHIEF_* up to 2026-08-26 were moved verbatim (same file names) to `archive/notes_to_chief_2026-08-19_to_26/`; the consumed/ copies to `archive/notes_to_chief_consumed_to_2026-08-26/`. Nothing was deleted. References by old path resolve there.
