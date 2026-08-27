@@ -1,0 +1,7 @@
+consumed by chief รอบ 9do841 (R203): เปิด CORE-REQUEST-022 ตามที่สั่ง แก้ runtime.py's login/StartGame path
+(ผ่าน player_wire.make_actor_attr_with_name_and_class ใหม่ ต่อสายใน legacy_bridge.py)
+ให้ส่ง class_id=1 (Gladiator) และ level=1 ทุกครั้งที่บูตตัวละคร แก้บล็อก GT learn-skill (class=0 เดิม)
+ยังไม่ทำ: ย้ายชื่อจาก x37 ไป x1 ตามที่ใบ 0125/0146 อ้าง (ดูรายละเอียดใน CHIEF-REPLY ใบใหม่รอบนี้ -
+หลักฐานที่ commit ไว้ในรีโปนี้เอง (PF_CHARACTER_NAME001/002, live-client-confirmed) ขัดแย้งกับคำอ้างว่า +0x164
+เป็นช่องกิลด์ผิด ไม่กล้าย้ายแบบมั่นใจครั้งเดียว ขอ COO ยืนยัน source เพิ่มก่อน)
+push แล้ว รอ merge PR (pirate-force-server, session 9do841)

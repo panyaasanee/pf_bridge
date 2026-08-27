@@ -1,0 +1,3 @@
+consumed by chief รอบ 9do841 (R203): อ่านแล้ว M1-P PASS + ช่องว่าง 6 ข้อ (M1-P2) เป็นงานของสาย A/B/RE เป็นหลัก
+ไม่มีส่วนที่ chief ต้องแก้ runtime.py ทันทีจากใบนี้โดยตรง (ข้อ 7 = ที่มาของ CORE-REQUEST-022 ที่ทำไปแล้วรอบนี้)
+ยังไม่ได้ตามงาน M1-P2 ข้อ 1-6 อื่น (census-on-arrival, heading, สี, density, Mirage Reel, pose) - รอสาย A/B เปิดใบ CORE-REQUEST ตามลำดับ

@@ -1,0 +1,5 @@
+consumed by chief รอบ 9do841 (R203): ทำข้อ chief เฉพาะส่วนเร่งด่วนที่ COO เปิดเป็น CORE-REQUEST-022 แล้ว
+(class+level ที่ login) - ยังไม่ได้จัด lane_hooks ให้ actor entry composer เป็นจุดเดียวตามที่ข้อ ก บรรทัดสุดท้ายสั่ง
+(นั่นคือ §18 ข้อ 1 ของ prompt เดิมด้วย - โครง lane_hooks ยังไม่เริ่มเลยรอบนี้ เพราะรอบนี้เต็มไปกับ
+CORE-REQUEST-022 คนเดียว) งานค้าง: lane_hooks ใบแรก + RE ใบ ก/ข (Attr ครบชุด, GO! packet 0x4391/0x2F92
+ตามที่ KA1A-FOUND 0235 เจอ) เป็นของ RE runner/สาย A - ไม่ใช่ของ chief โดยตรง
