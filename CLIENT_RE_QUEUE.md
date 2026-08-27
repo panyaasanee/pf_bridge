@@ -1192,3 +1192,62 @@ layout ของ nested reader พร้อม provenance **หรือ** bound
 (`field_0x0b_second=1`) ปิดด้วย แล้วค่อยส่ง attended GT รอบใหม่ยืนยันว่า client รับเฟรมจริง (nonclaim: การแก้นี้
 มาจากหลักฐาน [STATIC]+[PROVEN]-committed-report ไม่ใช่ [MEASURED] ของรอบนี้เอง — ยังไม่มีใครยิงเฟรมที่แก้แล้วใส่
 ไคลเอนต์จริง)
+
+---
+
+## 🔬 RE-115 MAPWINDOW-SCENE-NPC-LIST-SOURCE-001 [STATIC-ON-BRIDGE]: **หน้าต่างแผนที่ในเกม (M) มีรายการ "ค้นหาตัวละครในฉาก" เรียง `MOBS.n_ID` ต่อเนื่อง + ปุ่ม GO! — รายการนี้ไคลเอนต์ได้มาจาก packet ของเซิร์ฟเวอร์ (เช่น census/actor collection ที่ส่งอยู่แล้ว) หรือจากตารางฝั่งไคลเอนต์เอง** [🟡 OPEN]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง (2026-08-28T01:xx+07:00, รวม `notes_to_chief/`, `rounds/`):
+> `RE-115`/`GT-115` = 0 hit ทั้ง `CLIENT_RE_QUEUE.md` และ `GAME_TEST_QUEUE.md` — เลขสูงสุดที่ใช้แล้วคือ
+> `114` (`GT-114`, ตัวนับร่วม) ⇒ ใบนี้คือ `115`
+> 🔴 ใบเดิมทั้งหมดอยู่ที่เดิม ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่
+
+### ที่มา
+- `notes_to_chief/20260827_1240_PANYA-EVIDENCE-video2-Port-Royal-NPC-tour-30-NPCs-on-screen-map-window-lists-scene-NPCs-in-n_ID-order-156-163.md`
+  ①: เจ้าของถอดคลิป `vAD8TuO3ApA` เห็นหน้าต่างแผนที่ (M) แสดงรายการ 8 แถวแรกตรง `MOBS.n_ID` 156-163
+  ต่อเนื่องเป๊ะ (Marine Transport Station Columbus ... Royal Exchange Manager Mackie) พร้อม scrollbar —
+  จดหมายเดิมเสนอเองว่า RE runner ควรเปิดใบหาว่า UI นี้อ่านจาก packet ไหนหรือจากตารางไคลเอนต์ ใบนี้เป็นใบที่
+  ถูกเสนอไว้นั้น (ยังไม่มีใครเปิดจนถึง `notes_to_chief/20260827_2305_KA1A-NUDGE-*.md` เตือนซ้ำ — ตรวจ grep
+  แล้วยืนยันว่ายังไม่มีใบ static เดิมของหัวข้อนี้ในทั้งสองไฟล์คิว)
+- `world_population.py`/`world_population_bg0002.py` (bg0001/Bg0002 census composer) เป็นแหล่งข้อมูล NPC ต่อฉากฝั่ง
+  เซิร์ฟเวอร์ที่มีอยู่แล้ว — ใบนี้ถามว่า UI นี้พึ่งข้อมูลเดียวกันนี้ (composed actor list ที่ส่งตอน StartGame/arrival)
+  หรือพึ่งเส้นทางอื่น (client-side static table, หรือ packet แยกที่ยังไม่ถอด)
+
+### objective
+1. หาว่าเมนู "ค้นหาตัวละครในฉาก" ของหน้าต่างแผนที่ (M) ประกอบรายการจากอะไร — census/actor-collection packet
+   ที่ server ส่งอยู่แล้ว (ตัวเดียวกับที่ `world_population.py` ประกอบ) หรือ opcode/packet อื่นที่ยังไม่ถูกระบุ
+   หรือตารางฝั่งไคลเอนต์ล้วน (ไม่พึ่ง wire เลย)
+2. ถ้าเป็น packet: ระบุ opcode/handler และฟิลด์ที่ใช้เรียง (ยืนยันว่าเรียงตาม `n_ID`/`actor_identity` จริงหรือ
+   คนละคีย์ที่บังเอิญออกมาเรียงเหมือนกันในคลิปนี้)
+3. ระบุว่าปุ่ม GO! (teleport ไปหา NPC ที่เลือก) ใช้พิกัดจาก payload เดียวกันหรือ request ใหม่
+4. ถ้า static ไม่พอ ให้เขียน bounded negative ชัดเจนแยกข้อ 1/2/3
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยัน image SHA/ตาราง sha256 ตรง verifier ปัจจุบันก่อนเริ่ม
+- **T1** — grep/search อิมเมจหา string หรือ UI class ที่เกี่ยวกับหน้าต่างแผนที่ (คำที่เป็นไปได้: "MapWindow",
+  "GO", ป้าย UI ภาษาไทย/อังกฤษที่ตรงกับเฟรม `00m10s_MAPWINDOW_npc_list_156-163.jpg`) หา handler/ctor ที่วาด
+  รายการนี้
+- **T2** — ไล่ย้อนจาก handler ไปหา data source: ถ้าพบ opcode ที่ populate list ให้เทียบกับ opcode ที่รู้จักแล้ว
+  (census/arrival ที่ `world_population.py` ส่ง) ว่าเป็นตัวเดียวกันหรือคนละตัว
+- **T3** — ถ้าเป็นคนละ opcode ให้ระบุ tag/field layout เท่าที่ static เห็น (ไม่ต้องถอดครบ ถ้าชนเพดานให้บันทึก
+  bounded negative)
+- **T4** — ตรวจปุ่ม GO! แยก (อาจเป็นแค่ client-local nav ไม่ยิง request ใหม่เลย)
+
+### nonclaims
+① ไม่ claim ว่ารายการนี้ต้องมาจาก census packet เดียวกับที่ `world_population.py` ส่ง — นี่คือสมมติฐานที่ใบนี้
+กำลังตรวจ ไม่ใช่ข้อสรุปล่วงหน้า
+② ไม่ claim ว่า n_ID 156-163 ต่อเนื่องในคลิปพิสูจน์อะไรเกี่ยวกับ wire order — อาจเป็นเรื่องบังเอิญของ UI sort
+ฝั่งไคลเอนต์เอง (เช่น sort by ID ก่อนแสดง ไม่ใช่ wire order)
+③ ถ้า T1-T4 ไม่พบเส้นทางที่ถอดได้เลย นี่คือคำตอบสมบูรณ์ (bounded negative)
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative แล้วปิด
+ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+แหล่งข้อมูลของรายการ NPC ในหน้าต่างแผนที่พร้อม provenance **หรือ** bounded negative ที่แยกข้อ 1/2/3/4 ชัดเจน
+⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+
+**ทำไมมีค่า:** ถ้ารายการนี้เป็น packet ของเซิร์ฟเวอร์และไม่ใช่ census ที่ `world_population.py`/
+`world_population_bg0002.py` ส่งอยู่แล้ว จะเป็น opcode ที่ M1/M1-P ยังไม่ได้ส่งเลย — ผู้เล่นจะเห็นเมือง/เกาะ
+มี actor ยืนอยู่จริง แต่กด M แล้วค้นหาไม่เจอใครเลย ถ้าไม่ปิดใบนี้ก่อนจะไม่มีใครรู้ว่านี่คือช่องว่างที่ต้องต่อสาย
