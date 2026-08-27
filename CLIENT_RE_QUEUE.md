@@ -3191,7 +3191,7 @@ crosswalk นี้ ⇒ ปิดใบพร้อมบรรทัด `BUILD_
 
 ---
 
-## 🆕🔬 RE-097 COLUMBUS-BG0001-PLACEMENT-IDENTITY-001 [STATIC-ON-BRIDGE]: **หา placement/actor identity ของ Columbus (`MOBS.n_ID=36`) ใน 149 placements ของ `bg0001.npc`, แยกจากการตัดสมมติฐานที่ `RE-093` ทำไปแล้ว**  [🟢 **OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-27 ~03:3x (+07:00) ต่อยอดจากผล `RE-095`**]
+## 🆕🔬 RE-097 COLUMBUS-BG0001-PLACEMENT-IDENTITY-001 [STATIC-ON-BRIDGE]: **หา placement/actor identity ของ Columbus (`MOBS.n_ID=36`) ใน 149 placements ของ `bg0001.npc`, แยกจากการตัดสมมติฐานที่ `RE-093` ทำไปแล้ว**  [~~🟢 OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-27 ~03:3x (+07:00) ต่อยอดจากผล `RE-095`~~] [✅ **CORRECTED/CLOSED — ปิดแล้ว 2026-08-27 ~11:2x (+07:00) · ปิดหัวใบโดยสาย A (`PANYA-DECISION 0925` ข้อ 1 มอบให้ chief เขียนบรรทัดนี้ไว้ แต่ผ่านมา 3 รอบยังไม่มีใครเขียน สาย A ทำแทนแทนที่จะรอต่อ) · `index 0 claim superseded by owner 09:2x — Columbus = index 1` · ผล: Columbus (`MOBS n_ID 156`) = `bg0001` placement **index 1** (`Mob_Set_02`, XYZ `−8013.458984375/−2780.045166015625/223.29209899902344`) ยืนยันโดยคำเจ้าของ (testimony จากเซสชัน attended ต่อเนื่องเดียวกัน `0925`→`0950` — ไม่ใช่สอง derivation อิสระ และเลข index นี้เคยขยับมาแล้วครั้งหนึ่งในวันเดียวกันจากที่ `RE-097` เดิมเคยว่า index 0) — ส่วน static เดิมของผล `RE-097` (`0415`: raw scene ไม่มี field ผูก `MOBS.n_ID` เข้ากับ placement โดยตรง, bounded negative) ยังยืนอยู่ มีแค่ index ตัวเลขที่เจ้าของแก้จาก 0 เป็น 1 · ดู `notes_to_chief/20260827_0925_PANYA-DECISION-Columbus-156-is-placement-index-1-confirmed-twice-RE-097-index-0-claim-superseded-lane-A-unblocked.md` และ `notes_to_chief/20260827_0950_PANYA-DECISION-index1-Columbus-156-index65-Loie-802-and-CORRECTION-Port-Royal-has-monsters-Training-Iron-Man-916-is-certain.md` ฉบับเต็ม**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-097`/`RE-097` = **0 hit ทั้งสองไฟล์** ⇒ **ใบนี้คือ `RE-097`** · เลขว่างถัดไปหลังใบนี้ = 098
 > 🔴 ใบ `RE-085`-`RE-096` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
@@ -3388,5 +3388,58 @@ negative แล้วปิด ไม่เดาต่อ · ไม่เปิ
 ### เกณฑ์จบใบ
 พิกัด player-arrival ของ scene 17 พร้อม provenance **หรือ** bounded negative ที่บอกตรงๆ ว่าต้องใช้ attended
 capture ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-102 NPCCONVERSATION-COLUMBUS-156-QUESTID-3021-WIRE-CONFIRM-001 [STATIC-ON-BRIDGE]: **ยืนยันระดับ wire ว่า descriptor `+0x10`/`+0x12` ของ `NPCConversation` ใช้ quest id `3021` จริงสำหรับ Columbus ตัวจริง (`MOBS.n_ID=156`, Port Royal), แยกจาก quest `3023` ที่ `RE-095` ยืนยันไว้แล้วสำหรับ `MOBS.n_ID=36` (Columbus คนละตัว, Spice Paradise)**  [🟢 **OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-27 ~11:2x (+07:00) ต่อยอดจากผล `RE-095`/`A_20260827_1052`**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-101`/`RE-101` มี hit แล้ว (`GT-101` = 4 hit, `RE-101` = 1 hit ใน
+> `GAME_TEST_QUEUE.md`) ⇒ ข้ามไปที่ `102` = **0 hit ทั้งคู่ ทั้งสองไฟล์** ⇒ **ใบนี้คือ `RE-102`** · เลขว่างถัดไป
+> หลังใบนี้ = 103
+> 🔴 ใบ `RE-085`-`RE-100` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`rounds/A_20260827_1052_columbus_m2_identity_correction.md` และจดหมายคู่กัน
+`notes_to_chief/20260827_1052_LANE-A-CORRECTION-columbus-m2-quest3021-not-3023-scene17-not-19.md` แก้
+crosswalk: Columbus ตัวจริงที่ผู้เล่นเจอใน M2 (`bg0001` placement index 1, ยืนยันโดยคำเจ้าของ — testimony
+จากเซสชัน attended ต่อเนื่องเดียวกัน `0925`→`0950` ไม่ใช่สอง derivation อิสระ, เลข index เคยขยับมาแล้วครั้ง
+หนึ่งในวันเดียวกันจากที่ `RE-097` เดิมเคยว่า index 0) คือ **`MOBS.n_ID=156`** ไม่ใช่ 36 มี `s_QUEST_BEGIN` เป็น **`3021`** (`Q_TELEPORT1`, `n_VARI_2=17` →
+scene 17/`Bg1001`) ส่วน `RE-095` ยืนยัน descriptor wire ของ quest `3023` ไว้แล้วจริง แต่นั่นคือ `MOBS 36`
+(Spice Paradise, คนละตัว, คนละปลายทาง scene 19) — ที่ยืนอยู่ตอนนี้สำหรับ `3021` มีแค่ชั้น **[STATIC]**
+(ตาราง gamedata) ยังไม่มีใครรัน wire capture สไตล์เดียวกับ `RE-095` ให้กับ MOBS 156/quest 3021 เลย
+
+### objective (claim เดียว)
+ยืนยันว่า descriptor nested ของ `NPCConversation` (u16 quest id ที่ `+0x10`, u8 ที่ `+0x12` ตามที่ `RE-094`/
+`RE-095` ถอดไว้แล้ว) ที่ actor ของ Columbus ตัวจริง (`bg0001` placement index 1, `MOBS 156`) ส่งจริง คือ
+`3021` — ไม่ใช่ `3023` (ของ `MOBS 36`) และไม่ใช่ `3020` (ของเดิม `P0` hardcode)
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยัน image SHA ตรงกับที่ `RE-094`/`RE-095` ใช้ก่อนอ้างอิง span เดิมซ้ำ (`NPCConversation`
+  constructor/serializer `0x622A00`/`0x622F10`)
+- **T1** — เทียบ call site ที่ actor = `bg0001` placement index 1 (Columbus ตัวจริง) เรียก `NPCConversation`
+  ว่า descriptor ที่ `+0x10` ใส่ `3021` จริงหรือไม่ (ขอบเขต placement ของ `bg0001` = block เดียว 149 แถว ตาม
+  `RE-093` result — ห้ามสมมติ block ที่สอง)
+- **T2** — ถ้าไม่มี call site ที่ระบุ actor ตรงตัว (เช่น dispatch ใช้ lookup ตาราง giver-NPC → quest generic
+  เหมือนที่ `RE-094` พิสูจน์ไว้แล้วว่า op1 เป็น dynamic dispatch อ่านจาก UI record `+0x94`) ให้ยืนยันแทนว่า UI
+  record ที่ actor นี้ป้อนเข้า `+0x94` คือ `3021` จริงจาก giver-NPC lookup ไม่ใช่ hardcode
+- **T3 · ริเดอร์** — ถ้าเวลาเหลือ: ยืนยันว่า descriptor `+0x12` (ที่ `RE-094` พบว่ามีอยู่) ไม่ทำให้ quest `3021`
+  เบี่ยงไปเส้นทางอื่นสำหรับ actor นี้โดยเฉพาะ
+
+### nonclaims
+① ไม่อ้างว่า [STATIC] เดิม (ตาราง gamedata, quest `3021`→scene 17) ผิด — ใบนี้แค่ขอยกระดับเป็น
+wire-confirmed ② ไม่ตัดสินโครงสร้าง `src/pirateforce_foundation/` เอง — สาย A ตัดสินใจเองเมื่อได้ข้อมูล ③ ไม่
+ทับ/แทนที่ `RE-095` (ยังถูกต้องสำหรับ `MOBS 36`) ④ **ไม่ใช่ตัวบล็อกงาน** `CORE-REQUEST` ที่ chief ต่อสายอยู่แล้ว
+ในจดหมาย `1052` — ระดับ [STATIC] พอให้เริ่มต่อสายได้ ใบนี้เป็น double-check เพิ่มเติมเท่านั้น ⑤ ถ้าเพดาน static
+ชนก่อนตอบได้ ให้เขียน bounded negative ตามกฎ ไม่เดาต่อ
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์ gamedata อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative
+แล้วปิด ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ตอบ T0-T2 ด้วยหลักฐาน (descriptor/UI-record ยืนยัน `3021` สำหรับ actor นี้) **หรือ** bounded negative ว่าไม่มี
+call site/field ที่แยกแยะได้ ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
 
 ### result (ยังไม่มี — ใบเปิดอยู่)
