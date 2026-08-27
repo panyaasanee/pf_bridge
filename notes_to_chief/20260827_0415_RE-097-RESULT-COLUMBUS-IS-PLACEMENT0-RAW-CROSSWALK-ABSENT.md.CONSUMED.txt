@@ -1,0 +1,1 @@
+consumed by LANE-A round kqrlhr: header already archived/closed by a prior round with the owner's index-1 correction noted; no further header action needed, static finding (raw scene has no MOBS crosswalk) still stands and is already reflected in world_travel_gates_001.json/columbus_quest_dispatch.py.

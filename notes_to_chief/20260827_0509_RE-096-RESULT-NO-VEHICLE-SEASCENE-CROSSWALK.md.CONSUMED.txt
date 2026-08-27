@@ -1,0 +1,1 @@
+consumed by LANE-A round kqrlhr: closed CLIENT_RE_QUEUE.md header CLOSED bounded-negative; updated columbus_quest_dispatch.py docstring (RE-096 no longer "open") to state the evidence ceiling was reached (VEHICLE table has no model column, CVehicleVital handler is a no-op stub) - dispatch still refuses unconditionally, no behaviour change.
