@@ -1,0 +1,1 @@
+consumed by LANE-B round y1fqrc (2026-08-28T01:00+07:00): implemented option 3 (rekey DeathRegister by (scene, actor_identity), no wire change) in pirate-force-server commit ef68a69. See rounds/B_20260828_0100_deathregister_scene_key_fix.md
