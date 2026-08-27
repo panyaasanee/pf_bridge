@@ -3351,7 +3351,7 @@ BUILD_IMPACT: ถ้า D1/D2 -> "จุดยืน" กลายเป็น�
 ---
 
 ## 🆕 GT-081 TRAVEL-GATE-WALK-OUT-AND-WALK-HOME-001 [attended, in-game]: ผู้เล่นที่ **หยุดยืน** ในเขตที่พินไว้กลางท่าเรือ ทำให้ **ตัวเอง** ข้ามไ... -- archived 20260827 (closed; verbatim in `archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md`)
-## GT-084 MOB-COMBAT-001 / MOB-DEATH-001 FIRST-REAL-ATTACK-001: การโจมตีจริงจากผู้เล่นครั้งแรกที่ไปถึง mob_combat/mob_death บนบูตไร้แฟล็ก -- เลือดมอนสเตอร์ลดจริงไหม และ 0x201F ตายไหม  [🟡 **RESULT (ผ่านผลต่อของ GT-084-R2, 2026-08-27) -- wire/DB ครบ (hit x5, HP to 0, MOB-DEATH-001 kill, dying/dead frames, MOB_LOOT_DROP x2) แต่ client-observable FAIL 2 จุด: ศพแข็งลอยค้าง (ไม่ล้มตาม GT-022/GT-025), single-click ไม่มีแผงเป้า -- ดู notes_to_chief/20260827_1620_GT084R2-RESULT-*.md, RE-107/RE-108 เปิดตามแล้ว, ห้ามอ่านเป็น PASS/DONE**]
+## GT-084 MOB-COMBAT-001 / MOB-DEATH-001 FIRST-REAL-ATTACK-001: การโจมตีจริงจากผู้เล่นครั้งแรกที่ไปถึง mob_combat/mob_death บนบูตไร้แฟล็ก -- เลือดมอนสเตอร์ลดจริงไหม และ 0x201F ตายไหม  [🟡 **RESULT (ผ่านผลต่อของ GT-084-R2, 2026-08-27) -- wire/DB ครบ (hit x5, HP to 0, MOB-DEATH-001 kill, dying/dead frames, MOB_LOOT_DROP x2) แต่ client-observable FAIL 2 จุด: ศพแข็งลอยค้าง (ไม่ล้มตาม GT-022/GT-025), single-click ไม่มีแผงเป้า -- ดู notes_to_chief/20260827_1620_GT084R2-RESULT-*.md, RE-107/RE-108 ปิดแล้ว (bounded negative, 2026-08-27T17:1x+07:00), ห้ามอ่านเป็น PASS/DONE**]
 
 > เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md, prefix สองแบบ ห้ามแยกตัวนับ.
 > เลขสูงสุดที่ใช้ไปแล้ว ณ เวลาเขียนใบนี้: GT-081 (GAME_TEST_QUEUE.md) และ RE-083 (CLIENT_RE_QUEUE.md,
@@ -3622,7 +3622,7 @@ TEMPLATE_teardown_generic.ps1.
 
 ---
 
-## GT-084-R2 HOSTILE-PAIR-VISIBLE-001: รอบสองของ GT-084 -- คู่ faction (1,6) ที่ผู้เล่นได้ครึ่งของตัวเองแล้ว ทำให้ Tornado Eagle ขึ้นศัตรูจริงบนจอไหม (ชื่อแดง + แผงเป้าแดง) บนบูตไร้แฟล็ก -- ก่อนจะไปถึงเรื่องตี  [🟡 **RESULT -- claim หลัก (hostile ที่ตาเห็น) PASS ด้วยหลักฐานพฤติกรรม (ขอบแดง+ลูกศรแดงคู่, ดับเบิลคลิกตีติดจริง) แต่ไม่ใช่สีตามใบเป๊ะ (ชื่อชมพูไม่ใช่แดง, ไม่มีแผงเป้า) -- ผลต่อขั้นตี-ตาย: ดู GT-084 -- รายละเอียด notes_to_chief/20260827_1620_GT084R2-RESULT-*.md, RE-107/RE-108 เปิดตามแล้ว, สถานะสุดท้าย (PASS/MIXED) รอ chief ตั้ง**]
+## GT-084-R2 HOSTILE-PAIR-VISIBLE-001: รอบสองของ GT-084 -- คู่ faction (1,6) ที่ผู้เล่นได้ครึ่งของตัวเองแล้ว ทำให้ Tornado Eagle ขึ้นศัตรูจริงบนจอไหม (~~ชื่อแดง + แผงเป้าแดง~~ [UPDATE 2026-08-27T17:34+07:00 LANE-B ต่อยอด PANYA-REFERENCE 16:35+07:00: เกณฑ์สีที่ถูกต้องคือ **ส้ม (ยังไม่ aggro) → แดงเข้ม (aggro) → เทา (ตาย)**, ไม่ใช่ "แดง" เฉยๆ] + แผงเป้า) บนบูตไร้แฟล็ก -- ก่อนจะไปถึงเรื่องตี  [🟡 **RESULT -- claim หลัก (hostile ที่ตาเห็น) PASS ด้วยหลักฐานพฤติกรรม (ขอบแดง+ลูกศรแดงคู่, ดับเบิลคลิกตีติดจริง) แต่ไม่ใช่สีตามใบเป๊ะ (ชื่อชมพู/magenta ตลอด ไม่ใช่ส้ม→แดงเข้ม→เทาตามลำดับสถานะจริง, ไม่มีแผงเป้า) -- ผลต่อขั้นตี-ตาย: ดู GT-084 -- รายละเอียด notes_to_chief/20260827_1620_GT084R2-RESULT-*.md, RE-107/RE-108 ปิดแล้ว (bounded negative), RE-109 เปิดใหม่ถามครบ 6 สี, สถานะสุดท้าย (PASS/MIXED) รอ chief ตั้ง**]
 
 > เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md. เลขสูงสุด ณ เวลาเขียนใบนี้: GT-099 / RE-098.
 > 🔢 **ใบนี้ไม่กินเลขคิวใหม่** -- เป็น **รอบที่สองของ GT-084** เลนเดียวกัน (มอนสเตอร์เป้าหมายเดียวกัน 0x201F
