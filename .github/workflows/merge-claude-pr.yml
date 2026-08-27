@@ -227,7 +227,16 @@ jobs:
             || echo "::error::COULD NOT CLOSE #${PR}. The round lock is STUCK until a human closes it."
 
   reap:
-    if: github.event_name != 'pull_request_target'
+    # Runs on EVERY event, after merge.  Measured 2026-08-27 11:05 +07:00:
+    # GitHub fired this repository's hourly schedule five times in all of
+    # 2026-08-26 and not once in the eleven hours after 17:19 UTC; the */10
+    # schedule never fired in its first 90 minutes.  A cron that does not
+    # tick is not a safety net.  Pull-request events DO arrive several times
+    # an hour (every lane opens, pushes, readies and merges a PR each round),
+    # so the sweep rides on those: every PR event sweeps every open PR.
+    # Idempotent; the merge job above still handles the event's own PR first.
+    needs: merge
+    if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
