@@ -4728,7 +4728,7 @@ nonclaim บังคับด้านบนของใบนี้
 
 ---
 
-## GT-107 GM-001-R2 LOGIN-STATE-VISUAL-PROBE-002: ล็อกอินด้วยบัญชี GM อีกครั้งหลัง RE-105 พิน vital_version=0 (CORE-REQUEST-016 เปิดแล้ว) -- เซสชันรอดจาก error 23065 ที่ GT-101 เจอไหม แล้วจอเปลี่ยนอะไรไหม (คำถามเดิมของ GT-101 ที่ยังไม่มีใครตอบได้เพราะเซสชันตายก่อนถึง)  [PENDING]
+## GT-107 GM-001-R2 LOGIN-STATE-VISUAL-PROBE-002: ล็อกอินด้วยบัญชี GM อีกครั้งหลัง RE-105 พิน vital_version=0 (CORE-REQUEST-016 เปิดแล้ว) -- เซสชันรอดจาก error 23065 ที่ GT-101 เจอไหม แล้วจอเปลี่ยนอะไรไหม (คำถามเดิมของ GT-101 ที่ยังไม่มีใครตอบได้เพราะเซสชันตายก่อนถึง)  [RESULT -- NEGATIVE, new failure mode, error 28317, see notes_to_chief/20260827_1745_GT107-RESULT-NEGATIVE-vital-version-0-passes-version-check-but-client-throws-28317-RunTimeProtocolRes-read-failed-session-dies-GT103-not-reached-ka1-B.md -- superseded by GT-107-R3 below]
 
 > เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md. grep ยืนยันก่อนจอง (2026-08-27): GT-107 = 0 hit, RE-107 = 0
 > hit ทั้งสองไฟล์ (รวม archive/). เลขสูงสุดที่ใช้แล้วจริงคือ GT-106 (SCENE17-PROVISIONAL-ARRIVAL-001, เปิดโดย
@@ -5194,6 +5194,81 @@ client-observable: five separate readings, none substituting for another -- D0 p
 
 ### nonclaims
 (1) WAS blocked pending chief wiring `GT_DIAG_MULTI_OBJECT_WIRING`; landed R202 (9b6zl6), see server args above -- kept as history, not deleted, per queue rule. (2) Does not itself produce the required pre-human byte-diff proof. (3) Bundles five readings into one boot on the owner's own instruction; each stays independently reported. (4) D2 here is a byte-identical repeat of D0, NOT the GT-032 alternate-faction-value object the original order's table named -- that needs a value with provenance RE has not produced yet. (5) Does not test the player's own orange name (ADDENDUM 19:05 excludes it). (6) Does not decide the cause of any colour observed -- RE-067 only. (7) City-center placement is diagnostic only, not a real field-placement claim. (8) D1b's gate is only as good as whatever session state the eventual wiring actually tracks -- if it tracks nothing, the wiring reply must say so. (9) `DIAG_CENTER_Z` (2231.17) is a nearest-neighbour estimate from `population.py`'s own census (~931 units away), not a terrain query at this exact point -- objects rendering mid-air/underground is itself a result to record, not a reason to abort silently. (10) ~~DOUBLY BLOCKED as of ADDENDUM 20:18 (+07:00, same day, landed after this ticket was drafted): the owner named Mountain Deer (MOBS n_ID 27) as the body for all five objects, superseding this round's Jungle Big Tiger (template 60) pick -- Mountain Deer needs a fresh mine (not in bg0001's roster) and a new `mob_death.WIDENING_RULINGS` entry (template 27 not covered by the existing bg0001 ruling). Next LANE-B round's work; do not boot this ticket against the current module without that swap landing first.~~ DONE, the LANE-B round after this one (PANYA-DECISION 2026-08-27T20:10+07:00 "M1-P" item 3): Mountain Deer's row is hand-mined (it is not a member of ANY generated roster, bg0001's or the newly-mined Bg0002's -- both mining runs exclude template 27 on the same outfit-ambiguity ground) and `mob_death.WIDENING_RULINGS` carries a dedicated entry for template 27. Still BLOCKED-ON-WIRING for the unrelated reason nonclaim (1) already names. (11) THE SWAP TRADES AWAY PART OF ADDENDUM 19:05's ORIGINAL JUSTIFICATION FOR AN AGGRO MONSTER: Mountain Deer's own `n_AI_WANDER` (16) maps to `n_AGGRO` 0 in `field_mob_ai_tables.AI_WANDER_ROWS` -- it is NOT an aggro monster, unlike the Jungle Big Tiger pick it replaced (`n_AI_WANDER` 11, `n_AGGRO` 1200). It still grants EXP (`f_RATIO_EXP` 1.0, same contrast this ticket's original criterion used). The owner's later, more specific ADDENDUM 20:18 instruction is followed as given rather than re-argued; this is recorded so a reader of "unmistakably born as a monster" (ADDENDUM 19:05's own phrase) knows which half of that phrase the final body actually satisfies. (12) NEW R202: D1b (step 7 above) has NO death handling this round -- nothing in this codebase tracks "has this client already been sent a TargetVital for this identity", so `dead_only_schedule`'s refusal is never bypassed with a guessed `target_vital_seen=True` (see `diag_multi_object_wiring.D1B_UNWIRED_REASON`). Step 7 will still show a result (photo it as instructed) but expect NO dying/dead frames from the server for D1b specifically -- the client's own local reaction (if any) to a target reaching 0 HP with no server death frames IS itself the reading this object was built to produce, not a wiring bug to report. A follow-up CORE-REQUEST (a per-session set of TargetVital'd identities) would be needed to answer D1b's original question with a real "yes it was sent" rather than this negative result.
+
+### result
+(tester fills this in)
+
+
+---
+
+## GT-107-R3 GM-001-R3 LOGIN-STATE-VISUAL-PROBE-003: after RE-113 (trailing change-mask byte) + CORE-REQUEST-020 (field_0x0b_second=1) both landed on main, does a real client now accept GM_UpdateGMStateVital cleanly, and does BT_GM actually appear  [PENDING]
+
+> เลขใบ: reuses GT-107's number with `-R3` (house precedent: `GT-030-R3`), not a fresh draw from the
+> shared counter -- grep confirmed 2026-08-28: `GT-107-R3` = 0 hits repo-wide including `archive/`.
+> Highest bare number in the shared counter stays `114` (`GT-114`), unaffected. Opened by LANE-GM round
+> `3a0tly` per `notes_to_chief/20260827_2305_KA1A-NUDGE-idle-lanes-GM-R3-byte-proof-A-map-window-RE-chief-DIAG-wiring.md`.
+> GT-107's own header corrected same round from stale `[PENDING]` to its real negative result.
+
+### source (links only -- see cited files for full detail, not re-derived here)
+- RE-113 (round `fmgvbx`, CLOSED PASS/DONE): fixed GT-107's error 28317 -- `gm/state_wire.py` now calls
+  `legacy.make_runtime_vitals()` (plural), which appends the trailing change-mask byte the singular helper
+  omitted. `rounds/GM_20260827_1948_re113-trailing-mask-fix-core-request-020-mailbox.md`.
+- CORE-REQUEST-020 (confirmed on main): `field_0x0b_second` 0->1 at the real call site, per RE-089/RE-104's
+  proof that wire `+0x15==1` gates `BT_GM` visibility. `notes_to_chief/20260827_2014_CHIEF-REPLY-CORE-REQUEST-020-bt-gm-field-wired.md`.
+- Headless proof, driven through the real dispatcher:
+  `tests/test_gm_login_state_guard.py::GmLoginStateGuardTests::test_the_re113_plus_core_request_020_frame_matches_a_literal_hex_tail`
+  asserts the frame tail equals `12 19 5A 0B 00 0B 00 0B 01 14 00 00 00 00 0B 00` byte-for-byte. 235/235
+  green (LANE-GM round `3a0tly`).
+- Account: reuses GT-107's own ด่าน 0 resolution (`localtest`), not reopened here --
+  `notes_to_chief/20260827_1745_GT107-RESULT-NEGATIVE-*.md`.
+- 🔴 **Never fired at a real client.** GT-107 already proved headless-correct is not sufficient (it hit
+  28317 despite RE-105's version-0 fix passing). This entry is the only remaining way to learn if this
+  combination reaches a real client cleanly.
+
+### 🔴 scope
+Login-state frame + `BT_GM` visibility at Port Royal (scene 1) ONLY. **Do NOT combine with `GT-110`**
+(login-scene override to Bg0002) in the same session -- two variables in one sitting can't be attributed.
+Run `GT-110` as its own later session if wanted.
+
+### procedure -- unchanged from GT-107, follow that entry's ด่าน 0/1/2, db backup, and server-args blocks
+verbatim (same repo state gates, same `localtest` config-copy pattern, same green-boot resolver). ด่าน 2
+delta to grep on top of GT-107's own list: add
+`git grep -n "make_runtime_vitals" <SHA> -- src/pirateforce_foundation/gm/state_wire.py` and
+`git grep -n "test_the_re113_plus_core_request_020_frame_matches_a_literal_hex_tail" <SHA> -- tests/test_gm_login_state_guard.py`
+-- both must return a line, or **BLOCKED**.
+
+### steps -- delta from GT-107 only
+Steps 1-2 (boot, login) identical to GT-107. **Step 3 is new:** watch 10s after load clears for the old
+modal (23065) or the new one (28317) -- either recurring means stop here and write a RESULT like
+GT-101/GT-107, not a failure of this entry. No modal -> continue as GT-107's steps 4/6/7/8 (HUD check,
+NO-CRASH camera drag, console watch, teardown), **plus** a new step 5: search the notification/system UI
+for `BT_GM` (up to 3 min), and if found, click through to panel `GMUI_BASIC` (`Radiobutton_Message` +
+`TextBox_Message`, Enter sends `0x51E9` per RE-091) -- photograph before/after.
+
+🔮 predicted tail bytes (unproven, a wrong prediction is a finding not a failure): GT-107 measured
+`... 12 19 5A 0B 00 0B 00 0B 00 14 00 00 00 00`; this round predicts `0B 00`->`0B 01` (second field) plus
+one new trailing `0B 00` (RE-113's byte): `... 12 19 5A 0B 00 0B 00 0B 01 14 00 00 00 00 0B 00`.
+
+### pass criteria (two layers, never mixed)
+wire/DB: `[G>] GM_UPDATE_STATE_AFTER_LOGIN (N bytes)` once, no `gm_account_lookup_failed_*`, no
+`[G!] game socket closed/reset` within 60s of T0 (GT-107's own failure signature). Hex dump (if console
+shows one) matches the 🔮 prediction. DB/sha256 checks same as GT-107.
+
+client-observable (human only, never inferred from console) -- three non-ranked outcomes, each a complete
+result:
+  (a) strong positive: no modal AND `BT_GM` found + clickable through to `GMUI_BASIC` without error.
+  (b) real negative, not a failure: no modal, login fine, button still not found after a reasonable search
+      -- list everywhere checked.
+  (c) modal recurs (23065, 28317, or other): write up as a RESULT like GT-101/GT-107, stop.
+Name-label colours: one line per label per full-res still ("none" if none), same colour rule as every
+other entry (RE-067 stays open, no cause inferred).
+
+### nonclaims
+Does not test GM commands (`0x51E9` payload, GT-103's scope) or the login-scene override (`GT-110`, see
+scope above). Only tests account `localtest`. No reconnect/relogin. Does not assign semantics to the three
+opaque state fields beyond the proven `+0x15==1` gate value (RE-089's ban on offset/width inference stays
+in force). Headless 235/235 is cited evidence, not reproduced by the human tester. If ด่าน 0/1/2 don't
+clear, the whole entry is BLOCKED, not NO-RESULT/FAIL.
 
 ### result
 (tester fills this in)

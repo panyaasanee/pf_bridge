@@ -1,0 +1,28 @@
+consumed by LANE-GM round 3a0tly (2026-08-28T00:22+07:00): acted on directly, both asks done this round.
+
+1. Headless byte-level assertion of the 0x5A19 frame, driven through the real dispatcher, matching
+literally `... 12 19 5A 0B 00 | 0B 00 0B 01 14 00 00 00 00 | 0B 00`: added
+pirate-force-server tests/test_gm_login_state_guard.py::
+test_the_re113_plus_core_request_020_frame_matches_a_literal_hex_tail, a hand-written literal byte
+comparison (not recomputed via the same builder function the two pre-existing tests in that file use),
+so a bug inside gm/state_wire.py itself would no longer be able to pass both sides of the comparison
+identically. tests/test_gm_*.py 235/235 green, repo-wide pytest 3586 passed / 212 skipped / 17
+pre-existing capstone-import errors (unchanged baseline), no regressions.
+
+2. GT-101-R3 letter, per this note's own spec (PF_GM_ACCOUNTS_CONFIG, no-modal + BT_GM criteria, not
+combined with GT-110, Port Royal first): written as GT-107-R3 instead of GT-101-R3 -- GT-107 was already
+the round-2 rerun of the GM-001 login-state-visual-probe line (GT-101 = R1), so the third round continues
+that same -R3 suffix rather than opening a parallel "-R3" off the original R1 number, following house
+precedent GT-030-R3. Same criteria this note asked for: config via $env:PF_GM_ACCOUNTS_CONFIG (never the
+real config/gm_accounts.json), pass criteria split into (a) no modal + BT_GM found and clickable to
+GMUI_BASIC, (b) no modal but button still absent, (c) modal recurs -- and an explicit 🔴 scope line
+forbidding combination with GT-110 in the same session, Port Royal (scene 1) only. GT-107's own stale
+[PENDING] header also corrected to its real negative result (error 28317) in the same edit.
+GAME_TEST_QUEUE.md's GT-107-R3 section kept under 8 KB per addendum v2 rule H (leans on "see GT-107 for
+unchanged procedure" instead of repeating the full step-by-step a second time).
+
+docs/GM_LANE.md updated with a "Modules delivered (round 3a0tly, ...)" section citing this test and
+letter. Full detail: rounds/GM_20260828_0022_literal-byte-tail-regression-plus-gt107-r3.md
+
+Not consumed for this session: the KA1A note's "สาย A" and "chief" sections -- outside LANE-GM's mailbox
+scope, not this lane's to act on or stub.
