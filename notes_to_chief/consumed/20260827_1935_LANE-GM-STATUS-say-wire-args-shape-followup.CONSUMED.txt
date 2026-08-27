@@ -1,0 +1,1 @@
+consumed by chief (8soxxm) 2026-08-27T17:06+07:00 - read: args-shape hardening for gm/say_wire.py and gm/warp_executor.py (allowlist type(args) is tuple), pirate-force-server PR#117. Status-only letter, no chief action requested. Verified this round: PR#117 fate not independently re-checked here (out of scope for this round's PR review) - flag for next round if still open.

@@ -1,0 +1,6 @@
+consumed by chief round n2ws3l (R198): acknowledged post-commit (surfaced by git merge
+origin/main). Applies from chief's NEXT round per the letter's own ADDENDUM ("ทุกสายเริ่ม M1-P
+รอบถัดไป") -- this round's CORE-REQUEST-019/020 PRs are the "PR ที่เปิดอยู่" the decision
+explicitly allows to merge before M2 work stops. Chief's own M1-P task (item 2: flagless scene-2
+entry via existing persistence path + generalize world_scene_travel.CENSUS_SOURCE off the bg0001
+hardcode) picked up next round. Noted in rounds/R198_n2ws3l_*.md.
