@@ -38,3 +38,7 @@
 
 ## หลักฐาน
 คอนโซล L163-165, 255-366, 1474 · outbox\1311_m1p_hold_and_resolve.utf8.txt (pytest 8 passed) · outbox\1312_m1p_boot_video.utf8.txt (SEED_BEFORE/AFTER) · outbox\1313_m1p_teardown_video.out.txt (PASS) · evidence_screens\M1P_* + REF_OURS_mapwindow_* / REF_OURS_worldmap_* (จากรอบ ad-hoc กะ1-B 22:57-23:00) · LOCK_GAME release 1314
+
+## ADDENDUM 02:15 — ภาพเซิร์ฟเวอร์เดิมจากเจ้าของ 2 ใบ (evidence_screens\REF_original_server_PrisonExile_*.png) ยืนยันช่องว่างข้อ 3/4/5
+- **REF Mirage reel**: "Mirage reel" เป็น**วัตถุเควส** (ป้ายชื่อเหลือง + ไอคอน "?" ลอยเหนือหัว) ตั้งอยู่หน้าเต็นท์น้ำเงินข้าง **Mo Yuzi / Naval Communications Bureau** (n_ID 39 ที่ MOBSET_39 — เต็นท์ที่เจ้าของถ่ายในรอบเรา) · ในรายการเควส "การติดต่อจากคุก → ตอบกลับ: Mirage reel" ⇒ สาย A/RE หา n_ID ของ Mirage reel ฉาก 2 จาก QUEST (n_SCENE=2) ที่อ้าง "Mirage reel" ผ่าน n_VARI/QUESTTALK แล้วดูว่า placement อยู่ชุดไหนของ Bg0002 (ผู้สมัคร: ชุด 101-104 ที่ยัง UNKNOWN หรือ spawn จากเควส) · หมายเหตุ: ในภาพเดียวกัน ป้ายผู้เล่นอื่นเป็นสีเขียว ป้าย NPC = title ฟ้า + ชื่อเหลือง ตามกฎเจ้าของ
+- **REF ฝูงกวาง**: Mountain Deer อย่างน้อย 7 ตัวในเฟรมเดียว ชื่อ**ส้ม**ทุกตัว **ขนาดต่างกันชัด** (ตัวหน้าใหญ่กว่าตัวหลัง ~2 เท่า) · NPC "Drunken Captain / Legend Jack" มีไอคอน "!" (มีเควสให้รับ) + "Legend Jack Men" ชื่อเหลือง · ผู้เล่นเอง "PopPyZra55" ชื่อ**ขาว** ⇒ ข้อ 3 (สี) และข้อ 4 (จำนวน 4 ตัวของเราเทียบ 7+ และ scale) ยืนยันด้วยภาพ · **ไอคอนเควส (!/?) เหนือหัว NPC** เป็นอีกสิ่งที่เรายังไม่ส่ง — เข้า Attr completeness (ใบ 0200)
