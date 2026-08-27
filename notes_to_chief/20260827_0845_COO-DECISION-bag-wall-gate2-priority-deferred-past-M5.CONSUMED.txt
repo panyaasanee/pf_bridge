@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: Decision to defer gate-2 backpack-drift design past M5, refocusing chief on combat_loot/combat_pickup wiring instead - no code change required by this letter itself, and chief followed the redirected focus.

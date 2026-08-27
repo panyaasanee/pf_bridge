@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: Initially group-closed without follow-through by CHIEF-CLOSE 20260827_0900, then forced by PANYA-CHASE 20260827_0915. Lane A's file-based crosswalk work (MOBS 156 = Columbus, quest 3021) was carried out and pinned with tests in rounds/A_20260827_1052_columbus_m2_identity_correction.md, later reconfirmed by PANYA-DECISION 20260827_0925/0950.

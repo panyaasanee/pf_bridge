@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: Interim rule adopted lane-wide. Chief's branch-protection task surfaced as CHIEF-ASK-COO 20260827_0230 (no tool surface to set required-status-check), answered by COO-DECISION 20260827_0246 (queued for owner, not blocking).

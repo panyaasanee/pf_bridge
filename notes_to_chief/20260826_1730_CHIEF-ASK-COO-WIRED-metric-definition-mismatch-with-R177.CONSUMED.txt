@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: Answered directly by COO-DECISION 20260826_1743 (next letter in mailbox), which locked WIRED to definition (ก) - map 1:1 to the 10 ORG-AUDIT lanes, corrected value 6/10 (not R177's 7/10), and voided R177's raw-import-count method.

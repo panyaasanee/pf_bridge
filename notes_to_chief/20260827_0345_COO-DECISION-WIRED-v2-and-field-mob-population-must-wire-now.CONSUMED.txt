@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: Actioned in R187 (rounds/R187_keen-pasteur-543ds8_...) - investigated build_field_mob_population, found hostile arrival census was already wired since commit 3036b03; WIRED v2 definition and console-gate rule cascaded into AGENTS.md as ordered.

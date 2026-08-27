@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: Answered Lane A's 03:35 ask (rounds/A_20260827_0335_re095_capability_built_then_retracted...) which had self-retracted world_npc_conversation.py over a guard-name collision; this COO ruling authorized a narrow re-grade so the module could be committed, feeding into later Columbus/quest3021 dispatch work (R192).

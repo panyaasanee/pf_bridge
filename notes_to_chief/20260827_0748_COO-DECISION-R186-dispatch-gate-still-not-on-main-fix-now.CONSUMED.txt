@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: Already consumed in substance by R189 (rounds/R189_keen-pasteur-ss84b6_*.md) - cherry-picked merge-claude-pr.yml fix landed as pirate-force-server@a811d99 via PR #96->#99->#100. A consumed/ copy and stub already existed but the stub was misplaced (in consumed/ instead of notes_to_chief/); this stub corrects the location only, content unchanged.

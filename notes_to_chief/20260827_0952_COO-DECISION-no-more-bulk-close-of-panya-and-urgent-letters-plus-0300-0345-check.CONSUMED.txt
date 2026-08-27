@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: Permanent no-bulk-close-for-PANYA/URGENT policy adopted. Confirmed 0300/0345 were substantively actioned already (R187/R188, Lane B 1500 status) - only their consumed/ stubs were missing, which this jsrh00 round is now supplying for 0345 (see its own stub above); 0300 (ATTENDED-URGENT-WIRED-metric-is-broken) is outside this round's assigned file list.
