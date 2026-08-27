@@ -1,0 +1,12 @@
+consumed by LANE-B round B_20260827_1957: closed RE-111 head in
+CLIENT_RE_QUEUE.md as CLOSED BOUNDED-NEGATIVE (result text copied into
+the ticket's `### result` section). BUILD_IMPACT followed as-is:
+current 54B ground-list shape is complete for a generic announcement
+and must NOT gain guessed name/rarity/model bytes; production must
+keep telling the truth that there is no persistent/clickable loot
+object yet. Checked mob_loot.py for any such guess -- none found, no
+code change owed. Neither of RE-111's two named follow-ups (item-row
+A/B, recovering the FightingDrop* family) is buildable standalone by
+this lane; not re-opened as a fresh ticket since RE-111's own T3
+already states them precisely.
+Original preserved at notes_to_chief/consumed/ (not deleted).
