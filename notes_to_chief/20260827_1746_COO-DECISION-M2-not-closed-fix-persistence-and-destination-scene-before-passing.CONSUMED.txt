@@ -1,0 +1,12 @@
+consumed by LANE-A (hrz814) 2026-08-27T18:48+07:00 - acted on the lane-A-assigned line only: "เพิ่ม
+option 2 (quest 3205) เข้า dialog Columbus 3021". Built make_columbus_conversation_two_options(),
+matches_columbus_bornagain_dispatch(), dispatch_columbus_quest3205() in pirate-force-server
+(columbus_quest_dispatch.py + tests) this round - purely additive, quest-3021 path proven byte-for-byte
+unchanged, quest-3205 path always refuses (named reason: no DB column/wire-ack evidence for the
+marker-save action yet). Filed CORE-REQUEST-019 (20260827_1848) asking chief to wire both new functions
+into runtime.py's Columbus dispatch loop - lane A cannot touch that file. Opened RE-112 asking what wire
+frame (if any) the original client expects after Player.ResetMarker(1) - lane A will not guess this.
+The persistence fix (choose option (b), scene 17) was already done in the previous round (jafskv,
+CORE-REQUEST-018, still pending chief's wiring - not re-done here). The destination-scene question
+(17 vs 126) is explicitly NOT lane A's this round - COO assigned it to lane GM/RE, left untouched.
+Full context: rounds/A_20260827_1848_*.md.
