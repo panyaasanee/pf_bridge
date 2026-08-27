@@ -137,7 +137,7 @@ decoder ฝั่ง server ยืนบน W codec ที่ commit แล้�
 ## 🆕🔬 RE-092 REMOTE-ACTOR-LIST-CONSUMER-REPLACE-OR-MERGE-001 [STATIC-ON-BRIDGE]: **ไคลเอนต์อ่านคอลเลกชัน `make_runtime_remote_actors([entry])` ... -- archived 20260827 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md`)
 ## 🆕🔬 RE-093 BG0001-SERVICE-NPC-PLACEMENT-001 [STATIC-ON-BRIDGE]: **ถอดรหัส placement block ที่สองของ `bg0001.npc` (นอกเหนือจาก "Mob_Set" ที่ d... -- archived 20260827 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md`)
 ## 🆕🔬 RE-094 NPCCONVERSATION-OP1-GENERIC-SEMANTICS-001 [STATIC-ON-BRIDGE]: **ถอดรหัส op1/op2 ของ `NPCConversation` เป็นกลไกทั่วไป แยกจาก quest-... -- archived 20260827 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md`)
-## 🆕🔬 RE-095 NPCCONVERSATION-COLUMBUS-QUESTID-CROSSWALK-001 [STATIC-ON-BRIDGE]: **หา quest id / nested descriptor (u16 `+0x10`, u8 `+0x12`) ที่ NPC Columbus ใช้จริงใน `NPCConversation`, แยกจาก quest `3020` (actor `0x2001`/P0 singleton) ที่เซิร์ฟเวอร์ hardcode อยู่ตอนนี้**  [🟢 **OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-27 ~02:2x (+07:00) ต่อยอดจากผล `RE-094`**]
+## 🆕🔬 RE-095 NPCCONVERSATION-COLUMBUS-QUESTID-CROSSWALK-001 [STATIC-ON-BRIDGE]: **หา quest id / nested descriptor (u16 `+0x10`, u8 `+0x12`) ที่ NPC Columbus ใช้จริงใน `NPCConversation`, แยกจาก quest `3020` (actor `0x2001`/P0 singleton) ที่เซิร์ฟเวอร์ hardcode อยู่ตอนนี้**  [🔴 **CLOSED superseded-in-applicability — ปิดโดย LANE-A (สาย A · WORLD) รอบ `kqrlhr` 2026-08-27 ~14:2x (+07:00), ดูผลด้านล่าง**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-095`/`RE-095` = **0 hit ทั้งสองไฟล์** ⇒ **ใบนี้คือ `RE-095`** · เลขว่างถัดไปหลังใบนี้ = 096
 > 🔴 ใบ `RE-085`-`RE-094` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
@@ -185,11 +185,32 @@ placement ของ Columbus ใน block เดียวของ `bg0001`) ใ
 ตอบ T0/T1 ด้วยหลักฐาน (quest id ที่ผูกกับ Columbus จริง) **หรือ** bounded negative ว่า gamedata/ไคลเอนต์ไม่มี
 crosswalk นี้ ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
 
-### result (ยังไม่มี — ใบเปิดอยู่)
+### result — CLOSED superseded-in-applicability (ไม่ใช่ผิด — คนละ NPC)
+
+รายละเอียดเต็ม: `notes_to_chief/20260827_0310_RE-095-RESULT-COLUMBUS-QUEST-3023.md`. RE runner ตอบ T0/T1
+ด้วยหลักฐานจริง: `MOBS.n_ID=36` (`s_NAME=Columbus`, `s_TITLE=Marine Transport Station`) ใช้ quest `3023`
+(`Q_TELEPORT1`, `n_VARI_2=19` -> scene 19/`Bg1003`) — คำตอบระดับ static/gamedata ถูกต้องและยืนอยู่จริง
+
+**แต่ใบนี้ตอบผิด NPC สำหรับ Port Royal**: เจ้าของยืนยันในรอบถัดมา (`20260827_0925`/`0950_PANYA-DECISION`)
+ว่า Columbus ตัวจริงของ Port Royal คือ `MOBS.n_ID=156` (bg0001 placement index 1) ไม่ใช่ `n_ID=36` — ทั้งสอง
+แถวชื่อ "Columbus" เหมือนกันทุกตัวอักษร (`s_NAME`/`s_TITLE`/`s_ROLE_TALK=COLUMBUS_0` เหมือนกันหมด) เป็น NPC
+คนละตัวที่ใช้ชื่อ/โมเดล/เสียงซ้ำกัน (ปรากฏการณ์ทั่วไปของเกมนี้ — ดู `world_travel_gates_001.json`) `MOBS 156`
+ใช้ quest `3021` (`n_VARI_2=17` -> scene 17/`Bg1001`) ซึ่งเป็นคนละเควสต์คนละฉากกับที่ใบนี้ปิดไว้
+
+**แก้แล้วที่ไหน**: การแก้ไขนี้เข้า `pirate-force-server` ตั้งแต่ PR `#107` (round `8pfksm`, merge `b35384a3`)
+— `scenarios/world_travel_gates_001.json` และ `scenarios/world_scene_registry_001.json` pin ทั้งสองแถวไว้
+ชัดเจนพร้อม cross-reference ("Quest 3023 is real but is MOBS n_ID 36's quest ... not Port Royal's"),
+`columbus_quest_dispatch.py` (`CORE-REQUEST-014`) และ `tests/test_world_columbus_m2_crosswalk.py` ผูกกับ
+`3021`/`156`/scene 17 เท่านั้น — โค้ดที่ส่งจริงไม่เคยใช้ `3023` ของใบนี้
+
+BUILD_IMPACT: ไม่มี — ข้อเท็จจริงของ RE-095 (MOBS 36 -> quest 3023 -> scene 19) ยังคงจริงและยัง pin ไว้ใน
+`world_scene_registry_001.json`/`world_travel_gates_001.json` เป็นบันทึกแยกแยะ "อย่าใช้เควสต์นี้กับ Columbus
+ตัวจริง" แต่ไม่มีอะไรใน `src/pirateforce_foundation/` ที่เคยพึ่งค่านี้ให้ต้องแก้ย้อนหลัง — สาย A ปิดใบนี้เป็น
+mailbox consumption เท่านั้น ไม่มีโค้ดเปลี่ยนจากผลใบนี้โดยตรง (โค้ดแก้ไปแล้วตั้งแต่ PR #107 ก่อนหน้านี้)
 
 ---
 
-## 🆕🔬 RE-096 VEHICLE-ROW-SEASCENE-CROSSWALK-001 [STATIC-ON-BRIDGE]: **หา `VEHICLE` table row + ความหมายของ `CVehicleVital.+0x18` qword ที่ผูกกับกลุ่มฉากทะเล (`Bg1001`-`Bg1007`, `SCENE_TYPE=4`)**  [🟢 **OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-27 ~02:2x (+07:00) ต่อยอดจากผล `RE-085`**]
+## 🆕🔬 RE-096 VEHICLE-ROW-SEASCENE-CROSSWALK-001 [STATIC-ON-BRIDGE]: **หา `VEHICLE` table row + ความหมายของ `CVehicleVital.+0x18` qword ที่ผูกกับกลุ่มฉากทะเล (`Bg1001`-`Bg1007`, `SCENE_TYPE=4`)**  [🔴 **CLOSED bounded-negative — ปิดโดย LANE-A (สาย A · WORLD) รอบ `kqrlhr` 2026-08-27 ~14:2x (+07:00), ดูผลด้านล่าง**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-096`/`RE-096` = **0 hit ทั้งสองไฟล์** ⇒ **ใบนี้คือ `RE-096`** · เลขว่างถัดไปหลังใบนี้ = 097
 > 🔴 ใบ `RE-085`-`RE-095` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
@@ -227,13 +248,35 @@ crosswalk จริงจาก sea-scene/quest response ไป vehicle row แ�
 ตอบ T0/T1 ด้วยหลักฐาน (vehicle row + ความหมาย `+0x18`) **หรือ** bounded negative ว่า gamedata/ไคลเอนต์ไม่มี
 crosswalk นี้ ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
 
-### result (ยังไม่มี — ใบเปิดอยู่)
+### result — CLOSED bounded negative, T0/T1 negative, T2 rider negative
+
+รายละเอียดเต็ม: `notes_to_chief/20260827_0509_RE-096-RESULT-NO-VEHICLE-SEASCENE-CROSSWALK.md`. สรุป:
+
+- **T0** [bounded negative]: ตาราง `VEHICLE` จริงมี 79 แถวแต่มีแค่ `n_ID`/`n_PROPERTIES`/`n_SEATS`/
+  `s_NAMEBOARD`/`n_SEAT1..6` — ไม่มี model/type/speed/scene column ตามที่จ็อบคาดไว้เลย ข้อมูลเรือจริง
+  (`n_SHIP_VELOCITY`, `s_OUTFIT`, ชื่อเรือ) อยู่ใน **ตาราง `SHIP` แยกต่างหาก** (17 แถว) ที่ไม่มี field ผูกกลับ
+  ไป `VEHICLE` หรือไป sea scene family เลย id ที่ซ้ำกันบังเอิญระหว่างสองตาราง (`11,12,101,102,103`) ถูก
+  ตัดทิ้งตามกฎ ไม่ join จากเลขบังเอิญ
+- **T1** [bounded negative]: `CVehicleVital` handler `0x00710440` ถูก SHA-pin เป็น 5 ไบต์ `mov al,1; ret 4`
+  เท่านั้น — ไม่อ่าน/เขียน/lookup อะไรเลย capture ยัง `NOT_OBSERVED` ทั้งสองทิศทาง (0/0 เฟรม) จึงตั้งชื่อ
+  semantic ให้ qword `+0x18` ไม่ได้ (ไม่ใช่ vehicle id, model id หรืออื่นใด — ยังคง `UNKNOWN`)
+- **T2 rider** [bounded negative]: `SCENE_NAME` rows 17-23 (sea family) ไม่มี field อ้าง `VEHICLE`/`SHIP` ใดๆ
+
+**สิ่งที่ตัดทิ้งชัดเจน (ห้ามสับสนซ้ำ)**: `CGCVehicleModule`/`CVehicleAttr` (คนละ object จาก `CVehicleVital`)
+มี helper ที่สแกน `+0x18..+0x47` เพื่อเช็คว่าง — เลข offset `+0x18` ที่ตรงกันข้าม type **ไม่ใช่ crosswalk**
+
+BUILD_IMPACT: guard เชิงโครงสร้างสำหรับสาย A/เซิร์ฟเวอร์ — scene 19/`Bg1003` ≠ vehicle id, `VEHICLE` ≠ `SHIP`,
+`CVehicleVital.+0x18` ต้องคงชื่อ `UNKNOWN_QWORD` จนกว่าจะมี capture จริง `columbus_quest_dispatch.py`
+(chief, `CORE-REQUEST-014`) ใช้ผลนี้ตรงๆ อยู่แล้ว: `VEHICLE_BIND_REFUSED_NO_VEHICLE_ROW` ยังคง refuse
+เหมือนเดิม — ปิดใบนี้ไม่ปลดล็อกอะไร มันแค่ยืนยันว่าเพดาน static ถึงที่สุดแล้วจริง (COO-DECISION `20260827_1350`
+เร่งใบนี้เป็นลำดับสูงสุดของ RE runner ก่อน 20:00 — ปิดทันตามกำหนด) ทางเดียวที่เหลือคือ attended capture ของ
+`CVehicleVital` เฟรมจริง ไม่มีเส้นทาง static เพิ่มเติมในข้อมูลที่ commit ไว้
 
 ---
 
 ## 🆕🔬 RE-097 COLUMBUS-BG0001-PLACEMENT-IDENTITY-001 [STATIC-ON-BRIDGE]: **หา placement/actor identity ของ Columbus (`MOBS.n_ID=36`) ใน 149 plac... -- archived 20260827 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md`)
 ## 🆕🔬 RE-098 FIELD-MOB-DEFINITION-PAYLOAD-LEVEL-RANK-001 [STATIC-ON-BRIDGE]: **หา parser สำหรับ definition payload 16 ไบต์ต่อ `.npc` (`b5`/`b15... -- archived 20260827 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md`)
-## 🆕🔬 RE-100 SETNUMBER-99-101-SENTINEL-AND-ACTORMOVE-MULTIPOINT-001 [STATIC-ON-BRIDGE]: **เลขชุด `99`/`101+` ที่แทรกกลางลำดับ `.npc` มีความหมายพิเศษฝั่งไคลเอนต์ไหม + `CActorTask_ActorMove` (ผู้บริโภคที่ `RE-083` พิสูจน์แล้วสำหรับ `actor_type 2`) กินลิสต์ XYZ หลายจุดเป็นคิวได้จริงหรือรับได้แค่จุดเดียวต่อครั้ง**  [🟢 **OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-27 ~08:3x (+07:00) ตอบ `PANYA-ORDER 0440`**]
+## 🆕🔬 RE-100 SETNUMBER-99-101-SENTINEL-AND-ACTORMOVE-MULTIPOINT-001 [STATIC-ON-BRIDGE]: **เลขชุด `99`/`101+` ที่แทรกกลางลำดับ `.npc` มีความหมายพิเศษฝั่งไคลเอนต์ไหม + `CActorTask_ActorMove` (ผู้บริโภคที่ `RE-083` พิสูจน์แล้วสำหรับ `actor_type 2`) กินลิสต์ XYZ หลายจุดเป็นคิวได้จริงหรือรับได้แค่จุดเดียวต่อครั้ง**  [🔴 **CLOSED bounded-negative — ปิดโดย LANE-A (สาย A · WORLD) รอบ `kqrlhr` 2026-08-27 ~14:2x (+07:00), ดูผลด้านล่าง**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-099` มี **1 hit** ใน `GAME_TEST_QUEUE.md` (บรรทัด 7807, `GT-099 BACKPACK-LOAD-REFUSED-001`) — `RE-099` เองมี **0 hit** ทั้งสองไฟล์ แต่เลข `RE`/`GT` ใช้ตัวนับร่วมกัน (ห้ามแยกตัวนับ ตามกติกาเดิมของไฟล์นี้) ⇒ hit ฝั่ง `GT-099` พอแล้วที่จะทำให้ `099` ถูกจองไปแล้ว ⇒ ข้ามไปที่ `RE-100`/`GT-100` = **0 hit ทั้งคู่ ทั้งสองไฟล์** ⇒ **ใบนี้คือ `RE-100`** · เลขว่างถัดไปหลังใบนี้ = 101
 > 🔴 ใบ `RE-085`-`RE-098` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
@@ -283,42 +326,41 @@ negative แล้วปิด ไม่เดาต่อ · ไม่เปิ
 ตอบ T0-T3 ด้วยหลักฐาน (spans ที่ถอดครบ + คำตอบมี/ไม่มี branch หรือ multi-point field) **หรือ** bounded
 negative ครบทั้งสองคำถาม ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
 
-### result — CLOSED bounded negative, T0 cross-document only, T1/T2 negative, T3 moot
+> 🔧 **แก้ misplacement (Lane A, mailbox-consumption รอบ `kqrlhr`, 2026-08-27 ~14:2x +07:00):** placeholder
+> นี้เคยถูกเขียนทับด้วยผลของ `RE-102` (คนละใบ) ตั้งแต่รอบ `pvbj0u` — ย้ายเนื้อหานั้นไปไว้ใต้หัวใบ `RE-102`
+> เอง (ที่ถูกที่) แล้วในรอบนี้ ด้านล่างนี้คือผลจริงของ `RE-100`
 
-รายละเอียดเต็ม: `notes_to_chief/20260827_1339_RE-102-RESULT-BOUNDED-NEGATIVE-NO-STATIC-CALL-SITE.md`. สรุป:
+### result — CLOSED bounded negative, T1/T3 negative, T2 answered one-point
 
-- **T0** [STATIC, cross-document เท่านั้น — ไม่มี binary ให้ hash สดใน clone นี้]: `factpack_L1/MANIFEST.md:16`,
-  `RE-094-RESULT` (`0156`) และ `RE-095-RESULT` (`0310`) ทั้งสามอ้าง SHA เดียวกัน
-  (`9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`) — เอกสารสอดคล้องกัน แต่ไม่ใช่การ
-  hash ซ้ำ
-- **T1** [STATIC, bounded negative]: `external/PF_SERIALIZER_FIELDS.tsv` มีครบ 22 แถวของ `NPCConversation`
-  (`[0x00622F10,0x00623083)` + subcall `[0x00606890,0x006068E3)`) แถว `+0x10` (`W 6`, บรรทัด 1576) resolve
-  เป็น pointer chase ผ่าน array ที่ caller ส่งเข้ามา ไม่ใช่ literal คงที่ในตัว serializer เอง — ไม่มี call site
-  ระดับ static ที่ actor เจาะจงเขียน `3021` ตรงๆ (สอดคล้องกับที่ `RE-094` พิสูจน์ไว้แล้วว่า op1 เป็น dynamic
-  dispatch ไม่ใช่ขัดแย้งกัน)
-- **T2** [เพดาน — UNKNOWN]: ค่าที่เข้า serializer มาจาก UI record `+0x94` ที่ populate โดยโค้ดเหนือ serializer
-  นี้ (`RE-094`) — grep `+0x94`/giver ทั่ว `external/*.tsv` ทั้งหมด (`PF_SERIALIZER_FIELDS`,
-  `PF_PROTOCOL_REGISTRY`, `PF_DATA_EVIDENCE`, `PF_RUNTIME_CLASSMAP`, `PF_INPUT_INVENTORY`,
-  `PF_FIELD_VALIDATION`) = 0 hit ทั้งหมด ต้องใช้ disassembly สดของ image (ไม่มีใน clone นี้) หรือ attended
-  wire capture จริง ไม่มีทางใดพร้อมใช้ในรอบนี้
-- **ปัญหาซ้อนอีกชั้น**: สมมติฐานตั้งต้นของ T1/T2 เอง ("placement index 1 = MOBS 156") ก็ไม่ใช่ static field
-  ที่ decode ได้ — `bg0001.placements.tsv` แถว 1 มีแค่ `template_ids=2` (`Mob_Set_02`), และ `RE-093` เองห้าม
-  join ordinal ไปเป็น MOBS n_ID ตรงๆ ไว้แล้ว การผูก index 1 → MOBS 156 อยู่ที่ชั้น testimony/client-observable
-  (คำเจ้าของจากเซสชัน attended `0925`→`0950`) ไม่ใช่ชั้น wire/code ที่ T1/T2 ถามหา — ต่อให้เจอ call site ก็ปิด
-  loop ไม่ได้โดยไม่มี identity proof อิสระที่ชั้นนี้
-- **T3**: ไม่ทำ — moot เมื่อ T1/T2 เป็น bounded negative แล้ว
+รายละเอียดเต็ม: `notes_to_chief/20260827_0918_RE-100-RESULT-NO-SENTINEL-BRANCH-ACTORMOVE-ONE-POINT.md`.
+image SHA `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623` ตรงกับ `RE-083`. สรุป:
 
-**ทางเดียวที่จะยกระดับต่อ:** `GT-102` (`GAME_TEST_QUEUE.md:4094`, PENDING) — คลิก Columbus ตัวจริงในไคลเอนต์
-จริงแล้วบันทึก wire capture เท่านั้น ไม่มีเส้นทาง static เพิ่มเติมในข้อมูลที่ commit ไว้แล้ว
+- **T1** [bounded negative]: recursive CFG ของ definition loader (`0x00439E90`) + scene consumer
+  (`0x0043A9D0`) + template dispatch (`0x0043A6F0`) ที่ผูกกันจริงครบ 6 span ไม่มี `cmp/test/sub` เทียบค่า
+  `99`, `101` หรือขอบรอบนั้นเลยสักจุด — loader อ่าน payload `u32@+1` เข้า definition object `+0x30` แล้วส่ง
+  ต่อ generic dispatch โดยไม่มี branch sentinel คั่นระหว่างทาง raw `bg0001.npc` (positive control) มีค่า `99`
+  และ `101..113` จริง จึงเป็น control ที่พิสูจน์ว่าค่าผ่าน loader เดียวกัน ไม่ใช่ path คนละเส้น
+- **T2** [ตอบชัด — one point]: `CActorTask_ActorMove` เป็น object ขนาด `0x58`; destination เดียวอยู่ที่
+  `task+0x40/+0x44/+0x48` เท่านั้น `+0x4C` เป็น scalar แยก และ `+0x50..+0x55` เป็น byte flags ไม่มีพื้นที่
+  เหลือสำหรับจุดที่สอง constructor `0x00472A20` + updater `0x004799C0`/`0x00479C00` (span เดิมของ `RE-083`)
+  อ่าน/เขียนสูงสุดแค่ `+0x55`
+- **T3** [bounded negative]: extra-triple codec (`0x00439450`) อ่าน `u16 count` + `f32 x/y/z` เป็น list จริง
+  (ไม่ใช่ decoder artifact) แต่ recursive CFG ของ codec/placement-reader/loader/dispatch/scene-consumer ไม่มี
+  call ไป `CActorTask_ActorMove` ctor เลย เส้นเดียวที่พิสูจน์ว่าสร้าง task ซ้ำคือ `CNetActor` network-target
+  consumer (`0x00459160`) ซึ่งรับจุดใหม่ทีละจุดจากภายนอก ไม่ใช่คิวที่ task ถือเอง
 
-**ไม่ทับ/ไม่ขัด:** `columbus_quest_dispatch.py` (chief, `CORE-REQUEST-014`) — ช่องว่างสองจุดของมัน (scene-17
-spawn = `RE-103`, vehicle-bind payload = `RE-096`) เป็นทิศทาง **outbound** (server ตอบอะไร) คนละทิศกับ RE-102
-ที่ถาม **inbound** (client ส่ง 3021 จริงไหม) — ปิด RE-102 เป็น negative ไม่ทำให้สอง gate นั้นเปลี่ยนสถานะ
+คำว่า BOUNDED สำคัญทั้งสามข้อ: ไม่ใช่คำกล่าวว่า `99/101+`/extra-triple ไม่มีความหมายทั่วทั้ง image — คือไม่พบ
+ในเส้นทาง native ที่ระบุและถอดด้วย recursive CFG ครบเท่านั้น
 
-BUILD_IMPACT: ไม่มีของให้ wire เพิ่มใน `src/pirateforce_foundation/` จากใบนี้ — ระดับความเชื่อมั่นของ
-`3021`→Columbus ยังคงเป็น `[STATIC]` เท่าเดิม (ไม่ได้ตกลงหรือขึ้นระดับ) `columbus_quest_dispatch.py` คงสถานะ
-fail-closed เดิมต่อไปจนกว่า `RE-096`/`RE-103` หรือ `GT-102` จะปิดได้จริง — สาย A ไม่มีอะไรให้สร้างใน `src/`
-จากผลใบนี้รอบนี้เช่นกัน
+**Action taken ต่อ `PANYA-CHASE 0915`** (จากผลเดิม): RE runner ยืนยันเองว่า RE-100 **ไม่ครอบ** งาน identity
+crosswalk ของ placement index → MOBS.n_ID / Hields / Sase / Columbus ที่ `PANYA-CHASE 0915` และ `0310` §①
+ถาม — ใบนี้ตอบเฉพาะ 99/101+ native handling กับ ActorMove multi-point เท่านั้น
+
+BUILD_IMPACT: ไม่มีโมดูลใดใน `src/pirateforce_foundation/` ทำ multi-point movement หรือแยก set-number
+99/101+ อยู่ตอนนี้ (ตรวจแล้วรอบนี้ — `grep -rn "ActorMove\|multipoint" src/` ว่างเปล่านอกเหนือ docstring ของ
+`RE-100` เอง) จึงไม่มีอะไรให้แก้ใน `src/` จากผลใบนี้โดยตรง หากอนาคตมีเลนเดินหลายจุด (เช่น patrol NPC) ต้องส่ง
+target ทีละจุดจากฝั่งเซิร์ฟเวอร์เอง ตามที่ T2/T3 พิสูจน์ไว้ — ห้ามผูกเลขชุด 99/101+ เป็น special class จาก
+หลักฐานใบนี้
 
 ---
 
@@ -487,5 +529,112 @@ wire-confirmed ② ไม่ตัดสินโครงสร้าง `src/p
 ### เกณฑ์จบใบ
 ตอบ T0-T2 ด้วยหลักฐาน (descriptor/UI-record ยืนยัน `3021` สำหรับ actor นี้) **หรือ** bounded negative ว่าไม่มี
 call site/field ที่แยกแยะได้ ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
+
+> 🔧 **แก้ misplacement (Lane A, mailbox-consumption รอบ `kqrlhr`, 2026-08-27 ~14:2x +07:00):** ผลของใบนี้
+> ถูกเขียนไว้ผิดตำแหน่งตั้งแต่รอบ `pvbj0u` — เนื้อ result ด้านล่างถูกวางไว้ใต้ placeholder ของ `RE-100` แทน
+> (คนละใบ, RE-100 ตอนนั้นยังไม่ปิด) ทำให้ placeholder ของ `RE-102` เองค้างว่าง `(ยังไม่มี — ใบเปิดอยู่)`
+> ทั้งที่หัวใบข้างบนเขียนว่า `CLOSED` อยู่แล้ว — ย้ายเนื้อหามาไว้ที่ถูกที่รอบนี้ ไม่มีข้อความไหนถูกแก้ไข
+> เนื้อหา แค่ย้ายตำแหน่ง `RE-100` เองได้ผล real ของตัวเองแล้วในบล็อกของมันด้านบน
+
+### result — CLOSED bounded negative, T0 cross-document only, T1/T2 negative, T3 moot
+
+รายละเอียดเต็ม: `notes_to_chief/20260827_1339_RE-102-RESULT-BOUNDED-NEGATIVE-NO-STATIC-CALL-SITE.md`. สรุป:
+
+- **T0** [STATIC, cross-document เท่านั้น — ไม่มี binary ให้ hash สดใน clone นี้]: `factpack_L1/MANIFEST.md:16`,
+  `RE-094-RESULT` (`0156`) และ `RE-095-RESULT` (`0310`) ทั้งสามอ้าง SHA เดียวกัน
+  (`9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`) — เอกสารสอดคล้องกัน แต่ไม่ใช่การ
+  hash ซ้ำ
+- **T1** [STATIC, bounded negative]: `external/PF_SERIALIZER_FIELDS.tsv` มีครบ 22 แถวของ `NPCConversation`
+  (`[0x00622F10,0x00623083)` + subcall `[0x00606890,0x006068E3)`) แถว `+0x10` (`W 6`, บรรทัด 1576) resolve
+  เป็น pointer chase ผ่าน array ที่ caller ส่งเข้ามา ไม่ใช่ literal คงที่ในตัว serializer เอง — ไม่มี call site
+  ระดับ static ที่ actor เจาะจงเขียน `3021` ตรงๆ (สอดคล้องกับที่ `RE-094` พิสูจน์ไว้แล้วว่า op1 เป็น dynamic
+  dispatch ไม่ใช่ขัดแย้งกัน)
+- **T2** [เพดาน — UNKNOWN]: ค่าที่เข้า serializer มาจาก UI record `+0x94` ที่ populate โดยโค้ดเหนือ serializer
+  นี้ (`RE-094`) — grep `+0x94`/giver ทั่ว `external/*.tsv` ทั้งหมด (`PF_SERIALIZER_FIELDS`,
+  `PF_PROTOCOL_REGISTRY`, `PF_DATA_EVIDENCE`, `PF_RUNTIME_CLASSMAP`, `PF_INPUT_INVENTORY`,
+  `PF_FIELD_VALIDATION`) = 0 hit ทั้งหมด ต้องใช้ disassembly สดของ image (ไม่มีใน clone นี้) หรือ attended
+  wire capture จริง ไม่มีทางใดพร้อมใช้ในรอบนี้
+- **ปัญหาซ้อนอีกชั้น**: สมมติฐานตั้งต้นของ T1/T2 เอง ("placement index 1 = MOBS 156") ก็ไม่ใช่ static field
+  ที่ decode ได้ — `bg0001.placements.tsv` แถว 1 มีแค่ `template_ids=2` (`Mob_Set_02`), และ `RE-093` เองห้าม
+  join ordinal ไปเป็น MOBS n_ID ตรงๆ ไว้แล้ว การผูก index 1 → MOBS 156 อยู่ที่ชั้น testimony/client-observable
+  (คำเจ้าของจากเซสชัน attended `0925`→`0950`) ไม่ใช่ชั้น wire/code ที่ T1/T2 ถามหา — ต่อให้เจอ call site ก็ปิด
+  loop ไม่ได้โดยไม่มี identity proof อิสระที่ชั้นนี้
+- **T3**: ไม่ทำ — moot เมื่อ T1/T2 เป็น bounded negative แล้ว
+
+**ทางเดียวที่จะยกระดับต่อ:** `GT-102` (`GAME_TEST_QUEUE.md:4094`, PENDING) — คลิก Columbus ตัวจริงในไคลเอนต์
+จริงแล้วบันทึก wire capture เท่านั้น ไม่มีเส้นทาง static เพิ่มเติมในข้อมูลที่ commit ไว้แล้ว
+
+**ไม่ทับ/ไม่ขัด:** `columbus_quest_dispatch.py` (chief, `CORE-REQUEST-014`) — ช่องว่างสองจุดของมัน (scene-17
+spawn = `RE-103`, vehicle-bind payload = `RE-096`) เป็นทิศทาง **outbound** (server ตอบอะไร) คนละทิศกับ RE-102
+ที่ถาม **inbound** (client ส่ง 3021 จริงไหม) — ปิด RE-102 เป็น negative ไม่ทำให้สอง gate นั้นเปลี่ยนสถานะ
+
+BUILD_IMPACT: ไม่มีของให้ wire เพิ่มใน `src/pirateforce_foundation/` จากใบนี้ — ระดับความเชื่อมั่นของ
+`3021`→Columbus ยังคงเป็น `[STATIC]` เท่าเดิม (ไม่ได้ตกลงหรือขึ้นระดับ) `columbus_quest_dispatch.py` คงสถานะ
+fail-closed เดิมต่อไปจนกว่า `RE-096`/`RE-103` หรือ `GT-102` จะปิดได้จริง — สาย A ไม่มีอะไรให้สร้างใน `src/`
+จากผลใบนี้รอบนี้เช่นกัน
+
+---
+
+## 🆕🔬 RE-105 GM-UPDATE-STATE-VITAL-VERSION-001 [STATIC-ON-BRIDGE]: **`vital_version` ที่ถูกของ `GM_UpdateGMStateVital` (`0x5A19`) คืออะไร — และ error path ที่ผลิต `網路 VitalData 版本不對 ErrorData=<vital id>` อ่านค่าที่ต้องการจากไหน** [🟢 **OPEN — เปิดโดย LANE-GM 2026-08-27T15:22+07:00 ต่อยอดจาก `GT-101` RESULT**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-105` = 0 hit, `GT-105` = 0 hit ทั้งสองไฟล์ (ยืนยัน
+> 2026-08-27T15:22+07:00) ก่อนหน้านี้เลขสูงสุดที่ใช้แล้วคือ `104` (ทั้ง `RE-104`/`GT-104`) ⇒ ใบนี้คือ `105`
+> 🔴 ใบ `RE-085`-`RE-104` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`notes_to_chief/20260827_1445_GT101-RESULT-client-rejects-0x5A19-version-1-error-23065-session-killed.md`
+(attended session "กะ1", OBSERVER_CONFIRMED เจ้าของเห็นเอง 2026-08-27T14:39+07:00) — เจ้าของ login ด้วยบัญชี
+GM จริง (`localtest`) ผ่าน `PF_GM_ACCOUNTS_CONFIG` แล้วเห็น modal error กลางจอ ทันทีหลังเข้าแมพ ข้อความจีนตัวเต็ม
+`網路 VitalData 版本不對 --- ErrorData=23065, 請洽程式設計人員` — `23065` ฐานสิบ = `0x5A19` =
+`GM_UpdateGMStateVital` ตรง ๆ (client ระบุ vital id เองในข้อความ error) จากนั้น client หยุดประมวลผลสายทั้งหมด
+(นับถอยหลัง 24/25/26 วินาที บนจอ) แล้วปิด socket เอง (`ConnectionResetError(10054)`) จนเจ้าของต้องกด OK ปิดเกม
+ทั้งที่แมพ Port Royal เรนเดอร์ครบอยู่ข้างหลัง dialog (HP/level/minimap/HUD ปกติหมด)
+
+เฟรมที่ส่งจริงบนสาย (จากคอนโซลเซิร์ฟเวอร์ `capture_gt101_20260827_143419/server_console_live.out.txt`):
+`12 9D 6E 14 00 00 00 00 08 04 0B 02 12 01 00 12 19 5A 0B 01 0B 00 0B 00 14 00 00 00 00`
+สร้างด้วย `gm/state_wire.py`'s `make_gm_update_state_frame(legacy, 1, 0, 0, 0)` — `1` คือ `vital_version` ที่
+`docs/GM_LANE.md`/`state_wire.py`'s ติดป้ายเองไว้แล้วว่า `[ASSUMED - awaiting RE]` ก่อน `GT-101` (ไม่ใช่ค่าที่
+วัดมา) เทียบกับเฟรมอื่นบน connection เดียวกัน: `START_GAME_RES` ใช้ `0B 03` ("vital_version=3" ตำแหน่งเดียวกัน),
+`TeleportVital` ใช้ `0B 04` — ทั้งสองไม่ใช่หลักฐานของเวอร์ชันที่ถูกของ `0x5A19` (คนละ vital) แต่เป็นตัวอย่างว่า
+เวอร์ชัน `1` ผิดปกติเทียบกับเฟรมข้างเคียงจริง
+
+### objective
+1. หาว่า client เช็ค `vital_version` ของ `0x5A19` ตรงไหน (handler `0x00729F00` ที่ `RE-089` พินไว้แล้ว) และ
+   ค่าที่ผ่านการเช็คคือเท่าไร (ตัวเลขเดียวหรือช่วง)
+2. หา error path ที่ผลิตข้อความ `網路 VitalData 版本不對 --- ErrorData=<vital id>` — path นี้น่าจะใช้ได้กับ
+   vital อื่นทุกตัวในโปรเจกต์ในอนาคต (client "บอก" เราเองว่าเฟรมไหนผิดพร้อม vital id ตัวเลข) ไม่ใช่แค่ใบนี้
+3. ถ้าเป็นไปได้: หาที่มาของไบต์ offset 8-9 ในเฟรมข้างต้น (`08 04` — เฟรมอื่นบน connection เดียวกันทุกใบเป็น
+   `08 00`) ว่าเป็น field ของ envelope ที่ต้องตั้งค่าด้วยหรือเป็นเรื่องคนละจุด — ไม่บล็อกใบนี้ถ้าตอบไม่ได้
+   ในเวลาที่มี ให้แยกเป็น bounded negative ของหัวข้อนี้โดยเฉพาะ
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยัน image SHA/ตาราง sha256 ตรงกับ verifier ปัจจุบันก่อนเริ่ม เหมือนทุกใบ static
+- **T1** — อ่าน handler `0x00729F00` หา instruction ที่เทียบ/บวกลบกับค่าคงที่ที่ตำแหน่ง vital_version ของ
+  payload ขาเข้า (`+0x??` ตามที่ `RE-089` พินโครง header ไว้) — ค่าคงที่นั้นคือคำตอบของข้อ 1
+- **T2** — xref จากจุดเช็คที่ T1 เจอไปยัง branch ที่ล้มเหลว (ไม่ตรงเวอร์ชัน) — path นั้นควรจะโยงไปหาโค้ดที่ประกอบ
+  ข้อความ error/dialog (เทียบ format string หรือ resource string ที่มีรูป `%s`/`版本不對`/`ErrorData=%d` หรือ
+  คล้ายกัน) — ยืนยันว่าเป็น generic error path ไม่ใช่ path เฉพาะของ `0x5A19`
+- **T3** — ถ้าเวลาเหลือ: ตรวจไบต์ offset 8-9 (`08 04` vs `08 00`) ตามข้อ objective 3
+- **T4** — ถ้าหา T1 ไม่เจอในเส้นทางที่ถอดได้ ให้เขียน bounded negative ชัดเจน ("เวอร์ชันที่ถูกไม่ปรากฏเป็นค่าคงที่
+  ที่ static เห็นได้ ต้องใช้การ brute-force ค่าจริงจากไคลเอนต์ทีละค่า") ไม่เดาตัวเลข ไม่ทายจากเฟรมข้างเคียง
+
+### nonclaims
+① ไม่ claim ว่า `3`/`4` (ค่าที่เฟรมข้างเคียงใช้) คือเวอร์ชันที่ถูกของ `0x5A19` — เป็นคนละ vital กัน ไม่มี
+หลักฐานว่าใช้ scheme เวอร์ชันร่วมกัน
+② ไม่ claim ว่า RE-089's field semantics (`is_gm`/level ของสามฟิลด์) เปลี่ยนไปจากผลใบนี้ — ใบนี้ถามแค่เรื่อง
+version/error-path ไม่แตะความหมายฟิลด์
+③ ถ้า T1-T4 ไม่พบอะไรเลยในเส้นทางที่ถอดได้ นี่คือคำตอบที่สมบูรณ์ (bounded negative) ไม่ใช่ใบที่ค้าง — ปิดได้
+พร้อมส่งต่อให้ attended brute-force รอบถัดไปแทน
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative แล้วปิด
+ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ค่า `vital_version` ที่ถูกของ `0x5A19` พร้อม provenance **หรือ** bounded negative ที่บอกตรงๆ ว่าต้อง
+brute-force จากไคลเอนต์จริง ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
+
+**เร่งด่วนกว่าใบอื่นในคิว:** ใบนี้บล็อกไม่ให้ `localtest` (บัญชีจริงที่เจ้าของบูตด้วย) กลับเข้า `gm_accounts`
+ได้อีกจนกว่าจะปิด — เฟรมเวอร์ชัน `1` ฆ่าเซสชันเจ้าของไปแล้วหนึ่งครั้ง (`GT-101`, `ErrorData=23065`)
 
 ### result (ยังไม่มี — ใบเปิดอยู่)

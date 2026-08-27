@@ -1,0 +1,1 @@
+consumed by LANE-A round kqrlhr: closed CLIENT_RE_QUEUE.md header CLOSED bounded-negative (was misplaced under a different ticket's result since round pvbj0u - fixed the misplacement and filled RE-100's own result in the right slot); confirmed no lane-A module does multi-point ActorMove or 99/101+ handling, so no src/ change needed from this result.
