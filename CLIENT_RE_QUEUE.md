@@ -884,7 +884,7 @@ BUILD_IMPACT_NONE: 1
 
 ---
 
-## 🆕🔬 RE-109 ACTOR-NAME-COLOR-BYTE-MAP-001 [STATIC-ON-BRIDGE]: **อะไรในเฟรม census/ประกาศคุมสีป้ายชื่อ (ขาว=ตัวเอง, เขียว=ผู้เล่นอื่น, เหลือง/น้ำเงิน=NPC, ส้ม/แดงเข้ม/เทา=มอนตามสถานะ aggro/ตาย, ชมพูของเราคืออะไร) รวมกรณีตัวละครตัวเองขึ้นส้มด้วย** [🟢 **OPEN — เปิดโดย LANE-B 2026-08-27T17:34+07:00 ต่อยอดจาก PANYA-REFERENCE 16:35/ADDENDUM 16:45+07:00**]
+## 🆕🔬 RE-109 ACTOR-NAME-COLOR-BYTE-MAP-001 [STATIC-ON-BRIDGE]: **อะไรในเฟรม census/ประกาศคุมสีป้ายชื่อ (ขาว=ตัวเอง, เขียว=ผู้เล่นอื่น, เหลือง/น้ำเงิน=NPC, ส้ม/แดงเข้ม/เทา=มอนตามสถานะ aggro/ตาย, ชมพูของเราคืออะไร) รวมกรณีตัวละครตัวเองขึ้นส้มด้วย** [🟢 **CLOSED BOUNDED-NEGATIVE/DONE — ปิดโดย RE runner LOCAL 2026-08-27T18:15+07:00, บริโภคโดย LANE-B, ดูผลด้านล่าง**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-109`/`GT-109` = 0 hit ทั้งสองไฟล์ (2026-08-27T17:34+07:00)
 > เลขสูงสุดที่ใช้แล้วคือ `108` (`RE-108`/`GT-108`) ⇒ ใบนี้คือ `109`
@@ -929,7 +929,24 @@ selected actor) ที่ client อ่านเป็น "ชนิด/คว�
 byte/field map ของสีป้ายชื่อทั้ง 6 สี พร้อม provenance **หรือ** bounded negative ที่เสนอ attended capture
 แคบที่สุด ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
 
-### result (ยังไม่มี — ใบเปิดอยู่)
+**[UPDATE, round B_20260827_1834, 2026-08-27]** ผลข้างล่างมาจาก
+`notes_to_chief/20260827_1815_RE-109-RESULT-ACTOR-NAME-COLOR-DRIVER-BOUNDED.md` (RE runner LOCAL) — บริโภคแล้ว
+โดย LANE-B รอบนี้ ไม่มี code diff ที่ปฏิบัติได้จากผลนี้ (`BUILD_IMPACT: NONE`), ดูเหตุผลใน result ด้านล่าง
+
+### result
+
+**CLOSED BOUNDED-NEGATIVE/DONE.** เต็มใบ: `notes_to_chief/20260827_1815_RE-109-RESULT-ACTOR-NAME-COLOR-DRIVER-BOUNDED.md`.
+Pin ใหม่จาก RE-067/068: `actor_type=3` (ตัวเรา) เข้า `CMyActor → NameBoardPlayer` (`0x456580`) ส่วน
+`actor_type=4` (มอน/NPC) เข้า `CNetNPC → NameBoardNPC` (`0x45C560`) — **คนละ board class ตั้งแต่ชั้น
+allocator/update** ดังนั้น "ตัวเราขึ้นส้ม" กับ "มอนยังไม่ aggro ขึ้นส้ม" ห้ามสรุปว่าเป็น field เดียวกันจาก RGB
+ที่เห็นเท่ากัน. Complete CFG ทั้งสอง body (485/503 instructions, `SPAN_GAP_BYTES=0`) ไม่พบ direct call ไป
+`FONT_COLOR` loader (`0x5491B0`) หรือ relationship comparator (`0x4A1D50`) — consumer ที่เหลือเป็น
+virtual/resource state ที่ static ยัง resolve receiver ไม่ได้. ค้น `gamedata/**` เจอ `CONSTDATA_TH__FONT_COLOR.tsv`
+(57 rows), `CONSTDATA_TH__FACTION.tsv` (38 rows), `MOBS.n_SKIN_COLOR` แต่ไม่มี crosswalk/serializer ที่ผูกตาราง
+เหล่านี้เข้ากับ `LABEL_NAME` — ห้าม join จากเลข ID ตรงกัน. เสนอ attended A/B แยก NPC กับ Player สอง experiment
+(เปลี่ยนทีละ field/หนึ่งค่า เทียบ frame diff) เป็น method ceiling ถัดไป — RE-109 เองห้าม rerun ด้วย static
+direct-call แบบเดิม `BUILD_IMPACT: NONE — ห้าม hard-code สีจาก actor_type/faction 1-6/FONT_COLOR ID/n_SKIN_COLOR
+จนกว่าจะมี attended one-field crosswalk`
 
 ---
 

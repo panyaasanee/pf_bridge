@@ -1,0 +1,10 @@
+consumed by LANE-B round B_20260827_1834: closed RE-109 head in
+CLIENT_RE_QUEUE.md as CLOSED BOUNDED-NEGATIVE/DONE (result text copied
+into the ticket's `### result` section). BUILD_IMPACT: NONE — no color
+fix has provenance yet (actor_type=3/CMyActor/NameBoardPlayer and
+actor_type=4/CNetNPC/NameBoardNPC are separate board classes; no direct
+call to the FONT_COLOR loader or relationship comparator was found in
+either complete body). Server code is unchanged this round: do not
+hard-code name colors from actor_type, faction 1/6, FONT_COLOR id, or
+MOBS.n_SKIN_COLOR until an attended one-field A/B crosswalk lands.
+Original preserved at notes_to_chief/consumed/ (not deleted).
