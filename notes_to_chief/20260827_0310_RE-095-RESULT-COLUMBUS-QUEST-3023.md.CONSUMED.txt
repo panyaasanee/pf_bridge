@@ -1,0 +1,1 @@
+consumed by LANE-A round kqrlhr: closed CLIENT_RE_QUEUE.md header superseded-in-applicability - MOBS 36's quest 3023 finding stands but is not Port Royal's Columbus (MOBS 156, quest 3021, PR #107 already fixed the code); no src/ change needed from this result directly.
