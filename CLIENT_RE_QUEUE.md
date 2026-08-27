@@ -266,11 +266,19 @@ crosswalk นี้ ⇒ ปิดใบพร้อมบรรทัด `BUILD_
 มี helper ที่สแกน `+0x18..+0x47` เพื่อเช็คว่าง — เลข offset `+0x18` ที่ตรงกันข้าม type **ไม่ใช่ crosswalk**
 
 BUILD_IMPACT: guard เชิงโครงสร้างสำหรับสาย A/เซิร์ฟเวอร์ — scene 19/`Bg1003` ≠ vehicle id, `VEHICLE` ≠ `SHIP`,
-`CVehicleVital.+0x18` ต้องคงชื่อ `UNKNOWN_QWORD` จนกว่าจะมี capture จริง `columbus_quest_dispatch.py`
+`CVehicleVital.+0x18` ต้องคงชื่อ `UNKNOWN_QWORD` จนกว่าจะมี capture จริง ~~`columbus_quest_dispatch.py`
 (chief, `CORE-REQUEST-014`) ใช้ผลนี้ตรงๆ อยู่แล้ว: `VEHICLE_BIND_REFUSED_NO_VEHICLE_ROW` ยังคง refuse
-เหมือนเดิม — ปิดใบนี้ไม่ปลดล็อกอะไร มันแค่ยืนยันว่าเพดาน static ถึงที่สุดแล้วจริง (COO-DECISION `20260827_1350`
-เร่งใบนี้เป็นลำดับสูงสุดของ RE runner ก่อน 20:00 — ปิดทันตามกำหนด) ทางเดียวที่เหลือคือ attended capture ของ
-`CVehicleVital` เฟรมจริง ไม่มีเส้นทาง static เพิ่มเติมในข้อมูลที่ commit ไว้
+เหมือนเดิม — ปิดใบนี้ไม่ปลดล็อกอะไร~~ ทางเดียวที่เหลือคือ attended capture ของ
+`CVehicleVital` เฟรมจริง ไม่มีเส้นทาง static เพิ่มเติมในข้อมูลที่ commit ไว้ (COO-DECISION `20260827_1350`
+เร่งใบนี้เป็นลำดับสูงสุดของ RE runner ก่อน 20:00 — ปิดทันตามกำหนด)
+
+> **UPDATE (สาย A รอบ `jafskv`, 2026-08-27T17:37+07:00)**: บรรทัดที่ขีดฆ่าข้างบนล้าสมัยแล้ว —
+> `M2-NO-VEHICLE-OWNER-20260827-1525` (`notes_to_chief/20260827_1525_PANYA-DECISION-M2-accept-scene17-entry-without-vehicle-fix-later-*.md`)
+> ถอด `VEHICLE_BIND_REFUSED_NO_VEHICLE_ROW` ออกจากจุดเรียกใช้ทั้งหมดใน `columbus_quest_dispatch.py` แล้ว
+> (ค่าคงที่ยังอยู่ในไฟล์แต่เป็น dead code — grep ยืนยัน 0 call site) ฟังก์ชันนี้**ไม่ refuse ด้วยเหตุผลนี้อีก
+> ต่อไป** — M2 ไม่ต้องรอ vehicle-bind ปิดแล้วตามคำเคาะเจ้าของ ผลลัพธ์หลักของใบนี้ (T0/T1/T2 bounded-negative
+> + "ทางเดียวที่เหลือคือ attended capture") **ยังยืนอยู่เหมือนเดิม ไม่เปลี่ยน** — เปิดใบเทส `GT-109` แล้วรอ
+> capture ตามนั้น
 
 ---
 
@@ -725,7 +733,7 @@ wire field ที่ไม่มีหลักฐาน) — M2 ไปต่อ
 
 ---
 
-## 🆕🔬 RE-107 MOB-DEATH-DYING-DEAD-ANIMATION-DRIVER-001 [STATIC-ON-BRIDGE]: **NAMED+HOSTILE actor_type 4 ที่ HP 0 ไม่ล้มเหมือน GT-022/GT-025 (nameless/factionless) — client ใช้ฟิลด์/เฟรมไหนสั่ง fall/dying animation ของ body นี้ และทำไม mesh ถึงค้างลอย** [🟢 **OPEN — เปิดโดย LANE-B 2026-08-27T16:37+07:00 ต่อยอดจาก `GT-084`/`GT-084-R2` RESULT**]
+## 🔬 RE-107 MOB-DEATH-DYING-DEAD-ANIMATION-DRIVER-001 [STATIC-ON-BRIDGE]: **NAMED+HOSTILE actor_type 4 ที่ HP 0 ไม่ล้มเหมือน GT-022/GT-025 (nameless/factionless) — client ใช้ฟิลด์/เฟรมไหนสั่ง fall/dying animation ของ body นี้ และทำไม mesh ถึงค้างลอย** [🟢 **CLOSED BOUNDED-NEGATIVE/DONE — ปิดโดย RE runner LOCAL 2026-08-27T17:11+07:00, บริโภคโดย LANE-B, ดูผลด้านล่าง**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-107`/`GT-107` = 0 hit ทั้งสองไฟล์ (2026-08-27T16:37+07:00)
 > เลขสูงสุดที่ใช้แล้วคือ `106` (`RE-106`/chief) ⇒ ใบนี้คือ `107`
@@ -762,6 +770,10 @@ sent and never been observed" — `GT-084-R2` คือครั้งแรก�
 4. ถ้า static เห็นไม่พอแยกทาง เขียน bounded negative พร้อมเสนอ attended capture ที่แคบที่สุด (เช่น ส่ง dying
    โดยไม่มี hostile mask กับ body ชื่อเดียวกัน เทียบผล)
 
+**[UPDATE, round B_20260827_1734 (ebbhzt), 2026-08-27]** ผลข้างล่างมาจาก
+`notes_to_chief/20260827_1711_RE-107-RESULT-DEATH-BRANCH-MODEL-GATE-BOUNDED.md` (RE runner LOCAL) — บริโภคแล้ว
+โดย LANE-B รอบนี้ ไม่มี code diff ที่ปฏิบัติได้จากผลนี้ (`BUILD_IMPACT: NONE`), ดูเหตุผลใน result ด้านล่าง
+
 ### nonclaims
 ① ไม่ claim ว่า `DEATH_TASK_HOLD_MS = 700` เป็นสาเหตุ — ใบนี้ถามฟิลด์ที่คุมอนิเมชัน ไม่ใช่ใบวัด timing (การวัด/
    แก้ 700ms สงวนตาม `notes_to_chief/20260826_0551_COO-DECISION-death-hold-700-stands*.md`)
@@ -783,11 +795,27 @@ sent and never been observed" — `GT-084-R2` คือครั้งแรก�
 ฟิลด์/เฟรม/branch ที่คุม fall-vs-freeze พร้อม provenance **หรือ** bounded negative ที่เสนอ attended capture
 แคบที่สุดที่จะแยกสามสมมติฐานในข้อ objective 3 ได้ ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
 
-### result (ยังไม่มี — ใบเปิดอยู่)
+### result
+
+**CLOSED BOUNDED-NEGATIVE/DONE.** เต็มใบ: `notes_to_chief/20260827_1711_RE-107-RESULT-DEATH-BRANCH-MODEL-GATE-BOUNDED.md`.
+Recursive CFG ครบทั้งสอง predicate (`DYING_PREDICATE_VA=0x43BDA0`, `DEATH_PREDICATE_VA=0x43BD70`): อ่านเฉพาะ
+resident `BasicAttr` mask `[attr+0x44]==0` กับ timer `f32 [attr+0x58]` **ไม่มี read ของ name/faction/wire mask
+เลย** ⇒ named+hostile กับ nameless/factionless ไม่แยกกันที่ predicate คู่นี้. จุดเลือกท่าตายจริง (`0x472850`)
+เช็ค client-local model-loaded bit `[actor+0x70]&0x40` ก่อนส่ง clip `_F_DIE_000` เข้า render — bit นี้ไม่มี field
+เขียนจาก server เห็นได้ทาง static, และ data corpus ไม่มี crosswalk ยืนยันว่า preset `M011` (Tornado Eagle)
+resolve คลิปนี้สำเร็จหรือไม่. dead-task update CFG ครบไม่พบ call ไป actor-map resolver/inserter ⇒ ไม่พบ
+"actor ถูกลบจาก picking list" ใน task นี้ แต่ static แยก "ถูกถอดจาก logic list" กับ "ยังอยู่แต่ pick filter
+ปฏิเสธ" ไม่ได้โดยไม่เดา — **bounded negative ตามเกณฑ์จบใบ**. attended capture ที่แคบที่สุดถูกเสนอไว้ในใบเต็ม
+(ส่ง DEAD entry เฟรมเดียวไม่มี DYING มาก่อน บน identity/preset เดิม, ห้ามเปลี่ยน name/faction พร้อมกัน).
+
+**BUILD_IMPACT: NONE** — static ไม่พบ field ที่ server เขียนได้เพื่อแก้ freeze; ไม่มี diff ให้ทำในรอบนี้
+ต่อยอดได้เฉพาะทาง attended capture ที่ใบเต็มเสนอ (นอกเขตเขียนของ LANE-B — เป็นงาน attended/RE รอบถัดไป)
+
+BUILD_IMPACT_NONE: 1
 
 ---
 
-## 🆕🔬 RE-108 SELECT-TARGET-UI-PANEL-REQUIRED-FRAME-001 [STATIC-ON-BRIDGE]: **single-click บน 0x201F ได้ขอบแดง + ลูกศรล็อกแต่ไม่มีแผงเป้า UI (ต่างจาก GT-045 v3) — client ต้องการฟิลด์/เฟรมอะไรจากเซิร์ฟเวอร์ถึงจะเปิดแผง** [🟢 **OPEN — เปิดโดย LANE-B 2026-08-27T16:37+07:00 ต่อยอดจาก `GT-084`/`GT-084-R2` RESULT**]
+## 🔬 RE-108 SELECT-TARGET-UI-PANEL-REQUIRED-FRAME-001 [STATIC-ON-BRIDGE]: **single-click บน 0x201F ได้ขอบแดง + ลูกศรล็อกแต่ไม่มีแผงเป้า UI (ต่างจาก GT-045 v3) — client ต้องการฟิลด์/เฟรมอะไรจากเซิร์ฟเวอร์ถึงจะเปิดแผง** [🟢 **CLOSED BOUNDED-NEGATIVE/DONE — ปิดโดย RE runner LOCAL 2026-08-27T17:19+07:00, บริโภคโดย LANE-B, ดูผลด้านล่าง**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-108`/`GT-108` = 0 hit ทั้งสองไฟล์ (2026-08-27T16:37+07:00)
 > เลขสูงสุดที่ใช้แล้วคือ `107` (`RE-107`, ใบก่อนหน้าในรอบเดียวกัน) ⇒ ใบนี้คือ `108`
@@ -831,5 +859,162 @@ Eagle (`0x201F`) หนึ่งครั้ง ได้ **ขอบแดง�
 ### เกณฑ์จบใบ
 ฟิลด์/เฟรม/handler ที่คุมการเปิดแผงเป้า พร้อม provenance **หรือ** bounded negative ที่เสนอ attended capture
 แคบที่สุดตามข้อ objective 3 ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+
+**[UPDATE, round B_20260827_1734 (ebbhzt), 2026-08-27]** ผลข้างล่างมาจาก
+`notes_to_chief/20260827_1719_RE-108-RESULT-LOCAL-PANEL-GATE-NO-RESPONSE-FRAME.md` (RE runner LOCAL) — บริโภคแล้ว
+โดย LANE-B รอบนี้ ไม่มี code diff ที่ปฏิบัติได้จากผลนี้ (`BUILD_IMPACT: NONE`), ดูเหตุผลใน result ด้านล่าง
+
+### result
+
+**CLOSED BOUNDED-NEGATIVE/DONE.** เต็มใบ: `notes_to_chief/20260827_1719_RE-108-RESULT-LOCAL-PANEL-GATE-NO-RESPONSE-FRAME.md`.
+Complete handler `0x51F2F0..0x51F494` ถอด CFG ครบ: เปิดแผงผ่าน local-player + event-object + actor-map resolve
+(`0x446170`) + relation check (`0x43C380`) + downcast `CNetNPC` (`0x469700`) แล้วเรียก UI manager
+`0xAA0710(L"Main_Panel_Target_Enemy_New")` — **ไม่มี GetAttr/name/HP/level read ในตัว handler เอง** ฟิลด์เหล่านี้
+เป็น consumer แยกต่างหากหลังแผงเปิดแล้ว (`0x51F920`/`0x51F150`). `TargetVital` (outbound จาก client) ผูก inbound
+handler กับ shared no-op stub `0xA106C0` (`xor al,al; ret 4`) — เป็นรายงานขาออก ไม่ใช่คำขอที่ต้องมี response
+เพื่อเปิดแผง ⇒ **ไม่มี field/frame ที่ server เขียนได้เพื่อเปิดแผง**, ยืนยัน bounded negative ตามเกณฑ์จบใบ.
+`field_mobs.py` ไม่ส่ง BasicAttr level ก็จริง แต่นั่นเป็น consumer หลังเปิดแผง (จะได้ ctor default LV1) ไม่ใช่
+gate เปิดแผง — **ห้ามเติม level เพื่อหวังแก้อาการนี้** ตามที่ใบเต็มเตือนไว้ตรงๆ. attended capture ที่แคบที่สุด
+(single-click vs Tab-select เทียบ event slot/relation branch) อยู่นอกเขตเขียนของ LANE-B.
+
+**BUILD_IMPACT: NONE** — static ไม่พบ field/response vital ที่ server เขียนได้เพื่อเปิดแผง; การเติม
+TargetVital response หรือ BasicAttr level เป็น guess-fix ที่ใบเต็มห้ามไว้ตรงๆ ไม่มีอะไรให้ LANE-B แก้รอบนี้
+
+BUILD_IMPACT_NONE: 1
+
+---
+
+## 🆕🔬 RE-109 ACTOR-NAME-COLOR-BYTE-MAP-001 [STATIC-ON-BRIDGE]: **อะไรในเฟรม census/ประกาศคุมสีป้ายชื่อ (ขาว=ตัวเอง, เขียว=ผู้เล่นอื่น, เหลือง/น้ำเงิน=NPC, ส้ม/แดงเข้ม/เทา=มอนตามสถานะ aggro/ตาย, ชมพูของเราคืออะไร) รวมกรณีตัวละครตัวเองขึ้นส้มด้วย** [🟢 **OPEN — เปิดโดย LANE-B 2026-08-27T17:34+07:00 ต่อยอดจาก PANYA-REFERENCE 16:35/ADDENDUM 16:45+07:00**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-109`/`GT-109` = 0 hit ทั้งสองไฟล์ (2026-08-27T17:34+07:00)
+> เลขสูงสุดที่ใช้แล้วคือ `108` (`RE-108`/`GT-108`) ⇒ ใบนี้คือ `109`
+> 🔴 ใบ `RE-085`-`RE-108` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+> คำถามนี้ทับซ้อนบางส่วนกับ `RE-067` (ยังเปิด, ของสาย RE เดิม) — ใบนี้ไม่แทน `RE-067`, เป็นใบที่แคบกว่าและมี
+> หลักฐานใหม่ (owner reference clips + ตัวละครตัวเองขึ้นส้ม) ที่ `RE-067` ไม่มีตอนเปิด ถ้า RE runner เห็นว่า
+> ควรรวมเป็นใบเดียว ให้ตัดสินเองและบันทึกเหตุผลในผล ทั้งสองใบไม่ลบ
+
+### ที่มา
+`notes_to_chief/20260827_1635_PANYA-REFERENCE-original-server-combat-loop-colors-death-loot-vs-ours.md`
+(Panya, owner reference clips จากเซิร์ฟเวอร์เดิม) + ADDENDUM 16:45/17:0x — เซิร์ฟเวอร์เดิม: มอนยังไม่ aggro
+สีส้ม → aggro แดงเข้ม → ตายแล้วเทา. ของเรา (GT-084-R2): มอนสีชมพู/magenta ตลอด **และตัวละครผู้เล่นเอง
+(Arena01) ขึ้นสีส้มด้วย** ทั้งที่ควรเป็นสีขาว — ย้อนไปเจอตั้งแต่ `GT-078` (26 ส.ค., บูตไร้แฟล็ก ก่อนมี
+faction=1) ⇒ ไม่ได้เกิดจาก faction=1 ที่ wire เข้าไปทีหลัง แต่เป็นไบต์อื่นในเฟรมตัวละครตัวเอง (START_GAME/
+selected actor) ที่ client อ่านเป็น "ชนิด/ความสัมพันธ์" เดียวกับที่ทำให้มอนที่ยังไม่ aggro เป็นสีส้ม
+
+### objective
+1. หา field/byte ในเฟรม census (`NPCAttr`/`BasicAttr`/relation byte) ที่ client map เป็นสีป้ายชื่อ — ครอบคลุม
+   ทั้ง 6 สีที่ owner ยืนยัน: ขาว(ตัวเอง) เขียว(ผู้เล่นอื่น) เหลือง/น้ำเงิน(NPC) ส้ม(มอนยังไม่ aggro หรือตัวเรา)
+   แดงเข้ม(มอน aggro) เทา(มอนตาย) และชมพู/magenta ที่ของเราส่งอยู่ตอนนี้คือค่าอะไร
+2. อธิบายว่าทำไมตัวละครผู้เล่นเอง (START_GAME/selected-actor frame) ถึงอ่านเป็นสีเดียวกับมอนที่ยังไม่ aggro —
+   ตรง field เดียวกันหรือคนละ field ที่บังเอิญ map สีเดียวกัน
+3. ถ้า static เห็นไม่พอ ให้เขียน bounded negative พร้อม attended capture ที่แคบที่สุด (เช่น เปลี่ยน relation
+   byte ทีละบิตบน identity เดิม เทียบสี)
+
+### nonclaims
+① ไม่ claim ว่า `RE-067` ผิดหรือซ้ำซ้อน — ใบนี้แคบกว่าและมีหลักฐานใหม่เท่านั้น
+② ไม่ claim ว่าตัวเราขึ้นส้มมาจาก faction byte เดียวกับที่ทำให้มอน aggro เป็นแดงเข้ม — เป็นคำถามเปิด ไม่ใช่ข้อสรุป
+③ ถ้าหาไม่เจอในเส้นทางที่ถอดได้ นี่คือคำตอบสมบูรณ์ (bounded negative)
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยัน image SHA ตรง verifier ปัจจุบันก่อนเริ่ม
+- **T1** — xref field/byte ที่ client ใช้เลือกสีป้ายชื่อ (relation/faction/actor-type mask)
+- **T2** — เทียบ path ของ selected-actor(ตัวเอง) กับ path ของ field-mob เพื่อหาว่า field เดียวกันหรือคนละ field
+- **T3** — ถ้าไม่เจอ ให้เขียน bounded negative ตามข้อ objective 3
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative แล้วปิด
+ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+byte/field map ของสีป้ายชื่อทั้ง 6 สี พร้อม provenance **หรือ** bounded negative ที่เสนอ attended capture
+แคบที่สุด ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-110 AUTO-ATTACK-CADENCE-AND-POSE-FRAME-001 [STATIC-ON-BRIDGE]: **เฟรมตอบ ActionVital แบบไหนสั่งท่าโจมตีปกติของ performer และ client ส่ง ActionVital ซ้ำเองเมื่อได้เฟรมตอบแบบไหน (ต่างจากของเราที่ตีไม่ออกท่า/สแปมคลิกได้ดาเมจรัว)** [🟢 **OPEN — เปิดโดย LANE-B 2026-08-27T17:34+07:00 ต่อยอดจาก PANYA-REFERENCE 16:35+07:00**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-110`/`GT-110` = 0 hit ทั้งสองไฟล์ (2026-08-27T17:34+07:00)
+> เลขสูงสุดที่ใช้แล้วคือ `109` (`RE-109`, ใบก่อนหน้าในรอบเดียวกัน) ⇒ ใบนี้คือ `110`
+> 🔴 ใบ `RE-085`-`RE-109` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`notes_to_chief/20260827_1635_PANYA-REFERENCE-original-server-combat-loop-colors-death-loot-vs-ours.md` —
+เซิร์ฟเวอร์เดิม: คลิกครั้งเดียว → auto-attack loop ต่อเนื่องมีจังหวะ/มีท่า และมอนตีกลับ. ของเรา (GT-084-R2):
+ดับเบิลคลิก = ตี 1 ครั้ง **ไม่ออกท่าโจมตี** แต่ดาเมจขึ้น และ **สแปมคลิกได้ดาเมจรัวผิดปกติ** (เซิร์ฟเวอร์ตอบทุก
+`ActionVital` ทันทีไม่มี cooldown) — รอบนี้ (companion PR, `pirate-force-server`) ปิดช่องสแปมด้วยค่า
+PROVISIONAL ฝั่งเซิร์ฟเวอร์ชั่วคราว ใบนี้ถามค่าจริง/เฟรมจริงจาก client เพื่อแทนค่าชั่วคราวนั้น
+
+### objective
+1. หาว่า client ส่ง `ActionVital` ซ้ำเอง (auto-attack loop) เมื่อได้เฟรมตอบรูปแบบไหน — ต่างจากที่เราส่งตอนนี้
+   อย่างไร (field ไหนที่เราขาด/ผิด ทำให้ client ไม่ auto-repeat เอง)
+2. หาเฟรม/ฟิลด์ที่สั่งให้ performer เล่นท่าโจมตีปกติ (attack pose/animation) — ตอนนี้ของเราไม่ออกท่า
+3. หาจังหวะโจมตีขั้นต่ำจริงจาก gamedata (ถ้ามีตารางความเร็วโจมตีต่ออาวุธ/ตัวละคร) เพื่อแทนค่า PROVISIONAL
+   ที่ lane B ใส่ชั่วคราวไว้ในโค้ด (grep `ATTACK_CADENCE_MS_PROVISIONAL` ใน `mob_combat.py`)
+4. ถ้า static เห็นไม่พอ ให้เขียน bounded negative พร้อม attended capture ที่แคบที่สุด
+
+### nonclaims
+① ไม่ claim ว่ามอนตีกลับเป็นขอบเขตใบนี้ — mob-attacks-player เป็นคนละใบ (ยังไม่เปิด, BUILD-005 ขั้นถัดไป)
+② ไม่ claim ค่า cadence ล่วงหน้า — ถ้า gamedata ไม่มีตารางตรง ให้บอกตรงๆ ว่าไม่มี ไม่ประมาณ
+③ ถ้าหาไม่เจอในเส้นทางที่ถอดได้ นี่คือคำตอบสมบูรณ์ (bounded negative)
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยัน image SHA ตรง verifier ปัจจุบันก่อนเริ่ม
+- **T1** — หาเฟรมตอบที่ทำให้ client auto-repeat `ActionVital`
+- **T2** — หาเฟรม/ฟิลด์ที่สั่งท่าโจมตีของ performer
+- **T3** — หาตาราง gamedata ความเร็วโจมตีจริงถ้ามี (แทน `ATTACK_CADENCE_MS_PROVISIONAL`)
+- **T4** — ถ้าไม่เจอ ให้เขียน bounded negative ตามข้อ objective 4
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative แล้วปิด
+ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+เฟรม auto-repeat + เฟรมท่าโจมตี + ค่า cadence จริงจาก gamedata (ถ้ามี) พร้อม provenance **หรือ** bounded
+negative ที่เสนอ attended capture แคบที่สุด ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-111 LOOT-DROP-RENDER-REQUIRED-FIELDS-001 [STATIC-ON-BRIDGE]: **client ต้องการฟิลด์อะไรใน `MOB_LOOT_DROP` ถึงจะวาดถุงเรืองแสง+ป้ายชื่อสี rarity บนพื้น — เซิร์ฟเวอร์ส่งไปแล้ว 2 ใบ (54B) แต่เจ้าของไม่เห็นอะไรบนจอเลย** [🟢 **OPEN — เปิดโดย LANE-B 2026-08-27T17:34+07:00 ต่อยอดจาก PANYA-REFERENCE 16:35/ADDENDUM 16:45+07:00**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-111`/`GT-111` = 0 hit ทั้งสองไฟล์ (2026-08-27T17:34+07:00)
+> เลขสูงสุดที่ใช้แล้วคือ `110` (`RE-110`, ใบก่อนหน้าในรอบเดียวกัน) ⇒ ใบนี้คือ `111`
+> 🔴 ใบ `RE-085`-`RE-110` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`notes_to_chief/20260827_1635_PANYA-REFERENCE-original-server-combat-loop-colors-death-loot-vs-ours.md`
+ADDENDUM 16:45/16:5x — เซิร์ฟเวอร์เดิม: ของ drop ตกพื้นเป็นโมเดลถุงเล็กสีเหลืองเรืองแสง + ป้ายชื่อสี rarity
+(`ไอเทมยังไม่ประเมิน` สีเขียว) ลอยเหนือถุง คลิกแล้วตัวละครเดินไปเก็บเอง. GT-084-R2 ยืนยันเซิร์ฟเวอร์ส่ง
+`[G>] MOB_LOOT_DROP (54 bytes)` ×2 จริง (คอนโซล L11198/11202) แต่**เจ้าของไม่เห็นถุง/ป้ายบนจอเลย** ตัดทิ้ง
+ความเป็นไปได้ "ตกแล้วแต่ไม่ได้มอง" แล้ว (owner nonclaim ตรง)
+
+### objective
+1. หาโครงสร้างฟิลด์ที่ handler รับ `MOB_LOOT_DROP` ต้องการ (ชื่อไอเทม/rarity/model id/ตำแหน่ง) เทียบกับ 54
+   ไบต์ที่เราส่งตอนนี้ — ฟิลด์ไหนขาด/ผิด shape ทำให้ client ไม่ spawn ถุง
+2. หา resource/model ที่ client ใช้วาดถุงเรืองแสง (ชื่อ resource ถ้าถอดได้) และ path ที่ผูกป้ายชื่อสี rarity
+3. ถ้า static เห็นไม่พอ ให้เขียน bounded negative พร้อม attended capture ที่แคบที่สุด (เช่น ส่ง `MOB_LOOT_DROP`
+   ที่ต่างจากปัจจุบันเฉพาะฟิลด์เดียว เทียบว่าถุงขึ้นหรือไม่)
+
+### nonclaims
+① ไม่ claim ว่า pickup flow (`RE-082`, ปิดแล้ว) ผิด — ใบนี้ถามเฉพาะขั้น render ก่อนจะถึงขั้นคลิกเก็บ
+② ไม่ claim shape ที่ถูกต้องล่วงหน้า — objective 1 เปิดเท่ากันทุกฟิลด์
+③ ถ้าหาไม่เจอในเส้นทางที่ถอดได้ นี่คือคำตอบสมบูรณ์ (bounded negative)
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยัน image SHA ตรง verifier ปัจจุบันก่อนเริ่ม
+- **T1** — xref handler ที่รับ `MOB_LOOT_DROP` หา field ที่ต้องมีถึงจะ spawn drop object บนจอ
+- **T2** — หา resource model ถุง + path ป้ายชื่อสี rarity
+- **T3** — ถ้าไม่เจอ ให้เขียน bounded negative ตามข้อ objective 3
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative แล้วปิด
+ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+field ที่ขาด/ผิด shape พร้อม provenance **หรือ** bounded negative ที่เสนอ attended capture แคบที่สุด ⇒ ปิดใบ
+พร้อมบรรทัด `BUILD_IMPACT:`
 
 ### result (ยังไม่มี — ใบเปิดอยู่)

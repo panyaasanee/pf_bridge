@@ -3,7 +3,7 @@
 ## สรุปหนึ่งบรรทัด
 ต่อสาย CORE-REQUEST-017 จุดที่ 1 (LANE-GM login-scene override) เข้า `runtime.py` จริง, pf-adversary
 สามรอบพบและแก้บั๊กจริงสามจุด (HIGH ในสองจุด compose หลัก + จุดที่สามที่พบระหว่างรีวิวรอบสอง) ก่อน push,
-เปิด GT-109, ปิดค้าง mailbox 2 ใบ + registry row 013.
+เปิด GT-110, ปิดค้าง mailbox 2 ใบ + registry row 013.
 
 ## บริบท
 รอบก่อน (R195, session 8soxxm) สร้าง `lane_hooks/` skeleton และสัญญาไว้ว่า CORE-REQUEST-017 จุดที่ 1
@@ -81,7 +81,7 @@ config ต้องรู้ (pf-adversary รอบแรกตั้งข้�
 
 ## GAME_TEST_QUEUE
 
-เปิด **GT-109** (`pf-queue-author`) — client-observable ของ feature นี้: บัญชี GM ที่ตั้งค่า override ไปฉาก 2
+เปิด **GT-110** (`pf-queue-author`) — client-observable ของ feature นี้: บัญชี GM ที่ตั้งค่า override ไปฉาก 2
 (Prison Exile Island) จริงไหมบนจอ, ยืนที่ spawn ปักหมุด `(26905.0, 21185.0, 1680.0)` ไหม, ไม่ crash/glitch
 อ้างหลักฐาน headless (6/6 เขียว) เป็นชั้น wire/DB ไม่ให้ผู้เทสรันซ้ำ
 
@@ -97,6 +97,13 @@ config ต้องรู้ (pf-adversary รอบแรกตั้งข้�
   (กฎ v6.3 "ใครเปิดใบคนนั้นบริโภค" — ไม่ใช่ของ chief) ที่เป็นของ chief จริง (CHIEF-*/COO-*/PANYA-*/ไม่มีเจ้าของ)
   เหลือ ~75 ใบ รอบนี้ทำได้แค่ 2 ใบที่ผูกกับงานโค้ดจริงของรอบ (เวลาไปที่ pf-adversary สองรอบของ CORE-REQUEST-017)
   ยังไม่ใช่ backlog ที่หมด รอบถัดไปควรหยิบต่อ
+
+## เลขชนกัน GT-109/GT-110
+
+`pf_bridge` PR แรกของรอบนี้ (#221) ถูก `merge-claude-pr` ปิดอัตโนมัติเพราะ `mergeable=false` — LANE-A (รอบ
+`jafskv`) เปิด `GT-109` ของตัวเองพร้อมกัน (VEHICLE-BIND-WIRE-CAPTURE-001) และ commit ของเขาลง `main` ก่อน
+กู้ด้วย `git merge origin/main` (เก็บทั้งสองบล็อกไว้ ไม่ทิ้งฝั่งไหน ตามกฎ) แล้วขยับใบของ chief เป็น `GT-110`
+ตามกฎ "ชนแล้วห้ามทับ" เปิดล็อกใหม่เป็น PR ใบถัดไปเพื่อยึดคืน — branch ไม่เคยหาย ไม่มีข้อมูลสูญ
 
 ## งานแม่บ้านที่ยังไม่ทำ (บันทึกไว้ ไม่ใช่ลืม)
 
