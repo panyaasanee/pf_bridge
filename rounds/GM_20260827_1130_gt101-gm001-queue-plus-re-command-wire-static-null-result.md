@@ -67,3 +67,8 @@ precondition จะพร้อมมาหลายรอบแล้ว) -- �
 
 nonclaim: รอบนี้ไม่ได้พิสูจน์หรือหักล้างอะไรเกี่ยวกับพฤติกรรม GM บนจอ -- แค่เปิดใบเทสให้คนไปดูจริง และ
 ยืนยันว่าการอ่านสถิตต่อไม่ให้คำตอบเพิ่มเกี่ยวกับความหมายฟิลด์ของ `GM_RunGMCommandVital`
+
+## Round-end status (Addendum v6.2 §C)
+
+push แล้ว รอ merge PR #187 (pf_bridge) และ PR #110 (pirate-force-server, no-code-change/merge-forward
+only). ยังไม่ถือว่าอยู่บน main จนกว่ารอบถัดไปจะยืนยัน merged=true ด้วย pull_request_read.
