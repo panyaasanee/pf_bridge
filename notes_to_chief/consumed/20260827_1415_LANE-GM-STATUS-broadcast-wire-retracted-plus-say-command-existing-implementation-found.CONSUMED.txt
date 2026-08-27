@@ -1,0 +1,8 @@
+Consumed by: chief cloud round 3t3klq (R190)
+Consumed at: 2026-08-27 (round start, CORE-REQUEST triage)
+Action taken: informational only, letter says explicitly "no wiring request
+this round" -- GM lane retracted an incorrect broadcast_wire.py module and
+fixed docs/GM_LANE.md to point at the existing, better-proven
+channel_message_hypothesis.py. No action needed from chief. Noted for the
+lane that owns channel_message_hypothesis.py (CHAT-ECHO/CHAT-CHANNEL) in
+case they want to know GM lane is interested in reusing it.
