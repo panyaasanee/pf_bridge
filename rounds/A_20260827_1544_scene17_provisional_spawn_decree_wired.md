@@ -240,3 +240,30 @@ none - ไม่ต้องแตะ `runtime.py` เลย ตามที่�
 ต้องแตะ `runtime.py` โดยเฉพาะ - default ของ `via_login=True` ทำหน้าที่แทนการเพิ่ม keyword ที่ call site เดิม
 
 — สาย A · WORLD
+
+---
+
+## ⑧ addendum 2026-08-27T16:32+07:00 — ชนกับรอบ chief `e0daaa`, rebase แล้ว ไม่ใช่ re-wire
+
+หลังรอบข้างบน (แก้ pf-adversary finding เสร็จ, commit `2f8530a` push แล้ว) พบว่า **chief cloud รอบ `e0daaa`**
+wire คำเคาะเดียวกัน (spawn ฉาก 17 = `(0,0,0)`) เข้า `origin/main` ไปแล้วอย่างอิสระ ด้วย implementation ของตัวเอง
+(`ground` block เต็มกว่า + provenance string คนละแบบ) — merge ตรงกับ branch นี้ไม่ได้ (real content conflict
+ไม่ใช่แค่ race) ตรวจ `origin/main` สดแล้วพบว่า **implementation ของ chief ไม่มี fail-safe login-path ที่รอบนี้เพิ่ง
+แก้เลย** — ช่องโหว่เดียวกันที่ pf-adversary เจอในรอบก่อนหน้า (login path ยอมรับ `scene_id=17` ที่ persist ไว้
+โดยไม่ผ่าน vehicle-bind refusal) **ยังเปิดอยู่จริงบน `main` ตอนนี้** ไม่ใช่แค่ความเสี่ยงใน branch ที่ยังไม่ merge
+
+**แก้โดย:** `git reset --hard origin/main` แล้ว re-derive การแก้ fail-safe login-path ใหม่บนโค้ดจริงของ chief
+(ไม่ re-wire คำเคาะซ้ำ — ของ chief คือฐานจริงแล้ว) กลไกเดิม (`login_entry_allowed` ในสคีมา registry,
+`via_login` parameter บน `resolve_entry`, default ปฏิเสธ) คงเดิม แค่ปรับให้เข้ากับโครงสร้างไฟล์จริงของ chief
+commit ใหม่: `b58cab1` (แทนที่ `4ff9ce9`/`2f8530a` เดิมทั้งคู่ — ถูก force-with-lease push ทับ branch ของ
+สายนี้เอง ไม่ใช่ branch คนอื่น)
+
+เทส: targeted 321 tests (`test_world_scene_travel`/`test_world_scene_entry`/`test_columbus_quest_dispatch`
+(+`_wiring`)/`test_world_scene_liveness`(+`_wiring`)/`test_world_travel_gate`/`test_world_population_handoff`/
+`test_world_columbus_m2_crosswalk`/`test_npc_interaction_wire`) ผ่านหมด · full suite 3578 passed, 212 skipped
+(เดิม), 18 errors (capstone/pefile ขาดใน sandbox เดิม ไม่เกี่ยว), 0 failed
+
+ผู้เล่นจะเห็นอะไรต่างจากเมื่อวาน: ยังไม่มีเหมือนเดิม — การแก้รอบนี้ปิดช่องโหว่ fail-safe ที่ตอนนี้อยู่บนโค้ดจริง
+บน `main` (ไม่ใช่แค่ branch ที่ยังไม่ merge) ไม่ใช่การเปลี่ยนพฤติกรรมที่ client เห็น
+
+— **สาย A · WORLD**
