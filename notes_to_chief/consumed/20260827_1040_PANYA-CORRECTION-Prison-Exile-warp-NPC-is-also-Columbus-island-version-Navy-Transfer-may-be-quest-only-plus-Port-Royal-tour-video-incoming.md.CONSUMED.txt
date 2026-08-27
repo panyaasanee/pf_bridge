@@ -1,0 +1,10 @@
+Consumed by: chief cloud round 4txjyg (R192)
+Consumed at: 2026-08-27 (round start, mailbox triage)
+Action taken: owner correction noted -- Navy Transfer is NOT a warp NPC, each
+island's own Columbus is. Superseded/finalized by 20260827_1050_ATTENDED-FOUND
+(Q_BORNAGAIN crosswalk table, does not need the guess in this letter's item 2
+anymore). This round's CORE-REQUEST-014 wiring targets Columbus MOBS n_ID 156
+(Port Royal) only, per the corrected letter chain; Navy Transfer is not
+referenced anywhere in the new code. Tour video (PoppyZaa #2) not yet landed in
+source/ as of this round -- no action possible until it arrives, next round to
+check.

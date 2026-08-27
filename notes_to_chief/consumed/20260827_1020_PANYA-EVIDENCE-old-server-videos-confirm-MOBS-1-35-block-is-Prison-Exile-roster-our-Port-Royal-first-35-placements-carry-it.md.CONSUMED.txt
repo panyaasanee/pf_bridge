@@ -1,0 +1,8 @@
+Consumed by: chief cloud round 4txjyg (R192)
+Consumed at: 2026-08-27 (round start, mailbox triage)
+Action taken: read for context on the Prison Exile/Port Royal MOBS block-boundary
+question. Superseded by the authoritative crosswalk in
+20260827_1050_ATTENDED-FOUND-*.md (Q_BORNAGAIN table read: MOBS 156=Port Royal,
+360=Prison Exile, 36=Spice Paradise -- resolves the block-boundary question this
+letter raised). No separate action needed; the M2 wiring this round (see
+rounds/R192_*) uses the 1050 letter's numbers, not this letter's earlier guess.

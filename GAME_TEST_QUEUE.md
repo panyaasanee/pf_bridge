@@ -8259,6 +8259,226 @@ canonical, copy DB สองใบตามบล็อก db, เตรีย�
 - ไม่ชี้สาเหตุของสีป้ายชื่อ (`RE-067` เปิดอยู่).
 - ถ้าด่าน 0/1/2 ไปไม่ถึง (BLOCKED) => ทั้งใบเป็น BLOCKED ไม่ใช่ NO-RESULT/FAIL -- ยังไม่ได้ล็อกอินเลย.
 
+🆕 **อัปเดต (chief cloud รอบ `4txjyg` R192 · 2026-08-27T12:00+07:00) — ด่าน 0 ตอบแล้ว:** `config/gm_accounts.json`
+ไม่มีอยู่จริงในรีโปตอนนี้ (ไม่มีใครเป็น GM โดยดีฟอลต์) chief อนุมัติทาง (B) — สร้างสำเนาแยก ใส่ชื่อบัญชี
+`attended_test` แล้วตั้ง `$env:PF_GM_ACCOUNTS_CONFIG` ชี้ไปที่สำเนานั้นก่อนบูต ไม่ต้องแตะ/สร้าง
+`config/gm_accounts.json` จริง รายละเอียดเต็มดู
+`notes_to_chief/20260827_1200_CHIEF-REPLY-GT101-gm-accounts-test-config-approved.md` — ด่าน 0 ไม่ BLOCKED
+อีกต่อไป ไปต่อด่าน 1/2 ได้เลย
+
+### result (ผู้เทสกรอก)
+```
+
+```
+
+---
+
+## GT-102 CORE-REQUEST-014 COLUMBUS-NPCCONVERSATION-QUEST3021-DIALOGUE-001: คลิก Columbus ที่ Port Royal (MOBS n_ID 156, bg0001 placement index 1) ครั้งแรกหลัง CORE-REQUEST-014 -- เห็นบทสนทนาเควสต์ 3021 จริงไหม (เมื่อวานคลิกแล้วเงียบ)  [PENDING]
+
+> เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md, prefix สองแบบ ห้ามแยกตัวนับ.
+> เลขสูงสุดที่ใช้ไปแล้ว ณ เวลาเขียนใบนี้: GT-101 (GAME_TEST_QUEUE.md) และ RE-103 (CLIENT_RE_QUEUE.md,
+> บันทึกไว้เองว่า "เลขว่างถัดไป = 102"). grep ยืนยันก่อนจอง: GT-102 = 0 hit, RE-102 = 0 hit ทั้งสองไฟล์
+> (ยืนยัน 2026-08-27). ใบเก่าทุกใบอยู่ที่เดิม ไม่ถูกแตะ ไม่ถูกย้าย.
+
+### ที่มา -- อ่านจากซอร์สจริง ห้าม re-derive ระหว่างรอบ
+- `notes_to_chief/20260827_1052_LANE-A-CORRECTION-columbus-m2-quest3021-not-3023-scene17-not-19.md`:
+  Port Royal Columbus คือ MOBS `n_ID=156` (s_ROLE_GRAPHIC=COLUMBUS_0), bg0001 census placement **index 1**
+  -- ข้อผูก "index 1 = MOBS 156" เป็น **owner testimony** (PANYA-DECISION 0925/0950 ในเซสชัน attended
+  ต่อเนื่องเดียว) **ไม่ใช่ table crosswalk** และเลขนี้เคยขยับมาแล้วครั้งหนึ่งในวันเดียวกัน (RE-097 เคยเสนอ
+  index 0 ก่อน) -- ดูหมายเหตุใน nonclaims ว่าทำไมข้อนี้สำคัญ. quest = **3021** (ไม่ใช่ 3023 ซึ่งเป็นของ MOBS
+  n_ID=36 คนละตัว), `s_LUASCRIPT=Q_TELEPORT1`, `n_VARI_2=17` (ปลายทาง scene 17/`Bg1001`, ทะเล) -- ยืนยันจาก
+  `QUESTDATA_TH__QUEST.tsv` (`n_ID=3021` แถวเดียว, provenance sha256 ปักไว้ที่
+  `tests/test_world_columbus_m2_crosswalk.py`).
+- `pf_bridge/gamedata/tables/QUESTTEXT_TH__TEXT_QUEST.tsv:1312` (row `n_ID=3021`): `s_QUEST_NAME` = "มุ่งหน้าไป
+  Atlantic Ocean：Rising Sun Sea", `s_WORD1` (คำถามในบทสนทนา) = "พร้อมที่จะออกเดินทางไปยัง<text>[52300126]</text>
+  อย่างอิสระแล้วหรือยัง?", `s_WORD2` (ปุ่มตอบรับ) = "ข้าชอบการเดินทางแบบอิสระ", `s_WORD3` (ปุ่มปฏิเสธ) = "ข้า
+  จะอยู่ที่นี่" -- **นี่คือข้อความที่ใบนี้คาดว่าจะเห็นบนจอ ถ้า NPCConversation ที่ส่งจริงตรงกับเควสต์ 3021**.
+- `src/pirateforce_foundation/columbus_quest_dispatch.py` (pirate-force-server, ยังไม่ merge -- ดูด่าน 0):
+  `production_allowed = True`, ไม่มีแฟล็ก. `dispatch_columbus_quest3021()` เขียนไว้เองว่า **ปฏิเสธเสมอวันนี้**
+  ด้วยเหตุผลสองข้อที่แยกกัน (`scene17_teleport_refused_scene_has_no_pinned_spawn` จาก `world_scene_entry
+  .resolve_entry` เพราะ scene 17 ไม่มี pinned spawn -- ดู RE-103 เปิดอยู่ -- และ
+  `no_re096_vehicle_row_evidence` เพราะยังไม่มี wire evidence ของ payload ผูกเรือ -- ดู RE-096 เปิดอยู่) --
+  **แต่ทั้งสองเหตุผลนี้เกี่ยวกับ op1 (`QuestOperateVital`) เท่านั้น ไม่เกี่ยวกับการคลิกครั้งแรกที่ใบนี้ทดสอบ**.
+- `src/pirateforce_foundation/runtime.py::_dispatch_columbus_quest3021` (บรรทัด ~4186-4301): แขนแรก (คลิก)
+  รันเมื่อ `nested_id in (legacy.TARGET_VITAL, legacy.CHOOSE_NPC)` และ `self.population_indices is not None`
+  และ `columbus_quest_dispatch.COLUMBUS_PLACEMENT_INDEX in self.population_indices` (เกตนี้ **load-bearing
+  ไม่ใช่ defensive** -- คอมเมนต์ของโค้ดเองอ้าง `tests/test_world_census_wiring.py`) -- ถ้าตัวที่คลิกตรงกับ
+  actor identity ของ Columbus (`columbus_quest_dispatch.columbus_actor_identity(legacy)` = `0x2000+1+1` =
+  `0x2002` ตามสูตรเดียวกับที่ census ทั้งหมดใช้) จะคิวแอ็กชันเลเบล
+  `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE` เข้าไปครั้งเดียวต่อเซสชัน (ธง
+  `self.columbus_quest3021_conversation_sent` กันส่งซ้ำ) และ append event
+  `core_request_014_columbus_npc_conversation_sent_once`. เฟรมที่ประกอบเป็น `NPCConversation` (`0x31D8`)
+  ทรงเดียวกับ `make_npc_conversation_quest3020` เดิม (RE-094 พิสูจน์ว่าเป็นทรงทั่วไป) พารามิเตอร์ด้วย actor
+  identity ของ Columbus กับ quest id `3021`.
+- `self.population_indices` ถูกประกอบจาก **arrival census ปกติตอน login** (`runtime.py` บรรทัด ~5332,
+  `generation.indices`) -- ไม่มีสวิตช์แยก ไม่ต้องเดินไปใกล้ Columbus ก่อนเซิร์ฟเวอร์จะ "รู้จัก" เขา -- แต่
+  ผู้เล่นยังต้อง **เดินไปให้เห็นโมเดลบนจอจริง** ก่อนถึงจะคลิกได้ (นี่คือข้อจำกัดของมนุษย์หน้าจอ ไม่ใช่ของ
+  server-side gate).
+- พิกัดจริงของ placement index 1 (จากตารางที่ frozen เดิม, `PORT_ROYAL_UNAMBIGUOUS_PLACEMENTS` แถวที่ 2):
+  X **-8013.458984375**, Y **-2780.045166015625**, Z **223.29209899902344** -- 🔴 **หมายเหตุ**: คอลัมน์ชื่อ
+  แสดงผล (7th field) ของแถวนี้ในตารางเก่าเขียนว่า `'Sebastian'` ไม่ใช่ `'Columbus'` -- เป็นป้ายเก่าที่ไม่
+  อัปเดต ห้ามใช้ตัดสินตัวตน ให้เชื่อ owner testimony (0925/0950) ที่ผูก index 1 = Columbus (MOBS 156) แทน.
+  ระยะจากจุดเกิด (X -8553.9473, Y -2579.6890, Z 186.0 ตามที่ GT-084/GT-101 ใช้) ถึงพิกัดนี้ ~576 หน่วย
+  (ใกล้กว่า GT-084's target มาก).
+- `notes_to_chief/FROM_CHIEF_R192_TO_ATTENDED_20260827_1230.md`: chief เขียนตรงถึงผู้เทสเองว่า "ทดสอบแค่
+  Columbus ตอบจริงไหม ไม่ต้องลองกดไปทะเลต่อ (ยังไม่พร้อม)" -- ใบนี้เขียนตามคำสั่งนั้นเป๊ะ (ดู steps ข้อ 6
+  และ nonclaims).
+
+### objective (claim เดียว)
+เมื่อผู้เล่นคลิกโมเดล Columbus (placement index 1) ที่ Port Royal บนบูตไร้แฟล็ก -- ไคลเอนต์แสดงหน้าต่างบท
+สนทนาที่มีข้อความตรงกับเควสต์ 3021 จริงหรือไม่ (ไม่ใช่ความเงียบแบบเมื่อวาน ไม่ใช่ error ไม่ใช่บทสนทนาของ
+เควสต์อื่น) -- ทั้งชั้น wire (เฟรม `NPCConversation` + event ถูกคิวจริง) และชั้น client-observable
+(สิ่งที่ตาเห็นบนจอ). ใบนี้ **ไม่ทดสอบ** ว่ากด "มุ่งหน้าไป Atlantic Ocean" (ตอบรับ) แล้วเกิดอะไรต่อ -- นั่นคือ
+op1/`QuestOperateVital` ซึ่งเขียนไว้แล้วในซอร์สว่า **ปฏิเสธเสมอวันนี้** ด้วยเหตุผลที่ไม่เกี่ยวกับคำถามของใบนี้
+(ดู nonclaims).
+
+### คำทำนาย (คำทำนายที่ผิด = ผล ไม่ใช่ความล้มเหลว)
+- P1 [เสนอ, หัวใจของใบ] คลิกโมเดล Columbus ครั้งแรกในเซสชัน -> คอนโซลเซิร์ฟเวอร์พิมพ์บรรทัด
+  "[G>] CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE (N bytes)" ครั้งเดียว พร้อม event
+  `core_request_014_columbus_npc_conversation_sent_once`.
+- P2 [เสนอ] ถ้า P1 เป็นจริง -- หน้าต่างบทสนทนาโผล่บนจอจริง มีข้อความตรง/ใกล้เคียง `s_QUEST_NAME`="มุ่งหน้าไป
+  Atlantic Ocean：Rising Sun Sea" และ/หรือ `s_WORD1`="พร้อมที่จะออกเดินทางไปยัง...อย่างอิสระแล้วหรือยัง?" --
+  ไม่ใช่ข้อความว่าง ไม่ใช่ error, ไม่ใช่ข้อความของเควสต์อื่น (เช่นเควสต์ 3020 เดิม).
+- P3 [เสนอ, ตัวหักล้าง] ถ้าคลิกแล้วไม่มีอะไรขึ้นเลย (เหมือนเมื่อวาน) และคอนโซลไม่มีบรรทัด P1 เลย -> event
+  ที่ควรเห็นแทนคือหนึ่งใน `columbus_choose_npc_parse_error_*` / `columbus_actor_not_found_*` /
+  `columbus_conversation_compose_refused_*` (ชื่อ event ที่โค้ดเองประกาศไว้สำหรับกรณีปฏิเสธที่แขนคลิก) หรือ
+  ไม่มี event ใหม่เลย (แปลว่าเกตไม่ผ่านตั้งแต่ `population_indices`/`nested_id`) -- นี่คือผลลบที่มีค่าเท่ากับ
+  PASS ต้องเขียนให้เด่นเท่ากัน พร้อม redirect ไปยังเหตุผลที่คอนโซลพิมพ์จริง.
+- P4 [ข้อมูล, ไม่ตัดสิน pass/fail ของใบนี้] ถ้าผู้เทสคลิก/กดปุ่มตอบรับ "ข้าชอบการเดินทางแบบอิสระ" ต่อ (ไม่ว่า
+  ตั้งใจหรือพลาด) -- คาดว่าคอนโซลจะพิมพ์ event `columbus_quest3021_dispatch_refused_
+  scene17_teleport_refused_scene_has_no_pinned_spawn` แล้ว
+  `columbus_quest3021_dispatch_refused_no_re096_vehicle_row_evidence` และ **ไม่มีการย้ายฉาก/กลายเป็นเรือบน
+  จอเลย** (ยังอยู่ Port Royal เหมือนเดิม) -- นี่คือพฤติกรรมปฏิเสธที่ตั้งใจ ไม่ใช่บั๊ก แต่ **ไม่ใช่ objective ของ
+  ใบนี้** ห้ามใช้ตัดสิน PASS/FAIL ของใบนี้เอง (ดู nonclaims).
+
+### ก่อนบูต -- ด่าน 0 (ยังไม่ merge ณ ตอนเขียนใบนี้ -- ห้ามข้าม), ด่าน 1 (green boot), ด่าน 2 (grep ยืนยันสาย)
+
+**ด่าน 0 -- สถานะ merge:** CORE-REQUEST-014 อยู่ที่ commit `5d9cfd3` บนแบรนช์ `claude/tender-ride-4txjyg`
+ของ `pirate-force-server` ณ 2026-08-27 -- **PR ยังเปิดอยู่ ยังไม่ merge เข้า `main`**. `pf_resolve_green_boot
+.py` เดินตาม `origin/main` เท่านั้น (คำอธิบายในหัวไฟล์ของสคริปต์เอง) -- ถ้า PR ยังไม่ merge ตอนที่ผู้เทสรัน
+ด่าน 1 รีโซลเวอร์จะไม่คืนคอมมิตที่มีโค้ดนี้ (`exit 3` หรือคอมมิตที่ไม่มี `columbus_quest_dispatch.py`) --
+ใบนี้ยัง**บูตไม่ได้** ให้บันทึกผลเป็น "รอ merge" แล้วไปทำใบอื่น -- **ห้าม checkout branch `claude/tender-
+ride-4txjyg` ตรง ๆ ข้ามรีโซลเวอร์** แม้จะรู้เลข commit ก็ตาม (กติกาเดียวกับทุกใบอื่นในคิวนี้).
+
+**ด่าน 1 -- resolve commit เขียว:**
+```
+py -3 pf_resolve_green_boot.py --repo "C:\path\to\pirate-force-server" --fetch
+```
+รันจากโฟลเดอร์ pf_bridge, exit 0 + `BOOT_COMMIT: <sha>` เท่านั้นถึงบูตได้ (git checkout `<sha>` แบบ detached
+HEAD). ห้ามเทียบเลข commit ด้วยตา -- resolver คืนหัวแบรนช์ที่ผ่านเกต ไม่ใช่ merge commit เสมอไป.
+
+**ด่าน 2 -- ยืนยันสายจริงของ `<SHA>` (ห้ามเชื่อเลขบรรทัดในเอกสาร ต้อง grep ของจริง):**
+```
+git grep -n "columbus_quest_dispatch" <SHA> -- src/pirateforce_foundation/runtime.py
+git grep -n "_dispatch_columbus_quest3021" <SHA> -- src/pirateforce_foundation/runtime.py
+git grep -n "def dispatch_columbus_quest3021" <SHA> -- src/pirateforce_foundation/columbus_quest_dispatch.py
+git grep -n "core_request_014_columbus_npc_conversation_sent_once" <SHA> -- src/pirateforce_foundation/runtime.py
+git grep -n "COLUMBUS_QUEST_ID = 3021" <SHA> -- src/pirateforce_foundation/columbus_quest_dispatch.py
+```
+ต้องได้อย่างน้อย 1 บรรทัดต่อคำสั่งทั้ง 5 คำสั่ง. ขาดข้อใดข้อหนึ่ง = **BLOCKED** -- คอมมิตที่จะบูตยังไม่มี
+CORE-REQUEST-014 ต่อสายจริง ห้ามบูต ห้ามหาคอมมิตเอง ไปทำใบอื่นแล้วรอ merge.
+
+### db (สำเนาเสมอ ห้ามเปิด canonical, ห้ามแตะ state\play.sqlite3)
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-102_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt102.sqlite3
+```
+- เทียบ sha256 ของ canonical กับ `CANON_SHA.txt` ก่อนเริ่มและหลังจบ ต้องตรงทั้งสองครั้ง.
+- สำเนาใหม่ทุกบูต ⇒ ตำแหน่งตัวละครรีเซ็ตกลับจุดเกิดเสมอ (X -8553.9473, Y -2579.6890, Z 186.0).
+
+### server args (เป๊ะ -- ไม่มี --*-scenario เพราะ CORE-REQUEST-014 ทำงานเสมอ ไม่มีสวิตช์)
+```
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+py -3 -u -m pirateforce_foundation.app --db state\run_gt102.sqlite3
+```
+ห้ามมี `--*-scenario` แม้แต่ตัวเดียว, ห้ามพ่วงใบอื่นเข้าบูตนี้. หลักฐานว่าไม่มีแฟล็กจริง เก็บทันทีหลัง
+เซิร์ฟเวอร์ขึ้น แปะทั้งบรรทัดลงผล:
+```
+Get-CimInstance Win32_Process -Filter "Name='python.exe'" | Select-Object ProcessId,CommandLine | Format-List
+```
+
+### steps (คลิกต่อคลิก -- อัดวิดีโอต่อเนื่องตลอดช่วงถือ LOCK_GAME)
+ก่อนเริ่ม: ถือ LOCK_GAME, จด boot stamp (+07:00, ต้องไม่เก่ากว่า 420 นาทีตอนรัน teardown), เทียบ sha
+canonical, copy DB สองใบตามบล็อก db, เตรียม teardown จาก `TEMPLATE_teardown_generic.ps1`. ยืนยันด่าน 0-2
+ผ่านครบ (จด SHA ที่บูต).
+
+1. สตาร์ตเซิร์ฟเวอร์ก่อนเสมอ (`Get-NetTCPConnection -State Established` พอร์ต 10188/10189 = 0 ก่อนเปิด
+   client). client ที่บูตโดยไม่มีเซิร์ฟเวอร์ตายเองใน ~3.5 นาที. ถ้าต้องฆ่า client กลางคัน ต้อง restart
+   server ก่อนเปิด client ใหม่เสมอ (server ถือ session ค้าง ⇒ client ตัวถัดไปค้างที่ "connecting" ตลอดกาล).
+2. เปิด client -> เลือกเซิร์ฟเวอร์ -> dialog PVP ปุ่มซ้าย -> หน้าเลือกตัวละคร -> เลือกช่องแรก -> ปุ่มกลาง
+   สุดจาก 5 ปุ่มแถวล่าง = เข้าเกม (ปุ่มซ้ายสุด = ลบตัวละคร ห้ามกด). เริ่มอัดวิดีโอต่อเนื่องตั้งแต่ก่อนกดเข้า
+   เกม.
+3. T0 -- เห็น HP bar/minimap/ชื่อแมพครบ. จด HUD X/Y. คลิกขวาค้างลากกวาดกล้อง 360 องศาหนึ่งรอบ (ตัวเช็ค
+   NO-CRASH ตัวเดียวที่ใบนี้ยอมรับ -- คลิกขวาลากหมุนกล้องอย่างเดียว ทิศหันตัวละครไม่ขยับ ไม่ยิงอะไรออกสาย
+   ปลอดภัยเสมอ -- **ห้ามใช้ Q/E เป็นตัวเช็คนี้เด็ดขาด** เพราะ Q/E หันตัวละครจริงและยิง `TargetPosVital`).
+4. เดินไปทาง (-8013.5, -2780.0) โดยอ่าน HUD X/Y เทียบทุกช่วง (W/A/S/D คาดว่ายิง `TargetPosVital` ทุกครั้งที่
+   ขยับ/หันตัว -- คาดหมายและไม่ใช่ความเสี่ยงของใบนี้). งบเวลาเดินทาง 10 นาที (ระยะ ~576 หน่วยจากจุดเกิด,
+   ใกล้กว่าที่ GT-084 เคยเดิน). ถ้าครบ 10 นาทีแล้วยังไม่เห็นโมเดล NPC ที่ตำแหน่งนี้เลย ให้หยุดแล้วเขียนเป็น
+   NO-RESULT พร้อมเหตุผล (ระยะวาดโมเดล/ตำแหน่งไม่ตรง) ไม่ใช่ FAIL.
+5. เมื่อเห็นโมเดล: ถ่ายภาพนิ่ง full-res ของป้ายชื่อเหนือหัวโมเดล **ก่อน**คลิก (บันทึกสีป้าย + ข้อความป้ายถ้า
+   อ่านได้). single-click ที่โมเดลหนึ่งครั้ง (ตามแบบ NPC-style interaction ที่ `docs/COMMAND_HANDOFF.md`
+   บันทึกไว้แล้วว่าคลิกเดียวพอสำหรับ ChooseNPC/TargetVital -- ไม่ต้องดับเบิลคลิก). จดทันทีหลังคลิก: (ก)
+   บรรทัดคอนโซลเซิร์ฟเวอร์ทั้งหมดที่ขึ้นใหม่ (ข) สิ่งที่เห็นบนจอ (หน้าต่างบทสนทนาขึ้นไหม ข้อความอะไร).
+6. ถ่ายภาพนิ่ง full-res ทันทีที่เห็นหน้าต่างบทสนทนา (หรือทันทีที่ผ่านไป 10 วินาทีแล้วไม่มีอะไรขึ้นถ้า P3
+   เป็นจริง) -- นี่คือภาพหลักที่ตัดสิน P2. **ถ้าเห็นหน้าต่างขึ้นจริง: อ่าน/บันทึกข้อความในหน้าต่างคำต่อคำ
+   ห้ามอ่านจากความจำ ต้องอ่านจากภาพนิ่ง full-res เท่านั้น แล้วเทียบกับข้อความที่คาดไว้ใน P2. จากนั้น
+   🔴 กดปุ่มที่แปลว่า "ปฏิเสธ/อยู่ที่นี่" (คาดว่าคือปุ่มสอง หรือปุ่มที่มีข้อความใกล้เคียง "ข้าจะอยู่ที่นี่")
+   เพื่อปิดหน้าต่าง -- ห้ามกดปุ่มตอบรับ "มุ่งหน้าไป Atlantic Ocean" โดยตั้งใจ (คำสั่งตรงจาก chief letter
+   `notes_to_chief/FROM_CHIEF_R192_TO_ATTENDED_20260827_1230.md`) เว้นแต่กดพลาด -- ถ้ากดพลาด ไม่ต้อง
+   ตกใจ ให้จดเวลาที่กดพลาดไว้ แล้วสังเกต/จดตาม P4 ต่อ (ข้อมูลเสริม ไม่กระทบ pass/fail ของใบนี้) แล้วกลับมา
+   ทำ NO-CRASH check ข้อ 7 ต่อตามปกติ.**
+7. NO-CRASH check ซ้ำ: คลิกขวาลากอีกครั้ง -- ยืนยันไคลเอนต์ยังตอบสนอง.
+8. ออกเกม -> teardown ตาม `TEMPLATE_teardown_generic.ps1` -> เทียบ sha canonical รอบสุดท้าย.
+
+### pass criteria (สองชั้น แยกกันเสมอ ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น)
+
+ชั้น wire/DB (อ่านจาก server console/event log ล้วน ๆ ไม่ต้องพึ่งสิ่งที่เห็นบนจอ):
+- single-click ที่โมเดล Columbus ทำให้คอนโซลพิมพ์บรรทัด
+  "[G>] CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE (N bytes)" อย่างน้อยหนึ่งครั้งในเซสชันนี้
+  (ครั้งแรกเท่านั้น -- ธง `columbus_quest3021_conversation_sent` กันส่งซ้ำโดยออกแบบ ครั้งที่สองไม่ควรพิมพ์
+  ซ้ำ ถ้าคลิกซ้ำ ให้จดว่าไม่มีบรรทัดใหม่ขึ้นและถือเป็นพฤติกรรมที่ถูกต้อง ไม่ใช่ผลลบ).
+- event `core_request_014_columbus_npc_conversation_sent_once` ปรากฏในเซสชันนี้ (ถ้ามีการ export event log
+  ให้แนบ; ถ้าไม่มีช่องทางอ่าน event list โดยตรง ให้ถือบรรทัดคอนโซลข้อบนเป็นหลักฐาน wire เพียงพอ).
+- `sessions`: `count(*) WHERE selected_character_id IS NOT NULL` +1 ต่อการเข้าเกมหนึ่งครั้ง, `max(lease_
+  generation)` ไม่ถอยหลัง, `PRAGMA integrity_check` = `ok` บนสำเนา, sha256 canonical ก่อน-หลังตรงกับ
+  `CANON_SHA.txt` ทั้งสองครั้ง.
+- raw GAME log ทั้งไฟล์ + console out/err เก็บทั้งก่อน/หลัง ไม่ตัดทอน.
+- ผลลบที่สมบูรณ์เท่ากับ PASS: คลิกโมเดล Columbus แล้วไม่มีบรรทัด
+  "CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE" ขึ้นเลย และไม่มี event ใหม่ที่เกี่ยวข้องขึ้นเลย
+  ตลอดรอบ ⇒ เขียนเป็นผลลบเต็มรูป พร้อมบรรทัดคอนโซลทั้งหมดที่ขึ้นแทน (ถ้ามี) เพื่อช่วยชี้ว่าเกตไหนไม่ผ่าน
+  (`population_indices`/`nested_id`/`columbus_actor_not_found_*`/etc).
+
+ชั้น client-observable (ต้องมีคนหน้าจอ, ห้ามอนุมานจากบรรทัดคอนโซล):
+- หน้าต่างบทสนทนาปรากฏบนจอจริงหลังคลิก (หรือไม่ปรากฏ -- ทั้งสองผลมีค่าเท่ากันถ้าตรงกับที่ชั้น wire รายงาน
+  ไว้ อย่าตัดสินแยกจากชั้น wire).
+- ถ้าปรากฏ: ข้อความในหน้าต่างตรง/ใกล้เคียงกับที่คาดไว้ (`s_QUEST_NAME`/`s_WORD1` ของเควสต์ 3021 ตามที่จดไว้ใน
+  "ที่มา") -- บันทึกข้อความที่เห็นจริงคำต่อคำจากภาพนิ่ง full-res แล้วเทียบเป็นบรรทัดต่อบรรทัด ไม่ใช่แค่ "ตรง/
+  ไม่ตรง" เฉย ๆ.
+- สีของป้ายชื่อทุกป้ายในทุกภาพนิ่ง full-res (ป้ายชื่อ Columbus ก่อนคลิก, ป้ายชื่อตัวเอง, ป้ายอื่นถ้ามีในเฟรม)
+  บันทึกเป็นบรรทัดเดียวต่อป้ายต่อภาพ ("none" เขียนออกมาถ้าไม่มี ห้ามเว้นว่าง) -- อ่านจากภาพนิ่ง full-res
+  เท่านั้น ห้ามอ่านจาก contact sheet/ภาพย่อ/วิดีโอ ห้ามอนุมานสาเหตุของสี (`RE-067` เปิดอยู่). ไม่มีภาพอ้างอิง
+  ของเซิร์ฟเวอร์ต้นฉบับที่รู้จักสำหรับ NPC ตัวนี้โดยเฉพาะ ณ ตอนเขียนใบนี้ -- ใช้
+  `compared_and_matched=no-reference` ถ้าไม่มีภาพอ้างอิงจริง ๆ.
+
+### nonclaims
+- 🔴 **ใบนี้ไม่ทดสอบว่ากดตอบรับ ("มุ่งหน้าไป Atlantic Ocean") แล้วเกิดอะไรต่อ** -- op1/`QuestOperateVital`
+  เขียนไว้แล้วในซอร์สว่าปฏิเสธเสมอวันนี้ด้วยเหตุผลสองข้อที่เปิดอยู่ (`RE-103` พิกัด player-arrival ของ scene
+  17, `RE-096` payload ผูกเรือ) -- **ไม่ใช่คำถามของใบนี้** ถ้าผู้เทสกดพลาดแล้วเห็นพฤติกรรมตาม P4 ให้จดไว้เป็น
+  ข้อมูลเสริมเท่านั้น ห้ามใช้ตัดสิน PASS/FAIL ของใบนี้เอง (ตามคำสั่งตรงของ chief letter R192).
+- ข้อผูก "placement index 1 = Columbus (MOBS 156)" เป็น **owner testimony** ไม่ใช่ table crosswalk (ดู "ที่มา")
+  -- ถ้าบทสนทนาที่เห็นไม่ตรงกับเควสต์ 3021 ใบนี้ **แยกไม่ออก** ระหว่าง (ก) การต่อสาย NPCConversation ผิด กับ
+  (ข) ข้อผูก index-1-คือ-Columbus เองผิด -- เขียนทั้งสองความเป็นไปได้ไว้ในผล ไม่ตัดสินเอง.
+- ใบนี้ไม่ยืนยันไบต์ดิบของเฟรม `NPCConversation` สำหรับเควสต์ 3021 เทียบกับ capture จริง -- RE-094 พิสูจน์แค่
+  ทรงทั่วไปของเฟรม (จากเควสต์ 3020), ยังไม่มีใครรัน RE-095-style wire capture ให้กับ 3021 โดยเฉพาะ (มีข้อ
+  เสนอชื่อใบอย่างไม่เป็นทางการว่า `NPCCONVERSATION-COLUMBUS-156-QUESTID-3021-WIRE-CONFIRM-001` ใน LANE-A
+  correction letter แต่ **ยังไม่ได้เปิดเป็นใบจริงในคิว ณ ตอนเขียนใบนี้** -- อย่าอ้างเลขที่ยังไม่มี) -- ใบนี้
+  ปิดคำถามแค่ระดับ "ฟังก์ชันถูกเรียกจริง + คนเห็นข้อความที่ตรงกัน" ไม่ใช่ระดับไบต์.
+- ใบนี้ทดสอบผู้เล่นคนเดียว เซสชันเดียว -- ไม่ทดสอบว่าผู้เล่นคนที่สองคลิก Columbus พร้อมกันจะเกิดอะไร.
+- ไม่ทดสอบความเสถียรข้าม reconnect/relogin -- ล็อกอินครั้งเดียวในรอบนี้.
+- ไม่ชี้สาเหตุของสีป้ายชื่อ (`RE-067` เปิดอยู่).
+- ถ้าด่าน 0/1/2 ไปไม่ถึง (ยังไม่ merge/BLOCKED) => ทั้งใบเป็น "รอ merge"/BLOCKED ไม่ใช่ NO-RESULT/FAIL --
+  ยังไม่ได้ล็อกอินเลย.
+
 ### result (ผู้เทสกรอก)
 ```
 

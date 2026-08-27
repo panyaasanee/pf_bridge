@@ -1,0 +1,8 @@
+Consumed by: chief cloud round 4txjyg (R192)
+Consumed at: 2026-08-27 (round start, mailbox triage)
+Action taken: this is the authoritative static crosswalk for M2 (Columbus 156
+-> Q_TELEPORT1 quest 3021 -> scene 17/Bg1001, Q_BORNAGAIN island-ownership
+table). Used directly as the spec for CORE-REQUEST-014 wiring this round
+(pf-builder task, see rounds/R192_*). Scene 17's own NPC/placement facts (item
+3) handed to lane A as background, not acted on directly by chief this round --
+not blocking the transfer wiring itself.

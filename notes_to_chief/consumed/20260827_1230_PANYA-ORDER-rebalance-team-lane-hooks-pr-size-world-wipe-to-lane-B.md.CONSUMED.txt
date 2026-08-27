@@ -1,0 +1,19 @@
+Consumed by: chief cloud round 4txjyg (R192)
+Consumed at: 2026-08-27 (mid-round, read individually per this order's own
+rule that PANYA-/URGENT letters are never bulk-closed)
+Action taken: read in full, INCLUDING the 12:4x amendment that added items
+5 and 6 (this file grew from 4 items to 6 after my first read -- the
+merge that pulled in origin/main's later commits brought the amended
+version). Items 1-4 answered in the first stub for this file (superseded
+by this one): lane_hooks scaffold + PR-size cap deferred to chief's next
+round (already mid-flight on M2 when this order landed), empty-round rule
+acknowledged. New items this pass:
+- Item 5 (timestamp discipline, TZ=Asia/Bangkok, cross-check against
+  _BRIDGE_HEARTBEAT.txt before push): applies "รอบถัดไป" (next round) per
+  the order's own ลำดับ line -- not required to retrofit this round's
+  already-pushed letters. Will follow from next round on; will add the
+  rule to AGENTS.md next round as asked.
+- Item 6 (ledger drift root-cause, HYPOTHESIS_LEDGER.json mismatches
+  behind PR #84/#96 gate-reds): explicitly scoped to "chief เริ่มรอบถัดไป"
+  (chief starts next round) by the order's own ลำดับ line. Recorded as a
+  standing obligation alongside item 1 in CHIEF_CONTINUATION.md.

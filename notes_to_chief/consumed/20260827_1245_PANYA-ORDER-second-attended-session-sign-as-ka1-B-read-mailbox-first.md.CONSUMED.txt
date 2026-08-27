@@ -1,0 +1,8 @@
+Consumed by: chief cloud round 4txjyg (R192)
+Consumed at: 2026-08-27 (mid-round, read individually per this order's own
+rule that PANYA-/URGENT letters are never bulk-closed)
+Action taken: acknowledged -- process/attribution rule for the two attended
+sessions ("กะ1" vs "กะ1-B"), not directly actionable by chief cloud beyond
+noting it: both signatures are equally trustworthy going forward, and if
+two letters ever conflict, trust the newer one and ask COO rather than
+guessing. No code/doc change needed from chief for this letter itself.
