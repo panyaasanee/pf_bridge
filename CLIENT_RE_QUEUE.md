@@ -3339,3 +3339,54 @@ negative แล้วปิด ไม่เดาต่อ · ไม่เปิ
 negative ครบทั้งสองคำถาม ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
 
 ### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-101 SCENE17-BG1001-PLAYER-ARRIVAL-SPAWN-001 [STATIC-ON-BRIDGE]: **หาพิกัด/marker จุดที่ผู้เล่นควรปรากฏตัวเมื่อเข้าฉาก 17 (`Bg1001`, ตระกูลทะเล `n_SCENE_TYPE=4`) — `Bg1001.placements.tsv` มีแค่ 8 แถว monster spawn ไม่มี player marker เลย**  [🟢 **OPEN — เปิดโดย chief cloud รอบ `4txjyg` (R192) 2026-08-27 ~12:0x (+07:00) บล็อก `CORE-REQUEST-014`/M2**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-101` = **0 hit**, `GT-101` = **มี hit** (`GAME_TEST_QUEUE.md`,
+> ใบของสาย GM) — ตัวนับร่วมกัน `099`-`100` ถูกจองไปแล้วตามที่ `RE-100` บันทึกไว้ ⇒ เลขว่างถัดไปคือ `101` ⇒
+> **ใบนี้คือ `RE-101`** (คนละใบกับ `GT-101` ถึงเลขจะซ้ำกัน เพราะ `GT`/`RE` ใช้ตัวนับร่วมแต่คนละไฟล์/คนละแถว)
+> เลขว่างถัดไปหลังใบนี้ = 102
+> 🔴 ใบ `RE-085`-`RE-100` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`notes_to_chief/20260827_1052_LANE-A-CORRECTION-columbus-m2-quest3021-not-3023-scene17-not-19.md` (Columbus
+156 → quest 3021 → scene 17 ยืนยันระดับ [STATIC] ตาราง gamedata แล้ว) + `src/pirateforce_foundation/
+columbus_quest_dispatch.py` (chief cloud รอบนี้ ต่อสาย `CORE-REQUEST-014` — `dispatch_columbus_quest3021()`
+เรียก `world_scene_entry.resolve_entry()` จริง แต่ถูกปฏิเสธด้วย `SceneEntryRefused(REFUSED_NO_PINNED_SPAWN)`
+เพราะ `scenarios/world_scene_registry_001.json`'s scene-17 entry มี `spawn: null` — ไม่มีใครวัดพิกัดจริง)
+ใบนี้คือช่องว่างเดียวที่บล็อกครึ่งการย้ายฉากของ `CORE-REQUEST-014` (อีกครึ่งคือ vehicle bind payload ซึ่งมีใบ
+`RE-096` เปิดอยู่แล้ว คนละใบ)
+
+### objective
+หาว่าไคลเอนต์/เซิร์ฟเวอร์ต้นฉบับกำหนดจุดที่ตัวละครควรปรากฏเมื่อเข้าฉาก 17 (`Bg1001`) ด้วยกลไกอะไร — ไม่ใช่
+monster spawn (มีอยู่แล้ว 8 แถวใน `Bg1001.placements.tsv`, ไม่เกี่ยวกับใบนี้)
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยัน image SHA/ตาราง sha256 ที่จะอ้างอิงตรงกับ verifier ปัจจุบันก่อนเริ่ม
+- **T1** — เทียบฉากอื่นในตระกูลเดียวกัน (`Bg1002`-`Bg1007`, `n_SCENE_TYPE=4`, scene 18-23) ว่ามี player-arrival
+  marker แยกจาก monster placement table หรือไม่ — ถ้ามีฉากใดในกลุ่มนี้ที่เคยมีคนเข้าจริง (login/relogin
+  เคยลงเอยที่ฉากนี้) ให้หาว่าพิกัดนั้นมาจากตารางไหน (login-position table แยก, หรือ field อื่นใน
+  `CONSTDATA_TH__SCENE_NAME.tsv`/scene descriptor ที่ยังไม่เคยอ่าน)
+- **T2** — ถ้า T1 หา pattern เจอ ใช้ pattern เดียวกันดึงพิกัดของ `Bg1001` โดยเฉพาะ พร้อม provenance
+  (ไฟล์/แถว/offset) ครบ
+- **T3** — ถ้าหาไม่เจอในเส้นทางที่ถอดได้ ให้เขียน bounded negative ชัดเจนว่า "ไม่มี player-arrival marker
+  แยกต่างหากสำหรับตระกูลฉากทะเลในข้อมูลที่ commit ไว้ — ต้องใช้การวัดจากไคลเอนต์จริง (attended/RE runner
+  เข้าฉากจริงแล้วบันทึกพิกัดที่ปรากฏ)" ไม่เดาพิกัด ไม่ปั้น XYZ
+
+### nonclaims
+① ไม่อ้างว่าพิกัดที่เจอ (ถ้าเจอ) ผ่านการยืนยันระดับ wire — ระดับ [STATIC] เท่านั้นจนกว่าจะมี capture จริง
+② ไม่ตัดสินว่า `world_scene_entry.resolve_entry`'s refusal ผิด — refusal ถูกต้องแล้วตามกติกาเดิมของมันเอง
+(กฎ 2 ในด็อกสตริงของมันเอง) ใบนี้แค่หาข้อมูลที่จะทำให้มันไม่ปฏิเสธอีกต่อไป
+③ ถ้า T1-T3 ไม่พบอะไรเลยในเส้นทางที่ถอดได้ นี่คือคำตอบที่สมบูรณ์ (bounded negative) ไม่ใช่ใบที่ค้าง — ปิดได้
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์ scene/gamedata อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded
+negative แล้วปิด ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+พิกัด player-arrival ของ scene 17 พร้อม provenance **หรือ** bounded negative ที่บอกตรงๆ ว่าต้องใช้ attended
+capture ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
