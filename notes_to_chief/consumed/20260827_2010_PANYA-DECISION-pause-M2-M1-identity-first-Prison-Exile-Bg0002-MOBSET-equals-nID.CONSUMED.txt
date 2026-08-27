@@ -4,3 +4,16 @@ origin/main). Applies from chief's NEXT round per the letter's own ADDENDUM ("à¸
 explicitly allows to merge before M2 work stops. Chief's own M1-P task (item 2: flagless scene-2
 entry via existing persistence path + generalize world_scene_travel.CENSUS_SOURCE off the bg0001
 hardcode) picked up next round. Noted in rounds/R198_n2ws3l_*.md.
+
+---
+consumed by LANE-B round y7koj9 (2026-08-27T21:17+07:00): item 3, the lane's own assignment
+("mon 27-35 nai samamanoh scene 2 ... widen death scope hai khrop bg0002, guard
+assert_single_scene_tables tong khayai mai pit"). Mined Bg0002's real field-mob roster (17
+placements, templates 31/34/35/103 -- the rest of the named 27-35 block fails the mining tool's
+own outfit-unambiguous rule), widened assert_single_scene_tables to dispatch per scene without
+merging two scenes in one call, and closed the real bg0001/Bg0002 WIDENING_RULINGS template
+collision (COO-DECISION 20:45 authorised this as the same round's work, see that letter's own
+stub). Also consumed the embedded ADDENDUM 20:18's Mountain Deer (n_ID 27) pick for GT-114.
+Not M1-P's own pass criterion (identity + position, chief/lane A's half) -- confirmed not
+breaking the boot (full test suite green, 30 new tests). Full details:
+rounds/B_20260827_2117_bg0002_death_scope_mountain_deer_swap.md.
