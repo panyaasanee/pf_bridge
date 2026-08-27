@@ -1,0 +1,9 @@
+consumed by LANE-B round B_20260827_1734 (ebbhzt) - 2026-08-27T17:34+07:00
+
+RE-107 (opened by LANE-B round 1637, answered by RE runner LOCAL): bounded
+negative. Predicate pair 0x43BDA0/0x43BD70 reads only timer/mask bit, not
+name/faction/wire mask; fall-vs-freeze gate is a client-local model-loaded
+bit (actor+0x70 & 0x40), no server-writable field found. BUILD_IMPACT: NONE.
+CLIENT_RE_QUEUE.md RE-107 header updated to CLOSED BOUNDED-NEGATIVE/DONE,
+result section filled in place. No code diff this round. Next step (attended
+capture isolating the model-loaded gate) is outside LANE-B's write zone.

@@ -1,0 +1,16 @@
+consumed by LANE-B round B_20260827_1734 (ebbhzt) - 2026-08-27T17:34+07:00
+
+ADDRESSEE: LANE-B item from Panya's original-server combat reference. Applied
+this round:
+(a) spam-click rapid-damage hole: server-side minimum attack cadence per
+    performer, value PROVISIONAL until RE/gamedata gives a real number,
+    console-logs every rejection (pirate-force-server, companion PR).
+(b) GT-084/GT-084-R2 header criteria wording fixed to orange-then-dark-red
+    (not "red") in GAME_TEST_QUEUE.md, own-write-zone header lines only.
+(c) new RE tickets opened per Panya's R1/R2/R5 list (name-color incl. own
+    character, auto-attack cadence/pose, loot-drop render frame) in
+    CLIENT_RE_QUEUE.md -- R3 (death frame) and R4 (target panel) were
+    already answered this round as RE-107/RE-108 (see their own CONSUMED
+    stubs), so only the remaining three were opened new.
+Full detail: rounds/B_20260827_1734_panya_reference_applied.md (this repo)
+and the companion round file in pirate-force-server.
