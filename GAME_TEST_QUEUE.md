@@ -4600,7 +4600,7 @@ canonical, copy DB สองใบตามบล็อก db, เตรีย�
 
 ---
 
-## GT-105 CORE-REQUEST-014-PARTIAL SCENE17-PROVISIONAL-ARRIVAL-001: เดินทางเข้าฉาก 17 (Bg1001, "เรือกลางทะเล") ด้วยพิกัดชั่วคราวที่เจ้าของเคาะเอง (0,0,0) -- ไคลเอนต์วางผู้เล่นได้อย่างเป็นปกติไหม หรือจมพื้น/หลุดขอบแมพ/ค้าง  [PENDING -- ไม่บล็อก M4/M5, ไม่ใช่การปิด CORE-REQUEST-014 เต็ม]
+## GT-106 CORE-REQUEST-014-PARTIAL SCENE17-PROVISIONAL-ARRIVAL-001: เดินทางเข้าฉาก 17 (Bg1001, "เรือกลางทะเล") ด้วยพิกัดชั่วคราวที่เจ้าของเคาะเอง (0,0,0) -- ไคลเอนต์วางผู้เล่นได้อย่างเป็นปกติไหม หรือจมพื้น/หลุดขอบแมพ/ค้าง  [PENDING -- ไม่บล็อก M4/M5, ไม่ใช่การปิด CORE-REQUEST-014 เต็ม]
 
 > เลขใบ: ตัวนับร่วมกับ CLIENT_RE_QUEUE.md, ยืนยัน 105 ว่าง ณ 2026-08-27T15:xx+07:00 (grep 0 hit ทั้งสองไฟล์
 > รวม archive/) เปิดโดย chief รอบ `e0daaa`.
@@ -4633,6 +4633,16 @@ ResolveColumbusArrivalTests::test_succeeds_on_the_owner_decreed_provisional_spaw
 พิกัดขาเข้าฉาก 17 เป็นค่าชั่วคราวจากเจ้าของ ยังไม่พิสูจน์ว่าไคลเอนต์วางผู้เล่นบนผิวน้ำ/ในขอบแมพ -- ถ้าเข้าแล้ว
 ตกขอบ/ค้าง **ให้รายงานเป็นผล ไม่ใช่ FAIL ของกฎ**
 
+### ความเสี่ยงที่ pf-adversary พบ (รอบ e0daaa) -- บันทึกไว้ก่อนลอง อย่ารีบสรุป FAIL
+- ไคลเอนต์อาจปฏิเสธ `TeleportVital` เงียบ ๆ ถ้า client-side FSM ไม่อยู่ state `StateRunTime`/`StateNavigation`
+  ตอนที่เฟรมมาถึง (`RE-077` T3) -- ไม่มีใครวัด state ตอนคลิกเลือกบทสนทนาว่าเป็น state ไหน ถ้าผู้เล่นไม่ขยับเลย
+  หลังคลิก นี่คือหนึ่งในสาเหตุที่เป็นไปได้ ไม่ใช่แค่ "โค้ดพัง"
+- ยิงได้แค่ครั้งเดียวต่อ connection (`columbus_quest3021_dispatch_attempted` ล็อกถาวร) -- ถ้าครั้งแรกพลาด
+  (เหตุผลข้างบนหรืออื่นใด) ต้อง disconnect/reconnect ใหม่เท่านั้น คลิกซ้ำจะไม่มีอะไรเกิดขึ้นเลย (เงียบสนิท
+  ไม่มี event) อย่าคลิกซ้ำแล้วรอ ให้ reconnect แทน
+- ก่อนถึงใบนี้ได้เลย ต้องผ่านประตูเควส (110/739/111 = Finish) ก่อน -- ดู `CHIEF-STATUS 20260827_1545` ว่า
+  ยังไม่มีใครต่อสายให้ ถ้าไคลเอนต์ไม่ยอมให้เลือกตัวเลือกเควส 3021 เลย นั่นคือคำตอบของคำถามนั้น ไม่ใช่ของใบนี้
+
 ### หมดอายุ
 ใบนี้ (และค่าพิกัดชั่วคราวเอง) ถูกแทนที่ทันทีที่ `RE-103` T3 มีหลักฐานจริง (client-observable capture หรือ
 wire evidence ของจุดขาเข้าจริง) -- ตอนนั้นให้ปิดใบนี้และแก้ registry กลับเป็นค่าที่วัดจริง อย่าปล่อยให้ทั้งใบ
@@ -4658,7 +4668,7 @@ git grep -n "resolve_columbus_arrival\|world_scene_entry.resolve_entry" <SHA> --
 
 ### db (สำเนาเสมอ ห้ามเปิด canonical)
 ```
-copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-105_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-106_<yyyyMMdd_HHmmss>.sqlite3
 copy state\pirateforce.sqlite3 state\run_gt105.sqlite3
 ```
 เทียบ sha256 canonical กับ `CANON_SHA.txt` ก่อน/หลัง ต้องตรงทั้งสองครั้ง
