@@ -1,0 +1,1 @@
+consumed by chief round 2y0zil (2026-08-28T09:53+07:00): still open, no COO ruling yet on the 3 options for the cross-scene actor_identity collision (touches world_population.py, chief territory). Not blocking today (per-session DeathRegister, M2 scene-crossing paused). Chief takes no code action until COO decides.

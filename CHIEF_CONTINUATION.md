@@ -1,31 +1,30 @@
 # PIRATE FORCE — Chief Architect continuation file
 
 
-## รอบ 108–111 + แบนเนอร์ครั้งเดียว 2026-08-20 21:30 — ⤴ ย้ายไป archive แล้ว (รอบ 140)
--> `archive/CHIEF_CONTINUATION_ARCHIVE_20260824_R108_R111.md`
-(R111 = HYP-PF-029 NPC-HP-LINK-001 ผ่านจอจริง GT-039 · R110 = คำตอบสี่ข้อ+merge-claude-pr · R109 = ทาง D ci-status · R108 = ท่อ sync + prompt A′)
----
 
----
+## ดัชนีรอบเก่า (รอบ 44–178) — ย้ายไป archive แล้วทั้งหมด บรรทัดเดียวต่อกลุ่ม ไม่มีการลบเนื้อหา รายละเอียดเต็มอยู่ในไฟล์ archive ที่ชี้ไว้
 
-## รอบ 107 — ⤴ ย้ายไป archive แล้ว (รอบ 109)
-
-`pf_bridge\archive\CHIEF_CONTINUATION_ARCHIVE_20260820_R109_ROUND107.md`
-— ดีไซน์ sync ฝั่ง Windows (ทำจริงแล้วรอบ 108) · repo ที่สอง · ข้อเท็จจริงของ Routine
-· คำถาม A/B เรื่อง push (เคาะเป็น A′ รอบ 108) · วิธีอ่านผล Actions (เคาะเป็นทาง D รอบ 109)
-
-## รอบ 93 + 95 + 96 — ⤴ ย้ายไป archive แล้ว (รอบ 102)
-
-> ฉบับเต็ม: `pf_bridge\archive\CHIEF_CONTINUATION_ARCHIVE_20260820_R93_R95_R96.md`
-> ใจความที่ยังต้องรู้: R93 ปิดหนี้ gate-reproducible + แก้ GT-024 ด้วยไบต์ (FINDINGS_R93 = ท่อแสดงผล CHitResult) ·
-> R95 ปิดงบ HYP-PF-024 (3/3) ด้วย profile npc_sweep + IMG-QUERY-001 · R96 เปิด multiplayer ก้อน 2 (HYP-PF-025) ·
-> บทเรียน census SET-vs-mention (จ็อบ 156 REFUSED = guard ทำงานถูก) อยู่ในฉบับเต็ม
-
-## รอบ 92 (+ residue ก่อนรอบ 93) — ⤴ ย้ายไป archive แล้ว (รอบ 96)
-> เนื้อหาเต็ม: `pf_bridge\archive\CHIEF_CONTINUATION_ARCHIVE_20260820_R92.md` (ไม่ได้ลบ ไม่ได้แก้)
----
-
-> 📦 **[ย้ายไป archive 2026-08-17 23:1x (chief รอบ 44)]** รอบเก่า ☕ 26→M13 + คำขอจาก Panya (ตอบครบแล้ว) → `pf_bridge/archive/CHIEF_CONTINUATION_ARCHIVE_20260817.md` ก้อน A
+- รอบ 44 (26→M13 + คำขอ Panya ตอบครบแล้ว) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260817.md` ก้อน A
+- รอบ 53 (§1-§35: ข้อจำกัดเครื่อง/PF BRIDGE/Workspace/Playbook/โครงสร้างทีม/บันทึกรอบ 41-45) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R53.md`
+- รอบ 60 (§36-§44: รอบ 46-54, persistence design/ลูกมือ Windows probe/HYP-PF-015/CHAT-ECHO-002,004) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R60.md`
+- รอบ 68 (§45-§50: รอบ 55-60 CHAT-ECHO-005..008/MOVE-AUTHORITY-001/MOVE-CADENCE-001 + รอบ 61-63) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R67.md`
+- รอบ 64-67 (NAMEID fold revert/occupied_destination_policy/same_slot_noop/MOVE-ISOLATION-001) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R72.md`
+- รอบ 68-71 (SPLIT-OPERATE-001..003/ITEM-MERGE-001) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R76.md`
+- รอบ 72-75 (MOVE-AUTHORITY-001/MOVE-PROJECT-001/USE-DROP-SELL-001/CHAT-CHANNEL-001) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R77.md`
+- รอบ 76-78 (CHAT-CHANNEL-002/003/MULTIPLAYER-READINESS-AUDIT-001/STATS-PROG-002 — actor_type 2..6 = CNetActor/CMyActor/CNetNPC/CAvatarNPC/Pet, remote player=2 — 🔴 **Option 1 ส่วน (a) เสร็จตั้งแต่รอบ 78 ห้ามทำซ้ำ**, รอบ 81 เกือบสั่งลูกมือทำซ้ำมาแล้วครั้งหนึ่ง) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260819_R78.md`
+- รอบ 80-81 (UI-REFRESH-001/HP-DEATH-001 + 4 lane ขนาน NAMES/DELETE-REFRESH/HP-DEATH-002/MP-OPT1-B) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260819_R80_R81.md`
+- รอบ 82-83 (CORPUS-PIN-001 44/67 pinned/DAMAGE-MODEL-001: i32 signed ที่ hit entry +0x08, wire = tagged stream) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260819_R82_R83.md`
+- รอบ 84-85 (DYING-HOLD-001/ATTENDED-EVIDENCE-001/SCAN-DEBT-001 + NAMES-FOLD-002/RUNTIMERES-ACTOR-ENTRY-001/RESOLVE-SCOPE-001) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260819_R84_R85.md`
+- รอบ 86-89 (RUNTIMERES-ENCODER-001/NAMES-FOLD-003/COMMENT-ERRATA-002/LEDGER-VISIBILITY-001/CP874-PORTABILITY-001/DEATH-ESCALATE-001/BRIDGE-LIVENESS-001) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260820_R86_R89.md`
+- รอบ 90-91 (guard แดง = guard ทำงาน · **takeover แล้วให้อ่านทรีก่อน อย่าเขียนทับ** · HYP-PF-024 16 path `d4ed4d4` + RUNTIMERES-LATCHONLY-001 `47c7211`) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260820_R90_R91.md`
+- รอบ 92 -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260820_R92.md`
+- รอบ 100-102 (GT-027/028/029 results, DYING-COUNTDOWN 3-layer proof — เดิมไม่มีบรรทัดดัชนีของตัวเอง เข้าถึงได้อ้อมผ่าน `R109_ROUND107.md`'s บรรทัด 156 เท่านั้น ก่อนรอบนี้) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260820_R100_R101_R102.md`
+- รอบ 93+95+96 (gate-reproducible/GT-024 CHitResult · HYP-PF-024 3/3 · multiplayer ก้อน 2 HYP-PF-025) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260820_R93_R95_R96.md`
+- รอบ 107 (sync design ฝั่ง Windows/repo ที่สอง/push A'/อ่านผล Actions ทาง D) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260820_R109_ROUND107.md`
+- รอบ 108-111 (HYP-PF-029 NPC-HP-LINK-001 GT-039/merge-claude-pr/ci-status ทาง D/ท่อ sync + prompt A') -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260824_R108_R111.md`
+- รอบ 112-150 (42 รอบ, บรรทัดดัชนีครบ ไม่มีการลบ) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260825_R112_R150.md`
+- รอบ 151-165 (15 รอบ, บรรทัดดัชนีครบ ไม่มีการลบ) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260826_R151_R165.md`
+- รอบ 166-178 (13 รอบ, บรรทัดดัชนีครบ ไม่มีการลบ) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260827_R166_R178.md`
 
 ## 0. โครงสร้างทีมคืนนี้ + เช็คก่อนเริ่มทุกครั้ง
 
@@ -56,140 +55,6 @@
    ให้เอามาประมวล/commit ต่อ
 
 ---
-
-> 📦 **[ย้ายไป archive 2026-08-18 (chief รอบ 53)]** §1–§35 (ข้อจำกัดเครื่อง §1 · PF BRIDGE §2 ·
-> Workspace §3 · Playbook full-loop §7 — สำเนาสดใช้งานอยู่ใน GAME_TEST_QUEUE.md แล้ว ·
-> โครงสร้างทีม §16 — ฉบับ authoritative อยู่ใน prompt ของ scheduled task · บันทึกรอบ 41–45 §31–§35)
-> → `pf_bridge/archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R53.md`
->
-> ⚡ digest ข้อจำกัดที่ยังบังคับ (จาก §1–§3 — รายละเอียดในไฟล์ archive):
-> bash=Linux sandbox เท่านั้น งาน Windows ผ่าน PF BRIDGE `.ps1` ASCII → inbox (log UTF-8, quote ทุก path มี space) ·
-> request_access ใน scheduled run โดนปฏิเสธเสมอ · เปิดเกมจาก bridge = บล็อก · worktree เดิม 3 path ห้าม clone/สร้างใหม่ ·
-> git ใน sandbox: cd เข้า ServerProject + `--no-optional-locks` + หลัง commit `mv HEAD.lock HEAD.lock.stale` ·
-> gate จริง = Windows `py -3` ผ่าน bridge · sqlite เปิดจาก sandbox = copy /tmp หรือ mode=ro เท่านั้น · sleep ≤100 วิ
-
-> 📦 **[ย้ายไป archive 2026-08-18 06:1x (chief รอบ 60)]** §36–§44 (บันทึกรอบ 46–54 ปิดครบแล้ว:
-> รอบ 46 ดีไซน์ persistence characters/accounts `d0401f0` PROPOSED · รอบ 47+50 probe ลูกมือ Windows
-> Claude CLI ผ่าน read `094` + acceptEdits `095` · รอบ 48–49 idle สั้น · รอบ 51 HYP-PF-015 soft delete
-> + slot reuse `005b3d4` gate 449/0 · รอบ 52 ประมวลรอบใหญ่ #2 + fix v2 delete ack + ปิดบั๊กระบบ 2 ตัว
-> `0411987` + canonical guard · รอบ 53 CHAT-ECHO-002 + HYP-PF-016 headless GREEN TCP จริง →
-> GT-012/013 staged + archive §1–§35 · รอบ 54 CHAT-ECHO-004 static 0xAC52 Q1=A `5789f13`)
-> → `pf_bridge/archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R60.md`
->
-> ⚡ ยังมีผลบังคับ (รายละเอียดใน archive):
-> - **ลูกมือ Windows Claude CLI พร้อมใช้** (probe 094 read + 095 acceptEdits ผ่าน — เดิม §37.2/§40.3):
->   full path `& "C:\Users\Panya\.local\bin\claude.exe" -p` · stdout → `.agent_stdout.txt` · กติกา scope/ห้าม
->   commit/ห้ามแตะ canonical อยู่ใน prompt ของ scheduled task แล้ว
-> - **❓ คำถามค้าง Panya (รอบ 46, ไม่บล็อก):** ดีไซน์ persistence characters/accounts ยัง PROPOSED
->   รอเคาะ — รายละเอียด §36.2–36.3 ใน archive
-
-## [ARCHIVED รอบ 68] §45–§50 (รอบ 55–60) + รอบ 61–63 → pf_bridge\archive\CHIEF_CONTINUATION_ARCHIVE_20260818_R67.md
-
-> ย้ายโดย chief รอบ 68 (housekeeping, CONTINUATION ชนเพดาน 100KB) — สรุปหัวเรื่องที่ย้าย:
-> §45–47 CHAT-ECHO-005..007 (Q2 render gate/vtable, static) · §46 e1741db/820d473/eb52975
-> §48 MOVE-AUTHORITY-001 856f9e9 (client-authoritative movement, static) · §49 MOVE-CADENCE-001 ef9acd7 (headless B)
-> §50 CHAT-ECHO-008 cec8c82 (map 10 คลาส Community_*Vital, Grade A static) + แม่บ้าน archive §36–§44
-> รอบ 61 TELEPORT-CHECK-001 · รอบ 62 NAMEID-HASH-001 · รอบ 63 NAMEID-RESOLVE-001 (static, นำไปสู่กำแพง v141 ในรอบ 64)
-
-## รอบ 64–67 — ⤴ ย้ายไป archive แล้ว (รอบ 75)
-
-รอบ 64 (NAMES fold ชนกำแพง v141-immutable → revert · ซ่อม manifest 61–63 · commit `561cb02`) ·
-รอบ 65 (occupied_destination_policy → HYP-PF-017 swap headless · commit `9126fb5`) ·
-รอบ 66 (same_slot_noop blocked→runtime_pass · commit `e2fca8a`) ·
-รอบ 67 (move_negative_paths isolation → MOVE-ISOLATION-001 · commit `2f82af9`)
-→ เนื้อหาเต็มอยู่ที่ `pf_bridge\archive\CHIEF_CONTINUATION_ARCHIVE_20260818_R72.md`
-
-## รอบ 68–71 — ⤴ ย้ายไป archive แล้ว (รอบ 76)
-
-> 📦 `pf_bridge\archive\CHIEF_CONTINUATION_ARCHIVE_20260818_R76.md`
-> - **รอบ 68** SPLIT-OPERATE-001 `950819c` — inventory/split_stack not_started→in_progress, ItemOperate opcode space
-> - **รอบ 69** SPLIT-OPERATE-002 `08fb65b` — op6 = quantity-op family 4 call-site
-> - **รอบ 70** SPLIT-OPERATE-003 `ab89a24` — verb 0x16 two-panel, static caption route ปิด (เหลือ live capture)
-> - **รอบ 71** ITEM-MERGE-001 / HYP-PF-018 `8282a21` — generalized same-template merge, headless wire/DB proven
-> ⚡ ที่ยังบังคับอยู่จากสี่รอบนี้: **ป้าย "numeric-input dialog resource 0x12" @0x5A34D7 ของ SPLIT-OPERATE-001/002 ถูกแก้แล้วในรอบ 75** (จริง ๆ คือ MSVC EH trylevel store) — โครงสร้างที่พิสูจน์ไม่กระทบ · GT-015 ต้องการ live capture เท่านั้น
-
-## รอบ 72–75 — ⤴ ย้ายไป archive แล้ว (รอบ 77)
-
-> `pf_bridge\archive\CHIEF_CONTINUATION_ARCHIVE_20260818_R77.md` — เนื้อหาครบไม่ตัดทอน
-> · รอบ 72 MOVE-AUTHORITY-001 `6577626` · รอบ 73→74 MOVE-PROJECT-001 `f0f1968`
-> · รอบ 75 USE-DROP-SELL-001 + CHAT-CHANNEL-001 `b2e4669`
-
-## รอบ 76–78 — ⤴ ย้ายไป archive แล้ว (รอบ 81)
-
-> เนื้อหาเต็มของ **รอบ 76 (CHAT-CHANNEL-002/003), รอบ 77 (MULTIPLAYER-READINESS-AUDIT-001),
-> รอบ 78 (STATS-PROG-002 + MP-AUDIT-FOLLOWUP-001)** อยู่ที่
-> `pf_bridge\archive\CHIEF_CONTINUATION_ARCHIVE_20260819_R78.md`
->
-> สิ่งที่ยังต้องรู้จากสามรอบนี้โดยไม่ต้องเปิด archive:
-> - **MP-AUDIT-FOLLOWUP-001 (รอบ 78) ตอบ G1 ของ audit ไปแล้วระดับ ①** — `actor_type` 2..6 =
->   CNetActor / CMyActor / CNetNPC / CAvatarNPC / Pet · **remote player = 2** · F8 ปิด · G2 แคบลง
->   ⇒ **Option 1 ส่วน (a) เสร็จตั้งแต่รอบ 78 ห้ามทำซ้ำ** (รอบ 81 เกือบสั่งลูกมือทำซ้ำ)
-> - audit รอบ 77 = ต้นทางของคำถาม G1–G9 และของคำตัดสิน Option 1 ของ Panya
-> - รอบ 79 ไม่มีบันทึก: ถือ LOCK 18:2x แล้วตายเงียบ 5h42m โดยไม่ spawn อะไรเลย
-
----
-
-## รอบ 80–81 — ⤴ ย้ายไป archive แล้ว (รอบ 83)
-
-`archive\CHIEF_CONTINUATION_ARCHIVE_20260819_R80_R81.md`
-· รอบ 80 = UI-REFRESH-001 + HP-DEATH-001 · รอบ 81 = สี่ lane ขนาน (NAMES/DELETE-REFRESH/HP-DEATH-002/MP-OPT1-B)
-· **ทั้งสี่ lane ของรอบ 81 ถูกเทสจริงในรอบใหญ่ #4-#5 และ PASS หมด** — ผลอยู่ในรอบ 83
-
-
-## รอบ 82–83 — ⤴ ย้ายไป archive แล้ว (รอบ 85)
-
-> เนื้อหาเต็มของ **รอบ 82 (CORPUS-PIN-001), รอบ 83 (DAMAGE-MODEL-001)** อยู่ที่
-> `pf_bridge\archive\CHIEF_CONTINUATION_ARCHIVE_20260819_R82_R83.md`
->
-> สิ่งที่ยังต้องรู้จากสองรอบนี้โดยไม่ต้องเปิด archive:
-> - **`docs/PF_CAPTURE_CORPUS.json` = บ้านเดียวของชุดหลักฐาน** (รอบ 82) — เลิกถามไดเรกทอรีว่าไฟล์ไหนคือหลักฐาน
->   ตัวเลขที่เผยแพร่ = **44 จาก 67** (ไม่ใช่ 69 · 2 live tail ถูกกันออกโดยระบุชื่อ) · ถ้าตัวตรวจ corpus แดง
->   **ห้าม regenerate ตารางให้เขียว** ให้ไปหาจ็อบที่เขียนทับหลักฐาน
-> - **รอบ 83 พิสูจน์ว่า client ไม่คำนวณ damage เอง** — ตัวเลขที่ลอยขึ้นคือ **i32 มีเครื่องหมาย** ที่ server
->   วางไว้ที่ hit entry `+0x08` ผ่าน abs() แล้วพิมพ์ ⇒ **ตัวเลขต้นฉบับกู้ไม่ได้ตลอดกาล** (ทาง 2 ปิดถาวร)
-> - **wire = tagged stream** — ทุก field คือ tag byte 1 ตัวแล้วตามด้วย payload · client เทียบ tag แล้วยก
->   error flag ถ้าไม่ตรง ⇒ **server ต้องส่ง tag ให้ตรงเป๊ะ ไม่ใช่แค่ความกว้างถูก** · hit result = 5 field
->   แล้วตามด้วย array ของ entry ละ 32 ไบต์ (target id · i32 damage · position vec · reaction angle · u16 flag)
-> - **`DURATION_DYING` = 20** (อ่านจากอิมเมจรอบ 83) — ปิดหนี้ค่า placeholder 60.0f ของรอบ 81
-> - 🔴 **รอบ 85 หักล้างพาดหัวรอบ 83 หนึ่งประโยค** — ดูรอบ 85 หัวข้อ RUNTIMERES-ACTOR-ENTRY-001 และ
->   erratum ที่ต่อท้าย `reports/PF_HP_DEATH001_HP_DEATH_AND_RESPAWN_STATIC_20260819.md`
-
----
-
-## รอบ 84–85 — ⤴ ย้ายไป archive แล้ว (รอบ 87)
-
-อยู่ที่ `pf_bridge\archive\CHIEF_CONTINUATION_ARCHIVE_20260819_R84_R85.md` (ไม่ได้ลบ ไม่ได้แก้)
-· รอบ 84 = DYING-HOLD-001 + ATTENDED-EVIDENCE-001 + SCAN-DEBT-001 → commit `8360f57`
-· รอบ 85 = NAMES-FOLD-002 + RUNTIMERES-ACTOR-ENTRY-001 + RESOLVE-SCOPE-001 → commit `32878e0`
-· เรื่องเล่าฉบับเต็มของทั้งสองรอบอยู่ในข้อความ commit ของมันเองด้วย
-
-## รอบ 86 + 87 — ⤴ ย้ายไป archive แล้ว (รอบ 92)
-> เนื้อหาเต็ม: `pf_bridge\archive\CHIEF_CONTINUATION_ARCHIVE_20260820_R86_R89.md`
-> (RUNTIMERES-ENCODER-001 + NAMES-FOLD-003 + COMMENT-ERRATA-002 + LEDGER-VISIBILITY-001 + CP874-PORTABILITY-001)
-> 🔑 **บทเรียนที่ยังใช้อยู่ อย่าลืม:** เครื่องมือห้ามพิมพ์อักขระนอก cp874 ออก console (อีโมจิทำ gate แดงเฉพาะบน Windows)
-> · *"check ที่ไม่เคยเห็นมันแดง ไม่ใช่ check"*
-
-## รอบ 89 — ⤴ ย้ายไป archive แล้ว (รอบ 92)
-> เนื้อหาเต็ม: `pf_bridge\archive\CHIEF_CONTINUATION_ARCHIVE_20260820_R86_R89.md`
-> (บัญชีใหม่รอบแรก · DEATH-ESCALATE-001 + BRIDGE-LIVENESS-001 + งานแม่บ้านส่งกะ)
-
-## รอบ 90 (ถูกตัดกลางคัน) + รอบ 91 — ⤴ ย้ายไป archive แล้ว (รอบ 95)
-
-> ฉบับเต็ม: `pf_bridge\archive\CHIEF_CONTINUATION_ARCHIVE_20260820_R90_R91.md`
-> ใจความ: จ็อบ 145 แดงหนึ่ง guard จึงไม่ commit (fail closed ทำงาน) · รอบ 90 ถูกตัดกลางซ่อม ·
-> รอบ 91 อ่านทรี รันเทสซ้ำจนเขียว แล้ว commit `d4ed4d4` (HYP-PF-024 ลงจริง 16 path) +
-> เปิด RUNTIMERES-LATCHONLY-001 (`47c7211`) ตามที่ผู้เทสขอ · บทเรียนหลัก: **guard ที่แดงคือ guard ที่ทำงาน**
-> และ **takeover แล้วให้อ่านทรีก่อน อย่าเขียนทับ**
-
-## รอบ 112-150 (บรรทัดดัชนี) — ⤴ ย้ายไป archive แล้ว (รอบ 164)
--> `archive/CHIEF_CONTINUATION_ARCHIVE_20260825_R112_R150.md`
-(48 บรรทัดจากช่วง R112-R150 = รายการรอบ 42 + บรรทัดว่าง/บรรทัดต่อ 6 · ครบทุกบรรทัด ไม่มีการลบ · บันทึกเต็มของแต่ละรอบยังอยู่ที่ `rounds/R<NNN>_*.md`)
-
-## รอบ 151-165 (บรรทัดดัชนี) — ⤴ ย้ายไป archive แล้ว (รอบ 179)
--> `archive/CHIEF_CONTINUATION_ARCHIVE_20260826_R151_R165.md`
-(15 บรรทัดจากช่วง R151-R165 = รายการรอบ 15 · ครบทุกบรรทัด ไม่มีการลบ · บันทึกเต็มของแต่ละรอบยังอยู่ที่ `rounds/R<NNN>_*.md`)
-
-- R166-R173 (8 รอบ) — ↴ ย้ายไป archive แล้ว (รอบ jsrh00, 2026-08-27) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260827_R166_R178.md`
 
 ## CORE-REQUEST registry — ตัวนับเดียวทุกสาย (COO-DECISION 20260826_0656 · ตารางนี้สร้างโดย chief R174 · ปรับปรุงสถานะล่าสุด R177)
 
@@ -254,3 +119,4 @@
 - R201(0hy495) 2026-08-27 ~22:5x (+07:00) ไม่มีแก้โค้ด: ยืนยัน R200 ทั้งสอง repo merged=true, พบว่ากล่องจดหมาย 6 ใบที่คิดว่าไม่มี stub จริง ๆ มี stub ครบแล้ว (เช็คผิดรูปแบบชื่อไฟล์เอง) เติมสำเนา consumed/ ที่ขาด 3 ใบ ตอบ KA1A's M1-P console-token/scene2-login คำถาม + แจ้ง COO ว่า widen-death-scope stage2 ทำไปแล้วตั้งแต่รอบ 13:50 ไม่ต้องเพิ่มคำเคาะใหม่ [สรุปย่อ -> rounds/R201_0hy495_mailbox-archive-gap-fix-plus-two-chief-replies.md]
 - R202(9b6zl6) 2026-08-27~28 ~23:5x-00:4x (+07:00) ต่อสาย `GT_DIAG_MULTI_OBJECT_WIRING` (GT-114, CORE-REQUEST 022) ครบ 4 จุดใน `runtime.py`, แก้บั๊ก census-erasure ที่สาย B เจอไว้ก่อนต่อสาย, เทสใหม่ผ่าน dispatcher จริง 5 ข้อ, full suite 3806 passed · 2 container restart กลางรอบคร่า subagent (โค้ดต่อสายรอด แต่ pf-adversary รอบเต็มหาย -- chief ตรวจ 4 จุดเสี่ยงเองแทนบางส่วน) · ตอบ KA1A 2240/2305, ปิด LANE-B 2344 (self-resolved) [สรุปย่อ -> rounds/R202_9b6zl6_gt114-diag-multi-object-wiring-landed.md]
 - R203(9do841) 2026-08-28 ~01:5x-02:3x (+07:00) ต่อสาย `CORE-REQUEST-023` (COO เรียก "022" ผิด ชนกับ R202 chief ขยับเลข) — class_id=1/level=1 ทุกบูต แก้บล็อกหน้าต่างสกิล (GT learn-skill) · จุดตรวจ length-delta ของ hostile-pairing บังคับให้แก้ทั้งสองสาขา (plain + faction=1) พร้อมกัน มิฉะนั้นฟีเจอร์ที่ใช้งานอยู่จะ fail-closed ทุกครั้ง (เจอเองระหว่างทำ) · ฟังก์ชันเดิมที่เลนอื่น crosscheck ไม่แตะเลย · เทสเต็ม 3546 passed 0 failed เขียว(cloud sanity) ledger PASS · pf-adversary ไม่พบบั๊ก wire-layout พบ 3 จุด docstring ค้างชื่อฟังก์ชันเก่า แก้แล้ว · ยังไม่แตะย้ายชื่อ x1/x37 ตามที่ใบต้นทางขอ (ขัดกับหลักฐาน live-client-confirmed ที่ commit ไว้เอง ขอ COO/RE ยืนยันก่อน) [สรุปย่อ -> rounds/R203_9do841_core-request-023-class-level-login.md]
+- R204(2y0zil) 2026-08-28 ~09:5x (+07:00) ไม่มีแก้โค้ด: ต่อสาย CORE-REQUEST -- ไม่มีงานใหม่ที่ปลดล็อกได้รอบนี้ (ตรวจผ่าน subagent triage ของกล่องจดหมายตั้งแต่ R203) · stub จดหมายค้าง 10 ใบ (chief/COO/PANYA/KA1A owned) · ตัด `CHIEF_CONTINUATION.md` 59.8KB -> 47.6KB (ยุบบล็อก "ย้ายไป archive แล้ว" รอบ 44-178 เป็นดัชนีบรรทัดเดียว, ยังเกินเพดาน 30KB, ตัวทะเบียน CORE-REQUEST ที่เหลือจงใจไม่แตะ) · pf-adversary จับได้จริง 2 จุด (บทเรียน "ห้ามทำซ้ำ Option 1(a)" กับ "takeover อ่านทรีก่อน" หายไปตอนยุบ -- คืนกลับแล้ว) + เติมดัชนีที่ขาดของ archive R100-102 (ปัญหาเดิมก่อนรอบนี้) · แก้ `GAME_TEST_QUEUE.md`'s GT-116 จาก BLOCKED เป็น PENDING (merge #162 + sha 8017c71 ยืนยันแล้วจริงผ่าน API + git log) [สรุปย่อ -> rounds/R204_2y0zil_mailbox-stub-backlog-plus-continuation-size-cut-plus-gt116-unblock.md]
