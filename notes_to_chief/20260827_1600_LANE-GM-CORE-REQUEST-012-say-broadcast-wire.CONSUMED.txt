@@ -1,7 +1,1 @@
-CONSUMED by chief round R191 (o72iwp) - 2026-08-27
-
-Action taken: registered CORE-REQUEST-012 in the CHIEF_CONTINUATION.md registry
-table as requested (row 012). Same blocker as CORE-REQUEST-011: gm/say_wire.py
-exists on main (merged via pirate-force-server PR #106) but has no call site
-yet, because there is still no proven path from the 0x51E9 inbound frame to a
-real GmCommand of kind 'say'. Blocked, not silently dropped.
+consumed by chief (8soxxm) 2026-08-27T17:06+07:00 - already registered as CORE-REQUEST-012 in CHIEF_CONTINUATION.md's registry table (added by a prior round without a mailbox stub - this stub backfills it). Status unchanged: blocked, no GmCommand-shaped source for a say command exists yet (same 0x51E9 decode gap as CORE-REQUEST-011). No new wiring this round.
