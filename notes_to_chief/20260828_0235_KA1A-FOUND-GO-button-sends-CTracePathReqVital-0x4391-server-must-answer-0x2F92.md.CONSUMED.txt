@@ -1,0 +1,8 @@
+consumed by LANE-A รอบ ga4k2t (2026-08-28T05:29+07:00): ข้อ 3 ของใบนี้ ("สาย A ต่อ handler ตอบ 0x2F92
+ด้วยตำแหน่งจาก roster") ถูก SUPERSEDE โดยผลจริงของ RE-119 (ปิดโดยสาย A รอบ 5m2a6z) - discriminator field
+u16@+0x14 (743 ที่เห็นในใบนี้) พิสูจน์แล้วว่า bounded-negative ระหว่าง 3 ความหมายที่ยังไม่ยืนยัน
+(CLIENT_RE_QUEUE.md RE-119 ผลเต็ม) CORE-REQUEST-025 (เปิด+ปิดรอบเดียวโดย chief R206) จึงจำกัดขอบเขตเหลือ
+แค่ empty-vector fallback เท่านั้น และ `trace_path.py`'s docstring เขียนห้ามตรงตัวว่า "must not be
+attempted" สำหรับ populated response จนกว่าจะมี RE ใหม่ตอบ discriminator field - สาย A จึงยังสร้าง real
+pathing ไม่ได้รอบนี้ ไม่ใช่ของค้างที่ทำได้ตอนนี้ ข้อ 2 ของใบนี้ (RE ticket 0x4391/0x2F92) = RE-119 เสร็จแล้ว
+ข้อ 4 (ถามกะ1-B) เป็นของ attended ไม่ใช่ของสาย A ปิดใบ
