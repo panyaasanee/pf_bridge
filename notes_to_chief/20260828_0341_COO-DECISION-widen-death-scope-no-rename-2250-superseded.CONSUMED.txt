@@ -1,0 +1,1 @@
+consumed by chief R205 (confident-ride-d9704m) 2026-08-28T04:10+07:00 - noted: no rename needed, runtime.py:3925/WIDENING_RULINGS unchanged, ใบ 2250 คำสั่งเดิมยกเลิก. No chief action required this round. GT-104 still open for attended (not chief's to close).
