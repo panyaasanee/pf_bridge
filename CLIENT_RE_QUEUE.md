@@ -1251,3 +1251,76 @@ layout ของ nested reader พร้อม provenance **หรือ** bound
 **ทำไมมีค่า:** ถ้ารายการนี้เป็น packet ของเซิร์ฟเวอร์และไม่ใช่ census ที่ `world_population.py`/
 `world_population_bg0002.py` ส่งอยู่แล้ว จะเป็น opcode ที่ M1/M1-P ยังไม่ได้ส่งเลย — ผู้เล่นจะเห็นเมือง/เกาะ
 มี actor ยืนอยู่จริง แต่กด M แล้วค้นหาไม่เจอใครเลย ถ้าไม่ปิดใบนี้ก่อนจะไม่มีใครรู้ว่านี่คือช่องว่างที่ต้องต่อสาย
+
+---
+
+## 🆕🔬 RE-116 NPC-SPAWN-HEADING-SOURCE-001 [STATIC-ON-BRIDGE]: **actor spawn-time orientation มาจากไบต์/ตารางไหนของไคลเอนต์ (ถ้ามีเลย) — MOB_CENSUS ของเราไม่เคยส่งมันมาก่อน**  [🟡 OPEN]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง (2026-08-28T02:33+07:00, รวม `notes_to_chief/`, `rounds/`):
+> `RE-116`/`GT-116` = 0 hit ทั้ง `CLIENT_RE_QUEUE.md` และ `GAME_TEST_QUEUE.md` — เลขสูงสุดที่ใช้แล้วคือ
+> `115` (`RE-115`, ใบก่อนหน้าในรอบเดียวกัน) ⇒ ใบนี้คือ `116`
+> 🔴 ใบ `RE-085`-`RE-115` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`notes_to_chief/20260828_0150_M1P-RESULT-PASS-owner-confirms-Prison-Exile-identities-6-gaps-map-window-lead.md`
+gap ②: เจ้าของเห็น NPC/มอนทุกตัวบนเกาะคุกขยับ/หายใจจริง แต่หันหน้าทิศเดียวกันหมด ไม่เป็นธรรมชาติ — เซิร์ฟเวอร์
+เราไม่เคยส่งฟิลด์ heading จริงให้ actor เลย (`make_remote_movement_attr`'s heading arg เป็น `0.0` มาตลอดทั้ง
+bg0001 และ bg0002 จนถึงรอบนี้)
+
+รอบนี้ (LANE-A) หา static-only ในคลังนี้ก่อนเปิดใบ (ผลติดไว้ให้ RE runner ไม่ต้องทำซ้ำ):
+- `Bg0002Placement`/`SceneActorPlacement` dataclass ทั้งสอง (`scene2_prison_exile_tables.py`, `population.py`)
+  ไม่มีฟิลด์ heading/direction/rotation/facing/yaw เลย
+- Raw `gamedata/scene/Bg0002/Bg0002.placements.tsv` มีคอลัมน์ `f32_3`/`f32_4`/`f32_5` ที่ไม่เคยถูก join เข้าตาราง
+  ใดๆ — ค่าที่แท้จริง (วัดจริงทั้ง 106 แถว) เป็นเลขกลมช่วง 0-5500 ซ้ำกันข้าม MOBSET คนละชุด ไม่ใช่ค่าต่อเนื่อง
+  แบบมุม (ควรจะเป็น 0-360/0-2π ถ้าเป็น heading) — รูปร่างเหมือน radius สามชั้นมากกว่า และสมมติฐาน
+  "f32_4/f32_5 = radius" เคยถูกทดสอบและ**ตกไปแล้ว**โดยสาย B รอบก่อน
+  (`notes_to_chief/20260827_1030_LANE-B-REPLY-PANYA-ORDER-npc-scene-file-field-interpretation.md` บรรทัด
+  11-28: 11/13 placement มี f32_4/f32_5 เหมือนกันทุกตัว (500/800) ทั้งที่ `n_AGGRO` จริงต่างกัน 0 vs 1200)
+- `CONSTDATA_TH__MARKER.n_DIRTECTION` (`gamedata/tables/CONSTDATA_TH__MARKER.tsv`, คอลัมน์จริง ยืนยัน offset
+  ที่ `gamedata/PF_GAMEDATA_COLUMNS.tsv` แถว 1488-1493) เป็น enum เข็มทิศหยาบ 0-12 จริง แต่ scene 2 มีแค่ 18
+  แถว (ไม่ใช่ 97) และไม่มี join key เข้า `Bg0002Placement.n_id`/`placement_index` เลยในโค้ดที่ commit แล้ว —
+  แถว `n_ID=2` ตรงพิกัด spawn ที่ pin ไว้ใน `scenarios/world_scene_registry_001.json` เป๊ะ (หลักฐานเอนไปทาง
+  ตาราง teleport/arrival waypoint ไม่ใช่ตารางหันหน้า NPC แต่ยังไม่ตัดขาด)
+- Wire slot มีจริง ไม่ใช่ stub: `make_remote_movement_attr`'s heading f32 เขียนที่ offset `+0x34` ภายใต้ mask
+  bit `0x02` (`current/pf_login_game_server_v141.py:1204-1245`) ยืนยันด้วยรายงาน static-RE ที่ commit แล้ว
+  ตรง byte กับ Serial `0x4671C0` (`reports/PF_MOVE_PROJECT001_REMOTE_MOVEMENT_PROJECTION_STATIC_20260818.md`)
+  — **แต่** `external/PF_SERIALIZER_FIELDS.tsv` แถว 12-13 จัด `MovementAttr` ที่ address `0x0043BB80` เป็น
+  `EMPTY` (arg-copier เปล่า) ซึ่งเป็นคนละที่อยู่กับ `0x4671C0` — ยังไม่ reconcile สองแหล่งนี้ ปล่อยให้ใบนี้ตัดสิน
+- bg0001's `_entry()` เคยแก้ปัญหานี้แบบวนสี่ทิศ (`HEADINGS = (0, pi/2, pi, 3pi/2)` คีย์ด้วย
+  `placement_index & 3`, `world_population.py:210,343-350`) — **ไม่ได้มาจากตาราง/ข้อมูลไหนเลย เป็นค่าประดิษฐ์
+  ล้วน** ไม่ใช่หลักฐานว่ามี heading จริงในตาราง รอบนี้สาย A ใช้วิธีเดียวกันกับ bg0002 (parity คอสเมติก ไม่ใช่
+  claim ว่า RE แล้ว — ดู `world_population_bg0002.py`'s `_entry()` docstring) ระหว่างรอใบนี้ปิด
+
+### objective
+1. หา consumer ที่ initialize orientation ของ `CNetNPC` ตอน **spawn** (ไม่ใช่ wire-merge consumer ที่พิสูจน์
+   แล้วที่ `0x467130` — จุดนั้นรับค่าที่ส่งมาแล้ว ไม่ใช่จุดตั้งต้น) เริ่มจาก `0x45C103`/`0x45D2EA` ที่อ้างใน
+   `make_npc_attr`'s docstring เอง (`current/pf_login_game_server_v141.py:1139-1201`) เพราะจุดนั้นเคยสาวฟิลด์
+   spawn-time อื่นมาแล้ว
+2. เช็คว่า raw `.npc`/placement binary record (ไม่ใช่ TSV ที่ mine แล้ว) มี byte range อื่นนอก x/y/z ที่
+   consumer ตอน spawn อ่านเข้า heading offset หรือไม่
+3. หา xref ของตัวโหลด `CONSTDATA_TH__MARKER` ว่ามีอะไรอ่าน `n_DIRTECTION` นอกจากโค้ด teleport ผู้เล่นหรือไม่
+4. reconcile ชื่อ `MovementAttr` สองที่ (`0x0043BB80` EMPTY vs `0x4671C0` real) — คนละคลาสที่ชื่อชนกัน หรือ
+   `PF_SERIALIZER_FIELDS.tsv` จัดผิด
+5. ถ้า static เห็นไม่พอ ให้เขียน bounded negative แยกข้อ 1-4 ชัดเจน — **ต้องใช้ `GameClient.local.bin` จริง
+   ซึ่ง cloud clone นี้ไม่มี** (ตามที่ pf-static-re รอบนี้ยืนยัน) เลนนี้ทำได้เฉพาะบนเครื่องสะพาน
+
+### nonclaims
+① ไม่ claim ว่า f32_3/4/5 ไม่ใช่ heading อย่างเด็ดขาด — วัดจากรูปร่างค่า (เลขกลม ซ้ำข้ามอินสแตนซ์) เท่านั้น
+ยังไม่มี consumer xref มายืนยัน
+② ไม่ claim ว่า `CONSTDATA_TH__MARKER` ไม่เกี่ยวกับ NPC heading เด็ดขาด — แค่ไม่มี join key ในโค้ดที่ commit
+แล้ววันนี้
+③ ไม่ claim ว่า bg0001's `HEADINGS` วนสี่ทิศเป็นค่าที่ถูกจริง — เป็นค่าประดิษฐ์ที่ทำให้ดูเป็นธรรมชาติกว่าเดิม
+เท่านั้น ทั้งสองฉากรอใบนี้ปิดเพื่อเปลี่ยนเป็นของจริงถ้ามี
+④ ถ้า T1-T4 ไม่พบเส้นทางที่ถอดได้เลยจาก static ล้วน นี่คือคำตอบสมบูรณ์ (bounded negative ตาม T5)
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative แล้วปิด
+ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+แหล่งข้อมูล heading จริงของ actor spawn พร้อม provenance **หรือ** bounded negative ที่แยกข้อ 1/2/3/4 ชัดเจน
+⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+
+**ทำไมมีค่า:** ตอนนี้ทั้งเมือง (bg0001) และเกาะคุก (bg0002) ใช้ heading ประดิษฐ์วนสี่ทิศเหมือนกัน — เจ้าของ
+เพิ่งยืนยันด้วยตาว่านี่คือช่องว่างที่สังเกตเห็นได้จริง (M1-P gap ②) ถ้ามี heading จริงในข้อมูลไคลเอนต์
+จะทำให้ทั้งสองฉากดูเป็นธรรมชาติขึ้นทันทีโดยไม่ต้องเดาเพิ่ม
