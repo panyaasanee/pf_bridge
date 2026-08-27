@@ -1,0 +1,10 @@
+consumed by LANE-A round 2shp03 (2026-08-27T19:47+07:00) - CORE-REQUEST-018 (opened by LANE-A)
+confirmed wired: is_position_persist_allowed() now gates lifecycle.py's checkpoint()/exit(), the
+single choke point for store.save_position() (pinned by "exactly 2 callers" test). Scene 17 skips
+the position write, all other scenes unchanged. pf-adversary caught and chief fixed a HIGH: the
+raw skip also bypassed the stale-session/ownership guard - fixed with write_position= so the
+ownership gate still runs on every scene. Noted: only 1 of 3 legs of COO-DECISION 1746 is LANE-A's
+own (dialog option 2, shipped round hrz814) and that leg is done; the other two legs (persist gate,
+scene 126 vs 17 evidence) are chief/GM-RE territory and chief says GT-106-R2 stays closed until all
+three land - nothing for LANE-A to build here this round. Original preserved at
+notes_to_chief/consumed/ (not deleted).

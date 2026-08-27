@@ -1038,7 +1038,7 @@ field ที่ขาด/ผิด shape พร้อม provenance **หรื�
 
 ---
 
-## 🆕🔬 RE-112 BORNAGAIN-MARKER-RESET-WIRE-ACK-001 [STATIC-ON-BRIDGE]: **หลัง quest 3205 (Q_BORNAGAIN, `Player.ResetMarker(1)`) ถูกเรียก เกมเดิมส่งเฟรมอะไรกลับ (ถ้ามี) — client รอ ack หรือปิด dialog เงียบๆ** [🟢 **OPEN — เปิดโดย LANE-A 2026-08-27T18:48+07:00 ต่อยอดจาก COO-DECISION 17:46/GT-106 ④.1**]
+## 🆕🔬 RE-112 BORNAGAIN-MARKER-RESET-WIRE-ACK-001 [STATIC-ON-BRIDGE]: **หลัง quest 3205 (Q_BORNAGAIN, `Player.ResetMarker(1)`) ถูกเรียก เกมเดิมส่งเฟรมอะไรกลับ (ถ้ามี) — client รอ ack หรือปิด dialog เงียบๆ** [🔴 **CLOSED BOUNDED-NEGATIVE — ปิดโดย LANE-A 2026-08-27T19:45+07:00 (ผลจาก RE runner `20260827_1912_RE-112-RESULT-RESETMARKER-NOOP-ACK-BOUNDED.md`)**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-112`/`GT-112` = 0 hit ทั้งสองไฟล์ (2026-08-27T18:48+07:00)
 > เลขสูงสุดที่ใช้แล้วคือ `111` (`RE-111`) ⇒ ใบนี้คือ `112`
@@ -1077,4 +1077,13 @@ field ที่ขาด/ผิด shape พร้อม provenance **หรื�
 wire frame/ack shape พร้อม provenance **หรือ** bounded negative ที่เสนอ attended capture แคบที่สุด ⇒ ปิดใบ
 พร้อมบรรทัด `BUILD_IMPACT:`
 
-### result (ยังไม่มี — ใบเปิดอยู่)
+### result
+`Player.ResetMarker`/`Quest.SetFlag` ทั้งคู่ผูก body เดียวกัน `0x0045FA00` (`xor eax,eax; ret 4`) — ไม่มี
+state write/ack request/wait/close ใน Lua binding เอง มี wire class `ReliveMarkerVital 0x3DD6` แยกต่างหาก
+แต่ไม่มี crosswalk field/call edge ผูกมันกับ quest 3205 หรือ ResetMarker — corpus ปัจจุบัน = 0 frame ทั้ง
+W/R จึงเป็น bounded unknown ไม่ใช่ ack ที่ปิดแล้ว attended capture แคบที่สุดที่เสนอ: กด option "ตั้งฐานทัพ"
+ครั้งเดียวบนเซิร์ฟเวอร์ปัจจุบัน เก็บ inbound `QuestOperateVital` + ช่วง no-outbound ทั้งหมด (แยกชั้น wire กับ
+client-observable) เต็ม: `notes_to_chief/20260827_1912_RE-112-RESULT-RESETMARKER-NOOP-ACK-BOUNDED.md`
+
+`BUILD_IMPACT:` `CORE-REQUEST-019` ต้องคง named refusal ของ quest 3205 ไว้ — ห้ามเพิ่ม `ReliveMarkerVital`
+เป็น ack หรือ silent-success จนกว่าจะมีทั้ง persistence schema ที่ chief อนุมัติ **และ** capture/crosswalk จริง

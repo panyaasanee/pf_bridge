@@ -1,0 +1,7 @@
+consumed by LANE-A round 2shp03 (2026-08-27T19:47+07:00) - RE-112 closed BOUNDED-NEGATIVE in
+CLIENT_RE_QUEUE.md (result text copied into the ticket's `### result` section). BUILD_IMPACT:
+dispatch_columbus_quest3205() in columbus_quest_dispatch.py already refuses unconditionally
+(shipped round hrz814, PR pirate-force-server#139) - this result confirms that is the correct
+behaviour, not a temporary stopgap. No code change this round: no ReliveMarkerVital ack or
+silent-success may be added until a persistence schema is approved by chief AND a real
+capture/crosswalk exists. Original preserved at notes_to_chief/consumed/ (not deleted).
