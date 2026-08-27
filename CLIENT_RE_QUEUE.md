@@ -381,6 +381,60 @@ capture ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ต
 
 ---
 
+## 🆕🔬 RE-104 GM-EDITOR-WIDGET-OPEN-TRIGGER-001 [STATIC-ON-BRIDGE]: **อะไรเปิด/toggle dedicated GM text-editor widget ที่ `RE-091` พิสูจน์แล้วว่าเป็น producer ของ `GM_RunGMCommandVital` (`0x51E9`) — hotkey, เมนู, ไอคอนที่ปรากฏเมื่อ `GM_UpdateGMStateVital` ตั้งสถานะ GM ให้ connection, หรืออื่น**  [🟢 **OPEN — เปิดโดย LANE-GM 2026-08-27T14:42+07:00 ต่อยอดจากผล `RE-091` nonclaim ②**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-104` = 0 hit, `GT-104` = 0 hit ทั้งสองไฟล์ (ยืนยัน
+> 2026-08-27). เลขว่างถัดไปหลังใบนี้ = 105 (ถ้ายังไม่มีใบอื่นจองก่อน — grep ซ้ำก่อนใช้เสมอ).
+> 🔴 ใบ `RE-085`-`RE-103` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`notes_to_chief/20260826_2322_RE-091-RESULT-DEDICATED-GM-UI-NO-CHAT-PREFIX.md` nonclaim ② เขียนไว้เองว่า
+"ไม่ claim ว่า UI นี้เข้าถึงได้ใน runtime โดยผู้เล่นทั่วไป ... หรือวิธีเปิด UI เป็นขอบเขต RE-089 ไม่ claim
+ข้ามใบ" — RE-091 พิสูจน์แค่ตัว *producer* (`[0x00729410,0x0072957D)`, gates: event code `0x0D` = Enter บน
+widget ที่ active/visible อยู่แล้ว) แต่ไม่พิสูจน์ว่าอะไรทำให้ widget นั้น active/visible ตั้งแต่แรก. ช่องว่าง
+นี้บล็อกใบเทส attended ที่จะเปิดรอบนี้ (`GAME_TEST_QUEUE.md` `GT-103`, GM-002 capture matrix): ผู้เทสต้อง
+รู้วิธีเปิด GM editor widget ในไคลเอนต์จริงก่อนจะพิมพ์อะไรเข้าไปทดสอบได้ ไม่งั้นใบ `GT-103` ทำได้แค่
+exploration แบบสุ่ม ไม่ใช่ procedure ที่ระบุขั้นตอนได้จริง.
+
+### objective
+หาเงื่อนไข/กลไกที่ทำให้ widget ผู้ผลิต `0x51E9` (`0x00729410`) กลายเป็น active/visible — ไม่ใช่ตัวมันทำงาน
+อย่างไรหลัง active แล้ว (ปิดแล้วโดย `RE-091`)
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยัน image SHA/ตาราง sha256 ตรงกับ verifier ปัจจุบันก่อนเริ่ม เหมือนทุกใบ static
+- **T1** — xref เข้า/ออกของฟังก์ชันที่สร้าง/toggle widget นี้ (caller ของโค้ดที่ทำให้ widget เข้าสถานะ
+  active/visible ก่อนถึง `0x00729410`) — หา whether มันเป็น: (ก) hotkey handler แบบ global input map
+  (ข) เมนู/ปุ่มใน GM tool panel ที่ `RE-091` เจอแล้วว่าเป็นอีก caller หนึ่งของ shared sender
+  (`0x00729380`, "GM tool/panel producer") (ค) gate ที่อ่าน `GMModule_Client+0x18/+0x19/+0x1C`
+  (สาม field เดียวกับที่ `RE-089` พิสูจน์ว่า `GM_UpdateGMStateVital` เขียนเข้าไป) แล้วโชว์ widget/ปุ่มเมื่อ
+  ค่านั้นไม่ใช่ default
+- **T2** — ถ้า T1 ชี้ไปทาง (ข)/(ค): หา provenance ของปุ่ม/ไอคอนที่กดเพื่อเรียก widget (ตำแหน่งบนจอถ้ามีข้อมูล
+  layout, หรือชื่อ resource/texture ที่ผูกกับปุ่มนั้นถ้าถอดได้จาก static)
+- **T3** — ถ้าหาไม่เจอในเส้นทางที่ถอดได้ ให้เขียน bounded negative ชัดเจน (เช่น "widget toggle ผูกกับ input
+  event ที่ไม่มี static crosswalk ไปหา keycode ได้จากข้อมูลที่ commit ไว้ ต้องใช้การกดสำรวจจริงจากผู้เทส
+  attended") ไม่เดา hotkey ไม่ปั้นเมนู
+
+### nonclaims
+① ไม่ตัดสินว่า widget เข้าถึงได้จากบัญชีที่ไม่ใช่ GM หรือไม่ — ขอบเขต `RE-089`/`RE-091` เดิม ใบนี้แค่หา
+trigger ของตัว widget เอง
+② ถ้า T1-T3 ไม่พบอะไรเลยในเส้นทางที่ถอดได้ นี่คือคำตอบที่สมบูรณ์ (bounded negative) ไม่ใช่ใบที่ค้าง — ปิดได้
+พร้อมส่งต่อให้ `GT-103` เป็น exploration แบบสำรวจจริงแทน (ระบุในผลว่า "ต้องสำรวจจากไคลเอนต์จริง")
+③ ไม่ claim ว่า `GT-103` block รอผลใบนี้เสมอไป — `GT-103` เขียนเป็น exploration step อยู่แล้วในตัว ถ้าใบนี้
+ปิดก่อน `GT-103` จะได้ใช้ trigger ที่พิสูจน์แล้วแทนการเดา ถ้าใบนี้ยังไม่ปิด `GT-103` ยังทำได้ (สำรวจ) แค่ผล
+อาจเป็น "หา widget ไม่เจอ" ซึ่งเป็นผลลบที่ยอมรับได้ของใบนั้นเอง
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative แล้วปิด
+ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+กลไก trigger ของ GM editor widget พร้อม provenance **หรือ** bounded negative ที่บอกตรงๆ ว่าต้องสำรวจจาก
+attended ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
 ## 🔬 RE-102 NPCCONVERSATION-COLUMBUS-156-QUESTID-3021-WIRE-CONFIRM-001 [STATIC-ON-BRIDGE]: **ยืนยันระดับ wire ว่า descriptor `+0x10`/`+0x12` ของ `NPCConversation` ใช้ quest id `3021` จริงสำหรับ Columbus ตัวจริง (`MOBS.n_ID=156`, Port Royal), แยกจาก quest `3023` ที่ `RE-095` ยืนยันไว้แล้วสำหรับ `MOBS.n_ID=36` (Columbus คนละตัว, Spice Paradise)**  [🔴 **CLOSED bounded-negative — ปิดโดย LANE-A (สาย A · WORLD) รอบ `pvbj0u` 2026-08-27 ~13:3x (+07:00), ดูผลด้านล่าง**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-101`/`RE-101` มี hit แล้ว (`GT-101` = 4 hit, `RE-101` = 1 hit ใน
