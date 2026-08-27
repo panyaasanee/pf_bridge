@@ -283,7 +283,42 @@ negative แล้วปิด ไม่เดาต่อ · ไม่เปิ
 ตอบ T0-T3 ด้วยหลักฐาน (spans ที่ถอดครบ + คำตอบมี/ไม่มี branch หรือ multi-point field) **หรือ** bounded
 negative ครบทั้งสองคำถาม ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
 
-### result (ยังไม่มี — ใบเปิดอยู่)
+### result — CLOSED bounded negative, T0 cross-document only, T1/T2 negative, T3 moot
+
+รายละเอียดเต็ม: `notes_to_chief/20260827_1339_RE-102-RESULT-BOUNDED-NEGATIVE-NO-STATIC-CALL-SITE.md`. สรุป:
+
+- **T0** [STATIC, cross-document เท่านั้น — ไม่มี binary ให้ hash สดใน clone นี้]: `factpack_L1/MANIFEST.md:16`,
+  `RE-094-RESULT` (`0156`) และ `RE-095-RESULT` (`0310`) ทั้งสามอ้าง SHA เดียวกัน
+  (`9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`) — เอกสารสอดคล้องกัน แต่ไม่ใช่การ
+  hash ซ้ำ
+- **T1** [STATIC, bounded negative]: `external/PF_SERIALIZER_FIELDS.tsv` มีครบ 22 แถวของ `NPCConversation`
+  (`[0x00622F10,0x00623083)` + subcall `[0x00606890,0x006068E3)`) แถว `+0x10` (`W 6`, บรรทัด 1576) resolve
+  เป็น pointer chase ผ่าน array ที่ caller ส่งเข้ามา ไม่ใช่ literal คงที่ในตัว serializer เอง — ไม่มี call site
+  ระดับ static ที่ actor เจาะจงเขียน `3021` ตรงๆ (สอดคล้องกับที่ `RE-094` พิสูจน์ไว้แล้วว่า op1 เป็น dynamic
+  dispatch ไม่ใช่ขัดแย้งกัน)
+- **T2** [เพดาน — UNKNOWN]: ค่าที่เข้า serializer มาจาก UI record `+0x94` ที่ populate โดยโค้ดเหนือ serializer
+  นี้ (`RE-094`) — grep `+0x94`/giver ทั่ว `external/*.tsv` ทั้งหมด (`PF_SERIALIZER_FIELDS`,
+  `PF_PROTOCOL_REGISTRY`, `PF_DATA_EVIDENCE`, `PF_RUNTIME_CLASSMAP`, `PF_INPUT_INVENTORY`,
+  `PF_FIELD_VALIDATION`) = 0 hit ทั้งหมด ต้องใช้ disassembly สดของ image (ไม่มีใน clone นี้) หรือ attended
+  wire capture จริง ไม่มีทางใดพร้อมใช้ในรอบนี้
+- **ปัญหาซ้อนอีกชั้น**: สมมติฐานตั้งต้นของ T1/T2 เอง ("placement index 1 = MOBS 156") ก็ไม่ใช่ static field
+  ที่ decode ได้ — `bg0001.placements.tsv` แถว 1 มีแค่ `template_ids=2` (`Mob_Set_02`), และ `RE-093` เองห้าม
+  join ordinal ไปเป็น MOBS n_ID ตรงๆ ไว้แล้ว การผูก index 1 → MOBS 156 อยู่ที่ชั้น testimony/client-observable
+  (คำเจ้าของจากเซสชัน attended `0925`→`0950`) ไม่ใช่ชั้น wire/code ที่ T1/T2 ถามหา — ต่อให้เจอ call site ก็ปิด
+  loop ไม่ได้โดยไม่มี identity proof อิสระที่ชั้นนี้
+- **T3**: ไม่ทำ — moot เมื่อ T1/T2 เป็น bounded negative แล้ว
+
+**ทางเดียวที่จะยกระดับต่อ:** `GT-102` (`GAME_TEST_QUEUE.md:4094`, PENDING) — คลิก Columbus ตัวจริงในไคลเอนต์
+จริงแล้วบันทึก wire capture เท่านั้น ไม่มีเส้นทาง static เพิ่มเติมในข้อมูลที่ commit ไว้แล้ว
+
+**ไม่ทับ/ไม่ขัด:** `columbus_quest_dispatch.py` (chief, `CORE-REQUEST-014`) — ช่องว่างสองจุดของมัน (scene-17
+spawn = `RE-103`, vehicle-bind payload = `RE-096`) เป็นทิศทาง **outbound** (server ตอบอะไร) คนละทิศกับ RE-102
+ที่ถาม **inbound** (client ส่ง 3021 จริงไหม) — ปิด RE-102 เป็น negative ไม่ทำให้สอง gate นั้นเปลี่ยนสถานะ
+
+BUILD_IMPACT: ไม่มีของให้ wire เพิ่มใน `src/pirateforce_foundation/` จากใบนี้ — ระดับความเชื่อมั่นของ
+`3021`→Columbus ยังคงเป็น `[STATIC]` เท่าเดิม (ไม่ได้ตกลงหรือขึ้นระดับ) `columbus_quest_dispatch.py` คงสถานะ
+fail-closed เดิมต่อไปจนกว่า `RE-096`/`RE-103` หรือ `GT-102` จะปิดได้จริง — สาย A ไม่มีอะไรให้สร้างใน `src/`
+จากผลใบนี้รอบนี้เช่นกัน
 
 ---
 
@@ -346,7 +381,7 @@ capture ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ต
 
 ---
 
-## 🆕🔬 RE-102 NPCCONVERSATION-COLUMBUS-156-QUESTID-3021-WIRE-CONFIRM-001 [STATIC-ON-BRIDGE]: **ยืนยันระดับ wire ว่า descriptor `+0x10`/`+0x12` ของ `NPCConversation` ใช้ quest id `3021` จริงสำหรับ Columbus ตัวจริง (`MOBS.n_ID=156`, Port Royal), แยกจาก quest `3023` ที่ `RE-095` ยืนยันไว้แล้วสำหรับ `MOBS.n_ID=36` (Columbus คนละตัว, Spice Paradise)**  [🟢 **OPEN — เปิดโดย LANE-A (สาย A · WORLD) 2026-08-27 ~11:2x (+07:00) ต่อยอดจากผล `RE-095`/`A_20260827_1052`**]
+## 🔬 RE-102 NPCCONVERSATION-COLUMBUS-156-QUESTID-3021-WIRE-CONFIRM-001 [STATIC-ON-BRIDGE]: **ยืนยันระดับ wire ว่า descriptor `+0x10`/`+0x12` ของ `NPCConversation` ใช้ quest id `3021` จริงสำหรับ Columbus ตัวจริง (`MOBS.n_ID=156`, Port Royal), แยกจาก quest `3023` ที่ `RE-095` ยืนยันไว้แล้วสำหรับ `MOBS.n_ID=36` (Columbus คนละตัว, Spice Paradise)**  [🔴 **CLOSED bounded-negative — ปิดโดย LANE-A (สาย A · WORLD) รอบ `pvbj0u` 2026-08-27 ~13:3x (+07:00), ดูผลด้านล่าง**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-101`/`RE-101` มี hit แล้ว (`GT-101` = 4 hit, `RE-101` = 1 hit ใน
 > `GAME_TEST_QUEUE.md`) ⇒ ข้ามไปที่ `102` = **0 hit ทั้งคู่ ทั้งสองไฟล์** ⇒ **ใบนี้คือ `RE-102`** · เลขว่างถัดไป
