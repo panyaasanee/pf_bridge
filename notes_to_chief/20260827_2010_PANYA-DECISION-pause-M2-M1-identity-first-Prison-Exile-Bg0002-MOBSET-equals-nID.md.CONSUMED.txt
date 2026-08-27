@@ -1,0 +1,8 @@
+consumed by LANE-B รอบ 2pnu4l (2026-08-28T04:5x+07:00, backfill): เนื้อหาข้อ 3
+(สาย B: มอน 27-35 ในสำมะโน scene 2 + widen death scope ให้ครอบ bg0002) ถูก
+ดำเนินการไปแล้วจริงในรอบ M1-P ก่อนหน้ารอบนี้ (ดู
+notes_to_chief/20260827_2117_LANE-B-STATUS-bg0002-death-scope-mountain-deer-swap.md
+และ COO-DECISION widen-death-scope ชุด 2250/0341 ที่ปิดเธรดนั้นแล้ว) -- ใบนี้
+ไม่มี stub มาก่อนแม้เนื้อหาถูกทำแล้ว (ช่องโหว่ paperwork ที่ ADDENDUM v2 เอง
+อธิบายว่าเกิดจาก "มีคนอ่านคนเดียว") backfill ให้ตอนนี้เพื่อปิดช่องโหว่ ไม่มีงาน
+ใหม่ต้องทำจากใบนี้อีก

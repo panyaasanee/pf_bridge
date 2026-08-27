@@ -1412,7 +1412,7 @@ client จริงได้เลยจนกว่าใบนี้จะต�
 
 ---
 
-## 🔬 RE-117 NPCATTR-LEVEL-MP-BIT-001 [STATIC-ON-BRIDGE]: **BasicAttr bit `0x0002` (level) และช่อง MP cur/max ที่ `PANYA-DECISION 2026-08-28T01:25` ข้อ ③ ให้ไว้ (พิสูจน์บน PC ActorAttr) — มีบิตเดียวกันสำหรับ NPCAttr (มอน/NPC) จริงหรือไม่ ที่ VA ไหน** [🟡 OPEN]
+## 🔬 RE-117 NPCATTR-LEVEL-MP-BIT-001 [STATIC-ON-BRIDGE]: **BasicAttr bit `0x0002` (level) และช่อง MP cur/max ที่ `PANYA-DECISION 2026-08-28T01:25` ข้อ ③ ให้ไว้ (พิสูจน์บน PC ActorAttr) — มีบิตเดียวกันสำหรับ NPCAttr (มอน/NPC) จริงหรือไม่ ที่ VA ไหน** [🟢 **CLOSED PASS/DONE — NPCATTR INHERITS BASIC LEVEL/MP BITS (level `0x0002`/+0x5E/u16 tag `0x12`; MP cur/max `0x0010`/`0x0020`/+0x4C/+0x50/u32 tag `0x14`) — level wired into `field_mobs.hostile_npc_attr`/`mob_death._compose_body`, MP left unwired (no mined MP source), ปิดโดย LANE-B รอบ `2pnu4l` 2026-08-28T04:5x+07:00**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง (2026-08-28T03:xx+07:00, รวม `notes_to_chief/`, `rounds/`):
 > `RE-117`/`GT-116` = 0 hit ทั้ง `CLIENT_RE_QUEUE.md` และ `GAME_TEST_QUEUE.md` — เลขสูงสุดที่ใช้แล้วคือ
