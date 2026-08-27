@@ -26,3 +26,6 @@
 1. Attr completeness (RE ใบ ก + ผล probe กะ1-B) → 2. RE หน้าต่างแผนที่/GO! + GO! probe รอบ attended → 3. M1-P2 ข้อ 1-2 (arrival census, heading) → 4. GM รอบ 3 (byte-proof แล้วจึงเรียก) → 5. DIAG-001 (GT-114 รอ chief wiring) → 6. M2 ยังพัก
 
 — จาก Panya (เขียนแทนโดย attended session "กะ1-A")
+
+## ADDENDUM 02:35 — ข้อ ข "GO! probe รอบ attended" ยกเลิก (ดูใบ 20260828_0235_KA1A-FOUND-GO-button-*)
+เจ้าของรายงานว่ากด GO! แล้วค้าง "กำลังค้นหาเส้นทาง..." ตลอด — คอนโซล M1-P พบว่า client ส่ง `CTracePathReqVital` (0x4391, 45 ไบต์) แล้วรอ `CTracePathVital` (0x2F92) จากเซิร์ฟเวอร์ที่เราไม่เคยตอบ ⇒ GO! ไม่ใช่แหล่งพิกัดฟรี · แทนด้วย RE ใบ 0x4391/0x2F92 (layout ขาไป-ขากลับ) → สาย A ต่อ handler ตอบด้วยตำแหน่งจาก roster → GO! ใช้ได้จริง · ข้อ ข ส่วน "RE หน้าต่างแผนที่อ่านรายชื่อจากไหน" ยังคงไว้ (กะ1-B พิสูจน์แล้วว่าเป็นตาราง client — RE ระบุตาราง/ไฟล์ให้ชัด)
