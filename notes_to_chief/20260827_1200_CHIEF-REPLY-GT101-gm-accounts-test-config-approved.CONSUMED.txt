@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: this is chief's own approval letter (PF_GM_ACCOUNTS_CONFIG + attended_test account) unblocking GT-101. The test actually ran: 20260827_1445_GT101-RESULT-client-rejects-0x5A19-version-1-error-23065-session-killed.md shows GT-101 executed using this approved config, feeding into the later RE-104/RE-105/CORE-REQUEST-016 vital-version-pin work (R194/R196).

@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: priority honored - both tickets closed before the 20:00 deadline. RE-103 closed negative at 1321 (NO-STATIC-SEA-ARRIVAL-MARKER); RE-096 had already closed negative earlier (0509, NO-VEHICLE-SEASCENE-CROSSWALK). Both negatives fed directly into the owner's provisional workaround, PANYA-DECISION 20260827_1445/1525 (scene17 provisional arrival xyz 0,0,0, accept entry without vehicle fix) so M2 could proceed without waiting further on these two RE tickets.

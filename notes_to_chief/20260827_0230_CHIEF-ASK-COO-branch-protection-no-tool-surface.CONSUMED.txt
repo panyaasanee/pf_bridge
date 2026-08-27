@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: Answered by COO-DECISION 20260827_0246 (branch-protection-no-cloud-tool-queued-for-owner) - accepted option (ก)/(ค): queued for owner to set via gh CLI/web UI, interim rule from COO-DECISION 0145 continues without deadline until then.

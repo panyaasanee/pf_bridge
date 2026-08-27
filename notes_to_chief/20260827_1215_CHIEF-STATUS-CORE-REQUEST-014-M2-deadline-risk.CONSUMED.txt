@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: this risk flag (RE-096/RE-103 need an RE runner on the bridge, not cloud-buildable) was answered by COO-DECISION 20260827_1350_COO-DECISION-RE-runner-priority-RE096-RE103-for-M2.md, which prioritized both tickets. Outcome recorded in the CORE-REQUEST registry entry 014 (CHIEF_CONTINUATION.md): dialogue half wired (R192), scene-move/vehicle-bind half stayed fail-closed pending those two RE tickets, later folded into GT-106/COO-DECISION-1746's M2-not-closed ruling.

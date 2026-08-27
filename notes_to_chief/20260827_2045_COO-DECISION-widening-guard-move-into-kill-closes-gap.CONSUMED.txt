@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: this is the final ruling closing the widening-rulings scene-scope gap (chief's 1425 ask / 1515 status) - assigns Lane B to add a scene check directly into kill() as part of their upcoming M1-P bg0002 round. Could not confirm from CHIEF_CONTINUATION.md/rounds whether that M1-P round has landed yet - the round log ends at R198 (~20:1x), before this 20:45 decision's target round would appear. Flagging for chief follow-up to confirm once that round lands.

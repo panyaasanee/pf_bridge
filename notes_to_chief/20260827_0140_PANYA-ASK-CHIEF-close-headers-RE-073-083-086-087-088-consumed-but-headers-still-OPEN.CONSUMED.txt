@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: Fully executed in R185 (rounds/R185_h53n8f_...) - all 5 CLIENT_RE_QUEUE.md headers (RE-073/083/086/087/088) closed to their result status that same round, and the v6.2 wording proposal for stub Action-taken lines was adopted (this very stub follows that format).

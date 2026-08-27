@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: Chief executed this decision via CHIEF-CLOSE 20260826_2200 (group-closed the 148 pre-R180 letters, no per-letter backfill). Note: this "no backfill" stance was later superseded by the v6.3 mailbox rule that this very jsrh00 round is now executing (retroactive per-letter backfill of the not-lane-owned backlog).
