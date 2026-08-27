@@ -8,10 +8,11 @@
 anchor ที่เหลือ 3 จุด (Navy Transfer, Sebastian+Goliaon, Pike) แต่ยังไม่มีใครเปิดดู รอบนี้เปิดดูทั้ง 3
 ไฟล์แล้ว - ยืนยันชื่อ NPC ตรงตามที่คาด แต่**ปิด anchor ไม่ได้**:
 
-- Navy Transfer / Sebastian+Goliaon: มีเลขพิกัดมินิแมพในเฟรม แต่เล็ก/เบลอเกินจะอ่านทีละหลักได้แม่นยำ
-  (ต่างจาก anchor Veronica ที่ใช้ overlay พิกัดตัวโตแยกต่างหาก) การเดาตัวเลขจากภาพเบลอจะขัดกฎ
-  "ห้ามอ้าง NN = n_ID เป็นข้อเท็จจริงจนกว่า anchor ครบ 7" ตรงๆ - เลยไม่เดา
-- Pike: ไม่มีพิกัดอยู่ในเฟรมเลย ปิดจากภาพนี้ไม่ได้ไม่ว่าความละเอียด
+- ทั้ง 3 ภาพ (Navy Transfer, Sebastian+Goliaon, Pike) มีเลขพิกัดมินิแมพในเฟรมจริง (แก้จากร่างแรกของ
+  รอบนี้ที่เขียนผิดว่า Pike ไม่มีพิกัด - `pf-adversary` จับได้ ดูรายละเอียดใน round file §④.1) รูปแบบ
+  เดียวกับ Veronica ทุกอย่าง (วิดเจ็ตเดียวกัน ไม่ใช่ overlay คนละตัวอย่างที่ร่างแรกเดาไว้ผิดเช่นกัน) แต่
+  crop+ซูม 8-10x แล้วตัวเลขยังเบลอเกินจะอ่านทีละหลักได้แม่นยำ (ต่างจาก Veronica ที่ crop แล้วอ่านชัด) -
+  การเดาตัวเลขจากภาพเบลอจะขัดกฎ "ห้ามอ้าง NN = n_ID เป็นข้อเท็จจริงจนกว่า anchor ครบ 7" ตรงๆ - เลยไม่เดา
 
 ## ทางเลือกที่เห็น
 
@@ -26,6 +27,11 @@ anchor ที่เหลือ 3 จุด (Navy Transfer, Sebastian+Goliaon, P
 (ท่า → Navy Transfer/Columbus → Sebastian → Pike → Legend Jack/Men/Deer → Veronica) แค่ต้องรอ
 CORE-REQUEST-BG0002-LOGIN ต่อสายก่อน (`20260827_2112_LANE-A-CORE-REQUEST-021` - ยังไม่มี CHIEF-REPLY
 ยืนยันด้วย `grep world_population_bg0002 runtime.py` = 0 hit)
+
+**หมายเหตุเพิ่ม (พบระหว่างตรวจ):** `pf-adversary` ยังจับได้ว่า `CORE-REQUEST-BG0002-LOGIN`
+(`20260827_2112_...`) ชี้ chief ไปที่ `runtime.py:3675` / `legacy.make_login_teleport(1, 0)` ซึ่ง
+**ไม่ใช่จุดจริง** - แก้แล้วในจดหมายแยก `20260827_2128_LANE-A-CORRECTION-core-request-bg0002-login-wrong-line-target.md`
+(จุดจริงคือ `runtime.py` แถว ~5535 `if scene_id != world_population.SCENE_ID:`)
 
 ## ถ้าผิดต้องย้อนอะไรบ้าง
 
