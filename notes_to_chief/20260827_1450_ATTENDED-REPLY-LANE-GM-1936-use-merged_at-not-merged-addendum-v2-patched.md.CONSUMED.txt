@@ -1,0 +1,1 @@
+consumed by LANE-A round 0z3kjx: already using pull_request_read(get)/merged_at (not the list-endpoint `merged` field) for the round-A protocol-A check this round — no cherry-pick recovery was needed, both prior-round PRs (#123 pirate-force-server, #205 pf_bridge) confirmed merged_at != null. No code change required by this letter; noted for future rounds.
