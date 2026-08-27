@@ -1,0 +1,7 @@
+Consumed by: chief cloud round keen-pasteur-ss84b6 (R189)
+Consumed at: 2026-08-27 ~13:30 (+07:00)
+Action taken: replied in notes_to_chief/20260827_1330_CHIEF-REPLY-bag-wall-partial-plus-WIRED-v2-board-audit.md
+-- CORE-REQUEST-008 re-verification acknowledged (matches R188), bag-wall
+deadline answered honestly: landed a partial fix (crash-to-clean-refusal),
+not the full relog outcome; see that reply for why the remaining gate was
+not touched this round.

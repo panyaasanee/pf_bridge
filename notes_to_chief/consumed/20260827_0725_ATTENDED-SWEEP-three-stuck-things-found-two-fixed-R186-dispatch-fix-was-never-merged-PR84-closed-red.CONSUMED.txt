@@ -1,0 +1,14 @@
+Consumed by: chief cloud round keen-pasteur-ss84b6 (R189)
+Consumed at: 2026-08-27 ~13:xx (+07:00)
+Action taken: item (a)/(b) -- cherry-picked the isolated
+.github/workflows/merge-claude-pr.yml diff from branch
+claude/optimistic-mccarthy-561t95 (pirate-force-server@a811d99), without
+the HYPOTHESIZED_LEDGER.json drift that got PR#84 closed red. Could not
+verify end-to-end from this cloud sandbox (needs an actual PR merge on
+GitHub to observe workflow_dispatch firing); flagged for the next
+round/attended session to confirm a ci/<merge-sha>.json verdict appears
+on main after the next merge.
+Item (c) -- CHIEF_CONTINUATION.md's R186 entry corrected this round to
+say "written but the PR closed red, never landed" instead of "done".
+Items (1)/(2) (PR self-locks #91/#86) were already resolved by attended
+before this letter reached chief; no action needed from chief on those.

@@ -7799,3 +7799,111 @@ TEMPLATE_teardown_generic.ps1.
 🆕 **อัปเดต (chief cloud · รอบ `keen-pasteur-543ds8` R187 · 2026-08-27 ~09:00 (+07:00)) — คำเตือนสำคัญเรื่อง grep token ที่ใบนี้เคยใช้ผิด:** ใบนี้เคยตรวจคอนโซลหา `FIELD_MOB`/`HOSTILE` แล้วเจอ 0 บรรทัด (ดู `notes_to_chief/20260827_0205_GT084-NO-RESULT-*.md`) แต่ป้ายสองตัวนั้น **ไม่เคยมีอยู่จริงบน production path เลย** — เป็นช่องว่างการมองเห็น ไม่ใช่โค้ดไม่ทำงาน สาย B ตรวจสดแล้วยืนยัน (ดู `rounds/B_20260827_0805_gt084_roster_override_coverage.md`) ว่า 13/13 identity ของ field-mob roster อยู่ใน census จริง และ chief ต่อสายคอนโซลบรรทัดใหม่ให้แล้วรอบนี้ (`pirate-force-server` commit `dd5c785`): **`runtime.py`** พิมพ์ `MOB_DEATH_ROSTER_OVERRIDE_COVERAGE matched=13/13 missing=none` ทันทีหลัง census ประกอบเสร็จ — **นี่คือ grep token ที่ถูกต้องสำหรับตรวจว่าเฟรม hostile ออกสายจริง** ไม่ใช่ `FIELD_MOB`/`HOSTILE` ⇒ **รอบ attended ถัดไปของ `GT-084` (หรือใบต่อยอด) ต้อง grep หา `MOB_DEATH_ROSTER_OVERRIDE_COVERAGE` แทน** มิฉะนั้นจะอ่านผลผิดซ้ำเหมือนรอบก่อน ยืนยันด้วยบูต headless แล้ว (ก่อนแก้: ไม่มีบรรทัดนี้พิมพ์เลย = ผลลบเดิมของ `GT-084` ซ้ำได้จริง / หลังแก้: `matched=13/13` พิมพ์ทุกครั้งที่ประกอบ census สำเร็จ) — นี่คือ **wire layer เท่านั้น** ยังไม่ตอบว่าไคลเอนต์เรนเดอร์เป็นสีแดง/hostile จริงไหม (คำถามนั้นยังเปิดอยู่ใน `GT-084`/`RIDER-084-A` เดิม)
 
 🆕 **อัปเดต (chief cloud · รอบ `optimistic-mccarthy-ahn7zb` R188 · 2026-08-27 ~11:3x (+07:00)) — `CORE-REQUEST-008` ต่อสายแล้ว: ความเสี่ยง world-wipe ของ `mob_combat.bar_frames`/`mob_death.death_frames` (ที่ริเดอร์นี้เปิดไว้ตั้งแต่แรก) ปิดแล้วที่ชั้น static/wire:** `MOB_COMBAT_BAR`/`MOB_DEATH_DYING`/`MOB_DEATH_DEAD` compose เข้า full census เดียวกับ arrival แล้วทั้งสามจุด (`pirate-force-server@741ab5d`, grep token ใหม่ `MOB_COMBAT_BAR_CENSUS_RECOMPOSE`/`MOB_DEATH_FRAMES_CENSUS_RECOMPOSE`) แทน one-entry frame เดิม พร้อม fail-closed guard (compose ล้มเหลว หรือ scene ไม่ตรง ⇒ ถอยไป one-entry frame แทนโครง exception/ส่งเฟรมผิดฉาก — พบโดย `pf-adversary` ในรอบเดียวกัน ดู `rounds/R188_*.md`) 🔴 **ริเดอร์นี้เองยังไม่เปลี่ยนแม้แต่ตัวอักษรเดียวตามกฎ nonclaim ②-③ เดิม** — `OW1`-`OW3` ยังเป็นขั้นสังเกตบังคับเหมือนเดิมทุกประการ การแก้นี้ตอบเฉพาะชั้น static/wire ว่าเฟรมที่ส่งออกไม่ใช่ one-entry อีกต่อไป **ไม่ได้ตอบว่าไคลเอนต์จริงเห็นอะไร** — ห้ามอ่านว่า client-observable risk ถูกปิดแล้ว ผลจริงยังต้องรอ `OW1`-`OW3` เหมือนเดิมทุกประการ
+
+
+
+---
+
+### 🆕 GT-099 BACKPACK-LOAD-REFUSED-001: แถวกระเป๋าที่พังโครงสร้าง (แถวหาย) ตอนนี้เซิร์ฟเวอร์ปฏิเสธเสียงดังจริงไหม แทนที่จะพังเงียบเหมือนก่อน  [PENDING]
+
+> เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md. เลขสูงสุด ณ เวลาเขียนใบนี้: GT-084 / RE-098 (บันทึกไว้เองว่า
+> เลขว่างถัดไป = 099). grep ซ้ำก่อนจอง: GT-099 = 0 hit ทั้งสองไฟล์ (ยืนยัน 2026-08-27). ใบเก่าไม่ถูกแตะ.
+
+### ที่มา
+`notes_to_chief/20260826_0950_COO-DECISION-the-bag-wall-is-chief-s-and-the-identity-column-lands-with-it.md`
+①(ข)2: ด่าน 1 (`store._load_backpack`) ต้องตอบ ไม่ใช่หายไป — ก่อนรอบนี้ ทั้ง `ValueError` (เนื้อหาไม่ตรง
+golden) และ `RuntimeError` (แถวหัวหาย) จากด่านนี้ไม่มี handler รับใน `runtime.py`
+(`except (KeyError, PermissionError)` เดิม) ⇒ หลุดขึ้นไปตายเงียบในดิสแพตช์ของ v141 ที่แช่แข็งไว้ (ไม่มีการ
+พิมพ์อะไรเลย — วัดจากพฤติกรรมที่ report ไว้ก่อนหน้า ไม่ใช่การเดา).
+
+รอบที่แก้: chief cloud, session `keen-pasteur-ss84b6`, repo `pirate-force-server`:
+1. `runtime.py`, handler ของ `START_GAME_REQ`: เพิ่ม `except (ValueError, RuntimeError)` แยกจาก
+   `except (KeyError, PermissionError)` เดิม พิมพ์ `BACKPACK_LOAD_REFUSED <reason>` แล้วตอบไม่ตอบ (no reply)
+   แบบสะอาด แทนที่จะปล่อยให้หลุดขึ้นไป.
+2. `inventory.py`/`store.py`: แยก `require_known_backpack` เป็น `require_backpack_shape` (โครงสร้างอย่างเดียว)
+   ใช้ที่ `store._load_backpack` — ไม่กระทบใบนี้โดยตรง (ใบนี้ทดสอบกรณี "แถวหัวหายไปเลย" ซึ่งยังคง raise
+   `RuntimeError` เหมือนเดิมไม่ว่าจะแยกฟังก์ชันหรือไม่).
+
+🔴 **คำเตือนขอบเขต สำคัญมาก อ่านก่อนบูต**: ใบนี้**ไม่ทดสอบ**กรณี "กระเป๋าที่มีเนื้อหาดริฟต์แต่โครงสร้างถูกต้อง"
+(เช่น item ที่มี `quantity` ผิดจาก golden) — กรณีนั้นยังคงถูกปฏิเสธที่ `session.select_and_start`'s
+`is_unmoved_baseline` check (ไม่ถูกแตะในรอบนี้ — ลองแคบแล้วต้อง revert เพราะไปชนกับเทสของ
+`HYP-PF-010`/`017`/`018` ที่ต้องพึ่งเช็กนี้กันสถานะที่ mutate แล้วหลุดกลับมาแบบไม่มี opt-in flag) ซึ่งจับด้วย
+`except (KeyError, PermissionError)` เดิม (เงียบ ไม่พิมพ์อะไร) — พฤติกรรมที่สังเกตได้จากรอบนี้ **เหมือนเดิม
+ทุกประการ** กับก่อนรอบนี้สำหรับกรณีดริฟต์เนื้อหา (ทั้งสองกรณีคือ "ไม่ตอบ" แต่คนละสาเหตุ) ⇒ **ห้ามใช้ใบนี้
+ทดสอบกรณีนั้น** ถ้าอยากทดสอบกรณีเนื้อหาดริฟต์ ต้องรอรอบที่ออกแบบ Gate 2 (`is_unmoved_baseline`) ใหม่ให้แยก
+"ของจริงจากเกมเพลย์" ออกจาก "สถานะที่มาจาก hypothesis scenario ที่ยังไม่ได้ opt-in" ก่อน — ยังไม่มีรอบไหนทำ.
+
+### objective (claim เดียว)
+สำหรับตัวละครที่แถว `character_backpacks` (หัวตาราง ไม่ใช่ items) **ถูกลบทิ้งทั้งแถว** ด้วยมือ (จำลอง DB ที่
+เสียหาย/ไม่สมบูรณ์ — ไม่ใช่กรณีเนื้อหาดริฟต์) ผู้เทสเห็น: (1) รายการเลือกตัวละครยังโหลดขึ้นปกติ (ไม่แตะ
+backpack table เลย ไม่เกี่ยวกับใบนี้ แต่บันทึกไว้เป็น baseline), (2) กด "เข้าเกม" กับตัวละครนั้นแล้ว
+คอนโซลพิมพ์ `BACKPACK_LOAD_REFUSED character Backpack state is missing` ภายในไม่กี่วินาที, (3) process
+เซิร์ฟเวอร์ไม่ตาย (ยัง `ProcessId` เดิม), (4) ไม่มี Python traceback ใด ๆ ขึ้นคอนโซลเลย.
+
+**ตัวหักล้าง:** ถ้ากด "เข้าเกม" แล้วคอนโซลเงียบสนิท (ไม่มีทั้ง `BACKPACK_LOAD_REFUSED` และ traceback) หรือ
+process เซิร์ฟเวอร์ตาย ⇒ ไม่ผ่าน — การแก้ไม่ได้ผลอย่างที่คาด หรือบูตผิดคอมมิต.
+
+### ก่อนบูต
+ด่าน 1: `py -3 pf_resolve_green_boot.py --repo "..." --fetch` ตามธรรมเนียม exit 0 เท่านั้นถึงบูตได้.
+ด่าน 2: `git grep -n "BACKPACK_LOAD_REFUSED" <SHA> -- src/pirateforce_foundation/runtime.py` ต้องเจออย่างน้อย
+1 บรรทัด. ขาด = BLOCKED.
+
+### db (สำเนาเสมอ ห้ามแตะ canonical/state\play.sqlite3)
+copy `state\pirateforce.sqlite3` ไปสำรอง + ไปที่รันจริงตามธรรมเนียม GT-084 แล้ว:
+```
+sqlite3 state\run_gt099.sqlite3 "SELECT character_id FROM character_backpacks ORDER BY character_id LIMIT 1;"
+```
+จด `character_id` ของตัวละครช่องแรก (ยืนยันด้วย SELECT ห้ามเดา) แล้ว:
+```
+sqlite3 state\run_gt099.sqlite3 "DELETE FROM character_backpack_items WHERE character_id = <id>;"
+sqlite3 state\run_gt099.sqlite3 "DELETE FROM character_backpacks WHERE character_id = <id>;"
+```
+(ลบ items ก่อนเสมอ ตามลำดับ FK — `character_backpack_items.character_id` REFERENCES
+`character_backpacks.character_id`). ยืนยันว่าลบจริงด้วย SELECT ซ้ำ (ต้องว่าง 0 แถวทั้งสองตาราง).
+
+### server args
+```
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+py -3 -u -m pirateforce_foundation.app --db state\run_gt099.sqlite3
+```
+ห้ามมี `--*-scenario` — เส้นทางนี้คือดีฟอลต์.
+
+### steps
+1. ถือ LOCK_GAME, สตาร์ตเซิร์ฟเวอร์, จด ProcessId (`Get-CimInstance Win32_Process -Filter "Name='python.exe'"`).
+2. เปิด client → เลือกเซิร์ฟเวอร์ → หน้าเลือกตัวละคร. สังเกต: รายการโหลดปกติไหม (คาดว่าใช่ — ไม่แตะ backpack
+   table).
+3. คลิกเลือกตัวละครที่ถูกลบกระเป๋า → ปุ่ม "เข้าเกม". เริ่มจับเวลา.
+4. เฝ้าคอนโซลเซิร์ฟเวอร์ต่อเนื่อง 30 วินาที — คัดบรรทัด `BACKPACK_LOAD_REFUSED` มาทั้งบรรทัดถ้ามี, จด traceback
+   ใด ๆ ถ้ามี.
+5. เฝ้าจอไคลเอนต์คู่ขนาน — จดว่าเห็นอะไร (คาดว่า "connecting" ค้างแล้วไคลเอนต์ตายเองใน ~3.5 นาที เพราะฝั่ง
+   client ไม่รู้ความต่างระหว่าง "ปฏิเสธอย่างสุภาพ" กับ "ไม่มีอะไรตอบ" — นี่ไม่ใช่ผลลบ ตราบใดที่ข้อ 4 เห็น
+   `BACKPACK_LOAD_REFUSED` และ process ยังไม่ตาย).
+6. ยืนยัน ProcessId เดิมยังอยู่ (เช็ค `Get-CimInstance` ซ้ำ).
+7. teardown ตาม `TEMPLATE_teardown_generic.ps1`.
+
+### pass criteria (สองชั้น)
+
+ชั้น wire/DB:
+- คอนโซลมีบรรทัด `BACKPACK_LOAD_REFUSED character Backpack state is missing` ภายในไม่กี่วินาทีหลังกด
+  เข้าเกม.
+- ไม่มี Python traceback ใด ๆ ขึ้นคอนโซลตรงจังหวะนี้.
+- process เซิร์ฟเวอร์ (ProcessId ที่จดไว้) ยังรันอยู่หลังพยายามเข้าเกม.
+
+ชั้น client-observable:
+- หน้ารายการเลือกตัวละครโหลดปกติ ตัวละครที่ถูกลบกระเป๋าปรากฏในรายการ (ไม่ค้าง ไม่หาย).
+- กด "เข้าเกม" แล้ว — ไม่คาดว่าจะเห็นอะไรต่างจาก "connecting" ค้าง (ฝั่ง client ไม่รู้จัก
+  `BACKPACK_LOAD_REFUSED`) จนกว่า client ตายเองที่ ~3.5 นาที — **นี่คือ PASS ที่คาดไว้** ตราบใดที่ชั้น wire/DB
+  ข้างบนผ่านครบ (การแก้รอบนี้อยู่ที่คอนโซล/เสถียรภาพของ process ไม่ใช่ประสบการณ์ผู้เล่น) ถ้าเห็นสัญญาณอื่นที่
+  ชัดเจนกว่านั้น (error dialog ฯลฯ) ให้บันทึกเป็นข้อมูลใหม่ ไม่ใช่สิ่งที่คาด.
+
+### nonclaims
+- ใบนี้ไม่ทดสอบกรณีเนื้อหากระเป๋าดริฟต์ (ดูคำเตือนขอบเขตใน "ที่มา") — ยังเปิดเป็นงานคนละก้อน.
+- ใบนี้ไม่พิสูจน์ว่าตัวละครนั้นเข้าโลกได้ — คาดว่าไม่ได้ ทดสอบแค่ว่าเซิร์ฟเวอร์ตอบสนอง (ทางคอนโซล) และไม่ตาย
+  แทนที่จะพังเงียบ.
+- ใบนี้ทดสอบกรณีแถวหัวหายทั้งแถวเท่านั้น ไม่ครอบคลุมรูปแบบพังอื่น (เช่น field นอกขอบเขต ที่ตอนนี้ถูกดัก
+  ตั้งแต่ `require_backpack_shape` ด้วย `ValueError` — คาดว่าให้ผลเดียวกัน แต่ไม่ได้วัดในใบนี้).
+
+### result (ผู้เทสกรอก)
+```
+
+```

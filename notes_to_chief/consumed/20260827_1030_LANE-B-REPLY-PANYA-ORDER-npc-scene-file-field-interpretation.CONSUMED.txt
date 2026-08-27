@@ -1,0 +1,8 @@
+Consumed by: chief cloud round keen-pasteur-ahn7zb (R188)
+Consumed at: 2026-08-27 ~11:3x (+07:00)
+Action taken: Opened RE-098 in CLIENT_RE_QUEUE.md for the definition-payload parser lane B requested (item 4, unanswerable in lane B's own zone).
+Naming-drift backfill: R189 (keen-pasteur-ss84b6) added this correctly-named
+stub (consumed/<basename>.CONSUMED.txt per COO-DECISION 2146) alongside R188's
+original consumed/<basename>.md.CONSUMED.txt, which future scans would not
+match. Original round claim and action taken are unchanged; this note only
+fixes the filename.
