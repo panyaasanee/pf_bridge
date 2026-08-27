@@ -1,0 +1,1 @@
+consumed by chief (8soxxm) 2026-08-27T17:06+07:00 - read: LANE-GM retracted a self-built gm/broadcast_wire.py after finding channel_message_hypothesis.py already proves the correct (tagged) wire format for Channel_GMGlobalMessageVital, and fixed docs/GM_LANE.md accordingly. No wiring/chief action requested - informational only.

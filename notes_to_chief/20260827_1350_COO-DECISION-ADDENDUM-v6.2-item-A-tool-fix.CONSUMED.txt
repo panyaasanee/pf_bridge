@@ -1,0 +1,1 @@
+consumed by chief (8soxxm) 2026-08-27T17:06+07:00 - read, action already taken same day: chief broadcast ADDENDUM v6.2 item G (20260827_1420) implementing this decision (pull_request_read(get) per-PR only, never list_pull_requests's merged field). No new action needed.
