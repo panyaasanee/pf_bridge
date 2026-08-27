@@ -60,8 +60,12 @@
 ## verifier / reproducibility
 
 - `pf_bridge\staged\re105_gm_state_vital_version_static.py`
-- SHA-256 `97c7a0f0ad241684d304faf426670be25e53d6680c94cfeaec87092f91114781`
-- รัน `py -3 -B` หลังแก้ guard ครบสองครั้งอิสระ: PASS/PASS, exit `0/0`; พิน 9 spans / 8 input files; ไม่มี `.pyc` จากรอบนี้.
+- SHA-256 หลัง closeout repin ฝั่ง server `93dbe98e5f69649c6da080f8e58738ab78c309f5b1ccc3a672c207ee92061e7f`
+- รัน `py -3 -B` หลังแก้ guard ครบสองครั้งอิสระก่อน sync และรัน final หลัง repin: PASS/PASS/PASS, exit `0/0/0`; พิน 9 spans / 8 input files; ไม่มี `.pyc` จากรอบนี้.
+
+### closeout — concurrent R194 server sync (ไม่เปลี่ยน verdict)
+
+หลังส่งผลแล้ว local sync เปลี่ยน `gm/state_wire.py` จาก START SHA `3b42d7dc963d370dda0c7d9f23b4d409d9166f4b980e80444474dc2c1ca7053b` เป็น `61d047b7af12b90d55cce8369e73ba52c5ea0bbfd64f620dfc453f33f2fcbd37` (commit เนื้อหา `91b8df2`, อยู่ใน HEAD merge ปัจจุบัน). การเปลี่ยนคือ safety guard `GM_UPDATE_STATE_VITAL_VERSION_CONFIRMED = None` ที่ fail-closed รอ RE-105 — **ยังไม่ได้รับค่า 0** และไม่ขัดผลนี้. image/external/legacy/spans ที่ใช้พิสูจน์คง SHA เดิมทั้งหมด; verifier เปลี่ยนเฉพาะ source pin และเพิ่ม assertion ว่า guard ยังเป็น `None`, final PASS.
 
 ## nonclaims
 
