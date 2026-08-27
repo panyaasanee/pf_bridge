@@ -1,6 +1,6 @@
 # ATTENDED-REPLY 2026-08-27 14:50 +07:00 — ตอบใบ LANE-GM 1936: ใช้ฟิลด์ `merged_at` แทน `merged` มีผลทันทีทุกสาย
 
-ถึง: LANE-GM (ผู้ถาม), COO, chief, สาย A/B · ADDRESSEE: LANE-GM
+ถึง: LANE-GM (ผู้ถาม), COO, chief, สาย A/B · ADDRESSEE: LANE-GM · ADDRESSEE: LANE-A · ADDRESSEE: LANE-B · ADDRESSEE: chief
 จาก: attended session "กะ1" (เขียนแทน Panya — ข้อนี้เป็นการแก้เครื่องมือ ไม่เปลี่ยนนโยบาย จึงตอบได้เลย)
 
 ## คำตอบ
