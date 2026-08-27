@@ -685,3 +685,114 @@ wire field ที่ไม่มีหลักฐาน) — M2 ไปต่อ
 `CHIEF-STATUS` รอบเดียวกันนี้สำหรับข้อเสนอทางเลือก
 
 ### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-107 MOB-DEATH-DYING-DEAD-ANIMATION-DRIVER-001 [STATIC-ON-BRIDGE]: **NAMED+HOSTILE actor_type 4 ที่ HP 0 ไม่ล้มเหมือน GT-022/GT-025 (nameless/factionless) — client ใช้ฟิลด์/เฟรมไหนสั่ง fall/dying animation ของ body นี้ และทำไม mesh ถึงค้างลอย** [🟢 **OPEN — เปิดโดย LANE-B 2026-08-27T16:37+07:00 ต่อยอดจาก `GT-084`/`GT-084-R2` RESULT**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-107`/`GT-107` = 0 hit ทั้งสองไฟล์ (2026-08-27T16:37+07:00)
+> เลขสูงสุดที่ใช้แล้วคือ `106` (`RE-106`/chief) ⇒ ใบนี้คือ `107`
+> 🔴 ใบ `RE-085`-`RE-106` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`notes_to_chief/20260827_1620_GT084R2-RESULT-PASS-hostile-kill-full-wire-but-corpse-freezes-no-target-panel.md`
+(OBSERVER_CONFIRMED 2026-08-27T15:52-15:55+07:00) — ผู้เทสตี Tornado Eagle (identity `0x201F`, actor_type 4,
+named, hostile) 5 ครั้งจนถึง 0 HP บนบูตไร้แฟล็ก เซิร์ฟเวอร์ส่ง dying frame (timer 20.0) แล้ว dead frame
+(700 ms ถัดมา) ผ่าน carrier เดียวกับที่ `GT-022`/`GT-025` เคยใช้ (`GSCN_RunTimeProtocolRes` mask `0x02`).
+ข้อความ "Tornado Eagle บาดเจ็บหนักและล้มลง!" ขึ้นจริง (client รับ DYING) แต่นก**แข็งค้างท่าลอย ไม่ล้ม ไม่กระพือ
+ปีก ไม่มีอนิเมชัน** หลัง DEAD cursor ไม่รับรู้ว่ามี actor ตรงนั้นอีก ค้างจน logout.
+
+นี่ตรงข้ามกับ `GT-022`/`GT-025` (2026-08-19) ที่ส่งเฟรมชุดเดียวกันไปยัง identity `0x2001` — actor_type 4
+เหมือนกัน แต่**ไม่มีชื่อ ไม่มี faction** — แล้วได้ผลล้มราบจริง. actor_type เท่ากันแต่ผลต่างกัน ⇒ ตัวแปรที่ทำให้
+ต่างไม่ใช่ actor_type อย่างเดียว ต้องเป็นฟิลด์อื่นในเฟรม (ชื่อ/mask hostile `0x078D`/faction) — ยังไม่มีใคร
+xref หาสาขานั้น.
+
+`src/pirateforce_foundation/mob_death.py` (repo `pirate-force-server`, grep `DYING_PREDICATE_VA`/
+`DEATH_PREDICATE_VA` — เลขบรรทัดขยับทุกรอบที่มีคนแก้ docstring ด้านบน ห้ามเชื่อเลขบรรทัดเก่า หาโดยชื่อ) pin
+ไว้ว่า predicate คู่ที่ใช้จริงคือ `DYING_PREDICATE_VA = 0x43BDA0` (timer > 0) และ `DEATH_PREDICATE_VA =
+0x43BD70` (timer <= 0) บน
+`CNetNPC`/`CAvatarNPC`/`Pet` (actor_type 4) — คู่ต่าง `0x454A70`/`0x454AC0` ใช้กับ actor_type 2 เท่านั้น ไม่
+เกี่ยวกับใบนี้. ไฟล์เดียวกันบันทึกเอง (nonclaim ~397-405) ว่า "named AND hostile in one body has never been
+sent and never been observed" — `GT-084-R2` คือครั้งแรกที่ถูกส่งและสังเกต และผลไม่ตรงกับ fall-precedent
+
+### objective
+1. หาว่า predicate คู่ `0x43BDA0`/`0x43BD70` (หรือโค้ดที่ตามหลัง) อ่านฟิลด์อื่นนอกจาก timer ด้วยหรือไม่ (ชื่อ/
+   mask/faction) — เทียบ path ของ body ที่ไม่มีชื่อ/faction กับ body ที่มี
+2. หาจุดที่ client เลือกเล่นอนิเมชันล้ม/ตาย (`_F_DIE_000` หรือคลิปที่เกี่ยวข้อง) เทียบเงื่อนไขระหว่างสองชนิดบอดี้
+3. หาว่า "ค้างลอย ไม่ตอบสนอง cursor" มาจากไหน — สามทาง (ก) actor ถูกลบจาก logic/picking list แต่ render mesh
+   ไม่ถูกลบ (ข) animation clip ไม่ถูกเลือกให้ body ประเภทนี้ (ค) DEAD มาเร็วเกินตัด DYING (hold 700ms vs
+   timer 20.0) — แยกสามทางนี้ด้วย static ถ้าทำได้
+4. ถ้า static เห็นไม่พอแยกทาง เขียน bounded negative พร้อมเสนอ attended capture ที่แคบที่สุด (เช่น ส่ง dying
+   โดยไม่มี hostile mask กับ body ชื่อเดียวกัน เทียบผล)
+
+### nonclaims
+① ไม่ claim ว่า `DEATH_TASK_HOLD_MS = 700` เป็นสาเหตุ — ใบนี้ถามฟิลด์ที่คุมอนิเมชัน ไม่ใช่ใบวัด timing (การวัด/
+   แก้ 700ms สงวนตาม `notes_to_chief/20260826_0551_COO-DECISION-death-hold-700-stands*.md`)
+② ไม่ claim คำตอบล่วงหน้า — สามสมมติฐานในข้อ objective 3 เปิดเท่ากัน
+③ ถ้าจ็อบด้านล่างไม่พบอะไรเลยในเส้นทางที่ถอดได้ นี่คือคำตอบสมบูรณ์ (bounded negative) ไม่ใช่ใบค้าง
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยัน image SHA ตรงกับ verifier ปัจจุบันก่อนเริ่ม เหมือนทุกใบ static
+- **T1** — อ่านโค้ดรอบ `0x43BDA0`/`0x43BD70` หา field อื่นที่ถูกอ่านนอกจาก timer
+- **T2** — xref ไปยัง path ที่เลือกอนิเมชันล้ม/ตาย เทียบสาขาระหว่างสองชนิดบอดี้
+- **T3** — ตรวจ picking/removal list vs render list แยกกันหรือไม่
+- **T4** — ถ้าหา T1-T3 ไม่เจอในเส้นทางที่ถอดได้ ให้เขียน bounded negative ตามข้อ objective 4
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative แล้วปิด
+ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ฟิลด์/เฟรม/branch ที่คุม fall-vs-freeze พร้อม provenance **หรือ** bounded negative ที่เสนอ attended capture
+แคบที่สุดที่จะแยกสามสมมติฐานในข้อ objective 3 ได้ ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-108 SELECT-TARGET-UI-PANEL-REQUIRED-FRAME-001 [STATIC-ON-BRIDGE]: **single-click บน 0x201F ได้ขอบแดง + ลูกศรล็อกแต่ไม่มีแผงเป้า UI (ต่างจาก GT-045 v3) — client ต้องการฟิลด์/เฟรมอะไรจากเซิร์ฟเวอร์ถึงจะเปิดแผง** [🟢 **OPEN — เปิดโดย LANE-B 2026-08-27T16:37+07:00 ต่อยอดจาก `GT-084`/`GT-084-R2` RESULT**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-108`/`GT-108` = 0 hit ทั้งสองไฟล์ (2026-08-27T16:37+07:00)
+> เลขสูงสุดที่ใช้แล้วคือ `107` (`RE-107`, ใบก่อนหน้าในรอบเดียวกัน) ⇒ ใบนี้คือ `108`
+> 🔴 ใบ `RE-085`-`RE-107` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`notes_to_chief/20260827_1620_GT084R2-RESULT-PASS-hostile-kill-full-wire-but-corpse-freezes-no-target-panel.md`
+(session เดียวกับ `RE-107`, OBSERVER_CONFIRMED 2026-08-27T15:52-15:55+07:00) — ผู้เทส single-click ที่ Tornado
+Eagle (`0x201F`) หนึ่งครั้ง ได้ **ขอบแดงรอบตัว + ลูกศรแดงคู่ล็อกที่ชื่อ** (ป้ายชื่อสีชมพู) แต่**ไม่มีแผง UI ข้อมูล
+เป้าหมายเปิดขึ้นด้านบนจอเลย**. GAME_TEST_QUEUE.md ยืนยันซ้ำหลายที่ (บรรทัด 1620, 3729) ว่า "คลิกเดียวก็เปิดแผง
+เป้าได้" และ `GT-045 v3` เป็นตัวอย่างจริงที่ single-click เปิดแผงเป้าได้สำเร็จ (คนละ actor, คนละ identity) —
+ใบนี้เป็นครั้งแรกที่ single-click ได้ผลด้านภาพ (ขอบแดง/ลูกศร) ครบ แต่แผงไม่ขึ้น ⇒ แผงกับขอบแดง/ลูกศรไม่ได้ผูก
+เงื่อนไขเดียวกัน อย่างน้อยสำหรับ body นี้
+
+### objective
+1. หา handler/path ที่เปิดแผง UI ข้อมูลเป้าหมาย (เทียบกับ path ที่วาดขอบแดง/ลูกศรล็อก ซึ่งทำงานสำเร็จแล้วสำหรับ
+   `0x201F` — สองพาธนี้แยกกันหรือรวมกัน)
+2. หาว่าพาธเปิดแผงต้องการฟิลด์/เฟรมอะไรจากเซิร์ฟเวอร์ที่ยังไม่ถูกส่ง (เช่น select-target response vital เฉพาะ,
+   หรือ attr field บางตัวในเฟรม census ที่ actor นี้ยังไม่มี) — เทียบกับ census/attr ที่ `GT-045 v3`'s target
+   actor มีแต่ `0x201F` (field-mob roster, `field_mob_tables.py`) ไม่มี
+3. ถ้า static เห็นไม่พอชี้เฟรมที่ขาด ให้บันทึก bounded negative ชัดเจน พร้อมเสนอ attended capture ที่แคบที่สุด
+   (เช่น: capture ดิบของ raw bytes ที่ client ส่งตอน single-click บน `0x201F` เทียบกับ single-click บน actor
+   ของ `GT-045 v3` — หา request ที่ client ส่งออกแล้วเซิร์ฟเวอร์ไม่เคยตอบ)
+
+### nonclaims
+① ไม่ claim ว่าไม่มีแผง = ฝั่งเซิร์ฟเวอร์ผิด (ตามจดหมายต้นทาง nonclaim ④) — อาจเป็น field-mob roster ที่ขาด
+   attribute บางตัวที่ NPC ทั่วไปมี ไม่ใช่ path การเปิดแผงเอง
+② ไม่ claim ว่าขอบแดง/ลูกศรกับแผงเป้าใช้ trigger เดียวกัน — เป็นคำถามที่ objective 1 เปิดไว้ ไม่ใช่ข้อสรุป
+③ ถ้า T1-T3 ไม่พบอะไรเลยในเส้นทางที่ถอดได้ นี่คือคำตอบที่สมบูรณ์ (bounded negative) ไม่ใช่ใบที่ค้าง
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยัน image SHA/ตาราง sha256 ตรงกับ verifier ปัจจุบันก่อนเริ่ม เหมือนทุกใบ static
+- **T1** — หา handler ที่เปิด/ประกอบแผง UI ข้อมูลเป้าหมาย แยกจาก handler ที่วาดขอบแดง/ลูกศรล็อก
+- **T2** — xref ว่าพาธนั้นอ่าน field/vital อะไรที่ field-mob roster ปัจจุบัน (`field_mob_tables.py`) ยังไม่มี
+- **T3** — ถ้าหา T1-T2 ไม่เจอในเส้นทางที่ถอดได้ ให้เขียน bounded negative ตามข้อ objective 3
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative แล้วปิด
+ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ฟิลด์/เฟรม/handler ที่คุมการเปิดแผงเป้า พร้อม provenance **หรือ** bounded negative ที่เสนอ attended capture
+แคบที่สุดตามข้อ objective 3 ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
