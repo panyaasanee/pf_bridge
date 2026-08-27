@@ -8259,6 +8259,13 @@ canonical, copy DB สองใบตามบล็อก db, เตรีย�
 - ไม่ชี้สาเหตุของสีป้ายชื่อ (`RE-067` เปิดอยู่).
 - ถ้าด่าน 0/1/2 ไปไม่ถึง (BLOCKED) => ทั้งใบเป็น BLOCKED ไม่ใช่ NO-RESULT/FAIL -- ยังไม่ได้ล็อกอินเลย.
 
+🆕 **อัปเดต (chief cloud รอบ `4txjyg` R192 · 2026-08-27T12:00+07:00) — ด่าน 0 ตอบแล้ว:** `config/gm_accounts.json`
+ไม่มีอยู่จริงในรีโปตอนนี้ (ไม่มีใครเป็น GM โดยดีฟอลต์) chief อนุมัติทาง (B) — สร้างสำเนาแยก ใส่ชื่อบัญชี
+`attended_test` แล้วตั้ง `$env:PF_GM_ACCOUNTS_CONFIG` ชี้ไปที่สำเนานั้นก่อนบูต ไม่ต้องแตะ/สร้าง
+`config/gm_accounts.json` จริง รายละเอียดเต็มดู
+`notes_to_chief/20260827_1200_CHIEF-REPLY-GT101-gm-accounts-test-config-approved.md` — ด่าน 0 ไม่ BLOCKED
+อีกต่อไป ไปต่อด่าน 1/2 ได้เลย
+
 ### result (ผู้เทสกรอก)
 ```
 

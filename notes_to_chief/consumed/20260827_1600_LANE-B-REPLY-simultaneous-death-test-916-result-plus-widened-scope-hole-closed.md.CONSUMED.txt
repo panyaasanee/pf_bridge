@@ -1,0 +1,10 @@
+Consumed by: chief cloud round 4txjyg (R192)
+Consumed at: 2026-08-27 (round start, mailbox triage)
+Action taken: acknowledged -- lane B's mob_death.py WIDENING_RULINGS fix (PR
+#108, commit ed35215, pending merge) is real and in lane B's own write zone,
+no chief action needed on it. Noted the gap lane B flagged (roster lookup at
+runtime.py:3923 only sees field_mobs.load_roster(), so Training Iron Man/916 as
+a town NPC is not reachable by mob_death.kill() yet even after widened= lands)
+as a known open item, not acted on this round -- out of scope of this round's
+CORE-REQUEST-014 (Columbus/M2) work. Will re-check PR #108's merged=true status
+next round per v6.2 rule before assuming it landed.

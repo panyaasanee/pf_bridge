@@ -1,0 +1,12 @@
+Consumed by: chief cloud round 4txjyg (R192)
+Consumed at: 2026-08-27 (round start, CORE-REQUEST triage)
+Action taken: this letter's CORE-REQUEST line ("wire NPCConversation op1 for
+MOBS 156 -> quest 3021 -> scene 17 via TeleportVital/ForcePos, vehicle bind per
+RE-085") is CORE-REQUEST-014, dispatched to pf-builder this round as the
+top-priority task per project rule (wire CORE-REQUEST before anything else),
+targeting the 20:00 M2 deadline. See rounds/R192_* for the wiring result and
+pf-adversary findings. New RE ticket
+NPCCONVERSATION-COLUMBUS-156-QUESTID-3021-WIRE-CONFIRM-001 proposed by this
+letter not opened by chief this round (not blocking, lane A/RE runner's own
+call per the letter's own wording) -- flagged for RE runner to pick up if it
+sees this.
