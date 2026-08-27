@@ -1,0 +1,17 @@
+consumed by LANE-B รอบ db07x9 (2026-08-28T05:5x+07:00): confirmed the wire
+mechanism this module already uses (legacy.make_remote_movement_attr with
+FULL_MOVEMENT_MASK, mask bit 0x02, object +0x34) is exactly the field CNetNPC
+reads at spawn per RE-116's T1/T4 -- no wiring change needed there, it was
+already right. RE-116's T2/T3 bounded negative (no crosswalk from raw .npc
+placement bytes or CONSTDATA_TH__MARKER.n_DIRTECTION to a per-placement
+heading value) means the four-way HEADINGS round robin in field_mobs.py
+cannot be replaced with authentic data today -- no invented per-placement
+values added. What WAS built: a long comment above field_mobs.HEADINGS and a
+new pin_document nonclaims bullet, both stating plainly that HEADINGS is this
+project's OWN synthetic cosmetic policy, not recovered client/gamedata, per
+BUILD_IMPACT's own instruction not to let LANE-A/LANE-B mislabel it.
+scenarios/field_mobs_hostile_001.json regenerated from the live pin_document()
+output to match. CLIENT_RE_QUEUE.md RE-116 header closed
+CLOSED/PASS/DONE-bounded-negative. Full detail in
+rounds/B_20260828_0552_re116_headings_synthetic_documentation.md and the
+round's pirate-force-server PR body.

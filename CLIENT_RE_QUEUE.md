@@ -1254,7 +1254,21 @@ layout ของ nested reader พร้อม provenance **หรือ** bound
 
 ---
 
-## 🆕🔬 RE-116 NPC-SPAWN-HEADING-SOURCE-001 [STATIC-ON-BRIDGE]: **actor spawn-time orientation มาจากไบต์/ตารางไหนของไคลเอนต์ (ถ้ามีเลย) — MOB_CENSUS ของเราไม่เคยส่งมันมาก่อน**  [🟡 OPEN]
+## 🆕🔬 RE-116 NPC-SPAWN-HEADING-SOURCE-001 [STATIC-ON-BRIDGE]: **actor spawn-time orientation มาจากไบต์/ตารางไหนของไคลเอนต์ (ถ้ามีเลย) — MOB_CENSUS ของเราไม่เคยส่งมันมาก่อน**  [🟢 **CLOSED PASS/DONE — MOVEMENTATTR+0x34 (mask 0x02) คือแหล่งจริงที่ CNetNPC ใช้ตอน spawn แต่ไม่พบ crosswalk จาก `.npc`/MARKER (BOUNDED NEGATIVE T2/T3), ปิดโดย LANE-B รอบ `db07x9` 2026-08-28T05:4x+07:00**]
+
+> **ผลสรุป (เต็มดู `notes_to_chief/20260828_0516_RE-116-RESULT-MOVEMENTATTR-IS-SPAWN-HEADING-SOURCE.md`):**
+> T1 (recursive CFG `[0x0045D200,0x0045D485)`) ปักหมุด CNetNPC initial-apply อ่าน `MovementAttr+0x34` ตรงๆ ที่
+> `0x0045D34F/0x0045D355` — เป็นฟิลด์เดียวกับที่ `make_remote_movement_attr` เขียนที่ offset `+0x34` ใต้ mask
+> bit `0x02` อยู่แล้ว (byte-exact กับ Serial `0x4671C0`) ⇒ กลไก wire ที่โค้ดฝั่งเราใช้ **ถูกต้องอยู่แล้ว** T2
+> (native `.npc` loader chain `[0x00439780,0x0043AD54)`) และ T3 (named-literal xref ของ `n_DIRTECTION`) ทั้งคู่
+> เป็น **bounded negative**: ไม่พบ byte/field ใดใน raw placement record หรือ `CONSTDATA_TH__MARKER` ที่ feed
+> ค่า heading ต่อ-placement เข้า CNetNPC spawn path เลย (MARKER's เดียวที่พบ consumer คือ teleport/scene-entry
+> ของผู้เล่น ไม่ใช่ NPC placement) T4 reconcile `0x0043BB80` (arg-copier, slot-semantic mismatch ใน external
+> registry) กับ `0x004671C0` (`MovementAttr::Serial` จริง) เรียบร้อย ไม่ใช่ class ชนกัน
+> BUILD_IMPACT: `HEADINGS` วนสี่ทิศ (`field_mobs.py`) ยังเป็น**ค่าประดิษฐ์คอสเมติกของโปรเจกต์เอง** ไม่ใช่ข้อมูล
+> recover จากไคลเอนต์/gamedata — เพิ่มคอมเมนต์ยาวเหนือ `HEADINGS` และ bullet ใน `pin_document`'s nonclaims
+> ระบุชัดตามนี้แล้ว (LANE-B รอบ `db07x9`) ไม่มีการแตะกลไก wire (ถูกอยู่แล้ว) ไม่มีการเดา/ประดิษฐ์ค่า
+> per-placement ใหม่ใดๆ ถ้ามี crosswalk จริงในอนาคตให้เปิดใบใหม่แทนที่ค่า round-robin นี้
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง (2026-08-28T02:33+07:00, รวม `notes_to_chief/`, `rounds/`):
 > `RE-116`/`GT-116` = 0 hit ทั้ง `CLIENT_RE_QUEUE.md` และ `GAME_TEST_QUEUE.md` — เลขสูงสุดที่ใช้แล้วคือ
