@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): status report, GM-001..004 built (accounts/state_wire/command_capture/commands/scene_catalog), not wired to runtime yet at write time -- CORE-REQUEST-006 wired later per CHIEF_CONTINUATION.md registry row 006-010

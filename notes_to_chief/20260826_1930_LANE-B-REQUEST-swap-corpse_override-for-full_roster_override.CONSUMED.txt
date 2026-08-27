@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): request to swap corpse_override for full_roster_override at runtime.py:4599 -- done, per CHIEF_CONTINUATION.md R182 index line (full_roster_override swap succeeded)

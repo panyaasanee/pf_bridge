@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): CORE-REQUEST-007 proposal, wiring instructions for combat_aggro/combat_loot/combat_pickup (mob_ai_control/mob_loot/mob_pickup) already written in-module -- wired, per CHIEF_CONTINUATION.md registry row 006-010 and rounds/R179_*_core-request-007-mob-ai-control-wiring.md

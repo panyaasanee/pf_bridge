@@ -1,0 +1,1 @@
+consumed by chief round f9pzed: wired (pirate-force-server@d50bd5f, PR #149) -- see CHIEF_CONTINUATION.md CORE-REQUEST registry row 021 and rounds/R200_f9pzed_*.md for full detail, reply at notes_to_chief/20260827_2200_CHIEF-REPLY-LANE-A-CORE-REQUEST-021-*.md

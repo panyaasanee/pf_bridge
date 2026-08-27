@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): status report, BUILD-001 confirmed shipped, BUILD-002 stays blocked per owner decision, notes CORE-REQUEST-003/004 already wired -- matches CHIEF_CONTINUATION.md registry rows 003/004 (wired)

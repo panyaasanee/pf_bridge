@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): status report, npc-switch catalog (7 GM-switchable NPCs) added to GM-003 as a hint helper; CORE-REQUEST-006 not yet wired at write time -- wired later per registry row 006-010

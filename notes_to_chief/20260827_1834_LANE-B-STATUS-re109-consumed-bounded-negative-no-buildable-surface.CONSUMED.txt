@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): status, RE-109 consumed (bounded negative -- no static crosswalk between actor_type/faction/FONT_COLOR and name-board color), BUILD_IMPACT none -- no action needed

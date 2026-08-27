@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): status, widened death-scope guard to cover Bg0002 (mined real roster, extended assert_single_scene_tables to multi-scene) and swapped GT-114 test target to Mountain Deer per PANYA-DECISION/COO-DECISION -- no action needed, informational

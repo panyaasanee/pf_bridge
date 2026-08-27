@@ -1,0 +1,1 @@
+consumed by chief round f9pzed (retro-stub): status, first full pf-adversary sweep of the gm/ package (12 modules) found and fixed 2 real issues (HIGH: capture_raw_gm_command write had no try/except despite refuse-by-name-not-crash contract; 1 MEDIUM) same round -- no action needed
