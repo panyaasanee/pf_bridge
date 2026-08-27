@@ -1254,12 +1254,14 @@ layout ของ nested reader พร้อม provenance **หรือ** bound
 
 ---
 
-## 🔬 RE-117 BT-GM-CLICK-DISPATCH-GATE-001 [STATIC-ON-BRIDGE]: **คลิกปุ่ม `BT_GM` แล้วอะไรกันไม่ให้ `GMUI_BASIC` ถูกสร้าง — เดินจาก click handler `0x0053B9B0` → gate `0x0044A3B0` → current-UI-key vfunc → dispatcher `0x00AA0710` → factory `0x007280D0`, ระบุทุกเงื่อนไข/ฟิลด์ที่อ่านตลอดสาย** [🟡 OPEN]
+## 🔬 RE-118 BT-GM-CLICK-DISPATCH-GATE-001 [STATIC-ON-BRIDGE]: **คลิกปุ่ม `BT_GM` แล้วอะไรกันไม่ให้ `GMUI_BASIC` ถูกสร้าง — เดินจาก click handler `0x0053B9B0` → gate `0x0044A3B0` → current-UI-key vfunc → dispatcher `0x00AA0710` → factory `0x007280D0`, ระบุทุกเงื่อนไข/ฟิลด์ที่อ่านตลอดสาย** [🟡 OPEN]
 
-> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง (2026-08-28T03:xx+07:00, รวม `notes_to_chief/`, `rounds/`,
-> `archive/`): `RE-116`/`GT-116` ถูกจองแล้วโดย `GAME_TEST_QUEUE.md` (`GT-116` CORE-REQUEST-022, คนละสาย
-> คนละหัวข้อ, เปิดก่อนรอบนี้) — `RE-117`/`GT-117` = 0 hit ทุกไฟล์ ⇒ ใบนี้คือ `117`
-> 🔴 ใบ `RE-085`-`RE-115` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+> 🔢 **หมายเหตุเลข:** จองครั้งแรกเป็น `RE-117` (grep ยืนยัน ณ ตอนนั้น 2026-08-28T03:2x+07:00 ว่าง 0 hit) แต่
+> เมื่อ merge `origin/main` เข้ามาพบว่าสาย B (รอบ `gi7bxs`, `pf_bridge#263`, merge ก่อนใบนี้) จองเลข `117`
+> ไปพร้อมกันจริง (race — ทั้งสองรอบ grep เห็น 0 hit ในเวลาไล่เลี่ยกัน) เลข `117` ของสาย B อยู่บน `main` แล้ว
+> ห้ามแตะ/ห้ามย้าย (กฎห้ามแก้ใบที่ commit แล้ว) ⇒ ใบนี้จองใหม่เป็น `118` แทน (grep ซ้ำหลัง merge: `RE-118`/
+> `GT-118` = 0 hit ทั้งสองไฟล์)
+> 🔴 ใบ `RE-085`-`RE-117` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
 
 ### ที่มา
 `notes_to_chief/20260828_0215_GT101R3-RESULT-GM-frame-accepted-BT_GM-button-visible-click-does-nothing-no-packet.md`
@@ -1326,3 +1328,63 @@ client จริงได้เลยจนกว่าใบนี้จะต�
 
 ### result
 (RE runner กรอกที่นี่)
+
+---
+
+## 🔬 RE-117 NPCATTR-LEVEL-MP-BIT-001 [STATIC-ON-BRIDGE]: **BasicAttr bit `0x0002` (level) และช่อง MP cur/max ที่ `PANYA-DECISION 2026-08-28T01:25` ข้อ ③ ให้ไว้ (พิสูจน์บน PC ActorAttr) — มีบิตเดียวกันสำหรับ NPCAttr (มอน/NPC) จริงหรือไม่ ที่ VA ไหน** [🟡 OPEN]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง (2026-08-28T03:xx+07:00, รวม `notes_to_chief/`, `rounds/`):
+> `RE-117`/`GT-116` = 0 hit ทั้ง `CLIENT_RE_QUEUE.md` และ `GAME_TEST_QUEUE.md` — เลขสูงสุดที่ใช้แล้วคือ
+> `115` (`RE-115`, ตัวนับร่วม) ⇒ ใบนี้คือ `117`
+> 🔴 ใบเดิมทั้งหมดอยู่ที่เดิม ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่
+
+### ที่มา
+- `COO-DECISION 2026-08-28T01:46+07:00` สั่งสาย B ให้ใช้ตาราง 55/22-field ของ `PANYA-DECISION
+  2026-08-28T01:25+07:00` ข้อ ③ เป็นแนวทาง "ครบสมบูรณ์ที่สุด" เมื่อประกอบ ActorAttr ของ NPC/มอน
+- รอบ `gi7bxs` (สาย B, 2026-08-28) ตรวจ `legacy.make_npc_attr` (ตัวประกอบ NPCAttr ที่
+  `field_mobs.hostile_npc_attr`/`mob_death._compose_body` เรียก) แล้วพบว่า wire ตัวนี้มีบิตสำหรับ
+  ชื่อ/HP/MP-ไม่มี/faction/movement_speed อยู่แล้ว **แต่ไม่มีบิตใดตรงกับ "level" (x2, Basic bit `0x0002`,
+  +0x5E u16) หรือ MP cur/max (x5/6, +0x4C/+0x50 u32) เลย** — ทั้งสองช่องนี้มีข้อมูลที่ขุดแล้วสำหรับผู้เล่น
+  (`FieldMob.level` มีอยู่จริง มาจาก MOBS/STANDARD_MOB) แต่การมีอยู่ของบิตนั้นบน NPCAttr (ต่าง shape จาก
+  ActorAttr ของ PC) ยังไม่เคยถูกพิสูจน์แบบ static เลย — ที่มาเดียวของตารางคือการพรอบบนตัวละครผู้เล่น
+  (`adhoc_actorattr_probe`) ไม่ใช่บน NPC/มอน
+- ทั้งสองบิตนี้เป็น **serializer gap ไม่ใช่ value gap**: ข้อมูลมีแต่ไม่มีที่ทางในโค้ดที่จะส่ง — สาย B
+  ตัดสินใจไม่ประดิษฐ์ splice ใหม่จากตารางที่พิสูจน์บน actor คนละชนิด (กฎหลักฐานสองชั้นของโปรเจกต์ห้ามไว้)
+
+### objective
+1. หา `NPCAttr::Serialize` (หรือฟังก์ชันเทียบเท่าที่ `legacy.make_npc_attr` re-derive มา) ในไบนารีจริง —
+   VA ที่รับผิดชอบ — แล้วตรวจว่ามันมี case สำหรับ mask bit `0x0002` (level, u16) หรือไม่ ถ้ามี ระบุ offset
+   จากฐาน object และ tag ที่ใช้
+2. เช่นเดียวกันสำหรับ MP cur/max: มี bit ใดใน NPCAttr mask ที่ตรงกับ MP หรือไม่ (ตาราง PC ใช้ `+0x4C/+0x50`
+   u32 คู่กับ HP ที่ `+0x44/+0x48` ซึ่ง NPCAttr มีอยู่แล้วในบิต `0x0004`/`0x0008`)
+3. ถ้าไม่มีบิตใดเลยสำหรับ NPCAttr (ทั้งสอง) — นี่คือคำตอบสมบูรณ์ (bounded negative): NPC/มอนไม่มีแนวคิด
+   "level"/"MP" บน wire เลย ไม่ใช่แค่เราไม่ส่ง
+4. ถ้ามี ระบุ mask bit/offset/tag ให้ครบ เพื่อให้สาย B เพิ่ม parameter ใหม่ใน `legacy.make_npc_attr` ได้
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยัน image SHA/ตาราง sha256 ตรง verifier ปัจจุบันก่อนเริ่ม
+- **T1** — หา `NPCAttr::Serialize`/เทียบเท่า จาก cross-ref ของ `make_npc_attr`'s ที่มา (ดูว่า RE เดิม
+  เคยระบุ VA ไว้หรือยัง — เช่นเดียวกับที่ `ActorAttr::Serialize` (`0x466230`) ถูกอ้างสำหรับ PC)
+- **T2** — เดิน mask-bit dispatch table (หรือ if/switch chain) ของฟังก์ชันนั้น หา case `0x0002` และ
+  case ใด ๆ ที่เขียน field คู่กับ MP (ถ้ามีลักษณะคล้าย `0x0004`/`0x0008` แต่อีกคู่)
+- **T3** — ถ้าพบ ระบุ tag/offset/width ให้ครบพอที่จะเขียน `f32tag`/`u16tag` ใหม่ได้ทันที
+- **T4** — ถ้าไม่พบเลยทั้งคู่ เขียน bounded negative แยกข้อ 1/2
+
+### nonclaims
+① ไม่ claim ว่า NPCAttr ต้อง "พิการ" กว่า ActorAttr โดยดีไซน์ — อาจเป็นแค่ v141 (หรือรุ่นที่ตารางนี้มาจาก)
+ไม่เคยส่ง level/MP ให้ NPC ก็ได้ ทั้งที่บิตอาจมีอยู่ในไบนารี — ใบนี้ถามว่า "บิตมีจริงไหม" ไม่ใช่ "เกมออกแบบ
+ให้ NPC มี level ที่ผู้เล่นเห็นไหม"
+② ไม่ claim ว่า owner's probe table (01:25) ผิด — มันพิสูจน์ถูกสำหรับ PC ActorAttr เป๊ะ ใบนี้แค่ถามว่า
+ผลเดียวกันย้ายมาที่ NPCAttr ได้หรือไม่ ซึ่งเป็นคำถามที่ owner's ใบเองก็ทิ้งไว้เป็น nonclaim
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative แล้วปิด
+ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ระบุว่า NPCAttr มีบิตสำหรับ level/MP หรือไม่ พร้อม provenance (VA + offset ถ้ามี) **หรือ** bounded negative
+ที่แยกข้อ 1/2 ชัดเจน ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+
+**ทำไมมีค่า:** ปิดใบนี้แล้วสาย B จะรู้ว่า "ส่ง level/MP ให้มอนได้จริง (เพิ่ม parameter)" หรือ "ห้ามแตะ
+เพราะไม่มีบิต" — ทั้งสองคำตอบทำให้ Attr completeness ของ M3/M4 เดินต่อได้โดยไม่ต้องเดา ไม่ปิดใบนี้
+เท่ากับปล่อยให้รอบต่อไปถามคำถามเดิมซ้ำทุกครั้งที่แตะ field-mob ActorAttr

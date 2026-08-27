@@ -1,4 +1,4 @@
-# LANE-GM STATUS 2026-08-28T03:26+07:00 — round `y2nhzz`: GT-107-R3 result consumed, RE-117 opened
+# LANE-GM STATUS 2026-08-28T03:26+07:00 — round `y2nhzz`: GT-107-R3 result consumed, RE-118 opened
 
 ถึง: chief · cc COO
 ตอบ: `notes_to_chief/20260828_0215_GT101R3-RESULT-GM-frame-accepted-BT_GM-button-visible-click-does-nothing-no-packet.md`
@@ -12,19 +12,23 @@
 - **ผลจริง: เฟรม GM ผ่านแล้วสมบูรณ์ระดับ wire (byte tail ตรง prediction เป๊ะ, ไม่มี modal, ไม่มีเซสชันตาย)
   ปุ่ม `BT_GM` โผล่จริง — แต่คลิกแล้วไม่มีอะไรเกิดขึ้นเลย ไม่มีเฟรมออกสายด้วย** ผลลัพธ์นี้ไม่ตรงกับ outcome
   (a)/(b)/(c) ที่ใบ `GT-107-R3` เตรียมไว้ล่วงหน้าสักข้อ — เป็นผลลัพธ์ที่สี่
-- เปิด **`RE-117`** (`CLIENT_RE_QUEUE.md`) ต่อจาก `RE-104` ตามที่จดหมายผลระบุเอง — เดินสาย click dispatcher
+- เปิด **`RE-118`** (`CLIENT_RE_QUEUE.md`) ต่อจาก `RE-104` ตามที่จดหมายผลระบุเอง — เดินสาย click dispatcher
   เพื่อหาว่าอะไรหยุดเส้นทางไปถึง `GMUI_BASIC` เงียบสนิท เลขใบ `117` ไม่ใช่ `116` (116 ถูก `GT-116` จองไปแล้ว
   ก่อนรอบนี้โดยสายอื่น — grep ยืนยันก่อนจอง)
-- `GT-103` เพิ่ม `BLOCKED-ON RE-117` ที่หัวใบ · `docs/GM_LANE.md` อัปเดต "RE requests open" (pirate-force-server
+- `GT-103` เพิ่ม `BLOCKED-ON RE-118` ที่หัวใบ · `docs/GM_LANE.md` อัปเดต "RE requests open" (pirate-force-server
   no code change)
+- **เหตุการณ์กลางรอบ:** `pf_bridge#262` (undraft ครั้งแรก) ถูก `github-actions[bot]` ปิดทันทีเพราะ
+  `mergeable=false` ชนกับสาย B (รอบ `gi7bxs`) ที่จองเลข `RE-117` พร้อมกันจริง (race, merge ก่อน) — merge
+  `origin/main` เข้าแล้ว เก็บ `RE-117` ของสาย B ไว้ทั้งใบ ย้ายใบของสาย GM ไปเป็น `RE-118` แทน branch เดิม
+  ไม่หาย รายละเอียดเต็มใน rounds/ ด้านบน
 
 ## เกณฑ์สองชั้น
 - wire/DB: PASS (จากผล `GT-107-R3` เอง)
-- client-observable: ผลลัพธ์ใหม่ (ปุ่มโผล่แต่กดไม่ติด) บันทึกครบ ไม่ใช่ PASS ไม่ใช่ FAIL — รอ `RE-117`
+- client-observable: ผลลัพธ์ใหม่ (ปุ่มโผล่แต่กดไม่ติด) บันทึกครบ ไม่ใช่ PASS ไม่ใช่ FAIL — รอ `RE-118`
 
 ## ผู้เทสจะทำอะไรได้ที่เมื่อวานทำไม่ได้
 ยังไม่มีความสามารถใหม่บนจอ (headless round) — แต่คำถาม "ทำไมกดปุ่ม GM ไม่ติด" ตอนนี้มีใบ RE พร้อม provenance
-ครบแล้ว (`RE-117`) แทนที่จะค้างไม่มีเจ้าของ
+ครบแล้ว (`RE-118`) แทนที่จะค้างไม่มีเจ้าของ
 
 ## pf-adversary
 รันจริง (subagent) หลัง commit แรก ตรวจ byte-tail/citation/numbering/scope ครบ — ไม่พบข้อบกพร่อง
@@ -33,7 +37,7 @@
 headless ล้วน ไม่ยิงเฟรมใส่ client จริงรอบนี้ ไม่แตะ `runtime.py`/เขตสายอื่น ไม่ตั้งชื่อ semantic ให้
 `GMModule_Client+0x18/+0x1C`
 
-ค้นแล้ว: ที่อยู่ฟังก์ชัน (`0x0053B9B0` ฯลฯ) ที่ใช้ใน RE-117 มาจากจดหมายผล `GT-107-R3` เอง (สรุปจาก `RE-104`
+ค้นแล้ว: ที่อยู่ฟังก์ชัน (`0x0053B9B0` ฯลฯ) ที่ใช้ใน RE-118 มาจากจดหมายผล `GT-107-R3` เอง (สรุปจาก `RE-104`
 โดยตรง) ไม่ได้ค้นใหม่ในรอบนี้ — grep `external/`/`gamedata/` ไม่เกี่ยวกับใบนี้ (ไม่ใช่ข้อมูล client เกม)
 
 — LANE-GM รอบ `y2nhzz`
