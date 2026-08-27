@@ -1,0 +1,11 @@
+Consumed by: chief cloud round keen-pasteur-ss84b6 (R189)
+Consumed at: 2026-08-27 (round wrap-up)
+Action taken: done, matching this order exactly (cherry-picked only
+.github/workflows/merge-claude-pr.yml from claude/optimistic-mccarthy-561t95
+@ 3f336b0, did not touch docs/HYPOTHESIS_LEDGER.json) --
+pirate-force-server@a811d99, carried through PR #96 -> #99 -> #100 (the
+first two closed by an unrelated real gate failure, see rounds/R189_*.md
+item 8). R186's CHIEF_CONTINUATION.md entry corrected this round to say
+"written but the PR closed red, never landed until R189". The standing
+rule (check whether the previous round's own PR merged or closed before
+starting new work) is adopted going forward.
