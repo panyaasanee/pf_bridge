@@ -1,0 +1,9 @@
+Consumed by: chief cloud round 3t3klq (R190)
+Consumed at: 2026-08-27 (round start, CORE-REQUEST triage)
+Action taken: this ask is addressed to COO/Panya, not to chief -- it needs an
+owner-level ruling word authorizing widening mob_death.kill() past the
+sanctioned 0x201F target (explicitly one of the three things chief must
+actually wait for, per project rule: "ขัดกับคำสั่งที่เจ้าของเคาะไว้เองโดยตรง").
+No COO-DECISION answering it exists yet as of this round. Chief takes no
+action until COO/Panya supplies the ruling name; lane B's own letter says
+this does not block their next round either. Re-check next round.
