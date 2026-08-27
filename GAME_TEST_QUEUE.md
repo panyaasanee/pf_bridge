@@ -5558,3 +5558,168 @@ client-observable (a human at the screen only, never inferred from the console):
 ```
 
 ```
+
+---
+
+## GT-120 CORE-REQUEST-025 TRACEPATH-GO-BUTTON-STALL-CLEAR-001: after CORE-REQUEST-025 wires an empty-vector `CTracePathVital` (0x2F92) reply to every `CTracePathReqVital` (0x4391), does a real client's map-window GO! button actually stop the client stuck showing "กำลังค้นหาเส้นทาง..." forever -- the orange stall KA1A found this round -- and does NOT this entry test whether the character walks anywhere (no waypoint/auto-walk logic exists yet)  [BLOCKED -- wait for merge: commit pirate-force-server@4ddfd54 pushed, not yet confirmed merged into origin/main at time of writing; ด่าน 0 below must clear before boot]
+
+> NUMBERING NOTE: grep confirmed before reserving (2026-08-28, round R206) -- `GT-120`/`RE-120` = 0 hits in
+> `GAME_TEST_QUEUE.md`, `CLIENT_RE_QUEUE.md`, and `archive/`. Highest number in use anywhere in the shared
+> counter is `119` (`RE-119` TRACEPATH-GO-BUTTON-REQREPLY-LAYOUT-001, CLOSED PASS/DONE) -- `GT-116` is the
+> highest bare GT number but is lower than 119 -- => this entry is `120`. Entries `GT-101`-`GT-116`,
+> `GT-107-R3`, and `RE-085`-`RE-119` stay exactly where they are, unchanged -- this is a new entry, not a
+> replacement for any of them.
+
+### source (links only -- see cited files for full detail, not re-derived here)
+- `notes_to_chief/consumed/20260828_0235_KA1A-FOUND-GO-button-sends-CTracePathReqVital-0x4391-server-must-answer-0x2F92.md`:
+  attended finding, exact repro path `เปิดแผนที่ (M) -> เลือก NPC -> กด GO!` -- nothing happens on the wire
+  reply side, orange center-screen text "กำลังค้นหาเส้นทาง..." stays up forever (screenshot
+  `M1P_ingame_20260828_prison_exile_pike_deer_*.png`). Server never sent `0x2F92` at all.
+- `notes_to_chief/20260828_0424_RE-119-RESULT-DISCRIMINATED-PATH-RECORDS-AND-UI-ACTIONS.md` (STATIC-ON-BRIDGE,
+  PASS/DONE): proves the client's own response handler `[0x006EA9E0,0x006EACD3)`, on an empty response vector
+  (`u16` count = 0, no records), dispatches UI action `EndFindPath` at object `Main_FindPath` -- a clean stall-
+  clear signal, static evidence only, never fired at a real client before this entry.
+- `notes_to_chief/20260828_0427_LANE-A-CORE-REQUEST-025-wire-tracepath-empty-response-fallback.md`: opens the
+  build request, scoped explicitly to "empty-vector fallback only, do not guess a real path."
+- `rounds/R206_confident-ride-l5xxkh_core-request-025-tracepath-empty-vector-plus-024-shadow-numbering-flag.md`:
+  chief wired it same round. New `src/pirateforce_foundation/trace_path.py` (`TRACE_PATH_REQ_VITAL_ID`=0x4391,
+  `TRACE_PATH_VITAL_ID`=0x2F92, `make_trace_path_empty_response`); `runtime.py` dispatch branch is
+  unconditional (no `--*-scenario` flag -- production path), fail-closed if no character selected. New
+  `tests/test_trace_path_wiring.py` (4 tests, driven through the real dispatcher): no reply pre-select;
+  byte-identical to calling the builder directly; reply re-parses to exactly one `u16` tag `0x12`=0 field and
+  nothing else; repeated requests each independent. Full suite `3568 passed, 0 failed` cited, not reproduced
+  here.
+- `notes_to_chief/consumed/20260828_0200_PANYA-DECISION-new-direction-attr-completeness-use-client-data-map-window-GO-probe.md`
+  ADDENDUM 02:35: the owner's own attended GO! probe was stood down "until the payload is understood" --
+  RE-119 (closed) + CORE-REQUEST-025 (wired) together lift that pause; this is the first attended shot since.
+
+### objective (single claim -- wire/DB layer is a separate, already-closed claim)
+On an ordinary flagless login, after selecting a destination in the in-game map window and clicking GO!, does
+the client stop showing the orange "กำลังค้นหาเส้นทาง..." text stuck forever, instead clearing it the way
+KA1A's pre-fix capture never once saw. The wire/DB layer of this same fix (does the server actually reply with
+a structurally-empty `CTracePathVital`) is already proven headless this round in
+`tests/test_trace_path_wiring.py` (pirate-force-server repo) -- cited above, NOT re-proven by this entry. This
+entry is the client-observable layer only: the first human eyes on this specific fix.
+
+### predictions (a wrong prediction is a finding, not a failure)
+- P1 [primary, proposed]: clicking GO! causes the orange text to either not persist at all, or to appear and
+  then clear on its own within a short window -- either way, NOT stuck forever the way KA1A captured it.
+- P2 [expected non-event, explicitly NOT a requirement]: the character does not walk/move anywhere. If motion
+  is observed, write it up as a surprising bonus finding, separate from this entry's own pass/fail -- CORE-
+  REQUEST-025 deliberately implements no waypoint/auto-walk logic (RE-119 T4, request field `u16@+0x14`
+  bounded negative, never touched this round).
+- P3 [falsifier]: the orange text still appears and never clears within the observation window below -- a real
+  negative, not a failure. It would mean either this client build never received the fix, this exact click
+  path does not reach the new dispatch branch, or `EndFindPath` needs more than an empty vector in practice
+  (RE-119's handler proof was static, never fired at a real client before this entry) -- redirect to a new
+  RE/GT entry naming which of those three, do not re-run this one guessing.
+
+### ก่อนบูต -- ด่าน 0 (merge status, MUST clear first), ด่าน 1 (green boot), ด่าน 2 (grep confirms the branch)
+**ด่าน 0 -- merge status:** commit `pirate-force-server@4ddfd54` is reported pushed but NOT yet confirmed
+merged into `origin/main` at time of writing this entry. `pf_resolve_green_boot.py` follows `origin/main`
+only -- if unmerged when the tester runs ด่าน 1, the resolver will not return a commit carrying this code
+(`exit 3`, or a commit missing `trace_path.py`). **The entry stays unbootable** -- record "รอ merge" and move
+to another ticket. Never checkout the branch directly to skip the resolver, and never trust the `4ddfd54`
+string above without ด่าน 2 confirming it live.
+
+**ด่าน 1:**
+```
+py -3 pf_resolve_green_boot.py --repo "C:\path\to\pirate-force-server" --fetch
+```
+Only `exit 0` + printed `BOOT_COMMIT: <sha>` means bootable.
+
+**ด่าน 2 (need at least 1 line from every command; missing any one = BLOCKED, do not boot):**
+```
+git grep -n "TRACE_PATH_REQ_VITAL_ID" <SHA> -- src/pirateforce_foundation/trace_path.py
+git grep -n "TRACE_PATH_VITAL_ID" <SHA> -- src/pirateforce_foundation/trace_path.py
+git grep -n "make_trace_path_empty_response" <SHA> -- src/pirateforce_foundation/trace_path.py
+git grep -n "0x4391\|TRACE_PATH_REQ_VITAL_ID" <SHA> -- src/pirateforce_foundation/runtime.py
+```
+
+### db
+default_state\pirateforce.sqlite3 -- copy only, canonical never opened. Copy to
+`pf_bridge\backup\pirateforce_before_GT-120_<yyyyMMdd_HHmmss>.sqlite3`, then `state\run_gt120.sqlite3`. sha256
+vs `CANON_SHA.txt` before/after; `PRAGMA integrity_check=ok` on the working copy both times.
+
+### server args (flagless -- the dispatch branch is unconditional/production, no `--*-scenario` of any kind)
+```
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+py -3 -u -m pirateforce_foundation.app --db state\run_gt120.sqlite3
+```
+No scenario flag, no other entry piggybacked onto this boot. Any ordinary character/login works -- default
+spawn (Port Royal, scene 1) is enough; the map window's own NPC list is populated by the world census, not by
+this fix.
+
+### steps (click by click -- record continuous video for the whole LOCK_GAME window)
+Before start: hold `LOCK_GAME`, note boot stamp (+07:00, must be under 420 min old at teardown), compare
+canonical sha, copy both DBs per the db block, stage `TEMPLATE_teardown_generic.ps1`, confirm ด่าน 0-2 all
+cleared (record the resolved SHA).
+1. Start the server first (`Get-NetTCPConnection -State Established` on ports 10188/10189 must be 0 before
+   opening the client -- a client opened with no server dies on its own in ~3.5 minutes). If a client has to
+   be killed mid-session, restart the server before the next client -- the server keeps the old session, the
+   next client hangs on "connecting" forever otherwise.
+2. Open client, log in normally to a character, enter the map. Start continuous recording before entering.
+3. T0: HP bar / minimap / map name visible. Record HUD X/Y. Photograph full-res, name-label colours from this
+   still (self, "none" if no other label visible).
+4. NO-CRASH check: right-click-drag to sweep the camera 360 degrees once. Camera-only, character facing never
+   moves, nothing goes out on the wire. Never use Q/E or W/A/S/D for this check -- those turn the character
+   and emit `TargetPosVital`.
+5. Press M to open the map window. Photograph full-res.
+6. Select any one destination/NPC entry in the map window's list (KA1A's own path: open map -> select NPC).
+   Photograph the selection, before clicking GO!.
+7. Click GO!. Immediately watch screen-center.
+8. Photograph full-res at: immediately after click, +2s, +5s, +10s, +30s, or until the orange text clears,
+   whichever comes first. Record whether it appeared at all, and if so the exact timestamp it appeared and the
+   exact timestamp it cleared (or "still present at +30s" if it never clears).
+9. Record HUD X/Y again -- expected unchanged (P2); if changed, note prominently as a bonus/surprise finding,
+   not a requirement of this entry.
+10. Supplementary only, not required for a pass: if the server console is visible, copy verbatim any line
+    carrying `CTracePathReqVital`/`0x4391` at the moment of the click and any reply line carrying
+    `CTracePathVital`/`0x2F92` -- a missing console line does not fail this entry (see wire/DB pass criteria).
+11. NO-CRASH check again (right-click-drag).
+12. Log out, teardown via `TEMPLATE_teardown_generic.ps1` (stamp still under 420 min), recheck canonical
+    sha256, sha256 every capture.
+
+Colour rule (Panya's order, 2026-08-25): one line per label per image, write "none" not blank, full-res stills
+only (never a contact sheet or video), never infer a cause -- RE-067 is open and is the only place that
+question lives.
+
+### pass criteria (two layers, never mixed)
+
+wire/DB: the actual claim this layer answers -- "does the server structurally reply with an empty
+`CTracePathVital`" -- is already CLOSED headless this round by `tests/test_trace_path_wiring.py` (4/4 green,
+cited above, not reproduced by this entry). This entry's own wire/DB obligations are only: canonical sha256
+matches `CANON_SHA.txt` before/after; `PRAGMA integrity_check` = `ok` on the working copy both times;
+`sessions`/`lease_generation` behave normally for one ordinary login. Any console lines captured per step 10
+are recorded as supplementary corroboration only, never as a substitute for the client-observable answer below
+and never required for this entry to close.
+
+client-observable (a human at the screen only, never inferred from the console):
+- Primary reading: does "กำลังค้นหาเส้นทาง..." ever get stuck forever, or does it clear (including "never even
+  appeared because the reply was fast") -- P1 vs P3, both are complete, valid answers; write whichever
+  actually happened.
+- Secondary: did the character's position change -- expected no (P2); record either way, do not fail this
+  entry if it did move.
+- Both NO-CRASH checks pass.
+- Name-label colours recorded per the colour rule above, one line per label per full-res still.
+
+### nonclaims
+- Does not prove any waypoint/auto-walk behavior of any kind. CORE-REQUEST-025 wires only an empty-vector
+  reply; RE-119 T4 leaves the request's own discriminator field (`u16@+0x14`) bounded negative -- quest id vs.
+  NPC id vs. list index is still unresolved, and no record-carrying reply exists to test.
+- Does not test the map window's destination-selection semantics or which NPC/quest a given click corresponds
+  to on the wire -- out of scope, RE-119 T4's own open question.
+- Does not decide the cause of any name-label colour observed (`RE-067` stays open, no cause inferred).
+- Does not reproduce or re-run `tests/test_trace_path_wiring.py` -- that headless proof is cited as already
+  closed, this entry supplies only the client-observable half.
+- Single account, single login, single session -- no reconnect/relogin, no second character.
+- If ด่าน 0/1/2 don't clear (PR not merged / functions not found at the resolved SHA) -> the entire entry is
+  **BLOCKED**, not NO-RESULT/FAIL -- record it as "รอ merge" and stop.
+- Does not reopen or supersede any other GT/RE entry; PANYA-DECISION 0200's ADDENDUM 02:35 stood the GO! probe
+  down only pending payload understanding -- RE-119 (closed) + CORE-REQUEST-025 (wired) lift that pause, this
+  is the first attended shot since, on a fresh number.
+
+### result (ผู้เทสกรอก)
+```
+
+```
