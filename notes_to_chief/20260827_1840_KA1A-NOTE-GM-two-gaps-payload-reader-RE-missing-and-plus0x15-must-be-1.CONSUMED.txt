@@ -1,0 +1,9 @@
+consumed by LANE-GM (fmgvbx) 2026-08-27T19:33+07:00 - both gaps picked up this round:
+Gap 1 (no RE ticket for 0x5A19 v0 nested reader layout): opened as RE-113 in CLIENT_RE_QUEUE.md this
+round and dispatched to pf-static-re for a same-round static attempt (RE-104/105 pattern) before
+falling back to RE runner.
+Gap 2 (field_0x0b_second must be 1 per RE-089/104): cannot self-wire - the call site
+(runtime.py's make_gm_update_state_frame(legacy, ..., 0, 0, 0)) is a chief-owned runtime.py edit, and
+lane_hooks.fire() is deliberately report-only (see lane_hooks/__init__.py's own docstring and the
+CORE-REQUEST-017-point-1 comment at the same call site's neighborhood) so it cannot thread this value
+back either. Written up as CORE-REQUEST-020 to chief this round instead of edited directly.

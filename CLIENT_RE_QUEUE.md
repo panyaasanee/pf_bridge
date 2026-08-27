@@ -1087,3 +1087,61 @@ client-observable) เต็ม: `notes_to_chief/20260827_1912_RE-112-RESULT-RES
 
 `BUILD_IMPACT:` `CORE-REQUEST-019` ต้องคง named refusal ของ quest 3205 ไว้ — ห้ามเพิ่ม `ReliveMarkerVital`
 เป็น ack หรือ silent-success จนกว่าจะมีทั้ง persistence schema ที่ chief อนุมัติ **และ** capture/crosswalk จริง
+
+---
+
+## 🆕🔬 RE-113 GM-UPDATE-STATE-VITAL-NESTED-READER-LAYOUT-001 [STATIC-ON-BRIDGE]: **หลัง `vital_version=0` ผ่านเช็คของ `GM_UpdateGMStateVital` (`0x5A19`) แล้ว nested reader ของ vital นี้เองอ่านฟิลด์อะไรตามลำดับ ยาวเท่าไร — เฟรมที่เราส่งทำให้ `GSCN_RunTimeProtocolRes` ดีด `ErrorData=28317` ทันที** [🟢 **OPEN — เปิดโดย LANE-GM รอบ `fmgvbx` 2026-08-27T19:33+07:00**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-113`/`GT-113` = 0 hit ทั้งสองไฟล์ (2026-08-27T19:33+07:00,
+> รวม archive/) เลขสูงสุดที่ใช้แล้วคือ `112` (`RE-112`) ⇒ ใบนี้คือ `113`
+> 🔴 ใบ `RE-085`-`RE-112` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+- `RE-105` (CLOSED DONE/PASS, ดูใบนี้ด้านบน): `vital_version` ที่ถูกของ `0x5A19` คือ `0` — เช็คอยู่ใน generic
+  VitalData collection reader `[0x005F3E20,0x005F406D)`, prototype bootstrap `0x007299B0` เขียน
+  `message+0x10 = 0`
+- `GT-107` (attended, `notes_to_chief/20260827_1745_GT107-RESULT-*.md`): ส่งเฟรมตาม RE-105 แล้ว
+  (`... 12 19 5A 0B 00 0B 00 0B 00 14 00 00 00 00`) — เช็ค version ผ่านจริง (ไม่มี modal 23065 ของ GT-101
+  อีกแล้ว) **แต่** client ดีด `Error 28317 — GSCN_RunTimeProtocolRes ErrorData=28317, 讀取失敗` แล้วปิด
+  socket เองก่อนถึง `GT-103`/`BT_GM` ใด ๆ (28317 = 0x6E9D = id ของ `GSCN_RunTimeProtocolRes` เอง — เฟรมที่
+  บรรจุ `0x5A19` อยู่ข้างใน)
+- payload ที่ส่งตอนนี้ (`gm/state_wire.py`): `u8tag(0x0B)@+0x14` · `u8tag(0x0B)@+0x15` · `u32tag(0x14)@+0x18`
+  = 3 ฟิลด์ 9 ไบต์ tagged — เป็น layout ที่ `RE-088`/`RE-089` พิสูจน์แค่ "โครงมีสามฟิลด์นี้" ไม่เคยพิสูจน์ว่า
+  reader หลังผ่าน version check ต้องการครบตามนี้หรือมากกว่า/น้อยกว่านี้
+
+### objective
+1. หา nested reader ของ `0x5A19` เอง (หลัง version-check ทั่วไปผ่านแล้ว) — handler `0x00729F00` (RE-089),
+   prototype vtable `0x00F4631C` — อ่านกี่ฟิลด์ ทาง tag/ความยาวแบบไหนต่อฟิลด์ ยาวรวมกี่ไบต์จาก payload
+2. เทียบกับ 3 ฟิลด์ 9 ไบต์ที่ `gm/state_wire.py` ส่งอยู่ตอนนี้ — สั้นไป ยาวไป หรือ tag/ลำดับผิดหรือไม่
+3. หาว่ามีเงื่อนไขลำดับ/state ก่อนส่ง `0x5A19` หรือไม่ (เช่น ต้องตามหลังเฟรมอื่นก่อน ไม่ใช่ทันทีหลัง
+   `StartGameRes`) แยกจากคำถามเรื่อง byte layout ในข้อ 1-2
+4. ถ้า static ไม่พอสำหรับข้อ 1-3 ให้เขียน bounded negative ชัดเจน แยกเป็นข้อ ๆ (บอกว่าข้อไหนตอบได้/ไม่ได้)
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยัน image SHA/ตาราง sha256 ตรง verifier ปัจจุบันก่อนเริ่ม
+- **T1** — อ่าน handler `0x00729F00` ต่อจากจุดที่ version-check (`RE-105`) ผ่านแล้ว หา loop/sequence ของ
+  tag-read call ถัดไป (field count, tag byte, length ต่อฟิลด์)
+- **T2** — เทียบผลลัพธ์ T1 กับ 3-ฟิลด์/9-ไบต์ปัจจุบันตามข้อ objective 2
+- **T3** — xref เงื่อนไข state/ลำดับก่อนเรียก handler นี้ (ข้อ objective 3) ถ้าเวลาเหลือ
+- **T4** — ถ้า T1 ไม่พบเส้นทางที่ถอดได้ ให้เขียน bounded negative ("ต้อง brute-force ความยาว/จำนวนฟิลด์จริง
+  จากไคลเอนต์ทีละแบบ") ไม่เดาจำนวนฟิลด์จากเฟรมข้างเคียงที่เป็นคนละ vital
+
+### nonclaims
+① ไม่ claim ว่า 3 ฟิลด์ปัจจุบันผิด — อาจจะถูกแล้วและ error 28317 มาจากคนละสาเหตุ (เช่นลำดับ/state ตามข้อ
+objective 3) ใบนี้แค่แยกสองความเป็นไปได้ออกจากกัน
+② ไม่ claim ว่า `RE-105` ผิด — ใบนั้นตอบเรื่อง version เท่านั้น ปิดแล้วสมบูรณ์ในขอบเขตของมัน
+③ ถ้า T1-T4 ไม่พบอะไรเลยในเส้นทางที่ถอดได้ นี่คือคำตอบสมบูรณ์ (bounded negative) ⇒ ส่งต่อ attended
+brute-force รอบถัดไปแทน ไม่ใช่ใบที่ค้าง
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative แล้วปิด
+ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+layout ของ nested reader พร้อม provenance **หรือ** bounded negative ที่แยกข้อ 1/2/3 ชัดเจน ⇒ ปิดใบพร้อม
+บรรทัด `BUILD_IMPACT:`
+
+**เร่งด่วนกว่าใบอื่นในคิว:** ใบนี้บล็อก `GT-103`/`GT-110` และทาง ข ของ `PANYA-ORDER 1425` (warp ข้ามฉาก)
+ทั้งหมด — `localtest` ยังห้ามกลับเข้า `gm_accounts` จนกว่าใบนี้ปิด (กฎเดิมจาก `GT-101`/`GT-107` ยังใช้)
+
+### result (ยังไม่มี — ใบเปิดอยู่)

@@ -1,0 +1,15 @@
+consumed by LANE-GM (fmgvbx) 2026-08-27T19:33+07:00 - status of both paths as of this round:
+Path A (login-scene override): CORE-REQUEST-017 point 1 wired and merged (see docs/GM_LANE.md); GT-110
+(attended visual probe) is open and PENDING, waiting on an attended session, not on this lane. No new
+work needed from LANE-GM on path A this round.
+Path B (real cross-scene warp): item 3 (decode 0x51E9 -> GmCommand) was already done in an earlier round
+(gm/command_wire.py, RE-088-pinned) and same-scene warp via ForcePos exists (gm/warp_executor.py,
+CORE-REQUEST-011, merged) - both ahead of where this letter expected them. But GT-107 (2026-08-27 17:45,
+after this letter was written) found that the GM-state-after-login frame itself now kills the client
+session with a NEW error (28317, GSCN_RunTimeProtocolRes read-failed) before GT-103/warp can even be
+reached - this is a harder blocker than anything this letter named. Opened RE-113 (0x5A19 v0 nested
+reader layout) and CORE-REQUEST-020 (field_0x0b_second=1 per RE-089/104) this round to attack that
+blocker; item 4 (full TeleportVital cross-scene warp) stays blocked behind it and behind RE runner's
+"GM editor window trigger" / "TeleportVital semantics" items (already closed as RE-090/091 per
+docs/GM_LANE.md, so those specific asks from this letter are done - the remaining blocker is the new
+GT-107 failure mode, not the ones this letter named).
