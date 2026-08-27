@@ -1254,6 +1254,78 @@ layout ของ nested reader พร้อม provenance **หรือ** bound
 
 ---
 
+## 🆕🔬 RE-116 NPC-SPAWN-HEADING-SOURCE-001 [STATIC-ON-BRIDGE]: **actor spawn-time orientation มาจากไบต์/ตารางไหนของไคลเอนต์ (ถ้ามีเลย) — MOB_CENSUS ของเราไม่เคยส่งมันมาก่อน**  [🟡 OPEN]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง (2026-08-28T02:33+07:00, รวม `notes_to_chief/`, `rounds/`):
+> `RE-116`/`GT-116` = 0 hit ทั้ง `CLIENT_RE_QUEUE.md` และ `GAME_TEST_QUEUE.md` — เลขสูงสุดที่ใช้แล้วคือ
+> `115` (`RE-115`, ใบก่อนหน้าในรอบเดียวกัน) ⇒ ใบนี้คือ `116`
+> 🔴 ใบ `RE-085`-`RE-115` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`notes_to_chief/20260828_0150_M1P-RESULT-PASS-owner-confirms-Prison-Exile-identities-6-gaps-map-window-lead.md`
+gap ②: เจ้าของเห็น NPC/มอนทุกตัวบนเกาะคุกขยับ/หายใจจริง แต่หันหน้าทิศเดียวกันหมด ไม่เป็นธรรมชาติ — เซิร์ฟเวอร์
+เราไม่เคยส่งฟิลด์ heading จริงให้ actor เลย (`make_remote_movement_attr`'s heading arg เป็น `0.0` มาตลอดทั้ง
+bg0001 และ bg0002 จนถึงรอบนี้)
+
+รอบนี้ (LANE-A) หา static-only ในคลังนี้ก่อนเปิดใบ (ผลติดไว้ให้ RE runner ไม่ต้องทำซ้ำ):
+- `Bg0002Placement`/`SceneActorPlacement` dataclass ทั้งสอง (`scene2_prison_exile_tables.py`, `population.py`)
+  ไม่มีฟิลด์ heading/direction/rotation/facing/yaw เลย
+- Raw `gamedata/scene/Bg0002/Bg0002.placements.tsv` มีคอลัมน์ `f32_3`/`f32_4`/`f32_5` ที่ไม่เคยถูก join เข้าตาราง
+  ใดๆ — ค่าที่แท้จริง (วัดจริงทั้ง 106 แถว) เป็นเลขกลมช่วง 0-5500 ซ้ำกันข้าม MOBSET คนละชุด ไม่ใช่ค่าต่อเนื่อง
+  แบบมุม (ควรจะเป็น 0-360/0-2π ถ้าเป็น heading) — รูปร่างเหมือน radius สามชั้นมากกว่า และสมมติฐาน
+  "f32_4/f32_5 = radius" เคยถูกทดสอบและ**ตกไปแล้ว**โดยสาย B รอบก่อน
+  (`notes_to_chief/20260827_1030_LANE-B-REPLY-PANYA-ORDER-npc-scene-file-field-interpretation.md` บรรทัด
+  11-28: 11/13 placement มี f32_4/f32_5 เหมือนกันทุกตัว (500/800) ทั้งที่ `n_AGGRO` จริงต่างกัน 0 vs 1200)
+- `CONSTDATA_TH__MARKER.n_DIRTECTION` (`gamedata/tables/CONSTDATA_TH__MARKER.tsv`, คอลัมน์จริง ยืนยัน offset
+  ที่ `gamedata/PF_GAMEDATA_COLUMNS.tsv` แถว 1488-1493) เป็น enum เข็มทิศหยาบ 0-12 จริง แต่ scene 2 มีแค่ 18
+  แถว (ไม่ใช่ 97) และไม่มี join key เข้า `Bg0002Placement.n_id`/`placement_index` เลยในโค้ดที่ commit แล้ว —
+  แถว `n_ID=2` ตรงพิกัด spawn ที่ pin ไว้ใน `scenarios/world_scene_registry_001.json` เป๊ะ (หลักฐานเอนไปทาง
+  ตาราง teleport/arrival waypoint ไม่ใช่ตารางหันหน้า NPC แต่ยังไม่ตัดขาด)
+- Wire slot มีจริง ไม่ใช่ stub: `make_remote_movement_attr`'s heading f32 เขียนที่ offset `+0x34` ภายใต้ mask
+  bit `0x02` (`current/pf_login_game_server_v141.py:1204-1245`) ยืนยันด้วยรายงาน static-RE ที่ commit แล้ว
+  ตรง byte กับ Serial `0x4671C0` (`reports/PF_MOVE_PROJECT001_REMOTE_MOVEMENT_PROJECTION_STATIC_20260818.md`)
+  — **แต่** `external/PF_SERIALIZER_FIELDS.tsv` แถว 12-13 จัด `MovementAttr` ที่ address `0x0043BB80` เป็น
+  `EMPTY` (arg-copier เปล่า) ซึ่งเป็นคนละที่อยู่กับ `0x4671C0` — ยังไม่ reconcile สองแหล่งนี้ ปล่อยให้ใบนี้ตัดสิน
+- bg0001's `_entry()` เคยแก้ปัญหานี้แบบวนสี่ทิศ (`HEADINGS = (0, pi/2, pi, 3pi/2)` คีย์ด้วย
+  `placement_index & 3`, `world_population.py:210,343-350`) — **ไม่ได้มาจากตาราง/ข้อมูลไหนเลย เป็นค่าประดิษฐ์
+  ล้วน** ไม่ใช่หลักฐานว่ามี heading จริงในตาราง รอบนี้สาย A ใช้วิธีเดียวกันกับ bg0002 (parity คอสเมติก ไม่ใช่
+  claim ว่า RE แล้ว — ดู `world_population_bg0002.py`'s `_entry()` docstring) ระหว่างรอใบนี้ปิด
+
+### objective
+1. หา consumer ที่ initialize orientation ของ `CNetNPC` ตอน **spawn** (ไม่ใช่ wire-merge consumer ที่พิสูจน์
+   แล้วที่ `0x467130` — จุดนั้นรับค่าที่ส่งมาแล้ว ไม่ใช่จุดตั้งต้น) เริ่มจาก `0x45C103`/`0x45D2EA` ที่อ้างใน
+   `make_npc_attr`'s docstring เอง (`current/pf_login_game_server_v141.py:1139-1201`) เพราะจุดนั้นเคยสาวฟิลด์
+   spawn-time อื่นมาแล้ว
+2. เช็คว่า raw `.npc`/placement binary record (ไม่ใช่ TSV ที่ mine แล้ว) มี byte range อื่นนอก x/y/z ที่
+   consumer ตอน spawn อ่านเข้า heading offset หรือไม่
+3. หา xref ของตัวโหลด `CONSTDATA_TH__MARKER` ว่ามีอะไรอ่าน `n_DIRTECTION` นอกจากโค้ด teleport ผู้เล่นหรือไม่
+4. reconcile ชื่อ `MovementAttr` สองที่ (`0x0043BB80` EMPTY vs `0x4671C0` real) — คนละคลาสที่ชื่อชนกัน หรือ
+   `PF_SERIALIZER_FIELDS.tsv` จัดผิด
+5. ถ้า static เห็นไม่พอ ให้เขียน bounded negative แยกข้อ 1-4 ชัดเจน — **ต้องใช้ `GameClient.local.bin` จริง
+   ซึ่ง cloud clone นี้ไม่มี** (ตามที่ pf-static-re รอบนี้ยืนยัน) เลนนี้ทำได้เฉพาะบนเครื่องสะพาน
+
+### nonclaims
+① ไม่ claim ว่า f32_3/4/5 ไม่ใช่ heading อย่างเด็ดขาด — วัดจากรูปร่างค่า (เลขกลม ซ้ำข้ามอินสแตนซ์) เท่านั้น
+ยังไม่มี consumer xref มายืนยัน
+② ไม่ claim ว่า `CONSTDATA_TH__MARKER` ไม่เกี่ยวกับ NPC heading เด็ดขาด — แค่ไม่มี join key ในโค้ดที่ commit
+แล้ววันนี้
+③ ไม่ claim ว่า bg0001's `HEADINGS` วนสี่ทิศเป็นค่าที่ถูกจริง — เป็นค่าประดิษฐ์ที่ทำให้ดูเป็นธรรมชาติกว่าเดิม
+เท่านั้น ทั้งสองฉากรอใบนี้ปิดเพื่อเปลี่ยนเป็นของจริงถ้ามี
+④ ถ้า T1-T4 ไม่พบเส้นทางที่ถอดได้เลยจาก static ล้วน นี่คือคำตอบสมบูรณ์ (bounded negative ตาม T5)
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative แล้วปิด
+ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+แหล่งข้อมูล heading จริงของ actor spawn พร้อม provenance **หรือ** bounded negative ที่แยกข้อ 1/2/3/4 ชัดเจน
+⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+
+**ทำไมมีค่า:** ตอนนี้ทั้งเมือง (bg0001) และเกาะคุก (bg0002) ใช้ heading ประดิษฐ์วนสี่ทิศเหมือนกัน — เจ้าของ
+เพิ่งยืนยันด้วยตาว่านี่คือช่องว่างที่สังเกตเห็นได้จริง (M1-P gap ②) ถ้ามี heading จริงในข้อมูลไคลเอนต์
+จะทำให้ทั้งสองฉากดูเป็นธรรมชาติขึ้นทันทีโดยไม่ต้องเดาเพิ่ม
+---
+
 ## 🔬 RE-118 BT-GM-CLICK-DISPATCH-GATE-001 [STATIC-ON-BRIDGE]: **คลิกปุ่ม `BT_GM` แล้วอะไรกันไม่ให้ `GMUI_BASIC` ถูกสร้าง — เดินจาก click handler `0x0053B9B0` → gate `0x0044A3B0` → current-UI-key vfunc → dispatcher `0x00AA0710` → factory `0x007280D0`, ระบุทุกเงื่อนไข/ฟิลด์ที่อ่านตลอดสาย** [🟡 OPEN]
 
 > 🔢 **หมายเหตุเลข:** จองครั้งแรกเป็น `RE-117` (grep ยืนยัน ณ ตอนนั้น 2026-08-28T03:2x+07:00 ว่าง 0 hit) แต่
@@ -1388,3 +1460,72 @@ client จริงได้เลยจนกว่าใบนี้จะต�
 **ทำไมมีค่า:** ปิดใบนี้แล้วสาย B จะรู้ว่า "ส่ง level/MP ให้มอนได้จริง (เพิ่ม parameter)" หรือ "ห้ามแตะ
 เพราะไม่มีบิต" — ทั้งสองคำตอบทำให้ Attr completeness ของ M3/M4 เดินต่อได้โดยไม่ต้องเดา ไม่ปิดใบนี้
 เท่ากับปล่อยให้รอบต่อไปถามคำถามเดิมซ้ำทุกครั้งที่แตะ field-mob ActorAttr
+
+---
+
+## 🆕🔬 RE-119 TRACEPATH-GO-BUTTON-REQREPLY-LAYOUT-001 [STATIC-ON-BRIDGE]: **`CTracePathReqVital` (`0x4391`, ขาไป) กับ `CTracePathVital` (`0x2F92`, ขากลับที่เราไม่เคยส่ง) — ต้องตอบฟิลด์อะไรกลับให้ปุ่ม GO! ในหน้าต่างแผนที่เดินได้จริงแทนที่จะค้าง "กำลังค้นหาเส้นทาง..." ตลอด**  [🟡 OPEN]
+
+> 🔢 **หมายเหตุเลข:** จองครั้งแรกเป็น `RE-117` (grep ยืนยัน ณ ตอนนั้น 2026-08-28T03:30+07:00 ว่าง 0 hit) แต่
+> เมื่อ merge `origin/main` เข้ามาพบว่าทั้งสาย B (`RE-117 NPCATTR-LEVEL-MP-BIT-001`, `pf_bridge#263`) และสาย
+> GM (`RE-118 BT-GM-CLICK-DISPATCH-GATE-001`, ตัวเองก็ชนแล้ว renumber จาก 117→118 มาก่อนแล้ว) จองเลข `117`/
+> `118` ไปพร้อมกันจริงก่อนใบนี้ merge ทั้งคู่อยู่บน `main` แล้ว ห้ามแตะ/ห้ามย้าย ⇒ ใบนี้จองใหม่เป็น `119` แทน
+> (grep ซ้ำหลัง merge, 2026-08-28T03:45+07:00: `RE-119`/`GT-119` = 0 hit ทั้งสองไฟล์)
+> 🔴 ใบ `RE-085`-`RE-118` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`notes_to_chief/20260828_0235_KA1A-FOUND-GO-button-sends-CTracePathReqVital-0x4391-server-must-answer-0x2F92.md`
+(ADDENDUM ต่อ `PANYA-DECISION` 0200 ข้อ ข) — เจ้าของกด GO! ในหน้าต่างแผนที่แล้วจอค้างข้อความสีส้ม
+"กำลังค้นหาเส้นทาง..." ตลอด (เห็นรอบ M1-P, ภาพ `M1P_ingame_20260828_prison_exile_pike_deer_*.png`) คอนโซล
+M1-P L8925 จับเฟรมขาไปได้จริง 1 เฟรม แต่เราไม่เคยตอบขากลับเลย จึงค้างถาวร ใบ `chief` R204 (2y0zil) consume
+จดหมายนี้แล้วแต่ระบุชัดว่า "payload layout ของ 0x4391/0x2F92 และการต่อ handler เป็นงาน RE/LANE-A ไม่ใช่ chief"
+(`notes_to_chief/consumed/...KA1A-FOUND...md.CONSUMED.txt`) — ใบนี้คือการเปิดคิวอย่างเป็นทางการตามที่ยังไม่มี
+ใครทำ
+
+รอบนี้ (LANE-A) หา static-only ในคลังนี้ก่อนเปิดใบ (ผลติดไว้ให้ RE runner ไม่ต้องทำซ้ำ):
+- capture เดียวที่มี: 45 ไบต์ `0x4391` จากคอนโซล M1-P L8925 —
+  `12 6F 6E 14 00 00 00 00 08 00 0B 02 12 01 00 12 91 43 0B 00 | 0F E7 02 | 0F 00 00 | 14 00 00 00 00 |
+  0F 00 00 | 0F 00 00 | 0F 00 00 | 0F 00 00 | 08 00` — ไม่เคยเห็นเฟรม `0x2F92` เลยทั้งคลัง (สอดคล้องกับที่
+  client ไม่เคยได้คำตอบ)
+- `VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv:107` = `0x4391 CTracePathReqVital`, `:63` =
+  `0x2F92 CTracePathVital` · `external/PF_PROTOCOL_REGISTRY.tsv:376-378` มี registry/serializer/handler VA
+  ครบทั้งสองคลาส บวก `CGCTracePathModule`
+- `external/PF_SERIALIZER_FIELDS.tsv:5521-5536`: **`CTracePathReqVital` resolve แล้วครบ 8 ฟิลด์ทั้ง W/R**
+  (ไม่มี `EMPTY`), gate `ALWAYS`, span เดียว `[0x006EBAF0,0x006EBBF7)` — ถอด capture ตาม layout นี้ตรงกัน:
+  `u16@+0x14=0x02E7(743)`, ที่เหลืออีก 7 ฟิลด์ (`u16@+0x16`, `u32@+0x18`, `u16@+0x1C/+0x1E/+0x20/+0x22`,
+  `u8@+0x24`) = 0 ทั้งหมด — ความหมายของ `743` ยังไม่รู้ (เลขตรงทั้ง `QUEST.n_ID=743` ฉาก 5 และ
+  `MOBS.n_ID=743` "Jail Dead Prisoner" — **ห้ามสรุปจากเลขตรงกันเฉย ๆ**)
+- **`CTracePathVital` (ขากลับ) ยังไม่ปิด** — `external/PF_PROTOCOL_PRIORITY.tsv:377` = `serializer_status=OPEN`
+  บล็อกที่ `direct_call_not_proven_serializer` / `invalid_parameter_import_call_wire_effect_unproved` /
+  `invalid_parameter_singleton_register_call_wire_effect_unproved`; `PF_SERIALIZER_FIELDS.tsv:5491-5520` มี
+  18 W-field / 12 R-field ที่ไม่ใช่ stub ว่าง — สี่ฟิลด์ `tag 0x14` (f32/u32) ติดกันที่ `+0x0,+0x4,+0x8,+0xC`
+  มีรูปร่างเหมือน vec3+scalar (x/y/z/heading?) แต่**ยังไม่ผ่านเกณฑ์ CLOSED** ห้ามใช้เป็น layout จริง
+- `external/PF_FIELD_VALIDATION.tsv:752-755`: `CTracePathReqVital W` = `VALIDATED` (observed_frames=1, capture
+  ข้างบนนี่เอง) ส่วน `CTracePathReqVital R` / `CTracePathVital W` / `CTracePathVital R` = `NOT_OBSERVED` ทั้งหมด
+- gamedata/queue ค้นแล้ว: `TracePath`/`4391`/`2F92` ไม่มีใน `GAME_TEST_QUEUE.md`, `gamedata/PF_GAMEDATA_LUA_INDEX.tsv` — ยังไม่มีใครจองคิวนี้มาก่อน
+- roster lookup ที่มีอยู่แล้ว (สาย A ใช้ได้ทันทีถ้า layout ปิด, ไม่ต้องเขียนใหม่): `scene2_prison_exile_tables.py`
+  `_by_n_id()` (bg0002, private, :545) และ `population.py` `load_port_royal_placements()` (bg0001, :89) — เป็น
+  per-scene ทั้งคู่ ยังไม่มี dispatcher กลางข้ามฉาก แต่ข้อมูลตำแหน่งมีพร้อมสำหรับเกาะคุกแล้ว (Bg0002 97/97)
+
+### objective
+1. ปิด `CTracePathVital` (`0x2F92`) serializer ให้พ้น `OPEN` — สาว `SUBCALL`/`PE_IMPORT_INVALID_PARAMETER`
+   blocker ที่ `PF_PROTOCOL_PRIORITY.tsv:377` ชี้ไว้จนถึง writer/reader จริง แล้วยืนยันว่าสี่ฟิลด์ `tag 0x14`
+   ที่ `+0x0/+0x4/+0x8/+0xC` เป็น vec3(+scalar) จริงไหม หรือเป็นอย่างอื่น
+2. ตั้งสมมติฐาน semantic ของ `u16@+0x14=743` ใน `CTracePathReqVital` (quest id / NPC `n_ID` / list index ที่
+   client เลือกในหน้าต่างแผนที่) แล้วทดสอบกับตาราง `QUEST`/`MOBS` — ต้องแยกให้ชัดว่าเป็น semantic ที่พิสูจน์แล้ว
+   หรือ bounded negative เพราะเลข `743` ชนทั้งสองตารางพร้อมกัน (ห้ามสรุปมั่ว)
+3. หา xref ของ handler `0x00710440`/`CGCTracePathModule`: client ทำอะไรกับ response หลังได้รับ (auto-walk
+   ด้วย navmesh เอง หรือรอ waypoint หลายจุดจากเซิร์ฟเวอร์) และตรงไหนซ่อนข้อความ "กำลังค้นหาเส้นทาง..."
+4. ถ้า T1-T3 ชนเพดาน static ล้วน (ต้องใช้ `GameClient.local.bin` บนเครื่องสะพานที่ clone คลาวด์นี้ไม่มี) ให้เขียน
+   bounded negative แยกข้อ พร้อมระบุว่าต้องใช้เครื่องสะพานจริงถึงจะปิดต่อได้
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว/span SHA) · ชนเพดานให้เขียน bounded negative
+แล้วปิด ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+layout ของ `CTracePathVital` (0x2F92) พร้อม provenance พอให้สาย A เขียน handler ตอบจริงได้ **หรือ** bounded
+negative ที่แยกข้อ 1/2/3 ชัดเจนว่าต้องใช้เครื่องสะพาน ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+
+**ทำไมมีค่า:** GO! คือทางลัดที่มีอยู่แล้วในไคลเอนต์สำหรับ "เดินไปหา NPC ตัวไหนก็ได้อัตโนมัติ" — ถ้าต่อ handler
+ตอบ 0x2F92 ได้จริง (ด้วยตำแหน่งจาก roster ที่มีอยู่แล้วสำหรับเกาะคุก) ผู้เทส attended ทุกรอบจะประหยัดเวลาเดินเอง
+ทุกครั้ง และเป็นหลักฐาน client-observable ตัวแรกว่าเซิร์ฟเวอร์ตอบ pathfinding request ได้จริง
