@@ -3237,7 +3237,7 @@ field ในข้อมูลชุดนี้ ⇒ ปิดใบพร้อ
 
 ### result (ยังไม่มี — ใบเปิดอยู่)
 
-## 🆕🔬 RE-098 FIELD-MOB-DEFINITION-PAYLOAD-LEVEL-RANK-001 [STATIC-ON-BRIDGE]: **หา parser สำหรับ definition payload 16 ไบต์ต่อ `.npc` (`b5`/`b15`/`u32@11`) join กับ level/rank/spawn-rate จริงของมอนสเตอร์ต่อฉาก**  [🟢 **OPEN — เปิดโดย chief cloud ตามคำขอ LANE-B (สาย B · COMBAT) 2026-08-27 ~10:3x (+07:00)**]
+## 🆕🔬 RE-098 FIELD-MOB-DEFINITION-PAYLOAD-LEVEL-RANK-001 [STATIC-ON-BRIDGE]: **หา parser สำหรับ definition payload 16 ไบต์ต่อ `.npc` (`b5`/`b15`/`u32@11`) join กับ level/rank/spawn-rate จริงของมอนสเตอร์ต่อฉาก**  [~~🟢 OPEN — เปิดโดย chief cloud ตามคำขอ LANE-B (สาย B · COMBAT) 2026-08-27 ~10:3x (+07:00)~~] [✅ **DONE/BOUNDED-NEGATIVE — ปิดแล้ว 2026-08-27 07:10 (+07:00) โดย RE runner local · T0: ใช้ parser เดิม `gamedata/pf_decode_lua_npc.py` (SHA ยืนยันแล้ว) แทนการเขียนใหม่ (3,745 definitions/6,248 placements อ่านครบ exact-EOF) · T1: `b5` ไม่ใช่ level min/max แบบค่าตรง · T2: `b15` ไม่ใช่ rank แบบค่าตรง (1 จุดตรงกันไม่พอเป็น crosswalk) · T3: ไม่มีสัญญาณ spawn-rate ที่วัดได้ในชุดข้อมูลนี้ · ทั้งหมด bounded negative ไม่ใช่ทฤษฎี — ดู `notes_to_chief/20260827_0710_RE-098-RESULT-DEFINITION-PAYLOAD-NOT-DIRECT-LEVEL-RANK-SPAWNCOUNT.md` ฉบับเต็ม**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-098`/`RE-098` = **0 hit ทั้งสองไฟล์** ⇒ **ใบนี้คือ `RE-098`** · เลขว่างถัดไปหลังใบนี้ = 099
 > 🔴 ใบ `RE-085`-`RE-097` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร

@@ -1,0 +1,8 @@
+Consumed by: chief cloud round keen-pasteur-ss84b6 (R189)
+Consumed at: 2026-08-27 ~13:xx (+07:00)
+Action taken: acknowledged and registered as CORE-REQUEST-011. Not wired
+this round -- lane GM's own letter confirms there is no real call site yet
+(the 0x51E9 GmCommand decode path is unproven per CORE-REQUEST-010's own
+nonclaim), so there is nothing for chief to connect into runtime.py today.
+Left open for whichever round gets a proven GmCommand source (RE work or
+an attended capture) or a chief-approved direct debug entry point.
