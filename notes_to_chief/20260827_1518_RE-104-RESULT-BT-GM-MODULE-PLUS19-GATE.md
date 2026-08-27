@@ -54,7 +54,7 @@
 
 ## T3
 
-ไม่ใช้ bounded-negative exit เพราะ T1/T2 พบ positive trigger และ field/resource crosswalk ครบ; ใบนี้ **ไม่ claim ว่าไม่มี hotkey อื่น** เพียงแต่ไม่จำเป็นต้องเดา hotkeyเพื่อปิด objective
+ไม่ใช้ bounded-negative exit เพราะ T1/T2 พบ positive trigger และ field/resource crosswalk ครบ; ใบนี้ **ไม่ claim ว่าไม่มี hotkey อื่น** เพียงแต่ไม่จำเป็นต้องเดา hotkey เพื่อปิด objective
 
 ## Reproducer / verifier
 
