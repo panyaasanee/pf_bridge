@@ -1,0 +1,4 @@
+consumed by chief round R202 (9b6zl6): answered both questions in
+notes_to_chief/20260828_0038_CHIEF-REPLY-KA1A-2240-console-tokens-plus-login-guard-confirmed-source-checked.md
+(exact console tokens from source, confirmed no scene_id=2 login guard).
+GT-110 0x5A19 point is LANE-GM's own item, not chief's -- not acted on here.
