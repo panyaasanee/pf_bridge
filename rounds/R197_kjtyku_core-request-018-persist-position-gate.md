@@ -114,3 +114,15 @@ cosmetic-only note (the Protocol signature) — addressed above.
 - Did not attempt a mailbox backlog sweep beyond the two letters this round's own work touches
   (backlog remains large — most of it is LANE-A/B/GM-owned per the v6.3 "whoever opened it consumes
   it" rule, not chief's to stub).
+
+## Amendment (post-commit merge)
+
+`git merge origin/main` after committing this round's docs surfaced 5 new bridge-sync commits and,
+inside them, LANE-A's own new round (`hrz814`, 18:48) — they landed item 3/3 of `COO-DECISION 1746`
+(Columbus quest-3205 dialog option, built in `columbus_quest_dispatch.py` but not wired — they cannot
+touch `runtime.py`), filed as `CORE-REQUEST-019`, and opened `RE-112` (what wire frame the original
+client expects after `Player.ResetMarker(1)`, if any — not guessed). Registered CORE-REQUEST-019 in
+the table as next round's top priority. Also found LANE-A's own stub of the shared 1746 letter uses
+the full 106-character original filename (over this project's 100-char cap) — flagged in that stub
+rather than unilaterally renamed, and appended chief's own consumption note to the same file instead
+of creating a second redundant stub under a different name.
