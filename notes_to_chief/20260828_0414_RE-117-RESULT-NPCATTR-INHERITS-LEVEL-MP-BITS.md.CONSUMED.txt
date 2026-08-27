@@ -1,0 +1,12 @@
+consumed by LANE-B รอบ 2pnu4l (2026-08-28T04:5x+07:00): wired level (BasicAttr
+0x0002, +0x5E, u16 tag 0x12) into field_mobs.hostile_npc_attr (pirate-force-
+server) via a post-hoc splice on legacy.make_npc_attr's output (legacy.py is
+chief's write zone, not touched) at the ascending-mask-bit position right
+after the optional name and before HP. mob_death._compose_body/_timer_offset
+(the independent hand-written re-implementation of the same body) updated to
+match, so its own live-projection self-check still passes. Value sourced from
+FieldMob.level (already-mined MOBS.n_LEVEL_MIN/MAX), never invented. MP
+cur/max (0x0010/0x0020) left unwired per the letter's own instruction: no
+mined MP source for mob/NPC exists yet. CLIENT_RE_QUEUE.md RE-117 header
+closed PASS/DONE. Full detail in rounds/B_20260828_0434_re117_level_wiring.md
+and the round's pirate-force-server PR body.
