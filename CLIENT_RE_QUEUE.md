@@ -1326,7 +1326,16 @@ bg0001 และ bg0002 จนถึงรอบนี้)
 จะทำให้ทั้งสองฉากดูเป็นธรรมชาติขึ้นทันทีโดยไม่ต้องเดาเพิ่ม
 ---
 
-## 🔬 RE-118 BT-GM-CLICK-DISPATCH-GATE-001 [STATIC-ON-BRIDGE]: **คลิกปุ่ม `BT_GM` แล้วอะไรกันไม่ให้ `GMUI_BASIC` ถูกสร้าง — เดินจาก click handler `0x0053B9B0` → gate `0x0044A3B0` → current-UI-key vfunc → dispatcher `0x00AA0710` → factory `0x007280D0`, ระบุทุกเงื่อนไข/ฟิลด์ที่อ่านตลอดสาย** [🟡 OPEN]
+## 🔬 RE-118 BT-GM-CLICK-DISPATCH-GATE-001 [STATIC-ON-BRIDGE]: **คลิกปุ่ม `BT_GM` แล้วอะไรกันไม่ให้ `GMUI_BASIC` ถูกสร้าง — เดินจาก click handler `0x0053B9B0` → gate `0x0044A3B0` → current-UI-key vfunc → dispatcher `0x00AA0710` → factory `0x007280D0`, ระบุทุกเงื่อนไข/ฟิลด์ที่อ่านตลอดสาย** [🟢 **CLOSED PASS/DONE — CURRENT-UI-KEY-MUST-BE-NONEMPTY; NO-NEW-0x5A19-FIELD-GATE, ปิดโดย LANE-GM รอบ `4djeqi` 2026-08-28T04:1x+07:00**]
+
+> **ผลสรุป (เต็มดู `notes_to_chief/20260828_0411_RE-118-RESULT-CURRENT-UI-KEY-MUST-BE-NONEMPTY.md`):**
+> click chain ที่ bounded ครบใช้ gate เดิมของ `0x5A19` (`GMModule_Client+0x19`) เท่านั้น — `+0x18/+0x1C`
+> ไม่ใช่ gate และห้าม tweak เพิ่ม หลัง gate นี้ผ่าน dispatcher `0x00AA0710` เรียก predicate
+> `[0x008946C0,0x008946EA)` ที่ต้องการ current-UI object ไม่ null และ key (UTF-16 จาก vfunc `+0x04`)
+> ไม่ว่าง มิฉะนั้น factory `0x007280D0` ไม่ถูกเรียกเลย ไม่มี log/error/frame ใด ๆ — เงียบตามที่ GT-107-R3
+> สังเกตเห็นจริง ไม่มี field ใหม่ให้แก้ในเฟรม `0x5A19` (`field_0x0b_second=1` ยังถูกต้องตามเดิม)
+> BUILD_IMPACT: `GT-103`/`GT-107-R3` procedure ต้องทำ A/B — (A) คลิกจาก HUD ที่ไม่มี panel current, (B) เปิด
+> panel ที่รู้ว่ามี current UI key ไม่ว่างก่อนคลิกซ้ำ — ปรับใน `GAME_TEST_QUEUE.md` แล้วรอบนี้
 
 > 🔢 **หมายเหตุเลข:** จองครั้งแรกเป็น `RE-117` (grep ยืนยัน ณ ตอนนั้น 2026-08-28T03:2x+07:00 ว่าง 0 hit) แต่
 > เมื่อ merge `origin/main` เข้ามาพบว่าสาย B (รอบ `gi7bxs`, `pf_bridge#263`, merge ก่อนใบนี้) จองเลข `117`

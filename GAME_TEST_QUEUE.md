@@ -4309,7 +4309,7 @@ canonical, copy DB สองใบตามบล็อก db, เตรีย�
 
 ---
 
-## GT-103 GM-002 COMMAND-WIRE-CAPTURE-MATRIX-001: ล็อกอินด้วยบัญชี GM แล้วหา/เปิด GM editor widget พิมพ์ข้อความหลายแบบ -- capture file ของ `0x51E9` ขึ้นที่ `capture/gm_command_capture/` ไหม (path นี้ live บน production ครั้งแรกรอบนี้)  [PENDING -- BLOCKED-ON RE-118: GT-107-R3 (2026-08-28T02:15) พบว่าปุ่ม BT_GM โผล่จริงแต่คลิกแล้วเงียบสนิท ไม่มีเฟรม/หน้าต่างใด ๆ, ดู RE-118 (CLIENT_RE_QUEUE.md) และ GT-107-R3's result]
+## GT-103 GM-002 COMMAND-WIRE-CAPTURE-MATRIX-001: ล็อกอินด้วยบัญชี GM แล้วหา/เปิด GM editor widget พิมพ์ข้อความหลายแบบ -- capture file ของ `0x51E9` ขึ้นที่ `capture/gm_command_capture/` ไหม (path นี้ live บน production ครั้งแรกรอบนี้)  [PENDING -- unblocked: RE-118 CLOSED PASS/DONE 2026-08-28T04:1x+07:00 (CLIENT_RE_QUEUE.md), gate ระบุแล้วว่าไม่ใช่ field ใหม่บนเฟรม 0x5A19 แต่เป็น current-UI-key context ที่ dispatcher ต้องการ -- A/B procedure เพิ่มที่ step 2 ด้านล่าง]
 
 > เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md. grep ยืนยันก่อนจอง: GT-103 = 0 hit ⇒ ใบนี้คือ GT-103 (RE-104
 > ถูกใช้แล้วในรอบเดียวกัน โดยใบพี่น้อง). เลขว่างถัดไป = 105. ใบเก่าทุกใบอยู่ที่เดิม ห้ามแตะ.
@@ -4349,25 +4349,40 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt103.sqlite3
 
 ### steps (สืบเนื่องจาก GT-101 เซสชันเดียวกันได้ ไม่ต้อง relogin)
 1. เข้าเกม, NO-CRASH กวาดกล้อง (เหมือน GT-101 ขั้น 1-3).
-2. **เปิด GM editor widget ตาม procedure ที่ `RE-104` พิสูจน์แล้ว (ไม่ใช่การสุ่มอีกต่อไป)**: หาปุ่ม/control
+2a. **หาปุ่ม `BT_GM` ก่อน** ตาม procedure ที่ `RE-104` พิสูจน์แล้ว (ไม่ใช่การสุ่มอีกต่อไป): หาปุ่ม/control
    resource ชื่อ `BT_GM` ใน notification/system UI (ปุ่มจะแสดง/กดได้ก็ต่อเมื่อสถานะ GM ของ connection ผ่าน
-   gate อยู่แล้ว, ไม่ใช่ทุก account) -- กดปุ่มนั้น -> จะเปิด panel ชื่อ `GMUI_BASIC` ที่มี tab `Radiobutton_Message`
-   (เลือก lane) และช่อง `TextBox_Message` (พิมพ์ข้อความ). RE-104 ไม่ให้พิกัดบนจอ (static เท่านั้น) จึงยังต้อง
-   หาตำแหน่งจริงด้วยสายตา 1 ครั้ง -- จดตำแหน่ง/รูปร่างที่เจอไว้ด้วย (ภาพนิ่ง) เพื่อให้รอบถัดไปไม่ต้องหาอีก.
-   พบ -> ข้อ 3. **Bounded fallback ถ้าไม่พบ `BT_GM` ภายใน 5 การลอง** (สั้นกว่าเดิมเพราะตอนนี้รู้ชื่อ resource
-   และเงื่อนไข gate แล้ว ไม่ใช่การสุ่มเปล่า): บันทึก **NO-RESULT (BT_GM control not found/not visible in this
-   UI build, bounded exploration)** พร้อมจุดที่มองแล้ว แล้วข้ามไป teardown (ไม่ใช่ FAIL/BLOCKED -- RE-104
-   nonclaim ① ไม่ตัดสินว่าบัญชีที่ไม่ใช่ GM หรือ UI build อื่นจะเห็น control นี้หรือไม่).
-3. ถ้าพบ: พิมพ์ 4-8 ข้อความทดสอบ (สั้น/มีอาร์กิวเมนต์/ว่างเปล่า/ยาว+ไทย) กด Enter ทีละอัน เว้น 3 วินาที
-   จดเวลาส่งแต่ละอัน (+07:00).
+   gate อยู่แล้ว, ไม่ใช่ทุก account) -- ปุ่มนี้เป็นทางเข้าไปยัง panel ชื่อ `GMUI_BASIC` ที่มี tab
+   `Radiobutton_Message` (เลือก lane) และช่อง `TextBox_Message` (พิมพ์ข้อความ). RE-104 ไม่ให้พิกัดบนจอ
+   (static เท่านั้น) จึงยังต้องหาตำแหน่งจริงด้วยสายตา 1 ครั้ง -- จดตำแหน่ง/รูปร่างที่เจอไว้ด้วย (ภาพนิ่ง)
+   เพื่อให้รอบถัดไปไม่ต้องหาอีก.
+   - พบ -> ข้อ 2b (A/B ของ `RE-118`).
+   - **Bounded fallback ถ้าไม่พบ `BT_GM` ภายใน 5 การลอง** (สั้นกว่าเดิมเพราะตอนนี้รู้ชื่อ resource และ
+     เงื่อนไข gate แล้ว ไม่ใช่การสุ่มเปล่า): บันทึก **NO-RESULT (BT_GM control not found/not visible in this
+     UI build, bounded exploration)** พร้อมจุดที่มองแล้ว แล้วข้ามไป teardown (ไม่ใช่ FAIL/BLOCKED -- RE-104
+     nonclaim ① ไม่ตัดสินว่าบัญชีที่ไม่ใช่ GM หรือ UI build อื่นจะเห็น control นี้หรือไม่) -> จบ (ไม่ทำข้อ 2b/3).
+2b. **A/B ของ `RE-118`** (GT-107-R3 พบว่าคลิก `BT_GM` เงียบสนิท -- RE-118 พิสูจน์ static แล้วว่าสาเหตุคือ
+   dispatcher ต้องการ current-UI-key ที่ไม่ว่าง ไม่ใช่ field ใหม่บนเฟรม `0x5A19`), ทำต่อจากข้อ 2a ทันที:
+   - **(A) ก่อน**: คลิก `BT_GM` จาก HUD เปล่า (ไม่มี panel อื่นเปิดอยู่ก่อนหน้า) แล้วสังเกต -- คาดหมายตาม
+     GT-107-R3 เดิม (เงียบ ไม่มีหน้าต่าง).
+   - **(B) ต่อ**: เปิด panel อื่นที่รู้ว่าให้ current-UI key ไม่ว่างก่อน (เช่นหน้าต่างแผนที่ M หรือหน้าต่าง
+     inventory -- เลือกอันไหนก็ได้ที่เปิดสำเร็จแน่ ๆ) แล้วคลิก `BT_GM` ซ้ำโดยไม่ปิด panel นั้นก่อน.
+   - ถ้า (B) เปิด `GMUI_BASIC` ได้: บันทึกว่า panel ไหนทำให้ current-UI key ไม่ว่าง (ภาพนิ่ง) แล้วไปข้อ 3
+     ด้วย panel นั้นเปิดค้างไว้เป็นเงื่อนไขก่อน-คลิกเสมอ -- นี่คือ client-observable ใหม่ที่ RE-118 static
+     เดาไม่ได้ (ดู RE-118 T4/T5).
+   - ถ้า (B) ยังเงียบเหมือน (A): บันทึก **NO-RESULT (A/B ทั้งคู่เงียบ, current-UI-key ยังไม่ nonempty แม้เปิด
+     panel)** พร้อม panel ที่ลอง แล้วข้ามไป teardown -- RE-118 BUILD_IMPACT ระบุขั้นต่อไปคือ instrument
+     current-key return/create-null โดยสาย RE ไม่ใช่งานฝั่งเทสอีกแล้ว -> จบ (ไม่ทำข้อ 3).
+3. ถ้าผ่าน (B) ในข้อ 2b: พิมพ์ 4-8 ข้อความทดสอบ (สั้น/มีอาร์กิวเมนต์/ว่างเปล่า/ยาว+ไทย) กด Enter ทีละอัน
+   เว้น 3 วินาที จดเวลาส่งแต่ละอัน (+07:00).
 4. ยืนยันจอไม่มีปฏิกิริยาต่อเนื้อหาข้อความ (คาดหมายอยู่แล้ว) -- ถ่ายภาพนิ่งท้ายสุด.
 5. NO-CRASH ซ้ำ -> teardown -> เทียบ sha canonical -> ลบสำเนา config/env -> **เก็บทั้งโฟลเดอร์
    `capture/gm_command_capture/` แนบผล**.
 
 ### pass criteria (สองชั้น แยกกันเสมอ)
 wire/DB: พบ widget+ส่ง N ข้อความ ⇒ `capture/gm_command_capture/` มีไฟล์ `.txt` ใหม่ N ไฟล์ ชื่อมี
-`attended_test`/`_0x51E9`, มี header+decode section (FAILED-pin ก็นับเป็นผลถูกต้อง)+hex dump. ไม่พบ widget ⇒
-โฟลเดอร์ไม่มีไฟล์ใหม่เลย (ผลลบสมบูรณ์ ไม่ตอบคำถามหลักแต่ไม่ใช่ FAIL). sha256 canonical ตรงก่อน/หลัง,
+`attended_test`/`_0x51E9`, มี header+decode section (FAILED-pin ก็นับเป็นผลถูกต้อง)+hex dump. ไม่พบ widget
+(ข้อ 2a) หรือ A/B ทั้งคู่เงียบ (ข้อ 2b, ดู `RE-118`) ⇒ โฟลเดอร์ไม่มีไฟล์ใหม่เลย (ผลลบสมบูรณ์ ไม่ตอบคำถามหลักแต่
+ไม่ใช่ FAIL, ทั้งสอง NO-RESULT ชนิดนี้แยกกันตามสาเหตุที่บันทึกในข้อ 2a/2b). sha256 canonical ตรงก่อน/หลัง,
 `PRAGMA integrity_check`=ok, raw log/console เก็บครบ.
 client-observable: ปกติ**ไม่มีอะไรเปลี่ยนบนจอ**ตอบสนองเนื้อหาคำสั่ง (nonclaim ล่วงหน้า ไม่ใช่ FAIL) --
 สิ่งเดียวที่สังเกตคือผลของการสำรวจหา widget เอง (บันทึกทุกจุดที่ลอง+ผล, ถ่ายภาพรูปร่าง/ตำแหน่ง widget ถ้าพบ).
@@ -5321,8 +5336,19 @@ without error") — คอนโซลไม่เห็นเฟรมขาเ
 **ต่อ:** เปิด `RE-118` (`CLIENT_RE_QUEUE.md`) สืบจาก `RE-104` หา gate ที่ทำให้คลิกเงียบ — `GT-103` และ
 outcome (a) ของใบนี้ยังไม่ปิดจนกว่า `RE-118` จะตอบหรือชี้ทางสำรวจ
 
+**อัปเดต 2026-08-28T04:1x+07:00 (LANE-GM รอบ `4djeqi`):** `RE-118` CLOSED PASS/DONE
+(`notes_to_chief/20260828_0411_RE-118-RESULT-CURRENT-UI-KEY-MUST-BE-NONEMPTY.md`) — static พิสูจน์แล้วว่า
+คลิกเงียบเพราะ dispatcher ต้องการ current-UI-key ไม่ว่าง (ไม่ใช่ field ใหม่บนเฟรม `0x5A19`) ไม่ใช่ระดับ gate
+ของปุ่มเอง static ไม่สามารถชี้ค่ารันไทม์จริงได้ (ไม่มี capture ว่า key ว่างจริงตอน `GT-107-R3`) — ต้องทำ
+attended A/B ต่อ (เพิ่มไว้ที่ `GT-103` step 2 แล้ว: คลิกจาก HUD เปล่า vs. คลิกหลังเปิด panel ที่รู้ว่ามี
+current-UI key ไม่ว่าง) จึงจะปิด outcome (a) นี้ได้จริง ใบนี้เองยังไม่เปลี่ยนสถานะ RESULT เดิม (ผลลบเดิมยังคง
+ถูกต้อง เป็นเพียงคำอธิบายกลไก ไม่ใช่ผลใหม่บนจอ)
+
 nonclaim: ไม่ระบุสาเหตุที่คลิกไม่ทำงาน (ขอบเขตของ `RE-118`) · ไม่สำรวจอะไรบนจอนอกปุ่ม `BT_GM` (เจ้าของไม่ได้
 สำรวจต่อ) · ไม่ claim ว่า `GM_UpdateGMStateVital` ทำอย่างอื่นบนจอนอกจากทำให้ปุ่มนี้โผล่
+
+nonclaim ของย่อหน้า "อัปเดต" ด้านบน (รอบ `4djeqi`, แยกจาก nonclaim เดิมของผล 2026-08-28T02:15 ที่ไม่ถูกแก้):
+headless-only, ไม่มีเฟรมยิงเข้าไคลเอนต์จริงในรอบนี้เอง
 
 ---
 
