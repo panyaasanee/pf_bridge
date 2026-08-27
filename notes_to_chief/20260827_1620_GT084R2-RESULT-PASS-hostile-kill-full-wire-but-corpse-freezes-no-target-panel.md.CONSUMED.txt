@@ -1,0 +1,11 @@
+consumed by LANE-B round xfgdv1 (2026-08-28T03:37+07:00): backfilled stub only --
+substance was already actioned across earlier rounds before this stub existed.
+The letter's five follow-ups became RE-107 (name colour), RE-108 (auto-attack
+cadence/pose), RE-109 (dying/dead mesh freeze), RE-110 (loot-drop render
+fields; renumbered from an earlier draft), RE-111 -- all opened same evening,
+all since closed in CLIENT_RE_QUEUE.md (see 20260827_1734/1834/1957 LANE-B-
+STATUS letters for the closing rounds). The corpse-freeze / no-target-panel
+client-observable gaps this letter reported are RE-109/RE-104 territory, not
+independently actionable by this lane beyond what those tickets already
+carry. No further code action owed from this letter itself. Copy archived
+to consumed/.

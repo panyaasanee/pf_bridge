@@ -1,0 +1,17 @@
+consumed by LANE-B round xfgdv1 (2026-08-28T03:37+07:00): backfilled stub only --
+substance was already actioned across earlier rounds before this stub existed.
+R1-R5 became RE-107..RE-111 (see the 1620 letter's stub for the mapping);
+all closed CLIENT_RE_QUEUE.md, several BOUNDED-NEGATIVE (no buildable
+surface without an attended A/B, per RE-109/RE-110's own closing text).
+Item (ก) -- "close the spam-click = runaway-damage gap server-side" -- is
+NOT fully done: mob_combat.py's check_attack_cadence/AttackCadenceLedger
+(PROVISIONAL 600ms, this lane's own code, pre-existing this round) is built
+and unit-tested but was never wired into runtime.py's real dispatch, and no
+formal CORE-REQUEST letter was ever sent asking chief to do it -- only an
+in-code wiring note (MOB_COMBAT_CADENCE_WIRING). Escalated properly this
+round: see notes_to_chief/20260828_0337_LANE-B-CORE-REQUEST-wire-attack-
+cadence-gate-spam-click-fix.md. Mob retaliation (item 3, "mob attacks
+back") remains entirely unbuilt -- grepped this round, zero hits outside a
+hypothesis-module comment disclaiming it; too large a feature to start
+blind this round, flagged in the same status letter for COO/chief
+prioritisation. Copy archived to consumed/.
