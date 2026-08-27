@@ -110,3 +110,16 @@ none
 ## เปิดใบให้สาย C
 
 none -- RE-116 ปิด bounded negative แล้ว ไม่มีเบาะแสใหม่ที่ควรเปิดใบต่อ
+
+## 9 จบรอบ -- push แล้ว รอ merge
+
+pf-adversary จริง (subagent แยก, orchestrator เป็นผู้เรียก) รันบน diff ที่ push แล้ว: **ไม่พบข้อบกพร่อง**
+ตรวจครบ 5 จุด (ขอบเขต diff เทียบ merge-base จริง, JSON pin มาจาก `pin_document()` จริงไม่ใช่ hand-edit,
+คอมเมนต์ตรงกับใบ RE-116 ต้นฉบับทีละจุดไม่ overclaim, mailbox mechanics ฝั่ง pf_bridge ถูกต้อง ต้นฉบับไม่ถูก
+ลบ, ไม่แตะไฟล์นอกเขต) -- push แล้ว เอา draft ออกแล้ว รอ merge:
+
+- `pf_bridge#276` (`claude/friendly-ride-db07x9` @ `4379ed0`)
+- `pirate-force-server#178` (`claude/admiring-galileo-db07x9` @ `f9923da`)
+
+ยังไม่ merge ณ เวลาปิดรอบนี้ -- รอบถัดไปต้องตรวจ `pull_request_read` method `get` ยืนยัน `merged=true`
+จริงก่อนถือว่างานอยู่บน `main` (ตามข้อ A ของ ADDENDUM v2) ห้ามเชื่อไฟล์นี้เฉยๆ ว่า "เสร็จ"
