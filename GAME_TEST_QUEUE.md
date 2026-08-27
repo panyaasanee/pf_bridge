@@ -3902,7 +3902,7 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt099.sqlite3
 
 ```
 
-## GT-101 GM-001 LOGIN-STATE-VISUAL-PROBE-001: ล็อกอินด้วยบัญชีในลิสต์ gm_accounts แล้ว GM_UpdateGMStateVital (0x5A19) ที่ CORE-REQUEST-006 ต่อสายเข้า login path แล้ว จอเปลี่ยนอะไรไหม  [PENDING]
+## GT-101 GM-001 LOGIN-STATE-VISUAL-PROBE-001: ล็อกอินด้วยบัญชีในลิสต์ gm_accounts แล้ว GM_UpdateGMStateVital (0x5A19) ที่ CORE-REQUEST-006 ต่อสายเข้า login path แล้ว จอเปลี่ยนอะไรไหม  [RESULT -- ไม่ใช่ PASS/NO-RESULT/BLOCKED, ดูผลด้านล่าง]
 
 > เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md, prefix สองแบบ ห้ามแยกตัวนับ.
 > เลขสูงสุดที่ใช้ไปแล้ว ณ เวลาเขียนใบนี้: GT-099 (GAME_TEST_QUEUE.md) และ RE-100 (CLIENT_RE_QUEUE.md,
@@ -4086,7 +4086,12 @@ canonical, copy DB สองใบตามบล็อก db, เตรีย�
 
 ### result (ผู้เทสกรอก)
 ```
-
+RESULT (ไม่ใช่ PASS/NO-RESULT/BLOCKED) 2026-08-27T14:39+07:00, owner-observed: client ปฏิเสธ
+GM_UpdateGMStateVital เวอร์ชัน 1 ด้วย modal error "VitalData 版本不對 ErrorData=23065" (23065 = 0x5A19)
+แล้วปิด socket เอง -- เซสชันตายก่อนถึงคำถามเดิมของใบนี้ (จอเปลี่ยนอะไรไหม) เต็มผล/ไบต์บนสาย/หลักฐาน:
+notes_to_chief/20260827_1445_GT101-RESULT-client-rejects-0x5A19-version-1-error-23065-session-killed.md
+ติดตาม: RE-105 (vital_version ที่ถูก) + CORE-REQUEST-016 (guard runtime.py:4746 จนกว่าจะพิน) -- ทั้งคู่เปิด
+โดย LANE-GM รอบ 8791h3
 ```
 
 ---
