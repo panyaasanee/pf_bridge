@@ -5272,3 +5272,213 @@ clear, the whole entry is BLOCKED, not NO-RESULT/FAIL.
 
 ### result
 (tester fills this in)
+
+---
+
+## GT-116 CORE-REQUEST-022 CLASS-LEVEL-LOGIN-SKILLWINDOW-UNBLOCK-001: after CORE-REQUEST-022 wires class_id=1 (Gladiator) + level=1 into every login's ActorAttr/BasicAttr frames, does a real client's skill window (K / `Bt_main_Skill`) finally open, and does the wire actually carry those two fields byte-exact -- the one field GT-058/GT-059/GT-064 (all CLOSED, archived) could never get past because class was always 0  [BLOCKED -- รอ merge ก่อน, ไม่ใช่รอผู้เทส: PR ยังไม่เข้า main ณ ตอนเขียนใบ]
+
+> NUMBERING NOTE: grep confirmed before reserving -- `GT-116`/`RE-116` = 0 hits in `GAME_TEST_QUEUE.md`,
+> `CLIENT_RE_QUEUE.md`, and both `archive/*_closed.md` files (checked this round). Highest number in use
+> is `115` (`RE-115` MAPWINDOW-SCENE-NPC-LIST-SOURCE-001, OPEN, unrelated topic -- claimed same round by a
+> different lane) => this entry is `116`. Entries `GT-101`-`GT-114`, `GT-107-R3`, and `RE-085`-`RE-115` stay
+> exactly where they are, unchanged -- this is a new entry, not a replacement for any of them. `GT-058`
+> (CLOSED BOUNDED-NEGATIVE), `GT-059` (CLOSED P2/FALSIFIED), and `GT-064` (CLOSED) are archived, not
+> reopened -- per the queue's own archival rule, only PENDING/READY/BLOCKED/RUNNING entries stay live, and
+> all three are genuinely closed. This entry supersedes their open question with a new claim, on a new number.
+
+### source (links only -- see cited files for full detail, not re-derived here)
+- `notes_to_chief/20260828_0231_CHIEF-REPLY-CORE-REQUEST-022-class-level-wired-name-field-not-touched.md`
+  (chief round `9do841`/R203): "class_id = 1 (Gladiator) -- `ActorAttr +0x8C`, mask bit `0x00000001`
+  (เดิมไม่เคยส่งเลย, class=0 เสมอ ⇒ หน้าต่างสกิลเปิดไม่ได้ ตรงกับ GT learn-skill ที่ค้าง)" and "level = 1 --
+  `BasicAttr +0x5E`, mask bit `0x0002` (เดิมไม่เคยส่งเลย)". Both wired into the flagless production login
+  path AND the faction=1 recompose path in the same commit (a runtime length-delta check would otherwise
+  fail-closed if only one path got the fields). New functions named in that letter: `player_wire.py`'s
+  `make_actor_attr_with_name_and_class` / `make_actor_attr_with_name_class_and_faction`, wired into
+  `legacy_bridge.py`'s `LegacyProjector.start_game`. Old functions (`make_actor_attr_with_name`,
+  `make_actor_attr_with_basic_faction`) left untouched. Cites `3546 passed, 0 failed` full suite +
+  pf-adversary review -- headless evidence, cited not reproduced by this entry.
+- `notes_to_chief/20260828_0146_COO-DECISION-boot-character-actorattr-core-request-022-to-chief.md`: opens
+  CORE-REQUEST-022, names class+level (+ name-slot fix, see below) as the minimum "สมประกอบ" boot character.
+- `notes_to_chief/20260828_0125_PANYA-DECISION-boot-character-must-be-complete-...-ka1-B.md`: **owner's own
+  testimony**, from a separate ad-hoc probe fork (never merged, canonical never touched): "GT ที่เทส
+  learn skill ก็ติด block มาแล้วเพราะว่าเปิดหน้าต่างสกิลกันไม่ได้ จนตอนนี้เรามารู้แล้วว่าต้องใส่ค่า class
+  ก่อนถึงจะเปิดหน้าต่างสกิลได้" -- this is the direct antecedent this entry tests. Same letter's table (③)
+  independently pins `x13 = Actor b0 +0x8C u32 class id` and `x2 = Basic +0x5E u16 level`, matching the
+  chief-reply's offsets.
+- `GT-058` (CLOSED BOUNDED-NEGATIVE), `GT-059` SKILL-ATTR-WINDOW-GATE-001 (CLOSED P2/FALSIFIED: wire-exact
+  `CSkillAttr` x3 triggers, window never opened either session), `GT-064`
+  SKILL-ATTR-WINDOW-KPRESS-IN-GAP-001 (CLOSED) -- all archived in
+  `archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md`. None of the three could ever isolate "was it timing,
+  was it the wrong trigger, or was the client simply never told it had a class" -- class was 0 in every one
+  of those sessions. This entry is the first attended shot with class != 0.
+- 🔴 **Not confirmed from this repo's own text:** the requesting brief cites branch
+  `claude/awesome-darwin-9do841` and commit `8017c71` on `pirate-force-server`. Grep of this entire
+  `pf_bridge` checkout (including `notes_to_chief/`, `rounds/`, both archive files) finds **zero** hits for
+  the literal string `8017c71`. The branch-name *pattern* (`claude/awesome-darwin-<session>`) matches this
+  round's session id and is consistent with `R201`/`R202`'s own naming, so it is plausible -- but treat the
+  sha as **unverified** until ด่าน 0/1/2 below confirm it live. Do not boot against a sha copied from any
+  letter without resolving it yourself.
+
+### objective (claim เดียว)
+On a completely ordinary, flagless login (no `--*-scenario`), does the client now (a) receive
+`class_id=1`/`level=1` byte-exact in its login ActorAttr/BasicAttr frames, and (b) as a direct consequence,
+does pressing **K** / clicking `Bt_main_Skill` open an actual skill window for the first time in this
+project's history -- instead of the total silence GT-058/059/064 measured every time before. Both layers
+are the same claim (wire cause -> client effect), not two claims.
+
+### predictions (a wrong prediction is a finding, not a failure)
+- P1 [proposed, the heart of the entry] K / `Bt_main_Skill` after a normal flagless login opens the skill
+  window -- something GT-058/059/064 never once observed.
+- P2 [proposed, corollary] the window, once open, is not an empty/garbled error panel -- it shows
+  Gladiator-plausible content (zero learned skills at level 1 is a perfectly fine result; a broken/garbled
+  panel is not).
+- P3 [falsifier] K / `Bt_main_Skill` still produces nothing even with class_id=1 + level=1 confirmed on the
+  wire -- a real negative, not a failure: it means these two fields are necessary but not sufficient, and
+  redirects to the next untested field in the owner's own probe table (③) -- likely `x16`/`x17` (SP /
+  remaining status points) or `x18`-`x22` (STR/CON/DEX/INT/PER) -- open a new RE/GT entry naming the next
+  candidate rather than re-running this one.
+
+### ก่อนบูต -- ด่าน 0 (สถานะ merge, ยังไม่ merge ณ ตอนเขียนใบ -- ห้ามข้าม), ด่าน 1 (green boot), ด่าน 2 (grep ยืนยันสาย)
+
+**ด่าน 0 -- สถานะ merge:** CORE-REQUEST-022 is reported (chief round `9do841`/R203, `notes_to_chief/
+20260828_0231_CHIEF-REPLY-*`) as landed on a branch of `pirate-force-server`, **PR pending, not yet merged
+into `main`** at time of writing. `pf_resolve_green_boot.py` follows `origin/main` only -- if the PR has not
+merged when the tester runs ด่าน 1, the resolver will not return a commit containing this code (`exit 3`, or
+a commit missing `player_wire.py`'s new functions). **The entry stays unbootable** -- record the result as
+"รอ merge" and move to another ticket. **Never checkout the branch directly to skip the resolver**, even
+with a sha in hand (same rule as every other entry in this queue) -- and never trust the `8017c71` string
+above without ด่าน 2 confirming it live, per the source-section warning.
+
+**ด่าน 1 -- resolve commit เขียว:**
+```
+py -3 pf_resolve_green_boot.py --repo "C:\path\to\pirate-force-server" --fetch
+```
+Run from the `pf_bridge` folder. Only `exit 0` + a printed `BOOT_COMMIT: <sha>` means bootable (detached
+HEAD checkout of `<sha>`). Do not eyeball-compare commit numbers -- the resolver returns whatever gated
+branch head is current, not necessarily a merge commit.
+
+**ด่าน 2 -- ยืนยันสายจริงของ `<SHA>` (ห้ามเชื่อเลขบรรทัด/ชื่อฟังก์ชันในเอกสาร ต้อง grep ของจริง):**
+```
+git grep -n "make_actor_attr_with_name_and_class" <SHA> -- src/pirateforce_foundation/player_wire.py
+git grep -n "make_actor_attr_with_name_class_and_faction" <SHA> -- src/pirateforce_foundation/player_wire.py
+git grep -n "make_actor_attr_with_name_and_class\|make_actor_attr_with_name_class_and_faction" <SHA> -- src/pirateforce_foundation/legacy_bridge.py
+git grep -n "class_id" <SHA> -- src/pirateforce_foundation/player_wire.py
+git grep -n "def start_game" <SHA> -- src/pirateforce_foundation/legacy_bridge.py
+```
+Need at least 1 line from every command. Missing any one = **BLOCKED** -- the commit that would boot does
+not actually carry CORE-REQUEST-022 -- do not boot, do not hunt for a different commit yourself, go do
+another ticket and come back later.
+
+### db (สำเนาเสมอ ห้ามเปิด canonical, ห้ามแตะ state\play.sqlite3)
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-116_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt116.sqlite3
+```
+- Compare canonical sha256 against `CANON_SHA.txt` both before start and after finish -- must match both
+  times.
+- Fresh copy every boot => character position resets to spawn every time (same spawn other entries use:
+  X -8553.9473, Y -2579.6890, Z 186.0, scene 1 Port Royal), regardless of anything saved from a previous
+  session.
+
+### server args (เป๊ะ -- ไม่มี --*-scenario เพราะ CORE-REQUEST-022 ทำงานเสมอ flagless production, ไม่มีสวิตช์)
+```
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+py -3 -u -m pirateforce_foundation.app --db state\run_gt116.sqlite3
+```
+No `--*-scenario` flag of any kind, no other entry piggybacked onto this boot. Capture proof of the bare
+command line immediately after the server comes up, paste the full line into the result:
+```
+Get-CimInstance Win32_Process -Filter "Name='python.exe'" | Select-Object ProcessId,CommandLine | Format-List
+```
+
+### steps (click by click -- record continuous video for the whole LOCK_GAME window)
+Before start: hold `LOCK_GAME`, note boot stamp (+07:00, must be under 420 min old when teardown runs),
+compare canonical sha, copy both DBs per the db block, stage `TEMPLATE_teardown_generic.ps1`. Confirm ด่าน
+0-2 all cleared (record the resolved SHA).
+
+1. Start the server first always (`Get-NetTCPConnection -State Established` on ports 10188/10189 must be 0
+   before opening the client). A client opened with no server dies on its own in ~3.5 minutes. If the client
+   has to be killed mid-session, restart the server before opening the next client -- the server keeps the
+   old session, and the next client hangs on "connecting" forever otherwise.
+2. Open client -> select server -> PVP dialog left button -> character select -> first slot -> the middle
+   of the 5 bottom buttons = enter game (never the leftmost -- that deletes the character). Start continuous
+   recording before pressing enter-game.
+3. T0 -- HP bar / minimap / map name all visible. Record HUD X/Y. Photograph full-res, name-label colours
+   from this still (self, "none" if no other label visible).
+4. NO-CRASH check: right-click-drag to sweep the camera 360 degrees once. This is the only liveness check
+   this entry accepts -- camera-only, character facing never moves, nothing goes out on the wire, safe at
+   any point. **Never use Q/E or W/A/S/D for this check** -- those turn the character and emit
+   `TargetPosVital`.
+5. Press **K** (or click `Bt_main_Skill` if K does nothing) -- photograph full-res immediately before and
+   immediately after. Record every new server console line that appears in the same window.
+6. If a window opened: photograph its full content full-res, read/record what it shows character-for-
+   character from the still (not from memory). Do not compare it against any expected skill list -- this
+   entry does not test content correctness (see nonclaims).
+7. Secondary positive control (same move GT-059 used): press **C** to open the `CHARACTER` window,
+   photograph, close. This has opened successfully in every prior session even when K didn't -- if C fails
+   too, that's a much bigger finding than this entry's own claim, write it up prominently.
+8. NO-CRASH check again (right-click-drag).
+9. Log out -> teardown via `TEMPLATE_teardown_generic.ps1` (boot stamp must still be under 420 min) ->
+   recheck canonical sha256 -> sha256 every capture.
+
+Colour rule (Panya's order, 2026-08-25): one line per label per image, write "none" not blank, full-res
+stills only (never a contact sheet or video), never infer a cause -- `RE-067` is open and is the only place
+that question lives.
+
+### pass criteria (two layers, never mixed)
+
+wire/DB (read from raw captured frame bytes / server console+log only, never from what's on screen):
+- The login/StartGame response's ActorAttr block, at byte offset **+0x8C** relative to that block's start,
+  decodes as u32 little-endian **`0x00000001`** (class_id=1), and the frame's own change-mask has bit
+  **`0x00000001`** set for that block (previously this field was never sent at all, not merely zero --
+  record which of "absent" vs "present-but-zero" the pre-fix baseline actually was if a comparison capture
+  exists, otherwise just record what this session shows).
+- The same response's BasicAttr block, at offset **+0x5E**, decodes as u16 little-endian **`0x0001`**
+  (level=1), with change-mask bit **`0x0002`** set.
+- Byte layout reference for locating these offsets inside the captured frame:
+  `drafts/CHUNK2_Q1_ACTORATTR_MASK_FINDINGS.md` (pinned 55-field ActorAttr/BasicAttr map).
+- `sessions`: +1 row with `selected_character_id` set for this login; `max(lease_generation)` does not go
+  backward; `PRAGMA integrity_check` = `ok` on the working copy both times; canonical sha256 matches
+  `CANON_SHA.txt` before and after.
+- Raw GAME log + console out/err kept whole, not trimmed, both before and after.
+- Negative result with equal standing: if class_id/level are still absent or still zero on the wire despite
+  ด่าน 0-2 clearing -- write that up in full, it means the merged commit did not do what the letter claims,
+  which is itself the finding.
+
+client-observable (a human at the screen only, never inferred from the console):
+- Whether the skill window (K / `Bt_main_Skill`) opens at all is the primary reading -- opens (even
+  showing zero learned skills) vs. still nothing, both are complete, valid results; write whichever one
+  actually happened, do not treat "still nothing" as this entry failing (see P3).
+- If it opens: full-res photograph, content transcribed character-for-character from the still.
+- `C` / `CHARACTER` window control check per step 7.
+- Both NO-CRASH checks pass.
+- Name-label colours recorded per the colour rule above, one line per label per full-res still, "none"
+  written out where there is none.
+
+### nonclaims
+- 🔴 **Does not prove the character-name-slot bug is fixed.** The chief's own reply
+  (`...0231_CHIEF-REPLY-...-name-field-not-touched.md`) states the `x37`(`+0x164`, guild-name slot) ->
+  `x1`(`+0x28`, real name slot) move was deliberately **not** done this round, pending a second source of RE
+  confirmation. Expect the character's name to still land in the guild-name slot, not the real name slot,
+  until a separate entry/commit closes that. If the tester happens to see the name rendered correctly
+  anyway, record it as a separate, surprising finding -- do not read it as this entry's fix.
+- Does not prove "probe base 1" full completeness (movement speed `x7`, HP/MP per `STANDARD_STATUS`, stat
+  points `x18`-`x22`, etc. from the owner's own table in `...0125_PANYA-DECISION-...`) -- only `class_id`
+  (`x13`) and `level` (`x2`) were wired this round, per the chief reply.
+- Does not test or reopen `GT-058`/`GT-059`/`GT-064` -- those stay CLOSED/archived exactly as written. This
+  entry answers a related but distinct question (does an ordinary flagless login with class!=0 unblock the
+  window) rather than repeating their scenario-driven `CSkillAttr` trigger tests.
+- Does not test skill-window **content** correctness (whether the skills shown, if any, actually match a
+  level-1 Gladiator's real kit) -- only whether the window opens.
+- Does not test the faction=1 / HYP-PF-027 recompose path's client-visible behaviour -- the chief reply
+  states headless coverage exists for both paths sharing one length-delta check, cited here, not reproduced.
+- Single account, single login, single session -- no reconnect/relogin, no second character, no second
+  player observing.
+- Does not decide the cause of any name-label colour observed (`RE-067` stays open, no cause inferred).
+- If ด่าน 0/1/2 don't clear (PR not merged / functions not found at the resolved SHA) -> the entire entry is
+  **BLOCKED**, not NO-RESULT/FAIL -- record it as "รอ merge" and stop.
+
+### result (ผู้เทสกรอก)
+```
+
+```
