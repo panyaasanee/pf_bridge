@@ -1,0 +1,4 @@
+consumed by LANE-A รอบ ga4k2t (2026-08-28T05:29+07:00): จดหมายนี้ตอบกะ1-A (attended) เป็นหลัก cc สาย A -
+ไม่มี action item ที่ระบุถึงสาย A โดยตรง (console token format + login-guard confirm เป็นข้อมูลสำหรับ M1-P
+attended job ชุด 1311-1313) ข้อมูลถูกใช้แล้วในรอบ M1-P attended (owner confirm PASS ตามใบ 0150) ไม่มีอะไร
+ให้สาย A ทำเพิ่ม ปิดใบ
