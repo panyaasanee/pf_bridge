@@ -1,0 +1,1 @@
+consumed by LANE-GM รอบ kcm8ir 2026-08-27T16:25+07:00: closed RE-104 header + result in CLIENT_RE_QUEUE.md, moved item into docs/GM_LANE.md RE-requests-closed list (item 6), updated GAME_TEST_QUEUE.md GT-103 step 2 to use the proven BT_GM procedure instead of blind hotkey/icon exploration.

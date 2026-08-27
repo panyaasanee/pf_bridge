@@ -423,7 +423,7 @@ capture ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ต
 
 ---
 
-## 🆕🔬 RE-104 GM-EDITOR-WIDGET-OPEN-TRIGGER-001 [STATIC-ON-BRIDGE]: **อะไรเปิด/toggle dedicated GM text-editor widget ที่ `RE-091` พิสูจน์แล้วว่าเป็น producer ของ `GM_RunGMCommandVital` (`0x51E9`) — hotkey, เมนู, ไอคอนที่ปรากฏเมื่อ `GM_UpdateGMStateVital` ตั้งสถานะ GM ให้ connection, หรืออื่น**  [🟢 **OPEN — เปิดโดย LANE-GM 2026-08-27T14:42+07:00 ต่อยอดจากผล `RE-091` nonclaim ②**]
+## 🔬 RE-104 GM-EDITOR-WIDGET-OPEN-TRIGGER-001 [STATIC-ON-BRIDGE]: **อะไรเปิด/toggle dedicated GM text-editor widget ที่ `RE-091` พิสูจน์แล้วว่าเป็น producer ของ `GM_RunGMCommandVital` (`0x51E9`) — hotkey, เมนู, ไอคอนที่ปรากฏเมื่อ `GM_UpdateGMStateVital` ตั้งสถานะ GM ให้ connection, หรืออื่น**  [🟢 **CLOSED PASS/DONE — ปิดโดย LANE-GM รอบ `kcm8ir` 2026-08-27T16:1x+07:00, ดูผลด้านล่าง**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-104` = 0 hit, `GT-104` = 0 hit ทั้งสองไฟล์ (ยืนยัน
 > 2026-08-27). เลขว่างถัดไปหลังใบนี้ = 105 (ถ้ายังไม่มีใบอื่นจองก่อน — grep ซ้ำก่อนใช้เสมอ).
@@ -477,7 +477,22 @@ trigger ของตัว widget เอง
 กลไก trigger ของ GM editor widget พร้อม provenance **หรือ** bounded negative ที่บอกตรงๆ ว่าต้องสำรวจจาก
 attended ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:` ตามกฎ `BUILD-003`
 
-### result (ยังไม่มี — ใบเปิดอยู่)
+### result
+
+**CLOSED PASS/DONE.** เต็มใบ: `notes_to_chief/20260827_1518_RE-104-RESULT-BT-GM-MODULE-PLUS19-GATE.md`.
+Trigger ที่พิสูจน์ได้คือปุ่ม UI resource `BT_GM` (`0x00F2207C`), แสดง/enable จาก connection query type `0x25`
+ที่คืน `GMModule_Client+0x19` (adapter `0x00726D30`) — periodic UI state `0x0053B150` เช็คซ้ำทุกช่วง click
+dispatcher `0x0053B9B0` re-check gate เดิมก่อนขอ current UI key แล้วส่งเข้า central dispatcher `0x00AA0710` ซึ่ง
+crosswalk ไปยัง factory `0x007280D0` ของ `GMModule_Client+0x48` สร้าง panel `GMUI_BASIC` (`Radiobutton_Message` +
+`TextBox_Message`, Enter ส่งผ่าน producer `0x00729410` ที่ `RE-091` พิสูจน์ไว้แล้ว). ทั้ง 12 span/7 UTF-16 resource
+มี sha256 pin ในใบเต็ม. ไม่ claim screen coordinate/icon texture/hotkey สำรอง และไม่ตั้งชื่อ `module+0x19` ว่า
+`is_gm` (ยังไม่มี semantic/authorization evidence).
+
+**BUILD_IMPACT:** procedure สำหรับ `GT-103`: หา/กดปุ่ม resource `BT_GM` ใน notification/system UI ก่อน แทนการ
+สุ่ม hotkey — ดู `docs/GM_LANE.md` (pirate-force-server) ส่วน "RE requests closed" ข้อ 6 และ `GAME_TEST_QUEUE.md`
+`GT-103` ที่อัปเดตแล้วรอบนี้.
+
+BUILD_IMPACT_NONE: 0
 
 ---
 
@@ -575,7 +590,7 @@ fail-closed เดิมต่อไปจนกว่า `RE-096`/`RE-103` ห�
 
 ---
 
-## 🆕🔬 RE-105 GM-UPDATE-STATE-VITAL-VERSION-001 [STATIC-ON-BRIDGE]: **`vital_version` ที่ถูกของ `GM_UpdateGMStateVital` (`0x5A19`) คืออะไร — และ error path ที่ผลิต `網路 VitalData 版本不對 ErrorData=<vital id>` อ่านค่าที่ต้องการจากไหน** [🟢 **OPEN — เปิดโดย LANE-GM 2026-08-27T15:22+07:00 ต่อยอดจาก `GT-101` RESULT**]
+## 🔬 RE-105 GM-UPDATE-STATE-VITAL-VERSION-001 [STATIC-ON-BRIDGE]: **`vital_version` ที่ถูกของ `GM_UpdateGMStateVital` (`0x5A19`) คืออะไร — และ error path ที่ผลิต `網路 VitalData 版本不對 ErrorData=<vital id>` อ่านค่าที่ต้องการจากไหน** [🟢 **CLOSED DONE/PASS — ปิดโดย LANE-GM รอบ `kcm8ir` 2026-08-27T16:1x+07:00, ดูผลด้านล่าง**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-105` = 0 hit, `GT-105` = 0 hit ทั้งสองไฟล์ (ยืนยัน
 > 2026-08-27T15:22+07:00) ก่อนหน้านี้เลขสูงสุดที่ใช้แล้วคือ `104` (ทั้ง `RE-104`/`GT-104`) ⇒ ใบนี้คือ `105`
@@ -637,7 +652,29 @@ brute-force จากไคลเอนต์จริง ⇒ ปิดใบพ
 **เร่งด่วนกว่าใบอื่นในคิว:** ใบนี้บล็อกไม่ให้ `localtest` (บัญชีจริงที่เจ้าของบูตด้วย) กลับเข้า `gm_accounts`
 ได้อีกจนกว่าจะปิด — เฟรมเวอร์ชัน `1` ฆ่าเซสชันเจ้าของไปแล้วหนึ่งครั้ง (`GT-101`, `ErrorData=23065`)
 
-### result (ยังไม่มี — ใบเปิดอยู่)
+### result
+
+**CLOSED DONE/PASS.** เต็มใบ:
+`notes_to_chief/20260827_1613_RE-105-RESULT-VITAL-VERSION-ZERO-GENERIC-MISMATCH-PATH.md`.
+
+1. `vital_version` ที่ถูกของ `0x5A19` คือ **`0`** เท่านั้น (exact equality) — เช็คจริงอยู่ใน **generic VitalData
+   collection reader** `[0x005F3E20,0x005F406D)`, ไม่ใช่ handler เฉพาะ `0x00729F00`. Prototype ของ `0x5A19` เขียน
+   `message+0x10 = 0` โดย `mov` ตรงที่ bootstrap `0x007299B0` (ไม่ได้อนุมานจาก vital อื่น).
+2. error path เป็น **generic สำหรับทุก nested VitalData**: equality ล้ม → อ่าน id ของ instance ที่กำลัง decode
+   แบบ dynamic ผ่าน vtable → error code `0xE0000031` → ผูกกับ resource string `網路 VitalData 版本不對` →
+   `ErrorData=%d` คือ vital id ของ instance ที่ mismatch (ไม่ hardcode `0x5A19`)
+3. ไบต์ offset 8-9 (`08 04`) คือ **outer `GSCN_RunTimeProtocolRes` protocol version 4** — คนละฟิลด์ ถูกต้องอยู่
+   แล้ว ไม่ต้องแก้
+
+เฟรมที่ถูกต้อง: `... 08 04 0B 02 12 01 00 12 19 5A 0B 00 ...` (เปลี่ยนแค่ byte หลัง vital id จาก `0B 01` เป็น
+`0B 00`)
+
+**BUILD_IMPACT:** `gm/state_wire.py`'s `GM_UPDATE_STATE_VITAL_VERSION_CONFIRMED` เปลี่ยนจาก `None` เป็น `0` แล้ว
+รอบนี้ (LANE-GM write zone, ไม่แตะ `runtime.py` — guard ของ `CORE-REQUEST-016` เปิดเองเมื่อค่านี้ไม่ใช่ `None`),
+ยืนยันด้วย headless test ที่ assert nested header ตรง `12 19 5A 0B 00` จริง (`tests/test_gm_login_state_guard.py`).
+ผล UI/GM permission ยังต้องวัด attended แยก (`GT-101` rerun) — ใบนี้ไม่ claim ว่า widget/UI จะเปลี่ยนอะไรบนจอ.
+
+BUILD_IMPACT_NONE: 0
 
 ---
 

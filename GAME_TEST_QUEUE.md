@@ -4316,7 +4316,8 @@ canonical, copy DB สองใบตามบล็อก db, เตรีย�
 
 ### ลิงก์ (รายละเอียดเต็มอยู่ที่นี่ ไม่ใช่ในใบนี้)
 - wiring/capture path: `notes_to_chief/20260827_1700_CHIEF-REPLY-CORE-REQUEST-010-...md`, `docs/GM_LANE.md`
-- widget-trigger ยังไม่รู้: `RE-091`, ใบพี่น้อง `CLIENT_RE_QUEUE.md` `RE-104` (เปิดรอบนี้ ยังไม่ตอบ -- ไม่รอ)
+- widget-trigger: `RE-091` (producer), `RE-104` (open/toggle trigger -- **CLOSED PASS/DONE รอบ `kcm8ir`**,
+  `notes_to_chief/20260827_1518_RE-104-RESULT-BT-GM-MODULE-PLUS19-GATE.md`) -- procedure ด้านล่างอัปเดตแล้ว
 - บัญชี/config อนุมัติแล้ว (ใช้ซ้ำ): `notes_to_chief/20260827_1200_CHIEF-REPLY-GT101-gm-accounts-test-config-approved.md`
 - decode field pin: `RE-088` (positional names only, no semantics)
 
@@ -4348,10 +4349,15 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt103.sqlite3
 
 ### steps (สืบเนื่องจาก GT-101 เซสชันเดียวกันได้ ไม่ต้อง relogin)
 1. เข้าเกม, NO-CRASH กวาดกล้อง (เหมือน GT-101 ขั้น 1-3).
-2. **สำรวจหา GM editor widget แบบมีงบ (สูงสุด 10 การลอง)**: ไล่ดูไอคอน/เมนูที่เห็นทั้งหมดครั้งเดียว ->
-   right-click ป้ายชื่อตัวเอง -> ลอง hotkey สามัญทีละตัว (backtick, F1-F4, Ctrl+G, Enter เปล่า) เว้น 3
-   วินาที/ครั้ง, จดผลทุกครั้ง (แม้ไม่มีอะไรเกิดขึ้น). พบ -> ข้อ 3. ไม่พบครบ 10 -> บันทึก **NO-RESULT
-   (widget not found, bounded exploration)** พร้อมรายการที่ลอง แล้วข้ามไป teardown (ไม่ใช่ FAIL/BLOCKED).
+2. **เปิด GM editor widget ตาม procedure ที่ `RE-104` พิสูจน์แล้ว (ไม่ใช่การสุ่มอีกต่อไป)**: หาปุ่ม/control
+   resource ชื่อ `BT_GM` ใน notification/system UI (ปุ่มจะแสดง/กดได้ก็ต่อเมื่อสถานะ GM ของ connection ผ่าน
+   gate อยู่แล้ว, ไม่ใช่ทุก account) -- กดปุ่มนั้น -> จะเปิด panel ชื่อ `GMUI_BASIC` ที่มี tab `Radiobutton_Message`
+   (เลือก lane) และช่อง `TextBox_Message` (พิมพ์ข้อความ). RE-104 ไม่ให้พิกัดบนจอ (static เท่านั้น) จึงยังต้อง
+   หาตำแหน่งจริงด้วยสายตา 1 ครั้ง -- จดตำแหน่ง/รูปร่างที่เจอไว้ด้วย (ภาพนิ่ง) เพื่อให้รอบถัดไปไม่ต้องหาอีก.
+   พบ -> ข้อ 3. **Bounded fallback ถ้าไม่พบ `BT_GM` ภายใน 5 การลอง** (สั้นกว่าเดิมเพราะตอนนี้รู้ชื่อ resource
+   และเงื่อนไข gate แล้ว ไม่ใช่การสุ่มเปล่า): บันทึก **NO-RESULT (BT_GM control not found/not visible in this
+   UI build, bounded exploration)** พร้อมจุดที่มองแล้ว แล้วข้ามไป teardown (ไม่ใช่ FAIL/BLOCKED -- RE-104
+   nonclaim ① ไม่ตัดสินว่าบัญชีที่ไม่ใช่ GM หรือ UI build อื่นจะเห็น control นี้หรือไม่).
 3. ถ้าพบ: พิมพ์ 4-8 ข้อความทดสอบ (สั้น/มีอาร์กิวเมนต์/ว่างเปล่า/ยาว+ไทย) กด Enter ทีละอัน เว้น 3 วินาที
    จดเวลาส่งแต่ละอัน (+07:00).
 4. ยืนยันจอไม่มีปฏิกิริยาต่อเนื้อหาข้อความ (คาดหมายอยู่แล้ว) -- ถ่ายภาพนิ่งท้ายสุด.
@@ -4699,6 +4705,186 @@ client-observable: อย่างใดอย่างหนึ่งที่�
 หลุดขอบแมพ, หรือค้าง/ไม่โหลดฉากเลย + เดินได้ปกติไหม + สีป้ายชื่อทุกป้ายในทุกภาพ full-res (บรรทัดเดียวต่อป้าย,
 "none" เขียนออกมาถ้าไม่มี, ห้ามชี้สาเหตุ -- `RE-067` เปิดอยู่) ผลลบ (ตกขอบ/ค้าง) มีค่าเท่ากับผลบวก ตาม
 nonclaim บังคับด้านบนของใบนี้
+
+### result (ผู้เทสกรอก)
+```
+
+```
+
+---
+
+## GT-107 GM-001-R2 LOGIN-STATE-VISUAL-PROBE-002: ล็อกอินด้วยบัญชี GM อีกครั้งหลัง RE-105 พิน vital_version=0 (CORE-REQUEST-016 เปิดแล้ว) -- เซสชันรอดจาก error 23065 ที่ GT-101 เจอไหม แล้วจอเปลี่ยนอะไรไหม (คำถามเดิมของ GT-101 ที่ยังไม่มีใครตอบได้เพราะเซสชันตายก่อนถึง)  [PENDING]
+
+> เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md. grep ยืนยันก่อนจอง (2026-08-27): GT-107 = 0 hit, RE-107 = 0
+> hit ทั้งสองไฟล์ (รวม archive/). เลขสูงสุดที่ใช้แล้วจริงคือ GT-106 (SCENE17-PROVISIONAL-ARRIVAL-001, เปิดโดย
+> chief รอบ e0daaa) และ RE-106 (QUEST-FLAG-SYNC-MECHANISM-001, เปิดโดย chief คนละสาย) -- ทั้งสองใบไม่ว่าง ⇒
+> 106 ใช้ไม่ได้ ใบนี้คือ 107. เปิดโดย pf-queue-author ตามคำขอ LANE-GM รอบ kcm8ir. ใบเก่าทุกใบอยู่ที่เดิม ห้ามแตะ.
+
+### ที่มา -- อ่านจากซอร์สจริง ห้าม re-derive ระหว่างรอบ
+- `GT-101` เอง (ผลจริง `notes_to_chief/20260827_1445_GT101-RESULT-client-rejects-0x5A19-version-1-error-23065-session-killed.md`,
+  OBSERVER_CONFIRMED 2026-08-27T14:39+07:00): ส่ง `GM_UpdateGMStateVital` (`0x5A19`) ด้วย `vital_version=1`
+  ทำให้ไคลเอนต์ขึ้น modal error "網路 VitalData 版本不對 --- ErrorData=23065" (23065 = 0x5A19) แล้วหยุดรับ
+  ข้อมูล/ปิด socket เอง -- **ฆ่าเซสชันของเจ้าของเอง** ก่อนที่คำถามเดิมของ GM-001 ("จอเปลี่ยนอะไรไหม") จะถูกตอบ.
+- `RE-105-RESULT` (`notes_to_chief/20260827_1613_RE-105-RESULT-VITAL-VERSION-ZERO-GENERIC-MISMATCH-PATH.md`,
+  STATIC-ON-BRIDGE, DONE/PASS): generic VitalData collection reader `[0x005F3E20,0x005F406D)` เทียบ nested
+  version แบบ exact-equality กับ `message+0x10`; bootstrap ของ `0x5A19` เอง (`0x007299B0`) เซ็ตค่านั้นเป็น `0`
+  โดยตรง (`mov byte ptr [eax+0x10],bl` หลัง `xor ebx,ebx`) -- **`vital_version` ที่ถูกคือ `0` เท่านั้น**, ค่า `1`
+  ที่ GT-101 วัดว่าฆ่าเซสชันคือค่าที่ตกทาง mismatch เดียวกันนี้เอง. `08 04` (outer `GSCN_RunTimeProtocolRes`
+  protocol version 4) เป็นคนละฟิลด์ ไม่เกี่ยวกับสาเหตุ.
+- รอบ `kcm8ir` (`rounds/GM_20260827_1614_re105-vital-version-pin-plus-re104-widget-trigger-close.md`):
+  `src/pirateforce_foundation/gm/state_wire.py`'s `GM_UPDATE_STATE_VITAL_VERSION_CONFIRMED` เปลี่ยนจาก `None`
+  เป็น `0` จุดเดียว -- **ไม่แตะ `runtime.py`** เพราะ guard ของ `CORE-REQUEST-016` (`runtime.py`, เงื่อนไข
+  `is_gm and state_wire.GM_UPDATE_STATE_VITAL_VERSION_CONFIRMED is not None`) เปิดเองทันทีที่ค่านี้ไม่ใช่
+  `None` อีกต่อไป. เทสใหม่ `tests/test_gm_login_state_guard.py` (`GmLoginStateGuardTests`, 3 เทส) ยืนยันผ่าน
+  headless dispatcher จริงว่าเฟรมที่ประกอบมี `b"\x12\x19\x5a\x0b\x00"` (ไบต์เดียวที่ GT-101 พิสูจน์ว่าฆ่าเซสชัน
+  ตอนเป็น `0B 01`) และไม่มี `b"\x12\x19\x5a\x0b\x01"` เลย, `08 04` (outer protocol version) ไม่เปลี่ยน, บัญชี
+  ไม่ใช่ GM ไม่ได้รับผลกระทบ, และ guard เป็นเงื่อนไขจริง (patch ค่ากลับ `None` แล้วเฟรมถูก withhold เหมือนเดิม
+  ด้วย event `gm_update_state_frame_withheld_no_confirmed_vital_version_re105_open`). `tests/test_gm_*.py`
+  206/206 ผ่าน, repo เต็ม (`unittest discover`) 3565 เทส ผ่านหมดยกเว้น 18 error เดิมจาก `capstone` import ที่
+  ไม่เกี่ยวกับสายนี้ (baseline เดิม ไม่ใช่ของรอบนี้).
+- `RE-104-RESULT` (`notes_to_chief/20260827_1518_RE-104-RESULT-BT-GM-MODULE-PLUS19-GATE.md`, PASS/DONE):
+  พิสูจน์ trigger ของ dedicated GM editor widget (ปุ่ม `BT_GM` → panel `GMUI_BASIC`) -- **คนละคำถามกับใบนี้**
+  ใบนี้ไม่เปิด/ทดสอบ widget นั้นเลย (นั่นคือขอบเขตของ `GT-103` ที่อัปเดตแล้วแยกต่างหาก).
+- 🔴 **ใบนี้คือ byte-level regression check ของ GT-101 เท่านั้น ไม่ใช่การสำรวจใหม่.** RE-105/เทสใหม่พิสูจน์แค่
+  ระดับ headless dispatcher -- **เวอร์ชัน 0 ไม่เคยถูกยิงใส่ไคลเอนต์จริงเลยสักครั้ง** (คำของ LANE-GM STATUS เอง,
+  `notes_to_chief/20260827_1614_LANE-GM-STATUS-re104-re105-closed-vital-version-pinned.md` §"เกณฑ์สองชั้น":
+  wire/DB = PASS headless, client-observable = ยังไม่มี). ใบนี้คือก้าวที่ปิดช่องว่างนั้น.
+
+### ก่อนบูต -- ด่าน 0 (ชื่อบัญชี GM -- ห้ามเดา, สองแหล่งขัดกัน ต้องถามก่อน), ด่าน 1 (green boot), ด่าน 2 (grep ยืนยันสาย)
+
+**ด่าน 0 -- ชื่อบัญชี:** สองแหล่งไม่ตรงกัน ใบนี้ไม่เลือกแทน:
+  (A) `notes_to_chief/20260827_1200_CHIEF-REPLY-GT101-gm-accounts-test-config-approved.md` -- chief อนุมัติ
+      ชื่อ **`attended_test`** (ชื่อ fixture ใน `tests/test_gm_accounts.py` เท่านั้น).
+  (B) `GT-101` เอง (ผลจริง, บูต `2217fa47`): `attended_test` ใช้ไม่ได้จริง (ไม่มี client login ตัวไหนส่งชื่อนี้
+      ⇒ `is_gm_account()` คืน `False` เสมอ) -- รอบนั้นใช้ **`localtest`** จริง (บัญชีจริงในตาราง `accounts` ที่มี
+      ตัวละคร `Arena01`) แล้ว `is_gm_account("localtest")` คืน `True` จริง เฟรมถูกคิวจริง. ผลของ GT-101 เองเขียน
+      ไว้ตรง ๆ ว่า chief ควรแก้จดหมาย `1200` -- **แต่ ณ ตอนเขียนใบนี้ยังไม่มีจดหมายแก้ไขอย่างเป็นทางการ** (จดหมาย
+      เป็นบันทึกจุดเวลา ไม่ถูกแก้ย้อนหลังตามธรรมเนียมของคิวนี้).
+  **ก่อนบูต ต้องถาม chief/เจ้าของตรง ๆ ว่ารอบนี้จะใช้ชื่อไหน** -- ถ้าไม่มีคำตอบใหม่ให้ยึด (B) เพราะเป็นชื่อบัญชี
+  จริงเพียงชื่อเดียวที่พิสูจน์แล้วว่า login ได้จริงและติด GM gate จริง (แนบเหตุผลนี้ไปกับคำถามที่ถาม ไม่ตัดสินใจ
+  เงียบ ๆ). config เดิมของ GT-101 ถูกลบทิ้งไปแล้วตอน teardown -- ต้องสร้างสำเนาใหม่เสมอ ไม่มีของเก่าให้ใช้ซ้ำ:
+  ```
+  '{"gm_accounts": ["<ชื่อที่ยืนยันแล้ว>"]}' | Set-Content pf_bridge\backup\gm_accounts_GT-107_<yyyyMMdd_HHmmss>.json
+  ```
+  **ห้ามแก้ `config/gm_accounts.json` ตัวจริง** -- ใช้ `$env:PF_GM_ACCOUNTS_CONFIG` ชี้ไปที่สำเนาเสมอ (ทาง B เดิม
+  ของ GT-101, `gm/accounts.py`'s `ENV_OVERRIDE`). จดชื่อบัญชีที่ยืนยัน + path สำเนาไว้ในผลตั้งแต่ต้น ลบสำเนา/
+  เลิกตั้ง env ตอน teardown.
+
+**ด่าน 1 -- resolve commit เขียว:**
+```
+py -3 pf_resolve_green_boot.py --repo "C:\path\to\pirate-force-server" --fetch
+```
+รันจากโฟลเดอร์ pf_bridge, exit 0 + `BOOT_COMMIT: <sha>` เท่านั้นถึงบูตได้ (git checkout `<sha>` แบบ detached
+HEAD). ห้ามเทียบเลข commit ด้วยตา -- resolver คืนหัวแบรนช์ที่ผ่านเกต ไม่ใช่ merge commit เสมอไป.
+
+**ด่าน 2 -- ยืนยันสายจริงของ `<SHA>` (ห้ามเชื่อเลขบรรทัด/ไบต์ในเอกสารนี้ ต้อง grep ของจริงเสมอ):**
+```
+git grep -n "GM_UPDATE_STATE_VITAL_VERSION_CONFIRMED = 0" <SHA> -- src/pirateforce_foundation/gm/state_wire.py
+git grep -n "state_wire.GM_UPDATE_STATE_VITAL_VERSION_CONFIRMED" <SHA> -- src/pirateforce_foundation/runtime.py
+git grep -n "gm_update_state_frame_withheld_no_confirmed_" <SHA> -- src/pirateforce_foundation/runtime.py
+git grep -n "make_gm_update_state_frame" <SHA> -- src/pirateforce_foundation/runtime.py
+git grep -n "is_gm_account(self.token)" <SHA> -- src/pirateforce_foundation/runtime.py
+git grep -n "test_a_gm_account_gets_the_re105_pinned_state_frame" <SHA> -- tests/test_gm_login_state_guard.py
+```
+ต้องได้อย่างน้อย 1 บรรทัดต่อคำสั่งทั้ง 6 คำสั่ง, และบรรทัดแรกต้องคืน `= 0` ตรงตัว (ไม่ใช่ `= None`) -- ถ้าเป็น
+`None` แปลว่าคอมมิตที่จะบูตยังไม่มีการแก้จริง = **BLOCKED**, ห้ามบูต, ไปทำใบอื่นแล้วรอ merge.
+
+### db (สำเนาเสมอ ห้ามเปิด canonical, ห้ามแตะ state\play.sqlite3)
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-107_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt107.sqlite3
+```
+เทียบ sha256 ของ canonical กับ `CANON_SHA.txt` ก่อนเริ่มและหลังจบ ต้องตรงทั้งสองครั้ง. สำเนาใหม่ทุกบูต ⇒
+ตำแหน่งตัวละครรีเซ็ตกลับจุดเกิดเสมอ (คาดหมายอยู่แล้ว ไม่ใช่ผลของใบนี้).
+
+### server args (เป๊ะ -- ไม่มี --*-scenario, guard ทำงานเสมอไม่มีสวิตช์, ไม่มี chat trigger ในใบนี้เลย)
+```
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+$env:PF_GM_ACCOUNTS_CONFIG = "<path จากด่าน 0>"
+py -3 -u -m pirateforce_foundation.app --db state\run_gt107.sqlite3
+```
+
+### steps (คลิกต่อคลิก -- อัดวิดีโอต่อเนื่องตลอดช่วงถือ LOCK_GAME)
+ก่อนเริ่ม: ถือ LOCK_GAME, สำรอง state (บล็อก db ด้านบน), จด boot stamp (+07:00, ต้องไม่เก่ากว่า 420 นาทีตอนรัน
+teardown), เทียบ sha canonical, ยืนยันด่าน 0-2 ผ่านครบ (จดชื่อบัญชี + path config + SHA ที่บูต).
+🔴 **เตรียมใจไว้ก่อนคลิกเข้าเกม: modal error 23065 เดิมของ GT-101 อาจเกิดซ้ำได้จริง** ถ้า RE-105/การแก้รอบนี้ผิด
+ที่ใดก็ตาม -- นี่ไม่ใช่ FAIL ของใบนี้ เป็นผลลบที่มีค่าเท่ากับผลบวก (ดู pass criteria). ถ้าเกิดซ้ำ: กด OK ปิด
+dialog ตามปกติ, **restart server ก่อนเปิด client ใหม่เสมอ** (server ถือ session ค้าง ⇒ client ตัวถัดไปค้างที่
+"connecting" ตลอดกาลถ้าไม่ restart ก่อน), แล้วหยุดที่ตรงนั้น เขียนผลแบบ RESULT เหมือน GT-101 ไม่ต้องพยายามต่อ.
+
+1. สตาร์ตเซิร์ฟเวอร์ก่อนเสมอ (`Get-NetTCPConnection -State Established` พอร์ต 10188/10189 = 0 ก่อนเปิด client).
+   client ที่บูตโดยไม่มีเซิร์ฟเวอร์ตายเองใน ~3.5 นาที.
+2. เปิด client -> เลือกเซิร์ฟเวอร์ -> dialog PVP ปุ่มซ้าย -> หน้าเลือกตัวละคร -> เลือกช่องแรกของบัญชี GM ที่
+   ยืนยันในด่าน 0 -> ปุ่มกลางสุดจาก 5 ปุ่มแถวล่าง = เข้าเกม (ปุ่มซ้ายสุด = ลบตัวละคร ห้ามกด). เริ่มอัดวิดีโอ
+   ต่อเนื่องตั้งแต่ก่อนกดเข้าเกม.
+3. **ด่านชี้ขาดของใบนี้ (ใหม่ ไม่มีใน GT-101):** จ้องจอตั้งแต่วินาทีที่หน้าโหลดจบทันที 10 วินาทีเต็มก่อนทำอะไร
+   ต่อ -- มี modal error กลางจอ (ข้อความจีนขึ้นต้น "網路 VitalData") ขึ้นไหม. ถ่ายภาพนิ่ง full-res ทันทีถ้าเห็น.
+   ขึ้น -> ทำตามคำเตือนด้านบน (restart server, เขียนผล RESULT, จบใบ). ไม่ขึ้น -> ไปข้อ 4 เหมือน GT-101 เดิม.
+4. T0 -- เห็น HP bar/minimap/ชื่อแมพครบ. จด HUD X/Y. คลิกขวาค้างลากกวาดกล้อง 360 องศาหนึ่งรอบ (ตัวเช็ค NO-CRASH
+   ตัวเดียวที่ใบนี้ยอมรับ -- **ห้ามใช้ Q/E เด็ดขาด** เพราะ Q/E หันตัวละครจริงและยิง `TargetPosVital`; คลิกขวาลาก
+   หมุนกล้องอย่างเดียว ทิศหันตัวละครไม่ขยับ ไม่ยิงอะไรออกสาย ปลอดภัยเสมอ). ใบนี้ไม่มีขั้นเดิน/โจมตี/trigger ใด ๆ
+   เลย ⇒ ไม่จำเป็นต้องใช้ W/A/S/D หรือ Q/E ตลอดรอบ.
+5. เฝ้าจอต่อเนื่องอย่างน้อย 5 นาทีนับจาก T0 (โปรโตคอลเดิมของ GT-101 ทั้งหมด) -- ถ่ายภาพนิ่ง full-res ที่ t=0s,
+   30s, 120s, 300s เป็นอย่างน้อย และเพิ่มทันทีที่เห็นอะไรเปลี่ยนแม้เล็กน้อย. กวาดตาดูทุกจุด: ป้ายชื่อเหนือหัว
+   ตัวเอง, แผงสถานะ/HP มุมซ้าย, แผงเป้า (ถ้ามี), หน้าต่างแชท+prefix ชื่อตัวเอง, แถบไอคอน/เมนูบนสุด, minimap,
+   มุมจอทุกมุม.
+6. คู่ขนานกับข้อ 5: เฝ้าคอนโซลเซิร์ฟเวอร์ -- คัด `[G>] GM_UPDATE_STATE_AFTER_LOGIN`, `gm_account_lookup_failed_*`
+   (ถ้ามี = config พัง, หยุดแล้วเขียน BLOCKED ไม่ใช่ NO-RESULT), และเช็คว่าไม่มี `[G!] game socket closed/reset`
+   โผล่ก่อนครบ 5 นาที.
+7. ครบ 5 นาทีแล้ว: คลิกขวาลากอีกครั้ง (NO-CRASH ซ้ำ) -- ยืนยันไคลเอนต์ยังตอบสนอง.
+8. ออกเกม -> teardown ตาม `TEMPLATE_teardown_generic.ps1` -> เทียบ sha canonical รอบสุดท้าย -> ลบสำเนา config/
+   เลิกตั้ง `$env:PF_GM_ACCOUNTS_CONFIG`.
+
+### pass criteria (สองชั้น แยกกันเสมอ ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น)
+
+ชั้น wire/DB (อ่านจาก server console/event log ล้วน ๆ ไม่ต้องพึ่งสิ่งที่เห็นบนจอ):
+- คอนโซลพิมพ์ `[G>] GM_UPDATE_STATE_AFTER_LOGIN (N bytes)` หนึ่งครั้งตอนล็อกอินสำเร็จ, ไม่มี
+  `gm_account_lookup_failed_*` เลย.
+- 🔮 **คำทำนาย (ยังไม่เคยยิงใส่ไคลเอนต์จริง, ผิดได้ = ผล ไม่ใช่ความล้มเหลว):** ไบต์บนสายของเฟรมนี้ตรง
+  `... 08 04 0B 02 12 01 00 12 19 5A 0B 00 0B 00 0B 00 14 00 00 00 00` (เหมือนไบต์จริงที่ GT-101 จับได้เป๊ะ
+  ยกเว้นไบต์เดียวหลัง `12 19 5A` เปลี่ยนจาก `0B 01` เป็น `0B 00` ตามที่ RE-105/เทส `test_gm_login_state_guard.py`
+  พิสูจน์แล้วที่ชั้น headless) -- ถ้าคอนโซลมี hex dump ให้เทียบตรงนี้, ถ้าไม่มีก็ข้ามข้อนี้ไปดูแค่ N bytes.
+- ไม่มีบรรทัด `[G!] game socket closed/reset` โผล่ก่อนครบ 5 นาทีจาก T0 (สัญญาณทางสาย ทางอ้อม ของการที่ session
+  ไม่ตายกลางคัน -- แยกจากการเห็น modal บนจอ ซึ่งเป็นชั้น client-observable คนละชั้น).
+- `sessions`: `count(*) WHERE selected_character_id IS NOT NULL` +1 ต่อการเข้าเกมหนึ่งครั้ง, `max(lease_
+  generation)` ไม่ถอยหลัง, `PRAGMA integrity_check` = `ok` บนสำเนา, sha256 canonical ก่อน-หลังตรงกับ
+  `CANON_SHA.txt` ทั้งสองครั้ง.
+- raw GAME log ทั้งไฟล์ + console out/err เก็บทั้งก่อน/หลัง ไม่ตัดทอน.
+
+ชั้น client-observable (ต้องมีคนหน้าจอ, ห้ามอนุมานจากบรรทัดคอนโซล):
+- 🔴 **สามผลลัพธ์ต่อไปนี้ทุกอันมีค่าเท่ากัน ไม่ใช่เกณฑ์ผ่าน/ตกของใบนี้ (เหมือน GT-101 บวกผลที่สาม):**
+  (ก) **modal error 23065 เดิมขึ้นซ้ำ** -- แปลว่า RE-105/การแก้รอบนี้ยังไม่ปิดสาเหตุจริงบนไคลเอนต์ตัวนี้ ทั้งที่
+      headless พิสูจน์แล้ว เขียนเป็นผล RESULT (ไม่ใช่ PASS ไม่ใช่ FAIL) พร้อมภาพ+ไบต์จริงที่จับได้ ตามแบบผลของ
+      GT-101 เอง.
+  (ข) **ไม่มี modal, login ผ่านปกติ, ไม่เห็นอะไรเปลี่ยนบนจอเลย** ตลอด 5 นาที -- นี่คือผลลบที่ `RE-089` ทำนายไว้
+      แล้วว่าเป็นไปได้ (ไม่พบ render/UI consumer ที่ชั้น static) เขียนเป็นผลลบเต็มรูปพร้อมรายการทุกจุดที่ตรวจ
+      แล้วว่า "ไม่เปลี่ยน".
+  (ค) **ไม่มี modal, login ผ่านปกติ, เห็นอะไรเปลี่ยนจริง** -- ระบุให้ชัดว่าที่ไหน ถ่ายภาพนิ่ง full-res ปิดล้อม
+      จุดที่เปลี่ยนทันที -- นี่คือผลบวกที่ตอบคำถามค้างของ `RE-089`/`GT-101` ได้จริงเป็นครั้งแรก.
+- สีของป้ายชื่อทุกป้ายในทุกภาพนิ่ง full-res (t=0s/30s/120s/300s และภาพเพิ่มถ้ามี) บันทึกเป็นบรรทัดเดียวต่อป้าย
+  ต่อภาพ ("none" เขียนออกมาถ้าไม่มี ห้ามเว้นว่าง) -- อ่านจากภาพนิ่ง full-res เท่านั้น ห้ามอ่านจาก contact
+  sheet/ภาพย่อ/วิดีโอ ห้ามอนุมานสาเหตุของสี (`RE-067` เปิดอยู่). ไม่มีภาพอ้างอิงของเซิร์ฟเวอร์ต้นฉบับสำหรับ GM
+  state โดยเฉพาะที่รู้จักตอนนี้ -- ถ้าไม่มีอ้างอิงให้ใช้ `compared_and_matched=no-reference`.
+
+### nonclaims
+- 🔴 **ใบนี้เป็น byte-level regression check ของ GT-101 เท่านั้น ไม่ใช่การสำรวจ/ค้นใหม่.** ไม่ทดสอบค่าอื่นของ
+  สามฟิลด์ opaque (ยังส่ง `0, 0, 0` ชุดเดิมเหมือน GT-101 เป๊ะ ๆ) และไม่ตั้ง semantic ให้ไบต์ไหนจากสิ่งที่เห็น
+  บนจอ (`RE-089` ห้ามการอนุมานนี้จาก offset/ความกว้างไว้แล้ว).
+- 🔴 **ใบนี้ไม่พิสูจน์ว่าการแก้ของ RE-105/CORE-REQUEST-016 ถูกต้องที่ชั้นไคลเอนต์จริง** -- headless test พิสูจน์
+  แค่ว่า dispatcher ประกอบไบต์ที่ตั้งใจถูกต้อง; **ใบนี้คือรอบแรกที่วัดจริงว่าไคลเอนต์ตัวจริงยอมรับหรือไม่** ถ้า
+  modal เดิมขึ้นซ้ำ (ผลลัพธ์ (ก) ข้างบน) นั่นคือคำตอบของใบนี้เอง ไม่ใช่ความล้มเหลวของใบนี้.
+- 🔴 **"ไม่เห็นอะไรเปลี่ยนบนจอเลย" (ผลลัพธ์ (ข)) เป็นผลที่คาดไว้แล้วและยอมรับได้เต็มรูป ไม่ใช่ความล้มเหลวของ
+  ใบนี้** -- `RE-089` เองพิสูจน์แล้วว่าไม่พบ render/widget/texture consumer ของสามฟิลด์นี้ในโค้ด static ก่อน
+  รอบนี้จะเริ่มด้วยซ้ำ.
+- ไม่ทดสอบ GM editor widget (`BT_GM`/`GMUI_BASIC`) หรือคำสั่ง GM ใด ๆ เลย -- นั่นคือขอบเขตของ `GT-103`
+  (GM-002) คนละใบ, ไม่มีการยิงคำสั่งในใบนี้.
+- ไม่ทดสอบผู้เล่นคนอื่นเห็นอะไรต่างไปเกี่ยวกับบัญชี GM นี้, ไม่ทดสอบความเสถียรข้าม reconnect/relogin -- ล็อกอิน
+  ครั้งเดียวในรอบนี้.
+- ถ้าใช้สำเนา config ตามด่าน 0: ไม่พิสูจน์ว่าการเปลี่ยนแปลงนั้นคงอยู่ข้ามรอบอื่นหรือกระทบเลนอื่น -- สำเนานี้ของ
+  รอบนี้เท่านั้น ถูกลบทิ้งตอน teardown.
+- ไม่ชี้สาเหตุของสีป้ายชื่อ (`RE-067` เปิดอยู่).
+- ถ้าด่าน 0/1/2 ไปไม่ถึง (ยังไม่ merge/BLOCKED/ไม่มีคำตอบชื่อบัญชี) => ทั้งใบเป็น BLOCKED ไม่ใช่ NO-RESULT/FAIL
+  -- ยังไม่ได้ล็อกอินเลย.
 
 ### result (ผู้เทสกรอก)
 ```
