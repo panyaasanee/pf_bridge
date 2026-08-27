@@ -19,11 +19,16 @@ guard `str`/`bytes` และ `except Exception` -- ช่องเดียว�
 แบบเดียว) แก้ทั้ง `gm/say_wire.py` และ `gm/warp_executor.py` พร้อมกันในรอบนี้ (ทั้งคู่อยู่ในเขตเขียนของสายนี้)
 ผ่านที่สองของ pf-adversary ตรวจ allowlist เองแล้วไม่พบช่องเพิ่ม
 
+รอบนี้ยังมี **ผ่านที่ 3** ของ pf-adversary: ผ่านที่ 2 เขียนไว้ผิดว่า allowlist `isinstance(args, tuple)`
+"ไม่พบช่องเพิ่มเติม" -- ผ่านที่ 3 พิสูจน์สดว่า tuple subclass ที่โกหก `__len__`/`__getitem__` ยังหลุดผ่านได้
+แก้จริงด้วย `type(args) is tuple` (ปฏิเสธ subclass ทุกชนิด) บันทึกการแก้คำยืนยันผิดไว้ตรง ๆ ใน `docs/GM_LANE.md`
+ไม่ลบทิ้ง
+
 รายละเอียดเต็มดู `rounds/GM_20260827_1935_say-wire-args-shape-followup-plus-merge-field-api-bug.md`
 
 ## เทส
 
-`tests/test_gm_say_wire.py`: 21/21 · `tests/test_gm_warp_executor.py`: 20/20 · `test_gm_*.py` ทั้งชุด: 185/185
+`tests/test_gm_say_wire.py`: 23/23 · `tests/test_gm_warp_executor.py`: 22/22 · `test_gm_*.py` ทั้งชุด: 189/189
 
 ## PR
 

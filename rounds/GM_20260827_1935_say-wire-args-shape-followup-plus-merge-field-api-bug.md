@@ -89,3 +89,18 @@ GM ทำงานอะไรเพิ่มขึ้น
 
 ผู้เทสจะทำอะไรได้ที่เมื่อวานทำไม่ได้: ไม่มี -- รอบนี้เป็นการแก้ความทนทานของโค้ดภายในเขตเขียนของสายเอง
 (ไม่มีจุดเรียกจริงจากไคลเอนต์) บวกการพบบั๊ก tooling ที่ไม่ใช่ gameplay
+
+## แก้ไขเพิ่ม (ผ่านที่ 3 ของ pf-adversary): คำยืนยันของผ่านที่ 2 ผิด
+
+หลังบันทึกด้านบนแล้ว ส่ง `pf-adversary` ตรวจ allowlist (`isinstance(args, tuple)`) อีกรอบเพื่อยืนยันก่อนปิดรอบ --
+**ผลผ่านที่ 2 ที่เขียนไว้ว่า "ไม่พบช่องเพิ่มเติม" นั้นผิด** ผ่านที่ 3 พิสูจน์สดได้ภายในไม่ถึงนาที: tuple subclass
+ที่ override `__len__`/`__getitem__` ให้โยน exception อื่น (เช่น `RuntimeError`, `KeyError`) ผ่าน
+`isinstance(args, tuple)` ได้ปกติ และ `GmCommand` (frozen dataclass เปล่า ไม่มี validation ใน `__post_init__`)
+ไม่มีอะไรกันไม่ให้ caller สร้างแบบนี้ได้ -- ตรงกับ threat model "ไม่ว่าจะมาจากไหน" ที่ docstring ประกาศไว้เอง
+
+แก้จริง: เปลี่ยนจาก `isinstance(args, tuple)` เป็น `type(args) is tuple` -- ปฏิเสธ subclass ทุกชนิด
+tuple ตัวจริง (ไม่ใช่ subclass) ไม่มีทางโยน exception จาก `len()`/index ได้เลย จึงไม่มี dunder ให้โกหกอีกต่อไป
+เพิ่มเทส 2 ข้อต่อไฟล์ (lying `__len__`, lying `__getitem__`) `docs/GM_LANE.md` บันทึกการแก้คำยืนยันผิดของผ่านที่ 2
+ไว้ตรง ๆ ไม่ลบทิ้ง ตามกติกา "ห้ามลบประวัติเดิม"
+
+เทสรอบสุดท้าย: `tests/test_gm_say_wire.py` 23/23 · `tests/test_gm_warp_executor.py` 22/22 · `test_gm_*.py` 189/189
