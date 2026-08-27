@@ -57,11 +57,17 @@ name: merge-claude-pr
 
 on:
   pull_request_target:
-    types: [opened, reopened, synchronize, edited]
-  # The reaper: for a pull request that cannot merge and would otherwise sit
-  # there as a lock nobody can clear.
+    # `ready_for_review` was MISSING until 2026-08-27.  Every lane opens its
+    # round PR as a DRAFT and marks it ready at the end of the round - and that
+    # transition fired no event here, so a ready PR sat open until the hourly
+    # reaper CLOSED it after 6 hours (work lost, branch kept), and every later
+    # round of that lane ended on "lock held" (measured: pf_bridge #144 [LANE-A]
+    # 2026-08-27 ~07:xx, and the same shape on the server side #57/#61/#86/#91).
+    types: [opened, reopened, synchronize, edited, ready_for_review]
+  # The reaper, every 10 minutes: FINISHES (merges) any ready eligible PR that
+  # an event above was never delivered for, and closes only what cannot merge.
   schedule:
-    - cron: '23 * * * *'
+    - cron: '*/10 * * * *'
   workflow_dispatch:
 
 # `opened` and `edited` can arrive seconds apart on one pull request, and two
@@ -69,7 +75,7 @@ on:
 # Serialised rather than cancelled: the loser must still be able to see that the
 # PR is already merged and exit cleanly.
 concurrency:
-  group: merge-claude-pr-${{ github.event.pull_request.number || github.run_id }}
+  group: merge-claude-pr-${{ github.event.pull_request.number || 'scheduled' }}
   cancel-in-progress: false
 
 permissions:
@@ -81,7 +87,10 @@ env:
   # reason installing this file cannot retroactively merge a pull request that
   # was opened before it existed.
   PF_MARKER: 'PF-AUTOMERGE: v4'
-  PF_STALE_HOURS: '6'
+  # A DRAFT older than this is a round that died mid-way (a lane round is
+  # one hour; the routine that owns it fires hourly).  It is closed so the
+  # lane can claim again; the branch is kept.
+  PF_STALE_HOURS: '2'
 
 jobs:
   merge:
@@ -222,14 +231,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
     steps:
-      - name: Close marked claude/* pull requests that have gone stale
+      - name: Finish ready claude/* pull requests; close only what cannot merge or has died
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
           set -euo pipefail
 
@@ -253,29 +263,78 @@ jobs:
           for PR in $OPEN; do
             META=$(api "repos/${REPO}/pulls/${PR}")
             HEAD_REF=$(printf '%s' "$META" | jq -r '.head.ref')
+            HEAD_SHA=$(printf '%s' "$META" | jq -r '.head.sha')
             HEAD_REPO=$(printf '%s' "$META" | jq -r '.head.repo.full_name // ""')
+            BASE_REF=$(printf '%s' "$META" | jq -r '.base.ref')
             BODY=$(printf '%s' "$META" | jq -r '.body // ""')
+            DRAFT=$(printf '%s' "$META" | jq -r '.draft')
             CREATED=$(printf '%s' "$META" | jq -r '.created_at')
             [ "$HEAD_REPO" = "$REPO" ] || continue
+            [ "$BASE_REF" = "$DEFAULT_BRANCH" ] || continue
             case "$HEAD_REF" in claude/*) : ;; *) continue ;; esac
-            case "$BODY" in *"$PF_MARKER"*) : ;; *) continue ;; esac
-            # A date that will not parse must not kill the loop and leave every
-            # later pull request unreaped.  Default to age 0: the cost of
-            # skipping one round is one hour; the cost of aborting is the lock.
+            case "$BODY" in *"$PF_MARKER"*) : ;; *) echo "--- #${PR} ${HEAD_REF}: no marker - left alone ON PURPOSE (a human must add it)"; continue ;; esac
             CSEC=$(date -u -d "$CREATED" +%s 2>/dev/null || echo "$NOW")
             AGE=$(( NOW - CSEC ))
-            echo "--- #${PR} ${HEAD_REF} age=$(( AGE / 3600 ))h ---"
-            [ "$AGE" -ge "$LIMIT" ] || { echo "  young enough - left alone"; continue; }
+            echo "--- #${PR} ${HEAD_REF} draft=${DRAFT} age=$(( AGE / 60 ))m ---"
 
-            gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
-              "**Open for more than ${PF_STALE_HOURS} hours without merging - closing it.**" \
-              "" \
-              "There is no gate in this repository, so a pull request here should merge within seconds of being opened. One that is still open after ${PF_STALE_HOURS} hours means the merge job never ran or was refused - and an open \`claude/*\` pull request is the round lock, so it has to go." \
-              "" \
-              "**The branch \`${HEAD_REF}\` is kept.** Check the Actions tab of this repository before assuming the round did anything wrong: if \`merge-claude-pr\` is failing, closing pull requests will not fix it.")"
-            if gh pr close "$PR" --repo "$REPO"; then
-              echo "  REAPED -> commented and closed; branch kept"
-            else
-              echo "::error::COULD NOT CLOSE #${PR}. The round lock is STUCK until a human closes it."
+            if [ "$DRAFT" = "true" ]; then
+              # A draft is a round still working.  Only a draft that has outlived
+              # any possible round is a corpse, and a corpse is a stuck lock.
+              [ "$AGE" -ge "$LIMIT" ] || { echo "  draft, young enough - the round is still working"; continue; }
+              gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
+                "**Draft open for more than ${PF_STALE_HOURS} hours - the round that opened it has died; closing it to release the lane lock.**" \
+                "" \
+                "A lane round lasts under an hour. A draft this old means the session ended without marking the pull request ready (a tool disconnect, a timeout, a crash) and nothing on the cloud side can ever come back to it - a later round may only push its own branch." \
+                "" \
+                "**The branch \`${HEAD_REF}\` is kept.** The next round of this lane must check for a CLOSED previous PR of its own and carry the work forward from that branch before starting anything new.")" \
+                || echo "::warning::could not comment - closing anyway"
+              if gh pr close "$PR" --repo "$REPO"; then echo "  REAPED dead draft -> closed; branch kept"; else echo "::error::COULD NOT CLOSE #${PR}. The lane lock is STUCK until a human closes it."; fi
+              continue
             fi
+
+            # Ready and eligible: this is the `merge` job's work, replayed for a
+            # pull request whose event was never delivered.  `mergeable` is
+            # computed asynchronously and is null until ready.
+            MERGEABLE=null
+            for attempt in 1 2 3 4 5 6; do
+              MERGEABLE=$(api "repos/${REPO}/pulls/${PR}" | jq -r '.mergeable')
+              [ "$MERGEABLE" = "null" ] || break
+              echo "  mergeable not computed yet (attempt ${attempt}) - waiting"
+              sleep 5
+            done
+            if [ "$MERGEABLE" = "true" ]; then
+              MERGE_OUT=$(gh pr merge "$PR" --repo "$REPO" --merge --match-head-commit "$HEAD_SHA" 2>&1) && MRC=0 || MRC=$?
+              printf '%s\n' "$MERGE_OUT" | sed 's/^/  merge> /'
+              if [ "$MRC" -eq 0 ]; then
+                echo "  FINISHED -> merged #${PR}"
+                api -X DELETE "repos/${REPO}/git/refs/heads/${HEAD_REF}" >/dev/null 2>&1 \
+                  && echo "  branch ${HEAD_REF} deleted" || echo "  branch not deleted - harmless"
+                continue
+              fi
+              STATE=$(api "repos/${REPO}/pulls/${PR}" | jq -r '.state')
+              [ "$STATE" = "open" ] || { echo "  merge failed but the PR is already ${STATE} - another run got there first, fine"; continue; }
+              echo "::warning::merge of #${PR} failed (exit ${MRC}) - closing it to release the lane lock"
+              gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
+                "**The merge call failed - closing this pull request to release the lane lock.**" \
+                "" \
+                '```' \
+                "${MERGE_OUT}" \
+                '```' \
+                "" \
+                "**The branch \`${HEAD_REF}\` is kept.** The next round of this lane must carry the work forward from that branch.")" \
+                || echo "::warning::could not comment - closing anyway"
+              gh pr close "$PR" --repo "$REPO" || echo "::error::COULD NOT CLOSE #${PR}. The lane lock is STUCK until a human closes it."
+              continue
+            fi
+            if [ "$MERGEABLE" = "null" ]; then echo "  mergeable still null - left for the next tick"; continue; fi
+            # mergeable=false: main moved underneath and the two disagree.  It
+            # will never resolve itself, and waiting only keeps the lane locked.
+            gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
+              "**This pull request does not merge cleanly (\`mergeable=${MERGEABLE}\`) - closing it to release the lane lock.**" \
+              "" \
+              "\`main\` moved underneath \`${HEAD_REF}\` and the two versions disagree line by line. A cloud round can only push its own branch, so it cannot rebase this one." \
+              "" \
+              "**The branch \`${HEAD_REF}\` is kept and nothing on it is lost.** The next round of this lane must check for a CLOSED previous PR of its own and re-land that work on a fresh branch from \`main\` (one file per round; never append to a shared file at a fixed line).")" \
+              || echo "::warning::could not comment - closing anyway"
+            if gh pr close "$PR" --repo "$REPO"; then echo "  not mergeable -> closed; branch kept"; else echo "::error::COULD NOT CLOSE #${PR}. The lane lock is STUCK until a human closes it."; fi
           done
