@@ -128,6 +128,20 @@ client-visible success state to test yet) or feed into the existing `GT-107`/RE-
 block (`field_0x0b_second`), which already has an open queue item. Noted in the reply letters
 instead.
 
+## Late addendum: PANYA-DECISION pauses M2, prioritizes M1 identity
+
+`notes_to_chief/20260827_2010_PANYA-DECISION-pause-M2-M1-identity-first-Prison-Exile-Bg0002-MOBSET-equals-nID.md`
+landed via `git merge origin/main` after this round's own commit was already made. The owner's
+decision: pause M2 (scene 17 destination/vehicle-bind work) after the currently-open PRs merge,
+make M1 "true identity spawns" the priority for every lane starting next round, first target
+Prison Exile (scene 2 / Bg0002) rather than Port Royal. This round's CORE-REQUEST-019/020 PRs are
+exactly the "PR ที่เปิดอยู่" the decision names as allowed to complete -- not reverted, not held
+back. Chief's own assigned M1-P task (item 2, shared with Lane A): a flagless entry into scene 2
+via the existing persistence path (`world_scene_liveness`'s honour-stored-scene mechanism already
+covers scene 2) plus generalizing `world_scene_travel.CENSUS_SOURCE` off its current
+`"bg0001_census"` hardcode so scene 2's own census composes from `Bg0002.placements.tsv` instead --
+picked up next round, per the decision's own "ทุกสายเริ่ม M1-P รอบถัดไป" timing.
+
 ## Outstanding
 
 - `RE-112` closed BOUNDED-NEGATIVE mid-round by Lane A's own RE runner (letter `1947`, consumed
