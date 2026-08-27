@@ -4890,3 +4890,128 @@ dialog ตามปกติ, **restart server ก่อนเปิด client �
 ```
 
 ```
+
+---
+
+## GT-109 VEHICLE-BIND-WIRE-CAPTURE-001: ผู้เล่นขึ้นพาหนะ/กลายเป็นเรือครั้งแรก (หรือกลไกใดก็ตามที่เรียก CGCVehicleModule) -- จับเฟรม CVehicleVital (handler 0x00710440, tag 0x32 @object+0x18) จริงได้ทั้งสองทิศไหม (RE-096 ปิด bounded-negative แล้ว เพดาน static หมด เหลือแค่ attended capture)  [PENDING -- รอ wiring ทางเข้า vehicle-bind จริง, ไม่ใช่ BLOCKED ถาวร; ไม่บล็อก M2]
+
+> เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md. grep ยืนยันก่อนจอง (2026-08-27): เลขล่าสุดที่ถูกใช้จริงคือ
+> GT-107 (GAME_TEST_QUEUE.md) และ RE-108 (CLIENT_RE_QUEUE.md, เปิดโดยสาย B รอบ B_20260827_1637) -- GT-108/GT-109/
+> RE-109 = 0 hit ทั้งสองไฟล์รวม archive/ ⇒ **ใบนี้คือ GT-109**. เลขว่างถัดไปหลังใบนี้ = 110.
+> ใบเก่าทุกใบอยู่ที่เดิม ห้ามแตะ. เปิดโดย pf-queue-author ตามคำขอสาย A รอบ `jafskv`.
+
+### ที่มา (อ้างอิงไฟล์แทนอธิบายซ้ำ)
+- `RE-096` CLOSED bounded-negative (`CLIENT_RE_QUEUE.md` ~L213; เต็ม:
+  `notes_to_chief/20260827_0509_RE-096-RESULT-NO-VEHICLE-SEASCENE-CROSSWALK.md`): handler `0x00710440` เป็น
+  stub 5 ไบต์ `mov al,1; ret 4` เท่านั้น ไม่อ่าน/เขียน/lookup ตารางใด; capture `NOT_OBSERVED` 0/0 เฟรมทั้งสองทิศ
+  ในทุกคลังที่มี; ปิดใบเขียนตรงๆ ว่า "ทางเดียวที่เหลือคือ attended capture ของ `CVehicleVital` เฟรมจริง"
+- `RE-085` (`notes_to_chief/20260827_0156_RE-085-RESULT-SAME-ACTOR-VEHICLE-MODULE.md`): vehicle state เป็น
+  actor-local (`CGCVehicleModule` ผูก actor เดิมกับ `CVehicleAttr`) แต่จุดเรียกที่พบมีจุดเดียวคือภายใน
+  `dispatch_columbus_quest3021` -- ไม่พบ trigger อื่น (nonclaim ตรงๆ)
+- คำเคาะเจ้าของ `M2-NO-VEHICLE-OWNER-20260827-1525` (`notes_to_chief/20260827_1545_CHIEF-STATUS-M2-quest-gate-skip-needs-bridge-RE-not-cloud-buildable.md`
+  ข้อ 2, ยืนยันซ้ำ `notes_to_chief/20260827_1830_CHIEF-REPLY-PANYA-CHASE-0915-status-faction1-wired-M2-plan-RE100-coverage.md`):
+  ยืนยันตรงกับซอร์สจริง (`src/pirateforce_foundation/columbus_quest_dispatch.py`, ค่าคงที่
+  `VEHICLE_BIND_REFUSED_NO_VEHICLE_ROW` ยังอยู่ในไฟล์แต่ **ไม่มีจุดเรียกใช้เหลือเลย** -- ตรวจเองรอบ `jafskv`):
+  `dispatch_columbus_quest3021` **ไม่รอ vehicle-bind อีกต่อไป** -- สำเร็จและส่ง `TeleportVital` ตรงๆ โดยข้าม
+  จุดเรียก vehicle-bind ที่ `RE-085` เจอไปเลย ("แผนเต็ม M2 spec table" ที่จะเอา vehicle-bind กลับมา ยังไม่เขียน)
+
+### objective (claim เดียว)
+capture เฟรม `CVehicleVital` (tag `0x32`, 8 ไบต์ @`object+0x18`, serializer `0x006C0180-0x006C01A3`,
+handler `0x00710440`) จากการเล่นจริงอย่างน้อยหนึ่งครั้งทั้งสองทิศทาง client->server (W) และ server->client (R)
+เมื่อผู้เล่นขึ้นพาหนะ/กลายเป็นเรือ -- **ไม่ตัดสิน semantic ของ `+0x18`** (นั่นคืองานของ RE follow-up ที่จะเปิด
+เลขใหม่หลังใบนี้จับได้)
+
+### เกตก่อนบูต (ด่าน 0 พิเศษ -- เข้มกว่า GT-106)
+ประกาศตรงๆ: **ไม่มีทาง production/debug ใดในซอร์สที่ commit ไว้ตอนนี้ที่จะยิง `CVehicleVital` ได้เลย** เพราะ
+จุดเรียกเดียวที่เคยมี (`RE-085` T1/T3) ถูกถอดออกจาก `dispatch_columbus_quest3021` ตาม
+`M2-NO-VEHICLE-OWNER-20260827-1525`. grep สามคำสั่งนี้บน `<SHA>` จริงก่อนบูตทุกครั้ง (ห้ามเชื่อบรรทัดนี้แทนซอร์ส):
+```
+git grep -n "no_re096_vehicle_row_evidence\|vehicle_row\|vehicle_bind" <SHA> -- src/pirateforce_foundation/columbus_quest_dispatch.py
+git grep -n "CVehicleVital\|0x00710440\|0x006C0180" <SHA> -- src/pirateforce_foundation/
+git grep -n "gm_login_scene\|login_scene_override" <SHA> -- src/pirateforce_foundation/runtime.py
+```
+- คำสั่งที่ 1 = เจอเฉพาะนิยามค่าคงที่ (ไม่มี `.append`/จุดเรียกใช้จริง) = สถานะปัจจุบัน (vehicle-bind ยังไม่ถูก
+  ใส่กลับเข้า dispatch)
+- คำสั่งที่ 2 เจอ call site ใหม่ (ไม่ใช่แค่ registry/serializer ที่มีอยู่แล้วเป็นข้อมูลนิ่ง) = สัญญาณทางเข้าใหม่ --
+  อ่าน diff จริงก่อนเชื่อ
+- คำสั่งที่ 3 = 0 hit หมายความว่า GM login-scene override (`notes_to_chief/20260827_1524_LANE-GM-CORE-REQUEST-015-login-scene-override-wiring.md`,
+  ทาง ก ของ `PANYA-ORDER 20260827_1425`) ยังไม่ถูกเรียกจาก `runtime.py` เลย (module มีแล้ว 0 call site) --
+  **ถึงจะต่อสายก็ไม่ช่วยใบนี้โดยอัตโนมัติ**: `RE-085` ยืนยันว่า vehicle-bind logic ผูกอยู่เฉพาะใน
+  `dispatch_columbus_quest3021` เท่านั้น ยังไม่มีหลักฐานว่าการเข้าฉาก 17 เปล่าๆ (ไม่ผ่าน dispatch) จะยิง
+  `CVehicleVital` เอง
+
+ไม่พบทางเข้าใดที่ยิง `CVehicleVital` ได้จริง = ทั้งใบยังคง **PENDING -- รอ wiring ทางเข้าจริง** ห้ามแก้ `src/`
+เอง ห้ามปั้นเฟรมมือเปล่า ไปทำใบอื่นแล้วกลับมาเช็คซ้ำ พบทางแล้ว -> จดชื่อ flag/commit ที่ใช้ได้ลงผลก่อนไปด่าน 1/2
+มาตรฐาน (`pf_resolve_green_boot.py --fetch` แล้ว grep ซ้ำบน `<SHA>` ที่บูตจริง)
+
+### หมายเหตุ dependency (ไม่ใช่ gate เดียวกันเป๊ะกับ GT-106) + หลักฐานเพิ่มที่เพิ่งมีจริง
+
+`GT-106` (คุณภาพการวางตัวละครที่ฉาก 17) ตอนนี้ gate เบากว่าใบนี้แล้ว เพราะ `M2-NO-VEHICLE-OWNER-20260827-1525`
+ทำให้ `dispatch_columbus_quest3021` สำเร็จได้โดยไม่ต้องมี vehicle-bind -- **`GT-106` PASS ไม่ปลดล็อกใบนี้
+อัตโนมัติ** เพราะ path ที่ `GT-106` ใช้ข้าม vehicle-bind ไปเลยตามคำสั่งเจ้าของ ใบนี้จะรันต่อได้ทันทีเมื่อ:
+(ก) "แผนเต็ม M2 spec table" เอา vehicle-bind กลับเข้ามาใน `dispatch_columbus_quest3021`, หรือ
+(ข) มีคนพบ trigger อื่นที่ยิง `CGCVehicleModule`/`CVehicleVital` ได้จริง (ดูหัวข้อถัดไป)
+
+**update (ยืนยันหลัง `GT-106` รันจริงแล้ว 2026-08-27T17:10+07:00)**: ผล `GT-106` (`notes_to_chief/
+20260827_1710_GT106-RESULT-M2-Columbus-3021-enters-scene17-*.md` ③) เดินเส้นทาง Columbus -> ฉาก 17 จริงและ
+ให้ raw wire log ครบ (`server_console_live.out.txt` 4,031 บรรทัด) -- **frame ที่ client ส่งหลัง teleport มีแค่
+`TargetVital`x1, `TargetPosVital`x10, `COnLandVital`x8, `ActionVital`x3 ไม่มี `CVehicleVital` เลยสักเฟรม**
+นี่คือหลักฐาน de-facto บวกกับ `RE-096`/gate-0 ของใบนี้ (ยังไม่มีทางเข้าใดยิงเฟรมนี้จริง) แต่ **ไม่ใช่ผลของใบนี้
+เอง** (`GT-106` ไม่ได้ตั้งใจสังเกต `CVehicleVital` และไม่ได้บันทึกทุกเฟรมแบบ raw capture ตามที่ใบนี้ต้องการ) --
+ใบนี้ยังคง `PENDING` รอ capture ที่ตั้งใจสังเกตเฟรมนี้โดยเฉพาะ (ขั้น 5 ของใบนี้) ไม่ใช่ผลพลอยได้จากรอบอื่น
+
+### ทางเลือกอื่น (เปิดเป็นคำถาม -- ห้ามอ้างว่ามีจริงถ้ายังไม่เจอ)
+`RE-085` พบว่า `CGCVehicleModule`/`CVehicleAttr` เป็นกลไก actor-local ทั่วไป (ผูกกับ actor เดิม ไม่ใช่ scene
+fixture) แต่ nonclaims ของใบนั้นเขียนตรงๆ ว่าไม่ได้พิสูจน์ trigger อื่นนอกเหนือจาก `dispatch_columbus_quest3021`.
+คำถามเปิด: มีเมนู/ไอเทม/สกิล/GM command ใดในไคลเอนต์ที่เรียกกลไกนี้ได้โดยไม่ต้องผ่านฉาก 17 หรือไม่ (เช่น
+พาหนะบก/ม้า) -- ถ้าผู้เทสบังเอิญเจอระหว่างสำรวจ UI ตามปกติ (ไม่ใช่การเดา ไม่ใช่การลองสุ่มนอกขอบเขตใบ) ให้บันทึก
+เป็น finding แยกและแจ้ง RE runner เปิดใบใหม่ -- **ใบนี้เองไม่อ้างว่าเส้นทางนี้มีจริง**
+
+### nonclaims
+- ไม่ตัดสิน semantic ของ qword `+0x18` (vehicle catalog id? model id? อื่น?) -- งานของ RE follow-up
+- ไม่ตัดสินว่า `VEHICLE` row หรือ `SHIP` row ใดถูกใช้จริง (นั่นคือของเดิมที่ `RE-096` ปิดไปแล้วว่าตอบไม่ได้)
+- ไม่ตัดสินคุณภาพการวาง player ที่ฉาก 17 (นั่นคือ `GT-106`)
+- ไม่อ้างว่ามีเส้นทางพาหนะบก/ม้าจนกว่าจะเจอจริงระหว่างทดสอบ
+- ผลลบ (บูตถึงจุดที่ควรยิงแต่ capture ว่างเปล่าทั้งสองทิศทาง) **มีค่าเท่าผลบวก** -- แปลว่า trigger ที่ใช้ไม่ใช่
+  ตัวที่ยิง `CVehicleVital` จริง หรือ handler stub ไม่เคยถูกเรียกแม้ code path จะถึงจุดนั้น ทั้งสองเป็น finding
+  ที่ป้อนกลับให้ RE follow-up ไม่ใช่ FAIL ของใบนี้
+
+### db (สำเนาเสมอ ห้ามเปิด canonical)
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-109_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt109.sqlite3
+```
+เทียบ sha256 canonical กับ `CANON_SHA.txt` ก่อน/หลัง ต้องตรงทั้งสองครั้ง
+
+### server args
+ขึ้นกับเส้นทางที่ด่าน 0 หาเจอจริง (ตอนนี้ยังไม่มีเส้นทางเลย) -- **เขียนคำสั่งบูตจริงที่ใช้ลงผลก่อนเสมอ** ห้าม
+คัดลอกจากใบอื่นเดา ห้ามพ่วง `--*-scenario` ตัวอื่นเข้าบูตเดียวกัน
+
+### steps (คลิกต่อคลิก -- กรอกเฉพาะเมื่อด่าน 0 ผ่านแล้ว)
+1. LOCK_GAME, ผ่านเกตด่าน 0 พิเศษ + ด่าน 1/2 มาตรฐาน, จด BOOT_COMMIT + คำสั่งบูตจริง
+2. เข้าเกมจนถึงจุดที่ทางที่พบจริงพาไปเรียก vehicle-bind logic -- บันทึกว่าเป็นเส้นทางไหน (dispatch คืนสาย /
+   GM login-scene override + trigger อื่น / อื่นใด)
+3. NO-CRASH: คลิกขวาลากกวาดกล้อง 360 องศา (ห้าม Q/E -- Q/E หันตัวละครจริงและยิง `TargetPosVital`; คลิกขวาลาก
+   หมุนกล้องอย่างเดียวไม่ยิงอะไรออกสาย ปลอดภัยเสมอ)
+4. ถ่ายภาพนิ่ง full-res ก่อน/หลังจุดที่คาดว่าจะยิงเฟรม + สีป้ายชื่อทุกป้ายในภาพ (บรรทัดเดียวต่อป้าย, "none"
+   เขียนออกมาถ้าไม่มี, ห้ามชี้สาเหตุ -- `RE-067` เปิดอยู่)
+5. เก็บ raw capture ทั้งชุดทันทีหลังจุดนั้น (ตามแบบ `capture_gt031_*`/`capture_gt032_*` ใน
+   `external/PF_INPUT_INVENTORY.tsv`): `capture_gt109_<yyyyMMdd_HHmmss>/capture_v141/GAME_LIVE.txt`,
+   `GAME_EVENTS_LIVE.txt`, `server_console_live.out.txt`/`.err.txt`, ทุกบรรทัด `[G>]`/`PF-EVENT`/`ErrorData`
+6. NO-CRASH ซ้ำ -> teardown -> เทียบ sha canonical -> sha256 ทุกไฟล์ capture
+
+### pass criteria (สองชั้น แยกกันเสมอ)
+wire/DB: raw capture ที่เก็บในขั้น 5 มี frame instance อย่างน้อยหนึ่งเฟรมต่อทิศทาง ที่ไบต์ตรงกับ span
+serializer `0x006C0180-0x006C01A3` (tag `0x32`, 8 ไบต์, handler_va `0x00710440`) -- ทั้ง W (client->server)
+และ R (server->client) ต้องมีอย่างน้อยทิศทางละ 1 เฟรม (การยืนยันไบต์จริงเป็นงานของ RE follow-up ไม่ใช่ผู้เทส --
+ผู้เทสแค่ต้องเก็บ raw log ให้ครบไม่หาย/ไม่โดนล้าง) เมื่อ RE follow-up ยืนยันแล้ว `PF_FIELD_VALIDATION.tsv` แถว
+`CVehicleVital W`/`R` เปลี่ยนจาก `NOT_OBSERVED` (0/0 เฟรม) เป็น `observed_frames > 0` + sha256 canonical
+ตรงก่อน/หลัง + `PRAGMA integrity_check`=ok
+client-observable: อย่างใดอย่างหนึ่งที่เห็นจริง (ไม่เดา) -- ตัวละครเปลี่ยนโมเดล/ขึ้นพาหนะที่เห็นได้บนจอ, หรือ
+**ไม่มีอะไรเปลี่ยนบนจอเลยแม้ log จะมีเฟรม** (ทั้งสองผลมีค่าเท่ากัน ไม่ใช่ FAIL ของใบนี้ -- ดู nonclaim ผลลบ
+ด้านบน) + สีป้ายชื่อทุกป้ายในทุกภาพ full-res บันทึกตามกฎ `RE-067`
+
+### result (ผู้เทสกรอก)
+```
+
+```
