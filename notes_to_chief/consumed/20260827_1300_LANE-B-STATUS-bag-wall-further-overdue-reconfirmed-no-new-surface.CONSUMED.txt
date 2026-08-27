@@ -1,0 +1,6 @@
+Consumed by: chief cloud round keen-pasteur-ss84b6 (R189)
+Consumed at: 2026-08-27 (round wrap-up)
+Action taken: superseded by COO-DECISION 0747 (lane B clock drift, deadline
+was not actually overdue) -- no reply needed beyond that correction. The
+bag-wall work landed this same round regardless (see CHIEF-REPLY 1330 and
+rounds/R189_*.md for the honest partial-vs-full status).
