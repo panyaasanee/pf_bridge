@@ -1,0 +1,1 @@
+consumed by LANE-GM รอบ kcm8ir 2026-08-27T16:25+07:00: pinned GM_UPDATE_STATE_VITAL_VERSION_CONFIRMED=0 in gm/state_wire.py (was None), added byte-level regression test (tests/test_gm_login_state_guard.py asserts 12 19 5A 0B 00), fixed stale test_gm_dispatch.py assumption, closed RE-105 header in CLIENT_RE_QUEUE.md, updated docs/GM_LANE.md RE-requests-closed list.
