@@ -1035,3 +1035,46 @@ field ที่ขาด/ผิด shape พร้อม provenance **หรื�
 พร้อมบรรทัด `BUILD_IMPACT:`
 
 ### result (ยังไม่มี — ใบเปิดอยู่)
+
+---
+
+## 🆕🔬 RE-112 BORNAGAIN-MARKER-RESET-WIRE-ACK-001 [STATIC-ON-BRIDGE]: **หลัง quest 3205 (Q_BORNAGAIN, `Player.ResetMarker(1)`) ถูกเรียก เกมเดิมส่งเฟรมอะไรกลับ (ถ้ามี) — client รอ ack หรือปิด dialog เงียบๆ** [🟢 **OPEN — เปิดโดย LANE-A 2026-08-27T18:48+07:00 ต่อยอดจาก COO-DECISION 17:46/GT-106 ④.1**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-112`/`GT-112` = 0 hit ทั้งสองไฟล์ (2026-08-27T18:48+07:00)
+> เลขสูงสุดที่ใช้แล้วคือ `111` (`RE-111`) ⇒ ใบนี้คือ `112`
+> 🔴 ใบ `RE-085`-`RE-111` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา
+`notes_to_chief/20260827_1746_COO-DECISION-M2-not-closed-fix-persistence-and-destination-scene-before-passing.md`
+สั่งสาย A เพิ่ม option 2 (quest 3205) เข้า dialog Columbus 3021 · gamedata (`20260827_1710_GT106-RESULT-*.md`
+④.1) ยืนยัน `MOBS 156 s_QUEST_BEGIN` มี `3205` = Q_BORNAGAIN, `n_VARI_2=1` → lua `Player.ResetMarker(1)`
+สาย A เขียน `dispatch_columbus_quest3205()` ให้ refuse เสมอไว้ก่อน (`CORE-REQUEST-019`) เพราะไม่มีคอลัมน์ DB
+หรือหลักฐาน wire-ack ของ "save spawn point" เลย
+
+### objective
+1. หา wire frame (ถ้ามี) ที่เกมเดิมส่งกลับหลัง `Player.ResetMarker(n)` ถูกเรียกสำเร็จ — เป็น ack/state update
+   หรือไม่มีเลย (แค่ปิด dialog ฝั่ง client)
+2. ถ้ามี ack ให้ระบุ field/shape ที่ต้องส่งให้ตรง — เพื่อให้สาย A รู้ว่า persist แล้วต้องส่งอะไรกลับด้วย
+3. ถ้า static เห็นไม่พอ ให้เขียน bounded negative พร้อม attended capture ที่แคบที่สุด (กด option "ตั้งฐานทัพ"
+   ครั้งเดียว เก็บเฟรมขาเข้า/ขาออกทั้งหมดรอบนั้น)
+
+### nonclaims
+① ไม่ claim ว่าคอลัมน์ DB ควรมีหน้าตาแบบไหน — เป็นคำถามฝั่ง schema/chief แยกต่างหาก (ดู CORE-REQUEST-019)
+   ใบนี้ถามเฉพาะ wire ฝั่ง client
+② ไม่ claim ว่า option 2 พร้อมต่อสายจริงตอนนี้ — ยังต้อง refuse จนกว่าใบนี้ปิดและมี schema จริง
+③ ถ้าหาไม่เจอในเส้นทางที่ถอดได้ นี่คือคำตอบสมบูรณ์ (bounded negative)
+
+### จ็อบ
+- **T0 · ด่านคุม** — ยืนยัน image SHA ตรง verifier ปัจจุบันก่อนเริ่ม
+- **T1** — xref `Player.ResetMarker`/`Q_BORNAGAIN`/3205 handler หา response frame (ถ้ามี)
+- **T2** — ถ้าไม่เจอ static ให้เขียน bounded negative ตามข้อ objective 3
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (offset/แถว) · ชนเพดานให้เขียน bounded negative แล้วปิด
+ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+wire frame/ack shape พร้อม provenance **หรือ** bounded negative ที่เสนอ attended capture แคบที่สุด ⇒ ปิดใบ
+พร้อมบรรทัด `BUILD_IMPACT:`
+
+### result (ยังไม่มี — ใบเปิดอยู่)
