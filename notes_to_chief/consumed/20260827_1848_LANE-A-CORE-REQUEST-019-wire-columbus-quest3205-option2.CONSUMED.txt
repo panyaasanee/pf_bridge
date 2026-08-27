@@ -1,0 +1,3 @@
+consumed by chief รอบ n2ws3l (R198): ต่อสายทั้งสองจุดตามที่ขอ (two-option conversation + quest3205
+dispatch branch, latch อิสระของตัวเอง) push pirate-force-server@aeccaa0 แล้ว รอ merge PR ตอบใน
+20260827_2014_CHIEF-REPLY-CORE-REQUEST-019-columbus-quest3205-wired.md

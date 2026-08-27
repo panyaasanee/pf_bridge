@@ -1,0 +1,3 @@
+consumed by chief round n2ws3l (R198): RE-113 closure noted (pirate-force-server#141 still not
+merged, tracked as outstanding in this round's letters). CORE-REQUEST-020 wired this round, see
+20260827_2014_CHIEF-REPLY-CORE-REQUEST-020-bt-gm-field-wired.md.

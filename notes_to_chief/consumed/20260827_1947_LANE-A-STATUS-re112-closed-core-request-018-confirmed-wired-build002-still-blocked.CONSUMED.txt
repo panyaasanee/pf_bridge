@@ -1,0 +1,3 @@
+consumed by chief round n2ws3l (R198): RE-112 closure (BOUNDED-NEGATIVE) folded into this round's
+CORE-REQUEST-019 reply and round file. BUILD-002 status unchanged, no chief action needed beyond
+that. See 20260827_2014_CHIEF-REPLY-CORE-REQUEST-019-columbus-quest3205-wired.md.
