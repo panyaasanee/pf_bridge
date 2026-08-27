@@ -5033,7 +5033,7 @@ client-observable: อย่างใดอย่างหนึ่งที่�
 
 ---
 
-## GT-110 CORE-REQUEST-017-1 GM-LOGIN-SCENE-OVERRIDE-VISUAL-001: per-account login-scene override for GM accounts, wired into START_GAME_REQ this round -- does a real client actually render the overridden scene on login  [PENDING]
+## GT-110 CORE-REQUEST-017-1 GM-LOGIN-SCENE-OVERRIDE-VISUAL-001: per-account login-scene override, wired into START_GAME_REQ -- does a real client actually render the overridden scene on login  [PENDING -- safety fix 2026-08-28: now runs on the standalone path, no GM_UpdateGMStateVital/0x5A19 sent, no longer waits on GT-107-R3, see server args below]
 
 > เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md. จองไว้เป็น GT-109 ตอนแรก (grep ยืนยัน ณ ขณะนั้น: 0 hit)
 > แต่ LANE-A จองเลขเดียวกันพร้อมกัน (รอบ jafskv, VEHICLE-BIND-WIRE-CAPTURE-001) และ commit ของเขาลง
@@ -5055,26 +5055,46 @@ client-observable: อย่างใดอย่างหนึ่งที่�
   sha256 ของ canonical เทียบกับ CANON_SHA.txt ทั้งก่อนและหลัง · PRAGMA integrity_check=ok บนสำเนาที่ใช้ทำงาน
   ทั้งสองครั้ง
 
+> 🔧 SAFETY FIX 2026-08-28 (LANE-GM, answering
+> `notes_to_chief/20260827_2240_KA1A-NOTE-GT110-unsafe-until-0x5A19-payload-fixed-plus-M1P-jobs-staged.md`):
+> the original server-args below required `gm_accounts.json` membership,
+> which makes `is_gm_account()==True`, which makes `runtime.py` send
+> `GM_UpdateGMStateVital` (`0x5A19`) on login -- the exact frame that killed
+> `GT-101`/`GT-107` with two different crash modes, one fixed (`RE-113`) but
+> **not yet re-verified against a real client** (`GT-107-R3` still
+> `[PENDING]`). Running GT-110 the old way risked a third crash for a
+> question this ticket never needed to ask. `gm/login_scene_override.py`
+> now has a second, independent "standalone" path
+> ([สมมติของสาย GM - รอ COO ยืนยัน], see module docstring) that grants a
+> login-scene override WITHOUT any `gm_accounts.json` entry -- `is_gm`
+> stays `False` for this account, so the `0x5A19` block in `runtime.py`
+> never fires. Server args below now use ONLY the standalone path. GT-107-R3
+> stays the ticket that answers whether `0x5A19` itself is now safe -- this
+> ticket no longer needs that answer first.
+
 - server args:
 ```
 $env:PYTHONPATH = Join-Path (Get-Location) 'src'
-$env:PF_GM_ACCOUNTS_CONFIG = "<สำเนาทิ้งใต้ pf_bridge\backup\ ระบุบัญชี GM จริงที่ยืนยันแล้ว>"
-$env:PF_GM_LOGIN_SCENE_CONFIG = "<สำเนาทิ้งใต้ pf_bridge\backup\ map บัญชีนั้น -> scene_id 2>"
+$env:PF_GM_LOGIN_SCENE_STANDALONE_CONFIG = "<สำเนาทิ้งใต้ pf_bridge\backup\ map บัญชีทดสอบ -> scene_id 2, key 'standalone_login_scene'>"
 py -3 -u -m pirateforce_foundation.app --db state\run_gt109.sqlite3
 ```
-  ไม่มีแฟล็ก --*-scenario ใด ๆ -- override ขับด้วย config รอบนี้ ไม่ใช่ scenario-gated ห้ามแก้
-  config/gm_accounts.json หรือ config/gm_login_scene.json ตัวจริง ให้ env var ชี้ไปสำเนาทิ้งแล้วลบตอน teardown
+  ไม่มีแฟล็ก --*-scenario ใด ๆ -- override ขับด้วย config รอบนี้ ไม่ใช่ scenario-gated **ห้ามตั้ง**
+  `PF_GM_ACCOUNTS_CONFIG` หรือแก้ `config/gm_accounts.json` ตัวจริงเลยในใบนี้ -- ปล่อยให้ allowlist ว่างเป็นค่า
+  เริ่มต้น (ไม่มีใครเป็น GM) ตามที่ทางแก้นี้ตั้งใจ ห้ามแก้ `config/gm_login_scene.json` หรือ
+  `config/gm_login_scene_standalone.json` ตัวจริง ให้ env var ชี้ไปสำเนาทิ้งแล้วลบตอน teardown
 
   เงื่อนไขก่อนบูต ต้องผ่านก่อนเปิดเกม ไม่งั้นทั้งใบ BLOCKED (ไม่ใช่ NO-RESULT):
   1. resolve commit ที่บูตเขียวตามวิธีมาตรฐานของ repo แล้วยืนยันว่า commit นั้นมีของรอบนี้จริง:
      git grep -n "login_scene_override" <SHA> -- src/pirateforce_foundation/runtime.py
      git grep -n "gm_login_scene_override_applied_" <SHA> -- src/pirateforce_foundation/gm/login_scene_override.py
      git grep -n "gm_login_scene_override_lookup_failed_" <SHA> -- src/pirateforce_foundation/gm/login_scene_override.py
-     git grep -n "PF_GM_LOGIN_SCENE_CONFIG" <SHA> -- src/pirateforce_foundation/gm/login_scene_override.py
+     git grep -n "load_standalone_login_scene_overrides" <SHA> -- src/pirateforce_foundation/gm/login_scene_override.py
+     git grep -n "PF_GM_LOGIN_SCENE_STANDALONE_CONFIG" <SHA> -- src/pirateforce_foundation/gm/login_scene_override.py
      ผลลัพธ์ 0 hit ข้อไหน = BLOCKED ห้ามบูต
-  2. ยืนยันชื่อบัญชีจริงที่ล็อกอินแล้วผ่าน is_gm_account()==True บน build นี้จริง -- GT-101/GT-107 เจอว่าชื่อ
-     ตัวอย่าง (attended_test) กับบัญชีจริงไม่ตรงกันมาก่อน ห้ามเดา ต้องยืนยันซ้ำก่อนเขียนสำเนา gm_accounts.json
-  3. ห้ามชี้ PF_GM_LOGIN_SCENE_CONFIG ไปที่ scene_id=17 หรือฉากใดที่ปักหมุด login_entry_allowed=False -- จะทำให้
+  2. ยืนยันว่าบัญชีทดสอบที่จะใช้ **ไม่อยู่** ใน `config/gm_accounts.json` จริง (ไฟล์ต้องไม่มีอยู่ หรือมีแต่ allowlist
+     ว่าง) -- นี่คือสิ่งที่ทำให้ทางแก้นี้ปลอดภัยจาก `0x5A19`, ห้ามเดาว่า "ว่างอยู่แล้ว" ต้องเปิดไฟล์ดูจริงก่อนบูต
+  3. ห้ามชี้ `PF_GM_LOGIN_SCENE_STANDALONE_CONFIG` ไปที่ scene_id=17 หรือฉากใดที่ปักหมุด
+     login_entry_allowed=False -- จะทำให้
      login ทั้งครั้งถูกปฏิเสธไม่มี reply เลย (client ค้างที่ "connecting" ตลอดไป) ซึ่งเป็นพฤติกรรม fail-closed
      ที่ตั้งใจ ไม่ใช่บั๊ก แต่เผารอบทดสอบทิ้งเปล่า ๆ ใช้ scene_id=2 (Prison Exile Island, BG0002) แทน: พิสูจน์แล้ว
      ฝั่งเซิร์ฟเวอร์ว่ามี spawn ปักหมุดแต่ไม่มี ground evidence ที่ x/y จริงของบัญชี ⇒ login จะลงที่ spawn ปักหมุด
@@ -5097,20 +5117,24 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt109.sqlite3
   7. ถือค้างอย่างน้อย 60 วินาทีดูว่ามีอะไรเปลี่ยนไหม (texture pop-in, พื้นโหลดช้า, ป้ายชื่อแมพบน HUD ถ้ามี)
   8. ลากขวาหมุนกล้องอีกครั้ง (ทำซ้ำเช็ก NO-CRASH) แล้วออกจากเกม/ปิด client
   9. teardown ผ่าน TEMPLATE_teardown_generic.ps1 (ป้ายเวลาบูตต้องอายุไม่เกิน 420 นาทีตอน teardown) เช็ก
-     sha256 canonical กับ CANON_SHA.txt ซ้ำ ลบสำเนาทิ้ง gm_accounts.json/gm_login_scene.json ทั้งคู่ และ
-     unset ทั้งสอง env var
+     sha256 canonical กับ CANON_SHA.txt ซ้ำ ลบสำเนาทิ้ง gm_login_scene_standalone.json และ unset
+     `PF_GM_LOGIN_SCENE_STANDALONE_CONFIG` (ไม่มี `gm_accounts.json`/`PF_GM_ACCOUNTS_CONFIG` ให้ลบ/unset ในทางแก้
+     นี้ -- ไม่เคยตั้งมันเลยตั้งแต่ต้น)
 
 - pass criteria: (สองชั้น แยกกัน)
     wire/DB          : การสลับค่าฝั่งเซิร์ฟเวอร์เองพิสูจน์แบบ headless แล้วรอบนี้โดย
-                        tests/test_gm_login_scene_override_wiring.py (6/6 ข้อ ขับผ่าน dispatcher จริง รวม
-                        เทสระดับไบต์ full suite เขียว ไม่มี regression) -- อ้างที่นี่ ไม่พิสูจน์ซ้ำ ชั้น wire/DB
-                        ของใบนี้เอง (อ่านจาก console/event log ของการบูตจริงเท่านั้น ไม่ดูจอ) ต้องมีเพิ่ม:
-                        console พิมพ์บรรทัด WORLD_SCENE scene_id=2 และ event log บันทึก
-                        gm_login_scene_override_applied_2 ครั้งเดียวสำหรับ login นี้ ไม่มี event
-                        gm_login_scene_override_lookup_failed_* เลย · sessions ได้แถวใหม่ 1 แถวที่มี
-                        selected_character_id สำหรับ login นี้ · max(lease_generation) ไม่ถอยหลัง · sha256
-                        canonical ตรงกับ CANON_SHA.txt ก่อน/หลัง · PRAGMA integrity_check=ok บนสำเนาทำงาน
-                        ทั้งสองครั้ง
+                        tests/test_gm_login_scene_override_wiring.py (6/6 ข้อ ขับผ่าน dispatcher จริง) และ
+                        tests/test_gm_login_scene.py's standalone-path tests (ทางแก้ safety fix 2026-08-28) --
+                        full suite เขียว ไม่มี regression -- อ้างที่นี่ ไม่พิสูจน์ซ้ำ ชั้น wire/DB ของใบนี้เอง
+                        (อ่านจาก console/event log ของการบูตจริงเท่านั้น ไม่ดูจอ) ต้องมีเพิ่ม: console พิมพ์
+                        บรรทัด WORLD_SCENE scene_id=2 และ event log บันทึก gm_login_scene_override_applied_2
+                        ครั้งเดียวสำหรับ login นี้ ไม่มี event gm_login_scene_override_lookup_failed_* เลย ·
+                        **ไม่มีบรรทัด `[G>] GM_UPDATE_STATE_AFTER_LOGIN` ปรากฏเลยตลอด session นี้** (นี่คือ
+                        หลักฐานว่าทางแก้ standalone ทำงานจริง -- บัญชีนี้ไม่เคยผ่าน `is_gm_account()` เป็นจริง จึง
+                        ไม่มี `0x5A19` ถูกส่งแม้แต่ครั้งเดียว, เห็นบรรทัดนี้ = ทางแก้ไม่ได้ผล ใบนี้ FAIL ไม่ว่าจอจะ
+                        เปลี่ยนฉากถูกหรือไม่) · sessions ได้แถวใหม่ 1 แถวที่มี selected_character_id สำหรับ login
+                        นี้ · max(lease_generation) ไม่ถอยหลัง · sha256 canonical ตรงกับ CANON_SHA.txt ก่อน/หลัง ·
+                        PRAGMA integrity_check=ok บนสำเนาทำงานทั้งสองครั้ง
     client-observable: มนุษย์ที่จอเห็นตัวละครยืนบนพื้น/ฉาก Prison Exile Island / BG0002 ที่จุด (หรือใกล้เคียง
                         สอดคล้องกับ) spawn ปักหมุด (26905.0, 21185.0, 1680.0) ไม่ใช่บ้านหรือฉากที่บันทึกไว้ล่าสุด
                         ของบัญชีนั้น ไม่มี glitch ทางสายตา (ไม่ตกพื้น ไม่ลอย ไม่ค้างจอโหลด) เช็ก NO-CRASH ทั้ง
@@ -5120,8 +5144,9 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt109.sqlite3
   ไม่พิสูจน์ว่า override ใช้ได้กับ scene_id อื่น ไม่ทดสอบปลายทางที่ปักหมุด login_entry_allowed=False (วันนี้:
   ฉาก 17) เส้นทางนั้นถูกบันทึกไว้ว่าทำให้ login ทั้งครั้งถูกปฏิเสธไม่มี reply เลย (fail-closed ที่ตั้งใจ) และอยู่
   นอกขอบเขตใบนี้ -- config ของใบนี้ต้องไม่ชี้ไปฉาก 17 ไม่ทดสอบ reconnect, relogin, มากกว่าหนึ่งบัญชี GM หรือสิ่ง
-  ที่ผู้เล่นคนอื่นเห็น ไม่ตรวจสอบ config/gm_accounts.json หรือ config/gm_login_scene.json เกินกว่า mapping เดียว
-  ที่ใช้ที่นี่ สำเนาทิ้งถูกลบตอน teardown ใบนี้ไม่พิสูจน์อะไรเรื่องความคงอยู่ของมัน ไม่ชี้สาเหตุของสีป้ายชื่อใด ๆ
+  ที่ผู้เล่นคนอื่นเห็น ไม่ตรวจสอบ config/gm_login_scene_standalone.json เกินกว่า mapping เดียวที่ใช้ที่นี่ ไม่
+  พิสูจน์อะไรเรื่อง `GM_UpdateGMStateVital`/`0x5A19` เอง (นั่นเป็นขอบเขตของ `GT-107-R3` ต่างหาก -- ทางแก้ safety
+  fix 2026-08-28 ของใบนี้แค่ทำให้ไม่ต้องพึ่งคำตอบนั้นก่อน) สำเนาทิ้งถูกลบตอน teardown ใบนี้ไม่พิสูจน์อะไรเรื่องความคงอยู่ของมัน ไม่ชี้สาเหตุของสีป้ายชื่อใด ๆ
   ที่สังเกตได้ (RE-067 เปิดอยู่) ไม่ทำซ้ำหลักฐาน headless ที่ปิดไปแล้วรอบนี้ (tests/test_gm_login_scene_override_wiring.py,
   6/6, full-suite เขียว) -- อ้างเป็นหลักฐานที่มีอยู่แล้ว ไม่ต้องให้มนุษย์รันซ้ำ ผลลบ (เช่น client โชว์ฉากเดิม/บ้าน
   ของบัญชี, โชว์ความเสียหายทางภาพ, หรือค้าง) มีค่าเท่าผลบวก -- จะชี้ไปที่ว่าอะไรฝั่ง client บริโภค scene_id หลัง

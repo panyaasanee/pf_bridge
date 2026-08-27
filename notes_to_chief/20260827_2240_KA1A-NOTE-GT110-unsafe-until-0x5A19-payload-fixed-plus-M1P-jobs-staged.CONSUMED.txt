@@ -1,0 +1,25 @@
+consumed by LANE-GM รอบ ccc9wj (2026-08-28T02:22+07:00): ทำอะไรต่อ
+
+ส่วน (1) GT-110 -- ทำทางที่โน้ตเสนอว่าเร็วกว่า/ปลอดภัยกว่า (แยก override ออกจากสถานะ GM):
+  - src/pirateforce_foundation/gm/login_scene_override.py: เพิ่มเส้นทาง "standalone" ใหม่
+    (load_standalone_login_scene_overrides, key `standalone_login_scene`, config
+    config/gm_login_scene_standalone.json / env PF_GM_LOGIN_SCENE_STANDALONE_CONFIG) ที่ไม่เรียก
+    is_gm_account() เลย -- บัญชีทดสอบไม่ต้องอยู่ใน gm_accounts.json จึงไม่มีทาง is_gm เป็นจริง จึงไม่มี
+    GM_UpdateGMStateVital (0x5A19) ถูกส่งเลยสำหรับบัญชีนี้ -- ไม่แตะ runtime.py (จุดเสียบเดิมจาก
+    CORE-REQUEST-015 เรียก get_login_scene_override() อยู่แล้ว เส้นทางใหม่ทำงานผ่านจุดเดิมอัตโนมัติ)
+  - tests/test_gm_login_scene.py: +7 เทสใหม่คลุมเส้นทาง standalone (missing-file, grant-with-no-gm-listing,
+    ไม่ต้องมี gm_accounts.json เลยด้วยซ้ำ, ไม่อยู่ในลิสต์ = None, precedence เมื่ออยู่ทั้งสอง config,
+    malformed config, unknown scene_id) -- full suite 250/250 เขียว (รวม 3 เทสระดับ dispatcher จริงที่
+    pf-adversary ชี้ว่าขาด, ดู test_gm_login_scene_override_wiring.py)
+  - GAME_TEST_QUEUE.md: แก้หัวใบ GT-110 + server args + เงื่อนไขก่อนบูต + pass criteria (เพิ่มเงื่อนไขใหม่:
+    ต้องไม่มีบรรทัด GM_UPDATE_STATE_AFTER_LOGIN ปรากฏเลยตลอด session ถ้าเห็น = FAIL) + teardown + nonclaims
+    ให้สะท้อนทางแก้ใหม่ -- GT-110 ไม่ต้องรอ GT-107-R3 อีกต่อไป
+  ป้าย: [สมมติของสาย GM - รอ COO ยืนยัน] -- เป็นการเปลี่ยนสัญญาความปลอดภัยของโมดูล (เดิม "ต้องเป็น GM เท่านั้น
+  ถึงจะได้ override" ตอนนี้มีทางที่สองที่ไม่ต้องเป็น GM) แม้จะไม่ให้สถานะ GM หรือความสามารถอื่นใดนอกจาก
+  ตำแหน่ง login -- เขียนจดหมาย ASK-COO แยกให้ COO ยืนยันรอบถัดไป (ดูใบ ASK-COO ของรอบนี้)
+  ผ่าน pf-adversary ก่อน commit แล้ว (ดู rounds/GM_20260828_0229_gt110-standalone-login-scene-safety-fix.md สำหรับผลเต็ม)
+
+ส่วน (2) M1-P -- ไม่ใช่เขตของสาย GM (เขต world-wipe/census เป็นของสาย A/B/chief) ไม่ได้ทำอะไรเพิ่มรอบนี้
+  ส่งต่อให้สายที่เกี่ยวข้องอ่านต่อ (ต้นฉบับยังอยู่ที่ notes_to_chief/ ไม่ถูกลบ)
+
+ต้นฉบับสำเนาไปที่ notes_to_chief/consumed/
