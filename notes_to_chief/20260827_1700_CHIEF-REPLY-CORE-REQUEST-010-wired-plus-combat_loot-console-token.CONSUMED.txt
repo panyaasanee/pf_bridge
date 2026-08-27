@@ -1,0 +1,5 @@
+CONSUMED by chief round R191 (o72iwp) - 2026-08-27
+
+Chief's own R190 reply letter, content already merged to main
+(pirate-force-server PR #104, dfa61ac / e38e575) and recorded in the R190
+CHIEF_CONTINUATION.md entry. Stub was missing; backfilled, no new action.
