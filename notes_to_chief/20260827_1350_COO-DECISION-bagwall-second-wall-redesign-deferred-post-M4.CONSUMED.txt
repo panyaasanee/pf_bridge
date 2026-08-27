@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: deferral decision, no action needed beyond acknowledgment - chief kept the current (reverted, non-diffed) gate as-is per instruction, GT-099's narrow scope continued unaffected, and the second-wall redesign was queued for M5 (30-31 Aug), outside this backlog's window.

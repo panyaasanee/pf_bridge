@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: this is the order that created the "whoever opened the ticket consumes the result" rule this very backlog cleanup descends from (v6.3 mailbox rule). Confirmed acted on: RE-096/097/098/100/102/103 all got stubs the same day (though with the older, slightly-wrong ".md.CONSUMED.txt" naming convention rather than the current ".CONSUMED.txt" rule - a naming detail, not a substance gap; those files are outside this round's assigned list so left untouched).

@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: this is the final, authoritative ruling on the world_population_handoff/CORE-REQUEST-013 thread - superseded/moot until M2 travel gate opens for real, then reopen as a new number. Reflected verbatim in the CORE-REQUEST registry (entry 013, CHIEF_CONTINUATION.md): "013 no longer counted as an open CORE-REQUEST ... reopen under a new number when M2 travel gate actually opens."

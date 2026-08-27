@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: console-token bug fix is chief's own completed work, self-contained. All three flagged risks (client FSM gate silently rejecting TeleportVital, single-shot dispatch with no retry, quest-gate-skip making the whole path moot) were resolved by the actual attended run: GT-106 RESULT (20260827_1710) confirms the player left town through Columbus/3021 into scene 17 and could walk on deck - the dispatch worked live, answering all three open questions at once.

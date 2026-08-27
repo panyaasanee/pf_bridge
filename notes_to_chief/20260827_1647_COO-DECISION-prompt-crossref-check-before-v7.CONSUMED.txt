@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: standing process rule, no one-time code action needed - whoever writes the next prompt/HANDOVER version (v7+) must cross-reference GAME_TEST_QUEUE.md/CHIEF_CONTINUATION.md before claiming any ticket/HOLD is released. Acknowledged as an ongoing obligation carried forward from this round on.

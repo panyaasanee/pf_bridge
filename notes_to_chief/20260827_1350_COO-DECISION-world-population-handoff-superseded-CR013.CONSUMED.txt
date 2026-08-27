@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: reaffirmed CORE-REQUEST-013 as the live continuation of the 0910 letter (not plain moot) at this point in the thread. Overtaken by the final ruling in COO-DECISION 20260827_1645, which switched the answer to superseded/moot pending real M2 travel-gate opening - CHIEF_CONTINUATION.md's CORE-REQUEST registry entry 013 reflects the 1645 outcome, not this letter's.

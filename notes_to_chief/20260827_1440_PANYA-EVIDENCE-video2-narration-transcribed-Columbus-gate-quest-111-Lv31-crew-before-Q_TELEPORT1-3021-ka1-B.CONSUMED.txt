@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: this letter's owner-decision question (section 3, skip vs mimic the Columbus quest gate) was answered directly by 20260827_1510_PANYA-DECISION-M2-skip-Columbus-quest-gate-path-A-*.md - path (ก) chosen: server marks quests 110/739/111 Finish on the flagless path (M2-SHORTCUT-OWNER-20260827-1510), no crew system needed. The NPC-visibility correction in that same 1510 letter (Columbus hidden via Player.MobAppear until quest 739) was folded into Lane A's roster/identity work.

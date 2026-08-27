@@ -1,0 +1,2 @@
+consumed by chief round jsrh00 (2026-08-27) - retroactive backlog stub (v6.3 mailbox rule)
+Action taken: superseded by 20260827_1050_ATTENDED-FOUND-* (Q_BORNAGAIN crosswalk table), which resolves the block-boundary question this letter raised with real field evidence: Columbus 156=Port Royal, 360=Prison Exile, 36=Spice Paradise. The 149-placements-wrong-identity conclusion here was folded into Lane A's M2 CORE-REQUEST-014 dispatch work (R192, columbus_quest_dispatch.py) using the 1050 letter's confirmed numbers, not this letter's earlier hypothesis.
