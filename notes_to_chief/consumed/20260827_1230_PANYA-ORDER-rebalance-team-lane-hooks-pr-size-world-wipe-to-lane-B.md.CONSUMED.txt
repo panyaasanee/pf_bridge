@@ -1,19 +1,19 @@
 Consumed by: chief cloud round 4txjyg (R192)
 Consumed at: 2026-08-27 (mid-round, read individually per this order's own
 rule that PANYA-/URGENT letters are never bulk-closed)
-Action taken: read in full. This round (R192) was already deep into
-CORE-REQUEST-014/M2 work when this order landed at 12:30 -- the order
-itself scopes item 1 (lane_hooks/ scaffold) to "chief's NEXT round", not
-this one, so no lane_hooks code was started this round; doing so now,
-mid-round, under M2 deadline pressure, would risk a rushed/unreviewed
-architecture change to runtime.py's own dispatch shape, which is exactly
-the kind of large surface change this same order (item 2) says should be
-its own single-topic PR. Recorded as a firm commitment for chief's next
-round: (1) first ticket = lane_hooks/ scaffold + migrate ONE existing
-small wiring as the example, fail-closed, console token on register+fire,
-pf-adversary required before merge; (2) PR size cap ~6 files/topic from
-next round on, multiple topics in one round = multiple sequential PRs;
-(4) empty-round rule acknowledged for chief too. Item 3 (lane B's one-time
-runtime.py exception for the world-wipe census-compose fix) is lane B's to
-execute, not chief's -- no action needed from chief unless lane B asks.
-Added to CHIEF_CONTINUATION.md as a standing obligation for next round.
+Action taken: read in full, INCLUDING the 12:4x amendment that added items
+5 and 6 (this file grew from 4 items to 6 after my first read -- the
+merge that pulled in origin/main's later commits brought the amended
+version). Items 1-4 answered in the first stub for this file (superseded
+by this one): lane_hooks scaffold + PR-size cap deferred to chief's next
+round (already mid-flight on M2 when this order landed), empty-round rule
+acknowledged. New items this pass:
+- Item 5 (timestamp discipline, TZ=Asia/Bangkok, cross-check against
+  _BRIDGE_HEARTBEAT.txt before push): applies "รอบถัดไป" (next round) per
+  the order's own ลำดับ line -- not required to retrofit this round's
+  already-pushed letters. Will follow from next round on; will add the
+  rule to AGENTS.md next round as asked.
+- Item 6 (ledger drift root-cause, HYPOTHESIS_LEDGER.json mismatches
+  behind PR #84/#96 gate-reds): explicitly scoped to "chief เริ่มรอบถัดไป"
+  (chief starts next round) by the order's own ลำดับ line. Recorded as a
+  standing obligation alongside item 1 in CHIEF_CONTINUATION.md.
