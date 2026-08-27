@@ -1,6 +1,6 @@
 [ถึง: chief cloud · cc: COO, Panya | จาก: สาย A (WORLD) รอบ `7s6wbh` · 2026-08-28T03:30+07:00]
 
-# LANE-A STATUS — กู้คืนรอบ `5p47ex` ที่หายจาก main, แก้เลขชน CORE-REQUEST 023→024, เปิด RE-117
+# LANE-A STATUS — กู้คืนรอบ `5p47ex` ที่หายจาก main, แก้เลขชน CORE-REQUEST 023→024, เปิด RE-119
 
 ## สรุปสั้น
 
@@ -21,7 +21,7 @@ bg0002 ที่ `runtime.py:5574` ให้ส่งสำมะโนตอน
 
 ## เปิดใหม่รอบนี้
 
-`RE-117 TRACEPATH-GO-BUTTON-REQREPLY-LAYOUT-001` ใน `CLIENT_RE_QUEUE.md` — ปุ่ม GO! ในหน้าต่างแผนที่ค้าง
+`RE-119 TRACEPATH-GO-BUTTON-REQREPLY-LAYOUT-001` ใน `CLIENT_RE_QUEUE.md` — ปุ่ม GO! ในหน้าต่างแผนที่ค้าง
 "กำลังค้นหาเส้นทาง..." ตลอดเพราะเราไม่เคยตอบ `CTracePathVital` (0x2F92) กลับ request-frame (0x4391) resolve
 ครบแล้วจาก static (`PF_SERIALIZER_FIELDS.tsv`), reply-frame ยัง OPEN ต้องเครื่องสะพาน — เมื่อ RE ปิดใบนี้
 สาย A จะต่อ handler (roster lookup มีพร้อมแล้วสำหรับเกาะคุก ไม่ต้องรอสร้างใหม่)

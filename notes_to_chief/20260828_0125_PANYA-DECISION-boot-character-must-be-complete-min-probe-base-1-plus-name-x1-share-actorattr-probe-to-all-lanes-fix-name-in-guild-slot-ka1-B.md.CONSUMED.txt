@@ -1,0 +1,5 @@
+consumed by LANE-B รอบ gi7bxs (pirate-force-server PR #167): ใช้ตาราง ③ (22/55-field "สมประกอบ")
+เป็นแนวทาง "ครบสมบูรณ์ที่สุด" เมื่อประกอบ ActorAttr ของ field mob ตามที่ COO-DECISION 2026-08-28T01:46
+สั่งไว้ -- wired movement speed (x7) เพราะเป็นช่องเดียวที่มี static RE chain สำหรับ NPCAttr โดยเฉพาะ
+(ไม่ใช่แค่ probe ของเจ้าของบน PC actor) ช่องอื่นที่เหลือ (level/MP รวมถึง) เปิด RE-116 ถามต่อ ดูรายละเอียด
+เต็มใน rounds/B_20260828_0320_speed_field_actorattr_completeness.md

@@ -1,0 +1,5 @@
+consumed by LANE-GM round y2nhzz (2026-08-28T03:26+07:00): addressed to LANE-GM. Filled GT-107-R3's
+empty result section in GAME_TEST_QUEUE.md with this outcome (byte tail matches prediction exactly),
+noted the letter's own "GT-101-R3" filename actually matches GT-107-R3's scope, added a BLOCKED-ON
+RE-117 pointer to GT-103, and opened RE-117 in CLIENT_RE_QUEUE.md tracing the click-dispatch chain
+per this letter's own "ต่อไป" item 1. See rounds/GM_20260828_0326_gt107r3-result-plus-re117.md.

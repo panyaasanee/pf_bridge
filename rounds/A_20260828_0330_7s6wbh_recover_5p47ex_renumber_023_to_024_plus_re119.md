@@ -38,7 +38,7 @@ push (2026-08-28T03:30+07:00): `CORE-REQUEST-024` = 0 hit ในคลังท�
   R203) ก่อนรอบนี้ — ไม่ทับ ไม่เขียนซ้ำ (ดูข้อ "เจอระหว่างกู้" ด้านบนสำหรับ conflict resolution)
 - `20260828_0235_KA1A-FOUND-GO-button-*.md` (ADDRESSEE ข้อ 3: LANE-A): chief R204 consume แล้วแต่ยัง flag
   ไว้ชัดว่า "payload layout + handler wiring เป็นงาน RE/LANE-A ไม่ใช่ chief" และยังไม่มีใครทำ — รอบนี้ทำ:
-  เปิด `RE-117 TRACEPATH-GO-BUTTON-REQREPLY-LAYOUT-001` ใน `CLIENT_RE_QUEUE.md` (static research ก่อนเปิดใบ
+  เปิด `RE-119 TRACEPATH-GO-BUTTON-REQREPLY-LAYOUT-001` ใน `CLIENT_RE_QUEUE.md` (static research ก่อนเปิดใบ
   ผ่าน pf-static-re: request-frame `0x4391` resolve ครบ 8/8 field จาก `PF_SERIALIZER_FIELDS.tsv` span เดียว,
   reply-frame `0x2F92` ยัง OPEN บล็อกที่ SUBCALL ไม่ proven — ต้องเครื่องสะพาน) แก้ไข stub เดิมของ chief
   เพิ่มบรรทัดว่า LANE-A ทำอะไรแล้ว (ไม่ทับของ chief ต่อท้ายแทน)
@@ -47,7 +47,7 @@ push (2026-08-28T03:30+07:00): `CORE-REQUEST-024` = 0 hit ในคลังท�
 
 `CTracePathVital` (0x2F92, ขากลับ) ยัง layout ไม่ปิด — มีแค่รูปร่าง (4 ฟิลด์ `tag 0x14` ติดกันที่ `+0x0..+0xC`,
 เหมือน vec3+scalar) ไม่ใช่ field ที่พิสูจน์แล้ว เขียน handler ตอบตอนนี้ = เดา ขัดกฎบ้าน (ทุกข้อสรุปต้องมี
-provenance) รอ RE-117 ปิดก่อน — roster lookup (`scene2_prison_exile_tables._by_n_id`) พร้อมใช้ทันทีที่ layout
+provenance) รอ RE-119 ปิดก่อน — roster lookup (`scene2_prison_exile_tables._by_n_id`) พร้อมใช้ทันทีที่ layout
 มา ไม่ต้องรอสร้างใหม่
 
 ## M2
@@ -59,7 +59,7 @@ provenance) รอ RE-117 ปิดก่อน — roster lookup (`scene2_priso
 
 - ไม่ได้แตะ `runtime.py`/`app.py`/canonical DB เลยทั้งรอบ
 - ไม่ claim ว่า `CTracePathVital` layout ปิดแล้ว — ยัง OPEN ตาม `PF_PROTOCOL_PRIORITY.tsv`
-- ไม่ claim ว่า `743` ใน `CTracePathReqVital` คือ quest id หรือ NPC id — เลขตรงทั้งสองตารางพร้อมกัน (RE-117
+- ไม่ claim ว่า `743` ใน `CTracePathReqVital` คือ quest id หรือ NPC id — เลขตรงทั้งสองตารางพร้อมกัน (RE-119
   objective ข้อ 2 ต้องแยกให้ชัด)
 
 ## เปิดใบให้สาย C
