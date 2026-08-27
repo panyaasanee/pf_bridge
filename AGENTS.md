@@ -387,6 +387,16 @@ hardcode ไว้) ไม่ตรงกับ generator จริง (ขา�
 diff ว่าง** ไม่ใช่ก็อป error message หรือเชื่อเลขเดิมจากรอบก่อน (ดูตัวอย่างที่ทำถูกแล้วใน R182/R192:
 คำนวณ `hashlib.sha256`/digest สดทุกครั้ง)
 
+**เพิ่มเติม R194 (session e0daaa)** — สาเหตุที่ ledger drift ซ้ำสองใน `HYPOTHESIS_LEDGER.json`/
+`FUNCTIONAL_COVERAGE.json` เจาะจงกว่า R189: ทั้งสองไฟล์ pin แบบ **hand-computed hash ไม่มี generator
+CLI** (`tools/verify_hypothesis_ledger.py`'s `CANONICAL_CONTENT_SHA256`, `tests/test_foundation_legacy_
+seam.py`'s `GRADE_SUBSET_SHA256`) — คนแก้ไฟล์ต้องรันสคริปต์ในหัวแล้วพิมพ์ hex เอง ไม่มีคำสั่งเดียวที่ regenerate
+แล้ว diff ตัวมันเอง ⇒ สอง PR ที่แก้ไฟล์เดียวกันพร้อมกัน ใบที่ merge ทีหลังจะ pin เทียบกับเนื้อหาที่คนเขียนไม่เคย
+เห็น ก่อน commit ไฟล์สองไฟล์นี้ **ต้องรันทั้งคู่ (cloud-sandboxable เต็มที่ ไม่ต้อง STATIC-ON-BRIDGE)**:
+`python3 tools/verify_hypothesis_ledger.py` และ `python3 tools/verify_functional_coverage.py`
+(exit 0 + `PASS` = ไม่มี drift) ก่อน push ทุกครั้งที่แตะไฟล์เหล่านี้หรือไฟล์ที่ผลของมันขึ้นกับ (เช่น `tests/
+test_foundation_legacy_seam.py`) — ยังไม่มี generator CLI จริง การเขียนตัวนั้นเป็นงานแยกที่ยังไม่ทำรอบนี้
+
 ---
 
 ## 8. ⚠️ ปัญหาที่รู้อยู่แล้ว — อ่านก่อนโทษตัวเอง

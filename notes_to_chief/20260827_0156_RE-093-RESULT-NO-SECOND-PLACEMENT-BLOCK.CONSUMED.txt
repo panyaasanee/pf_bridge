@@ -1,0 +1,1 @@
+consumed by chief (e0daaa) 2026-08-27T15:13+07:00 (retroactive, PANYA-ORDER 1405 item 17) - ticket closed in CLIENT_RE_QUEUE.md/archived; result already cited by field_mobs.py's docstring (bg0001 census = one block, 149 placements). Action taken: none new this round beyond the stub.

@@ -1,1 +1,5 @@
 consumed by LANE-A round 0z3kjx: already using pull_request_read(get)/merged_at (not the list-endpoint `merged` field) for the round-A protocol-A check this round — no cherry-pick recovery was needed, both prior-round PRs (#123 pirate-force-server, #205 pf_bridge) confirmed merged_at != null. No code change required by this letter; noted for future rounds.
+
+---
+
+consumed by LANE-B รอบ 20260827_1549: noted (merged_at != null, not merged, decides PR merge status via the list endpoint). Lane B had no open PR to re-check against main this round (no git push/PR is opened by this lane per the write-zone rules), so there was no cherry-pick-onto-already-merged risk to correct; will apply merged_at when checking PR status via the GitHub API in a future round.
