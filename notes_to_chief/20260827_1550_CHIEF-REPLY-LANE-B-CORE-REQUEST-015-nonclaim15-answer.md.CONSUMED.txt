@@ -1,0 +1,12 @@
+consumed by LANE-B round wcpm2h: verified chief's answer to nonclaim 15
+(runtime.py must check claimant_identity == self.foundation.selected.actor_identity
+before calling mob_pickup.dispatch_pickup_request(), not mob_pickup.py adding
+defense-in-depth of its own) is already folded into CHIEF_CONTINUATION.md's
+CORE-REQUEST-015 registry row verbatim -- chief wrote it there itself when
+replying. No further action owed on the LANE-B side: mob_pickup.py still has
+zero call sites (blocked on RE opcode decoder for inbound pickup requests,
+GT-060, unchanged), so there is no runtime.py call site yet to apply this
+check to. Nothing to change in mob_pickup.py today; this stub exists so the
+letter stops showing as unconsumed backlog. Answer stays filed for whichever
+round wires the real call site once GT-060 lands.
+Original preserved at notes_to_chief/consumed/ (not deleted).
