@@ -167,3 +167,76 @@ none
 - **ไม่ได้แตะ** `runtime.py` · `app.py` · `current/pf_login_game_server_v141.py`
 
 — สาย A · WORLD
+
+---
+
+## (ADDENDUM 2026-08-27T~16:xx+07:00, สาย A, รอบ `0z3kjx` ต่อ) pf-adversary pass ภายนอก พบช่องว่างจริง 1 จุด (แก้แล้ว) + เอกสารเก่า 1 จุด (แก้แล้ว)
+
+ก่อนส่งต่อ merge ผู้ใช้รัน pf-adversary รอบสองจากภายนอก (แยกจาก ⑦ ที่สาย A ตรวจเอง) พบ **จริง medium-severity 1
+จุด** และ stale-docs อีก 1 จุด ทั้งสองแก้แล้วในคอมมิตถัดไปของรอบเดียวกันนี้ ไม่เปิดรอบใหม่
+
+### จุดที่ 1 (ต้องแก้, medium) - login path เสีย fail-safe ไปโดยไม่ตั้งใจ
+
+`resolve_columbus_arrival()` เรียก `world_scene_entry.resolve_entry()` — และฟังก์ชันนี้คือ **สายเดียวกันเป๊ะ**
+กับที่ `runtime.py:4643-4685` เรียกตอน login จริง โดยใช้ `self.foundation.selected.position` คือ `scene_id`
+ที่ persist ไว้ในแถวของตัวละครนั้นจริง ๆ ไม่ใช่ตำแหน่ง synthetic **ก่อนรอบนี้**: `resolve_entry()` refuse ฉาก 17
+เสมอ (ไม่มีเงื่อนไข) สำหรับทุกแถวที่ persist ชื่อฉาก 17 ไว้ - login รวมอยู่ด้วย เพราะ `target.spawn is None` ทำให้
+raise `SceneEntryRefused` **หลังรอบนี้ (ก่อนแก้)**: `target.spawn` กลายเป็น `(0,0,0)` แล้ว refusal เดิมหายไป -
+หมายความว่าถ้าแถวของตัวละครใน DB เคยมี `scene_id=17` (ไม่มี CHECK constraint ห้ามไว้เลย -
+`migrations/001_initial.sql:5`) ตัวละครนั้น login ครั้งถัดไปจะ **สำเร็จ** และถูกวางไว้กลางทะเลที่ `(0,0,0)` -
+ข้ามการ refuse แบบ vehicle-bind atomicity ของ `dispatch_columbus_quest3021` ไปเลย เพราะ login path ไม่เคยเรียก
+dispatch function นั้นเลย มันอ่านแค่ registry ผ่าน `resolve_entry` เท่านั้น สถานการณ์นี้ยัง latent อยู่ (ยังไม่มี
+อะไรเขียน `scene_id=17` ลง DB จริง เพราะ dispatch ไม่เคยสำเร็จ) แต่มันเงียบ ๆ เอา fail-closed guarantee ของฉาก 17
+ออกไปโดยไม่มีใครตั้งใจ และรอบนี้ (ก่อนแก้) ไม่มีเทสที่เรียก `resolve_entry` ตรง ๆ ด้วยแถว persist ฉาก 17 เลย
+(เทสเดิมเรียกผ่าน `resolve_columbus_arrival`'s synthetic call เท่านั้น)
+
+**การแก้**: เพิ่มฟิลด์ `login_entry_allowed` (bool, optional) บน destination ใน registry - default `True`
+เมื่อไม่ระบุ (ทุกฉากเดิม 1/2/278/997 ไม่เปลี่ยนพฤติกรรมเลย) ฉาก 17 ตั้งเป็น `false` ตรง ๆ พร้อมคำอธิบายในไฟล์
+`table_row_differences.login_entry_allowed_because` เพิ่มพารามิเตอร์ `via_login: bool = True` ใน
+`world_scene_entry.resolve_entry()` - default `True` หมายถึง "นี่คือ login path" และจะ raise
+`SceneEntryRefused(REFUSED_NOT_ALLOWED_AT_LOGIN, ...)` ถ้าฉากนั้น `login_entry_allowed=False` **ไม่แตะ
+`runtime.py` เลย** เพราะ default ของ `via_login` ทำหน้าที่แทน - `runtime.py`'s call site เดิม
+(`resolve_entry(position, registry=...)`, ไม่ส่ง keyword ใหม่) ได้พฤติกรรม fail-closed อัตโนมัติโดยไม่ต้องแก้
+บรรทัดเดียว `columbus_quest_dispatch.resolve_columbus_arrival()` (โมดูลของสาย A เอง) แก้ให้ส่ง
+`via_login=False` explicit เพราะมันไม่ได้อ่านแถว persist ของตัวละครเลย (`synthetic_stored` สร้างใหม่ทุกครั้ง)
+
+**เทส regression ใหม่**: `tests/test_world_scene_entry.py` เพิ่มคลาส `LoginEntryRestrictionTests` (8 เทส) พิสูจน์
+ตรง ๆ ว่าแถว persist ที่ชื่อฉาก 17 (ไม่ใช่ synthetic call ของ Columbus) ยัง refuse ที่ login call shape เดิม
+เป๊ะ (ไม่ส่ง `via_login`) และ `via_login=False` เท่านั้นที่เปิดทางให้ผ่าน `tests/test_world_scene_travel.py`
+เพิ่ม 3 เทสสำหรับ field parsing/default `tests/test_columbus_quest_dispatch.py` เพิ่ม 1 เทสยืนยันว่า
+`resolve_columbus_arrival` เรียก `resolve_entry(..., via_login=False)` จริง (ไม่ใช่แค่ default)
+
+### จุดที่ 2 (ต้องแก้, low) - เอกสารเก่า
+
+`docs/FUNCTIONAL_COVERAGE.json`'s `CORE-REQUEST-014` entry (บรรทัดเดิม ~844) ยังเขียนว่ามี "two named,
+independent evidence gaps" ซึ่งไม่จริงแล้วตั้งแต่ต้นรอบนี้ (เหลือ gap เดียว, ฉาก 17 มี decreed placeholder spawn
+แล้ว) แก้โดยเพิ่มย่อหน้า UPDATE ใหม่ (ไม่ลบของเดิม) บอกสถานะปัจจุบันจริง รวมการแก้ข้อ 1 ข้างต้นด้วย
+
+### ไฟล์ที่แตะเพิ่มในคอมมิตแก้นี้ (`pirate-force-server`, ไม่ใช่ของรอบ `4ff9ce9` เดิม)
+
+1. `src/pirateforce_foundation/world_scene_travel.py` - เพิ่มฟิลด์ `login_entry_allowed` (schema + dataclass +
+   loader validation)
+2. `src/pirateforce_foundation/world_scene_entry.py` - เพิ่ม `via_login` param + `REFUSED_NOT_ALLOWED_AT_LOGIN`
+3. `src/pirateforce_foundation/columbus_quest_dispatch.py` - ส่ง `via_login=False` explicit + docstring
+4. `scenarios/world_scene_registry_001.json` - ฉาก 17 เพิ่ม `login_entry_allowed: false` + คำอธิบาย
+5. `tests/test_world_scene_entry.py` - +8 เทส (`LoginEntryRestrictionTests`)
+6. `tests/test_world_scene_travel.py` - +3 เทส
+7. `tests/test_columbus_quest_dispatch.py` - +1 เทส
+8. `docs/FUNCTIONAL_COVERAGE.json` - แก้ note เดิม 1 จุด (stale docs)
+
+### ตัวเลขที่วัดได้ (หลังแก้)
+
+- เทสกลุ่มเป้าหมาย (`test_world_scene_travel` + `test_world_scene_entry` + `test_columbus_quest_dispatch` +
+  `test_columbus_quest_dispatch_wiring` + `test_world_travel_gate`) = **208/208 ผ่าน**
+- เทสทั้งเรโป: `python3 -m unittest discover -s tests` = **3555 เทส (3543 เดิม + 12 ใหม่), error 18 ตัว
+  (capstone ModuleNotFoundError เดิม เหมือนรอบก่อน ไม่มีตัวใหม่), 0 FAIL**
+- cp874-encodability: ทุกไฟล์ที่แตะใน `src/`/`tests/`/`scenarios/` ผ่านหมด (`docs/` ไม่อยู่ใน scope ของ gate
+  นี้ - ไฟล์ `FUNCTIONAL_COVERAGE.json` มีภาษาไทย utf-8 เดิมอยู่แล้วจากก่อนรอบนี้ ไม่เกี่ยวกับข้อความที่เพิ่มเข้า
+  ไปรอบนี้ซึ่งเป็น ASCII ล้วน)
+
+### CORE-REQUEST (รอบแก้นี้)
+
+none - ไม่ต้องแตะ `runtime.py` เลย ตามที่ผู้ใช้สั่งไว้: ทางที่เลือก (option 2 ในสองทางที่เสนอ) ออกแบบมาเพื่อไม่
+ต้องแตะ `runtime.py` โดยเฉพาะ - default ของ `via_login=True` ทำหน้าที่แทนการเพิ่ม keyword ที่ call site เดิม
+
+— สาย A · WORLD
