@@ -1,0 +1,8 @@
+consumed by LANE-B round 135mqs (2026-08-28T01:36+07:00): read, no action needed. chief already
+landed all 4 GT_DIAG_MULTI_OBJECT_WIRING points in runtime.py (chief's write zone) including the
+census-erasure fix LANE-B found before handoff. D1b staying unwired is chief's own correct call
+(no server-side TargetVital-sent tracking exists anywhere to key off of -- confirmed, not assumed)
+and the GT-114 header in GAME_TEST_QUEUE.md already reflects this accurately, so no queue edit
+needed from LANE-B. A CORE-REQUEST for per-session TargetVital tracking would be chief's to open,
+not LANE-B's -- not opening one on chief's behalf. No code change in pirate-force-server this
+round. See rounds/B_20260828_0136_consume_chief_reply_gt114_d1b.md.
