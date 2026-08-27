@@ -27,3 +27,8 @@
 - ห้ามอ้าง "NN = n_ID" เป็นข้อเท็จจริงจนกว่า anchor ครบ 7 · ห้าม brute-force วางทีละตัวให้เจ้าของดู (กฎ 04:5x) · ห้ามใช้ v141 source_name เป็นตัวตน · ห้ามเรียกเจ้าของก่อน headless proof ข้อ 4
 
 — จาก Panya (เขียนแทนโดย attended session "กะ1-A") · ADDRESSEE: LANE-A, LANE-B, RE, chief
+
+## ADDENDUM 20:18 — เจ้าของอนุมัติ: "นับว่าเป็นข่าวดี ทำเลย" + โน้ตเทคนิคจากกะ1-A
+- **มีผลทันที ทุกสายเริ่ม M1-P รอบถัดไป** (A :21 · B :31 · chief :51 · RE ตามคิว)
+- ทางเข้าฉาก 2 ข้อ 2: ตรวจซอร์สแล้ว `world_scene_liveness.py` seed `MEASURED_SCENE_IDS` มีฉาก 2 (SCENE-001) และโมดูล "รายงานอย่างเดียว ไม่ rewrite แถว" ⇒ login ที่แถว character_positions.scene_id=2 จะถูก honour เข้าฉาก 2 · **แต่ `world_scene_travel.CENSUS_SOURCE = "bg0001_census"` ฮาร์ดโค้ด** — census composer ต้อง generalize ตาม scene_id (อ่าน `gamedata/scene/Bg0002/Bg0002.placements.tsv` เมื่อ scene 2) — นี่คืองานหลักข้อ 1 ของสาย A ร่วม chief
+- มอนของ DIAG-001 (ใบ 1855): **เจ้าของเลือก Mountain Deer n_ID 27** (MOBS: M005 `M005_000_000_SP1;M005_000_000_SP2`, n_AI_COMBAT 150, n_AI_WANDER 16, f_RATIO_EXP 1.0, drop 5400001/2701001/2802222) — ใช้ตัวนี้ทั้ง 5 object
