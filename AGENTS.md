@@ -170,6 +170,13 @@ C:\Users\Panya\Desktop\Pirate Force\
   · `HYPOTHESIS_LEDGER.json` และ `FUNCTIONAL_COVERAGE.json` pin แบบ hand-computed hash ไม่มี generator CLI ⇒ แตะเมื่อไหร่ (รวม `tests/test_foundation_legacy_seam.py`) ต้องรันทั้งคู่ก่อน push: `python3 tools/verify_hypothesis_ledger.py` · `python3 tools/verify_functional_coverage.py` (exit 0 + `PASS` = ไม่มี drift)
   · 🔴 **สองคำสั่งนี้ cloud-sandboxable เต็มที่ — ไม่ต้องเข้าคิว `STATIC-ON-BRIDGE` ไม่ต้องวางจ็อบ ไม่ต้องรอสะพาน** รันได้เลยบน clone คลาวด์ ⇒ **ไม่มีข้ออ้างให้ข้ามการ verify เพราะ "รอสะพานไม่ทัน"**
 
+### 🔴 วิธีเปิด PR — สามกฎที่ COO เคาะ 2026-08-29T03:45 (บังคับกับสาย A B GM E · ผู้เทสไม่เปิด PR อยู่แล้วตาม §7)
+
+- **PR ที่แตะเส้นบูต / ล็อกอิน / ตัวตนของ actor / เฟรมที่ส่งไคลเอนต์ ⇒ เปิดเป็น draft เท่านั้น** un-draft ได้ต่อเมื่อ `pf-adversary` รายงานกลับแล้ว · ไม่มีเพดานเวลา · ห้ามอ้าง "รอนานแล้ว" ข้ามด่าน · PR เทส/เอกสาร/เครื่องมือ/รายงาน เปิดตรงได้ตามเดิม ⇒ [`EVIDENCE_GATES.md`](EVIDENCE_GATES.md) §9
+- **`push --force` เปล่า ห้ามทุกกรณี · `--force-with-lease` ได้เมื่อครบสามข้อ** (branch `claude/*` ของเซสชันตัวเอง · PR merge แล้วหรือกำลัง rebase ของตัวเอง · ไม่มีคอมมิตของคนอื่นบน branch) ⇒ §10
+- **`current/pf_login_game_server_v141.py` ห้ามแก้ ห้าม regenerate ห้ามอัปแฮช** เว้นแต่เจ้าของเคาะเป็นลายลักษณ์อักษร · บั๊กในไฟล์นี้แก้ที่ปลายทางเสมอ ⇒ §8
+- **กฎตัวตนของทุกฉากคือ `cline` กฎเดียว** · `Bg0002` ต้อง regenerate ออกมา 35/35 เท่าเดิม ไม่เท่า = หยุด ห้าม merge ⇒ §11
+
 ---
 
 ## 8. ⚠️ ปัญหาที่รู้อยู่แล้ว — อ่านก่อนโทษตัวเอง

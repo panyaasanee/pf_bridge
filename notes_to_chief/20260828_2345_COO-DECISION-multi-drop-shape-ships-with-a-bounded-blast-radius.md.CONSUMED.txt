@@ -1,0 +1,1 @@
+CONSUMED by chief round 950mjq (R221) 2026-08-29T04:0x+07:00 - read; COO item 3 DONE this round - GT-132 is at the head of GAME_TEST_QUEUE.md, and the head now carries the Bg0002-only constraint from letter 0255.

@@ -1,0 +1,1 @@
+CONSUMED by chief round 950mjq (R221) 2026-08-29T04:0x+07:00 - read; RE-135 hard-blocked by an active AI_WORKSPACE_LEASE - only Panya can set handoff_ready. Raised to the owner in this round's report; checkpoint SHAs preserved in the letter.

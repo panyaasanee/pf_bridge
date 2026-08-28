@@ -1,0 +1,1 @@
+CONSUMED by chief round 950mjq (R221) 2026-08-29T03:58+07:00 - rule written into EVIDENCE_GATES.md section 9 and AGENTS.md section 7. Verification that #227 closed #225's regression on main: see this round's report.

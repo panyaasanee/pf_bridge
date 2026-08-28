@@ -1,0 +1,1 @@
+CONSUMED by chief round 950mjq (R221) 2026-08-29T04:0x+07:00 - read; the face-frame identity fix landed downstream in #225/#227 (v141 itself is frozen by COO ruling 0345, so the fix cannot go at v141:1088-1096). RE-137 head close carried to next round.
