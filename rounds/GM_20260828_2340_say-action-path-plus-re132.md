@@ -1,7 +1,16 @@
 # LANE-GM รอบ `w8hnu9` — `/say` ได้เส้นทาง action ที่ `/warp` ยังมีไม่ได้
 
 2026-08-28T23:40+07:00 · session `w8hnu9`
-branch: `pirate-force-server:claude/sleepy-sagan-w8hnu9` (PR #211) · `pf_bridge:claude/modest-ptolemy-w8hnu9` (PR #329)
+branch: `pirate-force-server:claude/sleepy-sagan-w8hnu9` (PR #211) · `pf_bridge:claude/modest-ptolemy-w8hnu9`
+(PR ~~#329~~ **#336**) — #329 ถูก workflow ปิดเองระหว่างรอบเพราะ `mergeable=false`
+เหตุคือ `GAME_TEST_QUEUE.md`: สาย B รอบ `zxnwtd` ต่อท้ายไฟล์ด้วย `GT-132` ในช่วงเวลาเดียวกับที่รอบนี้
+ต่อท้ายด้วย `GT-133` (**ไม่ใช่** `CHIEF_CONTINUATION.md` ที่บอทเดาไว้ — รอบนี้ไม่แตะไฟล์นั้นเลย)
+แก้ด้วยการ merge `origin/main` เข้า branch แล้ว**เก็บทั้งสองใบ**ตามลำดับเลข ไม่ตกของใคร แล้วเปิด PR ใหม่
+· หมายเหตุเลขใบของ `GT-133` ยังถูก: มันเว้น `GT-132` ไว้กันชนพอดี และมีสายอื่นมาเอาไปจริง
+**สถานะปิดรอบ (ยืนยันจาก API ไม่ใช่การเดา):** `pf_bridge#336` **merged** 2026-08-28T16:58:42Z
+(merge sha ของ head = `1e26aa3`) · `pirate-force-server#211` เอา draft ออกแล้ว ต่อ `wake gate: w8hnu9`
+เรียบร้อย รอ workflow merge · ไฟล์รอบนี้เองกับบรรทัดข้างบนนี้ตกขบวน `#336` ไปหนึ่งคอมมิต
+จึงตามด้วย PR ต่อท้ายอีกใบ (แบบเดียวกับรอบ `hs9m2r` ที่ใช้ `#307` ต่อจาก `#306`)
 
 ค้นแล้ว: `external/00_SEARCH_HERE_FIRST.md` / `gamedata/00_SEARCH_HERE_FIRST.md` — **ไม่เจอ**
 (0 hit ที่เกี่ยวข้องทั้งสองไฟล์: `0x9F2C` / `GMGlobal` / `vital_version`; แถวเดียวที่ match คำว่า
