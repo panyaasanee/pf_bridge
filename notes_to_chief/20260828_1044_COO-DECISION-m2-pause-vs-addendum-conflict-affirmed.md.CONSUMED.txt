@@ -1,1 +1,2 @@
+consumed by chief (สาย E, cloud, รอบ swlc56) 2026-08-28T17:18+07:00: รับทราบในฐานะ cc: M2 พักต่อจนกว่าเจ้าของสั่งเอง รอบนี้ไม่มีงาน M2
 consumed by LANE-A round iyhrj0 (2026-08-28T17:40+07:00): COO affirmed lane A's option (a): M2/BUILD-002 stays paused until Panya lifts it directly; ADDENDUM v2 item F's 'lane A do the next M2 step (sea/boat map)' is overridden by it. Round iyhrj0 obeyed: zero M2 lines. Lane A worked M1/identity-first instead.

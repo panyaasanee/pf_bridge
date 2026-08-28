@@ -4309,7 +4309,7 @@ canonical, copy DB สองใบตามบล็อก db, เตรีย�
 
 ---
 
-## GT-103 GM-002 COMMAND-WIRE-CAPTURE-MATRIX-001: ล็อกอินด้วยบัญชี GM แล้วหา/เปิด GM editor widget พิมพ์ข้อความหลายแบบ -- capture file ของ `0x51E9` ขึ้นที่ `capture/gm_command_capture/` ไหม (path นี้ live บน production ครั้งแรกรอบนี้)  [PENDING -- unblocked: RE-118 CLOSED PASS/DONE 2026-08-28T04:1x+07:00 (CLIENT_RE_QUEUE.md), gate ระบุแล้วว่าไม่ใช่ field ใหม่บนเฟรม 0x5A19 แต่เป็น current-UI-key context ที่ dispatcher ต้องการ -- A/B procedure เพิ่มที่ step 2 ด้านล่าง]
+## GT-103 GM-002 COMMAND-WIRE-CAPTURE-MATRIX-001: ล็อกอินด้วยบัญชี GM แล้วหา/เปิด GM editor widget พิมพ์ข้อความหลายแบบ -- capture file ของ `0x51E9` ขึ้นที่ `capture/gm_command_capture/` ไหม (path นี้ live บน production ครั้งแรกรอบนี้)  [NO-RESULT ต่อ claim ของตัวเอง -- A/B ทั้งสี่สถานะ UI เงียบสนิท, blocked on RE-126 · ปิดหัวใบโดย LANE-GM (เจ้าของใบ) รอบ `hs9m2r` 2026-08-28T17:1x+07:00 จากผล attended กะ1-A `notes_to_chief/20260828_1140_GT103AB-RESULT-NEGATIVE-four-ui-states-all-silent-RE118-panel-hypothesis-falsified.md` · OBSERVER_CONFIRMED: 2026-08-28T11:36-11:37+07:00 (BOOT_COMMIT `336857cd` = main HEAD, ไร้แฟล็ก) · เจ้าของคลิก `BT_GM` 4 สถานะ (HUD เปล่า / แผนที่เปิดค้าง / กระเป๋าเปิดค้าง / ปิดกระเป๋าแล้วคลิกซ้ำ) เงียบทุกครั้ง · สำมะโนเฟรมขาเข้าทั้งบูต `0x51E9` = 0 ⇒ `capture/gm_command_capture/` ABSENT ถูกต้องแล้ว ไม่ใช่ teardown fail ⇒ **ใบนี้ไม่เคยไปถึงข้อ 3 จึงไม่มีผลต่อ claim ของตัวเอง** · `TargetPosVital` x3 ช่วงเดียวกัน = client มีชีวิต ไม่ใช่เซสชันตาย · ผลข้างเคียงที่มีค่าสูง: สมมติฐานเชิงปฏิบัติของ RE-118 (เปิด panel ให้ current-UI key ไม่ว่าง) **ถูกหักล้าง** ⇒ เปิด `RE-126` ต่อ (ประตูบานแรก `this+0x48` แทนบานสุดท้าย) · [ไม่อ้าง] ว่า capture path ของ `0x51E9` ใช้ได้หรือไม่ -- ยังไม่เคยถูกทดสอบ live เลย · 🔴 **ทางเลี่ยง:** `GT-127` (คำสั่ง GM ผ่านกล่องแชท `0xAC52`) ไม่ต้องรอใบนี้และไม่ต้องรอ `RE-126`]
 
 > เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md. grep ยืนยันก่อนจอง: GT-103 = 0 hit ⇒ ใบนี้คือ GT-103 (RE-104
 > ถูกใช้แล้วในรอบเดียวกัน โดยใบพี่น้อง). เลขว่างถัดไป = 105. ใบเก่าทุกใบอยู่ที่เดิม ห้ามแตะ.
@@ -4331,10 +4331,20 @@ canonical, copy DB สองใบตามบล็อก db, เตรีย�
 ```
 py -3 pf_resolve_green_boot.py --repo "C:\path\to\pirate-force-server" --fetch
 git grep -n "GM_RUN_GM_COMMAND_VITAL_ID" <SHA> -- src/pirateforce_foundation/runtime.py
-git grep -n "handle_gm_run_command_vital" <SHA> -- src/pirateforce_foundation/runtime.py
+git grep -n "def handle_gm_run_command_vital" <SHA> -- src/pirateforce_foundation/gm/dispatch.py
 git grep -n "def capture_raw_gm_command" <SHA> -- src/pirateforce_foundation/gm/command_capture.py
+git grep -n "production_allowed = True" <SHA> -- src/pirateforce_foundation/lane_hooks/lane_gm_run_command.py
 ```
 ขาดข้อใดข้อหนึ่ง = BLOCKED (precondition gate) -- ไปทำใบอื่น. (คนละแบบกับ "หา widget ไม่เจอ" ข้างล่าง)
+
+> 🔴 แก้ด่าน 2 เมื่อ 2026-08-28T17:1x+07:00 โดย LANE-GM (เจ้าของใบ) รอบ `hs9m2r` ตามที่กะ1-A รายงานใน
+> `notes_to_chief/20260828_1140_GT103AB-RESULT-NEGATIVE-*.md`: บรรทัดเดิม
+> `git grep "handle_gm_run_command_vital" -- src/pirateforce_foundation/runtime.py` **ล้าสมัย** -- โค้ด
+> ย้ายออกจาก `runtime.py` ไป `lane_hooks/lane_gm_run_command.py` + `gm/dispatch.py` แล้วตั้งแต่ v6.3
+> lane_hooks move-out ⇒ ทำตามใบตรง ๆ จะได้ 0 hit และขึ้น **BLOCKED ทั้งที่ของอยู่ครบ** (กะ1-A เจอสด ๆ
+> ตอนบูต 11:36 และต้องเปลี่ยนด่านเอง) ชุด 4 บรรทัดข้างบนคือชุดที่กะ1-A รันจริงแล้วผ่านทั้งหมด
+> ประวัติเดิมขีดฆ่า ไม่ลบ: บรรทัดที่ถอดออกคือ `git grep -n "handle_gm_run_command_vital" <SHA> --
+> src/pirateforce_foundation/runtime.py`
 
 ### db / server args
 ```
@@ -5048,7 +5058,7 @@ client-observable: อย่างใดอย่างหนึ่งที่�
 
 ---
 
-## GT-110 CORE-REQUEST-017-1 GM-LOGIN-SCENE-OVERRIDE-VISUAL-001: per-account login-scene override, wired into START_GAME_REQ -- does a real client actually render the overridden scene on login  [PENDING -- safety fix 2026-08-28: now runs on the standalone path, no GM_UpdateGMStateVital/0x5A19 sent, no longer waits on GT-107-R3, see server args below]
+## GT-110 CORE-REQUEST-017-1 GM-LOGIN-SCENE-OVERRIDE-VISUAL-001: per-account login-scene override, wired into START_GAME_REQ -- does a real client actually render the overridden scene on login  [PARKED -- ไม่ใช่ทางวิกฤต: ความสามารถซ้ำกับ seed run-DB ที่พิสูจน์แล้ว 3 รอบ (M1-P, GT-116/121/120) · ไม่มีเนื้อหา GM เหลือหลัง SAFETY FIX 28 ส.ค. (ใบนี้เดินทาง standalone `PF_GM_LOGIN_SCENE_STANDALONE_CONFIG` ⇒ `is_gm` = False ตลอดใบ ไม่มี 0x5A19 ไม่มี GM command surface) · พักตามคำสั่งเจ้าของ `notes_to_chief/20260828_1105_PANYA-ASK-LANE-GM-*.md` ข้อ 1(ก)/1(ข) ดำเนินการโดย LANE-GM (เจ้าของใบ) รอบ `hs9m2r` 2026-08-28T17:1x+07:00 · **ห้ามลบใบ ห้ามย้ายตำแหน่ง** · ถอดออกจากงบรอบของสาย GM แล้ว -- ชื่อใบ `GM-LOGIN-SCENE-OVERRIDE-VISUAL-001` ไม่ตรงเนื้อจริง ควรเป็นใบฟีเจอร์เซิร์ฟเวอร์ธรรมดา (chief จัดสาย, ข้อ 1(ข) ADDRESSEE: chief) · ถ้าจะรันในอนาคตต้องเขียน objective ใหม่ให้ตรงคำถามที่เหลือจริง = "เฟรม resync กลางคันใช้ได้กับ client จริงไหม" ไม่ใช่ "GM วาร์ปได้ไหม" (ข้อ 1(ค)) · ประวัติเดิมขีดฆ่า ไม่ลบ: หัวใบเดิมคือ `[PENDING -- safety fix 2026-08-28: now runs on the standalone path, no GM_UpdateGMStateVital/0x5A19 sent, no longer waits on GT-107-R3, see server args below]`]
 
 > เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md. จองไว้เป็น GT-109 ตอนแรก (grep ยืนยัน ณ ขณะนั้น: 0 hit)
 > แต่ LANE-A จองเลขเดียวกันพร้อมกัน (รอบ jafskv, VEHICLE-BIND-WIRE-CAPTURE-001) และ commit ของเขาลง
@@ -6213,6 +6223,212 @@ valid, informative negative, not a test failure). Name-label colours per the man
 - Single account, single session, two kill+pickup attempts -- not a stack/full-bag/race-condition test.
 - If precondition (a) or (b)'s call-site grep fails at boot time, the entire entry is BLOCKED, not
   NO-RESULT/FAIL -- record "รอ CORE-REQUEST" and stop.
+
+### result (tester fills this in)
+```
+
+```
+
+## GT-127 GM-003 CHAT-COMMAND-DOOR-001: GM พิมพ์คำสั่งลง**กล่องแชทธรรมดา**ของเกม (ไม่ใช่หน้าต่าง `BT_GM`/`GMUI_BASIC` ที่คลิกแล้วเงียบ) แล้วเซิร์ฟเวอร์อ่านคำสั่งนั้นได้จริงไหม -- ตัดสินที่ ndjson audit log ไม่ใช่ผลบนจอ  [BLOCKED-ON-WIRING -- `lane_hooks/lane_gm_chat_command.py` ลงทะเบียนบน point `vital_inbound_chat_local_talk` แล้ว แต่ `runtime.py` วันนี้มี `lane_hooks.fire()` **จุดเดียว** (สาขา `0x51E9` ที่ `runtime.py:4824`) และ **ไม่มี**จุดแทรกที่สาขา `0xAC52` ⇒ hook ไม่เคยยิงแม้แต่ครั้งเดียว · `CORE-REQUEST-GM-028` (`notes_to_chief`, รอบนี้) ขอสามบรรทัดนั้นจาก chief · 🔴 ห้ามบูตใบนี้จนกว่าด่าน 2 จะ grep เจอจุดเรียกจริงบน `main`]
+
+> เลขใบ: ตัวนับเดียวร่วมกับ `CLIENT_RE_QUEUE.md`, prefix สองแบบ ห้ามแยกตัวนับ. รอบนี้ (LANE-GM รอบ `hs9m2r`,
+> 2026-08-28) จอง `RE-126` ที่ `CLIENT_RE_QUEUE.md` และ `GT-127` ที่ไฟล์นี้. grep ยืนยันก่อนจอง:
+> `GT-126` / `GT-127` / `RE-126` = 0 hit ทั้งสองไฟล์. เลขสูงสุดก่อนหน้า = `GT-124` / `RE-125`.
+> ใบเก่าทุกใบอยู่ที่เดิม ไม่ถูกแตะ ไม่ถูกย้าย -- ใบนี้เป็นใบใหม่ ไม่แทนที่ใบใด.
+
+### ที่มา (ยืนยันแล้ว -- ห้าม re-derive ระหว่างรอบ)
+- ไคลเอนต์ส่งทุกบรรทัดที่พิมพ์ในกล่องแชทเป็น vital `0xAC52` `Channel_LocalTalkMessageVital`. เพย์โหลด =
+  wstring#1 (speaker, ฝั่ง client->server ว่างเสมอ) + wstring#2 (ข้อความที่พิมพ์); แต่ละ wstring =
+  tag `0x48` + u32 LE ความยาวไบต์ + UTF-16LE ล้วน ไม่มี terminator ⇒ รวม = `5 + n1 + 5 + n2`.
+- หลักฐานชั้นที่ 1: `GT-006`/`GT-009` จับเพย์โหลดจริงสามความยาว -- 34B ของ `"PFCHATPROBE1"` (12 ตัว),
+  20B ของ `"SHORT"` (5), 46B ของ `"PFCHATPROBETOOLONG"` (18) -- ตารางอยู่ที่
+  `pf_bridge/reports/PF_CHAT_ECHO002_SPEAKER_FIELD_RESEARCH_20260818.md` หัวข้อ (a).
+  ชั้นที่ 2: `tag 0x48 + u32 len + UTF-16LE` คือ wide-string encoding มาตรฐานของไคลเอนต์ Grade A
+  (พิสูจน์กับ `CreateActorDataEx`/`ActorAttr` names).
+- โมดูลใหม่รอบนี้: `src/pirateforce_foundation/gm/chat_command.py` (`handle_local_talk_chat`) +
+  hook `src/pirateforce_foundation/lane_hooks/lane_gm_chat_command.py` (point `vital_inbound_chat_local_talk`).
+  unit test 45 ตัวผ่าน -- headless เท่านั้น ยังไม่เคยยิงกับไคลเอนต์จริง.
+- ไวยากรณ์ (`gm/commands.py` เดิม): sigil คือ `/` นำหน้า -- `warp <scene_id> [x y]`, `npc on|off <mob_id>`,
+  `item <id> <n>`, `lv <n>`, `spawn <mob_id>`, `say <message>`.
+- 🔴 **GM-003 v1 ยังไม่มีผลต่อเกมเลย** -- คำสั่งที่รู้จักจะถูก parse แล้วเขียนลง ndjson audit log
+  `capture/gm_command_log.ndjson` พร้อม `"executed": false`. **เรคคอร์ดในล็อกนั้นคือเกณฑ์ผ่าน ไม่ใช่ผลบนจอ.**
+- event ที่ hook พิมพ์: `gm_chat_command_accepted_<name>` เมื่อสำเร็จ, `gm_chat_command_refused_<reason>`
+  เมื่อไม่สำเร็จ (`not_gm_account`, `not_a_command`, `rate_limited`, `command_parse_error_*`).
+- สิทธิ์: เฉพาะบัญชีใน allowlist ฝั่งเซิร์ฟเวอร์ (`PF_GM_ACCOUNTS_CONFIG` -> ไฟล์ json
+  `{"gm_accounts": ["<name>"]}`) เท่านั้นที่ได้อะไร -- คนอื่นถูกปฏิเสธที่ identity **ก่อน**จะ decode เพย์โหลด.
+- ประตูอีกบาน (`BT_GM`/`GMUI_BASIC`/`0x51E9`) ยังตายอยู่: `GT-103` (NO-RESULT ต่อ claim ตัวเอง), `RE-126`.
+  ใบนี้ **ไม่รอ**สองใบนั้น.
+
+### objective (claim เดียว)
+บนบูตไร้แฟล็ก บัญชีที่อยู่ใน GM allowlist พิมพ์คำสั่งที่ขึ้นต้นด้วย `/` ลงกล่องแชทธรรมดา -- เซิร์ฟเวอร์
+**อ่านและ parse คำสั่งนั้นได้จริง** (มีเรคคอร์ดใน `capture/gm_command_log.ndjson`) และบัญชีที่ไม่อยู่ใน
+allowlist พิมพ์คำสั่งเดียวกันแล้ว **ไม่ได้อะไรเลย** ใช่หรือไม่.
+
+### คำทำนาย (คำทำนายที่ผิด = ผล ไม่ใช่ความล้มเหลว)
+- P1 [หัวใจของใบ] `/warp 2` และ `/lv 30` -> `gm_chat_command_accepted_warp` / `_lv` + ndjson 2 เรคคอร์ด.
+- P2 ประโยคธรรมดา -> `refused_not_a_command`; `/notacommand xyz` -> `refused_command_parse_error_*`;
+  บัญชีนอก allowlist -> `refused_not_gm_account`. ทั้งสามไม่มีเรคคอร์ดใน ndjson.
+- P3 [บนจอ] เลนนี้ต้อง**มองไม่เห็น** -- บรรทัดแชทแสดงผลเหมือนเดิมทุกประการ ไม่มี warp ไม่มีเลเวลขึ้น.
+- P4 [ตัวหักล้าง, ผลลบที่มีค่าเท่ากับ PASS] คอนโซลเงียบสนิททั้งสี่บรรทัดทั้งที่ด่าน 2 ผ่าน ⇒ จุดเรียก
+  `lane_hooks.fire()` ที่สาขา `0xAC52` ถูกวางผิดที่/ผิดชื่อ point -> redirect ไปที่ `CORE-REQUEST-GM-028`
+  พร้อม diff ของ `runtime.py` จริง ไม่ใช่เปิดใบเทสใหม่.
+
+### ก่อนบูต -- ด่าน 0 / ด่าน 1 / ด่าน 2
+**ด่าน 0 (บัญชี/คอนฟิก):** ใช้ซ้ำการอนุมัติเดิม
+`notes_to_chief/20260827_1200_CHIEF-REPLY-GT101-gm-accounts-test-config-approved.md` -- ต้องมี (ก) บัญชี GM
+ที่อยู่ในไฟล์ allowlist และ (ข) บัญชีที่สอง **ที่ไม่อยู่** ในไฟล์นั้น (คู่ควบคุม).
+ไม่มีบัญชีที่สอง = ทำได้แค่ครึ่งใบ ให้บันทึกว่าข้ามคู่ควบคุมเพราะเหตุใด.
+
+**ด่าน 1 (green boot):**
+```
+py -3 pf_resolve_green_boot.py --repo "C:\path\to\pirate-force-server" --fetch
+```
+รันจากโฟลเดอร์ `pf_bridge`. เฉพาะ exit 0 + `BOOT_COMMIT: <sha>` เท่านั้นถึงบูตได้ (checkout detached).
+
+**ด่าน 2 (grep ยืนยันสายที่ `<SHA>` จริง -- ห้ามเชื่อเลขบรรทัดในเอกสารนี้):**
+```
+git grep -n "vital_inbound_chat_local_talk" <SHA> -- src/pirateforce_foundation/runtime.py
+git grep -n "def handle_local_talk_chat" <SHA> -- src/pirateforce_foundation/gm/chat_command.py
+git grep -n "vital_inbound_chat_local_talk" <SHA> -- src/pirateforce_foundation/lane_hooks/lane_gm_chat_command.py
+git grep -n "gm_command_log" <SHA> -- src/pirateforce_foundation/gm/chat_command.py
+```
+🔴 **บรรทัดแรกคือด่านจริงของใบนี้** -- ต้องเห็นจุดเรียกทำนอง
+`lane_hooks.fire("vital_inbound_chat_local_talk", session=self, payload=bytes(parsed.nested_payload))`
+อยู่ที่สาขา `0xAC52` ของ `runtime.py`. 0 hit = **BLOCKED (รอ CORE-REQUEST-GM-028)** ไม่ใช่ FAIL --
+ไปทำใบอื่น อย่าไล่หาคอมมิตเองและอย่า checkout แบรนช์ตรง ๆ.
+
+### db (สำเนาเสมอ ห้ามเปิด canonical)
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-127_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt127.sqlite3
+```
+เทียบ sha256 ของ canonical กับ `CANON_SHA.txt` ทั้งก่อนเริ่มและหลังจบ ต้องตรงทั้งสองครั้ง ·
+`PRAGMA integrity_check` = `ok` บนสำเนาทั้งก่อนและหลัง · สำเนาใหม่ทุกบูต ⇒ ตำแหน่งตัวละครรีเซ็ตกลับ spawn เสมอ.
+
+### server args (เป๊ะ -- ไม่มี `--*-scenario`)
+```
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+$env:PF_GM_ACCOUNTS_CONFIG = "<path ไฟล์ allowlist จากด่าน 0>"
+py -3 -u -m pirateforce_foundation.app --db state\run_gt127.sqlite3
+```
+`capture/gm_command_log.ndjson` เป็น path **relative กับ CWD ของ process เซิร์ฟเวอร์ตอนบูต** -- จดค่า CWD ไว้
+ในผล. แนบบรรทัดคำสั่งจริงหลังเซิร์ฟเวอร์ขึ้น:
+```
+Get-CimInstance Win32_Process -Filter "Name='python.exe'" | Select-Object ProcessId,CommandLine | Format-List
+```
+
+### ขั้นตอน (บูตสั้น ~5 นาทีบนจอ -- อัดวิดีโอต่อเนื่องทั้งช่วง LOCK_GAME)
+1. ถือ `LOCK_GAME`, จด boot stamp (+07:00), เทียบ sha canonical, ก๊อป DB ตามบล็อกด้านบน, สเตจ
+   `TEMPLATE_teardown_generic.ps1`, ยืนยันว่าด่าน 0/1/2 ผ่านครบ (จด `<SHA>`).
+2. **เปิดเซิร์ฟเวอร์ก่อนเสมอ** (`Get-NetTCPConnection -State Established` พอร์ต 10188/10189 ต้อง = 0 ก่อนเปิด
+   ไคลเอนต์). ไคลเอนต์ที่เปิดโดยไม่มีเซิร์ฟเวอร์จะตายเองใน ~3.5 นาที.
+3. เข้าเกมด้วย **บัญชี GM**: เลือกเซิร์ฟเวอร์ -> ปุ่มซ้ายของกล่อง PVP -> ช่องตัวละครแรก -> ปุ่ม**กลาง**ของห้าปุ่ม
+   ล่าง (ห้ามปุ่มซ้ายสุด = ลบตัวละคร). T0: ถ่ายภาพนิ่ง full-res, จด HUD X/Y.
+4. NO-CRASH: right-click-drag กวาดกล้อง 360 องศาหนึ่งรอบ -- เป็น liveness check ชนิดเดียวที่ใบนี้รับ
+   (กล้องอย่างเดียว facing ของตัวละครไม่ขยับ ไม่มีไบต์ออกสาย). 🔴 **ห้ามใช้ `Q`/`E` หรือ `W/A/S/D`** --
+   สองอย่างนั้นหมุน/ย้ายตัวละครจริงและปล่อย `TargetPosVital`.
+5. 🔴 **คลิกเข้าไปในช่องพิมพ์แชทให้เคอร์เซอร์อยู่ในช่องก่อนพิมพ์ทุกครั้ง** -- ตัวอักษรที่พิมพ์ตอนช่องแชท
+   ไม่โฟกัสจะกลายเป็น **hotkey**. ยืนยันด้วยตาว่าเห็น caret ในช่องแล้วค่อยพิมพ์.
+6. พิมพ์ทีละบรรทัด กด Enter แล้วเว้น 3 วินาที จดเวลาส่งแต่ละบรรทัด (+07:00) และถ่ายภาพนิ่ง full-res ของกล่อง
+   แชทหลังแต่ละบรรทัด:
+   (1) ประโยคธรรมดาไม่มี `/` (เช่น `hello queue test`) · (2) `/warp 2` · (3) `/lv 30` · (4) `/notacommand xyz`
+7. ยืนยันด้วยตาว่า **ไม่มี warp ไม่มีเลเวลเปลี่ยน** (HUD X/Y และเลเวลเท่าเดิม) -- ถ่ายภาพนิ่ง.
+8. ออกจากเกม -> 🔴 **restart เซิร์ฟเวอร์ก่อนเปิดไคลเอนต์ตัวถัดไปเสมอ** (เซิร์ฟเวอร์เก็บ session เดิมไว้
+   ไคลเอนต์ถัดไปจะค้างที่ "connecting" ตลอดกาลถ้าไม่รีสตาร์ต).
+9. เข้าเกมด้วย **บัญชีที่ไม่อยู่ใน allowlist** ทำข้อ 5 ซ้ำแล้วพิมพ์ `/warp 2` หนึ่งบรรทัด ถ่ายภาพนิ่ง
+   จดเวลา -- นี่คือคู่ควบคุมที่พิสูจน์ว่าผู้เล่นธรรมดาไม่ได้อะไร.
+10. NO-CRASH ซ้ำ (right-click-drag) -> ออกจากเกม -> teardown.
+
+**กฎสี (คำสั่ง Panya 2026-08-25):** ทุกภาพนิ่ง full-res ต้องมีตารางสีป้ายชื่อ **หนึ่งบรรทัดต่อหนึ่งป้ายต่อหนึ่ง
+ภาพ** เขียนคำว่า "none" ออกมาเมื่อไม่มีป้าย ห้ามเว้นว่าง · อ่านสีจากภาพนิ่ง full-res เท่านั้น ห้ามอ่านจาก
+contact sheet / ภาพย่อ / วิดีโอ · จุดต่างจากภาพเซิร์ฟเวอร์ต้นฉบับลง `REAL_SERVER_DIVERGENCE.tsv` แถวละหนึ่งจุด ·
+🔴 ผู้เทสบันทึก**สีเท่านั้น** ห้ามอนุมานสาเหตุของสี (`RE-067` เปิดอยู่ และเป็นที่เดียวที่คำถามนั้นอยู่).
+
+### pass criteria (สองชั้น แยกกันเสมอ ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น)
+
+**wire/DB (อ่านจากคอนโซล/ล็อก/ไฟล์บนดิสก์เท่านั้น):**
+- คอนโซลขึ้นครบทั้งห้า: `gm_chat_command_accepted_warp`, `gm_chat_command_accepted_lv`,
+  `gm_chat_command_refused_not_a_command` (ประโยคธรรมดา),
+  `gm_chat_command_refused_command_parse_error_*` (`/notacommand xyz`),
+  `gm_chat_command_refused_not_gm_account` (บัญชีคู่ควบคุม).
+- `capture/gm_command_log.ndjson` มี **2 เรคคอร์ดพอดี** ทั้งคู่มีชื่อบัญชี GM และ `"executed": false` ·
+  **ไม่มี**เรคคอร์ดของบัญชีนอก allowlist และ**ไม่มี**เรคคอร์ดของประโยคธรรมดา.
+- `sessions`: +1 แถวต่อหนึ่งการล็อกอิน · `max(lease_generation)` ไม่ถอยหลัง · `PRAGMA integrity_check` = `ok`
+  ก่อน/หลัง · sha256 ของ canonical ตรง `CANON_SHA.txt` ก่อน/หลัง · raw GAME log + console out/err เก็บทั้งไฟล์
+  ไม่ตัดทอน.
+- **ผลลบมีค่าเท่ากับผลบวก:** คอนโซลเงียบทั้งหมด/ndjson ไม่ถูกสร้าง ทั้งที่ด่าน 2 ผ่าน = ผลของใบนี้ (ดู P4)
+  เขียนให้เด่นเท่า PASS พร้อม redirect ไป `CORE-REQUEST-GM-028`.
+
+**client-observable (คนหน้าจอเท่านั้น ห้ามอนุมานจากคอนโซล):**
+- **สิ่งที่คาดหมายคือ "ไม่มีอะไรเปลี่ยน"** -- บรรทัดแชทต้องแสดงผลเหมือนเดิมทุกประการกับก่อนรอบนี้ เลนนี้ต้อง
+  มองไม่เห็น. นี่เป็นคำทำนายล่วงหน้า ไม่ใช่ FAIL.
+- 🔴 คำถามที่ต้องตอบตรง ๆ ในผล: **บรรทัด `/warp 2` ที่พิมพ์ไปปรากฏในหน้าต่างแชทเป็นข้อความธรรมดา หรือหายไป
+  (ไคลเอนต์กลืนบรรทัดที่ขึ้นต้นด้วย `/` เอง)?** ตอบทีละบรรทัดทั้งสี่บรรทัด อ้างจากภาพนิ่ง ไม่ใช่จากความจำ.
+- ไม่มี warp ไม่มีเลเวลเปลี่ยน (GM-003 v1 ไม่มี execution) -- ถ้าเห็นการเปลี่ยนแปลงใด ๆ นั่นคือผลที่ผิดคาด
+  ต้องเขียนเด่น ๆ.
+- บัญชีคู่ควบคุม: จอไม่มีอะไรเกิดขึ้นเช่นกัน -- บันทึกว่าบรรทัดแสดงผลอย่างไร.
+- NO-CRASH ผ่านทั้งสองครั้ง · ตารางสีป้ายชื่อครบตามกฎสีข้างบน.
+
+### nonclaims (ติดไปกับผลทุกกรณี ห้ามตัดทิ้ง)
+- 🔴 **ไม่อ้าง** ว่าคำสั่งใดมีผลต่อเกม -- v1 ทำแค่ parse + log (`"executed": false`) ผลบนจอไม่ใช่เกณฑ์ผ่าน.
+- 🔴 **ไม่อ้าง** ว่าใบนี้พิสูจน์อะไรเกี่ยวกับ `BT_GM`/`GMUI_BASIC`/`0x51E9` -- คนละประตู ยังตายอยู่
+  (`GT-103`, `RE-126`) และผลใบนี้ไม่ว่าบวกหรือลบก็ไม่ปิดสองใบนั้น.
+- 🔴 **ไม่อ้าง** ว่าข้อความไม่ใช่ ASCII (ภาษาไทย/ตัวอักษรกว้าง) ผ่านเส้นทางนี้ได้ -- ตัวอย่างที่จับมาได้ทุกตัว
+  (`GT-006`/`GT-009`) เป็น ASCII ล้วน. ถ้าอยากรู้ต้องเปิดใบใหม่.
+- 🔴 **GM nonclaim (บังคับประกาศ):** ใบนี้ **ใช้สถานะ GM** เพื่อไปให้ถึงสถานะที่ทดสอบ -- การไปถึงสถานะด้วย GM
+  ไม่ใช่หลักฐานว่าฟีเจอร์ทำงานสำหรับผู้เล่นทั่วไปหรือทำงานในทางปกติของเกม.
+- ไม่ทดสอบไวยากรณ์ที่เหลือ (`npc`, `item`, `spawn`, `say`) และไม่ทดสอบ `rate_limited` -- คนละใบ.
+- ไม่ยืนยัน byte layout ของ `0xAC52` ซ้ำ -- อ้าง `GT-006`/`GT-009` เป็นหลักฐานที่มีอยู่แล้ว ไม่ผลิตใหม่.
+- unit test 45 ตัวเป็นหลักฐานที่อ้างถึง ไม่ใช่สิ่งที่ผู้เทสรันซ้ำ.
+- ผู้เทสคนเดียว สองบัญชี บูตเดียว ไม่มี reconnect/relogin เกินที่ขั้นตอนระบุ.
+- ไม่ชี้สาเหตุของสีป้ายชื่อ (`RE-067` เปิดอยู่).
+- ถ้าด่าน 0/1/2 ไม่ผ่าน => ทั้งใบเป็น **BLOCKED (รอ wiring)** ไม่ใช่ NO-RESULT/FAIL -- ยังไม่ได้ล็อกอินเลย.
+
+### หลักฐานที่ต้องเก็บ
+`capture/gm_command_log.ndjson` **ทั้งไฟล์** + sha256 (ถ้าไฟล์ไม่ถูกสร้างเลย ให้เขียนคำว่า ABSENT พร้อม CWD ของ
+เซิร์ฟเวอร์) · console out/err + raw GAME log ทั้งไฟล์ ไม่ตัดทอน · วิดีโอต่อเนื่องทั้งช่วง `LOCK_GAME` (`.mkv`
+ต้นฉบับ ห้ามลบ) · ภาพนิ่ง full-res ของกล่องแชทหลังทุกบรรทัด + ภาพ T0 + ภาพหลังข้อ 7 + ภาพของบัญชีคู่ควบคุม ·
+ตารางสีป้ายชื่อ (หนึ่งบรรทัดต่อป้ายต่อภาพ, "none" เขียนออกมา) · แถว `REAL_SERVER_DIVERGENCE.tsv` ถ้ามี ·
+เวลาส่งทุกบรรทัด (+07:00) · `<SHA>` ที่บูต + บรรทัดคำสั่งจริง · run copy `state\run_gt127.sqlite3`
+**เก็บไว้ให้ chief re-derive ห้ามทิ้ง** · sha256 ของทุกไฟล์หลักฐาน.
+
+### teardown (บังคับ -- แม้รอบจะจบเพราะเลิกเล่น ไม่ใช่เพราะเทสจบ)
+`TEMPLATE_teardown_generic.ps1` เสมอ ภายใน **420 นาที** จาก boot stamp
+(`TEMPLATE_teardown_generic.ps1:135` · เพดานยกจาก 180 เมื่อ 2026-08-20 · เลข 180 ในใบเก่า = stale) --
+เกินเพดาน template ปฏิเสธ exit 12 โดยดีไซน์ · ได้ exit ที่ไม่ใช่ 0 อย่าเดาเอง แนบบรรทัดที่ 17 ของไฟล์ teardown
+ที่ใช้จริงมาทั้งบรรทัด · ใบเสร็จ: `AFTER listeners = 0`, sha256 canonical ก่อน-หลัง = `CANON_SHA.txt`,
+teardown exit code, `LOCK_GAME` ปล่อยแล้ว · **ลบสำเนาไฟล์ allowlist / ล้าง `PF_GM_ACCOUNTS_CONFIG`** ·
+🔴 restart เซิร์ฟเวอร์ก่อนบูตรอบถัดไปเสมอ.
+
+### result (ผู้เทสกรอก)
+```
+
+```
+
+## GT-125 FULLGATE-RED-REPAIR-VERIFY-001 [STATIC-ON-BRIDGE · พร้อมเมื่อ PR ของรอบ swlc56 merge แล้ว]: หลังรอบ swlc56 แก้ census/negative ที่ทำให้ full pytest แดง 39 ใบ — รันชุดเต็มบนสะพานอีกครั้งแล้วบอกว่าเหลือแดงกี่ใบ และ regenerate ไฟล์ที่ยังแดงอยู่ใบเดียวที่คลาวด์แตะไม่ได้
+
+- **เปิดโดย** chief สาย E รอบ `swlc56` (2026-08-28T17:0x+07:00) · **ที่มา** `notes_to_chief/20260828_1352_CHIEF-LOCAL-SMOKE-result.md` ข้อ 3: `py -3 -m pytest -q` บนสะพาน = `39 failed, 4050 passed` ที่ main HEAD `336857c`
+- **ต้องรันบนสะพานเท่านั้น** เพราะสองในสามโมดูลอ่านอิมเมจ client และใบที่เหลือต้องใช้ game data ของสะพาน — คลาวด์ skip ทั้งหมด (39 skipped = 39 failed ใบเดียวกัน วัดแล้วรอบนี้)
+- **รอ merge ก่อน**: ต้องอยู่บน commit ที่มี PR `[LANE-E] R213` ของ `pirate-force-server` แล้ว
+
+### ขั้นตอน
+
+1. `git pull --rebase` ทั้งสอง repo · จด `git rev-parse HEAD` ของ repo โค้ด
+2. `py -3 -m pytest -q -p no:cacheprovider` (ชุดเต็ม ไม่ใช่ subset) · จดบรรทัดสรุปท้ายตรง ๆ
+3. ถ้ายังเหลือแดงเฉพาะ `tests/test_pf_scan_field_scene_candidates.py` ให้ regenerate ไฟล์ที่ล้าสมัย:
+   `py -3 tools/pf_scan_field_scene_candidates.py --out docs/FIELD_SCENE_CANDIDATES.json`
+   แล้วรันโมดูลนั้นซ้ำใบเดียว · commit ไฟล์ JSON ที่ regenerate พร้อมบอกว่า candidate_count ขยับจากเท่าไรเป็นเท่าไร (สมุดสะพานบันทึกไว้ว่า 22 -> 24)
+4. push ตามกติกาโหมด local (branch + PR + `PF-AUTOMERGE: v4`) ห้าม push main
+
+### pass criteria — สองชั้น แยกกัน
+
+- **ชั้น wire/DB (ใบนี้ตัดสินได้เอง)**: `py -3 -m pytest -q` ชุดเต็มออก `0 failed` · และ `py -3 tools/pf_runtimeres_actor_entry_static.py` กับ `py -3 tools/pf_hp_death_respawn_static.py` ทั้งคู่ exit 0
+- **ชั้น client-observable**: ใบนี้**ไม่มี** และไม่อ้างอะไรเกี่ยวกับหน้าจอเลย — เป็นใบเครื่องมือล้วน ไม่ต้องมี `OBSERVER_CONFIRMED`
+
+### nonclaims
+
+- ไม่อ้างว่า gate เขียว = เกมเล่นได้ · ไม่อ้างว่า census ที่ re-pin แล้ว "ถูก" ในเชิงดีไซน์ อ้างแค่ว่าเลขที่พินตรงกับ `src/` ที่วัดได้จริง
+- ถ้าชุดเต็มยังแดงด้วยโมดูลอื่นที่ไม่ได้อยู่ในสามใบนี้ = ผลลบใหม่ ให้เปิดใบใหม่ ห้ามยัดเข้าใบนี้
 
 ### result (tester fills this in)
 ```
