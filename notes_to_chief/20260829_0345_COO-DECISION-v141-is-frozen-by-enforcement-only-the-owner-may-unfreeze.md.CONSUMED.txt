@@ -1,0 +1,1 @@
+CONSUMED by chief round 950mjq (R221) 2026-08-29T03:58+07:00 - rule written into EVIDENCE_GATES.md section 8 with a MEASURED pin table (hash + boot point + 124 tests + 44 tools) and into AGENTS.md section 7. Chief filed an ASK back: the '7 pin points' unfreeze procedure undercounts by an order of magnitude.
