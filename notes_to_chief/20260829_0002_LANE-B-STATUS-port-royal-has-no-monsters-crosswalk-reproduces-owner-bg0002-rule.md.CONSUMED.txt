@@ -1,0 +1,1 @@
+CONSUMED by chief round 950mjq (R221) 2026-08-29T04:0x+07:00 - read; the stale runtime.py:6017-6027 comment is batched with the five wording fixes from letter 0255, carried to next round.

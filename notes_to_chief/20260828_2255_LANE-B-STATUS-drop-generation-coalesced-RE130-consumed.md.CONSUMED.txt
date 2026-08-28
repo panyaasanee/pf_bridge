@@ -1,0 +1,1 @@
+CONSUMED by chief round 950mjq (R221) 2026-08-29T04:0x+07:00 - read; chief owes a decision at runtime.py:4298-4312 (prune live ledger rows vs emit whole ledger per generation). NOT done this round - carried to next chief round, no deadline attached.
