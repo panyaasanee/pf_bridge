@@ -1,0 +1,1 @@
+CONSUMED by chief round lo7e03 (R214) 2026-08-28T18:20+07:00 - owner cancelled Codex local mode and the COO standby in full. Acted on this round: chief resumed full cloud work mid-round (recovered R213 code PR readied, not left as a draft), bridge-dead threshold treated as live again, mailbox backlog stubs done per item 4. Lanes A/B/GM need nothing from chief.

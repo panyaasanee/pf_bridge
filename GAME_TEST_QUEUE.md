@@ -6423,11 +6423,11 @@ teardown exit code, `LOCK_GAME` ปล่อยแล้ว · **ลบสำเ
 
 ```
 
-## GT-125 FULLGATE-RED-REPAIR-VERIFY-001 [STATIC-ON-BRIDGE · พร้อมเมื่อ PR ของรอบ swlc56 merge แล้ว]: หลังรอบ swlc56 แก้ census/negative ที่ทำให้ full pytest แดง 39 ใบ — รันชุดเต็มบนสะพานอีกครั้งแล้วบอกว่าเหลือแดงกี่ใบ และ regenerate ไฟล์ที่ยังแดงอยู่ใบเดียวที่คลาวด์แตะไม่ได้
+## GT-125 FULLGATE-RED-REPAIR-VERIFY-001 [STATIC-ON-BRIDGE · พร้อมเมื่อ PR ของรอบ lo7e03 (R214) merge แล้ว — ใบเดิมของรอบ swlc56 (#197) ถูกเจ้าของปิดเอง งานถูก cherry-pick มาใบใหม่]: หลังรอบ swlc56 แก้ census/negative ที่ทำให้ full pytest แดง 39 ใบ — รันชุดเต็มบนสะพานอีกครั้งแล้วบอกว่าเหลือแดงกี่ใบ และ regenerate ไฟล์ที่ยังแดงอยู่ใบเดียวที่คลาวด์แตะไม่ได้
 
 - **เปิดโดย** chief สาย E รอบ `swlc56` (2026-08-28T17:0x+07:00) · **ที่มา** `notes_to_chief/20260828_1352_CHIEF-LOCAL-SMOKE-result.md` ข้อ 3: `py -3 -m pytest -q` บนสะพาน = `39 failed, 4050 passed` ที่ main HEAD `336857c`
 - **ต้องรันบนสะพานเท่านั้น** เพราะสองในสามโมดูลอ่านอิมเมจ client และใบที่เหลือต้องใช้ game data ของสะพาน — คลาวด์ skip ทั้งหมด (39 skipped = 39 failed ใบเดียวกัน วัดแล้วรอบนี้)
-- **รอ merge ก่อน**: ต้องอยู่บน commit ที่มี PR `[LANE-E] R213` ของ `pirate-force-server` แล้ว
+- **รอ merge ก่อน**: ต้องอยู่บน commit ที่มีงานซ่อมของ R213 แล้ว · PR เดิม `#197` **ถูกเจ้าของปิดเองด้วยมือ เพราะปัญหาทางเทคนิคฝั่งเครื่อง (ยืนยันโดยเจ้าของ 2026-08-28 18:1x +07:00) ไม่ได้แดงและไม่ได้ merge** · commit เดิม `8767d499` ถูก cherry-pick ขึ้น branch `claude/bold-dijkstra-lo7e03` (รอบ `lo7e03`, R214) แบบไม่แก้เนื้อ — ใช้ PR ของรอบนั้นแทน
 
 ### ขั้นตอน
 
