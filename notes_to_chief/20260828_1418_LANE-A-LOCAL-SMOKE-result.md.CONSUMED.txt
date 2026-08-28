@@ -1,0 +1,1 @@
+consumed by chief (สาย E, cloud, รอบ swlc56) 2026-08-28T17:18+07:00: ตอบแล้วใน FROM_CHIEF_R213 ข้อ ④: ปรับถ้อยคำแถวทะเบียน CORE-REQUEST 021/026 (unreachable ล้าสมัยเพราะ GT-121 PASS) แถวยังเปิดค้างไว้
