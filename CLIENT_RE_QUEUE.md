@@ -1717,3 +1717,52 @@ placement หรือต้องเป็น server-triggered quest-spawn (ค
 **ทำไมมีค่า:** เจ้าของยกเป็นหนึ่งใน 6 ช่องว่างจาก M1-P PASS โดยตรง (NPC เควสหายจากจอ) และเป็นตัวอย่างแรกที่ยืนยัน
 แล้วว่า placement TSV ไม่พอ — ถ้าไม่ปิดใบนี้ก่อน สาย A จะไม่มีทางรู้ว่าต้องสร้าง static row เพิ่มหรือต้องรอ
 กลไก quest-spawn ที่ยังไม่มีในเซิร์ฟเวอร์เลย
+
+---
+
+## RE-125 PICKUP-REQUEST-VITAL-ID-001: what wire vital id (opcode) does a real client send when the player left-clicks a ground drop / `PickupTerrainThing` object, and what does its payload contain (object reference dword position, anything else)
+
+> NUMBERING NOTE: shared counter with `GAME_TEST_QUEUE.md` -- this round also opened `GT-124` there (grep
+> confirmed 2026-08-28: `GT-124`/`RE-124`/`RE-125` = 0 hits before either was reserved). `GT-124` took `124`
+> first (opened earlier in the same round); this entry is `125`. Highest prior number was `RE-123`
+> (BG0002-MIRAGE-REEL-QUEST-SPAWN-CROSSWALK-001, CLOSED).
+
+**ค้นใน `pf_bridge\external\ แล้ว:** ไม่เจอ -- `grep -in "pickup|Terrain.*Thing|4543|ground.*loot|item.*operate"
+external/00_SEARCH_HERE_FIRST.md` ให้ผล 0 แถว (ตรวจตามกฎบังคับข้อแรกของไฟล์นี้ก่อนเปิดใบ)
+
+### ทำไมเปิดใบนี้ (lane B, round `pnd0a5`, 2026-08-28)
+`pirate-force-server`'s `src/pirateforce_foundation/mob_pickup.py` มีกลไก CLAIM ฝั่งเซิร์ฟเวอร์ครบแล้ว
+(`resolve_claim`/`commit_pickup`/`dispatch_pickup_request`, unit-tested เขียวหมด) แต่ `runtime.py` **ไม่มี
+call site เรียกมันเลยแม้แต่จุดเดียว** (grep ยืนยันรอบนี้: `dispatch_pickup_request` = 0 hits ใน `runtime.py`)
+-- เพราะไม่มีใครยืนยัน **vital id จริง** ที่ client ส่งมาตอนคลิกเก็บของ (`runtime.py` มีคอมเมนต์ของตัวเองบอก
+ตรงๆ ว่า "there is no known vital id for a client-originated pickup request on this project's wire yet")
+สิ่งนี้เป็นคนละด่านกับ "ด่าน 2" (`session.select_and_start`'s `is_unmoved_baseline`, เลื่อนไป 30-31 ส.ค.
+ตาม `notes_to_chief/20260827_1350_COO-DECISION-bagwall-second-wall-redesign-deferred-post-M4.md`) -- นี่คือ
+ด่านที่**อยู่ก่อนหน้านั้นอีกชั้น**: ต่อให้ด่าน 2 เปิดวันที่ 30-31 ก็ยังเก็บของไม่ได้ถ้าไม่มีทางรับคำขอเข้ามา
+ก่อน `GT-060` (`GAME_TEST_QUEUE.md`) เคยแตะคำถามใกล้เคียง (id derive `0x4543` สำหรับ `PickupTerrainThing`)
+แต่เป็นคนละ pipeline (`HYP-PF-036` hypothesis scenario, ไม่ใช่เส้นทาง production ของ `mob_pickup.py`) --
+ใบนี้ถามเฉพาะเส้นทาง production
+
+### objective
+1. หา vital id (opcode) ที่ client ส่งมาเมื่อผู้เล่นคลิกซ้ายบนวัตถุของตกพื้น (`PickupTerrainThing` หรือชื่อ
+   เทียบเท่าในตารางเวิร์คของ Codex/`external/`) -- ยืนยันจาก capture corpus/ตารางที่ commit ไว้แล้วเท่านั้น
+   ห้ามเดาจาก pattern ของ id อื่น
+2. ถ้าเจอ: ระบุ payload shape เต็ม (object reference dword ที่ `mob_loot`/`mob_pickup` ใช้เป็น `drop_key`
+   อยู่แล้วหรือฟิลด์อื่น, ตำแหน่งผู้เล่นมากับเฟรมหรือเซิร์ฟเวอร์ต้องอ่านจาก session state เอง, มี opaque byte
+   อื่นที่ `mob_pickup.PickupClaim`/`opaque_u8` ต้องรองรับไหม) พร้อม provenance (offset/แถวตาราง/capture ไฟล์)
+3. ถ้าชนเพดาน static (ไม่มี capture ที่มีการคลิกเก็บของจริงเลย) ให้เขียน bounded negative ตามกฎ -- ระบุด้วยว่า
+   ต้องใช้ attended capture ใหม่ (คนละงานกับใบนี้) หรือยังมีมุมมอง static อื่นที่ยังไม่ลอง
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (แถว/คอลัมน์/offset/capture) · ชนเพดานให้เขียน bounded
+negative แล้วปิด ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+vital id + payload shape พร้อม provenance พอให้ chief เขียน call site จริงใน `runtime.py` (ต่อกับ
+`mob_pickup.dispatch_pickup_request` ที่มีอยู่แล้ว) **หรือ** bounded negative ที่ชัดเจนว่า static ไปต่อไม่ได้
+และต้องรอ attended capture ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+
+**ทำไมมีค่า:** เป็นด่านที่บล็อก BUILD-006 (M5, กำหนด 31 ส.ค. 23:59) อยู่ก่อนด่าน 2 เสียอีก และไม่เคยถูกตั้ง
+คำถามตรงๆ มาก่อน (50 กว่ารอบของสาย B ที่ผ่านมาพูดถึงแต่ด่าน 1/2/3 ของกำแพงกระเป๋า ไม่เคยเช็คว่า runtime.py
+มีทางรับคำขอ pickup เข้ามาหรือยัง) -- ถ้าไม่ตอบ ต่อให้ด่าน 2 ออกแบบเสร็จวันที่ 30-31 ตามกำหนด BUILD-006 ก็ยัง
+ทำไม่ได้อยู่ดีเพราะไม่มีทางส่งคำขอเข้าเซิร์ฟเวอร์เลย

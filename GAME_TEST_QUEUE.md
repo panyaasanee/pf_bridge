@@ -6075,3 +6075,146 @@ client-observable (a human at the screen only, never inferred from the console):
 ```
 
 ```
+
+---
+
+## GT-124 MOB-PICKUP-CLAIM-PREVALIDATION-001: kill a mob, walk to its ground drop, attempt pickup -- does mob_pickup.py's resolve/commit/log-only CLAIM path (BUILD-006 second half) behave exactly as its own unit tests predict when driven by a real human, once runtime.py gets the inbound-pickup-request call site it does not have today  [BLOCKED-ON-WIRING -- see precondition (a) below]
+
+> NUMBERING NOTE: grep confirmed before reserving (2026-08-28, this round) across `GAME_TEST_QUEUE.md`,
+> `CLIENT_RE_QUEUE.md`, `notes_to_chief/`, `rounds/`, and `archive/`: `GT-124`/`RE-124` = 0 hits. The shared
+> GT-/RE- counter's actual highest used number is `RE-123` (BG0002-MIRAGE-REEL-QUEST-SPAWN-CROSSWALK-001,
+> CLOSED, `CLIENT_RE_QUEUE.md`) -- NOT `122` as `rounds/B_20260828_1039_gate2_not_due_yet_prevalidation_
+> ticket_opened.md` assumed when it told the queue-author to reserve "GT-123" (that round checked
+> `GAME_TEST_QUEUE.md`/archive but not `CLIENT_RE_QUEUE.md`'s own latest entry, whose closing note itself
+> already reserved `124` as next-free at 2026-08-28T09:31+07:00). This entry is therefore `124`, not `123`.
+> All entries `GT-101`-`GT-122` and `RE-085`-`RE-123` stay exactly where they are, unchanged.
+
+### precondition -- why this is BLOCKED-ON-WIRING, not PENDING (read before booting anything)
+(a) **THE HARD BLOCKER.** `mob_pickup.dispatch_pickup_request` / `PickupClaim` / `BagCell.commit_pickup` have
+ZERO call sites in `runtime.py` today (grep-confirmed against `pirate-force-server` HEAD this round). Only
+`BagCellRegistry.claim`/`.release` are wired (CORE-REQUEST-007, round `3lzfhw`) -- a different, per-connection
+bag-*ownership* claim, not a player's ground-drop pickup claim (see mob_pickup.py NONCLAIM 1/12). This is
+NOT the same blocker as gate 2 (`session.select_and_start.is_unmoved_baseline`, deferred to 30-31 Aug per
+`notes_to_chief/20260827_1350_COO-DECISION-bagwall-second-wall-redesign-deferred-post-M4.md`) -- it is an
+EARLIER, separate gap: nobody has wired ANY inbound opcode to this module, because nobody has a confirmed
+real wire "vital id" for a pickup request (`rounds/R180_3lzfhw_...md`: "inbound pickup request ยังไม่มีทางไป
+(รอ vital id จริงจาก RE)"). A CORE-REQUEST for this call site is not yet filed as of this writing; a fresh
+RE ticket (`RE-125`, `CLIENT_RE_QUEUE.md`) was opened the same round as this entry asking for the vital id.
+This entry cannot be booted until that CORE-REQUEST lands; it is written now, ready to run the day it does,
+so no attended time is spent re-deriving the procedure.
+(b) **OPEN QUESTION, NOT ASSUMED EITHER WAY.** `GT-045` (ANSWERED, archived) and `GT-060` (still
+BLOCKED-CONDITIONAL) both found that a ground drop rendered only a floating red name-label (0.2-0.3s), no
+model -- "nothing to click" (mob_pickup.py NONCLAIM 12). That measurement predates `mob_loot` being wired
+into flagless production (CORE-REQUEST-006, round `3lzfhw`/R180) -- whether the CURRENT production ground
+drop is any more clickable is genuinely unknown. This entry's own steps re-check it fresh; a "still nothing
+to click" finding is a valid, complete negative for that sub-question (see pass criteria), not a reason to
+fail the whole entry, and not something to guess at here.
+
+### source
+- `pirate-force-server/src/pirateforce_foundation/mob_pickup.py` (module docstring, "THE WALL", NONCLAIM
+  1/9/12): resolve_claim/commit_pickup/dispatch_pickup_request fully unit-tested (`tests/test_mob_pickup.py`,
+  green), never called from `runtime.py`.
+- `rounds/R180_3lzfhw_core-request-006-007-gm-loot-pickup-wiring.md`: mob_loot ground-drop wired flagless
+  into production this round; mob_pickup inbound request path explicitly left unwired, "รอ vital id จริง".
+- `archive/notes_to_chief_consumed_to_2026-08-26/20260825_1340_GT045-ANSWERED-...md`: ground drop = name
+  label only, no model, on the (older) hypothesis-scenario pipeline. `GT-060` (still BLOCKED-CONDITIONAL) is
+  the sibling entry for the wire-id question on that same old pipeline; this entry does not reuse or depend
+  on it -- different codepath, different opcode question, different module entirely (mob_pickup.py imports
+  neither HYP-PF-036 nor any opcode, per its own docstring).
+- `notes_to_chief/20260827_1350_COO-DECISION-bagwall-second-wall-redesign-deferred-post-M4.md`: gate 2
+  (persistence/relog) is scheduled for 30-31 Aug and is explicitly NOT this entry's concern -- see nonclaims.
+
+### objective (single claim)
+Once runtime.py has a real inbound-pickup-request call site into `mob_pickup.dispatch_pickup_request` (not
+yet built, see precondition (a)): does a real human player's kill -> walk -> attempt-pickup sequence, against
+a genuine `mob_loot` ground drop, produce exactly the CLAIM-layer outcome the module's own unit tests
+predict -- either (i) an accepted claim, printed verbatim as `MOB_PICKUP_ROW_WOULD_INSERT
+table=character_backpack_items claimant=... character_id=... item_identity=... template_id=... quantity=...
+slot=...` with values matching the drop actually taken, or (ii) exactly one of the named
+`MOB_PICKUP_REFUSAL_REASONS` strings (e.g. `claimant_out_of_range`, `not_the_killer`,
+`object_ref_never_issued`) -- and never a crash, a hang, or silence on both the console and the wire.
+Persistence/relog (gate 2) is explicitly out of scope (see nonclaims): this entry proves the CLAIM
+mechanics only, independent of whether the row is ever actually inserted.
+
+### predictions (a wrong prediction is a finding, not a failure)
+- P1 [primary, proposed]: click succeeds against a real, killed-by-this-character drop within
+  `PICKUP_RADIUS` -> console prints `MOB_PICKUP_ROW_WOULD_INSERT` with the drop's own template/quantity;
+  `outcome.delta` composes without raising (no `composed_bytes_off_pin`).
+- P2 [proposed, a valid alternate pass]: the attempt is refused by name (e.g. clicked too late,
+  `drop_already_taken`) -- any refusal from `MOB_PICKUP_REFUSAL_REASONS`, printed and legible, still proves
+  the CLAIM path is live and correctly gated; do not require P1 specifically to close this entry.
+- P3 [falsifier]: nothing prints on the console at all despite a click that should have reached the
+  handler -- means the call site itself is broken (wrong decode, wrong bag_cell, exception swallowed
+  upstream) -- redirect to a new RE/GT entry naming the break, do not re-run this one guessing.
+- P4 [open sub-question, NOT this entry's claim, see precondition (b)]: no clickable object exists at the
+  drop location at all on today's production build -- record as a clean, bounded NO-RESULT for the
+  click-trigger sub-question specifically (mirrors GT-060's own P4 treatment: NOT a negative about the
+  CLAIM mechanics, because no request could ever be sent to test them) -- this entry stays open, does not
+  FAIL, and the finding should open its own click-trigger RE/GT entry rather than being folded in here.
+
+### db
+default_state\pirateforce.sqlite3 -- copy only, canonical never opened. Copy to
+`pf_bridge\backup\pirateforce_before_GT-124_<yyyyMMdd_HHmmss>.sqlite3`, then `state\run_gt124.sqlite3`.
+sha256 vs `CANON_SHA.txt` before/after; `PRAGMA integrity_check=ok` on the working copy both times.
+
+### server args (fill in the exact command line once precondition (a) lands -- do not guess a flag today)
+mob_pickup.py declares `production_allowed = True`, `test_only = False`, no scenario id, no opt-in kwarg
+(module docstring: "NO FLAG ... exactly as unconditional as every other symbol in this file"). Once the
+CORE-REQUEST for the call site merges, boot is expected to be an ordinary flagless production login:
+```
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+py -3 -u -m pirateforce_foundation.app --db state\run_gt124.sqlite3
+```
+Before booting: run `pf_resolve_green_boot.py --fetch`, then grep the resolved SHA for the actual call site
+(`git grep -n "dispatch_pickup_request(" <SHA> -- src/pirateforce_foundation/runtime.py`) -- 0 hits means
+still BLOCKED, do not boot.
+
+### steps (click by click -- fill in once bootable; record continuous video for the whole LOCK_GAME window)
+1. LOCK_GAME; confirm the check above returns >=1 hit for the real call site -- otherwise stop, still
+   BLOCKED, do not boot.
+2. Start server, open client, log in; walk to any hostile mob; kill it (right-click-drag camera only while
+   positioning -- never Q/E/WASD before you mean to move, per the camera-vs-facing rule).
+3. Photograph full-res the instant the kill lands and again the instant any ground drop appears; record
+   whether a model is visible under the name label (precondition (b)) or only the label -- "none" if no
+   label either. Record the colour of every name label in frame, one line per label per image, per the
+   mandatory colour rule (R163/Panya 2026-08-25) -- never infer a cause, RE-067 owns that question alone.
+4. If nothing is clickable: photograph the attempt, record as P4/NO-RESULT for the click sub-question, stop
+   here -- do not force a click on empty ground.
+5. If something is clickable: left-click it once, immediately photograph the result, and copy the server
+   console verbatim from the moment of the click through the next 2 seconds.
+6. Repeat once more (a second kill+drop+click) for a second independent reading in the same session.
+7. NO-CRASH check: right-click-drag camera 360 degrees (camera only, proves liveness without emitting
+   TargetPosVital).
+8. Log out; teardown via `TEMPLATE_teardown_generic.ps1` (boot stamp must be under 420 min old); recheck
+   canonical sha256; sha256 every capture.
+
+### pass criteria (two layers, never mixed)
+wire/DB: server console shows either `MOB_PICKUP_ROW_WOULD_INSERT ...` with values matching the drop
+actually taken, or one exact string from `MOB_PICKUP_REFUSAL_REASONS` -- for both of the two attempts in
+step 6. No unhandled traceback. Canonical sha256 + `integrity_check=ok` before/after.
+client-observable (human at the screen only, never inferred from the console): whether a model was visible
+under the drop's name label (yes/no, per attempt); whether the click was even possible; whatever, if
+anything, visibly changes on screen after a successful claim (mob_pickup.py's own NONCLAIM 3: nobody has
+ever seen a client accept `bag_delta_pc` -- record plainly if the bag/HUD shows nothing at all, that is a
+valid, informative negative, not a test failure). Name-label colours per the mandatory colour rule.
+
+### nonclaims
+- Does NOT test persistence/relog (gate 2, `is_unmoved_baseline`) -- deliberately out of scope, scheduled
+  30-31 Aug per COO-DECISION 20260827_1350; a PASS here proves nothing about whether the item survives a
+  relog, only that the claim/resolve/log-only path itself is sound.
+- Does NOT test or depend on `GT-060`/HYP-PF-036 (the pickup-listener hypothesis scenario) -- different
+  module, different opcode question, mutually exclusive scenario flag; this entry is the production,
+  flagless path only.
+- Does NOT decide whether P4 (nothing clickable) is a client rendering defect, a missing element field, or
+  something else -- that is its own open question for a new entry, not answered or guessed here.
+- Does NOT prove `outcome.delta`/`bag_delta_pc` is accepted by a real client even if a `MOB_PICKUP_ROW_
+  WOULD_INSERT` line prints correctly -- NONCLAIM 3 in mob_pickup.py stands: nobody has measured that yet,
+  and a silent/no-visible-change screen after a "successful" claim is the expected, valid way that surfaces.
+- Single account, single session, two kill+pickup attempts -- not a stack/full-bag/race-condition test.
+- If precondition (a) or (b)'s call-site grep fails at boot time, the entire entry is BLOCKED, not
+  NO-RESULT/FAIL -- record "รอ CORE-REQUEST" and stop.
+
+### result (tester fills this in)
+```
+
+```
