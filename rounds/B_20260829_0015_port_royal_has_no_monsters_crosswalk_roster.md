@@ -45,7 +45,7 @@ stub `.CONSUMED.txt` ครบสามใบ · สำเนาต้นฉบ�
 | `field_mob_tables.py` (bg0001) | `HOSTILE_PLACEMENTS = []` · `TOWN_TARGET_PLACEMENTS` = หุ่นซ้อม `916` ×4 · `LEGACY_SETNUM_PLACEMENTS_PENDING_MIGRATION` = 9 แถวเดิม (ตั้งใจ ติดป้ายต่อแถว) · `WITHDRAWN_UNDER_THIS_RULE` · `COMBAT_AI_AT_RANK_ZERO` (Navy Private ×7 + Love Millie + Vera) · `IDENTITY_RULE_PER_PLACEMENT` |
 | `field_mobs.py` | อ่าน `SHIPPED_PLACEMENTS` · `assert_frozen_controls` **เขียนใหม่ทั้งฟังก์ชัน** ให้เทียบกับ `world_port_royal_identity` (ตารางที่สาย A ขุดคนละรอบคนละเครื่องมือ) · เพดาน rank/ai_combat จาก 1 → 0 พร้อมเหตุผล |
 | `mob_ai_control.py` | `ai_rows_of` คืน `None` เมื่อ `n_AI_COMBAT = 0` · `profile_of` บังคับ `offensive=False` ในกรณีนั้น (ติดป้าย `[LANE-B READING]`) |
-| `mob_death.py` | ruling 13:50 **ไม่ถูกขยาย** — ถอด `97` ออกโดยไม่ใส่ `916` แทน · `916` ใช้ ruling ของตัวเอง (09:55) · `PIN_PLACEMENT_INDEX` ผูกกับ **เป้าหมายที่ ruling ระบุ** ไม่ใช่ control ของตาราง |
+| `mob_death.py` | ruling 13:50 ตามโรสเตอร์: `97` ออก `916` เข้า (~~ร่างแรกถอด `97` โดยไม่ใส่ `916` = regression ที่ `pf-adversary` D1 จับได้~~ ดูข้อ ⑥bis) · `916` ยังมี ruling ของตัวเอง (09:55) และเทสยิงทั้งสองทาง · `PIN_PLACEMENT_INDEX` ผูกกับ **เป้าหมายที่ ruling ระบุ** ไม่ใช่ control ของตาราง |
 | `tools/pf_mine_mob_ai_rows.py` · `tools/pf_mine_scene_drop_tables.py` | อ่าน `SHIPPED_PLACEMENTS` · `n_AI_COMBAT = 0` = "ไม่มี AI รบ" ไม่ใช่ key ค้าง |
 | ตาราง/พินที่ regenerate | `field_mob_ai_tables.py` · `field_drop_tables.py` · `field_mob_tables_bg0002/bg0015.py` (กฎเดิม ระบุชื่อกฎชัด) · `scenarios/field_mobs_hostile_001.json` · `combat_aggro_001.json` · `combat_loot_001.json` |
 
@@ -69,6 +69,30 @@ stub `.CONSUMED.txt` ครบสามใบ · สำเนาต้นฉบ�
 - **หลักฐานว่าไบต์เปลี่ยนจริง:** `test_the_census_is_one_shot_per_session` `(20402, 20416)` →
   `(20378, 20392)` · digest ของ rung 60/115 ขยับ · rung 3/20 **ไม่ขยับ** (ตัวคุมว่าขยับเฉพาะแถวที่ตั้งใจ)
 
+## ⑥bis pf-adversary — **12 ข้อ · แก้ในรอบเดียวกัน 11 ข้อ · เหลือเป็นงานรอบหน้า 1 ข้อ**
+
+🔴 **ข้อที่สำคัญที่สุดคือ regression ที่รอบนี้เกือบ push ออกไป และผมยกมาทั้งข้อ:**
+
+| ข้อ | ที่พบ | ทำอะไร |
+|---|---|---|
+| **D1** 🔴 | ร่างแรกถอด `97` ออกจาก ruling 13:50 โดยไม่ใส่ `916` · แต่ `runtime.py:4106` **ฮาร์ดโค้ดสตริงนั้นสตริงเดียว** ⇒ **หุ่นซ้อมสี่ตัวฆ่าไม่ได้เลย** ทั้งที่เมื่อวานนกที่ตำแหน่งเดียวกันตายได้ · และจดหมาย ASK-COO เขียนตรงข้ามกับความจริง | ใส่ `916` กลับเข้า set ตามถ้อยคำของ ruling เอง (ไม่ขยายสิทธิ์: ruling 09:55 อนุญาตอยู่แล้ว) · แก้จดหมายทั้งสองใบด้วยการขีดฆ่า · **ยกคำถาม "หนึ่ง `widened=` กับโรสเตอร์ที่ต้องการสอง ruling" เป็นคำถามค้างของรอบ** |
+| **D2** | `assert_frozen_controls` ใหม่ **ผ่านได้ทั้งที่ควรล้ม 7 ทาง**: ลบหุ่นซ้อมทิ้งทั้งสี่ / เปลี่ยนป้ายเป็น `setnum` / `max_hp` 198125→4242 / เรียกด้วย `None` | เขียนใหม่: gate รูปร่างที่เขียนไว้ใน **ไฟล์มือ** ไม่ใช่ในตารางที่ถูกตรวจ · เช็ค level/HP กับ literal มือ · ยืนยัน legacy reading กับ v141 จริง ⇒ **ปลูก mutation ซ้ำทั้ง 7 ทาง ปฏิเสธครบ 7** |
+| **D3** | ไฟล์ที่ **ส่งจริง** (`scenarios/field_mobs_hostile_001.json`) และ docstring ของ `field_mobs.py` ยังพูดว่า 13 มอน / Mutant Green Eagle / hostile | pin พก `identity_rule` ต่อ placement · `withdrawn` · `unresolved` · nonclaim ใหม่ที่บอกตรง ๆ ว่าเก้าแถวยังผิด · docstring ขีดฆ่าและเขียนใหม่ |
+| **D4** | อ้างว่าเจ้าของยืนยัน `Bg0002` ด้วย **anchor เจ็ดจุด** — บันทึกจริงค้างที่ **2/7** | แก้ทั้งในเครื่องมือและในจดหมาย: สิ่งที่ยืนยันคือ `COO-DECISION 20260828_2250` **ชั้น client-observable** |
+| **D5** | prose ของ bg0001 (Tornado Eagle/Da Vinci/840 pin) ถูก render ลงไฟล์ `Bg0002`/`Bg0015` ด้วย ทั้งที่เป็นเท็จสำหรับสองฉากนั้น | ทำบล็อกนั้นให้ขึ้นกับฉากและกับการมีแถว pending จริง · regenerate ทั้งสามฉาก |
+| **D6** | ฉากเดียวที่รอบนี้เขียนใหม่ (bg0001) เป็นฉากเดียวที่ **ไม่มีเทส regenerate-and-diff** | เพิ่ม `Bg0001RegenerateAndDiffTest` |
+| **D7** | `WITHDRAWN_UNDER_THIS_RULE` พิมพ์ `0`/`''` ให้ placement 95 ทั้งที่ crosswalk ตอบได้ว่าคือ `910` Saben | เพิ่มเหตุผลต่อแถว (`avatar_is_a_variant_list` ฯลฯ) |
+| **D8** | "ศูนย์มอน" เป็นคำกล่าวเหนือ 140 จาก 149 placement · อีก 9 ถูก `continue` เงียบ ๆ | เพิ่ม `UNRESOLVED_PLACEMENTS` พร้อมเหตุผลต่อแถว + เทสว่า 140 + 9 = 149 |
+| **D9** | คอมเมนต์ "ten of thirteen มี aggro 0" กลายเป็นเท็จ (เป็น 6) | แก้ทั้งสามที่พร้อมขีดฆ่า |
+| **D10** | เทส speed กลายเป็น tautology (เทียบ parse กับลิสต์ที่ parse มา) | เพิ่ม literal จริง 150/100 กลับเข้าไป |
+| **D11** | เทสที่ยังปักตัวคุมที่ถูกถอน ไม่มีป้าย | ติดป้ายขีดฆ่าใน docstring ของไฟล์เทส |
+| **D12** | คอมเมนต์ของ ruling `916` เขียนว่า "ไม่มี placement ที่ไหนเลย" | ขีดฆ่าและระบุว่ามีสี่ placement แล้ว · การผูก scene ยกไปรอบย้าย |
+
+**ที่ `pf-adversary` พยายามหักแล้วหักไม่ได้:** ข้อเท็จจริง crosswalk ทุกตัว reproduce ได้ ·
+`CLINE` type 2 เป็น **บล็อกเดียวในทั้งตารางที่มี identity mapping** (ไม่ใช่คุณสมบัติของเลขน้อย) ·
+ทุกฟิลด์ของสี่แถวที่ส่งตรงกับ `MOBS[916]`/`STANDARD_MOB[100]` · ไม่มี skip inflation (skip ลดลง 3) ·
+ไม่แตะไฟล์ของ chief หรือของสาย A · rank 0 ไม่ได้ทำให้ไบต์โกหก (rank/ai ไม่เคยขึ้นสาย)
+
 ## ⑦ nonclaims
 
 1. **[ไม่อ้าง]** ว่ารอบนี้แก้ตัวตนของฉาก 1 ครบ — แก้ 4 จาก 13 อีก 9 ยังผิดและติดป้ายไว้
@@ -81,7 +105,9 @@ stub `.CONSUMED.txt` ครบสามใบ · สำเนาต้นฉบ�
    (30 vs 57) **ยังไม่ re-mine** ปล่อยกฎเดิมไว้และระบุชื่อกฎในไฟล์แล้ว
 6. ไม่แตะ `runtime.py`/`app.py`/`v141` · ไม่แตะเขตสาย A · ไม่แตะ PR สายอื่น · ไม่แตะ canonical DB ·
    ไม่ลบประวัติ ขีดฆ่าอย่างเดียว
-7. ยังไม่อ้างว่า merge — **push แล้ว รอ merge** `pirate-force-server#213` / `pf_bridge#333`
+7. **[ไม่อ้าง]** ว่าหุ่นซ้อม "ตายได้" ในเซิร์ฟเวอร์ที่ส่งจริงจนกว่าจะมีคนวัด — ทางฆ่ามีจริงแล้ว
+   (ruling 13:50 ที่ `runtime.py` ส่ง) แต่ยังไม่มีใครรันหน้าไคลเอนต์
+8. ยังไม่อ้างว่า merge — **push แล้ว รอ merge** `pirate-force-server#213` / `pf_bridge#333`
 
 ## ⑧ หมายเหตุเวลา (addendum ข้อ C)
 
