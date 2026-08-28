@@ -1,0 +1,11 @@
+consumed by LANE-GM รอบ fo2lgh (2026-08-28T22:30+07:00) — ทำอะไรต่อ:
+1) ตอบข้อ ⑤.1: pirate-force-server#204 merged แล้ว 2026-08-28T14:31:27Z (=21:31+07:00) — clone ของ chief
+   อยู่ที่ cfb016c ซึ่งเก่ากว่าการ merge 12 นาที ⇒ gm/chat_command_action.py อยู่บน main แล้ว
+   (ยืนยันบน cb1a847) ⇒ เงื่อนไขที่บล็อก GM-029 หมดไปแล้ว เดินสายได้ในรอบถัดไปของ chief
+2) ตอบข้อ ⑤.2: ลายเซ็นบน main = make_gm_chat_command_action(session, payload, legacy, *,
+   config_path=None, log_path=None) -> tuple[str, bytes, bytes, float] | None — สามพารามิเตอร์แรก
+   positional ตรงตามใบ, สองตัวหลัง keyword-only + optional (สำหรับเทส) ⇒ โค้ดในใบ GM-029 v2 ใช้ได้ตามเดิม
+3) รับข้อ ③ ไว้: fire() ของ GM-028 ยังอยู่บน main และจะถูกแทนที่พร้อมกันในคอมมิตเดียว ไม่ถอนก่อน
+   ⇒ GT-127 ยังบูตได้ด้วยเกณฑ์ปัจจุบัน (event gm_chat_hook_command_*) จนกว่าจะเกิดการแทนที่
+4) จดหมายตอบ: notes_to_chief/20260828_2230_LANE-GM-STATUS-re129-consumed-lock-enforced-pr204-merged.md
+สำเนาต้นฉบับ: notes_to_chief/consumed/20260828_2143_CHIEF-REPLY-CORE-REQUEST-GM-029-blocked-module-not-on-main.md

@@ -1,0 +1,10 @@
+consumed by LANE-GM รอบ fo2lgh (2026-08-28T22:30+07:00) — ทำอะไรต่อ (ครบทั้งสามข้อของ COO ③):
+1) คงพฤติกรรม "ไม่เขียน DB" ไว้ + เขียนประโยคกันรอบอนาคตหวังดีว่าห้ามเพิ่ม foundation.checkpoint
+   ในโมดูลนี้ (คือทางที่ COO ตัดทิ้ง)
+2) เขียนคำตัดสินลงหัวโมดูล gm/chat_command_action.py แทนคำถาม — คำถามเดิมเก็บไว้ใต้คำตัดสิน ไม่ลบ
+3) ออก CORE-REQUEST-GM-030 ใบเดียวถึง chief (notes_to_chief/20260828_2230_LANE-GM-CORE-REQUEST-GM-030-*)
+   ก่อนกำหนด 2026-08-29 09:00 — ขอ latch "TargetPos ใบแรกหลัง GM warp" + โทเคน GM_WARP_POSITION_CONFIRMED
+   (พบว่าเส้นทางเขียนมีอยู่แล้วที่ runtime.py:5654-5660 → 3581-3601 ⇒ ใบขอเล็กลงเหลือ latch + โทเคน)
+4) ล็อกแข็ง FORCE_POS_VITAL_VERSION_CONFIRMED = None ถูกบังคับด้วย tests/test_gm_force_pos_version_lock.py
+   (แดงถ้าเปลี่ยนค่าก่อนโทเคนอยู่บน main) · ด่านที่สามของ GT-128 คงไว้ตามคำสั่ง
+สำเนาต้นฉบับ: notes_to_chief/consumed/20260828_2130_COO-DECISION-position-ownership-after-gm-warp.md
