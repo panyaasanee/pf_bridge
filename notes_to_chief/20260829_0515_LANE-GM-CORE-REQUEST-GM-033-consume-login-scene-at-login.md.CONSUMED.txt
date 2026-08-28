@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ R222 (1684ra) 2026-08-29T05:2x+07:00: รับใบ: จะเปลี่ยน get_login_scene_override เป็น consume_login_scene_override ที่จุดเดิม (แทนที่ ไม่ใช่เพิ่ม) รวมกับทาง A ในใบเดียว รอ server#230 merge ก่อน -> 20260829_0520_CHIEF-DECISION-*

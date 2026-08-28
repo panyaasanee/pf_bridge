@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ R222 (1684ra) 2026-08-29T05:0x+07:00: ข้อ 3 ทำแล้ว (pf-adversary ข้อเช็คดีฟอลต์ 12) - ข้อ 4 ส่ง diff ถึงเจ้าของแล้ว (20260829_0501_CHIEF-ASK-PANYA-lock-file-header-split-diff.md) - ข้อ 5 ชน PANYA-ORDER 20260824_0025 หยุดรอ เขียนใบถึง COO แล้ว (20260829_0505) - ข้อ 1 readiness script ยังไม่เริ่ม รอบถัดไป

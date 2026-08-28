@@ -51,6 +51,22 @@ Every one of these happened here. Check for each shape by name.
     suggestions were mixed in one report and could not be told apart afterwards.
     **Ask: is every actionable claim labeled `[MEASURED]` (method + control named) or
     `[PROPOSED]`? Unlabeled counts as `[PROPOSED]`.**
+12. **A proof token that fires on drift instead of on the goal.** MANDATORY CHECK on
+    every ticket that ships a greppable token (vote item 3, `COO-DECISION
+    20260829_0441 vote-tally-six-org-hygiene-final`). `GM_WARP_POSITION_CONFIRMED`
+    printed green when the player took one step on their own, because the check was
+    "the row changed" and not "the row reached the commanded target". **Ask of every
+    token: is it compared against the INTENDED TARGET, or against a delta from the
+    previous state? A token that a state change alone can satisfy proves nothing about
+    the command that claims it.** Name the input that makes it fire without the
+    feature working.
+13. **Reading only half of one's own evidence.** MANDATORY CHECK (`COO-DECISION
+    20260829_0441 m2-destination-stays-scene-17-ask-closed`). A lane cited a number
+    out of its own previous round's file and shipped a conclusion that file's own
+    text refuted: the name it read as the destination's belonged to the ORIGIN. **Ask
+    of every citation of the project's own artifacts: was the cited file's CONCLUSION
+    read, or only the row/number that suits the claim? Open the cited file and read
+    what it says about the number.**
 
 ## Method
 For each defect: **a concrete failure scenario** — inputs or state, then the wrong
