@@ -1826,6 +1826,17 @@ bounded negative ที่ชัดเจนว่า static ตอบไม่�
 
 ## 🆕🔬 RE-128 SCENE-ORDINAL-TO-MOBS-NID-TABLE-LOCATION-001 [STATIC-ON-BRIDGE]: **ไฟล์/ตารางไหนของไคลเอนต์เก็บ mapping "เลขชุดต่อฉาก (1..115) → `MOBS.n_ID` (ถึง 10,080)" — ตัวที่หายไปทั้งโปรเจกต์ และเป็นตัวเดียวที่ทำให้ Port Royal เกิด NPC ผิดตัวทุกจุด**
 
+> 🟢🔴 **ชั้นตารางตอบแล้ว — LANE-A รอบ `9mtqfv` 2026-08-28T21:4x+07:00 · แต่ใบยัง *ไม่ปิด***
+> **คำตอบ: `gamedata/tables/CONSTDATA_TH__CLINE.tsv` · คีย์ `(n_CLINE_TYPE, n_CREATURE_TYPE) → n_LEADER_BK1`
+> · ฉากเข้าถึง type ผ่าน `SCENE_NAME.n_CLINE_TYPE` (`bg0001` → type 1)**
+> วัดซ้ำเอง: type 1 มี 113 แถวพอดี `n_CREATURE_TYPE` = `1..113` ครบไม่ขาด ตรงกับ `template_ids` ของ `bg0001` ·
+> identity 0/113 ใน type 1 (ทั้งตาราง 35/3,599 และทั้ง 35 อยู่ใน type 2) · **สมอเจ้าของเข้าทั้งสองจุด:**
+> index 1 → template 2 → **156 Columbus** · index 65 → template 67 → **802 Loie** (ใบ `20260827_0950_PANYA-DECISION-*`)
+> 🔴 **ยังไม่ปิดเพราะ:** ยังไม่ได้พิสูจน์ว่าไคลเอนต์อ่าน CLINE ตอนโหลดฉากจริง (ชั้นตารางล้วน ๆ · ต้องใช้เครื่องสะพาน) ·
+> `bg0001`/`Bg0002` บังเอิญมี `n_CLINE_TYPE == n_ID` ⇒ แยก "อ่านคอลัมน์" กับ "อ่าน `n_ID`" ไม่ออกที่สองฉากนี้ ·
+> 6 จาก 107 ค่า leader ของ type 1 ไม่มีใน `MOBS.n_ID` (`0,155,819,937,942,9107`) ยังไม่มีคำอธิบาย
+> nonclaim ครบหกข้อ + หลักฐานเต็ม: `notes_to_chief/20260828_2140_LANE-A-FINDING-RE-128-crosswalk-is-CONSTDATA-CLINE.md`
+
 > NUMBERING NOTE: ร่างไว้เป็น `RE-126` ตอนต้นรอบ แต่สาย GM รอบ `hs9m2r` merge `RE-126`+`GT-127` เข้า main
 > ก่อน ⇒ ตามกฎ "ชนแล้วห้ามทับ" ใบสาย GM อยู่ที่เดิม ใบนี้ขยับเป็น **`RE-128`** (สูงสุดบน main = 127)
 
