@@ -5561,7 +5561,7 @@ client-observable (a human at the screen only, never inferred from the console):
 
 ---
 
-## GT-120 CORE-REQUEST-025 TRACEPATH-GO-BUTTON-STALL-CLEAR-001: after CORE-REQUEST-025 wires an empty-vector `CTracePathVital` (0x2F92) reply to every `CTracePathReqVital` (0x4391), does a real client's map-window GO! button actually stop the client stuck showing "กำลังค้นหาเส้นทาง..." forever -- the orange stall KA1A found this round -- and does NOT this entry test whether the character walks anywhere (no waypoint/auto-walk logic exists yet)  [BLOCKED -- wait for merge: commit pirate-force-server@4ddfd54 pushed, not yet confirmed merged into origin/main at time of writing; ด่าน 0 below must clear before boot]
+## GT-120 CORE-REQUEST-025 TRACEPATH-GO-BUTTON-STALL-CLEAR-001: after CORE-REQUEST-025 wires an empty-vector `CTracePathVital` (0x2F92) reply to every `CTracePathReqVital` (0x4391), does a real client's map-window GO! button actually stop the client stuck showing "กำลังค้นหาเส้นทาง..." forever -- the orange stall KA1A found this round -- and does NOT this entry test whether the character walks anywhere (no waypoint/auto-walk logic exists yet)  [PENDING -- merge confirmed round `qynsyw` (2026-08-28 ~07:2x +07:00): `pirate-force-server#173` merged (`Merge pull request #173 from panyaasanee/claude/jolly-mccarthy-l5xxkh`), commit `4ddfd54` verified an ancestor of `origin/main` HEAD (`29a3a92`, PR `#180`) via `git merge-base --is-ancestor 4ddfd54 origin/main` on this round's fresh clone -- not trusted from any letter. Ready for an attended session; ด่าน 0/1/2 below still apply at boot time (more commits may have landed since this note).]
 
 > NUMBERING NOTE: grep confirmed before reserving (2026-08-28, round R206) -- `GT-120`/`RE-120` = 0 hits in
 > `GAME_TEST_QUEUE.md`, `CLIENT_RE_QUEUE.md`, and `archive/`. Highest number in use anywhere in the shared
@@ -5615,12 +5615,14 @@ entry is the client-observable layer only: the first human eyes on this specific
   RE/GT entry naming which of those three, do not re-run this one guessing.
 
 ### ก่อนบูต -- ด่าน 0 (merge status, MUST clear first), ด่าน 1 (green boot), ด่าน 2 (grep confirms the branch)
-**ด่าน 0 -- merge status:** commit `pirate-force-server@4ddfd54` is reported pushed but NOT yet confirmed
-merged into `origin/main` at time of writing this entry. `pf_resolve_green_boot.py` follows `origin/main`
-only -- if unmerged when the tester runs ด่าน 1, the resolver will not return a commit carrying this code
-(`exit 3`, or a commit missing `trace_path.py`). **The entry stays unbootable** -- record "รอ merge" and move
-to another ticket. Never checkout the branch directly to skip the resolver, and never trust the `4ddfd54`
-string above without ด่าน 2 confirming it live.
+**ด่าน 0 -- merge status:** commit `pirate-force-server@4ddfd54` is confirmed merged into `origin/main` as of
+round `qynsyw` (`git merge-base --is-ancestor 4ddfd54 origin/main` => ancestor, via `pirate-force-server#173`,
+itself an ancestor of the current `origin/main` HEAD `29a3a92`/PR `#180`) -- this replaces the earlier
+"not yet confirmed" note, which is now stale. This does NOT mean the tester can skip verification: run
+`pf_resolve_green_boot.py` yourself at boot time regardless (more commits may have landed on `origin/main`
+between this note and your session) -- if it still returns non-zero or a commit missing `trace_path.py`,
+the entry stays unbootable, record "รอ merge" and move to another ticket. Never checkout the branch directly
+to skip the resolver, and never trust the `4ddfd54` string above without ด่าน 2 confirming it live.
 
 **ด่าน 1:**
 ```
