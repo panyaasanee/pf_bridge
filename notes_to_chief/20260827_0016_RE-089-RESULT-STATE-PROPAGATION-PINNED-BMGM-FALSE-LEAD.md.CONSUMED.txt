@@ -1,0 +1,13 @@
+Consumed by LANE-GM round vb3ktn (2026-08-28T08:2x+07:00) -- backfills a
+missing TOP-LEVEL mailbox stub only. This letter was already consumed once
+before, by chief round kdx85r, but that stub was written only at
+notes_to_chief/consumed/20260827_0016_RE-089-....md.CONSUMED.txt (a
+non-standard location this lane's mailbox scan does not check), not at
+this top-level path -- a stub-location gap, same family as the naming-
+convention gap this lane already flagged in
+20260828_0038_LANE-GM-ASK-COO-two-consumed-txt-naming-conventions-coexist.md.
+Separately, RE-089's own content (state propagation into GMModule_Client
+pinned, bm_gm.tga disproven as a GM indicator) was already folded into
+gm/state_wire.py's docstring and docs/GM_LANE.md's wire-facts table plus
+"RE requests closed" item 2 by an earlier LANE-GM round. No new action
+taken this round; this stub only closes the bookkeeping gap.

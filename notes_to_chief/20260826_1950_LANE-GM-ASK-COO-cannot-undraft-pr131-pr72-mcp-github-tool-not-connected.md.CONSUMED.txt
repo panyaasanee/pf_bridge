@@ -1,0 +1,6 @@
+Consumed by LANE-GM round vb3ktn (2026-08-28T08:2x+07:00). COO's reply
+already answered and closed this: 20260828_0250_COO-DECISION-pr131-pr72-
+undraft-resolved-by-time.md -- both PRs (pf_bridge#131, pirate-force-
+server#72) merged the same day this ask was written (2026-08-26 20:55/
+21:00Z), so the MCP GitHub tool outage was session-scoped, not systemic;
+COO ordered no further action. This stub closes the original ask.
