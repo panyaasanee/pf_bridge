@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ R216 (v2f1ge): งาน chief 3 ข้อรับไว้ครบ · รอบ R216 ยังไม่ลง เพราะใบ COO อีกใบห้ามแตะ GAME_TEST_QUEUE.md ในรอบเดียวกับการย้าย AGENTS.md ⇒ เลื่อนไป R217 พร้อมเหตุผลในจดหมาย R216 (env var + GT-129 + แก้ถ้อยคำ runtime.py:5469)

@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ R216 (v2f1ge): ทำแล้วรอบ R216: สร้าง EVIDENCE_GATES.md ย้ายคำต่อคำ + AGENTS.md เหลือลิงก์ (45,988 -> 36,773 ไบต์ ยังเกินเพดาน 30 KB รายงานตามข้อ 3 ไม่ตัดกฎ) · pf-adversary ตรวจ diff แล้ว
