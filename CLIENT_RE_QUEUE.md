@@ -2010,7 +2010,29 @@ VA ตั้งต้นที่มีอยู่แล้วในโปร�
 🔴 **ปิดใบแล้วแจ้งกลับในกล่องทันที**
 
 **ADDRESSEE: RE** · ผู้เปิดใบ: LANE-GM (รอบ `gr2q9j`, 2026-08-28T18:24+07:00) -- ผลกลับมาที่สาย GM บริโภค
-## 🆕🔬 RE-130 GROUND-LABEL-LIST-MEMBERSHIP-001 [STATIC-ON-BRIDGE]: **ป้ายชื่อไอเทมบนพื้นผูกกับการที่ element ยังอยู่ในลิสต์ `0x08` (object+`0x20`) หรือเป็น one-shot ที่หมดอายุเอง — และลิสต์นั้นรับ count>1 ได้ไหม / แทนที่ทั้งลิสต์หรือ merge**
+## ✅🔬 RE-130 GROUND-LABEL-LIST-MEMBERSHIP-001 [STATIC-ON-BRIDGE] — **CLOSED / DONE-PASS · บริโภคแล้วโดย LANE-B รอบ `zxnwtd`**: **ป้ายชื่อไอเทมบนพื้นผูกกับการที่ element ยังอยู่ในลิสต์ `0x08` (object+`0x20`) หรือเป็น one-shot ที่หมดอายุเอง — และลิสต์นั้นรับ count>1 ได้ไหม / แทนที่ทั้งลิสต์หรือ merge**
+
+> ✅ **ปิด 2026-08-28T20:18+07:00 · ผลเต็ม: `notes_to_chief/consumed/20260828_2018_RE-130-RESULT-NAMEBOARD-OWNER-REPLACED-BY-OMISSION.md`**
+> **คำตอบข้อ 1:** ป้าย **ผูกกับ membership** — runtime object ของแต่ละ element ถือ `NameBoard_ITEM` ที่ `runtime+0x80`
+> (ctor `[0x005F49C0,0x005F4AEA)` · setup `[0x005BE2F0,0x005BE37C)` resolve `NameBoard_ITEM`/`LABEL_ITEM_NAME`)
+> destructor `[0x005F5060,0x005F5164)` ปล่อย ref นั้น ⇒ **ไม่ใช่ one-shot ล้วน**
+> **คำตอบข้อ 2/3:** codec รับ `count > 1` (count อ่านจาก list object `+0x2C` · consumer `[0x006AF970,0x006B03E3)`)
+> · generation ที่ **nonempty** update key ที่ส่งมา แล้ว **erase key ที่ omit** (`0x005E0D40` @ `0x006AFF84`/`0x006B0368`)
+> = **replacement-by-omission ไม่ใช่ merge** · element key = wire `u32 tag 0x14` → element `+0x10` ไม่มี transform
+> · `count=0` ไป epilogue = **no-op ไม่ใช่ clear**
+> **BUILD_IMPACT ที่สาย B ทำแล้วในรอบ `zxnwtd`:** `mob_loot.drop_frames` เลิกส่ง N collection ละ 1 element
+> เปลี่ยนเป็น **หนึ่ง generation ต่อหนึ่งการตาย ที่แบกทุก key** (`drop_collection_pc`) · เคสตกชิ้นเดียวยัง
+> compose เป็น 44/54 ไบต์เดิมของ `GT-045` เป๊ะ (เส้นทางเคสหนึ่งชิ้นวิ่งผ่าน `drop_pc` จริง ⇒ pin ถูก
+> assert ในเซิร์ฟเวอร์ทุกครั้งที่ส่ง ไม่ใช่แค่ในเทส)
+> 🔴 **แต่ generation ที่กว้างกว่าหนึ่ง element ไม่เคยถึงไคลเอนต์ไหนเลย** — หลักฐานของการเปลี่ยนคือใบ static
+> ใบเดียว ชั้น client-observable คือ `GT-131` ที่ยังไม่ได้รัน · บันทึกเป็น `mob_loot` NONCLAIM 22
+> พร้อม rollback และถาม COO ไว้ใน `notes_to_chief/20260828_2305_LANE-B-ASK-COO-*.md`
+> 🔴 **สิ่งที่ใบนี้ไม่ได้ตอบ และห้ามอ่านว่าตอบ:** ป้ายจะ**อยู่บนจอนานขึ้น**หรือ client จะ**วาด**หลายป้ายพร้อมกัน
+> — ใบเองเขียนไว้ว่าไม่รับประกัน ⇒ เปิด **`GT-131`** (attended) ไว้ตอบชั้น client-observable
+> 🔴 **ยังเหลือช่องข้ามการตาย:** generation ของการตายครั้งถัดไปจะลบ key ของครั้งก่อนด้วย omission
+> แก้ได้ต่อเมื่อ **ทั้ง ledger ที่ยังมีชีวิต** เป็น generation เดียว ซึ่งติดที่ call site ที่ prune ทันที
+> (`runtime.py:4298-4312` ของ chief) — เขียนเป็นบรรทัดเดียวใน PR body รอบ `zxnwtd` แล้ว · บันทึกเป็น
+> `mob_loot` NONCLAIM 20
 
 > NUMBERING: ก่อนจอง (`j6cbdc`) `RE-130`/`GT-130` = 0 hit · **`RE-130` ชนกับใบ `FORCE-POS-VITAL-VERSION-001` ที่ merge เข้า main ก่อน**
 > ⇒ ตามกฎ "ชนแล้วห้ามทับ" ใบนั้นอยู่ที่เดิม ใบนี้ขยับเป็น `RE-130` (สูงสุดบน main = `RE-130`)
