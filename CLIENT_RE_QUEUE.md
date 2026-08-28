@@ -1643,7 +1643,31 @@ wire POSITION ของทั้งหกช่องนี้ **ปิดแล
 
 ---
 
-## 🆕🔬 RE-123 BG0002-MIRAGE-REEL-QUEST-SPAWN-CROSSWALK-001 [STATIC-ON-BRIDGE]: **NPC "Mirage reel" ที่หน้าต่างแผนที่เกาะคุกของเจ้าของแสดงไว้ (ยืนหน้าเต็นท์ Mo Yuzi) มี n_ID ไหน และมันมาจากไฟล์ placement (`.npc`) ของฉากหรือมาจากการ spawn ผ่านเควส**
+## 🆕🔬 RE-123 BG0002-MIRAGE-REEL-QUEST-SPAWN-CROSSWALK-001 [STATIC-ON-BRIDGE]: **NPC "Mirage reel" ที่หน้าต่างแผนที่เกาะคุกของเจ้าของแสดงไว้ (ยืนหน้าเต็นท์ Mo Yuzi) มี n_ID ไหน และมันมาจากไฟล์ placement (`.npc`) ของฉากหรือมาจากการ spawn ผ่านเควส**  [🔴 **CLOSED MIXED-POSITIVE-BOUNDED — identity ปิดได้เป็น `MOBS/TIP n_ID=230` แต่ BUILD_IMPACT_NONE (hard guard) เพราะไม่มี XYZ/visibility policy, ปิดโดย LANE-A รอบ `z851j4` 2026-08-28T09:3x+07:00**]
+
+> **ผลสรุป (เต็มดู `notes_to_chief/20260828_0913_RE-123-RESULT-NID230-SERVER-OWNED-XYZ-UNPROVEN.md`):**
+> T1 (named-field crosswalk: `QUESTTEXT_TH__TEXT_QUEST.tsv` quest 51 briefing text path, `QUESTDATA_TH__QUEST.tsv`
+> quest 51/926 `n_SCENE=2`, `CONSTDATA_TH__MOBS.tsv` row `n_ID=230`'s `s_QUEST_BEGIN/END`) ปักหมุด identity
+> เป็น `MOBS/TIP n_ID=230` จากผู้สมัคร 19 ตัวชื่อซ้ำ "Mirage reel" — ตัวเดียวที่ผูก scene-2 quest ทั้งสองทิศ
+> (END quest 51, BEGIN quest 926) T2 (placement boundary): `Bg0002.placements.tsv` 106 แถว และทุก
+> `*.placements.tsv` ที่ extract ไว้แล้ว **ไม่มี template 230 เลยสักแถว** — ห้ามยืม XYZ ของ Mo Yuzi (n_ID 39)
+> T3 (Lua/spawn mechanism): quest 51/926 มี `n_VARI_13..20 = 0` ทุกช่อง และ `Player.MobAppear` (client)
+> เป็น stub no-op (`0x0045FA00`, verify image ตรง `xor eax,eax; ret 4`) ⇒ actor 230 ต้องมาจาก
+> **server-owned population** ไม่ใช่ client placement/Lua T4: `BUILD_IMPACT: ไม่มี source patch — hard guard`
+> เพราะ identity ปิดได้แต่ authoritative XYZ และ lifecycle/visibility policy ยังไม่ปิด
+>
+> **สาย A ทำอะไรกับผลนี้:** ไม่เพิ่ม static row 230 เข้า `scene2_prison_exile_tables.py` ตามที่ใบสั่งห้ามตรงๆ
+> แทนที่ด้วยการ formalize hard guard เป็น enforced test สี่ตัวใหม่ใน
+> `tests/test_scene2_prison_exile_tables.py` (`MirageReelRe123GuardTests`) ที่ยืนยันว่า 230 ไม่อยู่ทั้งใน
+> `KNOWN_PLACEMENTS` และ `UNRESOLVED_PLACEMENTS`, ว่า loader จะ refuse ถ้ามีใครเผลอเพิ่ม 230 เข้าไปในอนาคต,
+> และว่าไม่มีการยืมพิกัดของ Mo Yuzi (n_ID 39) มาใช้กับ 230 — ถ้าเจ้าของให้ XYZ/visibility policy จริงในอนาคต
+> (หรือมี original-server actor capture) ค่อยเปิดใบ BUILD/RE ใหม่เพื่อส่ง actor_type 4 n_ID 230 ผ่าน
+> census path ที่มีอยู่แล้ว
+>
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง (2026-08-28T09:31+07:00, รวม `notes_to_chief/`, `rounds/`):
+> `RE-124`/`GT-124` = 0 hit ทั้ง `CLIENT_RE_QUEUE.md` และ `GAME_TEST_QUEUE.md` — เลขสูงสุดที่ใช้แล้วคือ
+> `123` (ใบนี้เอง) ⇒ ใบถัดไปคือ `124`
+> 🔴 ใบเดิมทั้งหมด (`RE-085`-`RE-122`) อยู่ที่เดิม ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ
 
 > 🔢 หมายเหตุเลข: shared counter (RE/GT ร่วมกัน) สูงสุดที่ใช้อยู่ตอนนี้คือ `RE-122`; grep ยืนยันก่อนเปิดใบ
 > (2026-08-28T08:3x+07:00, รอบสาย A `of27sx`): `RE-123`/`GT-123` = 0 hits ใน `CLIENT_RE_QUEUE.md`,

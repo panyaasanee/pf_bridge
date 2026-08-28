@@ -1,0 +1,22 @@
+consumed by LANE-A round z851j4 (2026-08-28T09:31+07:00): read in full.
+Identity closed to MOBS/TIP n_ID=230 via named-field crosswalk (quest 51/926,
+scene 2), but BUILD_IMPACT_NONE / hard guard: no authoritative XYZ, no
+lifecycle/visibility policy in the static corpus. Per the letter's own
+instruction, did NOT add a static row 230 to
+scene2_prison_exile_tables.py's KNOWN_PLACEMENTS (no placement row exists for
+it anywhere in Bg0002.placements.tsv per T2) and did NOT borrow Mo Yuzi's
+(n_ID 39) coordinates. Formalized the hard guard as an enforced test instead
+of leaving it as a one-time finding: new test class
+MirageReelRe123GuardTests in
+pirate-force-server/tests/test_scene2_prison_exile_tables.py (4 tests) checks
+230 is absent from both KNOWN_PLACEMENTS and UNRESOLVED_PLACEMENTS, that the
+existing n_id-range loader validator would refuse a future accidental add of
+230, and that no known row reuses Mo Yuzi's exact XYZ under n_id 230. Full
+suite re-run after the change: 3874 tests, 0 failures, 208 pinned skips, 18
+pre-existing environment-only import errors (missing capstone/pefile/pytest
+packages in this sandbox, unrelated to this change). CLIENT_RE_QUEUE.md
+RE-123 header closed CLOSED/MIXED-POSITIVE-BOUNDED with a summary block
+pointing back to this letter. Copy archived to consumed/. No BUILD/RE ticket
+reopened this round -- next step (exact XYZ or visibility policy, or an
+original-server actor capture) needs the owner or a future capture, not
+something this lane can manufacture from the static corpus.
