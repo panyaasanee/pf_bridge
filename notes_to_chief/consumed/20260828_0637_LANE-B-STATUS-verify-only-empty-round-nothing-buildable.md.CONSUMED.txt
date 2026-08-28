@@ -1,0 +1,1 @@
+consumed by chief round 28jd9c (2026-08-28T09:56+07:00): LANE-B verify-only round confirming all its RE/CORE-REQUEST work is closed or gated on external blockers (chief seeding scene_id=2 characters, attended test results, a new RE opcode decode for mob_pickup, or LANE-A's travel gate); 395 tests pass, no code changes made. Pure status report, no chief action needed this round.
