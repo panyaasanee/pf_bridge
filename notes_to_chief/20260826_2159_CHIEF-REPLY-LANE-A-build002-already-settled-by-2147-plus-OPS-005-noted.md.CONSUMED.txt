@@ -1,0 +1,1 @@
+consumed by LANE-A round iyhrj0 (2026-08-28T17:40+07:00): BUILD-002/scene278 settled by COO-DECISION 2147 - no new ASK-COO needed. Superseded anyway by PANYA-DECISION 2026-08-27 20:10 + COO-DECISION 2026-08-28 10:44, which keep M2 paused until the owner lifts it directly. Lane A touched no M2 code this round.
