@@ -41,8 +41,9 @@ GM-028 ขอ `lane_hooks.fire()` หนึ่งจุดที่สาขา 
 
 - `lane_hooks.fire()` **ไม่คืนค่า** ตาม docstring ของตัวมันเอง:
   *"Never returns a value; hooks that need to hand something back to runtime.py are not what this point shape is for"*
-- ไบต์ออกสู่ client มี **ทางเดียว** ในเซิร์ฟเวอร์นี้: list `(label, pc, frame, delay)` ที่ `dispatch()`
-  **คืนค่า** แล้ว serve loop ของ legacy ดูดไปส่ง
+- **เลน**ส่งไบต์ได้ทางเดียว: list `(label, pc, frame, delay)` ที่ `dispatch()` **คืนค่า** แล้ว serve loop
+  ของ legacy ดูดไปส่ง (`pf_login_game_server_v141.py:7755`) — พูดให้ตรงตามที่ adversary แย้ง: ไฟล์ legacy
+  มี `sendall` สี่จุด แต่ไม่มีจุดไหนที่เลนเอื้อมถึง ⇒ ข้อสรุปเดิมยืน แต่ถ้อยคำเดิมเกินจริง
 - ตรวจทางอื่นแล้วไม่มี: `connection.py` เป็น socket plumbing ล้วน ไม่มีคิว action ·
   `gm/dispatch.py` docstring ของสายนี้เองเขียนไว้ตั้งแต่แรกว่า
   *"this lane has no send path outside a CORE-REQUEST wiring point"*
@@ -78,7 +79,7 @@ GM-028 ขอ `lane_hooks.fire()` หนึ่งจุดที่สาขา 
 `gm_chat_warp_withheld_no_confirmed_force_pos_vital_version_re129_open`
 รูปแบบเดียวกับที่ `runtime.py:5107` เกต `0x5A19` ไว้ **ซึ่งเป็นสิ่งที่ช่วยโปรเจกต์นี้ไว้แล้วหนึ่งครั้ง**
 
-### 3. `tests/test_gm_chat_command_action.py` (ใหม่) — 24 เทส + 5 subtests
+### 3. `tests/test_gm_chat_command_action.py` (ใหม่) — **34 เทส + 25 subtests** (หลังแก้ตาม adversary)
 สี่ชุด: `VersionGateTests` (เกตเป็นของจริง ไม่ใช่ของประดับ) · `WarpActionTests` (ไบต์ที่ได้ต้องเท่ากับ
 ของ composer ที่พินไว้ ไม่ใช่ไบต์ชุดใหม่ · z มาจาก connection ไม่ใช่ค่าเริ่มต้น) ·
 `PermissionTests` (ผู้เล่นทั่วไปพิมพ์คำสั่งเดียวกัน = ไม่ได้อะไร ไม่มีแถว ndjson ไม่มีการถอดรหัส) ·
@@ -90,7 +91,8 @@ subclass ที่โกหกผ่าน `__len__` — ทุกตัวต�
 - **`RE-129`** (`CLIENT_RE_QUEUE.md`): ไบต์ `vital_version` ของ `ForcePos` `0x0E80` — คำถามเดียว
   วิธีทำซ้ำของ RE-105 ตัวต่อตัว เกณฑ์จบ = ตัวเลขหนึ่งตัว + VA
 - **`GT-128`** (`GAME_TEST_QUEUE.md`): ใบแรกของสายนี้ที่ **ตัดสินที่จอ** — พิมพ์ `/warp` ในแชทแล้วตัวละครขยับไหม
-  `[BLOCKED x2]` ชัดเจนว่าห้ามบูตจนกว่า GM-029 ลง main **และ** RE-129 ตอบ
+  `[BLOCKED x3]` ชัดเจนว่าห้ามบูตจนกว่า GM-029 ลง main **และ** RE-129 ตอบ **และ** คำถาม
+  "ใครเป็นเจ้าของตำแหน่งหลัง warp" ถูกเคาะ (ใบ `ASK-COO` รอบนี้)
 - **`CORE-REQUEST-GM-029`** (`notes_to_chief`): แทนที่ GM-028 ทั้งใบ · GM-028 ถูกขีดฆ่าด้วย banner
   ที่หัวใบ (เนื้อหาเดิมคงไว้ครบ ตามกฎ "ห้ามลบประวัติเดิม")
 - `GT-127` หัวใบอัปเดต: ชี้ไป GM-029 และเตือน 🔴 **wire ได้จุดเดียว** — ถ้าวางทั้ง `fire()` และ action
