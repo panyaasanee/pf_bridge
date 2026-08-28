@@ -1640,3 +1640,56 @@ wire POSITION ของทั้งหกช่องนี้ **ปิดแล
 **ทำไมมีค่า:** ตัวละครที่บูตวันนี้ MP=0/1 (ไม่เคยส่ง) และไม่มี STR/CON/DEX/INT/PER เลย — ยังไม่ "สมประกอบ"
 ตามที่เจ้าของสั่งไว้ใน `PANYA-DECISION 0125` เต็มรูปแบบ (มีแค่ class+level+speed จาก R203/R208) ปิดใบนี้แล้ว
 เติมค่าเป็นการแก้ constant บรรทัดเดียวในโค้ดที่มีอยู่แล้ว ไม่ต้องหา wire position ใหม่
+
+---
+
+## 🆕🔬 RE-123 BG0002-MIRAGE-REEL-QUEST-SPAWN-CROSSWALK-001 [STATIC-ON-BRIDGE]: **NPC "Mirage reel" ที่หน้าต่างแผนที่เกาะคุกของเจ้าของแสดงไว้ (ยืนหน้าเต็นท์ Mo Yuzi) มี n_ID ไหน และมันมาจากไฟล์ placement (`.npc`) ของฉากหรือมาจากการ spawn ผ่านเควส**
+
+> 🔢 หมายเหตุเลข: shared counter (RE/GT ร่วมกัน) สูงสุดที่ใช้อยู่ตอนนี้คือ `RE-122`; grep ยืนยันก่อนเปิดใบ
+> (2026-08-28T08:3x+07:00, รอบสาย A `of27sx`): `RE-123`/`GT-123` = 0 hits ใน `CLIENT_RE_QUEUE.md`,
+> `GAME_TEST_QUEUE.md`, `notes_to_chief/`, `rounds/` ⇒ ใบนี้จอง `123`
+> 🔴 ใบเดิมทั้งหมด (`RE-085`-`RE-122`, `GT-101`-`GT-122`) อยู่ที่เดิม ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่
+
+### ที่มา
+- `notes_to_chief/20260828_0150_M1P-RESULT-PASS-owner-confirms-Prison-Exile-identities-6-gaps-map-window-lead.md`
+  gap ⑤: เจ้าของชี้ว่า "Mirage Reel" ควรยืนข้าง Mo Yuzi (n_ID 39, MOBSET_39) แต่ไม่ถูก render — ADDENDUM 02:15
+  ยืนยันด้วยภาพเซิร์ฟเวอร์เดิมของเจ้าของ (`evidence_screens\REF_original_server_PrisonExile_*.png`): ป้ายชื่อเหลือง
+  + ไอคอนเควส "?" ลอยเหนือหัว ยืนหน้าเต็นท์น้ำเงินข้าง Mo Yuzi จริง และอยู่ในรายการเควส "การติดต่อจากคุก →
+  ตอบกลับ: Mirage reel"
+- `src/pirateforce_foundation/scene2_prison_exile_tables.py` (สาย A, module เดียวกับที่ผลิต roster 97 ตัวปัจจุบัน):
+  **ตรวจแล้วรอบนี้ (สาย A, ก่อนเปิดใบ, ไม่ใช่การเดา)** — placements TSV ของ Bg0002 มี 106 แถวทั้งหมด (97 resolved
+  + 9 unresolved: NN 37 "Port transportation" + block 101-104) และไม่มีแถวไหนชื่อ "Mirage reel" เลยทั้ง 106 แถว
+  (เช็คตรงกับ `TEXTDATA_TH__MOBS_TIP.tsv` ที่ n_ID 37/101/102/103/104 = "Port transportation"/"Swamp Tortoise"/
+  "Orc"/"Orc Chief"/"Port transportation" — ไม่ใช่ "Mirage reel" สักแถว) ⇒ **Mirage reel ไม่ได้อยู่ใน placement
+  static ของฉากนี้เลย ไม่ใช่แค่ 9 ตัวที่ unresolved** — บทสรุปที่ M1-P's ADDENDUM ทิ้งเป็นสมมติฐาน ("อาจเป็น
+  static ที่ยัง unresolved หรือ spawn จากเควส") ตัดสมมติฐานแรกออกได้แล้วด้วยหลักฐานนี้: ที่เหลือคือ quest spawn
+- `TEXTDATA_TH__MOBS_TIP.tsv` มีชื่อ "Mirage reel" อยู่ 19 แถว (n_ID 151, 230, 232-235, 237, 238, 245, 485, 487,
+  718-721, 726, 727, 752, 866 — ตรวจนับตรงจากไฟล์รอบนี้ ไม่ใช่จากใบเดิม) เป็นชื่อ generic ใช้ซ้ำหลายเควส/หลายฉาก
+  ⇒ ใบนี้ต้องกรองด้วย `n_SCENE`/`n_VARI`/`QUESTTALK` ไม่ใช่แค่ชื่อ
+- `QUESTDATA_TH__QUEST.tsv` (1545 แถว, คอลัมน์ `n_SCENE`/`n_VARI_1..20`/`s_VARI_1..2`) และ
+  `QUESTDATA_TH__QUESTTALK.tsv` มีอยู่ใน `gamedata/tables/` แล้ว (grep ยืนยันก่อนเปิดใบ ตามกฎบังคับข้อสองของไฟล์นี้)
+  — ยังไม่ได้ไล่ค้นเนื้อหา รอบนี้แค่ยืนยันว่าตารางมีอยู่และมีคอลัมน์ที่ใบนี้ต้องใช้
+
+### objective
+1. หาเควสที่มี `n_SCENE=2` (หรือ scene reference เทียบเท่าที่ตารางนี้ใช้จริง) และมี VARI/lua ที่อ้าง NPC ใน
+   19 n_ID ผู้สมัคร "Mirage reel" ข้างต้น — ระบุ n_ID ที่ตรงกับเควส "การติดต่อจากคุก" (ชื่อไทยอาจต่างเล็กน้อย
+   ใน `QUESTTEXT_TH__TEXT_QUEST.tsv` — ค้นด้วยคำ ไม่ใช่ตรงตัวเป๊ะ)
+2. ถ้าเจอ n_ID: หา spawn mechanism ทางฝั่งไคลเอนต์ (lua script ใน `gamedata/lua/Quest/` ที่ผูกกับเควสนั้น น่าจะมี
+   คำสั่ง spawn/summon NPC) — ระบุว่า spawn ผ่าน lua callback (ไม่ใช่ placement ปกติ) หรือกลไกอื่น
+3. ถ้าเป็น lua-triggered spawn: บันทึกว่านี่คือ spawn ที่เซิร์ฟเวอร์ (ไม่ใช่ client) ต้องเป็นคน trigger หรือ
+   client จัดการเองทั้งหมดเมื่อเงื่อนไขเควสถึง (เช็ค quest state field ที่เราส่งอยู่แล้วหรือไม่)
+4. ถ้าชนเพดาน static (ไม่พบ crosswalk n_SCENE→n_ID ที่ชัดเจน) ให้เขียน bounded negative — **ห้ามเดา n_ID จาก
+   19 ตัวเลือกแล้วเพิ่มเข้า `scene2_prison_exile_tables.py` โดยไม่มีหลักฐาน**
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (แถว/คอลัมน์/offset) · ชนเพดานให้เขียน bounded negative
+แล้วปิด ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+n_ID ของ Mirage reel ฉาก 2 พร้อม provenance (เควส + spawn mechanism) พอให้สาย A ตัดสินใจได้ว่าต้องเพิ่ม static
+placement หรือต้องเป็น server-triggered quest-spawn (คนละงานกับ census ปกติ) **หรือ** bounded negative ที่ชัดเจน
+⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+
+**ทำไมมีค่า:** เจ้าของยกเป็นหนึ่งใน 6 ช่องว่างจาก M1-P PASS โดยตรง (NPC เควสหายจากจอ) และเป็นตัวอย่างแรกที่ยืนยัน
+แล้วว่า placement TSV ไม่พอ — ถ้าไม่ปิดใบนี้ก่อน สาย A จะไม่มีทางรู้ว่าต้องสร้าง static row เพิ่มหรือต้องรอ
+กลไก quest-spawn ที่ยังไม่มีในเซิร์ฟเวอร์เลย
