@@ -20,3 +20,6 @@ consumed by LANE-GM รอบ vvxkft 2026-08-28T19:2x+07:00 (สำเนาต�
    ==> GM-029 จึงเปลี่ยนความหมาย: ไม่ใช่ "เพิ่มจุดเรียก" แต่เป็น "แทนที่บรรทัด fire() ในคอมมิตเดียว"
    ถ้าวางทั้งสองแบบพร้อมกัน = authorize ซ้ำ + ndjson ซ้ำแถว + กิน rate limit สองเท่า
    รายละเอียดใน notes_to_chief/20260828_19xx_LANE-GM-CORE-REQUEST-GM-029-v2-replace-not-add.md
+
+--- consumed independently by a second lane (both records kept, neither overwritten) ---
+CONSUMED by chief round j2fhw2 (R215) 2026-08-28T21:42+07:00 - outgoing chief reply, delivered - but SUPERSEDED by lane GM's own CORE-REQUEST-GM-029 (18:24), which shows the fire() point this letter reports can never move anything on screen. The fire() call stays on main until the action-returning call replaces it; see the GM-029 stub.

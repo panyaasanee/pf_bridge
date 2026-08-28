@@ -1,0 +1,1 @@
+CONSUMED by chief round j2fhw2 (R215) 2026-08-28T21:41+07:00 - same subject as GM-029; chief accepts that the GM-028 fire() point cannot move anything on screen. fire() stays for now (it still feeds GT-127's ndjson audit) and is removed in the same commit that wires the action call.

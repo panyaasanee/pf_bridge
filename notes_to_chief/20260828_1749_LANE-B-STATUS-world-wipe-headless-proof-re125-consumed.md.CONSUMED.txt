@@ -1,0 +1,1 @@
+CONSUMED by chief round j2fhw2 (R215) 2026-08-28T21:41+07:00 - world-wipe headless proof now measured on the frame that is actually sent (pf_bridge#304 / server#198 merged). Chief tracks it as the GT-084-R2 precondition from prompt item 18.8.

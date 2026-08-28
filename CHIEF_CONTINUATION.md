@@ -2,29 +2,7 @@
 
 
 
-## ดัชนีรอบเก่า (รอบ 44–178) — ย้ายไป archive แล้วทั้งหมด บรรทัดเดียวต่อกลุ่ม ไม่มีการลบเนื้อหา รายละเอียดเต็มอยู่ในไฟล์ archive ที่ชี้ไว้
-
-- รอบ 44 (26→M13 + คำขอ Panya ตอบครบแล้ว) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260817.md` ก้อน A
-- รอบ 53 (§1-§35: ข้อจำกัดเครื่อง/PF BRIDGE/Workspace/Playbook/โครงสร้างทีม/บันทึกรอบ 41-45) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R53.md`
-- รอบ 60 (§36-§44: รอบ 46-54, persistence design/ลูกมือ Windows probe/HYP-PF-015/CHAT-ECHO-002,004) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R60.md`
-- รอบ 68 (§45-§50: รอบ 55-60 CHAT-ECHO-005..008/MOVE-AUTHORITY-001/MOVE-CADENCE-001 + รอบ 61-63) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R67.md`
-- รอบ 64-67 (NAMEID fold revert/occupied_destination_policy/same_slot_noop/MOVE-ISOLATION-001) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R72.md`
-- รอบ 68-71 (SPLIT-OPERATE-001..003/ITEM-MERGE-001) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R76.md`
-- รอบ 72-75 (MOVE-AUTHORITY-001/MOVE-PROJECT-001/USE-DROP-SELL-001/CHAT-CHANNEL-001) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R77.md`
-- รอบ 76-78 (CHAT-CHANNEL-002/003/MULTIPLAYER-READINESS-AUDIT-001/STATS-PROG-002 — actor_type 2..6 = CNetActor/CMyActor/CNetNPC/CAvatarNPC/Pet, remote player=2 — 🔴 **Option 1 ส่วน (a) เสร็จตั้งแต่รอบ 78 ห้ามทำซ้ำ**, รอบ 81 เกือบสั่งลูกมือทำซ้ำมาแล้วครั้งหนึ่ง) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260819_R78.md`
-- รอบ 80-81 (UI-REFRESH-001/HP-DEATH-001 + 4 lane ขนาน NAMES/DELETE-REFRESH/HP-DEATH-002/MP-OPT1-B) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260819_R80_R81.md`
-- รอบ 82-83 (CORPUS-PIN-001 44/67 pinned/DAMAGE-MODEL-001: i32 signed ที่ hit entry +0x08, wire = tagged stream) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260819_R82_R83.md`
-- รอบ 84-85 (DYING-HOLD-001/ATTENDED-EVIDENCE-001/SCAN-DEBT-001 + NAMES-FOLD-002/RUNTIMERES-ACTOR-ENTRY-001/RESOLVE-SCOPE-001) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260819_R84_R85.md`
-- รอบ 86-89 (RUNTIMERES-ENCODER-001/NAMES-FOLD-003/COMMENT-ERRATA-002/LEDGER-VISIBILITY-001/CP874-PORTABILITY-001/DEATH-ESCALATE-001/BRIDGE-LIVENESS-001) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260820_R86_R89.md`
-- รอบ 90-91 (guard แดง = guard ทำงาน · **takeover แล้วให้อ่านทรีก่อน อย่าเขียนทับ** · HYP-PF-024 16 path `d4ed4d4` + RUNTIMERES-LATCHONLY-001 `47c7211`) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260820_R90_R91.md`
-- รอบ 92 -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260820_R92.md`
-- รอบ 100-102 (GT-027/028/029 results, DYING-COUNTDOWN 3-layer proof — เดิมไม่มีบรรทัดดัชนีของตัวเอง เข้าถึงได้อ้อมผ่าน `R109_ROUND107.md`'s บรรทัด 156 เท่านั้น ก่อนรอบนี้) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260820_R100_R101_R102.md`
-- รอบ 93+95+96 (gate-reproducible/GT-024 CHitResult · HYP-PF-024 3/3 · multiplayer ก้อน 2 HYP-PF-025) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260820_R93_R95_R96.md`
-- รอบ 107 (sync design ฝั่ง Windows/repo ที่สอง/push A'/อ่านผล Actions ทาง D) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260820_R109_ROUND107.md`
-- รอบ 108-111 (HYP-PF-029 NPC-HP-LINK-001 GT-039/merge-claude-pr/ci-status ทาง D/ท่อ sync + prompt A') -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260824_R108_R111.md`
-- รอบ 112-150 (42 รอบ, บรรทัดดัชนีครบ ไม่มีการลบ) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260825_R112_R150.md`
-- รอบ 151-165 (15 รอบ, บรรทัดดัชนีครบ ไม่มีการลบ) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260826_R151_R165.md`
-- รอบ 166-178 (13 รอบ, บรรทัดดัชนีครบ ไม่มีการลบ) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260827_R166_R178.md`
+## ดัชนีรอบเก่า (รอบ 44-178) — ย้ายไป `archive/CHIEF_CONTINUATION_ARCHIVE_INDEX.md` แล้วทั้งบล็อก ไม่มีการลบเนื้อหา
 
 ## 0. โครงสร้างทีมคืนนี้ + เช็คก่อนเริ่มทุกครั้ง
 
@@ -111,3 +89,4 @@
 - R211(28jd9c) 2026-08-28 ~10:x (+07:00) housekeeping ล้วน: `CHIEF_CONTINUATION.md` 67.5KB→30.3KB (adversary แก้ 4 จุดจริง) · mailbox stub 53 ใบ · GT-116/120 PASS + GT-122 แก้สถานะ merge ค้าง [สรุปย่อ -> rounds/R211_28jd9c_mailbox-stub-backlog-plus-chief-continuation-size-cut-plus-gt116-120-122-closed.md]
 - R213(swlc56) 2026-08-28 ~17:0x-17:2x (+07:00) ซ่อม full-gate RED 39 ใบที่สะพานเจอ (census 4 pin ล้าสมัย + negative 2 ข้อที่แดงเพราะคอมเมนต์/สตริง SHA ไม่ใช่โค้ด) และเพิ่มเทสที่คำนวณ census จาก src/ ได้โดยไม่ต้องมีอิมเมจ -> rounds/R213_swlc56_fullgate-red-repair-src-census-and-negative-discriminators.md
 - R214(lo7e03) 2026-08-28 ~18:1x (+07:00) กู้งาน R213 ที่หายจาก main: `pirate-force-server` #197 เขียวแต่ถูกปิดโดยไม่ merge (เจ้าของยืนยันเองว่าปิดด้วยมือเพราะปัญหาเทคนิค ไม่ใช่ workflow) -> cherry-pick `8767d499` ขึ้น branch รอบนี้ไม่แก้เนื้อ, เทสซ้ำเขียว(cloud sanity) + ledger PASS 47 · โหมด codex local + STANDBY ถูกยกเลิกกลางรอบตามใบ 18:05 · stub กล่องจดหมายค้าง 20 ใบ · GT-125 แก้เงื่อนไข "รอ merge" ให้ชี้ใบใหม่ · CORE-REQUEST-GM-028 รับแล้ว ต่อสายเป็น PR ใบที่สอง -> rounds/R214_lo7e03_pr197-recovered-owner-closed-it-standby-lifted.md
+- R215(j2fhw2) 2026-08-28 ~21:4x (+07:00) `AGENTS.md` 89.5KB->46KB (ที่มาไป `archive/AGENTS_HISTORY_20260828.md` ครบทุกตัวอักษร) · `CHIEF_CONTINUATION.md` 32.9KB->28.5KB ใต้เพดานแล้ว · CORE-REQUEST-GM-029 ต่อไม่ได้ (โมดูลยังไม่ขึ้น main) · stub 21 ใบ -> rounds/R215_j2fhw2_agents-md-size-cut.md
