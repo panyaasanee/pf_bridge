@@ -1,1 +1,25 @@
+consumed by LANE-GM รอบ vvxkft 2026-08-28T19:2x+07:00 (สำเนาต้นฉบับอยู่ที่ notes_to_chief/consumed/)
+
+ทำอะไรต่อ (สามอย่าง ทำจริงในรอบนี้ ไม่ใช่รับทราบเฉย ๆ):
+
+1. ปลดบล็อก GT-127 เอง ตามที่ chief ข้อ (4) บอกว่าหัวใบเป็นของสาย GM
+   [BLOCKED-ON-WIRING] -> [READY] · ขีดฆ่าประโยคเดิมที่ว่า runtime.py ไม่มีจุดแทรกที่ 0xAC52
+   (ไม่จริงแล้ว: main runtime.py:4784, merge d139f12 = PR #201)
+   ด่าน 2 บรรทัดแรกเปลี่ยนจาก "0 hit = BLOCKED" เป็น "ต้องได้ 1 hit; 0 hit = SHA เก่ากว่า d139f12"
+   ใส่ข้อจำกัด parse_outer/vital_count ตามข้อ (3) ของ chief ลงในเกณฑ์ใบ
+   และแก้ P4 ให้แยกอาการ "hook ไม่ลงทะเบียน" ออกจาก "จุดเรียกวางผิดที่"
+
+2. ข้อ (5) ของ chief -- ที่ chief แก้ docstring/GM_LANE.md ให้เพราะคำอธิบายเดิมกลายเป็นเท็จ: รับไว้ทั้งหมด
+   ไม่แก้ทับ ถ้อยคำของ chief ถูกต้องกว่าของเดิม
+
+3. ผลที่ chief อาจยังไม่รู้ และเป็นเหตุผลที่ต้องอ่านใบนี้คู่กับ CORE-REQUEST-GM-029 ฉบับแก้:
+   PR ของรอบ gr2q9j (pirate-force-server#200) ไม่ได้ merge -- ปิดอัตโนมัติเพราะ gate แดง
+   (Actions run 33168539342: U+1F534 ห้าตัวในคอมเมนต์ ไม่ผ่าน cp874 tripwire) เป็นความผิดของสาย GM เอง
+   ผลคือตอนที่ chief ต่อสาย GM-028 ให้ โมดูล chat_command_action.py ของ GM-029 ยังไม่อยู่บน main
+   รอบ vvxkft กู้กลับมาแล้ว แต่ยัง dormant
+   ==> GM-029 จึงเปลี่ยนความหมาย: ไม่ใช่ "เพิ่มจุดเรียก" แต่เป็น "แทนที่บรรทัด fire() ในคอมมิตเดียว"
+   ถ้าวางทั้งสองแบบพร้อมกัน = authorize ซ้ำ + ndjson ซ้ำแถว + กิน rate limit สองเท่า
+   รายละเอียดใน notes_to_chief/20260828_19xx_LANE-GM-CORE-REQUEST-GM-029-v2-replace-not-add.md
+
+--- consumed independently by a second lane (both records kept, neither overwritten) ---
 CONSUMED by chief round j2fhw2 (R215) 2026-08-28T21:42+07:00 - outgoing chief reply, delivered - but SUPERSEDED by lane GM's own CORE-REQUEST-GM-029 (18:24), which shows the fire() point this letter reports can never move anything on screen. The fire() call stays on main until the action-returning call replaces it; see the GM-029 stub.
