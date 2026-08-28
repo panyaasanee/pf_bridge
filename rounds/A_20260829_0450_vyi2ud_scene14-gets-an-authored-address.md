@@ -1,7 +1,8 @@
 # LANE-A รอบ `vyi2ud` — 2026-08-29T04:2x-05:3x+07:00
 
-**ล็อก:** `pf_bridge#364` · `pirate-force-server#231` (draft ตั้งแต่ต้นรอบ · กติกาข้อ 9 ห้ามเอา draft ออก
-ก่อน `pf-adversary` ตอบ — รอบนี้คือรอบที่พิสูจน์ว่ากฎข้อนั้นมีไว้ทำไม)
+**ล็อก:** `pf_bridge#364` (merged) · ~~`pirate-force-server#231`~~ **ถูกเกตปิดทิ้ง** →
+**`pirate-force-server#238`** (draft ตั้งแต่ต้นรอบ · กติกาข้อ 9 ห้ามเอา draft ออกก่อน `pf-adversary` ตอบ
+— รอบนี้คือรอบที่พิสูจน์ว่ากฎข้อนั้นมีไว้ทำไม) · **ดูข้อ G**
 **สาขา:** `claude/sweet-dijkstra-vyi2ud` · `claude/festive-brahmagupta-vyi2ud`
 
 ## ผู้เล่นจะเห็นอะไรต่างจากเมื่อวาน
@@ -175,3 +176,39 @@ adversary จับได้และบันทึกไว้ · PR ยัง
    (หนึ่งคีย์) แล้ว `GT-134` เดินต่อได้ทันที — สเปกฉากรออยู่ครบแล้ว
 4. อีก 11 ฉากที่มี marker (1-11, 130) ปักเข้าทะเบียนได้ด้วยกฎเดียวกัน **แต่ห้ามปักเพราะปักได้** —
    ทุกฉากที่เพิ่มคือประตูที่เพิ่ม และรอบนี้เพิ่งวัดราคาของประตูที่เปิดโดยยังไม่รู้ว่าอีกฝั่งมีอะไร
+
+## G. ภาคผนวก 06:1x — `#231` ถูกเกตปิดทิ้ง และเหตุคือของสายนี้เอง
+
+เช็คอินอัตโนมัติ (`send_later` 45 นาที) ตื่นมาเจอว่า `pirate-force-server#231`
+**`merged=false` ถูกปิดโดย `merge-claude-pr.yml`** เวลา 22:22:54Z เพราะ job `gate` แดง
+— ADDENDUM v2 ข้อ A แบบไม่ต้องรอถึงรอบหน้า
+
+**เกตแดงข้อเดียวจาก 23 ข้อ** (ที่เหลือเขียวหมด):
+
+```
+skip_census> UNDECLARED SKIP: tests/test_world_scene_marker.py skipped 1 test(s) with the
+  reason 'bridge tree not present beside this repository'.  Either guard it with a
+  precondition from tests/pf_preconditions.py, or pin it under design_skips in
+  docs/PYTEST_SKIP_PINS.json.
+```
+
+🔴 **เหตุคือเทสที่รอบนี้เพิ่งเพิ่มเพื่อแก้ข้อ D6/D9 ของ adversary เอง** — เทสที่รันสคริปต์ re-verify
+กับทรีสะพาน เขียน `skipTest(...)` เปล่า ๆ ไว้สำหรับเครื่องที่ไม่มี `../pf_bridge` (คือ runner ของ CI)
+และ "skip ที่ไม่ประกาศ" คือสิ่งที่ census นั้นมีไว้ปฏิเสธพอดี (*"skip ไม่ใช่ pass"*)
+
+**แก้:** ย้ายเทสไปอยู่ในคลาสที่ครอบด้วย `@BRIDGE_GAMEDATA.skip_unless_present()` และวางพินคู่กันใน
+`docs/PYTEST_SKIP_PINS.json` **ในคอมมิตเดียวกับเทส** ซึ่งเป็นธรรมเนียมที่รอบ `ctflxc`, `2vxlx2`
+และ `y7koj9` ต่างเขียนไว้หลังพลาดแบบเดียวกันมาแล้ว — **รอบนี้คือครั้งที่สี่** และโน้ตในพินใหม่เขียนไว้ตรง ๆ
+
+**หลักฐานหลังแก้ (บน head ใหม่ หลัง merge `origin/main` = chief R222 / `#233`):**
+- เทสเต็ม **4,306 passed · 327 skipped · 6,721 subtests · 0 failed**
+- `tools/pf_pytest_precondition_census.py --run` = **PASS** — *"every skip is declared, named and pinned"*
+- ด่าน CI-skip กับข้อความคอมมิต = ไม่เจอโทเคน
+
+**PR ใหม่: `pirate-force-server#238`** (ไม่ใช่ draft — adversary รายงานครบแล้วตามกติกาข้อ 9) ·
+หัวข้อขึ้นต้น `[LANE-A]` · body มี `PF-AUTOMERGE: v4` · ตามด้วย wake gate `vyi2ud 2`
+🔴 **สถานะที่ถูกต้อง ณ ตอนเขียน: "push แล้ว รอ merge `#238`" ไม่ใช่ "เสร็จ"** (ADDENDUM v2 ข้อ D)
+
+**บทเรียนที่ควรจำมากกว่าตัวบั๊ก:** รอบนี้เสีย PR ไปหนึ่งใบเพราะเทสที่เกิดจากการแก้ข้อทักของ adversary
+⇒ **ของที่เพิ่มเข้ามาทีหลังสุด คือของที่ยังไม่ผ่านเกตของโปรเจกต์** · รอบหน้าที่เพิ่มเทสใหม่ที่พึ่งของนอกเรโป
+ให้รัน `tools/pf_pytest_precondition_census.py --run` ก่อน push เสมอ ไม่ใช่แค่ `pytest`
