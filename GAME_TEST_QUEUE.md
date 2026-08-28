@@ -6311,8 +6311,11 @@ valid, informative negative, not a test failure). Name-label colours per the man
   `item <id> <n>`, `lv <n>`, `spawn <mob_id>`, `say <message>`.
 - 🔴 **GM-003 v1 ยังไม่มีผลต่อเกมเลย** -- คำสั่งที่รู้จักจะถูก parse แล้วเขียนลง ndjson audit log
   `capture/gm_command_log.ndjson` พร้อม `"executed": false`. **เรคคอร์ดในล็อกนั้นคือเกณฑ์ผ่าน ไม่ใช่ผลบนจอ.**
-- event ที่ hook พิมพ์: `gm_chat_command_accepted_<name>` เมื่อสำเร็จ, `gm_chat_command_refused_<reason>`
-  เมื่อไม่สำเร็จ (`not_gm_account`, `not_a_command`, `rate_limited`, `command_parse_error_*`).
+- ~~event ที่ hook พิมพ์: `gm_chat_command_accepted_<name>` เมื่อสำเร็จ, `gm_chat_command_refused_<reason>`
+  เมื่อไม่สำเร็จ~~ **namespace นี้ตายไปตอน `GM-029`** (เส้น hook ไม่ถูกเรียกอีกแล้ว) ⇒ ชุดที่ใช้จริงคือ
+  `gm_chat_action_*` ดู P1/P2 · suffix ยังเหมือนเดิม (`not_gm_account`, `not_a_command`,
+  `rate_limited`, `command_parse_error_*`) — ขีดฆ่ารอบ `nz0qt2` เพราะบล็อก "ที่มา" นี้เขียนว่า
+  **ห้าม re-derive** ⇒ ถ้าปล่อยไว้ ผู้เทสมีสิทธิ์เชื่อบรรทัดนี้แทน P1
 - สิทธิ์: เฉพาะบัญชีใน allowlist ฝั่งเซิร์ฟเวอร์ (`PF_GM_ACCOUNTS_CONFIG` -> ไฟล์ json
   `{"gm_accounts": ["<name>"]}`) เท่านั้นที่ได้อะไร -- คนอื่นถูกปฏิเสธที่ identity **ก่อน**จะ decode เพย์โหลด.
 - ประตูอีกบาน (`BT_GM`/`GMUI_BASIC`/`0x51E9`) ยังตายอยู่: `GT-103` (NO-RESULT ต่อ claim ตัวเอง), `RE-126`.
@@ -6485,12 +6488,27 @@ contact sheet / ภาพย่อ / วิดีโอ · จุดต่าง
 ### pass criteria (สองชั้น แยกกันเสมอ ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น)
 
 **wire/DB (อ่านจากคอนโซล/ล็อก/ไฟล์บนดิสก์เท่านั้น):**
-- คอนโซลขึ้นครบทั้งห้า: `gm_chat_command_accepted_warp`, `gm_chat_command_accepted_lv`,
-  `gm_chat_command_refused_not_a_command` (ประโยคธรรมดา),
-  `gm_chat_command_refused_command_parse_error_*` (`/notacommand xyz`),
-  `gm_chat_command_refused_not_gm_account` (บัญชีคู่ควบคุม).
-- `capture/gm_command_log.ndjson` มี **2 เรคคอร์ดพอดี** ทั้งคู่มีชื่อบัญชี GM และ `"executed": false` ·
-  **ไม่มี**เรคคอร์ดของบัญชีนอก allowlist และ**ไม่มี**เรคคอร์ดของประโยคธรรมดา.
+
+🔴 **สองบรรทัดแรกของบล็อกนี้ถูกเขียนใหม่ รอบ `nz0qt2` 2026-08-29T03:2x+07:00 โดย LANE-GM (เจ้าของใบ)**
+— ของเดิมล้าสมัยด้วยเหตุผลเดียวกับที่ P1 ถูกเขียนใหม่ในรอบก่อน แต่**บล็อกนี้ถูกลืม**: ผู้เทสที่เลื่อนมาที่
+หัวข้อที่เขียนว่า "pass criteria" ตรง ๆ จะเจอเกณฑ์ชุดเก่าและบันทึก FAIL บนบิลด์ที่ปกติดี
+(pf-adversary จับได้ในรอบ `nz0qt2` ก่อน push — เป็นแผลเดียวกับ job 1331 ที่อยู่ในใบเดียวกันนี้เอง)
+**เกณฑ์ที่ใช้จริงคือ P1/P2/P4 ข้างบน** สองบรรทัดนี้เป็นสำเนาย่อของมัน ถ้าขัดกันเมื่อไร **P1 ชนะ**
+
+- ~~คอนโซลขึ้นครบทั้งห้า: `gm_chat_command_accepted_warp`, `gm_chat_command_accepted_lv`,
+  `gm_chat_command_refused_not_a_command`, `gm_chat_command_refused_command_parse_error_*`,
+  `gm_chat_command_refused_not_gm_account`~~ **namespace นี้ตายไปตั้งแต่ `GM-029`** ⇒ ที่ต้องเห็นคือ
+  `LANE_GM_CHAT_ACTION <cmd> route=action` (stderr) + ชุด `gm_chat_action_*`:
+  `gm_chat_action_accepted_lv` · `gm_chat_action_warp_withheld_no_confirmed_force_pos_vital_version_re129_open`
+  (`/warp` วันนี้ **ไม่ใช่** `accepted_` และนั่นคือผลที่ถูกต้อง) ·
+  `gm_chat_action_refused_not_a_command` · `gm_chat_action_refused_command_parse_error_*` ·
+  `gm_chat_action_refused_not_gm_account` (บัญชีคู่ควบคุมได้ `stdout='' stderr=''` โดยตั้งใจ)
+- ~~`capture/gm_command_log.ndjson` มี **2 เรคคอร์ดพอดี**~~ **จำนวนแถวขึ้นกับ BOOT_COMMIT — ดู P1**
+  (0 hit ของ `AUDIT_RECORD_OUTCOME` = 1 แถวต่อคำสั่ง · มี hit = 2 แถวต่อคำสั่ง คือ `issued` + `outcome`)
+  ที่**ไม่เปลี่ยน**: ทุกแถวมีชื่อบัญชี GM และ `"executed": false` ทั้ง `issued` และ `outcome` ·
+  **ไม่มี**เรคคอร์ดของบัญชีนอก allowlist และ**ไม่มี**เรคคอร์ดของประโยคธรรมดา ·
+  🔴 แถว `issued` ที่ไม่มีแถว `outcome` ตามหลัง = **ไม่มีไบต์ถูกส่ง** (เขียน audit ไม่สำเร็จ / โมดูล raise /
+  โปรเซสตายคาระหว่างสองแถว) ให้จดว่าเจอ ไม่ใช่ FAIL อัตโนมัติ และดูคอนโซลว่าเป็นกรณีไหน
 - `sessions`: +1 แถวต่อหนึ่งการล็อกอิน · `max(lease_generation)` ไม่ถอยหลัง · `PRAGMA integrity_check` = `ok`
   ก่อน/หลัง · sha256 ของ canonical ตรง `CANON_SHA.txt` ก่อน/หลัง · raw GAME log + console out/err เก็บทั้งไฟล์
   ไม่ตัดทอน.
@@ -6869,8 +6887,12 @@ nonempty ลบ key ที่ omit · **ใบนั้นเขียนเอ�
 
 ### เกณฑ์สองชั้น
 - **ชั้น wire/DB:** คอนโซลมี `LANE_GM_CHAT_SAY_GM_GLOBAL_MESSAGE` หนึ่งครั้งต่อหนึ่งคำสั่งที่รับ
-  · `LANE_GM_CHAT_ACTION say route=action` บน stderr · ndjson **หนึ่งแถวต่อหนึ่งคำสั่ง**
-  (สองแถว = เผลอ wire ทั้ง `fire()` และ action -- ห้ามมีทั้งคู่)
+  · `LANE_GM_CHAT_ACTION say route=action` บน stderr · ndjson: ~~**หนึ่งแถวต่อหนึ่งคำสั่ง**
+  (สองแถว = เผลอ wire ทั้ง `fire()` และ action -- ห้ามมีทั้งคู่)~~ **แก้รอบ `nz0qt2`:** ตั้งแต่
+  `CORE-REQUEST-GM-032` ข้อ 1-2 (PR `pirate-force-server#223`) หนึ่งคำสั่ง = **`issued` + `outcome`**
+  ⇒ วิธีจับ double-wire เปลี่ยนเป็น **นับ `record_id` ที่ไม่ซ้ำกัน**: หนึ่งคำสั่งต้องได้ `record_id`
+  เดียว · เห็นสอง `record_id` สำหรับบรรทัดที่พิมพ์ครั้งเดียว = เผลอ wire สองทางจริง (ดู P1 ของ `GT-127`
+  สำหรับวิธีตัดสินว่า BOOT_COMMIT ของคุณเป็นแบบไหน)
 - **ชั้น client-observable:** เจ้าของเห็นข้อความบนจอ (ภาพ + คำบอกเล่า)
 
 ### nonclaims ที่ผลของใบนี้ **ห้าม**ถูกใช้อ้าง
