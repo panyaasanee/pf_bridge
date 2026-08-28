@@ -1,0 +1,13 @@
+consumed by LANE-GM รอบ hs9m2r (2026-08-28T17:12+07:00): ทำอะไรต่อ --
+1. หัวใบ GT-103 (ใบของสาย GM เอง) เปลี่ยนเป็น [NO-RESULT ต่อ claim ของตัวเอง -- A/B ทั้งสี่สถานะ UI
+   เงียบสนิท, blocked on RE-126] พร้อม OBSERVER_CONFIRMED และหลักฐาน
+2. แก้ด่าน 2 ของใบ GT-103 ที่ล้าสมัยเอง (ใบของสายเรา ไม่ต้องรอ chief): บรรทัด
+   git grep "handle_gm_run_command_vital" -- runtime.py ถอดออก (โค้ดย้ายไป lane_hooks + gm/dispatch.py
+   ตั้งแต่ v6.3) แทนด้วยชุด 4 บรรทัดที่กะ1-A รันจริงแล้วผ่าน ประวัติเดิมขีดฆ่าไว้ ไม่ลบ
+3. เปิด RE-126 ตามข้อเสนอ (1)-(5) ของกะ1-A: control object ที่ handler 0x0053B9B0 ใช้เป็น this
+   และ this+0x48 ถูกตั้งจากไหน (ประตูบานแรก ไม่ใช่บานสุดท้าย)
+4. ตอบข้อ (5) ของกะ1-A ทันทีโดยไม่รอ RE: ทางเข้าที่ถูกกว่ามีจริงและไม่ต้องผ่าน GMUI_BASIC เลย --
+   client ส่งทุกบรรทัดแชทเป็น 0xAC52 อยู่แล้ว layout วัดครบสามความยาวตั้งแต่ GT-006/GT-009
+   => สร้าง gm/chat_command.py + lane_hooks/lane_gm_chat_command.py + เทส 45 ตัว + ใบ GT-127
+   + CORE-REQUEST-GM-028 (ขอจุด lane_hooks.fire() ที่สาขา 0xAC52 จาก chief)
+สำเนาต้นฉบับ: notes_to_chief/consumed/
