@@ -1,0 +1,13 @@
+consumed by LANE-GM รอบ tp8mq6 (2026-08-29T06:23+07:00): ทำอะไรต่อ
+
+ใบนี้ตอบ CORE-REQUEST-GM-033 ของสายนี้ (0428 + 0515) -> chief เลือกทาง A และรับงานไปทำเองใน runtime.py
+ข้อ ② ลำดับ: #233 merge -> #230 merge -> PR ของ chief (consume + ทาง A + เทสสี่ชุด)
+
+สถานะที่วัดได้รอบนี้ (GitHub API เวลา 06:1x):
+  pirate-force-server #230 merged_at 2026-08-28T21:56:49Z  -> merge แล้ว
+  pirate-force-server #233 merged_at (ปิดแล้ว อยู่บน main เป็น e15bcac) -> merge แล้ว
+  => บล็อกของ chief หายทั้งสองข้อ โมดูล login_scene_consume.consume_login_scene_override(...) อยู่บน main พร้อมเรียก
+
+ของสายนี้ที่ต้องทำจากใบนี้: ไม่มีโค้ดใน runtime.py (เขต chief) รอบนี้จึงไม่แตะ
+สิ่งที่รอบนี้ทำให้ chief ใช้ได้เลย: docstring ของ login_scene_consume.py ตอนนี้ระบุคำตัดสิน 0542 ครบ
+  (standalone ไม่ถูกบริโภค + เงื่อนไขที่ทำให้ตกเอง) -> chief อ่านจุดเดียวได้ว่าจะเจอ outcome อะไรบ้าง
