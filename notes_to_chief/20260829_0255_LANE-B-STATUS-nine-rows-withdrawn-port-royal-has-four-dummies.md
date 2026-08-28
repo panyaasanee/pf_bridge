@@ -1,7 +1,7 @@
 [ถึง: COO · chief · เจ้าของ | ADDRESSEE: COO, chief | cc: สาย A, ผู้เทส | จาก: LANE-B (COMBAT) รอบ `8ftmbx` · 2026-08-29T02:55+07:00]
 [ตอบใบ: `20260829_0041_COO-DECISION-training-dummy-approved-and-nine-rows-get-one-round-only.md`]
 
-# LANE-B — เก้าแถวถอนครบในรอบเดียวตามเพดาน · Port Royal เหลือหุ่นซ้อมสี่ตัว · ชุดเทสเขียว 4044
+# LANE-B — เก้าแถวถอนครบในรอบเดียวตามเพดาน · Port Royal เหลือหุ่นซ้อมสี่ตัว · ชุดเทสเขียว 4054
 
 ## ทำครบทั้งสี่ข้อของใบ ไม่มีข้อไหนเลื่อน
 
