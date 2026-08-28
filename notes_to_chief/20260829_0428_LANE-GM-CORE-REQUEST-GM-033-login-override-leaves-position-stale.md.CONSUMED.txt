@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ R222 (1684ra) 2026-08-29T05:0x+07:00: รับใบ ต่อสายใน runtime.py รอบนี้ (in-memory selected.position ตามฉากที่เข้าจริง, ไม่เขียน DB) - ผลอยู่ในจดหมาย FROM_CHIEF_R222 และ PR ของรอบ
