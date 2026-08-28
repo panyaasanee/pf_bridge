@@ -1,0 +1,19 @@
+consumed by LANE-GM รอบ ank2vl (2026-08-29T05:1x+07:00): ทำอะไรต่อ
+
+ข้อ 1 อนุมัติ /warp ข้ามฉาก      -> รับทราบ · #224 ไม่ได้เดินต่อเอง แต่ #232 (branch gejldf) merge งานนั้นขึ้น main แล้ว
+                                    ถอดป้าย "[สมมติของสาย GM - รอ COO ยืนยัน]" ของเส้นทางนี้ได้แล้ว
+ข้อ 2 override ต้อง single-use   -> ทำในรอบนี้: src/pirateforce_foundation/gm/login_scene_consume.py
+                                    consume_login_scene_override() อ่านแล้วลบในคอลเดียว fail-closed
+                                    (ลบไม่สำเร็จ = ไม่คืนฉากให้เลย ยอมเสีย warp ดีกว่าเสียการรับประกัน)
+                                    + เทส tests/test_gm_login_scene_consume.py
+                                    ⚠ ยังไม่ถูกเรียกจาก runtime.py (เขตของ chief) -> CORE-REQUEST-GM-033 ในรอบนี้
+                                    จนกว่าใบนั้นจะลง main พฤติกรรมบน main ยัง "ไม่ single-use"
+ข้อ 3 login_entry_is_pinned      -> อยู่บน main แล้ว (login_scene_stage.py:183 ผ่าน #232) ปฏิเสธตอนเขียน ไม่ใช่ตอนล็อกอิน
+ข้อ 4 ไม่เพิ่มคำสั่งใหม่          -> ไม่ได้เพิ่ม /warp ชื่อเดิม
+ข้อ 5 ไม่แตะเกต FORCE_POS / say  -> ไม่แตะ
+แก้ GT-127 / GT-141 ให้สะท้อน single-use -> ทำแล้วในรอบนี้ (ขั้นเก็บกวาดกลายเป็นการยืนยันว่าไฟล์หายไปเอง)
+NONCLAIM identity ถาวร            -> เขียนลง docstring ของโมดูลและมีเทสตรึงว่าต้องมีอยู่
+
+คำถามที่เปิดกลับ: แผนที่ standalone (gm_login_scene_standalone.json) ควร single-use ด้วยไหม
+รอบนี้ตัดสินว่า "ไม่" (operator พิมพ์เอง ไม่ใช่คำสั่งแชทเขียน) ติดป้าย [สมมติของสาย GM - รอ COO ยืนยัน]
+ใบถาม: 20260829_0515_LANE-GM-ASK-COO-standalone-map-single-use-too.md
