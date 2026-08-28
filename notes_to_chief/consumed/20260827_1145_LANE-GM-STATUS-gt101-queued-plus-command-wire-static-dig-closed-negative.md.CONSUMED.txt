@@ -1,13 +1,1 @@
-Consumed by: chief cloud round 4txjyg (R192)
-Consumed at: 2026-08-27 (round start, mailbox triage)
-Action taken: (1) GT-101 blocking question answered by reply letter
-FROM_CHIEF_R192_TO_LANE-GM (config/gm_accounts.json does not exist in this
-repo at all right now -- nobody is GM by default; chief approves a
-non-production test-only config for the attended run via
-PF_GM_ACCOUNTS_CONFIG env var pointing at a throwaway file with account name
-"attended_test", matching this project's own existing test fixture naming --
-no production config file created or committed). (2) GM_RunGMCommandVital
-static-re-dig negative result acknowledged, no new RE ticket opened per the
-letter's own recommendation (needs a live capture or console/debug path, not
-more static reading) -- noted as still-blocking CORE-REQUEST-011/012 in the
-CORE-REQUEST table, unchanged from R191.
+consumed by chief round 28jd9c (2026-08-28T09:56+07:00): Lane GM queued GT-101 (an attended GM-001 login probe) but needs chief/operator to either name an existing gm_accounts.json test account or approve adding one before the test can actually run. It also reported that a fresh static-RE re-dig into GM_RunGMCommandVital field semantics (for CORE-REQUEST-011/012, warp/say execution) closed negative — no new command catalog or syntax table was found anywhere already committed — and recommended against opening a new RE ticket, since the real next step is a live capture during an attended GM session or a COO decision on a console/debug command source. Later letters in this batch (GT-107, and the 2220 verify-only status) show GT-related attended testing did proceed and CORE-REQUEST-011/012 remained blocked pending exactly the capture this letter anticipated.

@@ -1,12 +1,1 @@
-Consumed by: chief cloud round 4txjyg (R192)
-Consumed at: 2026-08-27 (round start, CORE-REQUEST triage)
-Action taken: this letter's CORE-REQUEST line ("wire NPCConversation op1 for
-MOBS 156 -> quest 3021 -> scene 17 via TeleportVital/ForcePos, vehicle bind per
-RE-085") is CORE-REQUEST-014, dispatched to pf-builder this round as the
-top-priority task per project rule (wire CORE-REQUEST before anything else),
-targeting the 20:00 M2 deadline. See rounds/R192_* for the wiring result and
-pf-adversary findings. New RE ticket
-NPCCONVERSATION-COLUMBUS-156-QUESTID-3021-WIRE-CONFIRM-001 proposed by this
-letter not opened by chief this round (not blocking, lane A/RE runner's own
-call per the letter's own wording) -- flagged for RE runner to pick up if it
-sees this.
+consumed by chief round 28jd9c (2026-08-28T09:56+07:00): Lane A corrected an 18:30 chief letter that had wrongly stitched together two unrelated facts — RE-095's Columbus crosswalk (MOBS n_ID=36, quest 3023, scene 19, the Spice Paradise NPC) and the owner's 0925/0950 testimony about placement index 1 (MOBS n_ID=156, the real Port Royal Columbus) — as if they described the same NPC. Re-derived from sha256-pinned gamedata tables that the real Port Royal Columbus (MOBS 156) uses quest 3021, landing at scene 17/Bg1001, while RE-095's original finding (MOBS 36/quest 3023/scene 19) remains correct for its own NPC. Issued a CORE-REQUEST for chief to wire NPCConversation op1 for MOBS 156 to dispatch quest 3021 and teleport to scene 17. This correction was carried forward directly into the next status letter (20260827_1123, also in this batch), which recorded the RE-097 fix line and opened RE-102 to wire-confirm it.

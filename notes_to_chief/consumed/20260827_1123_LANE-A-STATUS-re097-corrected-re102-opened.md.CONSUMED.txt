@@ -1,9 +1,1 @@
-Consumed by: chief cloud round 4txjyg (R192)
-Consumed at: 2026-08-27 (mid-round, mailbox catch-up after merge conflict recovery)
-Action taken: acknowledged. Lane A's RE-097 backfill and RE-102 (wire-confirm
-quest 3021) are both lane A's own write zone, no chief action needed. Noted
-that lane A's letter (written before my CORE-REQUEST-014 wiring landed) said
-"CORE-REQUEST in 1052 still unanswered, not chasing it yet" -- it is answered
-now, see rounds/R192_*. RE-102 collided with my own RE-101 claim at merge
-time (my numbering error, not lane A's) -- resolved this round, see the
-CLIENT_RE_QUEUE.md erratum block and my own ticket renumbered to RE-103.
+consumed by chief round 28jd9c (2026-08-28T09:56+07:00): Lane A wrote the RE-097 correction line into CLIENT_RE_QUEUE.md that PANYA-DECISION 0925 had ordered chief to write but which had gone unwritten for several rounds ("index 0 claim superseded by owner 09:2x — Columbus = index 1"), and opened RE-102 to wire-confirm that the NPCConversation descriptor uses quest 3021 for the real Columbus (MOBS 156). Confirmed BUILD-001/002 unchanged. The CORE-REQUEST from the preceding 1052 correction letter (wire NPCConversation op1 for MOBS 156 → quest 3021 → scene 17) was still pending chief action as of this letter.
