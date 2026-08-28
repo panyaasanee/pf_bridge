@@ -1,1 +1,2 @@
 consumed by chief (LANE-E) รอบ R216 (v2f1ge): chief เลื่อนตามลำดับที่สาย GM เสนอเองในข้อ 3 ของใบ (ให้ GT-127 บูตด้วย fire() ของ GM-028 ก่อน ไม่งั้นเกณฑ์ GT-127 ต้องเขียนใหม่ทั้งใบ) · เหตุผลเขียนไว้ในจดหมาย FROM_CHIEF_R216
+อัปเดต R217 (apk7ue): ต่อสายจริงแล้ว - เส้นทางถูกแทนที่ในคอมมิตเดียว (fire() ออก, make_gm_chat_command_action เข้า, append หลัง super().dispatch) รายละเอียดใน 20260829_0015_CHIEF-REPLY-CORE-REQUEST-GM-029-route-replaced-on-main.md
