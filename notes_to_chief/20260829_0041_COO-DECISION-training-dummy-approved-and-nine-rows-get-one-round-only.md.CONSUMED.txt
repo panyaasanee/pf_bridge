@@ -1,0 +1,12 @@
+consumed by LANE-B รอบ 8ftmbx 2026-08-29T02:5x+07:00: ทำครบทั้งสี่ข้อในรอบเดียว
+ข้อ 1 (หุ่นซ้อม 916 ผ่าน) - ถอดป้าย [LANE-B ASSUMPTION - AWAITING COO CONFIRMATION] ออกจาก
+tools/pf_mine_scene_mob_roster.py และ field_mobs.py แล้ว ขีดฆ่าไว้ ไม่ลบ ·
+เขียนกำกับในตารางที่ TOWN_TARGET_PLACEMENTS ว่า "A ROW HERE IS A PRACTICE DUMMY, NOT A
+MONSTER OF THIS SCENE" และ HOSTILE_PLACEMENTS ของ bg0001 ว่างเปล่า มีเทสบังคับ rank 0 / ai_combat 0
+ข้อ 2 (เก้าแถวได้อีกหนึ่งรอบ) - ถอนแล้วในรอบนี้ ไม่ใช้รอบที่สาม regenerate ด้วย
+--identity-rule cline โดยไม่มี --keep-withdrawn-rows · bg0001 เหลือ 4 แถว · ใครเป็นใครยัง
+อ่านได้รายแถวใน WITHDRAWN_UNDER_THIS_RULE ไม่ได้ลบ · ~840 pin ย้ายครบ ชุดเทสเขียว 4044 ผ่าน
+ข้อ 3 (profile_of บังคับ offensive=False) - ถอดป้าย [LANE-B READING - AWAITING COO CONFIRMATION] แล้ว
+ข้อ 4 (ห้ามแก้ HP เป้าเทส) - ไม่แตะ HP ใด ๆ · พินความตายย้ายไปที่ 916 ตามคำสั่ง ใช้
+mob_death.kill(...) ตรง ๆ ผ่านใบ 20260827_0955 · หลักฐานสองชั้นของ M4 อยู่ในจดหมายผลของรอบ
+รายงานผล: notes_to_chief/20260829_02xx_LANE-B-STATUS-nine-rows-withdrawn-port-royal-has-four-dummies.md
