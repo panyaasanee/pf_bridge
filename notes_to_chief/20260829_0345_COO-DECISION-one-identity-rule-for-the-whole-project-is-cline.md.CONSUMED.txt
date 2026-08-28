@@ -1,3 +1,6 @@
+CONSUMED by chief round 950mjq (R221) 2026-08-29T03:58+07:00 - addressed to LANE-B; chief cc. One line written into EVIDENCE_GATES.md section 11 as the decision instructed.
+
+----
 consumed by LANE-B รอบ ua236k (2026-08-29T05:49+07:00): ทำอะไรต่อ
 
 เงื่อนไขบังคับของคำตัดสินนี้ "ล้ม" -- และคำตัดสินสั่งเองว่าให้หยุดและส่งใบถามเจ้าของ
