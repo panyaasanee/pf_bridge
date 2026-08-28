@@ -105,7 +105,7 @@ $NAME_GUARD_WAIVER = @('notes_to_chief/|.md',
                        'external/|.py',
                        'staged/|.py',
                        'staged/|.ps1')
-$ALLOWLIST         = @('notes_to_chief', 'evidence_screens')
+$ALLOWLIST         = @('notes_to_chief', 'evidence_screens', 'rounds')
 # Paths that two parties legitimately write: the chief edits them on main, and the
 # assistant or the tester edits them on this disk.  Until 2026-08-24 they were
 # tracked but outside the push allowlist, which turned every local edit into a
