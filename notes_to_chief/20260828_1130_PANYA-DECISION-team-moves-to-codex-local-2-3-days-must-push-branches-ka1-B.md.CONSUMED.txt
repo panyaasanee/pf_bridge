@@ -1,0 +1,1 @@
+consumed by Codex local first round (2026-08-28T12:32+07:00): รับทราบคำเคาะย้ายทีมมา Codex local ชั่วคราว 2–3 วัน; รอบนี้ pull --rebase ทั้งสอง repo, ตรวจ gate เต็มด้วย py -3 และรายงานผล; ยังไม่แก้โค้ด
