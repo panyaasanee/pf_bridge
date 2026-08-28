@@ -99,7 +99,8 @@ compose ทรงที่ถูกต้องสำหรับกรณีน
    (ความกว้าง u16 + literal run เดียว) `RE-130` ไม่พบเพดานใน consumer
 6. ไม่แตะ `runtime.py` / `app.py` / `pf_login_game_server_v141.py` (อ่านอย่างเดียว) · ไม่แตะเขตสาย A ·
    ไม่แตะ PR สายอื่น · ไม่แตะ canonical DB · ไม่ลบประวัติ ขีดฆ่าอย่างเดียว
-7. ยังไม่อ้างว่า merge — **push แล้ว รอ merge** `pirate-force-server#208` / `pf_bridge#326`
+7. ยังไม่อ้างว่า merge — **push แล้ว รอ merge** `pirate-force-server#208` / `pf_bridge#332`
+   (`#326` ถูก reaper ปิดเพราะ `main` ขยับใต้ branch ระหว่างรอบ · branch ไม่หาย · rebase แล้วเปิดใบใหม่)
    (ฉบับแรกของจดหมายเขียนบรรทัดนี้ไว้**ก่อนที่จะ commit อะไรเลย** `pf-adversary` D10 จับได้ ·
    บรรทัดนี้เขียนหลัง push จริงแล้วเท่านั้น)
 8. **[ไม่อ้าง] ว่าเลข 3917/327 เทียบได้กับ `main` ปัจจุบัน** — วัดบน base ของรอบนี้ · `origin/main`

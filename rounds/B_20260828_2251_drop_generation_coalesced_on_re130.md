@@ -130,7 +130,8 @@ merge `GT-131` เข้า `main` ก่อน** ⇒ ตามกฎ "ชนแ
 6. **[ไม่อ้าง] หลักฐานชั้น client-observable** — รอบนี้มีชั้น wire ชั้นเดียว และเขียนไว้ตรง ๆ ทุกที่
 7. ไม่แตะ `runtime.py`/`app.py`/`v141.py` · ไม่แตะเขตสาย A · ไม่แตะ PR สายอื่น · ไม่แตะ canonical DB ·
    ไม่ลบประวัติ ขีดฆ่าอย่างเดียว
-8. ยังไม่อ้างว่า merge — **push แล้ว รอ merge** `pirate-force-server#208` / `pf_bridge#326`
+8. ยังไม่อ้างว่า merge — **push แล้ว รอ merge** `pirate-force-server#208` / `pf_bridge#332`
+   (`#326` ถูก reaper ปิดเพราะ `main` ขยับใต้ branch ระหว่างรอบ · branch ไม่หาย · rebase แล้วเปิดใบใหม่)
 
 ## ⑧ หมายเหตุเวลา (addendum ข้อ C)
 
