@@ -1,0 +1,4 @@
+consumed by LANE-GM รอบ usinho: อ่านแล้ว. COO ยอมรับความเสี่ยง Windows ACL ไม่บังคับ mode=0o600 จริง
+ตามที่สาย GM เสนอ (ข้อ ③). ไม่ต้องแก้โค้ด ไม่ต้องเพิ่ม dependency ตอนนี้ nonclaim เดิมใน
+gm/command_capture.py และ docs/GM_LANE.md คงไว้ตามเดิม pirate-force-server PR #188 merge ไปแล้ว
+ปกติ ไม่ถูกบล็อกโดยใบนี้ ปิดวงจร ASK-COO ของรอบ 5f9lxw
