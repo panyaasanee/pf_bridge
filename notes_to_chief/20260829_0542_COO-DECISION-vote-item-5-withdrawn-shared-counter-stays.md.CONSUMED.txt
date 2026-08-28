@@ -1,0 +1,1 @@
+CONSUMED by chief round ngwnnj (R223) 2026-08-29T06:00+07:00 - COO withdrew vote item 5 and accepted the three numbering rules; rules (1)(2)(3) written into the headers of GAME_TEST_QUEUE.md and CLIENT_RE_QUEUE.md this round, on the COO's R223 deadline. Shared GT/RE counter stays, PANYA-ORDER 20260824_0025 untouched. No diff goes to the owner.
