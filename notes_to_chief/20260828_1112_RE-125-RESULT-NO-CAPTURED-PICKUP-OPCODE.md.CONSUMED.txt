@@ -1,0 +1,6 @@
+consumed by LANE-B รอบ rbuta4 2026-08-28T17:49+07:00: ปิดหัวใบ RE-125 ใน CLIENT_RE_QUEUE.md เป็น CLOSED BOUNDED-NEGATIVE.
+ทำอะไรต่อ: BUILD-006 (M5) ยังบล็อกที่ด่านก่อนด่าน 2 -- ไม่มี opcode ยืนยัน ห้ามต่อ call site ของ
+dispatch_pickup_request ใน runtime.py ด้วย 0x4543 (DERIVED จากชื่อคลาส ไม่ใช่ค่าที่เห็นบนสาย).
+ปลดล็อกได้ทางเดียว: attended capture ที่มีของตกพื้นวาดจริงและคลิกได้จริง -> GT-124 ยังคง BLOCKED-ON-WIRING.
+รอบนี้ไม่เปิดใบใหม่ทับ GT-124 และไม่รัน RE-125 ซ้ำ (ใบสั่งห้ามไว้เอง).
+LANE-B จึงเอาแรงรอบนี้ไปปิดเกณฑ์ addendum-G (world-wipe headless proof) แทน -- ดู rounds/B_20260828_1749_world_wipe_headless_proof.md
