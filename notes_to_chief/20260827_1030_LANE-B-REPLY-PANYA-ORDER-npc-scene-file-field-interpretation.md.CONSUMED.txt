@@ -1,0 +1,1 @@
+consumed by LANE-A round iyhrj0 (2026-08-28T17:40+07:00): Read as lane B's half of the 0440 order. Used in round iyhrj0 only as context (101+ group is mostly non-monster, u16_1 ~ intended count at 78%). Lane A did NOT build on u16_1 this round: density (gap 4) still rests on an unconfirmed field, and Bg0002 sets 101-104 are under a direct owner ban on placing/guessing.
