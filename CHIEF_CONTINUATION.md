@@ -63,19 +63,23 @@
 🔴 R211 (28jd9c, housekeeping v6.3 §17.9(ง)): ตารางเต็มทั้งใบ (แถว 001-026, ถ้อยคำเดิมทุกตัวอักษร) ย้ายไป
 `archive/CORE_REQUEST_REGISTRY_ARCHIVE_20260828_R211_rows001-026.md` — ไม่มีการลบ ไม่มีการแก้ถ้อยคำต้นฉบับ.
 ตารางด้านล่าง**สรุปย่อ**เฉพาะแถวที่ยัง**ไม่**ต่อแล้วเต็มใบ ณ วันที่ย้าย (ถ้อยคำเต็มของแถวเหล่านี้ก็อยู่ในไฟล์ archive เดียวกันด้วย ไม่ต้องเปิดสองที่ถ้าอ่านสรุปพอ)
-+ แถว 027 ที่ไม่เคยถูกเติมมาก่อน (หนี้เอกสารแบบเดียวกับที่ R191 เจอสำหรับ 006-010) เพิ่มให้ครบรอบนี้. แถวปิดแล้ว 001-010/013/016-020/022-025 อยู่ในไฟล์ archive อย่างเดียว
++ แถว 027 ที่ไม่เคยถูกเติมมาก่อน (หนี้เอกสารแบบเดียวกับที่ R191 เจอสำหรับ 006-010) เพิ่มให้ครบรอบนี้. แถวปิดแล้วจริงเต็มใบ 001-010/013/018-020/022-025 อยู่ในไฟล์ archive อย่างเดียว
+🔴 pf-adversary จับได้ก่อน push: ร่างแรกจัดแถว 017 เป็น "ปิดแล้ว" ทั้งที่จุด 2 ของมันเองยังไม่ต่อสาย — คืนมาไว้ในตารางเปิด อย่าเชื่อ tag `ต่อแล้ว — Rxxx` โดยไม่เช็คว่าทุกจุดใน "จุดเรียก" ต่อครบหรือยัง
 
 | เลข | สรุปย่อ (เต็ม -> archive แถวเดียวกัน) |
 |---|---|
-| 011 | LANE-GM warp (`ForcePos` same-scene, `20260827_0724`) — **[บล็อก]** ยังไม่มีจุดเรียกใน `runtime.py`/`app.py`: `CORE-REQUEST-010`'s `handle_gm_run_command_vital` authorize/capture เฟรม 0x51E9 เท่านั้น ยังไม่ decode wide-string เป็น `GmCommand` จริง ต้องมี RE เพิ่มหรือทาง attended console/debug (ยืนยันซ้ำ R191, ไม่เปลี่ยนแปลงถึง R210) |
-| 012 | LANE-GM say broadcast (`Channel_GMGlobalMessageVital`, `20260827_1600`) — **[บล็อก]** เหตุผลเดียวกับ 011 (ไม่มี `GmCommand` ชนิด `say` จาก client จริงจนกว่า 0x51E9 decode จะพิสูจน์) |
+| 011 | LANE-GM warp (`ForcePos` same-scene, `20260827_0724`) — **[เสนอ · บล็อก]** ยังไม่มีจุดเรียกใน `runtime.py`/`app.py`: `CORE-REQUEST-010`'s `handle_gm_run_command_vital` authorize/capture เฟรม 0x51E9 เท่านั้น ยังไม่ decode wide-string เป็น `GmCommand` จริง ต้องมี RE เพิ่มหรือทาง attended console/debug (ยืนยันซ้ำล่าสุด R207, ไม่มีรอบไหนแย้งถึง R210) |
+| 012 | LANE-GM say broadcast (`Channel_GMGlobalMessageVital`, `20260827_1600`) — **[เสนอ · บล็อก]** เหตุผลเดียวกับ 011 (ไม่มี `GmCommand` ชนิด `say` จาก client จริงจนกว่า 0x51E9 decode จะพิสูจน์) |
 | 014 | LANE-A Columbus `NPCConversation` quest 3021 → scene 17/`Bg1001` + vehicle bind (`20260827_1052`, RE-085) — **[ต่อสายบางส่วน — R192]** ครึ่งแรก (บทสนทนาเควส 3021) ต่อแล้วบน `main` · ครึ่งหลัง (ย้ายฉาก+ผูก vehicle) **ปฏิเสธเสมอ fail-closed ตั้งใจ** จนกว่า `RE-103` (พิกัด arrival ฉาก 17) และ `RE-096` (payload vehicle bind) ปิด — ทั้งคู่เป็นงาน RE runner (local) |
+| 017 | LANE-GM `gm/login_scene_override.get_login_scene_override` (`20260827_1524`) — สองจุด: (1) login override, (2) census ของฉาก override — **[จุด 1 ต่อแล้ว — R196 · จุด 2 ยังไม่ต่อสาย]** จุด 1 ต่อตรงใน `runtime.py`'s `START_GAME_REQ` handler, เทส 6 ข้อผ่าน dispatcher จริง, `pf-adversary` แก้บั๊ก compose 3 จุดก่อน push · nonclaim: override ไปฉากที่ `login_entry_allowed=False` ถูกปฏิเสธ fail-closed เงียบ ตั้งใจ · จุด 2 **ยังไม่มีฟังก์ชันให้เรียก** |
 | 015 | LANE-B `mob_pickup.dispatch_pickup_request()` (`20260827_1514`, `production_allowed=True`) — **[เสนอ · บล็อก, ไม่เร่ง]** ยังไม่มีจุดเรียก — รอ RE ถอด opcode inbound pickup request เต็ม (`claimant_identity,x,y,z,object_ref_u32,opaque_u8`; `RE-082` พิสูจน์แค่ element key) · nonclaim 15 ตอบแล้วโดย chief (`20260827_1550_CHIEF-REPLY`): `runtime.py` ต้องเช็ค `claimant_identity == foundation.selected.actor_identity` เอง ไม่ใช่ให้ `mob_pickup.py` เพิ่ม defense-in-depth |
 | 021 | LANE-A `world_population_bg0002` census composer, `Bg0002`/97 placements (`20260827_2112`) — **[ต่อแล้ว — R200 · unreachable]** โค้ดอยู่บน `main` จริง แต่**ไม่มีทาง reach ได้บนบูตใดๆวันนี้** — ไม่มี seed path ให้แถวตัวละคร `scene_id=2` ในฐานข้อมูล (R202 correction: เป็นงาน attended บน DB สำเนา ไม่ใช่งาน chief) |
 | 026 | LANE-A bg0002 census ส่งตอน arrival แทนตอน `TargetPosVital` ใบแรก (`20260828`, เดิมเลขชนกับ 024 — ดูรายละเอียดชนเลขในไฟล์ archive) — **[ต่อแล้ว — R207 · unreachable]** เหตุผลเดียวกับแถว 021 (ไม่มี seed path scene_id=2) |
 | 027 | LANE-A/PANYA-DECISION `20260828_0125` — ชื่อตัวละคร login ย้ายจาก `ActorAttr` guild-name bit (`0x01000000`@`+0x164`) ไปช่อง `BasicAttr` ชื่อจริง (`0x0001`@`+0x28`), จุดเรียก `player_wire.py`'s `_make_actor_attr_with_name_and_class` — **ต่อแล้ว — R210** (03d46t, `pirate-force-server` PR#187 merged=true ยืนยันแล้วรอบ 28jd9c ผ่าน `pull_request_read`) — แถวนี้ไม่เคยถูกเติมโดย R210 เอง เพิ่มย้อนหลังรอบนี้เพื่อปิดหนี้เอกสาร |
 
 🔴 `WIRED` count ในหัวตารางเดิม (7/10 ณ R177) ค้างมานาน ไม่ตรงกับตัวเลขที่บันทึกรอบหลัง ๆ รายงานลอย ๆ (R182 "9→10/10", R190 "WIRED v2 = 9/10" นิยามคนละแบบ) — ต้อง grep สดใหม่ทั้งหมดก่อนเชื่อเลขไหน ไม่ใช่ขอบเขตของ housekeeping รอบนี้ (แยกเป็นงานตรวจของตัวเอง) ดูดัชนีรอบด้านล่างสำหรับตัวเลข WIRED ที่แต่ละรอบรายงานเอง
+
+- R174-R178 (5 รอบ) — ↴ ย้ายไป archive แล้ว (รอบ jsrh00, 2026-08-27) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260827_R166_R178.md`
 
 - R179-R190 (12 รอบ) — ย้ายไป archive แล้ว (รอบ 28jd9c, 2026-08-28) -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260828_R179_R190.md`
 
