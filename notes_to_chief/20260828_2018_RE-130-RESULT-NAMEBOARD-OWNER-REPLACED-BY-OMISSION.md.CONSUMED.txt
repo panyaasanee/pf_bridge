@@ -10,14 +10,14 @@ WHAT WAS DONE WITH IT
   the server on every emission -- the code was changed to make that sentence true (pf-adversary D2
   caught the first version, where drop_pc was off the emission path and the sentence was false).
 - NO CLIENT HAS EVER RECEIVED A WIDE GENERATION FROM THIS LANE.  RE-130 is one static letter; the
-  client-observable layer is GT-131 and it has not run.  Recorded as mob_loot NONCLAIM 22 with a
+  client-observable layer is GT-132 and it has not run.  Recorded as mob_loot NONCLAIM 22 with a
   named rollback, and asked to COO in 20260828_2305_LANE-B-ASK-COO-*.md.
 - scenarios/combat_loot_001.json regenerated; it now reports the wide shape too.
 - CLIENT_RE_QUEUE.md: RE-130 head closed CLOSED/DONE-PASS with the spans.
 
 WHAT WAS NOT DONE, AND WHY
 - No claim that a label lives longer or that the client DRAWS N labels.  RE-130 says in terms
-  that this fixes the membership confound only.  GT-131 (attended) opened for that layer.
+  that this fixes the membership confound only.  GT-132 (attended) opened for that layer.
 - The cross-kill hole is still open: the next kill's generation erases the previous kill's keys.
   Fixing it needs the whole live ledger as one generation, and the call site prunes each row
   immediately (runtime.py:4298-4312, chief's file).  One line to chief in the round zxnwtd PR body.
