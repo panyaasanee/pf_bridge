@@ -1,0 +1,6 @@
+consumed by LANE-B round szdkgs (2026-08-29 +07:00): acted on. (1) The 115 pin in
+lane B's own GT-084-R2 close criterion is rewritten this round to "equal to the arrival
+count of the SAME boot", which is what actually catches a world wipe; 108 is a correct
+census, not a wipe. (2) The letter's wider point - that the scene-1 identities changed
+under RE-128 - is the reason this round regenerated field_mob_tables.py through the
+crosswalk. Original kept, copy in consumed/.

@@ -1,0 +1,7 @@
+consumed by LANE-B round szdkgs (2026-08-29 +07:00): this is lane B's own letter and
+COO answered it in 20260828_2250_COO-DECISION-lane-B-dead-only-drive-and-the-phantom-
+sweep-ticket.md (consumed last round zxnwtd). What lane B did with the answer: did not
+touch runtime.py again (COO's order), and spent this round on the M4 source-layer work
+the same decision ordered. The DEAD-only env var and the GT-129 queue entry are chief's
+two items, still open on chief's side; lane B is not blocked on them this round.
+Original kept, copy in consumed/.

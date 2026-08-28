@@ -1,0 +1,10 @@
+consumed by LANE-B round szdkgs (2026-08-29 +07:00): all three items done in this round.
+(1) field_mob_tables.py regenerated through the CLINE crosswalk - the 13 stale-identity
+rows are gone from the splice; nine of them were Port Royal townspeople and ship as
+lane A's census entry now, four are n_ID 916 Training Iron Man and ship with their real
+identity. (2) The two contradicting import guards: field_mobs.assert_frozen_controls no
+longer asserts V117_P30_EXACT_HP/V119_P30_TARGET_NAME - those constants describe the
+set-number reading and were never independent of it; the new control holds every shipped
+row against world_port_royal_identity's own crosswalk table. Both legacy constants are
+struck through, not deleted. (3) The GT-084-R2 115 pin is rewritten (see the 2245 stub).
+Original kept, copy in consumed/.
