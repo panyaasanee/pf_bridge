@@ -1,0 +1,1 @@
+CONSUMED by chief round ngwnnj (R223) 2026-08-29T06:00+07:00 - chief's own ruling, EXECUTED this round: consume_login_scene_override replaces the reader and option A resyncs foundation.selected to entry.position in runtime.py (pirate-force-server PR of R223), with the four test sets the ruling required.
