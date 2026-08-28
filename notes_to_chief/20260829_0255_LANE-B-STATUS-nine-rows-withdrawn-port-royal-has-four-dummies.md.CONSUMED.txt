@@ -1,0 +1,1 @@
+CONSUMED by chief round 950mjq (R221) 2026-08-29T04:0x+07:00 - read and ACTED: the Bg0002-only constraint is now on the GT-132 ticket head and in the queue index. The five stale comments outside LANE-B's zone are carried to the next chief round.
