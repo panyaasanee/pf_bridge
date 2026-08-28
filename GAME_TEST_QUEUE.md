@@ -4147,6 +4147,31 @@ notes_to_chief/20260827_1445_GT101-RESULT-client-rejects-0x5A19-version-1-error-
 
 ## GT-102 CORE-REQUEST-014 COLUMBUS-NPCCONVERSATION-QUEST3021-DIALOGUE-001: คลิก Columbus ที่ Port Royal (MOBS n_ID 156, bg0001 placement index 1) ครั้งแรกหลัง CORE-REQUEST-014 -- เห็นบทสนทนาเควสต์ 3021 จริงไหม (เมื่อวานคลิกแล้วเงียบ)  [**PARTIAL** -- เกรดโดย chief รอบ `wi1m62` 2026-08-29T01:0x+07:00 (ผู้เทสเสนอ `PARTIAL`/`PASS-WITH-FINDING`, chief เลือก `PARTIAL` เพราะคำถามหัวใบถามถึง**บทของเควสต์ 3021** ซึ่งยังไม่ถูกพิสูจน์) · `OBSERVER_CONFIRMED: 2026-08-29T00:17+07:00` · ที่ผ่าน: เส้น `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE` (54 bytes) ยิงจริงครั้งเดียว หน้าต่างบทสนทนาเปิดจริงพร้อมสองออปชัน · ที่ยังไม่ผ่าน: ป้ายผู้พูด+เสียงพากย์+เนื้อบทเป็นชุดของ **Sebastian** ไม่ใช่ Columbus ⇒ ชี้ขาดต้องถอดไบต์เฟรม 54 bytes ตรง ๆ = `RE-137` · ผล: `notes_to_chief/20260829_0018_KA3A-*` ข้อ ②]
 
+> **UPDATE 2026-08-29T03:0x+07:00 (chief สาย E รอบ `c5nwjc`/R220) -- ต้นเหตุของ "ป้ายผู้พูดเป็น Sebastian" ปิดแล้วที่ชั้น wire รอ merge**
+> สาย A หาตัวเจอ (`notes_to_chief/20260829_0146_LANE-A-CORE-REQUEST-*`): เฟรมหน้า (face frame) ตอนคลิก
+> ส่ง **เลข Mob-Set** ลงช่องที่ต้องเป็น **MOBS n_ID** ⇒ actor `0x2002` ถูกตีตราใหม่เป็น MOBS `2` (Sebastian ผู้คุม)
+> ทับตัวตนที่สำมะโนตอนล็อกอินส่งไว้ถูกแล้ว (MOBS `156` Columbus) · เลข `2` เป็นทั้งเลข Mob-Set ที่ถูก
+> และ MOBS n_ID ของ Sebastian ⇒ บั๊กโผล่เป็น **คนผิด** ไม่ใช่เลขผิด ตรงกับที่เจ้าของเห็นทุกประการ
+>
+> **headless proof (ชั้น wire/DB เท่านั้น) [วัดแล้ว]:** `src/pirateforce_foundation/world_face_frame.py`
+> ประกอบเฟรมใหม่ผ่าน `world_port_royal_identity.resolve()` -- call เดียวกับที่สำมะโนใช้ ⇒ สองเฟรมอ่านตารางเดียวกัน
+> เทส `tests/test_face_frame_identity_contradiction.py` (15 ข้อ เขียว(cloud sanity)) อ่าน **ไบต์ของเฟรม** ไม่ใช่ตาราง:
+> `RebuiltFaceFrameTests::test_the_two_frames_now_agree_on_who_this_actor_is` ยืนยันว่า NPCAttr ของ actor `0x2002`
+> ในเฟรมคลิก = NPCAttr ที่สำมะโนส่ง (MOBS 156 + avatar ของ Columbus + `basic_name="Columbus"`) เป๊ะ
+>
+> 🔴 **รอ merge ก่อนเทส** -- อยู่ใน PR ของรอบ `c5nwjc` ทั้งสองรีโป ยังไม่อยู่บน main ตอนเขียนบรรทัดนี้
+> 🔴 **ยังไม่แก้ที่ต้นทาง โดยเจตนา** builder ใน `current/pf_login_game_server_v141.py` ยังมีบั๊กอยู่
+> (ไฟล์นั้นถูกพินแช่แข็ง 7 จุด แก้ไม่ได้ -- ดู `notes_to_chief/20260829_0303_CHIEF-ASK-COO-v141-*`)
+> เราแก้ปลายทางใน `runtime` แทน ⇒ **สิ่งที่ผู้เล่นได้รับเปลี่ยนจริง** แต่ถ้าวันไหนมีเส้นทางอื่นที่ไม่ผ่าน `runtime`
+> เส้นทางนั้นจะยังเห็น Sebastian -- ผู้เทสเจออาการเดิมซ้ำ ให้รายงานว่า "เจอนอกเส้น runtime" ไม่ใช่ "แก้ไม่สำเร็จ"
+>
+> **เกณฑ์สองชั้นสำหรับรอบเทสถัดไป (เพิ่มจากเกณฑ์เดิมของใบ ไม่ได้แทนที่):**
+> - ชั้น wire/DB: คอนโซลไม่มี `face_frame_dropped_*` และมี `face_frame_identity_resolved_p1` ตอนคลิก Columbus
+> - ชั้น client-observable: หน้าต่างขึ้นชื่อ **Columbus** เนื้อบทของ Columbus **เสียงพากย์ของ Columbus**
+>   และป้ายชื่อ NPC ไม่หายหลังคลิก · ยังเป็น **PARTIAL** จนกว่าจะมี `OBSERVER_CONFIRMED` ใบใหม่
+> - nonclaim: บทของ **เควสต์ 3021** ยังเป็นคำถามเดิมของหัวใบ รอบนี้ไม่ได้แตะ ⇒ ตอบชื่อ/เสียงถูกแล้วก็ยังไม่ปิดใบ
+
+
 > เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md, prefix สองแบบ ห้ามแยกตัวนับ.
 > เลขสูงสุดที่ใช้ไปแล้ว ณ เวลาเขียนใบนี้: GT-101 (GAME_TEST_QUEUE.md) และ RE-103 (CLIENT_RE_QUEUE.md,
 > บันทึกไว้เองว่า "เลขว่างถัดไป = 102"). grep ยืนยันก่อนจอง: GT-102 = 0 hit, RE-102 = 0 hit ทั้งสองไฟล์
