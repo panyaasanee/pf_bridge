@@ -1720,7 +1720,7 @@ placement หรือต้องเป็น server-triggered quest-spawn (ค
 
 ---
 
-## RE-125 PICKUP-REQUEST-VITAL-ID-001: what wire vital id (opcode) does a real client send when the player left-clicks a ground drop / `PickupTerrainThing` object, and what does its payload contain (object reference dword position, anything else)
+## RE-125 PICKUP-REQUEST-VITAL-ID-001: what wire vital id (opcode) does a real client send when the player left-clicks a ground drop / `PickupTerrainThing` object, and what does its payload contain (object reference dword position, anything else)  [🔴 **CLOSED BOUNDED-NEGATIVE — opcode ยัง UNOBSERVED: `0x4543` เป็นค่า DERIVED จากชื่อคลาสเท่านั้น, corpus ปัจจุบัน 2,106 ไฟล์ / 75,208 blocks มี `PickupTerrainThing` W=0/R=0 ⇒ 🔴 ห้ามต่อ production call site ของ `dispatch_pickup_request` ใน `runtime.py` ด้วย `0x4543` · ปลดล็อกได้ด้วย attended click capture ใหม่เท่านั้น (ใบแยก) · payload shape ปิดแบบ conditional-static แล้ว: class body = `object_ref_u32` + `opaque_u8` ไม่มี claimant identity/XYZ ⇒ เซิร์ฟเวอร์ต้องอ่านตัวตน/ตำแหน่งจาก authenticated session state · ปิดโดย RE runner LOCAL 2026-08-28T11:12+07:00, บริโภคโดย LANE-B รอบ `rbuta4` 2026-08-28T17:49+07:00, ดู `notes_to_chief/20260828_1112_RE-125-RESULT-NO-CAPTURED-PICKUP-OPCODE.md`**]
 
 > NUMBERING NOTE: shared counter with `GAME_TEST_QUEUE.md` -- this round also opened `GT-124` there (grep
 > confirmed 2026-08-28: `GT-124`/`RE-124`/`RE-125` = 0 hits before either was reserved). `GT-124` took `124`
@@ -1823,3 +1823,59 @@ bounded negative ที่ชัดเจนว่า static ตอบไม่�
 (ดู `notes_to_chief/20260828_1105_PANYA-ASK-*.md`)
 
 **ADDRESSEE: RE** · ผู้เปิดใบ: LANE-GM (รอบ `hs9m2r`) -- ผลกลับมาที่สาย GM บริโภค
+
+## 🆕🔬 RE-128 SCENE-ORDINAL-TO-MOBS-NID-TABLE-LOCATION-001 [STATIC-ON-BRIDGE]: **ไฟล์/ตารางไหนของไคลเอนต์เก็บ mapping "เลขชุดต่อฉาก (1..115) → `MOBS.n_ID` (ถึง 10,080)" — ตัวที่หายไปทั้งโปรเจกต์ และเป็นตัวเดียวที่ทำให้ Port Royal เกิด NPC ผิดตัวทุกจุด**
+
+> NUMBERING NOTE: ร่างไว้เป็น `RE-126` ตอนต้นรอบ แต่สาย GM รอบ `hs9m2r` merge `RE-126`+`GT-127` เข้า main
+> ก่อน ⇒ ตามกฎ "ชนแล้วห้ามทับ" ใบสาย GM อยู่ที่เดิม ใบนี้ขยับเป็น **`RE-128`** (สูงสุดบน main = 127)
+
+**ค้นใน `pf_bridge\external\` แล้ว: ไม่เจอ** แถวที่ผูกเลขชุดของไฟล์ฉากกับ `MOBS.n_ID` ·
+**ค้น `gamedata\` แล้ว: ไม่เจอตัว mapping** (เจอแต่ปลายทางสองข้าง) · ผลลบที่ปิดแล้วในรอบ `iyhrj0`
+กันเสียรอบซ้ำ: `CONSTDATA_TH__MOBS.tsv` **ไม่มีคอลัมน์ฉาก** (`n_ID_MAP` = 0-7, `n_MOB_APPEAR` = 1/0
+เท่านั้น ทั้งคู่ไม่ใช่ scene id)
+
+### ทำไมเปิดใบนี้ (LANE-A รอบ `iyhrj0`, 2026-08-28T17:40+07:00)
+**ช่องว่างเชิงตัวเลขที่บังคับให้ตารางนี้ต้องมีอยู่:** วัดครบทั้ง **266 ฉาก** — `template_ids` **ไม่เคยเกิน 115**
+แต่ `MOBS.n_ID` เดินถึง **10,080** ⇒ เลขชุดเป็น **ordinal ต่อฉาก ไม่ใช่ id ระดับเกม** ⇒ **ต้องมีตารางแปลง
+(ฉาก, เลขชุด) → `n_ID` อยู่นอกไฟล์ฉาก** และยังไม่มีใครในโปรเจกต์หามัน
+
+ทุกวันนี้เราใช้ **identity map** แทน (`เลขชุด = n_ID`): `current/pf_login_game_server_v141.py:1323`
+`PORT_ROYAL_UNAMBIGUOUS_PLACEMENTS` 115 แถว (สร้างโดย `tools/pf_mine_scene_mob_roster.py`) — **ถูกสำหรับ
+`Bg0002`** (เจ้าของยืนยันทั้งฉาก M1-P 28 ส.ค.) **แต่ผิดสำหรับ `bg0001`** (`GT-078` OWNER-REJECTED) ⇒
+คำถามจริงคือ **"ทำไม identity map ถูกสำหรับฉาก 2 แต่ผิดสำหรับฉาก 1 และตัวจริงอยู่ที่ไหน"** ·
+`GT-078` addendum §3.2 (26 ส.ค.) สั่งให้เปิดใบ *"placement index → NPC identity ของ bg0001"* ไว้เอง
+แต่ **ไม่เคยถูกเปิดจริง** — ใบนี้คือใบนั้น
+
+### จุดตั้งต้นที่รอบ `iyhrj0` วัดไว้แล้ว (รายละเอียดเต็ม + provenance อยู่ใน
+`notes_to_chief/20260828_1740_LANE-A-FINDING-bg0001-crosswalk-is-not-an-offset.md` และ
+`rounds/A_20260828_1740_iyhrj0_*.md` — ที่นี่เก็บเฉพาะข้อที่เปลี่ยนวิธีทำงานของใบนี้)
+1. แถว `Port transportation` (`n_ID` 37/66/104/155/195/249/284/321/361/398 — มีใน `MOBS_TIP` ไม่มีใน
+   `CONSTDATA`) เป็น **ตัวคั่นบล็อก** ⇒ `1-36 | 38-65 | 67-103 | 105-154 | 156-194 | …` ·
+   **156-194** อ่านเป็นโรสเตอร์บริการของ Port Royal (lvl 10-20)
+2. 🔴 **ห้ามใช้เหตุผล "ฉากนี้ต้องอยู่บล็อกเดียว"** — โรสเตอร์ `Bg0002` ที่เจ้าของยืนยันแล้วกิน **4 บล็อก**
+   (template `1..41` + `101..104`) · รอบ `iyhrj0` ร่างเหตุผลแบบนั้นแล้วโดน adversary ตีตก เขียนกันคนถัดไปเดินซ้ำ
+3. 🔴 **ยังไม่มีสมอของ `bg0001` ที่ใช้ได้เลย** — Hields (`159`) รู้ว่าเป็นตัวไหนแต่ **ไม่รู้ placement index** ·
+   Sase (`796`) แถวนั้นระบุเองว่า **`[stated]` จากความทรงจำเจ้าของ ห้ามเลื่อนขั้นถ้าไม่มีเฟรม** (และเป็น
+   lvl 105-110 ไม่เข้ากับลานระดับ 11) ⇒ **ห้ามใช้ 796 คำนวณ offset**
+
+### objective (ไล่จากถูกไปแพง อย่าข้ามขั้น)
+1. **ชั้นข้อมูลก่อน (ถูกที่สุด):** หาตาราง/ไฟล์ที่ให้ "รายชื่อ NPC ต่อฉาก" หรือ "(ฉาก, ordinal) → `n_ID`" ·
+   ผู้สมัครที่ยังไม่มีใครเปิด: ตารางที่ **หน้าต่างแผนที่ (M)** ใช้สร้างรายชื่อ NPC ต่อฉาก (เจ้าของยืนยันว่ามันโชว์
+   ครบทุกฉาก รวม Mirage Reel ที่เราไม่ได้ส่ง) · `.lua` ต่อฉาก · ตาราง `CONSTDATA`/`TEXTDATA` ที่ยังไม่ extract
+2. **ชั้นไฟล์ฉาก:** `.npc` ถูก parse ครบหรือยัง (`*.placements.tsv` เป็นผล parse ของ record ไบนารีความยาว
+   ไม่คงที่) · โดยเฉพาะ **`u16_6`** (147 ค่าไม่ซ้ำใน 149 แถวของ `bg0001` ไม่เท่ากับ `index`) ยังไม่มีใครตรวจ
+3. **ชั้น wire (แพงสุด ทำต่อเมื่อ 1-2 ตัน):** ไล่หา **โค้ดที่เขียนค่าลง `u16@+0x14` ของ
+   `CTracePathReqVital` ก่อน send** (ctor `0x006EBA90` แค่ zero ฟิลด์; registry แถว 378 ser `0x006EBAF0`)
+   ซึ่ง `RE-119` T4 ทิ้งไว้เป็น bounded negative สามทาง · ถ้าเป็น `MOBS.n_ID` ปุ่ม GO! จะกลายเป็นแหล่ง
+   crosswalk ฝั่งไคลเอนต์ · **ห้ามใช้เลข 743 เดิมตัดสิน** ตามที่ `RE-119` สั่ง
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (แถว/คอลัมน์/offset/VA/SHA) · ชนเพดานให้เขียน bounded negative
+แล้วปิด ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB/source/คิวของสายอื่น
+
+### เกณฑ์จบใบ
+ระบุที่อยู่ของ mapping พร้อม provenance พอให้สาย A สร้างตาราง `bg0001` ตัวจริงได้ **หรือ** bounded negative
+ที่บอกชัดว่าชั้น 1-2 ปิดแล้ว เหลือแต่ชั้น 3 ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+
+**ปลดล็อกถ้าเป็นบวก:** `GT-078` ที่ค้าง OWNER-REJECTED ตั้งแต่ 26 ส.ค. · โรสเตอร์ตัวจริงของ Port Royal
+⇒ **M1 ของเมืองหลัก**
