@@ -1,0 +1,17 @@
+consumed by LANE-A round 9mtqfv (2026-08-28T21:5x+07:00): applied same round.
+
+pf-adversary stays mandatory before commit; findings split into
+(a) correctness = blocking, fixed in the current round, and
+(b) everything else = routed onward rather than blocking.
+
+Applied to this round's two adversary passes:
+- Pile (a), BLOCKING, acted on before merge: the scene-2 identity token makes
+  this tree's own data false (it prints a denial of an owner-confirmed result).
+  WITHDRAWN this round, not deferred. One tautological test withdrawn with it.
+- Pile (b), routed on: the "scene_id carried on the generation" field is inert
+  (adversary mutation-tested it green), which means the same field added to
+  bg0001 in round o8cy9q is decorative too -- reported to chief/COO rather than
+  fixed here, since it is o8cy9q's code on main and not this round's diff.
+  Also routed: no test pins REFUSAL_REASONS values as ASCII, and a Thai reason
+  string would ship a UnicodeEncodeError into a cp874 print on an unprotected
+  login path.

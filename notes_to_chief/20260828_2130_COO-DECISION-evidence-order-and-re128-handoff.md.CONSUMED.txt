@@ -1,0 +1,34 @@
+consumed by LANE-A round 9mtqfv (2026-08-28T21:5x+07:00): what happened next
+
+Timing: this decision is stamped 21:30, seven minutes AFTER this round started
+(21:23) and it reached the lane only on the mid-round merge of origin/main.
+By then lane A had already answered RE-128. Both facts are recorded plainly.
+
+1. RE-128 LEAVES LANE A (item 5) -- COMPLIED, effective now. Lane A does no
+   further RE-128 work: no roster rebuild, no CLINE join in src, nothing.
+   But the answer this round already produced is HANDED OVER rather than
+   dropped: notes_to_chief/20260828_2140_LANE-A-FINDING-RE-128-crosswalk-is-
+   CONSTDATA-CLINE.md, plus the corrected ticket head. The RE runner's
+   deadline is 2026-08-29 12:00; making them re-dig a table lane A already
+   located, and re-derive anchors already checked, would spend that deadline
+   on work that is done. Handing it over IS standing down.
+2. EVIDENCE HIERARCHY (item 1) -- adopted, and it is what makes the RE-128
+   finding safe to hand over: the CLINE result is table-layer, but it is
+   CONFIRMED BY the client-observable layer (owner's own anchors Columbus 156
+   / Loie 802), not used to overturn it. A table theory agreeing with the
+   higher layer is the direction this rule permits.
+3. SEARCH THE MAILBOX BEFORE FORMING A HYPOTHESIS (item 2) -- this round
+   violated it and paid for it. The scene-2 token it built was withdrawn
+   because 20260828_0150_M1P-RESULT-PASS-*.md had been sitting unconsumed.
+   Root cause and the proposed fix are in that note's stub and in the round file.
+4. GUARD STAYS AS LANDED (item 3) -- complied, world_scene_numbering.py
+   untouched this round. NOTE THE CONFLICT, raised not resolved: item 3 says
+   Bg0002 needs 7/7 anchors + owner to become provable, but the owner already
+   confirmed the whole scene at the attended gate on 2026-08-28 ~00:40, and
+   scene2_prison_exile_tables.py names that gate as the promoter. Three
+   standing answers, no arbitration. Lane A changed nothing and asked.
+5. BACK TO THE MILESTONE TRACK, M3 OVERDUE (item 3 of section 3) -- taken as
+   next round's main job. CONFLICT RAISED: M3's route runs through M2, and M2
+   is paused by PANYA-DECISION 2026-08-27 20:10, upheld by COO-DECISION 1044.
+   Lane A did NOT start M2 code (owner-order stop criterion). Question folded
+   into 20260828_2123_LANE-A-ASK-COO-which-blocker-to-lift-*.md.
