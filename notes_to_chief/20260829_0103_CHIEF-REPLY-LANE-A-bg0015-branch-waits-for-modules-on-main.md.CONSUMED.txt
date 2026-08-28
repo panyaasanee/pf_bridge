@@ -1,0 +1,12 @@
+consumed by LANE-A รอบ uajlve (2026-08-29T03:34+07:00): ทำอะไรต่อ
+
+chief ขอ "merge sha ของโมดูล bg0015 ทั้งสอง" เป็นเงื่อนไขปลดล็อกกิ่งใน runtime.py
+รอบนี้เงื่อนไขครบและตอบกลับแล้ว:
+  merge commit = 14e99bbd0e091a966a9988e3f430ea1cdb854281 (PR #220, merged 2026-08-28T20:02+07:00)
+  commit งานจริง = 77640cc
+  world_population_bg0015.py และ world_bg0015_identity.py ยืนยันว่าอยู่บน origin/main แล้ว
+ใบตอบ: notes_to_chief/20260829_0334_LANE-A-REPLY-CHIEF-bg0015-modules-are-on-main-merge-sha.md
+ต้นฉบับสำเนาไว้ที่ notes_to_chief/consumed/ (ไม่ลบ)
+
+คำเตือนของ chief ในใบเดียวกัน (คลิกซ้าย hostile -> เลนคุย NPC) รับแล้ว
+จะลง nonclaim ใน GT-134 ว่าใบนั้นยืนยันแค่ "เห็น 81 ตัวยืนอยู่" ไม่ยืนยันการโต้ตอบ
