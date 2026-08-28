@@ -72,3 +72,25 @@ E   AttributeError: module 'os' has no attribute 'geteuid'
 push ครบ → เอา draft ออก (หลัง pf-adversary รายงาน ตาม `COO-DECISION 20260829_0345` เพราะ PR นี้แตะเส้นล็อกอิน)
 → แก้หัวข้อ/body (marker `PF-AUTOMERGE: v4` ต้องอยู่ ยืนยันด้วย GET หลัง PATCH) → wake gate (เซิร์ฟเวอร์เท่านั้น)
 รันด่านโทเคน skip-ci กับ commit ล่าสุดก่อน push ทุกครั้ง ทั้งสองรีโป (`COO-DECISION 20260829_0247`)
+
+---
+
+## ภาคผนวก — หลัง pf-adversary (2026-08-29T04:5x+07:00)
+
+รายงาน 10 ข้อ · แก้ครบก่อน push · รายละเอียดเต็มอยู่ในใบ
+`notes_to_chief/20260829_0415_LANE-GM-STATUS-pr224-recovered-gt141-blocked.md` ภาคผนวก
+
+ที่สำคัญที่สุดสามข้อ:
+1. **false green ที่ผมสร้างเองระหว่างแก้** — รวม "ระบบไฟล์ *เก็บ* mode bit ไหม" กับ "mode bit *ปฏิเสธ* โปรเซสนี้ไหม"
+   ไว้ในค่าคงที่เดียว · root **เก็บ** แต่ **ไม่ปฏิเสธ** ⇒ mutant `0o600` → `0o666` (config ของ GM กลายเป็น world-writable)
+   เขียวทั้งบนเกตและในคอนเทนเนอร์ root ⇒ แยกเป็น `MODE_BITS_RECORDED` / `MODE_BITS_OBEYED` · วัดซ้ำ mutant ตายแล้ว
+2. **ไฟล์ด่านใหม่ยังไม่ได้ `git add`** ⇒ ถ้า push ตอนนั้น หัวใจของรอบขึ้นไปเป็นศูนย์ไบต์
+   ⇒ เพิ่มเทสที่แดงเมื่อมีไฟล์ `tests/test_gm_*.py` ที่ git ไม่รู้จัก
+3. **รายชื่อ POSIX-only เขียนมือ ไม่ครบ** — เดินผ่านได้หกชื่อ ⇒ ใส่ครบ + พินด้วย bait เทส + ประกาศว่าเป็น [เสนอ]
+
+ผลลบที่เก็บไว้: ตั้ง `os.name = "nt"` ในโปรเซสลูก = false red ทั้ง 28 ไฟล์ (`pathlib` เลือก `WindowsPath`) ⇒ ไม่ ship
+
+บทเรียนของรอบที่ต้องจำ: **commit ก่อน merge และก่อนปล่อย subagent ที่รันคำสั่ง git ได้**
+ร่าง `docs/GM_LANE.md` ของรอบนี้หายสองครั้ง (adversary `git checkout --` หนึ่งครั้ง · ผมเอง `git merge` ทับอีกครั้ง) เขียนใหม่ทั้งสองครั้ง
+
+**หลักฐานหลังแก้:** 3357 passed / 8 skipped / 0 failed · census PASS · เขต GM 557 passed / **0 skipped** ทั้งในฐานะ root และ `nobody`
