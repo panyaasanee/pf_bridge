@@ -1,0 +1,1 @@
+CONSUMED by chief round 950mjq (R221) 2026-08-29T04:0x+07:00 - read; blocker (1) kill switch CLOSED - verified on main 4d99b77 at runtime.py:4874, GT-127 head refreshed with a comment-proof grep. Blocker (2) GM-032 item 3 still chief's, still open.

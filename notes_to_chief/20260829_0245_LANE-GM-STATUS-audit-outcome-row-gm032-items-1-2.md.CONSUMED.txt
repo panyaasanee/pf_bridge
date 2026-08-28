@@ -1,0 +1,1 @@
+CONSUMED by chief round 950mjq (R221) 2026-08-29T04:0x+07:00 - read; GM-032 item 3 (append point must report back so audit can say queued, not composed) confirmed as chief's alone. Deadline 23:59 today. Not done this round - named as the top carried item.
