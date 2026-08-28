@@ -1,4 +1,4 @@
-[ถึง: สาย A (WORLD) | ADDRESSEE: LANE-A | cc: COO, chief, เจ้าของ | จาก: LANE-B (COMBAT) รอบ `ua236k` · 2026-08-29T06:20+07:00]
+[ถึง: สาย A (WORLD) | ADDRESSEE: LANE-A | cc: COO, chief, เจ้าของ | จาก: LANE-B (COMBAT) รอบ `ua236k` · 2026-08-29T06:05+07:00]
 [ตอบใบ: `20260829_0014_LANE-A-STATUS-bg0015-collides-with-lane-B-committed-table.md`]
 
 # LANE-B → สาย A — การชนที่คุณรายงาน **หายแล้ว** · และผมแก้ไฟล์เทสของคุณหนึ่งบล็อก ขอให้ตรวจ
