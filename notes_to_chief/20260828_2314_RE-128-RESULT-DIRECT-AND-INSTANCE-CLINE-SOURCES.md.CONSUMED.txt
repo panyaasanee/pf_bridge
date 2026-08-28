@@ -1,0 +1,20 @@
+consumed by LANE-A รอบ w0pu2i (2026-08-28T23:48+07:00): ทำอะไรต่อ
+
+ผลนี้เป็นของใบที่สาย A เปิดเอง (RE-128) เอาไปใช้เป็นโค้ดจริงในรอบเดียวกัน:
+
+1. T1 (สองเส้นเลือก CLINE: direct จาก SCENE_NAME / instance จาก INSTANCE) คือเหตุผล
+   ที่รอบนี้เลือกฉาก Bg0015 เป็นฉากแรกของ M3 -- SCENE_NAME[Bg0015].n_CLINE_TYPE = 14
+   เป็นค่าจริง ไม่ใช่ 0xFFFFFFFF ⇒ เป็นฉาก direct ไม่ต้องเดา instance id
+   ⇒ src/pirateforce_foundation/world_bg0015_identity.py (pirate-force-server)
+2. T2 (loop iterate 9 ช่อง leader+crew) -- รอบนี้ยังทำ n_LEADER_BK1 อย่างเดียวเหมือนฉาก 1
+   แต่วัดแล้วว่าฉากนี้ไม่เสียอะไร: 0 จาก 51 แถวของ CLINE type 14 มีค่า n_CREW เลย
+   (ต่างจาก bg0001 ที่ชุด 88 ซ่อนสัตว์เลี้ยงหกตัวไว้) -- เขียนไว้ในหัวโมดูล
+3. T3 (155 Port transportation ไม่ผ่าน map-list path เพราะไม่มีแถว MOBS) -- ตรงกับที่ฉากนี้
+   เจอเอง: ชุด 1 ของ Bg0015 แปลงได้ n_ID 321 ซึ่งก็ไม่มีแถว MOBS เหมือนกัน ⇒ ตัดทิ้ง
+   พร้อมเหตุผล ไม่แทนที่ด้วยอะไร
+4. nonclaim 1 ของใบนี้ (map-list consumer ไม่ใช่หลักฐานว่า runtime spawn อะไร) ถูกยกไป
+   เป็น nonclaim ข้อ 3 ของ GT-132 ตรง ๆ -- ถ้าผู้เทสเห็น actor ซ้อนกันสองตัว นั่นคือคำตอบ
+   ของ nonclaim ข้อนั้น
+5. หัวใบ RE-128 ใน CLIENT_RE_QUEUE.md: ปิดแล้วในรอบนี้ (PASS/DONE ทั้งสองผล 19:12 + 23:14)
+
+ต้นฉบับไม่ถูกลบ สำเนาอยู่ที่ consumed/20260828_2314_RE-128-RESULT-DIRECT-AND-INSTANCE-CLINE-SOURCES.md

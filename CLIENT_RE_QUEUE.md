@@ -1826,6 +1826,23 @@ bounded negative ที่ชัดเจนว่า static ตอบไม่�
 
 ## 🆕🔬 RE-128 SCENE-ORDINAL-TO-MOBS-NID-TABLE-LOCATION-001 [STATIC-ON-BRIDGE]: **ไฟล์/ตารางไหนของไคลเอนต์เก็บ mapping "เลขชุดต่อฉาก (1..115) → `MOBS.n_ID` (ถึง 10,080)" — ตัวที่หายไปทั้งโปรเจกต์ และเป็นตัวเดียวที่ทำให้ Port Royal เกิด NPC ผิดตัวทุกจุด**
 
+
+> ✅ **RE-128 PASS/DONE — ปิดใบ 2026-08-28T23:48+07:00 โดย LANE-A รอบ `w0pu2i` (เจ้าของใบปิดใบของตัวเอง)**
+> สาย RE ตอบครบสองครั้ง: `20260828_1912_RE-128-RESULT-CLINE-CROSSWALK-PINNED.md` (ชั้นตาราง)
+> และ `20260828_2314_RE-128-RESULT-DIRECT-AND-INSTANCE-CLINE-SOURCES.md` (เส้นเลือกจริงใน binary)
+> สามข้อที่ผู้รับช่วงค้างไว้ **ตอบครบทั้งสามข้อ**: ข้อ 1 (ไคลเอนต์อ่าน CLINE จริง — span
+> `[0x0043AA16,0x0043AAA4)` สอง branch) · ข้อ 2 (loop `[0x0043A83E,0x0043A968)` iterate 9 ช่อง leader+crew)
+> · ข้อ 3 (กลไกหาฉากอื่น: direct ผ่าน `SCENE_NAME` / instance ผ่าน `INSTANCE`) · ข้อ 4 (`Port transportation`
+> ถูกกรองทิ้งใน path นี้เพราะไม่มีแถว MOBS — ไม่ประกาศ semantic ระดับโลก)
+> **บริโภคผลครั้งที่สองแล้วในรอบนี้** (stub `.CONSUMED.txt` + สำเนาใน `consumed/`):
+> ผล T1 คือเหตุที่ M3 เริ่มที่ **Bg0015** — `SCENE_NAME[Bg0015].n_CLINE_TYPE = 14` เป็นค่าจริง ไม่ใช่
+> `0xFFFFFFFF` ⇒ เป็นฉาก direct ไม่ต้องเดา instance id ⇒ `src/pirateforce_foundation/world_bg0015_identity.py`
+> (81/91 placement ส่งได้) · ผล T2: ฉากนี้ **0 จาก 51 แถวมี `n_CREW`** ⇒ leader-only ไม่เสียอะไรที่นี่
+> · ผล T3: ชุด 1 ของ Bg0015 แปลงได้ 321 ซึ่งก็ไม่มีแถว MOBS เหมือน 155 ⇒ ตัดทิ้งพร้อมเหตุผล
+> 🔴 **ที่ยังไม่ปิดไปกับใบนี้ และห้ามอ่านว่าปิด:** nonclaim ทั้งห้าข้อของผล 23:14 — โดยเฉพาะข้อ 1
+> (map-list consumer ไม่ใช่หลักฐานว่า runtime spawn actor กี่ตัว) ที่ตอบได้ด้วยตาผู้เทสเท่านั้น
+> ⇒ ยกเป็น nonclaim ข้อ 3 ของ `GT-132` ตรง ๆ
+
 > 🟢🔴 **ชั้นตารางตอบแล้ว — LANE-A รอบ `9mtqfv` 2026-08-28T21:4x+07:00 · แต่ใบยัง *ไม่ปิด***
 > **คำตอบ: `gamedata/tables/CONSTDATA_TH__CLINE.tsv` · คีย์ `(n_CLINE_TYPE, n_CREATURE_TYPE) → n_LEADER_BK1`
 > · ฉากเข้าถึง type ผ่าน `SCENE_NAME.n_CLINE_TYPE` (`bg0001` → type 1)**
