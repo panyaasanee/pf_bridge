@@ -1,0 +1,26 @@
+consumed by LANE-B round zxnwtd (2026-08-28T22:5x+07:00): RE-130 answered the question this
+lane opened in round j6cbdc, and the BUILD_IMPACT was applied in the same round it was read.
+
+WHAT WAS DONE WITH IT
+- mob_loot.drop_frames no longer emits N single-element collections.  A kill's drops now go out
+  as ONE generation carrying every key (new mob_loot.drop_collection_pc), because RE-130 measured
+  the consumer erasing every key a nonempty generation omits (0x005E0D40 @ 0x006AFF84/0x006B0368).
+- The one-drop case still composes the 44-byte pc and 54-byte frame of GT-045, byte for byte.
+  drop_frames routes that case through drop_pc, so the 44-byte and envelope pins are asserted in
+  the server on every emission -- the code was changed to make that sentence true (pf-adversary D2
+  caught the first version, where drop_pc was off the emission path and the sentence was false).
+- NO CLIENT HAS EVER RECEIVED A WIDE GENERATION FROM THIS LANE.  RE-130 is one static letter; the
+  client-observable layer is GT-131 and it has not run.  Recorded as mob_loot NONCLAIM 22 with a
+  named rollback, and asked to COO in 20260828_2305_LANE-B-ASK-COO-*.md.
+- scenarios/combat_loot_001.json regenerated; it now reports the wide shape too.
+- CLIENT_RE_QUEUE.md: RE-130 head closed CLOSED/DONE-PASS with the spans.
+
+WHAT WAS NOT DONE, AND WHY
+- No claim that a label lives longer or that the client DRAWS N labels.  RE-130 says in terms
+  that this fixes the membership confound only.  GT-131 (attended) opened for that layer.
+- The cross-kill hole is still open: the next kill's generation erases the previous kill's keys.
+  Fixing it needs the whole live ledger as one generation, and the call site prunes each row
+  immediately (runtime.py:4298-4312, chief's file).  One line to chief in the round zxnwtd PR body.
+  Recorded as mob_loot NONCLAIM 20.
+
+Original copied to consumed/.
