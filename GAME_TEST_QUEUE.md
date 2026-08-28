@@ -3353,6 +3353,19 @@ BUILD_IMPACT: ถ้า D1/D2 -> "จุดยืน" กลายเป็น�
 ## 🆕 GT-081 TRAVEL-GATE-WALK-OUT-AND-WALK-HOME-001 [attended, in-game]: ผู้เล่นที่ **หยุดยืน** ในเขตที่พินไว้กลางท่าเรือ ทำให้ **ตัวเอง** ข้ามไ... -- archived 20260827 (closed; verbatim in `archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md`)
 ## GT-084 MOB-COMBAT-001 / MOB-DEATH-001 FIRST-REAL-ATTACK-001: การโจมตีจริงจากผู้เล่นครั้งแรกที่ไปถึง mob_combat/mob_death บนบูตไร้แฟล็ก -- เลือดมอนสเตอร์ลดจริงไหม และ 0x201F ตายไหม  [🟡 **RESULT (ผ่านผลต่อของ GT-084-R2, 2026-08-27) -- wire/DB ครบ (hit x5, HP to 0, MOB-DEATH-001 kill, dying/dead frames, MOB_LOOT_DROP x2) แต่ client-observable FAIL 2 จุด: ศพแข็งลอยค้าง (ไม่ล้มตาม GT-022/GT-025), single-click ไม่มีแผงเป้า -- ดู notes_to_chief/20260827_1620_GT084R2-RESULT-*.md, RE-107/RE-108 ปิดแล้ว (bounded negative, 2026-08-27T17:1x+07:00), ห้ามอ่านเป็น PASS/DONE** [UPDATE 2026-08-28T04:1x+07:00, R205, chief: CORE-REQUEST-024 wired -- server-side attack-cadence gate now runs on this dispatch path (`ATTACK_CADENCE_MS_PROVISIONAL=600`, RE-110 still open), closing the spam-click=runaway-damage gap LANE-B's own letter said this GT was seeing. Wire/DB proven only (`tests/test_mob_combat_cadence_wiring.py`) -- no attended session has confirmed the throttled rate looks right on screen yet]]
 
+🔵 **[UPDATE 2026-08-28T18:46+07:00 · LANE-B รอบ `j6cbdc` · เจ้าของใบ · ไม่แก้ถ้อยคำเดิม เพิ่มบล็อกต่อท้ายอย่างเดียว]**
+เกี่ยวกับผลลบชั้นจอข้อ **loot** (`MOB_LOOT_DROP 54B ×2` ออกสายแต่เจ้าของยืนยันว่าไม่เห็นทั้งสองชิ้น):
+รอบนี้ **ตัดคำอธิบายหนึ่งข้อออกได้ด้วยไบต์** — census/ศพเดินบน derived bit `0x02` -> object+`0x1C`
+ส่วน ground-drop เดินบน `0x08` -> object+`0x20` **คนละลิสต์** ⇒ census recompose ที่ยิงทุกครั้งที่ตี
+**ไม่ใช่**ตัวที่ลบของบนพื้น (พินไว้ที่ `pirate-force-server/tests/test_ground_drop_multi_drop_emission_shape.py`)
+เหลือสองสาเหตุที่ยังแข่งกันและ **ยังไม่มีใครแยก**: (1) ทรงการส่ง — ดรอป N ชิ้นส่ง N เฟรม แต่ละเฟรมเป็น
+collection สมบูรณ์ที่ประกาศ count=ONE ⇒ ถ้า consumer `0x08` เป็น replace-by-omission ของจะเหลือชิ้นสุดท้าย
+ชิ้นเดียว (`RE-129` เปิดรอบนี้) · (2) **อายุป้ายที่วัดได้ 0.2-0.4 วินาที** ซึ่งลำพังตัวเดียวก็อธิบาย
+"มองไม่เห็น" ได้ทั้งใบ
+🔴 **ถึงผู้เทสรอบหน้า:** ถ้าได้รันใบนี้หรือ `GT-104` อีก ให้**จ้องที่จุดตายทันทีที่เลือดหมด** (ป้ายอาจอยู่
+ไม่ถึงครึ่งวินาที) และถ้าเป็นไปได้ให้เทียบ **ตัวที่ดรอปชิ้นเดียว vs หลายชิ้น** — นั่นคือตัวแยกสองสาเหตุข้างบน
+
+
 > เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md, prefix สองแบบ ห้ามแยกตัวนับ.
 > เลขสูงสุดที่ใช้ไปแล้ว ณ เวลาเขียนใบนี้: GT-081 (GAME_TEST_QUEUE.md) และ RE-083 (CLIENT_RE_QUEUE.md,
 > บันทึกไว้เองว่า "เลขว่างถัดไป = 084"). grep ซ้ำทั้งสองไฟล์ก่อนจอง: GT-084 = 0 hit, RE-084 = 0 hit.

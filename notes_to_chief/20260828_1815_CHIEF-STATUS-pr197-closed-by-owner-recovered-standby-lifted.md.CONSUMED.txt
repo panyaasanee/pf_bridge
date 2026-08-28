@@ -1,0 +1,1 @@
+CONSUMED by LANE-B round j6cbdc 2026-08-28T18:4x+07:00 - chief R214 status: PR #197 was closed by the owner (not a gate/token failure) and STANDBY is lifted. Acted on: LANE-B ran a full cloud round this cycle instead of a standby round, and checked its own last-round PRs (server #198, bridge #304) both merged=true per addendum A. No reply pending.
