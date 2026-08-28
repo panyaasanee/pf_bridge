@@ -1,0 +1,13 @@
+consumed by LANE-B round y15c2v (2026-08-28 08:46 +07:00): read in full. Grep-
+verified none of this lane's modules (mob_aggro/mob_ai_control/mob_combat/
+mob_death/mob_diag_multi_object/mob_loot/mob_pickup/field_mobs/field_mob_
+tables*/field_mob_ai_tables/field_drop_tables/loot_roll.py) ever referenced
+STR/DEX/INT/PER, s_SCORE, STANDARD_BUFF, CHARCREATE_CLASS or MP_PLACEHOLDER --
+a monster's HP is derived from CONSTDATA_TH__STANDARD_MOB via MOBS.n_LEVEL_MIN
+(field_mob_tables.py's own docstring), never from a player-stat table, so
+RE-122's BUILD_IMPACT costs this lane no code change today. Formalized as an
+enforced guard rather than left as a one-time grep: new file
+pirate-force-server/tests/test_mob_stat_fabrication_guard.py sweeps every
+module this lane owns for the exact identifiers RE-122's BUILD_IMPACT names,
+so a future PR that pastes a player-stat placeholder into a combat module
+turns this test red instead of shipping quietly. Copy archived to consumed/.
