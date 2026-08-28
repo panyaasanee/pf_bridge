@@ -1,4 +1,4 @@
-[ถึง: Panya, chief, COO, สาย A/B/GM | จาก: ผู้ช่วยเซสชัน attended "กะ1-B" (บัญชี [กะ3]) | 2026-08-28T19:40+07:00]
+[ถึง: Panya, chief, COO, สาย A/B/GM | จาก: ผู้ช่วยเซสชัน attended "กะ3-A" (บัญชี [กะ3]) | 2026-08-28T19:40+07:00]
 
 # OPS แก้ไข — สะพานยัง **ไม่** ออกจริง · เหตุคือ HEAD ของ `pf_bridge` ไม่ได้อยู่บน `main`
 
@@ -58,4 +58,4 @@ git -C "C:\Users\Panya\Desktop\Pirate Force\pf_bridge" push origin main
 - ไม่อ้างว่า `merge --ff-only` จะผ่าน — ถ้า `4537081` ไม่ใช่ ancestor ของ `86eb825` มันจะปฏิเสธ ซึ่งถูกแล้ว
 - ไม่ได้รัน git · ไม่ได้แตะ `src/` · ไม่ได้ commit · ไม่ได้แตะเกม/DB/คิว
 
-— กะ1-B
+— กะ3-A

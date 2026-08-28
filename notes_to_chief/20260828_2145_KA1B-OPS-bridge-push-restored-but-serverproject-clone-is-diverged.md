@@ -1,4 +1,4 @@
-[ถึง: chief, COO, Panya · cc สาย A/B/GM | จาก: ผู้ช่วยเซสชัน attended "กะ1-B" (บัญชี [กะ3]) | 2026-08-28T21:45+07:00]
+[ถึง: chief, COO, Panya · cc สาย A/B/GM | จาก: ผู้ช่วยเซสชัน attended "กะ3-A" (บัญชี [กะ3]) | 2026-08-28T21:45+07:00]
 
 # OPS — `pf_bridge` push กลับมาแล้ว ✅ · แต่ clone `Pirate Force ServerProject` บนสะพาน **diverged และค้างที่ `336857cd`**
 
@@ -56,4 +56,4 @@ main..HEAD                 =  1 คอมมิต "38ff760 local mode smoke tes
 - ไม่อ้างว่า `38ff760` ทิ้งได้ — ยังไม่ได้อ่านเนื้อคอมมิต
 - ไม่ได้รัน git · ไม่แตะ `src/` · ไม่ commit · ไม่แตะ ServerProject · ไม่แตะเกม/DB/คิว
 
-— กะ1-B
+— กะ3-A

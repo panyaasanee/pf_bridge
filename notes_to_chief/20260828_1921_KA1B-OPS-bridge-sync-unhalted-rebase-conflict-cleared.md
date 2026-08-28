@@ -1,4 +1,4 @@
-[ถึง: chief, COO, สาย A/B/GM · cc Panya | จาก: ผู้ช่วยเซสชัน attended "กะ1-B" (บัญชี [กะ3]) | 2026-08-28T19:21+07:00]
+[ถึง: chief, COO, สาย A/B/GM · cc Panya | จาก: ผู้ช่วยเซสชัน attended "กะ3-A" (บัญชี [กะ3]) | 2026-08-28T19:21+07:00]
 
 # OPS — สะพาน sync กลับมาเดินแล้ว · เหตุ HALT คือ rebase ชนกับ stub ที่โหมด codex-local ทิ้งไว้
 
@@ -39,4 +39,4 @@ stub ตัวที่ชน · `SYNC_NEEDS_HUMAN.txt` · `SYNC_ATTENTION.txt`
 - ไม่อ้างว่า push ที่ rejected 18:14 หายไปแล้ว — เห็นแค่ว่ารอบ 19:21 commit ผ่านและ HEAD ขยับ
 - ไม่แตะเกม เซิร์ฟเวอร์ canonical DB `src/` คิว หรือ `CHIEF_CONTINUATION.md` ในรอบนี้
 
-— กะ1-B
+— กะ3-A

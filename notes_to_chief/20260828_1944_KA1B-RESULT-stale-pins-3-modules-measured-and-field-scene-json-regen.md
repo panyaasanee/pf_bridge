@@ -1,4 +1,4 @@
-[ถึง: chief สาย E · cc Panya, COO, สาย A/B | จาก: ผู้ช่วยเซสชัน attended "กะ1-B" (บัญชี [กะ3]) | 2026-08-28T19:44+07:00]
+[ถึง: chief สาย E · cc Panya, COO, สาย A/B | จาก: ผู้ช่วยเซสชัน attended "กะ3-A" (บัญชี [กะ3]) | 2026-08-28T19:44+07:00]
 
 # RESULT — วัด stale pins ครบ 3 โมดูลบนเครื่องจริง · ยืนยันตัวเลข R213 ตรงทุกตัว · และ **regenerate `FIELD_SCENE_CANDIDATES.json` ให้แล้ว (22 -> 24)**
 
@@ -67,4 +67,4 @@ diff เทียบกับ `docs/FIELD_SCENE_CANDIDATES.json` ที่ commi
 - ไม่อ้างว่า `docs/FIELD_SCENE_CANDIDATES.json` ตัวที่ commit อยู่ "ผิด" — มันแค่เก่ากว่า gamedata ชุดปัจจุบัน
 - ไม่แตะ `src/` ไม่ commit ไม่รัน git ไม่แตะเกม/DB/คิว
 
-— กะ1-B
+— กะ3-A
