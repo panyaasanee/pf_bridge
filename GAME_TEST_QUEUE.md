@@ -5535,9 +5535,11 @@ client-observable (a human at the screen only, never inferred from the console):
 - 🔴 **Does not prove the character-name-slot bug is fixed.** The chief's own reply
   (`...0231_CHIEF-REPLY-...-name-field-not-touched.md`) states the `x37`(`+0x164`, guild-name slot) ->
   `x1`(`+0x28`, real name slot) move was deliberately **not** done this round, pending a second source of RE
-  confirmation. Expect the character's name to still land in the guild-name slot, not the real name slot,
-  until a separate entry/commit closes that. If the tester happens to see the name rendered correctly
-  anyway, record it as a separate, surprising finding -- do not read it as this entry's fix.
+  confirmation. **UPDATE 2026-08-28 ~09:xx +07:00, chief round `03d46t`:** CORE-REQUEST-027 now wires this
+  move (headless-proven, PR pending merge) -- see `GT-122` for the dedicated attended entry. If GT-116 runs
+  before CORE-REQUEST-027 merges, expect the old guild-slot placement per this nonclaim; if it runs after,
+  the name should already be correct and GT-122 is the entry that claims/tests it, not this one -- do not
+  read either outcome here as this entry's own finding.
 - Does not prove "probe base 1" full completeness (movement speed `x7`, HP/MP per `STANDARD_STATUS`, stat
   points `x18`-`x22`, etc. from the owner's own table in `...0125_PANYA-DECISION-...`) -- only `class_id`
   (`x13`) and `level` (`x2`) were wired this round, per the chief reply.
@@ -5551,6 +5553,194 @@ client-observable (a human at the screen only, never inferred from the console):
 - Single account, single login, single session -- no reconnect/relogin, no second character, no second
   player observing.
 - Does not decide the cause of any name-label colour observed (`RE-067` stays open, no cause inferred).
+- If ด่าน 0/1/2 don't clear (PR not merged / functions not found at the resolved SHA) -> the entire entry is
+  **BLOCKED**, not NO-RESULT/FAIL -- record it as "รอ merge" and stop.
+
+### result (ผู้เทสกรอก)
+```
+
+```
+
+---
+
+## GT-122 CORE-REQUEST-027 NAME-FIELD-GUILD-SLOT-FIX-001: after CORE-REQUEST-027 moves the character's own name off ActorAttr's guild-name slot (`+0x164`, mask bit `0x01000000`, `LABEL_GUILD`) and onto BasicAttr's real name slot (`+0x28`, mask bit `0x0001`, `LABEL_NAME`) -- the guild-slot bug GT-116's own nonclaims section named and CORE-REQUEST-022/023 deliberately left untouched -- does a real client's own nameplate and `CHARACTER` window now show the character's name as a name, with no guild artifact on a freshly-created guildless character [PENDING -- not yet merged into `pirate-force-server` main at time of writing (chief round `03d46t`, branch `claude/jolly-mccarthy-03d46t`). Same handling as GT-116: do not boot until ด่าน 0 clears.]
+
+> NUMBERING NOTE: grep confirmed before reserving -- `GT-122` = 0 hits in `GAME_TEST_QUEUE.md` at time of
+> reservation. `RE-122` (`CLIENT_RE_QUEUE.md`) is already in use, filed under the `RE-` prefix for an
+> unrelated topic (`PLAYER-STANDARD-STATUS-AND-CHARCREATE-SCORE-VALUES-001`, the still-open MP/STR/CON/DEX/
+> INT/PER static probe) -- not this entry, not renamed, not touched here; `GT-` and `RE-` are separate
+> counters in separate files, same as `GT-116`/`RE-116` before it. `RE-123`'s own NUMBERING NOTE (round
+> `of27sx`, 2026-08-28 ~08:3x+07:00) already lists `GT-101`-`GT-122` alongside `RE-085`-`RE-122` as
+> protected/unchanged -- this number was already anticipated before this entry was filed, this is that
+> anticipated entry, not a fresh collision. `GT-101`-`GT-121` and `RE-085`-`RE-123` stay exactly where they
+> are, unchanged -- this is a new entry, not a replacement for any of them.
+
+### source (links only -- see cited files for full detail, not re-derived here)
+- `notes_to_chief/20260828_0125_PANYA-DECISION-boot-character-must-be-complete-min-probe-base-1-plus-name-x1-share-actorattr-probe-to-all-lanes-fix-name-in-guild-slot-ka1-B.md`:
+  owner's own live-client probe (row ② item 2, row ③ x1/x37) -- "ชื่อตัวละครที่ปัจจุบันส่งลง
+  x37 (+0x164 = LABEL_GUILD ชื่อกิลด์) ต้องย้ายไป x1 -- x37 ต้องว่างสำหรับตัวละครใหม่ (ไม่มีกิลด์)". Table
+  row 1 pins `x1 = Basic 0x0001 +0x28 wstring` -> ป้ายล่างสีขาว + หน้าต่าง `CHARACTER`; row 37 pins
+  `x37 = ActorAttr b24 +0x164 wstring` -> ชื่อกิลด์ (ควรว่าง) + row 38 (`+0x180` guild-flag byte) -> สีป้าย
+  ม่วง(มีกิลด์)/ส้ม(ไม่มี) -- the *flag* byte, not the name field, is what this project's own table says
+  drives the purple/orange split; CORE-REQUEST-027 does not touch `+0x180`.
+- `notes_to_chief/20260828_0231_CHIEF-REPLY-CORE-REQUEST-022-class-level-wired-name-field-not-touched.md`:
+  chief's prior round (`9do841`) deliberately declined to move x1/x37, pending a second independent source
+  before touching a field with a prior live-client PASS on it. CORE-REQUEST-027 is the follow-up that answers
+  that ask.
+- `notes_to_chief/20260828_0912_CHIEF-REPLY-CORE-REQUEST-027-actor-name-slot-wired.md` (chief round `03d46t`,
+  this round): `player_wire.py`'s `_make_actor_attr_with_name_and_class` (the real-login-path composer wired
+  via `legacy_bridge.py`'s `LegacyProjector.start_game` -- NOT the frozen `make_actor_attr_with_name`/
+  `make_actor_attr_with_basic_faction` baseline, left untouched) now writes the name wstring to
+  `BasicAttr +0x28` (bit `0x0001`) instead of `ActorAttr +0x164`, and the `ActorAttr` mask literal changed
+  `0x01000801` -> `0x00000801` (bit `0x01000000` no longer set at all). Net frame length unchanged. Cited
+  headless evidence: full suite `3750 passed, 327 skipped, 0 failed` (skips pre-declared/pinned via
+  `tools/pf_pytest_precondition_census.py`), `tools/verify_hypothesis_ledger.py` clean, `pf-adversary` review
+  pass before PR. Two golden-hash files re-baselined (`tests/golden/foundation_v1.json`,
+  `tests/golden/item_lifecycle_v1.json`) -- only `start_pc`/`start_frame`/`merged_start_pc`/
+  `merged_start_frame` keys changed, frozen V141 template path untouched -- cited as blast-radius evidence,
+  not reproduced by this entry.
+- GT-116's own nonclaims section (see its UPDATE block, this round) already forward-references this entry.
+
+### objective (single claim)
+On a completely ordinary, flagless login (no `--*-scenario`), does the character's own name now render in the
+correct name slot -- the white nameplate above the character and the `CHARACTER` (`C`) window -- instead of
+the guild-name slot, and does the character show no guild artifact (matching a freshly-created character that
+has no guild)? Wire cause and client effect are the same claim here, not two entries.
+
+### predictions (a wrong prediction is a finding, not a failure)
+- P1 [proposed, the heart of the entry] the nameplate above the character and the `CHARACTER` window both show
+  the character's actual own name, transcribed verbatim off a full-res still -- not blank, not garbled, not
+  standing in for something else.
+- P2 [proposed, corollary] no guild tag/label is visible anywhere on screen for this character, and if the
+  `CHARACTER` window has a guild field at all, it reads empty/none -- consistent with a freshly-created
+  guildless character.
+- P3 [falsifier] the name is missing entirely, garbled, or visibly rendered as if it were a guild
+  tag/slot -- a real negative, not a failure: it would mean the fix is wrong or incomplete, and redirects to a
+  new RE ticket comparing this session's raw frame bytes against the queue's own pinned ActorAttr/BasicAttr
+  mask findings field-by-field rather than re-running this entry. A name-label rendering in guild-styled
+  colour (purple, per the owner's own table row 38) is also a P3 finding worth recording, but per the colour
+  rule below the tester records the colour only and does not infer that the name-field move caused it -- the
+  actual driver per this project's own table is the separate `+0x180` guild-flag byte, untouched by
+  CORE-REQUEST-027, and `RE-067` (name-label colour cause) stays open regardless of what this entry sees.
+
+### ก่อนบูต -- ด่าน 0 (สถานะ merge, ยังไม่ merge ณ ตอนเขียนใบ -- ห้ามข้าม), ด่าน 1 (green boot), ด่าน 2 (grep ยืนยันสาย)
+
+**ด่าน 0 -- สถานะ merge:** CORE-REQUEST-027 is reported (chief round `03d46t`) as landed on branch
+`claude/jolly-mccarthy-03d46t` of `pirate-force-server`, **PR pending, not yet merged into `main`** at time of
+writing. `pf_resolve_green_boot.py` follows `origin/main` only -- if the PR has not merged when the tester
+runs ด่าน 1, the resolver will not return a commit containing this code (`exit 3`, or a commit missing
+`_make_actor_attr_with_name_and_class`). **The entry stays unbootable** -- record the result as "รอ merge" and
+move to another ticket. **Never checkout the branch directly to skip the resolver**, even with a sha in hand,
+and never trust any sha string above without ด่าน 2 confirming it live.
+
+**ด่าน 1 -- resolve commit เขียว:**
+```
+py -3 pf_resolve_green_boot.py --repo "C:\path\to\pirate-force-server" --fetch
+```
+Run from the `pf_bridge` folder. Only `exit 0` + a printed `BOOT_COMMIT: <sha>` means bootable (detached HEAD
+checkout of `<sha>`). Do not eyeball-compare commit numbers.
+
+**ด่าน 2 -- ยืนยันสายจริงของ `<SHA>` (need at least 1 line from every command; missing any one = BLOCKED, do
+not boot, do not hunt for a different commit, go do another ticket and come back later):**
+```
+git grep -n "_make_actor_attr_with_name_and_class" <SHA> -- src/pirateforce_foundation/player_wire.py
+git grep -n "0x00000801" <SHA> -- src/pirateforce_foundation/player_wire.py
+git grep -n "_make_actor_attr_with_name_and_class" <SHA> -- src/pirateforce_foundation/legacy_bridge.py
+git grep -n "def make_actor_attr_with_name\b" <SHA> -- src/pirateforce_foundation/player_wire.py
+git grep -n "def start_game" <SHA> -- src/pirateforce_foundation/legacy_bridge.py
+```
+The fourth command confirms the OLD frozen baseline (`make_actor_attr_with_name`) is still present and
+untouched -- if it is gone, more changed than this ticket's description covers, treat as BLOCKED too.
+
+### db (สำเนาเสมอ ห้ามเปิด canonical, ห้ามแตะ state\play.sqlite3)
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-122_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt122.sqlite3
+```
+Compare canonical sha256 against `CANON_SHA.txt` both before start and after finish -- must match both times.
+Fresh copy every boot => character position resets to spawn every time (X -8553.9473, Y -2579.6890, Z 186.0,
+scene 1 Port Royal), regardless of anything saved from a previous session.
+
+### server args (เป๊ะ -- ไม่มี --*-scenario, production flagless path only)
+```
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+py -3 -u -m pirateforce_foundation.app --db state\run_gt122.sqlite3
+```
+No `--*-scenario` flag of any kind, no other entry piggybacked onto this boot. Capture proof of the bare
+command line immediately after the server comes up:
+```
+Get-CimInstance Win32_Process -Filter "Name='python.exe'" | Select-Object ProcessId,CommandLine | Format-List
+```
+
+### steps (click by click -- record continuous video for the whole LOCK_GAME window)
+Before start: hold `LOCK_GAME`, note boot stamp (+07:00, must be under 420 min old when teardown runs), compare
+canonical sha, copy both DBs per the db block, stage `TEMPLATE_teardown_generic.ps1`. Confirm ด่าน 0-2 all
+cleared (record the resolved SHA).
+
+1. Start the server first always (`Get-NetTCPConnection -State Established` on ports 10188/10189 must be 0
+   before opening the client). A client opened with no server dies on its own in ~3.5 minutes. If the client
+   has to be killed mid-session, restart the server before opening the next client.
+2. Open client -> select server -> PVP dialog left button -> character select -> first slot -> the middle of
+   the 5 bottom buttons = enter game (never the leftmost -- that deletes the character). Start continuous
+   recording before pressing enter-game.
+3. T0 -- HP bar / minimap / map name all visible. Photograph full-res immediately.
+4. NO-CRASH check: right-click-drag to sweep the camera 360 degrees once. Camera-only, character facing never
+   moves, nothing goes out on the wire, safe at any point. **Never use Q/E or W/A/S/D for this check.**
+5. Photograph the nameplate above the character full-res, close enough to read it clearly; transcribe the
+   text verbatim from the still -- this is the P1 reading.
+6. Press **C** to open the `CHARACTER` window; photograph full-res; transcribe the name field shown verbatim,
+   and note whether any guild tag/field/label appears anywhere in that window ("none" if none).
+7. NO-CRASH check again (right-click-drag).
+8. Log out -> teardown via `TEMPLATE_teardown_generic.ps1` (boot stamp must still be under 420 min) -> recheck
+   canonical sha256 -> sha256 every capture.
+
+Colour rule (Panya's order, 2026-08-25): one line per label per image, write "none" not blank, full-res stills
+only (never a contact sheet or video), never infer a cause -- `RE-067` is open and is the only place that
+question lives. Divergences from the original server's screenshots go into `REAL_SERVER_DIVERGENCE.tsv`.
+
+### pass criteria (two layers, never mixed)
+
+wire/DB (read from raw captured frame bytes / server console+log only, never from what's on screen):
+- The login/StartGame response's `BasicAttr` block has change-mask bit **`0x0001`** set, with a wstring field
+  immediately following the mask field among `BasicAttr`'s emitted fields (ascending mask-bit order -- `0x0001`
+  is the lowest bit, so it is emitted first) that decodes to the character's actual stored name.
+- The same response's `ActorAttr` block does **NOT** have change-mask bit **`0x01000000`** set at all (absent,
+  not merely present-and-zero -- record which the captured frame actually shows).
+- Net frame length: record byte length of the `BasicAttr`/`ActorAttr` blocks and the whole StartGame response;
+  compare against a pre-fix capture if the tester has one, otherwise record this session's bytes as a fresh
+  baseline, not a comparison.
+- `sessions`: +1 row with `selected_character_id` set for this login; `max(lease_generation)` does not go
+  backward; `PRAGMA integrity_check` = `ok` on the working copy both times; canonical sha256 matches
+  `CANON_SHA.txt` before and after. Raw GAME log + console out/err kept whole, both before and after.
+- Negative result with equal standing: if `0x01000000` is still set, or the `0x0001` name field does not
+  decode to the character's name, despite ด่าน 0-2 clearing -- write that up in full; it means the merged
+  commit did not do what this ticket's source description claims, which is itself the finding.
+
+client-observable (a human at the screen only, never inferred from the console):
+- Nameplate text (step 5) transcribed verbatim from a full-res still -- PASS reading = matches the character's
+  actual own name; anything else (blank/garbled/wrong text) is recorded plainly, not read as this entry's own
+  failure (see P3).
+- `CHARACTER` window name field (step 6) transcribed verbatim; presence/absence of any guild
+  tag/field/label anywhere in that window recorded plainly ("none" if none).
+- Both NO-CRASH checks pass.
+- Name-label colours recorded per the colour rule above, one line per label per full-res still, "none" written
+  out where there is none.
+
+### nonclaims
+- Does not test class/level or the skill window (`K` / `Bt_main_Skill`) -- that is `GT-116`'s claim, a
+  separate entry on a separate number; do not read either entry's result as evidence for the other.
+- Does not test movement speed / HP-MP completeness / STR-CON-DEX-INT-PER stat points -- the remainder of the
+  owner's own "probe base 1" table is still open at `RE-122` (`CLIENT_RE_QUEUE.md`), unrelated to this fix.
+- Does not test guild membership mechanics (joining, leaving, guild chat, etc.) -- only that a freshly-created
+  guildless character shows no guild artifact on login.
+- Does not decide the cause of any name-label colour observed -- `RE-067` stays open, no cause inferred, even
+  if a guild-styled colour appears (see P3's caveat re the separate `+0x180` guild-flag byte).
+- Single account, single login, single session -- no reconnect/relogin, no second character, no second player
+  observing, no guild ever actually created or joined.
+- Headless full-suite (`3750 passed, 327 skipped, 0 failed`), ledger-verify, and `pf-adversary` review are
+  cited evidence from this round's build, not reproduced or re-run by this entry.
+- The two golden-hash re-baselines (`tests/golden/foundation_v1.json`, `tests/golden/item_lifecycle_v1.json`)
+  are cited as blast-radius evidence only -- this entry does not independently re-verify their diff.
 - If ด่าน 0/1/2 don't clear (PR not merged / functions not found at the resolved SHA) -> the entire entry is
   **BLOCKED**, not NO-RESULT/FAIL -- record it as "รอ merge" and stop.
 
