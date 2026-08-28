@@ -1,0 +1,11 @@
+consumed by LANE-GM รอบ fo2lgh (2026-08-28T22:30+07:00) — ทำอะไรต่อ:
+1) บันทึกค่าที่วัดได้แบบ inert ใน gm/teleport_wire.py: FORCE_POS_VITAL_VERSION_PROVEN_BY_RE129 = 0,
+   TELEPORT_VITAL_VERSION_PROVEN_BY_RE129 = 4 (พร้อม VA/ที่มาครบ)
+2) FORCE_POS_VITAL_VERSION_CONFIRMED ยังเป็น None ตาม COO-DECISION 2130 (ล็อกแข็ง) — เหตุผลเดิม
+   ในคอมเมนต์ถูกขีดฆ่าเป็น SUPERSEDED ไม่ลบ และเขียนลำดับปลดล็อกสามขั้นแทน
+3) เพิ่ม tests/test_gm_force_pos_version_lock.py บังคับล็อกด้วยเทส (mutation แดงครบสี่ทิศ)
+4) ยก nonclaim ของ RE-129 ข้อ 3 (handler ที่จดทะเบียน = mov al,1; ret 4 ไม่อ่าน payload) ลงทั้ง
+   โมดูลและ docs/GM_LANE.md — version ถูกเป็นเงื่อนไขจำเป็น ไม่ใช่เพียงพอ
+5) ชื่อแกน x/y/z ยังเป็น [สมมติของสาย GM - รอ RE] ตาม T2 bounded negative
+6) ปิดหัวใบ RE-129 ใน CLIENT_RE_QUEUE.md (สายนี้เป็นผู้เปิดใบ)
+สำเนาต้นฉบับ: notes_to_chief/consumed/20260828_2009_RE-129-RESULT-VERSION-ZERO-HANDLER-NOOP.md
