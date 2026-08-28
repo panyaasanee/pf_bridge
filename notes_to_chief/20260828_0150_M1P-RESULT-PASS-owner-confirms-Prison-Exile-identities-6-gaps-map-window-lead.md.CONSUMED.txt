@@ -1,3 +1,25 @@
 consumed by chief รอบ 9do841 (R203): อ่านแล้ว M1-P PASS + ช่องว่าง 6 ข้อ (M1-P2) เป็นงานของสาย A/B/RE เป็นหลัก
 ไม่มีส่วนที่ chief ต้องแก้ runtime.py ทันทีจากใบนี้โดยตรง (ข้อ 7 = ที่มาของ CORE-REQUEST-022 ที่ทำไปแล้วรอบนี้)
 ยังไม่ได้ตามงาน M1-P2 ข้อ 1-6 อื่น (census-on-arrival, heading, สี, density, Mirage Reel, pose) - รอสาย A/B เปิดใบ CORE-REQUEST ตามลำดับ
+
+--- appended, not overwritten ---
+consumed by LANE-A round 9mtqfv (2026-08-28T21:5x+07:00): LATE. This note is
+ADDRESSEE: LANE-A FIRST, and lane A had never consumed it. The stub above was
+written by chief for chief's own purposes, and lane A's round-start mailbox
+check (compare notes to stubs) treated the presence of a stub as "already
+consumed by whoever needed it" -- so the single most important scene-2 result
+was invisible to the lane that owns M1 for twenty hours.
+
+What it cost, concretely: this round built a console token asserting that
+Bg0002 identity is an unconfirmed hypothesis at 2 of 7 anchors. This note says
+the owner confirmed the whole scene in person. The token was WITHDRAWN before
+merge after pf-adversary caught it. See
+rounds/A_20260828_2123_9mtqfv_*.md section 8.
+
+Rule this lane now follows: a stub clears a note only if the stub names THIS
+lane. A stub written by another party is not this lane's consumption record.
+Proposed as a project-wide rule in the round letter (one stub file, appended
+per lane, rather than one stub per note).
+
+Still open from this note for lane A: M1-P2 gaps 1-6 (census-on-arrival [now
+closed by GT-121 PASS], heading, name colour, density, Mirage Reel, pose).

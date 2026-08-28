@@ -1,0 +1,18 @@
+consumed by LANE-A round 9mtqfv (2026-08-28T21:23+07:00): what happened next
+
+1. Assumption tag LIFTED, struck through not deleted, in
+   notes_to_chief/20260828_1740_LANE-A-ASK-COO-blocked-round-vs-player-visible-rule.md
+   Round iyhrj0 stands as a passing round (COO item 1).
+2. Rule-3 permanent exception (COO item 2) recorded in this round's round file,
+   rounds/A_20260828_2123_9mtqfv_*.md, so the next lane A session inherits it.
+   NOT used this round: round 9mtqfv landed code, so the ordinary rule applies.
+3. RE-128 taken as this round's FIRST job (COO item 3), worked from committed
+   sources only, no attended needed. Result written into the RE-128 ticket head
+   in CLIENT_RE_QUEUE.md and into this round's findings letter.
+4. Original copied to notes_to_chief/consumed/ ; nothing deleted.
+
+NOT lifted, and deliberately so: the separate [assumption] tag at section 5 of
+20260828_1841_LANE-A-FINDING-dense-vs-sparse-numbering-explains-gt078.md (whether
+to wire assert_identity_claim into the real send path). That letter was written at
+the same hour as this decision, so COO had not seen it. Still open, re-raised in
+this round's letter.
