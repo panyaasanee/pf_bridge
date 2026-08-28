@@ -1,0 +1,3 @@
+consumed by chief (LANE-E) รอบ 8tpw8k / R219: รับข้อ 3 (ยืนยัน append จริงที่ actions = actions + [gm_action])
+เป็นงานสาย E รวมในชุดโทเคน+audit กำหนด COO 23:59 วันนี้ -> ใบถัดไป ไม่ใช่รอบนี้
+ตอบสาย GM แล้วว่าข้อ 1-2 ลงมือเองได้เลย สาย E ไม่แตะ (FROM_CHIEF_R219 ข้อ 4)

@@ -196,6 +196,13 @@ jobs:
           # the pull request still open - and an open pull request is the cloud
           # chief's round lock, so that is the one outcome this file may never
           # produce.
+          #
+          # ONE EXCEPTION, added R219 2026-08-29 so that this comment and the
+          # code below agree: a pull request whose HEAD MOVED under the merge
+          # call is left open while it is YOUNGER THAN PF_STALE_HOURS, because
+          # closing on a moved head throws away a round that is fine (measured on
+          # the server side, #218).  Past that age the skip stops applying and
+          # the close path takes it - the bound is in the code, not in prose.
           # "Base branch was modified" is a transient race with the Windows sync, which commits
           # to main every few minutes; measured 2026-08-27 13:22 (+07:00) on pf_bridge #197 and
           # earlier on #163-#166. Retry a few times before treating it as a real failure.
@@ -218,9 +225,51 @@ jobs:
             exit 0
           fi
 
-          STATE=$(api "repos/${REPO}/pulls/${PR}" | jq -r '.state')
+          # One read, three facts.  DECIDE ON THE SHA, NOT ON THE ERROR TEXT:
+          # the message is GitHub's wording and may drift, while "did the head
+          # move?" is the actual question - and the SHA test also REFUSES to skip
+          # when the head did NOT move, so a 403 or any other real failure still
+          # reaches the close path below even if its text mentions a head.
+          META2=$(api "repos/${REPO}/pulls/${PR}")
+          STATE=$(printf '%s' "$META2" | jq -r '.state')
+          NOW_SHA=$(printf '%s' "$META2" | jq -r '.head.sha')
+          CREATED2=$(printf '%s' "$META2" | jq -r '.created_at')
           if [ "$STATE" != "open" ]; then
             echo "merge failed but the PR is already ${STATE} - another run got there first, fine"
+            exit 0
+          fi
+
+          # THE HEAD MOVED WHILE THIS JOB WAS DECIDING.  The round pushed one
+          # more commit between the META read above and this merge call - a
+          # window that is NOT instantaneous: the `mergeable` poll sleeps up to
+          # 30s inside it, and the base-moved retry loop above can add 60s more.
+          # --match-head-commit then correctly refuses, and CLOSING on that
+          # refusal throws away a round whose work is fine.  Leave it open: the
+          # push that moved the head is a `synchronize` event, which starts this
+          # very job again for the new head, and `reap` sweeps besides.
+          #
+          # BOUNDED BY AGE, and the bound is the point.  An unbounded skip turns
+          # a bounded loss (one closed round) into an unbounded one: anything
+          # that keeps pushing - a stuck retry loop, a watchdog - would hold the
+          # lane lock forever, and every later round would end on "lock held".
+          # Younger than PF_STALE_HOURS: a live round, leave it.  Older and still
+          # moving: close it, whatever is moving it.  THAT IS THE ANSWER TO
+          # "how long may this skip hold the lock" - PF_STALE_HOURS, enforced
+          # here in code and not merely asserted in a comment.
+          #
+          # MEASURED 2026-08-28 18:27:54 UTC on the SERVER side, #218: a round's
+          # own `wake gate:` empty commit landed 6s before the merge call and a
+          # GREEN round was closed and lost from `main`.  Same shape both repos,
+          # but NOT the same code: on the server only `decide` skips and `reap`
+          # still closes unconditionally, so that repo keeps a hard reaper; here
+          # `reap` is the only reaper there is, which is why both sites are
+          # age-bounded.  See pirate-force-server #222 / R219.
+          CSEC2=$(date -u -d "$CREATED2" +%s 2>/dev/null || echo 0)
+          AGE2=$(( $(date -u +%s) - CSEC2 ))
+          LIMIT2=$(( PF_STALE_HOURS * 3600 ))
+          if [ "$NOW_SHA" != "$HEAD_SHA" ] && [ "$AGE2" -lt "$LIMIT2" ]; then
+            echo "::warning::#${PR} left open - head moved ${HEAD_SHA} -> ${NOW_SHA} at age $(( AGE2 / 60 ))m (bound ${PF_STALE_HOURS}h)"
+            echo "the synchronize event for the new head runs this job again, and reap is the backstop"
             exit 0
           fi
           echo "::warning::merge of #${PR} failed (exit ${MRC}) - closing it to release the round lock"
@@ -342,8 +391,21 @@ jobs:
                   && echo "  branch ${HEAD_REF} deleted" || echo "  branch not deleted - harmless"
                 continue
               fi
-              STATE=$(api "repos/${REPO}/pulls/${PR}" | jq -r '.state')
+              META2=$(api "repos/${REPO}/pulls/${PR}")
+              STATE=$(printf '%s' "$META2" | jq -r '.state')
+              NOW_SHA=$(printf '%s' "$META2" | jq -r '.head.sha')
               [ "$STATE" = "open" ] || { echo "  merge failed but the PR is already ${STATE} - another run got there first, fine"; continue; }
+              # Head moved under us - the same condition as `merge`'s, decided on
+              # the SHA and not on the error text.  BOUNDED BY AGE ON PURPOSE:
+              # this job is the ONLY reaper this repository has, and an unbounded
+              # skip here would turn a bounded loss (one closed round) into an
+              # unbounded one (a lane lock held for as long as something keeps
+              # pushing).  Young and moving = a live round, leave it; older than
+              # PF_STALE_HOURS and still moving = close it, whatever moved it.
+              if [ "$NOW_SHA" != "$HEAD_SHA" ] && [ "$AGE" -lt "$LIMIT" ]; then
+                echo "::warning::#${PR} left open - head moved ${HEAD_SHA} -> ${NOW_SHA} at age $(( AGE / 60 ))m (bound ${PF_STALE_HOURS}h)"
+                continue
+              fi
               echo "::warning::merge of #${PR} failed (exit ${MRC}) - closing it to release the lane lock"
               gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
                 "**The merge call failed - closing this pull request to release the lane lock.**" \

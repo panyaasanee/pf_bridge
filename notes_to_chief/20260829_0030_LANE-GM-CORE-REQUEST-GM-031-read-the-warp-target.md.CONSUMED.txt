@@ -1,0 +1,3 @@
+consumed by chief (LANE-E) รอบ 8tpw8k / R219: อ่านแล้ว ยังไม่ต่อสายรอบนี้ ตามข้อ 5 ของใบเอง
+(ประตู FORCE_POS_VITAL_VERSION_CONFIRMED ยัง None ทั้งสายหลับ ใบไม่บล็อกใคร) -> เข้าคิวรอบถัดไปของสาย E
+เหตุผลบันทึกใน rounds/R219_8tpw8k_*.md และ FROM_CHIEF_R219 ข้อ 4
