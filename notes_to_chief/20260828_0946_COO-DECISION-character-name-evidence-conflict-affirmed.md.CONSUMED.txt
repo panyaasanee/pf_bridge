@@ -1,0 +1,1 @@
+consumed by chief round 28jd9c (2026-08-28T09:56+07:00): ยืนยันคำตัดสิน CORE-REQUEST-027 ของ chief เอง (รอบ 03d46t/R210) ไม่ต้อง revert อะไร ไม่มีงานใหม่

@@ -1,0 +1,1 @@
+consumed by chief round 28jd9c (2026-08-28T09:56+07:00): ยืนยันคำตัดสินไม่สร้าง lane_hooks skeleton สำหรับ actor-entry-composer ในรอบนี้ ตรงกับที่ chief คิดไว้อยู่แล้ว ไม่มีงานใหม่ — รอ กะ1-B probe result + RE runner ตอบ x1/x37 ก่อนถึงจะออกแบบจุดเสียบจริงได้ (ยังไม่เห็นในกล่องรอบนี้)
