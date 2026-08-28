@@ -45,8 +45,21 @@ routine ของเจ้าของ chief แก้เองไม่ได�
 · ติดอาวุธที่ `dispatch()` นอกเงื่อนไข scenario (GT-128 บูตไร้แฟล็ก) · เกณฑ์คือ label เท่ากับ
 `chat_command_action.WARP_ACTION_LABEL` เป๊ะ ไม่ใช่ substring `TELEPORT` (มีอีก 3 label ที่มีคำนั้น)
 · กันโทเคนโกหกเมื่อบูตมี `scene_load_scenario` (ปลดแฟล็ก บันทึก event ไม่พิมพ์โทเคน)
-ไฟล์ที่แตะ 2 ใบ: `src/pirateforce_foundation/runtime.py` (+57) · `tests/test_gm_warp_position_confirmed.py` (ใหม่ 8 เทส)
-เทส: สวีตเต็ม **3923 passed 323 skipped** เขียว(cloud sanity) · `HYPOTHESIS_LEDGER` **PASS 47** ไม่มี drift
+ไฟล์ที่แตะ 2 ใบ: `src/pirateforce_foundation/runtime.py` · `tests/test_gm_warp_position_confirmed.py` (ใหม่)
+`HYPOTHESIS_LEDGER` **PASS 47** ไม่มี drift
+
+🔴 **`pf-adversary` ล้มดีไซน์แรกด้วยการวัดจริง 3 ข้อระดับรุนแรงสุด chief แก้ก่อน commit:**
+1. `foundation.checkpoint()` คืนค่าปกติ **โดยไม่เขียนแถว** ในฉากที่พิน `persist_position_allowed=False`
+   (ฉาก 17 = ปลายทางเลน Columbus ของเราเอง) ⇒ โทเคนพิมพ์ทับแถวที่ไม่ขยับ (วัดแล้ว แถวก่อน=แถวหลัง)
+   **แก้:** เกตโทเคนด้วย `is_position_persist_allowed(...)` ตัวเดียวกับที่ `lifecycle.checkpoint` ใช้
+2. แฟล็กเดิมค้างข้ามเฟรมจนกว่าจะมีการเขียน — แต่ `RE-129` วัดเองว่า client เมิน `ForcePos` ⇒ TargetPos ใบแรก
+   รายงานพิกัดเดิม ไม่เขียน แฟล็กค้าง แล้วไปยิงตอน**ผู้เทสเดินเอง** (วัดแล้ว) = กรณีที่โทเคนมีไว้แยกพอดี
+   **แก้:** หน้าต่างยืนยันเปิดเฟรมเดียว (TargetPos ใบแรกหลัง warp) เปิด/ปิดใน `dispatch()` คร่อมเลน
+3. เฟรม warp ที่ไม่ได้เขียนเคยเงียบสนิท ⇒ แยกไม่ออกจาก "สายตาย"
+   **แก้:** บันทึกเหตุผลเสมอ `gm_warp_position_not_confirmed_{no_durable_position_write,scene_load_scenario,character_changed}`
+เพิ่มเอง: กัน arm ซ้ำ (`..._rearmed`) · ผูกแฟล็กกับ `character.id` ที่ arm ไว้
+❌ **ที่ยังพิสูจน์ไม่ได้ในเขต chief:** โทเคนไม่รู้ว่าแถวตรงกับพิกัดที่ `/warp` สั่งไหม เพราะทูเพิลที่โมดูลสาย GM คืนมา
+ไม่มีพิกัดปลายทาง ⇒ ความหมายวันนี้คือ "TargetPos ใบแรกหลัง warp ทำให้เกิดการเขียนจริง" เท่านั้น (ขอใบใหม่จากสาย GM)
 
 ## 3. `FIELD_SCENE_CANDIDATES` — ปฏิเสธการยกไฟล์ staged เข้า `docs/` [วัดแล้ว]
 สะพานขอให้ chief ยก `staged\FIELD_SCENE_CANDIDATES_regen_20260828.json` (24 candidates / 268 scenes) เข้า `docs/`
