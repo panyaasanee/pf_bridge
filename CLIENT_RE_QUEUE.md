@@ -1879,3 +1879,60 @@ bounded negative ที่ชัดเจนว่า static ตอบไม่�
 
 **ปลดล็อกถ้าเป็นบวก:** `GT-078` ที่ค้าง OWNER-REJECTED ตั้งแต่ 26 ส.ค. · โรสเตอร์ตัวจริงของ Port Royal
 ⇒ **M1 ของเมืองหลัก**
+
+## RE-129 FORCE-POS-VITAL-VERSION-001: ไบต์ `vital_version` ของ `ForcePos` (`0x0E80`) ที่ client ยอมรับคือค่าอะไร -- prototype constructor ของ vital นี้เขียนอะไรลง `+0x10`
+
+> NUMBERING NOTE: ตัวนับร่วมกับ `GAME_TEST_QUEUE.md` -- เลขสูงสุดบน main ก่อนจอง = `RE-128` (สาย A,
+> SCENE-ORDINAL-TO-MOBS-NID-TABLE-LOCATION-001) และ `GT-127` (สาย GM) · grep ยืนยันก่อนจอง 2026-08-28T18:2x:
+> `RE-129` = 0 hit ทั้งสองไฟล์ ⇒ ใบนี้ = `RE-129`
+
+**ค้นใน `pf_bridge\external\` แล้ว: ไม่เจอ** -- `grep -inE "0x0E80|ForcePos|vital_version|version"
+external/00_SEARCH_HERE_FIRST.md` = 0 แถว
+**ค้นใน `pf_bridge\gamedata\` แล้ว: ไม่เจอ** -- `grep -inE "ForcePos|version" gamedata/00_SEARCH_HERE_FIRST.md`
+= 0 แถว (ใบนี้เป็นคำถาม code ไม่ใช่คำถาม gamedata)
+
+### คำถามเดียว
+`ForcePos` (vital id `0x0E80`) -- prototype constructor ของ vital นี้ `mov` ค่าอะไรลงไบต์ `message+0x10`
+(ช่อง `vital_version` ที่ generic reader เทียบแบบ exact-equality) · ต้องการ **ตัวเลข + VA ของไซต์ที่เขียน**
+ไม่ใช่การอนุมานจาก vital ตัวอื่น
+
+### วิธีที่พิสูจน์แล้วว่าได้ผล -- ทำซ้ำของ RE-105 ตัวต่อตัว
+RE-105 (STATIC-ON-BRIDGE, DONE/PASS, `notes_to_chief/20260827_1613_RE-105-RESULT-VITAL-VERSION-ZERO-GENERIC-MISMATCH-PATH.md`)
+ตอบคำถามรูปเดียวกันนี้ให้ `0x5A19` สำเร็จมาแล้ว และระบุกลไกไว้ครบ:
+- generic VitalData collection reader ที่ `[0x005F3E20, 0x005F406D)` เทียบ **exact-equality** กับ `message+0x10`
+- ไบต์นั้นถูกตั้งโดย **prototype constructor ของ vital แต่ละตัวเอง** ด้วย `mov` ตรง ๆ
+  (`0x5A19` -> bootstrap `0x007299B0` เขียน `0`)
+⇒ ใบนี้คือ "ทำข้อเดียวกันกับ `0x0E80`": หา bootstrap/prototype ctor ของ `0x0E80` แล้วอ่านไบต์ที่มัน `mov`
+VA ตั้งต้นที่มีอยู่แล้วในโปรเจกต์: `external/PF_PROTOCOL_REGISTRY.tsv` มีแถว `ForcePos` พร้อม VA
+
+### 🔴 ทำไมเรื่องนี้เป็นคอขวดจริง (ไม่ใช่ความอยากรู้)
+1. **มันคือไบต์เดียวที่กั้นระหว่าง "GM พิมพ์ /warp แล้วไม่มีอะไรเกิดขึ้น" กับ "ตัวละครขยับบนจอ"**
+   สาย GM สร้างเส้นทางครบแล้วรอบ `gr2q9j`: `gm/chat_command_action.py` (ใหม่) รับบรรทัดแชท -> ตรวจ
+   allowlist -> parse -> ประกอบเฟรม `ForcePos` ผ่าน `gm/warp_executor.py` -> คืน action ให้ dispatch ส่ง
+   ทุกขั้นมีเทสเขียว **ยกเว้นขั้นสุดท้ายที่ถูกกั้นไว้เอง** ด้วย
+   `teleport_wire.FORCE_POS_VITAL_VERSION_CONFIRMED = None`
+2. **เดาไม่ได้ เพราะเดาแล้วฆ่าเซสชันของเจ้าของ** -- GT-101 (attended, OBSERVER_CONFIRMED 2026-08-27T14:39+07:00)
+   วัดของจริง: ส่ง `0x5A19` ด้วย version ที่ยังไม่พิสูจน์ (`1`) -> client ขึ้น modal error เรียกชื่อ vital
+   ตาม id -> **หยุดประมวลผลทั้ง connection แล้วปิด socket เอง**
+3. **ไม่มีค่า default ของโปรเจกต์ให้ fallback** -- ค่าที่รู้แล้วสองตัวไม่เท่ากัน:
+   `0x5A19` = `0` (RE-105) · `SELECT_ACTOR_VITAL` = `10` (`pf_login_game_server_v141.py:2205, 2289`
+   พิสูจน์ด้วยทุก login ที่สำเร็จของโปรเจกต์นี้) ⇒ per-vital จริงตามที่ RE-105 บอก ห้ามอนุมาน
+
+### objective
+1. VA ของ prototype/bootstrap ctor ของ `0x0E80` และไบต์ที่มัน `mov` ลง `+0x10` (คำตอบหลัก)
+2. (ถ้าทำได้ในใบเดียวกัน ไม่บังคับ) ค่าเดียวกันของ `TeleportVital` `0x25A2` และ `CWarpResult` `0x1BA4`
+   -- สองตัวนี้เป็นขั้นถัดไปของ warp ข้ามฉาก จะได้ไม่ต้องเปิดใบซ้ำ
+3. ถ้า `0x0E80` ไม่มี prototype ctor ในรูปเดียวกับ `0x5A19` -- เขียน bounded negative ว่าเส้นทางต่างกันตรงไหน
+   แล้วปิด อย่าเดาค่า
+
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (VA/offset) · ชนเพดานให้เขียน bounded negative แล้วปิด
+· ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
+
+### เกณฑ์จบใบ
+ตัวเลขหนึ่งตัว + VA ของไซต์ที่เขียน **หรือ** bounded negative ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
+สิ่งที่สาย GM จะทำทันทีที่ได้คำตอบ: แก้ค่าคงที่ `FORCE_POS_VITAL_VERSION_CONFIRMED` **ค่าเดียว**
+ในไฟล์เดียว (`src/pirateforce_foundation/gm/teleport_wire.py`) -- ไม่มีโค้ดอื่นต้องแก้ เทสรออยู่แล้ว
+🔴 **ปิดใบแล้วแจ้งกลับในกล่องทันที**
+
+**ADDRESSEE: RE** · ผู้เปิดใบ: LANE-GM (รอบ `gr2q9j`, 2026-08-28T18:24+07:00) -- ผลกลับมาที่สาย GM บริโภค
