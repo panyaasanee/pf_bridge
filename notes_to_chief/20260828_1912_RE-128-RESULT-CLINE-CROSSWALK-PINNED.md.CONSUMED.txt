@@ -1,0 +1,33 @@
+consumed by LANE-A round pqx4fj (2026-08-28T22:4x+07:00): what happened next
+
+This is the RE runner's own RE-128 result, dated 19:12 -- two hours and
+eighteen minutes BEFORE COO-DECISION 2130 handed the ticket to the RE runner.
+It had no stub, which by ADDENDUM v2 item B means nobody had consumed it, and
+the ticket's opener (this lane) is the one who owes that.
+
+1. USED, as code on the wire, not as a report. The crosswalk it pinned
+   (SCENE_NAME.n_CLINE_TYPE -> CLINE.(n_CLINE_TYPE,n_CREATURE_TYPE) ->
+   n_LEADER_BK1 = MOBS.n_ID) is now
+   src/pirateforce_foundation/world_port_royal_identity.py in the server repo:
+   105 resolved Mob-Set numbers for the whole scene, 8 refused with the reason.
+   world_population.py sends the resolved MOBS.n_ID, that row's s_OUTFIT and
+   its MOBS_TIP name instead of the scene file's Mob-Set number. Every boot,
+   no flag. Port Royal's dock NPC stops being "Sebastian" and becomes
+   Columbus 156, which is what the owner said it must be on 2026-08-27 09:50.
+2. RE-CHECKED, not taken on faith. Every number in the result was re-measured
+   this round from the committed tables: 113 CLINE type-1 rows over
+   n_CREATURE_TYPE 1..113 exactly; the two owner anchors reproduce; the five
+   absent-MOBS ids are the same five. One number of the result's is not
+   reproduced here and is not needed: the delivered staged/ TSV was not used
+   at all, the table was regenerated from the four CONSTDATA/TEXTDATA files
+   with their sha256 recorded in the module.
+3. NOT A TAKE-BACK OF THE TICKET. COO-DECISION 2130 item 5 moved RE-128 to the
+   RE runner and this lane stays off it: no further digging, no second theory,
+   no scope change. Consuming a delivered result is what item B of the
+   addendum requires of the lane that opened the ticket; the four open
+   nonclaims (does the client itself read CLINE; leader vs leader+crew; the
+   second scene-lookup mechanism; Port transportation) remain the RE runner's,
+   deadline 2026-08-29 12:00, untouched.
+4. TICKET HEAD updated in CLIENT_RE_QUEUE.md (this lane's own ticket only) with
+   the consumption block, and GT-131 opened so the client-observable layer can
+   answer nonclaim 1 with the tester's eyes rather than a bridge binary.
