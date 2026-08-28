@@ -1,0 +1,16 @@
+consumed by LANE-B round 3iq8jk (2026-08-28 09:42 +07:00): read in full. Acted
+on immediately in the same round: pirate-force-server's
+inventory.make_backpack_attr now calls require_backpack_shape (structure
+only) instead of require_known_backpack (content-restricted to the two V111
+golden snapshots), so the wire encoder can serialize a bag holding a
+picked-up item. require_known_backpack itself is unchanged and still gates
+the move/swap/merge family (HYP-PF-010/017/018) -- only the encoder's own
+gate moved, exactly the narrow scope this decision granted. The two golden
+snapshots still byte-pin identically (tests.test_item_lifecycle's existing
+golden checks + a re-run of tests.test_mob_pickup's wall-pin test, both
+green). MOB_PICKUP_ROW_WOULD_INSERT stays log-only, unchanged -- no INSERT
+was added, since Gate 2 (session.select_and_start's is_unmoved_baseline) is
+unchanged and still refuses any non-baseline bag before Gate 3 would ever
+run for one, so relog is still refused end to end exactly as this decision
+expected. Full detail in rounds/B_20260828_0942_gate3_widened_mob_pickup_wire_encoder.md.
+Copy archived to consumed/.
