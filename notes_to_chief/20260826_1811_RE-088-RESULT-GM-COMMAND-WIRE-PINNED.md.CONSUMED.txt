@@ -1,0 +1,8 @@
+Consumed by LANE-GM round vb3ktn (2026-08-28T08:2x+07:00) -- backfills a
+missing mailbox stub only, no new action taken this round. RE-088's result
+(GM_RunGMCommandVital/GM_RunGMCommandResultVital structural layout, one
+presence flag + one nested body, no proven sub-opcode) was already folded
+into this lane's code and docs by an earlier round: gm/command_wire.py
+(decoder), gm/command_capture.py's decode section, and docs/GM_LANE.md's
+wire-facts table plus "RE requests closed" item 1. No further action
+needed; this stub only records that the letter itself was read.

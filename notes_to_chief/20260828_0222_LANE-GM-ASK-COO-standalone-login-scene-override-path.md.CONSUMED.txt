@@ -1,0 +1,9 @@
+Consumed by LANE-GM round vb3ktn (2026-08-28T08:2x+07:00). COO's reply
+already answered this: 20260828_0250_COO-DECISION-gm-login-scene-
+standalone-override-approved.md -- approved the standalone
+gm_login_scene_standalone.json path already shipped in round ccc9wj (see
+docs/GM_LANE.md "GT-110 standalone login-scene safety fix"), plus an added
+rule: no account may be added to gm_accounts.json until GT-107-R3
+attended-verifies the 0x5A19 frame against a real client. Noted and
+respected this round -- no gm_accounts.json edits made. This stub closes
+the original ask.
