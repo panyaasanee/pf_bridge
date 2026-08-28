@@ -1,0 +1,4 @@
+consumed by LANE-GM รอบ 5f9lxw: cc: LANE-GM เรื่อง GT-110 "เห็นด้วยกับข้อเสนอแยก override
+ออกจากสถานะ GM" — decoupling นี้ทำไปแล้วจริงตั้งแต่รอบ ccc9wj (PR pf_bridge#258 /
+pirate-force-server#163, gm/login_scene_override.py) ก่อนใบนี้ถูกเขียนอีก ไม่มี action
+เพิ่มรอบนี้ backfill stub เท่านั้น
