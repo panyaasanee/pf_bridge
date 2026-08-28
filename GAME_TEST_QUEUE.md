@@ -4145,7 +4145,28 @@ notes_to_chief/20260827_1445_GT101-RESULT-client-rejects-0x5A19-version-1-error-
 
 ---
 
-## GT-102 CORE-REQUEST-014 COLUMBUS-NPCCONVERSATION-QUEST3021-DIALOGUE-001: คลิก Columbus ที่ Port Royal (MOBS n_ID 156, bg0001 placement index 1) ครั้งแรกหลัง CORE-REQUEST-014 -- เห็นบทสนทนาเควสต์ 3021 จริงไหม (เมื่อวานคลิกแล้วเงียบ)  [PENDING]
+## GT-102 CORE-REQUEST-014 COLUMBUS-NPCCONVERSATION-QUEST3021-DIALOGUE-001: คลิก Columbus ที่ Port Royal (MOBS n_ID 156, bg0001 placement index 1) ครั้งแรกหลัง CORE-REQUEST-014 -- เห็นบทสนทนาเควสต์ 3021 จริงไหม (เมื่อวานคลิกแล้วเงียบ)  [🟡 **PARTIAL -- กลไกผ่านทั้งสองชั้น หน้าต่างเปิดจริง แต่ "ผู้พูด" ผิดตัว** · ปิดชั้นกลไก ไม่ปิดชั้นเนื้อหา · ปิดหัวใบครึ่งนี้โดย LANE-A (เจ้าของใบ) รอบ `02k3w5` 2026-08-29T01:3x+07:00]
+
+> **ผลรอบ attended กะ3-A 2026-08-29T00:18+07:00** (`notes_to_chief/20260829_0018_KA3A-GT122-PASS-GT102-PARTIAL-GT104-BLOCKED-mobs-answer-as-npc.md`
+> · `OBSERVER_CONFIRMED` โดยเจ้าของ 00:17 · บูตไร้แฟล็ก `BOOT_COMMIT 3baf65de0319c8905afd7f426d599f12f2e7e664`)
+>
+> **สิ่งที่ผ่านแล้ว (ไม่ต้องเทสซ้ำ):** คลิก Columbus -> `TargetVital` -> `V98_NPC_FACE_PLAYER_POSITION_HEADING_P1`
+> -> `V98_NPC_CONVERSATION_DEFAULT_P1` -> **`CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE` (54 bytes) ยิงจริง ครั้งเดียวตามชื่อ**
+> · client-observable: **หน้าต่าง QUEST เปิดจริง มีสองออปชันตามที่ descriptor สองเอนทรีของเราส่ง**
+> (`มุ่งหน้าไป Atlantic Ocean: Rising Sun Sea` · `ตั้งฐานทัพที่ Port Royal`) ⇒ เมื่อวาน "คลิกแล้วเงียบ" **จบแล้ว**
+>
+> 🔴 **สิ่งที่ยังไม่ผ่าน และเป็นเหตุผลเดียวที่ใบนี้ไม่ใช่ PASS:** ป้ายผู้พูดในหน้าต่างอ่านว่า **"Sebastian"**
+> เนื้อบทขึ้นต้น "Prison Exile Island ข้าคือผู้..." และ**เสียงพากย์ที่ดังขึ้นเป็นเสียง Sebastian** (เจ้าของจำเสียง
+> จากเซิร์ฟเวอร์ต้นฉบับได้ — ยืนยันตอน OBSERVER_CONFIRMED) ⇒ สาม signal ชี้ทางเดียวกัน: **เนื้อ conversation
+> ที่ client เล่นเป็นชุดของ Sebastian ไม่ใช่ของ Columbus**
+> 🔴 **ห้ามสรุปสาเหตุจากใบนี้** descriptor ที่เราส่งมีแค่ actor qword + จำนวน + quest id (3021, 3205)
+> ⇒ ตัวที่เลือกเนื้อบทอยู่ฝั่ง client · ใบถอดสาเหตุคือ **`RE-136`** (เปิดโดยสาย A รอบ `02k3w5`)
+> **สถานะที่ผู้เทสเสนอคือ `PASS-WITH-FINDING` หรือ `PARTIAL` และยกให้ chief เคาะ** — สาย A เลือก `PARTIAL`
+> เพราะชั้น client-observable ของใบนี้ถามถึง "บทสนทนาเควสต์ 3021" ไม่ใช่ "หน้าต่างใด ๆ" · ถ้า chief เคาะเป็น
+> `PASS-WITH-FINDING` **นั่นคือการเปลี่ยนชื่อสถานะ ไม่ใช่การสั่งบูตซ้ำ** — ห้ามใช้ใบนี้กินสล็อต attended อีกใบ
+> จนกว่า `RE-136` จะตอบ
+> 🔴 finding ที่ไม่ใช่ของใบนี้ ยกไปแล้วไม่ทิ้ง: **ชื่อ NPC ทุกตัวเป็นสีเขียว** (ต้นฉบับเหลือง · `RE-067` เปิดอยู่)
+> = เขต chief (`REAL_SERVER_DIVERGENCE.tsv`) · และออปชันที่ 1 ชี้ฉาก **126 Rising Sun Sea** = ของ M2 โดยตรง
 
 > เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md, prefix สองแบบ ห้ามแยกตัวนับ.
 > เลขสูงสุดที่ใช้ไปแล้ว ณ เวลาเขียนใบนี้: GT-101 (GAME_TEST_QUEUE.md) และ RE-103 (CLIENT_RE_QUEUE.md,
@@ -6814,6 +6835,14 @@ nonempty ลบ key ที่ omit · **ใบนั้นเขียนเอ�
 > แต่ระหว่างรอบ **สาย B merge `GT-132` และสาย GM merge `GT-133`/`RE-132` เข้า main ก่อน**
 > ⇒ ตามกฎ "ชนแล้วห้ามทับ" ใบเหล่านั้นอยู่ที่เดิม ใบนี้ขยับเป็น **`GT-134`** · ไม่แทนที่ใบใด
 > 🔴 **BLOCKED โดยตั้งใจ ห้ามบูตจนกว่าจะเคลียร์ทั้งสองข้อในหัวข้อ blockers** -- บูตก่อนนั้นได้ FAIL ปลอม
+>
+> 🔴 **แก้ข้อเท็จจริง 2026-08-29T01:3x+07:00 (LANE-A รอบ `02k3w5` · เจ้าของใบแก้หัวใบตัวเอง):**
+> ประโยค "รอบนี้ลงสองไฟล์ของสาย A" ข้างล่าง **เป็นจริงในระดับ commit เท่านั้น ไม่ใช่ระดับ main**
+> PR `pirate-force-server#217` ของรอบ `w0pu2i` ถูก `merge-claude-pr.yml` ปิดทิ้งเพราะ job `gate` แดง
+> (cp874 tripwire · `tools/pf_runtimeres_actor_entry_static.py:911` · U+00B7 ที่รอบนั้นเขียนเอง)
+> ⇒ ทั้ง `world_bg0015_identity.py` และ `world_population_bg0015.py` **ไม่เคยขึ้น main**
+> รอบ `02k3w5` กู้กลับมาแล้วบน `claude/festive-brahmagupta-02k3w5` (PR **#220**) แก้ต้นเหตุ เทสเขียว
+> 4076 passed / 327 skipped / 0 failed ⇒ **ก่อนบูตใบนี้ ต้องเห็น merge sha ของ #220 บน main ก่อนเสมอ**
 
 ### ที่มา
 `Bg0015` = `SCENE_NAME.n_ID 14`, `s_MODLE_ID Bg0015`, 91 native placements, `n_SCENE_LV=100`
