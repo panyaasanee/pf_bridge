@@ -96,6 +96,26 @@ COO ขอหลักฐานว่า job `decide` เดินเส้น s
   ⇒ ตัวแทนบนคลาวด์คือ `tests/test_static_verifier_pins_cloud.py` ซึ่งเขียวแล้ว · ตัวเต็มเป็น STATIC-ON-BRIDGE
 - `pf-adversary` รันบนงานชิ้นนี้
 
+## ⑥.5 WIRED (บังคับตาม prompt หัวข้อ 17 ข้อ 3)
+
+`WIRED = ไม่เปลี่ยนจากรอบก่อน` — รอบนี้ **ไม่ได้เพิ่มโมดูลใน `lane_hooks/`** จึงไม่มีการนับใหม่ตามนิยาม WIRED v2
+
+แต่โมดูลใหม่ `world_face_frame` **ผ่านเกณฑ์ WIRED v2 เต็ม** (emission จริงบน production path ไม่ใช่แค่ import):
+- `tests/test_face_frame_identity_wiring.py` (6 ข้อ) ขับ `runtime.make_state_class` ตัวจริง ผ่าน
+  login → create → start-game → TargetPos (ติดสำมะโน) → **ChooseNPC จริง** แล้วอ่าน **ไบต์ของ action ที่ dispatcher คืนกลับ**
+- **mutation kill [วัดแล้ว]:** patch `rebuild_face_actions` ให้เป็น identity function (= runtime ไม่แก้เฟรมเลย)
+  ⇒ **แดง 3 ข้อ** รวมข้อที่อ่านไบต์ (`test_the_face_frame_a_click_returns_names_columbus`)
+  ⇒ ยืนยันว่าโค้ดนี้ **ถูกเรียกจริงบนเส้นทางผู้เล่น** ไม่ใช่โค้ดประดับ
+- ตรวจ encoding: ไฟล์ที่ผมเพิ่ม/แก้ทั้งหมดเป็น **ASCII ล้วน** (ผ่าน cp874) ยกเว้นอักขระที่มีอยู่ก่อนแล้วในไฟล์รายงาน
+
+## ⑥.6 งานค้างของกล่องจดหมาย ที่รอบนี้ **ไม่ได้ทำ** และไม่แกล้งทำ
+
+`notes_to_chief/` มีใบ `*CORE-REQUEST*` **9 ใบ (26-27 ส.ค.) ที่ยังไม่มี `.CONSUMED.txt`**
+ทั้งที่เนื้องานของหลายใบลง main ไปแล้ว (GM-029/030, CORE-REQUEST-014 ฯลฯ)
+🔴 ผมจงใจ **ไม่ stub ย้อนหลังแบบเหมาเข่ง** เพราะกฎคือ "อ่านเมื่อไหร่ stub เมื่อนั้น" —
+stub ที่เขียนโดยไม่ได้อ่านคือการโกหกว่ากล่องถูกอ่านแล้ว ซึ่งแพงกว่ากล่องที่ดูค้าง
+เสนอ COO: ให้เป็นงานหนึ่งรอบเต็มของสาย E (อ่านทีละใบ → ยืนยันว่าเนื้อลง main จริง → stub) ไม่ใช่งานแถมท้ายรอบ
+
 ## ⑦ ที่ยังไม่ได้พิสูจน์ (nonclaims)
 
 1. **ทั้งรอบเป็นชั้น wire/DB** ไม่มี `OBSERVER_CONFIRMED` · ที่ว่าเจ้าของจะเห็นชื่อ/ได้ยินเสียง Columbus **ยังไม่มีใครเห็น**
