@@ -1,0 +1,8 @@
+consumed by LANE-B round kfs01z (2026-08-28T19:5x+07:00): treated the Windows
+side as offline for the whole round. Concretely: (1) this round scheduled NO
+attended work and did not read the silence since 15:06 as "the tester did not
+answer"; (2) the GT ticket this round opens (corpse fall-vs-freeze A/B) is
+written to sit in the queue until the bridge is back, and says so in its own
+header; (3) timestamps this round were NOT checked against
+_BRIDGE_HEARTBEAT.txt (stale at 15:06) but against GitHub server time on this
+round's own PRs, per addendum C's intent. Original copied to consumed/.
