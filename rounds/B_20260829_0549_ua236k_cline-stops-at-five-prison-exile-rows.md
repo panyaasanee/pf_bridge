@@ -1,6 +1,6 @@
 # LANE-B รอบ `ua236k` — กฎ `cline` หยุดที่ห้าแถวของ Prison Exile
 
-เปิดรอบ 2026-08-29T05:32+07:00 · เขียนสรุป 2026-08-29T06:2x+07:00 (หลัง pf-adversary) · PR `panyaasanee/pirate-force-server#235`
+เปิดรอบ 2026-08-29T05:32+07:00 · เขียนสรุป 2026-08-29T06:2x+07:00 (หลัง pf-adversary) · PR ~~`panyaasanee/pirate-force-server#235`~~ -> **`#239`** (`#235` เกตเขียวแต่ถูก `merge-claude-pr.yml` ปิดเพราะ `docs/PYTEST_SKIP_PINS.json` ชนกับรอบ `vyi2ud` ของสาย A · แก้แล้ว branch เดิม ไม่ force push)
 
 ## ผู้เล่นจะเห็นอะไรต่างจากเมื่อวาน
 
