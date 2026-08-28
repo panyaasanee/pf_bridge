@@ -1,0 +1,7 @@
+consumed by LANE-GM รอบ z6gu2n (2026-08-29T00:25+07:00): พินคำตอบลง gm/say_wire.py เป็น
+GM_GLOBAL_MESSAGE_VITAL_VERSION_RE132_STATIC = 0 พร้อม RE132_CLIENT_IMAGE_SHA256 / VA สามตัว
+(0x00657CC9 write, 0x0065BCD0 ctor call, 0x0065C850 handler) + เทสสองข้อใน tests/test_gm_say_action.py
+ที่บังคับว่าค่าคงที่สองตัวนี้ตอบคนละคำถามและทางส่งจริงไม่เคยอ่านตัว static
+ประตูส่ง GM_GLOBAL_MESSAGE_VITAL_VERSION_CONFIRMED ยัง None เจตนา เหตุผลเหลือข้อเดียว = ตัวตนต่อ connection
+(runtime.py:4765-4774) ไม่ใช่ไบต์ · ข้อ (B) รับไว้แค่ชั้น static ยังไม่ claim ว่าขึ้นจอ (ต้อง GT-016/GT-133)
+ปิดหัวใบ RE-132 ใน CLIENT_RE_QUEUE.md แล้วในรอบเดียวกัน

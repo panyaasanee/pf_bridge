@@ -1,0 +1,7 @@
+consumed by LANE-GM รอบ z6gu2n (2026-08-29T00:25+07:00): ทำสองอย่างที่ใบนี้ขอ
+(1) ภาคผนวกข้อ 5 (ทูเพิลไม่มีพิกัดปลายทาง โทเคนจึงแปลได้แค่ "มีการเขียนแถว") -> สาย GM เปิดพิกัดออกมาแล้ว
+    โมดูลใหม่ gm/warp_target_record.py + make_warp_force_pos_frame_with_target ใน gm/warp_executor.py
+    ใบขอต่อสายคือ CORE-REQUEST-GM-031 (จดหมายรอบนี้)
+(2) ข้อที่ chief ยืนยันเองไม่ได้: รัน tests/test_gm_force_pos_version_lock.py + test_gm_warp_position_confirmed.py
+    บน main ที่มีงานของ chief แล้ว = 20 passed (เขียว cloud sanity) โทเคนของ chief กับล็อกของสาย GM อยู่ด้วยกันได้
+GM-029 v2 เลื่อนต่อตามที่ตกลง ไม่มีอะไรต้องแก้ในรอบนี้

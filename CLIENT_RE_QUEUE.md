@@ -2119,7 +2119,19 @@ VA ตั้งต้นที่มีอยู่แล้วในโปร�
 
 ---
 
-## RE-132 GM-GLOBAL-MESSAGE-VITAL-VERSION-001: ไบต์ `vital_version` ของ `Channel_GMGlobalMessageVital` (`0x9F2C`) ที่ client ยอมรับคือค่าอะไร -- ctor ของ vital นี้เขียนอะไรลง `+0x10`  [**OPEN** -- เปิดโดย LANE-GM รอบ `w8hnu9` 2026-08-28T23:26+07:00 · ใบเต็ม: `notes_to_chief/20260828_2326_LANE-GM-RE-REQUEST-132-gm-global-message-vital-version.md`]
+## RE-132 GM-GLOBAL-MESSAGE-VITAL-VERSION-001: ไบต์ `vital_version` ของ `Channel_GMGlobalMessageVital` (`0x9F2C`) ที่ client ยอมรับคือค่าอะไร -- ctor ของ vital นี้เขียนอะไรลง `+0x10`  [**CLOSED / ตอบครบ** -- ผล: `notes_to_chief/20260829_0010_RE-132-RESULT-VERSION-ZERO-RENDER-PATH.md` (DONE/PASS static, verifier 61/61) · บริโภคและปิดโดย LANE-GM (ผู้เปิดใบ) รอบ `z6gu2n` 2026-08-29T00:25+07:00]
+
+> **คำตอบ:** ข้อ 1 `0x9F2C` → `vital_version = 0` (เขียนที่ `0x00657CC9` ผ่าน ctor ที่ prototype เรียกที่ `0x0065BCD0`)
+> · ข้อ 2 ตัวคุม `0xAC52` → `0` ด้วยวิธีเดียวกัน ⇒ วิธีถูก · ข้อ 3 handler `0x0065C850` **ไม่ใช่ no-op**
+> (router `0x00659870` → อ่าน body ที่ `+0x18` → display sink `0x005CBAF0`) = static render-path positive
+> **ที่ใช้ต่อแล้วในรอบ `z6gu2n`:** `gm/say_wire.py` พินคำตอบเป็น `GM_GLOBAL_MESSAGE_VITAL_VERSION_RE132_STATIC = 0`
+> พร้อม VA/sha และเทสสองข้อใน `tests/test_gm_say_action.py`
+> 🔴 **ประตูส่งจริงยังปิด** (`GM_GLOBAL_MESSAGE_VITAL_VERSION_CONFIRMED = None`) · สิ่งที่ตกไปคือ **ไบต์**
+> ที่เหลือ **สามข้อ** (`pf-adversary` นับใหม่ให้ในรอบเดียวกัน ฉบับแรกเขียนว่า "เหลือข้อเดียว" ซึ่งผิด):
+> (A) ตัวตนต่อ connection ที่คอมเมนต์ `IDENTITY, STATED HONESTLY` ของ `runtime.py` (4886-4896 ณ commit นั้น —
+> พินเก่า `runtime.py:4765-4774` เลื่อนไปอยู่ damage dispatch แล้ว) · คำเคาะของ COO · และ (B) เรื่อง**จอ**
+> ซึ่ง RE-132 แค่ตัดทางที่มันจะพังที่ถูกที่สุดออก (handler ที่ไม่วาดอะไรเลย) ไม่ได้ทำให้ผ่าน
+> คำกล่าวว่า "ขึ้นจอ" ยังต้อง `GT-016`/`GT-133` (ชั้น client-observable) ตาม nonclaim ของใบผลเอง
 
 > NUMBERING NOTE: ตัวนับร่วมกับ `GAME_TEST_QUEUE.md` -- เลขสูงสุดบน main ก่อนจอง = `GT-131` (สาย A)
 > และ `RE-130` · grep ยืนยันก่อนจอง 2026-08-28T23:2x: `RE-132`/`GT-132` = 0 hit ทั้งสองไฟล์
