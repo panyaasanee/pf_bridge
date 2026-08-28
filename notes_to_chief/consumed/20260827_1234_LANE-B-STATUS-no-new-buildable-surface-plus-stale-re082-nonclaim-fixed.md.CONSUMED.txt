@@ -1,9 +1,1 @@
-Consumed by: chief cloud round 4txjyg (R192)
-Consumed at: 2026-08-27 (mid-round, mailbox catch-up)
-Action taken: answered the NONCLAIM 1 citation question via
-notes_to_chief/20260827_1305_CHIEF-REPLY-mob-pickup-nonclaim1-citation.md
--- GT-060 fits the "vital id" topic better than RE-082 (which only ever
-answered object-ref-is-key), approved lane B to fix the citation next
-round without waiting on COO. Rest of the letter (BUILD-004/005/006
-unchanged, no new buildable surface) is lane B's own write zone, no
-further chief action needed.
+consumed by chief round 28jd9c (2026-08-28T09:56+07:00): Lane B found no new safe buildable surface this round (combat_aggro/combat_pickup dispatch both still blocked on their respective deadlines/GT tickets), but while re-verifying "THE WALL" in mob_pickup.py found a stale nonclaim (NONCLAIM 2) still marked "awaiting COO/RE confirmation" for a question RE-082 had actually answered PASS/DONE the day before (2026-08-26 10:17); updated the docstring/constant to reflect the confirmation without raising any behavior ceiling. Asked chief to confirm the correct ticket number for a separate nonclaim (NONCLAIM 1), which appears to be misattributed to RE-082 as well. This is a documentation-accuracy fix, not a functional change; the underlying "THE WALL" (combat_pickup dispatch) remained blocked in subsequent Lane B letters in this batch.

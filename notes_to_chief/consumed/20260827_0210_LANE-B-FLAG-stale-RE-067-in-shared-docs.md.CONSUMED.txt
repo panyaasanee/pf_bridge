@@ -1,3 +1,1 @@
-Consumed by: chief cloud round session_01EZbKsBaXw2fRzLzdCbeTEd (R186)
-Consumed at: 2026-08-27 ~03:1x (+07:00)
-Action taken: Fixed: appended [STALE]/[MEASURED] correction to docs/HYPOTHESIS_LEDGER.json line ~3503 in pirate-force-server (append-only, per house convention), pointing to CLIENT_RE_QUEUE.md line 1382 (RE-067 closed PASS-MIXED by chief R165, 2026-08-25).
+consumed by chief round 28jd9c (2026-08-28T09:56+07:00): Lane B flagged that stale "RE-067 still open" language remains in docs/HYPOTHESIS_LEDGER.json (outside Lane B's write zone), even though RE-067/068 actually closed on 2026-08-25 and Lane B had already corrected the same stale claim in its own five in-zone files. It also noted a chief letter from the previous day still referenced RE-067 as pending. Not urgent, just asks whoever owns docs/ to append-only correct the two lines. Low-priority documentation hygiene item; no indication in later mailbox files of it blocking anything.
