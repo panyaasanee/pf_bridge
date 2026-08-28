@@ -6404,3 +6404,33 @@ teardown exit code, `LOCK_GAME` ปล่อยแล้ว · **ลบสำเ
 ```
 
 ```
+
+## GT-125 FULLGATE-RED-REPAIR-VERIFY-001 [STATIC-ON-BRIDGE · พร้อมเมื่อ PR ของรอบ swlc56 merge แล้ว]: หลังรอบ swlc56 แก้ census/negative ที่ทำให้ full pytest แดง 39 ใบ — รันชุดเต็มบนสะพานอีกครั้งแล้วบอกว่าเหลือแดงกี่ใบ และ regenerate ไฟล์ที่ยังแดงอยู่ใบเดียวที่คลาวด์แตะไม่ได้
+
+- **เปิดโดย** chief สาย E รอบ `swlc56` (2026-08-28T17:0x+07:00) · **ที่มา** `notes_to_chief/20260828_1352_CHIEF-LOCAL-SMOKE-result.md` ข้อ 3: `py -3 -m pytest -q` บนสะพาน = `39 failed, 4050 passed` ที่ main HEAD `336857c`
+- **ต้องรันบนสะพานเท่านั้น** เพราะสองในสามโมดูลอ่านอิมเมจ client และใบที่เหลือต้องใช้ game data ของสะพาน — คลาวด์ skip ทั้งหมด (39 skipped = 39 failed ใบเดียวกัน วัดแล้วรอบนี้)
+- **รอ merge ก่อน**: ต้องอยู่บน commit ที่มี PR `[LANE-E] R213` ของ `pirate-force-server` แล้ว
+
+### ขั้นตอน
+
+1. `git pull --rebase` ทั้งสอง repo · จด `git rev-parse HEAD` ของ repo โค้ด
+2. `py -3 -m pytest -q -p no:cacheprovider` (ชุดเต็ม ไม่ใช่ subset) · จดบรรทัดสรุปท้ายตรง ๆ
+3. ถ้ายังเหลือแดงเฉพาะ `tests/test_pf_scan_field_scene_candidates.py` ให้ regenerate ไฟล์ที่ล้าสมัย:
+   `py -3 tools/pf_scan_field_scene_candidates.py --out docs/FIELD_SCENE_CANDIDATES.json`
+   แล้วรันโมดูลนั้นซ้ำใบเดียว · commit ไฟล์ JSON ที่ regenerate พร้อมบอกว่า candidate_count ขยับจากเท่าไรเป็นเท่าไร (สมุดสะพานบันทึกไว้ว่า 22 -> 24)
+4. push ตามกติกาโหมด local (branch + PR + `PF-AUTOMERGE: v4`) ห้าม push main
+
+### pass criteria — สองชั้น แยกกัน
+
+- **ชั้น wire/DB (ใบนี้ตัดสินได้เอง)**: `py -3 -m pytest -q` ชุดเต็มออก `0 failed` · และ `py -3 tools/pf_runtimeres_actor_entry_static.py` กับ `py -3 tools/pf_hp_death_respawn_static.py` ทั้งคู่ exit 0
+- **ชั้น client-observable**: ใบนี้**ไม่มี** และไม่อ้างอะไรเกี่ยวกับหน้าจอเลย — เป็นใบเครื่องมือล้วน ไม่ต้องมี `OBSERVER_CONFIRMED`
+
+### nonclaims
+
+- ไม่อ้างว่า gate เขียว = เกมเล่นได้ · ไม่อ้างว่า census ที่ re-pin แล้ว "ถูก" ในเชิงดีไซน์ อ้างแค่ว่าเลขที่พินตรงกับ `src/` ที่วัดได้จริง
+- ถ้าชุดเต็มยังแดงด้วยโมดูลอื่นที่ไม่ได้อยู่ในสามใบนี้ = ผลลบใหม่ ให้เปิดใบใหม่ ห้ามยัดเข้าใบนี้
+
+### result (tester fills this in)
+```
+
+```
