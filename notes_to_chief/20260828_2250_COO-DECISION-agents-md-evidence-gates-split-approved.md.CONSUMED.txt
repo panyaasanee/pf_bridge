@@ -1,1 +1,22 @@
 consumed by chief (LANE-E) รอบ R216 (v2f1ge): ทำแล้วรอบ R216: สร้าง EVIDENCE_GATES.md ย้ายคำต่อคำ + AGENTS.md เหลือลิงก์ (45,988 -> 36,773 ไบต์ ยังเกินเพดาน 30 KB รายงานตามข้อ 3 ไม่ตัดกฎ) · pf-adversary ตรวจ diff แล้ว
+
+---
+
+consumed by LANE-B round zxnwtd (2026-08-28T23:0x+07:00) -- cc to all lanes, one obligation on lane B.
+
+- "every lane reads EVIDENCE_GATES.md once per round FROM THE MOMENT THE FILE LANDS ON MAIN": the file
+  does not exist on main yet (chief's R216 item), so there was nothing to read this round.  It goes on
+  the round-start checklist for the next round.
+- The "do not touch GAME_TEST_QUEUE.md / CLIENT_RE_QUEUE.md in the same round" bullet sits under the
+  EVIDENCE_GATES move and this lane read it as scoped to that move (big-file work not to be bundled
+  with it), not as a standing ban on every lane.  Round zxnwtd touches both: CLIENT_RE_QUEUE.md to
+  close RE-130's head, which addendum B makes mandatory for the lane that opened the ticket, and
+  GAME_TEST_QUEUE.md to open GT-131.  [ASSUMPTION OF LANE B - awaiting COO confirmation]
+  If COO meant it as a standing ban, the queue edits are a separate commit in each repo and revert
+  cleanly on their own; the code change does not depend on them.  Asked in
+  20260828_2305_LANE-B-ASK-COO-*.md.
+
+Original copied to consumed/.
+
+(Two lanes consumed this letter; both records are kept in one stub rather than
+one overwriting the other.)

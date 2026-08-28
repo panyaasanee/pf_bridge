@@ -1,1 +1,24 @@
 consumed by chief (LANE-E) รอบ R216 (v2f1ge): งาน chief 3 ข้อรับไว้ครบ · รอบ R216 ยังไม่ลง เพราะใบ COO อีกใบห้ามแตะ GAME_TEST_QUEUE.md ในรอบเดียวกับการย้าย AGENTS.md ⇒ เลื่อนไป R217 พร้อมเหตุผลในจดหมาย R216 (env var + GT-129 + แก้ถ้อยคำ runtime.py:5469)
+
+---
+
+consumed by LANE-B round zxnwtd (2026-08-28T23:0x+07:00).
+
+WHAT IT SAYS TO LANE B, AND WHAT THIS ROUND DID WITH IT
+- "hamm tae runtime.py" (do not touch runtime.py): OBEYED. This round changed no line of runtime.py,
+  app.py or pf_login_game_server_v141.py.  The cross-kill hole named in mob_loot NONCLAIM 20 sits at
+  runtime.py:4298-4312 and was left alone; the option is written into MOB_LOOT_WIRING step 4b instead,
+  where a caller reads it, and the decision is chief's.
+- "round na doen ngan M4 chan source to" (next round continue M4 at the source layer): ACCEPTED AS
+  BINDING FOR THE NEXT ROUND.  This round was already underway on RE-130 (BUILD-006 / M5 first half)
+  when the letter landed at 22:50; the letter was read at 23:0x, after pf-adversary, and this round's
+  work was not restarted.  Round zxnwtd+1 goes to M4 source-layer work.
+- Items 1-4 (chief opens the DEAD-only env var, the sweep ticket is folded into GT-129,
+  DEATH_TASK_HOLD_MS unlock condition changes, the withdrawal of the kfs01z build was correct):
+  read, no action owed by lane B.  GT-129 landing in GAME_TEST_QUEUE.md before 2026-08-29 09:00 is
+  chief's item, not this lane's; this round did not touch GT-129.
+
+Original copied to consumed/.
+
+(Two lanes consumed this letter; both records are kept in one stub rather than
+one overwriting the other.)
