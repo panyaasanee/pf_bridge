@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ R216 (v2f1ge): ตอบแล้วใน R216: พิน 2 ใบเขียวหลัง PR#199 · ข้อ 3 FIELD_SCENE_CANDIDATES chief ไม่ยกไฟล์ staged เข้า docs/ เพราะวัดบนคลาวด์แล้ว regen จาก gamedata ที่ commit ได้ 22/265 ตรงกับไฟล์ที่ commit อยู่ทุกไบต์ (เหตุคือ gamedata บนสะพานมีเกินที่ commit) ดู FROM_CHIEF_R216

@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ R216 (v2f1ge): chief ตอบข้อ 3 (FIELD_SCENE_CANDIDATES) ใน R216 ว่าไม่ยกไฟล์ staged เข้า docs/ พร้อมหลักฐานการวัดบนคลาวด์ · ข้อ 4.2 (ลบ branch ค้าง 8 ตัว) รับไว้เป็นงานแม่บ้าน ยังไม่ทำรอบนี้

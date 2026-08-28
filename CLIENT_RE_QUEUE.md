@@ -2037,7 +2037,29 @@ VA ตั้งต้นที่มีอยู่แล้วในโปร�
 🔴 **ปิดใบแล้วแจ้งกลับในกล่องทันที**
 
 **ADDRESSEE: RE** · ผู้เปิดใบ: LANE-GM (รอบ `gr2q9j`, 2026-08-28T18:24+07:00) -- ผลกลับมาที่สาย GM บริโภค
-## 🆕🔬 RE-130 GROUND-LABEL-LIST-MEMBERSHIP-001 [STATIC-ON-BRIDGE]: **ป้ายชื่อไอเทมบนพื้นผูกกับการที่ element ยังอยู่ในลิสต์ `0x08` (object+`0x20`) หรือเป็น one-shot ที่หมดอายุเอง — และลิสต์นั้นรับ count>1 ได้ไหม / แทนที่ทั้งลิสต์หรือ merge**
+## ✅🔬 RE-130 GROUND-LABEL-LIST-MEMBERSHIP-001 [STATIC-ON-BRIDGE] — **CLOSED / DONE-PASS · บริโภคแล้วโดย LANE-B รอบ `zxnwtd`**: **ป้ายชื่อไอเทมบนพื้นผูกกับการที่ element ยังอยู่ในลิสต์ `0x08` (object+`0x20`) หรือเป็น one-shot ที่หมดอายุเอง — และลิสต์นั้นรับ count>1 ได้ไหม / แทนที่ทั้งลิสต์หรือ merge**
+
+> ✅ **ปิด 2026-08-28T20:18+07:00 · ผลเต็ม: `notes_to_chief/consumed/20260828_2018_RE-130-RESULT-NAMEBOARD-OWNER-REPLACED-BY-OMISSION.md`**
+> **คำตอบข้อ 1:** ป้าย **ผูกกับ membership** — runtime object ของแต่ละ element ถือ `NameBoard_ITEM` ที่ `runtime+0x80`
+> (ctor `[0x005F49C0,0x005F4AEA)` · setup `[0x005BE2F0,0x005BE37C)` resolve `NameBoard_ITEM`/`LABEL_ITEM_NAME`)
+> destructor `[0x005F5060,0x005F5164)` ปล่อย ref นั้น ⇒ **ไม่ใช่ one-shot ล้วน**
+> **คำตอบข้อ 2/3:** codec รับ `count > 1` (count อ่านจาก list object `+0x2C` · consumer `[0x006AF970,0x006B03E3)`)
+> · generation ที่ **nonempty** update key ที่ส่งมา แล้ว **erase key ที่ omit** (`0x005E0D40` @ `0x006AFF84`/`0x006B0368`)
+> = **replacement-by-omission ไม่ใช่ merge** · element key = wire `u32 tag 0x14` → element `+0x10` ไม่มี transform
+> · `count=0` ไป epilogue = **no-op ไม่ใช่ clear**
+> **BUILD_IMPACT ที่สาย B ทำแล้วในรอบ `zxnwtd`:** `mob_loot.drop_frames` เลิกส่ง N collection ละ 1 element
+> เปลี่ยนเป็น **หนึ่ง generation ต่อหนึ่งการตาย ที่แบกทุก key** (`drop_collection_pc`) · เคสตกชิ้นเดียวยัง
+> compose เป็น 44/54 ไบต์เดิมของ `GT-045` เป๊ะ (เส้นทางเคสหนึ่งชิ้นวิ่งผ่าน `drop_pc` จริง ⇒ pin ถูก
+> assert ในเซิร์ฟเวอร์ทุกครั้งที่ส่ง ไม่ใช่แค่ในเทส)
+> 🔴 **แต่ generation ที่กว้างกว่าหนึ่ง element ไม่เคยถึงไคลเอนต์ไหนเลย** — หลักฐานของการเปลี่ยนคือใบ static
+> ใบเดียว ชั้น client-observable คือ `GT-132` ที่ยังไม่ได้รัน · บันทึกเป็น `mob_loot` NONCLAIM 22
+> พร้อม rollback และถาม COO ไว้ใน `notes_to_chief/20260828_2305_LANE-B-ASK-COO-*.md`
+> 🔴 **สิ่งที่ใบนี้ไม่ได้ตอบ และห้ามอ่านว่าตอบ:** ป้ายจะ**อยู่บนจอนานขึ้น**หรือ client จะ**วาด**หลายป้ายพร้อมกัน
+> — ใบเองเขียนไว้ว่าไม่รับประกัน ⇒ เปิด **`GT-132`** (attended) ไว้ตอบชั้น client-observable
+> 🔴 **ยังเหลือช่องข้ามการตาย:** generation ของการตายครั้งถัดไปจะลบ key ของครั้งก่อนด้วย omission
+> แก้ได้ต่อเมื่อ **ทั้ง ledger ที่ยังมีชีวิต** เป็น generation เดียว ซึ่งติดที่ call site ที่ prune ทันที
+> (`runtime.py:4298-4312` ของ chief) — เขียนเป็นบรรทัดเดียวใน PR body รอบ `zxnwtd` แล้ว · บันทึกเป็น
+> `mob_loot` NONCLAIM 20
 
 > NUMBERING: ก่อนจอง (`j6cbdc`) `RE-130`/`GT-130` = 0 hit · **`RE-130` ชนกับใบ `FORCE-POS-VITAL-VERSION-001` ที่ merge เข้า main ก่อน**
 > ⇒ ตามกฎ "ชนแล้วห้ามทับ" ใบนั้นอยู่ที่เดิม ใบนี้ขยับเป็น `RE-130` (สูงสุดบน main = `RE-130`)
@@ -2094,3 +2116,49 @@ VA ตั้งต้นที่มีอยู่แล้วในโปร�
 > ~~ชื่อเดิม `GROUND-LIST-0x08-REPLACE-BY-OMISSION-001` + เหตุผลเดิมที่เทียบ `GT-045` (ชิ้นเดียว) กับ
 > `GT-084-R2` (สองชิ้น)~~ **ถอน** — `GT-045` ก็ส่งสอง element ทรงเดียวกัน ห่างกัน 42 ms ไม่มีตัวแปรอิสระ
 > (`pf-adversary`) · ประวัติเต็มในจดหมาย 1846
+
+---
+
+## RE-132 GM-GLOBAL-MESSAGE-VITAL-VERSION-001: ไบต์ `vital_version` ของ `Channel_GMGlobalMessageVital` (`0x9F2C`) ที่ client ยอมรับคือค่าอะไร -- ctor ของ vital นี้เขียนอะไรลง `+0x10`  [**OPEN** -- เปิดโดย LANE-GM รอบ `w8hnu9` 2026-08-28T23:26+07:00 · ใบเต็ม: `notes_to_chief/20260828_2326_LANE-GM-RE-REQUEST-132-gm-global-message-vital-version.md`]
+
+> NUMBERING NOTE: ตัวนับร่วมกับ `GAME_TEST_QUEUE.md` -- เลขสูงสุดบน main ก่อนจอง = `GT-131` (สาย A)
+> และ `RE-130` · grep ยืนยันก่อนจอง 2026-08-28T23:2x: `RE-132`/`GT-132` = 0 hit ทั้งสองไฟล์
+> ⇒ ใบ RE นี้ = `RE-132` และใบเทสคู่กัน = `GT-133` (เว้น `GT-132` ไว้กันชนกับใบที่อาจจองพร้อมกัน)
+
+**ค้นใน `pf_bridge/external/` แล้ว: ไม่เจอ** · **ค้นใน `pf_bridge/gamedata/` แล้ว: ไม่เจอ**
+(0 แถวที่เกี่ยวกับ `0x9F2C` / `GMGlobal` / `vital_version` ในทั้งสองไฟล์ SEARCH_HERE_FIRST)
+**เจอจุดตั้งต้น:** `external/PF_PROTOCOL_REGISTRY.tsv:180` มีแถว `Channel_GMGlobalMessageVital` ครบทุก VA
+
+### คำถาม
+1. `0x9F2C` -- ctor เขียนไบต์อะไรลง `message+0x10` (ช่อง `vital_version`) · ขอ **ตัวเลข + VA ของไซต์ที่เขียน**
+2. `0xAC52` -- ค่าเดียวกัน **ด้วยวิธีเดียวกันเป๊ะ** (ตัวคุม: โปรเจกต์รู้คำตอบอิสระอยู่แล้วว่า `0` จาก
+   hash ของเฟรมที่ capture จริง CHAT-ECHO-001/002) ⇒ ได้ `0` = วิธีถูก เชื่อข้อ 1 ได้ · ได้ค่าอื่น = ตีใบกลับ
+3. (ถ้างบรอบยังเหลือ) handler `0x0065C850` ของ channel family อ่าน payload แล้วส่งต่อไปเรนเดอร์จริงไหม
+   -- RE-129 เจอมาแล้วว่า handler ที่จดทะเบียนไว้อาจเป็น `mov al,1; ret 4` ⇒ version ถูก = จำเป็น ไม่พอ
+
+### จุดตั้งต้น (จาก TSV แถวเดียวกัน เทียบกับตัวคุม)
+`0x9F2C`: `getter_va 0x0065AC10` (ctor ของ `ForcePos` อยู่ **ก่อน** getter ของแถวตัวเองพอดี ตาม RE-129)
+· `vtable 0x00F3790C` · `reg_site 0x00BF7390` · serializer/handler = `0x0065AD40`/`0x0065C850`
+`0xAC52`: `getter_va 0x006580B0` · `vtable 0x00F3775C` · serializer/handler **ตัวเดียวกัน**
+
+### ทำไมอนุมานจาก `0xAC52` ไม่ได้ทั้งที่ serializer เดียวกัน
+`vital_version` **ไม่ได้อยู่ใน payload** -- อยู่ใน envelope หนึ่งไบต์ต่อหนึ่ง nested vital
+(`u8tag(0x0B, vital_version)`, `pf_login_game_server_v141.py:702-704`) ⇒ การใช้ serializer ของ payload
+ร่วมกันแบบ byte-identical ไม่ได้พูดถึงไบต์นี้เลย · สี่ค่าที่วัดแล้วไม่เท่ากัน (`0x5A19`→0 · `ForcePos`→0
+· `TeleportVital`→4 · `SelectActor`→10) **ไม่มี default** · เดาแล้วเจ้าของเสียเซสชัน (`GT-101`, `ErrorData=23065`)
+
+### เกณฑ์จบใบ
+ตอบข้อ 1+2 พร้อม VA **หรือ** bounded negative ⇒ ปิดใบพร้อม `BUILD_IMPACT:` ว่าค่าคงที่
+`say_wire.GM_GLOBAL_MESSAGE_VITAL_VERSION_CONFIRMED` เปิดได้หรือไม่ · ถ้าคำตอบ != `0`
+สายนี้ **จะไม่เปิดค่าคงที่และจะไม่เขียน codec ตัวที่สอง** -- ต้องขอ parameter จากสายเจ้าของ
+`channel_message_hypothesis.py` แทน (บังคับไว้ด้วยเทสแล้ว: `tests/test_gm_say_action.py`)
+
+### 🔵 ก่อนลงมือ: มีใบ attended ที่วัดไบต์เดียวกันนี้จากชั้นที่สูงกว่าอยู่แล้ว
+`GT-016` (ระบุใน `docs/HYPOTHESIS_LEDGER.json` / `docs/FUNCTIONAL_COVERAGE.json` ของ repo เซิร์ฟเวอร์)
+= ส่งทั้งห้า channel ของ serializer `0x65AD40` รวม GMGlobal ให้ client จริงแล้วดูว่าอะไรเรนเดอร์
+⇒ ถ้าใบนั้นบูตแล้ว **ให้เอาผลของมันมาก่อน ใบนี้อาจกลายเป็นแค่การยืนยันซ้ำ**
+(สายนี้เพิ่งรู้จาก pf-adversary รอบ `w8hnu9`) · และ `runtime.py:2126-2147` ก็ส่งเฟรม 0x9F2C
+ที่ถือไบต์ `0` ออกสายได้อยู่แล้วภายใต้ scenario flag ⇒ ถ้ามีคน capture ไว้ ก็เป็นหลักฐานอีกทาง
+
+**ADDRESSEE: RE** · ผู้เปิดใบ: LANE-GM (`w8hnu9`) · ใบเทสที่รอผลนี้: `GT-133`
+🔴 ปิดแล้วแจ้งกลับในกล่องทันที -- สายนี้บริโภคผลใบที่ตัวเองเปิดในรอบถัดไป

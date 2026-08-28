@@ -27,7 +27,7 @@ world_population_bg0015.SCENE_N_ID:` **ก่อน** กิ่ง `elif scene_i
 |---|---|
 | `src/pirateforce_foundation/world_bg0015_identity.py` | crosswalk ทั้งฉาก · 41/51 ชุดแปลงได้ · 81/91 placement ส่งได้ · `_self_check()` ตอน import |
 | `src/pirateforce_foundation/world_population_bg0015.py` | ตัวประกอบสำมะโน · `build_bg0015_population(legacy, anchor, scene_id=14, count_source=...)` · ปฏิเสธทุกฉากที่ไม่ใช่ 14 |
-| `tests/test_world_bg0015_identity.py` · `tests/test_world_population_bg0015.py` | 24 เทส · header count == body count ทุกเส้นทาง |
+| `tests/test_world_bg0015_identity.py` · `tests/test_world_population_bg0015.py` | 31 เทส · header count == body count ทุกเส้นทาง |
 
 ลายเซ็นของ builder **เหมือน `build_bg0002_population` ทุกตัวอักษร** ตั้งใจให้ chief คัดลอกกิ่งเดิม
 มาแก้ชื่อโมดูลได้เลย · console: `census_console_line(generation)` หนึ่งบรรทัด +
@@ -46,7 +46,7 @@ world_population_bg0015.SCENE_N_ID:` **ก่อน** กิ่ง `elif scene_i
 
 เดินเข้าเกาะภูเขาไฟนรก (Bg0015) แล้วมีสิ่งมีชีวิต **81 ตัวยืนอยู่จริง** พร้อมชื่อจริง
 (Hell Ghoul 11 ตัว · Blood red eagle 5 · Earth Flame Dragon 4 · Carlos · Dante · Val'kyr ...)
-แทนเกาะร้างที่ไม่มีอะไรเลย · ใบตรวจรับคือ `GT-132`
+แทนเกาะร้างที่ไม่มีอะไรเลย · ใบตรวจรับคือ `GT-134`
 
 ## ถ้าไม่วางกิ่งนี้จะเป็นยังไง
 

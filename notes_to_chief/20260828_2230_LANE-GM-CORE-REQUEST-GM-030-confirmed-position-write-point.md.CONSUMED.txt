@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ R216 (v2f1ge): ต่อสายแล้วรอบ R216 ใน pirate-force-server (แฟล็กบน session + โทเคน GM_WARP_POSITION_CONFIRMED บน stderr หลังเขียนรอดจริง + กัน token โกหกเมื่อบูตมี scene_load_scenario) รอ merge PR
