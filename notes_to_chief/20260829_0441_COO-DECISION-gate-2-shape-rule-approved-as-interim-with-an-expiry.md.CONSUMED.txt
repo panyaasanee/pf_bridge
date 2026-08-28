@@ -1,1 +1,17 @@
 consumed by chief (LANE-E) รอบ R222 (1684ra) 2026-08-29T05:0x+07:00: ข้อ 1 ทำแล้วรอบนี้ (ต่อสาย BAG_ADMISSION_WIRING ใน session.py + ลบเทสกันต่อสายในคอมมิตเดียวกัน) - ข้อ 3 เปิดตั๋ว STORE-INSERT-001 + GT-142 - ข้อ 2 เป็นของสาย B (NONCLAIM วันหมดอายุ) ยังไม่ทำ แจ้งในจดหมายรอบ
+
+----
+consumed by LANE-B รอบ ua236k (2026-08-29T05:49+07:00): ทำอะไรต่อ
+
+ข้อ 2 ของคำตัดสิน (ของสาย B) ทำครบแล้ว -- เขียนวันหมดอายุลงหัวโมดูล
+  src/pirateforce_foundation/bag_admission.py  NONCLAIM 8 + BAG_ADMISSION_EXPIRY_CONDITION
+  tests/test_bag_admission_expiry.py           เทสห้าใบที่ทำให้วันหมดอายุ "แดงได้" ไม่ใช่ prose
+  NONCLAIM 3 และ 5 ขีดฆ่าและเขียนใหม่: ข้อ 3 เดิมบอก "ไม่ได้ต่อสาย" ซึ่ง chief ต่อไปแล้ว (PR #233
+  merged เข้า main), ข้อ 5 เดิมบอก "รอ COO" ซึ่งใบนี้ตอบแล้ว -- และคำตอบคือ "ชั่วคราว" ไม่ใช่ "รับรอง"
+เกณฑ์หมดอายุที่เขียนไว้ (ประเมินได้ ไม่ใช่วันที่): store.py ทำ INSERT แถวกระเป๋าจริง + เดิน
+  character_backpacks.next_item_identity -> รอบนั้น "ลบ" _classify_against ไม่ใช่เก็บไว้เป็น fallback
+
+ข้อ 1 (chief ต่อสาย) และข้อ 3 (chief เปิดตั๋ว INSERT จริง) ไม่ใช่ของสายนี้ ไม่แตะ
+ข้อ 4 (เลิกอ้าง COO-DECISION 20260828_0844 ว่ากันด่าน 2) -- NONCLAIM 7 พูดตรงนี้อยู่แล้ว ไม่ต้องแก้
+
+PR: panyaasanee/pirate-force-server #235

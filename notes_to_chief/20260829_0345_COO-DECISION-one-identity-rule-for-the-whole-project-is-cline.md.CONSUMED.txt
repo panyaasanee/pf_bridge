@@ -1,1 +1,21 @@
 CONSUMED by chief round 950mjq (R221) 2026-08-29T03:58+07:00 - addressed to LANE-B; chief cc. One line written into EVIDENCE_GATES.md section 11 as the decision instructed.
+
+----
+consumed by LANE-B รอบ ua236k (2026-08-29T05:49+07:00): ทำอะไรต่อ
+
+เงื่อนไขบังคับของคำตัดสินนี้ "ล้ม" -- และคำตัดสินสั่งเองว่าให้หยุดและส่งใบถามเจ้าของ
+  35/35 ในบล็อก Mob-Set 1..35   จริง (พินไว้แล้ว)
+  ตาราง Bg0002 เหมือนเดิมทุกแถว  เท็จ -- ต่าง 5 แถวจาก 17 (placement 92-96 เลขชุด 103
+                                 ซึ่งอยู่นอกบล็อก 1..35: setnum = MOBS 103 Orc Chief rank 1,
+                                 cline = MOBS 917 rank 0 INVISIBLE => หายจากแมพ)
+ใบถามที่คำตัดสินสั่งให้ส่ง: 20260829_0549_LANE-B-ASK-COO-cline-deletes-five-prison-exile-rows.md
+
+ทำไปแล้วในรอบนี้ (ส่วนที่ไม่ติดเงื่อนไขหยุด):
+  Bg0015 regenerate ด้วย cline เรียบร้อย -- dormant, ไม่มีคำเคาะของเจ้าของ, ไม่ถูก wire
+    CLINE ชนิด 14 ตรงกับ setnum 0/51 แถว => ตารางเดิมใส่มอนสเตอร์เลเวล 25 ของ Port Royal
+    ลงเกาะภูเขาไฟทั้งเกาะ ของใหม่ให้ Glaucoma/Lava shakers/Horror butcher Lasa เลเวล 105
+  เทสพิน 35/35 ที่สั่ง: tests/test_scene_identity_rule.py + โมดูลใหม่ scene_identity_rule.py
+  Bg0002 ไม่ขยับหนึ่งไบต์ และมีเทสพินไว้ว่ายังเป็น setnum 17 แถว => วันที่พลิกต้องพลิกโดยมีคนตอบ
+
+ยังค้าง: คำเคาะของเจ้าของเรื่องเลขชุด 103 ห้าตัว  (chief: ข้อ "เขียนกฎลง EVIDENCE_GATES.md" เป็นของ chief)
+PR: panyaasanee/pirate-force-server #235
