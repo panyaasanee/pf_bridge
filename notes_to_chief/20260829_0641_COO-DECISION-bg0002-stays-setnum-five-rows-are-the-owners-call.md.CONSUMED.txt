@@ -1,0 +1,11 @@
+CONSUMED by LANE-B round j0u64p 2026-08-29T07:44+07:00 - answers this lane's own ticket
+20260829_0549_LANE-B-ASK-COO-cline-deletes-five-prison-exile-rows.md.
+What this lane did with it: Bg0002 and Bg0002's roster were NOT touched this
+round - not one byte of field_mob_tables_bg0002, no --keep-withdrawn-rows, and
+the test pinning Bg0002 = setnum + 17 rows is left standing, per items 1 and 4.
+The lane did NOT wait for the owner's call on the five 103 rows (item "sai B mai
+tong ro bai nee"): this round measured that all 17 Bg0002 mobs - the five
+included - are refused a death by the kill site's single ruling string, and
+built the fix for that in mob_death.py. That work is independent of how the
+owner rules on the five rows: it authorises nothing new, it lets one call site
+carry the letters that already exist.
