@@ -21,7 +21,19 @@
 
 ## ② ครึ่ง chief ของ recompose Bg0002 (COO 1842 ข้อ 3 + ทิศ R231 จาก R230)
 
-(รายละเอียดจะเติมหลังทำ PR ใบสอง)
+PR ใบสอง: สาขา arrival census Bg0002 ใน `runtime.py` sync combat state เข้าฉากก่อน compose
+แล้วส่ง `ledger=self.mob_combat_ledger` เสมอ (ทางสมมาตรกับสาขา bg0001) + แขน latch
+ฉาก unaddressed · เทสใหม่ใน `test_scene_scoped_combat_wiring.py` (mutation แดงเมื่อ revert [วัดแล้ว])
+
+สามข้อวัดที่เปลี่ยนรูปงาน (รายละเอียด+การแบ่งครึ่ง → จดหมาย `20260829_1924_CHIEF-TO-LANE-B-*`):
+1. census ประกอบ**ก่อน**เลนต่อสู้ใน dispatch เดียวกัน [วัดแล้ว] ⇒ หน้าต่าง "เฟรมเดียวแผล+census"
+   ของ R230 เป็นเรื่องลำดับเลน ไม่ใช่เรื่องไม่ส่ง ledger
+2. ส่ง ledger ที่ arrival = ไบต์ไม่เปลี่ยนวันนี้ (sync ใหม่ = ceiling + ตาย rehydrate = ข้อมูลชุดเดียว
+   กับ register-only) — ป้ายตรงไปตรงมาในเทสและจดหมาย
+3. ช่องจริง = เฟรมเลือด/ตาย Bg0002 ถอย one-entry ทุกครั้ง (`..._skipped_no_population_anchor`
+   [วัดแล้ว] = ความเสี่ยง RE-092) — สามชั้น: การ์ดฉาก 1 เท่านั้น · Bg0002 ไม่เก็บ anchor/count ·
+   ตัวประกอบ recompose เป็นทรง bg0001 · ครึ่งโมดูล = สาย B ครึ่ง runtime รอบหน้า = chief
+   (กำหนด M5 31 ส.ค. 12:00)
 
 ## หลักฐาน
 
@@ -44,4 +56,6 @@
 
 ## สถานะ PR
 
-- push แล้ว รอ merge (เลข PR จะเติมท้ายรอบ)
+- `pirate-force-server#273` (GM-037, PR ใบแรก): **merged 19:22 [ตรวจกับ API แล้ว merged=true]**
+- `pirate-force-server` PR ใบสอง (Bg0002 arrival sync): push แล้ว รอ merge (เลขเติมตอนเปิด)
+- `pf_bridge#432` (บันทึกรอบ + จดหมาย + stub): push แล้ว รอ merge

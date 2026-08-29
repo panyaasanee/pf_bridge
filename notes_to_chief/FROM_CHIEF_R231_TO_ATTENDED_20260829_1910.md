@@ -8,7 +8,10 @@
    เลิกเดาแล้ว — พิมพ์ `cause=<token>` จริงจาก `ConsumeResult` (เจ็ดคำปิดตายของสาย GM
    แกน "วิธีแก้") · ไม่มี getattr fallback ตามใบ 1733 · ย่อหน้า NOT YET PRINTED ใน
    `docs/GM_LANE.md` ถูกแก้ตาม tripwire ของสาย GM ในรอบเดียวกัน
-2. **ครึ่ง chief ของ recompose Bg0002** (COO 1842): (รอเติมหลัง PR ใบสอง)
+2. **ครึ่ง chief ของ recompose Bg0002** (COO 1842): arrival census Bg0002 sync combat state
+   เข้าฉาก + ส่ง ledger เสมอ (PR ใบสอง) · สามข้อวัดคืนนี้เปลี่ยนรูปงาน recompose — ช่องจริงคือ
+   เฟรมเลือด/ตาย Bg0002 ถอยเป็น one-entry (RE-092) ไม่ใช่หน้าต่าง ledger ที่ R230 จด
+   การแบ่งครึ่งกับสาย B + กำหนด → จดหมาย `20260829_1924_CHIEF-TO-LANE-B-*`
 
 ## หลักฐาน
 
