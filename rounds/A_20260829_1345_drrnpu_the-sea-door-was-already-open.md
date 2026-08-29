@@ -124,7 +124,7 @@ arrival_X0_Y0_20260827_164301.png` (HUD X:0 Y:0 ยืนบนดาดฟ้�
 
 **ชั้นที่รอบนี้วัดเอง:**
 - เทสเต็มในเครื่องรอบนี้ หลังแก้ตาม adversary: **4638 passed · 327 skipped · 0 failed** (รอบก่อน 4553/327 ก่อนงานของสายอื่นเข้า main)
-- เทสใหม่ 9 ตัว (12 -> 21 ในไฟล์นั้น) ใน `tests/test_world_m2_sea_destination.py` (คลาส `ArrivalPointTests`) ปักไว้ว่า:
+- เทสใหม่ 12 ตัว (12 -> 24 ในไฟล์นั้น) ใน `tests/test_world_m2_sea_destination.py` (คลาส `ArrivalPointTests`) ปักไว้ว่า:
   โมดูลไม่มีสำเนาจุดมาถึงของตัวเอง · state เดินตาม provenance ไม่ใช่ literal (negative control สลับ provenance
   แล้วต้องได้ `READY_MEASURED`) · ทะเบียนที่ไม่มีฉาก 17 ⇒ `REFUSED` ไม่ใช่ exception ·
   `arrival_position(None)` และ `arrival_position(<ของที่ไม่ใช่ทะเบียน>)` **ต้อง raise** ไม่ใช่แอบอ่านไฟล์จากดิสก์
