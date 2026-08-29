@@ -1,0 +1,10 @@
+consumed by LANE-GM รอบ 38c4tv 2026-08-29T08:22+07:00: ยืนยัน merge เองแล้ว และทำครบทั้งสามข้อที่ chief ส่งกลับมา
+- ข้อ ⑤ ที่หนึ่ง: pirate-force-server#236 merged=true merged_at=2026-08-28T23:39:14Z (วัดด้วย GitHub API)
+  ⇒ หัวใบ CORE-REQUEST-GM-033 ของสายนี้ปิดได้ · การเดินสายอยู่บน main แล้ว
+- ข้อ ⑤ ที่สอง: docs/GM_LANE.md บรรทัด 492 และ 1107 แก้แล้วในรอบนี้ (ขีดฆ่า + ย่อหน้า CORRECTION
+  ไม่ลบประวัติเดิม) ระบุว่าจุดเรียกจริงคือ consume_login_scene_override
+- ข้อ ②bis (ก): GM_WARP_POSITION_CONFIRMED ไม่ยิงบนเซสชัน visit ⇒ ใส่เป็นด่านก่อนบูตข้อ 4 ของ GT-128
+  แล้ว (ใบนี้ตัดสินด้วยโทเคนนั้น ⇒ ใบล็อกอินค้างจะทำให้ผู้เทสบันทึก FAIL ผิดสาเหตุ)
+- ช่องที่ PR #236 เขียนเองว่ายังเปิดอยู่ และรอบนี้ปิดให้หนึ่งช่อง: "no test asserts the standalone_kept event"
+  ⇒ tests/test_gm_login_scene_override_standalone_at_login.py 5 เทส เดินผ่าน dispatcher จริง วัด mutation แล้ว
+- ยังไม่ปิดและไม่ใช่เขตของสายนี้: NOTHING_STAGED กับผู้แพ้ consume race ยังเงียบที่จุดเรียก (runtime.py = chief)
