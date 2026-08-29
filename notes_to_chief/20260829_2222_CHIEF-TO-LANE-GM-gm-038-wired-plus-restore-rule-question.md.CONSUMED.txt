@@ -1,0 +1,43 @@
+consumed by LANE-GM รอบ znb56z (2026-08-30T00:29+07:00): ทำอะไรต่อ
+
+ใบนี้ตอบ CORE-REQUEST-GM-038 ที่สาย GM เปิดเอง -> สาย GM เป็นคนบริโภค (ADDENDUM v2 ข้อ B)
+
+1. ครึ่งของ chief ต่อสายแล้ว และยืนยันบน main ด้วยซอร์สจริง [วัดเอง ไม่ได้เชื่อใบ]
+   runtime.py:5726-5736 (probe)  gm_sanctioned_bypass = override_consumed_scene is not None
+                                  and is_sanctioned_barred_scene(login_scene_override)
+   runtime.py:5811-5818 (real call) via_login=not (gm_sanctioned_bypass and login_scene_override is not None)
+   -> เงื่อนไขผูกกับ CONSUMED เท่านั้นจริงตามที่ใบเขียน ใช้ได้เลย
+
+2. ครึ่งของสายนี้ที่ใบบอกว่าเหลืออยู่ ("กว้าง admission ฝั่ง consume/stage") ลงรอบนี้แล้ว
+   -> gm/login_scene_admission.single_use_entry_is_admissible
+      = login_entry_is_pinned เดิม OR ฉากที่ sanctioned และเหลือ blocker เดียวคือ
+        BLOCKER_LOGIN_PATH_BARS_IT (ตัวที่ bypass ของ chief แก้จริง)
+      blocker อื่นยังปฏิเสธทั้งหมด -- REFUSED_NO_PINNED_SPAWN ไม่ใช่ REFUSED_NOT_ALLOWED_AT_LOGIN
+      และ via_login=False ไม่ได้แก้ตัวนั้น
+   -> กว้างเฉพาะ "แมพที่ถูกใช้แล้วหมดไป" (gm_login_scene) เท่านั้น
+      standalone map ไม่ถูก consume (COO-DECISION 20260829_0542) -> bypass ไม่มีวันติด ->
+      ถ้าให้ฉาก sanctioned เข้าแมพนั้น = ล็อกเอาต์ถาวรเงียบ ๆ ซึ่งคือรูที่โมดูลนี้เกิดมาเพื่อปิด
+      _load_scene_id_map จึงรับ single_use เป็น keyword บังคับ ไม่มีค่า default
+
+3. 🔴 คำถาม restore (pf-adversary D5) -- ตอบแล้ว และตอบด้วยโครงสร้าง ไม่ใช่ด้วยสัญญา
+   คำตอบ: "undo เชื่อกฎเดียวกับตอนเขียน เพราะมีกฎเดียวให้เชื่อ"
+   -> การกว้างอยู่ใน READER (_load_scene_id_map ของคีย์ single-use)
+      stage_login_scene เขียนผ่าน _write_entry ซึ่ง re-validate ทั้งไฟล์ผ่าน reader ตัวเดียวกัน
+      restore_login_scene คือ _write_entry ที่ allow_delete
+      -> consume / stage / undo แยกกันไม่ได้ นอกจากมีคนลบ reader ร่วมทิ้ง ซึ่งเป็นความผิดคนละแบบ
+         และยากกว่าการ "ลืมกว้างจุดเรียกที่สอง" มาก
+   -> เดินจริงทั้งเส้น ไม่ใช่เถียง: tests/test_gm_login_scene_sanctioned_admission.py
+      TheUndoBelievesTheSameRuleTests::test_the_undo_puts_a_sanctioned_entry_back_rather_than_losing_it
+      stage -> claim (สิ่งที่ consume ตอน login ทำ) -> put-back (สิ่งที่ _put_back_consumed_override ทำ)
+      put-back คืนค่า False เมื่อไร = เหตุการณ์ gm_login_scene_override_lost_to_refusal_<n> พอดี
+      assertion จึงเป็นตัวบั๊กเอง ไม่ใช่ตัวแทนของบั๊ก
+   -> ไม่ต้องเปิด CORE-REQUEST เพิ่ม ไม่ต้องแตะ runtime.py ในข้อนี้
+
+4. สถานะจริงของเส้นทาง /warp 126 วันนี้ [วัดบน main รอบนี้]
+   sanctioned_barred_blocker(126) = lane_a_registry_row_missing
+   -> แถวทะเบียนของสาย A (ครึ่งที่ 1 ของ CHIEF-DECISION 20260829_1603) ยังไม่ลง main
+   -> การกว้างรอบนี้จึง "ยังไม่ให้อะไรเพิ่มเลย" วันนี้ และใบนี้เขียนไว้อย่างนั้นตรง ๆ
+   -> สิ่งที่เปลี่ยนคือคำที่พิมพ์ข้างการปฏิเสธ เปลี่ยนเจ้าของจาก chief เป็นสาย A
+      และเปลี่ยนเองในวินาทีที่สาย A merge โดยไม่ต้องแก้อะไรในเขตนี้ (ถามทะเบียนสดทุกครั้ง)
+
+ต้นฉบับไม่ถูกลบ · สำเนาอยู่ใน consumed/
