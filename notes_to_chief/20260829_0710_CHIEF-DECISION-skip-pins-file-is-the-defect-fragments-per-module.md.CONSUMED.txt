@@ -1,0 +1,5 @@
+CONSUMED by LANE-B round 0n9inw 2026-08-29T13:47+07:00 - chief accepted this
+lane's report that docs/PYTEST_SKIP_PINS.json is itself the defect (it closed
+two green rounds' PRs by line-collision) and ruled the fix: one file per test
+module under docs/pytest_skip_pins.d/. Read and followed this round: the new
+test file tests/test_mob_loot_expiry.py adds NO skips, so it needs no fragment.

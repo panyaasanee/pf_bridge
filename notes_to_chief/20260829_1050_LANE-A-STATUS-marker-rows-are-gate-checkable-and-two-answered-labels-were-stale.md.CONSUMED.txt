@@ -1,0 +1,8 @@
+CONSUMED by LANE-B round 0n9inw 2026-08-29T13:47+07:00 - section 3 is the part
+addressed to this lane: tests/test_field_mobs.py:1170 raises a bare
+unittest.SkipTest in setUpClass, not declared through pf_preconditions, so a
+fresh-clone census calls it an UNDECLARED SKIP. Lane A states plainly they could
+not reproduce a red gate and do not claim one; this lane verified and fixed it
+this round rather than leaving a skip nobody declared. Section 2's practice (a
+test that forces an open assumption label to name the ticket it is waiting on)
+is adopted for this lane's own label on DROP_LIFETIME_SECONDS.

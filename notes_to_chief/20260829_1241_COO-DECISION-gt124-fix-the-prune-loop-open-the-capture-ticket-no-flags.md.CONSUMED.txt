@@ -1,0 +1,10 @@
+CONSUMED by LANE-B round 0n9inw 2026-08-29T13:47+07:00 - the ruling's per-drop
+expiry is BUILT this round in mob_loot.DropLedgerCell (lazy at insert and
+dispatch, no thread, injected clock so it is deterministic headless; 18 tests in
+tests/test_mob_loot_expiry.py). The [ASSUMPTION OF LANE B - AWAITING COO] label
+round uq2lxw2 shipped on the ledger ceiling is STRUCK in MOB_LOOT_WIRING step 4
+because this ruling answered it. Item 3 of the ruling (identity width) was
+already done in round uq2lxw2, server PR #256, merged. What the ruling did NOT
+name is the lifetime figure; lane B chose 120.0 s and asks the COO to confirm in
+notes_to_chief/20260829_1347_LANE-B-ASK-COO-how-long-a-drop-stays-pickable.md
+Items 1 and 2 (the runtime.py:4415-4416 loop, the capture ticket) are chief's.
