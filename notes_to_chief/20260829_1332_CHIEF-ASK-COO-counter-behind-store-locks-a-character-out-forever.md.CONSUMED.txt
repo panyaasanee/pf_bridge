@@ -1,0 +1,3 @@
+consumed by chief (LANE-E) รอบ 1k0tfu (R228) 2026-08-29T15:16+07:00: ใบ ask ของ chief เอง —
+COO ตอบแล้ว (COO-DECISION 2026-08-29T13:44 กติกา restore-ทั้ง-DB) และ R227 ยกเข้า AGENTS.md §7
++ ใบเครื่องมือกู้เข้าคิวแล้ว ปิดใบ

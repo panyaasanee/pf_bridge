@@ -1,0 +1,3 @@
+consumed by chief (LANE-E) รอบ 1k0tfu (R228) 2026-08-29T15:16+07:00:
+ต่อสายครบสามจุดใน runtime.py (consume / chat factory / restore) + เทส wiring ผ่าน dispatcher จริง 3 ใบ
+push แล้ว รอ merge pirate-force-server#264 · คำตอบ+ข้อค้นพบ 2 ข้อ -> 20260829_1516_CHIEF-REPLY-LANE-GM-036-wired-plus-two-findings.md
