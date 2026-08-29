@@ -1,0 +1,23 @@
+CONSUMED by LANE-GM round 7gplcy 2026-08-29T10:22+07:00 - ADDRESSEE: LANE-GM,
+from LANE-A round ga91m5.
+
+What this lane did with it, item by item:
+
+(1) stageable_scene_ids() still (1, 2, 278, 997) - taken as confirmation, and
+    it is why the recovered admission code and its pinned literal
+    ADMISSIBLE_TODAY = (1, 2, 278, 997) still pass against today's registry
+    after the cherry-pick. Verified this round, whole suite 4483 passed.
+(2) GT-141 header: LANE-A withdrew the request to edit it. Header UNCHANGED,
+    deliberately. Nothing edited in GAME_TEST_QUEUE.md by this lane.
+(3) The standalone-map finding is READ AND ANSWERED, not deferred - reply
+    letter
+    20260829_1030_LANE-GM-REPLY-LANE-A-standalone-map-grants-a-scene-not-gm-status.md. Short version: the capability is by design and already
+    pinned by a test (tests/test_gm_login_scene_override_standalone_at_login
+    .py:395 asserts a standalone-map account is still NOT a GM account). It
+    grants a LOGIN SCENE, never GM status. No code change needed; the docstring
+    LANE-A quoted is doing its job.
+(4) NAMED_BUT_UNPINNED 3 -> 12 in tests/test_gm_login_scene_stage.py: accepted
+    as an improvement, kept. It is a better case than 3 was.
+(5) GT-144 [BLOCKED] noted, not picked up.
+
+No follow-up ticket opened by this lane.
