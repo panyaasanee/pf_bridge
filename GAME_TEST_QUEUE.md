@@ -21,7 +21,7 @@
 ## 📇 สารบัญใบที่ยังไม่ปิด (คำสั่ง Panya 18:22 · อัปเดตทุกครั้งที่เปิด/ปิดใบ · เป็นดัชนีชี้ลงข้างล่าง — เนื้อใบไม่ถูกย้าย)
 
 - 🆕 **`GT-142` M5-KILL-PICKUP-RELOG-ROUNDTRIP-001** (🔴 **BLOCKED — `BLOCKED-BY: STORE-INSERT-001`** · เปิดโดย chief R222 ตาม `COO-DECISION 20260829_0441` gate-2 ข้อ 3 · ใบปิดวง M5: ฆ่ามอนใน `Bg0002` → เก็บของ → relog → ของยังอยู่ไหม · 🔴 **ห้ามขึ้นหัวคิว ห้ามเรียกผู้เทส** จนกว่าตั๋วราก `STORE-INSERT-001` ปิด (มติข้อ 6 กฎ 2-3) · 🔴 เกรดไม่ได้จนกว่า `RE-139` ปิด (กฎ 4) · ใบเต็มอยู่ท้ายไฟล์)
-- 🛠️ **`STORE-INSERT-001` [CHIEF-WORK · ไม่ใช่ใบเทส]** (🟡 **push แล้ว รอ merge `pirate-force-server#241` (R224 `4gqnwm`)** — เจ้าของ: chief · `store.py` ยังไม่มี INSERT แถวของที่เก็บได้ และไม่เดิน `character_backpacks.next_item_identity` ⇒ ของที่เก็บไม่รอดข้าม DB · เป็นตัวบล็อกเดียวของ `GT-142` · M5 ครบกำหนด 31 ส.ค. 12:00 · ใบเต็มอยู่ท้ายไฟล์)
+- 🛠️ **`STORE-INSERT-001` [CHIEF-WORK · ไม่ใช่ใบเทส]** (🟡 **push แล้ว รอ merge `pirate-force-server#244` (R224 `4gqnwm`)** — ~~#241~~ ถูกปิดเพราะเกตแดง (เทสของรอบนี้เองรั่ว sqlite handle บน Windows) แก้แล้วและเปิดใบใหม่บน branch เดิม — เจ้าของ: chief · `store.py` ยังไม่มี INSERT แถวของที่เก็บได้ และไม่เดิน `character_backpacks.next_item_identity` ⇒ ของที่เก็บไม่รอดข้าม DB · เป็นตัวบล็อกเดียวของ `GT-142` · M5 ครบกำหนด 31 ส.ค. 12:00 · ใบเต็มอยู่ท้ายไฟล์)
 - 🛠️ **`SKIPPINS-FRAGMENTS-001` [CHIEF-WORK · ไม่ใช่ใบเทส]** (🟢 **OPEN — เจ้าของ: chief** · `docs/PYTEST_SKIP_PINS.json` ไฟล์เดียวปิด PR ที่เกตเขียวไปแล้ว **2 ครั้ง** (`#231` สาย A · `#235` สาย B) เพราะสองสายเติม entry ที่บรรทัดเดียวกัน ⇒ แตกเป็น `docs/pytest_skip_pins.d/<โมดูล>.json` รายโมดูล · คำตัดสิน: `notes_to_chief/20260829_0710_CHIEF-DECISION-skip-pins-*` · ใบเต็มอยู่ท้ายไฟล์)
 - 🔥 **ใบแรกของกะ attended ถัดไป — ก่อนใบอื่นทั้งหมด รวม `GT-131`** (คำสั่ง COO 2026-08-28 23:45 ข้อ 3 · จดหมาย `20260828_2345_COO-DECISION-multi-drop-shape-ships-with-a-bounded-blast-radius.md`) · 🆕 **`GT-132` GROUND-DROP-COALESCED-GENERATION-DRAWS-N-LABELS-001** (🟢 **READY — attended · ศูนย์สล็อต ไม่มีแฟล็ก** · เปิดโดย LANE-B รอบ `zxnwtd` ต่อจาก `RE-130` ✅ CLOSED · ฆ่ามอนตัวที่ตกของ ≥ 2 ชิ้น แล้ว**นับป้ายชื่อไอเทมสีแดงจากเฟรมวิดีโอ** · เซิร์ฟเวอร์เปลี่ยนทรงส่งเป็น collection เดียว count=N แล้ว · 🔴 มีด่านบิลด์บังคับก่อนนับ (`generations=1` ในคอนโซล) · `1` ป้าย = **FAIL ของใบนี้** (coalesce ไม่ซื้ออะไรให้ผู้เล่น) · ใบเต็มอยู่ท้ายไฟล์
   · 🔴🔴 **ต้องรันใน `Bg0002` เท่านั้น ห้ามรันในเมือง** — Port Royal เหลือหุ่นซ้อมสี่ตัวและหุ่น `916` มี `n_DROPS_*` = 0 ทั้งสามคอลัมน์ ⇒ ฆ่าในเมืองแล้วได้ **0 ป้าย** ซึ่งเป็น `NO-RESULT (ฉากผิด)` **ไม่ใช่ FAIL** (chief R221 จาก `20260829_0255_LANE-B-STATUS-*` บรรทัด 46-47))
@@ -7325,9 +7325,9 @@ git grep -n "def login_entry_is_pinned" <SHA> -- src/pirateforce_foundation/gm/l
 
 ---
 
-## STORE-INSERT-001 [CHIEF-WORK · ไม่ใช่ใบเทส ไม่ต้องเปิดเกม]: `store.py` เขียนแถวของที่เก็บได้ลง DB จริง และเดินตัวนับ `next_item_identity`  [push แล้ว รอ merge `pirate-force-server#241` · เจ้าของ: chief (สาย E)]
+## STORE-INSERT-001 [CHIEF-WORK · ไม่ใช่ใบเทส ไม่ต้องเปิดเกม]: `store.py` เขียนแถวของที่เก็บได้ลง DB จริง และเดินตัวนับ `next_item_identity`  [push แล้ว รอ merge `pirate-force-server#244` (แทน ~~#241~~ ที่ถูกปิดเพราะเกตแดง) · เจ้าของ: chief (สาย E)]
 
-> 🟡 **สถานะ 2026-08-29T07:1x+07:00 (R224 `4gqnwm`): งานเสร็จและ push แล้ว รอ merge `pirate-force-server#241`** — ห้ามอ่านว่า "อยู่บน main" จนกว่ารอบถัดไปจะเห็น `merged=true`
+> 🟡 **สถานะ 2026-08-29T07:1x+07:00 (R224 `4gqnwm`): งานเสร็จและ push แล้ว รอ merge `pirate-force-server#244`** — ห้ามอ่านว่า "อยู่บน main" จนกว่ารอบถัดไปจะเห็น `merged=true`
 > เกณฑ์ปิดตั๋วทั้งห้าข้อ ทำครบตามนี้ [วัดแล้ว บน branch `claude/bold-dijkstra-4gqnwm`]:
 > ① `store.commit_acquired_backpack_item` — INSERT แถว + `UPDATE next_item_identity` ใน `BEGIN IMMEDIATE` เดียว (เทส atomicity ฉีด exception หลังทั้งสอง write แล้ววัดว่า **ทั้งแถวและตัวนับไม่ขยับ**)
 > ② identity มาจากคอลัมน์ ไม่ใช่ `MAX+1` — เทสตั้งตัวนับไว้ที่ 9 บนกระเป๋าที่ identity สูงสุดคือ 4 แล้ววัดว่า `MAX+1` (=5) **ถูกปฏิเสธโดยระบุชื่อ** ส่วน 9 ผ่าน
