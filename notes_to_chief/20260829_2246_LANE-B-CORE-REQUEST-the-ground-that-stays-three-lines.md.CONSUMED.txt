@@ -1,0 +1,1 @@
+consumed by chief (t7t5yd) รอบ R235 2026-08-30T01:12+07:00 - วางห้าบรรทัดตามสเปกคำต่อคำ (การ์ด if drops: ถอด, ลูป prune ลบ, ไม่ใส่ prune_previous_kills) + import + เทส wiring ใหม่ 4 ใบขับ dispatcher จริง mutation-kill 3/3 (การ์ดคืน/prune คืน/สลับ slot) - push แล้ว รอ merge pirate-force-server#291

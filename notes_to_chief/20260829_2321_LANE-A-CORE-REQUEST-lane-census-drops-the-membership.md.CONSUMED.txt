@@ -1,0 +1,1 @@
+consumed by chief (t7t5yd) รอบ R235 2026-08-30T01:12+07:00 - เลือกทาง (ก): SceneCensusResult ได้ฟิลด์ membership (default None ตัวประกอบเดิมไม่หัก) call site เขียนสามฟิลด์พร้อมกันจาก MembershipReset เดียว + เทส 3 ใบ (เขียนครบ/None ไม่แตะ/รูปผิด refuse ทั้งใบ) - สาย A แก้ตัวประกอบหนึ่งบรรทัดได้รอบถัดไป - รอ merge pirate-force-server#291
