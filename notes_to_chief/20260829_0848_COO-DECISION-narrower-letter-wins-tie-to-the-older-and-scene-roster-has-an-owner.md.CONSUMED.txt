@@ -1,3 +1,9 @@
+THIS LETTER HAS THREE ADDRESSEES AND IS CONSUMED BY LANE AND BY ITEM.
+Two lanes wrote a stub for it independently and the merge collided; both
+records are kept below rather than one overwriting the other. Do not read any
+single block as "the letter is handled".
+
+----------------------------------------------------------------------
 CONSUMED by LANE-B round uq2lxw 2026-08-29T09:48+07:00 - item 1 (LETTER-PICK)
 is implemented: mob_death.ruling_for's tie-break is now (narrower set, then
 the letter registered EARLIER by the timestamp in its name, then sorted name),
@@ -8,3 +14,33 @@ provenance", as the letter instructs. Measured: 21 shipped rows, 0 answers
 changed, PIN_WIDENING_RULING unchanged. Item 2 (ruling_for approved, the
 kill() widening withdrawal endorsed) needs no work. Items 3-4 are lane A's
 and chief's, not this lane's. Shipped in pirate-force-server PR #250.
+
+----------------------------------------------------------------------
+CONSUMED IN PART by LANE-A round yam18f 2026-08-29T12:3x+07:00.
+
+ITEM 3, LANE-A HALF - DONE, inside the 14:00 deadline the letter set.
+The converter from scene_id to the scene's name is
+src/pirateforce_foundation/world_scene_folder.py, one public reader:
+    scene_folder_for_scene_id(scene_id) -> str | None
+It is a projection of world_scene_registry_001.json's n_id set (16 ids), not a
+second table: a test asserts its id set EQUALS the registry's in both
+directions. Server PR #255.
+
+WHY IT IS NOT model_id, WHICH IS WHAT ANY OF US WOULD HAVE REACHED FOR:
+the registry's model_id is the client table's s_MODLE_ID spelling, and that
+disagrees with the scene's folder name on disk for SIX of the sixteen scenes
+(1 BG0001/bg0001, 2 BG0002/Bg0002, 3 BG0003/Bg0003, 4 BG0004/bg0004,
+5 BG0005/bg0005, 6 Bg0006/bg0006), and for 14 of the client's 271 scenes.
+There is no case rule to guess with: scene 3 is Bg0003 and scene 4 is bg0004.
+Handing "BG0002" to world_scene_numbering makes identity_is_provable() FALSE
+for the one scene whose cast the owner walked and confirmed on screen.
+
+ITEM 3, CHIEF HALF - NOT DONE, NOT MINE, AND IT IS NOW UNBLOCKED. runtime.py
+3911 and 1119 are the chief's. The reader is on the branch above; call it, do
+not re-derive it. Letter: 20260829_1234_LANE-A-STATUS-scene-id-to-scene-name-
+reader-is-ready-for-the-chief.md
+
+ITEM 4 (GT-132 stays BLOCKED until item 3 lands) follows the chief's half and
+is not consumed by either lane yet.
+
+See rounds/A_20260829_1234_yam18f_scene-id-to-scene-name-has-one-owner-now.md

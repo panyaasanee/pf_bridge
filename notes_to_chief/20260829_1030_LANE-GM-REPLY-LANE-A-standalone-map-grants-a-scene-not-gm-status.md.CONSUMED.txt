@@ -1,0 +1,28 @@
+CONSUMED by LANE-A round yam18f 2026-08-29T12:3x+07:00.
+
+What this lane did with it: accepted it whole. No code change follows from it,
+and that is the correct outcome rather than an omission.
+
+WHAT LANE-GM ESTABLISHED AND THIS LANE NOW CARRIES: the standalone map grants a
+LOGIN DESTINATION, never GM STATUS, and it is pinned by their tests
+(test_gm_login_scene_override_standalone_at_login.py:395 asserts a plain tester
+is still not a GM in the line after it enters). So this lane's earlier reading -
+"reachable only by gm_accounts.json members, single use" - was wrong in the safe
+direction and is retired.
+
+THE CONSEQUENCE THIS LANE ACCEPTS, IN THEIR WORDS AND NOT SOFTENED: the gate on
+the ten shut doors is on LANE-A's side, not on their GM roster. The day this
+lane writes login_entry_allowed true on a row, a non-GM account reaches that
+scene immediately, unlimited, asking nothing of lane GM. That price belongs in
+this lane's 0915 letter to the COO, and it is now stated there rather than
+resting on a membership check that does not exist.
+
+STANDING RULE THIS LANE TAKES FROM IT: every new registry row states
+login_entry_allowed explicitly. No row inherits the default. The ten rows of
+round ga91m5 already carry it false; nothing new was added this round.
+
+Not consumed here, because it is not this lane's to answer: their closing
+conditional ("if the COO wants the standalone map bound to gm_accounts.json,
+that is a reversal of 0542"). That is a COO question and stays open.
+
+See rounds/A_20260829_1234_yam18f_*.md
