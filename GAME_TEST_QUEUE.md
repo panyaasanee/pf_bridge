@@ -6242,6 +6242,18 @@ real wire "vital id" for a pickup request (`rounds/R180_3lzfhw_...md`: "inbound 
 RE ticket (`RE-125`, `CLIENT_RE_QUEUE.md`) was opened the same round as this entry asking for the vital id.
 This entry cannot be booted until that CORE-REQUEST lands; it is written now, ready to run the day it does,
 so no attended time is spent re-deriving the procedure.
+(a2) **SECOND HARD BLOCKER, MEASURED 2026-08-29T12:2x+07:00 (chief round `ni2wh2`/R225). WIRING THE CALL
+SITE ALONE WILL NOT MAKE THIS ENTRY RUNNABLE.** `runtime.py:4395-4419` announces every ground drop and then
+prunes all of them inside the SAME dispatch call (`for drop in drops: self.mob_loot_cell.take(drop.drop_key)`
+at `:4415-4416`). Measured against the real `DropLedgerCell` + `dispatch_pickup_request`, with a control cell
+identical except the prune loop did not run: treatment = 0 live rows, every claim REFUSED
+`drop_already_taken`; control = 2 live rows, claim ACCEPTED (`identity=5 slot=4`). So a tester would get a
+100% refusal rate on a correctly wired build. That prune loop's own comment (`:4402-4413`) says it exists
+BECAUSE no pickup path is wired -- GT-124 invalidates its premise. NOTE for whoever fixes it: no test pins
+that loop (grep `mob_loot_drops_sent` / `_pruned` / `mob_loot_cell` in `tests/` = 0 assertions), so removing
+it goes green silently AND removes the only bound on ledger growth; a replacement bound must land with it.
+Chief has asked COO to sequence this (`notes_to_chief/20260829_1221_CHIEF-ASK-COO-gt124-opcode-forbidden-and
+-drops-pruned.md`). Do NOT boot this entry until (a), (a2) and the opcode question are all closed.
 (b) **OPEN QUESTION, NOT ASSUMED EITHER WAY.** `GT-045` (ANSWERED, archived) and `GT-060` (still
 BLOCKED-CONDITIONAL) both found that a ground drop rendered only a floating red name-label (0.2-0.3s), no
 model -- "nothing to click" (mob_pickup.py NONCLAIM 12). That measurement predates `mob_loot` being wired
@@ -7367,6 +7379,16 @@ lane A พินไว้ว่าเข้าได้ตอนล็อกอ�
 `refused_stage_scene_has_no_login_entry` ไม่เขียนไฟล์)
 (เหตุผลที่รายชื่อสั้น: `rounds/GM_20260829_0336_*.md`)
 
+🟡 **ตั้งแต่รอบ `c48x1n`: คนเฝ้าคอนโซลไม่ต้องเปิดใบนี้มาดูรายชื่อ** (เมื่อ `pirate-force-server#254` merge)
+`/warp <ฉากผิดที่เป็นตัวเลข>` ⇒ stderr ของเซิร์ฟเวอร์ได้หนึ่งบรรทัด:
+`GM_CHAT_WARP_REFUSED account='<ชื่อ>' scene_id=<n> reason=scene_has_no_login_entry stageable=(...)`
+grep `GM_CHAT_WARP_REFUSED` (คนละโทเคนกับ `GM_LOGIN_SCENE_CONFIG_REFUSED` ซึ่งแปลว่าไฟล์ config เสีย ไม่ใช่พิมพ์ผิด)
+
+🔴 **ผู้เทสหน้าจอยังต้องอ่านรายชื่อ `1, 2, 278, 997` จากใบนี้เหมือนเดิม** — บรรทัดนั้นอยู่บน stderr ของเครื่องเซิร์ฟเวอร์
+ไม่ใช่บนจอเกม และไม่มีอะไรตอบกลับไปที่ไคลเอนต์ (pf-adversary D7 รอบ `c48x1n` จับได้ว่าฉบับแรกของบรรทัดนี้อ้างเกิน)
+🔴 **และพิมพ์ผิดที่ไม่ใช่ตัวเลข (`/warp island` · `/warp` เปล่า ๆ · `/warp 3 100`) ยังเงียบสนิททั้งสองฝั่ง** (D8 เปิดอยู่)
+🔴 ไม่ใช่หลักฐานว่า `/warp` ทำงาน และ **ไม่เปลี่ยนเกณฑ์ของใบนี้เลย**
+
 ### objective (claim เดียว)
 บนบูตไร้แฟล็ก บัญชีใน `gm_accounts` พิมพ์ `/warp <scene_id ที่ lane A พินไว้ และไม่ใช่ฉากปัจจุบัน>`
 ลงกล่องแชทธรรมดา แล้ว **ล็อกเอาต์และล็อกอินใหม่** -- ตัวละครปรากฏที่ฉากนั้นจริงหรือไม่
@@ -7710,3 +7732,119 @@ P1 แมพขึ้นและ **ว่างเปล่า** - คือข
 CANON_SHA ก่อน/หลัง :
 OBSERVER_CONFIRMED  :
 ```
+
+---
+
+## GT-145 CONSOLE-ENCODING-MEASURE-001 [STATIC-ON-BRIDGE -- วัดบนสะพานตอนเซิร์ฟเวอร์รันจริง · ไม่บูตไคลเอนต์ ไม่ล็อกอิน ไม่มีตัวละคร · ~15 นาที]: คอนโซลของเครื่องเจ้าของเป็น encoding อะไร -- พิมพ์สี่ค่าครั้งเดียว คัดลอกกลับมาดิบ ๆ  [PENDING]
+
+**ตอบใบ `CORE-REQUEST-GM-035`** · เข้าคิวตามจดหมาย chief `20260829_1221` ข้อ ⑤ · เขียนใบโดย `pf-queue-author`
+
+> NUMBERING: grep ก่อนจอง -- `GT-145` / `RE-145` = 0 hit ทั้ง `GAME_TEST_QUEUE.md` และ `CLIENT_RE_QUEUE.md` · สูงสุดก่อนหน้า = `GT-144` · ตัวนับเดียวร่วมกับ `CLIENT_RE_QUEUE.md`
+
+**ทำไมต้องวัด:** สามที่ใน repo พูดไม่ตรงกัน และ **ไม่มีที่ไหนวัดอะไรเลย** -- `runtime_console.py:26` (`_Mirror.encoding` รายงาน `utf-8`) · `gate-windows.yml:53` (บังคับ `PYTHONIOENCODING: 'cp874:strict'` เป็นนโยบาย) · เอกสารสาย GM + กติกาบ้าน ("คอนโซลสะพานเป็น cp874" มาหลายรอบ) · 🔴 และมี**ที่สี่**ที่จดหมาย GM-035 ไม่ได้ลิสต์: `runtime_console.py:122,126-133` เปิดคอนโซลด้วย `SetConsoleOutputCP(65001)` แล้ว `open("CONOUT$", "w", encoding="utf-8", errors="replace")` · ผลไม่ใช่เรื่องความเรียบร้อย: คอนโซลที่เข้ารหัสอักขระไม่ได้ทำให้ `print` โยน `UnicodeEncodeError` และเพราะ `_Mirror.write` เขียนคอนโซล (`:45`) **ก่อน** ไฟล์ mirror (`:46`) บรรทัดนั้นจะไม่ถูกบันทึกที่ไหนเลย
+
+- objective: บนสะพาน ตอนเซิร์ฟเวอร์รันอยู่จริง สี่ค่านี้คือค่าอะไร -- `sys.stderr.encoding` · `sys.stdout.encoding` · `os.environ.get("PYTHONIOENCODING")` · `locale.getpreferredencoding(False)` · หนึ่งข้อเท็จจริงของเครื่อง วัดครั้งเดียว **ไม่ได้พิสูจน์ว่าไฟล์ไหนถูกหรือผิด**
+- db: สำเนา `state\run_gt145.sqlite3` · 🔴 ห้ามเปิด canonical `state\pirateforce.sqlite3` · sha256 ก่อน-หลังต้องได้ `673f4bfb1c35ec390d6ed3b0c1fe3f581b20c6895ace9183c86a5971bccc9708` ทั้งสองครั้ง
+- server args: `py -3 -u -m pirateforce_foundation.app --db state\run_gt145.sqlite3` · 🔴 ห้ามมีแฟล็ก `--*-scenario` / `--world-census-actors` / `--export-events` · ไม่บูตไคลเอนต์
+- steps:
+    0. `LOCK.txt` ต้องเป็น `RELEASED` แล้วเขียนตัวเองเป็น holder · `py -3 -V` ตอบได้ (ไม่ตอบ = เลื่อนใบ ไม่ใช่ FAIL)
+    1. copy DB · จด sha256 ของ canonical
+    2. บูตเซิร์ฟเวอร์ในหน้าต่างของมันเอง ปล่อยรันไว้ **ห้ามแตะ** · จด boot stamp
+    3. `netstat -ano | findstr "10188 10189"` -> ต้องเห็น LISTENING ทั้งสองพอร์ต · คัดลอกทุกบรรทัด
+    4. เปิดหน้าต่าง PowerShell **ใหม่** ด้วยวิธีเดียวกับหน้าต่างที่บูตเซิร์ฟเวอร์ (shortcut/profile เดียวกัน) แล้ว `cd` รากรีโป · **จดว่าเป็นหน้าต่างใหม่หรือหน้าต่างเดียวกับเซิร์ฟเวอร์** (จดอย่างเดียว ไม่ต้องตีความ)
+    5. รันบรรทัดนี้ **ตามตัวอักษร**:
+       `py -3 -c "import sys,os,locale;print('PF_ENC stderr=%r stdout=%r PYTHONIOENCODING=%r locale=%r' % (sys.stderr.encoding, sys.stdout.encoding, os.environ.get('PYTHONIOENCODING'), locale.getpreferredencoding(False)))"`
+       ทั้งบรรทัดเป็น ASCII ล้วนโดยตั้งใจ -- ถ้าคอนโซลเป็น cp874 strict จริง โพรบที่มีอักขระนอก ASCII จะฆ่าการวัดของตัวเอง
+       🔴 **ห้าม redirect ห้าม pipe** (`>` `|` `Out-File` `Tee-Object` `Out-Host` `Select-String`) -- pipe เปลี่ยนค่า `sys.stdout.encoding` จริง ๆ ⇒ ผลที่ผ่าน pipe ใช้ไม่ได้ · แล้ว `echo $LASTEXITCODE` ต้องได้ `0`
+    6. รันต่อ คัดลอกผลด้วย: `chcp` และ `py -3 -V`
+    7. **คัดลอกตัวอักษร** จากคอนโซล (mark & copy) ไม่ใช่ถ่ายรูป ไม่ใช่พิมพ์ตาม -> วางลงช่อง result ดิบ ๆ
+    8. `netstat` ซ้ำข้อ 3
+    9. Ctrl+C ปิดเซิร์ฟเวอร์ · จด sha256 canonical ซ้ำ · **teardown ภายใน 60 นาทีนับจาก boot stamp** (`PANYA-ORDER 2026-08-29T09:30+07:00` ข้อ ① ลดเพดานจาก 180 เหลือ 60 สำหรับรอบ unattended · ใบนี้กินเวลา ~15 นาทีจึงอยู่ในเพดานสบาย ๆ) · ปลด LOCK เป็น `RELEASED` · 🔴 ห้าม commit เอง
+- pass criteria: 🔴 สองชั้นแยกกัน ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น
+    wire/DB (headless ล้วน ไม่ต้องมีคนหน้าจอ):
+      (ก) `netstat` ทั้งก่อนและหลังโพรบ เห็น LISTENING ทั้ง `10188` และ `10189` ⇒ วัดตอนเซิร์ฟเวอร์รันจริง
+      (ข) บรรทัด `PF_ENC` ออก **ครั้งเดียว** และ `$LASTEXITCODE` = `0`
+      (ค) สี่ค่าอยู่ในช่อง result แบบคัดลอกดิบ ครบสี่คีย์ **ไม่มีคีย์ไหนเว้นว่าง** · ค่าที่ไม่ได้ตั้งต้องเป็นตัวอักษร `None` เขียนออกมาเต็ม ๆ
+      (ง) `chcp` · `py -3 -V` · คำตอบข้อ 4 (หน้าต่างไหน) บันทึกครบ -- ใบปิดที่สี่ค่า สามอย่างนี้คือบริบทที่กันการต้องรันซ้ำอีกรอบ
+      (จ) sha256 canonical เท่าเดิมก่อน-หลัง · `SELECT max(lease_generation) FROM sessions;` บน**สำเนา** เท่าเดิมก่อน-หลัง (ใบนี้ไม่ส่งเฟรมใด ๆ ไม่มีแถวที่ `selected_character_id IS NOT NULL`)
+    client-observable: 🔴 **ใบนี้ไม่มีชั้นนี้ -- N/A และนี่คือเหตุผล** ไม่มีไคลเอนต์ถูกบูต ไม่มีล็อกอิน ไม่มีตัวละคร ไม่มีอะไรถึงจอผู้เล่นแม้แต่พิกเซลเดียว · สิ่งเดียวที่อยู่บนจอคือหน้าต่างคอนโซล ซึ่งเป็นข้อเท็จจริงของเครื่องที่อ่านได้แบบ headless **ไม่ใช่หลักฐานชั้น client-observable** ⇒ **ไม่ต้องมี `OBSERVER_CONFIRMED` และห้ามรอมัน** · กฎบันทึกสีป้ายชื่อทุกป้ายในเฟรม (คำสั่งเจ้าของ 2026-08-25, R163) **ไม่ใช้กับใบนี้ เพราะไม่มีเฟรมและไม่มีป้ายชื่อเลย** -- ไม่ใช่การขอยกเว้น · 🔴 ห้ามใช้ผลใบนี้อ้างว่าอะไรปรากฏหรือไม่ปรากฏบนจอ
+- nonclaims:
+    1. ไม่อ้างค่าของ `sys.stderr` **ภายในโปรเซสเซิร์ฟเวอร์หลัง `install_runtime_console` ทำงานแล้ว** -- ตรงนั้น `sys.stderr` เป็น `_Mirror` (`runtime_console.py:84-85`) เป็นคำถามคนละใบ ⇒ อยากได้ต้องเปิดใบใหม่ ห้ามยัดเข้าใบนี้
+    2. ไม่อ้างอะไรกับ stdout ที่ถูก redirect/pipe (ใบนี้วัดกรณีคอนโซลล้วน) และไม่อ้างว่าค่านี้เท่ากับค่าบน CI -- `gate-windows.yml` **บังคับ** ค่า ไม่ได้วัด (`:160-165` ยืนยันตัวเองบน runner ไม่ใช่บนสะพาน)
+    3. ผู้เทส **ไม่ต้องตีความ และไม่แก้ไฟล์ใด ๆ** รายงานสี่ค่าดิบอย่างเดียว การตัดสินว่าไฟล์ไหนผิดเป็นของ chief
+    4. **ผลลบมีค่าเท่าผลบวก** -- ค่าที่ออกมาไม่ตรงคำทำนายสักข้อคือคำตอบของ `GM-035` ไม่ใช่ความล้มเหลว · โพรบรันไม่ได้ / exit != 0 = **เลื่อนใบ ไม่ใช่ FAIL**
+    5. ไม่บล็อกสาย GM -- `console_safe(text, stream)` ถามสตรีมเองอยู่แล้ว เดินต่อได้ทุกคำตอบ
+
+**คำทำนาย (เป็นคำทำนาย ผิด = ผล ไม่ใช่ความล้มเหลว):** `PYTHONIOENCODING` = `None` · `locale.getpreferredencoding(False)` = `cp874` · `sys.stdout.encoding` = `sys.stderr.encoding` = `utf-8` เมื่อสตรีมต่อกับคอนโซลจริง (Windows ข้าม code page เว้นแต่ตั้ง `PYTHONLEGACYWINDOWSSTDIO=1` ซึ่ง `gate-windows.yml:54` ตั้ง แต่สะพานอาจไม่ตั้ง)
+
+**คำตอบแต่ละแบบแปลว่าอะไร (สำหรับคนอ่านผล ไม่ใช่งานของผู้เทส):**
+- **ไม่ใช่ `cp874`** ⇒ `gate-windows.yml:53` กำลังทดสอบเงื่อนไขที่ไม่มีอยู่บนสะพาน · ไฟล์นั้นเป็นเขต chief ตัดสินเองว่าแก้หรือคงไว้เป็นการเผื่อ
+- **เป็น `cp874`** ⇒ `runtime_console.py:26` ที่คืนค่าคงที่ `utf-8` คือคำรายงานเท็จที่รอคนเชื่อ · คนที่ถามสตรีมจะพับน้อยเกินไป -> `print` โยน -> บรรทัดหายทั้งคอนโซลและ mirror (`:45` ก่อน `:46`)
+- **`PYTHONIOENCODING` = `None`** ⇒ `cp874` ในรีโปมีที่มาเดียวคือไฟล์ CI · ประโยค "คอนโซลสะพานเป็น cp874" ไม่เคยมีการวัดรองรับ
+- **stdout != stderr** ⇒ ผลที่ไม่มีที่ไหนในสี่ที่พูดถึง ⇒ เปิดใบใหม่ ห้ามยัดเข้าใบนี้
+
+**ลิงก์ (ผู้เทสไม่ต้องอ่านเพื่อรันใบ):** `notes_to_chief/20260829_1105_LANE-GM-CORE-REQUEST-GM-035-what-encoding-is-the-console.md` · `notes_to_chief/20260829_1221_CHIEF-REPLY-LANE-GM-034-answered-differently-and-035-queued.md` ข้อ ⑤ · `src/pirateforce_foundation/runtime_console.py:26,45-46,84-85,122,126-133` · `.github/workflows/gate-windows.yml:53,160-165` · `docs/GM_LANE.md:3522` · `src/pirateforce_foundation/gm/login_scene_override.py:71`
+
+**ผู้เปิดใบ: chief (สาย E) ตามจดหมาย `20260829_1221` ข้อ ⑤** -- ผลกลับมาที่ chief และสาย GM บริโภค
+
+### result (ผู้เทสกรอก)
+```
+
+```
+
+---
+
+## GT-146 PICKUP-CLICK-OPCODE-CAPTURE-001 [attended, in-game]: คลิกซ้ายลงบน element ของตกที่เซิร์ฟเวอร์เราส่งเอง แล้ว **ไคลเอนต์ยิงเฟรมอะไรออกสาย** -- ใบ capture ที่ปลด `RE-125`/`GT-124`/M5  [PENDING · เปิดโดย LANE-B รอบ `uq2lxw2`]
+
+> NUMBERING: grep ก่อนจอง (2026-08-29T13:0x+07:00) `GT-146`/`RE-146` = 0 hit ทั้งสองคิว + `archive/` + `notes_to_chief/` · เลขสูงสุดที่ใช้ไป = 145 (`RE-` ใบจริงสูงสุด = `RE-132`) · ตัวนับเดียวสองไฟล์
+> 🔴 **`GT-060` มีอยู่แล้วและห้ามลบ**: ถาม claim เดียวกัน สถานะ `BLOCKED-CONDITIONAL` บูตไม่ได้เพราะไม่มีท่า spawn drop-object และขอ "โมเดลที่คลิกได้" ซึ่ง `GT-045` ปิดไปแล้วว่า**ไม่มีโมเดล** ⇒ ใบนี้เติมท่ายิงและเลิกขอโมเดล · **จดหมาย chief `20260829_1221` ที่ว่า "ไม่มีใครเปิดใบนั้น" คลาดเคลื่อน** · ได้ผล P1/P2/P3 เมื่อไร ให้ปิด `GT-060` แบบ superseded-by `GT-146` โดยระบุชื่อ ห้ามลบก่อนมีผล
+> ที่มาสามบรรทัด (รายละเอียดอยู่ในจดหมาย `20260829_13xx_LANE-B-*`): `RE-125` ปิดแบบ bounded-negative — opcode ยัง UNOBSERVED, `0x4543` derive จาก name-hash, id จริงอยู่ใน virtual-zero tail ของ `.data` ⇒ เปิดอิมเมจไม่ช่วย · `GT-046` static: request ก๊อป `+0x14` จาก **live runtime drop-object** ⇒ ไม่มีของ pre-placed ให้คลิก ต้องส่ง element เอง · มอนดรอปใช้ไม่ได้วันนี้ (`Bg0002` ตีไม่ติด · หุ่น `916` `n_DROPS_*`=0) ⇒ เหลือเลน ground-loot อย่างเดียว
+
+### objective (ข้ออ้างเดียว)
+คลิกซ้ายลงบนจุดของ element ของตกที่บูตนี้ส่งจริง **ไคลเอนต์ยิงเฟรมขาเข้าออกมาไหม และถ้ายิง nested vital id คือค่าอะไร**
+
+### db · server args (เป๊ะ)
+สำเนา `state\run_gt146.sqlite3` (+ backup `pirateforce_before_GT-146_<stamp>.sqlite3`) · **ห้ามเปิด canonical** · sha256 เทียบ `CANON_SHA.txt` ก่อน-หลัง
+```
+py -3 -u -m pirateforce_foundation.app --db state\run_gt146.sqlite3 --ground-loot-hypothesis-scenario scenarios\ground_loot_hypothesis_bit08_render.json --pickup-listener-hypothesis-scenario scenarios\pickup_listener_hypothesis_decode_probe.json
+```
+คู่นี้บูตร่วมกันได้ (Panya 20260824 1831 §① / 2120 §②) · **สำรอง**: ถ้า `git grep` ไม่เจอเลน listener บน commit ที่จะบูต ให้ตัดสองอาร์กิวเมนต์ท้ายออกแล้วจดว่าบูตเลนเดียว — หลักฐานหลักคือ raw capture ไม่ใช่บรรทัด listener · ห้ามพ่วง `--*-scenario` อื่น · ห้ามแก้โค้ด/payload
+
+### ขั้นตอน
+0. มาตรฐานบ้าน (LOCK · boot stamp · sha canonical · copy DB) · resolve commit เขียว แล้วยืนยันบน `<SHA>` ที่บูตจริง: `git show origin/ci-status:ci/<SHA>.json` = success · `git grep -n "ground-loot-hypothesis-scenario" <SHA> -- src/pirateforce_foundation/app.py` · `git cat-file -e <SHA>:scenarios/ground_loot_hypothesis_bit08_render.json` · ซ้ำกับเลน listener · **ห้ามใช้ `--help` เป็นหลักฐาน**
+1. server ก่อน client เสมอ · เข้าเกม (ปุ่มกลางจาก 5 ปุ่มแถวล่าง · ซ้ายสุด = ลบตัวละคร ห้ามกด)
+2. **อัดวิดีโอตั้งแต่ก่อนเข้าแมพเสร็จ** — เฟรมของตกออก **ครั้งเดียวต่อเซสชัน** ที่ TargetPos แรกหลัง runtime ack · ออกตอนไม่ได้อัด = NO-RESULT · **ห้ามพิมพ์ตัวอักษรตลอดรอบ**
+3. ในแมพ **ห้ามแตะ `W/A/S/D` และ `Q`/`E`** (ยิง `TargetPosVital` ทิ้ง) · จัดกล้องด้วย **คลิกขวาค้างลาก** เท่านั้น · หันไปทาง +X · **S0** ให้เห็น X/Y บน HUD
+4. **ยิง:** กด `W` สั้นที่สุด (~120 ms) ครั้งเดียว · จดเวลา (+07:00) และ `t` วิดีโอ · จด `X0/Y0` · ตาอยู่ที่จอ (ฝุ่น ~0.45 s · ป้าย 0.2-0.4 s)
+5. **คลิก 1 (ตอนยังเห็น):** เลื่อน cursor ไปที่ฝุ่น/ป้าย คลิกซ้ายหนึ่งครั้ง · จดเวลา · หายก่อนคลิกทันไม่ใช่ความผิดพลาด
+6. เดินไปทาง X เพิ่มจนราว `X0+30` (Y คงเดิม) · hover แล้ว **จดว่า cursor เปลี่ยนรูปไหม** · **S1**
+7. **คลิก 2-4 (คลิกทั้งที่มองไม่เห็น):** ทีละครั้ง ห่าง ~5 วิ · จดเวลาทุกครั้ง · **S2** หลังคลิกสุดท้าย 10 วิ
+8. NO-CRASH ด้วยคลิกขวาค้างลาก (ห้าม `Q`/`E`) · **S3** · ออกเกมด้วย X มุมขวาบน
+9. ปิด server (**restart ก่อนบูตถัดไปเสมอ**) · เก็บ `capture_gt146_<stamp>\capture_v141\GAME_LIVE.txt` ทั้งไฟล์ + console `.out`/`.err` + sha256 ทุกไฟล์ · `PRAGMA integrity_check` · **teardown เสมอ** · sha canonical ซ้ำ · ห้าม commit เอง
+10. ค้นในผล (คัดดิบ ห้ามตีความ): `findstr /N /C:"RECV" GAME_LIVE.txt` · `/C:"0x4543"` · `/C:"NEAR_ONCE"` · `/C:"FAR_ONCE"` · `findstr /N /C:"PICKUP" server_console_live.*.txt`
+
+### pass criteria (สองชั้น 🔴 ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น)
+**wire** — (ก) มี `NEAR_ONCE` + `FAR_ONCE` (54 B) = ยืนยันว่ามี element ถูกส่ง (precondition ไม่ใช่ claim) ไม่มี = P4 · (ข) สำมะโน `RECV` ทั้งไฟล์ แล้วเทียบหน้าต่าง ±2 วิ รอบคลิกแต่ละครั้งกับ baseline ก่อนคลิก ⇒ (1) มี id `0x4543` · (2) มี id อื่นที่ไม่มีใน baseline (คัด id + hexdump เต็ม) · (3) ไม่มีเฟรมนอก baseline · (ค) ถ้าบูตเลน listener: หนึ่งบรรทัดต่อเฟรม พร้อม `object_ref_u32`/`opaque_u8`/raw hex จำนวนตรงกับจำนวนคลิก — **ไม่มีบรรทัด listener ตัดสินอะไรไม่ได้** (id ที่ไม่ match ไหลลง frozen dispatch เงียบ) ⇒ **capture คือกรรมการ** · (ง) DB สำเนา `integrity_check`=ok · `sessions` +1 ต่อการเข้าเกม · sha canonical ตรงก่อน-หลัง
+ชั้นนี้ตอบไม่ได้: มีอะไรบนจอไหม คลิกโดนอะไรไหม
+**client-observable** — วิดีโอต่อเนื่อง + `S0..S3` full-res พร้อม sha256 · ตอบสามช่องเป็นภาษาคน: ฝุ่นขึ้นไหมกี่วิ · ป้ายขึ้นไหมอ่านว่าอะไรกี่วิ · cursor เปลี่ยนรูปตอน hover ไหม · หลังแต่ละคลิก: จอเปลี่ยนไหม มีข้อความระบบไหม (คัดเป๊ะ + สี) · **จดสีป้ายชื่อทุกป้ายทุกภาพ** อ่านจาก full-res เท่านั้น ไม่มีป้ายเขียน `none` · **จดสีอย่างเดียว ห้ามเดาสาเหตุ** (`RE-067`) · NO-CRASH/CRASH
+ชั้นนี้ตอบไม่ได้: เฟรมออกจากไคลเอนต์จริงไหม id อะไร
+
+### คำทำนาย (ผิด = ผล ไม่ใช่ความล้มเหลว)
+**P1** เจอ `0x4543` ⇒ id ที่ derive ไว้ CONFIRMED · **P2** เจอ id อื่น ⇒ REFUTED **และได้ id จริงมาแทน มีค่าเท่า P1** · **P3** คลิกครบแล้วเงียบ ⇒ ผลลบที่วัดแล้ว มีค่าเท่าผลบวก (redirect = ใบ static ว่าใคร populate ลิสต์ของ `DropThingModule_Client`) 🔴 **ระยะไม่ใช่คำอธิบาย**: 30 หน่วย เทียบ `RANGE_PICKUP 600.0` · **P4** ไม่มี `NEAR_ONCE`/`FAR_ONCE` ⇒ NO-RESULT แยกอะไรไม่ได้ ห้ามอ่านเป็นผลลบเรื่อง opcode
+🔴 **ผลลบไม่ปิดใบ** P3/P4 ห้ามปิดใบ ห้ามลบวิดีโอ (กติกาผลลบไม่ถูกแตะโดย `PANYA-ORDER 20260829 0930`)
+
+### กฎจุดเกิด (`PANYA-ORDER 0930` ข้อ ④)
+พิกัดของตก **อิง trigger** ⇒ element โผล่ที่ `trigger+30X` = ใกล้ ในระยะ (30 ≪ 600) และเยื้องหน้าโดยโครงสร้าง **ไม่ต้อง seed พิกัดลง DB และไม่มีตารางวางวัตถุให้ mine** (`GT-046` จ็อบ 5: `+0x14` มาจาก runtime drop-object ไม่ใช่โครงสร้างฉาก) · ค่าคาดหมายจาก `GT-045`: trigger `X -8553.947 Y -2579.689 Z 186.000` (คาดหมาย ไม่ใช่เกณฑ์)
+
+### nonclaims
+1. ไม่พิสูจน์ว่าเก็บ**สำเร็จ** หรือของเข้ากระเป๋า (`GT-142`) · เซิร์ฟเวอร์ไม่ตอบอะไรในใบนี้ ⇒ ทุกปฏิกิริยาบนจอเป็นพฤติกรรมไคลเอนต์ล้วน
+2. ไม่อธิบายการเก็บของที่**มอนดรอป** (`FightingDropModule_Client`/`FightingDropNotify` ยัง NOT_OBSERVED)
+3. ไม่ตอบว่า element อยู่ในลิสต์นานแค่ไหน/ทำไมป้ายหาย (`GT-132`) · ไม่ตัดสินสาเหตุของสีป้าย (`RE-067`)
+4. **ไม่นับเป็นเวอร์ชัน** — รอบที่รันใบนี้ ship ศูนย์บรรทัด แฟล็กเป็นเครื่องมือวัด · ไม่ต่อ production call site ใด ๆ (`RE-125` ห้าม `0x4543` บน production path)
+5. การเทียบ `object_ref_u32` กับ element key = งานตอนบริโภคผล ผู้เทสไม่ต้อง decode
+
+### links
+`RE-125`/`RE-130` (`CLIENT_RE_QUEUE.md`) · `notes_to_chief/20260828_1112_RE-125-RESULT-NO-CAPTURED-PICKUP-OPCODE.md` · `notes_to_chief/20260829_1221_CHIEF-ASK-COO-gt124-opcode-forbidden-and-drops-pruned.md` · `GT-060`/`GT-124`/`GT-132`/`GT-142` · `archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md` (`GT-045` `GT-046`) · `external/PF_FIELD_VALIDATION.tsv:102-103`
+
+### result (ผู้เทสกรอก)
+P1/P2/P3/P4 · เวลาคลิกทุกครั้ง (+07:00 และ `t` วิดีโอ) · path + sha256 ของ log/console/ภาพ/วิดีโอ · สำมะโน `RECV` + hexdump ช่วงคลิก · บรรทัด listener ทั้งบรรทัด · สามช่อง ฝุ่น/ป้าย/cursor · สีป้ายทุกป้ายทุกภาพ · NO-CRASH/CRASH · sha canonical ก่อน-หลัง · `integrity_check`
