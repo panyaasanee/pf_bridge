@@ -1,5 +1,21 @@
 # 🔴 อ่านไฟล์นี้ก่อนจะ "ไปถอด" อะไรใหม่จากไบนารี
 
+## 🔴 V2 checkpoint ปัจจุบัน — อ่านส่วนนี้ก่อน V1
+
+**A5 พบ IMAGE/CAPTURE mismatch 4 จุด รวม 386 instances** หลังทาบ effective V2 schema กับ capture ที่ตัดเนื้อหาซ้ำตาม SHA-256 แล้ว ตาราง IMAGE ไม่ถูกแก้ให้เข้ากับ CAPTURE
+
+ลำดับอ่าน:
+
+1. `PF_V2_MANIFEST.md` — namespace, SHA-256 และ checkpoint verification
+2. `PF_V2_HANDOFF.md` — วิธีรวม V1 + overlay โดยไม่สร้าง duplicated output
+3. `PF_V2_FIELD_VALIDATION.md` / `.tsv` — A5 mismatch 4 จุด / 386 instances
+4. `PF_V2_EFFECTIVE_STATUS.md` / `PF_V2_P1_OPEN.tsv` — IMAGE-static Priority 1 CLOSED 250/365, OPEN 115
+5. `PF_V1_MANIFEST.md` / `PF_HANDOFF_V1.md` — ฐาน V1 immutable
+
+⚠️ **ห้ามใช้ `PF_SERIALIZER_FIELDS.tsv` V1 เดี่ยว ๆ เป็นผลล่าสุด** และห้าม append TSV overlay ทุกไฟล์เข้าด้วยกันตรง ๆ: ใช้ `CHANGED` เป็นการแทนที่, `REMOVE*` เป็นการลบ และ `ADD*` เป็นการเพิ่มตามลำดับใน `PF_V2_HANDOFF.md`. Attr serializer 59 รายการมี correction ที่ slot `+0x34`; การเก็บแถว `+0x18` เดิมร่วมกับแถว correction จะสร้างข้อเท็จจริงซ้ำ/ผิด
+
+ผล V2 เป็น local-only ใน `pf_bridge\external` และถูก repository ignore อยู่: ผู้ที่เข้าถึงเครื่องนี้อ่านได้ แต่ clean clone/remote จะไม่ได้ไฟล์ชุดนี้โดยอัตโนมัติ
+
 > ### 🔴 โฟลเดอร์ไหนเก็บอะไร — กฎตัดสินประโยคเดียว (2026-08-24)
 > **ถอดมาจากอิมเมจ `GameClient.local.bin` (โค้ดที่เกม *รัน*) → `pf_bridge\external\`**
 > **ถอดมาจากไฟล์ข้อมูลเกม `.pc_` / `.lu_` / `.npc` (เนื้อหาที่เกม *อ่าน*) → `pf_bridge\gamedata\`**
@@ -12,7 +28,7 @@
 > **ห้ามเปลี่ยนชื่อจนกว่า GT-054 จะผ่าน** (`tools\pf_external_registry.py` ฮาร์ดโค้ด `pf_bridge\external` ไว้)
 
 
-**โฟลเดอร์นี้คือชุดส่งมอบงาน RE ของ Codex — 8 ตาราง รวม 17,626 แถว**
+**V1 core ของโฟลเดอร์นี้มี 8 ตาราง รวม 17,626 แถว; ผลล่าสุด V2 อยู่ในรูป additive overlays + derived indexes + manifest ตามรายการด้านบน**
 มันแกะไคลเอนต์ไปแล้วเป็นวัน ๆ และ **คำตอบของคำถามหลายข้อที่เรากำลังจะเปิดใบใหม่ อยู่ในนี้แล้ว**
 
 ## กติกาข้อเดียวที่ต้องทำทุกครั้ง
