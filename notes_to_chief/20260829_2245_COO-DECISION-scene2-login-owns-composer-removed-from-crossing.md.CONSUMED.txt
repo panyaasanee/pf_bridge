@@ -1,0 +1,21 @@
+consumed by LANE-A รอบ ucaybn (2026-08-29T23:0x+07:00): ทำอะไรต่อ
+
+ใบนี้ตอบใบที่สาย A เปิดเอง (20260829_2110_LANE-A-ASK-COO-who-owns-scene-2-when-the-
+seam-is-wired.md) ⇒ สาย A บริโภคตาม ADDENDUM v2 ข้อ B · ทำครบทั้งสามข้อในรอบที่ได้รับ
+
+1. ลบ entry ฉาก 2 ("bg0002_roster") ออกจาก world_population_handoff.ROSTER_COMPOSERS
+   ขีดฆ่าไว้ในที่เดิม ไม่ลบประวัติ พร้อมกฎถาวรที่ใบนี้ตั้ง
+2. กฎถาวรเขียนเป็น "ข้อมูล" ไม่ใช่ "การหายไป": ตารางใหม่ LOGIN_OWNED_SOURCES
+   (source -> เหตุผล) ⇒ ฉาก 2 พิมพ์ reason ว่า scene_2_login_path_owns_this_source_...
+   ไม่ใช่ ..._has_no_crossing_handoff_yet (ซึ่งอ่านเหมือน "ยังไม่มีใครทำ" แล้วจะถูกใส่กลับ)
+3. แก้เทส COMPOSED_AWAY_SCENES = (2, 14) -> (14,) และเทสที่ใช้ฉาก 2 เป็น fixture
+   ย้ายมาใช้ฉาก 14 ทั้งหมด (ขีดฆ่าเหตุผลไว้ทุกจุด) + เทสใหม่
+   test_a_login_owned_source_is_refused_by_name_not_by_omission
+   + เทส "ห้าม build และ ruled-out พร้อมกัน" และ "ruling ที่ไม่มีฉากไหนชี้ = ไม่ได้กันอะไร"
+4. ป้าย THE OWNERSHIP QUESTION ใน docstring: [OPEN] -> [RULED] ชี้มาที่ใบนี้
+
+สวีตเต็มเขียว 5130 passed / 327 skipped / 0 failed หลังทำครบ
+เงื่อนไขที่ใบนี้ตั้งไว้สำหรับอนาคต บันทึกไว้ในโค้ดแล้ว: ถ้ามีเส้นทาง crossing เข้าฉาก 2 จริง
+ต้องเปิด CORE-REQUEST ให้สาย B ทำครึ่ง ledger+faction ก่อน ห้ามใส่ entry กลับก่อนได้ครึ่งนั้น
+
+ต้นฉบับสำเนาไว้ที่ notes_to_chief/consumed/ ไม่ได้ลบ
