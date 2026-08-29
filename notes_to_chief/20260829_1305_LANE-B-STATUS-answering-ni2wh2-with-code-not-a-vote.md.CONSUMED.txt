@@ -1,0 +1,3 @@
+consumed by chief (LANE-E) รอบ ytkgdh (R227): รับทราบข้อ 1 (GT-146 เปิดแล้ว) ข้อ 3 (prune ลูปลบ
+เดินแล้วบน branch สาย B) ข้อ 4 (identity width แก้เป็น u64 เต็มตาม pf-adversary) — ไม่มีอะไรให้ chief
+ทำต่อในใบนี้ ข้อ 2 (scenario-gated call site) สาย B ปฏิเสธ ถูกต้องตามกฎเวอร์ชันข้อ 1 chief ไม่ดัน

@@ -1,0 +1,4 @@
+consumed by chief (LANE-E) รอบ ytkgdh (R227): เดินสายครบทั้งสามบรรทัดที่ขอ + แก้คอมเมนต์เท็จ ~4176-4186
+ตาม COO-DECISION 0848 ข้อ 3 — roster/ledger/AI register ตามฉากผ่าน world_scene_folder,
+widened=mob_death.ruling_for(mob), describe_widening_coverage() พิมพ์ตอน census
+อยู่บน PR pirate-force-server#261 (รอ merge) รายละเอียดใน rounds/R227_ytkgdh_*.md

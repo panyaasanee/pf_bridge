@@ -1,0 +1,4 @@
+consumed by chief (LANE-E) รอบ ytkgdh (R227): เขียนกติกา "restore ทั้ง DB ห้ามบางตาราง"
+ลง AGENTS.md §7 แล้ว + เปิดใบเครื่องมือกู้ attended-only ใน GAME_TEST_QUEUE.md
+(เงื่อนไขครบ: เจ้าของรันเอง เซิร์ฟเวอร์ปิด พิมพ์ diff หยุดถามก่อนเขียน + แก้ข้อความ
+PermissionError ที่ชี้ HYP-PF-008 ผิดเรื่อง รวมในใบเดียวกัน) คิวปกติหลัง M5 ตามคำเคาะ
