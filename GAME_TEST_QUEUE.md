@@ -3704,7 +3704,70 @@ census ตอน arrival ส่งไป **วัดจาก `frame` ซึ่�
 1. **เลข 115 ไม่ใช่เลขของบูตไร้แฟล็ก** — 115 คือขนาดตาราง placement ที่แช่ไว้ · สิ่งที่บูตไร้แฟล็ก **ประกอบได้จริง** คือ **108** (`SHIPPED_CENSUS_COUNT`, `tests/test_world_wipe_headless_proof.py:156`, ที่มา RE-128/CLINE) ⇒ เกณฑ์ที่ถูกคือ **108/108**
 2. **ชั้นคอนโซลตอบคำถามนี้ไม่ได้เลย** — บรรทัด `*_CENSUS_RECOMPOSE actor_count=N` พิมพ์ `world_census_actor_count` ที่อ่านจาก session state **ก่อน** ประกอบเฟรม ⇒ เป็น **INPUT ไม่ใช่ผลลัพธ์หลังเหตุการณ์** (รอบ `rbuta4` ถอนคำอ้างนี้ไปแล้วเอง) มัน grep ได้ แต่ยืนยันได้แค่ "เส้นทาง recompose ถูกเดิน"
 ⇒ **สิ่งที่จะปิดเกณฑ์นี้ได้จริง** คือบรรทัดคอนโซลที่นับ **จำนวน body ในเฟรมที่ประกอบเสร็จแล้ว** แล้วพิมพ์หลังประกอบ · จุดพิมพ์อยู่ใน `runtime.py` ซึ่ง **เป็นเขตของ chief** ⇒ สาย B เปิดเป็น CORE-REQUEST ใน body ของ `pirate-force-server#228` แทนการแก้เอง
-🔴 **สาย B ไม่เขียนบรรทัด "พร้อมสำหรับ GT-084-R2" ในรอบนี้ และจงใจไม่เขียน** — ชั้น wire ปิดแล้วจริง (`test_world_wipe_headless_proof.py` 7 ใบ วัดจาก `frame` ที่ `v141:7755` ส่งออก ไม่ใช่ `pc`) แต่ชั้นที่เกณฑ์ขอ (คอนโซล) ยังไม่มีของให้ grep และเป้าหมายของใบก็เพิ่งหายไป ⇒ เขียน "พร้อม" ตอนนี้คือคำอ้างที่รอบ `rbuta4` เพิ่งถอนไปเอง
+~~🔴 **สาย B ไม่เขียนบรรทัด "พร้อมสำหรับ GT-084-R2" ในรอบนี้ และจงใจไม่เขียน** — ชั้น wire ปิดแล้วจริง (`test_world_wipe_headless_proof.py` 7 ใบ วัดจาก `frame` ที่ `v141:7755` ส่งออก ไม่ใช่ `pc`) แต่ชั้นที่เกณฑ์ขอ (คอนโซล) ยังไม่มีของให้ grep และเป้าหมายของใบก็เพิ่งหายไป ⇒ เขียน "พร้อม" ตอนนี้คือคำอ้างที่รอบ `rbuta4` เพิ่งถอนไปเอง~~
+
+🆕 **RIDER-084-D (เจ้าของใบ LANE-B · รอบ `z096sw` · 2026-08-29T18:5x+07:00) — ครึ่งคอนโซลของเกณฑ์ addendum-G ปิดแล้ว วัดจริง · ไม่แก้ objective/เกณฑ์ผ่านของใบแม่แม้แต่ตัวอักษรเดียว**
+
+รอบก่อนเขียนไว้เองว่า "สิ่งที่จะปิดเกณฑ์นี้ได้จริงคือบรรทัดคอนโซลที่นับจากเฟรมที่ประกอบเสร็จแล้ว · จุดพิมพ์อยู่ใน `runtime.py` ซึ่งเป็นเขตของ chief" — **ข้อหลังผิด**: กฎบัตรสาย B ข้อ G มอบบล็อก `bar_frames`/`death_frames` ให้สายนี้แก้ได้หนึ่งครั้งเพื่องานนี้โดยตรง ⇒ รอบนี้แก้เองแทนที่จะรอ CORE-REQUEST
+
+**🟢 พร้อมสำหรับ GT-084-R2 — เฉพาะครึ่ง world-wipe ของเกณฑ์ addendum-G** (ไม่ใช่ทั้งใบ ดูข้อจำกัดท้ายบล็อก)
+
+🔴 **อ่านย่อหน้านี้ก่อน — ฉบับแรกของริเดอร์นี้เขียนเกินหลักฐาน และ pf-adversary จับได้ก่อน push**
+ฉบับแรกยกบรรทัด `actor_count=108 wire_actors=108` เป็นหลักฐานว่า "โลกรอด" · **นั่นเป็น tautology ไม่ใช่การวัด**:
+เมื่อ compose สำเร็จ `wire_actors` เท่ากับ `actor_count` เสมอโดยพีชคณิต (recompose เรียก
+`build_world_population(legacy, anchor, count)` ด้วย `count` ตัวเดียวกัน และ `census_order` อ่านตารางนิ่ง
+ที่หดไม่ได้) ⇒ มิวแทนต์ที่ **ไม่อ่านสายเลย พิมพ์ input ซ้ำ** เขียวทั้งสวีต
+🟢 **สิ่งที่ทำให้บรรทัดนี้มีค่าจริงคือของที่แก้หลังจากนั้น** ไม่ใช่เลข 108/108:
+บรรทัดถูกย้ายออกมา **นอก `if` และนอก `try`** ⇒ สองเส้นทาง fallback (compose โยน / ไม่มี anchor ซึ่ง
+คอมเมนต์ใน `runtime.py` เองบอกว่า "เกิดในการเล่นปกติ") **เคยส่งเฟรม one-entry ออกสาย = ตัว world wipe เอง
+แล้วคอนโซลเงียบสนิท** — นั่นคือสภาพเดียวที่ผู้เทสต้องการบรรทัดที่สุด และเป็นสภาพเดียวที่ไม่มีบรรทัด
+
+grep token ที่ผู้เทสต้องใช้ (ASCII ล้วน · cp874 ปลอดภัย):
+
+```
+MOB_COMBAT_BAR_CENSUS_RECOMPOSE        actor_count=<input>  wire_actors=<measured>  target=0x....
+MOB_DEATH_FRAMES_CENSUS_RECOMPOSE_DYING actor_count=<input> wire_actors=<measured>  target=0x....
+MOB_DEATH_FRAMES_CENSUS_RECOMPOSE       actor_count=<input> wire_actors=<measured>  target=0x....
+```
+
+🔴 **อ่านสองฟิลด์นี้ให้ต่างกัน ไม่ใช่ฟิลด์เดียวกันเขียนสองครั้ง**
+- `actor_count=` **ของเดิม ความหมายเดิม ไม่เปลี่ยน** = `world_census_actor_count` อ่านจาก session state **ก่อน** ประกอบเฟรม (INPUT) · เก็บชื่อเดิมไว้เพราะใบนี้กับ runbook สั่ง grep คำนี้อยู่แล้ว การเปลี่ยนความหมายเงียบ ๆ แย่กว่าดีเฟกต์ที่กำลังแก้
+- `wire_actors=` **ของใหม่รอบนี้** = จำนวนที่ **collection header ของเฟรมที่ส่งออกจริงประกาศ** อ่านหลังประกอบ ด้วย `world_population_handoff.wire_count_of` ตัวเดียวกับที่ headless proof เรียก และ**อ่านต่อเมื่อ `frame == legacy.frame_pc(pc)` ผ่านแล้วเท่านั้น**
+- ถ้าอ่านไม่ได้จะพิมพ์ `wire_actors=unmeasured reason=<ชื่อ>` **ไม่เคยพิมพ์ตัวเลขที่เดาไว้** (`frame_is_not_this_pc` / `header_unreadable` / `legacy_refused` / `pc_not_bytes` / `frame_not_bytes`)
+
+**วัดจริงบนบูตไร้แฟล็ก รอบนี้** (สคริปต์ขับ harness เดียวกับ `test_world_wipe_headless_proof.py` · ไม่ใช่ค่าที่เทสคำนวณเอง):
+
+```
+arrival        : WORLD_CENSUS assembled=108/115 wire=108 ... (collection header ประกาศ 108)
+
+--- บูตปกติ compose สำเร็จ (โลกรอด) ---
+ตี 1 ครั้ง      : MOB_COMBAT_BAR_CENSUS_RECOMPOSE        actor_count=108 wire_actors=108 target=0x2068
+ตาย 1 ตัว      : MOB_DEATH_FRAMES_CENSUS_RECOMPOSE_DYING actor_count=108 wire_actors=108 target=0x2068
+                MOB_DEATH_FRAMES_CENSUS_RECOMPOSE       actor_count=108 wire_actors=108 target=0x2068
+compose refusals/skips : ไม่มีสักรายการ
+
+--- 🔴 fallback: compose ถูกปฏิเสธ = world wipe จริง (เมื่อก่อนบรรทัดนี้ไม่มีเลย) ---
+                MOB_DEATH_FRAMES_CENSUS_RECOMPOSE_DYING actor_count=108 wire_actors=1 target=0x2068
+                MOB_DEATH_FRAMES_CENSUS_RECOMPOSE       actor_count=108 wire_actors=1 target=0x2068
+events         : mob_death_frames_census_compose_refused_RuntimeError
+```
+
+⇒ **นี่คือสิ่งที่ผู้เทสต้องอ่านจริง ๆ:** ไม่ใช่ "เห็น 108/108 แล้วสบายใจ" แต่คือ
+**`wire_actors` ต่างจาก `actor_count` เมื่อไหร่ = โลกถูกล้างเมื่อนั้น** · `108 vs 1` คือหน้าตาของ world wipe
+🔴 `state.events` **ไม่เคยถูกพิมพ์ที่ไหนเลยในทรีนี้** (append 276 จุด · print 0 จุด) ⇒ ก่อนรอบนี้
+สัญญาณเดียวที่ผู้เทสมีในสภาพนั้นคือ **การไม่มีบรรทัด** ซึ่งเป็นความผิดพลาดที่ `GT-084` เคยทำมาแล้วครั้งหนึ่ง
+
+⇒ **เกณฑ์ที่ถูกคือ 108/108 ไม่ใช่ 115/115** (ข้อ 1 ของบล็อกบนยังคงเดิมทุกตัวอักษร: 115 คือขนาดตารางที่แช่ไว้ · 108 คือสิ่งที่บูตไร้แฟล็กประกอบได้จริง)
+
+🔴 **สี่ข้อที่บรรทัดนี้ยังไม่ปิด และห้ามอ่านว่าปิด**
+1. **ตอน compose สำเร็จ สองเลขนี้ต่างกันไม่ได้** — มันเป็นเลขเดียวกันโดยพีชคณิต ⇒ `108/108`
+   ยืนยันได้แค่ "เส้นทางเดินและเฟรมที่ส่งคือเฟรมของ pc นั้น" **ห้ามอ่านว่า "นับ body แล้วครบ"**
+   ค่าของบรรทัดนี้อยู่ที่เคส fallback ล้วน ๆ
+2. **`wire_actors` คือจำนวนที่ header ประกาศ ไม่ใช่จำนวน body ที่นับได้** — เฟรมที่ประกาศ 108 แต่ใส่มา 12 ตัวจะพิมพ์ `wire_actors=108` และเป็น world wipe (วัดแล้วโดย pf-adversary: ตัด body เหลือ 12 จาก 108 → บรรทัดยังพิมพ์ 108) · คนที่เห็นเรื่องนั้นคือชั้น headless (`test_world_wipe_headless_proof.py` นับ occurrence ต่อ identity) ซึ่ง**ยังอยู่ครบทุกใบ ไม่ถูกแทนที่**
+3. **บนบูต GM ที่มี diag object สองเลขจะไม่เท่ากันโดยถูกต้อง** — วัดแล้ว: `actor_count=108 wire_actors=113` เพราะ diag object ห้าตัวถูก append เข้า collection ⇒ **`wire_actors` มากกว่า = ปกติบนบูต GM · `wire_actors` น้อยกว่า = wipe** บรรทัดไม่มีฟิลด์แยกสองกรณีนี้ให้ ต้องรู้จากบูตที่ใช้
+4. **ใบ `GT-084-R2` ยังไม่มีเป้าหมายให้คลิก** — `RIDER-084-C` ข้างบนยังคงเดิม: `0x201F` ไม่อยู่ใน roster และที่ยืนอยู่คือหุ่นซ้อมสี่ตัว · การตั้งเป้าหมายทดแทน/สถานะใบเป็นของ chief/COO ⇒ "พร้อม" ข้างบนคือ **พร้อมของเกณฑ์ addendum-G เท่านั้น** ไม่ใช่ "ใบนี้รันได้แล้ว"
+
+โค้ด: `src/pirateforce_foundation/mob_census_wire_count.py` (โมดูลใหม่ของสาย B · ไม่มีแฟล็ก · `production_allowed = True` · ไม่โยนเข้า dispatch เด็ดขาด) · `tests/test_mob_census_wire_count.py` · จุดพิมพ์ใน `runtime.py` (การแก้ครั้งเดียวที่ข้อ G สงวนไว้ให้สายนี้)
 
 
 ### ที่มา -- สิ่งที่เปลี่ยนตั้งแต่รอบแรกของ GT-084 (อ่านก่อนบูต ห้าม re-derive ระหว่างรอบ)
