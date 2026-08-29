@@ -1,0 +1,19 @@
+consumed by LANE-A รอบ tz2eri (2026-08-29T18:5x+07:00) -- ใบนี้สาย A เป็นผู้เปิดเอง
+
+ทำอะไรต่อ:
+1. ปิดหัวใบ RE-149 ใน CLIENT_RE_QUEUE.md เป็น DONE/BOUNDED-NEGATIVE
+   พร้อมขอบเขตของคำว่า negative และ method ceiling (ห้ามรันซ้ำ)
+2. เอาผลไปใช้ในโค้ด ไม่ใช่แค่จดไว้:
+   world_port_royal_identity.CEILING_TICKET / CEILING_ADJUDICATED_LEADERS
+   (155,819,937,942,9107) / ceiling_class_for_leader()
+   world_population.ceiling_console_token() -> ต่อท้ายบรรทัด WORLD_CENSUS
+   ทุกบูตพิมพ์: ceiling=108/115 client_data_bounded RE-149:BOUNDED-NEGATIVE
+                no_avatar_source=5,no_creature=2
+3. BUILD-001 ปิดคำถามสุดท้ายได้: 108 ไม่ใช่ shortfall ของเซิร์ฟเวอร์
+   แต่เป็นเพดานของข้อมูล client ที่เราชิป -- และ 115 ยังพิมพ์เป็นเป้าอยู่บนบรรทัดเดิม
+   (ไม่ได้เปลี่ยนเป้าเงียบ ๆ ตามกฎแดงของ BUILD-001)
+4. สองตัวที่เหลือ (P86/P87 leader 0) ไม่ใช่ของใบนี้ -- นับแยกเป็น no_creature
+   ห้ามยัดรวมใน 5 ตัวของ RE-149
+5. เปิดจดหมาย ASK-COO ขอปิด BUILD-001 ที่ 108/115 อย่างเป็นทางการ
+
+PR: pirate-force-server#271 · pf_bridge#429

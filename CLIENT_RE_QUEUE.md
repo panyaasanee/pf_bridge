@@ -2410,7 +2410,7 @@ and not self.v138_marker1_population_sent` (`TARGET_VITAL=0x1ADD`, `CHOOSE_NPC=0
 - client-observable: ตาเจ้าของเป็นตัวตัดสินสูงสุดตาม `COO-DECISION 20260828_2250` -- ใบเทสแยก
 
 
-## 🆕🔬 RE-149 PORT-ROYAL-FIVE-COSTUMELESS-LEADERS-001 [STATIC-ON-BRIDGE]: ห้าตัวที่ Port Royal "แต่งตัวให้ไม่ได้" -- ไคลเอนต์เอา `s_OUTFIT` ของ CLINE leader `155 / 819 / 937 / 942 / 9107` มาจากไหน หรือมันวาดไม่ได้เหมือนกัน  [OPEN]
+## 🔬 RE-149 PORT-ROYAL-FIVE-COSTUMELESS-LEADERS-001 [STATIC-ON-BRIDGE]: ห้าตัวที่ Port Royal "แต่งตัวให้ไม่ได้" -- ไคลเอนต์เอา `s_OUTFIT` ของ CLINE leader `155 / 819 / 937 / 942 / 9107` มาจากไหน หรือมันวาดไม่ได้เหมือนกัน  [✅ DONE/BOUNDED-NEGATIVE -- ปิดโดย LANE-A (ผู้เปิดใบ) รอบ `tz2eri` 2026-08-29T18:5x+07:00 · ผล: `notes_to_chief/20260829_1814_RE-149-RESULT-NO-SHIPPED-AVATAR-SOURCE.md` · **ไม่พบ avatar source ของทั้งห้าใน shipped corpus** (ครบทั้ง 4 PC tables / 616 Lua / 289 `.npc` / ทุกตารางที่มีคอลัมน์ `s_OUTFIT`) · verifier `staged/re149_costumeless_leaders_static.py` PASS 51/51 · **บริโภคแล้วในโค้ด**: `world_port_royal_identity.CEILING_ADJUDICATED_LEADERS` + `world_population.ceiling_console_token` ⇒ ทุกบูตพิมพ์ `ceiling=108/115 client_data_bounded RE-149:BOUNDED-NEGATIVE no_avatar_source=5,no_creature=2` (PR `pirate-force-server#271`) · 🔴 **ขอบเขตของคำว่า negative**: bounded ที่ static method ceiling ของ corpus ปัจจุบันเท่านั้น -- **ไม่ได้อ้าง**ว่า build/locale อื่นไม่มีห้าตัวนี้ และ**ไม่ได้อ้าง**จากจอว่าวาดไม่ได้ · **method ceiling: ห้ามรันใบนี้ซ้ำ**กับ corpus/objective เดิม เปิดใหม่ได้เมื่อมี data pack ใหม่หรือ named crosswalk ใหม่]
 
 **ADDRESSEE: RE** · ผู้เปิดใบ: LANE-A (สาย A · WORLD) รอบ `mcxexp` 2026-08-29T15:4x+07:00
 **ต้นเรื่อง:** BUILD-001 / M1 · สำมะโน bg0001 ส่งจริง **108 จาก 115 placement** มาตั้งแต่ `RE-128` ลง main ·
