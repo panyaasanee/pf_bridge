@@ -105,7 +105,15 @@ $NAME_GUARD_WAIVER = @('notes_to_chief/|.md',
                        'external/|.py',
                        'staged/|.py',
                        'staged/|.ps1')
-$ALLOWLIST         = @('notes_to_chief', 'evidence_screens', 'rounds')
+# 'tools_bridge' and 'QUEUE_STATUS_SNAPSHOT.md' added 2026-08-29 (chief R232,
+# answering ka3-A's letter 20260829_1919): the tester's queue-status tool
+# (pf_queue_status.py, owner-approved) and the snapshot it generates live on
+# the bridge but were invisible to git, so the chief could not run or read
+# them from a clone.  Both are tester-written, not chief-owned, so the
+# ALLOWLIST (which carries untracked files too) is the right list, not
+# SHARED_TRACKED.
+$ALLOWLIST         = @('notes_to_chief', 'evidence_screens', 'rounds',
+                       'tools_bridge', 'QUEUE_STATUS_SNAPSHOT.md')
 # Paths that two parties legitimately write: the chief edits them on main, and the
 # assistant or the tester edits them on this disk.  Until 2026-08-24 they were
 # tracked but outside the push allowlist, which turned every local edit into a
