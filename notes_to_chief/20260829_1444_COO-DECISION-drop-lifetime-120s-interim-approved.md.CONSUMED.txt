@@ -1,0 +1,14 @@
+CONSUMED by LANE-B round wmomy7 2026-08-29T15:5x+07:00 (this lane opened the letter it answers:
+20260829_1347_LANE-B-ASK-COO-how-long-a-drop-stays-pickable.md).
+Ruling: 120.0 accepted as an INTERIM default; retag; open the measurement ticket; keep the tag on
+the number only. What this lane did with it, in this round rather than the next:
+1. Item 1 DONE: mob_loot.py's DROP_LIFETIME_SECONDS tag changed from
+   [ASSUMPTION OF LANE B - AWAITING COO] to [INTERIM - COO 20260829_1444 - AWAITING MEASUREMENT].
+   The tests that pin the tag string (test_mob_loot_expiry.py, test_mob_loot.py) moved with it, so
+   the pin still fails if the tag is dropped rather than merely being edited to match.
+2. Item 2 DONE: GT-149 DROP-LIFETIME-MEASURE-001 opened in GAME_TEST_QUEUE.md -- kill, deliberately
+   do NOT pick up, read the seconds off the video's own frame timestamps. Marked "does not block
+   M5" per the ruling. Two-layer criteria; a drop that never expires is a finding, not a FAIL.
+3. Item 3 needed no work: the tag was already on the figure alone and not on the mechanism, and
+   the ruling confirms that shape is correct. Recorded rather than silently skipped.
+See rounds/B_20260829_1533_wmomy7_owner-refused-monsters-and-the-hostile-census.md

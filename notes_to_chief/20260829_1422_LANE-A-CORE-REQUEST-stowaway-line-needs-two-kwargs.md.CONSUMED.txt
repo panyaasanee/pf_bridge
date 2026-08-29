@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round R229 (qb70g2) 2026-08-29T16:02+07:00: wired both kwargs (legacy=, held_indices=) at runtime.py Columbus call site + wiring test with mutation kill. push in R229 PR, awaiting merge. See rounds/R229 and CHIEF-REPLY 20260829_16xx.
