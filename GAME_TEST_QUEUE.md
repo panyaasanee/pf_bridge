@@ -7332,8 +7332,8 @@ git grep -n "def login_entry_is_pinned" <SHA> -- src/pirateforce_foundation/gm/l
 > ① `store.commit_acquired_backpack_item` — INSERT แถว + `UPDATE next_item_identity` ใน `BEGIN IMMEDIATE` เดียว (เทส atomicity ฉีด exception หลังทั้งสอง write แล้ววัดว่า **ทั้งแถวและตัวนับไม่ขยับ**)
 > ② identity มาจากคอลัมน์ ไม่ใช่ `MAX+1` — เทสตั้งตัวนับไว้ที่ 9 บนกระเป๋าที่ identity สูงสุดคือ 4 แล้ววัดว่า `MAX+1` (=5) **ถูกปฏิเสธโดยระบุชื่อ** ส่วน 9 ผ่าน
 > ③ เจ้าของ session ตรวจแบบเดียวกับ `save_position` (เทส: session ของบัญชีอื่น + session ที่ปิดแล้ว ⇒ `PermissionError` และไม่มีอะไรถูกเขียน)
-> ④ เทส 13 ข้อ ฆ่า mutation ได้จริง 6/6 ที่ลอง (ถอดการเดินตัวนับ · เปลี่ยน identity เป็น `MAX+1` · ถอดการตรวจเจ้าของ · ถอด `-1` ของ `issued_through` · seed ตัวนับจากค่า default · ถอดการตรวจช่องซ้ำ) · roundtrip: เก็บ → relog → `get_backpack` → `bag_admission` ให้ `golden_plus_acquired`
-> ⑤ `HYPOTHESIS_LEDGER PASS entries=47` ไม่มี drift · สวีตเต็ม **4,361 passed 0 failed 323 skipped** เขียว(cloud sanity — ไม่ใช่เกตเต็ม) · ตระกูล HYP-PF-008/010/017/018 ยังถูกปฏิเสธเหมือนเดิม
+> ④ เทส 15 ข้อ ฆ่า mutation ได้จริง 8/8 ที่ลอง (ถอดการเดินตัวนับ · เปลี่ยน identity เป็น `MAX+1` · ถอดการตรวจเจ้าของ · ถอด `-1` ของ `issued_through` · seed ตัวนับจากค่า default · ถอดการตรวจช่องซ้ำ) · roundtrip: เก็บ → relog → `get_backpack` → `bag_admission` ให้ `golden_plus_acquired`
+> ⑤ `HYPOTHESIS_LEDGER PASS entries=47` ไม่มี drift · สวีตเต็ม **4,362 passed 0 failed 323 skipped** (หลังแก้ `pf-adversary`) เขียว(cloud sanity — ไม่ใช่เกตเต็ม) · ตระกูล HYP-PF-008/010/017/018 ยังถูกปฏิเสธเหมือนเดิม
 >
 > 🔴 **ผลข้างเคียงที่ต้องรู้:** เทสวันหมดอายุของสาย B (`tests/test_bag_admission_expiry.py`) ออกแบบให้ **แดงวันที่ตั๋วนี้ลง** และมันแดงจริง
 > รอบนี้ **แปลงเป็นหมุด ไม่ได้ลบ** (พินว่าใครเขียนคอลัมน์/INSERT แถวได้บ้าง) และ **ไม่ได้ตัด `_classify_against` ตาม `COO-DECISION 20260829_0441` ข้อ 2**
