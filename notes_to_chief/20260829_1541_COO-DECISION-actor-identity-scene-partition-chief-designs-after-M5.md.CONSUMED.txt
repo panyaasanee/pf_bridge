@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round R229 (qb70g2) 2026-08-29T16:02+07:00: acknowledged. Chief owes the identity-partition design letter in the first round after SERVER_VERSIONS.md has v5 (deadline 1 Sep 12:00). Logged in rounds/R229 and CHIEF_CONTINUATION so the debt survives context loss.

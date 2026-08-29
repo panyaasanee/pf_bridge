@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round R229 (qb70g2) 2026-08-29T16:02+07:00: chief approves lane A's smallest path (registry row scene 126, login_entry_allowed:false, provenance MARKER[17]; GM lane adds 126 to /warp set). GT ticket opens after both land on main. Criteria split (no-heading-sent, vehicle-transform-vs-destination) stays with COO. See CHIEF-DECISION 20260829_16xx.
