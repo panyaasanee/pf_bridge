@@ -1,0 +1,1 @@
+consumed by chief รอบ 73fhoc (R232) 2026-08-29T20:08+07:00: ① GT-001 ปิด PASS รอบ UA1 ด้วย OBSERVER_CONFIRMED จากใบนี้แล้ว (recurring คงเปิด) ② เพิ่ม tools_bridge + QUEUE_STATUS_SNAPSHOT.md ลง ALLOWLIST ของ pf_git_sync.ps1 แล้ว (รอ bridge pull) ③ ซ่อมสารบัญตามรายการ: ทำ GT-063/GT-064 แล้ว ที่เหลือรอ snapshot เพื่อ rebuild เต็ม (ดูจดหมายตอบ)

@@ -2451,7 +2451,7 @@ and not self.v138_marker1_population_sent` (`TARGET_VITAL=0x1ADD`, `CHOOSE_NPC=0
 **ค้น `gamedata` แล้ว:** เจอ -- `CONSTDATA_TH__MOBS.tsv`, `TEXTDATA_TH__MOBS_TIP.tsv`, `CONSTDATA_TH__CLINE.tsv`
 อ่านครบทั้งสามในรอบนี้ (ผลอยู่ด้านบน) · ที่ **ยังไม่ได้ค้น** คือ `gamedata/lua/` (616 ไฟล์) และตารางโลแคลอื่น
 
-## 🆕🔬 RE-150 AGGRO-PLACEMENT-OUTSIDE-REFUSED-BLOCKS-001 [STATIC-ON-BRIDGE]: หา placement ที่ AI เริ่มตีเอง (aggro) นอกบล็อก 101-104 ที่เจ้าของสั่งห้ามวาง -- จาก artifact ที่ commit แล้วเท่านั้น  [OPEN]
+## 🆕🔬 RE-150 AGGRO-PLACEMENT-OUTSIDE-REFUSED-BLOCKS-001 [STATIC-ON-BRIDGE]: หา placement ที่ AI เริ่มตีเอง (aggro) นอกบล็อก 101-104 ที่เจ้าของสั่งห้ามวาง -- จาก artifact ที่ commit แล้วเท่านั้น  [✅ DONE / BOUNDED-NEGATIVE — ปิดโดย chief R232 (ผู้เปิดใบ) จากผล RE runner ใบ `notes_to_chief/20260829_1912_RE-150-RESULT-NO-AGGRO-MONSTER-OUTSIDE-REFUSED.md`: มอน aggro (`n_RANK>0`+`n_AI_COMBAT>0`+`n_OFFESIVE=1`+`n_AGGRO>0`) ใน bg0001/Bg0002 มีเพียง Bg0002 placement 92-96 (Mob-Set 103, `AI_WANDER=11`) — ทั้งหมดอยู่ในบล็อก 101-104 ที่เจ้าของปฏิเสธ ⇒ **ไม่มีตัวเลือก aggro นอกบล็อกสำหรับ M6 ใน corpus ปัจจุบัน** · เงื่อนไขเปิดใหม่: data pack ใหม่ / crosswalk ใหม่ / เจ้าของทบทวนบล็อก 101-104 · นัยต่อ M6 เป็นของสาย B + COO (ใบผล cc ถึงแล้ว)]
 
 **ADDRESSEE: RE** · ผู้เปิดใบ: chief (สาย E) รอบ `roj9lp` R230 2026-08-29T18:0x+07:00 · ตามคำสั่ง `COO-DECISION 20260829_1741` ข้อ 3
 **ต้นเรื่อง:** สาย B กรองบล็อก 101-104 (`OWNER_REFUSED_PLACEMENTS` ทั้ง 8 placement) ออกจาก roster ตาม `PANYA-DECISION 27 ส.ค. 20:10` ("ติดป้าย UNKNOWN ไม่วาง") · COO ยืนยันย้อนหลังแล้ว (ใบ 1741 ข้อ 1-2) · ผลข้างเคียง: **ทั้งโปรเจกต์ไม่มีมอนที่เริ่มตีก่อนเลย** — COO รับได้ถึง M5 แต่**ไม่รับเป็นสภาพถาวร** (ใบ 1741 ข้อ 3)
