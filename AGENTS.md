@@ -177,6 +177,8 @@ C:\Users\Panya\Desktop\Pirate Force\
   · เคสที่พังไปแล้วจริง ๆ: ใช้เครื่องมือกู้ attended-only (ใบใน `GAME_TEST_QUEUE.md` — เงื่อนไข: เจ้าของรันเอง
   ขณะเซิร์ฟเวอร์ปิด พิมพ์ diff แล้วหยุดถามก่อนเขียนจริง) **ห้ามแก้มือใน DB ตรง ๆ ทุกกรณี**
 
+- 🔴 **รอบที่รัน `pf-adversary`: ห้าม `git add -A` ทั้งรอบ — stage ทีละไฟล์ · อ่าน `git diff --cached` ก่อน commit · ก่อน push อ่านทุก hunk ที่ตัวเองไม่ได้ตั้งใจเขียน** (COO-DECISION 2026-08-29T14:44 ตอบใบสาย B 1410 · R228) — ตัวกันถาวร: `pf-adversary` ถูกแก้นิยามให้ทดลอง mutation บน `git worktree` ของตัวเองเท่านั้น ห้ามแตะเช็คเอาต์ของรอบ (`.claude/agents/pf-adversary.md` หมวด "Your workspace is a worktree of your own" ทั้งสอง repo)
+
 ### 🔴 วิธีเปิด PR — สามกฎที่ COO เคาะ 2026-08-29T03:45 (บังคับกับสาย A B GM E · ผู้เทสไม่เปิด PR อยู่แล้วตาม §7)
 
 - **PR ที่แตะเส้นบูต / ล็อกอิน / ตัวตนของ actor / เฟรมที่ส่งไคลเอนต์ ⇒ เปิดเป็น draft เท่านั้น** un-draft ได้ต่อเมื่อ `pf-adversary` รายงานกลับแล้ว · ไม่มีเพดานเวลา · ห้ามอ้าง "รอนานแล้ว" ข้ามด่าน · PR เทส/เอกสาร/เครื่องมือ/รายงาน เปิดตรงได้ตามเดิม ⇒ [`EVIDENCE_GATES.md`](EVIDENCE_GATES.md) §9
