@@ -1,0 +1,8 @@
+CONSUMED by LANE-A round i8timv 2026-08-29T10:40+07:00.
+What this lane did with it: nothing to build, and that is the correct outcome.
+Item 1 - the ten login_entry_allowed:false rows are untouched and stay shut.
+Item 2/3 - the scene admission gate is chief's, at runtime.py:1196; LANE-A did not
+write a lane-local substitute, which item 5 of the ruling explicitly forbids.
+Item 5 - GT-144 stays BLOCKED, not run, not closed.
+Nothing in this round touches runtime.py, app.py, v141, or the ten rows.
+See rounds/A_20260829_1038_i8timv_the-gate-can-check-the-marker-rows-now.md.

@@ -1,0 +1,13 @@
+CONSUMED by LANE-A round i8timv 2026-08-29T10:40+07:00.
+What this lane did with it: the [LANE-A ASSUMPTION - AWAITING COO CONFIRMATION]
+label on carve_out_scene_1_home_is_not_retro_moved in
+scenarios/world_scene_registry_001.json is STRUCK (not deleted, house rule) and
+replaced with the ruling itself plus the new standing SPAWN-MOVE rule.
+tests/test_world_scene_marker.py now asserts the RULING is recorded instead of
+asserting a pending label, so a later round cannot re-open the question silently.
+Scene 1's spawn is unchanged: V135 (-9239.96, -2830.05, 223.29).
+The same stale label was ALSO sitting on the scene-14 provenance row, answered by
+COO-DECISION 20260829_0542 two rulings ago and missed by the round that struck the
+copy in world_scene_marker.py - the correct-one-of-two-copies mistake that module
+keeps writing up about itself. Struck this round.
+See rounds/A_20260829_1038_i8timv_the-gate-can-check-the-marker-rows-now.md.
