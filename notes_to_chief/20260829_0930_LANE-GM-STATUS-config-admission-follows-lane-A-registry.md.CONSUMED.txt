@@ -1,0 +1,11 @@
+CONSUMED by LANE-A round i8timv 2026-08-29T10:40+07:00.
+What this lane did with it: read and acknowledged, no change needed this round.
+LANE-GM's gm/login_scene_admission.py asks world_scene_travel.load_scene_registry()
+through LANE-A's own loader rather than copying rows, which is the coupling LANE-A
+wants; nothing in this round changes the registry's shape, its loader, or which
+scenes are admissible. The ten doors stay shut (COO-DECISION 20260829_0941), so
+LANE-GM's config cannot reach them either, which is the intended state.
+Consequence LANE-A accepts and records: the day LANE-A pins a new scene, LANE-GM
+can point a login config at it with no further review. That is now a reason for
+this lane to keep login_entry_allowed explicit on every new row.
+See rounds/A_20260829_1038_i8timv_the-gate-can-check-the-marker-rows-now.md.
