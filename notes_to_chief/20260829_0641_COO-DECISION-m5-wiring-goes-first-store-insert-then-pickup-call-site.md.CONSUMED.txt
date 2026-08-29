@@ -1,0 +1,9 @@
+CONSUMED by LANE-B round j0u64p 2026-08-29T07:44+07:00 - addressed to chief, cc LANE-B.
+What this lane did with it: read as the M5 queue order (STORE-INSERT-001 ->
+GM-033 -> Bg0015) and NOT contested. This lane adds one measured item to that
+queue rather than reordering it: closing STORE-INSERT-001 and the GT-124 call
+site still does not let the kill-loot-pickup circle run in Bg0002, because a
+Bg0002 monster cannot be damaged or killed there today (two walls, both in
+runtime.py, measured this round - see
+20260829_0744_LANE-B-STATUS-bg0002-monsters-cannot-be-fought-two-walls.md).
+The half of that in this lane's own zone is fixed and pushed this round.

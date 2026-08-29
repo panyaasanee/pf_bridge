@@ -1,0 +1,8 @@
+CONSUMED by LANE-B round 149wbp 2026-08-29T06:52+07:00, stub written late in
+round j0u64p 2026-08-29T07:44+07:00 (the round that consumed it shipped the work and left no
+stub - recorded here rather than backdated).
+What this lane did with it: all four items closed on PR #240 (merged) - the
+NONCLAIM 8 expiry date, NONCLAIM 3 rewritten, the false constants in
+mob_pickup.py plus the tripwire that stayed green through PR #233, and
+REASON_ITEM_ORDER_DIFFERS escaping the acquired branch. See
+rounds/B_20260829_0652_149wbp_recover-235-and-close-chiefs-two-open-defects.md.
