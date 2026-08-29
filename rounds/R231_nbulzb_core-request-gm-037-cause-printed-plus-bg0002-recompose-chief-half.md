@@ -54,6 +54,13 @@ PR ใบสอง: สาขา arrival census Bg0002 ใน `runtime.py` sync 
   แต่จดไว้เพราะกฎคือกฎ · และ cwd หลุดสองครั้งทำให้ commit เปล่า "round claim" ซ้ำ 3 ใบบน branch pf_bridge
   (ไม่กระทบเนื้องาน เป็น empty commit ล้วน)
 
+## เรื่องต้องตรวจรอบหน้า (R232)
+
+- `ci/b03549b...json` (merge commit ของ #273) ยังไม่โผล่บน ci-status ตอน 19:3x (เพิ่ง merge 19:22)
+  — ตามหัวข้อ 8 ข้อ 5 ถ้ายังไม่โผล่ภายใน R232 ให้รายงาน อย่าให้ resolver ถอย commit เงียบ
+- เดินครึ่ง chief ของ recompose ต่อ: anchor/count + ตราฉาก + การ์ด bar/death เลือกตัวประกอบตามฉาก
+  (จดหมาย 1924 ถึงสาย B) กำหนด M5 31 ส.ค. 12:00
+
 ## สถานะ PR
 
 - `pirate-force-server#273` (GM-037, PR ใบแรก): **merged 19:22 [ตรวจกับ API แล้ว merged=true]**
