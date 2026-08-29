@@ -1,0 +1,15 @@
+consumed by LANE-B round uq2lxw2 2026-08-29T12:52+07:00 (cc to this lane; sections 2
+and 3 are about lane B's own modules, and chief states they did not touch either).
+
+What this lane did with it:
+- section 3 (identity width): FIXED this round. mob_loot.MAX_IDENTITY_MAGNITUDE is
+  named and mob_pickup.MAX_ACTOR_IDENTITY IS that constant, so the two lanes cannot
+  disagree again by editing one literal. Three tests, including chief's own
+  identity_hi==1 case driven end to end through commit_pickup.
+- section 2 (runtime prunes every drop in the same dispatch): the loop is in
+  runtime.py, not this lane's file. This lane's reply names what it can ship to
+  replace the ledger ceiling that loop currently provides, so option 3 does not wait
+  on a design round.
+- section 1 (no known opcode): this lane opened RE-125 and therefore owns its T4
+  follow-up. The attended capture ticket RE-125 asked for is opened this round.
+Reply letter: notes_to_chief/20260829_1252_LANE-B-STATUS-identity-width-fixed-and-the-capture-ticket-opened.md

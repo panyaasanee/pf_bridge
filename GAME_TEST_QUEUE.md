@@ -7791,3 +7791,60 @@ OBSERVER_CONFIRMED  :
 ```
 
 ```
+
+---
+
+## GT-146 PICKUP-CLICK-OPCODE-CAPTURE-001 [attended, in-game]: คลิกซ้ายลงบน element ของตกที่เซิร์ฟเวอร์เราส่งเอง แล้ว **ไคลเอนต์ยิงเฟรมอะไรออกสาย** -- ใบ capture ที่ปลด `RE-125`/`GT-124`/M5  [PENDING · เปิดโดย LANE-B รอบ `uq2lxw2`]
+
+> NUMBERING: grep ก่อนจอง (2026-08-29T13:0x+07:00) `GT-146`/`RE-146` = 0 hit ทั้งสองคิว + `archive/` + `notes_to_chief/` · เลขสูงสุดที่ใช้ไป = 145 (`RE-` ใบจริงสูงสุด = `RE-132`) · ตัวนับเดียวสองไฟล์
+> 🔴 **`GT-060` มีอยู่แล้วและห้ามลบ**: ถาม claim เดียวกัน สถานะ `BLOCKED-CONDITIONAL` บูตไม่ได้เพราะไม่มีท่า spawn drop-object และขอ "โมเดลที่คลิกได้" ซึ่ง `GT-045` ปิดไปแล้วว่า**ไม่มีโมเดล** ⇒ ใบนี้เติมท่ายิงและเลิกขอโมเดล · **จดหมาย chief `20260829_1221` ที่ว่า "ไม่มีใครเปิดใบนั้น" คลาดเคลื่อน** · ได้ผล P1/P2/P3 เมื่อไร ให้ปิด `GT-060` แบบ superseded-by `GT-146` โดยระบุชื่อ ห้ามลบก่อนมีผล
+> ที่มาสามบรรทัด (รายละเอียดอยู่ในจดหมาย `20260829_13xx_LANE-B-*`): `RE-125` ปิดแบบ bounded-negative — opcode ยัง UNOBSERVED, `0x4543` derive จาก name-hash, id จริงอยู่ใน virtual-zero tail ของ `.data` ⇒ เปิดอิมเมจไม่ช่วย · `GT-046` static: request ก๊อป `+0x14` จาก **live runtime drop-object** ⇒ ไม่มีของ pre-placed ให้คลิก ต้องส่ง element เอง · มอนดรอปใช้ไม่ได้วันนี้ (`Bg0002` ตีไม่ติด · หุ่น `916` `n_DROPS_*`=0) ⇒ เหลือเลน ground-loot อย่างเดียว
+
+### objective (ข้ออ้างเดียว)
+คลิกซ้ายลงบนจุดของ element ของตกที่บูตนี้ส่งจริง **ไคลเอนต์ยิงเฟรมขาเข้าออกมาไหม และถ้ายิง nested vital id คือค่าอะไร**
+
+### db · server args (เป๊ะ)
+สำเนา `state\run_gt146.sqlite3` (+ backup `pirateforce_before_GT-146_<stamp>.sqlite3`) · **ห้ามเปิด canonical** · sha256 เทียบ `CANON_SHA.txt` ก่อน-หลัง
+```
+py -3 -u -m pirateforce_foundation.app --db state\run_gt146.sqlite3 --ground-loot-hypothesis-scenario scenarios\ground_loot_hypothesis_bit08_render.json --pickup-listener-hypothesis-scenario scenarios\pickup_listener_hypothesis_decode_probe.json
+```
+คู่นี้บูตร่วมกันได้ (Panya 20260824 1831 §① / 2120 §②) · **สำรอง**: ถ้า `git grep` ไม่เจอเลน listener บน commit ที่จะบูต ให้ตัดสองอาร์กิวเมนต์ท้ายออกแล้วจดว่าบูตเลนเดียว — หลักฐานหลักคือ raw capture ไม่ใช่บรรทัด listener · ห้ามพ่วง `--*-scenario` อื่น · ห้ามแก้โค้ด/payload
+
+### ขั้นตอน
+0. มาตรฐานบ้าน (LOCK · boot stamp · sha canonical · copy DB) · resolve commit เขียว แล้วยืนยันบน `<SHA>` ที่บูตจริง: `git show origin/ci-status:ci/<SHA>.json` = success · `git grep -n "ground-loot-hypothesis-scenario" <SHA> -- src/pirateforce_foundation/app.py` · `git cat-file -e <SHA>:scenarios/ground_loot_hypothesis_bit08_render.json` · ซ้ำกับเลน listener · **ห้ามใช้ `--help` เป็นหลักฐาน**
+1. server ก่อน client เสมอ · เข้าเกม (ปุ่มกลางจาก 5 ปุ่มแถวล่าง · ซ้ายสุด = ลบตัวละคร ห้ามกด)
+2. **อัดวิดีโอตั้งแต่ก่อนเข้าแมพเสร็จ** — เฟรมของตกออก **ครั้งเดียวต่อเซสชัน** ที่ TargetPos แรกหลัง runtime ack · ออกตอนไม่ได้อัด = NO-RESULT · **ห้ามพิมพ์ตัวอักษรตลอดรอบ**
+3. ในแมพ **ห้ามแตะ `W/A/S/D` และ `Q`/`E`** (ยิง `TargetPosVital` ทิ้ง) · จัดกล้องด้วย **คลิกขวาค้างลาก** เท่านั้น · หันไปทาง +X · **S0** ให้เห็น X/Y บน HUD
+4. **ยิง:** กด `W` สั้นที่สุด (~120 ms) ครั้งเดียว · จดเวลา (+07:00) และ `t` วิดีโอ · จด `X0/Y0` · ตาอยู่ที่จอ (ฝุ่น ~0.45 s · ป้าย 0.2-0.4 s)
+5. **คลิก 1 (ตอนยังเห็น):** เลื่อน cursor ไปที่ฝุ่น/ป้าย คลิกซ้ายหนึ่งครั้ง · จดเวลา · หายก่อนคลิกทันไม่ใช่ความผิดพลาด
+6. เดินไปทาง X เพิ่มจนราว `X0+30` (Y คงเดิม) · hover แล้ว **จดว่า cursor เปลี่ยนรูปไหม** · **S1**
+7. **คลิก 2-4 (คลิกทั้งที่มองไม่เห็น):** ทีละครั้ง ห่าง ~5 วิ · จดเวลาทุกครั้ง · **S2** หลังคลิกสุดท้าย 10 วิ
+8. NO-CRASH ด้วยคลิกขวาค้างลาก (ห้าม `Q`/`E`) · **S3** · ออกเกมด้วย X มุมขวาบน
+9. ปิด server (**restart ก่อนบูตถัดไปเสมอ**) · เก็บ `capture_gt146_<stamp>\capture_v141\GAME_LIVE.txt` ทั้งไฟล์ + console `.out`/`.err` + sha256 ทุกไฟล์ · `PRAGMA integrity_check` · **teardown เสมอ** · sha canonical ซ้ำ · ห้าม commit เอง
+10. ค้นในผล (คัดดิบ ห้ามตีความ): `findstr /N /C:"RECV" GAME_LIVE.txt` · `/C:"0x4543"` · `/C:"NEAR_ONCE"` · `/C:"FAR_ONCE"` · `findstr /N /C:"PICKUP" server_console_live.*.txt`
+
+### pass criteria (สองชั้น 🔴 ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น)
+**wire** — (ก) มี `NEAR_ONCE` + `FAR_ONCE` (54 B) = ยืนยันว่ามี element ถูกส่ง (precondition ไม่ใช่ claim) ไม่มี = P4 · (ข) สำมะโน `RECV` ทั้งไฟล์ แล้วเทียบหน้าต่าง ±2 วิ รอบคลิกแต่ละครั้งกับ baseline ก่อนคลิก ⇒ (1) มี id `0x4543` · (2) มี id อื่นที่ไม่มีใน baseline (คัด id + hexdump เต็ม) · (3) ไม่มีเฟรมนอก baseline · (ค) ถ้าบูตเลน listener: หนึ่งบรรทัดต่อเฟรม พร้อม `object_ref_u32`/`opaque_u8`/raw hex จำนวนตรงกับจำนวนคลิก — **ไม่มีบรรทัด listener ตัดสินอะไรไม่ได้** (id ที่ไม่ match ไหลลง frozen dispatch เงียบ) ⇒ **capture คือกรรมการ** · (ง) DB สำเนา `integrity_check`=ok · `sessions` +1 ต่อการเข้าเกม · sha canonical ตรงก่อน-หลัง
+ชั้นนี้ตอบไม่ได้: มีอะไรบนจอไหม คลิกโดนอะไรไหม
+**client-observable** — วิดีโอต่อเนื่อง + `S0..S3` full-res พร้อม sha256 · ตอบสามช่องเป็นภาษาคน: ฝุ่นขึ้นไหมกี่วิ · ป้ายขึ้นไหมอ่านว่าอะไรกี่วิ · cursor เปลี่ยนรูปตอน hover ไหม · หลังแต่ละคลิก: จอเปลี่ยนไหม มีข้อความระบบไหม (คัดเป๊ะ + สี) · **จดสีป้ายชื่อทุกป้ายทุกภาพ** อ่านจาก full-res เท่านั้น ไม่มีป้ายเขียน `none` · **จดสีอย่างเดียว ห้ามเดาสาเหตุ** (`RE-067`) · NO-CRASH/CRASH
+ชั้นนี้ตอบไม่ได้: เฟรมออกจากไคลเอนต์จริงไหม id อะไร
+
+### คำทำนาย (ผิด = ผล ไม่ใช่ความล้มเหลว)
+**P1** เจอ `0x4543` ⇒ id ที่ derive ไว้ CONFIRMED · **P2** เจอ id อื่น ⇒ REFUTED **และได้ id จริงมาแทน มีค่าเท่า P1** · **P3** คลิกครบแล้วเงียบ ⇒ ผลลบที่วัดแล้ว มีค่าเท่าผลบวก (redirect = ใบ static ว่าใคร populate ลิสต์ของ `DropThingModule_Client`) 🔴 **ระยะไม่ใช่คำอธิบาย**: 30 หน่วย เทียบ `RANGE_PICKUP 600.0` · **P4** ไม่มี `NEAR_ONCE`/`FAR_ONCE` ⇒ NO-RESULT แยกอะไรไม่ได้ ห้ามอ่านเป็นผลลบเรื่อง opcode
+🔴 **ผลลบไม่ปิดใบ** P3/P4 ห้ามปิดใบ ห้ามลบวิดีโอ (กติกาผลลบไม่ถูกแตะโดย `PANYA-ORDER 20260829 0930`)
+
+### กฎจุดเกิด (`PANYA-ORDER 0930` ข้อ ④)
+พิกัดของตก **อิง trigger** ⇒ element โผล่ที่ `trigger+30X` = ใกล้ ในระยะ (30 ≪ 600) และเยื้องหน้าโดยโครงสร้าง **ไม่ต้อง seed พิกัดลง DB และไม่มีตารางวางวัตถุให้ mine** (`GT-046` จ็อบ 5: `+0x14` มาจาก runtime drop-object ไม่ใช่โครงสร้างฉาก) · ค่าคาดหมายจาก `GT-045`: trigger `X -8553.947 Y -2579.689 Z 186.000` (คาดหมาย ไม่ใช่เกณฑ์)
+
+### nonclaims
+1. ไม่พิสูจน์ว่าเก็บ**สำเร็จ** หรือของเข้ากระเป๋า (`GT-142`) · เซิร์ฟเวอร์ไม่ตอบอะไรในใบนี้ ⇒ ทุกปฏิกิริยาบนจอเป็นพฤติกรรมไคลเอนต์ล้วน
+2. ไม่อธิบายการเก็บของที่**มอนดรอป** (`FightingDropModule_Client`/`FightingDropNotify` ยัง NOT_OBSERVED)
+3. ไม่ตอบว่า element อยู่ในลิสต์นานแค่ไหน/ทำไมป้ายหาย (`GT-132`) · ไม่ตัดสินสาเหตุของสีป้าย (`RE-067`)
+4. **ไม่นับเป็นเวอร์ชัน** — รอบที่รันใบนี้ ship ศูนย์บรรทัด แฟล็กเป็นเครื่องมือวัด · ไม่ต่อ production call site ใด ๆ (`RE-125` ห้าม `0x4543` บน production path)
+5. การเทียบ `object_ref_u32` กับ element key = งานตอนบริโภคผล ผู้เทสไม่ต้อง decode
+
+### links
+`RE-125`/`RE-130` (`CLIENT_RE_QUEUE.md`) · `notes_to_chief/20260828_1112_RE-125-RESULT-NO-CAPTURED-PICKUP-OPCODE.md` · `notes_to_chief/20260829_1221_CHIEF-ASK-COO-gt124-opcode-forbidden-and-drops-pruned.md` · `GT-060`/`GT-124`/`GT-132`/`GT-142` · `archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md` (`GT-045` `GT-046`) · `external/PF_FIELD_VALIDATION.tsv:102-103`
+
+### result (ผู้เทสกรอก)
+P1/P2/P3/P4 · เวลาคลิกทุกครั้ง (+07:00 และ `t` วิดีโอ) · path + sha256 ของ log/console/ภาพ/วิดีโอ · สำมะโน `RECV` + hexdump ช่วงคลิก · บรรทัด listener ทั้งบรรทัด · สามช่อง ฝุ่น/ป้าย/cursor · สีป้ายทุกป้ายทุกภาพ · NO-CRASH/CRASH · sha canonical ก่อน-หลัง · `integrity_check`
