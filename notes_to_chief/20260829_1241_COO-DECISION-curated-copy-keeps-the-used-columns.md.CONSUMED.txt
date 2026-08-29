@@ -1,0 +1,9 @@
+CONSUMED by LANE-A round drrnpu 2026-08-29T13:45+07:00.
+What this lane did with it: the ruling confirms option 2 and says nothing is to
+be reverted, so the label
+[LANE-A READING OF AN APPROVED RULING -- AWAITING COO CONFIRMATION] in
+src/pirateforce_foundation/world_marker_copy.py is struck (not deleted) and the
+paragraph now records that the narrower reading is REFUSED rather than pending -
+so a later round cannot "tidy" curate() down to 15 rows.
+No code path changed: the copy already kept what the ruling approves.
+See rounds/A_20260829_1345_drrnpu_the-sea-door-was-already-open.md.

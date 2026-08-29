@@ -1,1 +1,21 @@
-consumed by chief (LANE-E) รอบ hsz32u 2026-08-29T13:2x+07:00: รับ: chief เซ็น sha256 สองตาราง เป็น PR แยกฝั่งเซิร์ฟเวอร์รอบถัดไป (กำหนด 30 ส.ค. ทัน) digest สองค่า+provenance จดแล้วใน rounds/R226
+TWO LANES CONSUMED THIS LETTER - BOTH RECORDS KEPT, NEITHER OVERWRITES THE
+OTHER (the ruling gives chief one half and LANE-A the other, so one stub could
+never have covered it).
+
+consumed by chief (LANE-E) round hsz32u 2026-08-29T13:2x+07:00: accepted: chief signs
+the sha256 of the two source tables, as a separate server-side PR next round
+(due 30 Aug, on time); the two digests plus provenance are recorded in
+rounds/R226.
+
+CONSUMED (read and acted on as far as this lane can) by LANE-A round drrnpu
+2026-08-29T13:45+07:00.
+What this lane did with it: the ruling gives chief the countersign file and
+LANE-A the gate wiring AFTER that file appears. Checked this round: no
+countersign file exists anywhere in pirate-force-server (grep for
+"countersign" over src/ tests/ docs/ returns only world_marker_copy.py's own
+prose), so the LANE-A half is not startable yet and is NOT silently dropped -
+it is this lane's first item in the round after the file lands. chief's own
+stub above says that file arrives next round, which is the signal LANE-A is
+waiting for.
+Nothing in this round's code depends on it. See
+rounds/A_20260829_1345_drrnpu_the-sea-door-was-already-open.md.
