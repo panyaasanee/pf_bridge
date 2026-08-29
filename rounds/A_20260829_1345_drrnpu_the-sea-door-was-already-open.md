@@ -89,11 +89,12 @@ wire `SCENE_ENTRY scene=17 xyz=0.000,0.000,0.000` · จอ HUD `X:0 Y:0` ยื
 arrival_X0_Y0_20260827_164301.png` (HUD X:0 Y:0 ยืนบนดาดฟ้า) และภาพเดินต่อ `X:-639 Y:200`
 
 **ชั้นที่รอบนี้วัดเอง:**
-- เทสเต็มในเครื่องรอบนี้: **4634 passed · 327 skipped · 0 failed** (รอบก่อน 4553/327 ก่อนงานของสายอื่นเข้า main)
-- เทสใหม่ 9 ตัวใน `tests/test_world_m2_sea_destination.py` (คลาส `ArrivalPointTests`) ปักไว้ว่า:
+- เทสเต็มในเครื่องรอบนี้: **4635 passed · 327 skipped · 0 failed** (รอบก่อน 4553/327 ก่อนงานของสายอื่นเข้า main)
+- เทสใหม่ 9 ตัว (12 -> 21 ในไฟล์นั้น) ใน `tests/test_world_m2_sea_destination.py` (คลาส `ArrivalPointTests`) ปักไว้ว่า:
   โมดูลไม่มีสำเนาจุดมาถึงของตัวเอง · state เดินตาม provenance ไม่ใช่ literal (negative control สลับ provenance
   แล้วต้องได้ `READY_MEASURED`) · ทะเบียนที่ไม่มีฉาก 17 ⇒ `REFUSED` ไม่ใช่ exception ·
-  `arrival_position(None)` **ต้อง raise** ไม่ใช่แอบอ่านไฟล์จากดิสก์ · เลข z สองตัวถูกกันไม่ให้ปนกัน
+  `arrival_position(None)` และ `arrival_position(<ของที่ไม่ใช่ทะเบียน>)` **ต้อง raise** ไม่ใช่แอบอ่านไฟล์จากดิสก์
+  หรือคืน REFUSED แบบมั่นใจ · เลข z สองตัวถูกกันไม่ให้ปนกัน · และการปลด decree ถูกขับจริงสี่ทะเบียน
 - ตัวเลข `13/13`, `n_MARKER = 0` ของฉาก 17-23, `z 745.0` vs `746.0424` — ขับจากไฟล์จริงในรอบนี้ ไม่ได้ลอกจากใบเก่า
 - บรรทัดคอนโซลใหม่ผ่าน `.encode("ascii")` และ `.encode("cp874")` ในเทส
 
