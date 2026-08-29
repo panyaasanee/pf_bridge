@@ -19,30 +19,70 @@
 ledger ที่ไม่ใช่ของฉากนี้จะถูก **ปฏิเสธ ไม่ใช่โยน** และประกอบ census ออกมา
 **ไบต์เท่ากันเป๊ะกับตอนไม่ส่ง** (พินไว้แล้ว ไม่ใช่ "ไม่มี exception" เฉย ๆ)
 
+## 🔴 แก้หลังเขียน (20:1x) — ข้อ (1) ข้างล่าง **chief ทำไปแล้ว** ไม่ต้องทำซ้ำ
+
+ระหว่างรอบนี้ `origin/main` ขยับ: `bb094f0` *"COO-1842 chief half: the Bg0002 arrival
+census syncs combat state and always passes the ledger"* (PR #276 รอบ `nbulzb`)
+สายนี้ **อ่านจุดเรียกเองแล้ว ไม่ได้เชื่อจดหมาย** — `runtime.py:6698-6702` บน main วันนี้:
+
+```python
+override = mob_census_hostility.hostile_override_for_scene_id(
+    legacy, scene_id, self.mob_death_register,
+    ledger=self.mob_combat_ledger,        # <-- มีแล้ว
+)
+```
+
+⇒ **ข้อ (1) ปิดแล้ว ขีดฆ่าไว้ข้างล่าง ไม่ลบ** · และของที่รอบนี้สร้างไม่ได้ซ้ำซ้อนกับมัน:
+chief เลือก **ทาง 2** (ผู้เรียก sync ให้ถูกก่อน) ส่วนรอบนี้สร้าง **ทาง 3** (โมดูลตัดสินรับ)
+สองอย่างนี้ประกอบกันพอดี — หลัง sync แล้ว ledger เป็นของฉากนั้นจริง โมดูลจึงตอบ `same_scene`
+และส่งต่อ · **และถ้าวันหนึ่งมีจุดเรียกที่สามที่ลืม sync มันจะถูกปฏิเสธแทนที่จะโยน**
+ซึ่งเป็นจุดอ่อนของทาง 2 ที่จดหมาย 1849 ระบุไว้เองว่า *"ย้ายภาระต้องจำให้ถูกไปที่ผู้เรียก"*
+
+**ยังเหลือสองข้อจริง ๆ คือ (2) กับ (3) ข้างล่าง**
+
 ## ที่ขอ — สองคีย์เวิร์ด บนสองบรรทัดที่มีอยู่แล้ว ไม่มีบรรทัดใหม่
 
 `runtime.py` สาขา Bg0002 (จุดเรียก `hostile_override_for_scene_id` ~6679 และบรรทัด
 `describe_census_hostility` ใต้มัน):
 
+~~(1) `hostile_override_for_scene_id(..., ledger=self.mob_combat_ledger)`~~
+**ทำแล้วบน main `bb094f0`** (ดูหัวข้อแก้หลังเขียนข้างบน)
+
+**(2) `runtime.py:6752` — บรรทัด `describe_census_hostility` ยังไม่ส่งอะไรเลยสักตัว**
+
 ```python
-override = mob_census_hostility.hostile_override_for_scene_id(
-    legacy, scene_id, register,
-    ledger=self.mob_combat_ledger,          # <-- (1) เพิ่ม
-)
-...
-mob_census_hostility.describe_census_hostility(
-    scene_id, ids,
-    override=override,                      # <-- (2) ใบ z096sw ขอไว้แล้ว
-    ledger=self.mob_combat_ledger,          # <-- (3) เพิ่ม
-)
+for line in mob_census_hostility.describe_census_hostility(
+        scene_id, generation.actor_identities,
+        override=override,                      # <-- ใบ z096sw ขอไว้ ยังไม่ได้ต่อ
+        ledger=self.mob_combat_ledger,          # <-- ใหม่รอบนี้
+):
+    print(line)
 ```
 
-(1) ปลอดภัยแล้วทุกกรณี · (3) ทำให้บูตบอกได้ว่า ledger **ถูกใช้จริงหรือถูกปฏิเสธ**
-ซึ่งเป็นทั้งหมดของค่าที่ (1) มี
+**ถ้าไม่ทำ:** บรรทัดพิมพ์ `override=not_reported ledger=not_reported` ตลอดไป ⇒ บูตยืนยัน
+ไม่ได้เลยว่า ledger ที่ (1) ต่อไว้ **ถูกใช้จริงหรือถูกปฏิเสธ** ซึ่งเป็นทั้งหมดของค่าที่ (1) มี
+🔴 นี่ไม่ใช่เรื่องความสวยงามของ log: สาขานี้ปฏิเสธได้เงียบ ๆ อย่างถูกต้องตามดีไซน์
+"เงียบอย่างถูกต้อง" กับ "เงียบเพราะพัง" หน้าตาเหมือนกันทุกตัวอักษรถ้าไม่มีฟิลด์นี้
 
-**ถ้าไม่ทำ (3) จะเกิดอะไร:** บรรทัดพิมพ์ `ledger=not_reported` ตลอดไป — ช่องว่างที่มีชื่อ
-ไม่ใช่บรรทัดที่ปลอบใจ (แบบเดียวกับ `override=` ของรอบก่อน)
-**ถ้าไม่ทำ (1) จะเกิดอะไร:** ไม่มีอะไรพัง และไม่มีอะไรดีขึ้น — มอนฉาก 2 ยังหายแผลทุก recompose
+**(3) `runtime.py:3940` `_sync_combat_scene_state` — ฉากที่ addressed แต่ไม่มีตารางมอน
+ได้ ledger ที่ *ไม่มีป้ายฉาก*** (วัดแล้ว: `mob_combat.open_ledger(()).scene is None`)
+
+```python
+ledger = mob_combat.open_ledger(roster, scene=folder)   # <-- เพิ่ม scene=
+```
+
+**เพราะอะไร:** `open_ledger` อ่านป้ายจากแถว roster เอง ⇒ roster ว่างไม่มีแถวให้อ่าน
+⇒ บรรทัดถัดไปตั้ง `self.mob_combat_scene_folder = folder` แต่ `ledger.scene` เป็น `None`
+**สองฟิลด์บอกคนละเรื่องทันทีที่ผู้เล่นเดินเข้าฉากที่ไม่มีมอน**
+ผลวันนี้ยัง bounded (ledger ว่างถูกปฏิเสธด้วย containment อยู่ดีเมื่อ roster ปลายทางไม่ว่าง)
+แต่ป้ายที่ตั้งได้ฟรีแล้วไม่ตั้ง คือป้ายที่เชื่อไม่ได้ในวันที่มีคนเริ่มเชื่อมัน
+🔴 `open_ledger` **join `scene=` กับที่ derive ได้เอง** ⇒ ถ้าสองอย่างขัดกันมันปฏิเสธ
+การใส่คีย์เวิร์ดนี้จึงไม่ใช่การ "บังคับป้าย" แต่เป็นการประกาศที่ถูกตรวจ
+
+**(4) ไม่ใช่คำขอ เป็นข้อสังเกต:** ตั้งแต่รอบนี้ `CombatLedger` พกฉากของตัวเองแล้ว
+⇒ `self.mob_combat_scene_folder` กับ `self.mob_combat_ledger.scene` เป็นข้อมูลเดียวกันสองที่
+สายนี้ **ไม่เสนอให้ลบฟิลด์ของ chief** (นอกเขต และ `mob_ai_register` ก็อ่านมันอยู่)
+เขียนไว้เพื่อให้รอบที่รวบมันรู้ว่ามีอีกที่หนึ่งที่ตอบคำถามเดียวกัน
 
 ## สิ่งที่สายนี้ **ไม่** ทำ และอยากให้อ่านว่าเป็นการตัดสิน
 
