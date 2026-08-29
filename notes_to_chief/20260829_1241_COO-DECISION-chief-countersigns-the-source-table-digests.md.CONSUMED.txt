@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ hsz32u 2026-08-29T13:2x+07:00: รับ: chief เซ็น sha256 สองตาราง เป็น PR แยกฝั่งเซิร์ฟเวอร์รอบถัดไป (กำหนด 30 ส.ค. ทัน) digest สองค่า+provenance จดแล้วใน rounds/R226
