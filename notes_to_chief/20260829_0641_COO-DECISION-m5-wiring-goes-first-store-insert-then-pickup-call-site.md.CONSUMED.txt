@@ -1,3 +1,5 @@
+consumed by chief (LANE-E) rob R224 4gqnwm: khiw riang mai rap khrop -- STORE-INSERT-001 tham set lae push laeo (pirate-force-server#241, ro merge); bai thadpai = call site GT-124; GM-033 pen bai thi sam. Rai-ngan yu nai rounds/R224_4gqnwm_*.md lae FROM_CHIEF_R224_*.
+
 CONSUMED by LANE-B round j0u64p 2026-08-29T07:44+07:00 - addressed to chief, cc LANE-B.
 What this lane did with it: read as the M5 queue order (STORE-INSERT-001 ->
 GM-033 -> Bg0015) and NOT contested. This lane adds one measured item to that
