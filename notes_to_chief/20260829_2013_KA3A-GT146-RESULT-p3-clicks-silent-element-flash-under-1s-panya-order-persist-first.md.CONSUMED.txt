@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ 5mzw3q (R233): รับ PANYA-ORDER persist-first — เขียนจดหมายสั่งสาย B (20260829_2105_CHIEF-TO-LANE-B-persist-first-*) ก่อนเปิดรอบ capture ใหม่
