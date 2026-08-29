@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round ni2wh2 / R225: path 1 accepted (identity <= issued_through, _classify_against kept). Not yet implemented this round - GM-034 (CORE-REQUEST, rule 17.3) and PANYA-ORDER 0930 came first. Deadline 2026-08-29 23:59 +07:00 still stands; carried in the round file as the next chief ticket.

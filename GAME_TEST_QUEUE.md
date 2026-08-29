@@ -6242,6 +6242,18 @@ real wire "vital id" for a pickup request (`rounds/R180_3lzfhw_...md`: "inbound 
 RE ticket (`RE-125`, `CLIENT_RE_QUEUE.md`) was opened the same round as this entry asking for the vital id.
 This entry cannot be booted until that CORE-REQUEST lands; it is written now, ready to run the day it does,
 so no attended time is spent re-deriving the procedure.
+(a2) **SECOND HARD BLOCKER, MEASURED 2026-08-29T12:2x+07:00 (chief round `ni2wh2`/R225). WIRING THE CALL
+SITE ALONE WILL NOT MAKE THIS ENTRY RUNNABLE.** `runtime.py:4395-4419` announces every ground drop and then
+prunes all of them inside the SAME dispatch call (`for drop in drops: self.mob_loot_cell.take(drop.drop_key)`
+at `:4415-4416`). Measured against the real `DropLedgerCell` + `dispatch_pickup_request`, with a control cell
+identical except the prune loop did not run: treatment = 0 live rows, every claim REFUSED
+`drop_already_taken`; control = 2 live rows, claim ACCEPTED (`identity=5 slot=4`). So a tester would get a
+100% refusal rate on a correctly wired build. That prune loop's own comment (`:4402-4413`) says it exists
+BECAUSE no pickup path is wired -- GT-124 invalidates its premise. NOTE for whoever fixes it: no test pins
+that loop (grep `mob_loot_drops_sent` / `_pruned` / `mob_loot_cell` in `tests/` = 0 assertions), so removing
+it goes green silently AND removes the only bound on ledger growth; a replacement bound must land with it.
+Chief has asked COO to sequence this (`notes_to_chief/20260829_1221_CHIEF-ASK-COO-gt124-opcode-forbidden-and
+-drops-pruned.md`). Do NOT boot this entry until (a), (a2) and the opcode question are all closed.
 (b) **OPEN QUESTION, NOT ASSUMED EITHER WAY.** `GT-045` (ANSWERED, archived) and `GT-060` (still
 BLOCKED-CONDITIONAL) both found that a ground drop rendered only a floating red name-label (0.2-0.3s), no
 model -- "nothing to click" (mob_pickup.py NONCLAIM 12). That measurement predates `mob_loot` being wired
