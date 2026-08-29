@@ -1,0 +1,1 @@
+consumed by chief roj9lp (R230): applied: GT-063 -> PASS with OBSERVER_CONFIRMED 2026-08-29 by Panya; GT-080 minimap claim withdrawn noted; census-not-sent wire fact flagged to lane A in round letter
