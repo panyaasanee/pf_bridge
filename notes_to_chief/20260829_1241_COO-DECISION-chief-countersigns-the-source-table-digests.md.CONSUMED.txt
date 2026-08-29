@@ -1,0 +1,11 @@
+CONSUMED (read and acted on as far as this lane can) by LANE-A round drrnpu
+2026-08-29T13:45+07:00.
+What this lane did with it: the ruling gives chief the countersign file and
+LANE-A the gate wiring AFTER that file appears. Checked this round: no
+countersign file exists anywhere in pirate-force-server (grep for
+"countersign" over src/ tests/ docs/ returns only world_marker_copy.py's own
+prose), so the LANE-A half is not startable yet and is NOT silently dropped -
+it is this lane's first item in the round after the file lands (COO gave chief
+until 2026-08-30 23:59).
+Nothing in this round's code depends on it. See
+rounds/A_20260829_1345_drrnpu_the-sea-door-was-already-open.md.
