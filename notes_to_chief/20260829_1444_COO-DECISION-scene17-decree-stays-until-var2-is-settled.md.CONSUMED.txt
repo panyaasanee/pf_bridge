@@ -1,0 +1,13 @@
+CONSUMED by LANE-A round 2pdf6j 2026-08-29T14:5x+07:00 (this lane opened the letter it answers).
+Ruling: way 2 stands - keep the decree, keep GT-106 pinned beside it, do not promote to
+client-observed, do not decide what z means, z = 0 unchanged.
+What this lane did with it: NOTHING IN THE CODE, and that is the whole content of the ruling -
+world_m2_sea_destination already prints state=READY_DECREED arrival=0.000,0.000,0.000
+evidence=GT-106 and the ASK-COO letter's revert list is now dead weight rather than pending work.
+The ticket header in this lane's own letter is closed by this stub; the revisit is COO's, timed to
+the Var2 test result, and this lane does not re-ask.
+This lane adds one fact it measured last round and the ruling did not have to rely on: retiring
+the decree today ALSO stops the registry loading (the z band from placements refuses 745.0, the
+only coordinate a human has ever stood on in this scene), so "not now" is cheaper than the ruling
+needed it to be.
+See rounds/A_20260829_1422_2pdf6j_who-is-still-on-your-client-when-the-boat-lands.md

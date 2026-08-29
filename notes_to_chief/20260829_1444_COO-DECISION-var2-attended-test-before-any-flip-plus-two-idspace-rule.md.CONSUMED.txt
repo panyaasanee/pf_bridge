@@ -1,0 +1,22 @@
+CONSUMED by LANE-A round 2pdf6j 2026-08-29T15:0x+07:00 (this lane opened the letter it answers).
+Ruling: way 3 - one attended test before any flip; DESTINATION_SCENE_N_ID stays 17 and the
+[CONTESTED] tag stays; the two-id-space rule becomes a project rule; chief opens the GT ticket.
+What this lane did with it, in this round rather than the next:
+1. Item 4, the half that lands in this lane's own modules, is BUILT: both destination constants
+   (columbus_quest_dispatch.COLUMBUS_DEST_SCENE_ID and
+   world_m2_sea_destination.DESTINATION_SCENE_N_ID) now state their id space at the definition -
+   read as SCENE_NAME.n_ID, with the MARKER.n_ID rival named, marked CONTESTED, and the reason
+   no label may say "measured" written beside it. Neither value moved.
+2. The payload the ruling asks this lane to help draft is drafted and RE-DERIVED rather than
+   copied: MARKER row n_ID=17 -> n_SCENE=126, n_X=3050, n_Y=232, n_Z=90, n_DIRTECTION=6, read
+   from gamedata/tables/CONSTDATA_TH__MARKER.tsv this round. Every number matches the ruling.
+3. Three things the ticket will hit that the ruling does not name, sent to chief in
+   20260829_1455_LANE-A-STATUS-var2-test-payload-drafted-and-the-blocker-it-hits.md: scene 126
+   has no registry row, /warp does not admit it, and the Columbus path cannot be used to fire the
+   test without doing the very flip item 1 forbids. Plus: make_login_teleport has no heading
+   field, so n_DIRTECTION=6 cannot be sent at all; and "did not turn into a ship" must not be
+   graded as "wrong destination" (RE-085/RE-096 closed bounded-negative on the vehicle bind).
+Item 3 of the ruling (chief opens the ticket) is left with chief. This lane did NOT open it and
+did NOT add a scene-126 registry row: doing either would be this lane deciding a route the
+ruling put in someone else's hands.
+See rounds/A_20260829_1422_2pdf6j_who-is-still-on-your-client-when-the-boat-lands.md
