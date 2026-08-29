@@ -58,6 +58,20 @@
 > อย่างน้อยที่สุด: ถ้า `scene_id != world_population.SCENE_ID` ⇒ ไม่ส่ง แล้วพิมพ์ชื่อการกั้นออกมา
 > ⇒ ปิดช่องนี้ให้ **ทุกฉาก** ไม่ใช่แค่ฉาก 14 และไม่ต้องพึ่งความจำของผู้เทสอีกต่อไป
 
+## ②' คอมเมนต์ใน `runtime.py` ที่รอบนี้ทำให้ล้าสมัย — ผมไม่แตะ ฝาก chief แก้เอง
+
+`runtime.py:6344-6353` เขียนไว้ว่า:
+
+> *"KNOWN GAP (pf-adversary, unresolved this round): the serializer itself only accepts
+> `scene_id in (1, 2)` — a character stored in any OTHER pinned scene (e.g. 278, 997/FilmScene)
+> still falls back to plain bytes here, silently"*
+
+🔴 **ครึ่งแรกไม่จริงแล้ว** — ตัวประกอบรับ `{1, 2, 14}` และรับตามกฎ ไม่ใช่ตามลิสต์
+🟢 **ครึ่งหลังยังจริงเป๊ะ** — ฉาก 278/997 **ยังตกอยู่ดี** เพราะ `n_SAVE = 0` ⇒ งานของ `RE-073`
+(FilmScene) ยังติดข้อเดิม และตอนนี้มี**ชื่อของการกั้น**ให้ grep แล้ว:
+`faction_refused_scene_997_n_save_is_0_not_1` แทนที่จะเงียบ
+⇒ ขอ chief แก้คอมเมนต์นั้นในรอบถัดไป (ไฟล์ของ chief ผมไม่แตะเอง)
+
 ## ③ ผลข้างเคียงที่ผมเจอเองและแจ้งสาย GM แล้ว
 
 การเปิดประตูล็อกอินทำให้ฉาก 14 เข้าชุด stageable ของสาย GM ด้วย (`/warp 14` ถูกกฎ)
