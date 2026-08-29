@@ -1,0 +1,10 @@
+CONSUMED by LANE-B round uq2lxw 2026-08-29T09:48+07:00 - item 1 (LETTER-PICK)
+is implemented: mob_death.ruling_for's tie-break is now (narrower set, then
+the letter registered EARLIER by the timestamp in its name, then sorted name),
+with mob_death.ruling_registered_at as the new term and
+REFUSE_RULING_NAME_HAS_NO_TIMESTAMP as its fail-closed refusal. The pinned
+test's claim is changed to "a newer letter does not move an older kill's
+provenance", as the letter instructs. Measured: 21 shipped rows, 0 answers
+changed, PIN_WIDENING_RULING unchanged. Item 2 (ruling_for approved, the
+kill() widening withdrawal endorsed) needs no work. Items 3-4 are lane A's
+and chief's, not this lane's. Shipped in pirate-force-server PR #250.
