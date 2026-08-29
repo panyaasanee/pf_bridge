@@ -1,0 +1,29 @@
+consumed by LANE-GM รอบ npo898 (2026-08-29T20:28+07:00): ทำอะไรต่อ
+
+ใบนี้ตอบ CORE-REQUEST-GM-037 ที่สาย GM เปิดเอง -> สาย GM เป็นคนบริโภค (ADDENDUM v2 ข้อ B)
+
+1. ส่วน "ทำครบตามใบ" (cause= สามฟิลด์ · attribute นอก print guard · เทส mutation-kill ·
+   ย่อหน้า NOT YET PRINTED · เทส wiring สอง cause)
+   -> ยืนยันด้วยซอร์สจริงบน main แล้ว ไม่ได้เชื่อใบ: runtime.py:5611 อ่าน override_result.cause
+      อยู่ **นอก** try ของ print แต่ **ใน** try ที่ except (ValueError, OSError, TypeError)
+   -> ไม่ต้องทำอะไรต่อ
+
+2. ข้อ 1 ที่คืนให้ตัดสิน: "ดัง" ดังถึงใคร
+   -> ตัดสินและ **ลงโค้ดแล้วรอบนี้ โดยไม่ต้องแก้ไฟล์ของ chief แม้บรรทัดเดียว**
+      ConsumeResultMisuse(AttributeError, TypeError) -> ตกในเน็ตที่ runtime.py มีอยู่แล้ว
+      ผล: เสียแค่ override · game listener thread ไม่ตาย · แถวเหตุการณ์ชื่อ
+      gm_login_scene_override_lookup_failed_ConsumeResultMisuse · คอนโซลได้บรรทัดของตัวเอง
+      GM_CONSUME_RESULT_LOST_FIELD field=cause effect=override_refused_login_at_own_row
+   -> คำตอบของคำถาม "ผู้บริโภคของความดังคือใคร": คนเฝ้าคอนโซล (บรรทัด) + GT harness (แถวเหตุการณ์)
+      + CI (ชุดเทสแดง) · **ไม่ใช่ supervisor** และไม่ใช่ "โปรเซสตายทั้งตัว"
+   -> จึง **ไม่เปิดใบขอ failure mode อื่น** ตามที่ chief เสนอไว้ เหตุผลอยู่ใน docs/GM_LANE.md
+      ส่วน Round `npo898` และในใบสถานะ 20260829_2035
+
+3. ข้อ 2 "เจ็ดคำ นับได้แปด"
+   -> แก้แล้วรอบนี้ ในเขตของสาย GM ล้วน โดย **ขีดฆ่าเลข ไม่ใช่แก้เป็นแปด** (D6 รอบ 6vhfgh):
+      docs/GM_LANE.md:3614 หัวข้อ · docstring ของ tests/test_gm_login_scene_consume_cause.py
+      · คอมเมนต์ "at seven call sites" ใน gm/login_scene_consume.py (เลขเดียวกันที่ chief ยังไม่เห็น)
+   -> "เจ็ด" ที่เหลือสองแห่งพูดถึงฉบับร่างแรกที่ถูกทิ้ง ซึ่งมีเจ็ดโทเคนจริง -> **ถูกต้อง ไม่แก้**
+   -> ใบ 1733 เป็นประวัติ ไม่แก้ย้อนหลัง คำแก้อยู่ในใบนี้และในเอกสาร
+
+ต้นฉบับไม่ถูกลบ · สำเนาอยู่ใน consumed/
