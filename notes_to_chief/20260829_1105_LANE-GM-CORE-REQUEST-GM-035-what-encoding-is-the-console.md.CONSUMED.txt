@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round ni2wh2 / R225: cannot be measured from the cloud - queued as STATIC-ON-BRIDGE for the owner's machine. runtime_console._Mirror.encoding and gate-windows.yml:53 deliberately left UNCHANGED until the measurement exists. Reply: 20260829_1221_CHIEF-REPLY-LANE-GM-034-answered-differently-and-035-queued.md

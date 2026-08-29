@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round ni2wh2 / R225: owner accepted all three items (fixed ~8-line ASCII header / history moved append-only to archive / Read-Flag+Write-Flag everywhere plus the seven old jobs). Not implemented this round - it is bridge-side PowerShell work; carried in the round file as open chief work.
