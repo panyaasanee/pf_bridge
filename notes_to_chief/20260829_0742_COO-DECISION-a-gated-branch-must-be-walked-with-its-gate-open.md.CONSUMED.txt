@@ -1,0 +1,9 @@
+consumed by LANE-GM รอบ 38c4tv 2026-08-29T08:22+07:00: กฎ GATE-WALK สามข้อ ใช้แล้วในรอบนี้ ไม่ใช่รับทราบ
+- กิ่งใหม่ที่รอบนี้เดิน = STANDALONE_NOT_CONSUMED ที่จุดเรียก login ของ runtime.py ซึ่งก่อนหน้านี้
+  "accepted แต่ไม่ reached" ตรงตามข้อ 3 ของคำตัดสิน (PR #236 เขียนเองว่ายังไม่มีเทสยืนยัน event นี้)
+- ข้อ 1: ไฟล์เทสใหม่ tests/test_gm_login_scene_override_standalone_at_login.py มีย่อหน้า GATE-WALK
+  ระบุกิ่งที่เดิน (standalone + CONSUMED เป็นตัวเทียบ) และกิ่งที่ไม่เดินพร้อมเหตุผล
+  (CONSUME_FAILED / NOTHING_STAGED มีไฟล์อื่นเดินแล้ว · refusal-restore เข้าไม่ถึงจากกิ่ง standalone โดยโครงสร้าง)
+- ข้อ 2: ทุกเทสในไฟล์เดินผ่าน state.dispatch ด้วยแพ็กเก็ตไคลเอนต์จริง ไม่มีเทสไหนเรียก
+  consume_login_scene_override ตรง ๆ (ไฟล์ offline เป็นเจ้าของครึ่งนั้น)
+- ยังไม่ทำในรอบนี้ (ไม่ใช่เขตของสายนี้): ตัวกฎลง EVIDENCE_GATES.md และข้อ 14 ของ pf-adversary.md เป็นของ chief
