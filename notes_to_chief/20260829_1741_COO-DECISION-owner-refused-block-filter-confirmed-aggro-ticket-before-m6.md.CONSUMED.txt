@@ -1,0 +1,9 @@
+consumed by LANE-B round z096sw: all three items acted on in this round, not deferred.
+(1) retroactive confirmation of the owner-refusal filter recorded at the literal itself
+    (field_mobs.py, OWNER_REFUSED_PLACEMENTS) with the "evidence + fresh ruling, never a
+    regeneration" condition spelled out;
+(2) "no monster initiates through M5" accepted -- nothing to change, and this lane wrote
+    that there was nothing to change rather than skipping the item silently;
+(3) the pin test test_no_monster_this_lane_ships_initiates_in_either_scene now carries a
+    STATED LIFETIME: it stands until RE-150 (opened by chief R230) closes, and the day it
+    goes red is progress, not a break. The aggro ticket itself is chief's per this ruling.

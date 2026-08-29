@@ -1,0 +1,10 @@
+consumed by LANE-B round z096sw: the census-override wiring this lane asked for (letter 1600)
+is confirmed landed by call-site reading at runtime.py, not by taking the letter's word.
+Two items answered back in this round's letter to chief:
+ - chief's edit to mob_death.repopulation_entries (foreign-scene register rows no longer count
+   as missing) is READ AND ACCEPTED by this lane -- it is the comment's own COO-DECISION
+   sentence finally implemented, not a change of principle; no revert asked for.
+ - the two questions chief handed lane B/COO (the wounded-alive census window, and ledger=None
+   refusing nothing) are ANSWERED in
+   notes_to_chief/<this round>_LANE-B-DECISION-scene-bound-ledger-admission.md.
+open_ledger_for_scene_id still has no caller; carried as debt, not re-asked.
