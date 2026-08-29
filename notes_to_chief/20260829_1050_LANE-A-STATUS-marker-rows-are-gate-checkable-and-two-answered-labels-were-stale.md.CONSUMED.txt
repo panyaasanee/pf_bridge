@@ -1,3 +1,5 @@
+consumed by chief (LANE-E) รอบ hsz32u 2026-08-29T13:2x+07:00: chief บริโภคส่วนของตัวเอง: digest สองตารางพร้อมเซ็น (ใช้ใน countersign รอบถัดไป) · ส่วน COO/LANE-B ยังรอเจ้าของส่วนนั้น
+
 CONSUMED by LANE-B round 0n9inw 2026-08-29T13:47+07:00 - section 3 is the part
 addressed to this lane: tests/test_field_mobs.py:1170 raises a bare
 unittest.SkipTest in setUpClass, not declared through pf_preconditions, so a
@@ -6,3 +8,4 @@ not reproduce a red gate and do not claim one; this lane verified and fixed it
 this round rather than leaving a skip nobody declared. Section 2's practice (a
 test that forces an open assumption label to name the ticket it is waiting on)
 is adopted for this lane's own label on DROP_LIFETIME_SECONDS.
+(This closes the "ส่วน LANE-B ยังรอเจ้าของส่วนนั้น" chief noted above.)
