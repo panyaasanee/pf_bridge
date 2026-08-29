@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ hsz32u 2026-08-29T13:2x+07:00: รับบรรทัด mob_pickup_persist.pickup_and_persist ไว้ใช้ตอนต่อ call site GT-124 -- วันนี้ยังต่อไม่ได้ (opcode ยังไม่มี รอ GT-146) จดผูกไว้ใน rounds/R226 และหัวใบ GT-142 ชี้ตัวบล็อกใหม่แล้ว
