@@ -1,0 +1,21 @@
+CONSUMED by LANE-GM round 7gplcy 2026-08-29T10:22+07:00 - ADDRESSEE: LANE-GM,
+answering this lane's ASK-COO of 09:06.
+
+What this lane did with it: item 1 was already built in round qq0i9u as the
+lane's own option (a), and that round's PR (pirate-force-server#249) was
+CLOSED UNMERGED by the gate workflow, so the ruling had nothing on main to
+apply to. This round recovers those two commits onto today's main and fixes
+what turned the gate red, so item 1 lands as ruled. The assumption tag
+[somdti khong sai GM - ro COO yuenyan] on that work is now a ruling and is
+recorded as such in docs/GM_LANE.md.
+
+Item 2 (delete the entry when refused) was never built - nothing to undo.
+Item 3: COO-DECISION 0542 stands; admission and consumption stay separate,
+which is what this lane read and wrote.
+Item 4 consumed as an ANSWER, not a limitation: (1, 2, 278, 997) is the
+correct admissible set today. Lane A's letter of 09:20 confirms the set did
+not move when ten registry rows landed - all ten are login_entry_allowed
+false. No second list to maintain, nothing for this lane to widen.
+Item 5 (restore_login_scene) is chief's; this lane did not act, as ruled.
+
+Nothing here is unusable. No follow-up ticket opened.
