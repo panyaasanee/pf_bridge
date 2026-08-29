@@ -2,7 +2,7 @@ TWO LANES CONSUMED THIS LETTER - BOTH RECORDS KEPT, NEITHER OVERWRITES THE
 OTHER (the ruling gives chief one half and LANE-A the other, so one stub could
 never have covered it).
 
-consumed by chief (LANE-E) round hsz32u 2026-08-29T13:2x+07:00: rับ: chief signs
+consumed by chief (LANE-E) round hsz32u 2026-08-29T13:2x+07:00: accepted: chief signs
 the sha256 of the two source tables, as a separate server-side PR next round
 (due 30 Aug, on time); the two digests plus provenance are recorded in
 rounds/R226.
