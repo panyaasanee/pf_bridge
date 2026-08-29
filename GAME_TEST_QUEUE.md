@@ -7223,7 +7223,28 @@ server ยิง 5 เฟรม client เรนเดอร์ 5 บรรท�
 
 **ผู้เปิดใบ: LANE-GM (รอบ `w8hnu9`)** -- ผลกลับมาที่สาย GM บริโภค · ใบ RE ที่คู่กัน: `RE-132`
 
-## GT-134 BG0015-FIRST-EYES-001 [attended, in-game]: เกาะภูเขาไฟนรก `Bg0015` (scene 14) มีสิ่งมีชีวิตขึ้นจอจริงหรือไม่ -- ตาคู่แรกของโปรเจกต์ในฉากนี้  [BLOCKED]
+## GT-134 BG0015-FIRST-EYES-001 [attended, in-game]: เกาะภูเขาไฟนรก `Bg0015` (scene 14) มีสิ่งมีชีวิตขึ้นจอจริงหรือไม่ -- ตาคู่แรกของโปรเจกต์ในฉากนี้  ~~[BLOCKED]~~ **[READY]**
+
+> 🟢🟢 **B2 ปิดแล้ว · ใบนี้ `[READY]` · 2026-08-30T00:4x+07:00 (LANE-A รอบ `vvy6q7`)**
+> `COO-DECISION 20260829_2342` (ตอบใบ `ASK-COO 20260829_2240` ของสายนี้) **เคาะว่า "เปิดได้"**
+> ⇒ รอบนี้พลิก `login_entry_allowed` ของฉาก 14 เป็น `true` ใน `scenarios/world_scene_registry_001.json`
+> **และปิด `D3` ในคอมมิตเดียวกัน** (ไม่ได้ปล่อยให้เปิดค้างอย่างที่ใบ COO ยอมให้ทำได้)
+> 🔴 **ห้ามบูตจนกว่าจะเห็น merge sha ของ `pirate-force-server#290` บน main** — ก่อนหน้านั้นประตูยังปิดจริง
+> **สองบรรทัดที่ใบ COO บังคับให้มีก่อนใบรันได้ อยู่ในหัวข้อ `เกณฑ์` ข้างล่างแล้วทั้งคู่**
+
+> 🔴🔴 **บรรทัดที่ผู้เทสต้องอ่านก่อนตัดสิน PASS/FAIL — เงื่อนไขข้อ 1 ของ `COO-DECISION 20260829_2342`:**
+> **"มอนไม่ก้าวร้าว / ไม่อ่านว่าเป็นศัตรู = อาการของ `D3` ที่คาดไว้แล้ว ไม่ใช่ `FAIL` ของใบนี้"**
+> คำถามของใบนี้คือ ***มีสิ่งมีชีวิตขึ้นจอไหม*** ไม่ใช่ ***มันตีเราไหม***
+> 🔴 และ **แม้รอบนี้จะปิด `D3` ไปแล้ว บรรทัดนี้ยังยืน ไม่ถอน**: สิ่งที่รอบนี้ทำคือ**ส่งไบต์ faction ออกไป**
+> — **ไม่มีใครเคยเห็นว่าไคลเอนต์เรนเดอร์คู่ faction ในฉากนี้ออกมาเป็นอะไร** เพราะไม่เคยมีใครยืนในฉาก 14
+> ⇒ ถ้ามอนขึ้นจอแต่ไม่ก้าวร้าว = **ยังเป็น PASS ของใบนี้** และเป็นข้อมูลชิ้นใหม่ให้ใบถัดไป
+
+> 🔴 **`D3` ปิดในรอบเดียวกัน — สิ่งที่ผู้เทสควรเห็นเพิ่มบนคอนโซล หนึ่งบรรทัด:**
+> `PLAYER_FACTION basic_faction=1` (และ event `player_faction1_start_game_sent`)
+> ก่อนรอบนี้ฉาก 14 ได้ `player_faction1_compose_refused_production_start_game` แทน
+> ตัวคุมคือ `src/pirateforce_foundation/world_faction_admission.py`: ฉากที่ registry ประกาศเปิด **และ** `n_SAVE = 1`
+> วันนี้ = `{1, 2, 14}` เป๊ะ (`WORLD_FACTION_ADMISSION scenes=1,2,14`) · ฉาก 278/997 ไม่เข้าเพราะ `n_SAVE = 0`
+> 🔴 **ไม่เห็นบรรทัด `PLAYER_FACTION` = ให้จดไว้และรายงาน แต่ไม่ใช่ FAIL ของใบนี้** (เกณฑ์ PASS ยังเป็นตาเห็น)
 
 > **LANE-A รอบ `w0pu2i`** (2026-08-28 · milestone M3 · สั่งโดย `COO-DECISION 2026-08-28T22:50+07:00`
 > "M2 stays paused, M3 walks without that door")
@@ -7411,11 +7432,37 @@ server ยิง 5 เฟรม client เรนเดอร์ 5 บรรท�
   `consume_login_scene_override` (ใช้ครั้งเดียวตาม `COO-DECISION 0441` ข้อ 2)
   ⇒ ข้อ 1 (สำมะโนผิดเกาะ) และข้อ 2 (แถว `character_positions` ติดป้าย `scene_id 1`) **มีเทสขับผ่าน dispatcher จริงแล้วทั้งคู่**
   (`tests/test_gm_login_scene_override_position_resync.py`) · 🔴 **เป็นผลของ PR ที่ยัง "รอ merge"** — ผู้เทสห้ามถือว่าแก้แล้ว
-  จนกว่าจะเห็น merge sha บน `main` · ข้อ 3 (faction byte / D3) **ไม่ได้แตะรอบนี้ ยังบล็อกใบนี้อยู่**
+  จนกว่าจะเห็น merge sha บน `main` · ~~ข้อ 3 (faction byte / D3) **ไม่ได้แตะรอบนี้ ยังบล็อกใบนี้อยู่**~~
 
-### server args (เป๊ะ)
+  🟢🟢 **ทั้งสามข้อปิดครบแล้ว · B1 · B2 · B2' · D3 — LANE-A รอบ `vvy6q7` 2026-08-30T00:4x+07:00**
+  | ข้อ | ปิดโดย | ตรวจได้ที่ |
+  |---|---|---|
+  | **B1** สำมะโนฉาก 14 | รอบ `ga91m5-r2` — `lane_hooks/lane_a_scene_census.py` (ไม่ต้องมี `elif` ใน `runtime.py` อีกแล้ว) | `WORLD_CENSUS_BG0015 assembled=81/91` |
+  | **ข้อ 1** สำมะโนผิดเกาะ | `CHIEF-DECISION 0520` ทาง A + ฉาก 14 มีสำมะโน**ของตัวเอง** | `tests/test_lane_a_scene_census.py` ขับ dispatcher จริงบน registry จริง |
+  | **ข้อ 2** แถว `character_positions` | กิ่ง `login_scene_override_visit` ไม่เขียนแถวถาวร · **และ `persist_position_allowed` ของฉาก 14 ยังเป็น `false`** (รอบนี้พลิก boolean เดียว ไม่ใช่สอง) | `tests/test_world_scene_marker.py` |
+  | **ข้อ 3 / D3** faction byte | **รอบนี้** — `src/pirateforce_foundation/world_faction_admission.py` + แก้เกตเดียวใน `player_wire.py` | `PLAYER_FACTION basic_faction=1` · `tests/test_world_faction_admission.py` |
+  | **B2** ประตูล็อกอิน | **รอบนี้** — `login_entry_allowed: true` ตาม `COO-DECISION 20260829_2342` | `WORLD_SCENE scene_id=14 ...` (ไม่ใช่ `WORLD_SCENE_ENTRY_REFUSED`) |
+  🔴 **เงื่อนไขเดียวที่เหลือก่อนบูต: เห็น merge sha ของ `pirate-force-server#290` บน main**
+  🔴 **`persist_position_allowed` ยังเป็น `false` โดยตั้งใจ** ⇒ ถอน override แล้วตัวละครกลับ Port Royal เป๊ะ
+  แถวเดิมของผู้เทสไม่ถูกแตะ — ถ้าผู้เทสเห็นตัวเองโผล่ที่พิกัดภูเขาไฟกลาง Port Royal ในล็อกอินถัดไป
+  **นั่นคือ `GT-106` ซ้ำ = รายงานทันที เป็นบั๊กจริง ไม่ใช่ผลที่คาดไว้**
+
+### server args (เป๊ะ) — 🔴 **PRECONDITION แข็ง ไม่ใช่ข้อควรระวัง**
 `py -3 -u -m pirateforce_foundation.app --db state\run_gt132.sqlite3` · db = สำเนา **ห้ามเปิด canonical**
 · client `-SecondPasswordMode bypass` · 🔴 ห้ามมีแฟล็ก `--*-scenario` / `--world-census-actors` / `--export-events`
+
+> 🔴🔴 **ยกเป็น PRECONDITION แข็ง ตามเงื่อนไขข้อ 1 ของ `COO-DECISION 20260829_2342`
+> (LANE-A รอบ `vvy6q7` · 2026-08-30T00:4x+07:00) — บูตผิดข้อนี้ = ใบนี้เป็นโมฆะ ห้ามกรอกผล**
+> **ถ้าคำสั่งบูตมีแฟล็ก `--*-scenario` ใด ๆ หรือ `--second-password-mode bypass` (ฝั่ง *เซิร์ฟเวอร์*)
+> ⇒ หยุด ปิดเซิร์ฟเวอร์ บูตใหม่ให้ถูก แล้วเริ่มใบใหม่ตั้งแต่ต้น**
+> เหตุผลที่วัดแล้ว (`pf-adversary` รอบ `ucaybn` ข้อ D8): `runtime.py:944`
+> `world_census_enabled = (not active_lanes and second_password_mode == "required")`
+> เป็นทั้งเงื่อนไขของกิ่งสำมะโนต่อสาย **และ** ตัวปลดอาวุธ dispatcher เดิม `v141:4292`
+> ⇒ บูต opt-in **ไม่เรียกสำมะโนฉาก 14 เลย** แล้วส่ง `V134_P0_P30_P91_ISOLATED` = bg0001 สามตัว
+> พิกัด Port Royal เข้าฉาก 14 แทน ⇒ ผู้เทสเห็น **3 ร่าง ไม่มีบรรทัด `WORLD_CENSUS_BG0015`** = **FAIL ปลอม**
+> 🔴 **ตัวยืนยันหนึ่งบรรทัด ก่อนทำอย่างอื่นทั้งหมด:** ต้องเห็น `WORLD_CENSUS_BG0015 assembled=81/91`
+> **ไม่เห็น = หยุด ห้ามเดินต่อ ห้ามเดา** · เห็น `V134_P0_P30_P91` = บูตผิด กลับไปข้อบน
+> 🔴 `-SecondPasswordMode bypass` ของ **ไคลเอนต์** ยังใช้ตามเดิม — คนละตัวกับแฟล็กเซิร์ฟเวอร์
 
 ### ขั้นตอน (~30-40 นาที · อัดวิดีโอต่อเนื่องทั้งช่วง `LOCK_GAME`)
 1. ของมาตรฐานทุกข้อตาม `ATTENDED_SESSION_RUNBOOK.md` (LOCK · สำเนา DB · `CANON_SHA` ก่อน-หลัง ·

@@ -1,0 +1,31 @@
+consumed by LANE-A รอบ vvy6q7 (2026-08-30T00:4x+07:00): ทำอะไรต่อ
+
+ใบนี้ตอบใบที่สายนี้เปิดเอง (20260829_2240_LANE-A-ASK-COO-scene-14-door-has-one-blocker-left.md
++ หลักฐานเสริม 20260829_2240_LANE-A-ASK-COO-does-d3-faction-block-gt134.md)
+คำเคาะ: "เปิดได้" ภายใต้สามเงื่อนไข + มอบ D3 ให้สาย A พร้อม blast radius เป็นลายลักษณ์
+
+ทำครบทั้งสี่ข้อในรอบที่ได้รับ ไม่มีข้อค้าง:
+
+1. เงื่อนไข 1 (สองบรรทัดในหัวใบ GT-134) -- ทำแล้วทั้งคู่
+   - ข้อห้ามแฟล็ก ยกเป็น PRECONDITION แข็ง: อยู่ใต้หัวข้อ "server args" ของ GT-134
+     พร้อมตัวยืนยันหนึ่งบรรทัด (ต้องเห็น WORLD_CENSUS_BG0015 assembled=81/91 ไม่เห็น = หยุด)
+   - บรรทัด "มอนไม่ก้าวร้าว/ไม่อ่านว่าเป็นศัตรู = อาการ D3 ที่คาดไว้ ไม่ใช่ FAIL": อยู่ใต้หัวใบ
+     และ NOT ถอน แม้รอบนี้ปิด D3 แล้ว -- เพราะการส่งไบต์ faction ไม่เท่ากับการเห็นว่ามันเรนเดอร์
+2. เงื่อนไข 2 (ด่านรับเข้า + เทสขับสามเส้นทาง ห้ามถอด) -- คงอยู่ครบ ไม่ถอด
+   แต่ REPOINT ไปที่ registry ชั่วคราวที่ "ปิด" แทน registry จริง เพราะ registry จริงเปิดแล้ว
+   ⇒ ถ้าไม่ย้าย เทสสามตัวนั้นจะกลายเป็นการยืนยันคุณสมบัติตรงข้ามโดยที่ยังเขียวอยู่
+   (tests/test_lane_a_scene_census.py :: TheAdmissionCheckIsTheGateTests -- เขียนเหตุผลไว้ในคลาส)
+3. พลิก boolean -- scenarios/world_scene_registry_001.json ฉาก 14 login_entry_allowed -> true
+   🔴 persist_position_allowed ยังเป็น false ไม่แตะ (พลิก boolean เดียว ไม่ใช่สอง)
+4. D3 -- ปิดในคอมมิตเดียวกัน ไม่รอกำหนด 30 ส.ค. 12:00
+   src/pirateforce_foundation/world_faction_admission.py (โมดูลใหม่ของสายนี้)
+   + แก้เกตเดียวใน player_wire.make_actor_attr_with_name_class_and_faction
+   blast radius ตามใบเป๊ะ: registry ประกาศเปิด AND n_SAVE = 1 -> {1, 2, 14} วันนี้ DERIVED ไม่ใช่ลิสต์
+   ตัวประกอบแช่แข็งของ GT-032 (make_actor_attr_with_basic_faction) ไม่แตะ ยังถือ (1, 2) ตามเดิม
+   pf-adversary รันก่อน commit ตามที่ใบสั่ง
+
+ผลข้างเคียงที่ใบนี้ไม่ได้พูดถึงและสายนี้เจอเอง (แจ้งสาย GM แล้ว):
+   การเปิดประตูล็อกอินทำให้ฉาก 14 เข้าชุด stageable ของสาย GM ด้วย (/warp 14 กลายเป็นคำสั่งถูกกฎ)
+   เพราะ login_scene_admission.stageable_scene_ids() derive จาก login_entry_allowed
+   ⇒ ต้องการอยู่แล้ว (ทางเข้าของ GT-134 คือ override นี้) แต่ไม่ได้อยู่ในใบ ⇒ ไม่ปล่อยให้เจอเอง
+   ใบแจ้ง: 20260830_0045_LANE-A-TO-LANE-GM-scene-14-is-stageable-now.md
