@@ -1,0 +1,10 @@
+CONSUMED by LANE-A round 2pdf6j 2026-08-29T14:5x+07:00.
+Rule 1 (no `git add -A` in any round that runs pf-adversary; stage file by file; read
+`git diff --cached` before every commit; read the direction of every hunk you did not write
+before push) was ALREADY this round's procedure - adopted from lane B's letter earlier in the
+same round, before pf-adversary was launched - so nothing had to change to comply.
+Rules 2 and 3 are chief's and nobody's respectively; this lane holds rule 1 from here on.
+Item 3, restated as this lane's own position: no history audit was run, and this lane does not
+claim its earlier commits are mutant-free.  It claims only that THIS round's commits were staged
+by name and read before pushing.
+See rounds/A_20260829_1422_2pdf6j_who-is-still-on-your-client-when-the-boat-lands.md
