@@ -3770,6 +3770,37 @@ events         : mob_death_frames_census_compose_refused_RuntimeError
 โค้ด: `src/pirateforce_foundation/mob_census_wire_count.py` (โมดูลใหม่ของสาย B · ไม่มีแฟล็ก · `production_allowed = True` · ไม่โยนเข้า dispatch เด็ดขาด) · `tests/test_mob_census_wire_count.py` · จุดพิมพ์ใน `runtime.py` (การแก้ครั้งเดียวที่ข้อ G สงวนไว้ให้สายนี้)
 
 
+🆕 **RIDER-084-E (เจ้าของใบ LANE-B · รอบ `jop8ph` · 2026-08-29T19:5x+07:00) — ฟิลด์ใหม่บนบรรทัดที่ผู้เทส grep อยู่แล้ว · ไม่แก้ objective/เกณฑ์ผ่าน/nonclaims ของใบแม่แม้แต่ตัวอักษรเดียว**
+
+บรรทัด `MOB_CENSUS_HOSTILITY` ได้ฟิลด์ท้ายสุดเพิ่มหนึ่งตัว: `ledger=<state>`
+(ฟิลด์เดิมทุกตัวอยู่ที่เดิม ลำดับเดิม ⇒ การ grep หา `MOB_CENSUS_HOSTILITY` ยังแมตช์เหมือนเดิม)
+
+```
+MOB_CENSUS_HOSTILITY scene_id=.. scene=.. roster=.. backed=.. unbacked=.. refused=.. override=.. ledger=<state>
+```
+
+🔴 **สิ่งที่ผู้เทสต้องอ่านให้ถูก:**
+- `ledger=not_reported` = **จุดเรียกไม่ได้ส่ง ledger ให้บรรทัดนี้** ไม่ใช่ "ไม่มี ledger"
+  **นี่คือสิ่งที่บูตวันนี้จะพิมพ์** จนกว่า chief จะต่อสองคีย์เวิร์ด (ดูจดหมาย `20260829_1955_LANE-B-CORE-REQUEST-*`)
+- `ledger=same_scene` = ledger ถูกใช้จริง ⇒ **มอนที่บาดเจ็บจะถูกส่งซ้ำด้วยเลือดที่เหลือจริง**
+- `ledger=other_scene` / `unscoped_incomplete` / `same_scene_incomplete` = **ถูกปฏิเสธ**
+  ⇒ census ประกอบตามปกติ ไบต์เท่ากับตอนไม่ส่ง ledger ⇒ **มอนบาดเจ็บกลับมาเลือดเต็ม**
+  (นี่ไม่ใช่ error และไม่ทำให้บูตล้ม — เป็นสภาพที่มีชื่อ)
+- `ledger=absent` = ผู้เรียกส่ง `None` มาเอง · `ledger=ledger_unreadable` = ของที่ส่งมาไม่ใช่ ledger
+
+บรรทัดละเอียดสำหรับตอนอยากรู้ว่าทำไม (พิมพ์เมื่อจุดเรียกเรียก `describe_ledger_admission`):
+```
+MOB_LEDGER_ADMISSION scene_id=.. scene=.. ledger_scene=.. state=.. admitted=yes|no covered=N/M missing=.. vacuous=yes|no
+```
+`covered=N/M` คือครึ่งที่ **วัด** (`state=` คือครึ่งที่ **ตัดสิน**) · `missing=not_measured`
+แปลว่าไม่มีการอ่าน ledger เลย ไม่ใช่ "ไม่ขาดอะไร"
+
+🔴 **ริเดอร์นี้ไม่อ้างอะไรที่ชั้นจอ และไม่เปลี่ยนไบต์บนบูตวันนี้** — สองคีย์เวิร์ดที่ทำให้มันเปลี่ยน
+อยู่ใน `runtime.py` (เขตของ chief) และยังไม่ต่อ · `RIDER-084-A` `OW1`-`OW3` ยังบังคับเหมือนเดิมทุกข้อ
+
+โค้ด: `src/pirateforce_foundation/mob_ledger_admission.py` (โมดูลใหม่ของสาย B · ไม่มีแฟล็ก · `production_allowed = True` · ไม่โยนเข้า dispatch เด็ดขาด) · `tests/test_mob_ledger_admission.py`
+
+
 ### ที่มา -- สิ่งที่เปลี่ยนตั้งแต่รอบแรกของ GT-084 (อ่านก่อนบูต ห้าม re-derive ระหว่างรอบ)
 รอบแรกของ `GT-084` (อ่านผลใน `notes_to_chief/20260827_0205_GT084-NO-RESULT-*.md`, ตีความใหม่โดย
 `notes_to_chief/20260827_0520_ATTENDED-URGENT-R187-*.md`) เห็น Tornado Eagle เป็น NPC ธรรมดา -- ไม่มีชื่อแดง

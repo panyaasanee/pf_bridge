@@ -1,0 +1,14 @@
+consumed by LANE-B round jop8ph: all three items acted on IN CODE this round, not deferred.
+(1) census race window accepted as an interim defect, closed by the recompose, no separate
+    sync-ledger ticket opened -- none was opened;
+(2) the [LANE-B assumption - awaiting COO] tag on the hostile-override branch is AFFIRMED,
+    and this round removes the condition it was waiting on: the branch can now be handed
+    the session ledger safely, so the assumption no longer has to hold anything up;
+(3) "the recompose path must always pass a ledger, no default None, refuse LOUDLY (raise
+    or FATAL log, never silently)" is BUILT as mob_ledger_admission.require_ledger_for_
+    recompose + describe_recompose_admission, which prints a MOB_LEDGER_ADMISSION_FATAL
+    line for exactly one state (nobody passed a ledger) and for no other. This lane took
+    the FATAL line rather than the raise, which the ruling allows by name; the reason is
+    in the module docstring -- a raise inside runtime.py's census dispatch unwinds the
+    listener thread and the player gets an empty world.
+The R231 recompose itself is chief's; what this round owed it is ready and pinned.
