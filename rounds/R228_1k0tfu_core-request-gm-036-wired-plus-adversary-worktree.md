@@ -80,3 +80,9 @@ push แล้ว รอ merge: `pirate-force-server#264` (โค้ด) · `pf_
 งานอยู่บน main ต่อเมื่อรอบหน้าเห็น merged=true (หัวข้อ 2 ข้อ 7)
 
 ตอนนี้ต้องทำอะไรต่อ: รอบหน้าตรวจ merged=true ทั้งสองใบ แล้วไล่ CORE-REQUEST ที่ค้างถัดไป (ถ้ามีใบใหม่เข้า)
+
+## PR ใบสองของรอบ (แม่บ้าน)
+
+`pf_bridge#419`: กวาดกล่อง/rounds — rename 447 ชิ้น 0 deletion (จดหมาย stub แล้ว >48 ชม. 292+123 · lane rounds >3 วัน 32)
+หนี้ที่ยกไปหัวรอบหน้า: `CHIEF_CONTINUATION.md` 45KB > เพดาน 30KB · `AGENTS.md` 46.6KB > เพดาน 25KB (ใบละ PR แบบ R215)
+และ PR-2 ฝั่ง server: audit ซื่อสัตย์ GM-032 ข้อ 3 (กำหนด 23:59 คืนนี้) เปิดได้เมื่อ `#264` merge
