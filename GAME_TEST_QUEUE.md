@@ -20,10 +20,11 @@
 
 ## 📇 สารบัญใบที่ยังไม่ปิด (คำสั่ง Panya 18:22 · อัปเดตทุกครั้งที่เปิด/ปิดใบ · เป็นดัชนีชี้ลงข้างล่าง — เนื้อใบไม่ถูกย้าย)
 
-- 🆕 **`GT-147` SCENE17-STOWAWAY-ACTORS-FIRST-EYES-001** (🟢 **PENDING บูตได้เลย · attended** · เปิดโดย LANE-A รอบ `2pdf6j` · ขึ้นเรือ Columbus ออกทะเลแล้ว **ยังเห็นชาวเมืองไหม** — สี่ตัวอยู่ในรัศมี 2000 หน่วยจากจุดลงเรือ · **ผลลบกับผลบวกมีค่าเท่ากัน** · ใบเต็มอยู่ท้ายไฟล์)
+- 🆕 **`GT-148` SCENE17-STOWAWAY-ACTORS-FIRST-EYES-001** (🟢 **PENDING บูตได้เลย · attended** · เปิดโดย LANE-A รอบ `2pdf6j` · ขึ้นเรือ Columbus ออกทะเลแล้ว **ยังเห็นชาวเมืองไหม** — สี่ตัวอยู่ในรัศมี 2000 หน่วยจากจุดลงเรือ · **ผลลบกับผลบวกมีค่าเท่ากัน** · ใบเต็มอยู่ท้ายไฟล์)
 - 🔥 **`GT-146` PICKUP-CLICK-OPCODE-CAPTURE-001** (🟢 **PENDING บูตได้เลย · หัวคิวกะ attended ถัดไป ตาม `COO-DECISION 20260829_1241` ข้อ 2** · เปิดโดย LANE-B รอบ `uq2lxw2` · คลิกซ้ายบน element ของตกที่เซิร์ฟเวอร์ส่งเอง (คู่เลน hypothesis ที่ Panya อนุมัติ 20260824) แล้วเก็บทุกเฟรมขาเข้า — ใบ capture ที่ปลด `RE-125`/`GT-124`/M5 · ผลลบไม่ปิดใบ · ใบเต็มอยู่ท้ายไฟล์ · [บรรทัดสารบัญนี้เติมโดย chief R226 ตามกติกาสารบัญ — เนื้อใบไม่ถูกแตะ])
 - 🆕 **`GT-142` M5-KILL-PICKUP-RELOG-ROUNDTRIP-001** (🔴 **BLOCKED — `BLOCKED-BY: STORE-INSERT-001`** · เปิดโดย chief R222 ตาม `COO-DECISION 20260829_0441` gate-2 ข้อ 3 · ใบปิดวง M5: ฆ่ามอนใน `Bg0002` → เก็บของ → relog → ของยังอยู่ไหม · 🔴 **ห้ามขึ้นหัวคิว ห้ามเรียกผู้เทส** ~~จนกว่าตั๋วราก `STORE-INSERT-001` ปิด~~ [chief R226: ตั๋วรากปิดแล้ว เงื่อนไขย้ายเป็น: จนกว่า `GT-146` ให้ opcode และ call site `GT-124` ลง main] (มติข้อ 6 กฎ 2-3) · 🔴 เกรดไม่ได้จนกว่า `RE-139` ปิด (กฎ 4) · ใบเต็มอยู่ท้ายไฟล์)
 - 🛠️ **`STORE-INSERT-001` [CHIEF-WORK · ไม่ใช่ใบเทส]** (✅ **CLOSED -- `#244` merged แล้ว (ยืนยันด้วย API รอบ R226: merged_at 2026-08-29T00:56Z)** · ~~🟡 push แล้ว รอ merge `pirate-force-server#244` (R224 `4gqnwm`)~~ — ~~#241~~ ถูกปิดเพราะเกตแดง (เทสของรอบนี้เองรั่ว sqlite handle บน Windows) แก้แล้วและเปิดใบใหม่บน branch เดิม — เจ้าของ: chief · ~~`store.py` ยังไม่มี INSERT แถวของที่เก็บได้ และไม่เดิน `character_backpacks.next_item_identity` ⇒ ของที่เก็บไม่รอดข้าม DB · เป็นตัวบล็อกเดียวของ `GT-142`~~ [chief R226: ทั้งประโยคเป็นอดีตแล้ว — `store.commit_acquired_backpack_item` อยู่บน main (#244) ตัวบล็อกของ GT-142 ดูบรรทัดของมัน] · M5 ครบกำหนด 31 ส.ค. 12:00 · ใบเต็มอยู่ท้ายไฟล์)
+- 🆕 **`GT-147` COUNTER-RESYNC-RECOVERY-TOOL-001** (🔴 **BLOCKED-ON-TOOL · ไม่ด่วน — ห้ามขึ้นหัวคิว** · เปิดโดย chief R227 ตาม `COO-DECISION 20260829_1344` ทาง 3 · เครื่องมือกู้ตัวนับ `next_item_identity` ที่ล้าหลังแถวจริง (attended-only เจ้าของรันเอง · เซิร์ฟเวอร์ปิด · diff → หยุดถาม → ค่อยเขียน) + ตรวจรับงานแก้ข้อความ `PermissionError` ที่ชี้ `HYP-PF-008` ผิดเรื่องในใบเดียวกัน · สล็อตสร้างเครื่องมือ = คิวปกติของ chief หลังงาน M5 · เคสจริงยังไม่เคยเกิด — กติกา restore-ทั้ง-DB ใน `AGENTS.md` §7 กันเหตุแทบทั้งหมด · ใบเต็มอยู่ท้ายไฟล์)
 - 🛠️ **`SKIPPINS-FRAGMENTS-001` [CHIEF-WORK · ไม่ใช่ใบเทส]** (🟢 **OPEN — เจ้าของ: chief** · `docs/PYTEST_SKIP_PINS.json` ไฟล์เดียวปิด PR ที่เกตเขียวไปแล้ว **2 ครั้ง** (`#231` สาย A · `#235` สาย B) เพราะสองสายเติม entry ที่บรรทัดเดียวกัน ⇒ แตกเป็น `docs/pytest_skip_pins.d/<โมดูล>.json` รายโมดูล · คำตัดสิน: `notes_to_chief/20260829_0710_CHIEF-DECISION-skip-pins-*` · ใบเต็มอยู่ท้ายไฟล์)
 - 🔥 ~~**ใบแรกของกะ attended ถัดไป — ก่อนใบอื่นทั้งหมด รวม `GT-131`**~~ [chief R226: คำสั่งใหม่กว่า `COO-DECISION 20260829_1241` ข้อ 2 ยกใบ capture `GT-146` (ของ LANE-B ท้ายไฟล์ · PENDING บูตได้เลย) ขึ้นหัวคิวแทน — ใบนี้ต่อคิวถัดไป] (คำสั่ง COO 2026-08-28 23:45 ข้อ 3 · จดหมาย `20260828_2345_COO-DECISION-multi-drop-shape-ships-with-a-bounded-blast-radius.md`) · 🆕 **`GT-132` GROUND-DROP-COALESCED-GENERATION-DRAWS-N-LABELS-001** (⛔ **BLOCKED — LANE-B รอบ `j0u64p` วัดแล้วว่าใน `Bg0002` ตีมอนไม่ติดตั้งแต่ต้น ⇒ บูตแล้วได้ `NO-RESULT` เสมอ · รอ chief แก้สองบรรทัดใน `runtime.py` · ~~🟢 READY — attended · ศูนย์สล็อต ไม่มีแฟล็ก~~** · เปิดโดย LANE-B รอบ `zxnwtd` ต่อจาก `RE-130` ✅ CLOSED · ฆ่ามอนตัวที่ตกของ ≥ 2 ชิ้น แล้ว**นับป้ายชื่อไอเทมสีแดงจากเฟรมวิดีโอ** · เซิร์ฟเวอร์เปลี่ยนทรงส่งเป็น collection เดียว count=N แล้ว · 🔴 มีด่านบิลด์บังคับก่อนนับ (`generations=1` ในคอนโซล) · `1` ป้าย = **FAIL ของใบนี้** (coalesce ไม่ซื้ออะไรให้ผู้เล่น) · ใบเต็มอยู่ท้ายไฟล์
   · 🔴🔴 **ต้องรันใน `Bg0002` เท่านั้น ห้ามรันในเมือง** — Port Royal เหลือหุ่นซ้อมสี่ตัวและหุ่น `916` มี `n_DROPS_*` = 0 ทั้งสามคอลัมน์ ⇒ ฆ่าในเมืองแล้วได้ **0 ป้าย** ซึ่งเป็น `NO-RESULT (ฉากผิด)` **ไม่ใช่ FAIL** (chief R221 จาก `20260829_0255_LANE-B-STATUS-*` บรรทัด 46-47))
@@ -7864,18 +7865,58 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt146.sqlite3 --ground-loo
 ### result (ผู้เทสกรอก)
 P1/P2/P3/P4 · เวลาคลิกทุกครั้ง (+07:00 และ `t` วิดีโอ) · path + sha256 ของ log/console/ภาพ/วิดีโอ · สำมะโน `RECV` + hexdump ช่วงคลิก · บรรทัด listener ทั้งบรรทัด · สามช่อง ฝุ่น/ป้าย/cursor · สีป้ายทุกป้ายทุกภาพ · NO-CRASH/CRASH · sha canonical ก่อน-หลัง · `integrity_check`
 
-## GT-147 SCENE17-STOWAWAY-ACTORS-FIRST-EYES-001 [attended, in-game]: ออกทะเลกับ Columbus แล้ว **ไคลเอนต์ยังโชว์ actor ของ Port Royal ที่ถูกส่งไปตอนล็อกอินอยู่หรือไม่**  [PENDING · เปิดโดย LANE-A (WORLD) รอบ `2pdf6j`]
+---
 
-> NUMBERING: grep ก่อนจอง (2026-08-29T14:2x+07:00) `GT-147`/`RE-147` = 0 hit ทุกไฟล์ที่กติกาบอกให้ค้น · เลขสูงสุดที่ใช้ไป = 146
+## GT-147 COUNTER-RESYNC-RECOVERY-TOOL-001 [attended · in-game เฉพาะเฟสตรวจรับ · **เจ้าของรันเครื่องมือเอง**]: DB ที่ตัวนับ `next_item_identity` ล้าหลังแถวจริงในกระเป๋า — หลังรันเครื่องมือกู้ (นอก production path · diff → หยุดถาม → ค่อยเขียน) **ตัวละครที่ด่าน 2 ล็อกออกกลับเข้าโลกได้จริงไหม**  [BLOCKED -- **BLOCKED-ON-TOOL** · เครื่องมือยังไม่ถูกสร้าง · สล็อตสร้าง = คิวปกติของ chief **หลังงาน M5** ตาม `COO-DECISION 20260829_1344` · **ไม่ด่วน** — เคสจริงยังไม่เคยเกิด กติกา `AGENTS.md` §7 (R227) กันเหตุได้เกือบทั้งหมด]
+
+> NUMBERING: grep ตามสูตรข้อ ② หัวไฟล์ (2026-08-29T14:xx+07:00) — เลขสูงสุดที่ใช้ไป = 146 (`GT-146` · `RE-` สูงสุด = 139) ⇒ ใบนี้ = `GT-147` · ตัวนับเดียวร่วม `CLIENT_RE_QUEUE.md`
+> ที่มาสองบรรทัด: pf-adversary R226 ชี้เคส [เสนอ — ยังไม่เกิดจริง แต่สร้างได้]: restore บางตาราง ⇒ ตัวนับล้าหลังแถว ⇒ ด่าน 2 (`issued_through` บังคับใน `may_enter_world` ตั้งแต่ `#257`) ปฏิเสธ `acquired_identity_not_issued` ตลอดไป — ไม่มีอะไร re-sync ขึ้นโดยเจตนา (ตัวนับที่ derive จากกระเป๋าเลิกเป็นหลักฐาน) · chief ASK-COO `20260829_1332` → COO เคาะทาง 3: กติกาลง `AGENTS.md` §7 แล้ว (R227) · เครื่องมือกู้ = ใบนี้
+> 🔴 **เงื่อนไขแข็งจาก COO — เป็นส่วนหนึ่งของ claim ไม่ใช่คำแนะนำ:** (1) **attended-only เจ้าของรันเอง** (2) **เซิร์ฟเวอร์ปิดสนิทตลอดเวลาที่เครื่องมือรัน** (3) เครื่องมือ**พิมพ์ diff ของทุกอย่างที่จะแก้ แล้วหยุดถามก่อนเขียนแม้แต่ไบต์เดียว** (4) อยู่**นอก production path** — สคริปต์แยก (เช่นใต้ `tools/`) ห้ามถูก import โดย app/runtime
+> 🔴 ใบเดียวกันครอบงานแก้ **ข้อความ `PermissionError` ที่วันนี้ชี้ `HYP-PF-008` ผิดเรื่อง** — ผู้ร้ายจริงคือด่านตัวนับ ไม่ใช่ hypothesis นั้น (โทเคน stderr `BAG_ADMISSION ... reason=...` ชี้ถูกอยู่แล้ว) — COO สั่งรวมใบเดียว จึงตรวจรับในเฟส A ของ run เดียวกัน ไม่เปิด claim ที่สอง
+
+- objective: (ข้ออ้างเดียว) บนสำเนา DB ที่**ตั้งใจ**ทำ desync (ตัวนับต่ำกว่า `MAX(identity)` ของแถวจริง หนึ่งตัวละคร) — หลังเจ้าของรันเครื่องมือกู้ครบวง diff→ยืนยัน→เขียน **ด่าน 2 ยอมรับตัวละครตัวนั้นอีกครั้ง และตัวนับตรง max identity จริงของ store**
+- db: สำเนา throwaway `state\run_gt147.sqlite3` · สร้าง fixture ด้วยการลด `character_backpacks.next_item_identity` ของตัวละครทดสอบให้ต่ำกว่า `MAX(identity)` ใน `character_backpack_items` (จดค่าก่อน-หลัง) — การแก้มือครั้งนี้คือ**การสร้าง fixture บนสำเนาทิ้ง** ไม่ขัดข้อห้ามใน `AGENTS.md` §7 (ข้อห้ามนั้นคือห้าม*กู้ของจริง*ด้วยมือ) · 🔴 ห้ามเปิด canonical `state\pirateforce.sqlite3` · sha256 canonical ก่อน-หลังทั้งใบต้องเท่ากัน
+- server args: `py -3 -u -m pirateforce_foundation.app --db state\run_gt147.sqlite3` · ไม่มีแฟล็ก `--*-scenario` ใด ๆ · คำสั่งเรียกเครื่องมือ: **เติมชื่อ/แฟล็กจริงตอนเครื่องมือลง main — ห้ามเดา ห้ามรันใบนี้ก่อนบรรทัดนี้ถูกเติม** (ปลด BLOCKED-ON-TOOL = แก้บรรทัดนี้ + สถานะ)
+- steps:
+    0. มาตรฐานบ้าน: LOCK · sha canonical · copy DB · สร้าง fixture · จดสองค่า (`next_item_identity` · `MAX(identity)`)
+    1. **เฟส A — พิสูจน์ล็อกเอาต์ก่อนกู้:** บูตเซิร์ฟเวอร์ (server ก่อน client เสมอ) → เข้าเกม เลือกตัวละครทดสอบ → คาดว่า**เข้าโลกไม่ได้** (ค้าง "connecting"/ไม่เข้าแมพ — คำทำนาย ผิด = ผล) · เก็บ console `.err` ทั้งไฟล์: บรรทัด `BAG_ADMISSION` + ข้อความ `PermissionError` เต็มบรรทัด (คัดดิบ ห้ามตีความ) · ปิดไคลเอนต์ → **ปิดเซิร์ฟเวอร์** (กฎบ้าน: ฆ่าไคลเอนต์แล้วต้อง restart เซิร์ฟเวอร์ก่อนบูตหน้า)
+    2. **เฟส B — รันเครื่องมือ ขณะเซิร์ฟเวอร์ปิด:** ยืนยันไม่มี LISTENING ที่ `10188`/`10189` (`netstat -ano | findstr "10188 10189"` — คัดลอกผลดิบ) · รันเครื่องมือ**ครั้งที่ 1 แล้วตอบปฏิเสธ** → sha256 สำเนาต้อง**ไม่เปลี่ยน** (พิสูจน์ว่า "หยุดถาม" กันการเขียนจริง ไม่ใช่แค่พิมพ์คำถาม) · รัน**ครั้งที่ 2** อ่าน diff ทั้งหมด (คัดดิบลง result) → ตอบยืนยัน → เครื่องมือเขียน
+    3. ตรวจสำเนา: ตัวนับ vs `MAX(identity)` · `PRAGMA integrity_check`
+    4. **เฟส C — เข้าโลกจริง:** บูตเซิร์ฟเวอร์ใหม่บนสำเนาเดิม → เจ้าของล็อกอินตัวละครเดิมเข้าโลก · **S0** full-res เมื่อยืนในแมพ · NO-CRASH ด้วย**คลิกขวาค้างลาก** (🔴 ห้าม `Q`/`E`/`W/A/S/D` เป็น liveness — เปลี่ยน facing = ยิง `TargetPosVital`; คลิกขวาลากหมุนแค่กล้อง ไม่มีไบต์ออกสาย) · ออกเกม → ปิดเซิร์ฟเวอร์ → teardown เสมอ · sha canonical ซ้ำ · ห้าม commit เอง
+- pass criteria: 🔴 สองชั้นแยกกัน ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น
+    wire/DB (headless ไม่ต้องมีคนหน้าจอ):
+      (ก) เฟส A: มีโทเคน `BAG_ADMISSION ... reason=acquired_identity_not_issued` และ**ไม่มี**แถว `sessions` ที่ `selected_character_id` = ตัวละครทดสอบ
+      (ข) เฟส A: ข้อความ `PermissionError` **ไม่มีสตริง `HYP-PF-008`** และเรียกชื่อด่านตัวนับ/`issued_through` — ตรวจรับงานแก้ข้อความในใบเดียวกัน
+      (ค) เฟส B: ตอบปฏิเสธ ⇒ sha สำเนาไม่เปลี่ยน · ตอบยืนยัน ⇒ diff ที่พิมพ์ครอบ**ทุก**ค่าที่เปลี่ยนจริง (เทียบ SELECT ก่อน-หลัง) และไม่มีตาราง/แถว/คอลัมน์นอก diff ขยับ
+      (ง) หลังกู้: ตัวนับ = max identity จริงของ store (ตามนิยาม `issued_through`) · `integrity_check`=ok · เฟส C มีแถว `sessions` ใหม่ select ตัวละครนี้ ไม่มีโทเคนปฏิเสธซ้ำ · sha canonical เท่าเดิมก่อน-หลัง
+      ชั้นนี้ตอบไม่ได้: เจ้าของเห็นตัวละครยืนในโลกไหม
+    client-observable (ต้องมีตาคน):
+      เจ้าของเห็นตัวละครตัวเดิม**เข้าแมพ ยืนบนพื้น HUD ขึ้นปกติ** ไม่ค้าง "connecting" · S0 full-res + sha256 · **จดสีป้ายชื่อทุกป้ายในภาพ** หนึ่งบรรทัดต่อป้าย ไม่มีป้ายเขียน `none` อ่านจาก full-res เท่านั้น · **จดสีอย่างเดียว ห้ามเดาสาเหตุ** (`RE-067`) · NO-CRASH/CRASH · 🔴 G-OBS: จดหมายผลต้องมีบรรทัด `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>` ไม่มี = chief ไม่บริโภค
+      ชั้นนี้ตอบไม่ได้: ตัวนับตรงจริงไหม เครื่องมือเขียนอะไร diff ครบไหม
+- nonclaims:
+    1. ไม่พิสูจน์ว่า auto-resync ปลอดภัย — ต้องห้ามโดยนิยาม (COO 1344): เครื่องมือนี้เป็นทางกู้ที่**ไม่อัตโนมัติโดยตั้งใจ** ใบนี้ห้ามถูกอ้างเพื่อดันให้มันไปอยู่ใน production path
+    2. ไม่พิสูจน์ทรง desync อื่น (ตัวนับนำหน้าแถว · หลายตัวละคร · ตารางอื่นนอกคู่ backpack) — เจอเมื่อไรเปิดใบใหม่
+    3. ไม่แตะ/ไม่วัดกติกา "restore ทั้ง DB เท่านั้น" (`AGENTS.md` §7 บังคับอยู่แล้ว ใบนี้เป็นทางกู้เมื่อกันไม่ทัน) · ไม่ตัดสินสาเหตุสีป้ายชื่อ (`RE-067`)
+    4. **ผลลบมีค่าเท่าผลบวก:** กู้แล้วด่าน 2 ยังปฏิเสธ ⇒ finding เรื่องนิยาม interval ของด่าน (floor `golden_highest` / เพดาน inclusive — ดู R226 §①) ⇒ redirect กลับสเปกเครื่องมือ + คำถาม static เรื่อง interval **ไม่ใช่ความล้มเหลวของผู้เทส ห้ามปิดใบเป็น FAIL เฉย ๆ** · เครื่องมือยังไม่มี/รันไม่ขึ้น = ใบคง BLOCKED ไม่ใช่ FAIL
+- links: `notes_to_chief/20260829_1332_CHIEF-ASK-COO-counter-behind-store-locks-a-character-out-forever.md` · `notes_to_chief/20260829_1344_COO-DECISION-restore-rule-now-recovery-tool-as-a-ticket.md` · `AGENTS.md` §7 (กติกา R227) · `rounds/R226_hsz32u_gate2-counter-route1-wired-plus-gt146-capture-ticket.md` §① · ด่าน 2: `pirate-force-server#257` (`bag_admission.py` · `session.py` · `lifecycle.backpack_issued_through`)
+
+### result (ผู้เทสกรอก)
+```
+ค่า counter ก่อน/หลัง · MAX(identity) · บรรทัด BAG_ADMISSION + PermissionError คัดดิบ · diff เต็มของเครื่องมือ ·
+sha สำเนาหลังตอบปฏิเสธ/หลังเขียน · sha canonical ก่อน-หลัง · integrity_check · S0 + สีป้ายทุกป้าย · NO-CRASH/CRASH · OBSERVER_CONFIRMED
+
+## GT-148 SCENE17-STOWAWAY-ACTORS-FIRST-EYES-001 [attended, in-game]: ออกทะเลกับ Columbus แล้ว **ไคลเอนต์ยังโชว์ actor ของ Port Royal ที่ถูกส่งไปตอนล็อกอินอยู่หรือไม่**  [PENDING · เปิดโดย LANE-A (WORLD) รอบ `2pdf6j`]
+
+> NUMBERING: ใบนี้เปิดเป็นเลข 147 (grep ตอน 14:2x: เลขสูงสุดที่ใช้ไป = 146) แล้ว **ขยับเป็น `GT-148` ด้วยตัวเอง** ตามกฎออกเลขข้อ 3 ที่หัวไฟล์ — ชนกันจริง = คนที่ push ทีหลังขยับเลขของตัวเอง แล้วเขียนเหตุผลไว้ในใบ: ใบ COUNTER-RESYNC-RECOVERY-TOOL-001 ลง main ก่อนใบนี้ ⇒ ใบนั้นถือเลข 147 ไว้ทั้งใบ ไม่ถูกแตะแม้แต่ตัวอักษรเดียว
 > ที่มา (วัดรอบนี้จากตารางแช่แข็ง ผ่าน `world_population_handoff` + `tests/test_world_population_handoff.py::ArrivalStowawayTests`): census ส่ง actor `bg0001` **115 ตัว ครั้งเดียวบนเส้นทางล็อกอิน** และ **ไม่มีอะไร recompose ระหว่างเซสชัน** ⇒ ตอนข้ามไปทะเลเซิร์ฟเวอร์ไม่ได้ส่งคอลเลกชันใหม่เลย · สี่ตัวยืนห่างจุดขาเข้าทะเล `(0,0,0)` ไม่ถึง 2000 หน่วย: `Legend Jack` 1226.6u · `Plato` 1646.7u · `Qina` 1915.8u · `Betula` 1935.9u (รัศมี 5000u มี 11 ตัว)
 
 ### objective (claim เดียว)
 เมื่อผู้เล่นออกจาก Port Royal ด้วยเรือของ Columbus (เส้นทางที่มีอยู่จริงวันนี้ ไม่ต้องใช้แฟล็ก: คลิก Columbus ที่ท่า → ตัวเลือก 1 → เควส 3021 → ฉาก 17 "เรือกลางทะเล" ซึ่ง `GT-106` พิสูจน์แล้วว่าเดินได้) **จอยังแสดง actor ของ Port Royal ที่ถูกส่งไปตอนล็อกอินอยู่หรือไม่** — ใบนี้ตอบแค่ "เห็น" vs "ไม่เห็น" เท่านั้น
 
 ### db / server args (เป๊ะ)
-สำเนา `state\run_gt147.sqlite3` (+ backup) · 🔴 **ห้ามเปิด canonical** · sha256 เทียบ `CANON_SHA.txt` ก่อน-หลัง ต้องตรงทั้งสองครั้ง
+สำเนา `state\run_gt148.sqlite3` (+ backup) · 🔴 **ห้ามเปิด canonical** · sha256 เทียบ `CANON_SHA.txt` ก่อน-หลัง ต้องตรงทั้งสองครั้ง
 ```
-py -3 -u -m pirateforce_foundation.app --db state\run_gt147.sqlite3
+py -3 -u -m pirateforce_foundation.app --db state\run_gt148.sqlite3
 ```
 🔴 **ห้ามมีแฟล็กฝั่งเซิร์ฟเวอร์ใด ๆ** (`--*-scenario`, `--world-census-actors`, `--export-events`) — แฟล็กทำให้กิ่ง v141 เก่ายิง actor ฉาก 1 เข้ามาเอง ⇒ ผลอ่านไม่ได้ทั้งรอบ · client `-SecondPasswordMode bypass` ตามปกติ · 🔴 **restart เซิร์ฟเวอร์ก่อนบูตไคลเอนต์ทุกครั้ง** (session ค้าง ⇒ ไคลเอนต์ถัดไปค้าง "connecting")
 

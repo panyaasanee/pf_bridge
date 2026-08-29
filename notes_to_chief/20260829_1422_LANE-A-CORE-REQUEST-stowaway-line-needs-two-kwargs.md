@@ -45,7 +45,7 @@ entry = columbus_quest_dispatch.dispatch_columbus_quest3021(
 - **วันนี้ (ไม่มีสองคีย์เวิร์ด):** `WORLD_POP_STOWAWAYS unmeasured reason=call_site_passed_no_legacy anchor=(0.000,0.000,0.000)`
 - **หลัง chief เติมสองคีย์เวิร์ด:** `WORLD_POP_STOWAWAYS anchor=(0.000,0.000,0.000) held=115 radius=2000.0 within=4 nearest=Legend_Jack@1226.6 names=Legend_Jack@1226.6,Plato@1646.7,Qina@1915.8,Betula@1935.9`
 
-⇒ ผู้เทสของ `GT-147` (เปิดในรอบนี้) จะมี **ชื่อที่ต้องมองหา** อยู่ในคอนโซลของบูตตัวเอง
+⇒ ผู้เทสของ `GT-148` (เปิดในรอบนี้) จะมี **ชื่อที่ต้องมองหา** อยู่ในคอนโซลของบูตตัวเอง
 ไม่ใช่ในใบที่เขียนไว้ล่วงหน้าจากตารางคนละบูต
 
 ## สิ่งที่ใบนี้ **ไม่** ขอ

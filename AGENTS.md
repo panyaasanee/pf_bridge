@@ -169,6 +169,13 @@ C:\Users\Panya\Desktop\Pirate Force\
 - 🔴 **ก่อน commit ไฟล์ generated/ledger ใด ๆ: regenerate แล้วตรวจว่า diff ว่าง** (PANYA-ORDER ข้อ 5 · R193/R194) — ไฟล์ที่มีคำว่า pin/digest/ledger/checksum/GRADE_SUBSET ในชื่อ ให้รันตัวสร้างของมันเองใหม่แล้วเทียบ **ห้ามเชื่อเลขเดิมจากรอบก่อน**
   · `HYPOTHESIS_LEDGER.json` และ `FUNCTIONAL_COVERAGE.json` pin แบบ hand-computed hash ไม่มี generator CLI ⇒ แตะเมื่อไหร่ (รวม `tests/test_foundation_legacy_seam.py`) ต้องรันทั้งคู่ก่อน push: `python3 tools/verify_hypothesis_ledger.py` · `python3 tools/verify_functional_coverage.py` (exit 0 + `PASS` = ไม่มี drift)
   · 🔴 **สองคำสั่งนี้ cloud-sandboxable เต็มที่ — ไม่ต้องเข้าคิว `STATIC-ON-BRIDGE` ไม่ต้องวางจ็อบ ไม่ต้องรอสะพาน** รันได้เลยบน clone คลาวด์ ⇒ **ไม่มีข้ออ้างให้ข้ามการ verify เพราะ "รอสะพานไม่ทัน"**
+- 🔴 **restore DB ต้องทั้งไฟล์เท่านั้น — ห้าม restore บางตาราง ไม่ว่าจากเครื่องมือไหน** (COO-DECISION 2026-08-29T13:44 ตอบใบ chief 1332 · R227)
+  เหตุผล: ตัวนับ identity ของกระเป๋า (`next_item_identity`) เป็นหลักฐานได้ก็เพราะมัน**ไม่ derive จากแถวของ** —
+  restore ตาราง items โดยไม่เอาตารางตัวนับมาด้วย (หรือกลับกัน) ทำให้สองอย่าง desync
+  แล้วด่าน 2 (`issued_through` บังคับที่ `may_enter_world` ตั้งแต่ R226) **ล็อกตัวละครนั้นออกจากโลกถาวร**
+  และ auto-resync แก้ไม่ได้โดยนิยาม (ถ้าตัวนับ derive กลับจากกระเป๋าได้ มันก็เลิกเป็นหลักฐาน)
+  · เคสที่พังไปแล้วจริง ๆ: ใช้เครื่องมือกู้ attended-only (ใบใน `GAME_TEST_QUEUE.md` — เงื่อนไข: เจ้าของรันเอง
+  ขณะเซิร์ฟเวอร์ปิด พิมพ์ diff แล้วหยุดถามก่อนเขียนจริง) **ห้ามแก้มือใน DB ตรง ๆ ทุกกรณี**
 
 ### 🔴 วิธีเปิด PR — สามกฎที่ COO เคาะ 2026-08-29T03:45 (บังคับกับสาย A B GM E · ผู้เทสไม่เปิด PR อยู่แล้วตาม §7)
 
