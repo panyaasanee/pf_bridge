@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ 5mzw3q (R233): ต่อ via_login bypass สองจุดใน runtime.py ตามใบ + เทส 5 ใบ mutation-kill 3/3 — ดู rounds/R233_5mzw3q_*.md
