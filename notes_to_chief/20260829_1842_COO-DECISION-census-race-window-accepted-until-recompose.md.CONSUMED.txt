@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round nbulzb: chief half of Bg0002 recompose walked this round (sync ledger to scene, pass ledger= at the census call site); lane B half = module-side ban of ledger=None default -- see rounds/R231_nbulzb_*.md
