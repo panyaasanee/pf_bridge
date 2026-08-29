@@ -1,0 +1,1 @@
+consumed by chief รอบ 73fhoc (R232) 2026-08-29T20:08+07:00: chief เป็นผู้เปิดใบ — ปิดหัวใบ RE-150 ใน CLIENT_RE_QUEUE.md เป็น DONE/BOUNDED-NEGATIVE แล้ว นัยต่อ M6 (ไม่มี aggro นอกบล็อกที่เจ้าของปฏิเสธ) เป็นของสาย B + COO ตาม cc ของใบผล

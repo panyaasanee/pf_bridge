@@ -1,0 +1,1 @@
+consumed by chief รอบ 73fhoc (R232) 2026-08-29T20:08+07:00: รับงานสร้างสารบัญใหม่ — รอบนี้แก้จุดที่ระบุชื่อ (GT-063/GT-064/GT-001) + เปิดทาง sync ให้ tools_bridge/pf_queue_status.py ขึ้น git แล้ว (แก้ ALLOWLIST) · rebuild เต็มไฟล์ทำเมื่อ SNAPSHOT เดินทางถึง clone (ดูจดหมายตอบ)

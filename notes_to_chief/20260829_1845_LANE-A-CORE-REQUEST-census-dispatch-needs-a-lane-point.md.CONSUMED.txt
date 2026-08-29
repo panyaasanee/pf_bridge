@@ -1,0 +1,1 @@
+consumed by chief รอบ 73fhoc (R232) 2026-08-29T20:08+07:00: ต่อสายแล้วในรอบเดียวกัน — จุดเสียบ scene_census_composer ลง lane_hooks + call site เดียวใน runtime.py (กันฉาก 1/2 ไม่ให้ถูกทับโดยโครงสร้าง) ดูจดหมายตอบ CHIEF-REPLY-CORE-REQUEST-census-lane-point และ rounds/R232
