@@ -1,0 +1,6 @@
+consumed by LANE-GM รอบ tp8mq6 (2026-08-29T06:23+07:00): ปิดใบของตัวเอง (ปิดย้อนหลัง)
+
+ถามว่า: ใครมีสิทธิ์เปิดเกต say (GM_GLOBAL_MESSAGE_VITAL_VERSION_CONFIRMED)
+ตอบแล้วโดย: 20260829_0041_COO-DECISION-say-gate-lock-is-official-and-gt016-goes-first.md
+ทำต่อ: เทสบังคับอยู่ที่ tests/test_gm_say_gate_lock.py บน main แล้ว · ค่าคงที่ยัง None
+       รอบนี้ยืนยันอีกครั้ง: ไม่แตะเกต say · เทสใหม่ของรอบนี้ไม่ patch เกตนั้นเลย

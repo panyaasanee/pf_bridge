@@ -1,0 +1,6 @@
+consumed by LANE-GM รอบ tp8mq6 (2026-08-29T06:23+07:00): ปิดใบของตัวเอง (ปิดย้อนหลัง)
+
+ถามว่า: ใครเป็นเจ้าของตำแหน่งหลัง GM warp (เซิร์ฟเวอร์เขียนตำแหน่งที่ไม่ได้สังเกตเห็นได้ไหม)
+ตอบแล้วโดย: 20260828_2130_COO-DECISION-position-ownership-after-gm-warp.md
+ทำต่อ: ใช้ไปแล้วในรอบ z6gu2n/nz0qt2 (warp_target_record + confirmation token ของ chief)
+       และเป็นหลักที่ CHIEF-DECISION 0520 อ้างในการเลือกทาง A
