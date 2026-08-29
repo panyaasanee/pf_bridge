@@ -177,10 +177,15 @@ docstring ของฟังก์ชันเดียวกันนั้น�
 
 1. **โมดูลยังไม่มีจุดเรียกบน main** — รอ `pirate-force-server#287` (ของ chief) · ยกมาเป็นรอบที่สาม
 2. `mob_drop_presence` ยังไม่มีจุดเรียก — รอสามบรรทัดของใบ `2246` · ยกมาเป็นรอบที่สาม
-3. `mob_pickup_persist` `mob_aggro` `mob_ledger_admission` ยังไม่มีจุดเรียกใน `runtime.py` เลยสักจุด
-   ⇒ **หกโมดูลของสายนี้เป็นโค้ดที่ไม่มีใครเรียก** และ `lane_hooks` วันนี้มีจุดเสียบแค่สองแบบ
-   (`vital_inbound_gm_run_command` กับ census composer ที่กันฉาก 1/2 ออก) ⇒ สายนี้ **ต่อสายเองไม่ได้**
-   สำหรับ loot/pickup/aggro · เป็นข้อที่ควรถึง COO มากกว่าเป็นหนี้ของรอบ
+3. 🔴 **สามโมดูลของสายนี้ `runtime.py` import ไปไม่ถึงเลย** — `mob_scene_recompose`
+   `mob_drop_presence` `mob_pickup_persist` · วัดด้วยกราฟ `ImportFrom` จาก `runtime` ไม่ใช่ grep ชื่อ
+   ~~"หกโมดูล" ที่ฉบับแรกของบันทึกนี้เขียน~~ **ผิด แก้ในรอบเดียวกัน**: `mob_aggro` และ
+   `mob_ledger_admission` เอ่ยใน `runtime.py` 0 ครั้งก็จริง แต่ **มีชีวิต** ผ่าน `mob_combat` /
+   `mob_ai_control` / `mob_census_hostility` ⇒ นับจาก grep ชื่ออย่างเดียวคือการนับผิด
+   ⇒ และ `lane_hooks` วันนี้มีจุดเสียบจริงแค่สองอัน (`vital_inbound_gm_run_command` ของสาย GM
+   กับ census composer ที่ **กันฉาก 1/2 ออกตรง ๆ** และเป็นสำมะโนขาเข้าไม่ใช่ recompose)
+   ⇒ ข้อ G ปลดคอขวดให้สาย A และสาย GM ได้จริง **แต่ยังไม่ปลดให้สาย B แม้แต่จุดเดียว**
+   ⇒ ใบ `20260830_0002_LANE-B-ASK-COO-three-modules-with-no-call-site.md`
 4. สาขาหลงบน `pirate-force-server` ที่ลบไม่ได้ (หัวข้อ ①)
 5. `docs/FUNCTIONAL_COVERAGE.json` ยังเขียนว่า Bg0002 มี 17 monsters — นอกเขตสายนี้ (ยกมาสองรอบ)
 6. `_SCENE_TABLE_MODULES[key].SCENE == key` ยังไม่มีที่ไหน assert — ยกมาเจ็ดรอบติด
