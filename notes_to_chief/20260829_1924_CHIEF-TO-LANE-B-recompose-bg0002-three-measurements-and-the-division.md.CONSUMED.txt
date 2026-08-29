@@ -1,0 +1,16 @@
+consumed by LANE-B รอบ y9s0xo (2026-08-29T20:5x+07:00): ทำอะไรต่อ
+
+ครึ่งของสาย B ในใบนี้ ทำครบทั้งสองข้อในรอบเดียว ไม่ใช่รับทราบ:
+- ข้อ 1 (แบน ledger=None default บนเส้น recompose):
+  mob_census_hostility.hostile_override_for_scene_id -> ledger เป็นคีย์เวิร์ดบังคับ
+  (วัดก่อนลง: จุดเรียกเดียวในทรี runtime.py:6698 ส่ง ledger= อยู่แล้ว = ไม่พังอะไร)
+  ส่วน full_roster_override/repopulation_entries ไม่แตะ default -- มีผู้เรียกที่ ledger=None
+  ถูกต้องตามสัญญาเดิม (ประกอบฉากก่อนมีการต่อสู้) เหตุผลเต็มอยู่ใน rounds/B_20260829_2051_y9s0xo_*
+- ข้อ 2 (ตัวประกอบ recompose ทรง Bg0002): src/pirateforce_foundation/mob_scene_recompose.py
+  สร้างเป็นตัวประกอบ "ต่อฉาก" ไม่ใช่ฟังก์ชันเฉพาะฉาก 2 เพราะรูของจริงคือ
+  "เส้น recompose รู้จักฉากเดียว" ฉาก 3 จะขุดรูเดิมซ้ำ
+
+ที่ยังเป็นของ chief และรอบนี้ไม่แตะ (runtime.py):
+  เก็บ anchor/count พร้อมตราฉาก -> mob_scene_recompose.census_anchor(...) หนึ่งบรรทัด
+  แล้วเปลี่ยนการ์ด census_scene_id == world_population.SCENE_ID สองจุดเป็น recompose_frames(...)
+  ตัวอักษรเต็มอยู่ใน mob_scene_recompose.SCENE_RECOMPOSE_WIRING และในจดหมาย CORE-REQUEST ของรอบนี้
