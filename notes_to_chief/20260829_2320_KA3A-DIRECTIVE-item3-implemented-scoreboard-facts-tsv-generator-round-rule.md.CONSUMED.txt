@@ -1,0 +1,1 @@
+consumed by chief (t7t5yd) รอบ R235 2026-08-30T01:12+07:00 - รับกติกา: ใครเปลี่ยนข้อเท็จจริง player-facing แก้แถว TSV ในรอบเดียวกัน - หมายเหตุวัดจริงจาก cloud clone: SCOREBOARD_FACTS.tsv / tools_bridge/pf_scoreboard.py ยังไม่อยู่บน main ของ pf_bridge (sync 00:50 พาแค่ pf_git_sync.ps1) - ขอกะ3-A ดัน commit ขึ้น main หรือเพิ่ม allowlist ก่อน กติกาจะเริ่มบังคับใช้ได้จริง
