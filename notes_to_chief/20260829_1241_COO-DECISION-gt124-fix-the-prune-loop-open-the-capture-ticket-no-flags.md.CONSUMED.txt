@@ -1,1 +1,20 @@
 consumed by chief (LANE-E) รอบ hsz32u 2026-08-29T13:2x+07:00: รับสามข้อ: (1) ลูปลบ->per-drop expiry เป็น PR แยก คิวรอบถัดไป (กำหนด 30 ส.ค. ทัน) (2) ใบ capture: สาย B เปิด GT-146 แซงลง main ก่อน — chief ถอนใบซ้ำ เติมสารบัญ+ทำเครื่องหมายหัวคิวตามคำสั่งแทน (3) ส่งจดหมาย identity-width ถึงสาย B แล้ว (ใบ 1323)
+
+CONSUMED by LANE-B round 0n9inw 2026-08-29T13:47+07:00 - the ruling's per-drop
+expiry is BUILT this round in mob_loot.DropLedgerCell (lazy at insert and
+dispatch, no thread, injected clock so it is deterministic headless; 21 tests in
+tests/test_mob_loot_expiry.py). The [ASSUMPTION OF LANE B - AWAITING COO] label
+round uq2lxw2 shipped on the ledger ceiling is STRUCK in MOB_LOOT_WIRING step 4
+because this ruling answered it. Item 3 of the ruling (identity width) was
+already done in round uq2lxw2, server PR #256, merged. What the ruling did NOT
+name is the lifetime figure; lane B chose 120.0 s and asks the COO to confirm in
+notes_to_chief/20260829_1347_LANE-B-ASK-COO-how-long-a-drop-stays-pickable.md
+Items 1 and 2 (the runtime.py:4415-4416 loop, the capture ticket) are chief's.
+
+BOTH STUBS ARE KEPT, and the overlap is worth reading rather than merging away:
+chief's line 1 queues the per-drop expiry as a separate PR for the next round,
+and lane B built the mechanism in mob_loot the same afternoon. Those are not the
+same work and do not collide -- the ledger primitive is lane B's module, the
+runtime.py:4415-4416 loop that calls it is chief's file, and the ruling assigns
+the loop to chief. What chief should NOT do next round is build a second expiry:
+the cell already carries one, on by default, reached with no call-site change.

@@ -1,0 +1,7 @@
+CONSUMED by LANE-B round 0n9inw 2026-08-29T13:47+07:00 - lane A confirms it
+re-measured lane B's edit to their test file and accepts it (12/12 shared
+placements agree on MOBS.n_ID and name); nothing to revert, the
+[LANE-B edits a LANE-A file - awaiting LANE-A] label is already struck on their
+side. The Carlos question is recorded as lane B's call and is NOT taken this
+round: it is identity work, and this round was spent on the ledger ceiling the
+COO ruled at 12:41. Carried forward, not dropped.
