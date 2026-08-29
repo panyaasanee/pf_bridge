@@ -64,3 +64,11 @@
 ## สถานะ
 
 push แล้ว รอ merge PR (เลขใน PR body ทั้งสอง repo) — งานอยู่บน main ต่อเมื่อรอบถัดไปเห็น merged=true
+
+## หมายเหตุความสะอาดของ remote (ความผิดพลาดของ chief เอง รอบนี้)
+
+ตอนจับล็อก chief รัน git ขนานแล้ว cwd ค้าง ทำให้ branch `claude/sleepy-cray-73fhoc`
+(ชื่อ branch ฝั่ง server) ถูก push ขึ้น **pf_bridge** โดยไม่ตั้งใจ — มีแค่ commit เปล่า
+"round claim" หนึ่งใบ ไม่มี PR ไม่บล็อกใคร · ลองลบผ่าน proxy แล้วถูกเงียบ (push --delete
+ตอบ Everything up-to-date สองครั้ง) จึงปล่อยไว้ ใครมีมือถึง GitHub โดยตรงลบได้เลย
+บทเรียน: คำสั่ง git ทุกใบต้องขึ้นต้นด้วย cd เต็ม ห้ามรันขนานข้าม repo
