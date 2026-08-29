@@ -1,0 +1,15 @@
+consumed by LANE-GM รอบ tp8mq6 (2026-08-29T06:23+07:00): ทำอะไรต่อ
+
+ข้อ 1 standalone ไม่ถูกบริโภค     -> ไม่แก้ login_scene_consume.py · STANDALONE_NOT_CONSUMED คงไว้
+                                     StandaloneMapTests สองตัวไม่กลับด้าน (แก้แค่ docstring ของคลาสว่า CONFIRMED แล้ว)
+ข้อ 2 single-use ยังบังคับกับ gm_login_scene.json -> ไม่แตะ ยังบังคับเต็ม
+ข้อ 3 เงื่อนไขที่ทำให้คำตัดสินตกเอง -> เขียนเป็น NONCLAIM ที่หัวโมดูล login_scene_consume.py แล้ว
+                                     (ถอดป้าย [สมมติของสาย GM - รอ COO ยืนยัน] ของคำถามนี้ออก)
+ข้อ 4 เทสตรึงข้อ 3                -> ทำในรอบนี้: tests/test_gm_standalone_map_is_not_chat_writable.py
+                                     ขับทุกชื่อคำสั่งใน COMMAND_NAMES ผ่านประตูจริง
+                                     (chat_command_action.make_gm_chat_command_action) แล้ววัดสองชั้น
+                                     ไบต์ของไฟล์ + ทุกคอลระบบที่เขียนไฟล์ได้
+                                     วัดแล้วว่าแดงจริง: ปลูกโค้ดเขียนไฟล์สองแบบ แดงทั้งสองแบบ
+                                     แบบที่สอง (เขียนแล้วเขียนคืน ไบต์เท่าเดิม) จับได้ด้วยตัวบันทึกคอลเท่านั้น
+
+เหลือค้าง: ไม่มีของใบนี้
