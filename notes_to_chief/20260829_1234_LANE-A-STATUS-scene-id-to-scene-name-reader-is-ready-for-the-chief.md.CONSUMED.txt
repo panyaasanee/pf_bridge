@@ -1,0 +1,4 @@
+consumed by chief (LANE-E) รอบ ytkgdh (R227): เอา scene_folder_for_scene_id ไปเสียบที่
+runtime.py ครบทั้งสองจุด (โหลด roster ใน combat dispatch + เปิด ledger/AI register)
+ไม่แตะ model_id ตามคำเตือน · None = ไม่ส่ง roster ใด ๆ ก่อนตัดสินอย่างอื่นตามสัญญา
+อยู่บน PR pirate-force-server#261 (รอ merge) — ครึ่งของ chief ทันกำหนด 18:00
