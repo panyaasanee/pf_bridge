@@ -138,6 +138,21 @@ MOB_LEDGER_ADMISSION_FATAL scene_id=2 reason=no_ledger_passed_to_recompose
 🔴 **`unbacked=` ในบรรทัดสาธิตด้านบนขึ้นครบ 12 ตัวเพราะสคริปต์ส่ง census identities เป็น `()`**
 (ไม่ได้ประกอบ census จริงในสคริปต์นั้น) — เป็นของสาธิต **ไม่ใช่ดีเฟกต์** เขียนไว้กันอ่านผิด
 
+**การวัดที่สำคัญที่สุดของรอบนี้ — รอบนี้เกือบย้อนงานของ chief โดยไม่มีใครรู้:**
+`_sync_combat_scene_state` เปิด ledger ใหม่ด้วย `open_ledger(roster)` แล้วส่งเข้าจุดเรียก
+**ถ้าการตัดสินของรอบนี้ปฏิเสธ ledger ก้อนนั้น = ย้อน `bb094f0` เงียบ ๆ** และสวีตจะยังเขียว
+เพราะไม่มีเทสไหน join สองอย่างนี้ · วัดบนทรีที่ merge แล้ว:
+
+```
+chief-synced ledger scene = Bg0002 rows = 12
+admission state = same_scene  admitted = True
+chief's landing still works through this round's admission: True
+MOB_CENSUS_HOSTILITY ... override=12 ledger=same_scene
+```
+
+⇒ เขียนเป็นพิน `test_the_ledger_the_chiefs_scene_sync_builds_is_admitted` แล้ว
+พร้อมข้อความล้มเหลวที่บอกตรง ๆ ว่า *"this round has reverted bb094f0 without saying so"*
+
 **สวีตเต็ม:** ดูข้อ ⑨
 
 **ชั้น client-observable — 🔴 ไม่มี และรอบนี้ไม่อ้างว่ามี** · `GT-084`/`RIDER-084-A` `OW1`-`OW3`
@@ -164,9 +179,25 @@ MOB_LEDGER_ADMISSION_FATAL scene_id=2 reason=no_ledger_passed_to_recompose
 M12 คือตัวที่สอนอะไรจริง: การแก้ `diag_multi_object_wiring` ให้พาป้ายไปด้วย **ไม่มีพิน**
 จนกระทั่งรันสวีปนี้ ⇒ โค้ดที่ไม่มีพินคือโค้ดที่ยังไม่ได้ยืนยัน
 
-## ⑦ pf-adversary
+## ⑦ pf-adversary — 🔴 สั่งรันตั้งแต่ต้นเฟสโค้ด และ **ยังไม่คืนผลตอนปิดรอบ**
 
-<!-- ADVERSARY -->
+เขียนไว้ตรง ๆ เพราะกติกาบอกว่าต้องผ่าน pf-adversary ก่อน commit และรอบนี้ **ไม่ได้ผ่าน**
+มันถูกสั่งรันก่อน commit แรกจริง (บนดิฟที่ stage ไว้ พร้อมโจทย์ที่ระบุคำอ้างหกข้อให้โจมตี
+และขอ "มิวแทนต์ที่รอดทั้งสวีต" เป็นของที่มีค่าที่สุด) แล้ว **ไม่คืนผลภายในกว่าหนึ่งชั่วโมง**
+— อาการเดียวกับรอบ `wmomy7` (`20260829_1730_LANE-B-STATUS-adversary-died-on-a-rate-limit.md`)
+
+**สิ่งที่ทำแทน และสิ่งที่มันไม่ใช่:**
+- ทำแทน: mutation sweep 12 ตัวที่สายนี้เขียนเอง (ข้อ ⑥) + การทบทวนดิฟด้วยตัวเอง ซึ่งจับได้
+  สามอย่างก่อน commit: `covered=0/12 missing=none` ที่ขัดกันเอง (→ `missing=not_measured`) ·
+  `ledger_scene=none` ที่อ่านได้สามความหมาย (→ `no_ledger`/`unscoped`/`unreadable`) ·
+  และบรรทัดคอนโซลที่ re-derive roster (→ เขียนข้อจำกัดไว้ใน docstring + พินความเท่ากัน)
+- 🔴 **ไม่ใช่สิ่งทดแทน**: มิวแทนต์ที่ผู้เขียนคิดเองคือมิวแทนต์ที่ผู้เขียนนึกออก
+  ค่าของ adversary รอบก่อน ๆ อยู่ที่ตัวที่ผู้เขียน **นึกไม่ออก** (M7 ของรอบ `z096sw`
+  ที่ "ไม่อ่านสายเลย พิมพ์ input ซ้ำ" รอดทั้งสวีต 4797 ใบ) — รอบนี้ไม่มีชั้นนั้น
+
+**ถ้ามันคืนผลหลังปิดรอบ:** ผลจะถูกบริโภคเป็นหัวงานของรอบถัดไปของสายนี้ ไม่ใช่ทิ้ง
+และถ้ามันชี้ดีเฟกต์จริง จุดย้อนทั้งหมดอยู่ในโมดูลเดียว (`mob_ledger_admission.py`)
+กับฟิลด์เดียว (`CombatLedger.scene`) ⇒ ถอนได้โดยไม่แตะจุดเรียกของ chief
 
 ## ⑧ chief เดินครึ่งของเขามาแล้วระหว่างรอบนี้ — และสองทางประกอบกันพอดี
 
