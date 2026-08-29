@@ -1,0 +1,32 @@
+consumed by LANE-A รอบ ga91m5-r2 (2026-08-29T22:4x+07:00): ทำอะไรต่อ
+
+ใบนี้คือคำตอบของ CORE-REQUEST 20260829_1845 ที่สายนี้เปิดเอง ⇒ สายนี้บริโภค
+
+chief สั่งท้ายใบว่า "รอ PR รอบนี้ merge แล้วเขียน lane_hooks/lane_a_*.py ลงทะเบียน
+ฉากได้เลยในรอบถัดไป ไม่ต้องผ่าน CORE-REQUEST อีก" -> PR merge แล้ว (จุดเสียบอยู่บน main:
+lane_hooks.census_composer + call site runtime.py ~6785) -> รอบนี้คือรอบถัดไปนั้น
+
+1. เขียน src/pirateforce_foundation/lane_hooks/lane_a_scene_census.py แล้ว
+   ลงทะเบียน composer ของ "ทุกฉากใน world_scene_travel.CENSUS_SOURCES ที่ไม่ใช่ฉาก 1/2
+   และมีตัวอ่านคอนโซลในไฟล์นี้" = วันนี้คือฉาก 14 ฉากเดียว
+   -> ไม่ได้ hardcode 14: เพิ่มฉาก = เพิ่มแถวในตารางของ seam ไม่ใช่แก้ตรรกะไฟล์นี้
+2. ไม่ได้ลงทะเบียนฉาก 278 ตามที่ใบยกเป็นตัวอย่าง -- 278 อยู่ใน
+   SCENES_INTENTIONALLY_UNPOPULATED (RE-152 ปิด BOUNDED-NEGATIVE รอคำเคาะเจ้าของ
+   เรื่อง identity ของ Mob-Set) ⇒ ยืนคนเดียวยังเป็นคำตอบที่ถูก ไม่ใช่ของที่ลืม
+3. ข้อจำกัด trigger ที่ใบเตือนไว้ (ยิงเมื่อมี TargetPosVital แรกหลัง runtime ack)
+   รับทราบและไม่ได้ถือว่าได้ trigger-on-arrival มาด้วย -- ฉาก 14 ไม่ต้องการมัน
+   ผู้เล่นที่ล็อกอินเข้าฉากจะขยับอยู่แล้ว ถ้าวันหนึ่งต้องการจะเปิดใบตามที่ใบนี้บอก
+4. compose รับ keyword-only + **kwargs ตามสัญญาเป๊ะ · คืน SceneCensusResult
+   โดย actor_count/pc/frame มาจาก seam ไม่ได้นับซ้ำ · reapply_ms มาจาก handoff
+
+วัดจริงรอบนี้ (ขับ dispatcher จริง ไม่ใช่ double):
+  - registry จริง: ล็อกอินฉาก 14 ถูกปฏิเสธ WORLD_SCENE_ENTRY_REFUSED
+    [scene_not_allowed_at_login] -> teleport_sent=False -> census ไม่ถูกเรียกเลย
+  - เปิดคีย์ login_entry_allowed ใน registry ฉบับชั่วคราว (ไม่ commit):
+    LANE_HOOK_FIRED ... scene_census_composer:14 ->
+    WORLD_CENSUS_LANE_SCENE14_INITIAL_81 / _REAPPLY_81 pc=14866B frame=14879B
+    event world_census_lane_committed_actors_81_pc_14866_frame_14879 · คอนโซล 93 บรรทัด
+
+⇒ กำแพงที่สายนี้ติดสามรอบหายแล้ว เหลือ "คีย์เดียว" คือประตูฉาก 14
+   ตัวบล็อกที่เหลือคือ D3 (เกต faction-1 ของ player_wire) ซึ่งเป็นหนี้ของสายนี้เอง
+   ใบถาม: notes_to_chief/20260829_2240_LANE-A-ASK-COO-scene-14-door-has-one-blocker-left.md (แก้ 23:1x หลัง adversary: เคยมีสองกุญแจ ปิดด้วยด่านรับเข้าแล้ว)
