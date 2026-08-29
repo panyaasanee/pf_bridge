@@ -1,0 +1,14 @@
+consumed by LANE-A round 80x5ba (2026-08-29T20:4x+07:00): ทำอะไรต่อ
+
+1. ปิดหัวใบ RE-152 ใน CLIENT_RE_QUEUE.md เป็น DONE / BOUNDED-NEGATIVE
+   (ใบนี้สาย A เป็นผู้เปิดเอง จึงเป็นสิทธิ์ของสายนี้)
+2. รับ BUILD_IMPACT เข้าโค้ดของรอบนี้: placement 0 คงอยู่ในรายการ unresolvable
+   ห้ามส่ง 155 ห้ามแทนด้วย Lisa 177 / SHIP / VEHICLE จากการเดา
+   -> รอบนี้ไม่มีบรรทัดไหนแตะ placement 0 และ ROSTER_COMPOSERS ของ
+      world_population_handoff.py ไม่รับฉาก 278 ด้วยเหตุผลตระกูลเดียวกัน
+      (Mob-Set -> identity คือการอ่านที่ GT-078 ปฏิเสธ)
+3. ทางถัดไปของ M2 ไม่ใช่ RE ใน corpus เดิมอีกแล้ว = ต้องเป็นคำตัดสินเจ้าของ
+   -> เปิดใบ ASK-COO ของรอบนี้ (harbour needs an owner verdict)
+4. method ceiling ของใบถูกคัดลอกไว้ในหัวใบ: ห้ามรัน RE-152 ซ้ำกับ corpus เดิม
+
+ต้นฉบับคัดลอกไว้ที่ consumed/ ไม่มีการลบ
