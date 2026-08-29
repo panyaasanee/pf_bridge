@@ -1,20 +1,24 @@
 # 🔴 อ่านไฟล์นี้ก่อนจะ "ไปถอด" อะไรใหม่จากไบนารี
 
-## 🔴 V2 checkpoint ปัจจุบัน — อ่านส่วนนี้ก่อน V1
+## 🔴 V3 checkpoint ปัจจุบัน — duplicate-safe additive overlay
 
-**A5 พบ IMAGE/CAPTURE mismatch 386 instances ที่ 3 field locations / 4 field+reason points** หลังทาบ effective V2 schema กับ capture ที่ตัดเนื้อหาซ้ำตาม SHA-256 แล้ว ตาราง IMAGE ไม่ถูกแก้ให้เข้ากับ CAPTURE
+**A5 ยังพบ IMAGE/CAPTURE mismatch 386 instances ที่ 4 field+reason points (3 field locations)**; ตาราง IMAGE ไม่ถูกแก้ให้เข้ากับ CAPTURE
 
 ลำดับอ่าน:
 
-1. `PF_V2_MANIFEST.md` — namespace, SHA-256 และ checkpoint verification
-2. `PF_V2_HANDOFF.md` — วิธีรวม V1 + overlay โดยไม่สร้าง duplicated output
-3. `PF_V2_FIELD_VALIDATION.md` / `.tsv` — A5 mismatch 3 field locations / 4 field+reason points / 386 instances
-4. `PF_V2_EFFECTIVE_STATUS.md` / `PF_V2_P1_OPEN.tsv` — IMAGE-static Priority 1 CLOSED 250/365, OPEN 115
-5. `PF_V1_MANIFEST.md` / `PF_HANDOFF_V1.md` — ฐาน V1 immutable
+1. `PF_V3_MANIFEST.md` — commit marker, exact namespace, hashes และ duplicate audit ข้ามทุกรอบ
+2. `PF_V3_HANDOFF.md` — วิธีประกอบ V1 → V2 → V3 โดยไม่ append แถวซ้ำ
+3. `PF_V3_FIELD_VALIDATION.md` + canonical `PF_V2_FIELD_VALIDATION.tsv` — V3 replay ได้ TSV เดิมทุกไบต์ จึงไม่ปล่อยสำเนาซ้ำ
+4. `PF_V3_EFFECTIVE_STATUS.md` / `PF_V3_P1_OPEN.tsv` — P1 254/365 CLOSED, OPEN 111
+5. `PF_V2_MANIFEST.md` / `PF_HANDOFF_V1.md` — checkpoint ฐานแบบ immutable
 
-⚠️ **ห้ามใช้ `PF_SERIALIZER_FIELDS.tsv` V1 เดี่ยว ๆ เป็นผลล่าสุด** และห้าม append TSV overlay ทุกไฟล์เข้าด้วยกันตรง ๆ: ใช้ `CHANGED` เป็นการแทนที่, `REMOVE*` เป็นการลบ และ `ADD*` เป็นการเพิ่มตามลำดับใน `PF_V2_HANDOFF.md`. Attr serializer 59 รายการมี correction ที่ slot `+0x34`; การเก็บแถว `+0x18` เดิมร่วมกับแถว correction จะสร้างข้อเท็จจริงซ้ำ/ผิด
+⚠️ ห้าม append TSV ทุกไฟล์เข้าด้วยกันตรง ๆ: `CHANGED` แทนที่, `REMOVE*` ลบ, `ADD*` เพิ่ม และ status index ไม่ใช่ evidence table อีกชุด
 
-ผล V2 เป็น local-only ใน `pf_bridge\external` และถูก repository ignore อยู่: ผู้ที่เข้าถึงเครื่องนี้อ่านได้ แต่ clean clone/remote จะไม่ได้ไฟล์ชุดนี้โดยอัตโนมัติ
+V3 ตัดแถวเดิมที่รอบก่อนทำแล้วออกจากชุดใหม่: `CTracePathVital` 3 แถวไม่ถูกปล่อยซ้ำ; cross-overlay base target ซ้ำ 0; owned evidence keys ซ้ำ 0; status key เดิม 95 ตัวเป็น reference ใน derived index เท่านั้น
+
+[DECLARED-SCOPE] V3 เป็น local-only ใต้ `pf_bridge\external`; ไม่มี client/server runtime, server code, workflow หรือ queue ถูกแก้หรือรัน
+
+ข้อความประวัติด้านล่างเป็น immutable V2 index tail ไม่ใช่สถานะปัจจุบันของ V3:
 
 > ### 🔴 โฟลเดอร์ไหนเก็บอะไร — กฎตัดสินประโยคเดียว (2026-08-24)
 > **ถอดมาจากอิมเมจ `GameClient.local.bin` (โค้ดที่เกม *รัน*) → `pf_bridge\external\`**
