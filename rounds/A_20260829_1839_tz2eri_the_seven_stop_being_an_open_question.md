@@ -44,8 +44,8 @@ WORLD_CENSUS assembled=108/115 ... | undressable=7 P0/set1/lead155/Port_transpor
 ```
 
 - `world_port_royal_identity`: `CEILING_TICKET` / `CEILING_TICKET_VERDICT` /
-  `CEILING_TICKET_ANSWERED_AT` / `CEILING_ADJUDICATED_LEADERS` + `ceiling_class_for_leader()`
-  + ยามตอน import
+  `CEILING_TICKET_ANSWERED_AT` / `CEILING_ADJUDICATED_LEADERS` + `ceiling_class_for_placement()`
+  + `stale_adjudicated_leaders()`
 - `world_population`: `ceiling_console_token()` + ต่อท้าย `census_console_line` หนึ่งฟิลด์
 
 **ไม่มีเฟรมเปลี่ยน ไม่มีไบต์บนสายเปลี่ยน ไม่มีแถวถูกเขียน** — รายงานล้วน ไม่มี refusal ไหนอ่านมัน
@@ -83,11 +83,11 @@ WORLD_CENSUS assembled=108/115 ... | undressable=7 P0/set1/lead155/Port_transpor
 
 ## หลักฐาน
 
-- สวีตเต็ม **4864 passed · 0 failed · 327 skipped · 8799 subtests** · ดิฟ ASCII ล้วน (วัดแล้ว 0 ไบต์ที่ไม่ใช่ ASCII)
+- สวีตเต็มหลัง merge main **4939 passed · 0 failed · 327 skipped · 8834 subtests** · ดิฟ ASCII ล้วน (วัดแล้ว 0 ไบต์ที่ไม่ใช่ ASCII)
 - ยาม `not_applicable` ไล่ทุกขนาดรังจริง ไม่ใช่เถียงว่ามันเป็นไปไม่ได้: **จาก 108 ขนาด
   มีขนาดเดียวที่พิมพ์คำตัดสินได้ คือ 108** และวัดซ้ำที่สามจุดยึด (V134/V135/V112) ผลเดียวกันทั้งสาม
   (`undressable` เป็นสมบัติของตารางฉาก เท่ากันทุกรัง ⇒ เลขจะครบ 115 ได้ทางเดียว)
-- ไฟล์เทสใหม่ `tests/test_world_census_ceiling.py` (22 เทส) รวมเทสที่ไล่ regression จริง:
+- ไฟล์เทสใหม่ `tests/test_world_census_ceiling.py` (29 เทส) รวมเทสที่ไล่ regression จริง:
   แถวที่ถูกปฏิเสธด้วยเหตุผลที่ไม่มีใบไหนครอบ **ต้องขึ้น `unadjudicated=1` และ
   `no_avatar_source=4`** ไม่ใช่ถูกกลืนเข้าไปในเลขของ RE-149
 - ทุกสถานะของฟิลด์ encode `ascii` และ `cp874` ได้ รวมสถานะล้มเหลว
@@ -152,8 +152,9 @@ WORLD_CENSUS assembled=108/115 ... | undressable=7 P0/set1/lead155/Port_transpor
 
 - **D1 (adversary):** `world_m2_return_leg` ครึ่งที่วัดได้ **ตายในโปรดักชัน** — ไม่มี call site
   ไหนส่ง `departed_from` ⇒ ทุกการข้ามจริงพิมพ์ `drift=unmeasured:...`
-  🔴 chief แจ้งใน R230 ว่าต่อ `departed_from=` ให้แล้วใน `pirate-force-server#270` ซึ่ง**ยังไม่ merge**
-  ⇒ ไม่ใช่ของสายนี้แก้ (เป็น `runtime.py`) แต่จดไว้ว่า **ยังไม่จริงจนกว่า #270 จะเข้า**
+  ✅ **แก้แล้วระหว่างรอบนี้ ไม่ใช่โดยสายนี้**: `pirate-force-server#270` ของ chief merge เข้า main
+  ระหว่างรอบ · ตรวจหลัง merge แล้ว `runtime.py:4731` ส่ง `departed_from=` จริง ⇒ D1 ปิด
+  (สายนี้ merge main เข้าสาขาแล้ว สวีตหลัง merge **4939 passed 0 failed**)
 - **D3:** คำอ้าง "13 mutants ตายหมด" ของรอบ `mcxexp` **ตรวจซ้ำไม่ได้** เพราะไม่เคยระบุชื่อ mutant
   ⇒ รอบนี้ระบุชื่อ mutant ทุกตัวไว้ในบันทึกและ body ของ PR
 - **M11b:** mutant ที่แทนค่าคงที่ด้วย `()` ตรง ๆ ยังรอด — **equivalent วันนี้**
