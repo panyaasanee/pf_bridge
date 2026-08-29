@@ -16,18 +16,35 @@ consume ตอน login · chat factory (`make_gm_chat_command_action`) · resto
    [วัดแล้ว] แดง 3/3 บน origin/main ที่ยังไม่ต่อ · เขียว 3/3 เมื่อต่อ = mutation kill รายจุดเรียก
 2. ทิศ "snapshot แคบกว่าดิสก์": consume ตัดสินด้วย snapshot ⇒ ใบที่ snapshot ไม่ยอมทำให้ทั้งแฟ้ม
    `CONSUME_FAILED` และ branch นั้นใน runtime **เงียบ** = อาการ GM-034 กลับมาทางประตูใหม่
-   ⇒ เพิ่ม guarded print `GM_LOGIN_SCENE_OVERRIDE_CONSUME_FAILED judged_by=boot_snapshot ...`
+   ⇒ เพิ่ม guarded print `GM_LOGIN_SCENE_OVERRIDE_CONSUME_FAILED` (บรรทัด**ไม่อ้างสาเหตุ** —
+   outcome ไม่แบกสาเหตุมา ให้ทางแก้ทั้งสองทางแทน: ตรวจ config พัง / restart ถ้าแก้ทะเบียนหลังบูต)
    และเขียนเทส R225 สองใบใหม่ให้พินกลไกใหม่ (ใบไม่ถูกหยิบออกจากแฟ้มเลย · login จบที่แถวตัวเอง
    · ไม่มี lockout · คอนโซลบอกชื่อ) — invariant เดิมครบ กลไกเปลี่ยนตามดีไซน์ของ GM-036 เอง
+
+### ผล pf-adversary (ตรวจ diff จริงก่อน un-draft · ยืนยัน mutation-kill 3/3 ด้วยตัวเองแล้ว)
+
+- **D1 (แก้แล้ว):** ดราฟต์แรกของ print เขียน `judged_by=boot_snapshot` — [วัดแล้ว] โกหกกรณี JSON
+  พังกลางเซฟ (ไม่มี disagreement สักที่ แต่บรรทัดส่ง operator ไป restart ฟรี) ⇒ เขียนใหม่ไม่อ้างสาเหตุ
+- **D2 (พินแล้ว):** ทิศ disk-กว้าง เสีย per-account isolation จริง — [วัดแล้ว] แฟ้มสองบัญชี บัญชีที่ดีโดน
+  `consume_failed` ไปด้วยทั้งใบ ⇒ เพิ่มเทสพินราคาที่ยอมรับ (ไม่มีอะไรถูกทำลาย·ไม่มี lockout·ไม่เงียบ)
+- **D3 (แก้แล้ว):** เทส /warp เดิมเขียวได้แม้ route ไม่รันเลย ⇒ เติม assertion บวก 2 ตัว
+- **D4 (ส่งต่อสาย GM):** docstring/docs 7 จุดในเขตสาย GM ยังเขียนว่า "ยังไม่มีใครต่อสาย" — เท็จแล้ว
+  หลัง #264 merge · อยู่ในจดหมายตอบ GM (chief ไม่แตะ gm/ กับ docs/GM_LANE.md — เขตเขา)
+- ที่ adversary ลองแล้วหักไม่ได้: mock T3 ไม่รั่วไปที่ placement call · restore branch เป็น defense-in-depth
+  ที่ประกาศตรง · print เป็น ASCII ล้วน guarded · merge-order TypeError ยิงไม่ได้เพราะ callee ทั้งสามรับ kwarg
+  บน main แล้ว · ไม่มี consumer ของ event เก่านอกเทสที่ยังเขียว
 3. พินรูปเรียกใน `test_gm_standalone_map_is_not_chat_writable.py` อัปเดตตามรูปเรียกใหม่
    (ยังพินว่า "ไม่ส่ง config path" — เจตนาเดิมของด่านไม่เปลี่ยน)
 
-ไฟล์ที่แตะ (pirate-force-server, 4 ไฟล์): `src/pirateforce_foundation/runtime.py` ·
+ไฟล์ที่แตะ (pirate-force-server, 5 ไฟล์): `src/pirateforce_foundation/runtime.py` ·
 `tests/test_gm_login_scene_registry_wiring_in_runtime.py` (ใหม่) ·
-`tests/test_gm_login_scene_override_registry_authority.py` · `tests/test_gm_standalone_map_is_not_chat_writable.py`
+`tests/test_gm_login_scene_override_registry_authority.py` · `tests/test_gm_standalone_map_is_not_chat_writable.py` ·
+`.claude/agents/pf-adversary.md` (งานหลัก 2 — รวมใบเดียวเพราะกำหนด 16:51 มาก่อนที่ PR ใบสองจะ merge ทัน
+และเป็นไฟล์เอกสารที่เกตไม่รัน ความเสี่ยงทำใบแดง = ศูนย์ · เหตุผลเกินหนึ่งเรื่องเขียนตามกฎ v6.3)
 
-หลักฐาน: สวีตเต็ม 4,713 passed 0 failed เขียว(cloud sanity) · `HYPOTHESIS_LEDGER` PASS 47 ·
-ไฟล์ที่แตะ ASCII สะอาดทั้งหมด (ด่าน encode ไม่ใช่รันแล้วดู) · pf-adversary รีวิวก่อน un-draft
+หลักฐาน: สวีตเต็ม 4,715 passed 0 failed เขียว(cloud sanity) · `HYPOTHESIS_LEDGER` PASS 47 ·
+ไฟล์โค้ด/เทสที่แตะ ASCII สะอาด (ด่าน encode ไม่ใช่รันแล้วดู · non-ASCII เดียวที่พบเป็นข้อความเดิม
+ในไฟล์นิยาม agent ซึ่งไม่ใช่ของที่ print ออกคอนโซลสะพาน) · pf-adversary รีวิวก่อน un-draft (ผลข้างบน)
 
 ## งานหลัก 2 — COO-DECISION 1444 ข้อ 2 (กำหนด ~16:51 วันนี้ — เสร็จในรอบ)
 

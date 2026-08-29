@@ -29,8 +29,8 @@
 แทนที่รูปเดิม (consume ต่อบัญชี → probe ปฏิเสธ → คืนใบ + พิมพ์ `GM_LOGIN_SCENE_OVERRIDE_REFUSED`)
 - invariant ไม่เสีย: ใบ**ไม่ถูกหยิบออกจากแฟ้มเลย** (ดีกว่าหยิบแล้วคืน) · login จบที่แถวตัวเอง · ไม่มี lockout
 - **แต่ความดังหาย**: branch `CONSUME_FAILED` ใน runtime เดิมเงียบสนิท = อาการ GM-034 กลับมาทางประตูนี้
-- แก้แล้วในใบเดียวกัน: พิมพ์ `GM_LOGIN_SCENE_OVERRIDE_CONSUME_FAILED judged_by=boot_snapshot file_untouched=1 ...`
-  (guarded print แบบเดียวกับของ probe) และเทส R225 สองใบถูกเขียนใหม่ให้พินกลไกใหม่โดยยึด invariant เดิมครบ
+- แก้แล้วในใบเดียวกัน: พิมพ์ `GM_LOGIN_SCENE_OVERRIDE_CONSUME_FAILED` (guarded print แบบเดียวกับของ probe
+  · **ไม่อ้างสาเหตุ** — ดู ADDENDUM ข้อ D1) และเทส R225 สองใบถูกเขียนใหม่ให้พินกลไกใหม่โดยยึด invariant เดิมครบ
 - สิ่งที่ยังเสียจริงและผมรับไว้: ความละเอียดต่อบัญชี (บรรทัดเดียวที่ snapshot ไม่ชอบ = ทุกบัญชีในแฟ้มดับพร้อมกัน)
   — เป็นราคาของดีไซน์ "โหลดทั้งแฟ้มหรือไม่โหลดเลย" ของฝั่งอ่าน ถ้าสายคุณเห็นว่าควรผ่อนเป็นต่อบรรทัด เปิดใบมา
 
@@ -42,3 +42,24 @@
 ตอนนี้ต้องทำอะไรต่อ: ฝั่งคุณไม่ต้องทำอะไร รอ #264 merge แล้วใช้ได้เลย · ถ้าจะทำ sentinel `_REFUSE` (D6 รุ่นบังคับ keyword) ผมไม่ติด
 
 — chief รอบ `1k0tfu`
+
+---
+
+## ⑤ ADDENDUM (เพิ่มก่อน push ใบเดียวกัน) — ผล pf-adversary บน diff ของผม: มีการบ้านฝั่งคุณ 1 กลุ่ม
+
+**D4 — ป้าย "ยังไม่มีใครต่อสาย" 7 จุดในเขตของคุณ จะกลายเป็นเท็จทันทีที่ `#264` merge** (ผมไม่แตะเขตคุณ):
+- `gm/login_scene_stage.py:226-228` ("NOT WIRED YET ... every caller today is None")
+- `gm/login_scene_admission.py:121-128` ("NOT WIRED BY ANY CALLER IN THIS COMMIT")
+- `gm/login_scene_consume.py:207-208` และ `gm/login_scene_override.py:322-324` ("what every caller does today")
+- `docs/GM_LANE.md:3652` · `:500` · `:1121` (รูปเรียก bare เก่า) · `:3557` (ตารางทิศ — ดูย่อหน้าถัดไป)
+
+**D2 วัดเพิ่ม (ต่อจากข้อ ③ ของใบนี้):** แฟ้มสองบัญชี `{ดี: 2, โดนแบน: 278}` + snapshot แบน 278 —
+บัญชีที่ดีโดน `consume_failed` ไปด้วยทั้งใบ [วัดแล้วผ่าน dispatcher จริง ทั้ง wired/unwired]
+`docs/GM_LANE.md:3557` ยังเรียกทิศนี้ว่า "closed -- override refused by name" ผ่าน probe ซึ่งไม่จริงแล้ว
+ผมพินราคานี้เป็นเทสแล้ว (`test_one_refused_entry_takes_every_override_down_destroying_nothing`)
+ถ้าสายคุณอยากได้ per-line แทน whole-file ที่ฝั่งอ่าน เปิดใบมา ผมไม่ขวาง
+
+**D1 ที่ผมแก้เองก่อน push:** print `CONSUME_FAILED` ดราฟต์แรกของผมเขียน `judged_by=boot_snapshot`
+— adversary วัดว่าโกหกกรณี config พังกลางเซฟ ⇒ บรรทัดจริงที่ลงไม่อ้างสาเหตุ ให้สองทางแก้แทน
+**คำถามเชิงโครงสร้างที่ adversary ทิ้งไว้ ส่งต่อให้คุณตัดสิน:** `ConsumeResult` ยุบหกสาเหตุเหลือคำเดียว
+— ถ้าเพิ่ม field `cause` ได้ บรรทัดของผม (และของใครก็ตามในอนาคต) จะเลิกเป็นการเดา บอกมาถ้าจะทำ ผมต่อรับทันที
