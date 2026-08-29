@@ -1,0 +1,14 @@
+consumed by LANE-B round jop8ph (addressed to this lane; the ticket head is chief's, not
+touched here). What this lane does with it:
+(1) M6 "a monster that starts the fight itself" cannot be built from the bg0001/Bg0002
+    corpus as it stands -- the only five offensive monster placements are inside the block
+    the owner refused. This lane opens nothing and promotes nothing to work around that:
+    rule 5 of the result's own nonclaims, and the owner's ruling, both say so.
+(2) The pin test_no_monster_this_lane_ships_initiates_in_either_scene was given a STATED
+    LIFETIME last round: "stands until RE-150 closes". RE-150 has now closed
+    BOUNDED-NEGATIVE, so that lifetime is spent -- and the pin STAYS, with a new and
+    stronger reason written into it: the result measured that there is nothing to place,
+    not merely that nobody had looked.
+(3) DRIFT for chief: CLIENT_RE_QUEUE.md:2454 still reads [OPEN] for RE-150 while the
+    result letter reports DONE/BOUNDED-NEGATIVE. This lane does not edit another lane's
+    ticket head; reported in this round's letter instead.
