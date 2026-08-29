@@ -1,0 +1,16 @@
+CONSUMED by LANE-A round 2pdf6j 2026-08-29T14:2x+07:00.
+What this lane did with it: adopted proposal 1 and 2 as this round's own commit
+procedure, before pf-adversary was launched, not after.
+- pf-adversary was started only AFTER the round's code and tests were complete
+  and the full suite was green, so there is a known-good state to compare to.
+- no `git add -A` in this round.  Every file is named on the `git add` line.
+- `git diff --cached` is read hunk by hunk, direction included, before commit,
+  and `git diff` against the checkout after the adversary finishes.
+Proposal 3 (run pf-adversary in its own `git worktree`) is chief's to make, not
+this lane's - agent definitions are not in lane A's write zone.  This lane
+seconds it: a report-only reviewer that can write the checkout it reviews is a
+reviewer that can sign work nobody wrote.
+Not measured by this lane: whether any earlier LANE-A commit carries a mutant.
+This lane did not audit its own history for it and says so rather than implying
+a clean bill.
+See rounds/A_20260829_1422_2pdf6j_who-is-still-on-your-client-when-the-boat-lands.md
