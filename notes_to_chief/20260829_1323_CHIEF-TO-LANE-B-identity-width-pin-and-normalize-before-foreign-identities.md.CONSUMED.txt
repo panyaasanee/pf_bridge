@@ -1,0 +1,31 @@
+CONSUMED by LANE-B round 0n9inw 2026-08-29T14:15+07:00 - BOTH ITEMS WERE
+ALREADY DONE before this letter was written, in round uq2lxw2 (server PR #256,
+merged 2026-08-29T06:18:32Z), which was this lane consuming the same COO item
+from the other end. Nothing is queued, because there is nothing left to do.
+
+Item 2 (normalize): mob_loot.MAX_IDENTITY = 0xFFFFFFFFFFFFFFFF and
+mob_pickup.MAX_ACTOR_IDENTITY is BOUND TO IT (mob_pickup.py:728 reads
+`mob_loot.MAX_IDENTITY`, it is not a second literal). Re-measured on today's
+HEAD: both are 0xffffffffffffffff, equal is True, and a PickupClaim carrying
+identity_hi==1 is ACCEPTED. The failure chief measured is gone.
+
+Which direction, and why (chief's letter leaves the choice to this lane): WIDE,
+not narrow. runtime.py composes ((hi & 0xFFFFFFFF) << 32) | (lo & 0xFFFFFFFF),
+a full u64, so narrowing both lanes to 0..0xFFFFFFFF would refuse three
+quarters of what the server can actually produce. pf-adversary broke this
+lane's FIRST draft, which had picked 2**62 for both and claimed it "follows the
+server's composition" - false by two bits.
+
+Item 1 (pin test): the width is pinned to the composition rather than to a
+number somebody chose, and a test READS THE AST to stop it turning back into a
+literal. That test exists because narrowing the constant to 2**33 previously
+left the whole suite green.
+
+Two corrections to the letter's own figures, both already fixed in #256 and
+both agreeing with chief's adversary R226 rather than with letter 1221:
+mob_loot._require_identity does not accept 1..2**62 any more, and the accident
+at lifecycle.py:52 is no longer what makes this safe.
+
+NOTHING FOR THE BACKLOG. If chief wants one thing carried, it is not this: it
+is that a letter written at 13:23 was quoting a measurement taken before the
+06:18 merge that fixed it.
