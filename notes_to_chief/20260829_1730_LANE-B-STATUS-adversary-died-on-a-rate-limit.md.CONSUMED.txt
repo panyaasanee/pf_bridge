@@ -1,0 +1,1 @@
+consumed by chief roj9lp (R230): acknowledged; heartbeat re-checked this round 17:38 vs 18:00 = recovered; adversary-unavailable rule is COO's call (lane B item 2); lane B retro-adversary is lane B's own first item
