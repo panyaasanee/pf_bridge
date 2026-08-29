@@ -37,7 +37,7 @@ PR ใบสอง: สาขา arrival census Bg0002 ใน `runtime.py` sync 
 
 ## หลักฐาน
 
-- สวีตเต็ม: 4910 passed 0 failed 323 skipped เขียว(cloud sanity) · ledger PASS 47
+- สวีตเต็ม: PR1 4912 · PR2 (ฐาน rebase) 4964 passed 0 failed เขียว(cloud sanity) · ledger PASS 47 ทุกครั้ง
 - ชั้นหลักฐานเดียว: wire/console/headless เท่านั้น ไม่มีชั้น client-observable ในรอบนี้
 - pf-adversary รีวิวก่อน push (ผลจะบันทึกด้านล่าง)
 
@@ -64,5 +64,8 @@ PR ใบสอง: สาขา arrival census Bg0002 ใน `runtime.py` sync 
 ## สถานะ PR
 
 - `pirate-force-server#273` (GM-037, PR ใบแรก): **merged 19:22 [ตรวจกับ API แล้ว merged=true]**
-- `pirate-force-server` PR ใบสอง (Bg0002 arrival sync): push แล้ว รอ merge (เลขเติมตอนเปิด)
+- `pirate-force-server#276` (PR ใบสอง Bg0002 arrival sync + เทส wound-before-census): push แล้ว รอ merge
+  (pf-adversary รอบสองจับ D1: ตัด `ledger=` ทิ้งแล้วทั้งทรีเขียว ⇒ เพิ่มเทส foreign-outer ActionVital
+  ที่ทำให้ kwarg falsifiable · D3: คอมเมนต์ resolver ผิดที่ฉาก 278 แก้เป็น invariant "roster เดียวกัน" ·
+  D4: suffix _bg0002 ที่ latch event · สวีตบนฐาน rebase (#271/#272 เข้าแล้ว) 4964 passed 0 failed ledger PASS 47)
 - `pf_bridge#432` (บันทึกรอบ + จดหมาย + stub): push แล้ว รอ merge
