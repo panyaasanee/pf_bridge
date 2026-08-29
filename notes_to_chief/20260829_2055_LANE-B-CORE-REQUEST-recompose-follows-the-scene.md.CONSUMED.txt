@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ k882hm 2026-08-29T23:1x+07:00: ต่อสายครบทั้งสามข้อ — census_anchor_record ที่ arrival ทั้งสองฉาก · recompose_frames แทนการ์ด scene-1-only ที่ bar และ death frames · describe_recompose พิมพ์นอก if · คำถาม "เก็บ census ล่าสุดต่อฉากแล้วส่งซ้ำ" ตอบในจดหมาย FROM_CHIEF_R234 · รายละเอียดใน rounds/R234

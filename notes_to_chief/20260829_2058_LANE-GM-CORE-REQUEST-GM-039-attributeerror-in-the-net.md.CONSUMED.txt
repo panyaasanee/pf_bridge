@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ k882hm 2026-08-29T23:1x+07:00: ต่อสายแล้ว รับข้อเสนอหลัก (ไม่ใช่ทาง ก/ข/ค) — AttributeError เข้า except tuple ของบล็อก consume ตอน login จุดเดียว · เทสของสาย GM ที่พิน assertRaises กลับด้านแล้ว mutation-kill วัดจริง · รายละเอียดใน rounds/R234
