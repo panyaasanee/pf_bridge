@@ -1,0 +1,38 @@
+consumed by LANE-GM รอบ 6vhfgh (2026-08-29T19:25+07:00): ทำอะไรต่อ
+
+ใบนี้จ่าหน้าถึง "สาย A (WORLD), สาย GM" -> ข้อ 2 เป็นของสายนี้ (ADDENDUM v2 ข้อ B)
+ข้อ 1/3/4 เป็นของสาย A และ chief สายนี้ไม่แตะ
+
+ข้อ 2 "สาย GM เพิ่ม 126 เข้าชุดที่ /warp รับได้"
+-> ทำไม่ได้ตามตัวอักษร และเหตุผลวัดเองบน main ไม่ได้เดา:
+   /warp ข้ามฉาก = เขียนฉากล็อกอินครั้งหน้า (login_scene_stage)
+   runtime.py คลี่ต่อด้วย world_scene_entry.resolve_entry โดย via_login เป็นค่าเริ่มต้น True
+   ทั้งสองจุด (runtime.py:5635 probe, runtime.py:5706 ตัววางตัวละครจริง)
+   world_scene_entry.py:390 ปฏิเสธ login_entry_allowed=false เมื่อ via_login เป็นจริง
+   => ถ้า "รับ" เฉย ๆ ผู้เทสเสียหนึ่งรีล็อกแล้วไปไม่ถึงฉาก 126 อยู่ดี
+
+-> สายนี้ส่งของเท่าที่ซื่อสัตย์ได้ในรอบนี้ (อยู่ในเขตสายนี้ทั้งหมด):
+   1 gm/login_scene_admission.py: SANCTIONED_BARRED_SCENES = {126: "CHIEF-DECISION 20260829_1603 item 2"}
+     (MappingProxyType = typo guard ของโมดูลที่ import ไป ไม่ใช่การ์ดความปลอดภัย - D8)
+     + sanctioned_barred_blocker() วัดสดจากทะเบียนสาย A
+   2 gm/login_scene_stage.py: reason ใหม่ scene_sanctioned_but_route_incomplete
+     แยกจาก scene_has_no_login_entry เพราะ "ทางแก้" คนละอัน (รอ merge กับ ไล่ใบ)
+   3 gm/chat_command_action.py: บรรทัด way out พิมพ์ blocker= และ sanction= ต่อท้าย
+   4 tests/test_gm_login_scene_sanctioned_barred.py ชั้นแรกพิสูจน์ว่า
+     "sanctioned ไม่เท่ากับ admitted" ชุด stageable ยัง (1, 2, 278, 997) เท่าเดิม
+     ทั้งก่อนและหลังแถว 126 ของสาย A ลง
+
+-> เปิดใบ CORE-REQUEST-GM-038 (20260829_1925) ขอจุดเดียวใน runtime.py:
+   ส่ง via_login=False เฉพาะ override จากแมพ GM-gated + ฉากที่ sanctioned
+   พร้อมเงื่อนไขห้ามหลุดสามข้อ (standalone ต้องไม่ได้ bypass เด็ดขาด)
+   และทางเลือก ข (สาย A ปัก login_entry_allowed: true) พร้อมเหตุผลที่ไม่แนะนำ
+
+-> ข้อ 3 ของใบ (chief เปิด GT เมื่อทั้งสองอย่างอยู่บน main): ยังไม่ถึง
+   ครึ่งของสาย A ยังไม่ลง (วัดแล้ว: scenarios/world_scene_registry_001.json บน main
+   ไม่มีแถว n_id=126) และครึ่งของ runtime ยังเป็นใบ 038 ที่เพิ่งเปิด
+
+pf-adversary ตีกลับรอบแรก 8 ข้อ (D1-D8) ห้าข้อเป็นมิวแทนต์ที่รอดเทสทั้งชุด
+แก้แล้วหกข้อ พร้อมยืนยันว่าฆ่ามิวแทนต์ได้ทีละตัว · D7 ยอมรับเป็นช่องและเรียกชื่อไว้ ไม่แก้
+รายละเอียดอยู่ใน rounds/GM_20260829_1925_sanctioned_is_not_admitted.md
+
+ต้นฉบับไม่ถูกลบ · สำเนาอยู่ใน consumed/
