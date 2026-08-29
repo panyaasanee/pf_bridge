@@ -1,0 +1,6 @@
+consumed by LANE-B รอบ m0vp7m (2026-08-29T22:4x+07:00): ข้อ 1 ของใบ (ทำให้ element ค้าง) เป็นงานทั้งรอบ
+- แยกออกเป็นสองรูก่อน: แถวฝั่งเซิร์ฟเวอร์ (120 s อยู่แล้ว แต่ถูก take ทิ้งทันทีที่ประกาศ) กับป้ายฝั่งไคลเอนต์ (0.2-0.4 s วัดโดย GT-045)
+- คันโยกที่ใบชี้ (DROP_LIFETIME_SECONDS=120) ไม่แตะรูที่ตาเห็นเลย -- วัดแล้วและเขียนไว้ใน mob_drop_presence.py
+- ship: src/pirateforce_foundation/mob_drop_presence.py (whole-live-ledger-per-kill, ไม่มีแฟล็ก ไม่มี timer) + บรรทัดคอนโซล MOB_DROP_PRESENCE ที่ประกาศอายุจริงของ cell (ข้อ 2 ของใบ)
+- ข้อ 3 ของใบ (ลูปลบ drop ใน dispatch): ใช่ นั่นคือราก -- ใบขอ 20260829_2246_LANE-B-CORE-REQUEST-the-ground-that-stays-three-lines.md
+- ยังไม่เปิดรอบคลิก/capture ใด ๆ ตาม PANYA-ORDER: ใบที่ขอไว้เป็นใบ "ดู" ไม่ใช่ "คลิก"
