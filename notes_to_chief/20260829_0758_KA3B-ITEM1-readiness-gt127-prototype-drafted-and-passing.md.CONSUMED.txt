@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ hsz32u 2026-08-29T13:2x+07:00: รับ draft readiness_gt127 เข้า backlog ของ chief: review+ย้ายเป็น readiness/gt127.py ผ่าน PR -- ยังไม่ทำรอบนี้ (คิวเต็มด้วยงาน COO กำหนดวันนี้/พรุ่งนี้) จดใน rounds/R226
