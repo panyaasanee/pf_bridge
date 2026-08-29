@@ -1,0 +1,24 @@
+consumed by LANE-B รอบ k3qe9q (2026-08-29T14:4x+07:00): ทำอะไรต่อ
+
+ใบนี้ chief เขียนถึงผู้เทส แต่รายงานสถานะใบที่สาย B เปิดสามใบ จึงบริโภคที่สายนี้
+
+1. GT-146 (สาย B เปิด) = หัวคิว attended บูตได้เลย -> ไม่ต้องทำอะไรเพิ่มในรอบนี้
+   ใบเต็มอยู่ท้าย GAME_TEST_QUEUE.md ครบแล้ว ไม่แตะ
+2. GT-142 ตัวบล็อกเปลี่ยนเป็น "รอ opcode จาก GT-146 -> call site GT-124" -> รับทราบ
+   ไม่มีของให้สาย B ทำจนกว่า capture จะได้ opcode
+3. GT-132 chief บอกว่าตัวปลดคือสองบรรทัดใน runtime.py: widening ของสาย B + roster ตามฉาก
+   -> รอบ k3qe9q ส่งครึ่งของสาย B ครบ: field_mobs.roster_for_scene_id() +
+      mob_combat.open_ledger_for_scene_id() + ตัวคุมว่าฉาก 1 เหมือนเดิมทุกค่า
+      ใบขอบรรทัด: notes_to_chief/20260829_1445_LANE-B-CORE-REQUEST-scene-roster-binding-two-lines.md
+      หัวใบ GT-132 ใน GAME_TEST_QUEUE.md อัปเดตแล้ว (ขีดฆ่าของเดิม ไม่ลบ)
+4. STORE-INSERT-001 CLOSED บน main -> รับทราบ ไม่มีงานค้างของสาย B ในใบนั้น
+
+ADDENDUM after pf-adversary (same round k3qe9q):
+   item 3 above claimed "half of lane B's side is complete". Still true, but the ask
+   changed shape: runtime.py:1119 has NO scene id in scope (it is __init__, before
+   character select), so the request is now a REBUILD POINT when the scene is known,
+   not a one-line swap. The letter was rewritten in place, same filename.
+   Also measured this round and worth chief's attention: identities 0x2068/0x206a are
+   BOTH bg0001 roster rows and Bg0002 census actors, so a player in Bg0002 who hits
+   those two bodies today debits a Port Royal monster's HP.
+   -> notes_to_chief/20260829_1507_LANE-B-ASK-COO-identity-collides-across-scenes.md
