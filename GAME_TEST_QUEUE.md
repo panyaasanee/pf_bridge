@@ -7722,3 +7722,62 @@ P1 แมพขึ้นและ **ว่างเปล่า** - คือข
 CANON_SHA ก่อน/หลัง :
 OBSERVER_CONFIRMED  :
 ```
+
+---
+
+## GT-145 CONSOLE-ENCODING-MEASURE-001 [STATIC-ON-BRIDGE -- วัดบนสะพานตอนเซิร์ฟเวอร์รันจริง · ไม่บูตไคลเอนต์ ไม่ล็อกอิน ไม่มีตัวละคร · ~15 นาที]: คอนโซลของเครื่องเจ้าของเป็น encoding อะไร -- พิมพ์สี่ค่าครั้งเดียว คัดลอกกลับมาดิบ ๆ  [PENDING]
+
+**ตอบใบ `CORE-REQUEST-GM-035`** · เข้าคิวตามจดหมาย chief `20260829_1221` ข้อ ⑤ · เขียนใบโดย `pf-queue-author`
+
+> NUMBERING: grep ก่อนจอง -- `GT-145` / `RE-145` = 0 hit ทั้ง `GAME_TEST_QUEUE.md` และ `CLIENT_RE_QUEUE.md` · สูงสุดก่อนหน้า = `GT-144` · ตัวนับเดียวร่วมกับ `CLIENT_RE_QUEUE.md`
+
+**ทำไมต้องวัด:** สามที่ใน repo พูดไม่ตรงกัน และ **ไม่มีที่ไหนวัดอะไรเลย** -- `runtime_console.py:26` (`_Mirror.encoding` รายงาน `utf-8`) · `gate-windows.yml:53` (บังคับ `PYTHONIOENCODING: 'cp874:strict'` เป็นนโยบาย) · เอกสารสาย GM + กติกาบ้าน ("คอนโซลสะพานเป็น cp874" มาหลายรอบ) · 🔴 และมี**ที่สี่**ที่จดหมาย GM-035 ไม่ได้ลิสต์: `runtime_console.py:122,126-133` เปิดคอนโซลด้วย `SetConsoleOutputCP(65001)` แล้ว `open("CONOUT$", "w", encoding="utf-8", errors="replace")` · ผลไม่ใช่เรื่องความเรียบร้อย: คอนโซลที่เข้ารหัสอักขระไม่ได้ทำให้ `print` โยน `UnicodeEncodeError` และเพราะ `_Mirror.write` เขียนคอนโซล (`:45`) **ก่อน** ไฟล์ mirror (`:46`) บรรทัดนั้นจะไม่ถูกบันทึกที่ไหนเลย
+
+- objective: บนสะพาน ตอนเซิร์ฟเวอร์รันอยู่จริง สี่ค่านี้คือค่าอะไร -- `sys.stderr.encoding` · `sys.stdout.encoding` · `os.environ.get("PYTHONIOENCODING")` · `locale.getpreferredencoding(False)` · หนึ่งข้อเท็จจริงของเครื่อง วัดครั้งเดียว **ไม่ได้พิสูจน์ว่าไฟล์ไหนถูกหรือผิด**
+- db: สำเนา `state\run_gt145.sqlite3` · 🔴 ห้ามเปิด canonical `state\pirateforce.sqlite3` · sha256 ก่อน-หลังต้องได้ `673f4bfb1c35ec390d6ed3b0c1fe3f581b20c6895ace9183c86a5971bccc9708` ทั้งสองครั้ง
+- server args: `py -3 -u -m pirateforce_foundation.app --db state\run_gt145.sqlite3` · 🔴 ห้ามมีแฟล็ก `--*-scenario` / `--world-census-actors` / `--export-events` · ไม่บูตไคลเอนต์
+- steps:
+    0. `LOCK.txt` ต้องเป็น `RELEASED` แล้วเขียนตัวเองเป็น holder · `py -3 -V` ตอบได้ (ไม่ตอบ = เลื่อนใบ ไม่ใช่ FAIL)
+    1. copy DB · จด sha256 ของ canonical
+    2. บูตเซิร์ฟเวอร์ในหน้าต่างของมันเอง ปล่อยรันไว้ **ห้ามแตะ** · จด boot stamp
+    3. `netstat -ano | findstr "10188 10189"` -> ต้องเห็น LISTENING ทั้งสองพอร์ต · คัดลอกทุกบรรทัด
+    4. เปิดหน้าต่าง PowerShell **ใหม่** ด้วยวิธีเดียวกับหน้าต่างที่บูตเซิร์ฟเวอร์ (shortcut/profile เดียวกัน) แล้ว `cd` รากรีโป · **จดว่าเป็นหน้าต่างใหม่หรือหน้าต่างเดียวกับเซิร์ฟเวอร์** (จดอย่างเดียว ไม่ต้องตีความ)
+    5. รันบรรทัดนี้ **ตามตัวอักษร**:
+       `py -3 -c "import sys,os,locale;print('PF_ENC stderr=%r stdout=%r PYTHONIOENCODING=%r locale=%r' % (sys.stderr.encoding, sys.stdout.encoding, os.environ.get('PYTHONIOENCODING'), locale.getpreferredencoding(False)))"`
+       ทั้งบรรทัดเป็น ASCII ล้วนโดยตั้งใจ -- ถ้าคอนโซลเป็น cp874 strict จริง โพรบที่มีอักขระนอก ASCII จะฆ่าการวัดของตัวเอง
+       🔴 **ห้าม redirect ห้าม pipe** (`>` `|` `Out-File` `Tee-Object` `Out-Host` `Select-String`) -- pipe เปลี่ยนค่า `sys.stdout.encoding` จริง ๆ ⇒ ผลที่ผ่าน pipe ใช้ไม่ได้ · แล้ว `echo $LASTEXITCODE` ต้องได้ `0`
+    6. รันต่อ คัดลอกผลด้วย: `chcp` และ `py -3 -V`
+    7. **คัดลอกตัวอักษร** จากคอนโซล (mark & copy) ไม่ใช่ถ่ายรูป ไม่ใช่พิมพ์ตาม -> วางลงช่อง result ดิบ ๆ
+    8. `netstat` ซ้ำข้อ 3
+    9. Ctrl+C ปิดเซิร์ฟเวอร์ · จด sha256 canonical ซ้ำ · **teardown ภายใน 60 นาทีนับจาก boot stamp** (`PANYA-ORDER 2026-08-29T09:30+07:00` ข้อ ① ลดเพดานจาก 180 เหลือ 60 สำหรับรอบ unattended · ใบนี้กินเวลา ~15 นาทีจึงอยู่ในเพดานสบาย ๆ) · ปลด LOCK เป็น `RELEASED` · 🔴 ห้าม commit เอง
+- pass criteria: 🔴 สองชั้นแยกกัน ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น
+    wire/DB (headless ล้วน ไม่ต้องมีคนหน้าจอ):
+      (ก) `netstat` ทั้งก่อนและหลังโพรบ เห็น LISTENING ทั้ง `10188` และ `10189` ⇒ วัดตอนเซิร์ฟเวอร์รันจริง
+      (ข) บรรทัด `PF_ENC` ออก **ครั้งเดียว** และ `$LASTEXITCODE` = `0`
+      (ค) สี่ค่าอยู่ในช่อง result แบบคัดลอกดิบ ครบสี่คีย์ **ไม่มีคีย์ไหนเว้นว่าง** · ค่าที่ไม่ได้ตั้งต้องเป็นตัวอักษร `None` เขียนออกมาเต็ม ๆ
+      (ง) `chcp` · `py -3 -V` · คำตอบข้อ 4 (หน้าต่างไหน) บันทึกครบ -- ใบปิดที่สี่ค่า สามอย่างนี้คือบริบทที่กันการต้องรันซ้ำอีกรอบ
+      (จ) sha256 canonical เท่าเดิมก่อน-หลัง · `SELECT max(lease_generation) FROM sessions;` บน**สำเนา** เท่าเดิมก่อน-หลัง (ใบนี้ไม่ส่งเฟรมใด ๆ ไม่มีแถวที่ `selected_character_id IS NOT NULL`)
+    client-observable: 🔴 **ใบนี้ไม่มีชั้นนี้ -- N/A และนี่คือเหตุผล** ไม่มีไคลเอนต์ถูกบูต ไม่มีล็อกอิน ไม่มีตัวละคร ไม่มีอะไรถึงจอผู้เล่นแม้แต่พิกเซลเดียว · สิ่งเดียวที่อยู่บนจอคือหน้าต่างคอนโซล ซึ่งเป็นข้อเท็จจริงของเครื่องที่อ่านได้แบบ headless **ไม่ใช่หลักฐานชั้น client-observable** ⇒ **ไม่ต้องมี `OBSERVER_CONFIRMED` และห้ามรอมัน** · กฎบันทึกสีป้ายชื่อทุกป้ายในเฟรม (คำสั่งเจ้าของ 2026-08-25, R163) **ไม่ใช้กับใบนี้ เพราะไม่มีเฟรมและไม่มีป้ายชื่อเลย** -- ไม่ใช่การขอยกเว้น · 🔴 ห้ามใช้ผลใบนี้อ้างว่าอะไรปรากฏหรือไม่ปรากฏบนจอ
+- nonclaims:
+    1. ไม่อ้างค่าของ `sys.stderr` **ภายในโปรเซสเซิร์ฟเวอร์หลัง `install_runtime_console` ทำงานแล้ว** -- ตรงนั้น `sys.stderr` เป็น `_Mirror` (`runtime_console.py:84-85`) เป็นคำถามคนละใบ ⇒ อยากได้ต้องเปิดใบใหม่ ห้ามยัดเข้าใบนี้
+    2. ไม่อ้างอะไรกับ stdout ที่ถูก redirect/pipe (ใบนี้วัดกรณีคอนโซลล้วน) และไม่อ้างว่าค่านี้เท่ากับค่าบน CI -- `gate-windows.yml` **บังคับ** ค่า ไม่ได้วัด (`:160-165` ยืนยันตัวเองบน runner ไม่ใช่บนสะพาน)
+    3. ผู้เทส **ไม่ต้องตีความ และไม่แก้ไฟล์ใด ๆ** รายงานสี่ค่าดิบอย่างเดียว การตัดสินว่าไฟล์ไหนผิดเป็นของ chief
+    4. **ผลลบมีค่าเท่าผลบวก** -- ค่าที่ออกมาไม่ตรงคำทำนายสักข้อคือคำตอบของ `GM-035` ไม่ใช่ความล้มเหลว · โพรบรันไม่ได้ / exit != 0 = **เลื่อนใบ ไม่ใช่ FAIL**
+    5. ไม่บล็อกสาย GM -- `console_safe(text, stream)` ถามสตรีมเองอยู่แล้ว เดินต่อได้ทุกคำตอบ
+
+**คำทำนาย (เป็นคำทำนาย ผิด = ผล ไม่ใช่ความล้มเหลว):** `PYTHONIOENCODING` = `None` · `locale.getpreferredencoding(False)` = `cp874` · `sys.stdout.encoding` = `sys.stderr.encoding` = `utf-8` เมื่อสตรีมต่อกับคอนโซลจริง (Windows ข้าม code page เว้นแต่ตั้ง `PYTHONLEGACYWINDOWSSTDIO=1` ซึ่ง `gate-windows.yml:54` ตั้ง แต่สะพานอาจไม่ตั้ง)
+
+**คำตอบแต่ละแบบแปลว่าอะไร (สำหรับคนอ่านผล ไม่ใช่งานของผู้เทส):**
+- **ไม่ใช่ `cp874`** ⇒ `gate-windows.yml:53` กำลังทดสอบเงื่อนไขที่ไม่มีอยู่บนสะพาน · ไฟล์นั้นเป็นเขต chief ตัดสินเองว่าแก้หรือคงไว้เป็นการเผื่อ
+- **เป็น `cp874`** ⇒ `runtime_console.py:26` ที่คืนค่าคงที่ `utf-8` คือคำรายงานเท็จที่รอคนเชื่อ · คนที่ถามสตรีมจะพับน้อยเกินไป -> `print` โยน -> บรรทัดหายทั้งคอนโซลและ mirror (`:45` ก่อน `:46`)
+- **`PYTHONIOENCODING` = `None`** ⇒ `cp874` ในรีโปมีที่มาเดียวคือไฟล์ CI · ประโยค "คอนโซลสะพานเป็น cp874" ไม่เคยมีการวัดรองรับ
+- **stdout != stderr** ⇒ ผลที่ไม่มีที่ไหนในสี่ที่พูดถึง ⇒ เปิดใบใหม่ ห้ามยัดเข้าใบนี้
+
+**ลิงก์ (ผู้เทสไม่ต้องอ่านเพื่อรันใบ):** `notes_to_chief/20260829_1105_LANE-GM-CORE-REQUEST-GM-035-what-encoding-is-the-console.md` · `notes_to_chief/20260829_1221_CHIEF-REPLY-LANE-GM-034-answered-differently-and-035-queued.md` ข้อ ⑤ · `src/pirateforce_foundation/runtime_console.py:26,45-46,84-85,122,126-133` · `.github/workflows/gate-windows.yml:53,160-165` · `docs/GM_LANE.md:3522` · `src/pirateforce_foundation/gm/login_scene_override.py:71`
+
+**ผู้เปิดใบ: chief (สาย E) ตามจดหมาย `20260829_1221` ข้อ ⑤** -- ผลกลับมาที่ chief และสาย GM บริโภค
+
+### result (ผู้เทสกรอก)
+```
+
+```
