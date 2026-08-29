@@ -28,6 +28,23 @@
 บรรทัดที่ 3 ของรอบ `j0u64p` (`widened=mob_death.ruling_for(mob)` ที่ ~4171) **ยังค้างอยู่เหมือนเดิม**
 ไม่ใช่ใบใหม่ ไม่ได้ยกเลิก
 
+## 🔴 ข้อเดียวที่ขอให้ chief ระวัง — จุดเรียกทุกจุดต้องรับ scene id **ตัวเดียวกัน**
+
+จุดที่อ่าน roster มีสี่จุด (`1119` ledger · `1174` ai register · `3911` dispatch · `6486` census override)
+ถ้าเปลี่ยนบางจุดแล้วเหลือบางจุดเป็น `load_roster()` เปล่า **census กับ ledger จะพูดคนละเรื่อง**
+ในฉากที่ไม่ใช่ฉาก 1 — ซึ่งเป็นทรงเดียวกับ world-wipe ที่ `GT-084` เจอ
+⇒ ขอให้เปลี่ยน**ทั้งสี่จุดพร้อมกัน** หรือ**ไม่เปลี่ยนเลย** ไม่ขอครึ่งทาง
+
+**วัดปลายทางแล้วทั้งสามตัวรับ roster ว่างได้ ไม่มีตัวไหน raise:**
+
+```
+mob_ai_control.open_register(())                       -> MobAiRegister, 0 rows
+mob_death.full_roster_override(legacy, (), ...)        -> dict len=0  (falsy -> ข้าม override,
+                                                          census เดิมยืน = พฤติกรรมวันนี้ของฉากไร้มอน)
+mob_combat.open_ledger(())                             -> CombatLedger, 0 rows
+   เทียบ: roster ของ Bg0002 -> override dict len=17 · ledger 17 rows
+```
+
 ## ตัวคุมที่ทำให้บรรทัดนี้ปลอดภัยจะวางเมื่อไรก็ได้
 
 - `open_ledger_for_scene_id(1)` ให้ ledger ที่ **เท่ากับ `open_ledger()` ทุกค่า** (เทียบเป็นค่า ไม่ใช่ความยาว)
