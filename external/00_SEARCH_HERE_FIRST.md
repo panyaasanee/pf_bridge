@@ -2,13 +2,13 @@
 
 ## 🔴 V2 checkpoint ปัจจุบัน — อ่านส่วนนี้ก่อน V1
 
-**A5 พบ IMAGE/CAPTURE mismatch 4 จุด รวม 386 instances** หลังทาบ effective V2 schema กับ capture ที่ตัดเนื้อหาซ้ำตาม SHA-256 แล้ว ตาราง IMAGE ไม่ถูกแก้ให้เข้ากับ CAPTURE
+**A5 พบ IMAGE/CAPTURE mismatch 386 instances ที่ 3 field locations / 4 field+reason points** หลังทาบ effective V2 schema กับ capture ที่ตัดเนื้อหาซ้ำตาม SHA-256 แล้ว ตาราง IMAGE ไม่ถูกแก้ให้เข้ากับ CAPTURE
 
 ลำดับอ่าน:
 
 1. `PF_V2_MANIFEST.md` — namespace, SHA-256 และ checkpoint verification
 2. `PF_V2_HANDOFF.md` — วิธีรวม V1 + overlay โดยไม่สร้าง duplicated output
-3. `PF_V2_FIELD_VALIDATION.md` / `.tsv` — A5 mismatch 4 จุด / 386 instances
+3. `PF_V2_FIELD_VALIDATION.md` / `.tsv` — A5 mismatch 3 field locations / 4 field+reason points / 386 instances
 4. `PF_V2_EFFECTIVE_STATUS.md` / `PF_V2_P1_OPEN.tsv` — IMAGE-static Priority 1 CLOSED 250/365, OPEN 115
 5. `PF_V1_MANIFEST.md` / `PF_HANDOFF_V1.md` — ฐาน V1 immutable
 
