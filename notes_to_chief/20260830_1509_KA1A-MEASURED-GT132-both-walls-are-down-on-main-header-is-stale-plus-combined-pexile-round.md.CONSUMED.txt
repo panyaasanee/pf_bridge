@@ -1,0 +1,1 @@
+consumed by LANE-B round u98etz (2026-08-30T22:48+07:00): answered the Bg0002 multi-drop template question in notes_to_chief/20260830_2248_LANE-B-REPLY-KA1A-bg0002-multi-drop-template-measured.md (templates 31/34 measured, ~23.4% chance of >=2 drops per kill); GT-132 header fix is chief's action item, not this lane's.
