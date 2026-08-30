@@ -1,5 +1,29 @@
 # 🔴 อ่านไฟล์นี้ก่อนจะ "ไปถอด" อะไรใหม่จากไบนารี
 
+## 🔴 V4 checkpoint ปัจจุบัน — duplicate-safe reference composition
+
+**A5 ยัง mismatch 386 instances / 3 field locations / 4 field+reason points**; IMAGE และ CAPTURE ยังแยกชั้นหลักฐาน.
+
+ลำดับอ่าน:
+
+1. `PF_V4_MANIFEST.md` — commit marker, hashes และ executable duplicate guards
+2. `PF_V4_HANDOFF.md` — V3→V4 delta และกฎ reference-only composition
+3. `PF_V4_FIELD_VALIDATION.md` + canonical `PF_V2_FIELD_VALIDATION.tsv` — red CAPTURE replay; ไม่มี V4 TSV สำเนา
+4. `PF_V4_EFFECTIVE_STATUS.md` / `PF_V4_P1_OPEN.tsv` — P1 255/365 CLOSED, OPEN 110
+5. Daily / embedded-child / static-type artifacts — compose ตาม action; ห้าม append ทุก TSV ตรง ๆ
+
+V4 stored/reference A2 8,657 rows; logical validation-only 8,721. Composition มี 4 refs + 2 removals และไม่ copy child fields.
+
+Duplicate guard: exact files 0, within-TSV rows 0, delta+dedup keys 3,404 unique, base targets 576 unique. Status snapshots ซ้ำโดยตั้งใจ 110 distinct/312 occurrences และทุกแถวเป็น `NOT_A_NEW_EVIDENCE_ROW`.
+
+ItemAttr 13R+13W และ 15R+15W ต้องคงเป็น alternatives; VitalData serializer ยัง withheld. Static identity ไม่ activate A2/A5.
+
+[DECLARED-SCOPE] Local-only ใต้ `pf_bridge\external`; ไม่มี server/client runtime, workflow, queue, lease หรือ Git ถูกแก้/รัน.
+
+## 🔒 Frozen V3 index — ข้อความหลัง marker นี้คือ V3 index เดิมครบทุกไบต์
+<!-- PF_V4_FROZEN_V3_INDEX_BEGIN bytes=11466 sha256=52be24d7b410d87aef2ba4a4aec962e4314cbf554d12a78327fdd55d82626008 -->
+# 🔴 อ่านไฟล์นี้ก่อนจะ "ไปถอด" อะไรใหม่จากไบนารี
+
 ## 🔴 V3 checkpoint ปัจจุบัน — duplicate-safe additive overlay
 
 **A5 ยังพบ IMAGE/CAPTURE mismatch 386 instances ที่ 4 field+reason points (3 field locations)**; ตาราง IMAGE ไม่ถูกแก้ให้เข้ากับ CAPTURE
