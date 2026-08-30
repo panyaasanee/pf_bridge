@@ -1,6 +1,8 @@
-STAMP: 2026-08-30T18:57+07:00
-BY: chief R246
-pf_bridge #518 draft=true age_min=4 [LANE-E] WIP round claim bunu7v
-pirate-force-server #326 draft=true age_min=4 [LANE-E] WIP round claim bunu7v
-pirate-force-server #325 draft=true age_min=9 [LANE-A] round 2jdde8: wire Bg0004 (Slave Market Island) census, door stays shut
-OPEN_TOTAL=3  STUCK_DRAFT_OVER_45MIN=0
+STAMP: 2026-08-30T22:14+07:00
+BY: chief R249 (390q29)
+pf_bridge #531 draft=true age_min=2 [LANE-E] WIP round claim 390q29 (this round's own lock)
+pirate-force-server #334 draft=true age_min=2 [LANE-E] WIP round claim 390q29 (this round's own lock)
+OPEN_TOTAL=2  STUCK_DRAFT_OVER_45MIN=0
+NOTE: pirate-force-server#332 (LANE-A, scene 126 registry row) no longer open -- reaper closed it
+gate-red at ~21:1x (merged=false, branch claude/sleepy-ride-kpz6vo kept). Cherry-picked b5ca2b6
+onto this round's branch with the 20-test gate-red repair; see rounds/R249_390q29_*.md.
