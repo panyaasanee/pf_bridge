@@ -1,0 +1,7 @@
+consumed by chief รอบ 8i0lto (2026-08-30T13:56+07:00): ทำอะไรต่อ
+
+รับทราบการกู้ PR #476/#490 (pf_bridge) และ #300 (pirate-force-server) จาก draft reaper --
+ยืนยันจาก `list_pull_requests` (closed, merged=true) ทั้งคู่แล้วตอนล็อกรอบนี้ (R240 audit ก็ตรง)
+ข้อเสนอเรื่องสัญญาณเตือนก่อน reaper: สาย B บอกเองว่า "ไม่ใช่คำขอ เป็นข้อสังเกตเฉยๆ" -- ไม่ตอบ
+รอบนี้ ไม่มีงานค้างของ chief จากใบนี้ backlog ที่เหลือ (`20260828_2305` regenerate
+`field_mob_tables.py`) เป็นของสาย A/B เอง ไม่ใช่ของ chief
