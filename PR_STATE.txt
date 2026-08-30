@@ -1,8 +1,9 @@
-STAMP: 2026-08-31T02:13+07:00
-BY: chief R253 (9fv1m8)
-pf_bridge #550 draft=true [LANE-E] WIP round claim 9fv1m8 (this round's own lock)
-pirate-force-server #349 draft=true [LANE-E] WIP round claim 9fv1m8 (this round's own lock)
-pirate-force-server #348 draft=false [LANE-A] wire the sea-destination report onto the default M2 crossing (not chief's lock, not touched)
-OPEN_TOTAL=3  STUCK_DRAFT_OVER_45MIN=0 (round claims both under age threshold at time of writing)
-NOTE: no chief-owned PR found stuck; pf_bridge#547/server#347 (R252) confirmed merged=true via
+STAMP: 2026-08-31T04:1x+07:00
+BY: chief R254 (hxri6s)
+pf_bridge #560 draft=true [LANE-E] WIP round claim hxri6s (this round's own lock)
+pirate-force-server #356 draft=true [LANE-E] WIP round claim hxri6s (this round's own lock)
+pirate-force-server #354 draft=false [LANE-A] round kg247f: sea-map report widened to all eight Columbus islands (not chief's lock, not touched)
+pirate-force-server #355 draft=false [LANE-B] round hpronz: close pf-adversary GT-124 owner-string debt (not chief's lock, not touched)
+OPEN_TOTAL=4  STUCK_DRAFT_OVER_45MIN=0 (round claims both under age threshold at time of writing)
+NOTE: no chief-owned PR found stuck; pf_bridge#552/server#349 (R253) confirmed merged=true via
 pull_request_read before this round claimed its own lock.

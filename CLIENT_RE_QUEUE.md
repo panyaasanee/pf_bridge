@@ -2388,7 +2388,7 @@ and not self.v138_marker1_population_sent` (`TARGET_VITAL=0x1ADD`, `CHOOSE_NPC=0
 หรือไม่ ยังไม่มีใครวัด · `RE-092` พิสูจน์ replace-by-omission ที่ระดับ **ชุด actor** ไม่ใช่ระดับ **บิตใน mask**
 ⇒ นี่คือคำถามจริงของใบนี้ และเป็นคำถามที่ต้องใช้เครื่องสะพาน
 
-## 🆕🔴 RE-139 P33-P58-IDENTITY-CONTRADICTION-001 [STATIC-ON-CLOUD]: บูตเดียวส่ง **ตัวตนสองชุดที่ขัดกัน** ให้ placement เดียวกัน -- สำมะโนบอกว่า Babu/Juliet ตาราง roster บอกว่า Fighting Fish soldier/Jungle Big Tiger  [OPEN]
+## 🔬 RE-139 P33-P58-IDENTITY-CONTRADICTION-001 [STATIC-ON-CLOUD]: บูตเดียวส่ง **ตัวตนสองชุดที่ขัดกัน** ให้ placement เดียวกัน -- สำมะโนบอกว่า Babu/Juliet ตาราง roster บอกว่า Fighting Fish soldier/Jungle Big Tiger  [✅ DONE/RESOLVED-BY-MIGRATION -- ปิดโดย chief (ผู้เปิดใบ) รอบ `hxri6s` (R254) 2026-08-31T04:0x+07:00 · ผล: `notes_to_chief/20260830_1633_RE-139-RESULT-legacy-setnum-window-closed-roster-is-4-not-13.md` (สาย A รอบ `qlp30w`) · **ทั้งสองแหล่งเคยขัดกันจริงในบูตเดียว แต่เฉพาะในหน้าต่างที่ COO-DECISION 2026-08-29T00:41+07:00 ("nine rows get one round only") อนุมัติไว้ล่วงหน้า -- หน้าต่างนั้นปิดไปแล้วก่อนรอบ `qlp30w`** HEAD ปัจจุบัน (`field_mob_tables.SHIPPED_PLACEMENTS`) มีความจริงชุดเดียว: Babu/Juliet, roster=4 ไม่ใช่ 13 · **ปลดเงื่อนไข `GT-104`** "ห้ามเกรด identity ก่อนอ่าน RE-139" -- identity ไม่ขัดกันอีกต่อไป แต่ nonclaim อื่นของ `GT-104` (เลนคุย NPC บล็อกการโจมตี ฯลฯ) ยังไม่ถูกแตะ]
 
 **ADDRESSEE: สาย A (WORLD) + สาย B (COMBAT) ร่วมกัน** · ผู้เปิดใบ: chief (สาย E) รอบ `wi1m62` (R218) 2026-08-29T01:2x+07:00
 **ต้นเรื่อง:** `pf-static-re` รอบ `wi1m62` ระหว่างตอบ `RE-136`

@@ -1,0 +1,1 @@
+consumed by chief round R254 (hxri6s): decided option A (chat command /gmprobe <variant_id>). See notes_to_chief/20260831_0357_CHIEF-REPLY-CORE-REQUEST-GM-043-decision-option-A-gmprobe-chat-command.md for full reasoning. Wiring is LANE-GM's own territory (gm/chat_command_action.py), not runtime.py -- LANE-GM implements next round.
