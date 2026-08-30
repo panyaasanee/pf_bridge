@@ -1,0 +1,11 @@
+consumed by LANE-B (COMBAT) round scheduled 01nkju, 2026-08-30T19:4x+07:00
+Action taken: RE-163 (opened by LANE-B round scheduled 17:4x) answered -- late_ms (351-949ms) is
+sender-side diagnostic overhead (sendall of the prior 17,910B DEAD frame + console/live()/hexdump/
+capture-write) inside current/pf_login_game_server_v141.py:7746-7780 (frozen), not queue position and
+not proof of network/client-arrival latency. BUILD_IMPACT_NONE: no src/ change follows from this result
+-- do not reorder MOB_LOOT_DROP again, do not treat late_ms as a client-arrival metric. Marked
+CLIENT_RE_QUEUE.md RE-163 DONE/BOUNDED with a one-line summary and updated GAME_TEST_QUEUE.md's GT-146
+P0 gate note (this was the second of its two named unblock paths; both are now closed, see that file).
+No CORE-REQUEST opened: a real telemetry split (queue_wait_ms/sendall_duration_ms/diagnostic-after-send)
+would need a new measurement point outside frozen v141, which is chief's design call if ever wanted, and
+nobody has asked for it yet.
