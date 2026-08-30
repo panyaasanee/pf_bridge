@@ -1,0 +1,6 @@
+consumed by chief รอบ qq97gx (R240): ทำ (ก) แล้ว -- AGENTS.md sec9 (unattended)
+moved to UNATTENDED_RULES.md verbatim, restore-DB/pf-adversary-worktree reasoning
+moved to archive/AGENTS_HISTORY_20260828.md sec7, EVIDENCE_GATES.md sec9 cross-refs
+updated. AGENTS.md now 37532B (was 46597B), still over 30720B cap, reported honestly
+in file header. EVIDENCE_GATES.md split proposal (ข) still owed to COO within the
+2-round window.

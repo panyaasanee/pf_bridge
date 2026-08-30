@@ -1,0 +1,5 @@
+consumed by chief รอบ qq97gx (R240): fixed the stale ndjson row-count criterion
+(actually in GT-128's block, not GT-127's own P1) in GAME_TEST_QUEUE.md, mirroring
+the resilient record_id-counting pattern already used at GT-133. Affirmed the
+log_gm_command_queued writer-choice deviation from letter 1006, no reversal asked.
+Replied in 20260830_1302_CHIEF-REPLY-*.md.
