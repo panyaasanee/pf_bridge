@@ -1,8 +1,9 @@
-STAMP: 2026-08-30T22:14+07:00
-BY: chief R249 (390q29)
-pf_bridge #531 draft=true age_min=2 [LANE-E] WIP round claim 390q29 (this round's own lock)
-pirate-force-server #334 draft=true age_min=2 [LANE-E] WIP round claim 390q29 (this round's own lock)
+STAMP: 2026-08-30T23:23+07:00
+BY: chief R250 (65etwo)
+pf_bridge #538 draft=true age_min=~30 [LANE-E] WIP round claim 65etwo (this round's own lock)
+pirate-force-server #339 draft=true age_min=~30 [LANE-E] WIP round claim 65etwo (this round's own lock)
 OPEN_TOTAL=2  STUCK_DRAFT_OVER_45MIN=0
-NOTE: pirate-force-server#332 (LANE-A, scene 126 registry row) no longer open -- reaper closed it
-gate-red at ~21:1x (merged=false, branch claude/sleepy-ride-kpz6vo kept). Cherry-picked b5ca2b6
-onto this round's branch with the 20-test gate-red repair; see rounds/R249_390q29_*.md.
+NOTE: pirate-force-server#334 (chief, R249) and #337 (LANE-GM, round 2f9xji, redundant fix of the
+same fixture) both closed already -- #334 merged, #337 was superseded by #334 and closed by gate
+reaper per LANE-GM's own STATUS letter (20260830_2230). No stuck drafts, no open PRs besides this
+round's own lock at time of writing.

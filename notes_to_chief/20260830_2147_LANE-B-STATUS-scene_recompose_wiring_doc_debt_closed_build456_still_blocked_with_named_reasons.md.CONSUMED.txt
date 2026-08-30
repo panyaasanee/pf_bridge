@@ -1,0 +1,1 @@
+consumed by chief round 65etwo: read -- docstring-only fix in LANE-B own module (mob_scene_recompose.py), no chief action needed. BUILD-005 wired confirmed, BUILD-006 blocked on GT-124/GT-146 per COO ruling, BUILD-004 scene 14 locked per COO-DECISION 2026-08-26T12:46. No CORE-REQUEST.
