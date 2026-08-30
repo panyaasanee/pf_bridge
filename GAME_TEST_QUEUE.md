@@ -8054,6 +8054,16 @@ db = **สำเนา** `state\run_gt142.sqlite3` (จาก `default_state\pir
 > คีย์ `arrival_point_rule.why_the_ten_doors_are_shut` -- ย่อ: กิ่ง dispatcher เก่า `v141:4292`
 > ยิง actor bg0001 สามตัวฮาร์ดโค้ด `scene_id=1` เข้าฉากที่ผู้เล่นยืน **โดยไม่เช็คฉาก** บนบูตที่ไม่ไร้แฟล็กเป๊ะ ๆ
 
+> 🆕 **อัปเดต LANE-A รอบ `bq4mst` 2026-08-31T06:4x+07:00 -- เกตปลดแล้ว (R236) แต่ใบนี้ยัง BLOCKED สำหรับ 9 ฉาก
+> ที่เหลือ เพราะยังไม่มีตัวประกอบ ไม่ใช่เพราะประตูปิด:** เกตที่ใบนี้รอ (`scenarios/world_scene_registry_001.json`
+> `arrival_point_rule.why_the_ten_doors_are_shut`) ลง main แล้ว (`scene_admission_gate.py`, R236, ยืนยันโดย
+> `COO-DECISION 20260830_1351`) **แต่ฉาก 4 (Slave Market Island) เพียงฉากเดียวเปิดจริงรอบนี้** เพราะเป็นฉากเดียว
+> ในสิบที่มีตัวประกอบ (`world_population_bg0004.py`) พร้อมแล้ว (`COO-DECISION 20260830_1441`) --
+> **ย้ายฉาก 4 ออกจากขอบเขตใบนี้ ไปที่ `GT-165` ใบใหม่แยกต่างหาก** (มีเกณฑ์ของตัวเอง เพราะฉากนี้ไม่มี faction bit
+> เลยต่างจากที่ใบนี้เขียนไว้สำหรับสิบฉากรวม) · **อีกเก้าฉาก (3,5,6,7,8,9,10,11,130) ยังเป็น `login_entry_allowed:
+> false` เหมือนเดิมทุกตัวอักษร ยังไม่มีตัวประกอบ ยัง BLOCKED จริง ไม่ใช่แค่ประตูปิด** -- `stageable_scene_ids()`
+> วันนี้คือ `(1, 2, 4, 14, 278, 997)`
+
 ### objective (claim เดียว)
 ฉากที่ได้จุดมาถึงจากกฎ 1 (`COO-DECISION 20260829_0542`) เมื่อล็อกอินเข้าไปจริง
 **ตัวละครยืนบนพื้นที่ยืนได้ของแมพที่ถูกต้อง** ใช่หรือไม่ (ไม่ใช่ในหิน ใต้พื้น ในลาวา หรือลอยแล้วร่วง)
@@ -8801,3 +8811,42 @@ suspect 1/3/4 ของ `RE-164` (connection context / current-UI key / create p
 `CLIENT_RE_QUEUE.md#RE-164` · `notes_to_chief/20260831_0321_LANE-GM-CORE-REQUEST-GM-043-bt-gm-variant-call-site-for-gt164.md`
 (ใบเปิด) · `notes_to_chief/20260831_0357_CHIEF-REPLY-CORE-REQUEST-GM-043-decision-option-A-gmprobe-chat-command.md`
 (ตัดสินใจ) · `GT-101`/`GT-103`/`GT-107` (baseline: ค่า `(0,1,0)` คลิกเงียบ)
+
+## 🆕 GT-165 SLAVE-MARKET-ISLAND-FIRST-EYES-001 [attended, in-game]: เกาะตลาดทาส `Bg0004` (ฉาก 4) มีสิ่งมีชีวิตขึ้นจอจริงหรือไม่ -- ตาคู่แรกของโปรเจกต์ในฉากนี้  [READY]
+
+> เปิดโดย LANE-A (สาย A · WORLD) รอบ `bq4mst`, 2026-08-31T06:4x+07:00 · `login_entry_allowed` ของฉาก 4 พลิกเป็น
+> `true` รอบนี้ (`COO-DECISION 20260830_1441`, composer `world_population_bg0004.py`/`world_bg0004_identity.py`
+> ที่สร้างรอบ `6p22bu` และผูกรอบ `2jdde8` ถูกตัดสินว่าพร้อมแล้ว) -- แยกออกจาก `GT-144` (สิบฉาก) เพราะฉากนี้เปิด
+> เพียงฉากเดียวและมีเกณฑ์ของตัวเอง (ไม่มี faction bit เลย ต่างจากที่ `GT-144` เขียนไว้สำหรับกลุ่มรวม)
+
+### objective (claim เดียว)
+ล็อกอินเข้าฉาก 4 จริงแล้ว **เห็นตัวละคร/มอนสเตอร์ยืนอยู่บนเกาะ** (ไม่ใช่เกาะว่างเปล่า) ใช่หรือไม่ -- คำถามคือ
+"มีสิ่งมีชีวิตขึ้นจอไหม" ไม่ใช่ "มันโจมตีไหม": composer ของฉากนี้**ตั้งใจไม่ส่ง faction bit เลย** (ดู
+`world_population_bg0004.py` docstring -- เป็นคำตัดสินของสาย B ที่ยังไม่ทำ) จึงไม่มีความเสี่ยงแบบ `GT-134`
+ที่มอนไม่ก้าวร้าว -- นั่นเป็นพฤติกรรมที่คาดไว้ ไม่ใช่ FAIL ของใบนี้
+
+### ทางเข้า
+ไม่มี production path ใดเขียนแถว character ให้ชื่อฉาก 4 เอง (ดู `login_entry_allowed_because` ในทะเบียน) --
+เข้าได้เฉพาะ staged GM account (`config/gm_login_scene.json`, scene_id=4) หรือ GM `/warp 4`
+
+### สิ่งที่ยังไม่วัด (บันทึกไว้ล่วงหน้า ไม่ใช่คำทำนายว่าจะพัง)
+จุดเกิด `MARKER[4]` ยังเป็นชั้นหลักฐาน `authored` เท่านั้น -- ไม่เคยมีไคลเอนต์ยืนจริง, ห่างจาก placement
+ที่ใกล้ที่สุด 777.5 หน่วย (`table_row_differences.marker_geometry_measured_not_enforced`) -- ถ้าตกในหิน/หลุด
+พื้น ให้บันทึกเป็นข้อมูลแยก ไม่ใช่ FAIL ของใบนี้ (คำถามของใบนี้คือมี actor ไหม ไม่ใช่พื้นดีไหม)
+
+### pass criteria — สองชั้น
+**wire/DB (ปิดแล้วโดยเทส):** console line `WORLD_CENSUS_BG0004 assembled=109/116 ...` ปรากฏหลังล็อกอินเข้าฉาก 4
+-- pin ไว้แล้ว `tests/test_lane_a_scene_census.py::OnTheRealDispatcherTests::
+test_with_the_real_registry_the_slave_market_census_ships_109`
+**client-observable (ยังไม่มีใครยืนดู -- นี่คือสิ่งที่ใบนี้ต้องการ):** ผู้เทสเข้าฉาก 4 จริงแล้วรายงานว่าเห็น
+actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พอ ไม่ต้องนับให้ครบ 109)
+
+### สัญญาผู้บริโภค
+เปิดโดย LANE-A -- LANE-A บริโภคผลเอง ปิดหัวใบเมื่อผู้เทสยืนยันด้วยตา
+
+### links
+`scenarios/world_scene_registry_001.json` แถว `n_id: 4` (`login_entry_allowed_because`) ·
+`src/pirateforce_foundation/world_population_bg0004.py`, `world_bg0004_identity.py` ·
+`notes_to_chief/20260830_1441_COO-DECISION-scene4-slave-market-first-door.md` ·
+`notes_to_chief/20260831_0643_LANE-A-STATUS-scene4-slave-market-island-opens.md` · `GT-144` (the other nine,
+still shut) · `GT-134` (the sibling ticket for scene 14, same shape)
