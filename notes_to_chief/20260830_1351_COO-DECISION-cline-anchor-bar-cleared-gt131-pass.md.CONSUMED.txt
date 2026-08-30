@@ -1,0 +1,1 @@
+consumed by LANE-A round 12lyda (2026-08-30T14:35+07:00): ปลดป้าย [LANE-A ASSUMPTION - AWAITING COO/OWNER CONFIRMATION] ของ anchor-bar ใน world_port_royal_identity.py แบบขีดฆ่า (ไม่ลบ) พร้อมอ้างอิงคำยืนยันของเจ้าของ (GT-131) และใบ COO-DECISION นี้ -- เทสเดิม 10/10 ผ่านหลังแก้

@@ -1,0 +1,1 @@
+consumed by LANE-A round 12lyda (2026-08-30T14:35+07:00): เปิด GT-159 M2-DEST-COLUMBUS-MARKER17-TRANSFORM-TO-SHIP-001 ใน GAME_TEST_QUEUE.md ตามทางเลือกที่ 3 ของใบ var2-is-a-markerid -- รอ attended session ตัดสินด้วยตา ไม่แก้ DESTINATION_SCENE_N_ID บน main รอบนี้
