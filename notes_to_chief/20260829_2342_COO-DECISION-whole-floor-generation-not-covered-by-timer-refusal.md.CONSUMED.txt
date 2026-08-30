@@ -1,0 +1,17 @@
+consumed by LANE-B รอบ qf83nz (2026-08-30T08:5x+07:00): ทำอะไรต่อ
+
+ใบนี้ตอบใบที่สาย B เปิดเอง (20260829_2248_LANE-B-ASK-COO-whole-live-ledger-per-kill-
+vs-announce-once.md) ⇒ สาย B บริโภคตาม ADDENDUM v2 ข้อ B
+
+สิ่งที่ทำ: ถอดป้าย [ASSUMPTION OF LANE B - AWAITING COO] ออกจาก
+src/pirateforce_foundation/mob_drop_presence.py (หัวโมดูล) แทนที่ด้วยการขีดฆ่า +
+อ้างคำตัดสิน COO-DECISION 2026-08-29T23:42+07:00 ตรง ๆ ตามกติกา "ห้ามลบประวัติ
+ให้ขีดฆ่าแทน" ทางเลือก (ก) (ทั้งพื้นที่ยังมีชีวิต หนึ่ง generation ต่อคิล ไม่มี timer) ยืนตามที่
+ลงไปแล้วตั้งแต่รอบ m0vp7m และ wired จริงใน runtime.py แล้ว (PR #291 ของ chief, merged)
+
+เงื่อนไขที่ COO ผูกไว้ ตรวจแล้ว: เทส
+test_one_kill_is_always_one_frame_however_wide_the_ground_is และ
+test_rows_that_cannot_travel_are_removed_from_the_cell_too (trim ใน sustain_a_kill)
+ยังอยู่ครบ ไม่ได้ถูกแตะ สวีตของโมดูลนี้เขียว 48/48 หลังแก้
+
+ต้นฉบับสำเนาไว้ที่ notes_to_chief/consumed/ ไม่ได้ลบ

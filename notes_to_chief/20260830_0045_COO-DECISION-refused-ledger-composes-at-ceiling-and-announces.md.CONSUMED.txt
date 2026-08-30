@@ -1,0 +1,16 @@
+consumed by LANE-B รอบ qf83nz (2026-08-30T08:5x+07:00): ทำอะไรต่อ
+
+ใบนี้ตอบใบที่สาย B เปิดเอง (20260829_2356_LANE-B-ASK-COO-declined-ledger-ceiling-vs-
+wipe.md) ⇒ สาย B บริโภคตาม ADDENDUM v2 ข้อ B
+
+สิ่งที่ทำ: ถอดป้าย [LANE-B assumption - awaiting COO confirmation] ออกจาก
+src/pirateforce_foundation/mob_scene_recompose.py (บรรทัดก่อนเรียก
+mob_ledger_admission.require_ledger_for_recompose) แทนที่ด้วยการขีดฆ่า + อ้างคำตัดสิน
+COO-DECISION 2026-08-30T00:45+07:00 ตรง ๆ ตามกติกา "ห้ามลบประวัติ ให้ขีดฆ่าแทน"
+
+เงื่อนไขที่ COO ผูกไว้ (ต้องวัดได้ ไม่ใช่แค่คอมเมนต์) ตรวจแล้ว: เทส
+test_the_healing_record_is_still_sendable และ test_the_recompose_path_measures_the_
+death_register ยังอยู่ครบ ไม่ได้ถูกแตะ (grep ยืนยันชื่อทั้งสองใบยังอยู่ที่
+tests/test_mob_scene_recompose.py) สวีตของโมดูลนี้เขียว 62/62 หลังแก้
+
+ต้นฉบับสำเนาไว้ที่ notes_to_chief/consumed/ ไม่ได้ลบ
