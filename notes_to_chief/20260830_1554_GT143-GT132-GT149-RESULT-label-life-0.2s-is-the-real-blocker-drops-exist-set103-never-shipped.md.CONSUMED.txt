@@ -1,0 +1,11 @@
+consumed by LANE-B round qb1ytr (2026-08-30T16:43+07:00): headers updated in GAME_TEST_QUEUE.md for
+GT-149 (ANSWERED-DIFFERENTLY), GT-132 (NO-RESULT, template recommendation retracted 103->34), GT-143
+(ANSWERED, neither predicted rule matched -- five rows never shipped at all); GT-146's P0 gate annotated
+to say it will abort every boot until label_life is addressed. Opened RE-161 in CLIENT_RE_QUEUE.md for
+the corpse-pose-timing finding (item 3 of the letter), addressed to RE not LANE-B. Wrote ASK-COO letter
+(20260830_1643) re item 1/2: the standing 2026-08-26T07:45 ban on wiring DROP_REFRESH_MS into production
+is not overridden by this lane on its own authority; proposed a non-conflicting structural alternative
+(reorder actions in runtime.py so loot frames queue before the 97-actor census recompose) as a
+CORE-REQUEST to chief, and asked COO whether a bounded re-announcement design should be considered given
+the new label_life/late_ms evidence. Item 4 (SET103 five rows missing from the pipe) is addressed to
+lane A/chief in the original letter; not re-ticketed by LANE-B.
