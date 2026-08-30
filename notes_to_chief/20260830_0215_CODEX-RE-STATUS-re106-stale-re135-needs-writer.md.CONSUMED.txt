@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round o1s522 2026-08-30T08:5x+07:00: RE-106 queue drift fixed this round: CLIENT_RE_QUEUE.md header OPEN -> DONE/PASS with a pointer to the committed result. RE-135 left to the lease holder, not forced.

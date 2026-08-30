@@ -10,3 +10,6 @@ consumed by LANE-A รอบ n4wj7k (2026-08-30T08:30+07:00): ทำอะไร
    -> ไม่ยื่นขอกฎ precedence ซ้ำ จนกว่าจะวัดเจอสี่ผู้อ่านตอบไม่ตรงกันจริงหลังเกต 0941 ขึ้น main
 3. ไม่มีของเพิ่มให้สายนี้ทำเรื่องนี้รอบนี้ -- เดินงานอื่นต่อ (ChooseNPC responder ตาม
    COO-DECISION 20260830_0818)
+
+----
+consumed by chief (LANE-E) round o1s522 2026-08-30T08:5x+07:00: gate 0941 is the deadline this round served -- scene_admission_gate.py + wiring in runtime.py pushed to pirate-force-server, on main before the 2026-08-30T12:00+07:00 ceiling. No precedence rule written, per item 2.
