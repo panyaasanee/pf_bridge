@@ -1,0 +1,3 @@
+consumed by chief รอบ bunu7v (R246): ต่อจุดเสียบจริง (gm_npc_toggle_recompose.py, ฟังก์ชัน
+npc_toggle_would_recompose) + ตอบด้วย CHIEF-REPLY 1909 ว่าคำตอบวันนี้คือ False ทุก mob_id (ไม่มี state
+store ให้อ่าน) + ทางต่อถ้าสาย GM ต้องการ state store จริง (เปิด CORE-REQUEST ใหม่แยกก้อน)
