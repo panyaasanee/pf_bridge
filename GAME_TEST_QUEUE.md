@@ -8497,6 +8497,10 @@ OBSERVER_CONFIRMED  :
 > NUMBERING: grep ก่อนจอง -- `GT-150`/`GT-151`/`GT-152` = 0 hit ทั้งสองไฟล์ · สูงสุดก่อนหน้า = `GT-149` (`RE-` สูงสุด = 150) ⇒ ใบนี้ = `GT-151` · ตัวนับเดียวร่วม `CLIENT_RE_QUEUE.md`
 > ที่มา: จดหมายผล `RE-149` (`notes_to_chief/20260829_1814_RE-149-RESULT-NO-SHIPPED-AVATAR-SOURCE.md`) · โค้ดที่พิมพ์บรรทัด = `world_population.ceiling_console_token` / `undressable_console_token` (ลงใน `pirate-force-server#271`) · ชั้น wire/DB ของ `BUILD-001` วัดครบแล้ว: บูตไร้แฟล็กประกอบ **108 จาก 115** แถวแช่แข็งของ `bg0001` และเจ็ดตัวที่ตกมี**เหตุผลระบุชื่อรายตัว**บนคอนโซลรอบนี้ · สิ่งที่ยังไม่มีใครยืนยันด้วยตา คือรูบนจอเป็นเจ็ดจุด**นั้น** ไม่ใช่เจ็ดจุดอื่น
 > 🔴 **ไม่ซ้ำกับ `GT-131`**: `GT-131` (PENDING) ถามว่า NPC ที่ **มาถึง** แสดง **ตัวจริง** หรือไม่ (เรื่องตัวตน หลัง `GT-078` ถูกเจ้าของปฏิเสธ) · ใบนี้ถามคนละข้อ -- **จุดที่ว่าง ใช่จุดที่ถูกเรียกชื่อหรือไม่** · ห้ามปิดใบหนึ่งด้วยผลของอีกใบ
+> 🆕 **อัปเดตโดยเจ้าของใบ LANE-A รอบ `6oyud5` 2026-08-31T04:34+07:00 — ใบไม่ปิด, เครื่องมือใหม่เท่านั้น:** เจ็ดพิกัดในตารางด้านล่างนี้เคยมาจากการเปิดซอร์สคำนวณมือครั้งเดียวตอนรอบ `tz2eri`
+> ตอนนี้บูตไร้แฟล็กทุกบูตพิมพ์พิกัดเดียวกันเองบนบรรทัด `WORLD_CENSUS` ท้ายสุด (`undressable_positions=7 P0@x,y,z,...`, `world_population.undressable_placements_positioned`/
+> `undressable_positions_console_token`, ยังไม่ merge -- ดู `PR_STATE.txt`) จึงไม่มีทางเพี้ยนจากตารางค้างเก่าถ้าตารางแช่แข็งเคยเปลี่ยน และใบพี่น้อง (`GT-143`, คนละฉาก) ไม่ต้องคำนวณมือซ้ำอีก
+> **ไม่เปลี่ยนตัวคุมหรือ pass criteria ของใบนี้แม้แต่ข้อเดียว** -- เจ็ดจุดในตารางด้านล่างยังใช้เดินได้เหมือนเดิมทุกประการ ตัวเลขตรงกันทั้งสองแหล่ง (ยืนยันด้วย test คนละไฟล์)
 
 ### objective (claim เดียว)
 เจ็ดพิกัดที่คอนโซลเรียกชื่อว่าถูกตัด **ว่างเปล่าบนจอจริง** -- ใบนี้ตอบข้อเดียว: "ตรงจุดนี้มีอะไรยืนอยู่ไหม"
@@ -8556,7 +8560,7 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt151.sqlite3
 3. ไม่ตัดสินเลข 115 ในตารางแช่แข็ง · ไม่ตัดสิน encoding ของชื่อ CJK (`GT-145`) · ไม่วัดว่าเซิร์ฟเวอร์ต้นฉบับมีใครยืนตรงนั้น
 
 ### links
-`notes_to_chief/20260829_1814_RE-149-RESULT-NO-SHIPPED-AVATAR-SOURCE.md` · `world_population.undressable_placements_named` + `population.load_port_royal_placements` (ที่มาพิกัดเจ็ดจุด วัดรอบนี้) · `pirate-force-server#271` · `GT-131` (คนละข้ออ้าง) · `GT-143` (ใบพี่น้อง วิธีเดียวกันคนละฉาก)
+`notes_to_chief/20260829_1814_RE-149-RESULT-NO-SHIPPED-AVATAR-SOURCE.md` · `world_population.undressable_placements_named` + `population.load_port_royal_placements` (ที่มาพิกัดเจ็ดจุด วัดรอบนี้) · `pirate-force-server#271` · `GT-131` (คนละข้ออ้าง) · `GT-143` (ใบพี่น้อง วิธีเดียวกันคนละฉาก) · เพิ่มรอบ `6oyud5`: `world_population.undressable_placements_positioned` / `undressable_positions_console_token` (พิมพ์เจ็ดพิกัดนี้เองทุกบูต, ยังไม่ merge)
 
 **ผู้เปิดใบ: LANE-A (สาย A · WORLD) รอบ `tz2eri` 2026-08-29T18:4x+07:00** -- ผลกลับมาที่สาย A บริโภค
 
