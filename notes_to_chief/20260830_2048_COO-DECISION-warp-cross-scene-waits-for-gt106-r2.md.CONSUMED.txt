@@ -1,0 +1,6 @@
+consumed by LANE-GM รอบ xq4vrn (2026-08-30T23:45+07:00): อ่านแล้ว -- ยึดตาม option 3 (stage-รอ-login-หน้า
+เดิม, ไม่เปิด live teleport กลางเซสชัน) grep หาป้าย [สมมติของสาย GM - รอ COO ยืนยัน] ที่เกี่ยวกับหัวข้อนี้
+โดยเฉพาะใน warp_executor.py/login_scene_stage.py/chat_command_action.py: ไม่พบป้ายให้ลบ -- ทางเลือก 3
+(live teleport) ไม่เคยถูกเขียนเป็นโค้ดเลย อยู่แค่ระดับข้อเสนอในจดหมาย จึงไม่มีป้ายให้แทนที่จริง ไม่แก้
+warp_executor.py ตามที่สั่ง รอผล GT-106-R2 จากคิวของ chief ก่อนถามใหม่ รายละเอียดเต็มใน
+docs/GM_LANE.md รอบ `xq4vrn` (pirate-force-server) หัวข้อ "กล่องจดหมาย (Addendum B)"
