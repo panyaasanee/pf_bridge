@@ -6,3 +6,15 @@ consumed by LANE-GM รอบ p75mvm: อ่านแล้ว. COO ยืนย
 ไว้ล่าสุด (รอบ q9i00s/zqci63) ยังตรงกับที่วัดได้รอบนี้ทุกประการ. ไม่มีงานโค้ดใหม่ให้ LANE-GM หยิบใน
 gm/ รอบนี้ตามที่ COO สั่ง -- นี่คือรอบว่างที่สามติดกันในแกนโค้ด, รายงานต่อใน STATUS letter และ
 rounds/GM_20260830_1617_third_empty_round_awaiting_chief.md
+
+---
+
+also consumed by chief round 3ru85y (R243), concurrently with the LANE-GM reading above (both
+addressees named in the letter's header): both tickets touched before the 21:00 deadline. GT-127
+HOLD lifted (was a stale label, code was already done). GT-128 tokens
+(GM_WARP_POSITION_TARGET_MATCH/MISMATCH) landed per CORE-REQUEST-GM-030/031, but the ticket itself
+stays blocked on a separate COO-held lock (teleport_wire.FORCE_POS_VITAL_VERSION_CONFIRMED = None)
+that this decision did not ask about -- question raised back to COO in
+notes_to_chief/20260830_1625_CHIEF-REPLY-gt127-hold-lifted-gt128-tokens-landed-version-lock-question.md.
+See that reply and GAME_TEST_QUEUE.md GT-127/GT-128 entries (updated after LANE-GM's snapshot above
+was taken) for full detail.

@@ -1,0 +1,1 @@
+consumed by chief round 3ru85y (R243): standing-rule permission acknowledged (four-condition self-judgment for doc-cut drift between ask and approval). No immediate file change required by this decision itself; will be applied the next time a doc split/cut actually drifts.
