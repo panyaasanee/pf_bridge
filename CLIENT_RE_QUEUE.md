@@ -2835,3 +2835,68 @@ MOB_DEATH_FRAMES_CENSUS_RECOMPOSE       actor_count=97 wire_actors=97 target=0x2
 `notes_to_chief/20260830_1554_GT143-GT132-GT149-RESULT-label-life-0.2s-is-the-real-blocker-drops-exist-set103-never-shipped.md`
 (เปิดใบนี้) · `src/pirateforce_foundation/mob_death.py` (dying/dead frame composition, สาย B) ·
 `capture_pexile_20260830_151429/server_console_live.out.txt` L7580-7590 (ตัวอย่าง kill 1 ครบ)
+
+---
+
+## 🆕🔬 RE-163 MOB-LOOT-DROP-LATE-MS-SOURCE-001 [STATIC-ON-BRIDGE]: **เฟรม `MOB_LOOT_DROP` มาถึงช้า 351-949ms — ช้าเพราะอะไร ไม่ใช่ตำแหน่งคิว** [🟢 **OPEN — เปิดโดย LANE-B รอบใหม่ (scheduled) 2026-08-30T17:4x+07:00 หลังยืนยันซ้ำว่าตำแหน่งในลิสต์ `actions` ไม่ใช่สาเหตุ**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง 2026-08-30T17:4x+07:00: `RE-163`/`GT-163` = 0 hit ทั้งสองไฟล์ ·
+> `RE-162` ถูกจองชื่อ/เนื้อหาไว้แล้วโดย `notes_to_chief/20260830_1655_PANYA-ORDER-open-RE-162-*.md`
+> (in-session scene change) แต่ยังไม่ถูกเขียนลงไฟล์นี้ ณ เวลาที่เปิดใบนี้ — ข้ามเลข `162` ไว้ให้ใบนั้นตาม
+> ที่จองไว้ก่อน ไม่ชนกัน ⇒ ใบนี้คือ `163`
+> 🔴 ใบ `RE-085`-`RE-161`/`GT-001`-`GT-160` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่
+
+### ที่มา [อ่าน `src/pirateforce_foundation/runtime.py:4600-4824` ซ้ำโดย LANE-B รอบนี้, ตอบ
+`notes_to_chief/20260830_1704_CHIEF-REPLY-*.md` ส่วน 2 และ `notes_to_chief/20260830_1743_LANE-B-DECISION-*.md`]
+
+รอบก่อน (`qb1ytr`) ตั้งสมมติฐานว่าเฟรมเซนซัส 97-actor (~17,910 ไบต์) เป็น wire action แยกที่ถูกคิวไว้
+**ก่อน** `mob_drop_presence.loot_actions()` ในลิสต์ `actions` และขอให้สลับตำแหน่ง — chief ตอบว่าขัดกับ
+invariant ของ `CORE-REQUEST-007` รอบนี้อ่านโค้ดจริงซ้ำแล้วพบว่า**สมมติฐานนั้นผิด**: เฟรมเซนซัส 97-actor
+คือ**เนื้อหาของเฟรม `MOB_DEATH_DYING`/`MOB_DEATH_DEAD` เอง** (ไม่ใช่ action แยก) และ
+`actions.extend(loot_actions(step))` อยู่ถัดจาก `actions.append(MOB_DEATH_DEAD)` **ทันทีอยู่แล้ว** ไม่มี
+action อื่นคั่น ⇒ loot อยู่ในตำแหน่งที่เร็วที่สุดที่ invariant อนุญาตอยู่แล้ว **ไม่มีที่ให้สลับต่อ**
+
+แต่ `late_ms` (351-949ms, สามตัวอย่างจากบูตเดียวกัน `20260830_1554`) ยังไม่มีคำอธิบาย — ถ้าไม่ใช่ตำแหน่ง
+ในลิสต์ ตัวที่เหลือที่อธิบายได้คือต้นทุนจริงของการส่ง/ประมวลผลเฟรมสองเฟรมก่อนหน้า (แต่ละเฟรม 17,910
+ไบต์) หรือกลไก scheduler/`hold_ms` ที่ `runtime.py` เดินคิวจริง — สายนี้ไม่รู้ scheduler internals ของ
+chief พอจะตอบเอง
+
+### objective
+
+ตอบจาก artifact ที่ commit แล้วเท่านั้น (ห้ามเปิดเกม ห้ามใช้ capture ใหม่ในใบนี้ — capture ที่มีอยู่แล้วคือ
+`capture_pexile_20260830_151429/server_console_live.out.txt` L9833/24912/30769 ที่มี `late=` สามค่า):
+
+1. ตัว scheduler/ตัวส่งจริงที่แปลง `actions` list (แต่ละ tuple `(label, pc, frame, delay)`) เป็นไบต์บนสาย
+   คือฟังก์ชัน/method ไหนใน `runtime.py` และมันประมวลผลทีละรายการแบบ **ซิงโครนัส บล็อกกัน** หรือขนาน —
+   ถ้าซิงโครนัส เวลาที่ใช้ serialize+write เฟรม `MOB_DEATH_DYING`/`MOB_DEATH_DEAD` (17,910 ไบต์ต่อเฟรม)
+   ก่อนถึงคิวของ `MOB_LOOT_DROP` คือส่วนหนึ่งของ `late_ms` ที่วัดได้หรือไม่ พร้อมเลขบรรทัด
+2. `delay` ตัวที่สี่ของแต่ละ tuple (`0.0` สำหรับ `MOB_DEATH_DYING`/loot, `hold_ms/1000.0` สำหรับ
+   `MOB_DEATH_DEAD`) ถูกตีความอย่างไรจริง — เป็นเวลาที่ต้อง "รอก่อนส่งรายการนี้" (สะสมกับรายการก่อนหน้า)
+   หรือเป็น timestamp สัมบูรณ์ หรือไม่มีผลต่อเวลาส่งจริงเลย (แค่ metadata ที่ client อ่าน)
+3. ผลลบก็เป็นคำตอบ: ถ้าทั้งสองข้อไม่อธิบาย `late_ms` เลย ให้ปิดเป็น bounded-negative พร้อมระบุว่า
+   "สาเหตุอยู่นอกเขต `runtime.py`'s own actions list" (เช่น เครือข่าย/OS buffering) — คำตอบนั้นปิดคำถาม
+   ของสายนี้ถาวรเช่นกัน
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้):**
+- ระบุกลไก scheduler/`delay` และว่ามันอธิบาย `late_ms` ได้หรือไม่ พร้อมเลขบรรทัด/หลักฐานจาก static
+  analysis เท่านั้น — **ไม่ต้อง** แก้โค้ดในใบนี้
+
+**ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องแยกใบ ต้องมีคนหน้าจอ):**
+- ถ้า RE ชี้ทางลด `late_ms` ได้จริง (เช่น เฟรมเซนซัสควรเล็กลง หรือ scheduler ควรเปลี่ยนลำดับการ
+  serialize) — ต้องวัดซ้ำว่าป้ายกลับมาให้เห็นได้จริงไหม ยังไม่มีใครวัด
+
+### nonclaims
+
+1. ไม่อ้างว่า `late_ms` ทำให้ป้ายหมดอายุก่อนถึงจอจริง — เป็นสมมติฐานที่ตัวเลขชี้ไปเท่านั้น (ดู
+   `20260830_1554` nonclaim 2 ซึ่งยังไม่ถูกพิสูจน์)
+2. ไม่อ้างว่าตำแหน่งใน `actions` list เป็นสาเหตุ — ใบนี้เปิดขึ้นเพราะพิสูจน์แล้วว่า**ไม่ใช่**
+3. ไม่แก้ `runtime.py` ในใบนี้ — เป็นไฟล์ของ chief ถ้า RE ชี้ทางแก้ที่ scheduler จริง เป็น CORE-REQUEST
+   ไปยัง chief ไม่ใช่ของสาย B
+
+### links
+`notes_to_chief/20260830_1704_CHIEF-REPLY-force-pos-unlock-blast-radius-plus-loot-reorder-conflict-both-not-done.md`
+(ที่มาของข้อโต้แย้งเดิม) · `notes_to_chief/20260830_1743_LANE-B-DECISION-invariant-stands-no-reorder-room-left-membership-guard-built-instead.md`
+(การอ่านโค้ดที่เปิดใบนี้) · `src/pirateforce_foundation/runtime.py:4600-4824` (ลำดับ actions จริง) ·
+`capture_pexile_20260830_151429/server_console_live.out.txt` L9833/24912/30769 (`late=` สามค่า)
