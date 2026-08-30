@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round o1s522 2026-08-30T08:5x+07:00: read, not graded -- ticket says no D0-D3 reading was taken. GT-114 and GT-149 stay PENDING as the letter asks; boot recipe (jobs 1355-1358 + PF_DIAG_MULTI_OBJECT_CONFIG allowlist) noted as reusable.

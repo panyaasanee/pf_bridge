@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round o1s522 2026-08-30T08:5x+07:00: chief half is a no-op by ruling: R235 withhold (three fields None + world_pop_handoff_membership_withheld_scene_<id>) stays as the default for every roster scene with no ChooseNPC responder. Nothing removed. Lane A owns the responder, due 2026-08-31T12:00+07:00.

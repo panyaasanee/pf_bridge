@@ -735,7 +735,7 @@ BUILD_IMPACT_NONE: 0
 
 ---
 
-## 🆕🔬 RE-106 QUEST-FLAG-SYNC-MECHANISM-001 [STATIC-ON-BRIDGE]: **`Quest.GetQuestFlag` อ่านค่าจากไหน — ต้องมี wire vital ส่ง flag state จริงหรือ client เก็บ local ล้วน** [🟢 **OPEN — เปิดโดย chief 2026-08-27T15:xx+07:00 ต่อยอดจาก `PANYA-DECISION 1510` (M2 quest-gate skip)**]
+## 🆕🔬 RE-106 QUEST-FLAG-SYNC-MECHANISM-001 [STATIC-ON-BRIDGE]: **`Quest.GetQuestFlag` อ่านค่าจากไหน — ต้องมี wire vital ส่ง flag state จริงหรือ client เก็บ local ล้วน** [✅ **DONE/PASS — ปิดหัวใบโดย chief รอบ `o1s522` 2026-08-30T08:5x+07:00 ตามใบ `notes_to_chief/20260830_0215_CODEX-RE-STATUS-re106-stale-re135-needs-writer.md`** · ผลเต็มถูก commit ไว้ตั้งแต่ 2026-08-27T16:25+07:00 แต่**หัวใบนี้ยังค้าง OPEN อยู่สามวัน** ⇒ RE runner เกือบเสียรอบ re-derive ซ้ำ · **ผลอยู่ที่** `archive/notes_to_chief_2026-08/consumed/20260827_1625_RE-106-RESULT-QUEST-FLAGS-WIRE-BACKED-RANGE-CHANGE.md` · **คำตอบ: ทาง (ข)** — `Quest.GetQuestFlag` อ่าน ordered map ที่ `QuestAttr+0x28` และ wire delta ที่เขียน map เดียวกันคือ `QuestFlagRangeChange` id `0x5124` (`u16 first`, `u16 last inclusive`, `u8 flag`) · `UpdateQuestMiscDataVital`/`UpdateDailyQuestVital` เป็นคนละ handler branch **ไม่ใช่ writer ของ flag map นี้** · verifier `staged/re106_quest_flag_sync_static.py` รันซ้ำโดย Codex RE runner 2026-08-30T02:15+07:00 ได้ `RE-106 STATIC VERIFY PASS` (guard ครบ 12 code spans / 7 input files, image SHA-256 `9627211412AC…7028B623` เท่าเดิม) · 🔴 **[ไม่อ้าง]** นี่คือหลักฐานชั้น static ล้วน **ไม่ใช่ runtime/capture proof** — `QuestFlagRangeChange` ยัง `NOT_OBSERVED` ใน capture validation · ไม่พิสูจน์ค่า numeric ของ `Quest.Finish` หรือ outer carrier/lifecycle · ประวัติเดิมไม่ลบ: 🟢 **OPEN — เปิดโดย chief 2026-08-27T15:xx+07:00 ต่อยอดจาก `PANYA-DECISION 1510` (M2 quest-gate skip)**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-106`/`GT-106` = 0 hit ทั้งสองไฟล์ (2026-08-27T15:4x+07:00)
 > เลขสูงสุดที่ใช้แล้วคือ `105` (`RE-105`/lane GM) ⇒ ใบนี้คือ `106` (ชนกับ `GT-106` ของ chief เอง — คนละไฟล์
@@ -2518,3 +2518,70 @@ RE-149 ถาม "มี `s_OUTFIT` ของห้า id นี้ใน corpus
 `notes_to_chief/20260829_1814_RE-149-RESULT-NO-SHIPPED-AVATAR-SOURCE.md` (BUILD_IMPACT) ·
 `RE-149` (ปิดแล้ว ห้ามรันซ้ำ) · `world_port_royal_identity` (บล็อก `CEILING_*`) ·
 `world_m2_sea_destination` / `columbus_quest_dispatch` (งาน M2 ที่รอคำตอบนี้) · `GT-151`
+
+---
+
+## 🆕🔬 RE-154 CHOOSENPC-ANSWERS-FOR-UNANNOUNCED-ACTORS-001 [STATIC-ON-BRIDGE]: **ตัวตอบ `ChooseNPC` ตอบคลิกให้ identity ฮาร์ดโค้ดโดยไม่ตรวจฉาก และไม่ตรวจว่า actor นั้นเคยถูกประกาศให้ไคลเอนต์หรือยัง** [🟢 **OPEN — เปิดโดย chief รอบ `o1s522` (R236) 2026-08-30T09:xx+07:00 จากผล pf-adversary D2**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง 2026-08-30T09:xx+07:00: `RE-154`/`GT-154` = 0 hit ทั้งสองไฟล์
+> สูงสุดก่อนหน้า = `152` (+ `PROMOTE-153` ใน `GAME_TEST_QUEUE.md`) ⇒ ใบนี้คือ `154`
+> 🔴 ใบ `RE-085`-`RE-150` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ที่มา [วัดแล้ว 2026-08-30T09:xx+07:00 · รอบ `o1s522`]
+
+รอบ R236 ต่อ `scene_admission_gate` เพื่อกันไม่ให้กิ่งเก่า `v141:4292` ส่ง placement bg0001 สามตัว
+เข้าฉากที่ไม่ใช่ฉากบ้าน · ระหว่างที่ `pf-adversary` หักคำอ้างของรอบนั้น (D2) พบเส้นทางที่ **ไม่ได้ถูกเกตปิด**
+
+บูตจริง headless: `--second-password-mode bypass` + แถวเก็บฉาก 14 (ภูเขาไฟ) ⇒ เกตกันเฟรมประชากรสำเร็จ
+(`population_indices = None`, `npc_spawn_sent = False`) แต่ยิงคลิกเข้าไปตรง ๆ ยัง **ได้คำตอบเต็ม**:
+
+```
+CLICK 0x2001 -> ['V98_NPC_FACE_PLAYER_POSITION_HEADING_P0',
+                 'V134_P0_Q3020_NPC_CONVERSATION_ONCE']
+CLICK 0x205C -> ['V112_TEST_HARNESS_FACE_PLAYER_P91',
+                 'V112_TEST_HARNESS_TRADE_ZOOM_STORE5_SWORD_SOUL']   <- หน้าร้านเปิด
+```
+
+`V98_NPC_FACE_PLAYER_POSITION_HEADING_P0` คือ **เฟรมตำแหน่ง+ทิศเต็มใบของ placement Port Royal
+ที่เข้ารหัสด้วยพิกัดภูเขาไฟ**
+
+🔴 **ของเดิม ไม่ใช่ของที่ R236 สร้าง — วัดแล้ว** รันสคริปต์เดียวกันบน `main` ที่ยังไม่มีเกตเลย
+ได้ผลคลิก **เหมือนกันทุกตัวอักษร** ⇒ ใบนี้ไม่ใช่ regression ของ R236 · R236 แค่ทำให้เห็นชัดขึ้น
+เพราะตอนนี้ไคลเอนต์ **ไม่เคยได้รับ actor พวกนี้เลย** แต่เซิร์ฟเวอร์ยังตอบให้
+
+🔴 **การคืน `population_indices` ของ R236 ปิดใบนี้ไม่ได้** เพราะตัวตอบไม่ได้อ่านฟิลด์นั้นเป็นเกต
+(หลักที่ `runtime.py` เขียนไว้เองว่า `population_indices` คือหลักฐานว่าไคลเอนต์เรนเดอร์แล้ว
+จึงเป็น **หลักที่ยังไม่มีใครบังคับใช้จริงที่เส้นทางคลิก**)
+
+### objective
+
+ตอบสองข้อจาก artifact ที่ commit แล้วเท่านั้น (ห้ามเปิดเกม ห้ามใช้ capture):
+
+1. **`v141` ตัดสินอย่างไรว่าจะตอบ `ChooseNPC` ให้ identity ไหน** — อ่านสาขาจริง (`v141:4395` ขึ้นไป)
+   แล้วเขียนออกมาเป็นเงื่อนไขคำต่อคำ: อ่าน `population_indices` ไหม · อ่าน scene ไหม · เป็นตาราง
+   ฮาร์ดโค้ดล้วนหรือไม่ · identity ใดบ้างที่ตอบได้ (ช่วง `0x2001..`?)
+2. **มีเส้นทางไหนอีกบ้างที่ตอบให้ actor ที่ไม่เคยประกาศ** — ไม่ใช่แค่ `ChooseNPC`
+   (`TargetVital` · idle action · trade · conversation) รายการครบพร้อมเลขบรรทัด
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้):**
+- เขียนเงื่อนไขของตัวตอบออกมาได้ครบ พร้อมเลขบรรทัดใน `current/pf_login_game_server_v141.py`
+- ระบุได้ว่า identity ชุดใดตอบได้โดยไม่เคยประกาศ และเกตที่ถูกต้องควรอยู่ตรงไหน (ปลายทาง ไม่ใช่ใน v141)
+- **ไม่ต้อง** แก้โค้ดในใบนี้ — ใบนี้ตอบว่า "อะไรพัง ตรงไหน" เท่านั้น
+
+**ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องแยกใบ):**
+- ไคลเอนต์จริงจะส่ง `ChooseNPC` ให้ actor ที่ไม่เคยได้รับหรือเปล่า — **น่าจะไม่** ⇒ ความเสี่ยงจริง
+  จำกัดอยู่ที่ไคลเอนต์ที่ desync/ดัดแปลง ไม่ใช่ผู้เล่นปกติ · **ห้ามอ้างว่านี่กระทบผู้เล่นปกติจนกว่าจะมีคนวัด**
+
+### nonclaims
+
+1. ไม่อ้างว่าเป็น regression ของ R236 — วัดแล้วว่า main เหมือนกันเป๊ะ
+2. ไม่อ้างว่าผู้เล่นปกติเจออาการนี้ได้ (ดูชั้นสองข้างบน)
+3. ไม่อ้างว่า `population_indices` *ควร* เป็นเกตของเส้นทางคลิก — นั่นคือสิ่งที่ใบนี้ถามหา ไม่ใช่สิ่งที่ใบนี้สมมติ
+4. ห้ามแก้ `current/pf_login_game_server_v141.py` (แช่แข็งตาม `COO-DECISION 0345`) — ถ้ามีการแก้ ต้องเป็นปลายทาง
+
+### links
+`rounds/R236_o1s522_scene-admission-gate-wired-plus-gt131-graded.md` (nonclaim ข้อ 4) ·
+`src/pirateforce_foundation/scene_admission_gate.py` (docstring SCOPE) ·
+`src/pirateforce_foundation/world_face_frame.py` (รูปแบบ "แก้ปลายทาง" ที่ใช้ได้ผลแล้ว) · `GT-134`

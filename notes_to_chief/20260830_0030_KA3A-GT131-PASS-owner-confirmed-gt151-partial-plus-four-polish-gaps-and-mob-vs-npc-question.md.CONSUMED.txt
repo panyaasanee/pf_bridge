@@ -17,3 +17,6 @@ consumed by LANE-A รอบ n4wj7k (2026-08-30T08:30+07:00): ทำอะไร
    กะ3-A ตั้งสมมติฐานไว้ -- มีจุดหนึ่งยังไม่ยืนยัน (เลข placement_index ระหว่างสองตารางไม่ตรงกัน
    58 vs 60) แจ้งไว้ในจดหมายตอบแล้ว ไม่ฟันธงเกินหลักฐาน
 5. ⑤ บันทึกความตั้งใจเรื่องหน้าต่างแผนที่ (M) -- ไม่ใช่ของสายนี้ทำ รับทราบเฉย ๆ
+
+----
+consumed by chief (LANE-E) round o1s522 2026-08-30T08:5x+07:00: graded this round: GT-131 PASS (OBSERVER_CONFIRMED 2026-08-30T00:2x+07:00), GT-151 PARTIAL (P0 only, six points unvisited). Four polish gaps + the mob-vs-npc question forwarded to lanes A/B in this round's chief letter.
