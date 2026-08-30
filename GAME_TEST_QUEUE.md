@@ -8760,18 +8760,20 @@ TOWN_TARGET_PLACEMENTS`) เป็นเป้าตีได้จริงต�
 **ผู้เปิดใบ: LANE-B (สาย B · COMBAT) รอบ `309h1a` 2026-08-30T14:4x+07:00, เลขแก้เป็น GT-160 ที่รอบ
 `xt0g9c` หลัง recovery** — ตามคำสั่ง COO ข้างต้น ไม่เร่งด่วน ไม่บล็อก M4/M5 รอคิวเทสที่มีคนอยู่หน้าจอตามปกติ
 
-## 🆕🎮 GT-164 BT-GM-VARIANT-CLICK-SWEEP-001 [attended, in-game]: **คลิก `BT_GM` ทีละ variant ของ `gm/bt_gm_probe.py` (สี่ตัวคงที่ + บิต 0-7 ของ `field_0x14` + ค่าสูงสุด) แล้วดูว่า `GMUI_BASIC` เปิดไหม — ตอบข้อ 2 (query-gate เวลาคลิก) ของ `RE-164` เท่านั้น ข้ออื่นตอบด้วย static RE ต่างหาก** [🔴 **BLOCKED — ไม่มีจุดเรียกที่ยิง variant กลางเซสชันได้เลย ดู `CORE-REQUEST-GM-043`**]
+## 🆕🎮 GT-164 BT-GM-VARIANT-CLICK-SWEEP-001 [attended, in-game]: **คลิก `BT_GM` ทีละ variant ของ `gm/bt_gm_probe.py` (สี่ตัวคงที่ + บิต 0-7 ของ `field_0x14` + ค่าสูงสุด) แล้วดูว่า `GMUI_BASIC` เปิดไหม — ตอบข้อ 2 (query-gate เวลาคลิก) ของ `RE-164` เท่านั้น ข้ออื่นตอบด้วย static RE ต่างหาก** [🟢 **ปลด BLOCKED รอบ `jz4don` — จุดเสียบ `/gmprobe <variant_id>` ลง main แล้ว พร้อมให้เทสจริง**]
 
 ### สถานะ
-BLOCKED ตั้งแต่เปิดใบ — จุดเรียกเดียวที่มีอยู่ตอนนี้ (`runtime.py:6424-6438` ผ่าน `gm/state_wire.py`) ยิงค่า
-คงที่ `(0,1,0)` ครั้งเดียวตอนล็อกอินของบัญชี GM เท่านั้น (ค่าเดียวกับที่ `GT-101`/`GT-103`/`GT-107` ทดสอบแล้ว
-คลิกเงียบ) ไม่มีทางยิง 13 variant ที่เหลือของ `iter_state_vital_bit_variants()` ระหว่างเซสชันเดียวกันได้เลย
-`CORE-REQUEST-GM-043` (`notes_to_chief/`) เสนอสองทางเลือกให้ chief เลือกจุดเสียบ — ปลด BLOCKED เมื่อจุดนั้นลง
-main
+**ปลด BLOCKED** (รอบ LANE-GM `jz4don`, `CORE-REQUEST-GM-043` ตัดสินทางเลือก A โดย chief): จุดเสียบใหม่คือ
+คำสั่งแชท GM `/gmprobe <variant_id>` (`gm/chat_command_action.py::_gmprobe_action`, ต่อผ่าน dispatch เดียว
+กับ `/warp`/`/say`) — บัญชี GM พิมพ์ `/gmprobe <variant_id>` ในแชทระหว่างเซสชัน ได้ทั้ง 14 variant ตามชื่อ
+ใน `bt_gm_probe.known_variant_ids()` (`baseline-all-zero`, `first-byte-1`, `second-byte-1`, `both-bytes-1`,
+`u32-bit0`..`u32-bit7`, `u32-max`, `all-fields-1`) จุดเสียบเดิมตอนล็อกอิน (`runtime.py:6424-6438`, ค่าคงที่
+`(0,1,0)`) ยังอยู่เหมือนเดิม ไม่ถูกแทนที่ — `/gmprobe` เป็นทางเพิ่ม ไม่ใช่ทางแทน **ยังไม่มีการยิงจริงกับ
+ไคลเอนต์จริงรอบนี้** — สิ่งที่ลง main คือจุดเสียบเท่านั้น การคลิกจริงยังเป็นงานของกะ1-A ตามใบนี้
 
 ### objective
-เมื่อปลดแล้ว: ให้ผู้เทส (กะ1-A) login ด้วยบัญชี GM แล้วให้สาย GM สั่งยิงแต่ละ variant (14 ตัว) ทีละตัว
-ผ่านจุดเสียบใหม่ที่ `CORE-REQUEST-GM-043` จะให้มา จากนั้นคลิกปุ่ม `BT_GM` **หลังทุก variant** แล้วบันทึกว่า
+ให้ผู้เทส (กะ1-A) login ด้วยบัญชี GM แล้วพิมพ์ `/gmprobe <variant_id>` ทีละตัวจากทั้ง 14 ชื่อข้างต้น
+(เรียงตามลำดับ `bt_gm_probe.known_variant_ids()`) จากนั้นคลิกปุ่ม `BT_GM` **หลังทุก variant** แล้วบันทึกว่า
 `GMUI_BASIC` เปิดหรือไม่ — ตัวแรกที่เปิดคือคำตอบ ถ้าไม่มีตัวไหนเปิดเลยทั้ง 14 ตัว = bounded-negative ต่อ
 "field_0x14 บิต 0-7/max และสอง u8 field ไม่ใช่ gate" (ยังไม่ปิดคำถามเรื่อง connection-context/create-path/
 current-UI-key ซึ่งเป็น stub แยกใน `RE-164`)
@@ -8790,6 +8792,8 @@ suspect 1/3/4 ของ `RE-164` (connection context / current-UI key / create p
 เปิดโดย LANE-GM รอบ `b3fgm6` — LANE-GM บริโภคผลเอง ปิดหัวใบเมื่อ chief ต่อจุดเสียบและกะ1-A คลิกจบ
 
 ### links
-`src/pirateforce_foundation/gm/bt_gm_probe.py` (`iter_state_vital_bit_variants`) ·
-`CLIENT_RE_QUEUE.md#RE-164` · `notes_to_chief/20260831_03xx_LANE-GM-CORE-REQUEST-GM-043-*.md` ·
-`GT-101`/`GT-103`/`GT-107` (baseline: ค่า `(0,1,0)` คลิกเงียบ)
+`src/pirateforce_foundation/gm/bt_gm_probe.py` (`iter_state_vital_bit_variants`, `known_variant_ids`,
+`variant_by_id`) · `src/pirateforce_foundation/gm/chat_command_action.py` (`_gmprobe_action`) ·
+`CLIENT_RE_QUEUE.md#RE-164` · `notes_to_chief/20260831_0321_LANE-GM-CORE-REQUEST-GM-043-bt-gm-variant-call-site-for-gt164.md`
+(ใบเปิด) · `notes_to_chief/20260831_0357_CHIEF-REPLY-CORE-REQUEST-GM-043-decision-option-A-gmprobe-chat-command.md`
+(ตัดสินใจ) · `GT-101`/`GT-103`/`GT-107` (baseline: ค่า `(0,1,0)` คลิกเงียบ)
