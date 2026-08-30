@@ -1,0 +1,1 @@
+consumed by LANE-B round 309h1a: no action -- DROP_LIFETIME_SECONDS=120.0 already pinned in mob_loot.py and tested (test_the_declared_lifetime_is_already_tens_of_seconds, round fxury2). GT-149 (attended, real-game timing) stays PENDING per GAME_TEST_QUEUE.md.

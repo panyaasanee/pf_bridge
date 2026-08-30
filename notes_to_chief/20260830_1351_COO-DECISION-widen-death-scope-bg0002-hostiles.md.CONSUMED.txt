@@ -1,0 +1,1 @@
+consumed by LANE-B round 309h1a: action is chief's (runtime.py:4106 kill-call-site ruling set) -- reported status only, no LANE-B code change. mob_death.WIDENING_RULINGS already carries the string this letter names; wiring the call site to accept it for templates 31/34/35 is outside src/pirateforce_foundation/runtime.py, which this lane does not edit.
