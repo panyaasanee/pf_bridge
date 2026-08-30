@@ -1,0 +1,1 @@
+consumed by LANE-GM รอบ gm17278: สร้าง gm/bt_gm_probe.py (14 state-vital variant + 3 suspect hypothesis stub) + tests/test_gm_bt_gm_probe.py, เปิด RE-164 (CLIENT_RE_QUEUE.md) + GT-165 (GAME_TEST_QUEUE.md) + CORE-REQUEST-GM-043 (จุดเรียกยิง variant ระหว่างเซสชัน ยังไม่มี), อัปเดต docs/GM_LANE.md

@@ -2957,3 +2957,71 @@ GT-101 error 23065/28317):
 ### links
 `notes_to_chief/20260830_1655_PANYA-ORDER-open-RE-162-in-session-scene-change-with-a-named-consumer-chain.md`
 (ใบสั่งเต็ม) · `gm/warp_executor.py` (docstring อ้าง RE-090) · `notes_to_chief/` RE-090 result (field-not-proven)
+---
+
+## 🆕🔬 RE-164 BT-GM-FOUR-REMAINING-SUSPECTS-EXPERIMENTAL-FORK-001 [NEEDS-ATTENDED-CAPTURE]: หลัง `RE-126` ปิดสมมติฐาน "ผูกผิดตัว" และ `GT-103` หักล้างข้อเสนอเชิงปฏิบัติของ `RE-118` -- สี่ผู้ต้องสงสัยที่เหลือ (connection context / query-0x25 gate ตอนคลิก / current-UI object-key จริง / factory `0x007280D0` ถูกเรียกไหม) ยังไม่มีใครตอบสักข้อ ใบนี้เปิดการทดลองแบบ `PF_ADHOC_ATTR_PROBE` แทนการอ่าน disassembly ต่อ  [🟢 **OPEN — เปิดโดย LANE-GM รอบ `gm17278` 2026-08-31T02:2x+07:00 ตามคำสั่งเจ้าของ**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง 2026-08-31T02:2x+07:00: `RE-164`/`GT-164` = 0 hit ทั้งสองไฟล์ ·
+> สูงสุดก่อนหน้า `RE-163` (`GT`/`RE` ใช้ตัวนับเดียวร่วมกัน) ⇒ ใบนี้คือ `RE-164` · ใบ `RE-085`-`RE-163`/
+> `GT-001`-`GT-160` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ
+
+### ที่มา
+
+`notes_to_chief/20260831_0152_PANYA-ORDER-LANE-GM-make-the-BT_GM-button-and-GMUI_BASIC-window-actually-work.md`
+(คำสั่งของเจ้าของ เขียนแทนโดยกะ1-A) -- ให้เลน GM ทำให้ปุ่ม `BT_GM` เปิดหน้าต่าง `GMUI_BASIC` ได้จริงเป็นงาน
+หลัก แทนการวนงานรองระหว่างรอใบอื่นถูกปลดล็อก เหตุผลของเจ้าของ: มันเป็นฟังก์ชันดั้งเดิมของไคลเอนต์อยู่แล้ว
+ไม่ใช่ของที่ต้องประดิษฐ์ขึ้นใหม่
+
+**รู้แล้วและปิดแล้ว** (ห้ามเปิดใบซ้ำ): `RE-126` (object เดียวกันจริง ไม่ได้ผูกผิดตัว) · `GT-103` A/B
+NO-RESULT (สี่สถานะ UI คลิกแล้วเงียบทุกครั้ง หักล้างข้อเสนอเชิงปฏิบัติของ `RE-118` "current-UI key ต้อง
+ไม่ว่าง") RE-126 ปิดท้ายด้วยประโยคของตัวเอง: "สาเหตุอยู่**ถัดจาก**binding (connection context / query gate /
+current-UI object-key / create path) ซึ่ง RE-126 ปฏิเสธที่จะเดา -- ใบใหม่ถ้าจะไล่ต่อ ไม่ใช่ใบนี้" -- นี่คือ
+ใบนั้น
+
+### สิ่งที่สร้างแล้วรอบนี้ (`pirate-force-server`, เขต `gm/`, ยังไม่แตะไคลเอนต์จริง)
+
+`src/pirateforce_foundation/gm/bt_gm_probe.py` -- experiment fork ที่:
+1. `iter_state_vital_bit_variants()` / `build_variant_frame()` / `build_variant_payload()`: สร้าง 14
+   variant ของเฟรม `GM_UpdateGMStateVital` (`0x5A19`, เฟรม 41 ไบต์ที่พินแล้ว, layout ไม่เปลี่ยนจาก
+   `gm/state_wire.py` เดิมแม้แต่บิตเดียว) ทีละฟิลด์ -- ครอบคลุมผู้ต้องสงสัย ② (query-gate value) เท่านั้น
+   เพราะเป็นผู้ต้องสงสัยตัวเดียวที่ค่าเฟรมฝั่งเซิร์ฟเวอร์คุมได้ตรง ๆ
+2. `SUSPECT_STUBS` (3 รายการ): ผู้ต้องสงสัย ①③ (connection-context, current-UI-object-key) บันทึกเป็น
+   hypothesis stub ที่มีแต่คำถาม+เหตุผลที่ยังต่อสายไม่ได้รอบนี้ แท็ก `[สมมติของสาย GM - รอ RE]` ทุกรายการ
+   ไม่มีการเดาความหมายจริงเกินกว่าที่ RE-126/RE-118/ใบสั่งนี้ยืนยันไว้แล้ว -- ผู้ต้องสงสัย ④ (factory
+   `0x007280D0` ถูกเรียกไหม) ไม่ใช่ stub เพราะเป็น**ผล**ที่การทดลองสังเกต ไม่ใช่ตัวแปรขาเข้า
+3. `tests/test_gm_bt_gm_probe.py` (22 เทส): ตรวจ frame/payload construction เท่านั้น (ความยาว 41/9 ไบต์,
+   vital id, field range, variant id ไม่ซ้ำ) -- **ไม่มีเทสใดอ้างว่าหน้าต่างเปิด** ต้องรอผู้เทส attended
+
+### objective (สำหรับผู้แกะ static ต่อจากนี้ -- ไม่ใช่งานของ probe module ข้างบน)
+
+1. **connection context**: `0x0053B9B0` (handler, RE-126 พินไว้) อ่าน connection/session context จากไหน
+   -- ตรงกับ session ที่ state vital ถูกส่งจริงเสมอไหม หรือแยกกันได้
+2. **query gate ตอนคลิก**: query `0x25` adapter `0x00726D30` (อ่าน `GMModule_Client+0x19`, RE-104 พินไว้)
+   ถูกเรียกซ้ำตอนคลิกจริงไหม หรือเช็คแค่ตอนวาดปุ่มแล้ว cache ผลไว้
+3. **current-UI object-key จริง**: `GT-103` หักล้างว่าไม่ใช่ "ไม่ว่างพอ" -- เงื่อนไขจริงของ vfunc นี้คืออะไร
+4. **create path**: dispatcher `0x00AA0710` → factory `0x007280D0` ถูกเรียกไหมเมื่อคลิก (เดินสายจาก
+   `RE-118`'s call chain ที่พินไว้แล้ว: `0x0053B9B0` → gate `0x0044A3B0` → current-UI-key vfunc →
+   `0x00AA0710` → `0x007280D0`)
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB:** สาย GM ส่ง variant จาก `bt_gm_probe.py` ทีละตัว บันทึกว่า variant ไหนถูกส่งตอนไหน
+(ใช้คู่กับ GT queue entry ที่จะเปิดแยก) **ชั้น client-observable:** ผู้เทส attended คลิก `BT_GM` หลังแต่ละ
+variant แล้วดูว่า `GMUI_BASIC` เปิดหรือไม่ -- ทั้งสองชั้นต้องได้ตามกติกาหลักฐานสองชั้นเดิม (`EVIDENCE_GATES.md`)
+
+### nonclaims
+
+1. ไม่รับประกันว่าจะทำได้ -- อาจจบเป็น bounded negative ถ้าไม่มี variant ใดทำให้หน้าต่างเปิด ต้องเขียนให้
+   ชัดว่าตันที่ประตูบานไหน ไม่ปิดใบเงียบ ๆ
+2. `bt_gm_probe.py` **ไม่ได้พิสูจน์อะไรกับไคลเอนต์จริงเลยรอบนี้** -- มีแค่โค้ดสร้างเฟรม+เทสระดับไบต์ ไม่มี
+   การส่งจริง ไม่มีการคลิกจริง ตาม nonclaim ในตัวไฟล์เอง
+3. field ตัวแปร u32 (`field_0x14`) ครอบคลุมเฉพาะบิต 0-7 + ค่าสูงสุด `0xFFFFFFFF` รอบนี้ -- บิต 8-31 เป็น
+   ช่องว่างที่ตั้งใจทิ้งไว้ (ระบุในโค้ดและ `docs/GM_LANE.md`) ไม่ใช่ครบทุกกรณี
+4. ผู้ต้องสงสัย ①③ ยังเป็นคำถามเปิด ไม่มีคำตอบ ไม่มีการเดาความหมาย -- ต้องใช้ static RE หรือ CORE-REQUEST
+   ต่อ chief (ถ้าต้องแตะ `runtime.py`) เท่านั้น
+
+### links
+`notes_to_chief/20260831_0152_PANYA-ORDER-LANE-GM-make-the-BT_GM-button-and-GMUI_BASIC-window-actually-work.md`
+(ใบสั่งเต็ม) · `RE-126`/`RE-118`/`RE-104`/`RE-089`/`GT-103` (ปิดแล้ว ห้ามเปิดซ้ำ) ·
+`src/pirateforce_foundation/gm/bt_gm_probe.py` · `src/pirateforce_foundation/gm/state_wire.py` ·
+`tests/test_gm_bt_gm_probe.py` · คู่กัน: GT entry ใน `GAME_TEST_QUEUE.md` (สเปกคลิกสำหรับกะ1-A)
