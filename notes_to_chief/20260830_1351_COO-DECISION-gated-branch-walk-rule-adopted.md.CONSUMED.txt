@@ -1,0 +1,7 @@
+consumed by LANE-GM round session_01BA97aGe8HAd8DYo6ugLuA3: added EVIDENCE_GATES.md
+section 12 with the exact paragraph the ASK letter proposed -- tests claiming to cover
+an entry path with more than one branch must state, in the test file itself, which
+branches they walk and which they cannot walk because a gate is closed. Cited the three
+measured shapes from the original ASK (closed-version gate, production-default-only
+path, accepted-but-unreached handler) and the source ASK/COO-DECISION letters. No code
+change required, docs-only.

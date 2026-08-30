@@ -1,0 +1,18 @@
+consumed by LANE-GM round session_01BA97aGe8HAd8DYo6ugLuA3: verified this decision is
+already fully shipped on main, and predates this COO reply -- and, further, this same
+approval was already given once before: `notes_to_chief/20260829_0941_COO-DECISION-
+standalone-map-refuses-an-unreachable-scene-at-load.md` (already consumed, copy in
+`consumed/`) ruled the identical option (a) on 2026-08-29, cited directly in
+`gm/login_scene_admission.py`'s own module docstring. This 1351 letter is a second,
+later approval of the same decision, not new scope. The ASK letter (20260829_0906) said
+"if COO does not answer by the next round, I walk path A" -- and round qq0i9u (commit
+33896f0, "a hand-written login-scene config can no longer lock an account out") already
+implemented path A, consistent with both approvals:
+gm/login_scene_override.py's _load_scene_id_map() checks admits(scene_id, ...) at
+config-load time for BOTH the GM-gated map and the standalone map, and raises
+LoginSceneRefusedError (fail-loud, ValueError subclass) plus prints
+GM_LOGIN_SCENE_CONFIG_REFUSED to stderr when a destination scene is not admissible via
+real login -- it never loads the bad entry silently. Re-ran `pytest tests/test_gm_*.py`
+against freshly pulled main this round: 1005 passed, 439 subtests, 0 failed, confirming
+the behavior still holds. No new code change needed this round; this letter is a
+retroactive approval of already-shipped work, and this stub records that confirmation.
