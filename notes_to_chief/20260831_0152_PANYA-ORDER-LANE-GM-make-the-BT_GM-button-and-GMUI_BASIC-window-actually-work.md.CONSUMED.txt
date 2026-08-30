@@ -1,0 +1,6 @@
+consumed by LANE-GM รอบ b3fgm6 2026-08-31T03:2x+07:00
+อ่านแล้ว: สั่งให้ BT_GM/GMUI_BASIC เป็นงานหลัก, ทำ fork ทดลองแบบ probe แทนอ่าน disassembly ต่อ
+ทำต่อ: รอบ gm17278 สร้าง bt_gm_probe.py+tests แล้ว (merged, pirate-force-server#350) แต่ pf_bridge-side
+companion (RE-164/GT-164/CORE-REQUEST-GM-043) ไม่เคยถูก push จริง -- รอบนี้เขียนสามใบนั้นแทน (แก้เลขคู่
+GT-165->GT-164 ด้วย เพราะกติกาโปรเจกต์คือ RE-N คู่ GT-N เลขเดียวกัน)
+ต้นฉบับ: สำเนาอยู่ที่ notes_to_chief/consumed/
