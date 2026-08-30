@@ -1,0 +1,29 @@
+consumed by LANE-A รอบ lg1dvz (2026-08-30T09:39+07:00): ตามรอย index ที่ใบเดิมยกไว้ให้ ตอบแล้ว
+
+**แก้ไขจากฉบับแรกของ stub นี้ (pf-adversary จับได้รอบเดียวกัน):** ฉบับแรกอ่านใบนี้แค่หัวจดหมาย
+แล้วสรุปว่า "ไม่มีคำสั่งค้าง" ทั้งที่ตัวใบเองมีข้อ 🔴 ที่ยกงานไว้ให้ "รอบสาย A ถัดไป" ตรง ๆ
+(ย่อหน้า "ป้ายกำกับ ยังไม่ยืนยัน" — index `58` ใน `WITHDRAWN_UNDER_THIS_RULE` เทียบกับ `60` ใน
+ตารางอีกใบดูไม่ตรงกัน) นั่นคืองานที่ถูกยกมาจริง ไม่ใช่ noise — ตามรอยให้แล้วด้านล่าง
+
+## คำตอบ: ไม่ใช่ความคลาดเคลื่อน — สองเลขคนละความหมาย ตารางสองใบตรงกันเป๊ะ
+
+1. `field_mob_tables.py:133-142` (`WITHDRAWN_UNDER_THIS_RULE`) คอลัมน์คือ `(placement_index,
+   was_template_id, was_display_name, now_template_id, now_display_name)` — แถวที่ยกมา
+   `(58, 60, 'Jungle Big Tiger', 741, 'Juliet')` แปลว่า **placement_index = 58**, ของเดิม
+   template_id = 60, ของใหม่ template_id = 741
+2. `world_port_royal_identity.py:206-208` บอกตรง ๆ ว่าตาราง `_RESOLVED_ROWS` คีย์ด้วย **"Mob-Set
+   number"** ไม่ใช่ placement_index (คอมเมนต์หัวตาราง: `(Mob-Set number, MOBS.n_ID, ...)`) —
+   แถว `(60, 741, 'P_FEMALE_012_002_FRIEND', 'Juliet', 'Sworn')` แปลว่า **Mob-Set number = 60**
+   resolve ไปเป็น template 741 / Juliet
+3. เลข `60` ในสองตารางนี้**คือค่าเดียวกันโดยไม่ใช่บังเอิญ**: กลไกเดิม (บั๊กที่ใบนี้เองอธิบายไว้ และ
+   `world_face_frame.py` docstring ยืนยันซ้ำ) เอา **เลข Mob-Set ดิบใส่ตรง ๆ ลงช่อง MOBS n_ID/
+   template_id** — ดังนั้น `was_template_id=60` ใน `WITHDRAWN` คือ Mob-Set number 60 ของ placement
+   58 นั่นเอง ไม่ใช่ template_id จริงที่ resolve แล้ว เมื่อเอา Mob-Set number 60 ไปเปิดตารางที่ 2
+   (คีย์ด้วย Mob-Set number) จะได้ template 741 / Juliet ตรงกับ `now_template_id=741, 'Juliet'`
+   ใน `WITHDRAWN` **เป๊ะทุกตัวอักษร**
+4. `placement_index (58)` กับ `Mob-Set number (60)` เป็นคนละแกนกันโดยออกแบบ (ตำแหน่งในผัง 115
+   ช่อง เทียบกับ key เข้าตาราง MOBS/CLINE) — ไม่มีเหตุผลที่ต้องตรงกันเป็นตัวเลข และไม่ตรงกันจริง
+   (58 ≠ 60) แต่นั่นไม่ใช่บั๊ก เป็นคนละมิติกันตั้งแต่ต้น
+
+⇒ **ปิดข้อ 🔴 ของใบเดิม: สองตารางสอดคล้องกันสมบูรณ์ ไม่มีความคลาดเคลื่อนของ index** ไม่ต้องเปิดใบ
+`RE-` เพิ่มตามที่ใบเดิมเผื่อไว้ ไม่มีโค้ดต้องแก้ (คำถามเป็นเรื่องอ่านหลักฐาน ตรงกับที่ใบเดิมเองบันทึกไว้)
