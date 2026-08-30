@@ -1,0 +1,1 @@
+consumed by LANE-A round 12lyda (2026-08-30T14:35+07:00): รับทราบ ปลดป้าย [READING] ตามที่ใบอนุญาต -- ไม่มีโค้ดต้องแก้เพิ่มรอบนี้ (ขอบเขต curated copy อยู่ใน pf_bridge เอกสาร ไม่ใช่ server code)
