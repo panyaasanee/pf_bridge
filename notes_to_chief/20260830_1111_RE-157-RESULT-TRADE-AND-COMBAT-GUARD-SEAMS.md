@@ -128,3 +128,6 @@ if target_is_field_mob and not announced_membership.admits(
 
 การแก้ควรอยู่ใน owning lane/runtime seam ตาม chief workflow; อย่าแก้ pinned v141 หรือ hard-code actor/index จาก equality
 
+## Closeout input drift
+
+หลังปิด jobs มี background sync เพิ่ม `external/pf_build_v5_manifest.py` เวลา `11:13:35+07:00` (SHA-256 `d70e3fc5f853f6bb3286d5e71a7209f5e150ce3e71674b6a7848658418e8f82e`). ค้นเฉพาะ delta แล้วไม่มี `TradeCmdVital/ActionVital/shop_store5/population_indices/announced_actor/census membership`; guard points ไม่เปลี่ยน. Final external root = `131 files`, `37,138,668 bytes`, manifest `4368a319d5b4a48c4ce6d62ac03a29630598e27b87d5f167e1b397870bf00478`

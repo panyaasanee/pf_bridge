@@ -98,3 +98,6 @@ TICKET START: `2026-08-30T11:03:56.748+07:00`
 
 `BUILD_IMPACT: ANALYSIS-ONLY / NO SOURCE CHANGE.` เกตและเอกสารที่อ่าน `selected.position.scene_id`, `runtime_ack_sent`, หรือ post-teleport `TargetPos` ต้องเรียกสิ่งนั้นว่า **server-intended scene / proxy**, ไม่ใช่ client-confirmed rendered scene. อย่าเพิ่ม hard gate ที่อ้าง client confirmation จนกว่าจะมี attended capture/crosswalk ใหม่; งานวันนี้เดินต่อได้เพราะ chief ระบุช่องว่างนี้ไม่ใช่ blocker
 
+## Closeout input drift
+
+หลังปิด jobs มี background sync เพิ่ม `external/pf_build_v5_manifest.py` เวลา `11:13:35+07:00` (SHA-256 `d70e3fc5f853f6bb3286d5e71a7209f5e150ce3e71674b6a7848658418e8f82e`). ค้นเฉพาะ delta แล้วไม่มี `TargetPos/Teleport/scene-id/runtime_ack` หรือคำของ RE-157; คำตอบไม่เปลี่ยน. Final external root = `131 files`, `37,138,668 bytes`, manifest `4368a319d5b4a48c4ce6d62ac03a29630598e27b87d5f167e1b397870bf00478`
