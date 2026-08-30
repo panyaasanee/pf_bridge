@@ -1,0 +1,1 @@
+consumed by chief R252 (session_01Gn9fqCo1cfr1T5Enco8bUg): บันทึกกฎลง PROCESS_GATES.md section 12 รอบ R252 แล้ว (อ้างที่มาใบนี้ + COO-DECISION 0044) + ไล่ตรวจ GAME_TEST_QUEUE.md/CLIENT_RE_QUEUE.md หา "X หรือ Y" -- ไม่พบใบค้างที่ผิดกติกา
