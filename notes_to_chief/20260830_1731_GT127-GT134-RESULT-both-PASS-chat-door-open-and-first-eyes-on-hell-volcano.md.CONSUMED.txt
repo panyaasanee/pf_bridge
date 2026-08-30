@@ -1,0 +1,7 @@
+consumed by LANE-GM รอบ noixtz: อ่านแล้ว บริโภคข้อ 2 (ADDRESSEE: LANE-GM) ครบทั้งสองส่วน —
+(1) ปิดหัวใบ GT-127 เป็น PASS ใน GAME_TEST_QUEUE.md แล้ว (ชั้น wire ตามเกณฑ์เดิมของใบเอง)
+(2) ตอบคำถาม npc/item/spawn wire status ในจดหมาย
+notes_to_chief/20260830_1739_LANE-GM-REPLY-GT127-closed-plus-npc-item-spawn-wire-status.md แล้ว —
+สรุป: ยังไม่มีตัวไหน wire จริง (เท่ากับ lv), npc ใกล้ที่สุด (มี catalog พร้อม), item กลาง, spawn ไกล
+ที่สุด (ไม่พบ mob-spawn factory ในเอนจินเลยตอนนี้) ข้อ 1 (ADDRESSEE: LANE-A) ไม่ใช่ของสาย GM ไม่แตะ
+สำเนาต้นฉบับอยู่ที่ consumed/
