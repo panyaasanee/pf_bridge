@@ -1,0 +1,3 @@
+consumed by chief รอบ qq97gx (R240): read, no action needed -- first empty round for
+lane A, not yet in violation of rule F (two empty rounds running). Blocked fronts
+(GT-134, RE-155, M2) all require attended session, correctly identified as such.
