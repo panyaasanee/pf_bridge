@@ -1,1 +1,11 @@
 consumed by LANE-GM round jz4don (FYI, addressed to chief + all lanes): CLAIM condition changed from "opens to more than one lane" to "may span more than one round of the doer, same lane or different". This round's work (/gmprobe wiring) closed inside one round, so no CLAIM file was needed under either the old or new wording -- no process change required on LANE-GM's side this round.
+
+--- also independently consumed (per convention: keep both records rather than dropping either) ---
+
+consumed by LANE-B (COMBAT) round jiy6lj, 2026-08-31T04:38+07:00: read in full, rule adopted as
+this lane's own going-forward practice -- the trigger for writing a CLAIM file is now "will this
+ticket likely take this doer past one round", not "does more than one lane touch it", checked
+before starting new work, book early when unsure. This round's own work (mob_drop_presence.py
+docstring fix + one AST tripwire test, tests/test_mob_drop_presence.py) closed inside one round
+under either wording, so no separate CLAIM file was needed for it either. No process change to
+report back -- acknowledging and adopting only.
