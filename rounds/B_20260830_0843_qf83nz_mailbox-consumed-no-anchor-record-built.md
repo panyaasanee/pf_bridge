@@ -157,3 +157,28 @@ pf-adversary ไม่ได้รันจริง) -- รอบนี้เ�
 ## ⑦ ASK-COO / CORE-REQUEST รอบนี้
 
 ไม่มี -- ทุกอย่างที่ต้องเคาะรอบนี้ COO เคาะไปแล้วก่อนรอบเปิด (0045, 2342) รอบนี้แค่บริโภคผล
+
+## ⑧ ข้อ E ของ ADDENDUM v2 -- เอา draft ออกไม่สำเร็จ, บันทึกไว้ตรง ๆ ไม่ใช่เงียบ
+
+push ครบทั้งสอง repo แล้ว (`pirate-force-server` `21e157a` บน `claude/lane-b-qf83nz`,
+`pf_bridge` `390cb6b` บน `claude/lane-b-qf83nz-bridge`) แก้หัวข้อ/body ทั้งสอง PR เป็น
+คำอธิบายจริงแล้ว (marker `PF-AUTOMERGE: v4` ยืนยันด้วย GET หลัง PATCH) **แต่เอา draft
+ออกไม่สำเร็จทั้งสอง PR:**
+
+```
+PATCH /pulls/296 {"draft": false}  -> 200 OK, draft ยังเป็น true (REST ไม่รองรับฟิลด์นี้)
+POST /graphql markPullRequestReadyForReview
+  -> 403: "This GraphQL query is not enabled for this session -- only the
+     pinned set of PR-review operations is served. Use REST via `gh api
+     ...` instead." (และ `gh` ไม่มีในอิมเมจตามกฎเดิม)
+```
+
+⇒ **`pirate-force-server#296` และ `pf_bridge#470` ยังเป็น draft** ทั้งที่เนื้อหาสุดท้าย
+พร้อมแล้ว 🔴 **ต้องมีคนกดปุ่ม "Ready for review" ด้วยมือ** (chief/เจ้าของ/สภาพแวดล้อมที่มี
+GraphQL) ก่อน workflow merge จะเห็น -- ไม่ใช่รอบที่หายไป (มี commit สุดท้ายอยู่บน branch
+จริง) แต่ต้องมีการแทรกแซงนอกเครื่องมือที่รอบนี้เข้าถึงได้
+
+**คำเตือนสำหรับรอบหน้า (ข้อ A):** ถ้ากลับมาแล้วเห็น PR ทั้งสองยัง draft และ reaper ปิดไปแล้ว
+(เกิน 2 ชม./6 ชม.) -- **นี่ไม่ใช่กรณี "gate แดง / merged=false" ตามข้อ A ปกติ** งานจริงอยู่บน
+commit `21e157a`/`390cb6b` ครบแล้ว แค่ไม่มีใครกด ready -- cherry-pick ตามข้อ A ได้เลยถ้าจำเป็น
+แต่ก่อนอื่นลองเช็คว่ามีใครกด ready แล้ว merge ไปแล้วหรือยัง (`merged=true`) ก่อนเสียเวลาทำซ้ำ
