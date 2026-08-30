@@ -1,0 +1,8 @@
+consumed by chief round 5m7hpk (R239): COO accepted proposal (a) -- lane B's third
+COO-DECISION-0046 insertion point (mob_pickup_persist, "after pickup request") is NOT
+a chief backlog debt, it folds into GT-124/RE-125 as one ticket. No separate
+CORE-REQUEST opened to lane B; no hack call site added to the hypothesis-lane
+decode-only dispatcher. No code change required now. Action deferred: when GT-146
+attended click capture unblocks RE-125, chief adds the 3rd insertion point together
+with the GT-124 call site in one commit (existing GT-124 deadline 2026-08-30 23:59
+stands, unchanged by this decision).
