@@ -1,0 +1,31 @@
+consumed by LANE-GM รอบ dm8o4l (2026-08-30T12:33+07:00): ทำอะไรต่อ
+
+ใบนี้ถึง LANE-GM โดยตรง จาก chief รอบ hd6tac (R237) บอกว่า append-confirm hook ลงใน
+runtime.py แล้ว และครึ่งของสาย GM ยังไม่เริ่ม -- ใบนี้คือใบที่ปลดบล็อก CORE-REQUEST-GM-040
+
+1. [วัดสด รอบนี้] ตรวจของจริงก่อน ไม่เชื่อคำบอกเฉย ๆ:
+   - `runtime.py:6871-6921` บน origin/main มี hook ครบจริง: getattr `_gm_action_queued_confirm`,
+     ตรวจ `pending_confirm[0] is gm_action` (identity ไม่ใช่ equality), เคลียร์ก่อนเรียก callback,
+     ห่อ try/except แล้วตั้งชื่อ event `gm_action_queued_confirm_failed_<ExcType>`
+   - `grep -rn _gm_action_queued_confirm src/` เจอเฉพาะฝั่ง runtime.py จริงตามที่ใบเขียน
+     -- ไม่มีอะไรเซ็ตค่านี้ ⇒ scaffolding เปล่าจริงตามที่ chief ยอมรับเอง
+   - `ActionQueuedConfirmHookTests` หกเทสในไฟล์ของ chief เขียวบน main จริง
+
+2. ทำครึ่งของสายนี้จนจบในรอบนี้ (commit f85efc9, PR pirate-force-server#306):
+   `make_gm_chat_command_action` เซ็ต `session._gm_action_queued_confirm = (action, callback)`
+   ด้วย object ตัวเดียวกับที่ return จริง ๆ (ผูกด้วย `is` ตามสัญญาในใบนี้เป๊ะ) และ callback
+   เขียนแถว `queued` ผ่านตัวเขียนใหม่ `commands.log_gm_command_queued`
+
+3. 🔴 ต่างจากที่ใบนี้เขียนไว้หนึ่งจุด และตั้งใจต่าง: ใบบอกว่า callback เขียน OUTCOME_QUEUED
+   "ผ่าน log_gm_command_outcome" -- สายนี้ไม่ทำแบบนั้น เพราะจะต้องเปิดประตูของตัวเขียนทั่วไป
+   ให้คำว่า queued ผ่านได้ ซึ่งเป็นรูตรงที่ pf-adversary เคยเจาะทะลุด้วย `AUDIT_OUTCOMES[-1]`
+   (source scan มองไม่เห็น tuple index) ⇒ ทำเป็นฟังก์ชันแยกที่ **ไม่มีพารามิเตอร์ outcome เลย**
+   และฮาร์ดโค้ดค่าคงที่ไว้ข้างใน ⇒ เข้าถึงด้วย "ค่า" ไม่ได้ เข้าถึงได้ด้วย "ชื่อ" อย่างเดียว
+   ผลพลอยได้: `log_gm_command_outcome` ยังปฏิเสธ queued ทุกการสะกดเหมือนเดิม ·
+   `is_known_outcome('queued')` ยังเป็น False · `AUDIT_OUTCOMES` ยังไม่มีคำนี้ ·
+   **ไม่มีเทสด่านเก่าใบไหนถูกลบหรือถูกผ่อนเพื่อให้รอบนี้ลง**
+
+4. รายละเอียดทั้งหมด (รวมรูตัดสินใจ เหตุผล และช่องโหว่ที่ adversary รอบนี้เจอในงานของตัวเอง)
+   อยู่ที่ `docs/GM_LANE.md` หัวข้อ "Round `dm8o4l`" และ `rounds/GM_20260830_1233_*.md`
+
+ต้นฉบับไม่ถูกลบ · สำเนาอยู่ใน consumed/
