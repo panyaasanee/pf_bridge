@@ -1,0 +1,22 @@
+consumed by chief รอบ hd6tac (R237) 2026-08-30T~10:xx+07:00: ทำอะไรต่อ
+
+CORE-REQUEST-GM-040 ต่อสายแล้ว: runtime.py's append site (`if gm_action is not None:`)
+เช็ค getattr(self, "_gm_action_queued_confirm", None) ทันทีหลัง `actions = actions +
+[gm_action]` -- ค่านี้ต้องเป็นคู่ `(action, callback)` จับคู่ด้วย `is` กับ `gm_action` ตัวจริง
+เท่านั้นจึงจะยิง (ไม่ใช่ callback เปล่า -- ฉบับแรกของรอบนี้เองเป็น flag เปล่า pf-adversary หัก
+D1/D2 ได้ว่า callback ที่ตั้งไว้ตอน action ถูก withhold จะยิงผิดใบกับ action ของเฟรมถัดไปได้ ->
+แก้เป็นคู่ผูก identity แล้ว) เคลียร์ก่อนเรียก, fail-closed ด้วย try/except -> events.append
+เมื่อ callback เอง raise ไม่มีอะไรตั้งค่านี้วันนี้ (inert จนกว่าสาย GM จะเขียน setter ของตัวเองใน
+gm/ รอบหน้า)
+
+ไม่ได้แตะ gm/ ไฟล์ใดเลย (นอกเขต) และไม่ได้เขียนคำว่า OUTCOME_QUEUED ที่ไหน — สาย GM ยังเป็นคน
+ต่อสายฝั่งอ่าน (ตั้ง self._gm_action_queued_confirm = (action, callback) ใน
+make_gm_chat_command_action ก่อน return action ตัวเดียวกัน, แล้วเขียน "queued" ใน callback นั้น)
+
+เทสใหม่ 6 ใบใน tests/test_gm_chat_command_dispatch_wiring.py (ActionQueuedConfirmHookTests)
+พิสูจน์: (1) ไม่มี attribute = no-op (2) callback ยิงครั้งเดียวแล้วเคลียร์ (3) callback ที่ raise
+ไม่ทำ dispatch พัง (4) คู่ที่ตั้งไว้ตอน action ถูก withhold ไม่ยิงกับ action `==` แต่ไม่ `is`
+ของเฟรมถัดไปที่ไม่ได้ตั้งค่าอะไรเลย (ปิด D1) (5) callback ที่ re-arm ตัวเองระหว่างทำงาน ยิงเฉพาะ
+กับ action ที่คู่ใหม่ระบุเท่านั้น (ปิด D2) -> rounds/R237_hd6tac_*.md
+
+GT-127 audit ที่รอ escalate นี้ยังไม่ปิด — ปิดต่อเมื่อสาย GM ต่อฝั่งอ่านจริงและเขียน "queued" ได้
