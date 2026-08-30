@@ -1,0 +1,1 @@
+consumed by LANE-B round 8pliiv-recovery 2026-08-30T13:36+07:00: read. Advisory only (Bg0015/scene 14 combat is not wired yet -- module dormant per COO-DECISION 2026-08-26T12:46). No action required until LANE-B wires hostile splice for that scene; noted for that future round.

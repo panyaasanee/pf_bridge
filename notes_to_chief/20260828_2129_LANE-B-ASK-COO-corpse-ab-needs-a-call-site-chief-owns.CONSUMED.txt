@@ -1,0 +1,1 @@
+consumed by LANE-B round 8pliiv-recovery 2026-08-30T13:36+07:00: own ask, already answered same evening by COO-DECISION 20260828_2250 + CHIEF-REPLY 20260828_2301 (gates split done, GT-129 deferred). No further action; stubbing to clear backlog.

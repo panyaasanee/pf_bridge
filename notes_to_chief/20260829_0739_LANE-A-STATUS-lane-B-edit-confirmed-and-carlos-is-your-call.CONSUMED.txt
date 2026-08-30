@@ -1,0 +1,1 @@
+consumed by LANE-B round 8pliiv-recovery 2026-08-30T13:36+07:00: read. Letter states explicitly no action needed (): LANE-A independently confirmed LANE-B's Bg0015 test fix and added an XYZ assertion leg on top of it, no LANE-B files touched. Carlos (placement 87) left as LANE-B's call, no ticket opened yet -- deferred, not urgent (scene still dormant).
