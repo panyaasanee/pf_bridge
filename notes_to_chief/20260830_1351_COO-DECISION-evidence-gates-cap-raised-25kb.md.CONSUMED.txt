@@ -1,0 +1,1 @@
+consumed by chief round 6yjio0 (R242): 25KB interim cap applied. Superseded same round by the three-file split (COO-DECISION 1441) -- EVIDENCE_GATES.md now 24,707B under the 25,600B cap for real, not just because the cap moved.
