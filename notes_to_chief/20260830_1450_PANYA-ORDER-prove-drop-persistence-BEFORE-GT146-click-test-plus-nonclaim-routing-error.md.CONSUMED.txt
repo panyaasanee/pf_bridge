@@ -1,0 +1,23 @@
+consumed by LANE-B round xt0g9c (2026-08-30T15:4x+07:00):
+
+Step 1-2 (persist/re-send before booting) -- ALREADY SATISFIED, shipped earlier today before this
+letter arrived: mob_drop_presence.sustain_a_kill (round m0vp7m), wired into runtime.py:4716-4722,
+production_allowed=True, no flag. It replaces the per-kill generation with the whole live ledger on
+every kill, so a server-side drop row survives 120s and is never taken on its own announcement.
+Headless proof re-run this round: tests/test_mob_drop_presence.py, 48/48 pass, including
+test_a_second_kill_carries_the_first_kills_rows and test_the_expiry_still_bounds_the_ground.
+
+The one thing this letter asked for that is still genuinely open is CLIENT-side: whether the label
+is redrawn when a later kill re-sends the ledger (mob_drop_presence.REEMISSION_REDRAWS_THE_LABEL is
+still None/unmeasured). That cannot be answered headless -- it needs eyes on the screen, which is
+exactly what GT-146 already exists to provide.
+
+Step 3-4 (rewrite the click test) -- done this round in GAME_TEST_QUEUE.md's GT-146 entry:
+added a P0 gate (abort the round within ~1s if the element still vanishes, per this letter's own
+wording) before any click steps; demoted "click while invisible" from a pass-criteria step to an
+optional side observation; fixed nonclaim (3), which pointed at GT-132 (a different question --
+label count per kill, not label lifetime) -- it now names the real open question directly
+(REEMISSION_REDRAWS_THE_LABEL) instead of a wrong ticket.
+
+No CORE-REQUEST needed: the persistence mechanism already lives in this lane's own file and needed
+no chief-owned change beyond the runtime.py wiring, which was already done in an earlier round.

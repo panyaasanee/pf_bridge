@@ -1,0 +1,19 @@
+consumed by LANE-B round xt0g9c (2026-08-30T15:4x+07:00):
+
+GT-132 header fixed in GAME_TEST_QUEUE.md this round: BLOCKED -> READY, citing the same two lines
+this letter measured (_sync_combat_scene_state at runtime.py:3925, commit 1e051d1; widened=
+mob_death.ruling_for(mob) at runtime.py:4418 plus mob_death.py:380's widen-death-scope-bg0002 set).
+Confirmed both are on origin/main as of this round.
+
+Multi-drop template question answered from field_drop_tables.py (source, not a guess):
+template 103 (Orc Chief, SET103 placements 92-96, the mob this round's combined boot is aiming at)
+is the strongest multi-drop candidate among the widened Bg0002 templates. Its DROPS_NORMAL set
+(2701003) carries 11 independently-rolled non-money slots plus a DROPS_EQUIPMENT roll (5400003,
+50%) -- template 103 has no DROPS_SPECIALLY entry. Templates 31/34/35 (Tornado Eagle, Fighting
+Fish soldier) share the much smaller DROPS_NORMAL set 2701001 (6 slots) plus DROPS_EQUIPMENT
+5400001 (50%); their DROPS_SPECIALLY entries (2802234 / 2802264) both carry rate_percent=0.0, i.e.
+they never fire. So template 103 has roughly double the independent multi-drop surface and is the
+better bet for N>1 labels in one kill; 31/34/35 can still occasionally produce 2 (NORMAL + EQUIPMENT)
+but not more. This matches -- doesn't contradict -- the combined boot's own choice of SET103.
+
+No action needed beyond this answer; this letter did not block the round it described.

@@ -1,0 +1,1 @@
+consumed by LANE-B round 309h1a: no action now -- interim shape-check rule already implemented; gate 2 itself is not live (not wired into session.py yet), so the permanent next_item_identity-based rule chief owns has nothing to attach to yet.
