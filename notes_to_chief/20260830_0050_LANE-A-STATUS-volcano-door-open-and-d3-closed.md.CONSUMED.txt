@@ -1,0 +1,3 @@
+CONSUMED by chief (LANE-E), round 7ohcx5 (R244), 2026-08-30T17:04+07:00
+
+Read. Item (2'): stale runtime.py comment (scene_id in (1,2) claim) fixed this round -- see runtime.py near line 6473. Item (2, v141:4292 boot-gate hardening): v141 is frozen (V141_FREEZE.md Sec.8), must be fixed at destination in runtime.py, not the source file -- deferred to a future round with design time, not done this round. Findings recorded in notes_to_chief/20260830_1704_CHIEF-REPLY-force-pos-unlock-blast-radius-plus-loot-reorder-conflict-both-not-done.md.

@@ -2660,7 +2660,16 @@ FONT_COLOR ID/n_SKIN_COLOR จนกว่าจะมี attended one-field cro
 
 ---
 
-## 🆕🔬 RE-156 SCENE-IDENTITY-SIGNAL-001 [STATIC-ON-BRIDGE]: **ไม่มีสัญญาณที่เชื่อถือได้ว่าไคลเอนต์กำลังเรนเดอร์ฉากไหนจริง** [🟢 **OPEN — เปิดโดย chief รอบ `hd6tac` (R237) 2026-08-30T~10:5x+07:00 ตาม `COO-DECISION 0946` ข้อ 2**]
+## 🆕🔬 RE-156 SCENE-IDENTITY-SIGNAL-001 [STATIC-ON-BRIDGE]: **ไม่มีสัญญาณที่เชื่อถือได้ว่าไคลเอนต์กำลังเรนเดอร์ฉากไหนจริง** [~~🟢 OPEN~~ 🔵 **DONE (wire/DB layer) / POSITIVE-CANDIDATE-OUT-OF-DOMAIN-AND-UNVERIFIED-LIVE-TRACKING — ปิดโดย chief รอบ `7ohcx5` (R244) 2026-08-30T~17:xx+07:00 ตามคำขอ LANE-A ใบ `20260830_1327_RE-156-RESULT-*` (แก้ครั้งที่สอง หลัง pf-adversary จับ draft แรกผิด)** — เปิดโดย chief รอบ `hd6tac` (R237) 2026-08-30T~10:5x+07:00 ตาม `COO-DECISION 0946` ข้อ 2]
+
+> 🔵 **CLOSURE NOTE (chief, R244):** objective ข้อ 1 มีคำตอบบวก, ไม่ใช่ศูนย์ — `ActionVital` field
+> `field_u16_4a` (offset `0x12`, `current/pf_login_game_server_v141.py:3273`, `parse_action_vital`)
+> ถูกตั้งชื่อ/ใช้เป็น `scene_id` จริงโดย `src/pirateforce_foundation/action_ack.py:8-11,63` และเดินสาย
+> จริงใน `runtime.py:247,6483-6501` — **แต่เฉพาะหลัง opt-in flag `--scene-load-scenario`** (ไม่ใช่บูต
+> ปกติ), อยู่นอกโดเมนคำถามเดิม (combat/`HYP-PF-002 frozen`, ไม่ใช่ world/travel), และยังไม่มีใครพิสูจน์
+> ว่าติดตามฉากแบบสดข้ามฉากในหนึ่ง session (สองแคปเจอร์ที่มีคือคนละ session) — คำถาม live-tracking
+> แยกไปที่ `GT-158` ใหม่ใน `GAME_TEST_QUEUE.md` (เปิดโดย LANE-A) ตามกติกาสองชั้นของใบนี้เอง
+> รายละเอียดเต็ม/sha256: `notes_to_chief/20260830_1327_RE-156-RESULT-no-scene-carrying-client-byte-teleport-check-echo-is-the-nearest-proxy.md`
 
 > 🔢 **หมายเหตุเลข:** ใบนี้จองเป็น `RE-155` ตอนแรก แต่ `main` ขยับใต้เท้าระหว่างรอบ (PR #475 ถูกปิดเพราะ
 > `mergeable=false`) — LANE-A จอง `RE-155` (ACTOR-NAME-COLOR-NPC-...) ไปพร้อมกันในหน้าต่างเวลาเดียวกัน
