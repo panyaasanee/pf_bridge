@@ -8134,9 +8134,17 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt146.sqlite3 --ground-loo
    (ทาง 2 ของใบ ASK-COO ข้างบน, CORE-REQUEST ของรอบ `qb1ytr`) **ถอนแล้ว, ไม่ใช่ทางที่เดินต่อได้** — อ่าน
    `runtime.py:4600-4824` ซ้ำพบว่า `loot_actions()` อยู่ในตำแหน่งเร็วที่สุดที่ invariant ของ
    `CORE-REQUEST-007` อนุญาตอยู่แล้ววันนี้ ไม่มีที่ให้สลับต่อโดยไม่ผิดกฎ (ดู
-   `notes_to_chief/20260830_1743_LANE-B-DECISION-*.md`) ⇒ ทางที่เหลือที่จะปลดด่านนี้คือ (1) COO เคาะ
+   `notes_to_chief/20260830_1743_LANE-B-DECISION-*.md`) ⇒ ~~ทางที่เหลือที่จะปลดด่านนี้คือ (1) COO เคาะ
    ทาง 1/3/4 ของใบ ASK-COO เดิม หรือ (2) `RE-163` (เปิดใหม่รอบนี้ ใน `CLIENT_RE_QUEUE.md`) หาสาเหตุจริง
-   ของ `late_ms` แล้วชี้ทางแก้ที่ไม่ใช่ตำแหน่งคิว
+   ของ `late_ms` แล้วชี้ทางแก้ที่ไม่ใช่ตำแหน่งคิว~~
+   🔴 **ทั้งสองทางปิดแล้ว ไม่มีทางที่สาม (LANE-B รอบ scheduled 2026-08-30T19:4x+07:00):**
+   (1) `notes_to_chief/20260830_1742_COO-DECISION-label-life-drop-announcement-rule-stands.md` —
+   ยืนกฎเดิม (ห้ามส่งซ้ำ) ทาง 4 (NO-RESULT ที่รู้สาเหตุ) คือทางเดินต่อ ไม่มีโค้ดให้แก้;
+   (2) `notes_to_chief/20260830_1805_RE-163-RESULT-*.md` — `late_ms` เป็น sender-side diagnostic
+   overhead ใน `current/pf_login_game_server_v141.py` (frozen) ไม่ใช่ตำแหน่งคิวหรือ network latency,
+   `BUILD_IMPACT_NONE`, ไม่มีทางแก้จาก `src/` ⇒ **P0 นี้ยังคง ABORT ทุกรอบต่อไป จนกว่าจะมีบูต attended
+   ที่วัด `REEMISSION_REDRAWS_THE_LABEL` ตรง ๆ ตามเงื่อนไขที่ COO-DECISION ข้อ 23-25 วางไว้ (ยิงซ้ำครั้งเดียว
+   แล้ววัดว่าป้ายกลับมาไหม ก่อนเสนอ COO ใหม่) — ไม่ใช่งานที่ค้างอยู่กับ LANE-B วันนี้**
 1. server ก่อน client เสมอ · เข้าเกม (ปุ่มกลางจาก 5 ปุ่มแถวล่าง · ซ้ายสุด = ลบตัวละคร ห้ามกด)
 2. **อัดวิดีโอตั้งแต่ก่อนเข้าแมพเสร็จ** — เฟรมของตกออก **ครั้งเดียวต่อเซสชัน** ที่ TargetPos แรกหลัง runtime ack · ออกตอนไม่ได้อัด = NO-RESULT · **ห้ามพิมพ์ตัวอักษรตลอดรอบ**
 3. ในแมพ **ห้ามแตะ `W/A/S/D` และ `Q`/`E`** (ยิง `TargetPosVital` ทิ้ง) · จัดกล้องด้วย **คลิกขวาค้างลาก** เท่านั้น · หันไปทาง +X · **S0** ให้เห็น X/Y บน HUD

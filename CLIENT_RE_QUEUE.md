@@ -2771,7 +2771,7 @@ FONT_COLOR ID/n_SKIN_COLOR จนกว่าจะมี attended one-field cro
 
 ---
 
-## 🆕🔬 RE-161 CORPSE-POSE-APPLIES-AT-NEXT-RECOMPOSE-NOT-AT-DEATH-FRAME-001 [STATIC-ON-BRIDGE]: **ทำไมโมเดลไม่ล้มตอนได้เฟรมตาย แต่ล้มตอนคิลถัดไปมาถึงแทน** [🟢 **OPEN — เปิดโดย LANE-B รอบ `qb1ytr` 2026-08-30T16:4x+07:00 จากผล `20260830_1554_GT143-GT132-GT149-RESULT-*.md` (กะ1-A บูตจริง, ของแถมที่มีค่าที่สุดของรอบนั้น)**]
+## 🆕🔬 RE-161 CORPSE-POSE-APPLIES-AT-NEXT-RECOMPOSE-NOT-AT-DEATH-FRAME-001 [STATIC-ON-BRIDGE]: **ทำไมโมเดลไม่ล้มตอนได้เฟรมตาย แต่ล้มตอนคิลถัดไปมาถึงแทน** [~~🟢 OPEN — เปิดโดย LANE-B รอบ `qb1ytr` 2026-08-30T16:4x+07:00~~ 🔵 **DONE / BOUNDED-NEGATIVE — บริโภคโดย LANE-B (รอบ scheduled) 2026-08-30T19:4x+07:00 ตามผล `notes_to_chief/20260830_1818_RE-161-RESULT-TASK-QUEUE-NOT-CENSUS-GENERATION.md`: ไม่พบ census-generation/sequence field ใด ๆ ในเส้นทาง wire→task; current `MOB_DEATH_DEAD` full recomposed census เพียงพอสร้าง/คิว `CActorTask_Dead` อยู่แล้ว ท่าล้มค้างเป็น client task-queue/model-readiness timing (`0x4A0C90`/`0x4A0A50`/model bit `[actor+0x70]&0x40`) ไม่ใช่กลไก sequence ที่เซิร์ฟเวอร์ควบคุมได้ — `BUILD_IMPACT_NONE`, ไม่มี source ให้แก้ตามนี้ (nonclaim 3 ของใบเปิดเองอนุญาตให้สาย B ต่อสายถ้า RE ชี้ sequence bump ได้ แต่ RE ไม่พบกลไกนั้น) ปิดเป็น method ceiling ตามที่ผลระบุ**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง 2026-08-30T16:4x+07:00: `RE-161`/`GT-161` = 0 hit ทั้งสองไฟล์ ·
 > สูงสุดก่อนหน้า = `GT-160`/`RE-157` (`GT`/`RE` ใช้ตัวนับเดียวร่วมกัน) ⇒ ใบนี้คือ `161`
@@ -2838,7 +2838,7 @@ MOB_DEATH_FRAMES_CENSUS_RECOMPOSE       actor_count=97 wire_actors=97 target=0x2
 
 ---
 
-## 🆕🔬 RE-163 MOB-LOOT-DROP-LATE-MS-SOURCE-001 [STATIC-ON-BRIDGE]: **เฟรม `MOB_LOOT_DROP` มาถึงช้า 351-949ms — ช้าเพราะอะไร ไม่ใช่ตำแหน่งคิว** [🟢 **OPEN — เปิดโดย LANE-B รอบใหม่ (scheduled) 2026-08-30T17:4x+07:00 หลังยืนยันซ้ำว่าตำแหน่งในลิสต์ `actions` ไม่ใช่สาเหตุ**]
+## 🆕🔬 RE-163 MOB-LOOT-DROP-LATE-MS-SOURCE-001 [STATIC-ON-BRIDGE]: **เฟรม `MOB_LOOT_DROP` มาถึงช้า 351-949ms — ช้าเพราะอะไร ไม่ใช่ตำแหน่งคิว** [~~🟢 OPEN — เปิดโดย LANE-B รอบใหม่ (scheduled) 2026-08-30T17:4x+07:00~~ 🔵 **DONE / BOUNDED — บริโภคโดย LANE-B (รอบ scheduled) 2026-08-30T19:4x+07:00 ตามผล `notes_to_chief/20260830_1805_RE-163-RESULT-LATE-MS-INCLUDES-SENDER-HEXDUMP.md`: ตัวส่งจริงคือ `current/pf_login_game_server_v141.py:7746-7780` (frozen) ไม่ใช่ `runtime.py` — `late_ms` ที่วัดได้รวม `sendall()` ของเฟรม DEAD (17,910B) ก่อนหน้า บวก `live()`/console/full-hexdump/capture-write ของ DEAD ก่อน loop จะถึง LOOT ไม่ใช่เวลาที่ packet เดินทางถึง client จริง — `BUILD_IMPACT_NONE`: ห้าม reorder LOOT ต่อจากผลนี้ (ยืนยันซ้ำการถอนคำขอของรอบก่อน) และห้ามใช้ `late_ms` ปัจจุบันเป็น network/client-arrival metric ถ้าต้องการ telemetry แยก (`queue_wait_ms`/`sendall_duration_ms`/diagnostic-after-send) เป็นการออกแบบจุดวัดใหม่นอก v141 frozen ซึ่งเป็นของ chief ไม่ใช่ CORE-REQUEST ที่สาย B เปิดเองในรอบนี้ (ยังไม่มีใครขอ)**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง 2026-08-30T17:4x+07:00: `RE-163`/`GT-163` = 0 hit ทั้งสองไฟล์ ·
 > `RE-162` ถูกจองชื่อ/เนื้อหาไว้แล้วโดย `notes_to_chief/20260830_1655_PANYA-ORDER-open-RE-162-*.md`
