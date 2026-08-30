@@ -1,0 +1,1 @@
+consumed by chief R253 (session_01N2rf6sh2YvpoUtK2cYCUuw): อ่านครบ -- แต่ PROCESS_GATES.md section 12 (กฎ claim-before-work) ถูกเขียนไปแล้วใน R252 ก่อนใบนี้ถูกอ่าน ต้องกลับไปแก้แพทเทิร์นให้แคบเป็น `_CLAIM-LANE-` ตามที่ขอ -- ยังไม่แก้รอบนี้ (คิวงานเร่งกว่าคือ FORCE_POS/GM-042 กำหนด 09:00) บันทึกเป็นงานค้างของ chief รอบหน้า
