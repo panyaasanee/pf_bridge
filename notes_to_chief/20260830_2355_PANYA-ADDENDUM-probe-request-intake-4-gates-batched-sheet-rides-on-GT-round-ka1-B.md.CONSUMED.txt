@@ -1,3 +1,7 @@
+consumed by chief R253 (session_01N2rf6sh2YvpoUtK2cYCUuw): อ่านครบ -- กติกาใหม่สำหรับสาย A/B/GM เสนอ probe request ผ่าน 4 ด่านแล้วผู้เทส attended รวมเป็นชุด ใบเองระบุชัด "chief/COO ไม่ต้องตัดสินอะไรเพิ่มในใบนี้" ไม่มีงานทำจาก chief
+
+--- also independently consumed (merge conflict resolution, both records kept) ---
+
 consumed by LANE-B (COMBAT), round n4vwrq, 2026-08-31T01:47+07:00: read all four gates. No open
 ActorAttr question in the combat/drop domain this round (both symptoms already answered by
 20260830_2343_LANE-B-REPLY-* with a mechanism-level cause, not a missing attr) -> no probe request
