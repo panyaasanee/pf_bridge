@@ -1,26 +1,32 @@
-# 🔴 อ่านไฟล์นี้ก่อนจะ "ไปถอด" อะไรใหม่จากไบนารี
+# [PROPOSED][LOCAL] 🔴 อ่านไฟล์นี้ก่อนจะ "ไปถอด" อะไรใหม่จากไบนารี
 
-## 🔴 V4 checkpoint ปัจจุบัน — duplicate-safe reference composition
+## [MEASURED][IMAGE] 🔴 V4 checkpoint ปัจจุบัน — duplicate-safe reference composition
 
-**A5 ยัง mismatch 386 instances / 3 field locations / 4 field+reason points**; IMAGE และ CAPTURE ยังแยกชั้นหลักฐาน.
+[MEASURED][CAPTURE] **A5 ยัง mismatch 386 instances / 3 field locations / 4 field+reason points**; CAPTURE result นี้ไม่ถูก rewrite เป็น IMAGE fact.
 
-ลำดับอ่าน:
+[MEASURED][IMAGE] Full pinned V1→V2→V3→V4 overlay replay ผ่านและ current IMAGE-static status คือ P1 255/365 CLOSED, OPEN 110.
 
-1. `PF_V4_MANIFEST.md` — commit marker, hashes และ executable duplicate guards
-2. `PF_V4_HANDOFF.md` — V3→V4 delta และกฎ reference-only composition
-3. `PF_V4_FIELD_VALIDATION.md` + canonical `PF_V2_FIELD_VALIDATION.tsv` — red CAPTURE replay; ไม่มี V4 TSV สำเนา
-4. `PF_V4_EFFECTIVE_STATUS.md` / `PF_V4_P1_OPEN.tsv` — P1 255/365 CLOSED, OPEN 110
-5. Daily / embedded-child / static-type artifacts — compose ตาม action; ห้าม append ทุก TSV ตรง ๆ
+[PROPOSED][LOCAL] ลำดับอ่าน:
 
-V4 stored/reference A2 8,657 rows; logical validation-only 8,721. Composition มี 4 refs + 2 removals และไม่ copy child fields.
+1. [PROPOSED][LOCAL] `PF_V4_MANIFEST.md` — commit marker, hashes และ executable duplicate guards
+2. [PROPOSED][LOCAL] `PF_V4_HANDOFF.md` — V3→V4 delta และกฎ reference-only composition
+3. [PROPOSED][LOCAL] `PF_V4_FIELD_VALIDATION.md` + canonical `PF_V2_FIELD_VALIDATION.tsv` — red CAPTURE replay; ไม่มี V4 TSV สำเนา
+4. [PROPOSED][LOCAL] `PF_V4_EFFECTIVE_STATUS.md` / `PF_V4_P1_OPEN.tsv` — current IMAGE-static derived status
+5. [PROPOSED][LOCAL] Daily / embedded-child / static-type artifacts — compose ตาม action; ห้าม append ทุก TSV ตรง ๆ
 
-Duplicate guard: exact files 0, within-TSV rows 0, delta+dedup keys 3,404 unique, base targets 576 unique. Status snapshots ซ้ำโดยตั้งใจ 110 distinct/312 occurrences และทุกแถวเป็น `NOT_A_NEW_EVIDENCE_ROW`.
+[MEASURED][IMAGE] V4 stored/reference A2 8,657 rows; logical validation-only 8,721. Composition มี 4 refs + 2 removals และไม่ copy child fields.
 
-ItemAttr 13R+13W และ 15R+15W ต้องคงเป็น alternatives; VitalData serializer ยัง withheld. Static identity ไม่ activate A2/A5.
+[MEASURED][OUTPUT-AUDIT] Full namespace census = 121 files / 46 TSV / 21,918 TSV data rows; exact files 0, within-TSV rows 0, delta+dedup keys 3,404 unique, base targets 576 unique. Status snapshots ซ้ำโดยตั้งใจ 110 distinct/312 occurrences และทุกแถวเป็น `NOT_A_NEW_EVIDENCE_ROW`.
+
+[MEASURED][OUTPUT-AUDIT] Bounded A2 ADD tuple `(message,schema_variant,direction,new_order,new_tag,new_field_offset,new_len,new_gate_condition)` = 2,194/2,194 unique, duplicate groups 0; guard นี้ไม่กำหนด universal identity ให้ schema อื่น.
+
+[MEASURED][IMAGE] ItemAttr 13R+13W และ 15R+15W คงเป็น alternatives; VitalData serializer ยัง withheld. Static identity ไม่ activate A2/A5.
 
 [DECLARED-SCOPE] Local-only ใต้ `pf_bridge\external`; ไม่มี server/client runtime, workflow, queue, lease หรือ Git ถูกแก้/รัน.
 
-## 🔒 Frozen V3 index — ข้อความหลัง marker นี้คือ V3 index เดิมครบทุกไบต์
+[PROPOSED][LOCAL] Reproduce ด้วย `py -3 -B pf_build_v4_manifest.py --check`.
+
+## [MEASURED][OUTPUT-AUDIT] 🔒 Frozen V3 index — ข้อความหลัง marker นี้คือ V3 index เดิมครบทุกไบต์
 <!-- PF_V4_FROZEN_V3_INDEX_BEGIN bytes=11466 sha256=52be24d7b410d87aef2ba4a4aec962e4314cbf554d12a78327fdd55d82626008 -->
 # 🔴 อ่านไฟล์นี้ก่อนจะ "ไปถอด" อะไรใหม่จากไบนารี
 
