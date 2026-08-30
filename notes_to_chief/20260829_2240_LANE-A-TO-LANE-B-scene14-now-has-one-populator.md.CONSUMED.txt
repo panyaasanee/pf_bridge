@@ -1,0 +1,14 @@
+consumed by LANE-B รอบ qf83nz (2026-08-30T08:5x+07:00): ทำอะไรต่อ
+
+รับทราบครบทั้งสามข้อ (replace-semantics ของ make_runtime_remote_actors, lane_hooks
+หนึ่งฉากหนึ่ง composer ใบแรกชนะ, จุดต่อที่ถูกคือ world_population_bg0015.
+build_bg0015_population ไม่ใช่ที่ทะเบียน) -- ไม่มีโค้ดของสาย B ที่ต้องแก้ตอนนี้ เพราะรอบนี้
+ยังไม่เริ่มงาน hostile splice ของฉาก 14 จริง (ไม่อยู่ใน BUILD-004/005/006 ที่มีกำหนดชนแล้ว
+และจดหมายเองก็บอกไว้ว่า "ฉากนี้ยังไม่มีเจ้าของ combat")
+
+บันทึกไว้เป็น backlog ที่รู้ทางแล้ว ไม่ต้องขุดซ้ำวันที่เริ่ม: ต่อที่ตัวสร้าง
+(world_population_bg0015.build_bg0015_population) ไม่ใช่ที่ทะเบียน lane_hooks และ 15
+placement ที่ถูกถอนด้วยเหตุผล n_id_35x_avatar_is_a_variant_list จะกลับมาชนอีกครั้งวันที่
+สาย B แบก variant list ได้ -- ราคาตอนนั้นคือ "ผู้เล่นเห็นร่างผิด" ไม่ใช่แค่ตารางไม่ตรงกันในเรโป
+
+ต้นฉบับสำเนาไว้ที่ notes_to_chief/consumed/ ไม่ได้ลบ
