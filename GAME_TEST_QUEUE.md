@@ -8331,6 +8331,21 @@ sha สำเนาหลังตอบปฏิเสธ/หลังเขี
 
 ## GT-148 SCENE17-STOWAWAY-ACTORS-FIRST-EYES-001 [attended, in-game]: ออกทะเลกับ Columbus แล้ว **ไคลเอนต์ยังโชว์ actor ของ Port Royal ที่ถูกส่งไปตอนล็อกอินอยู่หรือไม่**  [PENDING · เปิดโดย LANE-A (WORLD) รอบ `2pdf6j`]
 
+> 🔴 อัปเดตโดย chief รอบ `65etwo` 2026-08-30T~23:1x+07:00: LANE-A เปิด CORE-REQUEST
+> (`notes_to_chief/20260830_2148_LANE-A-CORE-REQUEST-columbus-crossing-owes-a-population-handoff.md`)
+> ให้ต่อสาย `world_m2_crossing_handoff.crossing_handoff()` เข้าสาขาสำเร็จของ Columbus ใน `runtime.py`
+> รอบนี้ต่อแล้ว — **ไม่เปิดใบใหม่ซ้ำ** (ใบนี้ถามคำถาม client-observable เดียวกันเป๊ะกับที่ CORE-REQUEST
+> นี้ตอบชั้น wire/DB แล้ว: "จอยังโชว์ Port Royal อยู่ไหมหลังออกทะเล") ปรับ **wire/DB criteria ข้อ (ค)**
+> ด้านล่างให้ตรงของจริงที่ลงแล้วแทน: บรรทัดที่คัดลอกตอนนี้คือ `WORLD_M2_CROSSING_HANDOFF scene=17
+> kind=clear held=108 composed=YES dispatched=YES pc=17B frame=27B slot=before_teleport reason=...`
+> (ยืนยันด้วย probe สดผ่าน harness เดียวกับ `tests/test_columbus_quest_dispatch_wiring.py` รอบนี้ ไม่ใช่
+> การอ่านซอร์สเฉย ๆ) มาก่อนบรรทัด teleport เสมอ (`slot=before_teleport`) ตามด้วย `WORLD_POP_STOWAWAYS`
+> เดิมที่ยังพิมพ์อยู่เหมือนเคย — คัดลอกทั้งสองบรรทัดลง result ไม่ใช่เลือกอันเดียว สวีตเต็มเขียว(cloud
+> sanity) 5578 passed 0 failed หลังต่อสาย · รอ merge/gate จริงบนสะพานก่อนบูตใบนี้ (ดู `PR_STATE.txt`)
+> P1/P2 เดิมข้างล่างยังใช้ได้ทั้งคู่: ตอนนี้เฟรม clear ถูกคิวจริงแล้ว ถ้าผู้เทสยังเห็น actor เดิม (P1)
+> แปลว่าไคลเอนต์รับเฟรมแล้วไม่ทำตาม (ไม่ใช่ว่าเซิร์ฟเวอร์ยังไม่ส่ง) — ข้อค้นพบคนละความหมายจากตอนใบนี้เปิด
+> ครั้งแรก เขียนไว้ในผลให้ชัดว่าทดสอบตอนที่เฟรมถูกส่งแล้ว
+
 > NUMBERING: ใบนี้เปิดเป็นเลข 147 (grep ตอน 14:2x: เลขสูงสุดที่ใช้ไป = 146) แล้ว **ขยับเป็น `GT-148` ด้วยตัวเอง** ตามกฎออกเลขข้อ 3 ที่หัวไฟล์ — ชนกันจริง = คนที่ push ทีหลังขยับเลขของตัวเอง แล้วเขียนเหตุผลไว้ในใบ: ใบ COUNTER-RESYNC-RECOVERY-TOOL-001 ลง main ก่อนใบนี้ ⇒ ใบนั้นถือเลข 147 ไว้ทั้งใบ ไม่ถูกแตะแม้แต่ตัวอักษรเดียว
 > ที่มา (วัดรอบนี้จากตารางแช่แข็ง ผ่าน `world_population_handoff` + `tests/test_world_population_handoff.py::ArrivalStowawayTests`): census ส่ง actor `bg0001` **108 ตัวจาก 115 แถวในตาราง ครั้งเดียวบนเส้นทางล็อกอิน** และ **ไม่มีอะไร recompose ระหว่างเซสชัน** ⇒ ตอนข้ามไปทะเลเซิร์ฟเวอร์ไม่ได้ส่งคอลเลกชันใหม่เลย · สี่ตัวยืนห่างจุดขาเข้าทะเล `(0,0,0)` ไม่ถึง 2000 หน่วย: `Legend Jack` 1226.6u · `Plato` 1646.7u · `Qina` 1915.8u · `Betula` 1935.9u (รัศมี 5000u: **census ที่ส่งจริง 10 ตัว** · ตารางดิบ 11 — แถว `Filet` ที่ 2530u ไม่เคยถูกส่ง) 🔴 **เลข 4 เป็นของจุด `(0,0,0)` ซึ่งเป็น decree ไม่ใช่ค่าที่วัด** — ถ้าลงในแถบพื้นของฉากเอง (z 746.04-1272.74) จะเป็น **5 ตัว** (`Kaim` เข้ามา) และระยะสูงต่ำยุบจาก ~930 เหลือไม่เกิน ~341
 
