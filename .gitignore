@@ -169,6 +169,12 @@
 !/.claude/
 !/.claude/**
 
+# ---- but never the per-session worktree checkouts Claude Code creates for
+# isolated background agents: these are local execution scratch space (a full
+# nested git checkout, often still locked by a running agent), not repo
+# content, and committing one would capture broken/in-progress git state.
+/.claude/worktrees/
+
 # ---- one file per round, so two pull requests never touch one line ----
 # prompt v4 sends each cloud round's log to rounds/R<NNN>_*.md instead of
 # inserting at line 3 of CHIEF_CONTINUATION.md, which collided every time.
