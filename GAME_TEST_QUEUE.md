@@ -8402,3 +8402,61 @@ OBSERVER_CONFIRMED  :
 `notes_to_chief/20260829_2222_PANYA-DIRECTIVE-productive-org-8-items-*.md` · `notes_to_chief/20260829_2233_PANYA-DIRECTIVE-ADDENDUM-items-9-10-*.md` · `notes_to_chief/20260829_2246_COO-DECISION-directive-2222-parameters-set.md` · `GT-009` · `GT-012` · `GT-016` (ใบห้าช่อง คนละขอบเขต)
 
 **ผู้เปิดใบ: chief (สาย E) รอบ `k882hm` 2026-08-29T23:1x+07:00** — ผลกลับมาที่ chief บริโภค
+
+---
+
+## 🆕🔬 GT-158 ACTIONVITAL-FIELD-U16-4A-LIVE-SCENE-TRACKING-001 [attended, in-game, opt-in scenario required]: `field_u16_4a` ของ `ActionVital` ถูกตั้งชื่อ/ใช้เป็น `scene_id` โดย `action_ack.py` -- มันติดตามฉากปัจจุบันของไคลเอนต์แบบสดจริงหรือเป็นค่าที่ผูกไว้ตายตัวต่อการทดลอง
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง 2026-08-30T13:5x+07:00: `GT-158`/`RE-158` = 0 hit ทั้งสองไฟล์ ·
+> สูงสุดก่อนหน้า `RE-157` (`GT`/`RE` ใช้ตัวนับเดียวร่วมกัน ตามกฎที่ `RE-152` หัวใบเคยระบุไว้)
+> ⇒ ใบนี้คือ `GT-158` · ใบ `RE-085`-`RE-157`/`GT-001`-`GT-152` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ
+
+### ที่มา [วัดแล้ว โดย pf-adversary รอบตรวจ `RE-156` ของ LANE-A, 2026-08-30T13:5x+07:00]
+
+ระหว่างตรวจ draft แรกของ `RE-156` (ซึ่งอ้างผิดว่าไม่มี client->server byte พกเลขฉากเลย) `pf-adversary`
+พบว่า `current/pf_login_game_server_v141.py:3250-3284` `parse_action_vital`'s field `field_u16_4a`
+(offset `0x12`) ถูก `src/pirateforce_foundation/action_ack.py:8-11,63` ตั้งชื่อ/เทียบเป็น `scene_id` ตรงๆ
+และเดินสายจริงใน `src/pirateforce_foundation/runtime.py:247,6483-6501` (หลัง `--scene-load-scenario`
+เท่านั้น, `src/pirateforce_foundation/app.py:98,287-288`) แคปเจอร์จริงสองชุดเห็นค่าต่างกันตรงกับฉากจริง
+ที่ต่างกัน: `reports/PF_SCENE006_EA7D_ATTACK_COMMAND_RUNTIME_PASS_20260815.md:21` = ฉาก 2,
+`reports/PF_SCENE007_PORT_ROYAL_EA7D_ACTION_ACK_RUNTIME_PASS_20260816.md:13,27-28` = ฉาก 1 (Port Royal)
+**แต่ทั้งสองเป็นคนละ session คนละบูต** ไม่มีใครเดินข้ามฉากในหนึ่ง session แล้ววัดว่าค่าขยับตาม
+
+### objective
+
+แยกสองสมมติฐานที่ static ปัจจุบันแยกไม่ออก:
+1. **(A) ไคลเอนต์เขียนฉากปัจจุบันจริงลงฟิลด์นี้ทุกครั้งที่ส่ง `ActionVital`** — ถ้าจริง = สัญญาณยืนยันฉาก
+   ที่ใช้งานได้ (แม้จะยังอยู่หลังแฟล็ก opt-in และอยู่นอกโดเมน world/travel เดิม)
+2. **(B) ค่านี้ถูก bake ไว้ต่อ scenario/producer และบังเอิญตรงกับฉากจริงของการทดลองแต่ละครั้ง** — ถ้าจริง
+   = ไม่ใช่สัญญาณอะไรเลย เป็นเรื่องบังเอิญของการตั้งค่าเทสสองชุดที่ต่างกัน
+
+การทดลอง: ใน session เดียว ให้ตัวละครอยู่ฉาก A แล้วส่ง `ActionVital` (ผ่าน `--scene-load-scenario`
+ตามที่กลไกปัจจุบันบังคับ) บันทึกค่า `field_u16_4a` แล้วเปลี่ยนไปฉาก B (เท่าที่ทำได้ภายใต้ M2/สถานะ paused
+วันนี้ -- อาจใช้ฉากที่เปิดล็อกอินอยู่แล้วสองฉากคนละบูตที่ควบคุมตัวแปรอื่นให้เหมือนกันที่สุด ถ้าข้าม
+session ในตัวเดียวไม่ได้ภายใต้ข้อจำกัดปัจจุบัน) ส่ง `ActionVital` อีกครั้งในฉาก B แล้วเทียบค่า
+
+### pass criteria
+
+**ชั้น client-observable (ปิดใบนี้ได้ ชั้นเดียวพอเพราะคำถามเป็นคำถาม client-observable ล้วน):**
+- ค่า `field_u16_4a` ที่สังเกตได้จริงจากไคลเอนต์ต่างกันตามฉากจริงที่ต่างกัน ⇒ สมมติฐาน (A) ได้รับการยืนยัน
+- ค่าเดิมไม่ขยับตามฉาก (คงที่ไม่ว่าจะยืนฉากไหน) ⇒ สมมติฐาน (B) ได้รับการยืนยัน, field นี้ตกจากการเป็น
+  ผู้สมัครสัญญาณยืนยันฉาก
+
+### nonclaims
+
+1. ไม่อ้างว่าใบนี้ปลดล็อกอะไรใน production -- กลไกทั้งหมดอยู่หลัง `--scene-load-scenario` และเป็น
+   `HYP-PF-002 frozen` ของโดเมน combat ไม่ใช่ world/travel
+2. ไม่อ้างว่าผลของใบนี้ (ไม่ว่าทางไหน) เปลี่ยนสถานะของ `scene_admission_gate`/`world_travel_gate`
+   หรือ M2 -- คนละกลไกกันเป๊ะ, เปิดใบนี้เพื่อตอบคำถามที่ `RE-156` เปิดค้างไว้เท่านั้น
+3. ไม่อ้างว่าการทดลองนี้ต้องรอ M2 ปลดล็อกก่อน -- ถ้ามีฉากที่เปิดล็อกอินอยู่แล้ววันนี้สองฉาก (เช่น 1 กับ 14)
+   ที่ยิง `ActionVital` ได้ทั้งคู่ภายใต้ opt-in scenario เดียวกัน อาจทดลองข้ามบูตแทนได้ -- ผู้รับใบตัดสินเอง
+   ว่าการควบคุมตัวแปรแบบไหนน่าเชื่อถือพอ
+
+### links
+ใบผลที่เปิดคำถามนี้: `notes_to_chief/20260830_1327_RE-156-RESULT-no-scene-carrying-client-byte-teleport-check-echo-is-the-nearest-proxy.md`
+(ฉบับแก้ 2026-08-30T13:5x+07:00) · `RE-156` (ปิดชั้น wire/DB แล้ว, แยกชั้น client-observable มาที่นี่) ·
+`src/pirateforce_foundation/action_ack.py` · `src/pirateforce_foundation/runtime.py:247,6483-6501` ·
+`src/pirateforce_foundation/app.py:98,287-288` · `tests/test_action_ack.py`
+
+**ผู้เปิดใบ: LANE-A (สาย A · WORLD) รอบ `re156-answer` 2026-08-30T13:5x+07:00** — คำถามอยู่นอกโดเมนของ
+สายนี้ (combat ไม่ใช่ world) แต่เปิดใบไว้ตามกฎ "เจอสิ่งที่ไม่รู้ ให้เปิดใบ" แทนการหยุดสร้างของเพื่อค้นเอง
