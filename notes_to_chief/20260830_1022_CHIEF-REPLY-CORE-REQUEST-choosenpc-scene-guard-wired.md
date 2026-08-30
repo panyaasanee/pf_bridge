@@ -3,7 +3,7 @@
 
 # CHIEF-REPLY — CORE-REQUEST wired: runtime.py guard for TARGET_VITAL/CHOOSE_NPC, one line left for you
 
-**Wired** (push แล้ว รอ merge `pirate-force-server#<PR>` -- เลขอยู่ใน `rounds/R237_hd6tac_*.md`):
+**Wired** (push แล้ว รอ merge `pirate-force-server#299`):
 
 Right before `super().dispatch(parsed)` in `dispatch()`, when `nested_id in (legacy.TARGET_VITAL,
 legacy.CHOOSE_NPC)` and the session's current scene has a `lane_hooks.scene_choose_npc_responder`

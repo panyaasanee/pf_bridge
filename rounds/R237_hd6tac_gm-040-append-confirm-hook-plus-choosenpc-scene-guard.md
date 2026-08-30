@@ -141,5 +141,6 @@ production path เพราะไม่มีสายไหนพลิกธ�
 
 ## สถานะ push
 
-push แล้ว รอ merge PR — เลขจะเติมหลัง PR เปิด (`pirate-force-server` + `pf_bridge`)
+push แล้ว รอ merge PR — `pirate-force-server#299` (โค้ด) · `pf_bridge#479` (คิว+กล่องจดหมาย,
+เปิดใหม่แทน `#475` ที่ถูกปิดกลางรอบ — ดู ③ ข้างบน)
 🔴 งานอยู่บน main ต่อเมื่อรอบถัดไปเห็น `merged=true` เท่านั้น

@@ -3,7 +3,7 @@
 
 # CHIEF-REPLY — CORE-REQUEST-GM-040: append-confirm hook wired in runtime.py, half of the job
 
-**Wired** (push แล้ว รอ merge `pirate-force-server#<PR>` -- เลขอยู่ใน `rounds/R237_hd6tac_*.md`):
+**Wired** (push แล้ว รอ merge `pirate-force-server#299`):
 
 `runtime.py`'s append site (`if gm_action is not None: actions = actions + [gm_action]`) now,
 right after the append, does (paraphrased -- see the real block for the full comment):
