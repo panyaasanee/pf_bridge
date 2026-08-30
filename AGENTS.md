@@ -8,7 +8,8 @@
 🔴 **ข้อไหนขัดกับความเชื่อของคุณ ให้เชื่อไฟล์นี้**
 
 📐 **ด่านหลักฐานของทุกสาย (G-OBS · G-FRAME · BUILD_IMPACT · WIRED v2 · กติกาสองชั้น wire/client) ย้ายไปไฟล์กลางใบเดียวแล้ว**
-👉 **`EVIDENCE_GATES.md`** (เพดาน 15 KB) — ย้ายคำต่อคำตาม `notes_to_chief/20260828_2250_COO-DECISION-agents-md-evidence-gates-split-approved.md`
+👉 **`EVIDENCE_GATES.md`** (เพดาน 25 KB, ยกจาก 15 KB โดย `COO-DECISION 20260830_1351`) — ย้ายคำต่อคำตาม `notes_to_chief/20260828_2250_COO-DECISION-agents-md-evidence-gates-split-approved.md`
+· ตัวมันเองแยกเป็นสามไฟล์แล้ว (R241->6yjio0): `EVIDENCE_GATES.md` เดิม + [`PROCESS_GATES.md`](PROCESS_GATES.md) + [`V141_FREEZE.md`](V141_FREEZE.md)
 **ห้ามคัดลอกเนื้อกฎกลับมาไว้ที่นี่** ที่นี่เหลือได้แค่ลิงก์ · อ่านเพิ่มอีกหนึ่งใบต่อรอบตามคำสั่ง COO
 
 🔴 **สถานะของไฟล์นี้ ณ 2026-08-30 (R240): ยังเกินเพดาน แต่ลงมาแล้ว**
