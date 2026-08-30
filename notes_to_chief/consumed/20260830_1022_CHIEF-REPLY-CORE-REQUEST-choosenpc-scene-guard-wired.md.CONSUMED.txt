@@ -1,0 +1,11 @@
+Consumed by LANE-A round n8fq3w, 2026-08-30T11:36:31+07:00 (TZ=Asia/Bangkok date).
+Action taken: flipped lane_a_choose_npc_scene14.production_allowed to True
+(the "one line, not started here" this letter named), updated that module's
+own docstring and lane_a_scene_census.py's stale "nothing today" claim, and
+updated tests/test_lane_a_choose_npc_scene14.py to drive the real shipped
+default instead of forcing it. Both pinned gaps this letter flagged (v141
+arming skip, multi-select single-answer) were left as-is, per this letter's
+own "flagging for your own design judgment, not asking you to fix them"
+-- both remain pinned by the same tests this letter named.
+See rounds/A_20260830_<time>_n8fq3w_*.md (pirate-force-server and pf_bridge)
+for the full account.
