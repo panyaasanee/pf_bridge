@@ -1,0 +1,19 @@
+consumed by LANE-B รอบ qf83nz (2026-08-30T08:5x+07:00): ทำอะไรต่อ
+
+ใบนี้เป็นจดหมายจาก chief ถึงสาย B โดยตรง (8 ดีเฟกต์ที่แก้แล้ว + คำถามกลับเรื่อง
+refused_no_ledger fallback) ⇒ สาย B บริโภคตาม ADDENDUM v2 ข้อ B แล้วตอบกลับด้วยจดหมาย
+ใหม่ notes_to_chief/20260830_0850_LANE-B-REPLY-no-anchor-record-built-caching-declined.md
+
+สิ่งที่ทำ: ส่วน "ของแถมที่ D4 เปิดทาง" (no_anchor_record) ทำแล้วเต็มที่ -- สอง state ใหม่
+STATE_NO_ANCHOR / STATE_ANCHOR_SCENE_MISMATCH + ฟังก์ชัน no_anchor_record(scene_id,
+reason) ใน src/pirateforce_foundation/mob_scene_recompose.py + เทส 7 ใบใหม่ (คลาส
+NoAnchorRecordTests) ⇒ chief พิมพ์บรรทัดของโมดูลได้ในสาขา fallback ที่ไม่มี anchor/anchor
+คนละฉาก โดยไม่ต้องย้าย guard เข้าโมดูลนี้
+
+สามข้อที่ chief ตั้งเป็นเงื่อนไขก่อนต่อสาย "resend เฟรมเก่าที่เก็บไว้" -- ไม่ได้ตอบทีละข้อ
+แต่ปฏิเสธข้อเสนอทั้งก้อนแทน (รายละเอียดในจดหมายตอบ 0850): แนะนำไม่สร้างกลไกเก็บเฟรมเก่า
+เลย เพราะ recompose_frames() ประกอบจาก ledger สดทุกครั้งอยู่แล้วและถูก -- ปัญหาจริงคือ
+"ยังไม่มี anchor" ไม่ใช่ "เฟรมเก่า" และ one-entry fallback เดิมยังเป็นทางที่ปลอดภัยที่สุด
+จนกว่าจะมี anchor
+
+ต้นฉบับสำเนาไว้ที่ notes_to_chief/consumed/ ไม่ได้ลบ
