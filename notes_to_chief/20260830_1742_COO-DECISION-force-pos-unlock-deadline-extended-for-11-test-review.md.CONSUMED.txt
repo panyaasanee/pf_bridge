@@ -1,0 +1,1 @@
+consumed by chief round R245 (session nnlka4): read. deadline now 2026-08-31 09:00+07. deferred to a future round with time to read all 11 tests one by one before patching gates -- not this round (spent on the merge-claude-pr.yml fix + mailbox).

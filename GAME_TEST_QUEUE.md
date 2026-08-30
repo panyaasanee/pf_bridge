@@ -8026,7 +8026,7 @@ OBSERVER_CONFIRMED  :
 
 ---
 
-## GT-145 CONSOLE-ENCODING-MEASURE-001 [STATIC-ON-BRIDGE -- วัดบนสะพานตอนเซิร์ฟเวอร์รันจริง · ไม่บูตไคลเอนต์ ไม่ล็อกอิน ไม่มีตัวละคร · ~15 นาที]: คอนโซลของเครื่องเจ้าของเป็น encoding อะไร -- พิมพ์สี่ค่าครั้งเดียว คัดลอกกลับมาดิบ ๆ  [PENDING]
+## GT-145 CONSOLE-ENCODING-MEASURE-001 [STATIC-ON-BRIDGE -- วัดบนสะพานตอนเซิร์ฟเวอร์รันจริง · ไม่บูตไคลเอนต์ ไม่ล็อกอิน ไม่มีตัวละคร · ~15 นาที]: คอนโซลของเครื่องเจ้าของเป็น encoding อะไร -- พิมพ์สี่ค่าครั้งเดียว คัดลอกกลับมาดิบ ๆ  [DONE (wire/DB, N/A client-observable by design) -- ผล: `20260830_1738_GT145-RESULT-four-values-measured-PYTHONIOENCODING-is-None-locale-cp874-streams-utf8.md`, วัดครบสี่ค่าตรงคำทำนายทั้งสี่ข้อ, OBSERVER_CONFIRMED N/A ตามใบ]
 
 **ตอบใบ `CORE-REQUEST-GM-035`** · เข้าคิวตามจดหมาย chief `20260829_1221` ข้อ ⑤ · เขียนใบโดย `pf-queue-author`
 
@@ -8035,7 +8035,7 @@ OBSERVER_CONFIRMED  :
 **ทำไมต้องวัด:** สามที่ใน repo พูดไม่ตรงกัน และ **ไม่มีที่ไหนวัดอะไรเลย** -- `runtime_console.py:26` (`_Mirror.encoding` รายงาน `utf-8`) · `gate-windows.yml:53` (บังคับ `PYTHONIOENCODING: 'cp874:strict'` เป็นนโยบาย) · เอกสารสาย GM + กติกาบ้าน ("คอนโซลสะพานเป็น cp874" มาหลายรอบ) · 🔴 และมี**ที่สี่**ที่จดหมาย GM-035 ไม่ได้ลิสต์: `runtime_console.py:122,126-133` เปิดคอนโซลด้วย `SetConsoleOutputCP(65001)` แล้ว `open("CONOUT$", "w", encoding="utf-8", errors="replace")` · ผลไม่ใช่เรื่องความเรียบร้อย: คอนโซลที่เข้ารหัสอักขระไม่ได้ทำให้ `print` โยน `UnicodeEncodeError` และเพราะ `_Mirror.write` เขียนคอนโซล (`:45`) **ก่อน** ไฟล์ mirror (`:46`) บรรทัดนั้นจะไม่ถูกบันทึกที่ไหนเลย
 
 - objective: บนสะพาน ตอนเซิร์ฟเวอร์รันอยู่จริง สี่ค่านี้คือค่าอะไร -- `sys.stderr.encoding` · `sys.stdout.encoding` · `os.environ.get("PYTHONIOENCODING")` · `locale.getpreferredencoding(False)` · หนึ่งข้อเท็จจริงของเครื่อง วัดครั้งเดียว **ไม่ได้พิสูจน์ว่าไฟล์ไหนถูกหรือผิด**
-- db: สำเนา `state\run_gt145.sqlite3` · 🔴 ห้ามเปิด canonical `state\pirateforce.sqlite3` · sha256 ก่อน-หลังต้องได้ `673f4bfb1c35ec390d6ed3b0c1fe3f581b20c6895ace9183c86a5971bccc9708` ทั้งสองครั้ง
+- db: สำเนา `state\run_gt145.sqlite3` · 🔴 ห้ามเปิด canonical `state\pirateforce.sqlite3` · sha256 ก่อน-หลังต้องตรงกับ `CANON_SHA.txt` ทั้งสองครั้ง (🔴 ห้ามฝังค่าตาย -- ใบนี้เคยฮาร์ดโค้ด `673f4bfb1c35...` ซึ่งเป็นค่าเก่าและทำให้ GT-145 abort ทั้งที่ DB ไม่ได้ผิดอะไร วัดแล้ว R245 จาก GT-145 RESULT)
 - server args: `py -3 -u -m pirateforce_foundation.app --db state\run_gt145.sqlite3` · 🔴 ห้ามมีแฟล็ก `--*-scenario` / `--world-census-actors` / `--export-events` · ไม่บูตไคลเอนต์
 - steps:
     0. `LOCK.txt` ต้องเป็น `RELEASED` แล้วเขียนตัวเองเป็น holder · `py -3 -V` ตอบได้ (ไม่ตอบ = เลื่อนใบ ไม่ใช่ FAIL)
