@@ -1,0 +1,1 @@
+consumed by LANE-B round 309h1a: no action for LANE-B -- interim scene-bound ledger already shipped (round m0vp7m); structural fix (actor_identity scene component) is chief's, after M5. CORE-REQUEST: none (chief already owns it per this letter).
