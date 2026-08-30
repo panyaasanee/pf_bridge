@@ -2759,3 +2759,70 @@ FONT_COLOR ID/n_SKIN_COLOR จนกว่าจะมี attended one-field cro
 `notes_to_chief/20260830_0957_RE-154-RESULT-CHOOSENPC-MEMBERSHIP-AUDIT.md` (เปิดใบนี้) · `RE-154`
 (ปิดแล้ว คนละกลไก) · `current/pf_login_game_server_v141.py:4128-4201` (TradeCmd) ·
 `src/pirateforce_foundation/runtime.py:4054-4095` (mob combat ActionVital)
+
+---
+
+## 🆕🔬 RE-161 CORPSE-POSE-APPLIES-AT-NEXT-RECOMPOSE-NOT-AT-DEATH-FRAME-001 [STATIC-ON-BRIDGE]: **ทำไมโมเดลไม่ล้มตอนได้เฟรมตาย แต่ล้มตอนคิลถัดไปมาถึงแทน** [🟢 **OPEN — เปิดโดย LANE-B รอบ `qb1ytr` 2026-08-30T16:4x+07:00 จากผล `20260830_1554_GT143-GT132-GT149-RESULT-*.md` (กะ1-A บูตจริง, ของแถมที่มีค่าที่สุดของรอบนั้น)**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง 2026-08-30T16:4x+07:00: `RE-161`/`GT-161` = 0 hit ทั้งสองไฟล์ ·
+> สูงสุดก่อนหน้า = `GT-160`/`RE-157` (`GT`/`RE` ใช้ตัวนับเดียวร่วมกัน) ⇒ ใบนี้คือ `161`
+> 🔴 ใบ `RE-085`-`RE-157`/`GT-001`-`GT-160` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่
+
+### ที่มา [วัดแล้ว โดย attended session กะ1-A, บูต commit `6961ecf`, `notes_to_chief/20260830_1554_GT143-GT132-GT149-RESULT-*.md`]
+
+เจ้าของสังเกตเองระหว่างบูต GT-143/GT-132 (คัดดิบ):
+
+> ตอนตายขึ้นว่า ชื่อมอน ล้มลง แต่โมเดลตัวนั้นค้างท่ายืนเฉยๆ มีตัวเลขนับเวลา 20วิขึ้น แต่ไม่นับถอยหลัง
+> แค่ขึ้น 20 แล้วก็หายไป … พอตีตัวที่ 2 ไปนัดเอง ตัวที่ 1 จากท่ายืนค้างแข็ง กลายเป็นท่าล้มตายทันที …
+> พอตัวที่ 3 ตาย ตัวที่ 1,2 ก็เล่นท่าล้มตายแล้วค้างอีกครั้งนึงเหมือนเดิม … ไปตีตัวที่สี่ก็วนแบบนี้
+
+ฝั่งสายส่งครบทุกอย่างที่ควรส่งในคิลนั้นเอง (ไม่ใช่คิลถัดไป):
+
+```
+MOB-DEATH-001 kill: performer 0x10010001 -> target 0x2058 (ceiling 3138)
+  dying frame 184 bytes, timer 20.0 (> 0, latches 0x44384C)
+  dead  frame 184 bytes, timer 0.0  (<= 0, gates 0x443990 -> CActorTask_Dead 0x472810)
+                                     - gate is static; its effect has never been observed
+MOB_DEATH_FRAMES_CENSUS_RECOMPOSE_DYING actor_count=97 wire_actors=97 target=0x2058
+MOB_DEATH_FRAMES_CENSUS_RECOMPOSE       actor_count=97 wire_actors=97 target=0x2058
+```
+
+ทั้ง dying frame, dead frame และ **การ recompose census ทั้ง 97 ตัว (17,910 ไบต์)** ถูกส่งใหม่ในคิลเดียวกัน
+กับที่มอนตาย — ไม่ใช่ว่าเซิร์ฟเวอร์รอไปส่งตอนคิลถัดไป การรอเกิดขึ้น**ฝั่งไคลเอนต์**เท่านั้น
+
+### objective
+
+ตอบจาก artifact ที่ commit แล้วเท่านั้น (ห้ามเปิดเกม ห้ามใช้ capture ใหม่ในใบนี้ — capture ที่มีอยู่แล้วคือ
+`capture_pexile_20260830_151429/server_console_live.out.txt`, L216/L7580-7590/L14913/L22683/L28546):
+
+1. `CActorTask_Dead` (`0x472810`) ถูกเรียกจากที่ไหน และเงื่อนไขที่ทำให้มัน **ถูกข้าม** ในเฟรมเดียวกับที่
+   `dead frame` มาถึงคืออะไร (ใบเดิม RE ที่พินจุดนี้บันทึกไว้แล้วว่า "effect has never been observed" —
+   ใบนี้คือใบที่ไล่ต่อจากบรรทัดนั้น ไม่ใช่ใบซ้ำ)
+2. เส้นทางที่ client apply pose เปลี่ยนแปลง (ยืน→ล้ม) ผูกกับอะไรจริง — เฟรม `dead` เอง, การ recompose
+   census ครั้งถัดไป (คนละคิล), หรือ event อื่นที่ไม่มีในสองอย่างนี้เลย
+3. ถ้าคำตอบคือ "ผูกกับ recompose ครั้งถัดไป" — recompose ของคิลปัจจุบันเอง (ที่ส่งมาในเฟรมเดียวกัน ตาม
+   หลักฐานข้างบน) **ทำไมไม่ถูกนับเป็น "ครั้งถัดไป"** ของตัวเอง (เช่น sequence/generation number ที่ต้อง
+   เพิ่มขึ้นจริงถึงจะ trigger, หรือ client ประมวลผล census ก่อนอ่าน death-frame ในคิวเดียวกัน)
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้):**
+- ระบุ address/เงื่อนไขของข้อ 1-3 พร้อมเลขบรรทัด/offset จาก static analysis เท่านั้น — **ไม่ต้อง** แก้โค้ด
+  ในใบนี้
+
+**ชั้น client-observable (ปิดแล้วเมื่อ RE ตอบ แต่ยืนยันซ้ำด้วยตาได้ในบูตถัดไปที่มีคนหน้าจอ):**
+- ถ้า RE ชี้ว่าต้องมี sequence/generation bump ถึงจะ trigger — บูตครั้งถัดไปที่ฆ่ามอนตัวเดียวใน 1 เซสชัน
+  (ไม่มีตัวที่สอง) ควรเห็นท่าล้มค้างตลอดไป (ไม่มี "ครั้งถัดไป" ให้ trigger) เป็นการทำนายที่ทดสอบได้จริง
+
+### nonclaims
+
+1. ไม่อ้างว่าอาการนี้คือสาเหตุเดียวของ "ศพแข็ง" ที่ `GT-104`/`GT-084` เคยบันทึกไว้ — เป็นเบาะแสที่คมที่สุด
+   เท่าที่มี ไม่ใช่ข้อสรุป
+2. ไม่อ้างว่าการแก้ (ถ้ามี) อยู่ฝั่งเซิร์ฟเวอร์ — วันนี้ยังไม่รู้ว่าแก้ได้จากฝั่งไหน
+3. ไม่แก้ src/ ในใบนี้ — ถ้า RE ชี้ทางแก้ฝั่งเซิร์ฟเวอร์ได้ (เช่น sequence bump ที่ recompose ต้องมี)
+   เป็นของสาย B (combat/death) ต่อสายเองใน lane_hooks ตามกติกา
+
+### links
+`notes_to_chief/20260830_1554_GT143-GT132-GT149-RESULT-label-life-0.2s-is-the-real-blocker-drops-exist-set103-never-shipped.md`
+(เปิดใบนี้) · `src/pirateforce_foundation/mob_death.py` (dying/dead frame composition, สาย B) ·
+`capture_pexile_20260830_151429/server_console_live.out.txt` L7580-7590 (ตัวอย่าง kill 1 ครบ)
