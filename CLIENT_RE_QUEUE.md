@@ -2957,3 +2957,73 @@ GT-101 error 23065/28317):
 ### links
 `notes_to_chief/20260830_1655_PANYA-ORDER-open-RE-162-in-session-scene-change-with-a-named-consumer-chain.md`
 (ใบสั่งเต็ม) · `gm/warp_executor.py` (docstring อ้าง RE-090) · `notes_to_chief/` RE-090 result (field-not-proven)
+
+## 🆕🔬 RE-164 BT-GM-CLICK-FOUR-SUSPECTS-002 [NEEDS-ATTENDED-CAPTURE]: **ของสี่ผู้ต้องสงสัยที่ `RE-126` ทิ้งไว้โดยไม่เดา (connection context / query-0x25 gate ตอนคลิก / current-UI object-key จริง / create path `0x007280D0`) ตัวไหนคือประตูที่หยุด `GMUI_BASIC` จริง — ไล่ด้วยการยิงทีละตัวแปรใส่ client จริงแล้วดูผล ไม่ใช่อ่าน disassembly ต่อ**
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนเขียนลงไฟล์นี้ 2026-08-31T03:2x+07:00: `RE-164`/`GT-164` = 0 hit ทั้งสอง
+> ไฟล์นี้และ `GAME_TEST_QUEUE.md` ก่อนใบนี้ — เลขที่ใช้แล้วสูงสุดคือ `RE-163`/`GT-163`(reserved)
+> 🔴 ใบนี้แก้เลขคู่จากที่รอบก่อน (`gm17278`) เขียนไว้ใน `pirate-force-server` PR #350 และ
+> `docs/GM_LANE.md` ว่าคู่กับ `GT-165` — **นั่นผิด กติกาโปรเจกต์คือ RE-N คู่กับ GT-N เลขเดียวกันเสมอ**
+> (ดู `RE-161`/`GT-161`, `RE-162`/`GT-162`, `RE-163`/`GT-163` ด้านบน) เลขที่ถูกคือ `GT-164` ไม่ใช่ `GT-165`
+> — แก้ไว้ก่อนที่ตัวเลขผิดจะกระจายไปที่อื่น ดู nonclaim 4 ด้านล่าง
+
+### ที่มา — ใบนี้ควรถูกเปิดตั้งแต่รอบ `gm17278` แต่ไม่ได้ถูก push จริง
+
+รอบ `gm17278` (2026-08-30T19:14 UTC / ~02:25+07:00 31 ส.ค.) สร้าง
+`src/pirateforce_foundation/gm/bt_gm_probe.py` + `tests/test_gm_bt_gm_probe.py` บน `pirate-force-server`
+จริง (PR #350, `merged=true`, ยืนยันด้วย GitHub API) และ `docs/GM_LANE.md` ของรอบนั้นบันทึกไว้ว่า "เปิด
+`RE-164`" กับ "เปิด `CORE-REQUEST-GM-043`" — แต่ `pirate-force-server#350` เองเขียนไว้ในตัวว่า "Companion to
+`pf_bridge#RE-164`/`GT-165`/`CORE-REQUEST-GM-043`" คือ**อีก PR หนึ่งฝั่ง `pf_bridge`** ซึ่งไม่เคยถูกเปิดเลย —
+grep `pf_bridge` PR ทั้งหมดที่หัวข้อมี `gm17278` = 0 ผลลัพธ์ ยืนยันด้วย GitHub API ไม่ใช่จากรายงาน (ตามกฎ
+ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` ว่า "เสร็จ" ถ้า PR ไม่ merge) รอบนี้ (`b3fgm6`) จึงเขียนสามใบที่
+ค้างอยู่จริง: ใบนี้ (`RE-164`), `GT-164` (`GAME_TEST_QUEUE.md`), และ `CORE-REQUEST-GM-043`
+(`notes_to_chief/`)
+
+### objective
+
+ตอบจาก artifact ที่ commit แล้วก่อน (ห้ามเดาแล้วให้ผู้เทสยิงใส่ client จริงโดยไม่มี provenance):
+
+1. **connection context** — เดินจาก click handler `0x0053B9B0` (RE-126 ยืนยันแล้วว่าเป็นตัวจริง) หา
+   ที่มาของ connection/session context ที่มันอ่าน — context นั้นตรงกับ session ที่ state vital ถูกส่งไปหรือ
+   อาจไม่ตรงกันได้ (เช่น หลาย login รวดกัน)
+2. **query-0x25 gate ตอนคลิก** — adapter `0x00726D30` (อ่าน `GMModule_Client+0x19`, RE-104 พิสูจน์ว่าคุมการ
+   วาด/enable ปุ่ม) ถูกเรียกซ้ำตอนคลิกด้วยหรือคืนค่าจากตอนวาดครั้งเดียว — ถ้าเรียกซ้ำ ค่าที่อ่าน ณ
+   เวลาคลิกอาจต่างจากตอนวาด
+3. **current-UI object-key จริง** — `RE-118` เดาว่าต้องไม่ว่าง `GT-103` A/B หักล้างข้อเสนอนั้นแล้ว (4 สถานะ
+   UI เงียบหมด) เงื่อนไขจริงคืออะไร ไล่ vfunc `[0x01093198]+0x7C8+0x04` ต่อจากจุดที่ `RE-118` หยุด
+4. **create path** — factory `0x007280D0` ที่สร้าง `GMUI_BASIC`/`GMModule_Client+0x48` ถูกเรียกไหมเมื่อคลิก
+   หรือมี early-return ตัดก่อนถึง
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้บางส่วน):** คำตอบต่อข้อ 1-4 จาก static analysis ของ artifact ที่ commit แล้ว
+พร้อมเลขบรรทัด/VA — ผลลบก็เป็นคำตอบ (เช่น "ข้อ 2 คืนค่าเดิมเสมอ ไม่ถูกเรียกซ้ำตอนคลิก" ปิดข้อนั้นได้)
+
+**ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องมีคนหน้าจอ):** `GT-164` (`GAME_TEST_QUEUE.md`) — คลิก `BT_GM`
+ทีละ variant ของ `gm/bt_gm_probe.py`'s `iter_state_vital_bit_variants()` แล้วดูว่า `GMUI_BASIC` เปิดไหม —
+**BLOCKED** จนกว่า `CORE-REQUEST-GM-043` จะได้จุดเสียบที่ยิง variant กลางเซสชันได้ (ดูใบนั้น)
+
+### ข้อห้าม
+ห้ามเดาความหมายของฟิลด์ `field_0x14` บิต 8-31 (ไม่ครอบคลุมโดย `bt_gm_probe.py` รอบก่อน ตั้งใจเว้นไว้) ·
+ห้ามอ้างว่าประตูไหน "คือ" สาเหตุโดยไม่มี VA/บรรทัดอ้างอิง · ห้ามใช้ผลของใบนี้อ้างว่าทางแชท (`0xAC52`) เป็น
+ทางเข้า `GMUI_BASIC` อีกทาง (RE-126 ปิดคำถามนั้นแล้วว่าไม่ใช่)
+
+### สัญญาผู้บริโภค
+ผู้เปิดใบเป็นผู้บริโภคผล (LANE-GM) ตามกฎ ADDENDUM v2 ข้อ B — เมื่อได้ผล (บวก ลบ หรือ bounded-negative)
+สาย GM ปิดหัวใบนี้เองรอบที่บริโภค พร้อม consumed stub
+
+### nonclaims
+1. ไม่ได้ยิงเฟรมใด ๆ ใส่ client จริงในรอบนี้ — ใบนี้แค่ระบุคำถาม สี่ผู้ต้องสงสัยยังไม่มีใครตอบสักข้อ
+2. ไม่ได้ตรวจว่า `bt_gm_probe.py`'s 14 variant ครอบคลุมพอจะตอบข้อ 2 (query-gate timing) ได้จริง — นั่นเป็น
+   คำถามเรื่องเวลา ไม่ใช่ค่า ตัว frame variant ปัจจุบันตอบไม่ได้ ต้องมีกลไกจับเวลาเพิ่ม (ดู `bt_gm_probe.py`
+   docstring ของ `QUERY_GATE_VALUE_AT_CLICK_TIME_SUSPECT`)
+3. ไม่ได้ตัดสินว่า `GT-164` ควรปลด BLOCKED ด้วยทางไหน (GM chat-command ใหม่ หรือ debug scenario flag) —
+   เป็นดุลยพินิจของ chief ตาม `CORE-REQUEST-GM-043`
+4. เลข `GT-164` (แก้จาก `GT-165` ที่รอบก่อนเขียนผิดในเอกสารที่ไม่เคย push) คือเลขที่ยึดตามใบนี้ ถ้าเอกสาร
+   ที่ไหนยังอ้าง `GT-165` สำหรับเรื่องนี้ ให้ถือว่าเอกสารนั้นล้าสมัย ไม่ใช่ไฟล์คิวสองไฟล์นี้
+
+### links
+`pirate-force-server` PR #350 (merged, `bdbef5c`) · `src/pirateforce_foundation/gm/bt_gm_probe.py` ·
+`tests/test_gm_bt_gm_probe.py` · `notes_to_chief/20260828_1809_RE-126-RESULT-BT-GM-SAME-CONTROL.md` ·
+`notes_to_chief/20260828_1140_GT103AB-RESULT-...md` ·
+`notes_to_chief/20260831_0152_PANYA-ORDER-LANE-GM-make-the-BT_GM-button-and-GMUI_BASIC-window-actually-work.md`

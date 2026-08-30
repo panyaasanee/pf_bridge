@@ -8759,3 +8759,37 @@ TOWN_TARGET_PLACEMENTS`) เป็นเป้าตีได้จริงต�
 
 **ผู้เปิดใบ: LANE-B (สาย B · COMBAT) รอบ `309h1a` 2026-08-30T14:4x+07:00, เลขแก้เป็น GT-160 ที่รอบ
 `xt0g9c` หลัง recovery** — ตามคำสั่ง COO ข้างต้น ไม่เร่งด่วน ไม่บล็อก M4/M5 รอคิวเทสที่มีคนอยู่หน้าจอตามปกติ
+
+## 🆕🎮 GT-164 BT-GM-VARIANT-CLICK-SWEEP-001 [attended, in-game]: **คลิก `BT_GM` ทีละ variant ของ `gm/bt_gm_probe.py` (สี่ตัวคงที่ + บิต 0-7 ของ `field_0x14` + ค่าสูงสุด) แล้วดูว่า `GMUI_BASIC` เปิดไหม — ตอบข้อ 2 (query-gate เวลาคลิก) ของ `RE-164` เท่านั้น ข้ออื่นตอบด้วย static RE ต่างหาก** [🔴 **BLOCKED — ไม่มีจุดเรียกที่ยิง variant กลางเซสชันได้เลย ดู `CORE-REQUEST-GM-043`**]
+
+### สถานะ
+BLOCKED ตั้งแต่เปิดใบ — จุดเรียกเดียวที่มีอยู่ตอนนี้ (`runtime.py:6424-6438` ผ่าน `gm/state_wire.py`) ยิงค่า
+คงที่ `(0,1,0)` ครั้งเดียวตอนล็อกอินของบัญชี GM เท่านั้น (ค่าเดียวกับที่ `GT-101`/`GT-103`/`GT-107` ทดสอบแล้ว
+คลิกเงียบ) ไม่มีทางยิง 13 variant ที่เหลือของ `iter_state_vital_bit_variants()` ระหว่างเซสชันเดียวกันได้เลย
+`CORE-REQUEST-GM-043` (`notes_to_chief/`) เสนอสองทางเลือกให้ chief เลือกจุดเสียบ — ปลด BLOCKED เมื่อจุดนั้นลง
+main
+
+### objective
+เมื่อปลดแล้ว: ให้ผู้เทส (กะ1-A) login ด้วยบัญชี GM แล้วให้สาย GM สั่งยิงแต่ละ variant (14 ตัว) ทีละตัว
+ผ่านจุดเสียบใหม่ที่ `CORE-REQUEST-GM-043` จะให้มา จากนั้นคลิกปุ่ม `BT_GM` **หลังทุก variant** แล้วบันทึกว่า
+`GMUI_BASIC` เปิดหรือไม่ — ตัวแรกที่เปิดคือคำตอบ ถ้าไม่มีตัวไหนเปิดเลยทั้ง 14 ตัว = bounded-negative ต่อ
+"field_0x14 บิต 0-7/max และสอง u8 field ไม่ใช่ gate" (ยังไม่ปิดคำถามเรื่อง connection-context/create-path/
+current-UI-key ซึ่งเป็น stub แยกใน `RE-164`)
+
+### pass criteria — สองชั้น
+**client-observable:** เจ้าของ/กะ1-A ยืนยันด้วยตาว่า `GMUI_BASIC` เปิดหลัง variant ใดตัวหนึ่ง (หรือไม่เปิดเลย
+ทั้ง 14 ตัว = negative ที่มีค่า)
+**wire/DB:** เฟรมขาเข้าที่พิสูจน์ว่า variant ถูกส่งจริงตามลำดับที่ตั้งใจ (log ของ `runtime.py` call site ใหม่)
+
+### ข้อห้าม
+ห้ามข้าม variant ห้ามคลิกก่อนยิง variant ครบ (ต้องรู้ว่า "ก่อน/หลัง" variant ไหน) · ห้ามอ้างว่าใบนี้ตอบ
+suspect 1/3/4 ของ `RE-164` (connection context / current-UI key / create path) — ใบนี้ตอบเฉพาะ "ค่าของเฟรมนี้
+ทำให้เปิดไหม" เท่านั้น
+
+### สัญญาผู้บริโภค
+เปิดโดย LANE-GM รอบ `b3fgm6` — LANE-GM บริโภคผลเอง ปิดหัวใบเมื่อ chief ต่อจุดเสียบและกะ1-A คลิกจบ
+
+### links
+`src/pirateforce_foundation/gm/bt_gm_probe.py` (`iter_state_vital_bit_variants`) ·
+`CLIENT_RE_QUEUE.md#RE-164` · `notes_to_chief/20260831_03xx_LANE-GM-CORE-REQUEST-GM-043-*.md` ·
+`GT-101`/`GT-103`/`GT-107` (baseline: ค่า `(0,1,0)` คลิกเงียบ)
