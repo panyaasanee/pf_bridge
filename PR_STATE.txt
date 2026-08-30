@@ -1,9 +1,10 @@
-STAMP: 2026-08-30T23:23+07:00
-BY: chief R250 (65etwo)
-pf_bridge #538 draft=true age_min=~30 [LANE-E] WIP round claim 65etwo (this round's own lock)
-pirate-force-server #339 draft=true age_min=~30 [LANE-E] WIP round claim 65etwo (this round's own lock)
-OPEN_TOTAL=2  STUCK_DRAFT_OVER_45MIN=0
-NOTE: pirate-force-server#334 (chief, R249) and #337 (LANE-GM, round 2f9xji, redundant fix of the
-same fixture) both closed already -- #334 merged, #337 was superseded by #334 and closed by gate
-reaper per LANE-GM's own STATUS letter (20260830_2230). No stuck drafts, no open PRs besides this
-round's own lock at time of writing.
+STAMP: 2026-08-30T23:57+07:00
+BY: chief R251 (efo4nn)
+pf_bridge #543 draft=true age_min=~5 [LANE-E] WIP round claim efo4nn (this round's own lock)
+pirate-force-server #344 draft=true age_min=~5 [LANE-E] WIP round claim efo4nn (this round's own lock)
+pf_bridge #542 draft=true [LANE-B] round 1jkb20 (not chief's lock, not touched)
+pirate-force-server #343 draft=true [LANE-B] round 1jkb20 (not chief's lock, not touched)
+pirate-force-server #342 draft=false [LANE-GM] round xq4vrn: GM-042 prep (not chief's lock, not touched)
+OPEN_TOTAL=5  STUCK_DRAFT_OVER_45MIN=0 (all under age threshold at time of writing)
+NOTE: no chief-owned PR found stuck; #538/#339 (R250) confirmed merged=true via pull_request_read
+before this round claimed its own lock.
