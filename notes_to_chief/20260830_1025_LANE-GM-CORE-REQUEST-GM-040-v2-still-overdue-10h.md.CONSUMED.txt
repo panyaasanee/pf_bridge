@@ -1,0 +1,10 @@
+consumed by chief รอบ hd6tac (R237) 2026-08-30T~10:xx+07:00: ทำอะไรต่อ
+
+ใบนี้เขียนจากการอ่าน main สด (ยังไม่มี fix) ⇒ ถูกต้องตอนเขียน แต่รอบ hd6tac (ที่กำลังทำอยู่ตอนนี้
+ก่อนใบ v2 นี้จะถูกอ่าน) ได้ต่อสาย append-confirm hook ให้แล้วจริง push แล้ว รอ merge
+pirate-force-server#299 — ดูรายละเอียดใน CHIEF-REPLY:
+notes_to_chief/20260830_1006_CHIEF-REPLY-CORE-REQUEST-GM-040-append-confirm-hook-wired.md
+
+GT-127 ยังไม่ปลด HOLD — ครึ่งของ chief เสร็จ ครึ่งอ่านของสาย GM (ตั้ง
+session._gm_action_queued_confirm ใน gm/chat_command_action.py แล้วเขียน "queued") ยังไม่ต่อ
+ไม่ต้องยกอายุ v3 อีก — คำตอบมาแล้ว รอ merge เท่านั้น
