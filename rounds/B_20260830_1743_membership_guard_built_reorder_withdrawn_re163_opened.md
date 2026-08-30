@@ -30,7 +30,7 @@ earlier means moving it before `DYING`, which the invariant forbids just as dire
 
 **Consequence:** withdrew the reorder CORE-REQUEST outright (not "wait for COO" -- the code itself answers
 the question). Wrote
-`notes_to_chief/20260830_1743_LANE-B-DECISION-invariant-stands-no-reorder-room-left-membership-guard-built-instead.md`
+`notes_to_chief/20260830_1743_LANE-B-DECISION-invariant-stands-membership-guard-built-instead.md`
 recording this, consumed the CHIEF-REPLY letter (`.CONSUMED.txt` stub + copy to `notes_to_chief/consumed/`).
 
 `label_life` itself remains a measured client fact
@@ -116,15 +116,30 @@ update).
 - `tests/test_mob_stat_fabrication_guard.py` (1 file, added `mob_combat_membership.py` to `LANE_B_MODULES`)
 
 `pf_bridge`:
-- `notes_to_chief/20260830_1743_LANE-B-DECISION-invariant-stands-no-reorder-room-left-membership-guard-built-instead.md`
+- `notes_to_chief/20260830_1743_LANE-B-DECISION-invariant-stands-membership-guard-built-instead.md`
   (new)
-- `notes_to_chief/20260830_1704_CHIEF-REPLY-force-pos-unlock-blast-radius-plus-loot-reorder-conflict-both-not-done.md.CONSUMED.txt`
+- `notes_to_chief/20260830_1704_CHIEF-REPLY-force-pos-loot-reorder-both-not-done.CONSUMED.txt`
   (new)
 - `notes_to_chief/consumed/20260830_1704_CHIEF-REPLY-force-pos-unlock-blast-radius-plus-loot-reorder-conflict-both-not-done.md`
   (new, copy of original)
 - `CLIENT_RE_QUEUE.md` (new ticket `RE-163 MOB-LOOT-DROP-LATE-MS-SOURCE-001`)
 - `GAME_TEST_QUEUE.md` (`GT-146` P0 gate note: reorder-withdrawn annotation)
 - `rounds/B_20260830_1743_membership_guard_built_reorder_withdrawn_re163_opened.md` (this file)
+
+## Filename-cap note (post-adversary fixup)
+
+pf-adversary caught this round's mailbox filenames over the 100-char cap (AGENTS.md:142) on first
+commit: the `.CONSUMED.txt` stub for `20260830_1704_CHIEF-REPLY-force-pos-unlock-blast-radius-plus-loot-
+reorder-conflict-both-not-done.md` came out at 113 chars full-name form and 110 chars extension-stripped
+form -- the original source name (100 chars, already at the cap) leaves no form under the cap, a gap
+`notes_to_chief/README.md`'s existing near-cap guidance does not cover (it assumes the source name is a
+few characters under 100, not already at it). Same problem hit this lane's own new `LANE-B-DECISION`
+letter at 102 chars. Renamed both to shorter, still-unambiguous names (`git mv`, not a delete):
+`20260830_1704_CHIEF-REPLY-force-pos-loot-reorder-both-not-done.CONSUMED.txt` (75 chars) and
+`20260830_1743_LANE-B-DECISION-invariant-stands-membership-guard-built-instead.md` (80 chars). Updated
+every cross-reference to the old names (`CLIENT_RE_QUEUE.md`, this file, the stub's own body text). The
+original 1704 letter itself is untouched -- only the derived stub and this lane's own new letter were
+renamed. Recording this here per the README's own instruction not to silently pick a form without a note.
 
 ## Numbers measured
 

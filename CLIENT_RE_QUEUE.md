@@ -2897,6 +2897,6 @@ chief พอจะตอบเอง
 
 ### links
 `notes_to_chief/20260830_1704_CHIEF-REPLY-force-pos-unlock-blast-radius-plus-loot-reorder-conflict-both-not-done.md`
-(ที่มาของข้อโต้แย้งเดิม) · `notes_to_chief/20260830_1743_LANE-B-DECISION-invariant-stands-no-reorder-room-left-membership-guard-built-instead.md`
+(ที่มาของข้อโต้แย้งเดิม) · `notes_to_chief/20260830_1743_LANE-B-DECISION-invariant-stands-membership-guard-built-instead.md`
 (การอ่านโค้ดที่เปิดใบนี้) · `src/pirateforce_foundation/runtime.py:4600-4824` (ลำดับ actions จริง) ·
 `capture_pexile_20260830_151429/server_console_live.out.txt` L9833/24912/30769 (`late=` สามค่า)
