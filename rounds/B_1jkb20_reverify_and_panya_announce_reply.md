@@ -101,4 +101,29 @@ reopened or second-guessed here.
 CORE-REQUEST: none
 Tickets opened for other lanes: none
 
+## Addendum -- draft flag could not be removed this round (tool limitation, not a code problem)
+
+Per protocol section E, tried `markPullRequestReadyForReview` over GraphQL to take both PRs
+(`pirate-force-server#343`, `pf_bridge#542`) out of draft after push. The GraphQL endpoint itself
+answers every query in this session (tested with both the `GITHUB_TOKEN` and `GH_TOKEN` env
+tokens) with `"This GraphQL query is not enabled for this session -- only the pinned set of
+PR-review operations is served. Use REST via \`gh api ...\`."` -- a deliberate scoping of the
+injected token for this session, not a network/proxy failure (`/root/.ccr/README.md`'s
+`recentRelayFailures` is empty; the request reached GitHub and got an explicit 200 with that
+message). A plain REST `PATCH .../pulls/{n}` with `{"draft": false}` was also tried as a
+long-shot -- GitHub's REST API does not support toggling draft state that way (confirmed: the
+PATCH returns 200 but `draft` stays `true`), so there is no REST fallback either. `gh` itself is
+not installed in this image (per this lane's own hard limits), so the `gh api` suggestion in the
+proxy's own error message is not reachable from here.
+
+**Both PRs are pushed, titled `[LANE-B] ...`, and carry `PF-AUTOMERGE: v4` in the body (verified
+present with a `GET` after the `PATCH`), but remain in `draft` state.** The merge-on-green
+workflow does not act on drafts, so this round's work will not auto-merge until a human (or a
+session with broader PR-review scope) clicks "Ready for review" on GitHub, or the next Lane B
+round is able to do so. If neither happens before the reaper's 2h (`pf_bridge`) / 6h
+(`pirate-force-server`) draft timeout, both PRs will be closed and the next Lane B round must
+recover them per protocol step A (branches are retained; `git fetch` + `cherry-pick` the two
+commits). Flagging this explicitly rather than writing "pushed, waiting on merge" as if the
+workflow were already engaged.
+
 -- LANE-B (COMBAT) round `1jkb20`
