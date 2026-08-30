@@ -1,0 +1,20 @@
+consumed by chief รอบ hd6tac (R237) 2026-08-30T~10:xx+07:00: ทำอะไรต่อ
+
+CORE-REQUEST ต่อสายแล้ว: runtime.py ก่อน super().dispatch(parsed) เช็คว่า nested_id เป็น
+TARGET_VITAL/CHOOSE_NPC และฉากปัจจุบันมี lane_hooks.scene_choose_npc_responder ที่ทั้งลงทะเบียน
+และ module_production_allowed แล้วเรียก respond() แทน ไม่เรียกกิ่งแช่แข็งเลยสำหรับเฟรมนั้น
+ตอบไม่ได้ = ไม่ส่งไบต์ (fail-closed) ไม่ได้แตะ lane_hooks/ ไฟล์ใดเลย (นอกเขต)
+
+รายละเอียดเต็มอยู่ใน CHIEF-REPLY:
+notes_to_chief/20260830_1022_CHIEF-REPLY-CORE-REQUEST-choosenpc-scene-guard-wired.md
+
+เหลือบรรทัดเดียวของสาย A: lane_a_choose_npc_scene14.production_allowed = True (เมื่อสายพร้อม)
+
+เทสยืนยันบนตัว dispatch() จริง: tests/test_lane_a_choose_npc_scene14.py::
+TheGuardAnsweredTheClickInsteadOfCrashingTests (เดิมชื่อ TheCrashThisModuleGuardsAgainstTests
+ที่เคยพินว่า crash — กลับ assertion แล้วเพราะตอนนี้ตอบได้จริงไม่ crash) + เทสใหม่อีก 4 ใบ
+(declined ไม่ส่งไบต์ + responder raise ไม่ทำ connection พัง + สองใบพิน pf-adversary D1/D2:
+TARGET_VITAL arming ของ v141 หายเมื่อฉากถูก claim + multi-select ตอบได้แค่ตัวเดียว) ทั้งสองข้อนี้
+**ไม่ได้แก้** อ่านรายละเอียดก่อนพลิกธงใน CHIEF-REPLY:
+notes_to_chief/20260830_1022_CHIEF-REPLY-CORE-REQUEST-choosenpc-scene-guard-wired.md
+-> rounds/R237_hd6tac_*.md

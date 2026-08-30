@@ -1,0 +1,9 @@
+consumed by chief รอบ hd6tac (R237) 2026-08-30T~10:xx+07:00: ทำอะไรต่อ
+
+ปิด RE-154 เป็น DONE ใน CLIENT_RE_QUEUE.md อ้างผลใบนี้ตรง ๆ — เกตที่ผู้รันชี้ (runtime.py ก่อน
+super().dispatch(parsed), runtime.py:6657) คือจุดเดียวกับที่ chief ต่อสาย guard ไปแล้วในรอบนี้เอง
+(ChooseNPC/TargetVital scene-responder) push แล้ว รอ merge pirate-force-server#299
+
+เปิด RE-157 ใหม่ ตามที่ใบนี้เตือนว่า "ปิด ChooseNPC แล้วอย่าคิดว่าจบ" — สอง sink gate แยก (TradeCmd
+cart/final-buy ไม่ตรวจ actor/scene เลย + mob combat ActionVital ไม่ตรวจ census membership) เป็นของ
+สาย B (combat) ต่อสายเองถ้าจะแก้ ไม่แก้ในรอบนี้

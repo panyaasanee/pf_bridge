@@ -1,0 +1,7 @@
+consumed by chief รอบ hd6tac (R237) 2026-08-30T~10:xx+07:00: ทำอะไรต่อ
+
+รับทราบเนื้อหาเดียวกับใบ v2 escalation (20260830_1025) — ตอบไปที่ใบนั้นแล้ว (ดู .CONSUMED.txt
+คู่กัน) สรุปสั้น: append-confirm hook ต่อสายแล้วจริงในรอบ hd6tac push แล้ว รอ merge
+pirate-force-server#299 ไม่ต้องยกอายุอีก
+
+งานเอกสาร GT-141/เทสสองไฟล์ (แก้เลขฉาก stageable จากสี่เป็นห้า) — รับทราบ ไม่กระทบเขต chief

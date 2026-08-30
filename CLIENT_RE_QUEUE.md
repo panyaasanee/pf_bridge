@@ -2521,7 +2521,14 @@ RE-149 ถาม "มี `s_OUTFIT` ของห้า id นี้ใน corpus
 
 ---
 
-## 🆕🔬 RE-154 CHOOSENPC-ANSWERS-FOR-UNANNOUNCED-ACTORS-001 [STATIC-ON-BRIDGE]: **ตัวตอบ `ChooseNPC` ตอบคลิกให้ identity ฮาร์ดโค้ดโดยไม่ตรวจฉาก และไม่ตรวจว่า actor นั้นเคยถูกประกาศให้ไคลเอนต์หรือยัง** [🟢 **OPEN — เปิดโดย chief รอบ `o1s522` (R236) 2026-08-30T09:xx+07:00 จากผล pf-adversary D2**]
+## 🆕🔬 RE-154 CHOOSENPC-ANSWERS-FOR-UNANNOUNCED-ACTORS-001 [STATIC-ON-BRIDGE]: **ตัวตอบ `ChooseNPC` ตอบคลิกให้ identity ฮาร์ดโค้ดโดยไม่ตรวจฉาก และไม่ตรวจว่า actor นั้นเคยถูกประกาศให้ไคลเอนต์หรือยัง** [✅ **DONE — ปิดโดย chief รอบ `hd6tac` (R237) 2026-08-30T~10:xx+07:00 จากผล Codex RE runner `notes_to_chief/20260830_0957_RE-154-RESULT-CHOOSENPC-MEMBERSHIP-AUDIT.md`**]
+
+> 🔴 **ปิดด้วยเกตปลายทางบน main, ไม่ใช่แค่ผลวิเคราะห์:** RE result วัด source ตรงกับที่ R236 ทิ้งไว้
+> และชี้เกตที่ถูกต้องเป๊ะ (`runtime.py` ก่อน `super().dispatch(parsed)`) — chief รอบ `hd6tac` ต่อสาย
+> guard นี้แล้วจริง (`lane_hooks.scene_choose_npc_responder` claim ฉากที่ลงทะเบียน+allowed แทนกิ่ง
+> แช่แข็ง) push แล้ว รอ merge `pirate-force-server#299` · **ยังไม่มีฉากไหนพลิกธง `production_allowed`
+> วันนี้ ⇒ ยัง inert ในทางปฏิบัติ** จนกว่าสาย A จะพลิกธงของ `lane_a_choose_npc_scene14.py`
+> 🔴 RE result ชี้ sink gate อีกสองจุดที่ **ไม่ถูกปิดในรอบนี้** (นอกเขตเดิม) — ดู `RE-157` ที่เปิดใหม่
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง 2026-08-30T09:xx+07:00: `RE-154`/`GT-154` = 0 hit ทั้งสองไฟล์
 > สูงสุดก่อนหน้า = `152` (+ `PROMOTE-153` ใน `GAME_TEST_QUEUE.md`) ⇒ ใบนี้คือ `154`
@@ -2650,3 +2657,105 @@ FONT_COLOR ID/n_SKIN_COLOR จนกว่าจะมี attended one-field cro
 (`WIDENING_RULINGS` 916) · `src/pirateforce_foundation/population.py:23`
 (`NPC_STYLE_ACTOR_TYPE`) · `notes_to_chief/20260830_0030_KA3A-GT131-...` หมวด ③ ·
 `notes_to_chief/FROM_CHIEF_R236_TO_ATTENDED_20260830_0855.md` ข้อ ②
+
+---
+
+## 🆕🔬 RE-156 SCENE-IDENTITY-SIGNAL-001 [STATIC-ON-BRIDGE]: **ไม่มีสัญญาณที่เชื่อถือได้ว่าไคลเอนต์กำลังเรนเดอร์ฉากไหนจริง** [🟢 **OPEN — เปิดโดย chief รอบ `hd6tac` (R237) 2026-08-30T~10:5x+07:00 ตาม `COO-DECISION 0946` ข้อ 2**]
+
+> 🔢 **หมายเหตุเลข:** ใบนี้จองเป็น `RE-155` ตอนแรก แต่ `main` ขยับใต้เท้าระหว่างรอบ (PR #475 ถูกปิดเพราะ
+> `mergeable=false`) — LANE-A จอง `RE-155` (ACTOR-NAME-COLOR-NPC-...) ไปพร้อมกันในหน้าต่างเวลาเดียวกัน
+> merge ก่อน ⇒ กู้รอบนี้กลับมาบน `main` สดแล้วขยับเป็น `RE-156` ตามกฎหัวข้อ 4 (เลขชนห้ามทับ +1)
+> เนื้อหาไม่เปลี่ยน มีแค่เลขกับหมายเหตุนี้ที่ต่างจากฉบับที่หายไปพร้อม PR #475
+> 🔴 ใบ `RE-085`-`RE-155` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่
+
+### ที่มา [วัดแล้ว 2026-08-29T~09:xx+07:00 · รอบ `o1s522` (R236) · บันทึกลงใบรอบ `hd6tac`]
+
+`COO-DECISION 20260830_0946` (ตอบ `FROM_CHIEF_R236` ข้อ ⑤) สั่งบันทึกช่องว่างนี้เป็นข้อจำกัดต้นทาง
+ของโปรเจกต์แทนการเดินเกตต่อ: `scene_admission_gate.py` (R236) เป็น **เกตรับเข้าแถว** ไม่ใช่
+**เกตรับเข้าฉาก** — ตัดสินจาก `selected.position.scene_id` ซึ่งเป็นค่าที่**เซิร์ฟเวอร์เขียนเอง** ไม่ใช่
+สิ่งที่ไคลเอนต์ยืนยันกลับมา `world_travel_gate.py`'s docstring (R236) ระบุไว้ตรง ๆ ว่าโปรเจกต์นี้
+"แยกไม่ได้ว่าไคลเอนต์รับ teleport จริงไหม" — [วัดแล้ว] จากซอร์สที่ commit แล้วเท่านั้น ไม่มีการวัดกับ
+ไคลเอนต์จริงในใบนี้
+
+ทุกอย่างที่สร้างทับ `scene_admission_gate` (และ world-scene logic อื่นที่อ่าน `selected.position.scene_id`
+เป็นความจริงเกี่ยวกับตำแหน่งของไคลเอนต์) รับช่องว่างนี้มาด้วยโดยไม่รู้ตัว — บันทึกไว้ที่นี่ให้ grep เจอ
+ก่อนมีคนอ้างว่าเกตรับเข้าฉากมีอยู่แล้ว
+
+### objective
+
+ตอบจาก artifact ที่ commit แล้วเท่านั้น (ห้ามเปิดเกม ห้ามใช้ capture):
+
+1. **ไบต์ไหนในโปรโตคอลที่ไคลเอนต์ส่งกลับหลัง teleport/scene-load ที่นับเป็นการ "ยืนยัน" ฉากจริง**
+   (`TargetPos` แรกหลังเฟรม? มี vital อื่นที่พกเลขฉากจากฝั่งไคลเอนต์มาด้วยไหม?) — ต้องระบุ vital id +
+   เลขบรรทัดใน `current/pf_login_game_server_v141.py` ที่ตัวรับตีความมัน
+2. **ถ้าไม่มีไบต์แบบนั้นเลย** เขียนให้ชัดว่านี่คือขีดจำกัดถาวรของโปรโตคอลที่วัดได้ (ไม่ใช่แค่ยังไม่เจอ)
+   และอะไรคือ proxy ที่ใกล้เคียงที่สุดที่มีอยู่วันนี้ (เช่น `runtime_ack_sent`, `TargetPos` ปกติที่ไม่พกฉาก)
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้):**
+- ตอบข้อ 1/2 ข้างบนพร้อมเลขบรรทัดและชื่อ vital
+- **ไม่ต้อง** แก้โค้ดในใบนี้ — ใบนี้เป็นคำถามพื้นฐาน ไม่ใช่งานเดินสาย
+
+**ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องแยกใบ):**
+- ไคลเอนต์จริงส่งอะไรกลับมาจริงหลัง teleport ข้ามฉาก — ต้องมีคนเปิดเกมวัด ไม่ใช่งานของใบนี้
+
+### nonclaims
+
+1. ไม่อ้างว่า `scene_admission_gate.py` (R236) ผิด — มันทำตามที่ตั้งใจ (เกตรับเข้าแถว) ตรงตามที่ docstring บอก
+2. ไม่อ้างว่ามีตัวบล็อกงานวันนี้ — `COO-DECISION 0946` ข้อ 2 ระบุชัดว่านี่ไม่ใช่ตัวบล็อก ไม่มีกำหนด
+3. ไม่อ้างว่าตอบได้ในรอบเดียว — COO เขียนไว้เองว่า "เป็นคำถามพื้นฐานที่ยังไม่มีคำตอบในโปรเจกต์นี้เลย"
+
+### links
+`notes_to_chief/20260830_0946_COO-DECISION-r236-gate-scope-and-scene-identity-gap.md` (เปิดใบนี้) ·
+`src/pirateforce_foundation/scene_admission_gate.py` (เกตที่รับช่องว่างนี้มา) ·
+`src/pirateforce_foundation/world_travel_gate.py` (docstring ที่ระบุช่องว่างตรง ๆ) ·
+`rounds/R236_o1s522_scene-admission-gate-wired-plus-gt131-graded.md`
+
+---
+
+## 🆕🔬 RE-157 UNANNOUNCED-ACTOR-SINK-GATES-TRADECMD-AND-MOBCOMBAT-001 [STATIC-ON-BRIDGE]: **สอง sink gate ที่ RE-154 บอกว่า "ปิด ChooseNPC แล้วอย่าคิดว่าจบ"** [🟢 **OPEN — เปิดโดย chief รอบ `hd6tac` (R237) 2026-08-30T~10:5x+07:00 จากผล RE-154 RESULT**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-157` = 0 hit ในไฟล์นี้ · สูงสุดก่อนหน้า = `156` ⇒ ใบนี้คือ `157`
+> 🔴 ใบ `RE-085`-`RE-156` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่
+
+### ที่มา [วัดแล้ว โดย Codex RE runner, `notes_to_chief/20260830_0957_RE-154-RESULT-CHOOSENPC-MEMBERSHIP-AUDIT.md`]
+
+ระหว่างตอบ `RE-154` ผู้รันเจอสองเส้นทางแยกที่ตอบ actor ที่ไม่เคยประกาศให้ client เหมือนกัน แต่**คนละ
+กลไก** จาก `ChooseNPC` — เปิดใบแยกแทนการรวมเป็นเรื่องเดียว ตามกฎหนึ่งเรื่องต่อใบ:
+
+1. **`TradeCmdVital` cart/final-buy** (`v141:4128-4201`) — ตรวจแค่ wire fields, counters, cash
+   **ไม่ตรวจ scene, membership, `shop_store5_open_sent`, หรือ actor เลย** ⇒ client ที่ forge/desync
+   ขอ cart ack ได้จาก initial state และไป cash update ได้หลัง sequence แม้ไม่เคยได้รับ P91/store
+2. **default mob combat `ActionVital`** (`runtime.py:4054-4095`) — resolve จาก selected-scene roster
+   จริง แต่ **ไม่ตรวจว่า client เคยได้รับ census ประกาศ actor ตัวนั้นหรือยัง** ⇒ forged `ActionVital`
+   ที่ valid อาจตอบ field mob ที่อยู่ใน roster แต่ไม่เคยประกาศให้ client เห็น
+
+### objective
+
+ตอบจาก artifact ที่ commit แล้วเท่านั้น (ห้ามเปิดเกม ห้ามใช้ capture):
+
+1. **TradeCmd** — ระบุจุดที่ควรเพิ่ม guard (require active store session/latch ที่ผูก scene + actor
+   ที่ประกาศจริงก่อน cart/final-buy reply) พร้อมเลขบรรทัด
+2. **Mob combat** — ระบุจุดที่ควรเพิ่ม guard (require target อยู่ใน census membership ที่ส่งให้
+   session/scene นั้นจริง ไม่ใช่แค่อยู่ใน static roster) พร้อมเลขบรรทัด
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้):**
+- ระบุจุดแก้ทั้งสองข้อพร้อมเลขบรรทัด — **ไม่ต้อง** แก้โค้ดในใบนี้
+
+**ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องแยกใบ):**
+- ไคลเอนต์ปกติจะ trigger เส้นทางเหล่านี้ได้จริงหรือไม่ — RE-154 เองระบุว่าความเสี่ยงจริงจำกัดที่
+  client forged/desync ไม่ใช่ผู้เล่นปกติ **ยังไม่มีใครวัด**
+
+### nonclaims
+
+1. ไม่อ้างว่าผู้เล่นปกติเจออาการนี้ — RE-154 ระบุเองว่าเป็นความเสี่ยงของ client forged/desync
+2. ไม่อ้างว่า `RE-154`/`CORE-REQUEST` ของ ChooseNPC ปิดสองข้อนี้ไปด้วย — คนละกลไกกันเป๊ะ
+3. ไม่แก้ src/ ในใบนี้ — เป็นของสาย B (combat) ต่อสายเองใน lane_hooks ตามกติกา ถ้าจะแก้จริง
+
+### links
+`notes_to_chief/20260830_0957_RE-154-RESULT-CHOOSENPC-MEMBERSHIP-AUDIT.md` (เปิดใบนี้) · `RE-154`
+(ปิดแล้ว คนละกลไก) · `current/pf_login_game_server_v141.py:4128-4201` (TradeCmd) ·
+`src/pirateforce_foundation/runtime.py:4054-4095` (mob combat ActionVital)
