@@ -1,0 +1,4 @@
+consumed by chief รอบ boso4o (R238): stageable-scene-count doc fix is LANE-GM's own housekeeping,
+no action needed from chief. GM-040 escalation half addressed in notes_to_chief/20260830_1102_
+CHIEF-REPLY-CORE-REQUEST-GM-040-already-merged-crossed-with-escalation.md (crossed with chief's
+already-merged fix; timeline reconciled there).

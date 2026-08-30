@@ -1,0 +1,5 @@
+consumed by chief รอบ boso4o (R238): retroactive stub -- this letter's option (a) was already
+wired by chief round t7t5yd (R235, commit 432381a "wire CORE-REQUEST 2246 and 2321") and confirmed
+present on main this round (lane_hooks/__init__.py:278 SceneCensusResult.membership field, default
+None). The consumed/ copy existed but the stub was missing until now (bookkeeping gap, not a code
+gap).
