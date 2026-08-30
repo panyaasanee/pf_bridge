@@ -2723,7 +2723,7 @@ FONT_COLOR ID/n_SKIN_COLOR จนกว่าจะมี attended one-field cro
 
 ---
 
-## 🆕🔬 RE-157 UNANNOUNCED-ACTOR-SINK-GATES-TRADECMD-AND-MOBCOMBAT-001 [STATIC-ON-BRIDGE]: **สอง sink gate ที่ RE-154 บอกว่า "ปิด ChooseNPC แล้วอย่าคิดว่าจบ"** [🟢 **OPEN — เปิดโดย chief รอบ `hd6tac` (R237) 2026-08-30T~10:5x+07:00 จากผล RE-154 RESULT**]
+## 🆕🔬 RE-157 UNANNOUNCED-ACTOR-SINK-GATES-TRADECMD-AND-MOBCOMBAT-001 [STATIC-ON-BRIDGE]: **สอง sink gate ที่ RE-154 บอกว่า "ปิด ChooseNPC แล้วอย่าคิดว่าจบ"** [~~🟢 OPEN~~ 🔵 **DONE (analysis) / TWO SOURCE GUARDS REQUIRED, NOT YET BUILT — ปิดโดย chief รอบ `bunu7v` (R246) 2026-08-30T~19:1x+07:00 ตามผล `notes_to_chief/20260830_1111_RE-157-RESULT-TRADE-AND-COMBAT-GUARD-SEAMS.md` (Job 1/Job 2 ทั้งคู่ DONE ในใบผล) — implementation (TradeCmd active-session stamp ก่อน `runtime.py:6787`, mob-combat announced-membership guard ที่ `:4093-4096`) เป็นงานของ chief รอบถัดไป ไม่ใช่คำถาม RE อีกใบ — เปิดโดย chief รอบ `hd6tac` (R237) 2026-08-30T~10:5x+07:00 จากผล RE-154 RESULT**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-157` = 0 hit ในไฟล์นี้ · สูงสุดก่อนหน้า = `156` ⇒ ใบนี้คือ `157`
 > 🔴 ใบ `RE-085`-`RE-156` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่
@@ -2900,3 +2900,60 @@ chief พอจะตอบเอง
 (ที่มาของข้อโต้แย้งเดิม) · `notes_to_chief/20260830_1743_LANE-B-DECISION-invariant-stands-membership-guard-built-instead.md`
 (การอ่านโค้ดที่เปิดใบนี้) · `src/pirateforce_foundation/runtime.py:4600-4824` (ลำดับ actions จริง) ·
 `capture_pexile_20260830_151429/server_console_live.out.txt` L9833/24912/30769 (`late=` สามค่า)
+
+## 🆕🔬 RE-162 IN-SESSION-SCENE-CHANGE-WIRE-001 [STATIC-ON-BRIDGE]: **ไบต์ไหนสั่งให้ client เปลี่ยนแมพขณะออนไลน์ (ไม่ผ่านล็อกเอาต์)** [~~🟢 OPEN~~ 🔵 **DONE / MIXED — ปิดโดย chief รอบ `bunu7v` (R246) 2026-08-30T~19:2x+07:00 ตามผล `notes_to_chief/20260830_1909_RE-162-RESULT-IN-SESSION-SCENE-CHANGE-WIRE-EXISTS-CLIENT-OBSERVABLE-UNPROVEN.md` — ไม่ใช่ bounded-negative: กลไกมีจริงและต่อสายแล้ว (`_dispatch_columbus_quest3021` ส่ง `TeleportVital` ข้ามฉากขณะออนไลน์จริง, merged) แต่ยังไม่มีใครยืนยันว่าไคลเอนต์เรนเดอร์จริง (`GT-106` PENDING คือใบที่ตอบคำถามนี้อยู่แล้ว) — `/warp` เองไม่ใช้กลไกนี้เลย (นโยบาย ไม่ใช่ช่องว่างหลักฐาน) — สัญญาผู้บริโภค: แจ้ง LANE-GM + COO แล้วผ่าน `CHIEF-REPLY 1916`, แจ้งเจ้าของตรง ๆ ใน `FROM_CHIEF_R246_TO_ATTENDED` — เปิดโดย chief รอบ `bunu7v` 2026-08-30T19:01+07:00 ตาม `PANYA-ORDER` (owner order, เขียนแทนโดยกะ1-A)**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนเขียนลงไฟล์นี้ 2026-08-30T19:01+07:00: `RE-162`/`GT-162` เป็นข้อความ
+> การจองภายใน RE-163 เท่านั้น — ไม่มีใบ RE-162 จริงในไฟล์นี้หรือ `GAME_TEST_QUEUE.md` ก่อนใบนี้ · เลขที่ใช้แล้ว
+> สูงสุดคือ 163 แต่เลขนี้ถูกจองไว้ล่วงหน้าตั้งแต่ 16:55 โดย PANYA-ORDER ก่อน RE-163 เปิด จึงยังเป็น `162`
+> 🔴 ใบ `RE-085`-`RE-161`, `RE-163` และ `GT-001`-`GT-160` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่
+
+### ที่มา
+`notes_to_chief/20260830_1655_PANYA-ORDER-open-RE-162-in-session-scene-change-with-a-named-consumer-chain.md`
+— คำสั่งเจ้าของตรง ๆ ("เปิดใบ RE นั้นเลย และให้แน่ใจว่ามีคนจะหยิบผลลัพธ์ของใบนั้นไปใช้ต่อด้วย") ถามว่า
+"ทำไมยังเปลี่ยนแมพในเกมเดียวไม่ได้" กะ1-A วัดจากซอร์สบน main แล้วสรุปสามบรรทัด: (1) `ForcePos` ไม่มีช่องใส่
+ฉาก (`gm/warp_executor.py` docstring อ้าง RE-090) (2) `TeleportVital` น่าจะใส่ฉากได้แต่ยังไม่พิสูจน์ (RE-090
+ปิดโดยยังไม่รู้) (3) `warp_executor` ยังไม่ถูกต่อสายเลย (`grep -c warp_executor runtime.py` = 0) — ทางเดียวที่
+พิสูจน์แล้วว่าโหลดฉากได้คือทางล็อกอิน (`GT-141` PASS วันนี้ 16:3x)
+
+### objective
+
+ตอบจาก artifact ที่ commit แล้วเท่านั้น (ห้ามเปิดเกม ห้ามยิงไบต์ที่ยังไม่พิสูจน์ใส่ client จริง — บทเรียน
+GT-101 error 23065/28317):
+
+1. `CTeleportVital`/`TeleportVital` — layout เต็ม ฟิลด์ไหนคือ scene id / seq / xyz / heading · ฟิลด์ไหนที่
+   RE-090 ทิ้งไว้ว่า "ยังไม่พิสูจน์" และมันถูกอ่านที่ VA ไหน
+2. ฝั่ง client: ฟังก์ชันไหนสั่ง unload ฉากเดิม + load ฉากใหม่ และถูกเรียกจากเส้นทางไหนบ้าง — เส้นทางล็อกอิน
+   (`START_GAME_RES`) กับเส้นทางระหว่างเซสชันเป็นตัวเดียวกันหรือคนละตัว
+3. ถ้าเป็นคนละตัว: เส้นทางระหว่างเซสชันมี gate อะไรบ้างก่อนถึงจุดโหลด (ไล่จากประตูบานแรกตามบทเรียน RE-118)
+4. ต้องส่งสำมะโน/actor ของฉากใหม่ตามมาไหม และตามลำดับใด — ถ้าลำดับผิดจะเห็นอาการอะไร
+5. ผลลบก็เป็นคำตอบ: ถ้าอิมเมจไม่มีเส้นทางเปลี่ยนฉากระหว่างเซสชันเลย ให้ปิดเป็น bounded-negative พร้อมระบุว่า
+   "ล็อกอินคือทางเดียว" — ปิดคำถามของเจ้าของถาวรและมีค่าเท่าผลบวก
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้):** คำตอบต่อข้อ 1-5 ข้างต้น จาก static analysis ของ artifact ที่ commit แล้ว
+เท่านั้น พร้อมเลขบรรทัด/VA/หลักฐาน
+
+**ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องแยกใบ ต้องมีคนหน้าจอ):** ถ้าผลบวก สาย GM เปิด GT ใหม่ "พิมพ์
+`/warp <ฉากอื่น>` แล้วเปลี่ยนแมพทันทีโดยไม่ล็อกเอาต์" — ดูสัญญาผู้บริโภคด้านล่าง
+
+### ข้อห้าม
+ห้ามเดาค่าแล้วให้ผู้เทสยิงใส่ client จริง · ห้ามอ้างว่า `ForcePos` ทำได้ (RE-090 ปิดไปแล้วว่าไม่มีช่องฉาก) ·
+ห้ามลดรูปเหลือ "same-scene ก็พอ"
+
+### 🔴 สัญญาผู้บริโภค (จากคำสั่งเจ้าของโดยตรง — ไม่มีส่วนนี้ห้ามเปิดใบ)
+
+| ผลของ RE-162 | ใครหยิบต่อ | ทำอะไร | ภายใน |
+|---|---|---|---|
+| **บวก** (เจอเฟรม+ฟิลด์) | **สาย GM** | ต่อ cross-scene ใน `gm/warp_executor.py` (เขตตัวเอง) + เปิด CORE-REQUEST ขอจุดเรียกจาก chief | รอบถัดไปของสาย GM หลังใบปิด |
+| **บวก** (ต้องมีจุดเสียบ) | **chief** | ต่อจุดเรียกใน `runtime.py` ตาม CORE-REQUEST นั้น | ภายใน 2 รอบของ chief |
+| **บวก** (ต้องมีตาคน) | **คิว attended** | สาย GM เขียนใบ GT ใหม่ | ใบต้องพร้อมภายใน 1 รอบหลังโค้ดขึ้น main |
+| **ลบ/bounded** | **สาย GM + chief** | ปิดคำถามถาวรใน `docs/GM_LANE.md`, แจ้งเจ้าของตรง ๆ ว่าเรื่องนี้จบแล้ว | รอบถัดไป |
+
+บังคับเพิ่มสามข้อ: (1) RE runner ต้องเขียน `BUILD_IMPACT:` ที่เป็นคำสั่งทำได้จริง (2) สาย GM ต้องรายงานในกล่อง
+ทันทีที่บริโภคใบ อย่ารอรอบถัดไป (3) COO ยกระดับเป็น ESCALATION ถ้าปิดแล้วเกิน 3 รอบของสาย GM ยังไม่มีใครแตะ
+
+### links
+`notes_to_chief/20260830_1655_PANYA-ORDER-open-RE-162-in-session-scene-change-with-a-named-consumer-chain.md`
+(ใบสั่งเต็ม) · `gm/warp_executor.py` (docstring อ้าง RE-090) · `notes_to_chief/` RE-090 result (field-not-proven)

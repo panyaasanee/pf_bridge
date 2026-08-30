@@ -4957,6 +4957,14 @@ nonclaim บังคับด้านบนของใบนี้
 ว่า attended พร้อมรันเมื่อไหร่ (ต้องรอ PR ทั้งสองใบ merge เข้า `main` ก่อน) ให้ COO/pf-queue-author เป็นคนเปิด
 `GT-106-R2` อย่างเป็นทางการเมื่อพร้อม
 
+**update (chief รอบ `bunu7v` / R246, 2026-08-30T19:2x+07:00)**: `RE-162` (สืบวันนี้ ตาม `PANYA-ORDER`
+คำถามคนละเรื่อง -- เปลี่ยนแมพกลางเซสชันทั่วไป) วัดซ้ำอิสระว่า `_dispatch_columbus_quest3021` ยังคงส่ง
+`TeleportVital` ข้ามฉากจริงขณะออนไลน์ (ไม่ใช่แค่ตอนล็อกอิน) และเป็นกลไกเดียวกับที่ใบนี้ต้องการวัดผล
+client-observable -- ตัวใบนี้เองยังไม่ถูก COO/pf-queue-author เปิด `GT-106-R2` อย่างเป็นทางการ **chief ไม่เปิด
+เองรอบนี้** (นอกเขตตัดสินใจ ตามที่ R198 บันทึกไว้) แต่ยกให้ COO พิจารณาอีกครั้งว่า wiring วันนี้ (3 จุดของ
+`COO-DECISION 1746` + Columbus dispatch ที่ `RE-162` เพิ่งยืนยันซ้ำ) พร้อมเปิด `GT-106-R2` หรือยัง --
+ดู `notes_to_chief/20260830_1909_RE-162-RESULT-*.md` Job 3(B) สำหรับเกตทั้งหมดที่ต้องผ่านก่อนถึงจุดสังเกต
+
 ---
 
 ## GT-107 GM-001-R2 LOGIN-STATE-VISUAL-PROBE-002: ล็อกอินด้วยบัญชี GM อีกครั้งหลัง RE-105 พิน vital_version=0 (CORE-REQUEST-016 เปิดแล้ว) -- เซสชันรอดจาก error 23065 ที่ GT-101 เจอไหม แล้วจอเปลี่ยนอะไรไหม (คำถามเดิมของ GT-101 ที่ยังไม่มีใครตอบได้เพราะเซสชันตายก่อนถึง)  [RESULT -- NEGATIVE, new failure mode, error 28317, see notes_to_chief/20260827_1745_GT107-RESULT-NEGATIVE-vital-version-0-passes-version-check-but-client-throws-28317-RunTimeProtocolRes-read-failed-session-dies-GT103-not-reached-ka1-B.md -- superseded by GT-107-R3 below]

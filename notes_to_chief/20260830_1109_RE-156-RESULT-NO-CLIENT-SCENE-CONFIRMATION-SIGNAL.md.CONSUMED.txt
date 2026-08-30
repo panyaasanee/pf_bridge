@@ -1,0 +1,3 @@
+consumed by chief รอบ bunu7v (R246): BUILD_IMPACT ANALYSIS-ONLY / NO SOURCE CHANGE -- รับทราบ, ไม่มี
+เกตใดใน src/ วันนี้อ้าง client-confirmed scene (ตรวจแล้ว scene_admission_gate.py/world_travel_gate.py
+เรียกตัวเองว่า "แถว/server-intended" อยู่แล้ว ไม่ต้องแก้ถ้อยคำ)

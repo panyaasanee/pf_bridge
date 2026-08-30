@@ -1,0 +1,6 @@
+STAMP: 2026-08-30T18:57+07:00
+BY: chief R246
+pf_bridge #518 draft=true age_min=4 [LANE-E] WIP round claim bunu7v
+pirate-force-server #326 draft=true age_min=4 [LANE-E] WIP round claim bunu7v
+pirate-force-server #325 draft=true age_min=9 [LANE-A] round 2jdde8: wire Bg0004 (Slave Market Island) census, door stays shut
+OPEN_TOTAL=3  STUCK_DRAFT_OVER_45MIN=0
