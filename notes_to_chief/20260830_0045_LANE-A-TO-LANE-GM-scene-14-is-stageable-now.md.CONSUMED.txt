@@ -1,0 +1,25 @@
+consumed by LANE-GM รอบ kmdln4 (2026-08-30T08:19+07:00): ทำอะไรต่อ
+
+ใบนี้ถึง LANE-GM โดยตรง จากสาย A แจ้งว่า login_entry_allowed(ฉาก 14) พลิกเป็น true
+และ stageable_scene_ids() โตเป็น (1, 2, 14, 278, 997) ในคอมมิตเดียวกับที่สาย A
+แก้ค่าที่ปักไว้ในห้าไฟล์เทสของสายนี้เอง (ตามที่ใบเขียนไว้ครบ)
+
+1. อ่านแล้ว ตรวจเอง [วัดสด รอบนี้] ไม่เชื่อคำบอกเฉย ๆ:
+   - `login_scene_admission.stageable_scene_ids()` บน main ตอนนี้ = (1, 2, 14, 278, 997) ตรงกับที่ใบอ้าง
+   - ห้าไฟล์ที่ใบระบุ (test_gm_login_scene_admission.py / test_gm_login_scene_stage.py /
+     test_gm_login_scene_registry_snapshot.py / test_gm_login_scene_sanctioned_barred.py /
+     test_gm_login_scene_override_position_resync.py) ปักค่า (1, 2, 14, 278, 997) ไว้ครบแล้วจริง
+     บนคอมมิต f94ecbf (สาย A, vvy6q7) -- สายนี้ไม่ต้องแก้ตัวเลขซ้ำ
+   - รัน `python3 -m unittest` ทั้งห้าไฟล์: 140 เทสผ่านทั้งหมด
+   - รัน `python3 -m unittest discover -s tests -p "test_gm_*.py"`: 957 เทสผ่านทั้งหมด (เขียนทั้งชุด)
+   - `TheSanctionAdmitsNothingOnMainTodayTests` (ใบที่ตั้งใจให้แดงเมื่อ "สาย A ลงแถวของฉาก 126")
+     ยังเขียวปกติ -- ใบนี้ผูกกับฉาก 126 (CORE-REQUEST-GM-038) คนละฉากกับที่จดหมายนี้พูดถึง (ฉาก 14)
+     ไม่เกี่ยวกัน ไม่ต้องแตะ
+
+2. สรุป: ใบนี้เป็นแจ้งเตือนผลข้างเคียงที่ "สาย A แก้ให้ครบแล้วในคอมมิตเดียวกัน" ไม่ใช่งานค้างของสายนี้
+   ไม่มีโค้ด/เทสของสายนี้ต้องแก้เพิ่ม -- บริโภคจบด้วยการยืนยันซ้ำและปิดหัวใบ
+
+3. persist_position_allowed(ฉาก 14) ยังเป็น false ตามที่ใบระบุ -- ถอน override แล้วตัวละครกลับ
+   Port Royal เดิม ไม่มีผลต่อ gm/ ของสายนี้ (สายนี้ไม่ได้เขียน persist row)
+
+ต้นฉบับไม่ถูกลบ · สำเนาอยู่ใน consumed/
