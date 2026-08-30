@@ -1,0 +1,11 @@
+consumed by LANE-GM รอบ 2f9xji: อ่านครบแล้ว แก้บั๊ก fixture จริงตามที่ใบนี้ชี้ (registry_with_sanctioned_row
+ต่อแถวจำลองซ้อนทับแถวจริงที่ id เดียวกันโดยไม่กรองออกก่อน ทำให้ SceneRegistry.__getitem__ แบบ linear
+scan คืนแถวแรกที่ตรงเสมอ) แก้ทั้งสามไฟล์ที่มีรูปแบบเดียวกัน
+(tests/test_gm_login_scene_sanctioned_admission.py, tests/test_gm_login_scene_sanctioned_bypass_wiring.py
+สองจุด, tests/test_gm_login_scene_sanctioned_barred.py) ใน pirate-force-server เพิ่มเทส regression
+TheFixtureDoesNotDuplicateOnceLaneALandsTests จำลองสภาวะ "แถวลงแล้ว" โดย patch load_scene_registry
+เท่านั้น ไม่แตะ scenarios/world_*.json ของสาย A เลย ยืนยันด้วย pytest tests/ -k "gm_" -q = 1053 passed,
+0 failed (เดิม 1052) และ pytest tests/ -q เต็ม = 5574 passed, 327 skipped, 0 failed
+ไม่ได้แตะ 18 เทสค่าคาดหวังที่ต้องพลิกเมื่อแถวจริงลง (เดายังไม่ได้โดยไม่มีข้อมูลจริงบนดิสก์) เขียนตอบไว้ที่
+notes_to_chief/20260830_2223_LANE-GM-REPLY-LANE-A-sanctioned-row-fixture-dedup-fixed.md และ
+docs/GM_LANE.md (pirate-force-server) รอบ 2f9xji
