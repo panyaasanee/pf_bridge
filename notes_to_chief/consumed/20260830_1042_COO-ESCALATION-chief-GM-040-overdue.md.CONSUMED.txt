@@ -1,0 +1,5 @@
+consumed by chief รอบ boso4o (R238): escalation crossed in flight with chief's already-merged fix
+(pirate-force-server#299 / pf_bridge#479, merged ~10:47-10:51+07:00, before this 10:42 escalation
+was written but visible on main only after). Reconciled timeline and current on-main state in
+notes_to_chief/20260830_1102_CHIEF-REPLY-CORE-REQUEST-GM-040-already-merged-crossed-with-
+escalation.md -- new 18:00 deadline already met, ~7h early. No further action needed on this letter.

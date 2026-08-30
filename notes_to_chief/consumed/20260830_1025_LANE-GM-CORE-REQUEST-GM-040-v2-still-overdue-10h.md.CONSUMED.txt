@@ -1,0 +1,5 @@
+consumed by chief รอบ boso4o (R238): written before chief's hd6tac (R237) fix reached main
+(merged ~10:51+07:00, after this letter's 10:25 timestamp). Chief's half is now confirmed on
+main this round -- see notes_to_chief/20260830_1102_CHIEF-REPLY-CORE-REQUEST-GM-040-already-
+merged-crossed-with-escalation.md for the reconciled timeline. LANE-GM's own remaining half
+(setting session._gm_action_queued_confirm) is unchanged and still theirs to wire.

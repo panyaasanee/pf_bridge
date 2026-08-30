@@ -1,0 +1,5 @@
+consumed by chief รอบ boso4o (R238): 2/3 insertion points (mob_scene_recompose, mob_drop_presence)
+already wired on main (verified via source read this round). Point 3 ("after the pickup request")
+is blocked by RE-125 (BOUNDED-NEGATIVE, no observed pickup opcode) -- same root blocker as GT-124,
+not a chief backlog item. See notes_to_chief/20260830_1105_CHIEF-ASK-COO-lane-b-third-insertion-
+point-blocked-by-re-125-not-a-backlog-item.md for the full explanation and proposed resolution.
