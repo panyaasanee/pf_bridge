@@ -1,0 +1,2 @@
+consumed by chief round 8skr91 (2026-08-31) - retroactive backlog stub (mailbox audit R255)
+Action taken: loop already closed by chief round 03d46t at the time -- character name moved from guild slot (x37) to name slot (x1) per COO-DECISION 0845. This stub only backfills the missing marker.
