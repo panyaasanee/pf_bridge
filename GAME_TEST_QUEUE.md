@@ -9083,3 +9083,54 @@ grep โทเคน `LANE_GM_CHAT_WARP_CROSS_SCENE_TELEPORT_VITAL` เทีย
 รอบนี้ไม่มีเครื่องมือสำหรับ spawn subagent ชนิดนั้นเลย (ตรวจด้วย `ToolSearch`/`ListAgents` หลายคำค้นแล้วไม่พบ)
 จึงเขียนเองตามรูปแบบของใบ `GT-171`/`GT-141` ให้ใกล้เคียงที่สุด -- ถ้ารูปแบบผิดจากมาตรฐานให้แก้ได้ตามที่
 `pf-queue-author` เห็นสมควรในรอบถัดไป
+
+## 🆕 GT-173 OCEAN-WALLED-CITY-FIRST-EYES-001 [attended, in-game]: ฉาก 6 (Bg0006, Ocean Walled City) มีสิ่งมีชีวิตขึ้นจอจริงหรือไม่ -- ตาคู่แรกของโปรเจกต์ในฉากนี้  [READY]
+
+> เปิดโดย LANE-A (สาย A · WORLD) รอบ `fx0007`, 2026-08-31T17:xx+07:00 · `login_entry_allowed` ของฉาก 6
+> พลิกเป็น `true` รอบนี้ (`COO-DECISION 20260830_1441`, ประตูที่สี่ในคิวเดียวกับฉาก 4/5/10; composer
+> `world_population_bg0006.py`/`world_bg0006_identity.py` **สร้าง ผูก และเปิดประตูในรอบเดียวกัน** เหมือน
+> ฉาก 5 (รอบ `l03cgh`) -- เหตุผลเดียวกัน: เทสทั่วไป (`tests/test_lane_a_scene_census.py::
+> ComposerContractTests`) สมมติไว้แล้วว่าทุกฉากที่ lane นี้ผูก census ให้ต้องเปิดด้วย เพราะฉาก 4/5/10/14
+> เปิดหมดแล้วตอนรอบนี้เริ่ม) -- ไม่ใช่สำเนาของ `GT-166` เพราะฉากนี้**ไม่มี**ความเสี่ยงแบบ `GT-166`: ทะเบียนเอง
+> ไม่ระบุฉากนี้ใน `table_row_differences.the_two_interiors` (ตรวจแล้ว ไม่ใช่สมมติ) -- รูปแบบเดียวกับ `GT-165`
+> (ฉาก 4) / `GT-171` (ฉาก 5)
+
+### objective (claim เดียว)
+ล็อกอินเข้าฉาก 6 จริงแล้ว **เห็นตัวละคร/มอนสเตอร์ยืนอยู่ในเมืองกำแพงทะเล** (ไม่ใช่เมืองว่างเปล่า) ใช่หรือไม่ --
+คำถามคือ "มีสิ่งมีชีวิตขึ้นจอไหม" ไม่ใช่ "มันโจมตีไหม": composer ของฉากนี้**ตั้งใจไม่ส่ง faction bit เลย** (ดู
+`world_population_bg0006.py` docstring -- เป็นคำตัดสินของสาย B ที่ยังไม่ทำ) จึงไม่มีความเสี่ยงแบบ `GT-134`
+ที่มอนไม่ก้าวร้าว -- นั่นเป็นพฤติกรรมที่คาดไว้ ไม่ใช่ FAIL ของใบนี้
+
+### ทางเข้า
+ไม่มี production path ใดเขียนแถว character ให้ชื่อฉาก 6 เอง (ดู `login_entry_allowed_because` ในทะเบียน) --
+เข้าได้เฉพาะ staged GM account (`config/gm_login_scene.json`, scene_id=6) หรือ GM `/warp 6`
+
+### สิ่งที่ยังไม่วัด (บันทึกไว้ล่วงหน้า ไม่ใช่คำทำนายว่าจะพัง)
+1. จุดเกิด `MARKER[6]` ยังเป็นชั้นหลักฐาน `authored` เท่านั้น -- ไม่เคยมีไคลเอนต์ยืนจริง, ห่างจาก placement
+   ที่ใกล้ที่สุด 772.0 หน่วย (`table_row_differences.marker_geometry_measured_not_enforced`) -- ถ้าตกในหิน/
+   หลุดพื้น ให้บันทึกเป็นข้อมูลแยก ไม่ใช่ FAIL ของใบนี้ (คำถามของใบนี้คือมี actor ไหม ไม่ใช่พื้นดีไหม)
+2. ฉากนี้มี 3 leader ที่ถูกตัดออกด้วยเหตุผลใหม่ (ชื่อ `MOBS_TIP.s_NAME` เป็นอักษรจีน cp874 เข้ารหัสไม่ได้ --
+   ดู `world_bg0006_identity.py` docstring) -- ไม่ใช่ FAIL ของใบนี้เช่นกัน (composer ข้ามไปแล้วตั้งแต่ต้น
+   ไม่ใช่สิ่งที่ผู้เทสจะเห็นหายไปกลางจอ)
+
+### pass criteria — สองชั้น
+**wire/DB (ปิดแล้วโดยเทส):** console line `WORLD_CENSUS_BG0006 assembled=66/80 ...` ปรากฏหลังล็อกอินเข้าฉาก 6
+-- pin ไว้แล้ว `tests/test_lane_a_scene_census.py::OceanWalledCityRegistrationTests::
+test_the_real_registry_now_composes_and_that_is_the_round` และ `tests/test_world_population_bg0006.py`
+(เทสระดับ composer ตรง)
+**client-observable (ยังไม่มีใครยืนดู -- นี่คือสิ่งที่ใบนี้ต้องการ):** ผู้เทสเข้าฉาก 6 จริงแล้วรายงานว่าเห็น
+actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พอ ไม่ต้องนับให้ครบ 66)
+
+### สัญญาผู้บริโภค
+เปิดโดย LANE-A -- LANE-A บริโภคผลเอง ปิดหัวใบเมื่อผู้เทสยืนยันด้วยตา
+
+### links
+`scenarios/world_scene_registry_001.json` แถว `n_id: 6` (`login_entry_allowed_because`) ·
+`src/pirateforce_foundation/world_population_bg0006.py`, `world_bg0006_identity.py` ·
+`notes_to_chief/20260830_1441_COO-DECISION-scene4-slave-market-first-door.md` · `GT-165` (scene 4, same
+shape) · `GT-171` (scene 5, same shape) · `GT-166` (scene 10, same shape plus the geometry risk this
+scene does not carry) · `GT-134` (scene 14, same shape)
+
+**หมายเหตุผู้เขียนใบนี้:** ควรเขียนผ่านเอเจนต์ `pf-queue-author` ตามกติกาของโปรเจกต์ แต่ในสภาพแวดล้อม
+รอบนี้ไม่มีเครื่องมือสำหรับ spawn subagent ชนิดนั้น จึงเขียนเองตามรูปแบบของใบ `GT-171`/`GT-165` ให้ใกล้เคียง
+ที่สุด -- ถ้ารูปแบบผิดจากมาตรฐานให้แก้ได้ตามที่ `pf-queue-author` เห็นสมควรในรอบถัดไป
