@@ -8576,7 +8576,7 @@ assembled=84/116` ทุกบูตที่เรียกโมดูลน�
 `notes_to_chief/20260830_1441_COO-DECISION-scene4-slave-market-first-door.md` ·
 `src/pirateforce_foundation/world_bg0004_identity.py` ·
 `src/pirateforce_foundation/world_population_bg0004.py` ·
-`rounds/A_20260831_1239_h1utu5_bg0004-crosswalk.md`
+`rounds/A_20260831_1246_h1utu5_bg0004-crosswalk.md`
 
 **ผู้เปิดใบ: LANE-A (สาย A · WORLD) รอบ `h1utu5` 2026-08-31T12:3x+07:00** -- ตัวประกอบสร้างแล้ว ใบนี้เปิด
 ล่วงหน้าเพื่อไม่ให้คิวว่างตอนประตูเปิด

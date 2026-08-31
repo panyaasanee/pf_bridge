@@ -31,8 +31,9 @@ importer = ว่างเปล่า) และ `login_entry_allowed` ขอ�
 ## ตัวเลขที่วัดได้
 
 เทสใหม่ 27/27 ผ่าน (`test_world_bg0004_identity.py` 14 + `test_world_population_bg0004.py` 13) ·
-ทั้ง suite 5485 passed / 327 skipped / 0 failed (baseline ก่อนรอบนี้ 5483/327/0) · cp874 ผ่านทั้งสี่
-ไฟล์ใหม่
+ทั้ง suite 5485 passed / 327 skipped / 0 failed (baseline ก่อนรอบนี้ 5458/327/0 -- แก้เลขจาก 5483 หลัง
+pf-adversary จับได้ว่าบวกลบไม่ลงตัวกับ "27 tests total" วัดซ้ำบน `main` จริงในเช็คเอาต์นี้: 5458 + 27 =
+5485) · cp874 ผ่านทั้งสี่ไฟล์ใหม่
 
 ## Re-pin กติกาโครงการ (แก้ตามที่ `test_static_verifier_pins_cloud.py` สั่งไว้เอง)
 
