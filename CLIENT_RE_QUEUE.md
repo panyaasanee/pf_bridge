@@ -3211,3 +3211,29 @@ STATIC-ON-BRIDGE ก่อน)
 ### links
 
 `notes_to_chief/20260831_1142_RE-168-RESULT-no-dialogue-close-signal-exists-server-is-stateful-enough-to-add-one.md`
+
+## 🔬 RE-170 BG0005-SCENE-LEVEL-CONTROL-MEDIAN-GAP-001 [OPEN — assigned LANE-A]: `world_bg0015_identity.SCENE_LEVEL_CONTROL['BG0005']` อ้าง `(5, 60, 68.0, 35.0)` — CLINE-reading median 68.0, set-number median 35.0 — แต่รอบ `pynass` วัดใหม่ (per-placement บน 87 placements ที่ส่งได้จริง ตรวจสามวิธีอิสระให้ตรงกัน) ได้ 70 และ 31 ตามลำดับ ไม่ตรงกับตัวเลขเดิม ตัวเลขที่วัดใหม่นี้เชื่อว่าถูกต้องสำหรับวิธีนับที่ระบุไว้ในโมดูลของรอบนี้ แต่ยังไม่ได้ตรวจว่าตัวเลขเดิมใช้วิธีนับแบบอื่น (เช่น per-distinct-set แบบไม่ถ่วงน้ำหนัก หรือรวมแถวที่ resolve ไม่ได้ด้วย) หรือเป็นตัวเลขที่ผิดมาตั้งแต่รอบที่เขียนตารางนั้น
+
+### สิ่งที่รู้แล้ว (จากรอบ `pynass`, static, ไม่มี client)
+
+- วัดสามวิธี ได้ผลตรงกันทั้งสามครั้ง: per-placement (87 แถว), per-distinct-resolved-set (59 เซต), per-CLINE-row-ที่มีแถว MOBS จริง (63 คีย์) — ทั้งสามให้ CLINE-reading median = 70
+- Control 2 เป็น control อ่อนอยู่แล้วตามที่ทุกโมดูล crosswalk พี่น้องยอมรับเอง (monotone-in-level ทั้งโปรเจกต์ ดังนั้นการจับคู่แบบไหนก็ได้ median ใกล้เคียงกัน) — ช่องว่างนี้ไม่กระทบความเชื่อถือของ `world_bg0005_identity.py` เอง (control 1 — exact subset match — ยังตรง 100%)
+- ไม่ได้ไปแตะ/แก้ `SCENE_LEVEL_CONTROL` ในไฟล์ `world_bg0015_identity.py` เอง เพราะเป็นข้อมูลของรอบอื่น (`w0pu2i` หรือรอบใกล้เคียง) — รอบนี้ไม่ทราบวิธีนับตอนที่เขียนตารางนั้น จึงไม่กล้าลบ/แก้เอง
+
+### pass criteria
+
+1. **ระบุวิธีนับ**: หาว่ารอบที่เขียน `SCENE_LEVEL_CONTROL['BG0005']` (68.0, 35.0) นับด้วยวิธีไหน — ตรวจ git blame/round file ของบรรทัดนั้น แล้วเทียบ
+2. **ถ้าวิธีนับต่างกันจริง**: บันทึกทั้งสองวิธีไว้ในโมดูล ไม่ต้องแก้ตัวเลข
+3. **ถ้าตัวเลขเดิมผิดจริง**: แก้ `SCENE_LEVEL_CONTROL['BG0005']` เป็น `(5, 60, 70.0, 31.0)` พร้อม provenance ใหม่
+
+### ข้อห้าม
+
+ห้ามแก้ `SCENE_LEVEL_CONTROL` โดยไม่มี git-blame/round-file citation ว่าตัวเลขเดิมมาจากวิธีนับไหน — การเดาว่า "ตัวเลขเดิมผิด" แล้วเขียนทับโดยไม่ตรวจที่มาก่อน คือความผิดพลาดแบบเดียวกับที่ project นี้เคยเจอมาแล้ว (ดู `world_bg0015_identity.py`'s "THREE THINGS THAT KILL THE STRONG READING OF CONTROL 2")
+
+### สัญญาผู้บริโภค
+
+เปิดโดย LANE-A (ผู้พบ) — บริโภคผลเองถ้าไม่มีสายอื่นรับ เพราะเป็นข้อมูลใน `world_bg0015_identity.py` ที่สาย A ดูแลอยู่
+
+### links
+
+`rounds/A_20260831_1356_pynass_bg0005-crosswalk.md` (server repo) · `notes_to_chief/20260831_1358_LANE-A-STATUS-bg0005-evil-port-crosswalk-built-not-wired.md`
