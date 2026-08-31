@@ -1,0 +1,6 @@
+consumed by chief รอบ 7dvax5 (R269): ไม่มี ADDRESSEE: line ตรง chief (แค่ "cc") -- ทำอะไรต่อ:
+(1) ชั้น 1 (สาย B) + ชั้น 3 (สาย A+B ร่วม) แยกใบ INDEX ใหม่ให้ ADDRESSEE: ชัด
+    (20260831_1900_INDEX-LANE-B-*.md, 20260831_1901_INDEX-LANE-A-*.md) ตาม PROCESS_GATES #15
+(2) ชั้น 2 (chief เปิดกิ่งฉาก 14 ใน runtime.py) -- ยังไม่ลงมือ: ตามเนื้อใบเอง ชั้น 2 ขึ้นกับ CORE-REQUEST
+    ที่ชั้น 3 (สาย A+B ออกแบบ splice hostile ก่อน) ยังไม่ส่งมา เขียนโค้ดกิ่งตอนนี้ไม่มีแบบร่างป้องกัน
+    RE-092 (actor_identity ซ้ำ) = เสี่ยงเขียนผิด รอ CORE-REQUEST จากสาย A+B ก่อน

@@ -109,3 +109,11 @@ git log -1 --format=%B | grep -inE "\[(skip[ -]ci|ci[ -]skip|no[ -]ci|skip[ -]ac
 - ไม่ใช่การแก้ไฟล์ต้นฉบับของ COO -- chief ไม่เขียนทับใบที่คนอื่นเขียน เขียนใบใหม่แทน (index/pointer letter)
 - ต้นทางที่แท้จริง (prompt ของ COO เอง) เป็นของเจ้าของ ไม่ใช่ของ chief -- ข้อนี้แค่ปิดช่องที่ปลายทาง
 - มีผลตั้งแต่รอบนี้ (chief `yky18r`, R266)
+
+## 16. 🔴 ลำดับจบรอบคือ push → แก้หัวข้อ+body ใส่ marker → ปลด draft เท่านั้น ห้ามสลับ (กฎใหม่ · ที่มา: `20260831_1900_KA1A-ROOTCAUSE-the-reaper-skips-markerless-PRs-so-a-failed-undraft-is-unrecoverable-order-swapped.md` · เจ้าของอนุมัติแล้ว ลงใน prompt หลักของ Routine เป็น v6)
+
+- ต้นเหตุ: reaper ของ `merge-claude-pr.yml` ทั้งสองรีโป (`pf_bridge:358`, `pirate-force-server:656`) ข้าม PR ที่ body ไม่มี `PF-AUTOMERGE: v4` ทุกกรณี ("no marker - left alone ON PURPOSE") -- ลำดับเดิม (ปลด draft ก่อน ใส่ marker ทีหลัง) ทำให้ถ้าขั้นปลด draft ล้ม (เช่นเครื่องมือ GitHub MCP ไม่มีในเซสชันนั้น) PR จะค้างไม่มี marker ตลอดกาล ไม่มีกลไกอะไรกู้ได้เลยนอกจากเจ้าของมากดเอง -- เกิดจริง 31 ส.ค. สามใบพร้อมกัน (`pirate-force-server#399`/`#403`, `pf_bridge#620`)
+- กฎใหม่ (ยืนยันซ้ำจากที่ prompt หลักของ Routine (หัวข้อ 3) สั่งไว้แล้ว): ทุกสาย (A/B/GM/chief) ต้องทำสามขั้นจบรอบ**ตามลำดับนี้เท่านั้น**: (1) push งานให้ครบ (2) แก้หัวข้อ/body ของ PR ให้มีบรรทัด `PF-AUTOMERGE: v4` (3) ปลด draft ด้วย `update_pull_request(draft=false)` -- ขั้น (3) ล้มเมื่อไหร่ก็ตาม PR ยังมี marker อยู่แล้ว reaper (cron ทุก 10 นาที, `PF_STALE_MINUTES=45`) รับช่วงปลด draft ให้ด้วยโทเคนของ runner เอง เจ้าของไม่ต้องกด
+- ตรวจความปลอดภัยแล้ว (จากใบต้นฉบับ): job `decide`/`finish` ข้าม draft ทุกใบอยู่แล้วไม่ว่า marker จะอยู่ในนั้นหรือไม่ (`[ "$DRAFT" = "false" ] || continue`) ⇒ การใส่ marker ก่อนปลด draft ไม่ทำให้ PR ถูก merge กลางรอบที่งานยังไม่ครบ
+- nonclaim ที่ใบต้นฉบับติดไว้: ยังไม่เคยวัดว่าโทเคนของ runner ที่ reaper ใช้ปลด draft ผ่านจริงหรือไม่ (ยังไม่มี PR ที่ต้องพึ่ง path นี้จริงตั้งแต่กฎนี้มีผล) -- รอบที่เห็น reaper ปลด draft สำเร็จจริงครั้งแรก ให้บันทึกไว้ที่นี่
+- มีผลตั้งแต่รอบนี้ (chief `7dvax5`, R269)
