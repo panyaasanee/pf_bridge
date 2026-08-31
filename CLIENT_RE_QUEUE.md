@@ -2905,7 +2905,7 @@ GT-101 error 23065/28317):
 `notes_to_chief/20260830_1655_PANYA-ORDER-open-RE-162-in-session-scene-change-with-a-named-consumer-chain.md`
 (ใบสั่งเต็ม) · `gm/warp_executor.py` (docstring อ้าง RE-090) · `notes_to_chief/` RE-090 result (field-not-proven)
 
-## 🔬 RE-164 BT-GM-CLICK-FOUR-SUSPECTS-002 [PARTIAL — #2 CLOSED STATIC+ATTENDED, #4 CLOSED STATIC, #1/#3 NEEDS-ATTENDED-CAPTURE]: **ของสี่ผู้ต้องสงสัยที่ `RE-126` ทิ้งไว้โดยไม่เดา (connection context / query-0x25 gate ตอนคลิก / current-UI object-key จริง / create path `0x007280D0`) ตัวไหนคือประตูที่หยุด `GMUI_BASIC` จริง — ข้อ 2 กับ 4 ปิดแล้วด้วย static synthesis จากใบเก่า (`RE-104`+`RE-118`) ที่ไม่เคย cross-reference กันมาก่อน ข้อ 2 ได้ชั้น attended เพิ่มจาก `GT-164` (bounded negative: 14/14 variant คลิกแล้วไม่เปิด) ข้อ 1 กับ 3 ยังต้องไล่ disassembly เพิ่มที่ไม่มีในอิมเมจของ clone นี้**
+## 🔬 RE-164 BT-GM-CLICK-FOUR-SUSPECTS-002 [PARTIAL — #2 CLOSED STATIC+ATTENDED, #4 CLOSED STATIC, #1/#3 STATIC-ON-BRIDGE]: **ของสี่ผู้ต้องสงสัยที่ `RE-126` ทิ้งไว้โดยไม่เดา (connection context / query-0x25 gate ตอนคลิก / current-UI object-key จริง / create path `0x007280D0`) ตัวไหนคือประตูที่หยุด `GMUI_BASIC` จริง — ข้อ 2 กับ 4 ปิดแล้วด้วย static synthesis จากใบเก่า (`RE-104`+`RE-118`) ที่ไม่เคย cross-reference กันมาก่อน ข้อ 2 ได้ชั้น attended เพิ่มจาก `GT-164` (bounded negative: 14/14 variant คลิกแล้วไม่เปิด) ข้อ 1 กับ 3 ยังต้องไล่ disassembly เพิ่มที่ไม่มีในอิมเมจของ clone นี้**
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนเขียนลงไฟล์นี้ 2026-08-31T03:2x+07:00: `RE-164`/`GT-164` = 0 hit ทั้งสอง
 > ไฟล์นี้และ `GAME_TEST_QUEUE.md` ก่อนใบนี้ — เลขที่ใช้แล้วสูงสุดคือ `RE-163`/`GT-163`(reserved)
@@ -2913,6 +2913,16 @@ GT-101 error 23065/28317):
 > `docs/GM_LANE.md` ว่าคู่กับ `GT-165` — **นั่นผิด กติกาโปรเจกต์คือ RE-N คู่กับ GT-N เลขเดียวกันเสมอ**
 > (ดู `RE-161`/`GT-161`, `RE-162`/`GT-162`, `RE-163`/`GT-163` ด้านบน) เลขที่ถูกคือ `GT-164` ไม่ใช่ `GT-165`
 > — แก้ไว้ก่อนที่ตัวเลขผิดจะกระจายไปที่อื่น ดู nonclaim 4 ด้านล่าง
+>
+> 🆕 **ป้ายเส้นทางแก้แล้ว รอบ `jd4jqp` (`PROCESS_GATES.md` §18, กฎที่ chief เพิ่งเขียนกลับรอบ `jjs9bi`/R276
+> ตามใบ `20260831_2325_KA1A-ROOTCAUSE-RE-runner-idle-30h-*.md`):** ข้อ 1/3 เดิมติดป้าย
+> `NEEDS-ATTENDED-CAPTURE` มาตั้งแต่เปิดใบ (ก่อนป้ายเส้นทางสามแบบจะมีอยู่ด้วยซ้ำ) — **ป้ายนั้นผิดประเภทงาน**
+> ข้อความของใบนี้เองบอกตรง ๆ ว่าทั้งสองข้อ "ต้องไล่ disassembly เพิ่มที่ไม่มีในอิมเมจของ clone นี้ ... ต้อง
+> เปิดใบ RE runner บนสะพานถ้าจะไล่ต่อทาง static **หรือ**รอ attended capture" (nonclaim 5 เดิม) — คืองาน
+> อ่านไบนารีต่อบนเครื่องสะพาน (มี image + disassembler) ไม่ใช่งานที่ต้องมีคนนั่งหน้าจอเกม แก้เป็น
+> `STATIC-ON-BRIDGE` เพื่อให้ RE runner ที่ว่างอยู่ (ตามใบ ROOTCAUSE เดียวกัน) กรองใบนี้เจอ — สาย GM เป็น
+> ผู้เปิดใบนี้เอง จึงแก้ป้ายของใบตัวเองได้ตามกฎ mailbox (chief เองเลือกไม่แปะป้ายแทนใบของสายอื่น)
+> **ไม่เปลี่ยนเนื้อหา/ผล/nonclaim อื่นใดของใบนี้แม้แต่บรรทัดเดียว — แก้เฉพาะป้ายเส้นทางในหัวใบเท่านั้น**
 
 ### ที่มา — ใบนี้ควรถูกเปิดตั้งแต่รอบ `gm17278` แต่ไม่ได้ถูก push จริง
 
@@ -2938,7 +2948,7 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
    (`notes_to_chief/20260828_0411_RE-118-RESULT-CURRENT-UI-KEY-MUST-BE-NONEMPTY.md:26-28`) — แต่ยังไม่รู้ว่า
    context ตัวนั้น *ตรง* กับ session ที่ state vital ถูกส่งไปหรือไม่ ต้องไล่ write-site ของ `0x01032EC4`
    เพิ่ม ไม่มีในเอกสารที่ commit แล้ว — RE-126 nonclaim 3 ระบุเองว่าไม่เคยอ้างเรื่อง match/mismatch นี้
-   (`notes_to_chief/20260828_1809_RE-126-RESULT-BT-GM-SAME-CONTROL.md:53`) **[NEEDS-ATTENDED-CAPTURE ยืนยัน]**
+   (`notes_to_chief/20260828_1809_RE-126-RESULT-BT-GM-SAME-CONTROL.md:53`) **[STATIC-ON-BRIDGE ยืนยัน — แก้ป้ายรอบ jd4jqp]**
 2. **query-0x25 gate ตอนคลิก** — adapter `0x00726D30` (อ่าน `GMModule_Client+0x19`, RE-104 พิสูจน์ว่าคุมการ
    วาด/enable ปุ่ม) ถูกเรียกซ้ำตอนคลิกด้วยหรือคืนค่าจากตอนวาดครั้งเดียว — ถ้าเรียกซ้ำ ค่าที่อ่าน ณ
    เวลาคลิกอาจต่างจากตอนวาด
@@ -2962,7 +2972,7 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
    UTF-16 ไม่ว่าง) แต่หยุดที่ "ไม่มี literal/crosswalk ผูก key กับชื่อ panel"
    (`notes_to_chief/20260828_0411_...md:38,62`) — `GT-103AB`
    (`notes_to_chief/20260828_1140_GT103AB-RESULT-...md:51`) ยืนยันช่องว่างนี้ยังเปิดอยู่ ไม่มีใบไหนไล่ต่อจาก
-   จุดนั้น **[NEEDS-ATTENDED-CAPTURE ยืนยัน]**
+   จุดนั้น **[STATIC-ON-BRIDGE ยืนยัน — แก้ป้ายรอบ jd4jqp]**
 4. **create path** — factory `0x007280D0` ที่สร้าง `GMUI_BASIC`/`GMModule_Client+0x48` ถูกเรียกไหมเมื่อคลิก
    หรือมี early-return ตัดก่อนถึง
    ✅ **[STATIC ปิดแล้ว รอบ `1q7nxu`]** มี early-return แบบมีเงื่อนไข: dispatcher
