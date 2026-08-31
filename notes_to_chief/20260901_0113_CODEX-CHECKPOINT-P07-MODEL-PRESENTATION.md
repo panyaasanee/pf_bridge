@@ -60,7 +60,7 @@ P0-6 ถูกพักไว้ที่ `PARTIAL / PAUSED BY STOP RULE`; ห�
 - generation `...\PF_MONSTER_PRESENTATION.md` — 5,105 ไบต์ — SHA-256 `cf92eb5cc6955e6b443058a663f99c68c21865f0f9bf027db76cd9e33aeaffa4`
 - generation `...\PF_ATTR_RUNTIME_FIELDS.tsv` — 20,578 ไบต์ — SHA-256 `e62c446a4f887a337e16e5a63b7c9b382a8f890bf0a98a93572b9744eaf8ff6b`
 - generation `...\PF_ATTR_UNRESOLVED.tsv` — 2,355,364 ไบต์ — SHA-256 `07f3012fbdf5b9c1c61a455b1ce949f27e1d1c0d0e73ac1102bf97a4220463a0`
-- cumulative audit `C:\Users\Panya\Desktop\Pirate Force\Pirate_Force_Codex_Audit_Recommendations_CHECKPOINT_20260831.md` — 105,841 ไบต์ — SHA-256 `36463be5d61b5cffe43b1020cabfbebac87179f15ed91532e2c2138143ca11a7`
+- cumulative audit `C:\Users\Panya\Desktop\Pirate Force\Pirate_Force_Codex_Audit_Recommendations_CHECKPOINT_20260831.md` — 106,095 ไบต์ — SHA-256 `5ea8f78517b6c5eaecabbfdb8a6cab055f36907014a95d332b4e9fea9048d322`
 - immutable pre-edit snapshot `C:\Users\Panya\Desktop\Pirate Force\audit_history\Pirate_Force_Codex_Audit_Recommendations.b96e420c2902_20260901_0057.md` — 92,551 ไบต์ — SHA-256 `7bcbef60e9d058d38bb74f86802e4cb691c5b54fd295f2c867582af4040bc83c`
 
 ไฟล์ทั้งหมดเป็น local external/audit artifacts ยังไม่ใช่ committed/released package. รายงานหลักคง `HOLD FOR PANYA`
