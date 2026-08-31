@@ -8362,7 +8362,7 @@ P1/P2/P3/P4 · เวลาคลิกทุกครั้ง (+07:00 แล�
 ค่า counter ก่อน/หลัง · MAX(identity) · บรรทัด BAG_ADMISSION + PermissionError คัดดิบ · diff เต็มของเครื่องมือ ·
 sha สำเนาหลังตอบปฏิเสธ/หลังเขียน · sha canonical ก่อน-หลัง · integrity_check · S0 + สีป้ายทุกป้าย · NO-CRASH/CRASH · OBSERVER_CONFIRMED
 
-## GT-148 SCENE17-STOWAWAY-ACTORS-FIRST-EYES-001 [attended, in-game]: ออกทะเลกับ Columbus แล้ว **ไคลเอนต์ยังโชว์ actor ของ Port Royal ที่ถูกส่งไปตอนล็อกอินอยู่หรือไม่**  [PENDING · เปิดโดย LANE-A (WORLD) รอบ `2pdf6j`]
+## GT-148 SCENE17-STOWAWAY-ACTORS-FIRST-EYES-001 [attended, in-game]: ออกทะเลกับ Columbus แล้ว **ไคลเอนต์ยังโชว์ actor ของ Port Royal ที่ถูกส่งไปตอนล็อกอินอยู่หรือไม่**  [~~PENDING · เปิดโดย LANE-A (WORLD) รอบ `2pdf6j`~~ 🟢 **PASS ทั้งสองชั้น — LANE-A รอบ `qoj8ei` 2026-08-31T11:4x+07:00 ปิดหัวใบ ตามผล `notes_to_chief/20260831_1037_GT148-and-GT165-RESULT-stowaways-cleared-and-slave-market-island-has-life.md`: เจ้าของออกทะเลกับ Columbus ไปฉาก 17 รายงานตรง ๆ ว่า "ในแมพนั้นไม่มี npc อะไรอยู่" — ไม่มี actor ของ Port Royal ค้างข้ามมาแม้แต่ตัวเดียว; wire ยืนยันครบสี่บรรทัด รวม `WORLD_M2_CROSSING_HANDOFF kind=clear dispatched=YES slot=before_teleport`. หมายเหตุ: พบของใหม่คนละชั้น (หน้าต่างบทสนทนา Columbus ค้างบนจอ) ยกเป็น `RE-168` แยก ไม่นับเป็น FAIL ของใบนี้**]
 
 > 🔴 อัปเดตโดย chief รอบ `65etwo` 2026-08-30T~23:1x+07:00: LANE-A เปิด CORE-REQUEST
 > (`notes_to_chief/20260830_2148_LANE-A-CORE-REQUEST-columbus-crossing-owes-a-population-handoff.md`)
@@ -8854,7 +8854,7 @@ suspect 1/3/4 ของ `RE-164` (connection context / current-UI key / create p
 `notes_to_chief/20260831_0901_GT164-RESULT-bounded-negative-on-suspect-2-plus-field-0x0b-second-is-the-button-visibility-switch.md`
 (ผลใบนี้)
 
-## 🆕 GT-165 SLAVE-MARKET-ISLAND-FIRST-EYES-001 [attended, in-game]: เกาะตลาดทาส `Bg0004` (ฉาก 4) มีสิ่งมีชีวิตขึ้นจอจริงหรือไม่ -- ตาคู่แรกของโปรเจกต์ในฉากนี้  [READY]
+## 🆕 GT-165 SLAVE-MARKET-ISLAND-FIRST-EYES-001 [attended, in-game]: เกาะตลาดทาส `Bg0004` (ฉาก 4) มีสิ่งมีชีวิตขึ้นจอจริงหรือไม่ -- ตาคู่แรกของโปรเจกต์ในฉากนี้  [~~READY~~ 🟢 **PASS ทั้งสองชั้น — LANE-A รอบ `qoj8ei` 2026-08-31T11:4x+07:00 ปิดหัวใบ ตามผล `notes_to_chief/20260831_1037_GT148-and-GT165-RESULT-stowaways-cleared-and-slave-market-island-has-life.md`: เจ้าของเข้าฉาก 4 จริง เดินสำรวจแล้วรายงาน "มีสิ่งมีชีวิตหลายตัว ทุกตัวดูเหมือนจะเป็นสิ่งมีชีวิตของที่นี่จริง ๆ"; wire ตรงเกณฑ์เป๊ะ `WORLD_CENSUS_BG0004 assembled=109/116` ทั้ง 7 ตัวที่ไม่ส่งมีเหตุผลระบุครบ**]
 
 > เปิดโดย LANE-A (สาย A · WORLD) รอบ `bq4mst`, 2026-08-31T06:4x+07:00 · `login_entry_allowed` ของฉาก 4 พลิกเป็น
 > `true` รอบนี้ (`COO-DECISION 20260830_1441`, composer `world_population_bg0004.py`/`world_bg0004_identity.py`

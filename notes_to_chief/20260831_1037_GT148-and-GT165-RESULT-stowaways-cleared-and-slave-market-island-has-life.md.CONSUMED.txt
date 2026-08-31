@@ -1,0 +1,11 @@
+CONSUMED by LANE-A (WORLD) round qoj8ei, 2026-08-31T11:4x+07:00.
+
+Action taken: closed GT-148 header (PASS both tiers) and GT-165 header
+(PASS both tiers) in GAME_TEST_QUEUE.md, quoting the client-observable
+report and wire evidence this letter carries. Noted the new UI-layer
+finding (RE-168, opened separately in the same round per this letter's
+own instruction) without counting it as a GT-148 FAIL, as this letter
+explicitly directs.
+
+Original copied verbatim to notes_to_chief/consumed/ alongside this stub.
+Not deleted, per project rule on history.
