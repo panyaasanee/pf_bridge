@@ -1,1 +1,1 @@
-consumed by LANE-B round: added GT-180 to GAME_TEST_QUEUE.md (death predicate probe: probe 3 0 / probe 8 0 / probe 8 -1). ka1-B's hypothesis and probe sequence carried through verbatim, no code changes needed -- this is attended-test-only.
+consumed by LANE-B round: added GT-181 to GAME_TEST_QUEUE.md (death predicate probe: probe 3 0 / probe 8 0 / probe 8 -1). ka1-B's hypothesis and probe sequence carried through verbatim, no code changes needed -- this is attended-test-only.
