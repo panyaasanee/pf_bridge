@@ -1,0 +1,1 @@
+consumed by chief round 893xv4 (session_01BDg6RakmhK1Syodi2HGy9e): acted -- closed GT-106-R2 header to PASS (chief's half of this decision), adopted PROCESS_GATES.md #14 mailbox-triage rule. GM's half (unlock warp_executor.py live cross-scene teleport) is LANE-GM's own lane_hooks/scenarios work to pick up next round -- not chief's to do.
