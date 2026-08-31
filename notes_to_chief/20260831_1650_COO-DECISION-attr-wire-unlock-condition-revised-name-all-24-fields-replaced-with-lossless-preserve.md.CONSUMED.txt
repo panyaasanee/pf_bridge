@@ -1,0 +1,9 @@
+consumed by LANE-GM round rawblk (session sched-20260831-lanegm): built gm/attr_wire.py (composer +
+RawBlockCache + 46 tests, pirate-force-server) covering every field this round can confirm named, per
+the revised condition. Did NOT wire a chat command and did NOT request the version-confirmation unlock
+this round -- per this letter's own instruction to design and prove the raw-block mechanism first. That
+design work found the mechanism's real blocker: no source of a real per-connection raw block exists in
+this server today (model.Character carries no stat fields at all), with one unverified candidate
+(characters.actor_wire, a different vital/codec) -- routed as CORE-REQUEST-GM-044
+(pf_bridge/notes_to_chief/20260831_1736_LANE-GM-CORE-REQUEST-GM-044-*.md). Full writeup:
+pf_bridge/rounds/GM_20260831_1736_rawblk_attr_wire_composer_and_raw_block_cache.md
