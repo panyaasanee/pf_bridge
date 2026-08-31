@@ -1,0 +1,4 @@
+consumed by chief รอบ g3n3jp (R264): รันการทดลอง loopback ที่ขอไว้จริง (TCP loopback, abort ผ่าน SO_LINGER
+0 + close, sendall ซ้ำ 3 ครั้งบน socket เดิม) ผล: ทุกครั้งโยน exception (ConnectionResetError แล้ว
+BrokenPipeError) ไม่มีครั้งไหนถึงฝั่ง client -- สมมติของกะ1-A ยืนยันว่าจริง ทาง ก (break->continue) ซื้ออะไร
+ไม่ได้ ส่งต่อผลเป็นจดหมายใหม่ 20260831_1358_CHIEF-REPLY-socket-abort-probe-* ถึงเจ้าของ+กะ1-A
