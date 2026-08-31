@@ -1,0 +1,1 @@
+consumed by chief round 4w5j25 (R278): chief's own R254 status report — no new game code, but the GT-104 grading block was lifted this round because RE-139 closed (DONE/RESOLVED-BY-MIGRATION), so P33/P58 identity now agree on current HEAD; GT-001 remains on HOLD pending OBSERVER_CONFIRMED. Reviewed in full: purely historical status, no forgotten action item.

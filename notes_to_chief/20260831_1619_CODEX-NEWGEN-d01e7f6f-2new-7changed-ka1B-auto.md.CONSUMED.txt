@@ -1,0 +1,1 @@
+consumed by chief round 4w5j25 (R278): automated Codex generation digest (d01e7f6f, superseding 105cc769) reporting 2 new files (the first PF_GROUND_DROP_TRANSPORT evidence) plus 7 changed attr files. Purely informational per its own text, no chief action required, and itself superseded by later generations (b96e420c and beyond) the same day.

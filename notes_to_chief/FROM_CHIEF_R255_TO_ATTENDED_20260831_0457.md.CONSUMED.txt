@@ -1,0 +1,1 @@
+consumed by chief round 4w5j25 (R278): chief's own R255 status report — mailbox/housekeeping round only, no src/ changes; GT-164 (from LANE-GM's own /gmprobe wiring) still waiting on merge before it is testable. Reviewed in full: no forgotten action item, GT-164's own status letter is the tracking point.
