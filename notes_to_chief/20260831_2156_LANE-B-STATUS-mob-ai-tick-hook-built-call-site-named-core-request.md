@@ -120,6 +120,15 @@ retry-loop เหมือน damage_step/death_step ต้องตัดสิ
 วันนี้ single-threaded ต่อ connection จึง unreachable เหมือนที่ comment ของ
 damage_step retry เองบอกไว้)
 
+**ช่องที่ pf-adversary เจอตอนรีวิว (ยังไม่ปิด ต้องตอบก่อนต่อสายจริง)**: `maybe_tick`
+กับ `tick_session` มีพารามิเตอร์ `player_alive` ที่ default เป็น `True` เสมอ บล็อก
+CORE-REQUEST ข้างบนไม่ได้ส่งค่านี้ (ใช้ default) และตอนนี้ยังไม่มี state ตัวไหนใน
+`dispatch()` ที่บอกได้ว่าผู้เล่นที่กำลังส่ง packet ตายอยู่หรือไม่ ถ้า chief paste
+บล็อกนี้ตรง ๆ โดยไม่แก้ mob AI จะตีความผู้เล่นที่ตายแล้วว่ายังมีชีวิตตลอด (aggro/threat
+จะยังคิดกับศพ) -- chief ต้องหาว่า "ผู้เล่นคนนี้ยังไม่ตาย" มาจาก state ไหนใน `dispatch()`
+(เช่น flag ที่ death_step ตั้งไว้แล้ว) แล้วส่งเข้า `player_alive=` ก่อน merge บล็อกนี้เข้าจริง
+ไม่ใช่แค่ copy-paste ตามที่เขียนไว้ด้านบน
+
 ## เรื่อง Door B (ASK-COO ของรอบ 256rvs)
 
 ตรวจแล้วตอนต้นรอบ: ยังไม่มี COO-DECISION ตอบ ASK-COO ของรอบ `256rvs` เรื่องทิศทาง
