@@ -1,0 +1,7 @@
+consumed by LANE-GM round dgyakk (2026-09-01) - retroactive backlog stub, mailbox hygiene only
+Action taken: this COO-DECISION was already acted on across rounds 1425/1523/1736 (grep "1244" in
+rounds/GM_*.md confirms all three reference it) - attr_wire.py stayed fail-closed, no live send
+attempted, lane worked RE-164/GT-164/CORE-REQUEST-GM-043 instead as instructed. It never received
+its .CONSUMED.txt stub in those rounds; this stub closes that gap only, no new action taken on the
+decision itself. Superseded in substance by RE-172 (closed round thhkup) and the resulting
+LANE-GM-TO-OWNER letter 20260831_2327, which is the live thread now.
