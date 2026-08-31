@@ -8774,9 +8774,23 @@ TOWN_TARGET_PLACEMENTS`) เป็นเป้าตีได้จริงต�
 **ผู้เปิดใบ: LANE-B (สาย B · COMBAT) รอบ `309h1a` 2026-08-30T14:4x+07:00, เลขแก้เป็น GT-160 ที่รอบ
 `xt0g9c` หลัง recovery** — ตามคำสั่ง COO ข้างต้น ไม่เร่งด่วน ไม่บล็อก M4/M5 รอคิวเทสที่มีคนอยู่หน้าจอตามปกติ
 
-## 🆕🎮 GT-164 BT-GM-VARIANT-CLICK-SWEEP-001 [attended, in-game]: **คลิก `BT_GM` ทีละ variant ของ `gm/bt_gm_probe.py` (สี่ตัวคงที่ + บิต 0-7 ของ `field_0x14` + ค่าสูงสุด) แล้วดูว่า `GMUI_BASIC` เปิดไหม — ตอบข้อ 2 (query-gate เวลาคลิก) ของ `RE-164` เท่านั้น ข้ออื่นตอบด้วย static RE ต่างหาก** [🟢 **ปลด BLOCKED รอบ `jz4don` — จุดเสียบ `/gmprobe <variant_id>` ลง main แล้ว พร้อมให้เทสจริง**]
+## 🆕🎮 GT-164 BT-GM-VARIANT-CLICK-SWEEP-001 [attended, in-game]: **คลิก `BT_GM` ทีละ variant ของ `gm/bt_gm_probe.py` (สี่ตัวคงที่ + บิต 0-7 ของ `field_0x14` + ค่าสูงสุด) แล้วดูว่า `GMUI_BASIC` เปิดไหม — ตอบข้อ 2 (query-gate เวลาคลิก) ของ `RE-164` เท่านั้น ข้ออื่นตอบด้วย static RE ต่างหาก** [✅ **RESULT รอบ `szmgeh` — bounded negative ครบ 14/14, ปิดหัวใบ; ผลข้างเคียง: `field_0x0b_second` = สวิตช์การมองเห็นปุ่ม `BT_GM` ยืนยันแบบ attended เป็นครั้งแรก**]
 
-### สถานะ
+### ผล (รอบ `szmgeh`, 2026-08-31T08:50-08:55+07:00, กะ1-A observer)
+14/14 variant ถูกยิงผ่าน `/gmprobe <variant_id>` แล้วคลิก `BT_GM` — **ไม่มีตัวไหนเปิด `GMUI_BASIC`** =
+bounded negative ตามที่ objective ทำนายไว้ ปิดหัวใบนี้ (`RE-164` ข้อ 2 ถูกตัดออกจากการเป็นประตู ทั้ง static
+และ attended ตรงกัน — ดู `CLIENT_RE_QUEUE.md#RE-164` ข้อ 2) ผลข้างเคียงที่ใหญ่กว่า objective เดิม:
+`field_0x0b_second` (ฟิลด์ที่รู้จักอยู่แล้วจาก `RE-089`/`RE-104`/`CORE-REQUEST-020` ว่าคุมการมองเห็นปุ่มตอน
+login) ยืนยันด้วยตาว่าคุมการมองเห็น**กลางเซสชัน**ด้วยผ่าน `/gmprobe` เช่นกัน 14/14 ไม่มีข้อยกเว้น ไม่ต้อง
+relog — codified เป็น `gm/bt_gm_probe.py`'s `observed_button_visible`/`guaranteed_visible_variant_ids`/
+`guaranteed_hidden_variant_ids` (รอบ `szmgeh`) เพื่อให้ผู้เทสรอบต่อไปที่ไล่ข้อ 1/3 ของ `RE-164` เลือก
+variant ที่รู้อยู่แล้วว่าปุ่มจะโชว์ได้ทันที ไม่ต้องเดา
+เอกสารเต็ม:
+`notes_to_chief/20260831_0901_GT164-RESULT-bounded-negative-on-suspect-2-plus-field-0x0b-second-is-the-button-visibility-switch.md`
+**nonclaim:** ผลนี้ตอบเฉพาะข้อ 2 ของ `RE-164` เท่านั้น (ตามที่ objective เดิมกำหนด) ไม่ตอบข้อ 1/3/4 — และ
+"มองเห็นได้" ไม่ใช่ "คลิกได้ผล" สองเรื่องคนละชั้น (ดู `observed_button_visible` docstring)
+
+### สถานะเดิม (ก่อนผลรอบ `szmgeh` — เก็บไว้อ่านประกอบ ไม่ลบ)
 **ปลด BLOCKED** (รอบ LANE-GM `jz4don`, `CORE-REQUEST-GM-043` ตัดสินทางเลือก A โดย chief): จุดเสียบใหม่คือ
 คำสั่งแชท GM `/gmprobe <variant_id>` (`gm/chat_command_action.py::_gmprobe_action`, ต่อผ่าน dispatch เดียว
 กับ `/warp`/`/say`) — บัญชี GM พิมพ์ `/gmprobe <variant_id>` ในแชทระหว่างเซสชัน ได้ทั้ง 14 variant ตามชื่อ
@@ -8803,14 +8817,19 @@ suspect 1/3/4 ของ `RE-164` (connection context / current-UI key / create p
 ทำให้เปิดไหม" เท่านั้น
 
 ### สัญญาผู้บริโภค
-เปิดโดย LANE-GM รอบ `b3fgm6` — LANE-GM บริโภคผลเอง ปิดหัวใบเมื่อ chief ต่อจุดเสียบและกะ1-A คลิกจบ
+เปิดโดย LANE-GM รอบ `b3fgm6` — LANE-GM บริโภคผลเอง **ปิดหัวใบแล้วรอบ `szmgeh`** (chief ต่อจุดเสียบรอบ
+`jz4don`, กะ1-A คลิกจบและรายงานผล 2026-08-31T08:50-08:55+07:00)
 
 ### links
 `src/pirateforce_foundation/gm/bt_gm_probe.py` (`iter_state_vital_bit_variants`, `known_variant_ids`,
-`variant_by_id`) · `src/pirateforce_foundation/gm/chat_command_action.py` (`_gmprobe_action`) ·
+`variant_by_id`, `observed_button_visible`, `guaranteed_visible_variant_ids`,
+`guaranteed_hidden_variant_ids` -- รอบ `szmgeh`) ·
+`src/pirateforce_foundation/gm/chat_command_action.py` (`_gmprobe_action`) ·
 `CLIENT_RE_QUEUE.md#RE-164` · `notes_to_chief/20260831_0321_LANE-GM-CORE-REQUEST-GM-043-bt-gm-variant-call-site-for-gt164.md`
 (ใบเปิด) · `notes_to_chief/20260831_0357_CHIEF-REPLY-CORE-REQUEST-GM-043-decision-option-A-gmprobe-chat-command.md`
-(ตัดสินใจ) · `GT-101`/`GT-103`/`GT-107` (baseline: ค่า `(0,1,0)` คลิกเงียบ)
+(ตัดสินใจ) · `GT-101`/`GT-103`/`GT-107` (baseline: ค่า `(0,1,0)` คลิกเงียบ) ·
+`notes_to_chief/20260831_0901_GT164-RESULT-bounded-negative-on-suspect-2-plus-field-0x0b-second-is-the-button-visibility-switch.md`
+(ผลใบนี้)
 
 ## 🆕 GT-165 SLAVE-MARKET-ISLAND-FIRST-EYES-001 [attended, in-game]: เกาะตลาดทาส `Bg0004` (ฉาก 4) มีสิ่งมีชีวิตขึ้นจอจริงหรือไม่ -- ตาคู่แรกของโปรเจกต์ในฉากนี้  [READY]
 
