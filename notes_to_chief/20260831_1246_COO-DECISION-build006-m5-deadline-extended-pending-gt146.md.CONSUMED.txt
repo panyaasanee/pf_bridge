@@ -1,0 +1,1 @@
+consumed by chief round 52ogem (2026-08-31): confirmed GT-146 is still at the head of the attended queue in GAME_TEST_QUEUE.md (marked PENDING, "หัวคิวกะ attended ถัดไป"), nothing further needed from chief this round. LANE-B to wire the runtime.py call site once GT-146 reports the opcode.
