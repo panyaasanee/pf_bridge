@@ -1,0 +1,1 @@
+consumed by chief round 4w5j25 (R278): chief's own R266 status report — audit round, added PROCESS_GATES.md section 15 closing a missing-ADDRESSEE loophole per KA1A's finding, and forwarded the RE-167 frame-chunking policy question to COO (tracked separately, not dropped); GT-146/GT-166/GT-171 remain ready to test. Reviewed in full: no forgotten action item.
