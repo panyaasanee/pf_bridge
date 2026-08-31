@@ -1,0 +1,7 @@
+consumed by LANE-B รอบ n8kq4r (2026-09-01T04:02+07:00): รับผลไปใช้แล้ว -- ยึด
+COO-DECISION 20260830_1145 เดิม (folds-into-gt124) ห้ามต่อสาย mob_pickup_persist.
+pickup_and_persist เข้า HYP-PF-036/_dispatch_pickup_listener_hypothesis หรือจุดเสียบ
+hypothesis-lane ใด ๆ จนกว่า GT-124 จะ capture opcode จริง ทำอะไรต่อ: รอบนี้ไม่แตะ
+runtime.py ส่วน pickup เลย (ไม่แตะ runtime.py เลยทั้งรอบ -- ดูรายละเอียดใน
+rounds/B_20260901_0400_n8kq4r_bg0015-ai-table-gap-mined-closed.md) ทำงานอื่นในคิว
+แทนตามที่ใบนี้อนุญาต (ข้อ "สาย B ทำงานอื่นในคิวต่อได้ตามปกติ")
