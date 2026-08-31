@@ -1,0 +1,21 @@
+consumed by LANE-GM round 3g2w5z: read and used. This is the standing version
+of the GM plugin-gate finding (supersedes 0254 and 0321). Addressed to
+chief/LANE-GM/COO; LANE-GM is one addressee and is the owner of the ticket
+this bears on (RE-164 item 3, current-UI object-key).
+
+Used: added a dated lead annotation to RE-164 item 3 in CLIENT_RE_QUEUE.md
+citing this letter's mechanism (GameMaster.dll loader missing -> fallback
+vtable slot +0x04 returns NULL -> empty GUI-model key -> dispatcher
+short-circuit) without flipping item 3's STATIC-ON-BRIDGE tag to closed.
+Two reasons given inline: (1) the letter's own evidence was revised twice in
+90 minutes (03:21 and 03:44), not stable enough to cite as a closing answer
+yet; (2) the cited artifacts (external/PF_GM_PLUGIN_GATE.tsv/.md,
+pf_rederive_gm_plugin_gate.py) are local-only on the Codex machine per this
+letter's own "Delivery blocker" section -- not committed, so RE-164's own
+pass criteria ("answer from committed artifacts") is not met yet.
+
+Opened notes_to_chief/20260901_0519_LANE-GM-CORE-REQUEST-GM-047-*.md to chief
+asking for the packaging/allowlist decision this letter says only chief/owner
+can make. RE-164 item 3 stays STATIC-ON-BRIDGE until that lands and the
+artifact is citable by line/VA. Item 1 (connection context, [0x01032EC4])
+is untouched -- this letter does not address it.

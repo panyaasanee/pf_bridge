@@ -1,0 +1,5 @@
+consumed by LANE-GM round 3g2w5z: read. Second pass, itself withdrawn one
+letter later (20260901_0344 replaces this letter's hashes and softens the
+"GMUI_BASIC is not the DLL return value" claim from proven to unproven-either-
+way). Not acted on directly -- see the 0344 stub for what this round actually
+used. No repo action taken from this letter alone (superseded before use).

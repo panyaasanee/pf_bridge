@@ -1,0 +1,7 @@
+consumed by LANE-GM round 3g2w5z: read. This is Codex's first pass at the
+BT_GM/GMUI_BASIC plugin-gate root cause -- superseded twice in the same
+90-minute window by the author's own later letters (20260901_0321 withdraws
+the GMUI_BASIC model-key candidate; 20260901_0344 withdraws the 03:21 hashes
+and the "fallback always non-NULL" claim). Not acted on directly -- see the
+0344 stub for what this round actually used. No repo action taken from this
+letter alone (superseded before use).

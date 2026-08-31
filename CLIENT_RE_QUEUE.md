@@ -2973,6 +2973,19 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
    (`notes_to_chief/20260828_0411_...md:38,62`) — `GT-103AB`
    (`notes_to_chief/20260828_1140_GT103AB-RESULT-...md:51`) ยืนยันช่องว่างนี้ยังเปิดอยู่ ไม่มีใบไหนไล่ต่อจาก
    จุดนั้น **[STATIC-ON-BRIDGE ยืนยัน — แก้ป้ายรอบ jd4jqp]**
+   🟠 **[LEAD จาก Codex static RE รอบ `3g2w5z` — ยังไม่ปิดข้อนี้]** สาม CODEX CORRECTION letters
+   (`notes_to_chief/20260901_0254`/`0321`/`0344_CODEX-CORRECTION-*.md`, สองใบแรกถูกถอนบางส่วนโดยใบที่สาม)
+   อ้างว่าไล่ต่อจากจุดที่ `RE-118` หยุดได้: `application+0x7C8` เป็น interface pointer จาก
+   `GameMaster.dll`/`CreateGameMaster` (loader `0x00406720`) ไม่มี DLL นี้ในเครื่องที่วัด ⇒ fallback
+   4-byte vtable `0x00F09AF0` ที่ slot `+0x04` ชี้ `0x009F17E0` คืน NULL เสมอ — slot `+0x04` คือตัวที่
+   `[0x01093198]+0x7C8+0x04` เรียกเพื่อเอา GUI-model key ดังนั้น key ว่าง/NULL อธิบาย dispatcher
+   short-circuit ที่ `0x00AA0710..0x00AA0799` ได้ครบสาย **แต่ยังปิดข้อนี้ในใบนี้ไม่ได้:** (ก) evidence แก้
+   เองแล้วสองครั้งใน 90 นาที (03:21 ถอน `GMUI_BASIC` เป็น model key, 03:44 ถอน hash รุ่น 03:21 กับถอนคำว่า
+   fallback non-NULL เสมอ) — ไม่เสถียรพอจะอ้างเป็นคำตอบปิดใบ (ข) source ของหลักฐาน (`external/PF_GM_PLUGIN_GATE.tsv`/`.md`,
+   `pf_rederive_gm_plugin_gate.py`) เป็น local-only ที่เครื่อง Codex ยัง gitignore อยู่ ไม่ได้ commit เข้า repo
+   ตามที่ `20260901_0344` บอกเอง ⇒ ขัดกับ pass criteria ของใบนี้ที่ต้อง "ตอบจาก artifact ที่ commit แล้ว"
+   — เปิด `CORE-REQUEST` ให้ chief เคาะ packaging/allowlist แล้ว (ดู `notes_to_chief/`) ข้อ 3 คงป้าย
+   `STATIC-ON-BRIDGE` เดิมไว้จนกว่า artifact จะ commit และเสถียรพอให้อ้างอิงเลขบรรทัด/VA ได้จริง
 4. **create path** — factory `0x007280D0` ที่สร้าง `GMUI_BASIC`/`GMModule_Client+0x48` ถูกเรียกไหมเมื่อคลิก
    หรือมี early-return ตัดก่อนถึง
    ✅ **[STATIC ปิดแล้ว รอบ `1q7nxu`]** มี early-return แบบมีเงื่อนไข: dispatcher
