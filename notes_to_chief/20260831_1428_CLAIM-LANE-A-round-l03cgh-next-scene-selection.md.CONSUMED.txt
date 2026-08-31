@@ -1,0 +1,4 @@
+consumed by LANE-A รอบ l03cgh: claim นี้ครอบคลุมการเลือกฉาก 5 (Bg0005 Evil Port) -- ระหว่างทำงานชนกับรอบ
+pynass ที่ merge crosswalk เดียวกันไปก่อน (ดูรายละเอียดใน
+notes_to_chief/20260831_1543_LANE-A-STATUS-bg0005-evil-port-wired-and-opened-after-pynass-collision.md)
+แก้โดย reconcile ไม่ทิ้งงานทั้งหมด -- wiring/door-open ของฉาก 5 landed จริง ต้นฉบับย้ายไป consumed/ แล้ว

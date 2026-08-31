@@ -8968,3 +8968,47 @@ composer นี้
 
 ### links
 `CLIENT_RE_QUEUE.md` RE-169 · `notes_to_chief/20260831_1142_RE-168-RESULT-no-dialogue-close-signal-exists-server-is-stateful-enough-to-add-one.md`
+
+## 🆕 GT-171 EVIL-PORT-FIRST-EYES-001 [attended, in-game]: ฉาก 5 (Bg0005, Evil Port) มีสิ่งมีชีวิตขึ้นจอจริงหรือไม่ -- ตาคู่แรกของโปรเจกต์ในฉากนี้  [READY]
+
+> เปิดโดย LANE-A (สาย A · WORLD) รอบ `l03cgh`, 2026-08-31T14:xx+07:00 · `login_entry_allowed` ของฉาก 5
+> พลิกเป็น `true` รอบนี้ (`COO-DECISION 20260830_1441`, ประตูที่สามในคิวเดียวกับฉาก 4/10; composer
+> `world_population_bg0005.py`/`world_bg0005_identity.py` **สร้าง ผูก และเปิดประตูในรอบเดียวกัน** ต่างจาก
+> ฉาก 4/10 ที่แยกสามรอบ -- เหตุผล: เทสทั่วไป (`tests/test_lane_a_scene_census.py::
+> ComposerContractTests`) สมมติไว้แล้วว่าทุกฉากที่ lane นี้ผูก census ให้ต้องเปิดด้วย เพราะฉาก 4/10/14
+> เปิดหมดแล้วตอนรอบนี้เริ่ม) -- ไม่ใช่สำเนาของ `GT-166` เพราะฉากนี้**ไม่มี**ความเสี่ยงแบบ `GT-166`: ทะเบียนเอง
+> ไม่ระบุฉากนี้ใน `table_row_differences.the_two_interiors` (ตรวจแล้ว ไม่ใช่สมมติ) -- รูปแบบเดียวกับ `GT-165`
+> (ฉาก 4)
+
+### objective (claim เดียว)
+ล็อกอินเข้าฉาก 5 จริงแล้ว **เห็นตัวละคร/มอนสเตอร์ยืนอยู่ในเมืองท่า** (ไม่ใช่เมืองว่างเปล่า) ใช่หรือไม่ --
+คำถามคือ "มีสิ่งมีชีวิตขึ้นจอไหม" ไม่ใช่ "มันโจมตีไหม": composer ของฉากนี้**ตั้งใจไม่ส่ง faction bit เลย** (ดู
+`world_population_bg0005.py` docstring -- เป็นคำตัดสินของสาย B ที่ยังไม่ทำ) จึงไม่มีความเสี่ยงแบบ `GT-134`
+ที่มอนไม่ก้าวร้าว -- นั่นเป็นพฤติกรรมที่คาดไว้ ไม่ใช่ FAIL ของใบนี้
+
+### ทางเข้า
+ไม่มี production path ใดเขียนแถว character ให้ชื่อฉาก 5 เอง (ดู `login_entry_allowed_because` ในทะเบียน) --
+เข้าได้เฉพาะ staged GM account (`config/gm_login_scene.json`, scene_id=5) หรือ GM `/warp 5`
+
+### สิ่งที่ยังไม่วัด (บันทึกไว้ล่วงหน้า ไม่ใช่คำทำนายว่าจะพัง)
+จุดเกิด `MARKER[5]` ยังเป็นชั้นหลักฐาน `authored` เท่านั้น -- ไม่เคยมีไคลเอนต์ยืนจริง, ห่างจาก placement
+ที่ใกล้ที่สุด 564.3 หน่วย (`table_row_differences.marker_geometry_measured_not_enforced`) -- ถ้าตกในหิน/หลุด
+พื้น ให้บันทึกเป็นข้อมูลแยก ไม่ใช่ FAIL ของใบนี้ (คำถามของใบนี้คือมี actor ไหม ไม่ใช่พื้นดีไหม)
+
+### pass criteria — สองชั้น
+**wire/DB (ปิดแล้วโดยเทส):** console line `WORLD_CENSUS_BG0005 assembled=87/92 ...` ปรากฏหลังล็อกอินเข้าฉาก 5
+-- pin ไว้แล้ว `tests/test_lane_a_scene_census.py::OnTheRealDispatcherTests::
+test_with_the_real_registry_the_evil_port_census_ships_87` (เทสเต็มรูปแบบ boot+login+START_GAME+
+TargetPosVital ผ่าน dispatcher จริง) และ `tests/test_world_population_bg0005.py` (เทสระดับ composer ตรง)
+**client-observable (ยังไม่มีใครยืนดู -- นี่คือสิ่งที่ใบนี้ต้องการ):** ผู้เทสเข้าฉาก 5 จริงแล้วรายงานว่าเห็น
+actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พอ ไม่ต้องนับให้ครบ 87)
+
+### สัญญาผู้บริโภค
+เปิดโดย LANE-A -- LANE-A บริโภคผลเอง ปิดหัวใบเมื่อผู้เทสยืนยันด้วยตา
+
+### links
+`scenarios/world_scene_registry_001.json` แถว `n_id: 5` (`login_entry_allowed_because`) ·
+`src/pirateforce_foundation/world_population_bg0005.py`, `world_bg0005_identity.py` ·
+`notes_to_chief/20260830_1441_COO-DECISION-scene4-slave-market-first-door.md` · `GT-165` (scene 4, same
+shape) · `GT-166` (scene 10, same shape plus the geometry risk this scene does not carry) · `GT-134`
+(scene 14, same shape)
