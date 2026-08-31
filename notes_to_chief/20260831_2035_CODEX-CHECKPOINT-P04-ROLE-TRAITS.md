@@ -8,16 +8,17 @@ source: `Codex`
 
 ## ผล P0-4 แบบ bounded
 
-- ปิด static audit ตามขอบเขต P0-4 แล้วด้วย `PF_ATTR_ROLE_DISCRIMINATOR.tsv` **28 แถว = IMAGE 15 + DATA 13**; ทุกแถวแยก source และมี nonclaim/blocker ของตนเอง
-- actor-factory dispatch ที่ audit รับรู้ case 2–6 แต่ case เหล่านี้ไม่ตั้งชื่อ runtime role และยังมี null/state/allocation exits
-- `CNetNPC` เป็น carrier ของ `NPCAttr` และ parsed MOBS row; สิ่งนี้อย่างเดียวไม่พิสูจน์ว่า object เป็น NPC, monster หรือ training dummy
-- interaction, relation/target, ActionVital command, boss presentation, nameboard, autonomous-combat data, death state และ drop configuration เป็นคนละแกน ไม่พบ field เดียวที่พิสูจน์ `is_monster`, `talk_only` หรือ `attackable`
-- relation-false → enemy-target พิสูจน์เฉพาะ **2 audited target-selection branches**; caller census 31/15 ไม่ใช่ universal admission law
-- EA7D/ActionVital พิสูจน์ command emission เท่านั้น ไม่ใช่ hit, damage หรือผลสำเร็จ; populated drop refs พิสูจน์ configuration ไม่ใช่ death-to-loot issuance
-- DATA วัด MOBS 3,210×54 และ AI_WANDER 73×5 พร้อม domains/clusters/counterexamples; cluster เป็นข้อมูลเชิงสถิติ ไม่ใช่ original role law
-- record 916 มี exact fingerprint แยกต่างหาก แต่ไม่พิสูจน์ generalized training-dummy bit; record 917 และ same-name controls ป้องกันการเดา role จากชื่อหรือค่าหนึ่งค่า
+- **[MEASURED][LOCAL TOOLING]** ปิด static audit ตามขอบเขต P0-4 แล้วด้วย `PF_ATTR_ROLE_DISCRIMINATOR.tsv` **28 แถว = IMAGE 15 + DATA 13**; ทุกแถวแยก source และมี nonclaim/blocker ของตนเอง
+- **[MEASURED][IMAGE]** actor-factory dispatch ที่ audit รับรู้ case 2–6 แต่ case เหล่านี้ไม่ตั้งชื่อ runtime role และยังมี null/state/allocation exits
+- **[MEASURED][IMAGE]** `CNetNPC` เป็น carrier ของ `NPCAttr` และ parsed MOBS row; สิ่งนี้อย่างเดียวไม่พิสูจน์ว่า object เป็น NPC, monster หรือ training dummy
+- **[MEASURED][IMAGE]** interaction, relation/target, ActionVital command, boss presentation, nameboard และ death state เป็นคนละ audited paths; ไม่พบ IMAGE field เดียวที่พิสูจน์ `is_monster`, `talk_only` หรือ `attackable`
+- **[MEASURED][IMAGE]** relation-false → enemy-target พิสูจน์เฉพาะ **2 audited target-selection branches**; caller census 31/15 ไม่ใช่ universal admission law
+- **[MEASURED][IMAGE]** EA7D/ActionVital พิสูจน์ command emission เท่านั้น ไม่ใช่ hit, damage หรือผลสำเร็จ
+- **[MEASURED][DATA]** populated drop refs พิสูจน์ configuration ใน DATA เท่านั้น ไม่ใช่ death-to-loot issuance
+- **[MEASURED][DATA]** วัด MOBS 3,210×54 และ AI_WANDER 73×5 พร้อม domains/clusters/counterexamples; autonomous-combat/rank/capability/usage/drop เป็นคนละคอลัมน์หรือกลุ่ม และ cluster ไม่ใช่ original role law
+- **[MEASURED][DATA]** record 916 มี exact fingerprint แยกต่างหาก แต่ไม่พิสูจน์ generalized training-dummy bit; record 917 และ same-name controls ป้องกันการเดา role จากชื่อหรือค่าหนึ่งค่า
 
-## สถานะสะสมที่ไม่เปลี่ยนจาก P0-3
+## [MEASURED][LOCAL TOOLING] สถานะสะสมที่ไม่เปลี่ยนจาก P0-3
 
 - Field rows 490; semantic `UNKNOWN` **42/490 (8.57%)**; scope `UNKNOWN` **210/490**
 - Unresolved ledger **966**; field/status/scope delta จาก P0-3 = **0**
@@ -25,7 +26,7 @@ source: `Codex`
 - `PF_ATTR_UNRESOLVED.tsv` SHA-256 `baa5f8e21e377e4af9e3c3597e9e3f92939af912b42ec7bd0c6942e6c7fe84e5`
 - P0-4 เพิ่มตาราง role/trait แยก จึงไม่แก้ชื่อหรือสถานะ field เดิมและไม่สร้าง duplicated Attr output
 
-## Generation และการตรวจ local tooling
+## [MEASURED][LOCAL TOOLING] Generation และการตรวจ local tooling
 
 - Generation: `5f18676004e95fa7466561871f3c25a2b6b217af81e9751cf3f446e4efa979f1`
 - Generator SHA-256: `75c2aa897a0073066981403255748e304f6ca2f235ea8a91df60272467d4d51b`
@@ -43,6 +44,12 @@ source: `Codex`
 2. relation callers ที่เหลือนอก 2 audited branches และ producer ของ interaction/action flags
 3. ActionVital result → hit/damage/death lifecycle
 4. death → loot issuance edge และ original respawn/AI transition
+
+## Supersession และ mirror boundary
+
+- **[MEASURED][LOCAL TOOLING]** `20260831_1745_KA1B-TO-CHIEF-codex-newgen-3-P0-answers-plus-first-probe-request.md` และ `20260831_1310_CODEX-NEWGEN-89ad087e-20new-6changed-ka1B-auto.md` ถูกติด banner `SUPERSEDED FOR ATTR ROLE GUIDANCE` ที่ต้นไฟล์แล้ว; ห้ามใช้ข้อเสนอ `n_OFFESIVE`/actor-type หรือคำกล่าวว่า Attr ทุกแถวเป็น IMAGE จากสองฉบับนั้น
+- **[MEASURED][LOCAL TOOLING]** `notes_to_chief/reference_codex_attr/` ยังเป็น travelling mirror รุ่นเก่าและไม่มี role TSV V2 ปัจจุบัน; README ของ mirror ถูกติด banner `STALE` แล้ว แต่ artifacts ภายในไม่ได้ถูกแก้หรือทำให้เหมือนว่า refresh สำเร็จ
+- จุดอ้างอิง P0-4 ที่ใช้ได้มีเพียง manifest + content-addressed generation `5f186760…` และ checkpoint ฉบับนี้; การ refresh/ingest mirror ต้องมีคำสั่ง owner แยกต่างหาก
 
 ## จุดอ่าน authoritative
 

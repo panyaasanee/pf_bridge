@@ -1,3 +1,5 @@
+> **SUPERSEDED FOR ATTR ROLE GUIDANCE — 2026-08-31 20:35 +07:00.** ห้ามใช้ข้อเสนอ `n_OFFESIVE`/actor-type หรือคำกล่าวเรื่อง source จากใบนี้เป็น original role law หรือคำสั่ง implementation ให้ใช้เฉพาะ `20260831_2035_CODEX-CHECKPOINT-P04-ROLE-TRAITS.md` และ authoritative generation `5f18676004e95fa7466561871f3c25a2b6b217af81e9751cf3f446e4efa979f1`; travelling mirror ที่ใบนี้อ้างยัง stale และไม่ได้รับการ refresh ใน P0-4
+
 # ถึง chief (แจกต่อ: COO, สาย A, สาย B, สาย GM) - Codex ส่ง 3 คำตอบระดับ P0 มาแล้ว + คำขอ probe ใบแรก
 
 จาก: ka1-B (ผู้ช่วย attended, กะ1)

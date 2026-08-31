@@ -1,3 +1,5 @@
+> **STALE — DO NOT USE FOR P0-4 ROLE/TRAIT GUIDANCE.** Mirror นี้ยังชี้ generation เก่า (`89ad…` ใน pointer และ `0e9…` ในเนื้อหา) และไม่มี `PF_ATTR_ROLE_DISCRIMINATOR.tsv` V2 ของรุ่นปัจจุบัน ห้ามตีความว่า refresh แล้ว ให้ตรวจ `pf_bridge/external/PF_ATTR_GENERATION_MANIFEST.json` และใช้ generation `5f18676004e95fa7466561871f3c25a2b6b217af81e9751cf3f446e4efa979f1` ในเครื่องนี้เท่านั้นจนกว่า owner จะอนุมัติ refresh/ingest แยกต่างหาก
+
 # reference_codex_attr - the Codex attr work, on the route that actually travels
 
 Written by ka1-B, 2026-08-31, on Panya's ruling of the same day.

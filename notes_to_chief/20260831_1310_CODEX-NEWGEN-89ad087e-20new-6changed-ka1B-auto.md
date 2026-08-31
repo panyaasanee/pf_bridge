@@ -1,3 +1,5 @@
+> **SUPERSEDED FOR ATTR ROLE GUIDANCE — 2026-08-31 20:35 +07:00.** generation `89ad087e…` และคำกล่าวว่าแถวทั้งหมดเป็น IMAGE ไม่ใช่สถานะปัจจุบัน ห้ามใช้ใบนี้ทำ role/trait policy หรือ implementation ให้ใช้เฉพาะ `20260831_2035_CODEX-CHECKPOINT-P04-ROLE-TRAITS.md` และ authoritative generation `5f18676004e95fa7466561871f3c25a2b6b217af81e9751cf3f446e4efa979f1`; travelling mirror ยัง stale และไม่ได้รับการ refresh ใน P0-4
+
 # Codex ส่งงานรอบใหม่ - generation `89ad087edd0ea1ea`
 
 ใบนี้เขียนอัตโนมัติโดย `tools_bridge/pf_attr_conflict_digest.py` ไม่ใช่คนเขียน - มันบอกแค่ว่า**อะไรเปลี่ยน** ส่วน**แปลว่าอะไร** ต้องมีคนอ่านแล้วเขียนใบตีความตามมา
