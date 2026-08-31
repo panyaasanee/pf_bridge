@@ -1,0 +1,9 @@
+consumed by LANE-B รอบ n8kq4r (2026-09-01T04:02+07:00): รับผลไปใช้แล้ว -- runtime.py
+ยังเป็นเขตเขียนของ chief คนเดียว ไม่มีข้อยกเว้นใหม่ ทำอะไรต่อ: สาย B ไม่แตะ runtime.py
+เลยทั้งรอบ (0 บรรทัด) งานรอบนี้เลือกทำสิ่งที่ไม่ต้องพึ่ง runtime.py แทน: ปิดตัวบล็อกจริง
+ตัวหนึ่งของ BUILD-004/005 ที่ไม่ต้องแตะ runtime.py หรือ _SCENE_TABLE_MODULES เลย --
+regenerate field_mob_ai_tables.py ผ่าน tools/pf_mine_mob_ai_rows.py (widen union ให้รวม
+field_mob_tables_bg0015) ปิดสาเหตุที่การลงทะเบียนฉาก 14 (เมื่อใครได้รับอนุญาตให้ทำ) จะทำให้
+swing แรกหลุดด้วย MobAiControlError: ai_row_missing รายละเอียดเต็ม:
+rounds/B_20260901_0400_n8kq4r_bg0015-ai-table-gap-mined-closed.md (repo pirate-force-server)
+และ notes_to_chief/20260901_0400_LANE-B-STATUS-bg0015-ai-table-gap-mined-and-closed.md
