@@ -61,10 +61,22 @@ late-bound-globals ที่ `connection.py`'s `adapt_game_listener` ใช้�
 "V141 main updates globals such as HOST after this adapter is installed") พิสูจน์แล้วว่า
 monkeypatch attribute บน module object ที่ import มา (`legacy`, ก่อนที่ listener thread จะเริ่มรับ
 connection จริง) เปลี่ยนพฤติกรรมของ nested function ข้างในได้ทันที **โดยไม่แก้ไฟล์ v141 แม้ไบต์เดียว**
--- ยืนยัน semantics นี้ด้วย repro แยกนอกโปรเจกต์ (Python ทั่วไป, ไม่ใช่เฉพาะโปรเจกต์นี้):
+-- ~~ยืนยัน semantics นี้ด้วย repro แยกนอกโปรเจกต์ (Python ทั่วไป, ไม่ใช่เฉพาะโปรเจกต์นี้):
 `inner.__globals__ is mod.__dict__` เป็น `True` เสมอสำหรับ nested `def`, และ `LOAD_GLOBAL` มองหา
 ชื่อในดิกต์นั้น ณ เวลาที่เรียก ไม่ใช่ ณ เวลา define -- ตั้งค่า attribute หลัง `load_legacy()` แต่ก่อน
-listener thread เริ่ม (เช่นบรรทัด 848 หรือก่อนหน้านั้น) จึงพอ
+listener thread เริ่ม (เช่นบรรทัด 848 หรือก่อนหน้านั้น) จึงพอ~~
+
+**แก้ไขโดย pf-adversary รอบ n8kq4r (2026-09-01T04:5x+07:00):** ประโยคที่ขีดฆ่าข้างบนกล่าวเกินจริง
+`inner.__globals__ is mod.__dict__` เป็นจริงสำหรับ nested `def` ทั่วไป **แต่ไม่ใช่กลไกจริงของ
+`adapt_game_listener`** -- ฟังก์ชันนั้นทำ `dict(original.__globals__)` คือ **ก๊อปปี้ดิกต์ครั้งเดียว**
+ตอนสร้าง wrapped listener ไม่ใช่ live reference ไปยัง `legacy.__dict__` ⇒ การ set attribute บน
+`legacy` module object **หลังจาก** `adapt_game_listener(...)` ถูกเรียกไปแล้ว (เช่น hot-patch ระหว่าง
+เซิร์ฟเวอร์รันอยู่ ผ่าน admin endpoint หรือเครื่องมือ "apply fix without restart") จะ**ไม่มีผลกับ
+listener ที่กำลังรันอยู่แล้ว** เพราะมันอ่านจากสำเนาที่ก๊อปไปแล้ว กฎที่ถูกต้องคือ: ต้อง set attribute
+**ก่อน** `legacy.game_listener = adapt_game_listener(...)` ถูกเรียก (ไม่ใช่แค่ก่อน listener thread
+เริ่มรับ connection) placement ที่แนะนำด้านล่าง (`app.py` ราวบรรทัด 848, ก่อนเรียก `adapt_game_listener`)
+ยังถูกต้องและได้ยืนยันด้วยการรันจริงกับ `connection.adapt_game_listener` ของโปรเจกต์นี้แล้ว (ไม่ใช่แค่
+repro นอกโปรเจกต์) -- แต่ **ห้ามใครเอาไปใช้เป็น pattern แบบ "แก้ตอนไหนก็ได้ก่อนเซิร์ฟเวอร์หยุด"**
 
 จุดที่ควรใส่ (`src/pirateforce_foundation/app.py`, ราวบรรทัด 6 และ 848):
 
@@ -72,8 +84,10 @@ listener thread เริ่ม (เช่นบรรทัด 848 หรือ
 from .mob_loot import preserve_ground_heartbeat_frame   # เพิ่มบรรทัด import
 ...
 legacy.make_runtime_res_empty_exact = lambda: preserve_ground_heartbeat_frame(legacy)
-# วางก่อนหรือหลัง legacy.game_listener = adapt_game_listener(...) ก็ได้ (บรรทัด 848 เดิม) --
-# listener thread ยังไม่เริ่มรับ connection จนกว่า server_main()/run_server() ถูกเรียก
+# ~~วางก่อนหรือหลัง legacy.game_listener = adapt_game_listener(...) ก็ได้ (บรรทัด 848 เดิม) --~~
+# แก้ไข: ต้องวาง**ก่อน** legacy.game_listener = adapt_game_listener(...) เท่านั้น (ดูคำอธิบายด้านบน) --
+# listener thread ยังไม่เริ่มรับ connection จนกว่า server_main()/run_server() ถูกเรียก ก็จริง แต่นั่นไม่ใช่
+# เกณฑ์ที่ถูกต้อง เกณฑ์ที่ถูกต้องคือก่อนบรรทัด adapt_game_listener(...) เอง
 ```
 
 ผลลัพธ์: ทุกครั้งที่ `heartbeat_worker` (nested ข้างใน v141's frozen `game_listener`, เรียก
