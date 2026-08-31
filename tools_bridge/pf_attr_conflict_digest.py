@@ -60,6 +60,16 @@ NAME_GUARD = ("capture", "gameclient", "pirateforce.sqlite")
 # Which artifacts belong to the attr work.  Prefix match, deliberately broad.
 MIRROR_PREFIXES = ("PF_ATTR_", "PF_A2_", "PF_A3_", "PF_A6_", "PF_ERRATUM_")
 
+# A letter is written only when the round is SIGNIFICANT.  Codex regenerates
+# roughly every 20 minutes, so on an hourly schedule "the generation changed"
+# is true almost every run - announcing that unconditionally would drop ~24
+# auto-letters a day into a mailbox that is already the team's bottleneck.
+# Everything else still gets mirrored, and every round is recorded in
+# CODEX_ROUNDS_LOG.tsv, so nothing is lost - it just does not ping anyone.
+HIGH_SIGNAL_EXACT = ("PF_ATTR_FOR_SERVER.md", "PF_ATTR_QUARANTINE.tsv",
+                     "PF_ATTR_PROBE_REQUESTS.tsv")
+HIGH_SIGNAL_SUBSTR = ("SELECTOR", "DISCRIMINATOR", "CORRECTION", "ERRATUM")
+
 # Classes the running server actually encodes today.  A conflict outside this
 # set cannot break the live wire, so it is a documentation question rather than
 # a release blocker.
@@ -252,6 +262,45 @@ def mirror(root, artifacts):
     return added, changed, skipped
 
 
+def is_high_signal(name):
+    up = name.upper()
+    return name in HIGH_SIGNAL_EXACT or any(k in up for k in HIGH_SIGNAL_SUBSTR)
+
+
+def significance(added, changed, summary, prev_wired):
+    """Return (bool, reason).  A new deliverable always counts: the round that
+    added the name-colour selector, the role discriminator and the quest-mark
+    selector was the most valuable one so far."""
+    if added:
+        return True, "ไฟล์ใหม่ %d ใบ: %s" % (
+            len(added), ", ".join(n for n, _ in added[:4]))
+    hot = [n for n, _ in changed if is_high_signal(n)]
+    if hot:
+        return True, "ไฟล์สำคัญเปลี่ยน: " + ", ".join(hot[:4])
+    if summary and prev_wired is not None and summary.get("wired") != prev_wired:
+        return True, "แถว conflict ที่แตะโค้ดจริงเปลี่ยน %s -> %s" % (
+            prev_wired, summary.get("wired"))
+    return False, ""
+
+
+def log_round(gen, added, changed, summary, announced, reason):
+    path = os.path.join(OUT, "CODEX_ROUNDS_LOG.tsv")
+    new = not os.path.exists(path)
+    with open(path, "a", encoding="utf-8", newline="") as fh:
+        w = csv.writer(fh, delimiter="\t", quoting=csv.QUOTE_NONE,
+                       escapechar="\\", lineterminator="\n")
+        if new:
+            w.writerow(["checked_at", "generation_id", "added", "changed",
+                        "conflicts_total", "conflicts_open", "open_wired",
+                        "announced", "reason"])
+        w.writerow([datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+                    gen[:16], str(len(added)), str(len(changed)),
+                    str(summary.get("total", "")) if summary else "",
+                    str(summary.get("open", "")) if summary else "",
+                    str(summary.get("wired", "")) if summary else "",
+                    "yes" if announced else "no", reason])
+
+
 def announce(gen, prev_gen, added, changed, skipped, summary):
     """Write a letter so the team SEES a new round instead of polling."""
     stamp = datetime.datetime.now().strftime("%Y%m%d_%H%M")
@@ -326,13 +375,15 @@ def main():
         return 2
     gen, root, artifacts = g
 
-    prev_gen = None
+    prev_gen, prev_wired = None, None
     if os.path.exists(STATE):
         try:
             with open(STATE, "r", encoding="ascii") as fh:
-                prev_gen = json.load(fh).get("generation_id")
+                st = json.load(fh)
+            prev_gen = st.get("generation_id")
+            prev_wired = st.get("open_wired")
         except Exception:
-            prev_gen = None
+            prev_gen, prev_wired = None, None
 
     added, changed, skipped = mirror(root, artifacts)
     summary = build_slices(root)
@@ -372,15 +423,25 @@ def main():
     for n, why in skipped:
         print("  - %-46s %s" % (n, why))
 
-    if gen != prev_gen and (added or changed):
-        announce(gen, prev_gen, added, changed, skipped, summary)
-    elif gen != prev_gen:
-        print("  generation changed but no mirrored bytes differ - no letter")
-    else:
+    announced, reason = False, ""
+    if gen == prev_gen:
         print("  same generation as last run - no letter")
+    elif not (added or changed):
+        reason = "generation ใหม่แต่ไบต์ที่มิเรอร์ไม่ต่าง"
+        print("  " + reason + " - no letter")
+    else:
+        sig, reason = significance(added, changed, summary, prev_wired)
+        if sig:
+            announce(gen, prev_gen, added, changed, skipped, summary)
+            announced = True
+        else:
+            reason = "เปลี่ยนแค่ตารางพื้นหลัง ไม่มีไฟล์ใหม่และไฟล์สำคัญไม่ขยับ"
+            print("  round mirrored quietly - " + reason)
+    log_round(gen, added, changed, summary, announced, reason)
 
     with open(STATE, "w", encoding="ascii") as fh:
-        json.dump({"generation_id": gen}, fh)
+        json.dump({"generation_id": gen,
+                   "open_wired": summary.get("wired") if summary else None}, fh)
     print("")
     print(txt)
     return 0
