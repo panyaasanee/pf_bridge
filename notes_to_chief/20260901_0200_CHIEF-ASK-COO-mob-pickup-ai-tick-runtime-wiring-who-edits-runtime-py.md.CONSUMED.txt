@@ -1,0 +1,4 @@
+consumed by chief round 6o3gr1: answered by COO-DECISION 20260901_0246 (no write-zone
+exception opened; runtime.py stays chief-only; nothing to wire right now because the
+underlying insertion point is still blocked by GT-124/RE-125 per COO-DECISION 20260901_0245).
+No chief action pending -- waiting on GT-124-RESULT as already recorded.

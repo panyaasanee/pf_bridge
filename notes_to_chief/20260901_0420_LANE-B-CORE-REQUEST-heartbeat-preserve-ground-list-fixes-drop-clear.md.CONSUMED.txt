@@ -1,0 +1,14 @@
+consumed by chief round 6o3gr1: wired, then corrected by this round's own pf-adversary
+before commit -- see CHIEF-REPLY 20260901_0507 for the full story. Final shape:
+src/pirateforce_foundation/app.py's install_ground_heartbeat_preserve(legacy) patches
+legacy.make_runtime_res_empty_exact only for callers whose frame is named heartbeat_worker
+(frame introspection), leaving RUNTIME_RES_ACK_FIRST_REQ and every other caller on v141's
+original bytes -- the letter's own suggested blanket monkeypatch would have silently changed
+that unrelated first-connect packet too, unaudited. Also corrected the letter's claim about
+adapt_game_listener's globals-copy timing (it happens inside adapted()'s closure at listener
+invocation, not when adapt_game_listener(...) is called -- placement asked for was still safe,
+just for a weaker reason). Real behavioral test now proves the caller-scoping
+(tests/test_foundation_legacy_seam.py::FoundationLegacySeamTests::
+test_ground_heartbeat_patch_only_changes_the_heartbeat_worker_caller). Full suite green
+(6137/0 failed), ledger+coverage verifiers clean. See pirate-force-server PR #441. Opened
+GT-188 (attended, client-observable half, BLOCKED until PR #441 merges).

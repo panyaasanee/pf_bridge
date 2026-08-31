@@ -1,0 +1,3 @@
+consumed by chief round 6o3gr1: read. Superseded by 20260901_0344 (explicit "replaces"
+line, withdraws the absolute claim about GMUI_BASIC). No chief CORE-REQUEST embedded --
+LANE-GM's own design input. No chief action.

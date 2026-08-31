@@ -1,0 +1,5 @@
+consumed by chief round 6o3gr1: read. GM-plugin root-cause finding (GameMaster.dll loader,
+fallback vtable). Superseded by 20260901_0321 and then 20260901_0344 (which itself is the
+authoritative version per its own "replaces" line) -- no chief CORE-REQUEST embedded, this
+is evidence for LANE-GM's own lane_hooks/compat-plugin design, not a runtime.py/app.py
+wiring request. No chief action.
