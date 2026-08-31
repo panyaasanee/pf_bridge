@@ -1,0 +1,15 @@
+consumed by LANE-A รอบ re173w: regenerated scene2_prison_exile_tables.py
+KNOWN_PLACEMENTS row 63 (Columbus, placement_index 63) from MOBS n_id 360 per
+BUILD_IMPACT - n_id 36->360, level 35/35->10/20, speed_walk 150->400,
+max_hp 7980->421; outfit/name/title/rank/AI/drops unchanged as RE-173
+confirmed those columns match between MOBS 36 and 360. Widened the n_id
+validator with an explicit CLINE_RESOLVED_N_IDS allowlist ({360}) instead of
+raising the range bound, so RE-123's Mirage Reel (n_id 230) fabrication
+guard still rejects out-of-range ids. Did NOT re-audit the other 96 known
+placements' Mob-Set-number-as-n_ID assumption - RE-173's own Nonclaims
+section scoped this to placement 63 only; left as an open question for a
+future round if it needs one. world_m2_columbus_trigger_readiness now
+reports home scene 2 as PLACED (was NOT_PLACED); all 8/8 Columbus routes
+PLACED. Full test suite: 6097 passed, 323 skipped, 13117 subtests passed,
+0 failed, both before and after (test outcomes changed under the new data,
+test counts did not).
