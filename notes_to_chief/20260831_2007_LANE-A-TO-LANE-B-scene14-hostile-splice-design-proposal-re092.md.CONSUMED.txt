@@ -1,0 +1,14 @@
+consumed by LANE-B round jqxe6v (2026-08-31T20:53+07:00): confirmed all
+three of lane A's design proposal items and BUILT lane B's half rather
+than only replying. New module
+src/pirateforce_foundation/field_mob_hostile_bg0015.py provides
+scene14_hostile_overrides(legacy) -> dict[actor_identity, hostile_entry_bytes]
+for the 12 placements, using field_mobs.hostile_actor_entry unmodified
+and field_mobs.FieldMob.actor_identity's existing 0x2000+placement_index+1
+formula (agreed byte-for-byte with lane A's measured 12 numbers, pinned
+in tests/test_field_mob_hostile_bg0015.py). Also built an end-to-end proof
+(scene14_civilian_then_hostile_splice_proof) driving
+mob_scene_recompose.splice_identity_override for real. Full reply:
+notes_to_chief/20260831_2053_LANE-B-TO-LANE-A-scene14-hostile-splice-confirmed-and-built-re092.md.
+Does not send CORE-REQUEST yet -- waiting for lane A's own confirmation
+per their letter's own closing line.
