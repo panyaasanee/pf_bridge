@@ -25,8 +25,23 @@
 > ⇒ ผู้เทส/สายที่หยิบใบรันบรรทัดนี้ก่อนเชื่อหัวใบเสมอ · **ไม่ retrofit ใบเก่าทั้งคิวย้อนหลังในรอบเดียว** (คิวใหญ่เกินจะปลอดภัย)
 > ปิดหัวใบทุกครั้งที่บริโภคผล — เจ้าของใบเป็นคนปิด (หรือ chief ถ้าเจ้าของใบไม่ว่าง) อย่าปล่อยให้ค้างแบบที่เกิดกับ `GT-134`
 
+> 🔴🔴 **ไมล์สโตนพักแล้ว (คำสั่งตรง Panya 2026-09-01 ~02:1x+07:00 · จดหมาย `20260901_0215_PANYA-ORDER-*.md` ·
+> ประกาศโดย chief รอบ `4w5j25`/R278):** **M1-M6 ทั้งหมดพักไว้ก่อน** ไม่นับ ไม่ใช้เป็นเหตุผลจัดลำดับงาน จนกว่า
+> เจ้าของจะสั่งกลับมา (พัก ไม่ใช่ยกเลิก) ทุ่มไปที่: **P-1** ของดรอปต้องอยู่บนพื้นนานพอให้เดินไปเก็บทัน
+> (เจ้าของ: LANE-B) · **P-2** ชื่อมอนต้องเห็นสีถูกสถานะ ปกติ=ส้ม/สู้=แดง/ตาย=เทา ห้ามชมพู (เจ้าของ: LANE-GM) ·
+> **P-3** เปิดปุ่ม GM (เจ้าของ: LANE-GM ร่วม Codex) · รายละเอียดเต็ม `notes_to_chief/20260901_0302_FROM_CHIEF_R278_priority-reorg-panya-order-P1-P2-P3-plus-new-builds.md`
+> 🔴 **`GT-146` และใบตีมอนสเตอร์ทั้งหมด ห้ามเสนอเข้าคิว attended จนกว่า P-1 และ P-2 จะเสร็จ** — เจ้าของจะไม่เทส
+> สองประเภทนี้จนกว่าจะถึงตอนนั้น (นี่คือเหตุผลที่ M5 พักได้) · งานสร้างใหม่ที่เปิดใบแล้ว: `GT-182` `/warp` ไม่ใส่
+> พิกัด (LANE-GM) · `GT-183` `/speed` (LANE-GM) · `GT-184`/`GT-185` ปุ่มกลับหน้าเลือกตัวละคร/กลับเข้าเกม (LANE-A)
+> · `GT-186` ปุ่ม logout จริง (LANE-A) — ห้าใบนี้ท้ายไฟล์
+
 ## 📇 สารบัญใบที่ยังไม่ปิด (คำสั่ง Panya 18:22 · อัปเดตทุกครั้งที่เปิด/ปิดใบ · เป็นดัชนีชี้ลงข้างล่าง — เนื้อใบไม่ถูกย้าย)
 
+- 🆕 **`GT-182` GM-A-WARP-NO-COORD-LIVE-SPAWN-001** (🔴 **BLOCKED — BLOCKED-ON-WIRING** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตามคำสั่งตรง `PANYA-ORDER 20260901_0215` ข้อ 3 (GM-A) · ผู้ทำ: **LANE-GM** · `/warp <mapnum>` ไม่ใส่พิกัด ต้องไปจุดเกิดมาตรฐานจริง + ข้ามฉากทันที ไม่ต้อง relog — เลี่ยงบั๊ก z ผิดที่ `GT-172` พบด้วยการใช้ `world_scene_travel.spawn_position()` แทนพิกัดที่ผู้ใช้พิมพ์ · ใบเต็มอยู่ท้ายไฟล์)
+- 🆕 **`GT-183` GM-B-SPEED-COMMAND-001** (🔴 **BLOCKED — BLOCKED-ON-WIRING** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (GM-B) · ผู้ทำ: **LANE-GM** · `/speed <value>` คำสั่งแชท GM จริงบน `main` เขียน `ActorAttr` x7 (+0x54 f32) — เดโมแล้วนอก main โดยเจ้าของ (`PF_ADHOC_ATTR_PROBE`) ค่าปกติประเมิน 400 ยังไม่ยืนยันตาราง/ไบนารี · ใบเต็มอยู่ท้ายไฟล์)
+- 🆕 **`GT-184` UI-A-PART-A-BACK-TO-CHARSELECT-BUTTON-001** (🔴 **BLOCKED — สืบทอดจาก `GT-033` (ANSWERED — สองท่าที่ลองแล้วให้ผลลบ)** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งแรก) · ผู้ทำ: **LANE-A** · ปุ่มกลับหน้าเลือกตัวละครจากในเกม ต้องพาไปจริงกลางเซสชัน · แยกจาก `GT-185` ตามกฎหนึ่งใบหนึ่งข้อพิสูจน์ · ใบเต็มอยู่ท้ายไฟล์)
+- 🆕 **`GT-185` UI-A-PART-B-BACK-INTO-GAME-ROUNDTRIP-001** (🔴 **BLOCKED — precondition: `GT-184` ต้อง PASS ก่อน** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งหลัง) · ผู้ทำ: **LANE-A** · จากหน้าเลือกตัวละคร เลือกแล้วกลับเข้าเกมได้จริงในโปรเซสเดิมไหม — ปลดล็อกการเปลี่ยนฉากซ้ำโดยไม่บูตใหม่ · ใบเต็มอยู่ท้ายไฟล์)
+- 🆕 **`GT-186` UI-B-REAL-LOGOUT-BUTTON-001** (🔴 **BLOCKED — BLOCKED-ON-WIRING** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-B) · ผู้ทำ: **LANE-A** · ปุ่ม logout จริง (คนละ subcode กับ `GT-184`) ต้องจบเซสชันสะอาดโดยไม่ต้องปิดหน้าต่างด้วย X · ใบเต็มอยู่ท้ายไฟล์)
 - 🚀 **`PROMOTE-153` CHAT-ECHO-ON-A-DEFAULT-BOOT-001 [CHIEF-WORK · ไม่ใช่ใบเทส]** (🟢 **OPEN — เจ้าของ: chief** · ใบแรกของท่อ promotion ตาม `PANYA-DIRECTIVE 20260829_2222` + `COO-DECISION 20260829_2246` · แชทใบ้บนบูตปกติเพราะเส้นทาง echo อยู่ในเลน hypothesis ที่ `production_allowed: False` ทั้งสองเลน [วัดแล้ว รอบ k882hm] · เส้นตายข้อ 1 ของ directive: 30 ส.ค. 21:00 · ใบเต็มอยู่ท้ายไฟล์)
 - 📌 [บรรทัดสารบัญโดย chief R235 (t7t5yd) — เนื้อใบไม่ถูกแตะ] **`RIDER-149-A`** (ของสาย B ท้ายไฟล์): chief ต่อสายห้าบรรทัด `MOB_DROP_PRESENCE` ตามใบ 2246 แล้ว **รอ merge `pirate-force-server#291`** — ด่านบิลด์ของ rider (grep `MOB_DROP_PRESENCE` ตอนฆ่า) จะผ่านเมื่อ merge เท่านั้น ก่อนหน้านั้นบูตได้ `NO-RESULT` ตามที่ใบเขียนไว้เอง
 - 🆕 **`GT-148` SCENE17-STOWAWAY-ACTORS-FIRST-EYES-001** (🟢 **PENDING บูตได้เลย · attended** · เปิดโดย LANE-A รอบ `2pdf6j` · ขึ้นเรือ Columbus ออกทะเลแล้ว **ยังเห็นชาวเมืองไหม** — สี่ตัวอยู่ในรัศมี 2000 หน่วยจากจุดลงเรือ · **ผลลบกับผลบวกมีค่าเท่ากัน** · ใบเต็มอยู่ท้ายไฟล์)
@@ -9644,3 +9659,444 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
   - Every name-label colour recorded in this entry's screenshots is recorded as data only - per Panya's 2026-08-25 order, the tester does not attempt to explain why a label is that colour; that question belongs to RE-067.
 - links: notes_to_chief/20260831_2246_KA1B-TO-LANE-B-death-predicate-plus-probe-request.md - notes_to_chief/reference_codex_attr/PF_ATTR_ROLE_DISCRIMINATOR.tsv (row ACTOR_DEATH_SHARED) - pirate-force-server src/pirateforce_foundation/hostile_hp_link_hypothesis.py:383 - pirate-force-server src/pirateforce_foundation/mob_death.py:74-91 - notes_to_chief/reference_adhoc_probe/adhoc_attr_probe.py - notes_to_chief/reference_adhoc_probe/ACTORATTR_PROBE_TABLE_x_y.md - notes_to_chief/reference_adhoc_probe/ADHOC_PROBE_ROUND1_FINDINGS_20260827.md - notes_to_chief/consumed/20260830_2355_PANYA-ADDENDUM-probe-request-intake-4-gates-batched-sheet-rides-on-GT-round-ka1-B.md - numbering: GT-181 assigned after GT-180 collided with LANE-A round `yfbqmg`'s concurrent entry (same round, different topic) -- GT-181/RE-181 grepped as zero hits in GAME_TEST_QUEUE.md and CLIENT_RE_QUEUE.md before reserving this ID (highest prior at collision time: GT-180 taken by LANE-A, RE-172).
 - result: (tester fills in: PASS/FAIL/BLOCKED, evidence, timestamp)
+
+## GT-182 GM-A-WARP-NO-COORD-LIVE-SPAWN-001  [BLOCKED]
+
+> Opened by chief this round, directly per Panya's order (not through pf-queue-author --
+> no subagent-spawn tool available in this environment; written by hand in the shape of
+> GT-181/GT-172/GT-141, per those entries' own stated fallback). Source: PANYA-ORDER
+> `notes_to_chief/20260901_0215_PANYA-ORDER-drop-milestones-all-hands-on-three-things-plus-new-gm-and-ui-work.md`
+> section 3 (GM-A), routed per PROCESS_GATES.md rule #18 (route tag required, additive to
+> an OPEN/assigned tag, not a replacement). Build-owner lane: **LANE-GM** per chief's
+> broadcast letter this round (`notes_to_chief/20260901_0302_FROM_CHIEF_R278_priority-reorg-panya-order-P1-P2-P3-plus-new-builds.md`).
+
+- objective: single claim -- while already in a live session (any current scene), a GM
+  account types `/warp <mapnum>` in the chat box with NO coordinate arguments, and the
+  client (a) lands the character at that destination map's standard spawn point (the
+  `MARKER` table entry resolved via `SCENE_NAME[n].n_MARKER`, per
+  `COO-DECISION 20260829_0542_COO-DECISION-marker-table-is-the-default-spawn-source-with-an-evidence-label.md`
+  -- NOT (0,0,0), NOT an arbitrary hand-typed coordinate, and NOT the GM's own carried-over
+  z from the scene they warped from) AND (b) the scene switch happens immediately, mid
+  session, with no logout/relogin. Today there are two behaviors and neither does both:
+  `/warp <mapnum> x y` (with coordinates) already does a live, immediate, same-session
+  scene switch (`GT-106-R2` PASS via a different call site; `GT-172` PASS -- confirmed
+  2026-09-01, see below) but forces the GM to type exact coordinates by hand and the
+  server sends whatever z the GM was already standing at in the OLD scene, which `GT-172`
+  itself measured as finding F-2: the owner lands stuck in geometry / floating, unable to
+  fall to the floor, because the wrong z is carried over. `/warp <mapnum>` with no
+  coordinates only calls the stage path (`GT-141` PASS: writes
+  `config/gm_login_scene.json` for the NEXT relog: it does not touch the live session at
+  all). This entry is what proves the NEW, combined behavior the owner asked for.
+- background (read before touching anything):
+  - `notes_to_chief/consumed/20260829_0542_COO-DECISION-marker-table-is-the-default-spawn-source-with-an-evidence-label.md`:
+    marker-derived spawn points are an `authored` evidence tier, not `client-observed` --
+    most scenes have never had a client actually stand on their marker. If the GM lands in
+    rock/underground/off-map at the destination, record that as separate data, it is not a
+    FAIL of this entry's own claim (which is "did the scene switch happen and did the
+    server target the marker coordinate", not "is the marker geometry good").
+  - `GT-172` RESULT (PASS, `OBSERVER_CONFIRMED 2026-09-01T01:2x+07:00`): confirms the live
+    cross-scene teleport plumbing (`gm/warp_executor.py`, `gm/chat_command_action.py`)
+    already sends a real `TeleportVital` that moves the client mid-session with no relog.
+    It also found F-1 (wrong-scene census follows the player to the destination, using the
+    OLD scene's registry with the NEW scene's anchor coordinate) and F-2 (z carried over
+    from the old scene, character floats/sticks). **The implementing lane for this ticket
+    should build the no-coordinate branch using `world_scene_travel.spawn_position()` as
+    the anchor (the same call already used by the bg0002 eager-census arrival path, see
+    `runtime.py` ~7420-7452) instead of accepting a caller-supplied z** -- this sidesteps
+    F-2 by construction for THIS branch, though it does not fix F-2 for the with-coordinates
+    branch, and F-1 (census timing/registry mismatch) is a separate, still-open bug this
+    entry does not close either.
+  - GT-141's PASS already proves the STAGE half of this in isolation (no coords -> next
+    relog lands correctly); this entry does not repeat that, it only tests the NEW
+    combination (no coords + live + immediate).
+- db: fresh copy of `state\pirateforce.sqlite3` for this boot (never the canonical file) --
+  record the copy's filename and sha256 before/after; verify the canonical file's own
+  sha256 is unchanged before and after this round.
+- server args: standard boot, `-SecondPasswordMode bypass`, using a GM account already
+  present in `config/gm_accounts.json` (or a test copy pointed to by
+  `PF_GM_ACCOUNTS_CONFIG` if the real allowlist should not be touched). Requires whatever
+  PR lands the new no-coordinate live-spawn branch to be merged to `main` first -- this
+  entry cannot be run meaningfully before that (see RECHECK below).
+- steps:
+  1. Boot server + client per standard playbook. Confirm server has been running under 3.5
+     minutes before the client connects and that this is a fresh server start (not a
+     server left over from a previous, already-killed client).
+  2. Log in with the GM account. Note starting scene (scene A) and starting X/Y/Z from the
+     HUD.
+  3. Right-click-drag the camera only (never Q/E, never WASD) to get a clean baseline view
+     of the character. Screenshot, full resolution, labelled BASELINE. Record: scene
+     name/background shown, HUD X/Y/Z, and the colour of every name label visible in
+     frame (one line per label, write "none" if nothing else is in view).
+  4. Click into the chat input box and confirm focus. Type exactly `/warp <mapnum>` for a
+     destination map that is NOT scene A and IS known to `gm/scene_catalog.py`
+     (`is_known_scene_id` True) and DOES have a nonzero `n_MARKER` per the registry (pick
+     one already opened by LANE-A, e.g. scene 4/5/6/8/10). Press Enter.
+  5. Wait ~2 seconds. Screenshot, full resolution, labelled STEP-A. Record: did the scene
+     visibly change (background/scene name/minimap) with NO relog/loading-screen-to-login
+     step, HUD X/Y/Z (compare against the destination scene's `MARKER[n_MARKER]`
+     coordinate, not against scene A's coordinate), dead/stuck-in-geometry state if any,
+     and every name label's colour again.
+  6. If the scene did not change within ~10 seconds, stop -- this is the negative result
+     this entry is built to catch (see pass criteria).
+- pass criteria (two layers, kept separate):
+    wire/DB: the server console/capture log for this boot shows a single `/warp <mapnum>`
+      chat line (no coordinate arguments) producing a `TeleportVital`/`make_login_teleport`
+      frame (whatever action label the implementing lane uses for this new branch) whose
+      target X/Y/Z decode to the exact `MARKER[n_MARKER]` row for the destination scene,
+      not (0,0,0) and not the GM's prior X/Y/Z. This is headless-provable and needs no
+      human at the screen; it proves the bytes sent were correct, not that the client did
+      anything with them.
+    client-observable: what the human at the screen reports for STEP-A per step 5 above --
+      did the scene actually change on screen (background/minimap/scene name), did it
+      happen without any relog/login-screen step, and did the character appear to land on
+      walkable ground rather than visibly stuck in geometry. The three-part prediction
+      this entry falsifies: (i) scene changes without relog, (ii) landing coordinate
+      matches the marker (not the GM's old z), (iii) character is not visibly stuck. Any
+      one of these being false is a valid, useful negative result -- write up which part
+      failed, do not describe the whole entry as a blanket FAIL without saying which
+      sub-claim broke.
+- nonclaims:
+  1. Does not confirm the destination scene's marker geometry is good (per the
+     `authored`-not-`confirmed` caveat) -- a landing inside rock is recorded as data about
+     that scene's marker, not as a FAIL of "did warp switch scenes with no coordinates".
+  2. Does not test census/actor population of the destination scene following the switch
+     (F-1 from `GT-172` is a separate, still-open bug).
+  3. Does not test `/warp <mapnum> x y` (with coordinates) again -- that is `GT-172`,
+     already PASSed/separately tracked (its own F-1/F-2 findings remain open elsewhere).
+  4. Does not test warping to a scene with `n_MARKER == 0` (no marker) -- per the
+     COO-DECISION, those scenes keep the OLD rule (client evidence / owner ruling /
+     refusal) and are out of scope for "standard spawn point" as this entry defines it.
+  5. Does not claim any UI dialog (e.g. a stale NPC conversation box, per `RE-168`) is
+     fixed by this change -- if one appears, log it separately, it is not this entry's FAIL.
+- RECHECK: `cd pirate-force-server && git log --all --oneline -i --grep="GM-A" --grep="warp.*no.coord" --grep="GT-182" | head -5`
+  (empty output = the no-coordinate live-spawn branch has not landed yet and this entry's
+  BLOCKED status is still accurate).
+- links: `notes_to_chief/20260901_0215_PANYA-ORDER-drop-milestones-all-hands-on-three-things-plus-new-gm-and-ui-work.md`
+  (section 3, GM-A) -- `notes_to_chief/consumed/20260829_0542_COO-DECISION-marker-table-is-the-default-spawn-source-with-an-evidence-label.md`
+  -- `rounds/GM_20260831_1640_fftpji_warp_cross_scene_live_teleport.md` -- `GT-106-R2`,
+  `GT-172` (with-coordinates live warp, PASS with F-1/F-2 open findings), `GT-141`
+  (no-coordinates stage-only warp) -- `PROCESS_GATES.md` rule #18.
+- numbering: this batch (GT-182 through GT-186) was opened after re-running the shared
+  counter's own search command against `GAME_TEST_QUEUE.md`, `CLIENT_RE_QUEUE.md`, and
+  `archive/*QUEUE*ARCHIVE*.md`; highest confirmed prior number was `GT-181`. This entry is
+  `182`.
+- result: (tester/build lane fills in: PASS/FAIL/BLOCKED, evidence, timestamp,
+  OBSERVER_CONFIRMED line per G-OBS once client-observable evidence exists)
+
+## GT-183 GM-B-SPEED-COMMAND-001  [BLOCKED]
+
+> Opened by chief this round, directly per Panya's order, same provenance as `GT-182`
+> above. Source: PANYA-ORDER `notes_to_chief/20260901_0215_PANYA-ORDER-*.md` section 3
+> (GM-B). Build-owner lane: **LANE-GM** per chief's broadcast letter this round.
+
+- objective: single claim -- on a NORMAL boot of `pirate-force-server` `main` (no
+  `PF_ADHOC_ATTR_PROBE` environment variable, no external fork, no reference-only code from
+  `notes_to_chief/reference_adhoc_probe/`), a GM account types `/speed <value>` as a real
+  GM chat command and a human watching the screen sees the character's own movement speed
+  visibly change to match. The owner's own justification for asking for this ("already
+  proven doable via PF_ADHOC_ATTR_PROBE") refers to an informal, one-off, un-reviewed,
+  external-fork round the owner ran personally on 2026-08-27 -- this entry tests whether
+  the SAME wire mechanism, once written as a real, tested, in-tree GM command, still
+  produces the same visible effect on an ordinary client and boot.
+- background (read before building or running):
+  - `notes_to_chief/reference_adhoc_probe/ADHOC_PROBE_ROUND1_FINDINGS_20260827.md` row
+    "7 f32_54": values `1`, `999`, `99999` sent via the probe's field x7 made the
+    character visibly "walk fast/slow" on the owner's own screen. The owner's own estimate
+    of the table-normal value is **400** -- explicitly flagged in that same file as
+    "ยังไม่ได้ยืนยันกับตาราง/ไบนารี" (not yet confirmed against the stats table or the
+    binary) -- treat 400 as a starting guess, not a confirmed constant.
+  - `notes_to_chief/reference_adhoc_probe/adhoc_attr_probe.py`: the mechanism is
+    `BasicAttr` field x7, offset `+0x54`, kind `f32`, mask bit `0x0040`, sent as part of a
+    FULL 55-field `UpdateAttrVital` (`0x309A`) block -- the module's own docstring states
+    the client's ActorAttr apply "copies the incoming object whole", so a sparse delta
+    that omits other fields would zero them. Any real implementation of `/speed` must
+    follow the same whole-block-send discipline, not invent a smaller delta frame.
+  - `notes_to_chief/reference_adhoc_probe/README_WHAT_THIS_IS.md`: this reference folder is
+    explicitly **read-only**, has never passed `pf-adversary`, has no tests, and "if you
+    want to use this for real you must rewrite it in your own lane's territory, with
+    tests, not copy-paste". This entry cannot be closed by pointing at that folder; it
+    requires new, tested, in-tree code.
+- db: fresh copy of `state\pirateforce.sqlite3` for this boot (never the canonical file) --
+  record the copy's filename and sha256 before/after; verify the canonical file's own
+  sha256 is unchanged before and after.
+- server args: standard boot, `-SecondPasswordMode bypass`, GM account from
+  `config/gm_accounts.json` (or a test copy via `PF_GM_ACCOUNTS_CONFIG`). Requires whatever
+  PR wires a real `/speed` GM chat command to be merged to `main` first (see RECHECK).
+- steps:
+  1. Boot per standard playbook; confirm server up before client connects and confirm this
+     is a fresh server (not reused after a prior client was killed).
+  2. Log in with the GM account. Right-click-drag camera only for a clean baseline view.
+     Screenshot BASELINE, full resolution. Record every name label's colour in frame (one
+     line each, "none" if nothing else visible), and note a fixed walking reference (e.g.
+     distance between two landmarks, or time to cross a known gap) so "faster" is not
+     purely subjective.
+  3. Click into the chat box, confirm focus, type exactly `/speed 800` (double the owner's
+     estimated normal 400) and press Enter.
+  4. Walk the character a fixed distance (same path as any baseline walk timing done in
+     step 2) using normal WASD movement. Screenshot STEP-A. Record whether the character
+     visibly moves faster than baseline, and every name label's colour again.
+  5. Click into chat again, type exactly `/speed 100` (well below owner's estimated
+     normal), press Enter. Walk the same fixed distance. Screenshot STEP-B. Record whether
+     the character visibly moves slower than baseline.
+  6. Click into chat again, type exactly `/speed 400` (owner's estimated normal), press
+     Enter, walk the same distance, screenshot STEP-C, and record whether it looks like
+     baseline again (this is a visual comparison only, not a confirmation against the
+     stats table).
+- pass criteria (two layers, kept separate):
+    wire/DB: server console/capture log for this boot shows, after each `/speed <value>`
+      line, an `UpdateAttrVital 0x309A` frame whose decoded `BasicAttr` block has bit
+      `0x0040` set and the `+0x54` field (f32) equal to the value typed, with the rest of
+      the 55-field block populated (not zeroed) per the whole-block-send rule above.
+    client-observable: what the human at the screen reports for STEP-A/B/C -- does the
+      character visibly move faster after `/speed 800`, visibly slower after `/speed 100`,
+      and does `/speed 400` look like the untouched baseline. A result where the character
+      does NOT change speed at all is a valid, useful negative.
+- nonclaims:
+  1. Does not confirm 400 is the table-correct default walking speed -- it remains the
+     owner's own estimate from one round, explicitly unconfirmed against
+     `STANDARD_STATUS`/binary per the source finding itself.
+  2. Does not test negative, zero, or extreme values beyond what round-1 already tried
+     (1/999/99999) -- if new edge values are wanted, that is a new, separate probe
+     request, per the one-entry-one-claim rule.
+  3. Does not claim the whole-block-send discipline used by the ad-hoc probe is safe to
+     relax for a real `/speed` command.
+  4. Does not test `/speed` interacting with the movement-lock fields (x41/x42) --
+     out of scope.
+  5. Does not test any other ActorAttr field from the probe table -- this entry is scoped
+     to field x7 / move speed only.
+- RECHECK: `cd pirate-force-server && git log --all --oneline -i --grep="GM-B" --grep="/speed" --grep="GT-183" | head -5`
+  (empty output = the real `/speed` command has not landed on `main` yet and BLOCKED is
+  still accurate).
+- links: `notes_to_chief/20260901_0215_PANYA-ORDER-*.md` (section 3, GM-B) --
+  `notes_to_chief/reference_adhoc_probe/README_WHAT_THIS_IS.md`,
+  `ADHOC_PROBE_ROUND1_FINDINGS_20260827.md`, `ACTORATTR_PROBE_TABLE_x_y.md`,
+  `adhoc_attr_probe.py` -- `PROCESS_GATES.md` rule #18.
+- numbering: see `GT-182`'s numbering note. This entry is `183`.
+- result: (tester/build lane fills in: PASS/FAIL/BLOCKED, evidence, timestamp,
+  OBSERVER_CONFIRMED line per G-OBS once client-observable evidence exists)
+
+## GT-184 UI-A-PART-A-BACK-TO-CHARSELECT-BUTTON-001  [BLOCKED]
+
+> Opened by chief this round, directly per Panya's order, same provenance as `GT-182`.
+> Source: PANYA-ORDER `notes_to_chief/20260901_0215_PANYA-ORDER-*.md` section 3 (UI-A,
+> first half: "back to character select"). Split from the owner's single UI-A line into
+> two entries (`GT-184`/`GT-185`) because the two buttons are independently falsifiable
+> claims -- both halves opened this same round. Build-owner lane: **LANE-A** per chief's
+> broadcast letter this round.
+
+- objective: single claim -- clicking the HOME-menu "กลับหน้าเลือกตัวละคร" (back to
+  character select) button while in a live map actually transitions the client to the
+  character-select screen, mid-session, without closing the client window. This is the
+  exact open question `GT-033` left unanswered: that entry proved (ANSWERED, not PASS)
+  that the client sends a real `LogoutVital 0x1B40` subcode-03 frame when this button is
+  clicked, and that BOTH response policies tried so far (ack+close-socket; and
+  `ReturnSelectServerVital 0x709E`+ack+close-socket) leave the client sitting on the same
+  map screen with no transition, no error, no popup, and no process exit -- for 50-77
+  seconds of observation in three separate attended rounds. This entry exists to be run
+  against whatever NEW response/sequence the implementing lane builds -- it is not a
+  repeat of `GT-033`'s already-answered variants A/B.
+- background (read before running):
+  - `archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md` GT-033 RESULT block: full detail
+    on what has already been tried and failed, including the six untested branches listed
+    there -- do not re-propose one of those six as if it were new.
+  - `GT-026`: the HOME menu's exit dialog/buttons exist and are clickable, and clicking
+    does not freeze the client -- that plumbing is not what's broken; what's broken is
+    what happens (or doesn't) after the click.
+  - `RE-070` (`CLIENT_RE_QUEUE.md`): the open static-RE question about what actually gates
+    the orchestrator's scene/connection teardown. If this GT entry is still BLOCKED at
+    read time, check whether `RE-070` has new findings before assuming nothing has
+    changed.
+- db: fresh copy of `state\pirateforce.sqlite3` (never canonical) -- record filename +
+  sha256 before/after; verify canonical file's sha256 unchanged.
+- server args: standard boot, `-SecondPasswordMode bypass`. Requires whatever new
+  response-policy scenario/flag the implementing lane builds for this fix; do not attempt
+  this entry against the default boot or against the already-answered `GT-033` variant A/B
+  scenarios.
+- steps:
+  1. Boot per standard playbook; confirm server up first; confirm fresh server (not reused
+     after a killed client).
+  2. Log in normally. Right-click-drag camera only for a clean baseline view. Screenshot
+     BASELINE, full resolution, record every name label's colour (one per line, "none" if
+     empty).
+  3. Open the HOME menu, click "กลับหน้าเลือกตัวละคร". Note the wall-clock time of the
+     click.
+  4. Watch continuously for at least 90 seconds (GT-033's longest prior negative-result
+     window was ~77 seconds). Screenshot at +5s, +30s, +60s, +90s, labelled STEP-A through
+     STEP-D. Record at each: is the client still on the map, has any dialog/popup
+     appeared, has the screen changed to character-select, and every name label's colour
+     if still on a screen with name labels.
+  5. If character-select is reached, screenshot it labelled SUCCESS and record what is
+     shown (character name, any list of characters, any error text).
+- pass criteria (two layers, kept separate):
+    wire/DB: server console/capture log shows the `LogoutVital 0x1B40` subcode-03 request
+      arriving AND the new response frame(s) the implementing lane sends in reply,
+      byte-decoded and logged with a distinct token so a human's screenshot timestamps can
+      be lined up against it after the fact.
+    client-observable: does the human watching the screen actually see the
+      character-select screen appear within the 90-second observation window, with no
+      client crash/freeze and no need to close the window. A negative result here (client
+      stays on the map, exactly like `GT-033`) is a valid, useful finding.
+- nonclaims:
+  1. Does not test the "ออกจากเกม" (exit/quit) button or `LogoutVital` subcode 01 -- that
+     is `GT-186`, a separate claim.
+  2. Does not test what happens AFTER reaching character-select (re-entering the game) --
+     that is `GT-185`, which has this entry's PASS as a precondition.
+  3. Does not claim any prior `GT-033` variant is retested or re-litigated.
+  4. Does not attribute a negative result to any single one of the "kinit-teardown reaches
+     the client" open questions from `GT-033`'s nonclaims without new evidence.
+- RECHECK: `cd pirate-force-server && git log --all --oneline -i --grep="UI-A" --grep="back.*char.*select" --grep="GT-184" --grep="RE-070" | head -8`
+  (empty output for the UI-A/GT-184 terms = still BLOCKED).
+- links: `notes_to_chief/20260901_0215_PANYA-ORDER-*.md` (section 3, UI-A) --
+  `archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md` (GT-033 full result) -- `GT-026` --
+  `RE-070` in `CLIENT_RE_QUEUE.md` -- `PROCESS_GATES.md` rule #18 -- `GT-185` (depends on
+  this entry's PASS).
+- numbering: see `GT-182`'s numbering note. This entry is `184`.
+- result: (tester/build lane fills in: PASS/FAIL/BLOCKED, evidence, timestamp,
+  OBSERVER_CONFIRMED line per G-OBS once client-observable evidence exists)
+
+## GT-185 UI-A-PART-B-BACK-INTO-GAME-ROUNDTRIP-001  [BLOCKED]
+
+> Opened by chief this round, directly per Panya's order, same provenance as `GT-182`.
+> Source: PANYA-ORDER `notes_to_chief/20260901_0215_PANYA-ORDER-*.md` section 3 (UI-A,
+> second half: "back into game"). This is the half of UI-A that unblocks the owner's
+> stated cost problem: today, changing scene/map to test something new costs a full
+> client reboot because there is no working way back into a live game from
+> character-select without closing the window. Build-owner lane: **LANE-A** per chief's
+> broadcast letter this round.
+
+- objective: single claim -- having reached the character-select screen via the button
+  tested in `GT-184` (this entry's hard precondition -- it cannot be attempted at all
+  until `GT-184` PASSes), selecting a character from that screen and clicking whatever
+  "enter game"/"back into game" control exists there returns the client to a live,
+  playable game scene, in the SAME client process (no window close/reopen), and that this
+  second entry-into-game behaves the same as an ordinary first login (character loads
+  correctly, HUD populates, movement works, no stale state left over from the previous
+  session).
+- background (read before running):
+  - This is explicitly the mechanism the owner said is costing every test round money:
+    "ทางเดียวคือปิดหน้าต่างด้วย X ... บูตใหม่ทั้งรอบเพื่อเปลี่ยนฉากหนึ่งครั้ง" (the only way
+    is closing the window with X, which means a full reboot just to change scene once).
+    This entry is what proves that cost has actually been removed.
+  - The normal first-login character-select-to-game path already works today -- the open
+    question this entry asks is whether doing it a SECOND time, within the same running
+    client process, behaves identically, or whether stale state from the first session
+    causes a different, broken result the second time. Do not assume the answer is
+    "obviously yes" -- write it down and check instead of assuming.
+- db: fresh copy of `state\pirateforce.sqlite3` (never canonical) -- record filename +
+  sha256 before/after; verify canonical file's sha256 unchanged.
+- server args: same boot as `GT-184` (this is a continuation within the same boot/session,
+  not a new boot) -- do not restart the server between `GT-184`'s steps and this entry's
+  steps.
+- steps:
+  1. Complete `GT-184`'s steps first, in the same boot, ending with the client actually on
+     the character-select screen. If `GT-184` did not reach character-select, stop here --
+     mark this entry NOT-YET-RUN (not FAIL; it was never reached).
+  2. Screenshot the character-select screen, full resolution, labelled CHARSELECT-BASELINE.
+     Record what is shown and every name label's colour if any are visible on this screen.
+  3. Select the same character used earlier this session. Click whatever control returns
+     to the game. Record the exact button label seen.
+  4. Wait up to 30 seconds. Screenshot STEP-A. Record: did the client load into a live
+     scene, which scene (name/background/minimap), HUD state (HP/MP/level match the
+     character's last known values or not), and every name label's colour.
+  5. If loaded into a scene, right-click-drag camera only to confirm a stable, non-frozen
+     view. Then perform ONE ordinary WASD movement to confirm the character can actually
+     move.
+  6. Screenshot STEP-B after the movement check. Record whether the movement was reflected
+     on screen normally.
+- pass criteria (two layers, kept separate):
+    wire/DB: server console/capture log shows a fresh scene-entry sequence firing
+      correctly a SECOND time within the same TCP session/connection as the first login,
+      with no duplicate-registration errors, no exception lines, and `sessions`/
+      `characters` DB state consistent with one character, one active session.
+    client-observable: does the human watching the screen see a normal, playable game
+      scene appear after selecting the character and clicking "back into game" -- correct
+      HUD values, correct scene, and basic movement working -- within the same client
+      process, with no crash and no need to reopen the client.
+- nonclaims:
+  1. Does not test entering a DIFFERENT scene than the one the character was in before --
+     that is closer to a `/warp` claim, already covered by `GT-182`.
+  2. Does not test repeating this round-trip a third or further time.
+  3. Does not test multiple characters/multiple accounts round-tripping concurrently.
+  4. Does not claim this removes the need for any existing teardown/killed-client
+     workaround.
+- RECHECK: `cd pirate-force-server && git log --all --oneline -i --grep="UI-A" --grep="back into game" --grep="GT-185" | head -5`
+  (empty output = still blocked on GT-184's own fix landing).
+- links: `notes_to_chief/20260901_0215_PANYA-ORDER-*.md` (section 3, UI-A) -- `GT-184`
+  (hard precondition) -- `PROCESS_GATES.md` rule #18.
+- numbering: see `GT-182`'s numbering note. This entry is `185`.
+- result: (tester/build lane fills in: PASS/FAIL/BLOCKED/NOT-YET-RUN, evidence, timestamp,
+  OBSERVER_CONFIRMED line per G-OBS once client-observable evidence exists)
+
+## GT-186 UI-B-REAL-LOGOUT-BUTTON-001  [BLOCKED]
+
+> Opened by chief this round, directly per Panya's order, same provenance as `GT-182`.
+> Source: PANYA-ORDER `notes_to_chief/20260901_0215_PANYA-ORDER-*.md` section 3 (UI-B: "a
+> real logout button, distinct from the X close-window button, must work"). Build-owner
+> lane: **LANE-A** per chief's broadcast letter this round.
+
+- objective: single claim -- clicking the HOME-menu "ออกจากเกม" (exit/quit) control while
+  in a live map ends the session cleanly and takes the client itself out of the game
+  (screen changes away from the map and/or the client process exits on its own), as a
+  genuine alternative to forcibly closing the window with the OS-level X button. `GT-033`
+  already measured this exact button (subcode 01 of `LogoutVital 0x1B40`) under variant A
+  (ack + close-socket) and found the client's own process did NOT exit on its own within
+  the observation window; variant B (adding `ReturnSelectServerVital` first) was
+  deliberately NOT run against subcode 01. This entry is scoped to whatever NEW mechanism
+  the implementing lane builds, not a repeat of variant A.
+- background (read before running):
+  - `archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md` GT-033 RESULT block, subcode-01
+    column specifically: variant A measured, process did not exit on its own; variant B
+    subcode 01 explicitly NOT measured -- if the implementing lane's fix is close to
+    variant B in shape, running that untested cell for the first time here would itself be
+    new information, not a repeat.
+  - Distinguish this from `GT-184`/`GT-185`: those are about the "back to character
+    select" -> "back into game" round trip. This entry is about actually LEAVING/ending
+    the client session as a deliberate, clean alternative to the destructive X-kill.
+- db: fresh copy of `state\pirateforce.sqlite3` (never canonical) -- record filename +
+  sha256 before/after; verify canonical file's sha256 unchanged.
+- server args: standard boot, `-SecondPasswordMode bypass`. Requires whatever new
+  response/sequence the implementing lane builds for the exit path; if the fix is shared
+  code with `GT-184`'s fix, say so explicitly in this entry's result and cross-reference,
+  but still test this button and this subcode separately.
+- steps:
+  1. Boot per standard playbook; confirm server up first; confirm fresh server (not reused
+     after a killed client).
+  2. Log in normally. Right-click-drag camera only for a clean baseline view. Screenshot
+     BASELINE, full resolution, record every name label's colour (one per line, "none" if
+     empty).
+  3. Open the HOME menu, click "ออกจากเกม" (exit/quit -- record the exact label text
+     seen). Note the wall-clock time.
+  4. Watch continuously for at least 90 seconds. Screenshot at +5s, +30s, +60s, +90s,
+     labelled STEP-A through STEP-D. Record at each: is the client window still open, is
+     it still showing the map, has any dialog/disconnect-notice appeared, and (if the
+     window is still open and showing name labels) every name label's colour.
+  5. If the client process exits on its own at any point, record the exact wall-clock time
+     it happened relative to the click in step 3.
+  6. If the client is still sitting on the same map screen after 90 seconds with no change
+     of any kind, this is the negative result this entry is built to catch.
+- pass criteria (two layers, kept separate):
+    wire/DB: server console/capture log shows the `LogoutVital 0x1B40` subcode-01 request
+      arriving AND `sessions.closed_at` being written server-side AND whatever new
+      response frame(s) the implementing lane sends, logged with a distinct, greppable
+      token.
+    client-observable: does the human watching the screen see the client actually leave
+      the map -- either the process exits on its own, or the screen changes to something
+      that clearly indicates a completed logout -- within the 90-second window, without
+      the tester needing to close the window with X.
+- nonclaims:
+  1. Does not test the "back to character select" button or `LogoutVital` subcode 03 --
+     that is `GT-184`, a separate claim, even if it turns out to share implementation code.
+  2. Does not test what a killed/X-closed client looks like server-side.
+  3. Does not claim any existing teardown-template age limit changes because of this
+     entry's result either way.
+  4. Does not attribute a negative result to any specific untested branch from `GT-033`'s
+     six-branches list without first checking whether the implementing lane's fix actually
+     touches that branch.
+- RECHECK: `cd pirate-force-server && git log --all --oneline -i --grep="UI-B" --grep="logout" --grep="GT-186" | head -5`
+  (empty output = still BLOCKED-ON-WIRING).
+- links: `notes_to_chief/20260901_0215_PANYA-ORDER-*.md` (section 3, UI-B) --
+  `archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md` (GT-033 full result, subcode-01
+  column) -- `GT-184` (sibling UI ticket, different subcode) -- `PROCESS_GATES.md` rule #18.
+- numbering: see `GT-182`'s numbering note. This entry is `186`.
+- result: (tester/build lane fills in: PASS/FAIL/BLOCKED, evidence, timestamp,
+  OBSERVER_CONFIRMED line per G-OBS once client-observable evidence exists)
