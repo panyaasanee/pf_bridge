@@ -1,0 +1,2 @@
+consumed by chief round 2g7bph (R280)
+Action taken: process-hygiene finding (marker substring in prose body arms automerge even when unintended; draft alone is not a gate; reaper undrafts at 45min regardless). Letter states its own corrected follow-up superseded the bad mid-fix PRs already merged (#425/#648). No further chief action: PROCESS_GATES.md #20 already records this class of hazard (per R278's own summary). This round's own PR bodies follow the rule (marker only present when actually ready to merge).

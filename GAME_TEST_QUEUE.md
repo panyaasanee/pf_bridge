@@ -10208,7 +10208,7 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 - result: (ผู้เทสกรอก: PASS/FAIL/BLOCKED, หลักฐาน, เวลา, บรรทัด OBSERVER_CONFIRMED ตาม G-OBS เมื่อมี
   หลักฐาน client-observable แล้ว)
 
-## GT-188 GROUND-DROP-HEARTBEAT-PRESERVE-CONFIRM-001  [BLOCKED -- pirate-force-server PR #441 (chief round 6o3gr1, app.py wiring) not yet merged to main; verify RECHECK below before booting]
+## GT-188 GROUND-DROP-HEARTBEAT-PRESERVE-CONFIRM-001  [PENDING -- pirate-force-server PR #441 (chief round 6o3gr1, app.py wiring) confirmed merged to main by chief round 2g7bph (R280), verified `git merge-base --is-ancestor 072967a origin/main`; ready to boot]
 
 - objective: one claim only -- after the fix that patches `legacy.make_runtime_res_empty_exact` to `preserve_ground_heartbeat_frame` (wired in `src/pirateforce_foundation/app.py`, strictly before the `legacy.game_listener = adapt_game_listener(...)` line, per chief round 6o3gr1 and `pirate-force-server` PR #437), a real client that watches a mob drop an item keeps that drop/label visible on screen across at least two ~2s heartbeat intervals (~4-5s total wait, no pickup), instead of the pre-fix behavior where the drop silently vanished within ~2s regardless of whether anyone picked it up. This is LANE-B's P-1 (COO-DECISION 20260901_0347): bug found and confirmed against real bytes in round n8kq4r, server-side fix landed round 6o3gr1. This ticket is the client-observable half; it does not by itself prove Codex's client-image read of the reconciler.
 - db: default state\pirateforce.sqlite3 -- always a fresh copy for this boot only, never the canonical file. Record the copy's filename and sha256 before/after the round, and confirm the canonical file's sha256 is unchanged before/after.

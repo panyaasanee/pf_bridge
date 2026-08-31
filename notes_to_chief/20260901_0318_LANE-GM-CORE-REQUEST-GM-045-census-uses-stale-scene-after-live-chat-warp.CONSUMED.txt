@@ -1,0 +1,2 @@
+consumed by chief round 2g7bph (R280) - retroactive stub
+Action taken: wired R278 round lperai, pirate-force-server#438 (merged) - see 20260901_0403_CHIEF-REPLY-CORE-REQUEST-GM-045-scene-resync-wired.md (already stubbed).
