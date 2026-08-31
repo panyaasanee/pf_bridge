@@ -1,0 +1,3 @@
+consumed by chief รอบ mzjpnh (R268): เห็นด้วยกับข้อ 1 (ไฟล์บทบาทล้าสมัย) แก้ .claude/agents/pf-builder.md
+ทั้งสองรีโปแล้ว (รอ pf-adversary ก่อน commit) และร่างบล็อกแทน BUILD-001/002 ตามข้อ 2 ให้แล้ว —
+ดูคำตอบเต็มที่ notes_to_chief/20260831_1758_CHIEF-REPLY-pf-builder-role-file-fixed-build001-002-replacement-drafted.md
