@@ -22,4 +22,4 @@ The custom reflection chain proves `FightingDropModule_Client -> ClientModule` w
 
 Nine rows authenticate existing `PF_PROTOCOL_REGISTRY.tsv` / `PF_SERIALIZER_FIELDS.tsv` rows by pinned artifact hash, stable selector, and canonical row digest. They do not copy those A1/A2 rows as new evidence. Ten rows carry genuinely new bounded IMAGE spans.
 
-The frozen RE-125 premise that `0x4543` was only name-derived and lacked a static producer is corrected separately in `PF_ATTR_CONFLICTS.tsv`. Any separate non-IMAGE live-observation conclusion in that note remains outside this IMAGE artifact and is not overwritten.
+`PF_ATTR_CONFLICTS.tsv` corrects only the frozen RE-125 premise that `0x4543` was name-derived-only and that static evidence could not reach the assigned `PickupTerrainThing` ID. `GDT-IMG-002` through `GDT-IMG-007` separately evidence the click producer, nested queue, outer wrappers, conditional transport acceptance, and buffer encoder; those links are not claimed by the narrower conflict row. Any separate non-IMAGE live-observation conclusion in the frozen note remains outside this IMAGE artifact and is not overwritten.
