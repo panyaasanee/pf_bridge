@@ -1,0 +1,140 @@
+unresolved_kind	class	scope_status	blocker_head	row_count
+OPEN_CONFLICT_WORK_ITEM	UNKNOWN_ITEMBAG_FAMILY_MEMBER	N/A	OPEN_REDERIVED_IMAGE_CONFLICT	398
+OPEN_CONFLICT_WORK_ITEM	ActorAttr	N/A	OPEN_REDERIVED_IMAGE_CONFLICT	36
+CONCRETE_CONSUMER_CLASS_UNKNOWN	AvatarAttr	UNKNOWN	scope	34
+OPEN_CONFLICT_WORK_ITEM	ItemVaryAttr	N/A	OPEN_REDERIVED_IMAGE_CONFLICT	28
+OPEN_CONFLICT_WORK_ITEM	ItemAttr	N/A	OPEN_REDERIVED_IMAGE_CONFLICT	26
+CONCRETE_CONSUMER_CLASS_UNKNOWN	ActorAttr	UNKNOWN	scope	24
+OPEN_CONFLICT_WORK_ITEM	CSkillAttr	N/A	OPEN_REDERIVED_IMAGE_CONFLICT	21
+ROLE_PROVED_BROADER_IDENTITY_OPEN	PetAttr	PROVEN_EXACT	the structural/consumer role is exact but a unique broader g	18
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	ActorAttr	UNKNOWN	scope	14
+CONCRETE_CONSUMER_CLASS_UNKNOWN	MovementAttr	UNKNOWN	scope	14
+ROLE_PROVED_BROADER_IDENTITY_OPEN	CVehicleAttr	PROVEN_EXACT	the structural/consumer role is exact but a unique broader g	12
+CONCRETE_CONSUMER_CLASS_UNKNOWN	ItemAttr	UNKNOWN	scope	12
+CONCRETE_CONSUMER_CLASS_UNKNOWN	NPCAttr	UNKNOWN	scope	10
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	SummonedPetAttr	UNKNOWN	scope	10
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	CAchievementsAttr.ListChild	UNKNOWN	scope	8
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	ItemBagAttr	UNKNOWN	scope	8
+FIELD_GAMEPLAY_SEMANTIC_UNKNOWN	PetAttr	PROVEN_EXACT	no unique non-codec gameplay producer or consumer was proved	8
+OPEN_REDERIVED_IMAGE_CONFLICT	ItemAttr	PROVEN_EXACT	open conflict(s)	7
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	AvatarAttr	UNKNOWN	scope	6
+ROLE_PROVED_BROADER_IDENTITY_OPEN	BackpackAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	6
+CONCRETE_CONTAINER_RECORD_CLASS_AND_SEMANTIC_OPEN	CBuffWireRecord	UNKNOWN	scope	6
+ROLE_PROVED_BROADER_IDENTITY_OPEN	CGuildStorageAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	6
+CONCRETE_CONSUMER_CLASS_UNKNOWN	CSkillAttr	UNKNOWN	scope	6
+ROLE_PROVED_BROADER_IDENTITY_OPEN	CollectionBagAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	6
+ROLE_PROVED_BROADER_IDENTITY_OPEN	ExpressBagAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	6
+ROLE_PROVED_BROADER_IDENTITY_OPEN	ItemBagAttr_Equiped	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	6
+ROLE_PROVED_BROADER_IDENTITY_OPEN	ItemMallBagAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	6
+ROLE_PROVED_BROADER_IDENTITY_OPEN	NavigationExAttr	PROVEN_EXACT	the structural/consumer role is exact but a unique broader g	6
+CONCRETE_CONTAINER_RECORD_CLASS_AND_SEMANTIC_OPEN	ResidentEffectWireRecord	UNKNOWN	scope	6
+ROLE_PROVED_BROADER_IDENTITY_OPEN	StorageAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	6
+ROLE_PROVED_BROADER_IDENTITY_OPEN	UnlimitBagAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	6
+CONCRETE_CONSUMER_CLASS_UNKNOWN	BasicAttr	UNKNOWN	scope	4
+OPEN_REDERIVED_IMAGE_CONFLICT	BasicAttr	PROVEN_EXACT	open conflict(s)	4
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	CAchievementsAttr.TreeChild	UNKNOWN	scope	4
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	DailyQuestAttr.RecordNode	UNKNOWN	scope	4
+CONCRETE_CONSUMER_CLASS_UNKNOWN	InstanceRefreshAttr	UNKNOWN	scope	4
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	ItemAttr	UNKNOWN	scope	4
+ROLE_PROVED_BROADER_IDENTITY_OPEN	ItemAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	4
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	MovementAttr	UNKNOWN	scope	4
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	NPCAttr	UNKNOWN	scope	4
+CONTAINER_GAMEPLAY_SEMANTIC_OPEN	QuestAttr	PROVEN_EXACT	selector identity is exact but its complete gameplay state n	4
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	StallActorAttr	UNKNOWN	scope	4
+ROLE_PROVED_BROADER_IDENTITY_OPEN	SystemGiftAttr.SystemGift	PROVEN_EXACT	UI-row projection is exact	4
+FIELD_GAMEPLAY_SEMANTIC_UNKNOWN	WinePotAttr	PROVEN_EXACT	constructor, copy, and codec prove only width/default	4
+OPEN_REDERIVED_IMAGE_CONFLICT	ActorAttr	PROVEN_EXACT	open conflict(s)	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	ActorAttr	PROVEN_EXACT	structural/consumer role is proved but the broader gameplay 	2
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	ActorGatheringInfoAttr	UNKNOWN	scope	2
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	ActorTreasureHuntExcavatingInfoAttr	UNKNOWN	scope	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	AvatarAttr	PROVEN_EXACT	the structural/consumer role is exact but a unique broader g	2
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	BackpackAttr	UNKNOWN	scope	2
+GAMEPLAY_SEMANTIC_UNKNOWN	BackpackAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	BasicAttr	PROVEN_EXACT	structural/consumer role is proved but the broader gameplay 	2
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	BasicAttr	UNKNOWN	scope	2
+CONCRETE_CONSUMER_CLASS_UNKNOWN	CAchievementsAttr.TreeChild	UNKNOWN	scope	2
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	CCooldownAttr	UNKNOWN	scope	2
+CONCRETE_CONSUMER_CLASS_UNKNOWN	CCooldownAttr	UNKNOWN	scope	2
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	CGuildStorageAttr	UNKNOWN	scope	2
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	CVehicleAttr	UNKNOWN	scope	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	CollectableBookTypeAttr	PROVEN_EXACT	class role is exact but the code/bit domain has no unique ty	2
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	CollectionBagAttr	UNKNOWN	scope	2
+GAMEPLAY_SEMANTIC_UNKNOWN	CollectionBagAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	2
+FIELD_GAMEPLAY_SEMANTIC_UNKNOWN	CollectionObjPointAttr	PROVEN_EXACT	whole IMAGE census proves only constructor/copy/diff/merge/c	2
+FIELD_GAMEPLAY_SEMANTIC_UNKNOWN	CollectionPieceAttr	PROVEN_EXACT	only constructor, copy, and codec uses are proved	2
+FIELD_GAMEPLAY_SEMANTIC_UNKNOWN	CrystalPlateAttr	PROVEN_EXACT	no unique non-copy IMAGE producer/consumer	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	CrystalSlotAttr	PROVEN_EXACT	per-slot nutrient-add cap role is proved	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	CrystalSlotAttr	PROVEN_EXACT	zero/nonzero crystal-presence role is proved	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	DBAttribute	PROVEN_EXACT	the structural/consumer role is exact but a unique broader g	2
+CONCRETE_CONTAINER_RECORD_CLASS_AND_SEMANTIC_OPEN	DailyActivityState.RecordNode	UNKNOWN	scope	2
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	ExpressBagAttr	UNKNOWN	scope	2
+GAMEPLAY_SEMANTIC_UNKNOWN	ExpressBagAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	ExpressCountAttr	PROVEN_EXACT	the byte is the sole ExpressCountAttr count value, but IMAGE	2
+GAMEPLAY_SEMANTIC_UNKNOWN	Express_ClientGetExpressItemAttrsVital	PROVEN_EXACT	IMAGE proves inheritance, storage, and wire use but no uniqu	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	Express_ClientGetExpressItemAttrsVital	PROVEN_EXACT	underlying ID domain (mail, package, attachment, or another 	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	Express_ClientGetExpressItemAttrsVital	PROVEN_EXACT	observed values 0, 4, and outbound default 5 do not prove th	2
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	ItemBagAttr_Equiped	UNKNOWN	scope	2
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	ItemMallBagAttr	UNKNOWN	scope	2
+GAMEPLAY_SEMANTIC_UNKNOWN	ItemMallBagAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	2
+OPEN_REDERIVED_IMAGE_CONFLICT	ItemVaryAttr	PROVEN_EXACT	open conflict(s)	2
+CONCRETE_CONSUMER_CLASS_UNKNOWN	ItemVaryAttr	UNKNOWN	scope	2
+FIELD_GAMEPLAY_SEMANTIC_UNKNOWN	PetAttr	PROVEN_EXACT	the observed 1/2 comparison belongs to separately looked-up 	2
+CONCRETE_CONTAINER_RECORD_CLASS_AND_SEMANTIC_OPEN	PetAttr.CollectionRecord	UNKNOWN	scope	2
+NON_WIRE_RUNTIME_ROLE_OPEN	PetsModule_Client	PROVEN_EXACT	selector values 1/2 choose the two reference slots, but the 	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	QuestMiscAttr.QuestMiscData	PROVEN_EXACT	group-key role is exact, but the broader grouping domain is 	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	QuestMiscAttr.QuestMiscData	PROVEN_EXACT	kind values 1 and 2 have bounded consumers, but the full enu	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	QuestMiscAttr.QuestMiscData	PROVEN_EXACT	secondary identity-key role is exact, but its complete key d	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	QuestMiscAttr.QuestMiscData	PROVEN_EXACT	kind 2 uses this as a time-like endpoint	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	QuestMiscAttr.QuestMiscData	PROVEN_EXACT	kind 1 uses this as a progress/value	2
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	StorageAttr	UNKNOWN	scope	2
+GAMEPLAY_SEMANTIC_UNKNOWN	StorageAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	SystemGiftAttr.SystemGift	PROVEN_EXACT	the exact key is used for lookup and retrieve requests, but 	2
+CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	UnlimitBagAttr	UNKNOWN	scope	2
+GAMEPLAY_SEMANTIC_UNKNOWN	UnlimitBagAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	2
+CONCRETE_CONTAINER_RECORD_CLASS_UNKNOWN	UpdateAttrVital.Entry	UNKNOWN	scope	2
+ROLE_PROVED_BROADER_IDENTITY_OPEN	WinePotAttr	PROVEN_EXACT	clock unit, epoch, writer authority, and wrap behavior remai	2
+CLASS_LINK_RECOVERY_OPEN	ActorCommunityDataSet	PROVEN_EXACT	getter/vtable link remains unresolved	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	ActorEffectsModule_Client	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+CONCRETE_CONTAINER_RECORD_CLASS_AND_SEMANTIC_OPEN	ActorLearnedPetsSkillData.RecordNode	UNKNOWN	scope	1
+CLASS_LINK_RECOVERY_OPEN	ActorPetsCommonAttr	PROVEN_EXACT	getter/vtable link remains unresolved	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	BehaviorSoundModule	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	BkDisplayModule_Client	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	BuildingCrystalModule	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+CONCRETE_CONTAINER_RECORD_CLASS_AND_SEMANTIC_OPEN	CAchievementsAttr.TreeChild	UNKNOWN	scope	1
+CONCRETE_CONTAINER_RECORD_CLASS_UNKNOWN	CAchievementsAttr.TreeChild	UNKNOWN	scope	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	CGCBuffModule	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+OPEN_REDERIVED_IMAGE_CONFLICT	CSkillAttr	PROVEN_EXACT	open conflict(s)	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	CWebGMModule	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	CutinModule_Client	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+CONTAINER_GAMEPLAY_SEMANTIC_OPEN	DailyQuestAttr	PROVEN_EXACT	entry key/value roles are exact but the value has no univers	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	EnemySearchModule	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+CLASS_LINK_RECOVERY_OPEN	EquipmentExtraAttr	PROVEN_EXACT	getter/vtable link and immediate parent are unresolved	1
+GAMEPLAY_SEMANTIC_UNKNOWN	Express_ClientGetExpressItemAttrsVital	PROVEN_EXACT	concrete W runtime subtype and serializer target are not sta	1
+NON_WIRE_RUNTIME_ROLE_OPEN	FightAttr	PROVEN_EXACT	the attachment is ActorAttr/NPCAttr-family and the concrete 	1
+CLASS_LINK_RECOVERY_OPEN	FightingDropModule_Client	PROVEN_EXACT	getter/vtable link and immediate parent are unresolved	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	FingerGuessingGameModule_Client	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+CLASS_LINK_RECOVERY_OPEN	FriendshipDataSet	PROVEN_EXACT	getter/vtable link and immediate parent are unresolved	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	GatheringPerformanceModule_Client	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+CLASS_LINK_RECOVERY_OPEN	KnowledgeGuruCreateTableAttr	PROVEN_EXACT	getter/vtable link and immediate parent are unresolved	1
+CLASS_LINK_RECOVERY_OPEN	LetterInABottleDataSet	PROVEN_EXACT	getter/vtable link and immediate parent are unresolved	1
+OPEN_CONFLICT_WORK_ITEM	MOBS_DATA	N/A	OPEN_CROSS_SOURCE_MISMATCH	1
+NON_WIRE_RUNTIME_ROLE_OPEN	MOBS_RUNTIME	PROVEN_EXACT	the exact f_SCALE key-to-runtime-slot load is proved, but no	1
+CONCRETE_CONTAINER_RECORD_CLASS_AND_SEMANTIC_OPEN	NPCAppearAttr.RecordNode	UNKNOWN	scope	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	NPC_MovieModule	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+CLASS_LINK_RECOVERY_OPEN	NewsflashAttr	PROVEN_EXACT	getter/vtable link and immediate parent are unresolved	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	NoviceModule	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+CLASS_LINK_RECOVERY_OPEN	PartyAttr	PROVEN_EXACT	getter/vtable link remains unresolved	1
+CLASS_LINK_RECOVERY_OPEN	PenpalLetterDataSet	PROVEN_EXACT	getter/vtable link and immediate parent are unresolved	1
+NON_WIRE_RUNTIME_ROLE_OPEN	PetAttr	PROVEN_EXACT	mutation paths set/reset the byte, but no direct reader prov	1
+CONTAINER_GAMEPLAY_SEMANTIC_OPEN	PetsMergingData	PROVEN_EXACT	the exact collection/member role is proved but its broader g	1
+NON_WIRE_RUNTIME_ROLE_OPEN	PetsModule_Client	PROVEN_EXACT	the timeout-update vital and cached value are exact, but +0x	1
+NON_WIRE_RUNTIME_ROLE_OPEN	PetsModule_Client	PROVEN_EXACT	only the constructor zero is proved	1
+CONTAINER_GAMEPLAY_SEMANTIC_OPEN	QuestMiscAttr	PROVEN_EXACT	grouping role is exact but the broader group domain is not	1
+CONTAINER_GAMEPLAY_SEMANTIC_OPEN	ResidentEffectAttr	PROVEN_EXACT	container identity is exact, but the individual record gamep	1
+NON_WIRE_CONTAINER_SCOPE_OPEN	ResidentEffectWireRecord	UNKNOWN	scope	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	TileEffectModule_Client	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	TranslatePortalModule_Client	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	TreasureHuntPerformanceModule_Client	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+CONCRETE_CONTAINER_RECORD_CLASS_AND_SEMANTIC_OPEN	UpdateAttrVital.Entry	UNKNOWN	scope	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	UserSettingModule_Client	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	WinemakingModule_Client	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
