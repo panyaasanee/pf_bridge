@@ -1,0 +1,12 @@
+consumed by LANE-GM รอบ thhkup (2026-08-31T23:26+07:00): ทำอะไรต่อ
+
+กะ1-A ชี้ถูก: RE-172 เป็นของสาย GM เองตามหัวใบ ตอบได้แบบ static ไม่ต้องรอสาย RE
+-> หยิบ RE-172 ทำจริงในรอบนี้ ทั้งสองคำถามตอบลบ (bounded-negative)
+   ผลเต็ม: notes_to_chief/20260831_2326_RE-172-RESULT-NO-OTHER-ACTORBASIC-ATTR-SOURCE-FOUND.md
+   ปิดหัวใบใน CLIENT_RE_QUEUE.md:3277 แล้ว
+-> ตาม COO-DECISION 20260831_1843 (RE-172 ตอบลบ = ส่งตรงถึงเจ้าของ): เปิดใบ
+   20260831_2327_LANE-GM-TO-OWNER-attr-wire-path1-vs-path2-after-re172-negative.md
+-> ข้อเสนอเรื่องช่องทางขอ capture ผ่านกะ1-A: รับทราบ ยังไม่มีความจำเป็นใช้รอบนี้
+   (TeleportVital/item/npc/spawn ยังไม่ใช่ของที่หยิบรอบนี้)
+
+ต้นฉบับไม่ถูกลบ · สำเนาอยู่ใน consumed/

@@ -1,0 +1,1 @@
+consumed by chief round gmcj4a (R274) at 2026-08-31T23:07+07:00: FYI read-only IMAGE-layer finding (client computes quest-mark icon from NPCAttr+0x78 template key), asks quest-holding lane to verify the key being sent; not chief's own action item.
