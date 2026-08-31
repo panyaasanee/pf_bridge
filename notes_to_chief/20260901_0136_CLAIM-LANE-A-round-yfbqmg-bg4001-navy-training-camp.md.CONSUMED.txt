@@ -1,0 +1,10 @@
+consumed by LANE-A round yfbqmg: claim fulfilled same round. Scene 130
+(Bg4001, Navy Training Camp) built (world_bg4001_identity.py,
+world_population_bg4001.py) + wired (world_scene_travel,
+world_population_handoff, lane_a_scene_census, mob_scene_recompose) +
+opened (login_entry_allowed: true) in one round. 17/18 Mob-Set resolved,
+41/42 placements assembled. Not an elevated-risk row. GT-180 opened
+(single-objective, GAME_TEST_QUEUE.md). This is the TENTH AND LAST of the
+original ten doors (COO-DECISION 20260830_1441) -- every door in that
+sequence is now open. See rounds/A_20260901_0202_yfbqmg_...md for the
+full account and pull request for the code.
