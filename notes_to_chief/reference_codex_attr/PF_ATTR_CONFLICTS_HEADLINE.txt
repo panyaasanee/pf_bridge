@@ -18,35 +18,3 @@ OPEN rows on classes the live server encodes today (ActorAttr/BasicAttr) : 71
 the two tables below stay on the bridge disk, over the cap:
   PF_ATTR_CONFLICTS.tsv
   PF_ATTR_UNRESOLVED.tsv
-
---- manual amendment by chief, round jjs9bi (R276), 2026-09-01 ---
-NOT a re-run of tools_bridge/pf_attr_conflict_digest.py (its two source tables are bridge-disk-only,
-not in this cloud clone) -- this is a hand count over PF_ATTR_CONFLICTS_BUCKETS.tsv after applying
-COO-DECISION 20260901_0042 (Q1/Q2/(3)-mask-gate/Q3-empty-closure/Q3-f_SCALE-refuted) to that curated
-copy's who_decides/resolution_status/note columns. Next real regeneration from the bridge-disk source
-tables is authoritative over this block; if the two disagree, trust the regeneration and flag it.
-
-  closed by Codex alone (unchanged)                 : 647  (was 646; +1 is CROSS_SOURCE_SCHEMA_MISMATCH,
-                                                             2 rows, refuted by a later Codex gen and
-                                                             relabeled CODEX_ALREADY_RESOLVED this round)
-  closed by COO-DECISION 20260901_0042 this round    : 511  (Q1 426 + B_MASK_GATE-ratified 68 + Q3-empty 17)
-  OPEN, ruled non-blocking (Q2 D_LAYOUT, flagged
-    NEEDS_MEASUREMENT on both IMAGE+A2, no live
-    encoder touches this class)                      : 120
-  OPEN, still genuinely unruled                      :   8  (all E_OTHER: RUNNABLE_SERVER_CODE_SEMANTIC_
-                                                             CONFLICT 3, RUNNABLE_SERVER_CODE_COMBAT_
-                                                             LIFECYCLE_CONFLICT 2, FROZEN_A2_ITEMBAG_
-                                                             INHERITED_FIELD_OWNERSHIP 2, FROZEN_PICKUP_
-                                                             STATIC_PREMISE_PARTIALLY_REFUTED 1 -- COO's
-                                                             "4 remaining Q3 rows" note: chief could only
-                                                             confirm 2 of the 4 from the curated bucket
-                                                             copy (the f_SCALE pair, now closed above);
-                                                             the other 2 need chief+LANE-GM to read the
-                                                             full per-row table, which is bridge-disk-only
-                                                             in this session -- deferred, not dropped)
-  total                                               : 1286 (unchanged)
-
-Q4 (COO-DECISION 20260901_0042) recorded as standing policy, not a row edit: a ruling stays pinned to
-the generation_id above; a new Codex table under the SAME generation_id does not reopen a ruling
-already made here -- only a changed image_sha256 (new generation_id) may reopen a family.
---- end manual amendment ---

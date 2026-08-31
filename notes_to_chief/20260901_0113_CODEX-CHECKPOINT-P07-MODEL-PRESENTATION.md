@@ -3,6 +3,7 @@
 # CODEX CHECKPOINT P0-7 — MODEL PRESENTATION · CHECKPOINT_1
 
 - เวลา checkpoint: `2026-09-01 01:13 +07:00`
+- แก้ไขหลัง adversarial review: `2026-09-01 02:18 +07:00` — ถอน comparator V1 ที่ไม่มี stable row identity, แทนด้วย V2 และแก้ provenance labels; generation/artifact rows ไม่เปลี่ยน
 - สถานะ: `REVIEW ONLY / HOLD FOR PANYA` — Claude อ่านตรวจได้ แต่ไฟล์นี้ไม่ใช่คำสั่ง ingest, แก้ ServerProject, commit หรือ release
 - generation: `b96e420c290201ce60babec398fd2389ea36db2f2f30ce552d9d680f481f3fae`
 - image: `GameClient.local.bin`, 14,759,424 ไบต์, SHA-256 `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
@@ -28,22 +29,24 @@
 
 ## การสร้างซ้ำและ fail-closed
 
-- generator SHA-256 `afd0dd0820882e4cd93e21009c488dc08ea6960c0a03bb00236de0ddaf66fb9e`
-- manifest SHA-256 `45c85e4200aae9b677f63ae3d495f57771ae0ff9b14726fd55a417472138f94e`
-- การรันครั้งแรกหยุดก่อน publish ที่ Pike Nif cardinality เพราะ parser เดิมคาด NifFile เดียว; ตรวจ DATA แล้วแก้ branch เฉพาะ Pike ให้ pin exact six-part structure โดยคง invariant ของ lexical M descriptors อีก 615 ไฟล์
-- หลังแก้ รันสำเร็จสองรอบได้ generation ID เดิมทุกครั้ง; checkpoint reader ผ่าน, hashes/sizes/mirrors ผ่าน 48/48, stage ค้าง 0 และ image hash ก่อน/หลังไม่เปลี่ยน
-- independent adversarial review recompute generation ID, canonical row digests, source partitions, Pike structure, unresolved/conflict counts และไม่พบ generated-artifact defect
+**[MEASURED][LOCAL TOOLING]** ค่าต่อไปนี้มาจาก hash/count/reader checks ของ generation ที่ระบุ; ประโยคโครงสร้าง Pike แยกอ้าง **[ORIGINAL EVIDENCE: DATA]**:
+
+- **[MEASURED][LOCAL TOOLING]** generator SHA-256 `afd0dd0820882e4cd93e21009c488dc08ea6960c0a03bb00236de0ddaf66fb9e`
+- **[MEASURED][LOCAL TOOLING]** manifest SHA-256 `45c85e4200aae9b677f63ae3d495f57771ae0ff9b14726fd55a417472138f94e`
+- **[MEASURED][LOCAL TOOLING]** การรันครั้งแรกหยุดก่อน publish ที่ Pike Nif cardinality เพราะ parser เดิมคาด NifFile เดียว; **[ORIGINAL EVIDENCE: DATA]** Pike มี exact six-part / six ordered NifFiles และ ActionList ว่างหนึ่งชุด. จากนั้นแก้ branch เฉพาะ Pike โดยคง invariant ของ lexical M descriptors อีก 615 ไฟล์
+- **[MEASURED][LOCAL TOOLING]** หลังแก้ รันสำเร็จสองรอบได้ generation ID เดิมทุกครั้ง; checkpoint reader ผ่าน, hashes/sizes/mirrors ผ่าน 48/48, stage ค้าง 0 และ image hash ก่อน/หลังไม่เปลี่ยน
+- **[MEASURED][LOCAL TOOLING]** independent adversarial review recompute generation ID, canonical row digests, source partitions, Pike structure, unresolved/conflict counts และไม่พบ generated-artifact defect
 
 ## CHECKPOINT comparator ที่บังคับใช้ stop rule
 
-ไฟล์นี้เป็น checkpoint record; หลักฐาน authoritative คือ generation `b96e420c…`. Comparator V1 สร้างแต่ละบรรทัดด้วยค่าคอลัมน์ตามลำดับคั่น TAB, sort แบบ ordinal, join ด้วย LF โดย **ไม่มี trailing LF**, แล้ว SHA-256 UTF-8:
+**[MEASURED][LOCAL TOOLING]** ไฟล์นี้เป็น checkpoint record; หลักฐาน authoritative คือ generation `b96e420c…`. Comparator V1 ถูกถอนก่อน handoff เพราะไม่มี stable row identity และอาจพลาดการสลับ status ระหว่างคนละแถว. Comparator V2 prepend identity column ของแต่ละตาราง แล้วสร้างแต่ละบรรทัดด้วยค่าคอลัมน์ตามลำดับคั่น TAB, sort แบบ ordinal, join ด้วย LF โดย **ไม่มี trailing LF**, แล้ว SHA-256 UTF-8:
 
-- `field_status_vector_v1`: `field_key,direction,semantic_status,scope_status` จาก field rows 490 → `a3fc98519280a76c396729c94b6a38138dc6b0485f5e3f78147994f6397bc495`
-- `runtime_status_vector_v1`: `class,offset,semantic_status` จาก runtime rows 16 → `2c3c0b198bbc353585cda287486178fa5c4cf755f7d41ac176346059a651f779`
-- `presentation_status_vector_v1`: `field_key,row_kind,semantic_status` จาก presentation rows 2,697 → `733a7a03e3dd359c644955b8523d779da2fbf3258ca10b491a1fda73ec93e8bb`
-- `active_unresolved_vector_v1`: `field_key,unresolved_kind,semantic_status,scope_status` จาก unresolved rows หลังตัดเฉพาะ `OPEN_CONFLICT_WORK_ITEM` ออก เหลือ 465 → `9293dccb5c33632a66f8b4395de274905133151e7cf3357e3c6fa097ab6b947f`
+- `field_status_vector_v2`: `semantic_row_key,field_key,direction,semantic_status,scope_status` จาก field rows; unique identity `490/490` → `570a068f3776786a3de5487800f26300fa31b441fb13a7e7c3bf15039bedbf17`
+- `runtime_status_vector_v2`: `runtime_key,class,offset,semantic_status` จาก runtime rows; unique identity `16/16` → `8ec1fc7bbab71dd71026234ba9774227b55b5d26317c71535e577c11612e8728`
+- `presentation_status_vector_v2`: `presentation_id,field_key,row_kind,semantic_status` จาก presentation rows; unique identity `2,697/2,697` → `70cab27f6bcf9c8c1a5895e0f4f751fcecd6026518fd2f0cfba116dae6898bef`
+- `active_unresolved_vector_v2`: `unresolved_key,field_key,unresolved_kind,semantic_status,scope_status` จาก unresolved rows หลังตัดเฉพาะ `OPEN_CONFLICT_WORK_ITEM` ออก; active rows และ unique identity `465/465` → `7c4d2178986c391e91fa7c3fae6c84b8fcaacdfce4b50ef07bfc0be5559571a2`
 
-`no_change_streak=0` เพราะ CHECKPOINT_1 เพิ่มสาม exact runtime rows/coverage. CHECKPOINT_2 ต้อง recompute ทั้งสี่ vector: ถ้าทั้งสี่เท่าเดิมให้ streak เป็น 1; ถ้ามีตัวใดเปลี่ยนให้ reset เป็น 0. อนุญาตให้พัก P0-7 แบบ static ได้เมื่อมี future no-change checkpoint records ติดต่อกันจน `streak=2` เท่านั้น—checkpoint ถัดไปเพียงรอบเดียวไม่ทำให้หยุดอัตโนมัติ
+**[RECONSTRUCTED POLICY]** `no_change_streak=0` เพราะ CHECKPOINT_1 เพิ่มสาม exact runtime rows/coverage. CHECKPOINT_2 ต้อง recompute ทั้งสี่ vector: ถ้าทั้งสี่เท่าเดิมให้ streak เป็น 1; ถ้ามีตัวใดเปลี่ยนให้ reset เป็น 0. อนุญาตให้พัก P0-7 แบบ static ได้เมื่อมี future no-change checkpoint records ติดต่อกันจน `streak=2` เท่านั้น—checkpoint ถัดไปเพียงรอบเดียวไม่ทำให้หยุดอัตโนมัติ
 
 ## สิ่งที่ยังเปิด
 
@@ -55,12 +58,14 @@ P0-6 ถูกพักไว้ที่ `PARTIAL / PAUSED BY STOP RULE`; ห�
 
 ## ไฟล์ให้ตรวจ
 
+**[MEASURED][LOCAL TOOLING]** ขนาดและ SHA-256 ต่อไปนี้ตรวจจากไฟล์ local โดยตรง; source ของแถวภายใน artifact ยังคงแยกตามคอลัมน์ของแต่ละไฟล์:
+
 - `C:\Users\Panya\Desktop\Pirate Force\pf_bridge\external\PF_ATTR_GENERATION_MANIFEST.json` — 8,202 ไบต์ — SHA-256 `45c85e4200aae9b677f63ae3d495f57771ae0ff9b14726fd55a417472138f94e`
 - generation `...\.pf_attr_generations\b96e420c290201ce60babec398fd2389ea36db2f2f30ce552d9d680f481f3fae\PF_MONSTER_PRESENTATION.tsv` — 4,685,803 ไบต์ — SHA-256 `07135e4ff488cdd98c68f02c3be673479279c0e8361bf7a34721ea925bfe9f81`
 - generation `...\PF_MONSTER_PRESENTATION.md` — 5,105 ไบต์ — SHA-256 `cf92eb5cc6955e6b443058a663f99c68c21865f0f9bf027db76cd9e33aeaffa4`
 - generation `...\PF_ATTR_RUNTIME_FIELDS.tsv` — 20,578 ไบต์ — SHA-256 `e62c446a4f887a337e16e5a63b7c9b382a8f890bf0a98a93572b9744eaf8ff6b`
 - generation `...\PF_ATTR_UNRESOLVED.tsv` — 2,355,364 ไบต์ — SHA-256 `07f3012fbdf5b9c1c61a455b1ce949f27e1d1c0d0e73ac1102bf97a4220463a0`
-- cumulative audit `C:\Users\Panya\Desktop\Pirate Force\Pirate_Force_Codex_Audit_Recommendations_CHECKPOINT_20260831.md` — 106,095 ไบต์ — SHA-256 `5ea8f78517b6c5eaecabbfdb8a6cab055f36907014a95d332b4e9fea9048d322`
-- immutable pre-edit snapshot `C:\Users\Panya\Desktop\Pirate Force\audit_history\Pirate_Force_Codex_Audit_Recommendations.b96e420c2902_20260901_0057.md` — 92,551 ไบต์ — SHA-256 `7bcbef60e9d058d38bb74f86802e4cb691c5b54fd295f2c867582af4040bc83c`
+- cumulative audit `C:\Users\Panya\Desktop\Pirate Force\Pirate_Force_Codex_Audit_Recommendations_CHECKPOINT_20260831.md` — 108,156 ไบต์ — SHA-256 `49fffde386935c6ebd2259db174fe1b2f4268154aac22ecfef224b1f934fb5fb`
+- immutable pre-edit snapshot `C:\Users\Panya\Desktop\Pirate Force\audit_history\Pirate_Force_Codex_Audit_Recommendations.b96e420c2902_20260901_0218.md` — 106,095 ไบต์ — SHA-256 `5ea8f78517b6c5eaecabbfdb8a6cab055f36907014a95d332b4e9fea9048d322`
 
 ไฟล์ทั้งหมดเป็น local external/audit artifacts ยังไม่ใช่ committed/released package. รายงานหลักคง `HOLD FOR PANYA`
