@@ -9,29 +9,31 @@ This is an additive read-only checkpoint, not the final version. The server/emul
 `PF_ATTR_SEMANTIC_DELTA.tsv` is a true directional-field semantic/scope delta against pinned generation `1165903103511ed93a833ab3a0368f430fd1986f97ec543754f11ec139d13537` (manifest SHA-256 `c04c76619f69954b8491e8cf92385b2bbb1cf200c422167aea33befe8860cc6c`). It contains semantic-name/status changes, explicit `applies_to_class` corrections, and newly proved class-scoped rows; `PF_ATTR_FIELD_SEMANTICS.tsv` remains the cumulative active coverage table.
 
 - Image SHA-256: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
-- Field rows: 480
-- Priority-0 gameplay fields: 25 structural; 26 class-scoped claims
-- Priority-0 `PROVEN_EXACT`: 17
-- Priority-0 `PROVEN_ROLE_ONLY`: 6
+- Field rows: 490
+- Priority-0 gameplay fields: 28 structural; 30 class-scoped claims
+- Priority-0 `PROVEN_EXACT`: 20
+- Priority-0 `PROVEN_ROLE_ONLY`: 7
 - Priority-0 `PARTIAL`: 0
 - Priority-0 `UNKNOWN`: 3
-- Semantic-delta rows: 290 (`IMAGE` 290; `DATA` 0)
-- Delta by family (directional scoped rows): ActorAttr 38; ActorGatheringInfoAttr 2; ActorTreasureHuntExcavatingInfoAttr 2; AvatarAttr 40; BackpackAttr 2; BasicAttr 14; CAchievementsAttr.ListChild 8; CAchievementsAttr.TreeChild 6; CCooldownAttr 4; CGuildStorageAttr 2; CSkillAttr 6; CVehicleAttr 14; CollectionBagAttr 2; DailyQuestAttr.RecordNode 4; ExpressBagAttr 2; InstanceRefreshAttr 4; ItemAttr 34; ItemBagAttr 8; ItemBagAttr_Equiped 2; ItemMallBagAttr 2; ItemVaryAttr 6; MovementAttr 18; NPCAttr 14; NavigationExAttr 6; PetAttr 16; QuestMiscAttr.QuestMiscData 10; StallActorAttr 4; StorageAttr 2; SummonedPetAttr 10; SystemGiftAttr.SystemGift 6; UnlimitBagAttr 2
-- Existing-row transitions: PARTIAL->PARTIAL 10; PARTIAL->EXACT 10; PARTIAL->ROLE 4; PARTIAL->UNKNOWN 6; EXACT->EXACT 110; ROLE->PARTIAL 2; ROLE->EXACT 16; ROLE->ROLE 80; UNKNOWN->ROLE 30; UNKNOWN->UNKNOWN 16; new rows 6 (BasicAttr exact 4; CVehicleAttr role-only scope-open 2). The 24 added same-status transitions are fail-closed scope corrections for ItemAttr base, ItemBagAttr, and ItemVaryAttr count rows.
-- Unified unresolved work ledger: 963 rows = 453 active claim rows + 510 standalone conflict work items; standalone conflict rows are work items, not UNKNOWN fields.
-- Active field-direction claims withheld: 387 = 371 with semantic and/or scope open + 16 exact-semantic/exact-scope claims held only by OPEN conflict.
+- Semantic-delta rows: 300 (`IMAGE` 300; `DATA` 0)
+- Delta by family (directional scoped rows): ActorAttr 42; ActorGatheringInfoAttr 2; ActorTreasureHuntExcavatingInfoAttr 2; AvatarAttr 40; BackpackAttr 2; BasicAttr 18; CAchievementsAttr.ListChild 8; CAchievementsAttr.TreeChild 6; CCooldownAttr 4; CGuildStorageAttr 2; CSkillAttr 6; CVehicleAttr 14; CollectionBagAttr 2; DailyQuestAttr.RecordNode 4; ExpressBagAttr 2; InstanceRefreshAttr 4; ItemAttr 34; ItemBagAttr 8; ItemBagAttr_Equiped 2; ItemMallBagAttr 2; ItemVaryAttr 6; MovementAttr 18; NPCAttr 16; NavigationExAttr 6; PetAttr 16; QuestMiscAttr.QuestMiscData 10; StallActorAttr 4; StorageAttr 2; SummonedPetAttr 10; SystemGiftAttr.SystemGift 6; UnlimitBagAttr 2
+- Existing-row transitions: PARTIAL->PARTIAL 10; PARTIAL->EXACT 10; PARTIAL->ROLE 4; PARTIAL->UNKNOWN 6; EXACT->EXACT 110; ROLE->PARTIAL 2; ROLE->EXACT 16; ROLE->ROLE 80; UNKNOWN->ROLE 30; UNKNOWN->UNKNOWN 16; new rows 16 (BasicAttr exact 8; ActorAttr exact 2 and role-only 2; CVehicleAttr role-only scope-open 2; NPCAttr exact CNetNPC-scoped 2). The 24 added same-status transitions are fail-closed scope corrections for ItemAttr base, ItemBagAttr, and ItemVaryAttr count rows.
+- Unified unresolved work ledger: 966 rows = 456 active claim rows + 510 standalone conflict work items; standalone conflict rows are work items, not UNKNOWN fields.
+- Active field-direction claims withheld: 390 = 373 with semantic and/or scope open + 17 exact-semantic/exact-scope claims held only by OPEN conflict.
 - Other active claim work: non-wire runtime rows 7; container concepts 32; class-link/codec/closure rows 27.
-- OPEN conflicts represented exactly once in the unified ledger: 635 = rederived-IMAGE 616; measured-NOT_WIRE-needed 17; cross-source 2.
-- All conflict rows: 1274; OPEN 635; non-OPEN 639.
+- OPEN conflicts represented exactly once in the unified ledger: 638 = rederived-IMAGE 616; measured-NOT_WIRE-needed 17; cross-source 2; runnable-server-code semantic 3.
+- All conflict rows: 1283; OPEN 638; non-OPEN 645.
 - Class-level open work: 0 paired codecs need first field decode; 0 already-enumerated codecs need deduplicated active IMAGE/semantic rederivation; 10 classes need getter/vtable recovery
+- Selector evidence quarantined without suppressing field/server guidance: 0
 - Open empty-codec/legacy-row closure conflicts needing measured NOT_WIRE corrections: 17
-- Field status rows: exact 223; role-only 188; partial 27; unknown 42
-- Field concrete-scope rows: exact 270; unknown 210
+- Field status rows: exact 231; role-only 190; partial 27; unknown 42
+- Field concrete-scope rows: exact 280; unknown 210
 - Non-wire runtime/state rows: 13 (exact 6; role-only 6; unknown 1); Fight exact client-computed formulas: 29; 21 exact getter-to-widget-offset bindings; Activity adds 4 exact literal-control-to-object-slot bindings
+- NPC/player primary-name selector paths: 14 valid IMAGE rows; 0 selector rows quarantined. Two local-CMyActor paths prove controller `0x00F2CD08`/child `+0x54`, three typed-CNetNPC paths prove `0x00F2CD48`/child `+0x50`, and nine untyped paths retain the exact dynamic union `+0x54_or_+0x50` without inferring class from identity sign.
 - Combined UpdateAttr/Express-Get/Daily-Reward/CBuff/object-world/Pet/Activity container concepts: 68 (exact 39; role-only 16; partial 2; unknown 10; not-wire 1)
 - Container concrete-scope rows: exact 44; unknown 24
-- Source-separated binding rows: DATA 77 (exact 62; role-only 15); IMAGE loader mappings 1
-- Frozen/re-derived conflict rows: 1274
+- Source-separated binding rows: DATA 77 (exact 70; role-only 7); IMAGE loader mappings 1
+- Frozen/re-derived conflict rows: 1283
 - Approved attended probe requests: 0. `APPROVED_PROBE_REQUEST_SPECS` is empty, so no proposal has passed the fail-closed owner intake contract (linked unresolved key, exact commands, expected and falsifying observations, unlock, headless evidence, and prior-probe search). Zero probes does not mean zero unresolved work.
 
 ## Exact Priority-0 semantics (scope shown; not all class-safe)
@@ -40,6 +42,7 @@ This is an additive read-only checkpoint, not the final version. The server/emul
 - `ActorAttr 0x120`: `constellation_text` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; scope `UNKNOWN`)
 - `ActorAttr 0x13E`: `CGCPotionModule_thousand_quotient_positive_flag_and_mod1000_value_u16` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; scope `UNKNOWN`)
 - `ActorAttr 0x148`: `second_password_account_md5_upper_hex` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; scope `UNKNOWN`)
+- `ActorAttr 0x164`: `NameBoard_Player_LABEL_GUILD_text` (`applies_to_class=CNetActor`; scope `PROVEN_EXACT`)
 - `ActorAttr 0x190`: `target_panel_friend_actor_id` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; scope `UNKNOWN`)
 - `ActorAttr 0x198`: `target_panel_enemy_actor_id` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; scope `UNKNOWN`)
 - `ActorAttr 0x1A0`: `Navy_Pirate_icon_selector` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; scope `UNKNOWN`)
@@ -48,6 +51,8 @@ This is an additive read-only checkpoint, not the final version. The server/emul
 - `ActorAttr 0x1B2`: `SELL_STALL_BASIC_addend_u8` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; scope `UNKNOWN`)
 - `ActorAttr 0x78`: `GetPpClass_value` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; scope `UNKNOWN`)
 - `ActorAttr 0xE8`: `residence_location_text` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; scope `UNKNOWN`)
+- `BasicAttr 0x28`: `NameBoard_Player_LABEL_NAME_text` (`applies_to_class=CNetActor`; scope `PROVEN_EXACT`)
+- `BasicAttr 0x28`: `NameBoard_Player_LABEL_NAME_text` (`applies_to_class=CNetNPC`; scope `PROVEN_EXACT`)
 - `BasicAttr 0x54`: `FightAttr_run_speed_formula_input` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_BasicAttr__consumer_0x00467E60`; scope `UNKNOWN`)
 - `BasicAttr 0x54`: `MOBS.n_SPEED_WALK_to_initial_visual_horizontal_locomotion_scalar` (`applies_to_class=CNetNPC`; scope `PROVEN_EXACT`)
 - `BasicAttr 0x5C`: `scene_id__SCENE_NAME.n_ID` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_BasicAttr`; scope `UNKNOWN`)
@@ -118,7 +123,7 @@ UpdateAttrVital's paired codec at exceptional vtable slot +0x18 is now represent
 
 FightAttr's own slot +0x34 codec is empty. Its two runtime attachment pointers are non-wire fields. The 29 formulas in `PF_ATTR_COMPUTED_SEMANTICS.tsv` are exact original-client computations, but they do not prove which side was authoritative on the original server.
 
-Pet/Activity adds ten non-wire runtime/state rows. Five attachment pointers are exact: DailyActivityState, CNetActor, PetsData, ActorLearnedPetsSkillData, and PetsMergingData. PetAttr +0x9C is a bounded mutation marker; PetsModule +0x20/+0x24 are selector-1/2 runtime references; +0x30 is tied to Pets_UpdateSummonPetsTimeOutVital and Pet_Sailor_CD but its time representation/units remain open. PetsModule +0x34 remains UNKNOWN because IMAGE proves only its constructor zero. The active-claim unresolved census is 453; the unified ledger is 963 after adding conflict-only work items. CAchievementsAttr replaces one coarse placeholder with thirteen precise open concepts (net +12); SystemGiftAttr replaces one coarse placeholder with six precise open field rows (net +5); the three Quest placeholders are replaced by fourteen field-role and six container-role concepts (net +17). These increases are finer resolution, not regressions.
+Pet/Activity adds ten non-wire runtime/state rows. Five attachment pointers are exact: DailyActivityState, CNetActor, PetsData, ActorLearnedPetsSkillData, and PetsMergingData. PetAttr +0x9C is a bounded mutation marker; PetsModule +0x20/+0x24 are selector-1/2 runtime references; +0x30 is tied to Pets_UpdateSummonPetsTimeOutVital and Pet_Sailor_CD but its time representation/units remain open. PetsModule +0x34 remains UNKNOWN because IMAGE proves only its constructor zero. The active-claim unresolved census is 456; the unified ledger is 966 after adding conflict-only work items. CAchievementsAttr replaces one coarse placeholder with thirteen precise open concepts (net +12); SystemGiftAttr replaces one coarse placeholder with six precise open field rows (net +5); the three Quest placeholders are replaced by fourteen field-role and six container-role concepts (net +17). These increases are finer resolution, not regressions.
 
 `PF_ATTR_UI_BINDINGS.tsv` now contains 21 Fight getter-to-widget object-offset bindings plus four exact Activity literal-control bindings (`RADIOBUTTON_JEWEL`, `RADIOBUTTON_LINK`, `RADIOBUTTON_PUZZLE`, `BUTTON_OK`) to module object slots. Fight literal control names remain open where no exact model join exists.
 
@@ -130,7 +135,7 @@ PetAttr is an RTTI-only nested `PcRefObject` descendant outside the 139 relevant
 
 ## Source-separated DATA findings
 
-`PF_ATTR_DATA_BINDINGS.tsv` publishes 77 DATA rows plus one separately labelled IMAGE loader-layout row. The DATA rows include name/quest/world/party/guild/activity/pet/crystal/Express/Daily Reward evidence, ActorAttr personal-data and second-password/login-account controls, hash-pinned QUESTDATA, PETDATA, and STANDARD_MOB schema/value censuses, Collection storage widgets and six exact Collection table schemas, five exact Winemaking model/project definitions, five source-separated Achievement schema/component/action/tip-reference censuses, and two SystemGift UI-model definitions. The IMAGE row independently pins the 31-field STANDARD_MOB loader layout; it does not turn the DATA schema row into an IMAGE fact. DATA n_TYPE is explicitly not equated with QuestAttr selectors 0/1/2/4.
+`PF_ATTR_DATA_BINDINGS.tsv` publishes 77 DATA rows plus one separately labelled IMAGE loader-layout row. The DATA rows include name/quest/world/party/guild/activity/pet/crystal/Express/Daily Reward evidence, ActorAttr personal-data and second-password/login-account controls, hash-pinned and in-memory-decoded quest-mark assets, QUESTDATA, PETDATA, and STANDARD_MOB schema/value censuses, Collection storage widgets and six exact Collection table schemas, five exact Winemaking model/project definitions, five source-separated Achievement schema/component/action/tip-reference censuses, and two SystemGift UI-model definitions. The IMAGE row independently pins the 31-field STANDARD_MOB loader layout; it does not turn the DATA schema row into an IMAGE fact. DATA n_TYPE is explicitly not equated with QuestAttr selectors 0/1/2/4.
 
 Important mismatch: IMAGE probes an optional MOBS runtime `f_SCALE` at VA 0x004A2FC3 and initializes the slot to 0.0 at VA 0x004A2020, while current original DATA MOBS has no `f_SCALE` column. The 0.0 meaning is not inferred, and the IMAGE and DATA claims must remain separate.
 
@@ -158,7 +163,7 @@ Important mismatch: IMAGE probes an optional MOBS runtime `f_SCALE` at VA 0x004A
 - Pet/Activity state rows reclassified from wire to control/lifecycle: 68.
 - Activity/Pets module attachment rows reclassified as non-wire: 32.
 - Owning-vtable boundary corrections: 2; unsupported empty-closure conflicts: 17; module slot-role correction: 1.
-- Total conflict rows: 1274.
+- Total conflict rows: 1283.
 
 CSkillAttr is a DBAttribute-derived object with stored `_Mysize` at object +0x48 (low uint16 on wire) and repeated node fields `{skill_id_u16_wire@+0x0C, current_skill_level_u16@+0x10, current_level_skill_point_progress_u32@+0x14}`.
 
@@ -188,6 +193,42 @@ The nine-class ItemBag family uses two stored dword container sizes whose low ui
 
 ItemAttr has two separately keyed vtable schemas. Its optional +0x3C payload is proven to be ItemVaryAttr. ItemVaryAttr type codes select exact IMAGE-named subtypes: Value for values below 99, String for 99 through 118, and Embeded for 119 or above.
 ItemAttr +0x30 is the item-definition lookup key used to obtain s_ID_ICON, +0x34 is the linear container slot index resolved in pages of 80, +0x36 is the quantity value written to the exact ItemControl quantity-widget slot (+0x1810/+0x220), and +0x38 is the XML `quai` quality tier that maps values 1..5 to Label_ItemName FontStyle IDs 15..19. IMAGE and BigFontStyle DATA claims remain separate rows.
+
+## P0-2 primary name FontStyle selector
+
+[MEASURED][IMAGE] Method/control: the pinned selector hash is paired with an independent bounded `PUSH imm8` signature census for FontStyleID 55..63 and an executable-section `E8 rel32` census whose sole direct caller is `0x004446A7`. `PF_ATTR_NAME_COLOR_SELECTOR.tsv` publishes 14 valid paths and quarantines 0 paths. Only two local-CMyActor paths prove controller `0x00F2CD08`/child `+0x54`, and only three post-cast CNetNPC paths prove `0x00F2CD48`/child `+0x50`; nine paths remain the exact dynamic controller union. Both proved controller families load `NameBoard_Player`; no IMAGE runtime path to `NameBoard_NPC.model` is claimed.
+
+[MEASURED][IMAGE] Signed-nonpositive control paths emit 60 when the relationship predicate succeeds, 63 when receiver vslot `+0x3C` succeeds, and 61/63 from linked `NPCAttr+0x98` actor resolution, but those paths do not independently prove owner class. After an exact CNetNPC cast, 61 is emitted for `AI_WANDER.n_OFFESIVE != 0`, 61 for UNNAMED runtime bit `+0x70 & 0x100` when two local-state predicates are false, and 62 when that bit is clear. `0x00444267` clears bit `0x100` and emits no style.
+
+[MEASURED][DATA] `BigFontStyle.fsl` independently defines 60 as yellow, 61 as light red with dark-red outline, 62 as orange, and 63 as gray. IMAGE separately proves the pushed value reaches UILabel `FontStyleID`; the palette remains a DATA row. `FONT_COLOR`, `MOBS.n_SKIN_COLOR`, and unrelated UI property IDs are not joined.
+
+[MEASURED][IMAGE] No selector path proves a separate monster C++ class. Style 61 is not equivalent to `n_AGGRO`: its emission conditions include linked-actor success, `n_OFFESIVE`, and UNNAMED bit `0x100`; two HitResult writer causes are observed but are not a complete writer census. Style 63 is not equivalent to dead: the ordered CNetNPC dead predicate is one cause, while linked-actor failure is another. Style 62 is a bounded fallback, not proof of a monster class. ActorAttr +0x180 separately selects `LABEL_GUILD` FontStyleID 64..67 and is the negative control for the independent quest-mark board.
+
+## P0-3 CNetNPC quest-mark selector
+
+[MEASURED][IMAGE] `PF_ATTR_QUEST_MARK_SELECTOR.tsv` publishes nine valid selectors 0..8 plus one explicit out-of-range guard row. CNetNPC construction stores NPCAttr at +0x358, the QuestIconBoard pointer at +0x360, and a selector cache at +0x364. The audited QuestNPCModule refresh reads NPCAttr +0x78, submits a client-local event kind 0x0A, and the proved QuestModule handler calls 0x00619E00 before CNetNPC reaches the selector at 0x006078D0. This proves one local computation path, not that 0x00619E00 is the sole/final writer: the remaining event-subscriber overwrite census is open.
+
+[MEASURED][IMAGE] Selectors 1..8 map exactly to eight resource literals. Selector 0 sets board-root bit 0 and loads no new resource; it is not labelled hidden or absent. Input greater than 8 selects no new resource and reaches the common bit-clear tail, but the audited compute span emits only 0..8. The setter can skip its board call when the CNetNPC gate is clear, the board pointer is null, or the cached selector is unchanged. The refresh can also skip on missing typed-object/template/actor/singleton prerequisites.
+
+[MEASURED][IMAGE] Canonical selector conditions (verbatim from `PF_ATTR_QUEST_MARK_SELECTOR.tsv` claim-bound rows): selector 0: audited compute precondition fails, no eligible s_QUEST_END/s_QUEST_BEGIN MOBS candidate remains, or the pinned zero/5 fallback selects zero | selector 1: s_QUEST_BEGIN candidate; QuestAttr +0x28 lookup returns 0; opaque IMAGE predicate, local-singleton BasicAttr+0x5E opaque u16 threshold, and Accept_Check pass; n_TYPE(+0x14) not in {20,30}; no later 2/6/7/8 override | selector 2: selector-1 conditions plus n_TYPE(+0x14) in {5,6,7,10,40}, unless later 6/7/8 override wins | selector 3: s_QUEST_END candidate; QuestAttr +0x28 lookup returns 1 and Report_Check passes; n_TYPE(+0x14) not in {5,6,7,10,40}; returns before s_QUEST_BEGIN scan | selector 4: selector-3 conditions plus n_TYPE(+0x14) in {5,6,7,10,40}; returns before s_QUEST_BEGIN scan | selector 5: s_QUEST_END candidate has QuestAttr +0x28 lookup value 1 but Report_Check fails, and no later s_QUEST_BEGIN candidate wins | selector 6: accepted s_QUEST_BEGIN candidate whose n_LEVEL_QUEST(+0x18) plus global[0x010223E4] is below local-singleton BasicAttr+0x5E opaque u16 threshold; overrides 1/2 unless n_TYPE(+0x14) 25/41 later selects 7/8 | selector 7: accepted s_QUEST_BEGIN candidate with n_TYPE(+0x14) 25; overrides earlier 1/2/6 choice | selector 8: accepted s_QUEST_BEGIN candidate with n_TYPE(+0x14) 41; overrides earlier 1/2/6 choice | selector >8: accepted by the selector input guard path; not emitted by the audited compute span. Callback names and opaque thresholds do not prove original-server gameplay semantics.
+
+[MEASURED][DATA] Eight shipped packed textures are decoded only in memory and pinned by packed hash, decoded TGA hash, 64x64x32 header, alpha-plane geometry class, and alpha-weighted RGB palette class. The DATA rows are explicitly UNJOINED and make no IMAGE ownership or runtime-resolution claim. No decoded bytes are written to an artifact.
+
+[INFERENCE][CROSS-SOURCE] The case-insensitive filename stems of the IMAGE `.tga` literals resemble the shipped DATA `.tg_` names. This is only a review lead: the exact live resolver, runtime selection, placement, alpha/blend appearance, and display remain unproved.
+
+[MEASURED][IMAGE] The shared function at 0x00616740 is a typed module-attachment filter that accepts CNetNPC and stores the object at module +0x18; the older `serializer` label is superseded for this function. NPCAttr +0x78 now has two exact CNetNPC-scoped directional rows while its generic UNKNOWN rows remain an unresolved owner remainder excluding the proved CNetNPC owner—not evidence that another class was observed. QuestAttr wire claims continue to cite `PF_A2_QUEST_CODEC_CORRECTION.tsv` and container rows, not the EMPTY base serializer census.
+
+## P0-4 CNetNPC role and trait discriminator
+
+[MEASURED][IMAGE] PF_ATTR_ROLE_DISCRIMINATOR.tsv publishes 15 IMAGE rows. The audited actor factory dispatch contains cases 2/3/4/5/6, each still subject to state/allocation null paths, and CNetNPC carries NPCAttr plus a parsed MOBS row; no distinct actor_type case named monster is present in that bounded dispatch. One audited interaction route requires a CNetNPC cast, relation true, and the exact condition NPCAttr +0x7A bit1 clear or bit2 set before later state/distance gates can reach ChooseNPC. A separate generic interaction path requires CNetNPC plus distance. In two audited target-selection branches, relation false leads to local enemy-target +0xC8/+0xCC; generic actor-state/range logic then reaches the EA7D ActionVital producer. No access in that core has a proven CNetNPC, NPCAttr, or parsed-MOBS base for n_RANK, n_AI_COMBAT, n_OFFESIVE, n_CAPABILITY, or n_MOB_USAGE; matching numeric offsets on other bases are unrelated.
+
+[MEASURED][IMAGE] Presentation remains independent: n_RANK bits 6..10 have exactly two boss-UI callers; n_OFFESIVE has one direct nameboard predicate caller; n_CAPABILITY==1 drives duplicated raw-table UI/data gates. The unique named n_AI_COMBAT query is its loader and unnamed offset-based consumers remain open; n_ENEMY is loaded/copied without a proved admission consumer; n_MOB_USAGE has zero exact ASCII/UTF-16 literals. The shared death predicate and loaded drop configuration do not produce a proved death-to-loot edge.
+
+[MEASURED][DATA] The 13 DATA rows retain the independent MOBS/AI_WANDER census. n_MOB_USAGE=1 overlaps the empirical rank+combat cluster in 1533/1545 rows but has 12 exceptions and misses 139 other rank+combat rows. usage=2 + capability=1 + quest vectors has 670 rows but includes 12 rank-positive, 10 combat, and 8 offensive counterexamples. MOBS ids 916 and 917 are exact, distinct record fingerprints; neither supplies a generalized dummy bit. Same-name control groups 27/1732/8621 and 31/1635/2127 vary across rank, combat, usage, and offensive traits.
+
+[MEASURED][CROSS-SOURCE NONCLAIM] No single is_monster, talk_only, or attackable field is proved. IMAGE and DATA remain separate rows; the empirical DATA clusters are not original role policy.
+
+[PROPOSED] For reconstruction review, model the role as additive, independently testable traits. This is design guidance, not evidence that the original server stored those traits or one role enum.
 
 ## A5
 

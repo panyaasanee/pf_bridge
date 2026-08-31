@@ -5,17 +5,17 @@
 A published checkpoint is authoritative only through `PF_ATTR_GENERATION_MANIFEST.json`; consumers must resolve its content-addressed verified generation directory and parse the exact bytes whose hashes were verified. Top-level files are compatibility materializations, not a cross-file atomicity guarantee.
 
 - Image SHA-256: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
-- Directional rows: 480
-- Unique wire fields/controls: 253
-- Priority-0 gameplay fields: 25 structural; 26 class-scoped claims (`PROVEN_EXACT` 17; `PROVEN_ROLE_ONLY` 6; `PARTIAL` 0; `UNKNOWN` 3)
-- Recorded conflicts/claim corrections: 1274 rows; see `PF_ATTR_CONFLICTS.tsv` for source-separated details
-- Concrete-class scope: `PROVEN_EXACT` 270; `UNKNOWN` 210
+- Directional rows: 490
+- Unique wire fields/controls: 256
+- Priority-0 gameplay fields: 28 structural; 30 class-scoped claims (`PROVEN_EXACT` 20; `PROVEN_ROLE_ONLY` 7; `PARTIAL` 0; `UNKNOWN` 3)
+- Recorded conflicts/claim corrections: 1283 rows; see `PF_ATTR_CONFLICTS.tsv` for source-separated details
+- Concrete-class scope: `PROVEN_EXACT` 280; `UNKNOWN` 210
 - `PARTIAL`: 27
-- `PROVEN_EXACT`: 223
-- `PROVEN_ROLE_ONLY`: 188
+- `PROVEN_EXACT`: 231
+- `PROVEN_ROLE_ONLY`: 190
 - `UNKNOWN`: 42
 
-The 25 priority BasicAttr/ActorAttr gameplay fields now have exact W/R order, gate, offset, tag/sequence helper, length class, constructor default, VA, file offset, and codec-span hash. Sixteen have exact bounded semantics. BasicAttr +0x54 is split by `applies_to_class`: the dynamic FightAttr path consumes it in the exact run-speed formula but does not prove a concrete actor subtype; CNetNPC receives MOBS `n_SPEED_WALK` and passes it to the horizontal-locomotion scalar setter. The separate MOBS runtime +0x0C `f_SCALE` slot has no join to +0x54. Other exact bindings include BasicAttr +0x68 (`n_FACTION`), BasicAttr +0x6C (`n_ENEMY`), ActorAttr +0x78 (`GetPpClass`), +0x1A0 (Navy/Pirate icon), +0x1A8/+0x1AC (`GetBoatHealth` current/max), +0xE8 (residence location), +0x104 (age), +0x120 (constellation), +0x148 (uppercase MD5 of second-password bytes followed by login-account bytes), and +0x190/+0x198 (FRIEND/ENEMY target-panel actor IDs). Six more have exact structural/consumer roles without a unique broader gameplay noun. Three remain semantically `UNKNOWN`: ActorAttr +0x94,+0x13C,+0x1A4. Meaning certainty and concrete-class scope certainty are reported independently in the TSV.
+The 28 priority BasicAttr/ActorAttr gameplay fields now have exact W/R order, gate, offset, tag/sequence helper, length class, constructor default, VA, file offset, and codec-span hash. Eighteen have exact bounded semantics. BasicAttr +0x28 is split by `applies_to_class` and feeds `LABEL_NAME` in the separately proved CNetActor and CNetNPC nameboard controllers. ActorAttr +0x164 feeds the CNetActor `LABEL_GUILD` child +0x5C. ActorAttr +0x98 is role-only: it gates the CNetActor pair-relation predicate, while the local CMyActor path selects LABEL_NAME FontStyleID 56 for value 1 and 55 otherwise; the complete value domain/gameplay noun is not proved. BasicAttr +0x54 is split by `applies_to_class`: the dynamic FightAttr path consumes it in the exact run-speed formula but does not prove a concrete actor subtype; CNetNPC receives MOBS `n_SPEED_WALK` and passes it to the horizontal-locomotion scalar setter. The separate MOBS runtime +0x0C `f_SCALE` slot has no join to +0x54. Other exact bindings include BasicAttr +0x68 (`n_FACTION`), BasicAttr +0x6C (`n_ENEMY`), ActorAttr +0x78 (`GetPpClass`), +0x1A0 (Navy/Pirate icon), +0x1A8/+0x1AC (`GetBoatHealth` current/max), +0xE8 (residence location), +0x104 (age), +0x120 (constellation), +0x148 (uppercase MD5 of second-password bytes followed by login-account bytes), and +0x190/+0x198 (FRIEND/ENEMY target-panel actor IDs). Seven more have exact structural/consumer roles without a unique broader gameplay noun. Three remain semantically `UNKNOWN`: BasicAttr +0x5C, BasicAttr +0x60, and ActorAttr +0x1B2. Meaning certainty and concrete-class scope certainty are reported independently in the TSV.
 
 The frozen A2 slot34 overlay is left unchanged. This checkpoint records its omitted BasicAttr high mask gates, omitted ActorAttr `+0x1BC != 0` nested gates, two omitted Actor mask gates, and its stack-only description of the `+0x1B4/+0x1B8` mask pair in `PF_ATTR_CONFLICTS.tsv`.
 

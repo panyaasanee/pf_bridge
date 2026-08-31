@@ -10,8 +10,23 @@ The current server is an emulator target, not an evidence source. Implement only
 
 - Image SHA-256: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
 
+## Audited CNetNPC quest-mark dependency
+
+[MEASURED][IMAGE] `PF_ATTR_QUEST_MARK_SELECTOR.tsv` proves one CNetNPC path from NPCAttr +0x78 through a client-local event and QuestAttr/MOBS/QUEST inputs to selector values 0..8. It does not prove that the compute handler is the final event writer, that every client path uses it, or that any selector byte is itself original wire state.
+
+[PROPOSED] For future emulation, preserve and populate the corrected QuestAttr structures using `PF_A2_QUEST_CODEC_CORRECTION.tsv` and the exact container rows; let the audited client path derive its selector. Do not invent gameplay names for QuestAttr selectors, do not equate DATA n_TYPE with that selector domain, and do not implement selector 0 as an asserted hide state. Every claim-bound condition and skip path in `PF_ATTR_QUEST_MARK_SELECTOR.tsv` must remain a test case.
+
+## Audited CNetNPC role and trait boundary
+
+[MEASURED][IMAGE] PF_ATTR_ROLE_DISCRIMINATOR.tsv proves separate client decisions rather than one monster class flag: typed CNetNPC interaction, two audited relation-to-target branches, generic EA7D action admission, boss UI from rank bits 6..10, nameboard input from n_OFFESIVE, shared death state, and loaded drop configuration. The unique named n_AI_COMBAT query is its loader while unnamed offset-based consumers remain open; n_MOB_USAGE has no exact image literal; n_CAPABILITY==1 is a UI/data gate; n_ENEMY is loaded/copied without a proved attack-admission consumer.
+
+[MEASURED][DATA] The usage1/rank/combat and usage2/capability/quest combinations are empirical clusters with explicit counterexamples. IDs 916 and 917 are exact record fingerprints, not a generalized training-dummy role bit. A populated drop reference is not proof of loot issuance.
+
+[PROPOSED] If the emulator needs a working reconstruction before original policy is recovered, represent role as additive, separately testable traits and keep the exact record ID as an explicit reviewed override where necessary. Do not derive a universal is_monster, attackable, talk_only, offensive, boss, or lootable value from one DATA field or cluster. This proposal is not original-server evidence.
+
 ## Directional field rows safe to consume
 
+- `[R] ActorAttr 0x164` (`applies_to_class=CNetActor`; `wire_key=ActorAttr@0x164.var#R:b0x01000000`): `NameBoard_Player_LABEL_GUILD_text`; tag `VARSEQ_0x48`, len `var`, gate `+0x1B4 & 0x01000000`; `server_safe=YES`.
 - `[R] ActorGatheringInfoAttr 0x14` (`applies_to_class=ActorGatheringInfoAttr`; `wire_key=ActorGatheringInfoAttr@0x14.1#R`): `own_field_mask`; tag `0x0B`, len `1`, gate `ALWAYS`; `server_safe=YES`.
 - `[W] ActorGatheringInfoAttr 0x14` (`applies_to_class=ActorGatheringInfoAttr`; `wire_key=ActorGatheringInfoAttr@0x14.1#W`): `own_field_mask`; tag `0x0B`, len `1`, gate `ALWAYS`; `server_safe=YES`.
 - `[R] ActorTreasureHuntExcavatingInfoAttr 0x14` (`applies_to_class=ActorTreasureHuntExcavatingInfoAttr`; `wire_key=ActorTreasureHuntExcavatingInfoAttr@0x14.1#R`): `own_field_mask`; tag `0x0B`, len `1`, gate `ALWAYS`; `server_safe=YES`.
@@ -20,6 +35,10 @@ The current server is an emulator target, not an evidence source. Implement only
 - `[W] AvatarAttr 0x28` (`applies_to_class=AvatarAttr`; `wire_key=AvatarAttr@0x28.4#W`): `avatar_field_mask`; tag `0x26`, len `4`, gate `ALWAYS`; `server_safe=YES`.
 - `[R] BasicAttr 0x70` (`applies_to_class=BasicAttr`; `wire_key=BasicAttr@0x70.2#R`): `field_presence_mask`; tag `0x12`, len `2`, gate `ALWAYS`; `server_safe=YES`.
 - `[W] BasicAttr 0x70` (`applies_to_class=BasicAttr`; `wire_key=BasicAttr@0x70.2#W`): `field_presence_mask`; tag `0x12`, len `2`, gate `ALWAYS`; `server_safe=YES`.
+- `[R] BasicAttr 0x28` (`applies_to_class=CNetActor`; `wire_key=BasicAttr@0x28.var#R:b0x00000001`): `NameBoard_Player_LABEL_NAME_text`; tag `VARSEQ_0x48`, len `var`, gate `+0x70 & 0x0001`; `server_safe=YES`.
+- `[W] BasicAttr 0x28` (`applies_to_class=CNetActor`; `wire_key=BasicAttr@0x28.var#W:b0x00000001`): `NameBoard_Player_LABEL_NAME_text`; tag `VARSEQ_0x48`, len `var`, gate `+0x70 & 0x0001`; `server_safe=YES`.
+- `[R] BasicAttr 0x28` (`applies_to_class=CNetNPC`; `wire_key=BasicAttr@0x28.var#R:b0x00000001`): `NameBoard_Player_LABEL_NAME_text`; tag `VARSEQ_0x48`, len `var`, gate `+0x70 & 0x0001`; `server_safe=YES`.
+- `[W] BasicAttr 0x28` (`applies_to_class=CNetNPC`; `wire_key=BasicAttr@0x28.var#W:b0x00000001`): `NameBoard_Player_LABEL_NAME_text`; tag `VARSEQ_0x48`, len `var`, gate `+0x70 & 0x0001`; `server_safe=YES`.
 - `[R] BasicAttr 0x54` (`applies_to_class=CNetNPC`; `wire_key=BasicAttr@0x54.4#R:b0x00000040`): `MOBS.n_SPEED_WALK_to_initial_visual_horizontal_locomotion_scalar`; tag `0x2A`, len `4`, gate `+0x70 & 0x0040`; `server_safe=YES`.
 - `[W] BasicAttr 0x54` (`applies_to_class=CNetNPC`; `wire_key=BasicAttr@0x54.4#W:b0x00000040`): `MOBS.n_SPEED_WALK_to_initial_visual_horizontal_locomotion_scalar`; tag `0x2A`, len `4`, gate `+0x70 & 0x0040`; `server_safe=YES`.
 - `[R] CAchievementsAttr 0x54` (`applies_to_class=CAchievementsAttr`; `wire_key=CAchievementsAttr@0x54.1#R`): `achievement_storage_mode_zero_tree_nonzero_list`; tag `0x08`, len `1`, gate `ALWAYS`; `server_safe=YES`.
@@ -85,6 +104,8 @@ The current server is an emulator target, not an evidence source. Implement only
 - `[W] ItemVaryAttr N/A` (`applies_to_class=ItemVaryData`; `wire_key=ItemVaryAttr.entry_payload.slot28#W`): `ItemVaryData_subtype_payload`; tag `SUBCALL:ItemVaryData+0x28`, len `DYNAMIC`, gate `ALWAYS`; `server_safe=YES`.
 - `[R] MovementAttr 0x4C` (`applies_to_class=MovementAttr`; `wire_key=MovementAttr@0x4C.1#R`): `movement_field_mask`; tag `0x0B`, len `1`, gate `ALWAYS`; `server_safe=YES`.
 - `[W] MovementAttr 0x4C` (`applies_to_class=MovementAttr`; `wire_key=MovementAttr@0x4C.1#W`): `movement_field_mask`; tag `0x0B`, len `1`, gate `ALWAYS`; `server_safe=YES`.
+- `[R] NPCAttr 0x78` (`applies_to_class=CNetNPC`; `wire_key=NPCAttr@0x78.2#R:b0x00000001`): `npc_mobs_template_id`; tag `0x12`, len `2`, gate `(+0xBC & 0x01) != 0`; `server_safe=YES`.
+- `[W] NPCAttr 0x78` (`applies_to_class=CNetNPC`; `wire_key=NPCAttr@0x78.2#W:b0x00000001`): `npc_mobs_template_id`; tag `0x12`, len `2`, gate `(+0xBC & 0x01) != 0`; `server_safe=YES`.
 - `[R] NPCAttr 0xBC` (`applies_to_class=NPCAttr`; `wire_key=NPCAttr@0xBC.1#R`): `npc_field_mask`; tag `0x0B`, len `1`, gate `ALWAYS`; `server_safe=YES`.
 - `[W] NPCAttr 0xBC` (`applies_to_class=NPCAttr`; `wire_key=NPCAttr@0xBC.1#W`): `npc_field_mask`; tag `0x0B`, len `1`, gate `ALWAYS`; `server_safe=YES`.
 - `[R] NavigationExAttr 0x28` (`applies_to_class=NavigationExAttr`; `wire_key=NavigationExAttr@0x28.1#R`): `own_field_mask`; tag `0x0B`, len `1`, gate `ALWAYS`; `server_safe=YES`.
@@ -114,6 +135,9 @@ Every remaining active row is listed once below. It fails at least one publicati
 - `[W] ActorAttr 0x1B4` (`applies_to_class=ActorAttr`; `wire_key=ActorAttr@0x1B4.8#W`): `field_presence_masks`; WITHHELD (OPEN conflict=1abbba0a064cde28a451a33425d223aec8208fd3c5f9e513090e3c25b3e37eb2); preserve raw value/known structure only.
 - `[R] ActorAttr 0x1BC` (`applies_to_class=ActorAttr`; `wire_key=ActorAttr@0x1BC.1#R`): `field_group_gate`; WITHHELD (semantic=PROVEN_ROLE_ONLY); preserve raw value/known structure only.
 - `[W] ActorAttr 0x1BC` (`applies_to_class=ActorAttr`; `wire_key=ActorAttr@0x1BC.1#W`): `field_group_gate`; WITHHELD (semantic=PROVEN_ROLE_ONLY); preserve raw value/known structure only.
+- `[R] ActorAttr 0x98` (`applies_to_class=CNetActor`; `wire_key=ActorAttr@0x98.1#R:b0x04000000`): `CNetActor_pair_relation_zero_gate__CMyActor_value_1_selects_LABEL_NAME_FontStyleID_56_else_55`; WITHHELD (semantic=PROVEN_ROLE_ONLY); preserve raw value/known structure only.
+- `[W] ActorAttr 0x98` (`applies_to_class=CNetActor`; `wire_key=ActorAttr@0x98.1#W:b0x04000000`): `CNetActor_pair_relation_zero_gate__CMyActor_value_1_selects_LABEL_NAME_FontStyleID_56_else_55`; WITHHELD (semantic=PROVEN_ROLE_ONLY); preserve raw value/known structure only.
+- `[W] ActorAttr 0x164` (`applies_to_class=CNetActor`; `wire_key=ActorAttr@0x164.var#W:b0x01000000`): `NameBoard_Player_LABEL_GUILD_text`; WITHHELD (OPEN conflict=579ea549b8cc2e8803d57d1fc6b19e75bb698091fa3f96f33efd53cca37456f9;6bc125495ac1aa0aaa0e251efa07769321cdeae6239411d2a8b095f1f4bf8250;f82af72f259c2c5914bafebc28174813abed4e2e89a2046044b8145dbefa4184); preserve raw value/known structure only.
 - `[R] ActorAttr 0x78` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; `wire_key=ActorAttr@0x78.4#R:b0x00000004`): `GetPpClass_value`; WITHHELD (scope=UNKNOWN; OPEN conflict=c99f9c63771f4b6267d6abfee89516ff0e2a6454853bea3f7a1ed18d08029735); preserve raw value/known structure only.
 - `[W] ActorAttr 0x78` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; `wire_key=ActorAttr@0x78.4#W:b0x00000004`): `GetPpClass_value`; WITHHELD (scope=UNKNOWN; OPEN conflict=57a4c2c1bffb7ecdf4f057f4646a83ccbe233d75e3d27abd52e9911a2d725e8d); preserve raw value/known structure only.
 - `[R] ActorAttr 0x94` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; `wire_key=ActorAttr@0x94.4#R:b0x04000000`): `UNKNOWN`; WITHHELD (semantic=UNKNOWN; scope=UNKNOWN); preserve raw value/known structure only.
@@ -134,8 +158,8 @@ Every remaining active row is listed once below. It fails at least one publicati
 - `[W] ActorAttr 0x13E` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; `wire_key=ActorAttr@0x13E.2#W:b0x00008000`): `CGCPotionModule_thousand_quotient_positive_flag_and_mod1000_value_u16`; WITHHELD (scope=UNKNOWN; OPEN conflict=4842ba4c4aae43313c9b38e23ad11d3ee114f6e0089de2e8aa8c2bbc722881d2); preserve raw value/known structure only.
 - `[R] ActorAttr 0x148` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; `wire_key=ActorAttr@0x148.var#R:b0x00020000`): `second_password_account_md5_upper_hex`; WITHHELD (scope=UNKNOWN; OPEN conflict=5454082ce47cf3bde9a92a32b7d8d8d43938dd5517526b3066cfa35753dea37a); preserve raw value/known structure only.
 - `[W] ActorAttr 0x148` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; `wire_key=ActorAttr@0x148.var#W:b0x00020000`): `second_password_account_md5_upper_hex`; WITHHELD (scope=UNKNOWN; OPEN conflict=345c524557f6c68127cdd4e7effa3e0d4893e44f2ce7e22ef0bc4405d80fad26); preserve raw value/known structure only.
-- `[R] ActorAttr 0x180` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; `wire_key=ActorAttr@0x180.1#R:b0x02000000`): `presentation_bucket_selector_1_to_10`; WITHHELD (semantic=PROVEN_ROLE_ONLY; scope=UNKNOWN); preserve raw value/known structure only.
-- `[W] ActorAttr 0x180` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; `wire_key=ActorAttr@0x180.1#W:b0x02000000`): `presentation_bucket_selector_1_to_10`; WITHHELD (semantic=PROVEN_ROLE_ONLY; scope=UNKNOWN); preserve raw value/known structure only.
+- `[R] ActorAttr 0x180` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; `wire_key=ActorAttr@0x180.1#R:b0x02000000`): `LABEL_GUILD_FontStyleID_selector__1_3_to_64__4_7_to_65__8_9_to_66__10_to_67`; WITHHELD (semantic=PROVEN_ROLE_ONLY; scope=UNKNOWN); preserve raw value/known structure only.
+- `[W] ActorAttr 0x180` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; `wire_key=ActorAttr@0x180.1#W:b0x02000000`): `LABEL_GUILD_FontStyleID_selector__1_3_to_64__4_7_to_65__8_9_to_66__10_to_67`; WITHHELD (semantic=PROVEN_ROLE_ONLY; scope=UNKNOWN); preserve raw value/known structure only.
 - `[R] ActorAttr 0x190` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; `wire_key=ActorAttr@0x190.8#R:b0x40000000`): `target_panel_friend_actor_id`; WITHHELD (scope=UNKNOWN); preserve raw value/known structure only.
 - `[W] ActorAttr 0x190` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; `wire_key=ActorAttr@0x190.8#W:b0x40000000`): `target_panel_friend_actor_id`; WITHHELD (scope=UNKNOWN); preserve raw value/known structure only.
 - `[R] ActorAttr 0x198` (`applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr`; `wire_key=ActorAttr@0x198.8#R:b0x20000000`): `target_panel_enemy_actor_id`; WITHHELD (scope=UNKNOWN); preserve raw value/known structure only.
@@ -503,6 +527,8 @@ Every remaining active row is listed once below. It fails at least one publicati
 Every correction TSV, including every `PF_A2_*` file, is a forensic correction/conflict ledger and is never safe to consume wholesale. An individual mapping is authorized by this guide only when its active `PF_ATTR_FIELD_SEMANTICS.tsv` row has `semantic_status=PROVEN_EXACT`, `scope_status=PROVEN_EXACT`, and an empty `open_conflicts_with`; the same decision is materialized as `server_safe=YES` in `PF_A2_ATTR_FIELD_DELTA.tsv` where that overlay has a row.
 
 `CSkillAttr` has exactly one safe row: the R-side wire entry-count carrier `CSkillAttr.entry_count#R`. That row authorizes only decoding the count carrier. The other seven CSkill directional rows remain withheld through record-scope uncertainty and/or OPEN IMAGE conflicts, so the safe count row must not be generalized into a class-specific record mapping or used to consume an A2 correction file wholesale.
+
+`ActorAttr +0x164#W` is exact IMAGE evidence for the CNetActor NameBoard_Player `LABEL_GUILD` text lane, but it remains withheld because three non-default runnable server components still enforce the stale `character_name` mapping: two optional hypothesis field tables and the frozen class-less player-wire helper used as their byte-for-byte crosscheck. The production `LegacyProjector.start_game` path uses the corrected class+level encoder and is not implicated. These are NON_EVIDENCE_SERVER_CODE conflicts; this client-RE checkpoint does not edit server code. A separate authorized server correction must update all three components before the W row can become server-safe.
 
 Rows not printed in the safe list are printed in the withheld list and remain opaque/structure-only. Full measured context remains in `PF_ATTR_SEMANTIC_REPORT.md`, while `PF_ATTR_CONFLICTS.tsv` and `PF_ATTR_UNRESOLVED.tsv` state the exact work needed before promotion.
 

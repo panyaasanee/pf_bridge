@@ -30,6 +30,7 @@ ROLE_PROVED_BROADER_IDENTITY_OPEN	NavigationExAttr	PROVEN_EXACT	the structural/c
 CONCRETE_CONTAINER_RECORD_CLASS_AND_SEMANTIC_OPEN	ResidentEffectWireRecord	UNKNOWN	scope	6
 ROLE_PROVED_BROADER_IDENTITY_OPEN	StorageAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	6
 ROLE_PROVED_BROADER_IDENTITY_OPEN	UnlimitBagAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	6
+ROLE_PROVED_BROADER_IDENTITY_OPEN	ActorAttr	PROVEN_EXACT	structural/consumer role is proved but the broader gameplay 	4
 CONCRETE_CONSUMER_CLASS_UNKNOWN	BasicAttr	UNKNOWN	scope	4
 OPEN_REDERIVED_IMAGE_CONFLICT	BasicAttr	PROVEN_EXACT	open conflict(s)	4
 CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	CAchievementsAttr.TreeChild	UNKNOWN	scope	4
@@ -44,7 +45,6 @@ CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	StallActorAttr	UNKNOWN	scope	4
 ROLE_PROVED_BROADER_IDENTITY_OPEN	SystemGiftAttr.SystemGift	PROVEN_EXACT	UI-row projection is exact	4
 FIELD_GAMEPLAY_SEMANTIC_UNKNOWN	WinePotAttr	PROVEN_EXACT	constructor, copy, and codec prove only width/default	4
 OPEN_REDERIVED_IMAGE_CONFLICT	ActorAttr	PROVEN_EXACT	open conflict(s)	2
-ROLE_PROVED_BROADER_IDENTITY_OPEN	ActorAttr	PROVEN_EXACT	structural/consumer role is proved but the broader gameplay 	2
 CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	ActorGatheringInfoAttr	UNKNOWN	scope	2
 CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	ActorTreasureHuntExcavatingInfoAttr	UNKNOWN	scope	2
 ROLE_PROVED_BROADER_IDENTITY_OPEN	AvatarAttr	PROVEN_EXACT	the structural/consumer role is exact but a unique broader g	2
@@ -93,6 +93,7 @@ CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	UnlimitBagAttr	UNKNOWN	scope	2
 GAMEPLAY_SEMANTIC_UNKNOWN	UnlimitBagAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	2
 CONCRETE_CONTAINER_RECORD_CLASS_UNKNOWN	UpdateAttrVital.Entry	UNKNOWN	scope	2
 ROLE_PROVED_BROADER_IDENTITY_OPEN	WinePotAttr	PROVEN_EXACT	clock unit, epoch, writer authority, and wrap behavior remai	2
+OPEN_SERVER_CODE_SEMANTIC_CONFLICT	ActorAttr	PROVEN_EXACT	open conflict(s)	1
 CLASS_LINK_RECOVERY_OPEN	ActorCommunityDataSet	PROVEN_EXACT	getter/vtable link remains unresolved	1
 OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	ActorEffectsModule_Client	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
 CONCRETE_CONTAINER_RECORD_CLASS_AND_SEMANTIC_OPEN	ActorLearnedPetsSkillData.RecordNode	UNKNOWN	scope	1
