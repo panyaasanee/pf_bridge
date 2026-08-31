@@ -3186,7 +3186,23 @@ STATIC-ON-BRIDGE ก่อน)
 
 `rounds/A_20260831_1356_pynass_bg0005-crosswalk.md` (server repo) · `notes_to_chief/20260831_1358_LANE-A-STATUS-bg0005-evil-port-crosswalk-built-not-wired.md`
 
-## 🔬 RE-171 BG0006-CJK-TELEPORTER-NAME-001 [OPEN — assigned LANE-A]: `world_bg0006_identity.py` (ฉาก 6, Ocean Walled City) ตัด leader 939/940/941 (Mob-Set 111/112/113) ออกเพราะ `CONSTDATA_TH__MOBS_TIP.s_NAME` เป็นอักษรจีน (`海皇城寨傳送員` -- teleporter NPC ตามชื่อ outfit `M001_000_000_N`) cp874 เข้ารหัสไม่ได้ -- มีชื่อ ASCII/ไทย สำรองอยู่ในตารางอื่นที่รอบนี้ไม่ได้เปิดดูหรือไม่
+## 🔬 RE-171 BG0006-CJK-TELEPORTER-NAME-001 [🔴 **CLOSED bounded-negative — ปิดโดยผู้เปิดใบ LANE-A รอบ `trig7s` 2026-09-01T02:4x+07:00, ดูผลด้านล่าง**]: `world_bg0006_identity.py` (ฉาก 6, Ocean Walled City) ตัด leader 939/940/941 (Mob-Set 111/112/113) ออกเพราะ `CONSTDATA_TH__MOBS_TIP.s_NAME` เป็นอักษรจีน (`海皇城寨傳送員` -- teleporter NPC ตามชื่อ outfit `M001_000_000_N`) cp874 เข้ารหัสไม่ได้ -- มีชื่อ ASCII/ไทย สำรองอยู่ในตารางอื่นที่รอบนี้ไม่ได้เปิดดูหรือไม่
+
+### ผล (LANE-A รอบ `trig7s` 2026-09-01T02:4x+07:00 — ปิดใบ, pass criteria ข้อ 3 "ถ้าไม่มี")
+
+ค้นทั้ง `pf_bridge/gamedata` (1109 ไฟล์) หา `TEXTDATA_EN__MOBS_TIP.tsv` หรือคอลัมน์ชื่อสำรองใด ๆ:
+
+- ไม่มีไฟล์ `TEXTDATA_EN__*` หรือ `*_EN__*` ใด ๆ ในต้นไม้นี้เลย (`find gamedata -iname "TEXTDATA_EN*"` ว่างเปล่า)
+- ทุกตารางที่มีคอลัมน์ `s_NAME` ในต้นไม้นี้ขึ้นต้นด้วย `TEXTDATA_TH__`/`CONSTDATA_TH__` เท่านั้น (grep
+  ทุก `.tsv` หาคอลัมน์ `s_NAME` ในหัวตาราง — 38 ไฟล์ ไม่มีไฟล์ `_EN_`/`_ASCII_` แทรกอยู่เลย)
+- `grep -rl "M001_000_000_N" gamedata` และ `grep -rn "海皇城寨傳送員" gamedata` ต่างชี้ไปที่ไฟล์เดิมสองไฟล์
+  เท่านั้น (`CONSTDATA_TH__MOBS.tsv`, `TEXTDATA_TH__MOBS_TIP.tsv`) — ไม่มีแถวสำรองที่ไหนอีก
+- `TEXTDATA_TH__MOBS_TIP.tsv` มีแค่ 4 คอลัมน์ตามที่ใบเดิมบอกไว้แล้ว (`n_ID, s_NAME, s_TITLE,
+  s_NPC_CHATS`) ไม่มีคอลัมน์ที่ 5
+
+**สรุป: ไม่มีชื่อ ASCII/ไทยสำรองที่ไหนในคลังนี้ — 66/80 คือเพดานจริงของฉากนี้ ตามที่ pass criteria ข้อ 3
+ของใบนี้เองสั่งไว้ ("ตอบว่าไม่มี แล้วปิดใบ")** ไม่มีการแก้ `world_bg0006_identity.py` เพราะ fail-closed ที่มี
+อยู่ถูกต้องแล้ว (ไม่เดา ไม่ทับศัพท์) — ปิดใบโดยไม่มีการแก้โค้ด
 
 ### สิ่งที่รู้แล้ว (จากรอบ `fx0007`, static, ไม่มี client)
 
@@ -3263,3 +3279,50 @@ commit แล้ว พร้อมเลขบรรทัด/ชื่อไ�
 `notes_to_chief/20260831_1810_CHIEF-REPLY-GM-044-actor-wire-blob-is-AvatarAttr-not-ActorAttr-BasicAttr-does-not-match.md`
 · `notes_to_chief/20260831_1736_LANE-GM-CORE-REQUEST-GM-044-does-actor-wire-blob-match-attr-wire-field-layout.md`
 · `pirate-force-server/src/pirateforce_foundation/gm/attr_wire.py`
+
+## 🆕🔬 RE-173 PRISON-EXILE-COLUMBUS-MOBS-ID-36-VS-360-001 [STATIC-ON-BRIDGE]: **`world_m2_sea_destination.COLUMBUS_ROUTES` บอกว่า Prison Exile (home scene 2)'s Columbus คือ MOBS n_ID 360 แต่ `scene2_prison_exile_tables.py`'s เองมี placement ชื่อ "Columbus" (outfit `M055_000_000_N`, title "Marine Transport Station") ที่ n_ID 36 - ซึ่งเป็นเลขเดียวกับที่ Spice Paradise (home 3) ใช้เป็น Columbus ของตัวเอง - ใครถูก?**
+
+### สิ่งที่รู้แล้ว (LANE-A รอบ `trig7s`, static, ไม่มี client)
+
+- `world_m2_sea_destination.COLUMBUS_ROUTES` แถว home scene 2: `(360, 2, 3022, 18, 126)` - MOBS n_ID
+  360 คือ Columbus ของ Prison Exile ตามตารางนี้ (อ่านจาก `QUESTDATA_TH__QUEST.tsv` row 3022 +
+  ชื่อ NPC ที่โฆษณา ตามที่โมดูลนี้เอกสารไว้แล้วตั้งแต่รอบ `drrnpu`)
+- `scene2_prison_exile_tables.py`'s `KNOWN_PLACEMENTS` แถวที่ 63 (placement_index 63, mm_instance 1):
+  n_ID **36**, display_name "Columbus", title "Marine Transport Station" - ไม่ใช่ 360
+- `CONSTDATA_TH__MOBS.tsv` มีแถวจริงทั้งคู่: n_ID 36 และ n_ID 360 ต่างก็ชื่อ "哥倫布" (Columbus) และ
+  outfit `M055_000_000_N` เหมือนกันทุกประการ - ทั้งสองแถวมีจริง ไม่ใช่เลขที่ใครเดาขึ้นมา
+- `world_bg0003_identity.py` (home 3, Spice Paradise) เองก็ใช้ MOBS n_ID **36** เป็น Columbus ของตัวเอง
+  (`_RESOLVED_ROWS` แถว `(1, 1400, 36, ...)`) - เลขเดียวกับที่ scene2's ตารางใช้
+- สองฉากที่ต่างกัน (Prison Exile, Spice Paradise) อ้าง MOBS n_ID เดียวกัน (36) เป็น Columbus ของตัวเอง
+  ไม่น่าจะถูกทั้งคู่ - อย่างน้อยหนึ่งในสองต้องผิด (หรือ scene2's ตารางเองผิด ควรเป็น 360 ไม่ใช่ 36)
+- ไม่ได้แก้อะไรทั้งสองไฟล์รอบนี้ - `world_m2_columbus_trigger_readiness.py` (โมดูลใหม่รอบนี้) รายงาน
+  home scene 2 เป็น `NOT_PLACED` (เทียบกับเลขที่ `COLUMBUS_ROUTES` อ้าง คือ 360) แทนที่จะยอมรับ 36 เป็น
+  ตัวแทนโดยไม่มีหลักฐาน - CHARTER-02 "ห้ามเดาว่าตารางไหนผิด"
+
+### pass criteria
+
+1. หา CLINE crosswalk ที่แท้จริงของ placement_index 63 ในฉาก 2 (Bg0002) - `n_LEADER_BK1` ของ CLINE row
+   ที่ Mob-Set ของ placement นี้ชี้ไป - แล้วเทียบว่าตรงกับ MOBS 36 หรือ 360
+2. ถ้า crosswalk ชี้ไป 360 จริง: `scene2_prison_exile_tables.py`'s KNOWN_PLACEMENTS แถว 63 ผิด (ควรเป็น
+   360 ไม่ใช่ 36) - ส่งกลับให้ LANE-A แก้ไฟล์นั้น (LANE-A ดูแลไฟล์นี้เอง)
+3. ถ้า crosswalk ชี้ไป 36 จริง: `world_m2_sea_destination.COLUMBUS_ROUTES`'s home-scene-2 แถวผิด (ควรเป็น
+   36 ไม่ใช่ 360) - หรือ MOBS 36 ถูกใช้ซ้ำสองฉากจริงในเกมต้นฉบับ (ต้องมีหลักฐานเพิ่มถ้าจะอ้างอย่างหลัง)
+4. ถ้าหา crosswalk ไม่เจอ (fail-closed): รายงานผลลบ - ปิดใบแบบ bounded-negative ไม่ต้องเดา
+
+### ข้อห้าม
+
+ห้ามแก้ตัวเลขในไฟล์ใดโดยไม่มี CLINE crosswalk อ้างอิงชัดเจน (เลขบรรทัด/แถวจริง) - การเดาว่าตัวไหนผิดแล้ว
+แก้เลยคือความผิดพลาดแบบเดียวกับที่โปรเจกต์นี้เจ็บมาแล้ว (ดู `RE-170`, `world_bg0015_identity.py`)
+
+### สัญญาผู้บริโภค
+
+เปิดโดย LANE-A (ผู้พบ, รอบ `trig7s`) - LANE-A บริโภคผลเอง (แก้ไฟล์ที่ดูแลเอง ถ้าผลชี้ชัด หรือปิดใบแบบ
+bounded-negative ถ้าไม่มี crosswalk ให้ตาม)
+
+### links
+
+`pirate-force-server/src/pirateforce_foundation/world_m2_columbus_trigger_readiness.py` (docstring, ส่วน
+"A GENUINE DISCREPANCY") · `pirate-force-server/src/pirateforce_foundation/scene2_prison_exile_tables.py`
+(KNOWN_PLACEMENTS แถว 63) · `pirate-force-server/src/pirateforce_foundation/world_m2_sea_destination.py`
+(`COLUMBUS_ROUTES`) · `pirate-force-server/src/pirateforce_foundation/world_bg0003_identity.py`
+(`_RESOLVED_ROWS` แถวแรก) · `gamedata/tables/CONSTDATA_TH__MOBS.tsv` (n_ID 36, 360)
