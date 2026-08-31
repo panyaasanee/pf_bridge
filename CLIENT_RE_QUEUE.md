@@ -2958,7 +2958,7 @@ GT-101 error 23065/28317):
 `notes_to_chief/20260830_1655_PANYA-ORDER-open-RE-162-in-session-scene-change-with-a-named-consumer-chain.md`
 (ใบสั่งเต็ม) · `gm/warp_executor.py` (docstring อ้าง RE-090) · `notes_to_chief/` RE-090 result (field-not-proven)
 
-## 🔬 RE-164 BT-GM-CLICK-FOUR-SUSPECTS-002 [PARTIAL — 2/4 CLOSED STATIC, 2/4 NEEDS-ATTENDED-CAPTURE]: **ของสี่ผู้ต้องสงสัยที่ `RE-126` ทิ้งไว้โดยไม่เดา (connection context / query-0x25 gate ตอนคลิก / current-UI object-key จริง / create path `0x007280D0`) ตัวไหนคือประตูที่หยุด `GMUI_BASIC` จริง — ข้อ 2 กับ 4 ปิดแล้วด้วย static synthesis จากใบเก่า (`RE-104`+`RE-118`) ที่ไม่เคย cross-reference กันมาก่อน ข้อ 1 กับ 3 ยังต้องไล่ disassembly เพิ่มที่ไม่มีในอิมเมจของ clone นี้**
+## 🔬 RE-164 BT-GM-CLICK-FOUR-SUSPECTS-002 [PARTIAL — #2 CLOSED STATIC+ATTENDED, #4 CLOSED STATIC, #1/#3 NEEDS-ATTENDED-CAPTURE]: **ของสี่ผู้ต้องสงสัยที่ `RE-126` ทิ้งไว้โดยไม่เดา (connection context / query-0x25 gate ตอนคลิก / current-UI object-key จริง / create path `0x007280D0`) ตัวไหนคือประตูที่หยุด `GMUI_BASIC` จริง — ข้อ 2 กับ 4 ปิดแล้วด้วย static synthesis จากใบเก่า (`RE-104`+`RE-118`) ที่ไม่เคย cross-reference กันมาก่อน ข้อ 2 ได้ชั้น attended เพิ่มจาก `GT-164` (bounded negative: 14/14 variant คลิกแล้วไม่เปิด) ข้อ 1 กับ 3 ยังต้องไล่ disassembly เพิ่มที่ไม่มีในอิมเมจของ clone นี้**
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนเขียนลงไฟล์นี้ 2026-08-31T03:2x+07:00: `RE-164`/`GT-164` = 0 hit ทั้งสอง
 > ไฟล์นี้และ `GAME_TEST_QUEUE.md` ก่อนใบนี้ — เลขที่ใช้แล้วสูงสุดคือ `RE-163`/`GT-163`(reserved)
@@ -3001,6 +3001,14 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
    `archive/notes_to_chief_2026-08/consumed/20260827_1518_RE-104-RESULT-BT-GM-MODULE-PLUS19-GATE.md:41` และ
    `notes_to_chief/20260828_0411_RE-118-RESULT-CURRENT-UI-KEY-MUST-BE-NONEMPTY.md:27-31` (ทั้งสองมีมาก่อน
    `RE-164` เปิด แค่ไม่เคย cross-reference กัน — เป็นช่องว่างของการสังเคราะห์ ไม่ใช่หลักฐานใหม่)
+   🟢 **[ATTENDED เพิ่ม รอบ `szmgeh`, `GT-164`]** กะ1-A คลิก `BT_GM` จริงหลังยิงทั้ง 14 variant — **ไม่มี
+   variant ไหนเปิด `GMUI_BASIC`** แม้ปุ่มมองเห็นได้และ query-gate ถูกเรียกซ้ำตามที่พิสูจน์ไว้ (ด้านบน) ⇒
+   ข้อ 2 (ตัวเฟรมนี้เอง) **ถูกตัดออกจากการเป็นประตูที่หยุดหน้าต่าง** ทั้งชั้น static และ attended ตรงกัน —
+   ผลข้างเคียง: พบว่า `field_0x0b_second` (ไม่ใช่ field ที่ query-0x25 อ่าน) คือสวิตช์การ**มองเห็น**ปุ่ม
+   แยกจากการคลิก ยืนยันมิติใหม่ของฟิลด์ที่รู้จักอยู่แล้วจาก `RE-089`/`RE-104`/`CORE-REQUEST-020` (เดิมรู้แค่
+   ตอน login ครั้งเดียว รอบนี้ยืนยันว่าใช้ได้กลางเซสชันด้วย ไม่ต้อง relog) — รายละเอียดเต็มดู
+   `notes_to_chief/20260831_0901_GT164-RESULT-bounded-negative-on-suspect-2-plus-field-0x0b-second-is-the-button-visibility-switch.md`
+   และ `gm/bt_gm_probe.py`'s `observed_button_visible`/`guaranteed_visible_variant_ids` (รอบนี้เพิ่ม)
 3. **current-UI object-key จริง** — `RE-118` เดาว่าต้องไม่ว่าง `GT-103` A/B หักล้างข้อเสนอนั้นแล้ว (4 สถานะ
    UI เงียบหมด) เงื่อนไขจริงคืออะไร ไล่ vfunc `[0x01093198]+0x7C8+0x04` ต่อจากจุดที่ `RE-118` หยุด
    🟡 **[STATIC-PARTIAL รอบ `1q7nxu`]** `RE-118` ไล่ถึง predicate ที่ `[0x008946C0,0x008946EA)` (ตรวจ
@@ -3023,7 +3031,8 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
 
 **ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องมีคนหน้าจอ):** `GT-164` (`GAME_TEST_QUEUE.md`) — คลิก `BT_GM`
 ทีละ variant ของ `gm/bt_gm_probe.py`'s `iter_state_vital_bit_variants()` แล้วดูว่า `GMUI_BASIC` เปิดไหม —
-**BLOCKED** จนกว่า `CORE-REQUEST-GM-043` จะได้จุดเสียบที่ยิง variant กลางเซสชันได้ (ดูใบนั้น)
+🟢 **เสร็จแล้วรอบ `szmgeh`** (`CORE-REQUEST-GM-043` ปลด BLOCKED รอบ `jz4don`, กะ1-A คลิกจริงรอบ `GT164-RESULT`
+2026-08-31T08:50-08:55+07:00) — ผลคือ bounded negative ต่อข้อ 2 (ดูรายละเอียดในข้อ 2 ด้านบน)
 
 ### ข้อห้าม
 ห้ามเดาความหมายของฟิลด์ `field_0x14` บิต 8-31 (ไม่ครอบคลุมโดย `bt_gm_probe.py` รอบก่อน ตั้งใจเว้นไว้) ·
@@ -3048,6 +3057,10 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
 5. ข้อ 1 กับ 3 ยังไม่ปิด — ข้อ 1 ต้องไล่ write-site ของ `[0x01032EC4]` เพิ่ม ข้อ 3 ต้องไล่ vfunc chain ต่อจาก
    `[0x008946C0,0x008946EA)` ทั้งคู่ไม่มีในอิมเมจของ clone นี้ (ไม่มี client image ไม่มี disassembler)
    ต้องเปิดใบ RE runner บนสะพานถ้าจะไล่ต่อทาง static หรือรอ attended capture
+6. `GT-164` ปิดแล้วเป็น bounded negative ต่อข้อ 2 เท่านั้น (รอบ `szmgeh`) — **ไม่ใช่หลักฐานว่า `RE-164` ปิด
+   ครบ** ข้อ 1/3 ยังเปิด และการที่ปุ่ม "มองเห็นได้" ระหว่างเทส (`field_0x0b_second=1`) ก็ไม่ได้แปลว่าคลิกได้
+   ผล — สองเรื่องคนละชั้นกัน (visibility vs. click-success) ตามที่ `gm/bt_gm_probe.py`'s
+   `observed_button_visible` docstring ระบุไว้ชัดเจน
 
 ### links
 `pirate-force-server` PR #350 (merged, `bdbef5c`) · `src/pirateforce_foundation/gm/bt_gm_probe.py` ·
@@ -3056,4 +3069,5 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
 `notes_to_chief/20260831_0152_PANYA-ORDER-LANE-GM-make-the-BT_GM-button-and-GMUI_BASIC-window-actually-work.md` ·
 `archive/notes_to_chief_2026-08/consumed/20260827_1518_RE-104-RESULT-BT-GM-MODULE-PLUS19-GATE.md` ·
 `notes_to_chief/20260828_0411_RE-118-RESULT-CURRENT-UI-KEY-MUST-BE-NONEMPTY.md` ·
-`rounds/GM_20260831_0822_re164_partial_static_synthesis.md`
+`rounds/GM_20260831_0822_re164_partial_static_synthesis.md` ·
+`notes_to_chief/20260831_0901_GT164-RESULT-bounded-negative-on-suspect-2-plus-field-0x0b-second-is-the-button-visibility-switch.md`
