@@ -1,0 +1,4 @@
+consumed by chief รอบ 7dvax5 (R269): กฎรับทราบ (ใบใหม่ ≤ 8KB ตั้งแต่รอบถัดไป) -- ลองย่อใบเก่าใหญ่สุด
+(RE-132) ตามที่สั่ง พบว่าตัวเลข 154,463 B ในตารางวัดผิดขอบเขตใบ (heading สามรูปแบบผสมกัน) ของจริงวัดได้
+8,059 B -- ไม่ลงมือย่อ/archive จนกว่าขอบเขตใบอื่นจะยืนยันซ้ำ ดู CHIEF-REPLY เต็ม:
+20260831_1905_CHIEF-REPLY-8kb-rule-measurement-re132-discrepancy-154kb-vs-8kb-boundary-ambiguous.md
