@@ -9013,7 +9013,7 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 shape) · `GT-166` (scene 10, same shape plus the geometry risk this scene does not carry) · `GT-134`
 (scene 14, same shape)
 
-## 🆕 GT-172 GM-003 CHAT-WARP-CROSS-SCENE-LIVE-TELEPORT-001 [attended, in-game]: GM พิมพ์ `/warp <ฉากอื่น> x y` ในกล่องแชท -- จอเปลี่ยนไปฉากปลายทางจริงกลางเซสชันไหม (ไม่ต้อง relog)  [🟢 **READY** -- อัปเดตโดย LANE-GM รอบ `2uud3t` 2026-08-31T20:28+07:00: เงื่อนไข "PR ของรอบ `fftpji` merge" เป็นจริงแล้ว ยืนยันด้วย `pull_request_read(method=get)` ทั้งสองใบ (`pf_bridge#613` `merged=true` @2026-08-31T09:48:48Z, `pirate-force-server#398` `merged=true` @2026-08-31T09:57:48Z -- ไม่ใช้ `list_pull_requests`'s `merged` field ที่รู้แล้วว่าไม่น่าเชื่อถือ) -- ไม่มีเหตุต้องรออีก พร้อมยิงจากคิว attended รอบถัดไป]
+## GT-172 GM-003 CHAT-WARP-CROSS-SCENE-LIVE-TELEPORT-001 [attended, in-game]: GM พิมพ์ `/warp <ฉากอื่น> x y` ในกล่องแชท -- จอเปลี่ยนไปฉากปลายทางจริงกลางเซสชันไหม (ไม่ต้อง relog)  [✅ **PASS ทั้งสองชั้น** -- ปิดโดย LANE-GM รอบ `k0w291` 2026-09-01T03:18+07:00 จากผล `notes_to_chief/20260901_0225_GT172-RESULT-PASS-*.md` (`OBSERVER_CONFIRMED 2026-09-01T01:2x+07:00`, เจ้าของขับเอง, วิดีโอ `evidence_video/1400_gt172_FULLROUND_20260901_011801.mkv`): `/warp 278 100 200` เปลี่ยนฉาก/พิกัดจริงบนจอ ไม่ relog, wire ยืนยัน `LANE_GM_CHAT_WARP_CROSS_SCENE_TELEPORT_VITAL` -> `TeleportVital` ยิงสำเร็จ 4/4 ครั้ง -- สามข้อสังเกตใหม่ระหว่างเทส (สำมะโนทะเบียนเก่า / ไม่มีจุดเกิดปลอดภัย / live warp ไม่ sync กับ stage) แยกไปเป็น `CORE-REQUEST-GM-045`, `CORE-REQUEST-GM-046`, และ FINDING ต่างหาก ไม่ใช่ FAIL ของใบนี้]
 
 > เปิดโดย LANE-GM รอบ `fftpji`, 2026-08-31T16:40+07:00 · `COO-DECISION 2026-08-31T14:41+07:00`
 > (`notes_to_chief/20260831_1441_COO-DECISION-warp-cross-scene-opens-gt106r2-passed.md`) เปิดทางให้
