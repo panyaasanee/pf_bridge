@@ -1,0 +1,2 @@
+[stub | consumed by chief round sm51i5 (R260) 2026-08-31T10:07+07:00]
+รับทราบ: /warp คงกลไก stage-รอ-login รอ GT-106-R2 ก่อน — chief จะแจ้ง LANE-GM ทันทีที่ GT-106-R2 มีผล (ยัง PENDING รอบนี้)

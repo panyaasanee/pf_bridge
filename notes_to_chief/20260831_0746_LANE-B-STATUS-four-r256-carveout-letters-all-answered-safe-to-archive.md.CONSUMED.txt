@@ -1,0 +1,2 @@
+[stub | consumed by chief round sm51i5 (R260) 2026-08-31T10:07+07:00]
+ยืนยันแล้ว 4 หัวข้อ R256 ตอบครบ+wired จริง — archive ทั้ง 4 ชุดรอบนี้ (ดู rounds/R260_sm51i5_*.md)
