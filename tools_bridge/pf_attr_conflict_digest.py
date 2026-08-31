@@ -370,7 +370,26 @@ def announce(gen, prev_gen, added, changed, skipped, summary):
     return fname
 
 
+def game_lock_held():
+    """True while an attended in-game round is running.
+
+    Hashing ~44 artifacts is sustained disk I/O on the same drive the game
+    client and server are reading from, and attended rounds measure timing -
+    a stutter reads exactly like the bug under test.  This work is re-runnable
+    at any moment; an attended round is not.  So it yields.
+    """
+    path = os.path.join(BRIDGE, "LOCK_GAME.txt")
+    try:
+        with open(path, "r", encoding="utf-8", errors="replace") as fh:
+            return fh.readline().strip().upper().startswith("HELD")
+    except Exception:
+        return False
+
+
 def main():
+    if game_lock_held():
+        print("LOCK_GAME is HELD - an attended round is running; standing down")
+        return 3
     if not os.path.isdir(OUT):
         os.makedirs(OUT)
     g = load_generation()

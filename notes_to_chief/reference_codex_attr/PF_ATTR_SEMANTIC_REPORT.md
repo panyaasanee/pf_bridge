@@ -18,9 +18,10 @@ This is an additive read-only checkpoint, not the final version. The server/emul
 - Semantic-delta rows: 300 (`IMAGE` 300; `DATA` 0)
 - Delta by family (directional scoped rows): ActorAttr 42; ActorGatheringInfoAttr 2; ActorTreasureHuntExcavatingInfoAttr 2; AvatarAttr 40; BackpackAttr 2; BasicAttr 18; CAchievementsAttr.ListChild 8; CAchievementsAttr.TreeChild 6; CCooldownAttr 4; CGuildStorageAttr 2; CSkillAttr 6; CVehicleAttr 14; CollectionBagAttr 2; DailyQuestAttr.RecordNode 4; ExpressBagAttr 2; InstanceRefreshAttr 4; ItemAttr 34; ItemBagAttr 8; ItemBagAttr_Equiped 2; ItemMallBagAttr 2; ItemVaryAttr 6; MovementAttr 18; NPCAttr 16; NavigationExAttr 6; PetAttr 16; QuestMiscAttr.QuestMiscData 10; StallActorAttr 4; StorageAttr 2; SummonedPetAttr 10; SystemGiftAttr.SystemGift 6; UnlimitBagAttr 2
 - Existing-row transitions: PARTIAL->PARTIAL 10; PARTIAL->EXACT 10; PARTIAL->ROLE 4; PARTIAL->UNKNOWN 6; EXACT->EXACT 110; ROLE->PARTIAL 2; ROLE->EXACT 16; ROLE->ROLE 80; UNKNOWN->ROLE 30; UNKNOWN->UNKNOWN 16; new rows 16 (BasicAttr exact 8; ActorAttr exact 2 and role-only 2; CVehicleAttr role-only scope-open 2; NPCAttr exact CNetNPC-scoped 2). The 24 added same-status transitions are fail-closed scope corrections for ItemAttr base, ItemBagAttr, and ItemVaryAttr count rows.
-- Unified unresolved work ledger: 976 rows = 464 active claim rows + 512 standalone conflict work items; standalone conflict rows are work items, not UNKNOWN fields.
+- Unified unresolved work ledger: 977 rows = 465 active claim rows + 512 standalone conflict work items; standalone conflict rows are work items, not UNKNOWN fields.
 - Active field-direction claims withheld: 390 = 373 with semantic and/or scope open + 17 exact-semantic/exact-scope claims held only by OPEN conflict.
 - Other active claim work: non-wire runtime rows 7; container concepts 32; class-link/codec/closure rows 27; combat-lifecycle semantic/order rows 8.
+- P0-7 presentation-selection work: 1 explicit active row. This +1 is new coverage of a previously unrepresented boundary, not a regression.
 - OPEN conflicts represented exactly once in the unified ledger: 640 = rederived-IMAGE 616; measured-NOT_WIRE-needed 17; cross-source 2; runnable-server-code semantic 5.
 - All conflict rows: 1286; OPEN 640; non-OPEN 646.
 - Class-level open work: 0 paired codecs need first field decode; 0 already-enumerated codecs need deduplicated active IMAGE/semantic rederivation; 10 classes need getter/vtable recovery
@@ -28,13 +29,14 @@ This is an additive read-only checkpoint, not the final version. The server/emul
 - Open empty-codec/legacy-row closure conflicts needing measured NOT_WIRE corrections: 17
 - Field status rows: exact 231; role-only 190; partial 27; unknown 42
 - Field concrete-scope rows: exact 280; unknown 210
-- Non-wire runtime/state rows: 13 (exact 6; role-only 6; unknown 1); Fight exact client-computed formulas: 29; 21 exact getter-to-widget-offset bindings; Activity adds 4 exact literal-control-to-object-slot bindings
+- Non-wire runtime/state rows: 16 (exact 9; role-only 6; unknown 1); Fight exact client-computed formulas: 29; 21 exact getter-to-widget-offset bindings; Activity adds 4 exact literal-control-to-object-slot bindings
 - NPC/player primary-name selector paths: 14 valid IMAGE rows; 0 selector rows quarantined. Two local-CMyActor paths prove controller `0x00F2CD08`/child `+0x54`, three typed-CNetNPC paths prove `0x00F2CD48`/child `+0x50`, and nine untyped paths retain the exact dynamic union `+0x54_or_+0x50` without inferring class from identity sign.
 - Combined UpdateAttr/Express-Get/Daily-Reward/CBuff/object-world/Pet/Activity container concepts: 68 (exact 39; role-only 16; partial 2; unknown 10; not-wire 1)
 - Container concrete-scope rows: exact 44; unknown 24
 - Source-separated binding rows: DATA 77 (exact 70; role-only 7); IMAGE loader mappings 1
 - Combat lifecycle: 34 source-separated rows (`IMAGE` 26; `DATA` 8). Actor preexistence before lethal actor-entry dead-sync is exact; CHitResult-versus-HP arrival order, original-server cadence/death hold, exact equipment-dependent behavior selection, and original-server acknowledgement remain open. See `PF_COMBAT_LIFECYCLE.tsv`/`.md`.
 - P0-6 ground-drop transport: 19 IMAGE rows (9 content-addressed A1/A2 references; 10 new bounded IMAGE evidence rows). The accepted-queue branch closes click-to-nested/outer buffer encoding, but persistent server-to-client ground-object issuance remains open; overall status PARTIAL. Runtime IDs `0x4543`/`0x6E6F`/`0x453A` are not promoted to wire opcodes. See `PF_GROUND_DROP_TRANSPORT.tsv`/`.md`.
+- P0-7 monster presentation: 2697 source-separated rows (`DATA` 2688; `IMAGE` 9), status PARTIAL / CHECKPOINT_1. This first checkpoint added three exact runtime rows (+0x04/+0x08/+0x108). The configured Pike comparison token matches original DATA, but runtime selection/rendered equivalence are unproved; Deer SP1/SP2 metadata likewise proves neither. f_SCALE effect semantics remain in the existing runtime-open ledger, and +0x108-to-Avatar selection is one presentation-specific unresolved row. At least one further P0-7 checkpoint is required before the two-consecutive-no-status-change stop rule can be evaluated. See `PF_MONSTER_PRESENTATION.tsv`/`.md`.
 - Frozen/re-derived conflict rows: 1286
 - Approved attended probe requests: 0. `APPROVED_PROBE_REQUEST_SPECS` is empty, so no proposal has passed the fail-closed owner intake contract (linked unresolved key, exact commands, expected and falsifying observations, unlock, headless evidence, and prior-probe search). Zero probes does not mean zero unresolved work.
 
@@ -125,7 +127,7 @@ UpdateAttrVital's paired codec at exceptional vtable slot +0x18 is now represent
 
 FightAttr's own slot +0x34 codec is empty. Its two runtime attachment pointers are non-wire fields. The 29 formulas in `PF_ATTR_COMPUTED_SEMANTICS.tsv` are exact original-client computations, but they do not prove which side was authoritative on the original server.
 
-Pet/Activity adds ten non-wire runtime/state rows. Five attachment pointers are exact: DailyActivityState, CNetActor, PetsData, ActorLearnedPetsSkillData, and PetsMergingData. PetAttr +0x9C is a bounded mutation marker; PetsModule +0x20/+0x24 are selector-1/2 runtime references; +0x30 is tied to Pets_UpdateSummonPetsTimeOutVital and Pet_Sailor_CD but its time representation/units remain open. PetsModule +0x34 remains UNKNOWN because IMAGE proves only its constructor zero. The active-claim unresolved census is 464; the unified ledger is 976 after adding conflict-only work items. CAchievementsAttr replaces one coarse placeholder with thirteen precise open concepts (net +12); SystemGiftAttr replaces one coarse placeholder with six precise open field rows (net +5); the three Quest placeholders are replaced by fourteen field-role and six container-role concepts (net +17). These increases are finer resolution, not regressions.
+Pet/Activity adds ten non-wire runtime/state rows. Five attachment pointers are exact: DailyActivityState, CNetActor, PetsData, ActorLearnedPetsSkillData, and PetsMergingData. PetAttr +0x9C is a bounded mutation marker; PetsModule +0x20/+0x24 are selector-1/2 runtime references; +0x30 is tied to Pets_UpdateSummonPetsTimeOutVital and Pet_Sailor_CD but its time representation/units remain open. PetsModule +0x34 remains UNKNOWN because IMAGE proves only its constructor zero. The active-claim unresolved census is 465; the unified ledger is 977 after adding conflict-only work items. CAchievementsAttr replaces one coarse placeholder with thirteen precise open concepts (net +12); SystemGiftAttr replaces one coarse placeholder with six precise open field rows (net +5); the three Quest placeholders are replaced by fourteen field-role and six container-role concepts (net +17). These increases are finer resolution, not regressions.
 
 `PF_ATTR_UI_BINDINGS.tsv` now contains 21 Fight getter-to-widget object-offset bindings plus four exact Activity literal-control bindings (`RADIOBUTTON_JEWEL`, `RADIOBUTTON_LINK`, `RADIOBUTTON_PUZZLE`, `BUTTON_OK`) to module object slots. Fight literal control names remain open where no exact model join exists.
 
@@ -231,6 +233,18 @@ ItemAttr +0x30 is the item-definition lookup key used to obtain s_ID_ICON, +0x34
 [MEASURED][CROSS-SOURCE NONCLAIM] No single is_monster, talk_only, or attackable field is proved. IMAGE and DATA remain separate rows; the empirical DATA clusters are not original role policy.
 
 [PROPOSED] For reconstruction review, model the role as additive, independently testable traits. This is design guidance, not evidence that the original server stored those traits or one role enum.
+
+## P0-7 monster presentation
+
+[MEASURED][DATA] `PF_MONSTER_PRESENTATION.tsv` publishes every 2,686 lexical M### outfit reference plus the explicit non-M Pike target and one canonical general AI_WANDER reference. Pike ID 5 stores `P_MALE_002_000_PAK`, whose six-part composite descriptor has an empty ActionList (zero Action entries). Mountain Deer ID 27 lists SP1/SP2 and both descriptors carry the same active SENTRY metadata; that metadata proves neither runtime selection nor visual equivalence. MOBS IDs 30 and 1365 provide READY/DIE and SENTRY/DIE multi-outfit counterexamples; `DIE` is not renamed sleep or idle.
+
+[MEASURED][LOCAL TOOLING] The configured Pike comparison token matches original DATA; runtime selection and rendered equivalence are unproved.
+
+[MEASURED][IMAGE] This first P0-7 checkpoint adds three narrow exact runtime rows: n_BOUNDARY +0x04, n_HEIGHT +0x08, and s_OUTFIT +0x108. The f_SCALE key, 0.0 default, and load into +0x0C are exact, but no typed effect consumer is currently proved within the recorded bounded review; separate typed-census/alias-review digests are not incorporated or rederived by this generator, so no completeness/global-absence claim is made. The Avatar parser separately reads NifFile, KfFile, and ActionList. The proposed `Actived` alias belongs to SceneFogCmp and is refuted for Avatar use. After two bounded alias rounds, no +0x108-to-Avatar selection bridge is proved; that bounded result does not satisfy the master stop rule.
+
+[MEASURED][LOCAL TOOLING] P0-7 remains PARTIAL / CHECKPOINT_1. At least one further P0-7 checkpoint is required before the two-consecutive-no-status-change stop rule can be evaluated. The +1 unresolved selection row is coverage expansion for a previously unrepresented boundary, not regression; f_SCALE is already represented by the existing runtime-open row.
+
+[PROPOSED SAFETY RULE][SOURCE-SEPARATION] Token order does not prove original-server selection; n_BOUNDARY/n_HEIGHT do not prove collision or physics policy; f_SCALE zero is not a no-op claim; Action/@Actived is not server policy without new type-preserving evidence.
 
 ## A5
 
