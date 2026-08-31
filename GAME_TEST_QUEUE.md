@@ -8064,6 +8064,16 @@ db = **สำเนา** `state\run_gt142.sqlite3` (จาก `default_state\pir
 > false` เหมือนเดิมทุกตัวอักษร ยังไม่มีตัวประกอบ ยัง BLOCKED จริง ไม่ใช่แค่ประตูปิด** -- `stageable_scene_ids()`
 > วันนี้คือ `(1, 2, 4, 14, 278, 997)`
 
+> 🆕 **อัปเดตที่สอง LANE-A รอบ `3t75jw` 2026-08-31T09:3x+07:00 -- ฉาก 10 (Deep Sea Temple floor 1) เปิดเป็น
+> ประตูที่สองด้วย, ย้ายออกจากขอบเขตใบนี้เช่นกัน:** ตัวประกอบ (`world_population_bg0010.py`) พร้อมแล้ว
+> (`COO-DECISION 20260830_1441`, คิวเดียวกับฉาก 4) **ย้ายฉาก 10 ไปที่ `GT-166` ใบใหม่แยกต่างหาก** (เกณฑ์
+> ของตัวเอง สองคำถามแยก: มี actor ไหม / พื้นยืนได้ไหม -- ฉากนี้คือหนึ่งในสองแถวที่ตารางด้านล่างเตือนไว้ล่วงหน้า
+> ว่าเสี่ยงที่สุด จึงไม่รวมกับใบนี้ที่เป็นคำถามเดียว) · **อีกแปดฉาก (3,5,6,7,8,9,11,130) ยังเป็น
+> `login_entry_allowed: false` เหมือนเดิมทุกตัวอักษร ยังไม่มีตัวประกอบ ยัง BLOCKED จริง** --
+> `stageable_scene_ids()` วันนี้คือ `(1, 2, 4, 10, 14, 278, 997)` · [LANE-A ASSUMPTION - AWAITING COO
+> CONFIRMATION] ว่าการเปิดฉาก 10 ทั้งที่ทะเบียนตีตราความเสี่ยงสูงกว่าฉาก 4 นั้นถูกต้อง -- ถามไว้ใน
+> `notes_to_chief/20260831_0932_LANE-A-ASK-COO-scene10-landing-geometry-elevated-risk.md`
+
 ### objective (claim เดียว)
 ฉากที่ได้จุดมาถึงจากกฎ 1 (`COO-DECISION 20260829_0542`) เมื่อล็อกอินเข้าไปจริง
 **ตัวละครยืนบนพื้นที่ยืนได้ของแมพที่ถูกต้อง** ใช่หรือไม่ (ไม่ใช่ในหิน ใต้พื้น ในลาวา หรือลอยแล้วร่วง)
@@ -8869,3 +8879,50 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 `notes_to_chief/20260830_1441_COO-DECISION-scene4-slave-market-first-door.md` ·
 `notes_to_chief/20260831_0643_LANE-A-STATUS-scene4-slave-market-island-opens.md` · `GT-144` (the other nine,
 still shut) · `GT-134` (the sibling ticket for scene 14, same shape)
+
+## 🆕 GT-166 DEEP-SEA-TEMPLE-LANDING-GEOMETRY-001 [attended, in-game]: ฉาก 10 (Bg0010, Deep Sea Temple floor 1) ตัวประกอบ 94/100 ขึ้นจอไหม -- และ MARKER[10] เป็นพื้นที่ยืนได้จริงหรือไม่ (เกณฑ์คู่ ไม่ใช่แค่ actor)  [READY]
+
+> เปิดโดย LANE-A (สาย A · WORLD) รอบ `3t75jw`, 2026-08-31T09:3x+07:00 -- `login_entry_allowed` ของฉาก 10
+> พลิกเป็น `true` รอบนี้ (`COO-DECISION 20260830_1441`, ประตูที่สองในคิวเดียวกับฉาก 4; composer
+> `world_population_bg0010.py`/`world_bg0010_identity.py` สร้างรอบ `u3jo4g` ผูกรอบ `c42axq` ถูกตัดสินว่า
+> พร้อมแล้ว) -- ไม่ใช่สำเนาของ `GT-165` เพราะฉากนี้มีความเสี่ยงที่ `GT-165` ไม่มี: ทะเบียนเอง
+> (`table_row_differences.the_two_interiors`, pf-adversary รอบ `ga91m5`) ระบุฉากนี้ (คู่กับฉาก 11) เป็น
+> "สองแถวที่รอบ attended ควรดูก่อนถ้าจุดลงมีปัญหา"
+
+### objective (สองคำถาม ไม่ใช่หนึ่ง)
+(1) ล็อกอินเข้าฉาก 10 จริงแล้ว **เห็นสิ่งมีชีวิตขึ้นจอ** (ไม่ใช่ถ้ำว่างเปล่า) ใช่หรือไม่ -- composer ตั้งใจไม่ส่ง
+faction bit เลย เหมือนฉาก 4 (ดู `world_population_bg0010.py` docstring) จึงไม่ใช่คำถามเรื่องความก้าวร้าว
+(2) **ผู้เล่นยืนบนพื้นได้จริงไหม หรือตกในหิน/ลอยกลางอากาศ/จอดำ** -- จุดเกิด `MARKER[10]` อยู่ห่างจาก
+placement ที่ใกล้ที่สุดของฉากนี้ถึง 5174.7 หน่วย (นอกขอบเขต placement ทั้งหมด) พื้น placement ต่ำสุดของฉากนี้
+อยู่ที่ z=-4532.9 ขณะที่ marker อยู่ที่ z=465 -- ต่างกันเกือบ 5000 หน่วย ฉากนี้ยังเป็น "interior" แบบ
+n_CANGLIDE=0/n_LIMIT_HEIGHT=0 (บินร่อนไม่ได้ ไม่มีเพดานจำกัดความสูง) คำถามที่ 2 นี้คือเหตุผลที่ใบนี้แยกจาก
+`GT-165` ไม่ใช่ใบเดียวกัน
+
+### ทางเข้า
+ไม่มี production path ใดเขียนแถว character ให้ชื่อฉาก 10 เอง (ดู `login_entry_allowed_because` ในทะเบียน) --
+เข้าได้เฉพาะ staged GM account (`config/gm_login_scene.json`, scene_id=10) หรือ GM `/warp 10`
+
+### สิ่งที่ยังไม่วัด (บันทึกไว้ล่วงหน้า ไม่ใช่คำทำนายว่าจะพัง)
+จุดเกิด `MARKER[10]` เป็นชั้นหลักฐาน `authored` เท่านั้น -- ไม่เคยมีไคลเอนต์ยืนจริง ตัวเลขระยะทาง/z ข้างต้นคือสิ่ง
+ที่วัดได้จากตารางไคลเอนต์ ไม่ใช่การคาดเดา -- ถ้าคำถามที่ 2 ตอบว่า "ตกในหิน/หลุดพื้น/จอดำ" **ให้บันทึกเป็น
+ข้อมูล ไม่ใช่ FAIL ของ objective (1)** สองคำถามนี้แยกอิสระจากกันโดยตั้งใจ
+
+### pass criteria — สองชั้น, แยกตาม objective
+**wire/DB objective (1) (ปิดแล้วโดยเทส):** console line `WORLD_CENSUS_BG0010 assembled=94/100 ...` ปรากฏหลัง
+ล็อกอินเข้าฉาก 10 -- pin ไว้แล้ว `tests/test_lane_a_scene_census.py::OnTheRealDispatcherTests::
+test_with_the_real_registry_the_deep_sea_temple_census_ships_94`
+**client-observable objective (1) (ยังไม่มีใครยืนดู):** ผู้เทสเข้าฉาก 10 จริงแล้วรายงานว่าเห็น actor ขึ้นจอ
+หรือไม่ (นับคร่าว ๆ พอ ไม่ต้องนับให้ครบ 94)
+**client-observable objective (2), ไม่มีชั้น wire/DB ให้ (ไม่มีอะไรในโค้ดฝั่งนี้ตรวจพื้นได้):** ผู้เทสรายงานว่า
+ยืนบนพื้นได้ปกติ หรือหล่น/ติดหิน/จอดำ -- ผลของคำถามนี้เป็นข้อมูลใหม่สำหรับทะเบียน ไม่ใช่เกณฑ์ผ่าน/ไม่ผ่านของ
+composer นี้
+
+### สัญญาผู้บริโภค
+เปิดโดย LANE-A -- LANE-A บริโภคผลเอง ปิดหัวใบเมื่อผู้เทสยืนยันด้วยตาทั้งสอง objective (แยกกันได้ -- objective
+(1) อาจ PASS ขณะ objective (2) รายงานปัญหา)
+
+### links
+`scenarios/world_scene_registry_001.json` แถว `n_id: 10` (`login_entry_allowed_because`,
+`table_row_differences.the_two_interiors`) · `src/pirateforce_foundation/world_population_bg0010.py`,
+`world_bg0010_identity.py` · `notes_to_chief/20260831_0932_LANE-A-ASK-COO-scene10-landing-geometry-elevated-risk.md`
+· `GT-165` (scene 4, same shape minus the geometry risk) · `GT-134` (scene 14, same shape)
