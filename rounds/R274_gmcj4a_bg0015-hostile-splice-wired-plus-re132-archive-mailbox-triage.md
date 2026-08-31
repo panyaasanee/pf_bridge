@@ -84,7 +84,7 @@ consulting the hostile override — so clicking ANY NPC in the scene (not just o
 reverts all 12 hostile-spliced actors back to civilian (replace-by-omission, RE-092), verified by
 running `respond()` against a real spliced generation and diffing the resulting pc. Reported to LANE-A:
 `notes_to_chief/20260831_2318_CHIEF-TO-LANE-A-choosenpc-scene14-reverts-hostile-splice-to-civilian.md`.
-`GT-177` was updated with a caution note before finalizing this round (do not click any scene-14 NPC
+`GT-178` was updated with a caution note before finalizing this round (do not click any scene-14 NPC
 before observing aggro, or a real feature will read as a false negative). A secondary, lower-severity
 finding — `lane_a_scene_census.py`'s `_hostility_lines` doesn't pass `override=`/`ledger=` to
 `describe_census_hostility` for scene 14, so the one console line built for exactly this question
@@ -93,7 +93,7 @@ to pick up later; not fixed this round (not blocking, and touches a file this ro
 
 ## GAME_TEST_QUEUE.md
 
-Opened `GT-177` (via `pf-queue-author`) for the client-observable half of this CORE-REQUEST: does one
+Opened `GT-178` (via `pf-queue-author`) for the client-observable half of this CORE-REQUEST: does one
 of the 12 spliced placements in scene 14 actually behave hostile on screen, while the rest stay
 civilian as `GT-134` already measured. Explicitly does not close, move, or overwrite `GT-134` — cross-
 referenced as a distinct claim (GT-134 answered "does anything render", this asks "do the 12 spliced
@@ -139,7 +139,7 @@ not move this counter under WIRED v2's definition).
 
 ## Not proven / nonclaim
 
-No client screen has ever shown scene 14's hostile splice (`GT-177` opened for exactly that). The
+No client screen has ever shown scene 14's hostile splice (`GT-178` opened for exactly that). The
 mob_ai_tick CORE-REQUEST is deliberately not wired. RE-132's archive does not satisfy kaa1-A's actual
 ask (shrinking an oversized OPEN entry) — still open. pf-adversary's verdict on this round's diff was
 pending at the time this file was written; if it surfaced anything after this was committed, it will be
@@ -152,7 +152,7 @@ in the next round's file, not retroactively edited into this one.
 per established convention, only this pf_bridge file).
 
 **pf_bridge**: `CLIENT_RE_QUEUE.md`, `archive/CLIENT_RE_QUEUE_ARCHIVE_20260831_R274_closed.md`
-(new), `GAME_TEST_QUEUE.md` (GT-177 opened, then amended with the ChooseNPC caution after pf-adversary's
+(new), `GAME_TEST_QUEUE.md` (GT-178 opened, then amended with the ChooseNPC caution after pf-adversary's
 finding), `CHIEF_CONTINUATION.md`, 7 `.CONSUMED.txt` stubs + 7 `consumed/` copies,
 `notes_to_chief/20260831_2318_CHIEF-TO-LANE-A-choosenpc-scene14-reverts-hostile-splice-to-civilian.md`
 (new), `notes_to_chief/FROM_CHIEF_R274_TO_ATTENDED_*.md`, this file.

@@ -9298,8 +9298,75 @@ carry) · `GT-134` (scene 14, same shape)
 รอบนี้ไม่มีเครื่องมือสำหรับ spawn subagent ชนิดนั้น จึงเขียนเองตามรูปแบบของใบ `GT-175`/`GT-174` ให้ใกล้เคียง
 ที่สุด -- ถ้ารูปแบบผิดจากมาตรฐานให้แก้ได้ตามที่ `pf-queue-author` เห็นสมควรในรอบถัดไป
 
+## 🆕 GT-177 DEATH-CITY-SEA-FIRST-EYES-001 [attended, in-game]: ฉาก 9 (Bg0009, Death City Sea) มีสิ่งมีชีวิตขึ้นจอจริงหรือไม่ -- ตาคู่แรกของโปรเจกต์ในฉากนี้  [BLOCKED-ON-ATTENDED -- รอ PR ของรอบ `ir0lpw` (`pirate-force-server`, ยังไม่ merge เข้า `main`) merge ก่อน + รอ human ที่มี game client จริง]
 
-## GT-177 BG0015-HOSTILE-TWELVE-AGGRO-001 [attended, in-game]: ของ 81 ตัวที่ขึ้นจอในฉาก 14
+> เปิดโดย LANE-A (สาย A · WORLD) รอบ `ir0lpw`, 2026-08-31 · `login_entry_allowed` ของฉาก 9 พลิกเป็น `true`
+> รอบนี้ (`COO-DECISION 20260830_1441`, ประตูที่เก้าในคิวเดียวกับฉาก 4/5/6/8/3/10/7; composer
+> `world_population_bg0009.py`/`world_bg0009_identity.py` **สร้าง ผูก และเปิดประตูในรอบเดียวกัน** เหมือน
+> ฉาก 5/6/8/3/7) -- **ต่างจาก `GT-165`/`GT-171`/`GT-173`/`GT-174`/`GT-175`/`GT-176` ตรงที่โค้ดของรอบนี้ยังไม่
+> merge เข้า `main` ณ เวลาที่เขียนใบนี้** (repo `pirate-force-server`, รอบ `ir0lpw` ยังเปิดอยู่) จึงเปิดใบนี้
+> เป็น `BLOCKED-ON-ATTENDED` ไม่ใช่ `READY` -- ไม่ใช่สำเนาของ `GT-166` เพราะฉากนี้**ไม่มี**ความเสี่ยงแบบ
+> `GT-166`: ทะเบียนเองไม่ระบุฉากนี้ใน `table_row_differences.the_two_interiors` (ตรวจแล้ว ไม่ใช่สมมติ) --
+> รูปแบบเดียวกับ `GT-165` (ฉาก 4) / `GT-171` (ฉาก 5) / `GT-173` (ฉาก 6) / `GT-174` (ฉาก 8) / `GT-175`
+> (ฉาก 3) / `GT-176` (ฉาก 7)
+
+### objective (claim เดียว)
+ล็อกอินเข้าฉาก 9 จริงแล้ว **เห็นตัวละคร/มอนสเตอร์ยืนอยู่ใน Death City Sea** (ไม่ใช่ฉากว่างเปล่า) และไม่โดน
+ปฏิเสธล็อกอินเหมือนก่อนรอบ `ir0lpw` ใช่หรือไม่ -- คำถามคือ "มีสิ่งมีชีวิตขึ้นจอไหมและเข้าประตูนี้ได้จริงไหม"
+ไม่ใช่ "มันโจมตีไหม": composer ของฉากนี้**ตั้งใจไม่ส่ง faction bit เลย** (ดู `world_population_bg0009.py`
+docstring -- เป็นคำตัดสินของสาย B ที่ยังไม่ทำ) จึงไม่มีความเสี่ยงแบบ `GT-134` ที่มอนไม่ก้าวร้าว -- นั่นเป็น
+พฤติกรรมที่คาดไว้ ไม่ใช่ FAIL ของใบนี้
+
+### ทางเข้า
+ไม่มี production path ใดเขียนแถว character ให้ชื่อฉาก 9 เอง (ดู `login_entry_allowed_because` ในทะเบียน) --
+เข้าได้เฉพาะ staged GM account (`config/gm_login_scene.json`, scene_id=9) หรือ GM `/warp 9` -- ทั้งสองทาง
+ต้องรอ PR ของรอบ `ir0lpw` merge เข้า `main` ก่อนถึงจะบูตได้จริง
+
+### สิ่งที่ยังไม่วัด (บันทึกไว้ล่วงหน้า ไม่ใช่คำทำนายว่าจะพัง)
+1. Placement จริงของฉากนี้มี 63 ตัว แต่ composer ประกอบ (assemble) ได้ 57 ตัว (6 ตัวไม่มีร่างที่ส่งได้เลยไม่ถูก
+   ส่ง -- ดู `world_bg0009_identity.py` docstring สำหรับเหตุผลแยกแต่ละตัว) -- การเห็น "น้อยกว่า 63" ไม่ใช่ FAIL
+   ของใบนี้ คำถามของใบนี้คือมี actor ไหม ไม่ใช่ครบ 63 ไหม
+2. จุดเกิด `MARKER[9]` = `(2129, 20907, 240)` ยังเป็นชั้นหลักฐาน `authored` เท่านั้น --
+   `never_sent_to_any_client_by_this_project` (ไม่เคยมีไคลเอนต์ยืนจริงมาก่อนแม้แต่ครั้งเดียว) ห่างจาก
+   placement จริงที่ใกล้ที่สุด **2198.81 หน่วย** -- กว้างที่สุดในบรรดาประตูที่เลนนี้เปิดมา (กว้างกว่าฉาก 7's
+   10.793 และฉาก 8's 8.818 มาก) แม้จะยัง "อยู่ในขอบเขต placement" ตามทะเบียน (bounding box กว้างมาก ไม่ใช่
+   หลักประกันว่าพื้นดี) -- ผู้เทส**ต้องรายงานผลข้อนี้แยกเป็นบรรทัดของตัวเองไม่ว่าจะยืนได้หรือไม่ได้** เพราะเป็น
+   ข้อมูลใหม่ที่ยังไม่มีใครวัด และเป็นช่องว่างกว้างที่สุดเท่าที่เลนนี้เคยเปิดประตูมา
+
+### pass criteria — สองชั้น
+**wire/DB (ยังไม่ปิดโดยเทส -- รอ PR ของรอบ `ir0lpw` merge เข้า `main` ก่อน):** console line
+`WORLD_CENSUS_BG0009 assembled=57/63 ...` ต้องปรากฏหลังล็อกอินเข้าฉาก 9 -- ดูรูปแบบ log จาก composer
+`world_population_bg0009.py` และ console reader `tests/test_lane_a_scene_census.py` (รูปแบบเดียวกับที่
+`GT-165`/`GT-171`/`GT-173`/`GT-174`/`GT-175`/`GT-176` ใช้ปิด) -- เทสที่ pin ตัวเลขนี้ให้แน่นอนยังไม่ยืนยันว่า
+มีอยู่บน `main` ณ ตอนเขียนใบนี้ (ระบุไว้ตรง ๆ เพื่อไม่ให้อ่านผิดว่าปิดแล้ว)
+**client-observable (ยังไม่มีใครยืนดู -- นี่คือสิ่งที่ใบนี้ต้องการ):** ผู้เทสเข้าฉาก 9 จริงแล้วรายงานว่าเห็น
+actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พอ ไม่ต้องนับให้ครบ 57) และล็อกอินผ่านได้ปกติ ไม่โดนปฏิเสธเหมือนก่อนรอบ
+`ir0lpw` -- พร้อมรายงานแยกบรรทัดว่ายืนบน `MARKER[9]` ได้ปกติหรือไม่ (ไม่ตกขอบแมพ/ไม่ค้างกำแพง/ไม่ตกน้ำแบบ
+ผิดปกติ) ตามข้อ 2 ของ "สิ่งที่ยังไม่วัด" ข้างต้น (ข้อมูลใหม่ ไม่ใช่เงื่อนไขบล็อก PASS ของ objective หลัก แต่
+สำคัญกว่าปกติเพราะช่องว่าง 2198.81 หน่วยกว้างที่สุดเท่าที่เคยเปิดมา)
+
+### nonclaims
+ใบนี้ไม่พิสูจน์ว่า placement ทั้ง 63 ตัวถูกต้อง (พิสูจน์แค่ assembled=57 ที่ composer ตั้งใจส่ง), ไม่พิสูจน์ว่า
+มอนก้าวร้าว/ไม่ก้าวร้าว (composer ตัดสินใจไม่ส่ง faction bit ไปแล้วนอกใบนี้), และไม่พิสูจน์อะไรเกี่ยวกับ
+`MARKER[9]` เกินกว่า "ยืนได้/ไม่ได้ในบูตนี้" -- ไม่ใช่การรับรองว่าจุดนี้จะยืนได้ทุกครั้งหรือหลัง reset
+
+### สัญญาผู้บริโภค
+เปิดโดย LANE-A -- LANE-A บริโภคผลเอง ปิดหัวใบเมื่อผู้เทสยืนยันด้วยตา ตามหลัง PR ของรอบ `ir0lpw` merge แล้ว
+เท่านั้น
+
+### links
+`scenarios/world_scene_registry_001.json` แถว `n_id: 9` (`table_row_differences.login_entry_allowed_because`) ·
+`src/pirateforce_foundation/world_population_bg0009.py`, `world_bg0009_identity.py` ·
+`rounds/A_ir0lpw...md` (repo `pirate-force-server`, จะ push พร้อมกับ PR ของรอบ `ir0lpw`) ·
+`notes_to_chief/20260830_1441_COO-DECISION-scene4-slave-market-first-door.md` ·
+`GT-165` (scene 4, same shape) · `GT-171` (scene 5, same shape) · `GT-173` (scene 6, same shape) ·
+`GT-174` (scene 8, same shape) · `GT-175` (scene 3, same shape) ·
+`GT-176` (scene 7, same shape, closest marker-tightness precedent 10.793 units) ·
+`GT-166` (scene 10, dual-objective shape used only when marker risk is elevated -- not this scene's case,
+despite the wide 2198.81-unit gap) · `GT-134` (scene 14, same shape)
+
+
+## GT-178 BG0015-HOSTILE-TWELVE-AGGRO-001 [attended, in-game]: ของ 81 ตัวที่ขึ้นจอในฉาก 14
 (Bg0015, Hell Volcano Island) ที่ GT-134 พิสูจน์แล้วว่าทุกตัว NEUTRAL -- 12 ตัวที่รอบนี้ splice
 faction เข้าไปใหม่ เดินเข้าใกล้แล้ว "เข้าตี/อ่านเป็นศัตรู" จริงบนจอหรือไม่ ในขณะที่อีก 69 ตัวยังนิ่ง
 เหมือนเดิม  [READY]

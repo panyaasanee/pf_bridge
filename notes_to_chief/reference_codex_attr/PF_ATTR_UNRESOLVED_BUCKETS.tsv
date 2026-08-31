@@ -120,7 +120,7 @@ OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	EnemySearchModule	PROVEN_EXACT	own +0x34 
 CLASS_LINK_RECOVERY_OPEN	EquipmentExtraAttr	PROVEN_EXACT	getter/vtable link and immediate parent are unresolved	1
 GAMEPLAY_SEMANTIC_UNKNOWN	Express_ClientGetExpressItemAttrsVital	PROVEN_EXACT	concrete W runtime subtype and serializer target are not sta	1
 NON_WIRE_RUNTIME_ROLE_OPEN	FightAttr	PROVEN_EXACT	the attachment is ActorAttr/NPCAttr-family and the concrete 	1
-CLASS_LINK_RECOVERY_OPEN	FightingDropModule_Client	PROVEN_EXACT	getter/vtable link and immediate parent are unresolved	1
+CLASS_LINK_RECOVERY_OPEN	FightingDropModule_Client	PROVEN_EXACT	NO_CANONICAL_A1_WIRE_SURFACE_FOUND_BY_EXACT_GETTER_VTABLE_SL	1
 OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	FingerGuessingGameModule_Client	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
 CLASS_LINK_RECOVERY_OPEN	FriendshipDataSet	PROVEN_EXACT	getter/vtable link and immediate parent are unresolved	1
 OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	GatheringPerformanceModule_Client	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
