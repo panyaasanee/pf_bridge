@@ -4,3 +4,4 @@ checked_at	generation_id	added	changed	conflicts_total	conflicts_open	open_wired
 2026-08-31 15:33	105cc7692579f079	2	0	1285	640	71	no	
 2026-08-31 16:19	d01e7f6f57a8fdf1	2	7	1286	640	71	yes	new artifact(s) 2: PF_GROUND_DROP_TRANSPORT.md, PF_GROUND_DROP_TRANSPORT.tsv
 2026-08-31 17:18	3578f2aa13fcf22e	0	1	1286	640	71	no	background tables only - no new artifact, no high-signal change
+2026-08-31 18:04	b96e420c290201ce	1	3	1286	640	71	yes	new artifact(s) 1: PF_MONSTER_PRESENTATION.md

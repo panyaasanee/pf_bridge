@@ -16,6 +16,12 @@ The current server is an emulator target, not an evidence source. Implement only
 
 [PROPOSED] A future emulator may decode the nested `PickupTerrainThing` request using the canonical A2 fields and the proved outer protocol structure. Treat `0x4543` (nested pickup), `0x6E6F` (gameplay outer), and `0x453A` (login outer) as runtime type IDs only; do not register any as a top-level wire opcode on this evidence. Do not implement persistent ground-drop spawning from `FightingDropModule_Client`/`FightingDropNotify`: IMAGE proves only custom-reflection parents and metadata sizes, not a concrete wire surface.
 
+## P0-7 monster presentation
+
+[MEASURED][IMAGE/DATA, source-separated] `PF_MONSTER_PRESENTATION.tsv` publishes 2,697 rows (`DATA` 2,688; `IMAGE` 9), status PARTIAL / CHECKPOINT_1. This first P0-7 checkpoint added exact n_BOUNDARY +0x04, n_HEIGHT +0x08, and s_OUTFIT +0x108 runtime rows. The configured Pike comparison token matches original DATA, but runtime selection/rendered equivalence are unproved. Mountain Deer SP1/SP2 share active SENTRY metadata, which proves neither runtime selection nor visual equivalence. IMAGE refutes the SceneFog `Actived` alias. The f_SCALE key/default/load are exact while typed effect semantics remain open, and two bounded alias rounds do not prove the +0x108-to-Avatar selection bridge. At least one further P0-7 checkpoint is required before the two-consecutive-no-status-change stop rule can be evaluated.
+
+[PROPOSED] Preserve original outfit tokens, n_BOUNDARY, n_HEIGHT, and the optional f_SCALE slot without inventing selection, pose, collision, physics, or scale-zero policy. Do not assume token order selects a default, rename `DIE` as sleep/idle, implement Action/@Actived as original-server policy, or treat this first checkpoint as satisfying the master stop condition. The one new unresolved presentation row is coverage expansion, not evidence of a regression; f_SCALE remains a separate existing runtime-open row.
+
 ## Audited CNetNPC quest-mark dependency
 
 [MEASURED][IMAGE] `PF_ATTR_QUEST_MARK_SELECTOR.tsv` proves one CNetNPC path from NPCAttr +0x78 through a client-local event and QuestAttr/MOBS/QUEST inputs to selector values 0..8. It does not prove that the compute handler is the final event writer, that every client path uses it, or that any selector byte is itself original wire state.

@@ -127,7 +127,8 @@ OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	GatheringPerformanceModule_Client	PROVEN_
 CLASS_LINK_RECOVERY_OPEN	KnowledgeGuruCreateTableAttr	PROVEN_EXACT	getter/vtable link and immediate parent are unresolved	1
 CLASS_LINK_RECOVERY_OPEN	LetterInABottleDataSet	PROVEN_EXACT	getter/vtable link and immediate parent are unresolved	1
 OPEN_CONFLICT_WORK_ITEM	MOBS_DATA	N/A	OPEN_CROSS_SOURCE_MISMATCH	1
-NON_WIRE_RUNTIME_ROLE_OPEN	MOBS_RUNTIME	PROVEN_EXACT	the exact f_SCALE key-to-runtime-slot load is proved, but no	1
+NON_WIRE_RUNTIME_ROLE_OPEN	MOBS_RUNTIME	PROVEN_EXACT	the exact f_SCALE key, 0.0 constructor default, and load int	1
+MONSTER_PRESENTATION_RUNTIME_SELECTION_OPEN	MonsterPresentation	UNKNOWN	no type-preserving +0x108 token-vector -> Avatar filename/pa	1
 CONCRETE_CONTAINER_RECORD_CLASS_AND_SEMANTIC_OPEN	NPCAppearAttr.RecordNode	UNKNOWN	scope	1
 OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	NPC_MovieModule	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
 CLASS_LINK_RECOVERY_OPEN	NewsflashAttr	PROVEN_EXACT	getter/vtable link and immediate parent are unresolved	1
