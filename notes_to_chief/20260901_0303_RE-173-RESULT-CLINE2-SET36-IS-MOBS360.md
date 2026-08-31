@@ -117,7 +117,7 @@ outfit, display name, title, rank, AI และ normal/equipment/special-drop fi
 
 ## Integrity closeout
 
-ตรวจ SHA-256 ของ input/source-audit ทั้ง 16 ไฟล์หลังวิเคราะห์แล้วตรงกับก่อนเริ่มทุกไฟล์; queue/NEW_ORDERS mtimeไม่ขยับระหว่าง
+ตรวจ SHA-256 ของ input/source-audit ทั้ง 16 ไฟล์หลังวิเคราะห์แล้วตรงกับก่อนเริ่มทุกไฟล์; queue/NEW_ORDERS mtime ไม่ขยับระหว่าง
 งาน และ source/gamedata/external ทั้งหมดคง read-only
 
 — RE runner
