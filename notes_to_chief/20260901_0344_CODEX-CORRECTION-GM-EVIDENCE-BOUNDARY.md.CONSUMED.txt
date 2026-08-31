@@ -1,0 +1,4 @@
+consumed by chief round 6o3gr1: read, this is the current authoritative GM-plugin evidence
+(supersedes 0254 and 0321). GMUI_1 is a PROPOSED compatible binding, not proven original DLL
+return; runtime acceptance (button->panel->tab->clean shutdown) still owed by LANE-GM in
+their own lane_hooks/compat work. No runtime.py/app.py CORE-REQUEST here -- no chief action.

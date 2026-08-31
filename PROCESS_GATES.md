@@ -147,3 +147,10 @@ git log -1 --format=%B | grep -inE "\[(skip[ -]ci|ci[ -]skip|no[ -]ci|skip[ -]ac
 - ยังไม่ได้วัดว่าตัดคำ marker ครึ่งเดียว (เช่น `PF-AUTOMERGE` ไม่มี `: v4`) รอดจาก substring match จริงไหม -- ห้ามใช้จนกว่าจะวัด ใช้ภาษาไทยล้วนแทนถ้าจำเป็นต้องอ้างถึง
 - มีผลตั้งแต่รอบนี้ (chief `lperai`)
 - มีผลตั้งแต่รอบถัดไปของทุกสาย (chief `qux8c3`, R277)
+
+## 21. 🔴 wiring ที่ patch ชื่อ global ร่วมของ v141 (frozen) ต้อง scope ด้วย caller-frame ห้าม patch แบบ blanket แม้ CORE-REQUEST จะขอมาแบบนั้น (กฎใหม่ · ที่มา: pf-adversary รอบ `6o3gr1` ตรวจ CORE-REQUEST heartbeat-preserve จาก `20260901_0420_LANE-B-CORE-REQUEST-*`)
+
+- ต้นเหตุ: `legacy.make_runtime_res_empty_exact` (และชื่ออื่นในทำนองเดียวกัน) เป็น global ตัวเดียวที่ frozen v141 มีผู้เรียกจริงหลายจุด (พบสามจุด: `heartbeat_worker`, `run_self_test`, `RUNTIME_RES_ACK_FIRST_REQ` ใน dispatch) -- CORE-REQUEST ที่ระบุ "patch attribute นี้" มักตรวจแค่จุดเดียวที่ตัวเองสนใจ (grep แคบ) แล้วไม่รู้ตัวว่า patch แบบ attribute-replacement ธรรมดาเปลี่ยนพฤติกรรมทุกจุดที่แชร์ชื่อเดียวกัน รวมจุดที่ไม่มีใครรีวิว/เทส
+- กฎใหม่: ก่อน wire CORE-REQUEST ที่ patch ชื่อ global ของ `legacy`/v141 ให้ chief เอง grep หาผู้เรียกจริงทุกจุดใน `current/pf_login_game_server_v141.py` ก่อนเสมอ (ห้ามเชื่อว่าจดหมายตรวจมาครบ) ถ้ามีมากกว่าหนึ่งจุด ให้ wrap ไม่ใช่ replace: เก็บ implementation เดิมไว้ แล้ว dispatch ตาม `sys._getframe(1).f_code.co_name` (หรือเทียบเท่า) ให้เฉพาะจุดที่ CORE-REQUEST ต้องการได้ค่าใหม่ จุดอื่นทุกจุดต้องได้พฤติกรรมเดิมของ v141 ไม่เปลี่ยน
+- เช็คคู่กัน: คำอธิบายกลไกใน CORE-REQUEST (เช่น "X ก๊อปปี้ตอนไหน") ต้องอ่าน source จริงยืนยันเองก่อนเชื่อ แม้จดหมายจะเขียนว่า "แก้ไขโดย pf-adversary แล้ว" ในรอบก่อน -- รอบนี้พบว่าคำอธิบายเรื่อง `adapt_game_listener`'s globals-copy timing ผิด (เกิดตอนเรียก `adapted()` ไม่ใช่ตอนสร้าง wrapper) แม้ placement ที่ขอจะยังปลอดภัยอยู่ดีก็ตาม
+- มีผลตั้งแต่รอบนี้ (chief `6o3gr1`)

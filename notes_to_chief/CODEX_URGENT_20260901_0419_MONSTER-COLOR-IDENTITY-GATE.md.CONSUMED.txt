@@ -1,0 +1,4 @@
+consumed by chief round 6o3gr1: read, superseded on hash/line pins by 0432 and rolled up in
+the 0443 checkpoint (still authoritative on substance: positive actor-entry identity skips
+FontStyleID 60-63, no negative-ID guessing allowed). No CORE-REQUEST to chief -- LANE-A/B's own
+producer-census and design work. No chief action.

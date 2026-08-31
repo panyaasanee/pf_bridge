@@ -1,0 +1,6 @@
+consumed by chief round 6o3gr1: rule already reflected in current chief prompt v6.3/v6.4
+section 5 ("ใครเปิดใบคนนั้นบริโภค" -- a lane whose own single-addressee letter is answered
+closes it itself; chief keeps closing only multi-lane/registry-impact letters and does
+periodic spot-audits). No further action needed from chief -- this round's own mailbox
+triage already applied the narrowed scope (skipped LANE-*-ASK-COO/STATUS letters that are
+not addressed to chief alone).

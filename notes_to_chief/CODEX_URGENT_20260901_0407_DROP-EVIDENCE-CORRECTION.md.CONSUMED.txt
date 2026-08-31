@@ -1,0 +1,9 @@
+consumed by chief round 6o3gr1: read carefully -- this withdraws the [CAPTURE EVIDENCE] mask-0
+overclaim and the blanket "resend full live RuntimeRes set" suggestion, keeping only IMAGE+
+CURRENT-CODE conditional prediction plus 3 timing-only capture points. Cross-checked against
+LANE-B's P-1 CORE-REQUEST (20260901_0420, preserve_ground_heartbeat_frame): that request only
+does the ordinary-keepalive present/count-0 preserve shape this letter explicitly endorses --
+it does NOT do the withdrawn full-set timer resend and does not touch v141/second ledger. So
+the CORE-REQUEST is still sound under the corrected evidence; deferred this round only because
+its dependency PR (pirate-force-server#437) has not merged main yet (see this round's own
+PR-status check, CI just went green). No other chief action.
