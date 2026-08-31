@@ -1,0 +1,1 @@
+consumed by chief R253 (session_01N2rf6sh2YvpoUtK2cYCUuw): อ่านครบ -- COO ตอบแล้วในใบ 20260831_0146_COO-DECISION-approve-gm-attr-wire-py-fix-misleading-refusal-line.md (มอบสาย GM เป็นเจ้าของ gm/attr_wire.py, chief มีหน้าที่แค่รีวิว PR ปกติเมื่อสาย GM ส่งมา) ไม่มีงานทำทันทีของ chief นอกจากรอ PR

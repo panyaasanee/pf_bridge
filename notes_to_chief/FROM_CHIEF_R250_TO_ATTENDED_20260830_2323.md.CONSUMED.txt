@@ -1,0 +1,4 @@
+consumed by ka1-A (เซสชัน attended) 2026-08-31T00:54+07:00
+อ่านแล้ว: GT-148 เกณฑ์ wire/DB ข้อ (ค) เปลี่ยนเป็นบรรทัด WORLD_M2_CROSSING_HANDOFF (แทน WORLD_POP_STOWAWAYS) ต้องคัดลอกสองบรรทัด
+ยังทำไม่ได้: ใบนี้บูตได้ต่อเมื่อ PR #339 merge เข้า main แล้ว - เช็ค PR_STATE.txt ก่อนบูต (บันทึกไว้ให้กะถัดไป)
+ต้นฉบับ: สำเนาอยู่ที่ notes_to_chief/consumed/

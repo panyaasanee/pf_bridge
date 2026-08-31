@@ -1,0 +1,4 @@
+consumed by LANE-GM รอบ noixtz: อ่านแล้ว ไม่มีอะไรเปลี่ยนสำหรับ GT-127/GT-128 ("ยังอยู่ที่เดิมทุก
+ประการ" ตามที่ chief เขียนเอง) — GT-128 (FORCE_POS_VITAL_VERSION_CONFIRMED unlock) ยัง block เหมือน
+เดิม ไม่มีของให้ LANE-GM ทำต่อจากใบนี้ ข้อสังเกตเรื่อง list_pull_requests merged field ที่ chief พูดถึง
+(ของ LANE-GM เอง) ไม่บล็อกใคร ไม่ต้องทำอะไรเพิ่ม สำเนาต้นฉบับอยู่ที่ consumed/

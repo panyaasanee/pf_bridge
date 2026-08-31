@@ -1,0 +1,14 @@
+consumed by LANE-GM รอบ szmgeh 2026-08-31T09:2x+07:00
+อ่านแล้ว: 14/14 variant คลิกแล้วไม่มีตัวไหนเปิด GMUI_BASIC (bounded negative ต่อ RE-164 ข้อ 2) +
+field_0x0b_second ยืนยันแบบ attended เป็นครั้งแรกว่าเป็นสวิตช์การมองเห็นปุ่ม BT_GM กลางเซสชัน (ไม่ต้อง
+relog) -- ยืนยันมิติใหม่ของฟิลด์ที่รู้จักอยู่แล้วจาก RE-089/RE-104/CORE-REQUEST-020 (เดิมรู้แค่ตอน login)
+ทำต่อ:
+1. CLIENT_RE_QUEUE.md RE-164 ข้อ 2 -- เติมชั้น attended ต่อจาก static เดิม (ไม่ลบของเก่า) แก้ tag หัวใบ
+   เป็น [PARTIAL -- #2 CLOSED STATIC+ATTENDED, #4 CLOSED STATIC, #1/#3 NEEDS-ATTENDED-CAPTURE]
+2. GAME_TEST_QUEUE.md GT-164 -- ปิดหัวใบ (RESULT), เก็บสถานะเดิมไว้อ่านประกอบ ไม่ลบ
+3. pirate-force-server gm/bt_gm_probe.py -- เพิ่ม observed_button_visible()/guaranteed_visible_variant_ids()/
+   guaranteed_hidden_variant_ids() เพื่อ codify กติกาการมองเห็นให้ผู้เทสรอบต่อไป (ไล่ RE-164 ข้อ 1/3) เลือก
+   variant ที่รู้แล้วว่าปุ่มโชว์แน่ ไม่ต้องเดา -- 12 เทสใหม่ใน tests/test_gm_bt_gm_probe.py ปักตารางจากใบนี้
+nonclaim ที่ยังอยู่ครบ: ไม่อ้างว่า RE-164 ปิดครบ (ข้อ 1/3 ยังเปิด), ไม่อ้างว่า "มองเห็นได้" แปลว่า "คลิกได้ผล"
+(สองชั้นต่างกัน), ไม่อ้าง field_0x0b_second ว่าคือ GMModule_Client+0x19 (คนละใบ คนละที่อยู่)
+ต้นฉบับ: สำเนาอยู่ที่ notes_to_chief/consumed/

@@ -2,7 +2,18 @@
 [ป้ายเวลาจาก `TZ=Asia/Bangkok date` · heartbeat ล่าสุด 2026-08-30T14:58 (ไฟล์ไม่ได้อัปเดตตั้งแต่รอบ R242 ไม่ใช่นาฬิการอบนี้ผิด)]
 [ตอบใบ: `20260830_1441_COO-DECISION-scene4-slave-market-first-door.md`]
 
-# LANE-A STATUS — ฉาก 4 (Slave Market Island) มี crosswalk แล้ว 84/116 ยังไม่ต่อสาย
+## SUPERSEDED, 2026-08-31T13:0x+07:00 (orchestrator, ก่อน push รอบนี้)
+
+**งานทั้งหมดที่ใบนี้รายงานถูกทำซ้ำโดยรอบคู่ขนาน** `git merge-base --is-ancestor` ยืนยันว่ารอบ `6p22bu`
+(commit `e555666`, 2026-08-30T08:58:59Z) landed crosswalk เดียวกันบน `main` ประมาณหนึ่งชั่วโมงหลังรอบนี้
+reset branch จาก `main` -- คือชนกันจริงระหว่างสองรอบ ไม่ใช่ปัญหาประวัติ เวอร์ชันของ `6p22bu` ครบกว่า
+(109/116 vs 84/116) และมีรอบต่อยอดอีกสอง (`2jdde8` ต่อสาย census, `bq4mst` เปิดประตูฉาก 4 บน `main`
+จริง) เสร็จก่อนรอบนี้จะ push ด้วยซ้ำ `GT-165`/สถานะฉาก 4 บน `main` ปัจจุบันคือของถูกต้อง ไม่ใช่ของใบนี้
+ใบนี้ **ไม่มีโค้ดอะไรลง `main`** (dropped ระหว่าง merge-conflict resolution) เก็บไว้อ่านประกอบเป็นบันทึก
+ตรงไปตรงมาว่าเกิดอะไรขึ้น ดู `notes_to_chief/20260831_13xx_LANE-A-STATUS-h1utu5-duplicate-work-collision.md`
+สำหรับคำถามเชิงกระบวนการที่ยกให้ chief/COO (ทำไมล็อกรอบไม่กันการชนนี้)
+
+# LANE-A STATUS — ฉาก 4 (Slave Market Island) มี crosswalk แล้ว 84/116 ยังไม่ต่อสาย (SUPERSEDED, ดูด้านบน)
 
 ## ผู้เล่นจะเห็นอะไรต่างจากเมื่อวาน
 

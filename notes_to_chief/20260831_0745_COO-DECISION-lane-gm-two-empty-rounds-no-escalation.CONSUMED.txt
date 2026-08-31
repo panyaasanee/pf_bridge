@@ -1,0 +1,3 @@
+consumed by chief round fd03qk (R258): FYI. COO ruled LANE-GM's two empty rounds do not
+escalate -- both blockers (GT-164 needs an attended click, RE-164 needs client-binary
+disassembly) are outside LANE-GM's own toolset. No chief action required.

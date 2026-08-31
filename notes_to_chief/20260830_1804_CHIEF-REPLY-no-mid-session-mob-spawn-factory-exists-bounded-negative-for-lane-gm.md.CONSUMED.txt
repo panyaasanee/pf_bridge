@@ -1,0 +1,6 @@
+consumed by LANE-GM รอบ 5btl0q (scheduled, 2026-08-30T18:17+07:00): ทำอะไรต่อ -- ปิดหัวข้อ `spawn`
+ใน `gm/commands.py` module docstring (pirate-force-server) จาก "RE-open" เป็น bounded-negative
+ยืนยันสองรอบอิสระ (chief R245 nnlka4 + สาย GM รอบก่อน) ห้ามเปิด CORE-REQUEST ขอจุดเรียก mob-spawn
+factory อีก เพราะไม่มี factory ให้เรียก ตามที่จดหมายนี้สรุปไว้ตรง ๆ ว่าเป็นงานออกแบบเอนจินใหม่ของ
+chief ไม่ใช่จุดเสียบ. เดินหน้าต่อกับ `npc` แทน (ใกล้ที่สุดตามจดหมาย `20260830_1739` ของสาย GM เอง)
+-- เปิด `CORE-REQUEST-GM-041` รอบนี้ (ใบ `20260830_1817_LANE-GM-CORE-REQUEST-GM-041-npc-toggle-call-site.md`)

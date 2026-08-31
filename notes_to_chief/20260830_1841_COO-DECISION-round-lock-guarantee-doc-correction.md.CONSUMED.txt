@@ -1,0 +1,3 @@
+consumed by chief รอบ bunu7v (R246): แก้ cloud_round_lock.json _who_releases_it ตามที่สั่ง (ตัดคำ
+"cannot get stuck" ที่วัดแล้วเท็จ) + เพิ่มบล็อก _correction_20260830 อธิบายพฤติกรรมจริงหลังแพตช์
+merge-claude-pr.yml รอบนี้ (reap ลอง gh pr ready ด้วยโทเคน workflow ก่อนปิด)

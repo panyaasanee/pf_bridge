@@ -88,9 +88,21 @@ env:
   # was opened before it existed.
   PF_MARKER: 'PF-AUTOMERGE: v4'
   # A DRAFT older than this is a round that died mid-way (a lane round is
-  # one hour; the routine that owns it fires hourly).  It is closed so the
-  # lane can claim again; the branch is kept.
-  PF_STALE_HOURS: '2'
+  # under an hour; the routine that owns it fires hourly).  It is closed so
+  # the lane can claim again; the branch is kept.
+  #
+  # MUST STAY SHORTER THAN THE FASTEST LANE CADENCE (hourly, every lane).
+  # Measured 2026-08-30 (KA1A finding, pf_bridge#507): with the old 2-HOUR
+  # value, a lane whose own round-claim PR was left in draft by a round that
+  # died mid-way saw that PR at the start of every later round of its own and
+  # ended immediately every time (that is what the round-lock check is
+  # SUPPOSED to do for an open PR of your own lane) -- and nothing closed the
+  # corpse for up to two hourly cycles.  The lane was not dead; it was
+  # starving itself on schedule, exactly as designed, against a lock nobody
+  # was going to clear.  45 minutes recovers within the same hourly cycle
+  # instead of the next one, while staying well above how long a live round
+  # actually takes ("under an hour", see below).
+  PF_STALE_MINUTES: '45'
 
 jobs:
   merge:
@@ -199,7 +211,7 @@ jobs:
           #
           # ONE EXCEPTION, added R219 2026-08-29 so that this comment and the
           # code below agree: a pull request whose HEAD MOVED under the merge
-          # call is left open while it is YOUNGER THAN PF_STALE_HOURS, because
+          # call is left open while it is YOUNGER THAN PF_STALE_MINUTES, because
           # closing on a moved head throws away a round that is fine (measured on
           # the server side, #218).  Past that age the skip stops applying and
           # the close path takes it - the bound is in the code, not in prose.
@@ -252,9 +264,9 @@ jobs:
           # a bounded loss (one closed round) into an unbounded one: anything
           # that keeps pushing - a stuck retry loop, a watchdog - would hold the
           # lane lock forever, and every later round would end on "lock held".
-          # Younger than PF_STALE_HOURS: a live round, leave it.  Older and still
+          # Younger than PF_STALE_MINUTES: a live round, leave it.  Older and still
           # moving: close it, whatever is moving it.  THAT IS THE ANSWER TO
-          # "how long may this skip hold the lock" - PF_STALE_HOURS, enforced
+          # "how long may this skip hold the lock" - PF_STALE_MINUTES, enforced
           # here in code and not merely asserted in a comment.
           #
           # MEASURED 2026-08-28 18:27:54 UTC on the SERVER side, #218: a round's
@@ -266,9 +278,9 @@ jobs:
           # age-bounded.  See pirate-force-server #222 / R219.
           CSEC2=$(date -u -d "$CREATED2" +%s 2>/dev/null || echo 0)
           AGE2=$(( $(date -u +%s) - CSEC2 ))
-          LIMIT2=$(( PF_STALE_HOURS * 3600 ))
+          LIMIT2=$(( PF_STALE_MINUTES * 60 ))
           if [ "$NOW_SHA" != "$HEAD_SHA" ] && [ "$AGE2" -lt "$LIMIT2" ]; then
-            echo "::warning::#${PR} left open - head moved ${HEAD_SHA} -> ${NOW_SHA} at age $(( AGE2 / 60 ))m (bound ${PF_STALE_HOURS}h)"
+            echo "::warning::#${PR} left open - head moved ${HEAD_SHA} -> ${NOW_SHA} at age $(( AGE2 / 60 ))m (bound ${PF_STALE_MINUTES}m)"
             echo "the synchronize event for the new head runs this job again, and reap is the backstop"
             exit 0
           fi
@@ -324,7 +336,7 @@ jobs:
           }
 
           NOW=$(date -u +%s)
-          LIMIT=$(( PF_STALE_HOURS * 3600 ))
+          LIMIT=$(( PF_STALE_MINUTES * 60 ))
 
           OPEN=$(api "repos/${REPO}/pulls?state=open&per_page=100" | jq -r '.[].number')
           if [ -z "${OPEN}" ]; then echo "no open pull requests"; exit 0; fi
@@ -350,10 +362,51 @@ jobs:
               # A draft is a round still working.  Only a draft that has outlived
               # any possible round is a corpse, and a corpse is a stuck lock.
               [ "$AGE" -ge "$LIMIT" ] || { echo "  draft, young enough - the round is still working"; continue; }
+              # [MEASURED, 2026-08-30, ka1-A, pf_bridge#507]: a round can finish
+              # clean and push real work, then find that BOTH the REST
+              # `draft:false` PATCH and the GraphQL `markPullRequestReadyForReview`
+              # mutation are rejected (403) for the agent's own token.  Closing on
+              # sight in that case is not reaping a dead round - it is discarding
+              # a finished one, because "still draft" then means "token couldn't
+              # flip the flag", not "the round died".
+              #
+              # [PROPOSED, UNTESTED, pf-adversary round `bunu7v`]: the fix below
+              # -- try this workflow's own GITHUB_TOKEN (which already closes and
+              # merges pull requests a few lines below with `pull-requests: write`)
+              # for `gh pr ready` before treating a stale draft as dead -- has NOT
+              # been observed to succeed anywhere yet.  pf_bridge#507 itself was
+              # undrafted by the OWNER clicking "Ready for review" on github.com,
+              # not by any workflow call, so it is evidence the AGENT's token was
+              # refused, not evidence this WORKFLOW's token is accepted.
+              # `gh pr ready` calls the same `markPullRequestReadyForReview`
+              # mutation that 403'd for the agent -- if the 403's root cause is a
+              # policy that blocks any bot-identity actor from that one mutation
+              # specifically, this call 403s too, and the block below silently
+              # degrades to a no-op: one extra failed API call in front of the
+              # same eventual close, not a fix.  Nobody has yet root-caused why
+              # the agent's token was refused.  Get one real observation of this
+              # call succeeding under GITHUB_TOKEN before trusting that it closes
+              # the hole; until then this is strictly no worse than the pre-patch
+              # behavior (a reversible "try ready" ahead of an unconditional
+              # close), which is why it ships anyway.  If it can mark the pull
+              # request ready, the `ready_for_review` webhook this produces
+              # re-runs `decide` on the normal event path, and that job's
+              # existing green/red handling takes it from there - merge if green,
+              # comment-and-close if red, exactly as it does for any other pull
+              # request.  Only fall back to closing here if the token cannot even
+              # do that (the same 403, or something else, or the fix simply does
+              # not work) - a corpse this reap cannot revive is still a corpse.
+              if gh pr ready "$PR" --repo "$REPO" 2>&1 | sed 's/^/  ready> /'; then
+                echo "  stale draft -> marked ready; the next event runs decide normally"
+                continue
+              fi
+              echo "  could not mark ready (token refused it too) - reaping as a dead draft"
               gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
-                "**Draft open for more than ${PF_STALE_HOURS} hours - the round that opened it has died; closing it to release the lane lock.**" \
+                "**Draft open for more than ${PF_STALE_MINUTES} minutes - the round that opened it has died; closing it to release the lane lock.**" \
                 "" \
                 "A lane round lasts under an hour. A draft this old means the session ended without marking the pull request ready (a tool disconnect, a timeout, a crash) and nothing on the cloud side can ever come back to it - a later round may only push its own branch." \
+                "" \
+                "This reap job also tried \`gh pr ready\` with its own token before closing, in case the round had actually finished and only the agent's token was refused; that call failed too." \
                 "" \
                 "**The branch \`${HEAD_REF}\` is kept.** The next round of this lane must check for a CLOSED previous PR of its own and carry the work forward from that branch before starting anything new.")" \
                 || echo "::warning::could not comment - closing anyway"
@@ -401,9 +454,9 @@ jobs:
               # skip here would turn a bounded loss (one closed round) into an
               # unbounded one (a lane lock held for as long as something keeps
               # pushing).  Young and moving = a live round, leave it; older than
-              # PF_STALE_HOURS and still moving = close it, whatever moved it.
+              # PF_STALE_MINUTES and still moving = close it, whatever moved it.
               if [ "$NOW_SHA" != "$HEAD_SHA" ] && [ "$AGE" -lt "$LIMIT" ]; then
-                echo "::warning::#${PR} left open - head moved ${HEAD_SHA} -> ${NOW_SHA} at age $(( AGE / 60 ))m (bound ${PF_STALE_HOURS}h)"
+                echo "::warning::#${PR} left open - head moved ${HEAD_SHA} -> ${NOW_SHA} at age $(( AGE / 60 ))m (bound ${PF_STALE_MINUTES}m)"
                 continue
               fi
               echo "::warning::merge of #${PR} failed (exit ${MRC}) - closing it to release the lane lock"

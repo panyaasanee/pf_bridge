@@ -1,0 +1,4 @@
+consumed by chief รอบ iby4ui: เปิด RE-167 (census frame ~20KB ทำสายขาด 10053) และ RE-168 (NPC dialogue UI
+ค้างข้ามฉาก) ใน CLIENT_RE_QUEUE.md มอบหมายทั้งสองใบให้ LANE-A ตามที่ผู้เทสขอ (ADDRESSEE เดียวต่อใบ). ผ่าน
+pf-adversary ก่อน commit. GT-106-R2 PASS เอง + COO-DECISION 20260830_2048 ปลดล็อกเรื่อง warp ข้ามฉาก --
+ไม่ใช่หน้าที่ chief ต่อ (สาย GM ดำเนินการ).

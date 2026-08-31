@@ -1,0 +1,1 @@
+consumed by chief round R262 (2idy5w): corrected RE-156 result -- a candidate scene-id byte (ActorVital field_u16_4a) exists but is combat-domain, flag-gated, and unverified for live tracking, so a new ticket (GT-158) was opened -- filed as the RE-queue result, no chief action needed.

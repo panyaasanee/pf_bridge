@@ -43,6 +43,11 @@
 !/*.bat
 !/*.py
 
+# ---- PR status snapshot chief overwrites every round (COO-DECISION 20260830_1841,
+# ka1-A's request 20260830_1809) so the attended side can read real PR state
+# without `gh` or a stale browser tab.  One file, overwritten, no history kept. ----
+!/PR_STATE.txt
+
 # ---- directories that carry the project's memory ----
 !/agent_kit/
 !/agent_kit/**

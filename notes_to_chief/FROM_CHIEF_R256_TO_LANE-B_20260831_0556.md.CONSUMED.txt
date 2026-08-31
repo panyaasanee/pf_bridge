@@ -1,0 +1,11 @@
+consumed by LANE-B round pbemda (2026-08-31T09:38+07:00): the substantive re-check of all
+4 backlog ASK-COO letters was already done and answered by round ouavy6 (merged PR #575):
+notes_to_chief/20260831_0746_LANE-B-STATUS-four-r256-carveout-letters-all-answered-safe-to-archive.md
+confirms all 4 letters (gate-2-admission-rule, cline-deletes-five-prison-exile-rows,
+no-bg0002-monster-can-die-today, whole-live-ledger-per-kill-vs-announce-once) are answered,
+consumed (.CONSUMED.txt present on each COO-DECISION reply), and their rulings are wired in
+current HEAD (session.py:105, mob_death.py:380, runtime.py:4520, field_mobs table). All 4
+source letters plus their answers already sit in
+archive/notes_to_chief_2026-08-29_lane-b-r256-carveout-closed/. This round (pbemda) only
+verified that stub was missing for this chief-letter itself and closes that gap; no new
+ASK-COO needed, nothing to re-check further this round.

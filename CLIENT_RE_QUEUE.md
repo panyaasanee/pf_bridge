@@ -2388,7 +2388,7 @@ and not self.v138_marker1_population_sent` (`TARGET_VITAL=0x1ADD`, `CHOOSE_NPC=0
 หรือไม่ ยังไม่มีใครวัด · `RE-092` พิสูจน์ replace-by-omission ที่ระดับ **ชุด actor** ไม่ใช่ระดับ **บิตใน mask**
 ⇒ นี่คือคำถามจริงของใบนี้ และเป็นคำถามที่ต้องใช้เครื่องสะพาน
 
-## 🆕🔴 RE-139 P33-P58-IDENTITY-CONTRADICTION-001 [STATIC-ON-CLOUD]: บูตเดียวส่ง **ตัวตนสองชุดที่ขัดกัน** ให้ placement เดียวกัน -- สำมะโนบอกว่า Babu/Juliet ตาราง roster บอกว่า Fighting Fish soldier/Jungle Big Tiger  [OPEN]
+## 🔬 RE-139 P33-P58-IDENTITY-CONTRADICTION-001 [STATIC-ON-CLOUD]: บูตเดียวส่ง **ตัวตนสองชุดที่ขัดกัน** ให้ placement เดียวกัน -- สำมะโนบอกว่า Babu/Juliet ตาราง roster บอกว่า Fighting Fish soldier/Jungle Big Tiger  [✅ DONE/RESOLVED-BY-MIGRATION -- ปิดโดย chief (ผู้เปิดใบ) รอบ `hxri6s` (R254) 2026-08-31T04:0x+07:00 · ผล: `notes_to_chief/20260830_1633_RE-139-RESULT-legacy-setnum-window-closed-roster-is-4-not-13.md` (สาย A รอบ `qlp30w`) · **ทั้งสองแหล่งเคยขัดกันจริงในบูตเดียว แต่เฉพาะในหน้าต่างที่ COO-DECISION 2026-08-29T00:41+07:00 ("nine rows get one round only") อนุมัติไว้ล่วงหน้า -- หน้าต่างนั้นปิดไปแล้วก่อนรอบ `qlp30w`** HEAD ปัจจุบัน (`field_mob_tables.SHIPPED_PLACEMENTS`) มีความจริงชุดเดียว: Babu/Juliet, roster=4 ไม่ใช่ 13 · **ปลดเงื่อนไข `GT-104`** "ห้ามเกรด identity ก่อนอ่าน RE-139" -- identity ไม่ขัดกันอีกต่อไป แต่ nonclaim อื่นของ `GT-104` (เลนคุย NPC บล็อกการโจมตี ฯลฯ) ยังไม่ถูกแตะ]
 
 **ADDRESSEE: สาย A (WORLD) + สาย B (COMBAT) ร่วมกัน** · ผู้เปิดใบ: chief (สาย E) รอบ `wi1m62` (R218) 2026-08-29T01:2x+07:00
 **ต้นเรื่อง:** `pf-static-re` รอบ `wi1m62` ระหว่างตอบ `RE-136`
@@ -2660,7 +2660,16 @@ FONT_COLOR ID/n_SKIN_COLOR จนกว่าจะมี attended one-field cro
 
 ---
 
-## 🆕🔬 RE-156 SCENE-IDENTITY-SIGNAL-001 [STATIC-ON-BRIDGE]: **ไม่มีสัญญาณที่เชื่อถือได้ว่าไคลเอนต์กำลังเรนเดอร์ฉากไหนจริง** [🟢 **OPEN — เปิดโดย chief รอบ `hd6tac` (R237) 2026-08-30T~10:5x+07:00 ตาม `COO-DECISION 0946` ข้อ 2**]
+## 🆕🔬 RE-156 SCENE-IDENTITY-SIGNAL-001 [STATIC-ON-BRIDGE]: **ไม่มีสัญญาณที่เชื่อถือได้ว่าไคลเอนต์กำลังเรนเดอร์ฉากไหนจริง** [~~🟢 OPEN~~ 🔵 **DONE (wire/DB layer) / POSITIVE-CANDIDATE-OUT-OF-DOMAIN-AND-UNVERIFIED-LIVE-TRACKING — ปิดโดย chief รอบ `7ohcx5` (R244) 2026-08-30T~17:xx+07:00 ตามคำขอ LANE-A ใบ `20260830_1327_RE-156-RESULT-*` (แก้ครั้งที่สอง หลัง pf-adversary จับ draft แรกผิด)** — เปิดโดย chief รอบ `hd6tac` (R237) 2026-08-30T~10:5x+07:00 ตาม `COO-DECISION 0946` ข้อ 2]
+
+> 🔵 **CLOSURE NOTE (chief, R244):** objective ข้อ 1 มีคำตอบบวก, ไม่ใช่ศูนย์ — `ActionVital` field
+> `field_u16_4a` (offset `0x12`, `current/pf_login_game_server_v141.py:3273`, `parse_action_vital`)
+> ถูกตั้งชื่อ/ใช้เป็น `scene_id` จริงโดย `src/pirateforce_foundation/action_ack.py:8-11,63` และเดินสาย
+> จริงใน `runtime.py:247,6483-6501` — **แต่เฉพาะหลัง opt-in flag `--scene-load-scenario`** (ไม่ใช่บูต
+> ปกติ), อยู่นอกโดเมนคำถามเดิม (combat/`HYP-PF-002 frozen`, ไม่ใช่ world/travel), และยังไม่มีใครพิสูจน์
+> ว่าติดตามฉากแบบสดข้ามฉากในหนึ่ง session (สองแคปเจอร์ที่มีคือคนละ session) — คำถาม live-tracking
+> แยกไปที่ `GT-158` ใหม่ใน `GAME_TEST_QUEUE.md` (เปิดโดย LANE-A) ตามกติกาสองชั้นของใบนี้เอง
+> รายละเอียดเต็ม/sha256: `notes_to_chief/20260830_1327_RE-156-RESULT-no-scene-carrying-client-byte-teleport-check-echo-is-the-nearest-proxy.md`
 
 > 🔢 **หมายเหตุเลข:** ใบนี้จองเป็น `RE-155` ตอนแรก แต่ `main` ขยับใต้เท้าระหว่างรอบ (PR #475 ถูกปิดเพราะ
 > `mergeable=false`) — LANE-A จอง `RE-155` (ACTOR-NAME-COLOR-NPC-...) ไปพร้อมกันในหน้าต่างเวลาเดียวกัน
@@ -2714,7 +2723,7 @@ FONT_COLOR ID/n_SKIN_COLOR จนกว่าจะมี attended one-field cro
 
 ---
 
-## 🆕🔬 RE-157 UNANNOUNCED-ACTOR-SINK-GATES-TRADECMD-AND-MOBCOMBAT-001 [STATIC-ON-BRIDGE]: **สอง sink gate ที่ RE-154 บอกว่า "ปิด ChooseNPC แล้วอย่าคิดว่าจบ"** [🟢 **OPEN — เปิดโดย chief รอบ `hd6tac` (R237) 2026-08-30T~10:5x+07:00 จากผล RE-154 RESULT**]
+## 🆕🔬 RE-157 UNANNOUNCED-ACTOR-SINK-GATES-TRADECMD-AND-MOBCOMBAT-001 [STATIC-ON-BRIDGE]: **สอง sink gate ที่ RE-154 บอกว่า "ปิด ChooseNPC แล้วอย่าคิดว่าจบ"** [~~🟢 OPEN~~ 🔵 **DONE (analysis) / TWO SOURCE GUARDS REQUIRED, NOT YET BUILT — ปิดโดย chief รอบ `bunu7v` (R246) 2026-08-30T~19:1x+07:00 ตามผล `notes_to_chief/20260830_1111_RE-157-RESULT-TRADE-AND-COMBAT-GUARD-SEAMS.md` (Job 1/Job 2 ทั้งคู่ DONE ในใบผล) — implementation (TradeCmd active-session stamp ก่อน `runtime.py:6787`, mob-combat announced-membership guard ที่ `:4093-4096`) เป็นงานของ chief รอบถัดไป ไม่ใช่คำถาม RE อีกใบ — เปิดโดย chief รอบ `hd6tac` (R237) 2026-08-30T~10:5x+07:00 จากผล RE-154 RESULT**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `RE-157` = 0 hit ในไฟล์นี้ · สูงสุดก่อนหน้า = `156` ⇒ ใบนี้คือ `157`
 > 🔴 ใบ `RE-085`-`RE-156` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่
@@ -2759,3 +2768,446 @@ FONT_COLOR ID/n_SKIN_COLOR จนกว่าจะมี attended one-field cro
 `notes_to_chief/20260830_0957_RE-154-RESULT-CHOOSENPC-MEMBERSHIP-AUDIT.md` (เปิดใบนี้) · `RE-154`
 (ปิดแล้ว คนละกลไก) · `current/pf_login_game_server_v141.py:4128-4201` (TradeCmd) ·
 `src/pirateforce_foundation/runtime.py:4054-4095` (mob combat ActionVital)
+
+---
+
+## 🆕🔬 RE-161 CORPSE-POSE-APPLIES-AT-NEXT-RECOMPOSE-NOT-AT-DEATH-FRAME-001 [STATIC-ON-BRIDGE]: **ทำไมโมเดลไม่ล้มตอนได้เฟรมตาย แต่ล้มตอนคิลถัดไปมาถึงแทน** [~~🟢 OPEN — เปิดโดย LANE-B รอบ `qb1ytr` 2026-08-30T16:4x+07:00~~ 🔵 **DONE / BOUNDED-NEGATIVE — บริโภคโดย LANE-B (รอบ scheduled) 2026-08-30T19:4x+07:00 ตามผล `notes_to_chief/20260830_1818_RE-161-RESULT-TASK-QUEUE-NOT-CENSUS-GENERATION.md`: ไม่พบ census-generation/sequence field ใด ๆ ในเส้นทาง wire→task; current `MOB_DEATH_DEAD` full recomposed census เพียงพอสร้าง/คิว `CActorTask_Dead` อยู่แล้ว ท่าล้มค้างเป็น client task-queue/model-readiness timing (`0x4A0C90`/`0x4A0A50`/model bit `[actor+0x70]&0x40`) ไม่ใช่กลไก sequence ที่เซิร์ฟเวอร์ควบคุมได้ — `BUILD_IMPACT_NONE`, ไม่มี source ให้แก้ตามนี้ (nonclaim 3 ของใบเปิดเองอนุญาตให้สาย B ต่อสายถ้า RE ชี้ sequence bump ได้ แต่ RE ไม่พบกลไกนั้น) ปิดเป็น method ceiling ตามที่ผลระบุ**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง 2026-08-30T16:4x+07:00: `RE-161`/`GT-161` = 0 hit ทั้งสองไฟล์ ·
+> สูงสุดก่อนหน้า = `GT-160`/`RE-157` (`GT`/`RE` ใช้ตัวนับเดียวร่วมกัน) ⇒ ใบนี้คือ `161`
+> 🔴 ใบ `RE-085`-`RE-157`/`GT-001`-`GT-160` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่
+
+### ที่มา [วัดแล้ว โดย attended session กะ1-A, บูต commit `6961ecf`, `notes_to_chief/20260830_1554_GT143-GT132-GT149-RESULT-*.md`]
+
+เจ้าของสังเกตเองระหว่างบูต GT-143/GT-132 (คัดดิบ):
+
+> ตอนตายขึ้นว่า ชื่อมอน ล้มลง แต่โมเดลตัวนั้นค้างท่ายืนเฉยๆ มีตัวเลขนับเวลา 20วิขึ้น แต่ไม่นับถอยหลัง
+> แค่ขึ้น 20 แล้วก็หายไป … พอตีตัวที่ 2 ไปนัดเอง ตัวที่ 1 จากท่ายืนค้างแข็ง กลายเป็นท่าล้มตายทันที …
+> พอตัวที่ 3 ตาย ตัวที่ 1,2 ก็เล่นท่าล้มตายแล้วค้างอีกครั้งนึงเหมือนเดิม … ไปตีตัวที่สี่ก็วนแบบนี้
+
+ฝั่งสายส่งครบทุกอย่างที่ควรส่งในคิลนั้นเอง (ไม่ใช่คิลถัดไป):
+
+```
+MOB-DEATH-001 kill: performer 0x10010001 -> target 0x2058 (ceiling 3138)
+  dying frame 184 bytes, timer 20.0 (> 0, latches 0x44384C)
+  dead  frame 184 bytes, timer 0.0  (<= 0, gates 0x443990 -> CActorTask_Dead 0x472810)
+                                     - gate is static; its effect has never been observed
+MOB_DEATH_FRAMES_CENSUS_RECOMPOSE_DYING actor_count=97 wire_actors=97 target=0x2058
+MOB_DEATH_FRAMES_CENSUS_RECOMPOSE       actor_count=97 wire_actors=97 target=0x2058
+```
+
+ทั้ง dying frame, dead frame และ **การ recompose census ทั้ง 97 ตัว (17,910 ไบต์)** ถูกส่งใหม่ในคิลเดียวกัน
+กับที่มอนตาย — ไม่ใช่ว่าเซิร์ฟเวอร์รอไปส่งตอนคิลถัดไป การรอเกิดขึ้น**ฝั่งไคลเอนต์**เท่านั้น
+
+### objective
+
+ตอบจาก artifact ที่ commit แล้วเท่านั้น (ห้ามเปิดเกม ห้ามใช้ capture ใหม่ในใบนี้ — capture ที่มีอยู่แล้วคือ
+`capture_pexile_20260830_151429/server_console_live.out.txt`, L216/L7580-7590/L14913/L22683/L28546):
+
+1. `CActorTask_Dead` (`0x472810`) ถูกเรียกจากที่ไหน และเงื่อนไขที่ทำให้มัน **ถูกข้าม** ในเฟรมเดียวกับที่
+   `dead frame` มาถึงคืออะไร (ใบเดิม RE ที่พินจุดนี้บันทึกไว้แล้วว่า "effect has never been observed" —
+   ใบนี้คือใบที่ไล่ต่อจากบรรทัดนั้น ไม่ใช่ใบซ้ำ)
+2. เส้นทางที่ client apply pose เปลี่ยนแปลง (ยืน→ล้ม) ผูกกับอะไรจริง — เฟรม `dead` เอง, การ recompose
+   census ครั้งถัดไป (คนละคิล), หรือ event อื่นที่ไม่มีในสองอย่างนี้เลย
+3. ถ้าคำตอบคือ "ผูกกับ recompose ครั้งถัดไป" — recompose ของคิลปัจจุบันเอง (ที่ส่งมาในเฟรมเดียวกัน ตาม
+   หลักฐานข้างบน) **ทำไมไม่ถูกนับเป็น "ครั้งถัดไป"** ของตัวเอง (เช่น sequence/generation number ที่ต้อง
+   เพิ่มขึ้นจริงถึงจะ trigger, หรือ client ประมวลผล census ก่อนอ่าน death-frame ในคิวเดียวกัน)
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้):**
+- ระบุ address/เงื่อนไขของข้อ 1-3 พร้อมเลขบรรทัด/offset จาก static analysis เท่านั้น — **ไม่ต้อง** แก้โค้ด
+  ในใบนี้
+
+**ชั้น client-observable (ปิดแล้วเมื่อ RE ตอบ แต่ยืนยันซ้ำด้วยตาได้ในบูตถัดไปที่มีคนหน้าจอ):**
+- ถ้า RE ชี้ว่าต้องมี sequence/generation bump ถึงจะ trigger — บูตครั้งถัดไปที่ฆ่ามอนตัวเดียวใน 1 เซสชัน
+  (ไม่มีตัวที่สอง) ควรเห็นท่าล้มค้างตลอดไป (ไม่มี "ครั้งถัดไป" ให้ trigger) เป็นการทำนายที่ทดสอบได้จริง
+
+### nonclaims
+
+1. ไม่อ้างว่าอาการนี้คือสาเหตุเดียวของ "ศพแข็ง" ที่ `GT-104`/`GT-084` เคยบันทึกไว้ — เป็นเบาะแสที่คมที่สุด
+   เท่าที่มี ไม่ใช่ข้อสรุป
+2. ไม่อ้างว่าการแก้ (ถ้ามี) อยู่ฝั่งเซิร์ฟเวอร์ — วันนี้ยังไม่รู้ว่าแก้ได้จากฝั่งไหน
+3. ไม่แก้ src/ ในใบนี้ — ถ้า RE ชี้ทางแก้ฝั่งเซิร์ฟเวอร์ได้ (เช่น sequence bump ที่ recompose ต้องมี)
+   เป็นของสาย B (combat/death) ต่อสายเองใน lane_hooks ตามกติกา
+
+### links
+`notes_to_chief/20260830_1554_GT143-GT132-GT149-RESULT-label-life-0.2s-is-the-real-blocker-drops-exist-set103-never-shipped.md`
+(เปิดใบนี้) · `src/pirateforce_foundation/mob_death.py` (dying/dead frame composition, สาย B) ·
+`capture_pexile_20260830_151429/server_console_live.out.txt` L7580-7590 (ตัวอย่าง kill 1 ครบ)
+
+---
+
+## 🆕🔬 RE-163 MOB-LOOT-DROP-LATE-MS-SOURCE-001 [STATIC-ON-BRIDGE]: **เฟรม `MOB_LOOT_DROP` มาถึงช้า 351-949ms — ช้าเพราะอะไร ไม่ใช่ตำแหน่งคิว** [~~🟢 OPEN — เปิดโดย LANE-B รอบใหม่ (scheduled) 2026-08-30T17:4x+07:00~~ 🔵 **DONE / BOUNDED — บริโภคโดย LANE-B (รอบ scheduled) 2026-08-30T19:4x+07:00 ตามผล `notes_to_chief/20260830_1805_RE-163-RESULT-LATE-MS-INCLUDES-SENDER-HEXDUMP.md`: ตัวส่งจริงคือ `current/pf_login_game_server_v141.py:7746-7780` (frozen) ไม่ใช่ `runtime.py` — `late_ms` ที่วัดได้รวม `sendall()` ของเฟรม DEAD (17,910B) ก่อนหน้า บวก `live()`/console/full-hexdump/capture-write ของ DEAD ก่อน loop จะถึง LOOT ไม่ใช่เวลาที่ packet เดินทางถึง client จริง — `BUILD_IMPACT_NONE`: ห้าม reorder LOOT ต่อจากผลนี้ (ยืนยันซ้ำการถอนคำขอของรอบก่อน) และห้ามใช้ `late_ms` ปัจจุบันเป็น network/client-arrival metric ถ้าต้องการ telemetry แยก (`queue_wait_ms`/`sendall_duration_ms`/diagnostic-after-send) เป็นการออกแบบจุดวัดใหม่นอก v141 frozen ซึ่งเป็นของ chief ไม่ใช่ CORE-REQUEST ที่สาย B เปิดเองในรอบนี้ (ยังไม่มีใครขอ)**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง 2026-08-30T17:4x+07:00: `RE-163`/`GT-163` = 0 hit ทั้งสองไฟล์ ·
+> `RE-162` ถูกจองชื่อ/เนื้อหาไว้แล้วโดย `notes_to_chief/20260830_1655_PANYA-ORDER-open-RE-162-*.md`
+> (in-session scene change) แต่ยังไม่ถูกเขียนลงไฟล์นี้ ณ เวลาที่เปิดใบนี้ — ข้ามเลข `162` ไว้ให้ใบนั้นตาม
+> ที่จองไว้ก่อน ไม่ชนกัน ⇒ ใบนี้คือ `163`
+> 🔴 ใบ `RE-085`-`RE-161`/`GT-001`-`GT-160` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่
+
+### ที่มา [อ่าน `src/pirateforce_foundation/runtime.py:4600-4824` ซ้ำโดย LANE-B รอบนี้, ตอบ
+`notes_to_chief/20260830_1704_CHIEF-REPLY-*.md` ส่วน 2 และ `notes_to_chief/20260830_1743_LANE-B-DECISION-*.md`]
+
+รอบก่อน (`qb1ytr`) ตั้งสมมติฐานว่าเฟรมเซนซัส 97-actor (~17,910 ไบต์) เป็น wire action แยกที่ถูกคิวไว้
+**ก่อน** `mob_drop_presence.loot_actions()` ในลิสต์ `actions` และขอให้สลับตำแหน่ง — chief ตอบว่าขัดกับ
+invariant ของ `CORE-REQUEST-007` รอบนี้อ่านโค้ดจริงซ้ำแล้วพบว่า**สมมติฐานนั้นผิด**: เฟรมเซนซัส 97-actor
+คือ**เนื้อหาของเฟรม `MOB_DEATH_DYING`/`MOB_DEATH_DEAD` เอง** (ไม่ใช่ action แยก) และ
+`actions.extend(loot_actions(step))` อยู่ถัดจาก `actions.append(MOB_DEATH_DEAD)` **ทันทีอยู่แล้ว** ไม่มี
+action อื่นคั่น ⇒ loot อยู่ในตำแหน่งที่เร็วที่สุดที่ invariant อนุญาตอยู่แล้ว **ไม่มีที่ให้สลับต่อ**
+
+แต่ `late_ms` (351-949ms, สามตัวอย่างจากบูตเดียวกัน `20260830_1554`) ยังไม่มีคำอธิบาย — ถ้าไม่ใช่ตำแหน่ง
+ในลิสต์ ตัวที่เหลือที่อธิบายได้คือต้นทุนจริงของการส่ง/ประมวลผลเฟรมสองเฟรมก่อนหน้า (แต่ละเฟรม 17,910
+ไบต์) หรือกลไก scheduler/`hold_ms` ที่ `runtime.py` เดินคิวจริง — สายนี้ไม่รู้ scheduler internals ของ
+chief พอจะตอบเอง
+
+### objective
+
+ตอบจาก artifact ที่ commit แล้วเท่านั้น (ห้ามเปิดเกม ห้ามใช้ capture ใหม่ในใบนี้ — capture ที่มีอยู่แล้วคือ
+`capture_pexile_20260830_151429/server_console_live.out.txt` L9833/24912/30769 ที่มี `late=` สามค่า):
+
+1. ตัว scheduler/ตัวส่งจริงที่แปลง `actions` list (แต่ละ tuple `(label, pc, frame, delay)`) เป็นไบต์บนสาย
+   คือฟังก์ชัน/method ไหนใน `runtime.py` และมันประมวลผลทีละรายการแบบ **ซิงโครนัส บล็อกกัน** หรือขนาน —
+   ถ้าซิงโครนัส เวลาที่ใช้ serialize+write เฟรม `MOB_DEATH_DYING`/`MOB_DEATH_DEAD` (17,910 ไบต์ต่อเฟรม)
+   ก่อนถึงคิวของ `MOB_LOOT_DROP` คือส่วนหนึ่งของ `late_ms` ที่วัดได้หรือไม่ พร้อมเลขบรรทัด
+2. `delay` ตัวที่สี่ของแต่ละ tuple (`0.0` สำหรับ `MOB_DEATH_DYING`/loot, `hold_ms/1000.0` สำหรับ
+   `MOB_DEATH_DEAD`) ถูกตีความอย่างไรจริง — เป็นเวลาที่ต้อง "รอก่อนส่งรายการนี้" (สะสมกับรายการก่อนหน้า)
+   หรือเป็น timestamp สัมบูรณ์ หรือไม่มีผลต่อเวลาส่งจริงเลย (แค่ metadata ที่ client อ่าน)
+3. ผลลบก็เป็นคำตอบ: ถ้าทั้งสองข้อไม่อธิบาย `late_ms` เลย ให้ปิดเป็น bounded-negative พร้อมระบุว่า
+   "สาเหตุอยู่นอกเขต `runtime.py`'s own actions list" (เช่น เครือข่าย/OS buffering) — คำตอบนั้นปิดคำถาม
+   ของสายนี้ถาวรเช่นกัน
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้):**
+- ระบุกลไก scheduler/`delay` และว่ามันอธิบาย `late_ms` ได้หรือไม่ พร้อมเลขบรรทัด/หลักฐานจาก static
+  analysis เท่านั้น — **ไม่ต้อง** แก้โค้ดในใบนี้
+
+**ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องแยกใบ ต้องมีคนหน้าจอ):**
+- ถ้า RE ชี้ทางลด `late_ms` ได้จริง (เช่น เฟรมเซนซัสควรเล็กลง หรือ scheduler ควรเปลี่ยนลำดับการ
+  serialize) — ต้องวัดซ้ำว่าป้ายกลับมาให้เห็นได้จริงไหม ยังไม่มีใครวัด
+
+### nonclaims
+
+1. ไม่อ้างว่า `late_ms` ทำให้ป้ายหมดอายุก่อนถึงจอจริง — เป็นสมมติฐานที่ตัวเลขชี้ไปเท่านั้น (ดู
+   `20260830_1554` nonclaim 2 ซึ่งยังไม่ถูกพิสูจน์)
+2. ไม่อ้างว่าตำแหน่งใน `actions` list เป็นสาเหตุ — ใบนี้เปิดขึ้นเพราะพิสูจน์แล้วว่า**ไม่ใช่**
+3. ไม่แก้ `runtime.py` ในใบนี้ — เป็นไฟล์ของ chief ถ้า RE ชี้ทางแก้ที่ scheduler จริง เป็น CORE-REQUEST
+   ไปยัง chief ไม่ใช่ของสาย B
+
+### links
+`notes_to_chief/20260830_1704_CHIEF-REPLY-force-pos-unlock-blast-radius-plus-loot-reorder-conflict-both-not-done.md`
+(ที่มาของข้อโต้แย้งเดิม) · `notes_to_chief/20260830_1743_LANE-B-DECISION-invariant-stands-membership-guard-built-instead.md`
+(การอ่านโค้ดที่เปิดใบนี้) · `src/pirateforce_foundation/runtime.py:4600-4824` (ลำดับ actions จริง) ·
+`capture_pexile_20260830_151429/server_console_live.out.txt` L9833/24912/30769 (`late=` สามค่า)
+
+## 🆕🔬 RE-162 IN-SESSION-SCENE-CHANGE-WIRE-001 [STATIC-ON-BRIDGE]: **ไบต์ไหนสั่งให้ client เปลี่ยนแมพขณะออนไลน์ (ไม่ผ่านล็อกเอาต์)** [~~🟢 OPEN~~ 🔵 **DONE / MIXED — ปิดโดย chief รอบ `bunu7v` (R246) 2026-08-30T~19:2x+07:00 ตามผล `notes_to_chief/20260830_1909_RE-162-RESULT-IN-SESSION-SCENE-CHANGE-WIRE-EXISTS-CLIENT-OBSERVABLE-UNPROVEN.md` — ไม่ใช่ bounded-negative: กลไกมีจริงและต่อสายแล้ว (`_dispatch_columbus_quest3021` ส่ง `TeleportVital` ข้ามฉากขณะออนไลน์จริง, merged) แต่ยังไม่มีใครยืนยันว่าไคลเอนต์เรนเดอร์จริง (`GT-106` PENDING คือใบที่ตอบคำถามนี้อยู่แล้ว) — `/warp` เองไม่ใช้กลไกนี้เลย (นโยบาย ไม่ใช่ช่องว่างหลักฐาน) — สัญญาผู้บริโภค: แจ้ง LANE-GM + COO แล้วผ่าน `CHIEF-REPLY 1916`, แจ้งเจ้าของตรง ๆ ใน `FROM_CHIEF_R246_TO_ATTENDED` — เปิดโดย chief รอบ `bunu7v` 2026-08-30T19:01+07:00 ตาม `PANYA-ORDER` (owner order, เขียนแทนโดยกะ1-A)**]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนเขียนลงไฟล์นี้ 2026-08-30T19:01+07:00: `RE-162`/`GT-162` เป็นข้อความ
+> การจองภายใน RE-163 เท่านั้น — ไม่มีใบ RE-162 จริงในไฟล์นี้หรือ `GAME_TEST_QUEUE.md` ก่อนใบนี้ · เลขที่ใช้แล้ว
+> สูงสุดคือ 163 แต่เลขนี้ถูกจองไว้ล่วงหน้าตั้งแต่ 16:55 โดย PANYA-ORDER ก่อน RE-163 เปิด จึงยังเป็น `162`
+> 🔴 ใบ `RE-085`-`RE-161`, `RE-163` และ `GT-001`-`GT-160` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่
+
+### ที่มา
+`notes_to_chief/20260830_1655_PANYA-ORDER-open-RE-162-in-session-scene-change-with-a-named-consumer-chain.md`
+— คำสั่งเจ้าของตรง ๆ ("เปิดใบ RE นั้นเลย และให้แน่ใจว่ามีคนจะหยิบผลลัพธ์ของใบนั้นไปใช้ต่อด้วย") ถามว่า
+"ทำไมยังเปลี่ยนแมพในเกมเดียวไม่ได้" กะ1-A วัดจากซอร์สบน main แล้วสรุปสามบรรทัด: (1) `ForcePos` ไม่มีช่องใส่
+ฉาก (`gm/warp_executor.py` docstring อ้าง RE-090) (2) `TeleportVital` น่าจะใส่ฉากได้แต่ยังไม่พิสูจน์ (RE-090
+ปิดโดยยังไม่รู้) (3) `warp_executor` ยังไม่ถูกต่อสายเลย (`grep -c warp_executor runtime.py` = 0) — ทางเดียวที่
+พิสูจน์แล้วว่าโหลดฉากได้คือทางล็อกอิน (`GT-141` PASS วันนี้ 16:3x)
+
+### objective
+
+ตอบจาก artifact ที่ commit แล้วเท่านั้น (ห้ามเปิดเกม ห้ามยิงไบต์ที่ยังไม่พิสูจน์ใส่ client จริง — บทเรียน
+GT-101 error 23065/28317):
+
+1. `CTeleportVital`/`TeleportVital` — layout เต็ม ฟิลด์ไหนคือ scene id / seq / xyz / heading · ฟิลด์ไหนที่
+   RE-090 ทิ้งไว้ว่า "ยังไม่พิสูจน์" และมันถูกอ่านที่ VA ไหน
+2. ฝั่ง client: ฟังก์ชันไหนสั่ง unload ฉากเดิม + load ฉากใหม่ และถูกเรียกจากเส้นทางไหนบ้าง — เส้นทางล็อกอิน
+   (`START_GAME_RES`) กับเส้นทางระหว่างเซสชันเป็นตัวเดียวกันหรือคนละตัว
+3. ถ้าเป็นคนละตัว: เส้นทางระหว่างเซสชันมี gate อะไรบ้างก่อนถึงจุดโหลด (ไล่จากประตูบานแรกตามบทเรียน RE-118)
+4. ต้องส่งสำมะโน/actor ของฉากใหม่ตามมาไหม และตามลำดับใด — ถ้าลำดับผิดจะเห็นอาการอะไร
+5. ผลลบก็เป็นคำตอบ: ถ้าอิมเมจไม่มีเส้นทางเปลี่ยนฉากระหว่างเซสชันเลย ให้ปิดเป็น bounded-negative พร้อมระบุว่า
+   "ล็อกอินคือทางเดียว" — ปิดคำถามของเจ้าของถาวรและมีค่าเท่าผลบวก
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้):** คำตอบต่อข้อ 1-5 ข้างต้น จาก static analysis ของ artifact ที่ commit แล้ว
+เท่านั้น พร้อมเลขบรรทัด/VA/หลักฐาน
+
+**ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องแยกใบ ต้องมีคนหน้าจอ):** ถ้าผลบวก สาย GM เปิด GT ใหม่ "พิมพ์
+`/warp <ฉากอื่น>` แล้วเปลี่ยนแมพทันทีโดยไม่ล็อกเอาต์" — ดูสัญญาผู้บริโภคด้านล่าง
+
+### ข้อห้าม
+ห้ามเดาค่าแล้วให้ผู้เทสยิงใส่ client จริง · ห้ามอ้างว่า `ForcePos` ทำได้ (RE-090 ปิดไปแล้วว่าไม่มีช่องฉาก) ·
+ห้ามลดรูปเหลือ "same-scene ก็พอ"
+
+### 🔴 สัญญาผู้บริโภค (จากคำสั่งเจ้าของโดยตรง — ไม่มีส่วนนี้ห้ามเปิดใบ)
+
+| ผลของ RE-162 | ใครหยิบต่อ | ทำอะไร | ภายใน |
+|---|---|---|---|
+| **บวก** (เจอเฟรม+ฟิลด์) | **สาย GM** | ต่อ cross-scene ใน `gm/warp_executor.py` (เขตตัวเอง) + เปิด CORE-REQUEST ขอจุดเรียกจาก chief | รอบถัดไปของสาย GM หลังใบปิด |
+| **บวก** (ต้องมีจุดเสียบ) | **chief** | ต่อจุดเรียกใน `runtime.py` ตาม CORE-REQUEST นั้น | ภายใน 2 รอบของ chief |
+| **บวก** (ต้องมีตาคน) | **คิว attended** | สาย GM เขียนใบ GT ใหม่ | ใบต้องพร้อมภายใน 1 รอบหลังโค้ดขึ้น main |
+| **ลบ/bounded** | **สาย GM + chief** | ปิดคำถามถาวรใน `docs/GM_LANE.md`, แจ้งเจ้าของตรง ๆ ว่าเรื่องนี้จบแล้ว | รอบถัดไป |
+
+บังคับเพิ่มสามข้อ: (1) RE runner ต้องเขียน `BUILD_IMPACT:` ที่เป็นคำสั่งทำได้จริง (2) สาย GM ต้องรายงานในกล่อง
+ทันทีที่บริโภคใบ อย่ารอรอบถัดไป (3) COO ยกระดับเป็น ESCALATION ถ้าปิดแล้วเกิน 3 รอบของสาย GM ยังไม่มีใครแตะ
+
+### links
+`notes_to_chief/20260830_1655_PANYA-ORDER-open-RE-162-in-session-scene-change-with-a-named-consumer-chain.md`
+(ใบสั่งเต็ม) · `gm/warp_executor.py` (docstring อ้าง RE-090) · `notes_to_chief/` RE-090 result (field-not-proven)
+
+## 🔬 RE-164 BT-GM-CLICK-FOUR-SUSPECTS-002 [PARTIAL — #2 CLOSED STATIC+ATTENDED, #4 CLOSED STATIC, #1/#3 NEEDS-ATTENDED-CAPTURE]: **ของสี่ผู้ต้องสงสัยที่ `RE-126` ทิ้งไว้โดยไม่เดา (connection context / query-0x25 gate ตอนคลิก / current-UI object-key จริง / create path `0x007280D0`) ตัวไหนคือประตูที่หยุด `GMUI_BASIC` จริง — ข้อ 2 กับ 4 ปิดแล้วด้วย static synthesis จากใบเก่า (`RE-104`+`RE-118`) ที่ไม่เคย cross-reference กันมาก่อน ข้อ 2 ได้ชั้น attended เพิ่มจาก `GT-164` (bounded negative: 14/14 variant คลิกแล้วไม่เปิด) ข้อ 1 กับ 3 ยังต้องไล่ disassembly เพิ่มที่ไม่มีในอิมเมจของ clone นี้**
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนเขียนลงไฟล์นี้ 2026-08-31T03:2x+07:00: `RE-164`/`GT-164` = 0 hit ทั้งสอง
+> ไฟล์นี้และ `GAME_TEST_QUEUE.md` ก่อนใบนี้ — เลขที่ใช้แล้วสูงสุดคือ `RE-163`/`GT-163`(reserved)
+> 🔴 ใบนี้แก้เลขคู่จากที่รอบก่อน (`gm17278`) เขียนไว้ใน `pirate-force-server` PR #350 และ
+> `docs/GM_LANE.md` ว่าคู่กับ `GT-165` — **นั่นผิด กติกาโปรเจกต์คือ RE-N คู่กับ GT-N เลขเดียวกันเสมอ**
+> (ดู `RE-161`/`GT-161`, `RE-162`/`GT-162`, `RE-163`/`GT-163` ด้านบน) เลขที่ถูกคือ `GT-164` ไม่ใช่ `GT-165`
+> — แก้ไว้ก่อนที่ตัวเลขผิดจะกระจายไปที่อื่น ดู nonclaim 4 ด้านล่าง
+
+### ที่มา — ใบนี้ควรถูกเปิดตั้งแต่รอบ `gm17278` แต่ไม่ได้ถูก push จริง
+
+รอบ `gm17278` (2026-08-30T19:14 UTC / ~02:25+07:00 31 ส.ค.) สร้าง
+`src/pirateforce_foundation/gm/bt_gm_probe.py` + `tests/test_gm_bt_gm_probe.py` บน `pirate-force-server`
+จริง (PR #350, `merged=true`, ยืนยันด้วย GitHub API) และ `docs/GM_LANE.md` ของรอบนั้นบันทึกไว้ว่า "เปิด
+`RE-164`" กับ "เปิด `CORE-REQUEST-GM-043`" — แต่ `pirate-force-server#350` เองเขียนไว้ในตัวว่า "Companion to
+`pf_bridge#RE-164`/`GT-165`/`CORE-REQUEST-GM-043`" คือ**อีก PR หนึ่งฝั่ง `pf_bridge`** ซึ่งไม่เคยถูกเปิดเลย —
+grep `pf_bridge` PR ทั้งหมดที่หัวข้อมี `gm17278` = 0 ผลลัพธ์ ยืนยันด้วย GitHub API ไม่ใช่จากรายงาน (ตามกฎ
+ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` ว่า "เสร็จ" ถ้า PR ไม่ merge) รอบนี้ (`b3fgm6`) จึงเขียนสามใบที่
+ค้างอยู่จริง: ใบนี้ (`RE-164`), `GT-164` (`GAME_TEST_QUEUE.md`), และ `CORE-REQUEST-GM-043`
+(`notes_to_chief/`)
+
+### objective
+
+ตอบจาก artifact ที่ commit แล้วก่อน (ห้ามเดาแล้วให้ผู้เทสยิงใส่ client จริงโดยไม่มี provenance):
+
+1. **connection context** — เดินจาก click handler `0x0053B9B0` (RE-126 ยืนยันแล้วว่าเป็นตัวจริง) หา
+   ที่มาของ connection/session context ที่มันอ่าน — context นั้นตรงกับ session ที่ state vital ถูกส่งไปหรือ
+   อาจไม่ตรงกันได้ (เช่น หลาย login รวดกัน)
+   🟡 **[STATIC-PARTIAL รอบ `1q7nxu`]** ทราบแค่ *ตำแหน่ง* เช็ค: handler เช็ค global `[0x01032EC4]` ไม่เป็น
+   null เป็นสเต็ป 2 ของกิ่ง `0x0053BC51..0x0053BC96`
+   (`notes_to_chief/20260828_0411_RE-118-RESULT-CURRENT-UI-KEY-MUST-BE-NONEMPTY.md:26-28`) — แต่ยังไม่รู้ว่า
+   context ตัวนั้น *ตรง* กับ session ที่ state vital ถูกส่งไปหรือไม่ ต้องไล่ write-site ของ `0x01032EC4`
+   เพิ่ม ไม่มีในเอกสารที่ commit แล้ว — RE-126 nonclaim 3 ระบุเองว่าไม่เคยอ้างเรื่อง match/mismatch นี้
+   (`notes_to_chief/20260828_1809_RE-126-RESULT-BT-GM-SAME-CONTROL.md:53`) **[NEEDS-ATTENDED-CAPTURE ยืนยัน]**
+2. **query-0x25 gate ตอนคลิก** — adapter `0x00726D30` (อ่าน `GMModule_Client+0x19`, RE-104 พิสูจน์ว่าคุมการ
+   วาด/enable ปุ่ม) ถูกเรียกซ้ำตอนคลิกด้วยหรือคืนค่าจากตอนวาดครั้งเดียว — ถ้าเรียกซ้ำ ค่าที่อ่าน ณ
+   เวลาคลิกอาจต่างจากตอนวาด
+   ✅ **[STATIC ปิดแล้ว รอบ `1q7nxu`]** เรียกซ้ำ ไม่ใช่ค่าจากตอนวาด — click handler เรียก `0x0044A3B0`
+   ตรวจ `module+0x19` ใหม่ที่กิ่ง `0x0053BC51..0x0053BC96` เป็นการเรียกแยกจากเช็ควาด/enable เป็นระยะที่
+   `[0x0053B150,0x0053B324)` (สองที่คนละจุด) — สองใบยืนยันตรงกัน:
+   `archive/notes_to_chief_2026-08/consumed/20260827_1518_RE-104-RESULT-BT-GM-MODULE-PLUS19-GATE.md:41` และ
+   `notes_to_chief/20260828_0411_RE-118-RESULT-CURRENT-UI-KEY-MUST-BE-NONEMPTY.md:27-31` (ทั้งสองมีมาก่อน
+   `RE-164` เปิด แค่ไม่เคย cross-reference กัน — เป็นช่องว่างของการสังเคราะห์ ไม่ใช่หลักฐานใหม่)
+   🟢 **[ATTENDED เพิ่ม รอบ `szmgeh`, `GT-164`]** กะ1-A คลิก `BT_GM` จริงหลังยิงทั้ง 14 variant — **ไม่มี
+   variant ไหนเปิด `GMUI_BASIC`** แม้ปุ่มมองเห็นได้และ query-gate ถูกเรียกซ้ำตามที่พิสูจน์ไว้ (ด้านบน) ⇒
+   ข้อ 2 (ตัวเฟรมนี้เอง) **ถูกตัดออกจากการเป็นประตูที่หยุดหน้าต่าง** ทั้งชั้น static และ attended ตรงกัน —
+   ผลข้างเคียง: พบว่า `field_0x0b_second` (ไม่ใช่ field ที่ query-0x25 อ่าน) คือสวิตช์การ**มองเห็น**ปุ่ม
+   แยกจากการคลิก ยืนยันมิติใหม่ของฟิลด์ที่รู้จักอยู่แล้วจาก `RE-089`/`RE-104`/`CORE-REQUEST-020` (เดิมรู้แค่
+   ตอน login ครั้งเดียว รอบนี้ยืนยันว่าใช้ได้กลางเซสชันด้วย ไม่ต้อง relog) — รายละเอียดเต็มดู
+   `notes_to_chief/20260831_0901_GT164-RESULT-bounded-negative-on-suspect-2-plus-field-0x0b-second-is-the-button-visibility-switch.md`
+   และ `gm/bt_gm_probe.py`'s `observed_button_visible`/`guaranteed_visible_variant_ids` (รอบนี้เพิ่ม)
+3. **current-UI object-key จริง** — `RE-118` เดาว่าต้องไม่ว่าง `GT-103` A/B หักล้างข้อเสนอนั้นแล้ว (4 สถานะ
+   UI เงียบหมด) เงื่อนไขจริงคืออะไร ไล่ vfunc `[0x01093198]+0x7C8+0x04` ต่อจากจุดที่ `RE-118` หยุด
+   🟡 **[STATIC-PARTIAL รอบ `1q7nxu`]** `RE-118` ไล่ถึง predicate ที่ `[0x008946C0,0x008946EA)` (ตรวจ
+   UTF-16 ไม่ว่าง) แต่หยุดที่ "ไม่มี literal/crosswalk ผูก key กับชื่อ panel"
+   (`notes_to_chief/20260828_0411_...md:38,62`) — `GT-103AB`
+   (`notes_to_chief/20260828_1140_GT103AB-RESULT-...md:51`) ยืนยันช่องว่างนี้ยังเปิดอยู่ ไม่มีใบไหนไล่ต่อจาก
+   จุดนั้น **[NEEDS-ATTENDED-CAPTURE ยืนยัน]**
+4. **create path** — factory `0x007280D0` ที่สร้าง `GMUI_BASIC`/`GMModule_Client+0x48` ถูกเรียกไหมเมื่อคลิก
+   หรือมี early-return ตัดก่อนถึง
+   ✅ **[STATIC ปิดแล้ว รอบ `1q7nxu`]** มี early-return แบบมีเงื่อนไข: dispatcher
+   `[0x00AA0710,0x00AA0799)` เรียก empty-key predicate ก่อน ถ้า true จะ `ret 0x10` ทันทีไม่มี log/frame —
+   create path (`0x00A9E080` ซึ่ง vtable-crosswalk ไปที่ factory `0x007280D0` ผ่าน `GMModule_Client+0x48`)
+   ไม่ถูกเรียก (`notes_to_chief/20260828_0411_...md:36,42-44`; สรุปซ้ำใน
+   `rounds/GM_20260828_0418_re118-closed-gt103-ab-procedure-added.md:35`)
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้บางส่วน):** คำตอบต่อข้อ 1-4 จาก static analysis ของ artifact ที่ commit แล้ว
+พร้อมเลขบรรทัด/VA — ผลลบก็เป็นคำตอบ (เช่น "ข้อ 2 คืนค่าเดิมเสมอ ไม่ถูกเรียกซ้ำตอนคลิก" ปิดข้อนั้นได้)
+
+**ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องมีคนหน้าจอ):** `GT-164` (`GAME_TEST_QUEUE.md`) — คลิก `BT_GM`
+ทีละ variant ของ `gm/bt_gm_probe.py`'s `iter_state_vital_bit_variants()` แล้วดูว่า `GMUI_BASIC` เปิดไหม —
+🟢 **เสร็จแล้วรอบ `szmgeh`** (`CORE-REQUEST-GM-043` ปลด BLOCKED รอบ `jz4don`, กะ1-A คลิกจริงรอบ `GT164-RESULT`
+2026-08-31T08:50-08:55+07:00) — ผลคือ bounded negative ต่อข้อ 2 (ดูรายละเอียดในข้อ 2 ด้านบน)
+
+### ข้อห้าม
+ห้ามเดาความหมายของฟิลด์ `field_0x14` บิต 8-31 (ไม่ครอบคลุมโดย `bt_gm_probe.py` รอบก่อน ตั้งใจเว้นไว้) ·
+ห้ามอ้างว่าประตูไหน "คือ" สาเหตุโดยไม่มี VA/บรรทัดอ้างอิง · ห้ามใช้ผลของใบนี้อ้างว่าทางแชท (`0xAC52`) เป็น
+ทางเข้า `GMUI_BASIC` อีกทาง (RE-126 ปิดคำถามนั้นแล้วว่าไม่ใช่)
+
+### สัญญาผู้บริโภค
+ผู้เปิดใบเป็นผู้บริโภคผล (LANE-GM) ตามกฎ ADDENDUM v2 ข้อ B — เมื่อได้ผล (บวก ลบ หรือ bounded-negative)
+สาย GM ปิดหัวใบนี้เองรอบที่บริโภค พร้อม consumed stub
+
+### nonclaims
+1. รอบ `1q7nxu` ไม่ได้ยิงเฟรมใด ๆ ใส่ client จริง — ข้อ 2 กับ 4 ปิดได้ด้วยการอ่านใบเก่าที่ commit แล้ว
+   สองใบ (`RE-104`, `RE-118`) เฉย ๆ ไม่ใช่หลักฐานใหม่ ไม่ใช่การอ่าน disassembly เพิ่ม
+2. ไม่ได้ตรวจว่า `bt_gm_probe.py`'s 14 variant ครอบคลุมพอจะตอบข้อ 2 (query-gate timing) ได้จริง — นั่นเป็น
+   คำถามเรื่องเวลา ไม่ใช่ค่า ตัว frame variant ปัจจุบันตอบไม่ได้ ต้องมีกลไกจับเวลาเพิ่ม (ดู `bt_gm_probe.py`
+   docstring ของ `QUERY_GATE_VALUE_AT_CLICK_TIME_SUSPECT`) — ไม่กระทบคำตอบข้อ 2 ที่ปิดแล้ว (เรื่องคนละชั้น:
+   "เรียกซ้ำไหม" ปิดแล้วด้วย static, "ค่าอะไรตอนคลิกจริง" ยังต้องใช้เวลา/attended)
+3. ไม่ได้ตัดสินว่า `GT-164` ควรปลด BLOCKED ด้วยทางไหน (GM chat-command ใหม่ หรือ debug scenario flag) —
+   เป็นดุลยพินิจของ chief ตาม `CORE-REQUEST-GM-043`
+4. เลข `GT-164` (แก้จาก `GT-165` ที่รอบก่อนเขียนผิดในเอกสารที่ไม่เคย push) คือเลขที่ยึดตามใบนี้ ถ้าเอกสาร
+   ที่ไหนยังอ้าง `GT-165` สำหรับเรื่องนี้ ให้ถือว่าเอกสารนั้นล้าสมัย ไม่ใช่ไฟล์คิวสองไฟล์นี้
+5. ข้อ 1 กับ 3 ยังไม่ปิด — ข้อ 1 ต้องไล่ write-site ของ `[0x01032EC4]` เพิ่ม ข้อ 3 ต้องไล่ vfunc chain ต่อจาก
+   `[0x008946C0,0x008946EA)` ทั้งคู่ไม่มีในอิมเมจของ clone นี้ (ไม่มี client image ไม่มี disassembler)
+   ต้องเปิดใบ RE runner บนสะพานถ้าจะไล่ต่อทาง static หรือรอ attended capture
+6. `GT-164` ปิดแล้วเป็น bounded negative ต่อข้อ 2 เท่านั้น (รอบ `szmgeh`) — **ไม่ใช่หลักฐานว่า `RE-164` ปิด
+   ครบ** ข้อ 1/3 ยังเปิด และการที่ปุ่ม "มองเห็นได้" ระหว่างเทส (`field_0x0b_second=1`) ก็ไม่ได้แปลว่าคลิกได้
+   ผล — สองเรื่องคนละชั้นกัน (visibility vs. click-success) ตามที่ `gm/bt_gm_probe.py`'s
+   `observed_button_visible` docstring ระบุไว้ชัดเจน
+
+### links
+`pirate-force-server` PR #350 (merged, `bdbef5c`) · `src/pirateforce_foundation/gm/bt_gm_probe.py` ·
+`tests/test_gm_bt_gm_probe.py` · `notes_to_chief/20260828_1809_RE-126-RESULT-BT-GM-SAME-CONTROL.md` ·
+`notes_to_chief/20260828_1140_GT103AB-RESULT-...md` ·
+`notes_to_chief/20260831_0152_PANYA-ORDER-LANE-GM-make-the-BT_GM-button-and-GMUI_BASIC-window-actually-work.md` ·
+`archive/notes_to_chief_2026-08/consumed/20260827_1518_RE-104-RESULT-BT-GM-MODULE-PLUS19-GATE.md` ·
+`notes_to_chief/20260828_0411_RE-118-RESULT-CURRENT-UI-KEY-MUST-BE-NONEMPTY.md` ·
+`rounds/GM_20260831_0822_re164_partial_static_synthesis.md` ·
+`notes_to_chief/20260831_0901_GT164-RESULT-bounded-negative-on-suspect-2-plus-field-0x0b-second-is-the-button-visibility-switch.md`
+
+## 🔬 RE-167 CENSUS-FRAME-INTERMITTENT-ABORT-001 [~~OPEN — assigned LANE-A~~ 🔵 **wire/DB ANSWERED bounded-negative, client-observable STILL PENDING — LANE-A รอบ `qoj8ei` 2026-08-31T11:36+07:00, ผล `notes_to_chief/20260831_1136_RE-167-RESULT-wire-layer-no-server-buffer-timeout-cause-found-bounded-negative.md`: ไม่พบ server-side buffer/timeout/race ที่อธิบาย 10053 ได้ จาก static analysis; chunking ต้องแก้ frozen `current/pf_login_game_server_v141.py` ซึ่งเป็นไฟล์ที่ทั้งโปรเจกต์ตกลงห้ามแก้ — ส่งเป็นคำถามเชิงโครงสร้างให้ chief/COO ตัดสิน ไม่ใช่ CORE-REQUEST ปกติ; ยังไม่มี fix ให้เทส จึงยังไม่เปิด GT ใหม่**]: เฟรม `WORLD_CENSUS_INITIAL` ขนาด ~20 KB (Port Royal, 108-115 actor) ทำสายไคลเอนต์ขาดเป็นครั้งคราว (`ConnectionAbortedError 10053`) — เกิดที่จุดไหนของ send/parse และทำไมไม่เกิดทุกครั้งบนเฟรมขนาดเท่ากัน
+
+### หลักฐานตั้งต้น
+`notes_to_chief/20260831_1036_GT106R2-RESULT-PASS-client-renders-the-destination-scene-mid-session-plus-two-new-findings.md`
+(ของใหม่ข้อ 1) — สามจุดข้อมูล: Port Royal 20,112B ครั้งแรกสายขาด (`10053`) ครั้งถัดมาผ่านทั้ง
+INITIAL/REAPPLY, Slave Market (BG0004) 18,997B ขึ้นข้อความ "ยังไม่สามารถรับข้อมูล Server ได้" แต่เล่นต่อได้
+— **เกิดเป็นครั้งคราวบนเฟรมขนาดเท่ากัน ห้ามเขียนว่า "20 KB พังเสมอ"**
+
+### ที่มา
+ก่อนหน้านี้ Port Royal ส่ง actor แค่ 3 ตัว (`V134_P0_P30_P91_ISOLATED`) ตอนนี้ส่ง 108/115 — เฟรมโตจาก
+หลักร้อยไบต์เป็น ~20 KB เป็นผลข้างเคียงของงานสำมะโนที่เพิ่งลง main ไม่ใช่บั๊กเก่าที่เพิ่งโผล่
+
+### จุดที่ยังไม่แน่ชัด
+1. ฝั่งเซิร์ฟเวอร์ (`runtime.py`/`app.py` ส่ง `WORLD_CENSUS_INITIAL`): มี buffer/timeout ใดที่ทำให้ send
+   ถูก abort เป็นบางครั้งบนเพย์โหลดขนาดนี้ — ตรวจ log บริเวณจุด send ว่ามี retry/partial-write หรือไม่
+2. ฝั่งไคลเอนต์ (จากข้อสังเกต ไม่ใช่ disassembly ใหม่): ไคลเอนต์อ่านเฟรมสำมะโนเป็นก้อนเดียวหรือแบ่งอ่าน —
+   ถ้าไม่มี client image ให้ตอบจาก log ฝั่งเซิร์ฟเวอร์ + เอกสารโปรโตคอลที่ commit แล้วเท่านั้น
+3. ควรแบ่งเฟรมสำมะโนใหญ่เป็นหลายก้อน (chunking) หรือไม่ — ถ้าตอบได้จาก static analysis ให้เสนอ threshold
+4. ผลลบก็เป็นคำตอบ: ถ้าสรุปได้ว่าเป็นเงื่อนไข race ฝั่งเน็ตเวิร์กที่ไม่มีทางแก้จากโค้ดเซิร์ฟเวอร์ ให้ปิดเป็น
+   bounded-negative พร้อมเหตุผล
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้บางส่วน):** คำตอบต่อข้อ 1-4 จาก static analysis ของซอร์ส/log ที่ commit แล้ว
+พร้อมเลขบรรทัด — ผลลบก็เป็นคำตอบ
+
+**ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องมีคนหน้าจอ):** เปิด GT ใหม่ถ้าต้องยืนยันว่า fix (เช่น chunking)
+แก้อาการ 10053 จริงในเซสชันยาว — สาย A เปิดใบเมื่อมีของให้เทส
+
+### ข้อห้าม
+🔴 **ห้ามแก้ด้วยการลดจำนวน actor เงียบ ๆ** — นั่นคือถอยหลังจากงานสำมะโนที่เพิ่งทำสำเร็จ (ตามที่ผู้เทสเน้นไว้
+ในใบต้นเรื่อง) · ห้ามอ้างว่าพบสาเหตุแท้จริงจากการอ่าน log ครั้งเดียว (G1) · 🔴 **CHARTER-02 §⑥**:
+`WORLD_CENSUS_INITIAL` ถูกประกอบ/ส่งจาก `runtime.py` (`src/pirateforce_foundation/runtime.py:8096`) ซึ่งเป็น
+เขตของ chief คนเดียว — ถ้าคำตอบชั้น wire/DB สรุปว่า fix (เช่น chunking) ต้องแก้ใน `runtime.py`/`app.py`/
+`pf_login_game_server_v141.py` **LANE-A ห้ามแตะไฟล์เหล่านั้นเอง** ให้เปิด CORE-REQUEST ขอ chief ต่อสายแทน
+ตามกติกาเขตเขียนปกติ
+
+### สัญญาผู้บริโภค
+ผู้เปิดใบเป็นผู้บริโภคผล (LANE-A) ตามกฎ "ใครเปิดใบคนนั้นบริโภค" — มอบหมายโดย chief รอบ `iby4ui` ตามคำขอ
+ของกะ1-A ในใบต้นเรื่อง (ADDRESSEE เดียวต่อใบ)
+
+### links
+`notes_to_chief/20260831_1036_GT106R2-RESULT-PASS-client-renders-the-destination-scene-mid-session-plus-two-new-findings.md`
+
+## 🔬 RE-168 SCENE-TRANSITION-UI-LAYER-NOT-RESET-001 [~~OPEN — assigned LANE-A~~ 🔵 **wire/DB ANSWERED partial, client-observable STILL PENDING — LANE-A รอบ `qoj8ei` 2026-08-31T11:42+07:00, ผล `notes_to_chief/20260831_1142_RE-168-RESULT-no-dialogue-close-signal-exists-server-is-stateful-enough-to-add-one.md`: เฟรม `kind=clear` ที่มีอยู่เป็น population เท่านั้น ไม่มีช่องปิด UI; เซิร์ฟเวอร์จำสถานะ conversation ได้จริง (`columbus_quest3021_conversation_sent`) แต่ไม่มี opcode ปิด dialogue ที่ characterize แล้วในเขตนี้ — เปิดใบใหม่ให้สาย RE หา opcode ก่อน; ยังไม่มี fix ให้เทส จึงยังไม่เปิด GT ใหม่**]: หน้าต่างบทสนทนา NPC (Columbus quest 3021) ค้างอยู่บนจอหลัง teleport ข้ามฉาก ทั้งที่ actor ถูกล้างแล้ว (`population=none`, เฟรม `kind=clear` ยิงก่อน teleport) — ชั้น UI ควรถูกสั่งรีเซ็ตตอนไหน และตอนนี้เซิร์ฟเวอร์ส่งสัญญาณนั้นหรือไม่
+
+### หลักฐานตั้งต้น
+`notes_to_chief/20260831_1036_GT106R2-RESULT-PASS-client-renders-the-destination-scene-mid-session-plus-two-new-findings.md`
+(ของใหม่ข้อ 2) — เจ้าของรายงานตรง ๆ ว่า "หลังวาร์ปไปฉาก 17 ภาพ/หน้าต่างบทสนทนาของ Columbus ยังค้างอยู่บนจอ"
+รายละเอียดเฟรม `WORLD_M2_CROSSING_HANDOFF kind=clear ... slot=before_teleport ... held=108` มาจากจดหมาย
+คู่กันบูตเดียวกัน (`notes_to_chief/20260831_1037_GT148-and-GT165-RESULT-stowaways-cleared-and-slave-market-island-has-life.md`
+บรรทัด ①) ไม่ใช่ใบ 1036 **คนละชั้นกับที่ `GT-148` ถาม** (`GT-148` ถามเรื่อง actor ค้าง — ตามใบ 1037 สาย A
+เจ้าของใบรายงานว่าจะปิดเป็น PASS เอง แต่ ณ เวลาที่เขียนใบนี้ `GAME_TEST_QUEUE.md` ยังขึ้น PENDING (สาย A
+ยังไม่ปิดหัวใบจริง) — ใบนี้ถามเรื่อง UI ค้าง ซึ่งเป็นชั้นคนละอันแม้ทริกเกอร์เดียวกัน ไม่ขึ้นกับผลของ `GT-148`)
+
+### จุดที่ยังไม่แน่ชัด
+1. เฟรม `kind=clear` ที่มีอยู่แล้ว (`WORLD_M2_CROSSING_HANDOFF`) สั่งล้างเฉพาะ actor หรือมีช่องสั่งปิด UI
+   ด้วย — ถ้าไม่มี ต้องมีเฟรม/สัญญาณแยกสำหรับปิด dialogue window
+2. การเปิดหน้าต่างบทสนทนา Columbus มาจากจุดเสียบไหน (`CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE`
+   ตามที่ log ใบต้นเรื่องแสดง) — จุดเสียบเดียวกันควรมีคู่ปิดหรือไม่
+3. เป็นปัญหาฝั่งเซิร์ฟเวอร์ (ไม่ส่งสัญญาณปิด) หรือฝั่งไคลเอนต์ (ได้สัญญาณแต่ไม่ทำตาม) — ตอบจาก wire/log
+   ที่ commit แล้วเท่านั้น ถ้าต้องอ่าน client behavior ให้ตอบเป็น bounded-negative ว่าตอบไม่ได้จากฝั่งนี้
+4. ผลลบก็เป็นคำตอบ: ถ้าเซิร์ฟเวอร์ไม่มีทางรู้ว่า dialogue window เปิดอยู่ (stateless ฝั่งนี้) ให้ปิดเป็น
+   bounded-negative พร้อมเสนอทางแก้ (เช่น ผูก dialogue-close เข้ากับ `kind=clear` เดิม)
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้บางส่วน):** คำตอบต่อข้อ 1-4 จาก static analysis ของซอร์ส/log ที่ commit แล้ว
+
+**ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องมีคนหน้าจอ):** เปิด GT ใหม่เพื่อยืนยันว่า fix ปิดหน้าต่างจริง
+หลัง teleport — สาย A เปิดใบเมื่อมีของให้เทส
+
+### ข้อห้าม
+ห้ามนับเป็น FAIL ของ `GT-148` (ตามใบ 1037 ผลชั้น actor เป็นบวก — ไม่มี actor ค้าง — ไม่ว่าหัวใบจะถูกปิด
+เป็น PASS เมื่อไหร่ก็ตาม) · ห้ามอ้างว่ารู้พฤติกรรม client รวมโดยไม่มี client image/capture ยืนยัน ·
+🔴 **CHARTER-02 §⑥**: ถ้าคำตอบชั้น wire/DB สรุปว่าต้องผูกสัญญาณปิด UI เข้ากับเฟรมที่ `runtime.py`/`app.py`
+ประกอบ **LANE-A ห้ามแตะไฟล์เหล่านั้นเอง** ให้เปิด CORE-REQUEST ขอ chief ต่อสายแทน
+
+### สัญญาผู้บริโภค
+ผู้เปิดใบเป็นผู้บริโภคผล (LANE-A) — มอบหมายโดย chief รอบ `iby4ui` ตามคำขอของกะ1-A ในใบต้นเรื่อง (ใบใหม่
+ไม่ใช่ส่วนขยายของ `GT-148`)
+
+### links
+`notes_to_chief/20260831_1036_GT106R2-RESULT-PASS-client-renders-the-destination-scene-mid-session-plus-two-new-findings.md` ·
+`notes_to_chief/20260831_1037_GT148-and-GT165-RESULT-stowaways-cleared-and-slave-market-island-has-life.md`
+
+## 🔬 RE-169 NPC-DIALOGUE-CLOSE-OPCODE-001 [🟡 **STATIC bounded-positive-with-caveats, unconfirmed on wire -- chief รอบ `2idy5w` (R262) 2026-08-31T12:0x+07:00, ผล: pf-static-re pass this round, see chief's own summary below (no separate letter -- opened and answered same round)**]: มีเฟรม/opcode ที่ characterize แล้วสำหรับสั่งปิดหน้าต่างบทสนทนา NPC (dialogue/conversation window) หรือไม่ -- ตามที่ `RE-168` เปิดค้างไว้ (ไม่พบในเขต world/population/travel ของ LANE-A) รอบนี้กวาดทั้ง repo กว้างขึ้น
+
+### ผลการค้นแบบ static (จาก `PF_PROTOCOL_REGISTRY.tsv` / `PF_FIELD_VALIDATION.tsv` / `PF_SERIALIZER_FIELDS.tsv` / `PF_RUNTIME_CLASSMAP.tsv` เท่านั้น -- ไม่มี client image)
+
+**สามผู้ต้องสงสัย ไม่มีตัวไหนยืนยันบน wire ได้เต็มที่:**
+
+1. **`NPCConversation`** (`PF_PROTOCOL_REGISTRY.tsv:111`, source=IMAGE, มี vtable/serializer/handler VA
+   จริง) -- มี 17 W-field/17 R-field จริง (`PF_FIELD_VALIDATION.tsv:220-221`) แต่สถานะ `A2_STATIC_OPEN`
+   (characterize ไว้แค่ตัวแปร "เปิด") field walk พบ `mode_arg` byte เป็นตัวสลับทิศทาง R/W ภายใน serializer
+   เท่านั้น (`PF_SERIALIZER_FIELDS.tsv:1569-1590`) ไม่มีฟิลด์ไหนแปลว่า "ปิด" -- ไม่มีตัวแปร "ปิด" ของ
+   message นี้ลงทะเบียนแยกไว้เลย
+2. **`OpenCloseUI`** (`PF_PROTOCOL_REGISTRY.tsv:54`, IMAGE layer, มี vtable/serializer/handler VA จริง,
+   serializer ไม่ว่างจริงตามเกต G4 -- สองสตริง + ตัวเลข tag `0x05`/`0x14`/`0x32` ที่ `+0x30`/`+0x34`/`+0x58`,
+   `PF_SERIALIZER_FIELDS.tsv:865-874`) แต่ **`NOT_OBSERVED`** ใน capture layer (`PF_FIELD_VALIDATION.tsv:106-107`)
+   -- ไม่เคยปรากฏใน capture ไหนเลย ชื่อกว้าง ("UI" ไม่เจาะจง "dialogue/NPC/conversation") ไม่มีฟิลด์ไหน
+   ระบุ UI-id ของหน้าต่างเป้าหมาย
+3. **`WindowClosedPayloadMsg` / `WindowCloseResponseMsg` / `WindowCloseRequestMsg`**
+   (`PF_RUNTIME_CLASSMAP.tsv:412,649,655,3534,3771,3777` -- RTTI type-descriptor name string จาก
+   crash-dump สองก้อน, ชื่อคลาสเต็ม `.?AVWindowClosedPayloadMsg@UIAutomationCoreProto@@`) ชื่อใกล้เคียงที่สุด
+   ในทั้ง repo แต่ **ไม่มี opcode ผูกอยู่เลย** (grep `PF_PROTOCOL_REGISTRY.tsv` = 0 ผลลัพธ์) -- อยู่ใต้
+   namespace `UIAutomationCoreProto` ซึ่งดูเหมือน Windows UI-automation/accessibility ทั่วไป ไม่ใช่ระบบ
+   dialogue เฉพาะของเกมแน่นอน และไม่มี vtable/handler ให้ยืนยันว่าเดินสายกับ network dispatch จริงหรือไม่
+
+### จุดที่ยังไม่แน่ชัด
+
+ทั้งสามผู้ต้องสงสัยต้องการ `GameClient.local.bin`/disassembly เพื่อไปต่อ:
+`OpenCloseUI` ต้องหา handler ว่า dispatch ตาม UI-id enum อะไร (ค่าไหนคือ NPC dialogue),
+`WindowClose*` ต้องหาว่า vtable ไปถึง network message table จริงหรือเป็นโค้ด UI-automation ที่ตายแล้ว
+
+### pass criteria -- สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ใบนี้ปิดได้ตามนี้):** ตอบแล้วในรอบนี้ -- สาม candidate พร้อม provenance ตามด้านบน,
+ไม่มีตัวไหนยืนยันบน wire ได้ 100%
+
+**ชั้น client-observable (ต้อง STATIC-ON-BRIDGE หรือ attended):** ต้องมีคนเปิด `GameClient.local.bin`
+ตรวจ handler ของ `OpenCloseUI` และ vtable ของ `WindowClose*` สามชื่อ -- เข้าคิว `GAME_TEST_QUEUE.md`
+หมวด STATIC-ON-BRIDGE ตามกติกาหัวข้อ 1 (cloud ทำต่อไม่ได้ ไม่มี image)
+
+### ข้อห้าม
+
+ห้ามต่อ production call site (`runtime.py`) ด้วย `OpenCloseUI` หรือ `WindowClose*` จนกว่าจะยืนยัน handler/
+vtable จาก image จริง -- ทั้งสามยัง `NOT_OBSERVED`/`UNBOUND` เหมือน `RE-125`'s `0x4543` (บทเรียนเดียวกัน:
+ชื่อที่ดูใช่ไม่แปลว่า opcode ที่ยืนยันแล้ว)
+
+### สัญญาผู้บริโภค
+
+เปิดโดย chief แทน LANE-A ตามที่ `RE-168` เสนอ (คำถามกว้างกว่าโดเมน world/population/travel) -- LANE-A
+บริโภคต่อเมื่อจะผูก `OpenCloseUI`/`WindowClose*` เข้ากับจุดเสียบ `runtime.py:5082` จริง (ต้องรอ
+STATIC-ON-BRIDGE ก่อน)
+
+### links
+
+`notes_to_chief/20260831_1142_RE-168-RESULT-no-dialogue-close-signal-exists-server-is-stateful-enough-to-add-one.md`

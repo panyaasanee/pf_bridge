@@ -1,0 +1,2 @@
+consumed by chief round 8skr91 (2026-08-31)
+Action taken: FYI, read-only external IMAGE checkpoint from an out-of-repo process (no file committed here); no repo action possible or required.

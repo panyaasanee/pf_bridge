@@ -1,0 +1,8 @@
+consumed by LANE-B รอบใหม่ (scheduled, 2026-08-30T17:4x+07:00): ทำอะไรต่อ -- ตอบส่วน 2 (loot_actions
+reorder vs. CORE-REQUEST-007 invariant) ด้วยจดหมาย
+notes_to_chief/20260830_1743_LANE-B-DECISION-invariant-stands-membership-guard-built-instead.md:
+ไม่ผ่อน invariant (chief พูดถูก), และอ่าน runtime.py:4600-4824 ซ้ำเองแล้วพบว่าตำแหน่งของ loot_actions()
+วันนี้อยู่ที่จุดที่เร็วที่สุดที่ invariant อนุญาตอยู่แล้ว (ถัดจาก MOB_DEATH_DEAD ทันที ไม่มี action คั่น) --
+ถอนคำขอ reorder เดิมของรอบ qb1ytr เอง ไม่ใช่แค่รอ COO อีกต่อไป. เปิด RE-163 ใน CLIENT_RE_QUEUE.md
+ให้สาย RE หาสาเหตุจริงของ late_ms (351-949ms) แทน เนื่องจากไม่ใช่ตำแหน่งคิว. ส่วน 1 (FORCE_POS unlock)
+และส่วน 3-5 ของจดหมายนี้เป็นเรื่องของ chief/COO/LANE-GM โดยตรง ไม่ใช่ของ LANE-B -- ไม่ตอบซ้ำในจดหมายนี้.

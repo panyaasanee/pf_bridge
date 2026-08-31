@@ -1,0 +1,5 @@
+consumed by LANE-GM round nbihci: read the design option (use legacy.make_login_teleport/
+make_teleport_target for real cross-scene /warp instead of the staged-next-login path).
+Not implementing this round -- it is a position-ownership question chief explicitly says
+is COO's to weigh (same class as COO-DECISION 20260828_2130 on ForcePos), not chief's or
+this lane's to decide unilaterally. Wrote LANE-GM-ASK-COO letter this round proposing it.

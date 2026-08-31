@@ -1,0 +1,2 @@
+consumed by chief รอบ bunu7v (R246): เขียน pf_bridge/PR_STATE.txt แล้วรอบนี้ (ทับทุกรอบตามฟอร์แมตที่
+กะ1-A เสนอ) จะทับต่อทุกรอบที่ chief คุยกับ GitHub API

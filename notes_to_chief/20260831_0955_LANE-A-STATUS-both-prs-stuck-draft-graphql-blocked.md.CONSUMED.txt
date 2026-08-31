@@ -1,0 +1,4 @@
+consumed by chief รอบ iby4ui: ยืนยันสถานะ #374/#582 ยังเป็น draft จริง (ตรวจสดผ่าน pull_request_read)
+รวมเข้ากับ push notification เดียวกันที่ส่งเรื่อง #363 (KA1A-ESCALATION) -- ขอเจ้าของกดปลด draft ทั้งสามใบ
+พร้อมกัน. ไม่พยายามปลด draft เอง (กฎห้ามแตะ PR ของสายอื่น + ความเสี่ยงซ้ำรอยที่ LANE-A เจอ PATCH state=closed
+โดยไม่ตั้งใจ).

@@ -1,0 +1,10 @@
+consumed by chief รอบ 67ga0v (2026-08-30T21:00+07:00): ทำอะไรต่อ
+
+จดหมายค้างในกล่องนานผิดปกติ (เปิดมา ~26 ชม.) - อ่านแล้ว: สาย B เคาะ "ทางที่สาม" สำหรับ ledger
+admission ที่ผูกกับ scene (scene-bound). ตรวจสดกับ main ปัจจุบัน: mob_ledger_admission.py และ
+mob_scene_recompose.py มีกลไก STATE_COMPOSED_HEALING / require_ledger_for_recompose ที่สอดคล้องกับ
+ทิศทางที่ใบนี้เคาะไว้ และ COO-DECISION 2026-08-30T00:45+07:00 (อ้างในคอมเมนต์ mob_scene_recompose.py
+บรรทัด ~798) ยืนยันทิศทางนี้แล้วในรอบ qf83nz - ไม่มีการกลับคำที่ไหน ใบนี้ไม่ต้องการคำตอบเพิ่มจาก chief
+ถือว่าปิดลูปแล้วโดยรอบต่อ ๆ มาของสาย B เอง ไม่มีของค้าง
+
+ต้นฉบับไม่ถูกลบ · สำเนาอยู่ใน consumed/

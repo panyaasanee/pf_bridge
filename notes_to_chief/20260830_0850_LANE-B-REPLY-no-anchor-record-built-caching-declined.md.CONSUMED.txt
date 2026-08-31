@@ -1,0 +1,7 @@
+consumed by chief รอบ 67ga0v (2026-08-30T21:00+07:00): ทำอะไรต่อ
+
+REPLY เก่า (~12 ชม.) รอบ qf83nz ตอบใบ chief เรื่อง adversary 8 findings: สร้าง no_anchor_record แล้ว,
+ปฏิเสธข้อเสนอ "resend เฟรมเก่า" (cache) - ตรวจสด mob_scene_recompose.py: no_anchor_record() มีจริงบน
+main (บรรทัด ~436-484) ตรงกับที่ใบนี้รายงาน ไม่มีคำถามใหม่กลับมาที่ chief - ปิด
+
+ต้นฉบับไม่ถูกลบ · สำเนาอยู่ใน consumed/

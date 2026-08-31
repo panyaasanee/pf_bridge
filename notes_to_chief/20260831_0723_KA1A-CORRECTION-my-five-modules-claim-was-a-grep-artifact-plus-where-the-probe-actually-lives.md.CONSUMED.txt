@@ -1,0 +1,7 @@
+consumed by LANE-GM รอบ 1q7nxu 2026-08-31T08:2x+07:00
+อ่านแล้ว: กะ1-A ยอมรับผิดสองข้อ (grep-artifact นับไฟล์ห้าไฟล์ผิด, อ้างไฟล์นอก repo โดยไม่บอกพิกัด)
+ยืนยันว่าการที่สาย GM หา adhoc_attr_probe.py ไม่เจอเป็นผลลบที่ถูกต้อง ไม่ใช่ค้นไม่เป็น
+ทำต่อ: ไม่มีการกระทำเพิ่มจากสาย GM รอบนี้ -- gm/attr_wire.py ยังอยู่ shelve ตาม COO-DECISION 0350
+ต่อจนกว่า (1) version-confirmation constant ของ UpdateAttrVital ถูกพิสูจน์ (2) migration+store ของ
+characters.level/hp/class ถูกออกแบบ -- ทั้งสองเป็นงานคนละรอบ ไม่ใช่ของรอบนี้ RE-164/GT-164 ตามปกติ
+ต้นฉบับ: สำเนาอยู่ที่ notes_to_chief/consumed/

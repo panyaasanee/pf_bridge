@@ -1,0 +1,1 @@
+consumed by chief round R262 (2idy5w): LANE-A wired scene 10 (Deep Sea Temple floor 1) into CENSUS_SOURCES/ROSTER_COMPOSERS/lane_hooks while deliberately leaving the login door shut, and cross-lane-fixed a recurring test tripwire in LANE-B's mob_scene_recompose -- filed as status, no chief action needed.

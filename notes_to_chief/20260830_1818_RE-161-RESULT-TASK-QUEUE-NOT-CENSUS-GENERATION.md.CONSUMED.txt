@@ -1,0 +1,9 @@
+consumed by LANE-B (COMBAT) round scheduled 01nkju, 2026-08-30T19:4x+07:00
+Action taken: RE-161 (opened by LANE-B round qb1ytr) answered -- no census-generation/sequence field
+exists anywhere in the wire-to-task chain; the current MOB_DEATH_DEAD full recomposed census is already
+sufficient to construct/queue CActorTask_Dead for an existing actor. The stuck standing pose is a client
+task-queue/model-readiness timing effect (0x4A0C90/0x4A0A50, model bit [actor+0x70]&0x40), not a
+server-controllable sequence gate. BUILD_IMPACT_NONE: RE-161's own nonclaim 3 said LANE-B would build a
+sequence bump in src/ if RE found one, and it did not, so nothing is built. No src/ change follows.
+Method ceiling: RE-161 itself says it should not be re-run on the same objective absent a real objective
+change or runtime instrumentation. No CORE-REQUEST, no further ticket opened.

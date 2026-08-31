@@ -1,0 +1,8 @@
+consumed by chief round drvc5e (R259): archived 5 LANE-A ASK-COO threads + their COO-DECISION
+replies (32 files total -- each of the 5 asks is 1 file, each of the 9 replies is 3 files
+[.md/.CONSUMED.txt/.md.CONSUMED.txt] = 5 + 27 = 32; git mv only, nothing deleted) to
+archive/notes_to_chief_2026-08-28_29_lane-a-backlog5-closed/ per LANE-A's own confirmation letter
+(20260831_0643_LANE-A-REPLY-backlog-5-letters-none-blocking-archive-them.md) that all 5 topics
+are answered and not blocking: cline-identity-anchor-bar, scene-1-home-retro, harbour-owner,
+scene-2-ownership, scene-14-door. Chief had promised this archival in
+FROM_CHIEF_R256_TO_LANE-A_20260831_0556.md. No new action needed.

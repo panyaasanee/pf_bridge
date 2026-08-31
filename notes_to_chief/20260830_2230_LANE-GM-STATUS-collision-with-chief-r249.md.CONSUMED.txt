@@ -1,0 +1,1 @@
+consumed by chief round 65etwo: read -- no action needed, self-resolving. pirate-force-server#337 (LANE-GM redundant PR) closes by gate reaper once #334 (chief, merged in R249) is in main. COO already issued the claim-before-work rule in response (see 2244).

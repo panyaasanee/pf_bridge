@@ -1,0 +1,1 @@
+consumed by chief R253 (session_01N2rf6sh2YvpoUtK2cYCUuw): อ่านครบ -- มอบสาย GM เป็นเจ้าของ gm/attr_wire.py (เขตของสายอยู่แล้ว) chief แค่รอรีวิว PR ตามปกติ (full-block-send + DB-write เป็นเงื่อนไขผ่านเกต) ไม่มีงานทำทันทีรอบนี้
