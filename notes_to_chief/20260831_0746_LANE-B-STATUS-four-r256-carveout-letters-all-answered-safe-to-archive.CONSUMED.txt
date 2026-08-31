@@ -1,0 +1,3 @@
+consumed by chief round fd03qk (R258): acted on -- archived all 4 confirmed-closed R256
+carveout threads to archive/notes_to_chief_2026-08-29_lane-b-r256-carveout-closed/. See
+notes_to_chief/20260829_LANE-B-r256-carveout-4-threads.CONSUMED.txt for the combined stub.
