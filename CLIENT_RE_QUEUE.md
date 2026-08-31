@@ -3342,3 +3342,63 @@ RE runner (`20260901_0303_RE-173-RESULT-CLINE2-SET36-IS-MOBS360.md`): placement 
 Reel guard, n_id 230, หลุดผ่านไปด้วย) `world_m2_columbus_trigger_readiness` รายงาน home scene 2 เป็น
 `PLACED` แล้ว (8/8 เกาะ) RE-173 **ไม่ได้** audit อีก 96 placement ที่เหลือของ Bg0002 ว่าใช้กติกาเดียวกัน
 (Mob-Set number = MOBS n_ID ตรง ๆ) ถูกจริงหรือไม่ - นั่นยังเป็นคำถามเปิดสำหรับรอบ/ใบในอนาคตถ้าจำเป็น
+
+## 🔬 RE-188 PRISON-EXILE-BULLETIN-BOARD-CROSSWALK-CONTRADICTION-001 [STATIC-ON-BRIDGE]: RE-173's own method, applied to the other 96 `Bg0002` placements, resolves four Mob-Set numbers to CLINE leaders that CONTRADICT the placement's current name/outfit instead of confirming it (one resolves to a bulletin board, not an NPC at all) - which table is wrong, or is the method itself not safe to generalize?  [🔵 **OPEN — opened by LANE-A round this-round, 2026-09-01**]
+
+### สิ่งที่รู้แล้ว (LANE-A รอบนี้, static, ไม่มี client)
+
+- RE-173's method (`scene 2` มี `CONSTDATA_TH__SCENE_NAME.tsv` แถว `n_ID=2` ระบุ `n_CLINE_TYPE=2` ->
+  ทุก Mob-Set number `NN` ที่ placement ใช้ เป็น `n_CREATURE_TYPE` key เข้า `CONSTDATA_TH__CLINE.tsv`
+  ที่ `n_CLINE_TYPE=2` -> `n_LEADER_BK1` คือ MOBS n_ID จริง) ใช้ซ้ำกับทั้ง 96 Mob-Set number ที่เหลือใน
+  `scene2_prison_exile_tables.py::KNOWN_PLACEMENTS` (นอกเหนือจาก placement 63 ที่ RE-173 ปิดแล้ว)
+- ทั้ง 96 key มีแถวใน CLINE type-2 จริงทุกตัว (ไม่มีตัวไหน unresolved) - 92 ตัว resolve กลับไปเป็นเลข
+  เดิมของตัวเอง (`n_LEADER_BK1 == NN`, ไม่มี ambiguity - BK2/BK3/crew ทุกช่องเป็น 0 ทุกแถวที่ตรวจ) ตรงกับ
+  สมมติฐานเดิม (NN = MOBS n_ID ตรง ๆ) - ไม่ใช่หลักฐานใหม่ที่ยืนยัน แค่ไม่ขัดแย้ง
+- **4 key ไม่ resolve กลับไปเป็นเลขเดิม** - รูปแบบเดียวกับที่ RE-173 เจอในแถว 63 ทุกประการ (ไม่มี
+  ambiguity, BK2/BK3/crew เป็น 0):
+  - placement 64 (Mob-Set **38** "Reyna" นักการค้าเครื่องเทศ, outfit `P_FEMALE_001_001_RENA`) ->
+    `CONSTDATA_TH__CLINE.tsv:352` key `(2,38)` `n_LEADER_BK1=`**`231`**
+  - placement 67 (Mob-Set **39** "Mo Yuzi" สำนักงานสื่อสารทหารเรือ, outfit `M015_000_000_SP2`) ->
+    `CLINE.tsv:353` key `(2,39)` `n_LEADER_BK1=`**`742`**
+  - placement 68 (Mob-Set **40** "Carle" หัวหน้าเรือดำน้ำ, outfit `P_MALE_001_001_KARL`) ->
+    `CLINE.tsv:354` key `(2,40)` `n_LEADER_BK1=`**`743`**
+  - placement 91 (Mob-Set **41** "Martin" ผู้บัญชาการ, outfit `P_MALE_010_000_MARTIN`) ->
+    `CLINE.tsv:357` key `(2,41)` `n_LEADER_BK1=`**`914`**
+- **ต่างจาก RE-173 ตรงนี้:** ทั้งสี่ MOBS ID ที่ resolve ไปไม่ตรงกันเลยกับ MOBS ID เดิม ไม่ใช่แค่เลขต่าง
+  แต่ตัวตนต่างจริง - `CONSTDATA_TH__MOBS.tsv` แถว 231 คือ "海軍公佈欄" (Navy Bulletin Board),
+  outfit `BULLETIN_BOARD` - **ไม่ใช่คน** ส่วนแถว 742/743/914 เป็นชื่อ/outfit คนละตัวกับ Mo Yuzi/Carle/
+  Martin โดยสิ้นเชิง (742 "奧德賽" outfit `M009_000_000_N`, 743 "籠裡的死囚犯" outfit
+  `M001_000_003_SP1`, 914 "維特" outfit `P_MALE_002_000_PAK`) - RE-173's Columbus match มีทั้งชื่อและ
+  outfit ตรงกันทุกตัวอักษรระหว่าง 36/360 เป็นหลักฐานสนับสนุนแยกต่างหาก กรณีนี้ไม่มีเลย มีแต่หลักฐานขัดแย้ง
+
+### pass criteria
+
+1. อธิบายว่าทำไม key `(2,38)/(2,39)/(2,40)/(2,41)` ใน CLINE type-2 ไม่ได้หมายถึง identity ของ
+   placement 64/67/68/91 - เช่น CLINE type 2 มีมากกว่าหนึ่งความหมาย (spawn-group ผสม vs identity)
+   และ scene 2 ใช้ทั้งสองแบบปนกัน หรือ Mob-Set number namespace ของ placements TSV กับ
+   `n_CREATURE_TYPE` ของ CLINE ชนกันโดยบังเอิญสำหรับสี่เลขนี้ - ถ้าอธิบายได้และมีหลักฐานรองรับ:
+   ปิดใบแบบ CONFIRMED-NO-CHANGE, ไม่ต้องแก้ table
+2. หรือถ้าหาหลักฐานเพิ่มเติมที่สนับสนุนว่า 231/742/743/914 คือของจริงของสี่ placement นี้ (เช่น
+   quest/dialogue reference, หรือ evidence_screens ที่มีอยู่) ให้ระบุ - LANE-A แก้ตาม BUILD_IMPACT
+3. ถ้าหาคำอธิบายไม่ได้ (fail-closed): รายงานผลลบ - ปิดใบแบบ bounded-negative, table คงเดิม
+   (Mob-Set number ตรง ๆ) ตามที่วัดได้ในรอบนี้ ไม่ใช่การเดา
+
+### ข้อห้าม
+
+ห้ามแก้ placement 64/67/68/91 เป็น MOBS 231/742/743/914 โดยไม่มีหลักฐานสนับสนุนนอกเหนือจาก CLINE
+crosswalk เฉย ๆ - ในเคสนี้ crosswalk ขัดแย้งกับชื่อ/outfit ที่มีอยู่แล้ว ไม่ใช่ยืนยันเหมือน RE-173
+(หลักการคือวินัยหลักฐานสองชั้นของโปรเจกต์ - `G1`-`G8`/`G-OBS`/CHARTER-01 - ไม่ใช่กฎเฉพาะที่ CHARTER-02
+เขียนไว้ตรง ๆ ตรวจ CHARTER-02 ฉบับจริงแล้วไม่มีประโยคนี้ · `RE-170` เป็นใบพี่น้องที่ยัง **OPEN** ไม่ใช่
+ตัวอย่างที่ปิดแล้ว - อ้างเป็นเคสรูปแบบเดียวกันที่กำลังตรวจอยู่คู่กัน ไม่ใช่บทเรียนที่จบแล้ว)
+
+### สัญญาผู้บริโภค
+
+เปิดโดย LANE-A (ผู้พบ, รอบนี้) - LANE-A บริโภคผลเอง (แก้ไฟล์ที่ดูแลเอง ถ้าผลชี้ชัด หรือปิดใบแบบ
+bounded-negative ถ้าไม่มีคำอธิบายให้ตาม)
+
+### links
+
+`pirate-force-server/src/pirateforce_foundation/scene2_prison_exile_tables.py` (docstring ส่วน
+"RE-188 AUDIT", `KNOWN_PLACEMENTS` แถว 64/67/68/91) · `gamedata/tables/CONSTDATA_TH__CLINE.tsv`
+(บรรทัด 352-354, 357) · `gamedata/tables/CONSTDATA_TH__MOBS.tsv` (n_ID 38/39/40/41 และ 231/742/743/914)
+· `RE-173` (ใบพี่น้อง, ปิดแล้ว, วิธีเดียวกัน)
