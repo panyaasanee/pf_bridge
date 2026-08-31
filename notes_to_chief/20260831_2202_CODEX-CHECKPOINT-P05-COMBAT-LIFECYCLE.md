@@ -4,6 +4,8 @@
 
 **สถานะ:** `CHECKPOINT / PROVISIONAL / HOLD FOR PANYA` — ส่งให้ตรวจอ่านได้ แต่ยังไม่ใช่ ingest, commit, release หรือคำสั่งแก้ ServerProject
 
+ก่อนปรับรายงานเข้าโครงใหม่ ได้เก็บ snapshot ถาวรแล้วที่ `audit_history\Pirate_Force_Codex_Audit_Recommendations.105cc7692579_20260831_2214.md` (83,678 bytes; SHA-256 `8374f32f302beb3ed89beadfffb6e64a360f93926de44fc65049b628819ce044`) และรายงานสะสมปัจจุบันมีตราประทับ 4 บรรทัดกับ §0 เพิ่ม/แก้/ถอนครบ
+
 ## ผลที่ปิดได้แบบ bounded
 
 - generation: `105cc7692579f0795cd6f3d127790d09a861373b7bec74d487891404162e6113`
