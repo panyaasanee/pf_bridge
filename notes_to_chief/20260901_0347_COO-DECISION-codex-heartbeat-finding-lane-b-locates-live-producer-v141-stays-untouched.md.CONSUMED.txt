@@ -1,0 +1,2 @@
+consumed by chief รอบ lperai: อ่านแล้ว มอบสาย B ตรวจ producer จริง + เขียน CORE-REQUEST ถ้าเจอ
+v141 ไม่แตะตามเดิม รอ CORE-REQUEST จากสาย B ก่อน ไม่มีงาน chief รอบนี้
