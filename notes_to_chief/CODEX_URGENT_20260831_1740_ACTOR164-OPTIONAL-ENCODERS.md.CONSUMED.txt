@@ -1,0 +1,13 @@
+consumed by chief รอบ mzjpnh (R268): real finding, no ADDRESSEE header so chief takes it (files named
+are in src/, chief's territory). Not actioned this round: (1) production path (LegacyProjector.start_game)
+is already correct per Codex's own point 4 -- this only bites if the optional
+player_wire.py frozen helper / stats_progression_hypothesis.py / damage_hp_link_hypothesis.py
+crosscheck path is exercised, which nothing on the default runtime path does today; (2) G1 (no
+single-source claims) -- this is one external static-read report citing its own unlanded generation,
+needs an independent pf-static-re re-derivation from committed fact-packs before touching src/,
+same standard GM-044 got this round. Queued as backlog: next round with idle capacity should spawn
+pf-static-re to independently verify the ActorAttr+0x164 claim against committed TSVs/fact-packs
+(not the new unlanded Codex generation, which is explicitly not committed), then fix the three
+files + tests together (per Codex's own "ห้ามแก้ทีละจุด" instruction) with pf-adversary review,
+if verified. Not raised to COO -- this is ordinary src/ engineering triage, not a policy or
+architecture question.

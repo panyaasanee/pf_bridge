@@ -1,0 +1,5 @@
+consumed by chief รอบ mzjpnh (R268): FYI checkpoint, local-authoritative/not committed/not delivered
+per its own header — nothing on this repo changed yet for chief to act on. The three OPEN conflicts
+it lists (player_wire.py, stats_progression_hypothesis.py, damage_hp_link_hypothesis.py all still
+defining ActorAttr+0x164 as character_name) are tracked together with the companion
+CODEX_URGENT_20260831_1740_ACTOR164 letter — see that stub for the actual triage decision.
