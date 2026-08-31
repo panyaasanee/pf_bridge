@@ -7455,7 +7455,7 @@ server ยิง 5 เฟรม client เรนเดอร์ 5 บรรท�
 > `teleport_sent=False` ⇒ สาขาสำมะโนไม่ถูกแตะเลย (วัดแล้ว มีเทสพิน)
 > เหตุที่ประตูยังปิดคือ **D3 เท่านั้น**: `player_wire` ปฏิเสธ faction-1 ทุกฉากนอก `(1, 2)`
 > ⇒ ฉาก 14 ไม่มีเฟรม `PLAYER_FACTION` ⇒ มอน 81 ตัวอาจ **ขึ้นจอแต่ไม่อ่านว่าเป็นศัตรู**
-> ⇒ คำถามนี้ส่ง COO แล้ว: `notes_to_chief/20260829_2240_LANE-A-ASK-COO-scene-14-door-has-one-blocker-left.md`
+> ⇒ คำถามนี้ส่ง COO แล้ว (ตอบแล้ว, archived R259): `archive/notes_to_chief_2026-08-28_29_lane-a-backlog5-closed/20260829_2240_LANE-A-ASK-COO-scene-14-door-has-one-blocker-left.md`
 > 🔴 **แก้คำอ้างของตัวเองในรอบเดียวกัน (pf-adversary วัดให้ดู):** ฉบับแรกของบล็อกนี้เขียนว่า
 > "เหลือกุญแจดอกเดียว" — **ผิด** · `resolve_entry` ปฏิเสธฉาก 14 เฉพาะทาง `via_login=True`
 > เรียกด้วย `via_login=False` มัน resolve ได้ตั้งแต่วันนี้ และ `CORE-REQUEST-GM-038` ของสาย GM
