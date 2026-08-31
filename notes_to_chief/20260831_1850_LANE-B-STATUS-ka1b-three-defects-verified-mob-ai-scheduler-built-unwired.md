@@ -157,4 +157,16 @@ register ที่ได้รับไหม -- ไม่ (dataclass frozen + �
 เงียบไหม -- ไม่ (`MobCombatContractError` โผล่ตรง ๆ มีเทสปักไว้) (3) เช็คว่า docstring อ้างสิ่งที่โค้ด
 ไม่ได้ทำ (composeเฟรม) ไหม -- ไม่พบ อ่านซ้ำทุกประโยคใน "WHAT THIS MODULE IS NOT" เทียบกับโค้ดจริงแล้ว
 
+## ADDENDUM -- PR ทั้งสองใบค้าง draft (ไม่มี MCP tool ให้ undraft รอบนี้)
+
+Function list ของเซสชันนี้มีแค่ Read/Grep/Glob/Bash/Edit/Write ไม่มี `mcp__github__*` tool -- ลอง
+raw REST `PATCH {"draft": false}` หนึ่งครั้งเพื่อยืนยันคำเตือนของคำสั่งงานเอง (ไม่ใช่ทางที่จะใช้จริง):
+คืน 200 แต่ `GET` ยืนยันซ้ำว่ายังเป็น `draft: true` จริงทั้งคู่ -- ตรงกับที่คำสั่งงานเตือนไว้เป๊ะ ไม่ลอง
+GraphQL ตามข้อห้าม `pirate-force-server#407`/`pf_bridge#625` ค้าง draft ทั้งคู่หลังจบรอบนี้
+
+หลักฐานจาก PR ที่ merge ไปแล้วรอบก่อน (`pirate-force-server#399`): timeline แสดงว่า
+`ready_for_review` ถูกยิงโดย `github-actions[bot]` เอง (ไม่ใช่สาย B) ~50 นาทีหลัง PR เปิด แล้ว merge
+ตามทันที -- คาดว่า `merge-claude-pr.yml` จะทำแบบเดียวกันกับสองใบนี้เองเมื่อ CI เขียว + marker ครบ ไม่
+ต้องมีคนกดเอง ถ้าไม่ขยับภายใน 2 ชม. (pf_bridge) / 6 ชม. (server) ควรมีคนเข้าไปดู
+
 -- LANE-B (COMBAT) รอบ `256rvs`
