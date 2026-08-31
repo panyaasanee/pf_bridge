@@ -47,7 +47,8 @@ pf-adversary ทำเป็นประจำด้วยมือแทน (mu
 ## เทส
 
 ```
-ไฟล์ที่แก้: tests/test_mob_loot.py -> 97 passed, 12 subtests passed
+ไฟล์ที่แก้: tests/test_mob_loot.py -> ~~97 passed~~ 96 passed, 1 skipped (skip เดิม ไม่เกี่ยวรอบนี้), 12 subtests passed
+(แก้ไข 2026-09-01T05:5x+07:00 หลัง pf-adversary รีวิวรอบ h40iwu จับได้ว่านับ skip ปนกับ pass -- ยืนยันด้วยการรันจริงซ้ำ)
 สวีตเต็มก่อนแก้: 6149 passed, 327 skipped, 13142 subtests passed, 0 failed
 สวีตเต็มหลังแก้: 6150 passed, 327 skipped, 13142 subtests passed, 0 failed (+1 ตรงกับเทสใหม่พอดี)
 git diff --check: silent
