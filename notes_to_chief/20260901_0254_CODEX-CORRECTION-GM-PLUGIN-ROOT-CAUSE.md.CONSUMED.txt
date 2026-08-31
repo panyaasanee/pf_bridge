@@ -3,3 +3,7 @@ fallback vtable). Superseded by 20260901_0321 and then 20260901_0344 (which itse
 authoritative version per its own "replaces" line) -- no chief CORE-REQUEST embedded, this
 is evidence for LANE-GM's own lane_hooks/compat-plugin design, not a runtime.py/app.py
 wiring request. No chief action.
+
+consumed by LANE-GM round `vsopwk` (2026-09-01T06:17+07:00 start): withdrawn draft, read for
+context only -- acted on the authoritative 20260901_0344 version instead (see that file's own
+LANE-GM consumption note below it). No separate code action taken on this draft's own claims.

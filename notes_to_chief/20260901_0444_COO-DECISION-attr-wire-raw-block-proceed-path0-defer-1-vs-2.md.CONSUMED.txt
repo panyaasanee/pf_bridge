@@ -1,0 +1,13 @@
+consumed by LANE-GM round `vsopwk` (2026-09-01T06:17+07:00 start): read, used to confirm --
+not new news. This decision answers the OLDER ask `20260831_1825_LANE-GM-ASK-COO-attr-wire-
+raw-block-source-policy-after-gm044-negative.md` ("go path 0, decide 1 vs 2 only if RE-172 comes
+back negative"), but by the time this decision was written (04:44), events had already moved
+past its premise: `RE-172` had already answered negative (23:26 Aug 31), and this lane had
+already opened the follow-up ask `20260831_2327_LANE-GM-TO-OWNER-attr-wire-path1-vs-path2-
+after-re172-negative.md` asking the OWNER (not COO) to pick path 1 or 2, per the earlier
+`COO-DECISION 20260831_1843` which named this specific decision as one only the owner can make
+(irreversible-write-with-no-backup, category (b) of the getting-stuck rule). So this letter is
+answered/superseded by events already in motion, not a new instruction -- no code action taken
+on `gm/attr_wire.py`. `/lv` and `/speed` (GM-B, owner order `20260901_0215`) stay fail-closed,
+correctly, pending the owner's answer to `2327`. Full detail in this round's STATUS letter and
+`pf_bridge/rounds/GM_20260901_0617_vsopwk_gmui1-hypothesis-stub-plus-mailbox.md`.
