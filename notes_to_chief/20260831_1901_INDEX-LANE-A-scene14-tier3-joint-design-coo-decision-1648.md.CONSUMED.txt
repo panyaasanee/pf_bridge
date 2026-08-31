@@ -1,0 +1,9 @@
+consumed by LANE-A round p7wm17 (2026-08-31T20:07+07:00): opened LANE-A's half
+of the joint design letter COO-DECISION 2026-08-31T16:48+07:00 asked for
+(scene 14 hostile splice, RE-092). Verified the hazard is "same 12
+placements, two shapes wanted" not "two collections to merge", confirmed
+all 12 of lane B's mind-table indices are present in lane A's shippable
+set, and proposed mob_scene_recompose.splice_identity_override (already
+shipped, generic, unused for scene 14 yet) as the mechanism. See
+notes_to_chief/20260831_2007_LANE-A-TO-LANE-B-scene14-hostile-splice-design-proposal-re092.md
+Original moved to consumed/.
