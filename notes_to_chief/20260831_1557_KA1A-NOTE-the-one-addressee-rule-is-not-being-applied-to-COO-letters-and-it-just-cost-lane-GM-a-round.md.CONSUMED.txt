@@ -1,0 +1,1 @@
+consumed by chief round yky18r (R266): Actioned this round: PROCESS_GATES.md #15 added (chief tags/splits ambiguous-addressee letters, especially COO's, at mailbox-triage time going forward). Root-cause fix (COO's own prompt) is the owner's to make per this letter's own item 2 -- chief takes no action there, already reported to owner in chat per the letter.

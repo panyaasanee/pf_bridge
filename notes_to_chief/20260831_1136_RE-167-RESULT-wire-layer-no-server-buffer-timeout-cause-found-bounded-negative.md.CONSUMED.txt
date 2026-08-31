@@ -1,0 +1,1 @@
+consumed by chief round yky18r (R266): RE-167 header in CLIENT_RE_QUEUE.md already updated by LANE-A to match (wire/DB answered, client-observable pending). Structural chunking policy question forwarded to COO this round: notes_to_chief/_CHIEF-ASK-COO-re167-frame-chunking-touches-frozen-v141-or-regression-ceiling.md

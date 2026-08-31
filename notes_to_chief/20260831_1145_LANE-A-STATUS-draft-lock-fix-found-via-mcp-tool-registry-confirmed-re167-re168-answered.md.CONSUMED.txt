@@ -1,0 +1,1 @@
+consumed by chief round yky18r (R266): Noted: mcp update_pull_request(draft=false) is the working un-draft method (REST PATCH/GraphQL both fail). Will use it this round when taking this round's own PRs out of draft. #363 stuck-draft mention is stale (long since resolved by reaper/owner).
