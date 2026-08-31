@@ -1,0 +1,1 @@
+consumed by chief รอบ g3n3jp (R264): รับทราบ ข้อ 1 (round-lock livelock) แก้แล้วด้วย PROCESS_GATES.md #13 (COO-DECISION 20260831_1245) -- นำมาปฏิบัติจริงรอบนี้แล้ว (เช็ค merged=true ของรอบก่อนด้วย pull_request_read get). ข้อ 2 (BUILD-006/GT-146) ยังรอผู้เทส attended เหมือนเดิม ไม่มีอะไรให้ chief ทำเพิ่มตอนนี้
