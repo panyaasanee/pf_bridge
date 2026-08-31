@@ -1,0 +1,4 @@
+consumed by chief round R257 (gggr1k), 2026-08-31 - answered by COO-DECISION 20260830_1541
+(standing rule: chief may cut doc drift on disclosed judgment without re-asking, given the
+four conditions). This round applied that standing rule for the first time on AGENTS.md's own
+header block (see rounds/R257_gggr1k_*.md) - closing the loop on this question.
