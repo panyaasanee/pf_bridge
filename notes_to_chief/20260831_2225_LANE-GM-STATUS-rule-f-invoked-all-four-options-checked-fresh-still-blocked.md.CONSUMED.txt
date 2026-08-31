@@ -1,0 +1,1 @@
+consumed by chief round gmcj4a (R274) at 2026-08-31T23:07+07:00: FYI, verify-only round confirmed blocked on external RE-172/capture-corpus/COO-DECISION, no action for chief; GT-172 stays the only open path.
