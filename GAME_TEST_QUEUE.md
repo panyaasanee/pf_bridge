@@ -9134,3 +9134,55 @@ scene does not carry) · `GT-134` (scene 14, same shape)
 **หมายเหตุผู้เขียนใบนี้:** ควรเขียนผ่านเอเจนต์ `pf-queue-author` ตามกติกาของโปรเจกต์ แต่ในสภาพแวดล้อม
 รอบนี้ไม่มีเครื่องมือสำหรับ spawn subagent ชนิดนั้น จึงเขียนเองตามรูปแบบของใบ `GT-171`/`GT-165` ให้ใกล้เคียง
 ที่สุด -- ถ้ารูปแบบผิดจากมาตรฐานให้แก้ได้ตามที่ `pf-queue-author` เห็นสมควรในรอบถัดไป
+
+## 🆕 GT-174 SILVER-HARBOUR-FIRST-EYES-001 [attended, in-game]: ฉาก 8 (Bg0008, Silver Harbour) มีสิ่งมีชีวิตขึ้นจอจริงหรือไม่ -- ตาคู่แรกของโปรเจกต์ในฉากนี้  [READY]
+
+> เปิดโดย LANE-A (สาย A · WORLD) รอบ `p4wire`, 2026-08-31T18:xx+07:00 · `login_entry_allowed` ของฉาก 8
+> พลิกเป็น `true` รอบนี้ (`COO-DECISION 20260830_1441`, ประตูที่ห้าในคิวเดียวกับฉาก 4/5/6/10; composer
+> `world_population_bg0008.py`/`world_bg0008_identity.py` **สร้าง ผูก และเปิดประตูในรอบเดียวกัน** เหมือน
+> ฉาก 5/6 (รอบ `l03cgh`/`fx0007`) -- เหตุผลเดียวกัน: เทสทั่วไป (`tests/test_lane_a_scene_census.py::
+> ComposerContractTests`) สมมติไว้แล้วว่าทุกฉากที่ lane นี้ผูก census ให้ต้องเปิดด้วย เพราะฉาก 4/5/6/10/14
+> เปิดหมดแล้วตอนรอบนี้เริ่ม) -- ไม่ใช่สำเนาของ `GT-166` เพราะฉากนี้**ไม่มี**ความเสี่ยงแบบ `GT-166`: ทะเบียนเอง
+> ไม่ระบุฉากนี้ใน `table_row_differences.the_two_interiors` (ตรวจแล้ว ไม่ใช่สมมติ) -- รูปแบบเดียวกับ `GT-165`
+> (ฉาก 4) / `GT-171` (ฉาก 5) / `GT-173` (ฉาก 6)
+
+### objective (claim เดียว)
+ล็อกอินเข้าฉาก 8 จริงแล้ว **เห็นตัวละคร/มอนสเตอร์ยืนอยู่ในท่าเรือเงิน** (ไม่ใช่ท่าเรือว่างเปล่า) ใช่หรือไม่ --
+คำถามคือ "มีสิ่งมีชีวิตขึ้นจอไหม" ไม่ใช่ "มันโจมตีไหม": composer ของฉากนี้**ตั้งใจไม่ส่ง faction bit เลย** (ดู
+`world_population_bg0008.py` docstring -- เป็นคำตัดสินของสาย B ที่ยังไม่ทำ) จึงไม่มีความเสี่ยงแบบ `GT-134`
+ที่มอนไม่ก้าวร้าว -- นั่นเป็นพฤติกรรมที่คาดไว้ ไม่ใช่ FAIL ของใบนี้
+
+### ทางเข้า
+ไม่มี production path ใดเขียนแถว character ให้ชื่อฉาก 8 เอง (ดู `login_entry_allowed_because` ในทะเบียน) --
+เข้าได้เฉพาะ staged GM account (`config/gm_login_scene.json`, scene_id=8) หรือ GM `/warp 8`
+
+### สิ่งที่ยังไม่วัด (บันทึกไว้ล่วงหน้า ไม่ใช่คำทำนายว่าจะพัง)
+1. จุดเกิด `MARKER[8]` ยังเป็นชั้นหลักฐาน `authored` เท่านั้น -- ไม่เคยมีไคลเอนต์ยืนจริง แต่ห่างจาก placement
+   ที่ใกล้ที่สุดเพียง 8.8 หน่วยและอยู่**ภายใน**ขอบเขต placement (`table_row_differences.
+   marker_geometry_measured_not_enforced`) -- แน่นกว่าทุกประตูที่เปิดมาก่อนหน้านี้ -- ถ้าตกในหิน/หลุดพื้น
+   ให้บันทึกเป็นข้อมูลแยก ไม่ใช่ FAIL ของใบนี้ (คำถามของใบนี้คือมี actor ไหม ไม่ใช่พื้นดีไหม)
+2. ฉากนี้ไม่มี leader ที่ถูกตัดเพราะชื่อไม่ใช่ ASCII (ต่างจากฉาก 6) -- ตัวที่ถูกตัด 7 ตัวทั้งหมดเป็นเหตุผล
+   "ไม่มีแถว MOBS" หรือ "s_OUTFIT ว่าง" เท่านั้น (ดู `world_bg0008_identity.py` docstring) -- ไม่ใช่ FAIL
+   ของใบนี้เช่นกัน (composer ข้ามไปแล้วตั้งแต่ต้น ไม่ใช่สิ่งที่ผู้เทสจะเห็นหายไปกลางจอ)
+
+### pass criteria — สองชั้น
+**wire/DB (ปิดแล้วโดยเทส):** console line `WORLD_CENSUS_BG0008 assembled=69/76 ...` ปรากฏหลังล็อกอินเข้าฉาก 8
+-- pin ไว้แล้ว `tests/test_lane_a_scene_census.py::SilverHarbourRegistrationTests::
+test_the_real_registry_now_composes_and_that_is_the_round` และ `tests/test_world_population_bg0008.py`
+(เทสระดับ composer ตรง)
+**client-observable (ยังไม่มีใครยืนดู -- นี่คือสิ่งที่ใบนี้ต้องการ):** ผู้เทสเข้าฉาก 8 จริงแล้วรายงานว่าเห็น
+actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พอ ไม่ต้องนับให้ครบ 69)
+
+### สัญญาผู้บริโภค
+เปิดโดย LANE-A -- LANE-A บริโภคผลเอง ปิดหัวใบเมื่อผู้เทสยืนยันด้วยตา
+
+### links
+`scenarios/world_scene_registry_001.json` แถว `n_id: 8` (`login_entry_allowed_because`) ·
+`src/pirateforce_foundation/world_population_bg0008.py`, `world_bg0008_identity.py` ·
+`notes_to_chief/20260830_1441_COO-DECISION-scene4-slave-market-first-door.md` · `GT-165` (scene 4, same
+shape) · `GT-171` (scene 5, same shape) · `GT-173` (scene 6, same shape) · `GT-166` (scene 10, same shape
+plus the geometry risk this scene does not carry) · `GT-134` (scene 14, same shape)
+
+**หมายเหตุผู้เขียนใบนี้:** ควรเขียนผ่านเอเจนต์ `pf-queue-author` ตามกติกาของโปรเจกต์ แต่ในสภาพแวดล้อม
+รอบนี้ไม่มีเครื่องมือสำหรับ spawn subagent ชนิดนั้น จึงเขียนเองตามรูปแบบของใบ `GT-173`/`GT-171` ให้ใกล้เคียง
+ที่สุด -- ถ้ารูปแบบผิดจากมาตรฐานให้แก้ได้ตามที่ `pf-queue-author` เห็นสมควรในรอบถัดไป
