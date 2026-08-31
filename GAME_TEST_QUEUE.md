@@ -9012,3 +9012,74 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 `notes_to_chief/20260830_1441_COO-DECISION-scene4-slave-market-first-door.md` · `GT-165` (scene 4, same
 shape) · `GT-166` (scene 10, same shape plus the geometry risk this scene does not carry) · `GT-134`
 (scene 14, same shape)
+
+## 🆕 GT-172 GM-003 CHAT-WARP-CROSS-SCENE-LIVE-TELEPORT-001 [attended, in-game]: GM พิมพ์ `/warp <ฉากอื่น> x y` ในกล่องแชท -- จอเปลี่ยนไปฉากปลายทางจริงกลางเซสชันไหม (ไม่ต้อง relog)  [READY เมื่อ PR ของรอบ `fftpji` merge]
+
+> เปิดโดย LANE-GM รอบ `fftpji`, 2026-08-31T16:40+07:00 · `COO-DECISION 2026-08-31T14:41+07:00`
+> (`notes_to_chief/20260831_1441_COO-DECISION-warp-cross-scene-opens-gt106r2-passed.md`) เปิดทางให้
+> `/warp <scene_id> x y` ข้ามฉาก**ที่มีพิกัด**ยิง `legacy.make_login_teleport` จริงกลางเซสชันแทนการ
+> stage-รอ-login-หน้าเดิม (`gm/warp_executor.py::make_warp_teleport_frame_with_target`,
+> `gm/chat_command_action.py::_warp_teleport_action`) · โค้ดอยู่บนรอบนี้ (`pirate-force-server`
+> branch `claude/awesome-turing-fftpji`, PR `#398`) ยังไม่อยู่บน `main` จนกว่า PR จะ merge ·
+> `GT-106-R2` (`OBSERVER_CONFIRMED 2026-08-31T10:0x+07:00`) พิสูจน์แล้วว่ากลไกเดียวกันนี้
+> (`legacy.make_login_teleport` กลางเซสชัน) เคลื่อนจอจริงที่ฉาก 17 -- แต่ผ่าน call site อื่น
+> (`_dispatch_columbus_quest3021`, พิกัดคงที่ X=834 Y=-598) ไม่ใช่ผ่านคำสั่ง `/warp` ของสาย GM เอง ·
+> ใบนี้ถามคำถามที่ยังไม่มีใครตอบ: `/warp` เองที่ GM พิมพ์ ยิงแล้วจอเปลี่ยนจริงไหม ที่ปลายทางที่ GM เลือกเอง
+
+### objective (claim เดียว)
+GM login ด้วยบัญชีใน `gm_accounts.json` ยืนอยู่ฉากใดก็ได้ (ฉาก A) พิมพ์ `/warp 278 100 200` ลงกล่องแชทธรรมดา
+(278 = "Beach Soccer Field" ตาม `gm/scene_catalog.py` -- ฉากที่ catalog รู้จักจริง ไม่ใช่ฉากพิเศษแบบ 17 ที่มี
+call site อื่นเตรียมทางไว้แล้ว, และไม่ใช่ฉากที่ GM ยืนอยู่) -- **จอเปลี่ยนไปฉาก Beach Soccer Field ทันที
+กลางเซสชันหรือไม่ (ไม่ต้อง logout/login)**  ถ้าจะเลือกฉากอื่นแทน 278 ก็ได้ ขอเพียงเป็นฉากที่
+`scene_catalog.is_known_scene_id` คืน True และไม่ใช่ฉากปัจจุบันของ GM
+
+### ทางเข้า
+`/warp <scene_id> x y` เป็นบรรทัดแชทของ GM ทันที ไม่ต้องเตรียมไฟล์ config ใด ๆ ก่อน (ต่างจาก `GT-141` ที่
+เทสรูปแบบ stage+relog) -- **ต้องระบุ x y เสมอ** เช่น `/warp 278 100 200`: รูปแบบไม่มีพิกัด (`/warp 278`
+เฉย ๆ) ยัง stage-รอ-login-หน้าเหมือนเดิมทุกประการและไม่ใช่กลไกที่ใบนี้เทส (ไม่มีตำแหน่งให้ทั้งสอง
+composer ส่ง เจตนา ไม่ใช่บั๊ก)
+
+### สิ่งที่ยังไม่วัด (บันทึกไว้ล่วงหน้า ไม่ใช่คำทำนายว่าจะพัง)
+1. **census/actor ของฉากปลายทางไม่ตามไป** -- ช่องว่างเดียวกับที่ `RE-162` พบใน Columbus dispatch เอง
+   (แม้แต่กลไกที่ chief เขียนเองก็ไม่ปิดช่องนี้) ฉาก Beach Soccer Field อาจดูโล่งแม้ catalog จะมีชื่อ NPC
+   จริงก็ตาม -- **ไม่ใช่ FAIL ของใบนี้** (ใบนี้ถามแค่ "จอเปลี่ยนฉากไหม" ไม่ใช่ "ประชากรตามไปไหม")
+2. **จุดลง (x,y,z) ที่ GM พิมพ์เองอาจตกในหิน/นอกแมพ** เพราะยังไม่มี range/ground-extent check (ช่องโหว่เดิม
+   ที่บันทึกไว้ใน `gm/chat_command_action.py` ก่อนรอบนี้แล้ว ไม่ใช่ของใหม่รอบนี้) -- แนะนำเริ่มด้วยพิกัดใกล้
+   จุดกำเนิด (`0 0`) ก่อน ถ้าตกพื้นแปลกให้บันทึกแยกเป็นข้อมูล ไม่ใช่ FAIL ของกลไกเปลี่ยนฉาก
+3. **UI ค้างข้ามฉาก** -- `GT-106-R2` พบเพิ่มเติมว่าหน้าต่างบทสนทนา Columbus ค้างจอข้ามฉากแม้ actor จะถูกล้าง
+   แล้ว (ยกเป็น `RE-168` แยก) อาจเกิดซ้ำกับใบนี้เพราะกลไกส่งเฟรมเดียวกัน -- บันทึกแยกถ้าเจอ ไม่ใช่ FAIL
+   ของ "จอเปลี่ยนฉากไหม"
+4. z ที่ส่งคือ z ปัจจุบันของ GM ณ ฉาก A (ไม่ใช่ z ที่เหมาะกับฉาก Beach Soccer Field) -- ถ้าตกใต้/เหนือพื้น
+   ให้บันทึกแยก ไม่ใช่ FAIL
+
+### pass criteria — สองชั้น
+**wire/DB (ปิดแล้วโดยเทสเฮดเลส, ไม่ใช่ผลของใบนี้):**
+`tests/test_gm_warp_executor.py::WarpTeleportCrossSceneTests` +
+`tests/test_gm_chat_command_action.py::WarpActionTests` พิสูจน์ว่า `/warp <scene_id> x y` ข้ามฉากคืนไบต์
+เดียวกับ `legacy.make_login_teleport(scene_id, 0, x, y, z)` เป๊ะไบต์ต่อไบต์ ภายใต้ action label
+`LANE_GM_CHAT_WARP_CROSS_SCENE_TELEPORT_VITAL` -- นี่เป็น proof เชิงเฟรมเท่านั้น (bytes ออกไปถูกรูปถูกท่อ)
+**ไม่ใช่หลักฐานว่าจอไคลเอนต์เปลี่ยน**
+
+**client-observable (ใบนี้ถาม -- ยังไม่มีใครตอบ):** ผู้เทสพิมพ์ `/warp` เองแล้วรายงานตรง ๆ ว่าจอเปลี่ยนไปฉาก
+ปลายทางจริงหรือไม่ (ชื่อฉาก/ภาพพื้นหลัง/มินิแมพเปลี่ยนตามที่ `gm/scene_catalog.py` ระบุ) เก็บ log คอนโซล
+grep โทเคน `LANE_GM_CHAT_WARP_CROSS_SCENE_TELEPORT_VITAL` เทียบเวลากับสิ่งที่เห็นบนจอ
+
+### ข้อห้าม
+ห้ามประกาศ PASS ให้ปลายทางอื่นที่ไม่ได้เทสจริงในบูตเดียวกันโดยอิงผลของใบนี้ (กฎ G-OBS สาย GM เอง: ทุก
+ปลายทางใหม่ต้องมีหลักฐาน client-observable ของตัวเอง, ระบุไว้ตรง ๆ ใน `COO-DECISION 1441` เช่นกัน) -- ใบนี้
+ปิดได้แค่ปลายทางที่เทสจริงในบูตนั้น
+
+### สัญญาผู้บริโภค
+เปิดโดย LANE-GM -- LANE-GM บริโภคผลเอง ปิดหัวใบเมื่อผู้เทสยืนยันด้วยตา (G-OBS)
+
+### links
+`notes_to_chief/20260831_1441_COO-DECISION-warp-cross-scene-opens-gt106r2-passed.md` ·
+`notes_to_chief/20260831_1036_GT106R2-RESULT-PASS-client-renders-the-destination-scene-mid-session-plus-two-new-findings.md`
+· `src/pirateforce_foundation/gm/warp_executor.py::make_warp_teleport_frame_with_target` ·
+`src/pirateforce_foundation/gm/chat_command_action.py::_warp_teleport_action` ·
+`docs/GM_LANE.md` รอบ `fftpji` · `GT-141` (สายเดิม stage-รอ-login-หน้า ยังใช้ได้สำหรับ `/warp` ไม่มีพิกัด)
+
+**หมายเหตุผู้เขียนใบนี้:** ควรเขียนผ่านเอเจนต์ `pf-queue-author` ตามกติกาของโปรเจกต์ แต่ในสภาพแวดล้อมคลาวด์
+รอบนี้ไม่มีเครื่องมือสำหรับ spawn subagent ชนิดนั้นเลย (ตรวจด้วย `ToolSearch`/`ListAgents` หลายคำค้นแล้วไม่พบ)
+จึงเขียนเองตามรูปแบบของใบ `GT-171`/`GT-141` ให้ใกล้เคียงที่สุด -- ถ้ารูปแบบผิดจากมาตรฐานให้แก้ได้ตามที่
+`pf-queue-author` เห็นสมควรในรอบถัดไป
