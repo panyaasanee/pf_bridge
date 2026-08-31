@@ -26,7 +26,7 @@ ADDRESSEE: chief (FYI, ไม่ต้องตอบ)
   ของ src/ -- แก้เป็นบรรยายแทนการ quote ตัวอักษรจริงแล้วตรวจซ้ำผ่าน
 - รัน full test suite ยืนยัน: **5981 passed, 383 skipped, 13072 subtests passed, 0 failed** (เทียบกับ
   5946/383/12751 ก่อนรอบนี้ -- เพิ่ม 35 tests/321 subtests ไม่มี regression)
-- เปิด GT-178 (`pf_bridge/GAME_TEST_QUEUE.md`) แบบ dual-objective (มี actor ไหม + ยืนพื้นได้ไหม) ยึด
+- เปิด GT-179 (`pf_bridge/GAME_TEST_QUEUE.md`) แบบ dual-objective (มี actor ไหม + ยืนพื้นได้ไหม) ยึด
   แม่แบบ GT-166 (ฉาก 10, ธงความเสี่ยงเดียวกัน) เพราะฉากนี้ยึด precedent เดียวกัน ไม่ใช่แม่แบบ
   single-objective ของ GT-165/171/173-177
 
@@ -39,7 +39,7 @@ ADDRESSEE: chief (FYI, ไม่ต้องตอบ)
 
 ## ยังไม่ได้พิสูจน์
 
-- ไม่มีมนุษย์ยืนในฉากนี้มาก่อน -- GT-178 (attended, dual-objective) รอผู้เทสจริง หลัง PR ของรอบนี้ merge
+- ไม่มีมนุษย์ยืนในฉากนี้มาก่อน -- GT-179 (attended, dual-objective) รอผู้เทสจริง หลัง PR ของรอบนี้ merge
 - pf-adversary ตัวจริงยังไม่ได้ตรวจซ้ำงานรอบนี้ (ไม่มี tool ให้เรียกในสภาพแวดล้อมนี้) -- ทำการตรวจสอบตัวเอง
   อย่างเข้มงวดแทนตามหลักการเดียวกัน แต่ไม่ใช่การตรวจโดยบุคคล/agent ที่สอง
 
@@ -49,7 +49,7 @@ ADDRESSEE: chief (FYI, ไม่ต้องตอบ)
 
 ## เปิดใบให้สาย C
 
-ไม่มี -- GT-178 ครอบคลุมแล้ว
+ไม่มี -- GT-179 ครอบคลุมแล้ว
 
 ## ไฟล์ที่แตะ
 
@@ -67,7 +67,7 @@ pirate-force-server (24 ไฟล์): `src/pirateforce_foundation/world_bg0011_
 `tests/test_world_scene_marker.py`, `tests/test_world_scene_registry_rule_1_scenes.py`,
 `rounds/A_20260831_2348_68mm02_bg0011-deep-sea-temple-floor2-built-wired-opened.md` (ใหม่)
 
-pf_bridge (2 ไฟล์ + ใบจอง): `GAME_TEST_QUEUE.md` (เพิ่ม GT-178),
+pf_bridge (2 ไฟล์ + ใบจอง): `GAME_TEST_QUEUE.md` (เพิ่ม GT-179),
 `notes_to_chief/20260831_2327_CLAIM-LANE-A-round-68mm02-bg0011-deep-sea-temple-floor2.md` (ย้ายเข้า
 consumed/ พร้อมใบนี้)
 
