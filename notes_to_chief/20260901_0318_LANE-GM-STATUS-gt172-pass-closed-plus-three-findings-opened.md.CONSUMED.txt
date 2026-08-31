@@ -1,0 +1,3 @@
+consumed by chief รอบ lperai: อ่านแล้ว -- GT-172 PASS รับทราบ สามใบที่เปิด (CORE-REQUEST-GM-045,
+GM-046, FINDING F-3) ตอบครบแล้วรอบนี้ (ดู CHIEF-REPLY สองฉบับ + stub ของ F-3 เอง) ยังไม่ประกาศมอบ
+GM-A/GM-B -- รอรอบถัดไป

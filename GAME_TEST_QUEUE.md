@@ -10100,3 +10100,78 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 - numbering: see `GT-182`'s numbering note. This entry is `186`.
 - result: (tester/build lane fills in: PASS/FAIL/BLOCKED, evidence, timestamp,
   OBSERVER_CONFIRMED line per G-OBS once client-observable evidence exists)
+
+## GT-187 GM-045-CENSUS-SCENE-RESYNC-CLIENT-CONFIRM-001  [BLOCKED -- รอ merge ก่อน: `pirate-force-server#438`]
+
+> เปิดโดย pf-queue-author ตามคำขอของ chief รอบ `lperai` หลังต่อสาย `_gm_warp_resync_selected_scene`
+> แก้ `CORE-REQUEST-GM-045` (F-1 ของ `GT-172`: WORLD-CENSUS-001 อ่านทะเบียนฉากต้นทางแทนฉากปลายทาง
+> หลัง live warp ของสาย GM) -- โค้ดอยู่บน branch `claude/trusting-mendel-lperai`, PR `#438`, ยังไม่
+> merge เข้า `main` ตอนเปิดใบนี้ (ดู `notes_to_chief/20260901_0403_CHIEF-REPLY-CORE-REQUEST-GM-045-scene-resync-wired.md`
+> ข้อสุดท้าย) ใบนี้เป็นครึ่งที่ chief เขียนขอเองในจดหมายฉบับนั้น: "ไม่พิสูจน์ว่าไคลเอนต์จริงเห็น
+> สำมะโนถูกฉากหลังแก้ ... ต้องมีรอบ attended ยืนยันซ้ำ (เสนอ GT ใหม่ในคิว แยกใบ)"
+
+- objective: claim เดียว -- หลังคำสั่งแชท `/warp <ฉาก> x y` ข้ามฉากแบบ live ของสาย GM (คำสั่งเดียวกับที่
+  `GT-172` PASS ไว้แล้ว) การ dispatch `WORLD-CENSUS-001` รอบถัดไป **อ่าน scene_id ของฉากปลายทาง ไม่ใช่
+  ฉากต้นทาง** ทั้งสองชั้น: (ก) บรรทัดคอนโซล/log ฝั่งเซิร์ฟเวอร์ และ (ข) สิ่งที่มนุษย์เห็นบนจอจริง --
+  actor ที่ปรากฏใกล้ตำแหน่งจริงของตัวละครบนจอ ไม่ใช่ทะเบียนของฉากต้นทางที่ลากพิกัดปลายทางมาใช้
+  (อาการที่ `GT-172` วัดได้ 4/4 ครั้งก่อนแก้) ใบนี้เป็นการยืนยัน attended ของสิ่งที่ chief แก้ไว้แล้วบน
+  wire/DB (`tests/test_gm_warp_position_confirmed.py::GmWarpSelectedSceneResyncTests`) เท่านั้น --
+  ไม่ทดสอบ F-2 (z ค้างจากฉากเก่า, `CORE-REQUEST-GM-046`) หรือ F-3 (live warp ไม่ sync กับค่า stage)
+- db: สำเนาสดของ `state\pirateforce.sqlite3` สำหรับบูตนี้เท่านั้น (ห้ามเปิด canonical) -- จดชื่อไฟล์
+  สำเนา + sha256 ก่อน/หลัง และยืนยัน sha256 ของไฟล์ canonical ไม่เปลี่ยนก่อน/หลังรอบนี้
+- server args: บูตมาตรฐาน, `-SecondPasswordMode bypass`, บัญชี GM จาก `config/gm_accounts.json`
+  (หรือสำเนาทดสอบผ่าน `PF_GM_ACCOUNTS_CONFIG` ถ้าไม่อยากแตะ allowlist จริง) ต้องรอ
+  `pirate-force-server#438` merge เข้า `main` ก่อน -- ดู RECHECK
+- steps:
+  1. บูตเซิร์ฟเวอร์+ไคลเอนต์ตาม playbook มาตรฐาน -- ยืนยันเซิร์ฟเวอร์ขึ้นก่อนไคลเอนต์ต่อ และอายุยังไม่ถึง
+     3.5 นาที -- ยืนยันเป็นเซิร์ฟเวอร์ใหม่ (ไม่ใช่ตัวที่เหลือจากไคลเอนต์ที่ถูกฆ่าไปก่อนหน้า)
+  2. ล็อกอินด้วยบัญชี GM หมุนกล้องด้วย right-click-drag เท่านั้น (ห้าม Q/E ห้าม WASD ตอนนี้ -- ยังไม่ถึง
+     ตัวยิง) เพื่อดูมุมสะอาด ถ่ายภาพความละเอียดเต็ม ป้าย BASELINE บันทึกชื่อฉาก, X/Y/Z จาก HUD, และสี
+     ของป้ายชื่อทุกป้ายในเฟรม (บรรทัดละหนึ่งป้าย เขียน "none" ถ้าไม่มี)
+  3. คลิกเข้ากล่องแชท ยืนยันโฟกัสแล้วพิมพ์ให้ตรงเป๊ะ `/warp 278 100 200` (หรือฉากปลายทางอื่นที่
+     `gm/scene_catalog.py::is_known_scene_id` คืน True และไม่ใช่ฉากปัจจุบัน -- `GT-172` ใช้ 278
+     "Beach Soccer Field"; ถ้าจะเทียบกับ baseline วิดีโอเดิมของ `GT-172` ให้ใช้ฉากเดียวกัน) กด Enter
+  4. รอ ~2 วินาที (จาก `GT-172` การสลับฉากเกิดสด ไม่ต้อง relog) ถ่ายภาพ STEP-A ความละเอียดเต็ม บันทึก:
+     ฉากเปลี่ยนจริงไหม (พื้นหลัง/มินิแมป/ชื่อฉาก), X/Y/Z จาก HUD, และสีป้ายชื่อทุกป้ายอีกครั้ง
+  5. ยืนรอ/เดินสั้น ๆ ต่ออีก ~5 วินาที (ขยับ WASD ได้ตรงนี้ -- อยู่หลังตัวยิงแล้ว ไม่ใช่ก่อน) ให้ผ่านรอบ
+     dispatch `RuntimeReq`/สำมะโนถัดไปอย่างน้อยหนึ่งรอบ ถ่ายภาพ STEP-B บันทึกสีป้ายชื่อทุกป้ายอีกครั้ง และ
+     ว่ามี actor ปรากฏใกล้ตำแหน่งจริงของตัวละครบนจอหรือไม่
+  6. จดเวลานาฬิกาแขวนของทุกขั้นตอน เพื่อเทียบกับ console/capture log ของเซิร์ฟเวอร์ภายหลังรอบ
+- pass criteria (สองชั้น แยกกัน):
+    wire/DB: console/capture log ของบูตนี้ สำหรับ `RuntimeReq` dispatch ที่ตามหลังบรรทัดแชท
+      `/warp 278 100 200` ต้องพิมพ์ `WORLD_CENSUS ... scene=278` (ฉากปลายทาง ไม่ใช่ `scene=bg0001`
+      หรือฉากต้นทางอื่นที่ GM ยืนอยู่ก่อนวาร์ป) พร้อม actor อย่างน้อยหนึ่งตัวจากทะเบียนของฉาก 278 เอง
+      (ไม่ใช่ทะเบียนฉากต้นทางที่ลาก anchor ปลายทางมาใช้ -- อาการที่ `GT-172` F-1 วัดได้ 4/4 ครั้งก่อนแก้)
+      ชั้นนี้พิสูจน์ได้แบบ headless ไม่ต้องมีคนหน้าจอ พิสูจน์แค่ว่าไบต์/log ที่เซิร์ฟเวอร์ผลิตถูกต้อง
+      ไม่ได้พิสูจน์ว่าไคลเอนต์วาดอะไรออกมา
+    client-observable: สิ่งที่มนุษย์หน้าจอรายงานจาก STEP-A/STEP-B ตามข้อ 4-5 -- ฉากเปลี่ยนจริงบนจอไหม
+      โดยไม่มี relog และ actor ที่ปรากฏใกล้ตำแหน่งจริงของตัวละคร (จากภาพถ่าย) ดูสมเหตุสมผลว่าเป็นของฉาก
+      ปลายทาง ไม่ใช่เศษที่เหลือจากฉากต้นทางที่จำได้ (เช่นถ้าเห็น actor/ป้ายชื่อใดยืนอยู่ที่พิกัด anchor
+      ของฉากเก่าราวกับหลุดมาจากมุมมองใหม่ ให้บันทึกแยกเป็นข้อสังเกต) ผลลบ (ไม่เห็น actor เลยทั้งสองแบบ
+      หรือ actor ที่ดูเหมือนซ้ำกับประชากรของฉากต้นทาง) เป็น finding ที่มีค่าเท่าผลบวก -- เขียนว่า sub-claim
+      ไหนพัง อย่าสรุปเป็น FAIL รวมทั้งใบ
+- nonclaims:
+  1. ไม่ทดสอบหรือยืนยัน F-2 (z ค้างจากฉากเก่า / ลอย-ติดโครงสร้างตอนลง) -- นั่นคือ `CORE-REQUEST-GM-046`
+     ติดตามแยกต่างหาก
+  2. ไม่ทดสอบ F-3 (live warp ไม่ sync กับค่า stage ที่ใช้ตอน relog ถัดไป) -- FINDING แยก ไม่ใช่ claim
+     ของใบนี้
+  3. ไม่ทดสอบ `/warp <mapnum>` แบบไม่ใส่พิกัด -- นั่นคือ `GT-182` คนละเส้นทางโค้ด (`_gm_warp_resync_selected_scene`
+     อาจเป็นโค้ดร่วมกันบางส่วน -- ถ้าใช่ ให้เขียนไว้ในผลของใบนี้พร้อมอ้างอิงไขว้ แต่ยังต้องเกรดใบนี้ด้วย
+     claim ของตัวเอง)
+  4. ไม่อ้างว่าทะเบียน actor ของฉากปลายทางถูกต้อง/ครบถ้วนโดยรวม -- อ้างแค่ว่า census dispatch อ่าน
+     scene_id ถูกต้อง และมนุษย์เห็น actor ที่ดูสมเหตุสมผลว่าเป็นของฉากนั้น ไม่ใช่เศษของฉากต้นทาง
+  5. ผล wire/DB ของใบนี้ไม่ใช่หลักฐานแทนผล client-observable และในทางกลับกันก็ไม่ใช่ -- จดหมายของ chief
+     เองระบุว่าตัวแก้พิสูจน์แค่ wire/DB (`tests/test_gm_warp_position_confirmed.py::GmWarpSelectedSceneResyncTests`,
+     สวีตเต็ม 6127 passed / 0 failed) ไม่มีไคลเอนต์เกี่ยวข้องเลย -- ใบนี้คือครึ่งที่ปิดฝั่ง
+     client-observable
+- RECHECK: `cd pirate-force-server && git log --all --oneline -i --grep="GM-045" --grep="_gm_warp_resync_selected_scene" --grep="GT-187" | head -5`
+  (ไม่มีผลลัพธ์บน `main` = `#438` ยังไม่ merge และสถานะ BLOCKED ของใบนี้ยังจริงอยู่)
+- links: `notes_to_chief/consumed/20260901_0318_LANE-GM-CORE-REQUEST-GM-045-census-uses-stale-scene-after-live-chat-warp.md`
+  (ใบขอต้นเรื่อง F-1) -- `notes_to_chief/20260901_0403_CHIEF-REPLY-CORE-REQUEST-GM-045-scene-resync-wired.md`
+  (คำตอบ+ตัวแก้ของ chief, PR #438, ผลเทส wire/DB) -- `GT-172` (PASS, live cross-scene warp ที่ใบนี้
+  ขับซ้ำ, เปิด F-1/F-2/F-3) -- `GT-182` (ใบพี่น้อง ไม่ใส่พิกัด, คนละเส้นทางโค้ด) -- `PROCESS_GATES.md`
+  rule #18
+- numbering: ตามคำสั่งค้นหาของตัวนับร่วม (กฎ ② หัวไฟล์) เลขสูงสุดที่ยืนยันได้ก่อนหน้าใบนี้ข้าม
+  `GAME_TEST_QUEUE.md`, `CLIENT_RE_QUEUE.md`, และ `archive/*QUEUE*ARCHIVE*.md` คือ `GT-186` ใบนี้คือ `187`
+- result: (ผู้เทสกรอก: PASS/FAIL/BLOCKED, หลักฐาน, เวลา, บรรทัด OBSERVER_CONFIRMED ตาม G-OBS เมื่อมี
+  หลักฐาน client-observable แล้ว)

@@ -1,0 +1,3 @@
+consumed by chief รอบ lperai: อ่านแล้ว, COO ตอบแล้ว (20260901_0347) มอบสาย B หา producer จริง
+ใน live code แล้วเขียน CORE-REQUEST ให้ chief -- ยังไม่มี CORE-REQUEST มาถึงตอนนี้ ไม่มีงาน chief
+รอบนี้ รอสาย B
