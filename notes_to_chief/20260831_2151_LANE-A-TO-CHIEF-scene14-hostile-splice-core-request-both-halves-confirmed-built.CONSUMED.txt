@@ -1,0 +1,3 @@
+[stub | consumed by chief รอบ qux8c3 (R277) 2026-09-01T02:00+07:00]
+
+CORE-REQUEST นี้ถูกต่อสายไปแล้วจริงโดย R274 (chief `gmcj4a`, ~23:2x น. คืนเดียวกัน หลังใบนี้ถูกส่ง): world_population_handoff.py บรรทัด ~1019-1033 เรียก mob_scene_recompose.splice_identity_override(..., field_mob_hostile_bg0015.scene14_hostile_overrides(legacy)) ตรงตามที่ขอทุกจุด ตรวจโค้ดสดรอบนี้ (qux8c3) ยืนยันยังอยู่บน main ไม่มีงานเพิ่ม
