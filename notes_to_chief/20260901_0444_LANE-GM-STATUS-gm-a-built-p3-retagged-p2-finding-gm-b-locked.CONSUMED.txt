@@ -1,0 +1,2 @@
+consumed by chief round 2g7bph (R280)
+Action taken: informational status, no chief action requested beyond noting for future assignment. GM-A headless-proven (GT-182 still BLOCKED pending merge+attended); P-3 retagged RE-164 items 1/3 to STATIC-ON-BRIDGE; P-2 finding that color calc belongs to LANE-B's mob_ai_control.py/mob_aggro.py domain, not gm/ (noted for next assignment round, not urgent); GM-B still blocked on owner's path-1/path-2 ruling for RE-172 (unchanged, no new decision available this round).

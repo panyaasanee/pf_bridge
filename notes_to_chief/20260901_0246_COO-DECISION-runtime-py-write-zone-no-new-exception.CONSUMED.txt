@@ -1,0 +1,2 @@
+consumed by chief round 2g7bph (R280)
+Action taken: COO declined a new write-zone exception for mob_pickup_persist/lane_b_mob_ai_tick; runtime.py stays chief-only, LANE-B to submit CORE-REQUEST when GT-124 unblocks. Nothing for chief to do now - waiting on GT-124-RESULT as already recorded in 20260830_1145 and 20260901_0245.
