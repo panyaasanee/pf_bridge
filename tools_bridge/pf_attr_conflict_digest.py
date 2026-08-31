@@ -272,13 +272,13 @@ def significance(added, changed, summary, prev_wired):
     added the name-colour selector, the role discriminator and the quest-mark
     selector was the most valuable one so far."""
     if added:
-        return True, "ไฟล์ใหม่ %d ใบ: %s" % (
+        return True, "new artifact(s) %d: %s" % (
             len(added), ", ".join(n for n, _ in added[:4]))
     hot = [n for n, _ in changed if is_high_signal(n)]
     if hot:
-        return True, "ไฟล์สำคัญเปลี่ยน: " + ", ".join(hot[:4])
+        return True, "high-signal file changed: " + ", ".join(hot[:4])
     if summary and prev_wired is not None and summary.get("wired") != prev_wired:
-        return True, "แถว conflict ที่แตะโค้ดจริงเปลี่ยน %s -> %s" % (
+        return True, "open wired-conflict count moved %s -> %s" % (
             prev_wired, summary.get("wired"))
     return False, ""
 
@@ -427,7 +427,7 @@ def main():
     if gen == prev_gen:
         print("  same generation as last run - no letter")
     elif not (added or changed):
-        reason = "generation ใหม่แต่ไบต์ที่มิเรอร์ไม่ต่าง"
+        reason = "new generation but mirrored bytes identical"
         print("  " + reason + " - no letter")
     else:
         sig, reason = significance(added, changed, summary, prev_wired)
@@ -435,7 +435,7 @@ def main():
             announce(gen, prev_gen, added, changed, skipped, summary)
             announced = True
         else:
-            reason = "เปลี่ยนแค่ตารางพื้นหลัง ไม่มีไฟล์ใหม่และไฟล์สำคัญไม่ขยับ"
+            reason = "background tables only - no new artifact, no high-signal change"
             print("  round mirrored quietly - " + reason)
     log_round(gen, added, changed, summary, announced, reason)
 
