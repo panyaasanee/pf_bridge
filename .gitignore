@@ -83,6 +83,22 @@
 !/factpack_L1/blocks_256.tsv
 !/factpack_L1/make_factpack_l1.py
 
+# ---- tools_bridge/: bridge-side tooling, text only.
+# chief R232 (2026-08-29, answering ka3-A's letter of 19:19) added
+# 'tools_bridge' to the push ALLOWLIST in pf_git_sync.ps1 so the queue-status
+# tool could be read and run from a clone.  Only half of that ruling landed:
+# .gitignore line 11 ('/*') still denied the folder, and git status never
+# lists an ignored file, so the sync ALLOWLIST could not see it either and
+# nothing in tools_bridge/ has ever reached the remote.  ka1-B completed the
+# missing half on 2026-08-31 under Panya's ruling of the same day.
+# Text tools only, name-only entries, never a glob - same rule as external/.
+!/tools_bridge/
+/tools_bridge/*
+!/tools_bridge/pf_queue_status.py
+!/tools_bridge/pf_attr_conflict_digest.py
+# pf_scoreboard.py is NOT listed: it was not named in the R232 ruling and no
+# one has confirmed what it reads.  Whoever owns it should name it here.
+
 # ---- external/: the Codex RE deliverable (analytic tables: VA/span/sha
 # rows - NOT byte extracts of the client binary).  Same pattern as
 # factpack_L1: open the folder, deny everything inside, then allow ONLY
