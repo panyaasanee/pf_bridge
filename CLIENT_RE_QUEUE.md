@@ -2958,7 +2958,7 @@ GT-101 error 23065/28317):
 `notes_to_chief/20260830_1655_PANYA-ORDER-open-RE-162-in-session-scene-change-with-a-named-consumer-chain.md`
 (ใบสั่งเต็ม) · `gm/warp_executor.py` (docstring อ้าง RE-090) · `notes_to_chief/` RE-090 result (field-not-proven)
 
-## 🆕🔬 RE-164 BT-GM-CLICK-FOUR-SUSPECTS-002 [NEEDS-ATTENDED-CAPTURE]: **ของสี่ผู้ต้องสงสัยที่ `RE-126` ทิ้งไว้โดยไม่เดา (connection context / query-0x25 gate ตอนคลิก / current-UI object-key จริง / create path `0x007280D0`) ตัวไหนคือประตูที่หยุด `GMUI_BASIC` จริง — ไล่ด้วยการยิงทีละตัวแปรใส่ client จริงแล้วดูผล ไม่ใช่อ่าน disassembly ต่อ**
+## 🔬 RE-164 BT-GM-CLICK-FOUR-SUSPECTS-002 [PARTIAL — 2/4 CLOSED STATIC, 2/4 NEEDS-ATTENDED-CAPTURE]: **ของสี่ผู้ต้องสงสัยที่ `RE-126` ทิ้งไว้โดยไม่เดา (connection context / query-0x25 gate ตอนคลิก / current-UI object-key จริง / create path `0x007280D0`) ตัวไหนคือประตูที่หยุด `GMUI_BASIC` จริง — ข้อ 2 กับ 4 ปิดแล้วด้วย static synthesis จากใบเก่า (`RE-104`+`RE-118`) ที่ไม่เคย cross-reference กันมาก่อน ข้อ 1 กับ 3 ยังต้องไล่ disassembly เพิ่มที่ไม่มีในอิมเมจของ clone นี้**
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนเขียนลงไฟล์นี้ 2026-08-31T03:2x+07:00: `RE-164`/`GT-164` = 0 hit ทั้งสอง
 > ไฟล์นี้และ `GAME_TEST_QUEUE.md` ก่อนใบนี้ — เลขที่ใช้แล้วสูงสุดคือ `RE-163`/`GT-163`(reserved)
@@ -2986,13 +2986,35 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
 1. **connection context** — เดินจาก click handler `0x0053B9B0` (RE-126 ยืนยันแล้วว่าเป็นตัวจริง) หา
    ที่มาของ connection/session context ที่มันอ่าน — context นั้นตรงกับ session ที่ state vital ถูกส่งไปหรือ
    อาจไม่ตรงกันได้ (เช่น หลาย login รวดกัน)
+   🟡 **[STATIC-PARTIAL รอบ `1q7nxu`]** ทราบแค่ *ตำแหน่ง* เช็ค: handler เช็ค global `[0x01032EC4]` ไม่เป็น
+   null เป็นสเต็ป 2 ของกิ่ง `0x0053BC51..0x0053BC96`
+   (`notes_to_chief/20260828_0411_RE-118-RESULT-CURRENT-UI-KEY-MUST-BE-NONEMPTY.md:26-28`) — แต่ยังไม่รู้ว่า
+   context ตัวนั้น *ตรง* กับ session ที่ state vital ถูกส่งไปหรือไม่ ต้องไล่ write-site ของ `0x01032EC4`
+   เพิ่ม ไม่มีในเอกสารที่ commit แล้ว — RE-126 nonclaim 3 ระบุเองว่าไม่เคยอ้างเรื่อง match/mismatch นี้
+   (`notes_to_chief/20260828_1809_RE-126-RESULT-BT-GM-SAME-CONTROL.md:53`) **[NEEDS-ATTENDED-CAPTURE ยืนยัน]**
 2. **query-0x25 gate ตอนคลิก** — adapter `0x00726D30` (อ่าน `GMModule_Client+0x19`, RE-104 พิสูจน์ว่าคุมการ
    วาด/enable ปุ่ม) ถูกเรียกซ้ำตอนคลิกด้วยหรือคืนค่าจากตอนวาดครั้งเดียว — ถ้าเรียกซ้ำ ค่าที่อ่าน ณ
    เวลาคลิกอาจต่างจากตอนวาด
+   ✅ **[STATIC ปิดแล้ว รอบ `1q7nxu`]** เรียกซ้ำ ไม่ใช่ค่าจากตอนวาด — click handler เรียก `0x0044A3B0`
+   ตรวจ `module+0x19` ใหม่ที่กิ่ง `0x0053BC51..0x0053BC96` เป็นการเรียกแยกจากเช็ควาด/enable เป็นระยะที่
+   `[0x0053B150,0x0053B324)` (สองที่คนละจุด) — สองใบยืนยันตรงกัน:
+   `archive/notes_to_chief_2026-08/consumed/20260827_1518_RE-104-RESULT-BT-GM-MODULE-PLUS19-GATE.md:41` และ
+   `notes_to_chief/20260828_0411_RE-118-RESULT-CURRENT-UI-KEY-MUST-BE-NONEMPTY.md:27-31` (ทั้งสองมีมาก่อน
+   `RE-164` เปิด แค่ไม่เคย cross-reference กัน — เป็นช่องว่างของการสังเคราะห์ ไม่ใช่หลักฐานใหม่)
 3. **current-UI object-key จริง** — `RE-118` เดาว่าต้องไม่ว่าง `GT-103` A/B หักล้างข้อเสนอนั้นแล้ว (4 สถานะ
    UI เงียบหมด) เงื่อนไขจริงคืออะไร ไล่ vfunc `[0x01093198]+0x7C8+0x04` ต่อจากจุดที่ `RE-118` หยุด
+   🟡 **[STATIC-PARTIAL รอบ `1q7nxu`]** `RE-118` ไล่ถึง predicate ที่ `[0x008946C0,0x008946EA)` (ตรวจ
+   UTF-16 ไม่ว่าง) แต่หยุดที่ "ไม่มี literal/crosswalk ผูก key กับชื่อ panel"
+   (`notes_to_chief/20260828_0411_...md:38,62`) — `GT-103AB`
+   (`notes_to_chief/20260828_1140_GT103AB-RESULT-...md:51`) ยืนยันช่องว่างนี้ยังเปิดอยู่ ไม่มีใบไหนไล่ต่อจาก
+   จุดนั้น **[NEEDS-ATTENDED-CAPTURE ยืนยัน]**
 4. **create path** — factory `0x007280D0` ที่สร้าง `GMUI_BASIC`/`GMModule_Client+0x48` ถูกเรียกไหมเมื่อคลิก
    หรือมี early-return ตัดก่อนถึง
+   ✅ **[STATIC ปิดแล้ว รอบ `1q7nxu`]** มี early-return แบบมีเงื่อนไข: dispatcher
+   `[0x00AA0710,0x00AA0799)` เรียก empty-key predicate ก่อน ถ้า true จะ `ret 0x10` ทันทีไม่มี log/frame —
+   create path (`0x00A9E080` ซึ่ง vtable-crosswalk ไปที่ factory `0x007280D0` ผ่าน `GMModule_Client+0x48`)
+   ไม่ถูกเรียก (`notes_to_chief/20260828_0411_...md:36,42-44`; สรุปซ้ำใน
+   `rounds/GM_20260828_0418_re118-closed-gt103-ab-procedure-added.md:35`)
 
 ### pass criteria — สองชั้น แยกกันเด็ดขาด
 
@@ -3013,17 +3035,25 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
 สาย GM ปิดหัวใบนี้เองรอบที่บริโภค พร้อม consumed stub
 
 ### nonclaims
-1. ไม่ได้ยิงเฟรมใด ๆ ใส่ client จริงในรอบนี้ — ใบนี้แค่ระบุคำถาม สี่ผู้ต้องสงสัยยังไม่มีใครตอบสักข้อ
+1. รอบ `1q7nxu` ไม่ได้ยิงเฟรมใด ๆ ใส่ client จริง — ข้อ 2 กับ 4 ปิดได้ด้วยการอ่านใบเก่าที่ commit แล้ว
+   สองใบ (`RE-104`, `RE-118`) เฉย ๆ ไม่ใช่หลักฐานใหม่ ไม่ใช่การอ่าน disassembly เพิ่ม
 2. ไม่ได้ตรวจว่า `bt_gm_probe.py`'s 14 variant ครอบคลุมพอจะตอบข้อ 2 (query-gate timing) ได้จริง — นั่นเป็น
    คำถามเรื่องเวลา ไม่ใช่ค่า ตัว frame variant ปัจจุบันตอบไม่ได้ ต้องมีกลไกจับเวลาเพิ่ม (ดู `bt_gm_probe.py`
-   docstring ของ `QUERY_GATE_VALUE_AT_CLICK_TIME_SUSPECT`)
+   docstring ของ `QUERY_GATE_VALUE_AT_CLICK_TIME_SUSPECT`) — ไม่กระทบคำตอบข้อ 2 ที่ปิดแล้ว (เรื่องคนละชั้น:
+   "เรียกซ้ำไหม" ปิดแล้วด้วย static, "ค่าอะไรตอนคลิกจริง" ยังต้องใช้เวลา/attended)
 3. ไม่ได้ตัดสินว่า `GT-164` ควรปลด BLOCKED ด้วยทางไหน (GM chat-command ใหม่ หรือ debug scenario flag) —
    เป็นดุลยพินิจของ chief ตาม `CORE-REQUEST-GM-043`
 4. เลข `GT-164` (แก้จาก `GT-165` ที่รอบก่อนเขียนผิดในเอกสารที่ไม่เคย push) คือเลขที่ยึดตามใบนี้ ถ้าเอกสาร
    ที่ไหนยังอ้าง `GT-165` สำหรับเรื่องนี้ ให้ถือว่าเอกสารนั้นล้าสมัย ไม่ใช่ไฟล์คิวสองไฟล์นี้
+5. ข้อ 1 กับ 3 ยังไม่ปิด — ข้อ 1 ต้องไล่ write-site ของ `[0x01032EC4]` เพิ่ม ข้อ 3 ต้องไล่ vfunc chain ต่อจาก
+   `[0x008946C0,0x008946EA)` ทั้งคู่ไม่มีในอิมเมจของ clone นี้ (ไม่มี client image ไม่มี disassembler)
+   ต้องเปิดใบ RE runner บนสะพานถ้าจะไล่ต่อทาง static หรือรอ attended capture
 
 ### links
 `pirate-force-server` PR #350 (merged, `bdbef5c`) · `src/pirateforce_foundation/gm/bt_gm_probe.py` ·
 `tests/test_gm_bt_gm_probe.py` · `notes_to_chief/20260828_1809_RE-126-RESULT-BT-GM-SAME-CONTROL.md` ·
 `notes_to_chief/20260828_1140_GT103AB-RESULT-...md` ·
-`notes_to_chief/20260831_0152_PANYA-ORDER-LANE-GM-make-the-BT_GM-button-and-GMUI_BASIC-window-actually-work.md`
+`notes_to_chief/20260831_0152_PANYA-ORDER-LANE-GM-make-the-BT_GM-button-and-GMUI_BASIC-window-actually-work.md` ·
+`archive/notes_to_chief_2026-08/consumed/20260827_1518_RE-104-RESULT-BT-GM-MODULE-PLUS19-GATE.md` ·
+`notes_to_chief/20260828_0411_RE-118-RESULT-CURRENT-UI-KEY-MUST-BE-NONEMPTY.md` ·
+`rounds/GM_20260831_0822_re164_partial_static_synthesis.md`
