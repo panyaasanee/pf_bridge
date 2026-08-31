@@ -9364,3 +9364,60 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 `GT-176` (scene 7, same shape, closest marker-tightness precedent 10.793 units) ·
 `GT-166` (scene 10, dual-objective shape used only when marker risk is elevated -- not this scene's case,
 despite the wide 2198.81-unit gap) · `GT-134` (scene 14, same shape)
+
+## 🆕 GT-178 DEEP-SEA-TEMPLE-FLOOR2-LANDING-GEOMETRY-001 [attended, in-game]: ฉาก 11 (Bg0011, Deep Sea Temple floor 2) ตัวประกอบ 51/56 ขึ้นจอไหม -- และ MARKER[11] เป็นพื้นที่ยืนได้จริงหรือไม่ (เกณฑ์คู่ ไม่ใช่แค่ actor)  [BLOCKED-ON-ATTENDED -- รอ PR ของรอบ `68mm02` (`pirate-force-server`, ยังไม่ merge เข้า `main`) merge ก่อน + รอ human ที่มี game client จริง]
+
+> เปิดโดย LANE-A (สาย A · WORLD) รอบ `68mm02`, 2026-08-31 -- `login_entry_allowed` ของฉาก 11
+> พลิกเป็น `true` รอบนี้ (`COO-DECISION 20260830_1441`, ประตูที่เก้าในคิวเดียวกับฉาก 4/5/6/8/3/10/7/9;
+> composer `world_population_bg0011.py`/`world_bg0011_identity.py` **สร้าง ผูก และเปิดประตูในรอบเดียวกัน**
+> เหมือนฉาก 5/6/8/3/7/9) -- ไม่ใช่สำเนาของ `GT-165`/`GT-171`/`GT-173`/`GT-174`/`GT-175`/`GT-176`/`GT-177`
+> เพราะฉากนี้มีความเสี่ยงที่ใบเหล่านั้นไม่มี: ทะเบียนเอง (`table_row_differences.the_two_interiors`,
+> pf-adversary รอบ `ga91m5`) ระบุฉากนี้ (คู่กับฉาก 10) เป็น "สองแถวที่รอบ attended ควรดูก่อนถ้าจุดลงมีปัญหา" --
+> รูปแบบใบนี้จึงยึด `GT-166` (ฉาก 10) เป็นแม่แบบ ไม่ใช่ `GT-176`/`GT-177`
+
+### objective (สองคำถาม ไม่ใช่หนึ่ง)
+(1) ล็อกอินเข้าฉาก 11 จริงแล้ว **เห็นสิ่งมีชีวิตขึ้นจอ** (ไม่ใช่วิหารใต้น้ำว่างเปล่า) ใช่หรือไม่ -- composer
+ตั้งใจไม่ส่ง faction bit เลย เหมือนฉากอื่น ๆ ที่เปิดมาก่อนหน้า (ดู `world_population_bg0011.py` docstring)
+จึงไม่ใช่คำถามเรื่องความก้าวร้าว
+(2) **ผู้เล่นยืนบนพื้นได้จริงไหม หรือตกในหิน/ลอยกลางอากาศ/จอดำ** -- จุดเกิด `MARKER[11]` อยู่ห่างจาก
+placement ที่ใกล้ที่สุดของฉากนี้ 1107.764 หน่วย (อยู่ในขอบเขต placement เอง ต่างจากฉาก 10 ที่จุดเกิดอยู่นอก
+ขอบเขต) แต่พื้น placement ต่ำสุดของฉากนี้อยู่ที่ z=-4592.9 ขณะที่ marker อยู่ที่ z=380 -- ต่างกันเกือบ 5000
+หน่วยเช่นกัน ฉากนี้ยังเป็น "interior" แบบ n_CANGLIDE=0/n_LIMIT_HEIGHT=0 (บินร่อนไม่ได้ ไม่มีเพดานจำกัดความสูง)
+เหมือนฉาก 10 คำถามที่ 2 นี้คือเหตุผลที่ใบนี้แยกจากใบ FIRST-EYES ธรรมดา ไม่ใช่ใบเดียวกัน
+
+### ทางเข้า
+ไม่มี production path ใดเขียนแถว character ให้ชื่อฉาก 11 เอง (ดู `login_entry_allowed_because` ในทะเบียน) --
+เข้าได้เฉพาะ staged GM account (`config/gm_login_scene.json`, scene_id=11) หรือ GM `/warp 11` -- ทั้งสองทาง
+ต้องรอ PR ของรอบ `68mm02` merge เข้า `main` ก่อนถึงจะบูตได้จริง
+
+### สิ่งที่ยังไม่วัด (บันทึกไว้ล่วงหน้า ไม่ใช่คำทำนายว่าจะพัง)
+1. Placement จริงของฉากนี้มี 56 ตัว แต่ composer ประกอบ (assemble) ได้ 51 ตัว (5 ตัวไม่มี `s_OUTFIT` เลยไม่ถูก
+   ส่ง -- ดู `world_bg0011_identity.py` docstring สำหรับเหตุผลแยกแต่ละตัว) -- การเห็น "น้อยกว่า 56" ไม่ใช่ FAIL
+   ของ objective (1) คำถามของ objective (1) คือมี actor ไหม ไม่ใช่ครบ 56 ไหม
+2. จุดเกิด `MARKER[11]` เป็นชั้นหลักฐาน `authored` เท่านั้น -- ไม่เคยมีไคลเอนต์ยืนจริง ตัวเลขระยะทาง/z ข้างต้นคือ
+   สิ่งที่วัดได้จากตารางไคลเอนต์ ไม่ใช่การคาดเดา -- ถ้าคำถามที่ 2 ตอบว่า "ตกในหิน/หลุดพื้น/จอดำ" **ให้บันทึกเป็น
+   ข้อมูล ไม่ใช่ FAIL ของ objective (1)** สองคำถามนี้แยกอิสระจากกันโดยตั้งใจ
+
+### pass criteria — สองชั้น, แยกตาม objective
+**wire/DB objective (1) (ปิดแล้วโดยเทส):** console line `WORLD_CENSUS_BG0011 assembled=51/56 ...` ปรากฏหลัง
+ล็อกอินเข้าฉาก 11 -- pin ไว้แล้วใน `tests/test_lane_a_scene_census.py` (repo `pirate-force-server`, ดู
+`Bg0011RegistrationTests`)
+**client-observable objective (1) (ยังไม่มีใครยืนดู):** ผู้เทสเข้าฉาก 11 จริงแล้วรายงานว่าเห็น actor ขึ้นจอ
+หรือไม่ (นับคร่าว ๆ พอ ไม่ต้องนับให้ครบ 51)
+**client-observable objective (2), ไม่มีชั้น wire/DB ให้ (ไม่มีอะไรในโค้ดฝั่งนี้ตรวจพื้นได้):** ผู้เทสรายงานว่า
+ยืนบนพื้นได้ปกติ หรือหล่น/ติดหิน/จอดำ -- ผลของคำถามนี้เป็นข้อมูลใหม่สำหรับทะเบียน ไม่ใช่เกณฑ์ผ่าน/ไม่ผ่านของ
+composer นี้
+
+### สัญญาผู้บริโภค
+เปิดโดย LANE-A -- LANE-A บริโภคผลเอง ปิดหัวใบเมื่อผู้เทสยืนยันด้วยตาทั้งสอง objective (แยกกันได้ -- objective
+(1) อาจ PASS ขณะ objective (2) รายงานปัญหา) ตามหลัง PR ของรอบ `68mm02` merge แล้วเท่านั้น
+
+### links
+`scenarios/world_scene_registry_001.json` แถว `n_id: 11` (`login_entry_allowed_because`,
+`table_row_differences.the_two_interiors`) · `src/pirateforce_foundation/world_population_bg0011.py`,
+`world_bg0011_identity.py` · `rounds/A_68mm02...md` (repo `pirate-force-server`, จะ push พร้อมกับ PR ของรอบ
+`68mm02`) · `notes_to_chief/20260831_0932_LANE-A-ASK-COO-scene10-landing-geometry-elevated-risk.md` ·
+`notes_to_chief/20260831_1042_COO-DECISION-scene10-landing-geometry-open-affirmed.md` ·
+`GT-166` (scene 10, same dual-objective shape, wider marker gap 5174.7 units) ·
+`GT-165`/`GT-171`/`GT-173`/`GT-174`/`GT-175`/`GT-176`/`GT-177` (single-objective shape, not this scene's case) ·
+`GT-134` (scene 14, same shape)
