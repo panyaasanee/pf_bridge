@@ -1,0 +1,3 @@
+[stub | consumed by chief รอบ qux8c3 (R277) 2026-09-01T01:57+07:00]
+
+ยังเป็นกติกาปัจจุบัน สะท้อนใน prompt หลักหัวข้อ 3 ขั้น 4 (wake gate เฉพาะ pirate-force-server) ไม่มีงานเพิ่ม

@@ -9538,3 +9538,109 @@ composer นี้
 `GT-166` (scene 10, same dual-objective shape, wider marker gap 5174.7 units) ·
 `GT-165`/`GT-171`/`GT-173`/`GT-174`/`GT-175`/`GT-176`/`GT-177` (single-objective shape, not this scene's case) ·
 `GT-134` (scene 14, same shape)
+
+## 🆕 GT-180 NAVY-TRAINING-CAMP-FIRST-EYES-001 [attended, in-game]: ฉาก 130 (Bg4001, Navy Training Camp) มีสิ่งมีชีวิตขึ้นจอจริงหรือไม่ -- ตาคู่แรกของโปรเจกต์ในฉากนี้ และเป็นฉากสุดท้ายจากสิบประตูเดิม  [BLOCKED-ON-ATTENDED -- รอ PR ของรอบ `yfbqmg` (`pirate-force-server`, ยังไม่ merge เข้า `main`) merge ก่อน + รอ human ที่มี game client จริง]
+
+> เปิดโดย LANE-A (สาย A · WORLD) รอบ `yfbqmg`, 2026-09-01 · `login_entry_allowed` ของฉาก 130 พลิกเป็น
+> `true` รอบนี้ (`COO-DECISION 20260830_1441`, ประตูที่สิบและประตูสุดท้ายในคิวเดียวกับฉาก 4/5/6/8/3/10/7/9/11;
+> composer `world_population_bg4001.py`/`world_bg4001_identity.py` **สร้าง ผูก และเปิดประตูในรอบเดียวกัน**
+> เหมือนฉาก 5/6/8/3/7/9/11) -- **ต่างจาก `GT-165`/`GT-171`/`GT-173`/`GT-174`/`GT-175`/`GT-176`/`GT-177` ตรงที่
+> โค้ดของรอบนี้ยังไม่ merge เข้า `main` ณ เวลาที่เขียนใบนี้** จึงเปิดใบนี้เป็น `BLOCKED-ON-ATTENDED` ไม่ใช่
+> `READY` -- ไม่ใช่สำเนาของ `GT-166`/`GT-178`/`GT-179` เพราะฉากนี้**ไม่มี**ความเสี่ยงแบบนั้น: ทะเบียนเองไม่ระบุ
+> ฉากนี้ใน `table_row_differences.the_two_interiors` (ตรวจแล้ว ไม่ใช่สมมติ -- n_CANGLIDE=1, n_LIMIT_HEIGHT=0
+> ไม่ใช่คู่ (0,0) ที่แฟล็กนั้นหมายถึง) -- รูปแบบเดียวกับ `GT-165`(4)/`GT-171`(5)/`GT-173`(6)/`GT-174`(8)/
+> `GT-175`(3)/`GT-176`(7)/`GT-177`(9)
+
+### objective (claim เดียว)
+ล็อกอินเข้าฉาก 130 จริงแล้ว **เห็นตัวละคร/ทหารยืนอยู่ใน Navy Training Camp** (ไม่ใช่ฉากว่างเปล่า) และไม่โดน
+ปฏิเสธล็อกอินเหมือนก่อนรอบ `yfbqmg` ใช่หรือไม่ -- คำถามคือ "มีสิ่งมีชีวิตขึ้นจอไหมและเข้าประตูนี้ได้จริงไหม"
+ไม่ใช่ "มันโจมตีไหม": composer ของฉากนี้**ตั้งใจไม่ส่ง faction bit เลย** (ดู `world_population_bg4001.py`
+docstring -- เป็นคำตัดสินของสาย B ที่ยังไม่ทำ) จึงไม่มีความเสี่ยงแบบ `GT-134` ที่มอนไม่ก้าวร้าว -- นั่นเป็น
+พฤติกรรมที่คาดไว้ ไม่ใช่ FAIL ของใบนี้
+
+### ทางเข้า
+ไม่มี production path ใดเขียนแถว character ให้ชื่อฉาก 130 เอง (ดู `login_entry_allowed_because` ในทะเบียน) --
+เข้าได้เฉพาะ staged GM account (`config/gm_login_scene.json`, scene_id=130) หรือ GM `/warp 130` -- ทั้งสองทาง
+ต้องรอ PR ของรอบ `yfbqmg` merge เข้า `main` ก่อนถึงจะบูตได้จริง
+
+### สิ่งที่ยังไม่วัด (บันทึกไว้ล่วงหน้า ไม่ใช่คำทำนายว่าจะพัง)
+1. Placement จริงของฉากนี้มี 42 ตัว แต่ composer ประกอบ (assemble) ได้ 41 ตัว (1 ตัวไม่มี `s_OUTFIT`/ชื่อเลยไม่
+   ถูกส่ง -- แคบที่สุดในบรรดาสิบเอ็ดฉากที่เลนนี้เคย crosswalk มา -- ดู `world_bg4001_identity.py` docstring)
+   -- การเห็น "น้อยกว่า 42" ไม่ใช่ FAIL ของใบนี้ คำถามของใบนี้คือมี actor ไหม ไม่ใช่ครบ 42 ไหม
+2. จุดเกิด `MARKER[1000]` (ฉาก 130 อ้าง marker คนละเลขกับ scene id เอง) ยังเป็นชั้นหลักฐาน `authored` เท่านั้น
+   -- `never_sent_to_any_client_by_this_project` ห่างจาก placement จริงที่ใกล้ที่สุด **1018.201 หน่วย** และ
+   อยู่**นอก**ขอบเขต placement ของฉากนี้ (หนึ่งในหกจากสิบประตูที่จุดเกิดอยู่นอกขอบเขต) -- ผู้เทส**ต้องรายงาน
+   ผลข้อนี้แยกเป็นบรรทัดของตัวเองไม่ว่าจะยืนได้หรือไม่ได้** เพราะเป็นข้อมูลใหม่ที่ยังไม่มีใครวัด
+3. ระดับ (`n_LEVEL_MIN`) ของ 17 identity ที่ resolve แล้วกระโดดกว้างผิดปกติในฉากเดียว: 15 ตัวอยู่ level 10
+   (HP 421) แต่ 2 ตัว (Mob-Set 11 "Lightning Enchanted Generator", 12 "Rookie Recruit") อยู่ level 150
+   (HP 616,267 -- ประมาณ 1,464 เท่าของอีก 15 ตัว) -- ไม่ใช่ FAIL แต่เป็นข้อมูลที่ควรรายงานถ้าเห็นความต่าง
+   ชัดเจนบนจอ (ตัวใหญ่ผิดปกติ/ยืนแยกกลุ่ม)
+
+### pass criteria — สองชั้น
+**wire/DB (ยังไม่ปิดโดยเทส -- รอ PR ของรอบ `yfbqmg` merge เข้า `main` ก่อน):** console line
+`WORLD_CENSUS_BG4001 assembled=41/42 ...` ต้องปรากฏหลังล็อกอินเข้าฉาก 130 -- ดูรูปแบบ log จาก composer
+`world_population_bg4001.py` และ console reader `tests/test_lane_a_scene_census.py` (รูปแบบเดียวกับที่
+`GT-165`/`GT-171`/`GT-173`/`GT-174`/`GT-175`/`GT-176`/`GT-177` ใช้ปิด) -- เทสที่ pin ตัวเลขนี้ให้แน่นอนยังไม่
+ยืนยันว่ามีอยู่บน `main` ณ ตอนเขียนใบนี้ (ระบุไว้ตรง ๆ เพื่อไม่ให้อ่านผิดว่าปิดแล้ว)
+**client-observable (ยังไม่มีใครยืนดู -- นี่คือสิ่งที่ใบนี้ต้องการ):** ผู้เทสเข้าฉาก 130 จริงแล้วรายงานว่าเห็น
+actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พอ ไม่ต้องนับให้ครบ 41) และล็อกอินผ่านได้ปกติ ไม่โดนปฏิเสธเหมือนก่อนรอบ
+`yfbqmg` -- พร้อมรายงานแยกบรรทัดว่ายืนบน `MARKER[1000]` ได้ปกติหรือไม่ (ไม่ตกขอบแมพ/ไม่ค้างกำแพง/ไม่ตกน้ำแบบ
+ผิดปกติ) ตามข้อ 2 ของ "สิ่งที่ยังไม่วัด" ข้างต้น (ข้อมูลใหม่ ไม่ใช่เงื่อนไขบล็อก PASS ของ objective หลัก)
+
+### nonclaims
+ใบนี้ไม่พิสูจน์ว่า placement ทั้ง 42 ตัวถูกต้อง (พิสูจน์แค่ assembled=41 ที่ composer ตั้งใจส่ง), ไม่พิสูจน์ว่า
+ทหารก้าวร้าว/ไม่ก้าวร้าว (composer ตัดสินใจไม่ส่ง faction bit ไปแล้วนอกใบนี้), และไม่พิสูจน์อะไรเกี่ยวกับ
+`MARKER[1000]` เกินกว่า "ยืนได้/ไม่ได้ในบูตนี้" -- ไม่ใช่การรับรองว่าจุดนี้จะยืนได้ทุกครั้งหรือหลัง reset
+
+### สัญญาผู้บริโภค
+เปิดโดย LANE-A -- LANE-A บริโภคผลเอง ปิดหัวใบเมื่อผู้เทสยืนยันด้วยตา ตามหลัง PR ของรอบ `yfbqmg` merge แล้ว
+เท่านั้น
+
+### links
+`scenarios/world_scene_registry_001.json` แถว `n_id: 130` (`table_row_differences.login_entry_allowed_because`) ·
+`src/pirateforce_foundation/world_population_bg4001.py`, `world_bg4001_identity.py` ·
+`rounds/A_yfbqmg...md` (repo `pirate-force-server`, จะ push พร้อมกับ PR ของรอบ `yfbqmg`) ·
+`GT-166`(ฉาก 10)/`GT-178`(ฉาก 14)/`GT-179`(ฉาก 11) (dual-objective shape, ไม่ใช่กรณีฉากนี้) ·
+`GT-165`/`GT-171`/`GT-173`/`GT-174`/`GT-175`/`GT-176`/`GT-177` (single-objective shape, ฉากนี้ใช้แม่แบบเดียวกัน) ·
+เป็นใบสุดท้ายของ "สิบประตูเดิม" (`COO-DECISION 20260830_1441`) -- หลังใบนี้ปิด สิบประตูเปิดครบทุกฉากที่จอ
+
+### result (ผู้เทสกรอก)
+```
+
+```
+
+## GT-181 PLAYER-DEATH-PREDICATE-PROBE-001  [PENDING]
+- objective: single claim - during an attended round already using the ad-hoc ActorAttr probe channel (env PF_ADHOC_ATTR_PROBE=1), does setting the player's own BasicAttr hp_current (probe field x3, offset +0x44) to 0 and then BasicAttr death_timer (probe field x8, offset +0x58) to a non-positive value (0, then -1 if 0 does not trigger) make the client render the player's own character as dead on screen. This tests whether the shared IMAGE-layer death predicate documented at PF_ATTR_ROLE_DISCRIMINATOR.tsv row ACTOR_DEATH_SHARED (axis=death_state: "BasicAttr +0x44 == 0 AND ordered float +0x58 is nonpositive") actually governs the CLIENT's own visible death state for CMyActor (the player's own body), not just the CNetNPC family the row's own evidence audited.
+- background (read before running):
+  - PF_ATTR_ROLE_DISCRIMINATOR.tsv row ACTOR_DEATH_SHARED (axis=death_state, semantic_status=PROVEN_EXACT at the IMAGE layer only) names the predicate above and says explicitly it is shared behavior across 4 actor-family vtables including CNetNPC - it does NOT itself name CMyActor as audited.
+  - pirate-force-server src/pirateforce_foundation/hostile_hp_link_hypothesis.py line 383: `BASIC_BIT_DEATH_TIMER = 0x0080  # f32 tag 0x2A @ +0x58   <- the lethal bit` - the module deliberately does not wire this bit in (see its own comment block starting "THE LETHAL SIDE IS NOT COPIED IN").
+  - pirate-force-server src/pirateforce_foundation/mob_death.py lines 74-91: the timer's polarity is inverted from intuition (`timer > 0` = DYING, `timer <= 0` = DEAD, the state that builds CActorTask_Dead and plays the die animation), and NOTHING in the client image ever decrements BasicAttr f32[+0x58] on its own - "the field FREEZES at whatever the server last sent." This is why sending a non-positive value directly (rather than waiting for a countdown) is the only way to test the DEAD side of this gate.
+  - the 27-Aug owner-run probe round already tried x8 (death_timer) with several POSITIVE values, alone and together with x3 (hp_current) = 0, and got a negative result both times (notes_to_chief/reference_adhoc_probe/ADHOC_PROBE_ROUND1_FINDINGS_20260827.md, row "8 death_timer"; same table row 8 in ACTORATTR_PROBE_TABLE_x_y.md). Nobody has yet tried a NON-POSITIVE value for x8. That is the one untried leg this entry closes.
+  - source letter: notes_to_chief/20260831_2246_KA1B-TO-LANE-B-death-predicate-plus-probe-request.md (ka1-B's hypothesis and exact probe sequence, carried through verbatim below).
+- db: whatever copy of state\pirateforce.sqlite3 the host attended round already made for its own boot (this entry does not boot a new round or make a new DB copy - it rides on the tail of a round already in progress, per notes_to_chief/consumed/20260830_2355_PANYA-ADDENDUM-probe-request-intake-4-gates-batched-sheet-rides-on-GT-round-ka1-B.md). Record the host round's own DB copy filename and sha256 (before/after) in the result, whatever they already are for that round - do not open the canonical file.
+- server args: this step requires the ALREADY-BOOTED server for the host round to have been started with the ad-hoc probe lane enabled (env var `PF_ADHOC_ATTR_PROBE=1`; reference copy of the code at notes_to_chief/reference_adhoc_probe/adhoc_attr_probe.py, read-only, not part of `main`). This is Panya's own external fork, not the pirate-force-server `main` branch build used for ordinary GT rounds - the standard bypass flag (`-SecondPasswordMode bypass`) is unrelated and does not enable this. If the currently-booted round was NOT started with this env var, "probe 3 0" typed in chat is just an ordinary, inert chat line (it will not reach any special handler) - do not attempt this entry on that round; wait for the next round that is already probe-enabled and mark this entry's steps as not-yet-run for now, do not mark FAIL.
+- steps:
+  1. Precondition check (do this before touching anything else): confirm this round's server was booted with PF_ADHOC_ATTR_PROBE=1. If you booted it yourself, you already know. If someone else booted it, type `probe show` in chat and press Enter - a probe-enabled server prints the current ActorAttr/BasicAttr block to its own console; if nothing distinct happens (message just sits as a normal chat line, or "unknown command" style feedback), the lane is NOT enabled this round. Stop here and do not run the rest of this entry on this round.
+  2. Right-click-drag the camera only (never Q/E, never WASD) until your own character's full body is in frame and unobstructed. This is a camera move only - it does not change facing and emits nothing on the wire, so it is safe at any point.
+  3. Take a full-resolution screenshot labelled BASELINE. Record: your HP bar reading, whether your character shows any dead/dying pose already, and the colour of every name label visible in frame (your own nameplate and any other actor's nameplate) - one line per label, write "none" if there is nothing else in frame. Do not infer a cause for any colour, just record it.
+  4. Click directly into the chat input box first and confirm the caret/focus is in the chat line (typing anywhere else turns keystrokes into hotkeys instead of chat text). Type exactly: `probe 3 0` and press Enter.
+  5. Wait about 2 seconds. Take a full-resolution screenshot labelled STEP-A. Record the same three things as step 3 (HP bar, dead/dying state present or not, every name label's colour).
+  6. Click back into the chat input box, type exactly: `probe 8 0` and press Enter.
+  7. Wait about 2 seconds. Take a full-resolution screenshot labelled STEP-B. Record the same three things as step 3.
+  8. If STEP-B does NOT show a dead state: click into chat, type exactly: `probe 8 -1` and press Enter. Wait about 2 seconds. Take a full-resolution screenshot labelled STEP-C. Record the same three things as step 3.
+  9. If STEP-C (or STEP-B, whichever fired) shows a dead state: keep watching for about 20 more seconds (the client's own DYING duration constant is 20s per mob_death.py) and take one more screenshot labelled STEP-D, recording the same three things, to note whether anything changes on its own (mob_death.py already says nothing should - the field freezes - so this is a check against that claim for the player's own body, not an expectation of new behaviour).
+  10. If none of STEP-A/B/C show a dead state: stop here, this is a valid negative result - do not try further undocumented probe values under this entry (that would be a new, separate probe-sheet request, per the one-entry-one-claim rule).
+  11. End of probe segment for this entry. If the host round's own remaining plan needs a non-broken character afterward, whoever owns that round's own steps is responsible for restoring baseline stats (e.g. `probe base 1` plus re-setting x2-x6) - that restoration is outside this entry's claim and is not this entry's pass criterion.
+- pass criteria (two layers, kept separate):
+    wire/DB: from the host round's own console/capture log (the file already being written for that round, e.g. `server_console_live.out.txt` or whatever capture path that round's own boot script produces - do not start a separate capture for this), confirm after each of the three probe lines that an UpdateAttrVital (0x309A) frame was sent carrying the BasicAttr mask bits 0x0004 (x3) and/or 0x0080 (x8) set, decoding to exactly: hp_current (u32 @ +0x44) = 0 after "probe 3 0"; death_timer (f32 @ +0x58) = 0.0 (bit pattern 0x00000000) after "probe 8 0"; death_timer = -1.0 (bit pattern 0xBF800000) after "probe 8 -1", if that line was reached. This check can be done after the round is over, from the log alone, by anyone - it needs no human at the screen and it is not evidence of what the screen showed.
+    client-observable: exactly what a human watching the screen reports for STEP-A, STEP-B, STEP-C (and STEP-D if reached) per steps 5/7/8/9 above - HP bar reading, dead/dying state present or not and what it actually looks like (describe what is seen, do not assume a specific animation name in advance), and every name label's colour. The three-part prediction this entry is built to falsify is: STEP-A shows NOT dead; STEP-B or STEP-C shows dead; if STEP-B and STEP-C both show NOT dead, the prediction is wrong and that is the result, written up as a negative finding, not a failed test.
+- nonclaims:
+  - Does not test the death predicate for any CNetNPC / mob / dummy actor - this entry only exercises the player's own CMyActor via the ActorAttr/BasicAttr probe channel; GT-031, GT-032, GT-084 are the mob/NPC-side entries and are not affected by this entry's result either way.
+  - A positive result here (character does show dead) shows correlation with the two probed fields sent together; it does not by itself rule out that the client's ship-form is also required (ka1-B's own letter calls the ship-form requirement a guess he thinks becomes unnecessary if this predicate is confirmed, but this entry's steps do not test ship form at all, so it cannot confirm or exclude that guess).
+  - Does not test respawn, does not test whether the client's own on-screen death_timer countdown UI actually ticks (mob_death.py already says the underlying field itself does not move once the server stops touching it; this entry's step 9 only checks whether the player's own case matches that same freeze, it is not a new claim about the countdown widget).
+  - Does not test combat-triggered death (weapon hits, HP dropping through normal damage) - only a direct probe write of the two fields.
+  - FontStyleID 63 is not death and is not being used as a proxy for it anywhere in this entry.
+  - This probe channel (PF_ADHOC_ATTR_PROBE) is not part of the `pirate-force-server` `main` branch; this entry's result, positive or negative, says nothing about the standard boot's own production death pipeline except by way of the shared IMAGE-layer predicate both draw on.
+  - Every name-label colour recorded in this entry's screenshots is recorded as data only - per Panya's 2026-08-25 order, the tester does not attempt to explain why a label is that colour; that question belongs to RE-067.
+- links: notes_to_chief/20260831_2246_KA1B-TO-LANE-B-death-predicate-plus-probe-request.md - notes_to_chief/reference_codex_attr/PF_ATTR_ROLE_DISCRIMINATOR.tsv (row ACTOR_DEATH_SHARED) - pirate-force-server src/pirateforce_foundation/hostile_hp_link_hypothesis.py:383 - pirate-force-server src/pirateforce_foundation/mob_death.py:74-91 - notes_to_chief/reference_adhoc_probe/adhoc_attr_probe.py - notes_to_chief/reference_adhoc_probe/ACTORATTR_PROBE_TABLE_x_y.md - notes_to_chief/reference_adhoc_probe/ADHOC_PROBE_ROUND1_FINDINGS_20260827.md - notes_to_chief/consumed/20260830_2355_PANYA-ADDENDUM-probe-request-intake-4-gates-batched-sheet-rides-on-GT-round-ka1-B.md - numbering: GT-181 assigned after GT-180 collided with LANE-A round `yfbqmg`'s concurrent entry (same round, different topic) -- GT-181/RE-181 grepped as zero hits in GAME_TEST_QUEUE.md and CLIENT_RE_QUEUE.md before reserving this ID (highest prior at collision time: GT-180 taken by LANE-A, RE-172).
+- result: (tester fills in: PASS/FAIL/BLOCKED, evidence, timestamp)
