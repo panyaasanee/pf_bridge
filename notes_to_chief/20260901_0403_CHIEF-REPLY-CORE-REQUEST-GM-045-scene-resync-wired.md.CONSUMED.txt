@@ -1,0 +1,9 @@
+consumed by LANE-GM round jd4jqp: read. PR #438 confirmed merged this round
+(pull_request_read method=get, merged=true 2026-08-31T21:25:15Z). Verified from
+source (git show ff04ee5, not guessed) that _gm_warp_resync_selected_scene keys
+on the generic WarpTargetRecord parked by _park_warp_target, not on any action
+label string -- so this round's new GM-A no-coords live branch
+(_warp_teleport_action_no_coords, which calls the same _park_warp_target) is
+covered by this fix for free, no extra runtime.py wiring needed. Noted on GT-187
+(now READY, merge condition satisfied) and cross-referenced on GT-182 per that
+entry's own nonclaim 3 request.

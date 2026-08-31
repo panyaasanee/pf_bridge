@@ -9660,8 +9660,25 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 - links: notes_to_chief/20260831_2246_KA1B-TO-LANE-B-death-predicate-plus-probe-request.md - notes_to_chief/reference_codex_attr/PF_ATTR_ROLE_DISCRIMINATOR.tsv (row ACTOR_DEATH_SHARED) - pirate-force-server src/pirateforce_foundation/hostile_hp_link_hypothesis.py:383 - pirate-force-server src/pirateforce_foundation/mob_death.py:74-91 - notes_to_chief/reference_adhoc_probe/adhoc_attr_probe.py - notes_to_chief/reference_adhoc_probe/ACTORATTR_PROBE_TABLE_x_y.md - notes_to_chief/reference_adhoc_probe/ADHOC_PROBE_ROUND1_FINDINGS_20260827.md - notes_to_chief/consumed/20260830_2355_PANYA-ADDENDUM-probe-request-intake-4-gates-batched-sheet-rides-on-GT-round-ka1-B.md - numbering: GT-181 assigned after GT-180 collided with LANE-A round `yfbqmg`'s concurrent entry (same round, different topic) -- GT-181/RE-181 grepped as zero hits in GAME_TEST_QUEUE.md and CLIENT_RE_QUEUE.md before reserving this ID (highest prior at collision time: GT-180 taken by LANE-A, RE-172).
 - result: (tester fills in: PASS/FAIL/BLOCKED, evidence, timestamp)
 
-## GT-182 GM-A-WARP-NO-COORD-LIVE-SPAWN-001  [BLOCKED]
+## GT-182 GM-A-WARP-NO-COORD-LIVE-SPAWN-001  [BLOCKED -- code built round jd4jqp, PR not yet merged]
 
+> 🆕 **STATUS round `jd4jqp`:** the no-coordinate live-teleport branch this entry asks for is
+> BUILT and TESTED (`gm/warp_executor.py::warp_no_coords_live_target`/
+> `make_warp_teleport_frame_no_coords_with_target`, `gm/chat_command_action.py::
+> _warp_teleport_action_no_coords`, new label `WARP_CROSS_SCENE_NO_COORDS_TELEPORT_ACTION_LABEL`) --
+> uses exactly `world_scene_travel.spawn_position(world_scene_travel.destination(scene_id))` as
+> R278 asked, gated on `has_authored_entry` (n_MARKER != 0) so markerless scenes (17/126/278/997)
+> keep the old stage-only rule per this entry's own nonclaim 4 (scene 278 specifically is a pinned
+> regression test: `tests/test_gm_chat_command_action.py::ProductionCallShapeTests::
+> test_the_default_argument_call_stages_where_gt141_says_it_does`). Full suite green headless
+> (เขียว(cloud sanity), 6128 passed / 0 failed after rebase onto `main` post-`#438`). PR not yet
+> merged at time of writing -- per ADDENDUM v2 rule A this entry's own status stays BLOCKED, not
+> READY, until the PR merges; do not treat this note as a PASS or as "done". Also see `GT-187`'s
+> own status note this round: `_gm_warp_resync_selected_scene` (CORE-REQUEST-GM-045, merged
+> `pirate-force-server#438`) covers this branch too for free, verified from source -- both
+> `_warp_teleport_action` and this entry's `_warp_teleport_action_no_coords` call the same
+> `_park_warp_target`, which is the only thing that mechanism keys on.
+>
 > Opened by chief this round, directly per Panya's order (not through pf-queue-author --
 > no subagent-spawn tool available in this environment; written by hand in the shape of
 > GT-181/GT-172/GT-141, per those entries' own stated fallback). Source: PANYA-ORDER
@@ -10101,7 +10118,7 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 - result: (tester/build lane fills in: PASS/FAIL/BLOCKED, evidence, timestamp,
   OBSERVER_CONFIRMED line per G-OBS once client-observable evidence exists)
 
-## GT-187 GM-045-CENSUS-SCENE-RESYNC-CLIENT-CONFIRM-001  [BLOCKED -- รอ merge ก่อน: `pirate-force-server#438`]
+## GT-187 GM-045-CENSUS-SCENE-RESYNC-CLIENT-CONFIRM-001  [READY -- `pirate-force-server#438` merged, verify below]
 
 > เปิดโดย pf-queue-author ตามคำขอของ chief รอบ `lperai` หลังต่อสาย `_gm_warp_resync_selected_scene`
 > แก้ `CORE-REQUEST-GM-045` (F-1 ของ `GT-172`: WORLD-CENSUS-001 อ่านทะเบียนฉากต้นทางแทนฉากปลายทาง
@@ -10109,6 +10126,19 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 > merge เข้า `main` ตอนเปิดใบนี้ (ดู `notes_to_chief/20260901_0403_CHIEF-REPLY-CORE-REQUEST-GM-045-scene-resync-wired.md`
 > ข้อสุดท้าย) ใบนี้เป็นครึ่งที่ chief เขียนขอเองในจดหมายฉบับนั้น: "ไม่พิสูจน์ว่าไคลเอนต์จริงเห็น
 > สำมะโนถูกฉากหลังแก้ ... ต้องมีรอบ attended ยืนยันซ้ำ (เสนอ GT ใหม่ในคิว แยกใบ)"
+>
+> 🆕 **สถานะแก้ รอบ `jd4jqp`:** `pirate-force-server#438` `merged=true`
+> `2026-08-31T21:25:15Z` (ยืนยันด้วย `pull_request_read(method=get)`, ไม่ใช่แค่อ่านใบ) -- เงื่อนไข
+> BLOCKED เดิม ("รอ merge") หมดแล้ว ใบนี้พร้อมให้ผู้เทส attended หยิบทำได้ทันที (แก้เฉพาะป้ายสถานะ
+> ไม่แตะ objective/steps/pass-criteria/nonclaims ข้างล่าง) ⇒ ตอบ nonclaim 3 เดิมด้วย (ไม่ใช่การเดา
+> ไล่จาก diff จริง `git show ff04ee5`): **ใช่ โค้ดร่วมกันบางส่วนจริง** --
+> `_gm_warp_resync_selected_scene` ไม่ได้ผูกกับ action-label string ใด ๆ เลย มันอ่าน
+> `WarpTargetRecord` ที่ `gm/chat_command_action.py::_park_warp_target` park ไว้บน session attribute
+> เดียวกันทุกกิ่งของ `/warp` ที่ข้ามฉากแบบ live -- ทั้ง `_warp_teleport_action` (มีพิกัด, ใบนี้ทดสอบ)
+> และ `_warp_teleport_action_no_coords` (ไม่มีพิกัด, `GT-182`'s GM-A, สร้างรอบ `jd4jqp`) เรียก
+> `_park_warp_target` ตัวเดียวกันเป๊ะ ⇒ `_gm_warp_resync_selected_scene` ครอบคลุม GM-A ให้ฟรีโดยไม่ต้อง
+> ต่อสายเพิ่ม -- ยังไม่มีรอบ attended ยืนยันทั้งคู่ (ทั้งใบนี้และ `GT-182`) แค่ยืนยันว่า wire/DB
+> mechanism เดียวกันจริงจากการอ่านซอร์ส ไม่ใช่การเดา
 
 - objective: claim เดียว -- หลังคำสั่งแชท `/warp <ฉาก> x y` ข้ามฉากแบบ live ของสาย GM (คำสั่งเดียวกับที่
   `GT-172` PASS ไว้แล้ว) การ dispatch `WORLD-CENSUS-001` รอบถัดไป **อ่าน scene_id ของฉากปลายทาง ไม่ใช่
@@ -10165,7 +10195,9 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
      สวีตเต็ม 6127 passed / 0 failed) ไม่มีไคลเอนต์เกี่ยวข้องเลย -- ใบนี้คือครึ่งที่ปิดฝั่ง
      client-observable
 - RECHECK: `cd pirate-force-server && git log --all --oneline -i --grep="GM-045" --grep="_gm_warp_resync_selected_scene" --grep="GT-187" | head -5`
-  (ไม่มีผลลัพธ์บน `main` = `#438` ยังไม่ merge และสถานะ BLOCKED ของใบนี้ยังจริงอยู่)
+  (แก้รอบ `jd4jqp`: ตอนนี้มีผลจริง -- `ff04ee5 Wire CORE-REQUEST-GM-045: resync selected scene after
+  live GM warp` อยู่บน `main` แล้ว ผ่าน PR `#438` -- เดิมข้อความนี้บอก "ไม่มีผลลัพธ์ = ยังไม่ merge",
+  ตอนนี้ล้าสมัยไปแล้ว สถานะ READY ด้านบนคือของจริง)
 - links: `notes_to_chief/consumed/20260901_0318_LANE-GM-CORE-REQUEST-GM-045-census-uses-stale-scene-after-live-chat-warp.md`
   (ใบขอต้นเรื่อง F-1) -- `notes_to_chief/20260901_0403_CHIEF-REPLY-CORE-REQUEST-GM-045-scene-resync-wired.md`
   (คำตอบ+ตัวแก้ของ chief, PR #438, ผลเทส wire/DB) -- `GT-172` (PASS, live cross-scene warp ที่ใบนี้
