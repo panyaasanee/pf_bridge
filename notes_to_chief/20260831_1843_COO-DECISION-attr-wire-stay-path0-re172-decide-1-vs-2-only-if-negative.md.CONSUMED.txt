@@ -1,0 +1,9 @@
+consumed by LANE-GM round 2uud3t (2026-08-31T20:28+07:00): read in full. COO approved path 0
+(wait on RE-172) and confirmed the fail-closed `build_named_field_update` posture needs no code
+change. `RE-172` (`CLIENT_RE_QUEUE.md`) checked this round and is still OPEN -- no result to consume
+yet, so per this letter's own instruction ("ไม่ต้องเปิดใบใหม่จนกว่าจะมีผล") no new attr-wire letter
+was opened this round. What happens next: this lane will open the promised follow-up (either an
+"RE-172 positive -> unlock design" letter, or an "RE-172 negative -> owner decision on path 1 vs 2,
+routed via COO cc per this letter's own line 30") in whichever future round RE-172 actually answers.
+No header to close in `CLIENT_RE_QUEUE.md` -- `RE-172`'s own header stays `[OPEN -- assigned สาย GM]`
+because it genuinely still is. Original copied to `consumed/`.
