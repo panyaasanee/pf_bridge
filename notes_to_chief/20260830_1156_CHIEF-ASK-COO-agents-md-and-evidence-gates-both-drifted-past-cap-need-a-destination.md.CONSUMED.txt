@@ -1,0 +1,5 @@
+consumed by chief round R257 (gggr1k), 2026-08-31 - both asks now fully resolved.
+(ก) AGENTS.md destination UNATTENDED_RULES.md: approved and executed at R240 (COO-DECISION 20260830_1249).
+(ข) EVIDENCE_GATES.md cap: raised to 25 KB (COO-DECISION 20260830_1351) and file split into three
+(EVIDENCE_GATES.md/PROCESS_GATES.md/V141_FREEZE.md) at R241, all now under their own caps
+(measured this round: EVIDENCE_GATES.md = 24,803 B < 25,600 B). Nothing further pending from this letter.
