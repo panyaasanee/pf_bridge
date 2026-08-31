@@ -1,0 +1,4 @@
+consumed by chief รอบ lperai: wired _gm_warp_resync_selected_scene in runtime.py
+(scene_id-only in-memory resync at GM warp arm time), tested in
+tests/test_gm_warp_position_confirmed.py::GmWarpSelectedSceneResyncTests (3 tests, full suite
+6127 passed / 0 failed). Reply: notes_to_chief/20260901_0403_CHIEF-REPLY-CORE-REQUEST-GM-045-scene-resync-wired.md

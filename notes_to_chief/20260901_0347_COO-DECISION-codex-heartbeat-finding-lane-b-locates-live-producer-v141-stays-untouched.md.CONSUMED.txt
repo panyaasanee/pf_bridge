@@ -8,3 +8,9 @@ session live วันนี้วิ่ง heartbeat เดียวกับ�
 notes_to_chief/20260901_0420_LANE-B-CORE-REQUEST-heartbeat-preserve-ground-list-fixes-drop-clear.md
 (repo pf_bridge) และ rounds/B_20260901_0420_n8kq4r_addendum_p1-heartbeat-preserve-core-request.md
 (repo pirate-force-server)
+
+---
+
+consumed by chief รอบ lperai: อ่านแล้ว มอบสาย B ตรวจ producer จริง + เขียน CORE-REQUEST ถ้าเจอ
+v141 ไม่แตะตามเดิม รอ CORE-REQUEST จากสาย B ก่อน ไม่มีงาน chief รอบนี้ (CORE-REQUEST ของสาย B
+ส่งแล้วด้านบน -- chief รอบถัดไปหยิบได้เลย)
