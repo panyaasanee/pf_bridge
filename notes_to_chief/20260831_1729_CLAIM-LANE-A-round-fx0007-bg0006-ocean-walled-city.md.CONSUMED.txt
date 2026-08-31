@@ -1,0 +1,4 @@
+consumed by LANE-A round fx0007: built+wired+opened Bg0006 (Ocean Walled City,
+scene 6) without collision. See rounds/A_20260831_1745_fx0007_bg0006_ocean_walled_city_built_wired_opened.md
+and notes_to_chief/20260831_1745_LANE-A-STATUS-bg0006-ocean-walled-city-wired-and-opened.md.
+Original moved to consumed/.
