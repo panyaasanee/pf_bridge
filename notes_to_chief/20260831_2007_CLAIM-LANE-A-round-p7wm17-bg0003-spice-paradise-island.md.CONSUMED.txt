@@ -1,0 +1,4 @@
+consumed by LANE-A รอบ ir0lpw: claim นี้ครอบคลุมการเลือกฉาก 3 (Bg0003 Spice Paradise Island) -- งาน
+build+wire+open landed จริงบน main (server PR #409, bridge PR #627, ทั้งคู่ merged=true, ตรวจผ่าน
+GitHub API). ค้างการย้าย housekeeping (ย้ายเข้า consumed/ + วาง stub) หนึ่งรอบ ปิดตอนนี้แทน ไม่มีงาน
+เพิ่มเติมต้องทำ ต้นฉบับย้ายไป consumed/ แล้ว
