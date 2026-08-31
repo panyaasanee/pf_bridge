@@ -3412,3 +3412,58 @@ bounded-negative ถ้าไม่มีคำอธิบายให้ตา
 "RE-188 AUDIT", `KNOWN_PLACEMENTS` แถว 64/67/68/91) · `gamedata/tables/CONSTDATA_TH__CLINE.tsv`
 (บรรทัด 352-354, 357) · `gamedata/tables/CONSTDATA_TH__MOBS.tsv` (n_ID 38/39/40/41 และ 231/742/743/914)
 · `RE-173` (ใบพี่น้อง, ปิดแล้ว, วิธีเดียวกัน)
+
+## 🔬 RE-189 LOGOUT-TRANSITION-ORCHESTRATOR-WRITER-OF-PLUS18-001 [STATIC-ON-BRIDGE]: `RE-070` dumped the 31-slot vtable of `0xF45030` and named 4 writers of MODE (`+0x28`)/its timer pair (`+0x24`) - but never named a writer, in either graph, of the OTHER field the transition gate at `0x719620` also requires non-NULL (`[object+0x18]`) - is it ever set from a network response, or only from local UI init, and which of the six untested branches `RE-070`'s own rider names does this server's OWN architecture (not the client's) actually support building?  [🔵 **OPEN — opened by LANE-A round this-round, 2026-09-01**]
+
+### ทำไมเปิดใบนี้ (ไม่ใช่แค่ถาม - ของที่หาไม่เจอในสิ่งที่มีอยู่แล้ว)
+
+`PANYA-ORDER 20260901_0215` มอบ `GT-184`/`GT-185` (UI-A, กลับหน้าเลือกตัวละคร) และ `GT-186` (UI-B, ปุ่ม
+logout จริง) ให้สาย A เป็นงานสร้างใหม่ - ทั้งสามใบขอ "response/sequence ใหม่ที่ยังไม่เคยลอง" โดยชี้ไปที่
+`GT-033`'s เอง `archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md` (หกกิ่งที่ตารางสามช่องเดิมไม่ครอบ)
+และ `RE-070` (`archive/CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md`, DONE/PASS-MIXED) ที่ตอบ objective
+สามข้อของตัวเองแล้ว: MODE branch map (`1/2/3/4/other`), writer สี่จุดของ `+0x28`/`+0x24`, และเงื่อนไข gate
+จริงที่ `0x719620`: `delta = [object+0x24] - [app+0x7BC]; if delta<=3 AND [object+0x18]!=NULL: call
+[vtable+0xF4](false)` ของ sub-object
+
+อ่าน `RE-070`'s ผลเต็มก่อนตัดสินใจสร้างอะไรรอบนี้ (ตามกฎ "ไม่หยุดสร้างเพื่อวิจัย - แต่ก็ห้ามเดา") พบว่า:
+**ไม่มีที่ไหนในผล `RE-070` บอกว่าใครเซ็ต `[object+0x18]`** - T5 (dump slot ทั้งตารางของ `0xF45030` +
+resolve RTTI) ระบุไว้ในจ็อบลิสต์ของใบ แต่ผลที่บันทึกตอบแค่ objective 1-3 (writer ของ `+0x28`/`+0x24`,
+ช่วงค่าของ `+0x28`, บทบาทของ `+0x24`) - ไม่มีบรรทัดไหนรายงานว่า T5/T6 ทำจบหรือ `+0x18` มีค่าอะไร/ใครเขียน
+ถ้า `+0x18` เขียนได้เฉพาะจาก local UI init (เหมือนที่ `+0x28`/`+0x24` วัดได้ว่าไม่มี writer จาก inbound
+handler เลยในกราฟที่วัด) แปลว่า **response ฝั่งเซิร์ฟเวอร์อาจไม่มีทางเปิดประตูนี้ได้เลยไม่ว่าจะส่งอะไรก็ตาม**
+- ตรงข้ามกับสมมติฐานเดิมของทั้งโปรเจกต์ที่ว่าคำตอบคือ "ส่งเฟรมที่ถูกต้อง"
+
+### สิ่งที่ RE-189 ต้องตอบ (สองข้อ ไม่ต้องมากกว่านี้)
+
+1. **ใครเขียน `[object+0x18]`** - ทำ T5/T6 ของ `RE-070` ต่อให้จบ (RTTI ของ `0xF45030` resolve แล้วเป็น
+   `SystemSetting_LogoutConfirm` ตาม erratum ข้อ 2 ของผล - ใช้ชื่อนี้เป็นจุดเริ่ม UI-typeid-name binding
+   ถ้า T1-T4 เดิมไม่พอ) - ถ้า writer เดียวคือ local UI init (ไม่มี inbound handler เขียนเลย): เขียนไว้ตรง ๆ
+   ว่า **ไม่มี response ใดจากเซิร์ฟเวอร์เปิดประตูนี้ได้** ด้วยกลไกนี้ - bounded-negative ที่มีค่าเท่ากับผลบวก
+2. **ในหกกิ่งที่ `GT-033`/`RE-070` ทิ้งไว้ (ดูลิงก์) กิ่งไหนสร้างได้จริงในสถาปัตยกรรมของเซิร์ฟเวอร์นี้เอง**
+   (ไม่ใช่ไบนารีไคลเอนต์) - โดยเฉพาะกิ่ง 5 ("คนละ connection", ปิดพอร์ต LOGIN 10188 ด้วยไม่ใช่แค่ GAME
+   10189): เซิร์ฟเวอร์จำลองนี้ (ไม่ใช่ `current/pf_login_game_server_v141.py` ที่ freeze แล้ว) ยังคงมี
+   connection ของพอร์ต LOGIN แยกต่างหากที่ปิดได้จริงหลัง handoff เข้าเกมหรือไม่ - หรือ handoff ปิดไปแล้ว
+   ตั้งแต่ต้นทำให้กิ่งนี้ไม่มีอะไรให้แก้ (คำถามนี้ตอบได้จากโค้ดของโปรเจกต์เอง ไม่ต้องพึ่งไบนารีไคลเอนต์ - แต่
+   อยู่ใน `runtime.py`/`session.py` ซึ่งเป็นไฟล์ของ chief ไม่ใช่ของสาย A จึงเปิดเป็นใบให้สาย C/chief แทนที่จะ
+   เดาเอง)
+
+### ข้อห้าม
+
+ห้ามออกแบบ variant ใหม่ (แก้ timer/ลำดับเฟรม/field values/ปิดพอร์ต LOGIN) **ก่อน**ใบนี้ตอบข้อ 1 - ถ้า
+`[object+0x18]` เขียนได้จาก local UI เท่านั้น การส่งเฟรมใหม่ใด ๆ จากเซิร์ฟเวอร์คือการเดาที่มีหลักฐานขัดแย้ง
+อยู่แล้ว ไม่ใช่กิ่งที่ยังไม่ได้ลอง
+
+### สัญญาผู้บริโภค
+
+เปิดโดย LANE-A - LANE-A บริโภคผลเอง (จะสร้าง CORE-REQUEST ให้ chief ต่อสาย variant ใหม่ก็ต่อเมื่อ RE-189
+ชี้ทางที่สร้างได้จริง ไม่ใช่ก่อนหน้านั้น)
+
+### links
+
+`pf_bridge/GAME_TEST_QUEUE.md` `GT-184`/`GT-185`/`GT-186` (งานที่ใบนี้ปลดบล็อก) ·
+`pf_bridge/archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md` `GT-033` (หกกิ่งที่ยังไม่ได้ลอง +
+nonclaim ⑦ เรื่อง variant D) · `pf_bridge/archive/CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md` `RE-070`
+(ผล DONE/PASS-MIXED เต็ม, T5/T6 ที่ยังไม่เห็นผลรายงาน) ·
+`pirate-force-server/src/pirateforce_foundation/logout_hypothesis.py` (variant A/B ที่มีอยู่แล้ว) ·
+`notes_to_chief/20260901_0302_FROM_CHIEF_R278_priority-reorg-panya-order-P1-P2-P3-plus-new-builds.md`
+(มอบหมาย UI-A/UI-B ให้สาย A)
