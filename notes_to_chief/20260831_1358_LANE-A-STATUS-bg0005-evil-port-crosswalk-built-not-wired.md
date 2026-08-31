@@ -43,10 +43,13 @@ placements ไม่ส่ง 5
 
 **ช่องว่าง Control 2 วัดได้จริง บันทึกไว้ตรงๆ ไม่เงียบไว้.** `world_bg0015_identity.
 SCENE_LEVEL_CONTROL['BG0005']` อ้าง `(5, 60, 68.0, 35.0)` จากรอบก่อน วัดใหม่รอบนี้ (per-placement บน 87
-placements ที่ส่งได้) ได้ **70** ไม่ใช่ 68 (CLINE-reading median) และ **31** ไม่ใช่ 35 (set-number median,
-ตรวจสามวิธีอิสระ ตรงกันหมด) เป็น control อ่อนที่ไม่กระทบความเชื่อถือของตารางฉากนี้ (monotone-in-level
-ทั้งโปรเจกต์ ตามที่ทุกโมดูลพี่น้องเตือนไว้เอง) แต่ตัวเลขเดิมไม่ reproduce จากการวัดอิสระรอบนี้ -- เปิดใบ
-`RE-170` ให้สาย C ไปหาว่าตัวเลขเดิมนับด้วยวิธีไหน ไม่ได้ไปแก้เอง
+placements ที่ส่งได้) ได้ **70** ไม่ใช่ 68 (CLINE-reading median, ตรวจสามวิธีอิสระ ตรงกันหมด) ส่วน
+set-number median สามวิธีไม่ตรงกันเอง: per-distinct-resolved-set กับ per-CLINE-row-with-MOBS ให้ **31**
+ทั้งคู่ (ไม่ใช่ 35) แต่ per-placement -- วิธีเดียวกับที่ให้ 70 ข้างต้น -- ให้ **38** แทน (รอบแรกของ pynass
+เขียนผิดว่า "ตรวจสามวิธีตรงกันหมดที่ 31" -- pf-adversary จับได้ก่อน push แก้ตรงนี้แล้ว) เป็น control อ่อนที่
+ไม่กระทบความเชื่อถือของตารางฉากนี้ (monotone-in-level ทั้งโปรเจกต์ ตามที่ทุกโมดูลพี่น้องเตือนไว้เอง) แต่
+ตัวเลขเดิมไม่ reproduce จากการวัดอิสระรอบนี้ -- เปิดใบ `RE-170` ให้สาย C ไปหาว่าตัวเลขเดิมนับด้วยวิธีไหน
+ไม่ได้ไปแก้เอง
 
 สิบเซตมี outfit หลายตัวคั่นด้วย `;` ส่งตัวแรกเหมือนเดิม [สมมติของสาย A - รอ COO ยืนยัน] สืบทอดจากทุกฉาก
 พี่น้อง **กระจายไม่เท่ากันแบบฉาก 10**: เซตเดียว (44, leader 147) กินไป 9 จาก 87 placements ที่ส่งได้ รวมสิบ
@@ -105,9 +108,11 @@ marker_geometry_measured_not_enforced`) ระบุจุด marker ห่า�
 Placements: 92 ทั้งหมด, ส่งได้ 87, ส่งไม่ได้ 5 (1 ไม่มีแถว MOBS + 4 เซต outfit ว่าง) · เลข Mob-Set: 64
 ตัวที่ใช้จริง (ครบทุกคีย์ของ CLINE type 5), แก้ได้ 59, แก้ไม่ได้ 5 · multi-variant outfit: 10 เซต กระทบ 38
 จาก 87 placements ที่ส่งได้ · targeted regression (2 ไฟล์เทสใหม่): 28 passed, 362 subtests · full suite
-(`python3 -m pytest -q`): **5676 passed, 383 skipped, 10592 subtests passed, 0 failed** (~116s) -- วัด
-baseline ตรงรอบนี้เอง (stash การแก้ไขแล้วรันซ้ำ): 5648 passed / 383 skipped / 10228 subtests เพิ่มขึ้น 28
-เทส / 364 subtests (28 จากสองไฟล์ใหม่ ที่เหลืออีก 2 มาจาก tuple ของเทส verifier ที่ยาวขึ้นหนึ่งชื่อ) ·
+(`python3 -m pytest -q`): **5676 passed, 383 skipped, 10596 subtests passed, 0 failed** (~116s;
+เลข 10596 นี้แก้จาก 10592 ที่รอบแรกรายงานผิด -- pf-adversary รันซ้ำสองครั้งได้ 10596 ทั้งคู่, ไม่ reproduce
+ที่ 10592) -- วัด baseline ตรงรอบนี้เอง (stash การแก้ไขแล้วรันซ้ำ): 5648 passed / 383 skipped / 10228
+subtests เพิ่มขึ้น 28 เทส / 368 subtests (362 subtests มาจากสองไฟล์เทสใหม่เอง, อีก 6 subtests โผล่ที่อื่นใน
+suite เดิมจากการมีสองไฟล์ใหม่อยู่ใน tree -- ยังไม่ได้ไล่ว่าเป็นเทสตัวไหน เลขคงที่ทำซ้ำได้แต่ที่มายังไม่ทราบ) ·
 `tools/verify_hypothesis_ledger.py`: `PASS entries=47` (ไม่เปลี่ยน) ·
 `tools/verify_functional_coverage.py`: `OPEN DOMAINS: 8` (ไม่เปลี่ยน) ·
 `git diff --stat` บน `runtime.py`/`app.py`/`current/pf_login_game_server_v141.py`: ว่างเปล่า (ไม่แตะ)

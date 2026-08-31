@@ -3212,11 +3212,12 @@ STATIC-ON-BRIDGE ก่อน)
 
 `notes_to_chief/20260831_1142_RE-168-RESULT-no-dialogue-close-signal-exists-server-is-stateful-enough-to-add-one.md`
 
-## 🔬 RE-170 BG0005-SCENE-LEVEL-CONTROL-MEDIAN-GAP-001 [OPEN — assigned LANE-A]: `world_bg0015_identity.SCENE_LEVEL_CONTROL['BG0005']` อ้าง `(5, 60, 68.0, 35.0)` — CLINE-reading median 68.0, set-number median 35.0 — แต่รอบ `pynass` วัดใหม่ (per-placement บน 87 placements ที่ส่งได้จริง ตรวจสามวิธีอิสระให้ตรงกัน) ได้ 70 และ 31 ตามลำดับ ไม่ตรงกับตัวเลขเดิม ตัวเลขที่วัดใหม่นี้เชื่อว่าถูกต้องสำหรับวิธีนับที่ระบุไว้ในโมดูลของรอบนี้ แต่ยังไม่ได้ตรวจว่าตัวเลขเดิมใช้วิธีนับแบบอื่น (เช่น per-distinct-set แบบไม่ถ่วงน้ำหนัก หรือรวมแถวที่ resolve ไม่ได้ด้วย) หรือเป็นตัวเลขที่ผิดมาตั้งแต่รอบที่เขียนตารางนั้น
+## 🔬 RE-170 BG0005-SCENE-LEVEL-CONTROL-MEDIAN-GAP-001 [OPEN — assigned LANE-A]: `world_bg0015_identity.SCENE_LEVEL_CONTROL['BG0005']` อ้าง `(5, 60, 68.0, 35.0)` — CLINE-reading median 68.0, set-number median 35.0 — แต่รอบ `pynass` วัดใหม่ (per-placement บน 87 placements ที่ส่งได้จริง) ได้ 70 สำหรับ CLINE-reading median (ตรวจสามวิธีอิสระ ตรงกันทั้งสาม) ไม่ตรงกับตัวเลขเดิม สำหรับ set-number median สามวิธีไม่ตรงกันเอง: 31 (per-distinct-resolved-set และ per-CLINE-row-with-MOBS) กับ 38 (per-placement, วิธีเดียวกับที่ใช้ได้ 70 ข้างบน) — pf-adversary จับความไม่ตรงนี้ได้หลังรอบแรกเขียนว่า "ทั้งสามให้ 31" ผิด แก้เป็นรายงานตามจริงแล้ว ยังไม่ได้ตรวจว่าตัวเลขเดิม (35) ใช้วิธีนับแบบไหน หรือเป็นตัวเลขที่ผิดมาตั้งแต่รอบที่เขียนตารางนั้น
 
-### สิ่งที่รู้แล้ว (จากรอบ `pynass`, static, ไม่มี client)
+### สิ่งที่รู้แล้ว (จากรอบ `pynass`, static, ไม่มี client; แก้ไขหลัง pf-adversary review)
 
-- วัดสามวิธี ได้ผลตรงกันทั้งสามครั้ง: per-placement (87 แถว), per-distinct-resolved-set (59 เซต), per-CLINE-row-ที่มีแถว MOBS จริง (63 คีย์) — ทั้งสามให้ CLINE-reading median = 70
+- CLINE-reading median: วัดสามวิธี ได้ผลตรงกันทั้งสามครั้ง: per-placement (87 แถว), per-distinct-resolved-set (59 เซต), per-CLINE-row-ที่มีแถว MOBS จริง (63 คีย์) — ทั้งสามให้ CLINE-reading median = 70
+- set-number median: **ไม่ตรงกันสามวิธี** — per-distinct-resolved-set และ per-CLINE-row-with-MOBS ให้ 31 ทั้งคู่, แต่ per-placement (วิธีเดียวกับที่ให้ 70 ข้างต้น) ให้ **38** แทน — บันทึกทั้งสามค่าไว้ตรงนี้เพราะรอบแรกของ pynass เคยเขียนผิดว่า "ตรวจสามวิธีตรงกันหมดที่ 31" (pf-adversary catch, ดู commit นี้)
 - Control 2 เป็น control อ่อนอยู่แล้วตามที่ทุกโมดูล crosswalk พี่น้องยอมรับเอง (monotone-in-level ทั้งโปรเจกต์ ดังนั้นการจับคู่แบบไหนก็ได้ median ใกล้เคียงกัน) — ช่องว่างนี้ไม่กระทบความเชื่อถือของ `world_bg0005_identity.py` เอง (control 1 — exact subset match — ยังตรง 100%)
 - ไม่ได้ไปแตะ/แก้ `SCENE_LEVEL_CONTROL` ในไฟล์ `world_bg0015_identity.py` เอง เพราะเป็นข้อมูลของรอบอื่น (`w0pu2i` หรือรอบใกล้เคียง) — รอบนี้ไม่ทราบวิธีนับตอนที่เขียนตารางนั้น จึงไม่กล้าลบ/แก้เอง
 
@@ -3224,7 +3225,7 @@ STATIC-ON-BRIDGE ก่อน)
 
 1. **ระบุวิธีนับ**: หาว่ารอบที่เขียน `SCENE_LEVEL_CONTROL['BG0005']` (68.0, 35.0) นับด้วยวิธีไหน — ตรวจ git blame/round file ของบรรทัดนั้น แล้วเทียบ
 2. **ถ้าวิธีนับต่างกันจริง**: บันทึกทั้งสองวิธีไว้ในโมดูล ไม่ต้องแก้ตัวเลข
-3. **ถ้าตัวเลขเดิมผิดจริง**: แก้ `SCENE_LEVEL_CONTROL['BG0005']` เป็น `(5, 60, 70.0, 31.0)` พร้อม provenance ใหม่
+3. **ถ้าตัวเลขเดิมผิดจริง**: แก้ `SCENE_LEVEL_CONTROL['BG0005']` เป็น `(5, 60, 70.0, 31.0)` ถ้าตัวเลขเดิม (35) ใช้วิธีนับแบบ per-distinct-set/per-CLINE-row หรือ `(5, 60, 70.0, 38.0)` ถ้าใช้วิธี per-placement (วิธีเดียวกับที่ 70.0 ใช้) — ต้องระบุ provenance ใหม่และวิธีนับที่เลือกไว้ในโมดูลด้วยทั้งสองกรณี ห้ามเลือกค่าใดค่าหนึ่งโดยไม่บันทึกเหตุผล
 
 ### ข้อห้าม
 
