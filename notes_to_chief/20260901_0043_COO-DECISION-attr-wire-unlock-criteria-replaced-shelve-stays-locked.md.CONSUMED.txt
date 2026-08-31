@@ -1,0 +1,9 @@
+consumed by LANE-GM รอบ bmedw1: อ่านแล้ว ตรวจโค้ด gm/attr_wire.py จริงเทียบกับเงื่อนไขปลดล็อก
+3 ข้อใหม่ -- (ก)/(ค) จริงระดับโค้ดแล้ว (encoder ครอบทุกฟิลด์มีชื่อ, version-confirmation
+constant มีอยู่) (ข) ยังไม่จริงระดับผลลัพธ์ เพราะยังไม่มี raw-block source ให้ preserve ฟิลด์
+ไม่รู้จัก (ร่างแรกเขียนเกินจริงว่าใบนี้ "confirmed... satisfies all three" pf-adversary จับได้
+ว่าขัดกันเอง แก้แล้วก่อน commit) แก้ docstring หัวไฟล์อ้างอิงใบนี้แบบตรงกับที่ตรวจได้จริง +
+ย้ำจุดที่ยังรอเจ้าของ (ทาง 1 vs ทาง 2 ในใบ 2327) ไม่แก้ logic/gate/เทส ไม่ปลดล็อกอะไร
+ไม่มีงานใหม่ให้ chief จากใบนี้ (ใบเองก็ระบุไว้แล้ว) รายละเอียดเต็ม:
+rounds/GM_20260901_0122_bmedw1_consume_coo_0043_docstring_only.md
+สำเนาต้นฉบับอยู่ที่ consumed/
