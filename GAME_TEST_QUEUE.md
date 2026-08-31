@@ -9364,3 +9364,120 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 `GT-176` (scene 7, same shape, closest marker-tightness precedent 10.793 units) ·
 `GT-166` (scene 10, dual-objective shape used only when marker risk is elevated -- not this scene's case,
 despite the wide 2198.81-unit gap) · `GT-134` (scene 14, same shape)
+
+
+## GT-178 BG0015-HOSTILE-TWELVE-AGGRO-001 [attended, in-game]: ของ 81 ตัวที่ขึ้นจอในฉาก 14
+(Bg0015, Hell Volcano Island) ที่ GT-134 พิสูจน์แล้วว่าทุกตัว NEUTRAL -- 12 ตัวที่รอบนี้ splice
+faction เข้าไปใหม่ เดินเข้าใกล้แล้ว "เข้าตี/อ่านเป็นศัตรู" จริงบนจอหรือไม่ ในขณะที่อีก 69 ตัวยังนิ่ง
+เหมือนเดิม  [READY]
+
+> เปิดโดย chief รอบ `gmcj4a` (R274) 2026-08-31 -- CORE-REQUEST ร่วม LANE-A/LANE-B
+> (`notes_to_chief/20260831_2151_LANE-A-TO-CHIEF-scene14-hostile-splice-core-request-both-halves-confirmed-built.md`,
+> อ้างอิงข้อเสนอ `20260831_2007_LANE-A-TO-LANE-B-*` และคำยืนยัน `20260831_2053_LANE-B-TO-LANE-A-*`)
+> ลงจุดเสียบจริงแล้วใน `_roster_handoff` (`src/pirateforce_foundation/world_population_handoff.py:983-998`)
+> -- จุดเดียวที่ทั้ง `handoff_for_arrival` (M1-P login) และ `handoff_on_crossing` (M2) เรียกสำหรับ
+> source `"bg0015_roster"` ⇒ splice นี้ทำงานทุกครั้งที่ฉาก 14 ถูก compose ไม่ว่าทางไหน
+> ไม่ต้องมีจุดเสียบที่สอง (ยืนยันจากโค้ดจริง ไม่ใช่แค่จดหมาย)
+> 🔴 `pf-adversary` ตรวจ diff นี้แล้วรอบนี้ -- **พบ CONFIRMED defect** (ยืนยันด้วยการรัน `respond()`
+> จริง ไม่ใช่แค่อ่านโค้ด): `lane_hooks/lane_a_choose_npc_scene14.py`'s ChooseNPC responder ไม่รู้จัก
+> hostile splice เลย -- **คลิก NPC ตัวไหนก็ได้ในฉาก 14 (แม้ไม่ใช่ 1 ใน 12 ตัว) จะประกอบ actor ทั้ง 81
+> ตัวใหม่แบบพลเรือนล้วนแล้วส่งทับ ลบ hostile splice ของ 12 ตัวทิ้งกลับเป็นพลเรือนทันที** (replace-by-
+> omission, RE-092) รายละเอียดเต็ม + ที่ขอให้สาย A แก้:
+> `notes_to_chief/20260831_2318_CHIEF-TO-LANE-A-choosenpc-scene14-reverts-hostile-splice-to-civilian.md`
+> ⇒ **ผู้เทส: ห้ามคลิก NPC ตัวไหนในฉาก 14 ก่อนสังเกต/ถ่ายภาพพฤติกรรม aggro ของ 12 ตัวที่ spliced**
+> ถ้าคลิกไปแล้วเจอว่าทุกตัวนิ่งเหมือนพลเรือน ให้สงสัยข้อนี้ก่อน อย่ารีบสรุปว่า wire tier ผิด (มันถูก
+> ยืนยันแล้วด้วยเทส) -- แก้ที่ต้นทาง (ไฟล์ของสาย A) ยังไม่เกิดขึ้น ณ เวลาที่เปิดใบนี้
+
+### สืบต่อ GT-134 (ไม่ปิด ไม่ย้าย ไม่ทับ)
+`GT-134` ปิดแล้ว **PASS** สำหรับคำถาม "มีสิ่งมีชีวิตขึ้นจอในฉาก 14 ไหม" (81/91 ขึ้นจอจริง) --
+แต่ nonclaim ข้อ 1 ของใบนั้นตอบคำถาม "ก้าวร้าวไหม" ไปแล้วด้วยผลลบ: ทุกตัวเป็น NEUTRAL ไม่ถือ
+faction bit เลย ("มอนสเตอร์ที่ไม่เข้าตี = ผลที่คาดไว้ ไม่ใช่ FAIL" -- เจตนาเว้น scope ให้สาย B)
+ใบนี้คือใบที่ถามคำถามที่ GT-134 ตั้งใจไม่ตอบ: **เฉพาะ 12 ตัวที่รอบนี้ splice ใหม่** อ่านเป็นศัตรูจริง
+บนจอหรือไม่ -- คนละ claim กับ GT-134 ห้ามใช้ผลของใบหนึ่งปิดอีกใบ
+
+### objective (claim เดียว)
+เดินเข้าใกล้หนึ่งใน 12 placement ที่ `field_mob_hostile_bg0015.scene14_hostile_overrides()` splice
+faction เข้าไปแล้ว -- มันแสดงพฤติกรรมศัตรู (ป้ายชื่อสีศัตรู และ/หรือ เข้าตีเมื่อเข้าใกล้) ต่างจากอีก 69
+ตัวที่เหลือ (ยังเป็นพลเรือนเหมือน GT-134 วัดไว้) หรือไม่
+
+### pass criteria — สองชั้น แยกกัน ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น
+
+**wire/DB (ปิดแล้วโดยเทส -- ชั้นนี้ผู้อ่านแค่ยืนยัน ไม่ต้องรันซ้ำ):**
+- `tests/test_field_mob_hostile_bg0015.py::FieldMobHostileBg0015Tests::
+  test_splice_proof_changes_exactly_the_twelve_identities_and_nothing_else` และ
+  `::test_splice_proof_is_reachable_through_the_generic_recompose_splice` -- พิสูจน์กลไก splice
+  ที่ระดับไบต์มาก่อนรอบนี้แล้ว (ตัว dict/ตัว splice ถูก ก่อนมีจุดเสียบจริง)
+- `tests/test_world_population_handoff.py::HandoffTests::
+  test_a_composed_scene_gets_its_own_roster_and_never_the_dock_census` (แก้รอบนี้) -- ยืนยันว่า
+  `handoff.pc`/`handoff.frame` ของฉาก 14 ตอนนี้ **เท่ากับ** `splice_identity_override(direct, ...)`
+  ไม่ใช่ `direct` (สำมะโนพลเรือนดิบ) อีกต่อไป
+- full suite เขียวรอบนี้ (chief report: 5972+ passed, ไม่มีแดงใหม่, skip เดิม)
+- 🔴 **เกณฑ์นี้ตอบแล้วว่า YES** -- ไม่ต้องบูตเซิร์ฟเวอร์ซ้ำเพื่อพิสูจน์ชั้นนี้
+
+**client-observable (ยังไม่มีใครยืนดู -- นี่คือสิ่งที่ใบนี้ต้องการ ต้องมีคนอยู่หน้าจอเท่านั้น):**
+- ที่ 1 ใน 12 placement ที่ spliced: เห็นพฤติกรรมต่างจากพลเรือน (ป้ายชื่อเปลี่ยนสี และ/หรือ เข้าตี
+  เมื่อเดินเข้าระยะ) -- ถ่ายภาพนิ่ง full-res
+- ที่อย่างน้อย 1 placement ที่ไม่อยู่ใน 12 ตัวนั้น: ยังนิ่งเหมือนที่ GT-134 วัดไว้ (ควบคุมเทียบ)
+- **สีของทุกป้ายชื่อในทุกภาพ** จดแยกบรรทัดต่อป้าย ("none" ถ้าไม่มีป้าย) จากภาพนิ่ง full-res เท่านั้น
+  -- ถ้าต่างจากภาพเซิร์ฟเวอร์จริง บันทึกลง `REAL_SERVER_DIVERGENCE.tsv`
+- ห้ามอนุมานสาเหตุของสี (คำถามเปิดของ `RE-067`) -- จดสีเฉยๆ
+- ❗ **negative มีค่าเท่ากับ positive**: ถ้าทั้ง 12 ตัวยังนิ่งเหมือนพลเรือนทุกตัว (ไม่ต่างจาก GT-134
+  เลย) ⇒ จดละเอียดเท่าผลบวก แล้ว redirect ไปตรวจฝั่ง client-side interpretation ของ faction byte
+  (`mob_aggro.py` หรือคำถามเดียวกับ `RE-067`) -- **ไม่ใช่การหักล้าง wire tier ที่ปิดไปแล้วข้างบน**
+  เพราะไบต์ถูกยืนยันแล้วว่าออกไปจริง คำถามที่เหลือมีแค่ "ไคลเอนต์อ่านมันยังไง"
+
+### เกณฑ์ตัวคุม 12 ตำแหน่ง -- ห้ามเดา ต้องอ่านจากโค้ดก่อนบูต
+ไม่มีบรรทัดคอนโซลไหน (รวม `WORLD_CENSUS_BG0015` และ per-actor lines เดิม) พิมพ์ว่าตัวไหนถูก splice
+-- `actor_lines()` อ่านจากสำมะโนพลเรือนดิบเสมอ (`world_population_bg0015.py:438-458`) ไม่รู้เรื่อง
+splice เลย ก่อนบูตให้รันจากเชลล์ repo (ไม่ใช่การกระทำในเกม):
+```
+py -3 -c "from pirateforce_foundation import field_mob_hostile_bg0015 as h
+for m in h.scene14_hostile_roster():
+    print(m.placement_index, m.template_id, m.display_name, m.level, m.max_hp, m.x, m.y, m.z)"
+```
+นี่คือแหล่งเดียวที่ถูกต้องของ 12 ตำแหน่ง -- จด placement_index/ชื่อ/พิกัดที่พิมพ์ออกมาจริงไปใช้เดินหา
+ห้ามพิมพ์เลขเดาเองหรือเชื่อเลขจากรอบอื่น (ตารางเปลี่ยนได้ถ้าใครแก้ `DEFAULT_HOSTILE_PLACEMENT_INDICES`)
+
+### db / server args (เป๊ะ -- เหมือน GT-134 ทุกประการ ดูใบนั้นสำหรับเหตุผลละเอียด)
+สำเนา `state\run_gt177.sqlite3` -- ห้ามเปิด canonical `state\pirateforce.sqlite3`, sha256 ก่อน-หลัง
+ต้องเท่ากัน
+```
+py -3 -u -m pirateforce_foundation.app --db state\run_gt177.sqlite3
+```
+🔴 ห้ามมีแฟล็ก `--*-scenario` ใด ๆ และห้าม `--second-password-mode bypass` ฝั่งเซิร์ฟเวอร์ (ไม่งั้น
+dispatcher ข้ามกิ่งสำมะโนฉาก 14 ไปเลย ตามที่ `GT-134` วัดไว้แล้ว) · client `-SecondPasswordMode bypass`
+ใช้ได้ตามเดิม (คนละตัว) · 🔴 restart เซิร์ฟเวอร์ก่อนบูตไคลเอนต์ทุกครั้ง · เข้าฉาก 14 ด้วยกลไกเดิมของ
+GT-134 (GM login-scene override หรือ `/warp 14`) · NO-CRASH ด้วย right-click-drag เท่านั้น (ไม่ใช่
+Q/E) ที่จุดยืนเริ่มต้น -- การเดินเข้าใกล้มอนด้วย W/A/S/D คือส่วนหนึ่งของการทดสอบเอง ไม่ใช่ NO-CRASH
+check · teardown ภายใน 420 นาทีจาก boot stamp
+
+### nonclaims
+1. ไม่พิสูจน์ดาเมจ/HP loss จากการถูกตีจริง -- วัดแค่ aggro/approach behavior
+2. ไม่พิสูจน์ว่า 69 ตัวที่เหลือ "ไม่มีทางก้าวร้าวได้เลย" -- บูตเดียว จุดเดียว
+3. ไม่แยกทดสอบ M2 crossing เป็นบูตต่างหาก (ยืนยันจากโค้ดว่าจุดเสียบเดียวกัน แต่ใบนี้เดินผ่านทาง
+   login เท่านั้น -- ถ้าต้องการ attended evidence ของทาง crossing เปิดใบใหม่แยก)
+4. ไม่ตัดสินสาเหตุของสีป้ายชื่อ (`RE-067` ยังเปิด)
+5. ไม่ปิด/ไม่รอผล `pf-adversary` -- สถานะนั้นแยกจากใบนี้โดยสิ้นเชิง (ผลออกมาแล้ว: CONFIRMED defect,
+   ดูกล่องด้านบน)
+6. ไม่เลื่อนสถานะ identity ของ `Bg0015` ให้สูงกว่าที่ `COO-DECISION` เคาะไว้แล้ว
+7. ไม่ปิดช่องโหว่ ChooseNPC (`lane_hooks/lane_a_choose_npc_scene14.py`) ในใบนี้ -- ไฟล์ของสาย A, ขอไป
+   แยกต่างหากแล้ว (ดู links)
+
+### สัญญาผู้บริโภค
+เปิดโดย chief -- LANE-A/LANE-B ร่วมบริโภคผล
+
+### links
+`src/pirateforce_foundation/world_population_handoff.py::_roster_handoff` (บรรทัด 983-998) ·
+`src/pirateforce_foundation/field_mob_hostile_bg0015.py` ·
+`tests/test_field_mob_hostile_bg0015.py` · `tests/test_world_population_handoff.py::HandoffTests` ·
+`notes_to_chief/20260831_2318_CHIEF-TO-LANE-A-choosenpc-scene14-reverts-hostile-splice-to-civilian.md`
+(CONFIRMED ChooseNPC defect + ที่ขอสาย A) ·
+`notes_to_chief/20260831_2151_LANE-A-TO-CHIEF-scene14-hostile-splice-core-request-both-halves-confirmed-built.md` ·
+`notes_to_chief/20260831_2007_LANE-A-TO-LANE-B-scene14-hostile-splice-design-proposal-re092.md` ·
+`notes_to_chief/20260831_2053_LANE-B-TO-LANE-A-scene14-hostile-splice-confirmed-and-built-re092.md` ·
+`GT-134` (supersedes/updates -- see relationship note above, GT-134 stays PASS/closed as-is)
+
+### result (ผู้เทสกรอก)
+```
+
+```

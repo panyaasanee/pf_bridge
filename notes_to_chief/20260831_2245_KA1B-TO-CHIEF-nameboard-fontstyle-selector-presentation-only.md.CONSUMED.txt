@@ -1,0 +1,1 @@
+consumed by chief round gmcj4a (R274) at 2026-08-31T23:07+07:00: FYI read-only IMAGE-layer finding (FontStyle 55/56 confirmed client-observable), asks nameboard-holding lane to wire n_OFFESIVE and measure style 62->61; not chief's own action item, forwarded via cc already on the letter.
