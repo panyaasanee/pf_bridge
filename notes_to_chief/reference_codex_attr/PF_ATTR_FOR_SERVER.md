@@ -10,6 +10,12 @@ The current server is an emulator target, not an evidence source. Implement only
 
 - Image SHA-256: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
 
+## P0-6 ground-drop transport
+
+[MEASURED][IMAGE] `PF_GROUND_DROP_TRANSPORT.tsv` publishes 19 IMAGE rows: nine content-addressed references to canonical A1/A2 rows and ten new bounded static evidence rows. On A8D500's ready branch, the click-produced `PickupTerrainThing` request is carried inside the gameplay or login outer object and reaches nested/outer buffer encoding. The refusal branch releases the outer object; both branches return zero and the audited callers ignore EAX. Persistent server-to-client ground-object issuance/transport remains open, so overall P0-6 is PARTIAL.
+
+[PROPOSED] A future emulator may decode the nested `PickupTerrainThing` request using the canonical A2 fields and the proved outer protocol structure. Treat `0x4543` (nested pickup), `0x6E6F` (gameplay outer), and `0x453A` (login outer) as runtime type IDs only; do not register any as a top-level wire opcode on this evidence. Do not implement persistent ground-drop spawning from `FightingDropModule_Client`/`FightingDropNotify`: IMAGE proves only custom-reflection parents and metadata sizes, not a concrete wire surface.
+
 ## Audited CNetNPC quest-mark dependency
 
 [MEASURED][IMAGE] `PF_ATTR_QUEST_MARK_SELECTOR.tsv` proves one CNetNPC path from NPCAttr +0x78 through a client-local event and QuestAttr/MOBS/QUEST inputs to selector values 0..8. It does not prove that the compute handler is the final event writer, that every client path uses it, or that any selector byte is itself original wire state.

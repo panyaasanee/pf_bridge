@@ -22,7 +22,7 @@ This is an additive read-only checkpoint, not the final version. The server/emul
 - Active field-direction claims withheld: 390 = 373 with semantic and/or scope open + 17 exact-semantic/exact-scope claims held only by OPEN conflict.
 - Other active claim work: non-wire runtime rows 7; container concepts 32; class-link/codec/closure rows 27; combat-lifecycle semantic/order rows 8.
 - OPEN conflicts represented exactly once in the unified ledger: 640 = rederived-IMAGE 616; measured-NOT_WIRE-needed 17; cross-source 2; runnable-server-code semantic 5.
-- All conflict rows: 1285; OPEN 640; non-OPEN 645.
+- All conflict rows: 1286; OPEN 640; non-OPEN 646.
 - Class-level open work: 0 paired codecs need first field decode; 0 already-enumerated codecs need deduplicated active IMAGE/semantic rederivation; 10 classes need getter/vtable recovery
 - Selector evidence quarantined without suppressing field/server guidance: 0
 - Open empty-codec/legacy-row closure conflicts needing measured NOT_WIRE corrections: 17
@@ -34,7 +34,8 @@ This is an additive read-only checkpoint, not the final version. The server/emul
 - Container concrete-scope rows: exact 44; unknown 24
 - Source-separated binding rows: DATA 77 (exact 70; role-only 7); IMAGE loader mappings 1
 - Combat lifecycle: 34 source-separated rows (`IMAGE` 26; `DATA` 8). Actor preexistence before lethal actor-entry dead-sync is exact; CHitResult-versus-HP arrival order, original-server cadence/death hold, exact equipment-dependent behavior selection, and original-server acknowledgement remain open. See `PF_COMBAT_LIFECYCLE.tsv`/`.md`.
-- Frozen/re-derived conflict rows: 1285
+- P0-6 ground-drop transport: 19 IMAGE rows (9 content-addressed A1/A2 references; 10 new bounded IMAGE evidence rows). The accepted-queue branch closes click-to-nested/outer buffer encoding, but persistent server-to-client ground-object issuance remains open; overall status PARTIAL. Runtime IDs `0x4543`/`0x6E6F`/`0x453A` are not promoted to wire opcodes. See `PF_GROUND_DROP_TRANSPORT.tsv`/`.md`.
+- Frozen/re-derived conflict rows: 1286
 - Approved attended probe requests: 0. `APPROVED_PROBE_REQUEST_SPECS` is empty, so no proposal has passed the fail-closed owner intake contract (linked unresolved key, exact commands, expected and falsifying observations, unlock, headless evidence, and prior-probe search). Zero probes does not mean zero unresolved work.
 
 ## Exact Priority-0 semantics (scope shown; not all class-safe)
@@ -164,7 +165,7 @@ Important mismatch: IMAGE probes an optional MOBS runtime `f_SCALE` at VA 0x004A
 - Pet/Activity state rows reclassified from wire to control/lifecycle: 68.
 - Activity/Pets module attachment rows reclassified as non-wire: 32.
 - Owning-vtable boundary corrections: 2; unsupported empty-closure conflicts: 17; module slot-role correction: 1.
-- Total conflict rows: 1285.
+- Total conflict rows: 1286.
 
 CSkillAttr is a DBAttribute-derived object with stored `_Mysize` at object +0x48 (low uint16 on wire) and repeated node fields `{skill_id_u16_wire@+0x0C, current_skill_level_u16@+0x10, current_level_skill_point_progress_u32@+0x14}`.
 

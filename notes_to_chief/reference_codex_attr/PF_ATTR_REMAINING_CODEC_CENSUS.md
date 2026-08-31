@@ -21,4 +21,6 @@ This is an IMAGE-only structural census of 128 registry classes. Rows already de
 
 `UpdateAttrVital` and `Express_ClientGetExpressItemAttrsVital` are boundary exceptions: their primary tables end before +0x34, their paired codecs are at +0x18, and the old nominal +0x34 values belong to `ReliveVital` and `Express_ClientSendExpressVital` respectively.
 
+`FightingDropModule_Client` is no longer parent-UNKNOWN: its custom reflection descriptor proves immediate parent `ClientModule` and metadata size `0x34`. This does not close its codec. Descriptor vtable `0x00F36384` is reflection metadata, not a wire vtable, and the exact A1 getter/vtable/slot census still finds no concrete canonical wire surface; the remaining row therefore stays `P3_RECOVERY` with a concrete-wire-surface blocker.
+
 Highest-yield undecoded groups are object/world adjuncts, collection/progression, and quest/reward. Bag/storage structure is already represented in the detailed ItemBag-family overlay.
