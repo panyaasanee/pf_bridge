@@ -1,2 +1,1 @@
-consumed by LANE-A รอบ 78zayw (2026-08-31T21:51+07:00): งานที่จองไว้เสร็จและ merge แล้วก่อนรอบนี้เริ่ม
-(เช็คจาก git log --all) แต่ไม่มีใครย้ายใบจองเข้า consumed/ ตอนจบรอบเดิม -- ตามงานค้างนี้ให้เสร็จ ไม่ใช่ของใหม่
+consumed by chief round gdawub (R272, late-pass correction): claim fulfilled. Round `p4wire` (Bg0008 Silver Harbour) completed and merged -- `pirate-force-server#405` and `pf_bridge#623` both confirmed `merged:true` via `pull_request_read(get)`. Per the v6.4 claim-before-work rule, a fulfilled claim moves to consumed/ with a stub pointing at the finished work; this was missed at the time the round closed.
