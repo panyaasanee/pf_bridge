@@ -56,12 +56,14 @@ CONCRETE_CONSUMER_CLASS_UNKNOWN	CAchievementsAttr.TreeChild	UNKNOWN	scope	2
 CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	CCooldownAttr	UNKNOWN	scope	2
 CONCRETE_CONSUMER_CLASS_UNKNOWN	CCooldownAttr	UNKNOWN	scope	2
 CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	CGuildStorageAttr	UNKNOWN	scope	2
+OPEN_CONFLICT_WORK_ITEM	COMBAT_LIFECYCLE	N/A	OPEN_SERVER_CODE_SEMANTIC_CONFLICT	2
 CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	CVehicleAttr	UNKNOWN	scope	2
 ROLE_PROVED_BROADER_IDENTITY_OPEN	CollectableBookTypeAttr	PROVEN_EXACT	class role is exact but the code/bit domain has no unique ty	2
 CONCRETE_CONSUMER_AND_SEMANTIC_OPEN	CollectionBagAttr	UNKNOWN	scope	2
 GAMEPLAY_SEMANTIC_UNKNOWN	CollectionBagAttr	PROVEN_EXACT	gameplay identity is not uniquely bound to Data or an exact 	2
 FIELD_GAMEPLAY_SEMANTIC_UNKNOWN	CollectionObjPointAttr	PROVEN_EXACT	whole IMAGE census proves only constructor/copy/diff/merge/c	2
 FIELD_GAMEPLAY_SEMANTIC_UNKNOWN	CollectionPieceAttr	PROVEN_EXACT	only constructor, copy, and codec uses are proved	2
+COMBAT_LIFECYCLE_SEMANTIC_OR_ORDER_OPEN	CombatLifecycle	UNKNOWN	Original-server flag policy is absent.	2
 FIELD_GAMEPLAY_SEMANTIC_UNKNOWN	CrystalPlateAttr	PROVEN_EXACT	no unique non-copy IMAGE producer/consumer	2
 ROLE_PROVED_BROADER_IDENTITY_OPEN	CrystalSlotAttr	PROVEN_EXACT	per-slot nutrient-add cap role is proved	2
 ROLE_PROVED_BROADER_IDENTITY_OPEN	CrystalSlotAttr	PROVEN_EXACT	zero/nonzero crystal-presence role is proved	2
@@ -106,6 +108,12 @@ CONCRETE_CONTAINER_RECORD_CLASS_UNKNOWN	CAchievementsAttr.TreeChild	UNKNOWN	scop
 OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	CGCBuffModule	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
 OPEN_REDERIVED_IMAGE_CONFLICT	CSkillAttr	PROVEN_EXACT	open conflict(s)	1
 OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	CWebGMModule	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
+COMBAT_LIFECYCLE_SEMANTIC_OR_ORDER_OPEN	CombatLifecycle	UNKNOWN	Cadence is absent from the mapped DATA rows.	1
+COMBAT_LIFECYCLE_SEMANTIC_OR_ORDER_OPEN	CombatLifecycle	UNKNOWN	Original-server cadence is absent from this static layer.	1
+COMBAT_LIFECYCLE_SEMANTIC_OR_ORDER_OPEN	CombatLifecycle	UNKNOWN	Gameplay label remains unproved.	1
+COMBAT_LIFECYCLE_SEMANTIC_OR_ORDER_OPEN	CombatLifecycle	UNKNOWN	Relative UI dispatch order is not proved.	1
+COMBAT_LIFECYCLE_SEMANTIC_OR_ORDER_OPEN	CombatLifecycle	UNKNOWN	No original S2C combat sequence joins the two carriers.	1
+COMBAT_LIFECYCLE_SEMANTIC_OR_ORDER_OPEN	CombatLifecycle	UNKNOWN	Original-server acknowledgement and equipment-dependent sele	1
 OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	CutinModule_Client	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1
 CONTAINER_GAMEPLAY_SEMANTIC_OPEN	DailyQuestAttr	PROVEN_EXACT	entry key/value roles are exact but the value has no univers	1
 OPEN_NEEDS_MEASURED_NONWIRE_CORRECTION	EnemySearchModule	PROVEN_EXACT	own +0x34 target is physically empty, but the legacy non-EMP	1

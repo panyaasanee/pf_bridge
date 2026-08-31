@@ -18,9 +18,9 @@ The current server is an emulator target, not an evidence source. Implement only
 
 ## Audited CNetNPC role and trait boundary
 
-[MEASURED][IMAGE] PF_ATTR_ROLE_DISCRIMINATOR.tsv proves separate client decisions rather than one monster class flag: typed CNetNPC interaction, two audited relation-to-target branches, generic EA7D action admission, boss UI from rank bits 6..10, nameboard input from n_OFFESIVE, shared death state, and loaded drop configuration. The unique named n_AI_COMBAT query is its loader while unnamed offset-based consumers remain open; n_MOB_USAGE has no exact image literal; n_CAPABILITY==1 is a UI/data gate; n_ENEMY is loaded/copied without a proved attack-admission consumer.
+[MEASURED][IMAGE] PF_ATTR_ROLE_DISCRIMINATOR.tsv documents separate audited client decisions and does not prove one monster class flag: typed CNetNPC interaction, two audited relation-to-target branches, generic EA7D action admission, boss UI from rank bits 6..10, nameboard input from n_OFFESIVE, shared death state, and loaded drop configuration. The unique named n_AI_COMBAT query is its loader while unnamed offset-based consumers remain open; n_MOB_USAGE has no exact image literal; n_CAPABILITY==1 is a UI/data gate; n_ENEMY is loaded/copied without a proved attack-admission consumer.
 
-[MEASURED][DATA] The usage1/rank/combat and usage2/capability/quest combinations are empirical clusters with explicit counterexamples. IDs 916 and 917 are exact record fingerprints, not a generalized training-dummy role bit. A populated drop reference is not proof of loot issuance.
+[MEASURED][DATA] The usage1/rank/combat and usage2/capability/quest combinations are empirical clusters with explicit counterexamples. IDs 916 and 917 are exact record fingerprints and do not prove a generalized training-dummy role bit. A populated drop reference is not proof of loot issuance.
 
 [PROPOSED] If the emulator needs a working reconstruction before original policy is recovered, represent role as additive, separately testable traits and keep the exact record ID as an explicit reviewed override where necessary. Do not derive a universal is_monster, attackable, talk_only, offensive, boss, or lootable value from one DATA field or cluster. This proposal is not original-server evidence.
 

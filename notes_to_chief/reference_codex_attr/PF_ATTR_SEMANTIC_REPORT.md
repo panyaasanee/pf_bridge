@@ -18,11 +18,11 @@ This is an additive read-only checkpoint, not the final version. The server/emul
 - Semantic-delta rows: 300 (`IMAGE` 300; `DATA` 0)
 - Delta by family (directional scoped rows): ActorAttr 42; ActorGatheringInfoAttr 2; ActorTreasureHuntExcavatingInfoAttr 2; AvatarAttr 40; BackpackAttr 2; BasicAttr 18; CAchievementsAttr.ListChild 8; CAchievementsAttr.TreeChild 6; CCooldownAttr 4; CGuildStorageAttr 2; CSkillAttr 6; CVehicleAttr 14; CollectionBagAttr 2; DailyQuestAttr.RecordNode 4; ExpressBagAttr 2; InstanceRefreshAttr 4; ItemAttr 34; ItemBagAttr 8; ItemBagAttr_Equiped 2; ItemMallBagAttr 2; ItemVaryAttr 6; MovementAttr 18; NPCAttr 16; NavigationExAttr 6; PetAttr 16; QuestMiscAttr.QuestMiscData 10; StallActorAttr 4; StorageAttr 2; SummonedPetAttr 10; SystemGiftAttr.SystemGift 6; UnlimitBagAttr 2
 - Existing-row transitions: PARTIAL->PARTIAL 10; PARTIAL->EXACT 10; PARTIAL->ROLE 4; PARTIAL->UNKNOWN 6; EXACT->EXACT 110; ROLE->PARTIAL 2; ROLE->EXACT 16; ROLE->ROLE 80; UNKNOWN->ROLE 30; UNKNOWN->UNKNOWN 16; new rows 16 (BasicAttr exact 8; ActorAttr exact 2 and role-only 2; CVehicleAttr role-only scope-open 2; NPCAttr exact CNetNPC-scoped 2). The 24 added same-status transitions are fail-closed scope corrections for ItemAttr base, ItemBagAttr, and ItemVaryAttr count rows.
-- Unified unresolved work ledger: 966 rows = 456 active claim rows + 510 standalone conflict work items; standalone conflict rows are work items, not UNKNOWN fields.
+- Unified unresolved work ledger: 976 rows = 464 active claim rows + 512 standalone conflict work items; standalone conflict rows are work items, not UNKNOWN fields.
 - Active field-direction claims withheld: 390 = 373 with semantic and/or scope open + 17 exact-semantic/exact-scope claims held only by OPEN conflict.
-- Other active claim work: non-wire runtime rows 7; container concepts 32; class-link/codec/closure rows 27.
-- OPEN conflicts represented exactly once in the unified ledger: 638 = rederived-IMAGE 616; measured-NOT_WIRE-needed 17; cross-source 2; runnable-server-code semantic 3.
-- All conflict rows: 1283; OPEN 638; non-OPEN 645.
+- Other active claim work: non-wire runtime rows 7; container concepts 32; class-link/codec/closure rows 27; combat-lifecycle semantic/order rows 8.
+- OPEN conflicts represented exactly once in the unified ledger: 640 = rederived-IMAGE 616; measured-NOT_WIRE-needed 17; cross-source 2; runnable-server-code semantic 5.
+- All conflict rows: 1285; OPEN 640; non-OPEN 645.
 - Class-level open work: 0 paired codecs need first field decode; 0 already-enumerated codecs need deduplicated active IMAGE/semantic rederivation; 10 classes need getter/vtable recovery
 - Selector evidence quarantined without suppressing field/server guidance: 0
 - Open empty-codec/legacy-row closure conflicts needing measured NOT_WIRE corrections: 17
@@ -33,7 +33,8 @@ This is an additive read-only checkpoint, not the final version. The server/emul
 - Combined UpdateAttr/Express-Get/Daily-Reward/CBuff/object-world/Pet/Activity container concepts: 68 (exact 39; role-only 16; partial 2; unknown 10; not-wire 1)
 - Container concrete-scope rows: exact 44; unknown 24
 - Source-separated binding rows: DATA 77 (exact 70; role-only 7); IMAGE loader mappings 1
-- Frozen/re-derived conflict rows: 1283
+- Combat lifecycle: 34 source-separated rows (`IMAGE` 26; `DATA` 8). Actor preexistence before lethal actor-entry dead-sync is exact; CHitResult-versus-HP arrival order, original-server cadence/death hold, exact equipment-dependent behavior selection, and original-server acknowledgement remain open. See `PF_COMBAT_LIFECYCLE.tsv`/`.md`.
+- Frozen/re-derived conflict rows: 1285
 - Approved attended probe requests: 0. `APPROVED_PROBE_REQUEST_SPECS` is empty, so no proposal has passed the fail-closed owner intake contract (linked unresolved key, exact commands, expected and falsifying observations, unlock, headless evidence, and prior-probe search). Zero probes does not mean zero unresolved work.
 
 ## Exact Priority-0 semantics (scope shown; not all class-safe)
@@ -123,7 +124,7 @@ UpdateAttrVital's paired codec at exceptional vtable slot +0x18 is now represent
 
 FightAttr's own slot +0x34 codec is empty. Its two runtime attachment pointers are non-wire fields. The 29 formulas in `PF_ATTR_COMPUTED_SEMANTICS.tsv` are exact original-client computations, but they do not prove which side was authoritative on the original server.
 
-Pet/Activity adds ten non-wire runtime/state rows. Five attachment pointers are exact: DailyActivityState, CNetActor, PetsData, ActorLearnedPetsSkillData, and PetsMergingData. PetAttr +0x9C is a bounded mutation marker; PetsModule +0x20/+0x24 are selector-1/2 runtime references; +0x30 is tied to Pets_UpdateSummonPetsTimeOutVital and Pet_Sailor_CD but its time representation/units remain open. PetsModule +0x34 remains UNKNOWN because IMAGE proves only its constructor zero. The active-claim unresolved census is 456; the unified ledger is 966 after adding conflict-only work items. CAchievementsAttr replaces one coarse placeholder with thirteen precise open concepts (net +12); SystemGiftAttr replaces one coarse placeholder with six precise open field rows (net +5); the three Quest placeholders are replaced by fourteen field-role and six container-role concepts (net +17). These increases are finer resolution, not regressions.
+Pet/Activity adds ten non-wire runtime/state rows. Five attachment pointers are exact: DailyActivityState, CNetActor, PetsData, ActorLearnedPetsSkillData, and PetsMergingData. PetAttr +0x9C is a bounded mutation marker; PetsModule +0x20/+0x24 are selector-1/2 runtime references; +0x30 is tied to Pets_UpdateSummonPetsTimeOutVital and Pet_Sailor_CD but its time representation/units remain open. PetsModule +0x34 remains UNKNOWN because IMAGE proves only its constructor zero. The active-claim unresolved census is 464; the unified ledger is 976 after adding conflict-only work items. CAchievementsAttr replaces one coarse placeholder with thirteen precise open concepts (net +12); SystemGiftAttr replaces one coarse placeholder with six precise open field rows (net +5); the three Quest placeholders are replaced by fourteen field-role and six container-role concepts (net +17). These increases are finer resolution, not regressions.
 
 `PF_ATTR_UI_BINDINGS.tsv` now contains 21 Fight getter-to-widget object-offset bindings plus four exact Activity literal-control bindings (`RADIOBUTTON_JEWEL`, `RADIOBUTTON_LINK`, `RADIOBUTTON_PUZZLE`, `BUTTON_OK`) to module object slots. Fight literal control names remain open where no exact model join exists.
 
@@ -163,7 +164,7 @@ Important mismatch: IMAGE probes an optional MOBS runtime `f_SCALE` at VA 0x004A
 - Pet/Activity state rows reclassified from wire to control/lifecycle: 68.
 - Activity/Pets module attachment rows reclassified as non-wire: 32.
 - Owning-vtable boundary corrections: 2; unsupported empty-closure conflicts: 17; module slot-role correction: 1.
-- Total conflict rows: 1283.
+- Total conflict rows: 1285.
 
 CSkillAttr is a DBAttribute-derived object with stored `_Mysize` at object +0x48 (low uint16 on wire) and repeated node fields `{skill_id_u16_wire@+0x0C, current_skill_level_u16@+0x10, current_level_skill_point_progress_u32@+0x14}`.
 
@@ -224,7 +225,7 @@ ItemAttr +0x30 is the item-definition lookup key used to obtain s_ID_ICON, +0x34
 
 [MEASURED][IMAGE] Presentation remains independent: n_RANK bits 6..10 have exactly two boss-UI callers; n_OFFESIVE has one direct nameboard predicate caller; n_CAPABILITY==1 drives duplicated raw-table UI/data gates. The unique named n_AI_COMBAT query is its loader and unnamed offset-based consumers remain open; n_ENEMY is loaded/copied without a proved admission consumer; n_MOB_USAGE has zero exact ASCII/UTF-16 literals. The shared death predicate and loaded drop configuration do not produce a proved death-to-loot edge.
 
-[MEASURED][DATA] The 13 DATA rows retain the independent MOBS/AI_WANDER census. n_MOB_USAGE=1 overlaps the empirical rank+combat cluster in 1533/1545 rows but has 12 exceptions and misses 139 other rank+combat rows. usage=2 + capability=1 + quest vectors has 670 rows but includes 12 rank-positive, 10 combat, and 8 offensive counterexamples. MOBS ids 916 and 917 are exact, distinct record fingerprints; neither supplies a generalized dummy bit. Same-name control groups 27/1732/8621 and 31/1635/2127 vary across rank, combat, usage, and offensive traits.
+[MEASURED][DATA] The 13 DATA rows retain the independent MOBS/AI_WANDER census. n_MOB_USAGE=1 overlaps the empirical rank+combat cluster in 1533/1545 rows but has 12 exceptions and misses 139 other rank+combat rows. usage=2 + capability=1 + quest vectors has 670 rows but includes 12 rank-positive, 10 combat, and 8 offensive counterexamples. MOBS ids 916 and 917 are exact, distinct record fingerprints; neither proves a generalized dummy bit. Same-name control groups 27/1732/8621 and 31/1635/2127 vary across rank, combat, usage, and offensive traits.
 
 [MEASURED][CROSS-SOURCE NONCLAIM] No single is_monster, talk_only, or attackable field is proved. IMAGE and DATA remain separate rows; the empirical DATA clusters are not original role policy.
 

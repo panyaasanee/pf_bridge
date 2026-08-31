@@ -8,7 +8,7 @@ A published checkpoint is authoritative only through `PF_ATTR_GENERATION_MANIFES
 - Directional rows: 490
 - Unique wire fields/controls: 256
 - Priority-0 gameplay fields: 28 structural; 30 class-scoped claims (`PROVEN_EXACT` 20; `PROVEN_ROLE_ONLY` 7; `PARTIAL` 0; `UNKNOWN` 3)
-- Recorded conflicts/claim corrections: 1283 rows; see `PF_ATTR_CONFLICTS.tsv` for source-separated details
+- Recorded conflicts/claim corrections: 1285 rows; see `PF_ATTR_CONFLICTS.tsv` for source-separated details
 - Concrete-class scope: `PROVEN_EXACT` 280; `UNKNOWN` 210
 - `PARTIAL`: 27
 - `PROVEN_EXACT`: 231
