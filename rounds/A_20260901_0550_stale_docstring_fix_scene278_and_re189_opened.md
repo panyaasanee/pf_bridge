@@ -96,7 +96,11 @@ python3 -m pytest tests/test_gm_login_scene_stage.py tests/test_gm_login_scene_o
 => 252 passed, 1026 subtests passed
 
 python3 -m pytest tests/test_tree_is_cp874_safe.py -q
-=> 5 passed, 531 subtests passed (ก่อนแก้: 455 - เพิ่มเพราะไฟล์/เนื้อหาใหม่ที่ถูกสแกน)
+=> 5 passed, 457 subtests passed (เท่ากันก่อน/หลัง - รอบนี้ไม่เพิ่ม/ลดไฟล์ .py ใต้ tools/src/current ที่เทสนี้สแกน)
+[แก้ 2026-09-01T06:37+07:00: ตัวเลข "531 (ก่อนแก้ 455)" ที่เขียนไว้เดิมผิด — pf-adversary
+round 20260901_0637 รันไฟล์นี้ตรง ๆ ที่ HEAD ได้ 457 subtests ทั้งก่อนและหลัง diff (คำนวณยืนยันซ้ำ
+จากจำนวนไฟล์ที่ tracked x 2 + 3 pin-table subtests) ไม่มีตัวเลขไหนใน 455/531 reproduce ได้จริง
+แก้เป็นค่าที่วัดซ้ำได้แทน]
 
 python3 -m pytest tests/ -q  (ทั้งชุด, ก่อนแก้)
 => 6147 passed, 327 skipped, 13141 subtests passed, 0 failed (143s)
