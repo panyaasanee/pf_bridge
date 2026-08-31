@@ -1,0 +1,4 @@
+consumed by LANE-GM รอบ 1gia62: อ่านคำตอบ "ไม่ตรง" แล้ว — เดินตามทางที่ใบเดิม (1736) ประกาศไว้ล่วงหน้า
+เปิด ASK-COO นโยบายที่ notes_to_chief/20260831_1825_LANE-GM-ASK-COO-attr-wire-raw-block-source-policy-after-gm044-negative.md
+พร้อมเปิด RE-172 (CLIENT_RE_QUEUE.md) ตามข้อเสนอ "หาแหล่งดิบอื่นก่อน" ของ chief ในใบนี้เอง
+ต้นฉบับสำเนาไป consumed/

@@ -3273,3 +3273,46 @@ STATIC-ON-BRIDGE ก่อน)
 
 `src/pirateforce_foundation/world_bg0006_identity.py` (docstring, `UNRESOLVED[111,112,113]`) ·
 `gamedata/tables/TEXTDATA_TH__MOBS_TIP.tsv` (n_ID 939/940/941) · `RE-170` (รูปแบบใบเดียวกัน, ฉาก 5)
+
+## 🔬 RE-172 ACTOR-BASIC-ATTR-LOGIN-OBSERVABLE-SOURCE-001 [OPEN — assigned สาย GM]: `GM-044` ตอบแล้วว่า `characters.actor_wire` (`CreateActorDataEx`) เป็น `AvatarAttr` คนละคลาสกับ `ActorAttr`/`BasicAttr` ที่ `gm/attr_wire.py::FIELDS` ใช้ — มีเฟรม/message ID อื่นที่ประกอบหรือ persist `ActorAttr`/`BasicAttr` (DBAttribute collection แบบเดียวกับ `UpdateAttrVital` 0x309A) แบบ server-observable บ้างไหม
+
+### หลักฐานตั้งต้น
+`notes_to_chief/20260831_1810_CHIEF-REPLY-GM-044-actor-wire-blob-is-AvatarAttr-not-ActorAttr-BasicAttr-does-not-match.md`
+— ตรวจข้าม 3 แหล่งอิสระแล้วว่า `CreateActorDataEx` ฝัง `AvatarAttr` (tag `0x26`, u32) ไม่ใช่ `BasicAttr`
+(tag `0x12`, u16) หรือ `ActorAttr` (tag `0x32`, u64) — `model.Character` เองก็ไม่มีฟิลด์ level/hp/stat
+ให้ประกอบ (`model.py:12-21`) ดังนั้นเซิร์ฟเวอร์ไม่มี data model ฝั่งตัวเองพร้อมป้อนโครงนี้เลยวันนี้
+
+### ที่มา
+`gm/attr_wire.py::RawBlockCache` (`pirate-force-server#401` merged) ต้องการ "บล็อกดิบปัจจุบันจริง" มา
+seed ต่อ connection ก่อนจะประกอบ `UpdateAttrVital` แบบ lossless ได้ตาม `COO-DECISION 20260831_1650` —
+วันนี้ไม่มีแหล่งใดให้ seed ทำให้ composer fail-closed ค้างอยู่ (ปลอดภัย แต่ใช้งานไม่ได้)
+
+### จุดที่ยังไม่แน่ชัด
+1. มี message ID อื่นนอก `0x309A`/`CreateActorDataEx` ที่ client ส่ง/รับ `ActorAttr`/`BasicAttr` block
+   แบบเต็มหรือไม่ (login sequence อื่น, ทางเข้า GM tool เดิมของไคลเอนต์, หรือ debug/admin message ที่ยัง
+   ไม่ได้ characterize)
+2. มี column/table ใน DB schema (นอก `characters.actor_wire`) ที่ persist ฟิลด์เหล่านี้อยู่แล้วหรือไม่ —
+   ค้น `migrations/`/`model.py` ทั้งต้นไม้
+3. ผลลบก็เป็นคำตอบ: ถ้าไม่มีแหล่งใดจริง ให้ปิดเป็น bounded-negative — สาย GM จะกลับไปขอ COO เคาะนโยบาย
+   ทาง 1/2 ที่ค้างอยู่ใน `20260831_1825_LANE-GM-ASK-COO-attr-wire-raw-block-source-policy-after-gm044-negative.md`
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้เต็ม):** คำตอบต่อข้อ 1-2 จาก static analysis ของซอร์ส/protocol registry ที่
+commit แล้ว พร้อมเลขบรรทัด/ชื่อไฟล์ — ผลลบก็เป็นคำตอบ ไม่ต้องมี attended session
+
+**ชั้น client-observable:** ไม่จำเป็นสำหรับใบนี้ — เป็นคำถาม static ล้วน ถ้าคำตอบเป็นบวกและนำไปสู่โค้ดใหม่
+ใน `gm/` รอบถัดไปค่อยเปิด GT แยก
+
+### ข้อห้าม
+🔴 ห้ามอ่าน offset ที่ตรงกันโดยบังเอิญระหว่าง `AvatarAttr`/`ActorAttr`/`BasicAttr` แล้วสรุปว่าฟิลด์ตรงกัน
+โดยไม่เช็คความกว้าง/แท็ก (บทเรียนจาก `GM-044` เอง) · ห้ามเดา schema ที่ไม่ได้อ่านจริง
+
+### สัญญาผู้บริโภค
+ผู้เปิดใบเป็นผู้บริโภคผล — สาย GM เปิดเอง บริโภคผลเอง (ไม่ใช่ chief/RE ตัดสินใจแทน)
+
+### links
+
+`notes_to_chief/20260831_1810_CHIEF-REPLY-GM-044-actor-wire-blob-is-AvatarAttr-not-ActorAttr-BasicAttr-does-not-match.md`
+· `notes_to_chief/20260831_1736_LANE-GM-CORE-REQUEST-GM-044-does-actor-wire-blob-match-attr-wire-field-layout.md`
+· `pirate-force-server/src/pirateforce_foundation/gm/attr_wire.py`
