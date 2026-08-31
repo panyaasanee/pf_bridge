@@ -57,8 +57,13 @@ SIZE_CAP = 1900000
 # ($BAD_NAME_PARTS).  Mirroring them would only produce a refusal line a round.
 NAME_GUARD = ("capture", "gameclient", "pirateforce.sqlite")
 
-# Which artifacts belong to the attr work.  Prefix match, deliberately broad.
-MIRROR_PREFIXES = ("PF_ATTR_", "PF_A2_", "PF_A3_", "PF_A6_", "PF_ERRATUM_")
+# What to mirror.  This used to be a prefix list ("PF_ATTR_", "PF_A2_", ...)
+# and that was still a hand-maintained guess: the 2026-08-31 P0-5 round shipped
+# PF_COMBAT_LIFECYCLE.tsv/.md, no prefix matched, and 34 rows of combat
+# lifecycle silently never reached the team.  The manifest IS Codex's own
+# curated deliverable list, so mirror everything in it and let the size cap and
+# the sync name guard do the excluding.  No pattern to keep in step with Codex.
+MIRROR_PREFIXES = None  # kept for reference; selection is now manifest-driven
 
 # A letter is written only when the round is SIGNIFICANT.  Codex regenerates
 # roughly every 20 minutes, so on an hourly schedule "the generation changed"
@@ -236,8 +241,6 @@ def mirror(root, artifacts):
     """Copy the attr deliverables onto the route that actually travels."""
     added, changed, skipped = [], [], []
     for name in sorted(artifacts):
-        if not name.startswith(MIRROR_PREFIXES):
-            continue
         low = name.lower()
         if any(g in low for g in NAME_GUARD):
             skipped.append((name, "sync name guard would refuse it"))
