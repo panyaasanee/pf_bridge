@@ -3280,7 +3280,7 @@ commit แล้ว พร้อมเลขบรรทัด/ชื่อไ�
 · `notes_to_chief/20260831_1736_LANE-GM-CORE-REQUEST-GM-044-does-actor-wire-blob-match-attr-wire-field-layout.md`
 · `pirate-force-server/src/pirateforce_foundation/gm/attr_wire.py`
 
-## 🆕🔬 RE-173 PRISON-EXILE-COLUMBUS-MOBS-ID-36-VS-360-001 [STATIC-ON-BRIDGE]: **`world_m2_sea_destination.COLUMBUS_ROUTES` บอกว่า Prison Exile (home scene 2)'s Columbus คือ MOBS n_ID 360 แต่ `scene2_prison_exile_tables.py`'s เองมี placement ชื่อ "Columbus" (outfit `M055_000_000_N`, title "Marine Transport Station") ที่ n_ID 36 - ซึ่งเป็นเลขเดียวกับที่ Spice Paradise (home 3) ใช้เป็น Columbus ของตัวเอง - ใครถูก?**
+## ✅ RE-173 PRISON-EXILE-COLUMBUS-MOBS-ID-36-VS-360-001 [STATIC-ON-BRIDGE]: **`world_m2_sea_destination.COLUMBUS_ROUTES` บอกว่า Prison Exile (home scene 2)'s Columbus คือ MOBS n_ID 360 แต่ `scene2_prison_exile_tables.py`'s เองมี placement ชื่อ "Columbus" (outfit `M055_000_000_N`, title "Marine Transport Station") ที่ n_ID 36 - ซึ่งเป็นเลขเดียวกับที่ Spice Paradise (home 3) ใช้เป็น Columbus ของตัวเอง - ใครถูก?**  [🟢 **CLOSED — RE runner ตอบ 2026-09-01T03:03+07:00, LANE-A บริโภคผลและแก้ไฟล์แล้ว รอบ `re173w` 2026-09-01, ดูผลด้านล่าง**]
 
 ### สิ่งที่รู้แล้ว (LANE-A รอบ `trig7s`, static, ไม่มี client)
 
@@ -3326,3 +3326,19 @@ bounded-negative ถ้าไม่มี crosswalk ให้ตาม)
 (KNOWN_PLACEMENTS แถว 63) · `pirate-force-server/src/pirateforce_foundation/world_m2_sea_destination.py`
 (`COLUMBUS_ROUTES`) · `pirate-force-server/src/pirateforce_foundation/world_bg0003_identity.py`
 (`_RESOLVED_ROWS` แถวแรก) · `gamedata/tables/CONSTDATA_TH__MOBS.tsv` (n_ID 36, 360)
+
+### result — CLOSED, crosswalk ชี้ 360 จริง (pass criteria ข้อ 2)
+
+RE runner (`20260901_0303_RE-173-RESULT-CLINE2-SET36-IS-MOBS360.md`): placement 63 → MOBSET_36 → scene 2
+`n_CLINE_TYPE=2` → CLINE key `(2,36)` → `CONSTDATA_TH__CLINE.tsv:350` `n_LEADER_BK1=360` → `MOBS.n_ID=360`
+- ไม่มี ambiguity (leader BK2/3 และ crew ทุกช่องเป็น 0) `scene2_prison_exile_tables.py`'s แถว 63 **ผิด**
+(ใช้ Mob-Set number 36 ตรง ๆ แทนที่จะผ่าน CLINE crosswalk) `COLUMBUS_ROUTES`'s home scene 2 (360) **ถูก
+อยู่แล้ว ไม่ต้องแก้**
+
+**แก้แล้วโดย LANE-A รอบ `re173w`**: `scene2_prison_exile_tables.py` KNOWN_PLACEMENTS แถว 63 regenerate
+จาก MOBS 360 - `n_id` 36→360, `level`/`level_max` 35/35→10/20, `speed_walk` 150→400, `max_hp` 7980→421
+(outfit/name/title/rank/AI/drops ไม่เปลี่ยน - RE-173 ยืนยันคอลัมน์เหล่านี้ตรงกันระหว่าง MOBS 36/360)
+`n_id` validator เพิ่ม `CLINE_RESOLVED_N_IDS = {360}` แทนการขยับเพดาน range เดิม (กันไม่ให้ RE-123's Mirage
+Reel guard, n_id 230, หลุดผ่านไปด้วย) `world_m2_columbus_trigger_readiness` รายงาน home scene 2 เป็น
+`PLACED` แล้ว (8/8 เกาะ) RE-173 **ไม่ได้** audit อีก 96 placement ที่เหลือของ Bg0002 ว่าใช้กติกาเดียวกัน
+(Mob-Set number = MOBS n_ID ตรง ๆ) ถูกจริงหรือไม่ - นั่นยังเป็นคำถามเปิดสำหรับรอบ/ใบในอนาคตถ้าจำเป็น
