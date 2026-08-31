@@ -1,0 +1,1 @@
+consumed by chief round R262 (2idy5w): LANE-B asked COO to pick how to unblock three dead modules (mob_scene_recompose/mob_drop_presence/mob_pickup_persist) with no runtime.py call site -- answered by 20260830_0046_COO-DECISION-chief-builds-lane-b-insertion-points-once.md (chose option (a)), filed with no further action here.

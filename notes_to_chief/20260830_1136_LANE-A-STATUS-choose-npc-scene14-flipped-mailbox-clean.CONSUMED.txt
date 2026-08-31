@@ -1,0 +1,1 @@
+consumed by chief round R262 (2idy5w): LANE-A flipped production_allowed for the scene-14 ChooseNPC responder using the guard chief already wired, and confirmed mailbox clean -- filed as status, no further chief action needed.
