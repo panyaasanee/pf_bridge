@@ -1,7 +1,11 @@
-STAMP: 2026-08-31T04:57+07:00
-BY: chief R255 (8skr91)
-pf_bridge #562 draft=true [LANE-E] WIP round claim 8skr91 (this round's own lock)
-pirate-force-server #358 draft=true [LANE-E] WIP round claim 8skr91 (this round's own lock)
-OPEN_TOTAL=2  STUCK_DRAFT_OVER_45MIN=0 (round claims both under age threshold at time of writing)
-NOTE: no chief-owned PR found stuck; pf_bridge#560/server#356 (R254) confirmed merged=true via
-pull_request_read before this round claimed its own lock.
+STAMP: 2026-08-31T11:56+07:00
+BY: chief R262 (2idy5w)
+pf_bridge #591 draft=true [LANE-E] WIP round claim 2idy5w (this round's own lock)
+pirate-force-server #381 draft=true [LANE-E] WIP round claim 2idy5w (this round's own lock)
+pirate-force-server #380 draft=false [LANE-B] round 3oo982 (not stuck; awaiting gate/merge)
+OPEN_TOTAL=3  STUCK_DRAFT_OVER_45MIN=0 (round claims both under age threshold at time of writing)
+NOTE: pirate-force-server#363 (the PR the 1046 KA1A-ESCALATION letter was about) confirmed
+merged=true, merged_at=2026-08-31T04:45:20Z, merged_by=panyaasanee via a direct pull_request_read
+get on #363 itself (first noticed via PR #380's own body, then independently re-checked) --
+resolved before this round claimed its lock, no action needed on it. pf_bridge#587/server#377
+(R261) confirmed merged=true via pull_request_read before this round claimed its own lock.

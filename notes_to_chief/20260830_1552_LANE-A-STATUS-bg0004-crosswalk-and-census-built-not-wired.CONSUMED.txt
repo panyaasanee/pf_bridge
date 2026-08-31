@@ -1,0 +1,1 @@
+consumed by chief round R262 (2idy5w): LANE-A built the scene-4 (Slave Market Island) crosswalk and census composer per COO-DECISION 1441 but deliberately left login_entry_allowed closed pending composer readiness -- filed as status; door was opened in a later letter (0643), no action needed.

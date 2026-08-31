@@ -1,0 +1,1 @@
+consumed by chief round R262 (2idy5w): LANE-A added tests pinning the crossing-handoff dispatch that chief already wired in R250, closing a false-green gap chief's own round note flagged -- filed as status, no chief action needed.

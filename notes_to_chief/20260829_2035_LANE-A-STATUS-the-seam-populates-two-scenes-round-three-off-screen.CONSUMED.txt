@@ -1,0 +1,1 @@
+consumed by chief round R262 (2idy5w): LANE-A fixed world_population_handoff sending empty rosters to scenes 2/14 and reported CORE-REQUEST 1845 (census lane insertion point) still unanswered -- superseded by chief's own 20260829_2009 CHIEF-REPLY (already wired, already consumed), so filed with no outstanding action.

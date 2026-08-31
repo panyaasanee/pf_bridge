@@ -8939,3 +8939,32 @@ composer นี้
 `table_row_differences.the_two_interiors`) · `src/pirateforce_foundation/world_population_bg0010.py`,
 `world_bg0010_identity.py` · `notes_to_chief/20260831_0932_LANE-A-ASK-COO-scene10-landing-geometry-elevated-risk.md`
 · `GT-165` (scene 4, same shape minus the geometry risk) · `GT-134` (scene 14, same shape)
+
+## 🆕🔬 GT-170 NPC-DIALOGUE-CLOSE-OPCODE-002 [STATIC-ON-BRIDGE -- ต้องเปิด `GameClient.local.bin` จริง คลาวด์ทำต่อไม่ได้]: `RE-169` (คลาวด์, static จาก TSV ที่ commit แล้ว) เจอสามผู้ต้องสงสัยชื่อใกล้เคียง "ปิดหน้าต่างบทสนทนา NPC" แต่ยืนยันบน wire ไม่ได้เพราะไม่มีอิมเมจ -- ใครมี `GameClient.local.bin` ช่วยไล่ต่อสองข้อ
+
+### สามผู้ต้องสงสัย (จาก `RE-169`, ดู `CLIENT_RE_QUEUE.md` สำหรับ provenance เต็ม)
+1. `OpenCloseUI` (`PF_PROTOCOL_REGISTRY.tsv:54`) -- มี vtable/serializer/handler VA จริง, serializer ไม่ว่าง
+   (สองสตริง + tag ตัวเลข `0x05`/`0x14`/`0x32`) แต่ `NOT_OBSERVED` ใน capture ไหนเลย
+2. `WindowClosedPayloadMsg` / `WindowCloseResponseMsg` / `WindowCloseRequestMsg` (RTTI names,
+   `PF_RUNTIME_CLASSMAP.tsv`) -- ชื่อใกล้เคียงที่สุดในทั้ง repo แต่ไม่มี opcode ผูกอยู่เลย อยู่ใต้ namespace
+   `UIAutomationCoreProto` (อาจเป็นโค้ด UI-automation ทั่วไปของ Windows ไม่ใช่ระบบเกม)
+
+### สองข้อที่ต้องตอบจากอิมเมจ
+1. handler ของ `OpenCloseUI` dispatch ตาม UI-id enum อะไร -- มีค่าไหนตรงกับ NPC dialogue/conversation window
+2. `WindowClose*` สามชื่อ vtable ไปถึง network message dispatch table จริงหรือเป็นโค้ดที่ตายแล้ว (ไม่ reachable
+   จาก network)
+
+### pass criteria -- สองชั้น
+**wire/DB (ปิดแล้ว, ดู `RE-169`):** สาม candidate พร้อม provenance จาก TSV ที่ commit แล้ว
+**client-observable (ใบนี้ถาม):** เปิดอิมเมจตอบสองข้อบน -- ถ้าพบ UI-id/handler ที่ตรง ให้เปิด CORE-REQUEST
+ถึง chief ต่อสาย (`runtime.py:5082`, เขตของ chief) ห้ามต่อ production เองแม้จะดูชัดเจน
+
+### ข้อห้าม
+ห้ามต่อ production call site ด้วย `OpenCloseUI`/`WindowClose*` จนกว่าจะยืนยัน handler/vtable จากภาพจริง --
+บทเรียนเดียวกับ `RE-125`'s `0x4543` (ชื่อที่ดูใช่ไม่แปลว่า opcode ที่ยืนยันแล้ว)
+
+### สัญญาผู้บริโภค
+เปิดโดย chief -- LANE-A บริโภคผลเมื่อมีคนตอบจากอิมเมจ (ตามที่ `RE-169`/`RE-168` มอบหมายไว้)
+
+### links
+`CLIENT_RE_QUEUE.md` RE-169 · `notes_to_chief/20260831_1142_RE-168-RESULT-no-dialogue-close-signal-exists-server-is-stateful-enough-to-add-one.md`

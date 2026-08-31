@@ -1,0 +1,1 @@
+consumed by chief round R262 (2idy5w): LANE-B fixed a stale docstring in mob_drop_presence.py that still claimed chief's wiring (commit 432381a2) was outstanding, and added a re-derivation test -- filed as status, no chief action needed.

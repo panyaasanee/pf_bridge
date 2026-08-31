@@ -3157,3 +3157,57 @@ INITIAL/REAPPLY, Slave Market (BG0004) 18,997B ขึ้นข้อความ
 ### links
 `notes_to_chief/20260831_1036_GT106R2-RESULT-PASS-client-renders-the-destination-scene-mid-session-plus-two-new-findings.md` ·
 `notes_to_chief/20260831_1037_GT148-and-GT165-RESULT-stowaways-cleared-and-slave-market-island-has-life.md`
+
+## 🔬 RE-169 NPC-DIALOGUE-CLOSE-OPCODE-001 [🟡 **STATIC bounded-positive-with-caveats, unconfirmed on wire -- chief รอบ `2idy5w` (R262) 2026-08-31T12:0x+07:00, ผล: pf-static-re pass this round, see chief's own summary below (no separate letter -- opened and answered same round)**]: มีเฟรม/opcode ที่ characterize แล้วสำหรับสั่งปิดหน้าต่างบทสนทนา NPC (dialogue/conversation window) หรือไม่ -- ตามที่ `RE-168` เปิดค้างไว้ (ไม่พบในเขต world/population/travel ของ LANE-A) รอบนี้กวาดทั้ง repo กว้างขึ้น
+
+### ผลการค้นแบบ static (จาก `PF_PROTOCOL_REGISTRY.tsv` / `PF_FIELD_VALIDATION.tsv` / `PF_SERIALIZER_FIELDS.tsv` / `PF_RUNTIME_CLASSMAP.tsv` เท่านั้น -- ไม่มี client image)
+
+**สามผู้ต้องสงสัย ไม่มีตัวไหนยืนยันบน wire ได้เต็มที่:**
+
+1. **`NPCConversation`** (`PF_PROTOCOL_REGISTRY.tsv:111`, source=IMAGE, มี vtable/serializer/handler VA
+   จริง) -- มี 17 W-field/17 R-field จริง (`PF_FIELD_VALIDATION.tsv:220-221`) แต่สถานะ `A2_STATIC_OPEN`
+   (characterize ไว้แค่ตัวแปร "เปิด") field walk พบ `mode_arg` byte เป็นตัวสลับทิศทาง R/W ภายใน serializer
+   เท่านั้น (`PF_SERIALIZER_FIELDS.tsv:1569-1590`) ไม่มีฟิลด์ไหนแปลว่า "ปิด" -- ไม่มีตัวแปร "ปิด" ของ
+   message นี้ลงทะเบียนแยกไว้เลย
+2. **`OpenCloseUI`** (`PF_PROTOCOL_REGISTRY.tsv:54`, IMAGE layer, มี vtable/serializer/handler VA จริง,
+   serializer ไม่ว่างจริงตามเกต G4 -- สองสตริง + ตัวเลข tag `0x05`/`0x14`/`0x32` ที่ `+0x30`/`+0x34`/`+0x58`,
+   `PF_SERIALIZER_FIELDS.tsv:865-874`) แต่ **`NOT_OBSERVED`** ใน capture layer (`PF_FIELD_VALIDATION.tsv:106-107`)
+   -- ไม่เคยปรากฏใน capture ไหนเลย ชื่อกว้าง ("UI" ไม่เจาะจง "dialogue/NPC/conversation") ไม่มีฟิลด์ไหน
+   ระบุ UI-id ของหน้าต่างเป้าหมาย
+3. **`WindowClosedPayloadMsg` / `WindowCloseResponseMsg` / `WindowCloseRequestMsg`**
+   (`PF_RUNTIME_CLASSMAP.tsv:412,649,655,3534,3771,3777` -- RTTI type-descriptor name string จาก
+   crash-dump สองก้อน, ชื่อคลาสเต็ม `.?AVWindowClosedPayloadMsg@UIAutomationCoreProto@@`) ชื่อใกล้เคียงที่สุด
+   ในทั้ง repo แต่ **ไม่มี opcode ผูกอยู่เลย** (grep `PF_PROTOCOL_REGISTRY.tsv` = 0 ผลลัพธ์) -- อยู่ใต้
+   namespace `UIAutomationCoreProto` ซึ่งดูเหมือน Windows UI-automation/accessibility ทั่วไป ไม่ใช่ระบบ
+   dialogue เฉพาะของเกมแน่นอน และไม่มี vtable/handler ให้ยืนยันว่าเดินสายกับ network dispatch จริงหรือไม่
+
+### จุดที่ยังไม่แน่ชัด
+
+ทั้งสามผู้ต้องสงสัยต้องการ `GameClient.local.bin`/disassembly เพื่อไปต่อ:
+`OpenCloseUI` ต้องหา handler ว่า dispatch ตาม UI-id enum อะไร (ค่าไหนคือ NPC dialogue),
+`WindowClose*` ต้องหาว่า vtable ไปถึง network message table จริงหรือเป็นโค้ด UI-automation ที่ตายแล้ว
+
+### pass criteria -- สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ใบนี้ปิดได้ตามนี้):** ตอบแล้วในรอบนี้ -- สาม candidate พร้อม provenance ตามด้านบน,
+ไม่มีตัวไหนยืนยันบน wire ได้ 100%
+
+**ชั้น client-observable (ต้อง STATIC-ON-BRIDGE หรือ attended):** ต้องมีคนเปิด `GameClient.local.bin`
+ตรวจ handler ของ `OpenCloseUI` และ vtable ของ `WindowClose*` สามชื่อ -- เข้าคิว `GAME_TEST_QUEUE.md`
+หมวด STATIC-ON-BRIDGE ตามกติกาหัวข้อ 1 (cloud ทำต่อไม่ได้ ไม่มี image)
+
+### ข้อห้าม
+
+ห้ามต่อ production call site (`runtime.py`) ด้วย `OpenCloseUI` หรือ `WindowClose*` จนกว่าจะยืนยัน handler/
+vtable จาก image จริง -- ทั้งสามยัง `NOT_OBSERVED`/`UNBOUND` เหมือน `RE-125`'s `0x4543` (บทเรียนเดียวกัน:
+ชื่อที่ดูใช่ไม่แปลว่า opcode ที่ยืนยันแล้ว)
+
+### สัญญาผู้บริโภค
+
+เปิดโดย chief แทน LANE-A ตามที่ `RE-168` เสนอ (คำถามกว้างกว่าโดเมน world/population/travel) -- LANE-A
+บริโภคต่อเมื่อจะผูก `OpenCloseUI`/`WindowClose*` เข้ากับจุดเสียบ `runtime.py:5082` จริง (ต้องรอ
+STATIC-ON-BRIDGE ก่อน)
+
+### links
+
+`notes_to_chief/20260831_1142_RE-168-RESULT-no-dialogue-close-signal-exists-server-is-stateful-enough-to-add-one.md`
