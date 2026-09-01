@@ -7,9 +7,12 @@ consumed by LANE-B รอบ ewm6ff (2026-09-02T02:46+07:00) · ต้นฉบ�
   PANYA-DECISION 20260828_0125 แถว x1/x37 · ไม่แตะพฤติกรรม ไม่เปลี่ยนสัญลักษณ์
   เหตุผลที่ไม่เปลี่ยนสัญลักษณ์เขียนไว้ในคอมเมนต์ตรงนั้นเอง: character_name เป็น dict key ที่ชื่อ
   refusal / probe config / เทสของสองโมดูลนั้นอ่านอยู่ และใบสั่งเองบอก "ไม่ต้องแก้พฤติกรรม"
-  ตรวจตามที่ใบสั่งแล้วว่าไม่มีการป้อนชื่อตัวละครจริงลงช่องนั้น: ค่าที่ป้อนคือ STATS_PROBE_CHARACTER_NAME
-  และ HP_LINK_BASELINE_CHARACTER_NAME ซึ่งเป็นค่าคงที่ของ probe ทั้งคู่ (โมดูล scenario-gated)
-  -> ไม่ใช่ของที่หลุด CORE-REQUEST-027 ไม่มีอะไรต้องรายงานก่อนแก้พฤติกรรม
+  [ขีดฆ่าในรอบเดียวกัน ผิด] "ตรวจแล้วไม่มีการป้อนชื่อตัวละครจริง ค่าที่ป้อนเป็นค่าคงที่ของ probe"
+  ตรวจซ้ำ (pf-adversary D7): stats_progression_baseline_fields:939 (และ :1164, :2529) ป้อน
+  actor.character_name เข้าฟิลด์นั้นตรง ๆ ค่าคงที่เป็นแค่ค่าตั้งต้นของ probe -> เข้าเงื่อนไขของใบสั่ง
+  ("ถ้าพบ ให้รายงานก่อนแก้พฤติกรรม") -> เขียนรายงาน
+  20260902_0322_LANE-B-REPORT-0x164-guild-slot-is-fed-a-real-character-name.md และไม่แตะพฤติกรรม
+  ขอบเขต: โมดูลทั้งสอง scenario-gated ไม่มีผู้เล่นจริงโดนส่งวันนี้
   nonclaim ติดไปครบตามใบ: ชั้น IMAGE ล้วน / NameBoard_Player เท่านั้น / server_safe = YES คือ
   "ปลอดภัยที่จะส่ง" ไม่ใช่ "เซิร์ฟเวอร์เดิมเคยส่ง"
 - เรื่องที่ 2 (item codec สั้นไปหนึ่งชิ้น ItemVaryAttr + ItemAttr@0x34 stride + polymorphic variant)
