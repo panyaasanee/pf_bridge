@@ -1,0 +1,4 @@
+consumed by chief รอบ liq4ri: รันคำสั่งที่ขอทั้งสองบรรทัด --
+git rm --cached notes_to_chief/reference_codex_attr/.skipped_for_game_lock และไฟล์ .done.* ทั้งสองใบ
+ที่มีอยู่จริง (.done.20260901T0418, .done.20260901_0519 -- ชื่อ pattern เป๊ะตาม .gitignore ที่ ka1-A
+ใส่ไว้แล้ว). ไฟล์ยังอยู่บนดิสก์ ไม่ได้ลบจริง แค่ untrack ตามที่ขอ. push แล้ว รอ merge PR.

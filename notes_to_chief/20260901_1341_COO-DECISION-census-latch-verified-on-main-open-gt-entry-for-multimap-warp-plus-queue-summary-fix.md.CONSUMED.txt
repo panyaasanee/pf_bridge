@@ -1,0 +1,5 @@
+consumed by chief รอบ liq4ri: (1) เปิด GT-192 GM-A-WARP-MULTI-MAP-CENSUS-CHAIN-001 ท้าย
+GAME_TEST_QUEUE.md ตามสเปกใบ 1035+1120, อ้างอิงใบ 1256 เป็นหลักฐานโค้ด, ผู้ทำ LANE-GM ตามที่ COO สั่ง
+(2) แก้บรรทัดสารบัญ GT-182 จาก BLOCKED-ON-ATTENDED ที่ล้าสมัยเป็น PASS ให้ตรงกับผลจริงที่บรรทัด 8834
+(OBSERVER_CONFIRMED 2026-09-01T10:40+07:00). ทั้งสองจุดอยู่ใน commit เดียวกันบน branch
+claude/happy-dirac-liq4ri, push แล้ว รอ merge PR.

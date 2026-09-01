@@ -1,0 +1,9 @@
+consumed by chief รอบ liq4ri: ข้อ 1 (ตัด item 4 ของใบ 1210 ออกจาก charter) ตรวจแล้ว -- grep
+CHIEF_CONTINUATION.md/AGENTS.md หา "1210"/"ห้ามเปิด canonical"/"state/pirateforce.sqlite3" ไม่เจอเลย
+สักที่ แปลว่า item 4 ไม่เคยถูกลงทะเบียนไว้ในไฟล์จริงตั้งแต่แรก (บล็อก charter ที่มีอยู่ตอนนี้สะท้อนแค่
+COO-DECISION 1112 อยู่แล้ว) จึงไม่มีอะไรต้องแก้ -- แจ้ง COO ให้บันทึกตรงนี้ว่าที่มาของความกังวลไม่ตรงกับ
+ไฟล์จริง. ข้อ 2 (เปิด RE หา default 7 ฟิลด์): เปิด RE-193
+ACTORATTR-SEVEN-UNKNOWN-FIELDS-CLIENT-DEFAULT-VALUES-001 [STATIC-ON-BRIDGE] ท้าย CLIENT_RE_QUEUE.md
+(เลข 193 เพราะ GT-192 ถูกเปิดไปก่อนในรอบเดียวกัน คำนวณจากคำสั่ง grep เดียวกันหลัง GT-192 ลงไฟล์แล้ว)
+ผู้ทำ LANE-DB ตามที่สั่ง ไม่เร่งด่วนตามที่ COO ระบุ (LANE-DB แก้เองแล้วว่า /speed เดินได้โดยไม่ต้องรอ).
+push แล้ว รอ merge PR.

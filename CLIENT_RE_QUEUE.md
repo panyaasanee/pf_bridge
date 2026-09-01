@@ -3563,3 +3563,65 @@ runner/Codex บนสะพาน) ไม่ต้องพึ่งไฟล�
 (คำสั่งมอบหมายตรง) · `notes_to_chief/20260901_1225_LANE-GM-STATUS-sched-20260901-*.md` (รอบที่สามที่ขอ)
 · `notes_to_chief/20260901_0921_LANE-GM-STATUS-p2-color-static-research-fontstyle63-gap-re-followup-proposed.md` (รอบ `h6rsgl` ที่เสนอวิธีปิดนี้ครั้งแรก) ·
 `pf_bridge/NOW.md` P-2
+
+## 🔬 RE-193 ACTORATTR-SEVEN-UNKNOWN-FIELDS-CLIENT-DEFAULT-VALUES-001 [STATIC-ON-BRIDGE]: what does the client itself write, at object-creation time, into the 7 `ActorAttr` fields (of 55 total in `gm/attr_wire.py:166-224`) that have neither a server-owned typed-column source nor a codex `default_writer_va` row today -- `x=14 nameboard_key (0x090, u32)`, `x=25 wstr_B0 (0x0B0)`, `x=36 u8_18C (0x18C, u8)`, `x=41 q_140_pairB (0x140, u64)`, `x=42 u8_9B_pairB (0x09B, u8)`, `x=43 wstr_CC (0x0CC)`, `x=54 u16_1B0 (0x1B0, u16)` (`x=41`/`x=42` share one mask bit)?
+
+### ทำไมเปิดใบนี้ (มอบหมายตรงจาก COO)
+
+`COO-DECISION 20260901_1325_COO-DECISION-drop-1210-item4-plus-order-re-seven-attr-fields-for-lane-db.md`
+(`ADDRESSEE: chief`) สั่งตรงให้ chief เปิด RE หาค่า default ของ 7 ฟิลด์นี้ให้ **LANE-DB** ตอบใบ
+`20260901_1201_LANE-DB-ASK-COO-order-1101-premise-contradicted-by-gm044-and-a-way-out.md` ข้อ 2
+("สั่ง RE 7 ค่า ผ่าน chief — สายนี้ขอ RE เองไม่ได้") LANE-DB จับคู่ตาราง `FIELDS` ทั้ง 55 แถวกับ
+คอลัมน์ `default_value`/`default_writer_va` ใน `reference_codex_attr/PF_ATTR_FIELD_SEMANTICS.tsv`
+แล้วพบว่า `55 = 28 + 20 + 7`: 28 ฟิลด์มี default ของ client เองที่ codex ปิดแล้ว, 20 ฟิลด์เป็นของ
+เซิร์ฟเวอร์ (typed column ของ M4), เหลือ **7 ฟิลด์นี้เป็นช่องว่างจริง** ไม่มีทั้ง default และชื่อ ใช้
+วิธีเดียวกับที่ตาราง codex ปิดไปแล้ว 28 ค่า (`default_writer_va`) ไม่ใช่คำถามชนิดใหม่
+
+🔴 **ไม่เร่งด่วนแล้ว** (per `1325` เอง) — LANE-DB แก้ตัวเองในใบ `20260901_1321_LANE-DB-AMEND-coo-seven-unknown-fields-omit-instead-of-guess.md`
+ว่า `/speed` เดินได้โดยไม่ต้องรอชุดนี้ (กลยุทธ์ omit/ไม่เซ็ต mask bit แทนการเดาเป็นศูนย์) — เปิดคิวไว้
+เป็นงานพื้นหลังปิดช่องว่างระยะยาว ไม่ต้องแทรกก่อนคิวที่มีกำหนดจริง (เช่น P-2 / `RE-191`)
+
+### สิ่งที่ต้องตอบ
+
+สำหรับแต่ละฟิลด์ทั้งเจ็ด อ่านจาก call site ที่สร้างวัตถุ (`CreateActorDataEx`/`UpdateAttrVital` writer
+เดียวกับที่ codex ใช้ปิด 28 ค่าที่เหลือ) ไม่ใช่การเดาจากชื่อฟิลด์:
+
+1. `x=14 nameboard_key (0x090, u32)` -- ค่า default ตอนสร้างวัตถุคืออะไร (0? id ตายตัว? คำนวณจาก
+   field อื่น?)
+2. `x=25 wstr_B0 (0x0B0)` -- เป็น wide-string ความยาวเท่าไหร่ ค่า default คือ empty string จริงไหม
+   หรือมีค่าคงที่
+3. `x=36 u8_18C (0x18C, u8)` -- ค่า default
+4. `x=41 q_140_pairB (0x140, u64)` และ `x=42 u8_9B_pairB (0x09B, u8)` -- ทั้งสองแชร์ mask bit เดียวกัน
+   ตามที่ LANE-DB วัดไว้ (`gm/attr_wire.py`) ระบุด้วยว่าเซ็ตคู่กันเสมอหรือแยกกันได้ และค่า default ของ
+   แต่ละตัว
+5. `x=43 wstr_CC (0x0CC)` -- เป็น wide-string เช่นกัน ค่า default
+6. `x=54 u16_1B0 (0x1B0, u16)` -- ค่า default
+
+### pass criteria
+
+- **PASS**: ค่า default ของฟิลด์นั้นอ่านได้ตรงจาก call site จริงพร้อม provenance (VA/offset) ครบ
+  เหมือนที่ปิด 28 ค่าเดิม -- บันทึกทีละฟิลด์ ปิดเฉพาะฟิลด์ที่มีคำตอบได้ (ไม่ต้องรอครบเจ็ดตัวพร้อมกัน)
+- **BOUNDED-NEGATIVE**: ฟิลด์ใดไม่มี writer ที่ resolve ได้ตรง ๆ (เช่น ต้องผ่าน lookup table ที่ยังไม่
+  ถอด หรือค่ามาจาก input ผู้ใช้ตอนสร้างตัวละคร ไม่ใช่ default คงที่) -- เขียนไว้ตรง ๆ ว่าฟิลด์นั้นไม่มี
+  default คงที่ที่จะพิสูจน์ได้ ไม่ใช่เดาเป็นศูนย์
+
+### ข้อห้าม
+
+ห้ามเขียนโค้ด DB/attr-wire ใด ๆ จากใบนี้ -- LANE-DB เป็นเจ้าของการเขียนโค้ดต่อ (ดูสัญญาผู้บริโภค) ·
+ห้ามเดาค่า default จากชื่อฟิลด์หรือ pattern ของฟิลด์อื่นโดยไม่มี provenance จากไบนารี
+
+### สัญญาผู้บริโภค
+
+เปิดโดย chief (มอบหมายตรงจาก `COO-DECISION 20260901_1325`) -- **สาย DB บริโภคผล** (ผู้ที่ขอเรื่องนี้มา
+ผ่าน COO และเป็นผู้เขียนโค้ด seed ต่อ) ตามกฎ "ใครเปิดใบคนนั้นบริโภค" ข้อยกเว้นที่ chief เปิดแทนเพราะเป็น
+งานมอบหมายข้ามสาย (RE/Codex ไม่ใช่ chief ไม่ใช่ DB) -- สาย DB อ่านผลรอบถัดไปที่เห็นแล้วปิดหัวใบเอง
+
+### links
+
+`notes_to_chief/20260901_1325_COO-DECISION-drop-1210-item4-plus-order-re-seven-attr-fields-for-lane-db.md`
+(คำสั่งมอบหมายตรง) ·
+`notes_to_chief/20260901_1201_LANE-DB-ASK-COO-order-1101-premise-contradicted-by-gm044-and-a-way-out.md`
+(ตารางแบ่ง 55 = 28+20+7 และที่มาของ 7 ฟิลด์) ·
+`notes_to_chief/20260901_1321_LANE-DB-AMEND-coo-seven-unknown-fields-omit-instead-of-guess.md`
+(ทำไมไม่เร่งด่วนแล้ว) · `pf_bridge/notes_to_chief/reference_codex_attr/PF_ATTR_FIELD_SEMANTICS.tsv`
+(ตาราง 28 ค่าที่ปิดไปแล้วด้วยวิธีเดียวกัน) · `gm/attr_wire.py:166-224` (ตาราง `FIELDS` ทั้ง 55 แถว)
