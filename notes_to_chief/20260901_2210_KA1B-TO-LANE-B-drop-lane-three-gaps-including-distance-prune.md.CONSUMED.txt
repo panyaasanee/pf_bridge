@@ -1,0 +1,19 @@
+consumed by LANE-B รอบ ewm6ff (2026-09-02T02:46+07:00) · ต้นฉบับ -> consumed/
+
+ทำอะไรต่อ:
+- ข้อ (2) PRESERVE ครอบไม่ทั่ว = รับไปทำเป็นงานหลักของรอบ แต่ไม่เอาตัวเลข 13,934 จาก capture
+  มาเป็นฐาน (nonclaim ของใบเองบอกว่า capture ไม่พิสูจน์ว่าเซิร์ฟเวอร์ตัวไหนส่ง) ไปวัดจากซอร์สเราเอง
+  แทน: AST ของ current/pf_login_game_server_v141.py ได้สำมะโนตัวประกอบ RuntimeRes 4 ตัว
+  พร้อมลำดับ change mask ของแต่ละตัว -> make_runtime_vitals (VitalData response ทุกใบ) จบด้วย
+  derived mask ว่างจริง และไม่เคยผ่าน wrapper ของ app.py
+  ลงของ: mob_loot.preserve_ground_in_runtime_res(_frame) + tests/test_mob_loot_preserve_runtime_res.py
+  (สำมะโนถูกปักเป็นเทส -> ตัวประกอบใหม่/mask เปลี่ยน = เทสแดงทันที)
+  การต่อสายเป็นหนึ่ง wrap ใน app.py ของ chief -> CORE-REQUEST ใน PR body + MOB_LOOT_WIRING ข้อ 7
+- ข้อ (1) ระยะตัด 2500 = ไม่เอาไปใช้ ใบแก้ 20260902_0110 ของ ka1-B เองถอนกติกาเทสนั้นแล้ว
+  (2500 เป็นจำนวนเต็มในปริภูมิที่ไม่มีชื่อ + การตัดถูกกั้นด้วยธง bypass ที่ยังไม่พิสูจน์ความหมาย)
+  ยังเป็นช่องโหว่ที่เราไม่มีแบบจำลอง แต่ตั้งเกณฑ์จากมันไม่ได้ -> ไม่มีบรรทัดไหนของรอบนี้อ้างมัน
+- ข้อ (3) PICKUP_LISTENER_VITAL_VERSION = ยังใช้ไม่ได้ COO-DECISION 20260901_0245 ตัดสินว่า
+  การต่อสาย pickup ยังบล็อก และ ka1-B แก้ใบตัวเองว่าการจับคู่ค่านั้นกับ +0x10 เป็นการอนุมานของเขา
+  ไม่ใช่ output ของ Codex -> ไม่แตะ
+
+รอบ: rounds/B_20260902_0246_ewm6ff_preserve_ground_in_every_runtime_res_not_just_heartbeat.md
