@@ -1,0 +1,16 @@
+; GameMaster.def -- export table for GameMaster.dll
+;
+; The client resolves the entry point with GetProcAddress using the exact
+; ASCII string "CreateGameMaster" [GM-IMG-001].  Without this .def the VC
+; linker would publish "_CreateGameMaster" for a __cdecl function, or
+; "CreateGameMaster@0" for __stdcall, and GetProcAddress would return NULL --
+; which sends the client straight back down the fallback path it is on today.
+;
+; Verify after every build:
+;   dumpbin /exports GameMaster.dll
+; The name column must read exactly CreateGameMaster.
+
+LIBRARY GameMaster
+
+EXPORTS
+    CreateGameMaster
