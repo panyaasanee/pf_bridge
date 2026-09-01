@@ -74,10 +74,13 @@ PF_CAPTURE_BRANCH_SHAPES_20260830.tsv	33796	2026-08-29 20:28	full copy	PF_CAPTUR
 PF_CAPTURE_DELTA_20260830.inventory.tsv	127368	2026-08-29 20:30	full copy	PF_CAPTURE_DELTA_20260830.inventory.tsv
 PF_CAPTURE_DELTA_20260830.md	4156	2026-08-29 20:30	full copy	PF_CAPTURE_DELTA_20260830.md
 PF_CAPTURE_DELTA_20260830.validation.tsv	6462	2026-08-29 20:30	full copy	PF_CAPTURE_DELTA_20260830.validation.tsv
+PF_COMBAT_LETHAL_TAIL_DELTA.md	12538	2026-09-01 14:00	full copy	PF_COMBAT_LETHAL_TAIL_DELTA.md
+PF_COMBAT_LETHAL_TAIL_DELTA.pair.json	1269	2026-09-01 14:00	full copy	PF_COMBAT_LETHAL_TAIL_DELTA.pair.json
+PF_COMBAT_LETHAL_TAIL_DELTA.tsv	43449	2026-09-01 14:00	full copy	PF_COMBAT_LETHAL_TAIL_DELTA.tsv
 PF_COMBAT_LIFECYCLE.md	2423	2026-08-31 17:51	full copy	PF_COMBAT_LIFECYCLE.md
 PF_COMBAT_LIFECYCLE.tsv	41063	2026-08-31 17:51	full copy	PF_COMBAT_LIFECYCLE.tsv
 PF_COMPILER_RUNTIME_TARGET_6564_CLOSURE.md	11770	2026-08-29 23:21	full copy	PF_COMPILER_RUNTIME_TARGET_6564_CLOSURE.md
-PF_CRITICAL_ARTIFACT_AUTHORITY.json	15708	2026-09-01 13:04	full copy	PF_CRITICAL_ARTIFACT_AUTHORITY.json
+PF_CRITICAL_ARTIFACT_AUTHORITY.json	22061	2026-09-01 14:06	full copy	PF_CRITICAL_ARTIFACT_AUTHORITY.json
 PF_DAILY_ACTIVITY_CLOSURE.md	4236	2026-08-30 00:29	full copy	PF_DAILY_ACTIVITY_CLOSURE.md
 PF_DATA_EVIDENCE.md	1390	2026-08-22 14:50	full copy	PF_DATA_EVIDENCE.md
 PF_DATA_EVIDENCE.tsv	59258	2026-08-22 14:50	full copy	PF_DATA_EVIDENCE.tsv
@@ -205,6 +208,7 @@ pf_inventory_inputs.py	10567	2026-08-22 13:26	full copy	pf_inventory_inputs.py
 pf_rederive_actor_relation_interaction_graph.py	89606	2026-09-01 12:38	full copy	pf_rederive_actor_relation_interaction_graph.py
 pf_rederive_attr_capture_validation.py	55831	2026-08-30 18:45	full copy	pf_rederive_attr_capture_validation.py
 pf_rederive_attr_semantics.py	1477831	2026-08-31 17:49	full copy	pf_rederive_attr_semantics.py
+pf_rederive_combat_lethal_tail_delta.py	88086	2026-09-01 14:00	full copy	pf_rederive_combat_lethal_tail_delta.py
 pf_rederive_gm_plugin_gate.py	113012	2026-09-01 07:16	full copy	pf_rederive_gm_plugin_gate.py
 pf_rederive_ground_drop_lifetime.py	171909	2026-09-01 07:59	full copy	pf_rederive_ground_drop_lifetime.py
 pf_rederive_monster_color_gate.py	207140	2026-09-01 08:00	full copy	pf_rederive_monster_color_gate.py

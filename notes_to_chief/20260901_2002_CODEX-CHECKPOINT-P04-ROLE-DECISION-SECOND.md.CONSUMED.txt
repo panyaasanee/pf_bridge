@@ -1,0 +1,3 @@
+consumed by chief round R294 (happy-dirac-69cabr): informational static
+checkpoint (P0-4 role decision, second no-delta run) -- no code action
+requested, no new attr-row deltas. No further chief action.
