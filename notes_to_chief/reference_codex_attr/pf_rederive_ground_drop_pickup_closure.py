@@ -17,6 +17,7 @@ import importlib.util
 import io
 import json
 import os
+import re
 import struct
 import sys
 from collections import defaultdict
@@ -83,8 +84,29 @@ CURRENT_NESTED_DECLARED = 31_071
 CURRENT_NESTED_REACHED = 30_334
 FROZEN_CAPTURE_FILES = 1_772
 FROZEN_CAPTURE_BYTES = 595_134_426
-TAIL_EVENT_MANIFEST = "fb771d2f6fbeffacac37b283bad676c998480d74e010b36f1ebd2bd37a0dc82e"
+TAIL_EVENT_MANIFEST = "abaedb66ed9a2bbf8fae8ab872b92ef4d8b20736a23d7159b2d7f0300fb2b7be"
 ALL_UNRESOLVED_LOCATOR_MANIFEST = "23b8427bdf1ab56089dba2fa0a7c2f81d6a9f25b3a391ee03eecbebc665a7878"
+PATH_CAPTURE_V_CLASS = "PATH_CLASSIFIED_CAPTURE_V_PREFIX"
+AUTHORITATIVE_CAPTURE_PROVENANCE_LEDGER = None
+FORBIDDEN_UNLEDGERED_PROVENANCE_CLAIMS = (
+    "are REPLACEMENT provenance",
+    "current REPLACEMENT corpus",
+    "ORIGINAL=0",
+    "UNKNOWN=0",
+    "eligible_original_exchange_count=",
+    "confirmed_nonempty_original=",
+    "exact_reached_pickup_replacement=",
+)
+CAPTURE_FULL_ROW_TEMPLATE_SHA256 = {
+    "GDP-CAP-001": "8411bc0ed4a2006d82da09b4183289b4a52b08ad7777fe49f53b93e0c1cd0f7d",
+    "GDP-CAP-002": "a3204db31d0ee59e533933776ed25ad136236ef55e32672fbd6c5a11b80d696b",
+    "GDP-CAP-003": "9f4a650819ff73bf593d717b4e729a6d48bd9f87385cdedc22bb7e9e004b246f",
+    "GDP-CAP-004": "862758f7e8e1b1a365c4c6ef5f16a16208dbc593b3fb2567413e9dcaa97a013e",
+    "GDP-CAP-005": "69fb8ecbd739b9230fb0df8197b9dfe32683ddc9835c4d48ad1dcbe2bc7863fc",
+    "GDP-CAP-006": "816afb8ab15931b953d5e98abf5d86fa34bca4a2035b1be90b10447f19ceaac1",
+    "GDP-CAP-007": "69b8c70fa872949b0753d868e2ba19da46f356e1b9738f360c77687371a6c2db",
+}
+EXPECTED_REPORT_SHA256 = "52981a6ad0c505f5d62d2430d54f41e074ae43b26fbfe3b6521ed1d2dae39b8f"
 TRUNCATED_DERIVED_MASK_LOCATORS = (
     (
         "capture_gt010_20260818_015927/capture_v141/GAME_20260818_020106_955833_62358.txt",
@@ -675,7 +697,7 @@ def capture_manifest(records: Sequence[tuple[str, int, str]]) -> str:
     return sha256(text.encode("utf-8"))
 
 
-def is_replacement_capture_path(relative_path: str) -> bool:
+def has_capture_v_prefix_path(relative_path: str) -> bool:
     return any(part.casefold().startswith("capture_v") for part in Path(relative_path).parts)
 
 
@@ -845,8 +867,8 @@ def derive_tail_census(
                 c2s_declared += declared
                 c2s_reached += reached
                 c2s_pickup += pickup_reached
-                if not is_replacement_capture_path(rel):
-                    raise RuntimeError(f"C2S outer provenance is not REPLACEMENT: {rel}")
+                if not has_capture_v_prefix_path(rel):
+                    raise RuntimeError(f"C2S outer path lacks capture_v* classification component: {rel}")
                 continue
             if kind != "PC" or outer_id != runtime_res_id:
                 continue
@@ -922,12 +944,12 @@ def derive_tail_census(
                 pool_count_two += 1
             else:
                 raise RuntimeError("confirmed nonempty pool record-count drift")
-            if not is_replacement_capture_path(rel):
-                raise RuntimeError("confirmed nonempty pool provenance is not REPLACEMENT")
+            if not has_capture_v_prefix_path(rel):
+                raise RuntimeError("confirmed nonempty pool path lacks capture_v* component")
             key_bytes = b"".join(struct.pack("<I", value) for value in keys)
             keyset_sha = sha256(key_bytes)
             line = (
-                f"{rel}\t{file_shas[key]}\t{ordinal}\t{frame_sha}\tREPLACEMENT\t"
+                f"{rel}\t{file_shas[key]}\t{ordinal}\t{frame_sha}\t{PATH_CAPTURE_V_CLASS}\t"
                 f"{len(keys)}\t{keyset_sha}"
             )
             event_lines.append(line)
@@ -1690,29 +1712,30 @@ def build_rows(
         make_capture_row(
             facts,
             closure_id="GDP-CAP-005",
-            row_kind="REPLACEMENT_TERRAIN_POOL_SEQUENCE_CENSUS",
+            row_kind="PATH_CLASSIFIED_TERRAIN_POOL_SEQUENCE_CENSUS",
             phase="S2C_KEYSET_SEQUENCE",
             subject="confirmed nonempty TerrainThingPool frame/keyset metadata",
             direction="S2C",
-            semantic_status="OBSERVED_EXACT_REPLACEMENT_SEQUENCE",
+            semantic_status="OBSERVED_EXACT_PATH_CLASSIFIED_SEQUENCE_PROVENANCE_OPEN",
             exact_observation=(
-                "All 23 confirmed nonempty frames are REPLACEMENT provenance, across 11 files and 19 unique "
-                "complete-frame hashes; 22 carry one record and one carries two records. Their file/block order, "
-                "record counts, and hashed keysets are content-addressed without emitting any runtime key. "
-                "ORIGINAL=0 and UNKNOWN=0 among these confirmed nonempty frames."
+                "All 23 confirmed nonempty frames have a capture path component whose name starts with capture_v, "
+                "across 11 files and 19 unique complete-frame hashes; 22 carry one record and one carries two "
+                "records. Their file/block order, record counts, and hashed keysets are content-addressed without "
+                "emitting any runtime key. This filename classification is not authoritative server provenance."
             ),
             value_or_layout=(
                 f"event_manifest_sha256={facts.runtime_res_event_manifest};events=23;files=11;unique_frames=19;"
-                "count1=22;count2=1;ORIGINAL=0;UNKNOWN=0;"
-                "manifest_record=relative_path<TAB>file_sha256<TAB>block_ordinal<TAB>frame_sha256<TAB>provenance<TAB>record_count<TAB>keyset_sha256;"
+                "count1=22;count2=1;path_classification=PATH_CLASSIFIED_CAPTURE_V_PREFIX;"
+                "authoritative_provenance=NOT_ESTABLISHED;"
+                "manifest_record=relative_path<TAB>file_sha256<TAB>block_ordinal<TAB>frame_sha256<TAB>path_classification<TAB>record_count<TAB>keyset_sha256;"
                 "sort=lexicographic;join=LF_with_final_LF;encoding=UTF-8"
             ),
             evidence_mode="CAPTURE_METADATA_HASHED_KEYSET_SEQUENCE",
-            provenance="REPLACEMENT",
+            provenance=PATH_CAPTURE_V_CLASS,
             prior_claims=(),
-            nonclaim="CAPTURE proves frame order, categories, record counts, and hashed keysets only. It does not by itself define client state transitions; omission-causes-deletion remains the separately sourced IMAGE claim GDL-IMG-009.",
-            blocker="NO_ORIGINAL_NONEMPTY_TERRAIN_POOL_FRAME",
-            required_next_evidence="An ORIGINAL-provenance nonempty snapshot sequence and its independently typed pickup/removal ordering.",
+            nonclaim="CAPTURE proves path text, frame order, categories, record counts, and hashed keysets only. A capture_v* path component does not prove replacement or original server provenance, and omission-causes-deletion remains the separately sourced IMAGE claim GDL-IMG-009.",
+            blocker="AUTHORITATIVE_CAPTURE_PROVENANCE_LEDGER_NOT_PINNED",
+            required_next_evidence="A content-addressed authoritative capture-to-server provenance ledger plus an independently typed pickup/removal ordering.",
         ),
         make_capture_row(
             facts,
@@ -1723,40 +1746,43 @@ def build_rows(
             direction="C2S",
             semantic_status="ZERO_IN_EXACT_REACHED_SUBSET_GLOBAL_ABSENCE_OPEN",
             exact_observation=(
-                "The current REPLACEMENT corpus has 65,610 eligible C2S outer blocks: 64,979 gameplay 0x6E6F "
-                "and 631 login 0x453A. 58,412 have outer bit 0x02 clear/no nested collection. Nested declared "
+                "The current path-classified capture_v* subset has 65,610 eligible C2S outer blocks: 64,979 "
+                "gameplay 0x6E6F and 631 login 0x453A. 58,412 have outer bit 0x02 clear/no nested collection. Nested declared "
                 "instances total 15,350; 14,615 wrappers/type IDs are exactly reached, traversal advances only "
                 "across PASS CLOSED W schemas, and 735 later declared members remain unreached after the first "
-                "fail-closed stop. PickupTerrainThing is 0 of 14,615 exactly reached wrappers/type IDs."
+                "fail-closed stop. PickupTerrainThing is 0 of 14,615 exactly reached wrappers/type IDs. The path "
+                "classification is not authoritative server provenance."
             ),
-            value_or_layout="outer=65610;gameplay=64979;login=631;no_nested=58412;declared=15350;reached=14615;fail_closed=735;PickupTerrainThing_reached=0",
+            value_or_layout="outer=65610;gameplay=64979;login=631;no_nested=58412;declared=15350;reached=14615;fail_closed=735;PickupTerrainThing_reached=0;path_classification=PATH_CLASSIFIED_CAPTURE_V_PREFIX;authoritative_provenance=NOT_ESTABLISHED",
             evidence_mode="CAPTURE_CLOSED_SCHEMA_NESTED_TRAVERSAL",
-            provenance="REPLACEMENT",
+            provenance=PATH_CAPTURE_V_CLASS,
             prior_claims=(),
-            nonclaim="The 735 unresolved declared members prevent a global absence claim; zero of 14,615 exactly reached does not prove PickupTerrainThing absent from all 65,610 outer blocks or from original traffic.",
-            blocker="735_C2S_NESTED_MEMBERS_FAIL_CLOSED_AND_ORIGINAL_TRAFFIC_ABSENT",
-            required_next_evidence="Close the first-open schemas or capture an ORIGINAL typed PickupTerrainThing exchange.",
+            nonclaim="The 735 unresolved declared members prevent a global absence claim; zero of 14,615 exactly reached does not prove PickupTerrainThing absent from all 65,610 outer blocks, and capture_v* does not establish original-versus-replacement provenance.",
+            blocker="735_C2S_MEMBERS_FAIL_CLOSED_AND_AUTHORITATIVE_PROVENANCE_OPEN",
+            required_next_evidence="Close the first-open schemas and pin an authoritative provenance ledger or an independently authenticated original typed PickupTerrainThing exchange.",
         ),
         make_capture_row(
             facts,
             closure_id="GDP-CAP-007",
             row_kind="ORIGINAL_EXCHANGE_CEILING",
             phase="PICKUP_TO_AUTHORITATIVE_REMOVAL",
-            subject="eligible original pickup/removal exchange",
+            subject="authoritatively qualified original pickup/removal exchange",
             direction="C2S_THEN_S2C",
             semantic_status="ZERO_ESTABLISHED_EXCHANGES_CARRIER_OPEN",
             exact_observation=(
-                "No eligible ORIGINAL C2S pickup plus S2C omission/removal exchange is established by the current "
-                "corpus, and no exact omission/removal carrier is proved by CAPTURE. Existing PF_FIELD_VALIDATION.tsv "
-                "is frozen to the older 1,772-file/595,134,426-byte inventory, not the current 2,227-file corpus."
+                "Zero C2S pickup plus S2C omission/removal exchanges are qualified by a pinned authoritative "
+                "ORIGINAL-provenance ledger, because no such ledger is pinned; this is a qualification ceiling, "
+                "not proof that original traffic is absent. No exact omission/removal carrier is proved by CAPTURE. "
+                "Existing PF_FIELD_VALIDATION.tsv is frozen to the older 1,772-file/595,134,426-byte inventory, "
+                "not the current 2,227-file corpus."
             ),
-            value_or_layout="eligible_original_exchange_count=0;exact_capture_removal_carrier=NOT_PROVEN;confirmed_nonempty_original=0;exact_reached_pickup_replacement=0;frozen_files=1772;current_files=2227",
+            value_or_layout="authoritatively_qualified_original_exchange_count=0;authoritative_provenance_ledger=NOT_PINNED;exact_capture_removal_carrier=NOT_PROVEN;frozen_files=1772;current_files=2227",
             evidence_mode="CAPTURE_CEILING_PLUS_CONTENT_ADDRESSED_FROZEN_REFERENCE",
             provenance="CURRENT_MIXED_CORPUS",
             prior_claims=(frozen_prior,),
-            nonclaim="Replacement-server labels, client-observable disappearance, and outer traffic alone do not establish an original message/vital/opcode or authoritative removal carrier.",
-            blocker="ORIGINAL_PICKUP_ACCEPTANCE_REMOVAL_ORDER_AND_EXPIRY_UNOBSERVED",
-            required_next_evidence="Original same-build C2S pickup followed by a typed S2C snapshot/full-clear/omit/remove sequence with capture provenance.",
+            nonclaim="Filename labels, client-observable disappearance, and outer traffic alone do not establish server provenance, an original message/vital/opcode, or an authoritative removal carrier.",
+            blocker="AUTHORITATIVE_PROVENANCE_PICKUP_ACCEPTANCE_REMOVAL_ORDER_AND_EXPIRY_OPEN",
+            required_next_evidence="A provenance-ledger-qualified original same-build C2S pickup followed by a typed S2C snapshot/full-clear/omit/remove sequence.",
         ),
     ]
     return rows
@@ -1798,6 +1824,56 @@ def semantic_row_digest(row: Mapping[str, str]) -> str:
     )
 
 
+def capture_full_row_template_digest(row: Mapping[str, str]) -> str:
+    return canonical_digest(
+        {
+            key: value
+            for key, value in row.items()
+            if key not in {"claim_sha256", "evidence_key"}
+        }
+    )
+
+
+def reject_positive_unledgered_provenance_claim(text: str, label: str) -> None:
+    if AUTHORITATIVE_CAPTURE_PROVENANCE_LEDGER is not None:
+        return
+    normalized = " ".join(text.casefold().split())
+    compact = re.sub(r"[^a-z0-9]+", "", normalized)
+    positive_phrase = re.search(
+        r"\b(?:all|these|the)?\s*(?:frames|events|captures)?\s*(?:are|is|from)\s+"
+        r"(?:a\s+)?(?:replacement|original)\s+(?:server\s+)?provenance\b",
+        normalized,
+    )
+    count_semantic = re.search(
+        r"(?:replacement|original|unknown)(?:count)?\d+",
+        compact,
+    )
+    legacy_semantic = any(
+        token in compact
+        for token in (
+            "confirmednonemptyoriginal0",
+            "exactreachedpickupreplacement0",
+            "eligibleoriginalexchangecount0",
+        )
+    )
+    if positive_phrase or count_semantic or legacy_semantic:
+        raise ValueError(f"unledgered positive provenance/count semantics: {label}")
+
+
+def validate_capture_provenance_ceiling(row: Mapping[str, str]) -> None:
+    if row["source"] != SOURCE_CAPTURE or AUTHORITATIVE_CAPTURE_PROVENANCE_LEDGER is not None:
+        return
+    if row["provenance"] in {"REPLACEMENT", "ORIGINAL"}:
+        raise ValueError(f"authoritative CAPTURE provenance asserted without ledger: {row['closure_id']}")
+    claim_surface = "||".join(row[field] for field in FIELDNAMES)
+    reject_positive_unledgered_provenance_claim(claim_surface, row["closure_id"])
+    if any(token in claim_surface for token in FORBIDDEN_UNLEDGERED_PROVENANCE_CLAIMS):
+        raise ValueError(f"CAPTURE provenance/count claim lacks authoritative ledger: {row['closure_id']}")
+    expected_template = CAPTURE_FULL_ROW_TEMPLATE_SHA256.get(row["closure_id"])
+    if expected_template is None or capture_full_row_template_digest(row) != expected_template:
+        raise ValueError(f"CAPTURE full-row structural template drift: {row['closure_id']}")
+
+
 def validate_rows(
     rows: Sequence[Mapping[str, str]],
     prior: Mapping[str, PriorClaim],
@@ -1827,8 +1903,8 @@ def validate_rows(
         "GDP-CAP-002": "CURRENT_MIXED_CORPUS",
         "GDP-CAP-003": "CURRENT_MIXED_CORPUS",
         "GDP-CAP-004": "CURRENT_MIXED_CORPUS",
-        "GDP-CAP-005": "REPLACEMENT",
-        "GDP-CAP-006": "REPLACEMENT",
+        "GDP-CAP-005": PATH_CAPTURE_V_CLASS,
+        "GDP-CAP-006": PATH_CAPTURE_V_CLASS,
         "GDP-CAP-007": "CURRENT_MIXED_CORPUS",
     }
     for row in rows:
@@ -1880,6 +1956,7 @@ def validate_rows(
                 "direct_assertions",
             )):
                 raise ValueError(f"CAPTURE row exposes/mixes IMAGE span: {row['closure_id']}")
+            validate_capture_provenance_ceiling(row)
 
         claim_fields = {
             key: value for key, value in row.items() if key not in {"claim_sha256", "evidence_key"}
@@ -1936,7 +2013,7 @@ def render_report(rows: Sequence[Mapping[str, str]], facts: CaptureFacts, tsv: b
     lines = [
         "# PF ground-drop / pickup closure",
         "",
-        "This standalone P0-6 artifact closes the exact typed identity and bounded client transport path while preserving the runtime/policy ceilings. `source=IMAGE` and `source=CAPTURE` facts remain separate in every TSV row. No ServerProject/code row appears; replacement-provenance capture observations remain CAPTURE, not original evidence.",
+        "This standalone P0-6 artifact closes the exact typed identity and bounded client transport path while preserving the runtime/policy ceilings. `source=IMAGE` and `source=CAPTURE` facts remain separate in every TSV row. No ServerProject/code row appears. A capture_v* filename component is reported only as a path classification and is not treated as server provenance.",
         "",
         "## Outcome",
         "",
@@ -1964,11 +2041,11 @@ def render_report(rows: Sequence[Mapping[str, str]], facts: CaptureFacts, tsv: b
         "## Current capture ceiling (CAPTURE)",
         "",
         "- All four named target families (`PickupTerrainThing`, `DropThingModule_Client`, `FightingDropModule_Client`, `FightingDropNotify`) are W0/R0 in the broad current validator census.",
-        "- RuntimeRes R has 15,288 frames: 14,536 with derived TerrainThingPool bit 0x08 absent, zero present-count-zero, 23 present-nonempty, and 729 fail-closed unresolved. The 23 nonempty frames are 22 count-one plus one count-two; all are REPLACEMENT provenance in 11 files/19 unique complete-frame hashes.",
-        f"- The nonempty-event metadata manifest is `{facts.runtime_res_event_manifest}`. Its records contain path/hash/ordinal/provenance/count/keyset-hash only; runtime keys and payload bytes are not emitted.",
+        "- RuntimeRes R has 15,288 frames: 14,536 with derived TerrainThingPool bit 0x08 absent, zero present-count-zero, 23 present-nonempty, and 729 fail-closed unresolved. The 23 nonempty frames are 22 count-one plus one count-two, in 11 files/19 unique complete-frame hashes; every path has a capture_v* component, but authoritative server provenance is not established.",
+        f"- The nonempty-event metadata manifest is `{facts.runtime_res_event_manifest}`. Its records contain path/hash/ordinal/path-classification/count/keyset-hash only; runtime keys and payload bytes are not emitted. `PATH_CLASSIFIED_CAPTURE_V_PREFIX` records a filename property, not source truth.",
         f"- The all-729 unresolved-locator manifest is `{facts.runtime_res_uncertain_manifest}` over UTF-8 lines `relative_path<TAB>file_sha256<TAB>block_ordinal<TAB>frame_sha256<TAB>reason`, sorted lexicographically and joined with LF plus final LF. It contains 726 stopped tails and the three exact truncated-derived-mask locators listed below.",
-        "- Combined gameplay/login C2S outer blocks total 65,610 (64,979 gameplay, 631 login); 58,412 have no nested collection. Of 15,350 declared nested instances, 14,615 wrappers/type IDs are reached; traversal advances only across PASS CLOSED schemas, leaving 735 later declarations behind the first fail-closed stop. PickupTerrainThing is 0/14,615 reached wrappers/type IDs, not globally absent.",
-        "- Exactly zero eligible ORIGINAL pickup-to-authoritative-removal exchanges are established. No exact CAPTURE omission/removal carrier is proved.",
+        "- The capture_v*-path-classified gameplay/login C2S subset totals 65,610 outer blocks (64,979 gameplay, 631 login); 58,412 have no nested collection. Of 15,350 declared nested instances, 14,615 wrappers/type IDs are reached; traversal advances only across PASS CLOSED schemas, leaving 735 later declarations behind the first fail-closed stop. PickupTerrainThing is 0/14,615 reached wrappers/type IDs, not globally absent. The path label does not establish replacement or original provenance.",
+        "- Zero pickup-to-authoritative-removal exchanges are qualified by a pinned authoritative ORIGINAL-provenance ledger because no such ledger is pinned; this does not prove original exchanges absent. No exact CAPTURE omission/removal carrier is proved.",
         "- Existing `PF_FIELD_VALIDATION.tsv` is frozen to 1,772 files / 595,134,426 bytes. It is not a current-2,227-file validation, and its generator has no `--check` option.",
         "- No proprietary capture payload or raw byte is emitted. The current manifest records only path, size, and file SHA-256.",
         "",
@@ -2067,6 +2144,12 @@ def pair_payload(
         "image": {"path": IMAGE_SOURCE_FILE, "size": IMAGE_SIZE, "sha256": IMAGE_SHA256},
         "capture_corpus": {
             "scope": CAPTURE_SOURCE_FILE,
+            "authoritative_server_provenance_ledger": AUTHORITATIVE_CAPTURE_PROVENANCE_LEDGER,
+            "path_classification": {
+                "label": PATH_CAPTURE_V_CLASS,
+                "definition": "at least one relative-path component starts with capture_v (case-insensitive)",
+                "is_authoritative_server_provenance": False,
+            },
             "files": CURRENT_CAPTURE_FILES,
             "bytes": CURRENT_CAPTURE_BYTES,
             "manifest_sha256": CURRENT_CAPTURE_MANIFEST,
@@ -2164,6 +2247,13 @@ def validate_rendered(
     report_text = report.decode("utf-8")
     if "source=CAPTURE" not in report_text or "source=IMAGE" not in report_text:
         raise ValueError("report source-separation statement missing")
+    reject_positive_unledgered_provenance_claim(report_text, "report")
+    if AUTHORITATIVE_CAPTURE_PROVENANCE_LEDGER is None and any(
+        token in report_text for token in FORBIDDEN_UNLEDGERED_PROVENANCE_CLAIMS
+    ):
+        raise ValueError("report contains an authoritative provenance/count claim without a pinned ledger")
+    if sha256(report) != EXPECTED_REPORT_SHA256:
+        raise ValueError("report structural template hash drift")
     payload = json.loads(pair.decode("ascii"))
     if payload != pair_payload(rows, facts, tsv, report, generator_raw):
         raise ValueError("pair marker payload mismatch")
@@ -2428,6 +2518,76 @@ def self_test(bundle: DerivedBundle) -> tuple[str, ...]:
     )
 
     bad_rows = copy.deepcopy(list(bundle.rows))
+    bad_rows[cap005_index]["subject"] = "original_count=0"
+    reseal_row(bad_rows[cap005_index])
+    passed.append(
+        expect_failure(
+            "full_row_subject_hiding_place",
+            lambda: validate_rows(bad_rows, bundle.prior, bundle.frozen_prior),
+        )
+    )
+
+    bad_rows = copy.deepcopy(list(bundle.rows))
+    bad_rows[cap005_index]["direct_assertions"] += "||MUTATED_STRUCTURAL_FIELD"
+    reseal_row(bad_rows[cap005_index])
+    passed.append(
+        expect_failure(
+            "full_row_machine_field_hiding_place",
+            lambda: validate_rows(bad_rows, bundle.prior, bundle.frozen_prior),
+        )
+    )
+
+    bad_rows = copy.deepcopy(list(bundle.rows))
+    bad_rows[cap005_index]["exact_observation"] += " All frames are REPLACEMENT provenance."
+    reseal_row(bad_rows[cap005_index])
+    passed.append(
+        expect_failure(
+            "unledgered_replacement_claim",
+            lambda: validate_rows(bad_rows, bundle.prior, bundle.frozen_prior),
+        )
+    )
+
+    bad_rows = copy.deepcopy(list(bundle.rows))
+    bad_rows[cap005_index]["exact_observation"] += " All frames are replacement provenance."
+    reseal_row(bad_rows[cap005_index])
+    passed.append(
+        expect_failure(
+            "unledgered_lowercase_replacement_claim",
+            lambda: validate_rows(bad_rows, bundle.prior, bundle.frozen_prior),
+        )
+    )
+
+    bad_rows = copy.deepcopy(list(bundle.rows))
+    bad_rows[cap005_index]["exact_observation"] += " Frames are from original provenance."
+    reseal_row(bad_rows[cap005_index])
+    passed.append(
+        expect_failure(
+            "unledgered_paraphrased_original_claim",
+            lambda: validate_rows(bad_rows, bundle.prior, bundle.frozen_prior),
+        )
+    )
+
+    bad_rows = copy.deepcopy(list(bundle.rows))
+    bad_rows[cap005_index]["value_or_layout"] += ";ORIGINAL=0"
+    reseal_row(bad_rows[cap005_index])
+    passed.append(
+        expect_failure(
+            "unledgered_original_count",
+            lambda: validate_rows(bad_rows, bundle.prior, bundle.frozen_prior),
+        )
+    )
+
+    bad_rows = copy.deepcopy(list(bundle.rows))
+    bad_rows[cap005_index]["value_or_layout"] += ";replacement_count=23;original_count=0"
+    reseal_row(bad_rows[cap005_index])
+    passed.append(
+        expect_failure(
+            "unledgered_paraphrased_counts",
+            lambda: validate_rows(bad_rows, bundle.prior, bundle.frozen_prior),
+        )
+    )
+
+    bad_rows = copy.deepcopy(list(bundle.rows))
     image_prior = next(iter(bundle.prior.values()))
     bad_rows[cap005_index]["prior_reference"] = image_prior.token
     bad_rows[cap005_index]["prior_artifact_sha256"] = image_prior.artifact_sha256
@@ -2546,6 +2706,27 @@ def self_test(bundle: DerivedBundle) -> tuple[str, ...]:
                 bundle.tsv,
                 bundle.report,
                 bad_pair,
+                bundle.generator_raw,
+            ),
+        )
+    )
+    unledgered_report = bundle.report + b"\nAll observed frames are REPLACEMENT provenance.\n"
+    unledgered_pair = render_pair(
+        bundle.rows,
+        bundle.facts,
+        bundle.tsv,
+        unledgered_report,
+        bundle.generator_raw,
+    )
+    passed.append(
+        expect_failure(
+            "report_unledgered_provenance_claim",
+            lambda: validate_rendered(
+                bundle.rows,
+                bundle.facts,
+                bundle.tsv,
+                unledgered_report,
+                unledgered_pair,
                 bundle.generator_raw,
             ),
         )

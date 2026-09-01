@@ -38,6 +38,7 @@
     }
   },
   "capture_corpus": {
+    "authoritative_server_provenance_ledger": null,
     "blocks": 81954,
     "bytes": 699015496,
     "c2s_closed_nested": {
@@ -52,9 +53,14 @@
     },
     "files": 2227,
     "manifest_sha256": "b8284a566d9993f52540dea52e82896b0d8eb499b9aa83ceb74084a0e671db3c",
+    "path_classification": {
+      "definition": "at least one relative-path component starts with capture_v (case-insensitive)",
+      "is_authoritative_server_provenance": false,
+      "label": "PATH_CLASSIFIED_CAPTURE_V_PREFIX"
+    },
     "runtime_res_tail": {
       "bit08_absent": 14536,
-      "event_manifest_sha256": "fb771d2f6fbeffacac37b283bad676c998480d74e010b36f1ebd2bd37a0dc82e",
+      "event_manifest_sha256": "abaedb66ed9a2bbf8fae8ab872b92ef4d8b20736a23d7159b2d7f0300fb2b7be",
       "present_count_zero": 0,
       "present_nonempty": 23,
       "truncated_derived_mask": 3,
@@ -64,7 +70,7 @@
     "scope": "PF_ROOT://GameClient/**/capture_*/**/*",
     "text_files": 1337
   },
-  "claim_set_sha256": "b04cb1f6e4d659d75f7a676dda950e5040ff844ca9b538cb7b437d311612c2b0",
+  "claim_set_sha256": "0b24e08a365928d38d37c98063bbea2d2ce44c00e8096bb024e745ad0adcc13f",
   "closure_ids": [
     "GDP-IMG-001",
     "GDP-IMG-002",
@@ -84,19 +90,19 @@
   ],
   "files": {
     "PF_GROUND_DROP_PICKUP_CLOSURE.md": {
-      "sha256": "fdd25c4d2887d52c027b5be086c88d45f420a7fc20d5c153bca77e85b131da30",
-      "size": 14088
+      "sha256": "52981a6ad0c505f5d62d2430d54f41e074ae43b26fbfe3b6521ed1d2dae39b8f",
+      "size": 14761
     },
     "PF_GROUND_DROP_PICKUP_CLOSURE.tsv": {
-      "sha256": "0aa918f2c52d333d3d8bde32c28aac8315fdc6e7c5bff786573246de6195b49e",
-      "size": 29960
+      "sha256": "1cf955edcff6f360735488c8a6e03a91435f1041ba642092f9193fd295348a1c",
+      "size": 30672
     }
   },
-  "generation_sha256": "1d133ec7ca72fa08ed58afd930a895467803dad2dd45de1cc0f47650593a3211",
+  "generation_sha256": "82d3d4dc351e4c94314c40dafa664ece2619621b3f03a507a67bce045d2b145f",
   "generator": {
     "path": "pf_rederive_ground_drop_pickup_closure.py",
-    "sha256": "d2bf5d1e4b3ec3cc969611e87012d94186b7f08f58c119cadef4ca7777ab3794",
-    "size": 116033
+    "sha256": "f3eb92393fbaec884e596acc5cbafba02738328c1af39d875e0aca0beb310d9d",
+    "size": 124485
   },
   "image": {
     "path": "PF_ROOT://GameClient/GameClient.local.bin",
