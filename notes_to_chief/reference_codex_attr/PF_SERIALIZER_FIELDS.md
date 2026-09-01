@@ -1,0 +1,126 @@
+# PF serializer fields
+
+ตารางนี้สร้างจาก control-flow และ call-site ใน image ที่ตรึง hash แล้ว โดยไม่ใช้ตารางฟิลด์เดิมเป็นข้อมูลนำเข้า; ทุกแถว TSV ติด `source=IMAGE`
+
+## กติกาการวัด
+
+- ขอบเขตฟังก์ชันเป็น `[span_start, span_end)` จบที่ `ret`/`ret imm` ตัวแรกซึ่งตามด้วย `INT3` อย่างน้อย 3 ไบต์; SHA-256 ครอบคลุมช่วงนั้นพอดี
+- แถว tag ตัวเลขมาจาก call ไป `WRITE 0x0089A600` หรือ `READ 0x0089A640` และรับเฉพาะลำดับ push ที่พิสูจน์ได้เอกฐานเป็น `len, pointer, tag`
+- ตัวช่วยข้อความรับเฉพาะสี่ target ที่ตรึงครบทั้งช่วงไบต์/แฮช, ABI `thiscall` หนึ่งอาร์กิวเมนต์, import symbol จาก PE, direct thunk `0x00B37B80 -> [0x00C3B504] memcpy` และ semantic key bytes: `0x0089A6D0`/`0x0089A740` เป็น `basic_string<char>` W/R และ `0x0089A810`/`0x0089A880` เป็น `basic_string<wchar_t>` W/R; ทุกกรณีใช้ความยาว 32-bit little-endian ซึ่งนับ payload เป็นไบต์ ตามด้วย raw N bytes และยอมรับ call site เฉพาะเมื่อ ECX ย้อนถึง stream formal เอกฐาน
+- atomic object helper รับเฉพาะ full body ตรงทุกไบต์และ PE import ตรงชื่อ: `0x0088D050` พิสูจน์ exact `InterlockedIncrement(ECX+0x0C)` แล้ว return แต่ runtime address ยังผูก object/non-alias กับ stream ไม่ได้ จึงคง `atomic_target_object_alias_unproved`; `0x0088D060` ทำ `InterlockedDecrement(ECX+0x0C)` แล้วเมื่อผลเป็นศูนย์อาจ call runtime target จาก vtable `+0x04` จึงคง `dynamic_vtable_plus_0x04_target_unresolved` และไม่เดา target ทั้งสองกรณี
+- direct atomic pointer helpers `0x004A06A0`/`0x004A06B0` รับเฉพาะ body 8 ไบต์ที่เป็น `push ECX; call [InterlockedIncrement/Decrement]; ret` และ PE import ตรงชื่อ; ECX runtime pointer ยังไม่มี non-alias proof จึงคง `atomic_target_pointer_alias_unproved` ทุก call โดยไม่เรียกเป็น refcount หรือ non-wire
+- pure chain predicate `0x0088F2B0` รับเฉพาะ full body 33 ไบต์ตรง hash: อ่าน needle จาก stack `+0x04`, chain head จาก `+0x08`, เดิน pointer ที่ node `+0x04` จนเท่ากันหรือเป็น null แล้วคืน AL 1/0; body ไม่มี call และไม่มี memory write ส่วน caller 34 จุดต้องมี exact suffix `movzx eax,al; add esp,8` จึงบันทึกเป็น read-only predicate ที่ไม่สร้าง wire field โดยไม่ตั้งชื่อชนิด node/container
+- mutable chain helper `0x00B0BF70` รับ full body 108 ไบต์และ PE import `_invalid_parameter_noinfo` ตรง exact; body อ่าน link/flag ที่ `+0x00/+0x04/+0x08/+0x15` และมี memory write `[ESI+0x04]` ตรงสามจุด แต่ 22 caller sites ยังไม่มี object/non-alias provenance จึงคง `mutable_chain_target_object_alias_unproved` และไม่อ้างว่าเป็น non-wire หรือระบุชนิด container
+- locked mutable pointer-slot helper `0x0066AB90` รับ full body 157 ไบต์, direct import `malloc`/`_invalid_parameter_noinfo`, exact wrappers ของ `EnterCriticalSection`/`LeaveCriticalSection`/`InterlockedExchangeAdd` และจุดเขียน slot scale 4 ครบ; nested target `0x007016A0` กับ runtime object/source alias ยังไม่พิสูจน์ semantics เอกฐาน จึงคง `locked_mutable_pointer_slot_nested_target_and_alias_unproved` โดยไม่ตั้งชื่อชนิด container และไม่อ้างว่าเป็น non-wire
+- critical-section pointer wrappers `0x0088D5B0`/`0x0049DA40` รับเฉพาะ full body 10 ไบต์ที่เป็น `mov eax,[ecx]; push eax; call [Enter/LeaveCriticalSection]; ret` และ PE import ตรงชื่อ; runtime pointer ที่ `[ECX]` ยังไม่มี non-alias proof จึงคง `critical_section_pointer_alias_unproved` โดยไม่อ้างว่า call เป็น non-wire
+- locked mutable dword-slot update helper `0x00710FA0` รับ bounded entry CFG `[0x00710FA0,0x0071100F)` 111 ไบต์/42 instructions ตรง hash, เรียก lock/growth/unlock targets ที่พิสูจน์ไว้, direct `_invalid_parameter_noinfo` สองจุด, ปรับ counter `+0x20/+0x24` และเขียน output/slot; nested semantics กับ runtime aliases ยังไม่เอกฐาน จึงคง `locked_mutable_dword_slot_nested_target_and_alias_unproved` โดยไม่ตั้งชื่อ container หรือประกาศ NONWIRE
+- nested three-call composition helper `0x005F8DE0` รับ full body `[0x005F8DE0,0x005F8E04)` 36 ไบต์/13 instructions ตรง hash, มี direct calls เอกฐานไป `0x0089C080`/`0x0089B220`/`0x00463800`, zero-extend ผลลัพธ์ และส่ง address `ECX+0x50` ต่อโดยไม่มี explicit MOV ที่ปลายทางเป็น memory ใน body นี้; semantics ของ nested targets กับ runtime alias ยังไม่เอกฐาน จึงคง `nested_call_composition_targets_and_alias_unproved` โดยไม่ตั้งชื่อ operation หรือประกาศ NONWIRE
+- ECX+0x50 tail-jump helper `0x005F8C30` รับเฉพาะ entry-reachable prefix `[0x005F8C30,0x005F8C38)` 8 ไบต์/2 instructions ตรง hash: `add ecx,0x50` แล้ว direct tail jump ไป `0x00463800`; prefix ตามด้วย `CC` 8 ไบต์ที่ file offset `0x001F8038` จึงไม่ลาก routine ถัดไปเข้าคำอ้าง ส่วน tail-target semantics กับ runtime ECX alias ยังไม่เอกฐาน จึงคง `ecx_plus_50_tail_target_and_alias_unproved` โดยไม่ตั้งชื่อ operation หรือประกาศ NONWIRE
+- mutable pointer-slot traversal helper `0x0046D2B0` รับ full body 108 ไบต์/44 instructions ตรง hash, โหลด `_invalid_parameter_noinfo` IAT เข้า EDI, call EDI สองจุด และเขียน runtime `[ESI+0x04]` สามแขน; ระบุเฉพาะ pointer/link/flag offsets ตามไบต์และคง `mutable_pointer_slot_traversal_alias_unproved` โดยไม่ตั้งชื่อโครงสร้างข้อมูลหรือประกาศ NONWIRE
+- mutable dword-slot operation helper `0x00AC6E80` รับ bounded entry CFG `[0x00AC6E80,0x00AC6F00)` 128 ไบต์/53 instructions ตรง hash, ret 4 สองจุด, direct nested targets `0x006B35A0`/`0x00AC6D00`, direct `_invalid_parameter_noinfo` IAT และ state write `[ESI+0x10]=EDI`; nested semantics กับ runtime object/source alias ยังไม่เอกฐาน จึงคง `mutable_dword_slot_nested_targets_and_alias_unproved` โดยไม่ตั้งชื่อ container หรือประกาศ NONWIRE
+- mutable dword-range growth helper `0x007016A0` รับ full body 133 ไบต์ตรง exact, เขียนศูนย์ที่ `[EDI]`, เลื่อน end pointer `[ESI+0x10]`, ใช้ slot scale 4 และเรียก `_invalid_parameter_noinfo` ผ่าน register ที่โหลดจาก IAT; nested target `0x005F68D0` กับ runtime object alias ยังไม่พิสูจน์ semantics เอกฐาน จึงคง `mutable_dword_range_nested_target_and_alias_unproved` โดยไม่เรียก vector/list หรือ non-wire
+- direct IAT call `FF 15 C0 B4 C3 00` รับเฉพาะเมื่อ PE import table ยืนยัน `MSVCR90.dll!_invalid_parameter_noinfo` พร้อม file offset ของ call/IAT/descriptor/lookup/name ครบ; การรู้ import operation ยังไม่พิสูจน์ผลต่อ wire path จึงคง `invalid_parameter_import_call_wire_effect_unproved` และไม่ประกาศ NONWIRE
+- exact direct PE-import อื่นรับเฉพาะ 12 IAT ใน oracle ที่ระบุ DLL, decorated symbol และ `FF15 <IAT little-endian>` ตายตัว; ทุกแถวตรึง call/IAT/descriptor/lookup/name offsets และแยก tag ตาม operation แต่คง `exact_direct_import_call_wire_effect_unproved` โดยไม่อนุมานจากชื่อ import ว่าเป็น NONWIRE
+- rel32 import-thunk call รับเฉพาะ target ที่เป็น exact unconditional `FF25 <IAT little-endian>` 6 ไบต์และ PE import table ยืนยัน DLL/symbol ตาม independent oracle; ปัจจุบันคือ `0x0088D020 -> MSVCR90.dll!malloc` และ `0x00B37998 -> MSVCR90.dll!_CxxThrowException`. ทุกแถวตรึง call/target/thunk/IAT/descriptor/lookup/name offsets แต่คง `exact_import_thunk_call_wire_effect_unproved` โดยไม่ประกาศ NONWIRE จากชื่อ import
+- PE SecurityCookie helper `0x00B37964` รับ bounded entry `[0x00B37964,0x00B37973)` 15 ไบต์/4 instructions ตรง hash: เทียบ ECX กับ global `0x0102B4BC`, return เมื่อเท่ากัน หรือตรงไป failure target `0x00B38352`; COFF `SizeOfOptionalHeader=0xE0` ที่ file offset `0x0000013C` และ PE32 `NumberOfRvaAndSizes=16` ที่ `0x0000019C` ยืนยันว่า Load Configuration DataDirectory[10] ที่ `0x000001F0` อยู่ใน optional header จริง ก่อนชี้ field `SecurityCookie` ที่ `0x00BBA9AC` เป็น global เดียวกัน และ entry ตามด้วย `CC` 13 ไบต์. failure-path effect ยังไม่เอกฐาน จึงคง `pe_security_cookie_failure_path_wire_effect_unproved` โดยไม่ประกาศ NONWIRE
+- register-indirect `_invalid_parameter_noinfo` รับเฉพาะ exact `call r32` ที่มี reaching definition เดียวและ definition นั้นเป็น unprefixed exact `mov r32,[0x00C3B4C0]`; หลักฐานตรึง call/load bytes และ offsets ครบ แต่ยังคง `invalid_parameter_singleton_register_call_wire_effect_unproved` โดยไม่รวม multiple-definition paths
+- multi-definition register-indirect `_invalid_parameter_noinfo` ใช้กฎแยก: complete reaching set ต้องมีอย่างน้อยสอง definitions, ไม่มี undefined path และสมาชิกทุกจุดเป็น exact unprefixed `mov r32,[0x00C3B4C0]` ของ register เดียวกัน; ตรึงสมาชิก/bytes/offsets ทุกจุดและคง `invalid_parameter_multi_register_call_wire_effect_unproved`
+- ทุกแถวมี `file_off_claim` ของ call/jump/ret/registration ที่รองรับข้ออ้างนั้นโดยตรง; เปิด image ที่ offset นี้เพื่อตรวจไบต์ซ้ำได้
+- `gate_condition=ALWAYS` หมายถึงไม่มี immediate-mask gate, mode-direction proof หรือ ancestor SUBCALL path สำหรับแถวนั้น; หลักฐานที่มีจะบันทึก VA และ file offset ทุก anchor/path
+- `SUBCALL:0x...` รับเฉพาะ target คงที่ที่ตามถึง WRITE/READ ได้หรือเป็น serializer ใน A1 และพิสูจน์ stream chain เอกฐานจาก caller formal ผ่าน push/tail ไปยัง target formal และ primitive ECX ของทิศนั้น; ถ้า caller ไม่มี direct primitive seed จะย้อนจาก target formal ที่มี direction-specific primitive anchor ผ่าน call argument ได้เฉพาะเมื่อเหลือคู่ caller/target formal เดียว; tail ต้องมี ABI จำกัดช่วง formal และ stack depth ตรง jump เท่ากับศูนย์; แถวถัดไปจึงตามเข้า target
+- memory formal ผ่าน frame register รับเฉพาะ full-width `mov reg, esp` ที่มี stack depth เอกฐาน แล้วคำนวณ entry delta ตรงตัว; register copy ต้องเอกฐานทุก predecessor ส่วน arithmetic, LEA, partial write, conflict, missing path และ cycle ยังคง UNKNOWN; `stack_formal_base` บันทึก instruction/file offset ที่เป็นฐาน
+- ถ้า recursive backtrace ติด loop จะใช้ forward reaching-definition fixed point เป็น fallback เฉพาะเมื่อทุก CFG path มี plain 32-bit MOV definition เดียวและ source formal เอกฐาน; entry ที่ยังไม่กำหนด, definition หลายตัว, non-MOV/partial write และ opcode `other` นอก safe no-GPR-write families เป็น clobber; `formal_reaching_def` บันทึก definition/use file offsets ทุก claim
+- `SUBCALL:INDIRECT(...)` รับเฉพาะรูปโหลด `[vtable+0x18]` ที่โจทย์ตรึงว่าเป็น serializer slot และมีอาร์กิวเมนต์สองตัว; target จริงยัง UNKNOWN; ทิศจาก caller formal รับเฉพาะ byte branch เอกฐาน, exact mode load จาก `[esp+disp8]`, singleton reaching definition และตำแหน่ง call ในแขน zero/nonzero เดียวกัน โดย `indirect_mode_formal_source` ตรึง load/use/depth/formal offsets
+- direct target ที่รองรับทั้ง W/R ต้องพิสูจน์ local formal mode ทุก call site แม้ ancestor จะจำกัด `allowed` เหลือทิศเดียว; รับเฉพาะ intersection ที่พิสูจน์จาก zero/nonzero branch กับ WRITE/READ anchors ตรง และ caller value จาก constant, แขนง formal เดียวกัน หรือ formal forwarding ที่ width/mapping ตรงกัน; target ที่มี capability เอกฐานและอยู่ในแขน direct mode ตรงข้ามกับ `allowed` จะถูกจัดเป็น direction-infeasible และไม่ flatten เป็น UNKNOWN ซ้ำ โดย validator ต้อง re-derive call, branch node, direct anchors และ file offset ครบ
+- transitive capability ที่ดูเป็น R/W อาจลดเหลือทิศเดียวเฉพาะใน call-site escape hatch เมื่อ target มีขอบเขต entry แบบ `ret; int3+` ตรงไบต์ก่อนหน้า, decode ไม่มี error, direct primitive ทุกจุดเป็นทิศเดียว, ไม่มี serializer-capable tail และ direct serializer child ทุกจุดเป็น singleton ทิศเดียวกันหรือพิสูจน์ local mode ได้ทิศเดียวกัน; `local_capability_refinement` ตรึง boundary/primitive/child offsets, ABI, argument-path count และ hash ของ direction proof โดยไม่แก้ global capability
+- predicate บน byte register เช่น `bl` ตาม provenance เป็น lane 8 บิตแยกจาก full GPR; เมื่อ recursive trace ติด loop รับ fallback จาก unique reaching `mov r32,[esp+disp]` แบบ 32 บิตและ stack depth เอกฐาน (`formal_byte_reaching_def`) หรือจาก formal proof ของ full GPR ที่เข้มกว่า; เส้นหลังรับ exact `lea r32,[r32+0]` พร้อม `formal_identity_lea`; undefined/multiple definition, partial/overlapping write และ opaque GPR clobber จะหยุด ไม่ยก `mov bl` เป็นการนิยาม `ebx` ทั้งตัว
+- fallback ค่า mode ศูนย์รับเพิ่มเฉพาะ reaching definition เดียวที่เป็นไบต์ exact `xor r32,r32` สองไบต์โดย register เดียวกัน (`mode_zero_reaching_def`); EAX-EBX ใช้ low-byte lane dataflow ส่วน ESI/EDI/EBP ใช้ full-GPR dataflow ที่เข้มกว่า และ fallback นี้ไม่รวมหลาย definition; direct symbolic path เดิมอาจรวมหลาย CFG paths ได้เฉพาะเมื่อ expression ทุกแขนลดรูปเป็นค่าคงที่เดียวกัน โดยใช้ `mode_arg` ไม่ใช่ marker ของ fallback
+- ชุด reaching definition หลายจุดใช้ escape hatch แยก (`mode_zero_reaching_set`) เฉพาะเมื่อไม่มี undefined entry และทุก definition เป็น exact full-width two-byte `xor r32,r32` ของ register เดียวกัน; ตรึงสมาชิกทุกจุดและไม่ใช้ generic constant/value lattice
+- ค่า mode ศูนย์อาจข้าม exact full-width `lea r32,[r32+0]` ได้หนึ่งชั้นด้วย `mode_zero_identity_lea` เมื่อ identity site เป็น reaching definition เดียวของ use และ complete reaching set ก่อน identity ไม่มี undefined path โดยทุกสมาชิกเป็น exact full-width XOR-self ของ register เดียวกัน; ไม่ไล่ identity chain และไม่ใช้ generic value lattice
+- mode predicate รูป `cmp byte-formal, low8-register` รับค่าเทียบเป็นศูนย์เฉพาะเมื่อทุก reaching definition ของ lane นั้นเป็น exact full-width `xor r32,r32`; `predicate_zero_reaching` ตรึง register/lane/use และ definition ทุกจุด
+- wrapper ที่ไม่มี primitive R/W ตรงอาจใช้ `mode_nested_anchor_*` ได้เพียงหนึ่งชั้น เมื่อแต่ละแขนงมี direct child call เอกฐาน, child มี direction เอกฐาน, ABI/argument path ครบ และ formal ของ stream ตามถึง direct primitive ECX anchor ของ child ได้เอกฐาน; `target_nested_stream_anchor_*` ตรึงแขนงที่ direction ของ caller เลือกจริง
+- stack-depth ข้าม indirect import ได้เฉพาะ IAT ที่ PE import table ระบุชื่อ exact เป็น `_invalid_parameter_noinfo` หรือ `basic_string<wchar_t>` constructor/destructor ที่ decoration ลงท้าย `QAE@XZ` (ไม่มี stack argument); รองรับทั้ง `call [IAT]` ตรงและ `call r32` ที่ unprefixed reaching set มี definition เดียวเป็น exact `mov r32,[IAT]` ของ register เดียวกัน; `stack_neutral_register_import` ตรึง call/load/IAT/descriptor/lookup/DLL/symbol file offsets ส่วน undefined/multiple definition, รูปไบต์อื่น และ import นอก allowlist ยังทำให้ depth เป็น UNKNOWN
+- vtable `+0x10` ที่โจทย์ตรึงเป็น GetId แบบไม่มี stack argument รักษา depth ได้เฉพาะ `call r32` unprefixed ที่ reaching definition เดียวเป็น adjacent exact `mov r32,[r32+0x10]` และ symbolic target ยืนยัน slot เดียวกัน; `stack_neutral_vtable_getid` ตรึง call/load offsets ส่วน prefix, slot อื่น, non-adjacent/ambiguous definition และ depth ที่เสียไปแล้วไม่ผ่าน
+- คำสั่งที่เขียน ESP จะรักษา stack depth ได้เพิ่มเฉพาะไบต์ exact `8D A4 24 00 00 00 00` ซึ่ง decode ตรงเป็น full-width `lea esp,[esp+0]`; `stack_identity_lea` ตรึง VA/file offset และ function ส่วน prefix, displacement อื่น, index, register อื่น หรือ depth ที่เสียไปก่อนหน้าไม่ถูกกู้คืน
+- mode formal/value ที่ยังพิสูจน์ไม่ได้เป็น `UNKNOWN(subcall_direction_unresolved...)` และไม่ถูกขยายเป็นสองทิศ
+- stream ที่ยัง trace แบบ singleton ไม่ได้เป็น `UNKNOWN(subcall_stream_provenance_unresolved...)` และห้าม recurse; `stream_call`/`stream_arg` หรือ `stream_tail`, `stream_formal_discovery`, `tail_stack_depth`, caller/target anchors และ `primitive_stream` บันทึก VA กับ file offset ให้ตรวจซ้ำได้
+- descendant ทุกแถวสืบทั้งหลักฐาน stream และ `subcall_path@VA file_off target` ของ ancestor แต่ละชั้น จึงแยก static paths ที่ลงท้าย primitive site เดียวกันได้จาก A2 โดยตรง
+- นอกจาก primitive, exact direct-IAT/singleton-register/multi-register import calls, ตัวช่วยข้อความสี่ target, atomic helper สี่ target, pure chain predicate, mutable chain helper, locked mutable pointer-slot helper, critical-section pointer wrappers, locked mutable dword-slot update helper, nested three-call composition helper, ECX+0x50 tail-jump helper, mutable pointer-slot traversal helper, mutable dword-slot operation helper และ mutable dword-range growth helper ที่พิสูจน์รูปปฏิบัติการตามขอบเขตแล้ว direct/indirect call อื่นทุกจุดไม่ถูกข้าม แต่บันทึก `CALL_UNCLASSIFIED` เป็น UNKNOWN พร้อม file offset โดยไม่เดาว่าเป็น utility หรือ serializer
+- `order` คือลำดับ static call-site ตาม VA แยก W/R และแทรกผล recurse หลัง SUBCALL; ไม่อ้างเป็น dynamic execution count/order สำหรับ loop หรือแขนงที่กำกวม
+- `field_offset` ที่ไม่ใช่ `+0x...` เป็นนิพจน์ symbolic ตามคำสั่งจริง เช่น pointer, stack temporary, loop index หรือค่าคืนจากฟังก์ชัน ไม่ถูกบังคับให้เป็น member offset; top-level query ของแต่ละ event ใช้ resolver แยกกันเพื่อไม่ให้ cycle-breaking memo จาก event ก่อนหน้าเปลี่ยนผล
+- `EMPTY` รับ body `ret`/`ret 8` ล้วนและ exact allowlist หกกรณี: constant-return, absolute-global predicate, two-/single-argument value copier, conditional object init และ FPSTest entry-reachable prefix; กรณี FPSTest เทียบ full span 156 bytes ทุกไบต์ แต่จำกัดคำอ้าง EMPTY ไว้ที่ 24 คำสั่งซึ่งเข้าถึงได้จาก entry `0x0073E8B0` และสิ้นสุดก่อนตัวคั่น `CC CC` เท่านั้น ส่วน routine ที่เริ่ม `0x0073E900` ไม่อยู่ในคำอ้างและยังไม่ตีความ ทุกกรณีอ้างเพียงว่าเส้นทางที่ระบุไม่มี wire field พร้อม VA/file offset/full bytes หรือ full-span hash ส่วน body อื่นยัง UNKNOWN
+
+## จำนวน
+
+- protocol rows: 519
+- A2 rows: 6931
+- measured numeric W/R fields: 2783
+- exact string wire-helper rows: 408
+- exact atomic increment rows blocked by object-alias proof: 271
+- exact atomic decrement rows blocked at dynamic vtable target: 279
+- exact direct atomic pointer rows blocked by alias proof: 120
+- exact read-only chain predicate rows: 76
+- exact mutable chain rows blocked by object-alias proof: 70
+- exact locked mutable pointer-slot rows blocked by nested-target/alias proof: 58
+- exact critical-section pointer rows blocked by alias proof: 64
+- exact locked mutable dword-slot update rows blocked by nested-target/alias proof: 28
+- exact nested three-call composition rows blocked by nested-target/alias proof: 28
+- exact ECX+0x50 tail-jump rows blocked by tail-target/alias proof: 20
+- exact mutable pointer-slot traversal rows blocked by alias proof: 29
+- exact mutable dword-slot operation rows blocked by nested-target/alias proof: 46
+- exact mutable dword-range growth rows blocked by nested-target/alias proof: 32
+- exact direct `_invalid_parameter_noinfo` IAT rows blocked by wire-effect proof: 638
+- other exact direct PE-import rows blocked by wire-effect proof: 128
+- exact rel32 PE-import thunk rows blocked by wire-effect proof: 16
+- exact PE SecurityCookie check rows blocked by failure-path proof: 19
+- exact singleton-register `_invalid_parameter_noinfo` rows blocked by wire-effect proof: 179
+- exact multi-register `_invalid_parameter_noinfo` rows blocked by wire-effect proof: 10
+- SUBCALL rows: 271
+- direction-proven direct SUBCALL rows: 181
+- formal-to-formal forwarded SUBCALL rows: 28
+- stream-proven direct/tail SUBCALL rows: 255
+- rows stopped by unresolved stream provenance: 14
+- rows carrying exact stack-neutral import evidence: 2568
+- rows carrying register-indirect stack-neutral evidence: 1287
+- rows carrying exact stack-identity LEA evidence: 254
+- rows carrying exact GetId vtable stack evidence: 157
+- rows carrying indirect formal-mode source evidence: 2
+- rows carrying local capability refinement evidence: 48
+- rows carrying identity-LEA zero evidence: 22
+- unclassified CALL/JUMP rows: 1106
+- rows with gate/path evidence: 4449
+- protocol serializers without UNKNOWN: 338
+- protocol serializers with UNKNOWN: 181
+- image SHA-256: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
+
+## เหตุผล UNKNOWN
+
+- `atomic_target_object_alias_unproved`: 86 protocol(s)
+- `atomic_target_pointer_alias_unproved`: 13 protocol(s)
+- `critical_section_pointer_alias_unproved`: 5 protocol(s)
+- `direct_call_not_proven_serializer`: 148 protocol(s)
+- `dynamic_vtable_plus_0x04_target_unresolved`: 84 protocol(s)
+- `ecx_plus_50_tail_target_and_alias_unproved`: 8 protocol(s)
+- `exact_direct_import_call_wire_effect_unproved`: 11 protocol(s)
+- `exact_import_thunk_call_wire_effect_unproved`: 8 protocol(s)
+- `indirect_call_not_proven_serializer_slot`: 94 protocol(s)
+- `indirect_jump_not_proven_serializer`: 2 protocol(s)
+- `indirect_subserializer_target`: 7 protocol(s)
+- `invalid_parameter_import_call_wire_effect_unproved`: 68 protocol(s)
+- `invalid_parameter_multi_register_call_wire_effect_unproved`: 4 protocol(s)
+- `invalid_parameter_singleton_register_call_wire_effect_unproved`: 25 protocol(s)
+- `locked_mutable_dword_slot_nested_target_and_alias_unproved`: 6 protocol(s)
+- `locked_mutable_pointer_slot_nested_target_and_alias_unproved`: 8 protocol(s)
+- `mutable_chain_target_object_alias_unproved`: 18 protocol(s)
+- `mutable_dword_range_nested_target_and_alias_unproved`: 5 protocol(s)
+- `mutable_dword_slot_nested_targets_and_alias_unproved`: 21 protocol(s)
+- `mutable_pointer_slot_traversal_alias_unproved`: 11 protocol(s)
+- `nested_call_composition_targets_and_alias_unproved`: 9 protocol(s)
+- `pe_security_cookie_failure_path_wire_effect_unproved`: 12 protocol(s)
+- `primitive_stream_provenance_unresolved expected=entry+0x4 observed=NONE`: 5 protocol(s)
+- `registry_serializer_unresolved:getter_hits=0`: 15 protocol(s)
+- `registry_serializer_unresolved:vtable_hits=2`: 1 protocol(s)
+- `subcall_direction_unresolved target=0x005DEF10 proof=caller_mode_value_unproved`: 1 protocol(s)
+- `subcall_direction_unresolved target=0x0074CF90 proof=caller_mode_value_unproved`: 1 protocol(s)
+- `subcall_stream_provenance_unresolved target=0x00623220 proof=stream_argument_origin_unproved`: 1 protocol(s)
+- `subcall_stream_provenance_unresolved target=0x006342C0 proof=stream_argument_origin_unproved`: 1 protocol(s)

@@ -1,0 +1,166 @@
+# PF protocol priority census
+
+ตารางนี้จัดกลุ่มจากชื่อในทะเบียน 519 ตัวตามคำสั่งใหม่เท่านั้น และทุกแถวเป็นหลักฐาน `source=IMAGE` จาก A1/A2; ผลจาก capture หรือ dump จะไม่ถูกผสมลงในแถวเหล่านี้
+
+## กติกา
+
+- ตรวจชื่อแบบไม่สนตัวพิมพ์ใหญ่เล็ก และใช้ substring ตามรายการคำที่สั่ง
+- ถ้าชื่อตรงหลายกลุ่มในลำดับเดียวกัน เก็บทุกกลุ่ม/ทุกคำที่ตรง แต่เลือกเลขลำดับต่ำสุดเพียงลำดับเดียว
+- `CLOSED` ต้องมี getter, vtable และ serializer identity พร้อม และ A2 ไม่มี static blocker; handler ไม่ถูกใช้เป็นเกณฑ์ field-serialization closure
+- `matched_keyword` เป็น alias ตาม schema ส่งมอบของ `matched_keywords`; validator บังคับให้ค่าตรงกันทุกแถว
+- `blocker` รวมเฉพาะ registry/A2 blocker ชั้น IMAGE ของแถวนั้น
+- `capture_status` ในแถว IMAGE มีเพียงค่าอ้างอิง `SEPARATE_SOURCE:PF_FIELD_VALIDATION.tsv`; สถานะจริงจาก capture อยู่ในแถว `source=CAPTURE` ของไฟล์นั้นและห้าม merge เข้ามา
+- สถานะนี้เป็น structural closure ของ IMAGE ไม่ใช่คำอ้างว่าเคยเห็นบนสายจริง; การยืนยันสายจริงอยู่ใน `PF_FIELD_VALIDATION.*` เท่านั้น
+
+## จำนวน
+
+- ลำดับ 1: ปิดเชิงโครงสร้าง 241/365 (66.03%), เปิด 124
+- ลำดับ 2: ปิดเชิงโครงสร้าง 12/16 (75.00%), เปิด 4
+- ลำดับ 3: ปิดเชิงโครงสร้าง 84/138 (60.87%), เปิด 54
+
+## จำนวนแยกตามกลุ่ม
+
+- ลำดับ 1 `combat/damage/hp/vital`: 310
+- ลำดับ 1 `actor/npc/monster`: 49
+- ลำดับ 1 `item/inventory/drop/pickup/loot`: 60
+- ลำดับ 1 `move/position/teleport`: 8
+- ลำดับ 1 `login/logout/select/session`: 11
+- ลำดับ 1 `party`: 8
+- ลำดับ 2 `shop/trade/stall`: 2
+- ลำดับ 2 `skill/buff`: 5
+- ลำดับ 2 `quest`: 9
+- ลำดับ 2 `chat/message`: 0
+- ลำดับ 3 `remaining`: 138
+
+## ลำดับ 1 ที่ยังเปิด
+
+- `ItemBagAttr_Equiped` — direct_call_not_proven_serializer
+- `ItemAttr` — registry vtable UNKNOWN
+- `ItemBagAttr` — direct_call_not_proven_serializer
+- `CNSS_BoardcastToSpecifiedActorVtial` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved
+- `CNSS_BoardcastToAllActorVtial` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `GSCN_LoginProtocol` — atomic_target_object_alias_unproved | call_clobber@0x005F3F34:ecx | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | exact_import_thunk_call_wire_effect_unproved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved | pe_security_cookie_failure_path_wire_effect_unproved | primitive_stream_provenance_unresolved expected=entry+0x4 observed=NONE
+- `SelectActorVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | mutable_chain_target_object_alias_unproved
+- `CreateActorVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `TeleportVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved
+- `InstanceStatisticVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `InstanceInviteVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | invalid_parameter_import_call_wire_effect_unproved | mutable_pointer_slot_traversal_alias_unproved
+- `InstanceRefreshVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `ItemOperateVitalRes` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved
+- `ItemLockVital` — direct_call_not_proven_serializer | invalid_parameter_import_call_wire_effect_unproved
+- `UpdateAttrVital` — direct_call_not_proven_serializer | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_multi_register_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved | mutable_chain_target_object_alias_unproved
+- `ReliveMarkerVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved
+- `EquipFashionVital` — direct_call_not_proven_serializer | exact_import_thunk_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved
+- `FashionChangeVital` — direct_call_not_proven_serializer | invalid_parameter_import_call_wire_effect_unproved
+- `ItemBindingLockVitalRes` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `ServerAddedInfoVital` — direct_call_not_proven_serializer | invalid_parameter_import_call_wire_effect_unproved | mutable_chain_target_object_alias_unproved
+- `GetWorldInfoVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | invalid_parameter_import_call_wire_effect_unproved | mutable_chain_target_object_alias_unproved
+- `ActorInspectVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `CustomItem` — indirect_call_not_proven_serializer_slot
+- `LSCN_LoginVitalRes` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | invalid_parameter_import_call_wire_effect_unproved | mutable_chain_target_object_alias_unproved
+- `VitalData` — registry vtable UNKNOWN | registry serializer UNKNOWN | registry_serializer_unresolved:vtable_hits=2
+- `VitalProtocol` — atomic_target_object_alias_unproved | call_clobber@0x005F3F34:ecx | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | exact_import_thunk_call_wire_effect_unproved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved | pe_security_cookie_failure_path_wire_effect_unproved | primitive_stream_provenance_unresolved expected=entry+0x4 observed=NONE
+- `TriggerSyncVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | invalid_parameter_import_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `QuestNPCModule` — indirect_call_not_proven_serializer_slot
+- `NPCConversation` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | invalid_parameter_import_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `UpdateQuestMiscDataVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved
+- `CArenaVital` — atomic_target_pointer_alias_unproved | direct_call_not_proven_serializer | indirect_call_not_proven_serializer_slot | subcall_stream_provenance_unresolved target=0x00623220 proof=stream_argument_origin_unproved
+- `CArenaGameDataVital` — atomic_target_pointer_alias_unproved | direct_call_not_proven_serializer | invalid_parameter_import_call_wire_effect_unproved | locked_mutable_dword_slot_nested_target_and_alias_unproved | locked_mutable_pointer_slot_nested_target_and_alias_unproved | mutable_pointer_slot_traversal_alias_unproved
+- `CArenaResultVital` — atomic_target_object_alias_unproved | atomic_target_pointer_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | mutable_pointer_slot_traversal_alias_unproved
+- `PartyAttr` — registry getter UNKNOWN | registry vtable UNKNOWN | registry serializer UNKNOWN | registry_serializer_unresolved:getter_hits=0
+- `PartyUpdateVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `CSearchPartyVital` — atomic_target_pointer_alias_unproved | direct_call_not_proven_serializer | indirect_call_not_proven_serializer_slot | subcall_stream_provenance_unresolved target=0x006342C0 proof=stream_argument_origin_unproved
+- `ActorCommunityDataSet` — registry getter UNKNOWN | registry vtable UNKNOWN | registry serializer UNKNOWN | registry_serializer_unresolved:getter_hits=0
+- `ActorRelationshipData` — registry getter UNKNOWN | registry vtable UNKNOWN | registry serializer UNKNOWN | registry_serializer_unresolved:getter_hits=0
+- `Community_InitalizeActorCommunityVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `Community_AddFriendVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `Community_AddBlackListVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `Community_ReceiveNewMailVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved
+- `Community_RequestSoulMateMatchVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `Community_GetActorVowLockListVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `Community_UpdateActorVowLockVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `Community_ReplyPenpalLetterVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `CBuffVital` — direct_call_not_proven_serializer | locked_mutable_pointer_slot_nested_target_and_alias_unproved
+- `DailyRewardVitalRes` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `TradeCmdVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved
+- `TradeItemResultVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `TradeZoomVital` — direct_call_not_proven_serializer | invalid_parameter_import_call_wire_effect_unproved
+- `UpdateConditionalStoreItemVital` — direct_call_not_proven_serializer | invalid_parameter_import_call_wire_effect_unproved
+- `GSSS_GuildEventVitalReq` — atomic_target_pointer_alias_unproved | critical_section_pointer_alias_unproved | direct_call_not_proven_serializer | exact_direct_import_call_wire_effect_unproved | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved | mutable_chain_target_object_alias_unproved | mutable_dword_range_nested_target_and_alias_unproved | mutable_pointer_slot_traversal_alias_unproved | pe_security_cookie_failure_path_wire_effect_unproved
+- `GSSS_GuildEventVitalRes` — atomic_target_pointer_alias_unproved | critical_section_pointer_alias_unproved | direct_call_not_proven_serializer | exact_direct_import_call_wire_effect_unproved | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved | mutable_chain_target_object_alias_unproved | mutable_dword_range_nested_target_and_alias_unproved | mutable_pointer_slot_traversal_alias_unproved | pe_security_cookie_failure_path_wire_effect_unproved
+- `GSSS_GuildDataVitalRes` — atomic_target_object_alias_unproved | atomic_target_pointer_alias_unproved | critical_section_pointer_alias_unproved | direct_call_not_proven_serializer | exact_direct_import_call_wire_effect_unproved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | locked_mutable_dword_slot_nested_target_and_alias_unproved | locked_mutable_pointer_slot_nested_target_and_alias_unproved | mutable_chain_target_object_alias_unproved | mutable_dword_range_nested_target_and_alias_unproved | mutable_pointer_slot_traversal_alias_unproved
+- `GSSS_GSInitialGuildDataVital` — atomic_target_object_alias_unproved | atomic_target_pointer_alias_unproved | critical_section_pointer_alias_unproved | direct_call_not_proven_serializer | exact_direct_import_call_wire_effect_unproved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | locked_mutable_dword_slot_nested_target_and_alias_unproved | locked_mutable_pointer_slot_nested_target_and_alias_unproved | mutable_chain_target_object_alias_unproved | mutable_dword_range_nested_target_and_alias_unproved | mutable_pointer_slot_traversal_alias_unproved
+- `GSSS_GuildUpdateEventVital` — atomic_target_pointer_alias_unproved | critical_section_pointer_alias_unproved | direct_call_not_proven_serializer | exact_direct_import_call_wire_effect_unproved | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved | mutable_chain_target_object_alias_unproved | mutable_dword_range_nested_target_and_alias_unproved | mutable_pointer_slot_traversal_alias_unproved | pe_security_cookie_failure_path_wire_effect_unproved
+- `GSSS_GuildUpdateQuestMemberVital` — direct_call_not_proven_serializer | indirect_call_not_proven_serializer_slot | locked_mutable_pointer_slot_nested_target_and_alias_unproved
+- `GCSS_GuildStorageOpenVital` — indirect_call_not_proven_serializer_slot
+- `GCGS_GuildStorageCmdVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved
+- `GCGSSS_GuildStorageResultVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `GSSS_GuildStorageCmdVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | subcall_direction_unresolved target=0x0074CF90 proof=caller_mode_value_unproved
+- `DBSS_GuildStorageInitialVital` — indirect_jump_not_proven_serializer
+- `DBSS_GuildStorageUpdateVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `GCGSSS_GuildStorageVital_ReArrangeResult` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | invalid_parameter_import_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `Equipment_ReceiveCandidateCastingItemVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `BuildingCrystal_UpdateCrystalSlotVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `PlayerSearchVitalRes` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved
+- `StorageOpenVital` — indirect_call_not_proven_serializer_slot
+- `StorageCmdVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved
+- `StorageResultVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `Gathering_UpdateSceneGatheringPointVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `Activity_BasicVital` — registry getter UNKNOWN | registry vtable UNKNOWN | registry serializer UNKNOWN | registry_serializer_unresolved:getter_hits=0
+- `Activity_ActorCommandVital` — registry getter UNKNOWN | registry vtable UNKNOWN | registry serializer UNKNOWN | registry_serializer_unresolved:getter_hits=0
+- `Activity_SendRankingVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | invalid_parameter_import_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `ActorActivity_UpdateDailyActivityStateVital` — indirect_jump_not_proven_serializer
+- `Winemaking_UpdateWindPotSlotVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `Winemaking_UpdateLearnedFormulaVital` — direct_call_not_proven_serializer | invalid_parameter_import_call_wire_effect_unproved
+- `CollectionBookDataVitalRes` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `ItemMallBagAttr` — direct_call_not_proven_serializer
+- `ItemMallUpdatePersonalDataVital` — direct_call_not_proven_serializer | invalid_parameter_import_call_wire_effect_unproved | mutable_chain_target_object_alias_unproved
+- `ItemMallBagOpenRes` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `ItemMallBagUpdate` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `ItemMallBagItemTransfer` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved
+- `ItemMallPersonalGiftVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved
+- `ItemMallGiftNotifyVital` — direct_call_not_proven_serializer | exact_direct_import_call_wire_effect_unproved | invalid_parameter_import_call_wire_effect_unproved | pe_security_cookie_failure_path_wire_effect_unproved
+- `ItemMallIMSDataRes` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved | mutable_chain_target_object_alias_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `ItemMallGashaponDesVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | invalid_parameter_import_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `BlackMarketItem` — registry getter UNKNOWN | registry vtable UNKNOWN | registry serializer UNKNOWN | registry_serializer_unresolved:getter_hits=0
+- `CStartCooldownVital` — direct_call_not_proven_serializer | invalid_parameter_import_call_wire_effect_unproved
+- `CollectionObj_UpdateCollectionObjBagVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `CollectionObj_UpdateCollectEffectVital` — direct_call_not_proven_serializer | invalid_parameter_import_call_wire_effect_unproved
+- `Express_InitalizeActorExpressVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved
+- `Express_ClientGetExpressItemAttrsVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `Express_ClientReceiveNewExpressVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved
+- `Express_ClientSendExpressVital` — direct_call_not_proven_serializer | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved | mutable_pointer_slot_traversal_alias_unproved
+- `CTracePathVital` — direct_call_not_proven_serializer | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved
+- `ActorPetsCommonAttr` — registry getter UNKNOWN | registry vtable UNKNOWN | registry serializer UNKNOWN | registry_serializer_unresolved:getter_hits=0
+- `Pets_UpdatePetsDataVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `Pets_ChangePetEquipmentVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `Pets_UpdateLearnedPetSkillVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `Pets_SetPetSkillVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `Pets_SetPetAIVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `Pets_UpdatePetsMegringDataVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `CAchievementsBoardcastReqVital` — direct_call_not_proven_serializer | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved
+- `NPC_MovieModule` — indirect_call_not_proven_serializer_slot
+- `CHitParadeVital` — atomic_target_pointer_alias_unproved | direct_call_not_proven_serializer | exact_direct_import_call_wire_effect_unproved | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved | locked_mutable_dword_slot_nested_target_and_alias_unproved | locked_mutable_pointer_slot_nested_target_and_alias_unproved | mutable_chain_target_object_alias_unproved
+- `CHitParadeActorDataVital` — atomic_target_object_alias_unproved | atomic_target_pointer_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | mutable_pointer_slot_traversal_alias_unproved
+- `CHitParadeResVital_JP` — atomic_target_pointer_alias_unproved | direct_call_not_proven_serializer | exact_direct_import_call_wire_effect_unproved | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved | locked_mutable_dword_slot_nested_target_and_alias_unproved | locked_mutable_pointer_slot_nested_target_and_alias_unproved
+- `CHitParadeAvatarResVital_JP` — atomic_target_pointer_alias_unproved | direct_call_not_proven_serializer | indirect_call_not_proven_serializer_slot | locked_mutable_dword_slot_nested_target_and_alias_unproved | locked_mutable_pointer_slot_nested_target_and_alias_unproved
+- `UserSetting_UpdateServerSettingVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `GetNewsflashVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `GM_RunGMCommandVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved
+- `FightingDropModule_Client` — registry getter UNKNOWN | registry vtable UNKNOWN | registry serializer UNKNOWN | registry_serializer_unresolved:getter_hits=0
+- `FightingDropNotify` — registry getter UNKNOWN | registry vtable UNKNOWN | registry serializer UNKNOWN | registry_serializer_unresolved:getter_hits=0
+- `TreasureHunt_UpdateSceneTreasurePointVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | mutable_dword_slot_nested_targets_and_alias_unproved
+- `NPCAppearModule_Client` — direct_call_not_proven_serializer | ecx_plus_50_tail_target_and_alias_unproved | indirect_call_not_proven_serializer_slot
+- `ActorEffectsModule_Client` — indirect_call_not_proven_serializer_slot
+- `CWebGMVital_GSGC` — direct_call_not_proven_serializer | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved
+- `GSCN_AskForSystemGiftVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot
+- `CLearnSkillResultVital` — direct_call_not_proven_serializer | invalid_parameter_import_call_wire_effect_unproved | invalid_parameter_multi_register_call_wire_effect_unproved | invalid_parameter_singleton_register_call_wire_effect_unproved
+- `StallStartVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | invalid_parameter_import_call_wire_effect_unproved | mutable_chain_target_object_alias_unproved
+- `StallOpenVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved | indirect_call_not_proven_serializer_slot | invalid_parameter_import_call_wire_effect_unproved | mutable_chain_target_object_alias_unproved
+- `StallOperateVital` — atomic_target_object_alias_unproved | direct_call_not_proven_serializer | dynamic_vtable_plus_0x04_target_unresolved
+
+## ขอบเขตหลักฐาน
+
+- registry SHA-256 ก่อน/หลัง: `27DAAC0C6FBBC45D88281C31B98E3A8B56F421BD1E8BC16F970FDFF5716CFB4D`
+- serializer fields SHA-256 ก่อน/หลัง: `99282BDF3F492EAEBDBAB4918AECC0E37BF8EFB42B904B18E1BA306767B5C123`
+- ไม่มีการอ่าน DUMP/CAPTURE/DATA ในขั้นตอนนี้

@@ -1,0 +1,181 @@
+## 1) จำนวน protocol, serializer ที่ถอดสำเร็จ และ UNKNOWN
+
+- protocol registration: 519
+- evidence source ของ A1-A3 ทุกแถว: `IMAGE`
+- protocol serializer ที่ไม่มี UNKNOWN: 338
+- unique serializer VA ที่ไม่มี UNKNOWN: 174
+- protocol serializer ที่ยังมี UNKNOWN: 181
+- protocol ที่แก้ vtable กำกวมด้วย exact primary x86 MSVC RTTI: 1
+- protocol ที่พิสูจน์ serializer ค่าเดียวกันใน vtable candidate ครบ census: 1
+- protocol ที่พิสูจน์ handler ค่าเดียวกันใน vtable candidate ครบ census: 2
+- direct SUBCALL ที่พิสูจน์ทิศจาก formal branch: 181 แถว
+- ในจำนวนนั้นเป็น formal-to-formal forwarding: 28 แถว
+- direct/tail SUBCALL ที่พิสูจน์ stream chain ครบ: 255 แถว
+- แถวที่หยุดเพราะ stream provenance ยังไม่เอกฐาน: 14 แถว
+- แถวที่ใช้หลักฐาน PE import แบบ stack-neutral: 2568 แถว
+- ในจำนวนนั้นใช้ exact register-indirect IAT proof: 1287 แถว
+- แถวที่บันทึกหลักฐาน exact `lea esp,[esp+0]` stack-identity: 254 แถว
+- แถวที่บันทึกหลักฐาน GetId vtable `+0x10` แบบ stack-neutral: 157 แถว
+- แถวที่พิสูจน์ indirect serializer mode จาก caller formal แบบ exact: 2 แถว
+- แถวที่ใช้ complete local capability refinement: 48 แถว
+- แถวที่ใช้ zero proof ผ่าน exact identity LEA: 22 แถว
+- แถวข้อความที่พิสูจน์ผ่าน exact string wire helper: 408 แถว
+- แถว exact `InterlockedIncrement(ECX+0x0C)` ที่ยังหยุดเพราะ object/non-alias ไม่เอกฐาน: 271 แถว
+- แถว exact `InterlockedDecrement(ECX+0x0C)` ที่ยังหยุด ณ dynamic vtable `+0x04`: 279 แถว
+- แถว exact direct `InterlockedIncrement/Decrement(ECX)` ที่ยังหยุดเพราะ pointer non-alias ไม่เอกฐาน: 120 แถว
+- แถว exact read-only chain `+0x04` contains predicate: 76 แถว
+- แถว exact mutable chain ที่ยังหยุดเพราะ object/non-alias ไม่เอกฐาน: 70 แถว
+- แถว exact locked mutable pointer-slot ที่ยังหยุดเพราะ nested target/alias ไม่เอกฐาน: 58 แถว
+- แถว exact Enter/LeaveCriticalSection pointer wrapper ที่ยังหยุดเพราะ alias ไม่เอกฐาน: 64 แถว
+- แถว exact locked mutable dword-slot update ที่ยังหยุดเพราะ nested target/alias ไม่เอกฐาน: 28 แถว
+- แถว exact nested three-call composition ที่ยังหยุดเพราะ nested target/alias ไม่เอกฐาน: 28 แถว
+- แถว exact ECX+0x50 tail-jump ที่ยังหยุดเพราะ tail target/alias ไม่เอกฐาน: 20 แถว
+- แถว exact mutable pointer-slot traversal ที่ยังหยุดเพราะ alias ไม่เอกฐาน: 29 แถว
+- แถว exact mutable dword-slot operation ที่ยังหยุดเพราะ nested target/alias ไม่เอกฐาน: 46 แถว
+- แถว exact mutable dword-range growth ที่ยังหยุดเพราะ nested target/alias ไม่เอกฐาน: 32 แถว
+- แถว exact direct-IAT `_invalid_parameter_noinfo` ที่ยังหยุดเพราะผลต่อ wire path ไม่เอกฐาน: 638 แถว
+- แถว exact direct PE-import อื่นที่ยังหยุดเพราะผลต่อ wire path ไม่เอกฐาน: 128 แถว
+- แถว exact rel32 PE-import thunk ที่ยังหยุดเพราะผลต่อ wire path ไม่เอกฐาน: 16 แถว
+- แถว exact PE SecurityCookie check ที่ยังหยุดเพราะ failure-path effect ไม่เอกฐาน: 19 แถว
+- แถว exact singleton-register `_invalid_parameter_noinfo` ที่ยังหยุดเพราะผลต่อ wire path ไม่เอกฐาน: 179 แถว
+- แถว exact multi-register `_invalid_parameter_noinfo` ที่ทุก reaching definition โหลด IAT เดียวกัน แต่ยังหยุดเพราะผลต่อ wire path ไม่เอกฐาน: 10 แถว
+- UNKNOWN `atomic_target_object_alias_unproved`: 86 protocol(s)
+- UNKNOWN `atomic_target_pointer_alias_unproved`: 13 protocol(s)
+- UNKNOWN `critical_section_pointer_alias_unproved`: 5 protocol(s)
+- UNKNOWN `direct_call_not_proven_serializer`: 148 protocol(s)
+- UNKNOWN `dynamic_vtable_plus_0x04_target_unresolved`: 84 protocol(s)
+- UNKNOWN `ecx_plus_50_tail_target_and_alias_unproved`: 8 protocol(s)
+- UNKNOWN `exact_direct_import_call_wire_effect_unproved`: 11 protocol(s)
+- UNKNOWN `exact_import_thunk_call_wire_effect_unproved`: 8 protocol(s)
+- UNKNOWN `indirect_call_not_proven_serializer_slot`: 94 protocol(s)
+- UNKNOWN `indirect_jump_not_proven_serializer`: 2 protocol(s)
+- UNKNOWN `indirect_subserializer_target`: 7 protocol(s)
+- UNKNOWN `invalid_parameter_import_call_wire_effect_unproved`: 68 protocol(s)
+- UNKNOWN `invalid_parameter_multi_register_call_wire_effect_unproved`: 4 protocol(s)
+- UNKNOWN `invalid_parameter_singleton_register_call_wire_effect_unproved`: 25 protocol(s)
+- UNKNOWN `locked_mutable_dword_slot_nested_target_and_alias_unproved`: 6 protocol(s)
+- UNKNOWN `locked_mutable_pointer_slot_nested_target_and_alias_unproved`: 8 protocol(s)
+- UNKNOWN `mutable_chain_target_object_alias_unproved`: 18 protocol(s)
+- UNKNOWN `mutable_dword_range_nested_target_and_alias_unproved`: 5 protocol(s)
+- UNKNOWN `mutable_dword_slot_nested_targets_and_alias_unproved`: 21 protocol(s)
+- UNKNOWN `mutable_pointer_slot_traversal_alias_unproved`: 11 protocol(s)
+- UNKNOWN `nested_call_composition_targets_and_alias_unproved`: 9 protocol(s)
+- UNKNOWN `pe_security_cookie_failure_path_wire_effect_unproved`: 12 protocol(s)
+- UNKNOWN `primitive_stream_provenance_unresolved expected=entry+0x4 observed=NONE`: 5 protocol(s)
+- UNKNOWN `registry_serializer_unresolved:getter_hits=0`: 15 protocol(s)
+- UNKNOWN `registry_serializer_unresolved:vtable_hits=2`: 1 protocol(s)
+- UNKNOWN `subcall_direction_unresolved target=0x005DEF10 proof=caller_mode_value_unproved`: 1 protocol(s)
+- UNKNOWN `subcall_direction_unresolved target=0x0074CF90 proof=caller_mode_value_unproved`: 1 protocol(s)
+- UNKNOWN `subcall_stream_provenance_unresolved target=0x00623220 proof=stream_argument_origin_unproved`: 1 protocol(s)
+- UNKNOWN `subcall_stream_provenance_unresolved target=0x006342C0 proof=stream_argument_origin_unproved`: 1 protocol(s)
+
+## 2) hash ของ image ก่อนและหลัง
+
+- ก่อน: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
+- หลัง: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
+- ผล: ตรงกัน; image ไม่เปลี่ยน
+
+## 3) สิ่งที่ยังไม่รู้
+
+- protocol ที่ getter/vtable/serializer ไม่เอกฐานยังคงเป็น UNKNOWN; escape hatch ของ vtable รับเฉพาะ candidate เดียวที่มี primary x86 MSVC Complete Object Locator ครบโครงสร้างและ TypeDescriptor ชื่อเต็มตรง registry name โดยมี file offset ทุกชั้น ไม่มีการเลือก candidate จากความใกล้ของสตริง; หาก vtable ยังแยกไม่ได้ serializer/handler จะเลื่อนสถานะได้เฉพาะ slot ที่เป็น executable VA ค่าเดียวกันใน candidate getter/marker ครบทั้ง census และบันทึก pointer file offset ครบทุก candidate โดยไม่อ้างว่า vtable ถูกแก้แล้ว
+- indirect subserializer เก็บนิพจน์ target ไว้ แต่ยังไม่มี static target VA จึงไม่ recurse ผ่านจุดนั้น
+- call ทุกจุดที่ไม่ผ่านหลักฐาน target/ABI ถูกเก็บเป็น CALL_UNCLASSIFIED; direct-IAT/singleton-register/multi-register `_invalid_parameter_noinfo`, exact direct PE-import อื่นอีก 12 IAT, exact rel32 import thunks `0x0088D020`/`0x00B37998`, PE SecurityCookie helper `0x00B37964`, สี่ string target `0x0089A6D0`, `0x0089A740`, `0x0089A810`, `0x0089A880`, atomic target `0x004A06A0`/`0x004A06B0`/`0x0088D050`/`0x0088D060`, pure predicate `0x0088F2B0`, mutable helper `0x00B0BF70`, locked mutable pointer-slot helper `0x0066AB90`, critical-section wrappers `0x0088D5B0`/`0x0049DA40`, locked mutable dword-slot helper `0x00710FA0`, nested three-call helper `0x005F8DE0`, ECX+0x50 tail-jump helper `0x005F8C30`, mutable pointer-slot traversal helper `0x0046D2B0`, mutable dword-slot helper `0x00AC6E80` และ mutable dword-range helper `0x007016A0` ถูกยกออกจากกลุ่ม generic หลัง exact body/ABI/key bytes/PE imports/Load Configuration ตรงตามกฎของแต่ละกลุ่ม ส่วน target อื่นยังไม่รู้ว่าเป็น wire helper, utility, allocation หรือ lifecycle call
+- atomic helper `0x0088D050`/file offset `0x0048C450` จบที่ `0x0088D05B` และพิสูจน์ exact `InterlockedIncrement(ECX+0x0C)` แต่ 116 unique call sites ยังไม่มี ECX object/non-alias provenance ที่แยก runtime address ออกจาก stream/buffer state จึงคง `atomic_target_object_alias_unproved`; `0x0088D060`/`0x0048C460` จบที่ `0x0088D082` ทำ exact decrement แล้ว branch ไป indirect call `0x0088D07E`/`0x0048C47E` ผ่านค่าที่โหลดจาก vtable `+0x04` ณ `0x0088D077`/`0x0048C477`; target/member identity ยัง runtime-selected จึงคง `dynamic_vtable_plus_0x04_target_unresolved` เช่นกัน
+- direct atomic target `0x004A06A0`/file offset `0x0009FAA0` และ `0x004A06B0`/`0x0009FAB0` มี body 8 ไบต์ที่ต่างกันเฉพาะ IAT `InterlockedIncrement`/`InterlockedDecrement`; ทั้ง 120 แถวยังไม่มี runtime ECX pointer non-alias proof จึงคง `atomic_target_pointer_alias_unproved` และไม่ถูกนับเป็น wire success
+- pure predicate `0x0088F2B0`/file offset `0x0048E6B0` ถูกยกจาก generic UNKNOWN หลังพิสูจน์ full body `[0x0088F2B0,0x0088F2D1)`, zero call/memory-write, stack arguments สองตัว, chain step `[eax+0x04]`, boolean returns และ exact caller suffix ครบ 34 unique sites; ข้ออ้างจำกัดว่า call นี้เป็น read-only predicate ไม่ได้ระบุว่า chain/node เป็นระบบใด
+- mutable helper `0x00B0BF70`/file offset `0x0070B370` มี full body `[0x00B0BF70,0x00B0BFDC)` และ write `[ESI+0x04]` ณ `0x00B0BFAB`/`0x0070B3AB`, `0x00B0BFC8`/`0x0070B3C8`, `0x00B0BFD7`/`0x0070B3D7`; แม้ operation shape และ import exact จะรู้ครบ แต่ ESI มาจาก runtime ECX object ที่ยังไม่พิสูจน์ non-alias กับ stream/buffer จึงคง `mutable_chain_target_object_alias_unproved` ทั้ง 70 แถว
+- locked mutable pointer-slot helper `0x0066AB90`/file offset `0x00269F90` มี full body `[0x0066AB90,0x0066AC2D)`, direct `malloc`/`_invalid_parameter_noinfo`, exact critical-section/interlocked wrappers และ writes ณ `0x0066AC14`/`0x0026A014`, `0x0066AC17`/`0x0026A017`, `0x0066ABE1`/`0x00269FE1`, `0x0066ABF9`/`0x00269FF9`, `0x0066AC1D`/`0x0026A01D`; nested target `0x007016A0` และ runtime ECX/EDX alias ยังไม่พิสูจน์ semantics เอกฐาน จึงคง `locked_mutable_pointer_slot_nested_target_and_alias_unproved` ทั้ง 58 แถว
+- critical-section wrappers `0x0088D5B0`/file offset `0x0048C9B0` และ `0x0049DA40`/`0x0009CE40` มี full body 10 ไบต์ที่ต่างกันเฉพาะ IAT `EnterCriticalSection`/`LeaveCriticalSection`; ทั้ง 64 แถวโหลด pointer จาก runtime `[ECX]` ซึ่งยังไม่มี non-alias proof กับ stream/buffer จึงคง `critical_section_pointer_alias_unproved` และไม่ถูกนับเป็น wire success
+- locked mutable dword-slot update helper `0x00710FA0`/file offset `0x003103A0` ใช้ bounded entry CFG `[0x00710FA0,0x0071100F)` 111 ไบต์/42 instructions, call `0x0088D5B0`/`0x007016A0`/`0x0049DA40`, direct `_invalid_parameter_noinfo` ที่ `0x00710FD6`/`0x00710FF2`, decrement `[ESI+0x20]` ที่ `0x00710FCC`, output write `0x00710FE2`, slot write `0x00710FFB` และ increment `[ESI+0x24]` ที่ `0x00710FFE`; nested target semantics กับ aliases ยังไม่เอกฐาน จึงคง `locked_mutable_dword_slot_nested_target_and_alias_unproved` ทั้ง 28 แถว
+- nested three-call composition helper `0x005F8DE0`/file offset `0x001F81E0` มี full body `[0x005F8DE0,0x005F8E04)` 36 ไบต์/13 instructions, direct calls `0x005F8DE3 -> 0x0089C080`, `0x005F8DEF -> 0x0089B220`, `0x005F8DFB -> 0x00463800`, zero-extend AX ที่ `0x005F8DF4`, สร้าง address `ECX+0x50` ที่ `0x005F8DF8`, ไม่มี explicit MOV ที่ปลายทางเป็น memory และจบ `ret 4`; nested target semantics กับ runtime object/value alias ยังไม่เอกฐาน จึงคง `nested_call_composition_targets_and_alias_unproved` ทั้ง 28 แถว
+- ECX+0x50 tail-jump helper `0x005F8C30`/file offset `0x001F8030` ใช้ entry-reachable prefix `[0x005F8C30,0x005F8C38)` 8 ไบต์/2 instructions: `add ecx,0x50` ที่ entry แล้ว direct tail jump `0x005F8C33 -> 0x00463800`/file offset `0x00062C00`; หลัง prefix เป็น `CC` 8 ไบต์ตั้งแต่ file offset `0x001F8038` จึงไม่รวม routine ถัดไปในคำอ้าง ส่วน tail target semantics กับ runtime ECX/object alias ยังไม่เอกฐาน จึงคง `ecx_plus_50_tail_target_and_alias_unproved` ทั้ง 20 แถว
+- mutable pointer-slot traversal helper `0x0046D2B0`/file offset `0x0006C6B0` มี full body `[0x0046D2B0,0x0046D31C)` 108 ไบต์/44 instructions, โหลด `_invalid_parameter_noinfo` จาก IAT `0x00C3B4C0` ณ `0x0046D2B7`, call EDI ที่ `0x0046D2BF`/`0x0046D2CA`, และเขียน `[ESI+0x04]` ที่ `0x0046D2EB`/`0x0046D308`/`0x0046D317`; runtime ECX/ESI object alias ยังไม่เอกฐาน จึงคง `mutable_pointer_slot_traversal_alias_unproved` ทั้ง 29 แถว
+- mutable dword-slot operation helper `0x00AC6E80`/file offset `0x006C6280` ใช้ bounded entry CFG `[0x00AC6E80,0x00AC6F00)` 128 ไบต์/53 instructions ตรง hash มี ret 4 ที่ `0x00AC6ED6`/`0x00AC6EFD`, stack-zero write `0x00AC6EAC`, state write `[ESI+0x10]=EDI` ที่ `0x00AC6ECE`, direct `_invalid_parameter_noinfo` และ nested calls ไป `0x006B35A0`/`0x00AC6D00`; nested semantics กับ runtime object/source alias ยังไม่เอกฐาน จึงคง `mutable_dword_slot_nested_targets_and_alias_unproved` ทั้ง 46 แถว
+- mutable dword-range growth helper `0x007016A0`/file offset `0x00300AA0` มี full body `[0x007016A0,0x00701725)`, zero write `0x007016E7`/`0x00300AE7`, end-pointer write `0x007016F0`/`0x00300AF0`, register-indirect `_invalid_parameter_noinfo` call `0x007016F9`/`0x00300AF9` และ nested call `0x0070170B`/`0x00300B0B` ไป `0x005F68D0`; nested semantics กับ runtime object alias ยังไม่เอกฐาน จึงคง `mutable_dword_range_nested_target_and_alias_unproved` ทั้ง 32 แถว
+- direct-IAT call encoding `FF15C0B4C300` จำนวน 231 unique function+call-site ถูก PE import table ระบุเป็น `MSVCR90.dll!_invalid_parameter_noinfo`; 638 แถว (W 337/R 301) ถูกยกจาก generic โดยคง `invalid_parameter_import_call_wire_effect_unproved` เพราะชื่อ import ไม่ได้พิสูจน์ผลข้างเคียงต่อ stream/buffer path; อีก 177 แถวที่ symbolic target เดียวกันเป็น register-indirect form จึงไม่รวมใน direct-IAT claim และแยกตรวจด้านล่าง
+- register-indirect `_invalid_parameter_noinfo` 179 แถว (W 105/R 74) จาก 66 unique sites ผ่าน singleton reaching proof ครบ: exact `call r32` และ exact unprefixed `mov r32,[0x00C3B4C0]`; 167 แถวในจำนวนนี้เคยมี symbolic target ลดรูปเป็น IAT เดียวกัน ส่วนอีก 12 แถวถูกพบจาก instruction/load proof โดยตรง จึงไม่เลือกตามข้อความ tag เดิม; ทั้งหมดคง `invalid_parameter_singleton_register_call_wire_effect_unproved`; 10 แถว/6 sites ที่มี reaching definitions มากกว่าหนึ่งจุดถูกแยกด้วย complete-set proof ด้านล่าง
+- register-indirect `_invalid_parameter_noinfo` อีก 10 แถว (W 8/R 2) จาก 6 unique sites มี complete reaching-definition set จุดละ 2 definitions โดยไม่มี undefined path และทุก definition เป็น exact unprefixed `mov r32,[0x00C3B4C0]` ของ register เดียวกับ exact `call r32`; จึงยกออกจาก generic เป็น `invalid_parameter_multi_register_call_wire_effect_unproved` แต่ยังคง UNKNOWN เพราะ import identity ไม่ได้พิสูจน์ผลข้างเคียงต่อ wire path
+- exact direct PE-import อื่น 12 IAT รวม 128 แถว (W 64/R 64) จาก 36 unique sites ผ่านรูปไบต์ `FF15 <IAT little-endian>` ตรงทุกจุด และชื่อ DLL/symbol/IAT/descriptor/lookup ถูก re-derive จาก PE import table; แยกเป็น tag ตาม operation แต่ทั้งหมดคง `exact_direct_import_call_wire_effect_unproved` เพราะชื่อ import กับ call target ยังไม่พิสูจน์ผลต่อ stream/buffer path
+- exact rel32 import thunks สอง target รวม 16 แถวจาก 5 unique caller sites: `0x0088D020`/file offset `0x0048C420` เป็น `FF257CB8C300` ไป IAT `0x00C3B87C` (`MSVCR90.dll!malloc`) 2 แถว และ `0x00B37998`/`0x00736D98` เป็น `FF25C4B4C300` ไป IAT `0x00C3B4C4` (`MSVCR90.dll!_CxxThrowException`) 14 แถว; call site ทุกจุดเป็น rel32 target ตรงและ PE metadata ถูกตรึง แต่ implementation อยู่นอก image จึงคง `exact_import_thunk_call_wire_effect_unproved`
+- PE SecurityCookie helper `0x00B37964`/file offset `0x00736D64` ครอบ bounded entry ถึง `0x00B37973`/`0x00736D73` เป็น `3B0DBCB402017502F3C3E9DF090000`, SHA-256 `d31930a6047b3a9a986b1473f701e5b28070d619ab4d14daaa258ab445d25c43`, แล้วตามด้วย `CC` 13 ไบต์. COFF `SizeOfOptionalHeader=0xE0` ที่ file offset `0x0000013C` และ PE32 `NumberOfRvaAndSizes=16` ที่ `0x0000019C` ยืนยันว่า Load Configuration DataDirectory[10] ที่ `0x000001F0` อยู่ในขอบเขตที่ประกาศ; compare operand `0x0102B4BC` ตรงกับ `SecurityCookie` field ที่ `0x00BBA9AC`; เส้นเท่ากัน return ณ `0x00B3796C`/`0x00736D6C`, เส้นไม่เท่ากัน tail jump ณ `0x00B3796E`/`0x00736D6E` ไป `0x00B38352`/`0x00737752`. call target นี้มี 19 แถว (W 7/R 12) จาก 6 unique sites/12 protocol แต่ failure-path effect ยังไม่เอกฐาน จึงคง `pe_security_cookie_failure_path_wire_effect_unproved`
+- indirect call นอก serializer slot `+0x18` ยังไม่ถูกเรียกว่า subserializer แม้รูปอาร์กิวเมนต์จะคล้ายกัน
+- subserializer ที่รองรับทั้ง W/R แต่ target formal branch หรือ caller mode value ยังพิสูจน์ไม่ได้จะหยุดเป็น UNKNOWN และไม่ recurse แม้ ancestor จะเหลือทิศเดียว; target capability เอกฐานในแขน local direct/nested ที่พิสูจน์ว่าขัดกับ ancestor จะเป็น direction-infeasible และไม่ถูก flatten เป็นแถวของทิศนั้น โดยต้อง re-derive branch node, anchors, target และ file offset ได้ครบ
+- subserializer ที่ยังผูก caller stream formal ผ่าน push/tail ไปยัง target formal และ primitive ECX ของทิศเดียวกันไม่ได้จะหยุดเป็น UNKNOWN; การย้อนจาก target รับเฉพาะคู่ formal เอกฐาน และ tail ต้องวัด stack depth=0; reachability ไป W/R เพียงอย่างเดียวไม่ถือเป็นหลักฐาน stream
+- frame-relative formal รับฐานที่พิสูจน์ด้วย full-width `mov reg, esp` ณ stack depth เดียว; LEA ยอมรับเพิ่มเฉพาะ `lea r32,[r32+0]` ที่ไม่มี size override/index/absolute/nonzero displacement ส่วน arithmetic, partial write, conflicting/missing predecessor และ loop cycle ไม่ถูกเดา
+- loop fallback รับ unique reaching plain-MOV definition จากทุก CFG path และ exact full-width identity LEA เท่านั้น; undefined entry, multiple definitions และ `other` opcode ที่ไม่อยู่ใน exact no-GPR-write allowlist จะตัด provenance; multi-path arguments ที่บาง path ไม่ส่ง formal เดิมยังเป็น UNKNOWN
+- byte-lane loop fallback รับ definition เดียวจากทุก CFG path ที่เป็น full-width `mov r32,[esp+disp]` และ stack depth เอกฐาน หรือ formal proof ของ full GPR ที่เข้มกว่า; `formal_byte_reaching_def` ตรึง definition/use/lane/width และ exact `lea r32,[r32+0]` ตรึงด้วย `formal_identity_lea`; undefined entry, หลาย definition, overlapping/partial write และ opaque GPR clobber ยังคง UNKNOWN
+- fallback ของ mode byte ค่า zero รับเฉพาะ reaching definition เอกฐานที่เป็น exact two-byte `xor r32,r32`; `mode_zero_reaching_def` ตรึง definition/use/register/width/value และผูกกับ local direction call; fallback นี้ไม่รวมหลาย definition ส่วน direct symbolic path เดิมรวม CFG paths ได้เมื่อ expression ทุกแขนลดรูปเป็นค่าคงที่เดียวกันและแสดงเพียง `mode_arg`
+- multi-definition zero ใช้ `mode_zero_reaching_set` แยกต่างหากเมื่อไม่มี undefined path และสมาชิกทุกจุดเป็น exact full-width two-byte `xor r32,r32` ของ register เดียวกัน; marker ตรึง definition ทุกจุดและไม่รวมค่าชนิดอื่น
+- zero ผ่าน identity LEA จำกัดหนึ่งชั้นและรับเฉพาะ exact full-width `lea r32,[r32+0]` ที่เป็น reaching definition เดียว โดย predecessor set ทุกเส้นเป็น XOR-self ของ register เดียวกัน; identity chain, undefined predecessor และ mixed value ยัง UNKNOWN
+- register-zero mode predicate รับเฉพาะ `al/cl/dl/bl` ที่ทุก reaching definition เป็น exact full-width XOR-self โดยไม่มี undefined path; high-byte register, mixed definition และ operand ที่ formal ไม่เอกฐานยังคง UNKNOWN
+- nested mode/stream escape hatch จำกัดหนึ่งชั้น: branch-exclusive direct child ต้องมี capability เอกฐานและ stream formal ต้องส่งต่อถึง direct primitive anchor ของ child แบบเอกฐาน; หลักฐานตรึง call/argument/primitive offsets และ hash ของ canonical stream proof
+- local capability refinement ไม่อ้างว่า transitive W/R union ผิดโดยทั่วไป; รับเฉพาะ target ที่มี `ret; int3+` entry boundary ตรงไบต์ก่อนหน้าและ direct primitive ทุกจุดเป็นทิศเดียว พร้อม known serializer edge ครบทุกจุดพิสูจน์ทิศเดียวกัน ส่วน utility call ที่ capabilities ว่างยังไม่ถูกตีความ
+- indirect import อื่นนอก allowlist ชื่อ exact สามรายการยังทำให้ stack depth เป็น UNKNOWN; `call r32` รับเฉพาะ unprefixed singleton reaching definition ที่เป็น exact `mov r32,[IAT]` ของ register เดียวกัน และยังไม่อนุมาน cleanup จากรูป call หรือการไม่มี `add esp`
+- virtual call นอก task-pinned GetId slot `+0x10` หรือ GetId ที่ไม่อยู่ในรูป adjacent exact load/call พร้อม singleton reaching definition ยังทำให้ stack depth เป็น UNKNOWN; กฎนี้ไม่ใช้กับ serializer slot `+0x18` และไม่กู้ depth ที่เสียไปแล้ว
+- blocker ที่ตรวจถึงจุดหยุดแล้วไม่ใช่หลักฐานว่า implementation bytes หายจาก image: `StartGameRes` สูญ stack provenance ที่ vtable `+0x34` call `0x005EF2B5`/file offset `0x001EE6B5` ก่อน mode load `0x005EF2FC`; `GSSS_GuildStorageCmdVital` สูญที่ call `0x00673D29`/`0x00273129` ก่อน mode load `0x00673D36`. target address และ cleanup ถูกเลือกจาก runtime vtable และยังไม่เป็น singleton จาก static bytes จึงคง `caller_mode_value_unproved`.
+- `CArenaVital` และ `CSearchPartyVital` สูญ stream-formal stack provenance หลัง vtable slot-zero calls `0x00625E00`/file offset `0x00225200` และ `0x006377A0`/`0x00236BA0`; static bytes ยังไม่พิสูจน์ว่าค่า member pointer ทุกแหล่งมี target/cleanup เดียว จึงไม่ใช้ runtime object identity ที่ยังไม่เอกฐานเป็นหลักฐาน.
+- RunTimeProtocol ห้าชื่อที่ใช้ serializer `0x005F3E20` เก็บ stream formal ที่ `[ebp-0x50]` ณ `0x005F3E63`/file offset `0x001F3263`, แต่ address ของ local ข้างเคียง `[ebp-0x48]` ถูกส่งเข้า call `0x006B3440` ณ `0x005F3F75`/`0x001F3375` ก่อน restore ที่ `0x005F3FA2`/`0x001F33A2`. ไล่ต่อได้ว่า pointer ใน local มาจาก call `0x005E2E00` ณ `0x005F3EA8`/`0x001F32A8`; ฟังก์ชันนั้นมี runtime-selected indirect calls ที่ `0x005E2E31`/`0x001E2231`, `0x005E2E3F`/`0x001E223F`, `0x005E2E46`/`0x001E2246` และ vtable `+0x14` call `0x005E2E50`/`0x001E2250`.
+- call `0x006B3440` ใช้ operator-new thunk `0x00B37980` ณ `0x006B346D`/file offset `0x002B286D`; thunk ณ `0x00B37980`/`0x00736D80` กระโดดผ่าน IAT `0x00C3B4BC`/`0x008398BC` ซึ่ง PE import table ระบุ `MSVCR90.dll!??2@YAPAXI@Z` ที่ symbol-name offset `0x00C15BEE`. object 12 ไบต์ที่คืนมาถูกเขียนที่ `0x006B3488`/`0x002B2888`, `0x006B3494`/`0x002B2894` และส่ง `new_object+0x8` เข้า `0x0069D040` ที่ call `0x006B349E`/`0x002B289E`; ที่ `0x0069D07F`/`0x0029C47F` มีการเขียน pointee และ `0x0069D085`/`0x0029C485` เรียก `0x0088D050`, ซึ่งบวก `+0x0C` ณ `0x0088D050`/`0x0048C450` แล้วเรียก IAT `KERNEL32.dll!InterlockedIncrement` `0x00C3B1B0`/`0x008395B0` ณ `0x0088D054`/`0x0048C454`. implementation ของ allocator/import และค่า object จริงอยู่นอก image; จึงยังพิสูจน์ไม่ได้ว่าทุก write ไม่ alias `[ebp-0x50]` และคง primitive calls `0x005F3E98`/`0x001F3298` กับ `0x005F3EF4`/`0x001F32F4` เป็น UNKNOWN.
+- การเขียน ESP รูปอื่นนอก exact `8D A4 24 00 00 00 00` ยังทำให้ stack depth เป็น UNKNOWN; stack-identity rule ไม่กู้ depth ที่เป็น UNKNOWN มาก่อนและไม่ขยายเป็น generic LEA arithmetic
+- symbolic pointer/stack/loop expressions บอกที่มาของ address ตามคำสั่ง แต่ไม่อ้างว่าเป็น member offset คงที่; resolver ของแต่ละ top-level event แยกจากกันเพื่อไม่ให้ผลขึ้นกับลำดับ query ก่อนหน้า
+- order เป็น static call-site order; dynamic order/จำนวนรอบของ loop และแขนงกำกวมยังไม่รู้
+- tag ที่ไม่มีหลักฐาน producer/consumer ชนิดข้อมูลยังไม่ทราบ semantics
+
+## 4) สิ่งที่เกือบเดาแต่หยุดไว้
+
+- ไม่ตีความทะเบียน 519 รายการว่าเป็น packet เครือข่ายทั้งหมด เพราะมี Attr, Module, Protocol และ Vital ปะปนกัน
+- ไม่เลือก vtable จาก RTTI ที่ชื่อเพียงบางส่วนหรือคล้ายกัน หรือโครงสร้างที่ช่วงไบต์ข้าม PE section; รับเฉพาะชื่อเต็ม `.?AV<registry-name>@@`, self BaseClassDescriptor และ candidate เอกฐานจาก getter/marker census เดิม
+- ไม่เลือก vtable จากการที่ serializer/handler slot เท่ากัน; ความเท่ากันข้าม candidate พิสูจน์ได้เฉพาะค่าของ slot นั้น ส่วน vtable ยังคง `UNKNOWN`
+- ไม่ตั้งชื่อชนิด tag จากขนาด; ระบุชนิดเฉพาะ `0x2A=float32` และ `0x12=uint16` ตามหลักฐานที่ให้มา
+- ไม่บังคับค่าที่มาจาก heap/list/stack ให้เป็น offset จาก OBJ และไม่เดา target ของ virtual call
+- ไม่ถือ inherited W/R ว่าใช้แทน local call-site proof ได้; formal ของ thiscall/cdecl ต้องมี zero/nonzero branch แยก WRITE/READ anchors ตรงทุก dual-target edge และ formal forwarding ต้องมีต้นทาง/ปลายทางเอกฐานพร้อม width/mapping ที่พิสูจน์ได้
+- ไม่ลด target ที่ transitive capabilities เป็น R/W ตาม direct primitive เพียงจุดเดียว; ต้องมี entry boundary แบบ `ret; int3+` และ census direct primitive กับ known serializer child/tail ทั้งฟังก์ชัน พร้อม reject decode error, function-interior target, ทิศขัดกัน และ proof ที่ไม่เอกฐาน
+- ไม่ไล่ nested direction anchor แบบไม่จำกัดความลึก และไม่ใช้ capability เอกฐานอย่างเดียวแทน stream provenance; ถ้า child ไม่มี direct primitive ECX anchor หรือมี nested candidate มากกว่าหนึ่งจุดจะหยุดเป็น UNKNOWN
+- ไม่ถือว่าการ call target ที่มี W/R อยู่ข้างในแปลว่าส่ง stream เดิม; จุดที่ stack depth สูญหายหลัง SEH/indirect call หรือ target direction ไม่มี primitive ECX anchor ตรงถูกหยุดเป็น UNKNOWN
+- ไม่ถือ indirect call ว่า stack-neutral เพียงเพราะไม่มี push ติดหน้า; นอกจาก import allowlist ที่พิสูจน์จาก PE table ยอมรับเฉพาะ task-pinned GetId slot `+0x10` ที่เป็น unprefixed call, adjacent exact load และ singleton reaching definition พร้อม file offsets; slot/รูปอื่นยัง UNKNOWN
+- ไม่ถือ LEA ที่เขียน ESP ทุกตัวว่าเป็น no-op; stack depth ข้ามได้เฉพาะรูปไบต์ exact `lea esp,[esp+0]` ที่ validator re-derive ได้ และไม่อนุมานจาก mnemonic เพียงอย่างเดียว
+- ไม่ตีความ byte write เป็น full-register value; `mov bl,...` ใช้พิสูจน์ได้เฉพาะ lane ต่ำที่ target ตรวจจริงเท่านั้น
+- ไม่ถือ register ใน `cmp` ว่าเป็นศูนย์จากชื่อ idiom หรือ symbolic value อย่างเดียว; ต้องมี `predicate_zero_reaching` ที่ re-derive definition set จาก CFG และไบต์จริงได้ครบ
+- ไม่ถือ LEA ทุกตัวเป็น no-op หรือค่าศูนย์; ยอมให้ข้ามเฉพาะ full-width zero-displacement same-register identity หนึ่งจุด และต้องย้อน reaching definitions ก่อน LEA ได้ XOR-self ครบทุก path
+- ไม่ตั้งชื่อ helper ว่า string/blob/vector จาก address หรือขนาดเพียงอย่างเดียว; ยกเว้นสี่ string target ที่พิสูจน์จาก full-span hash, exact key bytes, ABI และ PE import names ครบ target อื่นที่ตามถึง primitive ไม่ได้ยังคงเป็น CALL_UNCLASSIFIED
+- ไม่เรียก atomic helper ว่า smart pointer/refcount/Release จาก idiom และไม่ประกาศ increment ว่า NONWIRE จาก body เพียงอย่างเดียว; ตารางใช้ชื่อปฏิบัติการที่พิสูจน์ตรงจาก `InterlockedIncrement/Decrement`, runtime address `ECX+0x0C` และ vtable `+0x04` เท่านั้น โดยคง alias/target reason จนกว่าจะมี object provenance เอกฐาน
+- ไม่เรียก pure chain predicate ว่า list/set/registry หรือผูกกับชนิด object จากรูป loop; ระบุเพียงการอ่าน pointer `+0x04`, การเทียบกับ needle และค่า boolean ตาม exact bytes
+- ไม่เรียก mutable chain helper ว่า iterator/list cleanup จากรูป flag/link และ `_invalid_parameter_noinfo`; ระบุเพียง offset ที่อ่าน/เขียนและ alias blocker ตาม exact bytes
+- ไม่เรียก locked mutable pointer-slot helper ว่า vector/list/pool จากรูป pointer arithmetic, lock และ allocator; ระบุเฉพาะ operation shape, exact imports/wrappers, nested target ที่ยังไม่ตีความ และ alias blocker
+- ไม่สรุปว่า critical-section wrapper เป็น non-wire เพียงเพราะ import เป็น lock API; จนกว่าจะพิสูจน์ runtime `[ECX]` non-alias ได้ ตารางระบุเฉพาะ dereference, import operation และ alias blocker
+- ไม่เรียก mutable dword-range growth helper ว่า vector/list/pool จากการหารระยะด้วย 4, zero-fill และ end-pointer update; nested target `0x005F68D0` กับ alias ยังไม่พิสูจน์ จึงไม่ยกเป็น non-wire
+- ไม่เรียก mutable dword-slot operation helper ว่า vector/list/insert จากการหารระยะด้วย 4 และการเลื่อน `[ESI+0x10]`; nested targets สองตัวกับ runtime alias ยังไม่พิสูจน์ จึงไม่ยกเป็น non-wire
+- ไม่เรียก mutable pointer-slot traversal helper ว่า tree/map/iterator จากรูป link และ flag `+0x21`; ระบุเฉพาะ offset/call/write ที่ exact และคง runtime object alias เป็น UNKNOWN
+- ไม่เรียก locked mutable dword-slot update helper ว่า vector/list/swap จาก lock, slot scale 4 และ counter update; ระบุเฉพาะ bounded CFG/nested calls/writes ที่ exact และคง nested semantics กับ runtime alias เป็น UNKNOWN
+- ไม่ตั้งชื่อ nested three-call composition helper ว่า string lookup/convert/member update จากลำดับสาม call, zero-extension และ address `ECX+0x50`; ระบุเฉพาะ full body/call targets/dataflow ที่ exact และคง nested semantics กับ runtime alias เป็น UNKNOWN
+- ไม่เรียก ECX+0x50 tail-jump helper ว่า member/container/string wrapper จากการปรับ this-pointer แล้ว jump; ระบุเฉพาะ entry prefix, direct target และตัวคั่น `CC` ที่ exact โดยคง tail-target semantics กับ runtime alias เป็น UNKNOWN และไม่ลาก routine หลังตัวคั่นเข้าคำอ้าง
+- ไม่ตัด direct `_invalid_parameter_noinfo` import call ออกจาก UNKNOWN เพียงเพราะเป็น validation API; ตารางระบุ exact import operation แต่คง wire-effect blocker จนกว่าจะมี path/non-alias proof
+- ไม่ตัด constructor/destructor/c_str/interlocked/formatting/UI import ออกจาก UNKNOWN เพียงเพราะ PE ระบุชื่อฟังก์ชัน; กฎ direct import พิสูจน์เฉพาะ exact call encoding และ import identity ส่วน argument alias, return use และผลต่อ wire path ยังไม่เอกฐาน
+- ไม่ตัด `malloc` หรือ `_CxxThrowException` ออกจาก UNKNOWN เพียงเพราะ rel32 target เป็น unconditional IAT thunk และ PE ระบุชื่อ; กฎ import-thunk พิสูจน์เฉพาะ call target, thunk bytes และ import identity ส่วน implementation/argument alias/ผลต่อ wire path อยู่นอก image
+- ไม่ตัด PE SecurityCookie check ออกจาก UNKNOWN เพียงเพราะ success path return และ compare global ตรง Load Configuration; failure tail target `0x00B38352`/file offset `0x00737752` ยังไม่ถูกพิสูจน์ผลต่อ wire path จึงระบุเฉพาะ exact guard shape และคง failure-path blocker
+- ไม่รวม register-indirect import call ที่มี reaching definition หลายจุดไว้ใน singleton rule แม้ symbolic target จะลดรูปเป็น IAT เดียวกัน; กฎ multi-register รับเฉพาะ complete reaching set อย่างน้อย 2 จุดโดยไม่มี undefined path และทุกจุดต้องเป็น exact unprefixed `mov` ของ register/IAT เดียวกับ call; definition แบบผสม, register/IAT ไม่ตรง หรือ path ที่ยังไม่มี definition ยังคง generic UNKNOWN
+- ไม่ประกาศฟังก์ชันว่า EMPTY เพียงเพราะไม่พบ WRITE/READ; นอกจาก body `ret`/`ret 8` ล้วน รับ exact allowlist ของ constant-return, absolute-global predicate, argument-value copiers, conditional object init และ FPSTest entry CFG เท่านั้น; FPSTest ต้องตรง full span 156 bytes และ re-derive 24 reachable instructions ก่อน `CC CC` โดยห้ามลากคำอ้างไปยัง suffix entry `0x0073E900` ส่วนกฎอื่นยังคงไม่อ่าน stack argument ไม่มี call/tail หรือไม่ dereference ค่า argumentตามชนิด จึงพิสูจน์ได้เพียงว่าไม่มี wire field ในเส้นทางที่ระบุ ไม่ใช่ว่า class/module ไม่มีพฤติกรรมด้านอื่น
+
+## 5) ลำดับ 1 ปิดได้กี่เปอร์เซ็นต์
+
+- จัด priority ครบ 519 รายการแบบ case-insensitive ตาม keyword ที่สั่ง: ลำดับ 1 = 365, ลำดับ 2 = 16, ลำดับ 3 = 138
+- ลำดับ 1 ปิดเชิงโครงสร้าง 241/365 = 66.03%; ยังเปิด 124 รายการ
+- คำสั่งปิด v1 ยอมรับ checkpoint นี้และสั่งหยุดไล่ 124 รายการ ห้ามเพิ่มเปอร์เซ็นต์ด้วยการเปลี่ยนชื่อ UNKNOWN, ตัด call ที่ยังพิสูจน์ไม่ได้ หรือเดา runtime identity
+- ใน 124 รายการที่เปิด: registry identity ยังเปิด 11 รายการ; serializer ยังเปิด 123 รายการ; `ItemAttr` เป็นรายการเดียวที่ serializer ปิดแล้วแต่ vtable identity ยังเปิด
+- blocker เป็นกลุ่มซ้อนทับกันและห้ามบวกเป็นยอดรวม: `direct_call_not_proven_serializer` 105 message, `atomic_target_object_alias_unproved` 73, `dynamic_vtable_plus_0x04_target_unresolved` 71, `indirect_call_not_proven_serializer_slot` 60, `invalid_parameter_import_call_wire_effect_unproved` 57 และ registry identity 11
+- แยกตาม keyword group ของรายการเปิด: `combat/damage/hp/vital` เดี่ยว 75; `item/inventory/drop/pickup/loot` เดี่ยว 12; สองกลุ่มดังกล่าวร่วมกัน 11; `actor/npc/monster` เดี่ยว 10; `combat...` ร่วม `actor...` 9; กลุ่มอื่น/กลุ่มชนรวม 7
+- A5 ยืนยันเพิ่มจากสายจริงให้ Priority 1 ได้ 28 message; อีก 12 message ของ Priority 1 ถูกสังเกตแต่หยุดที่ A2 static-open; 325 message ไม่พบใน capture และต้องเป็น `NOT_OBSERVED`
+- ใน 124 รายการที่ยังเปิด ไม่มีรายการใดเป็น `capture-validated`: พบ 12 รายการบนสายจริงแต่ทั้งหมดหยุดที่ static-open และอีก 112 รายการไม่ถูกสังเกต
+- รายชื่อ 124 รายการและ blocker รายตัวอยู่ใน `PF_PROTOCOL_PRIORITY.tsv`/`.md`; ภาคผนวก `PF_DUMP_REQUEST.md` แจกแจงชื่อทั้ง 124 แบบไม่ซ้ำและผูกกับสถานะ runtime ที่ขอเก็บหลักฐานรอบถัดไป
+- `capture_status` ในแถว `source=IMAGE` ของตาราง priority เป็นเพียง pointer `SEPARATE_SOURCE:PF_FIELD_VALIDATION.tsv`; สถานะ capture จริงอยู่ในแถว `source=CAPTURE` เท่านั้น จึงไม่มีการผสม evidence layer
+
+## 6) A5 พบความไม่ตรงระหว่าง static กับสายจริงกี่จุด
+
+- mismatch ระหว่าง A2 กับเฟรมที่ parse ได้: 0 instance และ 0 distinct message/direction/field/reason point
+- สแกนและ hash ไฟล์ใน `capture_*` ครบ 1,772 ไฟล์ รวม 595,134,426 ไบต์; ตรวจ text 918 ไฟล์ และพบ block ใน 277 ไฟล์
+- พบ PC 10,462 block และ DECOMPRESSED 41,432 block รวม 51,894 outer message instance; envelope error 0
+- nested instance ตาม count ที่ประกาศ 13,220; เดินถึงโดยไม่ heuristic 12,785; อีก 435 อยู่หลัง static-open boundary และถูกหยุดไว้โดยไม่เดา
+- parse สำเร็จ 11,904 message instance; A2 static-open 52,775 message instance ซึ่งไม่ถูกนับเป็น mismatch
+- มี nested frame อย่างน้อย 11,427 เฟรมที่ยืนยันได้สำเร็จ, 881 เฟรมที่ชน static-open และ 0 เฟรมที่พบ field mismatch
+- ค่า mismatch = 0 ไม่ได้หมายความว่า A2 ทั้ง 519 message ผ่านสายจริง: message ที่ไม่พบคือ `NOT_OBSERVED` และ message ที่ A2 ยังเปิดคือ `A2_STATIC_OPEN` ไม่ใช่ PASS หรือ FAIL
+- เนื่องจากไม่พบ mismatch จึงไม่มีรายการที่จะย้ายขึ้นต้นรายงาน หากรอบใหม่พบแม้หนึ่งจุด ต้องย้าย message, frame reference, field index และชนิด mismatch ขึ้นเป็นเรื่องแรกโดยไม่แสดง raw bytes
