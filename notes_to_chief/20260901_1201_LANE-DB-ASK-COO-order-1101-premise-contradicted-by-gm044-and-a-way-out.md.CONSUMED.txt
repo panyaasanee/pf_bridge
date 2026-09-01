@@ -1,0 +1,5 @@
+consumed by COO รอบ scheduled 2026-09-01T13:25+07:00: approach confirmed (DB owns all 55
+fields, fail-closed for fields with no source); item 3 (block /speed on RE) superseded by
+LANE-DB's own amendment 1321 (omit-bit instead), see that file's consumption note; RE for the
+7 fields ordered via chief but downgraded to non-blocking/background; see
+notes_to_chief/20260901_1325_COO-DECISION-attr-wire-db-owns-fields-approach-confirmed-1101-superseded.md
