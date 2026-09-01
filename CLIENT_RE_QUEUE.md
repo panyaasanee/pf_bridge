@@ -3819,3 +3819,64 @@ body layout หรือไม่
 `tools/verify_logout_return_select_encoder.py:1-30,86-90,172-186,304-310` (docstring, `FIELD3_TAG`,
 section B checks, RESULT line -- ทั้งหมด `[STALE][MEASURED]` รอบ 292) · `GT-018` (แหล่งจริงของ
 `DeleteActorVital`'s `0x44`, คนละข้อความ)
+
+## 🆕🔬 RE-197 GETWORLDINFO-SHORT-FORM-51BYTE-INTER-BUTTON-FRAME-001 [STATIC-ON-BRIDGE]: **ถอดโครงสร้าง/ความหมายของเฟรม 51 ไบต์ (`GetWorldInfoVital`, `#1398` ในแคปเจอร์ `gt192_20260901_184254`) ที่แทรกอยู่ระหว่างปุ่ม "กลับหน้าเลือกตัวละคร" กับปุ่ม "ออกจากเกม" -- ต่างจาก full-form 268-ไบต์ที่ตรวจแล้วอย่างไร และต่างกันไหมระหว่างสองเส้นทางปุ่ม**
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-197`/`RE-197` = **0 hit ทั้งสองไฟล์** ⇒ **ใบนี้คือ
+> `RE-197`** · เลขว่างถัดไปหลังใบนี้ = 198
+> 🔴 ใบ `RE-085`-`RE-196` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+### ทำไมเปิดใบนี้
+
+`notes_to_chief/20260901_1930_KA1A-CAPTURE-*.md` (เจ้าของกดปุ่ม UI-A/UI-B เองทั้งสองปุ่ม, capture
+`gt192_20260901_184254`) บันทึกลำดับเฟรมสด:
+
+    [G< #1396]  268 bytes  GetWorldInfoVital   <- dialog เปิด (full form)
+    [G< #1397]   34 bytes  0x1B40 LogoutVital  <- ปุ่ม "กลับหน้าเลือกตัวละคร"
+    [G< #1398]   51 bytes  GetWorldInfoVital   <- ยังไม่มีใครถอด
+    [G< #1401]  268 bytes  GetWorldInfoVital   <- dialog เปิดอีกครั้ง (full form)
+    [G< #1402]  119 bytes  0x1B40 LogoutVital  <- ปุ่ม "ออกจากเกม"
+
+`HYP-PF-040` push `ReturnSelectServerVital` ตอน full-form (268 ไบต์) เปิด dialog แต่เฟรม 268 ไบต์
+เหมือนกันทุกไบต์ไม่ว่าจะกดปุ่มไหน (เทียบ `#1396` กับ `#1401` แล้ว) ⇒ ตอบผิดปุ่มได้ครึ่งหนึ่งโดย
+โครงสร้าง `#1398` (51 ไบต์) เป็นเฟรมเดียวที่อยู่**ระหว่าง**ปุ่มแรกกับปุ่มที่สอง -- ยังไม่มีใครถอดว่า
+มันคืออะไร หรือมันต่างกันไหมถ้าเดินเส้นทาง UI-B (ออกจากเกม) แทน UI-A (กลับหน้าเลือกตัวละคร) ถ้าถอดได้
+และมันต่างกันจริง จะเป็นตัวแยกปุ่มที่ HYP-PF-040 ต้องการ (ทางที่ 2 ที่ใบ `1930` เสนอไว้) -- สายนี้
+(LANE-A) ตอบเองไม่ได้เพราะไม่มี raw capture bytes ของ `#1398` อยู่ในมือ มีแค่คำอธิบาย 3 บรรทัดใน
+ใบ `1930` เอง
+
+`production_allowed` ของ `logout_hypothesis.py` ทุกโปรไฟล์ยัง `False` -- ไม่มีความเสี่ยงต่อ
+production วันนี้จากคำถามนี้ ไม่ใช่ P0 ไม่บล็อกงานสายไหนตอนนี้
+
+### สิ่งที่ต้องตอบ
+
+1. `#1398` (51 ไบต์) มีโครงสร้างอย่างไรเทียบกับ full-form 268 ไบต์ (`WORLDINFO_RECORD_SKELETON` ใน
+   `logout_hypothesis.py`) -- เป็น short-form variant เดียวกันหรือคนละ vital กัน
+2. มีข้อมูลอะไรใน `#1398` ที่บ่งชี้ได้ว่าผู้เล่นกำลังจะกดปุ่มไหน (subcode ที่กำลังจะตามมา) หรือเป็น
+   payload คงที่ไม่ต่างกันเหมือน full-form
+3. ถ้ามีแคปเจอร์ที่สองของเส้นทาง UI-B (ปุ่ม "ออกจากเกม") ให้เทียบ `#1398`-เทียบเท่ากับของ UI-A
+   ไบต์ต่อไบต์ -- ต่างกันตรงไหนบ้าง (ถ้ามี capture เพิ่มให้ระบุ path)
+
+### pass criteria
+
+- **PASS**: ระบุโครงสร้าง `#1398` ชัดเจน พร้อมบอกได้ว่ามันเป็นตัวแยกปุ่มที่ใช้ได้จริงหรือไม่ (ยืนยัน
+  หรือปฏิเสธ) พร้อม evidence span
+- **BOUNDED-NEGATIVE**: ถ้าไม่มี raw capture bytes ของ `#1398` ให้ถอด (มีแค่ความยาว 51 ไบต์ที่รู้)
+  เขียนไว้ตรง ๆ ว่าต้องรอ capture เพิ่มก่อนตอบได้ ห้ามเดาโครงสร้าง
+
+### ข้อห้าม
+
+ห้ามแก้ `logout_dialog_open_hypothesis.py` หรือ `logout_hypothesis.py` จากใบนี้โดยตรง (ไฟล์ล็อกของ
+chief) · ห้ามอ้างว่าใบนี้ยืนยัน/ปฏิเสธว่า `HYP-PF-040` ผิดหรือถูก -- แค่หาตัวแยกปุ่มที่เป็นไปได้
+
+### สัญญาผู้บริโภค
+
+เปิดโดย LANE-A -- **LANE-A บริโภคผล** (เจ้าของ UI-A/UI-B ตาม `FROM_CHIEF_R278`)
+
+### links
+
+`notes_to_chief/20260901_1930_KA1A-CAPTURE-the-owner-clicked-both-UI-A-and-UI-B-buttons-herself-exact-bytes-plus-a-design-problem-for-HYP-PF-040.md`
+(ที่มา, บรรทัด `#1398`) ·
+`notes_to_chief/20260901_2007_LANE-A-CORE-REQUEST-logout-vitalcount-envelope-gap-classifier-built.md`
+(จดหมายที่เปิดใบนี้) · `src/pirateforce_foundation/logout_hypothesis.py:158-176` (HYP-PF-040 constant
++ provenance comment)
