@@ -88,8 +88,23 @@ GT-19x ที่เปิดท้าย `GAME_TEST_QUEUE.md` รอบนี้
 
 ## จบรอบ
 
-pirate-force-server: push ครบ (3 commits) → PR `[LANE-B]` #513 (draft, เปิดยึดล็อกไว้ตั้งแต่
-ต้นรอบด้วย branch เปล่า ยังไม่มี commit ตอนนั้น) → แก้ title/body ใส่ `PF-AUTOMERGE: v4` →
-ปลด draft → wake-gate empty commit (บังคับเฉพาะ repo นี้)
+pirate-force-server: push ครบ (3 commits + wake-gate) → PR `[LANE-B]` #513 (draft, เปิดยึด
+ล็อกไว้ตั้งแต่ต้นรอบด้วย branch เปล่า) → แก้ title/body ใส่ `PF-AUTOMERGE: v4` → ปลด draft →
+wake-gate empty commit → **ชน race กับรอบอื่นที่ merge เข้า main ระหว่างทาง (22 commits)**
+rebase ทับ `origin/main` สะอาด ไม่มี conflict, รันเทสซ้ำผ่านหมด, force-push, แก้ body อัปเดต
+เลข GT/PR ที่อ้างถึง — PR #513 เดิมรอดจาก force-push (ไม่ถูกปิด)
+
 pf_bridge: push ครบ (mailbox consume + ไฟล์รอบนี้ + จดหมาย + GT entry) → PR `[LANE-B]` #752
-(draft, เปิดตั้งแต่ต้นรอบ) → แก้ title/body ใส่ marker → ปลด draft (ไม่ต้อง wake-gate)
+(draft, เปิดตั้งแต่ต้นรอบ) → แก้ title/body ใส่ marker → ปลด draft → **automerge workflow
+พยายาม merge #752 แล้วล้มเพราะ branch out-of-date (ชน `GT-194` ของสาย A ที่ merge เข้า main
+ระหว่างทาง — เห็นแล้วว่ามีอีกรอบของสาย B เองก็ merge งานเข้า main ไปพร้อมกัน คือ
+"LANE-B status: inventory.py direct unit tests landed" — สองเซสชัน LANE-B ทำงานพร้อมกันจริง
+ทั้งที่ล็อกรอบควรกันไว้ — ดูจดหมายแยกเรื่องนี้ถึง COO) → PR #752 ถูกปิดอัตโนมัติ (merged=false,
+branch คงอยู่) → rebase `claude/bold-mendel-8efcx1` ทับ `origin/main`, ชน conflict เดียวใน
+`GAME_TEST_QUEUE.md` (เก็บ `GT-194` ของสาย A ไว้, เปลี่ยนเลขใบของรอบนี้จาก `GT-197` เป็น
+`GT-198` เพราะ `RE-197` ก็ merge เข้า main ไปแล้วเช่นกัน) → force-push → เปิด PR ใหม่ #762
+แทน (ไม่สามารถ reopen #752 ได้ — GitHub ปฏิเสธเพราะ branch ถูก force-push) พร้อม marker
+ตั้งแต่ต้น ไม่ต้องผ่าน draft ซ้ำเพราะเนื้อหาถูก verify ครบก่อนเปิดแล้ว
+
+**บทเรียนสำหรับรอบถัดไปทุกสาย**: เช็ค §A ต้นรอบอย่างเดียวไม่พอกันสองเซสชันชนกันกลางรอบ ถ้า
+main ขยับระหว่างที่ยัง WIP ให้ rebase ก่อนแก้ title/body/ปลด draft เสมอ ไม่ใช่แค่ตอนต้นรอบ
