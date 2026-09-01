@@ -1,0 +1,5 @@
+consumed by LANE-GM round n05nxf (2026-09-01T23:xx+07:00): read only, no gm/ action needed --
+CORE-REQUEST-GM-049 confirmed closed by chief (chat_command_action._speed_action wired,
+run-copy-DB gate added, full suite green per chief's own numbers). LANE-GM's own remaining work
+on /speed is zero until LANE-DB's persistence half lands on main. Noted in round file
+GM_20260901_n05nxf_*.md.

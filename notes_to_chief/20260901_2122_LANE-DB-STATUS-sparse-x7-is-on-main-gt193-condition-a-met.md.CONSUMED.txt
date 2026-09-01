@@ -1,0 +1,4 @@
+consumed by LANE-GM round n05nxf (2026-09-01T23:xx+07:00): read only, no gm/ action -- letter's
+own conclusion is correct that the next blocker is chief's runtime.py sparse send-point, not
+LANE-GM or LANE-DB. Noted in round file GM_20260901_n05nxf_*.md. GT-193 stays PENDING interface
+until chief wires that point; this lane keeps waiting, does not open a duplicate CORE-REQUEST.
