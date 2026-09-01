@@ -1,0 +1,12 @@
+consumed by LANE-A รอบ 7ste68 (2026-09-02T01:51+07:00): ทำเสร็จในรอบนี้
+ทำอะไรต่อ: สร้าง src/pirateforce_foundation/world_census_level.py (Foundation-owned additive splice
+บิต BasicAttr 0x0002 + u16 tag 0x12 ตาม RE-117 ใช้แพทเทิร์นเดียวกับ field_mobs.hostile_npc_attr
+ไม่แตะ v141 ที่ frozen ไม่แตะ runtime.py/app.py) แล้วต่อสายให้ census ปกติ 12 ฉาก:
+bg0002..bg0011, bg0015, bg4001 (ใบสั่งระบุสามฉาก bg0006/bg0009/bg0015 - สายนี้ขยายเป็นทุกฉากที่มี
+คอลัมน์ level ที่ขุดไว้แล้ว เพราะเกณฑ์ GM-A ของเจ้าของคือ "วาปข้ามหลายแมพแล้วต้องปกติทุกแมพ"
+ประกาศไว้ชัดใน PR body และไฟล์รอบ ไม่ได้ขยายเงียบ)
+ข้อควรระวังของใบสั่งครบทั้งสี่ข้อ: (1) ไม่แตะสี/ป้าย/actor type/identity เลย (2) กัน double-field
+ด้วยการ refuse บอดี้ที่มีบิต 0x0002 อยู่แล้ว - มีเทสขับด้วยบอดี้ hostile จริงของ scene 14
+(3) ไม่แก้ v141 ไม่ import ข้าม module (อ้าง field_mobs ในคอมเมนต์เท่านั้น)
+(4) เทส focused codec/order + regression: full suite 6624 passed / 327 skipped / 14112 subtests
+ค้าง: scene 1 (Port Royal) ต่อไม่ได้เพราะไม่มีคอลัมน์ level ที่ขุดไว้ -> เปิด RE-199 ให้สาย RE

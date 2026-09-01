@@ -9940,3 +9940,61 @@ highest `GT` ที่เปิดอยู่ก่อนใบนี้คื�
 - links: `pirate-force-server#513` (branch `claude/zen-einstein-8efcx1`, commits `74cee95a`/`4d2b5105`/`d6e7a56a`, pf-adversary x3, one HIGH finding fixed in commit 3) -- `notes_to_chief/consumed/20260901_2015_KA1B-TO-LANE-B-drop-model-selector-field-is-not-on-our-wire.md` (the hypothesis this ticket tests) -- `mob_loot.py` NONCLAIM 16 / `RE-067` (`CLIENT_RE_QUEUE.md`, withheld offsets) -- GT-045 closing letters (`archive/notes_to_chief_2026-08-19_to_26/20260825_1340_GT045-ANSWERED-*.md`, `.../20260825_1615_GT045-EVIDENCE-COMMITTED-*.md`) -- `GT-084`/`GT-084-R2` (real no-flag combat path on `0x201F`, corpse-freeze measurement) -- `GT-188` (heartbeat-preserve, separate claim, do not conflate) -- `rounds/B_20260901_2036_8efcx1_*.md` (this round's own account, same branch).
 - numbering: per the shared-counter search command (rule ② at the top of this file), re-run at rebase time against `origin/main`: highest `GT` on `main` is now `GT-194` (LANE-A, opened same day, merged ahead of this branch during a rebase conflict); highest `RE` in `CLIENT_RE_QUEUE.md` is `RE-197`. This entry is `198`.
 - result: (tester fills in: PASS/FAIL/BLOCKED/NO-RESULT, evidence, timestamp, `OBSERVER_CONFIRMED` line per G-OBS once client-observable evidence exists)
+
+## GT-200 CENSUS-NPC-LEVEL-LABEL-MULTI-SCENE-001  [PENDING -- โค้ดยังไม่ขึ้น `main`: PR #524 branch `claude/dazzling-volta-7ste68` · ห้ามบูตจนกว่า RECHECK ผ่าน]
+
+> เปิดโดย LANE-A รอบ `7ste68` 2026-09-02T01:55+07:00 ตามใบมอบหมาย
+> `notes_to_chief/20260901_2358_CHIEF-TO-LANE-A-codex-gt192-lv1-census-level-encode-assigned.md`
+> · **LANE-A บริโภคผลเอง** · numbering: คำสั่งค้นหาคืน `199` ⇒ ใบนี้ `200`
+> · บูต/DB/teardown ตาม `ATTENDED_SESSION_RUNBOOK.md` · ที่มาและตัวเลขเต็มอยู่ใน
+> `rounds/A_20260902_0155_7ste68_census-level-splice-twelve-scenes.md`
+
+- objective: ข้อพิสูจน์เดียว -- ป้าย `LV` เหนือหัว **NPC สำมะโนธรรมดา** แสดงเลขจริงและ **ต่างกันรายตัว**
+  ไม่ใช่ `LV 1` ทุกตัวอย่างที่ `GT-192` เห็น ในอย่างน้อย **3 ฉาก** ที่ไปถึงด้วย `/warp <mapnum>`
+  ภายในการล็อกอินครั้งเดียว
+- background:
+  - census composer ปกติไม่เคยเข้ารหัสเลเวลเลย (helper แช่แข็ง `v141:1139-1195` ไม่มีพารามิเตอร์
+    level, BasicAttr mask ไม่เคยเซ็ตบิต `0x0002`) ⇒ ไคลเอนต์วาด default ของตัวเอง
+  - รอบ `7ste68` เพิ่ม `world_census_level.py` (splice บิต `0x0002` + u16 tag `0x12` ตาม `RE-117`)
+    ต่อเข้า composer 12 ตัว: `world_population_bg0002..bg0011`, `bg0015` (ฉาก 14), `bg4001`
+    (ฉาก 130) · **ไม่มีแฟล็ก ติดทุกบูต**
+  - ฉาก 1 (Port Royal) **จงใจไม่ต่อ** เพราะไม่มีคอลัมน์เลเวลที่ mine ไว้ (`RE-199`) ⇒ `LV 1` ของฉาก 1
+    เป็นผลที่คาดไว้ **ห้ามรายงานเป็น FAIL**
+- steps:
+  1. RECHECK ผ่านก่อน · บูตปกติ **ไม่มีแฟล็ก scenario** · ล็อกอินบัญชี GM (ต้องใช้ `/warp`)
+  2. จัดมุมด้วย **คลิกขวาลาก** เท่านั้น ใช้เป็นตัวเช็ค NO-CRASH ตลอดใบ (ห้ามใช้ `Q`/`E`)
+  3. คลิกช่องแชท **ยืนยัน focus ก่อนพิมพ์เสมอ** · `/warp 3` · Enter · รอ ~3 วินาที
+  4. เดินเข้าใกล้ NPC ให้อ่านป้ายออก · ภาพนิ่ง **ความละเอียดเต็ม** ชื่อ SCENE-3 · บันทึกอย่างน้อย 4 ตัว
+     ตัวละบรรทัด: ชื่อ · เลข `LV` · **สีป้ายชื่อ** (ไม่มีสีเขียน "none") อ่านสีจากภาพเต็มเท่านั้น
+  5. ซ้ำข้อ 3-4 กับ `/warp 6` ("Columbus") และ `/warp 14` ("Hell King Kong") ·
+     ถ้าเหลือเวลา (ไม่ตัดสินใบ): `/warp 130` และ `/warp 1` เป็น negative control ที่คาดว่ายัง `LV 1`
+  6. **[คำทำนาย ไม่ใช่ผลวัด]** ช่วงเลเวลที่ mine ไว้: ฉาก 3 = 10..105 · 6 = 71..105 · 14 = 1..115 ·
+     ฉาก 9 มีแค่ 93/98 · ฉาก 130 มีแค่ 10/150 (ตารางเต็มในไฟล์รอบ) · เลขหลุดช่วง = finding
+- pass criteria (สองชั้น แยกกันเด็ดขาด):
+    wire/DB -- **ทำแล้วในรอบ `7ste68` ไม่ต้องรันซ้ำ**: เทสอ่านเลเวลกลับออกจาก `generation.pc` รายตัว
+      ครบ 12 ฉาก · สวีท 6624 passed / 327 skipped / 14112 subtests · ชั้นนี้พิสูจน์แค่ว่า
+      **เซิร์ฟเวอร์ส่งไบต์ออกไป** ไม่พิสูจน์สิ่งที่ไคลเอนต์วาด
+    client-observable -- **ชั้นนี้เท่านั้นที่ตัดสินใบ**: ใน >= 3 ฉากที่ warp ถึงใน login เดียว ป้าย `LV`
+      แสดงเลข **ไม่ใช่ 1** และ **ต่างกันระหว่างตัวในฉากเดียวกัน** · อย่างน้อยหนึ่งฉากที่ใช้ตัดสินต้องเป็น
+      ฉากช่วงกว้าง (3, 4, 5, 6 หรือ 14) -- ฉากค่าเดียว/สองค่าลำพังไม่พิสูจน์ว่าเป็นฟิลด์รายตัว
+      · **ผลลบมีค่าเท่าผลบวก**: ยังเห็น `LV 1` ทั้งที่ชั้น wire ผ่าน ⇒ ไคลเอนต์อ่านเลเวลจากที่อื่น
+      ไม่ใช่บิต `0x0002` ที่ `RE-117` pin ไว้ ⇒ เปิดใบ RE ใหม่พร้อมภาพนิ่ง ไม่ใช่ FAIL ของใบนี้
+      · ถูกบางฉากผิดบางฉาก ⇒ ระบุ **ชื่อฉาก** ที่พลาด อย่าตีขลุมทั้งใบ
+- nonclaims:
+  1. ไม่พูดเรื่อง **สี/ป้าย/faction/ชนิด actor** -- P-2 ยังเปิด บันทึกสีอย่างเดียว **ห้ามอนุมานสาเหตุ**
+  2. ไม่พิสูจน์เลเวลมอนสเตอร์ศัตรู (lane B ส่งมาตั้งแต่ `RE-117`) · ไม่พิสูจน์ HP/ชื่อ/พิกัด ·
+     ไม่พิสูจน์ว่า `n_LEVEL_MIN` คือเลเวลจริงต่อ spawn
+  3. ไม่ทดสอบกลไก `/warp` เอง -- ร่วมกับ `GT-192` ซึ่ง **ยังเปิดอยู่และใบนี้ห้ามแก้** · warp พังกลางทาง
+     = `NO-RESULT` ของใบนี้ และเป็นหลักฐานของ `GT-192`
+  4. ความต่างจากเซิร์ฟเวอร์จริงลง `REAL_SERVER_DIVERGENCE.tsv` · ไม่อ้างว่า PR merge แล้ว (ดู RECHECK)
+- RECHECK (ตัดสินด้วยเนื้อโค้ด ห้ามเทียบเลข commit ด้วยตา) -- ต้องได้ hit จริงจากคำสั่งนี้:
+  ```
+  cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/world_population_bg0006.py | grep -n "world_census_level.leveled_npc_attr"
+  ```
+  ว่าง/พัง = PR #524 ยังไม่ merge ⇒ ใบคง `PENDING` **ห้ามบูต** (เทส branch ก่อน merge ได้ ถ้าเปลี่ยน
+  `origin/main` เป็น `origin/claude/dazzling-volta-7ste68` แล้วเขียนในผลว่าใช้ตัวไหน)
+- links: `pirate-force-server#524` · `RE-117` · `RE-199` · `GT-192` (ห้ามแก้) ·
+  `src/pirateforce_foundation/world_census_level.py`
+- result: (ผู้เทสกรอก: PASS/FAIL/BLOCKED/NO-RESULT · หลักฐาน · timestamp · `OBSERVER_CONFIRMED` ตาม G-OBS)
+
+**ผู้เปิดใบ: LANE-A รอบ `7ste68` 2026-09-02T01:55+07:00 -- LANE-A บริโภคผลใบนี้เอง**
