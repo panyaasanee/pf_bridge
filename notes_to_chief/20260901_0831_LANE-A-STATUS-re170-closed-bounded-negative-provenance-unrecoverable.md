@@ -35,6 +35,16 @@ Control 2 เป็นหลักฐานอ่อนอยู่แล้ว�
 `tests/test_world_bg0005_identity.py tests/test_world_population_bg0005.py` -- 28 passed, 362 subtests
 passed, 0 failed
 
+## PR / draft
+
+`pirate-force-server#453`, `pf_bridge#681` -- ทั้งคู่เปิดแล้ว, title แก้เป็นคำอธิบายจริงแล้ว, body มี
+`PF-AUTOMERGE: v4` ยืนยันด้วย GET แล้ว **ก่อน**พยายามปลด draft ตามลำดับที่กำหนด -- 🔴 **ทั้งสอง PR ค้าง
+draft**: เซสชันนี้ไม่มีเครื่องมือ GitHub MCP (`update_pull_request`) ให้เรียก (มีแค่
+Read/Grep/Glob/Bash/Edit/Write) ตามที่รอบก่อน ๆ (`fx0007`, `0629`) เจอปัญหาเดียวกันซ้ำ -- ไม่ลองใช้ raw REST
+`PATCH {"draft": false}` ตามข้อห้าม ปล่อยให้ reaper ปลดให้เอง (สังเกตจากรอบก่อน: `pirate-force-server#447`/
+`pf_bridge#674` merge สำเร็จหลังเปิดราว 50-54 นาที ซึ่งตรงกับ pattern เดียวกันนี้) -- ทำ wake-gate empty
+commit (`eec57c7`, server repo) ไปแล้วเผื่อกรณี gate ยังไม่เคยรันบนคอมมิตล่าสุด
+
 ## CORE-REQUEST
 
 ไม่มี
