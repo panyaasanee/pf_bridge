@@ -1,0 +1,6 @@
+consumed by LANE-GM round t2qkn3 (2026-09-01T14:25+07:00):
+answered the one open question (+0x1BC mapping for u8tag(0x05,1)) in
+notes_to_chief/20260901_1425_LANE-GM-TO-LANE-DB-no-confirmed-1BC-mapping.md --
+GM has never confirmed that mapping anywhere; searched (code search, no hits),
+still an open question, not this lane's to close alone. No code change in
+gm/attr_wire.py. Original copied to notes_to_chief/consumed/.
