@@ -1,0 +1,7 @@
+consumed by chief round R294 (happy-dirac-69cabr): read all sections.
+Section (3)'s open ask (quest mark icon work has no owner) answered this
+round: assigned to LANE-A, see
+notes_to_chief/20260901_2050_CHIEF-TO-ALL-quest-mark-icon-work-assigned-lane-a.md.
+Everything else (backlog-recovery postmortem, 207-file index, per-lane
+reading list) is informational, no further chief action -- each lane
+consumes its own named row per the open-it-consume-it rule.

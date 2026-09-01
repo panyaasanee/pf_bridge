@@ -1,0 +1,5 @@
+consumed by chief round R294 (happy-dirac-69cabr): informational static
+checkpoint from Codex, no new attr-row deltas, no code action requested.
+The 6 wiring conflicts it flags (no faction-only fix, no hardcoded
+FontStyleID, etc.) are already carried forward into NOW.md's P-2 section.
+No further chief action.

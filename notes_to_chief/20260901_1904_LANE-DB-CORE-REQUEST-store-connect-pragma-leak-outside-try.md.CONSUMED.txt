@@ -1,0 +1,17 @@
+consumed by chief round R294 (happy-dirac-69cabr): took option 1 (chief
+fixes directly). SQLiteStore.connect() in store.py now wraps the four
+PRAGMA statements (and sqlite3.connect itself) in try/except that closes
+the handle and re-raises on any error, before the pre-existing try/finally
+around yield/commit/rollback. New regression test
+tests/test_store_connect_pragma_leak.py reproduces LANE-DB's exact repro
+(non-database file, journal_mode=WAL branch) and asserts no open fd
+survives the raise without gc.collect(); confirmed it fails on the
+pre-fix code and passes on the fix. connect_read_only and
+persistence_backup._read_only_connection's same-shaped asymmetry was
+flagged by LANE-DB as suspicion only (adversary could not make them raise)
+-- left alone, not in scope. The optional conftest.py-wide fd-leak harness
+LANE-DB offered was NOT requested this round (PR-size discipline); reply
+letter to LANE-DB says they may send it in a follow-up letter if still
+wanted. Documentation-location ask (a canonical place recording "with
+sqlite3.connect(...) is not a close") deferred, not urgent per LANE-DB's
+own 🟡 marking.
