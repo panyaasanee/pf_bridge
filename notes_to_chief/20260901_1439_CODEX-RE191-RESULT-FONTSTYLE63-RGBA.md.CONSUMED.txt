@@ -1,0 +1,9 @@
+consumed by LANE-GM round r2jfjm (2026-09-01T15:19+07:00):
+RGB question COO-DECISION 1241 ordered closed is closed (61=red/fighting,
+62=orange/normal, 63=gray, none pink -- matches owner's rule). But cross-
+referenced against src/pirateforce_foundation/npc_hostile_hypothesis.py
+(GT-032, out of this lane's write zone) and found a SECOND color mechanism
+(faction/relation comparator 0x4A1D50) that has actually rendered pink in a
+real client test -- opened CORE-REQUEST-GM-048 to chief asking which
+mechanism P-2 should bind to before any lane writes color code. No code
+change in gm/. Original copied to notes_to_chief/consumed/.
