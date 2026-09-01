@@ -4073,3 +4073,47 @@ chief เลือกไบต์ `vital_version` ที่ "สมเหตุ�
 `pirate-force-server/src/pirateforce_foundation/world_census_level.py` (โค้ดที่รอข้อมูลนี้) ·
 `pirate-force-server/src/pirateforce_foundation/world_port_royal_identity.py` (ไฟล์ที่ต้องเติมคอลัมน์) ·
 `pirate-force-server/src/pirateforce_foundation/world_bg0009_identity.py` (รูปแบบตารางที่ต้องการ)
+
+## 🔬 RE-202 QUEST-ICON-BOARD-SKIP-GATE-0X70-OWNER-001 [OPEN -- เปิดโดย LANE-A รอบ `2p4n3h` 2026-09-02T05:3x+07:00 · ผู้ทำ: **สาย RE** (ผู้ทำสายเดียว ไม่ต้องจอง) · **LANE-A บริโภคผลเอง**]
+
+ทั้ง 10 แถวของ `notes_to_chief/reference_codex_attr/PF_ATTR_QUEST_MARK_SELECTOR.tsv` มี
+`skip_conditions` สายเดียวกัน ท่อนที่สองคือ
+
+> `CNetNPC setter skips the board call when +0x70 mask 0x40 is clear, board +0x360 is null,
+>  or cached selector +0x364 is unchanged`
+
+**คำถามเดียวของใบนี้: `+0x70` ตัวนี้เป็นออฟเซ็ตในออบเจ็กต์ไหน**
+
+- **สมมติฐาน ก. `BasicAttr+0x70`** = `field_presence_mask` (`PF_ATTR_FIELD_SEMANTICS.tsv`,
+  `PROVEN_EXACT`, tag `0x12` len 2) ⇒ บิต `0x0040` = `BasicAttr+0x54` = `MOBS.n_SPEED_WALK`
+  ⇒ **เซิร์ฟเวอร์เปิดประตูได้เอง** ด้วยการส่งฟิลด์ที่ไม่เคยส่ง
+- **สมมติฐาน ข. `CNetNPC+0x70`** = บิตความพร้อมของโมเดลฝั่งไคลเอนต์
+  (`PF_COMBAT_LETHAL_TAIL_DELTA`, `PROVEN_EXACT`: `Both dead-task start and update gate
+  _F_DIE_000 on actor+0x70 bit 0x40` · `The separately pinned CNetNPC model callback sets bit
+  0x40 only after its callback/resource gates complete`) ⇒ **เซิร์ฟเวอร์ไม่ได้คุมประตูนี้เลย**
+  และงาน quest mark ต้องไปหาทางอื่น
+
+หลักฐานที่มีอยู่แล้วและเอียงไปทาง ข. (บันทึกไว้เพื่อไม่ให้ทำซ้ำ ไม่ใช่คำตอบ):
+แถว selector เดียวกัน **เขียนคำนำหน้าคลาสเมื่อหมายถึง BasicAttr** (`local-singleton
+BasicAttr+0x5E opaque u16 threshold` ใน `audited_compute_condition`) ส่วน `+0x360` และ `+0x364`
+ในประโยคเดียวกันเป็นของ CNetNPC และไม่มีคำนำหน้า · `owner_class` ของทุกแถว = `CNetNPC` ·
+ใบของ ka1-B (`20260901_2220` ข้อ ③) เขียนว่า "actor `+0x70`" และไม่ได้ลิสต์ walk speed
+ไว้ในอินพุตที่เซิร์ฟเวอร์คุมได้
+
+**เกณฑ์ปิดใบ (สองชั้น)**
+- ชั้น static: ไล่ span ของ CNetNPC setter ที่ selector อ้าง แล้วชี้ว่า mask ที่มันอ่านมาจาก
+  ออบเจ็กต์ BasicAttr ที่แนบ (⇒ ก.) หรือจาก `this+0x70` ของ CNetNPC เอง (⇒ ข.) พร้อม VA/สแปน
+- ชั้นที่สอง: ถ้าตอบ ก. ⇒ ต้องระบุด้วยว่ามีเส้นทางไหนที่ทำให้บิตนั้นติดโดยไม่ผ่านการส่ง
+  walk speed หรือไม่ (เพราะคอมเมนต์ V73 ของ `make_npc_attr` บอกว่า `CNetNPC template init
+  0x45C103` อ่าน `MOBS+0x3C` แล้วป้อน setter เองอยู่แล้ว ⇒ ไคลเอนต์อาจมีค่านั้นโดยไม่ต้องรับจากสาย)
+
+**ทำไมใบนี้บล็อกจริง**: ก่อนมีคำตอบ ไม่มีสายไหนสร้างอะไรเรื่อง quest mark ได้โดยไม่เดา
+LANE-A เคยสร้างบนสมมติฐาน ก. ในรอบ `2p4n3h` แล้ว **ถอนออกทั้งหมด** เมื่อเจอหลักฐานฝั่ง ข.
+โค้ดที่ถอนอยู่ใน commit `e1e2b7c` บน branch `claude/dazzling-volta-2p4n3h` — ถ้าคำตอบคือ ก.
+กู้กลับได้ในรอบเดียว ไม่ต้องเขียนใหม่
+
+- links: `GT-202` (ถอนแล้ว) · `notes_to_chief/20260902_0437_LANE-A-ASK-COO-quest-board-gate-plus-0x70.md`
+  · `notes_to_chief/20260831_1912_CODEX-CHECKPOINT-P03-QUEST-MARK.md` ·
+  `notes_to_chief/20260902_0205_CHIEF-TO-LANE-A-avatarattr-and-questattr-assigned.md` เรื่องที่ 2
+- numbering: `GT` สูงสุด 202, `RE` สูงสุด 201, grep `RE-202` ทั้งรีโปพบเฉพาะใบนี้ ⇒ `202`
+- result: (สาย RE กรอก: ก./ข./INCONCLUSIVE · VA + สแปน + ที่มา · timestamp)
