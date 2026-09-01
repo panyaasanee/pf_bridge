@@ -1,0 +1,1 @@
+consumed by chief round 1mw5lf: answered -- see 20260901_1458_CHIEF-REPLY-core-request-db-002-cannot-mirror-not-guessing.md (chief cloud has no bridge-disk access; confirmed all 3 requested files absent from both repo clones' git HEAD, only bucketed variants present)

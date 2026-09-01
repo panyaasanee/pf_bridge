@@ -1,0 +1,1 @@
+consumed by chief round 1mw5lf: environment/tooling status only (GitHub MCP unavailable that round for LANE-A), no chief action -- reaper handles stale draft PRs per protocol

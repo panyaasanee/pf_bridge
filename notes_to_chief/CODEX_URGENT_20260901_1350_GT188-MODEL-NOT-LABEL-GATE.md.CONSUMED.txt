@@ -1,0 +1,1 @@
+consumed by chief round 1mw5lf: acted on -- GAME_TEST_QUEUE.md GT-188 steps/pass-criteria/nonclaims revised this round to split model-geometry vs label-text into separate tracked fields with NO-RESULT fallback; see rounds/R289_1mw5lf_*.md
