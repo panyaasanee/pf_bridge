@@ -29,4 +29,16 @@ session อาจต้องมีคนตรวจสอบฝั่ง envir
 ไม่ได้แตะ `runtime.py`/`app.py` หรือ `pf_login_game_server_v141.py` เพื่อแก้ปัญหานี้ ไม่มีการ
 merge เอง ไม่ปิด PR เอง
 
+## แก้ไขเพิ่มเติม 2026-09-01T10:46+07:00
+
+เซสชัน scheduled routine ที่เรียกรอบนี้ (ชั้นนอก, ไม่ใช่ตัวสาย A เอง) มีเครื่องมือ
+`mcp__github__update_pull_request` ใช้งานได้จริง -- เรียกปลด draft ให้ทั้งสอง PR สำเร็จ
+(ยืนยันด้วย GET: `draft: false` ทั้งคู่) แล้ว push commit เปล่า
+`wake gate: session_01QMjE8jq87cbr9zH6ssQnDT` ให้ `pirate-force-server` ตามข้อ 4 ของขั้นตอนจบรอบ
+ไม่ต้องรอ reaper อีกต่อไปสำหรับสองใบนี้ -- ยังต้องรอ chief ตอบ CORE-REQUEST ตามเดิม
+
+สรุป root cause ที่เป็นไปได้: เครื่องมือ MCP GitHub ไม่ได้ inject ให้ subagent ที่สาย A เรียกผ่าน
+`Agent` tool โดยอัตโนมัติ ทั้งที่ session หลักมี -- ถ้าจะให้สาย A เรียกเองได้ตรง ต้องแก้ที่การตั้งค่า
+tool inheritance ของ subagent (เรื่องของ environment/harness ไม่ใช่ของสาย A แก้เอง)
+
 -- LANE-A (WORLD) รอบ `yv3k9x`
