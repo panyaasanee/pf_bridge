@@ -71,6 +71,10 @@
 **🔬 งาน static — ทำเมื่อไรก็ได้ ไม่ต้องมีคนเฝ้า ไม่ต้องจับ `LOCK_GAME` · ขนานกับรอบเทสเกมได้:**
 - ใบเก่าในไฟล์นี้: `GT-047` (🟠 จ็อบ 0 ปิดแล้ว 09:16 — source เข้ามือ chief · **R144 ส่ง patch การ์ด `field_offset` กลับแล้วที่ `patches/gt047/` (เขียว 8 ด่านบน cloud) · เหลือฝั่งสะพาน apply patch แล้ว rerun จ็อบ 1–3**) · `GT-049` (✅ **PASS/DONE — ผลหน้าสะพาน 2026-08-24 09:23 · บันทึก R144:** id 131 ยิงจาก **inbound** `ItemOperateVitalRes` handler `0x005EF5E0` → chat emitter `0x005CC309` — คนละเลนกับ `PickupTerrainThing` 0x1F/0x03/0x22 ของ GT-046 ⇒ **บรรทัดลูทสีเขียว = เซิร์ฟเวอร์ตัดสินการเก็บ** — ดีไซน์เลนลูทฝั่งเราต้องส่ง `ItemOperateVitalRes` เอง)
 - 🆕 ใบใหม่ตั้งแต่ R128 อยู่ไฟล์ใหม่ **`CLIENT_RE_QUEUE.md`** (คำสั่ง 18:22 ข้อ ③): ✅ **ปิดแล้ว 3 ใบ (ผลหน้าสะพาน 2026-08-24 ~00:3x–00:4x +07:00 · บันทึก R135):** `GT-054` PASS (spans **392/392** ตรงอิมเมจ · mismatch 0) · `GT-053` PASS (**N=106 ≥ 61 ⇒ `0x203D` in-band ⇒ H1 รอด**) · `GT-052` PASS (crosswalk class/skill ครบ · ผลลบ: ไม่พบ legend ของ `n_TARGET` ในชุดที่ค้น — ห้ามตั้ง label) — 🟡 `GT-050` **PARTIAL** (00:55: จ็อบ 1–3 ปิด · `CLearnSkillResultVital` CLOSED · direction `TriggerCastSkillVital` ชนเพดาน static — ทางต่อ observe-only attended) — ✅ `GT-055` **PASS/DONE** (ผลหน้าสะพาน 2026-08-24 02:41 · บันทึก R143: `0x36DB` = **string8** tag `0x44` · `0xAC52` = UTF-16LE tag `0x48` ⇒ parser เราผิดจริงฝั่ง `0x36DB` — แก้แล้ว: PR โค้ด #16 รอ gate ยังไม่เข้า main ณ R143) — **ที่ยังเปิดจริงในไฟล์นั้น: 0 ใบ — `RE-062` ปิด DONE โดย R152** (คำตอบ (ค): inbound ไม่เขียน `[actor+0x3E8]` — กุญแจอ่านผลลบ GT-059 · `RE-056` ปิด DONE/METHOD-FAIL · `RE-057`/`RE-058` ปิดโดย R144 · `RE-059`/`RE-060`/`RE-061` ปิดโดย R149 — ดูหัว `CLIENT_RE_QUEUE.md`) · 🔴 **บรรทัดนี้ล้าสมัยตั้งแต่ R165 — แก้โดย R166:** ที่เปิดจริงในไฟล์นั้นตอนนี้คือ **2 ใบ** — 🟢 `RE-068` ACTOR-NAMEBOARD-VALUE-034-SEMANTICS-001 (เปิดโดย R165) · 🟢 🆕 `RE-070` ORCHESTRATOR-TRANSITION-GATE-001 (เปิดโดย R166 — ทางต่อของ `GT-033` ที่ปิดเป็น ANSWERED · เป้า: ใครเซ็ต MODE `[orch+0x28]` ของ vtable `0xf45030` และ `[orch+0x24]` เป็น gate หรือแค่ display) · 🔢 **เลข 069 ไม่ว่างเพราะ `GT-069` ใช้อยู่ — ตัวนับสองคิวเป็นชุดเดียวกัน**
+  🔴 **บรรทัดบนนี้ล้าสมัยอีกครั้ง แก้โดย R298 (2026-09-02):** ข้อความ "ที่เปิดจริงในไฟล์นั้นตอนนี้คือ 2 ใบ — RE-068 · RE-070"
+  **ไม่จริงแล้ว** ทั้งสองใบ archive ปิดไปตั้งแต่ 2026-08-27 · และ **ห้ามสรุปสถานะคิว RE ด้วยมือในไฟล์นี้อีก** —
+  บล็อกสรุปที่หัว `CLIENT_RE_QUEUE.md` ที่บรรทัดนี้เคยชี้ไป ถูกย้ายเข้า archive แล้วด้วยเหตุผลเดียวกัน (มันค้าง 8 วันแล้วหลอกคนอ่าน)
+  สถานะจริงของคิว RE ตอบด้วยคำสั่งเดียวเท่านั้น: `python tools_bridge/pf_re_queue_taglint.py --list-open` (ดู `PROCESS_GATES.md` §18)
 - 📊 ค้างที่ต้องมองเห็น: ชุดส่งมอบ RE **8 ตาราง 17,618 แถว data** ผ่าน re-derive แล้ว · ✅ **โค้ดอ่านตัวแรกมาแล้ว R131** (`tools/pf_external_registry.py` · ✅ merge เข้า `main` แล้ว R133 — `1e0b20b`) · ✅ **R145: ครบ 8/8 ตารางบน `main` แล้ว** (สามใบท้ายเข้าที่ `579b468` · นับแถวจริง 519+290+11 = 820 ตรงพิน) — ไม่มีอะไรค้างรอหน้าสะพานในเลนนี้อีก (ดูหัว `CLIENT_RE_QUEUE.md`)
 
 🔴 ก่อนสั่งถอดอะไรใหม่: ค้น `pf_bridge\external\` ก่อนเสมอ — เริ่มที่ `external\00_SEARCH_HERE_FIRST.md` (คำสั่ง 18:22 ข้อ ④)
@@ -9641,7 +9645,7 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
 
 **ผู้เปิดใบ: chief รอบ `liq4ri` 2026-09-01 (cloud)**
 
-## GT-193 SPEED-COMMAND-SPARSE-X7-001  [PENDING interface -- see RECHECK]
+## GT-193 SPEED-COMMAND-SPARSE-X7-001  [PENDING interface -- DB half DONE, blocked on a VISIBLE refusal (R298) -- see RECHECK item 4]
 
 > Opened by chief per direct COO order `notes_to_chief/20260901_1642_COO-ORDER-speed-sparse-x7-chief-open-gt-entry.md`,
 > itself citing `20260901_1640_COO-ORDER-speed-sparse-x7-approved-panya-live-override-of-1447.md` (LANE-DB,
@@ -9763,7 +9767,40 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
      not the full-block `attr_wire.build_named_field_update` path `GT-183` depends on.
   3. ⬜ **NOT RUN** -- blocked on item 1 (no DB-side write to observe yet). Do not attempt until item 1
      ships.
-  4. Item 1 still failing (and item 3 therefore un-run) means the interface has not fully shipped: status
+  4. 🔴 **UPDATED R298 (`dfx8bu`, 2026-09-02T03:1x+07:00) -- items 1 and 3 are now CLOSED, and a THIRD
+     condition took their place. Read this before item 4's original text below.**
+     * item 1 ✅ **CLOSED**: LANE-DB's write path is on `main` and `_speed_action` calls it FIRST --
+       `store.write_typed_attributes_and_compose_sparse(character_id, {"speed_walk": value})`, then the
+       frame is composed from the store's READ-BACK, not from the GM's typed text. So step 6 of this
+       entry ("re-query the same persisted attribute row ... diff field-by-field") finally has something
+       to diff; before this it returned an empty diff every time and this entry could only ever have
+       graded a frame, never a memory. (LANE-GM round `hw6dix`, letter
+       `notes_to_chief/20260902_0129_LANE-GM-STATUS-speed-writes-the-row-gt193-condition-b-closed.md`.)
+     * item 3 ✅ unblocked by the above.
+     * 🔴 **THE ONE REMAINING BLOCKER, and it is not LANE-GM's:** `COO-DECISION`
+       `notes_to_chief/20260902_0147_COO-DECISION-speed-db-first-then-wire-refusal-must-be-visible.md`
+       makes a visible refusal MANDATORY -- "every time it refuses because of the DB it must answer with
+       a message in chat the GM sees immediately; SILENT IS A FORBIDDEN OUTCOME, the tester must be able
+       to tell 'typo' / 'DB rejected' / 'frame sent' apart FROM THE SCREEN".
+       **[วัดแล้ว R298]** all NINE non-success exits of `/speed` are silent to the screen: every refusal
+       returns `_Verdict(None, ...)`, `runtime.py:7513-7518` only queues an action that `is not None`, so
+       ZERO frames leave the server. `_note()` appends to an in-memory `session.events` list, `_log_outcome`
+       writes an ndjson file, `_announce_console_outcome` writes the server's stderr -- none of the three
+       is a screen the tester is looking at. Measured by running the real `make_gm_chat_command_action`
+       with the real encoder, with a success control that DID return a frame tuple.
+       ⇒ **status stays `PENDING interface`. Do NOT promote to `READY` and do NOT call the owner.**
+       Booting this today burns an attended round: she types `/speed 400`, nothing happens, and she cannot
+       tell a rejected write from a dead GM lane. Full analysis and the smallest correct wiring (it must
+       live in `gm/say_wire.py` -- `test_gm_say_gate_lock.py` forbids any other GM file from touching the
+       channel codec) is in `notes_to_chief/20260902_0311_CHIEF-REPLY-gt193-stays-pending-speed-refusal-is-silent-on-screen.md`;
+       the architectural half went to COO in `20260902_0313_CHIEF-ASK-COO-say-gate-lock-matches-module-name-not-channel-id.md`.
+       ⚠️ When that wiring lands it proves the **wire** layer only: `docs/FUNCTIONAL_COVERAGE.json:742-760`
+       (GT-009, attended) proved the client renders a **12-ASCII-character** LocalTalk message and measured
+       a 5-character one staying silent; the refusal text is 26 characters, so "the GM sees it" needs its
+       own attended entry and must never be claimed from this one.
+
+     --- original item 4 text, kept for the record: ---
+     Item 1 still failing (and item 3 therefore un-run) means the interface has not fully shipped: status
      stays `PENDING interface`. **Do not promote this entry to `READY` yet.** What changed this round: the
      wire-compose half (chat command -> sparse frame, version-gated) is on `main`, tested (17+8 new tests,
      full suite 6434/0 failed), and adversary-reviewed (pf-adversary found and a follow-up fix closed a

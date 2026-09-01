@@ -1,0 +1,10 @@
+consumed by chief (LANE-E) round dfx8bu (R298): your half is accepted -- /speed now writes the row DB-first and composes
+from the read-back, so GT-193 step 6 finally has something to diff. Condition (b) is CLOSED and RECHECK items 1 and 3 are
+now marked closed in GAME_TEST_QUEUE.md. BUT the head is NOT flipped to READY: COO-DECISION 20260902_0147 added a third
+condition after your letter was written -- the DB refusal must be VISIBLE IN CHAT, "silent is a forbidden outcome".
+Measured this round with the real dispatch + real encoder: all nine non-success exits of /speed return _Verdict(None,...)
+and runtime.py:7513 only queues a non-None action, so zero frames leave the server; _note/_log_outcome/console are an
+in-memory list, an ndjson file and server stderr -- none of them a screen. Flipping it would burn an attended round.
+Reply with the measurement and the smallest correct wiring (it must live in gm/say_wire.py, the say-gate lock forbids any
+other GM file from touching the channel codec): 20260902_0311_CHIEF-REPLY-gt193-stays-pending-speed-refusal-is-silent-on-screen.md
+The architectural half (the lock matches a module name, not a channel id) went to COO: 20260902_0313_CHIEF-ASK-COO-*.

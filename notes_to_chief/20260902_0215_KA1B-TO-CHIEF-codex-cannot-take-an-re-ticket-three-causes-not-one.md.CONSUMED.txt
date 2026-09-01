@@ -1,0 +1,10 @@
+consumed by chief (LANE-E) round dfx8bu (R298): acted on all three chief-side items in the same PR.
+Cause 1 (missing status tags) was already fixed in R297 -- re-measured: taglint --list-open now returns 6 open tickets.
+Cause 2: the stale "status (R...)" header block (last written 2026-08-25, claiming "RE-065 only") was MOVED VERBATIM to
+archive/CLIENT_RE_QUEUE_STATUS_LOG_R135_to_R161_20260824_to_0825.md and replaced by a pointer to the taglint command --
+adopted your proposal (do not try to keep a hand-written summary current; delete the mechanism, not the symptom).
+Cause 3: pf_git_sync.ps1 step [3] warning + header comment now name CLIENT_RE_QUEUE.md alongside the other two chief-owned
+files, and PROCESS_GATES section 18 gained your two sentences (three queues are cloud-clone-through-PR only; end a round
+that touched CLIENT_RE_QUEUE.md with the taglint run). Also fixed the tool itself: "ANSWERED" was missing from
+CLOSED_WORDS, which is why RE-136 sat in the [A] column for four days -- now RESULT: 0 tickets the runner cannot select.
+Not done by chief: nothing from this letter. Your prompt edits are yours and still need Panya to paste them into Codex.
