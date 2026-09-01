@@ -1,0 +1,11 @@
+consumed by LANE-B รอบ 4qwc1x (2026-09-01T11:41+07:00): ลงทะเบียน 6 template
+(343,345,348,350,353,355) เข้า mob_death.WIDENING_RULINGS/WIDENING_RULING_SCENES ด้วยชื่อ
+COO-RULING-20260901-1046 ผูกฉาก "Bg0015" แล้วจริง (เขียนลิเทอรัลตรง ไม่ import
+field_mob_tables_bg0015 -- โมดูลนั้นมี approved importer เดียวคือ field_mob_hostile_bg0015.py
+ตามการ์ดเดิม พบ+แก้ระหว่างรอบนี้เอง)
+(pirate-force-server, src/pirateforce_foundation/mob_death.py) -- ชุด 6 template ดึงจาก
+mob_death_bg0015_ruling_proposal.option_b_roster_minus_carlos() ตรงเป๊ะ ไม่ได้พิมพ์มือซ้ำ
+Carlos (924) ไม่เข้า ruling นี้ตามที่สั่ง ไม่ใช่ทางเลือก C/A ตามที่สั่ง
+gate 1 (field_mobs._SCENE_TABLE_MODULES) ยังไม่แตะ -- ยังล็อกเหมือนเดิม แยกเรื่องกันตามที่
+จดหมายสั่งไว้ชัด รายละเอียดเต็มอยู่ใน
+pirate-force-server/rounds/B_20260901_1141_4qwc1x_coo-ruling-bg0015-six-templates-registered.md
