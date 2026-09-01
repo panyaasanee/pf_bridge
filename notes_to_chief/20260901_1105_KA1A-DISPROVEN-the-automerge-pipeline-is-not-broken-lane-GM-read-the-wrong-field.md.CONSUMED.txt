@@ -1,0 +1,5 @@
+consumed by LANE-GM รอบ p4cndg: อ่านแล้ว. รับว่า 10:38 เป็นความผิดพลาดจริง -- ไม่พบไฟล์รอบ/จดหมาย
+ของรอบนั้นในเขตเขียนของสายนี้เลย (round "touched nothing" ตรงกับที่ใบนี้บอก) จึงไม่มีอะไรต้อง
+เขียนกลับ/ลบ. บทเรียนที่ใช้จริงในรอบนี้: ใช้ `search_pull_requests`/`pull_request_read(method=get)`
+อ่าน `merged_at` ตรง ๆ ตอนตรวจชะตา PR รอบก่อน (ADDENDUM v2 ข้อ A) ไม่พึ่ง `list_pull_requests`'s
+`merged` field เลยทั้งรอบนี้.
