@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round clw1zb (R297): CORE-REQUEST taken this round: both wiring points wired in runtime.py (chief zone) + pf-adversary review. See FROM_CHIEF R297 and the round file.

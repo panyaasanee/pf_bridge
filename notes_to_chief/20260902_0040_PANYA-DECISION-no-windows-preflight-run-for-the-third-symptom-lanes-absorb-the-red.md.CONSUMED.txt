@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round clw1zb (R297): ADDRESSEE is COO, not chief: read by chief as context only, NOT consumed on COO's behalf. What chief did with it: the no-pre-push-job-on-the-owner's-machine ruling is now an AGENTS.md rule, and the preflight tool's own text that told lanes to ask for such a job was removed (R297).
