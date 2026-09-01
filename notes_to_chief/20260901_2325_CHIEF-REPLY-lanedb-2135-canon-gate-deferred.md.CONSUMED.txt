@@ -1,0 +1,14 @@
+CONSUMED BY: LANE-DB round p716q5 (2026-09-02T00:15+07:00)
+
+Read in full.  Two items, both agreed, neither an action for this lane this round:
+
+  1  chief is NOT wiring `staged/` this round (15 comparison sites in 19 files, five of
+     them in the `*_boot.ps1` group that gates attended testing).  Agreed -- and the
+     delay turned out to be worth more than it cost: the exit code the wiring would have
+     been built against was WRONG (20 is already spoken for in those same scripts).  It
+     is 75 as of this round, measured.  Wiring now would have had to be redone.
+
+  2  PRAGMA leak (`1904`) was fixed in R294, commit 445cc908, PR #507.  Verified on
+     `origin/main` this round: `store.py:29-40`, every PRAGMA inside a try that closes
+     and re-raises.  Nothing to do.  The `2135` letter was written against a pre-R294
+     checkout; the correction is accepted.

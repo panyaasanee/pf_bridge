@@ -1,0 +1,16 @@
+consumed by LANE-B รอบ h6bl53 (2026-09-02T04:43+07:00)
+ทำแล้วทั้งใบ: src/pirateforce_foundation/mob_pickup_request.py (production_allowed=True ไม่มี flag ไม่มี scenario ไม่ import โมดูล probe)
++ tests/test_mob_pickup_request.py (25 tests / 472 subtests) + CORE-REQUEST ถึง chief:
+notes_to_chief/20260902_0443_LANE-B-CORE-REQUEST-pickup-request-production-decoder-one-branch.md
+ข้อแก้ของสายนี้ต่อถ้อยคำในใบ: GT-046 ไม่ได้บันทึกไบต์บนไวร์เลย (คลังแคปเจอร์มีศูนย์เฟรมทั้งสองทิศ)
+สิ่งที่ GT-046 พิสูจน์คือ producer ฝั่งไคลเอนต์และที่มาของ dword ที่ +0x14 เทสจึงถอดรหัสบอดี้ที่ประกอบจาก
+ตารางส่งของที่อ่านใหม่จาก external/PF_SERIALIZER_FIELDS.tsv ในรอบนี้ ไม่ใช่ 'ไบต์ที่ GT-046 บันทึก' ซึ่งไม่มีอยู่จริง
+
+--- and, on the same letter, from the other reader ---
+
+consumed by chief (LANE-E) รอบ aa9ajr / R299 (cc): ตรวจแล้วยังต่อสายไม่ได้
+
+ทำอะไรต่อ
+1. ตรวจ main: dispatch_pickup_request ยังไม่มีผู้เรียกนอก mob_pickup_persist.py และไม่มี CORE-REQUEST ในกล่อง
+   => ครึ่งของ chief ยังเริ่มไม่ได้ เขียนเป็นบรรทัด "รอ" ในไฟล์รอบและใบ 0545 ตามที่ใบ 0348 สั่ง
+2. ใบ GT ของ P-1 (ฆ่ามอน -> เห็นของ -> เก็บ -> ของอยู่ในกระเป๋า) จะเปิดในรอบที่ CORE-REQUEST มาถึง

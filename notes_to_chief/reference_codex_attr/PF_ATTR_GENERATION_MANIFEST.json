@@ -1,6 +1,6 @@
 {
   "artifact_count": 48,
-  "artifact_root": ".pf_attr_generations/d5eeb9313ae32ef3fe6d4f9b0bf124a6ca5efa221616f50bb67645a9f1b5655d",
+  "artifact_root": ".pf_attr_generations/4b02f45a71046e1b13761f4d9e10472d6c653a4f10f2a328f87bf47080ad97ae",
   "artifact_sizes": {
     "PF_A2_ACHIEVEMENTS_CODEC_CORRECTION.tsv": 430547,
     "PF_A2_ACTOR_CODEC_CORRECTION.tsv": 44883,
@@ -25,7 +25,7 @@
     "PF_ATTR_CLASS_CENSUS.md": 1972,
     "PF_ATTR_CLASS_CENSUS.tsv": 120388,
     "PF_ATTR_COMPUTED_SEMANTICS.tsv": 22731,
-    "PF_ATTR_CONFLICTS.tsv": 3531500,
+    "PF_ATTR_CONFLICTS.tsv": 3531510,
     "PF_ATTR_CONTAINER_SEMANTICS.tsv": 136417,
     "PF_ATTR_DATA_BINDINGS.tsv": 53723,
     "PF_ATTR_FIELD_SEMANTICS.md": 8813,
@@ -49,7 +49,7 @@
     "PF_GROUND_DROP_TRANSPORT.md": 2779,
     "PF_GROUND_DROP_TRANSPORT.tsv": 26924,
     "PF_MONSTER_PRESENTATION.md": 16783,
-    "PF_MONSTER_PRESENTATION.tsv": 21059779
+    "PF_MONSTER_PRESENTATION.tsv": 20875512
   },
   "artifacts": {
     "PF_A2_ACHIEVEMENTS_CODEC_CORRECTION.tsv": "7a01bfa1fc24bdedafa14586eb581464e6e1bcce49708e42d911d2e13f67095c",
@@ -75,7 +75,7 @@
     "PF_ATTR_CLASS_CENSUS.md": "109e3306416b6671fe09e0e2296a93d8a830e4d33111aab573e5290f6adcc242",
     "PF_ATTR_CLASS_CENSUS.tsv": "82b02f402005ba7b1d51a97e0eaba2bc89dcfdf884d91ecd61bd3542972efa11",
     "PF_ATTR_COMPUTED_SEMANTICS.tsv": "6813a941d672a54f3f2b75d2aaf2715812d713a855f4c18d10ceed0fb8509c8a",
-    "PF_ATTR_CONFLICTS.tsv": "7f2eb251bb2eec5af2a567e4016df508059c4de08f5575e42794d0c59aab8c1c",
+    "PF_ATTR_CONFLICTS.tsv": "4ddf998c76f5c5bd566f8a2c8bc15997b59dd39950eddc84454b8bdccf88fbaa",
     "PF_ATTR_CONTAINER_SEMANTICS.tsv": "e58e6e9b3b7df7089336ab0f7df042079be0266be3938da5da63708fa98282f1",
     "PF_ATTR_DATA_BINDINGS.tsv": "67e7550a09b00a5243f4c084ff486d29e420c6d0687704a092f157dbce219cb2",
     "PF_ATTR_FIELD_SEMANTICS.md": "ada47b2ab5f530f26d33eca406fa22cb985922d96b7d731bdea59b7c2b313104",
@@ -93,21 +93,21 @@
     "PF_ATTR_SEMANTIC_DELTA.tsv": "ea93b4c5b7699315c78d643fbfbab385ee012b95bd073f269ced3a545ef07c13",
     "PF_ATTR_SEMANTIC_REPORT.md": "f52f528abdcb19ed5cc0e0ab8d5666b62f3359dbeb8e4c98b8170b9c500258b7",
     "PF_ATTR_UI_BINDINGS.tsv": "36b2e0390b55e3089cdfbcc0cc1215e2bc096d11fe2185164b0d8a148409f91c",
-    "PF_ATTR_UNRESOLVED.tsv": "32e47039088770764650ca97f1d57b9744a59160912af5134628383b7d92a4f7",
+    "PF_ATTR_UNRESOLVED.tsv": "22f04945749e385d4220f2401924f3834daad59b7cadd76453ff344d0e6f743d",
     "PF_COMBAT_LIFECYCLE.md": "32d20f8fc8ed66e64644efd55fe1de34c5a0d32cadc0c84aa01c1d5d1f3feacb",
     "PF_COMBAT_LIFECYCLE.tsv": "305b7bdc12e9b638e3c3f37f996af8bb0e2d1877241aaf171885b8fae106b658",
     "PF_GROUND_DROP_TRANSPORT.md": "e2b1b90efcd63cfb6878f47937a466424d872809599a04718c75e6d7940c38c5",
     "PF_GROUND_DROP_TRANSPORT.tsv": "9e2396795ee32287f1f9b82f22fb8f394464d2b0a25375d07108ee138c73907b",
     "PF_MONSTER_PRESENTATION.md": "2a2a6990bb28cdff5c3a2c1791852f992ec020db15c70f9ab6f929c42a8be282",
-    "PF_MONSTER_PRESENTATION.tsv": "6c452e3da3be521bc82219af97186fda3ec0f6368f1cb34defbb95fb2184cd8b"
+    "PF_MONSTER_PRESENTATION.tsv": "658ae9352da2e45c1cd5306851dd7bbe8271dabe5cef3728ce223df31193722c"
   },
   "authoritative_reader": "pf_attr_checkpoint_reader.py",
   "authoritative_reader_sha256": "5c3a472d1965547adeda4642bebe17e469b71f8380a20ae58aefe221276af6b0",
   "compatibility_mirrors_authoritative": false,
   "format": "PF_ATTR_GENERATION_MANIFEST_V4",
-  "generation_id": "d5eeb9313ae32ef3fe6d4f9b0bf124a6ca5efa221616f50bb67645a9f1b5655d",
-  "generator_sha256": "15306d3f692ebe74355ed56e12767650bea208ed502e33c43f621bef95ff5237",
-  "generator_snapshot": ".pf_attr_generator_snapshots/15306d3f692ebe74355ed56e12767650bea208ed502e33c43f621bef95ff5237/pf_rederive_attr_semantics.py",
+  "generation_id": "4b02f45a71046e1b13761f4d9e10472d6c653a4f10f2a328f87bf47080ad97ae",
+  "generator_sha256": "c7d6c560f0848b3eb0edc34bb147a66d5c3fc1661ed0d88fb9c4065ca0a7528c",
+  "generator_snapshot": ".pf_attr_generator_snapshots/c7d6c560f0848b3eb0edc34bb147a66d5c3fc1661ed0d88fb9c4065ca0a7528c/pf_rederive_attr_semantics.py",
   "image_sha256": "9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623",
   "publication_rule": "resolve artifact_root and parse the same verified in-memory bytes; top-level artifact mirrors are non-authoritative"
 }

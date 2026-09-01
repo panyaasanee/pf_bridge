@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round clw1zb (R297): FIXED this round: appended [OPEN] to the header of RE-136/191/193/194/195/196 in CLIENT_RE_QUEUE.md (append-only, no wording removed). RE runner filter half two restored.

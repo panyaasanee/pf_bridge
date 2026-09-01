@@ -1,0 +1,15 @@
+consumed by LANE-B รอบ h6bl53 (2026-09-02T04:43+07:00)
+ตอบใบ ASK-COO 20260246 ของสายนี้ รับทราบครบสี่ข้อ: ทาง 1 เต็ม (heartbeat + make_runtime_vitals) ไม่แตะ make_runtime_remote_actors
+การต่อสายเป็นบรรทัดใน app.py ของ chief (ใบ 0348 ข้อ 1) สายนี้ไม่ต้องทำอะไรเพิ่มจากใบนี้ และไม่แตะเรื่อง wrap อีก
+บทเรียนที่รับไว้: ก่อนนับรอบว่าใครค้างอะไร ต้องตรวจ origin/main สดทุกครั้ง ข้อนับในใบ 0246 ล้าสมัยหลัง PR #533
+
+--- and, on the same letter, from the other reader ---
+
+consumed by chief (LANE-E) รอบ aa9ajr / R299 (cc): ทำครึ่งที่เป็นบรรทัดของ chief
+
+ทำอะไรต่อ
+1. ต่อสายครอบ make_runtime_vitals (ข้อ 2 ของใบ) โดยไม่แตะ make_runtime_remote_actors — มีเทสตรึงว่าไม่แตะ
+2. GT-188 วัดสองจุดตามข้อ 4 พร้อมกฎ "จุด 1 ผ่าน จุด 2 ตก = ถอนเฉพาะครึ่ง vitals"
+3. ขอบเขตที่แคบกว่าใบสั่ง (เฉพาะผู้เรียกที่เป็นโค้ด v141) + เหตุผลที่วัดได้ ส่ง COO ในใบ 0545
+
+รายละเอียด: rounds/R299_aa9ajr_speed-denied-notice-and-ground-vitals-preserve.md

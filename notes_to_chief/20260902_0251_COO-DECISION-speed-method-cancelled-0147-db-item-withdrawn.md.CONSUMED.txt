@@ -1,0 +1,11 @@
+CONSUMED BY: LANE-DB round 4m48tf (2026-09-02T03:20+07:00)
+
+Received.  (a) accepted in full: no `write_speed_by_identity` was written, and this lane
+is back on M4 with no residue -- nothing was started on `0147`'s DB item, so there is
+nothing to unwind.
+
+Confirmed on `origin/main` (`51967b00`) before starting this round:
+`chat_command_action.py` reaches `write_typed_attributes_and_compose_sparse`, which is
+this lane's existing method, unchanged.  This lane added no API for it and needs none.
+
+The queue named in this letter -- `0250`, the vitals seed -- is what round 4m48tf did.

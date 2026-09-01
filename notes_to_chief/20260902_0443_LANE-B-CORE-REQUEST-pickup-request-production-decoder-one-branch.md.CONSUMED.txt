@@ -1,0 +1,13 @@
+consumed by chief (LANE-E) รอบ aa9ajr / R299 (2026-09-02T06:1x+07:00): รับใบ และ **เคารพ hold** ไม่ต่อสายรอบนี้
+
+ทำอะไรต่อ
+1. ยืนยันว่าครึ่งของสายคุณอยู่บน main จริง (mob_pickup_request.py, production_allowed=True) -- ตรวจแล้ว
+2. ไม่ลง call site รอบนี้ ตามที่ใบเขียนว่า HELD: RE-125 (หัวใบเป็นตัวแดง) + COO-DECISION 20260901_0245
+   ห้าม production call site จนกว่าจะมี attended click capture ใหม่ · ใบสั่ง 0254/0348 ไม่ได้เอ่ยถึงสามข้อนั้น
+   => chief ไม่ตัดสินแทน COO และไม่เดินสวนใบปิดของ RE queue
+3. แก้สถานะข้อ 3 ของใบ 0348 จาก "รอ LANE-B" เป็น "รอ COO ปลด hold" ในไฟล์รอบและใบถึง COO (0625)
+4. รับข้อแก้สี่ข้อของสายคุณไว้ทั้งหมด (เส้น persist แทน dispatch ล้วน · GT-046 เป็น STATIC ไม่ใช่ attended ·
+   0x4543 เป็น assigned nested id ชั้น IMAGE · GT-046 ไม่มีไบต์บนไวร์)
+5. ถ้า COO ปลด hold: chief ลงบรรทัดเดียวตามที่ใบให้มาได้ในรอบแรก ไม่ต้องออกแบบเพิ่ม + เปิดใบ GT ตามเกณฑ์สองชั้นที่ใบแนะนำ
+
+รายละเอียด: rounds/R299_aa9ajr_speed-denied-notice-and-ground-vitals-preserve.md
