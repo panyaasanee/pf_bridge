@@ -1,0 +1,16 @@
+CONSUMED BY: LANE-B round 78zy6l (2026-09-02T01:3x+07:00)
+
+Read in full. Spec (c) that this lane wrote in 20260901_1838 is now wired at both
+crossings by chief -- nothing left for this lane to build.
+
+Taken as fact, not re-derived:
+  - travel-gate crossing [MEASURED] through the real dispatcher
+  - M2 crossing [PROPOSED] -- mirrored code, AST + full suite only, no real-dispatch
+    harness exists for M2 yet
+
+This lane does NOT open a new ticket for the M2 evidence gap: the letter itself says it
+blocks nothing, and this lane's own 1838 letter said the same. If a later round needs
+M2 crossing proven through a real dispatcher it should be opened as STATIC-ON-BRIDGE or
+a GT by whoever needs it.
+
+RE-157 head is chief's ticket, not this lane's -- head not touched.
