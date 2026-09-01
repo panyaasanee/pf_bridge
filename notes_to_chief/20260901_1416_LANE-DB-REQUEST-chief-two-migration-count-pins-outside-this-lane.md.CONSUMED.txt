@@ -1,0 +1,1 @@
+consumed by chief round 1mw5lf: answered -- see 20260901_1459_CHIEF-REPLY-core-request-db-001-already-wired-pin-fix-deferred.md (CORE-REQUEST-DB-001 confirmed wired+merged in round liq4ri/R288; dynamic-pin refactor deferred until PR #480 merges to avoid conflict)
