@@ -177,6 +177,42 @@ def family_of(kind):
     return "E_OTHER"
 
 
+def snapshot_audit_report():
+    """Keep an immutable copy of the audit report before Codex overwrites it.
+
+    Mirrors what the scheduled task does by hand, so a skipped or forgotten
+    step never costs a version.  No-op when the bytes match the newest copy
+    already in audit_history/.
+    """
+    if not os.path.exists(AUDIT_SRC):
+        return
+    hist = os.path.join(os.path.dirname(BRIDGE), "audit_history")
+    if not os.path.isdir(hist):
+        os.makedirs(hist)
+    with open(AUDIT_SRC, "rb") as fh:
+        data = fh.read()
+    existing = sorted(os.listdir(hist))
+    if existing:
+        with open(os.path.join(hist, existing[-1]), "rb") as fh:
+            if fh.read() == data:
+                return
+        for name in existing:
+            with open(os.path.join(hist, name), "rb") as fh:
+                if fh.read() == data:
+                    return
+    gen = "unknown"
+    try:
+        with open(MANIFEST, "r", encoding="utf-8") as fh:
+            gen = json.load(fh).get("generation_id", "unknown")[:12]
+    except Exception:
+        pass
+    name = ("Pirate_Force_Codex_Audit_Recommendations.%s_%s.byscript.md"
+            % (gen, datetime.datetime.now().strftime("%Y%m%d_%H%M")))
+    with open(os.path.join(hist, name), "wb") as fh:
+        fh.write(data)
+    print("  audit report snapshot kept: %s (%d bytes)" % (name, len(data)))
+
+
 def mirror_audit_report():
     """Copy the released audit report onto the route the lanes can read."""
     if not os.path.exists(AUDIT_SRC):
@@ -419,6 +455,18 @@ def game_lock_held():
 
 
 def main():
+    # Preserve the audit report BEFORE the lock check, not after.  Codex
+    # overwrites it in place and an attended round can hold the lock for over
+    # an hour, long enough for several checkpoints to be lost.  This is one cp
+    # of a ~110 KB file - it is not the disk load the lock rule guards against
+    # (that is the sha256 pass over ~48 artifacts below).  Doing it here also
+    # means the guarantee does not depend on the scheduled task remembering to
+    # copy the file by hand.
+    try:
+        snapshot_audit_report()
+    except Exception as exc:
+        print("snapshot failed (continuing): %s" % exc)
+
     if game_lock_held():
         print("LOCK_GAME is HELD - an attended round is running; standing down")
         # Record the gap.  Without this the skip is invisible afterwards, and
