@@ -9458,3 +9458,63 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 - links: `pf_bridge/notes_to_chief/20260901_0955_PANYA-ORDER-login-path-must-ship-the-census-eagerly-like-the-warp-path-now-does.md` (the order) -- `pf_bridge/notes_to_chief/20260901_1037_LANE-A-STATUS-port-royal-login-census-safety-net-built-core-request-for-chief.md` (this ticket's own build + CORE-REQUEST) -- `pirate-force-server/src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_scene1.py` -- `pirate-force-server/src/pirateforce_foundation/runtime.py:7569-7599` and `:8256-8266` (the trigger and the field comment naming the crash) -- GT-165 (frame-size disconnect precedent).
 - numbering: per the shared-counter search command (rule ② at the top of this file), the highest confirmed number before this entry is `GT-188`. This entry is `189`.
 - result: (tester fills in: PASS/FAIL/BLOCKED, evidence, timestamp, OBSERVER_CONFIRMED line per G-OBS once client-observable evidence exists)
+
+## 🆕🔬 GT-190 NPC-IDENTITY-CLINE-RESOLVED-BG0004-001 [attended, in-game, BLOCKED-ON-WIRING]: NPC ของฉาก 4 (Slave Market Island, Bg0004) ตรง CLINE crosswalk ที่คำนวณไว้จริงหรือไม่ -- ยังไม่มีใครยืนที่ฉากนี้แล้วดูมาก่อน
+
+> 🔢 **หมายเหตุเลข:** จองไว้เป็น `GT-160` ตอน 2026-09-01T11:4x+07:00 (grep ตอนนั้น 0 hit) แต่ `main`
+> ขยับใต้ branch ระหว่างรอบ -- LANE-B จอง `GT-160` (`TRAINING-DUMMY-NAME-COLOUR-001`) สำเร็จก่อนที่ PR นี้
+> จะ merge เข้า `main` ได้ ตอนแก้ conflict (2026-09-01) grep ซ้ำพบสูงสุดบน `main` คือ `GT-189` ⇒ ใบนี้
+> เปลี่ยนเลขเป็น `GT-190` เนื้อความอื่นไม่แก้ ใบ `RE-085`-`RE-168`/`GT-001`-`GT-189` อยู่ที่เดิมทั้งใบ
+> ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ
+
+### ที่มา
+
+`COO-DECISION 20260830_1441 (scene4-slave-market-first-door)` อนุมัติให้ LANE-A สร้าง crosswalk
+CLINE→MOBS แบบเดียวกับ `BUILD-001` (bg0001) ให้ฉาก 4 -- รอบ `s3m1f7` สร้างตัวประกอบเสร็จแล้ว
+(`src/pirateforce_foundation/scene4_slave_market_tables.py`,
+`src/pirateforce_foundation/world_population_bg0004.py`, ทดสอบ wire/DB 25 ตัวผ่านทั้งหมด) แต่กลไก
+เดียวกันนี้ (`RE-128`) ไม่เคยถูกยืนยันด้วยตาที่ฉากนี้มาก่อน -- bg0001 มี `GT-078`/วิดีโอเจ้าของ + `GT-131`
+PASS, bg0002 มีภาพถ่าย Sebastian/Pike, แต่ bg0004 ไม่มีหลักฐาน client-observable ใด ๆ เลย ใบนี้เปิดไว้
+ตามกฎ "เจอสิ่งที่ไม่รู้ ให้เปิดใบ ไม่ใช่หยุดสร้างของเพื่อค้นเอง"
+
+**สถานะ BLOCKED-ON-WIRING:** ตัวประกอบยังไม่ถูกเรียกจาก `runtime.py` (ไฟล์ของ chief) และ
+`login_entry_allowed` ของฉาก 4 ใน `scenarios/world_scene_registry_001.json` ยังเป็น `false` ตามคำสั่ง
+ตรงของ COO-DECISION เดียวกัน ("ยังไม่แก้ login_entry_allowed ... จนกว่าตัวประกอบจะพร้อมจริง") -- ใบนี้
+เทสไม่ได้จนกว่าจะมี `CORE-REQUEST` ต่อสายและเปิดประตูฉากในรอบถัดไป บันทึกไว้ล่วงหน้าเพื่อไม่ให้ต้องเปิดใบ
+ใหม่ทีหลัง
+
+### objective
+
+หลังต่อสาย (chief) + เปิดประตู (LANE-A) แล้ว ให้ผู้เทสเข้าฉาก 4 (Slave Market Island) แล้วดูว่า NPC ที่
+ปรากฏตรงกับตารางที่คำนวณไว้หรือไม่ -- ตัวอย่างชื่อที่ควรเห็น: Columbus (ท่าเรือ), Angelina (Princess
+Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, Orc/Dragon Gladiator/Scythe Beetle ในเขตมอนสเตอร์
+
+### pass criteria
+
+**ชั้น client-observable:**
+- ชื่อ/ตำแหน่ง NPC อย่างน้อย 3 ตัวที่เจ้าของยืนยันด้วยตาตรงกับตารางที่ประกอบไว้ ⇒ ยืนยัน crosswalk
+  ใช้ได้กับฉากนี้ด้วย (ไม่ใช่แค่ bg0001/bg0002)
+- ชื่อไม่ตรง หรือ NPC ที่เห็นไม่ใช่ตัวที่ตารางทำนาย ⇒ `RE-128`'s mechanism อาจไม่ generalize ข้ามฉาก
+  แบบตรงไปตรงมา ต้องกลับไปดู `CLINE` join ใหม่
+
+**ชั้น wire/DB (ทำได้ตอนนี้โดยไม่ต้องรอ attended):** `python3 -m unittest tests.test_scene4_slave_market_tables tests.test_world_population_bg0004`
+ผ่านครบ 25/25 (`assembled=84/84`, `unresolved=32`) -- นี่คือ headless proof ที่พร้อมให้ดูก่อนเปิดจอ
+ตามธรรมเนียมของโปรเจกต์ (`PANYA-DECISION 2026-08-27 20:10`)
+
+### nonclaims
+
+1. ไม่อ้างว่า 84 ตัวที่ประกอบได้คือทั้งหมดที่ฉากนี้ควรมี -- 32 placement ยังไม่ resolve (ดู docstring
+   ของ `scene4_slave_market_tables.py` สำหรับเหตุผลแยกตามกลุ่ม)
+2. ไม่อ้างว่าตัวประกอบพร้อมส่งจริงวันนี้ -- ยังไม่ต่อสายเข้า `runtime.py`, ยังไม่เปิด `login_entry_allowed`
+3. ไม่อ้างว่าความสอดคล้องเชิงธีม ("Slave Market" มีชื่อ "slave buyer"/"Princess Slave") คือหลักฐาน
+   client-observable -- เป็นการอ่าน pattern ของสายนี้เท่านั้น จนกว่าจะมีคนดูจริง
+
+### links
+
+`notes_to_chief/20260830_1441_COO-DECISION-scene4-slave-market-first-door.md` ·
+`notes_to_chief/20260830_1434_LANE-A-STATUS-r236-gate-verified-narrow-plus-door-priority-recommendation.md` ·
+`src/pirateforce_foundation/scene4_slave_market_tables.py` ·
+`src/pirateforce_foundation/world_population_bg0004.py` ·
+`GT-131` (bg0001 precedent, PASS) · `RE-128` (the crosswalk mechanism, closed)
+
+**ผู้เปิดใบ: LANE-A (สาย A · WORLD) รอบ `s3m1f7` 2026-09-01T11:4x+07:00**
