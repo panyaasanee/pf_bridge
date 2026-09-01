@@ -9749,15 +9749,28 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
 
 - RECHECK (must all pass BEFORE booting an attended round -- WIRED v2, do not call the owner to the
   screen until this passes headless):
-  1. `grep -n "def " pirate-force-server/src/pirateforce_foundation/persistence_attr_compose.py | grep -i sparse`
-     (or whatever name LANE-DB ships the x=7-only write function under) shows it exists on `main`.
-  2. `grep -n "/speed" pirate-force-server/src/pirateforce_foundation/runtime.py` shows the chat-command
-     call site dispatches to that sparse function, not the full-block path `GT-183` depends on.
-  3. Headless boot on a throwaway `staged/*_boot.ps1` run-copy DB, send `/speed 800` via a scripted
-     client/capture harness, and `grep` the console log for the frame described in pass criteria
-     wire/DB (a) -- confirms change-mask bit `0x0040` only, before any human sits down.
-  4. An empty/failing result on any of 1-3 means the interface has not shipped yet: status stays
-     `PENDING interface`. Do not promote this entry to `READY`.
+  1. ⬜ **NOT YET.** `grep -n "def " pirate-force-server/src/pirateforce_foundation/persistence_attr_compose.py
+     | grep -i sparse` shows nothing on `main` as of R294 (`happy-dirac-69cabr`/`focused-turing-69cabr`,
+     2026-09-01T21:2x+07:00) -- LANE-DB's DB-persistence half of this interface has not shipped. Re-check
+     under whatever name LANE-DB actually ships it.
+  2. ✅ **DONE, but not where this RECHECK originally said to look.** The chat-command call site lives in
+     `pirate-force-server/src/pirateforce_foundation/gm/chat_command_action.py`'s `_speed_action`
+     (dispatched from `command.name == "speed"`, right after `gmprobe`), NOT a direct `/speed` string in
+     `runtime.py` -- `runtime.py`'s own call site (`chat_command_action.make_gm_chat_command_action(...)`)
+     was already the single generic entry point for every GM chat command before this round, unchanged.
+     Verify instead with `grep -n 'command.name == "speed"' pirate-force-server/src/pirateforce_foundation/gm/chat_command_action.py`.
+     Confirmed dispatches to `gm.speed_wire.compose_sparse_speed_update` (the x=7-only sparse composer),
+     not the full-block `attr_wire.build_named_field_update` path `GT-183` depends on.
+  3. ⬜ **NOT RUN** -- blocked on item 1 (no DB-side write to observe yet). Do not attempt until item 1
+     ships.
+  4. Item 1 still failing (and item 3 therefore un-run) means the interface has not fully shipped: status
+     stays `PENDING interface`. **Do not promote this entry to `READY` yet.** What changed this round: the
+     wire-compose half (chat command -> sparse frame, version-gated) is on `main`, tested (17+8 new tests,
+     full suite 6434/0 failed), and adversary-reviewed (pf-adversary found and a follow-up fix closed a
+     real gap: the send was reachable against a canonical-named DB with no check -- now gated on
+     `session.foundation.lifecycle.store.path`'s filename, a heuristic not a guarantee, see
+     `chat_command_action.py`'s `_speed_db_is_canonical` docstring for the stated limitation). The
+     DB-persistence half is still LANE-DB's open half.
 
 - links: `notes_to_chief/20260901_1642_COO-ORDER-speed-sparse-x7-chief-open-gt-entry.md` ·
   `notes_to_chief/20260901_1641_COO-ORDER-speed-sparse-x7-lane-gm-wire-chat-command.md` ·
