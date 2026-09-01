@@ -2905,7 +2905,18 @@ GT-101 error 23065/28317):
 `notes_to_chief/20260830_1655_PANYA-ORDER-open-RE-162-in-session-scene-change-with-a-named-consumer-chain.md`
 (ใบสั่งเต็ม) · `gm/warp_executor.py` (docstring อ้าง RE-090) · `notes_to_chief/` RE-090 result (field-not-proven)
 
-## 🔬 RE-164 BT-GM-CLICK-FOUR-SUSPECTS-002 [PARTIAL — #2 CLOSED STATIC+ATTENDED, #4 CLOSED STATIC, #1/#3 STATIC-ON-BRIDGE]: **ของสี่ผู้ต้องสงสัยที่ `RE-126` ทิ้งไว้โดยไม่เดา (connection context / query-0x25 gate ตอนคลิก / current-UI object-key จริง / create path `0x007280D0`) ตัวไหนคือประตูที่หยุด `GMUI_BASIC` จริง — ข้อ 2 กับ 4 ปิดแล้วด้วย static synthesis จากใบเก่า (`RE-104`+`RE-118`) ที่ไม่เคย cross-reference กันมาก่อน ข้อ 2 ได้ชั้น attended เพิ่มจาก `GT-164` (bounded negative: 14/14 variant คลิกแล้วไม่เปิด) ข้อ 1 กับ 3 ยังต้องไล่ disassembly เพิ่มที่ไม่มีในอิมเมจของ clone นี้**
+## 🔬 RE-164 BT-GM-CLICK-FOUR-SUSPECTS-002 [PARTIAL — #2/#3/#4 CLOSED STATIC (#2 also ATTENDED), #1 STATIC-PARTIAL]: **ของสี่ผู้ต้องสงสัยที่ `RE-126` ทิ้งไว้โดยไม่เดา (connection context / query-0x25 gate ตอนคลิก / current-UI object-key จริง / create path `0x007280D0`) ตัวไหนคือประตูที่หยุด `GMUI_BASIC` จริง — ข้อ 2 กับ 4 ปิดแล้วด้วย static synthesis จากใบเก่า (`RE-104`+`RE-118`) ที่ไม่เคย cross-reference กันมาก่อน ข้อ 2 ได้ชั้น attended เพิ่มจาก `GT-164` (bounded negative: 14/14 variant คลิกแล้วไม่เปิด)**
+
+> 🆕 **อัปเดตรอบ `ku3jz6` 2026-09-01T21:xx+07:00 (LANE-GM):** ข้อ 3 **ปิดแล้วด้วย static** จาก
+> committed artifact ที่เพิ่ง sync เข้า repo รอบ `a0909b1` (19:54+07, หลังรอบก่อนหน้าที่ตรวจ 06:26
+> ยังไม่เจอไฟล์นี้จริง) — ดูบล็อกใหม่ในข้อ 3 ด้านล่าง ข้อ 1 ได้ write-site แล้วแต่ยังไม่ปิดสนิท (ดูบล็อกใหม่
+> ในข้อ 1) 🔴 **สิ่งที่สำคัญที่สุดของรอบนี้ไม่ใช่ static fact แต่เป็นบรรทัดปฏิบัติการที่ไม่ใช่หลักฐาน
+> IMAGE/DATA**: source artifact เอง (`PF_GM_PLUGIN_GATE.md` บรรทัด "UNPINNED OPERATIONAL INVENTORY")
+> ระบุว่า ณ ตอนสร้างไฟล์ **inventory ของเครื่องบริดจ์ไม่พบ `GameMaster.dll`** ข้าง client — ถ้าจริงและยังจริง
+> อาการ "เห็นปุ่มแต่คลิกไม่เปิด" ที่ตามหากันมาตั้งแต่ RE-104 (27 ส.ค.) สอดคล้องเป๊ะกับเส้น fallback ที่พิสูจน์
+> แล้วใน GM-IMG-001/002/003 (DLL/export หาไม่เจอ → fallback object 4 ไบต์ → slot+0x04 คืน NULL เสมอ →
+> dispatcher หยุดก่อนถึง factory) **นี่เป็นข้อสังเกตเชิงปฏิบัติการ ไม่ใช่ข้อเท็จจริง IMAGE/DATA** ต้องมีคนตรวจ
+> จริงว่าไฟล์นั้นควรอยู่ตรงไหนของ client install และหายไปจริงหรือไม่ (ดูจดหมายที่เปิดคู่กับรอบนี้)
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนเขียนลงไฟล์นี้ 2026-08-31T03:2x+07:00: `RE-164`/`GT-164` = 0 hit ทั้งสอง
 > ไฟล์นี้และ `GAME_TEST_QUEUE.md` ก่อนใบนี้ — เลขที่ใช้แล้วสูงสุดคือ `RE-163`/`GT-163`(reserved)
@@ -2949,6 +2960,18 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
    context ตัวนั้น *ตรง* กับ session ที่ state vital ถูกส่งไปหรือไม่ ต้องไล่ write-site ของ `0x01032EC4`
    เพิ่ม ไม่มีในเอกสารที่ commit แล้ว — RE-126 nonclaim 3 ระบุเองว่าไม่เคยอ้างเรื่อง match/mismatch นี้
    (`notes_to_chief/20260828_1809_RE-126-RESULT-BT-GM-SAME-CONTROL.md:53`) **[STATIC-ON-BRIDGE ยืนยัน — แก้ป้ายรอบ jd4jqp]**
+   🟡 **[STATIC-PARTIAL เพิ่ม รอบ `ku3jz6`]** เจอ write-site แล้ว: `notes_to_chief/reference_codex_attr/
+   pf_rederive_attr_semantics.py:25900-25902` pin `assert_bytes("CMyActor_singleton_store", 0x0044CB7D,
+   b"\x89\x35\xC4\x2E\x03\x01")` = `mov [0x01032EC4], esi` อยู่ท้าย `CMyActor` constructor ทันทีหลัง
+   `constructor_vtable_store` (`0x0044C990..0x0044C9CB`) — ยืนยันซ้ำอิสระใน `PF_ATTR_FIELD_SEMANTICS.tsv`
+   (แถว `singleton_store=0x0044CB7D..0x0044CB83`) และ `PF_COMBAT_LETHAL_TAIL_DELTA.tsv:13` ("CMyActor
+   singleton at 0x01032EC4 is nonnull") **สรุปเชิงความหมาย: `[0x01032EC4]` คือ singleton ของ `CMyActor`
+   (ตัวละครผู้เล่นโลคัลของ client เอง) ไม่ใช่ object ที่ผูกกับ "session"/"connection" ของเซิร์ฟเวอร์โดยตรง** —
+   นี่ตอบคำถามเดิมบางส่วน (ตัวแปรนี้เป็น "มี local player actor สร้างแล้วหรือยัง" ไม่ใช่ตัวติดตาม
+   หลาย-connection) แต่ **ยังไม่ปิดสนิท**: ไม่พบ write-site ตัวที่สอง (clear/dtor ตอน logout/relog) ในทั้ง
+   สอง repo แม้ค้นตรง VA แล้ว จึงยังตอบไม่ได้ว่า global ตัวนี้ค่าเก่าอาจค้างข้ามรอบ relog หรือไม่ — ต้องไล่
+   caller-graph ของ `constructor_vtable_store`/`0x0044C990` ต่อ ยังเป็น **STATIC-ON-BRIDGE จริง** สำหรับ
+   ส่วนนี้ ไม่ได้ปิดทั้งข้อ (รายละเอียดเต็ม: `notes_to_chief/20260901_2132_RE-164-RESULT-item3-closed-item1-writesite-found-plus-gamemasterdll-flag.md`)
 2. **query-0x25 gate ตอนคลิก** — adapter `0x00726D30` (อ่าน `GMModule_Client+0x19`, RE-104 พิสูจน์ว่าคุมการ
    วาด/enable ปุ่ม) ถูกเรียกซ้ำตอนคลิกด้วยหรือคืนค่าจากตอนวาดครั้งเดียว — ถ้าเรียกซ้ำ ค่าที่อ่าน ณ
    เวลาคลิกอาจต่างจากตอนวาด
@@ -2973,6 +2996,40 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
    (`notes_to_chief/20260828_0411_...md:38,62`) — `GT-103AB`
    (`notes_to_chief/20260828_1140_GT103AB-RESULT-...md:51`) ยืนยันช่องว่างนี้ยังเปิดอยู่ ไม่มีใบไหนไล่ต่อจาก
    จุดนั้น **[STATIC-ON-BRIDGE ยืนยัน — แก้ป้ายรอบ jd4jqp]**
+   🟢 **[STATIC ปิดแล้ว รอบ `ku3jz6`]** ตอบได้จาก committed artifact ที่เพิ่งมาถึง repo รอบ sync `a0909b1`
+   (2026-09-01T19:54+07 — ยังไม่มีตอนรอบ `20260901_0626` ที่เคย "ค้นแล้ว: ไม่เจอ" สามไฟล์นี้ตรง ๆ):
+   `notes_to_chief/reference_codex_attr/PF_GM_PLUGIN_GATE.tsv`/`.md` เดินสายเต็ม 17 IMAGE row + 2 DATA
+   row ทุกแถว `PROVEN_EXACT`/`PROVEN_EXACT_CONDITIONAL` พร้อม evidence span + sha256:
+   `GM-IMG-001` (loader `LoadLibraryW(L"GameMaster.dll")` → `GetProcAddress("CreateGameMaster")` →
+   เรียก export → เก็บผลที่ `application+0x7C8`) → `GM-IMG-002/003` (ถ้า DLL/export/call ล้มเหลว จะสร้าง
+   fallback object 4 ไบต์แทน ซึ่ง vtable slot `+0x04` คืน `NULL` เสมอ) → `GM-IMG-006/007` (คลิกเรียก
+   slot `+0x04` ผ่าน dispatcher `0x00AA0710..0x00AA0799` ซึ่งเช็ค empty-predicate `0x008946C0..
+   0x008946EA` — **จุดเดียวกับที่ RE-118 หยุดไว้พอดี** — ถ้า NULL/ว่าง จะ `ret` ก่อนถึง factory เสมอ) →
+   `GM-IMG-008` (factory `0x007280D0` ต้อง exact-match UTF-16 กับ key จาก slot `+0x04` เท่านั้นจึงสร้าง
+   panel) → `GM-IMG-009`/`GM-IMG-013` (`GMUI_BASIC` เป็นแค่ child/tab lookup **หลัง** panel ถูกสร้างแล้ว
+   ไม่ใช่ค่าที่ slot `+0x04` ต้องคืน — ถอนสมมติฐานเดิมที่เคยเข้าใจผิดแบบนี้) ผสาน DATA: `GM-DATA-001/002`
+   (`GMUI.project`/`GMUI_1.model`) ยืนยันว่า model ที่มี child `GMUI_BASIC` จริงชื่อ `GMUI_1` ไม่ใช่
+   `GMUI_BASIC` เอง — **คำตอบข้อ 3 (ตัดสินสองชั้นแยกกัน):**
+   - **ชั้น wire/DB/static — ปิด:** current-UI object-key คือค่าที่ slot `+0x04` ของ GM-plugin interface
+     คืน (ไม่ใช่ literal ที่เคยเดา) เดินทางผ่าน dispatcher → factory (exact-match) → GUI-model resolver
+     ที่ประกอบ `.\Data\GUI\Model\<key>.model`; ค่าที่ "ควรจะ" ทำให้ panel เปิดได้ตาม DATA ที่มีคือ `GMUI_1`
+     (**[RECONSTRUCTED POLICY — PROPOSED]** ของ artifact เอง ไม่ใช่ค่าที่วัดได้จาก DLL เดิมโดยตรง)
+   - **ชั้น client-observable — ยังไม่ปิด:** ไม่มีหลักฐานว่า panel เปิดจริงถ้าแก้ปัญหาด้านล่างแล้ว ต้อง
+     `GT-164` variant ใหม่ยืนยัน (ดู "ห้ามทำจนกว่า" ในหมายเหตุ nonclaim 8 ด้านล่าง)
+   🔴 **ข้อสังเกตเชิงปฏิบัติการที่สำคัญกว่า static fact เองทั้งหมด** — artifact ต้นทาง (`PF_GM_PLUGIN_GATE.md`,
+   ส่วน "UNPINNED OPERATIONAL INVENTORY — NOT IMAGE/DATA EVIDENCE") บันทึกไว้ตรง ๆ ว่า ณ ตอนสร้างไฟล์
+   inventory ของเครื่องบริดจ์ **ไม่พบ `GameMaster.dll`** ข้างไฟล์ client จริง — generator เองไม่ได้ enumerate/
+   hash inventory นี้ (อาจ stale) แต่ถ้ายังจริง **นี่คือคำอธิบายที่สอดคล้องกับอาการทั้งหมดที่สังเกตมาตั้งแต่
+   RE-104**: ปุ่มโชว์ได้ (field `0x0b_second` คุมแยกจากนี้) แต่คลิกแล้วไม่มีอะไรเกิดเพราะ interface ที่แท้จริง
+   ไม่เคยโหลดเลย ไม่ใช่ปัญหาการผูกปุ่ม/handler/query-gate ที่ RE-104/RE-118/RE-126/RE-164#2/#4 ไล่ตรวจไปแล้ว
+   ทั้งหมด (ทุกจุดนั้นถูกต้องอยู่แล้ว ปัญหาอยู่ *ก่อน* จุดเหล่านั้นทั้งหมด) — **ไม่ใช่ข้อเท็จจริง IMAGE/DATA
+   ห้ามใช้ปิดใบเพียงอย่างเดียว** ต้องมีคนตรวจ client install จริงว่าไฟล์นี้ควรอยู่ที่ไหนและหายไปจริงหรือไม่
+   (แจ้งผ่านจดหมาย `notes_to_chief/20260901_2132_RE-164-RESULT-item3-closed-item1-writesite-found-plus-gamemasterdll-flag.md`
+   ให้ chief/COO/เจ้าของตัดสินว่าจะตรวจยังไง — `pf_bridge` แผนกนี้ไม่มี client image ไม่มีทางยืนยันเอง)
+   หาก DLL หายไปจริงและกู้คืนไม่ได้ artifact เดียวกันนี้ยังทิ้ง **สเปกปลั๊กอินทดแทนที่เข้ากันได้** ไว้ครบ
+   (ABI ของ slot `+0x00`/`+0x04`/`+0x08`, allocator ที่ต้องใช้ `MSVCR90 operator new` ไม่ใช่ UCRT/modern
+   heap, ชื่อ export ต้องตรง `CreateGameMaster` ไม่มี decoration) — เป็นทางเลือกสำรองถ้าจะสร้างปลั๊กอินเอง
+   แทนการกู้ไฟล์เดิม (nonclaim: นี่เป็นสเปกที่ derive จาก IMAGE ไม่ใช่ค่าที่วัดจาก DLL เดิมโดยตรง)
 4. **create path** — factory `0x007280D0` ที่สร้าง `GMUI_BASIC`/`GMModule_Client+0x48` ถูกเรียกไหมเมื่อคลิก
    หรือมี early-return ตัดก่อนถึง
    ✅ **[STATIC ปิดแล้ว รอบ `1q7nxu`]** มี early-return แบบมีเงื่อนไข: dispatcher
@@ -2985,6 +3042,7 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
 
 **ชั้น wire/DB (ปิดใบนี้ได้บางส่วน):** คำตอบต่อข้อ 1-4 จาก static analysis ของ artifact ที่ commit แล้ว
 พร้อมเลขบรรทัด/VA — ผลลบก็เป็นคำตอบ (เช่น "ข้อ 2 คืนค่าเดิมเสมอ ไม่ถูกเรียกซ้ำตอนคลิก" ปิดข้อนั้นได้)
+🆕 **สถานะรอบ `ku3jz6`:** ข้อ 2/3/4 ปิดชั้นนี้แล้ว ข้อ 1 ยัง STATIC-PARTIAL (write-site เจอ, clear-site ยังไม่เจอ)
 
 **ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องมีคนหน้าจอ):** `GT-164` (`GAME_TEST_QUEUE.md`) — คลิก `BT_GM`
 ทีละ variant ของ `gm/bt_gm_probe.py`'s `iter_state_vital_bit_variants()` แล้วดูว่า `GMUI_BASIC` เปิดไหม —
@@ -3011,13 +3069,23 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
    เป็นดุลยพินิจของ chief ตาม `CORE-REQUEST-GM-043`
 4. เลข `GT-164` (แก้จาก `GT-165` ที่รอบก่อนเขียนผิดในเอกสารที่ไม่เคย push) คือเลขที่ยึดตามใบนี้ ถ้าเอกสาร
    ที่ไหนยังอ้าง `GT-165` สำหรับเรื่องนี้ ให้ถือว่าเอกสารนั้นล้าสมัย ไม่ใช่ไฟล์คิวสองไฟล์นี้
-5. ข้อ 1 กับ 3 ยังไม่ปิด — ข้อ 1 ต้องไล่ write-site ของ `[0x01032EC4]` เพิ่ม ข้อ 3 ต้องไล่ vfunc chain ต่อจาก
+5. ~~ข้อ 1 กับ 3 ยังไม่ปิด — ข้อ 1 ต้องไล่ write-site ของ `[0x01032EC4]` เพิ่ม ข้อ 3 ต้องไล่ vfunc chain ต่อจาก
    `[0x008946C0,0x008946EA)` ทั้งคู่ไม่มีในอิมเมจของ clone นี้ (ไม่มี client image ไม่มี disassembler)
-   ต้องเปิดใบ RE runner บนสะพานถ้าจะไล่ต่อทาง static หรือรอ attended capture
+   ต้องเปิดใบ RE runner บนสะพานถ้าจะไล่ต่อทาง static หรือรอ attended capture~~
+   **แก้รอบ `ku3jz6`:** ข้อ 3 ปิดแล้วด้วย static จาก `PF_GM_PLUGIN_GATE.tsv` ที่เพิ่ง sync เข้ามา (ไม่ต้อง
+   ใช้ image/disassembler เพิ่ม — เดินสายจาก IMAGE row ที่มีอยู่แล้วในไฟล์นั้น) ข้อ 1 เจอ write-site แล้ว
+   (`pf_rederive_attr_semantics.py:25900-25902`) แต่ clear-site/cardinality ยังไม่เจอ ยังเป็น
+   STATIC-ON-BRIDGE จริงสำหรับส่วนที่เหลือของข้อ 1 เท่านั้น
 6. `GT-164` ปิดแล้วเป็น bounded negative ต่อข้อ 2 เท่านั้น (รอบ `szmgeh`) — **ไม่ใช่หลักฐานว่า `RE-164` ปิด
-   ครบ** ข้อ 1/3 ยังเปิด และการที่ปุ่ม "มองเห็นได้" ระหว่างเทส (`field_0x0b_second=1`) ก็ไม่ได้แปลว่าคลิกได้
+   ครบ** ข้อ 1 ยังเปิดบางส่วน และการที่ปุ่ม "มองเห็นได้" ระหว่างเทส (`field_0x0b_second=1`) ก็ไม่ได้แปลว่าคลิกได้
    ผล — สองเรื่องคนละชั้นกัน (visibility vs. click-success) ตามที่ `gm/bt_gm_probe.py`'s
    `observed_button_visible` docstring ระบุไว้ชัดเจน
+7. **[ใหม่ รอบ `ku3jz6`]** ข้อ 3 ที่ปิดแล้วเป็นชั้น IMAGE/DATA เท่านั้น — `GMUI_1` เป็น
+   **[RECONSTRUCTED POLICY — PROPOSED]** ของ `PF_GM_PLUGIN_GATE.md` เอง ไม่ใช่ค่าที่วัดได้จาก DLL เดิม
+   โดยตรง ไม่อ้างว่า panel จะเปิดจริงถ้าลองค่านี้ — ต้องมี `GT-164` variant ใหม่ยืนยันชั้น client-observable
+8. **[ใหม่ รอบ `ku3jz6`]** ไม่อ้างว่า `GameMaster.dll` หายไปจริงจาก client install ปัจจุบัน — แหล่งข้อมูลเอง
+   ระบุว่า inventory นั้นอาจ stale และไม่ใช่ IMAGE/DATA evidence เป็นเพียงข้อสังเกตเชิงปฏิบัติการที่ต้อง
+   ตรวจซ้ำโดยคนที่มี client install จริง (LANE-GM ไม่มี client image ไม่มีทางยืนยันเอง)
 
 ### links
 `pirate-force-server` PR #350 (merged, `bdbef5c`) · `src/pirateforce_foundation/gm/bt_gm_probe.py` ·
@@ -3027,7 +3095,12 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
 `archive/notes_to_chief_2026-08/consumed/20260827_1518_RE-104-RESULT-BT-GM-MODULE-PLUS19-GATE.md` ·
 `notes_to_chief/20260828_0411_RE-118-RESULT-CURRENT-UI-KEY-MUST-BE-NONEMPTY.md` ·
 `rounds/GM_20260831_0822_re164_partial_static_synthesis.md` ·
-`notes_to_chief/20260831_0901_GT164-RESULT-bounded-negative-on-suspect-2-plus-field-0x0b-second-is-the-button-visibility-switch.md`
+`notes_to_chief/20260831_0901_GT164-RESULT-bounded-negative-on-suspect-2-plus-field-0x0b-second-is-the-button-visibility-switch.md` ·
+`notes_to_chief/reference_codex_attr/PF_GM_PLUGIN_GATE.tsv` (+`.md`, +`.pair.json`) ·
+`notes_to_chief/reference_codex_attr/pf_rederive_attr_semantics.py:25900-25902,26108,26413` ·
+`notes_to_chief/reference_codex_attr/PF_ATTR_FIELD_SEMANTICS.tsv` (แถว `singleton_store=0x0044CB7D..`) ·
+`notes_to_chief/reference_codex_attr/PF_COMBAT_LETHAL_TAIL_DELTA.tsv:13` ·
+`notes_to_chief/20260901_2132_RE-164-RESULT-item3-closed-item1-writesite-found-plus-gamemasterdll-flag.md`
 
 ## 🔬 RE-167 CENSUS-FRAME-INTERMITTENT-ABORT-001 [~~OPEN — assigned LANE-A~~ 🔵 **wire/DB ANSWERED bounded-negative, client-observable STILL PENDING — LANE-A รอบ `qoj8ei` 2026-08-31T11:36+07:00, ผล `notes_to_chief/20260831_1136_RE-167-RESULT-wire-layer-no-server-buffer-timeout-cause-found-bounded-negative.md`: ไม่พบ server-side buffer/timeout/race ที่อธิบาย 10053 ได้ จาก static analysis; chunking ต้องแก้ frozen `current/pf_login_game_server_v141.py` ซึ่งเป็นไฟล์ที่ทั้งโปรเจกต์ตกลงห้ามแก้ — ส่งเป็นคำถามเชิงโครงสร้างให้ chief/COO ตัดสิน ไม่ใช่ CORE-REQUEST ปกติ; ยังไม่มี fix ให้เทส จึงยังไม่เปิด GT ใหม่**]: เฟรม `WORLD_CENSUS_INITIAL` ขนาด ~20 KB (Port Royal, 108-115 actor) ทำสายไคลเอนต์ขาดเป็นครั้งคราว (`ConnectionAbortedError 10053`) — เกิดที่จุดไหนของ send/parse และทำไมไม่เกิดทุกครั้งบนเฟรมขนาดเท่ากัน
 
