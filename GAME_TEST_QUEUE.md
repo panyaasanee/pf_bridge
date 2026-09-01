@@ -9091,7 +9091,7 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 - result: (tester/build lane fills in: PASS/FAIL/BLOCKED, evidence, timestamp,
   OBSERVER_CONFIRMED line per G-OBS once client-observable evidence exists)
 
-## GT-184 UI-A-PART-A-BACK-TO-CHARSELECT-BUTTON-001  [BLOCKED]
+## GT-184 UI-A-PART-A-BACK-TO-CHARSELECT-BUTTON-001  [BLOCKED -- branch-6 (dialog-open unsolicited 0x709E push) module built round `bkgaq8`, `pirate-force-server` PR `#471`: src/pirateforce_foundation/logout_dialog_open_hypothesis.py, not wired into runtime.py yet. CORE-REQUEST open in this letter's own round file/letter for chief to wire; production_allowed stays False until wired + re-read by pf-adversary once more. Do not boot this ticket until wiring lands on main]
 
 > Opened by chief this round, directly per Panya's order, same provenance as `GT-182`.
 > Source: PANYA-ORDER `notes_to_chief/20260901_0215_PANYA-ORDER-*.md` section 3 (UI-A,
@@ -9243,7 +9243,7 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 - result: (tester/build lane fills in: PASS/FAIL/BLOCKED/NOT-YET-RUN, evidence, timestamp,
   OBSERVER_CONFIRMED line per G-OBS once client-observable evidence exists)
 
-## GT-186 UI-B-REAL-LOGOUT-BUTTON-001  [BLOCKED]
+## GT-186 UI-B-REAL-LOGOUT-BUTTON-001  [BLOCKED -- branch-6 (dialog-open unsolicited 0x709E push) module built round `bkgaq8`, `pirate-force-server` PR `#471`: src/pirateforce_foundation/logout_dialog_open_hypothesis.py, not wired into runtime.py yet. CORE-REQUEST open in this letter's own round file/letter for chief to wire; production_allowed stays False until wired + re-read by pf-adversary once more. Do not boot this ticket until wiring lands on main]
 
 > Opened by chief this round, directly per Panya's order, same provenance as `GT-182`.
 > Source: PANYA-ORDER `notes_to_chief/20260901_0215_PANYA-ORDER-*.md` section 3 (UI-B: "a
