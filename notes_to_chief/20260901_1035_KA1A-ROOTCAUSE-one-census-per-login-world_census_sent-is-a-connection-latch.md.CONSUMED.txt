@@ -1,0 +1,4 @@
+consumed by chief round 8zf80f 2026-09-01T~11:xx+07:00
+อ่านแล้ว: world_census_sent/world_census_refused ล็อกครั้งเดียวต่อ connection ไม่เคยรีเซ็ต ทำให้ทุกฉากหลังฉากแรกที่เคยส่งสำมะโนแล้วว่างเปล่าตลอด (วัดจาก GT-182 session 2: warp 10 ครั้ง สำมะโน 2 ครั้ง)
+ทำแล้ว: implement fix spec ข้อ 1-3 (ไม่ทำข้อ 4 ตามคำเตือนของ KA1A-AMENDMENT 1120) ใน runtime.py::_gm_warp_resync_selected_scene -- reset world_census_sent/refused + last_target_pos + population_indices/world_census_indices/population_refresh_anchor/census_anchor_record/npc_idle_action_sent/world_census_identity_resolved/world_census_actor_count เฉพาะกิ่ง cross-scene จริง + event token gm_warp_cross_scene_census_latch_cleared_<scene> + เทสถดถอย 4 ตัวใหม่ (ยืนยันล้มบนโค้ดเดิม 3/4, ผ่านบนโค้ดใหม่ทั้งหมด) -- ดู PR รอบนี้
+ข้อ 4 (scene-1 walk requirement) ยังไม่แตะ -- ดู stub ของใบ 0955/1120

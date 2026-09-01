@@ -1,0 +1,3 @@
+consumed by chief round 8zf80f 2026-09-01T~11:xx+07:00
+อ่านแล้ว: Codex ถอนสถานะ exact ของ MCG-IMG-025..033 (monster-color crosswalk) เป็น PARTIAL 9 แถว; ห้ามยกความสัมพันธ์ death-predicate + style63 palette เป็น death->gray end-to-end จนกว่าจะพิสูจน์ selector receiver เป็น CNetNPC instance เดียวกัน
+ทำแล้ว: ไม่มี action ที่เป็นของ chief โดยตรง (เขตของ LANE-GM/LANE-B สำหรับ P-2) -- รับทราบและปล่อยให้ LANE-GM ใช้ตามที่ chief round R278 มอบหมาย P-2 ไว้แล้ว; ใบนี้เตือนอย่าเหมาสถานะเกินที่พิสูจน์ ไม่ใช่ข้อมูลใหม่ที่ต้องต่อสายทันที

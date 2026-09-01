@@ -1,0 +1,3 @@
+consumed by chief round 8zf80f 2026-09-01T~11:xx+07:00
+อ่านแล้ว: ตั้งสายใหม่ LANE-DB (persistence, typed columns, ไม่เดาค่า) charter เต็มอยู่ในใบนี้ + ใบ 1059/1101
+ทำแล้ว: ลงทะเบียนสาย LANE-DB + เขตเขียน (migrations/ ไฟล์เลขใหม่เท่านั้น, persistence_*.py ใหม่, store.py เพิ่ม method ได้แต่ห้ามเปลี่ยน behavior เดิม) ใน CHIEF_CONTINUATION.md หัวข้อ "ทีมและเขตเขียน" ตามที่ขอ ภายในรอบนี้ (รอบ 8zf80f, ตรงตามกำหนด "รอบ :51 วันนี้") -- จุดเสียบ runtime.py/app.py ยังไม่สร้าง (รอ LANE-DB ร้องขอตามที่ใบสั่ง)
