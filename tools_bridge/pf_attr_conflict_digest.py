@@ -113,9 +113,23 @@ MIRROR_PREFIXES = None  # kept for reference; selection is now manifest-driven
 # auto-letters a day into a mailbox that is already the team's bottleneck.
 # Everything else still gets mirrored, and every round is recorded in
 # CODEX_ROUNDS_LOG.tsv, so nothing is lost - it just does not ping anyone.
-HIGH_SIGNAL_EXACT = ("PF_ATTR_FOR_SERVER.md", "PF_ATTR_QUARANTINE.tsv",
-                     "PF_ATTR_PROBE_REQUESTS.tsv")
-HIGH_SIGNAL_SUBSTR = ("SELECTOR", "DISCRIMINATOR", "CORRECTION", "ERRATUM")
+# 2026-09-01, third correction to this gate.  The first two versions of the
+# pipeline failed by naming what to CARRY (a prefix list, then a manifest).
+# This gate then failed the same way by naming what is IMPORTANT: a list of
+# high-signal filenames.  Codex moved on to colour / combat / drop / quest
+# work whose filenames matched none of them, so eleven published checkpoints
+# in nine hours were all reported as quiet rounds.
+#
+# The lesson, finally applied: stop choosing a proxy for "something happened".
+# Codex declares it itself.  PF_CRITICAL_ARTIFACT_AUTHORITY.json carries an
+# authority_note naming the checkpoint letter it just published - that IS the
+# event, it needs no list, and it cannot go stale as Codex changes subject.
+#
+# Everything else inverts: a changed file is significant BY DEFAULT, and only
+# the two files known to churn every round are treated as noise.  A new kind
+# of deliverable is now loud by default instead of silently ignored.
+KNOWN_CHURN = ("PF_CRITICAL_ARTIFACT_AUTHORITY.json",)
+KNOWN_CHURN_PREFIX = ("pf_rederive_",)
 
 # Classes the running server actually encodes today.  A conflict outside this
 # set cannot break the live wire, so it is a documentation question rather than
@@ -542,21 +556,21 @@ def mirror(root, artifacts):
     return added, changed, skipped
 
 
-def is_high_signal(name):
-    up = name.upper()
-    return name in HIGH_SIGNAL_EXACT or any(k in up for k in HIGH_SIGNAL_SUBSTR)
+def is_known_churn(name):
+    return name in KNOWN_CHURN or name.startswith(KNOWN_CHURN_PREFIX)
 
 
-def significance(added, changed, summary, prev_wired):
-    """Return (bool, reason).  A new deliverable always counts: the round that
-    added the name-colour selector, the role discriminator and the quest-mark
-    selector was the most valuable one so far."""
+def significance(added, changed, summary, prev_wired, note, prev_note):
+    """Return (bool, reason).  Codex declaring a checkpoint is the event."""
+    if note and note != prev_note:
+        return True, "Codex published a checkpoint: " + note
     if added:
         return True, "new artifact(s) %d: %s" % (
             len(added), ", ".join(n for n, _ in added[:4]))
-    hot = [n for n, _ in changed if is_high_signal(n)]
-    if hot:
-        return True, "high-signal file changed: " + ", ".join(hot[:4])
+    real = [n for n, _ in changed if not is_known_churn(n)]
+    if real:
+        return True, "%d deliverable(s) changed: %s" % (
+            len(real), ", ".join(real[:4]))
     if summary and prev_wired is not None and summary.get("wired") != prev_wired:
         return True, "open wired-conflict count moved %s -> %s" % (
             prev_wired, summary.get("wired"))
@@ -706,15 +720,16 @@ def main():
     key, note = round_key()
     print("round key : %s%s" % (key, ("  (" + note + ")") if note else ""))
 
-    prev_key, prev_wired = None, None
+    prev_key, prev_wired, prev_note = None, None, None
     if os.path.exists(STATE):
         try:
             with open(STATE, "r", encoding="ascii") as fh:
                 st = json.load(fh)
             prev_key = st.get("round_key")
             prev_wired = st.get("open_wired")
+            prev_note = st.get("authority_note")
         except Exception:
-            prev_key, prev_wired = None, None
+            prev_key, prev_wired, prev_note = None, None, None
 
     added, changed, skipped = mirror(root, artifacts)
     mirror_audit_report()
@@ -760,11 +775,12 @@ def main():
     announced, reason = False, ""
     if key == prev_key:
         print("  same round as last run - no letter")
-    elif not (added or changed):
-        reason = "new round but mirrored bytes identical"
+    elif not (added or changed) and note == prev_note:
+        reason = "new round but mirrored bytes identical and no new checkpoint"
         print("  " + reason + " - no letter")
     else:
-        sig, reason = significance(added, changed, summary, prev_wired)
+        sig, reason = significance(added, changed, summary, prev_wired,
+                                   note, prev_note)
         if sig:
             announce(gen, prev_key, added, changed, skipped, summary)
             announced = True
@@ -775,6 +791,7 @@ def main():
 
     with open(STATE, "w", encoding="ascii") as fh:
         json.dump({"round_key": key, "generation_id": gen,
+                   "authority_note": note,
                    "open_wired": summary.get("wired") if summary else None}, fh)
     print("")
     print(txt)
