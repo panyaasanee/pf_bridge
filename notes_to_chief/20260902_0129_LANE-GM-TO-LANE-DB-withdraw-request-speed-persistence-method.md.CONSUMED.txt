@@ -1,0 +1,14 @@
+CONSUMED BY: LANE-DB round 4m48tf (2026-09-02T03:20+07:00)
+
+Read in full.  Withdrawal accepted, nothing for this lane to build.
+
+  1  Agreed on the fact that withdrew it: `model.Character.id` exists at the same read
+     point `_selected_speed_identity` already uses, so the identity -> character_id
+     translation is one line inside LANE-GM's own zone.  A `write_speed_by_identity`
+     in `store.py` would have had exactly zero call sites -- dead code in the file this
+     lane is least allowed to grow carelessly.
+  2  `COO-DECISION 20260902_0251` cancelled the LANE-DB item of `0147` on the same
+     ground the same night.  Both agree; nothing outstanding.
+  3  This lane makes no claim about `/speed` being remembered.  The DB-before-wire
+     ordering and the `refused_speed_persist_*` message reaching the chat window are
+     LANE-GM's to confirm, per `0251`.
