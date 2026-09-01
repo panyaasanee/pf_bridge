@@ -78,8 +78,8 @@ grep `ADDRESSEE: LANE-DB` แล้วกรองใบที่ยังไม
 
 | อะไร | ผล |
 | --- | --- |
-| `tests/test_persistence_vitals.py` | 58 เทส 4 subtest **0 skip** |
-| ชุดที่เกตเลือกเอง (ตัดออก 48 โมดูล ตรงกับจำนวนของ workflow) | **5755 passed, 4 skipped** exit 0 |
+| `tests/test_persistence_vitals.py` | 59 เทส 4 subtest **0 skip** |
+| ชุดที่เกตเลือกเอง (ตัดออก 48 โมดูล ตรงกับจำนวนของ workflow) | **5756 passed, 4 skipped** exit 0 |
 | `tools/pf_pytest_precondition_census.py` | **RESULT: PASS** exit 0 |
 | `verify_hypothesis_ledger.py` · `verify_functional_coverage.py` | exit 0 · exit 0 |
 | `git diff --numstat` ของ `store.py` | **193 0** — ศูนย์บรรทัดที่ถูกลบ = ไม่มี method เดิมเปลี่ยน |
@@ -127,9 +127,37 @@ grep `ADDRESSEE: LANE-DB` แล้วกรองใบที่ยังไม
 - ❌ `hp_max = 0` ที่ปฏิเสธไว้ เป็นกฎของสายนี้สำหรับ **ตัวละครผู้เล่น** เท่านั้น ไม่ได้อ้างอะไรกับ
   มอน/NPC ที่อื่นในรีโป
 
+## เกต Windows แดงรอบแรก — อ่านล็อกก่อนสรุป แก้แล้วในรอบเดียวกัน
+
+PR #520 commit แรก (`ced4de41`) **เกตแดงที่ `pytest_subset exit=1`** ช่องอื่นเขียวหมด 22 ช่อง
+รวม `skip_census` (RESULT: PASS) ⇒ **ไม่ใช่ช่อง skip_census เหมือน PR #503** อ่านล็อกจริงก่อนสรุป
+ตามคำสั่งของรอบก่อน ไม่เดาว่าเหตุเดิม
+
+**เหตุจริง เป็นบั๊กของเทสรอบนี้เอง ไม่ใช่เกตงอแง**:
+
+```
+PermissionError: [WinError 32] The process cannot access the file because
+it is being used by another process: ...\Temp\tmp*\state.sqlite3
+```
+
+ตกที่ teardown ของ `TemporaryDirectory` ในสามเทส (`test_a_soft_deleted_character_raises_keyerror`,
+`test_damage_lands_on_disk_and_survives_a_reopen`, `test_the_database_really_does_accept_a_zero_maximum`)
+
+`with sqlite3.connect(p) as db:` **commit ให้ แต่ไม่ close ให้** — บน Linux ลบไฟล์ที่ยังเปิดอยู่ได้
+เลยไม่มีอะไรโผล่ บน Windows ลบไม่ได้ ⇒ ล้มทั้งชุด ในไฟล์นี้มีแบบนั้นเก้าที่
+🔴 **นี่คือบทเรียนว่า "เขียวบนเครื่องที่เขียนมัน" ไม่ใช่หลักฐานว่าเกตจะเขียว** — เครื่องนี้เป็น Linux
+เกตเป็น Windows และความต่างนี้มองไม่เห็นจากที่นี่เลย
+
+แก้: ทุก connection ดิบผ่านตัวช่วย `raw()` ที่ commit **และ close** · `src/` ไม่ถูกแตะแม้บรรทัดเดียว
+ในคอมมิตนี้ · และกฎนี้ **มีฟันแล้ว** ไม่ใช่คอมเมนต์ — เทส AST ตัวใหม่ parse ไฟล์เทสตัวเองแล้วแดง
+ถ้ามี `with sqlite3.connect(...)` โผล่มาอีก (ยืนยันด้วยการใส่กลับเข้าไปหนึ่งที่แล้วดูมันแดง)
+
+หลังแก้: 59 เทส 4 subtest 0 skip · ชุดเกต **5756 passed, 4 skipped** exit 0 · census PASS
+
 ## รอบหน้าทำอะไร
 
-1. **เช็ค PR #520 ก่อนอย่างอื่นทั้งหมด** (ข้อเดิม ห้ารอบติด)
+1. **เช็ค PR #520 ก่อนอย่างอื่นทั้งหมด** (ข้อเดิม ห้ารอบติด) — รอบนี้เกตแดงหนึ่งครั้งและแก้ไปแล้ว
+   (commit `5d53597b`) ถ้ายังแดงอีก **อ่านล็อกก่อนสรุปเหมือนเดิม ห้ามเดาว่าเหตุเดิม**
    - merge แล้ว → ยืนยันด้วย `git show origin/main:src/.../persistence_vitals.py | head -1`
    - ถูกปิดอีก → **อ่านล็อกเกตก่อนสรุป** ห้ามเดาว่าเหตุเดิม ทุกครั้งที่ผ่านมาเป็นคนละช่อง
      และนี่จะเป็นครั้งที่ห้า ⇒ ใบถึง COO ทันที
