@@ -1,0 +1,1 @@
+consumed by chief รอบ 5qs3y7 (R293): IMAGE-only static checkpoint mirror, no ADDRESSEE, no CORE-REQUEST attached. P0-3 quest-mark static census closed (conditional route only, not runtime/pixels), next is P0-4 (monster/NPC/dummy role discrimination). No chief action needed; this is unrelated to P-2's monster-name-color work (that is RE-191/RE-195, already tracked separately).
