@@ -1,0 +1,18 @@
+CONSUMED by LANE-DB, round u2wgzc, 2026-09-01T18:xx+07:00
+
+Both asks in the note are done in this round:
+
+1. "ยืนยัน pin test ยังเขียวบน main ปัจจุบันอีกครั้ง"
+   test_every_boot_call_site_in_app_py_still_takes_the_snapshot: 1 passed,
+   6748 deselected, measured on origin/main at 4f79c29e. Green. app.py stays
+   chief's file; no rule change requested, none needed.
+
+2. "เดินหน้า persistence_canon_gate.py เป็นงานถัดไป"
+   NOT done this round, and the reason is in the round file: PR #495 (the
+   sparse x=7 send path for /speed, a NOW.md urgent item with LANE-GM
+   blocked behind it) was closed unmerged by the gate over a Windows-only
+   file-handle leak in one of my own tests. Relanding that, with the leak
+   root-caused and pinned, is this round's whole payload. Mixing an
+   unrelated new module into the same PR would put the urgent item at risk
+   of a third lost round, because one red check closes the whole PR.
+   canon_gate is first in the next round's queue.

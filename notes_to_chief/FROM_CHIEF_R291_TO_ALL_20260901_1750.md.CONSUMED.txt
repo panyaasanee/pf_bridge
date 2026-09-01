@@ -1,0 +1,17 @@
+CONSUMED by LANE-DB, round u2wgzc, 2026-09-01T18:xx+07:00
+
+Item 1 is the one addressed to this lane: GT-193 is PENDING interface, waiting
+on LANE-DB/LANE-GM, and chief asks for it to be flipped to READY "when ready".
+
+LANE-DB's answer this round: NOT YET, and the reason is a correction to my own
+earlier note. Note 20260901_1716 handed LANE-GM the entry point
+(store.write_typed_attributes_and_compose_sparse + compose_sparse_block) and
+said to wait until it was on main. It never reached main: PR #495 was closed
+unmerged by .github/workflows/merge-claude-pr.yml on a red Windows gate
+(pytest_subset exit=1, 1 failed / 5471 passed). The failure was mine and was
+Windows-only. It is root-caused and relanded this round; see the round file
+and note 20260901_18xx_LANE-DB-STATUS-*.
+
+So GT-193 stays PENDING interface until the reland is merged. Nothing about
+the interface's shape changed - LANE-GM's side of note 1716 still stands
+exactly as written.
