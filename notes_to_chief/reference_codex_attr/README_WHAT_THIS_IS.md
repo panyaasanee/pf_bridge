@@ -1,94 +1,71 @@
-> **STALE — DO NOT USE FOR P0-4 ROLE/TRAIT GUIDANCE.** Mirror นี้ยังชี้ generation เก่า (`89ad…` ใน pointer และ `0e9…` ในเนื้อหา) และไม่มี `PF_ATTR_ROLE_DISCRIMINATOR.tsv` V2 ของรุ่นปัจจุบัน ห้ามตีความว่า refresh แล้ว ให้ตรวจ `pf_bridge/external/PF_ATTR_GENERATION_MANIFEST.json` และใช้ generation `5f18676004e95fa7466561871f3c25a2b6b217af81e9751cf3f446e4efa979f1` ในเครื่องนี้เท่านั้นจนกว่า owner จะอนุมัติ refresh/ingest แยกต่างหาก
+# reference_codex_attr — คู่มืออ่านงานของ Codex
 
-# reference_codex_attr - the Codex attr work, on the route that actually travels
+ปรับปรุง 2026-09-01 โดย ka1-B · **ชื่อโฟลเดอร์มีคำว่า attr เพราะตอนตั้งมันมีแต่งาน attr —
+ตอนนี้มันครอบงานของ Codex ทั้งหมด ไม่ได้เปลี่ยนชื่อเพราะจดหมายเก่าอ้างชื่อนี้ไว้**
 
-Written by ka1-B, 2026-08-31, on Panya's ruling of the same day.
+---
 
-## What is here
+## อ่านของดิบเถอะ อย่าอ่านแต่จดหมายสรุป
 
-Codex (an outside, read-only reverse-engineering worker) writes its attr
-deliverables into `pf_bridge/external/`. Nothing in `external/` reached GitHub,
-so no cloud lane could read any of it from a clone - the bridge had to paste
-excerpts by hand, one letter at a time.
+ตารางของ Codex ออกแบบมาให้อ่านตรงได้ ทุกแถวพก `source` · `semantic_status` · `scope` ·
+`nonclaim` · `blocker` · `evidence_key` มาเอง **มันจำกัดตัวเองในตัว**
 
-This folder is the fix. It holds:
+จดหมายสรุปของ ka1-B **ไม่ได้มีไว้แทนการอ่าน** มันทำสามอย่างที่ไฟล์ดิบทำไม่ได้: บอกว่ามีไฟล์นี้อยู่
+และเกี่ยวกับสายไหน · บอกว่ารอบไหนคือปัจจุบันและอะไรถูกถอน · เชื่อมกับโค้ดที่รันอยู่จริง
 
-1. **A mirror of the attr deliverables** - `PF_ATTR_FOR_SERVER.md`,
-   `PF_ATTR_FIELD_SEMANTICS.{md,tsv}`, `PF_ATTR_CLASS_CENSUS.*`,
-   `PF_ATTR_RUNTIME_FIELDS.tsv`, `PF_ATTR_UI_BINDINGS.tsv`,
-   `PF_ATTR_INHERITANCE.tsv`, `PF_A2_ACTOR_CODEC_CORRECTION.tsv`,
-   `PF_A2_BASIC_CODEC_CORRECTION.tsv` and the rest of the set.
-2. **Decision-grade slices of the two tables that are too big to travel** -
-   see the next section.
+🔴 **เวลาอ้างอิงในใบของคุณ ให้อ้างแถวในตาราง ไม่ใช่อ้างจดหมายของ ka1-B**
+ความผิดพลาดสองครั้งของชั้นสรุปเมื่อ 31 ส.ค.–1 ก.ย. (`BasicAttr +0x54` = `f_SCALE` และคำแนะนำ
+`n_OFFESIVE` ที่ไม่ครบ) **ของดิบถูกทั้งสองครั้ง ที่ผิดคือคนย่อย**
 
-Generation mirrored here:
+---
 
-    generation_id = 0e9cb92bb01b6b2255dc2284ae582347cd0f97765ac6128675d01e82aad376bd
-    image_sha256  = 9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623
+## เปิดไฟล์ไหนก่อน
 
-Check `PF_ATTR_GENERATION_MANIFEST.json` before trusting a row: if the
-generation_id there does not match the one in `external/`, this mirror is
-stale and someone must re-run the refresh command below.
+| อยากรู้ | เปิด |
+|---|---|
+| มีไฟล์อะไรบ้าง อ่านได้ยังไง | **`INVENTORY_what_you_can_read.tsv`** ← เริ่มที่นี่ |
+| Codex จัดหมวดงานตัวเองไว้ยังไง | `00_SEARCH_HERE_FIRST.md` (Codex เขียนเอง) |
+| รอบปัจจุบันคือรอบไหน | `PF_CRITICAL_ARTIFACT_AUTHORITY.json` → `authority_version` |
+| รอบที่ผ่านมามีอะไรบ้าง | `CODEX_ROUNDS_LOG.tsv` |
 
-## Why a mirror and not the real folder
+## ไฟล์ตามสายงาน
 
-`pf_git_sync.ps1` runs two scans:
+- **สีชื่อมอน / identity** — `PF_MONSTER_COLOR_GATE.*` · `PF_MONSTER_ROLE_DATA_CONTROLS.*` ·
+  `PF_ACTOR_RELATION_INTERACTION_GRAPH.*` · `PF_ATTR_NAME_COLOR_SELECTOR.tsv` · `PF_ATTR_ROLE_DISCRIMINATOR.tsv`
+- **ของตกบนพื้น** — `PF_GROUND_DROP_LIFETIME.*`
+- **ไอคอนเควส ! ?** — `PF_QUEST_MARK_SELECTOR.tsv` · `PF_QUEST_MARK_LIFECYCLE.*` · `PF_QUEST_MARK_RESOURCE_RESOLVER.*`
+- **GM** — `PF_GM_PLUGIN_GATE.*`
+- **attr / สายเก่า** — `PF_ATTR_*` · `PF_A2_*` · `PF_SERIALIZER_*` · `PF_PROTOCOL_*` (generation ถูกปักหมุดเป็น dependency แล้ว)
 
-| scan | paths | untracked files |
-|---|---|---|
-| ALLOWLIST | `notes_to_chief`, `evidence_screens`, `rounds`, `tools_bridge` | **carried** (`--untracked-files=all`) |
-| SHARED_TRACKED | `AGENTS.md`, `.gitignore`, `external`, `gamedata`, `staged`, ... | **not carried** (`--untracked-files=no`) |
+## `*.SLICE.md` ไม่ใช่ของจริง
 
-`external/` is in the second list, so a file there travels only once it is
-already in the git index - and on top of that `.gitignore` denied everything
-under `external/` except nine named members. `notes_to_chief/` is in the first
-list, so a new file here travels on the next 2-minute round with no git step.
-This is the same route ka1-A used for `reference_adhoc_probe/` on 2026-08-28.
+ไฟล์ 7 ตัวเกินเพดาน 2 MB ของ `pf_git_sync.ps1` จึงเดินทางไม่ได้ ที่คุณเห็นคือ **ตัวสรุป** —
+จำนวนแถว คอลัมน์ การกระจายค่า และตัวอย่างสี่แถว **ห้ามอ้าง `.SLICE.md` เป็นหลักฐาน**
+ถ้าต้องการแถวจริงให้ขอผู้ทดสอบที่บริดจ์ดึงให้ หรือขอ Codex ตัดชุดย่อยตามเงื่อนไข
 
-`.gitignore` was also widened on 2026-08-31 to name the attr deliverables, so
-they MAY be tracked in `external/` from now on. Until someone stages them from
-the Windows side, this mirror is what the lanes actually get.
+## กฎการใช้ ห้ามข้าม
 
-## The two tables that never travel
+1. **ชั้นหลักฐาน** — `[ORIGINAL EVIDENCE]` หนักสุด · `[RECONSTRUCTED POLICY]` **เป็นข้อเสนอ ไม่ใช่ข้อเท็จจริง** ·
+   `[CLIENT-OBSERVED RESULT]` คือสิ่งที่ **เซิร์ฟเวอร์เรา** ทำให้เห็น = หลักฐานเกี่ยวกับเรา ไม่ใช่เกี่ยวกับเซิร์ฟเวอร์เดิม
+2. **อ่าน `nonclaim` ทุกแถวก่อนใช้** มันเขียนไว้ตรง ๆ ว่าแถวนั้น *ไม่ได้* พิสูจน์อะไร
+3. **กฎ PER-CLASS** ความหมายของช่องหนึ่งในคลาสหนึ่ง ห้ามเหมาไปใช้กับอีกคลาส
+   (`ACTOR_DEATH_SHARED` ตรวจไว้กับตระกูล CNetNPC ไม่ได้ระบุ CMyActor — สาย B จับจุดนี้ได้เองจากคอลัมน์ `scope`)
+4. **ไฟล์ดิบไม่บอกว่าตัวเองถูกถอน** การถอนอยู่ใน `§0` ของรายงาน audit กับใบ `CODEX_URGENT_*`
+   เคสจริง 1 ก.ย.: crosswalk สี exact → **ถอน 10:40** → ปิดใหม่ 11:35 ⇒ **ปักหมุด `authority_version` ทุกครั้งที่อ้าง**
+5. **เทียบกับโค้ดที่รันอยู่ก่อนเปิดใบแก้** อัตราส่วนจริงของ §A ที่ตรวจแล้วคือ **3 ใน 4 ไม่ใช่ 4 ใน 4**
 
-| file | size | rows |
-|---|---|---|
-| `external/PF_ATTR_CONFLICTS.tsv` | ~3.4 MB | 1,274 |
-| `external/PF_ATTR_UNRESOLVED.tsv` | ~2.3 MB | 963 |
+## สิ่งที่มีค่าที่สุดไม่ได้อยู่ในไฟล์ไหนเลย
 
-Both exceed the 2 MB cap in `pf_git_sync.ps1` (`$SIZE_LIMIT_BYTES`). Listing
-them in `.gitignore` would only produce a refusal line every round, so they
-stay on the bridge disk and these derived slices travel instead:
+สองข้อค้นพบที่ดีที่สุดของวันนี้เป็น **การเชื่อมสองแหล่ง** ที่ไม่มีอยู่ในไฟล์ของ Codex สักไฟล์:
 
-- **`PF_ATTR_CONFLICTS_HEADLINE.txt`** - the counts, read this first.
-- **`PF_ATTR_CONFLICTS_BUCKETS.tsv`** - every `conflict_kind` x
-  `resolution_status` pair with its row count and who has to decide it. This
-  is the map: 1,274 rows collapse into a handful of policy families.
-- **`PF_ATTR_CONFLICTS_OPEN_WIRED.tsv`** - the 68 still-open rows that touch
-  `ActorAttr` or `BasicAttr`, the only two classes the live server encodes
-  today. Every other open conflict is on a class we do not wire yet, so it is
-  a documentation question, not a release blocker. Read this one before any
-  attr wiring change.
-- **`PF_ATTR_UNRESOLVED_BUCKETS.tsv`** - the unresolved table reduced to
-  `unresolved_kind` x `class` x `scope_status` x first clause of `blocker`.
+- **สี** = ตาราง selector ของ Codex **+ สูตร identity `0x2000 + placement_index + 1` ในโค้ดเรา** → ได้ style 56 ชมพู
+- **ของตก** = `n_DROPMODEL_TYPE` 0..12 ของ Codex **+ `mask 0x12` ที่ `mob_loot.py` เราส่งจริง** → ฟิลด์ที่ตัวเลือกอ่านไม่เคยขึ้นสาย
 
-Nothing in these slices re-derives or reinterprets a Codex claim. They only
-count and filter rows, and every line keeps its `conflict_key` /
-`unresolved_key` so it can be traced back to the full table on the bridge.
+Codex สร้างสองข้อนี้เองไม่ได้ เพราะโค้ดของเราไม่ใช่หลักฐานของมัน **สายทำได้ และควรทำ** —
+เวลาอ่านแถวที่เกี่ยวกับโดเมนตัวเอง ให้ถามต่อเสมอว่า *"แล้วโค้ดที่เรารันอยู่ส่งค่านั้นจริงไหม"*
 
-## Refreshing after a Codex round
+## รีเฟรช
 
-From the `pf_bridge` folder:
-
-    python tools_bridge\pf_attr_conflict_digest.py
-
-That regenerates the four slices and re-copies any mirrored file whose bytes
-changed. It writes nothing outside this folder and runs no git command.
-
-## What this folder is NOT
-
-- Not a source of truth. `external/` on the bridge disk is.
-- Not evidence at the client-observable layer. Everything here is IMAGE-layer
-  (static binary) analysis. Probe results are the other layer and live in
-  `reference_adhoc_probe/`. Do not mix a claim from one layer into the other
-  without saying which layer it came from.
+`python tools_bridge\pf_attr_conflict_digest.py` จากโฟลเดอร์ `pf_bridge`
+มิเรอร์ทุกไฟล์ที่ผ่านเพดาน + ยามชื่อ · สร้าง `.SLICE.md` ให้ไฟล์ใหญ่ · เขียน inventory ใหม่ ·
+และหยุดตัวเองถ้า `LOCK_GAME` ถูกถือ (มีรอบเทสในเกมอยู่)
