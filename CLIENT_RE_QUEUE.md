@@ -4026,7 +4026,7 @@ chief เลือกไบต์ `vital_version` ที่ "สมเหตุ�
 `src/pirateforce_foundation/gm/attr_wire.py:143-154` · `src/pirateforce_foundation/gm/state_wire.py:59` ·
 `src/pirateforce_foundation/gm/teleport_wire.py:151` · `GAME_TEST_QUEUE.md` `GT-193` ข้อ 8 (reconnect gate)
 
-## 🔬 RE-199 BG0001-PORT-ROYAL-MINED-LEVEL-COLUMN-001 [STATIC-ON-BRIDGE]: ผู้เล่นที่ยืนอยู่ scene 1 (Port Royal / bg0001) เห็น actor ทุกตัวขึ้น `LV 1` เพราะ `world_port_royal_identity` ไม่มีคอลัมน์ level ที่ขุดไว้เลย -- `MOBS.n_LEVEL_MIN` (และ `n_RANK`) ของแต่ละแถวใน crosswalk ของฉากนี้คือค่าอะไร
+## 🔬 RE-199 BG0001-PORT-ROYAL-MINED-LEVEL-COLUMN-001 [**CLOSED ANSWERED-IN-ROUND / OPENED-IN-ERROR** -- ปิดหัวใบโดย LANE-A (เจ้าของใบ) รอบ `7ste68` 2026-09-02T02:5x+07:00 ในรอบเดียวกับที่เปิด · **ไม่ต้องมีสาย RE ทำอะไรทั้งสิ้น** · เหตุ: pf-adversary ของรอบเดียวกันหักล้างสมมติฐานที่ใช้เปิดใบ -- `world_port_royal_identity` มี `mobs_n_id` ครบทั้ง 105 template ที่ resolve ได้ และทั้ง 105 ตัวมีแถวใน `gamedata/tables/CONSTDATA_TH__MOBS.tsv` พร้อม `n_LEVEL_MIN` (join แล้ว missing=0 ช่วง 10..125) ⇒ คอลัมน์ที่ใบนี้ขอ **ไม่ได้หายไป มันอยู่ห่างแค่ join เดียว** · LANE-A เติมคอลัมน์ลง `_RESOLVED_ROWS` และต่อสาย `world_census_level` ให้ scene 1 เสร็จในรอบ `7ste68` เอง (`pirate-force-server#524`) · บทเรียนที่ต้องไม่ทำซ้ำ: ใบนี้ถูกเปิดจากการ **ไม่เปิดดู** `gamedata/` ก่อนประกาศว่า "ไม่มีแหล่งข้อมูล" ซึ่งเป็นรูปแบบ G1 ที่กติกาห้ามไว้ตรง ๆ · ไม่ลบใบ เก็บไว้เป็นประวัติตามกติกา]: ผู้เล่นที่ยืนอยู่ scene 1 (Port Royal / bg0001) เห็น actor ทุกตัวขึ้น `LV 1` เพราะ `world_port_royal_identity` ไม่มีคอลัมน์ level ที่ขุดไว้เลย -- `MOBS.n_LEVEL_MIN` (และ `n_RANK`) ของแต่ละแถวใน crosswalk ของฉากนี้คือค่าอะไร
 
 ### ทำไมเปิดใบนี้
 
