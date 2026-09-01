@@ -9943,7 +9943,16 @@ highest `GT` ที่เปิดอยู่ก่อนใบนี้คื�
 - numbering: per the shared-counter search command (rule ② at the top of this file), re-run at rebase time against `origin/main`: highest `GT` on `main` is now `GT-194` (LANE-A, opened same day, merged ahead of this branch during a rebase conflict); highest `RE` in `CLIENT_RE_QUEUE.md` is `RE-197`. This entry is `198`.
 - result: (tester fills in: PASS/FAIL/BLOCKED/NO-RESULT, evidence, timestamp, `OBSERVER_CONFIRMED` line per G-OBS once client-observable evidence exists)
 
-## GT-199 CORPSE-REARM-AND-DROP-CROSS-SCENE-SCOPE-001  [PENDING -- รอ merge ก่อน]
+## GT-199 CORPSE-REARM-AND-DROP-CROSS-SCENE-SCOPE-001  [PENDING -- รอ merge ก่อน · ครึ่ง B ถอนแล้ว]
+
+🔴 **แก้ใบโดย chief รอบ `clw1zb` (R297) ก่อนใครเทส — อ่านสามบรรทัดนี้ก่อนอย่างอื่น:**
+1. **ครึ่ง B (ของไม่ตามข้ามฉาก) ถูกถอนออกก่อน push** หลัง pf-adversary ⇒ **ห้ามเทสครึ่ง B** จะไม่มีอะไรเปลี่ยน
+   และ `PF-EVENT mob_loot_scene_reconcile_cleared_*` **จะไม่ปรากฏ** (ไม่ใช่ FAIL ของใคร คือของที่ไม่ได้ส่ง)
+   เหตุผล + คำถามที่ค้างอยู่กับ COO: `notes_to_chief/20260902_0245_CHIEF-ASK-COO-drop-cross-scene-option1-vs-option2-*`
+2. **ครึ่ง A (ศพไม่ลุกกลับเป็นท่ากำลังตาย) ยังใช้ได้ตามใบทุกบรรทัด** — เทสได้เมื่อ merge แล้ว
+3. 🔴 **ใบนี้ไม่ได้ขยับ NOW.md P-1 และไม่เคยขยับ** — `COO-DECISION 20260901_2148` เขียนเองว่า "P-1/P-2/P-3 ไม่ผูกกับเรื่องนี้"
+   ถ้อยคำเดิมของใบที่บอกว่าเป็น "งานใต้ฝากระโปรงของ P-1" ให้อ่านว่า **แก้บั๊ก P0-5 เฉย ๆ**
+   (เกณฑ์ "เก็บได้" ของ P-1 ยังต่อสายไม่ได้เลย: `runtime.py` ไม่มี call site ของ pickup) · ดู `20260902_0248_CHIEF-CORRECTION-*`
 
 - objective: ข้อพิสูจน์เดียว: การต่อสายสอง bounded fix ของ P0-5 ใน `runtime.py` (chief รอบ `clw1zb`/R297)
   ให้ผลตามที่ตั้งใจ **ต่อหน้าไคลเอนต์จริง** ไม่ใช่แค่ในเทสไลบรารี
@@ -9955,7 +9964,7 @@ highest `GT` ที่เปิดอยู่ก่อนใบนี้คื�
   🔴 กฎ "หนึ่งใบหนึ่งข้อพิสูจน์": A กับ B ต้องถูก **เกรดและบันทึกแยกกัน** (A PASS/B FAIL เกิดได้)
   รวมไว้ใบเดียวเพราะเป็นการต่อสายก้อนเดียวในบูตเดียว · ได้ผลแค่ครึ่งเดียว = อีกครึ่งยังเปิด ให้เปิดเป็น
   "ใบถัดไป" (ห้ามจองเลข)
-- 🔴 รอ merge ก่อน: โค้ดต่อสายอยู่ repo `pirate-force-server` branch `claude/beautiful-shannon-clw1zb`
+- 🔴 รอ merge ก่อน: โค้ดต่อสาย **(เฉพาะครึ่ง A)** อยู่ repo `pirate-force-server` branch `claude/beautiful-shannon-clw1zb`
   (จาก CODEX_URGENT 2026-09-01T20:40+07:00 · COO-DECISION 2026-09-01T21:48+07:00 · ไลบรารีโดย LANE-B)
   **ต้องอยู่บน `main` ก่อนบูตเท่านั้น** ดู RECHECK ข้างล่าง ห้ามบูตจาก branch
 - 🔴 ประตูของ NOW.md: หัวไฟล์นี้สั่งว่า "GT-146 และใบตีมอนสเตอร์ทั้งหมด ห้ามเสนอเข้าคิว attended จนกว่า
@@ -10040,11 +10049,11 @@ highest `GT` ที่เปิดอยู่ก่อนใบนี้คื�
 - RECHECK:
   ```
   cd pirate-force-server && git fetch origin && \
-  git show origin/main:src/pirateforce_foundation/runtime.py | grep -n "reconcile_scene_transition()" && \
   git show origin/main:src/pirateforce_foundation/runtime.py | grep -n "transitioning=death_transitioning" && \
-  python3 -m pytest tests/test_mob_scene_recompose.py tests/test_mob_loot.py -q
+  python3 -m pytest tests/test_mob_corpse_rearm_wired.py tests/test_mob_scene_recompose.py -q
   ```
-  ต้องผ่านครบสามส่วน · ผลว่าง/แดง = ยังไม่ merge ⇒ ห้ามบูต ให้รายงานกลับแทน
+  ต้องผ่านทั้งสองส่วน · ผลว่าง/แดง = ยังไม่ merge ⇒ ห้ามบูต ให้รายงานกลับแทน
+  🔴 **ห้ามเช็ค `reconcile_scene_transition()`** — ครึ่ง B ถอนแล้ว มันจะไม่มีอยู่บน main และนั่นถูกต้อง
 - links: `notes_to_chief/CODEX_URGENT_20260901_2040_P05-CORPSE-DROP-STATE-SCOPE.md` ·
   `notes_to_chief/20260901_2148_COO-DECISION-corpse-rearm-and-cross-scene-drop-bounded-fix-to-lane-b.md` ·
   `notes_to_chief/20260901_2255_LANE-B-STATUS-corpse-rearm-and-drop-cross-scene-bounded-fixes-built-core-request-for-wiring.md` ·
