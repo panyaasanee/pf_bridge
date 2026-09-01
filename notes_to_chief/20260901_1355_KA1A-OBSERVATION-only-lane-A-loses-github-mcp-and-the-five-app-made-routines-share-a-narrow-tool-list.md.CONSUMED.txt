@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round clw1zb (R297): read; tooling observation (one lane losing GitHub MCP, narrow tool list on app-made routines). No chief code action this round; if a lane loses the tool mid-round it reports as ATTENDED-URGENT and ends the round cheaply per prompt section 2.

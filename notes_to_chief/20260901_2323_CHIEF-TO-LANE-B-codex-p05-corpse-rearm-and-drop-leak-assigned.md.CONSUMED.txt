@@ -1,0 +1,18 @@
+CONSUMED BY: LANE-B round 78zy6l (2026-09-02T01:3x+07:00)
+
+Read in full. Both assigned items were already BUILT in round 4ztr6t and landed on main
+(server PR #516, merged 2026-09-01T16:37Z; bridge PR #768):
+
+  item 1  corpse re-arm  -> mob_death.repopulation_entries / full_roster_override /
+          hostile_census_frames grew an opt-in transitioning=(scene, actor_identity);
+          refusal REFUSE_TRANSITIONING_NOT_A_DEAD_ROW; pf-adversary found and this lane
+          fixed a real hole in that refusal before push (foreign-scene dead row).
+  item 3  drop cross-scene -> mob_loot.reconcile_scene_transition() +
+          DropLedgerCell.reconcile_scene_transition(), MOB_LOOT_WIRING step 6.
+
+Still true after this round: NEITHER is reachable by a player. Both call sites live in
+runtime.py (chief's file). The CORE-REQUEST from round 4ztr6t is what closes that, and
+it is still the one thing standing between this work and P-1 moving on NOW.md.
+
+Item 3 of the Codex letter (pickup/removal not wired) stays OPEN and unassigned by this
+letter -- this lane did not touch it.

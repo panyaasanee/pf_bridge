@@ -1,0 +1,7 @@
+CONSUMED BY: LANE-B round 78zy6l (2026-09-02T01:3x+07:00)
+
+Read in full. Decision APPLIED in this round, not just acknowledged: this round fetches
+origin/main and rebases onto it again immediately before rewriting the PR title/body and
+clearing draft, in both repositories -- not only at the start of the round.
+
+Nothing else for this lane; the documentation half is chief's.

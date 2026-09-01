@@ -3571,7 +3571,7 @@ order, owner ruling ของ 7 template) อยู่ใน `notes_to_chief/202
 (แก้ไขแล้วรอบเดียวกัน) ไม่ใช่ใบนี้ **บันทึก `IMAGE_ACCESS_COST.tsv` ที่เกี่ยวข้องถูกลบออกแล้วเช่นกัน
 เพราะไม่มีต้นทุนจริงเกิดขึ้น**
 
-## 🔬 RE-191 MONSTER-NAME-COLOR-FONTSTYLE63-RGB-001 [STATIC-ON-BRIDGE]: `CODEX_CHECKPOINT 20260901_1135` closed the same-actor conditional static path for the monster-name-color write (`MCG-IMG-025..033` now `PROVEN_EXACT`, death branch conditionally writes style 63 via `CNetNPC` vslot `+0x3C` -> `0x0043BD70`) but never read the actual RGB triple that `fontstyle_id=63` resolves to through `UILabel_FontStyleID_parser_setter` (`0x00AA488F`) — what color does style 63 actually set, compared against the already-decoded controls 61/62? 🔴 **ไม่ใช่การยืนยันล่วงหน้าว่า 63 = เทา** — `20260901_0921_LANE-GM-STATUS-*.md`'s own nonclaim ①: "ไม่อ้างว่า fontstyle 63 คือสีเทาของมอนตาย — ตารางเองปฏิเสธการอ้างนี้ตรง ๆ" ใบนี้มีอยู่เพื่อหาคำตอบนั้น ไม่ใช่เพื่อยืนยัน `NOW.md` P-2's ตาย=เทา ที่ยังไม่มีหลักฐาน
+## 🔬 RE-191 MONSTER-NAME-COLOR-FONTSTYLE63-RGB-001 [STATIC-ON-BRIDGE]: `CODEX_CHECKPOINT 20260901_1135` closed the same-actor conditional static path for the monster-name-color write (`MCG-IMG-025..033` now `PROVEN_EXACT`, death branch conditionally writes style 63 via `CNetNPC` vslot `+0x3C` -> `0x0043BD70`) but never read the actual RGB triple that `fontstyle_id=63` resolves to through `UILabel_FontStyleID_parser_setter` (`0x00AA488F`) — what color does style 63 actually set, compared against the already-decoded controls 61/62? 🔴 **ไม่ใช่การยืนยันล่วงหน้าว่า 63 = เทา** — `20260901_0921_LANE-GM-STATUS-*.md`'s own nonclaim ①: "ไม่อ้างว่า fontstyle 63 คือสีเทาของมอนตาย — ตารางเองปฏิเสธการอ้างนี้ตรง ๆ" ใบนี้มีอยู่เพื่อหาคำตอบนั้น ไม่ใช่เพื่อยืนยัน `NOW.md` P-2's ตาย=เทา ที่ยังไม่มีหลักฐาน  [OPEN — assigned LANE-GM]
 
 ### ทำไมเปิดใบนี้ (มอบหมายตรงจาก COO)
 
@@ -3639,7 +3639,7 @@ runner/Codex บนสะพาน) ไม่ต้องพึ่งไฟล�
 · `notes_to_chief/20260901_0921_LANE-GM-STATUS-p2-color-static-research-fontstyle63-gap-re-followup-proposed.md` (รอบ `h6rsgl` ที่เสนอวิธีปิดนี้ครั้งแรก) ·
 `pf_bridge/NOW.md` P-2
 
-## 🔬 RE-193 ACTORATTR-SEVEN-UNKNOWN-FIELDS-CLIENT-DEFAULT-VALUES-001 [STATIC-ON-BRIDGE]: what does the client itself write, at object-creation time, into the 7 `ActorAttr` fields (of 55 total in `gm/attr_wire.py:166-224`) that have neither a server-owned typed-column source nor a codex `default_writer_va` row today -- `x=14 nameboard_key (0x090, u32)`, `x=25 wstr_B0 (0x0B0)`, `x=36 u8_18C (0x18C, u8)`, `x=41 q_140_pairB (0x140, u64)`, `x=42 u8_9B_pairB (0x09B, u8)`, `x=43 wstr_CC (0x0CC)`, `x=54 u16_1B0 (0x1B0, u16)` (`x=41`/`x=42` share one mask bit)?
+## 🔬 RE-193 ACTORATTR-SEVEN-UNKNOWN-FIELDS-CLIENT-DEFAULT-VALUES-001 [STATIC-ON-BRIDGE]: what does the client itself write, at object-creation time, into the 7 `ActorAttr` fields (of 55 total in `gm/attr_wire.py:166-224`) that have neither a server-owned typed-column source nor a codex `default_writer_va` row today -- `x=14 nameboard_key (0x090, u32)`, `x=25 wstr_B0 (0x0B0)`, `x=36 u8_18C (0x18C, u8)`, `x=41 q_140_pairB (0x140, u64)`, `x=42 u8_9B_pairB (0x09B, u8)`, `x=43 wstr_CC (0x0CC)`, `x=54 u16_1B0 (0x1B0, u16)` (`x=41`/`x=42` share one mask bit)?  [OPEN — assigned LANE-DB]
 
 ### ทำไมเปิดใบนี้ (มอบหมายตรงจาก COO)
 
@@ -3701,7 +3701,7 @@ runner/Codex บนสะพาน) ไม่ต้องพึ่งไฟล�
 (ทำไมไม่เร่งด่วนแล้ว) · `pf_bridge/notes_to_chief/reference_codex_attr/PF_ATTR_FIELD_SEMANTICS.tsv`
 (ตาราง 28 ค่าที่ปิดไปแล้วด้วยวิธีเดียวกัน) · `gm/attr_wire.py:166-224` (ตาราง `FIELDS` ทั้ง 55 แถว)
 
-## 🔬 RE-194 BASICATTR-0X54-SPEED-PLAYER-VS-NPC-CONFLICT-001 [STATIC-ON-BRIDGE]: `BasicAttr+0x54` (f32, mask `0x0040`, tag `0x2A`) has two different [MEASURED] client-write values for the same offset -- which one does a freshly-created *player* object actually carry?
+## 🔬 RE-194 BASICATTR-0X54-SPEED-PLAYER-VS-NPC-CONFLICT-001 [STATIC-ON-BRIDGE]: `BasicAttr+0x54` (f32, mask `0x0040`, tag `0x2A`) has two different [MEASURED] client-write values for the same offset -- which one does a freshly-created *player* object actually carry?  [OPEN — assigned LANE-DB]
 
 ### ทำไมเปิดใบนี้ (มอบหมายตรงจาก COO)
 
@@ -3766,7 +3766,7 @@ seed คอลัมน์ DB ต่อ) เหมือนกับ `RE-193` �
 เรื่องค่านี้ยังไม่ปิด) · `src/pirateforce_foundation/mob_death.py:850-856` (ยืนยัน offset/mask/tag
 เดียวกัน)
 
-## 🔬 RE-195 FONTSTYLEID-RELATIONSHIP-PREDICATE-VS-FACTION-COMPARATOR-001 [STATIC-ON-BRIDGE]: does `UILabel_FontStyleID_parser_setter`'s `relationship_predicate` (`0x0043C380..0x0043C63C`) read the same server-controllable `BasicAttr+0x68` faction field the proven relation comparator (`0x4A1D50`) reads, or a different one -- and is there any server-controllable input at all behind style ids 56/58/59/60/61 (the "positive/nonpositive identity + relationship" branches), or only behind 62/63?
+## 🔬 RE-195 FONTSTYLEID-RELATIONSHIP-PREDICATE-VS-FACTION-COMPARATOR-001 [STATIC-ON-BRIDGE]: does `UILabel_FontStyleID_parser_setter`'s `relationship_predicate` (`0x0043C380..0x0043C63C`) read the same server-controllable `BasicAttr+0x68` faction field the proven relation comparator (`0x4A1D50`) reads, or a different one -- and is there any server-controllable input at all behind style ids 56/58/59/60/61 (the "positive/nonpositive identity + relationship" branches), or only behind 62/63?  [OPEN — assigned LANE-GM]
 
 ### ทำไมเปิดใบนี้ (ตอบ CORE-REQUEST-GM-048)
 
@@ -3828,7 +3828,7 @@ selector (`0x00443F50`) หรือ faction/relation comparator (`0x4A1D50`) �
 faction BasicAttr `0x0400` @ `+0x68`, พิสูจน์แล้วรันไทม์) · `RE-191` (ปิดคำถาม RGB ของ 61/62/63 แล้ว
 ใบนี้ไม่ซ้ำ)
 
-## 🔬 RE-196 RETURNSELECTSERVERVITAL-FIELD3-TAG-BYTE-001 [STATIC-ON-BRIDGE]: field 3 (the string field, object `+0x20`) of `ReturnSelectServerVital` (0x709E) -- is there an instruction that writes a tag byte just before `string_wire_call@0x005E6A2B`, the way field1/field2 have `STACK@...+0x14`/`+0x18` tag-writes -- and separately, does the SAME question resolve for `DeleteActorVital`'s own string field (also labeled `UNTAGGED_STRING8_LEN32LE` despite GT-018 confirming a real `0x44` tag for it)?
+## 🔬 RE-196 RETURNSELECTSERVERVITAL-FIELD3-TAG-BYTE-001 [STATIC-ON-BRIDGE]: field 3 (the string field, object `+0x20`) of `ReturnSelectServerVital` (0x709E) -- is there an instruction that writes a tag byte just before `string_wire_call@0x005E6A2B`, the way field1/field2 have `STACK@...+0x14`/`+0x18` tag-writes -- and separately, does the SAME question resolve for `DeleteActorVital`'s own string field (also labeled `UNTAGGED_STRING8_LEN32LE` despite GT-018 confirming a real `0x44` tag for it)?  [OPEN — assigned chief]
 
 ### ทำไมเปิดใบนี้ (เขียนใหม่รอบ 292 หลัง pf-adversary รอบสองจับ overclaim ทิศตรงข้ามในร่างแรก)
 
@@ -3899,6 +3899,10 @@ section B checks, RESULT line -- ทั้งหมด `[STALE][MEASURED]` ร�
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-197`/`RE-197` = **0 hit ทั้งสองไฟล์** ⇒ **ใบนี้คือ
 > `RE-197`** · เลขว่างถัดไปหลังใบนี้ = 198
 > 🔴 ใบ `RE-085`-`RE-196` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
+
+## 🔬 RE-197 GETWORLDINFOVITAL-51-BYTE-FRAME-001 [STATIC-ON-BRIDGE]: เฟรม `GetWorldInfoVital` 51 ไบต์ (`[G< #1398]`) ที่อยู่ระหว่างปุ่ม "กลับหน้าเลือกตัวละคร" กับปุ่ม "ออกจากเกม" คือรูปแบบย่อของอะไร และมันแยกสองปุ่มออกจากกันได้จริงไหม (เฟรม 268 ไบต์เหมือนกันทุกไบต์ทั้งสองปุ่ม)  [OPEN — assigned chief]
+
+> 🔴 **หัวใบนี้ถูกเติมกลับโดย chief รอบ `clw1zb` (R297)** — เนื้อใบมีอยู่แล้วตั้งแต่ R292 แต่ไม่มีบรรทัด `## ` จึงถูกกลืนอยู่ในบล็อกของ `RE-196` และ RE runner มองไม่เห็นมาตลอด (pf-adversary D2) · **ไม่ได้แก้ ไม่ได้ย้าย ไม่ได้ลบถ้อยคำเดิมสักตัว เติมหัวใบอย่างเดียว**
 
 ### ทำไมเปิดใบนี้
 
@@ -4026,7 +4030,7 @@ chief เลือกไบต์ `vital_version` ที่ "สมเหตุ�
 `src/pirateforce_foundation/gm/attr_wire.py:143-154` · `src/pirateforce_foundation/gm/state_wire.py:59` ·
 `src/pirateforce_foundation/gm/teleport_wire.py:151` · `GAME_TEST_QUEUE.md` `GT-193` ข้อ 8 (reconnect gate)
 
-## 🔬 RE-199 BG0001-PORT-ROYAL-MINED-LEVEL-COLUMN-001 [**CLOSED ANSWERED-IN-ROUND / OPENED-IN-ERROR** -- ปิดหัวใบโดย LANE-A (เจ้าของใบ) รอบ `7ste68` 2026-09-02T02:5x+07:00 ในรอบเดียวกับที่เปิด · **ไม่ต้องมีสาย RE ทำอะไรทั้งสิ้น** · เหตุ: pf-adversary ของรอบเดียวกันหักล้างสมมติฐานที่ใช้เปิดใบ -- `world_port_royal_identity` มี `mobs_n_id` ครบทั้ง 105 template ที่ resolve ได้ และทั้ง 105 ตัวมีแถวใน `gamedata/tables/CONSTDATA_TH__MOBS.tsv` พร้อม `n_LEVEL_MIN` (join แล้ว missing=0 ช่วง 10..125) ⇒ คอลัมน์ที่ใบนี้ขอ **ไม่ได้หายไป มันอยู่ห่างแค่ join เดียว** · LANE-A เติมคอลัมน์ลง `_RESOLVED_ROWS` และต่อสาย `world_census_level` ให้ scene 1 เสร็จในรอบ `7ste68` เอง (`pirate-force-server#524`) · บทเรียนที่ต้องไม่ทำซ้ำ: ใบนี้ถูกเปิดจากการ **ไม่เปิดดู** `gamedata/` ก่อนประกาศว่า "ไม่มีแหล่งข้อมูล" ซึ่งเป็นรูปแบบ G1 ที่กติกาห้ามไว้ตรง ๆ · ไม่ลบใบ เก็บไว้เป็นประวัติตามกติกา]: ผู้เล่นที่ยืนอยู่ scene 1 (Port Royal / bg0001) เห็น actor ทุกตัวขึ้น `LV 1` เพราะ `world_port_royal_identity` ไม่มีคอลัมน์ level ที่ขุดไว้เลย -- `MOBS.n_LEVEL_MIN` (และ `n_RANK`) ของแต่ละแถวใน crosswalk ของฉากนี้คือค่าอะไร
+## 🔬 RE-201 BG0001-PORT-ROYAL-MINED-LEVEL-COLUMN-001 [**CLOSED ANSWERED-IN-ROUND / OPENED-IN-ERROR** -- ปิดหัวใบโดย LANE-A (เจ้าของใบ) รอบ `7ste68` 2026-09-02T02:5x+07:00 ในรอบเดียวกับที่เปิด · **ไม่ต้องมีสาย RE ทำอะไรทั้งสิ้น** · เหตุ: pf-adversary ของรอบเดียวกันหักล้างสมมติฐานที่ใช้เปิดใบ -- `world_port_royal_identity` มี `mobs_n_id` ครบทั้ง 105 template ที่ resolve ได้ และทั้ง 105 ตัวมีแถวใน `gamedata/tables/CONSTDATA_TH__MOBS.tsv` พร้อม `n_LEVEL_MIN` (join แล้ว missing=0 ช่วง 10..125) ⇒ คอลัมน์ที่ใบนี้ขอ **ไม่ได้หายไป มันอยู่ห่างแค่ join เดียว** · LANE-A เติมคอลัมน์ลง `_RESOLVED_ROWS` และต่อสาย `world_census_level` ให้ scene 1 เสร็จในรอบ `7ste68` เอง (`pirate-force-server#524`) · บทเรียนที่ต้องไม่ทำซ้ำ: ใบนี้ถูกเปิดจากการ **ไม่เปิดดู** `gamedata/` ก่อนประกาศว่า "ไม่มีแหล่งข้อมูล" ซึ่งเป็นรูปแบบ G1 ที่กติกาห้ามไว้ตรง ๆ · ไม่ลบใบ เก็บไว้เป็นประวัติตามกติกา · 🔴 **เลขใบเปลี่ยนจาก `RE-199` เป็น `RE-201`** ตอน merge: chief เปิด `GT-199` บน `main` ในเวลาไล่เลี่ยกัน และกฎเลขของสองคิวนี้ใช้ ช่องเลขร่วมกัน (ดูกฎ ② หัว `GAME_TEST_QUEUE.md`) ⇒ ใบนี้ขยับเลขเพื่อไม่ให้ชนกัน `GT-200` ของรอบเดียวกันไม่ชน จึงคงเลขเดิม]: ผู้เล่นที่ยืนอยู่ scene 1 (Port Royal / bg0001) เห็น actor ทุกตัวขึ้น `LV 1` เพราะ `world_port_royal_identity` ไม่มีคอลัมน์ level ที่ขุดไว้เลย -- `MOBS.n_LEVEL_MIN` (และ `n_RANK`) ของแต่ละแถวใน crosswalk ของฉากนี้คือค่าอะไร
 
 ### ทำไมเปิดใบนี้
 

@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round clw1zb (R297): already answered and wired in R294 (chat_command_action._speed_action, attr_wire version byte 0, CORE-REQUEST row 030 closed). Stub was missing; added now.

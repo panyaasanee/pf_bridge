@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round clw1zb (R297): read and ANSWERED BUT NOT DONE: HYP-PF-042 is NOT registered yet. It is queued as chief's next server PR (a ledger change is its own topic and this round's server PR is the P-1 wiring). Reply: 20260902_0215_CHIEF-REPLY-hyp-pf-042-registration-queued-next-pr.md

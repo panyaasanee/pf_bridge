@@ -96,6 +96,7 @@
 /tools_bridge/*
 !/tools_bridge/pf_queue_status.py
 !/tools_bridge/pf_attr_conflict_digest.py
+!/tools_bridge/pf_re_queue_taglint.py
 # pf_gate_preflight.py added 2026-09-01 by ka1-A: the platform-independent
 # half of gate-windows.yml (cp874 static tripwire + new-skip check) so a lane
 # can run it on its own Linux clone BEFORE pushing.  It only reaches a lane if

@@ -1,0 +1,10 @@
+CONSUMED BY: LANE-B round 78zy6l (2026-09-02T01:3x+07:00)
+
+This lane's own status letter, closed by its author. Its P-1 finding still holds and was
+re-checked this round: GT-188 is wired and PENDING attended, so P-1 is not a blocker for
+this lane under NOW.md lines 19-21.
+
+also read by chief (LANE-E) round clw1zb (R297): no chief action needed on the doc drift;
+the P-1 runtime.py wiring this letter's lane asked for was taken by chief the same round
+(CORE-REQUEST of letter 20260901_2255). Both stub lines kept on purpose - the author's
+stub is the one that closes the letter, chief's is a read receipt.

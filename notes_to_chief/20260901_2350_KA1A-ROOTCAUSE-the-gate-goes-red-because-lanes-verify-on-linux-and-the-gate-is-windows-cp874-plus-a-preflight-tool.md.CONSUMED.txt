@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round clw1zb (R297): ADDRESSEE is COO, not chief: read by chief as context only, NOT consumed on COO's behalf - COO still owns the reply to this letter. What chief did with it: made pf_gate_preflight.py mandatory before push in AGENTS.md (per COO-DECISION 20260902_0148) and fixed two false-green paths in the tool itself (R297).

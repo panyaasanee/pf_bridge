@@ -63,7 +63,7 @@ SERVER_STATS_PROGRESSION_PATH = (
 )
 SERVER_DAMAGE_HP_LINK_PATH = SERVER_SOURCE_ROOT / "damage_hp_link_hypothesis.py"
 EXPECTED_SERVER_SOURCE_HASHES = {
-    SERVER_RUNTIME_PATH: "cea9fe3fb4fb3c1b5ed22321d1666971e26d9b6d13999aefd67b5778b388e5cb",
+    SERVER_RUNTIME_PATH: "6098c24a45b6964c4b3296dae0b3e61c1cb0505736cb9a8682d0ff0ba7a8a0b5",
     SERVER_MOB_COMBAT_PATH: "c552f817d663d3055fd57bc491d12676e9bc18444f6c38bb4c6a2249633ba432",
     SERVER_PLAYER_WIRE_PATH: "c2080983d192051bf3f3ddc3df754e768e6eac4c25e8f147cd247be37fb21d75",
     SERVER_STATS_PROGRESSION_PATH: "a41d88c02fa8c5b52b6bb234f19a567945e7ae7af7c06794ab3e13edbf5a06c9",
@@ -78,8 +78,8 @@ COMBAT_CONFLICT_GOLDEN = {
         "lifecycle_key": "e56e8288813de96b5d6aaf9ff60b6e6c0fb97f74be065e67a10df6619930847a",
         "exact_observation": "The inbound handler reads u32 +0x30, feeds it to behavior lookup 0x00702A10, then constructs CActorTask_UseBehavior through 0x0047AB30.",
         "frozen_claim_ref": (
-            "Pirate Force ServerProject/src/pirateforce_foundation/runtime.py:4193-4330@sha256="
-            "cea9fe3fb4fb3c1b5ed22321d1666971e26d9b6d13999aefd67b5778b388e5cb;"
+            "Pirate Force ServerProject/src/pirateforce_foundation/runtime.py:4193-4335,8679-8691@sha256="
+            "6098c24a45b6964c4b3296dae0b3e61c1cb0505736cb9a8682d0ff0ba7a8a0b5;"
             "mob_combat.py:1698-1745@sha256="
             "c552f817d663d3055fd57bc491d12676e9bc18444f6c38bb4c6a2249633ba432"
         ),

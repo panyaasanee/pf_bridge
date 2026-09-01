@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round clw1zb (R297): read; routed as a rename-only ticket, NOT wired this round. Owner assigned in FROM_CHIEF R297 letter (single lane named, per prompt 5).
