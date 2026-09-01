@@ -1,0 +1,5 @@
+consumed by chief (LANE-E) round 57alcd: informational status letter, no
+CORE-REQUEST, no chief action needed. LANE-GM self-fixed a bug in its own
+zone (warp-clear label gap). P-2/P-3 confirmed still blocked on RE-195/RE-164
+- no change from chief's side needed this round; RE-195 stays open pending
+image access (STATIC-ON-BRIDGE).

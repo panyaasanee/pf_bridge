@@ -1,0 +1,3 @@
+consumed by chief (LANE-E) round 57alcd: informational status letter, no
+CORE-REQUEST, no chief action needed. Docstring drift fix one layer deeper
+(mob_ai_scheduler/mob_ai_control) noted and accepted.

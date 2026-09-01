@@ -9640,3 +9640,124 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
   `GT-182` (first-warp-of-session PASS, this entry's direct precondition) · `runtime.py:5459-5470`
 
 **ผู้เปิดใบ: chief รอบ `liq4ri` 2026-09-01 (cloud)**
+
+## GT-193 SPEED-COMMAND-SPARSE-X7-001  [PENDING interface -- see RECHECK]
+
+> Opened by chief per direct COO order `notes_to_chief/20260901_1642_COO-ORDER-speed-sparse-x7-chief-open-gt-entry.md`,
+> itself citing `20260901_1640_COO-ORDER-speed-sparse-x7-approved-panya-live-override-of-1447.md` (LANE-DB,
+> approves a sparse x=7-only write path in `persistence_attr_compose.py`, reversing part of COO-ORDER
+> `1447` item 2) and `20260901_1641_COO-ORDER-speed-sparse-x7-lane-gm-wire-chat-command.md` (LANE-GM,
+> wires `/speed <value>` to call it). Both orders record Panya's live confirmation in-session
+> 2026-09-01 16:39+07 to proceed without waiting for the BasicAttr+0x54 player-vs-NPC value RE.
+>
+> **Correction to the source orders' own cross-reference:** `1640` and `1642` both write "RE-193" for
+> the BasicAttr+0x54 player-vs-NPC pilot question that is explicitly NOT a blocker for this entry.
+> Checked directly against `CLIENT_RE_QUEUE.md`: `RE-193` is actually
+> `ACTORATTR-SEVEN-UNKNOWN-FIELDS-CLIENT-DEFAULT-VALUES-001` (unrelated, opened round `liq4ri`/R288).
+> The BasicAttr+0x54 player-vs-NPC pilot RE is `RE-194 BASICATTR-0X54-SPEED-PLAYER-VS-NPC-CONFLICT-001`
+> (chief opened it round `2zr22w`/R290) -- COO-ORDER `1447` itself, when opening that pilot RE, said to
+> number it "after RE-193", i.e. 194 (confirmed again by `COO-DECISION 20260901_1542` item 2, same
+> wording). This entry treats `RE-194` as the correct non-blocking parallel RE. Flag this numbering
+> slip back to COO/chief when consuming this entry -- do not silently repeat "RE-193" as the speed-value
+> ticket.
+>
+> Numbering: highest `GT` at open time is `GT-192`; highest `RE` in `CLIENT_RE_QUEUE.md` is `RE-195`.
+> This entry is `193`.
+
+- objective: single claim -- once LANE-DB's sparse write path (mask bit x=7 / `BasicAttr+0x54` only, in
+  `persistence_attr_compose.py`) is wired to LANE-GM's `/speed <value>` chat command, sending
+  `/speed <value>` on a normal boot writes ONLY that one field (mask bit `0x0040`) in the persisted
+  attribute block, and produces ONLY that one visible effect (movement speed) -- no other attribute,
+  wire-level or DB-level, is touched by this command. This is a narrower, distinct claim from `GT-183`
+  (full-55-field-block `/speed` variant, separate entry, do not merge the two).
+
+- 🔴 db (READ FIRST -- dangerous if skipped): this entry MUST run against a run-copy DB produced by one
+  of the `staged/*_boot.ps1` jobs (e.g. `staged/087_gt008_boot.ps1`), which copy
+  `state\pirateforce.sqlite3` (canonical) to a fresh timestamped run-copy
+  (`state\pirateforce_gt193_<stamp>.sqlite3` or equivalent) BEFORE boot. **This entry must never point a
+  boot at the canonical file directly.** Record the run-copy's filename and sha256 before/after this
+  round, and separately verify the canonical file's own sha256 is byte-identical before and after (it is
+  never opened for this test).
+
+- server args: standard boot via a `staged/*_boot.ps1` job as above (`-SecondPasswordMode bypass`), GM
+  account from `config/gm_accounts.json`. Requires `pirate-force-server@main` at or after the commit
+  that ships BOTH (a) LANE-DB's sparse x=7-only write function in `persistence_attr_compose.py` and
+  (b) LANE-GM's `/speed <value>` chat-command wiring that calls that function (not the full-block path
+  `GT-183` exercises) -- see RECHECK.
+
+- steps:
+  1. Boot server + client per standard playbook on a `staged/*_boot.ps1` run-copy DB (see db section
+     above). Confirm a fresh server start, not reused from a prior client.
+  2. Log in with the GM account. Right-click-drag camera only for a clean baseline view (camera-only,
+     does not change facing, emits nothing on the wire). Screenshot BASELINE, full resolution. Record
+     every name label's colour in frame, one line each ("none" if nothing else visible), and a fixed
+     walking reference (distance between two landmarks, or time to cross a known gap).
+  3. Query the persisted attribute row for this character directly from the run-copy DB (read-only) and
+     record every field's current value -- this is the pre-command wire/DB snapshot.
+  4. Click into the chat box, confirm focus, type exactly `/speed 800`, press Enter.
+  5. Walk the fixed distance from step 2 using normal WASD movement. Screenshot STEP-A. Record whether
+     the character visibly moves faster than baseline, and every name label's colour again.
+  6. Re-query the same persisted attribute row from the run-copy DB. Diff field-by-field against the
+     step-3 snapshot.
+  7. Repeat steps 3-6 once more with `/speed 100` (STEP-B, expect visibly slower than baseline).
+
+- pass criteria (two layers, kept separate):
+    wire/DB: (a) the server console/capture log shows, after each `/speed <value>` line, a frame whose
+      decoded change-mask has bit `0x0040` (`BasicAttr+0x54`, x=7) set and NO other bit set; (b) the
+      step-3-vs-step-6 DB row diff (both `/speed 800` and `/speed 100` passes) shows exactly ONE changed
+      field -- the speed column, matching the typed value -- byte-identical everywhere else in the row.
+      Both (a) and (b) are headless-provable from the console log and the DB file alone and need no
+      human at the screen. If either the frame or the DB diff shows ANY other field/bit touched, that is
+      a FAIL of this entry's sparse-only claim regardless of whether the speed field itself changed
+      correctly -- record exactly which extra field/bit appeared. This is also the exact observation
+      LANE-DB's open "25-field resend" question wants watched for (see nonclaim 2); report what was seen
+      there too, but this entry does not have to resolve that wider question to close.
+    client-observable: what the human at the screen reports for STEP-A/STEP-B against BASELINE -- does
+      the character visibly move faster after `/speed 800` and visibly slower after `/speed 100`, with
+      no other visible change (no glitch, no name-label colour change, no other stat/appearance shift).
+      A result where the character does not visibly change speed at all is a valid, useful negative --
+      it would point at the sparse path either not reaching the client or being ignored client-side.
+
+- nonclaims:
+  1. Does not test the full-55-field-block `/speed` variant -- that is `GT-183` (separate claim, separate
+     entry, currently `BLOCKED`; do not close or supersede it with this entry's result).
+  2. Does not close LANE-DB's open "25-field resend" question -- only reports what is observed while
+     this narrower x=7-only path runs once. A clean result here is not proof the wider question is
+     answered; a dirty result (extra field touched) is direct, useful input to that question.
+  3. Does not confirm `400` is the table-correct default walking speed, and does not depend on `RE-194`
+     (`BasicAttr+0x54` player-vs-NPC value, corrected number -- see provenance note above) closing
+     first. Per the COO order this entry may run in parallel; `RE-194` is backward-confirming evidence
+     only, not a gate.
+  4. Does not test negative, zero, or extreme values beyond `800`/`100` -- new edge values are a
+     separate entry, per the one-entry-one-claim rule.
+  5. Does not test `/speed` interacting with movement-lock fields (x41/x42) -- out of scope.
+  6. Does not test persistence across relog/reconnect -- single, unbroken session only.
+
+- RECHECK (must all pass BEFORE booting an attended round -- WIRED v2, do not call the owner to the
+  screen until this passes headless):
+  1. `grep -n "def " pirate-force-server/src/pirateforce_foundation/persistence_attr_compose.py | grep -i sparse`
+     (or whatever name LANE-DB ships the x=7-only write function under) shows it exists on `main`.
+  2. `grep -n "/speed" pirate-force-server/src/pirateforce_foundation/runtime.py` shows the chat-command
+     call site dispatches to that sparse function, not the full-block path `GT-183` depends on.
+  3. Headless boot on a throwaway `staged/*_boot.ps1` run-copy DB, send `/speed 800` via a scripted
+     client/capture harness, and `grep` the console log for the frame described in pass criteria
+     wire/DB (a) -- confirms change-mask bit `0x0040` only, before any human sits down.
+  4. An empty/failing result on any of 1-3 means the interface has not shipped yet: status stays
+     `PENDING interface`. Do not promote this entry to `READY`.
+
+- links: `notes_to_chief/20260901_1642_COO-ORDER-speed-sparse-x7-chief-open-gt-entry.md` ·
+  `notes_to_chief/20260901_1641_COO-ORDER-speed-sparse-x7-lane-gm-wire-chat-command.md` ·
+  `notes_to_chief/20260901_1640_COO-ORDER-speed-sparse-x7-approved-panya-live-override-of-1447.md` ·
+  `notes_to_chief/20260901_1447_COO-ORDER-re-basicattr-0x54-speed-value-hold-speed-send-gate-staged-ps1-ownership.md`
+  (original hold, partially reversed by `1640`) · `CLIENT_RE_QUEUE.md` `RE-194`
+  `BASICATTR-0X54-SPEED-PLAYER-VS-NPC-CONFLICT-001` (parallel, non-blocking, corrected number -- see
+  provenance note) · `GT-183 GM-B-SPEED-COMMAND-001` (sibling entry, full-block variant, separate claim,
+  currently `BLOCKED`) · `staged/087_gt008_boot.ps1` (run-copy DB pattern this entry's boot must follow).
+
+- numbering: highest `GT` at open time is `GT-192`; highest `RE` in `CLIENT_RE_QUEUE.md` is `RE-195`.
+  This entry is `193`.
+
+- result: (tester/build lane fills in: PASS/FAIL/BLOCKED, evidence, timestamp, OBSERVER_CONFIRMED line
+  per G-OBS once client-observable evidence exists)
+
+**ผู้เปิดใบ: chief รอบ `57alcd` 2026-09-01 (cloud), per COO-ORDER `1642`**
