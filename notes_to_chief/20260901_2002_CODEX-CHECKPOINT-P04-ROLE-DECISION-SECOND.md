@@ -88,6 +88,6 @@ LOCK_GAME รอบ GT-192 ถูกปล่อยที่ 19:52. ผู้ท
 - IMAGEก่อน/หลัง: 14,759,424 B / SHA-256 `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`.
 - Working copiesใต้ `external/*` ถูก ignore/untracked แต่ทั้งแปดไฟล์มี byte-identical tracked mirrorใต้ `notes_to_chief/reference_codex_attr` ที่ pf_bridge commit `89c16e29ddca4502e81575a0aa86949cf80b5d79`.
 - Authority: 15,708 B / `f3f1a8eddae03e9976c1926be69e034631bec0cd2912b56b39a452715f581f57`.
-- Canonical report: 166,902 B / `f5eb87bb83e26cbcabe8d5690210ac403ac3bb4d61b92fcd2f5d289f1bca5bc7`.
+- Canonical report: 167,305 B / `ee6de975053e45ae4215ca38c34d7e9b05532ec844f40b637f3ebb67177d04bd`.
 - รายงานก่อนแก้มี permanent byte-identical snapshotอยู่แล้ว: `audit_history/Pirate_Force_Codex_Audit_Recommendations.b96e420c2902_20260901_1124.byka1B.md` / `48948f235046d6dc509c6dc84588ed77025035eee01600420e2a56d4a62d4a44` จึงไม่สร้าง duplicate snapshot.
 - ไม่แก้ ServerProject, ไม่รัน tests/server/client/GameClient/dump/capture, ไม่แตะ Git/workflow/queue/leaseหรือ frozen V141.
