@@ -49,6 +49,14 @@ and a fresh pf-adversary read of the wired runtime.py branch."* -- สายน�
 
 เรียก pf-adversary agent จริงในเซสชันนี้ (มี tool ให้เรียก รอบนี้ผิดปกติจากที่ KA1A เคยรายงานว่าสาย A
 เสีย GitHub MCP/pf-adversary ซ้ำ ๆ) ให้ตรวจ wiring ของรอบ `liq4ri` อีกครั้ง (fresh read ตามที่
-stop_rule ต้องการก่อนวันที่จะพลิกแฟล็กได้จริง) ผลอยู่ในไฟล์รอบ
+stop_rule ต้องการก่อนวันที่จะพลิกแฟล็กได้จริง) ผลอยู่ในไฟล์รอบ -- verdict **SAFE-TO-FLIP** ทางเทคนิค
+วันนี้ (unreachable, ไม่ double-count, one-shot latch ถูกต้อง) **แต่สายนี้ไม่พลิกแฟล็ก** เพราะ
+stop_rule ต้องการรอบ attended ผ่านจริงด้วย ไม่ใช่แค่ pf-adversary read เพียงอย่างเดียว
+
+**พบเพิ่ม (จะเป็นประโยชน์กับผู้ต่อสาย allowlist):** ยังไม่มีเทสไหนขับ branch นี้ผ่าน wired
+`runtime.py` path จริง (`tests/test_logout_dialog_open_hypothesis.py` เรียกฟังก์ชัน dispatch ตรง ๆ
+เท่านั้น) เพราะไม่มี allowlist profile ให้สร้าง state instance จริงได้ -- เมื่อเพิ่ม profile ที่หกแล้ว
+ขอให้รอบนั้นเพิ่มเทสแบบ `test_logout_worldinfo_first.py` (ขับผ่าน `make_state_class`/
+`_dispatch_with_lanes` จริง) ให้ branch นี้ด้วย ไม่ใช่แค่เพิ่ม profile เฉย ๆ
 
 -- LANE-A (WORLD) round `qw9tz4`

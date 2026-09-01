@@ -58,7 +58,30 @@ restart จาก main") ตรวจ PR ล่าสุดของสาย A 
 แล้ว (ไม่ใช่ diff ของ PR) โฟกัส: double-count ของ `rx_frames`, one-shot latch, และยืนยันอิสระว่า branch
 ยังไม่มีทาง reachable จากบูตจริงใด ๆ
 
-ผล: [กำลังรอผล -- จะอัปเดตหัวข้อนี้ก่อน push จริง]
+**ผล (agent จริงกลับมาแล้ว):** verdict = **SAFE-TO-FLIP** วันนี้ -- ตรวจสามทาง (อ่านซอร์ส, ลอง
+สร้าง scenario ปลอมแล้วป้อนเข้า `require_logout_hypothesis_scenario` ใน worktree แยก จนได้
+`ValueError`, และขับ branch จริงผ่าน `make_state_class`/`_dispatch_with_lanes` ด้วย monkeypatch
+allowlist ชั่วคราว) ยืนยันตรงกันทั้งสามทาง: **ไม่มี** `_PROFILE_*` ใดพา
+`LOGOUT_RESPONSE_POLICY_WORLDINFO_DIALOG_OPEN_PUSH` ได้เลยวันนี้, **ไม่มี** double-count ของ
+`rx_frames` (สอง branch คนละค่าคงที่บนฟิลด์เดียวกัน แยกกันเชิงโครงสร้าง ไม่ใช่แค่ธรรมเนียม),
+one-shot latch ทำงานถูกต้องจริง (ครั้งที่สองถูกปฏิเสธ, ตัวนับไม่ขยับ)
+
+**พบบั๊กจริง 2 จุด (ไม่ใช่ severity สูง แต่แก้แล้วรอบนี้):**
+1. `tests/test_logout_dialog_open_hypothesis.py`'s module docstring เขียนว่า "UNWIRED on main" ซึ่ง
+   **เท็จแล้ว** ตั้งแต่ PR #476 merge -- แก้แล้ว (ขีดฆ่า ไม่ลบ ต่อด้วยคำแก้พร้อม citation ตามธรรมเนียม
+   เดิม) เพราะข้อความเท็จนี้จะบังหมอกอีกจุดที่ยังจริงอยู่ (ข้อ 2 ด้านล่าง) ถ้าไม่แก้
+2. **ยังไม่มีเทสไหนขับ branch นี้ผ่าน `runtime.py`'s wired path จริง** (`test_logout_worldinfo_first.py`
+   มีแบบนั้นให้ policy พี่น้องของมัน แต่ไฟล์เทสของโมดูลนี้ยังเรียกฟังก์ชัน dispatch ตรง ๆ ด้วย fake
+   connection เท่านั้น) -- ช่องว่างนี้ยังจริง เพราะไม่มี allowlist profile ให้สร้าง state instance จริง
+   ได้ (ดูข้อ 4) ทิ้งไว้เป็น follow-up หลัง allowlist profile ลง ไม่ปิดช่องว่างเองตอนนี้เพราะต้อง
+   monkeypatch allowlist ชั่วคราวซึ่งไม่ควร ship เป็นเทสถาวร
+
+**การตัดสินใจเรื่องแฟล็ก:** แม้ verdict คือ SAFE-TO-FLIP ทางเทคนิค **สายนี้ไม่พลิก
+`production_allowed`** เพราะ `HYP-PF-040`'s `stop_rule` เขียนเงื่อนไขไว้เป็น "และ" (ต้องมีรอบ
+attended `GT-184`/`GT-186` ผ่านจริง **ด้วย**) ไม่ใช่แค่ "หรือ" -- นี่คือกฎที่ chief/pf-adversary
+ตัดสินใจร่วมกันไว้แล้วในรอบ `liq4ri` (โปรเจกต์เคาะไว้เอง ไม่ใช่สายนี้ตีความเพิ่ม) ตรงกับ "(ค) ขัดกับ
+คำสั่งที่เจ้าของ/โปรเจกต์เคาะไว้เองโดยตรง" ในกฎ "ติดแล้วต้องให้ COO เคาะ" -- แจ้งเรื่องนี้ชัดในจดหมาย
+CORE-REQUEST เพื่อกันไม่ให้รอบถัดไปพลิกเร็วไปเพราะเห็นแค่ผล SAFE-TO-FLIP โดยไม่อ่าน stop_rule เต็ม
 
 ## 4. CORE-REQUEST ใหม่
 
@@ -77,7 +100,22 @@ restart จาก main") ตรวจ PR ล่าสุดของสาย A 
 - `notes_to_chief/20260901_1446_LANE-A-CORE-REQUEST-logout-hypothesis-allowlist-needs-dialog-open-push-profile.md` -- ใหม่
 - `rounds/A_20260901_1446_qw9tz4_mailbox_triage_corerequest_dialog_open_allowlist.md` -- ไฟล์นี้เอง
 
-**pirate-force-server:** ไม่มี (0 src diff, companion PR)
+**pirate-force-server** (1 ไฟล์):
+- `tests/test_logout_dialog_open_hypothesis.py` (module docstring แก้ -- ขีดฆ่าประโยค "UNWIRED on
+  main" ที่ล้าสมัยตั้งแต่ PR #476 merge + เขียนคำแก้พร้อม citation ไม่แตะ test logic ใด ๆ)
+
+## เทสที่รัน
+
+```
+python3 -m pytest tests/test_logout_dialog_open_hypothesis.py tests/test_logout_worldinfo_first.py \
+  tests/test_tree_is_cp874_safe.py -q
+=> 33 passed, 467 subtests passed (7.69s)
+
+python3 -m pytest tests/ -q  (ทั้งชุด)
+=> 6298 passed, 327 skipped, 13373 subtests passed, 0 failed (194.60s)
+```
+
+จำนวนเทสไม่เปลี่ยน (docstring-only fix ไม่แตะ logic ใด ๆ) 0 failed ทั้งชุด
 
 ## 6. ASK-COO
 
