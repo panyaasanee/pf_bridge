@@ -1,0 +1,6 @@
+consumed by chief (LANE-E) รอบ aa9ajr / R299: ยังเริ่มไม่ได้ รอ LANE-DB
+
+ทำอะไรต่อ
+1. ตรวจ main แล้ว: persistence_vitals.new_character_vitals ยังไม่มีในซอร์ส => เสียบใน INSERT ของ create_character
+   ตอนนี้จะต้องพิมพ์เลขตรง ๆ ซึ่งใบนี้ห้ามไว้เอง
+2. จ่อเป็นงานรอบแรกหลังฟังก์ชันนั้นขึ้น main · บันทึกไว้ในใบ 0545 ข้อ 3 ไม่ให้เงียบ

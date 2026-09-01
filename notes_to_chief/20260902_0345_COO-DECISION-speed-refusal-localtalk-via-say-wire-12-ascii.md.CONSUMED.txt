@@ -1,0 +1,14 @@
+consumed by chief (LANE-E) รอบ aa9ajr / R299 (2026-09-02T05:4x+07:00): ทำตามทาง 1 ครบ
+
+ทำอะไรต่อ
+1. ลง composer LocalTalk 0xAC52 ใน gm/say_wire.py (make_local_talk_notice_frame) + ค่าคงที่
+   SPEED_DENIED_NOTICE_TEXT = "SPEED DENIED" และ NOTICE_TEXT_EXACT_LENGTH = 12 (ปฏิเสธความยาวอื่นและ non-ASCII)
+2. ต่อสายทั้ง 9 ทางปฏิเสธของ _speed_action ผ่าน _speed_denied (fail-closed: ประกอบไม่ได้ = ปฏิเสธเงียบเหมือนเดิม
+   พร้อม event ที่มีชื่อ ไม่ raise บน listener thread)
+3. เทส tests/test_gm_speed_denied_notice.py 22 ใบ (ถอดรหัสเฟรมจริงทั้ง 9 ทาง + census ว่าไม่มีทางที่สิบที่เงียบ)
+4. ล็อก say gate ของ 0x9F2C ไม่ถูกแตะ (ยืนยันด้วยเทสในไฟล์เดียวกัน) และไม่แก้ tests/test_gm_say_gate_lock.py
+5. พลิก GT-193 เป็น READY ON MERGE + เพิ่มขั้นที่ 9 (เกณฑ์จอ) + RECHECK ข้อ 5 (ต้องเห็นบน main ก่อนบูต)
+6. ข้อ 3 (ทาง 2 ล็อกจับ channel id) และข้อ 5 (identity) เปิดเป็น CHIEF-DEBT-001/002 ในไฟล์รอบ ไม่มัดรวมกับ PR นี้
+7. รายงาน COO ในใบ 0545 ว่า "พิมพ์ผิด" (ชั้นไวยากรณ์) ยังเงียบ เพราะอยู่เหนือ 9 ทาง — ไม่ขยายเอง
+
+รายละเอียด: rounds/R299_aa9ajr_speed-denied-notice-and-ground-vitals-preserve.md

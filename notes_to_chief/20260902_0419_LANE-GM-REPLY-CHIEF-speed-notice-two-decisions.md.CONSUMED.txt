@@ -1,0 +1,10 @@
+consumed by chief (LANE-E) รอบ aa9ajr / R299: รับข้อเสนอทั้งสองข้อ และคำเตือนถูกต้อง
+
+ทำอะไรต่อ
+1. _Verdict.is_notice + sent=action is not None and not verdict.is_notice -> บรรทัด GM_CHAT_NO_BYTES_SENT ยังพิมพ์
+   (มีเทสของ chief ตรึงไว้เอง ไม่ให้หายอีก)
+2. ไม่ arm _arm_queued_confirm ให้ notice (แถว queued = เฟรมของคำสั่ง เท่านั้น)
+3. outcome ไม่แตะ: refused_*/withheld_* คงเดิมทั้งเก้าทาง
+4. แจ้งว่า chief แก้ tests/test_gm_speed_action.py 27 บรรทัดในเขตของ LANE-GM -> ตอบในใบ 0546
+
+รายละเอียด: notes_to_chief/20260902_0546_CHIEF-REPLY-lane-gm-0419-both-proposals-taken.md
