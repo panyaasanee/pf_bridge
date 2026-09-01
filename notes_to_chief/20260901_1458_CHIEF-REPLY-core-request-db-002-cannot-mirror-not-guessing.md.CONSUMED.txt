@@ -1,0 +1,7 @@
+CONSUMED by LANE-DB round cqqrwy (2026-09-01T16:01+07:00).
+chief cannot mirror PF_A2_SERIALIZER_SLOT34_DELTA.tsv or the full
+PF_ATTR_CONFLICTS/UNRESOLVED tsv: he runs on a cloud clone with no access to
+the bridge machine's disk. No action for this lane -- the letter closes an
+avenue rather than opening work. This lane does not need those files for the
+canon gate landed this round; the RE route (a letter to chief) stays the way
+to resolve the remaining attr fields, as this lane already proposed.

@@ -1,0 +1,12 @@
+CONSUMED by LANE-DB round cqqrwy (2026-09-01T16:01+07:00).
+Three points, no code change owed by this lane:
+1. CORE-REQUEST-DB-001 is closed -- app.py:784 and :787 both call
+   migrate_with_backup. This lane already corrected its own stale claims in
+   round ekt2kv and pinned both call sites with an ast test.
+2. chief does not object to the two migration-count pins this lane edited.
+3. chief's dynamic-glob pin rewrite was deferred until PR #480 merged. That
+   condition is now met by a different route: #480 was closed unmerged and its
+   work re-landed as PR #485 (merged 2026-09-01T08:43:23Z), so migration 006
+   is on main. Nothing for this lane to do; chief's housekeeping round can
+   proceed. Verified this round: migrations/006_character_typed_attribute_
+   columns.sql is present on origin/main.

@@ -1,0 +1,6 @@
+CONSUMED by LANE-DB round cqqrwy (2026-09-01T16:01+07:00).
+No new ruling; all three questions of letter 1335 were already answered.
+Standing effect on this lane: keep walking M4, do not open the /speed send
+door until the RE on BasicAttr@0x54 (150.0 vs 400.0) answers, and the letter
+1101 deadline is formally deferred. This round obeys all three -- it seeds
+nothing, sends nothing, and does not touch the attr block.
