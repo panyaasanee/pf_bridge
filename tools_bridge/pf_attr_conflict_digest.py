@@ -81,9 +81,23 @@ FRESH_WRITE_GUARD_SEC = 20
 # table that grows slightly between rounds does not start failing silently.
 SIZE_CAP = 1900000
 
-# Names carrying these fragments are refused by the sync proprietary name guard
-# ($BAD_NAME_PARTS).  Mirroring them would only produce a refusal line a round.
+# The sync proprietary name guard ($BAD_NAME_PARTS) refuses names carrying
+# these fragments - but pf_git_sync.ps1 waives the guard for the extensions
+# below when the file travels under notes_to_chief/, a waiver Panya extended on
+# 2026-09-01 so the twelve capture-VALIDATOR files stop being refused every
+# round.  So only refuse here what the sync would still refuse there.
 NAME_GUARD = ("capture", "gameclient", "pirateforce.sqlite")
+WAIVED_EXTS = (".md", ".tsv", ".py", ".json")
+HARD_DENY = ("gameclient", "pirateforce.sqlite")
+
+
+def sync_would_refuse_name(name):
+    low = name.lower()
+    if any(g in low for g in HARD_DENY):
+        return True
+    if any(g in low for g in NAME_GUARD):
+        return not low.endswith(WAIVED_EXTS)
+    return False
 
 # What to mirror.  This used to be a prefix list ("PF_ATTR_", "PF_A2_", ...)
 # and that was still a hand-maintained guess: the 2026-08-31 P0-5 round shipped
@@ -256,6 +270,105 @@ def snapshot_audit_report():
     print("  audit report snapshot kept: %s (%d bytes)" % (name, len(data)))
 
 
+def slice_oversized():
+    """Give every over-cap table a small readable stand-in.
+
+    A file above the 2 MB sync cap can never reach a cloud lane, and a lane
+    that cannot see a table has no way to know what it would have said.  Rather
+    than hand-writing a digest per file (which only ever covers the files
+    someone remembered), derive one for ANY over-cap table: row count, the
+    low-cardinality columns bucketed, and a few sample rows.  Future oversized
+    deliverables are covered without editing this script again.
+    """
+    made = []
+    for name in sorted(os.listdir(EXT)):
+        full = os.path.join(EXT, name)
+        if not os.path.isfile(full) or name.startswith("."):
+            continue
+        if not name.lower().endswith(".tsv"):
+            continue
+        if os.path.getsize(full) <= SIZE_CAP:
+            continue
+        if sync_would_refuse_name(name):
+            continue
+        dst = os.path.join(OUT, name[:-4] + ".SLICE.md")
+        try:
+            with open(full, "r", encoding="utf-8", errors="replace",
+                      newline="") as fh:
+                rdr = csv.reader(fh, delimiter="\t", quoting=csv.QUOTE_NONE)
+                hdr = next(rdr, [])
+                if not hdr:
+                    continue
+                counts = [{} for _ in hdr]
+                sample, rows = [], 0
+                for r in rdr:
+                    rows += 1
+                    if len(sample) < 4:
+                        sample.append(r)
+                    if rows <= 40000:
+                        for i, v in enumerate(r[:len(hdr)]):
+                            if len(counts[i]) <= 60:
+                                v = v[:48]
+                                counts[i][v] = counts[i].get(v, 0) + 1
+        except Exception as exc:
+            print("  slice failed for %s: %s" % (name, exc))
+            continue
+
+        L = ["# %s - ตัวสรุป (ไฟล์เต็มเดินทางไม่ได้)" % name, ""]
+        L.append("ไฟล์เต็ม `pf_bridge/external/%s` ขนาด %d ไบต์ **เกินเพดาน 2 MB ของ "
+                 "`pf_git_sync.ps1` จึงอยู่บนดิสก์บริดจ์เท่านั้น**" %
+                 (name, os.path.getsize(full)))
+        L.append("")
+        L.append("- แถวข้อมูล: **%d** · คอลัมน์: **%d**" % (rows, len(hdr)))
+        L.append("- สร้างโดย `tools_bridge/pf_attr_conflict_digest.py` "
+                 "นับกับกรองเท่านั้น ไม่ได้ตีความอะไรใหม่")
+        L.append("")
+        L.append("## คอลัมน์")
+        L.append("")
+        L.append("`" + "` · `".join(hdr) + "`")
+        L.append("")
+        L.append("## คอลัมน์ที่ค่าซ้ำกันมาก (ใช้ดูรูปร่างข้อมูล)")
+        L.append("")
+        shown = 0
+        for i, c in enumerate(counts):
+            if not c or len(c) > 30 or len(c) < 2:
+                continue
+            shown += 1
+            if shown > 6:
+                break
+            L.append("**%s**" % hdr[i])
+            L.append("")
+            L.append("| ค่า | จำนวน |")
+            L.append("|---|---|")
+            for v, n in sorted(c.items(), key=lambda kv: -kv[1])[:14]:
+                L.append("| `%s` | %d |" % ((v or "(ว่าง)").replace("|", "\\|"), n))
+            L.append("")
+        if shown == 0:
+            L.append("ทุกคอลัมน์มีค่าไม่ซ้ำกันเกือบทั้งหมด (เป็นตารางหลักฐานรายแถว)")
+            L.append("")
+        L.append("## ตัวอย่าง 4 แถวแรก")
+        L.append("")
+        L.append("```")
+        for r in sample:
+            L.append(" | ".join((x or "")[:60] for x in r[:10]))
+        L.append("```")
+        L.append("")
+        L.append("อยากได้แถวไหนเต็ม ๆ ขอผู้ทดสอบที่บริดจ์ดึงให้ได้ "
+                 "หรือขอให้ Codex ตัดชุดย่อยตามเงื่อนไขที่ต้องการ")
+        txt = "\n".join(L) + "\n"
+        old = None
+        if os.path.exists(dst):
+            with open(dst, "r", encoding="utf-8") as fh:
+                old = fh.read()
+        if old != txt:
+            with open(dst, "w", encoding="utf-8") as fh:
+                fh.write(txt)
+            made.append((os.path.basename(dst), rows))
+    for n, r in made:
+        print("  slice %-52s %7d rows" % (n, r))
+    return made
+
+
 def mirror_audit_report():
     """Copy the released audit report onto the route the lanes can read."""
     if not os.path.exists(AUDIT_SRC):
@@ -364,7 +477,7 @@ def mirror(root, artifacts):
     now = time.time()
     for name in sorted(names):
         low = name.lower()
-        if any(g in low for g in NAME_GUARD):
+        if sync_would_refuse_name(name):
             skipped.append((name, "sync name guard would refuse it"))
             continue
         src = os.path.join(root, name)
@@ -570,6 +683,7 @@ def main():
 
     added, changed, skipped = mirror(root, artifacts)
     mirror_audit_report()
+    slice_oversized()
     summary = build_slices(root)
 
     lines = ["PF_ATTR digest", "generated by tools_bridge/pf_attr_conflict_digest.py", ""]
