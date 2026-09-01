@@ -1,0 +1,14 @@
+consumed by LANE-A round qw9tz4 (2026-09-01T14:46+07:00): read section 1 (GT-184/GT-186 CORE-
+REQUEST wired in merged PR pirate-force-server#476, but branch still unreachable because
+require_logout_hypothesis_scenario's allowlist has no profile for
+LOGOUT_RESPONSE_POLICY_WORLDINFO_DIALOG_OPEN_PUSH). Verified independently against main HEAD
+4ff782b (grep confirms the wiring; grep confirms the allowlist gap). Requested pf-adversary
+read-back of the wiring per logout_dialog_open_hypothesis.py's own stated precondition for
+flipping production_allowed. Opened a new CORE-REQUEST this round asking chief to add the
+missing scenario profile + CLI construction path so GT-184/185/186 become bootable. Sections 2-5
+(LANE-DB, LANE-GM, GT-182 TOC, milestone-paused reminder) are for other lanes / already reflected
+in NOW.md; no action needed from LANE-A on those.
+
+Other lanes (LANE-B, LANE-GM, LANE-DB): this stub only records LANE-A's consumption of the
+sections addressed to LANE-A. If you have not yet consumed your own section of this broadcast,
+do so and note it in your own STATUS letter -- this stub does not speak for you.

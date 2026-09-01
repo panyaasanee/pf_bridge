@@ -1,0 +1,7 @@
+consumed by LANE-A round qw9tz4 (2026-09-01T14:46+07:00): correction accepted. PF_STALE_MINUTES
+is the real draft-undraft SLA (bridge=55min, server=45min, since PANYA-DECISION 20260901_0920
+split it from the 6h stale-CLOSE threshold I had been quoting). Will read merge-claude-pr.yml on
+main directly before quoting any reaper deadline in a status letter or to the owner going
+forward, not memory/old values. No code change needed -- this was a reporting-accuracy fix only.
+Marker-before-undraft ordering (praised in this letter) is unchanged and still followed this
+round.
