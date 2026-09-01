@@ -9,13 +9,35 @@
 - **P-1** ของดรอปต้องอยู่บนพื้นนานพอให้เดินไปเก็บทัน → **LANE-B**
 - **P-2** สีชื่อมอนต้องถูกสถานะ: ปกติ=ส้ม / สู้=แดง / ตาย=เทา (ห้ามชมพู) → **LANE-GM**
 - **P-3** เปิดปุ่ม GM ให้ได้ → **LANE-GM** (Codex ป้อนข้อมูลเรื่อยๆ ใบที่แตะ P-3 หยิบใช้ทันที ไม่เข้าคิวรอ)
-- งานสร้างใหม่คู่ขนาน: GM-A `/warp` ไม่ใส่พิกัด (LANE-GM, GT-182 **PASS** รอบ 8zf80f) · GM-B `/speed` (LANE-GM) ·
+- งานสร้างใหม่คู่ขนาน: GM-A `/warp` ไม่ใส่พิกัด (LANE-GM, GT-182 **PASS** รอบ 8zf80f) ·
   UI-A/UI-B ปุ่มกลับหน้าเลือกตัวละคร/logout (LANE-A)
+- 🆕 GM-B `/speed` **ย้ายเจ้าของจาก LANE-GM ไป LANE-DB** (`COO-DECISION/ORDER 20260901_1059/1100/1101`
+  ทับของเดิมเฉพาะจุดนี้) — เป็นงานส่งมอบชิ้นแรกของสายใหม่ LANE-DB (ดูหัวข้อ "ทีมและเขตเขียน" ด้านล่าง)
 - `GT-146`/ใบตีมอนทั้งหมด **ห้ามเข้าคิว attended** จนกว่า P-1 และ P-2 จะเสร็จ
 
 🔴 KA1A-FINDING 20260901_1110 (`notes_to_chief/consumed/`): บล็อกนี้อยู่ใน **จดหมาย/ไฟล์นี้เท่านั้น** —
 prompt ของแต่ละสาย (scheduled routine) ยังพูดถึงแต่ milestone เดิม เพราะ**เจ้าของเท่านั้นที่แก้ prompt ได้จริง**
 (chief แก้แทนไม่ได้ ห้ามลองด้วย) จนกว่าเธอจะทำ ให้ chief ทุกรอบอ่านบล็อกนี้ก่อนมอบงานใหม่ แทนการพึ่ง prompt สาย
+
+## ทีมและเขตเขียน — 🆕 สายที่ 5: LANE-DB (PERSISTENCE)
+
+ตั้งโดย COO ตามคำสั่งตรงเจ้าของ 2026-09-01T10:5x (`notes_to_chief/consumed/20260901_1059_COO-DECISION-*.md`,
+`.../20260901_1100_COO-DECISION-create-lane-db-*.md`, `.../20260901_1101_COO-ORDER-lane-db-first-*.md`)
+ลงทะเบียนที่นี่โดย chief รอบ `8zf80f` ตามที่ COO ขอ ("รอบ :51 วันนี้"):
+
+- **ภารกิจ:** persistence ข้าม session แบบ MMORPG จริง — typed columns ใน DB เป็นแหล่งความจริง
+  (ความเร็ว/HP/เลเวล/สแตท/EXP/ของสวมใส่/เควส) compose attr block จากค่า typed + บล็อบ creation ของ
+  ตัวละครเอง ห้ามเดาฟิลด์ที่ไม่รู้จักเป็นศูนย์ (ข้อห้ามตรงของเจ้าของ ใบ `1059`)
+- **เขตเขียนใน `pirate-force-server`:** `migrations/` (ไฟล์เลขใหม่เท่านั้น ห้ามแก้ไฟล์ที่ apply แล้ว) ·
+  โมดูลใหม่ `src/pirateforce_foundation/persistence_*.py` · เพิ่ม method ใหม่ใน `store.py` ได้
+  แต่ห้ามเปลี่ยน behavior ของ method เดิม · `rounds/DB_*`
+- **จุดเสียบ `runtime.py`/`app.py`:** ยังไม่มี — chief สร้างให้ครั้งเดียวเมื่อ LANE-DB ร้องขอ (แบบเดียวกับ
+  LANE-B `COO-DECISION 20260830_0046`) ยังไม่มีการร้องขอเข้ามาถึงรอบนี้
+- **v141:** ห้ามแตะตลอดกาล เหมือนทุกสาย
+- **งานแรก:** `/speed <ตัวคูณ>` ใช้เทสได้จริง (ใบ `1101`) — deadline PR แรกภายในรอบ 14:01 วันนี้,
+  พร้อมเข้าคิว attended ภายใน 2026-09-02 12:00
+- นัยต่อ M4 (ตีได้ตายได้): schema ปัจจุบันไม่มีคอลัมน์ HP เลย — LANE-DB คือตัวปลดล็อกจริง คิวถัดจาก
+  `/speed` คือ HP/เลเวล (ตามที่ COO ตั้งข้อสังเกตไว้ในใบ `1100`)
 
 ## ดัชนีรอบเก่า (รอบ 44-178) — ย้ายไป `archive/CHIEF_CONTINUATION_ARCHIVE_INDEX.md` แล้วทั้งบล็อก ไม่มีการลบเนื้อหา
 
@@ -94,3 +116,4 @@ prompt ของแต่ละสาย (scheduled routine) ยังพูด�
 
 - R283(69r41m) 2026-09-01T~09:0x+07:00 no src change either repo: confirmed CORE-REQUEST-GM-047 merged both repos (pf_bridge#680, server#452, pull_request_read get + direct runtime.py:5304 source read on main), registry row 028 -> wired; lifted GT-182 BLOCKED-PENDING-GM047-FIX warning to BLOCKED-ON-ATTENDED [NEEDS-ATTENDED-CAPTURE] (TOC + full entry + RECHECK note); mailbox triage stubbed 3 chief/everyone letters (2 COO-DECISION ack-only, 1 LANE-B tooling note self-resolved); self-caught mid-round: a parallel Bash call cd mistake put a stray commit on the wrong repo branch, caught by push refspec failure before anything was lost, fixed with git reset --hard to the pushed commit -> rounds/R283_69r41m_gm047-merge-confirmed-gt182-unblocked-mailbox-triage.md
 - R284(632iyt) 2026-09-01T~09:5x+07:00 no src change either repo (platform-only round): implemented PANYA-DECISION 20260901_0920 in full -- pf_bridge PF_STALE_MINUTES 45->55 (ready-attempt only) + new PF_STALE_CLOSE_HOURS=6 (close bound, split from the ready-attempt bound); both repos got a liveness guard before the reaper's age-based close (commits/{sha} committer date <30min -> leave open); pf-adversary (mandatory pre-commit) caught 2 real defects in the first draft -- unbounded liveness reprieve (fixed: caps at 2x the close bound) and a commits/ API call that could abort the whole reap tick under set -e (fixed: guarded fallthrough) -- both re-validated (yaml dup-key strict + bash -n all run: blocks); executed COO-DECISION 20260901_0741's mandatory queue-shrink (noted R283 skipped it without explanation, flagged not blamed): GT-127 CLOSED-PASS entry 57,425->7,609B, GAME_TEST_QUEUE.md 1,702,807->1,652,991B, history to archive/GT-127_history_20260901.md, byte-verified lossless; mailbox triage stubbed 8 letters (RE-188-RESULT correctly left unstubbed for LANE-A, its opener, per the open-it-consume-it rule); WIRED=5/5 unchanged -> rounds/R284_632iyt_reaper-threshold-split-liveness-guard-plus-mailbox-triage-plus-gt127-shrink.md
+- R285(8zf80f) 2026-09-01T~11:2x+07:00 wired the KA1A-ROOTCAUSE fix: cross-scene GM warp resync now also clears the once-per-login WORLD-CENSUS-001 latch (world_census_sent/refused, last_target_pos, and 7 sibling composition fields) inside `_gm_warp_resync_selected_scene`, so every scene after the first one a session's census fires in stops being silently empty (GT-182 measured 10 warps/2 censuses); item 4 (scene-1 walk requirement) deliberately NOT touched per KA1A-AMENDMENT's crash warning, production_allowed confirmed still False; 4 new regression tests (3/4 confirmed failing pre-fix via runtime.py-only git stash), pf-adversary found no defects (live-probed the rearmed branch and the v141:4395 crash window, both safe), full suite 6214/0 failed both repos, ledger PASS 47 no drift; graded GT-182 PASS with OBSERVER_CONFIRMED (chief's own ticket), left GT-175 for LANE-A per its own opener-consumes line; registered new LANE-DB (PERSISTENCE) lane's charter+write-zone in this file within COO's own deadline (COO-DECISION/ORDER 20260901_1059/1100/1101), reassigned GM-B /speed from LANE-GM to LANE-DB; installed a standing P-1/P-2/P-3 priority reminder at this file's head per KA1A-FINDING 20260901_1110 (milestones stay paused; no lane prompt reflects this, chief cannot edit those); mailbox triage stubbed 12 letters; LANE-A's Port Royal CORE-REQUEST (runtime.py:7578-7582) still not actionable, precondition unmet; WIRED=5/5 unchanged -> rounds/R285_8zf80f_wire-census-latch-fix-lane-db-registered-gt182-pass-mailbox-triage.md

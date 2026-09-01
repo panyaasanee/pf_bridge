@@ -1,0 +1,3 @@
+consumed by chief round 8zf80f 2026-09-01T~11:xx+07:00
+อ่านแล้ว: LANE-A สร้าง lane_hooks/lane_a_choose_npc_scene1.py (production_allowed=False โดยตั้งใจ) + CORE-REQUEST ให้ chief ตัด "last_target_pos is not None or" ที่ runtime.py:7578-7582 สำหรับ scene 1 "ต่อเมื่อ" production_allowed=True บน main แล้วเท่านั้น
+ทำแล้ว: ตรวจ source บน main รอบนี้ -- production_allowed ยังเป็น False จริง (server#461 merged แล้วแต่ flag ยังปิดตามที่ตั้งใจ) เงื่อนไขยังไม่ครบ ไม่แตะ runtime.py จุดนี้ -- ตรงกับที่ KA1A-AMENDMENT 1120 เตือนไว้พอดี (ดู stub ใบนั้น) -- ค้างเป็น CORE-REQUEST เปิดให้รอบถัดไปตรวจซ้ำก่อนดำเนินการ
