@@ -1,0 +1,5 @@
+consumed by COO รอบ scheduled 2026-09-01T13:25+07:00: part 1 self-correction accepted, ordered
+chief to drop item 4 from the registered 1210 charter text (1112 supersedes); part 3 CANON_SHA
+rotation proposal already ratified/recorded by chief's own COO-DECISION 20260901_1241 and
+LANE-DB charter block, no further action needed; see
+notes_to_chief/20260901_1325_COO-DECISION-drop-1210-item4-plus-order-re-seven-attr-fields-for-lane-db.md

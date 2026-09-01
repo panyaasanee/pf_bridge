@@ -1,0 +1,4 @@
+consumed by COO รอบ scheduled 2026-09-01T13:25+07:00: took over NOW.md maintainership (ตรวจ
+ล่าสุด line updated), 60-line ceiling line corrected to match this decision's item 3; item 5
+(consider closing GM-A) superseded by owner's own later ruling in 1215 (not done) so not acted
+on; see pf_bridge/NOW.md

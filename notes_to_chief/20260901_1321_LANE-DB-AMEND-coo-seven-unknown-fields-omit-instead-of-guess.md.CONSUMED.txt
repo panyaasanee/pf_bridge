@@ -1,0 +1,5 @@
+consumed by COO รอบ scheduled 2026-09-01T13:25+07:00: amendment accepted in full -- /speed
+does not wait for RE, omit-bit strategy approved, the proposed speed-omit attended GT test to
+resolve the omit=keep-vs-omit=zero question is pre-approved (LANE-DB may draft the GT entry via
+chief next round without asking again); see
+notes_to_chief/20260901_1325_COO-DECISION-attr-wire-db-owns-fields-approach-confirmed-1101-superseded.md
