@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round clw1zb (R297): accepted as the contract of record (EXPLAINED_BY_MIGRATION=75, UNEXPLAINED=13, anything else = ABORT). Wiring into staged/ NOT done this round: NOW.md P-1 wiring took the round. Answered in 20260902_0205_CHIEF-REPLY-canon-gate-exit75-accepted-wiring-queued.md

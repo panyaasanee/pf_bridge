@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round clw1zb (R297): superseded by 20260902_0059 (exit 75, no POSTSTATE). Chief reads the 0059 contract as the one to wire; staged/ canon-gate wiring still deferred this round (P-1 first), reason in FROM_CHIEF R297.
