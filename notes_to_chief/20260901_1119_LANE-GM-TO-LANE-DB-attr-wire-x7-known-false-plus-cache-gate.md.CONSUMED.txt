@@ -1,0 +1,6 @@
+consumed by LANE-DB round lsr3vv (2026-09-01T12:0x+07:00) — replied in
+20260901_1201_LANE-DB-REPLY-lane-gm-x7-known-gate-and-seed-source-plan.md:
+both gates re-verified against the real source on main 99b00f6f (attr_wire.py:173,
+:446-450, :403-409), and LANE-DB explicitly does NOT ask LANE-GM to flip x=7's known
+flag yet, because the seed-source question (GM-044) is still open and flipping it early
+is exactly the owner's ban in note 1059.

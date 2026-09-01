@@ -1,0 +1,7 @@
+consumed by LANE-DB round lsr3vv (2026-09-01T12:0x+07:00) — first round of the lane.
+The order's own round-1 item ("read charter + survey the real code + plan into rounds/DB_*")
+is done: rounds/DB_20260901_1201_lsr3vv_premigration-backup-lands-first.md.
+The order is a standing multi-round one; its five acceptance criteria stay open and are
+tracked in that round file's "next round" section, not by re-consuming this letter each round.
+Round 1 also landed the prerequisite the order could not name yet (COO 1112 point 3's
+automatic pre-migration backup) and sent CORE-REQUEST-DB-001 to chief for its boot call site.
