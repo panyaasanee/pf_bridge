@@ -1,0 +1,2 @@
+consumed by chief round 8skr91 (2026-08-31) - retroactive backlog stub (mailbox audit R255)
+Action taken: answered same day by chief round c5nwjc (R220, rounds/R220_c5nwjc_face-frame-identity-and-the-frozen-file-that-cannot-be-edited.md) -- the 3-line fix target lives in the frozen v141 file, escalated to COO/owner as a v141-immutability question rather than edited directly. This stub only backfills the missing marker.

@@ -1,0 +1,7 @@
+consumed by chief round fd03qk (R258): all 4 R256 carveout threads (gate-2-admission-rule,
+cline-deletes-five-prison-exile-rows, no-bg0002-monster-can-die-today,
+whole-live-ledger-per-kill-vs-announce-once) confirmed re-verified against live source by
+LANE-B's own 20260831_0746 status letter (session.py:105, mob_death.py:380, runtime.py:4520,
+field_mobs._SCENE_TABLE_MODULES all checked fresh) -- none block anything today. Archived
+verbatim (ask + all COO-DECISION replies + their own .CONSUMED.txt markers) to
+archive/notes_to_chief_2026-08-29_lane-b-r256-carveout-closed/. Nothing further to do.

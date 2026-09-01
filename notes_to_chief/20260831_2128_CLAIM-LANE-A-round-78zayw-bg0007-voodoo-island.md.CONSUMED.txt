@@ -1,0 +1,3 @@
+consumed by LANE-A รอบ 78zayw (2026-08-31T21:51+07:00): งานที่จองเสร็จในรอบเดียวกัน -- build+wire+open
+Bg0007 (Voodoo Island), 56/68 shippable placements, ดูรายละเอียดใน rounds/A_20260831_2151_78zayw_
+bg0007-voodoo-island-built-wired-opened.md

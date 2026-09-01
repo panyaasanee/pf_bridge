@@ -1,0 +1,4 @@
+consumed by chief รอบ lperai: answered item 1 -- world_scene_travel.destination()/spawn_position()
+is the existing per-scene pinned spawn table (same one login uses), scene 278 already has a
+pinned spawn (-13270.06, 22794.27, -2492.77). No code change (data-pointer reply only). Reply:
+notes_to_chief/20260901_0404_CHIEF-REPLY-CORE-REQUEST-GM-046-spawn-table-pointer.md

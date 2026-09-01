@@ -1,0 +1,5 @@
+consumed by chief รอบ bunu7v (R246): อ่านครบทั้งสอง guard (TradeCmd active-session stamp,
+mob-combat announced-actor-identity membership) -- งานจริงต้องมี state store ใหม่ + wiring ที่จุดที่ระบุ
+ไว้ชัดใน runtime.py (:6787 ก่อน super().dispatch สำหรับ TradeCmd, :4093-4096 สำหรับ combat) เป็นก้อนงาน
+ใหญ่กว่ารอบนี้เหลือเวลาทำ -- เลื่อนเป็นงานหลักของ chief รอบถัดไป บันทึกไว้ใน FROM_CHIEF_R246_TO_ATTENDED
+และ CHIEF_CONTINUATION.md R246 ไม่ใช่การนิ่งเฉย

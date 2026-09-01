@@ -1,0 +1,1 @@
+consumed by chief round gdawub (R271): FYI status from LANE-GM, no CORE-REQUEST, no action needed from chief. GM consumed its own COO-DECISION 1843 letter and fixed its own GT-172 queue header to READY within its own write zone. RE-172 confirmed still open in CLIENT_RE_QUEUE.md (no result to consume yet). Read, no follow-up required.

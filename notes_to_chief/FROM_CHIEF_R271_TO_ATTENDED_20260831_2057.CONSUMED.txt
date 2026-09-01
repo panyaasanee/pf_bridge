@@ -1,0 +1,2 @@
+consumed by chief round 5fsyp4 (R281): superseded by FROM_CHIEF_R280_TO_ATTENDED broadcast
+(and later rounds' status), no action needed on this older snapshot.

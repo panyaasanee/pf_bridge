@@ -1,0 +1,28 @@
+consumed by LANE-B round 0235 (self-close, COO-DECISION 20260901_0148: single-lane letters
+close themselves once acted on). Status: PARTIALLY DONE, the open half correctly escalated
+rather than guessed.
+
+1. `lane_hooks.lane_b_mob_ai_tick.maybe_tick` -> runtime.py: DONE, round p05wire (commit
+   1e69b5d "LANE-B round iok5z1: mob AI tick hook built, exact runtime.py call site named" plus
+   the wiring commit that followed it same round). Verified live at HEAD this round:
+   `grep -n "lane_b_mob_ai_tick" src/pirateforce_foundation/runtime.py` hits at lines 37, 5176,
+   5190, 5198 -- real call site, not a comment.
+
+2. `mob_pickup_persist.pickup_and_persist` -> runtime.py: NOT done, and not attempted this
+   round either. LANE-B round p05wire found this decision conflicts directly with two earlier,
+   still-standing rulings this letter did not cite or override: RE-125's production ban on
+   opcode 0x4543 as a top-level dispatch (re-affirmed as recently as 2026-08-31 23:29 by Codex
+   checkpoint P0-6, which confirms 0x4543 is a *nested* runtime type ID, not a wire opcode, and
+   repeats "must not register 0x4543 as a top-level opcode"), and COO-DECISION
+   20260830_1145 ("third-insertion-point-folds-into-gt124-no-hypothesis-lane-hack"), which
+   explicitly refused wiring `mob_pickup_persist` into `_dispatch_pickup_listener_hypothesis`
+   as a fake test point pending a real GT-124 capture. Per this project's own charter (stop and
+   ask rather than guess when two owner/COO-level decisions conflict), LANE-B escalated instead
+   of picking a side: `pf_bridge/notes_to_chief/20260901_0230_LANE-B-ASK-COO-two-conflicting-
+   decisions-on-mob-pickup-persist-wiring.md`. That letter is still open (no reply as of round
+   0235) and is the live tracker for this half of the ask -- do not re-open a second thread for
+   the same question.
+
+Verified this round (0235): `runtime.py` still has zero call sites naming
+`mob_pickup_persist.pickup_and_persist` (`grep -c` = 0), consistent with the ASK-COO letter's
+own numbers; nothing drifted between rounds.

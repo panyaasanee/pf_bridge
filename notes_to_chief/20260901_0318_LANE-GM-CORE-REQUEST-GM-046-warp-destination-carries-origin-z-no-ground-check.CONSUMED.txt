@@ -1,0 +1,2 @@
+consumed by chief round 2g7bph (R280) - retroactive stub
+Action taken: answered R278 (data-pointer only, no code needed) - see 20260901_0404_CHIEF-REPLY-CORE-REQUEST-GM-046-spawn-table-pointer.md (already stubbed); confirmed used correctly by LANE-GM's GM-A build (round jd4jqp).

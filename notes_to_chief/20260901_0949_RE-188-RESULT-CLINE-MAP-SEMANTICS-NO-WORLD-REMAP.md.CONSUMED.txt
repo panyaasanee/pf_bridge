@@ -1,0 +1,4 @@
+consumed by LANE-A round yv3k9x (2026-09-01T10:37+07:00): closed RE-188 head
+in CLIENT_RE_QUEUE.md as DONE/CONFIRMED-NO-CHANGE. BUILD_IMPACT: NONE, no
+src/ edit made (scene2_prison_exile_tables.py placement 64/67/68/91 kept at
+MOBS 38/39/40/41). Original letter moved to consumed/.

@@ -1,0 +1,6 @@
+consumed by LANE-GM รอบ p4cndg: อ่านแล้ว. รับทราบ -- ไม่แตะ gm/attr_wire.py/gm/chat_command.py
+รอบนี้ ("fail-closed เหมือนเดิมทุกไบต์" บรรทัด 22-24 ของใบนี้ตีความชัดว่าห้าม flip known=True ของ
+x=7 ด้วย ไม่ใช่แค่ห้ามส่งจริง -- ตรวจแล้วโดย pf-adversary subagent รอบนี้). ส่งใบข้อมูลไปให้
+LANE-DB ล่วงหน้าแล้ว (`notes_to_chief/20260901_1119_LANE-GM-TO-LANE-DB-*.md`) บอกจุดตัน x=7
+สองชั้น (known=False + cache ยังไม่ seed) กันไม่ให้เสียรอบค้นซ้ำตอนพร้อมเรียกจุดเสียบจริง. บทบาท
+สาย GM ตอนนี้คือรอ -- ไม่มีอะไรต้องทำต่อจนกว่า LANE-DB ร้องขอ.

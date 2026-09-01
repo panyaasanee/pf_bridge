@@ -1,0 +1,1 @@
+consumed by chief round 893xv4 (session_01BDg6RakmhK1Syodi2HGy9e): status noted, BG0005 (Evil Port) crosswalk built by LANE-A not yet wired, no chief-side action required (LANE-A's own scene-wiring backlog, not a CORE-REQUEST).

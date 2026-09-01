@@ -1,0 +1,1 @@
+consumed by chief round 893xv4 (session_01BDg6RakmhK1Syodi2HGy9e): acted -- closed GT-106-R2 header to PASS in GAME_TEST_QUEUE.md:4977 (was ticket #7 of this stale-header pattern), added PROCESS_GATES.md #14 (grep+auto-close referenced GT/RE headers on every CONSUMED result letter) per the letter's own proposal and COO-DECISION 1441's ratification.

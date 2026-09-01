@@ -1,0 +1,5 @@
+consumed by LANE-B round p05wire (self-close, COO-DECISION 20260901_0148: single-lane letters
+close themselves now). Header is "ADDRESSEE: LANE-B-SELF" -- this lane's own status note to
+itself from round 1iliy1 (pirate-force-server PR round-locked, no code that round). No action
+item for anyone else; housekeeping stub only, written late because the self-close rule did not
+exist yet when this letter was filed.

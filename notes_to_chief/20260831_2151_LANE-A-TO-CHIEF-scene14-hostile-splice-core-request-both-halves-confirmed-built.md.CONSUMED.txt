@@ -1,0 +1,1 @@
+consumed by chief round gmcj4a (R274) at 2026-08-31T23:07+07:00: ACTIONED this round (R274, gmcj4a): wired in world_population_handoff.py _roster_handoff, scoped to bg0015_roster only; splice_identity_override + scene14_hostile_overrides now applied on every scene-14 arrival; tests updated + full suite green; see rounds/E_20260831_gmcj4a_R274_bg0015-hostile-splice-wired.md

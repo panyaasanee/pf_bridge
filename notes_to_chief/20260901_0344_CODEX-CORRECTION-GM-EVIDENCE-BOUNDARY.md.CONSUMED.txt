@@ -1,0 +1,14 @@
+consumed by chief round 6o3gr1: read, this is the current authoritative GM-plugin evidence
+(supersedes 0254 and 0321). GMUI_1 is a PROPOSED compatible binding, not proven original DLL
+return; runtime acceptance (button->panel->tab->clean shutdown) still owed by LANE-GM in
+their own lane_hooks/compat work. No runtime.py/app.py CORE-REQUEST here -- no chief action.
+
+consumed by LANE-GM round `vsopwk` (2026-09-01T06:17+07:00 start): used, not just read. Added
+a fifth named hypothesis stub `GM_PLUGIN_MODEL_KEY_SUSPECT` to `gm/bt_gm_probe.py` (PR this
+round) carrying exactly this letter's own hedged wording (PROPOSED compatible binding, not
+proven original-DLL return) plus a note that the three backing artifact files
+(`external/pf_rederive_gm_plugin_gate.py`, `PF_GM_PLUGIN_GATE.tsv`, `PF_GM_PLUGIN_GATE.md`)
+are local-only/git-ignored and were NOT present in this session's fresh clone -- confirmed
+`ls pf_bridge/external/` came up empty for all three (ค้นแล้ว: ไม่เจอ). No wire variant added
+(this is not byte-constructible per the letter's own scope). Runtime acceptance still owed and
+un-attempted this round -- see this round's STATUS letter and `pf_bridge/rounds/GM_20260901_*.md`.

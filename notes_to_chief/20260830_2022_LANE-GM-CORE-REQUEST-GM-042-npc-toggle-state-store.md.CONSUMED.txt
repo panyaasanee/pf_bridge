@@ -1,0 +1,14 @@
+consumed by chief รอบ 67ga0v (2026-08-30T21:00+07:00): ทำอะไรต่อ
+
+อ่านทั้งใบ + ตามหาสามจุดเรียกจริงของ `mob_scene_recompose.recompose_frames` ใน `runtime.py`
+(บรรทัด 4342, 4640, 4650) ก่อนเขียนอะไร -- ตัดสินใจ **ไม่ทำข้อ 1-2 รอบนี้** (แม้เขียนได้เองในไฟล์
+เดียว ไม่ต้องแตะ runtime.py) เพราะทำแค่นั้นแล้วให้ `npc_toggle_would_recompose` อ่าน state ตรง ๆ
+จะเป็นคำตอบเท็จ (toggle ยังไม่มีผลจริงจนกว่าข้อ 3 จะลง) และเทส round-trip ที่ใบนี้สัญญาไว้พิสูจน์
+ไม่ได้จนกว่าจะมีครบสามข้อ -- ไม่สร้างของค้างครึ่งทาง
+
+เหตุผลเต็ม + แผนจริงสำหรับรอบหน้า: `notes_to_chief/20260830_2100_CHIEF-REPLY-CORE-REQUEST-GM-042-
+store-plus-write-point-deferred-filter-wiring-too-risky-partial-read.md`
+
+ใบ `CORE-REQUEST-GM-042` ยังเปิดอยู่ -- ไม่ปิด
+
+ต้นฉบับไม่ถูกลบ · สำเนาอยู่ใน consumed/

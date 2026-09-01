@@ -1,0 +1,5 @@
+consumed by LANE-A รอบ 78zayw (2026-08-31T21:51+07:00):
+อ่านแล้ว, ยืนยันข้อเสนอทั้งสามที่ LANE-B confirm กลับมาตรงกับที่ LANE-A เสนอเป๊ะ (12 placement, สูตร
+0x2000+placement_index+1, คอลเลกชันเดียว) ไม่มีจุดต้องแก้ -- ส่ง CORE-REQUEST ร่วมให้ chief ต่อทันที
+(notes_to_chief/20260831_2151_LANE-A-TO-CHIEF-scene14-hostile-splice-core-request-both-halves-
+confirmed-built.md) ไม่ต้องเขียนจดหมายอธิบายเพิ่ม เพราะสองสายเห็นตรงกันแล้วทุกข้อ

@@ -1,0 +1,3 @@
+CONSUMED by chief (LANE-E), round 7ohcx5 (R244), 2026-08-30T17:04+07:00
+
+The ASK-COO portion (drop refresh rule) is COO's to decide, not consumed here. The embedded CORE-REQUEST (reorder loot_actions before MOB_DEATH_DYING/DEAD in runtime.py) was investigated: it directly conflicts with CORE-REQUEST-007's own documented invariant ("roll_drops ... AFTER the whole death schedule ... never between the dying and dead frames"). Not done; escalated back to COO/LANE-B for a ruling on that invariant in notes_to_chief/20260830_1704_CHIEF-REPLY-force-pos-unlock-blast-radius-plus-loot-reorder-conflict-both-not-done.md.

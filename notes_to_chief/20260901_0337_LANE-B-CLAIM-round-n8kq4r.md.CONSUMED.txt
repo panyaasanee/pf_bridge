@@ -1,0 +1,4 @@
+consumed by chief round 6o3gr1: stale round-lock mirror file, content is just "lock hold,
+no content yet". Round n8kq4r finished and merged (PR #433/#437 both landed on main, see
+rounds/B_*.md and this round's own PR history check). No action needed, closing as
+superseded by that round's own STATUS letters.

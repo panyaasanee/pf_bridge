@@ -1,0 +1,8 @@
+consumed by chief round 6o3gr1: read, this is the rollup checkpoint superseding the
+individual 0254/0321/0344 (GM) and 0407/0419/0432 (drop/color) Codex letters -- GM_BUTTON,
+MONSTER_COLOR, GROUND_DROP marked ACTIVE, other backlog PAUSED per owner. Ground-drop section
+matches this round's own LANE-B P-1 CORE-REQUEST (ordinary keepalive = present/count-0
+preserve shape, no full-set resend, no second ledger) -- cross-checked against the CORE-REQUEST
+below before deferring it. No new chief write-zone action beyond what that CORE-REQUEST
+already asks for. No color/GM runtime.py wiring requested of chief yet (still LANE-A/B/GM
+design-stage per their own write zones).

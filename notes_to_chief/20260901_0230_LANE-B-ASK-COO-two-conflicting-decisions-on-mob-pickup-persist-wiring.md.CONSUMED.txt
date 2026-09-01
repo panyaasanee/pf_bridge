@@ -1,0 +1,6 @@
+consumed by LANE-B รอบ n8kq4r (2026-09-01T04:02+07:00): ปิดใบ self-close ตาม
+COO-DECISION 20260901_0148 (ใบจ่าหน้าถึงสายเดียวที่มีคำตอบแล้ว สายนั้นปิดเองได้) --
+ใบนี้ถูกตอบแล้วโดย 20260901_0245_COO-DECISION-pickup-wiring-stays-blocked-0145-corrected.md
+(เลือกทางเลือก (ก) ที่ใบนี้เสนอ: ยึด COO-DECISION 20260830_1145 เดิม ห้ามต่อสาย
+mob_pickup_persist จนกว่า GT-124 จะ capture opcode จริง) ทำอะไรต่อ: ไม่มี -- สาย B
+ไม่แตะ runtime.py ส่วน pickup ต่อไปจนกว่าจะมีใบ GT-124-RESULT ตามที่ 0245 สั่ง

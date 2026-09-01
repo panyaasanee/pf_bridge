@@ -1,0 +1,30 @@
+consumed by chief รอบ 69r41m (R283) 2026-09-01T~09:0x+07:00: รับทราบตามที่จดหมายสั่งไว้ตรง ๆ
+("chief: ไม่ต้องทำอะไรเพิ่มเรื่องนี้") -- (ข) death predicate ของ 7 template และ (ค) gate 1
+ownership/sequencing มอบให้สาย B ทำต่อ (หาระเบียบวิธีเดิม -> ประยุกต์ -> เสนอ COO) ไม่ใช่งานของ chief
+รอบนี้ ไม่มี action item ฝั่ง chief
+
+---
+
+consumed by LANE-B รอบ vzhc6s (2026-09-01T09:44+07:00): บริโภคทั้งสองข้อที่มอบให้สาย B --
+
+(ข) อ่านโค้ดจริงของ `mob_death.py` (`WIDENING_RULINGS`, `WIDENING_RULING_SCENES`, `ruling_for`)
+และเทสที่ปักไว้ (`tests/test_mob_death.py`) สรุประเบียบวิธีเดิมที่ใช้กับ bg0001/Bg0002 เป็นสี่ขั้น
+(จดหมายเจ้าของตั้งชื่อ template/ทั้งเทเบิล -> เครื่องมือ mine คัดกรองทางเทคนิคไว้ก่อนแล้ว -> ผูก
+ชื่อ ruling กับฉาก -> carve-out แยกเฉพาะตัวที่ตกกฎเทคนิค) วัดกับ 7 template ของ Bg0015
+(343,345,348,350,353,355,924): สามขั้นแรก generalize ได้สะอาด (ไม่ชนกับ ruling เดิมเลย,
+overlaps_with_registered_rulings() = frozenset() ที่ HEAD) แต่ขั้นที่สี่ **ไม่ generalize** กับ
+template 924 "Carlos" -- Carlos ไม่ได้ตกกฎเทคนิคแบบ Mountain Deer (template 27 ของ Bg0002)
+เลย จึงไม่มีบรรทัดฐานเดิมให้ใช้ตัดสินว่าควรแยกมันออกหรือไม่ บันทึกเป็นข้อเท็จจริงที่วัดได้ ไม่ใช่เดา
+ตามที่จดหมายสั่ง แล้วส่งข้อเสนอ 3 ทาง (คุมทั้ง 7 / คุม 6 ตัวไม่รวม Carlos / เลื่อนทั้งหมด) ให้ COO
+เคาะ ไม่ได้เพิ่ม entry ใน `mob_death.WIDENING_RULINGS` เอง (ยืนยันด้วยเทสว่า dict ไม่เปลี่ยนหลัง
+เรียกทุกฟังก์ชันในโมดูลใหม่)
+
+(ค) ไม่แตะ `field_mobs._SCENE_TABLE_MODULES` ตามคำสั่งห้ามเด็ดขาดรอบนี้ -- gate 1 ยังปิดเหมือนเดิม
+รอคำตอบ (ข) จาก COO ก่อน
+
+ผลผลิต: `src/pirateforce_foundation/mob_death_bg0015_ruling_proposal.py` (โมดูลใหม่, 17 เทสใน
+`tests/test_mob_death_bg0015_ruling_proposal.py`, ผ่านหมด), แก้ pinned-inventory 2 เทสเดิมที่
+โมดูลใหม่ทำให้ล้าสมัย (`tests/test_field_mobs.py`, `tests/test_mob_stat_fabrication_guard.py`),
+สวีตเต็ม 6173 passed / 0 failed หลังแก้, จดหมายข้อเสนอฉบับนี้เอง, และ
+`rounds/B_20260901_0939_vzhc6s_bg0015-death-predicate-proposal.md` (repo pirate-force-server)
+ยังไม่ได้ตอบ: COO ยังไม่เคาะว่าจะเลือกทางไหนในสามทาง

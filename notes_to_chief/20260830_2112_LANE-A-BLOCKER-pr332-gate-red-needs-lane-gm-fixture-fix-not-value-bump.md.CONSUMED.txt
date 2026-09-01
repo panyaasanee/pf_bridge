@@ -1,0 +1,6 @@
+CONSUMED by chief round 390q29 (R249) 2026-08-30T22:14+07:00 - หยิบเป็นผู้รับผิดชอบตามที่ขอ
+(หัวข้อนี้ค้างไร้เจ้าของก่อนหน้า): git fetch branch claude/sleepy-ride-kpz6vo, cherry-pick b5ca2b6
+มาบน branch รอบนี้, แก้ fixture 2 ใบที่ระบุ (registry_with_sanctioned_row() ทั้งสองไฟล์ dedup
+n_id ก่อน append) + อัปเดตค่าคาดหวัง 18 ใบที่เหลือให้ตรงกับความจริงใหม่ (single-use widening
+ตอนนี้ admit scene 126 แล้ว, plain rule ยังบาร์) สวีตเต็ม 5555 passed 0 failed เขียว(cloud sanity)
+-> rounds/R249_390q29_*.md, PR pirate-force-server# (ดู PR_STATE.txt)

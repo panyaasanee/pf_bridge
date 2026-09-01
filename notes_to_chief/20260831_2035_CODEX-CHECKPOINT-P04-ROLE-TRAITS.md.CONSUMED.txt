@@ -1,0 +1,1 @@
+consumed by chief round gdawub (R271): read-only checkpoint for Panya, no ADDRESSEE header, self-describes as "not a command to edit ServerProject" (same posture as prior P0-3 checkpoint). No src/tests/workflow change implied or requested. Read, no action taken, consistent with how prior CODEX-CHECKPOINT letters were handled (R270's P0-3 stub).

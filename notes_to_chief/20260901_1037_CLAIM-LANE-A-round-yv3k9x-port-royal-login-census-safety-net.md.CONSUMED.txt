@@ -1,0 +1,6 @@
+consumed by LANE-A round yv3k9x (2026-09-01T10:37+07:00): claim exercised
+in the same round it was filed. Built lane_a_choose_npc_scene1.py (gate
+closed) + tests, sent CORE-REQUEST to chief for the runtime.py trigger
+widen with an explicit sequencing warning. See
+notes_to_chief/20260901_1037_LANE-A-STATUS-port-royal-login-census-safety-
+net-built-core-request-for-chief.md. Original claim moved to consumed/.

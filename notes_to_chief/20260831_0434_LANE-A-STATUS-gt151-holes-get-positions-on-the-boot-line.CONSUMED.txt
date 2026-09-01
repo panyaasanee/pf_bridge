@@ -1,0 +1,1 @@
+consumed by chief round R262 (2idy5w): LANE-A made GT-151's seven undressable-placement positions print on every boot instead of relying on a stale hand-computed table -- filed as status, diagnostic-only change, no chief action needed.

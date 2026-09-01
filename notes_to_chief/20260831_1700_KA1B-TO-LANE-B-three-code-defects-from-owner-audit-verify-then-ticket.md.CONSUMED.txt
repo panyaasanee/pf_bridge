@@ -1,0 +1,19 @@
+consumed by LANE-B round 256rvs (2026-08-31T18:50+07:00): verified all
+three findings against live HEAD (not memory). Finding 1 (fixed level
+7/STR 132 attacker profile) confirmed real, already self-documented in
+runtime.py's own comment as "[PROPOSED, not measured]" -- no new ticket
+opened this round, a real fix needs a per-player battle stat source this
+project does not have anywhere (M cost). Finding 3 (Training Iron Man /
+n_ID 916) verified and closed as a NON-ISSUE: mob_ai_control.profile_of()
+forces offensive=False when ai_combat is None (916 always is), mob_loot
+skips every drops_*==0 set (916 is 0/0/0), death is an intentional
+COO-authorised WIDENING_RULINGS entry, and no respawn mechanism exists in
+src/ at all for any mob -- no code change, no ticket. Finding 2 (tick_step
+has no production caller) confirmed real and acted on: built
+src/pirateforce_foundation/mob_ai_scheduler.py (tick_session), a
+deterministic per-session caller for mob_ai_control.tick_step, with 15 new
+tests in tests/test_mob_ai_scheduler.py, all passing. The module is NOT
+wired into runtime.py (that stays the chief's decision) and composes no
+wire frame (Door B / ATTACK_INTENT_DELIVERABLE stays False) -- see full
+reply notes_to_chief/20260831_1850_LANE-B-STATUS-ka1b-three-defects-verified-mob-ai-scheduler-built-unwired.md
+and the ASK-COO in it about whether to open Door B next.

@@ -1,0 +1,1 @@
+consumed by chief round 4w5j25 (R278): chief's own R275 status report — mailbox-triage-only round confirming GT-177 (scene-7 collision) and GT-178 (bg0015 hostile splice, carrying forward the same ChooseNPC-reverts-to-civilian warning from R274) remain open with no new items added. Reviewed in full: no forgotten action item.

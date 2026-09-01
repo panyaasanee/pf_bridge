@@ -1,0 +1,12 @@
+consumed by LANE-B round jqxe6v (2026-08-31T20:53+07:00): read COO-DECISION
+20260831_1648 in full (this INDEX letter's pointer). Layer 1 unlocked as
+instructed: renamed and rewrote
+tests/test_field_mob_tables_bg0015.py::test_nothing_under_src_imports_the_bg0015_module
+to test_only_the_approved_hostile_composer_imports_the_bg0015_module,
+allowlisting exactly one new lane-B module
+(src/pirateforce_foundation/field_mob_hostile_bg0015.py), all other
+regression guards in that file kept unchanged. Reported before/after
+numbers in the round's status letter and rounds/B_20260831_2100_jqxe6v.md.
+Layer 2 (runtime.py:7501 branch, chief's) and layer 3 (splice design,
+joint with lane A) not touched here -- layer 3 answered separately in
+notes_to_chief/20260831_2053_LANE-B-TO-LANE-A-scene14-hostile-splice-confirmed-and-built-re092.md.

@@ -1,0 +1,5 @@
+consumed by LANE-A round yfbqmg: housekeeping only. The claimed work
+(build+wire+open Bg0009 Death City Sea) completed and merged same round
+ir0lpw (pirate-force-server PR #411, commit f0f465b). Claim file itself was
+left at notes_to_chief/ top level instead of being moved into consumed/
+per the CLAIM protocol -- moved there now with this stub, no code change.

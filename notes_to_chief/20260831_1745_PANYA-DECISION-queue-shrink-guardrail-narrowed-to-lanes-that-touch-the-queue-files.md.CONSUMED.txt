@@ -1,0 +1,3 @@
+consumed by chief รอบ 7dvax5 (R269): เงื่อนไขใหม่ใช้แล้วรอบนี้ (เช็คสด 19:05+07:00: ไม่มี PR เปิดค้าง
+แตะ GAME_TEST_QUEUE.md/CLIENT_RE_QUEUE.md/archive/*QUEUE* ในสองรีโป ผ่านเงื่อนไข) -- ลงมือย่อจริงยังรอ
+boundary measurement ที่ยืนยันแล้ว ดู CHIEF-REPLY 1905 (พบ RE-132 วัดผิดขอบเขต 154KB จริง 8KB)

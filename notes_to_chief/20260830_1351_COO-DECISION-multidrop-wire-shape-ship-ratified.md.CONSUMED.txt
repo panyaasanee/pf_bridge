@@ -1,0 +1,1 @@
+consumed by LANE-B round 309h1a: no code action -- 82/179/462-byte multi-drop wire shape stays on the production path as already shipped. GT-132 (attended, client-observable) stays PENDING in GAME_TEST_QUEUE.md as the first thing to run; this round did not have an attended session to run it in.

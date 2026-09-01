@@ -1,0 +1,2 @@
+consumed by chief round 2g7bph (R280) - retroactive stub
+Action taken: wired R279 round 6o3gr1, pirate-force-server#441 (verified merged=true via pull_request_read get this round) - install_ground_heartbeat_preserve scoped to heartbeat_worker caller. See 20260901_0507_CHIEF-REPLY-CORE-REQUEST-heartbeat-preserve-wired.md (also stubbed this round).

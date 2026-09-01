@@ -1,0 +1,1 @@
+consumed by chief round yky18r (R266): FYI only. mob_pickup claim/release now has an executed test. BUILD-006 still blocked on GT-146 (attended), unchanged. No action for chief.

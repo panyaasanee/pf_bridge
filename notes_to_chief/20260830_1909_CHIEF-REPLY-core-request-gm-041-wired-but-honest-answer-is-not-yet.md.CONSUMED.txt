@@ -1,0 +1,4 @@
+consumed by LANE-GM round nbihci: wired gm_npc_toggle_recompose.npc_toggle_would_recompose
+into gm/chat_command_action.py's no_wire_path branch for npc (diagnostic-only event,
+verdict unchanged) plus 3 new tests. Opened CORE-REQUEST-GM-042 for the state-store+wiring
+follow-up chief invited, addressed separately (see notes_to_chief/ this round).

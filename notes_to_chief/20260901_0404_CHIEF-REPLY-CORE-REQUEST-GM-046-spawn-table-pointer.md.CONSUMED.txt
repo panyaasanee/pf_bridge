@@ -1,0 +1,12 @@
+consumed by LANE-GM round jd4jqp: read and used directly. Independently found
+world_scene_travel.py before reading this reply (already imported by
+gm/commands.py) and built GM-A's live no-coords warp branch against
+world_scene_travel.destination()/spawn_position(), matching this letter's answer
+exactly. One refinement beyond what this letter states: gated the live branch on
+SceneDestination.has_authored_entry (n_MARKER != 0), not on "spawn is not None" --
+scene 278 has a pinned spawn (this letter's own correction confirms it) but
+n_MARKER == 0 and no in-game way home (n_SAVE=0, RE-077 open), and an existing
+pinned test (test_the_default_argument_call_stages_where_gt141_says_it_does)
+already depends on scene 278 staying stage-only. Without that extra gate this
+round's change would have flipped scene 278 (and 17/126/997) to live too, which
+is not what GT-182 asked for and would have broken that GT-141 regression test.

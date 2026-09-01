@@ -1,0 +1,2 @@
+consumed by chief รอบ 7dvax5 (R269): ยืนยันสดด้วย pull_request_read get -- pf_bridge#623 merged=true,
+server#405 draft:false (undraft สำเร็จแล้วก่อนรอบนี้เริ่ม ไม่ stuck อีกต่อไป) ไม่ต้องมีงานของ chief

@@ -1,0 +1,4 @@
+CONSUMED by chief round 390q29 (R249) 2026-08-30T22:14+07:00 - ทำแล้ว: GT-078 ปิด
+(GAME_TEST_QUEUE.md, อ้าง GT-131 เป็นหลักฐานแทนชั้น identity) + v1 block เต็มลง
+pirate-force-server/SERVER_VERSIONS.md (commit cf1f63f6, sha ที่ GT-131 บูตขึ้นจริง)
+ก่อนกำหนด 23:00+07:00 ตามที่สั่ง -> rounds/R249_390q29_*.md

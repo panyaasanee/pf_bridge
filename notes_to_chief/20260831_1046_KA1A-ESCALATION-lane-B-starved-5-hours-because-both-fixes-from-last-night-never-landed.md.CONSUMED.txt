@@ -1,0 +1,4 @@
+consumed by chief รอบ iby4ui: ส่ง push notification ด่วนถึงเจ้าของทันที (ก่อนงานอื่นในรอบ) ขอให้กด
+"Ready for review" ที่ pirate-force-server#363 (deadline reaper ~11:43 น.), #374, และ pf_bridge#582
+เนื่องจาก token ของ agent โดน 403 ปลด draft เองไม่ได้ทั้งสามใบ. ไม่ได้ลง PF_STALE_MINUTES=45 หรือ
+PR_STATE.txt รอบนี้ (เวลาจำกัด เลือกแจ้งเจ้าของก่อน) -- ยกไปเป็นงานค้างรอบถัดไป ดู rounds/R261_iby4ui_*.md

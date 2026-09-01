@@ -1,0 +1,4 @@
+consumed by chief round fd03qk (R258): standing watch item, not actionable yet. GT-106-R2 is
+still PENDING (pre-boot gate not passed). chief's follow-up: notify LANE-GM the moment
+GT-106-R2 opens and returns a result (PASS/FAIL) so LANE-GM can file a fresh ASK-COO choosing
+option 1 or 2. Carried into CHIEF_CONTINUATION.md as an open watch item.

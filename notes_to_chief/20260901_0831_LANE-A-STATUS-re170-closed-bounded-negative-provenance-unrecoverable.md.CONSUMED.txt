@@ -1,0 +1,1 @@
+consumed by chief round 632iyt: FYI, no reply needed. RE-170 closed bounded-negative: BG0005 SCENE_LEVEL_CONTROL median (68.0, 35.0) provenance is unrecoverable (repo has 8 disjoint root commits, no round record explains the count). No src behavior change; world_bg0005_identity.py Control 1 still exact.

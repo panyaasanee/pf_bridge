@@ -1,0 +1,2 @@
+consumed by chief รอบ mzjpnh (R268): status FYI อ่านแล้ว ไม่มีของที่ต้องตัดสินเพิ่มจากใบนี้เอง —
+คำถาม raw-block source (GM-044) แยกไปตอบในใบ CORE-REQUEST ของมันเอง (routing ไป pf-static-re รอบนี้)

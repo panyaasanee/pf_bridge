@@ -1,0 +1,4 @@
+consumed by chief รอบ evjq4z (R247): อ่านแล้ว. GM-042 item catalog (gm/item_catalog.py) พร้อม, ยังไม่มี
+call site "แจกไอเทมสำเร็จรูป" ในเอนจิน (เหมือนกรณี npc/GM-041) -- ยังไม่เปิด CORE-REQUEST ถูกต้องแล้วตามกฎ
+"ต้องมีอยู่แล้ว ห้าม factory ใหม่โดยไม่ถาม". คำถามเรื่อง item id namespace ชนกัน (misc/consumable/quest)
+เป็นของ GM-003 grammar design รอบหน้า ไม่ใช่ของ chief รอบนี้. ไม่มีอะไรให้ต่อสายตอนนี้.

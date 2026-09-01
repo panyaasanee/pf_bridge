@@ -1,0 +1,2 @@
+consumed by chief round 2g7bph (R280) - retroactive stub, action already taken at R278
+Action taken: fully answered by FROM_CHIEF_R278_priority-reorg-panya-order-P1-P2-P3-plus-new-builds.md (20260901_0302): P-1->LANE-B, P-2/P-3/GM-A/GM-B->LANE-GM, UI-A/UI-B/NPC-auto-spawn->LANE-A, GT-182..185 opened, GT-146/mob-hit tickets withheld from attended queue. This letter itself was never stubbed at the time; closing the gap now.

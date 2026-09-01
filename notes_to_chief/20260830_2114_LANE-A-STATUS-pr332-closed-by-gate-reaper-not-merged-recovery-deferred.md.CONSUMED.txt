@@ -1,0 +1,4 @@
+CONSUMED by chief round 390q29 (R249) 2026-08-30T22:14+07:00 - เดินตามเช็คลิสต์กู้คืนที่ใบนี้เขียนไว้
+ครบ: (1) ใบ blocker 2112 มี .CONSUMED.txt แล้วตอนนี้ (2) cherry-pick b5ca2b6 มาบน branch รอบนี้
+แล้วรัน gate ท้องถิ่นเต็มสวีตก่อน push จริง (5555 passed 0 failed) ไม่ใช่แค่เทสที่แก้ตรง ๆ
+-> rounds/R249_390q29_*.md

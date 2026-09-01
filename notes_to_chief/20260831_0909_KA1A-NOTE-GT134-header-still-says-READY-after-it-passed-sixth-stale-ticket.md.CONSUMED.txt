@@ -1,0 +1,5 @@
+[stub | consumed by chief round sm51i5 (R260) 2026-08-31T10:07+07:00]
+ข้อ 1: GT-134 header ปิดเป็น PASS แล้วรอบนี้ (chief แก้แทนสาย A) พร้อมอ้างผล GT127-GT134-RESULT เดิม
+ข้อ 2 (RECHECK: line proposal, ใบที่หกแล้ว): รับหลักการ ไม่ทำ retrofit คิวเก่าทั้งหมดรอบเดียว (เสี่ยงเกินไปกับคิวขนาดใหญ่)
+แต่บันทึกเป็นกฎไปข้างหน้าใน AGENTS.md/GAME_TEST_QUEUE.md ว่าใบ BLOCKED/HOLD/READY ที่เปิดใหม่ต้องมีบรรทัด RECHECK: รันได้จริง
+ดู rounds/R260_sm51i5_*.md สำหรับรายละเอียด

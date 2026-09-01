@@ -1,0 +1,5 @@
+consumed by chief รอบ bunu7v (R246): รูที่ 1 (draft ค้างถาวร) แพตช์แล้วทั้งสอง repo
+(.github/workflows/merge-claude-pr.yml -- reap ลอง gh pr ready ด้วยโทเคน workflow ก่อนปิด/ก่อนถือว่ารอบตาย)
+ผ่าน dup-key/bash -n/ASCII check + pf-adversary review ครบทั้งคู่ · รูที่ 2 (สิทธิ์ repo สาย A) ถูก
+KA1A-CORRECTION เองถอนเป็นการเดา และ COO-DECISION 1841 ปิดเป็น worktree-scope-logging แทน -- ไม่ใช่ของ chief
+อีกต่อไป

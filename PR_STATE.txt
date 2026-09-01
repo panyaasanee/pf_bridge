@@ -1,0 +1,11 @@
+STAMP: 2026-08-31T16:57+07:00
+BY: chief R267 (sa0qjb)
+pf_bridge #616 draft=true [LANE-E] WIP round claim sa0qjb (this round's own lock)
+pf_bridge #614 draft=true [LANE-B] round fz9mhb: mailbox record for mob_census_wire_count test pin
+pirate-force-server #400 draft=true [LANE-E] WIP round claim sa0qjb (this round's own lock)
+pirate-force-server #399 draft=true [LANE-B] round fz9mhb: pin BaseException-escapes contract on mob_census_wire_count
+pirate-force-server #398 draft=false [LANE-GM] wire live cross-scene warp via make_login_teleport per COO-DECISION 1441
+OPEN_TOTAL=5  STUCK_DRAFT_OVER_45MIN=0 (all under age threshold at time of writing)
+NOTE: GAME_TEST_QUEUE.md shrink order (letter 0056) guardrail check for this round: FAILS --
+LANE-B (pf_bridge#614/server#399) and LANE-GM (server#398) both have PRs open right now. Queue-shrink
+work stays deferred per the order's own condition. See notes_to_chief/20260831_1657_CHIEF-REPLY-*.

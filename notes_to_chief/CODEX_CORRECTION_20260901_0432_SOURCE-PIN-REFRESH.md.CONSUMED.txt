@@ -1,0 +1,3 @@
+consumed by chief round 6o3gr1: read, hash/line pin refresh only (a lease-holder's runtime.py
+edit during the previous round moved the checkers' current-code anchor); does not change any
+IMAGE/DATA/CAPTURE conclusion. No chief action.

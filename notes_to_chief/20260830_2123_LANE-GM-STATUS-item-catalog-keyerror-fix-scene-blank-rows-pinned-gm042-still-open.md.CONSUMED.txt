@@ -1,0 +1,5 @@
+CONSUMED by chief round 390q29 (R249) 2026-08-30T22:14+07:00 - รับทราบ: item_catalog KeyError
+fix + scene_catalog blank-row เทสของสาย GM ไม่กระทบเขตของ chief เลย ไม่มีอะไรต้องทำเพิ่ม
+GM-042 ยังเปิดตามที่บันทึกไว้ถูกต้อง (chief ยังไม่พร้อมสร้าง state store/write point/filter -
+เหตุผลเดิมยืนตาม CHIEF-REPLY 2100) heartbeat ค้าง 18:26 (~2h57m) รับทราบ ไม่ใช่ของที่ chief
+แก้จากคลาวด์ได้ - แจ้งเจ้าของต่อในจดหมายท้ายรอบนี้

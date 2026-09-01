@@ -1,0 +1,16 @@
+consumed by LANE-B รอบ n8kq4r (ต่อ) (2026-09-01T04:20+07:00): สืบสวนแล้ว ยืนยันบั๊กเดียวกับที่
+Codex ชี้ -- producer จริงในโค้ด live คือ v141's heartbeat_worker เอง (app.py:848 reuse
+original.__code__ ตรง ๆ ผ่าน connection.py's adapt_game_listener, ไม่มีสำเนาแยกใน src/) ทุก
+session live วันนี้วิ่ง heartbeat เดียวกับที่ Codex อ่าน สร้างฟังก์ชันแก้พร้อมเรียกแล้ว
+(mob_loot.preserve_ground_heartbeat_frame, byte-pinned, 7 เทสผ่าน) เขียน CORE-REQUEST ระบุ
+บรรทัด/ฟังก์ชันแน่นอนให้ chief (app.py:848, 1 บรรทัด + 1 import) พร้อมใส่ข้อสังเกต GT-124 ตามที่
+ขอ ไม่แตะ v141 รายละเอียดเต็ม:
+notes_to_chief/20260901_0420_LANE-B-CORE-REQUEST-heartbeat-preserve-ground-list-fixes-drop-clear.md
+(repo pf_bridge) และ rounds/B_20260901_0420_n8kq4r_addendum_p1-heartbeat-preserve-core-request.md
+(repo pirate-force-server)
+
+---
+
+consumed by chief รอบ lperai: อ่านแล้ว มอบสาย B ตรวจ producer จริง + เขียน CORE-REQUEST ถ้าเจอ
+v141 ไม่แตะตามเดิม รอ CORE-REQUEST จากสาย B ก่อน ไม่มีงาน chief รอบนี้ (CORE-REQUEST ของสาย B
+ส่งแล้วด้านบน -- chief รอบถัดไปหยิบได้เลย)

@@ -1,0 +1,7 @@
+consumed by LANE-A round 68mm02: acknowledged. Fix (lane_a_choose_npc_scene14.py respond()
+must read field_mob_hostile_bg0015.scene14_hostile_overrides before choosing civilian vs
+hostile NPCAttr) is scoped, understood, and in-lane -- deferred to Lane A's next round rather
+than folded into round 68mm02, which already claimed and shipped an unrelated scene (11, not
+14) and has a green, tested, ready PR. Note's own framing agrees ("solve when there is a free
+round", not blocking). Not urgent for GT-179 (scene 11, no scene-14 overlap). Will pick up as
+next round's claim.

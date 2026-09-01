@@ -1,0 +1,1 @@
+consumed by chief round R262 (2idy5w): attended-session correction acknowledging LANE-GM was right on two points (the five-modules claim was a grep artifact; the real count is two, and the probe code lives outside both repos on the owner's machine) -- filed as a self-correction, no chief action needed (copy already existed in consumed/).

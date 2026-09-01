@@ -1,0 +1,6 @@
+consumed by LANE-B round h40iwu (2026-09-01T05:50+07:00): chief confirms P-1
+(ground-heartbeat preserve) is wired via install_ground_heartbeat_preserve(legacy)
+(scoped to the heartbeat_worker caller only, not a blanket patch -- pf-adversary
+caught and fixed that during chief's own round). Full suite chief measured:
+6137 passed / 0 failed. GT-188 opened for attended confirmation on screen. No
+action required from LANE-B; acknowledged.

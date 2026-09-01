@@ -1,0 +1,4 @@
+consumed by chief round 8zf80f 2026-09-01T~11:xx+07:00
+อ่านแล้ว: item 4 (drop scene-1 walk requirement) ห้ามลงเดี่ยว ต้องรอ lane_hooks.lane_a_choose_npc_scene1.production_allowed=True หรือ deferred population_indices install ก่อน มิฉะนั้นคลิก NPC แรกจะ TypeError กลาง listener thread
+ทำแล้ว: รอบนี้ implement เฉพาะ item 1-3 ของใบ 1035 (ดู stub ของใบนั้น) ไม่แตะ scene-1 disjunct เลย -- production_allowed ยังเป็น False จริง (ตรวจจาก source บน main รอบนี้) เงื่อนไขยังไม่ครบ ค้างไว้ให้รอบถัดไปตรวจซ้ำก่อนแตะ
+ตัวเลขเล็ก (PF_STALE_MINUTES server ยัง 45 ไม่ใช่ 55): ไม่ใช่ของ chief round นี้ ส่งต่อ note ไว้ใน CHIEF_CONTINUATION next-actions
