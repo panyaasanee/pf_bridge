@@ -3752,3 +3752,70 @@ selector (`0x00443F50`) หรือ faction/relation comparator (`0x4A1D50`) �
 `src/pirateforce_foundation/npc_hostile_hypothesis.py:14-27` (relation comparator `0x4A1D50`,
 faction BasicAttr `0x0400` @ `+0x68`, พิสูจน์แล้วรันไทม์) · `RE-191` (ปิดคำถาม RGB ของ 61/62/63 แล้ว
 ใบนี้ไม่ซ้ำ)
+
+## 🔬 RE-196 RETURNSELECTSERVERVITAL-FIELD3-TAG-BYTE-001 [STATIC-ON-BRIDGE]: field 3 (the string field, object `+0x20`) of `ReturnSelectServerVital` (0x709E) -- is there an instruction that writes a tag byte just before `string_wire_call@0x005E6A2B`, the way field1/field2 have `STACK@...+0x14`/`+0x18` tag-writes -- and separately, does the SAME question resolve for `DeleteActorVital`'s own string field (also labeled `UNTAGGED_STRING8_LEN32LE` despite GT-018 confirming a real `0x44` tag for it)?
+
+### ทำไมเปิดใบนี้ (เขียนใหม่รอบ 292 หลัง pf-adversary รอบสองจับ overclaim ทิศตรงข้ามในร่างแรก)
+
+pf-adversary รอบ `njkvcc` (`notes_to_chief/20260901_1737_LANE-A-CORE-REQUEST-logout-tag-byte-overclaim-found-by-real-adversary.md`)
+เจอว่า `logout_hypothesis.py` อ้าง *"EVERY TAG BYTE (0x08/0x32/0x44) IS READ FROM THE CLIENT'S OWN
+SERIALIZER"* โดยไม่เคยวัด field 3 ตรง (ยกมาจาก `DeleteActorVital`/GT-018 เท่านั้น) ร่างแรกของ chief
+แก้เกินไปอีกทาง: อ้างว่า `PF_SERIALIZER_FIELDS.tsv:1125` (`UNTAGGED_STRING8_LEN32LE`) พิสูจน์ว่า field 3
+**ไม่มี** tag -- **pf-adversary รอบสอง (บังคับก่อน commit) จับ overclaim ทิศตรงข้าม**: แถว 462/466
+ให้ label เดียวกันเป๊ะกับ field 4 ของ `DeleteActorVital` เอง ทั้งที่ `GT-055` ยืนยันแล้วว่า tag `0x44`
+ของข้อความนั้นเป็นของจริง (corroborate GT-010/011/018) และบันทึกไว้ตรง ๆ ว่า *"ป้าย `UNTAGGED_*` = ขอบเขต
+helper ไม่ใช่ full-wire claim"* (`GAME_TEST_QUEUE.md:92`) -- label จึงไม่พิสูจน์ทั้งสองทิศทาง: ไม่พิสูจน์
+ว่า field 3 ไม่มี tag และไม่พิสูจน์ว่ามี tag `0x44` แก้ทั้งสองไฟล์เป็น "UNCONFIRMED ทั้งสองทาง" แล้ว
+(`[STALE][MEASURED]` round 292) -- ใบนี้เปิดเพื่อหาคำตอบจริง
+
+`production_allowed` ของ `logout_hypothesis.py`'s return-select profile ยัง `False` ทุกที่ -- ไม่มีความ
+เสี่ยงต่อ production วันนี้จากคำถามนี้ ไม่ใช่ P0
+
+### สิ่งที่ต้องตอบ
+
+1. อ่าน serializer `0x5e69f0` (descriptor table `0xf304ec` slot2) ที่ VA รอบ field 3 (`+0x20`) อีกครั้ง
+   โดยเฉพาะ -- มี instruction ที่เขียน tag byte ก่อน `string_wire_call@0x005E6A2B` หรือไม่ (เทียบกับ
+   field 1/2 ที่มี `STACK@...+0x14`/`+0x18` เขียน tag ก่อนชัดเจนตาม row 1123-1124)
+2. **ใบเดียวกัน ถามซ้ำกับ `DeleteActorVital`**: มี instruction เขียน tag `0x44` ก่อนเรียก string-helper
+   ของ field 4 จริงหรือไม่ (นี่คือกรณีที่ `GT-018` ยืนยันแล้วว่ามี tag จริง -- ใช้เป็นกรณีเทียบวิธีอ่าน
+   ให้ตรงกัน แล้วยืนยันว่าวิธีหา instruction span นี้ใช้ได้จริงกับทั้งสองข้อความ)
+3. ถ้า field 3 ไม่มี tag byte จริง -- ขนาด body ที่ถูกต้องของ all-zero minimal form คือเท่าไหร่ (ปัจจุบัน
+   โมดูลอ้าง 16 bytes นับรวม tag `0x44`; ถ้าตัด tag ออกจะเหลือ 15 bytes) และ `RETURN_SELECT_SERVER_BODY`
+   ปัจจุบัน (`logout_hypothesis.py`) ตรงกับ layout จริงหรือไม่
+4. ยืนยันว่าไม่มี raw capture ใดที่จับ `ReturnSelectServerVital` ตัวจริงมาเทียบไบต์ต่อไบต์ได้อยู่แล้ว
+   (ถ้ามี ให้ระบุ evidence span ทันที ไม่ต้องรอ static เพิ่ม)
+
+### pass criteria
+
+- **PASS**: ระบุ instruction span ที่ยืนยัน/ปฏิเสธ tag byte ก่อน field 3 (และก่อน `DeleteActorVital`'s
+  field 4 เพื่อเทียบวิธี) พร้อม VA + file offset + span_sha256 เหมือนแถวอื่นในตาราง แล้วสรุป layout ที่
+  ถูกต้องของ 16-byte (หรือ 15-byte) body
+- **BOUNDED-NEGATIVE**: ถ้า static เพิ่มไม่พอจะชี้ขาดทั้งสองข้อความ (เช่น compiler inlining ทำให้
+  tag-write แยกจาก string_wire_call ไม่ชัด) เขียนไว้ตรง ๆ ว่ายังต้องรอ raw capture ของ
+  `ReturnSelectServerVital` จริง ไม่ใช่แค่ static เพิ่ม -- ห้ามเดาทิศทางไหนทั้งสิ้น
+
+### ข้อห้าม
+
+ห้ามเปลี่ยน `RETURN_SELECT_SERVER_BODY` หรือ body-layout logic ใด ๆ ใน `logout_hypothesis.py` จากใบนี้
+โดยตรง (chief ตัดสินใจแก้เองเมื่อได้ผลแล้ว เพราะมี fixture-drift guard ที่ต้องแก้คู่กัน) · ห้ามอ้างว่า
+`production_allowed` เปลี่ยนสถานะจากใบนี้ (ยัง False เหมือนเดิมไม่ว่าผลจะออกมาอย่างไร) · ห้ามสรุปว่า
+label `UNTAGGED_STRING8_LEN32LE` แปลว่า "ไม่มี tag" โดยไม่เช็ค instruction span ก่อนเสมอ (นี่คือ
+overclaim ทิศตรงข้ามที่ร่างแรกของใบนี้เพิ่งทำพลาดไปเอง)
+
+### สัญญาผู้บริโภค
+
+เปิดโดย chief -- **chief บริโภคผล** (เจ้าของไฟล์ `logout_hypothesis.py` และ
+`tools/verify_logout_return_select_encoder.py` ตามเขตเขียนหัวข้อ 6) รอบถัดไปที่เห็นผลแล้วตัดสินว่าจะแก้
+body layout หรือไม่
+
+### links
+
+`notes_to_chief/20260901_1737_LANE-A-CORE-REQUEST-logout-tag-byte-overclaim-found-by-real-adversary.md`
+(ที่มา) · `pf_bridge/external/PF_SERIALIZER_FIELDS.tsv:459-467,1123-1128` (แถว `DeleteActorVital` field
+4 ทั้ง W/R และ `ReturnSelectServerVital` ทั้ง W/R ของ field 1-3) · `GAME_TEST_QUEUE.md:92` (GT-055,
+ที่มาของ "label = ขอบเขต helper ไม่ใช่ full-wire claim") ·
+`src/pirateforce_foundation/logout_hypothesis.py:186-221` (field3 tag comment เต็ม,
+`[STALE][MEASURED]` รอบ 292, แก้สองครั้ง) ·
+`tools/verify_logout_return_select_encoder.py:1-30,86-90,172-186,304-310` (docstring, `FIELD3_TAG`,
+section B checks, RESULT line -- ทั้งหมด `[STALE][MEASURED]` รอบ 292) · `GT-018` (แหล่งจริงของ
+`DeleteActorVital`'s `0x44`, คนละข้อความ)
