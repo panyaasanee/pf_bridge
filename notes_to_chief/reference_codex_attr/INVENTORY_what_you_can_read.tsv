@@ -80,7 +80,7 @@ PF_COMBAT_LETHAL_TAIL_DELTA.tsv	43449	2026-09-01 14:00	full copy	PF_COMBAT_LETHA
 PF_COMBAT_LIFECYCLE.md	2423	2026-08-31 17:51	full copy	PF_COMBAT_LIFECYCLE.md
 PF_COMBAT_LIFECYCLE.tsv	41063	2026-08-31 17:51	full copy	PF_COMBAT_LIFECYCLE.tsv
 PF_COMPILER_RUNTIME_TARGET_6564_CLOSURE.md	11770	2026-08-29 23:21	full copy	PF_COMPILER_RUNTIME_TARGET_6564_CLOSURE.md
-PF_CRITICAL_ARTIFACT_AUTHORITY.json	22061	2026-09-01 14:06	full copy	PF_CRITICAL_ARTIFACT_AUTHORITY.json
+PF_CRITICAL_ARTIFACT_AUTHORITY.json	26948	2026-09-01 15:51	full copy	PF_CRITICAL_ARTIFACT_AUTHORITY.json
 PF_DAILY_ACTIVITY_CLOSURE.md	4236	2026-08-30 00:29	full copy	PF_DAILY_ACTIVITY_CLOSURE.md
 PF_DATA_EVIDENCE.md	1390	2026-08-22 14:50	full copy	PF_DATA_EVIDENCE.md
 PF_DATA_EVIDENCE.tsv	59258	2026-08-22 14:50	full copy	PF_DATA_EVIDENCE.tsv
@@ -95,9 +95,9 @@ PF_GM_PLUGIN_GATE.pair.json	777	2026-09-01 07:17	full copy	PF_GM_PLUGIN_GATE.pai
 PF_GM_PLUGIN_GATE.tsv	27050	2026-09-01 07:17	full copy	PF_GM_PLUGIN_GATE.tsv
 PF_GROUND_DROP_LIFETIME.md	21237	2026-09-01 07:59	full copy	PF_GROUND_DROP_LIFETIME.md
 PF_GROUND_DROP_LIFETIME.tsv	61979	2026-09-01 07:59	full copy	PF_GROUND_DROP_LIFETIME.tsv
-PF_GROUND_DROP_PICKUP_CLOSURE.md	14088	2026-09-01 15:10	full copy	PF_GROUND_DROP_PICKUP_CLOSURE.md
-PF_GROUND_DROP_PICKUP_CLOSURE.pair.json	3784	2026-09-01 15:10	full copy	PF_GROUND_DROP_PICKUP_CLOSURE.pair.json
-PF_GROUND_DROP_PICKUP_CLOSURE.tsv	29960	2026-09-01 15:10	full copy	PF_GROUND_DROP_PICKUP_CLOSURE.tsv
+PF_GROUND_DROP_PICKUP_CLOSURE.md	14761	2026-09-01 15:37	full copy	PF_GROUND_DROP_PICKUP_CLOSURE.md
+PF_GROUND_DROP_PICKUP_CLOSURE.pair.json	4074	2026-09-01 15:37	full copy	PF_GROUND_DROP_PICKUP_CLOSURE.pair.json
+PF_GROUND_DROP_PICKUP_CLOSURE.tsv	30672	2026-09-01 15:37	full copy	PF_GROUND_DROP_PICKUP_CLOSURE.tsv
 PF_GROUND_DROP_TRANSPORT.md	2779	2026-08-31 17:51	full copy	PF_GROUND_DROP_TRANSPORT.md
 PF_GROUND_DROP_TRANSPORT.tsv	26924	2026-08-31 17:51	full copy	PF_GROUND_DROP_TRANSPORT.tsv
 PF_HANDOFF_V1.md	31872	2026-08-22 15:00	full copy	PF_HANDOFF_V1.md
@@ -210,11 +210,11 @@ pf_extract_protocol.py	773240	2026-08-22 13:17	full copy	pf_extract_protocol.py
 pf_inventory_inputs.py	10567	2026-08-22 13:26	full copy	pf_inventory_inputs.py
 pf_rederive_actor_relation_interaction_graph.py	89606	2026-09-01 12:38	full copy	pf_rederive_actor_relation_interaction_graph.py
 pf_rederive_attr_capture_validation.py	55831	2026-08-30 18:45	full copy	pf_rederive_attr_capture_validation.py
-pf_rederive_attr_semantics.py	1477831	2026-08-31 17:49	full copy	pf_rederive_attr_semantics.py
+pf_rederive_attr_semantics.py	1518114	2026-09-01 16:17	full copy	pf_rederive_attr_semantics.py
 pf_rederive_combat_lethal_tail_delta.py	88086	2026-09-01 14:00	full copy	pf_rederive_combat_lethal_tail_delta.py
 pf_rederive_gm_plugin_gate.py	113012	2026-09-01 07:16	full copy	pf_rederive_gm_plugin_gate.py
 pf_rederive_ground_drop_lifetime.py	171909	2026-09-01 07:59	full copy	pf_rederive_ground_drop_lifetime.py
-pf_rederive_ground_drop_pickup_closure.py	116033	2026-09-01 15:10	full copy	pf_rederive_ground_drop_pickup_closure.py
+pf_rederive_ground_drop_pickup_closure.py	124485	2026-09-01 15:36	full copy	pf_rederive_ground_drop_pickup_closure.py
 pf_rederive_monster_color_gate.py	207140	2026-09-01 08:00	full copy	pf_rederive_monster_color_gate.py
 pf_rederive_monster_color_mechanism_join.py	67594	2026-09-01 09:45	full copy	pf_rederive_monster_color_mechanism_join.py
 pf_rederive_monster_color_wire_control.py	71641	2026-09-01 09:35	full copy	pf_rederive_monster_color_wire_control.py
