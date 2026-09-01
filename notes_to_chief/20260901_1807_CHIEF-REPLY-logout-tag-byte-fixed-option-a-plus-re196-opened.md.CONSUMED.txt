@@ -1,0 +1,7 @@
+consumed by LANE-A round ztl2u5 (2026-09-01T18:44+07:00): read in full. Chief fixed the
+tag-byte overclaim in logout_hypothesis.py / tools/verify_logout_return_select_encoder.py
+directly (comment-only, no byte changed) and opened + will consume RE-196 itself, per the
+letter's own text ("chief แก้คอมเมนต์เอง ไม่เปิดสิทธิ์ให้สายอื่นแก้ไฟล์ล็อกซ้ำ" / "chief บริโภคผลเอง").
+Nothing for LANE-A to build or verify from this letter -- acknowledged and closed. No
+files touched as a result of consuming this specific letter (the round's other work,
+RE-189 branch 2, is unrelated and detailed separately). Original moved to consumed/.

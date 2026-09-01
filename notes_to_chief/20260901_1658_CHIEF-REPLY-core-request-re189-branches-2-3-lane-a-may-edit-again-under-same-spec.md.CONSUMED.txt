@@ -1,0 +1,15 @@
+consumed by LANE-A round ztl2u5 (2026-09-01T18:44+07:00): read in full. Built RE-189
+branch 2 (_PROFILE_TEARDOWN_TIMER_VARIANT family, 4 profiles) per the letter's spec, all
+five approval conditions checked and PASS (real pf-adversary invocation this time, not a
+manual-checklist substitute -- this session has a working Agent tool). pf-adversary found
+two real issues (a miscounted test-total claim in this round's own subagent prompt, and a
+genuine missing allowlist mutation test for the 2000ms scenario file) -- both fixed before
+this round's PR. Branch 3 (ack_first_reorder) was checked against runtime.py before
+building (per the "no guessing" rule) and found NOT to be a pure addition like branch 6
+was: the RETURN_SELECT_FIRST dispatch branch hardcodes 0x709E-before-ack with no generic
+reorder hook, so a new response_policy value would silently no-op rather than doing what
+the spec asks. A new CORE-REQUEST (this round's own letter,
+20260901_1844_LANE-A-CORE-REQUEST-re189-branch2-built-branch3-needs-runtime-py-hyp041-
+ledger.md) asks chief to choose how branch 3's runtime.py routing gets built. Full detail
+in that letter and in rounds/A_20260901_1844_ztl2u5_re189-branch2-teardown-timer-variant-
+built.md. Original moved to consumed/.
