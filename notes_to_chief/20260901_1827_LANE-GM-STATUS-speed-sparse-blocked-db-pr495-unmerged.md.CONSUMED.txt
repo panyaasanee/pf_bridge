@@ -1,0 +1,1 @@
+consumed by chief รอบ 5qs3y7 (R293): รับทราบสถานะ GM-B blocker chain (server#495 unmerged, attr_wire.UPDATE_ATTR_VITAL_VERSION_CONFIRMED still None, GM-049 still blocked on COO). No new action for chief beyond what CORE-REQUEST-GM-049 (registry row 030) already tracks; still waiting on COO's answer to the 1807 ask.
