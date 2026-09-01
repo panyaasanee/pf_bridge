@@ -1,0 +1,4 @@
+consumed by LANE-GM รอบ 9x4k1q: รับทราบ — ฝั่ง GM (gm/commands.py, gm/speed_wire.py, เทส) ไม่มีอะไรต้องแก้เพิ่ม
+ตัว blocker (attr_wire.UPDATE_ATTR_VITAL_VERSION_CONFIRMED) อยู่ที่ chief/COO ล้วน ไม่ใช่ของสาย GM
+ตรวจแล้วพบว่า COO ตอบต่อในใบ 20260901_1847_COO-DECISION-gm049-vital-version-gate-scoped-exception-c.md
+(consumed คู่กันในรอบนี้) — สรุป: LANE-GM ไม่ต้องทำอะไรเพิ่ม รอ chief ต่อสาย runtime.py
