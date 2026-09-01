@@ -1,7 +1,7 @@
 {
   "schema": "pirate-force-critical-artifact-authority/v1",
-  "authority_version": "2026-09-01T17:51:00+07:00",
-  "authority_note": "20260901_1751_CODEX-CHECKPOINT-P03-QUEST-MARK-CLOSURE.md",
+  "authority_version": "2026-09-01T20:02:00+07:00",
+  "authority_note": "20260901_2002_CODEX-CHECKPOINT-P04-ROLE-DECISION-SECOND.md",
   "serverproject_snapshot": {
     "commit": "8a8afa7c6ad7f13af5ac7088ffca6fc743cae5fa",
     "commit_time": "2026-09-01T07:50:38Z",
@@ -114,7 +114,65 @@
         "PF_QUEST_MARK_LIFECYCLE.md": {"size": 13715, "sha256": "561d2d0ab1219c95df72cad6371c7ca294d7fb56efad710a0afeb50572e6e5a2"},
         "pf_rederive_quest_mark_lifecycle.py": {"size": 56022, "sha256": "e26ad423b3b2da0df72c6c5eba97f83e36ccb9e211f223b8eca80fc7192646ff"}
       }
+    },
+    "monster_role_data_controls": {
+      "claim_scope": "Owns exact DATA labels, field values, usage-domain counts and counterexamples used to bound NPC/monster/training-dummy role inference. A lexical label never proves runtime class, attackability, damage behavior or original-server assignment policy.",
+      "rows": 21,
+      "sources": {"DATA": 21},
+      "pair_id": "2f1e5b1e09032421f993999d7c2ed6d83d1c5d119f8ba75e77f814a403ddde5d",
+      "metrics_sha256": "d032c714a5eb9401744d6df02bccde34ad7705122e84b62f1115386413855435",
+      "files": {
+        "PF_MONSTER_ROLE_DATA_CONTROLS.tsv": {"size": 45536, "sha256": "72a5e6ece07f8ca64f710617a8c95b976895be62fb1ddb5677f4ee6ee371348f"},
+        "PF_MONSTER_ROLE_DATA_CONTROLS.md": {"size": 7838, "sha256": "c73e337235cc29d785c3ac7fa6f717490fc4d31663e54abedfaef6786d3c559e"},
+        "PF_MONSTER_ROLE_DATA_CONTROLS.pair.json": {"size": 739, "sha256": "b27a8f8a74399c74fd21f313c7fa9940b78fef94103e91483e46e2924377233d"},
+        "pf_rederive_monster_role_data_controls.py": {"size": 78358, "sha256": "e878040fcc2317a9ae208de9cecd3e9df6f055421fc3eb6a901cabef5e8b7603"}
+      },
+      "tracked_mirror": {
+        "location": "notes_to_chief/reference_codex_attr",
+        "commit": "89c16e29ddca4502e81575a0aa86949cf80b5d79",
+        "byte_identical": true,
+        "all_files_tracked": true
+      }
+    },
+    "actor_relation_interaction_graph": {
+      "claim_scope": "Owns the bounded client-local graph that separates talk/interact, target presentation, enemy target/state and color/style paths. It does not own original-server role assignment policy and does not claim that unresolved indirect or dynamic paths are absent.",
+      "rows": 42,
+      "sources": {"IMAGE": 42},
+      "layers": {"STATIC_NATIVE": 39, "UI_NATIVE": 1, "WIRE_CODEC": 2},
+      "direct_e8_callsites": 31,
+      "callsite_categories": {"talk_interact": 4, "target_presentation": 3, "enemy_target_state": 10, "color_style": 3, "unresolved": 11},
+      "unresolved_rows": 11,
+      "pair_generation": "b62f9c3a72e42177f4e2991fd91a1515e6e70450c610e338c1bf7c85c603a71f",
+      "verdict": "BOUNDED_STATIC_GRAPH / ORIGINAL_POLICY_OPEN",
+      "files": {
+        "PF_ACTOR_RELATION_INTERACTION_GRAPH.tsv": {"size": 104190, "sha256": "0192050fab1df86346a8aac069a3f0f3fbe90620589879a89890461780e812ad"},
+        "PF_ACTOR_RELATION_INTERACTION_GRAPH.md": {"size": 7102, "sha256": "47c3afea68093b329271323d750781c03808fff7178ab391c1c5834a89213ecd"},
+        "PF_ACTOR_RELATION_INTERACTION_GRAPH.pair.json": {"size": 556, "sha256": "8fd30ceab78c865f973a98bfc63f4a9182627fd148208ac906174ff2f7476c48"},
+        "pf_rederive_actor_relation_interaction_graph.py": {"size": 89606, "sha256": "8d1b5c1964a54c5849de001f715e877a86d3598d887adc18d0170dd87ad64d1e"}
+      },
+      "tracked_mirror": {
+        "location": "notes_to_chief/reference_codex_attr",
+        "commit": "89c16e29ddca4502e81575a0aa86949cf80b5d79",
+        "byte_identical": true,
+        "all_files_tracked": true
+      }
     }
+  },
+  "operational_checkpoint": {
+    "goal_master": {"size": 33006, "sha256": "623671b9acd8e091bd48615edfa70a191c781ea88edfa82a731afa3f7af06bdd"},
+    "anti_stall_rule": "Pause a family after two consecutive checkpoints with no field status or scope change, record the exact blocker, then move to the next priority.",
+    "first_p0_4_no_delta": {
+      "report_snapshot": "Pirate_Force_Codex_Audit_Recommendations.b96e420c2902_20260901_1124.byka1B.md",
+      "sha256": "48948f235046d6dc509c6dc84588ed77025035eee01600420e2a56d4a62d4a44"
+    },
+    "second_p0_4_no_delta": {
+      "main_attr_generation": "b96e420c290201ce60babec398fd2389ea36db2f2f30ce552d9d680f481f3fae",
+      "field_status_change": 0,
+      "field_scope_change": 0,
+      "standalone_rows_added": {"IMAGE": 42, "DATA": 21}
+    },
+    "decision": "P0-4_PAUSED_BY_ANTI_STALL / ORIGINAL_POLICY_OPEN",
+    "next_priority": "P0-5"
   },
   "supersession": [
     {
@@ -145,12 +203,27 @@
       "note": "CODEX_URGENT_20260901_1627_COLOR-RELATION-CORRECTION.md",
       "superseded": ["any reading of conditional pair 1/6 as measured SCENE-005 causality", "delivery-incomplete artifact listing"],
       "retained": ["GT-032/SCENE-005/GT-043 provenance correction", "same-renderer correction", "faction-only fix prohibition"]
+    },
+    {
+      "note": "20260901_2002_CODEX-CHECKPOINT-P04-ROLE-DECISION-SECOND.md",
+      "superseded": ["PF_ATTR_ROLE_DISCRIMINATOR.tsv row MOBS_ID916_FINGERPRINT blocker phrase claiming that no training label is present"],
+      "retained": ["all other MOBS_ID916_FINGERPRINT field values", "rank/combat/offensive/aggro/usage/capability/drop nonclaims", "no generalized dummy-bit conclusion"],
+      "scope": {
+        "artifact": "PF_ATTR_ROLE_DISCRIMINATOR.tsv",
+        "row": "MOBS_ID916_FINGERPRINT",
+        "row_key": "15f2baf80527d3a13bd34509d12f86dcb8fb945a641e0b29ffdf62b076b97a11",
+        "claim_sha256": "336e01a3e400c9d74ab7ee580f6853dfe9125a260b8610e2bb37981b6025d5d2",
+        "replacement_fact": "MOBS ID 916 has exact ASCII DATA label 'Training Iron Man'; lexical only"
+      }
     }
   ],
   "delivery": {
-    "location": "outside the canonical ServerProject Git worktree",
-    "tracked": false,
-    "git_ignored": false,
-    "requirement": "owner-approved packaging or ingest is required for another clone or machine"
+    "external_location": "outside the canonical ServerProject Git worktree",
+    "external_tracked": false,
+    "external_git_ignored": true,
+    "tracked_mirror_location": "pf_bridge/notes_to_chief/reference_codex_attr",
+    "tracked_mirror_commit": "89c16e29ddca4502e81575a0aa86949cf80b5d79",
+    "tracked_mirror_scope": "The eight P0-4 files listed in monster_role_data_controls and actor_relation_interaction_graph are byte-identical and tracked at this commit.",
+    "requirement": "Consumers must verify the authority hashes against either the local external copy or the tracked mirror; do not assume every older standalone external artifact is mirrored."
   }
 }

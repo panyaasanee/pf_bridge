@@ -101,7 +101,21 @@ $BAD_NAME_PARTS    = @('gameclient', 'capture', 'pirateforce.sqlite')
 # become a candidate there - a renamed proprietary file dropped in cannot ride
 # along.  And GameClient.bin is 14,759,424 bytes, so the 2 MB size check below
 # refuses it regardless.  Two independent backstops, neither one waived here.
+# 2026-09-01 - Panya ruled the 2026-08-24 waiver extends to the same files when
+# they travel under notes_to_chief/ instead of external/.  Background: the Codex
+# deliverables are mirrored into notes_to_chief/reference_codex_attr/ because
+# external/ cannot carry untracked files; twelve of them carry 'capture' in the
+# name and were refused every round, so the team never saw them.  They are the
+# SAME class already waived at 'external/|.py': validators and derived tables
+# ABOUT captures, not captures.  Checked before widening: every hex run of 64+
+# chars in those files is a sha256 digest, and the tables hold protocol ids,
+# lengths, dispositions, file paths and hashes - no packet or binary bytes.
+# The 2 MB size check and the hard-deny extension block below are untouched and
+# still refuse any real capture or binary regardless of this waiver.
 $NAME_GUARD_WAIVER = @('notes_to_chief/|.md',
+                       'notes_to_chief/|.tsv',
+                       'notes_to_chief/|.py',
+                       'notes_to_chief/|.json',
                        'external/|.py',
                        'staged/|.py',
                        'staged/|.ps1')
