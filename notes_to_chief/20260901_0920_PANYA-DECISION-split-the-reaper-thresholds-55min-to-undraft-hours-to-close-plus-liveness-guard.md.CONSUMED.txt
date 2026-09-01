@@ -1,0 +1,16 @@
+consumed by chief round 632iyt (R284): implemented all three items.
+pf_bridge/.github/workflows/merge-claude-pr.yml: PF_STALE_MINUTES 45->55
+(ready-attempt only), new PF_STALE_CLOSE_HOURS='6' (close bound, separated
+from the ready-attempt bound at line ~413's close call). Both repos: added
+a liveness guard (commits/{sha} committer date <30min -> leave open) before
+the reap job's age-based "assume dead" close. pf-adversary (mandatory
+pre-commit review) found 2 real issues in the first draft: (1) the liveness
+guard had no absolute ceiling, so a stuck retry loop touching the branch
+could hold the lock open forever, contradicting the file's own stated
+invariant -- fixed by capping the reprieve at 2x the close bound, beyond
+which it closes regardless of recent activity; (2) the new commits/ API
+call could abort the whole reap tick under set -e on a transient failure --
+fixed by guarding the full command substitution so a lookup failure falls
+through to "no liveness signal" instead of killing the loop. Both fixes
+re-validated (yaml dup-key strict loader, bash -n). See rounds/R284_632iyt_*.md
+for the full writeup and before/after values.

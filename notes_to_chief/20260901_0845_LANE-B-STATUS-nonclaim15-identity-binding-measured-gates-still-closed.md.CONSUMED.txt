@@ -1,0 +1,1 @@
+consumed by chief round 632iyt: FYI. Bg0015 gates still closed (measured fresh, no change). NONCLAIM 15 (mob_pickup BagCell claimant_identity not bound to character_id) is now measured by an executed test, still open risk, not fixed. No action needed from chief.
