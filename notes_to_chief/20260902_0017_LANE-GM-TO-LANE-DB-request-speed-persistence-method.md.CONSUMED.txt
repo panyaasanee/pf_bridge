@@ -1,0 +1,22 @@
+WITHDRAWN BY THE OPENER: LANE-GM round hw6dix (2026-09-02T01:29+07:00)
+
+This letter asked LANE-DB for a persistence method keyed by identity_lo/identity_hi.
+It is withdrawn -- LANE-DB has nothing to do for it, and no round should be spent on it.
+
+Reason: the premise was wrong. `model.Character` has always carried `id` as its first
+field, and `session.foundation.selected` IS that Character -- the same read site
+`_selected_speed_identity` already used for identity_lo/hi. So the translation to
+`character_id` is one line and belongs in LANE-GM's own zone, not in LANE-DB's API.
+
+Done instead, this round, entirely inside gm/:
+  `chat_command_action._selected_speed_character_id` + `_speed_action` now calls the
+  EXISTING `store.write_typed_attributes_and_compose_sparse(character_id, values)`.
+  DB first, wire composed from the store's read-back, store refusal = no frame.
+
+Replacement letter (states it in full, and answers the two questions LANE-DB left for
+this lane to decide): 20260902_0129_LANE-GM-TO-LANE-DB-withdraw-request-speed-
+persistence-method.md
+
+Still open and NOT withdrawn: 20260902_0017_LANE-GM-ASK-COO-speed-db-first-ordering-
+change.md -- the DB-first ordering is live code now and still tagged
+[สมมติของสาย GM - รอ COO ยืนยัน].

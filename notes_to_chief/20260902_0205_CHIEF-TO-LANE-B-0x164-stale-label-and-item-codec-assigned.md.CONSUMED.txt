@@ -1,0 +1,23 @@
+consumed by LANE-B รอบ ewm6ff (2026-09-02T02:46+07:00) · ต้นฉบับ -> consumed/
+
+ทำอะไรต่อ:
+- เรื่องที่ 1 (ป้าย ActorAttr +0x164) = ทำแล้วรอบนี้ แก้คอมเมนต์/ป้ายในสองไฟล์ที่ใบระบุ
+  (stats_progression_hypothesis.py:302-309, damage_hp_link_hypothesis.py:319) ให้ตรงกับ
+  gm/attr_wire.py:253 (wstr_164_guild -> LABEL_GUILD) และอ้าง player_wire.py:80-90 กับ
+  PANYA-DECISION 20260828_0125 แถว x1/x37 · ไม่แตะพฤติกรรม ไม่เปลี่ยนสัญลักษณ์
+  เหตุผลที่ไม่เปลี่ยนสัญลักษณ์เขียนไว้ในคอมเมนต์ตรงนั้นเอง: character_name เป็น dict key ที่ชื่อ
+  refusal / probe config / เทสของสองโมดูลนั้นอ่านอยู่ และใบสั่งเองบอก "ไม่ต้องแก้พฤติกรรม"
+  [ขีดฆ่าในรอบเดียวกัน ผิด] "ตรวจแล้วไม่มีการป้อนชื่อตัวละครจริง ค่าที่ป้อนเป็นค่าคงที่ของ probe"
+  ตรวจซ้ำ (pf-adversary D7): stats_progression_baseline_fields:939 (และ :1164, :2529) ป้อน
+  actor.character_name เข้าฟิลด์นั้นตรง ๆ ค่าคงที่เป็นแค่ค่าตั้งต้นของ probe -> เข้าเงื่อนไขของใบสั่ง
+  ("ถ้าพบ ให้รายงานก่อนแก้พฤติกรรม") -> เขียนรายงาน
+  20260902_0322_LANE-B-REPORT-0x164-guild-slot-is-fed-a-real-character-name.md และไม่แตะพฤติกรรม
+  ขอบเขต: โมดูลทั้งสอง scenario-gated ไม่มีผู้เล่นจริงโดนส่งวันนี้
+  nonclaim ติดไปครบตามใบ: ชั้น IMAGE ล้วน / NameBoard_Player เท่านั้น / server_safe = YES คือ
+  "ปลอดภัยที่จะส่ง" ไม่ใช่ "เซิร์ฟเวอร์เดิมเคยส่ง"
+- เรื่องที่ 2 (item codec สั้นไปหนึ่งชิ้น ItemVaryAttr + ItemAttr@0x34 stride + polymorphic variant)
+  = ยังไม่ทำ ตามลำดับที่ใบเองกำหนดไว้ท้ายใบ ("NOW.md P-1 มาก่อน หยิบเมื่อคิว P-1 ของสายว่าง")
+  P-1 กินรอบนี้ทั้งรอบ -> ยกไปรอบหน้าอย่างเปิดเผย ไม่มีอะไรค้างครึ่งทาง เพราะใบสั่งให้เปิดเป็นใบ
+  "ตรวจก่อน" ไม่ใช่สั่งแก้ทันที
+
+รอบ: rounds/B_20260902_0246_ewm6ff_preserve_ground_in_every_runtime_res_not_just_heartbeat.md

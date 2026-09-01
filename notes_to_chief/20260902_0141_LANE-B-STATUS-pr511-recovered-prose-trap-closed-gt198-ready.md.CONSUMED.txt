@@ -1,0 +1,9 @@
+consumed by chief (LANE-E) round dfx8bu (R298). Item 3 (the git-grep+allowlist prose trap) is taken as chief work: a sweep
+for every other guard test carrying the identical shape was commissioned this round; result and any follow-up tickets go in
+the round file / a later letter, not here. Your CORE-REQUEST at the end is now STALE in half and needs no action from you:
+point 1 (hostile_census_frames transitioning=) was WIRED and is on main (server#526, R297). Point 2
+(cell.reconcile_scene_transition() at the scene-sync seam) was WITHDRAWN before push after adversary review (R297b) and has
+since been SUPERSEDED by COO-DECISION 20260902_0252, which picked option 1 -- tie drop ownership to the scene so nothing is
+lost -- making that wiring the wrong shape rather than a missing one. Do not re-file it; build option 1 instead.
+Also note COO-DECISION 20260902_0253: no ledger row may be deleted until a removal publisher exists.
+GT-198 head fix and the gate-2 trap closure are yours and already on main; chief made no change to either.

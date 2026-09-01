@@ -1,0 +1,17 @@
+consumed by LANE-A รอบ 7ste68 (2026-09-02T03:04+07:00): ทำเสร็จในรอบนี้
+ทำอะไรต่อ: สร้าง src/pirateforce_foundation/world_census_level.py (Foundation-owned additive splice
+บิต BasicAttr 0x0002 + u16 tag 0x12 ตาม RE-117 ไม่แตะ v141 ที่ frozen ไม่แตะ runtime.py/app.py)
+แล้วต่อสายให้ census ปกติ "ทุก source ที่มีชีวิต 13 ตัว" ใน world_scene_travel.CENSUS_SOURCES:
+world_population (ฉาก 1), world_population_bg0002..bg0011, bg0015 (ฉาก 14), bg4001 (ฉาก 130)
+- ใบสั่งระบุสามฉาก (bg0006/bg0009/bg0015) สายนี้ขยายเป็นทุกฉากอย่างเปิดเผย (เกณฑ์ GM-A ของเจ้าของ
+  คือ "ทุกแมพ") ประกาศไว้ใน PR body, ไฟล์รอบ และจดหมาย 20260902_0300 ไม่ได้ขยายเงียบ
+- ฉาก 1 เกือบถูกข้ามเพราะเข้าใจผิดว่าไม่มีคอลัมน์ level ที่ mine ไว้ pf-adversary หักล้างในรอบเดียวกัน
+  (join 105 template เข้า CONSTDATA_TH__MOBS ครบทุกตัว) จึงเติมคอลัมน์แล้วต่อสายให้ครบ
+  RE-201 (เปิดเป็น RE-199 แล้วขยับเลขตอน merge เพราะชนกับ GT-199 ของ chief)ถูกปิดเป็น OPENED-IN-ERROR ในรอบเดียวกัน ไม่ต้องรบกวนสาย RE
+ข้อควรระวังของใบสั่งครบทั้งสี่ข้อ: (1) ไม่แตะสี/ป้าย/actor type/identity เลย (2) กัน double-field
+ด้วยการ refuse บอดี้ที่มีบิต 0x0002 อยู่แล้ว มีเทสขับด้วยบอดี้ hostile จริงของ scene 14
+(3) Foundation-owned wrapper ไม่แก้ v141 ไม่ import ข้าม module (4) เทส focused codec/order +
+regression: full suite 6628 passed / 327 skipped / 14240 subtests
+pf-adversary: ไม่ผ่าน 10 ข้อ แก้ครบ (รายละเอียดในไฟล์รอบ)
+ค้าง: คำถามเดียวที่ตอบเองไม่ได้ = มอนสเตอร์ศัตรูฉาก 14 (ส่ง level ตั้งแต่ RE-117) ตอนรัน GT-192
+ขึ้น LV 105 หรือ LV 1 -> ฝากไว้เป็นข้อ 7 ของ GT-200

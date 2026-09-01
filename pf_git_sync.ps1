@@ -25,10 +25,25 @@
 #
 # WHAT IT MAY PUSH: notes_to_chief/** and evidence_screens/** and nothing else.
 # Both are new files with timestamps in their names, so a rebase cannot collide by
-# construction rather than by luck.  CHIEF_CONTINUATION.md and GAME_TEST_QUEUE.md
-# are deliberately NOT in the allowlist: the chief owns them, and if they are
-# edited on this machine the fast-forward pull fails loudly and this script stops
-# and says so, with nothing lost - the edits are still on the disk.
+# construction rather than by luck.  CHIEF_CONTINUATION.md, GAME_TEST_QUEUE.md and
+# CLIENT_RE_QUEUE.md are deliberately NOT in the allowlist: the chief owns them,
+# and an edit made here can never travel out.  What happens to the pull is
+# narrower than an earlier wording of this comment claimed ("fails loudly and
+# this script stops and says so" - it does not stop; see the "Do NOT Finish
+# here" note in step [3], which is deliberate and stays): the fast-forward is
+# refused only when the incoming commits touch that same file, and the round
+# then writes SYNC_ATTENTION.txt plus a SYNC_STUCK_* letter and CARRIES ON to
+# the push block.  When the chief happens not to touch the file, the merge
+# succeeds silently and the local edit simply sits here unnoticed, which is the
+# worse of the two outcomes.  Nothing is lost either way - the edits are still
+# on the disk - but nothing arrives either.
+# CLIENT_RE_QUEUE.md is named here explicitly because a standing prompt on
+# this machine used to tell its worker to fill in a `### result:` field in that
+# file and let this script carry it; it cannot, and the first round that actually
+# reached that step would have deadlocked every lane's pull, not just that
+# worker's own (pf_bridge/notes_to_chief/20260902_0215_KA1B-TO-CHIEF-codex-cannot-
+# take-an-re-ticket-three-causes-not-one.md, cause 3).  All three queues are
+# editable from a cloud clone through a PR and from nowhere else.
 #
 # WHAT IT REFUSES: deletions, files over 2 MB, proprietary extensions and names,
 # anything outside the allowlist, --force, reset, clean, stash, checkout, restore,
@@ -281,6 +296,91 @@ function Finish([int]$code, [string]$verdict, [string]$note) {
     Write-Output ('SYNC_VERDICT=' + $verdict)
     Write-Output ('SYNC_EXIT=' + $code)
     exit $code
+}
+
+# ---------------------------------------------------------------------------
+# [5] stuck-worktree alarm.  Panya approved 2026-09-02 ~01:3x, option (a) of
+# ka1-A letter 20260902_0120.
+# A stuck server worktree used to be one identical log line every two minutes
+# and nothing else.  On 2026-09-01 it sat that way for 90 minutes and nobody
+# knew until the owner happened to ask.  More logging does not fix that; the
+# fix is ONE letter in the mailbox, which is where the routines and the owner
+# actually look.  Written once per episode and then muted until the worktree
+# recovers, so it can never become 2-minute spam.
+# The state file is named .log on purpose: .gitignore ignores '**/*.log', so
+# this local counter can never appear as an untracked file that rides a commit.
+# ---------------------------------------------------------------------------
+$SERVER_STUCK_ROUNDS_BEFORE_LETTER = 15   # 15 rounds x 2 minutes = about 30 min
+
+function ServerStuckStatePath() {
+    return (Join-Path $BridgeRepo 'sync_state_server_stuck.log')
+}
+
+function ServerStuckReset() {
+    $p = ServerStuckStatePath
+    if (Test-Path -LiteralPath $p) {
+        try { WriteAsciiFile $p @('0', '0') } catch { }
+    }
+}
+
+function ServerStuckTick([string[]]$detail) {
+    $p = ServerStuckStatePath
+    $count = 0
+    $alarmed = '0'
+    if (Test-Path -LiteralPath $p) {
+        try {
+            $st = @(Get-Content -LiteralPath $p -ErrorAction Stop)
+            if ($st.Count -ge 1) { [void][int]::TryParse(([string]$st[0]).Trim(), [ref]$count) }
+            if ($st.Count -ge 2) { $alarmed = ([string]$st[1]).Trim() }
+        } catch { }
+    }
+    $count = $count + 1
+    if ($count -ge $SERVER_STUCK_ROUNDS_BEFORE_LETTER -and $alarmed -ne '1' -and (-not $DryRun) -and (-not $SelfCheck)) {
+        $name = (Get-Date -Format 'yyyyMMdd_HHmm') + '_SYNC-ALARM-server-worktree-stuck-for-' + $count + '-rounds.md'
+        $letter = Join-Path $notesDir $name
+        $lines = @()
+        $lines += ('# SYNC ALARM - the server worktree has been stuck for ' + $count + ' rounds')
+        $lines += ''
+        $lines += ('written by pf_git_sync.ps1 step [5] at ' + (Stamp) + ' (machine local time)')
+        $lines += 'this letter is written ONCE per episode, then muted until the worktree recovers.'
+        $lines += ''
+        $lines += '## what is wrong'
+        $lines += ''
+        $lines += ('    git status --porcelain in the server repo is not empty, so step [5] will')
+        $lines += ('    not pull.  It has skipped ' + $count + ' rounds in a row, about ' + ($count * 2) + ' minutes.')
+        $lines += ''
+        $lines += '## what step [5] saw'
+        $lines += ''
+        foreach ($d in $detail) { $lines += ('    ' + $d) }
+        $lines += ''
+        $lines += '## why it matters'
+        $lines += ''
+        $lines += '    while this lasts the worktree falls further behind origin/main, and the'
+        $lines += '    attended boot guard "worktree must be clean" aborts the next test round.'
+        $lines += ''
+        $lines += '## what to do'
+        $lines += ''
+        $lines += '    the owner can double-click FIX_SERVER_WORKTREE.bat in the Pirate Force'
+        $lines += '    folder.  It proves every dirty file is byte-identical to origin/main'
+        $lines += '    before it touches anything, and refuses if any real local work is there.'
+        $lines += '    If it refuses, somebody has uncommitted work in the server worktree and'
+        $lines += '    a human has to decide what happens to it.'
+        $lines += ''
+        $lines += '## note'
+        $lines += ''
+        $lines += '    step [5] self-heals the one case it can prove is safe: every dirty entry'
+        $lines += '    is a tracked-modified file AND byte-identical to origin/main.  This'
+        $lines += '    letter existing means that self-heal did NOT apply - so this is'
+        $lines += '    something else, and it needs eyes.'
+        try {
+            WriteAsciiFile $letter $lines
+            Shout '[5]' ('stuck for ' + $count + ' rounds - wrote ' + $name + ' to the mailbox')
+            $alarmed = '1'
+        } catch {
+            Shout '[5]' 'stuck, and the alarm letter could not be written'
+        }
+    }
+    try { WriteAsciiFile $p @([string]$count, $alarmed) } catch { }
 }
 
 # ---------------------------------------------------------------------------
@@ -551,9 +651,12 @@ if ($behind -gt 0 -and $ahead -eq 0) {
                 ''
                 'git merge --ff-only was refused on the pf_bridge repository.'
                 'The usual cause is a locally modified file that the chief owns'
-                '(CHIEF_CONTINUATION.md or GAME_TEST_QUEUE.md are the two that matter).'
+                '(CHIEF_CONTINUATION.md, GAME_TEST_QUEUE.md or CLIENT_RE_QUEUE.md).'
                 'Those files are not in the push allowlist on purpose, so local edits'
                 'to them can never travel and will block every pull until resolved.'
+                'Editing any of the three on this machine is always a mistake, no'
+                'matter who asked for it: they are chief-owned and change only'
+                'through a pull request from a cloud clone.'
                 ''
                 'Nothing has been lost.  Your edits are still on the disk.'
                 'git said:'
@@ -807,7 +910,84 @@ if ($NoServer) {
     $sv = GitRun $ServerRepo @('status', '--porcelain')
     $dirty = @($sv.Out -split "`n" | Where-Object { $_.Trim() -ne '' })
     if ($dirty.Count -gt 0) {
-        Log '[5]' ('server worktree has ' + $dirty.Count + ' dirty path(s) - skipping, never stashing')
+        # -------------------------------------------------------------------
+        # Self-heal for the wreck of a fast-forward that died half way.
+        # Panya approved 2026-09-02 ~01:3x, option (b) of ka1-A letter 0120.
+        #
+        # This line was logged on 2026-09-01 23:40:09 and it is the whole story:
+        #   [5] server fast-forward refused: error: unable to unlink old
+        #       'src/pirateforce_foundation/runtime.py': Invalid argument
+        #       | Updating 40010029..ee1877ed
+        # git had already written four files with the NEW content, then could
+        # not unlink one file, so it stopped.  HEAD unmoved, index unmoved, four
+        # tracked files modified.  From the next round on, the dirty check below
+        # refused to pull - and the only thing that could have cleared the dirt
+        # was the pull it was refusing.  It stayed stuck for 90 minutes, in
+        # silence, until a human ran FIX_SERVER_WORKTREE.bat by hand.  Third
+        # deadlock of that exact shape in one day: a safety guard that closes
+        # its own only exit.
+        #
+        # The signature of that wreck is exact, and repairing it loses nothing:
+        #   * every dirty entry is ' M' - tracked, modified in the worktree,
+        #     with a CLEAN index.  Untracked '??', staged 'M ', adds, deletes
+        #     and renames disqualify the whole attempt, all of them.
+        #   * every one of those paths is byte-identical to origin/<branch>.
+        # If both hold, what is on disk is git's own half-written output and
+        # belongs to nobody.  If either fails there may be a human's work in
+        # there, and we skip exactly as before and never stash.
+        # -------------------------------------------------------------------
+        $healed = $false
+        $shapeOk = $true
+        $dpaths = @()
+        foreach ($d in $dirty) {
+            if ($d.Length -lt 4) { $shapeOk = $false; break }
+            if ($d.Substring(0, 2) -cne ' M') { $shapeOk = $false; break }
+            $dp = ParsePorcelainPath $d.Substring(3)
+            if ($dp -eq '') { $shapeOk = $false; break }
+            $dpaths += $dp
+        }
+        if ($shapeOk -and $dpaths.Count -eq $dirty.Count -and (-not $DryRun)) {
+            $hf = GitRun $ServerRepo @('fetch', 'origin', $Branch)
+            if ($hf.Code -ne 0) {
+                Log '[5]' ('self-heal could not fetch, leaving everything alone: ' + ($hf.Out -replace "`n", ' | '))
+            } else {
+                $cmp = GitRun $ServerRepo (@('diff', '--numstat', ('origin/' + $Branch), '--') + $dpaths)
+                $cmpLines = @($cmp.Out -split "`n" | Where-Object { $_.Trim() -ne '' })
+                if ($cmp.Code -eq 0 -and $cmpLines.Count -eq 0) {
+                    Shout '[5]' ('all ' + $dirty.Count + ' dirty path(s) are byte-identical to origin/' + $Branch + ' - this is a fast-forward that died half way, not anyone work - restoring them')
+                    foreach ($dp in $dpaths) { Log '[5]' ('  ~ ' + $dp) }
+                    $co = GitRun $ServerRepo (@('checkout', '--') + $dpaths)
+                    if ($co.Code -ne 0) {
+                        Shout '[5]' ('self-heal restore failed, leaving everything alone: ' + ($co.Out -replace "`n", ' | '))
+                    } else {
+                        $sv2 = GitRun $ServerRepo @('status', '--porcelain')
+                        $dirty2 = @($sv2.Out -split "`n" | Where-Object { $_.Trim() -ne '' })
+                        if ($dirty2.Count -ne 0) {
+                            Shout '[5]' ('self-heal left ' + $dirty2.Count + ' path(s) still dirty - stopping before the fast-forward')
+                        } else {
+                            $sm2 = GitRun $ServerRepo @('merge', '--ff-only', ('origin/' + $Branch))
+                            if ($sm2.Code -ne 0) {
+                                Shout '[5]' ('self-heal cleaned the worktree but the fast-forward still refused: ' + ($sm2.Out -replace "`n", ' | '))
+                            } else {
+                                Shout '[5]' 'self-heal complete - worktree clean and fast-forwarded'
+                                $healed = $true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if ($healed) {
+            ServerStuckReset
+        } else {
+            Log '[5]' ('server worktree has ' + $dirty.Count + ' dirty path(s) - skipping, never stashing')
+            # Naming the paths costs one line each and saves an hour of hunting.
+            # On 2026-09-01 this step printed only the COUNT for 90 minutes and
+            # the tester had to place two read-only bridge jobs to learn which
+            # four files they were.  The script always knew.
+            foreach ($d in $dirty) { Log '[5]' ('  ! ' + $d) }
+            ServerStuckTick $dirty
+        }
     } elseif ($DryRun) {
         Log '[5]' 'DRYRUN: server worktree clean, would fetch and fast-forward'
     } else {
@@ -817,9 +997,13 @@ if ($NoServer) {
         } else {
             $sm = GitRun $ServerRepo @('merge', '--ff-only', ('origin/' + $Branch))
             if ($sm.Code -ne 0) {
-                Log '[5]' ('server fast-forward refused: ' + ($sm.Out -replace "`n", ' | '))
+                # SHOUT, not Log: this is the event that produced the 90-minute
+                # silent stall, and it was one quiet line among two hundred.
+                Shout '[5]' ('server fast-forward refused: ' + ($sm.Out -replace "`n", ' | '))
+                ServerStuckTick @(('fast-forward refused: ' + ($sm.Out -replace "`n", ' | ')))
             } else {
                 Log '[5]' 'server repo up to date'
+                ServerStuckReset
             }
         }
     }

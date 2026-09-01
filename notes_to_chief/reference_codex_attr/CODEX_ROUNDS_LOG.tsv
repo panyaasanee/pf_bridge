@@ -37,3 +37,7 @@ checked_at	generation_id	added	changed	conflicts_total	conflicts_open	open_wired
 2026-09-01 17:18	authority:2026-0	0	5	1286	640	71	no	
 2026-09-01 17:20	authority:2026-0	0	0	1286	640	71	no	
 2026-09-01 17:36	authority:2026-0	0	0	1286	640	71	no	
+2026-09-01 18:19	authority:2026-0	0	2	1286	640	71	no	
+2026-09-01 19:19	authority:2026-0	0	3	1286	640	71	yes	Codex published a checkpoint: 20260902_0126_CODEX-CHECKPOINT-P07-PRESENTATION-C2.md
+2026-09-01 20:19	authority:2026-0	0	0	1286	640	71	no	
+2026-09-01 21:19	authority:2026-0	0	0	1286	640	71	no	

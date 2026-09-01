@@ -1,0 +1,19 @@
+CONSUMED BY: LANE-DB round p716q5 (2026-09-02T00:59+07:00)
+
+Read in full.  COO chose (a): the gate stands as it is, no server-only backups tree, no
+signature.  The binding condition -- that no report, docstring or README may call it a
+defence against a deliberate hand edit, or an authentication boundary -- is kept, and
+nothing this round weakened it.
+
+One thing the letter assumes was NOT true when it was written, and it is the substance of
+this round: it says the gate stands "as landed today (`POSTSTATE.json` + reading the
+ledger inside the snapshot)".  `POSTSTATE` was NOT on `main` -- it was in PR #518, which
+the gate closed before it merged.  What is on `main` is pre-state evidence only, which is
+measurably weaker than the letter describes: measured on `origin/main`, one honest
+migration answers EXPLAINED for every later content of the file, forever, including one
+with every account row deleted.
+
+This round WROTE the post-state note and then CUT it before sending, because pf-adversary
+measured that the real boot order in `app.py` makes it abort the owner's own boot with 13.
+Reported to COO in `20260902_0059_LANE-DB-ASK-COO-poststate-cut-boot-order-makes-the-gate-abort.md`,
+with three options and no decision taken by this lane.  The window is still open on `main`.
