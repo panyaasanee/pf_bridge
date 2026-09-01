@@ -1,0 +1,3 @@
+consumed by chief round wjdlnr (R296): decided option 2 (check both stub patterns, no mass rename).
+See notes_to_chief/20260901_2357_CHIEF-DECISION-consumed-stub-naming-check-both-patterns.md and
+AGENTS.md:72 (updated).

@@ -1,0 +1,229 @@
+file	bytes	codex_wrote	team_reads_via	read_this_file	mirror_fresh	cited_in_a_ka1B_letter
+00_SEARCH_HERE_FIRST.md	14205	08-30 02:06	full copy	00_SEARCH_HERE_FIRST.md	ok	not cited
+PF_A1_SERIALIZER_SLOT34_DELTA.tsv	18143	08-29 21:08	full copy	PF_A1_SERIALIZER_SLOT34_DELTA.tsv	ok	not cited
+PF_A1_STATIC_TYPE_INFO_DELTA.tsv	1543	08-30 01:35	full copy	PF_A1_STATIC_TYPE_INFO_DELTA.tsv	ok	not cited
+PF_A2_A3_STRING_WIRE_CORRECTION.md	3202	08-29 20:29	full copy	PF_A2_A3_STRING_WIRE_CORRECTION.md	ok	not cited
+PF_A2_ACHIEVEMENTS_CODEC_CORRECTION.tsv	430547	09-01 16:42	full copy	PF_A2_ACHIEVEMENTS_CODEC_CORRECTION.tsv	STALE	not cited
+PF_A2_ACTOR_CODEC_CORRECTION.tsv	44883	09-01 16:42	full copy	PF_A2_ACTOR_CODEC_CORRECTION.tsv	STALE	cited
+PF_A2_ATTR_FIELD_DELTA.tsv	488493	09-01 16:42	full copy	PF_A2_ATTR_FIELD_DELTA.tsv	STALE	not cited
+PF_A2_ATTR_SEMANTIC_DELTA.md	1562	09-01 16:42	full copy	PF_A2_ATTR_SEMANTIC_DELTA.md	STALE	not cited
+PF_A2_ATTR_SEMANTIC_DELTA.tsv	16186	09-01 16:42	full copy	PF_A2_ATTR_SEMANTIC_DELTA.tsv	STALE	not cited
+PF_A2_BASIC_CODEC_CORRECTION.tsv	5887	09-01 16:42	full copy	PF_A2_BASIC_CODEC_CORRECTION.tsv	STALE	cited
+PF_A2_COLLECTION_CODEC_CORRECTION.tsv	102444	09-01 16:42	full copy	PF_A2_COLLECTION_CODEC_CORRECTION.tsv	STALE	not cited
+PF_A2_COOLDOWN_CODEC_CORRECTION.tsv	34749	09-01 16:42	full copy	PF_A2_COOLDOWN_CODEC_CORRECTION.tsv	STALE	not cited
+PF_A2_CRYSTAL_CODEC_CORRECTION.tsv	104939	09-01 16:42	full copy	PF_A2_CRYSTAL_CODEC_CORRECTION.tsv	STALE	not cited
+PF_A2_CSKILL_CODEC_CORRECTION.tsv	53245	09-01 16:42	full copy	PF_A2_CSKILL_CODEC_CORRECTION.tsv	STALE	not cited
+PF_A2_DAILYREWARD_CODEC_CORRECTION.tsv	62349	09-01 16:42	full copy	PF_A2_DAILYREWARD_CODEC_CORRECTION.tsv	STALE	not cited
+PF_A2_DAILY_ACTIVITY_NONWIRE_DELTA.tsv	8961	08-30 00:29	full copy	PF_A2_DAILY_ACTIVITY_NONWIRE_DELTA.tsv	ok	not cited
+PF_A2_EMBEDDED_CHILD_COMPOSITION_DELTA.tsv	4275	08-30 01:16	full copy	PF_A2_EMBEDDED_CHILD_COMPOSITION_DELTA.tsv	ok	not cited
+PF_A2_EXPRESS_GET_CODEC_CORRECTION.tsv	48963	09-01 16:42	full copy	PF_A2_EXPRESS_GET_CODEC_CORRECTION.tsv	STALE	not cited
+PF_A2_INSTANCE_REFRESH_CODEC_CORRECTION.tsv	41372	09-01 16:42	full copy	PF_A2_INSTANCE_REFRESH_CODEC_CORRECTION.tsv	STALE	not cited
+PF_A2_INVALID_PARAMETER_NONWIRE_DELTA.tsv	32429	08-29 23:21	full copy	PF_A2_INVALID_PARAMETER_NONWIRE_DELTA.tsv	ok	not cited
+PF_A2_ITEMATTR_CODEC_CORRECTION.tsv	131177	09-01 16:42	full copy	PF_A2_ITEMATTR_CODEC_CORRECTION.tsv	STALE	cited
+PF_A2_ITEMBAG_CODEC_CORRECTION.tsv	2149519	09-01 16:42	summary only (over cap)	PF_A2_ITEMBAG_CODEC_CORRECTION.SLICE.md	STALE	cited
+PF_A2_ITEMVARY_CODEC_CORRECTION.tsv	39754	09-01 16:42	full copy	PF_A2_ITEMVARY_CODEC_CORRECTION.tsv	STALE	cited
+PF_A2_ITERATOR_HELPERS_NONWIRE_DELTA.tsv	24350	08-29 23:22	full copy	PF_A2_ITERATOR_HELPERS_NONWIRE_DELTA.tsv	ok	not cited
+PF_A2_PET_ACTIVITY_CORRECTION.tsv	116143	09-01 16:42	full copy	PF_A2_PET_ACTIVITY_CORRECTION.tsv	STALE	not cited
+PF_A2_POOL_46BAA0_READER_DELTA.tsv	2205	08-29 21:24	full copy	PF_A2_POOL_46BAA0_READER_DELTA.tsv	ok	not cited
+PF_A2_POOL_46F4D0_DELTA.tsv	21340	08-29 21:08	full copy	PF_A2_POOL_46F4D0_DELTA.tsv	ok	not cited
+PF_A2_POOL_638690_DELTA.tsv	21365	08-29 20:48	full copy	PF_A2_POOL_638690_DELTA.tsv	ok	not cited
+PF_A2_POOL_661FA0_DELTA.tsv	13126	08-29 20:51	full copy	PF_A2_POOL_661FA0_DELTA.tsv	ok	not cited
+PF_A2_POST_V1_STATIC_DELTA.tsv	20985	08-29 20:29	full copy	PF_A2_POST_V1_STATIC_DELTA.tsv	ok	not cited
+PF_A2_QUEST_CODEC_CORRECTION.tsv	1047985	09-01 16:42	full copy	PF_A2_QUEST_CODEC_CORRECTION.tsv	STALE	not cited
+PF_A2_SERIALIZER_SLOT34_DELTA.tsv	5335314	08-29 21:08	summary only (over cap)	PF_A2_SERIALIZER_SLOT34_DELTA.SLICE.md	ok	cited
+PF_A2_STRING_WIRE_TAG_DELTA.tsv	201157	08-29 20:29	full copy	PF_A2_STRING_WIRE_TAG_DELTA.tsv	ok	cited
+PF_A2_SYSTEM_GIFT_CODEC_CORRECTION.tsv	49866	09-01 16:42	full copy	PF_A2_SYSTEM_GIFT_CODEC_CORRECTION.tsv	STALE	not cited
+PF_A2_TARGETS_6564E0_656C50_6FDB40_NONWIRE_DELTA.tsv	19914	08-29 23:21	full copy	PF_A2_TARGETS_6564E0_656C50_6FDB40_NONWIRE_DELTA.tsv	ok	not cited
+PF_A2_TARGET_656690_NONWIRE_DELTA.tsv	2744	08-29 23:21	full copy	PF_A2_TARGET_656690_NONWIRE_DELTA.tsv	ok	not cited
+PF_A2_V5_INVALID_PARAMETER_NONWIRE_DELTA.tsv	14524	08-30 03:03	full copy	PF_A2_V5_INVALID_PARAMETER_NONWIRE_DELTA.tsv	ok	not cited
+PF_A2_WINE_CODEC_CORRECTION.tsv	129907	09-01 16:42	full copy	PF_A2_WINE_CODEC_CORRECTION.tsv	STALE	not cited
+PF_A3_SERIALIZER_SLOT34_DELTA.tsv	6251	08-29 21:08	full copy	PF_A3_SERIALIZER_SLOT34_DELTA.tsv	ok	not cited
+PF_A3_TAG_CENSUS_DELTA.tsv	1503	08-29 20:29	full copy	PF_A3_TAG_CENSUS_DELTA.tsv	ok	cited
+PF_A6_VTABLE_CANDIDATE_DELTA.md	3936	08-29 20:22	full copy	PF_A6_VTABLE_CANDIDATE_DELTA.md	ok	not cited
+PF_A6_VTABLE_CANDIDATE_DELTA.tsv	95638	08-29 20:22	full copy	PF_A6_VTABLE_CANDIDATE_DELTA.tsv	ok	not cited
+PF_ACTOR_RELATION_INTERACTION_GRAPH.md	7102	09-01 12:53	full copy	PF_ACTOR_RELATION_INTERACTION_GRAPH.md	ok	cited
+PF_ACTOR_RELATION_INTERACTION_GRAPH.pair.json	556	09-01 12:53	full copy	PF_ACTOR_RELATION_INTERACTION_GRAPH.pair.json	ok	not cited
+PF_ACTOR_RELATION_INTERACTION_GRAPH.tsv	104190	09-01 12:53	full copy	PF_ACTOR_RELATION_INTERACTION_GRAPH.tsv	ok	cited
+PF_ATTR_CLASS_CENSUS.md	1972	09-01 16:42	full copy	PF_ATTR_CLASS_CENSUS.md	STALE	cited
+PF_ATTR_CLASS_CENSUS.tsv	120388	09-01 16:42	full copy	PF_ATTR_CLASS_CENSUS.tsv	STALE	cited
+PF_ATTR_COMPUTED_SEMANTICS.tsv	22731	09-01 16:42	full copy	PF_ATTR_COMPUTED_SEMANTICS.tsv	STALE	cited
+PF_ATTR_CONFLICTS.tsv	3531500	09-01 16:42	summary only (over cap)	PF_ATTR_CONFLICTS.SLICE.md	ok	cited
+PF_ATTR_CONTAINER_SEMANTICS.tsv	136417	09-01 16:42	full copy	PF_ATTR_CONTAINER_SEMANTICS.tsv	STALE	not cited
+PF_ATTR_DATA_BINDINGS.tsv	53723	09-01 16:42	full copy	PF_ATTR_DATA_BINDINGS.tsv	STALE	cited
+PF_ATTR_FIELD_SEMANTICS.md	8813	09-01 16:42	full copy	PF_ATTR_FIELD_SEMANTICS.md	STALE	cited
+PF_ATTR_FIELD_SEMANTICS.tsv	1339980	09-01 16:42	full copy	PF_ATTR_FIELD_SEMANTICS.tsv	STALE	cited
+PF_ATTR_FIELD_VALIDATION_DELTA.md	7959	08-30 18:45	full copy	PF_ATTR_FIELD_VALIDATION_DELTA.md	ok	not cited
+PF_ATTR_FIELD_VALIDATION_DELTA.tsv	4552	08-30 18:45	full copy	PF_ATTR_FIELD_VALIDATION_DELTA.tsv	ok	not cited
+PF_ATTR_FOR_SERVER.md	126593	09-01 16:42	full copy	PF_ATTR_FOR_SERVER.md	ok	cited
+PF_ATTR_GENERATION_MANIFEST.json	8204	09-01 16:42	full copy	PF_ATTR_GENERATION_MANIFEST.json	ok	cited
+PF_ATTR_INHERITANCE.tsv	40114	09-01 16:42	full copy	PF_ATTR_INHERITANCE.tsv	STALE	cited
+PF_ATTR_NAME_COLOR_SELECTOR.tsv	37350	09-01 16:42	full copy	PF_ATTR_NAME_COLOR_SELECTOR.tsv	STALE	cited
+PF_ATTR_PROBE_REQUESTS.tsv	151	09-01 16:42	full copy	PF_ATTR_PROBE_REQUESTS.tsv	STALE	cited
+PF_ATTR_QUARANTINE.tsv	359	09-01 16:42	full copy	PF_ATTR_QUARANTINE.tsv	STALE	not cited
+PF_ATTR_QUEST_MARK_SELECTOR.tsv	52137	09-01 16:42	full copy	PF_ATTR_QUEST_MARK_SELECTOR.tsv	STALE	cited
+PF_ATTR_REMAINING_CODEC_CENSUS.md	2593	09-01 16:42	full copy	PF_ATTR_REMAINING_CODEC_CENSUS.md	STALE	not cited
+PF_ATTR_REMAINING_CODEC_CENSUS.tsv	135056	09-01 16:42	full copy	PF_ATTR_REMAINING_CODEC_CENSUS.tsv	STALE	not cited
+PF_ATTR_ROLE_DISCRIMINATOR.tsv	42626	09-01 16:42	full copy	PF_ATTR_ROLE_DISCRIMINATOR.tsv	STALE	cited
+PF_ATTR_RUNTIME_FIELDS.tsv	20578	09-01 16:42	full copy	PF_ATTR_RUNTIME_FIELDS.tsv	STALE	cited
+PF_ATTR_SEMANTIC_DELTA.tsv	856188	09-01 16:42	full copy	PF_ATTR_SEMANTIC_DELTA.tsv	STALE	not cited
+PF_ATTR_SEMANTIC_REPORT.md	44840	09-01 16:42	full copy	PF_ATTR_SEMANTIC_REPORT.md	ok	not cited
+PF_ATTR_UI_BINDINGS.tsv	12964	09-01 16:42	full copy	PF_ATTR_UI_BINDINGS.tsv	STALE	cited
+PF_ATTR_UNRESOLVED.tsv	2355364	09-01 16:42	summary only (over cap)	PF_ATTR_UNRESOLVED.SLICE.md	STALE	cited
+PF_CAPTURE_BRANCH_SHAPES_20260830.md	5728	08-29 20:28	full copy	PF_CAPTURE_BRANCH_SHAPES_20260830.md	ok	not cited
+PF_CAPTURE_BRANCH_SHAPES_20260830.tsv	33796	08-29 20:28	full copy	PF_CAPTURE_BRANCH_SHAPES_20260830.tsv	ok	not cited
+PF_CAPTURE_DELTA_20260830.inventory.tsv	127368	08-29 20:30	full copy	PF_CAPTURE_DELTA_20260830.inventory.tsv	ok	not cited
+PF_CAPTURE_DELTA_20260830.md	4156	08-29 20:30	full copy	PF_CAPTURE_DELTA_20260830.md	ok	not cited
+PF_CAPTURE_DELTA_20260830.validation.tsv	6462	08-29 20:30	full copy	PF_CAPTURE_DELTA_20260830.validation.tsv	ok	not cited
+PF_COMBAT_LETHAL_TAIL_DELTA.md	12538	09-01 14:00	full copy	PF_COMBAT_LETHAL_TAIL_DELTA.md	ok	cited
+PF_COMBAT_LETHAL_TAIL_DELTA.pair.json	1269	09-01 14:00	full copy	PF_COMBAT_LETHAL_TAIL_DELTA.pair.json	ok	not cited
+PF_COMBAT_LETHAL_TAIL_DELTA.tsv	43449	09-01 14:00	full copy	PF_COMBAT_LETHAL_TAIL_DELTA.tsv	ok	cited
+PF_COMBAT_LIFECYCLE.md	2423	09-01 16:42	full copy	PF_COMBAT_LIFECYCLE.md	STALE	cited
+PF_COMBAT_LIFECYCLE.tsv	41063	09-01 16:42	full copy	PF_COMBAT_LIFECYCLE.tsv	STALE	cited
+PF_COMPILER_RUNTIME_TARGET_6564_CLOSURE.md	11770	08-29 23:21	full copy	PF_COMPILER_RUNTIME_TARGET_6564_CLOSURE.md	ok	not cited
+PF_CRITICAL_ARTIFACT_AUTHORITY.json	26948	09-01 15:51	full copy	PF_CRITICAL_ARTIFACT_AUTHORITY.json	ok	cited
+PF_DAILY_ACTIVITY_CLOSURE.md	4236	08-30 00:29	full copy	PF_DAILY_ACTIVITY_CLOSURE.md	ok	not cited
+PF_DATA_EVIDENCE.md	1390	08-22 14:50	full copy	PF_DATA_EVIDENCE.md	ok	not cited
+PF_DATA_EVIDENCE.tsv	59258	08-22 14:50	full copy	PF_DATA_EVIDENCE.tsv	ok	not cited
+PF_DUMP_REQUEST.md	14814	08-22 14:53	full copy	PF_DUMP_REQUEST.md	ok	cited
+PF_EMBEDDED_CHILD_COMPOSITION.md	4771	08-30 01:16	full copy	PF_EMBEDDED_CHILD_COMPOSITION.md	ok	not cited
+PF_ERRATUM_TWO_IMAGES.md	2028	08-22 14:50	full copy	PF_ERRATUM_TWO_IMAGES.md	ok	not cited
+PF_EXTERNAL_REPORT.md	48750	08-22 14:57	full copy	PF_EXTERNAL_REPORT.md	ok	not cited
+PF_FIELD_VALIDATION.md	5487	08-23 07:22	full copy	PF_FIELD_VALIDATION.md	ok	cited
+PF_FIELD_VALIDATION.tsv	72849	08-23 07:22	full copy	PF_FIELD_VALIDATION.tsv	ok	cited
+PF_GM_PLUGIN_GATE.md	17377	09-01 07:17	full copy	PF_GM_PLUGIN_GATE.md	ok	cited
+PF_GM_PLUGIN_GATE.pair.json	777	09-01 07:17	full copy	PF_GM_PLUGIN_GATE.pair.json	ok	not cited
+PF_GM_PLUGIN_GATE.tsv	27050	09-01 07:17	full copy	PF_GM_PLUGIN_GATE.tsv	ok	cited
+PF_GROUND_DROP_LIFETIME.md	21237	09-01 07:59	full copy	PF_GROUND_DROP_LIFETIME.md	ok	cited
+PF_GROUND_DROP_LIFETIME.tsv	61979	09-01 07:59	full copy	PF_GROUND_DROP_LIFETIME.tsv	ok	cited
+PF_GROUND_DROP_PICKUP_CLOSURE.md	14761	09-01 15:37	full copy	PF_GROUND_DROP_PICKUP_CLOSURE.md	ok	cited
+PF_GROUND_DROP_PICKUP_CLOSURE.pair.json	4074	09-01 15:37	full copy	PF_GROUND_DROP_PICKUP_CLOSURE.pair.json	ok	not cited
+PF_GROUND_DROP_PICKUP_CLOSURE.tsv	30672	09-01 15:37	full copy	PF_GROUND_DROP_PICKUP_CLOSURE.tsv	ok	cited
+PF_GROUND_DROP_TRANSPORT.md	2779	09-01 16:42	full copy	PF_GROUND_DROP_TRANSPORT.md	STALE	cited
+PF_GROUND_DROP_TRANSPORT.tsv	26924	09-01 16:42	full copy	PF_GROUND_DROP_TRANSPORT.tsv	STALE	cited
+PF_HANDOFF_V1.md	31872	08-22 15:00	full copy	PF_HANDOFF_V1.md	ok	cited
+PF_INPUT_INVENTORY.md	1214	08-22 15:00	full copy	PF_INPUT_INVENTORY.md	ok	not cited
+PF_INPUT_INVENTORY.tsv	364080	08-22 15:00	full copy	PF_INPUT_INVENTORY.tsv	ok	not cited
+PF_ITERATOR_HELPERS_NONWIRE.md	8867	08-29 23:22	full copy	PF_ITERATOR_HELPERS_NONWIRE.md	ok	not cited
+PF_MONSTER_COLOR_GATE.md	40551	09-01 08:00	full copy	PF_MONSTER_COLOR_GATE.md	ok	cited
+PF_MONSTER_COLOR_GATE.pair.json	529	09-01 08:00	full copy	PF_MONSTER_COLOR_GATE.pair.json	ok	not cited
+PF_MONSTER_COLOR_GATE.tsv	110234	09-01 08:00	full copy	PF_MONSTER_COLOR_GATE.tsv	ok	cited
+PF_MONSTER_COLOR_MECHANISM_JOIN.md	8372	09-01 09:45	full copy	PF_MONSTER_COLOR_MECHANISM_JOIN.md	ok	cited
+PF_MONSTER_COLOR_MECHANISM_JOIN.tsv	13134	09-01 09:45	full copy	PF_MONSTER_COLOR_MECHANISM_JOIN.tsv	ok	cited
+PF_MONSTER_COLOR_WIRE_CONTROL.md	6473	09-01 09:35	full copy	PF_MONSTER_COLOR_WIRE_CONTROL.md	ok	cited
+PF_MONSTER_COLOR_WIRE_CONTROL.tsv	27191	09-01 09:35	full copy	PF_MONSTER_COLOR_WIRE_CONTROL.tsv	ok	cited
+PF_MONSTER_PRESENTATION.md	16783	09-01 16:42	full copy	PF_MONSTER_PRESENTATION.md	ok	cited
+PF_MONSTER_PRESENTATION.tsv	21059779	09-01 16:42	summary only (over cap)	PF_MONSTER_PRESENTATION.SLICE.md	ok	cited
+PF_MONSTER_ROLE_DATA_CONTROLS.md	7838	09-01 11:37	full copy	PF_MONSTER_ROLE_DATA_CONTROLS.md	ok	cited
+PF_MONSTER_ROLE_DATA_CONTROLS.pair.json	739	09-01 11:37	full copy	PF_MONSTER_ROLE_DATA_CONTROLS.pair.json	ok	not cited
+PF_MONSTER_ROLE_DATA_CONTROLS.tsv	45536	09-01 11:37	full copy	PF_MONSTER_ROLE_DATA_CONTROLS.tsv	ok	cited
+PF_POOL_46BAA0_BLOCKER.md	3610	08-29 21:24	full copy	PF_POOL_46BAA0_BLOCKER.md	ok	not cited
+PF_POOL_46F4D0_CLOSURE.md	4054	08-29 21:08	full copy	PF_POOL_46F4D0_CLOSURE.md	ok	not cited
+PF_POOL_638690_CLOSURE.md	6015	08-29 20:48	full copy	PF_POOL_638690_CLOSURE.md	ok	not cited
+PF_POOL_661FA0_CLOSURE.md	12524	08-29 20:51	full copy	PF_POOL_661FA0_CLOSURE.md	ok	not cited
+PF_POST_V1_PRIORITY_DELTA.tsv	1456	08-29 20:29	full copy	PF_POST_V1_PRIORITY_DELTA.tsv	ok	not cited
+PF_POST_V1_STATIC_CLOSURE.md	5611	08-29 20:29	full copy	PF_POST_V1_STATIC_CLOSURE.md	ok	not cited
+PF_PRIORITY_COMPILER_TARGET_6564_DELTA.tsv	4710	08-29 23:21	full copy	PF_PRIORITY_COMPILER_TARGET_6564_DELTA.tsv	ok	not cited
+PF_PRIORITY_DAILY_ACTIVITY_DELTA.tsv	1247	08-30 00:29	full copy	PF_PRIORITY_DAILY_ACTIVITY_DELTA.tsv	ok	not cited
+PF_PRIORITY_EMBEDDED_CHILD_DELTA.tsv	2777	08-30 01:16	full copy	PF_PRIORITY_EMBEDDED_CHILD_DELTA.tsv	ok	not cited
+PF_PRIORITY_POOL_46F4D0_DELTA.tsv	2256	08-29 21:08	full copy	PF_PRIORITY_POOL_46F4D0_DELTA.tsv	ok	not cited
+PF_PRIORITY_POOL_638690_DELTA.tsv	2242	08-29 20:48	full copy	PF_PRIORITY_POOL_638690_DELTA.tsv	ok	not cited
+PF_PRIORITY_POOL_661FA0_DELTA.tsv	1884	08-29 20:51	full copy	PF_PRIORITY_POOL_661FA0_DELTA.tsv	ok	not cited
+PF_PRIORITY_SERIALIZER_SLOT34_DELTA.tsv	30483	08-29 21:08	full copy	PF_PRIORITY_SERIALIZER_SLOT34_DELTA.tsv	ok	not cited
+PF_PRIORITY_STATIC_TYPE_INFO_DELTA.tsv	2720	08-30 01:35	full copy	PF_PRIORITY_STATIC_TYPE_INFO_DELTA.tsv	ok	not cited
+PF_PRIORITY_V5_INVALID_PARAMETER_DELTA.tsv	1678	08-30 03:03	full copy	PF_PRIORITY_V5_INVALID_PARAMETER_DELTA.tsv	ok	not cited
+PF_PROTOCOL_PRIORITY.md	30541	08-22 14:56	full copy	PF_PROTOCOL_PRIORITY.md	ok	cited
+PF_PROTOCOL_PRIORITY.tsv	132502	08-22 14:56	full copy	PF_PROTOCOL_PRIORITY.tsv	ok	cited
+PF_PROTOCOL_REGISTRY.md	4267	08-22 14:53	full copy	PF_PROTOCOL_REGISTRY.md	ok	cited
+PF_PROTOCOL_REGISTRY.tsv	89506	08-22 14:53	full copy	PF_PROTOCOL_REGISTRY.tsv	ok	cited
+PF_QUEST_MARK_EVENT_CENSUS.md	8833	09-01 10:31	full copy	PF_QUEST_MARK_EVENT_CENSUS.md	ok	not cited
+PF_QUEST_MARK_EVENT_CENSUS.tsv	29193	09-01 10:31	full copy	PF_QUEST_MARK_EVENT_CENSUS.tsv	ok	not cited
+PF_QUEST_MARK_LIFECYCLE.md	13715	09-01 10:45	full copy	PF_QUEST_MARK_LIFECYCLE.md	ok	cited
+PF_QUEST_MARK_LIFECYCLE.tsv	23289	09-01 10:45	full copy	PF_QUEST_MARK_LIFECYCLE.tsv	ok	cited
+PF_QUEST_MARK_RESOURCE_RESOLVER.md	8165	09-01 10:43	full copy	PF_QUEST_MARK_RESOURCE_RESOLVER.md	ok	cited
+PF_QUEST_MARK_RESOURCE_RESOLVER.tsv	44435	09-01 10:43	full copy	PF_QUEST_MARK_RESOURCE_RESOLVER.tsv	ok	cited
+PF_RUNTIME_CLASSMAP.md	2923	08-22 14:40	full copy	PF_RUNTIME_CLASSMAP.md	ok	cited
+PF_RUNTIME_CLASSMAP.tsv	1947472	08-22 14:40	summary only (over cap)	PF_RUNTIME_CLASSMAP.SLICE.md	ok	cited
+PF_SERIALIZER_FIELDS.md	29968	08-22 14:54	full copy	PF_SERIALIZER_FIELDS.md	ok	cited
+PF_SERIALIZER_FIELDS.tsv	25195473	08-22 14:53	summary only (over cap)	PF_SERIALIZER_FIELDS.SLICE.md	ok	cited
+PF_SERIALIZER_SLOT34_CORRECTION.md	6029	08-29 21:08	full copy	PF_SERIALIZER_SLOT34_CORRECTION.md	ok	cited
+PF_SERIALIZER_SLOT34_ROOTS.tsv	15626	08-29 21:08	full copy	PF_SERIALIZER_SLOT34_ROOTS.tsv	ok	not cited
+PF_STATIC_TYPE_INFO_CLASSMAP.md	1698	08-30 00:29	full copy	PF_STATIC_TYPE_INFO_CLASSMAP.md	ok	cited
+PF_STATIC_TYPE_INFO_CLASSMAP.tsv	1992	08-30 00:29	full copy	PF_STATIC_TYPE_INFO_CLASSMAP.tsv	ok	cited
+PF_TAG_CENSUS.tsv	1985	08-22 14:54	full copy	PF_TAG_CENSUS.tsv	ok	not cited
+PF_TARGETS_694790_6B3440_A2_DELTA.tsv	18047	08-29 21:48	full copy	PF_TARGETS_694790_6B3440_A2_DELTA.tsv	ok	not cited
+PF_TARGETS_694790_6B3440_NONWIRE.md	10629	08-29 21:48	full copy	PF_TARGETS_694790_6B3440_NONWIRE.md	ok	cited
+PF_TARGET_652A30_A2_DELTA.tsv	9295	08-29 21:35	full copy	PF_TARGET_652A30_A2_DELTA.tsv	ok	not cited
+PF_TARGET_652A30_NONWIRE.md	8762	08-29 21:35	full copy	PF_TARGET_652A30_NONWIRE.md	ok	not cited
+PF_V1_MANIFEST.md	4127	08-22 15:04	full copy	PF_V1_MANIFEST.md	ok	not cited
+PF_V2_EFFECTIVE_STATUS.md	2948	08-29 22:07	full copy	PF_V2_EFFECTIVE_STATUS.md	ok	not cited
+PF_V2_FIELD_VALIDATION.md	7685	08-29 22:09	full copy	PF_V2_FIELD_VALIDATION.md	ok	cited
+PF_V2_FIELD_VALIDATION.tsv	22058	08-29 22:09	full copy	PF_V2_FIELD_VALIDATION.tsv	ok	cited
+PF_V2_HANDOFF.md	12231	08-29 22:08	full copy	PF_V2_HANDOFF.md	ok	cited
+PF_V2_MANIFEST.md	13366	08-29 22:14	full copy	PF_V2_MANIFEST.md	ok	not cited
+PF_V2_P1_OPEN.tsv	56019	08-29 22:07	full copy	PF_V2_P1_OPEN.tsv	ok	not cited
+PF_V3_EFFECTIVE_STATUS.md	3281	08-29 23:26	full copy	PF_V3_EFFECTIVE_STATUS.md	ok	not cited
+PF_V3_FIELD_VALIDATION.md	8720	08-29 23:36	full copy	PF_V3_FIELD_VALIDATION.md	ok	not cited
+PF_V3_HANDOFF.md	10762	08-29 23:29	full copy	PF_V3_HANDOFF.md	ok	not cited
+PF_V3_MANIFEST.md	16871	08-29 23:46	full copy	PF_V3_MANIFEST.md	ok	not cited
+PF_V3_P1_OPEN.tsv	54699	08-29 23:26	full copy	PF_V3_P1_OPEN.tsv	ok	not cited
+PF_V4_EFFECTIVE_STATUS.md	3140	08-30 01:35	full copy	PF_V4_EFFECTIVE_STATUS.md	ok	not cited
+PF_V4_FIELD_VALIDATION.md	8423	08-30 01:18	full copy	PF_V4_FIELD_VALIDATION.md	ok	not cited
+PF_V4_HANDOFF.md	5654	08-30 02:06	full copy	PF_V4_HANDOFF.md	ok	not cited
+PF_V4_MANIFEST.md	20919	08-30 02:06	full copy	PF_V4_MANIFEST.md	ok	not cited
+PF_V4_P1_OPEN.tsv	54668	08-30 01:35	full copy	PF_V4_P1_OPEN.tsv	ok	not cited
+PF_V5_EFFECTIVE_STATUS.md	3407	08-30 03:41	full copy	PF_V5_EFFECTIVE_STATUS.md	ok	not cited
+PF_V5_FIELD_VALIDATION.md	7101	08-30 03:54	full copy	PF_V5_FIELD_VALIDATION.md	ok	not cited
+PF_V5_INVALID_PARAMETER_CLOSURE.md	8563	08-30 03:03	full copy	PF_V5_INVALID_PARAMETER_CLOSURE.md	ok	not cited
+PF_V5_P1_OPEN.tsv	53841	08-30 03:41	full copy	PF_V5_P1_OPEN.tsv	ok	cited
+pf_attr_checkpoint_reader.py	26393	08-31 08:44	full copy	pf_attr_checkpoint_reader.py	ok	tool script
+pf_build_compiler_runtime_target_6564_closure.py	106505	08-29 23:18	full copy	pf_build_compiler_runtime_target_6564_closure.py	ok	tool script
+pf_build_daily_activity_closure.py	55421	08-30 00:28	full copy	pf_build_daily_activity_closure.py	ok	tool script
+pf_build_embedded_child_composition.py	69970	08-30 01:15	full copy	pf_build_embedded_child_composition.py	ok	tool script
+pf_build_iterator_helpers_nonwire.py	59836	08-29 23:03	full copy	pf_build_iterator_helpers_nonwire.py	ok	tool script
+pf_build_pool_46baa0_reader_delta.py	26042	08-29 21:23	full copy	pf_build_pool_46baa0_reader_delta.py	ok	tool script
+pf_build_pool_46f4d0_closure.py	54835	08-29 21:08	full copy	pf_build_pool_46f4d0_closure.py	ok	tool script
+pf_build_pool_638690_closure.py	58979	08-29 20:48	full copy	pf_build_pool_638690_closure.py	ok	tool script
+pf_build_pool_661fa0_closure.py	53458	08-29 20:50	full copy	pf_build_pool_661fa0_closure.py	ok	tool script
+pf_build_post_v1_static_closure.py	34431	08-29 20:28	full copy	pf_build_post_v1_static_closure.py	ok	tool script
+pf_build_priority.py	20550	08-22 14:56	full copy	pf_build_priority.py	ok	tool script
+pf_build_serializer_slot34_correction.py	58135	08-29 21:08	full copy	pf_build_serializer_slot34_correction.py	ok	tool script
+pf_build_static_type_info_classmap.py	29191	08-30 00:28	full copy	pf_build_static_type_info_classmap.py	ok	tool script
+pf_build_string_tag_correction.py	22277	08-29 20:29	full copy	pf_build_string_tag_correction.py	ok	tool script
+pf_build_target_652a30_nonwire.py	36708	08-29 21:36	full copy	pf_build_target_652a30_nonwire.py	ok	tool script
+pf_build_targets_694790_6b3440_nonwire.py	31872	08-29 21:48	full copy	pf_build_targets_694790_6b3440_nonwire.py	ok	tool script
+pf_build_v1_manifest.py	17420	08-22 15:04	full copy	pf_build_v1_manifest.py	ok	tool script
+pf_build_v2_effective_status.py	18825	08-29 22:07	full copy	pf_build_v2_effective_status.py	ok	tool script
+pf_build_v2_manifest.py	26674	08-29 22:11	full copy	pf_build_v2_manifest.py	ok	tool script
+pf_build_v3_effective_status.py	34362	08-29 23:38	full copy	pf_build_v3_effective_status.py	ok	tool script
+pf_build_v3_manifest.py	58012	08-29 23:44	full copy	pf_build_v3_manifest.py	ok	tool script
+pf_build_v4_effective_status.py	65016	08-30 01:34	full copy	pf_build_v4_effective_status.py	ok	tool script
+pf_build_v4_manifest.py	91165	08-30 02:03	full copy	pf_build_v4_manifest.py	ok	tool script
+pf_build_v5_effective_status.py	71086	08-30 03:37	full copy	pf_build_v5_effective_status.py	ok	tool script
+pf_build_v5_invalid_parameter_closure.py	103855	08-30 02:58	full copy	pf_build_v5_invalid_parameter_closure.py	ok	tool script
+pf_build_v5_manifest.py	102453	08-30 04:15	full copy	pf_build_v5_manifest.py	ok	tool script
+pf_capture_delta_20260830.py	41935	08-29 20:30	full copy	pf_capture_delta_20260830.py	ok	tool script
+pf_extract_capture_branch_shapes_20260830.py	40610	08-29 20:27	full copy	pf_extract_capture_branch_shapes_20260830.py	ok	tool script
+pf_extract_data_evidence.py	14216	08-22 14:49	full copy	pf_extract_data_evidence.py	ok	tool script
+pf_extract_dump_rtti.py	32164	08-22 14:40	full copy	pf_extract_dump_rtti.py	ok	tool script
+pf_extract_dump_vtable_candidates.py	34672	08-29 20:21	full copy	pf_extract_dump_vtable_candidates.py	ok	tool script
+pf_extract_protocol.py	773240	08-22 13:17	full copy	pf_extract_protocol.py	ok	tool script
+pf_inventory_inputs.py	10567	08-22 13:26	full copy	pf_inventory_inputs.py	ok	tool script
+pf_rederive_actor_relation_interaction_graph.py	89606	09-01 12:38	full copy	pf_rederive_actor_relation_interaction_graph.py	ok	tool script
+pf_rederive_attr_capture_validation.py	55831	08-30 18:45	full copy	pf_rederive_attr_capture_validation.py	ok	tool script
+pf_rederive_attr_semantics.py	1530379	09-01 16:44	full copy	pf_rederive_attr_semantics.py	ok	tool script
+pf_rederive_combat_lethal_tail_delta.py	88086	09-01 14:00	full copy	pf_rederive_combat_lethal_tail_delta.py	ok	tool script
+pf_rederive_gm_plugin_gate.py	113012	09-01 07:16	full copy	pf_rederive_gm_plugin_gate.py	ok	tool script
+pf_rederive_ground_drop_lifetime.py	171909	09-01 07:59	full copy	pf_rederive_ground_drop_lifetime.py	ok	tool script
+pf_rederive_ground_drop_pickup_closure.py	124485	09-01 15:36	full copy	pf_rederive_ground_drop_pickup_closure.py	ok	tool script
+pf_rederive_monster_color_gate.py	207140	09-01 08:00	full copy	pf_rederive_monster_color_gate.py	ok	tool script
+pf_rederive_monster_color_mechanism_join.py	67594	09-01 09:45	full copy	pf_rederive_monster_color_mechanism_join.py	ok	tool script
+pf_rederive_monster_color_wire_control.py	71641	09-01 09:35	full copy	pf_rederive_monster_color_wire_control.py	ok	tool script
+pf_rederive_monster_role_data_controls.py	78358	09-01 11:37	full copy	pf_rederive_monster_role_data_controls.py	ok	tool script
+pf_rederive_quest_mark_event_census.py	75639	09-01 10:31	full copy	pf_rederive_quest_mark_event_census.py	ok	tool script
+pf_rederive_quest_mark_lifecycle.py	56022	09-01 10:44	full copy	pf_rederive_quest_mark_lifecycle.py	ok	tool script
+pf_rederive_quest_mark_resource_resolver.py	74855	09-01 10:43	full copy	pf_rederive_quest_mark_resource_resolver.py	ok	tool script
+pf_validate_capture_fields.py	47884	08-22 14:26	full copy	pf_validate_capture_fields.py	ok	tool script
+pf_validate_v2_effective_capture.py	96399	08-29 22:08	full copy	pf_validate_v2_effective_capture.py	ok	tool script
+pf_validate_v3_effective_capture.py	29378	08-29 23:38	full copy	pf_validate_v3_effective_capture.py	ok	tool script
+pf_validate_v4_effective_capture.py	55563	08-30 01:17	full copy	pf_validate_v4_effective_capture.py	ok	tool script
+pf_validate_v5_effective_capture.py	48617	08-30 04:36	full copy	pf_validate_v5_effective_capture.py	ok	tool script

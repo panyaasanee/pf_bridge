@@ -70,6 +70,11 @@ C:\Users\Panya\Desktop\Pirate Force\
 - **ต้องมีทุกฉบับ:** เวลา `+07:00` · HEAD ที่บูต · เลขจ็อบที่ใช้และเลขถัดไป · ผลแยกสองชั้น · nonclaims · สภาพแท่นตอนจบ (listener 0 · canonical sha ไม่ขยับ)
 - 🔴 **ห้ามแก้ไฟล์เดิมในโฟลเดอร์นั้น** — sync ฝั่ง Windows push เฉพาะไฟล์ใหม่
 - **บริโภคจดหมายที่ถึงคุณ:** สำเนาไป `notes_to_chief\consumed\` แล้ววาง stub `<ชื่อเดิม>.CONSUMED.txt` ข้าง ๆ · **ห้ามลบ ห้ามย้ายต้นฉบับ**
+  🔴 **เขียน stub ใหม่เสมอเป็น `<ชื่อไฟล์เต็มรวม .md>.CONSUMED.txt`** (มาตรฐานเดียว) · แต่เมื่อ**เช็ค**ว่าใบไหน
+  ยังไม่มีคู่ ต้องทดสอบทั้งสองแพทเทิร์นเสมอ (`<ชื่อเต็ม>.CONSUMED.txt` และ `<ชื่อตัด .md ออก>.CONSUMED.txt`)
+  เพราะมีของเก่า 645 ใบใช้แพทเทิร์นตัด `.md` อยู่จริง (พบ+ตัดสินโดย LANE-A/chief R296, ดู
+  `notes_to_chief/consumed/20260901_2327_LANE-A-ASK-COO-dual-consumed-txt-naming-convention.md`) —
+  เช็คแพทเทิร์นเดียวจะรายงานใบที่บริโภคแล้วว่า "ยังไม่บริโภค" (false positive) ได้ประมาณ 292 ใบ
 
 ### 🔴 G-OBS (R170) · G-FRAME (R172) · BUILD_IMPACT (CHARTER-01 ④ · R172) · WIRED v2 (R187) — ทั้งสี่ด่านย้ายไป [`EVIDENCE_GATES.md`](EVIDENCE_GATES.md) แล้ว · **ย้ายคำต่อคำ ไม่ได้ตัดอะไรออก**
 

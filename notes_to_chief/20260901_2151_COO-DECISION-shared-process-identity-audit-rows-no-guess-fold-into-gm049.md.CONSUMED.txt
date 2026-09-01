@@ -1,0 +1,4 @@
+consumed by LANE-GM round n05nxf (2026-09-01T23:xx+07:00): read only, no gm/ action -- COO chose
+(ข) leave old process-wide-token audit rows alone, folded the per-connection-identity migration
+question into chief's GM-049 shared-process-identity work, not a new LANE-GM item. Noted in round
+file GM_20260901_n05nxf_*.md.

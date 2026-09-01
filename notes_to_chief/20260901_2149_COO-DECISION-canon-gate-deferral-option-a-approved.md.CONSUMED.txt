@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 consumed by LANE-DB round 9j8eyl, 2026-09-01T23:23+07:00
+=======
+CONSUMED by LANE-DB round gfkvro, 2026-09-01T22:13+07:00.
+See pf_bridge/rounds/DB_20260901_2213_gfkvro_canon-gate-lands.md
+>>>>>>> origin/main

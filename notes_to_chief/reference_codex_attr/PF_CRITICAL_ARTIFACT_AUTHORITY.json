@@ -1,7 +1,7 @@
 {
   "schema": "pirate-force-critical-artifact-authority/v1",
-  "authority_version": "2026-09-01T21:05:00+07:00",
-  "authority_note": "20260901_2105_CODEX-CHECKPOINT-P05-LETHAL-TAIL.md",
+  "authority_version": "2026-09-01T22:51:00+07:00",
+  "authority_note": "20260901_2242_CODEX-CHECKPOINT-P06-PICKUP-CLOSURE.md",
   "serverproject_snapshot": {
     "commit": "8a8afa7c6ad7f13af5ac7088ffca6fc743cae5fa",
     "commit_time": "2026-09-01T07:50:38Z",
@@ -74,6 +74,46 @@
         "PF_GROUND_DROP_LIFETIME.tsv": {"size": 61979, "sha256": "b1703a7f31c42ddebf9702d12a7942577407fc320a9c2ad8411a08f3f017e710"},
         "PF_GROUND_DROP_LIFETIME.md": {"size": 21237, "sha256": "b953b9aa913fb0e432d06687a71d5aef705dfa762beb18483d165c7faac46d73"},
         "pf_rederive_ground_drop_lifetime.py": {"size": 171909, "sha256": "af66d888b796cea4af9ad5c02c8cdcb990877804842fefa46c095cf1cc6c76e1"}
+      }
+    },
+    "ground_drop_pickup_closure": {
+      "claim_scope": "Delta-only owner for the exact typed click-to-PickupTerrainThing key join, nested/outer logical discriminators, bounded serialize/rewrite/chunk/socket path, direct-local-erase negative, current capture-corpus RuntimeRes terrain-pool census and fail-closed C2S nested reach census. Original server provenance, acceptance, issuance/co-order, expiry and post-pickup removal policy remain OPEN.",
+      "depends_on": ["PF_GROUND_DROP_TRANSPORT.tsv", "PF_GROUND_DROP_LIFETIME.tsv", "PF_FIELD_VALIDATION.tsv", "PF_PROTOCOL_REGISTRY.tsv", "PF_SERIALIZER_FIELDS.tsv", "PF_TAG_CENSUS.tsv"],
+      "rows": 15,
+      "sources": {"IMAGE": 8, "CAPTURE": 7},
+      "pair_generation": "82d3d4dc351e4c94314c40dafa664ece2619621b3f03a507a67bce045d2b145f",
+      "claim_set_sha256": "0b24e08a365928d38d37c98063bbea2d2ce44c00e8096bb024e745ad0adcc13f",
+      "capture_corpus": {
+        "files": 2227,
+        "bytes": 699015496,
+        "manifest_sha256": "b8284a566d9993f52540dea52e82896b0d8eb499b9aa83ceb74084a0e671db3c",
+        "runtime_res_r": 15288,
+        "terrain_pool": {"bit08_absent": 14536, "present_count_zero": 0, "present_nonempty": 23, "unresolved": 729, "truncated_derived_mask": 3},
+        "path_classified_nonempty_event_manifest_sha256": "abaedb66ed9a2bbf8fae8ab872b92ef4d8b20736a23d7159b2d7f0300fb2b7be",
+        "uncertain_locator_manifest_sha256": "23b8427bdf1ab56089dba2fa0a7c2f81d6a9f25b3a391ee03eecbebc665a7878",
+        "c2s_outer": {"total": 65610, "gameplay": 64979, "login": 631, "nested_declared": 15350, "nested_reached": 14615, "nested_fail_closed": 735, "pickup_reached": 0},
+        "authoritative_server_provenance_ledger": null,
+        "path_classification": "PATH_CLASSIFIED_CAPTURE_V_PREFIX; filename property only; not original-versus-replacement source truth"
+      },
+      "verdict": "P0-6_BOUNDED_CLIENT_KEY_TRANSPORT_CLOSED / ORIGINAL_PICKUP_REMOVAL_POLICY_OPEN",
+      "adversarial_review": {
+        "status": "PASS_AFTER_THREE_PROVENANCE_GUARD_CORRECTIONS",
+        "published_capture_columns_mutated": 238,
+        "published_capture_columns_accepted": 0,
+        "self_test_fail_closed_mutations": 27,
+        "corrections": ["removed path-name-derived REPLACEMENT and ORIGINAL=0 truth claims", "replaced case-sensitive phrase denylist with structural templates", "expanded structural templates to every published CAPTURE column while separately recomputing derived claim/evidence digests"]
+      },
+      "files": {
+        "PF_GROUND_DROP_PICKUP_CLOSURE.tsv": {"size": 30672, "sha256": "1cf955edcff6f360735488c8a6e03a91435f1041ba642092f9193fd295348a1c"},
+        "PF_GROUND_DROP_PICKUP_CLOSURE.md": {"size": 14761, "sha256": "52981a6ad0c505f5d62d2430d54f41e074ae43b26fbfe3b6521ed1d2dae39b8f"},
+        "PF_GROUND_DROP_PICKUP_CLOSURE.pair.json": {"size": 4074, "sha256": "a2bdbcd29e5df9f3a2e37aefa68f41b0a7af2642be403c7471464163d1ec9f3e"},
+        "pf_rederive_ground_drop_pickup_closure.py": {"size": 124485, "sha256": "f3eb92393fbaec884e596acc5cbafba02738328c1af39d875e0aca0beb310d9d"}
+      },
+      "tracked_mirror": {
+        "location": "notes_to_chief/reference_codex_attr",
+        "commit": "621a7d7f56833db9f5d8f069d806cc3a4df09acd",
+        "byte_identical": true,
+        "all_files_tracked": true
       }
     },
     "quest_mark_event_census": {
@@ -179,12 +219,12 @@
         "PF_COMBAT_LETHAL_TAIL_DELTA.pair.json": {"size": 1269, "sha256": "a92e8c41aaaefd759b9162b080594e3a2d5f87de60a86e3b44cb04872d6c7e35"},
         "pf_rederive_combat_lethal_tail_delta.py": {"size": 88086, "sha256": "eef9c1f2139bd4c4d6a01bb11b2edaa8c150d479cbdcfb5f9f6ccf5c4e1eeb5f"}
       },
-      "local_mirror": {
+      "tracked_mirror": {
         "location": "notes_to_chief/reference_codex_attr",
         "byte_identical": true,
         "all_files_present": true,
-        "all_files_tracked": false,
-        "git_status": "untracked; owner/chief commit decision required"
+        "all_files_tracked": true,
+        "commit": "26bef6f9b45e514e9d4f600291477f40d423c697"
       }
     }
   },
@@ -210,13 +250,29 @@
       "bounded_closures": ["actor-before-terrain within one RuntimeRes handler", "current-target clear before optional TargetIsDead panel event", "runtime target storage separated from ActorAttr+0x198 and NPCAttr+0xA8", "observer fanout before death sync", "dead-task construction/queue/model-ready/persistence gates", "BasicAttr+0x58 requires a later write/snapshot on the proved path"],
       "open_original_policy": ["CHitResult versus actor-entry arrival order", "original packet grouping/cadence/timer values/hold duration", "authentic actor removal/corpse lifetime", "terrain/drop creation-removal-pickup ownership", "CFightMsgVital skipped by bounded stop rule"]
     },
-    "decision": "P0-5_BOUNDED_CLIENT_CONTRACT_CLOSED / ORIGINAL_SEQUENCE_OPEN",
-    "next_priority": "P0-6"
+    "p0_6_checkpoint": {
+      "main_attr_generation": "b96e420c290201ce60babec398fd2389ea36db2f2f30ce552d9d680f481f3fae",
+      "main_attr_field_status_change": 0,
+      "main_attr_field_scope_change": 0,
+      "standalone_rows_added": {"IMAGE": 8, "CAPTURE": 7},
+      "bounded_closures": ["DropThingGameObj typed is-a click gate", "PickupTerrainThing+0x14 equals TerrainThing+0x10 reconciliation key on the reached success path", "0x4543 nested and 0x6E6F gameplay/0x453A login logical discriminators", "serialize -> buffer rewrite -> <=0x3FF8 chunk -> WS2_32 send path", "no direct local unregister/map erase in the reached pickup-emission subpath", "current-corpus terrain-pool and fail-closed nested-reach census"],
+      "open_original_policy": ["authoritative capture-to-server provenance ledger", "original accepted pickup exchange", "post-pickup omission/full-clear/remove carrier and ordering", "last-item all-clear", "expiry duration/policy", "final socket literal mapping after buffer rewrite", "729 unresolved RuntimeRes tails and 735 unresolved C2S nested members"]
+    },
+    "decision": "P0-6_BOUNDED_CLIENT_KEY_TRANSPORT_CLOSED / ORIGINAL_PICKUP_REMOVAL_POLICY_OPEN",
+    "next_priority": "P0-7"
   },
   "current_server_readonly_audit": {
     "classification": "RECONSTRUCTED_POLICY_AND_INTERNAL_CONTRACT_AUDIT; not original-server evidence",
-    "serverproject_head": "7969f984f690afc68c981a6e74cdb3bcb0df6878",
+    "serverproject_head": "89632cb386f3b1d875e89b3465ed1def023eec32",
+    "inspected_at": "2026-09-01T22:51:00+07:00",
     "worktree_clean_at_inspection": true,
+    "relevant_file_blobs_unchanged_from_prior_audit": false,
+    "relevant_drift_summary": {
+      "changed_files": ["mob_loot.py", "mob_drop_presence.py"],
+      "classification": "RECONSTRUCTED_POLICY drift only; added/live-wired the derived mask-0x16 n_DROPMODEL_TYPE candidate and corrected its frame-trim cap",
+      "effect_on_urgent_findings": "NO_CLOSURE: no scene term/reset was added, whole-live-ledger republish remains, and production pickup/removal remains disconnected",
+      "unchanged_files": ["runtime.py", "mob_death.py", "mob_scene_recompose.py", "mob_pickup.py", "current/pf_login_game_server_v141.py"]
+    },
     "urgent_note": {"name": "CODEX_URGENT_20260901_2040_P05-CORPSE-DROP-STATE-SCOPE.md", "size": 9289, "sha256": "8b8904aed010ff49566b8af6bfb99898358e80b1f78f8fe2c014f58ea847aa8b"},
     "confirmed_internal_defects": [
       "A scalar dead_timer is applied across the entire multi-corpse register, re-arming prior corpses when another mob dies.",
@@ -227,8 +283,8 @@
       "runtime.py": {"blob": "fc67b7467d56dc7fcff5662c3ae3305171f1f4a0", "sha256": "cea9fe3fb4fb3c1b5ed22321d1666971e26d9b6d13999aefd67b5778b388e5cb"},
       "mob_death.py": {"blob": "3fc422fd3d2057a18c8eef4ed3182c9d923f4303", "sha256": "7c0daee1e1532b18c2e2bdeb83fbc4bb65d91394c716409e599369f9f87f614e"},
       "mob_scene_recompose.py": {"blob": "aad58adaccefd22face85359d1dbdde4e5aee18a", "sha256": "b71b018b6b0bd3efe59e51896586ab497040accb4337b3cecdf161c48fc64083"},
-      "mob_loot.py": {"blob": "cdf7da4e51a1caa978e02f8ad0204cd4a09bb7b6", "sha256": "8ca53695026d5cd90667c383b9e95cfee2a6ad9c5f32ecbd131e33f6006d776d"},
-      "mob_drop_presence.py": {"blob": "3250d62fcef941f490920603c4ba9fc0e6e33fc3", "sha256": "21b4db22f97cdb57f56783341625e8ea0526f330b4e4695486234d398f1a573e"},
+      "mob_loot.py": {"blob": "f6f4b9485c4dcd874454a5bd87d0ded0060b312e", "sha256": "ea623df7847312c1369a1240558052c5c329726770d206ca53a8bc744c5ab2d2"},
+      "mob_drop_presence.py": {"blob": "9100d3064d3596195731353a6d5b3ecc5fde23ca", "sha256": "3fdb669e07089431fd3317a1a1a71ff836080efc015410ddcbbc04586034d08b"},
       "mob_pickup.py": {"blob": "3c364269937c062af23c361f170ac42e56d1f85a", "sha256": "c1a027c4b7b88c11d73979aa54161736c216a9d0b860203e8fcc8611e861cdcc"},
       "current/pf_login_game_server_v141.py": {"blob": "2823248b15db4dd0c5d49978720e80b97b4ec10a", "sha256": "2eb05ed2fdbdd5ee3d91f7fbb8c1d16a4c7a02a843bc97169b16a389e4ea4c22"}
     }
@@ -287,9 +343,10 @@
     "external_tracked": false,
     "external_git_ignored": true,
     "tracked_mirror_location": "pf_bridge/notes_to_chief/reference_codex_attr",
-    "tracked_mirror_commit": "89c16e29ddca4502e81575a0aa86949cf80b5d79",
-    "tracked_mirror_scope": "The eight P0-4 files listed in monster_role_data_controls and actor_relation_interaction_graph are byte-identical and tracked at this commit.",
-    "p0_5_local_mirror_scope": "The four combat_lethal_tail_delta files are byte-identical under notes_to_chief/reference_codex_attr but remain untracked because Codex is forbidden to add or commit them.",
-    "requirement": "Consumers must verify authority hashes. P0-4 may use the pinned tracked mirror; P0-5 may use the local external or byte-identical local mirror, but repository/clone durability remains OPEN until the owner/chief chooses to track the four files. Do not assume every older standalone external artifact is mirrored."
+    "p0_4_tracked_mirror_commit": "89c16e29ddca4502e81575a0aa86949cf80b5d79",
+    "p0_5_tracked_mirror_commit": "26bef6f9b45e514e9d4f600291477f40d423c697",
+    "p0_6_tracked_mirror_commit": "621a7d7f56833db9f5d8f069d806cc3a4df09acd",
+    "tracked_mirror_scope": "The eight P0-4 files, four P0-5 files and four P0-6 files listed by their artifact entries are byte-identical and tracked at the pinned commits.",
+    "requirement": "Consumers must verify authority hashes and artifact-specific mirror commits. Do not assume every older standalone external artifact is mirrored."
   }
 }

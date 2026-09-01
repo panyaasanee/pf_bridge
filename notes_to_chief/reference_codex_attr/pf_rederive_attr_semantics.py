@@ -33,6 +33,7 @@ EXPECTED_IMAGE_SHA256 = (
     "9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623"
 )
 EXPECTED_IMAGE_SIZE = 14_759_424
+EXPECTED_IMAGE_MTIME_NS = 1_786_635_932_862_722_100
 IMAGE_BASE = 0x00400000
 ONCE_INIT_VA = 0x0089C080
 ID_ASSIGN_VA = 0x0089BD00
@@ -62,8 +63,8 @@ SERVER_STATS_PROGRESSION_PATH = (
 )
 SERVER_DAMAGE_HP_LINK_PATH = SERVER_SOURCE_ROOT / "damage_hp_link_hypothesis.py"
 EXPECTED_SERVER_SOURCE_HASHES = {
-    SERVER_RUNTIME_PATH: "a4719484830f300ce11e73bd989c9db9a69e55666aea7fb27dfdcdc84d7d8eae",
-    SERVER_MOB_COMBAT_PATH: "25d38552590a05b7bac83a9d1c2cee2a89272c3760bbec048d8dceba4c3283ac",
+    SERVER_RUNTIME_PATH: "cea9fe3fb4fb3c1b5ed22321d1666971e26d9b6d13999aefd67b5778b388e5cb",
+    SERVER_MOB_COMBAT_PATH: "c552f817d663d3055fd57bc491d12676e9bc18444f6c38bb4c6a2249633ba432",
     SERVER_PLAYER_WIRE_PATH: "c2080983d192051bf3f3ddc3df754e768e6eac4c25e8f147cd247be37fb21d75",
     SERVER_STATS_PROGRESSION_PATH: "a41d88c02fa8c5b52b6bb234f19a567945e7ae7af7c06794ab3e13edbf5a06c9",
     SERVER_DAMAGE_HP_LINK_PATH: "96333ca482bd109ee553eec9afc283038b90fd4563fad5f90b9091a579154248",
@@ -77,10 +78,10 @@ COMBAT_CONFLICT_GOLDEN = {
         "lifecycle_key": "e56e8288813de96b5d6aaf9ff60b6e6c0fb97f74be065e67a10df6619930847a",
         "exact_observation": "The inbound handler reads u32 +0x30, feeds it to behavior lookup 0x00702A10, then constructs CActorTask_UseBehavior through 0x0047AB30.",
         "frozen_claim_ref": (
-            "Pirate Force ServerProject/src/pirateforce_foundation/runtime.py:4109-4218@sha256="
-            "a4719484830f300ce11e73bd989c9db9a69e55666aea7fb27dfdcdc84d7d8eae;"
-            "mob_combat.py:1633-1680@sha256="
-            "25d38552590a05b7bac83a9d1c2cee2a89272c3760bbec048d8dceba4c3283ac"
+            "Pirate Force ServerProject/src/pirateforce_foundation/runtime.py:4193-4330@sha256="
+            "cea9fe3fb4fb3c1b5ed22321d1666971e26d9b6d13999aefd67b5778b388e5cb;"
+            "mob_combat.py:1698-1745@sha256="
+            "c552f817d663d3055fd57bc491d12676e9bc18444f6c38bb4c6a2249633ba432"
         ),
         "frozen_claim": "the cited runtime.py and mob_combat.py dispatch path admits a parsed target-bearing ActionVital without a post-parse +0x30 check against a visible behavior/action state",
         "rederived_claim": "IMAGE proves that inbound ActionVital +0x30 is the behavior selector consumed by lookup 0x00702A10 before CActorTask_UseBehavior construction; exact equipment-dependent choice remains open",
@@ -93,8 +94,9 @@ COMBAT_CONFLICT_GOLDEN = {
         "lifecycle_key": "9aa4efcc1bcca61f9f7cd5f1b447f3a23360f7a02401ee453d7c4ca76e7d8c20",
         "exact_observation": "Bit 3 is required on the known target-reaction lane that reaches 0x0048D870 when the enclosing bit-0 path is active and bit 4 is clear.",
         "frozen_claim_ref": (
-            "Pirate Force ServerProject/src/pirateforce_foundation/mob_combat.py:323,1004,1060@sha256="
-            "25d38552590a05b7bac83a9d1c2cee2a89272c3760bbec048d8dceba4c3283ac"
+            "Pirate Force ServerProject/src/pirateforce_foundation/mob_combat.py:"
+            "349-351,1030-1045@sha256="
+            "c552f817d663d3055fd57bc491d12676e9bc18444f6c38bb4c6a2249633ba432"
         ),
         "frozen_claim": "production emits CHitResult flags 0x0001",
         "rederived_claim": "the known IMAGE target-reaction lane requires bit 0 and bit 3 set with bit 4 clear; this does not prove 0x0009 is original-server policy",
@@ -182,6 +184,16 @@ PRIOR_GENERATION_MANIFEST_PATH = PRIOR_GENERATION_DIR / "manifest.json"
 PRIOR_FIELD_SEMANTICS_PATH = PRIOR_GENERATION_DIR / "PF_ATTR_FIELD_SEMANTICS.tsv"
 PRIOR_SEMANTIC_REPORT_PATH = PRIOR_GENERATION_DIR / "PF_ATTR_SEMANTIC_REPORT.md"
 PRIOR_FOR_SERVER_PATH = PRIOR_GENERATION_DIR / "PF_ATTR_FOR_SERVER.md"
+P0_7_CHECKPOINT1_GENERATION_ID = (
+    "b96e420c290201ce60babec398fd2389ea36db2f2f30ce552d9d680f481f3fae"
+)
+P0_7_CHECKPOINT1_PRESENTATION_PATH = (
+    GENERATION_ROOT / P0_7_CHECKPOINT1_GENERATION_ID
+    / "PF_MONSTER_PRESENTATION.tsv"
+)
+EXPECTED_P0_7_CHECKPOINT1_PRESENTATION_SHA256 = (
+    "07135e4ff488cdd98c68f02c3be673479279c0e8361bf7a34721ea925bfe9f81"
+)
 EXPECTED_PRIOR_MANIFEST_SHA256 = (
     "c04c76619f69954b8491e8cf92385b2bbb1cf200c422167aea33befe8860cc6c"
 )
@@ -201,6 +213,43 @@ GAMEDATA_ROOT = HERE.parent / "gamedata"
 GAMEDATA_COLUMNS_PATH = GAMEDATA_ROOT / "PF_GAMEDATA_COLUMNS.tsv"
 AI_WANDER_PATH = GAMEDATA_ROOT / "tables" / "CONSTDATA_TH__AI_WANDER.tsv"
 MOBS_PATH = GAMEDATA_ROOT / "tables" / "CONSTDATA_TH__MOBS.tsv"
+SCENE_META_PATH = GAMEDATA_ROOT / "_SCENE_meta.json"
+SCENE_INDEX_PATH = GAMEDATA_ROOT / "PF_GAMEDATA_SCENE_INDEX.tsv"
+SCENE_NAME_PATH = GAMEDATA_ROOT / "tables" / "CONSTDATA_TH__SCENE_NAME.tsv"
+CLINE_PATH = GAMEDATA_ROOT / "tables" / "CONSTDATA_TH__CLINE.tsv"
+SCENE_PLACEMENT_ROOT = GAMEDATA_ROOT / "scene"
+EXPECTED_SCENE_PLACEMENT_FILE_COUNT = 289
+EXPECTED_SCENE_NONEMPTY_PLACEMENT_FILE_COUNT = 268
+EXPECTED_SCENE_PLACEMENT_TOTAL_BYTES = 1_529_875
+EXPECTED_SCENE_PLACEMENT_TOTAL_ROWS = 6_248
+EXPECTED_SCENE_PLACEMENT_LEXICAL_MOB_MONSTER_ROWS = 6_230
+EXPECTED_SCENE_PLACEMENT_EXTRA_TRIPLE_ROWS = 238
+EXPECTED_SCENE_PLACEMENT_EXTRA_TRIPLE_TOTAL = 7_194
+EXPECTED_SCENE_PLACEMENT_UNRESOLVED_TEMPLATE_ROWS = 2
+EXPECTED_SCENE_PLACEMENT_MANIFEST_SHA256 = (
+    "e97c34aa7419c5cf0deab96ece6fbbe4d059e77ad7f2e55599272af0a5e8770a"
+)
+SCENE_PLACEMENT_PATHS = tuple(
+    sorted(
+        SCENE_PLACEMENT_ROOT.rglob("*.placements.tsv"),
+        key=lambda path: path.relative_to(SCENE_PLACEMENT_ROOT).as_posix().casefold(),
+    )
+)
+SCENE_SOURCE_ROOT = PF_ROOT / "GameClient"
+EXPECTED_SCENE_SOURCE_FILE_COUNT = 289
+EXPECTED_SCENE_SOURCE_TOTAL_BYTES = 831_018
+EXPECTED_SCENE_SOURCE_MANIFEST_SHA256 = (
+    "47fbf59d311bfecac92c3f2487c84a36a1cfa8acabc9577f5e0963b9f618d3bc"
+)
+EXPECTED_SCENE_SOURCE_LOCAL_AGGREGATE_SHA256 = (
+    "321f3ed266c614c35b862cc428fb435ef3d7b3a9b43829e98741307a2fd0c1f8"
+)
+SCENE_SOURCE_PATHS = tuple(
+    sorted(
+        SCENE_SOURCE_ROOT.rglob("*.npc"),
+        key=lambda path: path.relative_to(SCENE_SOURCE_ROOT).as_posix().casefold(),
+    )
+)
 AVATAR_DESCRIPTOR_ROOT = PF_ROOT / "GameClient" / "Data" / "GC" / "V"
 STANDARD_MOB_PATH = (
     GAMEDATA_ROOT / "tables" / "CONSTDATA_TH__STANDARD_MOB.tsv"
@@ -314,6 +363,10 @@ EXPECTED_DATA_HASHES = {
     GAMEDATA_COLUMNS_PATH: "6f1a00dc9660038f651007397244c575b321beaf756675fd0e437c3131294d89",
     AI_WANDER_PATH: "0b3f1eb8e67915c4be5758c734cae17c575ac2aa76cb989e13242cfb6ad01a23",
     MOBS_PATH: "3c0d33d68f832eefda56c845495008338dcef56f4277584b9ca479b7e1b3916b",
+    SCENE_META_PATH: "0329f8fa24a62f022a965e1c455e1c7f520770459d98d5e6d8df567cdd1fdcb9",
+    SCENE_INDEX_PATH: "c4016cf685671d4c7bbb1909bb300146afd802dd6b53f2d5e7b928249f26652d",
+    SCENE_NAME_PATH: "e38114a802576266ce37b2abcf8ebce3f105d7d5abaf4bc5ca066e7848c5d60b",
+    CLINE_PATH: "aa4a55b8db882eb965d0b7e186cd7bc7b5a81da8f057fee24586a27c94b2dc40",
     STANDARD_MOB_PATH: "4b2db7f9553c877c2ec471105754dd08982d9e80027cc468c1ceaee840d68925",
     FACTION_PATH: "9f7f58373416ac41645f56ce8c37d87822b969360df4004bf0c534101b416639",
     CHARCREATE_CLASS_PATH: "2a2668ab38d7a4501cfec8fada9d140f80527b8a4f0f85bfb1c4269e39b7f4c7",
@@ -495,8 +548,10 @@ class RegistryEntry:
 
 class Image:
     def __init__(self, path: Path):
+        before_stat = path.stat()
         self.path = path
         self.data = path.read_bytes()
+        after_stat = path.stat()
         self.sha256 = hashlib.sha256(self.data).hexdigest()
         if len(self.data) != EXPECTED_IMAGE_SIZE:
             raise SystemExit(
@@ -508,6 +563,13 @@ class Image:
                 "image_sha256_mismatch expected=%s actual=%s"
                 % (EXPECTED_IMAGE_SHA256, self.sha256)
             )
+        if (
+            before_stat.st_size != EXPECTED_IMAGE_SIZE
+            or after_stat.st_size != EXPECTED_IMAGE_SIZE
+            or before_stat.st_mtime_ns != EXPECTED_IMAGE_MTIME_NS
+            or after_stat.st_mtime_ns != EXPECTED_IMAGE_MTIME_NS
+        ):
+            raise SystemExit("image_stat_pin_mismatch")
         self.sections = self._parse_sections()
 
     def _parse_sections(self) -> tuple[Section, ...]:
@@ -855,6 +917,7 @@ def ground_drop_transport_row_key(row: dict[str, object]) -> str:
 
 MONSTER_PRESENTATION_COLUMNS = (
     "presentation_id",
+    "subject_id",
     "presentation_key",
     "row_kind",
     "field_key",
@@ -874,6 +937,25 @@ MONSTER_PRESENTATION_COLUMNS = (
     "active_action_index",
     "active_action_file",
     "active_action_class",
+    "scene",
+    "scene_index_ordinal",
+    "placement_index",
+    "placement_name",
+    "placement_name_class",
+    "placement_x",
+    "placement_y",
+    "placement_z",
+    "placement_set_names",
+    "placement_template_ids",
+    "authored_group_count",
+    "extra_triple_count",
+    "scene_name_row_ids",
+    "cline_type",
+    "cline_projection",
+    "cline_candidate_mobs_ids",
+    "cline_count_fields",
+    "candidate_outfit_vectors",
+    "composition_join_status",
     "claim",
     "claim_sha256",
     "semantic_status",
@@ -904,6 +986,28 @@ MONSTER_PRESENTATION_COLUMNS = (
     "blocker",
     "required_next_evidence",
     "image_sha256",
+)
+MONSTER_PRESENTATION_CHECKPOINT2_COLUMNS = (
+    "subject_id",
+    "scene",
+    "scene_index_ordinal",
+    "placement_index",
+    "placement_name",
+    "placement_name_class",
+    "placement_x",
+    "placement_y",
+    "placement_z",
+    "placement_set_names",
+    "placement_template_ids",
+    "authored_group_count",
+    "extra_triple_count",
+    "scene_name_row_ids",
+    "cline_type",
+    "cline_projection",
+    "cline_candidate_mobs_ids",
+    "cline_count_fields",
+    "candidate_outfit_vectors",
+    "composition_join_status",
 )
 MONSTER_PRESENTATION_CLAIM_COLUMNS = (
     "row_kind",
@@ -955,6 +1059,15 @@ def monster_presentation_claim_sha(row: dict[str, object]) -> str:
     return stable_key(
         "PF_MONSTER_PRESENTATION_CLAIM_V1",
         *(row[column] for column in MONSTER_PRESENTATION_CLAIM_COLUMNS),
+    )
+
+
+def monster_presentation_subject_id(row: dict[str, object]) -> str:
+    """Stable semantic subject identity, independent of status and evidence."""
+    return stable_key(
+        "PF_MONSTER_PRESENTATION_SUBJECT_V1",
+        row["source"],
+        row["field_key"],
     )
 
 
@@ -1388,6 +1501,15 @@ def _acquire_input_guards() -> None:
     )
     kernel32.CreateFileW.restype = ctypes.c_void_p
     invalid_handle = ctypes.c_void_p(-1).value
+    if (
+        len(SCENE_PLACEMENT_PATHS) != EXPECTED_SCENE_PLACEMENT_FILE_COUNT
+        or len({str(path).casefold() for path in SCENE_PLACEMENT_PATHS})
+        != EXPECTED_SCENE_PLACEMENT_FILE_COUNT
+        or len(SCENE_SOURCE_PATHS) != EXPECTED_SCENE_SOURCE_FILE_COUNT
+        or len({str(path).casefold() for path in SCENE_SOURCE_PATHS})
+        != EXPECTED_SCENE_SOURCE_FILE_COUNT
+    ):
+        raise SystemExit("attr_scene_placement_guard_census_mismatch")
     paths = {
         RUNNING_SCRIPT_PATH,
         IMAGE_PATH,
@@ -1400,8 +1522,11 @@ def _acquire_input_guards() -> None:
         PRIOR_FIELD_SEMANTICS_PATH,
         PRIOR_SEMANTIC_REPORT_PATH,
         PRIOR_FOR_SERVER_PATH,
+        P0_7_CHECKPOINT1_PRESENTATION_PATH,
         *EXPECTED_DATA_HASHES,
         *EXPECTED_SERVER_SOURCE_HASHES,
+        *SCENE_PLACEMENT_PATHS,
+        *SCENE_SOURCE_PATHS,
     }
     acquired = []
     for path in sorted(paths, key=lambda item: str(item).casefold()):
@@ -1823,6 +1948,11 @@ def _run_from_verified_snapshot() -> int:
         reconfigure = getattr(stream, "reconfigure", None)
         if reconfigure is not None:
             reconfigure(encoding="utf-8", errors="backslashreplace")
+    # This generator has one authoritative mode: a complete staged re-derivation.
+    # Reject flags instead of silently treating names such as --check or
+    # --self-test as a successful full publication.
+    if sys.argv[1:]:
+        raise SystemExit("attr_generator_unsupported_arguments")
     _assert_no_reparse_components(RUNNING_SCRIPT_LEXICAL_PATH, "generator_script")
     _assert_no_reparse_components(HERE_LEXICAL, "output_root")
     _assert_no_reparse_components(
@@ -2416,27 +2546,31 @@ def validate_monster_presentation_links_in_stage(
         raise SystemExit("monster_presentation_validation_schema_mismatch")
     ids = [row["presentation_id"] for row in rows]
     if (
-        len(rows) != 2697
+        len(rows) != 8950
         or ids != sorted(ids)
         or len(ids) != len(set(ids))
         or Counter(row["source"] for row in rows)
-        != Counter({"DATA": 2688, "IMAGE": 9})
+        != Counter({"DATA": 8940, "IMAGE": 10})
         or Counter(row["evidence_mode"] for row in rows)
         != Counter(
             {
                 "DATA_ASSET_EVIDENCE": 2687,
+                "DATA_COMPOSITION_EVIDENCE": 6252,
                 "CANONICAL_REFERENCE": 5,
-                "NEW_IMAGE_EVIDENCE": 5,
+                "NEW_IMAGE_EVIDENCE": 6,
             }
         )
         or Counter(row["semantic_status"] for row in rows)
         != Counter(
             {
                 "PROVEN_EXACT_DATA_METADATA": 2687,
+                "PROVEN_EXACT_AUTHORED_PLACEMENT_GROUP": 6248,
+                "PROVEN_EXACT_DATA_AMBIGUITY_GUARD": 4,
                 "CANONICAL_REFERENCE": 5,
                 "PROVEN_EXACT": 3,
                 "FALSE_LEAD_REFUTED": 1,
                 "UNKNOWN": 1,
+                "BOUNDED_NEGATIVE": 1,
             }
         )
         or Counter(row["evidence_reuse"] for row in rows)
@@ -2444,7 +2578,7 @@ def validate_monster_presentation_links_in_stage(
             {
                 "CANONICAL_ASSET_EVIDENCE": 615,
                 "EXPLICIT_EVIDENCE_REUSE": 2076,
-                "UNIQUE_EVIDENCE": 6,
+                "UNIQUE_EVIDENCE": 6259,
             }
         )
         or Counter(row["row_kind"] for row in rows)
@@ -2452,6 +2586,8 @@ def validate_monster_presentation_links_in_stage(
             {
                 "LEXICAL_M_PREFIX_OUTFIT_REFERENCE": 2686,
                 "EXPLICIT_PIKE_NON_M_TARGET": 1,
+                "AUTHORED_PLACEMENT_GROUP": 6248,
+                "CLINE_MAP_LIST_PROJECTION_GUARD": 4,
                 "CANONICAL_AI_WANDER_REFERENCE": 1,
                 "CANONICAL_MOBS_RUNTIME_REFERENCE": 4,
                 "AVATAR_PART_NIF_PARSER": 1,
@@ -2459,11 +2595,13 @@ def validate_monster_presentation_links_in_stage(
                 "AVATAR_ACTIONLIST_ORCHESTRATOR": 1,
                 "SCENEFOG_ACTIVED_FALSE_LEAD": 1,
                 "MONSTER_PRESENTATION_RUNTIME_SELECTION_OPEN": 1,
+                "SCALE_MANAGER_IDENTITY_CENSUS": 1,
             }
         )
-        or len({row["presentation_key"] for row in rows}) != 2697
-        or len({row["claim_sha256"] for row in rows}) != 2697
-        or len({row["evidence_key"] for row in rows}) != 2697
+        or len({row["subject_id"] for row in rows}) != 8950
+        or len({row["presentation_key"] for row in rows}) != 8950
+        or len({row["claim_sha256"] for row in rows}) != 8950
+        or len({row["evidence_key"] for row in rows}) != 8950
     ):
         raise SystemExit("monster_presentation_validation_census_mismatch")
 
@@ -2487,9 +2625,15 @@ def validate_monster_presentation_links_in_stage(
         "data_row_file_offset_end",
         "data_row_sha256",
     )
+    composition_columns = tuple(
+        column for column in MONSTER_PRESENTATION_CHECKPOINT2_COLUMNS
+        if column != "subject_id"
+    )
     for row in rows:
         if (
-            row["claim_sha256"] != monster_presentation_claim_sha(row)
+            not row["subject_id"]
+            or row["subject_id"] != monster_presentation_subject_id(row)
+            or row["claim_sha256"] != monster_presentation_claim_sha(row)
             or row["evidence_key"] != monster_presentation_evidence_key(row)
             or row["presentation_key"] != monster_presentation_row_key(row)
             or not row["nonclaim"]
@@ -2513,6 +2657,7 @@ def validate_monster_presentation_links_in_stage(
             if (
                 row["image_sha256"] != EXPECTED_IMAGE_SHA256
                 or any(row[column] != "N/A" for column in data_span_columns)
+                or any(row[column] != "N/A" for column in composition_columns)
                 or any(
                     row[column] != "N/A"
                     for column in (
@@ -2533,6 +2678,7 @@ def validate_monster_presentation_links_in_stage(
             if (
                 row["source"] != "DATA"
                 or any(row[column] != "N/A" for column in canonical_columns)
+                or any(row[column] != "N/A" for column in composition_columns)
                 or row["data_table_path"] == "N/A"
                 or row["data_table_sha256"] == "N/A"
                 or row["data_row_file_offset_start"] == "N/A"
@@ -2555,6 +2701,27 @@ def validate_monster_presentation_links_in_stage(
                     "monster_presentation_validation_data_provenance_mismatch_%s"
                     % row["presentation_id"]
                 )
+        elif row["evidence_mode"] == "DATA_COMPOSITION_EVIDENCE":
+            if (
+                row["source"] != "DATA"
+                or row["evidence_reuse"] != "UNIQUE_EVIDENCE"
+                or row["canonical_presentation_id"] != row["presentation_id"]
+                or any(row[column] != "N/A" for column in canonical_columns)
+                or row["data_table_path"] in {"", "N/A"}
+                or row["data_table_sha256"] in {"", "N/A"}
+                or row["data_row_file_offset_start"] in {"", "N/A"}
+                or row["data_row_file_offset_end"] in {"", "N/A"}
+                or row["data_row_sha256"] in {"", "N/A"}
+                or row["evidence_file"] in {"", "N/A", "N/A_CANONICAL_REFERENCE"}
+                or row["evidence_file_sha256"] in {
+                    "", "N/A", "N/A_CANONICAL_REFERENCE",
+                }
+                or any(row[column] in {"", "N/A"} for column in composition_columns)
+            ):
+                raise SystemExit(
+                    "monster_presentation_validation_composition_provenance_mismatch_%s"
+                    % row["presentation_id"]
+                )
         elif row["evidence_mode"] == "NEW_IMAGE_EVIDENCE":
             if (
                 row["source"] != "IMAGE"
@@ -2563,6 +2730,7 @@ def validate_monster_presentation_links_in_stage(
                 or any(row[column] != "N/A" for column in canonical_columns)
                 or row["evidence_file_sha256"] != EXPECTED_IMAGE_SHA256
                 or any(row[column] in {"", "N/A"} for column in image_span_columns)
+                or any(row[column] != "N/A" for column in composition_columns)
             ):
                 raise SystemExit(
                     "monster_presentation_validation_new_image_provenance_mismatch_%s"
@@ -2578,6 +2746,7 @@ def validate_monster_presentation_links_in_stage(
                 or row["evidence_file_sha256"] != "N/A_CANONICAL_REFERENCE"
                 or row["evidence_locator"] != "N/A_CANONICAL_REFERENCE"
                 or any(row[column] != "N/A" for column in image_span_columns)
+                or any(row[column] != "N/A" for column in composition_columns)
             ):
                 raise SystemExit(
                     "monster_presentation_validation_canonical_provenance_mismatch_%s"
@@ -2608,9 +2777,156 @@ def validate_monster_presentation_links_in_stage(
             "MP-IMG-007": "AVATAR_ACTIONLIST_ORCHESTRATOR",
             "MP-IMG-008": "SCENEFOG_ACTIVED_FALSE_LEAD",
             "MP-IMG-009": "MONSTER_PRESENTATION_RUNTIME_SELECTION_OPEN",
+            "MP-IMG-010": "SCALE_MANAGER_IDENTITY_CENSUS",
         }
     ):
         raise SystemExit("monster_presentation_validation_open_row_mismatch")
+
+    placement_rows = [
+        row for row in rows if row["row_kind"] == "AUTHORED_PLACEMENT_GROUP"
+    ]
+    placement_classes = Counter(
+        row["placement_name_class"] for row in placement_rows
+    )
+    if (
+        len(placement_rows) != EXPECTED_SCENE_PLACEMENT_TOTAL_ROWS
+        or len({(row["scene"].casefold(), row["placement_index"])
+                for row in placement_rows})
+        != EXPECTED_SCENE_PLACEMENT_TOTAL_ROWS
+        or len({row["scene"].casefold() for row in placement_rows})
+        != EXPECTED_SCENE_NONEMPTY_PLACEMENT_FILE_COUNT
+        or placement_classes
+        != Counter(
+            {
+                "LEXICAL_MOB_OR_MONSTER_NAME_OR_SET_NOT_CLASS_PROOF":
+                    EXPECTED_SCENE_PLACEMENT_LEXICAL_MOB_MONSTER_ROWS,
+                "NONLEXICAL_NAME_AND_SET":
+                    EXPECTED_SCENE_PLACEMENT_TOTAL_ROWS
+                    - EXPECTED_SCENE_PLACEMENT_LEXICAL_MOB_MONSTER_ROWS,
+            }
+        )
+        or sum(
+            int(row["extra_triple_count"], 10) > 0
+            for row in placement_rows
+        ) != EXPECTED_SCENE_PLACEMENT_EXTRA_TRIPLE_ROWS
+        or sum(
+            int(row["extra_triple_count"], 10)
+            for row in placement_rows
+        ) != EXPECTED_SCENE_PLACEMENT_EXTRA_TRIPLE_TOTAL
+        or sum(
+            "UNRESOLVED" in row["placement_template_ids"].upper()
+            for row in placement_rows
+        ) != EXPECTED_SCENE_PLACEMENT_UNRESOLVED_TEMPLATE_ROWS
+        or any(
+            row["authored_group_count"] != "1"
+            or row["cline_projection"] != "NOT_APPLIED_IDENTITY_UNSAFE"
+            or row["cline_candidate_mobs_ids"]
+            != "NOT_APPLIED_IDENTITY_UNSAFE"
+            or row["cline_count_fields"]
+            != "NOT_APPLIED_SPAWN_COUNT_UNPROVED"
+            or row["scene_name_row_ids"]
+            != "NOT_APPLIED_MAP_LIST_CONTEXT"
+            or row["cline_type"]
+            != "NOT_APPLIED_MAP_LIST_CONTEXT"
+            or "scene_name_rows_sha256" in row["support_spans"]
+            or row["candidate_outfit_vectors"]
+            != "NOT_APPLIED_IDENTITY_UNSAFE"
+            or row["composition_join_status"]
+            != "PLACEMENT_GROUP_ONLY_NO_IDENTITY_JOIN"
+            or row["mobs_id"] != "N/A"
+            or row["outfit_token"] != "N/A"
+            or not row["data_table_path"].endswith(".placements.tsv")
+            or not row["evidence_file"].endswith(".npc")
+            or not row["evidence_locator"].startswith("original_npc=")
+            or int(row["extra_triple_count"], 10) < 0
+            for row in placement_rows
+        )
+    ):
+        raise SystemExit("monster_presentation_validation_placement_census_mismatch")
+
+    projection_rows = [
+        row for row in rows
+        if row["row_kind"] == "CLINE_MAP_LIST_PROJECTION_GUARD"
+    ]
+    expected_projection = {
+        "38": ("64", "231"),
+        "39": ("67", "742"),
+        "40": ("68", "743"),
+        "41": ("91", "914"),
+    }
+    actual_projection: dict[str, tuple[str, str]] = {}
+    for row in projection_rows:
+        template_id = row["placement_template_ids"]
+        actual_projection[template_id] = (
+            row["placement_index"], row["cline_candidate_mobs_ids"]
+        )
+        try:
+            vectors = json.loads(row["candidate_outfit_vectors"])
+        except (TypeError, ValueError):
+            raise SystemExit(
+                "monster_presentation_validation_projection_vector_json_mismatch"
+            )
+        direct = vectors.get("direct_numeric_token_candidate")
+        projected = vectors.get("cline_map_list_projection")
+        if (
+            not isinstance(direct, dict)
+            or not isinstance(projected, dict)
+            or direct.get("mobs_id") != template_id
+            or projected.get("mobs_id") != row["cline_candidate_mobs_ids"]
+            or not isinstance(direct.get("s_OUTFIT"), list)
+            or not isinstance(projected.get("s_OUTFIT"), list)
+            or not direct["s_OUTFIT"]
+            or not projected["s_OUTFIT"]
+            or ";".join(projected["s_OUTFIT"]) != row["outfit_token"]
+        ):
+            raise SystemExit(
+                "monster_presentation_validation_projection_vector_mismatch_%s"
+                % template_id
+            )
+    if (
+        len(projection_rows) != 4
+        or actual_projection != expected_projection
+        or any(
+            row["scene"].casefold() != "bg0002"
+            or row["cline_type"] != "2"
+            or row["authored_group_count"] != "1_REFERENCE_ONLY"
+            or row["composition_join_status"]
+            != "NOT_IDENTITY_SAFE_MAP_LIST_PROJECTION_ONLY"
+            or row["semantic_status"]
+            != "PROVEN_EXACT_DATA_AMBIGUITY_GUARD"
+            or not row["data_table_path"].endswith(".placements.tsv")
+            or not row["evidence_file"].endswith(".npc")
+            for row in projection_rows
+        )
+    ):
+        raise SystemExit("monster_presentation_validation_projection_guard_mismatch")
+
+    scale_rows = [
+        row for row in rows
+        if row["row_kind"] == "SCALE_MANAGER_IDENTITY_CENSUS"
+    ]
+    if (
+        len(scale_rows) != 1
+        or scale_rows[0]["presentation_id"] != "MP-IMG-010"
+        or scale_rows[0]["semantic_status"] != "BOUNDED_NEGATIVE"
+        or scale_rows[0]["field_key"]
+        != "MONSTER_PRESENTATION@MOBS_SCALE_TYPED_EFFECT_CONSUMER#N"
+        or scale_rows[0]["evidence_locator"]
+        != (
+            "manager_identity_sensitive_scale_census|singleton_calls=13|"
+            "primary_lookup_calls=68|primary_pairs=5|alternate_pairs=4|"
+            "pinned_false_join_windows=3"
+        )
+        or scale_rows[0]["evidence_span_start"] != "0x0045BF40"
+        or scale_rows[0]["evidence_span_end"] != "0x0045C15D"
+        or scale_rows[0]["evidence_span_sha256"]
+        != "afb5662a3f1a81c98de8ed77d82262747b8563ce25be88d041c8dea89e52fb72"
+        or sum("false_join_site_" in part
+               for part in scale_rows[0]["support_spans"].split(";")) != 3
+        or "0x004A1E90" not in scale_rows[0]["claim"]
+        or "0x0044F8D1" not in scale_rows[0]["claim"]
+    ):
+        raise SystemExit("monster_presentation_validation_scale_census_mismatch")
 
     lexical_rows = [
         row for row in rows
@@ -14282,9 +14598,9 @@ def write_semantic_report(
     ):
         raise SystemExit("semantic_report_ground_drop_partition_mismatch")
     if (
-        len(monster_presentation_rows) != 2697
+        len(monster_presentation_rows) != 8950
         or Counter(row["source"] for row in monster_presentation_rows)
-        != Counter({"DATA": 2688, "IMAGE": 9})
+        != Counter({"DATA": 8940, "IMAGE": 10})
         or sum(
             row["row_kind"] == "MONSTER_PRESENTATION_RUNTIME_SELECTION_OPEN"
             and row["field_key"] == "MONSTER_PRESENTATION@ACTIVE_SELECTION#N"
@@ -14412,7 +14728,7 @@ def write_semantic_report(
             "",
             "## P0-7 monster presentation (independent of field quarantine)",
             "",
-            "[MEASURED][IMAGE/DATA, source-separated] `PF_MONSTER_PRESENTATION.tsv` remains publishable as 2,697 rows (2,688 DATA; 9 IMAGE), status PARTIAL / CHECKPOINT_1. This first P0-7 checkpoint added exact n_BOUNDARY +0x04, n_HEIGHT +0x08, and s_OUTFIT +0x108 runtime rows. The configured Pike comparison token matches original DATA, but runtime selection/rendered equivalence are unproved; Deer SP1/SP2 share active SENTRY metadata, which likewise proves neither runtime selection nor visual equivalence. f_SCALE effect semantics and the +0x108-to-Avatar selection bridge remain open. At least one further P0-7 checkpoint is required before the two-consecutive-no-status-change stop rule can be evaluated.",
+            "[MEASURED][IMAGE/DATA, source-separated] `PF_MONSTER_PRESENTATION.tsv` remains publishable as 8,950 rows (8,940 DATA; 10 IMAGE), status PARTIAL / CHECKPOINT_2. It adds 6,248 original authored placement-group records, four DATA namespace-ambiguity guards, and one bounded manager-identity-sensitive f_SCALE row while preserving all 2,697 prior rows. No semantic status closes: f_SCALE typed-effect semantics and the +0x108-to-Avatar selection bridge remain open. CLINE is not promoted from its client map-list role to world-actor identity, and authored groups are not live spawn density.",
             "",
             "## Quarantine ledger",
             "",
@@ -14620,7 +14936,7 @@ def write_semantic_report(
         ),
         "- P0-6 ground-drop transport: %d IMAGE rows (9 content-addressed A1/A2 references; 10 new bounded IMAGE evidence rows). The accepted-queue branch closes click-to-nested/outer buffer encoding, but persistent server-to-client ground-object issuance remains open; overall status PARTIAL. Runtime IDs `0x4543`/`0x6E6F`/`0x453A` are not promoted to wire opcodes. See `PF_GROUND_DROP_TRANSPORT.tsv`/`.md`."
         % len(ground_drop_transport_rows),
-        "- P0-7 monster presentation: %d source-separated rows (`DATA` 2688; `IMAGE` 9), status PARTIAL / CHECKPOINT_1. This first checkpoint added three exact runtime rows (+0x04/+0x08/+0x108). The configured Pike comparison token matches original DATA, but runtime selection/rendered equivalence are unproved; Deer SP1/SP2 metadata likewise proves neither. f_SCALE effect semantics remain in the existing runtime-open ledger, and +0x108-to-Avatar selection is one presentation-specific unresolved row. At least one further P0-7 checkpoint is required before the two-consecutive-no-status-change stop rule can be evaluated. See `PF_MONSTER_PRESENTATION.tsv`/`.md`."
+        "- P0-7 monster presentation: %d source-separated rows (`DATA` 8940; `IMAGE` 10), status PARTIAL / CHECKPOINT_2. The checkpoint adds 6,248 original authored placement-group rows, four CLINE map-list ambiguity guards, and one bounded f_SCALE manager-identity census row while preserving the 2,697 prior rows. f_SCALE typed-effect semantics and +0x108-to-Avatar selection remain open; authored groups are not live density and CLINE is not world-actor identity. See `PF_MONSTER_PRESENTATION.tsv`/`.md`."
         % len(monster_presentation_rows),
         "- Frozen/re-derived conflict rows: %d" % len(conflict_rows),
         "- Approved attended probe requests: %d. `APPROVED_PROBE_REQUEST_SPECS` is empty, so no proposal has passed the fail-closed owner intake contract (linked unresolved key, exact commands, expected and falsifying observations, unlock, headless evidence, and prior-probe search). Zero probes does not mean zero unresolved work."
@@ -14829,9 +15145,9 @@ def write_semantic_report(
             "",
             "[MEASURED][LOCAL TOOLING] The configured Pike comparison token matches original DATA; runtime selection and rendered equivalence are unproved.",
             "",
-            "[MEASURED][IMAGE] This first P0-7 checkpoint adds three narrow exact runtime rows: n_BOUNDARY +0x04, n_HEIGHT +0x08, and s_OUTFIT +0x108. The f_SCALE key, 0.0 default, and load into +0x0C are exact, but no typed effect consumer is currently proved within the recorded bounded review; separate typed-census/alias-review digests are not incorporated or rederived by this generator, so no completeness/global-absence claim is made. The Avatar parser separately reads NifFile, KfFile, and ActionList. The proposed `Actived` alias belongs to SceneFogCmp and is refuted for Avatar use. After two bounded alias rounds, no +0x108-to-Avatar selection bridge is proved; that bounded result does not satisfy the master stop rule.",
+            "[MEASURED][IMAGE] The prior exact runtime rows remain: n_BOUNDARY +0x04, n_HEIGHT +0x08, and s_OUTFIT +0x108. CHECKPOINT_2 adds a pinned manager-identity-sensitive census: the CNetNPC initializer stores the primary 0x004A1C70 MOBS result at +0x35C, while three apparent +0x0C paths instead pass MOBS +0x7C through the different 0x004A1E90 lookup and read a secondary record. This refutes those false joins but proves no typed f_SCALE effect consumer or global absence. The Avatar parser separately reads NifFile, KfFile, and ActionList; SceneFog `Actived` remains refuted and no +0x108-to-Avatar selection bridge is proved.",
             "",
-            "[MEASURED][LOCAL TOOLING] P0-7 remains PARTIAL / CHECKPOINT_1. At least one further P0-7 checkpoint is required before the two-consecutive-no-status-change stop rule can be evaluated. The +1 unresolved selection row is coverage expansion for a previously unrepresented boundary, not regression; f_SCALE is already represented by the existing runtime-open row.",
+            "[MEASURED][LOCAL TOOLING] P0-7 remains PARTIAL / CHECKPOINT_2. Semantic status closures are zero: the one presentation-selection UNKNOWN remains open, and f_SCALE remains role-only/open for a typed effect consumer. Evidence/coverage changed, so the V3 comparator is established as a new baseline with `no_change_streak=0`.",
             "",
             "[PROPOSED SAFETY RULE][SOURCE-SEPARATION] Token order does not prove original-server selection; n_BOUNDARY/n_HEIGHT do not prove collision or physics policy; f_SCALE zero is not a no-op claim; Action/@Actived is not server policy without new type-preserving evidence.",
             "",
@@ -14888,9 +15204,9 @@ def write_for_server(
     ):
         raise SystemExit("server_guide_ground_drop_partition_mismatch")
     if (
-        len(monster_presentation_rows) != 2697
+        len(monster_presentation_rows) != 8950
         or Counter(row["source"] for row in monster_presentation_rows)
-        != Counter({"DATA": 2688, "IMAGE": 9})
+        != Counter({"DATA": 8940, "IMAGE": 10})
         or sum(
             row["row_kind"] == "MONSTER_PRESENTATION_RUNTIME_SELECTION_OPEN"
             and row["semantic_status"] == "UNKNOWN"
@@ -14942,9 +15258,9 @@ def write_for_server(
                 "",
                 "## P0-7 monster presentation (independent of field quarantine)",
                 "",
-                "[MEASURED][IMAGE/DATA, source-separated] `PF_MONSTER_PRESENTATION.tsv` publishes 2,697 rows (2,688 DATA; 9 IMAGE), status PARTIAL / CHECKPOINT_1. This first P0-7 checkpoint added exact +0x04/+0x08/+0x108 runtime rows. The configured Pike comparison token matches original DATA, but runtime selection/rendered equivalence are unproved; Deer SP1/SP2 share active SENTRY metadata, which proves neither runtime selection nor visual equivalence. f_SCALE effect semantics and the +0x108 selection bridge remain open. At least one further P0-7 checkpoint is required before the two-consecutive-no-status-change stop rule can be evaluated.",
+                "[MEASURED][IMAGE/DATA, source-separated] `PF_MONSTER_PRESENTATION.tsv` publishes 8,950 rows (8,940 DATA; 10 IMAGE), status PARTIAL / CHECKPOINT_2. It preserves all prior rows and adds 6,248 original authored placement-group rows, four CLINE map-list ambiguity guards, and one bounded f_SCALE manager-identity census row. The placement rows are not actors/spawns/live density, CLINE is not world-actor identity, and f_SCALE effect semantics plus the +0x108 selection bridge remain open.",
                 "",
-                "[PROPOSED] Keep the exact shipped outfit tokens and dimensions as opaque presentation inputs. Do not choose the first token as an asserted default, map `DIE` to sleep/idle, treat zero scale as a no-op, or turn Action/@Actived into server policy without new type-preserving evidence. Do not treat this first checkpoint as the master stop condition.",
+                "[PROPOSED] Keep exact shipped outfit vectors and dimensions as opaque presentation inputs. Do not choose the first token as an asserted default, map `DIE` to sleep/idle, turn authored placement groups into spawn density, use CLINE as world-actor identity, treat zero scale as a no-op, or turn SceneFog Action/@Actived into Avatar/server policy without new type-preserving evidence.",
                 "",
                 "Quarantined rows and their suppressed derivatives remain in `PF_ATTR_QUARANTINE.tsv` and `PF_ATTR_UNRESOLVED.tsv`; do not reconstruct them from a prior report.",
                 "",
@@ -14993,9 +15309,9 @@ def write_for_server(
         "",
         "## P0-7 monster presentation",
         "",
-        "[MEASURED][IMAGE/DATA, source-separated] `PF_MONSTER_PRESENTATION.tsv` publishes 2,697 rows (`DATA` 2,688; `IMAGE` 9), status PARTIAL / CHECKPOINT_1. This first P0-7 checkpoint added exact n_BOUNDARY +0x04, n_HEIGHT +0x08, and s_OUTFIT +0x108 runtime rows. The configured Pike comparison token matches original DATA, but runtime selection/rendered equivalence are unproved. Mountain Deer SP1/SP2 share active SENTRY metadata, which proves neither runtime selection nor visual equivalence. IMAGE refutes the SceneFog `Actived` alias. The f_SCALE key/default/load are exact while typed effect semantics remain open, and two bounded alias rounds do not prove the +0x108-to-Avatar selection bridge. At least one further P0-7 checkpoint is required before the two-consecutive-no-status-change stop rule can be evaluated.",
+        "[MEASURED][IMAGE/DATA, source-separated] `PF_MONSTER_PRESENTATION.tsv` publishes 8,950 rows (`DATA` 8,940; `IMAGE` 10), status PARTIAL / CHECKPOINT_2. It preserves the 2,697 prior rows and adds 6,248 original authored placement-group rows, four Bg0002 CLINE map-list ambiguity guards with full candidate s_OUTFIT vectors, and one bounded manager-identity-sensitive f_SCALE census row. The f_SCALE key/default/load remain exact but no typed effect consumer is proved; no +0x108-to-Avatar active-outfit/action/idle bridge is proved. Authored groups are not actor/spawn/live density, and CLINE is not world-actor identity.",
         "",
-        "[PROPOSED] Preserve original outfit tokens, n_BOUNDARY, n_HEIGHT, and the optional f_SCALE slot without inventing selection, pose, collision, physics, or scale-zero policy. Do not assume token order selects a default, rename `DIE` as sleep/idle, implement Action/@Actived as original-server policy, or treat this first checkpoint as satisfying the master stop condition. The one new unresolved presentation row is coverage expansion, not evidence of a regression; f_SCALE remains a separate existing runtime-open row.",
+        "[PROPOSED] Preserve original full outfit vectors, n_BOUNDARY, n_HEIGHT, and the optional f_SCALE slot without inventing selection, pose, collision, physics, or scale-zero policy. Do not assume token order selects a default, rename `DIE` as sleep/idle, turn authored placement groups or CLINE count-like fields into spawn density, use CLINE as world-actor identity, or implement SceneFog Action/@Actived as Avatar/original-server policy. The active-selection UNKNOWN and typed f_SCALE effect remain open; CHECKPOINT_2 closes neither.",
         "",
         "## Audited CNetNPC quest-mark dependency",
         "",
@@ -23258,6 +23574,247 @@ def build_monster_presentation(
     if position != len(mobs_raw):
         raise SystemExit("monster_presentation_mobs_offset_mismatch")
 
+    def parse_tsv_bytes_with_offsets(
+        raw: bytes, label: str,
+    ) -> tuple[
+        tuple[str, ...], list[dict[str, str]],
+        list[tuple[int, int, str]],
+    ]:
+        text = raw.decode("utf-8", errors="strict")
+        reader = csv.DictReader(io.StringIO(text, newline=""), delimiter="\t")
+        if reader.fieldnames is None:
+            raise SystemExit("monster_presentation_%s_missing_header" % label)
+        parsed = [dict(row) for row in reader]
+        if any(
+            None in row or any(value is None for value in row.values())
+            for row in parsed
+        ):
+            raise SystemExit("monster_presentation_%s_malformed_row" % label)
+        lines = raw.splitlines(keepends=True)
+        if len(lines) != len(parsed) + 1:
+            raise SystemExit(
+                "monster_presentation_%s_physical_line_mismatch" % label
+            )
+        offsets: list[tuple[int, int, str]] = []
+        cursor = len(lines[0])
+        for line in lines[1:]:
+            offsets.append(
+                (cursor, cursor + len(line), hashlib.sha256(line).hexdigest())
+            )
+            cursor += len(line)
+        if cursor != len(raw):
+            raise SystemExit("monster_presentation_%s_offset_mismatch" % label)
+        return tuple(reader.fieldnames), parsed, offsets
+
+    checkpoint1_raw = P0_7_CHECKPOINT1_PRESENTATION_PATH.read_bytes()
+    if (
+        hashlib.sha256(checkpoint1_raw).hexdigest()
+        != EXPECTED_P0_7_CHECKPOINT1_PRESENTATION_SHA256
+    ):
+        raise SystemExit("monster_presentation_checkpoint1_hash_mismatch")
+    checkpoint1_columns, checkpoint1_rows, _checkpoint1_offsets = (
+        parse_tsv_bytes_with_offsets(checkpoint1_raw, "checkpoint1")
+    )
+    expected_checkpoint1_columns = tuple(
+        column for column in MONSTER_PRESENTATION_COLUMNS
+        if column not in MONSTER_PRESENTATION_CHECKPOINT2_COLUMNS
+    )
+    if (
+        checkpoint1_columns != expected_checkpoint1_columns
+        or len(checkpoint1_rows) != 2697
+    ):
+        raise SystemExit("monster_presentation_checkpoint1_schema_mismatch")
+
+    scene_meta_raw = SCENE_META_PATH.read_bytes()
+    scene_meta = json.loads(scene_meta_raw.decode("utf-8", errors="strict"))
+    if (
+        hashlib.sha256(scene_meta_raw).hexdigest()
+        != EXPECTED_DATA_HASHES[SCENE_META_PATH]
+        or scene_meta.get("files") != EXPECTED_SCENE_SOURCE_FILE_COUNT
+        or scene_meta.get("succeeded") != EXPECTED_SCENE_SOURCE_FILE_COUNT
+        or scene_meta.get("failed") != 0
+        or scene_meta.get("errors") != []
+        or scene_meta.get("placement_count_total")
+        != EXPECTED_SCENE_PLACEMENT_TOTAL_ROWS
+        or scene_meta.get("definition_count_total") != 3745
+        or scene_meta.get("source_bytes") != EXPECTED_SCENE_SOURCE_TOTAL_BYTES
+        or scene_meta.get("output_bytes")
+        != EXPECTED_SCENE_PLACEMENT_TOTAL_BYTES
+        or scene_meta.get("source_manifest_sha256")
+        != EXPECTED_SCENE_SOURCE_MANIFEST_SHA256
+    ):
+        raise SystemExit("monster_presentation_scene_meta_mismatch")
+
+    scene_index_raw = SCENE_INDEX_PATH.read_bytes()
+    (
+        scene_index_columns, scene_index_rows, scene_index_offsets,
+    ) = parse_tsv_bytes_with_offsets(scene_index_raw, "scene_index")
+    if (
+        hashlib.sha256(scene_index_raw).hexdigest()
+        != EXPECTED_DATA_HASHES[SCENE_INDEX_PATH]
+        or scene_index_columns
+        != (
+            "scene", "src_path", "version", "placement_count",
+            "src_sha256", "src_bytes", "parse_status", "definition_count",
+            "placement_count_offset", "output_path",
+        )
+        or len(scene_index_rows) != EXPECTED_SCENE_PLACEMENT_FILE_COUNT
+        or any(row["parse_status"] != "OK" for row in scene_index_rows)
+        or sum(int(row["placement_count"], 10) for row in scene_index_rows)
+        != EXPECTED_SCENE_PLACEMENT_TOTAL_ROWS
+        or sum(int(row["src_bytes"], 10) for row in scene_index_rows)
+        != EXPECTED_SCENE_SOURCE_TOTAL_BYTES
+    ):
+        raise SystemExit("monster_presentation_scene_index_mismatch")
+
+    placement_manifest_records: list[str] = []
+    source_manifest_records: list[str] = []
+    placement_path_set: set[str] = set()
+    source_path_set: set[str] = set()
+    authored_placements: list[dict[str, object]] = []
+    expected_placement_columns = (
+        "index", "name", "offset", "end_offset", "xyz_offset",
+        "x", "y", "z", "xyz_raw_hex", "f32_3", "f32_4", "f32_5",
+        "u16_0", "u16_1", "u16_2", "u16_3", "u16_4", "u16_5",
+        "u16_6", "version2_byte", "set_names", "template_ids",
+        "extra_triple_count", "extra_triples_xyz",
+    )
+    for scene_ordinal, (index_row, index_span) in enumerate(
+        zip(scene_index_rows, scene_index_offsets), 1
+    ):
+        placement_path = (GAMEDATA_ROOT / index_row["output_path"]).resolve()
+        source_path = (SCENE_SOURCE_ROOT / index_row["src_path"]).resolve()
+        try:
+            placement_relative = placement_path.relative_to(
+                SCENE_PLACEMENT_ROOT.resolve()
+            )
+            source_relative = source_path.relative_to(SCENE_SOURCE_ROOT.resolve())
+        except ValueError as exc:
+            raise SystemExit(
+                "monster_presentation_scene_path_outside_guarded_roots"
+            ) from exc
+        _assert_no_reparse_components(
+            _lexical_path_for(placement_path),
+            "monster_presentation_placement_%d" % scene_ordinal,
+        )
+        _assert_no_reparse_components(
+            _lexical_path_for(source_path),
+            "monster_presentation_scene_source_%d" % scene_ordinal,
+        )
+        placement_raw = placement_path.read_bytes()
+        source_raw = source_path.read_bytes()
+        placement_sha = hashlib.sha256(placement_raw).hexdigest()
+        source_sha = hashlib.sha256(source_raw).hexdigest()
+        if (
+            source_sha != index_row["src_sha256"]
+            or len(source_raw) != int(index_row["src_bytes"], 10)
+        ):
+            raise SystemExit(
+                "monster_presentation_scene_source_hash_mismatch_%d"
+                % scene_ordinal
+            )
+        placement_manifest_records.append(
+            "%s\t%d\t%s"
+            % (placement_relative.as_posix(), len(placement_raw), placement_sha)
+        )
+        source_manifest_records.append(
+            "%s\t%d\t%s"
+            % (source_relative.as_posix(), len(source_raw), source_sha)
+        )
+        placement_path_set.add(str(placement_path).casefold())
+        source_path_set.add(str(source_path).casefold())
+        (
+            placement_columns, placement_rows, placement_offsets,
+        ) = parse_tsv_bytes_with_offsets(
+            placement_raw, "placement_%04d" % scene_ordinal
+        )
+        if (
+            placement_columns != expected_placement_columns
+            or len(placement_rows) != int(index_row["placement_count"], 10)
+            or [row["index"] for row in placement_rows]
+            != [str(value) for value in range(len(placement_rows))]
+        ):
+            raise SystemExit(
+                "monster_presentation_placement_schema_or_count_mismatch_%d"
+                % scene_ordinal
+            )
+        for placement, placement_span in zip(
+            placement_rows, placement_offsets
+        ):
+            authored_placements.append(
+                {
+                    "scene_ordinal": scene_ordinal,
+                    "scene": index_row["scene"],
+                    "index_row": index_row,
+                    "index_span": index_span,
+                    "placement_path": placement_path,
+                    "placement_sha256": placement_sha,
+                    "source_path": source_path,
+                    "source_sha256": source_sha,
+                    "placement": placement,
+                    "placement_span": placement_span,
+                }
+            )
+
+    placement_manifest_sha256 = hashlib.sha256(
+        "\n".join(sorted(placement_manifest_records, key=str.casefold)).encode("utf-8")
+    ).hexdigest()
+    source_local_aggregate_sha256 = hashlib.sha256(
+        "\n".join(sorted(source_manifest_records, key=str.casefold)).encode("utf-8")
+    ).hexdigest()
+    if (
+        placement_path_set
+        != {str(path.resolve()).casefold() for path in SCENE_PLACEMENT_PATHS}
+        or source_path_set
+        != {str(path.resolve()).casefold() for path in SCENE_SOURCE_PATHS}
+        or len(authored_placements) != EXPECTED_SCENE_PLACEMENT_TOTAL_ROWS
+        or sum(len(path.read_bytes()) for path in SCENE_PLACEMENT_PATHS)
+        != EXPECTED_SCENE_PLACEMENT_TOTAL_BYTES
+        or placement_manifest_sha256
+        != EXPECTED_SCENE_PLACEMENT_MANIFEST_SHA256
+        or source_local_aggregate_sha256
+        != EXPECTED_SCENE_SOURCE_LOCAL_AGGREGATE_SHA256
+    ):
+        raise SystemExit("monster_presentation_scene_manifest_mismatch")
+
+    scene_name_raw = SCENE_NAME_PATH.read_bytes()
+    scene_name_columns, scene_name_rows, scene_name_offsets = (
+        parse_tsv_bytes_with_offsets(scene_name_raw, "scene_name")
+    )
+    cline_raw = CLINE_PATH.read_bytes()
+    cline_columns, cline_rows, cline_offsets = parse_tsv_bytes_with_offsets(
+        cline_raw, "cline"
+    )
+    if (
+        len(scene_name_rows) != 271
+        or len(scene_name_columns) != 24
+        or scene_name_columns[0] != "n_ID"
+        or scene_name_columns[1] != "s_MODLE_ID"
+        or scene_name_columns[8] != "n_CLINE_TYPE"
+        or len(cline_rows) != 3599
+        or cline_columns
+        != (
+            "n_ID", "n_CLINE_TYPE", "n_CREATURE_TYPE", "n_TACTIC_AI",
+            "n_LEADER_BK1", "n_LEADER_BK2", "n_LEADER_BK3",
+            "n_CREW1", "n_CREW1_NUMBER", "n_CREW2", "n_CREW2_NUMBER",
+            "n_CREW3", "n_CREW3_NUMBER", "n_CREW4", "n_CREW4_NUMBER",
+            "n_CREW5", "n_CREW5_NUMBER", "n_CREW6", "n_CREW6_NUMBER",
+        )
+    ):
+        raise SystemExit("monster_presentation_scene_catalog_schema_mismatch")
+    scene_name_by_model: dict[str, list[tuple[dict[str, str], tuple[int, int, str]]]] = defaultdict(list)
+    for scene_row, scene_span in zip(scene_name_rows, scene_name_offsets):
+        scene_name_by_model[scene_row["s_MODLE_ID"].casefold()].append(
+            (scene_row, scene_span)
+        )
+    cline_by_pair: dict[
+        tuple[str, str], list[tuple[dict[str, str], tuple[int, int, str]]]
+    ] = defaultdict(list)
+    for cline_row, cline_span in zip(cline_rows, cline_offsets):
+        cline_by_pair[
+            (cline_row["n_CLINE_TYPE"], cline_row["n_CREATURE_TYPE"])
+        ].append((cline_row, cline_span))
+
     boundary_values = [int(row["n_BOUNDARY"], 10) for row in mobs_rows]
     height_values = [int(row["n_HEIGHT"], 10) for row in mobs_rows]
     if (
@@ -23546,6 +24103,7 @@ def build_monster_presentation(
         return {column: "N/A" for column in MONSTER_PRESENTATION_COLUMNS}
 
     def finish(row: dict[str, str]) -> None:
+        row["subject_id"] = monster_presentation_subject_id(row)
         row["claim_sha256"] = monster_presentation_claim_sha(row)
         row["evidence_key"] = monster_presentation_evidence_key(row)
         row["presentation_key"] = monster_presentation_row_key(row)
@@ -23664,6 +24222,324 @@ def build_monster_presentation(
         }
     )
     finish(row)
+
+    mobs_with_span_by_id = {
+        row["n_ID"]: (row, row_offsets[index])
+        for index, row in enumerate(mobs_rows)
+    }
+    if len(mobs_with_span_by_id) != 3210:
+        raise SystemExit("monster_presentation_mobs_span_index_mismatch")
+
+    scene_summary_counts: dict[str, Counter[str]] = defaultdict(Counter)
+    for scene_index_row in scene_index_rows:
+        scene_summary_counts[scene_index_row["scene"]]
+    authored_row_by_scene_index: dict[tuple[str, str], dict[str, str]] = {}
+    lexical_marker_count = 0
+    extra_triple_row_count = 0
+    extra_triple_total = 0
+    unresolved_template_row_count = 0
+    for authored_index, item in enumerate(authored_placements, 1):
+        scene = str(item["scene"])
+        scene_ordinal = int(item["scene_ordinal"])
+        placement_path = item["placement_path"]
+        source_path = item["source_path"]
+        if not isinstance(placement_path, Path) or not isinstance(source_path, Path):
+            raise SystemExit("monster_presentation_authored_path_type_mismatch")
+        placement = item["placement"]
+        index_row = item["index_row"]
+        placement_span = item["placement_span"]
+        index_span = item["index_span"]
+        if (
+            not isinstance(placement, dict)
+            or not isinstance(index_row, dict)
+            or not isinstance(placement_span, tuple)
+            or not isinstance(index_span, tuple)
+        ):
+            raise SystemExit("monster_presentation_authored_record_type_mismatch")
+        set_tokens = tuple(
+            token for token in re.split(r"[;,\t ]+", placement["set_names"])
+            if token
+        )
+        lexical_marker = placement["name"].casefold().startswith(
+            ("mob", "monster")
+        ) or any(
+            token.casefold().startswith(("mob", "monster"))
+            for token in set_tokens
+        )
+        if lexical_marker:
+            lexical_marker_count += 1
+        extra_triple_count = int(placement["extra_triple_count"], 10)
+        if extra_triple_count > 0:
+            extra_triple_row_count += 1
+        extra_triple_total += extra_triple_count
+        if "UNRESOLVED" in placement["template_ids"].upper():
+            unresolved_template_row_count += 1
+        placement_class = (
+            "LEXICAL_MOB_OR_MONSTER_NAME_OR_SET_NOT_CLASS_PROOF"
+            if lexical_marker else "NONLEXICAL_NAME_AND_SET"
+        )
+        summary = scene_summary_counts[scene]
+        summary["placements"] += 1
+        summary["lexical_markers" if lexical_marker else "nonlexical"] += 1
+        summary["extra_triple_records"] += extra_triple_count
+
+        placement_locator_key = stable_key(
+            "PF_AUTHORED_PLACEMENT_SUBJECT_V1",
+            evidence_path(placement_path),
+            placement["index"],
+        )
+        presentation_id = "MP-PLC-%04d" % authored_index
+        row = blank_row()
+        row.update(
+            {
+                "presentation_id": presentation_id,
+                "row_kind": "AUTHORED_PLACEMENT_GROUP",
+                "field_key": (
+                    "MONSTER_PRESENTATION@AUTHORED_PLACEMENT_%s#N"
+                    % placement_locator_key
+                ),
+                "lexical_class": placement_class,
+                "scene": scene,
+                "scene_index_ordinal": str(scene_ordinal),
+                "placement_index": placement["index"],
+                "placement_name": placement["name"],
+                "placement_name_class": placement_class,
+                "placement_x": placement["x"],
+                "placement_y": placement["y"],
+                "placement_z": placement["z"],
+                "placement_set_names": placement["set_names"] or "NONE",
+                "placement_template_ids": placement["template_ids"] or "NONE",
+                "authored_group_count": "1",
+                "extra_triple_count": placement["extra_triple_count"],
+                "scene_name_row_ids": "NOT_APPLIED_MAP_LIST_CONTEXT",
+                "cline_type": "NOT_APPLIED_MAP_LIST_CONTEXT",
+                "cline_projection": "NOT_APPLIED_IDENTITY_UNSAFE",
+                "cline_candidate_mobs_ids": "NOT_APPLIED_IDENTITY_UNSAFE",
+                "cline_count_fields": "NOT_APPLIED_SPAWN_COUNT_UNPROVED",
+                "candidate_outfit_vectors": "NOT_APPLIED_IDENTITY_UNSAFE",
+                "composition_join_status": "PLACEMENT_GROUP_ONLY_NO_IDENTITY_JOIN",
+                "claim": (
+                    "The original .npc source and pinned decoder output contain "
+                    "this exact authored placement-group record; it is counted "
+                    "once and its literal name/set/template tokens and coordinates "
+                    "are preserved without resolving an actor identity."
+                ),
+                "semantic_status": "PROVEN_EXACT_AUTHORED_PLACEMENT_GROUP",
+                "evidence_mode": "DATA_COMPOSITION_EVIDENCE",
+                "evidence_reuse": "UNIQUE_EVIDENCE",
+                "canonical_presentation_id": presentation_id,
+                "data_table_path": evidence_path(placement_path),
+                "data_table_sha256": str(item["placement_sha256"]),
+                "data_row_file_offset_start": fmt_off(placement_span[0]),
+                "data_row_file_offset_end": fmt_off(placement_span[1]),
+                "data_row_sha256": placement_span[2],
+                "evidence_file": evidence_path(source_path),
+                "evidence_file_sha256": str(item["source_sha256"]),
+                "evidence_locator": (
+                    "original_npc=%s|derived_placement=%s|scene=%s|index=%s"
+                    % (
+                        source_path.name, placement_path.name,
+                        scene, placement["index"],
+                    )
+                ),
+                "support_spans": (
+                    "scene_meta_sha256=%s;scene_index_row_sha256=%s;"
+                    "placement_manifest_sha256=%s;"
+                    "source_manifest_sha256=%s"
+                    % (
+                        EXPECTED_DATA_HASHES[SCENE_META_PATH], index_span[2],
+                        placement_manifest_sha256,
+                        EXPECTED_SCENE_SOURCE_MANIFEST_SHA256,
+                    )
+                ),
+                "source": "DATA",
+                "nonclaim": (
+                    "One authored placement group is not one actor, spawn, model, "
+                    "monster, or live density unit. Lexical Mob/Monster markers do "
+                    "not prove class or identity. Extra triples are not counted as "
+                    "actors. CLINE and MOBS are deliberately not generalized into "
+                    "a world-actor identity join."
+                ),
+                "blocker": (
+                    "original live spawn/visibility/cardinality and actor identity "
+                    "are not established by the authored placement record"
+                ),
+                "required_next_evidence": (
+                    "source-separated original runtime observation joined to this "
+                    "exact scene and placement if live density or identity is needed"
+                ),
+                "image_sha256": "N/A",
+            }
+        )
+        finish(row)
+        authored_row_by_scene_index[(scene.casefold(), placement["index"])] = row
+
+    if (
+        lexical_marker_count
+        != EXPECTED_SCENE_PLACEMENT_LEXICAL_MOB_MONSTER_ROWS
+        or extra_triple_row_count
+        != EXPECTED_SCENE_PLACEMENT_EXTRA_TRIPLE_ROWS
+        or extra_triple_total
+        != EXPECTED_SCENE_PLACEMENT_EXTRA_TRIPLE_TOTAL
+        or unresolved_template_row_count
+        != EXPECTED_SCENE_PLACEMENT_UNRESOLVED_TEMPLATE_ROWS
+        or len(authored_row_by_scene_index)
+        != EXPECTED_SCENE_PLACEMENT_TOTAL_ROWS
+        or sum(counter["placements"] for counter in scene_summary_counts.values())
+        != EXPECTED_SCENE_PLACEMENT_TOTAL_ROWS
+        or len(scene_summary_counts) != EXPECTED_SCENE_PLACEMENT_FILE_COUNT
+        or sum(
+            bool(counter["placements"])
+            for counter in scene_summary_counts.values()
+        ) != EXPECTED_SCENE_NONEMPTY_PLACEMENT_FILE_COUNT
+    ):
+        raise SystemExit("monster_presentation_authored_placement_census_mismatch")
+
+    projection_guards = (
+        (64, "38", "231"),
+        (67, "39", "742"),
+        (68, "40", "743"),
+        (91, "41", "914"),
+    )
+    for guard_ordinal, (placement_index, template_id, projected_id) in enumerate(
+        projection_guards, 1
+    ):
+        authored = authored_row_by_scene_index[("bg0002", str(placement_index))]
+        source_item = next(
+            item for item in authored_placements
+            if str(item["scene"]).casefold() == "bg0002"
+            and isinstance(item["placement"], dict)
+            and item["placement"]["index"] == str(placement_index)
+        )
+        placement = source_item["placement"]
+        placement_span = source_item["placement_span"]
+        if not isinstance(placement, dict) or not isinstance(placement_span, tuple):
+            raise SystemExit("monster_presentation_projection_guard_type_mismatch")
+        scene_candidates = scene_name_by_model["bg0002"]
+        if (
+            len(scene_candidates) != 1
+            or scene_candidates[0][0]["n_CLINE_TYPE"] != "2"
+            or placement["template_ids"] != template_id
+        ):
+            raise SystemExit(
+                "monster_presentation_projection_scene_mismatch_%s" % template_id
+            )
+        cline_candidates = cline_by_pair[("2", template_id)]
+        if (
+            len(cline_candidates) != 1
+            or cline_candidates[0][0]["n_LEADER_BK1"] != projected_id
+        ):
+            raise SystemExit(
+                "monster_presentation_projection_cline_mismatch_%s" % template_id
+            )
+        direct_mobs, direct_span = mobs_with_span_by_id[template_id]
+        projected_mobs, projected_span = mobs_with_span_by_id[projected_id]
+        cline_row, cline_span = cline_candidates[0]
+        outfit_vectors = json.dumps(
+            {
+                "direct_numeric_token_candidate": {
+                    "mobs_id": template_id,
+                    "s_OUTFIT": direct_mobs["s_OUTFIT"].split(";"),
+                },
+                "cline_map_list_projection": {
+                    "mobs_id": projected_id,
+                    "s_OUTFIT": projected_mobs["s_OUTFIT"].split(";"),
+                },
+            },
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        presentation_id = "MP-PROJ-%03d" % guard_ordinal
+        placement_path = source_item["placement_path"]
+        source_path = source_item["source_path"]
+        if not isinstance(placement_path, Path) or not isinstance(source_path, Path):
+            raise SystemExit("monster_presentation_projection_path_type_mismatch")
+        row = blank_row()
+        row.update(
+            {
+                "presentation_id": presentation_id,
+                "row_kind": "CLINE_MAP_LIST_PROJECTION_GUARD",
+                "field_key": (
+                    "MONSTER_PRESENTATION@BG0002_MAP_LIST_PROJECTION_%s#N"
+                    % template_id
+                ),
+                "lexical_class": "DATA_NAMESPACE_AMBIGUITY_NOT_ACTOR_IDENTITY",
+                "mobs_id": projected_id,
+                "mobs_name": projected_mobs["s_NAME"],
+                "outfit_token": projected_mobs["s_OUTFIT"],
+                "scene": "Bg0002",
+                "scene_index_ordinal": authored["scene_index_ordinal"],
+                "placement_index": str(placement_index),
+                "placement_name": placement["name"],
+                "placement_name_class": authored["placement_name_class"],
+                "placement_x": placement["x"],
+                "placement_y": placement["y"],
+                "placement_z": placement["z"],
+                "placement_set_names": placement["set_names"],
+                "placement_template_ids": template_id,
+                "authored_group_count": "1_REFERENCE_ONLY",
+                "extra_triple_count": placement["extra_triple_count"],
+                "scene_name_row_ids": scene_candidates[0][0]["n_ID"],
+                "cline_type": "2",
+                "cline_projection": (
+                    "(2,%s)->CLINE.n_ID=%s.n_LEADER_BK1=%s"
+                    % (template_id, cline_row["n_ID"], projected_id)
+                ),
+                "cline_candidate_mobs_ids": projected_id,
+                "cline_count_fields": "n_LEADER_BK1:IMPLICIT_NO_COUNT_FIELD",
+                "candidate_outfit_vectors": outfit_vectors,
+                "composition_join_status": "NOT_IDENTITY_SAFE_MAP_LIST_PROJECTION_ONLY",
+                "claim": (
+                    "DATA admits two distinct namespace interpretations for this "
+                    "Bg0002 template token: the same-number MOBS row and the "
+                    "SCENE_NAME/CLINE map-list projection select different MOBS "
+                    "rows and different full s_OUTFIT vectors; neither is promoted "
+                    "to placement actor identity."
+                ),
+                "semantic_status": "PROVEN_EXACT_DATA_AMBIGUITY_GUARD",
+                "evidence_mode": "DATA_COMPOSITION_EVIDENCE",
+                "evidence_reuse": "UNIQUE_EVIDENCE",
+                "canonical_presentation_id": presentation_id,
+                "data_table_path": evidence_path(placement_path),
+                "data_table_sha256": str(source_item["placement_sha256"]),
+                "data_row_file_offset_start": fmt_off(placement_span[0]),
+                "data_row_file_offset_end": fmt_off(placement_span[1]),
+                "data_row_sha256": placement_span[2],
+                "evidence_file": evidence_path(source_path),
+                "evidence_file_sha256": str(source_item["source_sha256"]),
+                "evidence_locator": (
+                    "Bg0002.placement=%d|SCENE_NAME.n_CLINE_TYPE=2|"
+                    "CLINE.n_CREATURE_TYPE=%s|direct_MOBS=%s|projected_MOBS=%s"
+                    % (placement_index, template_id, template_id, projected_id)
+                ),
+                "support_spans": (
+                    "scene_name_row_sha256=%s;cline_row_sha256=%s;"
+                    "direct_mobs_row_sha256=%s;projected_mobs_row_sha256=%s;"
+                    "source_manifest_sha256=%s"
+                    % (
+                        scene_candidates[0][1][2], cline_span[2],
+                        direct_span[2], projected_span[2],
+                        EXPECTED_SCENE_SOURCE_MANIFEST_SHA256,
+                    )
+                ),
+                "source": "DATA",
+                "nonclaim": (
+                    "This is a map-list/catalog projection guard, not a world actor "
+                    "identity, spawn instruction, visibility result, or server policy."
+                ),
+                "blocker": (
+                    "the placement token namespace cannot be generalized into a "
+                    "MOBS identity through CLINE"
+                ),
+                "required_next_evidence": (
+                    "source-separated placement-specific original runtime identity "
+                    "evidence before selecting either candidate"
+                ),
+                "image_sha256": "N/A",
+            }
+        )
+        finish(row)
 
     def staged_canonical(
         artifact_path: Path,
@@ -23941,6 +24817,175 @@ def build_monster_presentation(
         )
         finish(row)
 
+    def direct_call_sites(target: int) -> tuple[int, ...]:
+        sites: list[int] = []
+        for section in image.sections:
+            if not (section.characteristics & 0x20000000):
+                continue
+            raw = image.data[
+                section.raw_ptr:section.raw_ptr + section.raw_size
+            ]
+            for index in range(0, max(0, len(raw) - 4)):
+                if raw[index] != 0xE8:
+                    continue
+                site = section.va + index
+                destination = site + 5 + struct.unpack_from(
+                    "<i", raw, index + 1
+                )[0]
+                if destination == target:
+                    sites.append(site)
+        return tuple(sites)
+
+    singleton_calls = direct_call_sites(0x0040B560)
+    primary_lookup_calls = direct_call_sites(0x004A1C70)
+    alternate_lookup_calls = direct_call_sites(0x004A1E90)
+
+    def immediate_manager_pairs(
+        first_target: int, second_target: int,
+    ) -> tuple[int, ...]:
+        pairs: list[int] = []
+        for site in direct_call_sites(first_target):
+            offset = image.va_to_off(site)
+            if offset is None or offset + 12 > len(image.data):
+                continue
+            if image.data[offset + 5:offset + 7] != b"\x8b\xc8":
+                continue
+            if image.data[offset + 7] != 0xE8:
+                continue
+            second_site = site + 7
+            destination = second_site + 5 + struct.unpack_from(
+                "<i", image.data, offset + 8
+            )[0]
+            if destination == second_target:
+                pairs.append(site)
+        return tuple(pairs)
+
+    primary_pairs = immediate_manager_pairs(0x0040B560, 0x004A1C70)
+    alternate_pairs = immediate_manager_pairs(0x0040B560, 0x004A1E90)
+    if (
+        len(singleton_calls) != 13
+        or len(primary_lookup_calls) != 68
+        or len(alternate_lookup_calls) != 4
+        or primary_pairs
+        != (0x0045BF5E, 0x0045C1E0, 0x0045D262, 0x0051E77B, 0x00521B6B)
+        or alternate_pairs
+        != (0x00449BA6, 0x0044F8B2, 0x0045189B, 0x006E1A1A)
+    ):
+        raise SystemExit("monster_presentation_scale_manager_call_census_mismatch")
+
+    scale_census_spans = {
+        "mobs_manager_singleton_window": (
+            0x0040B560, 0x0040B5C8,
+            "7cad05792b34bdc435515b7b626b7d7f5d7c2987ea0c2b446d503be21b7127bf",
+        ),
+        "cnetnpc_mobs_initializer_window": (
+            0x0045BF40, 0x0045C15D,
+            "afb5662a3f1a81c98de8ed77d82262747b8563ce25be88d041c8dea89e52fb72",
+        ),
+        "primary_map_lookup_window": (
+            0x004A1C70, 0x004A1CF0,
+            "89dd1c4b48c03437318c192cdc2ca8737f4c2fa7441151a60cb8d7c70411e01e",
+        ),
+        "alternate_map_lookup_window": (
+            0x004A1E90, 0x004A1F10,
+            "f95e6c003ab0c087d97da7b9cc63f55106a29dad227a4ac7dd9b7e7bd7624f34",
+        ),
+        "false_join_site_449b70": (
+            0x00449B70, 0x00449BC0,
+            "0285ef52da703f69f32ad7c8ccbe7438ee0455c47f2c4a97d85e0a3835233fdd",
+        ),
+        "false_join_site_44f880": (
+            0x0044F880, 0x0044F900,
+            "72fdbf2f6a04ead23fcbac970b2a7bb7c0703ff33e0f7266da0c427e7e9f7f1d",
+        ),
+        "false_join_site_451870": (
+            0x00451870, 0x004518D0,
+            "a872da853752a4b4cd3325679cff0ca6ab0845087965319477b78f652f1bcd3f",
+        ),
+    }
+    for start, end, expected_hash in scale_census_spans.values():
+        if image.span_hash(start, end) != expected_hash:
+            raise SystemExit("monster_presentation_scale_census_span_mismatch")
+
+    def scale_span_text(name: str) -> str:
+        start, end, span_hash = scale_census_spans[name]
+        return "%s=%s..%s@file_off=%s..%s@sha256=%s" % (
+            name, fmt_va(start), fmt_va(end),
+            fmt_off(image.va_to_off(start)), fmt_off(image.va_to_off(end)),
+            span_hash,
+        )
+
+    primary_start, primary_end, primary_hash = scale_census_spans[
+        "cnetnpc_mobs_initializer_window"
+    ]
+    row = blank_row()
+    row.update(
+        {
+            "presentation_id": "MP-IMG-010",
+            "row_kind": "SCALE_MANAGER_IDENTITY_CENSUS",
+            "field_key": "MONSTER_PRESENTATION@MOBS_SCALE_TYPED_EFFECT_CONSUMER#N",
+            "lexical_class": "N/A",
+            "claim": (
+                "The bounded CNetNPC initializer window obtains the manager at "
+                "0x0040B560, calls the primary lookup 0x004A1C70, stores the "
+                "returned MOBS pointer at CNetNPC +0x35C, and reads several MOBS "
+                "fields but not +0x0C in this window. The image contains 13 direct "
+                "singleton calls, 68 direct primary-lookup calls, five exact "
+                "singleton-to-primary immediate pairs, four singleton-to-alternate "
+                "pairs, and three pinned CNetNPC-related +0x7C-to-0x004A1E90 false-"
+                "join windows. Returned secondary-record +0x0C at 0x0044F8D1 is "
+                "therefore not MOBS f_SCALE."
+            ),
+            "semantic_status": "BOUNDED_NEGATIVE",
+            "evidence_mode": "NEW_IMAGE_EVIDENCE",
+            "evidence_reuse": "UNIQUE_EVIDENCE",
+            "canonical_presentation_id": "MP-IMG-010",
+            "evidence_file": evidence_path(IMAGE_PATH),
+            "evidence_file_sha256": image.sha256,
+            "evidence_locator": (
+                "manager_identity_sensitive_scale_census|singleton_calls=13|"
+                "primary_lookup_calls=68|primary_pairs=5|alternate_pairs=4|"
+                "pinned_false_join_windows=3"
+            ),
+            "evidence_span_start": fmt_va(primary_start),
+            "evidence_span_end": fmt_va(primary_end),
+            "evidence_span_start_file_offset": fmt_off(
+                image.va_to_off(primary_start)
+            ),
+            "evidence_span_end_file_offset": fmt_off(
+                image.va_to_off(primary_end)
+            ),
+            "evidence_span_sha256": primary_hash,
+            "support_spans": ";".join(
+                scale_span_text(name) for name in (
+                    "mobs_manager_singleton_window",
+                    "primary_map_lookup_window",
+                    "alternate_map_lookup_window",
+                    "false_join_site_449b70",
+                    "false_join_site_44f880",
+                    "false_join_site_451870",
+                )
+            ),
+            "source": "IMAGE",
+            "nonclaim": (
+                "This is a bounded evidence-window result, not complete function "
+                "coverage, a global absence claim, a unit/meaning for f_SCALE, or "
+                "proof that zero is a no-op. Singleton identity alone is not enough; "
+                "the primary MOBS pointer must be preserved through the read."
+            ),
+            "blocker": (
+                "no typed effect consumer preserving CNetNPC+0x35C or the exact "
+                "0x004A1C70 result through a +0x0C read is proved"
+            ),
+            "required_next_evidence": (
+                "a type-preserving +0x0C consumer with no intervening secondary "
+                "lookup, or a source-separated original runtime scale observation"
+            ),
+            "image_sha256": image.sha256,
+        }
+    )
+    finish(row)
+
     for token, asset in assets.items():
         path = asset["path"]
         _assert_no_reparse_components(
@@ -23954,15 +24999,32 @@ def build_monster_presentation(
             )
 
     rows.sort(key=lambda item: item["presentation_id"])
+    checkpoint1_by_id = {
+        row["presentation_id"]: row for row in checkpoint1_rows
+    }
+    preserved_rows = [
+        row for row in rows if row["presentation_id"] in checkpoint1_by_id
+    ]
+    if len(preserved_rows) != 2697:
+        raise SystemExit("monster_presentation_checkpoint1_row_preservation_count")
+    for current in preserved_rows:
+        prior = checkpoint1_by_id[current["presentation_id"]]
+        if any(current[column] != prior[column] for column in checkpoint1_columns):
+            raise SystemExit(
+                "monster_presentation_checkpoint1_row_changed_%s"
+                % current["presentation_id"]
+            )
     if (
-        len(rows) != 2697
+        len(rows) != 8950
         or Counter(row["source"] for row in rows)
-        != Counter({"DATA": 2688, "IMAGE": 9})
+        != Counter({"DATA": 8940, "IMAGE": 10})
         or Counter(row["row_kind"] for row in rows)
         != Counter(
             {
                 "LEXICAL_M_PREFIX_OUTFIT_REFERENCE": 2686,
                 "EXPLICIT_PIKE_NON_M_TARGET": 1,
+                "AUTHORED_PLACEMENT_GROUP": 6248,
+                "CLINE_MAP_LIST_PROJECTION_GUARD": 4,
                 "CANONICAL_AI_WANDER_REFERENCE": 1,
                 "CANONICAL_MOBS_RUNTIME_REFERENCE": 4,
                 "AVATAR_PART_NIF_PARSER": 1,
@@ -23970,16 +25032,20 @@ def build_monster_presentation(
                 "AVATAR_ACTIONLIST_ORCHESTRATOR": 1,
                 "SCENEFOG_ACTIVED_FALSE_LEAD": 1,
                 "MONSTER_PRESENTATION_RUNTIME_SELECTION_OPEN": 1,
+                "SCALE_MANAGER_IDENTITY_CENSUS": 1,
             }
         )
         or Counter(row["semantic_status"] for row in rows)
         != Counter(
             {
                 "PROVEN_EXACT_DATA_METADATA": 2687,
+                "PROVEN_EXACT_AUTHORED_PLACEMENT_GROUP": 6248,
+                "PROVEN_EXACT_DATA_AMBIGUITY_GUARD": 4,
                 "CANONICAL_REFERENCE": 5,
                 "PROVEN_EXACT": 3,
                 "FALSE_LEAD_REFUTED": 1,
                 "UNKNOWN": 1,
+                "BOUNDED_NEGATIVE": 1,
             }
         )
         or Counter(row["evidence_reuse"] for row in rows)
@@ -23987,13 +25053,19 @@ def build_monster_presentation(
             {
                 "CANONICAL_ASSET_EVIDENCE": 615,
                 "EXPLICIT_EVIDENCE_REUSE": 2076,
-                "UNIQUE_EVIDENCE": 6,
+                "UNIQUE_EVIDENCE": 6259,
             }
         )
-        or len({row["presentation_id"] for row in rows}) != 2697
-        or len({row["presentation_key"] for row in rows}) != 2697
-        or len({row["claim_sha256"] for row in rows}) != 2697
-        or len({row["evidence_key"] for row in rows}) != 2697
+        or len({row["presentation_id"] for row in rows}) != 8950
+        or len({row["subject_id"] for row in rows}) != 8950
+        or any(
+            not row["subject_id"]
+            or row["subject_id"] != monster_presentation_subject_id(row)
+            for row in rows
+        )
+        or len({row["presentation_key"] for row in rows}) != 8950
+        or len({row["claim_sha256"] for row in rows}) != 8950
+        or len({row["evidence_key"] for row in rows}) != 8950
         or any(
             row["source"] == "DATA"
             and (
@@ -24021,6 +25093,19 @@ def build_monster_presentation(
         ) != 1
     ):
         raise SystemExit("monster_presentation_census_or_layer_mismatch")
+    presentation_v2_lines = sorted(
+        "\t".join(
+            row[column] for column in (
+                "presentation_id", "field_key", "row_kind", "semantic_status",
+            )
+        )
+        for row in rows
+    )
+    presentation_v3_subject_lines = sorted(row["subject_id"] for row in rows)
+    presentation_v3_status_lines = sorted(
+        "%s\t%s" % (row["subject_id"], row["semantic_status"])
+        for row in rows
+    )
     stats: dict[str, object] = {
         "weighted_active": weighted_active,
         "distinct_active": distinct_active,
@@ -24033,6 +25118,26 @@ def build_monster_presentation(
         "height_min": min(height_values),
         "height_max": max(height_values),
         "lexical_M_token_keyset_sha256": lexical_m_token_keyset_sha256,
+        "scene_summary_counts": scene_summary_counts,
+        "scene_placement_manifest_sha256": placement_manifest_sha256,
+        "scene_source_manifest_sha256": EXPECTED_SCENE_SOURCE_MANIFEST_SHA256,
+        "scene_lexical_marker_count": lexical_marker_count,
+        "scene_extra_triple_row_count": extra_triple_row_count,
+        "scene_extra_triple_total": extra_triple_total,
+        "scene_unresolved_template_row_count": unresolved_template_row_count,
+        "scene_nonempty_count": sum(
+            bool(counter["placements"])
+            for counter in scene_summary_counts.values()
+        ),
+        "presentation_v2_fingerprint": hashlib.sha256(
+            "\n".join(presentation_v2_lines).encode("utf-8")
+        ).hexdigest(),
+        "presentation_v3_subject_fingerprint": hashlib.sha256(
+            "\n".join(presentation_v3_subject_lines).encode("ascii")
+        ).hexdigest(),
+        "presentation_v3_status_fingerprint": hashlib.sha256(
+            "\n".join(presentation_v3_status_lines).encode("ascii")
+        ).hexdigest(),
     }
     return rows, stats
 
@@ -24043,9 +25148,9 @@ def write_monster_presentation_md(
     stats: dict[str, object],
 ) -> None:
     if (
-        len(rows) != 2697
+        len(rows) != 8950
         or Counter(row["source"] for row in rows)
-        != Counter({"DATA": 2688, "IMAGE": 9})
+        != Counter({"DATA": 8940, "IMAGE": 10})
     ):
         raise SystemExit("monster_presentation_md_partition_mismatch")
 
@@ -24070,7 +25175,13 @@ def write_monster_presentation_md(
     sentry_die = target("1365", "M011_001_000_SP3")
     weighted = stats["weighted_active"]
     distinct = stats["distinct_active"]
-    if not isinstance(weighted, Counter) or not isinstance(distinct, Counter):
+    scene_summary = stats["scene_summary_counts"]
+    if (
+        not isinstance(weighted, Counter)
+        or not isinstance(distinct, Counter)
+        or not isinstance(scene_summary, dict)
+        or len(scene_summary) != EXPECTED_SCENE_PLACEMENT_FILE_COUNT
+    ):
         raise SystemExit("monster_presentation_md_stats_type_mismatch")
     ordered_classes = (
         "READY", "SENTRY", "ATTACK", "WALK", "TALK", "HAPPY",
@@ -24079,11 +25190,14 @@ def write_monster_presentation_md(
     lines = [
         "# PF monster presentation - source-separated P0-7 checkpoint",
         "",
-        "[MEASURED][LOCAL TOOLING] P0-7 status: **PARTIAL / CHECKPOINT_1**. This is the first P0-7 checkpoint. It publishes 2,697 deterministic rows (2,688 DATA; 9 IMAGE) and added three exact runtime rows: n_BOUNDARY +0x04, n_HEIGHT +0x08, and s_OUTFIT +0x108. At least one further P0-7 checkpoint is required before the two-consecutive-no-status-change stop rule can be evaluated.",
+        "[MEASURED][LOCAL TOOLING] P0-7 status: **PARTIAL / CHECKPOINT_2**. It publishes 8,950 deterministic, source-separated rows (8,940 DATA; 10 IMAGE). CHECKPOINT_2 adds 6,248 authored placement-group records, four CLINE map-list projection ambiguity guards, and one manager-identity-sensitive f_SCALE census row. All 2,697 CHECKPOINT_1 rows retain every prior column value and key.",
         "",
-        "[MEASURED][LOCAL TOOLING] Method/control: derive descriptor names only from the already guarded MOBS s_OUTFIT corpus; acquire read/share-read handles for all 615 lexical M descriptors plus Pike before parsing; verify packed and decoded hashes; decode XML only in memory; restrict IMAGE claims to exact pinned spans. No client, server, dump, capture, or runtime execution was used.",
+        "[MEASURED][LOCAL TOOLING] Method/control: guard the pinned GameClient image by size/SHA-256/mtime before and after; revalidate all 289 original `.npc` files against the pinned scene index and source manifest; validate all 289 derived placement TSVs against their pinned manifest; derive descriptor names only from the guarded MOBS s_OUTFIT corpus; decode XML only in memory; and restrict IMAGE claims to exact pinned evidence windows. No client, server, dump, capture, or runtime execution was used.",
         "",
         "- [MEASURED][IMAGE] Image SHA-256: `%s`." % image.sha256,
+        "- [MEASURED][DATA] Original scene source manifest: `%s`; derived placement manifest: `%s`." % (stats["scene_source_manifest_sha256"], stats["scene_placement_manifest_sha256"]),
+        "- [MEASURED][DATA] Authored placement groups: 6,248 across 268 nonempty scene files; 21 additional guarded scene files have zero base placement rows (289 files total). Exactly 6,230 groups have a lexical Mob/Monster marker in the literal name or set-name tokens; 18 do not. These are authored groups, not actors, spawns, models, monsters, live density, or a current server roster.",
+        "- [MEASURED][DATA] 238 base placement records carry 7,194 preserved extra triples, and two placement rows retain the literal decoder result `UNRESOLVED` in `placement_template_ids`. Extra triples are not actors/spawns or additional authored groups; `UNRESOLVED` is only decoder token-resolution status and is not an unknown actor class or identity.",
         "- [MEASURED][DATA] Lexical M### outfit references: 2,686 across 2,186 MOBS rows; 615 distinct descriptors. A lexical `M###` prefix is a corpus-selection rule, not proof of a concrete monster class.",
         "- [MEASURED][DATA] Explicit non-M target: Pike MOBS ID 5 (`P_MALE_002_000_PAK`).",
         "- [MEASURED][LOCAL TOOLING] Guarded descriptors: 616 total. `lexical_M_token_keyset_sha256=%s` covers only the 615 lexical M descriptors; Pike is the additional guarded descriptor."
@@ -24102,6 +25216,28 @@ def write_monster_presentation_md(
             stats["height_count"], stats["height_distinct"],
             stats["height_min"], stats["height_max"],
         ),
+        "",
+        "## Authored placement-group census",
+        "",
+        "[MEASURED][DATA] Each decoded base placement row is counted once. `extra_triple_count` is preserved but is never added to actor/spawn cardinality. SCENE_NAME and CLINE are not generalized into world-actor identity. The four Bg0002 guards prove why: template tokens `38/39/40/41` project through the client map-list crosswalk to distinct MOBS candidates `231/742/743/914`; both candidate s_OUTFIT vectors are preserved, but neither candidate is promoted to placement identity.",
+        "",
+        "| Scene | Authored groups | Lexical markers | Nonlexical | Extra-triple records (not actors) |",
+        "|---|---:|---:|---:|---:|",
+    ]
+    for scene in sorted(scene_summary, key=str.casefold):
+        summary = scene_summary[scene]
+        if not isinstance(summary, Counter):
+            raise SystemExit("monster_presentation_md_scene_summary_type_mismatch")
+        lines.append(
+            "| %s | %d | %d | %d | %d |"
+            % (
+                scene.replace("|", "\\|"), summary["placements"],
+                summary["lexical_markers"], summary["nonlexical"],
+                summary["extra_triple_records"],
+            )
+        )
+    lines.extend(
+        [
         "",
         "## Exact targets",
         "",
@@ -24136,18 +25272,26 @@ def write_monster_presentation_md(
         "## IMAGE boundary and open work",
         "",
         "- [MEASURED][IMAGE] Exact named loads establish n_BOUNDARY +0x04, n_HEIGHT +0x08, and s_OUTFIT tokenization into +0x108; separate pinned spans establish the Avatar NifFile/KfFile/ActionList parser surfaces.",
-        "- [MEASURED][IMAGE] The f_SCALE key, 0.0 constructor default, and load into runtime +0x0C are exact. No typed effect consumer is currently proved within the recorded bounded review. Separate typed-census/alias-review digests are not incorporated or rederived by this generator, so neither census completeness nor global absence is claimed; 0.0 is not classified as a no-op.",
+        "- [MEASURED][IMAGE] The f_SCALE key, 0.0 constructor default, and load into MOBS runtime +0x0C remain exact role-only evidence. CHECKPOINT_2 pins the CNetNPC initializer window: `0x0045BF5E` obtains the singleton, `0x0045BF65` calls primary lookup `0x004A1C70`, and `0x0045BF6A` stores the returned MOBS pointer at CNetNPC +0x35C. That bounded window reads several MOBS fields but not +0x0C.",
+        "- [MEASURED][IMAGE] The direct-call census finds 13 singleton calls, 68 primary-lookup calls, five immediate singleton-to-primary pairs, and four singleton-to-alternate pairs. Three pinned CNetNPC-related paths use MOBS +0x7C as a key to the different lookup `0x004A1E90`; returned-record +0x0C at `0x0044F8D1` is therefore a secondary-record field, not MOBS f_SCALE. This is a bounded false-join refutation, not whole-function coverage or global absence.",
         "- [MEASURED][IMAGE] The proposed `Actived` candidate at `0x009F939B -> 0x009F9040(1)` is refuted for Avatar use: it is the SceneFogCmp property family.",
         "- [MEASURED][IMAGE] The exact Avatar action parser reads `KfFile` and `GetAllowActionPlus`; it does not read `Action/@Actived` on the bounded path.",
-        "- [MEASURED][IMAGE] After two bounded alias rounds, no type-preserving +0x108 token-vector to Avatar filename/parser/active-selection bridge is proved. `MONSTER_PRESENTATION@ACTIVE_SELECTION#N` remains one explicit active unresolved item; this bounded result does not satisfy the master two-checkpoint stop rule.",
+        "- [MEASURED][IMAGE] No type-preserving +0x108 full-token-vector to Avatar registry/active-outfit/action/idle selection bridge is proved. `MONSTER_PRESENTATION@ACTIVE_SELECTION#N` remains the one explicit active unresolved item. Full candidate vectors are preserved in DATA; first-token selection is not claimed as original policy.",
         "- [MEASURED][IMAGE] Exact ASCII/UTF-16 `IDLE` and `s_WANDER` literal checks find no direct named IMAGE action/task consumer. This does not exclude unnamed, indexed, virtual, offset-based, or runtime-only consumers.",
+        "",
+        "## Comparator and status delta",
+        "",
+        "- [MEASURED][LOCAL TOOLING] CHECKPOINT_1 V2 presentation fingerprint: `70cab27f6bcf9c8c1a5895e0f4f751fcecd6026518fd2f0cfba116dae6898bef`; CHECKPOINT_2 V2: `%s`. V2 includes row/status fields, so its change records expanded evidence/coverage and cannot by itself be read as a semantic closure." % stats["presentation_v2_fingerprint"],
+        "- [MEASURED][LOCAL TOOLING] V3 introduces deterministic status/evidence-independent `subject_id`. Subject-set fingerprint: `%s`; subject+status fingerprint: `%s`. Subject IDs are nonempty and unique at the published comparison grain." % (stats["presentation_v3_subject_fingerprint"], stats["presentation_v3_status_fingerprint"]),
+        "- [MEASURED][LOCAL TOOLING] Semantic status closures in this checkpoint: **0**. f_SCALE remains role-only/open for typed effect semantics and active outfit/action/idle selection remains UNKNOWN. The evidence/coverage fingerprint changed, so `no_change_streak=0`; CHECKPOINT_2 establishes the V3 baseline rather than claiming a two-checkpoint stop.",
         "",
         "## Nonclaims",
         "",
-        "[PROPOSED SAFETY RULE] Do not infer original-server selection from token order, call the first outfit a default, assign collision/physics semantics to n_BOUNDARY/n_HEIGHT, treat f_SCALE zero as a no-op, or use Action/@Actived as server policy without a new type-preserving proof.",
+        "[PROPOSED SAFETY RULE] Do not infer original-server selection from token order, call the first outfit a default, multiply authored groups or CLINE count-like fields into spawn density, treat CLINE projection as actor identity, assign collision/physics semantics to n_BOUNDARY/n_HEIGHT, treat f_SCALE zero as a no-op, rename DIE as sleep, or use SceneFog Action/@Actived as Avatar/server policy without a new type-preserving proof.",
         "",
-        "[MEASURED][LOCAL TOOLING] The +1 unresolved row is coverage expansion, not regression: the earlier ledger did not represent this presentation-selection boundary. This remains CHECKPOINT_1; at least one further P0-7 checkpoint is required before the two-consecutive-no-status-change stop rule can be evaluated.",
-    ]
+        "[MEASURED][LOCAL TOOLING] CHECKPOINT_2 is an evidence/coverage delta, not an UNKNOWN/status closure. A future checkpoint must compare the same V3 subject/status scheme before any no-change stopping rule can be evaluated.",
+        ]
+    )
     _write_output_text(MONSTER_PRESENTATION_MD_PATH, "\n".join(lines) + "\n")
 
 
@@ -28399,6 +29543,7 @@ def main() -> int:
     )
     write_tsv(PROBE_REQUESTS_PATH, probe_request_columns, probe_request_rows)
 
+    after_stat = IMAGE_PATH.stat()
     after = hashlib.sha256(IMAGE_PATH.read_bytes()).hexdigest()
     print("attr_class_rows=%d" % len(class_rows))
     print("attr_remaining_codec_rows=%d" % len(remaining_codec_rows))
@@ -28482,7 +29627,11 @@ def main() -> int:
     print("a1_attr_slot_delta_rows=0_deduplicated_to_PF_A1_SERIALIZER_SLOT34_DELTA")
     print("a3_attr_tag_delta_rows=0_deduplicated_to_PF_A3_SERIALIZER_SLOT34_DELTA")
     print("image_sha256_after=%s" % after)
-    if after != image.sha256:
+    if (
+        after != image.sha256
+        or after_stat.st_size != EXPECTED_IMAGE_SIZE
+        or after_stat.st_mtime_ns != EXPECTED_IMAGE_MTIME_NS
+    ):
         raise SystemExit("image_changed_during_run")
     _verify_server_source_hashes()
     generation_id = _publish_generation(image.sha256)
@@ -28518,8 +29667,13 @@ def main() -> int:
         or published_manifest.get("artifact_count") != len(OUTPUT_ARTIFACT_PATHS)
     ):
         raise SystemExit("attr_postpublish_manifest_validation_failed")
+    final_image_stat = IMAGE_PATH.stat()
     final_image_sha256 = hashlib.sha256(IMAGE_PATH.read_bytes()).hexdigest()
-    if final_image_sha256 != image.sha256:
+    if (
+        final_image_sha256 != image.sha256
+        or final_image_stat.st_size != EXPECTED_IMAGE_SIZE
+        or final_image_stat.st_mtime_ns != EXPECTED_IMAGE_MTIME_NS
+    ):
         raise SystemExit("image_changed_after_publish")
     print("attr_checkpoint_reader=PASS")
     print("image_sha256_postpublish=%s" % final_image_sha256)

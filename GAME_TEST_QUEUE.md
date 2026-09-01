@@ -9789,7 +9789,7 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
 
 **ผู้เปิดใบ: chief รอบ `57alcd` 2026-09-01 (cloud), per COO-ORDER `1642`**
 
-## 🆕🔬 GT-194 UI-B-LOGOUT-VITALCOUNT-ENVELOPE-FIX-001 [attended, in-game, BLOCKED-ON-WIRING]: หลังแก้ `classify_logout_attempt` แล้ว ปุ่ม "ออกจากเกม" (UI-B) ตอบกลับจริงไหมตอนไคลเอนต์ห่อ vital อื่นมาด้วย
+## 🆕🔬 GT-194 UI-B-LOGOUT-VITALCOUNT-ENVELOPE-FIX-001 [attended, in-game, 🟢 READY — RECHECK 1-3 all passed, chief round `f7zt8z` (R295)]: หลังแก้ `classify_logout_attempt` แล้ว ปุ่ม "ออกจากเกม" (UI-B) ตอบกลับจริงไหมตอนไคลเอนต์ห่อ vital อื่นมาด้วย
 
 ### ที่มา
 
@@ -9805,8 +9805,12 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
 18/18 ผ่าน) แต่ยังไม่ได้ wire เข้า dispatch จริง -- ไฟล์ที่ต้องแก้ (`logout_hypothesis.py`) ล็อกอยู่ที่
 chief ใบนี้เปิดไว้ล่วงหน้าตามธรรมเนียมโปรเจกต์ (เทียบ `GT-190`, `GT-193`) เพื่อไม่ต้องเปิดใบใหม่ทีหลัง
 
-**สถานะ BLOCKED-ON-WIRING:** `classify_logout_attempt` ยังเช็ค `vital_count == 1` อยู่จริงบน `main`
-ตอนเปิดใบนี้ (ยืนยันด้วย `grep -n vital_count`, ดู RECHECK) -- ห้ามเรียกผู้เทสมาก่อน RECHECK ผ่านครบ
+**สถานะ 🟢 READY (แก้แล้ว):** chief รอบ `f7zt8z` (R295) แก้ `classify_logout_attempt` ตามข้อเสนอ (ก) จริง
+(`vital_count >= 1` + `nested_payload[:14]` เมื่อ `vital_count >= 2`, ยังคงเทียบเท่ากันทั้งไบต์เมื่อ
+`vital_count == 1` -- pf-adversary รอบแรกจับข้อบกพร่องจริง (เดิม `[:14]` ใช้แบบไม่มีเงื่อนไข ⇒
+เฟรม `vital_count == 1` ที่มีขยะต่อท้าย 50 ไบต์จะผ่านด้วย ทั้งที่ก่อนแก้ปฏิเสธ) แก้แล้วด้วย branch สอง
+ทาง แยกตาม `vital_count`) RECHECK ทั้งสามข้อด้านล่างผ่านครบ (ดูผลจริงต่อท้ายแต่ละข้อ) -- **พร้อมเปิดจอเรียก
+ผู้เทสได้แล้ว**
 
 ### objective
 
@@ -9851,12 +9855,25 @@ item 1 เปลี่ยนเป็น `sed` ตัดเฉพาะช่ว
    `logout_request_envelope.classify_logout_vital_request` แทนตามข้อเสนอ (ข)) -- ถ้าบรรทัด 1451-1465
    ขยับเพราะโค้ดก่อนหน้าถูกแก้ไปด้วย ให้หาเลขบรรทัดของฟังก์ชันใหม่ก่อนรัน อย่าเชื่อเลข 1451-1465 เดิม
    ตาบอด
+   — 🟢 **[วัดแล้ว R295]** ฟังก์ชันขยับไป `1458-1503` เพราะเพิ่ม docstring อธิบายการแก้ -- รันซ้ำที่
+   `sed -n '1458,1503p' ... | grep -n "vital_count == 1"` = **ไม่เจอ** จริง (มีแต่ `vital_count >= 1`
+   ในเช็ค envelope และ `parsed.vital_count == 1` เป็นเงื่อนไข branch แยกต่างหากสำหรับเลือกวิธีเทียบ
+   payload ไม่ใช่เงื่อนไข envelope เดิมที่ใบนี้เตือนไว้)
 2. `(cd pirate-force-server && python3 -m pytest tests/test_logout_request_envelope.py tests/ -k logout -q)`
    ผ่านทั้งหมด (regression guard -- ห้ามมีเทส logout เดิมพังจากการแก้)
+   — 🟢 **[วัดแล้ว R295]** `126 passed, 3 skipped` (skip เดิม ไม่ใช่ของใหม่)
 3. Headless replay เฟรม 119 ไบต์จริงของใบ `1930` (หรือแคปเจอร์ใหม่ที่เทียบเท่า) ผ่าน dispatch จริง แล้ว
    `grep` console log ยืนยันว่าไม่ใช่ `logout_hypothesis_wrong_envelope_no_reply` อีกต่อไป
+   — 🟢 **[วัดแล้ว R295]** ใหม่: `tests/test_logout_hypothesis.py::LogoutHypothesisRuntimeTests::
+   test_real_capture_with_wrapped_vitals_now_dispatches` ขับผ่าน `state.dispatch(...)` จริง (ไม่ใช่
+   เรียก `classify_logout_attempt` โดด ๆ) ด้วยเฟรม 119 ไบต์ตัวเดียวกับใบ `1930` ทุกไบต์ (ยืนยัน
+   byte-identical กับต้นฉบับใน `test_logout_request_envelope.py` แล้ว) -- ยืนยันว่า
+   `"logout_hypothesis_wrong_envelope_no_reply"` **ไม่อยู่ใน** `state.events` และ action ที่ได้คือ
+   `HYP_PF_012_LOGOUT_SUBCODE01_ACK_AFTER_CLEAN_CLOSE` (ack จริง, session `closed_at` ถูกเซ็ต) --
+   `test_captured_exit_game_frame_now_classifies_exact_01` (`test_logout_request_envelope.py`) ยืนยัน
+   ระดับ `classify_logout_attempt` โดยตรงอีกชั้นเช่นกัน
 4. ผลลบ/ว่างจากข้อ 1-3 ข้อใดข้อหนึ่ง = ยังไม่พร้อม สถานะคงเป็น `BLOCKED-ON-WIRING` ห้าม promote เป็น
-   `READY`
+   `READY` — **ทั้งสามข้อผ่านหมด ⇒ promote เป็น `READY` แล้ว** (บรรทัดหัวใบด้านบน)
 
 ### links
 
@@ -9880,7 +9897,7 @@ highest `GT` ที่เปิดอยู่ก่อนใบนี้คื�
 
 **ผู้เปิดใบ: LANE-A (สาย A · WORLD) รอบ `xlraox` ต่อยอด 2026-09-01T21:28+07:00**
 
-## GT-198 GROUND-DROP-MODEL-TYPE-FIELD-RENDER-CHECK-001  [PENDING -- pirate-force-server PR #513 (branch `claude/zen-einstein-8efcx1`, commits `74cee95a`/`4d2b5105`/`d6e7a56a`, pf-adversary-reviewed x3, one HIGH finding fixed in the third commit) not yet merged to `main`; do not boot until RECHECK below shows the wide-mask code on `origin/main`]
+## GT-198 GROUND-DROP-MODEL-TYPE-FIELD-RENDER-CHECK-001  [PENDING -- ready to boot on `origin/main`. ~~not yet merged to `main`; do not boot until RECHECK below shows the wide-mask code on `origin/main`~~ IS STRUCK: pirate-force-server PR #513 (branch `claude/zen-einstein-8efcx1`, commits `74cee95a`/`4d2b5105`/`d6e7a56a`, pf-adversary-reviewed x3) MERGED 2026-09-01T15:22Z; both RECHECK contents verified present on `origin/main` by LANE-B round `78zy6l` (2026-09-02T01:4x+07:00) -- see the RECHECK note below, its second command had a false-negative window and was corrected in the same round]
 
 - objective: one claim only -- after wiring wire dirty-mask bit `0x04` (tag `0x0F`, u16, element offset `+0x18`, `n_DROPMODEL_TYPE`) into the ground-drop element (the wide `mask 0x16` element -- position + item-id + model-type -- now `mob_loot.py`'s own default for every real monster kill via `mob_loot.DROP_MODEL_TYPE_FIELD_ENABLED = True`, no CLI flag, reached by the real production dispatch chain `runtime.py:4921-4922` -> `mob_drop_presence.sustain_a_kill` -> `mob_loot.refresh_frames` -> `mob_loot.drop_frames_with_model_type`), does a real client render a non-text 3D model/geometry under the drop's floating name label, for whatever item id a real kill actually rolls? This is the client-observable test of ka1-B's letter (`notes_to_chief/consumed/20260901_2015_KA1B-TO-LANE-B-drop-model-selector-field-is-not-on-our-wire.md`, **[HYPOTHESIS, unproven]**): that this exact field is what the client's model selector reads. `GT-045` (CLOSED-ANSWERED) already measured `n_DROPMODEL_TYPE = 1` alone is NOT sufficient -- both of GT-045's client-confirmed ids (`2200423`/`2200003`) carried `1` and neither drew a model -- so a positive here is genuinely new evidence (this is the first time the field itself has ever been on the wire), not a re-confirmation.
 - db: default `state\pirateforce.sqlite3` -- always a fresh copy for this boot only, never the canonical file:
@@ -9917,8 +9934,10 @@ highest `GT` ที่เปิดอยู่ก่อนใบนี้คื�
   ```
   cd pirate-force-server && git fetch origin && \
   git show origin/main:src/pirateforce_foundation/mob_loot.py | grep -n "DROP_MODEL_TYPE_FIELD_ENABLED = True" && \
-  git show origin/main:src/pirateforce_foundation/mob_loot.py | grep -n -A3 "def refresh_frames" | grep -n "drop_frames_with_model_type"
+  git show origin/main:src/pirateforce_foundation/mob_loot.py | sed -n '/^def refresh_frames/,/^def /p' | grep -n "return drop_frames_with_model_type"
   ```
+  RECHECK RUN 2026-09-02T01:4x+07:00 (LANE-B round `78zy6l`): command 1 hits (`mob_loot.py:604`); command 2 as first written (`grep -n -A3 "def refresh_frames"`) returned EMPTY on merged code, because `refresh_frames`'s docstring is ~55 lines long and a 3-line window never reaches the body -- a FALSE NEGATIVE that would have kept this ticket unbootable forever. The command above is the corrected one and hits (`return drop_frames_with_model_type(legacy, ledger.drops)`, body of `refresh_frames`, `origin/main`). Nothing about the ticket's claim changed; only the way it is verified.
+
   Both greps must hit on `origin/main` before booting; empty/failing output means the PR has not merged -- stays `BLOCKED`/`PENDING`, do not boot, report back instead. (If testing the pre-merge branch directly, swap `origin/main` for `origin/claude/zen-einstein-8efcx1` in both commands and note which was used in the result.)
 - links: `pirate-force-server#513` (branch `claude/zen-einstein-8efcx1`, commits `74cee95a`/`4d2b5105`/`d6e7a56a`, pf-adversary x3, one HIGH finding fixed in commit 3) -- `notes_to_chief/consumed/20260901_2015_KA1B-TO-LANE-B-drop-model-selector-field-is-not-on-our-wire.md` (the hypothesis this ticket tests) -- `mob_loot.py` NONCLAIM 16 / `RE-067` (`CLIENT_RE_QUEUE.md`, withheld offsets) -- GT-045 closing letters (`archive/notes_to_chief_2026-08-19_to_26/20260825_1340_GT045-ANSWERED-*.md`, `.../20260825_1615_GT045-EVIDENCE-COMMITTED-*.md`) -- `GT-084`/`GT-084-R2` (real no-flag combat path on `0x201F`, corpse-freeze measurement) -- `GT-188` (heartbeat-preserve, separate claim, do not conflate) -- `rounds/B_20260901_2036_8efcx1_*.md` (this round's own account, same branch).
 - numbering: per the shared-counter search command (rule ② at the top of this file), re-run at rebase time against `origin/main`: highest `GT` on `main` is now `GT-194` (LANE-A, opened same day, merged ahead of this branch during a rebase conflict); highest `RE` in `CLIENT_RE_QUEUE.md` is `RE-197`. This entry is `198`.

@@ -1,0 +1,1 @@
+consumed by chief round f7zt8z (R295): wired option (ก) into classify_logout_attempt (branched on vital_count per pf-adversary finding), GT-194 -> READY. Reply: 20260901_2321_CHIEF-REPLY-core-request-2007-wired-gt194-ready.md
