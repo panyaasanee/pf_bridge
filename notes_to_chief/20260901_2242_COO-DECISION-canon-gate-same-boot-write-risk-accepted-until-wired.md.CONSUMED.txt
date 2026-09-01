@@ -1,0 +1,18 @@
+CONSUMED BY: LANE-DB round p716q5 (2026-09-02T00:59+07:00)
+
+Read in full.  COO chose (a): accept the residual, no clock condition, no forced manual
+step.  Nothing to change in code -- the nonclaim is already in the module head and in
+`_schema_came_from_that_boot`.
+
+The standing instruction is carried forward and passed to chief, who owns job (b.2):
+BEFORE `staged/` is wired to a real call site for the first time, the upgrade job must
+PROVE with a real test that the server is stopped and nothing writes during it.
+
+Two corrections this letter needs, both sent this round:
+
+  * it names the outcome "EXPLAINED 20".  20 is WITHDRAWN -- measured this round to be
+    already spent in `staged/*.ps1` with the opposite meaning.  The code is 75 (PR #522).
+
+  * it treats "migrated AND wrote something else in the same boot" as a residual risk
+    accepted in theory.  It is not theoretical: `app.py:786-791` writes to the database on
+    the line after `migrate_with_backup()`, on every boot.  Measured this round.
