@@ -103,3 +103,35 @@ pirate-force-server: push แล้ว (`b476903`, branch `claude/zen-einstein-4
 เซสชันนี้ commit/push เท่านั้น ไม่เปิด/จัดการ PR เอง)
 
 pf_bridge: กำลัง push รอบนี้ (ไฟล์รอบนี้ + `.CONSUMED.txt` + `LANE-B-STATUS` แนบท้าย)
+
+## ADDENDUM 2026-09-01T23:21+07:00 — pf-adversary จริง (ผ่าน coordinator) พบจุดบั๊ก, แก้แล้ว
+
+coordinator รัน pf-adversary จริงกับ `b476903` (medium-high confidence) พบบั๊กจริงหนึ่งจุดใน
+`REFUSE_TRANSITIONING_NOT_A_DEAD_ROW` (`mob_death.repopulation_entries`): เช็คเดิม
+`register.is_dead(transitioning[1], transitioning[0])` ตรวจกับ**ทะเบียนทั้งก้อน** ไม่ใช่กับ
+roster ที่ call นี้ได้รับจริง เพราะ `DeathRegister` เก็บศพข้ามฉากไว้ตามดีไซน์ — `transitioning`
+ที่ชี้ไปแถวศพจริงแต่ **คนละฉาก/roster** จึงผ่านเงื่อนไขเงียบ ๆ แล้วทำให้**ทุกแถวศพในการ compose
+จริง (รวมแถวจริงที่กำลัง compose)** ตกกลับไปที่ `DEAD_TIMER_SECONDS` แทนที่จะใช้ `dead_timer`
+ที่ผู้เรียกตั้งใจส่ง (เช่น `DYING_TIMER_SECONDS`) — ตรงกับรูปแบบ caller-mistake ที่ docstring เดิม
+อ้างว่าจับได้ แต่จับไม่ได้จริง
+
+**แก้แล้ว**: ย้าย `roster_keys = set((m.scene, m.actor_identity) for m in roster)` ขึ้นมาก่อนเช็ค
+`transitioning`, เช็คใหม่ต้องผ่านทั้งสองเงื่อนไข — `transitioning in roster_keys` **และ**
+`register.is_dead(...)` — ไม่ใช่แค่ข้อหลังข้อเดียว เพิ่มเทส
+`test_transitioning_naming_a_dead_row_from_a_foreign_scenes_roster_is_refused` (มอนจริงตาย 2
+ฉาก: bg0001 กับ Bg0002 ใน register เดียวกัน, ตั้ง `transitioning` ชี้ไปแถว Bg0002 ตอน compose
+roster bg0001 ต้องถูกปฏิเสธ)
+
+**สองจุดรอง** ที่ pf-adversary ชี้ก็แก้ในรอบเดียวกัน:
+1. `mob_scene_recompose.SCENE_RECOMPOSE_WIRING` เพิ่ม item (4) บอกจุดต่อสาย `transitioning=` ให้
+   chief ตรง ๆ ในซอร์ส (เดิมมีแค่ commit message กับจดหมาย pf_bridge)
+2. strengthen เทสที่อ่อนสองใบให้ตรวจ **wire bytes จริงต่อแถว** แทนแค่ `len(frame) > 0`:
+   `test_transitioning_reaches_hostile_census_frames_with_correct_per_row_wire_bytes`
+   (`tests/test_mob_death.py`) และเทสใหม่ที่ชั้น `recompose_frames` (เส้นทางจริงที่ chief จะต่อสาย)
+   `test_scene_1_transitioning_reaches_the_live_composer_and_only_that_row_moves`
+   (`tests/test_mob_scene_recompose.py`)
+
+ไฟล์ที่แตะเพิ่ม: `src/pirateforce_foundation/mob_death.py`,
+`src/pirateforce_foundation/mob_scene_recompose.py`, `tests/test_mob_death.py`,
+`tests/test_mob_scene_recompose.py` — เทสรวมทั้งรีโปรันซ้ำก่อน push (ดูจดหมายแยกถึง coordinator
+สำหรับ commit SHA ใหม่และตัวเลขผลเทส)
