@@ -10151,12 +10151,47 @@ highest `GT` ที่เปิดอยู่ก่อนใบนี้คื�
   4. ความต่างจากเซิร์ฟเวอร์จริงลง `REAL_SERVER_DIVERGENCE.tsv` · ไม่อ้างว่า PR merge แล้ว
 - RECHECK (ตัดสินด้วยเนื้อโค้ด ห้ามเทียบเลข commit) -- ต้องได้ hit จริง:
   ```
-  cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/world_population_bg0006.py | grep -n "world_census_level.leveled_npc_attr"
+  cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/world_population_bg0006.py | grep -n "level=placement.identity.level"
   ```
   ว่าง/พัง = PR #524 ยังไม่ merge ⇒ คง `PENDING` **ห้ามบูต** (เทส branch ก่อน merge ได้ ถ้าเปลี่ยน
   `origin/main` เป็น `origin/claude/dazzling-volta-7ste68` แล้วเขียนในผลว่าใช้ตัวไหน)
+  🔴 **แก้คำสั่ง RECHECK 2026-09-02T04:5x+07:00 (LANE-A รอบ `2p4n3h`, เจ้าของใบเอง)**: เดิมค้นหา
+  ~~`world_census_level.leveled_npc_attr`~~ ซึ่ง**เลิกปรากฏในไฟล์นั้นแล้ว**หลังรอบ `2p4n3h` ย้าย
+  call site ไปเป็น `world_census_gait.census_npc_attr` (ห่อ `leveled_npc_attr` อีกที ระดับยังส่ง
+  เหมือนเดิมทุกไบต์บวกฟิลด์ gait) ถ้าไม่แก้ คำสั่งเดิมจะคืนค่าว่างและอ่านผิดว่า "PR #524 ยังไม่ merge"
+  ทั้งที่ merge แล้ว · คำสั่งใหม่ค้นหาอาร์กิวเมนต์ระดับซึ่งอยู่ในทั้งสองรูปแบบ
+  🔴 **คำเตือนที่สำคัญกว่าคำสั่ง RECHECK (LANE-A รอบ `2p4n3h`, วัดแล้วผ่าน dispatcher จริง)**:
+  ก่อนรอบ `2p4n3h` การ **คลิก NPC หนึ่งครั้ง** ทำให้เซิร์ฟเวอร์ส่ง actor ทั้ง 108 ตัวของฉาก 1 ใหม่
+  **โดยไม่มีฟิลด์เลเวลเลย** (`world_face_frame.build_face_state` เรียก `make_npc_attr` เปล่า ๆ
+  ซึ่งไม่มีพารามิเตอร์ level) ⇒ ภาพที่ถ่ายหลังคลิกใครสักคน **เป็นเฟรมที่ถูกย้อนแล้ว** และจะขึ้น
+  `LV 1` แม้โค้ดของ `7ste68` จะอยู่บน main · ฉาก 14 เป็นแบบเดียวกันเฉพาะ NPC พลเรือน
+  ⇒ **ถ้ารัน `GT-200` ก่อนรอบ `2p4n3h` ขึ้น main: ห้ามคลิก NPC ก่อนถ่ายภาพ**
+  ถ้ารันหลังจากนั้น: คลิกได้ตามปกติ และให้บันทึกไว้ในผลว่ารันบน main รุ่นไหน
 - links: `pirate-force-server#524` · `RE-117` · `RE-201` (ปิดแล้ว) · `GT-192` (ห้ามแก้)
 - result: (ผู้เทสกรอก: PASS/FAIL/BLOCKED/NO-RESULT · หลักฐาน · timestamp · `OBSERVER_CONFIRMED`)
 
 **ผู้เปิดใบ: LANE-A รอบ `7ste68` 2026-09-02T01:55+07:00 -- LANE-A บริโภคผลใบนี้เอง**
 
+
+## GT-202 CENSUS-NPC-QUEST-MARK-GATE-WALK-SPEED-001  [**WITHDRAWN / OPENED-IN-ERROR** -- ถอนหัวใบโดย LANE-A (เจ้าของใบ) รอบ `2p4n3h` 2026-09-02T05:3x+07:00 ในรอบเดียวกับที่เปิด · **ไม่ต้องบูต ไม่ต้องมีผู้เทสทำอะไรทั้งสิ้น**]
+
+> เหตุ: pf-adversary ของรอบเดียวกันหักล้างสมมติฐานที่ใช้เปิดใบ และ LANE-A ตรวจซ้ำเองแล้วยืนยันว่า
+> ผู้ตรวจถูก · ใบนี้ตั้งอยู่บนการอ่านว่า `+0x70` ในเงื่อนไขข้ามของ `QuestIconBoard` คือ
+> `BasicAttr+0x70` (`field_presence_mask`) ⇒ บิต `0x0040` = `MOBS.n_SPEED_WALK`
+> **แต่** `reference_codex_attr/PF_COMBAT_LETHAL_TAIL_DELTA` มีแถว `PROVEN_EXACT` ว่า
+> `Both dead-task start and update gate _F_DIE_000 on actor+0x70 bit 0x40` และ
+> `The separately pinned CNetNPC model callback sets bit 0x40 only after its callback/resource
+> gates complete` ⇒ มี `actor+0x70` บิต `0x40` ที่ถอดแล้วอยู่จริง เป็นบิตความพร้อมของโมเดล
+> ฝั่ง **CNetNPC** · และแถว selector เดียวกัน **เขียนคำนำหน้าคลาสเมื่อหมายถึง BasicAttr**
+> (`local-singleton BasicAttr+0x5E opaque u16 threshold`) ส่วน `+0x360`/`+0x364` ในประโยค
+> เดียวกันเป็นของ CNetNPC ⇒ `+0x70` เปล่า ๆ น่าจะเป็นของ CNetNPC
+> · โค้ดที่ใบนี้จะเทส **ถูกถอนออกจาก PR ของรอบ `2p4n3h` ทั้งหมดแล้ว** (อยู่ใน commit `e1e2b7c`
+> บน branch `claude/dazzling-volta-2p4n3h` กู้กลับได้ถ้า `RE-202` ตอบว่าเป็น BasicAttr)
+> · แทนที่ด้วย **`RE-202`** ใน `CLIENT_RE_QUEUE.md` ซึ่งเป็นสิ่งเดียวที่ปลดล็อกงานนี้ได้จริง
+> · ไม่ลบใบ เก็บไว้เป็นประวัติตามกติกา
+> · บทเรียนที่ต้องไม่ทำซ้ำ: ใบนี้ประกาศว่า `+0x70` เป็น "แถวเดียวที่ Codex ถอดไว้" โดยที่
+> **ไม่ได้ grep ทั้งโฟลเดอร์ก่อน** — รูปแบบ G1 เดียวกับที่ `RE-201` โดนมาแล้วเมื่อรอบก่อน
+> · ข้อผิดพลาดข้อที่สองที่บันทึกไว้: ใบนี้เรียกประโยคนั้นว่า "ท่อนแรก" ของ `skip_conditions`
+> ทั้งที่มันเป็น **ท่อนที่สอง** (ท่อนแรกคือ `QuestNPCModule_refresh validated prerequisites reject`)
+
+**ผู้เปิดและผู้ถอนใบ: LANE-A รอบ `2p4n3h`**
