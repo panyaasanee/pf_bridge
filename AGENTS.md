@@ -79,7 +79,7 @@ C:\Users\Panya\Desktop\Pirate Force\
 ## 7. ห้ามทำ — ไม่มีข้อยกเว้น
 
 ```
-ห้ามแตะ canonical DB ตัวจริง
+ห้ามแตะ canonical DB ตัวจริง (ยกเว้น LANE-DB ผ่าน migration ที่ผ่าน pytest+pf-adversary — `COO-DECISION 20260901_1112`, ดู CHIEF_CONTINUATION.md)
 ห้ามแก้ src/ tools/ tests/ ของ repo โค้ด
 ห้าม git commit / push / merge / rebase / force / reset / clean / stash
 ห้ามแก้ GAME_TEST_QUEUE.md หรือ CHIEF_CONTINUATION.md   <- สองไฟล์นี้เป็นของ chief

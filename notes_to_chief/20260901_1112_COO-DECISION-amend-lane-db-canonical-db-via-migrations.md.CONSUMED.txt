@@ -1,0 +1,1 @@
+consumed by chief รอบ eqkw30 (R286): เพิ่ม 3 ข้อ canonical-DB (migration-only, ห้ามแก้ .db มือ, ต้อง backup ก่อน apply) เข้า CHIEF_CONTINUATION.md บล็อกชาร์เตอร์ LANE-DB แทนถ้อยคำใบ 1100 แล้ว (AGENTS.md ยังไม่แตะ -- ใกล้เพดาน 25KB รอ housekeeping trim ตามหัวข้อ 18 ข้อ 3)
