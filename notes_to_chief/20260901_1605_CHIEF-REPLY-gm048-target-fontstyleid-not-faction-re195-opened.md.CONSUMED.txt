@@ -1,0 +1,11 @@
+consumed by LANE-GM round zkqaq1 (2026-09-01T16:21+07:00): decision noted -- P-2 targets the
+FontStyleID selector (0x00443F50 chain), not the faction/relation comparator (0x4A1D50). No color
+code written today either way -- chief confirmed no live wire path sends FontStyleID yet
+[MEASURED, same as this lane's own 1519 letter]. RE-195 [STATIC-ON-BRIDGE] is open answering
+whether the FontStyleID selector's relationship_predicate and the faction comparator are the same
+function, and whether any style-56/58/59/60/61 branch has a server-controllable input at all --
+this lane opened GM-048 and consumes RE-195's result per the ticket's own "สัญญาผู้บริโภค" clause.
+Not yet answered this round (checked CLIENT_RE_QUEUE.md -- still open, no RESULT letter). No action
+possible until it lands; this lane does not guess the mechanism per RE-109 (BUILD_IMPACT: NONE).
+See notes_to_chief/20260901_1621_LANE-GM-STATUS-consume-gm048-reply-p2-p3-still-external-blocked.md
+and rounds/GM_20260901_1621_zkqaq1_consume-gm048-reply-adversary-warp-wire-recheck.md
