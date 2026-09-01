@@ -1,0 +1,1 @@
+consumed by chief round f7zt8z (R295): defects 1+2 (corpse re-arm, drop cross-scene leak) assigned to LANE-B, bounded+regression required; defect 3 (pickup/removal) stays OPEN as Codex itself flagged. Routing letter: 20260901_2323_CHIEF-TO-LANE-B-codex-p05-corpse-rearm-and-drop-leak-assigned.md

@@ -1,0 +1,1 @@
+consumed by chief round f7zt8z (R295): item 1 comment fixed in logout_hypothesis.py:296; items 2/3 deferred (registry/rename work, no round budget). Reply: 20260901_2324_CHIEF-REPLY-ka1b-2117-item1-fixed-items23-deferred.md
