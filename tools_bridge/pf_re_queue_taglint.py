@@ -81,7 +81,7 @@ def audit(queue_path, notes_dir, min_num):
     names = load_result_index(notes_dir)
     tickets = split_tickets(lines)
 
-    invisible, no_route, orphan = [], [], []
+    invisible, no_route, orphan, eligible = [], [], [], []
     for t in tickets:
         head_live = strip_struck(t["header"])
         route = [r for r in ROUTE_TAGS if r in head_live]
@@ -100,12 +100,14 @@ def audit(queue_path, notes_dir, min_num):
             continue
         if closed or letter:
             continue
+        if route:
+            eligible.append((t, route, status))
         if route and not status:
             invisible.append((t, route))
         elif status and not route:
             no_route.append((t, status))
 
-    return tickets, invisible, no_route, orphan
+    return tickets, invisible, no_route, orphan, eligible
 
 
 def main():
@@ -114,6 +116,16 @@ def main():
     ap.add_argument("--notes", default="notes_to_chief")
     ap.add_argument("--min", type=int, default=85,
                     help="ignore tickets below this number (old tickets are archived)")
+    ap.add_argument("--list-open", dest="list_open", action="store_true",
+                    help="print the tickets a worker should actually take, using the "
+                         "robust rule: route tag present AND header not marked closed AND "
+                         "no RESULT letter in notes_to_chief/.  The OPEN/PENDING half is "
+                         "reported as a warning column, NOT used to exclude a ticket -- a "
+                         "hand-typed tag that goes missing must not silence the queue.")
+    ap.add_argument("--route", default="",
+                    help="with --list-open: keep only tickets carrying this route tag, "
+                         "e.g. --route STATIC-ON-BRIDGE for a worker that has the client "
+                         "image and capture corpus but never boots the game.")
     ap.add_argument("--fix", action="store_true",
                     help="append '  [PENDING]' to every [A] header (status half only). "
                          "Run this on a CLOUD CLONE and commit it there: the three queue "
@@ -126,7 +138,32 @@ def main():
         sys.stderr.write("ERROR: queue not found: %s\n" % a.queue)
         return 2
 
-    tickets, invisible, no_route, orphan = audit(a.queue, a.notes, a.min)
+    tickets, invisible, no_route, orphan, eligible = audit(a.queue, a.notes, a.min)
+
+    if a.list_open:
+        if a.route:
+            eligible = [e for e in eligible if a.route in e[1]]
+        print("RE QUEUE -- TICKETS A WORKER SHOULD TAKE  (%s)" % a.queue)
+        if a.route:
+            print("filter: route == %s" % a.route)
+        print("rule: route tag present AND header not marked closed AND no RESULT letter.")
+        print("      the OPEN/PENDING tag is NOT part of the rule -- see the warning column.")
+        print("")
+        if not eligible:
+            print("    none -- the queue really is empty")
+        for t, route, status in eligible:
+            warn = "" if status else "   <- WARNING: no OPEN/PENDING tag on the header"
+            print("    %-7s line %-6d %s%s" % (t["id"], t["line"], ",".join(route), warn))
+        print("")
+        if orphan:
+            print("    NOTE: %d block(s) hold a second consumer contract, so a ticket below"
+                  % len(orphan))
+            print("    them lost its '## ' header and is NOT in the list above:")
+            for t, n in orphan:
+                print("      inside %s (line %d)" % (t["id"], t["line"]))
+            print("")
+        print("OPEN TICKETS: %d" % len(eligible))
+        return 0
 
     print("RE QUEUE TAG LINT -- %s" % a.queue)
     print("tickets parsed: %d" % len(tickets))
