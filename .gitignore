@@ -286,3 +286,16 @@
 # ----------------------------------------------------------------------------
 /factpack_L1/strings_*.tsv
 /factpack_L1/pe_*.tsv
+
+# Codex mirror bookkeeping markers (2026-09-01, ordered by Panya after the
+# 11:18-12:18 blackout).  The local Codex runner RENAMES
+# notes_to_chief/reference_codex_attr/.skipped_for_game_lock to .done.<stamp>
+# every time it skips a round for LOCK_GAME and later resumes.  git sees that
+# as a deletion; pf_git_sync now skips it per-file instead of refusing the whole
+# commit, but the marker has no business being tracked at all - it is local
+# bookkeeping, not a letter.  THIS PATTERN IS INERT UNTIL chief runs
+# 'git rm --cached' on the two tracked copies: an ignore alone does not untrack,
+# and without the pattern the untracked file would simply be re-added by the
+# notes_to_chief allowlist on the next tick.
+/notes_to_chief/reference_codex_attr/.skipped_for_game_lock
+/notes_to_chief/reference_codex_attr/.skipped_for_game_lock.done.*
