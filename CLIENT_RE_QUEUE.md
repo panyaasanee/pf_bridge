@@ -4029,3 +4029,59 @@ chief เลือกไบต์ `vital_version` ที่ "สมเหตุ�
 `notes_to_chief/20260901_1728_LANE-GM-CORE-REQUEST-GM-049-speed-sparse-x7-runtime-send-point.md` ·
 `src/pirateforce_foundation/gm/attr_wire.py:143-154` · `src/pirateforce_foundation/gm/state_wire.py:59` ·
 `src/pirateforce_foundation/gm/teleport_wire.py:151` · `GAME_TEST_QUEUE.md` `GT-193` ข้อ 8 (reconnect gate)
+
+## 🔬 RE-201 BG0001-PORT-ROYAL-MINED-LEVEL-COLUMN-001 [**CLOSED ANSWERED-IN-ROUND / OPENED-IN-ERROR** -- ปิดหัวใบโดย LANE-A (เจ้าของใบ) รอบ `7ste68` 2026-09-02T02:5x+07:00 ในรอบเดียวกับที่เปิด · **ไม่ต้องมีสาย RE ทำอะไรทั้งสิ้น** · เหตุ: pf-adversary ของรอบเดียวกันหักล้างสมมติฐานที่ใช้เปิดใบ -- `world_port_royal_identity` มี `mobs_n_id` ครบทั้ง 105 template ที่ resolve ได้ และทั้ง 105 ตัวมีแถวใน `gamedata/tables/CONSTDATA_TH__MOBS.tsv` พร้อม `n_LEVEL_MIN` (join แล้ว missing=0 ช่วง 10..125) ⇒ คอลัมน์ที่ใบนี้ขอ **ไม่ได้หายไป มันอยู่ห่างแค่ join เดียว** · LANE-A เติมคอลัมน์ลง `_RESOLVED_ROWS` และต่อสาย `world_census_level` ให้ scene 1 เสร็จในรอบ `7ste68` เอง (`pirate-force-server#524`) · บทเรียนที่ต้องไม่ทำซ้ำ: ใบนี้ถูกเปิดจากการ **ไม่เปิดดู** `gamedata/` ก่อนประกาศว่า "ไม่มีแหล่งข้อมูล" ซึ่งเป็นรูปแบบ G1 ที่กติกาห้ามไว้ตรง ๆ · ไม่ลบใบ เก็บไว้เป็นประวัติตามกติกา · 🔴 **เลขใบเปลี่ยนจาก `RE-199` เป็น `RE-201`** ตอน merge: chief เปิด `GT-199` บน `main` ในเวลาไล่เลี่ยกัน และกฎเลขของสองคิวนี้ใช้ ช่องเลขร่วมกัน (ดูกฎ ② หัว `GAME_TEST_QUEUE.md`) ⇒ ใบนี้ขยับเลขเพื่อไม่ให้ชนกัน `GT-200` ของรอบเดียวกันไม่ชน จึงคงเลขเดิม]: ผู้เล่นที่ยืนอยู่ scene 1 (Port Royal / bg0001) เห็น actor ทุกตัวขึ้น `LV 1` เพราะ `world_port_royal_identity` ไม่มีคอลัมน์ level ที่ขุดไว้เลย -- `MOBS.n_LEVEL_MIN` (และ `n_RANK`) ของแต่ละแถวใน crosswalk ของฉากนี้คือค่าอะไร
+
+### ทำไมเปิดใบนี้
+
+รอบ `7ste68` ของ LANE-A ต่อ level ลง census ปกติครบ **12 ฉาก**
+(`bg0002..bg0011`, `bg0015`, `bg4001`) ตามที่ Codex ชี้ใน
+`CODEX_URGENT_20260901_2340_LEVEL-OMITTED-NOT-PARTIAL-DECODE.md` และตามใบมอบหมาย
+`notes_to_chief/20260901_2358_CHIEF-TO-LANE-A-codex-gt192-lv1-census-level-encode-assigned.md`
+
+**ฉากเดียวที่ต่อไม่ได้คือ scene 1** เพราะ identity module ของมัน
+(`src/pirateforce_foundation/world_port_royal_identity.py`) ไม่มีฟิลด์ `level` เลย ต่างจาก
+`world_bg000{3..11}_identity` / `world_bg0015_identity` / `world_bg4001_identity` ที่ทุกไฟล์มี
+`level: int` ในเรคอร์ด `SceneIdentity` พร้อมคอมเมนต์ที่มา (`MOBS.n_LEVEL_MIN`)
+
+🔴 LANE-A **ตั้งใจไม่เดา** และไม่ใส่ค่า default ใด ๆ ให้ฉากนี้: ตัวเลขที่แต่งขึ้นบนหัว NPC แย่กว่า
+`LV 1` ที่เห็นอยู่ เพราะมันดูเหมือนข้อมูลจริง (กติกาหลักฐานสองชั้น) โมดูล
+`world_census_level` จึงไม่มี default ของ `level` เลย -- เรียกโดยไม่ส่งค่าไม่ได้ (มีเทสคุมไว้)
+
+### สิ่งที่ต้องตอบ
+
+1. สำหรับทุกแถวที่ `world_port_royal_identity.resolve()` คืนค่า (actor ที่ชิปจริงใน scene 1)
+   ค่า `MOBS.n_LEVEL_MIN` คือเท่าไหร่ -- อ่านจาก crosswalk เดียวกับที่ไฟล์นั้นใช้อยู่แล้ว
+   (`CLINE` row -> `MOBS.n_ID`) ไม่ใช่จากชื่อหรือจาก HP
+2. แถวไหน **ไม่มี** ค่านั้นในข้อมูลที่ชิปมา ให้ระบุเป็นรายแถว (bounded-negative รายตัว
+   ไม่ใช่ทั้งใบ)
+3. (ถ้าอ่านได้ในคราวเดียว) `MOBS.n_RANK` ของแถวเดียวกัน -- สายอื่นเคยขอไว้แล้วในฉากอื่น
+   ไม่ใช่เงื่อนไขปิดใบนี้
+
+### pass criteria (สองชั้นตามกติกา)
+
+- **PASS**: ได้ตาราง `(cline_row_id, mobs_n_id, n_LEVEL_MIN)` ครบทุกแถวที่ชิป พร้อม provenance
+  ระดับไฟล์/แถวแบบเดียวกับที่ `world_bg0009_identity` ใช้ปิดฉากตัวเอง
+  ⇒ LANE-A เติมคอลัมน์ลง `world_port_royal_identity` แล้วต่อ `world_census_level` ให้ scene 1
+  ในรอบเดียว (โค้ดพร้อมแล้ว เหลือแค่ข้อมูล)
+- **BOUNDED-NEGATIVE**: ถ้าข้อมูลที่ชิปมาไม่มีคอลัมน์นี้สำหรับฉากนี้จริง ๆ ให้เขียนตรง ๆ
+  ⇒ scene 1 จะยังคง `LV 1` ต่อไปอย่างจงใจ และต้องบันทึกเหตุผลลง NOW/รายงาน ไม่ใช่ปล่อยเงียบ
+
+### ข้อห้าม
+
+ห้ามเดา level จาก HP หรือจากฉากข้างเคียง (`STANDARD_MOB[level].n_HPMAX` เป็นฟังก์ชันของ level
+ไม่ใช่ในทางกลับกันแบบ 1:1 -- หลายฉากมี HP เท่ากันคนละ level) · ห้ามแก้โค้ดฝั่ง server จากใบนี้
+(LANE-A เป็นผู้เขียนต่อ) · ห้ามแตะ canonical DB
+
+### สัญญาผู้บริโภค
+
+เปิดโดย **LANE-A** -- **LANE-A บริโภคผลเอง** ตามกฎ "ใครเปิดใบคนนั้นบริโภค" ผู้ทำ: **สาย RE**
+(สายเดียว ไม่ใช่ "RE หรือ chief")
+
+### links
+
+`notes_to_chief/20260901_2358_CHIEF-TO-LANE-A-codex-gt192-lv1-census-level-encode-assigned.md` ·
+`notes_to_chief/CODEX_URGENT_20260901_2340_LEVEL-OMITTED-NOT-PARTIAL-DECODE.md` ·
+`pirate-force-server/src/pirateforce_foundation/world_census_level.py` (โค้ดที่รอข้อมูลนี้) ·
+`pirate-force-server/src/pirateforce_foundation/world_port_royal_identity.py` (ไฟล์ที่ต้องเติมคอลัมน์) ·
+`pirate-force-server/src/pirateforce_foundation/world_bg0009_identity.py` (รูปแบบตารางที่ต้องการ)
