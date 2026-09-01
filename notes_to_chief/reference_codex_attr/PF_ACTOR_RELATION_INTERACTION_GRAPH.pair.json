@@ -1,0 +1,17 @@
+{
+  "commit_rule": "marker-before/files-twice/marker-after; exact bytes and hashes",
+  "files": [
+    {
+      "name": "PF_ACTOR_RELATION_INTERACTION_GRAPH.tsv",
+      "sha256": "630df0cdbaa1ce380f3040eb2304e2b0efdb602b614dacd8d6e1872600a1b6dc",
+      "size": 97168
+    },
+    {
+      "name": "PF_ACTOR_RELATION_INTERACTION_GRAPH.md",
+      "sha256": "bf20d31c33f27373496214f3ab50908619aa20088c548c9d71a86215f78cca8b",
+      "size": 6173
+    }
+  ],
+  "generation_sha256": "78c5ce450ae1367fad2e21442d58eed5289545b79341c3d401d53f20d64512d7",
+  "schema": 1
+}

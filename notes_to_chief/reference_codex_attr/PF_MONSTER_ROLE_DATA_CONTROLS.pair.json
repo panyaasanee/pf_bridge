@@ -1,0 +1,20 @@
+{
+  "artifacts": {
+    "PF_MONSTER_ROLE_DATA_CONTROLS.md": {
+      "sha256": "c73e337235cc29d785c3ac7fa6f717490fc4d31663e54abedfaef6786d3c559e",
+      "size": 7838
+    },
+    "PF_MONSTER_ROLE_DATA_CONTROLS.tsv": {
+      "sha256": "72a5e6ece07f8ca64f710617a8c95b976895be62fb1ddb5677f4ee6ee371348f",
+      "size": 45536
+    }
+  },
+  "format": "PF_MONSTER_ROLE_DATA_CONTROLS_PAIR_V1",
+  "metrics_sha256": "d032c714a5eb9401744d6df02bccde34ad7705122e84b62f1115386413855435",
+  "pair_id": "2f1e5b1e09032421f993999d7c2ed6d83d1c5d119f8ba75e77f814a403ddde5d",
+  "publication_rule": "TSV and Markdown are valid together only when this last-written marker matches both hashes and sizes.",
+  "row_count": 21,
+  "source_counts": {
+    "DATA": 21
+  }
+}

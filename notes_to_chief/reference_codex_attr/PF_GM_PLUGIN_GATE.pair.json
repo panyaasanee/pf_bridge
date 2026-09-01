@@ -1,0 +1,39 @@
+{
+  "gate_ids": [
+    "GM-IMG-001",
+    "GM-IMG-002",
+    "GM-IMG-003",
+    "GM-IMG-004",
+    "GM-IMG-005",
+    "GM-IMG-006",
+    "GM-IMG-007",
+    "GM-IMG-008",
+    "GM-IMG-009",
+    "GM-IMG-010",
+    "GM-IMG-011",
+    "GM-IMG-012",
+    "GM-IMG-013",
+    "GM-IMG-014",
+    "GM-IMG-015",
+    "GM-IMG-016",
+    "GM-IMG-017",
+    "GM-DATA-001",
+    "GM-DATA-002"
+  ],
+  "md": {
+    "path": "PF_GM_PLUGIN_GATE.md",
+    "sha256": "e64e3868736c57ac4abff8a3d5e1f68b4be9d4edbaaebc7d5dd807d9d775e4ae",
+    "size": 17377
+  },
+  "rows": {
+    "DATA": 2,
+    "IMAGE": 17,
+    "total": 19
+  },
+  "schema": "PF_GM_PLUGIN_GATE_PAIR_V1",
+  "tsv": {
+    "path": "PF_GM_PLUGIN_GATE.tsv",
+    "sha256": "a5f3fdeb6a830b06e3eb9dceff85fc762459ca3e4f9e7ada152937ef1c898509",
+    "size": 27050
+  }
+}

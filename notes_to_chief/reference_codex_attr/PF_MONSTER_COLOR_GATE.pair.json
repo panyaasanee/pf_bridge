@@ -1,0 +1,17 @@
+{
+  "commit_rule": "marker-before/files-twice/marker-after; exact bytes and hashes",
+  "files": [
+    {
+      "name": "PF_MONSTER_COLOR_GATE.tsv",
+      "sha256": "8d236351d827a39a74fe9b5e1b9ac694f5f51af5328fcedc1d9f207720bcbaa0",
+      "size": 110234
+    },
+    {
+      "name": "PF_MONSTER_COLOR_GATE.md",
+      "sha256": "57dff3dfb518dfe3d60b7ebfb01d9f2325d69c78eac940dfbfb6d3bafab7f596",
+      "size": 40551
+    }
+  ],
+  "generation_sha256": "75a50010a549c05fa8529461f47a575ace58d5c0677ad809bdb56ac5c3eeacfd",
+  "schema": 1
+}

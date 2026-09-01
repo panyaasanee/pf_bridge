@@ -1,0 +1,156 @@
+{
+  "schema": "pirate-force-critical-artifact-authority/v1",
+  "authority_version": "2026-09-01T17:51:00+07:00",
+  "authority_note": "20260901_1751_CODEX-CHECKPOINT-P03-QUEST-MARK-CLOSURE.md",
+  "serverproject_snapshot": {
+    "commit": "8a8afa7c6ad7f13af5ac7088ffca6fc743cae5fa",
+    "commit_time": "2026-09-01T07:50:38Z",
+    "claim": "Color and ground-drop replacement comparisons are reproducible as of this immutable Git object; later HEADs are drift diagnostics, not silently accepted evidence."
+  },
+  "color_snapshot_scope": {
+    "explicit_project_source_pins": 51,
+    "exhaustive_foundation_python_census_files": 157
+  },
+  "attr_dependency_pins": {
+    "generation_id": "b96e420c290201ce60babec398fd2389ea36db2f2f30ce552d9d680f481f3fae",
+    "PF_ATTR_GENERATION_MANIFEST.json": {"size": 8202, "sha256": "45c85e4200aae9b677f63ae3d495f57771ae0ff9b14726fd55a417472138f94e"},
+    "PF_ATTR_NAME_COLOR_SELECTOR.tsv": {"size": 37350, "sha256": "d15864a21a7a124a23f6dffad174a55d376045a25a04814bbe6dc5f5632af82d"},
+    "PF_ATTR_FIELD_SEMANTICS.tsv": {"size": 1339980, "sha256": "1418b7559f5b05feef585490e76d33e8f72cd82c1ff854941d7faf37878c7f2f"},
+    "PF_ATTR_QUEST_MARK_SELECTOR.tsv": {"size": 52137, "sha256": "3218d619a400dfcab52416489dcf8e6b85e6cbfd5a8bbd14d6ccad39dbfb9bf0"},
+    "PF_ATTR_DATA_BINDINGS.tsv": {"size": 53723, "sha256": "67e7550a09b00a5243f4c084ff486d29e420c6d0687704a092f157dbce219cb2"}
+  },
+  "artifacts": {
+    "gm": {
+      "rows": 19,
+      "sources": {"IMAGE": 17, "DATA": 2},
+      "files": {
+        "PF_GM_PLUGIN_GATE.tsv": {"size": 27050, "sha256": "a5f3fdeb6a830b06e3eb9dceff85fc762459ca3e4f9e7ada152937ef1c898509"},
+        "PF_GM_PLUGIN_GATE.md": {"size": 17377, "sha256": "e64e3868736c57ac4abff8a3d5e1f68b4be9d4edbaaebc7d5dd807d9d775e4ae"},
+        "PF_GM_PLUGIN_GATE.pair.json": {"size": 777, "sha256": "38b3bf4b64a7be30e5a10c73c7253061f5fd46f390e323c9abf940c9fd0b8b92"},
+        "pf_rederive_gm_plugin_gate.py": {"size": 113012, "sha256": "dee0ad09a4cd2d74b6369768ea2bef8fc0091a7c7567200a510b56cd738e9f0e"}
+      }
+    },
+    "monster_color": {
+      "claim_scope": "Canonical downstream owner for the conditional CNetNPC selector, controller/UILabel/style-registry/parser/apply/render ceiling and source-separated palette facts.",
+      "rows": 66,
+      "sources": {"IMAGE": 58, "DATA": 8},
+      "pair_generation": "75a50010a549c05fa8529461f47a575ace58d5c0677ad809bdb56ac5c3eeacfd",
+      "files": {
+        "PF_MONSTER_COLOR_GATE.tsv": {"size": 110234, "sha256": "8d236351d827a39a74fe9b5e1b9ac694f5f51af5328fcedc1d9f207720bcbaa0"},
+        "PF_MONSTER_COLOR_GATE.md": {"size": 40551, "sha256": "57dff3dfb518dfe3d60b7ebfb01d9f2325d69c78eac940dfbfb6d3bafab7f596"},
+        "PF_MONSTER_COLOR_GATE.pair.json": {"size": 529, "sha256": "70c30b6f492ff3fe841d6682fc9f089370e11dad8f6bb06be6af29f7e4b5c009"},
+        "pf_rederive_monster_color_gate.py": {"size": 207140, "sha256": "95a5dcf85d48f8bb3786f4d052e629cfdda8b661f522c3329a4f8b57707eae54"}
+      }
+    },
+    "monster_color_mechanism_join": {
+      "claim_scope": "Owns only the FACTION loader/comparator semantics, the conditional relation-fallback edge into the existing selector, and source-separated DATA membership rows. SCENE-005 causality remains OPEN.",
+      "does_not_supersede": "monster_color",
+      "rows": 8,
+      "sources": {"IMAGE": 6, "DATA": 2},
+      "pair_generation": "40bee0ae06ec8fd710b768b25e029b775cd7eb157f8e75f3047900ff81e14ccc",
+      "files": {
+        "PF_MONSTER_COLOR_MECHANISM_JOIN.tsv": {"size": 13134, "sha256": "dfaf5f31380c3ce6a0cfffd6b8778e1a28154b6438f5f404067b402c3d324190"},
+        "PF_MONSTER_COLOR_MECHANISM_JOIN.md": {"size": 8372, "sha256": "2b4125f6387f82f3d8af173136ac018c354eefba22bfcd0af2e1a2314d84534d"},
+        "pf_rederive_monster_color_mechanism_join.py": {"size": 67594, "sha256": "14aaee83970f58ca5774e32c3bf561e6cfce97b15a5e81de5110564bb0699b28"}
+      }
+    },
+    "monster_color_wire_control": {
+      "claim_scope": "Owns only the bounded literal-immediate/direct-E8/typed-path census and the proved upstream wire/event controls. Whole-program direct style-wire control remains OPEN.",
+      "does_not_supersede": "monster_color",
+      "rows": 15,
+      "sources": {"IMAGE": 15},
+      "pair_generation": "6e2041061bc42b44934fd309059eb4177b136714d30e2b5eec5a5c8061d80cc7",
+      "files": {
+        "PF_MONSTER_COLOR_WIRE_CONTROL.tsv": {"size": 27191, "sha256": "8fbffa366c495e323a9c87dc443316b1b2352a534b2bd47a97c2766361cae70d"},
+        "PF_MONSTER_COLOR_WIRE_CONTROL.md": {"size": 6473, "sha256": "b596e71d41cb3efcf9e84b74eea5affedc174429baf8e81a8846e61930738849"},
+        "pf_rederive_monster_color_wire_control.py": {"size": 71641, "sha256": "bee56a4a2073a8152651ba083ffa725af46838a4115c9b4149c6b159956dc1ad"}
+      }
+    },
+    "ground_drop": {
+      "rows": 29,
+      "sources": {"IMAGE": 23, "DATA": 3, "CAPTURE": 3},
+      "cross_file_pair_marker": null,
+      "files": {
+        "PF_GROUND_DROP_LIFETIME.tsv": {"size": 61979, "sha256": "b1703a7f31c42ddebf9702d12a7942577407fc320a9c2ad8411a08f3f017e710"},
+        "PF_GROUND_DROP_LIFETIME.md": {"size": 21237, "sha256": "b953b9aa913fb0e432d06687a71d5aef705dfa762beb18483d165c7faac46d73"},
+        "pf_rederive_ground_drop_lifetime.py": {"size": 171909, "sha256": "af66d888b796cea4af9ad5c02c8cdcb990877804842fefa46c095cf1cc6c76e1"}
+      }
+    },
+    "quest_mark_event_census": {
+      "claim_scope": "Owns the bounded direct/static return-value-query channel kind-0x0A producer, registration, writer and dispatch partition plus the separate general-channel reuse controls. Runtime-only/computed listeners, live ordering/reentrancy and abnormal teardown remain OPEN.",
+      "depends_on": ["PF_ATTR_QUEST_MARK_SELECTOR.tsv", "PF_GROUND_DROP_LIFETIME.tsv"],
+      "rows": 20,
+      "sources": {"IMAGE": 20},
+      "pair_generation": "6a513a67f9e349150933fccf2ea7468538332b3f2553d0a6e8b0206475376dd3",
+      "files": {
+        "PF_QUEST_MARK_EVENT_CENSUS.tsv": {"size": 29193, "sha256": "40127e6410c1aa6405efada640c60b72663eb9e35537c8011cdeede47d0a0b35"},
+        "PF_QUEST_MARK_EVENT_CENSUS.md": {"size": 8833, "sha256": "e1de566825b6d60e5ac747df3f53e4975cd49dd36f3584441039c49820247c4e"},
+        "pf_rederive_quest_mark_event_census.py": {"size": 75639, "sha256": "5c6e6ea3558b4c8efebfa1f20ae7126bd9e39575b041acddba33bc485af11fda"}
+      }
+    },
+    "quest_mark_resource_resolver": {
+      "claim_scope": "Owns the conditional .tga-to-.tg_ final-character rewrite, transformed-first/original fallback, registered TGA machinery and source-separated eight-target filename census. Concrete runtime open, reader selection, decode, bind and pixels remain OPEN.",
+      "depends_on": ["PF_ATTR_QUEST_MARK_SELECTOR.tsv", "PF_ATTR_DATA_BINDINGS.tsv", "PF_GROUND_DROP_LIFETIME.tsv"],
+      "rows": 29,
+      "sources": {"IMAGE": 20, "DATA": 9},
+      "measurement_profiles": {"MEASURED": 24, "REFERENCE": 4, "COMPOSED_BOUND": 1},
+      "pair_generation": "c9c9e96ee67762cdaab18bf12d6cf22c1a4cf82c83270f50562a849c90985304",
+      "canonical_route_key": "79839063b5f2dad4f09c2c9022857ca6842763281547d762147f6939ccbb77cb",
+      "special_data_control_key": "270ef783a275112122482e38259c62f2d7547e4627b239502623802fb8c925c3",
+      "files": {
+        "PF_QUEST_MARK_RESOURCE_RESOLVER.tsv": {"size": 44435, "sha256": "de491977008f1b3a0ab75da4a45bbba9cd35504350ecfbff95cfbec69a8641ab"},
+        "PF_QUEST_MARK_RESOURCE_RESOLVER.md": {"size": 8165, "sha256": "f39f41cc91a5f6a7f1748933853e7d7ef0db393008588abf6fa73927421b71cc"},
+        "pf_rederive_quest_mark_resource_resolver.py": {"size": 74855, "sha256": "afe9f7694bb6bda28804aac7869a686c1e44f29e36ecd7d20e694be0ccedbc38"}
+      }
+    },
+    "quest_mark_lifecycle": {
+      "claim_scope": "Owns the static QuestIconBoard pool/constructor, CNetNPC ownership, update gates, manager admission/withdrawal, destruction and submission ceiling through 0x00A9E6C0. Runtime presentation timing, final renderer/GPU and pixels remain OPEN.",
+      "depends_on": ["PF_ATTR_QUEST_MARK_SELECTOR.tsv", "PF_QUEST_MARK_EVENT_CENSUS.tsv", "PF_QUEST_MARK_RESOURCE_RESOLVER.tsv", "PF_GROUND_DROP_LIFETIME.tsv"],
+      "rows": 17,
+      "sources": {"IMAGE": 17},
+      "pair_generation": "455c1aaca750b729dc24f10d67e702dbda62884219f1d87c03621a1f66558992",
+      "files": {
+        "PF_QUEST_MARK_LIFECYCLE.tsv": {"size": 23289, "sha256": "45d7a21d8e340faede88f8f745651a4d44a24fbb50c262f6907e40063a71f517"},
+        "PF_QUEST_MARK_LIFECYCLE.md": {"size": 13715, "sha256": "561d2d0ab1219c95df72cad6371c7ca294d7fb56efad710a0afeb50572e6e5a2"},
+        "pf_rederive_quest_mark_lifecycle.py": {"size": 56022, "sha256": "e26ad423b3b2da0df72c6c5eba97f83e36ccb9e211f223b8eca80fc7192646ff"}
+      }
+    }
+  },
+  "supersession": [
+    {
+      "note": "20260901_1439_CODEX-CHECKPOINT-GM-COLOR-DROP-FIFTH.md",
+      "superseded": ["unqualified current-code PASS wording", "color/drop file metadata"]
+    },
+    {
+      "note": "20260901_1439_CODEX-RE191-RESULT-FONTSTYLE63-RGBA.md",
+      "superseded": ["color file metadata only"],
+      "retained": ["source-separated RE-191 evidence conclusions"]
+    },
+    {
+      "note": "20260901_1440_CODEX-CORRECTION-GT188-ARTIFACT-HASHES.md",
+      "superseded": ["color/drop file metadata only"],
+      "retained": ["GT-188 label-only false-green warning"]
+    },
+    {
+      "note": "20260901_1504_CODEX-CORRECTION-IMMUTABLE-SERVERPROJECT-SNAPSHOT.md",
+      "superseded": ["phrase '51 ServerProject snapshot files'"],
+      "retained": ["immutable snapshot design", "artifact metadata", "runtime ceilings"]
+    },
+    {
+      "note": "20260901_1519_LANE-GM-CORE-REQUEST-GM-048-p2-rgb-closed-faction-pink-crossref.md",
+      "superseded": ["GT-032 pink/red-name attribution", "second color-renderer claim", "claim that styles 61/62/63 contain no pink and close RGB for P0-2"],
+      "retained": ["warning against unverified direct style hardcoding", "need for same-actor runtime acceptance"]
+    },
+    {
+      "note": "CODEX_URGENT_20260901_1627_COLOR-RELATION-CORRECTION.md",
+      "superseded": ["any reading of conditional pair 1/6 as measured SCENE-005 causality", "delivery-incomplete artifact listing"],
+      "retained": ["GT-032/SCENE-005/GT-043 provenance correction", "same-renderer correction", "faction-only fix prohibition"]
+    }
+  ],
+  "delivery": {
+    "location": "outside the canonical ServerProject Git worktree",
+    "tracked": false,
+    "git_ignored": false,
+    "requirement": "owner-approved packaging or ingest is required for another clone or machine"
+  }
+}
