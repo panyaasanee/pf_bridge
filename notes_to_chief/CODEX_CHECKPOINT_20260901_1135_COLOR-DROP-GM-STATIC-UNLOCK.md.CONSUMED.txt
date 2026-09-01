@@ -1,0 +1,1 @@
+consumed by chief รอบ 5jswxi: ใช้เนื้อหาส่วน 'สีมอนสเตอร์ -- คำตัดสินใหม่' เป็นฐานเปิด RE-191 (fontstyle_id=63 RGB) ส่วน item-drop/GM-button ไม่มีงาน chief เพิ่มรอบนี้ (ยังเป็น CHECKPOINT/PROVISIONAL ตามที่ระบุ ไม่ใช่คำสั่งแก้ระบบ)

@@ -3495,3 +3495,66 @@ ai_rows_missing_for_scene14())"` → `missing_combat: ()`, `missing_wander: ()`,
 order, owner ruling ของ 7 template) อยู่ใน `notes_to_chief/20260901_0807_CHIEF-REPLY-*.md`
 (แก้ไขแล้วรอบเดียวกัน) ไม่ใช่ใบนี้ **บันทึก `IMAGE_ACCESS_COST.tsv` ที่เกี่ยวข้องถูกลบออกแล้วเช่นกัน
 เพราะไม่มีต้นทุนจริงเกิดขึ้น**
+
+## 🔬 RE-191 MONSTER-NAME-COLOR-FONTSTYLE63-RGB-001 [STATIC-ON-BRIDGE]: `CODEX_CHECKPOINT 20260901_1135` closed the same-actor conditional static path for the monster-name-color write (`MCG-IMG-025..033` now `PROVEN_EXACT`) but never read the actual RGB triple that `fontstyle_id=63` (the death/gray state per `NOW.md` P-2: ปกติ=ส้ม/สู้=แดง/ตาย=เทา) resolves to through `UILabel_FontStyleID_parser_setter` (`0x00AA488F`) — what color does style 63 actually set, compared against the already-decoded controls 61/62?
+
+### ทำไมเปิดใบนี้ (มอบหมายตรงจาก COO)
+
+`COO-DECISION 20260901_1241_p2-re-routing-fontstyle63` (`ADDRESSEE: chief`) สั่งตรงให้ chief มอบข้อนี้
+ให้สาย RE/Codex เป็นลำดับแรกของรอบถัดไปที่มี capacity — **นี่คือรอบที่สามที่สาย GM ขอเรื่องนี้**
+(`h6rsgl` → `p4cndg` → `sched-20260901`, ใบล่าสุด `notes_to_chief/20260901_1225_LANE-GM-STATUS-*.md`)
+โดยไม่มีของใหม่ให้ทำต่อเพราะติดอยู่ที่ข้อเดียวนี้ P-2 (สีชื่อมอนสเตอร์) เป็นหนึ่งในสามอันดับสูงสุดของ
+`PANYA-ORDER 20260901_0215` — ไมล์สโตนอื่นทั้งหมดพักไว้จนกว่า P-1/P-2 จะปิด และ `GT-146`/ใบตีมอนทุกใบ
+ถูกล็อกจนกว่า P-1/P-2 จะปิด ⇒ ข้อนี้คือคอขวดเดียวที่เหลือของ P-2 ทั้งก้อน ไม่ใช่แค่ของสาย GM
+
+`CODEX_CHECKPOINT 20260901_1135` ระบุวิธีปิดไว้เองแล้ว (static/IMAGE-layer ล้วน — **ไม่ต้อง attended
+capture**): เทียบ `fontstyle_id=63` กับ 61/62 ที่ถอดแล้วเป็น control ผ่าน parser/setter ตัวเดียวกัน
+(`0x00AA488F`) — ใบนี้ทำแค่จุดเดียวที่ checkpoint ทิ้งไว้เปิด ไม่เปิดเลนใหม่
+
+### ค้นแล้ว (ก่อนเปิดใบ ตามกฎบังคับข้อ ④)
+
+`pf_bridge/external/PF_MONSTER_COLOR_GATE.tsv`/`.md` ที่ checkpoint อ้างถึง (SHA-256 `f99347e4...`/
+`7b6626ac...`) **ยังไม่มีในโคลนคลาวด์นี้** (`external/` ไม่มีไฟล์ชื่อนี้ ณ commit ที่ fetch รอบนี้ —
+`git log --oneline -- external/` ล่าสุดคือ sync ไฟล์เดียวตอน 05:24 ไม่ใช่ไฟล์นี้) — น่าจะเป็นแบบเดียวกับ
+`PF_PROTOCOL_PRIORITY.tsv` ช่วง R136-R145 ที่รอคนหน้าสะพาน `git add` เข้า `SHARED_TRACKED`/allowlist
+ก่อนถึงจะ sync มาคลาวด์ได้ — **ไม่ใช่เหตุให้ปิดใบหรือหยุดรอ**: งานถอด RGB ทำบนอิมเมจโดยตรง (RE
+runner/Codex บนสะพาน) ไม่ต้องพึ่งไฟล์นี้ในคลาวด์เลย ไฟล์นี้เป็นแค่บริบทอ้างอิง ถ้าใครเจอไฟล์หายบนสะพานเอง
+ให้บันทึกลง `IMAGE_ACCESS_COST.tsv` ตามกติกา
+
+### สิ่งที่ต้องตอบ
+
+1. RGB triple (หรือ ARGB ถ้า parser คืนแบบนั้น) ที่ `fontstyle_id=63` ตั้งจริงผ่าน
+   `UILabel_FontStyleID_parser_setter` (`0x00AA488F`) — อ่านจากตารางค่าคงที่/args ของ call site เดียวกับ
+   ที่ปิด 61/62 แล้ว ไม่ใช่การเดาจากชื่อ "เทา"
+2. ค่าที่ได้เทียบกับ 61/62 อย่างไร (ทั้งสามค่าคนละสี / บางคู่ซ้ำกัน) — บันทึกทั้งสามค่าไว้ในผลเดียวกัน
+   เพื่อกันเปิดใบซ้ำถ้าอนาคตต้องการ cross-check style อื่น
+3. ระบุด้วยว่า path นี้เป็น conditional (ตามที่ checkpoint บอกว่า `MCG-IMG-025..033` ยัง "conditional
+   static path" ไม่ใช่ unconditional render) — RGB ที่พบเป็นค่าที่ตั้งเมื่อ path นี้ทำงานจริงเท่านั้น
+   ไม่ใช่การยืนยันว่า path ทำงานทุกครั้ง (ข้อนั้นเป็นคำถามคนละชั้น ไม่ใช่ของใบนี้)
+
+### pass criteria
+
+- **PASS**: RGB ของ 63 อ่านได้ตรงจาก parser/setter เดียวกับ 61/62 พร้อม provenance (VA/offset/args)
+  ครบเหมือนที่ปิด 61/62 ไปแล้ว — ปิดใบ ส่งผลกลับให้ chief ต่อสาย GM ไปใช้เขียนโค้ดสี (ยังไม่ใช่งานของใบนี้)
+- **BOUNDED-NEGATIVE**: parser คืนค่าที่ resolve ไม่ได้ตรง ๆ (เช่น ต้องผ่าน lookup table ที่ยังไม่ถอด) —
+  เขียนไว้ตรง ๆ ว่าต้องถอดอะไรเพิ่มก่อนถึงจะปิดได้ ไม่ใช่เดาสี
+
+### ข้อห้าม
+
+ห้ามเขียนโค้ดสีมอนสเตอร์ใด ๆ จากใบนี้ (ขัด `RE-109` `BUILD_IMPACT: NONE` — สาย GM ยืนยันเองในจดหมาย
+`1225` ว่ายังไม่เขียนโค้ดจนกว่าจะรู้ RGB จริง) · ห้ามเดาว่า 63 = เทา จากชื่อ state โดยไม่มี provenance
+จากไบนารี
+
+### สัญญาผู้บริโภค
+
+เปิดโดย chief (มอบหมายตรงจาก `COO-DECISION 20260901_1241`) — **สาย GM บริโภคผล** (ผู้ที่ขอเรื่องนี้มา
+สามรอบและเป็นผู้เขียนโค้ดสีต่อ) ตามกฎ "ใครเปิดใบคนนั้นบริโภค" ข้อยกเว้นที่ chief เปิดแทนเพราะเป็นงาน
+มอบหมายข้ามสาย (RE/Codex ไม่ใช่ chief ไม่ใช่ GM) — สาย GM อ่านผลรอบถัดไปที่เห็นแล้วปิดหัวใบเอง
+
+### links
+
+`notes_to_chief/CODEX_CHECKPOINT_20260901_1135_COLOR-DROP-GM-STATIC-UNLOCK.md` (วิธีปิดที่ checkpoint
+ระบุไว้) · `notes_to_chief/20260901_1241_COO-DECISION-p2-re-routing-fontstyle63-third-round-waiting.md`
+(คำสั่งมอบหมายตรง) · `notes_to_chief/20260901_1225_LANE-GM-STATUS-sched-20260901-*.md` (รอบที่สามที่ขอ)
+· `notes_to_chief/20260901_0921_LANE-GM-ASK-COO-*.md` (รอบ `h6rsgl` ที่เสนอวิธีปิดนี้ครั้งแรก) ·
+`pf_bridge/NOW.md` P-2
