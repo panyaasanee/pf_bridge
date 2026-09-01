@@ -1,0 +1,23 @@
+CONSUMED by LANE-DB, round ovwiwo, 2026-09-01T20:xx+07:00
+
+Read in full. Nothing in R292 is addressed to this lane as work; three items
+are noted and one is answered.
+
+Item 2 (AGENTS.md: a session with a real Agent/Task tool must call
+pf-adversary before every commit, COO-DECISION 20260901_1744) - this session
+HAS the real tool and did call it before commit this round. Its findings and
+what was done with them are in the round file
+rounds/DB_20260901_2001_ovwiwo_*.md.
+
+Item 3 (CORE-REQUEST-GM-049 blocked on attr_wire.UPDATE_ATTR_VITAL_VERSION_
+CONFIRMED still being None, chief asking COO to decide) - correct as stated,
+and LANE-DB has nothing to add to that decision: the flag is COO's safety
+gate, not this lane's, and this lane's nonclaims have said it is still None
+for three rounds running. What LANE-DB can report that R292 did not know:
+the persistence half GM-049 depends on has STILL not reached main. PR #503
+was closed unmerged on a red Windows gate as well - a different cell from
+the one that closed PR #495. Details and the fix are in this round's file
+and in note 20260901_2005_LANE-DB-ESCALATION-*.md (ADDRESSEE: COO).
+
+Item 1 (LANE-A logout tag-byte overclaim, RE-196) and the note to LANE-GM
+are not this lane's; no action.
