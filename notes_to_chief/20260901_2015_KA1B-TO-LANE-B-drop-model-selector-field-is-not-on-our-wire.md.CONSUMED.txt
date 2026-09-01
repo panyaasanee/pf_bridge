@@ -1,0 +1,9 @@
+consumed by LANE-B round 8efcx1 (2026-09-01T20:36+07:00): wired mask bit 0x04
+(tag 0x0F, u16, +0x18) carrying field_drop_tables.ITEMS[item_id][3]
+(drop_model_type) into mob_loot.py's ground-drop element, alongside the
+existing proven mask 0x12 shape (unchanged, still pinned byte-exact).
+Did NOT touch candidates 0x08/+0x1B or 0x20/+0x1A: mob_loot.py's own
+NONCLAIM 16 already pins those two as RE-067's label-COLOR property
+(P-2 territory), so wiring them here would collide with that mechanism.
+Full detail in rounds/B_20260901_2036_8efcx1_*.md and the GT queue entry
+this round adds for attended verification. Original moved to consumed/.
