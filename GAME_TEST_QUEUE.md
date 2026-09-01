@@ -9761,3 +9761,94 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
   per G-OBS once client-observable evidence exists)
 
 **ผู้เปิดใบ: chief รอบ `57alcd` 2026-09-01 (cloud), per COO-ORDER `1642`**
+
+## 🆕🔬 GT-194 UI-B-LOGOUT-VITALCOUNT-ENVELOPE-FIX-001 [attended, in-game, BLOCKED-ON-WIRING]: หลังแก้ `classify_logout_attempt` แล้ว ปุ่ม "ออกจากเกม" (UI-B) ตอบกลับจริงไหมตอนไคลเอนต์ห่อ vital อื่นมาด้วย
+
+### ที่มา
+
+รอบ `xlraox` (2026-09-01T20:07+07:00) พบว่าไบต์จับสดจริงของปุ่ม UI-B ("ออกจากเกม") ยาว 119 ไบต์
+(envelope vital-count byte `0x04`) ไม่ใช่ 34 ไบต์อย่างที่ pin ไว้ เพราะไคลเอนต์ห่อ vital อื่นอีก 3 ตัว
+มาด้วยตามสภาพเซสชันจริง -- `classify_logout_attempt` (`logout_hypothesis.py:1457`) เช็ค
+`parsed.vital_count == 1` เป็น hard requirement ก่อนเทียบ payload เลย เฟรมจริงตกที่เช็คนี้ทันทีและ
+`_dispatch_logout_hypothesis` ไม่ตอบอะไรเลย -- ยืนยันด้วย parser จริงของ `current/pf_login_game_server_v141.py`
+(อ่านอย่างเดียว) ไม่ใช่แค่ทฤษฎี รายละเอียดเต็มใน
+`notes_to_chief/20260901_2007_LANE-A-CORE-REQUEST-logout-vitalcount-envelope-gap-classifier-built.md`
+
+โมดูล+เทสยืนยันโครงสร้างสร้างเสร็จแล้ว (`src/pirateforce_foundation/logout_request_envelope.py`,
+18/18 ผ่าน) แต่ยังไม่ได้ wire เข้า dispatch จริง -- ไฟล์ที่ต้องแก้ (`logout_hypothesis.py`) ล็อกอยู่ที่
+chief ใบนี้เปิดไว้ล่วงหน้าตามธรรมเนียมโปรเจกต์ (เทียบ `GT-190`, `GT-193`) เพื่อไม่ต้องเปิดใบใหม่ทีหลัง
+
+**สถานะ BLOCKED-ON-WIRING:** `classify_logout_attempt` ยังเช็ค `vital_count == 1` อยู่จริงบน `main`
+ตอนเปิดใบนี้ (ยืนยันด้วย `grep -n vital_count`, ดู RECHECK) -- ห้ามเรียกผู้เทสมาก่อน RECHECK ผ่านครบ
+
+### objective
+
+หลัง chief แก้ `classify_logout_attempt` ตามข้อเสนอ (ก) หรือ (ข) ในจดหมาย `2007` แล้ว ให้ผู้เทสกดปุ่ม
+"ออกจากเกม" (UI-B) จริงในสถานการณ์ที่ไคลเอนต์มักมี vital อื่นค้างอยู่ในเซสชัน (ไม่ใช่บัญชีเพิ่งล็อกอิน
+สด ๆ ที่ไม่มี pending vital ใด ๆ) แล้วดูว่าปุ่มตอบสนองจริงหรือไม่
+
+### pass criteria — สองชั้น
+
+**ชั้น client-observable:** ผู้เทสกดปุ่ม "ออกจากเกม" แล้วเห็นเกมตอบสนองจริง (ออกจากเกม/กลับหน้า
+ล็อกอินตามพฤติกรรมที่ตั้งใจ) อย่างน้อย 2 ครั้งติดต่อกันในเซสชันที่มี vital อื่นค้างอยู่จริง (เดิน/สู้/
+เปิด dialog มาก่อนกดปุ่ม) ไม่ใช่แค่ตอนเพิ่งล็อกอิน -- ปุ่มไม่ตอบสนอง (เหมือนเดิม) ⇒ FAIL, บันทึกว่า
+vital_count ตอนนั้นคือเท่าไหร่ (grep console/capture log)
+
+**ชั้น wire/DB (headless, ทำได้ก่อนเปิดจอ ตาม `PANYA-DECISION 2026-08-27 20:10`):**
+`python3 -m pytest tests/test_logout_request_envelope.py -q` ต้องยังผ่าน 18/18 หลังแก้ (โมดูลนี้ไม่ถูก
+แตะโดยการ wire -- เป็น regression guard) และ server console/capture log ของรอบเทสต้องโชว์ว่า
+`_dispatch_logout_hypothesis` ตอบกลับ (ไม่ใช่ `logout_hypothesis_wrong_envelope_no_reply`) เมื่อ
+`vital_count == 4` เหมือนเฟรมจับจริงของใบ `1930`
+
+### nonclaims
+
+1. ไม่อ้างว่าการแก้นี้คือสาเหตุเดียวที่ UI-B ค้าง -- เป็นบั๊ก dispatch จริงที่ยืนยันแล้วหนึ่งจุด อาจมี
+   จุดอื่นที่ยังไม่เจอ (ดูหัวข้อ HYP-PF-040 ในจดหมาย `2007`)
+2. ไม่ทดสอบ subcode 3 (UI-A, "กลับหน้าเลือกตัวละคร") -- ไบต์จับสดของปุ่มนั้นตรง pin เดิม 34/34 อยู่แล้ว
+   ไม่มีอะไรต้องแก้ฝั่งนั้น (แยกเป็นเรื่อง `HYP-PF-040`/`RE-197` คนละประเด็น)
+3. ไม่ยืนยัน/ปฏิเสธ `HYP-PF-040` (ตัวแยกปุ่มตอน dialog เปิด) -- ใบนี้เทสเฉพาะ dispatch-level fix ของ
+   vital-count envelope เท่านั้น
+4. ไม่ทดสอบ persistence หลัง logout (ข้อมูลตัวละครถูกเซฟถูกต้องหรือไม่) -- แยกเป็นใบอื่นถ้าจำเป็น
+
+### RECHECK (ต้องผ่านครบก่อนเปิดจอเรียกผู้เทส)
+
+🔴 แก้แล้วหลัง pf-adversary รอบนี้ชี้สองจุด: (1) เดิม item 1/2 อ้าง cwd ต่างกัน (parent-dir-relative
+vs repo-root-relative) สั่งต่อกันจะพังเงียบ ๆ -- ทุกข้อด้านล่างนี้ล็อก `cd pirate-force-server` เข้าไป
+ในคำสั่งเองแล้ว ไม่พึ่ง cwd ผู้รัน (2) เดิม `grep -n "vital_count == 1"` ทั้งไฟล์ชนกับ decoy ที่บรรทัด
+1560 (`classify_worldinfo_frame`, คนละฟังก์ชัน ไม่เกี่ยวกับใบนี้) ⇒ จะมี hit ค้างตลอดแม้แก้แล้ว --
+item 1 เปลี่ยนเป็น `sed` ตัดเฉพาะช่วงบรรทัดของ `classify_logout_attempt` ก่อน grep เพื่อไม่ให้ชน decoy
+
+1. `(cd pirate-force-server && sed -n '1451,1465p' src/pirateforce_foundation/logout_hypothesis.py | grep -n "vital_count == 1")`
+   ต้อง **ไม่เจอ** อะไรเลย (exit code เป็น grep-no-match) -- ถ้ายังเจอแปลว่า `classify_logout_attempt`
+   เองยังไม่ถูกแก้ (เปลี่ยนเป็น `>= 1` ตามข้อเสนอ (ก) หรือเรียก
+   `logout_request_envelope.classify_logout_vital_request` แทนตามข้อเสนอ (ข)) -- ถ้าบรรทัด 1451-1465
+   ขยับเพราะโค้ดก่อนหน้าถูกแก้ไปด้วย ให้หาเลขบรรทัดของฟังก์ชันใหม่ก่อนรัน อย่าเชื่อเลข 1451-1465 เดิม
+   ตาบอด
+2. `(cd pirate-force-server && python3 -m pytest tests/test_logout_request_envelope.py tests/ -k logout -q)`
+   ผ่านทั้งหมด (regression guard -- ห้ามมีเทส logout เดิมพังจากการแก้)
+3. Headless replay เฟรม 119 ไบต์จริงของใบ `1930` (หรือแคปเจอร์ใหม่ที่เทียบเท่า) ผ่าน dispatch จริง แล้ว
+   `grep` console log ยืนยันว่าไม่ใช่ `logout_hypothesis_wrong_envelope_no_reply` อีกต่อไป
+4. ผลลบ/ว่างจากข้อ 1-3 ข้อใดข้อหนึ่ง = ยังไม่พร้อม สถานะคงเป็น `BLOCKED-ON-WIRING` ห้าม promote เป็น
+   `READY`
+
+### links
+
+`notes_to_chief/20260901_2007_LANE-A-CORE-REQUEST-logout-vitalcount-envelope-gap-classifier-built.md`
+(จดหมายเปิดประเด็นนี้ พร้อมข้อเสนอ (ก)/(ข) และเลขบรรทัด) ·
+`notes_to_chief/20260901_1930_KA1A-CAPTURE-*.md` (ที่มาไบต์จับสดจริง, ย้ายไป `consumed/`) ·
+`src/pirateforce_foundation/logout_request_envelope.py` ·
+`tests/test_logout_request_envelope.py` · `src/pirateforce_foundation/logout_hypothesis.py:1451-1465`
+(จุดที่ต้องแก้) · `RE-197` (คำถามคู่ขนานเรื่อง `#1398`, ไม่บล็อกใบนี้) · `GT-186` (UI-B precedent,
+บล็อกซ้ำสองรอบเทสก่อนพบสาเหตุนี้)
+
+### numbering
+
+highest `GT` ที่เปิดอยู่ก่อนใบนี้คือ `GT-193`; highest `RE` ใน `CLIENT_RE_QUEUE.md` คือ `RE-197`
+ใบนี้คือ `194`
+
+### result
+
+(tester/build lane กรอก: PASS/FAIL/BLOCKED, evidence, timestamp, OBSERVER_CONFIRMED line ตาม G-OBS
+เมื่อมี client-observable evidence)
+
+**ผู้เปิดใบ: LANE-A (สาย A · WORLD) รอบ `xlraox` ต่อยอด 2026-09-01T21:28+07:00**
