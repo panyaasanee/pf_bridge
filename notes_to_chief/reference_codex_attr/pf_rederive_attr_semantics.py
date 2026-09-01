@@ -1948,6 +1948,11 @@ def _run_from_verified_snapshot() -> int:
         reconfigure = getattr(stream, "reconfigure", None)
         if reconfigure is not None:
             reconfigure(encoding="utf-8", errors="backslashreplace")
+    # This generator has one authoritative mode: a complete staged re-derivation.
+    # Reject flags instead of silently treating names such as --check or
+    # --self-test as a successful full publication.
+    if sys.argv[1:]:
+        raise SystemExit("attr_generator_unsupported_arguments")
     _assert_no_reparse_components(RUNNING_SCRIPT_LEXICAL_PATH, "generator_script")
     _assert_no_reparse_components(HERE_LEXICAL, "output_root")
     _assert_no_reparse_components(
@@ -2819,6 +2824,11 @@ def validate_monster_presentation_links_in_stage(
             != "NOT_APPLIED_IDENTITY_UNSAFE"
             or row["cline_count_fields"]
             != "NOT_APPLIED_SPAWN_COUNT_UNPROVED"
+            or row["scene_name_row_ids"]
+            != "NOT_APPLIED_MAP_LIST_CONTEXT"
+            or row["cline_type"]
+            != "NOT_APPLIED_MAP_LIST_CONTEXT"
+            or "scene_name_rows_sha256" in row["support_spans"]
             or row["candidate_outfit_vectors"]
             != "NOT_APPLIED_IDENTITY_UNSAFE"
             or row["composition_join_status"]

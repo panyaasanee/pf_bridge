@@ -1,6 +1,6 @@
 {
   "artifact_count": 48,
-  "artifact_root": ".pf_attr_generations/d5eeb9313ae32ef3fe6d4f9b0bf124a6ca5efa221616f50bb67645a9f1b5655d",
+  "artifact_root": ".pf_attr_generations/d5865d64f2ca82f1242c5e006422620d51f227422cdcfb20bf71a2140d255372",
   "artifact_sizes": {
     "PF_A2_ACHIEVEMENTS_CODEC_CORRECTION.tsv": 430547,
     "PF_A2_ACTOR_CODEC_CORRECTION.tsv": 44883,
@@ -49,7 +49,7 @@
     "PF_GROUND_DROP_TRANSPORT.md": 2779,
     "PF_GROUND_DROP_TRANSPORT.tsv": 26924,
     "PF_MONSTER_PRESENTATION.md": 16783,
-    "PF_MONSTER_PRESENTATION.tsv": 21059779
+    "PF_MONSTER_PRESENTATION.tsv": 20875512
   },
   "artifacts": {
     "PF_A2_ACHIEVEMENTS_CODEC_CORRECTION.tsv": "7a01bfa1fc24bdedafa14586eb581464e6e1bcce49708e42d911d2e13f67095c",
@@ -99,15 +99,15 @@
     "PF_GROUND_DROP_TRANSPORT.md": "e2b1b90efcd63cfb6878f47937a466424d872809599a04718c75e6d7940c38c5",
     "PF_GROUND_DROP_TRANSPORT.tsv": "9e2396795ee32287f1f9b82f22fb8f394464d2b0a25375d07108ee138c73907b",
     "PF_MONSTER_PRESENTATION.md": "2a2a6990bb28cdff5c3a2c1791852f992ec020db15c70f9ab6f929c42a8be282",
-    "PF_MONSTER_PRESENTATION.tsv": "6c452e3da3be521bc82219af97186fda3ec0f6368f1cb34defbb95fb2184cd8b"
+    "PF_MONSTER_PRESENTATION.tsv": "658ae9352da2e45c1cd5306851dd7bbe8271dabe5cef3728ce223df31193722c"
   },
   "authoritative_reader": "pf_attr_checkpoint_reader.py",
   "authoritative_reader_sha256": "5c3a472d1965547adeda4642bebe17e469b71f8380a20ae58aefe221276af6b0",
   "compatibility_mirrors_authoritative": false,
   "format": "PF_ATTR_GENERATION_MANIFEST_V4",
-  "generation_id": "d5eeb9313ae32ef3fe6d4f9b0bf124a6ca5efa221616f50bb67645a9f1b5655d",
-  "generator_sha256": "15306d3f692ebe74355ed56e12767650bea208ed502e33c43f621bef95ff5237",
-  "generator_snapshot": ".pf_attr_generator_snapshots/15306d3f692ebe74355ed56e12767650bea208ed502e33c43f621bef95ff5237/pf_rederive_attr_semantics.py",
+  "generation_id": "d5865d64f2ca82f1242c5e006422620d51f227422cdcfb20bf71a2140d255372",
+  "generator_sha256": "9d5e4b242fe21f649907b9afb1c97582a7c2788527cb71e0001534378974c4c8",
+  "generator_snapshot": ".pf_attr_generator_snapshots/9d5e4b242fe21f649907b9afb1c97582a7c2788527cb71e0001534378974c4c8/pf_rederive_attr_semantics.py",
   "image_sha256": "9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623",
   "publication_rule": "resolve artifact_root and parse the same verified in-memory bytes; top-level artifact mirrors are non-authoritative"
 }
