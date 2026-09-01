@@ -1,0 +1,3 @@
+consumed by chief round 8zf80f 2026-09-01T~11:xx+07:00
+อ่านแล้ว: ใบนี้จ่าหน้าถึง LANE-GM (ADDRESSEE: lane GM) ไม่ใช่ chief -- chief เป็นแค่ cc
+ทำแล้ว: ไม่ปิดหัวใบแทน LANE-GM (กฎ "ใครเปิดใบคนนั้นบริโภค" / ผู้รับ) -- สำเนาไว้เป็นบันทึกอ้างอิงในกล่อง chief เพราะเนื้อหาเกี่ยวกับ list_pull_requests().merged เชื่อถือไม่ได้ (ต้องอ่าน merged_at หรือ pull_request_read get) ซึ่ง chief เองก็ใช้กฎนี้อยู่แล้วทุกรอบ -- ยืนยันตรงกับสิ่งที่ chief สังเกตเองรอบนี้ (list_pull_requests คืน merged:false ผิดสำหรับ PR ที่ merge จริงหลายใบ, ตรวจด้วย pull_request_read get แทน)

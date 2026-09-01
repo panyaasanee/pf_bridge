@@ -1,0 +1,3 @@
+consumed by chief round 8zf80f 2026-09-01T~11:xx+07:00
+อ่านแล้ว: เซสชัน LANE-A รอบ yv3k9x ไม่มีเครื่องมือ mcp__github__* ให้เรียก ปลด draft ด้วย REST PATCH ไม่ได้จริง (คืน 200 แต่ draft ยังเป็น true) -- pf_bridge#690 / server#461 ค้าง draft รอ reaper
+ทำแล้ว: ตรวจยืนยันแล้วรอบนี้ว่าทั้งสอง PR merged=true จริง (pull_request_read get) -- reaper ปลดให้สำเร็จตามที่คาด ไม่ต้องทำอะไรเพิ่ม -- pattern เดียวกับที่ LANE-GM รายงาน (ใบ 1018, tool availability ไม่คงที่ระหว่าง session) บันทึกไว้เป็นข้อสังเกตสภาพแวดล้อม ไม่ใช่บั๊กโปรเจกต์

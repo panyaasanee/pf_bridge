@@ -8831,7 +8831,22 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 - links: notes_to_chief/20260831_2246_KA1B-TO-LANE-B-death-predicate-plus-probe-request.md - notes_to_chief/reference_codex_attr/PF_ATTR_ROLE_DISCRIMINATOR.tsv (row ACTOR_DEATH_SHARED) - pirate-force-server src/pirateforce_foundation/hostile_hp_link_hypothesis.py:383 - pirate-force-server src/pirateforce_foundation/mob_death.py:74-91 - notes_to_chief/reference_adhoc_probe/adhoc_attr_probe.py - notes_to_chief/reference_adhoc_probe/ACTORATTR_PROBE_TABLE_x_y.md - notes_to_chief/reference_adhoc_probe/ADHOC_PROBE_ROUND1_FINDINGS_20260827.md - notes_to_chief/consumed/20260830_2355_PANYA-ADDENDUM-probe-request-intake-4-gates-batched-sheet-rides-on-GT-round-ka1-B.md - numbering: GT-181 assigned after GT-180 collided with LANE-A round `yfbqmg`'s concurrent entry (same round, different topic) -- GT-181/RE-181 grepped as zero hits in GAME_TEST_QUEUE.md and CLIENT_RE_QUEUE.md before reserving this ID (highest prior at collision time: GT-180 taken by LANE-A, RE-172).
 - result: (tester fills in: PASS/FAIL/BLOCKED, evidence, timestamp)
 
-## GT-182 GM-A-WARP-NO-COORD-LIVE-SPAWN-001  [BLOCKED-ON-ATTENDED [NEEDS-ATTENDED-CAPTURE] -- GM047 fix merged, safe to run; code built round jd4jqp, fixed+merged round ts0deo]
+## GT-182 GM-A-WARP-NO-COORD-LIVE-SPAWN-001  [PASS -- OBSERVER_CONFIRMED 2026-09-01T10:40+07:00, chief round 8zf80f]
+
+> ✅ **PASS (chief round `8zf80f`), OBSERVER_CONFIRMED 2026-09-01T10:40+07:00:** attended session,
+> Panya drove every keystroke herself (`notes_to_chief/consumed/20260901_1040_GT182-RESULT-*.md`).
+> `/warp 3` typed with no coordinates, mid-session, no relog. Screen changed to Spice Paradise
+> Island; landed X:-21,215 Y:16,907, standing on ground, walkable immediately -- F-2 from
+> `GT-172` (float/stuck geometry from a carried-over z) does NOT reproduce on this no-coords
+> form, confirming the `world_scene_travel.spawn_position()` anchor this entry's own background
+> section asked for. Creatures were on screen before she moved. Wire:
+> `LANE_GM_CHAT_WARP_CROSS_SCENE_NO_COORDS_TELEPORT_VITAL` (73 B) then
+> `WORLD_POP_HANDOFF scene=3 kind=census actors=62` anchored on the destination's pinned spawn,
+> not the departure coordinates -- F-1 from `GT-172` closed for this path (GM-045 + GM-047).
+> Both (a) and (b) of this entry's single claim hold. Not covered by this PASS: whether a
+> SECOND warp later in the same session would also get a census (the once-per-connection latch
+> this same round's `runtime.py` fix addresses, see `rounds/` this round) -- out of scope for
+> this entry's own claim, which is about the first warp only.
 
 > ✅ **UNBLOCKED (chief round `69r41m`, R283):** the `20260901_0741_COO-DECISION-gm047-position-corruption-p0-block-gt182-until-fixed.md`
 > warning is lifted. `CORE-REQUEST-GM-047` (registry row 028) landed on `main` in both repos this
