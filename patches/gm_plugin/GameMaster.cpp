@@ -215,14 +215,22 @@ HMODULE FindClientCrt() {
         reinterpret_cast<IMAGE_IMPORT_DESCRIPTOR*>(base + dir->VirtualAddress);
 
     for (; imp->Name != 0; ++imp) {
-        DWORD namesRva =
-            imp->OriginalFirstThunk ? imp->OriginalFirstThunk : imp->FirstThunk;
-        if (namesRva == 0 || imp->FirstThunk == 0) {
+        /*
+         * Never fall back to FirstThunk for the NAME table.  After the loader
+         * has run, FirstThunk holds resolved absolute addresses, not RVAs to
+         * IMAGE_IMPORT_BY_NAME -- reading it as the name table computes
+         * base + <absolute VA>, a wild pointer, and the lstrcmpA below would
+         * fault inside DllMain under the loader lock: a hard crash at client
+         * start-up.  A descriptor with no INT simply cannot be searched by
+         * name, so skip it.  (A normally linked VC9 executable gives every
+         * descriptor an INT; this is the branch, not the expected path.)
+         */
+        if (imp->OriginalFirstThunk == 0 || imp->FirstThunk == 0) {
             continue;
         }
 
         IMAGE_THUNK_DATA* names =
-            reinterpret_cast<IMAGE_THUNK_DATA*>(base + namesRva);
+            reinterpret_cast<IMAGE_THUNK_DATA*>(base + imp->OriginalFirstThunk);
         IMAGE_THUNK_DATA* bound =
             reinterpret_cast<IMAGE_THUNK_DATA*>(base + imp->FirstThunk);
 
@@ -325,6 +333,24 @@ void* GameMasterInterface::MakeEmptyString(void* destination) {
  */
 extern "C" void* __cdecl CreateGameMaster(void) {
     try {
+        /*
+         * Refuse rather than hand back a half-built object.
+         *
+         * Without the MSVCP90 constructor, slot +0x00 would write its -1 and
+         * leave the +4 subobject UNINITIALISED -- diverging from the proven
+         * fallback, which initialises it [GM-IMG-012] -- and slot +0x08 would
+         * return a buffer it never constructed while telling the caller a
+         * wstring lives there.  Whoever read or destroyed those would be
+         * working on garbage.  That is a NEW failure, strictly worse than the
+         * dead button we already have, so we decline the job instead and say
+         * why.  DllMain has already printed which lookup failed.
+         */
+        if (g_wstringCtor == NULL) {
+            Announce(L"FAIL: msvcp90 wstring ctor unresolved; returning NULL "
+                     L"rather than a half-constructed object");
+            return NULL;
+        }
+
         void* raw = AllocateFromClientCrt(sizeof(GameMasterInterface));
         if (raw == NULL) {
             /*

@@ -94,10 +94,18 @@ compiler ของเรา ไม่ขึ้นกับ `_SECURE_SCL` (ค่
 ขนาด `basic_string` ระหว่าง 24 กับ 28 ไบต์) ⇒ สวิตช์ `PF_GM_ALLOW_NON_VC9` **ถูกลบทิ้งทั้งอัน** เพราะ
 ไม่จำเป็นอีกต่อไป (และของเดิมมันทำให้ slot `+0x08` คืน pointer ที่ยังไม่ init = แย่กว่าไม่ทำอะไรเลย)
 
-`[PROPOSED]` ชื่อ decorated ของ ctor
-(`??0?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAE@XZ`) **ยังไม่ได้ยืนยันกับ
-`msvcp90.dll` ของเครื่องจริง** — ถ้าผิด เรา resolve ไม่ได้ แล้ว**ข้ามการ construct ทั้งสองช่อง พร้อม
-พิมพ์บอก** ไม่มีการ fallback ไป inline ctor เด็ดขาด เพราะนั่นคือสิ่งที่เพิ่งแก้ทิ้งไป
+`[MEASURED — llvm-undname]` ชื่อ decorated ทั้งสามตัวถอดกลับแล้วตรงตามที่ตั้งใจ:
+`??3@YAXPAX@Z` = `void __cdecl operator delete(void*)` · `??2@YAPAXI@Z` =
+`void* __cdecl operator new(unsigned int)` ·
+`??0?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAE@XZ` =
+`public: __thiscall std::basic_string<wchar_t,...>::basic_string(void)`
+(revision 2 เคยติดป้ายตัวหลังว่า `[PROPOSED]` ซึ่ง **ระวังเกินจริง** — pf-adversary รอบสองชี้ว่าการสะกด
+ตรวจได้และตรวจแล้วถูก การติดป้ายอ่อนเกินก็เป็นการรายงานน้ำหนักหลักฐานผิดเหมือนกัน)
+
+สิ่งที่**ยังไม่รู้จริง ๆ** คือ `msvcp90.dll` บนเครื่องนั้น **export ตัวนี้ออกมาหรือเปล่า** — ถ้าไม่ เรา
+resolve ไม่ได้ แล้ว `CreateGameMaster` จะ **คืน NULL ไปเลย** (ไม่ใช่คืน object ที่ construct ไม่ครบ)
+พร้อมพิมพ์บอก ⇒ กลับไปสภาพเดิมของวันนี้ ไม่ใช่ failure แบบใหม่ ไม่มีการ fallback ไป inline ctor เด็ดขาด
+ตรวจล่วงหน้าได้ด้วย `dumpbin /exports msvcp90.dll | findstr basic_string@_W`
 
 ## กฎหน่วยความจำ
 
@@ -120,12 +128,30 @@ instance ที่ถูกต้อง**โดยโครงสร้าง** 
 (`DOWNSTREAM_RETENTION_AND_ORIGINAL_OWNERSHIP_UNPROVEN`) ไม่ปิดความเป็นไปได้ที่ panel เก็บ pointer ของ
 สตริงเราไว้ ถ้า `FreeLibrary` unmap เราแล้วมีคนอ่านต่อ = แครชตอนปิดที่ไล่สาเหตุยากมาก
 
+## 🔴 ตรวจก่อน build หนึ่งอย่าง — ยังไม่มีใครตรวจ
+
+ทุกการจองหน่วยความจำของปลั๊กอินนี้พึ่ง `FindClientCrt()` ที่เดิน import table ของ client ไปหา thunk ของ
+`??3@YAXPAX@Z` **แต่ยังไม่มีใครเปิด import table ของ client จริงมาดูเลยว่า `operator delete` ถูก import
+มาแบบมีชื่อ (by name) และ descriptor นั้นมี INT (`OriginalFirstThunk`) อยู่จริงหรือไม่** — ไม่มีแถวไหนใน
+gate TSV พิสูจน์เรื่องนี้ ถ้า import มาแบบ ordinal หรือ INT ถูก strip เราจะหาไม่เจอแล้วคืน NULL
+(ผลคือปุ่มตายเหมือนเดิม ไม่ได้แครช — และปลั๊กอินจะพิมพ์ `client CRT: NOT FOUND` บอก)
+
+บนบริดจ์ทำได้ในคำสั่งเดียว:
+
+```
+dumpbin /imports GameClient.exe | findstr /i "msvcr90 ??3@YAXPAX@Z"
+```
+
+เห็น `??3@YAXPAX@Z` ในรายการ = ผ่าน · เห็นแต่ตัวเลข ordinal = ต้องเปลี่ยนวิธีหา CRT (บอกกลับมา)
+
 ## build
 
 ```
-cd patches\gm_plugin
 build_vs2008.bat
 ```
+
+(สคริปต์ `pushd "%~dp0"` เองแล้ว รันจากโฟลเดอร์ไหนก็ได้ — revision 2 แก้จุดที่ path อ้างอิง cwd
+ซึ่งอาจทำให้ไปตรวจไฟล์คนละตัวกับที่ copy)
 
 ตรวจให้สามอย่าง **และ fail จริงทุกข้อ** (revision 1 มีสองข้อแรกแต่ทั้งคู่เป็น false green):
 
@@ -203,8 +229,12 @@ key อะไร — **ถ้าไม่มีบรรทัดพวกนี
 
 ## nonclaim
 
-1. **ไม่อ้างว่าหน้าต่างจะเปิดได้จริง** — ไม่มีการ compile/รัน/boot รอบนี้ session คลาวด์ไม่มี MSVC ไม่มี
-   Windows ไม่มี client image ⇒ **ชั้น client-observable ว่างเปล่า และชั้น static ของ DLL นี้ก็ว่างเปล่า**
+1. **ไม่อ้างว่าหน้าต่างจะเปิดได้จริง** — **ไม่มีการ compile ด้วย MSVC/VC9 ไม่มีการรัน ไม่มีการ boot เกม**
+   session คลาวด์ไม่มี MSVC ไม่มี Windows ไม่มี client image ⇒ **ชั้น client-observable ว่างเปล่าสนิท**
+   สิ่งที่มีคือ ABI cross-check ด้วย `clang-cl` (ดูหัวข้อ "สัญญา ABI") ซึ่งเป็น **การยืนยันแวดล้อมเท่านั้น**
+   ไม่ใช่ข้อพิสูจน์ว่า VC9 จะให้ผลเดียวกัน
+   (revision 1 ของ nonclaim ข้อนี้เขียนว่า "ไม่มีการ compile เลย" ซึ่งขัดกับหัวข้อ MEASURED ในไฟล์เดียวกัน
+   หลังเพิ่มผล clang-cl เข้ามา — pf-adversary รอบสองจับได้ แก้แล้วตรงนี้)
 2. **ไม่อ้างว่า `GMUI_1` คือค่าที่ DLL เดิมคืน** — `[RECONSTRUCTED POLICY — PROPOSED]` และการเทียบใน
    `GM-IMG-008` เป็น tautology (เทียบค่าของเรากับค่าของเราเอง) ⇒ ตัวตัดสินจริงคือ dispatcher lookup ซึ่ง
    blocker เขียนไว้เองว่า `REQUEST_TO_FACTORY_RUNTIME_BINDING_NOT_OBSERVED` ⇒ ต้อง A/B
@@ -235,8 +265,8 @@ IMAGE SHA-256: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623
 ## sha256 ของซอร์สในโฟลเดอร์นี้ (ตามธรรมเนียม `patches/` — revision 2)
 
 ```
-08a264d6128d26b7baa505a511643a5646d8bd1e6226650340d8a0b1abf51a14  GameMaster.cpp
+7212fc5745f6b336cac42d4a27f81e8db5b33ea3f8ef4de947d07dd9a9d9f032  GameMaster.cpp
 9e2a3adc808189ba9ee31060469617e1eb32ab90c8d3094ec0a09a541aba2190  GameMaster.def
-8d3b9143904c156784fea82bb542e2b7c88a37daac9d2ea263ce7bfcb40f4870  build_vs2008.bat
-225f8b4ffab0eeb3771575a0119473b3c4d3bf2eda7146f79a8f244505388336  install.bat
+40c6f348a7b195b92100edd381feb2e2ce96285feb9c9132dbb1581d6ceda4d3  build_vs2008.bat
+abe8b0b98113405f93431170617bc3a7074b7377c16e6bbcfec2475a5c576ab6  install.bat
 ```

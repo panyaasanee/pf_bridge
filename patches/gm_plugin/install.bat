@@ -21,6 +21,10 @@ REM project spent 27 Aug - 1 Sep failing to obtain and has never disassembled.
 REM Those outcomes are not symmetric, so this script never overwrites.
 REM ===========================================================================
 setlocal
+REM Resolve GameMaster.dll relative to THIS script, never to the caller's cwd:
+REM run from the repo root, a cwd-relative name could make the overwrite guard
+REM inspect one file and the copy take another.
+pushd "%~dp0"
 
 if "%~1"=="" (
   echo Usage: install.bat "C:\path\to\client\folder"

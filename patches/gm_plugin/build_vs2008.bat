@@ -21,6 +21,9 @@ REM build. If it is unchanged, your flag did not reach the compiler and you are
 REM about to re-test an identical DLL.
 REM ===========================================================================
 setlocal
+REM Operate on THIS script's folder, not the caller's cwd, so a forgotten cd
+REM cannot make us build or check some other GameMaster.dll.
+pushd "%~dp0"
 
 if not "%VCINSTALLDIR%"=="" goto have_env
 if "%VS90COMNTOOLS%"=="" (
@@ -45,7 +48,11 @@ if exist disasm.txt     del /q disasm.txt
 echo.
 echo === compiling and linking ===
 echo EXTRA_DEFS=%EXTRA_DEFS%
-cl /nologo /LD /MD /O2 /W4 /WX /EHsc ^
+REM /W4 without /WX on purpose: VC9's own Platform SDK headers emit W4-level
+REM warnings (C4201 nameless struct/union among them), so /WX would abort the
+REM build over a warning in Microsoft's headers, on a machine that cannot
+REM iterate quickly. Read the warnings; do not let them stop the build.
+cl /nologo /LD /MD /O2 /W4 /EHsc ^
    /D WIN32 /D _WINDOWS /D NDEBUG /D _CRT_SECURE_NO_WARNINGS %EXTRA_DEFS% ^
    GameMaster.cpp ^
    /link /DEF:GameMaster.def /OUT:GameMaster.dll /MACHINE:X86
@@ -70,22 +77,28 @@ REM ---------------------------------------------------------------------------
 echo.
 echo === check 1/3: export name ===
 dumpbin /nologo /exports GameMaster.dll > exports.txt
-findstr /c:"_CreateGameMaster" exports.txt >nul
-if not errorlevel 1 (
-  echo [FAIL] exported as _CreateGameMaster -- leading underscore. GetProcAddress will miss it.
-  exit /b 1
-)
-findstr /c:"CreateGameMaster@" exports.txt >nul
-if not errorlevel 1 (
-  echo [FAIL] exported with an @n stdcall decoration. GetProcAddress will miss it.
-  exit /b 1
-)
-findstr /r /c:"[ ]CreateGameMaster$" exports.txt >nul
+
+REM One word-boundary test does all three jobs, and survives either output
+REM format dumpbin may use (a bare "CreateGameMaster" column, or the
+REM "CreateGameMaster = _CreateGameMaster" form some versions print for a
+REM .def-renamed export -- the exported token still matches there):
+REM   _CreateGameMaster    -> '_' is a word character, so \< does not match
+REM   CreateGameMaster@0   -> \> does not match before '@'
+REM   CreateGameMaster     -> matches
+REM An earlier revision used a plain substring match here, which passed on both
+REM decorated spellings: it green-lit the exact failure it existed to catch.
+findstr /r /c:"\<CreateGameMaster\>" exports.txt >nul
 if errorlevel 1 (
   echo [FAIL] no export named exactly CreateGameMaster.
+  echo        GetProcAddress would return NULL and the client would silently
+  echo        keep its own fallback -- indistinguishable on screen from the bug
+  echo        this plug-in exists to fix. Export table was:
+  type exports.txt
   exit /b 1
 )
 echo [ok] exported as exactly CreateGameMaster
+echo      (read these lines yourself once, do not just trust the check:)
+findstr /i "CreateGameMaster" exports.txt
 
 REM ---------------------------------------------------------------------------
 REM Check 2: CRT dependencies. Revision 1 printed a [WARN] here and then
