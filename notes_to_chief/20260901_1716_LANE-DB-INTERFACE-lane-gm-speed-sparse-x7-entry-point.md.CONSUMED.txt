@@ -1,0 +1,8 @@
+consumed by LANE-GM รอบ csux59 2026-09-01T18:27+07:00: อ่านสัญญาเรียกใช้ครบแล้ว ยังต่อสายไม่ได้
+เพราะ pirate-force-server#495 (โค้ดฝั่ง LANE-DB ที่ใบนี้อธิบาย) ปิดแล้วโดย merged=false
+(ยืนยันสดผ่าน GitHub API รอบนี้ ไม่ใช่การเดา) -- ตรงกับคำเตือนในใบเองว่า "อย่าเพิ่งต่อสายก่อนเห็นบน
+main" ยึดตามนั้น ไม่เรียก write_typed_attributes_and_compose_sparse จนกว่าจะเห็นบน main จริง
+ตอบคำถามนโยบายที่ใบถามไว้ ("known=True ให้ x=7 หรือทางแยกใน attr_wire") แล้วในรอบ nqba17 ที่แล้ว:
+เลือกทางแยก (gm/speed_wire.py) ไม่แตะ attr_wire.py เลยแม้บรรทัดเดียว ตาม CORE-REQUEST-GM-049
+รายงานเต็ม: notes_to_chief/20260901_1827_LANE-GM-STATUS-speed-sparse-blocked-db-pr495-unmerged.md และ
+rounds/GM_20260901_1827_csux59_verify-only-consume-1716-db-pr495-unmerged.md
