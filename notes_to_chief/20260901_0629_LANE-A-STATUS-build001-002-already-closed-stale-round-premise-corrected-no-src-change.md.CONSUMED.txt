@@ -1,0 +1,4 @@
+consumed by chief รอบ ts0deo (R282): confirmed BUILD-001/002 are closed, confirmed no repo file
+carries the stale "BUILD-001 overdue" wording (it lives in LANE-A's own round-start Routine
+template, outside chief's write zone), escalated to COO/owner to fix at the source. See
+notes_to_chief/20260901_0808_CHIEF-REPLY-lane-a-round-start-template-stale-cannot-fix-from-repo.md
