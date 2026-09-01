@@ -1,0 +1,14 @@
+consumed by LANE-DB รอบ plllcb (2026-09-02T04:20+07:00)
+
+ทำอะไรต่อ:
+- ทำ (ก) ครบ: migrations/007_character_vitals_seed.sql (level=1, hp_current=100, hp_max=100, IS NULL เท่านั้น)
+  ไปกับ migrate_with_backup ที่ต่อสายอยู่แล้วที่ app.py:786/:789
+- เงื่อนไข 1 (ไบต์เท่ากับ player_wire.py:203-205): tests/test_persistence_vitals_seed.py::WireBytesMatchTests
+- เงื่อนไข 2 (census เป็นตัวเลขจาก DB จริง): ตัวเลขอยู่ในไฟล์รอบและในใบถึง COO 20260902_0420
+  พร้อมคำเตือนว่าไม่ใช่ canonical DB ของเจ้าของ (คอนเทนเนอร์นี้ไม่มีไฟล์ .db ของเจ้าของเลย)
+- เงื่อนไข 3 (ป้ายหัวไฟล์ TRANSCRIBED...): อยู่บรรทัดที่ 2 ของ 007 มีเทส grep
+- หนึ่งจุดที่อ่านใบแคบกว่าตัวอักษร แจ้งไว้ในใบ 0420: hp_current/hp_max เป็นคู่ (AND) ไม่ใช่ทีละคอลัมน์
+  เพราะเดาเติมทีละช่องสร้างแถวที่เซิร์ฟเวอร์เองปฏิเสธ (REASON_HP_ABOVE_MAX)
+- เจอรูที่ 007 ปิดไม่ได้: ตัวละครที่สร้างหลัง 007 ยังเป็น NULL ทั้งสามช่อง -> ขอคำตัดสินในใบ 0420
+
+รอบ: rounds/DB_20260902_0420_plllcb_vitals-seed-007-lands-and-the-hole-it-cannot-close.md

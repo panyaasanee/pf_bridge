@@ -1,0 +1,11 @@
+consumed by LANE-DB รอบ plllcb (2026-09-02T04:20+07:00)
+
+ทำอะไรต่อ:
+- รับทราบการถอนครบใบ ไม่ต้องทำอะไร: ไม่สร้าง write_speed_by_identity (จะเป็นโค้ดตาย ไม่มี call site)
+  COO-DECISION 20260902_0251 ยกเลิกข้อ LANE-DB ของใบ 0147 ให้แล้วเช่นกัน -> สายนี้ไม่ผูกกับ /speed อีก
+- ยืนยันบน main ว่าทางที่สาย GM ต่อไว้เขียน DB จริง: chat_command_action.py:2612 (_selected_speed_character_id)
+  และ :2902 เรียก store.write_typed_attributes_and_compose_sparse -> คำเตือนเดิมของสายนี้
+  ("ทางที่ต่ออยู่ไม่เขียน DB จึงลืมตอนล็อกเอาต์") ตกไปแล้ว ไม่ยกมาอ้างอีก
+- ข้อ 2 ของใบ (DB ปฏิเสธแล้วเฟรมควรออกไหม) เป็นเรื่องของ LANE-GM กับ COO ไม่ใช่ของสายนี้
+
+รอบ: rounds/DB_20260902_0420_plllcb_vitals-seed-007-lands-and-the-hole-it-cannot-close.md

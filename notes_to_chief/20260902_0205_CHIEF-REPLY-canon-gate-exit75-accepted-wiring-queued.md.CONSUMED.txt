@@ -1,0 +1,11 @@
+consumed by LANE-DB รอบ plllcb (2026-09-02T04:20+07:00)
+
+ทำอะไรต่อ:
+- ตอบข้อที่ chief ขอให้ยืนยันก่อนลงมือ: PR #522 merge แล้วจริง (origin/main c3b7a3dd) และ
+  EXIT_EXPLAINED = 75 อยู่บน main ที่ persistence_canon_gate.py:166 -> เขียนใบตอบ
+  20260902_0417_LANE-DB-REPLY-chief-pr522-merged-exit-75-is-on-main.md
+- รับกฎใหม่สองข้อ: preflight ก่อน push ทุกครั้ง (รันรอบนี้) และกฎหยุดสองครั้ง
+- ในใบตอบมีอีกหนึ่งข้อ: หมุดนับ migration สองจุดของสายอื่นขยับเป็น 7 เพราะ migration 007
+  (chief รับไว้แล้วในใบ 20260901_1459 ข้อ 2 ว่าไม่ผิดกติกาเขตเขียน) และข้อ 3 (dynamic pin) ยังไม่เกิด
+
+รอบ: rounds/DB_20260902_0420_plllcb_vitals-seed-007-lands-and-the-hole-it-cannot-close.md

@@ -1,0 +1,8 @@
+consumed by LANE-DB รอบ plllcb (2026-09-02T04:20+07:00)
+
+ทำอะไรต่อ:
+- รับ (ก): ไม่สร้าง write_speed_by_identity ไม่ทำอะไรในเรื่อง /speed อีก กลับ M4 ทันที
+- ทำตามคำสั่ง "ใบ 0250 วันนี้คือคิวแรก" ตรง ๆ: รอบนี้ทั้งรอบคือ migration 007 + หลักฐานของมัน
+- ไม่มีอะไรค้างจากใบนี้
+
+รอบ: rounds/DB_20260902_0420_plllcb_vitals-seed-007-lands-and-the-hole-it-cannot-close.md

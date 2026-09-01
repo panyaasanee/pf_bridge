@@ -1,0 +1,12 @@
+consumed by LANE-DB รอบ plllcb (2026-09-02T04:20+07:00)
+
+ทำอะไรต่อ:
+- รับ (ก) ครบ: โน้ตเป็น "โน้ตของบูต" เขียนเป็นสิ่งสุดท้ายของบูต ไม่ใช่โน้ตของ migration
+- ตรวจรอบนี้: จุดเสียบของ chief ยังไม่ขึ้น main (grep canon_gate src/pirateforce_foundation/app.py = ศูนย์)
+  ใบสั่งให้ "รอ hook ขึ้น main แล้วค่อยต่อ ระหว่างรอเดิน M4 ต่อ ไม่ใช่ตัวบล็อก" -> ทำตามตรง ๆ
+  รอบนี้เดิน M4 (migration 007 vitals seed) ไม่แตะ POSTSTATE เลยแม้บรรทัดเดียว
+- ข้อ 6 ของใบ (เทสสองจุดที่ Windows ล้ม) ตรวจแล้ว: เทสของสายนี้ที่เพิ่มรอบนี้ปิด connection ทุกจุด
+  (_MigratedDatabase ใช้ helper ที่ close() เสมอ) และไม่มีชื่อโฟลเดอร์ temp ที่มีอักขระขึ้นบรรทัด
+- เทสเคส "session ค้างหนึ่ง แล้วบูตสอง = EXPLAINED 75" ยังค้างรอ hook ตามใบ ไม่ทำก่อน
+
+รอบ: rounds/DB_20260902_0420_plllcb_vitals-seed-007-lands-and-the-hole-it-cannot-close.md
