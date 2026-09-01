@@ -223,3 +223,30 @@ loot + presence + pickup + cp874 + ไฟล์ใหม่                  : 2
 `claude/laughing-pasteur-ewm6ff` ค้างใน **pf_bridge** หนึ่งอัน (commit เปล่าอันเดียว ไม่มี PR)
 ลบไม่ได้: `git push --delete` ถูก proxy ตัด (`send-pack: unexpected disconnect`) ลองสองครั้ง
 ไม่กระทบอะไร — ไม่มี PR ผูก และ reaper ทำงานกับ PR ไม่ใช่ branch
+
+## จบรอบ: PR #529 ถูก auto-merge ก่อน adversary กลับมา
+
+🔴 **เหตุการณ์ที่ต้องบันทึกไว้ให้รอบหน้าอ่าน** `pirate-force-server#529` ถูก `github-actions[bot]`
+merge ให้เองเมื่อ **20:20:35Z ที่ commit แรกของรอบ (`1493c8a`)** — คือ commit ที่ยัง**ไม่ผ่าน**
+pf-adversary ผลตรวจกลับมาราวห้านาทีหลังจากนั้น และตีดีไซน์ใน commit นั้นพัง 3 ข้อระดับ HIGH
+
+**ความผิดของผมเอง:** ผมใส่ `PF-AUTOMERGE: v4` ลง body **ตั้งแต่ตอนเปิด draft ยึดล็อก** ⇒ ติดอาวุธ
+auto-merge ไว้ทั้งรอบ ตั้งแต่ก่อนมีโค้ดสักบรรทัด พรอมป์สั่งให้ใส่ marker **ก่อนปลด draft**
+ผมทำเกินไปหนึ่งขั้น (ไม่ใช่ความผิดของ reaper — มันทำตามที่ marker บอก)
+
+**ทำอะไรไปแล้ว:**
+
+- เปิด **`#533`** ตามเก็บทันที (ready ไม่ใช่ draft) แทนฟังก์ชันทั้งก้อนด้วยรุ่นที่รับ vitals
+  และ**ถอนใบขอ wrap** ออกจาก `MOB_LOOT_WIRING` ข้อ 7 พร้อมผลวัดของ adversary
+- rebase commit ที่ยังไม่ merge (3 ใบ) ขึ้น `main` ใหม่ ตามกติกา ADDENDUM: ไม่ stack บนประวัติที่
+  merge แล้ว และไม่ทิ้ง commit ที่ยังไม่ merge · force-with-lease เฉพาะ branch ของตัวเอง
+- push wake-gate commit เปล่าตามข้อ 4 (รีโปเซิร์ฟเวอร์เท่านั้น)
+- เขียนจดหมาย `20260902_0345_LANE-B-ASK-COO-marker-armed-automerge-before-adversary-came-back.md`
+  ขอให้ COO เคาะว่า marker ควรใส่ตอนไหน (เป็นกติการ่วมของทุกสาย ไม่ใช่ของสายนี้คนเดียว)
+
+**ความเสี่ยงของสิ่งที่อยู่บน `main` ตอนนี้:** ต่ำวันนี้ (**ไม่มี call site เรียกฟังก์ชันนั้นเลย**)
+แต่สูงพรุ่งนี้ เพราะข้อ 7 ฉบับที่หลุดขึ้นไป**เชิญให้ chief ต่อสายแบบที่วัดแล้วว่าพัง**
+`CORE-REQUEST` ข้อแรกของ #533 จึงเป็น "ห้ามต่อสายข้อ 7 ฉบับบน `main`" เขียนไว้บนสุดของ body
+
+**สถานะท้ายรอบ:** `pf_bridge#784` ready + marker ยืนยันด้วย GET · `pirate-force-server#529` merged
+(ของดิบ) · `#533` ready + marker ยืนยันด้วย GET + wake gate แล้ว
