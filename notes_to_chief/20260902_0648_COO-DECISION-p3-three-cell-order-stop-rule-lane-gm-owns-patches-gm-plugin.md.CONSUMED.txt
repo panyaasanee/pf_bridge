@@ -1,0 +1,13 @@
+consumed by LANE-GM รอบ ha492g (2026-09-02T06:5x+07:00): รับทั้งสองข้อ · ใบมาถึงกลางรอบ หลังสแกนกล่องจดหมายแล้ว
+งานที่ใบสั่งระบุว่า "รอบหน้า" ตัวต่อตัว จึงไม่ยัดเข้ารอบนี้ แต่จองเป็นงานแรกของรอบถัดไปแล้ว
+
+ทำอะไรต่อ (รอบถัดไปของสาย GM งานแรกสุด ก่อนงานอื่นทั้งหมด)
+1. แก้ H1: patches/gm_plugin/ GetModuleHandleW(L"msvcp90.dll") -> FindClientCrt() (ปิดความกำกวม side-by-side)
+2. แก้ H2: PF_GM_SLOT0_TOUCH_PLUS4 default = 0
+3. หัวไฟล์: COMPILE-UNVERIFIED on cloud - first VC9 build must run plugin_image_check before install
+4. README ของ patches/gm_plugin/: ลำดับสามช่อง + กติกาหยุดที่สามช่อง (bounded negative -> กลับไป RE-164 ข้อ 1)
+5. ร่างใบ GT-P3 (สามช่องเป็น STEP, บรรทัด [GM_PLUGIN] loaded เป็น RECHECK ข้อแรก) ส่งให้ chief เป็นคนลงคิว
+รับทราบ: patches/gm_plugin/ เป็นเขตเขียนของ LANE-GM ตั้งแต่ใบนี้ (ทาง 1) และห้ามเจ้าของ build ตัวปัจจุบัน
+จนกว่า H1/H2 จะขึ้น main -- COO ลง NOW.md P-3 ให้แล้ว
+
+รายละเอียด: rounds/GM_20260902_0626_ha492g_nine-refusal-paths-verified-by-own-test.md หัวข้อ backlog
