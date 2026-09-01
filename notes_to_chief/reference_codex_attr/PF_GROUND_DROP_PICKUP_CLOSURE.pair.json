@@ -1,0 +1,118 @@
+{
+  "canonical_inputs": {
+    "CODEX_URGENT_20260901_2040_P05-CORPSE-DROP-STATE-SCOPE.md": {
+      "sha256": "8b8904aed010ff49566b8af6bfb99898358e80b1f78f8fe2c014f58ea847aa8b",
+      "size": 9289
+    },
+    "PF_FIELD_VALIDATION.tsv": {
+      "sha256": "080a5f32580df575632fee69d3f8faa6e2e745ad1775d05daf3e272e4e0941c3",
+      "size": 72849
+    },
+    "PF_GROUND_DROP_LIFETIME.tsv": {
+      "sha256": "b1703a7f31c42ddebf9702d12a7942577407fc320a9c2ad8411a08f3f017e710",
+      "size": 61979
+    },
+    "PF_GROUND_DROP_TRANSPORT.tsv": {
+      "sha256": "9e2396795ee32287f1f9b82f22fb8f394464d2b0a25375d07108ee138c73907b",
+      "size": 26924
+    },
+    "PF_INPUT_INVENTORY.tsv": {
+      "sha256": "729b5e73383de8fd6e0008875d4b9b685de2ad8d72a55118aa862093f10259d1",
+      "size": 364080
+    },
+    "PF_PROTOCOL_REGISTRY.tsv": {
+      "sha256": "27daac0c6fbbc45d88281c31b98e3a8b56f421bd1e8bc16f970fdff5716cfb4d",
+      "size": 89506
+    },
+    "PF_SERIALIZER_FIELDS.tsv": {
+      "sha256": "99282bdf3f492eaebdbab4918aecc0e37bf8efb42b904b18e1ba306767b5c123",
+      "size": 25195473
+    },
+    "PF_TAG_CENSUS.tsv": {
+      "sha256": "63bc9a039b5b35e5b2e1f08ce99e91b05da6e6959b5b4f173eac66b88aea337a",
+      "size": 1985
+    },
+    "pf_validate_capture_fields.py": {
+      "sha256": "0166337cbc8e9e561d9d3cd5f02364f4ed43c49070644d5423387e87b793d8c8",
+      "size": 47884
+    }
+  },
+  "capture_corpus": {
+    "blocks": 81954,
+    "bytes": 699015496,
+    "c2s_closed_nested": {
+      "declared": 15350,
+      "fail_closed": 735,
+      "gameplay_outer_blocks": 64979,
+      "login_outer_blocks": 631,
+      "no_nested_blocks": 58412,
+      "outer_blocks": 65610,
+      "pickup_reached": 0,
+      "reached": 14615
+    },
+    "files": 2227,
+    "manifest_sha256": "b8284a566d9993f52540dea52e82896b0d8eb499b9aa83ceb74084a0e671db3c",
+    "runtime_res_tail": {
+      "bit08_absent": 14536,
+      "event_manifest_sha256": "fb771d2f6fbeffacac37b283bad676c998480d74e010b36f1ebd2bd37a0dc82e",
+      "present_count_zero": 0,
+      "present_nonempty": 23,
+      "truncated_derived_mask": 3,
+      "uncertain": 729,
+      "uncertain_locator_manifest_sha256": "23b8427bdf1ab56089dba2fa0a7c2f81d6a9f25b3a391ee03eecbebc665a7878"
+    },
+    "scope": "PF_ROOT://GameClient/**/capture_*/**/*",
+    "text_files": 1337
+  },
+  "claim_set_sha256": "b04cb1f6e4d659d75f7a676dda950e5040ff844ca9b538cb7b437d311612c2b0",
+  "closure_ids": [
+    "GDP-IMG-001",
+    "GDP-IMG-002",
+    "GDP-IMG-003",
+    "GDP-IMG-004",
+    "GDP-IMG-005",
+    "GDP-IMG-006",
+    "GDP-IMG-007",
+    "GDP-IMG-008",
+    "GDP-CAP-001",
+    "GDP-CAP-002",
+    "GDP-CAP-003",
+    "GDP-CAP-004",
+    "GDP-CAP-005",
+    "GDP-CAP-006",
+    "GDP-CAP-007"
+  ],
+  "files": {
+    "PF_GROUND_DROP_PICKUP_CLOSURE.md": {
+      "sha256": "fdd25c4d2887d52c027b5be086c88d45f420a7fc20d5c153bca77e85b131da30",
+      "size": 14088
+    },
+    "PF_GROUND_DROP_PICKUP_CLOSURE.tsv": {
+      "sha256": "0aa918f2c52d333d3d8bde32c28aac8315fdc6e7c5bff786573246de6195b49e",
+      "size": 29960
+    }
+  },
+  "generation_sha256": "1d133ec7ca72fa08ed58afd930a895467803dad2dd45de1cc0f47650593a3211",
+  "generator": {
+    "path": "pf_rederive_ground_drop_pickup_closure.py",
+    "sha256": "d2bf5d1e4b3ec3cc969611e87012d94186b7f08f58c119cadef4ca7777ab3794",
+    "size": 116033
+  },
+  "image": {
+    "path": "PF_ROOT://GameClient/GameClient.local.bin",
+    "sha256": "9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623",
+    "size": 14759424
+  },
+  "marker_published_last": true,
+  "publication_order": [
+    "PF_GROUND_DROP_PICKUP_CLOSURE.tsv",
+    "PF_GROUND_DROP_PICKUP_CLOSURE.md",
+    "PF_GROUND_DROP_PICKUP_CLOSURE.pair.json"
+  ],
+  "row_count": 15,
+  "schema": "PF_GROUND_DROP_PICKUP_CLOSURE_PAIR_V1",
+  "source_counts": {
+    "CAPTURE": 7,
+    "IMAGE": 8
+  }
+}
