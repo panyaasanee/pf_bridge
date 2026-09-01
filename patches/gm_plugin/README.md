@@ -1,162 +1,242 @@
 # GameMaster.dll — ปลั๊กอิน GM ที่สร้างขึ้นใหม่ (source เดินทาง cloud → bridge)
 
-[สาย LANE-GM รอบ `ku3jz6` · 2026-09-01T22:0x+07:00]
+[สาย LANE-GM รอบ `ku3jz6` · revision 2 · 2026-09-01T22:2x+07:00]
 
 ## ทำไมมีโฟลเดอร์นี้
 
-เจ้าของตัดสิน 2026-09-01 (สดในเซสชัน): **`GameMaster.dll` ไม่เคยมีและกู้ไม่ได้ ต้องสร้างขึ้นใหม่เอง
-เท่านั้น** — โฟลเดอร์นี้คือซอร์สของปลั๊กอินตัวนั้น เขียนจากสัญญา ABI ที่พิสูจน์แล้วล้วน ๆ ไม่ได้ถอดจาก
-DLL เดิม (ไม่มีใครเคยเห็น DLL เดิม)
+เจ้าของตัดสินสดในเซสชัน 2026-09-01: **`GameMaster.dll` ไม่เคยมีและกู้ไม่ได้ ต้องสร้างขึ้นใหม่เองเท่านั้น**
 
-วางไว้ใน `patches/` ตามหน้าที่ของโฟลเดอร์นี้ที่ `.gitignore:70-76` เขียนไว้เอง — "ของที่เดินทางจาก
-cloud ไป bridge พร้อม sha256 แทนการ paste ผ่าน code block"
-🔴 `[สมมติของสาย GM - รอ COO ยืนยัน]` คอมเมนต์เดิมของโฟลเดอร์เขียนว่า "chief-authored" ซึ่งเป็นที่มา
-ของโฟลเดอร์ (GT-047) ไม่ใช่กฎห้ามสายอื่นเขียน — ถ้า COO เห็นว่าต้องย้าย บอกได้ ย้ายให้ทันที
-(ทางเลือกอื่นคือ `tools_bridge/` แต่โฟลเดอร์นั้น allowlist ทีละไฟล์ ต้องแก้ `.gitignore` ซึ่งเป็น
-ไฟล์ governance ไม่ใช่เขตของสายนี้)
+🔴 `[UNPINNED — คำสั่งด้วยวาจาในเซสชัน ไม่มี artifact ใน repo บันทึกไว้]` ต้องติดป้ายนี้ให้ตรง เพราะใบ
+ล่าสุดของสายนี้เอง (`notes_to_chief/20260901_2132_RE-164-RESULT-...`) เขียนตรงข้าม: บอกแค่ว่า
+**inventory ของบริดจ์หาไฟล์ไม่เจอ** และ nonclaim ข้อ 1 ของใบนั้นปฏิเสธชัด ๆ ว่า "ไม่อ้างว่าหายไปจริง"
+ส่วน `PF_GM_PLUGIN_GATE.md:14` ก็ติดป้าย inventory นั้นเองว่า **อาจ stale**
+⇒ ไม่มีอะไรในโฟลเดอร์นี้พึ่งความต่างนั้น และ `install.bat` **ปฏิเสธการเขียนทับ** เสมอ (ดูล่าง)
 
-## ปัญหาที่ปลั๊กอินตัวนี้แก้
+วางใน `patches/` ตามหน้าที่ที่ `.gitignore:71-76` เขียนไว้เอง — "ของที่เดินทางจาก cloud ไป bridge พร้อม
+sha256 แทนการ paste ผ่าน code block" และเป็น allowlist แบบ recursive อยู่แล้ว
+🔴 `[สมมติของสาย GM - รอ COO ยืนยัน]` คอมเมนต์เดิมเขียนว่า "chief-authored" ซึ่งเป็นที่มา (GT-047)
+ไม่ใช่กฎห้ามสายอื่นเขียน — ถ้า COO เห็นว่าต้องย้าย ย้ายให้ทันที
 
-ตั้งแต่ `RE-104` (27 ส.ค.) เราไล่หามาตลอดว่าทำไม **ปุ่ม `BT_GM` โชว์ได้แต่กดแล้วไม่มีอะไรเกิดขึ้น**
-`RE-118`/`RE-126`/`RE-164` ตรวจไปทีละประตู (การผูกปุ่ม / handler / query-0x25 gate / create path)
-แล้วพบว่า **ทุกจุดถูกต้องอยู่แล้ว** — คำตอบคือจุดที่พังอยู่ *เหนือ* ทุกจุดนั้น:
+## ปัญหาที่ปลั๊กอินตัวนี้ตั้งใจแก้
 
-| ขั้น | เกิดอะไร | แถวที่พิสูจน์ |
+ตั้งแต่ `RE-104` (27 ส.ค.) เราไล่หาว่าทำไม **ปุ่ม `BT_GM` โชว์ได้แต่กดแล้วเงียบ**
+
+| ขั้น | เกิดอะไร | แถว |
 |---|---|---|
 | 1 | client เรียก `LoadLibraryW(L"GameMaster.dll")` → `GetProcAddress("CreateGameMaster")` | `GM-IMG-001` |
-| 2 | ถ้า DLL/export/ผลลัพธ์หายไป → สร้าง fallback object 4 ไบต์แทน | `GM-IMG-002` |
-| 3 | fallback slot `+0x04` คืน `NULL` **เสมอ** | `GM-IMG-003` |
-| 4 | คลิกเรียก slot `+0x04` แล้วส่งค่าให้ dispatcher | `GM-IMG-006` |
+| 2 | ถ้า DLL/export/**ผลลัพธ์**หายไป → สร้าง fallback object 4 ไบต์แทน | `GM-IMG-002` |
+| 3 | fallback slot `+0x04` คืน `NULL` เสมอ | `GM-IMG-003` |
+| 4 | คลิกเรียก slot `+0x04` แล้วส่งค่าต่อให้ dispatcher | `GM-IMG-006` |
 | 5 | dispatcher เห็น NULL/ว่าง → `ret` ทันที ไม่ถึง factory ไม่มี log ไม่มีเฟรม | `GM-IMG-007` |
-| — | แต่ปุ่มยัง **โชว์** ได้ เพราะ show path เช็คแค่ว่า `application+0x7C8` ไม่ null | `GM-IMG-004` |
+| — | ปุ่มยัง **โชว์** ได้ เพราะ show path เช็คแค่ `application+0x7C8` ไม่ null | `GM-IMG-004` |
 
-⇒ อาการ "เห็นปุ่ม แต่กดแล้วเงียบสนิท" คือลายเซ็นของเส้น fallback เป๊ะ ๆ
+🔴 **ระวังคำ:** `PF_GM_PLUGIN_GATE.md:14` ให้น้ำหนักเรื่องนี้ไว้แค่ **"เพียงสอดคล้องกับ"** เส้น fallback
+ไม่ใช่ "คือลายเซ็นเป๊ะ ๆ" — และ `GM-IMG-005` ให้ตัวผลิตอาการเงียบแบบเดียวกันอีกตัวที่เป็นอิสระจากกัน
+(gate `GMModule_Client+0x19` ซึ่ง `GT-164` ยิงทดสอบไป 14 variant แล้ว) ⇒ ไฟล์นี้ **ไม่อ้างว่าเจอสาเหตุ
+ที่แท้จริง** อ้างแค่ว่ากำจัดสาเหตุที่เป็นไปได้ออกไปหนึ่งตัว
 
-## ปลั๊กอินต้องทำอะไรบ้าง (สัญญา ABI)
+เช่นกัน: `RE-118`/`RE-126`/`RE-164` ที่ไล่ประตูอื่นไปแล้ว **ไม่ใช่ "พิสูจน์แล้วว่าทุกจุดถูกต้อง"** —
+เป็นการสืบสวนสี่ครั้งที่ยังเปิดหน้าต่างไม่ได้ (`GM-IMG-008` blocker:
+`REQUEST_TO_FACTORY_RUNTIME_BINDING_NOT_OBSERVED`) และ `RE-118` เองก็ถูกแก้ไปแล้วบางส่วน
+(`20260901_0254_CODEX-CORRECTION-GM-PLUGIN-ROOT-CAUSE.md:15`)
 
-vtable ต้องมีสามช่องเรียงตามนี้เป๊ะ (MSVC x86 ให้ `__thiscall` กับ member function อยู่แล้ว: `this`
-อยู่ใน ECX, callee เก็บกวาด stack — ประกาศเมธอดสามตัวตามลำดับใน class ที่ **ไม่มี virtual
-destructor** จะได้ layout กับ `ret 8`/`ret 0`/`ret 4` ที่ถูกต้องอัตโนมัติ)
+## สัญญา ABI ที่ต้องทำให้ครบ
 
 | slot | สัญญา | แถว |
 |---|---|---|
 | `+0x00` | output pointer 2 ตัว, `ret 8`, คืนตัวแรกใน EAX | `GM-IMG-012` |
-| `+0x04` | ไม่มี argument, `ret` เปล่า, คืน pointer ไปยังสตริง UTF-16 ปิดท้ายด้วย NUL | `GM-IMG-006` |
-| `+0x08` | destination pointer 1 ตัว, `ret 4`, default-construct MSVCP90 wstring ตรงนั้น | `GM-IMG-014` |
+| `+0x04` | ไม่มี argument, `ret` เปล่า, คืน pointer ไปยังสตริง UTF-16 ปิดท้าย NUL | `GM-IMG-006` |
+| `+0x08` | destination pointer 1 ตัว, `ret 4`, default-construct MSVCP90 wstring | `GM-IMG-014` |
 
-**ค่าที่ slot `+0x04` คืน = `GMUI_1`** — factory เทียบสตริงนี้กับ key ที่ขอแบบ exact UTF-16
-(`GM-IMG-008`) แล้ว resolver เอาไปประกอบ `.\Data\GUI\Model\<key>.model` (`GM-IMG-013`) บนดิสก์จริง
-`GMUI.project` ประกาศ model ชื่อ `GMUI_1` และ `GMUI_1.model` เป็นไฟล์เดียวใน 534 ไฟล์ที่มี tab
-`GMUI_BASIC` อยู่ข้างใน ไม่มี `GMUI_BASIC.model` เลย (`GM-DATA-001/002`)
+`[MEASURED — clang-cl 18 targeting the 32-bit MS ABI, รอบ ku3jz6 · ไม่ใช่ MSVC/VC9 จึงเป็นการยืนยัน
+แวดล้อม ไม่ใช่ข้อพิสูจน์ว่า VC9 จะให้ผลเดียวกัน]`
 
-## กฎหน่วยความจำ — ทางที่ทำให้ client แครชง่ายที่สุด
+คอมไพล์จริงด้วย `clang-cl` (MS ABI, `-m32`, `/W4`) ผ่านสะอาดไม่มี warning แล้ววัดสองอย่าง:
 
-`GM-IMG-010`: ตอนปิดเกม client ส่ง pointer ของเราเข้า **MSVCR90 `operator delete` ที่มัน import**
-ตรง ๆ **โดยไม่เรียก virtual destructor** แล้วค่อย `FreeLibrary` ⇒
+`-fdump-vtable-layouts` → slot เรียงตาม**ลำดับที่ประกาศ** และ RTTI ของ `/GR` อยู่ที่ offset ติดลบ
+จึง**ไม่ดัน** slot 0 ตามที่ออกแบบไว้:
 
-- object ต้องมาจาก heap เดียวกับที่ client จะ delete — `AllocateFromClientCrt()` จึงไปขอ
-  `operator new` (`??2@YAPAXI@Z`) จาก `msvcr90.dll` ที่โหลดอยู่แล้วโดยตรง (ใช้ `GetModuleHandleW`
-  ไม่ใช่ `LoadLibraryW` เพราะไม่ต้องการ reference เพิ่ม) — ทางนี้ถูกไม่ว่า DLL เราจะลิงก์ CRT ตัวไหน
-- ห้ามคืน static/global object (delete บนหน่วยความจำที่ไม่ได้มาจาก heap = แครชทันที)
-- class **ห้ามมี virtual destructor** — จะกิน vtable slot แล้วดัน `+0x04`/`+0x08` เลื่อน และไม่มีวัน
-  ถูกเรียกอยู่ดี
-- ห้ามพึ่ง destructor ทำ cleanup เพราะไม่มีวันถูกเรียก
+```
+VFTable indices for 'GameMasterInterface'
+  0 | QueryStateOutputs(void*, void*)      -> +0x00
+  1 | GetWindowModelBasename()             -> +0x04
+  2 | MakeEmptyString(void*)               -> +0x08
+```
 
-## ทำไมบังคับ VS2008 (VC9)
+`llvm-objdump -d` → epilogue ตรงตามที่แต่ละแถวบังคับเป๊ะ:
 
-slot `+0x00` กับ `+0x08` **construct `std::basic_string<wchar_t>` ลงในหน่วยความจำที่ client เป็น
-เจ้าของ** — toolchain รุ่นใหม่วาง layout ของชนิดนี้ต่างออกไป build ด้วยตัวอื่นจึงไม่ใช่แค่ "เตือน"
-แต่ **เขียนทับหน่วยความจำ client ผิดรูป** `GameMaster.cpp` จึง `#error` ถ้าไม่ใช่ `_MSC_VER == 1500`
+| ฟังก์ชัน | slot | epilogue | แถว |
+|---|---|---|---|
+| `QueryStateOutputs` | `+0x00` | `retl $0x8` | `GM-IMG-012` (2 stack args) |
+| `GetWindowModelBasename` | `+0x04` | `retl` (เปล่า) | `GM-IMG-006` (0 args, plain ret) |
+| `MakeEmptyString` | `+0x08` | `retl $0x4` | `GM-IMG-014` (1 stack arg) |
 
-ถ้าบริดจ์ไม่มี VC9 จริง ๆ มีสวิตช์ `PF_GM_ALLOW_NON_VC9` ซึ่ง **ไม่ใช่การปิดเช็ค** แต่เป็นการ
-*ถอด wstring construction ออกทั้งหมด* (เหตุผลเดียวที่ต้องใช้ VC9) ผลคือ slot `+0x08` ผิดสัญญา —
-ยอมรับได้เฉพาะเพราะ `GM-IMG-014` วัดแล้วว่า **ไม่มี route ไหนใน 5 เส้นที่ pin ไว้เรียก slot `+0x08`
-เลย** ถือเป็น build ทดลอง ต้องเขียนกำกับในใบผลเทสทุกครั้ง
+mangled name ขึ้นต้นด้วย `UAE` = public virtual `__thiscall` (`this` ใน ECX, callee เก็บกวาด) ตามต้องการ
+**`build_vs2008.bat` check 3/3 ทำการวัดชุดเดียวกันนี้ซ้ำบน MSVC จริง** ซึ่งเป็นตัวที่นับ
 
-## วิธี build (บนเครื่องบริดจ์)
+## ทำไม revision 2 ถึงเลิกพึ่ง VS2008
+
+revision 1 **inline `std::wstring` ctor จาก header ของ compiler เราเอง** ลงในหน่วยความจำที่ client เป็น
+เจ้าของ ซึ่งผิด — ตัวเลขในตารางเองหักล้าง:
+
+| แถว | span | ยาว |
+|---|---|---|
+| `GM-IMG-003` (คืน NULL) | `0x009F17E0..0x009F17E3` | **3 ไบต์** = `xor eax,eax; ret` (ตัวคุม) |
+| `GM-IMG-014` (slot `+0x08`) | `0x00403C00..0x00403C1D` | **29 ไบต์** |
+| `GM-IMG-012` (slot `+0x00`) | `0x00407E10..0x00407E33` | **35 ไบต์** |
+
+29/35 ไบต์คือ prologue + `call` import หนึ่งครั้ง + epilogue **ไม่ใช่** wstring ctor แบบ inline (ลำพัง
+`_SECURE_SCL=1` ก็ต้องมี proxy allocation + `_Tidy` + เก็บ `_Myproxy` แล้ว) และ `GM-IMG-014` เขียนเป็น
+คำอยู่แล้วว่า "default-constructs that destination **through the pinned MSVCP90 import**"
+
+⇒ revision 2 **เรียก export ตัวนั้นตรง ๆ** (resolve ตอน `DllMain`) layout จึงตรงโดยโครงสร้าง ไม่ขึ้นกับ
+compiler ของเรา ไม่ขึ้นกับ `_SECURE_SCL` (ค่า default ของ VC9 ที่ revision 1 ขี่ไว้โดยไม่รู้ตัว และเปลี่ยน
+ขนาด `basic_string` ระหว่าง 24 กับ 28 ไบต์) ⇒ สวิตช์ `PF_GM_ALLOW_NON_VC9` **ถูกลบทิ้งทั้งอัน** เพราะ
+ไม่จำเป็นอีกต่อไป (และของเดิมมันทำให้ slot `+0x08` คืน pointer ที่ยังไม่ init = แย่กว่าไม่ทำอะไรเลย)
+
+`[PROPOSED]` ชื่อ decorated ของ ctor
+(`??0?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAE@XZ`) **ยังไม่ได้ยืนยันกับ
+`msvcp90.dll` ของเครื่องจริง** — ถ้าผิด เรา resolve ไม่ได้ แล้ว**ข้ามการ construct ทั้งสองช่อง พร้อม
+พิมพ์บอก** ไม่มีการ fallback ไป inline ctor เด็ดขาด เพราะนั่นคือสิ่งที่เพิ่งแก้ทิ้งไป
+
+## กฎหน่วยความจำ
+
+`GM-IMG-010`: client ส่ง pointer ของเราเข้า **MSVCR90 `operator delete` ที่มัน import** ตรง ๆ **โดยไม่
+เรียก virtual destructor** แล้วค่อย `FreeLibrary`
+
+revision 1 หา CRT ด้วย `GetModuleHandleW(L"msvcr90.dll")` ซึ่ง **ไม่พอ**: MSVCR90 เป็น side-by-side
+assembly มีสอง instance พร้อมกันได้ (app-local + WinSxS) ชื่อ base เดียวกัน **คนละ `_crtheap`** —
+จองจากตัวหนึ่งแล้วถูก free ด้วยอีกตัว = แครชตอนปิดเกม และ `dumpbin /dependents` รายงานว่าปกติทุกอย่าง
+
+revision 2 เดิน **import table ของตัว client เอง** หา thunk ที่ผูกกับ `??3@YAXPAX@Z` (`operator delete`
+ตัวที่ `GM-IMG-010` พิสูจน์ว่าจะถูกเรียกใส่เรา) แล้ว resolve module จาก address ที่ผูกไว้จริง ⇒ ได้
+instance ที่ถูกต้อง**โดยโครงสร้าง** ไม่ใช่โดยการเดาจากชื่อ
+
+ถ้าหาไม่เจอ → **คืน `NULL`** ไม่ใช่ `new` ธรรมดา (revision 1 ทำแบบนั้น ซึ่งเป็น cross-heap free แน่นอน)
+`GM-IMG-002` ระบุ "the returned object is absent" ไว้ข้าง ๆ library/export ที่หาย ⇒ คืน NULL = client
+ติดตั้ง fallback ของมันเอง = **สภาพเดียวกับวันนี้เป๊ะ ๆ** ไม่ใช่ failure แบบใหม่
+
+ยังมี: `DllMain` **pin ตัวเอง** (`GET_MODULE_HANDLE_EX_FLAG_PIN`) เพราะ `GM-IMG-017` blocker
+(`DOWNSTREAM_RETENTION_AND_ORIGINAL_OWNERSHIP_UNPROVEN`) ไม่ปิดความเป็นไปได้ที่ panel เก็บ pointer ของ
+สตริงเราไว้ ถ้า `FreeLibrary` unmap เราแล้วมีคนอ่านต่อ = แครชตอนปิดที่ไล่สาเหตุยากมาก
+
+## build
 
 ```
 cd patches\gm_plugin
 build_vs2008.bat
 ```
 
-สคริปต์ตรวจสองอย่างที่เป็นสาเหตุพังจริงให้เอง:
+ตรวจให้สามอย่าง **และ fail จริงทุกข้อ** (revision 1 มีสองข้อแรกแต่ทั้งคู่เป็น false green):
 
-1. **ชื่อ export ต้องเป็น `CreateGameMaster` เป๊ะ** ไม่มี `_` นำ ไม่มี `@0` ต่อท้าย — ถ้าเพี้ยน
-   `GetProcAddress` คืน NULL แล้ว client จะกลับไปเดินเส้น fallback เงียบ ๆ **หน้าตาเหมือนบั๊กเดิมทุก
-   ประการ** (นี่คือกับดักที่หลอกคนได้ง่ายที่สุดของงานนี้) — `GameMaster.def` เป็นตัวบังคับชื่อ
-2. **ต้องพึ่ง `MSVCR90.dll`** — ถ้าไม่ใช่ แปลว่า CRT คนละตัวกับที่ client จะ delete
+1. **ชื่อ export** — revision 1 ใช้ `findstr /i "CreateGameMaster"` ซึ่งเป็น substring match จึง**ผ่าน
+   ทั้ง `_CreateGameMaster` และ `CreateGameMaster@0`** คือเขียวให้กับความพังที่ตัวเองโฆษณาว่าจะจับ
+   ตอนนี้ปฏิเสธ decoration แต่ละแบบตรง ๆ
+2. **CRT dependency** — revision 1 พิมพ์ `[WARN]` แล้วพิมพ์ `[OK]` ต่อ ตอนนี้ `exit /b 1`
+3. **epilogue `ret 8`/`ret 4`** จาก `dumpbin /disasm` — ของใหม่
 
-แล้วพิมพ์ sha256 ของ DLL ออกมาให้จดลงใบผลเทส
+เปลี่ยน option โดยไม่แก้ซอร์ส (revision 1 บอกให้ rebuild ด้วยแฟล็กที่**ส่งเข้าไปไม่ได้จริง**):
+
+```
+set EXTRA_DEFS=/D PF_GM_KEY=L\"GMUI_BASIC\"
+set EXTRA_DEFS=/D PF_GM_SLOT0_TOUCH_PLUS4=0
+```
+
+🔴 **เทียบ SHA256 ที่สคริปต์พิมพ์กับ build ก่อนหน้าทุกครั้ง** ถ้าเท่าเดิม = แฟล็กไม่ถึง compiler และคุณ
+กำลังจะเทส DLL ตัวเดิมซ้ำ แล้วสรุปผิดว่าสมมติฐานถูกหักล้างไปแล้ว
 
 ## ติดตั้ง
 
-วาง `GameMaster.dll` **ข้างไฟล์ exe หลักของ client** (โฟลเดอร์เดียวกัน) — `GM-IMG-001` บอกว่า client
-เรียก `LoadLibraryW` ด้วยชื่อไฟล์เปล่า ๆ ไม่มี path จึงเดินตามลำดับค้นหา DLL ปกติของ Windows ซึ่งมี
-โฟลเดอร์ของ exe เป็นอันดับต้น
+```
+install.bat "C:\path\to\client\folder"
+```
 
-🔴 **ห้าม patch `0x009F17E0` ตรง ๆ** (`PF_GM_PLUGIN_GATE.md` ระบุห้ามไว้เอง) — ตารางพิสูจน์แค่ว่า
-มันเป็น fallback getter ของ vtable นี้ ไม่ได้พิสูจน์ว่า function body เป็นของ GM โดยเฉพาะ
+**ห้าม copy เอง** — `install.bat` **ปฏิเสธการเขียนทับ** ถ้าเจอ `GameMaster.dll` อยู่แล้ว จะหยุด พิมพ์
+sha256 ของไฟล์เดิม แล้วบอกให้เก็บสำเนาและรายงาน chief/COO ก่อน เพราะถ้า inventory stale จริง ไฟล์นั้นคือ
+ของที่โปรเจกต์นี้ตามหามาตั้งแต่ 27 ส.ค. และยังไม่เคยมีใคร disassemble — ผลของสองทางไม่สมมาตรกัน
+
+🔴 **ห้าม patch `0x009F17E0` ตรง ๆ** (`PF_GM_PLUGIN_GATE.md` ห้ามไว้เอง)
 
 ## เกณฑ์ผ่าน — สองชั้น แยกกันเด็ดขาด
 
-**ชั้น static (ทำเสร็จแล้วในรอบ `ku3jz6`):** ทุกข้อของสัญญา ABI ข้างบนมีแถว `PROVEN_EXACT` +
-VA + sha256 กำกับครบ — แต่ **นี่ไม่ใช่หลักฐานว่าหน้าต่างเปิดได้**
+**ชั้น static ของ *ตัว DLL นี้*: มีบางส่วนแล้ว (revision 2) แต่ยังไม่ใช่ MSVC**
 
-**ชั้น client-observable (ยังไม่ทำ ต้องมีคนนั่งหน้าจอ):** `PF_GM_PLUGIN_GATE.md` ระบุ acceptance
-ของตัวเองไว้ว่าต้องเห็นครบสามอย่าง
+revision 1 เขียนว่า "ชั้น static ทำเสร็จแล้ว" ซึ่งผิด — เป็นการยืมหลักฐานข้ามชั้น: แถว `PROVEN_EXACT`
+ทั้งหลายเป็นหลักฐานเกี่ยวกับ **client image** ไม่ใช่เกี่ยวกับไฟล์นี้ ตอนนั้นชั้นนี้ว่างเปล่าจริง ๆ
 
-1. ปุ่ม GM ยังโชว์เหมือนเดิม (ไม่หายไป — ถ้าหายแปลว่า `CreateGameMaster` คืน NULL)
-2. **คลิกแล้วหน้าต่าง `GMUI_1` เปิด และเข้าถึง tab `GMUI_BASIC` ได้** ← ข้อที่ตัดสินทั้งหมด
-3. ปิดเกมแล้ว **ไม่แครช** (พิสูจน์ว่ากฎหน่วยความจำข้างบนถูกจริง — แครชตอนปิดคือลายเซ็นของ heap
-   ผิดตัว)
+รอบนี้เติมได้บางส่วน (ดูหัวข้อ "สัญญา ABI"): คอมไพล์ผ่าน `/W4` สะอาด · vtable เรียงตามลำดับประกาศ ·
+epilogue `ret 8`/`ret`/`ret 4` ครบ — **แต่ทั้งหมดวัดด้วย `clang-cl` ไม่ใช่ MSVC และไม่ใช่ VC9**
+⇒ ยังต้องให้ `build_vs2008.bat` check 3/3 วัดซ้ำบน toolchain จริงบนบริดจ์ นั่นคือตัวที่นับ
 
-ยังไม่มีใบ `GT` สำหรับสามข้อนี้ — สายนี้เปิดใบ GT เองไม่ได้ ขอให้ chief เปิดให้ (ดูจดหมายคู่รอบนี้)
+**ชั้น client-observable: ยังไม่มีเลย ต้องมีคนนั่งหน้าจอ**
+
+🔴 **ก่อนเทส ต้องเปิดตัวดู debug output (DebugView หรือ debugger) ไว้ก่อน** ปลั๊กอินพิมพ์บรรทัด
+`[GM_PLUGIN]` ตอนโหลด บอก build timestamp · หา client CRT เจอไหม · resolve wstring ctor ได้ไหม · จะคืน
+key อะไร — **ถ้าไม่มีบรรทัดพวกนี้ แปลว่า DLL ไม่เคยถูกโหลด** ซึ่งบนจอหน้าตาเหมือนกับ "โหลดแล้วแต่ key
+ผิด" ทุกประการ
+
+| # | ต้องเห็น | แยกอะไรได้ |
+|---|---|---|
+| 0 | บรรทัด `[GM_PLUGIN] loaded build=...` | **DLL เราถูกโหลดจริง** — ถ้าไม่มี ข้อ 1-3 ไม่มีความหมายเลย |
+| 1 | ปุ่ม GM ยังโชว์ | ผ่านได้แม้ไม่ติดตั้งอะไรเลย ⇒ ไม่ใช่ตัวตัดสิน แต่ถ้า**หาย**แปลว่าผิดปกติหนัก |
+| 2 | **คลิกแล้ว `GMUI_1` เปิด ถึง tab `GMUI_BASIC`** | ← ข้อที่ตัดสินทั้งหมด |
+| 3 | ปิดเกมไม่แครช | ผ่านได้แม้ไม่ติดตั้งอะไรเลย ⇒ มีความหมายก็ต่อเมื่อข้อ 0 ผ่านแล้ว |
+
+ข้อ 1 กับ 3 **ผ่านได้ด้วยการไม่ติดตั้ง DLL เลย** (วางผิดโฟลเดอร์ก็ผ่าน) — ข้อ 0 คือสิ่งที่ทำให้ทั้งชุดมี
+ความหมาย ยังไม่มีใบ `GT` สำหรับสี่ข้อนี้ สายนี้เปิดใบ GT เองไม่ได้ ขอ chief เปิดให้
 
 ## ถ้าพัง — ไล่ตามลำดับนี้
 
-| อาการ | ผู้ต้องสงสัยอันดับหนึ่ง |
+| อาการ | ผู้ต้องสงสัย |
 |---|---|
-| ปุ่ม GM **หายไป** | `CreateGameMaster` คืน NULL (allocation ล้ม) — `GM-IMG-004` เช็ค non-null |
-| คลิกแล้วยังเงียบเหมือนเดิม | ชื่อ export เพี้ยน (`dumpbin /exports` ซ้ำ) หรือ DLL ไม่ได้อยู่ข้าง exe |
-| หน้าต่างเปิดแต่ tab ว่าง/ผิด | ค่า `GMUI_1` — เป็น `[RECONSTRUCTED POLICY]` ตัวเดียวในไฟล์นี้ |
-| **แครชตอนคลิก** | slot `+0x00` การ init `+4` — rebuild ด้วย `PF_GM_SLOT0_TOUCH_PLUS4=0` |
-| **แครชตอนปิดเกม** | heap ผิดตัว — เช็คว่า `dumpbin /dependents` ขึ้น `MSVCR90.dll` จริง |
+| **ไม่มีบรรทัด `[GM_PLUGIN]` เลย** | DLL ไม่ถูกโหลด: วางผิดโฟลเดอร์ · SxS manifest หาย (error 14001 — ต้องมี VC9 redistributable) · `dumpbin /exports` ซ้ำ |
+| พิมพ์ `client CRT: NOT FOUND` | import walk ไม่เจอ `??3@YAXPAX@Z` ⇒ คืน NULL ⇒ สภาพเท่าเดิม |
+| พิมพ์ `wstring ctor: NOT RESOLVED` | ชื่อ decorated ผิด — `dumpbin /exports msvcp90.dll` แล้วแก้ |
+| โหลดแล้วแต่**คลิกยังเงียบ** | **key ผิด** (`GMUI_1` เทียบ `GMUI_BASIC` — ดู A/B ข้างบน) · หรือ gate `GMModule_Client+0x19` (`GM-IMG-005`) ปิดอยู่ |
+| ปุ่ม GM **หายไป** | ไม่ใช่เพราะเราคืน NULL (`GM-IMG-002` ⇒ ปุ่มยังโชว์) แต่คือ fallback allocation ของ client เองล้ม — เรื่องอื่น |
+| **แครชตอนคลิก** | slot `+0x00` การ init `+4` → rebuild ด้วย `PF_GM_SLOT0_TOUCH_PLUS4=0` **แล้วเช็คว่า sha256 เปลี่ยนจริง** |
+| **แครชตอนปิดเกม** | heap คนละตัว (แต่ import walk ควรกันไว้แล้ว) — เก็บ debug output มาด้วย |
 
-**rollback สะอาดเสมอ: ลบไฟล์ `GameMaster.dll` ทิ้ง** แล้ว client กลับไปเดินเส้น fallback ที่พิสูจน์
-แล้ว (`GM-IMG-002`) ไม่มีอย่างอื่นเปลี่ยน — ไม่ต้องแก้ทะเบียน ไม่ต้องลงเกมใหม่ ไม่แตะไฟล์ client เดิม
-แม้แต่ไบต์เดียว (เราเพิ่มไฟล์ใหม่หนึ่งไฟล์เท่านั้น ไม่ได้ patch อะไรเลย)
+**rollback: ลบไฟล์ `GameMaster.dll` ทิ้ง** client กลับไปเดิน fallback ที่พิสูจน์แล้ว (`GM-IMG-002`) —
+เราไม่ได้ patch ไบต์ไหนของ client เลย ไม่ได้เขียน registry เพิ่มไฟล์ใหม่หนึ่งไฟล์เท่านั้น
+(ข้อความนี้จริงก็ต่อเมื่อใช้ `install.bat` ซึ่งไม่เขียนทับ — นี่คือเหตุผลที่มันมีอยู่)
 
 ## nonclaim
 
-1. **ไม่อ้างว่าหน้าต่างจะเปิดได้จริง** — รอบนี้ไม่มีการ compile ไม่มีการรัน ไม่มีการ boot เกม
-   session คลาวด์นี้ไม่มี MSVC ไม่มี Windows ไม่มี client image ⇒ **ยังไม่มีหลักฐานชั้น
-   client-observable แม้แต่ชั้นเดียว**
-2. **ไม่อ้างว่า `GMUI_1` คือค่าที่ DLL เดิมเคยคืน** — เป็น `[RECONSTRUCTED POLICY — PROPOSED]` ที่
-   ประกอบจาก DATA ที่ shipped มา ไม่ใช่ค่าที่วัดได้ ไม่มีใครเคยเห็นค่าคืนของ DLL เดิม
-3. **การ init `+4` ของ slot `+0x00` เป็นการตีความ ไม่ใช่ข้อเท็จจริง** — `GM-IMG-012` บอกว่า
-   "initialises its +4 subobject" แต่ไม่บอกชนิด ที่เลือก wstring เพราะ slot ข้างเคียง (`+0x08`) ทำ
-   แบบนั้น — เป็นการเดาที่ใหญ่ที่สุดในไฟล์นี้ มีสวิตช์ปิดไว้ให้แล้ว
-4. **ไม่อ้างว่าปลั๊กอินนี้เหมือน DLL เดิม** — เป็นตัวที่ "เข้ากันได้กับสัญญาที่พิสูจน์แล้ว" เท่านั้น
-   DLL เดิมอาจมี private method อื่นอีกที่เราไม่รู้ (`GM-IMG-014` ระบุเองว่าไม่ปิดข้อนี้)
-5. **ไม่ได้ใช้ GM ข้ามขั้นตอนอะไร** — ยังไม่มีอะไรทำงานเลย นี่คือซอร์สที่รอ compile
-6. ไม่แตะไฟล์ client เดิม ไม่แตะ canonical DB ไม่แตะ `runtime.py`/`app.py`/
+1. **ไม่อ้างว่าหน้าต่างจะเปิดได้จริง** — ไม่มีการ compile/รัน/boot รอบนี้ session คลาวด์ไม่มี MSVC ไม่มี
+   Windows ไม่มี client image ⇒ **ชั้น client-observable ว่างเปล่า และชั้น static ของ DLL นี้ก็ว่างเปล่า**
+2. **ไม่อ้างว่า `GMUI_1` คือค่าที่ DLL เดิมคืน** — `[RECONSTRUCTED POLICY — PROPOSED]` และการเทียบใน
+   `GM-IMG-008` เป็น tautology (เทียบค่าของเรากับค่าของเราเอง) ⇒ ตัวตัดสินจริงคือ dispatcher lookup ซึ่ง
+   blocker เขียนไว้เองว่า `REQUEST_TO_FACTORY_RUNTIME_BINDING_NOT_OBSERVED` ⇒ ต้อง A/B
+3. **การ init `+4` ของ slot `+0x00` เป็นการตีความ** — `GM-IMG-012` (`PROVEN_EXACT_ABI_UNKNOWN_SEMANTIC`)
+   ไม่บอกชนิด ที่เลือก wstring เพราะช่องข้างเคียงทำแบบนั้น + ความยาว 35 ไบต์สอดคล้องกับ prologue +
+   เขียน -1 + call import + epilogue — **เป็นการยืนยันแวดล้อม ไม่ใช่การพิสูจน์**
+4. **ไม่อ้างว่าเหมือน DLL เดิม** — เข้ากันได้กับสัญญาที่พิสูจน์แล้วเท่านั้น `GM-IMG-014` ระบุเองว่าไม่ปิด
+   ความเป็นไปได้ที่ DLL เดิมมี private method อื่น
+5. **ไม่อ้างว่าทุกแถวใน TSV เป็น `PROVEN_EXACT`** — มี 11 ค่าต่างกัน รวม
+   `MECHANICAL_..._MANUAL_HASH_ANCHORED` สองแถว (`GM-IMG-015`, `GM-IMG-017`) ซึ่งเป็น manual
+   interpretation ไม่ใช่ symbolic dataflow (`PF_GM_PLUGIN_GATE.md:63`) — **และสองแถวนั้นคือแถวที่รับ
+   น้ำหนักเรื่อง no-alias กับความปลอดภัยของ static buffer พอดี**
+   🔴 revision 1 กับ **จดหมาย `20260901_2132` ที่ merge ขึ้น main ไปแล้ว** เขียนผิดข้อนี้ ต้องออกใบแก้
+6. **ไม่อ้างว่าเจอสาเหตุที่แท้จริงของ P-3** — กำจัดสาเหตุที่เป็นไปได้ออกหนึ่งตัวเท่านั้น
+   (`GM-IMG-005` ยังเป็นตัวผลิตอาการเดียวกันที่เป็นอิสระ)
+7. **ไม่แตะสิทธิ์ GM ฝั่งเซิร์ฟเวอร์เลย** — เปิดได้แค่หน้าต่าง UI ฝั่ง client ใครเป็น GM ยังตัดสินที่
+   `gm_accounts` เหมือนเดิม client ยังขอเป็น GM เองไม่ได้ ไม่มีวัน
+8. ไม่แตะไฟล์ client เดิม ไม่แตะ canonical DB ไม่แตะ `runtime.py`/`app.py`/
    `pf_login_game_server_v141.py`
-7. **ปลั๊กอินนี้ไม่แตะเรื่องสิทธิ์ GM ฝั่งเซิร์ฟเวอร์เลย** — มันเปิดได้แค่ *หน้าต่าง UI* ฝั่ง client
-   ใครเป็น GM ยังตัดสินที่ `gm_accounts` ฝั่งเซิร์ฟเวอร์เหมือนเดิมทุกประการ client ยังขอเป็น GM เอง
-   ไม่ได้ ไม่มีวัน (invariant ข้อ 1 ของสายนี้ ไม่เปลี่ยนเพราะไฟล์นี้)
 
-## ที่มาของทุกข้อเท็จจริง
+## ที่มา
 
-`notes_to_chief/reference_codex_attr/PF_GM_PLUGIN_GATE.tsv` (17 IMAGE row + 2 DATA row ทุกแถว
-`PROVEN_EXACT`/`PROVEN_EXACT_CONDITIONAL` พร้อม evidence span + sha256) และ `.md` คู่กัน
+`notes_to_chief/reference_codex_attr/PF_GM_PLUGIN_GATE.tsv` (17 IMAGE row + 2 DATA row — `semantic_status`
+ต่างกัน 11 ค่า ดู nonclaim 5) และ `.md` คู่กัน
 TSV SHA-256: `a5f3fdeb6a830b06e3eb9dceff85fc762459ca3e4f9e7ada152937ef1c898509`
 IMAGE SHA-256: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
 
-## sha256 ของซอร์สในโฟลเดอร์นี้ (ตามธรรมเนียม `patches/`)
+## sha256 ของซอร์สในโฟลเดอร์นี้ (ตามธรรมเนียม `patches/` — revision 2)
 
 ```
-4cba6d44a411094296ad720a3428cc31271bc399b3d98a78fbf2b1ee67f058dc  GameMaster.cpp
+08a264d6128d26b7baa505a511643a5646d8bd1e6226650340d8a0b1abf51a14  GameMaster.cpp
 9e2a3adc808189ba9ee31060469617e1eb32ab90c8d3094ec0a09a541aba2190  GameMaster.def
-d9d5da1e44716218fae4b47d2f938375c76b525573c98f35410dba1d3fbed302  build_vs2008.bat
+8d3b9143904c156784fea82bb542e2b7c88a37daac9d2ea263ce7bfcb40f4870  build_vs2008.bat
+225f8b4ffab0eeb3771575a0119473b3c4d3bf2eda7146f79a8f244505388336  install.bat
 ```
