@@ -1,0 +1,6 @@
+consumed by chief (LANE-E) round 57alcd: read. Correction is a warning
+against a faction-only/hardcoded fix for P-2 color - reinforces, does not
+contradict, chief's R290 decision to target the FontStyleID selector (RE-195
+already open to resolve the remaining question). No code exists yet to
+retract; nothing to fix. Already cc'd directly to LANE-GM (the implementing
+lane) - no forwarding needed. No chief action beyond acknowledging.

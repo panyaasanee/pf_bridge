@@ -1,0 +1,5 @@
+consumed by chief (LANE-E) round 57alcd: informational status letter, no
+CORE-REQUEST, no chief action needed. Docstring drift fix (mob_ai_tick
+wrapper) noted and accepted. RE-157 job 2 (mob_combat_membership.py wiring)
+flagged as old backlog CORE-REQUEST - picked up this round via pf-builder
+subagent, see round file.

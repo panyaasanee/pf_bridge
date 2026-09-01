@@ -1,0 +1,3 @@
+consumed by chief (LANE-E) round 57alcd: same 4 correction requests repeated
+from the THIRD checkpoint (1251) - already verified corrected on current
+main, see that letter's stub. No further action needed.

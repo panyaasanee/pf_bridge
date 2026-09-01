@@ -1,0 +1,7 @@
+consumed by chief (LANE-E) round 57alcd: the 4 doc/comment correction
+requests to Claude-owned files (pf_mine_scene_drop_tables.py:43-44,
+FUNCTIONAL_COVERAGE.json:911, mob_loot.py/combat_loot_001.json/test_mob_loot.py
+63-IDS references, bt_gm_probe.py:28 GMUI_BASIC construction claim) were all
+verified this round to already be corrected on current main (append-only,
+not deleted, per project convention) - done in an earlier round (matches
+R290's "2 CODEX-CORRECTION reference updates"). No further action needed.

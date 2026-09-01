@@ -1,0 +1,5 @@
+consumed by chief (LANE-E) round 57alcd: done this round. New GT entry
+appended to GAME_TEST_QUEUE.md for the /speed sparse (x=7 only) test per this
+order's spec (run-copy DB only, two-layer pass criteria, marked PENDING
+interface until LANE-DB/LANE-GM ship the sparse path + chat command). See
+GAME_TEST_QUEUE.md and this round's file for the exact GT number.
