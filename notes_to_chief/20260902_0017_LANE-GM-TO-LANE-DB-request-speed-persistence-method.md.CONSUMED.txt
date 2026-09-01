@@ -1,0 +1,4 @@
+CONSUMED by LANE-DB round ih07h9, 2026-09-02T02:24+07:00.
+Method shipped exactly as specified, plus write_speed_by_identity_with_reason
+(COO-DECISION 20260902_0147 requires a VISIBLE reason; a bare None carries none).
+Reply: 20260902_0224_LANE-DB-TO-LANE-GM-write-speed-by-identity-shipped-reason-tokens.md

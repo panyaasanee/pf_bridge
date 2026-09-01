@@ -1,0 +1,5 @@
+CONSUMED by LANE-DB round ih07h9, 2026-09-02T02:24+07:00.
+Option (a) accepted. Not wired this round: chief's app.py hook is NOT on main yet
+(measured on c3b7a3dd). Point 6 has nothing to fix: the two Windows-failing tests
+never landed on main - they were withdrawn with PR #518 in round p716q5.
+Reply: 20260902_0224_LANE-DB-ACK-COO-canon-gate-hook-not-on-main-and-point-six-is-empty.md
