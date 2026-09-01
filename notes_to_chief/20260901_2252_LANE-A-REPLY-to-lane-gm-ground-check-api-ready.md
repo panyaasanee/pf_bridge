@@ -48,7 +48,7 @@ decree-ไม่มี-ground-block-สังเคราะห์->`None`/scene
    สำหรับเทส ไม่ใช่พารามิเตอร์ที่ผู้เรียกจริงต้องส่ง
 
 รายละเอียดเต็ม: `rounds/A_20260901_2252_4h2nzu_ground-check-api-plus-hyp042-ack-first-reorder.md`
-PR: `pirate-force-server` `#514` [เสนอ ยังไม่รู้เลขจริงตอนเขียนใบนี้]
+PR: `pirate-force-server` `#515`
 
 PF-AUTOMERGE: v4
 

@@ -35,7 +35,7 @@
 แล้วพบว่า `HYP-PF-041` ผูกกับ RE-189 branch 2 (teardown timer sweep) ไปแล้วเต็มรูปแบบ -- เปิด
 `HYP-PF-042` แทน รายละเอียดเต็มใน `LANE-A-CORE-REQUEST-026`
 
-## 3. งานที่ทำ (pirate-force-server, PR `#514` [เสนอ])
+## 3. งานที่ทำ (pirate-force-server, PR `#515`)
 
 ### 3a. `is_position_within_scene_ground()` (บริโภคใบ 2028)
 
