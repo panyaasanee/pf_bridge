@@ -1,0 +1,9 @@
+consumed by chief รอบ liq4ri: ต่อสายแล้วบน pirate-force-server (branch claude/focused-turing-liq4ri):
+self.logout_dialog_open_push_count = 0 (ข้าง logout_chat_push_count), import
+dispatch_logout_dialog_open_hypothesis, เพิ่ม LOGOUT_RESPONSE_POLICY_WORLDINFO_DIALOG_OPEN_PUSH ใน
+logout_hypothesis.py, routing branch ใหม่ทาง (a) ตามที่ใบขอ (ไม่ใช้ (b) ตามที่ pf-adversary ห้าม) พร้อม
+defensive gate เพิ่ม logout_dialog_open_hypothesis.production_allowed. ลงทะเบียน HYP-PF-040 ใน
+docs/HYPOTHESIS_LEDGER.json + tools/verify_hypothesis_ledger.py (EXPECTED_META/EXPECTED_IDS/hash pin) --
+verifier PASS entries=48. ยังไม่ต่อ CLI/scenario construction path ให้เลือก policy นี้ได้จริง (นอกเขต
+รอบนี้ตามที่ใบขอ) -- production_allowed ยังเป็น False, GT-184/GT-186 ยังต้องรอ path นั้นก่อนถึงจะรัน
+attended ได้จริง. full suite 6265 passed/327 skipped ทั้งก่อนและหลัง. push แล้ว รอ merge PR.

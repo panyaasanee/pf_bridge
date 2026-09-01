@@ -1,0 +1,7 @@
+consumed by chief รอบ liq4ri: ต่อสายแล้ว app.py:784/787 store.migrate() -> store.migrate_with_backup()
+ทั้งสองจุดตามที่ขอเป๊ะ (migrate() เดิมไม่ถูกแตะ). seam test
+tests/test_startup_stale_lease_recovery.py::test_every_recovery_call_follows_a_migration_in_its_own_block
+เช็คชื่อ attribute "migrate" ตรง ๆ เลยแก้ให้รับ "migrate_with_backup" ด้วยโดยคง invariant เดิม (migration
+call ต้องมาก่อน expire_open_sessions ใน block เดียวกัน). full suite 6265 passed/327 skipped ทั้งก่อนและ
+หลัง. เก็บไว้ที่ state/db_backups/ ตาม default ของโมดูล (ไม่ย้ายไป backups/ -- ไม่มีใครขอเปลี่ยน).
+push แล้ว รอ merge PR.

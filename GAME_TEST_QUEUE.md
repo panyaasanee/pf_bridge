@@ -37,7 +37,8 @@
 
 ## 📇 สารบัญใบที่ยังไม่ปิด (คำสั่ง Panya 18:22 · อัปเดตทุกครั้งที่เปิด/ปิดใบ · เป็นดัชนีชี้ลงข้างล่าง — เนื้อใบไม่ถูกย้าย)
 
-- 🆕 **`GT-182` GM-A-WARP-NO-COORD-LIVE-SPAWN-001** (✅ **`BLOCKED-ON-ATTENDED [NEEDS-ATTENDED-CAPTURE]` — ปลอดภัยให้ทดสอบแล้ว** — CORE-REQUEST-GM-047 (`runtime.py:5304`) merged ทั้งสอง repo ยืนยันแล้วรอบ `69r41m`/R283 · เดิม `BLOCKED-PENDING-GM047-FIX` ตาม `COO-DECISION 20260901_0741` ปลดแล้ว · เปิดโดย chief ตามคำสั่งตรง `PANYA-ORDER 20260901_0215` ข้อ 3 (GM-A) · ผู้ทำ: **LANE-GM** · `/warp <mapnum>` ไม่ใส่พิกัด ต้องไปจุดเกิดมาตรฐานจริง + ข้ามฉากทันที ไม่ต้อง relog — เลี่ยงบั๊ก z ผิดที่ `GT-172` พบด้วยการใช้ `world_scene_travel.spawn_position()` แทนพิกัดที่ผู้ใช้พิมพ์ · ใบเต็มอยู่ท้ายไฟล์)
+- 🆕 **`GT-182` GM-A-WARP-NO-COORD-LIVE-SPAWN-001** (✅ **PASS — OBSERVER_CONFIRMED 2026-09-01T10:40+07:00, chief round `8zf80f`** — แก้โดย chief รอบ `liq4ri` ตาม `COO-DECISION 20260901_1341` ข้อ 2 (หัวใบเดิมล้าสมัยเขียนว่า `BLOCKED-ON-ATTENDED`) · `/warp <mapnum>` ไม่ใส่พิกัดครั้งแรกของ session ผ่านแล้ว · **แต่วาปข้ามหลายแมพติดกันแล้วเจอ NPC ทุกแมพยังไม่ผ่าน — ดูใบใหม่ `GT-192`** · ใบเต็มอยู่ท้ายไฟล์)
+- 🆕 **`GT-192` GM-A-WARP-MULTI-MAP-CENSUS-CHAIN-001** (🟢 **PENDING บูตได้เลย · attended** — เปิดโดย chief ตาม `COO-DECISION 20260901_1341` ข้อ 1 (ตอบใบ `20260901_1256`) · ผู้ทำ: **LANE-GM** · วาปข้ามอย่างน้อย 3 แมพติดกันด้วย `/warp <mapnum>` (ไม่ใช่ใบแรกของการล็อกอิน — `GT-182` พิสูจน์ใบแรกแล้ว) แล้วเช็คว่าเจอ NPC ปกติครบทุกแมพที่ไปถึง — พิสูจน์ census latch ที่แก้แล้วบน `main` (`runtime.py:5459-5470`, สเปกใบ `20260901_1035`+`20260901_1120`) · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-183` GM-B-SPEED-COMMAND-001** (🔴 **BLOCKED — BLOCKED-ON-WIRING** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (GM-B) · ผู้ทำ: **LANE-GM** · `/speed <value>` คำสั่งแชท GM จริงบน `main` เขียน `ActorAttr` x7 (+0x54 f32) — เดโมแล้วนอก main โดยเจ้าของ (`PF_ADHOC_ATTR_PROBE`) ค่าปกติประเมิน 400 ยังไม่ยืนยันตาราง/ไบนารี · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-184` UI-A-PART-A-BACK-TO-CHARSELECT-BUTTON-001** (🔴 **BLOCKED — สืบทอดจาก `GT-033` (ANSWERED — สองท่าที่ลองแล้วให้ผลลบ)** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งแรก) · ผู้ทำ: **LANE-A** · ปุ่มกลับหน้าเลือกตัวละครจากในเกม ต้องพาไปจริงกลางเซสชัน · แยกจาก `GT-185` ตามกฎหนึ่งใบหนึ่งข้อพิสูจน์ · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-185` UI-A-PART-B-BACK-INTO-GAME-ROUNDTRIP-001** (🔴 **BLOCKED — precondition: `GT-184` ต้อง PASS ก่อน** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งหลัง) · ผู้ทำ: **LANE-A** · จากหน้าเลือกตัวละคร เลือกแล้วกลับเข้าเกมได้จริงในโปรเซสเดิมไหม — ปลดล็อกการเปลี่ยนฉากซ้ำโดยไม่บูตใหม่ · ใบเต็มอยู่ท้ายไฟล์)
@@ -9518,3 +9519,122 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
 `GT-131` (bg0001 precedent, PASS) · `RE-128` (the crosswalk mechanism, closed)
 
 **ผู้เปิดใบ: LANE-A (สาย A · WORLD) รอบ `s3m1f7` 2026-09-01T11:4x+07:00**
+
+## GT-192 GM-A-WARP-MULTI-MAP-CENSUS-CHAIN-001
+
+> Opened by chief (round `liq4ri`, cloud) per `COO-DECISION 20260901_1341_COO-DECISION-census-latch-verified-on-main-open-gt-entry-for-multimap-warp-plus-queue-summary-fix.md`
+> item 1, itself answering `notes_to_chief/20260901_1256_KA1A-TO-COO-census-latch-fix-landed-on-main-NOW-md-needs-updating-and-GM-A-is-testable-again.md`.
+> `notes_to_chief/reference` for this entry's spec: `20260901_1035_KA1A-ROOTCAUSE-one-census-per-login-world_census_sent-is-a-connection-latch.md`
+> (the bug and fix items 1-3) and `20260901_1120_KA1A-AMENDMENT-my-1035-fix-spec-item-4-is-unsafe-as-written-lane-A-already-measured-why.md`
+> (item 4, scene-1 eager census, deliberately NOT part of this fix or this entry -- see nonclaim 4).
+> Build-owner lane for this ticket's underlying fix: the census-latch clear already landed on
+> `main` (verified this round by COO directly from source, `pirate-force-server@81952ce`,
+> `runtime.py:5459-5470`) -- this entry exists to get the one thing nobody has yet: an attended
+> human confirming the client actually renders a SECOND (and third, fourth...) census inside one
+> TCP connection, not just the first one `GT-182` already proved.
+>
+> numbering: `grep -ohE '\b(GT|RE)-[0-9]{3}\b' GAME_TEST_QUEUE.md CLIENT_RE_QUEUE.md
+> archive/*QUEUE*ARCHIVE*.md | grep -oE '[0-9]{3}$' | sort -n | tail -1` returned `191`
+> (`RE-191`) at the time this entry was opened -- this entry is `192`.
+
+- objective: single claim -- starting from an already-logged-in live session (any starting
+  scene), a GM account types `/warp <mapnum>` at least THREE times in a row to three
+  DIFFERENT destination scenes that each have a nonzero `n_MARKER` (i.e. NOT the scene-1
+  walk-before-census case this entry deliberately excludes -- see nonclaim 4), and at EACH
+  destination the client renders a normal NPC population, not an empty map. `GT-182` already
+  proved the FIRST warp of a session gets a census; this entry is the one thing that PASS did
+  not cover, stated explicitly in its own PASS note: "whether a SECOND warp later in the same
+  session would also get a census... out of scope for this entry's own claim, which is about
+  the first warp only."
+- background (read before touching anything):
+  - `20260901_1035_KA1A-ROOTCAUSE-*.md`: measured on a live capture (boot 1404,
+    `run_gt182_20260901_094056.sqlite3`) that `self.world_census_sent` is a **once-per-TCP-
+    connection** latch (`runtime.py:1155`, set at 7785/7996/8016/8122/8250/1384, never reset
+    anywhere before this round's fix), so every warp after the session's first census-bearing
+    scene arrival was silently dropped -- ten `/warp` chat commands in the owner's own GT-182
+    session-2 capture produced exactly two censuses, both for the FIRST scene she landed
+    census-eligible in. This is the exact bug this entry checks is now closed.
+  - the fix that landed (`runtime.py:5459-5470`, inside `_gm_warp_resync_selected_scene`,
+    the same method `CORE-REQUEST-GM-045`/`GM-047` already wired): on a confirmed cross-scene
+    GM warp it now resets `world_census_sent`, `world_census_refused`, `last_target_pos`, and
+    the sibling fields that describe the OLD scene's placement indices
+    (`population_indices`, `world_census_indices`, `population_refresh_anchor`,
+    `census_anchor_record`, `npc_idle_action_sent`). Resetting `last_target_pos` matters for
+    the SAME reason `GT-182`'s own F-1 finding did: without it, the newly-unlatched census
+    would compose the destination roster around the departure scene's stale coordinates.
+  - what nobody has measured yet, per `1035`'s own nonclaim: "I did NOT prove the client
+    would render a second census in the same session... **The round that lands this must be
+    attended-tested before any first-eyes ticket is graded.**" This entry is that attended
+    test. `1120`'s amendment does not change any of items 1-3 above; it only blocks item 4
+    (scene-1 eager census), which this entry does not exercise.
+- db: fresh copy of `state\pirateforce.sqlite3` for this boot (never the canonical file) --
+  record the copy's filename and sha256 before/after; verify the canonical file's own
+  sha256 is unchanged before and after this round.
+- server args: standard boot, `-SecondPasswordMode bypass`, using a GM account already
+  present in `config/gm_accounts.json`. Requires `pirate-force-server@main` at or after
+  `81952ce` (the commit COO read `runtime.py:5459-5470` from this round) -- see RECHECK below.
+- steps:
+  1. Boot server + client per standard playbook. Confirm a fresh server start (not reused
+     from a previous client).
+  2. Log in with the GM account into any scene. Let the FIRST census for this session land
+     and confirm NPCs are visible (this is `GT-182`'s own claim, not re-tested here in
+     detail -- just confirm the session is past its first census before warping).
+  3. Click into chat, type `/warp <mapnum1>` for a destination scene NOT yet visited this
+     session, with a nonzero `n_MARKER` (pick one already opened by LANE-A, e.g. scene
+     4/5/6/8/10 -- avoid scene 1, per nonclaim 4). Press Enter. Wait ~3 seconds. Screenshot,
+     full resolution, labelled MAP-1. Record: scene name/background, HUD X/Y/Z, and every
+     NPC name label visible in frame with its colour (write "none" if the map looks empty).
+  4. Repeat step 3 for a SECOND different destination scene (`<mapnum2>`, also nonzero
+     `n_MARKER`, also not scene 1 or `<mapnum1>`). Screenshot labelled MAP-2, same recording.
+  5. Repeat step 3 for a THIRD different destination scene (`<mapnum3>`). Screenshot labelled
+     MAP-3, same recording.
+  6. Optional but encouraged if time allows: warp back to `<mapnum1>` a second time and
+     confirm NPCs are still there (tests that the latch-clear does not itself break a
+     revisited scene).
+- pass criteria (two layers, kept separate):
+    wire/DB: the server console/capture log for this boot shows, for EACH of the three (or
+      more) `/warp` commands after the first, a fresh `world_census_sent = False` ->
+      `WORLD_POP_HANDOFF`/`WORLD_CENSUS_BG*` assembled line pair for that destination scene
+      (not just the first one) -- i.e. the wire-level count of census dispatches should equal
+      the number of distinct scenes warped into this session, not one. This is headless-
+      provable from the console log alone and needs no human at the screen; it proves the
+      server SENT the bytes, not that the client rendered anything from them.
+    client-observable: what the human at the screen reports for MAP-1/MAP-2/MAP-3 per steps
+      3-5 above -- did each destination map show a normal NPC population (not empty), matching
+      what a fresh login into that same scene would show. Any ONE destination coming up
+      empty while the wire/DB layer shows a census WAS sent for it is a valid, useful
+      negative result (points at a client-side replace/render bug per RE-189 Job 1's own
+      "the field every profile is trying to flip" territory, or at a stale
+      `population_indices` mismatch this round's fix did not fully address) -- write up
+      which specific map failed, do not describe the whole entry as a blanket FAIL.
+- nonclaims:
+  1. Does not test the SCENE-1 eager-census case (item 4 of `1035`, blocked by `1120`'s
+     amendment as unsafe without either `lane_hooks.lane_a_choose_npc_scene1.production_allowed`
+     or a deferred `population_indices` install) -- this entry only exercises the cross-scene
+     GM-warp latch-clear path (`1035` items 1-3), which carries none of that hazard because a
+     warp only ever fires after login is already complete.
+  2. Does not re-test the FIRST warp of a session in detail -- that is `GT-182`, already PASS.
+  3. Does not test whether the destination scenes' marker geometry is walkable/good (per the
+     `authored`-not-`confirmed` caveat `GT-182` already carries) -- a bad landing spot is
+     scene data, not a FAIL of the census-chain claim this entry tests.
+  4. Does not claim this proves the census-latch fix is complete for every code path --
+     `1035`'s own nonclaim that nobody measured whether `world_census_refused` (vs
+     `world_census_sent`) had latched in the original bug capture is still open; this entry's
+     PASS/FAIL is about client-observed NPC presence across warps, not about which of the two
+     latch fields was responsible for the original symptom.
+  5. Does not test relog/reconnect behavior -- this is a single, unbroken TCP session across
+     all warps, per the entry's own objective.
+- RECHECK: `cd pirate-force-server && git log --oneline -1 -- src/pirateforce_foundation/runtime.py | head -1`
+  then confirm that commit is an ancestor of (or equal to) the boot commit used for this run,
+  and `grep -n -B5 "world_census_sent = False" src/pirateforce_foundation/runtime.py` shows a
+  hit inside `_gm_warp_resync_selected_scene` (at `main@81952ce` this is line 5459 -- do not
+  trust that exact number on a later commit, the file grows; confirm by function name, not by
+  line number) before trusting this entry's premise that the latch-clear fix is present on the
+  commit being tested.
+- links: `notes_to_chief/consumed/20260901_1035_KA1A-ROOTCAUSE-one-census-per-login-world_census_sent-is-a-connection-latch.md` ·
+  `notes_to_chief/consumed/20260901_1120_KA1A-AMENDMENT-my-1035-fix-spec-item-4-is-unsafe-as-written-lane-A-already-measured-why.md` ·
+  `notes_to_chief/20260901_1256_KA1A-TO-COO-census-latch-fix-landed-on-main-NOW-md-needs-updating-and-GM-A-is-testable-again.md` ·
+  `notes_to_chief/20260901_1341_COO-DECISION-census-latch-verified-on-main-open-gt-entry-for-multimap-warp-plus-queue-summary-fix.md` ·
+  `GT-182` (first-warp-of-session PASS, this entry's direct precondition) · `runtime.py:5459-5470`
+
+**ผู้เปิดใบ: chief รอบ `liq4ri` 2026-09-01 (cloud)**
