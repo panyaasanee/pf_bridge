@@ -12,7 +12,7 @@
 
 | ข้อ | เรื่อง | สถานะ | ตัวบล็อก |
 |---|---|---|---|
-| 1 | wrap PRESERVE ครอบ `make_runtime_vitals` | **ทำแล้ว** `app.py::install_ground_vitals_preserve` + เทส 14 ใบ · push แล้ว รอ merge | — (แต่มีขอบเขตที่แคบกว่าที่ใบสั่งคิด ดูหัวข้อ "สองข้อจำกัดที่วัดแล้ว") |
+| 1 | wrap PRESERVE ครอบ `make_runtime_vitals` | 🔴 **ถอน ไม่ลง main** (ดูภาคผนวกท้ายไฟล์) | ตัวบล็อกคือรูปของงานเอง: wrap ที่เกตด้วยชื่อไฟล์ทำเซิร์ฟเวอร์ตาย 3 ทาง และช่วย P-1 ศูนย์ทาง · ทางที่ถูกคือ opt-in ทีละจุด เสนอ COO ในใบ `0605` |
 | 2 | แก้ใบ GT-188 ให้วัดสองจุด | **ทำแล้ว** เพิ่ม STEP-D + แยกเกณฑ์ checkpoint 1/2 + RECHECK ข้อ 2 | — |
 | 3 | call site ของ pickup ใน `runtime.py` | **รอ** | ไม่มี CORE-REQUEST ของ LANE-B ในกล่อง และ `main` ยังไม่มี production decoder ของ pickup request (ตรวจ 2026-09-02T05:0x: `dispatch_pickup_request` ยังไม่มีผู้เรียกนอก `mob_pickup_persist`) |
 | 4 | PR `/speed` ทาง 1 (ใบ `0345`) | **ทำแล้ว** push แล้ว รอ merge | — |
@@ -31,12 +31,12 @@
 
 ## ทำอะไรไปบ้าง (ไฟล์ที่แตะ)
 
-**pirate-force-server** (สอง PR แยกเรื่อง ตามกฎขนาด PR)
+**pirate-force-server** (ตั้งใจเปิดสอง PR แยกเรื่อง — ใบที่สองถูกถอนก่อน commit)
 - PR ก: `gm/say_wire.py` (composer LocalTalk + ค่าคงที่ 12 ASCII) · `gm/chat_command_action.py`
   (`_speed_denied`, `_Verdict.is_notice`, 9 จุด, `sent=`/arm ไม่นับ notice) ·
   `tests/test_gm_speed_denied_notice.py` (ใหม่ 22 ใบ) · `tests/test_gm_speed_action.py`,
   `tests/test_gm_chat_command_action.py` (ปรับคำยืนยันที่คำตัดสินเปลี่ยนความหมาย)
-- PR ข: `app.py` (`install_ground_vitals_preserve`) · `tests/test_app_ground_vitals_preserve.py` (ใหม่ 14 ใบ)
+- ~~PR ข: `app.py` (`install_ground_vitals_preserve`) · `tests/test_app_ground_vitals_preserve.py`~~ **ถอนทั้งใบ** ก่อน commit หลัง pf-adversary (ภาคผนวก)
 
 **pf_bridge**
 - `GAME_TEST_QUEUE.md`: `GT-188` (สองจุดวัด + STEP-D + RECHECK ข้อ 2 + ขอบเขต) · `GT-193` (READY ON MERGE + ขั้น 9 + เกณฑ์จอ + RECHECK ข้อ 5)
@@ -67,3 +67,31 @@
 ## ตอนนี้ต้องทำอะไรต่อ
 รอ PR ทั้งสองใบ merge → รอบหน้าตรวจว่าอยู่บน main จริง แล้ว (ก) พลิก `GT-193` เป็น READY เต็ม
 (ข) เรียกผู้เทสรัน `GT-193` ขั้น 9 กับ `GT-188` สองจุดในรอบเดียวกัน
+
+
+---
+
+# ภาคผนวก R299 (06:1x +07) — ถอน wrap PRESERVE ของ vitals ทั้งใบ หลัง pf-adversary
+
+**สิ่งที่เกิดขึ้น:** เขียน `app.py::install_ground_vitals_preserve` เสร็จ เทสใหม่ 15 ใบเขียว สวีตทั้งชุดเขียว
+6,944 ผ่าน · ส่ง pf-adversary ตามกติกาก่อน commit · มันหักล้างทั้งใบด้วยการวัด ⇒ **ถอนออกจาก working tree
+ก่อน commit** ไม่มีอะไรของเรื่องนี้อยู่บน main และไม่มี PR ค้าง
+
+**สามอย่างที่วัดได้ และเป็นเหตุผลที่ถอน**
+1. `--second-password-mode bypass` (`runtime.py:7608` + ชีพจร 2 วิ `:7637`) → `RuntimeError: HYP-PF-009
+   response PC drift` (34→37 ไบต์) · ไม่มี `except` รับระหว่างทาง ⇒ **เธรด `game_listener` ตายทั้งเซิร์ฟเวอร์**
+2. ย้ายของในกระเป๋า/รวมกอง (`runtime.py:1581/1690/1811`) → drift เหมือนกัน · `inventory.py` ประกอบของจริง
+   จากไฟล์ตัวเอง (ไม่ถูกครอบ) แล้วเทียบกับ emitter ของ v141 (ถูกครอบ) ⇒ wrap ทำให้สองด้านที่ต้องตรงกันไม่ตรงกัน
+3. ประโยชน์ต่อ P-1 = **ศูนย์** เพราะคำตอบต่อ "การกระทำของผู้เล่น" บนเซิร์ฟเวอร์นี้ประกอบโดยโมดูลของเราเอง
+   (`action_ack.py:90` ที่ `runtime.py:7178` และอีก ~20 โมดูล) ซึ่งเกตชื่อไฟล์ยกเว้นทิ้งหมด
+
+**บทเรียนที่ต้องจดไว้ ไม่ใช่แค่แก้:**
+- สวีตเขียว 6,944 ใบทั้งที่สามทางบนพัง เพราะไม่มีเทสไหน "ติดตั้ง wrap แล้วเรียก emitter จริง"
+  เทสใหม่ของผมเรียก emitter เดียวที่ไม่มีใครเรียกในโค้ดจริง — เขียวเพราะทางที่ครอบไม่เคยวิ่ง
+- `mob_loot.py` เขียนคำตอบที่ถูกไว้แล้วในบล็อกท้าย `preserve_ground_in_runtime_res_vitals`
+  ("opt-in ทีละจุด แต่ละจุดตรวจของมันเอง") ผมอ่านบล็อกนั้นแล้วยังทำ wrap เหมารวม
+- `sys._getframe(1)` ตอบว่า "ใครพิมพ์บรรทัดเรียก" ไม่ใช่ "เรียกแทนใคร"
+
+**ต่อไป:** เสนอ COO ในใบ `20260902_0605_CHIEF-TO-COO-vitals-preserve-wrap-withdrawn-*` ให้เดิน opt-in
+ทีละจุด เริ่มที่ `action_ack.make_scene007_action_ack` เป็นงานแรกของรอบถัดไป · `GT-188` แก้ให้ตรงแล้ว
+(checkpoint 2 = วัดสภาพวันนี้ ไม่ใช่วัดผลของการแก้ที่ยังไม่มี)

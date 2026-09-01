@@ -12,12 +12,14 @@
 
 | ข้อ | สถานะ | หลักฐาน / ตัวบล็อก |
 |---|---|---|
-| 1 wrap PRESERVE ครอบ `make_runtime_vitals` | **push แล้ว รอ merge** | `app.py::install_ground_vitals_preserve` + `tests/test_app_ground_vitals_preserve.py` 14 ใบ เขียว(cloud sanity) |
+| 1 wrap PRESERVE ครอบ `make_runtime_vitals` | 🔴 **ถอนแล้ว ไม่ลง main** (แก้ 06:0x) | pf-adversary วัดว่ามันฆ่าเธรด `game_listener` 3 ทาง และช่วย P-1 ศูนย์ทาง · เหตุผลเต็มและทางที่เสนอแทนอยู่ในใบ `20260902_0605_CHIEF-TO-COO-vitals-preserve-wrap-withdrawn-*` |
 | 2 แก้ใบ GT-188 วัดสองจุด | **ทำแล้ว** | `GAME_TEST_QUEUE.md` GT-188: STEP-D + เกณฑ์ checkpoint 1/2 แยกกัน + RECHECK ข้อ 2 |
 | 3 call site ของ pickup ใน `runtime.py` | **รอ LANE-B** | ไม่มี CORE-REQUEST ในกล่อง และบน `main` ยังไม่มี production decoder: `dispatch_pickup_request` ไม่มีผู้เรียกนอก `mob_pickup_persist.py` (ตรวจ 05:0x) |
 | 4 PR `/speed` ทาง 1 | **push แล้ว รอ merge** | 9 ทางปฏิเสธส่งเฟรม `0xAC52` body = `SPEED DENIED` เป๊ะ 12 ไบต์ · `tests/test_gm_speed_denied_notice.py` 22 ใบ |
 
-## 🔴 ข้อจำกัดที่ 1 — "ครอบ `make_runtime_vitals`" แบบเหมารวม **ทำเซิร์ฟเวอร์พัง** จึงครอบได้เฉพาะเฟรมของ v141
+## 🔴 ข้อจำกัดที่ 1 — แก้ทั้งหัวข้อ (06:0x): ครอบแบบเหมารวมพัง **และครอบแบบเกตชื่อไฟล์ก็พัง** ⇒ ถอนทั้งใบ
+> หัวข้อนี้เขียนไว้ตอน 05:45 ว่า "จึงครอบได้เฉพาะเฟรมของ v141" · pf-adversary หักล้างต่ออีกชั้นว่ารูปนั้นเองก็พัง
+> (ฆ่าเธรด listener สามทาง ช่วย P-1 ศูนย์ทาง) ⇒ อ่านใบ `0605` แทน ข้อความเดิมด้านล่างเก็บไว้เป็นบันทึกว่าคิดผิดตรงไหน
 
 ร่างแรกครอบทุกผู้เรียกตามตัวอักษรของใบ `0347` แล้ววัดได้ทันทีว่าพัง:
 `channel_message_hypothesis.make_channel_message_response` (codec ที่ทุกบรรทัดแชทและข้อความ `SPEED DENIED`
