@@ -1,7 +1,7 @@
 {
   "schema": "pirate-force-critical-artifact-authority/v1",
-  "authority_version": "2026-09-01T22:51:00+07:00",
-  "authority_note": "20260901_2242_CODEX-CHECKPOINT-P06-PICKUP-CLOSURE.md",
+  "authority_version": "2026-09-02T01:26:00+07:00",
+  "authority_note": "20260902_0126_CODEX-CHECKPOINT-P07-PRESENTATION-C2.md",
   "serverproject_snapshot": {
     "commit": "8a8afa7c6ad7f13af5ac7088ffca6fc743cae5fa",
     "commit_time": "2026-09-01T07:50:38Z",
@@ -12,12 +12,18 @@
     "exhaustive_foundation_python_census_files": 157
   },
   "attr_dependency_pins": {
-    "generation_id": "b96e420c290201ce60babec398fd2389ea36db2f2f30ce552d9d680f481f3fae",
-    "PF_ATTR_GENERATION_MANIFEST.json": {"size": 8202, "sha256": "45c85e4200aae9b677f63ae3d495f57771ae0ff9b14726fd55a417472138f94e"},
+    "generation_id": "4b02f45a71046e1b13761f4d9e10472d6c653a4f10f2a328f87bf47080ad97ae",
+    "PF_ATTR_GENERATION_MANIFEST.json": {"size": 8204, "sha256": "8ffa1ec8b5ce8fe9dc774cbc3b01997a7ff3ee516120d536bee5875898b338da"},
+    "pf_rederive_attr_semantics.py": {"size": 1530912, "sha256": "c7d6c560f0848b3eb0edc34bb147a66d5c3fc1661ed0d88fb9c4065ca0a7528c"},
+    "pf_attr_checkpoint_reader.py": {"size": 26393, "sha256": "5c3a472d1965547adeda4642bebe17e469b71f8380a20ae58aefe221276af6b0"},
     "PF_ATTR_NAME_COLOR_SELECTOR.tsv": {"size": 37350, "sha256": "d15864a21a7a124a23f6dffad174a55d376045a25a04814bbe6dc5f5632af82d"},
     "PF_ATTR_FIELD_SEMANTICS.tsv": {"size": 1339980, "sha256": "1418b7559f5b05feef585490e76d33e8f72cd82c1ff854941d7faf37878c7f2f"},
     "PF_ATTR_QUEST_MARK_SELECTOR.tsv": {"size": 52137, "sha256": "3218d619a400dfcab52416489dcf8e6b85e6cbfd5a8bbd14d6ccad39dbfb9bf0"},
-    "PF_ATTR_DATA_BINDINGS.tsv": {"size": 53723, "sha256": "67e7550a09b00a5243f4c084ff486d29e420c6d0687704a092f157dbce219cb2"}
+    "PF_ATTR_DATA_BINDINGS.tsv": {"size": 53723, "sha256": "67e7550a09b00a5243f4c084ff486d29e420c6d0687704a092f157dbce219cb2"},
+    "PF_MONSTER_PRESENTATION.tsv": {"size": 20875512, "sha256": "658ae9352da2e45c1cd5306851dd7bbe8271dabe5cef3728ce223df31193722c"},
+    "PF_MONSTER_PRESENTATION.md": {"size": 16783, "sha256": "2a2a6990bb28cdff5c3a2c1791852f992ec020db15c70f9ab6f929c42a8be282"},
+    "PF_ATTR_UNRESOLVED.tsv": {"size": 2355364, "sha256": "22f04945749e385d4220f2401924f3834daad59b7cadd76453ff344d0e6f743d"},
+    "PF_ATTR_CONFLICTS.tsv": {"size": 3531510, "sha256": "4ddf998c76f5c5bd566f8a2c8bc15997b59dd39950eddc84454b8bdccf88fbaa"}
   },
   "artifacts": {
     "gm": {
@@ -197,6 +203,43 @@
         "all_files_tracked": true
       }
     },
+    "monster_presentation_checkpoint_2": {
+      "claim_scope": "CHECKPOINT_2 evidence and coverage owner for authored scene placement groups, four CLINE map-list ambiguity guards and the manager-sensitive f_SCALE census. Authored placement groups are not live actor density; CLINE map-list projection is not runtime actor identity; typed scale effect and active outfit/action/idle selection remain OPEN.",
+      "generation_id": "4b02f45a71046e1b13761f4d9e10472d6c653a4f10f2a328f87bf47080ad97ae",
+      "rows": 8950,
+      "sources": {"DATA": 8940, "IMAGE": 10},
+      "checkpoint_1_rows_preserved": 2697,
+      "checkpoint_2_additions": {"authored_placement_groups": 6248, "cline_map_list_projection_guards": 4, "manager_sensitive_scale_rows": 1},
+      "semantic_status_closures": 0,
+      "status": "PARTIAL / CHECKPOINT_2",
+      "no_change_streak": 0,
+      "fingerprints": {
+        "presentation_v2": "c942fd4ef6d6347b13977a6d503d9fb8886497a13bfd4f6095628068aa8452e7",
+        "v3_subject_set": "9e05ee4153eb9ccb703a467e879fa3b51264b93dda812862942d5f5a7e0b4a37",
+        "v3_subject_status": "17d691d8de7b6f096f8cabd22a9a6355802e1be2f3726de620821202126c3222"
+      },
+      "integrity": {
+        "deterministic_full_publications": 2,
+        "artifact_hash_and_size_checks": "48/48 PASS",
+        "checkpoint_reader": "PASS",
+        "compatibility_mirror_warnings": 0,
+        "unsupported_arguments": "--check, --self-test and junk fail before mutation",
+        "old_context_leak_counterexample": "d5eeb931... rejected by the final placement validator",
+        "prior_row_preservation_mismatches": 0,
+        "source_partition": "all TSV rows have exactly one of IMAGE/DATA; no DUMP/CAPTURE row in PF_MONSTER_PRESENTATION.tsv"
+      },
+      "server_context_pin": {
+        "runtime.py": {"sha256": "6098c24a45b6964c4b3296dae0b3e61c1cb0505736cb9a8682d0ff0ba7a8a0b5", "claim_range": "4193-4335,8679-8691", "claim": "ActionVital admission path still has no post-parse +0x30 behavior-state check"},
+        "decoder_authority_open": "pf_decode_lua_npc.py is not yet pinned as the permanent decoder authority; raw .npc and derived placement inputs are individually pinned"
+      },
+      "files": {
+        "PF_ATTR_GENERATION_MANIFEST.json": {"size": 8204, "sha256": "8ffa1ec8b5ce8fe9dc774cbc3b01997a7ff3ee516120d536bee5875898b338da"},
+        "PF_MONSTER_PRESENTATION.tsv": {"size": 20875512, "sha256": "658ae9352da2e45c1cd5306851dd7bbe8271dabe5cef3728ce223df31193722c"},
+        "PF_MONSTER_PRESENTATION.md": {"size": 16783, "sha256": "2a2a6990bb28cdff5c3a2c1791852f992ec020db15c70f9ab6f929c42a8be282"},
+        "pf_rederive_attr_semantics.py": {"size": 1530912, "sha256": "c7d6c560f0848b3eb0edc34bb147a66d5c3fc1661ed0d88fb9c4065ca0a7528c"}
+      },
+      "tracked_mirror": null
+    },
     "combat_lethal_tail_delta": {
       "claim_scope": "Delta-only IMAGE owner for bounded RuntimeRes actor-before-terrain order, target release, typed target-field separation, CHitResult target side effects, observer-before-death ordering, dead-task construction/queue/model gates, bounded corpse persistence and the BasicAttr+0x58 timer-authority boundary. Original-server packet grouping, cadence, timer values, hold duration, actor removal and pickup/drop policy remain OPEN.",
       "depends_on": ["PF_COMBAT_LIFECYCLE.tsv", "PF_GROUND_DROP_LIFETIME.tsv", "PF_MONSTER_COLOR_GATE.tsv", "PF_ATTR_FIELD_SEMANTICS.tsv", "PF_ATTR_ROLE_DISCRIMINATOR.tsv", "PF_ACTOR_RELATION_INTERACTION_GRAPH.tsv", "PF_QUEST_MARK_EVENT_CENSUS.tsv", "FACTPACK_R102_DYING_COUNTDOWN_UI_FIELD_STATIC.md"],
@@ -258,11 +301,29 @@
       "bounded_closures": ["DropThingGameObj typed is-a click gate", "PickupTerrainThing+0x14 equals TerrainThing+0x10 reconciliation key on the reached success path", "0x4543 nested and 0x6E6F gameplay/0x453A login logical discriminators", "serialize -> buffer rewrite -> <=0x3FF8 chunk -> WS2_32 send path", "no direct local unregister/map erase in the reached pickup-emission subpath", "current-corpus terrain-pool and fail-closed nested-reach census"],
       "open_original_policy": ["authoritative capture-to-server provenance ledger", "original accepted pickup exchange", "post-pickup omission/full-clear/remove carrier and ordering", "last-item all-clear", "expiry duration/policy", "final socket literal mapping after buffer rewrite", "729 unresolved RuntimeRes tails and 735 unresolved C2S nested members"]
     },
-    "decision": "P0-6_BOUNDED_CLIENT_KEY_TRANSPORT_CLOSED / ORIGINAL_PICKUP_REMOVAL_POLICY_OPEN",
-    "next_priority": "P0-7"
+    "p0_7_checkpoint_2": {
+      "main_attr_generation": "4b02f45a71046e1b13761f4d9e10472d6c653a4f10f2a328f87bf47080ad97ae",
+      "main_attr_field_status_change": 0,
+      "main_attr_field_scope_change": 0,
+      "semantic_status_closures": 0,
+      "presentation_rows": {"total": 8950, "DATA": 8940, "IMAGE": 10},
+      "checkpoint_1_rows_preserved": 2697,
+      "new_coverage_rows": 6253,
+      "decision": "P0-7_PARTIAL_CHECKPOINT_2 / EVIDENCE_COVERAGE_DELTA",
+      "open": ["typed f_SCALE effect, unit and zero policy", "s_OUTFIT +0x108 to Avatar active outfit/action/idle selection", "live actor density from authored placement groups", "runtime identity for CLINE map-list projections", "permanent pf_decode_lua_npc.py decoder authority pin"]
+    },
+    "gt192_level_correction": {
+      "supersedes": "the claim that ordinary census records carried level and the client only partially decoded them",
+      "current_fact": "the ordinary V141 census builder sends name, HP, speed, scene and sequence but omits BasicAttr level bit 0x0002/u16; HP is present, so LV 1 does not prove partial decode",
+      "image_fact": "RE-117 proves inherited NPCAttr BasicAttr level bit 0x0002, object+0x5E u16 tag 0x12",
+      "implementation_boundary": "Foundation has a bounded hostile-field-mob level splice; ordinary multi-scene census acceptance remains a separate runtime verification",
+      "urgent_note": "CODEX_URGENT_20260901_2340_LEVEL-OMITTED-NOT-PARTIAL-DECODE.md"
+    },
+    "decision": "P0-7_PARTIAL_CHECKPOINT_2 / EVIDENCE_COVERAGE_DELTA / PAUSED_BY_OWNER_AFTER_CHECKPOINT",
+    "next_priority": "NONE_WHILE_OWNER_PAUSE; P0-8 is the next ordered lane when explicitly resumed"
   },
   "current_server_readonly_audit": {
-    "classification": "RECONSTRUCTED_POLICY_AND_INTERNAL_CONTRACT_AUDIT; not original-server evidence",
+    "classification": "HISTORICAL_RECONSTRUCTED_POLICY_AND_INTERNAL_CONTRACT_AUDIT_AS_OF_INSPECTED_AT; not original-server evidence and not a moving-HEAD claim",
     "serverproject_head": "89632cb386f3b1d875e89b3465ed1def023eec32",
     "inspected_at": "2026-09-01T22:51:00+07:00",
     "worktree_clean_at_inspection": true,
@@ -290,6 +351,17 @@
     }
   },
   "supersession": [
+    {
+      "note": "20260902_0126_CODEX-CHECKPOINT-P07-PRESENTATION-C2.md",
+      "superseded": ["P0-7 CHECKPOINT_1 as the current presentation census", "d5eeb931 placement rows that projected SCENE_NAME/CLINE context into authored placement groups", "any claim that --check or --self-test was a distinct mode of pf_rederive_attr_semantics.py"],
+      "retained": ["20260901_0229 CHECKPOINT_1 V2 methodology and fingerprints as history", "all 2697 CHECKPOINT_1 presentation rows", "P0-7 typed-effect and active-selection blockers"],
+      "replacement": "generation 4b02f45a... / PARTIAL CHECKPOINT_2 / V3 baseline / owner pause"
+    },
+    {
+      "note": "CODEX_URGENT_20260901_2340_LEVEL-OMITTED-NOT-PARTIAL-DECODE.md",
+      "superseded": ["20260901_2002 diagnosis that ordinary census actors carried level and LV 1 therefore proved partial client decode"],
+      "replacement": "ordinary census level field was omitted; HP was present; color/nameplate remains a separate unresolved presentation problem"
+    },
     {
       "note": "20260901_1439_CODEX-CHECKPOINT-GM-COLOR-DROP-FIFTH.md",
       "superseded": ["unqualified current-code PASS wording", "color/drop file metadata"]
@@ -346,7 +418,9 @@
     "p0_4_tracked_mirror_commit": "89c16e29ddca4502e81575a0aa86949cf80b5d79",
     "p0_5_tracked_mirror_commit": "26bef6f9b45e514e9d4f600291477f40d423c697",
     "p0_6_tracked_mirror_commit": "621a7d7f56833db9f5d8f069d806cc3a4df09acd",
-    "tracked_mirror_scope": "The eight P0-4 files, four P0-5 files and four P0-6 files listed by their artifact entries are byte-identical and tracked at the pinned commits.",
+    "p0_7_external_generation": "4b02f45a71046e1b13761f4d9e10472d6c653a4f10f2a328f87bf47080ad97ae",
+    "p0_7_tracked_mirror_commit": null,
+    "tracked_mirror_scope": "The eight P0-4 files, four P0-5 files and four P0-6 files listed by their artifact entries are byte-identical and tracked at the pinned commits. P0-7 CHECKPOINT_2 is authoritative only through the external generation manifest and is not claimed as a complete tracked mirror.",
     "requirement": "Consumers must verify authority hashes and artifact-specific mirror commits. Do not assume every older standalone external artifact is mirrored."
   }
 }
