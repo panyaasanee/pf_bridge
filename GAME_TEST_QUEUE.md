@@ -9789,7 +9789,7 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
 
 **ผู้เปิดใบ: chief รอบ `57alcd` 2026-09-01 (cloud), per COO-ORDER `1642`**
 
-## 🆕🔬 GT-194 UI-B-LOGOUT-VITALCOUNT-ENVELOPE-FIX-001 [attended, in-game, BLOCKED-ON-WIRING]: หลังแก้ `classify_logout_attempt` แล้ว ปุ่ม "ออกจากเกม" (UI-B) ตอบกลับจริงไหมตอนไคลเอนต์ห่อ vital อื่นมาด้วย
+## 🆕🔬 GT-194 UI-B-LOGOUT-VITALCOUNT-ENVELOPE-FIX-001 [attended, in-game, 🟢 READY — RECHECK 1-3 all passed, chief round `f7zt8z` (R295)]: หลังแก้ `classify_logout_attempt` แล้ว ปุ่ม "ออกจากเกม" (UI-B) ตอบกลับจริงไหมตอนไคลเอนต์ห่อ vital อื่นมาด้วย
 
 ### ที่มา
 
@@ -9805,8 +9805,12 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
 18/18 ผ่าน) แต่ยังไม่ได้ wire เข้า dispatch จริง -- ไฟล์ที่ต้องแก้ (`logout_hypothesis.py`) ล็อกอยู่ที่
 chief ใบนี้เปิดไว้ล่วงหน้าตามธรรมเนียมโปรเจกต์ (เทียบ `GT-190`, `GT-193`) เพื่อไม่ต้องเปิดใบใหม่ทีหลัง
 
-**สถานะ BLOCKED-ON-WIRING:** `classify_logout_attempt` ยังเช็ค `vital_count == 1` อยู่จริงบน `main`
-ตอนเปิดใบนี้ (ยืนยันด้วย `grep -n vital_count`, ดู RECHECK) -- ห้ามเรียกผู้เทสมาก่อน RECHECK ผ่านครบ
+**สถานะ 🟢 READY (แก้แล้ว):** chief รอบ `f7zt8z` (R295) แก้ `classify_logout_attempt` ตามข้อเสนอ (ก) จริง
+(`vital_count >= 1` + `nested_payload[:14]` เมื่อ `vital_count >= 2`, ยังคงเทียบเท่ากันทั้งไบต์เมื่อ
+`vital_count == 1` -- pf-adversary รอบแรกจับข้อบกพร่องจริง (เดิม `[:14]` ใช้แบบไม่มีเงื่อนไข ⇒
+เฟรม `vital_count == 1` ที่มีขยะต่อท้าย 50 ไบต์จะผ่านด้วย ทั้งที่ก่อนแก้ปฏิเสธ) แก้แล้วด้วย branch สอง
+ทาง แยกตาม `vital_count`) RECHECK ทั้งสามข้อด้านล่างผ่านครบ (ดูผลจริงต่อท้ายแต่ละข้อ) -- **พร้อมเปิดจอเรียก
+ผู้เทสได้แล้ว**
 
 ### objective
 
@@ -9851,12 +9855,25 @@ item 1 เปลี่ยนเป็น `sed` ตัดเฉพาะช่ว
    `logout_request_envelope.classify_logout_vital_request` แทนตามข้อเสนอ (ข)) -- ถ้าบรรทัด 1451-1465
    ขยับเพราะโค้ดก่อนหน้าถูกแก้ไปด้วย ให้หาเลขบรรทัดของฟังก์ชันใหม่ก่อนรัน อย่าเชื่อเลข 1451-1465 เดิม
    ตาบอด
+   — 🟢 **[วัดแล้ว R295]** ฟังก์ชันขยับไป `1458-1503` เพราะเพิ่ม docstring อธิบายการแก้ -- รันซ้ำที่
+   `sed -n '1458,1503p' ... | grep -n "vital_count == 1"` = **ไม่เจอ** จริง (มีแต่ `vital_count >= 1`
+   ในเช็ค envelope และ `parsed.vital_count == 1` เป็นเงื่อนไข branch แยกต่างหากสำหรับเลือกวิธีเทียบ
+   payload ไม่ใช่เงื่อนไข envelope เดิมที่ใบนี้เตือนไว้)
 2. `(cd pirate-force-server && python3 -m pytest tests/test_logout_request_envelope.py tests/ -k logout -q)`
    ผ่านทั้งหมด (regression guard -- ห้ามมีเทส logout เดิมพังจากการแก้)
+   — 🟢 **[วัดแล้ว R295]** `126 passed, 3 skipped` (skip เดิม ไม่ใช่ของใหม่)
 3. Headless replay เฟรม 119 ไบต์จริงของใบ `1930` (หรือแคปเจอร์ใหม่ที่เทียบเท่า) ผ่าน dispatch จริง แล้ว
    `grep` console log ยืนยันว่าไม่ใช่ `logout_hypothesis_wrong_envelope_no_reply` อีกต่อไป
+   — 🟢 **[วัดแล้ว R295]** ใหม่: `tests/test_logout_hypothesis.py::LogoutHypothesisRuntimeTests::
+   test_real_capture_with_wrapped_vitals_now_dispatches` ขับผ่าน `state.dispatch(...)` จริง (ไม่ใช่
+   เรียก `classify_logout_attempt` โดด ๆ) ด้วยเฟรม 119 ไบต์ตัวเดียวกับใบ `1930` ทุกไบต์ (ยืนยัน
+   byte-identical กับต้นฉบับใน `test_logout_request_envelope.py` แล้ว) -- ยืนยันว่า
+   `"logout_hypothesis_wrong_envelope_no_reply"` **ไม่อยู่ใน** `state.events` และ action ที่ได้คือ
+   `HYP_PF_012_LOGOUT_SUBCODE01_ACK_AFTER_CLEAN_CLOSE` (ack จริง, session `closed_at` ถูกเซ็ต) --
+   `test_captured_exit_game_frame_now_classifies_exact_01` (`test_logout_request_envelope.py`) ยืนยัน
+   ระดับ `classify_logout_attempt` โดยตรงอีกชั้นเช่นกัน
 4. ผลลบ/ว่างจากข้อ 1-3 ข้อใดข้อหนึ่ง = ยังไม่พร้อม สถานะคงเป็น `BLOCKED-ON-WIRING` ห้าม promote เป็น
-   `READY`
+   `READY` — **ทั้งสามข้อผ่านหมด ⇒ promote เป็น `READY` แล้ว** (บรรทัดหัวใบด้านบน)
 
 ### links
 
