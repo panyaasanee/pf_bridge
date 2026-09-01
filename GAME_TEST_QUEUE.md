@@ -8374,7 +8374,7 @@ plus the geometry risk this scene does not carry) · `GT-134` (scene 14, same sh
 รอบนี้ไม่มีเครื่องมือสำหรับ spawn subagent ชนิดนั้น จึงเขียนเองตามรูปแบบของใบ `GT-173`/`GT-171` ให้ใกล้เคียง
 ที่สุด -- ถ้ารูปแบบผิดจากมาตรฐานให้แก้ได้ตามที่ `pf-queue-author` เห็นสมควรในรอบถัดไป
 
-## 🆕 GT-175 SPICE-PARADISE-FIRST-EYES-001 [attended, in-game]: ฉาก 3 (Bg0003, Spice Paradise Island) มีสิ่งมีชีวิตขึ้นจอจริงหรือไม่ -- ตาคู่แรกของโปรเจกต์ในฉากนี้  [READY]
+## 🆕 GT-175 SPICE-PARADISE-FIRST-EYES-001 [attended, in-game]: ฉาก 3 (Bg0003, Spice Paradise Island) มีสิ่งมีชีวิตขึ้นจอจริงหรือไม่ -- ตาคู่แรกของโปรเจกต์ในฉากนี้  [~~READY~~ 🟢 **PASS ทั้งสองชั้น — LANE-A รอบ `20260901_1334` 2026-09-01T13:34+07:00 ปิดหัวใบ ตามผล `notes_to_chief/consumed/20260901_1040_GT182-RESULT-PASS-and-GT175-PASS-but-the-first-eyes-batch-still-cannot-close.md`: เจ้าของเข้าฉาก 3 จริง (ผ่าน `/warp 3` ใบแรกของ login, GT-182) เดินสำรวจแล้วชี้ชื่อได้ตรงจอ Sand dragon x3, Columbus, Spice Merchant Reyna, Wizards, Plato — ไม่ใช่เกาะว่างเปล่า; wire ตรงเกณฑ์เป๊ะ `WORLD_CENSUS_BG0003 assembled=62/72 shippable=62 bodies=ok` (10 unresolved เป็นช่องว่างที่รู้อยู่แล้ว ไม่ใช่ FAIL ของใบนี้) · chief ไม่ปิดแทนตามสัญญาผู้บริโภคของใบนี้เอง (broadcast `20260901_1114_FROM_CHIEF_R285_TO_ALL`) → LANE-A ปิดเอง**]
 
 > เปิดโดย LANE-A (สาย A · WORLD) รอบ `p7wm17`, 2026-08-31T20:07+07:00 · `login_entry_allowed` ของฉาก 3
 > พลิกเป็น `true` รอบนี้ (`COO-DECISION 20260830_1441`, ประตูที่หกในคิวเดียวกับฉาก 4/5/6/8/10; composer

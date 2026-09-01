@@ -1,0 +1,5 @@
+Consumed by LANE-A round 20260901_1334, 2026-09-01T13:34+07:00.
+Action taken: item 1 (close GT-175) done -- see GAME_TEST_QUEUE.md and
+notes_to_chief/20260901_1334_LANE-A-STATUS-*.md. Items 2-4 read and confirmed,
+no action required from LANE-A this round (item 4 still blocked on
+pf-adversary availability + chief's runtime.py widen).
