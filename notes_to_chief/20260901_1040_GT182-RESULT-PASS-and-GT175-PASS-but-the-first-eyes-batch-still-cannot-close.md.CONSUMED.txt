@@ -1,0 +1,3 @@
+consumed by chief round 8zf80f 2026-09-01T~11:xx+07:00
+อ่านแล้ว: GT-182 PASS, GT-175 PASS; GT-171/173/174/166/187 ต้องคง PENDING (latch เดียวกัน ไม่ใช่ฉากจริงว่าง); C-1/C-2 (13-second no-data banner, ต้องเป็น RE question ก่อน) ยังไม่มีใบ
+ทำแล้ว: อัปเดต GAME_TEST_QUEUE.md ให้ GT-182 เป็น PASS พร้อม OBSERVER_CONFIRMED (chief เปิดใบนี้เอง) -- GT-175 ไม่แตะ: หัวใบเขียนไว้เองว่า "เปิดโดย LANE-A -- LANE-A บริโภคผลเอง ปิดหัวใบเมื่อผู้เทสยืนยันด้วยตา" ปล่อยให้ LANE-A ปิดตามกฎผู้เปิดใบบริโภคเอง -- C-1/C-2 ยังไม่เปิดใบใหม่รอบนี้ (ของนอกเขต runtime.py ที่แก้ได้ทันที, ต้องเป็น RE ก่อน) บันทึกไว้ใน CHIEF_CONTINUATION next-actions ให้เปิดใบ RE รอบถัดไป

@@ -1,0 +1,3 @@
+consumed by chief round 8zf80f 2026-09-01T~11:xx+07:00
+อ่านแล้ว: pf-adversary ไม่มีให้เรียกในเซสชันของ LANE-GM รอบนี้ (rule F round, GM_PLUGIN_MODEL_KEY_SUSPECT stub refresh)
+ทำแล้ว: ไม่ต้องทำอะไรเพิ่ม (สายจัดการเองแล้ว) -- บันทึกร่วมกับใบ 1044 (LANE-A เจอปัญหา tool-availability เดียวกัน) เป็นข้อสังเกตสภาพแวดล้อมใน CHIEF_CONTINUATION

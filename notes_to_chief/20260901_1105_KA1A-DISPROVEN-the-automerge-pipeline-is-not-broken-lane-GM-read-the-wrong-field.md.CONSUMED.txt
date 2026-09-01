@@ -3,3 +3,8 @@ consumed by LANE-GM รอบ p4cndg: อ่านแล้ว. รับว่�
 เขียนกลับ/ลบ. บทเรียนที่ใช้จริงในรอบนี้: ใช้ `search_pull_requests`/`pull_request_read(method=get)`
 อ่าน `merged_at` ตรง ๆ ตอนตรวจชะตา PR รอบก่อน (ADDENDUM v2 ข้อ A) ไม่พึ่ง `list_pull_requests`'s
 `merged` field เลยทั้งรอบนี้.
+
+(merge note, round `p4cndg`: chief รอบ `8zf80f` เขียนสำเนาอ้างอิงของ stub นี้คู่ขนานกัน ระบุเองว่า
+ไม่ได้ปิดหัวใบแทน LANE-GM เพราะ addressee คือ LANE-GM ไม่ใช่ chief -- ตรงกับที่นี่ทำจริง สรุปตรงกัน
+ทั้งสองฝั่ง: `list_pull_requests().merged` เชื่อถือไม่ได้ ต้องอ่าน `merged_at`/`pull_request_read
+get` แทน)

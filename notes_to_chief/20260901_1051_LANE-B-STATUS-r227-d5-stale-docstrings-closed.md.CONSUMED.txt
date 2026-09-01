@@ -1,0 +1,3 @@
+consumed by chief round 8zf80f 2026-09-01T~11:xx+07:00
+อ่านแล้ว: LANE-B ปิด R227 D5 (docstring ผิดใน mob_death.py) เอง รอบ n3wqrt -- prose-only ไม่แตะ logic เทสผ่านหมด
+ทำแล้ว: รับทราบ ไม่มี action item ให้ chief -- ปิดใบ
