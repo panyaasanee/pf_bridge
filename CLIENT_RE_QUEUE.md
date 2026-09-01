@@ -562,7 +562,7 @@ BUILD_IMPACT_NONE: 0
 > 🔴 ใบ `RE-085`-`RE-100` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ — ใบนี้เป็นใบใหม่ ไม่ใช่ใบแทนใคร
 
 ### ที่มา
-`rounds/A_20260827_1052_columbus_m2_identity_correction.md` และจดหมายคู่กัน
+`archive/rounds_2026-08-27_to_28/A_20260827_1052_columbus_m2_identity_correction.md` และจดหมายคู่กัน
 `notes_to_chief/20260827_1052_LANE-A-CORRECTION-columbus-m2-quest3021-not-3023-scene17-not-19.md` แก้
 crosswalk: Columbus ตัวจริงที่ผู้เล่นเจอใน M2 (`bg0001` placement index 1, ยืนยันโดยคำเจ้าของ — testimony
 จากเซสชัน attended ต่อเนื่องเดียวกัน `0925`→`0950` ไม่ใช่สอง derivation อิสระ, เลข index เคยขยับมาแล้วครั้ง
@@ -1962,7 +1962,7 @@ bounded negative ที่ชัดเจนว่า static ตอบไม่�
 
 ### จุดตั้งต้นที่รอบ `iyhrj0` วัดไว้แล้ว (รายละเอียดเต็ม + provenance อยู่ใน
 `notes_to_chief/20260828_1740_LANE-A-FINDING-bg0001-crosswalk-is-not-an-offset.md` และ
-`rounds/A_20260828_1740_iyhrj0_*.md` — ที่นี่เก็บเฉพาะข้อที่เปลี่ยนวิธีทำงานของใบนี้)
+`archive/rounds_2026-08-27_to_28/A_20260828_1740_iyhrj0_bg0001_identity_not_an_offset.md` — ที่นี่เก็บเฉพาะข้อที่เปลี่ยนวิธีทำงานของใบนี้)
 1. แถว `Port transportation` (`n_ID` 37/66/104/155/195/249/284/321/361/398 — มีใน `MOBS_TIP` ไม่มีใน
    `CONSTDATA`) เป็น **ตัวคั่นบล็อก** ⇒ `1-36 | 38-65 | 67-103 | 105-154 | 156-194 | …` ·
    **156-194** อ่านเป็นโรสเตอร์บริการของ Port Royal (lvl 10-20)
@@ -2125,7 +2125,7 @@ VA ตั้งต้นที่มีอยู่แล้วในโปร�
    **แทนที่ทั้งลิสต์** หรือ **merge ตาม element key** · ต้องการ VA ของไซต์ที่เคลียร์/แทนที่ container
 3. ถ้าแทนที่ทั้งลิสต์ — element key คือฟิลด์ไหน · container เคลียร์ก่อนหรือหลัง parse
 
-### ทำไมถึงถาม (ประวัติเต็มอยู่ในจดหมาย 1846 และ `rounds/B_20260828_1846_*.md`)
+### ทำไมถึงถาม (ประวัติเต็มอยู่ในจดหมาย 1846 และ `archive/rounds_2026-08-27_to_28/B_20260828_1846_multi_drop_emission_shape.md`)
 เซิร์ฟเวอร์ส่งของหลายชิ้นเป็น **N collection แยกกัน แต่ละอันประกาศ count=ONE** ⇒ ถ้า consumer แทนที่ทั้งลิสต์
 เหลือของได้ชิ้นเดียว · ลิสต์พี่น้อง `0x02` ผ่าน envelope **ตัวเดียวกัน** ส่ง N element ในหนึ่ง collection ได้ปกติ
 — `GT-121` ✅ PASS (`OBSERVER_CONFIRMED` 2026-08-28T09:2x) **97 element** ถึง client จริง เจ้าของเห็น NPC ครบบนจอ
@@ -2979,7 +2979,7 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
    `[0x00AA0710,0x00AA0799)` เรียก empty-key predicate ก่อน ถ้า true จะ `ret 0x10` ทันทีไม่มี log/frame —
    create path (`0x00A9E080` ซึ่ง vtable-crosswalk ไปที่ factory `0x007280D0` ผ่าน `GMModule_Client+0x48`)
    ไม่ถูกเรียก (`notes_to_chief/20260828_0411_...md:36,42-44`; สรุปซ้ำใน
-   `rounds/GM_20260828_0418_re118-closed-gt103-ab-procedure-added.md:35`)
+   `archive/rounds_2026-08-27_to_28/GM_20260828_0418_re118-closed-gt103-ab-procedure-added.md:35`)
 
 ### pass criteria — สองชั้น แยกกันเด็ดขาด
 

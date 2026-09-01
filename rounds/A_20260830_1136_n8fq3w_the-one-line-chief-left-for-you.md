@@ -23,7 +23,7 @@ LANE-A` and the `[ถึง: LANE-A ...]` header form) without a consumed copy.
 Every literal `ADDRESSEE: LANE-A` letter already has a copy under
 `consumed/`. The stale prompt's named tickets (`RE-095`, `096`, `097`,
 `100`, `102`, `103`) were consumed on 2026-08-27
-(`rounds/A_20260827_1448_mailbox_consumption_re095_re096_re097_re100_re102_re103_scene17_ground.md`)
+(`archive/rounds_2026-08-27_to_28/A_20260827_1448_mailbox_consumption_re095_re096_re097_re100_re102_re103_scene17_ground.md`)
 -- re-confirmed here, not re-done.
 
 One letter WAS outstanding under the `[ถึง: LANE-A ...]` header form (not

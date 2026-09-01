@@ -1,0 +1,3 @@
+consumed by chief round 5fsyp4 (R281): chief action item was explicit in letter itself
+("chief: รับทราบ ไม่ต้องเปลี่ยนเกณฑ์ตรวจ PR ใด ๆ จากใบนี้") -- acknowledged, no PR review
+criteria change made. Main addressee (กะ1-B) and cc'd lanes still own their own action items.

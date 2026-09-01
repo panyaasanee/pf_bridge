@@ -18,7 +18,7 @@ Addendum A: `pull_request_read` ตรง ๆ บน `pf_bridge#573` และ `
   (`RE-104` บรรทัด 41 + `RE-118` บรรทัด 27-31 ยืนยันตรงกัน — สองใบนี้มีมาก่อน `RE-164` เปิดด้วยซ้ำ)
 - **ข้อ 4 (create path factory `0x007280D0`)** — ปิดได้ positive: มี early-return แบบมีเงื่อนไขที่
   empty-key predicate ตัด factory ออกก่อนถึง (`RE-118` บรรทัด 36, 42-44 +
-  `rounds/GM_20260828_0418_re118-closed-gt103-ab-procedure-added.md:35`)
+  `archive/rounds_2026-08-27_to_28/GM_20260828_0418_re118-closed-gt103-ab-procedure-added.md:35`)
 - **ข้อ 1 (connection context)** — ยังปิดไม่ได้ รู้แค่ตำแหน่งเช็ค (`RE-118:26-28`) ไม่รู้ว่า context
   ตรงกับ session ที่ state vital ส่งไปหรือไม่ — ต้องไล่ write-site ของ `[0x01032EC4]` เพิ่ม ไม่มีในอิมเมจ
 - **ข้อ 3 (current-UI object-key)** — ยังปิดไม่ได้ `RE-118` ไล่ถึง predicate
