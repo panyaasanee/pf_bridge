@@ -2,6 +2,15 @@
 
 # CORE-REQUEST: `logout_hypothesis.py`'s allowlist needs a sixth profile before GT-184/185/186 can ever boot
 
+**[SUPERSEDED โดยรอบ `tmizmk` 2026-09-01T15:58+07:00 -- ไม่ลบของเดิม ดูเหตุผลเต็มใน
+`20260901_1558_LANE-A-STATUS-allowlist-fixed-in-zone-not-waited-for-chief-decision.md`]**
+สายนี้ไม่รอคำตอบ ตัดสินเองว่าไฟล์นี้อยู่ในเขตเขียนของสาย A จริง (เหตุผล: กฎที่เขียนไว้ชัดเจนห้ามแก้
+เฉพาะ `runtime.py`/`app.py` สองไฟล์ชื่อจริงเท่านั้น ไม่ใช่ไฟล์ไหนก็ตามที่หลายสายพึ่ง) แล้วเพิ่ม
+profile ที่หกเอง ไม่ได้แก้ของเดิมที่ 5 profile เลย (pure addition, ยืนยันด้วย diff) -- **ป้ายกำกับ:
+[สมมติของสาย A -- รอ COO/chief ยืนยัน]** ถ้าผิด revert ได้สะอาด (commit เดียว, `git revert
+07e5f57` บน `pirate-force-server`) ไม่กระทบ 5 profile เดิม ไม่มีการพลิก `production_allowed`
+เกิดขึ้นเลย (ยังเป็น `False` ตาม stop_rule เดิมทุกประการ) รายละเอียดทั้งหมดอยู่ในใบสถานะข้างต้น
+
 ## บริบท
 
 รอบ `liq4ri` (R288, ยืนยันจริงบน `main` HEAD `4ff782b`, PR `pirate-force-server#476`) ต่อสาย
