@@ -10151,12 +10151,78 @@ highest `GT` ที่เปิดอยู่ก่อนใบนี้คื�
   4. ความต่างจากเซิร์ฟเวอร์จริงลง `REAL_SERVER_DIVERGENCE.tsv` · ไม่อ้างว่า PR merge แล้ว
 - RECHECK (ตัดสินด้วยเนื้อโค้ด ห้ามเทียบเลข commit) -- ต้องได้ hit จริง:
   ```
-  cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/world_population_bg0006.py | grep -n "world_census_level.leveled_npc_attr"
+  cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/world_population_bg0006.py | grep -n "level=placement.identity.level"
   ```
   ว่าง/พัง = PR #524 ยังไม่ merge ⇒ คง `PENDING` **ห้ามบูต** (เทส branch ก่อน merge ได้ ถ้าเปลี่ยน
   `origin/main` เป็น `origin/claude/dazzling-volta-7ste68` แล้วเขียนในผลว่าใช้ตัวไหน)
+  🔴 **แก้คำสั่ง RECHECK 2026-09-02T04:5x+07:00 (LANE-A รอบ `2p4n3h`, เจ้าของใบเอง)**: เดิมค้นหา
+  ~~`world_census_level.leveled_npc_attr`~~ ซึ่ง**เลิกปรากฏในไฟล์นั้นแล้ว**หลังรอบ `2p4n3h` ย้าย
+  call site ไปเป็น `world_census_gait.census_npc_attr` (ห่อ `leveled_npc_attr` อีกที ระดับยังส่ง
+  เหมือนเดิมทุกไบต์บวกฟิลด์ gait) ถ้าไม่แก้ คำสั่งเดิมจะคืนค่าว่างและอ่านผิดว่า "PR #524 ยังไม่ merge"
+  ทั้งที่ merge แล้ว · คำสั่งใหม่ค้นหาอาร์กิวเมนต์ระดับซึ่งอยู่ในทั้งสองรูปแบบ
+  · ถ้ารัน `GT-200` หลังรอบ `2p4n3h` ขึ้น main ให้บันทึกด้วยว่า NPC มีฟิลด์ gait แล้ว (ดู `GT-202`)
 - links: `pirate-force-server#524` · `RE-117` · `RE-201` (ปิดแล้ว) · `GT-192` (ห้ามแก้)
 - result: (ผู้เทสกรอก: PASS/FAIL/BLOCKED/NO-RESULT · หลักฐาน · timestamp · `OBSERVER_CONFIRMED`)
 
 **ผู้เปิดใบ: LANE-A รอบ `7ste68` 2026-09-02T01:55+07:00 -- LANE-A บริโภคผลใบนี้เอง**
 
+
+## GT-202 CENSUS-NPC-QUEST-MARK-GATE-WALK-SPEED-001  [PENDING -- โค้ดยังไม่ขึ้น `main`: PR ของรอบ `2p4n3h` · ห้ามบูตจนกว่า RECHECK ผ่าน]
+
+> เปิดโดย LANE-A รอบ `2p4n3h` 2026-09-02T05:0x+07:00 ตามใบ `20260902_0205_CHIEF-TO-LANE-A-*`
+> เรื่องที่ 2 · **LANE-A บริโภคผลเอง** · numbering: `GT` สูงสุด 200, `RE` สูงสุด 201, grep
+> `GT-202|RE-202` ทั้งรีโปไม่พบ ⇒ ใบนี้ `202` · บูต/teardown ตาม `ATTENDED_SESSION_RUNBOOK.md`
+> · ที่มาเต็มใน `rounds/A_20260902_0422_2p4n3h_*.md`
+
+- objective: **มีไอคอนเควส (`!` / `?`) โผล่เหนือหัว NPC ในเมืองหรือไม่** หลังรอบนี้เปิดประตูที่
+  ไคลเอนต์ใช้ตัดสินว่าจะเรียกบอร์ดไอคอนหรือไม่ · **ผลลบมีค่าเท่าผลบวก** (ดู pass criteria)
+- background: ทั้ง 10 แถวของ `PF_ATTR_QUEST_MARK_SELECTOR.tsv` (Codex P0-3) มี `skip_conditions`
+  สายเดียวกัน ท่อนแรก: `CNetNPC setter skips the board call when +0x70 mask 0x40 is clear` ·
+  `+0x70` = `field_presence_mask` ของ BasicAttr และบิต `0x0040` = `BasicAttr+0x54`
+  = `MOBS.n_SPEED_WALK` (f32 tag `0x2A`) ทั้งคู่ `PROVEN_EXACT` ⇒ census ธรรมดา **ไม่เคยตั้งบิตนี้
+  เลย** (helper แช่แข็งตั้งให้เฉพาะเมื่อได้ `movement_speed` · composer 13 ตัวส่ง `None` มาตลอด)
+  ⇒ selector ไม่เคยถูกประเมินสำหรับชาวเมืองสักตัว · รอบ `2p4n3h` เพิ่ม `world_census_gait.py`
+  ส่งค่าที่ mine ไว้ของแถวนั้น ทุก census source **ไม่มีแฟล็ก** · 🔴 **91 จาก 100 n_ID ที่ Port Royal
+  ส่ง มี `s_QUEST_BEGIN`/`s_QUEST_END` ไม่ว่าง** ⇒ ถ้ากลไกครบ เมืองควรมีไอคอนหลายตัว
+- steps:
+  1. RECHECK ผ่านก่อน · บูตปกติ **ไม่มีแฟล็ก scenario** · ล็อกอิน GM (ฉาก 1 คือจุดล็อกอิน)
+  2. จัดมุมด้วย **คลิกขวาลาก** เท่านั้น = ตัวเช็ค NO-CRASH (ห้ามใช้ `Q`/`E`)
+  3. ยืนนิ่ง **รออย่างน้อย 5 วินาที** ก่อนถ่ายภาพแรก — selector รีเฟรชด้วย tick **1000 ms** ของ
+     `QuestNPCModule` เอง ไม่มี event จากเซิร์ฟเวอร์
+  4. ภาพนิ่ง **เต็มความละเอียด** ชื่อ `SCENE1-QUESTMARK` · บันทึก >= 6 ตัว ตัวละบรรทัด: ชื่อ ·
+     มี/ไม่มีไอคอน · ถ้ามีให้บรรยายรูป (`!` / `?` / อื่น / สี) อ่านจากภาพเต็มเท่านั้น
+  5. ต้องมีอย่างน้อยสามชื่อนี้ (ตารางไคลเอนต์บอกว่ามีเควส): **Columbus** (156) · **Nelson** (168)
+     · **Drunkard Captain** (171)
+  6. `/warp 6` แล้วทำข้อ 3-4 ซ้ำ ชื่อภาพ `SCENE6-QUESTMARK` (ยืนยันว่าไม่ใช่อาการเฉพาะฉาก 1)
+  7. **ตัวควบคุม** — บันทึกด้วยว่า NPC ยังขึ้นชื่อและ `LV` ตามปกติหรือไม่ (`GT-200` ตัดสินเรื่อง
+     `LV` ใบนี้แค่บันทึก) · หายไป = **การถดถอย** ⇒ หยุด เขียน `FAIL` รายงาน
+- pass criteria (สองชั้น แยกกันเด็ดขาด):
+    wire/DB -- **ทำแล้ว**: `tests/test_world_census_gait.py` อ่านค่ากลับ **ออกจาก `generation.pc`**
+      รายตัวครบทั้ง 13 census source · พินว่า `make_npc_attr` เปล่า ๆ ยังไม่ตั้งบิต `0x0040`
+      (กัน revert เงียบ) · พิสูจน์แค่ว่า**เซิร์ฟเวอร์ส่งไบต์** ไม่พิสูจน์สิ่งที่ไคลเอนต์วาด
+    client-observable -- **ชั้นนี้เท่านั้นที่ตัดสินใบ**:
+      · **PASS** = มีไอคอนเหนือหัว NPC อย่างน้อยหนึ่งตัวในภาพเต็ม (จำนวนเท่าไรก็นับ)
+      · **NEGATIVE-RESULT (ไม่ใช่ FAIL)** = ไม่มีไอคอนเลยทั้งสองฉาก **และ** ชื่อ/`LV` ยังปกติ ⇒ ประตู
+        `0x0040` ไม่ใช่ตัวเดียวที่ขวาง เหลือสามข้อที่เป็นของไคลเอนต์ (`+0x360` null · cache `+0x364`
+        · predicate ของเควส) ⇒ **เปิดใบ RE ใหม่** ไม่ใช่ `FAIL` ของใบนี้
+      · **FAIL** = ชื่อ/`LV`/ตัว NPC หายไป หรือไคลเอนต์ค้าง/หลุด = การถดถอยจากฟิลด์ใหม่
+- nonclaims:
+  1. **ไม่ได้อ้างว่าไอคอนจะขึ้น** — เปิดได้หนึ่งในสี่ท่อน อีกสามท่อนเป็นของไคลเอนต์ · ตาราง
+     selector เป็นชั้น `IMAGE` ล้วน และ Codex เขียน nonclaim เองว่าจอเป็นคนละชั้นแหล่งข้อมูล
+  2. ไม่พูดเรื่อง **สี/faction/ชนิด actor** — P-2 ยังเปิด · รอบนี้ไม่แตะสีเลยแม้แต่บิตเดียว
+  3. ไม่พิสูจน์ว่า NPC **เดิน** — ฟิลด์นี้เป็นสเกลาร์ ไม่ใช่คำสั่งให้เคลื่อนที่
+  4. ไม่แตะ `QuestAttr` — เหตุผลใน `notes_to_chief/20260902_0437_LANE-A-ASK-COO-quest-board-gate-plus-0x70.md` ข้อ 2
+- RECHECK (ตัดสินด้วยเนื้อโค้ด ห้ามเทียบเลข commit) -- ต้องได้ hit จริงทั้งสองบรรทัด:
+  ```
+  cd pirate-force-server && git fetch origin && \
+  git show origin/main:src/pirateforce_foundation/world_population.py | grep -n "world_census_gait.census_npc_attr" && \
+  python3 -m pytest tests/test_world_census_gait.py -q
+  ```
+  ว่าง/แดง = PR ของรอบ `2p4n3h` ยังไม่ merge ⇒ คง `PENDING` **ห้ามบูต**
+- links: `reference_codex_attr/PF_ATTR_QUEST_MARK_SELECTOR.tsv` · `..._FIELD_SEMANTICS.tsv` ·
+  `notes_to_chief/20260831_1912_CODEX-CHECKPOINT-P03-QUEST-MARK.md` · `..._20260831_2247_KA1B-*` ·
+  `..._20260901_2220_KA1B-TO-CHIEF-item-codec-*` ข้อ ③ · `GT-200` (คนละใบ ห้ามรวมผล) · `GT-192`
+- result: (ผู้เทสกรอก: PASS/NEGATIVE-RESULT/FAIL/BLOCKED/NO-RESULT · หลักฐาน · timestamp ·
+  บรรทัด `OBSERVER_CONFIRMED` ตาม G-OBS)
+
+**ผู้เปิดใบ: LANE-A รอบ `2p4n3h` 2026-09-02T05:0x+07:00 -- LANE-A บริโภคผลใบนี้เอง**
