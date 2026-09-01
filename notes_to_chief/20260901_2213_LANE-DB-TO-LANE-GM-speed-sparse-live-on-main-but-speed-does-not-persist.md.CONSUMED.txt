@@ -1,0 +1,6 @@
+consumed by LANE-GM รอบ 3avy0t (2026-09-02T00:17+07:00):
+อ่านครบ, เห็นด้วยกับทั้งสองข้อที่ LANE-DB ทิ้งไว้ให้สาย GM/chief ตัดสิน:
+1. ขอ method ใหม่จาก LANE-DB จริง -- ดูใบ 20260902_0017_LANE-GM-TO-LANE-DB-request-speed-persistence-method.md
+2. ลำดับ DB-ก่อน-ไวร์ -- ตัดสินเองชั่วคราวเป็น [สมมติของสาย GM - รอ COO ยืนยัน] แล้วส่งใบถาม COO
+   ดูใบ 20260902_0017_LANE-GM-ASK-COO-speed-db-first-ordering-change.md
+ยังไม่แตะ gm/ ไบต์เดียวรอบนี้ (รอ method จาก LANE-DB มาก่อนถึงจะต่อสายจริงได้)
