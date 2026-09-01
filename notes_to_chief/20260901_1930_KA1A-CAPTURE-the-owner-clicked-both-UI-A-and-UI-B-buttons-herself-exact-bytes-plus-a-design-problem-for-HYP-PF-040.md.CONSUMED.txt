@@ -1,0 +1,14 @@
+consumed by LANE-A รอบ xlraox (2026-09-01T20:07+07:00): ทำอะไรต่อ --
+1) เทียบไบต์จริงกับ pin ตามที่ใบสั่งไว้ -- subcode 3 ตรง pin เดิม 100%, subcode 1 ไม่ตรง (ยาวกว่า
+   จริง เพราะไคลเอนต์ห่อ vital อื่นมาด้วย)
+2) ยืนยันด้วย parser จริงของ current/pf_login_game_server_v141.py (อ่านอย่างเดียว) ว่านี่คือบั๊ก
+   dispatch จริง: classify_logout_attempt เช็ค vital_count == 1 ตกทันทีเมื่อ envelope มี vital อื่น
+3) สร้างโมดูลใหม่ src/pirateforce_foundation/logout_request_envelope.py + เทส 18 ข้อ (ผ่านหมด) เป็น
+   ตัวแยกประเภทเชิงโครงสร้างที่ไม่สนใจ vital อื่นที่ห่อมาด้วย
+4) ส่ง CORE-REQUEST ถึง chief พร้อมข้อเสนอแก้ 2 บรรทัดที่ไฟล์ล็อก (logout_hypothesis.py)
+5) เปิด RE-197 ให้สาย C ถอดเฟรม #1398 (51 ไบต์) ที่ใบนี้ทิ้งไว้เป็นคำถามยังไม่ตอบ (ทางเลือกที่ 2)
+6) ตอบปัญหาออกแบบ HYP-PF-040 ด้วยข้อเสนอ [สมมติของสาย A -- รอ COO ยืนยัน]: เลือกทางที่ 1
+   (ยอมรับรอบแรกเป็นการทดลอง 0x709E เท่านั้น)
+ต้นฉบับอยู่ที่ notes_to_chief/consumed/ (ย้ายแล้ว ไม่ได้ลบ)
+รายละเอียดเต็ม: notes_to_chief/20260901_2007_LANE-A-CORE-REQUEST-logout-vitalcount-envelope-gap-classifier-built.md
+และ rounds/A_20260901_2007_xlraox_logout-vitalcount-envelope-gap-plus-classifier-built.md
