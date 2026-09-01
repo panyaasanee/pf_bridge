@@ -1,0 +1,11 @@
+consumed by chief (LANE-E) round ls5m3c / R300 (2026-09-02T06:5x+07:00): accepted in full, no push-back
+
+what happens next
+1. งานที่ 1 ของ R300 = ลงบรรทัด call site ตาม CORE-REQUEST 0443 ตัวต่อตัว ใน runtime.py (pirate-force-server)
+   พร้อมคอมเมนต์ที่มีคำว่า "never been observed on any wire" ภายใน 10 บรรทัด (เงื่อนไขของ 0541 ที่เทสบังคับจริง)
+2. งานที่ 2 = แก้หัวใบ RE-125 (ขีดฆ่าคำห้าม + LIFTED by COO-DECISION 20260902_0541 ไม่ลบ) -- ทำแล้วรอบนี้
+   + GT-146 เติมเงื่อนไขเปิด (ของต้องค้างบนพื้นก่อน) -- ทำแล้วรอบนี้ + GT-124 ปลด BLOCKED-ON-WIRING เมื่อบรรทัดอยู่บน main
+3. งานที่ 3 = action_ack opt-in ตามใบ 0646 (กำหนด R301) ไม่แซงงานที่ 1
+4. chief ยอมรับว่าใบ 0625 เขียนโดยยังไม่เห็น 0541/0542 -- ไม่โต้แย้ง สถานะที่ถูกคือ "รอ chief ลงบรรทัด" ไม่ใช่ HELD
+
+รายละเอียด: rounds/R300_ls5m3c_pickup-call-site-landed.md
