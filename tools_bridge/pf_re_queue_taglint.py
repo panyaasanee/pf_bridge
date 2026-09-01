@@ -114,6 +114,12 @@ def main():
     ap.add_argument("--notes", default="notes_to_chief")
     ap.add_argument("--min", type=int, default=85,
                     help="ignore tickets below this number (old tickets are archived)")
+    ap.add_argument("--fix", action="store_true",
+                    help="append '  [PENDING]' to every [A] header (status half only). "
+                         "Run this on a CLOUD CLONE and commit it there: the three queue "
+                         "files are chief-owned single-writer files, deliberately outside "
+                         "the bridge push allowlist (see pf_git_sync.ps1) -- an edit made on "
+                         "the bridge disk cannot travel out and blocks every pull in.")
     a = ap.parse_args()
 
     if not os.path.isfile(a.queue):
@@ -148,6 +154,30 @@ def main():
         print("    %-7s line %-6d contains %d consumer-contract sections" % (t["id"], t["line"], n))
         print("            a following ticket lost its '## ' header inside this block")
     print("")
+
+    if a.fix and invisible:
+        with open(a.queue, "r", encoding="utf-8") as fh:
+            lines = fh.read().split("\n")
+        for t, _route in invisible:
+            i = t["line"] - 1
+            if lines[i] != t["header"]:
+                sys.stderr.write("ERROR: line %d moved, aborting --fix\n" % t["line"])
+                return 2
+            lines[i] = lines[i].rstrip() + "  [PENDING]"
+            print("FIXED  %-7s line %d  -> header now ends with [PENDING]" % (t["id"], t["line"]))
+        with open(a.queue, "w", encoding="utf-8") as fh:
+            fh.write("\n".join(lines))
+        print("")
+        print("--fix touched the status half ONLY: no wording removed, moved or reworded,")
+        print("and the route tag of every ticket is left exactly as it was.")
+        print("[C] orphan bodies are NOT auto-fixed: a lost header must be recovered")
+        print("verbatim from git history, by hand.")
+        print("")
+        print("REMINDER: commit this from a cloud clone.  The three queue files are")
+        print("chief-owned single-writer files and are deliberately outside the bridge")
+        print("push allowlist in pf_git_sync.ps1 -- an edit made on the bridge disk")
+        print("cannot travel out and blocks every pull in.")
+        return 1
 
     total = len(invisible) + len(no_route) + len(orphan)
     print("RESULT: %d ticket(s) the RE runner cannot select" % total)
