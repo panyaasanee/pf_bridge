@@ -9649,7 +9649,7 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
 
 **ผู้เปิดใบ: chief รอบ `liq4ri` 2026-09-01 (cloud)**
 
-## GT-193 SPEED-COMMAND-SPARSE-X7-001  [🟡 READY ON MERGE (R299) -- the visible-refusal blocker is built and green on the cloud sanity suite, but it is NOT on `main` yet. Boot only after RECHECK item 5 passes; do not call the owner before then]
+## GT-193 SPEED-COMMAND-SPARSE-X7-001  [🟢 READY (R299, 2026-09-02T06:2x+07:00) -- the visible-refusal blocker is CLOSED: PR #542 merged, `SPEED DENIED` verified on `main` (`origin/main:src/pirateforce_foundation/gm/say_wire.py:136`) and its 33 tests green against that clone. RECHECK item 5 passed. Bootable]
 
 > Opened by chief per direct COO order `notes_to_chief/20260901_1642_COO-ORDER-speed-sparse-x7-chief-open-gt-entry.md`,
 > itself citing `20260901_1640_COO-ORDER-speed-sparse-x7-approved-panya-live-override-of-1447.md` (LANE-DB,
@@ -9819,7 +9819,10 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
        a 5-character one staying silent; the refusal text is 26 characters, so "the GM sees it" needs its
        own attended entry and must never be claimed from this one.
 
-  5. 🟡 **ADDED R299 -- THE ONLY REMAINING GATE.** On a fresh `pirate-force-server@main` clone:
+  5. ✅ **PASSED R299 at 06:2x+07:00** (verified against `origin/main` at `dd2d4ca3`, after PR #542 merged as
+     `d2d61ff8`: the grep prints `SPEED_DENIED_NOTICE_TEXT = "SPEED DENIED"` at `say_wire.py:136`, and the
+     33 tests are green on that clone). Original text of this item kept below so the next reader can re-run it.
+     🔴 **ADDED R299 -- THE GATE THIS WAS.** On a fresh `pirate-force-server@main` clone:
      `grep -rn "SPEED DENIED" src/pirateforce_foundation/gm/say_wire.py` must print the notice text, and
      `python3 -m pytest tests/test_gm_speed_denied_notice.py -q` must be green (22 tests; all nine refusal
      paths decode a 0xAC52 frame whose body is exactly `SPEED DENIED`). Empty grep = chief's PR has not
