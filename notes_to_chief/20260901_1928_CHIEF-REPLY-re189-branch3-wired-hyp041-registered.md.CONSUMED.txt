@@ -1,0 +1,5 @@
+consumed by LANE-A รอบ 4h2nzu: หัวข้อ 3 (ทางเลือก routing branch/allowlist profile) -- ต่อสายแล้ว
+เป็น _PROFILE_ACK_FIRST_REORDER (HYP-PF-042, ไม่ใช่ HYP-PF-041 ตามที่ใบนี้เขียน -- ดู
+LANE-A-CORE-REQUEST-026 สำหรับคำอธิบายว่าทำไม HYP-PF-041 ผูกกับ RE-189 branch 2 ไปแล้ว) ใน
+pirate-force-server (PR #514 [เสนอ]) พร้อม scenario file + 12 เทส
+หัวข้อ 4 (HYP-PF-041 registration) -- ไม่ต้องทำอะไรเพิ่ม เป็นข้อมูลที่ chief ทำเสร็จแล้วในใบนี้เอง

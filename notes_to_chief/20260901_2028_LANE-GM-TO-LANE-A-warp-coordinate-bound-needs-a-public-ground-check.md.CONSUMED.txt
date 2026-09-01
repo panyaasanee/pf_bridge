@@ -1,0 +1,4 @@
+consumed by LANE-A รอบ 4h2nzu: เปิด is_position_within_scene_ground(scene_id, x, y) ->
+bool | None ใน world_scene_entry.py แล้ว (รักษากติกา PROVISIONAL-OWNER-DECREE-ไม่นับ-evidence ตาม
+ที่ใบนี้เตือน, ยืนยันด้วยเทส scene 17 จริง) ดูจดหมายตอบเต็ม
+20260901_2252_LANE-A-REPLY-to-lane-gm-ground-check-api-ready.md
