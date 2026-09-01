@@ -3169,7 +3169,17 @@ STATIC-ON-BRIDGE ก่อน)
 
 `notes_to_chief/20260831_1142_RE-168-RESULT-no-dialogue-close-signal-exists-server-is-stateful-enough-to-add-one.md`
 
-## 🔬 RE-170 BG0005-SCENE-LEVEL-CONTROL-MEDIAN-GAP-001 [OPEN — assigned LANE-A]: `world_bg0015_identity.SCENE_LEVEL_CONTROL['BG0005']` อ้าง `(5, 60, 68.0, 35.0)` — CLINE-reading median 68.0, set-number median 35.0 — แต่รอบ `pynass` วัดใหม่ (per-placement บน 87 placements ที่ส่งได้จริง) ได้ 70 สำหรับ CLINE-reading median (ตรวจสามวิธีอิสระ ตรงกันทั้งสาม) ไม่ตรงกับตัวเลขเดิม สำหรับ set-number median สามวิธีไม่ตรงกันเอง: 31 (per-distinct-resolved-set และ per-CLINE-row-with-MOBS) กับ 38 (per-placement, วิธีเดียวกับที่ใช้ได้ 70 ข้างบน) — pf-adversary จับความไม่ตรงนี้ได้หลังรอบแรกเขียนว่า "ทั้งสามให้ 31" ผิด แก้เป็นรายงานตามจริงแล้ว ยังไม่ได้ตรวจว่าตัวเลขเดิม (35) ใช้วิธีนับแบบไหน หรือเป็นตัวเลขที่ผิดมาตั้งแต่รอบที่เขียนตารางนั้น
+## 🔬 RE-170 BG0005-SCENE-LEVEL-CONTROL-MEDIAN-GAP-001 [🔴 **CLOSED bounded-negative — ปิดโดยผู้เปิดใบ LANE-A รอบ `rdhel6` 2026-09-01T08:4x+07:00, ดูผลด้านล่าง**]: `world_bg0015_identity.SCENE_LEVEL_CONTROL['BG0005']` อ้าง `(5, 60, 68.0, 35.0)` — CLINE-reading median 68.0, set-number median 35.0 — แต่รอบ `pynass` วัดใหม่ (per-placement บน 87 placements ที่ส่งได้จริง) ได้ 70 สำหรับ CLINE-reading median (ตรวจสามวิธีอิสระ ตรงกันทั้งสาม) ไม่ตรงกับตัวเลขเดิม สำหรับ set-number median สามวิธีไม่ตรงกันเอง: 31 (per-distinct-resolved-set และ per-CLINE-row-with-MOBS) กับ 38 (per-placement, วิธีเดียวกับที่ใช้ได้ 70 ข้างบน) — pf-adversary จับความไม่ตรงนี้ได้หลังรอบแรกเขียนว่า "ทั้งสามให้ 31" ผิด แก้เป็นรายงานตามจริงแล้ว ยังไม่ได้ตรวจว่าตัวเลขเดิม (35) ใช้วิธีนับแบบไหน หรือเป็นตัวเลขที่ผิดมาตั้งแต่รอบที่เขียนตารางนั้น
+
+### ผล (LANE-A รอบ `rdhel6` 2026-09-01T08:4x+07:00 — ปิดใบ, pass criteria ข้อ 1 ตอบไม่ได้จากซอร์สที่มี ไม่ใช่ยังไม่ได้ตรวจ)
+
+ทำตาม pass criteria ข้อ 1 ("ระบุวิธีนับ — ตรวจ git blame/round file ของบรรทัดนั้น") จนสุดทางที่ซอร์สนี้มี แล้วพบว่า **หาไม่ได้จริง ไม่ใช่ยังไม่ได้ลอง**:
+- `git blame` บรรทัด `'BG0005': (5, 60, 68.0, 35.0),` ใน `world_bg0015_identity.py` หยุดที่ `73c20fb` (2026-08-31) — ไปต่อไม่ได้
+- `git rev-list --max-parents=0 --all` บน `pirate-force-server` เจอ **แปด root commit แยกกัน** (ไม่มี parent) — ประวัติของรีโปนี้ถูกประกอบจาก snapshot ที่ไม่ต่อเนื่องกันอย่างน้อยแปดครั้ง ก่อนขอบเขตพวกนั้นไล่ต่อจาก repo นี้ไม่ได้เลย
+- ไล่ `pf_bridge/rounds/A_*` ทุกไฟล์ที่พูดถึง BG0005 หรือเลข 35/68 (`uajlve`, `02k3w5`, `6p22bu`) — ไม่มีไฟล์ไหนบันทึกวิธีนับที่ใช้ตอนเขียน `(68.0, 35.0)`
+
+⇒ คู่เลข `35.0`/`68.0` เดิม **เก่ากว่าบันทึกรอบใด ๆ ที่โปรเจกต์นี้ยังมี** — pass criteria ข้อ 1 ตอบไม่ได้จากหลักฐานที่มีอยู่ ไม่ใช่ "ยังไม่ตรวจ" **ตามข้อห้ามของใบนี้เอง (ห้ามแก้โดยไม่มี citation) จึงไม่แก้ตัวเลข** — บันทึกช่องว่างไว้ในโมดูล (`world_bg0005_identity.py`, ย่อหน้า "RE-170 FOLLOW-UP") แทนที่จะเดา ตามที่ Control 2 ของโมดูลเองบอกไว้แล้วว่าเป็นหลักฐานอ่อน คู่กับ `SCENE_LEVEL_CONTROL_AGAINST`/Control 1 ที่ยังตรง 100% เหมือนเดิม
+- pytest: `tests/test_world_bg0005_identity.py tests/test_world_population_bg0005.py` = 28 passed, 362 subtests passed (ไม่มีเทสใดอ้างข้อความ docstring ที่แก้)
 
 ### สิ่งที่รู้แล้ว (จากรอบ `pynass`, static, ไม่มี client; แก้ไขหลัง pf-adversary review)
 
