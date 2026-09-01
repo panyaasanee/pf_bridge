@@ -1,7 +1,7 @@
 {
   "schema": "pirate-force-critical-artifact-authority/v1",
-  "authority_version": "2026-09-01T20:02:00+07:00",
-  "authority_note": "20260901_2002_CODEX-CHECKPOINT-P04-ROLE-DECISION-SECOND.md",
+  "authority_version": "2026-09-01T21:05:00+07:00",
+  "authority_note": "20260901_2105_CODEX-CHECKPOINT-P05-LETHAL-TAIL.md",
   "serverproject_snapshot": {
     "commit": "8a8afa7c6ad7f13af5ac7088ffca6fc743cae5fa",
     "commit_time": "2026-09-01T07:50:38Z",
@@ -156,6 +156,36 @@
         "byte_identical": true,
         "all_files_tracked": true
       }
+    },
+    "combat_lethal_tail_delta": {
+      "claim_scope": "Delta-only IMAGE owner for bounded RuntimeRes actor-before-terrain order, target release, typed target-field separation, CHitResult target side effects, observer-before-death ordering, dead-task construction/queue/model gates, bounded corpse persistence and the BasicAttr+0x58 timer-authority boundary. Original-server packet grouping, cadence, timer values, hold duration, actor removal and pickup/drop policy remain OPEN.",
+      "depends_on": ["PF_COMBAT_LIFECYCLE.tsv", "PF_GROUND_DROP_LIFETIME.tsv", "PF_MONSTER_COLOR_GATE.tsv", "PF_ATTR_FIELD_SEMANTICS.tsv", "PF_ATTR_ROLE_DISCRIMINATOR.tsv", "PF_ACTOR_RELATION_INTERACTION_GRAPH.tsv", "PF_QUEST_MARK_EVENT_CENSUS.tsv", "FACTPACK_R102_DYING_COUNTDOWN_UI_FIELD_STATIC.md"],
+      "rows": 15,
+      "sources": {"IMAGE": 15},
+      "semantic_statuses": {"PROVEN_EXACT": 8, "PROVEN_EXACT_BOUNDED": 6, "PARTIAL": 1},
+      "pair_generation": "5839daedbb039165372ef69cdb22eee9b61a3c2d6da281673f3710da0b08cfd5",
+      "claim_set_sha256": "f05036a5d74fd81782314af14d5792b2ea987e44118331bd927835f27ca722c1",
+      "adversarial_review": {
+        "status": "PASS_AFTER_CORRECTION",
+        "span_checks": 69,
+        "prior_reference_checks": 41,
+        "top_level_other_tsvs_checked": 99,
+        "duplicate_claim_evidence_observation_hits": 0,
+        "raw_e8_control": "death-sync 26 raw candidates = 26 decoded calls; CHitResult 50 raw candidates versus 49 decoded calls with one false-positive, and the row explicitly says raw candidates"
+      },
+      "files": {
+        "PF_COMBAT_LETHAL_TAIL_DELTA.tsv": {"size": 43449, "sha256": "6f6cffddfc0d77d9853637051ef572576ceff9ba7bee50bb1a01eb21c7263170"},
+        "PF_COMBAT_LETHAL_TAIL_DELTA.md": {"size": 12538, "sha256": "39695cf6c76b90ed6336efedbcadca09b477e057aa05d08cb709926b933d52b0"},
+        "PF_COMBAT_LETHAL_TAIL_DELTA.pair.json": {"size": 1269, "sha256": "a92e8c41aaaefd759b9162b080594e3a2d5f87de60a86e3b44cb04872d6c7e35"},
+        "pf_rederive_combat_lethal_tail_delta.py": {"size": 88086, "sha256": "eef9c1f2139bd4c4d6a01bb11b2edaa8c150d479cbdcfb5f9f6ccf5c4e1eeb5f"}
+      },
+      "local_mirror": {
+        "location": "notes_to_chief/reference_codex_attr",
+        "byte_identical": true,
+        "all_files_present": true,
+        "all_files_tracked": false,
+        "git_status": "untracked; owner/chief commit decision required"
+      }
     }
   },
   "operational_checkpoint": {
@@ -171,8 +201,37 @@
       "field_scope_change": 0,
       "standalone_rows_added": {"IMAGE": 42, "DATA": 21}
     },
-    "decision": "P0-4_PAUSED_BY_ANTI_STALL / ORIGINAL_POLICY_OPEN",
-    "next_priority": "P0-5"
+    "p0_4_decision": "P0-4_PAUSED_BY_ANTI_STALL / ORIGINAL_POLICY_OPEN",
+    "p0_5_checkpoint": {
+      "main_attr_generation": "b96e420c290201ce60babec398fd2389ea36db2f2f30ce552d9d680f481f3fae",
+      "main_attr_field_status_change": 0,
+      "main_attr_field_scope_change": 0,
+      "standalone_rows_added": {"IMAGE": 15},
+      "bounded_closures": ["actor-before-terrain within one RuntimeRes handler", "current-target clear before optional TargetIsDead panel event", "runtime target storage separated from ActorAttr+0x198 and NPCAttr+0xA8", "observer fanout before death sync", "dead-task construction/queue/model-ready/persistence gates", "BasicAttr+0x58 requires a later write/snapshot on the proved path"],
+      "open_original_policy": ["CHitResult versus actor-entry arrival order", "original packet grouping/cadence/timer values/hold duration", "authentic actor removal/corpse lifetime", "terrain/drop creation-removal-pickup ownership", "CFightMsgVital skipped by bounded stop rule"]
+    },
+    "decision": "P0-5_BOUNDED_CLIENT_CONTRACT_CLOSED / ORIGINAL_SEQUENCE_OPEN",
+    "next_priority": "P0-6"
+  },
+  "current_server_readonly_audit": {
+    "classification": "RECONSTRUCTED_POLICY_AND_INTERNAL_CONTRACT_AUDIT; not original-server evidence",
+    "serverproject_head": "7969f984f690afc68c981a6e74cdb3bcb0df6878",
+    "worktree_clean_at_inspection": true,
+    "urgent_note": {"name": "CODEX_URGENT_20260901_2040_P05-CORPSE-DROP-STATE-SCOPE.md", "size": 9289, "sha256": "8b8904aed010ff49566b8af6bfb99898358e80b1f78f8fe2c014f58ea847aa8b"},
+    "confirmed_internal_defects": [
+      "A scalar dead_timer is applied across the entire multi-corpse register, re-arming prior corpses when another mob dies.",
+      "The per-session DropLedger has no scene term, survives scene synchronization and is republished whole on a later kill, allowing cross-scene ghost drops."
+    ],
+    "implemented_gap_not_original_policy_proof": "Production pickup does not call the existing transaction helpers and has no proved TerrainThing removal publisher; count-zero is PRESERVE, not CLEAR.",
+    "files": {
+      "runtime.py": {"blob": "fc67b7467d56dc7fcff5662c3ae3305171f1f4a0", "sha256": "cea9fe3fb4fb3c1b5ed22321d1666971e26d9b6d13999aefd67b5778b388e5cb"},
+      "mob_death.py": {"blob": "3fc422fd3d2057a18c8eef4ed3182c9d923f4303", "sha256": "7c0daee1e1532b18c2e2bdeb83fbc4bb65d91394c716409e599369f9f87f614e"},
+      "mob_scene_recompose.py": {"blob": "aad58adaccefd22face85359d1dbdde4e5aee18a", "sha256": "b71b018b6b0bd3efe59e51896586ab497040accb4337b3cecdf161c48fc64083"},
+      "mob_loot.py": {"blob": "cdf7da4e51a1caa978e02f8ad0204cd4a09bb7b6", "sha256": "8ca53695026d5cd90667c383b9e95cfee2a6ad9c5f32ecbd131e33f6006d776d"},
+      "mob_drop_presence.py": {"blob": "3250d62fcef941f490920603c4ba9fc0e6e33fc3", "sha256": "21b4db22f97cdb57f56783341625e8ea0526f330b4e4695486234d398f1a573e"},
+      "mob_pickup.py": {"blob": "3c364269937c062af23c361f170ac42e56d1f85a", "sha256": "c1a027c4b7b88c11d73979aa54161736c216a9d0b860203e8fcc8611e861cdcc"},
+      "current/pf_login_game_server_v141.py": {"blob": "2823248b15db4dd0c5d49978720e80b97b4ec10a", "sha256": "2eb05ed2fdbdd5ee3d91f7fbb8c1d16a4c7a02a843bc97169b16a389e4ea4c22"}
+    }
   },
   "supersession": [
     {
@@ -215,6 +274,12 @@
         "claim_sha256": "336e01a3e400c9d74ab7ee580f6853dfe9125a260b8610e2bb37981b6025d5d2",
         "replacement_fact": "MOBS ID 916 has exact ASCII DATA label 'Training Iron Man'; lexical only"
       }
+    },
+    {
+      "note": "20260830_1818_RE-161-RESULT-TASK-QUEUE-NOT-CENSUS-GENERATION.md",
+      "superseded": ["any reading that an ordinary existing/current task or queued task alone proves a long CActorTask_Dead stall"],
+      "retained": ["existing actor can reach CActorTask_Dead construction without a census-generation field", "live task-manager/model/resource state remained unobserved"],
+      "replacement_evidence": ["LT-IMG-010", "LT-IMG-011", "LT-IMG-013"]
     }
   ],
   "delivery": {
@@ -224,6 +289,7 @@
     "tracked_mirror_location": "pf_bridge/notes_to_chief/reference_codex_attr",
     "tracked_mirror_commit": "89c16e29ddca4502e81575a0aa86949cf80b5d79",
     "tracked_mirror_scope": "The eight P0-4 files listed in monster_role_data_controls and actor_relation_interaction_graph are byte-identical and tracked at this commit.",
-    "requirement": "Consumers must verify the authority hashes against either the local external copy or the tracked mirror; do not assume every older standalone external artifact is mirrored."
+    "p0_5_local_mirror_scope": "The four combat_lethal_tail_delta files are byte-identical under notes_to_chief/reference_codex_attr but remain untracked because Codex is forbidden to add or commit them.",
+    "requirement": "Consumers must verify authority hashes. P0-4 may use the pinned tracked mirror; P0-5 may use the local external or byte-identical local mirror, but repository/clone durability remains OPEN until the owner/chief chooses to track the four files. Do not assume every older standalone external artifact is mirrored."
   }
 }
