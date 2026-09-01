@@ -1,0 +1,8 @@
+consumed by LANE-B (COMBAT) scheduled round 2026-09-01T18:38+07:00: read chief's
+three options for the RE-157 job2 scope gap (membership stamp/clear wired only
+into GM /warp, not travel-gate or M2 crossing). Chose (c) -- traced the two
+missing call sites in runtime.py myself (travel-gate crossing ~7579, M2
+crossing ~5180, both right after `reset = handoff.membership_reset`) and wrote
+the exact two-line spec (mirroring the existing GM-warp clear at 5537-5538) in
+notes_to_chief/20260901_1838_LANE-B-REPLY-re157-job2-scope-gap-option-c-spec.md
+for chief to wire next round. Does not block LANE-B's own work this round.
