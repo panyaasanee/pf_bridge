@@ -38,6 +38,7 @@ import hashlib
 import json
 import os
 import sys
+import time
 
 csv.field_size_limit(min(2147483647, sys.maxsize))
 
@@ -58,6 +59,23 @@ AUDIT_OUT_DIR = os.path.join(NOTES, "reference_codex_audit")
 AUDIT_DST = os.path.join(AUDIT_OUT_DIR,
                          "Pirate_Force_Codex_Audit_Recommendations.md")
 MANIFEST = os.path.join(EXT, "PF_ATTR_GENERATION_MANIFEST.json")
+
+# 2026-09-01: this script used to key everything off PF_ATTR_GENERATION_MANIFEST
+# and mirror only the artifacts it listed.  That manifest covers ONE Codex work
+# stream (attr).  Codex finished it, pinned it as a dependency, and moved on to
+# colour / quest-mark / drop / GM work - so the attr generation_id stopped
+# moving while Codex kept writing every few minutes.  Result: the round log
+# reported "same generation, no letter" for half a day and 172 files in
+# external/ never reached the team, including every artifact behind the three
+# fronts the owner was actively asking about.
+#
+# The authority file below carries an authority_version that moves with each
+# real round, so that is the signal now.  A content fingerprint over external/
+# is the fallback for when it is absent.
+AUTHORITY = os.path.join(EXT, "PF_CRITICAL_ARTIFACT_AUTHORITY.json")
+
+# A file written within this many seconds is probably still being written.
+FRESH_WRITE_GUARD_SEC = 20
 
 # pf_git_sync.ps1 refuses anything over 2 MB.  Stay under it with a margin so a
 # table that grows slightly between rounds does not start failing silently.
@@ -97,6 +115,31 @@ def sha256(path):
         for chunk in iter(lambda: fh.read(1 << 20), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+def round_key():
+    """What identifies 'a Codex round' for change detection.
+
+    authority_version first; otherwise a fingerprint of every file in
+    external/ (name + size + mtime), which moves whenever anything is written.
+    """
+    try:
+        with open(AUTHORITY, "r", encoding="utf-8") as fh:
+            a = json.load(fh)
+        v = a.get("authority_version")
+        if v:
+            note = a.get("authority_note", "")
+            return "authority:" + str(v), note
+    except Exception:
+        pass
+    h = hashlib.sha256()
+    for name in sorted(os.listdir(EXT)):
+        full = os.path.join(EXT, name)
+        if not os.path.isfile(full):
+            continue
+        st = os.stat(full)
+        h.update(("%s|%d|%d\n" % (name, st.st_size, int(st.st_mtime))).encode())
+    return "fingerprint:" + h.hexdigest()[:16], ""
 
 
 def load_generation():
@@ -306,14 +349,32 @@ def build_slices(root):
 
 
 def mirror(root, artifacts):
-    """Copy the attr deliverables onto the route that actually travels."""
+    """Copy Codex's deliverables onto the route that actually travels.
+
+    Everything in external/ that clears the guards - not a curated list and not
+    a filename pattern.  Both of those have already failed once each: the
+    prefix list dropped PF_COMBAT_LIFECYCLE, and the manifest list dropped 172
+    files.  The size cap and the sync name guard do the excluding.
+    """
     added, changed, skipped = [], [], []
-    for name in sorted(artifacts):
+    names = set(artifacts)
+    for f in os.listdir(EXT):
+        if os.path.isfile(os.path.join(EXT, f)) and not f.startswith("."):
+            names.add(f)
+    now = time.time()
+    for name in sorted(names):
         low = name.lower()
         if any(g in low for g in NAME_GUARD):
             skipped.append((name, "sync name guard would refuse it"))
             continue
         src = os.path.join(root, name)
+        if not os.path.exists(src):
+            src = os.path.join(EXT, name)
+        if not os.path.exists(src):
+            continue
+        if now - os.path.getmtime(src) < FRESH_WRITE_GUARD_SEC:
+            skipped.append((name, "written seconds ago, left for next round"))
+            continue
         n = os.path.getsize(src)
         if n > SIZE_CAP:
             skipped.append((name, "%d bytes, over the sync cap" % n))
@@ -486,18 +547,26 @@ def main():
         os.makedirs(OUT)
     g = load_generation()
     if g is None:
-        return 2
-    gen, root, artifacts = g
+        # The attr manifest being unreadable or mid-write must no longer stop
+        # the whole run: attr is one frozen work stream, everything else Codex
+        # writes still needs to reach the team.
+        print("attr manifest unusable this round - mirroring the rest anyway")
+        gen, root, artifacts = "attr-unavailable", EXT, {}
+    else:
+        gen, root, artifacts = g
 
-    prev_gen, prev_wired = None, None
+    key, note = round_key()
+    print("round key : %s%s" % (key, ("  (" + note + ")") if note else ""))
+
+    prev_key, prev_wired = None, None
     if os.path.exists(STATE):
         try:
             with open(STATE, "r", encoding="ascii") as fh:
                 st = json.load(fh)
-            prev_gen = st.get("generation_id")
+            prev_key = st.get("round_key")
             prev_wired = st.get("open_wired")
         except Exception:
-            prev_gen, prev_wired = None, None
+            prev_key, prev_wired = None, None
 
     added, changed, skipped = mirror(root, artifacts)
     mirror_audit_report()
@@ -539,23 +608,23 @@ def main():
         print("  - %-46s %s" % (n, why))
 
     announced, reason = False, ""
-    if gen == prev_gen:
-        print("  same generation as last run - no letter")
+    if key == prev_key:
+        print("  same round as last run - no letter")
     elif not (added or changed):
-        reason = "new generation but mirrored bytes identical"
+        reason = "new round but mirrored bytes identical"
         print("  " + reason + " - no letter")
     else:
         sig, reason = significance(added, changed, summary, prev_wired)
         if sig:
-            announce(gen, prev_gen, added, changed, skipped, summary)
+            announce(gen, prev_key, added, changed, skipped, summary)
             announced = True
         else:
             reason = "background tables only - no new artifact, no high-signal change"
             print("  round mirrored quietly - " + reason)
-    log_round(gen, added, changed, summary, announced, reason)
+    log_round(key[:24], added, changed, summary, announced, reason)
 
     with open(STATE, "w", encoding="ascii") as fh:
-        json.dump({"generation_id": gen,
+        json.dump({"round_key": key, "generation_id": gen,
                    "open_wired": summary.get("wired") if summary else None}, fh)
     print("")
     print(txt)
