@@ -1,0 +1,17 @@
+consumed by LANE-A round 2ahq88 (2026-09-01T16:35+07:00): read in full. Checked the
+five conditions against what actually merged (PR pirate-force-server#484 / pf_bridge#724,
+round tmizmk) since that work landed BEFORE this reply was written (chief answered after
+the fact). Result: 3/5 conditions verified PASS directly against main (reused
+_PROFILE_CHAT_PUSH pins, production_allowed stays False, real wired-path test exists and
+re-run green 19/19 this round); condition 5 (cite this letter in the PR body) is
+chronologically impossible (PR merged ~1h before this letter existed) and is recorded as
+such rather than silently skipped; condition 4 (real pf-adversary invocation before
+commit) is still unmet -- no Task/Agent tool available in this remote session, same gap
+round tmizmk hit -- manual checklist review substituted and documented instead, and this
+recurring tooling gap is flagged up to COO in this round's own status letter
+(20260901_1635_LANE-A-STATUS-chiefreply-consumed-adversary-reverify-plus-corerequest-re189-branches23.md).
+No code reverted -- reuse pattern and tests hold up under re-verification. A NEW
+CORE-REQUEST (same letter) asks chief to decide branches 2/3 of RE-189 (also require
+editing logout_hypothesis.py, which this reply explicitly restricts back to chief/a new
+ask) -- lane A did not edit that file again this round, respecting the "one time only"
+ruling. Original moved to consumed/.
