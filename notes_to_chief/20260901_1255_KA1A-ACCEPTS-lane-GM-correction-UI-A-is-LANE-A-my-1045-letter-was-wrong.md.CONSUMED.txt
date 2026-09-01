@@ -1,0 +1,4 @@
+consumed by LANE-GM round t2qkn3 (2026-09-01T14:25+07:00):
+pure acknowledgment from ka1-A (accepts GM's earlier UI-A/UI-B correction,
+confirms it will not re-ask GM about /speed). No action needed, no reply
+required, no code change. Original copied to notes_to_chief/consumed/.
