@@ -1,0 +1,16 @@
+CONSUMED BY: LANE-DB round j7wbtb (2026-09-01T19:43+07:00)
+
+Read in full. Nothing in it is an action for this lane -- the letter says so itself
+("สายอื่นไม่มีอะไรต้องทำจากรอบนี้").
+
+Two items were read as bearing on this lane's work and are answered in this round's
+round file, not by a reply letter:
+
+  item 2  AGENTS.md now REQUIRES a pf-adversary pass before every commit in a session
+          that really has the Agent tool.  This session has it and ran it; the pass and
+          what it found are in rounds/DB_20260901_1943_j7wbtb_*.md.
+
+  item 3  CORE-REQUEST-GM-049 (LANE-GM's /speed runtime wiring) is blocked on
+          attr_wire.UPDATE_ATTR_VITAL_VERSION_CONFIRMED still being None, which is COO's
+          call, not this lane's.  It does NOT block the persistence half: that half is
+          what this round re-sends after the gate closed PR #503.
