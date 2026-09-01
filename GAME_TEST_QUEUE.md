@@ -9700,8 +9700,22 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
   6. Re-query the same persisted attribute row from the run-copy DB. Diff field-by-field against the
      step-3 snapshot.
   7. Repeat steps 3-6 once more with `/speed 100` (STEP-B, expect visibly slower than baseline).
+  8. [COO-DECISION `20260901_1847`, item 4] Between step 4 and step 5, before anything else: watch for a
+     client-side modal error, a dropped/closed socket, or a forced reconnect-and-relogin immediately after
+     the `/speed <value>` line is sent. This checks the `UpdateAttrVital` (0x309A) `vital_version` byte
+     specifically -- chief set it to `0` this round (`attr_wire.UPDATE_ATTR_VITAL_VERSION_CONFIRMED`),
+     picked from the converging pattern of two OTHER, independently-proven vital_version bytes in the same
+     wire family (`gm/state_wire.py` and `gm/teleport_wire.py`, both `0`), not measured against a real
+     client for THIS opcode. `GT-101` already showed what a wrong version byte does: modal error,
+     connection halted, socket closed.
 
 - pass criteria (two layers, kept separate):
+    reconnect gate (check FIRST, before grading speed/wire/DB below): if step 8 observes a reject/
+      reconnect, this entry is a hard FAIL on the vital_version byte specifically -- record the exact
+      client-visible symptom, do NOT proceed to grade steps 5-7's speed/wire/DB claims from the same
+      attempt (a rejected frame did not carry a speed change to grade), and do NOT try a second guessed
+      byte value in the same attended round. Stop and open a new RE ticket scoped to proving the real
+      `UpdateAttrVital` vital_version byte before re-attempting this entry.
     wire/DB: (a) the server console/capture log shows, after each `/speed <value>` line, a frame whose
       decoded change-mask has bit `0x0040` (`BasicAttr+0x54`, x=7) set and NO other bit set; (b) the
       step-3-vs-step-6 DB row diff (both `/speed 800` and `/speed 100` passes) shows exactly ONE changed

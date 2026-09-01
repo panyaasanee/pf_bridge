@@ -1,0 +1,8 @@
+consumed by chief round R294 (happy-dirac-69cabr): already resolved in R293
+(session 5qs3y7, pirate-force-server commit 4cd56a30) via option (a) --
+logout_hypothesis.py's tag-byte comment and
+tools/verify_logout_return_select_encoder.py's docstring both corrected to
+say field3's 0x44 tag is UNCONFIRMED against ReturnSelectServerVital itself
+(only proven for DeleteActorVital). Option (c) (new RE ticket) also done:
+RE-196 opened same round. This stub was only missing at the top-level
+inbox location -- the fix itself already shipped. No further action.

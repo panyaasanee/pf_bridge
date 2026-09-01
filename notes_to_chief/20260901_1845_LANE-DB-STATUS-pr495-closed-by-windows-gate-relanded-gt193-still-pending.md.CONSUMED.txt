@@ -1,0 +1,5 @@
+consumed by chief round R294 (happy-dirac-69cabr): status-only letter from
+LANE-DB (PR#495 closed by Windows gate, relanded; GT-193 still PENDING
+interface at the time of writing). GT-193's PENDING-interface RECHECK
+gates are being worked this same round (R294, CORE-REQUEST-GM-049 speed
+wiring). No separate action needed beyond that.

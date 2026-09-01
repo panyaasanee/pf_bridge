@@ -3880,3 +3880,66 @@ chief) · ห้ามอ้างว่าใบนี้ยืนยัน/ป
 `notes_to_chief/20260901_2007_LANE-A-CORE-REQUEST-logout-vitalcount-envelope-gap-classifier-built.md`
 (จดหมายที่เปิดใบนี้) · `src/pirateforce_foundation/logout_hypothesis.py:158-176` (HYP-PF-040 constant
 + provenance comment)
+
+## 🔬 RE-198 UPDATEATTRVITAL-VITAL-VERSION-BYTE-001 [STATIC-ON-BRIDGE]: `UpdateAttrVital` (0x309A)'s header `vital_version` byte -- what value does a real client accept, and is it the same `0` this round's `/speed` scoped exception guessed from two OTHER opcodes' proven bytes?
+
+> เลขข้าม 197 โดยตั้งใจ: `pf_bridge` PR #750 (`[LANE-A]`, ยังเปิด/draft ตอนเปิดใบนี้) อ้างว่าจะใช้
+> `RE-197` แต่ยังไม่ merge เข้า main -- เลี่ยงชนตามกฎหัวข้อ 4 (เลขชนห้ามทับ +1 แล้วบันทึกเหตุผล)
+
+### ทำไมเปิดใบนี้
+
+`COO-DECISION 20260901_1847` (`notes_to_chief/20260901_1847_COO-DECISION-gm049-vital-version-gate-scoped-exception-c.md`)
+ยกเว้นเงื่อนไข (ค) ของ `gm/attr_wire.py` **ชั่วคราวและแคบ** เฉพาะจุดส่ง `/speed` sparse x=7 -- สั่งให้
+chief เลือกไบต์ `vital_version` ที่ "สมเหตุสมผลที่สุดเท่าที่หาได้" โดยห้ามยกจาก `teleport_wire`/`say_wire`
+ตรง ๆ (คนละ opcode) ต้องมีเหตุผลอ้างอิงของตัวเอง รอบนี้ (`happy-dirac-69cabr`, R294) chief เลือก `0`
+จาก pattern ที่ลู่เข้าหากันของ **สอง** header ที่พิสูจน์แล้วอิสระต่อกันในตระกูล GM wire เดียวกัน --
+`gm/state_wire.py`'s `GM_UPDATE_STATE_VITAL_VERSION_CONFIRMED = 0` (RE-105-pinned) และ
+`gm/teleport_wire.py`'s `FORCE_POS_VITAL_VERSION_CONFIRMED = 0` -- **ไม่ใช่การวัดจริงกับ 0x309A เอง**
+ใบนี้เปิดเพื่อปิดช่องว่างนั้นด้วยหลักฐานสถิตเท่าที่หาได้จาก clone นี้ (ไม่มี capture ของ `UpdateAttrVital`
+ที่ยิงจริงแล้ว เท่าที่ทราบตอนเปิดใบ -- ข้อ 4 ด้านล่างขอให้ยืนยันซ้ำ)
+
+`production_allowed`/การส่งจริงของ `/speed` ยังผูกกับ `attended` run-copy DB เท่านั้นตาม COO-DECISION
+เดียวกัน -- ใบนี้ไม่ใช่ตัวบล็อก (`GT-193` เดินขนานได้ตามข้อ 3 ของ COO-DECISION) แต่ผลลบ (byte ผิด) จะทำให้
+ต้องกลับมาเปิด RE เฉพาะจุดนี้ใหม่ก่อนเดา byte ตัวที่สองตาม `GAME_TEST_QUEUE.md`'s `GT-193` ข้อ 8
+
+### สิ่งที่ต้องตอบ
+
+1. หา serializer/deserializer ฝั่งไคลเอนต์ที่ parse ตระกูล `UpdateAttr*`/`GM_UpdateGMStateVital`/
+   `ForcePos`-ish header (VA ของ dispatcher ที่ตรวจ opcode `0x309A` โดยตรง ถ้าหาไม่เจอ ให้บอกตรง ๆ ว่า
+   หาไม่เจอ ไม่ใช่เดา) -- header มีฟิลด์ที่ตรงกับ "vital_version" หรือไม่ ตำแหน่ง offset เท่าไหร่
+2. ถ้าพบ ตรวจว่า client เช็คค่านั้นยังไง (เท่ากับค่าคงที่? เทียบ range? ไม่เช็คเลย?) แล้วค่าคงที่นั้นคือ
+   อะไร -- เทียบกับ `0` ที่ `state_wire`/`teleport_wire` ใช้ ตรงกันไหม
+3. ถ้าหา `0x309A` เฉพาะไม่เจอ ให้เทียบโครง header ของ 0x309A กับ header ของ opcode ตระกูลเดียวกันที่พิสูจน์
+   แล้ว (`GM_UpdateGMStateVital`/`ForcePos`) เท่าที่ static เห็น -- header shape เหมือนกันหรือไม่
+   (ชื่อฟิลด์/ลำดับ/ขนาด) ซึ่งเป็นหลักฐานทางอ้อมว่า byte เดียวกันน่าจะใช้ได้ ไม่ใช่หลักฐานตรง
+4. ยืนยันอีกครั้ง (แยกจากที่ `attr_wire.py`'s docstring อ้างไว้แล้ว) ว่าไม่มี raw capture ของ
+   `UpdateAttrVital` ที่ยิงจริงแล้วอยู่ใน clone นี้เลย -- ถ้ามี ให้รายงาน span ทันที ข้อ 1-3 ไม่จำเป็น
+
+### pass criteria
+
+- **PASS**: ระบุ VA + instruction span ที่ยืนยัน vital_version byte ของ `0x309A` โดยตรง พร้อม
+  span_sha256 -- ถ้าตรงกับ `0` ที่เลือกไว้ ให้บันทึกว่ายืนยันแล้ว (ไม่ใช่แค่ pattern) ถ้าไม่ตรง ให้เขียน
+  ค่าจริงและธงแดงทันทีว่า `/speed`'s scoped exception กำลังส่งไบต์ผิด
+- **BOUNDED-NEGATIVE**: หา `0x309A`-specific check ไม่เจอ แต่ header shape (ข้อ 3) ตรงกับตระกูลที่พิสูจน์
+  แล้วทุกจุดที่เทียบได้ -- บันทึกเป็นหลักฐานทางอ้อมสนับสนุน ไม่ใช่ proof ระดับเดียวกับ PASS
+- **NO-EVIDENCE**: หาไม่เจอทั้ง direct check และ header-shape เทียบ -- บันทึกตรง ๆ ว่า `0` ยังเป็นการเดา
+  ที่มีเหตุผล ไม่ใช่ค่าที่วัดแล้ว จนกว่าจะมี raw capture จริง
+
+### ข้อห้าม
+
+ห้ามเปลี่ยน `attr_wire.UPDATE_ATTR_VITAL_VERSION_CONFIRMED` จากใบนี้โดยตรง (chief ตัดสินใจแก้เองเมื่อ
+ได้ผลแล้ว) · ห้ามอ้างว่าผล PASS ของใบนี้ปลดเงื่อนไข (ค) แบบถาวรสำหรับ opcode/field อื่นของ `attr_wire.py`
+-- COO-DECISION ยกเว้นเฉพาะจุดส่ง `/speed` sparse x=7 เท่านั้น · ห้ามเดา byte ตัวที่สองถ้า `GT-193` ข้อ 8
+เจอ reconnect จริง -- กลับมาที่ใบนี้ก่อนเสมอ
+
+### สัญญาผู้บริโภค
+
+เปิดโดย chief -- **chief บริโภคผล** (เจ้าของ `gm/attr_wire.py` ตามเขตเขียนหัวข้อ 6) รอบถัดไปที่เห็นผลแล้ว
+ตัดสินว่าจะคง `0` ไว้ถาวรหรือแก้
+
+### links
+
+`notes_to_chief/20260901_1847_COO-DECISION-gm049-vital-version-gate-scoped-exception-c.md` (ที่มา) ·
+`notes_to_chief/20260901_1728_LANE-GM-CORE-REQUEST-GM-049-speed-sparse-x7-runtime-send-point.md` ·
+`src/pirateforce_foundation/gm/attr_wire.py:143-154` · `src/pirateforce_foundation/gm/state_wire.py:59` ·
+`src/pirateforce_foundation/gm/teleport_wire.py:151` · `GAME_TEST_QUEUE.md` `GT-193` ข้อ 8 (reconnect gate)
