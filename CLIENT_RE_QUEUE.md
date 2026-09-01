@@ -3496,7 +3496,7 @@ order, owner ruling ของ 7 template) อยู่ใน `notes_to_chief/202
 (แก้ไขแล้วรอบเดียวกัน) ไม่ใช่ใบนี้ **บันทึก `IMAGE_ACCESS_COST.tsv` ที่เกี่ยวข้องถูกลบออกแล้วเช่นกัน
 เพราะไม่มีต้นทุนจริงเกิดขึ้น**
 
-## 🔬 RE-191 MONSTER-NAME-COLOR-FONTSTYLE63-RGB-001 [STATIC-ON-BRIDGE]: `CODEX_CHECKPOINT 20260901_1135` closed the same-actor conditional static path for the monster-name-color write (`MCG-IMG-025..033` now `PROVEN_EXACT`) but never read the actual RGB triple that `fontstyle_id=63` (the death/gray state per `NOW.md` P-2: ปกติ=ส้ม/สู้=แดง/ตาย=เทา) resolves to through `UILabel_FontStyleID_parser_setter` (`0x00AA488F`) — what color does style 63 actually set, compared against the already-decoded controls 61/62?
+## 🔬 RE-191 MONSTER-NAME-COLOR-FONTSTYLE63-RGB-001 [STATIC-ON-BRIDGE]: `CODEX_CHECKPOINT 20260901_1135` closed the same-actor conditional static path for the monster-name-color write (`MCG-IMG-025..033` now `PROVEN_EXACT`, death branch conditionally writes style 63 via `CNetNPC` vslot `+0x3C` -> `0x0043BD70`) but never read the actual RGB triple that `fontstyle_id=63` resolves to through `UILabel_FontStyleID_parser_setter` (`0x00AA488F`) — what color does style 63 actually set, compared against the already-decoded controls 61/62? 🔴 **ไม่ใช่การยืนยันล่วงหน้าว่า 63 = เทา** — `20260901_0921_LANE-GM-STATUS-*.md`'s own nonclaim ①: "ไม่อ้างว่า fontstyle 63 คือสีเทาของมอนตาย — ตารางเองปฏิเสธการอ้างนี้ตรง ๆ" ใบนี้มีอยู่เพื่อหาคำตอบนั้น ไม่ใช่เพื่อยืนยัน `NOW.md` P-2's ตาย=เทา ที่ยังไม่มีหลักฐาน
 
 ### ทำไมเปิดใบนี้ (มอบหมายตรงจาก COO)
 
@@ -3515,9 +3515,14 @@ capture**): เทียบ `fontstyle_id=63` กับ 61/62 ที่ถอด
 
 `pf_bridge/external/PF_MONSTER_COLOR_GATE.tsv`/`.md` ที่ checkpoint อ้างถึง (SHA-256 `f99347e4...`/
 `7b6626ac...`) **ยังไม่มีในโคลนคลาวด์นี้** (`external/` ไม่มีไฟล์ชื่อนี้ ณ commit ที่ fetch รอบนี้ —
-`git log --oneline -- external/` ล่าสุดคือ sync ไฟล์เดียวตอน 05:24 ไม่ใช่ไฟล์นี้) — น่าจะเป็นแบบเดียวกับ
-`PF_PROTOCOL_PRIORITY.tsv` ช่วง R136-R145 ที่รอคนหน้าสะพาน `git add` เข้า `SHARED_TRACKED`/allowlist
-ก่อนถึงจะ sync มาคลาวด์ได้ — **ไม่ใช่เหตุให้ปิดใบหรือหยุดรอ**: งานถอด RGB ทำบนอิมเมจโดยตรง (RE
+`git log --oneline -- external/` ล่าสุดคือ sync ไฟล์เดียวตอน 05:24 ไม่ใช่ไฟล์นี้) — **สาเหตุ (แก้ไขจาก
+draft แรกที่เข้าใจง่ายเกินไป, pf-adversary จับได้):** ไม่ใช่แค่รอคนหน้าสะพาน `git add` — `.gitignore` ของ
+`pf_bridge` ใช้ deny-all กับ `external/` (`/external/*` แล้วค่อย allowlist ทีละไฟล์ตรง ๆ) และ
+`PF_MONSTER_COLOR_GATE.tsv`/`.md` (รวมถึง `PF_GROUND_DROP_LIFETIME.tsv`/`.md`) **ยังไม่อยู่ใน allowlist
+นั้นเลย** ⇒ ต้องแก้ `.gitignore` เพิ่มบรรทัด allow ตรงชื่อไฟล์ก่อน แล้วค่อย `git add` (`pf_git_sync.ps1`'s
+`SHARED_TRACKED` สแกนด้วย `--untracked-files=no` — ไฟล์ที่ gitignore กันไว้จะไม่มีวัน sync แม้ `git add`
+เพราะไม่มีทาง track ได้ตั้งแต่แรก) — เข้าเค้าเดียวกับ "deny-all `.gitignore` กลืนทั้งโฟลเดอร์" ที่โปรเจกต์นี้
+เจอมาก่อน — **ไม่ใช่เหตุให้ปิดใบหรือหยุดรอ**: งานถอด RGB ทำบนอิมเมจโดยตรง (RE
 runner/Codex บนสะพาน) ไม่ต้องพึ่งไฟล์นี้ในคลาวด์เลย ไฟล์นี้เป็นแค่บริบทอ้างอิง ถ้าใครเจอไฟล์หายบนสะพานเอง
 ให้บันทึกลง `IMAGE_ACCESS_COST.tsv` ตามกติกา
 
@@ -3556,5 +3561,5 @@ runner/Codex บนสะพาน) ไม่ต้องพึ่งไฟล�
 `notes_to_chief/CODEX_CHECKPOINT_20260901_1135_COLOR-DROP-GM-STATIC-UNLOCK.md` (วิธีปิดที่ checkpoint
 ระบุไว้) · `notes_to_chief/20260901_1241_COO-DECISION-p2-re-routing-fontstyle63-third-round-waiting.md`
 (คำสั่งมอบหมายตรง) · `notes_to_chief/20260901_1225_LANE-GM-STATUS-sched-20260901-*.md` (รอบที่สามที่ขอ)
-· `notes_to_chief/20260901_0921_LANE-GM-ASK-COO-*.md` (รอบ `h6rsgl` ที่เสนอวิธีปิดนี้ครั้งแรก) ·
+· `notes_to_chief/20260901_0921_LANE-GM-STATUS-p2-color-static-research-fontstyle63-gap-re-followup-proposed.md` (รอบ `h6rsgl` ที่เสนอวิธีปิดนี้ครั้งแรก) ·
 `pf_bridge/NOW.md` P-2

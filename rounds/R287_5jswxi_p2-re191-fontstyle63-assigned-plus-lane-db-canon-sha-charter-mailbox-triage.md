@@ -28,9 +28,12 @@ RGB จริงของ `fontstyle_id=63` ผ่าน `UILabel_FontStyleID_pa
 ถอดแล้วเป็น control static/IMAGE-layer ล้วน ไม่ต้อง attended capture
 
 ค้นแล้ว (กฎบังคับข้อ ④): `pf_bridge/external/PF_MONSTER_COLOR_GATE.tsv`/`.md` ที่ checkpoint อ้างถึงยัง
-**ไม่มีในโคลนคลาวด์นี้** (`external/` ไม่มีไฟล์ชื่อนี้ ไม่ปรากฏใน `git log -- external/`) — เดาว่าเป็นแบบ
-เดียวกับ `PF_PROTOCOL_PRIORITY.tsv` ช่วง R136-R145 ที่รอคนหน้าสะพาน `git add` เข้า tracked ก่อนถึง sync
-มาคลาวด์ได้ — ไม่ใช่เหตุให้หยุด งาน RE-191 ทำบนอิมเมจโดยตรงบนสะพาน/Codex ไม่ต้องพึ่งไฟล์นี้ในคลาวด์
+**ไม่มีในโคลนคลาวด์นี้** (`external/` ไม่มีไฟล์ชื่อนี้ ไม่ปรากฏใน `git log -- external/`) — **แก้ไขจาก
+draft แรก (pf-adversary จับได้):** ไม่ใช่แค่รอคนหน้าสะพาน `git add` — `.gitignore` ของ `pf_bridge` เป็น
+deny-all ต่อ `external/` และไฟล์นี้ยังไม่อยู่ใน allowlist เลย ต้องแก้ `.gitignore` เพิ่มบรรทัด allow ก่อน
+ถึงจะ `git add`/sync ได้จริง (`pf_git_sync.ps1`'s `SHARED_TRACKED` สแกน `--untracked-files=no` — ไฟล์ที่
+gitignore กันไว้ไม่มีทาง track ได้เลยไม่ว่าจะ `git add` กี่ครั้ง) — ไม่ใช่เหตุให้หยุด งาน RE-191 ทำบนอิมเมจ
+โดยตรงบนสะพาน/Codex ไม่ต้องพึ่งไฟล์นี้ในคลาวด์
 
 สัญญาผู้บริโภค: chief เปิดใบ (มอบหมายข้ามสาย ไม่ใช่ผู้ทำ) — **สาย GM บริโภคผล** เมื่อ RE runner/Codex
 ปิดใบ
@@ -58,8 +61,21 @@ addressee = chief/ทุกคน/ไม่มีเจ้าของชัด
 
 ## pf-adversary
 
-รันก่อน commit ตามกฎบังคับ (ตรวจ RE-191 entry ตรงกับแหล่งอ้าง + LANE-DB charter paraphrase ไม่หลุด
-เงื่อนไข + scope: ไม่แตะ `runtime.py`/`app.py`/v141/canonical DB) — ผลอยู่ในจดหมาย/หมายเหตุ commit นี้
+รันก่อนปลด draft (isolated subagent, ตรวจ RE-191 entry ตรงกับแหล่งอ้าง + LANE-DB charter paraphrase
+ไม่หลุดเงื่อนไข + scope: ไม่แตะ `runtime.py`/`app.py`/v141/canonical DB) — **จับได้ 3 defect จริงในดราฟต์
+แรก แก้ครบก่อน undraft:**
+1. ลิงก์ `20260901_0921_LANE-GM-ASK-COO-*.md` ผิด ไม่มีไฟล์นี้จริง — ชื่อจริงคือ
+   `20260901_0921_LANE-GM-STATUS-p2-color-static-research-fontstyle63-gap-re-followup-proposed.md`
+   (แก้แล้วใน `CLIENT_RE_QUEUE.md`)
+2. หัวใบ RE-191 ดราฟต์แรกเขียนว่า `fontstyle_id=63` คือ "the death/gray state per NOW.md P-2" —
+   pre-assert คำตอบที่ใบนี้มีไว้หา ขัดกับ nonclaim ①ของใบ `0921` เอง ("ไม่อ้างว่า fontstyle 63 คือสีเทา")
+   แก้เป็นบรรยาย mechanism (death branch เขียน style 63 แบบมีเงื่อนไข) แทน ไม่ pre-assert สี (แก้แล้ว)
+3. คำอธิบายสาเหตุที่ `PF_MONSTER_COLOR_GATE.*` ไม่ sync มาคลาวด์ ดราฟต์แรกเขียนว่า "รอ git add" เฉย ๆ —
+   ไม่ครบ: `.gitignore` เป็น deny-all ต่อ `external/` ต้องแก้ allowlist ก่อน ไม่ใช่แค่ `git add` (แก้แล้ว
+   ทั้ง `CLIENT_RE_QUEUE.md` และหัวข้อนี้)
+
+จุดสังเกตรอง (ไม่ใช่ defect): บล็อก `(1)(2)(3)` สองชุดติดกันใน LANE-DB charter อ้างอิงเลขซ้ำกันได้ยาก —
+labelเป็น `1241-①/②/③` แยกจากชุด `1112` เดิม (แก้แล้ว)
 
 ## GAME_TEST_QUEUE.md
 
