@@ -36,7 +36,10 @@ CLOSED_WORDS = ("DONE", "CLOSED", "ARCHIVED", "archived", "OPENED-IN-ERROR",
                 "METHOD-FAIL", "SUPERSEDED")
 TICKET_RE = re.compile(r"^##\s.*?\b(RE|GT)-(\d{3})\b")
 STRIKE_RE = re.compile(r"~~.*?~~", re.S)
-CONSUMER_MARK = "consumer-contract"  # matched loosely below
+# The Thai heading that opens every ticket's consumer-contract section,
+# written with escapes so this file stays pure ASCII for the cp874 console.
+CONSUMER_MARK = ("\u0e2a\u0e31\u0e0d\u0e0d\u0e32\u0e1c\u0e39\u0e49"
+                 "\u0e1a\u0e23\u0e34\u0e42\u0e20\u0e04")
 
 
 def strip_struck(text):
@@ -92,7 +95,7 @@ def audit(queue_path, notes_dir, min_num):
         # a block that carries two consumer-contract sections has swallowed
         # the header of the ticket that follows it (see RE-197, commit 32f5634e)
         n_contracts = len([l for l in t["body"].split("\n")
-                           if l.startswith("###") and "สัญญาผู้บริโภค" in l])
+                           if l.startswith("###") and CONSUMER_MARK in l])
         if n_contracts > 1:
             orphan.append((t, n_contracts))
 
