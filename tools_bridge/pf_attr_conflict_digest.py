@@ -421,6 +421,18 @@ def game_lock_held():
 def main():
     if game_lock_held():
         print("LOCK_GAME is HELD - an attended round is running; standing down")
+        # Record the gap.  Without this the skip is invisible afterwards, and
+        # the per-checkpoint retraction lists inside the window are lost with
+        # nobody aware they existed.
+        try:
+            if not os.path.isdir(OUT):
+                os.makedirs(OUT)
+            with open(os.path.join(OUT, ".skipped_for_game_lock"), "a",
+                      encoding="ascii") as fh:
+                fh.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+                         + "\tskipped: LOCK_GAME held\n")
+        except Exception:
+            pass
         return 3
     if not os.path.isdir(OUT):
         os.makedirs(OUT)
