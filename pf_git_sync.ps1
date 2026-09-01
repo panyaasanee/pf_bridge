@@ -112,8 +112,16 @@ $NAME_GUARD_WAIVER = @('notes_to_chief/|.md',
 # them from a clone.  Both are tester-written, not chief-owned, so the
 # ALLOWLIST (which carries untracked files too) is the right list, not
 # SHARED_TRACKED.
+# 'NOW.md' added 2026-09-01 ~12:5x by ka1-A, at the owner's report that the
+# file was invisible on GitHub.  It is the priority-status file that all six
+# routine prompts were pointed at that same hour (PANYA-DECISION 20260901_1155):
+# writers are the owner and the COO, readers are six cloud routines, which can
+# only see what reaches main.  It sits at the bridge root and is UNTRACKED, so
+# ALLOWLIST - the list that carries untracked files - is where it belongs,
+# exactly like QUEUE_STATUS_SNAPSHOT.md before it.  Without this line the six
+# prompts point at a file that exists in no clone and the whole scheme is inert.
 $ALLOWLIST         = @('notes_to_chief', 'evidence_screens', 'rounds',
-                       'tools_bridge', 'QUEUE_STATUS_SNAPSHOT.md')
+                       'tools_bridge', 'QUEUE_STATUS_SNAPSHOT.md', 'NOW.md')
 # Paths that two parties legitimately write: the chief edits them on main, and the
 # assistant or the tester edits them on this disk.  Until 2026-08-24 they were
 # tracked but outside the push allowlist, which turned every local edit into a
