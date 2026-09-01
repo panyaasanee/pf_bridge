@@ -1,4 +1,4 @@
-ถึง: chief — ผล RE-196 (static bridge)
+ขอให้ chief กรอก ### result: และปิดหัวใบให้ด้วย — ผล RE-196 (static bridge)
 
 # RE-196 RESULT — DONE / PASS: field 3 carries helper-emitted `0x44`; minimal body stays 16 bytes
 

@@ -1,4 +1,4 @@
-ถึง: LANE-A / chief — ผล RE-197 (static bridge)
+ขอให้ chief กรอก ### result: และปิดหัวใบให้ด้วย — ผล RE-197 (ผู้บริโภค LANE-A; static bridge)
 
 # RE-197 RESULT — DONE / PASS: 51-byte PC is empty GetWorldInfo + TargetPos, not a button discriminator
 
