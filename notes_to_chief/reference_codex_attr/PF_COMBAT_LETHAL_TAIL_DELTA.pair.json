@@ -1,0 +1,47 @@
+{
+  "claim_set_sha256": "f05036a5d74fd81782314af14d5792b2ea987e44118331bd927835f27ca722c1",
+  "delta_ids": [
+    "LT-IMG-001",
+    "LT-IMG-002",
+    "LT-IMG-003",
+    "LT-IMG-004",
+    "LT-IMG-005",
+    "LT-IMG-006",
+    "LT-IMG-007",
+    "LT-IMG-008",
+    "LT-IMG-009",
+    "LT-IMG-010",
+    "LT-IMG-011",
+    "LT-IMG-012",
+    "LT-IMG-013",
+    "LT-IMG-014",
+    "LT-IMG-015"
+  ],
+  "files": {
+    "PF_COMBAT_LETHAL_TAIL_DELTA.md": {
+      "sha256": "39695cf6c76b90ed6336efedbcadca09b477e057aa05d08cb709926b933d52b0",
+      "size": 12538
+    },
+    "PF_COMBAT_LETHAL_TAIL_DELTA.tsv": {
+      "sha256": "6f6cffddfc0d77d9853637051ef572576ceff9ba7bee50bb1a01eb21c7263170",
+      "size": 43449
+    }
+  },
+  "generation_sha256": "5839daedbb039165372ef69cdb22eee9b61a3c2d6da281673f3710da0b08cfd5",
+  "image": {
+    "path": "PF_ROOT://GameClient/GameClient.local.bin",
+    "sha256": "9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623",
+    "size": 14759424
+  },
+  "marker_published_last": true,
+  "publication_order": [
+    "PF_COMBAT_LETHAL_TAIL_DELTA.tsv",
+    "PF_COMBAT_LETHAL_TAIL_DELTA.md",
+    "PF_COMBAT_LETHAL_TAIL_DELTA.pair.json"
+  ],
+  "row_count": 15,
+  "schema": "PF_COMBAT_LETHAL_TAIL_DELTA_PAIR_V1",
+  "source_counts": {
+    "IMAGE": 15
+  }
+}
