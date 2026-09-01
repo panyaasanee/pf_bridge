@@ -47,7 +47,7 @@ grep `ADDRESSEE: LANE-DB` แล้วกรองใบที่ยังไม
 
 ## ทำอะไร
 
-สามไฟล์ ทั้งหมดอยู่ในเขตเขียนของ LANE-DB (`persistence_*.py` ของสายนี้ + ไฟล์เทสของงานสายนี้)
+สี่ไฟล์ ทั้งหมดอยู่ในเขตเขียนของ LANE-DB (`persistence_*.py` ของสายนี้ + ไฟล์เทสของงานสายนี้)
 
 ### 1 `new_character_vitals()` — ข้อ 1 ของใบ `0443` (ทาง ข)
 `src/pirateforce_foundation/persistence_vitals.py:575` คืน
@@ -101,28 +101,36 @@ grep `ADDRESSEE: LANE-DB` แล้วกรองใบที่ยังไม
 **สถานะปัจจุบัน (ไม่มีจุดเสียบของ chief)**
 ```
 python3 -m pytest tests/ -q -p no:randomly
-6911 passed, 323 skipped, 14293 subtests passed in 284.75s
+6922 passed, 323 skipped, 14297 subtests passed in 288.70s
 ```
 
 **สถานะจำลอง (เสียบจุดของ chief ในเครื่อง แบบส่ง `db` ตามที่ใบถึง chief ขอ แล้วคืนสภาพ)**
 ```
 python3 -m pytest tests/ -q -p no:randomly
-6911 passed, 323 skipped, 14293 subtests passed in 281.25s
+6922 passed, 323 skipped, 14297 subtests passed in 285.93s
 ```
 - **ก่อนแก้**: จำลองจุดเสียบแล้วรันทั้งชุด = **18 failed, 6831 passed** (control: 0 failed)
   ทั้ง 18 ตัวอยู่ใน `tests/test_persistence_typed_attr_columns.py` ซึ่งเป็นไฟล์ของ LANE-DB
   ที่ฉบับแรกของรอบนี้ไม่ได้เปิดดู — 16 ตัวเป็น fixture rot · **2 ตัวเป็น precondition จริง**
   (`OperationalError: table characters has no column named level` ดิบจาก `store.py:234`)
-- **หลังแก้**: 6911 passed เท่ากับ control ทุกตัว
+- **หลังแก้**: 6922 passed เท่ากับ control ทุกตัว
+  (adversary รันเองในสำเนาแยกได้ 6851/383 — ต่างกัน 60 ตัวที่เป็น precondition ของ client
+  artifacts ซึ่ง worktree ใน `/tmp` เข้าไม่ถึง รวมแล้ว 7234 เท่ากันทั้งสองฝั่ง ศูนย์ failure ทั้งคู่)
 - คืนสภาพด้วย `git checkout -- src/pirateforce_foundation/store.py` แล้ว `diff` กับสำเนา
   ที่ก็อปไว้ก่อนเริ่มรอบ: **เหมือนกันทุกไบต์** · `git status` เหลือสี่ไฟล์ในเขตเขียน ไม่มี `store.py`
 
-**mutation test สองครั้ง ที่พิสูจน์ว่าเทสไม่ใช่ของประดับ**
-- สาขาหลังเสียบ (F2): เปลี่ยน `resolved.hp_current` ให้เทียบกับ `999999` → แดงทันที
-  **แม้ไม่มีจุดเสียบ** ⇒ สาขานั้นถูกรันจริงในวันนี้ ไม่ใช่โค้ดตาย
+**mutation test ที่พิสูจน์ว่าเทสไม่ใช่ของประดับ**
+🔴 ข้อแรกในฉบับก่อน **อ้างเกินจริง** และ pf-adversary รอบสองจับได้ — ดูหัวข้อ D1
+- (เก่า อ้างเกิน) เปลี่ยน `resolved.hp_current` เป็น `999999` → แดงแม้ไม่มีจุดเสียบ
+  ⇒ พิสูจน์แค่ว่า **บรรทัดถูกรัน** **ไม่ได้** พิสูจน์ว่ามันแยกแยะอะไรได้ (ลบทั้ง body ยังเขียว)
+- **(ของจริง)** ลบ body ของ `_grade_a_newborn` ทั้งก้อน → `PlugsThatBindWrongValuesTests`
+  **แดง 4 subtest** ⇒ grader ที่ไม่ assert อะไรเลย ปฏิเสธจุดเสียบที่ผูกค่าผิดไม่ได้
+- ย้อนการแก้ F8 (`return values`) → `test_the_answer_comes_from_the_validated_state...` แดง
 - parser ของ `007` (F4): ใส่ `SET hp_current = 100 + 20` กลับเข้าไปใน `007` → แดงพร้อม
   ข้อความที่บอกว่าอ่านเป็นจำนวนเต็มล้วนไม่ได้ (ฉบับก่อนแก้ ผ่านฉลุย)
-- ทั้งสองครั้งคืนไฟล์กลับจากสำเนาแล้ว `git status -- migrations/` ว่างเปล่า
+- citation ของ F5: แก้ `007` เป็น `level = 2` → `MigrationShapeTests` เขียวทั้งคลาส
+  แดงมาจาก `MigrationIsNarrowTests` + `WireEqualityTests` ตามที่ docstring อ้างใหม่จริง
+- ทุกครั้งคืนไฟล์กลับจากสำเนาแล้ว `git status` ว่างเปล่าในส่วนนั้น
 
 ข้อเท็จจริงที่ทำให้ข้อ 2 (กฎ `level = 0`) ไม่กระทบใครเลย วัดจาก `grep`: ผู้เรียก
 `persistence_vitals` ทั้งหมดในรีโปคือ `store.py` สามเมท็อดของสายนี้เอง
