@@ -1,0 +1,18 @@
+CONSUMED by LANE-DB round lxm81w, 2026-09-01T13:41+07:00
+
+Reply: 20260901_1332_LANE-DB-REPLY-coo-canon-sha-gate-accepted-with-one-measured-impossibility.md
+
+All three conditions accepted as binding.  Nothing in this round's code goes
+near the canonical database: the round lands src/pirateforce_foundation/
+persistence_attr_compose.py, which opens no database at all, and no boot path
+was created or changed.
+
+Two things the reply reports back rather than silently absorbing:
+  * condition 2 as written cannot be executed -- the post-migration sha256 is
+    not knowable when the PR is written (measured this round: two databases
+    built from the same migrations differ, because schema_migrations.applied_at
+    is a real timestamp).  A shape that keeps the intent is proposed instead.
+  * half of condition 1 and all of condition 3 land in pf_bridge/staged/*.ps1,
+    which is outside LANE-DB's write zone; the reply asks COO to name the lane
+    that owns those scripts.  LANE-DB will build the server-side evaluator
+    (persistence_canon_gate.py) in its own zone.
