@@ -32,8 +32,45 @@ import sys
 
 ROUTE_TAGS = ("STATIC-ON-BRIDGE", "STATIC-ON-CLOUD", "NEEDS-ATTENDED-CAPTURE")
 STATUS_TAGS = ("OPEN", "PENDING")
+# "ANSWERED" was missing here until R298 and RE-136 sat in the [A] column for
+# four days because of it: its header has said
+# "ANSWERED (source layer) by chief round wi1m62" since 2026-08-29, which is a
+# closed ticket by every reading except this tuple's.  A closed word that the
+# queue's authors actually use and this tool does not know is worse than no
+# check at all -- it reports work that does not exist, every round, forever.
 CLOSED_WORDS = ("DONE", "CLOSED", "ARCHIVED", "archived", "OPENED-IN-ERROR",
                 "METHOD-FAIL", "SUPERSEDED")
+# ANSWERED is deliberately NOT in the tuple above: it is a substring match
+# against the whole header line, and this queue writes two-layer verdicts.
+# pf-adversary (round dfx8bu) measured two live headers that a plain
+# "ANSWERED" in CLOSED_WORDS would have closed while they are half open --
+# RE-167 and RE-168 both read
+#   "wire/DB **ANSWERED** ..., **client-observable STILL PENDING**"
+# and both are masked today only by has_result_letter, which stops masking
+# them the next time consumed letters are archived out of notes_to_chief/.
+# It also matches "UNANSWERED", which is live vocabulary in the sibling
+# queue, so the word alone would close a ticket that says the opposite.
+# The rule below is therefore: ANSWERED closes a ticket only when nothing
+# in the same header still says it is open.
+MIN_PLAUSIBLE_TICKETS = 40
+ANSWERED_WORD = "ANSWERED"
+ANSWERED_NEGATIONS = ("UNANSWERED", "UN-ANSWERED", "NOT ANSWERED",
+                      "ANSWERED-DIFFERENTLY")
+
+
+def answered_means_closed(head_live):
+    """True only for a header whose ANSWERED is not contradicted by itself.
+
+    Layer awareness, not word matching: a header that answers the wire/DB
+    half and says the client-observable half is still pending is an OPEN
+    ticket that happens to contain the word.
+    """
+    if ANSWERED_WORD not in head_live:
+        return False
+    upper = head_live.upper()
+    if any(n in upper for n in ANSWERED_NEGATIONS):
+        return False
+    return not any(s in head_live for s in STATUS_TAGS)
 TICKET_RE = re.compile(r"^##\s.*?\b(RE|GT)-(\d{3})\b")
 STRIKE_RE = re.compile(r"~~.*?~~", re.S)
 # The Thai heading that opens every ticket's consumer-contract section,
@@ -89,7 +126,8 @@ def audit(queue_path, notes_dir, min_num):
         head_live = strip_struck(t["header"])
         route = [r for r in ROUTE_TAGS if r in head_live]
         status = [s for s in STATUS_TAGS if s in head_live]
-        closed = any(w in head_live for w in CLOSED_WORDS)
+        closed = (any(w in head_live for w in CLOSED_WORDS)
+                  or answered_means_closed(head_live))
         letter = has_result_letter(t["id"], names)
 
         # a block that carries two consumer-contract sections has swallowed
@@ -142,6 +180,28 @@ def main():
         return 2
 
     tickets, invisible, no_route, orphan, eligible = audit(a.queue, a.notes, a.min)
+
+    # A FLOOR, BECAUSE "0 PROBLEMS" AND "0 QUEUE" LOOK IDENTICAL WITHOUT ONE.
+    # pf-adversary (round dfx8bu) ran both modes against a zero-byte queue file
+    # and got a clean bill of health twice: "RESULT: 0 ticket(s) the RE runner
+    # cannot select", exit 0, and "none -- the queue really is empty", exit 0.
+    # This tool is now the single authority PROCESS_GATES section 18 points
+    # every lane at, and the round that wrote that rule was itself a 35-line
+    # deletion from this very file; had the deletion taken ticket bodies with
+    # it, the mandated closing command would have said everything was fine.
+    # The floor is deliberately far below the real count (97 at the time of
+    # writing): it is a smoke alarm for a truncated, half-written or
+    # wrong-path file, not a pin on the queue's size, which must be free to
+    # shrink as tickets are archived.
+    if len(tickets) < MIN_PLAUSIBLE_TICKETS:
+        sys.stderr.write(
+            "ERROR: only %d ticket(s) parsed out of %s -- below the floor of %d.\n"
+            "This queue has had ~97 tickets since 2026-08.  A count this low means\n"
+            "the file was truncated, a bad --queue path was passed, or the ticket\n"
+            "header format changed and TICKET_RE stopped matching.  Refusing to\n"
+            "report a clean queue; check the file before trusting any output.\n"
+            % (len(tickets), a.queue, MIN_PLAUSIBLE_TICKETS))
+        return 3
 
     if a.list_open:
         if a.route:

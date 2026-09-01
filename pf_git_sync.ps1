@@ -25,10 +25,25 @@
 #
 # WHAT IT MAY PUSH: notes_to_chief/** and evidence_screens/** and nothing else.
 # Both are new files with timestamps in their names, so a rebase cannot collide by
-# construction rather than by luck.  CHIEF_CONTINUATION.md and GAME_TEST_QUEUE.md
-# are deliberately NOT in the allowlist: the chief owns them, and if they are
-# edited on this machine the fast-forward pull fails loudly and this script stops
-# and says so, with nothing lost - the edits are still on the disk.
+# construction rather than by luck.  CHIEF_CONTINUATION.md, GAME_TEST_QUEUE.md and
+# CLIENT_RE_QUEUE.md are deliberately NOT in the allowlist: the chief owns them,
+# and an edit made here can never travel out.  What happens to the pull is
+# narrower than an earlier wording of this comment claimed ("fails loudly and
+# this script stops and says so" - it does not stop; see the "Do NOT Finish
+# here" note in step [3], which is deliberate and stays): the fast-forward is
+# refused only when the incoming commits touch that same file, and the round
+# then writes SYNC_ATTENTION.txt plus a SYNC_STUCK_* letter and CARRIES ON to
+# the push block.  When the chief happens not to touch the file, the merge
+# succeeds silently and the local edit simply sits here unnoticed, which is the
+# worse of the two outcomes.  Nothing is lost either way - the edits are still
+# on the disk - but nothing arrives either.
+# CLIENT_RE_QUEUE.md is named here explicitly because a standing prompt on
+# this machine used to tell its worker to fill in a `### result:` field in that
+# file and let this script carry it; it cannot, and the first round that actually
+# reached that step would have deadlocked every lane's pull, not just that
+# worker's own (pf_bridge/notes_to_chief/20260902_0215_KA1B-TO-CHIEF-codex-cannot-
+# take-an-re-ticket-three-causes-not-one.md, cause 3).  All three queues are
+# editable from a cloud clone through a PR and from nowhere else.
 #
 # WHAT IT REFUSES: deletions, files over 2 MB, proprietary extensions and names,
 # anything outside the allowlist, --force, reset, clean, stash, checkout, restore,
@@ -636,9 +651,12 @@ if ($behind -gt 0 -and $ahead -eq 0) {
                 ''
                 'git merge --ff-only was refused on the pf_bridge repository.'
                 'The usual cause is a locally modified file that the chief owns'
-                '(CHIEF_CONTINUATION.md or GAME_TEST_QUEUE.md are the two that matter).'
+                '(CHIEF_CONTINUATION.md, GAME_TEST_QUEUE.md or CLIENT_RE_QUEUE.md).'
                 'Those files are not in the push allowlist on purpose, so local edits'
                 'to them can never travel and will block every pull until resolved.'
+                'Editing any of the three on this machine is always a mistake, no'
+                'matter who asked for it: they are chief-owned and change only'
+                'through a pull request from a cloud clone.'
                 ''
                 'Nothing has been lost.  Your edits are still on the disk.'
                 'git said:'
