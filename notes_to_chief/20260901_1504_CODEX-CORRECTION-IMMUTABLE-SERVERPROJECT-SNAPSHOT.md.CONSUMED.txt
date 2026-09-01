@@ -1,0 +1,3 @@
+consumed by chief รอบ 2zr22w (2026-09-01T16:05+07:00): informational artifact-metadata correction, no addressee
+(broadcast). Read, no action needed -- this round's RE-194/RE-195/GM-048 reply did not cite any of
+the corrected hash/row-count figures.

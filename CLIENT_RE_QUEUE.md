@@ -3625,3 +3625,130 @@ runner/Codex บนสะพาน) ไม่ต้องพึ่งไฟล�
 `notes_to_chief/20260901_1321_LANE-DB-AMEND-coo-seven-unknown-fields-omit-instead-of-guess.md`
 (ทำไมไม่เร่งด่วนแล้ว) · `pf_bridge/notes_to_chief/reference_codex_attr/PF_ATTR_FIELD_SEMANTICS.tsv`
 (ตาราง 28 ค่าที่ปิดไปแล้วด้วยวิธีเดียวกัน) · `gm/attr_wire.py:166-224` (ตาราง `FIELDS` ทั้ง 55 แถว)
+
+## 🔬 RE-194 BASICATTR-0X54-SPEED-PLAYER-VS-NPC-CONFLICT-001 [STATIC-ON-BRIDGE]: `BasicAttr+0x54` (f32, mask `0x0040`, tag `0x2A`) has two different [MEASURED] client-write values for the same offset -- which one does a freshly-created *player* object actually carry?
+
+### ทำไมเปิดใบนี้ (มอบหมายตรงจาก COO)
+
+`COO-DECISION 20260901_1447` ข้อ 1 (`ADDRESSEE: chief`) สั่งเปิด RE ใบนี้ตรง ๆ เป็น **เคสนำร่อง**
+ของคำถามใหญ่กว่า (25 ฟิลด์ที่มี default พิสูจน์แล้วแต่ยังไม่ยืนยันว่า resend กลางเกมปลอดภัย -- ดูใบ
+`1420`/`1335` ของ LANE-DB) ตรวจแล้วทั้งสองเลขมีอยู่จริงในซอร์สที่ commit แล้ว ไม่ได้เชื่อจากใบขอเฉย ๆ:
+
+- `src/pirateforce_foundation/player_wire.py:76` -- `PLAYER_LOGIN_MOVEMENT_SPEED = 400.0`, คอมเมนต์
+  บรรทัด 66 อ้างว่าไคลเอนต์เขียน `400.0f` ลง `+0x54` ที่ `0x00464AF2` "on every fresh instance"
+- `src/pirateforce_foundation/persistence_attr_compose.py:233/241` -- ค่า `400.0` เดียวกัน ที่ VA
+  เดียวกัน (`0x00464AF2`) ถูกใช้เป็น candidate seed ของคอลัมน์ DB แต่คอมเมนต์บรรทัด 152/239 ของไฟล์
+  เดียวกันเองเขียนไว้ตรง ๆ ว่า "+0x54 is the player's walk speed" เป็น **[สมมติของสาย DB - รอ RE]**
+  ยังไม่ปิด
+- `tests/test_npc_gait_wire.py:59` -- `PROVEN_WALK_SPEED = 150.0` (runtime_pass, สำหรับ **NPC** ไม่ใช่
+  player) offset เดียวกันตามที่ `docs/FUNCTIONAL_COVERAGE.json` อ้างถึง
+- `src/pirateforce_foundation/mob_death.py:856` -- `BASIC_BIT_MOVEMENT_SPEED = 0x0040 # f32 tag 0x2A
+  @ +0x54` ยืนยัน offset/mask/tag ตรงกับทั้งสองจุดข้างบน เป็นฟิลด์เดียวกันแน่นอน ไม่ใช่การชนกันของเลข
+  offset คนละฟิลด์
+
+**ทำไมสำคัญ**: `persistence_typed_attrs.py:28/38/45` วางแผนจะ seed คอลัมน์ DB ของผู้เล่นจาก `400.0`
+(ค่าตอนสร้างวัตถุ) แต่ถ้าไคลเอนต์จริงเขียนทับด้วยค่าอื่น (เช่น `150.0` เหมือน NPC หรือค่าที่คำนวณจาก
+คลาส/สเตตัสตัวละคร) ทุกตัวละครที่ผ่าน path นี้จะได้ speed ผิดพร้อมกันเงียบ ๆ ก่อนที่ LANE-DB จะเริ่ม
+เขียนโค้ด seed จริง (`COO-DECISION 20260901_1447` ข้อ 2 ยังไม่เปิดประตูส่ง `/speed` รออันนี้ก่อน)
+
+### สิ่งที่ต้องตอบ
+
+คำถามเดียว: object ผู้เล่น (ไม่ใช่ NPC/mob) ที่สร้างใหม่ตอนล็อกอิน มีค่าอะไรจริงที่ `BasicAttr+0x54`
+ณ จุดที่สร้างเสร็จ ก่อน wire ใด ๆ จะมาทับ --
+
+1. เป็น `400.0` แบบเดียวกับที่ `player_wire.py:66` อ้าง (แยกจาก NPC path ที่ใช้ `150.0`) หรือ
+2. เป็น `150.0` เหมือน NPC (แชร์ constructor เดียวกัน) หรือ
+3. เป็นค่าอื่น ที่คำนวณจากคลาส/สเตตัสตัวละคร ไม่ใช่ literal คงที่ตัวเดียว
+
+อ่านจาก call site ที่ `0x00464AF2` โดยตรง (เส้นทางเดียวกับที่ `player_wire.py:66` อ้างถึง) --
+แยกให้ชัดว่า call site นั้นถูกเรียกจาก constructor ของ **player** object จริง ไม่ใช่ constructor ที่ใช้
+ร่วมกับ NPC/mob (ถ้าใช้ร่วมกัน ต้องหา branch/parameter ที่แยกค่าระหว่างสองประเภท)
+
+### pass criteria
+
+- **PASS**: ระบุค่าจริงของ player object พร้อม VA/offset ของ call site และแยกให้เห็นว่าเส้นทางของ
+  player กับ NPC เป็น constructor เดียวกันหรือคนละตัว (ถ้าเดียวกัน ต้องโชว์จุดที่ค่าต่างกัน)
+- **BOUNDED-NEGATIVE**: ถ้า `0x00464AF2` เป็น shared constructor ที่ resolve ไม่ได้ว่า branch ไหนใช้
+  กับ player จริง (ต้องมี runtime trace ไม่ใช่ static เพียงอย่างเดียว) -- เขียนไว้ตรง ๆ ว่า static ปิด
+  ไม่ได้ ต้องส่งต่อเป็น GT (attended, วัด speed จริงบนจอ) ไม่ใช่เดา
+
+### ข้อห้าม
+
+ห้ามเขียนโค้ด DB/persistence/attr-wire ใด ๆ จากใบนี้ -- LANE-DB เป็นเจ้าของโค้ด seed ต่อ · ห้ามสรุปว่า
+`400.0` หรือ `150.0` ถูกโดยไม่มี VA ของ call site ที่แยก player ออกจาก NPC ชัดเจน
+
+### สัญญาผู้บริโภค
+
+เปิดโดย chief (มอบหมายตรงจาก `COO-DECISION 20260901_1447` ข้อ 1) -- **สาย DB บริโภคผล** (ผู้ใช้ค่านี้
+seed คอลัมน์ DB ต่อ) เหมือนกับ `RE-193` ข้อยกเว้นเดียวกัน -- สาย DB อ่านผลรอบถัดไปที่เห็นแล้วปิดหัวใบเอง
+
+### links
+
+`notes_to_chief/20260901_1447_COO-ORDER-re-basicattr-0x54-speed-value-hold-speed-send-gate-staged-ps1-ownership.md`
+(คำสั่งมอบหมายตรง ข้อ 1) · `src/pirateforce_foundation/player_wire.py:59-76` (ค่า 400.0 + คอมเมนต์
+อ้าง VA) · `tests/test_npc_gait_wire.py:59` (ค่า 150.0 ของ NPC) ·
+`src/pirateforce_foundation/persistence_attr_compose.py:233-241,284-288` (nonclaim ของสาย DB เอง
+เรื่องค่านี้ยังไม่ปิด) · `src/pirateforce_foundation/mob_death.py:850-856` (ยืนยัน offset/mask/tag
+เดียวกัน)
+
+## 🔬 RE-195 FONTSTYLEID-RELATIONSHIP-PREDICATE-VS-FACTION-COMPARATOR-001 [STATIC-ON-BRIDGE]: does `UILabel_FontStyleID_parser_setter`'s `relationship_predicate` (`0x0043C380..0x0043C63C`) read the same server-controllable `BasicAttr+0x68` faction field the proven relation comparator (`0x4A1D50`) reads, or a different one -- and is there any server-controllable input at all behind style ids 56/58/59/60/61 (the "positive/nonpositive identity + relationship" branches), or only behind 62/63?
+
+### ทำไมเปิดใบนี้ (ตอบ CORE-REQUEST-GM-048)
+
+`notes_to_chief/20260901_1519_LANE-GM-CORE-REQUEST-GM-048-p2-rgb-closed-faction-pink-crossref.md`
+(`ADDRESSEE: chief`) ถาม chief ให้ตัดสินว่ากลไกสี P-2 (ปกติ=ส้ม/สู้=แดง/ตาย=เทา) ควรผูกกับ FontStyleID
+selector (`0x00443F50`) หรือ faction/relation comparator (`0x4A1D50`) และให้ยืนยันว่ามี/ไม่มีวิถีที่
+เซิร์ฟเวอร์ส่ง FontStyleID อยู่แล้ววันนี้
+
+**ตรวจแล้วสองอย่างก่อนเปิดใบนี้ (ไม่ใช่การเดา):**
+1. `grep -rn FontStyle src/ gm/ tests/ docs/` (ทั้งสองรีโป) = 0 ผลนอกเอกสารอ้างอิงเอง -- **ยืนยันตามที่
+   GM-048 บอกไว้เอง: ไม่มีฟิลด์ wire ชื่อ FontStyleID ที่เซิร์ฟเวอร์ส่งตรง ๆ วันนี้จริง** [MEASURED]
+2. เปิด `notes_to_chief/reference_codex_attr/PF_ATTR_NAME_COLOR_SELECTOR.tsv` (Codex, IMAGE-only,
+   ของเดิมที่มีอยู่แล้ว ไม่ใช่ข้อมูลใหม่รอบนี้) อ่านคอลัมน์ `input_offset_or_key` ของแถว
+   `output_fontstyle_id=60` (condition `signed_nonpositive_identity_pair_and_relationship_predicate_true`)
+   -- ค่าคือ **`relationship_predicate_including_BasicAttr+0x68_fallback`** -- ตัวเลข offset `+0x68`
+   ตรงกับ offset ของ faction bit ที่ `npc_hostile_hypothesis.py:16` พิสูจน์แล้วว่าเป็น BasicAttr `0x0400`
+   🔴 **นี่คือ lead ใหม่ ไม่ใช่ข้อสรุป**: แถวเดียวพูดถึง "fallback" ของ relationship_predicate
+   (`0x0043C380..0x0043C63C`) ไปที่ offset เดียวกับ faction -- ไม่ได้พิสูจน์ว่า `0x0043C380` กับ
+   `0x4A1D50` (relation comparator ที่ `npc_hostile_hypothesis.py` อ้างถึง) เป็นฟังก์ชันเดียวกัน หรือ
+   อ่าน field เดียวกันในทุก branch -- ห้ามอ่านเกินนี้ (G6) นี่คือเหตุผลที่เปิดใบนี้แทนการตัดสินเอง
+
+### สิ่งที่ต้องตอบ
+
+1. `0x0043C380..0x0043C63C` (relationship_predicate ของ FontStyleID selector) กับ `0x4A1D50`
+   (relation comparator ของ `npc_hostile_hypothesis.py`) เป็นฟังก์ชันเดียวกัน, ฟังก์ชันหนึ่งเรียกอีก
+   ฟังก์ชันหนึ่ง, หรือคนละกลไกที่บังเอิญอ่าน offset ใกล้กัน?
+2. ใน branch ที่ resolve เป็น `output_fontstyle_id` 56/58/59/60/61 (ไม่ใช่ 62/63 ที่ RE-191 ปิดไปแล้ว)
+   มี input ตัวไหนบ้างที่เป็นฟิลด์ที่เซิร์ฟเวอร์ควบคุมได้อยู่แล้ววันนี้ (เช่น faction `+0x68`) เทียบกับ
+   ที่ต้องพึ่ง "identity" ซึ่งตาราง Codex เองบอกว่ายังไม่พิสูจน์ owner class (`owner_class_unproved`
+   ปรากฏในแทบทุกแถว `untyped_dynamic_controller`)
+3. ถ้าไม่มี branch ไหนที่ resolve เป็น 61 (fighting, ส้ม→แดงตามที่ RE-191 พิสูจน์) จากอินพุตที่เซิร์ฟเวอร์
+   ควบคุมได้ล้วน ๆ -- เขียนไว้ตรง ๆ ว่า P-2 ต้องรอ RE เพิ่มก่อนมีจุดเสียบจริง ไม่ใช่แค่ "ยังไม่มีวันนี้"
+
+### pass criteria
+
+- **PASS**: ระบุความสัมพันธ์ของสองฟังก์ชัน (ข้อ 1) พร้อม VA/evidence span ครบ และระบุ branch อย่างน้อย
+  หนึ่งเส้นทางที่ resolve เป็น style 61 (สู้) จากอินพุตที่เซิร์ฟเวอร์ควบคุมได้ล้วน ๆ ถ้ามี
+- **BOUNDED-NEGATIVE**: ถ้าทุก branch ที่ resolve เป็น 56/58/59/60/61 ต้องพึ่ง "identity"/"relationship"
+  ที่ยังไม่มี typed call path (ตามที่ตาราง Codex ระบุ `owner_class_unproved` ไว้เองในเกือบทุกแถว)
+  -- เขียนไว้ตรง ๆ ว่าไม่มี branch ไหนพร้อมให้เซิร์ฟเวอร์ขับสี "สู้" ได้วันนี้โดยไม่มี RE/probe เพิ่ม
+
+### ข้อห้าม
+
+ห้ามเขียนโค้ดสีมอนสเตอร์ใด ๆ จากใบนี้ · ห้ามอ้างว่า `0x0043C380` กับ `0x4A1D50` เป็นฟังก์ชันเดียวกันหรือ
+คนละฟังก์ชันโดยไม่มี evidence span ใหม่ (แถวที่มีอยู่ไม่พอจะสรุป ตามที่ nonclaim ข้อ 1 ของใบนี้เขียนไว้)
+
+### สัญญาผู้บริโภค
+
+เปิดโดย chief (ตอบ `CORE-REQUEST-GM-048`) -- **สาย GM บริโภคผล** (ผู้เปิด GM-048 และผู้เขียนโค้ด P-2
+ต่อ) -- สาย GM อ่านผลรอบถัดไปที่เห็นแล้วปิดหัวใบเอง ตามกฎ "ใครเปิดใบคนนั้นบริโภค" ข้อยกเว้นที่ chief
+เปิดแทนเพราะเป็นคำถามที่ GM-048 ส่งมาให้ chief ตัดสินโดยตรง
+
+### links
+
+`notes_to_chief/20260901_1519_LANE-GM-CORE-REQUEST-GM-048-p2-rgb-closed-faction-pink-crossref.md`
+(ที่มาของคำถาม) · `notes_to_chief/reference_codex_attr/PF_ATTR_NAME_COLOR_SELECTOR.tsv` (ตาราง
+เต็มของ selector, แถว fontstyle 56-63 ทั้งหมด) ·
+`src/pirateforce_foundation/npc_hostile_hypothesis.py:14-27` (relation comparator `0x4A1D50`,
+faction BasicAttr `0x0400` @ `+0x68`, พิสูจน์แล้วรันไทม์) · `RE-191` (ปิดคำถาม RGB ของ 61/62/63 แล้ว
+ใบนี้ไม่ซ้ำ)
