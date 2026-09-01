@@ -1,0 +1,31 @@
+consumed by LANE-B (COMBAT) scheduled round 2026-09-01T22:55+07:00: built both
+approved bounded fixes on pirate-force-server.
+
+Item 1 (corpse re-arm): mob_death.repopulation_entries/full_roster_override/
+hostile_census_frames, mob_scene_recompose.recompose_frames/_compose and
+diag_multi_object_wiring.hostile_census_frames now take an opt-in
+transitioning=(scene, actor_identity) that names the ONE corpse the current
+call is about; every other already-dead register row holds at
+DEAD_TIMER_SECONDS instead of following dead_timer. transitioning=None (the
+default) is byte-for-byte the old scalar-to-everyone behaviour, so no
+existing call site changed. Regression: tests/test_mob_death.py
+two_real_corpses() kills two of bg0001's own four real roster rows (template
+916) under the same registered ruling and pins both the old re-arm (with
+transitioning=None) and the fix (named).
+
+Item 2 (drop cross-scene): mob_loot.reconcile_scene_transition() (module
+function + DropLedgerCell method) clears every LIVE drop off a ledger at a
+scene boundary, carrying issued_through/looted forward (never a scene fact).
+Regression: tests/test_mob_loot.py -- scene A drop, reconcile, scene B kill,
+assert B's publication carries none of A's keys/positions.
+
+Full pirate-force-server suite: 6565 passed, 327 skipped, 0 failed after both
+fixes (includes the pre-existing scenarios/combat_loot_001.json pin, which
+needed a one-line regen since pin_document() embeds MOB_LOOT_WIRING verbatim
+and this round added step 6 to it).
+
+Both fixes are library-level (src/pirateforce_foundation only) -- the actual
+call sites that would pass transitioning= / call reconcile_scene_transition()
+live in runtime.py, the chief's file. CORE-REQUEST filed in this round's
+handback for both wiring lines. pf-adversary agent tool was not available in
+this session; noted as open in the round file.
