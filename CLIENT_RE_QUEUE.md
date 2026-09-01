@@ -3820,7 +3820,6 @@ body layout หรือไม่
 section B checks, RESULT line -- ทั้งหมด `[STALE][MEASURED]` รอบ 292) · `GT-018` (แหล่งจริงของ
 `DeleteActorVital`'s `0x44`, คนละข้อความ)
 
-## 🆕🔬 RE-197 GETWORLDINFO-SHORT-FORM-51BYTE-INTER-BUTTON-FRAME-001 [STATIC-ON-BRIDGE]: **ถอดโครงสร้าง/ความหมายของเฟรม 51 ไบต์ (`GetWorldInfoVital`, `#1398` ในแคปเจอร์ `gt192_20260901_184254`) ที่แทรกอยู่ระหว่างปุ่ม "กลับหน้าเลือกตัวละคร" กับปุ่ม "ออกจากเกม" -- ต่างจาก full-form 268-ไบต์ที่ตรวจแล้วอย่างไร และต่างกันไหมระหว่างสองเส้นทางปุ่ม**
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง: `GT-197`/`RE-197` = **0 hit ทั้งสองไฟล์** ⇒ **ใบนี้คือ
 > `RE-197`** · เลขว่างถัดไปหลังใบนี้ = 198
@@ -3881,7 +3880,13 @@ chief) · ห้ามอ้างว่าใบนี้ยืนยัน/ป
 (จดหมายที่เปิดใบนี้) · `src/pirateforce_foundation/logout_hypothesis.py:158-176` (HYP-PF-040 constant
 + provenance comment)
 
-## 🔬 RE-198 UPDATEATTRVITAL-VITAL-VERSION-BYTE-001 [STATIC-ON-BRIDGE]: `UpdateAttrVital` (0x309A)'s header `vital_version` byte -- what value does a real client accept, and is it the same `0` this round's `/speed` scoped exception guessed from two OTHER opcodes' proven bytes?
+## 🔬 RE-198 UPDATEATTRVITAL-VITAL-VERSION-BYTE-001 [STATIC-ON-CLOUD] [🔵 **DONE / BOUNDED-NEGATIVE — ปิดโดย chief รอบ `happy-dirac-69cabr` 2026-09-01T21:19+07:00, ดูผลด้านล่าง**]: `UpdateAttrVital` (0x309A)'s header `vital_version` byte -- what value does a real client accept, and is it the same `0` this round's `/speed` scoped exception guessed from two OTHER opcodes' proven bytes?
+
+> **ผล**: ไม่พบ constructor VA ของ `0x309A` เอง (NO EVIDENCE ต่อคำถามหลัก) แต่พบข้อเท็จจริงสำคัญ:
+> `RE-129-RESULT` เองปักหมุด `TeleportVital` (กลไก generic-reader เดียวกันเป๊ะ) ไว้ที่ byte `4` ไม่ใช่ `0`
+> — ทำลาย "pattern ลู่เข้า 0 เสมอ" ที่ chief ใช้อ้างอิงตอนเลือก byte (เป็น 2 ใน 3 ไม่ใช่ 3 ใน 3) `0` ยังคง
+> เป็นการเดาที่มีเหตุผลดีที่สุดภายใต้ความเสี่ยงที่ COO ยอมรับแล้ว (bounded/reversible) แต่ไม่ใช่ค่าที่วัดแล้ว
+> ผลเต็ม: `notes_to_chief/20260901_2119_RE-198-RESULT-BOUNDED-NEGATIVE-teleportvital-breaks-convergence.md`
 
 > เลขข้าม 197 โดยตั้งใจ: `pf_bridge` PR #750 (`[LANE-A]`, ยังเปิด/draft ตอนเปิดใบนี้) อ้างว่าจะใช้
 > `RE-197` แต่ยังไม่ merge เข้า main -- เลี่ยงชนตามกฎหัวข้อ 4 (เลขชนห้ามทับ +1 แล้วบันทึกเหตุผล)
