@@ -1,7 +1,7 @@
 # NOW — งานที่ต้องมาก่อนทุกอย่าง
 
 สถานะ: **มีงานด่วน 3 ข้อ**
-ตรวจล่าสุด: 2026-09-02 02:55 +07:00 โดย COO
+ตรวจล่าสุด: 2026-09-02 03:48 +07:00 โดย COO
 
 ## รอ Panya ติ๊ก  ← คุณดูหัวข้อนี้หัวข้อเดียวพอ
 (ว่าง = ไม่มีอะไรค้างคุณ · COO ย้ายข้อมาที่นี่เมื่อคิดว่าเสร็จ พร้อมหลักฐานหนึ่งบรรทัดและวันที่ย้าย
@@ -24,6 +24,7 @@
 - **P-1 ของดรอปต้องค้างอยู่บนพื้น** นานพอที่จะเห็นและเก็บได้ — สถานะ: ยังไม่ขยับ (R297 corpse re-arm = แก้บั๊ก ไม่นับ)
   ตัวบล็อกจริง: `runtime.py` ไม่มี call site ของ pickup · COO `0254`: LANE-B ส่ง production decoder + CORE-REQUEST → chief ต่อสาย
   ของตกข้ามฉาก: COO `0252` เคาะทางที่ 1 (ผูก ownership กับฉาก ของไม่หาย) · 🔴 ห้ามลบแถว ledger จนกว่ามี removal publisher (`0253`)
+  COO `0347`: PRESERVE ครอบ heartbeat + `make_runtime_vitals` · GT-188 วัดสองจุด · COO `0348`: chief ต่อสายทั้งหมดภายใน R299 ไม่งั้น ESCALATION 09:00
 - **P-2 สีชื่อมอนสเตอร์** ส้ม=ปกติ · แดง=กำลังสู้ · เทา=ตาย · **ห้ามชมพู** — สถานะ: Codex ปิด P0-2 static
   checkpoint แล้ว (รอบ `1652`, mechanism+wire census) ยังไม่มีโค้ดเปิดใช้ ต่อไปคือ P0-3 quest mark
   🔴 ห้าม faction-only fix / hardcode FontStyleID (Codex urgent `1627`) ห้ามเดา identity ติดลบโดยไม่ปิด uniqueness/registry
@@ -40,7 +41,7 @@
 - **GM-B** `/speed <ค่า>` — สถานะ: **`GT-193` เปิดแล้ว (`GAME_TEST_QUEUE.md:9644`) แต่ยัง `PENDING interface`**
   DB-ก่อน-ไวร์อยู่บน `main` แล้ว (`chat_command_action.py:2612/2902` ผ่าน `write_typed_attributes_and_compose_sparse`)
   ข้อ LANE-DB ของใบ `0147` **ยกเลิก** (COO `0251`) ไม่ต้องสร้าง `write_speed_by_identity` · LANE-DB ไม่ผูกกับข้อนี้แล้ว
-  เหลือ: LANE-GM ยืนยันข้อความปฏิเสธ `refused_speed_persist_*` ออกจอแชทจริง → chief เปลี่ยน `GT-193` เป็น `READY`
+  เหลือ: chief ลง LocalTalk composer ใน `say_wire.py` ข้อความ `SPEED DENIED` 12 ASCII (COO `0345`, R299) → LANE-GM ยืนยัน 9 ทางปฏิเสธ → `GT-193` READY
   RE-193 (BasicAttr+0x54) เดินต่อขนานไป **ไม่บล็อก** — ใช้ยืนยันหลักฐานย้อนหลัง ไม่ใช่เงื่อนไขเปิดประตู
   สาย DB เดิน M4 (21 typed column) ต่อได้ทันทีเหมือนเดิม ไม่ผูกกับข้อนี้
 - **UI-B** ปุ่มล็อกเอาต์จริง (ไม่ใช่กด X ปิดหน้าต่าง)
