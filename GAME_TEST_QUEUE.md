@@ -37,7 +37,7 @@
 
 ## 📇 สารบัญใบที่ยังไม่ปิด (คำสั่ง Panya 18:22 · อัปเดตทุกครั้งที่เปิด/ปิดใบ · เป็นดัชนีชี้ลงข้างล่าง — เนื้อใบไม่ถูกย้าย)
 
-- 🆕 **`GT-182` GM-A-WARP-NO-COORD-LIVE-SPAWN-001** (🔴🔴 **`BLOCKED-PENDING-GM047-FIX` — ห้ามคลิกทดสอบ** — ความเสี่ยงข้อมูลเสียหายจริง (position แถวใน DB จะเพี้ยนสองชั้น) จนกว่า CORE-REQUEST-GM-047 (`runtime.py:5304`) จะถูกแก้ ตาม `COO-DECISION 20260901_0741` · เดิม BLOCKED-ON-WIRING [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตามคำสั่งตรง `PANYA-ORDER 20260901_0215` ข้อ 3 (GM-A) · ผู้ทำ: **LANE-GM** · `/warp <mapnum>` ไม่ใส่พิกัด ต้องไปจุดเกิดมาตรฐานจริง + ข้ามฉากทันที ไม่ต้อง relog — เลี่ยงบั๊ก z ผิดที่ `GT-172` พบด้วยการใช้ `world_scene_travel.spawn_position()` แทนพิกัดที่ผู้ใช้พิมพ์ · ใบเต็มอยู่ท้ายไฟล์)
+- 🆕 **`GT-182` GM-A-WARP-NO-COORD-LIVE-SPAWN-001** (✅ **`BLOCKED-ON-ATTENDED [NEEDS-ATTENDED-CAPTURE]` — ปลอดภัยให้ทดสอบแล้ว** — CORE-REQUEST-GM-047 (`runtime.py:5304`) merged ทั้งสอง repo ยืนยันแล้วรอบ `69r41m`/R283 · เดิม `BLOCKED-PENDING-GM047-FIX` ตาม `COO-DECISION 20260901_0741` ปลดแล้ว · เปิดโดย chief ตามคำสั่งตรง `PANYA-ORDER 20260901_0215` ข้อ 3 (GM-A) · ผู้ทำ: **LANE-GM** · `/warp <mapnum>` ไม่ใส่พิกัด ต้องไปจุดเกิดมาตรฐานจริง + ข้ามฉากทันที ไม่ต้อง relog — เลี่ยงบั๊ก z ผิดที่ `GT-172` พบด้วยการใช้ `world_scene_travel.spawn_position()` แทนพิกัดที่ผู้ใช้พิมพ์ · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-183` GM-B-SPEED-COMMAND-001** (🔴 **BLOCKED — BLOCKED-ON-WIRING** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (GM-B) · ผู้ทำ: **LANE-GM** · `/speed <value>` คำสั่งแชท GM จริงบน `main` เขียน `ActorAttr` x7 (+0x54 f32) — เดโมแล้วนอก main โดยเจ้าของ (`PF_ADHOC_ATTR_PROBE`) ค่าปกติประเมิน 400 ยังไม่ยืนยันตาราง/ไบนารี · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-184` UI-A-PART-A-BACK-TO-CHARSELECT-BUTTON-001** (🔴 **BLOCKED — สืบทอดจาก `GT-033` (ANSWERED — สองท่าที่ลองแล้วให้ผลลบ)** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งแรก) · ผู้ทำ: **LANE-A** · ปุ่มกลับหน้าเลือกตัวละครจากในเกม ต้องพาไปจริงกลางเซสชัน · แยกจาก `GT-185` ตามกฎหนึ่งใบหนึ่งข้อพิสูจน์ · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-185` UI-A-PART-B-BACK-INTO-GAME-ROUNDTRIP-001** (🔴 **BLOCKED — precondition: `GT-184` ต้อง PASS ก่อน** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งหลัง) · ผู้ทำ: **LANE-A** · จากหน้าเลือกตัวละคร เลือกแล้วกลับเข้าเกมได้จริงในโปรเซสเดิมไหม — ปลดล็อกการเปลี่ยนฉากซ้ำโดยไม่บูตใหม่ · ใบเต็มอยู่ท้ายไฟล์)
@@ -9077,17 +9077,15 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 - links: notes_to_chief/20260831_2246_KA1B-TO-LANE-B-death-predicate-plus-probe-request.md - notes_to_chief/reference_codex_attr/PF_ATTR_ROLE_DISCRIMINATOR.tsv (row ACTOR_DEATH_SHARED) - pirate-force-server src/pirateforce_foundation/hostile_hp_link_hypothesis.py:383 - pirate-force-server src/pirateforce_foundation/mob_death.py:74-91 - notes_to_chief/reference_adhoc_probe/adhoc_attr_probe.py - notes_to_chief/reference_adhoc_probe/ACTORATTR_PROBE_TABLE_x_y.md - notes_to_chief/reference_adhoc_probe/ADHOC_PROBE_ROUND1_FINDINGS_20260827.md - notes_to_chief/consumed/20260830_2355_PANYA-ADDENDUM-probe-request-intake-4-gates-batched-sheet-rides-on-GT-round-ka1-B.md - numbering: GT-181 assigned after GT-180 collided with LANE-A round `yfbqmg`'s concurrent entry (same round, different topic) -- GT-181/RE-181 grepped as zero hits in GAME_TEST_QUEUE.md and CLIENT_RE_QUEUE.md before reserving this ID (highest prior at collision time: GT-180 taken by LANE-A, RE-172).
 - result: (tester fills in: PASS/FAIL/BLOCKED, evidence, timestamp)
 
-## GT-182 GM-A-WARP-NO-COORD-LIVE-SPAWN-001  [BLOCKED-PENDING-GM047-FIX -- DO NOT RUN, position-corruption risk, see COO-DECISION 20260901_0741 and CORE-REQUEST-GM-047; code built round jd4jqp, PR not yet merged]
+## GT-182 GM-A-WARP-NO-COORD-LIVE-SPAWN-001  [BLOCKED-ON-ATTENDED [NEEDS-ATTENDED-CAPTURE] -- GM047 fix merged, safe to run; code built round jd4jqp, fixed+merged round ts0deo]
 
-> 🔴🔴 **BLOCKED-PENDING-GM047-FIX (pinned R282, chief, per COO-DECISION `20260901_0741_COO-DECISION-gm047-position-corruption-p0-block-gt182-until-fixed.md`):**
-> DO NOT test this entry yet. `CORE-REQUEST-GM-047` found that cross-scene warp (this entry's own
-> code path) never calls the server-side position resync (`_gm_warp_resync_selected_scene`,
-> CORE-REQUEST-GM-045) because `runtime.py:5304` only matches the same-scene `WARP_ACTION_LABEL`,
-> not either cross-scene label. Running this test before the fix lands writes a corrupted position
-> row to the DB (old `scene_id` + new scene's x/y/z) and keeps corrupting every subsequent write in
-> the session -- irreversible, no backup. Fix tracked as CORE-REQUEST registry row 028 (this round).
-> This warning stays until chief confirms the `runtime.py:5304` fix is on `main` and reopens this
-> entry for normal queue status.
+> ✅ **UNBLOCKED (chief round `69r41m`, R283):** the `20260901_0741_COO-DECISION-gm047-position-corruption-p0-block-gt182-until-fixed.md`
+> warning is lifted. `CORE-REQUEST-GM-047` (registry row 028) landed on `main` in both repos this
+> round -- `pull_request_read get` confirms `pf_bridge#680` and `pirate-force-server#452` both
+> `merged: true` (`merged_at 2026-09-01T01:19:23Z` / `01:27:10Z`), and `runtime.py:5304` on
+> `origin/main` was read directly this round and shows the three-label `_GM_WARP_LABELS` fix in
+> place, not the old single-label check. The position-corruption risk this warning existed for no
+> longer applies -- normal queue status resumes. Registry row 028 marked wired below.
 
 > 🆕 **STATUS round `jd4jqp`:** the no-coordinate live-teleport branch this entry asks for is
 > BUILT and TESTED (`gm/warp_executor.py::warp_no_coords_live_target`/
@@ -9098,13 +9096,18 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 > keep the old stage-only rule per this entry's own nonclaim 4 (scene 278 specifically is a pinned
 > regression test: `tests/test_gm_chat_command_action.py::ProductionCallShapeTests::
 > test_the_default_argument_call_stages_where_gt141_says_it_does`). Full suite green headless
-> (เขียว(cloud sanity), 6128 passed / 0 failed after rebase onto `main` post-`#438`). PR not yet
-> merged at time of writing -- per ADDENDUM v2 rule A this entry's own status stays BLOCKED, not
-> READY, until the PR merges; do not treat this note as a PASS or as "done". Also see `GT-187`'s
+> (เขียว(cloud sanity), 6128 passed / 0 failed after rebase onto `main` post-`#438`). PR merged
+> `2026-09-01T01:19:23Z`/`01:27:10Z` (confirmed round `69r41m`/R283, see UPDATE note below) -- was
+> BLOCKED, now READY. Also see `GT-187`'s
 > own status note this round: `_gm_warp_resync_selected_scene` (CORE-REQUEST-GM-045, merged
 > `pirate-force-server#438`) covers this branch too for free, verified from source -- both
 > `_warp_teleport_action` and this entry's `_warp_teleport_action_no_coords` call the same
 > `_park_warp_target`, which is the only thing that mechanism keys on.
+>
+> 🆕 **UPDATE round `69r41m` (R283):** `CORE-REQUEST-GM-047` merged both repos
+> (`pf_bridge#680`, `pirate-force-server#452`), confirmed via `pull_request_read get` and a direct
+> read of `runtime.py:5304` on `origin/main` (now keys on all three `_GM_WARP_LABELS`). Registry
+> row 028 marked wired. This entry is safe to run per the standard playbook now.
 >
 > Opened by chief this round, directly per Panya's order (not through pf-queue-author --
 > no subagent-spawn tool available in this environment; written by hand in the shape of
@@ -9213,8 +9216,8 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
   5. Does not claim any UI dialog (e.g. a stale NPC conversation box, per `RE-168`) is
      fixed by this change -- if one appears, log it separately, it is not this entry's FAIL.
 - RECHECK: `cd pirate-force-server && git log --all --oneline -i --grep="GM-A" --grep="warp.*no.coord" --grep="GT-182" | head -5`
-  (empty output = the no-coordinate live-spawn branch has not landed yet and this entry's
-  BLOCKED status is still accurate).
+  (non-empty as of round `69r41m`/R283 -- the no-coordinate live-spawn branch AND its
+  CORE-REQUEST-GM-047 position-resync fix are both on `main`; this entry is READY, not BLOCKED).
 - links: `notes_to_chief/20260901_0215_PANYA-ORDER-drop-milestones-all-hands-on-three-things-plus-new-gm-and-ui-work.md`
   (section 3, GM-A) -- `notes_to_chief/consumed/20260829_0542_COO-DECISION-marker-table-is-the-default-spawn-source-with-an-evidence-label.md`
   -- `rounds/GM_20260831_1640_fftpji_warp_cross_scene_live_teleport.md` -- `GT-106-R2`,
