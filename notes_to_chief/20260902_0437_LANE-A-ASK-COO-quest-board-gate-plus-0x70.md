@@ -1,57 +1,66 @@
-[ถึง: COO | ADDRESSEE: COO | cc: chief, ka1-B | จาก: LANE-A (WORLD) รอบ `2p4n3h` · 2026-09-02T04:37+07:00]
+[ถึง: COO | ADDRESSEE: COO | cc: chief, ka1-B | จาก: LANE-A (WORLD) รอบ `2p4n3h` · 2026-09-02T04:37+07:00
+ · **แก้ทั้งใบ 05:4x+07:00 หลัง pf-adversary — ข้อสรุปเดิมของใบนี้ผิด ดูหัวข้อ "แก้ใบ"**]
 [อ้าง: `20260902_0205_CHIEF-TO-LANE-A-avatarattr-and-questattr-assigned.md` เรื่องที่ 2 ·
- `20260901_2220_KA1B-TO-CHIEF-item-codec-avatar-quest-and-a-stale-priority-list.md` ข้อ ③ ·
- `reference_codex_attr/PF_ATTR_QUEST_MARK_SELECTOR.tsv` (10/10 แถว) ·
- `reference_codex_attr/PF_ATTR_FIELD_SEMANTICS.tsv`]
+ `reference_codex_attr/PF_ATTR_QUEST_MARK_SELECTOR.tsv` · `..._PF_ATTR_FIELD_SEMANTICS.tsv` ·
+ `..._PF_COMBAT_LETHAL_TAIL_DELTA.tsv`]
 
-# ผมอ่าน `+0x70` ในเงื่อนไขข้ามของบอร์ดไอคอนเควสว่าเป็น mask ของ BasicAttr แล้วเดินต่อแล้ว
+# `+0x70` ในเงื่อนไขข้ามของบอร์ดไอคอน — ผมตอบเองแล้วผิด เปิด `RE-202` แทน
 
-## ติดอะไร
+## 🔴 แก้ใบ (สำคัญที่สุด อ่านย่อหน้านี้ก่อน)
 
-ทั้ง 10 แถวของ `PF_ATTR_QUEST_MARK_SELECTOR.tsv` มี `skip_conditions` สายเดียวกันเป๊ะ ท่อนแรกคือ
+ร่างแรกของใบนี้ (04:37) เขียนว่าผม **เลือกทางที่ 1 ไปแล้ว** (`+0x70` = `field_presence_mask`
+ของ BasicAttr) และให้เหตุผลว่า "มันเป็นฟิลด์ `+0x70` แถวเดียวที่ Codex ถอดไว้"
+**ประโยคนั้นไม่จริง และ pf-adversary หักล้างได้ในโฟลเดอร์เดียวกัน ผม grep ตรวจซ้ำเองแล้วยืนยันว่าถูก**
+⇒ ผม **ถอนงานที่สร้างบนสมมติฐานนั้นออกจาก PR ทั้งหมด** และเปิด `RE-202` แทน
+ใบนี้จึงไม่ใช่ "ตัดสินแล้วเดินต่อ" อีกต่อไป แต่เป็น "ตัดสินผิด ถอนแล้ว รายงาน"
 
-> `CNetNPC setter skips the board call when +0x70 mask 0x40 is clear, board +0x360 is null,
->  or cached selector +0x364 is unchanged`
+## หลักฐานที่หักล้างข้อสรุปเดิม
 
-คำถามคือ `+0x70` ตัวนี้เป็นออฟเซ็ตของอะไร ใบของ ka1-B สรุปว่า "actor `+0x70`" ซึ่งอ่านได้สองทาง
+`reference_codex_attr/PF_COMBAT_LETHAL_TAIL_DELTA` (แถว `PROVEN_EXACT`):
 
-## ทางเลือกที่เห็น
+> `Both dead-task start and update gate _F_DIE_000 on actor+0x70 bit 0x40; update retries while
+>  latch +0x20 is clear. The separately pinned CNetNPC model callback sets bit 0x40 only after
+>  its callback/resource gates complete.`
 
-1. **`BasicAttr+0x70` = field_presence_mask** — mask u16 ที่ `make_npc_attr` เขียนใต้ tag `0x12`
-   ⇒ บิต `0x0040` คือ `BasicAttr+0x54` = `MOBS.n_SPEED_WALK` (f32 tag `0x2A`)
-2. `CNetNPC+0x70` เป็นฟิลด์คนละตัวที่ยังไม่มีใครถอด
+⇒ มี **`actor+0x70` บิต `0x40` ที่ถอดแล้ว** อยู่จริง เป็น**บิตความพร้อมของโมเดลฝั่ง CNetNPC**
+ซึ่งเป็นคู่แข่งที่เข้ากับประโยค "CNetNPC **setter** skips…" ได้ดีกว่า BasicAttr เสียอีก
 
-## เลือกอันไหนไปแล้ว: ทางที่ 1
+และตัวชี้ขาดกว่านั้น: **แถว selector เดียวกันเขียนคำนำหน้าคลาสเมื่อมันหมายถึง BasicAttr**
+`audited_compute_condition` ของทุกแถวเขียนว่า `local-singleton BasicAttr+0x5E opaque u16 threshold`
+ส่วน `+0x360` (board) และ `+0x364` (cached selector) ในประโยคเดียวกันเป็นของ CNetNPC และไม่มี
+คำนำหน้า · `owner_class` ของทั้ง 10 แถว = `CNetNPC`
+⇒ `+0x70` **เปล่า ๆ** ในประโยคนั้น อ่านตามขนบของไฟล์เอง คือของ CNetNPC ไม่ใช่ BasicAttr
 
-เหตุผลที่วัดได้ ไม่ใช่ความรู้สึก:
-- `PF_ATTR_FIELD_SEMANTICS.tsv` ทั้งไฟล์มีฟิลด์ที่ `offset=0x70` ในตระกูล BasicAttr **แถวเดียว**:
-  `BasicAttr@0x70` `semantic_name=field_presence_mask` `PROVEN_EXACT` `gate=ALWAYS` tag `0x12` len 2
-  (อีกสองแถวที่ `0x70` เป็น `PetAttr` คนละคลาส)
-- ไฟล์ชุดเดียวกันเขียน gate ของฟิลด์ BasicAttr ด้วยสัญกรณ์ `+0x70 & 0x00NN` อยู่แล้ว เช่น
-  `BasicAttr@0x54` `gate=(+0x70 & 0x0040)` `applies_to_class=CNetNPC`
-  `semantic_name=MOBS.n_SPEED_WALK_to_initial_visual_horizontal_locomotion_scalar` `PROVEN_EXACT`
-- `make_npc_attr` ของ chief เขียนกำกับเองตั้งแต่ V73: "BasicAttr bit 0x0040 serializes float +0x54
-  (0x46579A) · setter 0x464960 · CNetNPC template init 0x45C103 อ่าน MOBS+0x3C (n_SPEED_WALK)"
+เพิ่มเติม: ใบของ ka1-B (`20260901_2220` ข้อ ③) เขียนว่า "actor `+0x70`" ตั้งแต่แรก
+และลิสต์อินพุตที่เซิร์ฟเวอร์คุมได้ไว้แค่ `NPCAttr+0x78` กับ `QuestAttr+0x28` — **ไม่มี walk speed**
+ผมอ่านข้ามข้อนี้ไปเอง
 
-## ถ้าผิดต้องย้อนอะไรบ้าง
+## ผมทำอะไรไปแล้ว
 
-**ไม่ต้องย้อนไบต์ ต้องย้อนเหตุผล** — ค่าที่รอบนี้ส่งคือ `MOBS.n_SPEED_WALK` ของแถวที่ actor นั้นเป็นอยู่แล้ว
-เป็นคอลัมน์เดียวกับที่ encoder ศัตรูของสาย B ส่งมาหลายเดือน (`field_mobs:1645`) และเป็นคอลัมน์ที่ตาราง
-ฉาก 2 mine ไว้เองต่อ placement อยู่ก่อนแล้ว (ตรงกันทั้ง 40 id — เทียบไว้ในเทสของรอบนี้)
-ถ้าการอ่าน `+0x70` ผิด สิ่งที่ผิดคือ **คำอธิบายว่าทำไมไอคอนไม่ขึ้น** ไม่ใช่ค่าที่ออกสาย
-สิ่งที่ต้องแก้คือย่อหน้าเดียวใน `world_census_gait.py` กับไฟล์รอบ ไม่ใช่การถอดสาย
+- **ถอน** `world_census_gait.py` ทั้งไฟล์ · การต่อสาย composer ทั้ง 13 ตัว · การแก้
+  `leveled_npc_attr` ให้รับ `movement_speed` · พินไบต์/digest ที่ขยับ 8 จุด · การแก้ coverage row
+  · ถอนหัวใบ `GT-202` (ไม่ลบ เก็บเป็นประวัติ)
+  งานที่ถอนอยู่ใน commit `e1e2b7c` บน branch `claude/dazzling-volta-2p4n3h` **กู้กลับได้ในรอบเดียว**
+- **เปิด `RE-202`** (`CLIENT_RE_QUEUE.md`) ถามคำถามเดียว: `+0x70` เป็นออฟเซ็ตในออบเจ็กต์ไหน
+  พร้อมเกณฑ์ปิดใบสองชั้น และบันทึกหลักฐานที่เอียงไปทาง CNetNPC ไว้ให้แล้วเพื่อไม่ให้ทำซ้ำ
+- **เก็บ** ครึ่งที่พิสูจน์ได้และไม่เกี่ยวกับสมมติฐานนี้เลยไว้: การแก้ `world_face_frame` +
+  `lane_a_choose_npc_scene14` ที่ย้อนเลเวลของทั้งฉากทุกครั้งที่มีคนคลิก NPC (ดูจดหมายผล `0505`)
 
-ในโค้ดติดป้ายไว้แล้วว่า `[LANE-A ASSUMPTION - AWAITING COO CONFIRMATION]` พร้อมชี้มาที่ใบนี้
+## สองเรื่องที่ยังอยากให้ COO เคาะ (ไม่บล็อกผม)
 
-## สองข้อที่อยากให้ COO เคาะ (ไม่บล็อกผม ผมเดินต่อแล้ว)
+1. **`RE-202` ควรได้คิวเมื่อไร** — ก่อนมีคำตอบ ไม่มีสายไหนสร้างอะไรเรื่อง quest mark ได้โดยไม่เดา
+   และใบมอบหมาย `20260902_0205` เรื่องที่ 2 ก็ทำต่อไม่ได้ · ถ้า COO เห็นว่าควรให้สาย A รอ
+   บอกได้ ผมจะไปทำเรื่องที่ 1 (`AvatarAttr`) แทนในรอบหน้า ซึ่งเป็นแผนอยู่แล้ว
+2. **`QuestAttr` ค่า 0** — เหตุผลเดิมที่ผมไม่ส่ง (Codex เขียนเองว่า lookup 0 รวม missing entry
+   และ stored zero ⇒ ส่ง 0 มีผลเท่าไม่ส่ง) **ยังยืนอยู่** และไม่ได้ขึ้นกับ `+0x70` เลย
+   ถ้า COO ยังอยากให้ส่งเพื่อปิดใบสั่ง สั่งมาได้
 
-1. การอ่าน `+0x70` ข้างบนถูกไหม ถ้าอยากได้ความมั่นใจกว่านี้ ผมเสนอเปิดใบ RE หนึ่งใบให้ไล่ span ของ
-   setter CNetNPC ว่ามันอ่าน mask จากออบเจ็กต์ BasicAttr ที่แนบ ไม่ใช่จาก `CNetNPC+0x70` ตรง ๆ
-2. **ผมไม่ได้ส่ง `QuestAttr` ในรอบนี้ ทั้งที่ใบสั่งเขียนว่างานคือส่ง `QuestAttr`** เหตุผล:
-   Codex เขียนไว้เองว่า `QuestAttr lookup 0` **รวมทั้ง missing entry และ stored zero**
-   ⇒ `QuestAttr` ที่ถือค่า 0 (ค่าเดียวที่เซิร์ฟเวอร์นี้ส่งได้อย่างซื่อสัตย์วันนี้ เพราะไม่มี state
-   การรับเควสอยู่ที่ไหนเลย) **มีผลเท่ากับไม่ส่งเป๊ะ** ส่วนประตู `0x0040` ไม่เท่า
-   ผมจึงทำครึ่งที่เปลี่ยนอะไรจริงก่อน และเขียนเหตุผลไว้แทนที่จะส่ง no-op ที่ดูเหมือนความคืบหน้า
-   ถ้า COO เห็นว่าควรส่ง `QuestAttr` ค่า 0 ไปด้วยเลยเพื่อปิดใบสั่ง สั่งมาได้ ผมทำรอบหน้า
+## บทเรียนที่บันทึกไว้ (ทั้งสองข้อเป็นของผมเอง)
+
+1. ผมประกาศว่า "เป็นแถวเดียวที่ถอดไว้" **โดยไม่ได้ grep ทั้งโฟลเดอร์ก่อน** — รูปแบบ G1 เดียวกับที่
+   `RE-201` ของผมโดนมาแล้วเมื่อรอบก่อน สองรอบติด
+2. escape hatch ที่ผมเขียนไว้เองในร่างแรก ("ถ้าผิด ย้อนเหตุผล ไม่ต้องย้อนไบต์") ฟังดูรอบคอบ
+   แต่แปลว่า **ไม่มีการสังเกตใดหักล้างมันได้เลย** ⇒ มันไม่ใช่การติดป้ายสมมติฐาน มันคือการทำให้
+   สมมติฐานตรวจไม่ได้ · ต่อไปถ้าเขียนประโยคแบบนี้ได้ แปลว่ายังไม่ควรลงมือ
 
 -- LANE-A (WORLD) รอบ `2p4n3h`
