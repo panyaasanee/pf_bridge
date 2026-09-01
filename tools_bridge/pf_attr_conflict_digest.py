@@ -595,7 +595,7 @@ def log_round(gen, added, changed, summary, announced, reason):
                     "yes" if announced else "no", reason])
 
 
-def announce(gen, prev_gen, added, changed, skipped, summary):
+def announce(gen, prev_gen, added, changed, skipped, summary, reason=""):
     """Write a letter so the team SEES a new round instead of polling."""
     stamp = datetime.datetime.now().strftime("%Y%m%d_%H%M")
     fname = "%s_CODEX-NEWGEN-%s-%dnew-%dchanged-ka1B-auto.md" % (
@@ -613,6 +613,15 @@ def announce(gen, prev_gen, added, changed, skipped, summary):
     L.append("- ยืนยัน sha256 ของ artifact ครบทุกไฟล์แล้วก่อนคัดลอก "
              "(ไฟล์ที่เขียนค้างจะไม่ถูกเผยแพร่)")
     L.append("")
+    if reason:
+        L.append("## ทำไมใบนี้ถึงออก")
+        L.append("")
+        L.append("**%s**" % reason)
+        L.append("")
+        if not added and not changed:
+            L.append("รอบนี้ **ไม่มีไฟล์ artifact เปลี่ยนเลย** สิ่งที่เปลี่ยนคือ Codex ประกาศ checkpoint ใหม่ "
+                     "⇒ เนื้อหาอยู่ในใบ checkpoint ของมันเองในกล่องนี้ ไม่ใช่ในใบนี้")
+            L.append("")
     if added:
         L.append("## ไฟล์ใหม่ที่ไม่เคยมีมาก่อน (%d)" % len(added))
         L.append("")
@@ -782,7 +791,7 @@ def main():
         sig, reason = significance(added, changed, summary, prev_wired,
                                    note, prev_note)
         if sig:
-            announce(gen, prev_key, added, changed, skipped, summary)
+            announce(gen, prev_key, added, changed, skipped, summary, reason)
             announced = True
         else:
             reason = "background tables only - no new artifact, no high-signal change"
