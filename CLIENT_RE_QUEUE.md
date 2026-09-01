@@ -3467,3 +3467,21 @@ nonclaim ⑦ เรื่อง variant D) · `pf_bridge/archive/CLIENT_RE_QUEUE
 `pirate-force-server/src/pirateforce_foundation/logout_hypothesis.py` (variant A/B ที่มีอยู่แล้ว) ·
 `notes_to_chief/20260901_0302_FROM_CHIEF_R278_priority-reorg-panya-order-P1-P2-P3-plus-new-builds.md`
 (มอบหมาย UI-A/UI-B ให้สาย A)
+
+## RE-133 FIELD-MOB-AI-TABLES-BG0015-REGEN-001 [OPENED-IN-ERROR, CLOSED same round -- see correction below] regenerate `field_mob_ai_tables` for Bg0015 (`chief รอบ ts0deo` (R282))
+
+**แก้ทันทีในรอบเดียวกัน (pf-adversary รีวิวก่อน commit จับได้):** ใบนี้เปิดโดยอ้างจดหมาย
+`notes_to_chief/20260901_0106_LANE-B-STATUS-bg0015-combat-ledger-gap-*.md` (จาก 01:06) โดยไม่ได้
+เช็คก่อนว่ามีจดหมายจากสาย B รอบถัดมา (`n8kq4r`, `notes_to_chief/consumed/20260901_0400_LANE-B-
+STATUS-bg0015-ai-table-gap-mined-and-closed.md`, 04:00) ที่ปิดช่องว่างนี้ไปแล้วจริง **ก่อน**รอบนี้
+(`n8kq4r` merge แล้วบน `main`, commit `n8kq4r` ancestor ของ HEAD) — สาเหตุไม่ใช่ gamedata หายบนบริดจ์
+เลย แต่เป็นเครื่องมือ mine (`tools/pf_mine_mob_ai_rows.py`) ไม่เคยถูกขอให้อ่านโมดูล
+`field_mob_tables_bg0015` เพิ่มเข้า union แก้จุดเดียวใน `src/` (ไม่ต้องแตะบริดจ์/gamedata นอกที่
+commit ไว้แล้วเลย) แล้วรัน miner ใหม่ ยืนยันสดที่ HEAD รอบนี้เอง (`PYTHONPATH=src python3 -c
+"from pirateforce_foundation import mob_combat_bg0015_gates as g; print(g.
+ai_rows_missing_for_scene14())"` → `missing_combat: ()`, `missing_wander: ()`,
+`open_register_refusal_for_scene14()` → `None`) — **ใบนี้ไม่ควรถูกเปิดเลย** ทิ้งไว้เป็นบันทึกความ
+ผิดพลาดของ chief รอบนี้ ไม่ใช่งานที่ต้องทำต่อ ตัวคำถามจริงที่ยังไม่ตอบ (เจ้าของ gate 1/registration
+order, owner ruling ของ 7 template) อยู่ใน `notes_to_chief/20260901_0807_CHIEF-REPLY-*.md`
+(แก้ไขแล้วรอบเดียวกัน) ไม่ใช่ใบนี้ **บันทึก `IMAGE_ACCESS_COST.tsv` ที่เกี่ยวข้องถูกลบออกแล้วเช่นกัน
+เพราะไม่มีต้นทุนจริงเกิดขึ้น**

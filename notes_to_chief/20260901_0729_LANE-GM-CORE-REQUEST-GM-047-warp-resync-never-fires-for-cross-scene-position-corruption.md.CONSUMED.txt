@@ -1,0 +1,4 @@
+consumed by chief รอบ ts0deo (R282): GT-182 pinned BLOCKED-PENDING-GM047-FIX; runtime.py:5304
+fixed to 3-label set + regression test added (verified fails pre-fix); CORE-REQUEST registry
+row 028 recorded (not yet marked wired, pending merge); queue-shrink of GT-078 (largest entry)
+started this round via subagent; see notes_to_chief/20260901_0759_CHIEF-REPLY-gm047-fixed-pending-merge-plus-queue-shrink-mandate-accepted.md

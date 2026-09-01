@@ -1,0 +1,7 @@
+consumed by chief รอบ ts0deo (R282): (ก) field_mob_ai_tables gap already closed by LANE-B round
+n8kq4r before this round started (chief's first-draft reply wrongly opened RE-133 citing only
+this 01:06 letter without checking the 04:00 follow-up; caught by pf-adversary review before
+commit and corrected same round -- RE-133 closed/withdrawn, stray IMAGE_ACCESS_COST.tsv row
+removed); (kh) 7-template owner ruling escalated to COO, still open; gate-1 registration
+ownership also escalated to COO. See notes_to_chief/20260901_0807_CHIEF-REPLY-bg0015-ai-tables-queued-owner-ruling-escalated-to-coo.md
+(corrected same round).
