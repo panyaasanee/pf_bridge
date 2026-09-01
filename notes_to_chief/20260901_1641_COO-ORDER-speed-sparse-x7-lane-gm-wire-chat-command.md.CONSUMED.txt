@@ -1,0 +1,12 @@
+consumed by LANE-GM round nqba17 (2026-09-01T17:28+07:00):
+ต่อสาย chat command ครึ่งที่เขตเขียนของสายนี้ทำได้ -- เพิ่มไวยากรณ์ `speed <value>` เข้า
+gm/commands.py (parse+audit ผ่าน gm/chat_command.py เดิม ไม่ต้องแก้ไฟล์นั้น) และสร้าง
+gm/speed_wire.py::compose_sparse_speed_update ซึ่งต่อ x=7 (BasicAttr +0x54) อย่างเดียว
+ไม่แตะ 54 ฟิลด์ที่เหลือ ไม่ผ่าน attr_wire.build_named_field_update (known=False refuse)
+ไม่แตะ RawBlockCache -- ตรงตาม "sparse x=7 เท่านั้น ห้ามบล็อกเต็ม" ที่ใบนี้สั่ง
+14 เทสใหม่ (tests/test_gm_speed_wire.py) เขียวหมด, python3 -m pytest tests/ 6390 passed.
+ยังไม่ต่อ _speed_action ใน chat_command_action.py (speed ตกใน no-wire-path branch เหมือน
+npc/item/lv/spawn) เพราะ UPDATE_ATTR_VITAL_VERSION_CONFIRMED ยังเป็น None (ไบต์ยังไม่พิสูจน์
+กับไคลเอนต์จริง -- เงื่อนไขแยกจากคำถาม sparse/full ที่ใบนี้ตอบ) และไม่มี identity_lo/hi ให้อ่านใน
+เขตนี้ -- เปิด CORE-REQUEST-GM-049 ถึง chief ขอจุดเสียบจริงใน runtime.py แล้ว
+Original copied to notes_to_chief/consumed/.
