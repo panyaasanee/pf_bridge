@@ -584,11 +584,39 @@ if ($behind -gt 0 -and $ahead -eq 0) {
 # [4] bridge push - allowlist only, explicit adds, no deletions, ever
 # ---------------------------------------------------------------------------
 
+# 2026-09-01 ~13:0x - THIRD correction, same shape as the two below, ordered by
+# Panya after this branch blacked the bridge out for a full hour (11:18-12:18):
+# the Codex mirror routine RENAMED its own marker
+# notes_to_chief/reference_codex_attr/.skipped_for_game_lock -> .done.<stamp>,
+# which git reports as one deletion, and this branch then refused EVERY commit
+# every 2 minutes.  35 candidates piled up - letters, round files and NOW.md,
+# the file all six routine prompts had just been pointed at - and nothing from
+# the bridge reached main while every surface still looked healthy.
+#
+# A deletion still never gets committed.  That invariant does NOT live here and
+# never did: deleted paths go to $deletions and never enter $candidates, the
+# index is rebuilt with read-tree HEAD, every path is added explicitly BY NAME,
+# and the staged tree is re-checked for ^D below with REFUSED_STAGED_DELETION
+# aborting the round if one ever appears.  This block only decided whether one
+# skipped path may also cancel everything CLEAN standing beside it.  The answer
+# is the same one already ruled for the size/proprietary guard directly below,
+# on 2026-08-24, in that block's own words: 'Skipping ONLY the offending paths
+# is strictly safer - the bad file still never reaches the remote and everything
+# clean keeps moving.  The guard is per-file, so per-file is honest.'
+#
+# KNOWN AND ACCEPTED: for a rename, the new name commits while the old name
+# stays on main, so main briefly carries both.  That is a visible duplicate, not
+# data loss, and it self-heals when a human commits the deletion deliberately.
+# RESIDUAL, deliberately not changed in the same edit: the SelfCheck verdict
+# above still reports SELFCHECK_WOULD_REFUSE when only a deletion is present.
+# That is now pessimistic rather than wrong, and it has consumers this edit did
+# not audit - chief should judge it separately.
+$deletionsSkipped = 0
 if ($deletions.Count -gt 0) {
-    Shout '[4]' ('refusing the whole commit: ' + $deletions.Count + ' deletion or rename inside the allowlist')
+    $deletionsSkipped = $deletions.Count
+    Shout '[4]' ('skipping ' + $deletions.Count + ' deletion/rename(s) inside the allowlist - everything clean still commits')
     foreach ($d in $deletions) { Log '[4]' ('  ! ' + $d) }
     Log '[4]' 'a deletion is never committed by this script.  Move the file back, or let a human commit it deliberately.'
-    Finish 5 'REFUSED_DELETION' ($deletions.Count.ToString() + ' deletion(s)')
 }
 
 # A file that fails the guard cancels the COMMIT.  It must not cancel the ROUND:
@@ -935,4 +963,4 @@ if ((Test-Path -LiteralPath $attnPath) -and (-not $DryRun)) {
     Log '[7]' 'cleared SYNC_ATTENTION.txt - the round completed'
 }
 
-Finish 0 'OK' ('committed=' + $committed + ' newletters=' + $newOrders.Count)
+Finish 0 'OK' ('committed=' + $committed + ' newletters=' + $newOrders.Count + ' deletions_skipped=' + $deletionsSkipped)
