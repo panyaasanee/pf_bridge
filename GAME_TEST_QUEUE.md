@@ -6034,296 +6034,50 @@ valid, informative negative, not a test failure). Name-label colours per the man
 
 ```
 
-## GT-127 GM-003 CHAT-COMMAND-DOOR-001: GM พิมพ์คำสั่งลง**กล่องแชทธรรมดา**ของเกม (ไม่ใช่หน้าต่าง `BT_GM`/`GMUI_BASIC` ที่คลิกแล้วเงียบ) แล้วเซิร์ฟเวอร์อ่านคำสั่งนั้นได้จริงไหม -- ตัดสินที่ ndjson audit log ไม่ใช่ผลบนจอ  [~~HOLD (เกณฑ์รีเฟรชแล้ว รอชุดของ chief)~~ **READY — HOLD ปลดโดย chief รอบ `3ru85y` (R243)** -- ตั้งโดย LANE-GM (เจ้าของใบ) รอบ `xk4wmz` 2026-08-29T01:1x+07:00 · ~~READY~~ ของรอบ `vvxkft` ยังถูกต้องเรื่องการเดินสาย แต่ **เกณฑ์**ล้าสมัยหลัง `GM-029` merge ⇒ job 1331 ของผู้เทสกะ3-B abort ฟรีหนึ่งรอบ (ใบ `20260829_0056`) · รอบนี้เขียน **ด่าน 2 และ P1/P2/P4 ใหม่ทั้งหมด** แล้ว (ดูข้างล่าง) เหลือรอสองอย่างที่ไม่ใช่ของ LANE-GM ก่อนบูต ทั้งคู่เป็นของ chief ตาม `COO-DECISION 20260829_0041`: (1) ต่อ kill-switch กลับทาง (ข) -- จุดเรียกใน `runtime.py` ต้องอ่าน `production_allowed` **ก่อน** เรียก `make_gm_chat_command_action` (กำหนด 2026-08-29 12:00 +07:00) · (2) ทำ audit ให้ซื่อสัตย์ -- `capture/gm_command_log.ndjson` ต้องบันทึกว่า **ต่อคิว action จริงหรือไม่** ไม่ใช่เขียน accepted เท่ากันทั้งกรณีที่ส่งและกรณีที่เกตปิด (กำหนด 2026-08-29 23:59 +07:00) 🔴 ข้อ (2) สำคัญกับใบนี้เป็นพิเศษเพราะ **ใบนี้ตัดสินด้วยไฟล์นั้น** · ปลด HOLD ได้ทันทีที่ด่าน 2 บรรทัดที่ห้า grep เจอ และ chief แจ้งว่าชุด audit ลง main แล้ว · **อัปเดตรอบ `nz0qt2` 2026-08-29T02:3x+07:00 (LANE-GM เจ้าของใบ) — สองข้อ วัดด้วย GitHub API ไม่ใช่ด้วยจดหมาย:** (1) 🔴 **สวิตช์ยังไม่อยู่บน main** — `pirate-force-server#218` (สวิตช์ทาง (ข) ของ chief) มีสถานะ `state=closed merged=false` ⇒ `grep module_production_allowed` บน main `b79bb87` = **0 hit** ทั้ง `runtime.py` และ `lane_hooks/__init__.py` · จดหมาย `20260829_0103` ของ chief เขียนว่า "PR #218 รอ merge" ซึ่งเป็นจริงตอนเขียน แต่ PR ถูกปิดโดยไม่ merge หลังจากนั้น ⇒ ข้อ (1) **ยังบล็อกใบนี้อยู่** และเป็นงานกู้ของ chief ตาม ADDENDUM v2 ข้อ A (branch `claude/bold-dijkstra-wi1m62` ยังอยู่) · (2) ครึ่งของ audit ที่เป็นเขตของ LANE-GM (`CORE-REQUEST-GM-032` ข้อ 1-2: แถว `outcome`) ~~**push แล้วรอ merge PR `pirate-force-server#223`** ยังไม่ใช่ "อยู่บน main"~~ **อัปเดตรอบ `ank2vl` 2026-08-29T04:1x+07:00 (LANE-GM เจ้าของใบ) วัดด้วย GitHub API ไม่ใช่จดหมาย: `#223` `merged=true` 2026-08-28T20:02:41Z ⇒ แถว `outcome` อยู่บน main แล้ว · และตัวบล็อกข้อ (1) ข้างบนก็หมดไปด้วย — `08d2c6d` (สวิตช์ `module_production_allowed` ของ chief) อยู่บน `origin/main` แล้ว `git grep` เจอทั้ง `runtime.py` และ `lane_hooks/__init__.py` ⇒ เหลือเฉพาะข้อ 3 ของ GM-032 (คำว่า `queued` ที่ซื่อสัตย์) ซึ่งเป็นของ chief** — ครึ่งที่เหลือ (ข้อ 3 คำว่า `queued` ที่ซื่อสัตย์ = ยืนยันว่า action ถูก append จริง) ยังเป็นของ chief · **ผลต่อการนับแถว ndjson ของใบนี้อยู่ที่ P1 อ่านก่อนบูต** · ~~BLOCKED-ON-WIRING -- `runtime.py` วันนี้มี `lane_hooks.fire()` **จุดเดียว** (สาขา `0x51E9` ที่ `runtime.py:4824`) และ **ไม่มี**จุดแทรกที่สาขา `0xAC52` ⇒ hook ไม่เคยยิงแม้แต่ครั้งเดียว~~ **ไม่จริงอีกต่อไป:** chief ต่อสายให้แล้วตาม `CORE-REQUEST-GM-028` -- จุดเรียกอยู่บน main ที่ `runtime.py:4784` (merge `d139f12` = PR #201, จดหมาย `notes_to_chief/20260828_1845_CHIEF-REPLY-CORE-REQUEST-GM-028-chat-point-wired.md`) ⇒ **ด่าน 2 บรรทัดแรกต้อง grep เจอแล้ว** ถ้ายังไม่เจอ แปลว่า `<SHA>` ที่ resolve ได้เก่ากว่า `d139f12` ไม่ใช่ว่าใบนี้บล็อก · สองข้อที่ chief ตั้งใจทำต่างจากจุด `0x51E9` และมีผลต่อเกณฑ์ใบนี้: (1) **ไม่มี `return`** เฟรมยังไหลต่อทางเดิมทุกไบต์ ⇒ บรรทัดแชทต้องแสดงผลปกติ (ตรงกับ P3 อยู่แล้ว) (2) **ไม่บวก `rx_frames`** ⇒ สำมะโนเฟรมต้องไม่ขยับเพราะ hook · ข้อจำกัดที่ต้องเขียนลงในผล: `parse_outer` ของ v141 ถอด nested vital **ตัวแรก** แล้วส่งไบต์ที่เหลือทั้งหมดเป็น `nested_payload` ⇒ ถ้าเฟรมหนึ่งมี vital มากกว่าหนึ่งตัว hook จะได้ payload ที่ไม่ใช่บอดี้แชทล้วน และ `handle_local_talk_chat` จะ**ปฏิเสธเพราะรูปไม่ตรง (refusal ไม่ใช่ crash)** -- เฟรมแชทที่เคย capture ทั้งสามใบ (GT-006/GT-009) เป็น `vital_count == 1` ทั้งหมด จึงยังไม่เคยเจอกรณีนี้จริง **ถ้าเจอ `refused_*` ทั้งที่พิมพ์คำสั่งถูก ให้จด `vital_count` ของเฟรมนั้นก่อนสรุปว่า FAIL** · ~~`CORE-REQUEST-GM-028` (`notes_to_chief`, รอบนี้) ขอสามบรรทัดนั้นจาก chief~~ **แทนที่ด้วย `CORE-REQUEST-GM-029` (รอบ `gr2q9j`, 2026-08-28T18:2x+07:00)** -- GM-028 ขอ `fire()` ซึ่งตามสัญญาของตัวมันเอง **ไม่คืนค่า** ⇒ อ่านบรรทัดได้แต่ส่งไบต์กลับไม่ได้ตลอดกาล · GM-029 ขอจุดเดียวที่ **คืน action** รูปเดียวกับ `gm_state_action` (`runtime.py:5122/5331`) ⇒ ครอบทั้งใบนี้และ `GT-128` · 🔴 **wire ได้จุดเดียวเท่านั้น** ถ้าเผลอวางทั้งสองแบบ = authorize ซ้ำ + ndjson ซ้ำแถว + กิน rate limit สองเท่า · 🔴 ห้ามบูตใบนี้จนกว่าด่าน 2 จะ grep เจอจุดเรียกจริงบน `main` · **อัปเดต chief R221 (`950mjq`) 2026-08-29T04:0x+07:00 — บล็อกข้อ (1) ปิดแล้ว วัดบน main ไม่ใช่บน branch:** สวิตช์ทาง (ข) **อยู่บน main แล้ว** ที่ `src/pirateforce_foundation/runtime.py:4874` บน `origin/main` = `4d99b77` (เข้ามาทาง `pirate-force-server#222` ซึ่ง merge แล้ว หลังจาก `#218` ถูกปิดแบบไม่ merge) · รูปแบบตรงกับที่ `COO-DECISION 0041` สั่ง: `module_production_allowed("lane_gm_chat_command")` เป็น**เงื่อนไขที่สามของ `if` เอง** ⇒ อ่าน `production_allowed` **ก่อน** เรียก `make_gm_chat_command_action` จริง · 🔴🔴 **ด่าน 2 ของใบนี้ ให้ใช้ grep บรรทัดนี้เท่านั้น — ห้าม grep คำว่า `production_allowed` เปล่า ๆ:** `grep -n 'lane_hooks\.module_production_allowed("lane_gm_chat_command")' src/pirateforce_foundation/runtime.py` ⇒ **ต้องได้ 1 hit (บรรทัด 4874)** [วัดแล้ว chief R221] · เหตุผลที่ต้องเจาะจง: grep คำเปล่าให้ **7 hit** บนไฟล์เดียวกัน ซึ่ง **5 ใน 7 เป็นคอมเมนต์กับสตริง** (บรรทัด 243, 4881, 4886, 4999 และ label ที่ 5018/5021) ⇒ ผ่านด่านได้ทั้งที่โค้ดจริงหายไป ซึ่งเป็นกับดักแบบเดียวกับที่เผา job 1331 · **บล็อกข้อ (2) (audit ซื่อสัตย์ / GM-032 ข้อ 3) ยังเปิดอยู่ และยังเป็นของ chief** ⇒ ใบนี้ยัง HOLD ด้วยเหตุข้อ (2) ข้อเดียว · **อัปเดตรอบ `q9i00s` 2026-08-30T08:35+07:00 (LANE-GM เจ้าของใบ) วัดสดจากซอร์ส ไม่ใช่จากจดหมาย:** เส้นตาย COO 23:59 (29 ส.ค.) ของข้อ (2) เลยมาแล้ว ~9 ชม. `src/pirateforce_foundation/gm/commands.py:146-155` — `OUTCOME_QUEUED` ยังเป็น "RESERVED, AND UNREACHABLE ON PURPOSE" ตามคอมเมนต์ในซอร์สเอง จุด append จริง `runtime.py:6674-6679` ยังไม่มีทางรายงานกลับ ⇒ ไม่มีอะไรเปลี่ยนตั้งแต่ chief รับใบ `GM-032` ข้อ 3 ไว้ที่รอบ `8tpw8k`/R219 · เปิด `CORE-REQUEST-GM-040` ยกอายุถึง chief แล้ว (`notes_to_chief/20260830_0835_...md`) ใบนี้ยัง HOLD เหมือนเดิม ไม่มีอะไรให้ปลด · **อัปเดต chief รอบ `hd6tac` (R237) 2026-08-30T~10:xx+07:00 — ครึ่งเดียวของ GM-040 เสร็จ ไม่ปลด HOLD:** `runtime.py`'s append site เช็ค `self._gm_action_queued_confirm` (คู่ `(action, callback)` ที่จับคู่ด้วย `is` กับ `gm_action` ตัวจริง ไม่ใช่แค่ callback เปล่า — pf-adversary หัก D1/D2 ของแบบ flag เปล่าไปแล้วรอบนี้เอง) ทันทีหลัง `actions = actions + [gm_action]` แล้ว แต่ **ไม่มีอะไรตั้งค่านั้นวันนี้** — นี่คือจุดเสียบที่ chief เป็นเจ้าของเท่านั้น (runtime.py) ครึ่งที่เหลือ (`gm/chat_command_action.py` ตั้ง `session._gm_action_queued_confirm = (action, callback)` ก่อน return action tuple ตัวเดียวกัน แล้วเขียน `OUTCOME_QUEUED` ใน callback) ยังเป็นของ LANE-GM ต่อสายเองใน `gm/` ตามกติกา lane_hooks · เทส 6 ใบพิสูจน์จุดเสียบใน `tests/test_gm_chat_command_dispatch_wiring.py::ActionQueuedConfirmHookTests` -> `rounds/R237_hd6tac_core-request-gm-040-append-confirm-hook.md` · **อัปเดต chief รอบ `3ru85y` (R243) 2026-08-30T~16:xx+07:00 — HOLD ปลดแล้ว, wire/DB PASS, client-observable ยังไม่วัด:** LANE-GM's ครึ่งที่เหลือ (`gm/chat_command_action.py` ตั้ง `session._gm_action_queued_confirm` + เขียน `OUTCOME_QUEUED` ในคอลแบ็ก) ยืนยันอยู่บน main แล้วทั้งจากใบ `20260830_1318_LANE-GM-STATUS-verify-only-gt128-confirmed.md` (LANE-GM เจ้าของใบ วัดเอง) และจากการรันเทสสดของรอบนี้: `tests/test_gm_chat_command_dispatch_wiring.py::QueuedRowLandsEndToEndTests` ผ่านครบผ่าน dispatcher จริง (ไม่ใช่ mock) ยืนยันว่าคำสั่ง GM ที่ไปถึง `actions = actions + [gm_action]` เขียนแถว ndjson `outcome:queued` ที่ซื่อสัตย์จริง ⇒ **wire/DB: PASS** (ทั้งสองครึ่งของ `CORE-REQUEST-GM-032` ข้อ 1-3 อยู่บน main) · **client-observable: ยังไม่มีใครวัด** — ใบนี้ตัดสินที่ ndjson ตามที่หัวใบเขียนเอง ไม่ต้องรอ attended แต่ **รอบนี้ไม่ได้เดินด่าน 2/P1-P4 เต็มรูปแบบ** (เกินขอบเขตที่อ่านจบในรอบนี้) ⇒ [ไม่อ้าง] ว่าใบนี้เกรด PASS แล้ว มีแค่ตัวบล็อกที่ทำให้ HOLD ถูกปลด · รอบถัดไปที่แตะใบนี้: เดินด่าน 2 เต็ม + P1-P4 แล้วเกรดจริง · **อัปเดตรอบ `noixtz` 2026-08-30T17:4x+07:00 (LANE-GM เจ้าของใบ) — เดินด่าน 2 เต็ม + P1-P4 จบแล้วโดย attended กะ1-A (เจ้าของขับ UI เอง), เกรด 🟢 PASS ชั้น wire (ชั้นที่ใบนี้ตัดสินเอง):** ผล `notes_to_chief/20260830_1731_GT127-GT134-RESULT-both-PASS-chat-door-open-and-first-eyes-on-hell-volcano.md` (`OBSERVER_CONFIRMED: 2026-08-30T17:1x+07:00`, `BOOT_COMMIT 57490434` = main HEAD ไร้แฟล็ก) — `capture/gm_command_log.ndjson` = 8 แถว (4 คำสั่งที่รู้จัก `/lv` `/warp 2` `/say` `/warp 14` × 2 แถว parse+outcome ตรงเกณฑ์ "คอมมิตใหม่" เป๊ะ, ทุกแถว `executed:false`) · ประโยคธรรมดา `สวัสดี` และคำสั่งผิด `/notacommand xyz` = 0 แถว ตามที่คาด (ไม่ log สิ่งที่ไม่ใช่คำสั่ง) · P3 (บนจอ) ✅ เจ้าของยืนยันไม่มีอะไรเกิดขึ้นบนจอเลย ตรงคำทำนายของใบ · P4 (ตัวหักล้าง) ไม่เกิด คอนโซลไม่เงียบ ⇒ จุดเรียกต่อสายจริง · P2 (บัญชีนอก allowlist) ทำได้แค่ 2 ใน 3 ข้อ — เจ้าของไม่มีบัญชีที่สอง [ไม่อ้าง] ว่าข้อนี้วัดครบ · **🟢 GT-127 CLOSED PASS (wire/DB layer, ตามเกณฑ์เดิมของใบเอง — ndjson audit ไม่ใช่ผลบนจอ)** — ปิดหัวใบโดย LANE-GM (เจ้าของใบ) รอบ `noixtz`, consumed stub: `notes_to_chief/20260830_1731_*.CONSUMED.txt`]
-
-> เลขใบ: ตัวนับเดียวร่วมกับ `CLIENT_RE_QUEUE.md`, prefix สองแบบ ห้ามแยกตัวนับ. รอบนี้ (LANE-GM รอบ `hs9m2r`,
-> 2026-08-28) จอง `RE-126` ที่ `CLIENT_RE_QUEUE.md` และ `GT-127` ที่ไฟล์นี้. grep ยืนยันก่อนจอง:
-> `GT-126` / `GT-127` / `RE-126` = 0 hit ทั้งสองไฟล์. เลขสูงสุดก่อนหน้า = `GT-124` / `RE-125`.
-> ใบเก่าทุกใบอยู่ที่เดิม ไม่ถูกแตะ ไม่ถูกย้าย -- ใบนี้เป็นใบใหม่ ไม่แทนที่ใบใด.
-
-### ที่มา (ยืนยันแล้ว -- ห้าม re-derive ระหว่างรอบ)
-- ไคลเอนต์ส่งทุกบรรทัดที่พิมพ์ในกล่องแชทเป็น vital `0xAC52` `Channel_LocalTalkMessageVital`. เพย์โหลด =
-  wstring#1 (speaker, ฝั่ง client->server ว่างเสมอ) + wstring#2 (ข้อความที่พิมพ์); แต่ละ wstring =
-  tag `0x48` + u32 LE ความยาวไบต์ + UTF-16LE ล้วน ไม่มี terminator ⇒ รวม = `5 + n1 + 5 + n2`.
-- หลักฐานชั้นที่ 1: `GT-006`/`GT-009` จับเพย์โหลดจริงสามความยาว -- 34B ของ `"PFCHATPROBE1"` (12 ตัว),
-  20B ของ `"SHORT"` (5), 46B ของ `"PFCHATPROBETOOLONG"` (18) -- ตารางอยู่ที่
-  `pf_bridge/reports/PF_CHAT_ECHO002_SPEAKER_FIELD_RESEARCH_20260818.md` หัวข้อ (a).
-  ชั้นที่ 2: `tag 0x48 + u32 len + UTF-16LE` คือ wide-string encoding มาตรฐานของไคลเอนต์ Grade A
-  (พิสูจน์กับ `CreateActorDataEx`/`ActorAttr` names).
-- โมดูลใหม่รอบนี้: `src/pirateforce_foundation/gm/chat_command.py` (`handle_local_talk_chat`) +
-  hook `src/pirateforce_foundation/lane_hooks/lane_gm_chat_command.py` (point `vital_inbound_chat_local_talk`).
-  unit test 45 ตัวผ่าน -- headless เท่านั้น ยังไม่เคยยิงกับไคลเอนต์จริง.
-- ไวยากรณ์ (`gm/commands.py` เดิม): sigil คือ `/` นำหน้า -- `warp <scene_id> [x y]`, `npc on|off <mob_id>`,
-  `item <id> <n>`, `lv <n>`, `spawn <mob_id>`, `say <message>`.
-- 🔴 **GM-003 v1 ยังไม่มีผลต่อเกมเลย** -- คำสั่งที่รู้จักจะถูก parse แล้วเขียนลง ndjson audit log
-  `capture/gm_command_log.ndjson` พร้อม `"executed": false`. **เรคคอร์ดในล็อกนั้นคือเกณฑ์ผ่าน ไม่ใช่ผลบนจอ.**
-- ~~event ที่ hook พิมพ์: `gm_chat_command_accepted_<name>` เมื่อสำเร็จ, `gm_chat_command_refused_<reason>`
-  เมื่อไม่สำเร็จ~~ **namespace นี้ตายไปตอน `GM-029`** (เส้น hook ไม่ถูกเรียกอีกแล้ว) ⇒ ชุดที่ใช้จริงคือ
-  `gm_chat_action_*` ดู P1/P2 · suffix ยังเหมือนเดิม (`not_gm_account`, `not_a_command`,
-  `rate_limited`, `command_parse_error_*`) — ขีดฆ่ารอบ `nz0qt2` เพราะบล็อก "ที่มา" นี้เขียนว่า
-  **ห้าม re-derive** ⇒ ถ้าปล่อยไว้ ผู้เทสมีสิทธิ์เชื่อบรรทัดนี้แทน P1
-- สิทธิ์: เฉพาะบัญชีใน allowlist ฝั่งเซิร์ฟเวอร์ (`PF_GM_ACCOUNTS_CONFIG` -> ไฟล์ json
-  `{"gm_accounts": ["<name>"]}`) เท่านั้นที่ได้อะไร -- คนอื่นถูกปฏิเสธที่ identity **ก่อน**จะ decode เพย์โหลด.
-- ประตูอีกบาน (`BT_GM`/`GMUI_BASIC`/`0x51E9`) ยังตายอยู่: `GT-103` (NO-RESULT ต่อ claim ตัวเอง), `RE-126`.
-  ใบนี้ **ไม่รอ**สองใบนั้น.
+## GT-127 GM-003 CHAT-COMMAND-DOOR-001: GM พิมพ์คำสั่งลง**กล่องแชทธรรมดา**ของเกม (ไม่ใช่หน้าต่าง `BT_GM`/`GMUI_BASIC` ที่คลิกแล้วเงียบ) แล้วเซิร์ฟเวอร์อ่านคำสั่งนั้นได้จริงไหม -- ตัดสินที่ ndjson audit log ไม่ใช่ผลบนจอ  [🟢 **CLOSED PASS (wire/DB layer, ตามเกณฑ์เดิมของใบเอง — ndjson audit ไม่ใช่ผลบนจอ)** — ปิดหัวใบโดย LANE-GM (เจ้าของใบ) รอบ `noixtz` 2026-08-30T17:4x+07:00 หลังเดินด่าน 2 เต็ม + P1-P4 จบโดย attended กะ1-A (เจ้าของขับ UI เอง) · `OBSERVER_CONFIRMED: 2026-08-30T17:1x+07:00` · `BOOT_COMMIT 57490434` = main HEAD ไร้แฟล็ก · consumed stub: `notes_to_chief/20260830_1731_*.CONSUMED.txt` · **ประวัติเต็ม (HOLD→READY→ทุกรอบอัปเดตของ chief/LANE-GM/P1-P4/ด่าน 0-2) ย้ายไปที่ `archive/GT-127_history_20260901.md` (กฎ v6.3 §11)**]
 
 ### objective (claim เดียว)
 บนบูตไร้แฟล็ก บัญชีที่อยู่ใน GM allowlist พิมพ์คำสั่งที่ขึ้นต้นด้วย `/` ลงกล่องแชทธรรมดา -- เซิร์ฟเวอร์
 **อ่านและ parse คำสั่งนั้นได้จริง** (มีเรคคอร์ดใน `capture/gm_command_log.ndjson`) และบัญชีที่ไม่อยู่ใน
 allowlist พิมพ์คำสั่งเดียวกันแล้ว **ไม่ได้อะไรเลย** ใช่หรือไม่.
 
-### คำทำนาย (คำทำนายที่ผิด = ผล ไม่ใช่ความล้มเหลว)
-
-🔴 **P1 P2 P4 เขียนใหม่ทั้งสามข้อ รอบ `xk4wmz` โดย LANE-GM (เจ้าของใบ)** -- namespace ของอีเวนต์
-เปลี่ยนจาก `gm_chat_command_*` เป็น **`gm_chat_action_*`** ตอน `GM-029` merge และ `/warp` วันนี้
-**ไม่ยิง `accepted_`** เพราะเกตไบต์ยังปิด ⇒ ของเดิมจะทำให้ผู้เทสอ่าน "ผลที่ถูกต้อง" เป็น FAIL
-(ชี้โดยผู้เทสกะ3-B ใบ `20260829_0056`) · ~~ของเดิมเก็บไว้ท้ายหัวข้อนี้~~
-
-- **P1 [หัวใจของใบ]** `/lv 30` -> คอนโซล `gm_chat_action_accepted_lv` + **ndjson 1 เรคคอร์ด**
-  (`"executed": false` -- เรคคอร์ดคือเกณฑ์ผ่าน ไม่ใช่ผลบนจอ)
-  🔴 ~~`/warp 2` -> **ไม่ใช่** `accepted_warp` แต่เป็น
-  `gm_chat_action_warp_withheld_no_confirmed_force_pos_vital_version_re129_open`~~
-  **เปลี่ยนแล้ว รอบ `gejldf` 2026-08-29T03:3x+07:00 โดย LANE-GM (เจ้าของใบ ผู้ทำให้ fact เปลี่ยนเอง
-  ตาม PANYA-RULING 20260829_0127):** ตั้งแต่ PR `pirate-force-server#224` ลง main
-  **`/warp 2` ไม่เข้าเกต `FORCE_POS` อีกต่อไป** เพราะรูปแบบไร้พิกัด (และรูปแบบข้ามฉากทุกแบบ)
-  ถูกเปลี่ยนเส้นทางไป **จองฉากล็อกอินครั้งถัดไป** แทนการถูกปฏิเสธ
-  ⇒ ค่าที่ต้องเห็นวันนี้: คอนโซล **`gm_chat_action_warp_staged_login_scene_2`** ·
-  ndjson แถว `outcome` = **`"outcome":"staged_login_scene"`**
-  (ถ้าพิมพ์ `/warp <ฉากอื่น> <x> <y>` จะได้ `"staged_login_scene_coords_ignored"` แทน --
-  พิกัดถูกทิ้งเพราะการล็อกอินสปอว์นที่จุดเข้าของฉากนั้นเอง)
-  🔴 **เกณฑ์ผ่านของข้อนี้ไม่เปลี่ยน** -- ยังเป็น "เซิร์ฟเวอร์อ่านและ parse ได้ และไม่มีไบต์ออกสาย"
-  🔴 **ผลข้างเคียงที่ผู้เทสต้องรู้ก่อนพิมพ์ และต้องเก็บกวาดหลังจบใบ:** คำสั่งนี้ **เขียนไฟล์จริง**
-  `config/gm_login_scene.json` ของเซิร์ฟเวอร์ ⇒ ถ้าไม่ลบ บัญชี GM ที่ใช้เทสจะ**ล็อกอินเข้าฉาก 2
-  (Prison Exile) ในครั้งถัดไป** ไม่ใช่จุดเดิม · **ขั้นเก็บกวาดหลังจบใบ (บังคับ):** ลบไฟล์นั้น
-  หรือพิมพ์ `/warp <ฉากที่ยืนอยู่จริง>` ทับก่อน logout แล้วบันทึกในผลว่าทำอะไร
-  (ไฟล์นี้ไม่ใช่ canonical DB ลบได้ปลอดภัย ค่าเริ่มต้นของมันคือ "ไม่มีใครมี override")
-  ~~**นี่คือผลที่ถูกต้องและนับเป็นผ่าน** -- แปลว่าเซิร์ฟเวอร์อ่าน parse และปฏิเสธการส่งอย่างตั้งใจ
-  ตาม `COO-DECISION 20260828_2130` (เกต `FORCE_POS_VITAL_VERSION_CONFIRMED = None`)~~
-  (เกตนั้น **ยังปิดอยู่ทุกประการ** และยังเป็นคำตอบที่ถูกต้องสำหรับ `/warp <ฉากปัจจุบัน> <x> <y>`
-  ซึ่งเป็นรูปแบบเดียวที่ยังเดินเข้าเกต -- ดู `GT-128`)
-  ndjson ยังต้องมีเรคคอร์ดของ `/warp` เพราะ audit เขียน **ก่อน** ถึงเกต
-  🔴 **จำนวนแถวขึ้นกับ BOOT_COMMIT — วัดก่อนนับ อย่าจำตัวเลข** (แก้โดย LANE-GM เจ้าของใบ รอบ `nz0qt2`
-  2026-08-29T02:3x+07:00 หลังส่ง `CORE-REQUEST-GM-032` ข้อ 1-2 ขึ้น PR `pirate-force-server#223`):
-  `~~รวมสองคำสั่ง = 2 เรคคอร์ด~~` เป็นจริงเฉพาะคอมมิตที่ยังไม่มีแถว `outcome`
-  **วิธีตัดสินหนึ่งบรรทัด (รันที่รากรีโปเซิร์ฟเวอร์ ณ BOOT_COMMIT):**
-  `findstr /C:"AUDIT_RECORD_OUTCOME" src\pirateforce_foundation\gm\commands.py`
-  - **0 hit** ⇒ คอมมิตเก่า: **1 แถวต่อหนึ่งคำสั่ง** (`/lv 30` + `/warp 2` = 2 แถว) เกณฑ์เดิมทั้งหมดใช้ได้
-  - **มี hit** ⇒ คอมมิตใหม่: **2 แถวต่อหนึ่งคำสั่ง** (`/lv 30` + `/warp 2` = **4 แถว**) —
-    แถวแรก `"record":"issued"` (เหมือนเดิมทุกฟิลด์ `"executed": false`) และแถวที่สอง
-    `"record":"outcome"` ที่มีฟิลด์ `"outcome"` บอกว่าเกิดอะไรขึ้นกับคำสั่งนั้น ผูกกันด้วย `"record_id"` เดียวกัน
-    ค่าที่ต้องเห็นวันนี้: ~~`/warp 2` -> `"outcome":"withheld_force_pos_vital_version"`~~
-    **`/warp 2` -> `"outcome":"staged_login_scene"`** (เปลี่ยนรอบ `gejldf` ดูหัวข้อ P1 ข้างบน
-    พร้อมขั้นเก็บกวาดที่บังคับ) · ค่าเดิมยังถูกต้องสำหรับ `/warp <ฉากปัจจุบัน> <x> <y>` เท่านั้น ·
-    `/lv 30` -> `"outcome":"refused_no_wire_path"` · `/say ...` -> `"outcome":"withheld_gm_global_message_vital_version"`
-    🔴 **`"outcome":"composed"` วันนี้เป็นไปไม่ได้** (เกตทั้งสองบานปิด) เห็นเมื่อไร = มีคนเปิดเกตโดยไม่มี COO-DECISION
-    🔴 คำว่า **`"outcome":"queued"` ห้ามปรากฏเลย** จนกว่า `CORE-REQUEST-GM-032` ข้อ 3 (ของ chief) จะลง main
-    — เห็นแล้วคือ over-claim ไม่ใช่ผลดี ให้จดเป็น FINDING
-  ⇒ **นับแถวแล้วไม่ตรง 1:1 กับจำนวนคำสั่ง ไม่ใช่ FAIL โดยอัตโนมัติ** ให้ดูฟิลด์ `record` ก่อนเสมอ
-  · `/say ...` (ถ้าลอง) -> `gm_chat_action_say_withheld_no_confirmed_gm_global_vital_version_re132_open`
-  ซึ่งก็เป็นผลที่ถูกต้องเช่นกัน -- เกตนี้ถูก `COO-DECISION 20260829_0041` ล็อกเป็นทางการแล้ว
-  **ไม่ได้ล็อกเพราะไบต์** (RE-132 ตอบ 0 ไปแล้ว) แต่ล็อกเพราะ identity ยังแยกคนสองคนไม่ออก
-- **P2** ประโยคธรรมดา -> `gm_chat_action_refused_not_a_command`; `/notacommand xyz` ->
-  `gm_chat_action_refused_command_parse_error_*`; บัญชีนอก allowlist ->
-  `gm_chat_action_refused_not_gm_account` · ทั้งสามไม่มีเรคคอร์ดใน ndjson
-- **P3 [บนจอ]** เลนนี้ต้อง**มองไม่เห็น** -- บรรทัดแชทแสดงผลเหมือนเดิมทุกประการ ไม่มี warp ไม่มีเลเวลขึ้น
-  (ไม่เปลี่ยน: chief ยืนยันว่าจุดต่อใหม่ไม่มี `return` และไม่บวก `rx_frames` เหมือนเดิม)
-- **P4 [ตัวหักล้าง, ผลลบที่มีค่าเท่ากับ PASS]** คอนโซลเงียบสนิททุกบรรทัดทั้งที่ด่าน 2 ผ่าน ⇒ จุดเรียก
-  `make_gm_chat_command_action` ที่สาขา `0xAC52` ไม่ถูกเดินถึงจริง ⇒ แนบบรรทัดจริงของ `runtime.py`
-  ที่ `<SHA>` แล้ว redirect กลับ LANE-GM **ไม่ใช่เปิดใบเทสใหม่**
-  🔴 **อาการที่ต้องแยกเปลี่ยนไปแล้ว** -- ~~`LANE_HOOK_FIRED ... lane_gm_chat_command`~~ **จะไม่โผล่
-  อีกต่อไปและไม่ใช่ความผิดพลาด**: เส้นทาง hook ถูกเลิกใช้ทั้งเส้นตอน GM-029
-  (`lane_hooks/lane_gm_chat_command.py` เหลือสถานะ registered-but-never-fired ตามที่ LANE-GM
-  ตัดสินไว้ในรอบ `xk4wmz` -- เหตุผลอยู่ใน docstring ของโมดูลนั้น) · โทเคนที่ต้องเห็นแทนคือ
-  **`LANE_GM_CHAT_ACTION <cmd> route=action`** (stderr) · ถ้าโทเคนนั้นก็ไม่มีแต่ ndjson มีเรคคอร์ด
-  = allowlist ปฏิเสธก่อนถึงจุดพิมพ์ ⇒ ตรวจ **ด่าน 0** ไม่ใช่จุดเรียก
-  ⚠️ ผู้เล่นธรรมดา (นอก allowlist) ได้ `stdout='' stderr=''` **โดยตั้งใจ** -- โทเคนพิมพ์หลังผ่าน
-  allowlist เท่านั้น (chief วัดเอง ใบ `20260829_0015` ข้อ ⑥.2) เงียบกว่าสมัย GM-028 ไม่ใช่ดังกว่า
-
-### ก่อนบูต -- ด่าน 0 / ด่าน 1 / ด่าน 2
-**ด่าน 0 (บัญชี/คอนฟิก):** ใช้ซ้ำการอนุมัติเดิม
-`notes_to_chief/20260827_1200_CHIEF-REPLY-GT101-gm-accounts-test-config-approved.md` -- ต้องมี (ก) บัญชี GM
-ที่อยู่ในไฟล์ allowlist และ (ข) บัญชีที่สอง **ที่ไม่อยู่** ในไฟล์นั้น (คู่ควบคุม).
-ไม่มีบัญชีที่สอง = ทำได้แค่ครึ่งใบ ให้บันทึกว่าข้ามคู่ควบคุมเพราะเหตุใด.
-
-**ด่าน 1 (green boot):**
-```
-py -3 pf_resolve_green_boot.py --repo "C:\path\to\pirate-force-server" --fetch
-```
-รันจากโฟลเดอร์ `pf_bridge`. เฉพาะ exit 0 + `BOOT_COMMIT: <sha>` เท่านั้นถึงบูตได้ (checkout detached).
-
-**ด่าน 2 (grep ยืนยันสายที่ `<SHA>` จริง -- ห้ามเชื่อเลขบรรทัดในเอกสารนี้):**
-
-🔴 **ชุด grep เดิมถูกแทนที่ทั้งก้อน รอบ `xk4wmz` 2026-08-29T01:1x+07:00 โดย LANE-GM (เจ้าของใบ)**
-เหตุ: `CORE-REQUEST-GM-029` merge แล้ว (`pirate-force-server#214`, จดหมาย `notes_to_chief/
-20260829_0015_CHIEF-REPLY-CORE-REQUEST-GM-029-route-replaced-on-main.md`) -- chief **ลบ** บรรทัด
-`fire()` ทิ้งและใส่ **การเรียกตรง** แทนในคอมมิตเดียว ⇒ grep เดิม 2 ใน 4 บรรทัดเลิกแมตช์ถาวร
-**ไม่ใช่เพราะใบบล็อกและไม่ใช่เพราะ `<SHA>` เก่า** · ผู้เทสกะ3-B เสีย job 1331 (abort 00:44 "ด่าน 2
-ไม่ผ่าน") ไปกับชุดเดิมนี้แล้วหนึ่งรอบ และเป็นคนเสนอชุดใหม่ข้างล่าง (`notes_to_chief/
-20260829_0056_KA3A-GT127-dan2-grep-stale-after-GM029-hold-1331.md`) -- ขอบคุณครับ ชุดนี้คือของเขา
-
-~~ชุดเดิม (เก็บไว้เป็นประวัติ ห้ามใช้):~~
-~~`git grep -n "vital_inbound_chat_local_talk" <SHA> -- src/pirateforce_foundation/runtime.py`~~
-~~`git grep -n "vital_inbound_chat_local_talk" <SHA> -- src/pirateforce_foundation/lane_hooks/lane_gm_chat_command.py`~~
-~~`git grep -n "gm_command_log" <SHA> -- src/pirateforce_foundation/gm/chat_command.py`~~
-(บรรทัดที่ 1 ⇒ 0 hit ถาวร เพราะไม่มี `fire()` แล้ว · บรรทัดที่ 2 ยังได้ hit **แต่โมดูลนั้นไม่ใช่
-เส้นทาง production อีกต่อไป** ⇒ แมตช์แล้วก็ไม่ได้แปลว่าสายต่อ · บรรทัดที่ 3 ⇒ 0 hit เพราะ
-`DEFAULT_LOG_PATH` อยู่ที่ `gm/commands.py` ไม่เคยอยู่ใน `chat_command.py` -- ผิด path มาแต่แรก)
-
-**ชุดใหม่ ใช้ชุดนี้:**
-```
-git grep -n "make_gm_chat_command_action" <SHA> -- src/pirateforce_foundation/runtime.py
-git grep -n "def handle_local_talk_chat" <SHA> -- src/pirateforce_foundation/gm/chat_command.py
-git grep -n "gm_chat_action_" <SHA> -- src/pirateforce_foundation/gm/chat_command_action.py
-git grep -n "DEFAULT_LOG_PATH" <SHA> -- src/pirateforce_foundation/gm/commands.py
-git grep -n "production_allowed" <SHA> -- src/pirateforce_foundation/runtime.py
-```
-🔴 **บรรทัดแรกคือด่านจริงของใบนี้** -- ต้องเห็นการเรียกตรงทำนอง
-`gm_action = chat_command_action.make_gm_chat_command_action(session=self, payload=bytes(parsed.nested_payload), legacy=legacy)`
-ที่สาขา `0xAC52` ของ `runtime.py` · 0 hit = `<SHA>` เก่ากว่า merge ของ `#214` ⇒ ยังไม่ใช่ FAIL แต่บูตไม่ได้
-รัน `pf_resolve_green_boot.py --fetch` ใหม่ · ยังห้ามไล่หาคอมมิตเองและห้าม checkout แบรนช์ตรง ๆ
-
-🔴 **บรรทัดที่ห้า (`production_allowed`) คือด่านของ COO ไม่ใช่ของ LANE-GM** -- ต้องเห็นจุดเรียกใน
-`runtime.py` อ่าน `production_allowed` ของโมดูลสาย GM **ก่อน** เรียก `make_gm_chat_command_action`
-ตาม `COO-DECISION 20260829_0041` ข้อ ① (ทาง (ข), กำหนดส่ง chief ภายใน 2026-08-29 12:00 +07:00)
-
-🔴🔴 **อ่านบรรทัดนี้ให้จบก่อนตัดสิน -- "เจอ hit" ไม่ได้แปลว่าสวิตช์มาแล้ว**
-วัดจริงบน `main` = `103bbfd` (2026-08-29T01:4x+07:00): grep นี้คืน **1 hit และเป็น "คอมเมนต์"**
-ที่ `runtime.py:242` ซึ่งพูดถึง `MOB_COMBAT_WIRING`/`MOB_DEATH_WIRING` ของ **สาย B**
-ไม่เกี่ยวกับสวิตช์ของสาย GM เลย ⇒ **สวิตช์ยังไม่มา ยังห้ามบูต**
-(ถ้าใบนี้เขียนแค่ "0 hit = ยังไม่มา" ผู้เทสจะเห็น 1 hit แล้วสรุปว่ามาแล้ว -- เป็นบั๊กชนิดเดียวกับที่
-ทำให้ job 1331 เสียไปทั้ง job ผู้เขียนใบเกือบพลาดซ้ำรอบนี้เอง จับได้ตอนวัดจริงก่อน push)
-
-**วิธีตัดสินที่ใช้ได้จริง** -- รันสองบรรทัดนี้แล้ว **เทียบเลขบรรทัด**:
-```
-git grep -n "production_allowed" <SHA> -- src/pirateforce_foundation/runtime.py
-git grep -n "make_gm_chat_command_action" <SHA> -- src/pirateforce_foundation/runtime.py
-```
-ผ่านเมื่อ: มี hit ของ `production_allowed` ที่เป็น **โค้ดจริง (ไม่ใช่บรรทัดที่ขึ้นต้นด้วย `#`)**
-และเลขบรรทัด **อยู่เหนือและใกล้** บรรทัด `make_gm_chat_command_action` (หลักสิบบรรทัด ไม่ใช่หลักพัน)
-ยังไม่ผ่านเมื่อ: hit เดียวที่ได้อยู่แถว ๆ บรรทัด 242 และเป็นคอมเมนต์ ⇒ **ยังห้ามบูต**
-
-### db (สำเนาเสมอ ห้ามเปิด canonical)
-```
-copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-127_<yyyyMMdd_HHmmss>.sqlite3
-copy state\pirateforce.sqlite3 state\run_gt127.sqlite3
-```
-เทียบ sha256 ของ canonical กับ `CANON_SHA.txt` ทั้งก่อนเริ่มและหลังจบ ต้องตรงทั้งสองครั้ง ·
-`PRAGMA integrity_check` = `ok` บนสำเนาทั้งก่อนและหลัง · สำเนาใหม่ทุกบูต ⇒ ตำแหน่งตัวละครรีเซ็ตกลับ spawn เสมอ.
-
-### server args (เป๊ะ -- ไม่มี `--*-scenario`)
-```
-$env:PYTHONPATH = Join-Path (Get-Location) 'src'
-$env:PF_GM_ACCOUNTS_CONFIG = "<path ไฟล์ allowlist จากด่าน 0>"
-py -3 -u -m pirateforce_foundation.app --db state\run_gt127.sqlite3
-```
-`capture/gm_command_log.ndjson` เป็น path **relative กับ CWD ของ process เซิร์ฟเวอร์ตอนบูต** -- จดค่า CWD ไว้
-ในผล. แนบบรรทัดคำสั่งจริงหลังเซิร์ฟเวอร์ขึ้น:
-```
-Get-CimInstance Win32_Process -Filter "Name='python.exe'" | Select-Object ProcessId,CommandLine | Format-List
-```
-
-### ขั้นตอน (บูตสั้น ~5 นาทีบนจอ -- อัดวิดีโอต่อเนื่องทั้งช่วง LOCK_GAME)
-1. ถือ `LOCK_GAME`, จด boot stamp (+07:00), เทียบ sha canonical, ก๊อป DB ตามบล็อกด้านบน, สเตจ
-   `TEMPLATE_teardown_generic.ps1`, ยืนยันว่าด่าน 0/1/2 ผ่านครบ (จด `<SHA>`).
-2. **เปิดเซิร์ฟเวอร์ก่อนเสมอ** (`Get-NetTCPConnection -State Established` พอร์ต 10188/10189 ต้อง = 0 ก่อนเปิด
-   ไคลเอนต์). ไคลเอนต์ที่เปิดโดยไม่มีเซิร์ฟเวอร์จะตายเองใน ~3.5 นาที.
-3. เข้าเกมด้วย **บัญชี GM**: เลือกเซิร์ฟเวอร์ -> ปุ่มซ้ายของกล่อง PVP -> ช่องตัวละครแรก -> ปุ่ม**กลาง**ของห้าปุ่ม
-   ล่าง (ห้ามปุ่มซ้ายสุด = ลบตัวละคร). T0: ถ่ายภาพนิ่ง full-res, จด HUD X/Y.
-4. NO-CRASH: right-click-drag กวาดกล้อง 360 องศาหนึ่งรอบ -- เป็น liveness check ชนิดเดียวที่ใบนี้รับ
-   (กล้องอย่างเดียว facing ของตัวละครไม่ขยับ ไม่มีไบต์ออกสาย). 🔴 **ห้ามใช้ `Q`/`E` หรือ `W/A/S/D`** --
-   สองอย่างนั้นหมุน/ย้ายตัวละครจริงและปล่อย `TargetPosVital`.
-5. 🔴 **คลิกเข้าไปในช่องพิมพ์แชทให้เคอร์เซอร์อยู่ในช่องก่อนพิมพ์ทุกครั้ง** -- ตัวอักษรที่พิมพ์ตอนช่องแชท
-   ไม่โฟกัสจะกลายเป็น **hotkey**. ยืนยันด้วยตาว่าเห็น caret ในช่องแล้วค่อยพิมพ์.
-6. พิมพ์ทีละบรรทัด กด Enter แล้วเว้น 3 วินาที จดเวลาส่งแต่ละบรรทัด (+07:00) และถ่ายภาพนิ่ง full-res ของกล่อง
-   แชทหลังแต่ละบรรทัด:
-   (1) ประโยคธรรมดาไม่มี `/` (เช่น `hello queue test`) · (2) `/warp 2` · (3) `/lv 30` · (4) `/notacommand xyz`
-7. ยืนยันด้วยตาว่า **ไม่มี warp ไม่มีเลเวลเปลี่ยน** (HUD X/Y และเลเวลเท่าเดิม) -- ถ่ายภาพนิ่ง.
-8. ออกจากเกม -> 🔴 **restart เซิร์ฟเวอร์ก่อนเปิดไคลเอนต์ตัวถัดไปเสมอ** (เซิร์ฟเวอร์เก็บ session เดิมไว้
-   ไคลเอนต์ถัดไปจะค้างที่ "connecting" ตลอดกาลถ้าไม่รีสตาร์ต).
-9. เข้าเกมด้วย **บัญชีที่ไม่อยู่ใน allowlist** ทำข้อ 5 ซ้ำแล้วพิมพ์ `/warp 2` หนึ่งบรรทัด ถ่ายภาพนิ่ง
-   จดเวลา -- นี่คือคู่ควบคุมที่พิสูจน์ว่าผู้เล่นธรรมดาไม่ได้อะไร.
-10. NO-CRASH ซ้ำ (right-click-drag) -> ออกจากเกม -> teardown.
-
-**กฎสี (คำสั่ง Panya 2026-08-25):** ทุกภาพนิ่ง full-res ต้องมีตารางสีป้ายชื่อ **หนึ่งบรรทัดต่อหนึ่งป้ายต่อหนึ่ง
-ภาพ** เขียนคำว่า "none" ออกมาเมื่อไม่มีป้าย ห้ามเว้นว่าง · อ่านสีจากภาพนิ่ง full-res เท่านั้น ห้ามอ่านจาก
-contact sheet / ภาพย่อ / วิดีโอ · จุดต่างจากภาพเซิร์ฟเวอร์ต้นฉบับลง `REAL_SERVER_DIVERGENCE.tsv` แถวละหนึ่งจุด ·
-🔴 ผู้เทสบันทึก**สีเท่านั้น** ห้ามอนุมานสาเหตุของสี (`RE-067` เปิดอยู่ และเป็นที่เดียวที่คำถามนั้นอยู่).
+### ผลจริง (สรุปหนึ่งบรรทัด)
+`capture/gm_command_log.ndjson` = 8 แถว (4 คำสั่งที่รู้จัก `/lv` `/warp 2` `/say` `/warp 14` × 2 แถว parse+outcome, ทุกแถว `executed:false`) · ประโยคธรรมดา/คำสั่งผิด = 0 แถวตามคาด · จอไม่เปลี่ยนอะไรเลยตรงคำทำนาย · **wire/DB: PASS** · **client-observable: ยังไม่มีใครวัดเต็มรูปแบบ** (บัญชีคู่ควบคุมทำได้แค่ 2/3 ข้อ — เจ้าของไม่มีบัญชีที่สอง) · รายละเอียดเต็มทุกรอบอัปเดต: ดูอาร์ไคฟ์
 
 ### pass criteria (สองชั้น แยกกันเสมอ ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น)
 
 **wire/DB (อ่านจากคอนโซล/ล็อก/ไฟล์บนดิสก์เท่านั้น):**
-
-🔴 **สองบรรทัดแรกของบล็อกนี้ถูกเขียนใหม่ รอบ `nz0qt2` 2026-08-29T03:2x+07:00 โดย LANE-GM (เจ้าของใบ)**
-— ของเดิมล้าสมัยด้วยเหตุผลเดียวกับที่ P1 ถูกเขียนใหม่ในรอบก่อน แต่**บล็อกนี้ถูกลืม**: ผู้เทสที่เลื่อนมาที่
-หัวข้อที่เขียนว่า "pass criteria" ตรง ๆ จะเจอเกณฑ์ชุดเก่าและบันทึก FAIL บนบิลด์ที่ปกติดี
-(pf-adversary จับได้ในรอบ `nz0qt2` ก่อน push — เป็นแผลเดียวกับ job 1331 ที่อยู่ในใบเดียวกันนี้เอง)
-**เกณฑ์ที่ใช้จริงคือ P1/P2/P4 ข้างบน** สองบรรทัดนี้เป็นสำเนาย่อของมัน ถ้าขัดกันเมื่อไร **P1 ชนะ**
-
-- ~~คอนโซลขึ้นครบทั้งห้า: `gm_chat_command_accepted_warp`, `gm_chat_command_accepted_lv`,
-  `gm_chat_command_refused_not_a_command`, `gm_chat_command_refused_command_parse_error_*`,
-  `gm_chat_command_refused_not_gm_account`~~ **namespace นี้ตายไปตั้งแต่ `GM-029`** ⇒ ที่ต้องเห็นคือ
-  `LANE_GM_CHAT_ACTION <cmd> route=action` (stderr) + ชุด `gm_chat_action_*`:
+- คอนโซล: `LANE_GM_CHAT_ACTION <cmd> route=action` (stderr) + ชุด `gm_chat_action_*`:
   `gm_chat_action_accepted_lv` · `gm_chat_action_warp_withheld_no_confirmed_force_pos_vital_version_re129_open`
-  (`/warp` วันนี้ **ไม่ใช่** `accepted_` และนั่นคือผลที่ถูกต้อง) ·
+  (`/warp` **ไม่ใช่** `accepted_` และนั่นคือผลที่ถูกต้อง) ·
   `gm_chat_action_refused_not_a_command` · `gm_chat_action_refused_command_parse_error_*` ·
   `gm_chat_action_refused_not_gm_account` (บัญชีคู่ควบคุมได้ `stdout='' stderr=''` โดยตั้งใจ)
-- ~~`capture/gm_command_log.ndjson` มี **2 เรคคอร์ดพอดี**~~ **จำนวนแถวขึ้นกับ BOOT_COMMIT — ดู P1**
-  (0 hit ของ `AUDIT_RECORD_OUTCOME` = 1 แถวต่อคำสั่ง · มี hit = 2 แถวต่อคำสั่ง คือ `issued` + `outcome`)
-  ที่**ไม่เปลี่ยน**: ทุกแถวมีชื่อบัญชี GM และ `"executed": false` ทั้ง `issued` และ `outcome` ·
-  **ไม่มี**เรคคอร์ดของบัญชีนอก allowlist และ**ไม่มี**เรคคอร์ดของประโยคธรรมดา ·
-  🔴 แถว `issued` ที่ไม่มีแถว `outcome` ตามหลัง = **ไม่มีไบต์ถูกส่ง** (เขียน audit ไม่สำเร็จ / โมดูล raise /
-  โปรเซสตายคาระหว่างสองแถว) ให้จดว่าเจอ ไม่ใช่ FAIL อัตโนมัติ และดูคอนโซลว่าเป็นกรณีไหน
+- `capture/gm_command_log.ndjson`: จำนวนแถวขึ้นกับ `BOOT_COMMIT` (0 hit ของ `AUDIT_RECORD_OUTCOME` = 1 แถวต่อคำสั่ง ·
+  มี hit = 2 แถวต่อคำสั่ง คือ `issued` + `outcome`) · ที่ไม่เปลี่ยน: ทุกแถวมีชื่อบัญชี GM และ `"executed": false` ·
+  **ไม่มี**เรคคอร์ดของบัญชีนอก allowlist และ**ไม่มี**เรคคอร์ดของประโยคธรรมดา
 - `sessions`: +1 แถวต่อหนึ่งการล็อกอิน · `max(lease_generation)` ไม่ถอยหลัง · `PRAGMA integrity_check` = `ok`
-  ก่อน/หลัง · sha256 ของ canonical ตรง `CANON_SHA.txt` ก่อน/หลัง · raw GAME log + console out/err เก็บทั้งไฟล์
-  ไม่ตัดทอน.
-- **ผลลบมีค่าเท่ากับผลบวก:** คอนโซลเงียบทั้งหมด/ndjson ไม่ถูกสร้าง ทั้งที่ด่าน 2 ผ่าน = ผลของใบนี้ (ดู P4)
-  เขียนให้เด่นเท่า PASS พร้อม redirect ไป `CORE-REQUEST-GM-028`.
+  ก่อน/หลัง · sha256 canonical ตรง `CANON_SHA.txt` ก่อน/หลัง
+- **ผลลบมีค่าเท่ากับผลบวก:** คอนโซลเงียบทั้งหมด/ndjson ไม่ถูกสร้าง ทั้งที่ด่าน 2 ผ่าน = ผลของใบนี้เช่นกัน
 
 **client-observable (คนหน้าจอเท่านั้น ห้ามอนุมานจากคอนโซล):**
-- **สิ่งที่คาดหมายคือ "ไม่มีอะไรเปลี่ยน"** -- บรรทัดแชทต้องแสดงผลเหมือนเดิมทุกประการกับก่อนรอบนี้ เลนนี้ต้อง
-  มองไม่เห็น. นี่เป็นคำทำนายล่วงหน้า ไม่ใช่ FAIL.
-- 🔴 คำถามที่ต้องตอบตรง ๆ ในผล: **บรรทัด `/warp 2` ที่พิมพ์ไปปรากฏในหน้าต่างแชทเป็นข้อความธรรมดา หรือหายไป
-  (ไคลเอนต์กลืนบรรทัดที่ขึ้นต้นด้วย `/` เอง)?** ตอบทีละบรรทัดทั้งสี่บรรทัด อ้างจากภาพนิ่ง ไม่ใช่จากความจำ.
-- ไม่มี warp ไม่มีเลเวลเปลี่ยน (GM-003 v1 ไม่มี execution) -- ถ้าเห็นการเปลี่ยนแปลงใด ๆ นั่นคือผลที่ผิดคาด
-  ต้องเขียนเด่น ๆ.
-- บัญชีคู่ควบคุม: จอไม่มีอะไรเกิดขึ้นเช่นกัน -- บันทึกว่าบรรทัดแสดงผลอย่างไร.
-- NO-CRASH ผ่านทั้งสองครั้ง · ตารางสีป้ายชื่อครบตามกฎสีข้างบน.
+- **สิ่งที่คาดหมายคือ "ไม่มีอะไรเปลี่ยน"** -- บรรทัดแชทต้องแสดงผลเหมือนเดิมทุกประการ เลนนี้ต้องมองไม่เห็น
+- คำถามที่ต้องตอบตรง ๆ: `/warp 2` ที่พิมพ์ไปปรากฏในหน้าต่างแชทเป็นข้อความธรรมดา หรือหายไป (ไคลเอนต์กลืนบรรทัด `/`)?
+- ไม่มี warp ไม่มีเลเวลเปลี่ยน (GM-003 v1 ไม่มี execution) · บัญชีคู่ควบคุม: จอไม่มีอะไรเกิดขึ้นเช่นกัน
+- NO-CRASH ผ่านทั้งสองครั้ง · ตารางสีป้ายชื่อครบตามกฎสี
 
-### nonclaims (ติดไปกับผลทุกกรณี ห้ามตัดทิ้ง)
-- 🔴 **ไม่อ้าง** ว่าคำสั่งใดมีผลต่อเกม -- v1 ทำแค่ parse + log (`"executed": false`) ผลบนจอไม่ใช่เกณฑ์ผ่าน.
-- 🔴 **ไม่อ้าง** ว่าใบนี้พิสูจน์อะไรเกี่ยวกับ `BT_GM`/`GMUI_BASIC`/`0x51E9` -- คนละประตู ยังตายอยู่
-  (`GT-103`, `RE-126`) และผลใบนี้ไม่ว่าบวกหรือลบก็ไม่ปิดสองใบนั้น.
-- 🔴 **ไม่อ้าง** ว่าข้อความไม่ใช่ ASCII (ภาษาไทย/ตัวอักษรกว้าง) ผ่านเส้นทางนี้ได้ -- ตัวอย่างที่จับมาได้ทุกตัว
-  (`GT-006`/`GT-009`) เป็น ASCII ล้วน. ถ้าอยากรู้ต้องเปิดใบใหม่.
-- 🔴 **GM nonclaim (บังคับประกาศ):** ใบนี้ **ใช้สถานะ GM** เพื่อไปให้ถึงสถานะที่ทดสอบ -- การไปถึงสถานะด้วย GM
-  ไม่ใช่หลักฐานว่าฟีเจอร์ทำงานสำหรับผู้เล่นทั่วไปหรือทำงานในทางปกติของเกม.
-- ไม่ทดสอบไวยากรณ์ที่เหลือ (`npc`, `item`, `spawn`, `say`) และไม่ทดสอบ `rate_limited` -- คนละใบ.
-- ไม่ยืนยัน byte layout ของ `0xAC52` ซ้ำ -- อ้าง `GT-006`/`GT-009` เป็นหลักฐานที่มีอยู่แล้ว ไม่ผลิตใหม่.
-- unit test 45 ตัวเป็นหลักฐานที่อ้างถึง ไม่ใช่สิ่งที่ผู้เทสรันซ้ำ.
-- ผู้เทสคนเดียว สองบัญชี บูตเดียว ไม่มี reconnect/relogin เกินที่ขั้นตอนระบุ.
-- ไม่ชี้สาเหตุของสีป้ายชื่อ (`RE-067` เปิดอยู่).
-- ถ้าด่าน 0/1/2 ไม่ผ่าน => ทั้งใบเป็น **BLOCKED (รอ wiring)** ไม่ใช่ NO-RESULT/FAIL -- ยังไม่ได้ล็อกอินเลย.
+🔴 **หมายเหตุจากใบเดิม:** เกณฑ์ที่ตัดสินจริงคือ P1/P2/P4 (เต็มในอาร์ไคฟ์) — บล็อกข้างบนเป็นสำเนาย่อ ถ้าขัดกัน P1 ชนะ
 
-### หลักฐานที่ต้องเก็บ
-`capture/gm_command_log.ndjson` **ทั้งไฟล์** + sha256 (ถ้าไฟล์ไม่ถูกสร้างเลย ให้เขียนคำว่า ABSENT พร้อม CWD ของ
-เซิร์ฟเวอร์) · console out/err + raw GAME log ทั้งไฟล์ ไม่ตัดทอน · วิดีโอต่อเนื่องทั้งช่วง `LOCK_GAME` (`.mkv`
-ต้นฉบับ ห้ามลบ) · ภาพนิ่ง full-res ของกล่องแชทหลังทุกบรรทัด + ภาพ T0 + ภาพหลังข้อ 7 + ภาพของบัญชีคู่ควบคุม ·
-ตารางสีป้ายชื่อ (หนึ่งบรรทัดต่อป้ายต่อภาพ, "none" เขียนออกมา) · แถว `REAL_SERVER_DIVERGENCE.tsv` ถ้ามี ·
-เวลาส่งทุกบรรทัด (+07:00) · `<SHA>` ที่บูต + บรรทัดคำสั่งจริง · run copy `state\run_gt127.sqlite3`
-**เก็บไว้ให้ chief re-derive ห้ามทิ้ง** · sha256 ของทุกไฟล์หลักฐาน.
+### nonclaims (ติดไปกับผลทุกกรณี)
+- ไม่อ้างว่าคำสั่งใดมีผลต่อเกม -- v1 ทำแค่ parse + log (`"executed": false`)
+- ไม่อ้างว่าใบนี้พิสูจน์อะไรเกี่ยวกับ `BT_GM`/`GMUI_BASIC`/`0x51E9` -- คนละประตู (`GT-103`, `RE-126`)
+- ไม่อ้างว่าข้อความไม่ใช่ ASCII ผ่านเส้นทางนี้ได้ · **GM nonclaim:** ใบนี้ใช้สถานะ GM เพื่อไปให้ถึงสถานะที่ทดสอบ
+  ไม่ใช่หลักฐานว่าฟีเจอร์ทำงานสำหรับผู้เล่นทั่วไป · ไม่ทดสอบไวยากรณ์ที่เหลือ (`npc`/`item`/`spawn`/`say`) หรือ `rate_limited`
 
-### teardown (บังคับ -- แม้รอบจะจบเพราะเลิกเล่น ไม่ใช่เพราะเทสจบ)
-`TEMPLATE_teardown_generic.ps1` เสมอ ภายใน **420 นาที** จาก boot stamp
-(`TEMPLATE_teardown_generic.ps1:135` · เพดานยกจาก 180 เมื่อ 2026-08-20 · เลข 180 ในใบเก่า = stale) --
-เกินเพดาน template ปฏิเสธ exit 12 โดยดีไซน์ · ได้ exit ที่ไม่ใช่ 0 อย่าเดาเอง แนบบรรทัดที่ 17 ของไฟล์ teardown
-ที่ใช้จริงมาทั้งบรรทัด · ใบเสร็จ: `AFTER listeners = 0`, sha256 canonical ก่อน-หลัง = `CANON_SHA.txt`,
-teardown exit code, `LOCK_GAME` ปล่อยแล้ว · **ลบสำเนาไฟล์ allowlist / ล้าง `PF_GM_ACCOUNTS_CONFIG`** ·
-🔴 restart เซิร์ฟเวอร์ก่อนบูตรอบถัดไปเสมอ.
+---
 
-### result (ผู้เทสกรอก)
-```
-
-```
+**ลิงก์:**
+- ประวัติเต็ม (ทุกเวอร์ชันของหัวใบ, ที่มา, P1-P4, ด่าน 0-2/grep, db/server args/ขั้นตอน, หลักฐานที่ต้องเก็บ, teardown): `archive/GT-127_history_20260901.md`
+- ผลปิดใบ: `notes_to_chief/20260830_1731_GT127-GT134-RESULT-both-PASS-chat-door-open-and-first-eyes-on-hell-volcano.md`
 
 ## GT-125 FULLGATE-RED-REPAIR-VERIFY-001 [STATIC-ON-BRIDGE · พร้อมเมื่อ PR ของรอบ lo7e03 (R214) merge แล้ว — ใบเดิมของรอบ swlc56 (#197) ถูกเจ้าของปิดเอง งานถูก cherry-pick มาใบใหม่]: หลังรอบ swlc56 แก้ census/negative ที่ทำให้ full pytest แดง 39 ใบ — รันชุดเต็มบนสะพานอีกครั้งแล้วบอกว่าเหลือแดงกี่ใบ และ regenerate ไฟล์ที่ยังแดงอยู่ใบเดียวที่คลาวด์แตะไม่ได้
 

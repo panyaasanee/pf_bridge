@@ -87,22 +87,39 @@ env:
   # reason installing this file cannot retroactively merge a pull request that
   # was opened before it existed.
   PF_MARKER: 'PF-AUTOMERGE: v4'
-  # A DRAFT older than this is a round that died mid-way (a lane round is
-  # under an hour; the routine that owns it fires hourly).  It is closed so
-  # the lane can claim again; the branch is kept.
+  # How long a DRAFT may sit before the reaper TRIES to un-stick it with its
+  # own token (`gh pr ready`).  Trying is never destructive on its own, so
+  # this bound only governs when the attempt starts -- CLOSING a draft that
+  # still cannot be un-stuck is governed separately, by PF_STALE_CLOSE_HOURS
+  # below.
   #
-  # MUST STAY SHORTER THAN THE FASTEST LANE CADENCE (hourly, every lane).
-  # Measured 2026-08-30 (KA1A finding, pf_bridge#507): with the old 2-HOUR
-  # value, a lane whose own round-claim PR was left in draft by a round that
-  # died mid-way saw that PR at the start of every later round of its own and
-  # ended immediately every time (that is what the round-lock check is
-  # SUPPOSED to do for an open PR of your own lane) -- and nothing closed the
-  # corpse for up to two hourly cycles.  The lane was not dead; it was
-  # starving itself on schedule, exactly as designed, against a lock nobody
-  # was going to clear.  45 minutes recovers within the same hourly cycle
-  # instead of the next one, while staying well above how long a live round
-  # actually takes ("under an hour", see below).
-  PF_STALE_MINUTES: '45'
+  # [PANYA-DECISION 20260901_0920+07:00, via ka1-A]: raised 45 -> 55 on the
+  # owner's own reasoning -- wait until close to the next hourly round before
+  # even trying, so a round at 45-50 minutes that is genuinely close to done
+  # is not disturbed early.  Un-drafting does not discard anything: a round
+  # still working can keep pushing after this fires.  Measured same day: lane
+  # B round `iok5z1` ran 1h16m04s end to end, so no single minutes-based
+  # number bounds every round -- that is why CLOSING is now a separate,
+  # longer bound (PF_STALE_CLOSE_HOURS) instead of reusing this one.
+  #
+  # Original reasoning for landing in the same hourly cycle rather than the
+  # next one, still true at 55: measured 2026-08-30 (KA1A finding,
+  # pf_bridge#507), with the old 2-HOUR value a lane whose own round-claim PR
+  # was left in draft by a round that died mid-way saw that PR at the start
+  # of every later round of its own and ended immediately every time (that is
+  # what the round-lock check is SUPPOSED to do for an open PR of your own
+  # lane) -- and nothing closed the corpse for up to two hourly cycles.  The
+  # lane was not dead; it was starving itself on schedule, exactly as
+  # designed, against a lock nobody was going to clear.
+  PF_STALE_MINUTES: '55'
+  # How long a DRAFT that a `gh pr ready` attempt could NOT un-stick may sit
+  # before the reaper gives up and CLOSES it.  Separate from, and much longer
+  # than, PF_STALE_MINUTES above -- same split pirate-force-server already
+  # had (PF_STALE_HOURS there), added here [PANYA-DECISION 20260901_0920+07:00]
+  # because this repository had one variable governing both the harmless
+  # "try ready" attempt and the destructive close, which is not a decision,
+  # only an accident of only ever having one variable.
+  PF_STALE_CLOSE_HOURS: '6'
 
 jobs:
   merge:
@@ -337,6 +354,7 @@ jobs:
 
           NOW=$(date -u +%s)
           LIMIT=$(( PF_STALE_MINUTES * 60 ))
+          CLOSE_LIMIT=$(( PF_STALE_CLOSE_HOURS * 3600 ))
 
           OPEN=$(api "repos/${REPO}/pulls?state=open&per_page=100" | jq -r '.[].number')
           if [ -z "${OPEN}" ]; then echo "no open pull requests"; exit 0; fi
@@ -400,11 +418,62 @@ jobs:
                 echo "  stale draft -> marked ready; the next event runs decide normally"
                 continue
               fi
-              echo "  could not mark ready (token refused it too) - reaping as a dead draft"
+              echo "  could not mark ready (token refused it too)"
+
+              # [PANYA-DECISION 20260901_0920+07:00, via ka1-A] item 2: closing
+              # a draft that cannot be un-stuck is now governed by
+              # PF_STALE_CLOSE_HOURS, not by PF_STALE_MINUTES (the ready-attempt
+              # bound above).  A round can still be working past PF_STALE_MINUTES
+              # -- ready failing only means the token could not flip the flag,
+              # not that the round died -- so give it up to PF_STALE_CLOSE_HOURS
+              # before treating it as a corpse.  A later tick retries `gh pr
+              # ready` for free every time this branch is re-entered.
+              if [ "$AGE" -lt "$CLOSE_LIMIT" ]; then
+                echo "  still within the ${PF_STALE_CLOSE_HOURS}h close bound - leaving as draft; a later tick retries ready"
+                continue
+              fi
+
+              # [PANYA-DECISION 20260901_0920+07:00] item 3: a truly dead round
+              # is completely silent, so measure that instead of guessing from
+              # age alone.  A push on this exact head within the last ~30
+              # minutes means a round is still actively working even though it
+              # could not un-draft itself -- do not discard live work.
+              # [pf-adversary, this round]: BOUNDED, same as every other "leave
+              # open" skip in this file (see the merge job's own head-moved
+              # skip above).  Past LIVENESS_ABSOLUTE_LIMIT the reprieve stops
+              # applying no matter what keeps touching the branch, so a stuck
+              # retry loop or an orphaned watchdog on a dead round's own
+              # branch cannot hold the lock forever by refreshing itself
+              # faster than the 30-minute liveness window.
+              LIVENESS_WINDOW_SEC=1800
+              LIVENESS_ABSOLUTE_LIMIT=$(( CLOSE_LIMIT * 2 ))
+              if [ "$AGE" -lt "$LIVENESS_ABSOLUTE_LIMIT" ]; then
+                # The commits/ lookup must never be able to kill this whole
+                # tick under `set -e` on a transient API failure: `|| true`
+                # on `api` itself is not enough because `jq` still runs on
+                # whatever (possibly empty) stdout it left, and pipefail
+                # would then still fail the assignment.  Guard the entire
+                # command substitution instead, same fail-safe direction as
+                # the CSEC3 parse fallback below (a lookup failure here must
+                # fall through to "no liveness signal", not abort the loop).
+                LATEST_COMMIT_DATE=$(api "repos/${REPO}/commits/${HEAD_SHA}" 2>/dev/null | jq -r '.commit.committer.date // empty' 2>/dev/null) || LATEST_COMMIT_DATE=""
+                if [ -n "$LATEST_COMMIT_DATE" ]; then
+                  CSEC3=$(date -u -d "$LATEST_COMMIT_DATE" +%s 2>/dev/null || echo 0)
+                  SINCE_PUSH=$(( NOW - CSEC3 ))
+                  if [ "$CSEC3" -ne 0 ] && [ "$SINCE_PUSH" -ge 0 ] && [ "$SINCE_PUSH" -lt "$LIVENESS_WINDOW_SEC" ]; then
+                    echo "::warning::#${PR} left open - head ${HEAD_SHA} committed $(( SINCE_PUSH / 60 ))m ago (<30m) - round looks alive, not reaping yet (absolute bound $(( LIVENESS_ABSOLUTE_LIMIT / 3600 ))h)"
+                    continue
+                  fi
+                fi
+              else
+                echo "  past the liveness reprieve's own absolute bound ($(( LIVENESS_ABSOLUTE_LIMIT / 3600 ))h) - closing regardless of recent activity"
+              fi
+
+              echo "  quiet past the liveness window (or past its absolute bound) - reaping as a dead draft"
               gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
-                "**Draft open for more than ${PF_STALE_MINUTES} minutes - the round that opened it has died; closing it to release the lane lock.**" \
+                "**Draft open for more than ${PF_STALE_CLOSE_HOURS} hours and quiet for at least 30 minutes - the round that opened it has died; closing it to release the lane lock.**" \
                 "" \
-                "A lane round lasts under an hour. A draft this old means the session ended without marking the pull request ready (a tool disconnect, a timeout, a crash) and nothing on the cloud side can ever come back to it - a later round may only push its own branch." \
+                "A lane round lasts under an hour. A draft this old and this quiet means the session ended without marking the pull request ready (a tool disconnect, a timeout, a crash) and nothing on the cloud side can ever come back to it - a later round may only push its own branch." \
                 "" \
                 "This reap job also tried \`gh pr ready\` with its own token before closing, in case the round had actually finished and only the agent's token was refused; that call failed too." \
                 "" \

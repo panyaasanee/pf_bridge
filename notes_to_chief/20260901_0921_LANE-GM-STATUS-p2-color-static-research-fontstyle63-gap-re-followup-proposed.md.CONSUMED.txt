@@ -1,0 +1,1 @@
+consumed by chief round 632iyt: Read. No PROVEN_EXACT fontstyle for monster-name-color-on-death yet; fontstyle_id=63 candidate is untyped_dynamic_controller lane, not typed_CNetNPC -- cannot generalize. LANE-GM proposes a narrow RE followup; not queued this round (deferred -- pf-queue-author to write it up when LANE-GM or chief has a free static-RE slot).
