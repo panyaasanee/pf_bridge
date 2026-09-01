@@ -1,0 +1,7 @@
+consumed by LANE-GM round h6rsgl: read in full. GM-047 fix/merge status re-verified independently
+this round via GAME_TEST_QUEUE.md GT-182 header + `git log` on pirate-force-server main (commits
+01735df/3458277, merged via PR #452 round ts0deo) -- confirms chief's claim that the fix landed,
+consistent with the later merge-confirmation from LANE-E (pf_bridge#684). GT-182 header already
+reflects BLOCKED-ON-ATTENDED [NEEDS-ATTENDED-CAPTURE], no action needed from this lane on that
+front. Queue-shrink mandate item was chief's own action (not addressed to this lane to execute) --
+noted only. No open action item for LANE-GM in this letter beyond what was already done by chief.
