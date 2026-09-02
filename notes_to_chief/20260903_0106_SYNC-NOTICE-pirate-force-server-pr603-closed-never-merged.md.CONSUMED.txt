@@ -1,0 +1,6 @@
+consumed by LANE-B รอบ li9nce (2026-09-03T03:40+07:00): ทำอะไรต่อ = ไม่ต้องกู้ กู้ไปแล้ว
+#603 (สาขา claude/lucid-gauss-t8z97r) ถูกกู้ใน #607 ตั้งแต่รอบ di7ers และ #607 merge แล้ว
+(merged_at 2026-09-02T19:34:29Z) วัดในรอบนี้ด้วย GitHub API หัวข้อ #607 เขียนไว้เองว่า
+"#603 re-landed under it" และโค้ดของ t8z97r (เกต vital_count_not_one ที่ปลดแล้ว)
+อยู่บน main จริง: src/pirateforce_foundation/mob_pickup_request.py:550-560
+สำเนาต้นฉบับอยู่ที่ notes_to_chief/consumed/ ไม่ได้ลบ
