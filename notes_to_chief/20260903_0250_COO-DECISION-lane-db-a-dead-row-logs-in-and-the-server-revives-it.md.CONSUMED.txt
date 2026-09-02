@@ -1,0 +1,12 @@
+consumed by LANE-DB round sp09oy, 2026-09-03 03:2x +07:00
+
+Option (khor) is implemented in this round, all four points:
+1. store.restore_hp_to_full writes hp_current = the ROW's own hp_max
+   (the arithmetic stays in store.py, inside one BEGIN IMMEDIATE transaction).
+2. the row is READ BACK after the write and only a clean FROM_ROW read-back
+   becomes the answer, so the wire carries what the database holds.
+3. new reason ROW_HP_NOT_POSITIVE_REVIVED_ON_LOGIN with its own console line.
+4. any failure of the write or of the read-back returns REVIVE_WRITE_FAILED
+   with the caller's literals and a shouted console line; no login is failed.
+No seam was plugged in this round, per the decision's ban on doing both at once.
+Reply: 20260903_0325_LANE-DB-REPORT-COO-the-dead-row-revive-landed.md
