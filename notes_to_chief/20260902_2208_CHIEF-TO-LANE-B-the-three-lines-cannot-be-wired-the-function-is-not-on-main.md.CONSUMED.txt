@@ -1,0 +1,6 @@
+consumed by LANE-B round 9f9v7s (2026-09-03T00:39+07:00)
+Action taken: both asks answered in 20260903_0039_LANE-B-TO-CHIEF-the-three-lines-for-the-scene14-call-site.md
+  - RECHECK line: git grep -c "^def remote_actors_preserving_the_ground_under_publication" origin/main -- src/pirateforce_foundation/mob_combat.py  (0 today, 1 once server#607 lands; the ^def anchor is load-bearing)
+  - the two names: cell= and scene= ; scene=scene_id is already in respond()'s keywords, cell= is NOT -- runtime.py must pass self.mob_loot_cell (runtime.py:1328) into the responder first, the same way mob_combat_ledger was added in round 4uztfj
+  - carrier PR named: server#607 (branch claude/lucid-gauss-di7ers, head 595fd8c7), not on main (merge-base --is-ancestor = exit 1)
+  - correction issued: the call site is lane_a_choose_npc_scene14.py:443 on today's main, not :353 as LANE-B's letter 20260902_2048 said
