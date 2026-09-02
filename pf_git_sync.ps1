@@ -1244,6 +1244,84 @@ if ((Test-Path -LiteralPath $bridgeAgents) -and (Test-Path -LiteralPath $serverA
 $CLAIM_STUCK_MIN = 75
 $CLAIM_REAP_MIN  = 360
 
+# ---------------------------------------------------------------------------
+# THE SECOND GATE, added 2026-09-02 ~20:0x (+07:00) on the owner's word after
+# this step raised its first FALSE ALARM.
+#
+# What happened: at 19:48 it shouted that claude/gracious-galileo-et2ux4 had
+# "died holding the lock", age 90 min, tip "round claim: et2ux4", and told the
+# owner a person must close that lock PR.  She asked ka1-A to check first.
+# The branch belonged to LANE-GM and it had not died at all: its two pull
+# requests were BOTH ALREADY MERGED - #590 at 12:05:33Z and #594 at 12:40:04Z,
+# the second one EIGHT MINUTES before the alarm - and the branch itself was
+# gone by the time anyone looked.  Had she followed the instruction she would
+# have closed the work of a lane that had just finished.
+#
+# The age test cannot tell those apart, because a finished round leaves the
+# same artefact behind: a branch whose tip is still the bare claim commit.
+# The thing that separates them is whether a pull request is still OPEN.  So
+# this step now asks GitHub before it shouts:
+#
+#   open PR    -> a round really is holding the lock.  Shout, as before.
+#   no open PR -> the round finished, this is only a leftover tip.  Say so
+#                 quietly and do NOT ask anyone to close anything.
+#   unknown    -> the API could not be reached.  Shout, but say plainly that
+#                 the PR state is unverified, so nobody acts on a guess.
+#
+# The answer is cached per branch for CLAIM_PR_RECHECK_MIN so a 2-minute step
+# cannot burn the 60-per-hour unauthenticated rate limit.  Cache lives beside
+# the log, never in git.
+# ---------------------------------------------------------------------------
+
+$CLAIM_PR_REPOS       = @('panyaasanee/pf_bridge', 'panyaasanee/pirate-force-server')
+$CLAIM_PR_RECHECK_MIN = 20
+
+function ClaimPrStatePath() { return (Join-Path $BridgeRepo 'sync_state_claim_pr.log') }
+
+function ClaimPrCacheRead() {
+    $h = @{}
+    $p = ClaimPrStatePath
+    if (Test-Path -LiteralPath $p) {
+        try {
+            foreach ($l in @(Get-Content -LiteralPath $p -ErrorAction Stop)) {
+                $bits = $l -split '\|'
+                if ($bits.Count -ge 3) { $h[$bits[0]] = @{ 'when' = [int64]$bits[1]; 'verdict' = $bits[2] } }
+            }
+        } catch { }
+    }
+    return $h
+}
+
+function ClaimPrCacheWrite($cache) {
+    $p = ClaimPrStatePath
+    $out = @()
+    foreach ($k in $cache.Keys) { $out += ($k + '|' + $cache[$k]['when'] + '|' + $cache[$k]['verdict']) }
+    try { $out | Out-File -LiteralPath $p -Encoding ascii } catch { }
+}
+
+function ClaimOpenPrVerdict([string]$branchShort) {
+    # branchShort is 'claude/xxx' with the origin/ prefix already stripped.
+    # Returns 'open', 'none' or 'unknown'.  Never throws: this is a guard on a
+    # guard, and it must not be able to break the round it runs inside.
+    $allOk = $true
+    foreach ($repo in $CLAIM_PR_REPOS) {
+        $url = 'https://api.github.com/repos/' + $repo + '/pulls?state=open&per_page=100'
+        $r = $null
+        try {
+            $r = Invoke-RestMethod -Uri $url -Headers @{ 'User-Agent' = 'pf-git-sync' } -TimeoutSec 25
+        } catch {
+            $allOk = $false
+            continue
+        }
+        if ($r -eq $null) { $allOk = $false; continue }
+        foreach ($pr in @($r)) {
+            if ($pr.head -ne $null -and $pr.head.ref -eq $branchShort) { return 'open' }
+        }
+    }
+    if ($allOk) { return 'none' }
+    return 'unknown'
+}
+
 $cf = GitRun $BridgeRepo @('fetch', 'origin', '--prune', '+refs/heads/claude/*:refs/remotes/origin/claude/*')
 if ($cf.Code -ne 0) {
     Log '[5c]' ('round-claim check skipped - fetch of claude/* failed: ' + ($cf.Out -replace "`n", ' | '))
@@ -1264,9 +1342,46 @@ if ($cf.Code -ne 0) {
         }
     }
     if ($claimStuck.Count -gt 0) {
-        Shout '[5c]' ('round died holding the lock: ' + $claimStuck.Count + ' claude/* branch(es) whose tip is still a bare round claim after ' + $CLAIM_STUCK_MIN + ' min - every scheduled run since then is backing out of a lock nobody is using')
-        foreach ($c in $claimStuck) { Log '[5c]' ('  !! ' + $c) }
-        Log '[5c]' 'a person must close that lock PR - this step will not touch it'
+        # SECOND GATE: a bare claim tip is only a stuck lock while a pull
+        # request is still open.  See the block above for the false alarm that
+        # put this here.
+        $cache = ClaimPrCacheRead
+        $reallyStuck = @()
+        $leftover    = @()
+        $unverified  = @()
+        foreach ($c in $claimStuck) {
+            $refShort = ($c -split '\s+')[0]
+            $branch = $refShort -replace '^origin/', ''
+            $verdict = $null
+            if ($cache.ContainsKey($branch) -and (($nowUtc - $cache[$branch]['when']) -lt ($CLAIM_PR_RECHECK_MIN * 60))) {
+                $verdict = $cache[$branch]['verdict']
+            }
+            if ($verdict -eq $null) {
+                if ($DryRun -or $SelfCheck) { $verdict = 'unknown' }
+                else {
+                    $verdict = ClaimOpenPrVerdict $branch
+                    $cache[$branch] = @{ 'when' = $nowUtc; 'verdict' = $verdict }
+                }
+            }
+            if     ($verdict -eq 'open') { $reallyStuck += ($c + '  openPR=yes') }
+            elseif ($verdict -eq 'none') { $leftover    += ($c + '  openPR=no') }
+            else                         { $unverified  += ($c + '  openPR=UNVERIFIED') }
+        }
+        if (-not ($DryRun -or $SelfCheck)) { ClaimPrCacheWrite $cache }
+
+        if ($reallyStuck.Count -gt 0) {
+            Shout '[5c]' ('round died holding the lock: ' + $reallyStuck.Count + ' claude/* branch(es) whose tip is still a bare round claim after ' + $CLAIM_STUCK_MIN + ' min AND whose pull request is still OPEN - every scheduled run since then is backing out of a lock nobody is using')
+            foreach ($c in $reallyStuck) { Log '[5c]' ('  !! ' + $c) }
+            Log '[5c]' 'a person must close that lock PR - this step will not touch it'
+        }
+        if ($unverified.Count -gt 0) {
+            Shout '[5c]' ('' + $unverified.Count + ' bare round claim(s) older than ' + $CLAIM_STUCK_MIN + ' min, and GitHub could NOT be reached to check whether a pull request is still open - do not act on this line alone, check the PR by hand')
+            foreach ($c in $unverified) { Log '[5c]' ('  ?? ' + $c) }
+        }
+        if ($leftover.Count -gt 0) {
+            Log '[5c]' ('' + $leftover.Count + ' bare round claim tip(s) with NO open pull request - the round finished and left its claim commit behind, not an alert, nothing to close')
+            foreach ($c in $leftover) { Log '[5c]' ('  -- ' + $c) }
+        }
     } elseif ($claimLive -gt 0) {
         Log '[5c]' ('round claim held and still young - ' + $claimLive + ' branch(es) under ' + $CLAIM_STUCK_MIN + ' min, not an alert')
     } else {
