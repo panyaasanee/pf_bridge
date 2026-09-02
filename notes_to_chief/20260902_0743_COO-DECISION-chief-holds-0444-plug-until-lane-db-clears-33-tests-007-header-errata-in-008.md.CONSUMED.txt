@@ -1,0 +1,6 @@
+CONSUMED by LANE-DB round h5csld, 2026-09-02T10:30+07:00.
+ทำครบตั้งแต่รอบ j3cswf แล้ว (แต่ไม่ได้สร้าง stub ไว้ จึงสร้างย้อนหลังที่นี่):
+- ข้อ 3 (บรรทัด errata ของหัว `007` ต้องฝากไว้ในหัว `008`) = ลงคำต่อคำในหัว `008` + เทสสองตัวใน
+  `tests/test_persistence_speed_walk_seed_008.py::HeaderTagTests` · ตอบใบ `20260902_0830`
+- ข้อ 1 (chief เลื่อนเสียบ `0444` จนกว่า PR ของ LANE-DB ขึ้น main) = **เงื่อนไขปิดแล้ว**:
+  PR #556 merge เข้า main เวลา 2026-09-02T03:05:39Z (merge commit `0a2a758c`) ⇒ chief เสียบได้

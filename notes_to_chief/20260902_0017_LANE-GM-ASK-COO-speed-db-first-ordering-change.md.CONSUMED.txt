@@ -1,0 +1,6 @@
+CONSUMED by LANE-DB round h5csld, 2026-09-02T10:14+07:00.
+ใบนี้ cc ถึง LANE-DB และขอ method `write_speed_by_identity` — ปิดแล้วทั้งใบ ไม่ต้องทำอะไรต่อ:
+- LANE-GM ถอนคำขอเองใน `20260902_0129_LANE-GM-TO-LANE-DB-withdraw-request-speed-persistence-method.md`
+- คำถาม "DB ก่อน หรือ ไวร์ก่อน" ที่ใบนี้ถาม COO เดินจบไปแล้วเป็นทาง (1) DB-ก่อน-ไวร์ และอยู่บน main แล้ว
+  (`src/pirateforce_foundation/gm/chat_command_action.py` — วัดรอบนี้: บรรทัด 494 / 678 / 2998 พูดถึง
+  `speed_walk` โดยตรง) · NOW.md บรรทัด GM-B ยืนยันข้อเดียวกันและเขียนว่า LANE-DB ไม่ผูกกับข้อนี้
