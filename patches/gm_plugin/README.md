@@ -343,6 +343,7 @@ key อะไร — **ถ้าไม่มีบรรทัดพวกนี
 | อาการ | ผู้ต้องสงสัย |
 |---|---|
 | **ไม่มีบรรทัด `[GM_PLUGIN]` เลย** | DLL ไม่ถูกโหลด: วางผิดโฟลเดอร์ · SxS manifest หาย (error 14001 — ต้องมี VC9 redistributable) · `dumpbin /exports` ซ้ำ |
+| **~~`build_vs2008.bat` ทำ DLL ที่โหลดไม่ได้~~ (ปิดแล้ว revision 5)** | วัดจริงโดย ka1-A รอบ attended R304 (2026-09-02): สคริปต์เดิม**ไม่เรียก `mt.exe`** ⇒ DLL ไม่มี RT_MANIFEST ฝัง แต่ import `MSVCR90.dll` ⇒ loader ตอบ 14001 และไม่มีโค้ดในปลั๊กอินได้รันเลย · **ทุกบิลด์ที่สคริปต์ทำก่อน revision 5 โหลดไม่ได้** และมันเงียบสนิท (13,824 ไบต์ เช็คเดิมผ่านครบสามข้อ) · revision 5 ฝัง manifest ให้เอง แล้ว `check 0/4` **อ่านภาพที่จะถูกติดตั้งจริง** ยืนยันว่ามีเซกชัน `.rsrc` (สภาพที่ ka1-A วัดว่า **ไม่มี** บนบิลด์ที่โหลดไม่ได้) · การอ่าน RT_MANIFEST `#2` ด้วย `mt.exe` เป็นคำเตือน ไม่ใช่เกต เพราะยังไม่มีใครเคยรันคำสั่งนั้นเลย — ถ้ามันขึ้น `[warn]` ให้ตัดสินด้วย `plugin_image_check` ก่อนบูตเกม · `install.bat` ปฏิเสธถ้า `dumpbin` **บอกว่า** ไม่มี `.rsrc` และเตือนดัง ๆ ถ้าหา `dumpbin` ไม่เจอ (เครื่องเกมไม่มี VC) ⇒ ถ้าเจออาการนี้กับบิลด์ใหม่ แปลว่าเป็นสาเหตุอื่นในแถวบน ไม่ใช่ข้อนี้ |
 | พิมพ์ `client CRT: NOT FOUND` | import walk ไม่เจอ `??3@YAXPAX@Z` ⇒ คืน NULL ⇒ สภาพเท่าเดิม |
 | พิมพ์ `wstring ctor: NOT RESOLVED` | ชื่อ decorated ผิด — `dumpbin /exports msvcp90.dll` แล้วแก้ |
 | โหลดแล้วแต่**คลิกยังเงียบ** | **key ผิด** (`GMUI_1` เทียบ `GMUI_BASIC` — ดู A/B ข้างบน) · หรือ gate `GMModule_Client+0x19` (`GM-IMG-005`) ปิดอยู่ |
@@ -389,13 +390,14 @@ key อะไร — **ถ้าไม่มีบรรทัดพวกนี
 TSV SHA-256: `a5f3fdeb6a830b06e3eb9dceff85fc762459ca3e4f9e7ada152937ef1c898509`
 IMAGE SHA-256: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
 
-## sha256 ของซอร์สในโฟลเดอร์นี้ (ตามธรรมเนียม `patches/` — revision 4)
+## sha256 ของซอร์สในโฟลเดอร์นี้ (ตามธรรมเนียม `patches/` — revision 5)
 
 ```
 eecd367419a6ae394d07188c6cd0799d263ba04c29f822336d74eb3fa24ee68b  GameMaster.cpp
 9e2a3adc808189ba9ee31060469617e1eb32ab90c8d3094ec0a09a541aba2190  GameMaster.def
-1202a9839ad74aeadca3b0f0e44d6b2b9c36c3599db4f492e3f4700b0edb8b3d  build_vs2008.bat
-abe8b0b98113405f93431170617bc3a7074b7377c16e6bbcfec2475a5c576ab6  install.bat
+58b576f5fd89622493c774db829a5f16acd82b5b6bd4dc2826b17e065677171e  build_vs2008.bat
+798ce5ad297c14527022c9d00e1db2fb30aa0354f73463bcc268acba3464a93a  install.bat
+f8df2984d6021288b0c0af52f378d2e6dcc05c69b1e35b0e2ee455ebbf04a681  find_mt.bat
 ```
 
 บรรทัดบนคือ sha256 ของ **เนื้อในรีโป (LF)** ตามรูปแบบที่ revision 2 บันทึกไว้
@@ -403,8 +405,14 @@ abe8b0b98113405f93431170617bc3a7074b7377c16e6bbcfec2475a5c576ab6  install.bat
 ค่าที่ `certutil -hashfile` จะให้บนบริดจ์ (CRLF) คือ:
 
 ```
-0bdb2c6c84c6078d07fc3c2cab179f0a98fb9916080fd0e57b99222e75c31b6a  build_vs2008.bat   (CRLF บนดิสก์)
-1a00bb6b82bd2d2a90d92065059f23d24a21c775d9188026e36ee782a33b4d0e  install.bat   (CRLF บนดิสก์)
+1a3157ade227cef1bfec8fe1e76d6c8a2ffbf63e097b6d7fda8a5524d25f83a4  build_vs2008.bat   (CRLF บนดิสก์)
+3ac0a48b4813dc2b4615fc2415030c2c3134e7c0b151891f788eab03c312e40d  install.bat   (CRLF บนดิสก์)
+a887091cad972c0740b92fe6ec0e399a058dfc1e745ecb99fc87982a18fe53fd  find_mt.bat   (CRLF บนดิสก์)
 ```
+
+🔴 **ค่าทั้งหกอัปเดตในรอบ `hj2cry` พร้อมกับตัวสคริปต์เอง** — pf-adversary (D8) วัดได้ว่า revision 4
+ทิ้งค่าเดิมไว้ทั้งชุดหลังแก้สคริปต์ ⇒ คนที่เช็คบนบริดจ์จะเห็นไม่ตรง แล้วสรุปผิด **ตามคำเตือนของไฟล์นี้เอง**
+ว่าไฟล์ถูกแก้ระหว่างทาง ทั้งที่มันถูกต้อง · `find_mt.bat` เป็นไฟล์ใหม่ของรอบนี้ จึงไม่เคยมีค่าปักมาก่อน
+**กฎ: แก้สคริปต์ในโฟลเดอร์นี้ ต้องอัปเดตบล็อกนี้ในคอมมิตเดียวกัน**
 
 (revision 2 บันทึกไว้ชุดเดียวโดยไม่บอกว่าเป็นชุดไหน ⇒ ใครเช็คบนบริดจ์จะเห็นไม่ตรงและสรุปผิดว่าไฟล์ถูกแก้ระหว่างทาง)
