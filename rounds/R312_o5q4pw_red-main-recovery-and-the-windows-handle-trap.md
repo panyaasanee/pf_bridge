@@ -176,13 +176,16 @@ LANE-DB ล้อมในเขตที่กฎบัตรให้ล้อ
 
 - `pytest tests/test_login_speed.py tests/test_gm_login_scene_override_position_resync.py`
   ⇒ **41 passed, 29 subtests** (ตรงกับที่ COO วัดเองบนสาขา `eww6tv`)
-- **ชุดเต็มบนต้นไม้สุดท้าย: `8079 passed, 323 skipped, 16187 subtests` exit 0 — เขียว(cloud sanity)**
+- **ชุดเต็มบนต้นไม้สุดท้าย: `8081 passed, 323 skipped, 16187 subtests` exit 0 — เขียว(cloud sanity)**
+  (`8079` ก่อนใส่หมุดสองตัวของ D1 · `+2` คือหมุดนั้นเอง ไม่มีเทสเดิมตัวไหนขยับ)
   รันบนต้นไม้ที่ **มี `origin/main` อยู่แล้ว** (`git merge-base --is-ancestor origin/main HEAD` exit 0)
   ตาม `COO 0053` กฎ ก. ⇒ ไม่ใช่หัวสาขาเพียว
 - 🔴 **ซ้อมเกตในสภาพ "ไม่มี `pf_bridge` ข้าง ๆ"** (`COO 2344` — ไม่บังคับรอบนี้เพราะไม่มีไฟล์ `tests/test_*.py`
   ใหม่ แต่รันเพราะใบนี้เป็นใบที่แพงที่สุดในโปรเจกต์ตอนนี้): worktree นอกโฟลเดอร์แม่ + ตัด 48 โมดูลแบบเดียวกับเกต
-  ⇒ **`7149 passed, 74 skipped, 14162 subtests` exit 0** · skip census **RESULT: PASS** exit 0
-  🔴 **เทียบกับ run `33660327427` ของเกตจริง: `7148 passed + 1 failed` = `7149` · `74 skipped` · `14162 subtests` ตรงกันทุกตัว**
+  ⇒ **`7151 passed, 74 skipped, 14162 subtests` exit 0** · skip census **RESULT: PASS** exit 0
+  (รันบนคอมมิตที่ push จริง `f2c191bc` · ยืนยันในล็อกว่าไม่มี `pf_bridge` ข้าง ๆ)
+  🔴 **เทียบกับ run `33660327427` ของเกตจริง: `7148 passed + 1 failed` = `7149` แล้ว `+2` หมุดของ D1 = `7151`
+  · `74 skipped` และ `14162 subtests` **ตรงกับเกตทุกตัว** ⇒ หมุดที่เพิ่มไม่ได้เพิ่ม skip และไม่ขยับหมุด 48
   ⇒ นี่คือหลักฐานที่แรงที่สุดเท่าที่ Linux ให้ได้ว่าเดลตาเดียวที่เหลือคือตัวที่ถูกซ่อมพอดี
 - `tools/verify_hypothesis_ledger.py` ⇒ **PASS entries=50** (ขั้นบังคับก่อน commit หัวข้อ 7)
 - ไม่มีอักขระนอก ASCII ในดิฟทั้งใบ (`git diff | grep -P '[^\x00-\x7F]'` ว่าง) · `git diff --check` ว่าง
