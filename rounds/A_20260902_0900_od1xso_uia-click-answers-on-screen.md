@@ -70,38 +70,83 @@ stub `.CONSUMED.txt` ครบทั้งสองใบ + สำเนาเ�
 
 ## 4. สิ่งที่ส่งจริง
 
-`src/pirateforce_foundation/world_logout_button_notice.py` (โมดูลใหม่ · 298 บรรทัด · ASCII ล้วน)
-- `classify_button(frame)` -> ชื่อปุ่ม + subcode + จำนวน vital + ไบต์ตามหลัง (ผ่านตัวจำแนกเดิม ไม่ถอดซ้ำ)
-- `make_uia_notice(legacy, frame)` -> ประกอบบรรทัด 12 ASCII `BACK REFUSED`
-  ผ่าน `gm/say_wire.make_local_talk_notice_frame` ของ LANE-GM (**import ไม่ก๊อปตรรกะ**)
-- `observe(legacy, frame)` -> `(notice | None, บรรทัด ASCII)` — หนึ่งคอลสำหรับ call site เดียวของ chief
-  สี่ทางออก: `LANE_A_UIA_NOTICE_COMPOSED` · `LANE_A_UIA_STOOD_DOWN` (UI-B) ·
-  `LANE_A_UIA_NOTICE_FAILED` (ตัวประกอบปฏิเสธ) · `LANE_A_LOGOUT_FRAME_UNCLASSIFIED`
+`src/pirateforce_foundation/world_logout_button_notice.py` (โมดูลใหม่ · ASCII ล้วน · **ประตูสาธารณะประตูเดียว**)
+- `observe_parsed(legacy, parsed)` -> `(notice | None, บรรทัด ASCII)` — คอลเดียวสำหรับ call site เดียวของ chief
+  อ่าน `parsed` ตัวเดียวกับที่ `runtime.py` ถืออยู่ ผ่าน `logout_hypothesis.classify_logout_attempt`
+  (ฟังก์ชันที่ dispatch ของ scenario ใช้เอง) ⇒ ตอบคลิกที่ dispatch เรียกว่า `wrong_payload` ไม่ได้
+- ห้าทางออก แต่ละทางมี token ของตัวเอง (บรรทัดจริงที่วัดแล้ว ไม่ได้เขียนจากความจำ):
+  `LANE_A_UIA_NOTICE_COMPOSED button=BACK_TO_CHARSELECT subcode=3 vitals=1 trailing=0 text=BACK REFUSED pc=56 frame=66`
+  `LANE_A_UIA_STOOD_DOWN button=EXIT_GAME subcode=1 vitals=4 trailing=85`
+  `LANE_A_UIA_WITHDRAWN` (โมดูลถูกปิด) · `LANE_A_UIA_NOTICE_FAILED` (ตัวประกอบปฏิเสธ) ·
+  `LANE_A_LOGOUT_FRAME_UNCLASSIFIED verdict=<คำ>` (ถูกปฏิเสธ พร้อมคำตัดสินของตัวจำแนกจริง)
+- ประกอบผ่าน `gm/say_wire.make_local_talk_notice_frame` ของ LANE-GM (**import ไม่ก๊อปตรรกะ**)
 - `production_allowed = True` — **ไม่มีแฟล็ก** ตามกติกาข้อ 1 ของสาย
 - **ไม่ส่งเอง ไม่ปิด connection ไม่ import runtime/socket** (เทส AST บังคับข้อนี้)
 
-`tests/test_world_logout_button_notice.py` (28 เทส · 20 subtests)
+`tests/test_world_logout_button_notice.py` (29 เทส · 11 subtests)
 
 `pf_bridge`: `GT-205` (ใบเทสด้วยตา · เขียนผ่าน pf-queue-author · สถานะ **BLOCKED** จนกว่า call site ขึ้น main
 พร้อม RECHECK ที่รันได้จริง) · ปิดหัวใบ `RE-197` · จดหมาย CORE-REQUEST ถึง chief · จดหมาย ASK-COO เรื่องถ้อยคำ
 
 ## 5. หลักฐานสองชั้น
 
-- **wire/DB (ทำแล้ว)**: 28 เทสเทียบ **ไบต์ตรง** กับตัวประกอบของ `say_wire` และพิสูจน์ว่า
+🔴 **ชั้นที่รอบนี้ไปถึงจริงคือ composition/unit ไม่ใช่ wire/DB** (pf-adversary D10 · `EVIDENCE_GATES.md`
+นิยาม wire/DB ว่าเป็นเฟรมในล็อกคอนโซล/แถวใน DB/เหตุการณ์ที่เซิร์ฟเวอร์บันทึก — รอบนี้ไม่มีซ็อกเก็ต
+ไม่มี DB ไม่มีเซิร์ฟเวอร์ เฟรมคำขอเป็น hex ในไฟล์เทส) ร่างแรกของไฟล์รอบนี้เขียนว่า "wire/DB (ทำแล้ว)" — **ผิดหนึ่งขั้น แก้แล้ว**
+
+- **composition/unit (ทำแล้ว)**: 29 เทสเทียบ **ไบต์ตรง** กับตัวประกอบของ `say_wire` และพิสูจน์ว่า
   12 ตัวอักษรอยู่ในเฟรมจริง (UTF-16LE หลังแท็ก `0x48` + ความยาว `0x18`) · เฟรมคำขอสองใบที่พิน
-  **เป็นไบต์จริงจากมือเจ้าของ** ไม่ใช่ของประดิษฐ์
-- **client-observable (ยังไม่ทำ ตั้งใจ)**: `GT-205` — ไม่มีใครเคยเห็นช่องนี้เรนเดอร์ **ขณะ dialog เปิด**
-  หลักฐานเรนเดอร์ที่มี (`GT-006`/`GT-009`) วัดตอน dialog ปิด ⇒ ผลลบของใบนี้มีค่าเท่าผลบวก
-  และแปลว่า "dialog กินอินพุต/เรนเดอร์" ไม่ใช่ "ตัวประกอบผิด"
+  **เป็นไบต์จริงจากมือเจ้าของ** parse ด้วย `legacy.parse_outer` ของจริง ไม่ใช่ของปลอม
+- **wire/DB (ยังไม่ทำ)**: มาถึงเมื่อ call site ของ chief อยู่บน main แล้วบูตพิมพ์ token จริง
+- **client-observable (ยังไม่ทำ ตั้งใจ)**: `GT-205` — 🔴 **ไม่เคยมีบรรทัดที่เซิร์ฟเวอร์ประกอบเองบนช่องนี้
+  ถูกเห็นบนจอบนบูตปกติเลยสักครั้ง** (`gm/say_wire.py` เขียนไว้เองเป็นตัวพิมพ์ใหญ่ · ที่เรนเดอร์ใน
+  `GT-006`/`GT-009` คือข้อความที่ไคลเอนต์ส่งเองแล้วสะท้อนกลับ หลังแฟล็ก และ dialog ปิดอยู่)
+  ⇒ ผลลบของใบนี้มีค่าเท่าผลบวก และแปลว่า "ช่องนี้/dialog ไม่วาดให้" ไม่ใช่ "ตัวประกอบผิด"
 
-## 6. pf-adversary
+## 6. pf-adversary — **ไม่ผ่าน 18 ข้อ** และห้าข้อแรกเปลี่ยนรูปของรอบนี้ทั้งรอบ
 
-(เติมในหัวข้อนี้ก่อน commit — ดูข้อ 8)
+**D1+D2 (วิกฤต, วัดแล้ว) — token ที่ `GT-205` สั่งให้ผู้เทสคัดลอก เป็น token ที่โมดูลพิมพ์ไม่ได้
+และมันติดตั้งแต่ก่อนประกอบไบต์**
+ร่างแรกพิมพ์ `LANE_A_UIA_NOTICE_COMPOSED` ออกมาจาก **การจำแนก** ไม่ใช่จากไบต์ ⇒ ตัวประกอบปฏิเสธ
+(ข้อความ 13 ตัวอักษร / seam พัง) ก็ยังขึ้นคำว่า COMPOSED · และบรรทัด UI-A ที่พิมพ์จริงไม่มีฟิลด์ที่ใบเทสสั่งให้คัดลอกเลย
+**แก้แล้ว:** `COMPOSED` ออกจาก `LogoutButtonNotice` เท่านั้น (มีไบต์แน่นอน) · ทุกบรรทัดมีฟิลด์ครบชุดเดียวกัน
+· เพิ่มเทสที่ยืนยันว่า "ตัวประกอบปฏิเสธ ⇒ ห้ามมีคำว่า COMPOSED ในบรรทัด"
+
+**D5 (วิกฤต, วัดแล้ว) — สองประตู รับเฟรมคนละชุด**
+ทางไบต์ดิบรับ `vital_count == 1` + ขยะ 50 ไบต์ ซึ่ง `classify_logout_attempt` เรียกว่า `wrong_payload`
+(เป็นรูเดียวกับที่ pf-adversary เคยปิดในไฟล์นั้นเอง) ⇒ เซิร์ฟเวอร์จะพ่น `BACK REFUSED` ให้คลิกที่ตัวเองไม่รับ
+**แก้แล้ว:** ตัดทางไบต์ดิบทิ้งทั้งหมด เหลือ `observe_parsed` ประตูเดียว + เทสบังคับว่ามีประตูเดียว
++ เทสยิงเคสขยะ 50 ไบต์นั้นตรง ๆ
+
+**D3 (สูง, วัดแล้ว) — ถ้อยคำ 12 ตัวที่ใบเทสสั่งให้คนอ่านจากจอ ไม่มีเทสไหนพินเลย**
+ผู้ตรวจเปลี่ยนเป็น `BACK DENIED!` แล้วชุดเทสยัง **เขียวทั้งชุด** ⇒ ใบ `GT-205` จะพิสูจน์ไม่ได้เงียบ ๆ
+**แก้แล้ว:** `assertEqual(UIA_NOTICE_TEXT, "BACK REFUSED")` ตรง ๆ (แบบเดียวกับที่ LANE-GM ทำกับ `SPEED DENIED`)
+
+**D7 (สูง, วัดแล้ว) — คอมเมนต์บอก chief ให้ถามเกตผ่าน `lane_hooks.module_production_allowed`
+ซึ่งคืน `False` ให้โมดูลนี้ตลอดกาล** (มันแก้ชื่อเฉพาะโมดูลใต้ `lane_hooks/`)
+⇒ call site จะยืนลงทุกคลิก ขณะที่ RECHECK ของใบเทสเห็นสายต่อแล้ว = เจ้าของเสียรอบ attended ทั้งรอบ
+**แก้แล้ว** ทั้งในคอมเมนต์และในใบ CORE-REQUEST
+
+**D4 (กลาง) — ปิดโมดูลเอง แต่รายงานว่า "ตัวประกอบพัง"** ⇒ เพิ่ม token `LANE_A_UIA_WITHDRAWN` แยกออกมา
+**D6/D9/D10 (กลาง) — ข้ออ้างสูงกว่าหลักฐานสามที่** ⇒ แก้ถ้อยคำทั้งสามที่ (ดูข้อ 5 กับข้อ 9)
+**D11 (กลาง) — เลข 14 ที่ก๊อปมาด้วยมือ** ⇒ อ่านจาก `logout_hypothesis.LOGOUT_REQUEST_PAYLOADS` แทน + เทสผูกสองฝั่ง
+**D12 (ต่ำ) — "ไม่ raise ทุกกรณี" ไม่จริงกับ `BaseException`** ⇒ ประกาศรูนี้ไว้ในโมดูลเอง
+**D14/D15 (ต่ำ) — "UI-B ไม่ได้อะไรเลย" ไม่จริง (ได้บรรทัดคอนโซล) และบรรทัด UNCLASSIFIED ไม่มีข้อมูล**
+⇒ แก้ถ้อยคำ + ใส่ `verdict=<คำ>` ของตัวจำแนกจริงลงในบรรทัด
+**D17/D18 (ต่ำ) — ช่องว่างในถ้อยคำไม่เคยถูกวัด และ n=1 ต่อปุ่ม** ⇒ เขียนไว้ทั้งสองที่ ไม่แก้โค้ด
+(โค้ดแยกปุ่มด้วย **subcode** ไม่ได้แยกด้วยรูปซองอยู่แล้ว)
+
+**สิ่งที่ผู้ตรวจลองแล้วพังไม่ลง:** ล็อกของ LANE-GM (`test_gm_say_gate_lock`) · ล็อก
+`test_presentation_ownership` · census ของ skip · `bytes` subclass ที่โกหก `__len__` ·
+การสลับ subcode->ปุ่ม · การลบเกต `production_allowed` (เทสจับทั้งหมด)
 
 ## 7. ชุดเทส
 
-- `python3 -m pytest -q` (ทั้งดวง) และ `tools/pf_pytest_precondition_census.py --run`
-- รายละเอียดในข้อ 8
+- `python3 -m pytest tests/test_world_logout_button_notice.py -q` ⇒ **29 passed, 11 subtests**
+- `python3 -m pytest -q` (ทั้งดวง หลังรอบแรกของการแก้) ⇒ **7136 passed, 327 skipped, 15015 subtests**
+  (จำนวน skip เท่าเดิมเป๊ะกับก่อนรอบนี้ ⇒ ไม่มี skip ใหม่ที่ไม่ได้ประกาศ)
+- `tools/pf_pytest_precondition_census.py --run` ⇒ **RESULT: PASS**
+- ทั้งสองไฟล์ **ASCII ล้วน** (เทสในไฟล์เองบังคับ)
 
 ## 8. push แล้ว รอ merge
 
@@ -113,9 +158,12 @@ stub `.CONSUMED.txt` ครบทั้งสองใบ + สำเนาเ�
 2. ไม่ได้อ้างว่าใครเห็น `BACK REFUSED` บนจอ — ยังไม่มีใครเห็น ใบ `GT-205` เป็นตัวตัดสิน
 3. ไม่แตะ `logout_hypothesis.py` · `logout_dialog_open_hypothesis.py` · `runtime.py` · `app.py`
    · canonical DB · ใบของสายอื่น · `patches/gm_plugin/` · `HYP-PF-040`
-4. ไม่ได้อ้างว่าบรรทัดนี้จะไปถึงไคลเอนต์เมื่อ chief ต่อสาย — ถ้าตัวแปรที่ call site ไม่ใช่เฟรมเต็ม
-   ผลคือ `UNCLASSIFIED` เงียบ ๆ · ใบ CORE-REQUEST เขียนข้อนี้ไว้ตรง ๆ และขอให้ chief ตอบกลับหนึ่งบรรทัด
+4. ไม่ได้อ้างว่าบรรทัดนี้จะไปถึงไคลเอนต์เมื่อ chief ต่อสาย · ถ้าเฟรมไม่ถึงจุดนั้น บรรทัดที่ได้คือ
+   `UNCLASSIFIED verdict=<คำ>` ซึ่งบอกเหตุผลในตัว ไม่ใช่ความเงียบ
 5. ถ้อยคำ `BACK REFUSED` เป็น **[สมมติของสาย A - รอ COO ยืนยัน]** (จดหมาย `0910`)
-   ต้นทุนถ้าเปลี่ยนใจ = ค่าคงที่หนึ่งตัว
+   ต้นทุนถ้าเปลี่ยนใจ = ค่าคงที่หนึ่งตัว + เทสสองบรรทัด
+6. `classify_logout_attempt` เป็นฟังก์ชันที่ dispatch **ของ scenario** ใช้ — บนบูตปกติ **ยังไม่มีใครเรียกมันวันนี้**
+   บรรทัดที่ขอจาก chief จะเป็นผู้เรียกรายแรกในโหมดโปรดักชัน · ที่อ้างคือ "ตัวอ่านไบต์ตัวเดียว" ไม่ใช่ "พิสูจน์แล้วว่าใช้ได้จริง"
+7. UI-B ไม่ได้ "ไม่ได้อะไรเลย" — **ไม่ได้ไบต์** แต่ได้บรรทัดคอนโซลหนึ่งบรรทัด ซึ่งเป็นหลักฐานที่คนอ่านล็อกของ `GT-194` จะเห็น
 
 -- LANE-A (WORLD) round `od1xso`

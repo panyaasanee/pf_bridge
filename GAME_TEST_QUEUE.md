@@ -10490,11 +10490,18 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
 - pass criteria: (TWO layers -- neither layer may ever be offered as proof of the other)
     wire/DB          : headless-readable from the console/capture alone. The subcode-3 request arrives
       and the console prints
-      `LANE_A_UIA_NOTICE_COMPOSED button=BACK_TO_CHARSELECT subcode=3 vitals=1 trailing=0`
-      together with the composed frame length. If she also clicks the exit button at any point, the
-      matching line is `LANE_A_UIA_STOOD_DOWN button=EXIT_GAME subcode=1 vitals=4 trailing=85` and it
-      must show that this lane composed NOTHING for subcode 1. Copy both lines verbatim, do not
-      interpret. `integrity_check` = `ok`; canonical sha unchanged; no uncaught traceback.
+      `LANE_A_UIA_NOTICE_COMPOSED button=BACK_TO_CHARSELECT subcode=3 vitals=1 trailing=0 text=BACK REFUSED pc=56 frame=66`
+      (one line, exactly as printed -- the `pc=`/`frame=` lengths are the composed bytes, so the token
+      cannot appear unless bytes exist). If she also clicks the exit button at any point, the matching
+      line is `LANE_A_UIA_STOOD_DOWN button=EXIT_GAME subcode=1 vitals=4 trailing=85`, which shows this
+      lane composed NO BYTES for subcode 1 -- it still prints that one line, which is itself evidence
+      `GT-194`'s reader will see; "nothing at all" would be the wrong expectation. Copy both lines
+      verbatim, do not interpret.
+      Three other tokens can appear instead, and each means something different:
+      `LANE_A_UIA_WITHDRAWN` (the module is switched off), `LANE_A_UIA_NOTICE_FAILED` (the composer
+      refused -- a bug to report, not a tester error), `LANE_A_LOGOUT_FRAME_UNCLASSIFIED verdict=<word>`
+      (the frame reached this lane and was rejected; the word is the live classifier's own verdict).
+      Copy whichever appeared. `integrity_check` = `ok`; canonical sha unchanged; no uncaught traceback.
       This layer CANNOT answer: whether anything was drawn on screen.
     client-observable: needs the human at the screen; never inferred from the console. Within the
       30-second window after the click, a human SEES the line `BACK REFUSED` -- twelve ASCII
