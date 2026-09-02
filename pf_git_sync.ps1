@@ -468,13 +468,165 @@ if (FlagIsHeld $lockGitPath) {
 Log '[1]' 'LOCK_GIT free'
 
 # ---------------------------------------------------------------------------
-# [2] a real index.lock means git itself is mid-operation
+# [2] a real index.lock means git itself is mid-operation.
+#
+# HISTORY, so nobody treats the next one as a first occurrence.  A 0-byte
+# index.lock has been left in this repo at least SIX times: 2026-08-20 (staged
+# jobs 168 and 169 still tell the owner to delete it by hand), 2026-08-31
+# twice, 2026-09-02 three times, and 2026-09-02 18:02:37, which blocked every
+# round for 74 minutes and held a whole attended round's letters on the disk.
+# Five of those were renamed out of the way by the ka1-B session
+# (.git\STALE_index.lock.ka1B_*) and never reported, which is exactly why the
+# cause was never chased.
+#
+# WHO CREATES IT is still unknown and this block does not guess.  Windows
+# process auditing is off, so nothing on this machine records it.  The 0-byte
+# size is the one hard clue: git creates index.lock EMPTY and then writes into
+# it, so a process killed between those two steps leaves precisely this.
+#
+# Three behaviours, approved by the owner 2026-09-02 ~19:30 (+07:00):
+#   (1) self-heal, and only under three guards together
+#   (2) evidence trap: the first round of an episode records who was running
+#   (3) alarm: after N consecutive skips, one letter, then muted
 # ---------------------------------------------------------------------------
+
+$INDEX_LOCK_STALE_MIN            = 10
+$INDEX_LOCK_ROUNDS_BEFORE_LETTER = 5
+
+function IndexLockStatePath() { return (Join-Path $BridgeRepo 'sync_state_index_lock.log') }
+
+function IndexLockReset() {
+    $p = IndexLockStatePath
+    if (Test-Path -LiteralPath $p) { Remove-Item -LiteralPath $p -Force -ErrorAction SilentlyContinue }
+}
+
+function IndexLockLiveGit() {
+    # git-family processes only.  A running git is the one thing that makes
+    # deleting the lock dangerous, so this guard must never be softened for
+    # convenience.
+    return @(Get-Process -ErrorAction SilentlyContinue |
+        Where-Object { $_.ProcessName -in @('git', 'git-remote-https', 'git-remote-http', 'git-lfs', 'gitk') })
+}
+
+function IndexLockSnapshot([string]$why, $lockItem) {
+    # The trap.  Written once per episode, beside the sync log, never into git:
+    # the point is to name the process next time, not to fill the repo.
+    $wp = Join-Path $BridgeRepo 'sync_state_index_lock_witness.log'
+    $lines = @()
+    $lines += '================================================================'
+    $lines += ('captured ' + (Stamp) + '   reason: ' + $why)
+    if ($lockItem) {
+        $lines += ('lock size  : ' + $lockItem.Length + ' bytes')
+        $lines += ('lock mtime : ' + $lockItem.LastWriteTime.ToString('yyyy-MM-ddTHH:mm:ss'))
+    }
+    $lines += 'processes running at this moment (name / pid / started):'
+    foreach ($pr in @(Get-Process -ErrorAction SilentlyContinue |
+                      Where-Object { $_.ProcessName -match '^(git|gitk|powershell|pwsh|cmd|conhost|py|python|node|GameClient|Code|ssh)' } |
+                      Sort-Object ProcessName)) {
+        $st = 'unknown'
+        try { $st = $pr.StartTime.ToString('yyyy-MM-ddTHH:mm:ss') } catch { $st = 'unknown' }
+        $lines += ('    ' + $pr.ProcessName.PadRight(22) + ' pid=' + ([string]$pr.Id).PadRight(8) + ' started ' + $st)
+    }
+    try { $lines | Out-File -LiteralPath $wp -Encoding utf8 -Append } catch { }
+}
+
+function IndexLockTick($lockItem, [int]$ageMin) {
+    $p = IndexLockStatePath
+    $count = 0
+    $alarmed = '0'
+    if (Test-Path -LiteralPath $p) {
+        try {
+            $st = @(Get-Content -LiteralPath $p -ErrorAction Stop)
+            if ($st.Count -ge 1) { [void][int]::TryParse(([string]$st[0]).Trim(), [ref]$count) }
+            if ($st.Count -ge 2) { $alarmed = ([string]$st[1]).Trim() }
+        } catch { }
+    }
+    if ($count -eq 0) { IndexLockSnapshot 'first round of this index.lock episode' $lockItem }
+    $count = $count + 1
+    if ($count -ge $INDEX_LOCK_ROUNDS_BEFORE_LETTER -and $alarmed -ne '1' -and (-not $DryRun) -and (-not $SelfCheck)) {
+        $nd = Join-Path $BridgeRepo 'notes_to_chief'
+        $name = (Get-Date -Format 'yyyyMMdd_HHmm') + '_SYNC-ALARM-index-lock-has-blocked-every-round-for-' + $count + '-rounds.md'
+        $lines = @()
+        $lines += ('# SYNC ALARM - .git\index.lock has blocked ' + $count + ' rounds in a row')
+        $lines += ''
+        $lines += ('written by pf_git_sync.ps1 step [2] at ' + (Stamp) + ' (machine local time)')
+        $lines += 'one letter per episode, then muted until the lock clears.'
+        $lines += ''
+        $lines += '## what is wrong'
+        $lines += ''
+        $lines += '    pf_bridge\.git\index.lock exists, so every step after [2] is skipped:'
+        $lines += '    nothing is committed, nothing is pushed, the server repo is not pulled.'
+        $lines += ('    ' + $count + ' rounds in a row, about ' + ($count * 2) + ' minutes so far.')
+        if ($lockItem) {
+            $lines += ('    lock size  : ' + $lockItem.Length + ' bytes')
+            $lines += ('    lock mtime : ' + $lockItem.LastWriteTime.ToString('yyyy-MM-ddTHH:mm:ss') + '  (age ' + $ageMin + ' min)')
+        }
+        $lines += ''
+        $lines += '## why the self-heal did not fire'
+        $lines += ''
+        $lines += '    it needs all three at once: the lock is 0 bytes, it is at least'
+        $lines += ('    ' + $INDEX_LOCK_STALE_MIN + ' minutes old, and NO git process is running.')
+        $lines += '    A non-empty lock means a git process wrote into it - that is not a stale'
+        $lines += '    lock and this script will never delete it.  A human has to look.'
+        $lines += ''
+        $lines += '## where to look'
+        $lines += ''
+        $lines += '    sync_state_index_lock_witness.log in this folder lists every process that'
+        $lines += '    was running when the episode started.  That file is the trap set for'
+        $lines += '    whoever creates these; read it before deleting anything.'
+        $lines += ''
+        $lines += '## nonclaims'
+        $lines += ''
+        $lines += '    - this letter does NOT say which process created the lock.  Nothing on'
+        $lines += '      this machine records that today; process auditing is off.'
+        $lines += '    - a stale lock is not evidence of data loss.  Nothing is lost by the skip'
+        $lines += '      itself; the work waits.'
+        try {
+            $lines | Out-File -LiteralPath (Join-Path $nd $name) -Encoding utf8
+            Shout '[2]' ('index.lock alarm letter written: ' + $name)
+        } catch {
+            Shout '[2]' ('index.lock alarm letter FAILED to write: ' + $_.Exception.Message)
+        }
+        $alarmed = '1'
+    }
+    try { @([string]$count, $alarmed) | Out-File -LiteralPath $p -Encoding ascii } catch { }
+    return $count
+}
 
 $idxLock = Join-Path $BridgeRepo '.git\index.lock'
 if (Test-Path -LiteralPath $idxLock) {
-    Log '[2]' 'index.lock present - another git process is running, skipping this round'
-    Finish 0 'SKIP_INDEX_LOCK' 'git busy'
+    $li = $null
+    try { $li = Get-Item -LiteralPath $idxLock -Force -ErrorAction Stop } catch { }
+    $ageMin = 0
+    if ($li) { $ageMin = [int]((Get-Date) - $li.LastWriteTime).TotalMinutes }
+    $liveGit = IndexLockLiveGit
+    $sizeOk = ($li -ne $null -and $li.Length -eq 0)
+    $ageOk  = ($ageMin -ge $INDEX_LOCK_STALE_MIN)
+    $gitOk  = ($liveGit.Count -eq 0)
+
+    if ($sizeOk -and $ageOk -and $gitOk -and (-not $DryRun) -and (-not $SelfCheck)) {
+        IndexLockSnapshot 'about to self-heal a stale lock' $li
+        Remove-Item -LiteralPath $idxLock -Force -ErrorAction SilentlyContinue
+        Start-Sleep -Milliseconds 200
+        if (Test-Path -LiteralPath $idxLock) {
+            Shout '[2]' 'stale index.lock could not be removed - skipping this round'
+            [void](IndexLockTick $li $ageMin)
+            Finish 0 'SKIP_INDEX_LOCK' 'git busy'
+        }
+        Shout '[2]' ('stale index.lock removed by self-heal: 0 bytes, ' + $ageMin + ' min old, no git process running')
+        IndexLockReset
+    }
+    else {
+        $sz = '?'
+        if ($li) { $sz = [string]$li.Length }
+        Log '[2]' ('index.lock present - size=' + $sz + 'B age=' + $ageMin + 'min gitProcesses=' + $liveGit.Count + ' - not touching it, skipping this round')
+        $n = IndexLockTick $li $ageMin
+        Log '[2]' ('consecutive index.lock skips: ' + $n)
+        Finish 0 'SKIP_INDEX_LOCK' 'git busy'
+    }
+}
+else {
+    IndexLockReset
 }
 Log '[2]' 'no index.lock'
 
