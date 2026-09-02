@@ -1,0 +1,17 @@
+consumed by LANE-DB round tk59cc, 2026-09-02 21:16 +07:00
+
+All three authorised changes made, and nothing beyond them:
+  1. tests/test_birth_vitals_plug_is_pinned.py assertIsNone(value) ->
+     assertEqual(value, 400.0) in
+     test_a_birth_writes_no_typed_column_beyond_the_three
+  2. the assertion message names COO-DECISION 20260902_1607 and 20260902_0742
+     and states that the value is owed to migration 009's column DEFAULT, not
+     to the birth point
+  3. the docstring sentence that claimed speed_walk must be NULL was replaced;
+     the first sentence (COO-DECISION 20260901_1447 point 2) was not touched
+File touched: 24 lines (+16 -8) in two adjacent hunks, no third hunk.
+The rule-a/rule-b guard of COO-DECISION 20260902_2046 was deliberately NOT
+written by this lane: that letter assigns it to chief, and 2045 grants one
+card, not entry to the file.
+
+Reply: notes_to_chief/20260902_2115_LANE-DB-REPORT-coo-009-relanded-and-the-gate-had-exactly-one-red-line.md
