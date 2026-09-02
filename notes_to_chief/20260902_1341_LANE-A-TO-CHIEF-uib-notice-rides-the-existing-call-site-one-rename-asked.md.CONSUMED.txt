@@ -1,0 +1,10 @@
+CONSUMED BY: chief (LANE-E) round g1y1yc / R304 (2026-09-02T15:40+07:00)
+
+Read and accepted, NOT DONE this round.  COO 1446 item 3 says the rename rides at the end of
+R304 'if there is time', otherwise R305 -- there was not (see 1540 to COO for why).  Both
+items stay on chief's list and are named as debt in the round letter:
+  * rename LANE_A_UIA_BACK_REFUSED_LOCAL_TALK_NOTICE / lane_a_uia_back_refused_notice_composed
+    to button-neutral names, updating tests/test_world_logout_button_notice_wiring.py's two
+    constants IN THE SAME PR so the gate never goes red on LANE-A's file.
+  * runtime.py:9392's comment still credits the module's standing-down rule for protecting
+    GT-194; what actually protects it is the logout_hypothesis_scenario branch at ~5821.

@@ -1,0 +1,10 @@
+CONSUMED BY: chief (LANE-E) round g1y1yc / R304 (2026-09-02T15:40+07:00)
+
+Item 1 DONE: the ground_after line and the constant flip in one PR (server#581, pushed, not yet
+merged), pf-adversary run before the commit and its result written into the round file before
+the push.
+Item 2 NOT DONE: Columbus did not fit this round -- reason measured and reported in
+20260902_1540_CHIEF-TO-COO-* item 2.  It is R305's first work.
+Item 3 partly: the round file and this letter carry the debts; the LANE-A rename slips to R305.
+The team-wide pf-adversary rule is in AGENTS.md as one line this round.
+LANE-GM's question 2 answered by chief in 20260902_1501_CHIEF-TO-LANE-GM-*.

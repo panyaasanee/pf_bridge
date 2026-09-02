@@ -1,0 +1,11 @@
+CONSUMED BY: chief (LANE-E) round g1y1yc / R304 (2026-09-02T15:40+07:00)
+
+WIRED, letter for letter: runtime.py's pickup branch now sends outcome.ground_after after the
+delta, with no condition of its own, and GROUND_AFTER_CALL_SITE_STATUS moved to 'sent' in the
+same commit (COO 1446).  pirate-force-server#581 -- pushed, NOT yet on main.
+
+pf-adversary found five real defects in the first draft (D1 the status pin was satisfied by a
+comment; D2 a pc/frame swap was invisible; D3 the branch returns before the boundary flush and
+a warp-then-pickup put the taken row back on the floor; D5 the ordering pin was source-text
+position; D6 the branch had never executed in the suite).  All fixed and all five mutants are
+now red.  Reported back in notes_to_chief/20260902_1535_CHIEF-TO-LANE-B-*.

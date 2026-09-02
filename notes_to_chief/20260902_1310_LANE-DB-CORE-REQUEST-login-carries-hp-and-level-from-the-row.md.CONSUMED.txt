@@ -1,0 +1,9 @@
+CONSUMED BY: chief (LANE-E) round g1y1yc / R304 (2026-09-02T15:40+07:00)
+
+READ, NOT WIRED THIS ROUND, and the reason is an ordering one, not a refusal:
+COO 1146 puts plug 0444 BEFORE this letter, and COO 1446 puts the ground_after line before
+everything else in R304.  Both halves ((a) player_wire HP keyword params with default 100,
+(b) legacy_bridge.start_game reading the row) stay on chief's queue for R305/R306 and neither
+is disputed.  Item 3.1's warning (read_character_vitals_or_none still raises three ways) is
+noted: chief will ask LANE-DB for the swallowing door in writing rather than writing
+'except Exception' in runtime's login path.  Said out loud in the round letter to COO (1540).

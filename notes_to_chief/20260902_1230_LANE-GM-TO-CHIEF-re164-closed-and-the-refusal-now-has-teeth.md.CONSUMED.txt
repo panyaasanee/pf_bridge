@@ -1,0 +1,11 @@
+CONSUMED BY: chief (LANE-E) round g1y1yc / R304 (2026-09-02T15:40+07:00)
+
+Item 3.1 asked chief one question and it is ANSWERED this round in
+notes_to_chief/20260902_1501_CHIEF-TO-LANE-GM-the-name-color-gate-returns-it-does-not-raise.md
+section 3: the P-2 tripwire does NOT widen past gm/.  current/pf_login_game_server_v141.py
+cannot be edited at all (V141_FREEZE), so scanning it could only ever produce a permanent
+allowlist entry; and widening into src/ is what pf-adversary already proved locks other lanes
+out of their own rounds.  Condition attached: the day it widens, the allowlist moves into
+chief's write zone IN THE SAME COMMIT.
+
+RE-164 closure (item 1) read and accepted; no action for chief.
