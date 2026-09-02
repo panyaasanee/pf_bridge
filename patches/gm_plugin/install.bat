@@ -34,8 +34,17 @@ if "%~1"=="" (
 
 set "TARGET=%~1"
 
+REM !! EVERY `%TARGET%` INSIDE A PARENTHESISED BLOCK BELOW IS QUOTED, and it
+REM is a bug fix, not a style (pf-adversary, round `hj2cry`, D9).  Percent
+REM expansion runs BEFORE parenthesis tokenising, so an unquoted
+REM `C:\Program Files (x86)\PirateForce` puts a bare `)` inside the block and
+REM closes it early: cmd then runs `\PirateForce` as a command and falls out
+REM to the next line -- which in the second block is `exit /b 1`, i.e. an
+REM unconditional `[STOP] a GameMaster.dll ALREADY EXISTS` about a folder that
+REM has none.  The client is very plausibly installed under a path with
+REM parentheses, so this was reachable on the first real use.
 if not exist "%TARGET%\" (
-  echo [FAIL] not a folder: %TARGET%
+  echo [FAIL] not a folder: "%TARGET%"
   exit /b 1
 )
 
@@ -48,7 +57,7 @@ if exist "%TARGET%\GameMaster.dll" (
   echo.
   echo [STOP] A GameMaster.dll ALREADY EXISTS in the target folder.
   echo.
-  echo         %TARGET%\GameMaster.dll
+  echo         "%TARGET%\GameMaster.dll"
   echo.
   echo Nothing has been changed. This is important: if that file is the
   echo original plug-in, it is the artifact this project has been unable to
@@ -65,9 +74,88 @@ if exist "%TARGET%\GameMaster.dll" (
   exit /b 1
 )
 
+REM ===========================================================================
+REM Revision 2: DO NOT INSTALL A DLL WINDOWS WILL NOT LOAD.
+REM
+REM COO-DECISION 2026-09-02T19:48+07:00 asked this script to "carry everything
+REM the DLL needs, not the .dll on its own".  Measured answer, and it is worth
+REM stating plainly because it is not what the phrasing suggests: once the
+REM manifest is EMBEDDED (build_vs2008.bat revision 5), the .dll on its own IS
+REM everything -- ka1-A's attended R304 loaded and ran exactly one file in the
+REM client folder, with the CRT resolved out of the client's own side-by-side
+REM assembly.  So this script does not gain a second file to copy.  What it
+REM gains is a check that the ONE file is complete.
+REM
+REM WHY THAT IS THE FILE-COMPLETENESS PROBLEM AND NOT A SUBSTITUTE FOR IT: the
+REM failure being prevented is precisely "a needed piece is missing when the
+REM loader looks".  Before revision 5 that piece was a manifest sitting beside
+REM the DLL, unread by anyone; the fix put it INSIDE the image.  A DLL built by
+REM an older copy of the build script -- or by a build that stopped before the
+REM embed -- still has the hole, and it is invisible: 13,824 bytes, all the old
+REM checks [ok], and LoadLibraryW answers 14001 with no message on screen.
+REM
+REM !! IT RUNS **BELOW** THE [STOP] GUARD, and revision 2's first draft had it
+REM above (pf-adversary, round `hj2cry`, D12).  The highest-value output this
+REM script has is "there is ALREADY a GameMaster.dll in that folder" -- the
+REM artifact this project has failed to obtain since 27 Aug.  A tool check
+REM placed above it would swallow that discovery on exactly the machine most
+REM likely to lack the tool: the GAME PC, which is not the build machine.
+REM
+REM !! AND A MISSING TOOL IS A WARNING, NOT A REFUSAL, for the same reason.
+REM `dumpbin` ships with VC, not with the game.  Refusing to install a
+REM verified-good DLL because the client machine has no compiler costs the
+REM same attended round as installing a bad one -- so the two cases are split:
+REM the tool SAYS the manifest is missing => refuse; the tool is ABSENT => say
+REM so loudly and continue.  `build_vs2008.bat` gates hard on the machine that
+REM has the tool, which is where the gate belongs.
+REM
+REM WHY `dumpbin` AND NOT `mt.exe` HERE: `mt.exe -inputresource:...;#2
+REM -validate_manifest` has never been run by anyone on this project, so a
+REM refusal built on it could be refusing a good file (pf-adversary D11).  The
+REM `.rsrc` section IS measured: ka1-A's unloadable DLL had none.
+REM
+REM ~~a plain `GameMaster.dll.manifest` copied beside the DLL~~ -- NOT DONE,
+REM and stated rather than silently skipped: an external manifest beside a DLL
+REM is not what the loader read on the machine that measured this, and nobody
+REM in this project has measured whether it would be read at all.  Copying an
+REM extra file into the owner's client folder on an unmeasured guess is the
+REM kind of change this script's whole design refuses to make.  Asked back in
+REM `notes_to_chief/20260902_2038_LANE-GM-TO-COO-mt-exe-step-landed-and-the-
+REM file-install-bat-does-not-copy.md`.
+REM ===========================================================================
+set "DUMPBIN="
+for /f "delims=" %%I in ('where dumpbin 2^>nul') do if not defined DUMPBIN set "DUMPBIN=%%I"
+if defined DUMPBIN goto have_dumpbin
+
+echo [warn] dumpbin is not on PATH, so this script cannot look inside
+echo        GameMaster.dll before copying it. That check is NOT the gate --
+echo        build_vs2008.bat gates hard on the machine that builds the file --
+echo        but it does mean nothing here has verified this particular file.
+echo        If this DLL was built by build_vs2008.bat revision 5 or later, it
+echo        was checked there. If you are not sure, stop and rebuild.
+goto do_copy
+
+:have_dumpbin
+"%DUMPBIN%" /nologo /headers "GameMaster.dll" > "%TEMP%\pf_gm_headers.txt"
+findstr /c:".rsrc" "%TEMP%\pf_gm_headers.txt" >nul
+if %errorlevel% neq 0 (
+  echo.
+  echo [FAIL] GameMaster.dll has no .rsrc section, so it carries no embedded
+  echo        manifest. Windows would answer LoadLibraryW with 14001 and no
+  echo        plug-in code would ever run -- button visible, click silent,
+  echo        exactly like the bug this plug-in exists to fix.
+  echo        Nothing was copied. Rebuild with build_vs2008.bat, which embeds
+  echo        the manifest and re-reads the image before it prints [OK].
+  del /q "%TEMP%\pf_gm_headers.txt" 2>nul
+  exit /b 1
+)
+del /q "%TEMP%\pf_gm_headers.txt" 2>nul
+echo [ok] the file about to be copied carries an embedded resource
+
+:do_copy
 copy /y "GameMaster.dll" "%TARGET%\GameMaster.dll" >nul
-if errorlevel 1 (
-  echo [FAIL] copy failed. Check permissions on %TARGET%
+if %errorlevel% neq 0 (
+  echo [FAIL] copy failed. Check permissions on "%TARGET%"
   exit /b 1
 )
 
