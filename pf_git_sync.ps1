@@ -149,8 +149,17 @@ $NAME_GUARD_WAIVER = @('notes_to_chief/|.md',
 # ALLOWLIST - the list that carries untracked files - is where it belongs,
 # exactly like QUEUE_STATUS_SNAPSHOT.md before it.  Without this line the six
 # prompts point at a file that exists in no clone and the whole scheme is inert.
+# 'LOOSE_ENDS.md' added 2026-09-02 ~10:2x by ka1-A, on Panya's order.  It is the
+# register of unfinished things that have no owner and no home in any queue -
+# she said plainly that she forgets to chase them, so the ka1-A system-mechanic
+# skill re-reads it every time she calls that mode.  It sits at the bridge root
+# and is UNTRACKED, so the ALLOWLIST is where it belongs, exactly like NOW.md
+# and QUEUE_STATUS_SNAPSHOT.md before it.  Without this line the file exists in
+# no clone, the routines cannot read what is outstanding, and the register
+# quietly becomes the very thing it was built to prevent.
 $ALLOWLIST         = @('notes_to_chief', 'evidence_screens', 'rounds',
-                       'tools_bridge', 'QUEUE_STATUS_SNAPSHOT.md', 'NOW.md')
+                       'tools_bridge', 'QUEUE_STATUS_SNAPSHOT.md', 'NOW.md',
+                       'LOOSE_ENDS.md')
 # Paths that two parties legitimately write: the chief edits them on main, and the
 # assistant or the tester edits them on this disk.  Until 2026-08-24 they were
 # tracked but outside the push allowlist, which turned every local edit into a

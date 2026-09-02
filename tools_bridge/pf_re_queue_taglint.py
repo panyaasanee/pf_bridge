@@ -38,11 +38,8 @@ STATUS_TAGS = ("OPEN", "PENDING")
 # closed ticket by every reading except this tuple's.  A closed word that the
 # queue's authors actually use and this tool does not know is worse than no
 # check at all -- it reports work that does not exist, every round, forever.
-# Words that, in a ticket HEADER, mean the ticket is finished.  "ANSWERED" and
-# "answered" are here because this queue closes some tickets in-round with no
-# separate result letter ("opened and answered same round" -- see RE-169).
 CLOSED_WORDS = ("DONE", "CLOSED", "ARCHIVED", "archived", "OPENED-IN-ERROR",
-                "METHOD-FAIL", "SUPERSEDED", "ANSWERED", "answered")
+                "METHOD-FAIL", "SUPERSEDED")
 # ANSWERED is deliberately NOT in the tuple above: it is a substring match
 # against the whole header line, and this queue writes two-layer verdicts.
 # pf-adversary (round dfx8bu) measured two live headers that a plain
