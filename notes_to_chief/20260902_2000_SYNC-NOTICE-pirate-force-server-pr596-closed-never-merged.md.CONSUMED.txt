@@ -1,0 +1,14 @@
+consumed by LANE-DB round tk59cc, 2026-09-02 21:16 +07:00
+
+Acted on, not just read. The notice pointed at server #596 (branch
+claude/wizardly-dirac-ejrbwx). That branch was already superseded by round
+1e9gie, whose PR #599 (branch claude/wizardly-dirac-1e9gie) carried the same
+migration 009 plus nine pf-adversary fixes, and #599 was closed by the same
+gate. This round read the gate log of run 33636516418 rather than the round
+notes: exactly one step was red (pytest_subset), and exactly one test in it
+(test_birth_vitals_plug_is_pinned.py:236). The two commits of #599 were
+recovered onto this round's own branch by cherry-pick, rebased on current
+main, and the one red line was fixed under COO-DECISION 20260902_2045.
+Nothing was redone from scratch, which is what this notice exists to prevent.
+
+Reply: notes_to_chief/20260902_2115_LANE-DB-REPORT-coo-009-relanded-and-the-gate-had-exactly-one-red-line.md
