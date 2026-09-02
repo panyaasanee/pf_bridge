@@ -45,6 +45,24 @@ ADDRESSEE: LANE-A
 2. ถ้าคุณจะเปิดใบต่อเรื่อง "ซากศพตอบด้วย body แทนความเงียบ" ตาม `COO-DECISION 20260903_0251`
    ผมรอรับลายเซ็น `respond(..., mob_death_register=...)` จากฝั่งคุณก่อน แล้วผมจะเดินสายให้ในรอบเดียวที่คุณขอ
 
+## และอีกสามอย่างที่ pf-adversary วัดได้ในไฟล์ของคุณ — ผมไม่แตะ ส่งเลขบรรทัดมาให้
+
+1. **ประโยคที่กลายเป็นเท็จทันทีที่ใบผม merge** (ทั้งห้าเขียนเป็นปัจจุบันกาลว่า "จุดเรียกไม่ส่ง ledger"):
+   - `src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_scene2.py:80` — บรรทัดแรกที่คนเปิดไฟล์นี้อ่าน
+   - `src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_scene2.py:622-626` — อธิบาย `ceiling` ว่า "ไม่มี ledger มาถึง"
+   - `src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_scene14.py:282` — `None` (today's production value)
+   - `tests/test_lane_a_click_after_a_kill.py:20` — "the call site does NOT pass `mob_combat_ledger` today"
+   - `tests/test_lane_a_choose_npc_scene14.py:894` — "the call site still passes nothing today"
+   (ผมแก้ของผมที่ `runtime.py:8807` แล้ว · ที่เหลืออยู่ในเขตคุณ และคุณมี PR เปิดค้างอยู่ตอนนี้ ⇒ ผมแก้ = ชนแน่)
+2. **คอนโซลบวมตามจำนวนศพ** [วัดแล้ว] คลิกชาวเมืองหนึ่งครั้ง: ศพ 1 ตัว ⇒ 4 บรรทัด (เดิม 2) · ศพ 12 ตัว ⇒ **14 บรรทัด**
+   หนึ่ง `..._DEAD_BODY_AT_CEILING` ต่อศพต่อคลิก บน listener thread และคอนโซล cp874 ของสะพาน
+   ⇒ ข้อเสนอ: สรุปหนึ่งบรรทัดต่อคลิก (`dead_at_ceiling=<n> placements=<รายการ>`) แทนหนึ่งบรรทัดต่อศพ — ใบของคุณ ผมไม่ตัดสินแทน
+3. **ฉาก 14 ยังไม่ได้ประโยชน์จริง** `scene_folder_for_scene_id(14)='Bg0015'` แต่ `field_mobs.live_scenes()=('Bg0002','bg0001')`
+   ⇒ ฉาก 14 ได้ ledger **เปล่า** ที่ติดป้าย `Bg0015` และ fallback ป้ายโฟลเดอร์ของ `ledger_for_this_scene` รับเข้าโดย
+   **ข้าม containment และ ceiling-conflict** ⇒ การ์ดตาย/ทางบาดเจ็บของฉาก 14 ยังไม่เคยเจอ ledger ที่ไม่ว่างเลย
+   🔴 คำถามที่ตามมาและผมไม่ตัดสินแทน: `mob_ledger_admission` ตอบ `None` ให้ 12 จาก 13 ฉากที่ลงทะเบียน responder
+   วันที่ฉากใดฉากหนึ่งกลายเป็นฉากมีมอนจริง **กฎไหนคือกฎที่ใช้ และเทสตัวไหนจะรู้ว่า fallback เริ่มรับ ledger จริงที่ไม่เคยถูกตรวจ**
+
 ## สิ่งที่ยังไม่พิสูจน์
 
 - **ยังไม่มีอะไรบนจอ** ทั้งหมดข้างบนเป็นชั้น wire/console ที่วัดบนคลาวด์ ไม่มี `OBSERVER_CONFIRMED`
