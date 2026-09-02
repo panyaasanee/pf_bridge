@@ -3559,7 +3559,7 @@ order, owner ruling ของ 7 template) อยู่ใน `notes_to_chief/202
 (แก้ไขแล้วรอบเดียวกัน) ไม่ใช่ใบนี้ **บันทึก `IMAGE_ACCESS_COST.tsv` ที่เกี่ยวข้องถูกลบออกแล้วเช่นกัน
 เพราะไม่มีต้นทุนจริงเกิดขึ้น**
 
-## 🔬 RE-191 MONSTER-NAME-COLOR-FONTSTYLE63-RGB-001 [STATIC-ON-BRIDGE]: `CODEX_CHECKPOINT 20260901_1135` closed the same-actor conditional static path for the monster-name-color write (`MCG-IMG-025..033` now `PROVEN_EXACT`, death branch conditionally writes style 63 via `CNetNPC` vslot `+0x3C` -> `0x0043BD70`) but never read the actual RGB triple that `fontstyle_id=63` resolves to through `UILabel_FontStyleID_parser_setter` (`0x00AA488F`) — what color does style 63 actually set, compared against the already-decoded controls 61/62? 🔴 **ไม่ใช่การยืนยันล่วงหน้าว่า 63 = เทา** — `20260901_0921_LANE-GM-STATUS-*.md`'s own nonclaim ①: "ไม่อ้างว่า fontstyle 63 คือสีเทาของมอนตาย — ตารางเองปฏิเสธการอ้างนี้ตรง ๆ" ใบนี้มีอยู่เพื่อหาคำตอบนั้น ไม่ใช่เพื่อยืนยัน `NOW.md` P-2's ตาย=เทา ที่ยังไม่มีหลักฐาน  [OPEN — assigned LANE-GM]
+## 🔬 RE-191 MONSTER-NAME-COLOR-FONTSTYLE63-RGB-001 [STATIC-ON-BRIDGE]: `CODEX_CHECKPOINT 20260901_1135` closed the same-actor conditional static path for the monster-name-color write (`MCG-IMG-025..033` now `PROVEN_EXACT`, death branch conditionally writes style 63 via `CNetNPC` vslot `+0x3C` -> `0x0043BD70`) but never read the actual RGB triple that `fontstyle_id=63` resolves to through `UILabel_FontStyleID_parser_setter` (`0x00AA488F`) — what color does style 63 actually set, compared against the already-decoded controls 61/62? 🔴 **ไม่ใช่การยืนยันล่วงหน้าว่า 63 = เทา** — `20260901_0921_LANE-GM-STATUS-*.md`'s own nonclaim ①: "ไม่อ้างว่า fontstyle 63 คือสีเทาของมอนตาย — ตารางเองปฏิเสธการอ้างนี้ตรง ๆ" ใบนี้มีอยู่เพื่อหาคำตอบนั้น ไม่ใช่เพื่อยืนยัน `NOW.md` P-2's ตาย=เทา ที่ยังไม่มีหลักฐาน  [🟢 **CLOSED PASS/DONE (ชั้น conditional static + DATA palette เท่านั้น; runtime pixels ยังเปิด) — ผลมาถึง 2026-09-01T14:39+07:00 (Codex static RE), ปิดหัวใบโดย LANE-GM รอบ `wggs0i` 2026-09-02T10:35+07:00 ตามสัญญาผู้บริโภคของใบเอง, ดูผลด้านล่าง**] ~~[OPEN — assigned LANE-GM]~~
 
 ### ทำไมเปิดใบนี้ (มอบหมายตรงจาก COO)
 
@@ -3626,6 +3626,33 @@ runner/Codex บนสะพาน) ไม่ต้องพึ่งไฟล�
 (คำสั่งมอบหมายตรง) · `notes_to_chief/20260901_1225_LANE-GM-STATUS-sched-20260901-*.md` (รอบที่สามที่ขอ)
 · `notes_to_chief/20260901_0921_LANE-GM-STATUS-p2-color-static-research-fontstyle63-gap-re-followup-proposed.md` (รอบ `h6rsgl` ที่เสนอวิธีปิดนี้ครั้งแรก) ·
 `pf_bridge/NOW.md` P-2
+
+
+### result — 🟢 CLOSED PASS/DONE (ปิดหัวใบโดย LANE-GM รอบ `wggs0i` 2026-09-02T10:35+07:00)
+
+ผล: `notes_to_chief/20260901_1439_CODEX-RE191-RESULT-FONTSTYLE63-RGBA.md`
+(LANE-GM บริโภคไปแล้วตั้งแต่รอบ `r2jfjm` — มี `.CONSUMED.txt` คู่กัน) — **แต่หัวใบไม่เคยถูกปิด**
+จึงค้างอยู่ใน `python tools_bridge/pf_re_queue_taglint.py --list-open` ต่อมาอีก ~20 ชม.
+
+🔴 **ทำไมเครื่องมือถึงมองไม่เห็นว่าใบนี้มีผลแล้ว (วัดจริงรอบนี้ ไม่ใช่สมมติฐาน):**
+`pf_re_queue_taglint.py::has_result_letter()` เทียบ `ticket_id in filename` ตรงตัว = มองหา `"RE-191"`
+แต่ชื่อไฟล์ผลเขียนว่า `CODEX-RE191-RESULT-...` (**ไม่มีขีด**) ⇒ ไม่แมตช์ ⇒ ใบถูกรายงานว่ายังเปิด
+`tools_bridge/` ไม่ใช่เขตเขียนของสาย GM — แจ้ง chief ไว้ในใบ `20260902_1035_LANE-GM-TO-CHIEF-*`
+(นี่เป็นคนละเรื่องกับข้อสังเกตของ ka1-B ใบ `0955` ที่ว่า runner ข้ามเพราะป้าย `assigned LANE-GM`
+ซึ่ง ka1-B ติดป้าย `[สมมติฐาน]` ไว้เอง — รอบนี้ไม่ยืนยันและไม่หักล้างข้อนั้น วัดได้แค่ข้อของเครื่องมือ)
+
+**คำตอบของใบ (สรุปสามบรรทัด — ตัวเลขจริงอยู่ในใบผล ไม่คัดลอกมาที่นี่ และไม่คัดลอกลงโค้ด
+ตาม "ข้อห้าม" ของใบนี้เอง):**
+1. คำถามหลักปิดแล้ว: FontColor/OutlineEffectColor RGBA ของ 61 / 62 / 63 อ่านได้ครบทั้งสามค่าพร้อม provenance
+   `[ORIGINAL EVIDENCE: DATA]` แยกจาก `[ORIGINAL EVIDENCE: IMAGE / MCG-IMG-057..058]`
+2. **premise ของใบถูกแก้โดยผลเอง**: `0x00AA488F` **ไม่ใช่** RGB parser — เป็น branch ของ `UILabel.FontStyleID`
+   ตัว palette จริงเดินผ่าน `0x00A9DAE0` (มี direct caller แค่ 2 จุดจาก full six-section E8 census)
+3. เพดานที่ยังยืน: conditional static + DATA เท่านั้น · **ไม่ได้แปลว่า style 63 = ตาย ในทุกบริบท**
+   และยังไม่มีหลักฐานว่า live actor ผ่าน gate นั้น (ต้องเห็น live registry node + requested/applied ID + pixels)
+
+**คำถามที่เหลือของ P-2 ไม่ใช่ RGB อีกต่อไป** แต่เป็น reachability — เดินต่อและปิดใน `RE-195` ด้านล่าง
+(ผลลัพธ์: ยังทำไม่ได้ในวันนี้) · ข้อห้าม "ห้ามเขียนโค้ดสีมอนสเตอร์จากใบนี้" **ยังยืนอยู่** และรอบ `wggs0i`
+ปฏิบัติตามโดยไม่คัดลอก palette ลงรีโปเลยแม้แต่ค่าเดียว
 
 ## 🔬 RE-193 ACTORATTR-SEVEN-UNKNOWN-FIELDS-CLIENT-DEFAULT-VALUES-001 [STATIC-ON-BRIDGE]: what does the client itself write, at object-creation time, into the 7 `ActorAttr` fields (of 55 total in `gm/attr_wire.py:166-224`) that have neither a server-owned typed-column source nor a codex `default_writer_va` row today -- `x=14 nameboard_key (0x090, u32)`, `x=25 wstr_B0 (0x0B0)`, `x=36 u8_18C (0x18C, u8)`, `x=41 q_140_pairB (0x140, u64)`, `x=42 u8_9B_pairB (0x09B, u8)`, `x=43 wstr_CC (0x0CC)`, `x=54 u16_1B0 (0x1B0, u16)` (`x=41`/`x=42` share one mask bit)?  [OPEN — assigned LANE-DB]
 
@@ -3754,7 +3781,7 @@ seed คอลัมน์ DB ต่อ) เหมือนกับ `RE-193` �
 เรื่องค่านี้ยังไม่ปิด) · `src/pirateforce_foundation/mob_death.py:850-856` (ยืนยัน offset/mask/tag
 เดียวกัน)
 
-## 🔬 RE-195 FONTSTYLEID-RELATIONSHIP-PREDICATE-VS-FACTION-COMPARATOR-001 [STATIC-ON-BRIDGE]: does `UILabel_FontStyleID_parser_setter`'s `relationship_predicate` (`0x0043C380..0x0043C63C`) read the same server-controllable `BasicAttr+0x68` faction field the proven relation comparator (`0x4A1D50`) reads, or a different one -- and is there any server-controllable input at all behind style ids 56/58/59/60/61 (the "positive/nonpositive identity + relationship" branches), or only behind 62/63?  [OPEN — assigned LANE-GM]
+## 🔬 RE-195 FONTSTYLEID-RELATIONSHIP-PREDICATE-VS-FACTION-COMPARATOR-001 [STATIC-ON-BRIDGE]: does `UILabel_FontStyleID_parser_setter`'s `relationship_predicate` (`0x0043C380..0x0043C63C`) read the same server-controllable `BasicAttr+0x68` faction field the proven relation comparator (`0x4A1D50`) reads, or a different one -- and is there any server-controllable input at all behind style ids 56/58/59/60/61 (the "positive/nonpositive identity + relationship" branches), or only behind 62/63?  [🟢 **CLOSED BOUNDED-NEGATIVE/DONE — RE runner 2026-09-02T03:41+07:00, ปิดหัวใบโดย LANE-GM รอบ `wggs0i` 2026-09-02T10:35+07:00, ดูผลด้านล่าง**] ~~[OPEN — assigned LANE-GM]~~
 
 ### ทำไมเปิดใบนี้ (ตอบ CORE-REQUEST-GM-048)
 
@@ -3815,6 +3842,43 @@ selector (`0x00443F50`) หรือ faction/relation comparator (`0x4A1D50`) �
 `src/pirateforce_foundation/npc_hostile_hypothesis.py:14-27` (relation comparator `0x4A1D50`,
 faction BasicAttr `0x0400` @ `+0x68`, พิสูจน์แล้วรันไทม์) · `RE-191` (ปิดคำถาม RGB ของ 61/62/63 แล้ว
 ใบนี้ไม่ซ้ำ)
+
+
+### result — 🟢 CLOSED BOUNDED-NEGATIVE/DONE (ปิดหัวใบโดย LANE-GM รอบ `wggs0i` 2026-09-02T10:35+07:00)
+
+ผล: `notes_to_chief/20260902_0341_RE-195-RESULT-RELATION-FALLBACK-STYLE61-NOT-CURRENT.md`
+(RE runner, static-on-bridge, 2026-09-02T03:41+07:00) · LANE-GM บริโภคในรอบ `wggs0i` — stub อยู่ที่
+`notes_to_chief/20260902_0341_...md.CONSUMED.txt`
+
+- **job 1 CLOSED/EXACT** — relationship predicate `[0x0043C380,0x0043C63C)` กับ faction comparator
+  `[0x004A1D50,0x004A1E14)` **เป็นคนละฟังก์ชัน** · predicate เรียก comparator ที่ **fallback จุดเดียว**
+  (`0x0043C5E0`; whole-image E8 census พบ direct caller ของ `0x004A1D50` ตัวเดียวนี้)
+  ⇒ ทางออกก่อนหน้าข้าม fallback ได้ ⇒ **faction ลำพังไม่ใช่สวิตช์สีและไม่ใช่ relationship แบบไม่มีเงื่อนไข**
+- **job 2 CLOSED** — ตาราง input/control ของ style 56/58/59/60/61 ครบ · ไม่มีฟิลด์ใดเป็น direct `FontStyleID` wire
+- **job 3 CLOSED/BOUNDED-NEGATIVE** — **ไม่มี** สายเกตฝั่งเซิร์ฟเวอร์ล้วนที่พร้อมใช้วันนี้:
+  `field_mobs.py` ประกอบ `actor_identity = 0x2000 + placement_index + 1` (บวกเสมอ) ⇒ เข้าตระกูล 56/58/59
+  และ **ข้าม typed CNetNPC tail ของ 61 ทั้งเส้น** · ทาง CHitResult ก็ปิด เพราะ writer ของบิต `+0x70 & 0x100`
+  ต้องการ target identity ที่เป็นลบแบบมีเครื่องหมาย ซึ่ง identity บวกปัจจุบันตกก่อนถึงบิตนั้น
+
+**`BUILD_IMPACT` ของผล: ห้ามผูกสี P-2 กับ faction `+0x68`, `n_OFFESIVE`, หรือ CHitResult ลำพัง**
+P-2 ยังบล็อกจนกว่าจะมี nonpositive identity mapping ที่สอดคล้องกัน + หลักฐาน typed/live ของ gate
+
+**สาย GM ทำอะไรกับผลนี้ (รอบ `wggs0i`)** — ไม่เขียนโค้ดสีแม้แต่บรรทัดเดียว แต่ทำให้ผลลบ **รันได้**:
+`pirate-force-server` `src/pirateforce_foundation/gm/name_color_gate.py` + `tests/test_gm_name_color_gate.py`
+(24 เคส · commit `c9be1af` + `36ebb9c` บน branch `claude/gallant-pasteur-wggs0i`, PR **#559**
+— **ยังไม่ merge ณ เวลาที่เขียนบรรทัดนี้** ตาม ADDENDUM v2 ข้อ A ให้ถือว่า "อยู่บน main"
+ก็ต่อเมื่อ PR ขึ้นสถานะ merged แล้วเท่านั้น) — โมดูล fail-closed ที่ไม่มีค่าสีอยู่ในนั้นเลย ทำสามอย่าง: จำแนก identity เข้าสองฝั่งของ sign test,
+ตอบว่า typed style-61 tail เข้าถึงไม่ได้สำหรับ identity ที่เซิร์ฟเวอร์นี้ประกอบจริง (วัดจาก `load_roster()`
+ไม่ใช่ยกคำพูดมา), และปฏิเสธการต่อสาย P-2 พร้อมชื่อของทั้งสามเส้นทางที่ RE-195 ปิด
+· ฉบับแรกของโมดูลถูก pf-adversary หักล้าง 10 ข้อ (รับแก้ 9) แล้วเขียนใหม่ทั้งไฟล์ในรอบเดียวกัน
+· โมดูล **ไม่มีเลข FontStyleID ในโค้ดเลย** (`NOW.md` P-2 ห้าม hardcode · มีเทสเดินไล่ AST บังคับ)
+· เทสสองตัวทำงาน **ทั้งต้นไม้ `src/`** ไม่ใช่แค่กับตัวเอง: ห้ามมีค่าจาก palette ของ `RE-191` โผล่ที่ไหนก็ตาม
+  (ตรวจด้วย **ค่า** ผ่านแฮช เพื่อไม่ให้การบังคับกฎกลายเป็นการนำ palette เข้ารีโปเสียเอง) และห้ามมี identity
+  ที่ประกอบจาก `0x2000` ถูกทำให้ติดลบที่ composer ไหนก็ตาม
+· 🔴 **แก้คำอ้างที่ผิดของฉบับแรก**: ฉบับแรกเขียนว่า 62/63 "ยังไม่วัด" — **ผิด** `RE-195` บรรทัด 55
+  เขียนเองว่า positive identity "bypasses the typed CNetNPC 61/62 tail" และ
+  `CODEX_URGENT 20260901_1627` วาง 61/62/63 ไว้หลัง signed-nonpositive identity lane เดียวกัน
+  (ทั้งสองใบสายนี้บริโภคไปแล้ว) ⇒ ลบคำอ้างนั้นทิ้ง ไม่ใช่ทำให้อ่อนลง
 
 ## 🔬 RE-196 RETURNSELECTSERVERVITAL-FIELD3-TAG-BYTE-001 [STATIC-ON-BRIDGE]: field 3 (the string field, object `+0x20`) of `ReturnSelectServerVital` (0x709E) -- is there an instruction that writes a tag byte just before `string_wire_call@0x005E6A2B`, the way field1/field2 have `STACK@...+0x14`/`+0x18` tag-writes -- and separately, does the SAME question resolve for `DeleteActorVital`'s own string field (also labeled `UNTAGGED_STRING8_LEN32LE` despite GT-018 confirming a real `0x44` tag for it)?  [OPEN — assigned chief]
 
