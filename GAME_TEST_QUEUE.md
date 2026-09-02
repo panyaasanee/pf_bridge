@@ -10236,3 +10236,123 @@ highest `GT` ที่เปิดอยู่ก่อนใบนี้คื�
 > ทั้งที่มันเป็น **ท่อนที่สอง** (ท่อนแรกคือ `QuestNPCModule_refresh validated prerequisites reject`)
 
 **ผู้เปิดและผู้ถอนใบ: LANE-A รอบ `2p4n3h`**
+
+## GT-203 MOB-DROP-LEFT-CLICK-PICKUP-INTO-BACKPACK-001  [BLOCKED]
+
+> NUMBERING: grep ก่อนจอง (2026-09-02T07:1x+07:00, จากราก `pf_bridge`) `GT-203`/`RE-203` = **0 hit**
+> ทุกที่ที่กติกาสั่งให้ดู: `GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `notes_to_chief/` · `rounds/` ·
+> `archive/` · เลขสูงสุดที่ใช้ไปจริง = **202** (`GT-202` [WITHDRAWN] · `RE-202` [OPEN] — ตัวนับเดียวสองไฟล์)
+> ⇒ ใบนี้ = **203** · ใบ `GT-001`-`GT-202` และ `RE-085`-`RE-202` อยู่ที่เดิมทั้งใบ ไม่ลบ ไม่ย้าย
+
+> 🔴 **รอ merge ก่อน — ห้ามบูตจนกว่า `pirate-force-server PR #549` (chief, R300) จะขึ้น `main`**
+> เปิดตาม `COO-DECISION 20260902_0542` ข้อ 3 (ใบ GT ของ P-1)
+> 🔴 **ประตูที่สอง (บล็อกจริง):** ของต้องค้างบนพื้นนานพอให้ตาคนเห็นและเล็งคลิกได้ ⇒ **`GT-188` checkpoint 2
+> ต้องได้ผลก่อน** · ฝั่ง ledger เซิร์ฟเวอร์รอด 120 วิ แล้วจริง (`mob_drop_presence.sustain_a_kill` บน `main`)
+> แต่ **การวาดป้าย/โมเดลซ้ำบนจอยังไม่มีใครวัด** และทาง `preserve_ground_in_runtime_res_vitals` แบบครอบ
+> **ถูกถอนแล้ว** โดย `COO-DECISION 20260902_0646` (วัดได้ว่าฆ่าเธรด `game_listener` 3 ทาง) · ตัวแทนแบบ opt-in
+> ทีละจุด เริ่มที่ `action_ack` **ยังไม่อยู่บน `main`** ⇒ **ห้ามอ้างว่า PRESERVE อยู่บน main แล้ว — มันไม่อยู่**
+
+- objective: (ข้ออ้างเดียว) ผู้เล่นฆ่ามอน -> ของตกลงพื้น -> เดินเข้าไปแล้ว **คลิกซ้ายที่ของชิ้นนั้นหนึ่งครั้ง** --
+  เส้นทาง production ใหม่ใน `runtime.py` ที่เรียก `mob_pickup_request.dispatch_inbound_pickup_request(...)`
+  โดยคีย์ที่ **NESTED vital id** `mob_pickup_request.PICKUP_REQUEST_VITAL_ID` (= `0x4543`)
+  **หยิบของออกจากพื้นเข้ากระเป๋าได้จริงหรือไม่**
+- db: `default_state\pirateforce.sqlite3` -- **สำเนาเท่านั้น ห้ามเปิด canonical** · คัดไป
+  `backup\pirateforce_before_GT-203_<yyyyMMdd_HHmmss>.sqlite3` แล้ว `state\run_gt203.sqlite3` ·
+  จด sha256 ของสำเนาก่อน/หลัง · เทียบ sha256 ของ canonical กับ `CANON_SHA.txt` **ก่อนและหลัง ต้องเท่ากัน** ·
+  `PRAGMA integrity_check` = `ok` ทั้งสองครั้ง
+- server args: บูตปกติตาม playbook บน `main` **ไม่มีแฟล็ก `--*-scenario` ใด ๆ** (สาขานี้เป็น production ไม่มี flag):
+  `py -3 -u -m pirateforce_foundation.app --db state\run_gt203.sqlite3`
+  🔴 **ตัวละครบูตต้อง "สมประกอบ" ตาม `PANYA-DECISION 20260828_0125`** ก่อนเริ่มจับเวลา: level 1 · class 1 ·
+  stats จาก `CHARCREATE_CLASS s_SCORE` · HP/MP จาก `STANDARD_STATUS` · speed `ActorAttr` x7 = 400 ·
+  **ชื่อตัวละครอยู่ใน `BasicAttr` x1 (`+0x28`) และห้ามอยู่ใน x37** · x39/x41/x42 = **0** ทั้งสามช่อง
+- steps: (playbook: `ATTENDED_SESSION_RUNBOOK.md` · อัดวิดีโอต่อเนื่องตลอดหน้าต่าง `LOCK_GAME`)
+    0. LOCK_GAME · boot stamp · sha canonical · copy DB · รัน RECHECK ข้างล่างให้ผ่านทั้งสองบรรทัดก่อน ไม่ผ่าน = ไม่บูต
+    1. **server ก่อน client เสมอ** · เข้าเกม ยืนยันบล็อก "สมประกอบ" จากคอนโซล/HUD แล้วจด scene + X/Y/Z
+    2. จัดมุมกล้องด้วย **คลิกขวาค้างลาก** เท่านั้น · ยังห้าม `Q`/`E` และ `W/A/S/D` จนกว่าจะถึงขั้นที่สั่งให้เดิน
+       (ทั้งสองชุดเปลี่ยน facing และยิง `TargetPosVital`) · **ห้ามพิมพ์ตัวอักษรตลอดรอบ**
+    3. ฆ่ามอน **หนึ่งตัวที่ดรอปของ** · ทันทีที่ของโผล่ ถ่าย full-res **S0** · เลือก **ของหนึ่งชิ้น** แล้วเขียนชื่อ/รูปร่าง/
+       ตำแหน่งของชิ้นนั้นลง result เดี๋ยวนั้น แล้วตามชิ้นเดิมตลอดใบ · ซากมอน (corpse) **ไม่นับ** เป็นตัวของ
+    4. เดินเข้าไปหาของด้วย `W/A/S/D` จนอยู่ติดชิ้นที่ตามอยู่ · ถ่าย **S1** · **จดสภาพกระเป๋าก่อนคลิก**:
+       เปิดกระเป๋า นับช่องที่มีของ ถ่าย **S2** แล้วปิด
+    5. **คลิกซ้ายที่ของชิ้นนั้นหนึ่งครั้ง** · จดเวลานาฬิกา (+07:00) และ `t` ในวิดีโอ · ถ่าย **S3** ทันที ·
+       คัดคอนโซลเซิร์ฟเวอร์ **ดิบ ห้ามตีความ** ตั้งแต่วินาทีที่คลิกไปอีก 3 วินาที
+    6. เปิดกระเป๋าอีกครั้ง ถ่าย **S4** (ช่องเดิม + ช่องที่เพิ่ม) · **ห้ามลากของในกระเป๋า** (ยิง item-move คนละเลน)
+    7. NO-CRASH ด้วย **คลิกขวาค้างลาก** (🔴 ห้ามใช้ `Q`/`E` เป็นตัวเช็ค) · **S5** · ออกเกมด้วย X มุมขวาบน
+    8. ปิดเซิร์ฟเวอร์ (**ฆ่าไคลเอนต์แล้วต้อง restart เซิร์ฟเวอร์ก่อนบูตหน้าเสมอ**) · เก็บ console `.out`/`.err`
+       + `capture_v141\GAME_LIVE.txt` + `capture_v141\GAME_EVENTS_LIVE.txt` + sha256 ทุกไฟล์ ·
+       `PRAGMA integrity_check` · **teardown เสมอ** · sha canonical ซ้ำ · ห้าม commit เอง
+    9. คัดผลจากคอนโซล/แคปเจอร์ (ดิบ): `findstr /N /C:"MOB_PICKUP_REQUEST_DECODED" /C:"MOB_PICKUP_REQUEST_REFUSED"
+       /C:"MOB_PICKUP_ROW_INSERTED" server_console_live.*.txt` · `findstr /N /C:"UNKNOWN_0x"
+       capture_v141\GAME_EVENTS_LIVE.txt` · `findstr /N /C:"[G< #" server_console_live.*.out`
+
+- 🔴 **สามผลลัพธ์ที่เป็นไปได้ และวิธีแยกจากคอนโซลอย่างเดียว** (`0x4543` เป็นเลข **DERIVED** จากการอ่านอิมเมจแบบ
+  static และ **ไม่เคยถูกเห็นบนไวร์ใด ๆ เลย** -- `RE-125` CLOSED BOUNDED-NEGATIVE):
+    (a) คอนโซลมี `MOB_PICKUP_REQUEST_DECODED ...` => **เลขถูก และสาขายิงแล้ว**
+        (ดูต่อว่าตามด้วย `MOB_PICKUP_ROW_INSERTED ...` หรือ `MOB_PICKUP_REQUEST_REFUSED reason=<ชื่อ>`)
+    (b) **ไม่มี** สองโทเคนนั้น แต่มีบรรทัด vital ที่ไม่รู้จักของ **id อื่น** ในหน้าต่าง +-2 วิรอบคลิก --
+        `[G< #<n>] <len> bytes IDs=[...]` และ/หรือ `EVENT seq=... name=UNKNOWN_0x<ID>` ใน
+        `GAME_EVENTS_LIVE.txt` => **เลข `0x4543` ผิด แต่รอบนี้จับ opcode จริงมาได้** ซึ่งคือสิ่งที่ `GT-146`
+        ต้องการพอดี · **คัด id + บรรทัดเต็ม + hexdump ห้าม decode เอง**
+    (c) คอนโซล **เงียบสนิท** ตอนคลิก => **ไคลเอนต์ไม่ส่งเฟรม pickup** · เป็นผลที่วัดแล้ว ไม่ใช่รอบเสีย
+  🔴 ต้องเทียบกับ **baseline ก่อนคลิก** เสมอ ไม่งั้นแยก (b) กับ (c) ไม่ออก
+
+- pass criteria: (สองชั้น 🔴 **ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้นเด็ดขาด**)
+    wire/DB          : (1) `character_backpack_items` ในสำเนา DB มี **แถวใหม่หนึ่งแถวของตัวละครที่เลือกไว้**
+      (จำนวนแถวก่อน/หลังต่างกัน 1 · จด `item_identity`/`template_id`/`quantity`/`slot` ทุกค่า) **และ**
+      (2) คอนโซลมีบรรทัด `MOB_PICKUP_REQUEST_DECODED` ของคลิกครั้งนั้น · ประกอบ: `MOB_PICKUP_ROW_INSERTED
+      table=character_backpack_items ...` ที่ค่าตรงกับแถวจริง · `integrity_check` = `ok` ·
+      sha256 canonical ตรง `CANON_SHA.txt` ก่อน/หลัง · ไม่มี traceback ที่ไม่ถูกจับ
+      ชั้นนี้ตอบไม่ได้: บนจอเห็นอะไร ป้ายหายจริงไหม กระเป๋าวาดของขึ้นไหม
+    client-observable: **ต้องมีคนอยู่หน้าจอเท่านั้น ห้ามอนุมานจากคอนโซล** -- (1) **ป้ายชื่อลอยของชิ้นที่ตามอยู่
+      หายไปจากพื้น** เทียบ `S1` กับ `S3` **และ** (2) **ช่องกระเป๋าได้ของเพิ่มขึ้นจริงบนจอ** เทียบ `S2` กับ `S4` ·
+      มีข้อความระบบขึ้นไหม (คัดเป๊ะ + สี) · NO-CRASH/CRASH ·
+      🔴 **จดสีป้ายชื่อทุกป้ายทุกภาพ หนึ่งบรรทัดต่อหนึ่งป้ายต่อหนึ่งภาพ** อ่านจาก **full-res เท่านั้น** ·
+      ไม่มีป้ายให้เขียนคำว่า `none` ห้ามเว้นว่าง · **จดสีอย่างเดียว ห้ามเดาสาเหตุของสี** (`RE-067` เป็นเจ้าของ)
+      ชั้นนี้ตอบไม่ได้: มีแถวลง DB จริงไหม เฟรมที่ยิงคือ id อะไร
+
+- คำทำนาย (**เป็นคำทำนาย** · ทำนายผิด = ผลการวัด ไม่ใช่ความล้มเหลว):
+    P1 (a) + แถวใหม่ + ป้ายหาย + ช่องกระเป๋าเพิ่ม => ผ่านทั้งสองชั้น
+    P2 (a) แล้วตามด้วย `MOB_PICKUP_REQUEST_REFUSED reason=<ชื่อจากทะเบียน>` => สาขายิงแล้วและถูกกั้นถูกจุด
+       **แต่ไม่มีแถวใหม่** => wire/DB = FAIL ของข้ออ้างนี้ แต่ชี้ไปที่ชื่อ reason นั้นตรง ๆ
+       🔴 `reason=position_not_finite` โดยเฉพาะ = ตำแหน่งผู้เล่นอ่านไม่ได้ทั้งสองทาง (ดู nonclaim 7)
+    P3 (b) => `0x4543` ผิด · **ผลลบนี้มีค่าเท่าผลบวก** redirect ไป `GT-146`/`RE-125` ไม่ใช่ rerun ใบนี้แบบเดา
+    P4 (c) => ไคลเอนต์ไม่ส่งเฟรม · redirect ไปใบ static ว่าใคร populate ลิสต์ของ `DropThingModule_Client`
+    P5 ของหายจากพื้นก่อนคลิกทัน / ไม่มีของให้คลิก => **NO-RESULT (ประตู `GT-188` ยังไม่เปิดจริง)** ไม่ใช่ FAIL
+
+- nonclaims:
+  1. ไม่พิสูจน์ว่าของ **รอดข้าม relog** -- นั่นคือ `GT-142` ทั้งใบ
+  2. ไม่พิสูจน์ว่า `0x4543` เป็น opcode จริงของไคลเอนต์ ถ้าผลออกมาเป็น (b) หรือ (c) · และผล (a) พิสูจน์แค่ว่า
+     **เฟรมที่ไคลเอนต์ส่งตรงกับเลขนี้ในรอบนี้** ไม่ได้ทำให้ `RE-125` เปลี่ยนสถานะโดยอัตโนมัติ
+  3. ไม่พิสูจน์อายุของ/ป้ายบนพื้น และไม่พิสูจน์ว่า PRESERVE ทำงาน -- `GT-188` เป็นเจ้าของคำถามนั้น
+  4. ไม่ตัดสินสาเหตุของสีป้ายใด ๆ (`RE-067`) · จดสีอย่างเดียว
+  5. ไม่ใช่เทส stack / กระเป๋าเต็ม / สองผู้เล่นแย่งของ / race -- หนึ่งบัญชี หนึ่งเซสชัน หนึ่งการฆ่า หนึ่งคลิก
+  6. ไม่พิสูจน์อะไรเกี่ยวกับหุ่นซ้อมใน Port Royal -- `n_ID 916` มี `n_DROPS_*` = 0 ทั้งสามคอลัมน์ => ฆ่าที่นั่น
+     ได้ **NO-RESULT (ฉากผิด)** ไม่ใช่ FAIL
+  7. 🔴 ระยะ pickup ของเซิร์ฟเวอร์คือ **450 หน่วย 3 มิติ** จากตำแหน่งที่เซิร์ฟเวอร์ "เชื่อว่า" ผู้เล่นอยู่ ซึ่งเป็น
+     ตำแหน่งที่ **ไคลเอนต์รายงานมาเอง** (ไม่ใช่ server-authoritative) · ใบนี้ไม่พิสูจน์ว่าไคลเอนต์โกหกตำแหน่งไม่ได้
+
+- RECHECK: (รันก่อนเชื่อหัวใบเสมอ · ต้องผ่าน **ทั้งสองบรรทัด** ไม่งั้นยัง BLOCKED ห้ามบูต)
+  1. `cd pirate-force-server && git grep -n "dispatch_inbound_pickup_request(" origin/main -- src/pirateforce_foundation/runtime.py`
+     -- ต้องได้ **>= 1 hit** (0 hit = `PR #549` ยังไม่ merge) · และต้องเห็นคอมเมนต์ที่มีคำว่า
+     "never been observed on any wire" ภายในสิบบรรทัดจาก call site (เงื่อนไขของ `COO-DECISION 20260902_0541`)
+  2. `GT-188` checkpoint 2 ต้องมีผลบันทึกแล้วในใบของมันเอง และของต้องยังอยู่บนพื้นตอนที่ผู้เล่นเดินไปถึง --
+     ไม่มีผล = ยัง BLOCKED · 🔴 ห้ามอ้าง `grep install_ground_vitals_preserve src/pirateforce_foundation/app.py`
+     เป็นหลักฐานว่าผ่าน: บรรทัดนั้น **ต้องไม่มี** บน main วันนี้ (ถูกถอนโดย `COO-DECISION 20260902_0646`)
+
+- links: `COO-DECISION 20260902_0542` ข้อ 3 (ใบนี้) · `COO-DECISION 20260902_0541` (ปลด HELD ของ call site) ·
+  `COO-DECISION 20260902_0646` (ถอน wrap · opt-in ทีละจุดเริ่มที่ `action_ack` ยังไม่ขึ้น main) ·
+  `GT-188` (ประตู) · `GT-146` (ใบ capture opcode -- ผล (b)/(c) ของใบนี้ป้อนใบนั้น) · `GT-124` · `GT-142` ·
+  `RE-125` (`CLIENT_RE_QUEUE.md:1761`, CLOSED BOUNDED-NEGATIVE) · `RE-067` (สีป้าย) ·
+  `PANYA-DECISION 20260828_0125` (ตัวละครสมประกอบ) ·
+  `pirate-force-server/src/pirateforce_foundation/mob_pickup_request.py:192,289,587` ·
+  `pirate-force-server/src/pirateforce_foundation/mob_pickup_persist.py:213-238` (`MOB_PICKUP_ROW_INSERTED`) ·
+  `pirate-force-server/migrations/003_character_inventory.sql:9` (`character_backpack_items`)
+
+- result: (ผู้เทสกรอก) ผล (a)/(b)/(c) + P1-P5 · เวลาคลิก (+07:00 และ `t` วิดีโอ) · path + sha256 ของ
+  console/`GAME_LIVE.txt`/`GAME_EVENTS_LIVE.txt`/ภาพ/วิดีโอ · จำนวนแถว `character_backpack_items` ก่อน/หลัง +
+  ค่าทุกคอลัมน์ของแถวใหม่ · บรรทัดคอนโซลเต็มทุกโทเคน · สามช่องบนจอ (ป้ายหาย/กระเป๋าเพิ่ม/ข้อความระบบ) ·
+  **ตารางสีป้ายชื่อครบทุกป้ายทุกภาพ** · NO-CRASH/CRASH · sha canonical ก่อน/หลัง · `integrity_check`
+  🔴 **G-OBS:** จดหมายผลของใบนี้ **ต้องมีบรรทัด** `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>` ·
+  ตราบใดที่ยังไม่มีบรรทัดนี้ สถานะใบคือ **`AWAITING-OBSERVER` ไม่ใช่ `PASS`** และห้ามยกผลใบนี้ไปเป็นฐานของใบอื่น
+
+**ผู้เปิดใบ: chief (LANE-E) รอบ `ls5m3c` / R300 ตาม `COO-DECISION 20260902_0542` ข้อ 3**
