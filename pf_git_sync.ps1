@@ -1123,6 +1123,172 @@ if ($cf.Code -ne 0) {
 }
 
 # ---------------------------------------------------------------------------
+# [5d] closed-but-never-merged pull request watcher.  Panya ruled 2026-09-02
+#      ~12:3x, option (kho) of the ka1-A blue-round finding.
+#
+#      THE FAILURE THIS EXISTS FOR, measured on four real rounds:
+#        a round pushes, opens its PR, writes its round file saying "done",
+#        and ENDS.  It has no memory and no life after that.  The Windows gate
+#        then finishes - minutes later, with nobody left to receive the result
+#        - goes RED, and merge-claude-pr.yml closes the pull request.  The
+#        branch survives, the work survives, but it never reaches main, and
+#        NOTHING tells anyone: the workflow writes its reason as a comment on
+#        the pull request itself, which no lane ever reads.
+#        server#495 (LANE-DB), #511 (LANE-B), #540 (LANE-B), #545 (LANE-A) all
+#        died exactly this way.  Two of the four were one UNDECLARED SKIP on an
+#        otherwise fully green gate (#545: 22 of 23 steps green).  Each was
+#        found by accident, rounds later, and cost a whole round to re-land.
+#
+#      So this step turns a silent close into a letter in the mailbox, which is
+#      the one channel every lane already reads at the top of every round.
+#      It never closes, reopens, merges or edits anything - it only writes.
+#
+#      COST CONTROL.  The API is called unauthenticated (both repositories are
+#      public), which is 60 requests an hour per IP.  This step runs at most
+#      once every CLOSED_PR_EVERY_MIN minutes and makes 2 list calls plus at
+#      most CLOSED_PR_MAX_LETTERS comment calls, so a bad hour is ~15 calls.
+#      The state file is named .log on purpose: .gitignore ignores '**/*.log',
+#      so this local ledger can never ride along in a commit.
+#
+#      FIRST RUN IS SILENT.  With no state file, the currently-closed pull
+#      requests are recorded WITHOUT writing letters - otherwise the first tick
+#      would dump a letter for every PR that ever died.  Only closures seen
+#      after that produce a letter.
+# ---------------------------------------------------------------------------
+
+$CLOSED_PR_EVERY_MIN    = 10
+$CLOSED_PR_MAX_LETTERS  = 3
+$CLOSED_PR_REPOS        = @('panyaasanee/pirate-force-server', 'panyaasanee/pf_bridge')
+
+function ClosedPrStatePath() { return (Join-Path $BridgeRepo 'sync_state_closed_prs.log') }
+
+function GhJson([string]$url) {
+    try {
+        return Invoke-RestMethod -Uri $url -Headers @{ 'User-Agent' = 'pf-git-sync' } -TimeoutSec 25
+    } catch {
+        return $null
+    }
+}
+
+function LaneFromTitle([string]$title) {
+    if ($title -match '^\s*\[([A-Za-z0-9\-]+)\]') { return $Matches[1].ToUpper() }
+    return 'chief'
+}
+
+if ($DryRun -or $SelfCheck -or $NoServer) {
+    Log '[5d]' 'closed-PR watcher skipped in this mode'
+} else {
+    $cpState = ClosedPrStatePath
+    $seen = @{}
+    $firstRun = $true
+    $lastCheck = 0
+    if (Test-Path -LiteralPath $cpState) {
+        $firstRun = $false
+        try {
+            $lines = @(Get-Content -LiteralPath $cpState -ErrorAction Stop)
+            foreach ($l in $lines) {
+                $t = ([string]$l).Trim()
+                if ($t -eq '') { continue }
+                if ($t -like 'last=*') { [void][int64]::TryParse($t.Substring(5), [ref]$lastCheck); continue }
+                $seen[$t] = $true
+            }
+        } catch { }
+    }
+    $nowSec = [int64](((Get-Date).ToUniversalTime() - [DateTime]'1970-01-01').TotalSeconds)
+    if (-not $firstRun -and ($nowSec - $lastCheck) -lt ($CLOSED_PR_EVERY_MIN * 60)) {
+        Log '[5d]' ('checked less than ' + $CLOSED_PR_EVERY_MIN + ' min ago - skipping this round')
+    } else {
+        $written = 0
+        $newIds  = @()
+        foreach ($repo in $CLOSED_PR_REPOS) {
+            $url = 'https://api.github.com/repos/' + $repo + '/pulls?state=closed&per_page=20&sort=updated&direction=desc'
+            $prs = GhJson $url
+            if ($null -eq $prs) { Log '[5d]' ('could not read closed pull requests of ' + $repo + ' - skipped, not an error'); continue }
+            foreach ($pr in @($prs)) {
+                if ($null -ne $pr.merged_at) { continue }
+                $ref = [string]$pr.head.ref
+                if ($ref -notlike 'claude/*') { continue }
+                $key = $repo + '#' + $pr.number
+                if ($seen.ContainsKey($key)) { continue }
+                $newIds += $key
+                if ($firstRun) { continue }
+                if ($written -ge $CLOSED_PR_MAX_LETTERS) { continue }
+
+                $lane   = LaneFromTitle ([string]$pr.title)
+                $reason = ''
+                $cm = GhJson ('https://api.github.com/repos/' + $repo + '/issues/' + $pr.number + '/comments?per_page=5')
+                if ($null -ne $cm) {
+                    foreach ($c in @($cm)) {
+                        $b = [string]$c.body
+                        if ($b -ne '') { $reason = $b }
+                    }
+                }
+                if ($reason.Length -gt 900) { $reason = $reason.Substring(0, 900) + ' ...' }
+
+                $name = (Get-Date -Format 'yyyyMMdd_HHmm') + '_SYNC-NOTICE-' + ($repo -replace '.*/', '') + '-pr' + $pr.number + '-closed-never-merged.md'
+                $lines = @()
+                $lines += ('ADDRESSEE: ' + $lane)
+                $lines += ''
+                $lines += ('# ' + $repo + ' #' + $pr.number + ' was CLOSED and never merged')
+                $lines += ''
+                $lines += ('written by pf_git_sync.ps1 step [5d] at ' + (Stamp) + ' (machine local time)')
+                $lines += 'this notice is written once per pull request and never repeated.'
+                $lines += ''
+                $lines += ('    title   : ' + [string]$pr.title)
+                $lines += ('    branch  : ' + $ref + '   <- THE WORK IS STILL HERE, nothing was deleted')
+                $lines += ('    opened  : ' + [string]$pr.created_at)
+                $lines += ('    closed  : ' + [string]$pr.closed_at)
+                $lines += ('    link    : ' + [string]$pr.html_url)
+                $lines += ''
+                $lines += '## why you are reading this'
+                $lines += ''
+                $lines += '    A round pushes, opens its pull request, writes its round file and ends.'
+                $lines += '    The gate finishes minutes later with nobody left to receive the result.'
+                $lines += '    If it goes red the pull request is closed, and the only record is a'
+                $lines += '    comment on the pull request itself, which no lane reads.  Four rounds'
+                $lines += '    died that way before this notice existed (server #495 #511 #540 #545),'
+                $lines += '    each found by accident and each costing a whole round to re-land.'
+                $lines += ''
+                $lines += '## what the closer said'
+                $lines += ''
+                if ($reason -eq '') {
+                    $lines += '    (no comment was left on the pull request - open the link and read the'
+                    $lines += '     gate run for this head commit)'
+                } else {
+                    foreach ($rl in ($reason -split "`n")) { $lines += ('    ' + $rl.TrimEnd()) }
+                }
+                $lines += ''
+                $lines += '## what to do'
+                $lines += ''
+                $lines += '    1. read the gate log for the head commit and find the ONE step that failed'
+                $lines += '    2. fix that cause on the branch above - do not start the round over'
+                $lines += '    3. re-open a pull request from the same branch'
+                $lines += '    Nothing here is lost.  Re-doing the work from scratch is the expensive'
+                $lines += '    mistake this notice exists to prevent.'
+                try {
+                    WriteAsciiFile (Join-Path $notesDir $name) $lines
+                    Shout '[5d]' ('closed and never merged: ' + $key + ' - wrote ' + $name + ' to ' + $lane)
+                    $written = $written + 1
+                } catch {
+                    Shout '[5d]' ('closed and never merged: ' + $key + ' - could not write the letter')
+                }
+            }
+        }
+        foreach ($k in $newIds) { $seen[$k] = $true }
+        if ($firstRun) {
+            Log '[5d]' ('first run - recorded ' + $newIds.Count + ' already-closed pull request(s) silently, no letters')
+        } elseif ($newIds.Count -eq 0) {
+            Log '[5d]' 'no newly closed pull requests'
+        } else {
+            Log '[5d]' ('newly closed: ' + $newIds.Count + ' - letters written: ' + $written)
+        }
+        $out = @('last=' + $nowSec)
+        foreach ($k in $seen.Keys) { $out += $k }
+        try { WriteAsciiFile $cpState $out } catch { }
+    }
+}
+
+# ---------------------------------------------------------------------------
 # [6] tell the tester, but only when there is something to tell - the mtime of
 #     NEW_ORDERS.txt is itself the signal, so it must not be touched otherwise
 # ---------------------------------------------------------------------------
