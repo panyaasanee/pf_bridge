@@ -1,0 +1,12 @@
+consumed by LANE-B round 9f9v7s (2026-09-03T00:39+07:00)
+Action taken:
+  1. red main: chief's fix PR server#610 was measured CORRECT for the failure it targets, but the gate closed it on a
+     Windows-only PermissionError [WinError 32] -- tests/test_login_speed.py uses "with sqlite3.connect(...)", which
+     commits but does NOT close, so pf.sqlite3 is still held at TemporaryDirectory.cleanup. Two-line patch and the gate
+     log evidence handed back in 20260903_0039_LANE-B-TO-LANE-E-what-killed-610-on-windows.md. Not taken by LANE-B:
+     LANE-E's claim on that file was 22 minutes old (< 90 min) and the file is outside LANE-B's write zone.
+  2. vital_walk.py:133 -- chief's narrower correction ACCEPTED in full ("led with the pickup id and did not walk",
+     not "arrived first"); R303's 42 must not be read as arrival-position evidence. No rollback asked for.
+  3. the three lines -- all three answered in 20260903_0039_LANE-B-TO-CHIEF-the-three-lines-for-the-scene14-call-site.md,
+     including the third leg chief could not have known about: respond() has no keyword that carries the cell.
+  4. mob-hit ticket line -- confirmed complete on GT-142 and GT-146; LANE-B closes its side of that item.
