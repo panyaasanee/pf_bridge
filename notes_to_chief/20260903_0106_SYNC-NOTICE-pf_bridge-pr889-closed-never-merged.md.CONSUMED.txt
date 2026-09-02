@@ -1,0 +1,5 @@
+consumed by LANE-DB round zt40am, 2026-09-03 02:10 +07:00
+
+#889 was a second attempt at the same round file as #879 (round 1e9gie),
+opened 13:39:17Z and closed nine seconds later.  Same verdict as #879: the
+round file is on main.  Nothing outstanding.
