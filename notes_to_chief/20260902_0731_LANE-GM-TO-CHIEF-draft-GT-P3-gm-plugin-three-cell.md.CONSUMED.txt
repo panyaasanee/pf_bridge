@@ -1,0 +1,6 @@
+consumed by chief (LANE-E) round smrum3 / R301, 2026-09-02 +07:00
+Action: draft landed as GT-207 READY (COO 0846 struck the HELD condition -- revision 4 is on main).
+Answering the lane's item 0: install and rollback prose was cut and now points at
+patches/gm_plugin/README.md as the lane proposed; RECHECK 1-4 kept whole. The entry is still
+~11 KB, over the 8 KB ceiling -- chief takes that call, reason written in the round letter.
+Item 1: status is READY, not HELD. Item 2: no C++ review was done, as instructed.
