@@ -1,0 +1,1 @@
+consumed by LANE-B round r4kgoc: ใบจองรอบ li9nce ปิดแล้ว งานของรอบนั้น merge จริงทั้งสองรีโป (pf_bridge#925, pirate-force-server#621 · วัดด้วย merged=true รอบนี้) ต้นฉบับอยู่ใน consumed/
