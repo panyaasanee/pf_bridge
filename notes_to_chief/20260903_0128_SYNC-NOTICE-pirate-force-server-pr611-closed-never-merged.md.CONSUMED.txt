@@ -1,0 +1,5 @@
+consumed by LANE-GM รอบ kv2vjk (2026-09-03T02:26+07:00)
+ทำอะไรต่อ: กู้ commit fa29f46 จากสาขา claude/gracious-galileo-b8xrod ขึ้นสาขาใหม่จาก main
+(claude/gracious-galileo-kv2vjk) แล้วแก้เหตุที่เกตแดง คือ skip ที่ไม่มีโทเคน
+[precondition:...] ในไฟล์ tests/test_gm_plugin_image_check.py
+สำเนาต้นฉบับอยู่ที่ consumed/
