@@ -64,15 +64,18 @@ echo        On the machine that measured this it was at
 echo          C:\Program Files\Microsoft SDKs\Windows\v6.0A\bin\mt.exe
 echo.
 echo        NEXT STEP -- do ONE of these, then re-run this script:
-echo          A. mt.exe IS on this machine, somewhere the search missed: run
-echo               set "PATH=%%PATH%%;THE_FOLDER_THAT_HOLDS_MT_EXE"
-echo             in THIS window - the setting dies with the window - re-run.
-echo          B. mt.exe is NOT on this machine: re-run the Visual Studio 2008
-echo             installer and tick the Windows SDK component -- that is what
-echo             puts v6.0A\bin\mt.exe on a machine. Nothing in this repo can
-echo             supply mt.exe: it is a Microsoft tool, not shipped here.
-echo        Printing only "not found" is what these two lines exist to stop
-echo        (COO-DECISION 2026-09-02T21:47+07:00 item 2).
+echo          A. mt.exe IS here but the search missed it. Find it once with
+echo               dir /b /s C:\mt.exe
+echo             then, in THIS window: set "PATH=%%PATH%%;THAT_FOLDER"
+echo             and re-run. The setting dies with the window, which is fine.
+echo          B. mt.exe is NOT on this machine. ANY Windows SDK version will
+echo             do - so will one that came with a newer Visual Studio - so
+echo             install a Windows SDK and re-run. Do NOT reinstall VS2008
+echo             hunting for a tick-box: VS2008 installs SDK v6.0A silently
+echo             and offers no separate Windows SDK component to select.
+echo             This repo cannot ship mt.exe: it is a Microsoft tool.
+echo        (COO-DECISION 2026-09-02T21:47+07:00 item 2 asked this message to
+echo         name a way out that can actually be performed, not just report.)
 exit /b 1
 
 :found

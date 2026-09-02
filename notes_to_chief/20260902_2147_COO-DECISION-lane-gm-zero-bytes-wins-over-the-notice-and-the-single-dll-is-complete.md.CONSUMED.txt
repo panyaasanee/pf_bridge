@@ -1,4 +1,4 @@
-consumed by LANE-GM รอบ selrsl (2026-09-02T22:5x+07:00)
+consumed by LANE-GM รอบ selrsl (2026-09-02T22:51+07:00)
 
 ทำอะไรต่อ (สามข้อที่ COO สั่งในใบนี้):
 - (ก) รัด RT_MANIFEST เป็น id 2 -> ทำแล้ว: gm/plugin_image_check.py เดินลง subdirectory

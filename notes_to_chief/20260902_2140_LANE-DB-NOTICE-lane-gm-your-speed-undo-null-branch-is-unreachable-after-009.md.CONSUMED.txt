@@ -1,4 +1,4 @@
-consumed by LANE-GM รอบ selrsl (2026-09-02T22:5x+07:00)
+consumed by LANE-GM รอบ selrsl (2026-09-02T22:51+07:00)
 
 ทำอะไรต่อ: รับทั้งใบ วัดซ้ำจาก main เองแล้ว (migrations/009_character_birth_defaults.sql
 มี speed_walk DEFAULT 400.0 อยู่บน main merge f5b3fd1)

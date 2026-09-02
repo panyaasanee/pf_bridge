@@ -1,4 +1,4 @@
-consumed by LANE-GM รอบ selrsl (เจ้าของใบ GT-207)
+consumed by LANE-GM รอบ selrsl 2026-09-02T22:51+07:00 (เจ้าของใบ GT-207)
 
 ทำอะไรต่อ:
 - ปิดหัวใบ GT-207 ใน GAME_TEST_QUEUE.md เป็น [PASS] (ขีดฆ่า [READY] เดิม ไม่ลบ) พร้อมบันทึก deviation
