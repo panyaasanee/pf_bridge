@@ -11638,7 +11638,10 @@ RECHECK: `git -C pirate-force-server fetch && git -C pirate-force-server grep -c
   8. ไม่ตัดสินสาเหตุของสีป้ายใด ๆ (`RE-067`) · ไม่ใช่เทส stack / กระเป๋าเต็ม / สองผู้เล่นแย่งของ
 - result: (ผู้เทสกรอก · ตัวเลข `N_click`/`N_dec`/`N_vc1`/`N_silent` + จำนวนคลิกต่อชิ้นครบทุกชิ้น + ตารางสีป้าย · ผลเต็มไปที่ round file และจดหมายผล ไม่ใช่ในใบนี้)
 
-## GT-217 ATLANTIS-OCEAN-PANEL-CENSUS-ON-A-GM-SINGLE-USE-ENTRY-001  [BLOCKED -- รอ merge ของรอบ `4uztfj` · โค้ดสำมะโน `Bg3001` ยังไม่ขึ้น `main` · ตัวบล็อกเดียวคือ merge · RECHECK ผ่านครบสามข้อ = เลื่อนเป็น `READY` ได้เองโดยไม่ต้องรอเจ้าของใบ]
+## GT-217 ATLANTIS-OCEAN-PANEL-CENSUS-ON-A-GM-SINGLE-USE-ENTRY-001  [BLOCKED -- รอ merge ของรอบ `l6at2v` (ไม่ใช่ `4uztfj` แล้ว) · โค้ดสำมะโน `Bg3001` ยังไม่ขึ้น `main` · ตัวบล็อกเดียวคือ merge · RECHECK ผ่านครบสามข้อ = เลื่อนเป็น `READY` ได้เองโดยไม่ต้องรอเจ้าของใบ]
+
+> 🔴 **แก้ป้ายโดย LANE-A รอบ `l6at2v` 2026-09-02T22:4x+07:00 · ผู้เทสอ่านตรงนี้ก่อน**: PR ของรอบ `4uztfj` (`pirate-force-server#601`) **ถูกปิดโดยไม่ merge** เวลา 14:54Z — `merge-claude-pr.yml` ปิดเองเพราะเกต Windows แดงที่ช่อง `skip_census` ช่องเดียว (UNDECLARED SKIP 6 ตัวใน `tests/test_world_bg3001_identity_rederived.py`) ⇒ **การรอ merge ของ `#601` คือการรอสิ่งที่จะไม่เกิดขึ้นอีกแล้ว**
+> งานทั้งก้อนถูกกู้ขึ้นแบรนช์ `claude/laughing-archimedes-l6at2v` ในรอบ `l6at2v` พร้อมแก้ต้นเหตุ (`@BRIDGE_GAMEDATA.skip_unless_present()` + หมุดใน `docs/PYTEST_SKIP_PINS.json`) ⇒ **merge ที่ต้องรอคือ PR ของรอบ `l6at2v`** · เกณฑ์ RECHECK สามข้อข้างล่าง **ไม่เปลี่ยน** ทุกข้อวัดจาก `main` อยู่แล้ว ไม่ได้วัดจากเลข PR
 
 > เปิดโดย LANE-A (WORLD) รอบ `4uztfj` 2026-09-02T20:0x+07:00 · **LANE-A บริโภคผลใบนี้เอง**
 > numbering: ตัวนับร่วมกับ `CLIENT_RE_QUEUE.md` · ตอนเปิดวัดได้ `GT` สูงสุด `215` ⇒ เปิดเป็น `216` · 🔴 **ขยับเป็น `217` ตอน rebase ตามกฎ ③ (คนที่ push ทีหลังขยับ)**: chief (LANE-E) push `GT-216 MULTI-VITAL-WALKER-...` ขึ้น main ก่อนในรอบ R309

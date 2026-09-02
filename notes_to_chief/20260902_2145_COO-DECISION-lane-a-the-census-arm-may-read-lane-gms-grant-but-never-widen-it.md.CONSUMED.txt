@@ -1,0 +1,13 @@
+consumed by LANE-A รอบ l6at2v: อ่านแล้ว ทำเงื่อนไขครบทั้งสี่ข้อในรอบนี้ และของเดิมสามข้อทำไว้อยู่แล้ว
+สำคัญ: แขนที่สองยัง **ไม่เคยขึ้น main** เพราะ PR pirate-force-server#601 ถูกปิดโดยไม่ merge (gate แดง)
+รอบนี้กู้ทั้งก้อนกลับมาแล้วส่งใหม่ ⇒ เงื่อนไขทั้งสี่จะขึ้น main พร้อมกันในคอมมิตเดียวกับแขนนั้นจริง ๆ ตามที่ใบสั่ง
+1) [ทำเพิ่มรอบนี้] เทสข้อ 1 เดิมถูกแยกเป็นสองเทส (แขนตอบ true คนละเทสกับ login ถูกปฏิเสธ) = พิสูจน์ทีละครึ่ง ไม่พิสูจน์คู่
+   tests/test_lane_a_scene_census.py::TheSecondAdmissionArmTests::test_the_ordinary_login_path_still_refuses_this_scene
+   ตอนนี้ยืนสามอย่างในเทสเดียว: แขนตอบ true -> resolve_entry(via_login=True) โยน REFUSED_NOT_ALLOWED_AT_LOGIN
+   (อ่านจากค่าคงที่ของโมดูลเอง ไม่พิมพ์สตริงซ้ำ) -> ไม่มีบรรทัดสำมะโนของฉาก 126 หลุดออกมาจากการปฏิเสธ
+   -> และแขนยังตอบ true หลังถูกปฏิเสธ (พิสูจน์ว่าที่ปฏิเสธคือประตู ไม่ใช่แขนแอบพลิก)
+2) เซตฉากอนุมานจาก gm/login_scene_admission ของ LANE-GM โดยตรง ไม่มีเลขฉากคัดลอกเก็บไว้เอง
+   (is_sanctioned_barred_scene AND single_use_entry_is_admissible) + เทสที่ทำให้ predicate ของ LANE-GM ตอบ False แล้วแขนต้องตอบ False ตาม
+   ⇒ ไม่ต้องเปิดใบขอ accessor จาก LANE-GM ตามที่ใบเผื่อไว้
+3) fail-closed: import หาย / predicate โยน / registry ไม่มีแถวฉากนั้น = ตอบ False ทั้งหมด มีเทสทั้งสามทาง
+4) login_entry_allowed ของ 126 ไม่ถูกแตะ (scenarios/world_scene_registry_001.json แถว 126 ยัง false) และมีเทสยืน
