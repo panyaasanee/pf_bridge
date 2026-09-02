@@ -15,7 +15,7 @@
  * Every structural claim names the gate_id row that proves it.  Nothing here
  * comes from the original DLL's code, which nobody has ever seen.
  *
- * 🔴 COMPILE-UNVERIFIED on cloud -- this file has never been compiled by MSVC
+ * !! COMPILE-UNVERIFIED on cloud -- this file has never been compiled by MSVC
  * and cannot be, here: the cloud clone has no Windows SDK and no VC9.  THE
  * FIRST VC9 BUILD MUST RUN plugin_image_check ON THE BUILT DLL BEFORE INSTALL:
  *     set PYTHONPATH=src
@@ -184,7 +184,7 @@
  * and the 35-byte body length fits prologue + the -1 store + one import call +
  * epilogue and little else.  That is corroboration, not proof.
  *
- * 🔴 Be exact about what the default costs, because the row cuts both ways:
+ * !! Be exact about what the default costs, because the row cuts both ways:
  * GM-IMG-012 states in ONE clause that the proven fallback "writes -1 to its
  * first dword, INITIALIZES ITS +4 SUBOBJECT, and does not use the second
  * pointer", and slot +0x00 is a slot with a PINNED call route (GM-IMG-011
@@ -316,7 +316,7 @@ const wchar_t* g_walkFailure = NULL;
  * by construction instead of by name.
  *
  * dllName  NULL = any module; otherwise the import descriptor's DLL name,
- *          compared case-insensitively.  🔴 NEVER pass NULL when the answer
+ *          compared case-insensitively.  !! NEVER pass NULL when the answer
  *          decides who owns memory.  The mangled names we look for are NOT
  *          unique to one library: ??3@YAXPAX@Z is imported by MFC90 and by
  *          any injected/anti-cheat module, and the wstring ctor's decorated

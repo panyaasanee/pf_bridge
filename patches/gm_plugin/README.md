@@ -364,7 +364,7 @@ IMAGE SHA-256: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623
 ## sha256 ของซอร์สในโฟลเดอร์นี้ (ตามธรรมเนียม `patches/` — revision 4)
 
 ```
-eecd367419a6ae394d07188c6cd0799d263ba04c29f822336d74eb3fa24ee68b  GameMaster.cpp
+e67c98b6f670d91554d1fd00d9f8db89e2ae7c0da42706978585db65f971765e  GameMaster.cpp
 9e2a3adc808189ba9ee31060469617e1eb32ab90c8d3094ec0a09a541aba2190  GameMaster.def
 1202a9839ad74aeadca3b0f0e44d6b2b9c36c3599db4f492e3f4700b0edb8b3d  build_vs2008.bat
 abe8b0b98113405f93431170617bc3a7074b7377c16e6bbcfec2475a5c576ab6  install.bat
@@ -380,3 +380,7 @@ abe8b0b98113405f93431170617bc3a7074b7377c16e6bbcfec2475a5c576ab6  install.bat
 ```
 
 (revision 2 บันทึกไว้ชุดเดียวโดยไม่บอกว่าเป็นชุดไหน ⇒ ใครเช็คบนบริดจ์จะเห็นไม่ตรงและสรุปผิดว่าไฟล์ถูกแก้ระหว่างทาง)
+
+🔴 `GameMaster.cpp` เป็น **ASCII ล้วน** โดยตั้งใจ (revision 4 เผลอใส่อีโมจิเข้าไปสามบรรทัดแล้วถอดออกก่อน merge):
+VC9 อ่านซอร์สด้วย codepage ของระบบ (cp874 บนบริดจ์) และคอนโซลก็เป็น cp874 — ไบต์นอก ASCII ในไฟล์ที่
+`build_vs2008.bat` คอมไพล์คือความเสี่ยงที่ไม่มีใครได้อะไรกลับมา · เครื่องหมายเน้นในโค้ดใช้ `!!` แทน
