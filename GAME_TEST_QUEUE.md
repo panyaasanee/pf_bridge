@@ -11677,7 +11677,7 @@ RECHECK: `git -C pirate-force-server fetch && git -C pirate-force-server grep -c
 > 🔴 **แก้ป้ายโดย LANE-A รอบ `gx7xtp` 2026-09-02T23:4x+07:00 · อ่านสองย่อหน้านี้ก่อนนับ actor บนจอ**
 > 1. **ตัวบล็อกหมดแล้ว**: PR ของรอบ `l6at2v` merge เข้า `main` แล้ว ⇒ ป้าย `[BLOCKED]` เดิมผิดตั้งแต่เวลานั้น · เกณฑ์ RECHECK สามข้อข้างล่าง **ไม่เปลี่ยน** ยังต้องรันก่อนบูต
 > 2. 🔴 **จำนวน actor ของฉากนี้ขยับ 36 → 37** ตาม `COO-DECISION 20260902_2146` ข้อ 1: แถว Mob-Set 56 (placement 37, `MOBS 8180`, ชื่อไทย) เคยถูกตัดทิ้งเพราะคอนโซลของเราพิมพ์ชื่อไทยไม่ได้ COO กลับคำแล้ว ⇒ มันส่งจริง
->    ⇒ สิ่งที่ต้องนับบนจอคือ **37 ตัว จาก 38 placement** · ตัวที่เพิ่มคือ **สัตว์/วัตถุ lv 60 หนึ่งตัว ที่ป้ายชื่อเป็นภาษาไทย** (อ่านบนจอได้ แต่คอนโซลพิมพ์ไม่ได้)
+>    ⇒ ~~สิ่งที่ต้องนับบนจอคือ **37 ตัว จาก 38 placement**~~ 🔴 **ตัวเลขนี้ถูกแทนที่โดยข้อ 4 — วันนี้นับ 36** · ตัวที่จะเพิ่มเมื่อ `#612` merge คือ **สัตว์/วัตถุ lv 60 หนึ่งตัว ที่ป้ายชื่อเป็นภาษาไทย** (อ่านบนจอได้ แต่คอนโซลพิมพ์ไม่ได้)
 >    ⇒ บนคอนโซลมันจะออกมาเป็น `placement=37 n_ID=8180 name_cp874_hex=a1c3d0b7a7 lv60 hp43275 @(...)` — **นี่คือสิ่งที่ถูกต้อง ห้ามอ่านว่าผิดปกติ**
 > 3. **บอกได้ว่าเครื่องคุณอยู่รุ่นไหน โดยไม่ต้อง grep f-string**:
 >    ```
@@ -11687,9 +11687,12 @@ RECHECK: `git -C pirate-force-server fetch && git -C pirate-force-server grep -c
 > 4. 🔴 **แก้ป้ายโดย LANE-A รอบ `wqg99e` 2026-09-03T01:28+07:00 — ตอนนี้คำตอบของข้อ 3 คือ "ว่าง" ⇒ นับ 36**
 >    ~~รอบ `gx7xtp` ขึ้น main แล้ว~~ **ไม่จริง**: `pirate-force-server#609` **ถูก reaper ปิดโดยไม่ merge** เวลา 2026-09-03T01:05+07:00
 >    (เหตุ: `main` แดงอยู่ที่ `tests/test_gm_login_scene_override_position_resync.py` ซึ่งไม่ใช่ของรอบนั้น — ดู `NOW.md` P-0)
->    ⇒ `NAME_CP874_HEX` **ยังไม่อยู่บน `main`** (วัดเอง `git cat-file -e origin/main:src/.../lane_hooks/lane_a_ground_preserve.py` = ไม่มี · `main` = `30e150a`)
+>    ⇒ `NAME_CP874_HEX` **ยังไม่อยู่บน `main`** — วัดตรงตัวไม่ใช่ผ่านไฟล์อื่น (pf-adversary D8):
+>    `git show origin/main:src/pirateforce_foundation/world_bg3001_identity.py | grep -c NAME_CP874_HEX` = **0** · บนแบรนช์ `#612` = **9** · `main` = `30e150a`
 >    ⇒ **ผู้เทสที่บูตวันนี้ต้องนับ 36 ตัว จาก 38 placement ไม่ใช่ 37** และ **ไม่มีป้ายชื่อไทย** บนจอ — เห็น 36 = ถูกต้อง ห้ามอ่านว่า FAIL
 >    งานถูกกู้ขึ้นแบรนช์ `claude/laughing-archimedes-wqg99e` แล้วในรอบนี้ (`pirate-force-server#612`) · **ข้อ 3 คือผู้ตัดสิน ไม่ใช่เลข PR**
+>    🔴 **ก่อนรันคำสั่งข้อ 3 ต้อง `git fetch origin main` ก่อนเสมอ** (pf-adversary D9 · กฎ `NOW.md` "`git fetch` ก่อนอ่านไฟล์เสมอ")
+>    เพราะคำสั่งนั้นอ่าน `origin/main` ในเครื่องคุณ ไม่ใช่ของ GitHub ⇒ ไม่ fetch แล้ว `#612` merge ไปแล้ว = คุณจะนับ 36 แต่เห็น 37 แล้วเขียน FAIL ผิด
 
 > 🔴 **แก้ป้ายโดย LANE-A รอบ `l6at2v` 2026-09-02T22:4x+07:00 · ผู้เทสอ่านตรงนี้ก่อน**: PR ของรอบ `4uztfj` (`pirate-force-server#601`) **ถูกปิดโดยไม่ merge** เวลา 14:54Z — `merge-claude-pr.yml` ปิดเองเพราะเกต Windows แดงที่ช่อง `skip_census` ช่องเดียว (UNDECLARED SKIP 6 ตัวใน `tests/test_world_bg3001_identity_rederived.py`) ⇒ **การรอ merge ของ `#601` คือการรอสิ่งที่จะไม่เกิดขึ้นอีกแล้ว**
 > งานทั้งก้อนถูกกู้ขึ้นแบรนช์ `claude/laughing-archimedes-l6at2v` ในรอบ `l6at2v` พร้อมแก้ต้นเหตุ (`@BRIDGE_GAMEDATA.skip_unless_present()` + หมุดใน `docs/PYTEST_SKIP_PINS.json`) ⇒ **merge ที่ต้องรอคือ PR ของรอบ `l6at2v`** · เกณฑ์ RECHECK สามข้อข้างล่าง **ไม่เปลี่ยน** ทุกข้อวัดจาก `main` อยู่แล้ว ไม่ได้วัดจากเลข PR
