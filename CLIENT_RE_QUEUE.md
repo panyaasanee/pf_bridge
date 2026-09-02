@@ -2893,7 +2893,7 @@ GT-101 error 23065/28317):
 `notes_to_chief/20260830_1655_PANYA-ORDER-open-RE-162-in-session-scene-change-with-a-named-consumer-chain.md`
 (ใบสั่งเต็ม) · `gm/warp_executor.py` (docstring อ้าง RE-090) · `notes_to_chief/` RE-090 result (field-not-proven)
 
-## 🔬 RE-164 BT-GM-CLICK-FOUR-SUSPECTS-002 [PARTIAL — #2/#3/#4 CLOSED STATIC (#2 also ATTENDED), #1 STATIC-PARTIAL]: **ของสี่ผู้ต้องสงสัยที่ `RE-126` ทิ้งไว้โดยไม่เดา (connection context / query-0x25 gate ตอนคลิก / current-UI object-key จริง / create path `0x007280D0`) ตัวไหนคือประตูที่หยุด `GMUI_BASIC` จริง — ข้อ 2 กับ 4 ปิดแล้วด้วย static synthesis จากใบเก่า (`RE-104`+`RE-118`) ที่ไม่เคย cross-reference กันมาก่อน ข้อ 2 ได้ชั้น attended เพิ่มจาก `GT-164` (bounded negative: 14/14 variant คลิกแล้วไม่เปิด)**
+## 🔬 RE-164 BT-GM-CLICK-FOUR-SUSPECTS-002 [CLOSED เฉพาะ**ชั้น static** ครบสี่ข้อ (#2 มีชั้น attended ด้วย) — ~~#1 STATIC-PARTIAL~~ ปิดโดย `RE-164 RESULT` `20260902_1143` รอบ `qhowwu` · 🔴 **ชั้น client-observable ของข้อ 3 ยังไม่ปิด และใบนี้ไม่เคยปิดมัน** — ถูกถือโดยขั้นที่ตัดสินของ `GT-207` (คลิกแล้ว `GMUI_BASIC` เปิดไหม) ซึ่งแทนที่ "`GT-164` variant ใหม่" ที่ nonclaim 7 พูดถึงและจะไม่มีวันมี]: **ของสี่ผู้ต้องสงสัยที่ `RE-126` ทิ้งไว้โดยไม่เดา (connection context / query-0x25 gate ตอนคลิก / current-UI object-key จริง / create path `0x007280D0`) ตัวไหนคือประตูที่หยุด `GMUI_BASIC` จริง — ข้อ 2 กับ 4 ปิดแล้วด้วย static synthesis จากใบเก่า (`RE-104`+`RE-118`) ที่ไม่เคย cross-reference กันมาก่อน ข้อ 2 ได้ชั้น attended เพิ่มจาก `GT-164` (bounded negative: 14/14 variant คลิกแล้วไม่เปิด)**
 
 > 🆕 **อัปเดตรอบ `ku3jz6` 2026-09-01T21:xx+07:00 (LANE-GM):** ข้อ 3 **ปิดแล้วด้วย static** จาก
 > committed artifact ที่เพิ่ง sync เข้า repo รอบ `a0909b1` (19:54+07, หลังรอบก่อนหน้าที่ตรวจ 06:26
@@ -2960,6 +2960,36 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
    สอง repo แม้ค้นตรง VA แล้ว จึงยังตอบไม่ได้ว่า global ตัวนี้ค่าเก่าอาจค้างข้ามรอบ relog หรือไม่ — ต้องไล่
    caller-graph ของ `constructor_vtable_store`/`0x0044C990` ต่อ ยังเป็น **STATIC-ON-BRIDGE จริง** สำหรับ
    ส่วนนี้ ไม่ได้ปิดทั้งข้อ (รายละเอียดเต็ม: `notes_to_chief/20260901_2132_RE-164-RESULT-item3-closed-item1-writesite-found-plus-gamemasterdll-flag.md`)
+   ✅ **[STATIC ปิดแล้ว รอบ `qhowwu` — บริโภคโดย LANE-GM ผู้เปิดใบ]** `notes_to_chief/
+   20260902_1143_RE-164-RESULT-local-actor-singleton-clear-sites.md` ปิด write-site ตัวที่สองที่รอบ `ku3jz6`
+   หาไม่เจอ: direct-reference census ของ DWORD `0x01032EC4` ใน `.text` = **2,016 จุด ตรงกับ
+   relocation target ครบ** ถอดตามขอบเขตคำสั่งแล้วเป็น read/test 2,013 จุด และ **direct write สามจุด**:
+   publish `0x0044CB7D` (ctor) · conditional clear `0x0044C4E2..0x0044C4EF` (dtor — `cmp` ก่อน จึง
+   **ไม่ล้างทับ object ใหม่**) · unconditional clear `0x004B4B33` ก่อน path ที่ผูก actor ตัวใหม่
+   ⇒ คำถามเดิมของข้อ 1 ตอบได้แล้ว: `[0x01032EC4]` **ไม่ใช่ตัวระบุ connection/session** และ
+   lifecycle ปกติมีการล้างก่อนเปลี่ยน actor ⇒ สมมติฐาน "click handler อ่าน context ของคนละ
+   connection เพราะ login เร็ว ๆ กัน" **ถูกถอน** · evidence spans มี SHA-256 ครบสามช่วงในใบผล
+   🔴 **เพดานของการปิด อ่านก่อนเอาไปอ้าง:** ปิดเฉพาะ **lifecycle ปกติที่เดินผ่านสามจุดนี้**
+   (nonclaim 2 ของใบผล: crash / forced termination / corruption ไม่ถูกอ้าง) · และ census นี้เป็น
+   **หลักฐานเชิงบวกจาก clear-site ไม่ใช่ผลลบจาก linear disassembler** (nonclaim 3) — indirect alias /
+   bulk overwrite ที่ไม่ฝัง absolute address ยังไม่ถูกตัด
+   🔴 **สิ่งที่ใบนี้ไม่เคยปิดและการปิดหัวใบนี้ไม่ได้ทำให้หายไป:** คำถาม "มี `GameMaster.dll` อยู่ข้าง exe
+   ก่อนติดตั้งของเราไหม" (`NOW.md` P-3) เป็นคำถาม **เชิงปฏิบัติการจากเครื่องจริง ไม่ใช่งาน static RE**
+   (nonclaim 4 ของใบผลปฏิเสธเองว่าไม่ตอบเรื่องนี้) — มันถูกถือโดย **ใบ `GT-207` หัวข้อ "ของแถม"**
+   ("ของแถม (`RE-164` · NOW.md P-3): มี `GameMaster.dll` อยู่ข้าง exe **ก่อน** ติดตั้งของเราไหม")
+   ⇒ การปิดหัวใบนี้ **ไม่ทำให้ P-3 ขยับ** และ **ไม่ทำให้คำถามนั้นหาย** — มันย้ายไปอยู่ที่เดียว
+   ที่ตอบมันได้ คือคนที่นั่งอยู่หน้าเครื่องจริง
+   🔴 **ชั้น client-observable ไปอยู่ที่ไหน (อย่าอ่านหัวใบแล้วคิดว่ามันหายไป):** คำตอบของข้อ 3 ในใบนี้
+   เขียนเองว่าชั้น client-observable ยังไม่ปิดและต้องมี `GT-164` variant ใหม่ยืนยัน · **ไม่มี variant นั้น
+   และจะไม่มี** — สิ่งที่แทนมันคือขั้นที่ตัดสินของ **`GT-207`** (คลิก `BT_GM` แล้ว `GMUI_1` เปิดถึง tab
+   `GMUI_BASIC` หรือไม่) ซึ่ง `[READY]` รอเครื่องจริงอยู่แล้ว ⇒ การปิดหัวใบนี้ปิด **ชั้น static** เท่านั้น
+   ไม่ใช่การปิดคำถามของ P-3
+   🔴 **อ้าง `GT-207` ด้วยเลขใบ ไม่ใช่เลขบรรทัด** — `GT-207` ขยับ `10552`->`10614` ภายในวันเดียว และ
+   `NOW.md:31` ที่ pin `:10552` ค้างไปแล้ว · สายนี้แก้ `GAME_TEST_QUEUE.md` ไม่ได้ จึงไม่ทิ้ง pin ที่ซ่อมเองไม่ได้
+   ⚖️ **ข้อขัดแย้งที่สายนี้ยกขึ้นเอง (เหมือนรอบ `wggs0i`):** `ADDENDUM v2 ข้อ B` ให้สิทธิ์สายที่เปิดใบ
+   ปิดหัวใบของตัวเอง แต่ `PROCESS_GATES.md` §19 (บรรทัด 146) เขียนว่าใบที่กระทบทะเบียนกลางให้ **chief**
+   ปิด · ใบผลขอให้ "LANE-GM/chief" ปิด สายนี้จึงปิดตามคำขอนั้น — **ถ้า chief อ่านตาม §19 แล้วจะย้อนหัวใบ
+   กลับไปแล้วปิดเอง สายนี้ไม่โต้**
 2. **query-0x25 gate ตอนคลิก** — adapter `0x00726D30` (อ่าน `GMModule_Client+0x19`, RE-104 พิสูจน์ว่าคุมการ
    วาด/enable ปุ่ม) ถูกเรียกซ้ำตอนคลิกด้วยหรือคืนค่าจากตอนวาดครั้งเดียว — ถ้าเรียกซ้ำ ค่าที่อ่าน ณ
    เวลาคลิกอาจต่างจากตอนวาด

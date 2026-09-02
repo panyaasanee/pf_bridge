@@ -1,7 +1,7 @@
 # QUEUE STATUS SNAPSHOT (generated -- do not edit; regenerate with tools_bridge/pf_queue_status.py)
-generated: 2026-09-02T11:06:46+07:00
+generated: 2026-09-02T12:24:59+07:00
 scanned: GAME_TEST_QUEUE.md, CLIENT_RE_QUEUE.md + 18 archive files
-tickets total: 236 (live 212 / archive-only 24) -- open in live: 81
+tickets total: 237 (live 213 / archive-only 24) -- open in live: 80
 
 ## OPEN (live)
 | ใบ | status | ที่อยู่ | อ่านจาก |
@@ -68,9 +68,9 @@ tickets total: 236 (live 212 / archive-only 24) -- open in live: 81
 | GT-200 | PENDING | live:GAME_TEST_QUEUE.md:10155 | header |
 | GT-202 | UNKNOWN | live:GAME_TEST_QUEUE.md:10225 | ? |
 | GT-203 | PENDING | live:GAME_TEST_QUEUE.md:10248 | header |
-| GT-204 | BLOCKED | live:GAME_TEST_QUEUE.md:10310 | header |
-| GT-205 | BLOCKED | live:GAME_TEST_QUEUE.md:10433 | header |
-| GT-207 | READY | live:GAME_TEST_QUEUE.md:10552 | header |
+| GT-204 | READY | live:GAME_TEST_QUEUE.md:10310 | header |
+| GT-205 | READY | live:GAME_TEST_QUEUE.md:10479 | header |
+| GT-207 | READY | live:GAME_TEST_QUEUE.md:10614 | header |
 | RE-104 | OPEN | live:CLIENT_RE_QUEUE.md:472 | header |
 | RE-107 | UNKNOWN | live:GAME_TEST_QUEUE.md:6232 | ? |
 | RE-122 | UNKNOWN | live:CLIENT_RE_QUEUE.md:1634 | ? |
@@ -79,17 +79,16 @@ tickets total: 236 (live 212 / archive-only 24) -- open in live: 81
 | RE-137 | OPEN | live:CLIENT_RE_QUEUE.md:2275 | header |
 | RE-138 | OPEN | live:CLIENT_RE_QUEUE.md:2294 | header |
 | RE-155 | OPEN | live:CLIENT_RE_QUEUE.md:2533 | header |
-| RE-164 | PARTIAL | live:CLIENT_RE_QUEUE.md:2896 | header |
 | RE-169 | UNKNOWN | live:GAME_TEST_QUEUE.md:8147 | ? |
-| RE-193 | OPEN | live:CLIENT_RE_QUEUE.md:3657 | header |
-| RE-194 | OPEN | live:CLIENT_RE_QUEUE.md:3719 | header |
-| RE-196 | OPEN | live:CLIENT_RE_QUEUE.md:3883 | header |
-| RE-202 | OPEN | live:CLIENT_RE_QUEUE.md:4142 | header |
-| RE-206 | OPEN | live:CLIENT_RE_QUEUE.md:4186 | header |
-| RE-208 | OPEN | live:CLIENT_RE_QUEUE.md:4227 | header |
+| RE-193 | OPEN | live:CLIENT_RE_QUEUE.md:3680 | header |
+| RE-194 | OPEN | live:CLIENT_RE_QUEUE.md:3742 | header |
+| RE-196 | OPEN | live:CLIENT_RE_QUEUE.md:3906 | header |
+| RE-206 | OPEN | live:CLIENT_RE_QUEUE.md:4295 | header |
+| RE-208 | OPEN | live:CLIENT_RE_QUEUE.md:4336 | header |
+| RE-209 | OPEN | live:CLIENT_RE_QUEUE.md:4367 | header |
 
-## DRIFT -- open แต่ไม่มีในสารบัญมือ (64)
-GT-002, GT-036, GT-060, GT-069, GT-099, GT-102, GT-103, GT-104, GT-106, GT-107, GT-109, GT-110, GT-114, GT-125, GT-128, GT-129, GT-133, GT-140, GT-141, GT-144, GT-151, GT-158, GT-159, GT-160, GT-164, GT-166, GT-170, GT-171, GT-173, GT-174, GT-176, GT-177, GT-178, GT-179, GT-180, GT-181, GT-187, GT-188, GT-189, GT-190, GT-193, GT-194, GT-198, GT-199, GT-200, GT-202, GT-204, GT-205, RE-104, RE-107, RE-122, RE-128, RE-135, RE-137, RE-138, RE-155, RE-164, RE-169, RE-193, RE-194, RE-196, RE-202, RE-206, RE-208
+## DRIFT -- open แต่ไม่มีในสารบัญมือ (63)
+GT-002, GT-036, GT-060, GT-069, GT-099, GT-102, GT-103, GT-104, GT-106, GT-107, GT-109, GT-110, GT-114, GT-125, GT-128, GT-129, GT-133, GT-140, GT-141, GT-144, GT-151, GT-158, GT-159, GT-160, GT-164, GT-166, GT-170, GT-171, GT-173, GT-174, GT-176, GT-177, GT-178, GT-179, GT-180, GT-181, GT-187, GT-188, GT-189, GT-190, GT-193, GT-194, GT-198, GT-199, GT-200, GT-202, GT-204, GT-205, RE-104, RE-107, RE-122, RE-128, RE-135, RE-137, RE-138, RE-155, RE-169, RE-193, RE-194, RE-196, RE-206, RE-208, RE-209
 
 ## DRIFT -- อยู่ในสารบัญมือแต่สถานะจริงปิดแล้ว (13)
 GT-030, GT-032, GT-033, GT-045, GT-078, GT-121, GT-131, GT-148, GT-182, RE-077, RE-125, RE-130, RE-139
@@ -237,7 +236,7 @@ GT-148: index=PENDING vs body=PASS -- อ่านทั้งสองที่
 | RE-129 | CLOSED | live:CLIENT_RE_QUEUE.md:2016 |
 | RE-130 | CLOSED | live:CLIENT_RE_QUEUE.md:2078 |
 | RE-132 | CLOSED | live:CLIENT_RE_QUEUE.md:2160 |
-| RE-133 | CLOSED | live:CLIENT_RE_QUEUE.md:3544 |
+| RE-133 | CLOSED | live:CLIENT_RE_QUEUE.md:3567 |
 | RE-136 | ANSWERED | live:CLIENT_RE_QUEUE.md:2193 |
 | RE-139 | DONE | live:CLIENT_RE_QUEUE.md:2326 |
 | RE-149 | DONE | live:CLIENT_RE_QUEUE.md:2348 |
@@ -249,16 +248,18 @@ GT-148: index=PENDING vs body=PASS -- อ่านทั้งสองที่
 | RE-161 | DONE | live:CLIENT_RE_QUEUE.md:2709 |
 | RE-162 | DONE | live:CLIENT_RE_QUEUE.md:2839 |
 | RE-163 | DONE | live:CLIENT_RE_QUEUE.md:2776 |
-| RE-167 | ANSWERED | live:CLIENT_RE_QUEUE.md:3093 |
-| RE-168 | ANSWERED | live:CLIENT_RE_QUEUE.md:3137 |
-| RE-170 | CLOSED | live:CLIENT_RE_QUEUE.md:3233 |
-| RE-171 | CLOSED | live:CLIENT_RE_QUEUE.md:3270 |
-| RE-172 | DONE | live:CLIENT_RE_QUEUE.md:3321 |
-| RE-173 | CLOSED | live:CLIENT_RE_QUEUE.md:3364 |
-| RE-188 | CLOSED | live:CLIENT_RE_QUEUE.md:3427 |
-| RE-189 | CLOSED | live:CLIENT_RE_QUEUE.md:3489 |
-| RE-191 | CLOSED | live:CLIENT_RE_QUEUE.md:3562 |
-| RE-195 | CLOSED | live:CLIENT_RE_QUEUE.md:3784 |
-| RE-197 | DONE | live:CLIENT_RE_QUEUE.md:3955 |
-| RE-198 | DONE | live:CLIENT_RE_QUEUE.md:4015 |
-| RE-201 | CLOSED | live:CLIENT_RE_QUEUE.md:4086 |
+| RE-164 | CLOSED | live:CLIENT_RE_QUEUE.md:2896 |
+| RE-167 | ANSWERED | live:CLIENT_RE_QUEUE.md:3116 |
+| RE-168 | ANSWERED | live:CLIENT_RE_QUEUE.md:3160 |
+| RE-170 | CLOSED | live:CLIENT_RE_QUEUE.md:3256 |
+| RE-171 | CLOSED | live:CLIENT_RE_QUEUE.md:3293 |
+| RE-172 | DONE | live:CLIENT_RE_QUEUE.md:3344 |
+| RE-173 | CLOSED | live:CLIENT_RE_QUEUE.md:3387 |
+| RE-188 | CLOSED | live:CLIENT_RE_QUEUE.md:3450 |
+| RE-189 | CLOSED | live:CLIENT_RE_QUEUE.md:3512 |
+| RE-191 | CLOSED | live:CLIENT_RE_QUEUE.md:3585 |
+| RE-195 | CLOSED | live:CLIENT_RE_QUEUE.md:3807 |
+| RE-197 | DONE | live:CLIENT_RE_QUEUE.md:3978 |
+| RE-198 | DONE | live:CLIENT_RE_QUEUE.md:4038 |
+| RE-201 | CLOSED | live:CLIENT_RE_QUEUE.md:4109 |
+| RE-202 | CLOSED | live:CLIENT_RE_QUEUE.md:4165 |

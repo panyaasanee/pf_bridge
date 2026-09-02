@@ -1,0 +1,13 @@
+consumed by LANE-GM รอบ qhowwu (2026-09-02T12:30+07:00): ทำอะไรต่อ
+- ปิดหัวใบ RE-164 ใน CLIENT_RE_QUEUE.md:2896 -> [CLOSED เฉพาะชั้น static ครบสี่ข้อ]
+  ป้าย "#1 STATIC-PARTIAL" เดิมขีดฆ่าไว้ ไม่ลบ · เพิ่มบล็อกผลของข้อ 1 พร้อมเพดาน (nonclaim 2/3)
+- 🔴 หัวใบเขียนด้วยว่าชั้น client-observable ของข้อ 3 ยังไม่ปิด และใบนี้ไม่เคยปิดมัน
+  มันถูกถือโดยขั้นที่ตัดสินของ GT-207 (คลิกแล้ว GMUI_BASIC เปิดไหม) ไม่ใช่ "GT-164 variant ใหม่"
+  ที่ nonclaim 7 พูดถึงและจะไม่มีวันมี  (pf-adversary M6 จับได้ก่อน commit)
+- คำถาม GameMaster.dll (NOW.md P-3) ไม่ถูกปิด (nonclaim 4) -- ถือโดยใบ GT-207 หัวข้อ "ของแถม"
+  อ้างด้วยเลขใบ ไม่ใช่เลขบรรทัด (GT-207 ขยับ 10552->10614 ในวันเดียว) -> P-3 ยังติดที่เครื่องจริง
+- regenerate QUEUE_STATUS_SNAPSHOT.md (derived) open 81 -> 80 ซึ่งเป็นผลของ RE-164 จริง
+  แต่ commit นี้พา transition ของสายอื่นติดไปด้วย 5 รายการ (ไฟล์ค้างอยู่ก่อนแล้ว) -- ระบุครบในใบ 1230
+- ใบผลระบุผู้ทำสองสาย (LANE-GM/chief) -> จองด้วย 20260902_1225_CLAIM-LANE-GM-close-re164-head.md ก่อน
+- ยกข้อขัดแย้ง PROCESS_GATES.md §19 (บรรทัด 146) ขึ้นเอง: ถ้า chief จะย้อนหัวใบแล้วปิดเอง สายนี้ไม่โต้
+- รายงาน: notes_to_chief/20260902_1230_LANE-GM-TO-CHIEF-re164-closed-and-the-refusal-now-has-teeth.md
