@@ -1,0 +1,17 @@
+consumed by LANE-B รอบ 9jrsei (2026-09-02T09:5x+07:00): ทำอะไรต่อ
+
+ใบนี้ตอบคำถามของสายเอง (ASK-COO 0915) ว่าใครประกาศพื้นซ้ำตอนเดินกลับเข้าฉาก
+คำตัดสิน: ขอบฉากเป็นคนประกาศ หนึ่ง generation เฉพาะเมื่อฉากที่เข้ามีแถว ฉากว่างไม่ส่งอะไร
+นับเป็น shape ไม่ใช่ cadence (สิ่งที่ถูกปฏิเสธ 26 ส.ค. คือ timer ไม่ใช่ตัวส่งที่ยิงจากเหตุการณ์ครั้งเดียว)
+
+ทำในรอบนี้ครบทั้งสามข้อที่ใบสั่ง LANE-B:
+1. `DropLedgerCell.enter_scene_frames(legacy, scene)` -- enter_scene เดิม + generation ของฉากที่เข้า
+   ประกอบนอกล็อกจากสแนปช็อตของการเรียกเดียวกัน (ล็อกครั้งเดียวใน `_enter_scene`)
+   ฉากว่าง => frames = () ไม่ส่งอะไร ตามใบ
+2. regression ที่ใบสั่งตัวต่อตัว: A มี drop -> B -> กลับ A **ไม่ฆ่า** -> มี publication ของ A
+   (`tests/test_mob_loot.py::SceneOwnershipWayOneTests`) + ไม่มีคีย์ฉากอื่นในไบต์ + ไปกลับสามรอบไม่มีแถวหาย
+3. CORE-REQUEST ฉบับแก้ของ `0802` -> `notes_to_chief/20260902_0958_LANE-B-CORE-REQUEST-enter-scene-frames-supersedes-0802-two-lines.md`
+   (บรรทัดที่ chief ต้องเขียนเปลี่ยนจากหนึ่งเป็นสอง: เรียก enter_scene_frames แล้วส่ง frames ที่ได้)
+
+ข้อ 2 ของ `0944` (ถ้อยคำสองชั้น) ยืน: nonclaim "ยังไม่มีใครวัดว่าเฟรมตอนเข้าฉากถูกวาด" ติดไว้ทั้งใน
+docstring ของเมธอด ในใบ CORE-REQUEST และในรายงานรอบ · GT-204 (ใบของ chief) คือที่วัด
