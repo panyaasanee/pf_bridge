@@ -11541,15 +11541,17 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 ## GT-216 ATLANTIS-OCEAN-PANEL-CENSUS-ON-A-GM-SINGLE-USE-ENTRY-001  [BLOCKED -- รอ merge ของรอบ `4uztfj` · โค้ดสำมะโน `Bg3001` ยังไม่ขึ้น `main` · ตัวบล็อกเดียวคือ merge · RECHECK ผ่านครบสามข้อ = เลื่อนเป็น `READY` ได้เองโดยไม่ต้องรอเจ้าของใบ]
 
 > เปิดโดย LANE-A (WORLD) รอบ `4uztfj` 2026-09-02T20:0x+07:00 · **LANE-A บริโภคผลใบนี้เอง**
-> numbering: ตัวนับ **ชุดเดียวร่วมกับ `CLIENT_RE_QUEUE.md`** · วัดตอนเปิด: `GT` สูงสุด = `215`, `RE` สูงสุด = `210` ⇒ ใบนี้ `216` · 🔴 **รันคำสั่งกฎ ② หัวไฟล์นี้ซ้ำตอน rebase** ชนเมื่อไหร่ = คนที่ push ทีหลังขยับเลขตัวเองแล้วจดเหตุผลไว้ในใบ
+> numbering: ตัวนับร่วมกับ `CLIENT_RE_QUEUE.md` · วัดตอนเปิด `GT` สูงสุด `215` · `RE` สูงสุด `210` ⇒ ใบนี้ `216` · 🔴 รันคำสั่งกฎ ② ซ้ำตอน rebase
 > 🔴 **ใบนี้ไม่แซงคิวบูตที่ chief ปักไว้ (`FROM_CHIEF_R305`)**: `GT-207` -> `GT-193` -> `GT-205` -> `GT-204` (ท้ายสุด) · ใบนี้ต่อ **หลัง** สี่ใบนั้น
 > บูต/DB/teardown ตาม `BRIDGE_BOOT_PROCEDURE.md` + `ATTENDED_SESSION_RUNBOOK.md` · **รัน teardown เสมอ** แม้รอบจบเพราะเลิกเล่นเฉย ๆ (เทมเพลตปฏิเสธ boot stamp เก่ากว่า 420 นาที)
 
 - objective: ข้อพิสูจน์เดียว -- **ฉาก 126 (`Bg3001` "Atlantis" · `n_SCENE_TYPE 8` = OCEAN PANEL) ถูกส่งถึงไคลเอนต์เป็นครั้งแรกของโปรเจกต์ และมีมนุษย์นั่งดูว่าไคลเอนต์วาดอะไรออกมา**
   รอบ `4uztfj` ต่อสายสำมะโนให้ฉากนี้: ขาเข้าเซิร์ฟเวอร์ประกอบ **36 actor จาก 38 placement ดั้งเดิมของฉาก** --
-  เกาะสี่ก้อนที่เป็น actor (`MAP_ISLAND_01`: "Mad Sand Island", "Pirate Lair", "Blood Blade Island", "Lonely Island") ·
-  เรือสิบลำ ("Intrepid", "Santa Maria", "Skull Phantom", "Merchant Ship", "Merchant marine Trade Ship" x3, "Pirate Ship" x4, "Repair ship") ·
-  "Jellyfish King" (lv 60) · "Sea Monster Fish" · และ **มาร์กเกอร์อากาศแบบ INVISIBLE ห้าชนิด** (ชื่อ "Tornado" สี่ตัว + มาร์กเกอร์ไม่มีชื่อ lv 110 อีกหกจุดวาง)
+  🔴 **นับเป็นจุดวาง (placement) ไม่ใช่นับชื่อ** — ร่างแรกของบรรทัดนี้เขียนว่า "เรือสิบลำ" ซึ่งบวกได้ 27 ไม่ใช่ 36 (pf-adversary จับ) ⇒ ตัวเลขที่ถูกคือ:
+  **20 ลำเรือ** (`SP_*`): "Merchant Ship" x9 · "Pirate Ship" x4 · "Merchant marine Trade Ship" x3 · "Intrepid" · "Santa Maria" · "Skull Phantom" · "Repair ship" อย่างละ 1 ·
+  **10 มาร์กเกอร์อากาศ INVISIBLE**: ชื่อ "Tornado" 4 + ไม่มีชื่อ lv 110 อีก 6 ·
+  **4 เกาะที่เป็น actor** (`MAP_ISLAND_01`: "Mad Sand Island", "Pirate Lair", "Blood Blade Island", "Lonely Island") ·
+  **2 สัตว์**: "Jellyfish King" (lv 60) · "Sea Monster Fish"  ⇒ รวม 36
   🔴 **ไม่เคยมีใครเห็นว่าไคลเอนต์วาด `MAP_ISLAND_01` เป็นอะไร หรือวาด actor INVISIBLE ที่มีป้ายชื่ออย่างไร** ⇒ ใบนี้ซื้อ "ตาแรก" ล้วน ๆ
 
 - RECHECK (ตัดสินด้วย **เนื้อโค้ดบน `origin/main`** ห้ามเทียบเลข commit · รันจาก cwd ที่กำหนดในบรรทัดเอง · ผ่านครบสามข้อ = เลื่อนเป็น `READY` ได้เองโดยไม่ต้องรอเจ้าของใบ):
@@ -11559,7 +11561,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
   (cd pirate-force-server && py -3 -m pytest tests/test_world_population_bg3001.py tests/test_world_bg3001_identity.py tests/test_lane_a_scene_census.py -q)
   ```
   ข้อ 1-2 ต้องเจอสตริงจริงทั้งสอง · ข้อ 3 ต้องเขียวทั้งชุด · ว่าง/แดง = ยังไม่ merge ⇒ คง `[BLOCKED]` **ห้ามบูต ไม่เสียเวลาผู้เทสแม้แต่นาทีเดียว**
-  🔴 **ห้าม grep สิ่งที่คอนโซลพิมพ์ผ่าน f-string** (`assembled=`, `hp=`) -- สตริงพวกนั้น **ไม่มีอยู่ในไฟล์** · กับดักนี้ทำให้รอบ `cu1il6` ต้องเขียนใบใหม่ทั้งใบ
+  🔴 **ห้าม grep สิ่งที่พิมพ์ผ่าน f-string** (`assembled=`, `hp=`) -- ไม่มีอยู่ในไฟล์ (กับดักของรอบ `cu1il6`)
   ทดสอบก่อน merge ได้ ถ้าเปลี่ยน `origin/main` เป็น branch ของรอบ `4uztfj` แล้ว **เขียนในผลว่าใช้ branch/commit ไหน**
 
 - เส้นทางเข้า (วัดรอบนี้ · 🔴 **มีทางเดียวเท่านั้น ห้ามคิดทางใหม่**):
@@ -11583,7 +11585,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 
 - steps: (เซิร์ฟเวอร์ก่อน ไคลเอนต์ทีหลัง เสมอ · ~15 นาทีบนจอ)
   1. RECHECK ผ่านก่อน · `LOCK_GAME` · จด boot stamp · sha canonical · คัดลอก DB เป็น run copy
-  2. บูตเซิร์ฟเวอร์ **ใหม่สด** ก่อน แล้วค่อยบูตไคลเอนต์ (เคยฆ่าไคลเอนต์ = เซิร์ฟเวอร์ยังถือเซสชัน ตัวถัดไปค้าง "connecting" ตลอดกาล ⇒ **รีสตาร์ตเซิร์ฟเวอร์ก่อนเสมอ**) · ห้ามเปิดไคลเอนต์ทิ้งโดยไม่มีเซิร์ฟเวอร์ (ตายเองใน ~3.5 นาที)
+  2. บูตเซิร์ฟเวอร์ **ใหม่สด** ก่อน แล้วค่อยบูตไคลเอนต์ (ไคลเอนต์ที่ถูกฆ่า = เซิร์ฟเวอร์ยังถือเซสชัน ตัวถัดไปค้าง "connecting" ⇒ **รีสตาร์ตเซิร์ฟเวอร์ก่อนเสมอ**)
   3. ล็อกอิน GM เข้าฉากบ้านให้เห็นตัวจริงก่อน · ภาพนิ่ง `S00-HOME` เต็มความละเอียด
   4. คลิกช่องแชท **ยืนยันว่า focus จริง** (พิมพ์ตอนไม่ focus = ตัวอักษรกลายเป็นฮอตคีย์) · พิมพ์ `/warp 126` · Enter · รอ ~3 วิ
      (`/warp` เป็นคำสั่ง GM **ไม่ใช่** ตัวยิงแชทที่ต้องยาว **12 ตัวอักษร ASCII พอดี** ของใบอื่น -- **ห้ามเติมตัวอักษรให้ครบ 12**)
@@ -11607,6 +11609,12 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
           `BG3001_UNSHIPPED placement=37 set=56 cline_row=60455 leader_n_id=8180 reason=MOBS_TIP_name_is_Thai,_not_ASCII;_this_lane_ships_an_ASCII_evidence_layer`
       (ง) คลิกที่ได้คำตอบ: `LANE_A_CHOOSE_NPC_SCENE126_ANSWERED ...` + label `LANE_A_CHOOSE_NPC_SCENE126_FACE_P<n>` · **คลิกแรกก่อนก้าวเดินถูกปฏิเสธโดยตั้งใจ** ด้วย `no_player_position_walk_one_step` (ทรงเดียวกับที่ `GT-214` จดไว้ของฉาก 2) ⇒ **ไม่ใช่ FAIL**
       (จ) `integrity_check` = `ok` ทั้งสองครั้ง · sha canonical ไม่เปลี่ยน · ไม่มี traceback หลุด
+      (ฉ) 🔴 **บรรทัดที่จะโผล่และ *ไม่ใช่* เรื่องผิดปกติ ห้ามหยุดใบเพราะมัน** (วัดบนดิสแพตช์จริงรอบ `4uztfj`):
+          `COLUMBUS_CHOOSE_NPC_WRONG_SCENE scene=126 effect=columbus_lane_declined`
+          เกิดเมื่อคลิก actor ที่ **placement 1** (เรือ "Santa Maria") เพราะ identity ของมันคือ `0x2002` เลขเดียวกับ Columbus ที่พอร์ตรอยัล
+          และ guard ของ chief ปฏิเสธให้แล้ว (`conversation_sent` ยังเป็น `False` · ไม่มีหน้าต่างบทสนทนา · ไม่มีการวาป)
+          ⇒ **ไม่ใช่เงื่อนไข STOP ของข้อ 11** และ **ไม่ใช่หลักฐานของใบ `GT-213`** (ใบนั้นพูดถึงฉาก 14) · คัดบรรทัดลงรายงานเฉย ๆ
+          ถ้าเห็น `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE` หรือหน้าต่างบทสนทนาโผล่จริง **นั่นคือ STOP** และรายงานทันที
       🔴 **`pc=` และ `frame=` มาจากบิลด์ของรอบ `4uztfj` ที่ anchor นี้ · anchor ต่างไปแล้วสองเลขนี้เปลี่ยนได้อย่างชอบธรรม ⇒ ผู้เทส "คัดตามที่เห็น" ห้ามใช้สองเลขนี้ตัดสินผ่าน/ตก**
       🔴 **ชั้นนี้ตอบไม่ได้เลยว่ามีอะไรถูกวาดบนจอ**
     client-observable (🔴 **ต้องมีคนนั่งหน้าจอ ห้ามอนุมานจากคอนโซล · ชั้นนี้เท่านั้นที่ตัดสินใบ**):
@@ -11627,8 +11635,8 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
   4. ไม่ตัดสินความหมายของสีป้ายชื่อ (`RE-067`) · ไม่แตะคอมแบต/ดรอป/HP · ไม่พิสูจน์อะไรที่รอดข้าม relog (บูตบนสำเนา)
   5. ไม่แซงลำดับบูตของ `FROM_CHIEF_R305` · ไม่ตัดสินฉาก 2 (`GT-214`) ฉาก 130 / 278 / 997
 
-- links: `src/pirateforce_foundation/world_population_bg3001.py` · `lane_hooks/lane_a_scene_census.py` · `gm/login_scene_stage.py` · `gm/login_scene_admission.py` ·
-  `CORE-REQUEST-GM-038` · `COO-DECISION 20260829_1444` · `CHIEF-DECISION 20260829_1603` · `GT-214` · `GT-192` · `RE-067`
+- links: `world_population_bg3001.py` · `lane_a_scene_census.py` · `gm/login_scene_admission.py` · `CORE-REQUEST-GM-038` ·
+  `COO 20260829_1444` · `CHIEF 20260829_1603` · `GT-214` · `RE-067`
 - result: (ผู้เทสกรอก: PASS/FAIL/NO-RESULT · branch/commit ที่บูต · ภาพ `S00-HOME`/`S126-A`/`S126-B`/`S126-C`/`S126-CLICK1..3` ·
   บรรทัดคอนโซลดิบทุกโทเคนข้างบน (`WORLD_POP_HANDOFF` · `WORLD_CENSUS_BG3001` · 36 บรรทัด actor · `BG3001_UNSHIPPED` สองบรรทัด · คลิกทุกครั้ง) ·
   จำนวน actor ที่ **นับจากจอ** · บรรทัดสีป้ายครบทุกป้ายทุกภาพ · sha256 ทั้งสี่ค่า · `integrity_check` · NO-CRASH/CRASH · timestamp +07:00 · `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
