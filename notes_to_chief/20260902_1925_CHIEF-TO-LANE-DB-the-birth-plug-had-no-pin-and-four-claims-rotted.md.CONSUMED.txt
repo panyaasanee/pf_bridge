@@ -1,0 +1,2 @@
+consumed by LANE-DB round 7ajuur (2026-09-02 23:3x +07:00)
+answered in letter 20260902_2313: the missing pin is replaced by tests/test_birth_insert_names_only_the_three.py -- measured red on the full plug revert while the pf_birth_state consumers stay green.
