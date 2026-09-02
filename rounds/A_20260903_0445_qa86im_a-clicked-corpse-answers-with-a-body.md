@@ -1,6 +1,6 @@
 # LANE-A (WORLD) รอบ `qa86im` — ซากศพตอบด้วยร่าง แทนที่จะตอบด้วยความเงียบ
 
-เปิดรอบ 2026-09-03T04:22+07:00 · ปิดรอบ 2026-09-03T0x:xx+07:00
+เปิดรอบ 2026-09-03T04:22+07:00 · ปิดรอบ 2026-09-03T05:4x+07:00
 PR: `pf_bridge#929` · `pirate-force-server#623`
 สาขา: `claude/jolly-feynman-qa86im` · `claude/laughing-archimedes-qa86im`
 
@@ -55,6 +55,7 @@ PR: `pf_bridge#929` · `pirate-force-server#623`
 - รับ `mob_death_register` เข้าลายเซ็น · ประกอบศพก่อนถาม ledger · นับแยกช่องใหม่ `dead_as_corpse=`
 - คลิกที่ศพ ⇒ **ตอบ** (label `..._CORPSE_P<n>` ไม่มี MovementAttr) · ประกอบศพไม่ได้ ⇒ ปฏิเสธด้วยชื่อเดิมเป๊ะ
 - คอนโซล: บรรทัดต่อศพ กลายเป็น **หนึ่งบรรทัดสรุปต่อคลิก** `count= placements= identities=`
+  · และช่อง `hp=` ได้ค่าที่สาม `no_live_body` สำหรับเฟรมที่ไม่มีร่างเป็น ๆ ให้พูดถึงเลย (ดูหัวข้อ pf-adversary ข้อ 1)
   (ข้อเสนอของ chief ใบ `0300` ข้อ 2 · เขาวัดของเดิมได้ 14 บรรทัดต่อคลิกเดียวที่มีศพ 12 ตัว บน listener thread)
 
 **ประโยคที่ `#619` ทำให้เป็นเท็จ ขีดฆ่าห้าจุด ไม่ลบ** (ทั้งห้ายังจริงกับดีพลอยที่เก่ากว่า `#619`)
@@ -67,7 +68,8 @@ PR: `pf_bridge#929` · `pirate-force-server#623`
 **เทสเฉพาะไฟล์ที่รอบนี้แตะ** (ระหว่างทาง ตามกฎ):
 ```
 pytest tests/test_lane_a_choose_npc_scene14.py tests/test_lane_a_choose_npc_scene2.py \
-       tests/test_lane_a_click_after_a_kill.py -q   =>  80 passed, 18 subtests
+       tests/test_lane_a_click_after_a_kill.py -q   =>  81 passed, 18 subtests
+       (ก่อนเพิ่มเทสของข้อบกพร่อง `hp=` ที่การวัดจับได้ · หลังเพิ่ม 82)
 pytest tests/test_lane_a_choose_npc_scene1.py tests/test_lane_a_choose_npc_roster_scenes.py \
        tests/test_lane_a_choose_npc_ground_preserve.py tests/test_lane_a_scene_census.py \
        tests/test_choose_npc_call_site_ledger.py tests/test_lane_hooks.py -q
@@ -92,11 +94,51 @@ census_entry == mine  ->  True
 ⇒ คลิกไม่ได้ประดิษฐ์ร่างใหม่ มันส่งร่างเดียวกับที่ไคลเอนต์เคยรับตอนเข้าฉาก · `mob_death.SCENE_ID == field_mobs.SCENE_ID == 1`
 และ `SCENE_SEQUENCE == 0` ทั้งคู่ (วัด ไม่ใช่สมมติ) ซึ่งเป็นเหตุผลที่ต้องส่ง `scene_id` เข้าไปเองแทนที่จะรับดีฟอลต์
 
-**ชุดเต็มของรอบ** (ครั้งเดียว บนคอมมิตสุดท้ายจริง หลัง pf-adversary): _(เติมก่อน push)_
+**ชุดเต็มของรอบ บนคอมมิตสุดท้ายจริง `804f93a` ในทรงของเกต** (worktree ที่ **ไม่มี** `pf_bridge` อยู่ข้าง ๆ):
+```
+python -m pytest tests -q -rs
+  => 8256 passed, 404 skipped, 16580 subtests passed in 292.41s   (exit 0)
+python tools/pf_pytest_precondition_census.py --report full_final.txt
+  => every skip is declared, named and pinned / RESULT: PASS      (exit 0)
+```
+🔴 **ทำไมรอบนี้รันชุดเต็มสองครั้ง** (กฎบังคับให้เขียนเหตุผล ห้ามซุก): ครั้งแรกผมรัน `pytest` โดย **ไม่ได้เท out ลงไฟล์**
+⇒ `pf_pytest_precondition_census.py --report` อ่านผลไม่ได้ (มันกินไฟล์ผลของ pytest ไม่ได้รันเทสเอง) ⇒ ต้องรันซ้ำเพื่อเอาไฟล์
+**ความผิดพลาดของผมเอง หนึ่งครั้ง ~5 นาที** · รอบหน้า: `pytest ... > ไฟล์` ตั้งแต่ครั้งแรกเสมอ
+(ตัวเลขของสองครั้งตรงกันเป๊ะ: `8256 passed, 404 skipped, 16580 subtests`)
 
-## pf-adversary
+🔴 **และรอบนี้เสียเวลาไปกับสิ่งที่ไม่ใช่ความผิดของใคร: คอนเทนเนอร์รีสตาร์ตสองครั้ง** (05:1x และ 05:2x)
+ครั้งแรกฆ่า `pf-adversary` ที่รันไป **36 นาที** ครั้งที่สองฆ่าทั้ง `pf-adversary` รอบสองและชุดเต็มที่เดินไปถึง 92%
+⇒ รอบนี้จึงตรวจ adversarial **ด้วยตัวเองแบบวัดจริง** แทนการรอ agent (ดูหัวข้อถัดไป) และรันชุดเต็มแบบ foreground
 
-_(เติมผลก่อน push — รอบนี้ส่งให้ตรวจก่อนแตะ `main` ตามกฎ)_
+## pf-adversary — คอนเทนเนอร์ฆ่าไปสองรอบ จึงตรวจเองด้วยการวัด ไม่ใช่การอ่าน
+
+🔴 **พูดให้ตรง: agent `pf-adversary` ไม่ได้รายงานผลในรอบนี้เลย** ทั้งสองครั้งถูกฆ่ากลางทางเพราะคอนเทนเนอร์รีสตาร์ต
+สิ่งที่แทนที่มันคือการวัดสี่ชุดข้างล่าง ซึ่งเป็นคำถามที่ผมส่งให้มันตรวจอยู่แล้ว · **นี่คือ mitigation ไม่ใช่ของเทียบเท่า**
+ถ้ารอบหน้า agent รันจบ ควรให้มันตรวจก้อนนี้ซ้ำ
+
+**1. หนึ่งข้อบกพร่องจริงที่การวัดจับได้ และแก้ในคอมมิต `804f93a`** — `hp=` โกหกได้เมื่อทั้งฉากเป็นศพ:
+ฝังมอนครบทั้ง 12 ตัว ⇒ ไม่มีร่างไหนอ่าน HP จาก ledger **และไม่มีร่างไหนถือเพดาน** แต่นิพจน์เดิม
+(`'ledger' if hostile_from_ledger else 'ceiling'`) ยังพิมพ์ `hp=ceiling` เกี่ยวกับเฟรมที่ไม่มีเพดานอยู่เลย
+⇒ นี่คือรูปเดียวกับ pf-adversary D8 รอบ `cu1il6` ("รายงานผลลัพธ์ ไม่ใช่อาร์กิวเมนต์")
+⇒ `lane_a_click_hp.hp_token()` เป็นผู้มีอำนาจเดียวของช่องนี้: `ledger` / `ceiling` / **`no_live_body`** ตัดสินจากจำนวนร่าง **เป็น** เท่านั้น
+⇒ มีเทสฆ่าได้ (`test_a_frame_with_no_live_hostile_body_says_so_instead_of_lying`)
+
+**2. `corpse_body_for` raise ไม่ได้เลย — วัด 15 รูป** ไม่ใช่ 15 ข้ออ้าง: register เป็น `None` / duck type ที่มี `is_dead`
+คืน True / วัตถุที่ raise ทุก attribute / subclass ที่ `is_dead` raise / `True` / string / dict ·
+mob ที่ `.scene` raise · mob ที่ `.actor_identity` raise · legacy ที่ raise ทุกเมธอด · `scene_id` เป็น `-1`, `2**32`, `'x'`
+⇒ **ทุกกรณีคืน `None` ไม่มีอันไหน raise** = ไม่มีคลิกไหนหายไปเพราะฟังก์ชันนี้
+
+**3. ตัวเลขบนคอนโซลซื่อสัตย์ — วัดแปดรูปของแพ็กเก็ต** (คลิกชาวเมืองขณะมีสองหลุมศพ · คลิกที่ศพเอง · identity ซ้ำในแพ็กเก็ตเดียว ·
+ศพแล้วตามด้วยชาวเมือง · identity ที่ไม่รู้จักแล้วตามด้วยศพ · หลุมศพของ identity ที่ไม่ได้อยู่ใน roster นี้ · หลุมศพของ **อีกฉาก** · ไม่มี register)
+⇒ `visible=97 hostile=12` คงที่ทุกกรณี · หลุมศพข้ามฉากและหลุมศพนอก roster **ไม่ถูกนับ** (`dead_as_corpse=0`) · ไม่มีบรรทัดไหนขัดกับเฟรมที่ส่งจริง
+
+**4. เทสฆ่าโค้ดได้จริง — กลายพันธุ์ 11 ตัว ตาย 11** (ไม่ใช่ "เทสเขียว" แต่คือ "เทสตายได้เมื่อโค้ดผิด"):
+`corpse_body_for` คืน None เสมอ · ถอดการเช็คชนิดของ register · ถาม `is_dead` **โดยไม่ใส่กุญแจฉาก** · `hp_token` ไม่พูด `no_live_body` ·
+เปลี่ยน death timer เป็นฝั่ง dying · label อ้าง `FACE` เสมอ (ทั้งสองฉาก) · เลิกนับ `dead_as_corpse` (ทั้งสองฉาก) ·
+ส่งร่างเป็น ๆ แทนศพ · ตัด `identities=` ออกจากบรรทัดสรุป
+
+**5. ร่างที่ยังมีชีวิตยังหันมาหาผู้เล่นเหมือนเดิม — วัด** (ไม่ใช่อนุมานจากโครงสร้าง): คลิกมอนเป็น ๆ ขณะมี register ⇒ `FACE_P58` และไบต์ MovementAttr อยู่ในเฟรม ·
+คลิกชาวเมืองขณะมี register ⇒ `FACE_P0` มีไบต์ · คลิกศพ ⇒ `CORPSE_P50` **ไม่มี** ไบต์
 
 ## กล่องจดหมาย (ADDENDUM ข้อ B / `AGENTS.md` §7)
 
