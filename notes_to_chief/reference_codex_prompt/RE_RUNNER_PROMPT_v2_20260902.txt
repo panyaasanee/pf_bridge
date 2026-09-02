@@ -64,8 +64,10 @@ BRIDGE\notes_to_chief\<YYYYMMDD_HHMM>_<เลขใบ>-RESULT-<สรุป>.md
 หนึ่ง log ต่อใบ:
 <ISO+07>  RE-xxx  DONE|PARTIAL|BLOCKED  jobs=<ช่วง>  letter=<ชื่อไฟล์>
 🔴 หนึ่ง log ต่อใบที่เปิดค้างแต่ถูกข้าม (บังคับ ตั้งแต่ 2026-09-02):
-<ISO+07>  SKIP  RE-xxx  reason=<other-route|no-route-and-not-static|assigned-<สาย>|already-answered|other:<คำอธิบายสั้น>>
+<ISO+07>  SKIP  RE-xxx  reason=<other-route-cloud|other-route-attended|no-route-and-not-static|assigned-<สาย>|other:<คำอธิบายสั้น>>
 เหตุผล: บรรทัด NO-WORK บอกแค่ว่าไม่มีงาน ไม่ได้บอกว่าทำไมใบที่มีอยู่ถึงไม่ถูกหยิบ — ที่ผ่านมาต้องเสียเวลาหลายชั่วโมงไล่หาเหตุย้อนหลังเพราะ log ไม่ได้บันทึกไว้
+🔴 **ลง SKIP เฉพาะใบที่ผ่านเกณฑ์ candidate แล้ว** (หัวใบไม่ได้เขียนว่าปิด **และ** ไม่มีจดหมายผล) **แต่ถูกข้ามด้วยกฎป้าย** เท่านั้น
+**ใบที่ปิดแล้ว/มีจดหมายผลแล้ว ห้ามลง SKIP** — มันถูกคัดออกตั้งแต่เกณฑ์ candidate ไม่ใช่ "ถูกข้าม" (แก้เพิ่ม 2026-09-02 18:0x หลังวัดของจริง: รอบ 17:15 ลง SKIP 12 บรรทัด โดย 10 บรรทัดเป็น `already-answered` ของใบที่ปิดไปแล้ว ⇒ log โตวันละสิบกว่าบรรทัดต่อรอบและจะกลบบรรทัดที่มีความหมายภายในไม่กี่วัน) · เลิกใช้ reason `already-answered` ทั้งหมด
 ถ้าลงมือหลายใบ เพิ่ม:
 <ISO+07>  ROUND  tickets=<เลขคั่นด้วยจุลภาค>  completed=<n>  partial=<n>  elapsed=<นาที>  deadline=OK
 อัปเดต MEMORY ก่อนจบ: เวลา, batch, ผล/checkpoint ต่อใบ, SHA สำคัญ และสถานะ lock แบบกระชับ
