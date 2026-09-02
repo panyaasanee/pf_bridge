@@ -336,6 +336,58 @@ if exist "%PFGM_OUT%" del /q "%PFGM_OUT%" 2>nul
 goto do_copy
 
 :pfgm_refuse
+REM ===========================================================================
+REM Revision 4: PFGM_FORCE=1 -- a way past THIS refusal that leaves evidence.
+REM
+REM COO-DECISION 2026-09-03T01:48+07:00 item 7, revising the same COO's
+REM `20260902_2342`: the id-2 rule still blocks, but a rule that has never
+REM read a real DLL must not be the only thing between the owner and an
+REM attended round. The DLL that GT-207 proved LOADS (R304, the GM window
+REM opened on screen) has never been through this checker. If it were refused
+REM at two in the morning with no way past, P-3 would be blocked by us, by
+REM hand, and no lane could help until the next round.
+REM
+REM WHY THIS IS NOT FAIL-OPEN, said plainly because it looks like it:
+REM   - the variable has NO default.  Nothing in this repository sets it,
+REM     build_vs2008.bat does not set it, and an unset or empty PFGM_FORCE
+REM     leaves the refusal exactly as it was.  The owner types it.
+REM   - only the literal `1` counts, so `PFGM_FORCE=0` and `PFGM_FORCE=no`
+REM     force nothing.
+REM   - it is scoped to THIS refusal -- the checker's verdict about the file
+REM     being installed.  It does NOT reach the [STOP] guard on an existing
+REM     GameMaster.dll, which is about destroying an artifact this project has
+REM     failed to obtain since 27 Aug and stays unforceable, and it does not
+REM     reach the `.rsrc` [FAIL] above.
+REM   - it prints the real verdict and the failing rule names in capitals,
+REM     keeps the full report on disk, and repeats the line under the [OK], so
+REM     a forced install cannot later be remembered as a checked one.
+REM
+REM The two tokens are READ FROM THE CHECKER'S OWN OUTPUT, never guessed here:
+REM `verdict=` and `failed_rules=` are printed by
+REM `pirateforce_foundation.gm.plugin_image_check.console_lines`, and
+REM `failed_rules` names EVERY rule the image breaks, not only the one the
+REM verdict happens to be.  A checker older than round `p7q74c` prints no such
+REM line; that case says so instead of printing an empty `rules=`.
+REM ===========================================================================
+set "PFGM_VERDICT="
+for /f "tokens=3" %%V in ('findstr /c:"GM_PLUGIN_IMAGE build verdict=" "%PFGM_OUT%"') do if not defined PFGM_VERDICT set "PFGM_VERDICT=%%V"
+if not defined PFGM_VERDICT set "PFGM_VERDICT=verdict=unparsed_read_the_report_above"
+set "PFGM_RULES="
+for /f "tokens=3" %%R in ('findstr /c:"GM_PLUGIN_IMAGE build failed_rules=" "%PFGM_OUT%"') do if not defined PFGM_RULES set "PFGM_RULES=%%R"
+REM `failed_rules=manifest_id2` -> `rules=manifest_id2`: the decision asked for
+REM `rules=`, and re-typing the value into a second literal is how a printed
+REM token and the token a test greps for drift apart.
+REM !! NO ANGLE BRACKETS IN THESE VALUES, and that is a bug fix waiting to
+REM happen rather than a style: `echo %VAR%` where the value holds a `<` is a
+REM REDIRECTION, so the one line the owner has to report would be swallowed
+REM into a file instead of printed.
+if defined PFGM_RULES set "PFGM_RULES=%PFGM_RULES:failed_=%"
+if not defined PFGM_RULES set "PFGM_RULES=rules=not_printed_this_checker_predates_round_p7q74c"
+REM Same de-quoting as PF_SERVER_REPO above: `set PFGM_FORCE="1"` is how a
+REM person who has been fighting paths with spaces all evening will type it.
+set "PFGM_FORCE_FLAG=%PFGM_FORCE%"
+if defined PFGM_FORCE_FLAG set "PFGM_FORCE_FLAG=%PFGM_FORCE_FLAG:"=%"
+if "%PFGM_FORCE_FLAG%"=="1" goto pfgm_forced
 echo.
 echo [FAIL] plugin_image_check refused this file. Its verdict and EVERY
 echo        blocking problem it found are printed above -- read all of them.
@@ -349,7 +401,35 @@ echo.
 echo        The full report is KEPT, not deleted, so it can be pasted into a
 echo        letter instead of retyped off the screen:
 echo            "%PFGM_OUT%"
+echo.
+echo        If you have a DLL you have SEEN load -- the GM window opened with
+echo        it -- and this refusal is the only thing between you and a test
+echo        session, install it anyway and tell us what was refused:
+echo            set PFGM_FORCE=1
+echo            install.bat "%TARGET%"
+echo        That prints the real verdict and the failing rule names in
+echo        capitals, keeps the report above, and asks you to send both to
+echo        LANE-GM. It does not make the file good -- it makes the refusal
+echo        reportable instead of final. It does NOT apply to the [STOP] guard
+echo        about an existing GameMaster.dll: nothing forces that one.
 exit /b 1
+
+:pfgm_forced
+set "PFGM_FORCED=1"
+echo.
+echo [FORCED] %PFGM_VERDICT% %PFGM_RULES%
+echo [FORCED] PFGM_FORCE=1 IS SET, SO A FILE THIS CHECKER REFUSED IS BEING
+echo [FORCED] COPIED ANYWAY. NOTHING HERE HAS VERIFIED IT. THE VERDICT ON THE
+echo [FORCED] LINE ABOVE IS A FINDING ABOUT THESE BYTES, NOT A WARNING ABOUT A
+echo [FORCED] MISSING TOOL.
+echo [FORCED] TELL LANE-GM TWO THINGS: THE TOKENS ABOVE, AND WHETHER THE GM
+echo [FORCED] WINDOW OPENED AFTERWARDS. EITHER ANSWER IS EVIDENCE -- IF IT
+echo [FORCED] OPENED, A RULE OF OURS IS WRONG ABOUT REAL FILES AND WE OWE YOU
+echo [FORCED] A FIX; IF IT DID NOT, THE RULE JUST SAVED THE SESSION.
+echo [FORCED] THE FULL REPORT IS KEPT AT:
+echo [FORCED]     "%PFGM_OUT%"
+echo [FORCED] ROLLBACK IS ONE FILE: DELETE THE COPY IN THE CLIENT FOLDER.
+goto do_copy
 
 :pfgm_stale_tool
 echo.
@@ -374,6 +454,15 @@ if %errorlevel% neq 0 (
 
 echo [OK] installed: %TARGET%\GameMaster.dll
 certutil -hashfile "%TARGET%\GameMaster.dll" SHA256
+REM Said a second time, and the second time is the load-bearing one: the [OK]
+REM and the SHA256 above are what a person screenshots, and a refusal that has
+REM scrolled off the top would otherwise be remembered as "install.bat said OK".
+if "%PFGM_FORCED%"=="1" (
+  echo.
+  echo [FORCED] THAT [OK] MEANS COPIED, NOT CHECKED. %PFGM_VERDICT% %PFGM_RULES%
+  echo [FORCED] IF THE GM BUTTON STAYS DEAD, THIS LINE IS THE FIRST THING TO
+  echo [FORCED] REPORT TO LANE-GM.
+)
 echo.
 echo Rollback: delete that one file. Nothing else on the machine was touched --
 echo no client byte was patched, no registry key written. The client then
