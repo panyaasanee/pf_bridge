@@ -11672,7 +11672,18 @@ RECHECK: `git -C pirate-force-server fetch && git -C pirate-force-server grep -c
   8. ไม่ตัดสินสาเหตุของสีป้ายใด ๆ (`RE-067`) · ไม่ใช่เทส stack / กระเป๋าเต็ม / สองผู้เล่นแย่งของ
 - result: (ผู้เทสกรอก · ตัวเลข `N_click`/`N_dec`/`N_vc1`/`N_silent` + จำนวนคลิกต่อชิ้นครบทุกชิ้น + ตารางสีป้าย · ผลเต็มไปที่ round file และจดหมายผล ไม่ใช่ในใบนี้)
 
-## GT-217 ATLANTIS-OCEAN-PANEL-CENSUS-ON-A-GM-SINGLE-USE-ENTRY-001  [BLOCKED -- รอ merge ของรอบ `l6at2v` (ไม่ใช่ `4uztfj` แล้ว) · โค้ดสำมะโน `Bg3001` ยังไม่ขึ้น `main` · ตัวบล็อกเดียวคือ merge · RECHECK ผ่านครบสามข้อ = เลื่อนเป็น `READY` ได้เองโดยไม่ต้องรอเจ้าของใบ]
+## GT-217 ATLANTIS-OCEAN-PANEL-CENSUS-ON-A-GM-SINGLE-USE-ENTRY-001  [🟢 READY -- merge ที่รอเกิดขึ้นจริงแล้ว (`pirate-force-server#606` merged 2026-09-02T23:20+07:00) · ผู้เทสรัน RECHECK สามข้อข้างล่างก่อนบูตเสมอ]
+
+> 🔴 **แก้ป้ายโดย LANE-A รอบ `gx7xtp` 2026-09-02T23:4x+07:00 · อ่านสองย่อหน้านี้ก่อนนับ actor บนจอ**
+> 1. **ตัวบล็อกหมดแล้ว**: PR ของรอบ `l6at2v` merge เข้า `main` แล้ว ⇒ ป้าย `[BLOCKED]` เดิมผิดตั้งแต่เวลานั้น · เกณฑ์ RECHECK สามข้อข้างล่าง **ไม่เปลี่ยน** ยังต้องรันก่อนบูต
+> 2. 🔴 **จำนวน actor ของฉากนี้ขยับ 36 → 37** ตาม `COO-DECISION 20260902_2146` ข้อ 1: แถว Mob-Set 56 (placement 37, `MOBS 8180`, ชื่อไทย) เคยถูกตัดทิ้งเพราะคอนโซลของเราพิมพ์ชื่อไทยไม่ได้ COO กลับคำแล้ว ⇒ มันส่งจริง
+>    ⇒ สิ่งที่ต้องนับบนจอคือ **37 ตัว จาก 38 placement** · ตัวที่เพิ่มคือ **สัตว์/วัตถุ lv 60 หนึ่งตัว ที่ป้ายชื่อเป็นภาษาไทย** (อ่านบนจอได้ แต่คอนโซลพิมพ์ไม่ได้)
+>    ⇒ บนคอนโซลมันจะออกมาเป็น `placement=37 n_ID=8180 name_cp874_hex=a1c3d0b7a7 lv60 hp43275 @(...)` — **นี่คือสิ่งที่ถูกต้อง ห้ามอ่านว่าผิดปกติ**
+> 3. **บอกได้ว่าเครื่องคุณอยู่รุ่นไหน โดยไม่ต้อง grep f-string**:
+>    ```
+>    (cd pirate-force-server && git show origin/main:src/pirateforce_foundation/world_bg3001_identity.py | findstr /C:"NAME_CP874_HEX")
+>    ```
+>    เจอ = 37 ตัว (รอบ `gx7xtp` ขึ้นแล้ว) · ว่าง = 36 ตัว (ยังเป็น `main` ของรอบ `l6at2v`) — **ทั้งสองสภาพเทสได้ ไม่ต้องรอ**
 
 > 🔴 **แก้ป้ายโดย LANE-A รอบ `l6at2v` 2026-09-02T22:4x+07:00 · ผู้เทสอ่านตรงนี้ก่อน**: PR ของรอบ `4uztfj` (`pirate-force-server#601`) **ถูกปิดโดยไม่ merge** เวลา 14:54Z — `merge-claude-pr.yml` ปิดเองเพราะเกต Windows แดงที่ช่อง `skip_census` ช่องเดียว (UNDECLARED SKIP 6 ตัวใน `tests/test_world_bg3001_identity_rederived.py`) ⇒ **การรอ merge ของ `#601` คือการรอสิ่งที่จะไม่เกิดขึ้นอีกแล้ว**
 > งานทั้งก้อนถูกกู้ขึ้นแบรนช์ `claude/laughing-archimedes-l6at2v` ในรอบ `l6at2v` พร้อมแก้ต้นเหตุ (`@BRIDGE_GAMEDATA.skip_unless_present()` + หมุดใน `docs/PYTEST_SKIP_PINS.json`) ⇒ **merge ที่ต้องรอคือ PR ของรอบ `l6at2v`** · เกณฑ์ RECHECK สามข้อข้างล่าง **ไม่เปลี่ยน** ทุกข้อวัดจาก `main` อยู่แล้ว ไม่ได้วัดจากเลข PR
@@ -11683,12 +11694,12 @@ RECHECK: `git -C pirate-force-server fetch && git -C pirate-force-server grep -c
 > บูต/DB/teardown ตาม `BRIDGE_BOOT_PROCEDURE.md` + `ATTENDED_SESSION_RUNBOOK.md` · **รัน teardown เสมอ** แม้รอบจบเพราะเลิกเล่นเฉย ๆ (เทมเพลตปฏิเสธ boot stamp เก่ากว่า 420 นาที)
 
 - objective: ข้อพิสูจน์เดียว -- **ฉาก 126 (`Bg3001` "Atlantis" · `n_SCENE_TYPE 8` = OCEAN PANEL) ถูกส่งถึงไคลเอนต์เป็นครั้งแรกของโปรเจกต์ และมีมนุษย์นั่งดูว่าไคลเอนต์วาดอะไรออกมา**
-  รอบ `4uztfj` ต่อสายสำมะโนให้ฉากนี้: ขาเข้าเซิร์ฟเวอร์ประกอบ **36 actor จาก 38 placement ดั้งเดิมของฉาก** --
+  รอบ `4uztfj` ต่อสายสำมะโนให้ฉากนี้: ขาเข้าเซิร์ฟเวอร์ประกอบ ~~**36 actor**~~ **37 actor จาก 38 placement ดั้งเดิมของฉาก** (ขยับในรอบ `gx7xtp` ดูหัวใบข้อ 2) --
   🔴 **นับเป็นจุดวาง (placement) ไม่ใช่นับชื่อ** — ร่างแรกของบรรทัดนี้เขียนว่า "เรือสิบลำ" ซึ่งบวกได้ 27 ไม่ใช่ 36 (pf-adversary จับ) ⇒ ตัวเลขที่ถูกคือ:
   **20 ลำเรือ** (`SP_*`): "Merchant Ship" x9 · "Pirate Ship" x4 · "Merchant marine Trade Ship" x3 · "Intrepid" · "Santa Maria" · "Skull Phantom" · "Repair ship" อย่างละ 1 ·
   **10 มาร์กเกอร์อากาศ INVISIBLE**: ชื่อ "Tornado" 4 + ไม่มีชื่อ lv 110 อีก 6 ·
   **4 เกาะที่เป็น actor** (`MAP_ISLAND_01`: "Mad Sand Island", "Pirate Lair", "Blood Blade Island", "Lonely Island") ·
-  **2 สัตว์**: "Jellyfish King" (lv 60) · "Sea Monster Fish"  ⇒ รวม 36
+  **3 สัตว์/วัตถุ**: "Jellyfish King" (lv 60) · "Sea Monster Fish" · **แถวชื่อไทย lv 60 (`MOBS 8180`, `M081_000_000_N`) ที่รอบ `gx7xtp` เพิ่มเข้ามา** ⇒ ~~รวม 36~~ **รวม 37**
   🔴 **ไม่เคยมีใครเห็นว่าไคลเอนต์วาด `MAP_ISLAND_01` เป็นอะไร หรือวาด actor INVISIBLE ที่มีป้ายชื่ออย่างไร** ⇒ ใบนี้ซื้อ "ตาแรก" ล้วน ๆ
 
 - RECHECK (ตัดสินด้วย **เนื้อโค้ดบน `origin/main`** ห้ามเทียบเลข commit · รันจาก cwd ที่กำหนดในบรรทัดเอง · ผ่านครบสามข้อ = เลื่อนเป็น `READY` ได้เองโดยไม่ต้องรอเจ้าของใบ):

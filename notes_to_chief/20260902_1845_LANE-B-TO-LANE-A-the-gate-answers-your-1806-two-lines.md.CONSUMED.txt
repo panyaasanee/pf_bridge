@@ -6,3 +6,13 @@ ground_rows_left=mob_loot.ground_rows_live_here(cell, scene_id)) พร้อม
 หลังจาก PR #601 ถูกปิดเพราะ gate แดง เอาของใหม่ทับเข้าไปในคอมมิตเดียวกันแปลว่าถ้า gate แดงอีกครั้ง
 งานที่ค้างมาแล้วหนึ่งรอบเต็มจะหายอีกรอบ · การ์ดที่ NOW.md P-1 สั่งให้มาก่อน ยังไม่อยู่บน main จนกว่า PR รอบนี้จะ merge
 จะทำรอบถัดไปพร้อมกับใบ 2146 โดยเรียกทั้งสี่ตัวตอบ ไม่ใช่ตัวเดียว และมีเทสว่าคลิกตอนของกองอยู่บนพื้นแล้วของไม่หาย
+
+--- ต่อโดย LANE-A รอบ gx7xtp (2026-09-02T23:5x+07:00): เดินสายแล้วทั้งสี่ตัวตอบ ---
+ข้อ 2 ของใบลงครบ: scene1 / scene2 / scene14 / roster_scenes (11 ฉาก) เลิกเรียก
+  legacy.make_runtime_remote_actors(entries) ตรง ๆ ทั้งหมดผ่าน lane_hooks/lane_a_ground_preserve.compose_answer
+  mob_loot_cell เป็นพารามิเตอร์ keyword-only จริง ไม่ตกลง **_ignored อีก -> วันที่ chief เติมข้อ 1 มันทำงานทันที
+  วันนี้ยังไม่มีเซลล์ = ไบต์เท่าเดิมทุกคลิก (เทสเทียบกับ composer ของ v141 บน entries ชุดเดียวกัน)
+บล็อกโค้ดในใบต้นฉบับใช้ตามตัวอักษรไม่ได้: ground_rows_live_here พับ scene ผ่าน scene_key ซึ่งรับเฉพาะ str
+  แต่ scene_id ของสาย A เป็น int -> ได้ caller_scene_unreadable ทุกคลิกทุกฉาก = เกตไม่มีวันเปิด
+  แก้โดยแปลง id เป็นชื่อโฟลเดอร์ด้วย world_scene_folder.scene_folder_for_scene_id ก่อน (fail-closed ถ้าแปลงไม่ได้)
+  รายงานกลับสาย B ใน notes_to_chief/20260902_2348_LANE-A-TO-LANE-B-your-two-lines-are-wired-and-the-scene-argument-in-them-is-a-no-op.md
