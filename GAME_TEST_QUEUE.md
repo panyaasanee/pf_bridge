@@ -11055,3 +11055,115 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
   branch/commit ที่บูต · timestamp +07:00 · `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
 
 **ผู้เปิดใบ: LANE-A (WORLD) รอบ `1d6rta` 2026-09-02T13:4x+07:00 -- LANE-A บริโภคผลใบนี้เอง**
+
+## GT-212 CHOOSE-NPC-NINE-ROSTER-ISLANDS-CLICK-ANSWER-001  [BLOCKED -- โค้ดยังไม่ขึ้น `main`: อยู่บน branch `claude/laughing-archimedes-gwwpmr` เท่านั้น · ตัวบล็อกเดียวคือ merge (ไม่มีแฟล็ก scenario) · ห้ามบูตจนกว่า RECHECK ผ่านครบสามข้อ ⇒ แล้วจึงเลื่อนเป็น `READY`]
+
+> เปิดโดย LANE-A (WORLD) รอบ `gwwpmr` 2026-09-02T15:55+07:00 · **LANE-A บริโภคผลเอง**
+> numbering: shared counter กับ `CLIENT_RE_QUEUE.md` -- ณ วันเปิด highest `GT` = 211, highest `RE` = 210
+> ⇒ ใบนี้ `212` (รันคำสั่งค้นหาซ้ำตอน rebase) · บูต/DB/teardown ตาม `ATTENDED_SESSION_RUNBOOK.md`
+> (teardown ปฏิเสธ boot stamp เก่ากว่า 420 นาที · รอบที่จบเพราะเลิกเล่นเฉย ๆ ก็ต้องรัน teardown)
+
+- objective: ข้อพิสูจน์เดียว -- **เก้าเกาะ roster (ฉาก 4,5,6,7,8,9,10,11,130 · 630 actor) ตอบคลิก NPC
+  บนไคลเอนต์จริงแล้ว และคลิกนั้นไม่พาผู้เล่นไปไหน** · ครึ่งความปลอดภัยอยู่ในข้อพิสูจน์เดียวกัน ไม่แยกใบ:
+  คลิก actor ที่ **placement index 1** (actor identity `0x2002`) ต้อง **ไม่เปิดบทสนทนา Columbus ของ
+  พอร์ตรอยัล และไม่ย้ายผู้เล่นไปแมพอื่น** (ปลายทางที่กลัวคือฉาก 17 ซึ่ง registry เขียน
+  `login_entry_allowed: false`) · ฉาก 3 (Spice Paradise) เป็นของ `GT-210` **ไม่ใช่ใบนี้**
+- PRECONDITION / RECHECK (ต้องผ่านครบสามข้อจึงเลื่อนเป็น `READY` · ตัดสินด้วยเนื้อโค้ด ห้ามเทียบเลข commit):
+  ```
+  (cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_roster_scenes.py | findstr /C:"production_allowed = True")
+  (cd pirate-force-server && py -3 -c "import sys; sys.path.insert(0,'src'); from pirateforce_foundation.lane_hooks import lane_a_choose_npc_roster_scenes as m; print(m.scenes_this_lane_answers_for()); print(m.skipped_scenes())")
+  (cd pirate-force-server && py -3 -m pytest tests/test_lane_a_choose_npc_roster_scenes.py tests/test_columbus_quest_dispatch_wiring.py -q)
+  ```
+  ข้อ 1 ต้องเจอจริง · ข้อ 2 ต้องพิมพ์ **ครบสิบฉาก** `(3, 4, 5, 6, 7, 8, 9, 10, 11, 130)` และ skipped = `()` ·
+  ข้อ 3 ต้อง **เขียวทั้งชุด** (ในนั้นมี `TheNineAreSafeOnlyBecauseTheRuntimeGuardStandsTests` และ
+  `ColumbusSceneGuardTests` -- สองตัวนี้คือของที่พิสูจน์ scene guard แบบ headless ไปแล้ว) ·
+  ว่าง/แดง/ขาดฉาก = ยังไม่ merge ⇒ คง `[BLOCKED]` **ห้ามบูต ห้ามเสียเวลาผู้เทสแม้แต่นาทีเดียว** ·
+  ทดสอบก่อน merge ได้ถ้าเปลี่ยน `origin/main` เป็น `origin/claude/laughing-archimedes-gwwpmr`
+  แล้ว **เขียนในผลว่าใช้ branch ไหนและ commit ไหน**
+- db: `state\pirateforce.sqlite3` -- **สำเนาเท่านั้น ห้ามเปิดไฟล์ canonical** · คัดลอกเป็น
+  `state\run_gt212_<yyyyMMdd_HHmmss>.sqlite3` แล้วบูตทับสำเนา · จด sha256 ของสำเนาก่อน/หลัง ·
+  จด sha256 ของ canonical ก่อน/หลัง และยืนยันว่า **ไม่เปลี่ยน** · `PRAGMA integrity_check` = `ok` ทั้งสองครั้ง
+  (รอบคัดลอก DB ⇒ ตำแหน่งตัวละครกลับไป spawn ทุกบูต เป็นเรื่องปกติ ไม่ใช่ผลวัด)
+- server args: บูตปกติตาม `BRIDGE_BOOT_PROCEDURE.md` · 🔴 **ไม่มีแฟล็ก scenario ใด ๆ** ·
+  `-SecondPasswordMode bypass` · บัญชี GM ใน `config/gm_accounts.json` · เก็บคอนโซลรวม stdout+stderr (`2>&1`)
+  -- โทเคนของเลนออกทาง **stderr**
+  ```
+  py -3 -u -m pirateforce_foundation.app --db state\run_gt212_<stamp>.sqlite3
+  ```
+- เส้นทาง: **ใช้เส้นทางวาปของ `GT-192` ห้ามคิดเส้นทางใหม่** -- `/warp <scene n_id>` เปล่า **ไม่ใส่พิกัด**
+- ตัวไหนคือ placement index 1 (ผู้เทสต้องทำได้จริง):
+  ฉาก 4 index 1 = body ชื่อ **`Columbus`** (Mob-Set 2 · `n_ID=67` · outfit `M055_000_000_N` · lv50 hp23976)
+  -- ชื่อพ้องกับ NPC พอร์ตรอยัลแต่คนละตัว และนั่นคือประเด็นทั้งหมดของใบนี้ ·
+  🔴 **บนจออาจไม่มีอะไรบอกว่าตัวไหนคือ index 1** (ป้ายชื่ออาจว่าง -- `GT-030-R3` วัดได้แบบนั้นกับ actor type 4)
+  ⇒ ถ้าหาจากจอไม่ได้ ให้ **คลิกหลายตัว รวมตัวแรกที่สำมะโนพิมพ์ในคอนโซล** แล้วอ่าน `placement=` ย้อนจาก
+  บรรทัด `..._ANSWERED` · **ใบนี้ยังไม่ครบจนกว่าจะมีอย่างน้อยหนึ่งคลิกที่พิมพ์ `placement=1`**
+- steps: (เซิร์ฟเวอร์ก่อน ไคลเอนต์ทีหลัง เสมอ)
+  1. RECHECK ผ่านก่อน · LOCK_GAME · จด boot stamp · sha canonical · คัดลอก DB
+  2. บูตเซิร์ฟเวอร์ **ใหม่สด** แล้วค่อยบูตไคลเอนต์ (เคยมีไคลเอนต์ถูกฆ่า = เซิร์ฟเวอร์ยังถือเซสชันไว้
+     ตัวถัดไปจะค้าง "connecting" ตลอดกาล ⇒ **รีสตาร์ตเซิร์ฟเวอร์ก่อนเสมอ**) · ห้ามบูตไคลเอนต์ทิ้งไว้
+     โดยไม่มีเซิร์ฟเวอร์ (ตายใน ~3.5 นาที) · ล็อกอิน GM เข้าฉากจริงให้เสร็จก่อน
+  3. ตอนบูต: ต้อง **ไม่มี** `LANE_A_CHOOSE_NPC_ROSTER_SKIPPED` แม้แต่บรรทัดเดียว · มีบรรทัดใด = บิลด์ผิด
+     **หยุด ไม่ต้องคลิก** ทั้งใบ `NO-RESULT` (คัดลอก `scene=`/`reason=` มาด้วย)
+  4. คลิกช่องแชท **ยืนยัน focus จริง** (พิมพ์ตอนไม่ focus = ฮอตคีย์) · `/warp 4` · Enter · รอ ~3 วิ
+     (`/warp` คือคำสั่ง GM **ไม่ใช่** ตัวยิงแชท 12 ตัวอักษร -- ห้ามเติมตัวอักษรให้ครบ 12)
+  5. 🔴 **เดินหนึ่งก้าว** (`W` หรือ `S`) ก่อนคลิกเสมอ · วาปข้ามฉากล้าง `last_target_pos = None` และ
+     responder ปฏิเสธเมื่อค่านี้เป็น `None` ⇒ **คลิกก่อนเดิน = เงียบ และนั่นคือความผิดของขั้นตอน ไม่ใช่ผลวัด**
+  6. ภาพนิ่ง **เต็มความละเอียด** `S04-BEFORE` -- ยังไม่คลิกใคร · จัดมุมด้วย **คลิกขวาลาก** เท่านั้น
+  7. **คลิกซ้ายหนึ่งครั้ง** บน NPC หนึ่งตัว โดยมีตัวอื่นในเฟรมอย่างน้อยสองตัว · `S04-AFTER` ภายใน ~3 วิ ·
+     จดบรรทัด `..._ANSWERED` ดิบ ๆ ทุกครั้ง
+  8. ทำซ้ำข้อ 5-7 จนได้คลิกที่ `placement=1` (อย่างน้อยสามคลิกต่างตัว) · หลังคลิกนั้น **จ้องจอ 30 วินาที**
+     ไม่คลิกอะไรเลย · `S04-P1+2s` `S04-P1+30s`
+  9. ทำซ้ำข้อ 4-8 กับอีกหนึ่งเกาะที่เลือกเอง (`/warp 5` หรือ `/warp 130`) ตั้งชื่อภาพตามฉากนั้น
+  10. ตัวเช็ค NO-CRASH: **คลิกขวาลากหมุนกล้อง** เท่านั้น · ห้ามใช้ `Q`/`E` เป็นตัวเช็คนี้ ·
+      🔴 **ห้ามเปลี่ยน facing ของตัวละครนอกจากก้าวเดินในข้อ 5**
+  11. ปิดเซิร์ฟเวอร์ · เก็บ `.out`/`.err`, `capture_v141\GAME_LIVE.txt`, `GAME_EVENTS_LIVE.txt` + sha256 ·
+      `integrity_check` · เช็ค sha canonical ซ้ำ · **รัน teardown เสมอ**
+  🔴 **ขอบเขต:** คลิกเพื่อ **เลือก** เท่านั้น -- ห้ามตีมอน ห้ามใช้สกิล ห้ามคลิกโจมตี ทุกฉาก · เผลอตี = จดไว้ในผล
+  🔴 **STOP:** ถ้ามีหน้าต่างบทสนทนา/เควสต์โผล่ หรือรู้ตัวว่าอยู่คนละแมพหลังคลิก ⇒ **หยุดทั้งใบทันที
+  ปิดไคลเอนต์ รายงานทันที = FAIL** และเก้าเกาะต้องกลับไปอยู่หลัง skip rule เดิมของเลน
+- pass criteria (สองชั้น · 🔴 **ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้นเด็ดขาด**):
+    wire/DB (headless พิสูจน์ได้ ไม่ต้องมีตาคน · grep คอนโซลรวม `2>&1`):
+      (ก) ตอนบูต **ไม่มี** `LANE_A_CHOOSE_NPC_ROSTER_SKIPPED scene=<n> reason=<reason>` สำหรับเก้าฉากเลย
+      (ข) ทุกคลิกที่ได้คำตอบ: `LANE_A_CHOOSE_NPC_SCENE<n>_ANSWERED placement=<idx> visible=<count>
+          omitted=<count>` และ label ที่ส่ง `LANE_A_CHOOSE_NPC_SCENE<n>_FACE_P<idx>` ·
+          **[คำทำนาย ไม่ใช่ผลวัด]** `omitted=0` ทุกครั้ง และ `visible` = จำนวน actor ที่สำมะโนขาเข้าส่ง
+      (ค) มีอย่างน้อยหนึ่งบรรทัดที่ `placement=1`
+      (ง) 🔴 ตลอดเวลาที่ยืนอยู่บนเก้าฉาก: **ไม่มี** event `core_request_014_columbus_npc_conversation_sent_once`
+          และ **ไม่มี** label `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE` -- นี่คือครึ่งสายของ
+          เกณฑ์ความปลอดภัย · (จ) `integrity_check` = `ok` · sha canonical ไม่เปลี่ยน · ไม่มี traceback หลุด
+      **ชั้นนี้ตอบไม่ได้เลยว่ามีอะไรถูกวาดบนจอ หรือผู้เล่นยืนอยู่ที่ไหน**
+    client-observable (ต้องมีคนนั่งหน้าจอ · **ชั้นนี้เท่านั้นที่ตัดสินใบ**):
+      (ฉ) หลัง `/warp 4` **เห็นชาวเกาะยืนอยู่จริง** ในเฟรมก่อนคลิก (`S04-BEFORE`)
+      (ช) ตัวที่ถูกคลิก **หันมาหาตัวละครเรา** และมี **ชื่อและ/หรือแถบ HP** ขึ้น -- บันทึกสิ่งที่แสดงตรง ๆ
+          **ช่องชื่อว่างเป็นการบันทึก ไม่ใช่ FAIL อัตโนมัติ** · เทียบ `AFTER` กับ `BEFORE`
+      (ซ) 🔴 หลังคลิกตัวที่ `placement=1` ครบ 30 วินาที: **ไม่มีหน้าต่างบทสนทนา/เควสต์ใด ๆ** และ
+          **ผู้เล่นยังอยู่เกาะเดิม** (พื้นหลังเดิม ชาวเกาะชุดเดิม กล้องไม่ถูกย้าย)
+      (ฌ) actor ตัวอื่นในเฟรมเหมือนเดิมทุกตัว: อยู่ครบ · หน้าตาเดิม · ป้าย `LV` ไม่หายและไม่กลายเป็น `1`
+      (ญ) 🔴 **สีป้ายชื่อทุกป้ายในเฟรม หนึ่งบรรทัดต่อหนึ่งป้ายต่อหนึ่งภาพ** ทุกภาพ · เขียนคำว่า `none`
+          ออกมาแทนการเว้นว่าง · อ่านสีจาก **ภาพนิ่งเต็มความละเอียดเท่านั้น** (ห้าม contact sheet/ภาพย่อ/วิดีโอ)
+          · **จดสีอย่างเดียว ห้ามอนุมานสาเหตุ** (`RE-067`) · ความต่างจากเซิร์ฟเวอร์จริงลง
+          `REAL_SERVER_DIVERGENCE.tsv` แถวละข้อ
+      **ผลลบมีค่าเท่าผลบวก:** มี `..._ANSWERED` ครบแต่จอไม่ขยับ ⇒ คำตอบคือ **เซิร์ฟเวอร์ตอบแล้ว ไคลเอนต์
+      ไม่วาด** ⇒ ไม่ใช่ความผิดของ lane hook · **ห้ามถอน `production_allowed` ด้วยเหตุนี้** ให้เปิดใบ `RE-` ·
+      มี `LANE_HOOK_FIRED` แต่ไม่มี `..._ANSWERED` ⇒ เช็คก่อนว่าเดินหนึ่งก้าวจริง (ข้อ 5) ·
+      ไม่มี `LANE_HOOK_FIRED` เลย ⇒ คลิกไม่ถึงสาขานี้ = `NO-RESULT`
+- nonclaims:
+  1. ไม่พิสูจน์ว่าสำมะโนขาเข้าถูก/ครบ (`GT-192` ห้ามแก้) · ไม่พิสูจน์เลข `LV` (`GT-200` ห้ามแก้) ·
+     ไม่พิสูจน์กลไก `/warp` เอง
+  2. ไม่ตัดสินฉาก 3 (`GT-210`) ฉาก 14 (`GT-134`) ฉาก 1 หรือฉาก 2
+  3. ไม่พูดเรื่องความหมายของสีป้าย -- `RE-067` ยังเปิด · จดสีอย่างเดียว
+  4. ไม่พิสูจน์ว่า index space เป็น scene-aware แล้ว -- **ไม่ใช่** · ความปลอดภัยยังยืมมาจาก conjunct เดียว
+     ใน `runtime.py` · ใบนี้พิสูจน์แค่ว่า **ผู้เล่นจริงกดแล้วไม่ถูกพาไปไหน** ไม่ใช่ว่าการชนกันหายไป
+  5. ไม่พิสูจน์คอมแบต/aggro/HP · ไม่พิสูจน์ว่าอะไรรอดข้าม relog · ไม่พิสูจน์ melee/skill targeting
+     บนฉากที่ responder อ้างสิทธิ์ (ภาระที่ยังไม่ปลด -- `runtime.py:7520-7533`)
+- links: `lane_hooks/lane_a_choose_npc_roster_scenes.py` · `lane_hooks/lane_a_scene_census.py`
+  (`_membership_if_answerable`) · `runtime.py` scene guard (PR #570) · `world_bg0004_identity.py` ·
+  `tests/test_lane_a_choose_npc_roster_scenes.py` · `GT-210` (ฉาก 3) · `GT-192` (เส้นทางวาป) ·
+  `GT-200` (ป้าย LV) · `GT-134` · `RE-067` (สีป้าย) ·
+  `notes_to_chief/20260902_1207_LANE-A-CORE-REQUEST-columbus-branch-needs-a-scene-guard.md`
+- result: (ผู้เทสกรอก: PASS/FAIL/NO-RESULT · branch/commit ที่บูต · ภาพ `S04-BEFORE`/`S04-AFTER`/
+  `S04-P1+2s`/`S04-P1+30s` + ของเกาะที่สอง · บรรทัดคอนโซลดิบทุกบรรทัด (`..._ANSWERED` ทุกคลิก) ·
+  บรรทัดสีป้ายครบทุกป้ายทุกภาพ · sha256 ทั้งสี่ค่า · timestamp +07:00 ·
+  `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
+
+**ผู้เปิดใบ: LANE-A (WORLD) รอบ `gwwpmr` 2026-09-02T15:55+07:00 -- LANE-A บริโภคผลใบนี้เอง**
