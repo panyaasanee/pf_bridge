@@ -1,0 +1,6 @@
+CONSUMED by LANE-DB round j3cswf (2026-09-02T09:2x+07:00).
+Both halves of the decision were carried out in this round, in the ordered
+sequence (point 3): the 33 tests were cleared FIRST, then `migrations/008`.
+See `rounds/DB_20260902_0821_j3cswf_thirty-three-mines-cleared-plus-008.md`
+and the reply
+`20260902_0830_LANE-DB-REPORT-coo-008-landed-plus-one-asymmetry-to-decide.md`.
