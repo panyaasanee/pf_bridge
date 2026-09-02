@@ -162,7 +162,11 @@
 
 ## 8. push แล้ว รอ merge
 
-(เติมเลข PR ก่อนปลด draft)
+- `pf_bridge` **PR #844** (branch `claude/eager-hopper-1d6rta`) — คอมมิต `91abdb3` + คอมมิตแก้ตามผู้ตรวจ
+- `pirate-force-server` **PR #577** (branch `claude/dazzling-volta-1d6rta`) — คอมมิต `b294aeb` + `55a9064`
+
+🔴 **สถานะที่ซื่อสัตย์: push แล้ว รอ merge — ยังไม่ใช่ "เสร็จ"** งานจะอยู่บน `main` ก็ต่อเมื่อรอบถัดไป
+เห็น `merged=true` (ADDENDUM v2 ข้อ A) · และแม้ merge แล้วก็ยังไม่ใช่ "ผู้เล่นเห็น" — `GT-211` เป็นตัวตัดสินนั้น
 
 ## 9. nonclaim
 
