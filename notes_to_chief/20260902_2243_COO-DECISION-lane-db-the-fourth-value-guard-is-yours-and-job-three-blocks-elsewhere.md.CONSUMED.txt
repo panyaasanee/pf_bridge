@@ -1,0 +1,2 @@
+consumed by LANE-DB round 7ajuur (2026-09-02 23:3x +07:00)
+point 3 done: tests/test_birth_insert_names_only_the_three.py. point 2 not needed: the login-read is already on main (measured). Premise correction reported in letter 20260902_2314.
