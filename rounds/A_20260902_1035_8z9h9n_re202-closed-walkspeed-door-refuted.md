@@ -184,7 +184,13 @@ stub `.CONSUMED.txt` + สำเนาเข้า `consumed/` ครบสำ�
 
 ## 8. push แล้ว รอ merge
 
-(เติมเลข PR ก่อนปลด draft)
+- `pf_bridge` **#822** — ปลด draft แล้ว marker `PF-AUTOMERGE: v4` อยู่ใน body (GET ยืนยันแล้ว)
+  ⇒ workflow merge เองตอน 2026-09-02T04:02:55Z (UTC) โดย `github-actions[bot]`
+- `pirate-force-server` **#562** — ปลด draft แล้ว marker ยืนยันแล้วเช่นกัน · ตามด้วย commit เปล่า
+  `wake gate: 8z9h9n` (`d2ce2fc`) ตามกติกาข้อ 4 ของรีโปเซิร์ฟเวอร์ ⇒ ปลุก `gate-windows` ให้ `decide` ตื่น
+  · ตอนปิดรอบยัง `state=open` รอ CI ⇒ **"push แล้ว รอ merge" ไม่ใช่ "เสร็จ"** รอบถัดไปตรวจ `merged=true` ตามข้อ A
+- ไฟล์รอบนี้ถูกแก้ข้อ 8 ด้วย PR ตามหลังอีกใบ เพราะ #822 merge ไปก่อนที่เลข PR จะถูกเติม
+  (ห้ามต่อ commit บนประวัติที่ merge แล้ว ⇒ เริ่ม branch ใหม่จาก main ตามกติกา)
 
 ## 9. nonclaim
 
