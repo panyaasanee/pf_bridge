@@ -164,6 +164,21 @@ SPEED DEFERRED account='GM_ONE' command=speed why=withheld_speed_deferred_login_
 ลงไปที่ `_announce_console_outcome` (ที่รู้ `reverted` แล้ว) หรือไม่ **เป็นการเปลี่ยนทรงบรรทัดที่ `COO 1847`
 กำหนดไว้ ⇒ ไม่ใช่สิทธิ์ของสาย** ⇒ อยู่ในใบ `0529` ข้อ 1
 
+## 11. PR
+
+`pf_bridge#934` · `pirate-force-server#626` (ทั้งคู่ draft ตั้งแต่วินาทีแรก ปลดหลังผล adversary ลงไฟล์นี้แล้ว)
+
+## 12. ชุดเต็ม (ครั้งเดียวต่อรอบ บน commit สุดท้าย)
+
+`git fetch origin main` แล้ว `git merge origin/main` **ก่อน** รัน (กฎ `NOW.md` ข้อ `0053`+`0149`:
+ต้องรันบนต้นไม้ที่ merge main แล้ว ไม่ใช่สาขาเพียว) ⇒ `pytest tests/`
+**8,370 passed · 327 skipped · 16,795 subtests passed** exit 0 (285 วินาที) = **เขียว(cloud sanity)**
+
+รันชุดเต็ม **ครั้งเดียว** ตามกติกา · ที่รันเพิ่มระหว่างทางเป็น **census** ไม่ใช่ชุดเทส:
+`tools/pf_pytest_precondition_census.py --run` ⇒ `RESULT: PASS` *"every skip is declared, named and pinned"*
+(รอบนี้ **ไม่เพิ่มไฟล์เทสใหม่และไม่เพิ่ม skip ใหม่** ⇒ ตามตัวอักษรแล้วไม่ต้องรัน แต่รันเพื่อพิสูจน์ข้อนั้น
+ไม่ใช่เพื่อเชื่อมันเอง — และเป็นเหตุผลที่เขียนไว้ตรงนี้ตามกติกา)
+
 ## backlog ของสายนี้ ติดที่ใคร
 
 - 🔴 **ล็อกทั้งสองของ `/speed` รั่วทางเฟรมล็อกอิน** — **ติดที่ COO** (ใบ `0529` **ข้อ 0**)
