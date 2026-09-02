@@ -121,6 +121,13 @@ C:\Users\Panya\Desktop\Pirate Force\
 - 🔴 **เพดานใบเทสใหม่ = 12,000 อักขระ นับเป็น "อักขระ" ไม่ใช่ไบต์ UTF-8** (`COO-DECISION 20260902_1648` ข้อ 1 แทนกฎ ≤ 8 KB เดิม · หลักฐาน: `GT-207` 11,753 · `GT-211` 11,360 · `GT-212` 9,710 อักขระ ไม่มีใบไหนเคยลง 8 KB ได้) — **ห้ามตัดขั้นตอนความปลอดภัยของใบเทสเพื่อให้ลงเพดาน เกินให้เขียนบอก COO**
 - 🔴 **ต้อง `git fetch origin main` ก่อน `checkout -B` ทั้งสองรีโปเสมอ** (`COO-DECISION 20260902_1648` ข้อ 2 · หลักฐาน: `origin/main` ในโคลนสดของ `pirate-force-server` ค้างเก่า 189 คอมมิต ชี้ `35b8abb` ⇒ `checkout -B` โดยไม่ `fetch` = ย้อนทั้งรีโปกลับไปเมื่อวานแบบเงียบ)
 - 🔴 **"อยู่บน main แล้ว" วัดด้วยกราฟ git เท่านั้น ห้ามใช้ฟิลด์ `merged` ของ GitHub API** — `git fetch origin main` แล้ว `git merge-base --is-ancestor <head-sha> origin/main` · exit 0 = อยู่บน main · **`merged=false` ห้ามใช้เป็นเหตุผล cherry-pick เด็ดขาด** จะ cherry-pick ได้ต่อเมื่อ `--is-ancestor` ตอบ exit 1 (`COO-DECISION 20260902_1745` ข้อ 2 · เหตุ: workflow ของเราปิดใบด้วยการ push ⇒ ใบที่อยู่บน main แล้วยังรายงาน `merged=false` ได้)
+- 🔴 **รอบที่เพิ่มไฟล์ `tests/test_*.py` ใหม่ ต้องซ้อมเกตในสภาพ "ไม่มี `pf_bridge` ข้าง ๆ" ก่อน push ให้ได้ `exit 0`** (`COO-DECISION 20260902_2344` ข้อ 1 · ข้อเสนอของสาย A ใบ `20260902_2240` · **ไม่ใช่เกตใหม่ ไม่มีใครถูกปิด PR เพราะไม่ทำ** เป็นขั้นก่อน push) · ราคา ~5 นาที (สาย A วัดได้ 282 วินาที) · เหตุ: `server#601` เสียทั้งรอบ 3,534 บรรทัดเพราะ `unittest.skipIf` เปล่าหนึ่งตัว และไฟล์หมุดเดียวกันบันทึกทรงนี้ไว้อีกอย่างน้อยสามใบ (`#231` `#540` `#545`) เกิดกับสาย A สาย B และ chief · กลไก: บนคลาวด์ `pf_bridge` อยู่ข้าง ๆ เสมอ ⇒ เทสที่ต้องการตารางเกมผ่านทุกครั้งในบ้าน สายตาแรกที่เห็นว่ามันข้ามคือเกต Windows ซึ่งเป็นสายตาที่ปิด PR ทิ้ง
+  ```bash
+  git worktree add --detach <ที่ว่างนอกโฟลเดอร์แม่ที่มี pf_bridge> HEAD
+  grep -l 'GameClient\|capture_v141' tests/*.py | sort -u | grep -v test_foundation_legacy_seam.py > excl.txt
+  python3 -m pytest tests -q -rs $(sed 's|^|--ignore |' excl.txt) > log.txt
+  python3 tools/pf_pytest_precondition_census.py --report log.txt --excluded excl.txt   # ต้อง exit 0
+  ```
 - 🔴 **ทุกสายทำ round claim ต้นรอบก่อนเขียนโค้ด (WIP PR) การ์ดกันรอบซ้อนนับ claim ด้วย · ก่อนจบรอบอ่าน `state` ของ PR ตัวเองอีกครั้งหลัง push สุดท้าย — `closed` ที่ไม่ merge = รอบยังไม่เสร็จ เปิด PR ใหม่จากกิ่งเดิม ห้ามเขียนในไฟล์รอบว่าของขึ้นแล้ว** (`COO-DECISION 20260902_1146` ข้อ 4 ค + `20260902_1249` ข้อ 1 · เหตุ: LANE-DB สองเซสชันชนกัน 10:52 และ #558 ถูกปิดก่อน rewind)
 
 ---
