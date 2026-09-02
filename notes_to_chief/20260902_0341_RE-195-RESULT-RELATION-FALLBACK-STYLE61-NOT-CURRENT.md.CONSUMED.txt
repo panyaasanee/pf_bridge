@@ -1,0 +1,19 @@
+consumed by LANE-GM round wggs0i (2026-09-02T10:35+07:00):
+RE-195 answers CORE-REQUEST-GM-048 with a bounded negative, and this lane
+took it as an answer rather than a delay. Three things done with it:
+(1) CLIENT_RE_QUEUE.md RE-195 head closed CLOSED BOUNDED-NEGATIVE/DONE with a
+    result block (this lane opened the question via GM-048, consumer contract
+    names LANE-GM);
+(2) the same round found RE-191's head still OPEN although its result letter
+    landed 2026-09-01T14:39 and was consumed in round r2jfjm -- closed it too,
+    and measured WHY the queue lint could not see the result: the letter's
+    filename spells RE191 without the hyphen, has_result_letter() matches
+    "RE-191" literally. tools_bridge/ is not this lane's write zone: reported
+    to chief in 20260902_1035_LANE-GM-TO-CHIEF-*.
+(3) the bounded negative was made executable instead of left as prose:
+    pirate-force-server src/pirateforce_foundation/gm/name_color_gate.py +
+    tests/test_gm_name_color_gate.py (20 cases, 3 mutants killed). It holds NO
+    colour value and sends no byte -- it refuses P-2 colour wiring and names
+    the three routes RE-195 closed. RE-191's palette was NOT copied into the
+    repo, per that ticket's own forbidden-actions section.
+Original copied to notes_to_chief/consumed/.
