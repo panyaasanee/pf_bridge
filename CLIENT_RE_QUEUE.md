@@ -4407,3 +4407,41 @@ derived-mask-ว่าง ล้างพื้นทั้งฉากทิ้
   นอกจาก literal สี่ตัวข้างบน ซึ่งไม่ครอบคลุม 11 ไบต์ที่ถาม) · ค้น `gamedata` แล้ว: **ไม่เกี่ยว** (คำถามอยู่ในโค้ด ไม่ใช่ตาราง)
 - numbering: `RE` สูงสุดในไฟล์นี้ = 208 · grep `RE-209` ทั้งรีโปพบเฉพาะใบนี้ ⇒ `209`
 - result: (สาย RE กรอก: ไบต์ + คำสั่งที่ถอดได้ของ `0x0045BC80..0x0045BC8A` · ESI ถูกเขียนหรือไม่ · sha ตรงหรือไม่ · timestamp)
+
+## 🔬 RE-210 EXIT-BUTTON-ONLAND-RESPONSE-EXPECTATION-001 [OPEN (ย่อแล้ว) -- เปิดโดย LANE-A รอบ `1d6rta` 2026-09-02T13:4x+07:00 · ผู้ทำ: **สาย RE** (ผู้ทำสายเดียว ไม่ต้องจอง) · **LANE-A บริโภคผลเอง** · `[STATIC-ON-BRIDGE]`]
+
+🔴 **แก้หัวใบในรอบเดียวกับที่เปิด (pf-adversary D3)** — ร่างแรกชื่อ `EXIT-BUTTON-COMPANION-VITAL-0X1EB4-001`
+และถามสามข้อ ~~ข้อ 1 (`0x1EB4` ชื่ออะไร) และข้อ 2 (สคีมาสี่ f32 + `0F 01 00` คืออะไร)~~
+**สองข้อนั้นถูกตอบไว้แล้วในของที่ commit ไว้ ไม่ต้องให้สาย RE ทำ**:
+- `0x1EB4` = **`COnLandVital`** (`pirate-force-server/docs/PF_VITAL_NAMES.json:546` hash-match byte-exact ·
+  `current/pf_login_game_server_v141.py:399,450` `ON_LAND_VITAL`)
+- สคีมาเต็มทั้ง W และ R: `external/PF_SERIALIZER_FIELDS.tsv:1173-1182` — f32 สี่ตัว tag `0x2A`
+  ที่ `+0x14/+0x18/+0x1C/+0x20` แล้ว u16 tag `0x0F` ที่ `+0x24` (= `0F 01 00` ท้ายเรคคอร์ด) ชั้น IMAGE พร้อม sha
+- `external/PF_PROTOCOL_PRIORITY.tsv:83` ทำเครื่องหมาย `COnLandVital` ว่า `KNOWN/CLOSED` อยู่แล้ว
+**บทเรียน (G1):** ร่างแรก `grep 1EB4` ใน TSV ที่คีย์เป็น**ชื่อคลาส** แล้วอ่านผลว่างว่า "ไม่มีในโลก" ·
+ไม่ลบข้อความเดิม ขีดฆ่าไว้ · ราคาที่เกือบเสีย: หนึ่งรอบของสาย RE ซึ่งเป็นสายที่หายากที่สุด
+
+**คำถามเดียวที่เหลือ และเป็นคำถามที่ตัดสินงานของสาย A จริง ๆ:**
+**ไคลเอนต์บล็อกการออกจากเกมไว้จนกว่าจะได้คำตอบของ `COnLandVital` (หรือของ `TargetPosVital`) หรือไม่**
+
+ทำไมคำถามนี้ยังเปิดอยู่ทั้งที่สคีมาปิดแล้ว: `external/PF_FIELD_VALIDATION.tsv:164-165` บันทึกว่า
+ขา **W** ของ `COnLandVital` `VALIDATED CAPTURE` แต่ขา **R** เป็น **`NOT_OBSERVED`** —
+คือ **ไม่เคยมีใครเห็นเซิร์ฟเวอร์ตอบ vital ตัวนี้เลยสักครั้ง** และเฟรมปุ่ม "ออกจากเกม" ที่เจ้าของกดเอง
+(`[G< #1402]` 119 ไบต์) พก `COnLandVital` มาสองเรคคอร์ดพร้อมกับ `LogoutVital`
+
+**เกณฑ์ปิดใบ (ชั้น static พอ · ตอบใช่/ไม่ใช่ + ที่มา)**
+- ฝั่งไคลเอนต์: มีเส้นทางไหนที่ **รอ/บล็อก** การออกจากโลก ไว้จนกว่าจะได้ response ของ `COnLandVital`
+  หรือ `TargetPosVital` หรือไม่ (ยก span + sha ตาม `RE_STATIC_SEARCH_RULES.md` §1)
+- **ผลลบมีค่าเท่าผลบวก**: ถ้า "ไม่มีใครรอ" แปลว่าความเงียบของสามตัวที่พ่วงมาไม่ใช่สาเหตุที่ปุ่มไม่ทำงาน
+  ⇒ สาย A เลิกไล่ทางนี้ทั้งทางแทนที่จะเดาต่ออีกหลายรอบ
+- ถ้า "รอ" ⇒ บอกด้วยว่ารอ **field/แฟล็กไหน** เพื่อให้สาย A ประกอบคำตอบได้โดยไม่ต้องเดาไบต์
+
+- links: `FINDINGS_A_1d6rta_UI_B_LOGOUT_BUTTON_FRAME_EVIDENCE.md` (ไบต์ + โครง + ตารางแก้คำผิด) ·
+  `notes_to_chief/consumed/20260901_1930_KA1A-CAPTURE-*.md` · `notes_to_chief/20260902_0333_RE-197-RESULT-*`
+  (ระบุไว้แล้วว่าเฟรมหลัง `#1402` คือ `COnLandVital + TargetPosVital`) · `RE-189` · `GT-194` · `GT-211` ·
+  `external/PF_FIELD_VALIDATION.tsv:164-165` · `NOW.md` คิว UI-B
+- ค้นแล้วก่อนเปิด: `PF_VITAL_NAMES.json` · `PF_SERIALIZER_FIELDS.tsv` · `PF_PROTOCOL_PRIORITY.tsv` ·
+  `PF_FIELD_VALIDATION.tsv` · v141 · `gamedata` (ไม่เกี่ยว: คำถามอยู่ในตรรกะของไคลเอนต์ ไม่ใช่ตารางข้อมูลเกม)
+- numbering: `RE` สูงสุดในไฟล์นี้ = 209 · ใบเทสของรอบเดียวกันคือ `GT-211` (หัวใบลงไฟล์
+  `GAME_TEST_QUEUE.md` แล้วในคอมมิตเดียวกันกับใบนี้ ไม่ใช่การจองเลขล่วงหน้า) · ตรวจซ้ำตอน rebase
+- result: (สาย RE กรอก: ใช่/ไม่ใช่ + span/sha ที่ใช้ · ถ้า "รอ" บอก field ที่รอ · timestamp)

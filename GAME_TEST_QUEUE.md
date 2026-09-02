@@ -9964,7 +9964,10 @@ item 1 เปลี่ยนเป็น `sed` ตัดเฉพาะช่ว
    payload ไม่ใช่เงื่อนไข envelope เดิมที่ใบนี้เตือนไว้)
 2. `(cd pirate-force-server && python3 -m pytest tests/test_logout_request_envelope.py tests/ -k logout -q)`
    ผ่านทั้งหมด (regression guard -- ห้ามมีเทส logout เดิมพังจากการแก้)
-   — 🟢 **[วัดแล้ว R295]** `126 passed, 3 skipped` (skip เดิม ไม่ใช่ของใหม่)
+   — 🟢 **[วัดแล้ว R295]** ~~`126 passed, 3 skipped`~~ (skip เดิม ไม่ใช่ของใหม่)
+   🔴 **ตัวเลขนี้เน่าแล้ว แก้โดย LANE-A (เจ้าของใบ) รอบ `1d6rta` ตาม pf-adversary D10:** คำสั่งเดียวกัน
+   บน `main` วันนี้ให้ **`182 passed, 3 skipped`** และหลังเทสของรอบ `1d6rta` ให้ **`191 passed, 3 skipped`**
+   ⇒ ผู้เทสห้ามใช้เลข 126 เป็นเกณฑ์ · เกณฑ์จริงคือ **เขียวทั้งชุด และจำนวน skip ยังเป็น 3**
 3. Headless replay เฟรม 119 ไบต์จริงของใบ `1930` (หรือแคปเจอร์ใหม่ที่เทียบเท่า) ผ่าน dispatch จริง แล้ว
    `grep` console log ยืนยันว่าไม่ใช่ `logout_hypothesis_wrong_envelope_no_reply` อีกต่อไป
    — 🟢 **[วัดแล้ว R295]** ใหม่: `tests/test_logout_hypothesis.py::LogoutHypothesisRuntimeTests::
@@ -10606,10 +10609,17 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
       `LANE_A_UIA_NOTICE_COMPOSED button=BACK_TO_CHARSELECT subcode=3 vitals=1 trailing=0 text=BACK REFUSED pc=56 frame=66`
       (one line, exactly as printed -- the `pc=`/`frame=` lengths are the composed bytes, so the token
       cannot appear unless bytes exist). If she also clicks the exit button at any point, the matching
-      line is `LANE_A_UIA_STOOD_DOWN button=EXIT_GAME subcode=1 vitals=4 trailing=85`, which shows this
+      line is ~~`LANE_A_UIA_STOOD_DOWN button=EXIT_GAME subcode=1 vitals=4 trailing=85`, which shows this
       lane composed NO BYTES for subcode 1 -- it still prints that one line, which is itself evidence
-      `GT-194`'s reader will see; "nothing at all" would be the wrong expectation. Copy both lines
-      verbatim, do not interpret.
+      `GT-194`'s reader will see; "nothing at all" would be the wrong expectation.~~ **CHANGED, LANE-A
+      round `1d6rta` (2026-09-02T13:4x+07:00), per `COO-DECISION 20260902_1145`: the exit button is no
+      longer a stand-down.** On a boot that carries this round's code (server PR of round `1d6rta`; the
+      RECHECK below tells you which `main` you have), the exit click prints
+      `LANE_A_UIA_NOTICE_COMPOSED button=EXIT_GAME subcode=1 vitals=4 trailing=85 text=EXIT REFUSED pc=56 frame=66`
+      and a second twelve-character line may appear on screen. **That belongs to `GT-211`, not to this
+      entry** -- this entry is graded on `BACK REFUSED` alone. On an older `main` the struck
+      `LANE_A_UIA_STOOD_DOWN` line is still the correct one and is not a defect. Copy whichever lines
+      appeared, verbatim, do not interpret.
       Three other tokens can appear instead, and each means something different:
       `LANE_A_UIA_WITHDRAWN` (the module is switched off), `LANE_A_UIA_NOTICE_FAILED` (the composer
       refused -- a bug to report, not a tester error), `LANE_A_LOGOUT_FRAME_UNCLASSIFIED verdict=<word>`
@@ -10643,8 +10653,10 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
      state, NOT proof that the notice composer is wrong. The render evidence for this channel
      (`GT-006`/`GT-009`) was measured with the dialog CLOSED, so this entry is the first time it is
      asked to draw with the dialog OPEN.
-  3. Does NOT test the "ออกจากเกม" button (`GT-186`/`GT-194`) and must not be run in a way that changes
-     their evidence. If she clicks it anyway, log it as a separate observation with its own token line.
+  3. Does NOT test the "ออกจากเกม" button (`GT-186`/`GT-194`/**`GT-211`**) and must not be run in a way
+     that changes their evidence. If she clicks it anyway, log it as a separate observation with its own
+     token line -- and on a `main` that carries round `1d6rta`, that observation IS `GT-211`'s evidence:
+     record it there rather than grading this entry on it.
   4. Claims nothing about `ReturnSelectServerVital 0x709E` or `HYP-PF-040`.
   5. Does not claim the PR is merged; the RECHECK line, not this header, decides that.
 
@@ -10907,3 +10919,139 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
   `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
 
 **ผู้เปิดใบ: LANE-A (WORLD) รอบ `326kf4` 2026-09-02T12:2x+07:00 -- LANE-A บริโภคผลใบนี้เอง**
+
+## GT-211 UI-B-EXIT-BUTTON-VISIBLE-NOTICE-001  [BLOCKED -- โค้ดยังไม่ขึ้น `main`: อยู่บน branch `claude/dazzling-volta-1d6rta` เท่านั้น · ตัวบล็อกเดียวคือ merge (ไม่มีแฟล็ก ไม่แตะ `runtime.py`) · ห้ามบูตจนกว่า RECHECK ผ่านครบสองข้อ]
+
+> เปิดโดย LANE-A (WORLD) รอบ `1d6rta` 2026-09-02T13:4x+07:00 · **LANE-A บริโภคผลเอง**
+> numbering: shared counter กับ `CLIENT_RE_QUEUE.md` (กฎ ② หัวไฟล์) -- **ให้รันคำสั่งค้นหาซ้ำตอน rebase**
+> ณ วันเปิดใบ: highest `GT` บน `main` = `GT-210`; highest `RE` = `RE-210` (เปิดรอบเดียวกัน) ⇒ ใบนี้ `211`
+> บูต/DB/teardown ตาม `ATTENDED_SESSION_RUNBOOK.md` (teardown ปฏิเสธ boot stamp เก่ากว่า 420 นาที
+> -- ต้องรัน teardown เสมอ แม้รอบจบเพราะเจ้าของเลิกเล่นเฉย ๆ)
+
+- objective: ข้อพิสูจน์เดียว ตัดสินด้วยตาคนเท่านั้น -- ตัวละครยืนอยู่ในแมพจริงบนบูต **ปกติ ไม่มีแฟล็ก
+  scenario ใด ๆ ทั้งสิ้น และโดยเฉพาะไม่ใช่ logout scenario** · ผู้เล่นเปิดเมนู HOME แล้วคลิกปุ่ม
+  "ออกจากเกม" (exit game) แล้วบรรทัดเดียว `EXIT REFUSED` -- ตัวอักษร ASCII พิมพ์ได้ **12 ตัวพอดี** --
+  **ขึ้นบนจอ** ในพื้นที่แชท/ช่องพูดฝั่งเรา ไม่ว่าจะระหว่างที่ dialog logout ยังค้างอยู่ หรือหลังมันปิดไป
+- background (อ่านครั้งเดียวแล้วทำตาม steps):
+  1. รอบ `od1xso` สร้าง `src/pirateforce_foundation/world_logout_button_notice.py` ซึ่งตอบ **เฉพาะ**
+     ปุ่ม UI-A ("กลับหน้าเลือกตัวละคร", subcode 3) ด้วย `BACK REFUSED` -- นั่นคือ `GT-205`
+     **ยังมีชีวิตอยู่และใบนี้ไม่แตะ**
+  2. รอบ `1d6rta` (รอบนี้) ต่อยอดโมดูลเดิมให้ตอบปุ่ม UI-B ("ออกจากเกม", `LogoutVital 0x1B40`
+     subcode 1, เฟรมจับสดของเจ้าของเอง 119 ไบต์ ห่อ vital มาสี่ตัว) ด้วยประโยค 12 ตัวอักษรของตัวเอง
+     `EXIT REFUSED` ประกอบผ่าน `gm/say_wire.make_local_talk_notice_frame` -- **byte-equal** กับ composer
+     ที่พิสูจน์แล้ว ไม่มีความรู้เรื่องสายเป็นของตัวเอง
+  3. **ไม่ต้อง wire อะไรใหม่** -- call site `0x1B40` เดิมใน `runtime.py` (รอบ `od1xso` บรรทัดของ chief)
+     ส่งสิ่งที่ `observe_parsed` คืนมา ไม่ว่าจะปุ่มไหน
+  4. คำว่า `EXIT REFUSED` เป็น **[ข้อสมมติของเลน A -- รอ COO ยืนยัน]** จดหมาย
+     `notes_to_chief/20260902_1341_LANE-A-ASK-COO-uib-notice-wording.md` ⇒ ผู้เทสที่อ่านสะกดคำอื่นบนจอ
+     ให้ **จดตามที่เห็นเป๊ะ ๆ** อย่าเพิ่งตัดสินว่าเป็นข้อบกพร่อง
+  5. 🔴 **ไม่เคยมีใครเห็นบรรทัดที่เซิร์ฟเวอร์ประกอบเองบนช่องนี้ขึ้นจอบนบูตปกติมาก่อนเลย**
+     (`gm/say_wire.py` เขียนไว้เป็นตัวใหญ่) · ของที่ขึ้นจอใน `GT-006`/`GT-009` คือข้อความที่ไคลเอนต์
+     **สะท้อนของตัวเอง** หลังแฟล็ก scenario และตอน dialog logout ปิดอยู่ ⇒ **ผลลบของใบนี้มีค่าเท่าผลบวก**
+     มันเป็น finding เรื่องช่องนี้และเรื่อง dialog ไม่ใช่หลักฐานว่า composer ผิด
+  6. ความยาว 12 ตัวอักษรคือความยาวเดียวที่เคยเห็นเรนเดอร์ (`GT-006`/`GT-009`: `PFCHATPROBE1`) ·
+     body ห้าตัวอักษร **วัดแล้วว่าเงียบ**
+- PRECONDITION / RECHECK (ใบนี้เริ่มที่ `BLOCKED` · **RECHECK ผ่านเท่านั้นจึงเลื่อนเป็น `READY`**) --
+  คำสั่งล็อก cwd ในตัวเอง ไม่พึ่ง cwd ผู้รัน:
+  ```
+  (cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/world_logout_button_notice.py | grep -n "EXIT REFUSED")
+  (cd pirate-force-server && python3 -m pytest tests/test_world_logout_button_notice.py tests/test_world_logout_button_notice_wiring.py -q)
+  ```
+  ข้อ 1 ต้อง **เจอจริง** · ข้อ 2 ต้อง **เขียวทั้งชุด** บน clone เดียวกันนั้น ·
+  **ผลว่างจากข้อ 1 = ยังไม่ merge ⇒ ไม่บูต ไม่เสียเวลาผู้เทสแม้แต่นาทีเดียว** คงสถานะ `BLOCKED`
+  ทดสอบบน branch ก่อน merge ได้ ถ้าเปลี่ยน `origin/main` เป็น `origin/claude/dazzling-volta-1d6rta`
+  แล้ว **เขียนในผลว่าใช้ตัวไหน และ commit ไหน**
+- db: `state\pirateforce.sqlite3` -- **สำเนาเท่านั้น ห้ามเปิดไฟล์ canonical** · คัดลอกเป็น
+  `state\run_gt211_<yyyyMMdd_HHmmss>.sqlite3` แล้วบูตทับสำเนา · จด sha256 ของสำเนา ก่อน/หลัง ·
+  จด sha256 ของ canonical ก่อน/หลัง และยืนยันว่า **ไม่เปลี่ยน** · `PRAGMA integrity_check` = `ok` ทั้งสองครั้ง
+  (รอบคัดลอก DB ⇒ ตำแหน่งตัวละครกลับไป spawn ทุกบูต เป็นเรื่องปกติ ไม่ใช่ผลวัด)
+- server args: บูตมาตรฐานตาม `BRIDGE_BOOT_PROCEDURE.md` · `-SecondPasswordMode bypass` ·
+  🔴 **ไม่มีแฟล็ก scenario ใด ๆ และห้ามเป็น logout scenario เด็ดขาด** · เก็บคอนโซลรวม stdout+stderr (`2>&1`)
+  ```
+  py -3 -u -m pirateforce_foundation.app --db state\run_gt211_<stamp>.sqlite3
+  ```
+- steps: (ราว 10 นาทีหน้าจอ · เซิร์ฟเวอร์ก่อน ไคลเอนต์ทีหลัง เสมอ)
+  1. RECHECK ผ่านก่อน · LOCK_GAME · จด boot stamp · sha canonical · คัดลอก DB
+  2. บูตเซิร์ฟเวอร์ **ใหม่สด** แล้วค่อยบูตไคลเอนต์ (เคยมีไคลเอนต์ถูกฆ่า = เซิร์ฟเวอร์ยังถือเซสชันไว้
+     ไคลเอนต์ตัวถัดไปจะ "connecting" ค้างตลอดกาล ⇒ **รีสตาร์ตเซิร์ฟเวอร์ก่อนเสมอ**) ·
+     ห้ามบูตไคลเอนต์ทิ้งไว้โดยไม่มีเซิร์ฟเวอร์ (ตายใน ~3.5 นาที)
+  3. **ล็อกอินเข้าฉากจริงให้เสร็จก่อนทุกอย่าง** (มีเกต fail-closed เมื่อยังไม่ได้เลือกตัวละคร)
+  4. จัดมุมภาพด้วย **คลิกขวาลาก** เท่านั้น (กล้องอย่างเดียว facing ไม่ขยับ ไม่มีไบต์ออกสาย) ·
+     🔴 **ห้ามเปลี่ยน facing ของตัวละคร**: ห้าม `Q`/`E` ห้าม `W/A/S/D` (ทั้งคู่ยิง TargetPosVital) ·
+     **ห้ามพิมพ์ตัวอักษรใด ๆ** ตอนช่องแชทไม่ focus (ทุกปุ่มกลายเป็นฮอตคีย์)
+  5. ภาพนิ่ง `S0-BASELINE` **เต็มความละเอียด** เห็นพื้นที่แชท/ช่องพูด · จดเวลานาฬิกา (+07:00) และ `t` ของวิดีโอ
+  6. เปิดเมนู HOME · ภาพนิ่ง `S1` (เมนูเปิด)
+  7. คลิก "ออกจากเกม" **หนึ่งครั้ง** · จดเวลานาฬิกาและ `t` ของคลิกนั้น **ก่อนทำอย่างอื่น**
+  8. **จ้องจออย่างน้อย 30 วินาที** · `S2` ที่ ~+2s · `S3` ที่ +10s · `S4` ที่ +30s (เต็มความละเอียดทุกใบ
+     เห็นพื้นที่แชท) · ห้ามคลิกอะไร ห้ามปิด dialog เอง ระหว่าง 30 วินาทีนั้น เว้นแต่ไคลเอนต์ปิดเอง
+  9. บันทึกในผล: เห็น 12 ตัวอักษรไหม yes/no · **ตรงไหนบนจอ** (แผง/บรรทัดใด) · ห่างจากคลิกกี่วินาที ·
+     อยู่นานเท่าไร · และตอนนั้น **dialog logout ยังเปิดอยู่หรือปิดไปแล้ว**
+  10. ทำซ้ำได้อีกครั้งเดียว **เฉพาะเมื่อครั้งแรกไม่เห็นอะไร**: relog แล้วทำข้อ 6-9 ใหม่โดย
+      **เปิดหน้าต่าง/แท็บแชทค้างไว้ให้เห็นประวัติก่อนคลิก** · ตั้งชื่อ `S0b..S4b` และ
+      **บันทึกสองครั้งแยกกัน ห้ามรวม**
+  11. ตัวเช็ค NO-CRASH: **คลิกขวาลากหมุนกล้อง** เท่านั้น (ห้ามใช้ `Q`/`E` เป็นตัวเช็คนี้) · `S5` · ปิดด้วยปุ่ม X
+  12. ปิดเซิร์ฟเวอร์ · เก็บ `.out`/`.err`, `capture_v141\GAME_LIVE.txt`,
+      `capture_v141\GAME_EVENTS_LIVE.txt` + sha256 ทุกไฟล์ · `integrity_check` · เช็ค sha canonical ซ้ำ ·
+      **รัน teardown เสมอ**
+- pass criteria (สองชั้น · 🔴 **ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้นเด็ดขาด**):
+    wire/DB (อ่านจากคอนโซล/แคปเจอร์อย่างเดียว ไม่ต้องมีตาคน): คลิกนั้นต้องพิมพ์ **บรรทัดเดียว**
+      `LANE_A_UIA_NOTICE_COMPOSED button=EXIT_GAME subcode=1 vitals=4 trailing=85 text=EXIT REFUSED pc=56 frame=66`
+      (`pc=`/`frame=` คือความยาวไบต์ที่ประกอบได้ ⇒ โทเคนนี้ปรากฏไม่ได้ถ้าไม่มีไบต์จริง ·
+      ชื่อโทเคนขึ้นต้น `UIA` ตามโมดูลเดิม **ไม่ใช่ความผิดพลาด** ให้ดูที่ `button=`) ·
+      🔴 **บรรทัดนี้คือที่เดียวในแคปเจอร์ที่แยกสองปุ่มออกจากกันได้ — อย่าใช้บรรทัด `SENT` แทน**
+      (pf-adversary D1 วัดแล้ว): ตัวส่งของ v141 เขียน **label** ลง `GAME_LIVE.txt` / `[G>]` / ไฟล์
+      events และ label ของทั้งสองปุ่มยังเป็น `LANE_A_UIA_BACK_REFUSED_LOCAL_TALK_NOTICE` เหมือนกัน
+      อีกทั้งประโยคทั้งสองยาว 12 ตัวเท่ากัน ⇒ `SENT ... frame_bytes=66` ของสองคลิก **เหมือนกันทุกไบต์**
+      (`runtime.py` เป็นไฟล์ของ chief · คำขอเปลี่ยนชื่ออยู่ในจดหมาย `20260902_1341_LANE-A-TO-CHIEF-*`
+      · ไบต์ที่ผู้เล่นได้ถูกต้องทั้งสองปุ่มอยู่แล้ว ไม่ใช่บั๊กของไบต์) ·
+      **ผู้เทสคัดลอกบรรทัดดิบ ๆ ห้ามตีความ** · เลข `vitals=`/`trailing=` บอกสิ่งที่ไคลเอนต์ห่อมารอบคลิก
+      และ **ต่างจาก 4/85 ได้โดยชอบธรรมในเซสชันอื่น -- ให้คัดลอกเลขที่เห็นจริง ห้ามนับความต่างเป็น FAIL** ·
+      สิ่งที่ตัดเกรดมีแค่ โทเคน · `button=EXIT_GAME` · `subcode=1` · และช่อง `text=`
+      โทเคนอื่นที่อาจขึ้นแทน และความหมายของแต่ละตัว:
+      `LANE_A_UIA_STOOD_DOWN` (เลนนี้ไม่มีประโยคให้ปุ่มนั้น -- **รายงานทันที** เพราะกับ subcode 1
+      ตอนนี้ไม่ควรเป็นไปได้แล้ว) · `LANE_A_UIA_WITHDRAWN` (โมดูลถูกปิดสวิตช์) ·
+      `LANE_A_UIA_NOTICE_FAILED` (composer ปฏิเสธ -- เป็นบั๊กให้รายงาน ไม่ใช่ความผิดผู้เทส) ·
+      `LANE_A_LOGOUT_FRAME_UNCLASSIFIED verdict=<word>` (เฟรมถึงเลนแล้วถูกปฏิเสธ · คำนั้นคือคำตัดสิน
+      ของ classifier ตัวจริง) · `LANE_A_UIA_NOTICE_NOT_THIS_BOOT` (โหลด logout scenario มา = **บูตผิดใบ**
+      ให้รีบูตแบบไม่มีแฟล็ก) · และ `integrity_check` = `ok` · sha canonical ไม่เปลี่ยน · ไม่มี traceback หลุด
+      **ชั้นนี้ตอบไม่ได้เลยว่ามีอะไรถูกวาดบนจอ**
+    client-observable (ต้องมีคนนั่งหน้าจอ · **ห้ามอนุมานจากคอนโซล**): ภายใน 30 วินาทีหลังคลิก มนุษย์
+      **เห็น** บรรทัด `EXIT REFUSED` -- 12 ตัวอักษร ASCII สะกดตามนั้น -- ในพื้นที่แชท/ช่องพูดฝั่งเรา ·
+      เทียบ `S0` กับ `S2`/`S3`/`S4` ตามแบบของบ้านนี้ ·
+      🔴 บันทึก **สีป้ายชื่อทุกป้ายในเฟรม หนึ่งบรรทัดต่อหนึ่งป้ายต่อหนึ่งภาพ** สำหรับ `S0`-`S5`
+      (และ `S0b`-`S4b` ถ้าทำรอบสอง) เขียนคำว่า `none` ออกมาแทนการเว้นว่าง ·
+      อ่านสีจาก **ภาพนิ่งเต็มความละเอียดเท่านั้น** ห้าม contact sheet / ภาพย่อ / วิดีโอ ·
+      **จดสีอย่างเดียว ห้ามอนุมานสาเหตุ** (สิ่งที่ตัดสินสีป้ายยังไม่มีใครรู้ = ตัว `RE-067` ทั้งใบ) ·
+      ความต่างจากภาพเซิร์ฟเวอร์จริงลง `REAL_SERVER_DIVERGENCE.tsv` แถวละข้อ
+      **ชั้นนี้ตอบไม่ได้เลยว่าประกอบไบต์อะไร หรือ subcode ไหนมาถึง**
+- prediction (**นี่คือคำทำนาย ไม่ใช่ผลวัด** · ทำนายผิด = finding ไม่ใช่ความล้มเหลว):
+    P1 มีโทเคน **และ** เห็น `EXIT REFUSED` ใน ~2 วิ ⇒ ผ่านทั้งสองชั้น
+    P2 มีโทเคน แต่ 30 วินาทีแล้วไม่เห็นอะไร ⇒ ช่องนี้ไม่เรนเดอร์ขณะ dialog logout ถือ input/render state อยู่
+       -- เป็น finding จริงเรื่อง dialog **ไม่ใช่หลักฐานว่า composer ผิด** ⇒ เปิดใบ `RE-` เรื่อง render state
+       ของ dialog **ห้ามรันซ้ำมั่ว ๆ**
+    P3 ไม่มีโทเคนเลย ⇒ คลิกไม่ถึง call site นี้ · รัน RECHECK ใหม่และรายงานว่าบูต commit ไหน ⇒
+       ชั้นจอเป็น `NO-RESULT` ไม่ใช่ FAIL
+- nonclaims:
+  1. **ใบนี้ไม่ทำให้ผู้เล่นออกจากเกม** · `NOW.md` ข้อ UI-B ขอปุ่ม logout ที่ออกได้จริง (ไม่ใช่ปิดหน้าต่างด้วย X)
+     ใบนี้ตัดสิน **เฉพาะว่าบรรทัดปฏิเสธขึ้นจอไหม** เท่านั้น · `GT-033` วัดรูปแบบคำตอบทั้งสองแบบที่โปรเจกต์นี้มี
+     แล้วไคลเอนต์จริงยังอยู่แมพเดิม 50-77 วิ ตลอดสามรอบที่มีคนนั่งดู · `RE-189` พบว่าฟิลด์ที่เกต transition
+     ของไคลเอนต์ต้องใช้ ถูกเขียนโดย local UI binding เท่านั้น
+  2. ไม่ทดสอบปุ่ม UI-A (นั่นคือ `GT-205`) -- แต่ถ้าเธอกดทั้งสองปุ่มในเซสชันเดียว **ต้องขึ้นทั้งสองบรรทัด
+     และต้องคัดลอกทั้งสองบรรทัด**
+  3. ไม่แตะ `GT-194`: ใบนั้นบูต logout scenario ซึ่งใบนี้ **ประกอบอะไรไม่ได้เลยโดยโครงสร้าง**
+     (ตรึงไว้ด้วย `tests/test_world_logout_button_notice_wiring.py::...test_a_scenario_boot_composes_nothing_for_the_uib_click`)
+     ⇒ 🔴 **บูตใบนี้ด้วย logout scenario คือวิธีเดียวที่ทำให้ทั้งสองใบไร้ความหมายพร้อมกัน**
+  4. ไม่อ้างว่า 12 ตัวอักษรนั้นเรนเดอร์ **ขณะ dialog logout เปิดอยู่** -- นั่นคือสิ่งที่ยังไม่รู้ และเป็นเหตุผล
+     ที่ต้องจดว่าตอนเห็น dialog เปิดหรือปิด
+- links: `NOW.md` queue item UI-B · `COO-DECISION 20260902_1145` ·
+  `notes_to_chief/20260902_1341_LANE-A-ASK-COO-uib-notice-wording.md` · `GT-205` · `GT-194` · `GT-033` ·
+  `RE-189` · `RE-210` (เปิดรอบเดียวกัน: vital `0x1EB4` คืออะไร) ·
+  `FINDINGS_A_1d6rta_UI_B_LOGOUT_BUTTON_FRAME_EVIDENCE.md` (ไบต์จับสด 119 ไบต์ เทียบกับ pin) ·
+  `notes_to_chief/consumed/20260901_1930_KA1A-CAPTURE-*.md` (ที่มาของไบต์) ·
+  `rounds/A_20260902_1341_1d6rta_uib-exit-button-answers-on-screen.md` ·
+  `src/pirateforce_foundation/world_logout_button_notice.py` · `src/pirateforce_foundation/gm/say_wire.py`
+- result: (ผู้เทสกรอกตาม G-OBS: PASS/FAIL/BLOCKED/NO-RESULT · ภาพ `S0`-`S5` (+ `S0b`-`S4b` ถ้ามีรอบสอง) ·
+  บรรทัดคอนโซลดิบทุกบรรทัด · บรรทัดสีป้ายครบทุกป้ายทุกภาพ · dialog เปิด/ปิดตอนเห็น · sha256 ทั้งสี่ค่า ·
+  branch/commit ที่บูต · timestamp +07:00 · `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
+
+**ผู้เปิดใบ: LANE-A (WORLD) รอบ `1d6rta` 2026-09-02T13:4x+07:00 -- LANE-A บริโภคผลใบนี้เอง**
