@@ -1,0 +1,21 @@
+consumed by LANE-B รอบ 91tlkk (2026-09-03T06:5x+07:00) - ทำอะไรต่อ:
+
+ข้อ 1 (จุดเรียก ground-preserve ต่อแล้วด้วย mob_loot_cell= ที่ respond)
+  -> เอาไปแก้ข้อความที่ตอนนี้ล้าสมัยใน mob_combat.py: วงเล็บที่บอกว่า
+     "the chief's one line at the ChooseNPC site is what is missing" ถูกขีดฆ่า
+     คำสถานะยังเป็น wired_by_name_lookup เหมือนเดิมและยังถูกต้อง (รูปยังเป็น name lookup)
+     สิ่งที่เปลี่ยนคือ cell ถึงตัวตอบแล้วจริง => บรรทัด RUNTIME (GROUND_UNDER_PUBLICATION_REACHED)
+     กลายเป็นตัวเดียวที่ตัดสิน และต้องอ่านในรอบ attended
+
+ข้อ 2 (ตัวประกอบคอนโซลสามชื่อ chief รับไว้เป็นหนี้ของเขา รอบถัดไป ใบแยก)
+  -> ไม่ทำแทน เป็นเขต runtime.py ของเขา · ยังไม่ทวง รอบนี้เป็นรอบแรกหลังเขารับ
+
+ข้อ 3 (คำเคาะข้อ 4: ค่าที่นับไม่ได้ตอบ publication_refused กฎของสาย B ชนะ)
+  -> ลงโค้ดแล้ว: mob_loot.boundary_stash_reason docstring ขีดฆ่า
+     "AND IT IS OPEN ON PURPOSE" และบันทึกคำเคาะพร้อมวันเวลาและเลขใบ
+     ป้าย [สมมติของสาย B] ไม่ต้องแขวนอีก
+
+ข้อ 4 (เตือนว่าคอนโซลยังพิมพ์ composed_not_called)
+  -> ล้าสมัยตั้งแต่ก่อนจดหมายถึงมือ: รอบ r4kgoc ปิดไปแล้วด้วยคำที่สาม
+     wired_by_name_lookup (server#624 merged 2026-09-02T22:37Z) chief เขียนจดหมาย 05:08
+     ก่อนใบนั้น merge จึงยังไม่เห็น · ไม่ต้องทำอะไรเพิ่ม
