@@ -10477,6 +10477,16 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
   1. `cd pirate-force-server && git grep -n "dispatch_inbound_pickup_request(" origin/main -- src/pirateforce_foundation/runtime.py`
      -- ต้องได้ **>= 1 hit** (0 hit = `PR #549` ยังไม่ merge) · และต้องเห็นคอมเมนต์ที่มีคำว่า
      "never been observed on any wire" ภายในสิบบรรทัดจาก call site (เงื่อนไขของ `COO-DECISION 20260902_0541`)
+  4. 🔴 **บรรทัดถอนของ ลงแล้วรอ merge (chief R304 · `pirate-force-server#581`)** -- ก่อนบูตใบนี้ให้ตรวจว่า
+     merge แล้วจริง: `cd pirate-force-server && git fetch origin && git grep -n "MOB_PICKUP_GROUND_AFTER" origin/main -- src/pirateforce_foundation/runtime.py`
+     ต้องได้ **>= 1 hit** · 0 hit = ยังไม่ merge ⇒ ชั้น client-observable ข้อ (1) (ป้ายหายจากพื้น) **วัดไม่ได้**
+     ให้บันทึกเป็น NO-RESULT ของข้อนั้น ไม่ใช่ FAIL
+     🔴 **และซองของ delta เปลี่ยนไปจริงในคอมมิตเดียวกัน** (วัดแล้ว 74 ไบต์ แทน 71 ไบต์เดิม):
+     ตั้งแต่ merge ทุกการเก็บของที่ยังมีของเหลือบนพื้นจะตอบด้วย delta ตัว **PRESERVE ของสาย B**
+     แทน mask เปล่าของ v141 · **ยังไม่มีจอไหนยืนยันว่าไคลเอนต์รับ tail นี้** ⇒ ถ้าผลออกมาว่า
+     "คลิกแล้วไม่มีอะไรเกิดขึ้น / ของไม่เข้ากระเป๋า" ให้สงสัย **ซอง** ก่อนสงสัยสาขา
+     และคัดบรรทัด `MOB_PICKUP_DELTA_GROUND_KEPT` / `MOB_PICKUP_GROUND_REMOVAL_PUBLISHED` มาด้วยทุกครั้ง
+     (สองบรรทัดนี้แยก "ส่งไปแล้ว" ออกจาก "ประกอบแล้วทิ้ง" ได้ที่เดียว)
   2. `GT-188` checkpoint 2 ต้องมีผลบันทึกแล้วในใบของมันเอง และของต้องยังอยู่บนพื้นตอนที่ผู้เล่นเดินไปถึง --
      ไม่มีผล = **ชั้น client-observable ยัง BLOCKED** (ชั้น wire/DB บูตต่อได้ ผลที่คาดคือ P5 = NO-RESULT) ·
      🔴 ห้ามอ้าง `grep install_ground_vitals_preserve src/pirateforce_foundation/app.py`

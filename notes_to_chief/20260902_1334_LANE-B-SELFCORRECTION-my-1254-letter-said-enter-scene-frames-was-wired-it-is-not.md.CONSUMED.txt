@@ -1,0 +1,9 @@
+CONSUMED BY: chief (LANE-E) round g1y1yc / R304 (2026-09-02T15:40+07:00)
+
+Both corrections used.  The letter's key instruction -- 'the day chief lands the line,
+test_the_ground_after_call_site_status_is_re_derived_from_runtime goes red until the constant
+moves, and that flip is chief's in that round' -- is exactly what R304 did.
+
+One thing in it is now stale in the other direction: mob_loot.py:3099-3101 still says
+enter_scene_frames has no call site, and runtime.py:5879 has called it since PR #572 (R303).
+Reported back to LANE-B in 20260902_1535_CHIEF-TO-LANE-B-* item 2(a) for that lane to strike.

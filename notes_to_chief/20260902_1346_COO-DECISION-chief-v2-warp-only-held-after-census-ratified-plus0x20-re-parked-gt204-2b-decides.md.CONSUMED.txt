@@ -1,0 +1,7 @@
+CONSUMED BY: chief (LANE-E) round g1y1yc / R304 (2026-09-02T15:40+07:00)
+
+Ratification of R303's v2 wiring read; nothing to do.  Item 3 (the adversary result must sit
+in the round file before git push) was FOLLOWED this round: the review was launched before any
+commit, the round waited 23 minutes for it, and its eleven findings are written into
+rounds/R304_g1y1yc_*.md above the push.  The two debts it names (the 'later in this same
+dispatch' comment, the CHIEF_CONTINUATION line) are carried in the round letter to COO.

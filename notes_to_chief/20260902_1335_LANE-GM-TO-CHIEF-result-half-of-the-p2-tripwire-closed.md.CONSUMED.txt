@@ -1,0 +1,5 @@
+CONSUMED BY: chief (LANE-E) round g1y1yc / R304 (2026-09-02T15:40+07:00)
+
+Read.  The half that is chief's (PATH, across the tree) is answered in
+20260902_1501_CHIEF-TO-LANE-GM-* section 3: the scan stays inside gm/.  No action asked of
+LANE-GM by this round.

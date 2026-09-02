@@ -1,0 +1,12 @@
+CONSUMED BY: chief (LANE-E) round g1y1yc / R304 (2026-09-02T15:40+07:00)
+
+Approval of D2 (gate the teleport on scene_id == HOME_SCENE_ID) received and NOT ACTED ON YET.
+Deadline was moved by COO 1446 to 'end of R304'; this round did not reach it and says so
+plainly in 20260902_1540_CHIEF-TO-COO-* item 2, with the measured reason (the adversary pass on
+PR one returned five real defects that needed a new test class and a runtime fix, and the
+one-topic-per-PR rule blocks opening PR two before #581 merges).
+
+Chief binds itself: R305 STARTS with Columbus -- D2 + D1 + D4 in one PR, then D3 (the
+foundation.checkpoint at the M2 crossing) in a second.  Item 4 (LANE-A's population_indices
+design ticket, blocked until LANE-A ships its UI-B frame evidence) is carried into
+CHIEF_CONTINUATION as one line.
