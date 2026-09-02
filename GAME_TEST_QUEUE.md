@@ -11537,3 +11537,100 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
   `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
 
 **ผู้เปิดใบ: chief รอบ `7uxscs` (R308) -- chief บริโภคผลใบนี้เอง**
+
+## GT-216 ATLANTIS-OCEAN-PANEL-CENSUS-ON-A-GM-SINGLE-USE-ENTRY-001  [BLOCKED -- รอ merge ของรอบ `4uztfj` · โค้ดสำมะโน `Bg3001` ยังไม่ขึ้น `main` · ตัวบล็อกเดียวคือ merge · RECHECK ผ่านครบสามข้อ = เลื่อนเป็น `READY` ได้เองโดยไม่ต้องรอเจ้าของใบ]
+
+> เปิดโดย LANE-A (WORLD) รอบ `4uztfj` 2026-09-02T20:0x+07:00 · **LANE-A บริโภคผลใบนี้เอง**
+> numbering: ตัวนับ **ชุดเดียวร่วมกับ `CLIENT_RE_QUEUE.md`** · วัดตอนเปิด: `GT` สูงสุด = `215`, `RE` สูงสุด = `210` ⇒ ใบนี้ `216` · 🔴 **รันคำสั่งกฎ ② หัวไฟล์นี้ซ้ำตอน rebase** ชนเมื่อไหร่ = คนที่ push ทีหลังขยับเลขตัวเองแล้วจดเหตุผลไว้ในใบ
+> 🔴 **ใบนี้ไม่แซงคิวบูตที่ chief ปักไว้ (`FROM_CHIEF_R305`)**: `GT-207` -> `GT-193` -> `GT-205` -> `GT-204` (ท้ายสุด) · ใบนี้ต่อ **หลัง** สี่ใบนั้น
+> บูต/DB/teardown ตาม `BRIDGE_BOOT_PROCEDURE.md` + `ATTENDED_SESSION_RUNBOOK.md` · **รัน teardown เสมอ** แม้รอบจบเพราะเลิกเล่นเฉย ๆ (เทมเพลตปฏิเสธ boot stamp เก่ากว่า 420 นาที)
+
+- objective: ข้อพิสูจน์เดียว -- **ฉาก 126 (`Bg3001` "Atlantis" · `n_SCENE_TYPE 8` = OCEAN PANEL) ถูกส่งถึงไคลเอนต์เป็นครั้งแรกของโปรเจกต์ และมีมนุษย์นั่งดูว่าไคลเอนต์วาดอะไรออกมา**
+  รอบ `4uztfj` ต่อสายสำมะโนให้ฉากนี้: ขาเข้าเซิร์ฟเวอร์ประกอบ **36 actor จาก 38 placement ดั้งเดิมของฉาก** --
+  เกาะสี่ก้อนที่เป็น actor (`MAP_ISLAND_01`: "Mad Sand Island", "Pirate Lair", "Blood Blade Island", "Lonely Island") ·
+  เรือสิบลำ ("Intrepid", "Santa Maria", "Skull Phantom", "Merchant Ship", "Merchant marine Trade Ship" x3, "Pirate Ship" x4, "Repair ship") ·
+  "Jellyfish King" (lv 60) · "Sea Monster Fish" · และ **มาร์กเกอร์อากาศแบบ INVISIBLE ห้าชนิด** (ชื่อ "Tornado" สี่ตัว + มาร์กเกอร์ไม่มีชื่อ lv 110 อีกหกจุดวาง)
+  🔴 **ไม่เคยมีใครเห็นว่าไคลเอนต์วาด `MAP_ISLAND_01` เป็นอะไร หรือวาด actor INVISIBLE ที่มีป้ายชื่ออย่างไร** ⇒ ใบนี้ซื้อ "ตาแรก" ล้วน ๆ
+
+- RECHECK (ตัดสินด้วย **เนื้อโค้ดบน `origin/main`** ห้ามเทียบเลข commit · รันจาก cwd ที่กำหนดในบรรทัดเอง · ผ่านครบสามข้อ = เลื่อนเป็น `READY` ได้เองโดยไม่ต้องรอเจ้าของใบ):
+  ```
+  (cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/world_population_bg3001.py | findstr /C:"WORLD_CENSUS_BG3001")
+  (cd pirate-force-server && git show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_scene_census.py | findstr /C:"scene_is_sanctioned_for_a_gm_entry")
+  (cd pirate-force-server && py -3 -m pytest tests/test_world_population_bg3001.py tests/test_world_bg3001_identity.py tests/test_lane_a_scene_census.py -q)
+  ```
+  ข้อ 1-2 ต้องเจอสตริงจริงทั้งสอง · ข้อ 3 ต้องเขียวทั้งชุด · ว่าง/แดง = ยังไม่ merge ⇒ คง `[BLOCKED]` **ห้ามบูต ไม่เสียเวลาผู้เทสแม้แต่นาทีเดียว**
+  🔴 **ห้าม grep สิ่งที่คอนโซลพิมพ์ผ่าน f-string** (`assembled=`, `hp=`) -- สตริงพวกนั้น **ไม่มีอยู่ในไฟล์** · กับดักนี้ทำให้รอบ `cu1il6` ต้องเขียนใบใหม่ทั้งใบ
+  ทดสอบก่อน merge ได้ ถ้าเปลี่ยน `origin/main` เป็น branch ของรอบ `4uztfj` แล้ว **เขียนในผลว่าใช้ branch/commit ไหน**
+
+- เส้นทางเข้า (วัดรอบนี้ · 🔴 **มีทางเดียวเท่านั้น ห้ามคิดทางใหม่**):
+  ประตูล็อกอินปกติของฉาก 126 **ปิดอยู่** (`login_entry_allowed: false`) และ **รอบนี้ไม่ได้แตะมัน** ·
+  🔴 **ผู้เทสห้ามพลิกสวิตช์นี้เด็ดขาด** -- `COO-DECISION 20260829_1444` บังคับว่าต้องมีผลใบ attended ใบนี้ก่อนจึงจะพิจารณาพลิกได้ · จุดทั้งหมดของใบคือ "ทางเข้าเดียวคือ grant ของ GM"
+  GM เข้าได้ด้วย single-use grant `CORE-REQUEST-GM-038` ที่ลงมาเพื่อ scene id นี้โดยเฉพาะ:
+  (1) ล็อกอินด้วยบัญชี GM ที่อยู่ใน `config/gm_accounts.json`
+  (2) พิมพ์ `/warp 126` ในแชท · ฉาก 126 **ไม่มี marker ปลายทางในไฟล์ฉาก** (`n_MARKER = 0`) ⇒ `/warp` **ไม่วาปสด** แต่ **สเตจการล็อกอินครั้งถัดไป** · คอนโซลต้องตอบเป็นข้อความ staged-login ไม่ใช่ teleport
+  (3) **ล็อกเอาต์แล้วล็อกอินกลับด้วยตัวละครเดิม** ⇒ ลงที่ spawn ที่ registry ปักไว้ `(3050, 232, 90)` = `CONSTDATA_TH__MARKER` แถว 17 (`CHIEF-DECISION 20260829_1603` ข้อ 1)
+  วัดรอบนี้: `single_use_stageable_scene_ids()` = `(1,2,3,4,5,6,7,8,9,10,11,14,126,130,278,997)` · `126` **ไม่อยู่** ใน `stageable_scene_ids()` ปกติ · `sanctioned_barred_blocker(126)` = `login_path_bars_it_needs_core_request_gm_038`
+
+- db: canonical = `state\pirateforce.sqlite3` -- 🔴 **สำเนาเท่านั้น ห้ามเปิดไฟล์ canonical** ⇒ คัดลอกเป็น `state\run_gt216_<yyyyMMdd_HHmmss>.sqlite3` แล้วบูตทับสำเนา
+  จด sha256 ของสำเนาก่อน/หลัง · จด sha256 ของ canonical ก่อน/หลัง และยืนยันว่า **ไม่เปลี่ยน** · `PRAGMA integrity_check` = `ok` **ทั้งสองครั้ง** · **รัน teardown เสมอ**
+  (รอบคัดลอก DB ⇒ ตำแหน่งตัวละครกลับไป spawn ทุกบูต เป็นเรื่องปกติ ไม่ใช่ผลวัด)
+
+- server args: บูตมาตรฐาน · 🔴 **ไม่มีแฟล็ก scenario ใด ๆ** · `-SecondPasswordMode bypass` · บัญชี GM ใน `config/gm_accounts.json`
+  🔴 เก็บคอนโซล **รวม stdout+stderr (`2>&1`)** -- โทเคนของเลนนี้ออกทาง **stderr** ล้วน เก็บแต่ stdout จะไม่เห็นอะไรเลย
+  ```
+  py -3 -u -m pirateforce_foundation.app --db state\run_gt216_<stamp>.sqlite3 2>&1
+  ```
+
+- steps: (เซิร์ฟเวอร์ก่อน ไคลเอนต์ทีหลัง เสมอ · ~15 นาทีบนจอ)
+  1. RECHECK ผ่านก่อน · `LOCK_GAME` · จด boot stamp · sha canonical · คัดลอก DB เป็น run copy
+  2. บูตเซิร์ฟเวอร์ **ใหม่สด** ก่อน แล้วค่อยบูตไคลเอนต์ (เคยฆ่าไคลเอนต์ = เซิร์ฟเวอร์ยังถือเซสชัน ตัวถัดไปค้าง "connecting" ตลอดกาล ⇒ **รีสตาร์ตเซิร์ฟเวอร์ก่อนเสมอ**) · ห้ามเปิดไคลเอนต์ทิ้งโดยไม่มีเซิร์ฟเวอร์ (ตายเองใน ~3.5 นาที)
+  3. ล็อกอิน GM เข้าฉากบ้านให้เห็นตัวจริงก่อน · ภาพนิ่ง `S00-HOME` เต็มความละเอียด
+  4. คลิกช่องแชท **ยืนยันว่า focus จริง** (พิมพ์ตอนไม่ focus = ตัวอักษรกลายเป็นฮอตคีย์) · พิมพ์ `/warp 126` · Enter · รอ ~3 วิ
+     (`/warp` เป็นคำสั่ง GM **ไม่ใช่** ตัวยิงแชทที่ต้องยาว **12 ตัวอักษร ASCII พอดี** ของใบอื่น -- **ห้ามเติมตัวอักษรให้ครบ 12**)
+  5. คัดบรรทัดคอนโซลดิบที่ตอบกลับ · **คาดว่าเป็นข้อความสเตจล็อกอิน ไม่ใช่การวาป** ⇒ **จอไม่เปลี่ยนฉาก = ผลที่คาดไว้ ไม่ใช่ FAIL**
+  6. **ล็อกเอาต์ แล้วล็อกอินกลับด้วยตัวละครเดิม** · รอโหลดจนจบ
+  7. ภาพนิ่ง `S126-A` ทันทีที่โหลดเสร็จ **ยังไม่กดอะไรเลย** · จัดมุมมองด้วย **คลิกขวาลาก** เท่านั้น (หมุน **กล้องอย่างเดียว** facing ของตัวละครไม่ขยับ ไม่มีไบต์ออกสาย ปลอดภัยทุกจังหวะ) แล้วเก็บ `S126-B` `S126-C` ให้ครบรอบทิศ
+  8. **เดินหนึ่งก้าว** (`W` หรือ `S`) -- จำเป็น เพราะตัวตอบคลิกอ่าน `last_target_pos` ซึ่งยังเป็น `None` ก่อนก้าวแรก
+  9. **คลิกซ้ายหนึ่งครั้ง** บน actor ที่มองเห็น โดยมีตัวอื่นในเฟรม · `S126-CLICK1` ภายใน ~3 วิ · ทำซ้ำอีกสองตัวถ้ามี (`S126-CLICK2` `S126-CLICK3`)
+     🔴 **คลิกเพื่อเลือกเท่านั้น** ห้ามตี ห้ามใช้สกิล (`NOW.md` ห้ามใบตีมอนจนกว่า P-1/P-2 ปิด) · มี "Jellyfish King" ในฉาก ⇒ **เดินหนีอย่างเดียว**
+  10. ตัวเช็ค NO-CRASH: **คลิกขวาลากหมุนกล้อง** เท่านั้น · 🔴 **ห้ามใช้ `Q`/`E` เป็นตัวเช็คนี้** (มันหมุน **ตัวละคร** และยิง `TargetPosVital` ออกสาย เช่นเดียวกับ `W/A/S/D`) · ออกด้วยปุ่ม X
+  11. ปิดเซิร์ฟเวอร์ · เก็บ `.out`/`.err` + `capture_v141\GAME_LIVE.txt` + `GAME_EVENTS_LIVE.txt` + sha256 ทุกไฟล์ · `integrity_check` · sha canonical ซ้ำ · **รัน teardown เสมอ**
+  🔴 **STOP:** มีหน้าต่างบทสนทนา/เควสต์โผล่ หรือรู้ตัวว่าอยู่คนละฉากหลังคลิก ⇒ หยุดทั้งใบทันที ปิดไคลเอนต์ รายงานทันที
+
+- pass criteria (สองชั้น · 🔴 **ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้นเด็ดขาด**):
+    wire/DB (headless พิสูจน์ได้ ไม่ต้องมีตาคน · grep จากคอนโซลที่รวม `2>&1`):
+      (ก) มี `WORLD_POP_HANDOFF scene=126 ...` แล้วตามด้วยบรรทัดเดียวนี้:
+          `WORLD_CENSUS_BG3001 assembled=36/38 shippable=36 wire=36 bodies=ok pc=6377B frame=6390B anchor=(3050.000,232.000,90.000) reapply_ms=3000 source=bg3001_full_roster shortfall=identity_unresolved=2 unresolved=2`
+      (ข) ตามด้วยบรรทัด `n_ID=... <name> lv.. hp.. @(x,y,z)` **ครบ 36 บรรทัด** (หนึ่งบรรทัดต่อหนึ่ง actor)
+      (ค) มี `BG3001_UNSHIPPED` **สองบรรทัดพอดี**:
+          `BG3001_UNSHIPPED placement=28 set=16 cline_row=60415 leader_n_id=0 reason=CLINE_row_carries_leader_0,_no_CONSTDATA_MOBS_row`
+          `BG3001_UNSHIPPED placement=37 set=56 cline_row=60455 leader_n_id=8180 reason=MOBS_TIP_name_is_Thai,_not_ASCII;_this_lane_ships_an_ASCII_evidence_layer`
+      (ง) คลิกที่ได้คำตอบ: `LANE_A_CHOOSE_NPC_SCENE126_ANSWERED ...` + label `LANE_A_CHOOSE_NPC_SCENE126_FACE_P<n>` · **คลิกแรกก่อนก้าวเดินถูกปฏิเสธโดยตั้งใจ** ด้วย `no_player_position_walk_one_step` (ทรงเดียวกับที่ `GT-214` จดไว้ของฉาก 2) ⇒ **ไม่ใช่ FAIL**
+      (จ) `integrity_check` = `ok` ทั้งสองครั้ง · sha canonical ไม่เปลี่ยน · ไม่มี traceback หลุด
+      🔴 **`pc=` และ `frame=` มาจากบิลด์ของรอบ `4uztfj` ที่ anchor นี้ · anchor ต่างไปแล้วสองเลขนี้เปลี่ยนได้อย่างชอบธรรม ⇒ ผู้เทส "คัดตามที่เห็น" ห้ามใช้สองเลขนี้ตัดสินผ่าน/ตก**
+      🔴 **ชั้นนี้ตอบไม่ได้เลยว่ามีอะไรถูกวาดบนจอ**
+    client-observable (🔴 **ต้องมีคนนั่งหน้าจอ ห้ามอนุมานจากคอนโซล · ชั้นนี้เท่านั้นที่ตัดสินใบ**):
+      (ฉ) หลัง relog: **มี actor ถูกวาดบนจอไหม และกี่ตัว** -- นับจาก `S126-A/B/C` แล้วเขียนเลขที่นับได้ตรง ๆ
+      (ช) ก้อนที่ควรเป็น **เกาะ** (`MAP_ISLAND_01` สี่ก้อน) วาดออกมาเป็นอะไร -- บรรยายตามที่เห็น (ก้อนเกาะ / กล่อง / โมเดลผิด / ไม่มีอะไรเลย) **ห้ามเดาสาเหตุ**
+      (ซ) **[คำทำนาย ไม่ใช่ผลวัด]** มาร์กเกอร์ "Tornado" สี่ตัว **ไม่ถูกวาดเป็นตัว** เพราะ outfit เป็น INVISIBLE · แต่ **ป้ายชื่อจะขึ้นหรือไม่ ยังไม่มีใครรู้** ⇒ จดว่าเห็นป้ายลอยไหม กี่ป้าย · ทำนายผิด = finding ไม่ใช่ความล้มเหลว
+      (ฌ) 🔴 **สีป้ายชื่อทุกป้ายในเฟรม หนึ่งบรรทัดต่อหนึ่งป้ายต่อหนึ่งภาพ ทุกภาพ** · เขียนคำว่า `none` ออกมาแทนการเว้นว่าง · อ่านสีจาก **ภาพนิ่งเต็มความละเอียดเท่านั้น** (ห้าม contact sheet / ภาพย่อ / วิดีโอ) · **จดสีอย่างเดียว ห้ามอนุมานสาเหตุของสี** (`RE-067` เป็นเจ้าของคำถามนั้น) · ความต่างจากภาพเซิร์ฟเวอร์จริงลง `REAL_SERVER_DIVERGENCE.tsv` แถวละข้อ
+      🔴 **ชั้นนี้ตอบไม่ได้ว่าเฟรมใดออกจากเซิร์ฟเวอร์**
+    🔴 ปิดใบด้วย `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>` เท่านั้น (G-OBS) · หลักฐานครบแต่ยังไม่มีลายเซ็นคน = `AWAITING-OBSERVER` ซึ่ง **ไม่ใช่ PASS และไม่ใช่ FAIL**
+
+- ที่รู้อยู่แล้วและ **ไม่ใช่ FAIL**: ฉากนี้ **ไม่มีเฟรม `PLAYER_FACTION`** เพราะ `n_SAVE = 0` · เห็นแล้วอย่าตกใจ อย่าเปิดใบซ้ำ ให้จดไว้เฉย ๆ
+- 🔴 **ผลลบมีค่าเท่าผลบวก:** ถ้า **ไม่มีอะไรถูกวาดเลย** ทั้งที่คอนโซลบอก `wire=36` ⇒ คำตอบคือ **finding เรื่องฉากประเภท ocean panel** (ไคลเอนต์กับ `n_SCENE_TYPE 8`) **ไม่ใช่หลักฐานว่าตัวประกอบสำมะโนผิด** และ **ห้ามใช้เป็นเหตุถอน `production_allowed`** ⇒ เปิดใบ `RE-` ใหม่พร้อมภาพและเลข `wire=` ดิบ ๆ · วาดครบแต่ผิดรูป = finding อีกแบบ redirect ไปที่ไฟล์ฉาก ไม่ใช่ที่สำมะโน
+
+- nonclaims:
+  1. ไม่พิสูจน์ว่าฉาก 126 ควรเปิดประตูล็อกอินปกติ · ใบนี้ **ไม่พลิก** `login_entry_allowed` และผลของใบนี้ไม่ใช่ใบอนุญาตให้ใครพลิกเอง
+  2. ไม่พิสูจน์ว่า 36 ตัวตรงกับต้นฉบับ · ไม่พิสูจน์ระบบ identity ของสอง placement ที่ตกไป (28 และ 37)
+  3. ไม่พิสูจน์กลไก `/warp` เอง (`GT-182`/`GT-192`) · ไม่พิสูจน์เส้นทางสเตจล็อกอินของฉากอื่นในลิสต์ single-use
+  4. ไม่ตัดสินความหมายของสีป้ายชื่อ (`RE-067`) · ไม่แตะคอมแบต/ดรอป/HP · ไม่พิสูจน์อะไรที่รอดข้าม relog (บูตบนสำเนา)
+  5. ไม่แซงลำดับบูตของ `FROM_CHIEF_R305` · ไม่ตัดสินฉาก 2 (`GT-214`) ฉาก 130 / 278 / 997
+
+- links: `src/pirateforce_foundation/world_population_bg3001.py` · `lane_hooks/lane_a_scene_census.py` · `gm/login_scene_stage.py` · `gm/login_scene_admission.py` ·
+  `CORE-REQUEST-GM-038` · `COO-DECISION 20260829_1444` · `CHIEF-DECISION 20260829_1603` · `GT-214` · `GT-192` · `RE-067`
+- result: (ผู้เทสกรอก: PASS/FAIL/NO-RESULT · branch/commit ที่บูต · ภาพ `S00-HOME`/`S126-A`/`S126-B`/`S126-C`/`S126-CLICK1..3` ·
+  บรรทัดคอนโซลดิบทุกโทเคนข้างบน (`WORLD_POP_HANDOFF` · `WORLD_CENSUS_BG3001` · 36 บรรทัด actor · `BG3001_UNSHIPPED` สองบรรทัด · คลิกทุกครั้ง) ·
+  จำนวน actor ที่ **นับจากจอ** · บรรทัดสีป้ายครบทุกป้ายทุกภาพ · sha256 ทั้งสี่ค่า · `integrity_check` · NO-CRASH/CRASH · timestamp +07:00 · `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
+
+**ผู้เปิดใบ: LANE-A (WORLD) รอบ `4uztfj` 2026-09-02T20:0x+07:00 -- LANE-A บริโภคผลใบนี้เอง**
