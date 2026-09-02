@@ -1312,6 +1312,125 @@ if ($DryRun -or $SelfCheck -or $NoServer) {
 }
 
 # ---------------------------------------------------------------------------
+# [5e] stale flag release.  Panya ruled 2026-09-02 ~13:3x, after saying plainly
+#      that she turns this machine off and sometimes leaves it off a long time.
+#
+#      THE FAILURE THIS PREVENTS.  A flag is taken by a job or by the attended
+#      tester and released at the end of that work.  If the machine dies in the
+#      middle - power off, sleep, a killed console - the flag stays HELD with
+#      nobody behind it.  On the next boot every sync round reads it and backs
+#      out: step [1] skips the whole round on LOCK_GIT, step [5] refuses to
+#      touch the server repository on LOCK_GAME.  Nothing recovers on its own,
+#      because the only thing that could clear the flag is the round that died.
+#      That is the same shape as the three deadlocks already found on
+#      2026-09-01/02 (NOW.md, the half-finished fast-forward, the dirty
+#      worktree): a guard that closes its own only exit.
+#
+#      THE TWO FLAGS ARE NOT TREATED THE SAME, ON PURPOSE.
+#      * LOCK_GIT guards the git index.  Re-taking it costs nothing and a stale
+#        one blocks every round, so age alone is enough to release it.
+#      * LOCK_GAME guards a LIVE test round: a running server, an open game
+#        window, the canonical database.  Releasing that one while a round is
+#        genuinely alive would let the code change under the tester's feet -
+#        the exact promise the flag exists to make.  So age is NOT enough:
+#        the game client must be gone AND nothing may be listening on the
+#        server ports.  If either is still there this step SHOUTS and leaves
+#        the flag exactly where it is.
+#
+#      It writes one letter per release so the change is never silent, and it
+#      never touches a flag younger than FLAG_STALE_HOURS.
+# ---------------------------------------------------------------------------
+
+$FLAG_STALE_HOURS = 3
+$GAME_PORTS       = @(10188, 10189)
+
+function FlagHeldSince([string]$path) {
+    $l = FlagFirstLine $path
+    if ($l -notmatch '^HELD:\s*(.+)$') { return $null }
+    $raw = $Matches[1].Trim()
+    try { return [DateTime]::Parse($raw, [Globalization.CultureInfo]::InvariantCulture) } catch { return $null }
+}
+
+function ReleaseFlag([string]$path, [string]$name, [int]$ageHours, [string]$why) {
+    $stamp = (Get-Date).ToString('yyyy-MM-ddTHH:mm:sszzz', [Globalization.CultureInfo]::InvariantCulture)
+    $old = @()
+    try { $old = @(Get-Content -LiteralPath $path -ErrorAction Stop) } catch { }
+    $new = @()
+    $new += ('RELEASED: ' + $stamp)
+    $new += 'BY: pf_git_sync.ps1 step [5e] - stale flag release, no human was behind this flag'
+    $new += ('done: the flag had been HELD for about ' + $ageHours + ' hours. ' + $why)
+    $new += 'note: this script released the flag only. It did not finish, undo or judge whatever work the dead holder was doing.'
+    $new += ''
+    $new += '----- previous flag history -----'
+    foreach ($o in $old) { $new += ([string]$o) }
+    try { WriteAsciiFile $path $new } catch { return $false }
+    $lines = @()
+    $lines += 'ADDRESSEE: chief'
+    $lines += ''
+    $lines += ('# ' + $name + ' was released automatically after ' + $ageHours + ' hours')
+    $lines += ''
+    $lines += ('written by pf_git_sync.ps1 step [5e] at ' + (Stamp) + ' (machine local time)')
+    $lines += ''
+    $lines += ('    flag  : ' + $name)
+    $lines += ('    held  : about ' + $ageHours + ' hours, past the ' + $FLAG_STALE_HOURS + '-hour bound')
+    $lines += ('    check : ' + $why)
+    $lines += ''
+    $lines += '## why this happened'
+    $lines += ''
+    $lines += '    The holder of this flag never released it.  The usual cause is that this'
+    $lines += '    machine was switched off, slept, or had its console killed in the middle'
+    $lines += '    of the work.  A flag left HELD stops every later sync round, and nothing'
+    $lines += '    can clear it except the round that died, so it would have stayed stuck.'
+    $lines += ''
+    $lines += '## what this step did NOT do'
+    $lines += ''
+    $lines += '    It released the flag and nothing else.  Whatever the dead holder was in'
+    $lines += '    the middle of is still exactly where it was left - no commit, no merge,'
+    $lines += '    no cleanup, no judgement.  Someone should look at what that work was.'
+    try {
+        $ln = (Get-Date -Format 'yyyyMMdd_HHmm') + '_SYNC-NOTICE-' + ($name -replace '\.txt$','') + '-released-after-' + $ageHours + 'h.md'
+        WriteAsciiFile (Join-Path $notesDir $ln) $lines
+    } catch { }
+    return $true
+}
+
+if ($DryRun -or $SelfCheck) {
+    Log '[5e]' 'stale flag check skipped in this mode'
+} else {
+    foreach ($fp in @(@($lockGitPath, 'LOCK_GIT.txt'), @($lockGamePath, 'LOCK_GAME.txt'))) {
+        $path = $fp[0]; $name = $fp[1]
+        if (-not (FlagIsHeld $path)) { continue }
+        $since = FlagHeldSince $path
+        if ($null -eq $since) { Shout '[5e]' ($name + ' is HELD but its timestamp cannot be read - leaving it alone for a human'); continue }
+        $ageH = [int]((Get-Date) - $since).TotalHours
+        if ($ageH -lt $FLAG_STALE_HOURS) { Log '[5e]' ($name + ' held ' + $ageH + 'h - young enough, left alone'); continue }
+        if ($name -eq 'LOCK_GIT.txt') {
+            if (ReleaseFlag $path $name $ageH 'LOCK_GIT guards the git index only; re-taking it is free.') {
+                Shout '[5e]' ('released stale ' + $name + ' after ' + $ageH + 'h and wrote a letter')
+            } else {
+                Shout '[5e]' ('could not release stale ' + $name)
+            }
+            continue
+        }
+        $clients = @()
+        try { $clients = @(Get-Process -Name 'GameClient*' -ErrorAction SilentlyContinue) } catch { }
+        $listening = 0
+        foreach ($prt in $GAME_PORTS) {
+            try { $listening += @(Get-NetTCPConnection -State Listen -LocalPort $prt -ErrorAction SilentlyContinue).Count } catch { }
+        }
+        if ($clients.Count -gt 0 -or $listening -gt 0) {
+            Shout '[5e]' ($name + ' held ' + $ageH + 'h BUT a round looks alive - GameClient=' + $clients.Count + ' listeners=' + $listening + ' - NOT touching it')
+            continue
+        }
+        if (ReleaseFlag $path $name $ageH 'no GameClient process and nothing listening on the server ports, so no live round was behind it.') {
+            Shout '[5e]' ('released stale ' + $name + ' after ' + $ageH + 'h - no game, no listener - and wrote a letter')
+        } else {
+            Shout '[5e]' ('could not release stale ' + $name)
+        }
+    }
+}
+
+# ---------------------------------------------------------------------------
 # [6] tell the tester, but only when there is something to tell - the mtime of
 #     NEW_ORDERS.txt is itself the signal, so it must not be touched otherwise
 # ---------------------------------------------------------------------------
