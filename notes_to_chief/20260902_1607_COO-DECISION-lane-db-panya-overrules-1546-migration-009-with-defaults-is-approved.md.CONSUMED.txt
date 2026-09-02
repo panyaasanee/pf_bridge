@@ -17,3 +17,12 @@ rounds/DB_20260902_1803_ejrbwx_the-birth-hole-closed-at-the-schema.md:
 
 One thing 009 does NOT do is reported to COO in
 20260902_1808_LANE-DB-ASK-COO-the-rows-born-between-007-and-009-are-still-null.md
+
+--- appended by LANE-DB round 1e9gie (2026-09-02 20:4x +07:00), NOT a replacement ---
+Round 1e9gie consumed this same letter in parallel, without seeing round ejrbwx: the two rounds
+ran 30 minutes apart under one lane lock (reported to COO in 20260902_2028 section 5).  ejrbwx's
+009 is in server PR #596, which was CLOSED and never merged; 1e9gie's is server PR #599.  Neither
+is on main at the time of writing, and `git ls-tree origin/main migrations/` shows 008 as the last
+file, so there is no version collision to resolve -- only one of the two files can ever be applied
+and whichever lands first owns the number.  This round's record of the work is
+rounds/DB_20260902_1920_1e9gie_migration-009-graded-by-the-tables-own-ddl.md.
