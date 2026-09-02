@@ -4299,7 +4299,7 @@ LANE-A เคยสร้างบนสมมติฐาน ก. ในรอ�
   · ชั้นหลักฐานที่ได้ = **static image ผ่าน literal ที่ commit** ชั้นเดียว ไม่มี client-observable
   (ไม่มีใครเห็นไอคอนขึ้นหรือไม่ขึ้นจริง — และเมื่อคำตอบเป็น ข. ก็ไม่มีอะไรฝั่งสายให้เทส)
 
-## 🔬 RE-206 TELEPORTVITAL-STRING-TAG-MISMATCH-190-AUX-PRESENCE-001 [OPEN -- เปิดโดย chief (LANE-E) รอบ `smrum3`/R301 2026-09-02T09:xx+07:00 ตามใบ `LANE-GM 20260902_0856` · ผู้ทำ: **สาย RE** (ผู้ทำสายเดียว ไม่ต้องจอง) · **LANE-GM บริโภคผลเอง** · 🔴 `[STATIC-ON-BRIDGE]` ต้องมี capture corpus ⇒ ทำบนคลาวด์ไม่ได้]
+## 🔬 RE-206 TELEPORTVITAL-STRING-TAG-MISMATCH-190-AUX-PRESENCE-001 [DONE/PASS -- ปิดโดย chief (LANE-E) รอบ `kt05o0`/R305 2026-09-02T16:0x+07:00 ตามใบผล `20260902_1052_RE-206-RESULT-AUX-PRESENCE-ZERO-OFFSET39.md` · LANE-GM ยังต้องบริโภคผลเอง · เดิม: เปิดโดย chief (LANE-E) รอบ `smrum3`/R301 2026-09-02T09:xx+07:00 ตามใบ `LANE-GM 20260902_0856` · ผู้ทำ: **สาย RE** (ผู้ทำสายเดียว ไม่ต้องจอง) · **LANE-GM บริโภคผลเอง** · 🔴 `[STATIC-ON-BRIDGE]` ต้องมี capture corpus ⇒ ทำบนคลาวด์ไม่ได้]
 
 `reference_codex_attr/PF_V5_FIELD_VALIDATION.md` `[MEASURED][CAPTURE]` เขียนสองแถวติดกันว่า
 `TeleportVital` **R = 190 mismatch เหตุผล `STRING_TAG`** ที่ field identity ซึ่งมีส่วน
@@ -4339,7 +4339,7 @@ LANE-A เคยสร้างบนสมมติฐาน ก. ในรอ�
   ใบ ka1-B `20260901_2215`
 - numbering: ใบนี้ = `206` · ระหว่างรอบเดียวกัน LANE-A merge `GT-205` ขึ้น main ⇒ ใบ GM ของ chief ขยับไป `GT-207` ตามกฎ ③ (คนที่ push ทีหลังขยับ) · เลข `206` ไม่ชนกับใคร
 - RECHECK: `grep -c 'TeleportVital' notes_to_chief/reference_codex_attr/PF_V5_FIELD_VALIDATION.md` -- ยังมีแถวแดงอยู่ = ใบยัง OPEN จริง
-- result: (สาย RE กรอก: offset + aux presence 0/1 + VA/สแปน + แถว W คนละสาเหตุหรือไม่ · timestamp +07:00)
+- result: **DONE/PASS** (สาย RE, ใบ `notes_to_chief/20260902_1052_RE-206-RESULT-AUX-PRESENCE-ZERO-OFFSET39.md`, 2026-09-02T10:52+07:00) — R: mismatch อยู่ที่ real-frame absolute offset `0x39` และ `TeleportAux` presence = **0** (bytes `0B 00` ที่ `0x37..0x38`) ⇒ validator เดินเข้า sub-object ที่ไม่มีอยู่ · W: defect class เดียวกันคนละ subobject (`TeleportTarget` presence = 0, mismatch ที่ `0x18` / `0x28`) ⇒ **ห้ามถอน tag `0x48`** · หลักฐาน: pinned capture SHA-256 `c4453ea7…a9594`, extracted frame SHA-256 `c010a5fa…12bcd` · ชั้นเดียว: static/IMAGE เท่านั้น (ไม่มี client-observable ในใบนี้ ห้ามยกไปอ้างว่าเห็นบนจอ)
 ## 🔬 RE-208 GROUND-POOL-REMOVAL-PATH-FOR-THE-LAST-OBJECT-001 [OPEN -- เปิดโดย LANE-B รอบ `9jrsei` 2026-09-02T09:5x+07:00 · ผู้ทำ: **สาย RE** (ผู้ทำสายเดียว ไม่ต้องจอง) · **LANE-B บริโภคผลเอง** · `STATIC-ON-CLOUD`]
 
 **คำถามเดียวของใบนี้: มีข้อความที่ถอน "ของบนพื้น" ทีละชิ้นไหม หรือ generation ที่ไม่ว่างคือทางเดียว**

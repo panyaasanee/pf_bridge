@@ -39,6 +39,7 @@
 
 - 🆕 **`GT-182` GM-A-WARP-NO-COORD-LIVE-SPAWN-001** (✅ **PASS — OBSERVER_CONFIRMED 2026-09-01T10:40+07:00, chief round `8zf80f`** — แก้โดย chief รอบ `liq4ri` ตาม `COO-DECISION 20260901_1341` ข้อ 2 (หัวใบเดิมล้าสมัยเขียนว่า `BLOCKED-ON-ATTENDED`) · `/warp <mapnum>` ไม่ใส่พิกัดครั้งแรกของ session ผ่านแล้ว · **แต่วาปข้ามหลายแมพติดกันแล้วเจอ NPC ทุกแมพยังไม่ผ่าน — ดูใบใหม่ `GT-192`** · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-192` GM-A-WARP-MULTI-MAP-CENSUS-CHAIN-001** (🟢 **PENDING บูตได้เลย · attended** — เปิดโดย chief ตาม `COO-DECISION 20260901_1341` ข้อ 1 (ตอบใบ `20260901_1256`) · ผู้ทำ: **LANE-GM** · วาปข้ามอย่างน้อย 3 แมพติดกันด้วย `/warp <mapnum>` (ไม่ใช่ใบแรกของการล็อกอิน — `GT-182` พิสูจน์ใบแรกแล้ว) แล้วเช็คว่าเจอ NPC ปกติครบทุกแมพที่ไปถึง — พิสูจน์ census latch ที่แก้แล้วบน `main` (`runtime.py:5459-5470`, สเปกใบ `20260901_1035`+`20260901_1120`) · ใบเต็มอยู่ท้ายไฟล์)
+- 🆕 **`GT-212` COLUMBUS-SCENE-GUARDS-VISIBLE-COST-001** (🔴 **BLOCKED — รอ merge `server#584` (+ ใบ D3 ของรอบเดียวกัน)** · เปิดโดย chief (LANE-E) รอบ `kt05o0`/R305 ตาม `COO-DECISION 20260902_1347` · ผู้ทำ: **ผู้เทส attended** · chief บริโภคผลเอง · ข้ามไปฉาก 17 ด้วย Columbus แล้ว `/warp 1` กลับมา Port Royal ต้องมีชาวเมือง + คลิก actor index 1 ของฉาก 14 ต้องไม่เปิดบทสนทนา · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-207` GM-PLUGIN-THREE-CELL-BUTTON-001** (🟢 **READY บูตได้เลย · attended** — ใบที่ `COO-DECISION 20260902_0846` เรียกว่า `GT-P3`/`GT-203`; เลข `203`/`204` ถูกใช้ไปแล้ว จึงเป็น **`205`** · ร่างโดย LANE-GM `0731`, ลงคิวโดย chief R301 `smrum3` · **`COO 0846` เรียกใบนี้ว่า `GT-203`; เลข 203/204/205 ถูกใช้แล้ว ⇒ `207`** · P-3 ปุ่ม GM: **สาม build เท่านั้น** ห้ามช่องที่สี่ (`COO 0648`+`0845` + ตาราง README) · `patches/gm_plugin/` **revision 4** `780d41dd` บน `main` ⇒ **คำห้าม build ถอนแล้ว** · ตัวตัดสิน = บรรทัด `[GM_PLUGIN]` ใน DebugView · 🔴 ลำดับคือ build→install→**ขั้น 0**→บูต และ **rollback ทุก build** · bounded negative ใช้ได้เฉพาะเมื่อเห็น `alive, returning interface` ทุก build · ใบเต็มท้ายไฟล์)
 - 🆕 **`GT-183` GM-B-SPEED-COMMAND-001** (🔴 **BLOCKED — BLOCKED-ON-WIRING** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (GM-B) · ผู้ทำ: **LANE-GM** · `/speed <value>` คำสั่งแชท GM จริงบน `main` เขียน `ActorAttr` x7 (+0x54 f32) — เดโมแล้วนอก main โดยเจ้าของ (`PF_ADHOC_ATTR_PROBE`) ค่าปกติประเมิน 400 ยังไม่ยืนยันตาราง/ไบนารี · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-184` UI-A-PART-A-BACK-TO-CHARSELECT-BUTTON-001** (🔴 **BLOCKED — สืบทอดจาก `GT-033` (ANSWERED — สองท่าที่ลองแล้วให้ผลลบ)** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งแรก) · ผู้ทำ: **LANE-A** · ปุ่มกลับหน้าเลือกตัวละครจากในเกม ต้องพาไปจริงกลางเซสชัน · แยกจาก `GT-185` ตามกฎหนึ่งใบหนึ่งข้อพิสูจน์ · ใบเต็มอยู่ท้ายไฟล์ · **[อัปเดต round `tmizmk` 2026-09-01 15:58+07:00] allowlist ที่หกลงแล้ว พร้อมบูตด้วย `--logout-hypothesis-scenario scenarios/logout_hypothesis_dialog_open_push.json` -- ยังไม่พลิก `production_allowed` (รอ attended pass ก่อนตาม stop_rule) พร้อมให้ผู้เทส attended หยิบได้แล้ว**)
@@ -11065,3 +11066,96 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
   branch/commit ที่บูต · timestamp +07:00 · `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
 
 **ผู้เปิดใบ: LANE-A (WORLD) รอบ `1d6rta` 2026-09-02T13:4x+07:00 -- LANE-A บริโภคผลใบนี้เอง**
+
+## GT-212 COLUMBUS-SCENE-GUARDS-VISIBLE-COST-001  [BLOCKED -- โค้ดยังไม่ขึ้น `main` · **รอ merge ก่อน** · ห้ามบูตจนกว่า RECHECK ข้อ 1-2 ผ่าน]
+
+> เปิดโดย chief (LANE-E) รอบ `kt05o0`/R305 ตาม `COO-DECISION 20260902_1347` · **chief บริโภคผลเอง**
+> numbering: กฎ ② หัวไฟล์ --
+> `grep -ohE '\b(GT|RE)-[0-9]{3}\b' GAME_TEST_QUEUE.md CLIENT_RE_QUEUE.md archive/*QUEUE*ARCHIVE*.md | grep -oE '[0-9]{3}$' | sort -n | tail -1`
+> คืน `211` (`GT-211`) ⇒ ใบนี้ = `212` · `RE-206` เพิ่งปิดรอบนี้ · `RE-210` มีอยู่จริง · ทั้งคู่ไม่ชนเลขนี้
+> teardown ตาม `ATTENDED_SESSION_RUNBOOK.md` -- ต้องรันเสมอ แม้รอบจบเพราะเจ้าของเลิกเล่นเฉย ๆ
+
+- objective: ข้อพิสูจน์เดียว ตัดสินด้วยตาคน -- ประตูกันฉากของสาย Columbus M2 **ปฏิเสธเฉพาะสิ่งที่ผิด และไม่ริบสิ่งที่ผู้เล่นเคยได้**:
+  ข้ามจากบ้าน (ฉาก 1) ไปฉาก 17 ได้เหมือนเดิม แล้ว `/warp 1` กลับมา **Port Royal ต้องมีชาวเมือง ไม่ใช่เมืองร้าง** ·
+  ตัวควบคุมอยู่ในข้อพิสูจน์เดียวกัน: คลิก actor ที่ **placement index 1 ของฉาก 14** ต้อง **ไม่เปิดบทสนทนา และไม่วาปไปไหน**
+
+- ของที่รอ merge (ยังไม่อยู่บน `main` ตอนเขียนใบ):
+  (A) op1/quest 3021 ถูกปฏิเสธเมื่อแถว in-memory ไม่ใช่ฉาก 1 · event `columbus_q3021_teleport_refused_wrong_scene_<n>`
+      + stderr `COLUMBUS_Q3021_TELEPORT_REFUSED scene=<n> reason=not_home_scene`  (PR `server#584`)
+  (B) ChooseNPC บน actor ที่ใช้ placement index เดียวกับ Columbus ในฉากอื่น ถูกปฏิเสธแบบมีชื่อ ·
+      event `columbus_choose_npc_wrong_scene_<n>_lane_declined` + stderr `COLUMBUS_CHOOSE_NPC_WRONG_SCENE scene=<n> effect=columbus_lane_declined`
+      🔴 คำว่า `lane_declined` ไม่ใช่ `no_reply` โดยตั้งใจ: **สายอื่นตอบคลิกนั้นจริง** (ฉาก 14 = `LANE_A_CHOOSE_NPC_SCENE14_FACE_P1`,
+      ฉากโรสเตอร์ = `V98_NPC_CONVERSATION_DEFAULT_P1`) โทเคนนี้บอกได้แค่ว่า **สาย Columbus ไม่ตอบ** ห้ามอ่านว่า "ไม่มีอะไรตอบ"
+  (C) D3 (PR ที่สองของ R305): checkpoint ตำแหน่ง = ฉาก 17 ตอนข้ามจริง · 🔴 **ถ้า (C) ยังไม่ลง แถว in-memory ยังเป็นฉาก 1 หลังข้าม
+      ⇒ `/warp 1` ไม่ถูกนับเป็นการข้ามฉาก ⇒ census latch ไม่ถูกปลด ⇒ Port Royal ว่างได้ · กรณีนั้น = `NO-RESULT` ของครึ่งนั้น ไม่ใช่ FAIL**
+
+- 🔴 สองข้อที่ไม่รู้แล้วเสียรอบ:
+  1. โทเคน (B) พิมพ์ได้ **เฉพาะก่อนคุยกับ Columbus ที่ท่าเรือครั้งแรกของเซสชัน** (แลตช์ `columbus_quest3021_conversation_sent` อยู่ทั้งเซสชัน)
+     ⇒ **ทำฉาก 14 ก่อน แล้วค่อยกลับบ้าน** · และพิมพ์ **ครั้งเดียวต่อฉาก** ต่อให้คลิกสิบครั้ง
+  2. หลังวาปทุกครั้ง **เดินหนึ่งก้าว** (`W`/`S`) ก่อนตัดสินว่าฉากว่าง -- ฉาก 1 เป็นเคส walk-before-census (`GT-192`)
+
+- RECHECK (ตัดสินด้วยเนื้อโค้ด ห้ามเทียบเลข commit):
+  ```
+  cd pirate-force-server && git fetch origin
+  git show origin/main:src/pirateforce_foundation/runtime.py | grep -n "COLUMBUS_Q3021_TELEPORT_REFUSED"
+  git show origin/main:src/pirateforce_foundation/runtime.py | grep -n "COLUMBUS_CHOOSE_NPC_WRONG_SCENE"
+  git show origin/main:src/pirateforce_foundation/runtime.py | grep -n "columbus_q3021_crossing_checkpoint"
+  ```
+  ข้อ 1-2 ว่าง ⇒ คง `BLOCKED` **ห้ามบูต ไม่เสียเวลาผู้เทสแม้แต่นาทีเดียว** · ข้อ 3 ว่าง ⇒ บูตได้ แต่ครึ่ง `/warp 1` เป็น `NO-RESULT` ตาม (C)
+
+- db: `state\pirateforce.sqlite3` **สำเนาเท่านั้น ห้ามเปิด canonical** → `state\run_gt212_<yyyyMMdd_HHmmss>.sqlite3` ·
+  sha256 สำเนาก่อน/หลัง · sha256 canonical ก่อน/หลัง ต้องไม่เปลี่ยน · `PRAGMA integrity_check`=`ok` ทั้งสองครั้ง
+- server args: บูตมาตรฐาน `BRIDGE_BOOT_PROCEDURE.md` · `-SecondPasswordMode bypass` · **ไม่มีแฟล็ก scenario ใด ๆ** ·
+  บัญชี GM ใน `config/gm_accounts.json` · เก็บคอนโซลรวม stdout+stderr (`2>&1`) -- โทเคนทั้งสองออกทาง **stderr**
+
+- steps:
+  1. RECHECK ก่อน · เซิร์ฟเวอร์สดใหม่ · บูตไคลเอนต์ · ล็อกอิน GM ฉาก 1 · ภาพ `S00` (ให้เห็นย่านที่มี NPC หนาแน่น)
+  2. 🔴 **ยังห้ามคลิก Columbus ที่ท่าเรือ** (กล่องแดงข้อ 1)
+  3. คลิกช่องแชท ยืนยัน focus จริง · `/warp 14` · Enter · รอ ~3 วิ · เดินหนึ่งก้าว · ภาพ `S14-BEFORE`
+  4. **คลิกซ้ายหนึ่งครั้ง** บน actor ที่ป้ายเขียน `Columbus` ในฉาก 14 -- **คนละตัวกับที่ท่าเรือ** (ฉาก 14 index 1 = ชื่อ `Columbus` lv110;
+     ท่าเรือคือ MOBS 156) · หาไม่เจอให้คลิกทีละตัวแล้วดูคอนโซล พอโทเคน (B) ขึ้นให้หยุด · ภาพ `S14-AFTER` ภายใน ~3 วิ · จด HUD X/Y/Z ก่อน-หลัง
+  5. `/warp 1` · เดินหนึ่งก้าว · คลิก Columbus ที่ท่าเรือ → หน้าต่าง QUEST → กด **ตัวเลือกที่ 1** ครั้งเดียว · ภาพ `S17` ทันทีที่ฉากทะเลขึ้น
+  6. `/warp 1` กลับบ้าน · เดินหนึ่งก้าว · รอ ~3 วิ · กวาดกล้องด้วย **คลิกขวาลาก** เท่านั้น · ภาพ `S01-RETURN` ที่ย่านเดียวกับ `S00`
+  7. NO-CRASH ด้วยคลิกขวาลากหมุนกล้อง (ห้าม `Q`/`E` -- นั่นยิง `TargetPosVital`) · ออกด้วย X
+  8. ปิดเซิร์ฟเวอร์ · เก็บ console `.out`/`.err` + capture + sha256 · `integrity_check` · sha canonical ซ้ำ · **teardown เสมอ**
+  🔴 ขอบเขต: คลิกเพื่อ **เลือก/คุย** เท่านั้น -- ห้ามตีมอน ห้ามใช้สกิล ทุกฉาก
+
+- pass criteria (สองชั้น 🔴 ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น):
+    wire/DB (headless พิสูจน์ได้ ไม่ต้องมีตาคน · grep คอนโซลรวม `2>&1`):
+      (ก) คลิกที่ฉาก 14: `COLUMBUS_CHOOSE_NPC_WRONG_SCENE scene=14 effect=columbus_lane_declined` **หนึ่งบรรทัด**
+          และ **ไม่มี** `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE`
+      (ข) ข้ามจริงจากฉาก 1: มี `CORE_REQUEST_014_COLUMBUS_Q3021_TELEPORT_SCENE17_ONCE`
+      (ค) ถ้ามี op1 หลุดออกจากฉากที่ไม่ใช่ 1: `COLUMBUS_Q3021_TELEPORT_REFUSED scene=<n> reason=not_home_scene`
+          และ **ไม่มี** `core_request_014_columbus_scene17_teleport_sent` ตามหลัง ·
+          **[คำทำนาย ไม่ใช่ผลวัด]** ผู้เทสอาจไม่มีทางยิง op1 จากนอกบ้านด้วยมือได้เลย ⇒ **ไม่เจอบรรทัดนี้ = ไม่ใช่ FAIL** ให้เขียนว่า "ไม่มีโอกาสยิง"
+      (ง) `/warp 1` ขาสุดท้าย: มี census ของฉาก 1 ชุดใหม่ (ไม่ใช่ของฉากก่อนหน้า)
+      (จ) `integrity_check`=`ok` · sha canonical ไม่เปลี่ยน · ไม่มี traceback
+      🔴 ชั้นนี้ **ตอบไม่ได้ว่ามีอะไรอยู่บนจอ**
+    client-observable (ต้องมีคนนั่งหน้าจอ · **ชั้นนี้เท่านั้นที่ตัดสินใบ**):
+      (ฉ) `S14-AFTER`: คลิกแล้ว **ไม่มี** หน้าต่างบทสนทนา/เควสต์ขึ้น และ **ฉากไม่เปลี่ยน** (HUD ยังเป็นฉาก 14)
+      (ช) `S01-RETURN`: Port Royal **มีชาวเมืองให้เห็น** -- ตอบเป็นคำพูดคน: กี่ตัว ชื่อที่อ่านได้ เทียบกับ `S00`
+      (ซ) 🔴 **สีป้ายชื่อทุกป้ายในทุกภาพ หนึ่งบรรทัดต่อหนึ่งป้ายต่อหนึ่งภาพ** เขียน `none` ถ้าไม่มี · อ่านสีจาก **ภาพเต็มความละเอียดเท่านั้น**
+          · **จดสีอย่างเดียว ห้ามอนุมานสาเหตุ** (`RE-067`) · ต่างจากเซิร์ฟเวอร์จริง → `REAL_SERVER_DIVERGENCE.tsv` แถวละข้อ
+      🔴 ชั้นนี้ **ตอบไม่ได้ว่าเฟรมใดออกจากเซิร์ฟเวอร์**
+
+- คำทำนาย (เป็นคำทำนาย ผิด = ผล ไม่ใช่ความล้มเหลว):
+  P1 (ฉ) เงียบ + (ช) มีชาวเมือง ⇒ PASS ทั้งใบ
+  P2 (ฉ) เงียบ แต่ (ช) ว่าง ⇒ RECHECK ข้อ 3 ว่าง = `NO-RESULT` (D3 ยังไม่ลง) · ข้อ 3 hit = **finding จริงของ census latch** ⇒ เปิดใบ `RE-` ใหม่ **ห้ามถอนเกต**
+  P3 คลิกที่ฉาก 14 แล้ว **มีบทสนทนาขึ้น หรือถูกวาป** ⇒ **หยุดทั้งใบทันที รายงานทันที** -- เกต (B) ไม่ทำงาน ผู้เล่นถูกพาออกนอกเกาะได้
+
+- nonclaims:
+  1. 🔴 **ไม่อ้างอะไรเลยเกี่ยวกับประชากรของฉาก 17 เอง** -- เป็นเรื่องของ `GT-148` ใบนี้ไม่แตะ
+  2. ไม่พิสูจน์ว่าโทเคน (A) ครอบทุกเส้นทางที่ยิง op1 ได้ -- พิสูจน์เฉพาะเส้นทางที่ผู้เทสเดินจริง
+  3. ไม่พิสูจน์กลไก `/warp` เอง และไม่แก้ `GT-182`/`GT-192` ไม่ว่าผลจะออกอย่างไร
+  4. ไม่พิสูจน์ความหมายของสีป้าย (`RE-067`) · ไม่แตะคอมแบต/ดรอป · ไม่พิสูจน์อะไรที่รอดข้าม relog
+  5. **ผลลบมีค่าเท่าผลบวก**: Port Royal ว่าง = หลักฐานเรื่อง latch/checkpoint ไม่ใช่หลักฐานว่าเกตผิด และ **ห้ามใช้เป็นเหตุถอนเกตทั้งสองอัน**
+
+- links: `notes_to_chief/20260902_1347_COO-DECISION-chief-columbus-gate-teleport-on-home-scene-approved-d1-d4-first-d3-is-chief-too.md` ·
+  `notes_to_chief/20260902_1332_CHIEF-ASK-COO-columbus-guard-shipped-but-adversary-found-a-live-scene14-hit-and-an-unguarded-teleport.md` ·
+  `server#584` (A,B) · `runtime.py` (`_columbus_note_choose_npc_wrong_scene`, `_dispatch_columbus_quest3021`) ·
+  `tests/test_columbus_quest_dispatch_wiring.py` · `GT-148` · `GT-192` · `RE-067`
+- result: (ผู้เทสกรอก: PASS/FAIL/NO-RESULT · P1/P2/P3 · ภาพ `S00`/`S14-BEFORE`/`S14-AFTER`/`S17`/`S01-RETURN` + sha256 ·
+  บรรทัดคอนโซลคัดดิบทุกโทเคนข้างบน · บรรทัดสีป้ายครบทุกภาพ · sha canonical ก่อน/หลัง · `integrity_check` · NO-CRASH/CRASH ·
+  timestamp +07:00 · `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
+
+**ผู้เปิดใบ: chief (LANE-E) รอบ `kt05o0`/R305 -- chief บริโภคผลเอง**
