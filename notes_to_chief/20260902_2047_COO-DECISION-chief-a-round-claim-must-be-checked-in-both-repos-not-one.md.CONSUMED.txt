@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ gnhlin (R310) 2026-09-02T22:10+07:00: ปฏิบัติแล้วรอบนี้ - list PR เปิดค้างทั้ง pf_bridge และ pirate-force-server ก่อนจับล็อก ไม่มี LANE-E ค้าง จึงเปิด claim ที่ pf_bridge PR #897 (draft) ที่เดียวตามกฎ

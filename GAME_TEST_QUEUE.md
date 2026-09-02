@@ -10761,6 +10761,30 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
 - **rollback ทุกครั้งที่จบ build ไม่ว่าผลจะเป็นอะไร**: ลบ `GameMaster.dll` ที่ติดตั้งออกจากข้าง client
   (ไม่มี patch ไบต์ ไม่มี registry ไม่แตะ DB) · ลืมข้อนี้ = รอบหน้าจะอ่านของเราเองเป็นหลักฐาน `RE-164` ผิด ๆ
 
+### ขั้น 0N — negative control ของ `check 0/4` **หนึ่งครั้งเดียวทั้งใบ** (`COO-DECISION 20260902_2148` ใบที่ 2)
+ทำ **ก่อน** build แรก · **ไม่กินโควตา build** · ไม่บูตเกม ไม่แตะ client ไม่แตะ DB · ใช้เวลาไม่ถึงหนึ่งนาที
+
+**เหตุผลที่ต้องทำ** — LANE-GM เขียนไว้เองในใบ `20260902_2038` nonclaim 3ก: `check 0/4`
+(`mt.exe -inputresource:...;#2 -validate_manifest`) เขาเขียน **จากเอกสารของ Microsoft ไม่ได้วัดเอง**
+⇒ วันนี้ไม่มีใครรู้ว่ามันกันอะไรได้จริงหรือเปล่า และมันคือเกตที่ยืนขวางไม่ให้ DLL ที่โหลดไม่ได้เข้าโฟลเดอร์ client
+
+**ทำอะไร** ชี้เกตไปที่ DLL ที่ **รู้ว่าเสีย** — ตัวที่ ka1-A วัดเองแล้วว่า `LoadLibraryW` ปฏิเสธ
+(**13,824 ไบต์ · sha256 `67501F7E...F496`** · ตัวที่ *ไม่มี* เซกชัน `.rsrc` · ใบ `20260902_1920_KA1A-TO-LANE-GM-*`)
+ถ้ายังมีไฟล์นั้นอยู่ ใช้ตัวนั้น · ถ้าลบไปแล้ว สร้างขึ้นใหม่ได้ด้วย `build_vs2008.bat` **ที่ข้ามขั้น `mt.exe`**
+(หรือคัดสำเนา DLL ที่บิลด์เสร็จแล้วมาลบ `.rsrc` ออก) — เกณฑ์คือ **DLL ที่ไม่มี manifest ฝัง** ไม่ใช่ sha ตัวนั้นเป๊ะ ๆ
+
+`py -3 -m pirateforce_foundation.gm.plugin_image_check --dll "<DLL ที่ไม่มี manifest>" --client-dir "<client>"`
+(หรือรัน `check 0/4` ของ `install.bat` ตรง ๆ ถ้าเรียกแยกได้ · จดคำสั่งที่ใช้จริงลงผลด้วย)
+
+**อ่านผลยังไง — ทั้งสองผลคือข้อมูลที่วันนี้เราไม่มี ไม่มีผลไหน "เสียรอบ"**
+- **แดง** (`verdict=manifest_missing` หรือ exit ไม่เป็น 0) = เกตทำงานจริง ⇒ จดว่าแดง แล้วเดินต่อไป BUILD ตามปกติ
+- **เขียว** (`image_ok` / exit 0) = 🔴 **เกตนี้ไม่เคยกันอะไรได้เลย** ⇒ จดไว้ให้ชัด **แล้วยังเดินต่อไป BUILD ได้**
+  แต่ตั้งแต่จุดนั้น `check 0/4` ในผลของใบนี้ **ห้ามถูกอ้างเป็นหลักฐานว่า DLL ครบ** ต้องพึ่งเกต `.rsrc` (`dumpbin`) แทน
+- **รันไม่ได้** (ไม่มี `mt.exe` / เรียกแยกไม่ได้) = จด `NO-RESULT` ของขั้นนี้บรรทัดเดียวแล้วเดินต่อ **ห้ามหยุดทั้งใบเพราะขั้นนี้**
+
+nonclaim ของขั้นนี้: ไม่พิสูจน์ว่า DLL ของ build ไหนดีหรือเสีย · พิสูจน์แค่ว่า **เครื่องมือวัดตัวนั้นขยับหรือไม่ขยับ**
+เมื่อชี้ไปที่ของที่รู้ว่าเสีย · ไม่แตะข้อสรุปของ `RE-164` และไม่เปลี่ยนเกณฑ์ผ่าน/ไม่ผ่านของใบนี้แม้แต่ข้อเดียว
+
 ### BUILD (นับเป็น **build** ไม่ใช่ "ช่อง" — เพดาน **สาม build** ทั้งใบ รวมกิ่งแครช)
 | build | `PF_GM_KEY` | `PLUS4` | คำสั่ง | build เมื่อ |
 |---|---|---|---|---|
@@ -11538,10 +11562,18 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 
 **ผู้เปิดใบ: chief รอบ `7uxscs` (R308) -- chief บริโภคผลใบนี้เอง**
 
-## GT-216 MULTI-VITAL-WALKER-MAKES-GROUND-PICKUP-PLAYABLE-001  [BLOCKED -- รอ merge ก่อน: pirate-force-server PR `#600` (chief, LANE-E) ยังไม่ขึ้น main]
+## GT-216 MULTI-VITAL-WALKER-MAKES-GROUND-PICKUP-PLAYABLE-001  [🟢 READY]
 
-RECHECK: `git -C pirate-force-server fetch && git -C pirate-force-server grep -n "VITAL_WALK_PROMOTED" origin/main -- src/pirateforce_foundation/vital_walk.py src/pirateforce_foundation/runtime.py`
-  0 hit = ใบยัง `BLOCKED` จริง ห้ามบูต · เจอทั้งสองไฟล์ = พลิกหัวใบเป็น `READY` แล้วบูตได้เลย
+RECHECK: `git -C pirate-force-server fetch && git -C pirate-force-server grep -c "vital_walk" origin/main -- src/pirateforce_foundation/vital_walk.py src/pirateforce_foundation/runtime.py`
+  ต้องได้ **สองบรรทัด** (ไฟล์ละบรรทัด) = โมดูลอยู่บน main และ `runtime.py` เรียกมันจริง ⇒ ใบนี้ `READY`
+  ได้บรรทัดเดียวหรือศูนย์ = โค้ดหาย ให้ตีกลับเป็น `BLOCKED` แล้วเขียนถึง chief
+  🔴 **บรรทัด RECHECK เดิมของใบนี้ผิด และ chief เป็นคนเขียนผิดเอง** (R309) มันสั่ง grep หาสตริง
+  `VITAL_WALK_PROMOTED` ใน **ทั้งสอง** ไฟล์ แต่โทเคนนั้นเป็นค่าคงที่ที่ประกาศใน `vital_walk.py:162`
+  ไฟล์เดียว ส่วน `runtime.py` เป็นฝ่าย **เรียก** ตัวพิมพ์ ⇒ เกณฑ์เดิมเป็นเท็จตลอดกาล และจะขัง
+  ใบนี้ไว้แม้โค้ดขึ้น main ครบแล้ว · วัดจริงรอบ R310: `origin/main` มี `vital_walk.py`
+  (`VITAL_WALK_PROMOTED_TOKEN` บรรทัด 162 · จุดพิมพ์บรรทัด 420) และ `runtime.py:26` `import vital_walk`
+  พร้อมจุดเสียบ `_vital_walk_promote_target_pos` (6428) และ `walk_nested_vitals` (6473)
+  ⇒ ตัวบล็อกเดียวที่หัวใบเดิมอ้าง (`PR #600 ยังไม่ขึ้น main`) **หมดไปแล้ว วัดจาก main ไม่ใช่จากบันทึกรอบก่อน**
   สถานะกลางหลังรันจบแต่ยังไม่มีลายเซ็นตาคน = **`AWAITING-OBSERVER`** (ไม่ใช่ PASS ไม่ใช่ FAIL)
   ใบนี้มีชั้น client-observable ⇒ **G-OBS บังคับ**: จดหมายผลต้องมีบรรทัด `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>` ไม่มี = chief ไม่ปิดใบ
 
@@ -11710,3 +11742,81 @@ RECHECK: `git -C pirate-force-server fetch && git -C pirate-force-server grep -n
   จำนวน actor ที่ **นับจากจอ** · บรรทัดสีป้ายครบทุกป้ายทุกภาพ · sha256 ทั้งสี่ค่า · `integrity_check` · NO-CRASH/CRASH · timestamp +07:00 · `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
 
 **ผู้เปิดใบ: LANE-A (WORLD) รอบ `4uztfj` 2026-09-02T20:0x+07:00 -- LANE-A บริโภคผลใบนี้เอง**
+
+## GT-218 SPEED-SAFE-VALUE-400-DRY-RUN-CLIENT-SURVIVES-001  [BLOCKED -- ล็อกทั้งสองของ `/speed` ยังปิดอยู่ · ปลดป้ายได้ก็ต่อเมื่อ RECHECK ผ่านครบสี่ข้อเท่านั้น ห้ามปลดเพราะมีคนบอกว่า merge แล้ว]
+
+> เปิดโดย chief รอบ R310 ตาม `COO-DECISION 20260902_2148` ใบที่ 1 · numbering: `GT` สูงสุดในคิว = 217 · `RE` สูงสุดใน `CLIENT_RE_QUEUE.md` = 133 ⇒ ใบนี้คือ **218**
+> 🔴 โค้ดใต้ล็อกทั้งสอง **ยังไม่เคยถูกรันแม้แต่ครั้งเดียว** วันที่ล็อกที่สองเปิด = วันแรกที่มันทำงาน และมันจะทำงานต่อหน้าเจ้าของ ⇒ ใบนี้ถูกออกแบบให้ **พังได้อย่างปลอดภัย** · 🔴 **ห้ามพ่วงงานอื่นในใบนี้** ใบอื่นห้ามพังไปกับมัน
+
+RECHECK: (ตัดสินด้วยเนื้อโค้ดบน `origin/main` ห้ามเชื่อคำบอกเล่าหรือเลข commit · ผ่านครบสี่ข้อ = เลื่อนเป็น `READY` ได้เองโดยไม่ต้องรอเจ้าของใบ)
+  1. `(cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/session.py | findstr /C:"login_speed.resolve_for_character")`
+  2. `(cd pirate-force-server && git show origin/main:src/pirateforce_foundation/gm/speed_wire.py | findstr /C:"SPEED_LOGIN_READ_LANDED: bool = True")`
+  3. `(cd pirate-force-server && git show origin/main:src/pirateforce_foundation/gm/speed_wire.py | findstr /C:"SHAPES_CLEARED_BY_A_REAL_CLIENT: frozenset = frozenset()")`
+  4. `(cd pirate-force-server && py -3 -m pytest tests/test_login_speed.py tests/test_gm_speed_deferred.py tests/test_gm_speed_shape_hold.py -q)`
+  ข้อ 1 ต้อง **เจอ** = login-read ต่อที่ seam จริง (ล็อกที่ 1 · `COO 1846`)
+  ข้อ 2 ต้อง **เจอ** = `SPEED_LOGIN_READ_LANDED` ถูกพลิกเป็น `True` แล้ว (วันนี้เป็น `False` ที่ `gm/speed_wire.py:327`)
+  ข้อ 3 ต้อง **ไม่เจอ** = เซตไม่ว่างแล้ว (ล็อกที่ 2 · วันนี้เป็น `frozenset()` ที่ `gm/speed_wire.py:277`)
+  ข้อ 4 เขียวทั้งชุด · ข้อใดไม่ตรง = คง `[BLOCKED]` **ห้ามบูต ห้ามเรียกผู้เทส**
+  ใบนี้มีชั้น client-observable ⇒ **G-OBS บังคับ**: จดหมายผลต้องมี `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>` · รันจบแต่ยังไม่มีลายเซ็นตาคน = **`AWAITING-OBSERVER`** (ไม่ใช่ PASS ไม่ใช่ FAIL) · ทุกเฟรมที่ยกมาอ้างต้องมี `t` เทียบ `T0` และ `dist` (G-FRAME)
+
+- objective: ข้ออ้างเดียว -- **พิมพ์ `/speed 400` หนึ่งครั้งบนไคลเอนต์จริง แล้วตัวละคร "รอด": ไม่ตาย และไคลเอนต์ยังรับอินพุตต่อได้** (`GT-193` FAIL: `/speed 300` ⇒ HP 0 · เงิน 0 · ตาย · 426 เฟรมถัดมาไม่มีคลิกเลย · DB ฝั่งเราสะอาด)
+
+- ค่าที่อนุญาต: **`400` ค่าเดียว** พิมพ์ `/speed 400` เป๊ะ ห้ามลองค่าอื่นในรอบนี้แม้แต่ครั้งเดียว
+  🔴 **ซอร์สวันนี้ไม่มี clamp และไม่มี allow-list ของค่าเลย**: `gm/speed_wire.py:132-153` (`parse_speed_value`) และ `:184-188` รับ float finite ทุกค่า ปฏิเสธแค่ bool/NaN/Inf · ช่วงเดียวที่มีคือช่วง f32 ทั้งช่วง (`persistence_typed_attrs.py:114` ใช้ที่ `:227-235`,`:250-254`) ⇒ **`400` ปลอดภัยด้วยหลักฐาน ไม่ใช่ด้วยประตูในโค้ด**
+  หลักฐานของ `400`: เป็นเลขที่ทุกล็อกอินส่งให้ไคลเอนต์อยู่แล้ววันนี้ (`player_wire.py:77`) · เป็นค่าคอนสตรัคเตอร์ของไคลเอนต์เอง VA `0x00464AF2` ไบต์ `00 00 C8 43` (`migrations/008_character_speed_walk_seed.sql:39,123` · `persistence_attr_compose.py:281,289`) · เป็นค่าในบล็อก "สมประกอบ" ของตัวละครบูต (x7 = 400)
+  ⇒ ค่าตรงกับของเดิมทุกไบต์ ⇒ ถ้าไคลเอนต์ยังตายอีก **ผู้ต้องสงสัยคือทรงเฟรม ไม่ใช่ตัวเลข** ซึ่งเป็นคำตอบที่วันนี้เราไม่มี
+
+- 🔴 **อาจต้องรีล็อกอิน -- รู้ไว้ก่อนกด ไม่ใช่ตอนจอค้าง**: ถ้าไคลเอนต์ล็อกตัวเองซ้ำแบบ `GT-193` ทางออกเดียวคือปิดไคลเอนต์ **แล้วรีสตาร์ตเซิร์ฟเวอร์ก่อน** จึงบูตไคลเอนต์ใหม่ (ไม่รีสตาร์ต = ตัวถัดไปค้าง "connecting" ตลอดกาล) · การรีล็อกอินนี้เป็น **ขั้นกู้ ไม่ใช่ผลวัด** และการที่ต้องใช้มัน = **FAIL ของชั้น client-observable**
+
+- db: canonical `state\pirateforce.sqlite3` -- 🔴 **สำเนาเท่านั้น ห้ามเปิด canonical** ⇒ `state\run_gt218_<yyyyMMdd_HHmmss>.sqlite3`
+  🔴 **ชื่อสำเนาห้ามเป็น `pirateforce.sqlite3` และห้ามมี `~`** ไม่งั้นเกต `_speed_db_is_canonical` (`gm/chat_command_action.py:3463-3493`) กันคำสั่งทิ้งทั้งใบ
+  sha256 สำเนาก่อน/หลัง · sha256 canonical ก่อน/หลัง ต้องเท่ากัน · `PRAGMA integrity_check` = `ok` สองครั้ง · **teardown เสมอ** (เทมเพลตปฏิเสธ boot stamp เก่ากว่า 420 นาที) · รอบคัดลอก DB ⇒ ตัวละครกลับ spawn ทุกบูต ปกติ ไม่ใช่ผลวัด
+
+- server args: บูตมาตรฐาน **ไม่มีแฟล็ก scenario ใด ๆ** · `-SecondPasswordMode bypass` · บัญชี GM ใน `config/gm_accounts.json` · 🔴 เก็บคอนโซลรวม stdout+stderr (โทเคนเลนนี้ออกทาง stderr ล้วน):
+  `py -3 -u -m pirateforce_foundation.app --db state\run_gt218_<stamp>.sqlite3 2>&1`
+
+- steps: (playbook `ATTENDED_SESSION_RUNBOOK.md` · อัดวิดีโอต่อเนื่องตลอด `LOCK_GAME` · ~10 นาทีบนจอ)
+    0. RECHECK ผ่านก่อน · `LOCK_GAME` · boot stamp · sha canonical · คัดลอก DB
+    1. **server ก่อน client เสมอ** · ล็อกอิน GM · ยืนยันบล็อก "สมประกอบ" จากคอนโซล (level 1 · class 1 · stats จาก `CHARCREATE_CLASS s_SCORE` · HP/MP จาก `STANDARD_STATUS` · x7 = 400 · ชื่ออยู่ `BasicAttr` x1 `+0x28` ห้ามอยู่ x37 · x39/x41/x42 = 0) ไม่ครบ = หยุด ไม่รัน · จด scene + X/Y/Z + `T0` เป็นเวลาจริง +07:00
+    2. `S0-BASE` full-res โดยเห็น **เลข HP และเลขเงิน** ชัด · จัดกล้องด้วย **คลิกขวาค้างลาก** เท่านั้น (หมุนกล้องอย่างเดียว · facing ไม่ขยับ · ไม่มีไบต์ขึ้นไวร์)
+    3. baseline: กด `W` ค้าง 5 วินาทีจากจุดที่จำได้ จด X/Y ก่อน-หลัง · `S1-WALK` · (`W/A/S/D` และ `Q`/`E` เปลี่ยน **facing ของตัวละคร** และยิง `TargetPosVital` ⇒ ใช้เฉพาะขั้นที่สั่งให้เดิน)
+    4. คลิกช่องแชท **ยืนยันว่าโฟกัสจริง** พิมพ์ `/speed 400` แล้ว Enter · เป็นคำสั่ง GM **ไม่ใช่** ทริกเกอร์แชท 12 ตัวอักษร **ห้ามเติมอักษรให้ครบ 12** · **ห้ามพิมพ์อักษรใดตอนช่องแชทไม่โฟกัส** (กลายเป็นฮอตคีย์)
+    5. **ห้ามแตะอะไรเลย 5 วินาที** จ้องจอ · `S2-AFTER` ภายใน ~3 วิ ต้องเห็นเลข HP · เลขเงิน · ช่องแชท
+    6. NO-CRASH: **คลิกขวาค้างลากหมุนกล้อง** (🔴 ห้ามใช้ `Q`/`E` เป็นตัวเช็คนี้)
+    7. เดินซ้ำแบบขั้น 3 จากจุดเดิม กด `W` ค้าง 5 วินาที · `S3-WALK2` · ออกเกมด้วยปุ่ม X
+    8. ปิดเซิร์ฟเวอร์ · เก็บ `.out`/`.err` + `capture_v141\GAME_LIVE.txt` + `GAME_EVENTS_LIVE.txt` + sha256 ทุกไฟล์ · `integrity_check` · sha canonical ซ้ำ · **teardown เสมอ** · ห้าม commit เอง
+    9. คัดดิบ ห้ามตีความ:
+       `findstr /N /C:"LANE_GM_CHAT_ACTION" /C:"LANE_GM_CHAT_SPEED_UPDATE_ATTR_VITAL" /C:"SPEED DEFERRED" /C:"GM_CHAT_NO_BYTES_SENT" /C:"LOGIN_SPEED" server_console_live.*.txt`
+    🔴 **STOP:** HP กลายเป็น 0 · เงินกลายเป็น 0 · ตัวละครตาย ⇒ หยุดทั้งใบทันที ถ่าย `S2-AFTER` ให้ได้ แล้วรายงาน (นี่คือ **ผลของใบ** ไม่ใช่ความผิดของผู้เทส)
+
+- pass criteria: (สองชั้น 🔴 **ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้นเด็ดขาด**)
+    wire/DB (headless พิสูจน์ได้ ไม่ต้องมีตาคน):
+      (ก) มี `LANE_GM_CHAT_ACTION speed route=action` แล้วตามด้วย `[G>] LANE_GM_CHAT_SPEED_UPDATE_ATTR_VITAL` **หนึ่งครั้ง** · **ไม่มี** `SPEED DEFERRED` และ **ไม่มี** `GM_CHAT_NO_BYTES_SENT ... why=withheld_speed_*`
+      (ข) เฟรมนั้นต้องมี `00 00 C8 43` (400.0) **ไม่ใช่** `00 00 96 43` (300.0 ของ `GT-193`)
+      (ค) หลังเฟรมนั้นมีเฟรมขาเข้าที่ **ไม่ใช่ heartbeat อย่างน้อย 1 เฟรม** (`GT-193` วัดได้ 0 จาก 426)
+      (ง) `characters.speed_walk` ในสำเนา = `400.0` · ฟิลด์อื่นในแถวเท่าเดิมทุกไบต์ (diff ก่อน/หลัง)
+      (จ) `integrity_check` = `ok` สองครั้ง · sha canonical ไม่เปลี่ยน · ไม่มี traceback หลุด
+      🔴 **ชั้นนี้ตอบไม่ได้ว่าตัวละครยังมีชีวิตบนจอไหม** -- `GT-193` พิสูจน์แล้วว่า DB ฝั่งเราสะอาดได้ทั้งที่ตัวละครตาย
+    client-observable (🔴 ต้องมีคนนั่งหน้าจอ ห้ามอนุมานจากคอนโซล · **ชั้นนี้เท่านั้นที่ตัดสินใบ**):
+      (1) ครบ 5 วินาทีหลัง Enter: **เลข HP เท่าเดิมและไม่ใช่ 0 · เลขเงินเท่าเดิม · ไม่ตาย ไม่มีหน้าจอชุบชีวิต** -- เขียนเลขจริงจาก `S0-BASE` และ `S2-AFTER` ทั้งคู่
+      (2) ไคลเอนต์ยังรับอินพุต: คลิกขวาค้างลากแล้ว **กล้องหมุนจริงบนจอ** และกด `W` แล้ว **ตัวละครขยับจริงบนจอ**
+      (3) **[คำทำนาย ไม่ใช่ผลวัด]** ความเร็วเดิน **ไม่เปลี่ยน** เพราะ 400 คือเลขที่ล็อกอินส่งอยู่แล้ว ⇒ เขียนระยะที่เดินได้ทั้ง `S1-WALK` และ `S3-WALK2` · **ทำนายผิด = finding ไม่ใช่ความล้มเหลว**
+      (4) คัดข้อความในช่องแชทตรงตัว · เห็น `SPEED DENIED` (12 ตัวอักษร ASCII) = ล็อกที่ 2 ยังปิด ⇒ รอบนี้เป็น **NO-RESULT ไม่ใช่ FAIL** หยุดและรายงาน
+      (5) 🔴 **จดสีป้ายชื่อทุกป้ายทุกภาพ หนึ่งบรรทัดต่อหนึ่งป้ายต่อหนึ่งภาพ** ไม่มีป้ายให้เขียน `none` ห้ามเว้นว่าง · อ่านจาก **full-res เท่านั้น** · **จดสีอย่างเดียว ห้ามเดาสาเหตุ** (`RE-067`) · ต่างจากภาพเซิร์ฟเวอร์จริง ⇒ `REAL_SERVER_DIVERGENCE.tsv` แถวละข้อ
+      🔴 **ชั้นนี้ตอบไม่ได้ว่าเฟรมใดออกจากเซิร์ฟเวอร์ หรือแถวใน DB เป็นอะไร**
+    🔴 **ผลลบมีค่าเท่าผลบวก**: ตายอีกทั้งที่ค่าเป็น 400 ⇒ ผู้ต้องสงสัยย้ายจาก **ตัวเลข** ไปที่ **ทรงเฟรม** ⇒ redirect ไปคำถาม deserializer · **ห้ามปลด `SHAPES_CLEARED_BY_A_REAL_CLIENT` ด้วยผลลบนี้**
+
+- nonclaims:
+  1. ไม่พิสูจน์ว่า `speed_walk` รอดข้ามล็อกอิน -- ใบนี้ใช้ค่าที่เท่ากับค่าเดิมโดยตั้งใจ
+  2. ไม่พิสูจน์ว่าค่าอื่นปลอดภัย -- ครอบ `400` ค่าเดียว · `300` ยังเป็นค่าที่ฆ่าตัวละครมาแล้ว (`GT-193`)
+  3. ไม่พิสูจน์ว่า `/speed` ทำให้ความเร็วบนจอเปลี่ยนได้จริง (ต้องใช้ค่าที่ต่างจาก 400 = ใบใหม่หลังใบนี้ผ่าน)
+  4. ไม่พิสูจน์ vital_version byte ของ `UpdateAttrVital` (0x309A) · ไม่ตัดสินสาเหตุอาการของ `GT-193`
+  5. ไม่ตัดสินความหมายของสีป้าย (`RE-067`) · ไม่แตะคอมแบต/ดรอป/กระเป๋า
+  6. ไม่ใช่ negative control ของ `check 0/4` -- ใบที่ 2 ของ COO `2148` พ่วงเป็นขั้น `0N` ใน `GT-207` ไม่ใช่ใบนี้
+
+- links: `COO-DECISION 20260902_2148` (ใบที่ 1) · `COO-DECISION 20260902_1846`/`1847` · `GT-193` (FAIL) · `RE-067` ·
+  `gm/speed_wire.py:277,327` · `gm/chat_command_action.py:3803,3861` · `session.py` (`login_speed.resolve_for_character`) · `login_speed.py` · `player_wire.py:77`
+
+- result: (ผู้เทสกรอก: PASS/FAIL/NO-RESULT · branch/commit ที่บูต · `S0-BASE`/`S1-WALK`/`S2-AFTER`/`S3-WALK2` · เลข HP/เงินทั้งสองภาพ · บรรทัดคอนโซลดิบทุกโทเคน · ตารางสีป้ายครบทุกป้ายทุกภาพ · sha256 ทั้งสี่ค่า · `integrity_check` · NO-CRASH/CRASH · ต้องรีล็อกอินหรือไม่ · `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
+
+**ผู้เปิดใบ: chief (สาย E) รอบ R310 `gnhlin` ตาม `COO-DECISION 20260902_2148` -- chief บริโภคผลใบนี้เอง**

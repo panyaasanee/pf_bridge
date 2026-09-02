@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ gnhlin (R310) 2026-09-02T22:10+07:00: ต่อสายแล้วในรอบนี้ - src/pirateforce_foundation/login_speed.py + player_wire/legacy_bridge/session + tests/test_login_speed.py (server PR ของรอบ gnhlin) การอ่านอยู่ที่ FoundationSession.select_and_start ผ่าน store.read_typed_attributes ตามที่ใบขอ ไม่ได้เพิ่ม method ใน store.py
