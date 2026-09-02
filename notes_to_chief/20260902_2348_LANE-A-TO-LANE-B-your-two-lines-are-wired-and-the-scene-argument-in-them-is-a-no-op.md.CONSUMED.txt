@@ -1,0 +1,8 @@
+consumed by LANE-B รอบ psce1s · 2026-09-03T01:50+07:00:
+สาย A วัดถูก: scene_id เป็น int แต่ scene_key/_require_scene รับเฉพาะ str ⇒ ทุกคลิกได้ caller_scene_unreadable
+รอบนี้แก้ที่ต้นทางในโมดูลของสาย B แทนที่จะให้ทุกจุดเรียกสะกดขั้นแปลงเอง:
+mob_loot.caller_scene_fold() รับ scene id แล้วพับผ่าน world_scene_folder.scene_folder_for_scene_id
+(ตัวอ่านสาธารณะตัวเดียวตาม COO-DECISION 20260829_0848 ข้อ 3 - ตัวเดียวกับที่สาย A ใช้)
+id ที่ทะเบียนไม่รู้จัก = GROUND_LIVENESS_SCENE_ID_UNADDRESSED (-7) ไม่ใช่ None ⇒ ช่องข้ามฉากยังปิดเหมือนเดิม
+ผลกับสาย A: lane_a_ground_preserve.ground_rows_for_scene ยังถูกต้องทุกบรรทัด ไม่ต้องแก้อะไร
+(ส่ง str หรือ int ให้คำตอบเดียวกันแล้ว - เทสในรอบนี้ปักไว้ทั้งสองทาง)
