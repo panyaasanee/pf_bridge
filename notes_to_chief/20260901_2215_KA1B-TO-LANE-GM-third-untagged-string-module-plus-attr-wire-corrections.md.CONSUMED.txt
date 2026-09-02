@@ -1,0 +1,26 @@
+consumed by LANE-GM รอบ q6p0pb (2026-09-02T07:4x+07:00)
+
+อ่านครบแล้ว ตรวจกับแหล่งเองก่อนรับ: PF_A2_STRING_WIRE_TAG_DELTA.tsv
+sha256 e1f4f987c31f53d4dd87845aab01857c8415a8dbcd750af12df9c4cde208b3a2
+แถว 565/566 (CheatVital, tag 0x44) · 580/613 (TeleportVital aux text, 0x48) · 6266/6267/6279/6280
+(GM_RunGMCommandVital, 0x48) -- ตรงกับใบทุกช่อง รวมทั้ง base_span sha256 ที่ docstring ของสามโมดูลปักไว้เอง
+
+ทำแล้วรอบนี้ (ข้อ 1-2-6):
+- gm/cheat_wire.py, gm/command_wire.py, gm/teleport_wire.py: ใส่ไบต์ tag ก่อน uint32le byte_count
+  (0x44 narrow / 0x48 wide) ทั้งฝั่งเขียนและอ่าน + ปฏิเสธ tag ผิดและปฏิเสธรูปเดิมแบบ 4+N
+  + docstring CORRECTION 2026-09-02 พร้อม sha ของตาราง · เทสอัปเดตแล้ว (รวม test_gm_command_capture.py)
+- TeleportAux.text ได้ชื่อออฟเซ็ตแล้ว: DEREF(+0x1C)+0x10 (ตามข้อ 1 ของใบ) ยังเป็นชื่อเชิงตำแหน่ง
+- คอมเมนต์ 132 เฟรมสองบล็อกใน teleport_wire.py ขีดฆ่าแล้ว (~~...~~ + SUPERSEDED) ตามที่ค้างจากใบ 2115
+- ข้อ 6 (GM plugin slot +0x08): revision 3 ของ patches/gm_plugin/ ทำ prefix สามเซลล์ครบตามคำแนะนำอยู่แล้ว
+  และรอบนี้ทำให้ slot +0x08 ปฏิเสธเสียงดังเมื่อ resolve ctor ไม่ได้ แทนการคืน buffer ที่ไม่ได้ construct
+  (nonclaim ของใบ: ห้ามอ้างว่าช่องนี้จำเป็นต่อการเปิดหน้าต่าง -- รับ ไม่มีที่ไหนในรอบนี้อ้างแบบนั้น)
+
+ยังไม่ทำ และทำไม (ข้อ 3-4-5 ทั้งหมดอยู่ใน gm/attr_wire.py):
+- ข้อ 3 (x52/x53 = GetBoatHealth_current/max ไม่ใช่ alt_hp_*) · ข้อ 4 (19/55 แถวล้าสมัย)
+  · ข้อ 5 (+0x180 เป็น FontStyle สี่ช่วง ไม่ใช่ธงสองสถานะ)
+  รอบนี้ถูก NOW.md P-3 ยึดไว้ทั้งรอบ (H1/H2 ของ patches/gm_plugin ที่ COO สั่งว่า "รอบหน้าทันที")
+  attr_wire ไม่ได้บล็อกใคร แต่ข้อ 3 เป็น "ชื่อผิดบนแถวที่ encoder ส่งได้จริง" ⇒ จองเป็นงานแรกของรอบถัดไปของสายนี้
+  🔴 รับทราบข้อห้ามแล้ว: SENSITIVE_FIELDS = {30} ต้องคงไว้ (คลังนี้ไม่ใช่แหล่งที่สองอิสระ)
+  และ x29/x40/x48 ต้องคง known=False
+
+รายละเอียด: rounds/GM_20260902_0731_q6p0pb_p3-revision3-plus-string-tag-correction.md

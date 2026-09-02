@@ -15,6 +15,57 @@
  * Every structural claim names the gate_id row that proves it.  Nothing here
  * comes from the original DLL's code, which nobody has ever seen.
  *
+ * 🔴 COMPILE-UNVERIFIED on cloud -- this file has never been compiled by MSVC
+ * and cannot be, here: the cloud clone has no Windows SDK and no VC9.  THE
+ * FIRST VC9 BUILD MUST RUN plugin_image_check ON THE BUILT DLL BEFORE INSTALL:
+ *     set PYTHONPATH=src
+ *     py -3 -m pirateforce_foundation.gm.plugin_image_check \
+ *            --dll <build>\GameMaster.dll --client-dir "<client folder>"
+ * (pirate-force-server, landed 2026-09-02.  It names which of eleven file-level
+ * failures you have, all of them at once, instead of one per boot.)
+ *
+ * REVISION 4 -- revision 3 was reviewed by pf-adversary in the same round and
+ * NEVER LEFT THE WORKING TREE.  Two of its findings were CRITICAL and both
+ * were revision 3's own doing:
+ *   - the CRT lookup passed dllName = NULL, so the first descriptor importing
+ *     ??3@YAXPAX@Z won -- and MFC90, a proxy CRT, or an injected anti-cheat
+ *     module import that name too.  Measured on a synthetic import table: it
+ *     returned MFC90.  That is the cross-heap free of GM-IMG-010 with a green
+ *     "located" line printed over it.  Both lookups now filter on the
+ *     descriptor's DLL name as well as the symbol.
+ *   - H1 was not actually achieved: the wstring ctor's decorated name is
+ *     byte-identical in MSVCP80/90/100, so a symbol-only match could bind
+ *     MSVCP80 while announcing "exact instance".
+ * Also from that pass: resolution moved out of DllMain entirely (GetProcAddress
+ * on a forwarded export re-enters the loader, which is forbidden under the
+ * loader lock, and its symptom -- client does not start -- is indistinguishable
+ * on screen from "never loaded"); `loaded` is now the first thing DllMain
+ * prints; Announce emits one OutputDebugStringW per line (three calls could be
+ * split across DebugView rows, and the token is what the whole test order
+ * greps for); the self-pin result is checked and reported; slot +0x08 returns
+ * the destination rather than NULL (see the comment there); the descriptor-name
+ * search verifies the candidate really exports what we need; and an
+ * unattributable binding no longer abandons the rest of the table.
+ *
+ * REVISION 3 -- two HIGH findings from this lane's own pf-adversary pass,
+ * ordered fixed by COO-DECISION 20260902_0648 (which also moved this folder
+ * into LANE-GM's write zone).  Both were self-inflicted by revision 2:
+ *   - H1: DllMain resolved MSVCP90 with GetModuleHandleW(L"msvcp90.dll") --
+ *     the exact base-name lookup revision 2 removed for MSVCR90 four lines
+ *     earlier, reintroduced for the OTHER side-by-side assembly.  Worse there
+ *     than for the CRT: an empty _SECURE_SCL=1 basic_string still takes a
+ *     _Container_proxy from its allocator, so a proxy allocated through
+ *     instance A and released through the client's pinned instance B is a
+ *     cross-heap free.  The import walk is now generic and used for both.
+ *   - H2: PF_GM_SLOT0_TOUCH_PLUS4 defaulted to 1, i.e. the default build
+ *     constructed an object of a size we are still GUESSING (28 bytes with
+ *     _SECURE_SCL=1) over first+4..first+31 inside client memory.  GM-IMG-012
+ *     does not name the +4 type.  The default now writes only the -1 that row
+ *     states verbatim; touching +4 is the third A/B cell, opt-in.
+ *   - and the refusal in CreateGameMaster is now tied to the macro that
+ *     actually needs the constructor, not to the constructor itself; see the
+ *     comment there for why slot +0x08 is not a reason to refuse the job.
+ *
  * REVISION 2 -- rewritten after a pf-adversary pass rejected revision 1.
  * What changed and why (each was a real defect, not a style note):
  *   - r1 inlined a std::wstring constructor from this compiler's headers.  The
@@ -23,8 +74,11 @@
  *     xor eax,eax; ret).  Neither fits an inlined _SECURE_SCL=1 string ctor,
  *     which alone needs a proxy allocation, _Tidy and a _Myproxy store.  And
  *     GM-IMG-014 says so in words: "default-constructs that destination
- *     through the pinned MSVCP90 import".  We now CALL THAT EXPORT.  This is
- *     layout-exact by construction, so the build no longer depends on VC9 or
+ *     through the pinned MSVCP90 import".  We therefore call an MSVCP90
+ *     export instead of inlining one.  [PROPOSED] the row names no symbol --
+ *     it pins a 29-byte span and a vtable cell -- so WHICH export is our
+ *     reading of that sentence, not the row's content.  Given that reading it
+ *     is layout-exact by construction, so the build no longer depends on VC9 or
  *     on _SECURE_SCL, which r1 rode as an undocumented default.
  *   - r1 picked the CRT with GetModuleHandleW(L"msvcr90.dll").  MSVCR90 is a
  *     side-by-side assembly and two instances can be mapped at once, each with
@@ -97,7 +151,7 @@
  *
  *   At shutdown the client hands our pointer straight to the MSVCR90 operator
  *   delete it imports, with NO virtual destructor call, then FreeLibrary's us.
- *   Therefore: allocate from that exact CRT instance (see FindClientCrt), never
+ *   Therefore: allocate from that exact CRT instance (see FindClientImport), never
  *   return a static or global, declare no virtual destructor -- it would take a
  *   vtable slot and shift +0x04/+0x08, and would never be called -- and let
  *   nothing depend on a destructor running.
@@ -125,16 +179,44 @@
  * invented -- the MEANING of these outputs is still UNKNOWN
  * (semantic_status: PROVEN_EXACT_ABI_UNKNOWN_SEMANTIC) and is not guessed here.
  *
- * The row does not name the +4 type.  Two things point at a wstring: the
- * sibling slot +0x08 default-constructs one, and the 35-byte body length fits
- * prologue + the -1 store + one import call + epilogue and little else.  That
- * is corroboration, not proof.  If the client dies at the click, rebuild with
- *   set EXTRA_DEFS=/D PF_GM_SLOT0_TOUCH_PLUS4=0
- * which writes only the -1 the row states verbatim, and COMPARE THE PRINTED
- * SHA256 to be sure you really got a different DLL.
+ * The row does not name the +4 type -- not its size, not its class.  Two
+ * things point at a wstring: the sibling slot +0x08 default-constructs one,
+ * and the 35-byte body length fits prologue + the -1 store + one import call +
+ * epilogue and little else.  That is corroboration, not proof.
+ *
+ * 🔴 Be exact about what the default costs, because the row cuts both ways:
+ * GM-IMG-012 states in ONE clause that the proven fallback "writes -1 to its
+ * first dword, INITIALIZES ITS +4 SUBOBJECT, and does not use the second
+ * pointer", and slot +0x00 is a slot with a PINNED call route (GM-IMG-011
+ * call_counts=1,4; GM-IMG-015 mechanical_slot_+0x00_calls=1).  So the default
+ * build is a DELIBERATE DIVERGENCE from the proven fallback on a reachable
+ * slot: it writes the -1 and leaves +4 exactly as the caller left it.  Do not
+ * describe it as "only what the row states" -- the row states the +4 init just
+ * as plainly.  It is a choice between two ways of being wrong, ordered by
+ * COO-DECISION 20260902_0648 and taken with eyes open:
+ *   =0 leaves a subobject uninitialised that the caller may destroy;
+ *   =1 writes 24 or 28 bytes of OUR guess over a subobject whose size and
+ *      type nobody has measured, possibly past its end, possibly over a
+ *      caller's stack frame.
+ * =0 is the smaller blast radius (it writes nothing we cannot cite), not the
+ * faithful reproduction.  If the client dies at the click in cell 1 or 2, this
+ * is the first suspect, not "a different cause entirely".
+ *
+ * So the DEFAULT IS 0 (revision 3, H2).  Constructing a wstring at first+4
+ * writes 24 or 28 bytes -- the size depends on _SECURE_SCL, which is exactly
+ * the kind of thing we do not know about the client's build -- into memory
+ * whose extent we have never measured.  If the real subobject is smaller, or
+ * if `first` is a caller stack temporary, that is an overwrite in client
+ * memory (return address included) produced by our own guess, at the click.
+ * A default of 1 spent the first attended round on the riskiest cell.
+ *
+ * The default therefore writes only what GM-IMG-012 states verbatim.  Turning
+ * the +4 initialisation on is the THIRD cell of the A/B in README.md:
+ *   set EXTRA_DEFS=/D PF_GM_SLOT0_TOUCH_PLUS4=1
+ * and COMPARE THE PRINTED SHA256 to be sure you really got a different DLL.
  */
 #ifndef PF_GM_SLOT0_TOUCH_PLUS4
-#  define PF_GM_SLOT0_TOUCH_PLUS4 1
+#  define PF_GM_SLOT0_TOUCH_PLUS4 0
 #endif
 
 #include <windows.h>
@@ -155,8 +237,24 @@ namespace {
  */
 typedef void* (__thiscall *wstring_ctor_t)(void* self);
 
+typedef void* (__cdecl *operator_new_t)(size_t);
+
 wstring_ctor_t g_wstringCtor = NULL;
 HMODULE        g_clientCrt   = NULL;
+operator_new_t g_clientNew   = NULL;
+bool           g_resolved    = false;
+
+/*
+ * Names we look for in the CLIENT's import table.  All three are decorated
+ * exactly as MSVC emits them; llvm-undname round-trips all three (README,
+ * "why revision 2 stopped depending on VS2008").
+ */
+const char kOperatorDelete[] = "??3@YAXPAX@Z";
+const char kOperatorNew[]    = "??2@YAPAXI@Z";
+const char kWstringCtor[]    =
+    "??0?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAE@XZ";
+const char kMsvcp90[]        = "msvcp90.dll";
+const char kMsvcr90[]        = "msvcr90.dll";
 
 /* [GM-IMG-013] the value slot +0x04 hands to the GUI model resolver.
  *
@@ -168,53 +266,168 @@ HMODULE        g_clientCrt   = NULL;
  * DllMain so this storage outlives any pointer a consumer retained. */
 wchar_t g_modelBasename[64] = PF_GM_KEY;
 
+/*
+ * One OutputDebugStringW call per line, assembled here.
+ *
+ * Revision 3 emitted the prefix, the text and the newline as three separate
+ * calls.  DebugView renders one row per call and DLL_PROCESS_ATTACH runs with
+ * the client's other threads live, so the token `[GM_PLUGIN] loaded` -- the
+ * single indicator the whole three-cell test order hangs on -- could be split
+ * across rows or interleaved with another emitter, and a literal search for it
+ * would find nothing.  No CRT is used here: this file must not depend on a
+ * string function from a heap we do not own.
+ */
 void Announce(const wchar_t* text) {
-    OutputDebugStringW(L"[GM_PLUGIN] ");
-    OutputDebugStringW(text);
-    OutputDebugStringW(L"\n");
+    wchar_t line[640];
+    const wchar_t prefix[] = L"[GM_PLUGIN] ";
+    int i = 0;
+    for (int p = 0; prefix[p] != L'\0' && i < 637; ++p) {
+        line[i++] = prefix[p];
+    }
+    for (int t = 0; text[t] != L'\0' && i < 637; ++t) {
+        line[i++] = text[t];
+    }
+    line[i++] = L'\n';
+    line[i] = L'\0';
+    OutputDebugStringW(line);
 }
 
+/* Set by FindClientImport when the client's PE headers themselves do not
+ * parse, so a structural failure is never reported as "the symbol is not
+ * imported" (revision 3 collapsed thirteen give-up paths into one message). */
+const wchar_t* g_walkFailure = NULL;
+
 /*
- * Find the CRT instance that will actually free us.
+ * The one lookup primitive in this file: walk the CLIENT's own import table and
+ * report the module (and, when matched by symbol, the bound address) that the
+ * client itself is wired to.
  *
- * GetModuleHandleW(L"msvcr90.dll") is not good enough: MSVCR90 ships as a
- * side-by-side assembly, an app-local copy and a WinSxS copy can both be
- * mapped, they share a base name, and each has its own _crtheap.  Allocating
- * from one and being freed by the other is a shutdown crash whose only
- * symptom is a crash on exit -- and dumpbin /dependents reports success for it.
+ * Why this and never GetModuleHandleW(base name).  MSVCR90 and MSVCP90 both
+ * ship as side-by-side assemblies: an app-local copy under Microsoft.VC90.CRT
+ * and a WinSxS copy can be mapped at the same time, they share a base name,
+ * and each carries its own heap.  A base-name handle is whichever the loader
+ * lists first, which is a coin toss we would lose only at shutdown, with
+ * dumpbin /dependents reporting success the whole time.
+ *   - For the CRT this decides who owns our object: GM-IMG-010 proves the
+ *     client frees us through its own imported operator delete.
+ *   - For MSVCP90 it decides who owns the _Container_proxy an empty
+ *     _SECURE_SCL=1 basic_string takes from its allocator (revision 3, H1).
+ * Anchoring on a thunk the client has already bound gives the right instance
+ * by construction instead of by name.
  *
- * So we walk the main module's import table for the thunk bound to
- * ??3@YAXPAX@Z (operator delete(void*)) -- the very function GM-IMG-010 proves
- * the client calls on us -- and resolve the module from that bound address.
- * The result is the right instance by construction rather than by name.
+ * dllName  NULL = any module; otherwise the import descriptor's DLL name,
+ *          compared case-insensitively.  🔴 NEVER pass NULL when the answer
+ *          decides who owns memory.  The mangled names we look for are NOT
+ *          unique to one library: ??3@YAXPAX@Z is imported by MFC90 and by
+ *          any injected/anti-cheat module, and the wstring ctor's decorated
+ *          name is byte-identical across MSVCP80/90/100.  Matching the first
+ *          descriptor that happens to import the name would hand back the
+ *          wrong module and reinstate exactly the cross-heap free this file
+ *          exists to prevent -- with a green "located" line over it.
+ * symbol   NULL = match the descriptor itself (first bound thunk, ordinal
+ *          imports included, so a stripped INT is still usable); otherwise the
+ *          exact imported-by-name symbol, and out->bound is that binding.
+ * requireExport  descriptor mode only (symbol == NULL): accept a candidate
+ *          module only if it exports this name, and return that address in
+ *          out->bound.  Without it the first bound thunk decides, and one
+ *          forwarded or hooked IAT slot at the head of the descriptor points
+ *          at a different module entirely.
+ *
+ * NOT called from DllMain any more (see ResolveOnce): GetProcAddress on a
+ * forwarded export can re-enter the loader, which is forbidden while holding
+ * the loader lock.  Every loop is still bounded and nothing is dereferenced
+ * that the table did not describe as a name.
  */
-HMODULE FindClientCrt() {
+enum {
+    kMaxDescriptors = 1024,        /* a VC9 exe imports tens, not thousands */
+    kMaxThunksPerDescriptor = 16384
+};
+
+struct ClientImport {
+    HMODULE module;
+    FARPROC bound;
+};
+
+bool FindClientImport(const char* dllName,
+                      const char* symbol,
+                      const char* requireExport,
+                      ClientImport* out) {
+    out->module = NULL;
+    out->bound  = NULL;
     BYTE* base = reinterpret_cast<BYTE*>(GetModuleHandleW(NULL));
     if (base == NULL) {
-        return NULL;
+        g_walkFailure = L"client image: GetModuleHandleW(NULL) returned NULL";
+        return false;
     }
 
     IMAGE_DOS_HEADER* dos = reinterpret_cast<IMAGE_DOS_HEADER*>(base);
     if (dos->e_magic != IMAGE_DOS_SIGNATURE) {
-        return NULL;
+        g_walkFailure = L"client image: no MZ header";
+        return false;
     }
 
     IMAGE_NT_HEADERS* nt =
         reinterpret_cast<IMAGE_NT_HEADERS*>(base + dos->e_lfanew);
     if (nt->Signature != IMAGE_NT_SIGNATURE) {
-        return NULL;
+        g_walkFailure = L"client image: no PE header";
+        return false;
     }
 
     IMAGE_DATA_DIRECTORY* dir =
         &nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT];
     if (dir->VirtualAddress == 0 || dir->Size == 0) {
-        return NULL;
+        g_walkFailure = L"client image: no import directory";
+        return false;
     }
 
     IMAGE_IMPORT_DESCRIPTOR* imp =
         reinterpret_cast<IMAGE_IMPORT_DESCRIPTOR*>(base + dir->VirtualAddress);
 
-    for (; imp->Name != 0; ++imp) {
+    for (int d = 0; d < kMaxDescriptors && imp->Name != 0; ++d, ++imp) {
+        if (dllName != NULL &&
+            lstrcmpiA(reinterpret_cast<const char*>(base + imp->Name),
+                      dllName) != 0) {
+            continue;
+        }
+
+        if (imp->FirstThunk == 0) {
+            continue;
+        }
+        IMAGE_THUNK_DATA* bound =
+            reinterpret_cast<IMAGE_THUNK_DATA*>(base + imp->FirstThunk);
+
+        if (symbol == NULL) {
+            /*
+             * Descriptor match only: we want the module this descriptor is
+             * bound to -- including through an ordinal import, since no name
+             * is read on this path.  We do NOT stop at the first binding
+             * unless it satisfies requireExport: one forwarded or hooked slot
+             * at the head of the table would otherwise pick a module that
+             * merely sits next to the one we asked for.
+             */
+            for (int t = 0; t < kMaxThunksPerDescriptor &&
+                            bound->u1.Function != 0; ++t, ++bound) {
+                HMODULE candidate = NULL;
+                if (!GetModuleHandleExW(
+                        GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
+                            GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+                        reinterpret_cast<LPCWSTR>(bound->u1.Function),
+                        &candidate)) {
+                    continue;
+                }
+                if (requireExport != NULL) {
+                    FARPROC proc = GetProcAddress(candidate, requireExport);
+                    if (proc == NULL) {
+                        continue;
+                    }
+                    out->bound = proc;
+                }
+                out->module = candidate;
+                return true;
+            }
+            continue;
+        }
+
         /*
          * Never fall back to FirstThunk for the NAME table.  After the loader
          * has run, FirstThunk holds resolved absolute addresses, not RVAs to
@@ -223,18 +436,18 @@ HMODULE FindClientCrt() {
          * fault inside DllMain under the loader lock: a hard crash at client
          * start-up.  A descriptor with no INT simply cannot be searched by
          * name, so skip it.  (A normally linked VC9 executable gives every
-         * descriptor an INT; this is the branch, not the expected path.)
+         * descriptor an INT; this is the branch, not the expected path, and
+         * the symbol == NULL mode above still works without one.)
          */
-        if (imp->OriginalFirstThunk == 0 || imp->FirstThunk == 0) {
+        if (imp->OriginalFirstThunk == 0) {
             continue;
         }
 
         IMAGE_THUNK_DATA* names =
             reinterpret_cast<IMAGE_THUNK_DATA*>(base + imp->OriginalFirstThunk);
-        IMAGE_THUNK_DATA* bound =
-            reinterpret_cast<IMAGE_THUNK_DATA*>(base + imp->FirstThunk);
 
-        for (; names->u1.AddressOfData != 0; ++names, ++bound) {
+        for (int t = 0; t < kMaxThunksPerDescriptor &&
+                        names->u1.AddressOfData != 0; ++t, ++names, ++bound) {
             if (IMAGE_SNAP_BY_ORDINAL(names->u1.Ordinal)) {
                 continue;
             }
@@ -244,37 +457,41 @@ HMODULE FindClientCrt() {
                     base + names->u1.AddressOfData);
 
             if (lstrcmpA(reinterpret_cast<const char*>(byName->Name),
-                         "??3@YAXPAX@Z") != 0) {
+                         symbol) != 0) {
+                continue;
+            }
+            if (bound->u1.Function == 0) {
                 continue;
             }
 
-            HMODULE owner = NULL;
             if (GetModuleHandleExW(
                     GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
                         GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
                     reinterpret_cast<LPCWSTR>(bound->u1.Function),
-                    &owner)) {
-                return owner;
+                    &out->module)) {
+                out->bound =
+                    reinterpret_cast<FARPROC>(bound->u1.Function);
+                return true;
             }
-            return NULL;
+            /* Unattributable binding: keep looking.  Revision 3 gave up on
+             * the whole table here, so a first descriptor with an
+             * unattributable thunk hid a perfectly good MSVCR90 descriptor
+             * two entries later. */
+            continue;
         }
     }
-    return NULL;
+    return false;
 }
 
 void* AllocateFromClientCrt(size_t size) {
-    typedef void* (__cdecl *operator_new_t)(size_t);
-
-    if (g_clientCrt == NULL) {
+    /* Resolved once in DllMain so the load-time report is about the function
+     * we will actually call, not about the module that might export it
+     * (revision 2 printed "client CRT: located" before anyone had asked
+     * MSVCR90 for operator new). */
+    if (g_clientNew == NULL) {
         return NULL;
     }
-
-    operator_new_t crtNew = reinterpret_cast<operator_new_t>(
-        GetProcAddress(g_clientCrt, "??2@YAPAXI@Z"));
-    if (crtNew == NULL) {
-        return NULL;
-    }
-    return crtNew(size);
+    return g_clientNew(size);
 }
 
 class GameMasterInterface {
@@ -314,7 +531,34 @@ const wchar_t* GameMasterInterface::GetWindowModelBasename() {
 }
 
 void* GameMasterInterface::MakeEmptyString(void* destination) {
-    if (destination != NULL && g_wstringCtor != NULL) {
+    if (g_wstringCtor == NULL) {
+        /*
+         * We cannot construct.  We still return the destination, because
+         * returning NULL does not avoid the damage and adds damage of its own:
+         * GM-IMG-014's required_interface_fact flags possible_hidden_sret, and
+         * in that shape the CALLER owns the buffer and runs ~basic_string on
+         * it at scope exit whatever we leave in EAX -- so the wild free
+         * happens either way, while a NULL in EAX additionally gets used as
+         * the object (mov ecx,eax) for a NULL dereference on top.  The row's
+         * own required_next_evidence says to keep the exact fallback
+         * behaviour, and the fallback returns the same pointer in EAX.
+         *
+         * The evidence is the announce below, not the return value; the two
+         * are independent.  If this line ever appears it is NEW EVIDENCE and
+         * belongs in the test report: GM-IMG-014 records blocker
+         * NO_PINNED_CALL_ROUTE_FOR_SLOT8 -- none of the five pinned
+         * application+0x7C8 routes reaches slot +0x08 and no rel32 branch
+         * targets it -- so a call here means a route nobody has observed
+         * (split address or an external alias, which that row's nonclaim
+         * explicitly leaves open).
+         */
+        Announce(L"slot +0x08 called with no MSVCP90 ctor -- destination left "
+                 L"UNCONSTRUCTED, pointer returned unchanged.  REPORT THIS "
+                 L"LINE: GM-IMG-014 has no pinned call route, so a call here "
+                 L"is new evidence.");
+        return destination;
+    }
+    if (destination != NULL) {
         try {
             g_wstringCtor(destination);
         } catch (...) {
@@ -331,25 +575,183 @@ void* GameMasterInterface::MakeEmptyString(void* destination) {
  * __stdcall are indistinguishable to the caller, so no convention mismatch is
  * possible here.
  */
+/*
+ * Everything that can re-enter the loader happens here, on the client's own
+ * thread, AFTER DllMain has returned -- never under the loader lock.
+ * GetProcAddress on a forwarded export calls LdrpLoadDll; doing that from
+ * DLL_PROCESS_ATTACH is a documented deadlock/corruption, and the symptom
+ * would be "the client does not start", which on screen is indistinguishable
+ * from "the DLL was never loaded" -- the one state the three-cell stop rule
+ * cannot get out of.  [GM-IMG-001] has the client call this export from
+ * ordinary code, so we are out of the lock by then.
+ *
+ * Single-threaded by construction: GM-IMG-001 pins one LoadLibrary ->
+ * GetProcAddress -> call sequence at start-up.
+ */
+void ResolveOnce() {
+    if (g_resolved) {
+        return;
+    }
+    g_resolved = true;
+
+    /*
+     * Pin ourselves.  GM-IMG-017's blocker leaves downstream retention of the
+     * slot +0x04 string unproven, and GM-IMG-010 has the client FreeLibrary us
+     * at shutdown.  If a panel kept the raw pointer, unmapping this module
+     * would fault while reading it -- a crash on exit whose README triage
+     * would send the tester to the CRT, which would look fine.  The result is
+     * checked and reported: revision 3 discarded it, so the whole argument
+     * rested on a call nobody could confirm had worked.
+     */
+    HMODULE self = NULL;
+    BOOL pinned = GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
+                                         GET_MODULE_HANDLE_EX_FLAG_PIN,
+                                     reinterpret_cast<LPCWSTR>(&g_modelBasename),
+                                     &self);
+
+    ClientImport crt;
+    const wchar_t* crtLine =
+        L"client CRT: NOT FOUND -- no import descriptor named msvcr90.dll "
+        L"binds ??3@YAXPAX@Z; CreateGameMaster will return NULL";
+    if (FindClientImport(kMsvcr90, kOperatorDelete, NULL, &crt)) {
+        g_clientCrt = crt.module;
+        g_clientNew = reinterpret_cast<operator_new_t>(
+            GetProcAddress(g_clientCrt, kOperatorNew));
+        crtLine = g_clientNew
+            ? L"client CRT: msvcr90.dll instance taken from the client's own "
+              L"operator delete import, and ??2@YAPAXI@Z resolved in it"
+            : L"client CRT: msvcr90.dll instance located, but it does not "
+              L"export ??2@YAPAXI@Z -- CreateGameMaster will return NULL";
+    } else if (FindClientImport(NULL, kOperatorDelete, NULL, &crt)) {
+        /*
+         * Diagnostic only -- deliberately NOT used.  Somebody else in the
+         * process imports operator delete under that name (MFC90, an injected
+         * anti-cheat module, a proxy CRT).  Allocating from it would be the
+         * cross-heap free GM-IMG-010's required_interface_fact forbids
+         * (returned_object_memory_must_be_safe_for_application_MSVCR90_delete),
+         * so we refuse and print who it was, because that is the fact the
+         * attended round needs.
+         */
+        wchar_t path[MAX_PATH];
+        path[0] = L'\0';
+        GetModuleFileNameW(crt.module, path, MAX_PATH);
+        Announce(L"client CRT: ??3@YAXPAX@Z is imported, but NOT from a "
+                 L"descriptor named msvcr90.dll.  REFUSING it.  Owner:");
+        Announce(path);
+    }
+
+    /*
+     * MSVCP90.  Both anchors are inside the client's own import table AND
+     * filtered by descriptor name, because the decorated ctor name is
+     * byte-identical in MSVCP80/90/100 -- a symbol-only match can bind the
+     * wrong library and reinstate the cross-heap free (H1's whole point).
+     *   1. the client's own binding for the constructor -- then we call the
+     *      exact address it calls;
+     *   2. failing that, a module the msvcp90.dll descriptor is bound to that
+     *      actually exports the name.
+     *
+     * [PROPOSED] the decorated name is not verified against this machine's
+     * msvcp90.dll.  If it is wrong we resolve NULL, say so on the line below,
+     * and degrade as described in CreateGameMaster -- we never fall back to an
+     * inlined constructor, because the whole point of calling the export is
+     * that our own layout may differ.
+     */
+    ClientImport cpp;
+    ClientImport probe;
+    const wchar_t* cppLine =
+        L"msvcp90 wstring ctor: NOT RESOLVED -- the client binds nothing from "
+        L"a descriptor named msvcp90.dll; slot +0x00 (+4 init) and +0x08 skip "
+        L"construction";
+    if (FindClientImport(kMsvcp90, kWstringCtor, NULL, &cpp)) {
+        g_wstringCtor = reinterpret_cast<wstring_ctor_t>(cpp.bound);
+        cppLine = L"msvcp90 wstring ctor: resolved from the client's own "
+                  L"msvcp90.dll import binding (that exact instance)";
+    } else if (FindClientImport(kMsvcp90, NULL, kWstringCtor, &cpp)) {
+        g_wstringCtor = reinterpret_cast<wstring_ctor_t>(cpp.bound);
+        cppLine = L"msvcp90 wstring ctor: the client does not import it, but "
+                  L"the msvcp90.dll instance it is bound to exports it";
+    } else if (FindClientImport(kMsvcp90, NULL, NULL, &probe)) {
+        cppLine = L"msvcp90 wstring ctor: NOT RESOLVED -- the client's "
+                  L"msvcp90.dll instance does not export that decorated name. "
+                  L"Run dumpbin /exports msvcp90.dll and report what it does "
+                  L"export";
+    }
+
+    if (g_walkFailure != NULL) {
+        Announce(g_walkFailure);
+    }
+    Announce(pinned ? L"self-pin: ok (FreeLibrary cannot unmap us)"
+                    : L"self-pin: FAILED -- a retained slot +0x04 pointer "
+                      L"would dangle after FreeLibrary; report a crash on "
+                      L"exit as THIS, not as a heap mismatch");
+    Announce(crtLine);
+    Announce(cppLine);
+    Announce(L"key=" PF_GM_KEY);
+#if PF_GM_SLOT0_TOUCH_PLUS4
+    Announce(L"slot +0x00 +4 init: ON  (cell 3 -- the guessed subobject)");
+#else
+    Announce(L"slot +0x00 +4 init: off (cell 1/2 default -- writes the -1 and "
+             L"leaves +4 as the caller left it)");
+#endif
+}
+
 extern "C" void* __cdecl CreateGameMaster(void) {
     try {
+        ResolveOnce();
+#if PF_GM_SLOT0_TOUCH_PLUS4
         /*
-         * Refuse rather than hand back a half-built object.
+         * Refuse rather than hand back a half-built object -- but only in the
+         * build that promises to build one.
          *
-         * Without the MSVCP90 constructor, slot +0x00 would write its -1 and
-         * leave the +4 subobject UNINITIALISED -- diverging from the proven
-         * fallback, which initialises it [GM-IMG-012] -- and slot +0x08 would
-         * return a buffer it never constructed while telling the caller a
-         * wstring lives there.  Whoever read or destroyed those would be
-         * working on garbage.  That is a NEW failure, strictly worse than the
-         * dead button we already have, so we decline the job instead and say
-         * why.  DllMain has already printed which lookup failed.
+         * With PF_GM_SLOT0_TOUCH_PLUS4=1 and no constructor, slot +0x00 would
+         * write its -1 and leave the +4 subobject UNINITIALISED, diverging
+         * from the proven fallback which initialises it [GM-IMG-012].  That is
+         * a NEW failure, strictly worse than the dead button we already have,
+         * so we decline the job and say why.  DllMain has already printed
+         * which lookup failed.
          */
         if (g_wstringCtor == NULL) {
-            Announce(L"FAIL: msvcp90 wstring ctor unresolved; returning NULL "
-                     L"rather than a half-constructed object");
+            Announce(L"FAIL: msvcp90 wstring ctor unresolved and "
+                     L"PF_GM_SLOT0_TOUCH_PLUS4=1; returning NULL rather than a "
+                     L"half-constructed object.  Rebuild with =0 to test the "
+                     L"key path without the constructor.");
             return NULL;
         }
+#else
+        /*
+         * Default build (revision 3): the constructor is NOT required to do
+         * this job, so its absence must not cost the attended round.
+         *
+         * Note what this branch does NOT claim: with the macro off, +4 is
+         * left uninitialised on EVERY call, resolved constructor or not, so
+         * the divergence from GM-IMG-012's fallback that the =1 branch above
+         * refuses to ship is shipped here unconditionally.  That is the
+         * ordered trade (see the PF_GM_SLOT0_TOUCH_PLUS4 block at the top),
+         * not something this guard prevents.
+         *
+         * Slot +0x00 writes only the -1 that GM-IMG-012 states verbatim, and
+         * slot +0x04 -- the only slot on the click route that decides anything
+         * [GM-IMG-006, -007] -- returns a static string and needs no heap and
+         * no CRT at all.  Slot +0x08 has no pinned call route whatsoever
+         * (GM-IMG-014, blocker NO_PINNED_CALL_ROUTE_FOR_SLOT8) and now refuses
+         * loudly instead of lying.  Refusing the whole interface here would
+         * trade the one question we can answer this round -- does a non-empty
+         * key open the window -- against a slot nobody has observed being
+         * called.
+         *
+         * [LANE-GM assumption, awaiting COO confirmation] this is narrower
+         * than the "tie the guard to the macro" wording in the lane's 0559
+         * letter, which asserted that nothing uses the constructor when the
+         * macro is 0.  That is not true -- slot +0x08 uses it unconditionally
+         * -- so the guard moved and slot +0x08 was made safe, rather than the
+         * claim being taken at face value.
+         */
+        if (g_wstringCtor == NULL) {
+            Announce(L"degraded: no MSVCP90 wstring ctor.  Proceeding: slot "
+                     L"+0x00 writes only the -1 and slot +0x08 will refuse "
+                     L"(GM-IMG-014 has no pinned call route).");
+        }
+#endif
 
         void* raw = AllocateFromClientCrt(sizeof(GameMasterInterface));
         if (raw == NULL) {
@@ -382,45 +784,33 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID reserved) {
         return TRUE;
     }
 
-    DisableThreadLibraryCalls(module);
-
     /*
-     * Pin ourselves.  GM-IMG-017's blocker leaves downstream retention of the
-     * slot +0x04 string unproven, and GM-IMG-010 has the client FreeLibrary us
-     * at shutdown.  If a panel kept the raw pointer, unmapping this module
-     * would fault while reading it -- a crash on exit whose README triage would
-     * send the tester to the CRT, which would look fine.  Pinning removes the
-     * whole class for the cost of not unloading.
+     * Everything here must be safe under the loader lock, and the load proof
+     * must come FIRST.
+     *
+     * Revision 3 walked the import table and called GetProcAddress twice
+     * before announcing anything, so if any of that had faulted or re-entered
+     * the loader, the client would have failed to start with no [GM_PLUGIN]
+     * line at all -- which the three-cell stop rule reads as "the DLL was
+     * never loaded" and answers by running plugin_image_check, a tool that
+     * inspects bytes in a file and would report image_ok.  That is a state the
+     * plan can enter and cannot leave, on the one attended round it is
+     * budgeted for.  So: announce first, resolve later (see ResolveOnce,
+     * called from CreateGameMaster on the client's own thread).
+     *
+     * DisableThreadLibraryCalls and OutputDebugStringW are both safe here.
      */
-    HMODULE self = NULL;
-    GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
-                           GET_MODULE_HANDLE_EX_FLAG_PIN,
-                       reinterpret_cast<LPCWSTR>(&g_modelBasename),
-                       &self);
-
-    g_clientCrt = FindClientCrt();
-
-    HMODULE cpp = GetModuleHandleW(L"msvcp90.dll");
-    if (cpp != NULL) {
-        /*
-         * std::basic_string<wchar_t,char_traits<wchar_t>,allocator<wchar_t> >
-         * ::basic_string(void), public __thiscall.
-         * [PROPOSED] name not verified against this machine's msvcp90.dll.  If
-         * it is wrong we resolve NULL, skip both constructions, and say so
-         * below -- we never fall back to an inlined constructor, because the
-         * whole point of calling the export is that our own layout may differ.
-         */
-        g_wstringCtor = reinterpret_cast<wstring_ctor_t>(GetProcAddress(
-            cpp,
-            "??0?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAE@XZ"));
-    }
-
-    Announce(L"loaded  build=" PF_GM_WIDE(__DATE__) L" " PF_GM_WIDE(__TIME__));
-    Announce(g_clientCrt   ? L"client CRT: located via import table"
-                           : L"client CRT: NOT FOUND -- CreateGameMaster will return NULL");
-    Announce(g_wstringCtor ? L"msvcp90 wstring ctor: resolved"
-                           : L"msvcp90 wstring ctor: NOT RESOLVED -- slots +0x00/+0x08 will skip construction");
+    DisableThreadLibraryCalls(module);
+    Announce(L"loaded build=" PF_GM_WIDE(__DATE__) L" " PF_GM_WIDE(__TIME__));
     Announce(L"key=" PF_GM_KEY);
+#if PF_GM_SLOT0_TOUCH_PLUS4
+    Announce(L"slot +0x00 +4 init: ON  (cell 3 -- the guessed subobject)");
+#else
+    Announce(L"slot +0x00 +4 init: off (cell 1/2 default)");
+#endif
+    Announce(L"CRT / msvcp90 lookups are deferred to the first "
+             L"CreateGameMaster call, off the loader lock -- their result "
+             L"lines appear then, not now");
 
     return TRUE;
 }

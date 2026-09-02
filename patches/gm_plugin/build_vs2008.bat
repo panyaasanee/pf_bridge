@@ -15,7 +15,7 @@ REM To change build options WITHOUT editing the source (the README's A/B needs
 REM this -- revision 1 documented rebuild flags that no one could actually
 REM pass):
 REM   set EXTRA_DEFS=/D PF_GM_KEY=L\"GMUI_BASIC\"
-REM   set EXTRA_DEFS=/D PF_GM_SLOT0_TOUCH_PLUS4=0
+REM   set EXTRA_DEFS=/D PF_GM_SLOT0_TOUCH_PLUS4=1   (revision 3 default is 0)
 REM Then ALWAYS compare the SHA256 printed at the end against the previous
 REM build. If it is unchanged, your flag did not reach the compiler and you are
 REM about to re-test an identical DLL.
@@ -101,10 +101,16 @@ echo      (read these lines yourself once, do not just trust the check:)
 findstr /i "CreateGameMaster" exports.txt
 
 REM ---------------------------------------------------------------------------
-REM Check 2: CRT dependencies. Revision 1 printed a [WARN] here and then
-REM printed [OK] anyway, which is not a check. A wrong CRT crashes at shutdown,
-REM far from its cause; MSVCP90 must be present too, or our wstring ctor
-REM resolution has nothing to bind to.
+REM Check 2: CRT dependency. Revision 1 printed a [WARN] here and then printed
+REM [OK] anyway, which is not a check. A wrong CRT crashes at shutdown, far
+REM from its cause, so the MSVCR90 half below is a real FAIL.
+REM
+REM The MSVCP90 half is NOT a check and revision 4 stops pretending it is:
+REM this DLL includes only <windows.h> and <new> (placement new only, no
+REM import), and catch(...) pulls __CxxFrameHandler3 from MSVCR90, so the
+REM built image NEVER depends on MSVCP90 and the warning below is permanent.
+REM It also would not mean what it said: we bind to the CLIENT's msvcp90
+REM instance, not to ours. It is printed as information, not as a gate.
 REM ---------------------------------------------------------------------------
 echo.
 echo === check 2/3: CRT dependencies ===
@@ -116,10 +122,11 @@ if errorlevel 1 (
 echo [ok] MSVCR90.dll present
 dumpbin /nologo /dependents GameMaster.dll | findstr /i "MSVCP90" >nul
 if errorlevel 1 (
-  echo [WARN] MSVCP90.dll is not a dependency. Not fatal -- we resolve its
-  echo        wstring ctor dynamically -- but confirm the client itself loads it,
-  echo        or slots +0x00/+0x08 will skip construction. The plug-in prints
-  echo        which of the two it did; read the debug output.
+  echo [info] MSVCP90.dll is not a dependency of THIS DLL, which is expected
+  echo        and not a finding: we resolve the wstring ctor inside the
+  echo        CLIENT's own msvcp90 instance at run time. What matters is the
+  echo        [GM_PLUGIN] 'msvcp90 wstring ctor:' line in DebugView, which is
+  echo        printed at the first CreateGameMaster call, not at load.
 ) else (
   echo [ok] MSVCP90.dll present
 )
@@ -148,7 +155,19 @@ echo      Eyeball the three vtable slots by hand once, in disasm.txt: they must
 echo      appear in declaration order and slot +0x04 must be a bare ret.
 
 echo.
-echo === sha256 (RECORD THIS, and compare it against your previous build) ===
+echo === EXTRA_DEFS this build actually saw ===
+echo      EXTRA_DEFS=%EXTRA_DEFS%
+echo      Empty here means cell 1.  If you meant cell 2 or 3 and this is
+echo      empty, the flag did NOT reach the compiler - stop and set it.
+
+echo.
+echo === sha256 (RECORD THIS; it is NOT a flag-arrival check) ===
+echo      The DLL embeds __DATE__/__TIME__ and the PE header carries a
+echo      link timestamp, so EVERY rebuild changes this hash whether or
+echo      not your flag arrived.  Record it to prove the INSTALLED file is
+echo      this build (plugin_image_check compares them).  The real control
+echo      that the flag arrived is the line above plus the [GM_PLUGIN]
+echo      'key=' and 'slot +0x00 +4 init:' lines in DebugView.
 certutil -hashfile GameMaster.dll SHA256
 
 echo.
@@ -156,4 +175,13 @@ echo [OK] GameMaster.dll built and statically checked.
 echo      Install with install.bat -- do NOT copy by hand: install.bat refuses
 echo      to overwrite an existing GameMaster.dll, which would destroy a file
 echo      nobody in this project has ever been able to obtain.
+echo.
+echo === next step 0, BEFORE booting the game (pirate-force-server checkout) ===
+echo      set PYTHONPATH=src
+echo      py -3 -m pirateforce_foundation.gm.plugin_image_check --dll "%CD%\GameMaster.dll" --client-dir "^<client folder^>"
+echo      It names every file-level failure at once (missing / not_pe /
+echo      wrong_machine / no_exports / export_decorated / manifest_missing ...)
+echo      and exit code 0 also means the INSTALLED file is this build, byte for
+echo      byte.  One attended round: do not spend it discovering these one at a
+echo      time.
 endlocal

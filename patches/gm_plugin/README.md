@@ -1,6 +1,13 @@
 # GameMaster.dll — ปลั๊กอิน GM ที่สร้างขึ้นใหม่ (source เดินทาง cloud → bridge)
 
-[สาย LANE-GM รอบ `ku3jz6` · revision 2 · 2026-09-01T22:2x+07:00]
+[สาย LANE-GM รอบ `q6p0pb` · **revision 4** · 2026-09-02T08:3x+07:00]
+[revision 3 = แก้ H1/H2 ตามคำสั่ง `COO-DECISION 20260902_0648` ซึ่งย้าย `patches/gm_plugin/` มาเป็นเขตเขียนของสาย LANE-GM
+ · **revision 3 ไม่เคยออกจาก working tree** — pf-adversary รอบเดียวกันหักล้างสองข้อระดับ CRITICAL ในตัวมันเอง
+ (การค้นด้วยสัญลักษณ์อย่างเดียวคืนโมดูลผิดได้ทั้ง MSVCR90 และ MSVCP90) ⇒ ที่ commit จริงคือ **revision 4**
+ · ก่อนหน้านี้ revision 2 รอบ `ku3jz6` 2026-09-01T22:2x+07:00]
+
+🔴 **ห้าม build revision 2 ที่ติดตั้งไปแล้ว/ที่ยังค้างอยู่** — `NOW.md` P-3 ห้ามไว้เอง จนกว่า revision 3 จะขึ้น `main`
+เหตุผลอยู่ที่หัวข้อ "revision 3 แก้อะไร" ด้านล่าง (สองข้อคือ cross-heap free กับการเขียนของขนาดที่ยังเดาอยู่ลงหน่วยความจำ client)
 
 ## ทำไมมีโฟลเดอร์นี้
 
@@ -48,8 +55,11 @@ sha256 แทนการ paste ผ่าน code block" และเป็น a
 | `+0x04` | ไม่มี argument, `ret` เปล่า, คืน pointer ไปยังสตริง UTF-16 ปิดท้าย NUL | `GM-IMG-006` |
 | `+0x08` | destination pointer 1 ตัว, `ret 4`, default-construct MSVCP90 wstring | `GM-IMG-014` |
 
-`[MEASURED — clang-cl 18 targeting the 32-bit MS ABI, รอบ ku3jz6 · ไม่ใช่ MSVC/VC9 จึงเป็นการยืนยัน
-แวดล้อม ไม่ใช่ข้อพิสูจน์ว่า VC9 จะให้ผลเดียวกัน]`
+`[MEASURED — clang 18 target `i386-pc-windows-msvc` · วัดซ้ำบน **revision 3** รอบ `q6p0pb`
+(ผลเท่า revision 2 ทุกช่อง) · ไม่ใช่ MSVC/VC9 จึงเป็นการยืนยันแวดล้อม ไม่ใช่ข้อพิสูจน์ว่า VC9 จะให้ผลเดียวกัน
+· 🔴 และคลาวด์ไม่มี Windows SDK จริง ต้องเขียน `windows.h` ปลอมขั้นต่ำ (typedef + โครง PE + prototype)
+ให้คอมไพเลอร์ ⇒ สิ่งที่วัดคือ **โค้ดของเรา** (ไวยากรณ์สะอาดที่ `-Wall -Wextra` · ลำดับ vtable · epilogue)
+ไม่ใช่ความเข้ากันได้กับ SDK จริง ตัวที่นับยังเป็น `build_vs2008.bat` check 3/3 บนบริดจ์เหมือนเดิม]`
 
 คอมไพล์จริงด้วย `clang-cl` (MS ABI, `-m32`, `/W4`) ผ่านสะอาดไม่มี warning แล้ววัดสองอย่าง:
 
@@ -144,6 +154,86 @@ dumpbin /imports GameClient.exe | findstr /i "msvcr90 ??3@YAXPAX@Z"
 
 เห็น `??3@YAXPAX@Z` ในรายการ = ผ่าน · เห็นแต่ตัวเลข ordinal = ต้องเปลี่ยนวิธีหา CRT (บอกกลับมา)
 
+## 🔴 ลำดับสามช่อง และกติกาหยุด (`COO-DECISION 20260902_0648` ข้อ ก — ยืนยันตัวต่อตัว)
+
+มีรอบ attended **รอบเดียว** ต่อการนัดหนึ่งครั้ง แต่ละช่องต้อง build ใหม่ ติดตั้งใหม่ เทียบ sha ใหม่
+ทำตามลำดับนี้เท่านั้น **ห้าม build ช่องที่สี่** (`GMUI_BASIC` + `PLUS4=1`) ไม่ว่าผลจะเป็นอย่างไร
+
+| ช่อง | `PF_GM_KEY` | `PF_GM_SLOT0_TOUCH_PLUS4` | build เมื่อ |
+|---|---|---|---|
+| **1 (เริ่มที่นี่)** | `GMUI_1` (default) | `0` (default) | เสมอ — build เปล่า ๆ `build_vs2008.bat` ได้ช่องนี้ |
+| **2** | `GMUI_BASIC` | `0` | ช่อง 1 ขึ้นบรรทัด `loaded` แล้ว **แต่คลิกยังเงียบ** |
+| **3** | `GMUI_1` | `1` | ช่อง 2 ก็ยังเงียบ |
+| ~~4~~ | ~~`GMUI_BASIC`~~ | ~~`1`~~ | **ห้าม** — ผลของมันแยกไม่ออกจากสามช่องแรก แลกหนึ่งรอบ attended ฟรี ๆ |
+
+**ตัวชี้ทางเดียวว่าจะเดินต่อได้:** บรรทัด `[GM_PLUGIN] loaded build=...` ใน DebugView
+(revision 4: บรรทัดนี้เป็น **สิ่งแรก** ที่ `DllMain` พิมพ์ ก่อนโค้ดอะไรก็ตามที่ fault ได้ · ส่วนบรรทัดผล
+`client CRT:` / `msvcp90 wstring ctor:` / `self-pin:` ย้ายไปพิมพ์ตอน **คลิกครั้งแรก** เพราะการ resolve
+ย้ายออกจาก loader lock — เห็น `loaded` แต่ไม่เห็นสามบรรทัดนั้น = ปุ่มยังไม่เคยเรียก `CreateGameMaster`
+ซึ่งเป็นข้อมูลคนละชิ้นกับ "DLL ไม่ถูกโหลด" และเป็นสิ่งที่รอบก่อนแยกไม่ได้เลย)
+- **ไม่มีบรรทัดนี้** = DLL ไม่เคยถูกโหลด ⇒ **หยุด ห้าม build ช่องถัดไป** ให้รัน `plugin_image_check` (ขั้นที่ 0 ข้างล่าง)
+  แล้วแก้ตามคำตอบของมันก่อน — การ build ช่องถัดไปตอนที่ DLL ยังไม่ถูกโหลดคือการเผารอบเทสโดยไม่ได้ข้อมูลเลย
+- **มีบรรทัดนี้แต่คลิกเงียบ** = เดินไปช่องถัดไปตามตาราง
+
+**กติกาหยุด:** ครบสามช่องแล้วยังเงียบเหมือนกันหมด = ผลลบแบบมีขอบเขต (**bounded negative**)
+อ่านว่า "โหลดได้ แต่ประตูไม่ได้อยู่ตรงนี้" ⇒ กลับไปที่ `RE-164` ผู้ต้องสงสัยข้อ 1 (`GM-IMG-005`
+gate `GMModule_Client+0x19`) **ไม่ใช่** อ่านว่า "ปลั๊กอินใช้ไม่ได้"
+
+## ขั้นที่ 0 ของทุกช่อง — ก่อนบูตเกม (ไม่ต้องมี VC toolchain)
+
+จาก checkout ของ `pirate-force-server`:
+
+```
+set PYTHONPATH=src
+py -3 -m pirateforce_foundation.gm.plugin_image_check --dll <build>\GameMaster.dll --client-dir "<ที่ติดตั้ง client>"
+```
+
+บันทึก **verdict + sha256** ลงใบเทสทุกครั้ง · exit code 0 เมื่อทุกพาธเป็น `image_ok` **และ**
+ไฟล์ที่ติดตั้งข้าง client เป็นไฟล์เดียวกับที่เพิ่ง build (กันกับดัก "เทส DLL ตัวเมื่อวานซ้ำ")
+มันบอก **ทุกปัญหาที่บล็อกพร้อมกัน** ไม่ใช่ทีละข้อต่อหนึ่ง build:
+`missing` / `no_such_dir` / `not_pe` / `wrong_machine` / `not_a_dll` / `no_exports` /
+`export_decorated` / `export_forwarded` / `export_missing` / `manifest_missing` / `image_ok`
+
+## revision 3 แก้อะไร (สองข้อ HIGH ที่ pf-adversary ของสายนี้เจอในซอร์สของสายนี้เอง)
+
+**H1 — `DllMain` เคยหา MSVCP90 ด้วย `GetModuleHandleW(L"msvcp90.dll")`**
+คือวิธีค้นด้วยชื่อฐานแบบเดียวกับที่ revision 2 เพิ่งกำจัดทิ้งไปสำหรับ MSVCR90 ในไฟล์เดียวกัน
+และมันแย่กว่าตรงที่ MSVCP90: `basic_string` ที่ `_SECURE_SCL=1` จอง `_Container_proxy` ผ่าน allocator
+**แม้เป็นสตริงว่าง** ⇒ จองผ่าน instance A แล้ว client ทำลายผ่าน instance B ที่มัน pin ไว้ = cross-heap free
+⇒ revision 3 ใช้ **การเดิน import table ของ client** ตัวเดียวกันกับทั้งสองฝั่ง (`FindClientImport`)
+สองชั้น: (1) หา thunk ที่ client ผูกไว้กับ ctor ตัวนั้นตรง ๆ แล้ว**เรียกที่อยู่นั้นเลย**
+(2) ถ้าไม่มี ให้หา instance ของ `msvcp90.dll` ที่ client ผูกอยู่ แล้ว `GetProcAddress` จากตัวนั้น
+บรรทัด `[GM_PLUGIN]` ตอนโหลดบอกว่าใช้ทางไหน — เป็นหลักฐานที่ต้องแนบในใบเทส
+
+**H2 — `PF_GM_SLOT0_TOUCH_PLUS4` เคย default = 1**
+คือ build ปกติจะ construct ของขนาดที่ **ยังเดาอยู่** (24 หรือ 28 ไบต์ แล้วแต่ `_SECURE_SCL` ของ client
+ซึ่งเราไม่รู้) ทับ `first+4 ..` ในหน่วยความจำของ client — `GM-IMG-012` **ไม่ได้บอกชนิดของ `+4`**
+ถ้าของจริงเล็กกว่า = เขียนล้น (ถ้า `first` เป็น temporary บนสแตกผู้เรียก = ทับ return address ตอนคลิก)
+⇒ default ใหม่ = **0** เขียนเฉพาะ `-1` ที่แถวนั้นเขียนไว้ตรง ๆ · การแตะ `+4` เป็นช่องที่ 3 แบบ opt-in
+
+**revision 4 (รอบเดียวกัน หลัง pf-adversary รอบสองของสายนี้เอง) แก้เพิ่มอีกแปดข้อ:**
+`FindClientImport` **ต้องกรองชื่อ descriptor เสมอ** — `??3@YAXPAX@Z` ไม่ได้มีแต่ MSVCR90 (MFC90 และโมดูล
+anti-cheat ที่ inject เข้ามาก็ import) และชื่อ mangled ของ wstring ctor **เหมือนกันเป๊ะใน MSVCP80/90/100**
+⇒ revision 3 ที่ค้นด้วยสัญลักษณ์อย่างเดียวคืนโมดูลผิดได้ = cross-heap free ตัวเดิมที่ H1 สั่งให้กำจัด
+(วัดจริงด้วย harness ของ adversary) · โหมดค้นด้วยชื่อ dll ต้องยืนยันว่าโมดูลนั้น **export ตัวที่เราต้องการ**
+ไม่ใช่เชื่อ thunk แรก · เจอ binding ที่หาโมดูลไม่ได้แล้วต้องค้นต่อ ไม่ใช่เลิกทั้งตาราง · **การ resolve
+ทั้งหมดย้ายออกจาก `DllMain`** ไปทำตอน `CreateGameMaster` (GetProcAddress บน forwarded export เรียก
+loader ซ้อน = ห้ามทำใต้ loader lock) และ `loaded` พิมพ์เป็นบรรทัดแรกสุด · `Announce` เหลือ
+`OutputDebugStringW` ครั้งเดียวต่อบรรทัด และตัดช่องว่างซ้ำใน `loaded  build=` ⇒ grep ตรงกับที่เอกสารเขียน ·
+ผลของ self-pin ถูกตรวจและรายงาน · slot `+0x08` **คืน pointer เดิม** (ไม่ใช่ NULL) เพราะกรณี hidden sret
+ผู้เรียกทำลาย buffer ของตัวเองอยู่แล้ว การคืน NULL ไม่ได้กันอะไรแต่เพิ่ม NULL-deref
+· ทางยอมแพ้เชิงโครงสร้าง (header ไม่ใช่ PE ฯลฯ) มีข้อความของตัวเองแล้ว
+
+**ยังไม่แก้ (จงใจ ไม่ใช่ตกหล่น):** `build_vs2008.bat` check 3 ยัง grep `ret 8`/`ret 4` ทั้งอิมเมจ จึงผูกกับ
+slot ไหนไม่ได้ และ "slot `+0x04` ต้องเป็น `ret` เปล่า" ยังเป็นคำสั่งให้คนอ่านเอง ไม่ใช่การตรวจ
+— เขียน batch state machine โดยรันไม่ได้เลยเสี่ยงกว่าปล่อยไว้พร้อมบรรทัดนี้ · จองไว้ในไฟล์รอบแล้ว
+
+**พ่วงมาด้วย (จาก MED list ใบ `0559`):** `client CRT: located` ไม่พิมพ์ก่อน `??2@YAPAXI@Z` ถูก resolve จริง
+อีกต่อไป (resolve ตอนโหลด แล้วรายงานผลจริง) · ทุกลูปที่เดิน import table มีขอบเขตแล้ว (ลูปไม่รู้จบใต้
+loader lock = client ไม่สตาร์ต ไม่ใช่แค่ปุ่มตาย) · slot `+0x08` เมื่อ resolve ctor ไม่ได้จะ **คืน NULL
+พร้อมพิมพ์บอก** แทนการคืน buffer ที่ไม่ได้ construct (ดู `GM-IMG-014` blocker `NO_PINNED_CALL_ROUTE_FOR_SLOT8`
+— ไม่มี route ไหนที่พิสูจน์แล้วว่าเรียก slot นี้ **ถ้าเห็นบรรทัดนี้บนจอ = หลักฐานใหม่ ต้องรายงาน**)
+
 ## build
 
 ```
@@ -165,11 +255,19 @@ build_vs2008.bat
 
 ```
 set EXTRA_DEFS=/D PF_GM_KEY=L\"GMUI_BASIC\"
-set EXTRA_DEFS=/D PF_GM_SLOT0_TOUCH_PLUS4=0
+set EXTRA_DEFS=/D PF_GM_SLOT0_TOUCH_PLUS4=1
 ```
 
-🔴 **เทียบ SHA256 ที่สคริปต์พิมพ์กับ build ก่อนหน้าทุกครั้ง** ถ้าเท่าเดิม = แฟล็กไม่ถึง compiler และคุณ
-กำลังจะเทส DLL ตัวเดิมซ้ำ แล้วสรุปผิดว่าสมมติฐานถูกหักล้างไปแล้ว
+🔴 revision 3 **สลับค่า default ของ `PF_GM_SLOT0_TOUCH_PLUS4` จาก 1 เป็น 0** ⇒ บรรทัดที่สองข้างบน
+ตอนนี้คือ "เปิด" ไม่ใช่ "ปิด" อย่างที่ revision 2 เขียนไว้ ใช้เฉพาะช่องที่ 3 ของตาราง "ลำดับสามช่อง" ด้านบน
+
+🔴 **SHA256 ที่สคริปต์พิมพ์ ไม่ใช่ตัวพิสูจน์ว่าแฟล็กถึง compiler** (แก้คำของ revision 2/3 ที่เขียนกลับกัน):
+DLL ฝัง `__DATE__`/`__TIME__` และ PE header มี link timestamp ⇒ **ทุก rebuild ทำให้ sha เปลี่ยนเสมอ**
+ต่อให้ลืม `set EXTRA_DEFS` ก็ตาม ⇒ "sha เปลี่ยน = แฟล็กถึงแล้ว" เป็นข้อสรุปผิดที่พาไปบันทึกว่า
+`GMUI_BASIC` ถูกหักล้างทั้งที่ไม่เคย build มัน
+ตัวควบคุมจริงมีสองอัน: บรรทัด `EXTRA_DEFS=` ที่สคริปต์พิมพ์ก่อน build และบรรทัด `[GM_PLUGIN] key=` /
+`slot +0x00 +4 init:` ใน DebugView · sha256 ใช้เพื่อพิสูจน์ว่า **ไฟล์ที่ติดตั้ง = ไฟล์ที่เพิ่ง build**
+(หน้าที่ของ `plugin_image_check`) เท่านั้น
 
 ## ติดตั้ง
 
@@ -204,6 +302,7 @@ key อะไร — **ถ้าไม่มีบรรทัดพวกนี
 | # | ต้องเห็น | แยกอะไรได้ |
 |---|---|---|
 | 0 | บรรทัด `[GM_PLUGIN] loaded build=...` | **DLL เราถูกโหลดจริง** — ถ้าไม่มี ข้อ 1-3 ไม่มีความหมายเลย |
+| 0b | บรรทัด `client CRT:` / `msvcp90 wstring ctor:` / `self-pin:` **หลังคลิก** | **client เรียก `CreateGameMaster` จริง** — มี `loaded` แต่ไม่มีสามบรรทัดนี้ = ยังไม่เคยถูกเรียก |
 | 1 | ปุ่ม GM ยังโชว์ | ผ่านได้แม้ไม่ติดตั้งอะไรเลย ⇒ ไม่ใช่ตัวตัดสิน แต่ถ้า**หาย**แปลว่าผิดปกติหนัก |
 | 2 | **คลิกแล้ว `GMUI_1` เปิด ถึง tab `GMUI_BASIC`** | ← ข้อที่ตัดสินทั้งหมด |
 | 3 | ปิดเกมไม่แครช | ผ่านได้แม้ไม่ติดตั้งอะไรเลย ⇒ มีความหมายก็ต่อเมื่อข้อ 0 ผ่านแล้ว |
@@ -220,8 +319,8 @@ key อะไร — **ถ้าไม่มีบรรทัดพวกนี
 | พิมพ์ `wstring ctor: NOT RESOLVED` | ชื่อ decorated ผิด — `dumpbin /exports msvcp90.dll` แล้วแก้ |
 | โหลดแล้วแต่**คลิกยังเงียบ** | **key ผิด** (`GMUI_1` เทียบ `GMUI_BASIC` — ดู A/B ข้างบน) · หรือ gate `GMModule_Client+0x19` (`GM-IMG-005`) ปิดอยู่ |
 | ปุ่ม GM **หายไป** | ไม่ใช่เพราะเราคืน NULL (`GM-IMG-002` ⇒ ปุ่มยังโชว์) แต่คือ fallback allocation ของ client เองล้ม — เรื่องอื่น |
-| **แครชตอนคลิก** | slot `+0x00` การ init `+4` → rebuild ด้วย `PF_GM_SLOT0_TOUCH_PLUS4=0` **แล้วเช็คว่า sha256 เปลี่ยนจริง** |
-| **แครชตอนปิดเกม** | heap คนละตัว (แต่ import walk ควรกันไว้แล้ว) — เก็บ debug output มาด้วย |
+| **แครชตอนคลิก** | ช่องที่ 3 (`PLUS4=1`) = การ init `+4` เขียนของขนาดที่เดาไว้ทับหน่วยความจำ client → กลับไปช่อง 1/2 · **ช่อง 1/2 ก็แครชตอนคลิกได้เหมือนกัน**: default ปล่อย `+4` ไม่ init ทั้งที่ `GM-IMG-012` บอกว่า fallback จริง init ให้ ⇒ ผู้เรียกอาจทำลายของที่ไม่ได้ init — **นี่คือผู้ต้องสงสัยที่หนึ่งของช่อง 1/2 ไม่ใช่ "คนละสาเหตุ"** (revision 3 เขียนผิดตรงนี้) เก็บ debug output ทั้งหมดมา |
+| **แครชตอนปิดเกม** | อ่านบรรทัด `self-pin:` ก่อน — `FAILED` = pointer ที่ค้างอยู่ dangling ไม่ใช่เรื่อง heap · จากนั้นดู `client CRT:` ถ้าเขียนว่า **REFUSING** แปลว่ามีคนอื่นใน process import `??3@YAXPAX@Z` ไว้ (MFC90/anti-cheat) และเราปฏิเสธไปแล้ว = ไม่ใช่สาเหตุ · heap คนละตัวเป็นผู้ต้องสงสัยลำดับหลัง เพราะ revision 4 กรองชื่อ descriptor เป็น `msvcr90.dll` แล้ว |
 
 **rollback: ลบไฟล์ `GameMaster.dll` ทิ้ง** client กลับไปเดิน fallback ที่พิสูจน์แล้ว (`GM-IMG-002`) —
 เราไม่ได้ patch ไบต์ไหนของ client เลย ไม่ได้เขียน registry เพิ่มไฟล์ใหม่หนึ่งไฟล์เท่านั้น
@@ -262,11 +361,22 @@ key อะไร — **ถ้าไม่มีบรรทัดพวกนี
 TSV SHA-256: `a5f3fdeb6a830b06e3eb9dceff85fc762459ca3e4f9e7ada152937ef1c898509`
 IMAGE SHA-256: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
 
-## sha256 ของซอร์สในโฟลเดอร์นี้ (ตามธรรมเนียม `patches/` — revision 2)
+## sha256 ของซอร์สในโฟลเดอร์นี้ (ตามธรรมเนียม `patches/` — revision 4)
 
 ```
-7212fc5745f6b336cac42d4a27f81e8db5b33ea3f8ef4de947d07dd9a9d9f032  GameMaster.cpp
+eecd367419a6ae394d07188c6cd0799d263ba04c29f822336d74eb3fa24ee68b  GameMaster.cpp
 9e2a3adc808189ba9ee31060469617e1eb32ab90c8d3094ec0a09a541aba2190  GameMaster.def
-40c6f348a7b195b92100edd381feb2e2ce96285feb9c9132dbb1581d6ceda4d3  build_vs2008.bat
+1202a9839ad74aeadca3b0f0e44d6b2b9c36c3599db4f492e3f4700b0edb8b3d  build_vs2008.bat
 abe8b0b98113405f93431170617bc3a7074b7377c16e6bbcfec2475a5c576ab6  install.bat
 ```
+
+บรรทัดบนคือ sha256 ของ **เนื้อในรีโป (LF)** ตามรูปแบบที่ revision 2 บันทึกไว้
+🔴 `.gitattributes` บังคับ `*.bat text eol=crlf` ⇒ ไฟล์ `.bat` **บนดิสก์ฝั่ง Windows จะไม่ตรงกับค่าข้างบน**
+ค่าที่ `certutil -hashfile` จะให้บนบริดจ์ (CRLF) คือ:
+
+```
+0bdb2c6c84c6078d07fc3c2cab179f0a98fb9916080fd0e57b99222e75c31b6a  build_vs2008.bat   (CRLF บนดิสก์)
+1a00bb6b82bd2d2a90d92065059f23d24a21c775d9188026e36ee782a33b4d0e  install.bat   (CRLF บนดิสก์)
+```
+
+(revision 2 บันทึกไว้ชุดเดียวโดยไม่บอกว่าเป็นชุดไหน ⇒ ใครเช็คบนบริดจ์จะเห็นไม่ตรงและสรุปผิดว่าไฟล์ถูกแก้ระหว่างทาง)
