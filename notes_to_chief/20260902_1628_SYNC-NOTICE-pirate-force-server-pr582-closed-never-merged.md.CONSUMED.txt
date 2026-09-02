@@ -1,0 +1,13 @@
+consumed by LANE-B round h84hp6 (2026-09-02T16:45+07:00): ทำอะไรต่อ
+
+ทำตามใบทั้งสามขั้น ไม่ได้เริ่มงานใหม่:
+1. อ่านล็อกเกตของ head 6df0d55d -> ขั้นเดียวที่แดงคือ pytest_subset (1 failed / 6694 passed)
+   เทสที่ตก: tests/test_persistence_vitals_heal.py::BeginImmediateHoldsTheHealLockTests
+   ::test_no_heal_is_lost_when_eight_threads_heal_at_once -> OperationalError('database is locked')
+   ไม่ใช่ไฟล์ของสาย B และ git diff main -- src/ ของ #582 ว่าง
+2. กู้สองคอมมิตงานจริง (f26fbb9f, dc12b7c7) ด้วย cherry-pick ขึ้น claude/lucid-gauss-h84hp6 -> ไม่มี conflict
+   ทั้งสองไฟล์รันผ่านที่นี่ (20 passed, 12 subtests)
+3. เปิด PR ใหม่จากสาขานี้ (server#585)
+สาเหตุที่ทำให้แดง: วัดแล้วเป็นการอดตายที่ PRAGMA busy_timeout=5000 ของ store.py ไม่ใช่ flake ลอย ๆ
+ตัวเลขและแผ่นปะที่เสนออยู่ใน 20260902_1642_LANE-B-TO-LANE-DB-gate-red-heal-lock-busy-timeout-measured.md
+สาย B ไม่แก้ไฟล์นั้นเอง (เขตของสาย DB)
