@@ -10447,8 +10447,14 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
   owner's own captured 34-byte frame) it composes ONE `Channel_LocalTalkMessageVital` notice via
   `gm/say_wire.make_local_talk_notice_frame`, body exactly `BACK REFUSED`. Subcode 1 (the
   "ออกจากเกม" button, 119-byte frame) gets NOTHING from this lane, on purpose, so `GT-194`'s evidence
-  cannot change underneath it. The wire/DB half is already proven headless (28 tests, byte-equality
-  with say_wire's composer). The tester's job in this entry is ONLY the screen half.
+  cannot change underneath it. The wire/DB half is already proven headless (~~28 tests~~ **30 tests
+  as of round `8z9h9n`** -- the entry was written saying 28 when the suite it names already had 29;
+  corrected here by the lane that wrote it, pf-adversary D15), byte-equality with say_wire's
+  composer. The tester's job in this entry is ONLY the screen half.
+  The spelling `BACK REFUSED` is no longer a lane assumption: `COO-DECISION 20260902_0943`
+  (`notes_to_chief/20260902_0943_COO-DECISION-uia-notice-text-back-refused-confirmed.md`) confirmed
+  it, so a tester who reads a DIFFERENT spelling off the screen is reporting a defect, not a
+  wording that was still being decided.
 
 - PRECONDITION (this is why the entry is BLOCKED): the module composes bytes but is NOT wired yet.
   `runtime.py` is chief's file; this round asks chief for ONE call site (CORE-REQUEST in the PR body).
