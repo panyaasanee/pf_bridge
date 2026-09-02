@@ -426,7 +426,7 @@ IMAGE SHA-256: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623
 eecd367419a6ae394d07188c6cd0799d263ba04c29f822336d74eb3fa24ee68b  GameMaster.cpp
 9e2a3adc808189ba9ee31060469617e1eb32ab90c8d3094ec0a09a541aba2190  GameMaster.def
 58b576f5fd89622493c774db829a5f16acd82b5b6bd4dc2826b17e065677171e  build_vs2008.bat
-40dbea960018a8f342ef35f84a386917d94d352fcf9e5ef62e197970fa250222  install.bat
+6685e76ed7d63f700c52b628df010bc59ccb111ad382a0aba702670adc6f7ef0  install.bat
 83c75d3955a7448e93d30a07511ff3a19b12f0217689c9d35ac8533bb582b9ea  find_mt.bat
 ```
 
@@ -436,7 +436,7 @@ eecd367419a6ae394d07188c6cd0799d263ba04c29f822336d74eb3fa24ee68b  GameMaster.cpp
 
 ```
 1a3157ade227cef1bfec8fe1e76d6c8a2ffbf63e097b6d7fda8a5524d25f83a4  build_vs2008.bat   (CRLF บนดิสก์)
-d6d1772523d94d02cdc28547bdba7caf5380265a0aa3dd745a3ed046c2a381d5  install.bat   (CRLF บนดิสก์)
+181529c8bc5cf5e132a509be152f1d41206698f26227b88d2f3993943c8fa9cf  install.bat   (CRLF บนดิสก์)
 4033da06059525cb525d3a132239e3f60ae7b636fe5768f94d5bee1c28924b64  find_mt.bat   (CRLF บนดิสก์)
 ```
 
@@ -447,9 +447,11 @@ d6d1772523d94d02cdc28547bdba7caf5380265a0aa3dd745a3ed046c2a381d5  install.bat   
 🔴 รอบ `selrsl` (2026-09-02T22:51+07:00): `find_mt.bat` เปลี่ยน (ข้อความ `[FAIL]` มีบล็อก `NEXT STEP`)
 ⇒ **ค่าของ `find_mt.bat` ทั้งสองบรรทัดอัปเดตในคอมมิตเดียวกันกับสคริปต์** · อีกสี่ค่าไม่ขยับ เพราะไฟล์อื่นไม่ถูกแตะ
 · pf-adversary จับข้อนี้ได้เป็นรอบที่สอง (D3 ของรอบ `selrsl` หลัง D8 ของรอบ `hj2cry`) — กฎบรรทัดบนมีอยู่เพราะเรื่องนี้
-🔴 รอบ `p7q74c` (2026-09-03T03:5x+07:00): `install.bat` เปลี่ยนเป็น **revision 4** (`PFGM_FORCE=1` ตาม
+🔴 รอบ `p7q74c` (2026-09-03T04:xx+07:00): `install.bat` เปลี่ยนเป็น **revision 4** (`PFGM_FORCE=1` ตาม
 `COO-DECISION 20260903_0148` ข้อ 7) ⇒ **สองค่าของ `install.bat` อัปเดตในคอมมิตเดียวกันอีกครั้ง**
 · อีกสี่ค่าไม่ขยับ · รอบนี้ไม่ต้องรอ pf-adversary มาจับ — กฎบรรทัดบนถูกอ่านก่อนแก้
+· 🔴 **และอัปเดตรอบสองในรอบเดียวกัน** หลัง pf-adversary ส่งผล (D5-D11) แล้วสคริปต์ถูกแก้อีกชุด
+  ⇒ ค่าที่ปักคือค่า **สุดท้าย** ของรอบนี้ ไม่ใช่ค่าตอนร่างแรก
 🔴 รอบ `b8xrod` (2026-09-03T00:xx+07:00): `install.bat` เปลี่ยนเป็น revision 3 ⇒ **สองค่าของ `install.bat` อัปเดตในคอมมิตเดียวกัน**
 · อีกสี่ค่าไม่ขยับ เพราะ `GameMaster.cpp` `GameMaster.def` `build_vs2008.bat` `find_mt.bat` ไม่ถูกแตะ
 · pf-adversary จับข้อนี้ได้เป็น **รอบที่สาม** (H1 ของรอบ `b8xrod`) — ร่างแรกของรอบนี้ก็ทิ้งค่าเดิมไว้อีก
