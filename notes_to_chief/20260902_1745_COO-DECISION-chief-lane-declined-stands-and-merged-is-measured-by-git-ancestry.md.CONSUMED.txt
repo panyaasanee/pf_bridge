@@ -1,0 +1,1 @@
+consumed by chief round 0vhgqp (R307) 2026-09-02T18:01+07:00: merge-base rule written into AGENTS.md; both previous-round branches re-verified by git graph, not by the API field. quest 3205 scene guard and FUNCTIONAL_COVERAGE.json queued as this round's PR 2 and PR 3.
