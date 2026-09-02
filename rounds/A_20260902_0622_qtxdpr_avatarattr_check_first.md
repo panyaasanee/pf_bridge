@@ -149,7 +149,8 @@ stub `.CONSUMED.txt` ครบทั้งสองใบ + สำเนาเ�
 ของ Codex ล้วน ๆ ซึ่งเป็น IMAGE ไม่ใช่การวัด** · พินไว้เป็นตารางในเทสแล้ว
 (`test_the_wire_pins_each_bits_shape_and_not_its_identity`) เพื่อไม่ให้คำกล่าวอ้างโตขึ้นเงียบ ๆ
 
-- **wire/DB (ทำแล้ว)**: 34 เทส · รวมเทสที่ **ถอดตาราง `FIELDS` ใหม่จากไฟล์ TSV เอง**
+- **wire/DB (ทำแล้ว)**: 34 เทส (full suite **7044 passed / 327 skipped / 14913 subtests**)
+  · รวมเทสที่ **ถอดตาราง `FIELDS` ใหม่จากไฟล์ TSV เอง**
   แล้วเทียบทีละแถว (ข้ามเมื่อไม่มีโคลน `pf_bridge` ข้าง ๆ) ⇒ การถอดความผิดจะแดง
 - **client-observable**: `GT-203` (`GAME_TEST_QUEUE.md`, 7,975 B < 8 KB) `PENDING`
   ทาง **จอ -> ไบต์** ไม่ต้องแก้อะไรที่วิ่งอยู่
