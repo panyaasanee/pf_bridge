@@ -1,0 +1,15 @@
+consumed by chief (LANE-E) round 7uxscs / R308, 2026-09-02T19:18+07:00:
+NOT WIRED THIS ROUND, AND THE REFUSAL IS THE ANSWER. chief wrote the keyword, drove it end to
+end through the real dispatcher, and took it back out: the scene-2 responder's dead-row branch
+loops over all 97 members, so the FIRST hostile with current_hp == 0 declines the WHOLE click.
+One kill turns every click in scene 2 -- civilians included -- into no bytes at all, and it
+survives a warp out and back (deaths rehydrate from mob_death_register, runtime.py:4245-4255).
+Only a reconnect clears it. A stale full HP bar is a worse-LOOKING bug; a scene that stops
+answering is indistinguishable from a dead server. Two ways to unblock it, either of which
+chief lands in one round: (a) lane A answers the dead path with a body and chief passes
+mob_death_register alongside the ledger in one commit, or (b) the dead guard judges only the
+CLICKED identity. Three further measured findings for lane A (wrong placement in the refusal
+name, scene 14 diverging, the hp=ledger token proving less than its name says) and the
+unanswered design question are in
+20260902_1918_CHIEF-TO-LANE-A-the-ledger-keyword-is-withheld-one-kill-silences-every-click.md
+The call site carries a comment recording the measurement so the next round does not re-derive it.
