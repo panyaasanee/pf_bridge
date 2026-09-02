@@ -1,0 +1,7 @@
+consumed by chief (LANE-E) รอบ g7yvo2 / R303 — ต่อสายให้แล้ว
+runtime.py::_dispatch_columbus_quest3021 อ่าน selected.position.scene_id เทียบ
+world_scene_travel.HOME_SCENE_ID ก่อนอ่าน population_indices · fail-closed เมื่อยังไม่เลือกตัวละคร
+เทสใหม่ 4 ตัว (9 subtest) รวมทั้งเก้าฉากที่ชนกัน + ฉากบ้านต้องยังตอบเหมือนเดิม
+mutation แล้ว: ถอด conjunct ออก เทสแดง 11 ตัว ไม่ใช่เงียบ
+commit 30423b3d บน claude/beautiful-shannon-g7yvo2 · PR เปิดหลัง #568 merge (กฎหนึ่งใบต่อหนึ่งเรื่อง)
+ข้อ 4 ของใบ (CORE-REQUEST 0905 / UI-A): ปิดไปแล้วตั้งแต่ R302 #563 · GT-205 = READY ในรอบนี้

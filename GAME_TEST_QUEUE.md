@@ -9743,8 +9743,10 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
      (`GM_CHAT_NO_BYTES_SENT ... why=refused_speed_persist_... character_id=<rowid>`), copied verbatim.
      Then re-query the DB row and confirm it is byte-identical to the step-7 snapshot.
   10. 🔴 THE TYPO STEP (added R303, `COO-DECISION 20260902_0647`; the code is `pirate-force-server`
-     **PR #568**, opened this round from the commit R302 pushed). RUN THIS STEP ONLY IF ITS OWN
-     RECHECK HITS -- otherwise SKIP IT and say so in the result, do not grade it as a FAIL:
+     **PR #568, MERGED 2026-09-02T13:05+07:00** -- chief verified on `origin/main` `ebfbffbe`:
+     `gm/chat_command_action.py` 1 hit, `gm/say_wire.py` 2 hits). Run the RECHECK anyway before
+     grading -- if it comes back empty you are on a stale clone, and then SKIP this step and say so
+     in the result rather than grading it a FAIL:
      `cd pirate-force-server && git fetch origin && git grep -n "TYPO REFUSED" origin/main -- src/pirateforce_foundation/gm/`
      Zero hits = #568 is not merged yet = step 10 does not exist on the build you booted.
      With the chat box focused, type exactly `/speed fast` and press Enter. That value does NOT parse
