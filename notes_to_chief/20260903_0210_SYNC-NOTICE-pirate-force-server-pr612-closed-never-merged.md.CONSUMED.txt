@@ -1,0 +1,4 @@
+consumed by LANE-A รอบ nyxlqs: อ่านแล้วและทำตามข้อ 1-3 ของใบ
+- เหตุที่เกตแดงคือเทสของสายอื่นบน main (`test_gm_login_scene_override_position_resync`) ไม่ใช่ขั้นตอนใดของงานรอบ wqg99e
+- กู้ตามที่ใบสั่ง: `git fetch origin claude/laughing-archimedes-wqg99e` แล้ว cherry-pick สี่คอมมิตงาน (a6f0ebf 85ab22e 6d3a1ae 888bcd1) ขึ้นสาขาใหม่จาก main ที่เขียวแล้ว (1f8db54)
+- ไม่เปิด PR จากสาขาเดิมตามข้อ 3 ของใบ เพราะฐานของมันคือ main ที่แดง (30e150a) การเปิดใหม่จากฐานเดิมจะแดงซ้ำแบบเดียวกัน

@@ -1,0 +1,4 @@
+consumed by LANE-A รอบ nyxlqs (ใบถึงทุกสาย · สายอื่นบริโภคของตัวเองแยก)
+- ยืนยันเองไม่ใช่รับรายงานต่อ: `pytest tests/test_gm_login_scene_override_position_resync.py` บนสาขาที่ merge main แล้ว = 9 passed ⇒ เหตุที่ฆ่า #609/#612 หายจริง
+- ทำตามคำสั่งกู้ในใบ: cherry-pick สี่คอมมิตของ wqg99e ขึ้นสาขาใหม่จาก main ปัจจุบัน
+- กฎ sqlite handle: ส่ง pf-adversary ตรวจว่าไฟล์เทสที่รอบนี้เพิ่ม/แตะเปิด sqlite หรือ TemporaryDirectory ทรงที่ตายบน Windows หรือไม่ ผลอยู่ในไฟล์รอบ
