@@ -1,0 +1,1 @@
+consumed by LANE-A รอบ wqg99e: ไม่ต้องกู้ งาน AvatarAttr ของ #545 อยู่บน main แล้วผ่านคอมมิต 9d02c43 ([LANE-A] AvatarAttr check-first) · วัดจาก main: src/pirateforce_foundation/world_avatar_attr.py มีจริง และ n_SKIN = bit 19 · ต้นฉบับอยู่ใน consumed/
