@@ -26,6 +26,16 @@ REM run from the repo root, a cwd-relative name could make the overwrite guard
 REM inspect one file and the copy take another.
 pushd "%~dp0"
 
+REM !! CLEARED, like every other PFGM_* variable in this script, and it is a
+REM false-provenance fix rather than tidiness (pf-adversary, round `p7q74c`,
+REM D6).  `setlocal` inherits the caller's environment, and `PFGM_FORCED` is
+REM one keystroke from the documented `PFGM_FORCE` -- while `[FORCED]` is the
+REM word this script prints a dozen times, so it is the spelling a person
+REM half-remembers.  Inherited, it makes a fully CHECKED install print "THAT
+REM [OK] MEANS COPIED, NOT CHECKED" with both evidence tokens empty: the label
+REM runs backwards and the line the owner is told to report says nothing.
+set "PFGM_FORCED="
+
 if "%~1"=="" (
   echo Usage: install.bat "C:\path\to\client\folder"
   echo        ^(the folder containing the client executable^)
@@ -369,11 +379,15 @@ REM `failed_rules` names EVERY rule the image breaks, not only the one the
 REM verdict happens to be.  A checker older than round `p7q74c` prints no such
 REM line; that case says so instead of printing an empty `rules=`.
 REM ===========================================================================
+REM `2^>nul` on both, like every other findstr in this file: stderr inside
+REM `for /f ('...')` is NOT captured, so a `%TEMP%` that a cleaner emptied
+REM would print `FINDSTR: Cannot open ...` twice into the middle of the block
+REM the owner is being asked to read and report (pf-adversary, `p7q74c`, D11).
 set "PFGM_VERDICT="
-for /f "tokens=3" %%V in ('findstr /c:"GM_PLUGIN_IMAGE build verdict=" "%PFGM_OUT%"') do if not defined PFGM_VERDICT set "PFGM_VERDICT=%%V"
+for /f "tokens=3" %%V in ('findstr /c:"GM_PLUGIN_IMAGE build verdict=" "%PFGM_OUT%" 2^>nul') do if not defined PFGM_VERDICT set "PFGM_VERDICT=%%V"
 if not defined PFGM_VERDICT set "PFGM_VERDICT=verdict=unparsed_read_the_report_above"
 set "PFGM_RULES="
-for /f "tokens=3" %%R in ('findstr /c:"GM_PLUGIN_IMAGE build failed_rules=" "%PFGM_OUT%"') do if not defined PFGM_RULES set "PFGM_RULES=%%R"
+for /f "tokens=3" %%R in ('findstr /c:"GM_PLUGIN_IMAGE build failed_rules=" "%PFGM_OUT%" 2^>nul') do if not defined PFGM_RULES set "PFGM_RULES=%%R"
 REM `failed_rules=manifest_id2` -> `rules=manifest_id2`: the decision asked for
 REM `rules=`, and re-typing the value into a second literal is how a printed
 REM token and the token a test greps for drift apart.
@@ -387,6 +401,15 @@ REM Same de-quoting as PF_SERVER_REPO above: `set PFGM_FORCE="1"` is how a
 REM person who has been fighting paths with spaces all evening will type it.
 set "PFGM_FORCE_FLAG=%PFGM_FORCE%"
 if defined PFGM_FORCE_FLAG set "PFGM_FORCE_FLAG=%PFGM_FORCE_FLAG:"=%"
+REM A value that is SET but is not the literal `1` fails closed, which is
+REM right, and then prints the same [FAIL] telling the owner to "set
+REM PFGM_FORCE=1" -- which is exactly what they believe they just did
+REM (pf-adversary, round `p7q74c`, D10).  `set PFGM_FORCE=1 ` with a trailing
+REM space off a pasted line, or `set PFGM_FORCE = 1`, costs the attended round
+REM this escape exists to save.  The value itself is NOT echoed: it is the one
+REM string here the owner typed, and a `>` in it would redirect this warning
+REM into a file.
+if defined PFGM_FORCE_FLAG if not "%PFGM_FORCE_FLAG%"=="1" echo [warn] PFGM_FORCE is set, but not to the single character 1 (a trailing space or a space before the = counts), so nothing is being forced.
 if "%PFGM_FORCE_FLAG%"=="1" goto pfgm_forced
 echo.
 echo [FAIL] plugin_image_check refused this file. Its verdict and EVERY
@@ -419,15 +442,48 @@ set "PFGM_FORCED=1"
 echo.
 echo [FORCED] %PFGM_VERDICT% %PFGM_RULES%
 echo [FORCED] PFGM_FORCE=1 IS SET, SO A FILE THIS CHECKER REFUSED IS BEING
-echo [FORCED] COPIED ANYWAY. NOTHING HERE HAS VERIFIED IT. THE VERDICT ON THE
-echo [FORCED] LINE ABOVE IS A FINDING ABOUT THESE BYTES, NOT A WARNING ABOUT A
-echo [FORCED] MISSING TOOL.
+echo [FORCED] COPIED ANYWAY. NOTHING HERE HAS VERIFIED IT.
+REM !! THE NO-BYTES-READ VERDICTS GET DIFFERENT WORDS (pf-adversary, round
+REM `p7q74c`, D7).  `missing` and `unreadable` -- an ACL, an exclusive handle
+REM held by AV or by a client that already mapped the DLL -- reach this label
+REM like any other refusal, and the checker's own comment says of exactly
+REM those verdicts that NO byte was read.  Shouting "this is a finding about
+REM these bytes" over `verdict=unreadable` launders a failure to open a file
+REM into a statement about its contents, in capitals, in the one line the
+REM owner is asked to send us.  The checker names the case itself: it prints
+REM `failed_rules=none_evaluated` when it never got to test a rule.
+if "%PFGM_RULES%"=="rules=none_evaluated" goto pfgm_forced_unread
+echo [FORCED] THE VERDICT ON THE LINE ABOVE IS A FINDING ABOUT THESE BYTES,
+echo [FORCED] NOT A WARNING ABOUT A MISSING TOOL.
+goto pfgm_forced_tail
+
+:pfgm_forced_unread
+echo [FORCED] BUT NO RULE WAS EVALUATED: THE CHECKER NEVER READ THE FILE (IT
+echo [FORCED] WAS MISSING, LOCKED, OR UNREADABLE). THAT VERDICT IS ABOUT
+echo [FORCED] GETTING AT THE FILE, NOT ABOUT WHAT IS INSIDE IT -- AND WHAT WAS
+echo [FORCED] JUST COPIED IS THEREFORE COMPLETELY UNEXAMINED.
+
+:pfgm_forced_tail
 echo [FORCED] TELL LANE-GM TWO THINGS: THE TOKENS ABOVE, AND WHETHER THE GM
 echo [FORCED] WINDOW OPENED AFTERWARDS. EITHER ANSWER IS EVIDENCE -- IF IT
 echo [FORCED] OPENED, A RULE OF OURS IS WRONG ABOUT REAL FILES AND WE OWE YOU
 echo [FORCED] A FIX; IF IT DID NOT, THE RULE JUST SAVED THE SESSION.
-echo [FORCED] THE FULL REPORT IS KEPT AT:
-echo [FORCED]     "%PFGM_OUT%"
+REM !! THE REPORT IS APPENDED TO A LOG NOTHING IN THIS SCRIPT EVER DELETES
+REM (pf-adversary, round `p7q74c`, D5).  `%PFGM_OUT%` is a FIXED path that
+REM every later run deletes on its way past -- including the next run, the
+REM successful one, at the `image_ok` branch.  So the only durable trace of a
+REM forced install used to be console scrollback the owner was told to replace
+REM with a screenshot of the [OK] line.  Appending, never overwriting: two
+REM forced installs are two entries, and the second must not erase the first.
+set "PFGM_LOG=%TEMP%\pf_gm_forced_installs.log"
+echo ---------------- FORCED INSTALL %DATE% %TIME% ---------------->> "%PFGM_LOG%"
+echo target: "%TARGET%">> "%PFGM_LOG%"
+echo %PFGM_VERDICT% %PFGM_RULES%>> "%PFGM_LOG%"
+type "%PFGM_OUT%" >> "%PFGM_LOG%" 2>nul
+echo [FORCED] THIS RUN IS APPENDED, PERMANENTLY, TO:
+echo [FORCED]     "%PFGM_LOG%"
+echo [FORCED] (THE REPORT AT "%PFGM_OUT%" IS DELETED BY THE NEXT RUN OF THIS
+echo [FORCED] SCRIPT, SO SEND THE LOG ABOVE, NOT THAT ONE.)
 echo [FORCED] ROLLBACK IS ONE FILE: DELETE THE COPY IN THE CLIENT FOLDER.
 goto do_copy
 

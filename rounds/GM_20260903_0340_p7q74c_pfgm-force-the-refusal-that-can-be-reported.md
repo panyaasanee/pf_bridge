@@ -71,31 +71,51 @@
 
 ## หลักฐาน
 
-### ตารางกลายพันธุ์ — เทสใหม่ฆ่าได้จริงกี่ตัว (5 ตัว 5 ตาย)
+### 🔴 pf-adversary ปฏิเสธร่างแรกทั้งใบ — 13 ข้อ และสามข้อแรกคือรูปเดียวกัน
 
-รันคุณสมบัติที่เทสเกรด ใส่ข้อความ batch ที่ถูกกลายพันธุ์ทีละแบบ:
+ร่างแรกของรอบนี้ (คอมมิต `19d9bef` / `eb43038`) **ผ่านเทสของตัวเองทั้งที่ฟีเจอร์พัง** ดังนี้:
 
-| กลายพันธุ์ | ผล |
+| กลายพันธุ์ที่ร่างแรกจับไม่ได้ | ผลที่เกิดจริง |
 |---|---|
-| ไฟล์จริงบนสาขานี้ | GREEN |
-| `goto pfgm_forced` แบบไม่มีเงื่อนไข | RED — `unguarded escape` |
-| เปลี่ยนยามเป็นตัวแปรอื่น (`if defined PFGM_PY`) | RED — `unguarded escape` |
-| รับค่าอะไรก็ได้ที่ไม่ว่าง (`if defined PFGM_FORCE_FLAG`) | RED — `wrong guard` |
-| ลบ `exit /b 1` ให้ตกลงบล็อกถัดไป | RED — `no exit` |
-| เติมทางออกที่สอง (`if defined PFGM_PY goto do_copy`) | RED — `unguarded escape` |
+| `REM exit /b 1 -- removed` | statement หาย แต่ substring ยังอยู่ ⇒ ตกลง `:pfgm_forced` ที่อยู่ใต้ทันที **DLL ที่ถูกปฏิเสธติดตั้งโดยไม่ต้องตั้งตัวแปรเลย** |
+| `if **not** "%PFGM_FORCE_FLAG%"=="1" goto pfgm_forced` | สลับขั้ว: ไม่ตั้งตัวแปร = ติดตั้ง · ตั้ง = ปฏิเสธ · **ชุดเต็ม 8,234 ตัวเขียวหมด** |
+| `set "PFGM_FORCE_FLAG=1"` | บรรทัดยามเหมือนเดิมทุกไบต์ แต่ไม่มีอะไรผูกแฟล็กกับตัวแปรของเจ้าของอีก |
+| ทำให้ด่าน `[STOP]` / `.rsrc` force ได้ · ให้ `:pfgm_no_tool` กระโดดเข้า forced · ลบ `set "PFGM_FORCED=1"` | เขียวทั้งสี่ (เทสเดิมสแกนหน้าต่าง 17 บรรทัดที่ **เริ่มหลัง** บรรทัด `if exist`) |
+| เปลี่ยนชื่อโทเคน `failed_rules=` · สะกดชื่อกฎผิด · ตัดกฎเหลือตัวแรก · ยุบ `none`/`none_evaluated` เข้าหากัน | เขียว **9 จาก 9 บนเครื่องที่ไม่มี `pf_bridge` = เกต Windows** เพราะเทสของฟีเจอร์อยู่ในคลาสที่เกตข้าม |
+
+**สิ่งที่แก้ในรอบเดียวกัน**
+- เทส batch อ่าน **statement ที่รันจริง** (`_batch_statements` ทิ้ง REM/echo) · บรรทัดสุดท้ายของบล็อก
+  ต้องเป็น `exit /b 1` · เทียบบรรทัดยาม **ทั้งบรรทัด** · ปักโซ่ `%PFGM_FORCE%` → แฟล็กทีละบรรทัด ·
+  ห้ามมี `PFGM_FORCE` ใน statement ใดก่อนป้าย `:pfgm_image_check` · ทั้งไฟล์มี `goto pfgm_forced`
+  ได้บรรทัดเดียว
+- ย้ายการเกรดฝั่ง Python ออกมาเป็นเทส **ไม่มียาม** (7 ใบใหม่) เพื่อให้เกตเห็น
+- 4 ข้อเป็นบั๊กตอนรันจริง ไม่ใช่แค่ coverage: รายงานถูกลบโดยรันถัดไป (แก้: **append** ลง
+  `%TEMP%\pf_gm_forced_installs.log` ที่ไม่มีใครลบ) · `PFGM_FORCED` ไม่เคยถูกล้าง (แก้: ล้างที่หัวไฟล์
+  — พิมพ์ผิดหนึ่งตัวอักษรทำให้การติดตั้งที่ **ตรวจแล้ว** ถูกป้ายว่า forced) · แบนเนอร์อ้างว่า verdict
+  เป็น "คำตัดสินเรื่องไบต์" ทั้งที่ `unreadable`/`missing` ไม่เคยอ่านไบต์เลย (แก้: แยกถ้อยคำด้วย
+  `rules=none_evaluated`) · `failed_rules=none` โกหกสำหรับบิลด์ /MT (แก้: เพิ่ม `not_evaluated=`)
+- `2^>nul` บน `for /f` สองบรรทัดใหม่ · เตือนเมื่อ `PFGM_FORCE` ถูกตั้งแต่ไม่ใช่ `1` เป๊ะ
+
+### ตารางกลายพันธุ์หลังแก้ (16 ตัว ตาย 16)
+
+| ชุด | ผล |
+|---|---|
+| batch 10 ตัว (A REM-ed exit · B ยามสลับขั้ว · C แฟล็กฮาร์ดโค้ด · D forced ไม่พิมพ์อะไร · G โทเคนกฎฮาร์ดโค้ด · H forced ลบรายงาน · E `[STOP]` force ได้ · K `no_tool` กระโดดเข้า forced · M ไม่ตั้ง `PFGM_FORCED` · N ลบบรรทัดล้างค่า) | **RED ทั้ง 10** |
+| python 6 ตัว บนเช็คเอาต์ทรงเกต (เปลี่ยนชื่อโทเคน · สะกดชื่อกฎผิด · ตัดกฎเหลือตัวแรก · ยุบสองคำเข้าหากัน · `rules_for_verdict` คืนว่าง · ใส่ entry ปลอมให้ verdict ที่ไม่ได้อ่านไบต์) | **RED ทั้ง 6** |
+| python 6 ตัวรอบสอง (ลบตัวเก็บกฎของแต่ละกิ่ง export/not-a-dll · ตัด `failed_rules` เหลือ `[:1]`) | **RED ทั้ง 6** |
 
 ### ตาราง `failed_rules` — วัดกับภาพ PE ที่ประกอบเอง
 
 | ภาพ | verdict | `failed_rules` |
 |---|---|---|
-| ปกติ | `image_ok` | `none` |
+| ปกติ (/MD manifest id 2) | `image_ok` | `none` · `not_evaluated=none` |
+| **/MT ไม่มี manifest เลย** | `image_ok` | `none` · **`not_evaluated=manifest_id2`** (กฎนี้ถามเฉพาะบิลด์ที่ผูก CRT แบบ side-by-side ⇒ พูดว่า "ทุกกฎผ่าน" ไม่ได้) |
 | manifest ฝังที่ id 1 | `manifest_missing` | `manifest_id2` |
-| ไม่มี manifest | `manifest_missing` | `manifest_id2` |
 | ไม่ใช่ DLL + export ถูกตกแต่งชื่อ | `not_a_dll` | `pe32_dll,export_exact` (**สองกฎ**) |
 | PE32+ | `wrong_machine` | `pe32_dll` |
-| export เป็น forwarder | `export_forwarded` | `export_exact` |
-| ไฟล์ตัดกลาง | `not_pe` | `pe32_dll` |
-| โฟลเดอร์ไคลเอนต์ที่ไม่มี DLL | `missing` | `none_evaluated` |
+| export เป็น forwarder / ไม่มี export / export ผิดชื่อ | `export_*` | `export_exact` (ทั้งสี่กิ่ง มีเทสแยกกิ่งละใบ) |
+| ไฟล์ตัดกลาง | `not_pe` | `pe32_dll` · `not_evaluated=export_exact,manifest_id2` |
+| โฟลเดอร์ไคลเอนต์ที่ไม่มี DLL | `missing` | `none_evaluated` · `not_evaluated=` ทั้งสามกฎ |
 
 ### ซ้อมเกต (สภาพไม่มี `pf_bridge` ข้าง ๆ)
 
@@ -107,11 +127,16 @@
 
 ### เทสระหว่างทาง
 
-- `pytest tests/test_gm_plugin_image_check.py` → **74 passed** (เดิม 73)
+- `pytest tests/test_gm_plugin_image_check.py` → **82 passed** (เดิม 73 · +8 ใบใหม่ที่ **ไม่มียาม**
+  จึงรันบนเกตด้วย +1 ใบใหม่ในคลาสที่มียาม)
 - `pytest tests/test_gm_plugin_image_check.py tests/test_pytest_precondition_census.py
   tests/test_gm_source_is_cp874_safe.py` → **143 passed, 893 subtests passed**
 - ซ้อมเกตในสภาพ **ไม่มี `pf_bridge` ข้าง ๆ**: ดูหัวข้อ "ซ้อมเกต" ด้านล่าง
-- ชุดเต็ม `pytest tests/`: ดูหัวข้อ "ชุดเต็ม" ด้านล่าง (รันครั้งเดียว บน commit สุดท้าย)
+### ชุดเต็ม (รันครั้งเดียว บนต้นไม้ที่ merge `main` แล้ว หลังแก้ตาม pf-adversary)
+
+`git merge origin/main` (`e22b071` — `#619` ของสาย E เข้ามาระหว่างรอบ) แล้ว `pytest tests/` →
+**8276 passed, 327 skipped, 16526 subtests passed ใน 279 วินาที** บนคอมมิต `e66a593`
+ซึ่งเป็นคอมมิตสุดท้ายของฝั่งเซิร์ฟเวอร์จริง ๆ ⇒ ไม่มีการแก้โค้ดหลังชุดเต็มผ่าน
 
 ## NONCLAIM
 
