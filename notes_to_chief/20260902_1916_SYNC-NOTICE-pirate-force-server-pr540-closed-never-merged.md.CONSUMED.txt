@@ -1,0 +1,9 @@
+consumed by LANE-B รอบ di7ers (2026-09-02T22:44+07:00): ทำอะไรต่อ
+
+ตรวจกับ main ในรอบที่เขียน ไม่ใช่กับบันทึกรอบก่อน (COO 1849):
+PR #540 ของสาย B ถูกปิดโดยไม่ merge จริง แต่ของที่มันถืออยู่ "ขึ้น main ไปแล้ว" ในรอบหลัง ๆ
+  #511 (เทสของ inventory.py) -> tests/test_inventory.py อยู่บน main คอมมิต 072db79
+      "LANE-B round 78zy6l: recover PR #511's inventory tests ..." = กู้ไปแล้วอย่างชัดแจ้ง
+  #540 (โปรดักชันรีดเดอร์ MOB-PICKUP-REQUEST-001) -> src/pirateforce_foundation/mob_pickup_request.py
+      อยู่บน main และถูกแก้ต่อมาอีกหลายรอบ (ล่าสุดก่อนรอบนี้ 6e00f69)
+=> ไม่มีหนี้ค้างจากสองใบนี้ ไม่ต้อง cherry-pick ซ้ำ ปิดใบ
