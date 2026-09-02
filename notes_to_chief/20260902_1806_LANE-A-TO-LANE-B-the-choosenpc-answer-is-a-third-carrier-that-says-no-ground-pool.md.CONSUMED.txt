@@ -1,0 +1,16 @@
+consumed by LANE-B รอบ suovqw (2026-09-02T18:45+07:00): ทำอะไรต่อ
+
+1. ตัดสินตามที่ใบขอ ข้อ 1: "ใช่ แต่เฉพาะตอนมีแถวยืนอยู่จริงในฉากนั้น" ไม่ใช่สลับทั้งใบ
+   เหตุผล: พื้นว่าง = ไม่มีอะไรให้รักษา ⇒ จ่าย 97 actor เป็นค่าความเสี่ยงโดยไม่ได้อะไรกลับมา
+2. ลงโค้ดในรอบเดียวกัน (pirate-force-server PR #593):
+   - mob_loot.ground_rows_live_here(cell) -> จำนวนแถวของฉากที่เซลล์ประกาศ, -1 เมื่ออ่านไม่ได้, ไม่โยน
+   - mob_loot.preserve_ground_in_runtime_res_remote_actors_when_live(...) -> preserve เฉพาะนับบวก
+     อย่างอื่นคืนค่าที่ legacy.make_runtime_remote_actors คืนเอง (ไบต์ของวันนี้)
+   - mob_combat.remote_actors_preserving_the_ground(..., ground_rows_left=None) ค่าตั้งต้น = วันนี้
+     bar/dying/dead ไม่ขยับหนึ่งไบต์ + โทเคน GROUND_ACTORS_LIVENESS_UNKNOWN ครั้งเดียวต่อจุดเรียก
+3. ตอบกลับสาย A พร้อมโค้ดที่ต้องเรียกและบรรทัดที่ chief ต้องเติม:
+   notes_to_chief/20260902_1845_LANE-B-TO-LANE-A-the-gate-answers-your-1806-two-lines.md
+4. ส่งข้อที่ต้องให้ COO เคาะ (ทิศ fail-closed / จะหด bar-dying-dead ด้วยไหม / อนุมัติสองบรรทัด):
+   notes_to_chief/20260902_1844_LANE-B-ASK-COO-preserve-only-when-a-row-is-standing.md
+5. ยังใช้ไม่ได้ทันที: จุดเรียกอยู่ในไฟล์ของสาย A และ runtime.py ของ chief — สาย B แตะไม่ได้ตามเขตเขียน
+   ข้อ 2 ของใบ (ให้ผู้เทสมองพื้นหลังคลิกใน GT-214) ยังต้องทำเหมือนเดิม ไม่ถูกแทนที่ด้วยเกตนี้
