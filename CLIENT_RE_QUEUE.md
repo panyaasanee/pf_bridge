@@ -3559,7 +3559,7 @@ order, owner ruling ของ 7 template) อยู่ใน `notes_to_chief/202
 (แก้ไขแล้วรอบเดียวกัน) ไม่ใช่ใบนี้ **บันทึก `IMAGE_ACCESS_COST.tsv` ที่เกี่ยวข้องถูกลบออกแล้วเช่นกัน
 เพราะไม่มีต้นทุนจริงเกิดขึ้น**
 
-## 🔬 RE-191 MONSTER-NAME-COLOR-FONTSTYLE63-RGB-001 [STATIC-ON-BRIDGE]: `CODEX_CHECKPOINT 20260901_1135` closed the same-actor conditional static path for the monster-name-color write (`MCG-IMG-025..033` now `PROVEN_EXACT`, death branch conditionally writes style 63 via `CNetNPC` vslot `+0x3C` -> `0x0043BD70`) but never read the actual RGB triple that `fontstyle_id=63` resolves to through `UILabel_FontStyleID_parser_setter` (`0x00AA488F`) — what color does style 63 actually set, compared against the already-decoded controls 61/62? 🔴 **ไม่ใช่การยืนยันล่วงหน้าว่า 63 = เทา** — `20260901_0921_LANE-GM-STATUS-*.md`'s own nonclaim ①: "ไม่อ้างว่า fontstyle 63 คือสีเทาของมอนตาย — ตารางเองปฏิเสธการอ้างนี้ตรง ๆ" ใบนี้มีอยู่เพื่อหาคำตอบนั้น ไม่ใช่เพื่อยืนยัน `NOW.md` P-2's ตาย=เทา ที่ยังไม่มีหลักฐาน  [🟢 **CLOSED PASS/DONE — ผลมาถึง 2026-09-01T14:39+07:00 (Codex static RE), ปิดหัวใบโดย LANE-GM รอบ `wggs0i` 2026-09-02T10:35+07:00 ตามสัญญาผู้บริโภคของใบเอง, ดูผลด้านล่าง**] ~~[OPEN — assigned LANE-GM]~~
+## 🔬 RE-191 MONSTER-NAME-COLOR-FONTSTYLE63-RGB-001 [STATIC-ON-BRIDGE]: `CODEX_CHECKPOINT 20260901_1135` closed the same-actor conditional static path for the monster-name-color write (`MCG-IMG-025..033` now `PROVEN_EXACT`, death branch conditionally writes style 63 via `CNetNPC` vslot `+0x3C` -> `0x0043BD70`) but never read the actual RGB triple that `fontstyle_id=63` resolves to through `UILabel_FontStyleID_parser_setter` (`0x00AA488F`) — what color does style 63 actually set, compared against the already-decoded controls 61/62? 🔴 **ไม่ใช่การยืนยันล่วงหน้าว่า 63 = เทา** — `20260901_0921_LANE-GM-STATUS-*.md`'s own nonclaim ①: "ไม่อ้างว่า fontstyle 63 คือสีเทาของมอนตาย — ตารางเองปฏิเสธการอ้างนี้ตรง ๆ" ใบนี้มีอยู่เพื่อหาคำตอบนั้น ไม่ใช่เพื่อยืนยัน `NOW.md` P-2's ตาย=เทา ที่ยังไม่มีหลักฐาน  [🟢 **CLOSED PASS/DONE (ชั้น conditional static + DATA palette เท่านั้น; runtime pixels ยังเปิด) — ผลมาถึง 2026-09-01T14:39+07:00 (Codex static RE), ปิดหัวใบโดย LANE-GM รอบ `wggs0i` 2026-09-02T10:35+07:00 ตามสัญญาผู้บริโภคของใบเอง, ดูผลด้านล่าง**] ~~[OPEN — assigned LANE-GM]~~
 
 ### ทำไมเปิดใบนี้ (มอบหมายตรงจาก COO)
 
@@ -3865,11 +3865,20 @@ P-2 ยังบล็อกจนกว่าจะมี nonpositive identity 
 
 **สาย GM ทำอะไรกับผลนี้ (รอบ `wggs0i`)** — ไม่เขียนโค้ดสีแม้แต่บรรทัดเดียว แต่ทำให้ผลลบ **รันได้**:
 `pirate-force-server` `src/pirateforce_foundation/gm/name_color_gate.py` + `tests/test_gm_name_color_gate.py`
-(20 เคส) — โมดูล fail-closed ที่ไม่มีค่าสีอยู่ในนั้นเลย ทำสามอย่าง: จำแนก identity เข้าสองฝั่งของ sign test,
+(24 เคส · commit `c9be1af` + `36ebb9c` บน branch `claude/gallant-pasteur-wggs0i`, PR **#559**
+— **ยังไม่ merge ณ เวลาที่เขียนบรรทัดนี้** ตาม ADDENDUM v2 ข้อ A ให้ถือว่า "อยู่บน main"
+ก็ต่อเมื่อ PR ขึ้นสถานะ merged แล้วเท่านั้น) — โมดูล fail-closed ที่ไม่มีค่าสีอยู่ในนั้นเลย ทำสามอย่าง: จำแนก identity เข้าสองฝั่งของ sign test,
 ตอบว่า typed style-61 tail เข้าถึงไม่ได้สำหรับ identity ที่เซิร์ฟเวอร์นี้ประกอบจริง (วัดจาก `load_roster()`
 ไม่ใช่ยกคำพูดมา), และปฏิเสธการต่อสาย P-2 พร้อมชื่อของทั้งสามเส้นทางที่ RE-195 ปิด
-· เทสฆ่า mutant ครบสามแบบ: ล้าง blocker ทิ้ง / วาง palette ลงในโมดูล / กลับด้าน sign test
-· 62 กับ 63 ตอบ **UNKNOWN** ไม่เดา (ตาราง RE-195 ครอบแค่ 56..61)
+· ฉบับแรกของโมดูลถูก pf-adversary หักล้าง 10 ข้อ (รับแก้ 9) แล้วเขียนใหม่ทั้งไฟล์ในรอบเดียวกัน
+· โมดูล **ไม่มีเลข FontStyleID ในโค้ดเลย** (`NOW.md` P-2 ห้าม hardcode · มีเทสเดินไล่ AST บังคับ)
+· เทสสองตัวทำงาน **ทั้งต้นไม้ `src/`** ไม่ใช่แค่กับตัวเอง: ห้ามมีค่าจาก palette ของ `RE-191` โผล่ที่ไหนก็ตาม
+  (ตรวจด้วย **ค่า** ผ่านแฮช เพื่อไม่ให้การบังคับกฎกลายเป็นการนำ palette เข้ารีโปเสียเอง) และห้ามมี identity
+  ที่ประกอบจาก `0x2000` ถูกทำให้ติดลบที่ composer ไหนก็ตาม
+· 🔴 **แก้คำอ้างที่ผิดของฉบับแรก**: ฉบับแรกเขียนว่า 62/63 "ยังไม่วัด" — **ผิด** `RE-195` บรรทัด 55
+  เขียนเองว่า positive identity "bypasses the typed CNetNPC 61/62 tail" และ
+  `CODEX_URGENT 20260901_1627` วาง 61/62/63 ไว้หลัง signed-nonpositive identity lane เดียวกัน
+  (ทั้งสองใบสายนี้บริโภคไปแล้ว) ⇒ ลบคำอ้างนั้นทิ้ง ไม่ใช่ทำให้อ่อนลง
 
 ## 🔬 RE-196 RETURNSELECTSERVERVITAL-FIELD3-TAG-BYTE-001 [STATIC-ON-BRIDGE]: field 3 (the string field, object `+0x20`) of `ReturnSelectServerVital` (0x709E) -- is there an instruction that writes a tag byte just before `string_wire_call@0x005E6A2B`, the way field1/field2 have `STACK@...+0x14`/`+0x18` tag-writes -- and separately, does the SAME question resolve for `DeleteActorVital`'s own string field (also labeled `UNTAGGED_STRING8_LEN32LE` despite GT-018 confirming a real `0x44` tag for it)?  [OPEN — assigned chief]
 
