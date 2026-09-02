@@ -11286,10 +11286,11 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 - RECHECK (ตัดสินด้วย **เนื้อโค้ดบน `origin/main`** ห้ามเทียบเลข commit · ผ่านครบสามข้อ = เลื่อนเป็น `READY` ได้เอง):
   ```
   (cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_scene2.py | findstr /C:"production_allowed = True")
-  (cd pirate-force-server && git show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_scene2.py | findstr /C:"LANE_A_CHOOSE_NPC_SCENE2_DECLINED" /C:"hp=ceiling")
+  (cd pirate-force-server && git show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_scene2.py | findstr /C:"no_player_position_walk_one_step" /C:"dead_monster_needs_a_mob_death_body")
   (cd pirate-force-server && py -3 -m pytest tests/test_lane_a_choose_npc_scene2.py -q)
   ```
-  ข้อ 1-2 ต้องเจอจริงทั้งสองสตริง · ข้อ 3 ต้องเขียวทั้งชุด · ว่าง/แดง = ยังไม่ merge ⇒ คง `[BLOCKED]` **ห้ามบูต ไม่เสียเวลาผู้เทสแม้แต่นาทีเดียว**
+  ข้อ 1-2 ต้องเจอจริงทั้งสองสตริง (เลือกสตริงที่เป็น **เนื้อโค้ด** ไม่ใช่ข้อความใน docstring:
+  `hp=ceiling` ที่คอนโซลพิมพ์ตอนรันเป็นผลของ f-string จึง **ไม่มีในไฟล์** ห้าม grep คำนั้น -- วัดแล้วรอบ `cu1il6`) · ข้อ 3 ต้องเขียวทั้งชุด · ว่าง/แดง = ยังไม่ merge ⇒ คง `[BLOCKED]` **ห้ามบูต ไม่เสียเวลาผู้เทสแม้แต่นาทีเดียว**
   ทดสอบก่อน merge ได้ถ้าเปลี่ยน `origin/main` เป็น branch ของรอบ `cu1il6` แล้ว **เขียนในผลว่าใช้ branch/commit ไหน**
 - db: `state\pirateforce.sqlite3` -- **สำเนาเท่านั้น ห้ามเปิดไฟล์ canonical** ⇒ `state\run_gt214_<yyyyMMdd_HHmmss>.sqlite3` แล้วบูตทับสำเนา
   จด sha256 สำเนาก่อน/หลัง · sha256 canonical ก่อน/หลัง ต้อง **ไม่เปลี่ยน** · `PRAGMA integrity_check` = `ok` ทั้งสองครั้ง
@@ -11317,6 +11318,12 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
   10. **[ขั้นสังเกต ไม่ใช่เกณฑ์ตัดสิน]** ทำ **ก็ต่อเมื่อ** มีมอนที่ **บาดเจ็บอยู่แล้ว** จากใบอื่นในเซสชันเดียวกัน · 🔴 **ห้ามตีมอนเพื่อทำขั้นนี้** (`NOW.md` ห้ามใบตีมอนจนกว่า P-1 และ P-2 ปิด) · ถ้าไม่มี ให้ **ข้าม** แล้วเขียนว่า "ไม่มีมอนบาดเจ็บ ข้าม"
       ถ้ามี: `S02-HP-BEFORE` (เห็นแถบ HP พร่อง) ⇒ คลิก actor ตัวใดก็ได้หนึ่งครั้ง ⇒ `S02-HP-AFTER` · จดว่าแถบ HP **เต็มกลับ** หรือ **ยังพร่อง** · **[คำทำนาย]** เต็มกลับ เพราะ responder ไม่มี combat ledger (`hp=ceiling` ในคอนโซลบอกไว้ตรง ๆ) · **นี่ไม่ใช่ FAIL ของใบนี้** เป็นการวัดที่ใบนี้ถูกขอให้ยืนยันด้วยตา · ทางแก้อยู่ที่ `CORE-REQUEST 20260902_1735` ถึง chief
   11. **ครึ่งความปลอดภัยที่สอง:** ฉาก 2 มี actor ชื่อ `Columbus` (`n_ID 360`) ซึ่ง **ไม่ใช่ Columbus ของพอร์ตรอยัล** · คลิกมันหนึ่งครั้ง แล้ว **จ้องจอ 30 วินาที ไม่คลิกอะไรเลย** · `S02-COL+2s` `S02-COL+30s` · หาไม่เจอให้คลิกทีละตัวแล้วอ่าน `placement=` ย้อนจากคอนโซล
+  11b. **[ขั้นสังเกต ไม่ใช่เกณฑ์ตัดสิน · pf-adversary D2]** ทำ **ก็ต่อเมื่อ** มีของวางอยู่บนพื้นในฉาก 2 จากใบอื่นในเซสชันเดียวกัน · 🔴 **ห้ามฆ่ามอนเพื่อสร้างเงื่อนไขนี้**
+      เฟรมตอบคลิกประกอบผ่าน `make_runtime_remote_actors` ซึ่ง derived mask บอกว่า **ไม่มี ground list** (`0x02` วัดแล้ว บิต `0x08` ไม่ติด)
+      ถ้ามีของบนพื้น: `S02-GROUND-BEFORE` ⇒ คลิก actor หนึ่งครั้ง ⇒ `S02-GROUND-AFTER` · จดว่าของ **ยังอยู่** หรือ **หายไป**
+      **[ยังไม่วัด]** ผลของบิตนี้กับไคลเอนต์เป็นการอ่านแบบ static ของสาย B เท่านั้น · ใบ `20260902_1806_LANE-A-TO-LANE-B-*`
+  11c. **[ขั้นสังเกต · pf-adversary D6]** ในภาพ `S02-AFTER` ให้ดู actor **ตัวอื่น** ที่ไม่ได้ถูกคลิกด้วย: **ยังยืนที่เดิม** หรือขยับ/หันไปทางอื่น
+      (เฟรมส่ง NPCAttr ให้ 96 ตัวโดย **ไม่มี** MovementAttr ซึ่งไม่มีตำแหน่งอยู่ในนั้น — ยังไม่มีใครวัดว่าไคลเอนต์ "คงของเดิม" หรือไม่)
   12. ตัวเช็ค NO-CRASH: **คลิกขวาลากหมุนกล้อง** เท่านั้น · 🔴 **ห้ามใช้ `Q`/`E` เป็นตัวเช็คนี้** · ออกด้วย X
   13. ปิดเซิร์ฟเวอร์ · เก็บ `.out`/`.err`, `capture_v141\GAME_LIVE.txt`, `GAME_EVENTS_LIVE.txt` + sha256 · `integrity_check` · sha canonical ซ้ำ · **รัน teardown เสมอ**
   🔴 **ขอบเขต:** คลิกเพื่อ **เลือก** เท่านั้น -- ห้ามตีมอน ห้ามใช้สกิล ห้ามคลิกโจมตี · เผลอตี = จดไว้ในผล
@@ -11324,7 +11331,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 - pass criteria (สองชั้น · 🔴 **ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้นเด็ดขาด**):
     wire/DB (headless พิสูจน์ได้ ไม่ต้องมีตาคน · grep คอนโซลรวม `2>&1`):
       (ก) คลิกข้อ 5: มี `LANE_A_CHOOSE_NPC_SCENE2_DECLINED reason=no_player_position_walk_one_step` และ **ไม่มี** `..._ANSWERED` คู่กัน
-      (ข) ทุกคลิกหลังก้าวเดิน: `LANE_A_CHOOSE_NPC_SCENE2_ANSWERED placement=<n> visible=97 hostile=12 hp=ceiling` และ label ที่ส่ง `LANE_A_CHOOSE_NPC_SCENE2_FACE_P<n>`
+      (ข) ทุกคลิกหลังก้าวเดิน: `LANE_A_CHOOSE_NPC_SCENE2_ANSWERED placement=<n> visible=97 hostile=12 hp=ceiling from_ledger=0` และ label ที่ส่ง `LANE_A_CHOOSE_NPC_SCENE2_FACE_P<n>`
           **[คำทำนาย ไม่ใช่ผลวัด]** `visible=97` และ `hostile=12` เท่ากันทุกคลิก · เลขต่างจากนี้ = finding ให้จดดิบ ๆ ไม่ต้องตีความ
       (ค) ตลอดเวลาที่อยู่ฉาก 2: **ไม่มี** event `core_request_014_columbus_npc_conversation_sent_once` และ **ไม่มี** label `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE` และ **ไม่มี** `core_request_014_columbus_scene17_teleport_sent`
       (ง) `integrity_check` = `ok` ทั้งสองครั้ง · sha canonical ไม่เปลี่ยน · ไม่มี traceback หลุด
@@ -11341,6 +11348,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 - nonclaims:
   1. ไม่พิสูจน์ว่าสำมะโนขาเข้าถูก/ครบ (`GT-192` ห้ามแก้) · ไม่พิสูจน์เลข `LV` (`GT-200` ห้ามแก้) · ไม่พิสูจน์กลไก `/warp` เอง
   2. ไม่ตัดสินฉาก 3 (`GT-210`) · ฉากโรสเตอร์เก้าเกาะ (`GT-212`) · ฉาก 14 (`GT-134`/`GT-213`) · ฉาก 1 · ฉาก 17
+  3b. **ไม่พิสูจน์ว่าเฟรมนี้ทำอะไรกับของบนพื้น หรือกับตำแหน่งของ 96 ตัวที่ไม่ได้ถูกคลิก** -- ข้อ 11b/11c เป็นการ **สังเกต** ล้วน · `RE-092` พิสูจน์ replace-by-omission **ระดับชุด actor** ไม่ใช่ระดับ attribute และไม่ใช่ ground list
   3. **ไม่พิสูจน์คอมแบต/aggro/HP** -- ข้อ 10 เป็น **การสังเกต** ของช่องว่างที่รู้อยู่แล้ว (`hp=ceiling`) **ไม่ใช่เกณฑ์ผ่าน/ตก** และใบนี้ **ไม่ได้แก้** อะไรเรื่องนั้น (`CORE-REQUEST 20260902_1735`)
   4. ไม่พูดเรื่องความหมายของสีป้าย -- `RE-067` ยังเปิด · จดสีอย่างเดียว
   5. ไม่พิสูจน์ว่า index space เป็น scene-aware แล้ว · ไม่พิสูจน์ว่าอะไรรอดข้าม relog · ไม่แซงลำดับบูตของ `FROM_CHIEF_R305`
