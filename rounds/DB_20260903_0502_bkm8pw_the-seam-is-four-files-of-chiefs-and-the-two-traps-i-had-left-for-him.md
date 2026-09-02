@@ -182,7 +182,7 @@ dict ไม่ครบสาม · `bool` · **อ่านกลับหล�
 
 ## 7. PR ของรอบนี้
 
-- `pirate-force-server` — **PR ของกิ่ง `claude/relaxed-planck-bkm8pw`** สองคอมมิต
+- `pirate-force-server` — **#627** สองคอมมิต
   (`687d62e3` งานหลัก · `60a18bdb` แก้ตาม `pf-adversary` ครบ 14 ข้อ)
   **เปิดแล้ว พร้อม `PF-AUTOMERGE: v4` · รอ gate — ยังไม่ขึ้น main ณ ตอนเขียนบรรทัดนี้**
 - `pf_bridge` — **#933** `[LANE-DB] round bkm8pw: claim` → ไฟล์รอบใบนี้ + จดหมายสองใบ + stub สามใบ
