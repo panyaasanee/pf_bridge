@@ -11684,6 +11684,12 @@ RECHECK: `git -C pirate-force-server fetch && git -C pirate-force-server grep -c
 >    (cd pirate-force-server && git show origin/main:src/pirateforce_foundation/world_bg3001_identity.py | findstr /C:"NAME_CP874_HEX")
 >    ```
 >    เจอ = 37 ตัว (รอบ `gx7xtp` ขึ้นแล้ว) · ว่าง = 36 ตัว (ยังเป็น `main` ของรอบ `l6at2v`) — **ทั้งสองสภาพเทสได้ ไม่ต้องรอ**
+> 4. 🔴 **แก้ป้ายโดย LANE-A รอบ `wqg99e` 2026-09-03T01:28+07:00 — ตอนนี้คำตอบของข้อ 3 คือ "ว่าง" ⇒ นับ 36**
+>    ~~รอบ `gx7xtp` ขึ้น main แล้ว~~ **ไม่จริง**: `pirate-force-server#609` **ถูก reaper ปิดโดยไม่ merge** เวลา 2026-09-03T01:05+07:00
+>    (เหตุ: `main` แดงอยู่ที่ `tests/test_gm_login_scene_override_position_resync.py` ซึ่งไม่ใช่ของรอบนั้น — ดู `NOW.md` P-0)
+>    ⇒ `NAME_CP874_HEX` **ยังไม่อยู่บน `main`** (วัดเอง `git cat-file -e origin/main:src/.../lane_hooks/lane_a_ground_preserve.py` = ไม่มี · `main` = `30e150a`)
+>    ⇒ **ผู้เทสที่บูตวันนี้ต้องนับ 36 ตัว จาก 38 placement ไม่ใช่ 37** และ **ไม่มีป้ายชื่อไทย** บนจอ — เห็น 36 = ถูกต้อง ห้ามอ่านว่า FAIL
+>    งานถูกกู้ขึ้นแบรนช์ `claude/laughing-archimedes-wqg99e` แล้วในรอบนี้ (`pirate-force-server#612`) · **ข้อ 3 คือผู้ตัดสิน ไม่ใช่เลข PR**
 
 > 🔴 **แก้ป้ายโดย LANE-A รอบ `l6at2v` 2026-09-02T22:4x+07:00 · ผู้เทสอ่านตรงนี้ก่อน**: PR ของรอบ `4uztfj` (`pirate-force-server#601`) **ถูกปิดโดยไม่ merge** เวลา 14:54Z — `merge-claude-pr.yml` ปิดเองเพราะเกต Windows แดงที่ช่อง `skip_census` ช่องเดียว (UNDECLARED SKIP 6 ตัวใน `tests/test_world_bg3001_identity_rederived.py`) ⇒ **การรอ merge ของ `#601` คือการรอสิ่งที่จะไม่เกิดขึ้นอีกแล้ว**
 > งานทั้งก้อนถูกกู้ขึ้นแบรนช์ `claude/laughing-archimedes-l6at2v` ในรอบ `l6at2v` พร้อมแก้ต้นเหตุ (`@BRIDGE_GAMEDATA.skip_unless_present()` + หมุดใน `docs/PYTEST_SKIP_PINS.json`) ⇒ **merge ที่ต้องรอคือ PR ของรอบ `l6at2v`** · เกณฑ์ RECHECK สามข้อข้างล่าง **ไม่เปลี่ยน** ทุกข้อวัดจาก `main` อยู่แล้ว ไม่ได้วัดจากเลข PR

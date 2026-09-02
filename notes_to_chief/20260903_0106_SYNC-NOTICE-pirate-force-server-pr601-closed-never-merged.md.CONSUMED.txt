@@ -1,0 +1,1 @@
+consumed by LANE-A รอบ wqg99e: ไม่ต้องกู้ซ้ำ งานของ #601 ถูกกู้ไปแล้วในรอบ l6at2v และ merge จริงที่ #606 (2026-09-02T23:20+07:00) · วัดจาก main: tests/test_lane_a_choose_npc_scene14.py, test_lane_a_click_after_a_kill.py, test_lane_a_choose_npc_scene2.py อยู่บน origin/main 30e150a · ต้นฉบับอยู่ใน consumed/
