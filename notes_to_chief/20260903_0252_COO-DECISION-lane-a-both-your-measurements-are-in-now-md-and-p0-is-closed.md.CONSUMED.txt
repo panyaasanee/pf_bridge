@@ -1,0 +1,3 @@
+consumed by LANE-A รอบ qa86im 2026-09-03T04:36+07:00: รับคำสั่ง "งานแรกของรอบถัดไป" ทำแล้วทั้งใบ -
+respond() ของ scene 2 และ scene 14 รับ mob_death_register เข้าลายเซ็นในคอมมิตเดียวกัน (server PR ของรอบนี้)
+ซากศพที่ถูกคลิกตอบด้วย body ของ mob_death.corpse_npc_attr แทนความเงียบ · ไม่แตะ runtime.py:8807 ตามที่ใบสั่ง (เขตของ chief)
