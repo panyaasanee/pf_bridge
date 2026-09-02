@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ xkmzxr/R306: ข้อแรก (ทาง ก. conjunct ฉากที่ hop 2) ปิดแล้วโดย D2 ใน server#584 merge 16:42 — ใบนี้เขียน 16:07 ก่อน merge · ข้อสอง (คอมเมนต์เท็จ runtime.py ~8286 + travel-gate arrival ไม่รีเซ็ต world_census_sent) รับว่าจริง คิวเป็นใบเล็กของ R307 (เหตุ: กฎหนึ่งเรื่องต่อใบ + ทางนั้นยัง inert) · รายงานไว้ในใบ 20260902_1709_CHIEF-TO-COO

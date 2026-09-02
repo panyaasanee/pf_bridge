@@ -9549,7 +9549,7 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
 
 **ผู้เปิดใบ: LANE-A (สาย A · WORLD) รอบ `s3m1f7` 2026-09-01T11:4x+07:00**
 
-## GT-192 GM-A-WARP-MULTI-MAP-CENSUS-CHAIN-001
+## GT-192 GM-A-WARP-MULTI-MAP-CENSUS-CHAIN-001  [🟢 READY (R306, 2026-09-02T17:2x+07:00) -- ของอยู่บน `main` ครบแล้ว ตัวบล็อกเดียวคือคนบูต · หนี้หัวใบตาม `COO-DECISION 20260902_0544` (รายการปิด + ฉาก 1 เดินหนึ่งก้าว) **ปิดในรอบนี้** หลัง LANE-GM ทวงในใบ `20260902_1526` — R299/R305 เคยบันทึกว่าทำแล้ว ซึ่งไม่จริง]
 
 > Opened by chief (round `liq4ri`, cloud) per `COO-DECISION 20260901_1341_COO-DECISION-census-latch-verified-on-main-open-gt-entry-for-multimap-warp-plus-queue-summary-fix.md`
 > item 1, itself answering `notes_to_chief/20260901_1256_KA1A-TO-COO-census-latch-fix-landed-on-main-NOW-md-needs-updating-and-GM-A-is-testable-again.md`.
@@ -9567,69 +9567,96 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
 > (`RE-191`) at the time this entry was opened -- this entry is `192`.
 
 - objective: single claim -- starting from an already-logged-in live session (any starting
-  scene), a GM account types `/warp <mapnum>` at least THREE times in a row to three
-  DIFFERENT destination scenes that each have a nonzero `n_MARKER` (i.e. NOT the scene-1
-  walk-before-census case this entry deliberately excludes -- see nonclaim 4), and at EACH
-  destination the client renders a normal NPC population, not an empty map. `GT-182` already
+  scene), a GM account types `/warp <mapnum>` down the **closed list in step 3** (12 marker-backed
+  scenes, then scene 1 last), and at each of the TWELVE marker-backed destinations the client renders
+  a normal NPC population, not an empty map.
+  🔴 **ฉาก 1 ถูกตัดสินด้วยกฎของขั้น 4 ไม่ใช่ด้วยประโยคนี้** (ว่างตอนมาถึงโดยตั้งใจ · nonclaim 1 ข้างล่าง
+  ไม่ใช่ nonclaim 4 -- การอ้าง "nonclaim 4" ในประโยคเดิมผิดมาตั้งแต่ก่อนรอบ R306 และแก้ตรงนี้)
+  `GT-182` already
   proved the FIRST warp of a session gets a census; this entry is the one thing that PASS did
   not cover, stated explicitly in its own PASS note: "whether a SECOND warp later in the same
   session would also get a census... out of scope for this entry's own claim, which is about
   the first warp only."
-- background (read before touching anything):
-  - `20260901_1035_KA1A-ROOTCAUSE-*.md`: measured on a live capture (boot 1404,
-    `run_gt182_20260901_094056.sqlite3`) that `self.world_census_sent` is a **once-per-TCP-
-    connection** latch (`runtime.py:1155`, set at 7785/7996/8016/8122/8250/1384, never reset
-    anywhere before this round's fix), so every warp after the session's first census-bearing
-    scene arrival was silently dropped -- ten `/warp` chat commands in the owner's own GT-182
-    session-2 capture produced exactly two censuses, both for the FIRST scene she landed
-    census-eligible in. This is the exact bug this entry checks is now closed.
-  - the fix that landed (`runtime.py:5459-5470`, inside `_gm_warp_resync_selected_scene`,
-    the same method `CORE-REQUEST-GM-045`/`GM-047` already wired): on a confirmed cross-scene
-    GM warp it now resets `world_census_sent`, `world_census_refused`, `last_target_pos`, and
-    the sibling fields that describe the OLD scene's placement indices
-    (`population_indices`, `world_census_indices`, `population_refresh_anchor`,
-    `census_anchor_record`, `npc_idle_action_sent`). Resetting `last_target_pos` matters for
-    the SAME reason `GT-182`'s own F-1 finding did: without it, the newly-unlatched census
-    would compose the destination roster around the departure scene's stale coordinates.
-  - what nobody has measured yet, per `1035`'s own nonclaim: "I did NOT prove the client
-    would render a second census in the same session... **The round that lands this must be
-    attended-tested before any first-eyes ticket is graded.**" This entry is that attended
-    test. `1120`'s amendment does not change any of items 1-3 above; it only blocks item 4
-    (scene-1 eager census), which this entry does not exercise.
+- background: ย้ายทั้งบล็อกไปที่ `archive/GT192_BACKGROUND_verbatim_20260902.md` (chief รอบ `xkmzxr`/R306 ·
+  เหตุ: เพดานใบ 12,000 อักขระ · ไม่มีการลบ ไม่มีขั้นตอนความปลอดภัยถูกตัด) — อ่านก่อนแตะอะไรถ้าต้องการที่มาของบั๊ก
 - db: fresh copy of `state\pirateforce.sqlite3` for this boot (never the canonical file) --
   record the copy's filename and sha256 before/after; verify the canonical file's own
   sha256 is unchanged before and after this round.
 - server args: standard boot, `-SecondPasswordMode bypass`, using a GM account already
   present in `config/gm_accounts.json`. Requires `pirate-force-server@main` at or after
   `81952ce` (the commit COO read `runtime.py:5459-5470` from this round) -- see RECHECK below.
+  🔴 **เซิร์ฟเวอร์ห้ามรันด้วย `--second-password-mode` ที่ไม่ใช่ `required` · ห้ามมี `--*-scenario` แม้ตัวเดียว
+  · และห้าม `--world-census-actors`** (สองข้อแรกปิดสำมะโนทั้งหมด ⇒ ทั้ง 13 แมพขึ้นจอว่าง และนั่นคือ**การบูต ไม่ใช่บั๊ก**
+  ⇒ ใบนี้จะอ่านเป็น FAIL ผิด ๆ · ข้อสามไม่ได้ปิดสำมะโนแต่ย้ายจำนวน actor ⇒ ตารางในขั้น 3 ใช้เทียบไม่ได้)
+  ยืนยันด้วยชื่อ ไม่ใช่ด้วยเลขบรรทัด (ไฟล์โต เลขเลื่อน):
+  `git grep -n "world_census_enabled = " -- src/pirateforce_foundation/runtime.py`
+  ต้องได้ `world_census_enabled = (not active_lanes and second_password_mode == "required")`
+  (`active_lanes` ประกอบจากแฟล็ก `--*-scenario` ทั้ง 27 ตัวใน `app.py` · chief วัดเองรอบ `xkmzxr`)
+  `-SecondPasswordMode bypass` ที่เขียนไว้บรรทัดบนเป็นแฟล็กของ **ไคลเอนต์** (ขีดเดียว) คนละตัวกับแฟล็กเซิร์ฟเวอร์ (สองขีด)
+  ตัดสินโดย chief รอบ `xkmzxr` (R306) ตามที่ LANE-GM เสนอในใบ `20260902_1604` — ใบนี้ chief เป็นผู้เปิดเอง
+- preflight (ไม่บังคับ · **ทำก่อนบูต** ถ้าจะทำ · ทำไม่ได้ก็ข้ามได้ ใบนี้ไม่ผูกกับมัน):
+  ให้จ็อบฝั่งสะพานรัน แล้วเก็บลงไฟล์ (คอนโซลของผู้เทสเป็น PowerShell/cp874 — บรรทัด bash ใช้ไม่ได้):
+  ```
+  cd <repo>\pirate-force-server
+  $env:PYTHONPATH = "src"
+  py -3 -m pirateforce_foundation.gm.warp_chain_preflight *> preflight_gt192.txt
+  ```
+  แนบไฟล์นั้นมากับผล · output จริง ~44 บรรทัด (stdout 16 + stderr ~28) ทั้งหมด ASCII
+  🔴 มันทำนาย**สิ่งที่เซิร์ฟเวอร์ประกอบ** ไม่ใช่สิ่งที่ไคลเอนต์วาด — จอไม่ตรงตารางคือของที่ใบนี้ตามหา
+  🔴 **บรรทัด `LANE_A_CENSUS_SKIPPED scene=2 ... reason=reserved_by_a_runtime_branch` ใน output ของมันไม่ใช่คำเตือน**
+  ฉาก 2 ส่งสำมะโนของตัวเองจากแขนอื่นของ `runtime.py` (97 ตัว) ⇒ **ฉาก 2 ว่างบนจอ = ผลลบที่มีค่า ไม่ใช่ "by design"**
 - steps:
   1. Boot server + client per standard playbook. Confirm a fresh server start (not reused
      from a previous client).
   2. Log in with the GM account into any scene. Let the FIRST census for this session land
      and confirm NPCs are visible (this is `GT-182`'s own claim, not re-tested here in
      detail -- just confirm the session is past its first census before warping).
-  3. Click into chat, type `/warp <mapnum1>` for a destination scene NOT yet visited this
-     session, with a nonzero `n_MARKER` (pick one already opened by LANE-A, e.g. scene
-     4/5/6/8/10 -- avoid scene 1, per nonclaim 4). Press Enter. Wait ~3 seconds. Screenshot,
-     full resolution, labelled MAP-1. Record: scene name/background, HUD X/Y/Z, and every
-     NPC name label visible in frame with its colour (write "none" if the map looks empty).
-  4. Repeat step 3 for a SECOND different destination scene (`<mapnum2>`, also nonzero
-     `n_MARKER`, also not scene 1 or `<mapnum1>`). Screenshot labelled MAP-2, same recording.
-  5. Repeat step 3 for a THIRD different destination scene (`<mapnum3>`). Screenshot labelled
-     MAP-3, same recording.
-  6. Optional but encouraged if time allows: warp back to `<mapnum1>` a second time and
-     confirm NPCs are still there (tests that the latch-clear does not itself break a
-     revisited scene).
+  3. 🔴 **รายการปิด ไม่ใช่ "เลือกเอง"** (`COO-DECISION 20260902_0544` · LANE-GM วัดประตู production
+     `warp_executor.warp_no_coords_live_target` ครบ 330 ฉากแล้วได้ 13 ฉากนี้พอดี ฉากนอกชุดถูกปฏิเสธด้วยชื่อ
+     · chief วัดซ้ำเองในรอบ `xkmzxr` ได้ชุดเดียวกันเป๊ะ):
+     พิมพ์ `/warp <เลข>` ทีละฉาก **เรียงตามนี้** ในล็อกอินเดียวไม่ตัดการเชื่อมต่อ
+     `2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 14, 130` แล้ว**ปิดท้ายด้วย `1`**
+     ทุกฉาก: Enter → รอ ~3 วินาที → **สกรีนช็อตก่อนคลิกอะไรทั้งสิ้น** ตั้งชื่อ `MAP-<เลขฉาก>` →
+     จด ชื่อฉาก/ฉากหลัง · HUD X/Y/Z · **ประมาณจำนวน NPC ที่เห็น** (ไม่ต้องจดชื่อครบทุกตัว 41-109 ตัวต่อแมพ)
+     🔴 แมพไหนที่ดู **ว่างหรือน้อยผิดปกติ** ค่อยจดชื่อ NPC ทุกตัวพร้อมสีให้ครบ — นั่นคือแมพที่ใบนี้ตามหา
+     จำนวน actor ที่เซิร์ฟเวอร์จะประกอบตอนมาถึง (จาก `warp_chain_preflight` ของ LANE-GM รอบ `0aij4z`
+     · chief วัดซ้ำรอบ `xkmzxr` ตรงทุกตัว · **ใช้เทียบ ไม่ใช่เกณฑ์ผ่าน**):
+     `2`=97 · `3`=62 · `4`=109 · `5`=87 · `6`=66 · `7`=56 · `8`=69 · `9`=57 · `10`=94 · `11`=51 · `14`=81 · `130`=41
+     🔴 **เดินหนึ่งก้าว (W/S) ก่อนคลิก NPC เสมอ** — วาปข้ามฉากล้าง `last_target_pos` เป็น `None`
+     คลิกก่อนเดิน = เงียบ และนั่นคือความผิดของขั้นตอน ไม่ใช่ผลวัด
+     🔴 **ขอบเขต: คลิกเพื่อเลือกเท่านั้น ห้ามตีมอน ห้ามใช้สกิล** (ใบตีมอนถูกกันไว้จนกว่า P-1/P-2 จะปิด)
+  4. 🔴 **ฉาก 1 (Port Royal) ว่างตอนมาถึงโดยตั้งใจ — เดินหนึ่งก้าวก่อนตัดสิน**
+     ที่มาของกฎ: `KA1A-AMENDMENT 20260901_1120` (ห้ามส่งสำมะโนก่อนผู้เล่นเดิน) ·
+     ตัวเลข 0 ตอนมาถึง / 108 หลังเดินหนึ่งก้าว มาจาก `warp_chain_preflight` และ chief วัดซ้ำรอบ `xkmzxr`
+     (**ไม่ได้อยู่ในใบ `1120`** — อย่าไปหาในนั้น) · กลไก: `runtime.py` เกตสำมะโนด้วย
+     `last_target_pos is not None or scene_id != 1` ⇒ ฉาก 1 ตอนมาถึงยังไม่มีสำมะโน
+     ⇒ ว่างทันทีที่วาปเข้า **ไม่ใช่ FAIL** · "เดินหนึ่งก้าวแล้วยังว่าง" = ผลลบที่มีค่า ให้จดแล้วเทียบกับชั้น wire
+     ตามเกณฑ์สองชั้นข้างล่าง (ห้ามตัดสิน FAIL จากจอชั้นเดียว)
+  5. 🔴 **ใบนี้วัดการ "เห็น" NPC เป็นหลัก** — คลิก NPC ได้ (หลังเดินหนึ่งก้าว) แต่ไม่ใช่เกณฑ์ผ่านของใบนี้
+     🔴 ตอนบูต **ต้องไม่มี** บรรทัด `LANE_A_CHOOSE_NPC_ROSTER_SKIPPED` แม้แต่บรรทัดเดียว —
+     มีบรรทัดใด = **บิลด์ผิด หยุด ไม่ต้องวาป** ทั้งใบเป็น NO-RESULT (กฎเดียวกับ `GT-212` ข้อ 3)
+     กฎการข้าม roster สิบฉากถูก **ถอนแล้ว** ใน `server#583` (merge 2026-09-02 09:29Z) ⇒ วันนี้ทุกฉากลงทะเบียนตอบคลิก
+     (ร่างแรกของขั้นนี้ในรอบ `xkmzxr` เขียนตรงข้าม โดยลอกจากจดหมายที่เขียนก่อน `#583` — ถอนแล้ว)
+  6. หมดแรง/หมดเวลากลางทางได้ — **เขียนว่าหยุดที่ฉากไหน** ผลบางส่วนของสายที่เรียงตามข้อ 3 ยังใช้ตัดสินได้
+     🔴 **แต่ต้องรัน teardown ตาม `ATTENDED_SESSION_RUNBOOK.md` เสมอ แม้เลิกกลางคัน** พร้อม sha256 ของสำเนา DB
+     หลังจบ และปล่อยล็อก — เลิกกลางคันโดยไม่ teardown = หลักฐานชั้น wire ของทั้งรอบหายถาวร
+     ถ้ายังไหว: วาปกลับไป **ฉาก 2** (ฉากแรกของรายการ) อีกครั้ง แล้วยืนยันว่า NPC ยังอยู่
+     (ทดสอบว่าการปลดแลตช์ไม่พังฉากที่กลับมาซ้ำ)
 - pass criteria (two layers, kept separate):
-    wire/DB: the server console/capture log for this boot shows, for EACH of the three (or
-      more) `/warp` commands after the first, a fresh `world_census_sent = False` ->
+    wire/DB: the server console/capture log for this boot shows, for EACH of the TWELVE
+      marker-backed destinations in step 3, a fresh `world_census_sent = False` ->
       `WORLD_POP_HANDOFF`/`WORLD_CENSUS_BG*` assembled line pair for that destination scene
-      (not just the first one) -- i.e. the wire-level count of census dispatches should equal
-      the number of distinct scenes warped into this session, not one. This is headless-
-      provable from the console log alone and needs no human at the screen; it proves the
-      server SENT the bytes, not that the client rendered anything from them.
-    client-observable: what the human at the screen reports for MAP-1/MAP-2/MAP-3 per steps
-      3-5 above -- did each destination map show a normal NPC population (not empty), matching
+      (not just the first one) -- i.e. the wire-level count of census dispatches equals the
+      number of distinct marker-backed scenes warped into this session, not one.
+      🔴 **นับได้สูงสุด 12 จาก 13 และนั่นถูกแล้ว**: การวาปเข้าฉาก 1 ล้าง `last_target_pos` เป็น `None`
+      และเกตสำมะโนคือ `last_target_pos is not None or scene_id != 1` ⇒ ฉาก 1 **ไม่ส่งอะไรตอนมาถึง**
+      โดยตั้งใจ · มันจะส่งหลังผู้เล่นเดินหนึ่งก้าวตามขั้น 4 · เกณฑ์เดิมที่เขียนว่า "เท่ากับจำนวนฉากทั้งหมด"
+      เป็นเลขที่ทำให้ผ่านไม่ได้ ถอนแล้วในรอบ `xkmzxr` (`COO-DECISION 20260902_0544` เองก็เขียนไว้ว่า 12/13)
+      This is headless-provable from the console log alone and needs no human at the screen; it
+      proves the server SENT the bytes, not that the client rendered anything from them.
+    client-observable: what the human at the screen reports for each `MAP-<scene>` of the
+      closed list in step 3 (scene 1 judged by step 4's rule, not by its arrival frame)
+      -- did each destination map show a normal NPC population (not empty), matching
       what a fresh login into that same scene would show. Any ONE destination coming up
       empty while the wire/DB layer shows a census WAS sent for it is a valid, useful
       negative result (points at a client-side replace/render bug per RE-189 Job 1's own
@@ -9642,6 +9669,8 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
      or a deferred `population_indices` install) -- this entry only exercises the cross-scene
      GM-warp latch-clear path (`1035` items 1-3), which carries none of that hazard because a
      warp only ever fires after login is already complete.
+     🔴 ฉาก 1 ที่เพิ่มเข้าท้ายรายการปิดในขั้น 3 (R306) **ไม่ขัดกับ nonclaim ข้อนี้**: ใบนี้ยัง**ไม่**เรียกร้อง
+     ให้ฉาก 1 มีสำมะโนตอนมาถึง — ขั้น 4 ตัดสินมันหลังเดินหนึ่งก้าวเท่านั้น ซึ่งคือพฤติกรรมที่ `1120` กันไว้ตั้งใจ
   2. Does not re-test the FIRST warp of a session in detail -- that is `GT-182`, already PASS.
   3. Does not test whether the destination scenes' marker geometry is walkable/good (per the
      `authored`-not-`confirmed` caveat `GT-182` already carries) -- a bad landing spot is
@@ -9665,8 +9694,12 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
   `notes_to_chief/20260901_1256_KA1A-TO-COO-census-latch-fix-landed-on-main-NOW-md-needs-updating-and-GM-A-is-testable-again.md` ·
   `notes_to_chief/20260901_1341_COO-DECISION-census-latch-verified-on-main-open-gt-entry-for-multimap-warp-plus-queue-summary-fix.md` ·
   `GT-182` (first-warp-of-session PASS, this entry's direct precondition) · `runtime.py:5459-5470`
+  · `notes_to_chief/20260902_1526_LANE-GM-TO-CHIEF-gt192-header-debt-and-a-preflight-for-the-13-scene-chain.md`
+  · `notes_to_chief/20260902_1604_LANE-GM-TO-CHIEF-gt192-server-args-line-would-disable-the-census.md`
+- teardown: `ATTENDED_SESSION_RUNBOOK.md` — **ต้องรันเสมอ** แม้รอบจบเพราะเลิกกลางคันหรือเจ้าของเลิกเล่นเฉย ๆ
+- result: (ผู้เทสกรอก: หยุดที่ฉากไหน · แมพที่ว่าง/น้อยผิดปกติ · ชั้น wire นับได้กี่สำมะโน · เวลา · ไฟล์สกรีนช็อต)
 
-**ผู้เปิดใบ: chief รอบ `liq4ri` 2026-09-01 (cloud)**
+**ผู้เปิดใบ: chief รอบ `liq4ri` 2026-09-01 (cloud)** · แก้ครั้งล่าสุด: chief รอบ `xkmzxr`/R306 (จ่ายหนี้ `COO 0544`)
 
 ## GT-193 SPEED-COMMAND-SPARSE-X7-001  [🟢 READY (R299, 2026-09-02T06:2x+07:00) -- the visible-refusal blocker is CLOSED: PR #542 merged, `SPEED DENIED` verified on `main` (`origin/main:src/pirateforce_foundation/gm/say_wire.py:136`) and its 33 tests green against that clone. RECHECK item 5 passed. Bootable]
 
@@ -11179,7 +11212,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 
 **ผู้เปิดใบ: LANE-A (WORLD) รอบ `gwwpmr` 2026-09-02T15:55+07:00 -- LANE-A บริโภคผลใบนี้เอง**
 
-## GT-213 COLUMBUS-SCENE-GUARDS-VISIBLE-COST-001  [BLOCKED -- โค้ดยังไม่ขึ้น `main` · **รอ merge ก่อน** · ห้ามบูตจนกว่า RECHECK ข้อ 1-2 ผ่าน]
+## GT-213 COLUMBUS-SCENE-GUARDS-VISIBLE-COST-001  [🟢 READY (R306, 2026-09-02T17:2x+07:00) -- RECHECK ข้อ 1-2 **ผ่านแล้ว** (`server#584` merge 09:42Z ⇒ `COLUMBUS_Q3021_TELEPORT_REFUSED` และ `COLUMBUS_CHOOSE_NPC_WRONG_SCENE` อยู่บน `main`) · ข้อ 3 (`columbus_q3021_crossing_checkpoint` = ครึ่ง `/warp 1`) **ยังไม่อยู่บน `main`** — เป็น PR ของรอบ R306 ที่ยังไม่ merge ตอนเขียนบรรทัดนี้ · 🔴 **รัน RECHECK ทั้งสามข้อก่อนบูตเสมอ** ข้อ 3 ว่างเมื่อไหร่ ครึ่ง `/warp 1` เป็น `NO-RESULT` ตาม (C) ไม่ใช่ FAIL และครึ่งฉาก 14 ยังตัดสินได้ตามปกติ]
 
 > เปิดโดย chief (LANE-E) รอบ `kt05o0`/R305 ตาม `COO-DECISION 20260902_1347` · **chief บริโภคผลเอง**
 > numbering: กฎ ② หัวไฟล์ --
