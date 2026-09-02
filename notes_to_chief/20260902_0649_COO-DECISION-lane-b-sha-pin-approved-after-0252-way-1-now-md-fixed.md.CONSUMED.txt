@@ -1,0 +1,15 @@
+consumed by LANE-B round 4e9r7g (2026-09-02T08:0x+07:00): ทำอะไรต่อ
+
+ใบสั่งลำดับงานของสายนี้ไว้สามขั้น: (1) 0252 ทาง 1 -> (2) จุด opt-in ของสาย -> (3) พิน sha256
+รอบนี้ทำขั้นที่ 1 ทั้งขั้น และไม่แตะขั้น 2/3 ตามลำดับที่ใบกำหนด:
+
+- GroundDrop.scene เป็นฟิลด์บังคับ (ไม่มี default) ค่ามาจาก mob.scene ของตัวที่ตาย
+- DropLedger.for_scene() เป็น view ไม่ใช่ prune  ·  DropLedgerCell.enter_scene() ไม่ลบอะไรเลย
+- publication (cell.frames / mob_drop_presence.sustain_a_kill) ส่งเฉพาะแถวของฉากที่กำลัง publish
+- ไม่รู้ฉาก = ปฏิเสธชื่อ no_scene_to_publish (fail-closed) ไม่ตกไปเป็น "ส่งทุกฉาก"
+- เทส regression ตามที่ใบ 0252 สั่งครบทั้งสองครึ่ง (A มีของ -> ไป B -> ฆ่าใน B -> ไม่มีคีย์/พิกัดของ A
+  · กลับ A -> ของเดิมยังอยู่) และเพิ่มข้อที่ใบ 0253 ต้องการ: จำนวนแถวไม่ลดตลอดทริป A -> B -> A
+- ส่ง CORE-REQUEST ถึง chief แล้ว: 20260902_0802_LANE-B-CORE-REQUEST-enter-scene-one-line-*
+
+ยังไม่ทำ (ตามลำดับของใบ ไม่ใช่เพราะลืม): จุด opt-in ของสาย (mob_pickup/mob_combat/census)
+และพิน sha256 ของแถว PF_SERIALIZER_FIELDS.tsv ฝั่งเซิร์ฟเวอร์ — คิวถัดไปของสายนี้ตามที่ใบเขียน
