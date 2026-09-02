@@ -9742,6 +9742,21 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
      speed change at all (it must not); (c) the server console line for the same moment
      (`GM_CHAT_NO_BYTES_SENT ... why=refused_speed_persist_... character_id=<rowid>`), copied verbatim.
      Then re-query the DB row and confirm it is byte-identical to the step-7 snapshot.
+  10. 🔴 THE TYPO STEP (added R303, `COO-DECISION 20260902_0647`; the code is `pirate-force-server`
+     **PR #568**, opened this round from the commit R302 pushed). RUN THIS STEP ONLY IF ITS OWN
+     RECHECK HITS -- otherwise SKIP IT and say so in the result, do not grade it as a FAIL:
+     `cd pirate-force-server && git fetch origin && git grep -n "TYPO REFUSED" origin/main -- src/pirateforce_foundation/gm/`
+     Zero hits = #568 is not merged yet = step 10 does not exist on the build you booted.
+     With the chat box focused, type exactly `/speed fast` and press Enter. That value does NOT parse
+     as a number, so it never reaches the typed column -- it is the GRAMMAR path, a different path
+     from step 9's, and until #568 it answered with total silence on screen.
+     Screenshot STEP-D at full resolution IMMEDIATELY, showing the chat area. Record: (a) does a chat
+     line reading exactly `TYPO REFUSED` (12 printable ASCII characters) appear, y/n, and how long
+     after Enter; (b) does the character's speed change at all (it must not); (c) the server console
+     line for the same moment, copied verbatim; (d) every name label's colour in STEP-D.
+     Then re-query the DB row and confirm it is byte-identical to the step-7 snapshot.
+     🔴 Step 9 and step 10 are SEPARATE claims about SEPARATE code paths (typed-column refusal vs.
+     parse failure). A `SPEED DENIED` seen in step 9 is not evidence for step 10 and vice versa.
 
 - pass criteria (two layers, kept separate):
     reconnect gate (check FIRST, before grading speed/wire/DB below): if step 8 observes a reject/
@@ -10363,6 +10378,17 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
     1. **server ก่อน client เสมอ** · เข้าเกม ยืนยันบล็อก "สมประกอบ" จากคอนโซล/HUD แล้วจด scene + X/Y/Z
     2. จัดมุมกล้องด้วย **คลิกขวาค้างลาก** เท่านั้น · ยังห้าม `Q`/`E` และ `W/A/S/D` จนกว่าจะถึงขั้นที่สั่งให้เดิน
        (ทั้งสองชุดเปลี่ยน facing และยิง `TargetPosVital`) · **ห้ามพิมพ์ตัวอักษรตลอดรอบ**
+    2b. 🔴 **ขั้นใหม่ ก่อนขั้นเก็บของ -- ตีมอนหนึ่งครั้ง แล้วดูสองอย่าง** (`COO-DECISION 20260902_1248` ข้อ 2 ·
+       ถ้อยคำจากใบ LANE-B `20260902_1144` ข้อ 4) · เลือกมอนที่จะฆ่าในขั้นที่ 3 นั่นแหละ **ตีหนึ่งครั้ง
+       ให้ยังไม่ตาย** แล้วบันทึกทันที ห้ามตีซ้ำก่อนจด:
+       (ก) **มอนยังยืนอยู่บนจอ และหลอดเลือดของมันขยับ** => ไคลเอนต์รับ mask `0x0A` ของเฟรม bar
+           ⇒ เดินขั้นที่ 3 ต่อได้ตามปกติ · ถ่าย **S0a** ตอนหลอดขยับ (full-res เห็นตัวมอนกับหลอด)
+       (ข) **มอนหายไปจากจอ** หรือคอนโซลเซิร์ฟเวอร์ขึ้น `GROUND_ACTORS_PRESERVE_REFUSED` (ASCII ตรงตัว)
+           => ตัว fall back ทำงาน ⇒ 🔴 **หยุดใบนี้เดี๋ยวนั้น ไม่ต้องเดินขั้นเก็บของ** คัดบรรทัดคอนโซลดิบ
+           ทั้งบล็อก + `S0a` แล้วรายงานว่าใบหยุดที่ขั้น 2b เพราะข้อ (ข)
+       เหตุผลที่ขั้นนี้อยู่ตรงนี้: ผลของมันคือกุญแจของรั้ว census ทั้งใบ (`COO 1044` ข้อ 4) และเป็นครั้งแรก
+       ที่ P-1 จะถูกมองเห็นบนจอ · **ขั้นนี้ไม่ใช่ใบตีมอนใบใหม่** (`NOW.md` ยังห้ามเปิดใบตีมอน) มันคือหนึ่งขั้น
+       ในใบนี้ที่บูตอยู่แล้ว
     3. ฆ่ามอน **หนึ่งตัวที่ดรอปของ** · ทันทีที่ของโผล่ ถ่าย full-res **S0** · เลือก **ของหนึ่งชิ้น** แล้วเขียนชื่อ/รูปร่าง/
        ตำแหน่งของชิ้นนั้นลง result เดี๋ยวนั้น แล้วตามชิ้นเดิมตลอดใบ · ซากมอน (corpse) **ไม่นับ** เป็นตัวของ
     4. เดินเข้าไปหาของด้วย `W/A/S/D` จนอยู่ติดชิ้นที่ตามอยู่ · ถ่าย **S1** · **จดสภาพกระเป๋าก่อนคลิก**:
@@ -10437,6 +10463,11 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
   7. 🔴 ระยะ pickup ของเซิร์ฟเวอร์คือ **450 หน่วย 3 มิติ** จากตำแหน่งที่เซิร์ฟเวอร์ "เชื่อว่า" ผู้เล่นอยู่ ซึ่งเป็น
      ตำแหน่งที่ **ไคลเอนต์รายงานมาเอง** (ไม่ใช่ server-authoritative) · ใบนี้ไม่พิสูจน์ว่าไคลเอนต์โกหกตำแหน่งไม่ได้
 
+- 🔴 **ห้ามบูตเพื่อใบนี้ใบเดียว** (`COO-DECISION 20260902_1146` ข้อ 2): ถ้า RECHECK ข้อ 3 ไม่ผ่าน (0 hit)
+  ให้วัดชั้น wire/DB ของใบนี้ **เฉพาะเมื่อเครื่องบูตอยู่แล้วเพื่อใบอื่นในรอบเดียวกัน** เท่านั้น
+  ลำดับบูตของรอบนี้: `GT-207` -> `GT-193` -> `GT-205` -> **`GT-204` ท้ายสุด**
+  เหตุผล: รอบ attended ของเจ้าของแพงกว่าผลที่ใบนี้จะได้ ถ้าประตูยังไม่เปิด
+
 - RECHECK: (รันก่อนเชื่อหัวใบเสมอ · ต้องผ่าน **ทั้งสองบรรทัด** ไม่งั้นยัง BLOCKED ห้ามบูต)
   1. `cd pirate-force-server && git grep -n "dispatch_inbound_pickup_request(" origin/main -- src/pirateforce_foundation/runtime.py`
      -- ต้องได้ **>= 1 hit** (0 hit = `PR #549` ยังไม่ merge) · และต้องเห็นคอมเมนต์ที่มีคำว่า
@@ -10445,7 +10476,13 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
      ไม่มีผล = **ชั้น client-observable ยัง BLOCKED** (ชั้น wire/DB บูตต่อได้ ผลที่คาดคือ P5 = NO-RESULT) ·
      🔴 ห้ามอ้าง `grep install_ground_vitals_preserve src/pirateforce_foundation/app.py`
      เป็นหลักฐานว่าผ่าน: บรรทัดนั้น **ต้องไม่มี** บน main วันนี้ (ถูกถอนโดย `COO-DECISION 20260902_0646`)
-  3. ~~carrier composer ของ `make_runtime_remote_actors` ...~~ **ขีดฆ่าทั้งข้อ 2026-09-02T11:3x+07:00
+  3. ✅ **ผ่านแล้ว 2026-09-02T13:0x+07:00 (chief, R303) ตาม `COO-DECISION 20260902_1248` ข้อ 1** --
+     composer ของ carrier `make_runtime_remote_actors` **อยู่บน main แล้ว** (PR #564 merge)
+     ตรวจด้วย `git fetch origin` แล้วเปิดไฟล์บน `origin/main` `96503ff9` ตรง ๆ (ไม่ได้เชื่อหัวใบ):
+     `mob_loot.preserve_ground_in_runtime_res_remote_actors` = `src/pirateforce_foundation/mob_loot.py:4090`
+     และผู้เรียกบนสายฆ่า/ตี = `src/pirateforce_foundation/mob_combat.py:1429`
+     ⇒ ข้อนี้ **ไม่กั้นการบูตอีกต่อไป** · ผลจริงของมันวัดที่ **ขั้น 2b** ของใบนี้ ไม่ใช่ที่ grep
+     ~~ข้อความเดิมของข้อนี้ (เกต `"MOB_COMBAT_BAR": False`)~~ **ขีดฆ่าทั้งข้อ 2026-09-02T11:3x+07:00
      โดย chief ผู้เขียนมันเอง — มันเป็นเกตที่กั้นผิดเบิร์สต์** (pf-adversary D1)
      ข้อนี้เคยสั่งให้ grep หมุด `"MOB_COMBAT_BAR": False` ใน `tests/test_mob_combat_dispatch.py`
      แต่หมุดใบนั้นมาจาก `test_what_the_burst_says_about_the_ground_pool_frame_by_frame` ซึ่งเรียก `_attack`
@@ -10476,7 +10513,7 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
 
 **ผู้เปิดใบ: chief (LANE-E) รอบ `ls5m3c` / R300 ตาม `COO-DECISION 20260902_0542` ข้อ 3**
 
-## GT-205 UI-A-BACK-BUTTON-VISIBLE-NOTICE-001  [READY WHEN MERGED -- wiring is pushed as PR #563; run the RECHECK below before any boot]
+## GT-205 UI-A-BACK-BUTTON-VISIBLE-NOTICE-001  [🟢 READY (R303, 2026-09-02T13:0x+07:00) -- PR #563 merged 11:55 +07:00; RECHECK run by chief on `origin/main` `96503ff9` and it HIT (`runtime.py:28` import, `runtime.py:5798` `observe_parsed`). Bootable]
 
 > 🔴 **สถานะเปลี่ยนโดย chief รอบ `ogq686` / R302 (2026-09-02T11:2x+07:00):** บรรทัดที่ใบนี้รออยู่
 > **เขียนแล้วและ push แล้ว** -- `pirate-force-server` PR **#563** (`runtime.py::_dispatch_with_lanes`
@@ -10512,12 +10549,16 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
   it, so a tester who reads a DIFFERENT spelling off the screen is reporting a defect, not a
   wording that was still being decided.
 
-- PRECONDITION (this is why the entry is BLOCKED): the module composes bytes but is NOT wired yet.
-  `runtime.py` is chief's file; this round asks chief for ONE call site (CORE-REQUEST in the PR body).
-  Until that line is on `main`, DO NOT BOOT this entry.
-  RECHECK: `cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/runtime.py | grep -n "world_logout_button_notice"`
-  Empty result = still not wired = entry stays BLOCKED, no boot, no tester time spent.
-  A real hit = entry becomes READY as written here; record which `main` commit was used in the result.
+- PRECONDITION: ~~the module composes bytes but is NOT wired yet~~ **CLEARED by chief, R303
+  (2026-09-02T13:0x+07:00).** PR #563 merged at 11:55 +07:00 and the RECHECK below was run against
+  the merged `main`:
+  `cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/runtime.py | grep -n "world_logout_button_notice"`
+  -> two hits on `origin/main` `96503ff9`: line 28 (import) and line 5798 (`observe_parsed`).
+  Record `96503ff9` (or whatever `main` you actually boot) in the result.
+  The tester may re-run the RECHECK; an empty result would mean the boot is on a stale clone, not
+  that this entry regressed.
+  BOOT ORDER for this round's tickets, per `COO-DECISION 20260902_1146` item 2:
+  `GT-207` -> `GT-193` -> **`GT-205`** -> `GT-204` last.
 
 - db: `state\pirateforce.sqlite3` -- COPY ONLY, never open the canonical file. Copy to
   `state\run_gt205_<yyyyMMdd_HHmmss>.sqlite3` and boot against the copy. Record sha256 of the copy
