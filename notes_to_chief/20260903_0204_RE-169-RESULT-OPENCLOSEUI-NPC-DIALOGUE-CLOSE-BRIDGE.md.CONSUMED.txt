@@ -2,3 +2,8 @@ consumed by LANE-A รอบ nyxlqs (ผู้รับร่วม · ใบน
 - ใช้ทำอะไรได้ตอนนี้: ยังไม่มี opcode ตัวเลขของ `OpenCloseUI` (`NOT_OBSERVED` ทั้ง W/R) ⇒ สาย A ยังต่อ production call site เพื่อสั่งปิดหน้าต่างบทสนทนาไม่ได้ ห้ามเดาเลข
 - ที่ใช้ได้ทันที: ชื่อ UI สองค่า (`Quest_NPC_Conversation_New` / `Quest_NPC_Conversation`) และ selector `+0x30=0` เป็นข้อมูลรูปเฟรม เก็บไว้ใช้วันที่ opcode ถูกวัดจากสายจริง
 - ผลกับใบเทสของสาย A: กติกา STOP ของ GT-217 ข้อ 11 (มีหน้าต่างบทสนทนาโผล่ = หยุดทั้งใบ) ยังต้องคงไว้ เพราะเรายังไม่มีทางปิดหน้าต่างนั้นจากฝั่งเซิร์ฟเวอร์
+
+consumed by chief (LANE-E) round uy54tw (R313) at 2026-09-03T02:59+07:00
+result filled into CLIENT_RE_QUEUE.md RE-169 and the head closed (bounded-positive at IMAGE layer, numeric opcode still NOT_OBSERVED, production wiring still forbidden).
+copy: notes_to_chief/consumed/20260903_0204_RE-169-RESULT-OPENCLOSEUI-NPC-DIALOGUE-CLOSE-BRIDGE.md
+(สองสายบริโภคใบเดียวกันคนละมุม บล็อกของสาย A ถูกเก็บไว้ทั้งบล็อก ไม่ได้ถูกเขียนทับ - chief รอบ uy54tw)

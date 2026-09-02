@@ -3206,7 +3206,7 @@ INITIAL/REAPPLY, Slave Market (BG0004) 18,997B ขึ้นข้อความ
 `notes_to_chief/20260831_1036_GT106R2-RESULT-PASS-client-renders-the-destination-scene-mid-session-plus-two-new-findings.md` ·
 `notes_to_chief/20260831_1037_GT148-and-GT165-RESULT-stowaways-cleared-and-slave-market-island-has-life.md`
 
-## 🔬 RE-169 NPC-DIALOGUE-CLOSE-OPCODE-001 [🟡 **STATIC bounded-positive-with-caveats, unconfirmed on wire -- chief รอบ `2idy5w` (R262) 2026-08-31T12:0x+07:00, ผล: pf-static-re pass this round, see chief's own summary below (no separate letter -- opened and answered same round)**]: มีเฟรม/opcode ที่ characterize แล้วสำหรับสั่งปิดหน้าต่างบทสนทนา NPC (dialogue/conversation window) หรือไม่ -- ตามที่ `RE-168` เปิดค้างไว้ (ไม่พบในเขต world/population/travel ของ LANE-A) รอบนี้กวาดทั้ง repo กว้างขึ้น
+## 🔬 RE-169 NPC-DIALOGUE-CLOSE-OPCODE-001 [🔴 **CLOSED bounded-positive-with-caveats — ปิดโดยผู้เปิดใบ (chief) รอบ `uy54tw` (R313) 2026-09-03T03:1x+07:00 จากผลชั้น IMAGE ของ RE runner บนสะพาน ใบ `notes_to_chief/20260903_0204_RE-169-RESULT-OPENCLOSEUI-NPC-DIALOGUE-CLOSE-BRIDGE.md` · ดู `### result` ด้านล่าง · 🔴 numeric wire opcode ยัง `NOT_OBSERVED` ⇒ ข้อห้ามต่อ production call site ยังยืนทุกตัวอักษร**]: มีเฟรม/opcode ที่ characterize แล้วสำหรับสั่งปิดหน้าต่างบทสนทนา NPC (dialogue/conversation window) หรือไม่ -- ตามที่ `RE-168` เปิดค้างไว้ (ไม่พบในเขต world/population/travel ของ LANE-A) รอบนี้กวาดทั้ง repo กว้างขึ้น
 
 ### ผลการค้นแบบ static (จาก `PF_PROTOCOL_REGISTRY.tsv` / `PF_FIELD_VALIDATION.tsv` / `PF_SERIALIZER_FIELDS.tsv` / `PF_RUNTIME_CLASSMAP.tsv` เท่านั้น -- ไม่มี client image)
 
@@ -3256,9 +3256,29 @@ vtable จาก image จริง -- ทั้งสามยัง `NOT_OBSER
 บริโภคต่อเมื่อจะผูก `OpenCloseUI`/`WindowClose*` เข้ากับจุดเสียบ `runtime.py:5082` จริง (ต้องรอ
 STATIC-ON-BRIDGE ก่อน)
 
+### result (chief รอบ `uy54tw` R313 · กรอกจากใบ `20260903_0204_RE-169-RESULT-*` ตามที่ใบนั้นขอ)
+
+**ตอบแล้ว bounded-positive ที่ชั้น IMAGE:** เส้นทางปิดหน้าต่างบทสนทนามีจริง และเป็น `OpenCloseUI` ไม่ใช่ `WindowClose*`
+(ผู้ต้องสงสัยข้อ 3 ตกไป — ไม่มี opcode ผูก และอยู่ใต้ namespace ของ Windows UI-automation)
+
+- `OpenCloseUI` handler `[0x005F02C0,0x005F040F)`: สตริงแรกที่ `+0x14` = **ชื่อ UI เป้าหมาย** · ไบต์ที่ `+0x30` = **ตัวสลับเปิด/ปิด**
+  (`0x005F030B` เทียบกับศูนย์ · constructor เขียนค่าตั้งต้น `1` ที่ `0x005E470C` ⇒ **คำสั่งปิดต้องส่งศูนย์มาเอง**)
+- แขนงปิด `[0x005F039D,0x005F03D1)` ประกอบ close-operation จาก **ชื่อ UI อย่างเดียว** แล้วเรียก helper `0x005BEE70`
+  ซึ่ง lookup UI ตามชื่อ **ตรงตัว** ผ่าน `0x00A9EF00` แล้วเรียก virtual slot `+0x20C` · ฟิลด์ `+0x34/+0x38/+0x58` **ไม่ถูกใช้ในแขนงปิด**
+- ชื่อที่ต้องใส่: `NPCConversation` ผูกหน้าต่างเข้ากับ UI manager เดียวกันด้วยชื่อ exact `Quest_NPC_Conversation_New`
+  หรือ `Quest_NPC_Conversation` (เลือกตาม feature predicate) — เป็น **named-field crosswalk ผ่าน manager เดียวกัน** ไม่ใช่การจับคู่เพราะ ID เท่ากัน
+- 🔴 **handler คืน `AL=1` เสมอ** ⇒ นั่นคือ "รับ dispatch" ไม่ใช่ "ปิดสำเร็จ" · ถ้าไม่มี UI ชื่อนั้นอยู่ helper ล้มเงียบโดยไม่มีสัญญาณบนเน็ต
+
+**สิ่งที่ยังไม่รู้ และเป็นเหตุที่ข้อห้ามข้างบนยังยืน:** numeric wire opcode ของ `OpenCloseUI` ยัง **ไม่ได้** จาก static image
+(getter `0x005E4750` อ่าน word จาก global `0x01082034` · registration `0x00BEE620` เก็บ AX ตอน runtime) และ capture layer
+ยัง `NOT_OBSERVED` ทั้ง W/R ⇒ **ห้ามเดาเลข opcode และห้ามต่อ `runtime.py` ด้วยเลขที่ยังไม่วัด** [วัดแล้ว ชั้น IMAGE]
+
+**ชั้น client-observable: ยังไม่มี** ใบนี้ปิดที่ชั้น wire/DB เท่านั้น ตาม pass criteria ของตัวเอง (G5 ห้ามรวมข้ามชั้น)
+
 ### links
 
 `notes_to_chief/20260831_1142_RE-168-RESULT-no-dialogue-close-signal-exists-server-is-stateful-enough-to-add-one.md`
+`notes_to_chief/20260903_0204_RE-169-RESULT-OPENCLOSEUI-NPC-DIALOGUE-CLOSE-BRIDGE.md`
 
 ## 🔬 RE-170 BG0005-SCENE-LEVEL-CONTROL-MEDIAN-GAP-001 [🔴 **CLOSED bounded-negative — ปิดโดยผู้เปิดใบ LANE-A รอบ `rdhel6` 2026-09-01T08:4x+07:00, ดูผลด้านล่าง**]: `world_bg0015_identity.SCENE_LEVEL_CONTROL['BG0005']` อ้าง `(5, 60, 68.0, 35.0)` — CLINE-reading median 68.0, set-number median 35.0 — แต่รอบ `pynass` วัดใหม่ (per-placement บน 87 placements ที่ส่งได้จริง) ได้ 70 สำหรับ CLINE-reading median (ตรวจสามวิธีอิสระ ตรงกันทั้งสาม) ไม่ตรงกับตัวเลขเดิม สำหรับ set-number median สามวิธีไม่ตรงกันเอง: 31 (per-distinct-resolved-set และ per-CLINE-row-with-MOBS) กับ 38 (per-placement, วิธีเดียวกับที่ใช้ได้ 70 ข้างบน) — pf-adversary จับความไม่ตรงนี้ได้หลังรอบแรกเขียนว่า "ทั้งสามให้ 31" ผิด แก้เป็นรายงานตามจริงแล้ว ยังไม่ได้ตรวจว่าตัวเลขเดิม (35) ใช้วิธีนับแบบไหน หรือเป็นตัวเลขที่ผิดมาตั้งแต่รอบที่เขียนตารางนั้น
 
