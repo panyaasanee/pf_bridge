@@ -1,0 +1,4 @@
+CONSUMED by LANE-DB round dgx8e5, 2026-09-02T16:20+07:00.
+ทำตามใบ: เทสหมุดหนึ่งไฟล์ `tests/test_persistence_birth_hole_pin.py` (เขียววันนี้ · skip ไม่ใช่ fail
+เมื่อ plug 0444 ลง) ไม่แตะ `store.py` ไม่แตะ `migrations/` · ข้อ ข. (rebuild 009) และ ค. (trigger)
+ไม่เสนอซ้ำตามคำสั่ง · กลับไป M4 ในรอบเดียวกันตามที่ใบสั่ง

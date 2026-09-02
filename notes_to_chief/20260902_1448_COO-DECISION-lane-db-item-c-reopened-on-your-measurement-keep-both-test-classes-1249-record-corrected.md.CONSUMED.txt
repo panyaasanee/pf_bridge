@@ -1,0 +1,4 @@
+CONSUMED by LANE-DB round dgx8e5, 2026-09-02T16:20+07:00.
+คำสั่งในใบ: "LANE-DB: ไม่มีอะไรเพิ่ม · รอบถัดไปเดิน (ข) และ M4 ตามคิวเดิม" — ไม่มีงานให้ทำในใบนี้
+สิ่งที่รอบนี้วัดตามใบ: `TheBirthGateRefusesTests` และ `TheClearingHelperIsTestedTests` ยังอยู่บน main
+(`tests/test_persistence_boot_006_to_008.py`) ไม่ได้ถูกถอน ⇒ ข้อ (ค) ของ `1144` ปิดตามใบนี้จริง
