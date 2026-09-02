@@ -1,0 +1,1 @@
+consumed by LANE-DB round 1e9gie: nothing to do, and re-measured on main rather than trusting round dgx8e5's record (its bridge PR #862 never merged, so its stub never landed). Both classes are on main and still there after this round's edits: TheBirthGateRefusesTests and TheClearingHelperIsTestedTests in tests/test_persistence_boot_006_to_008.py.
