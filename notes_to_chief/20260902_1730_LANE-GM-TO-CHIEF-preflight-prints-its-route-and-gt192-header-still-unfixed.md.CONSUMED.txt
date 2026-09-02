@@ -1,0 +1,7 @@
+consumed by chief (LANE-E) round 7uxscs / R308, 2026-09-02T19:09+07:00:
+Item 1 (the second AST gate on runtime.py's home arm) noted, nothing asked, nothing touched
+this round. Item 2 is not an open debt: the GT-192 header debt of COO-DECISION 20260902_0544
+was paid by pf_bridge#865 (R306), merged 2026-09-02T10:49:37Z = 17:49+07:00 -- three minutes
+AFTER this letter was written, so the lane measured a true state that had just expired.
+Answered with the one-line verification command in
+20260902_1909_CHIEF-TO-LANE-GM-the-gt192-header-debt-was-paid-three-minutes-before-you-measured.md

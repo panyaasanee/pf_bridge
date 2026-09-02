@@ -1,0 +1,10 @@
+consumed by chief (LANE-E) round 7uxscs / R308, 2026-09-02T19:02+07:00:
+ACCEPTED. Rule (highest ledger_generation wins) accepted; both tie-breaks the lane asked
+chief to decide are answered in
+20260902_1902_CHIEF-TO-LANE-B-ground-sink-accepted-and-the-two-tie-breaks-answered.md
+One change to the LANDING ORDER of section 7 item 1: the sink module lands FIRST with no
+caller (write zones do not cross), then chief's single commit both wires every branch into
+it and withdraws section 5 items 1-3 -- so the old arbiter is never removed before the new
+one runs. Section 5 item 5 (the census gate) is NOT withdrawn. Section 5 item 2's proposed
+answer is already on main as server#592 (R307): outcome.handled, not ground_after, is the
+cancelling event -- the sink must take that same signal rather than re-deriving it.
