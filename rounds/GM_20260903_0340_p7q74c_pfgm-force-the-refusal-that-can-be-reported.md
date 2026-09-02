@@ -71,6 +71,42 @@
 
 ## หลักฐาน
 
+### ตารางกลายพันธุ์ — เทสใหม่ฆ่าได้จริงกี่ตัว (5 ตัว 5 ตาย)
+
+รันคุณสมบัติที่เทสเกรด ใส่ข้อความ batch ที่ถูกกลายพันธุ์ทีละแบบ:
+
+| กลายพันธุ์ | ผล |
+|---|---|
+| ไฟล์จริงบนสาขานี้ | GREEN |
+| `goto pfgm_forced` แบบไม่มีเงื่อนไข | RED — `unguarded escape` |
+| เปลี่ยนยามเป็นตัวแปรอื่น (`if defined PFGM_PY`) | RED — `unguarded escape` |
+| รับค่าอะไรก็ได้ที่ไม่ว่าง (`if defined PFGM_FORCE_FLAG`) | RED — `wrong guard` |
+| ลบ `exit /b 1` ให้ตกลงบล็อกถัดไป | RED — `no exit` |
+| เติมทางออกที่สอง (`if defined PFGM_PY goto do_copy`) | RED — `unguarded escape` |
+
+### ตาราง `failed_rules` — วัดกับภาพ PE ที่ประกอบเอง
+
+| ภาพ | verdict | `failed_rules` |
+|---|---|---|
+| ปกติ | `image_ok` | `none` |
+| manifest ฝังที่ id 1 | `manifest_missing` | `manifest_id2` |
+| ไม่มี manifest | `manifest_missing` | `manifest_id2` |
+| ไม่ใช่ DLL + export ถูกตกแต่งชื่อ | `not_a_dll` | `pe32_dll,export_exact` (**สองกฎ**) |
+| PE32+ | `wrong_machine` | `pe32_dll` |
+| export เป็น forwarder | `export_forwarded` | `export_exact` |
+| ไฟล์ตัดกลาง | `not_pe` | `pe32_dll` |
+| โฟลเดอร์ไคลเอนต์ที่ไม่มี DLL | `missing` | `none_evaluated` |
+
+### ซ้อมเกต (สภาพไม่มี `pf_bridge` ข้าง ๆ)
+
+`git clone` สาขานี้ลงโฟลเดอร์ที่ **ไม่มี** `pf_bridge` เป็นพี่น้อง แล้วรันสองอย่างตามที่ `COO 0148`
+ข้อ 3 กับ `COO 2344` สั่ง:
+- `pytest tests/test_gm_plugin_image_check.py` → **70 passed, 4 skipped** (สี่ตัวคือ pin ที่เพิ่งขยับ)
+- `python tools/pf_pytest_precondition_census.py --run` → **`every skip is declared, named and pinned`
+  · RESULT: PASS**
+
+### เทสระหว่างทาง
+
 - `pytest tests/test_gm_plugin_image_check.py` → **74 passed** (เดิม 73)
 - `pytest tests/test_gm_plugin_image_check.py tests/test_pytest_precondition_census.py
   tests/test_gm_source_is_cp874_safe.py` → **143 passed, 893 subtests passed**
