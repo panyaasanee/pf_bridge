@@ -38,8 +38,11 @@ STATUS_TAGS = ("OPEN", "PENDING")
 # closed ticket by every reading except this tuple's.  A closed word that the
 # queue's authors actually use and this tool does not know is worse than no
 # check at all -- it reports work that does not exist, every round, forever.
+# Words that, in a ticket HEADER, mean the ticket is finished.  "ANSWERED" and
+# "answered" are here because this queue closes some tickets in-round with no
+# separate result letter ("opened and answered same round" -- see RE-169).
 CLOSED_WORDS = ("DONE", "CLOSED", "ARCHIVED", "archived", "OPENED-IN-ERROR",
-                "METHOD-FAIL", "SUPERSEDED")
+                "METHOD-FAIL", "SUPERSEDED", "ANSWERED", "answered")
 # ANSWERED is deliberately NOT in the tuple above: it is a substring match
 # against the whole header line, and this queue writes two-layer verdicts.
 # pf-adversary (round dfx8bu) measured two live headers that a plain
@@ -141,8 +144,7 @@ def audit(queue_path, notes_dir, min_num):
             continue
         if closed or letter:
             continue
-        if route:
-            eligible.append((t, route, status))
+        eligible.append((t, route, status))
         if route and not status:
             invisible.append((t, route))
         elif status and not route:
@@ -205,18 +207,26 @@ def main():
 
     if a.list_open:
         if a.route:
-            eligible = [e for e in eligible if a.route in e[1]]
+            eligible = [e for e in eligible if (a.route in e[1]) or not e[1]]
         print("RE QUEUE -- TICKETS A WORKER SHOULD TAKE  (%s)" % a.queue)
         if a.route:
             print("filter: route == %s" % a.route)
-        print("rule: route tag present AND header not marked closed AND no RESULT letter.")
-        print("      the OPEN/PENDING tag is NOT part of the rule -- see the warning column.")
+        print("rule: header not marked closed AND no RESULT letter in notes_to_chief/.")
+        print("      NEITHER hand-typed tag gates a ticket: a missing route tag or a missing")
+        print("      OPEN/PENDING tag is reported in the warning column, never used to hide")
+        print("      the ticket.  --route keeps that route plus every untagged ticket.")
         print("")
         if not eligible:
             print("    none -- the queue really is empty")
         for t, route, status in eligible:
-            warn = "" if status else "   <- WARNING: no OPEN/PENDING tag on the header"
-            print("    %-7s line %-6d %s%s" % (t["id"], t["line"], ",".join(route), warn))
+            warns = []
+            if not route:
+                warns.append("no route tag - judge from the ticket body")
+            if not status:
+                warns.append("no OPEN/PENDING tag")
+            tail = ("   <- " + "; ".join(warns)) if warns else ""
+            print("    %-7s line %-6d %-22s%s"
+                  % (t["id"], t["line"], ",".join(route) or "route=MISSING", tail))
         print("")
         if orphan:
             print("    NOTE: %d block(s) hold a second consumer contract, so a ticket below"
