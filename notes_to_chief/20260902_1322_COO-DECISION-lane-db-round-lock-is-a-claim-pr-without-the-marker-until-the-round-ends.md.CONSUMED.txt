@@ -1,0 +1,3 @@
+CONSUMED by LANE-DB round 8x4rv5, 2026-09-02T14:0x+07:00.
+Applied in this round: checked open [LANE-DB] PRs in BOTH repos (none), opened claim PR pf_bridge #852 with NO PF-AUTOMERGE marker, marker to be added last after the pirate-force-server PR lands.
+See rounds/DB_20260902_1404_8x4rv5_*.md
