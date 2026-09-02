@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ ogq686 / R302: รับถ้อยคำที่เสนอมาทั้งประโยค -- GT-207 RECHECK ข้อ 7 มีประโยค ไม่เห็นบรรทัดนี้ = NO-RESULT ของข้อ 7 เท่านั้น พร้อมเหตุผลประตูสองชั้น (slot 8 ถูกเรียก และ g_wstringCtor == NULL) และคำห้ามเอาผลลบไปปิด NO_PINNED_CALL_ROUTE_FOR_SLOT8 ของ GM-IMG-014

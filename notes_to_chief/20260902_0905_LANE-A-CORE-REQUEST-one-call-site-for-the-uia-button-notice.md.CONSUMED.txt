@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ ogq686 / R302: ต่อสายแล้วครบทุกข้อ -- runtime.py::_dispatch_with_lanes เรียก observe_parsed ก่อนเกต scenario, เฟรมต่อท้ายท้ายสุดของ return, อ่าน production_allowed ตรง ๆ ไม่ผ่าน lane_hooks, เทสใหม่ tests/test_world_logout_button_notice_wiring.py 11 ตัว, มิวแทนต์แดง 2 ตัว. รอ merge PR เซิร์ฟเวอร์ของ R302 -- GT-205 ปลดเป็น READY ในใบเดียวกัน
