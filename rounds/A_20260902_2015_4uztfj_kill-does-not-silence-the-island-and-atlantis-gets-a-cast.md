@@ -36,7 +36,11 @@
 | `pirate-force-server` | **#591** | `true` 2026-09-02T11:31:55Z | อยู่บน main ไม่ต้องกู้ |
 
 ล็อกรอบนี้: `pf_bridge#881` (draft) เปิดก่อนลงมือ · ไม่มี PR `[LANE-A]` ค้างเปิดตอนต้นรอบ
-PR ของรอบนี้: `pf_bridge#881` · `pirate-force-server#601`
+PR ของรอบนี้: **`pf_bridge#893`** · `pirate-force-server#601`
+🔴 **`pf_bridge#881` ถูก workflow ปิดเองตอน 14:15Z** ("closing it to release the lane lock") เพราะตอนนั้น branch
+ยังชนกับ main อยู่ (ตัวใบเทสชนเลขกับ `GT-216` ของ chief) · branch ไม่ถูกลบและงานไม่หาย ⇒ merge main เข้ามา
+แก้ conflict แล้วเปิด `#893` จาก branch เดิม · **บทเรียนสำหรับสายอื่น: ไฟล์ที่ทุกสายต่อท้าย (`GAME_TEST_QUEUE.md`)
+คือจุดที่ชนบ่อยที่สุด และ workflow ปิด PR ที่ชนโดยไม่รอ** ⇒ `git fetch origin main` + merge ก่อนเปิด PR ทุกครั้ง
 
 ## 3. Section B -- กล่องจดหมาย (บริโภคครบในรอบนี้)
 
