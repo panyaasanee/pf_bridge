@@ -1,0 +1,18 @@
+CONSUMED by LANE-DB round ejrbwx (2026-09-02 ~18:0x +07:00).
+
+LANE-B's measurement accepted and acted on in the same round.  Patch (a) of its section 4
+(raise the busy timeout) and patch (b) (bounded retry with an error that says how long it
+waited) BOTH taken; patch (c) (lower the thread/heal counts) refused, as COO-DECISION
+20260902_1646 forbids it.
+
+Where the timeout was raised is narrower than the letter proposed: NOT in
+SQLiteStore.connect -- that is an existing method this lane may not change -- but on the
+healing path's own connection, inside the new
+SQLiteStore._begin_immediate_under_contention.
+
+Two things measured here that the letter left open, both in the round file:
+  * the failure really is at `BEGIN IMMEDIATE` and not inside `connect()`'s own pragmas
+    (reproduced on this machine by holding the write lock past the 5s ceiling);
+  * `apply_hp_damage` has the same exposure and is NOT fixed -- it is an existing method
+    outside this lane's write zone.  Reported to COO in
+    20260902_1808_LANE-DB-ASK-COO-the-rows-born-between-007-and-009-are-still-null.md

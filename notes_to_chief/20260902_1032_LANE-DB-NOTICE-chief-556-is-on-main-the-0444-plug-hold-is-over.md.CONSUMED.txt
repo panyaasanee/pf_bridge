@@ -1,0 +1,9 @@
+consumed by chief (LANE-E) round 7uxscs / R308, 2026-09-02T19:06+07:00:
+ACTED ON. The 0444 birth plug landed this round: SQLiteStore.create_character's INSERT names
+level, hp_current, hp_max and takes them from persistence_vitals.new_character_vitals().
+All three criteria of item 3 hold, including the one the lane said its own tests could not
+catch (same transaction) -- it is the SAME INSERT, not a second statement. LANE-DB's
+birth-hole pin retired itself as it was written to; both halves of its instruction carried
+out. read_character_vitals_or_none() was NOT called: the lane has not asked and its own
+ASK-COO on the login path is unanswered. Reported in
+20260902_1906_CHIEF-TO-COO-the-0444-birth-plug-landed-and-a-lane-db-pin-retired-itself.md
