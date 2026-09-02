@@ -165,10 +165,13 @@ console_tail= ['LANE_HOOK_FIRED ... lane_a_choose_npc_scene2 ...']
 
 ## ⑧ การพิสูจน์
 
-- **ซ้อมเกตสองช่อง** ในสภาพ **ไม่มี `pf_bridge` ข้าง ๆ** (worktree นอกโฟลเดอร์แม่) บนคอมมิตแรกของรอบ:
-  `pytest_subset` **7,390 passed · 81 skipped · 14,747 subtests · exit 0**
-  `skip_census` **RESULT: PASS · exit 0** — ไฟล์เทสใหม่ไม่เพิ่ม skip
-  🔴 ซ้อมซ้ำอีกครั้งบนสภาพที่ push จริง (หลังแก้ตาม adversary) ผลอยู่ท้ายหัวข้อนี้
+- **ซ้อมเกตสองช่อง** ในสภาพ **ไม่มี `pf_bridge` ข้าง ๆ** (worktree นอกโฟลเดอร์แม่) **สองครั้ง**
+  ครั้งที่หนึ่ง บน `b9c1d8c8` (ก่อนแก้ตาม adversary): `pytest_subset` 7,390 passed · 81 skipped · 14,747 subtests · exit 0 · `skip_census` PASS · exit 0
+  🔴 **ครั้งที่สอง บน `699b79bb` = สภาพที่ push จริง** (ต้นไม้มี `origin/main` อยู่แล้ว `merge-base --is-ancestor` exit 0):
+  `pytest_subset` **7,391 passed · 81 skipped · 14,760 subtests · exit 0**
+  `skip_census` **RESULT: PASS · exit 0**
+  ⇒ เทสเพิ่มหนึ่งตัว (ตัวไล่ 13 ฉากของ D3) · **skip เท่าเดิม 81** ⇒ ไฟล์ใหม่ไม่เพิ่ม skip ไม่ต้องแตะหมุด
+  เหตุที่ต้องซ้อมสองครั้ง: adversary เปลี่ยนโค้ดและเพิ่มเทส ⇒ สภาพที่ซ้อมครั้งแรกไม่ใช่สภาพที่ push
 - **ledger/coverage ไม่ drift**: `verify_hypothesis_ledger.py` PASS entries=50 · `verify_functional_coverage.py` exit 0
 - ไม่มีอักขระนอก ASCII ในไฟล์ที่แตะ (คอนโซล cp874) · `git diff --check` สะอาด
 - 🔴 **ไม่มีอะไร client-observable ทั้งรอบ** เขียว = เขียว(cloud sanity) + ซ้อมทรงเกต ไม่ใช่เกต Windows
