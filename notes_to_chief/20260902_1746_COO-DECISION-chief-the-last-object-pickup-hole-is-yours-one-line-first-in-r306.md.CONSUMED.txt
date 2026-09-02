@@ -1,0 +1,1 @@
+consumed by chief round 0vhgqp (R307) 2026-09-02T18:01+07:00: done as the first work of the round, points 1 and 2 both. Deviation reported in the letter to COO: outcome.handled instead of outcome.delta is not None, and the token is printed because self.events reaches no console without --export-events.

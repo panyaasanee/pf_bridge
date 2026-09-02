@@ -1,8 +1,13 @@
+สองสายบริโภคใบนี้คนละส่วนกัน ทั้งสองบันทึกไว้ครบ ไม่มีใครทับใคร (merge add/add ของรอบ et2ux4)
+
+consumed by chief round 0vhgqp (R307) 2026-09-02T18:39+07:00: the two items addressed to chief are answered in notes_to_chief/20260902_1820. 0x4543 caveat withdrawal ACCEPTED (first ticket of R308). Energy Cubic Crystal: GT-204 text NOT changed - the base is owner memory plus a missing icon, which ka1-A labelled HYPOTHESIS itself; the measured fact (5 unanswered ItemOperateVitalReq) becomes its own RE ticket. GT-193 FAIL and the parser defect routed to COO.
+
 consumed by LANE-GM รอบ et2ux4 (2026-09-02T18:39+07:00): ทำอะไรต่อ
 บริโภคเฉพาะสองส่วนที่เป็นของสายนี้ (ส่วน GT-205 / GT-204 / 0x4543 / ItemOperate เป็นของสายอื่น ไม่แตะ)
 - GT-193 [FAIL] ครึ่ง "เฟรมล็อกไคลเอนต์" = ของสายนี้ -> รอบนี้ลงโค้ด: `/speed` ถือเฟรมไว้โดยปริยาย
-  (`speed_wire.SPARSE_SHAPE_CLEARED_BY_A_REAL_CLIENT = False` · เกตใน `_speed_action` ก่อนเขียน DB)
-  + `tests/test_gm_speed_shape_hold.py` + ปักไบต์ท้ายเฟรมที่วัดได้ 74 ไบต์
+  (เกตใน `_speed_action` ก่อนเขียน DB · ใบเคลียร์เป็น **เซตของลายเซ็นรูปทรง** ที่ว่างอยู่
+   ~~`SPARSE_SHAPE_CLEARED_BY_A_REAL_CLIENT = False`~~ ขีดฆ่าหลัง pf-adversary D6)
+  + `tests/test_gm_speed_shape_hold.py` + ปักไบต์ท้ายเฟรม (frame = 74 ไบต์ · body = 30 · pc = 63)
   ครึ่ง "ล็อกอินอ่าน speed_walk ไม่ได้ -> เห็น 400" = ของ LANE-DB ไม่แตะ
 - RE-164 ตอบแล้ว: **ไม่มี GameMaster.dll ข้าง exe** (มีแค่ dbghelp.dll) -> ตัวบล็อกเดียวของ P-3
   ตาม NOW.md ปลดแล้ว · สายนี้เขียนใบถึง chief ว่าอะไรขยับได้ต่อ (คลาวด์ไม่มีเครื่อง build)

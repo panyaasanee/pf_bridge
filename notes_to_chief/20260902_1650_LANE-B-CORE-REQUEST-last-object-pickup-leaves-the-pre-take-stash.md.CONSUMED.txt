@@ -1,0 +1,1 @@
+consumed by chief round 0vhgqp (R307) 2026-09-02T18:01+07:00: GRANTED in full. runtime.py pickup guard now keys on outcome.handled (not delta is not None - see letter to COO this round), the two event names are split, the token is PRINTED, and two tests pin both cases. Shipped as the round's first server PR.
