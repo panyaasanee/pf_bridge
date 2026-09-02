@@ -1,14 +1,14 @@
-consumed by chief (LANE-E) round ls5m3c / R300 (2026-09-02T06:5x+07:00): รับทั้ง 5 ข้อ
-
-what happens next
-1. wrap ครอบ make_runtime_vitals = ถอนถาวร ห้ามรื้อกลับทุกรูป (เหมารวม / เกตชื่อไฟล์) -- chief รับข้อนี้เป็นกฎ
-2. จุด opt-in แรก = action_ack.make_scene007_action_ack เรียก preserve_ground_in_runtime_res_vitals แทน
-   legacy.make_runtime_vitals + เลื่อนหมุดของจุดนั้น -- กำหนด R301 (ไม่แซงงานที่ 1 ของ R300 = call site pickup)
-3. ด่านบังคับต่อจุดที่ chief ต้องทำครบก่อนปิดจุด: เทสที่ติดตั้งจริงและเรียก composer จริง + pf-adversary 1 รอบ
-   + 3 ทางที่พังในใบ 0605 (game_listener) ต้องไม่กลับมาแดง
-4. ที่จุด opt-in: preserve_* ปฏิเสธ = ใช้ไบต์เดิม + พิมพ์ GROUND_VITALS_PRESERVE_REFUSED <ExcType> (ASCII)
-5. CHIEF-DEBT-003 (สวีตเขียวทั้งที่พัง) รับไว้ -- ต้องมีเทส "ติดตั้งแล้วเรียกจริง" อย่างน้อย 1 ใบต่อจุด
-6. GT-188 checkpoint 2 = "วัดสภาพวันนี้" คงไว้ · พลิกกลับเป็น "วัดผลของการแก้" เมื่อ action_ack ขึ้น main
-   -> chief เขียนเงื่อนไขเปิดของ GT-146 อ้างสถานะนี้ตรง ๆ แล้วรอบนี้ (ห้ามอ้างว่า PRESERVE อยู่บน main)
-
-รายละเอียด: rounds/R300_ls5m3c_pickup-call-site-landed.md
+consumed by chief (LANE-E) round smrum3 / R301, 2026-09-02 +07:00
+Action: item 2 done and pushed as pirate-force-server PR #555 -- make_scene007_action_ack now
+composes through preserve_ground_in_runtime_res_vitals, HYP-PF-002's markers moved with it.
+Item 4 done, with two chief calls the COO is asked to check in letter 20260902_0920: the console
+line is the type name only (the decision's literal text, and three in-repo rules agree), and the
+refusal reason rides a new event instead so it survives --export-events. Item 3's three gates are
+met: installed-and-really-called tests via state.dispatch(), one pf-adversary round, and the three
+paths of letter 0605 measured still green.
+NOT done, deliberately, and raised back to the COO: item 5's flip of GT-188 checkpoint 2 to
+"measure the effect of the fix". pf-adversary measured that checkpoint 2 presses W (a
+TargetPosVital, not an EA7D ActionVital) and boots with no flags, while the opted-in site only
+runs under --scene-load-scenario ..._ea7d_ack.json -- so the changed line executes zero times in
+that boot and the flip would file a W-step result as evidence about this code. The reason is
+written into GT-188 itself. CHIEF-DEBT-003 is closed for this one site only.

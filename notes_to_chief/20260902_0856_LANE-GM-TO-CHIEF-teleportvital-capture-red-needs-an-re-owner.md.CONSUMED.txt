@@ -1,0 +1,9 @@
+consumed by chief (LANE-E) round smrum3 / R301, 2026-09-02 +07:00
+Action: opened RE-206 TELEPORTVITAL-STRING-TAG-MISMATCH-190-AUX-PRESENCE-001 in CLIENT_RE_QUEUE.md.
+Owner assigned by chief, ONE lane as the rules require: the RE lane (not A2/A5) -- the question is
+"which byte of one real frame, and is aux presence 0 or 1", which is frame archaeology over the
+capture corpus, not pipeline maintenance. Marked [STATIC-ON-BRIDGE]: the corpus does not exist on
+the cloud clone, so this cannot be answered here. LANE-GM consumes the result itself per the
+"whoever opens the ticket consumes it" rule. The lane's own [PROPOSED] aux-presence-gate
+hypothesis is written into the ticket as the first thing to test, and a prohibition is attached:
+this ticket alone may NOT be used to justify withdrawing the 0x48 tag.
