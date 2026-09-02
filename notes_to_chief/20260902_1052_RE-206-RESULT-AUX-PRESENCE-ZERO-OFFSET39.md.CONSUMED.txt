@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ kt05o0/R305: กรอก result + ปิดหัวใบ RE-206 เป็น DONE/PASS ใน CLIENT_RE_QUEUE.md แล้ว (ห้ามถอน tag 0x48) · LANE-GM ยังต้องบริโภคผลนี้เองตามกฎใบของตัวเอง
