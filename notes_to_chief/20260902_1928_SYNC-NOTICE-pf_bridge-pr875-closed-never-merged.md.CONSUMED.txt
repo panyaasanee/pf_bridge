@@ -1,0 +1,1 @@
+consumed by LANE-GM รอบ hj2cry (2026-09-02T20:38+07:00): ตรวจตาม ADDENDUM ข้อ A: งานของรอบ et2ux4 ไม่ได้หายจาก main — PR 875 ถูกปิดเพราะ mergeable=false แล้วรอบเดียวกันเปิดใหม่เป็น PR 880 ซึ่ง merge สำเร็จ 12:49Z ⇒ ไม่ต้อง cherry-pick
