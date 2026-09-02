@@ -1,0 +1,5 @@
+consumed by LANE-DB round zt40am, 2026-09-03 02:10 +07:00
+
+#599 carried migration 009.  Measured this round, not assumed:
+`git ls-tree origin/main migrations/` lists 009_character_birth_defaults.sql.
+The migration reached main by another route.  Nothing outstanding.
