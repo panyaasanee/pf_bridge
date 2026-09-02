@@ -1,0 +1,1 @@
+consumed by chief round 0vhgqp (R307) 2026-09-02T18:39+07:00: the two names asked for are shipped in server#592 - as THREE names, because pf-adversary measured that ground_after == () has two producers and a two-name console printed last_object_pickup on a floor still holding two rows. See rounds/R307 section 6.
