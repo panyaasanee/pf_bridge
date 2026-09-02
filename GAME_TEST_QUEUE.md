@@ -9947,7 +9947,10 @@ item 1 เปลี่ยนเป็น `sed` ตัดเฉพาะช่ว
    payload ไม่ใช่เงื่อนไข envelope เดิมที่ใบนี้เตือนไว้)
 2. `(cd pirate-force-server && python3 -m pytest tests/test_logout_request_envelope.py tests/ -k logout -q)`
    ผ่านทั้งหมด (regression guard -- ห้ามมีเทส logout เดิมพังจากการแก้)
-   — 🟢 **[วัดแล้ว R295]** `126 passed, 3 skipped` (skip เดิม ไม่ใช่ของใหม่)
+   — 🟢 **[วัดแล้ว R295]** ~~`126 passed, 3 skipped`~~ (skip เดิม ไม่ใช่ของใหม่)
+   🔴 **ตัวเลขนี้เน่าแล้ว แก้โดย LANE-A (เจ้าของใบ) รอบ `1d6rta` ตาม pf-adversary D10:** คำสั่งเดียวกัน
+   บน `main` วันนี้ให้ **`182 passed, 3 skipped`** และหลังเทสของรอบ `1d6rta` ให้ **`191 passed, 3 skipped`**
+   ⇒ ผู้เทสห้ามใช้เลข 126 เป็นเกณฑ์ · เกณฑ์จริงคือ **เขียวทั้งชุด และจำนวน skip ยังเป็น 3**
 3. Headless replay เฟรม 119 ไบต์จริงของใบ `1930` (หรือแคปเจอร์ใหม่ที่เทียบเท่า) ผ่าน dispatch จริง แล้ว
    `grep` console log ยืนยันว่าไม่ใช่ `logout_hypothesis_wrong_envelope_no_reply` อีกต่อไป
    — 🟢 **[วัดแล้ว R295]** ใหม่: `tests/test_logout_hypothesis.py::LogoutHypothesisRuntimeTests::
@@ -10952,6 +10955,12 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
       `LANE_A_UIA_NOTICE_COMPOSED button=EXIT_GAME subcode=1 vitals=4 trailing=85 text=EXIT REFUSED pc=56 frame=66`
       (`pc=`/`frame=` คือความยาวไบต์ที่ประกอบได้ ⇒ โทเคนนี้ปรากฏไม่ได้ถ้าไม่มีไบต์จริง ·
       ชื่อโทเคนขึ้นต้น `UIA` ตามโมดูลเดิม **ไม่ใช่ความผิดพลาด** ให้ดูที่ `button=`) ·
+      🔴 **บรรทัดนี้คือที่เดียวในแคปเจอร์ที่แยกสองปุ่มออกจากกันได้ — อย่าใช้บรรทัด `SENT` แทน**
+      (pf-adversary D1 วัดแล้ว): ตัวส่งของ v141 เขียน **label** ลง `GAME_LIVE.txt` / `[G>]` / ไฟล์
+      events และ label ของทั้งสองปุ่มยังเป็น `LANE_A_UIA_BACK_REFUSED_LOCAL_TALK_NOTICE` เหมือนกัน
+      อีกทั้งประโยคทั้งสองยาว 12 ตัวเท่ากัน ⇒ `SENT ... frame_bytes=66` ของสองคลิก **เหมือนกันทุกไบต์**
+      (`runtime.py` เป็นไฟล์ของ chief · คำขอเปลี่ยนชื่ออยู่ในจดหมาย `20260902_1341_LANE-A-TO-CHIEF-*`
+      · ไบต์ที่ผู้เล่นได้ถูกต้องทั้งสองปุ่มอยู่แล้ว ไม่ใช่บั๊กของไบต์) ·
       **ผู้เทสคัดลอกบรรทัดดิบ ๆ ห้ามตีความ** · เลข `vitals=`/`trailing=` บอกสิ่งที่ไคลเอนต์ห่อมารอบคลิก
       และ **ต่างจาก 4/85 ได้โดยชอบธรรมในเซสชันอื่น -- ให้คัดลอกเลขที่เห็นจริง ห้ามนับความต่างเป็น FAIL** ·
       สิ่งที่ตัดเกรดมีแค่ โทเคน · `button=EXIT_GAME` · `subcode=1` · และช่อง `text=`
