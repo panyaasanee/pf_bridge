@@ -1,3 +1,15 @@
+> # ⛔ LEGACY — อย่า paste ไฟล์นี้เข้า Codex อีก
+>
+> ตัวที่รันจริงคือ automation `pirate-force-re-runner` ซึ่งมี prompt ของตัวเอง — ฉบับล่าสุดอยู่ที่
+> **`Desktop\Pirate Force\RE_RUNNER_PROMPT_v2_20260902.txt`** (สำเนาใน repo:
+> `pf_bridge/notes_to_chief/reference_codex_prompt/RE_RUNNER_PROMPT_v2_20260902.txt`)
+>
+> ไฟล์นี้เก็บไว้เป็นประวัติอย่างเดียว ไม่มีหลักฐานว่ามีใครใช้มันอยู่ (grep จดหมายที่ขึ้นหัวตามรูปของมัน = 0 ใบ)
+> และมัน **ขาดของที่ v2 มี** — ไม่มี lock, ไม่มีงบเวลา, ไม่มี batch, ไม่มี PARTIAL checkpoint, ไม่มี memory
+>
+> — กะ1-B, 2026-09-02 10:35 +07:00
+
+# PROMPT ยืน — Codex รันคิว RE (CLIENT_RE_QUEUE) บนเครื่องสะพาน
 # PROMPT ยืน — Codex รันคิว RE (CLIENT_RE_QUEUE) บนเครื่องสะพาน
 
 > วิธีใช้: copy ทั้งบล็อกด้านล่างนี้ (ตั้งแต่ `====` ถึง `====` ท้ายไฟล์) ไปวางใน Codex ที่รันบนเครื่องสะพาน
