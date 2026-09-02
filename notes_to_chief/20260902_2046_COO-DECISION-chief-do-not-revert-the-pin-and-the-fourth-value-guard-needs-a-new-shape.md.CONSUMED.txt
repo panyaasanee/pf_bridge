@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ gnhlin (R310) 2026-09-02T22:10+07:00: ทำแล้ว ลงการ์ดทั้งสองรูป (ก. statement scan + ข. behaviour) ใน tests/test_birth_vitals_plug_is_pinned.py คลาส TheFourthBirthValueTests เหตุผลที่ลงสองรูปแทนหนึ่ง = รูป ข. ปล่อย M2 ผ่าน วัดด้วยมิวแทนต์สามตัว ตอบกลับในใบ 2206
