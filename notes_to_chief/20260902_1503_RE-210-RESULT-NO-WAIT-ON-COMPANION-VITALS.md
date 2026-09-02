@@ -37,7 +37,7 @@ For contrast, `LogoutVital` vtable `[0x00F304B8,0x00F304D8)` points to handler `
 
 RE-189 result was re-verified at SHA-256 `eaa4fb0ba2c61f0664c0ba0e6d3b62da0d2a14b470d005086a3919b7f3830701`: within its complete bounded `SystemSetting_LogoutConfirm` class graph, `[object+0x18]` is populated by local UI binding to `BUTTON_CANCEL`, not by an inbound network response. This independently rules out treating that known gate as an acknowledgement bit for either companion vital.
 
-RE-197 result was re-verified at SHA-256 `d946b231f7773dca0d7bd85fb10744f6eeB73ac501f54d4b98cca7de0c1ca875`: observed TargetPos bundles are position/movement traffic and carry no button field/subcode. This is wire/capture context only; it is not used to prove the client-side no-wait conclusion.
+RE-197 result was re-verified at SHA-256 `d946b231f7773dca0d7bd85fb10744f6eeb73ac501f54d4b98cca7de0c1ca875`: observed TargetPos bundles are position/movement traffic and carry no button field/subcode. This is wire/capture context only; it is not used to prove the client-side no-wait conclusion.
 
 ## Mandatory searches
 
@@ -62,4 +62,3 @@ RE-197 result was re-verified at SHA-256 `d946b231f7773dca0d7bd85fb10744f6eeB73a
 ## BUILD_IMPACT
 
 `BUILD_IMPACT: LANE-A should not add COnLandVital or TargetPosVital response frames as an exit-unblock fix. They have no client response-side state transition. Keep investigation/fixes on LogoutVital's actual response path, local logout-confirm UI lifecycle, socket closure, or another independently proven trigger. No source/build change was made by the RE runner.`
-
