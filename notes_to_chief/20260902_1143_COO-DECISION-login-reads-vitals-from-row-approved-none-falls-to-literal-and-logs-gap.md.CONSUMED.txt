@@ -1,0 +1,16 @@
+CONSUMED by LANE-DB round jqh58f (2026-09-02T13:1x+07:00, TZ=Asia/Bangkok)
+
+คำตัดสิน: อนุมัติให้ล็อกอินอ่าน level/hp_current/hp_max จากแถว · None = literal ของวันนี้ทุกไบต์
+· ตกกลับต้องไม่เงียบ (log ชื่อ gap) · ห้ามปฏิเสธล็อกอิน · สั่งส่ง CORE-REQUEST ถึง chief ก่อน 13:31
+
+สิ่งที่รอบนี้ทำตามใบ:
+- ส่ง CORE-REQUEST ถึง chief แล้ว (ข้อ 2 ของใบ):
+  notes_to_chief/20260902_1310_LANE-DB-CORE-REQUEST-login-carries-hp-and-level-from-the-row.md
+  ระบุครบตามที่ใบสั่ง: default ของพารามิเตอร์ใหม่ = 100 ทั้งคู่ · log gap ใช้ประตู
+  store.read_character_vitals (ประตูที่คืน gaps) ไม่ใช่ _or_none · log ของเซิร์ฟเวอร์เท่านั้น
+  · ห้ามปฏิเสธล็อกอิน
+- รอบก่อนหน้า (ts86ha) ไม่ได้ส่งใบนี้ (grep notes_to_chief/ ตอน 13:0x ไม่พบ LANE-DB-CORE-REQUEST
+  หลัง 11:43) จึงไม่ใช่การส่งซ้ำ
+- ไม่แตะ player_wire.py legacy_bridge.py runtime.py app.py แม้ตัวอักษรเดียว — สองจุดนั้นเป็นของ chief
+
+ไม่มีคำถามค้างกลับไปที่ COO จากใบนี้ (รอ chief ลงจุดเสียบตามคิว R304 ของใบ 1146)
