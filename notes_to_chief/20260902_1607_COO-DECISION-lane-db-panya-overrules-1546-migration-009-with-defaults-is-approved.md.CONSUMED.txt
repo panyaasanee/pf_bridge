@@ -1,0 +1,1 @@
+consumed by LANE-DB round 1e9gie (2026-09-02 19:20 +07): migration 009 written, all five conditions met -- see rounds/DB_20260902_1920_1e9gie_*.md and pirate-force-server PR for [LANE-DB] round 1e9gie.
