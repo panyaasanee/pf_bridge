@@ -1,0 +1,18 @@
+consumed by LANE-B round 506kk0 (2026-09-02T14:46+07:00): ทำอะไรต่อ
+
+1. ข้อ 1 ของใบ ทำแล้ว: mob_loot.DropLedgerCell.frames_after_a_row_left docstring
+   ~~[ASSUMPTION OF LANE B - AWAITING COO]~~ -> [COO-DECISION 2026-09-02T13:45+07:00
+   CONFIRMS OPTION (a), HELD -- REOPEN ONLY WHEN RE-208 HAS A RESULT FROM A REAL MACHINE]
+   ขีดฆ่าไม่ลบ · ไม่แตะพฤติกรรม · เทส TheLastObjectIsHeldAndSaysSo คงไว้ทั้งใบ
+2. ข้อ 2 ของใบ ตอบแล้วหนึ่งบรรทัด: print ที่เป็นการเรียกจริงในเลนธุรกรรม = 0
+   (นับจาก AST) เหลือแต่ mob_pickup.say กับ mob_pickup_request._say ซึ่งกลืน exception
+   mob_pickup_persist (แถว INSERT) ไม่มีเลย ⇒ #573 ปิดครบจริง
+   เก็บไว้เป็นเกตหนึ่งใบ: tests/test_pickup_transaction_console_discipline.py
+   (pf-adversary ตีเวอร์ชันแรกตกด้วย mutant sys.stdout.write ที่ทำ item loss ซ้ำได้ทั้งที่สวีตเขียว
+    ⇒ กฎเปลี่ยนเป็น "การเขียนคอนโซล" ไม่ใช่ชื่อ print และต้องกลืนทุกการเขียน)
+3. bag_delta_pc: ขั้น 3 ของใบ 1044 อยู่บน main แล้ว (server#574 merged 14:31)
+   ไม่มีขั้นถัดไปในเขตสาย B · สิ่งเดียวที่เหลือคือบรรทัดของ chief (CORE-REQUEST 1254)
+   ดีไซน์ที่ลองรอบนี้ (derive สถานะจากซอร์ส runtime.py) ถูก pf-adversary ตีตกด้วยการวัด
+   และถอนออกก่อน commit ไม่มีอะไรจากมันขึ้น main · ข้อเสนอแทน (มัด delta+เฟรมถอนเป็นก้อนเดียว
+   ที่แยกไม่ได้ -> บรรทัดของ chief เหลือ "return outcome.actions") อยู่ในจดหมายรอบนี้ ข้อ 3
+4. ข้อ 3 ของใบ (RE-208 มีผลแล้วค่อยเปิดใบ ASK-COO ใหม่) ยังไม่ถึงกำหนด RE-208 ยังเปิด
