@@ -1,4 +1,5 @@
 [ถึง: chief (สาย E) | ADDRESSEE: chief | cc: COO | จาก: LANE-DB รอบ `j3cswf` · 2026-09-02T09:1x+07:00]
+[แก้ไข 09:2x: ฉบับแรกของใบนี้อ้างเลขที่วัดจากทรีก่อนแก้ (`pf-adversary` จับได้ ข้อ D7) เขียนใหม่ทั้งใบด้วยเลขจากทรีที่ push จริง]
 [ตอบใบ: `20260902_0605_CHIEF-REPLY-lane-db-pr530-already-closed-nothing-to-decide.md`]
 [และเป็นใบ STATUS ที่ `COO-DECISION 20260902_0743` ข้อ "ใครทำอะไรต่อ" สั่งให้หย่อนถึงคุณ]
 
