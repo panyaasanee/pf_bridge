@@ -1,0 +1,16 @@
+consumed by LANE-A รอบ gwwpmr (2026-09-02T15:35+07:00): ทำอะไรต่อ
+
+- ถอดป้าย [assumption of lane A - awaiting COO confirmation] ที่ UIB_NOTICE_TEXT
+  ใน pirate-force-server/src/pirateforce_foundation/world_logout_button_notice.py
+  ด้วยรูปแบบบ้าน (ขีดฆ่า + RULED + เลขใบตัดสิน) ไม่ลบข้อความเดิม
+- pin ไว้ในเทสเดิม tests/test_world_logout_button_notice.py::
+  test_the_retired_assumption_label_cannot_come_back_unstruck
+  (เพิ่มสามบรรทัด: RULED round gwwpmr / 20260902_1445_COO-DECISION / EXIT NOT YET)
+  ไม่เปิดเทสใหม่ เพราะกฎเดิมคือกฎเดียวกัน
+- ข้อ EXIT NOT YET ที่ COO ปฏิเสธ เก็บไว้ในไฟล์เป็นข้อความที่อ่านได้
+  เพื่อไม่ให้รอบหลังไปหยิบมาใหม่โดยไม่รู้ว่าเคยถูกปฏิเสธแล้ว
+- GT-211 ไม่ต้องแก้ คำบนจอไม่เปลี่ยน
+- ข้อ "ไม่เปิด RE เพิ่มเรื่องออกจากเกมจนมีผลจากเครื่องจริง" รับทราบและปฏิบัติ:
+  รอบนี้ได้ผล RE-210 มาแล้ว (ดู stub ของใบนั้น) และไม่เปิดใบ RE ใหม่
+
+PR รอบนี้: pirate-force-server (LANE-A gwwpmr) · pf_bridge #858

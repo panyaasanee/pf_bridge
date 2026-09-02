@@ -4421,7 +4421,13 @@ derived-mask-ว่าง ล้างพื้นทั้งฉากทิ้
 - numbering: `RE` สูงสุดในไฟล์นี้ = 208 · grep `RE-209` ทั้งรีโปพบเฉพาะใบนี้ ⇒ `209`
 - result: (สาย RE กรอก: ไบต์ + คำสั่งที่ถอดได้ของ `0x0045BC80..0x0045BC8A` · ESI ถูกเขียนหรือไม่ · sha ตรงหรือไม่ · timestamp)
 
-## 🔬 RE-210 EXIT-BUTTON-ONLAND-RESPONSE-EXPECTATION-001 [OPEN (ย่อแล้ว) -- เปิดโดย LANE-A รอบ `1d6rta` 2026-09-02T13:4x+07:00 · ผู้ทำ: **สาย RE** (ผู้ทำสายเดียว ไม่ต้องจอง) · **LANE-A บริโภคผลเอง** · `[STATIC-ON-BRIDGE]`]
+## 🔬 RE-210 EXIT-BUTTON-ONLAND-RESPONSE-EXPECTATION-001 [**CLOSED / PASS** -- ตอบแล้ว 2026-09-02T15:03+07:00 · บริโภคโดย LANE-A รอบ `gwwpmr` 2026-09-02T15:35+07:00 · เปิดโดย LANE-A รอบ `1d6rta` · ผู้ทำ: **สาย RE** · `[STATIC-ON-BRIDGE]`]
+
+**คำตอบ: ไม่** — ไคลเอนต์ไม่รอคำตอบของ `COnLandVital` หรือ `TargetPosVital` ก่อนออกจากเกม · vtable ของทั้งสองคลาสชี้ไปที่ handler ตัวเดียวกัน `0x00710440` ซึ่งทั้งตัวคือ `mov al,1; ret 4` (5 ไบต์) — ไม่อ่าน ไม่เขียน ไม่เรียกต่อ
+**ผลต่อ LANE-A (BUILD_IMPACT ของใบผล):** ห้ามเติมเฟรมตอบ companion vital สองตัวนี้เป็นทางออกจากเกม — มันจะไม่ทำอะไรเลย · ทางที่เหลือคือ response path จริงของ `LogoutVital` (handler `0x005EF930` อ่าน `+0x14/+0x18/+0x1C` ของออบเจกต์คำตอบ) — **ยังไม่เปิดใบ RE ใหม่** ตาม NOW.md UI-B ที่ห้ามเปิดเพิ่มจนกว่าจะมีผลจากเครื่องจริง
+จดหมายผล: `notes_to_chief/20260902_1503_RE-210-RESULT-NO-WAIT-ON-COMPANION-VITALS.md`
+
+~~หัวใบเดิม (OPEN):~~
 
 🔴 **แก้หัวใบในรอบเดียวกับที่เปิด (pf-adversary D3)** — ร่างแรกชื่อ `EXIT-BUTTON-COMPANION-VITAL-0X1EB4-001`
 และถามสามข้อ ~~ข้อ 1 (`0x1EB4` ชื่ออะไร) และข้อ 2 (สคีมาสี่ f32 + `0F 01 00` คืออะไร)~~
