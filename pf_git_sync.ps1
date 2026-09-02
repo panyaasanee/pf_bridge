@@ -1158,6 +1158,19 @@ if ($cf.Code -ne 0) {
 
 $CLOSED_PR_EVERY_MIN    = 10
 $CLOSED_PR_MAX_LETTERS  = 3
+# CATCH-UP.  Panya turns this machine off, sometimes for a long time, and asked
+# that nothing be lost by that.  A normal tick reads the 20 most recently closed
+# pull requests, which is plenty at ~25 closures a day - but after the machine
+# has been off for hours those 20 can all be newer than the closures that
+# happened while it slept, and a silently closed round would scroll off the
+# window and never get its letter.  So the first tick after a gap of
+# CLOSED_PR_CATCHUP_MIN minutes reads a much deeper page and is allowed more
+# letters in that one round.  Costs at most a handful of extra API calls, once,
+# on the tick after the machine wakes.
+$CLOSED_PR_CATCHUP_MIN  = 45
+$CLOSED_PR_PAGE_NORMAL  = 20
+$CLOSED_PR_PAGE_CATCHUP = 100
+$CLOSED_PR_MAX_CATCHUP  = 12
 $CLOSED_PR_REPOS        = @('panyaasanee/pirate-force-server', 'panyaasanee/pf_bridge')
 
 function ClosedPrStatePath() { return (Join-Path $BridgeRepo 'sync_state_closed_prs.log') }
@@ -1195,13 +1208,23 @@ if ($DryRun -or $SelfCheck -or $NoServer) {
         } catch { }
     }
     $nowSec = [int64](((Get-Date).ToUniversalTime() - [DateTime]'1970-01-01').TotalSeconds)
+    $gapMin = 0
+    if ($lastCheck -gt 0) { $gapMin = [int](($nowSec - $lastCheck) / 60) }
+    $catchUp = ($lastCheck -gt 0 -and $gapMin -ge $CLOSED_PR_CATCHUP_MIN)
+    $prPage    = $CLOSED_PR_PAGE_NORMAL
+    $prMaxLetters = $CLOSED_PR_MAX_LETTERS
+    if ($catchUp) {
+        $prPage = $CLOSED_PR_PAGE_CATCHUP
+        $prMaxLetters = $CLOSED_PR_MAX_CATCHUP
+        Shout '[5d]' ('this machine was away for about ' + $gapMin + ' min - catching up over the last ' + $prPage + ' closed pull requests instead of ' + $CLOSED_PR_PAGE_NORMAL)
+    }
     if (-not $firstRun -and ($nowSec - $lastCheck) -lt ($CLOSED_PR_EVERY_MIN * 60)) {
         Log '[5d]' ('checked less than ' + $CLOSED_PR_EVERY_MIN + ' min ago - skipping this round')
     } else {
         $written = 0
         $newIds  = @()
         foreach ($repo in $CLOSED_PR_REPOS) {
-            $url = 'https://api.github.com/repos/' + $repo + '/pulls?state=closed&per_page=20&sort=updated&direction=desc'
+            $url = 'https://api.github.com/repos/' + $repo + '/pulls?state=closed&per_page=' + $prPage + '&sort=updated&direction=desc'
             $prs = GhJson $url
             if ($null -eq $prs) { Log '[5d]' ('could not read closed pull requests of ' + $repo + ' - skipped, not an error'); continue }
             foreach ($pr in @($prs)) {
@@ -1212,7 +1235,7 @@ if ($DryRun -or $SelfCheck -or $NoServer) {
                 if ($seen.ContainsKey($key)) { continue }
                 $newIds += $key
                 if ($firstRun) { continue }
-                if ($written -ge $CLOSED_PR_MAX_LETTERS) { continue }
+                if ($written -ge $prMaxLetters) { continue }
 
                 $lane   = LaneFromTitle ([string]$pr.title)
                 $reason = ''
