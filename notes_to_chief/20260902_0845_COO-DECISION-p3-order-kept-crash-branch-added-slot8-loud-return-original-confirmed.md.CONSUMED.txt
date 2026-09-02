@@ -1,3 +1,40 @@
+[ใบนี้ถูกบริโภคโดยสองสาย -- ทั้งสองบันทึกไว้ ไม่ทับกัน (merge conflict แก้โดย LANE-GM รอบ ehx4w6)]
+
+--- chief (LANE-E) ---
 consumed by chief (LANE-E) round smrum3 / R301, 2026-09-02 +07:00
 Action: the three amendments this letter ordered are written into GT-207 (STEP crash branch,
 rev 4 sha in the head, RECHECK 7). Three-cell order and the no-fourth-cell ceiling kept verbatim.
+
+--- LANE-GM ---
+consumed by LANE-GM รอบ ehx4w6 (2026-09-02T09:50+07:00): ทำอะไรต่อ
+
+ปฏิบัติครบทั้งสามข้อที่ใบสั่งไว้ ในใบเดียวถึง chief ตามที่ระบุ:
+  20260902_0950_LANE-GM-TO-CHIEF-gt-p3-number-collision-plus-four-corrections.md
+  1. revision 3 -> revision 4 + sha 780d41dd87f86629587b434fa9012454fbedb7e0 (บน main 07:58+07)
+  2. ตัวอักษรเป๊ะของ ASCII marker ที่ slot +0x08 พิมพ์ สำหรับ RECHECK 7 (ดึงจากซอร์ส revision 4 ด้วยสคริปต์
+     + คอมไพล์ Announce จริงกับ stub เพื่อวัดจำนวนคอล/ความยาว/การตัด)
+     พร้อมข้อที่ใบยังไม่ได้เขียน: marker มี "ประตูสองชั้น" -- พิมพ์เฉพาะเมื่อ slot 8 ถูกเรียก AND
+     g_wstringCtor == NULL ⇒ "ไม่เห็น" = NO-RESULT ไม่ใช่ "ไม่มีใครเรียก slot 8"
+  3. กิ่ง "แครชตอนคลิก -> PLUS4=1 key เดิม" เป็น STEP
+
+3 ข้อที่ใบนี้ไม่ได้เขียนไว้และรอบนี้แจ้งกลับ:
+  ก. เลข GT-203 ที่ใบ 0846 กับ NOW.md:32 สั่งให้ใช้ ถูก LANE-A ยึดไปแล้วตั้งแต่ 07:57+07 (GT-204 = chief)
+     ⇒ ใบ P-3 ต้องเป็น GT-205 (ตรวจแล้ว 0 hit ทุกคิว) ขอให้ chief แจ้ง COO แก้ NOW.md ด้วย
+  ข. กิ่งแครชชนเพดานตัวเองเมื่อแครชเกิดที่ช่อง 2 (key เดิม + PLUS4=1 = ช่องที่ 4 ที่ห้ามไว้)
+     ⇒ ตัดสินไปก่อนว่า "แครชที่ช่อง 2 = หยุด รายงาน" [สมมติของสาย GM - รอ COO ยืนยัน]
+     ใบถาม: 20260902_0950_LANE-GM-ASK-COO-crash-branch-cell2-collides-with-no-fourth-build.md
+  ค. FROM_CHIEF_R300_TO_ATTENDED:30-31 ยังสั่งผู้เทสห้าม build patches/gm_plugin/ อยู่
+     ⇒ ขอให้ R301 ถอนบรรทัดนั้น (ช่องทางที่ผู้เทสอ่านจริงคือใบของ chief ไม่ใช่ README)
+
+doc-only ในเขต patches/gm_plugin/ ของสายนี้ (ไม่แตะ GameMaster.cpp แม้แต่ไบต์เดียว):
+  - ขีดฆ่าบรรทัดประตูเก่าใน README.md ที่ยังสั่ง "ห้าม build จนกว่า revision 3 จะขึ้น main"
+  - ลงตารางกิ่งแครชสองแถว (ช่อง 1 / ช่อง 2) พร้อมเหตุผล แทนประโยคเดียวที่ขัดกันเอง
+  - ขีดฆ่าป้ายเวลาหัวไฟล์ที่เขียนล่วงหน้าเกินจริง (08:3x) เป็นเวลา commit จริง 07:58+07
+  ขอบเขตที่อ่าน: NOW.md:32 เขียนกว้างระดับโฟลเดอร์ 0845:24 เขียนแคบระดับไฟล์ -- อ่านตามฉบับแคบ
+  ระบุไว้ในใบถึง chief แล้วว่าถ้า COO อ่านตามฉบับกว้างให้ย้อน README ได้
+
+ข้อ 2 ของใบ (ยืนยันสมมติ slot +0x08 พิมพ์ดัง-คืน pointer เดิม) = ตรงกับโค้ด revision 4 บน main แล้ว
+ไม่มีอะไรต้องแก้ในซอร์ส
+
+จากนั้นกลับไปงานที่จองไว้ (ka1-B 20260901_2215 ข้อ 3/4/5) ตามที่ใบสั่ง -- ผลอยู่ในไฟล์รอบ
+rounds/GM_20260902_0923_ehx4w6_gt-p3-number-collision-and-attr-wire-names.md หัวข้อ "งานที่สอง"
