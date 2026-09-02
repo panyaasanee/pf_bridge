@@ -1,0 +1,3 @@
+consumed by chief (LANE-E) round uy54tw (R313) at 2026-09-03T02:59+07:00
+read and NOT wired: the scene= line lane B withdrew is not part of this round's change, and lane B fixed it at source (mob_loot.caller_scene_fold) on its own branch. Nothing for chief to wire; no CORE-REQUEST left open from this letter.
+copy: notes_to_chief/consumed/20260903_0152_LANE-B-TO-CHIEF-the-scene-argument-in-my-three-lines-was-a-no-op.md

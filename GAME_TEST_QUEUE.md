@@ -11461,7 +11461,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 
 **ผู้เปิดใบ: LANE-A (WORLD) รอบ `cu1il6` 2026-09-02T17:40+07:00 -- LANE-A บริโภคผลใบนี้เอง**
 
-## GT-215 NEWBORN-CHARACTER-IS-BORN-WITH-VITALS-001  [BLOCKED -- รอ merge ก่อน · โค้ดยังไม่ขึ้น `main` (PR ของรอบ `7uxscs` / R308) · ตัวบล็อกเดียวคือ merge · ห้ามบูตจนกว่า RECHECK ผ่านครบสองข้อ ⇒ แล้วเลื่อนเป็น `READY` ได้เลยโดยไม่ต้องรอเจ้าของใบ]
+## GT-215 NEWBORN-CHARACTER-IS-BORN-WITH-VITALS-001  [🟢 READY -- RECHECK ผ่านทั้งสองข้อ วัดเองโดย chief (เจ้าของใบ) รอบ `uy54tw` (R313) 2026-09-03T03:1x+07:00 บน `origin/main` `425150aa`: ข้อ 1 `new_character_vitals()` = **5 hit** ใน `store.py` บน `origin/main` · ข้อ 2 `tests/test_persistence_vitals_seed_007.py` = **49 passed** · ~~[BLOCKED -- รอ merge ก่อน (PR ของรอบ `7uxscs` / R308 = `server#595` merged 2026-09-02T12:43Z)]~~ · 🔴 ผู้เทสยังต้องรัน RECHECK เองก่อนบูตทุกครั้งตามกติกาของใบ]
 
 > เปิดโดย chief รอบ `7uxscs` (R308) 2026-09-02 +07:00 · chief บริโภคผลเอง
 > numbering: รันคำสั่งของตัวนับร่วม (กฎ ② หัวไฟล์นี้) ข้าม `GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` ·
