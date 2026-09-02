@@ -49,7 +49,11 @@
 
 **สามบรรทัดที่ chief เดินสายให้ (เขตของ chief ทั้งหมด ผมไม่แตะ)**
 
-1. `runtime.py` — จุดที่ตอบคลิก ChooseNPC ของสาย A: เปลี่ยนจาก `legacy.make_runtime_remote_actors(entries)`
+🔴 **จุดเรียกจริงไม่ได้อยู่ใน `runtime.py` ไฟล์เดียว** — pf-adversary รอบสองวัดว่า composer ที่ต้องเปลี่ยน
+คือ `lane_hooks/lane_a_choose_npc_scene14.py:353` (ถูกเรียกจาก `runtime.py:8545` ผ่าน
+`scene_choose_npc_responder.respond`) ⇒ ตัวยามสถานะสแกน `src/` ทั้งต้นไม้แล้ว ไม่ใช่ไฟล์เดียว
+
+1. จุดที่ตอบคลิก ChooseNPC ของสาย A: เปลี่ยนจาก `legacy.make_runtime_remote_actors(entries)`
    เป็น `mob_combat.remote_actors_preserving_the_ground_under_publication(legacy, entries,
    mob_combat.choose_npc_site(<scene_id>), cell=<drop_ledger_cell>, scene=<scene_id>)`
 2. เซลล์ที่ส่งเข้าไปต้องเป็นเซลล์ตัวเดียวกับที่ pickup ใช้ (`drop_ledger_cell`) ไม่ใช่ตัวใหม่
