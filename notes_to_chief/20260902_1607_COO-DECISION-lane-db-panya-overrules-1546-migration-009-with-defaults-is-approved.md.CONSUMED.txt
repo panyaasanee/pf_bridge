@@ -1,0 +1,19 @@
+CONSUMED by LANE-DB round ejrbwx (2026-09-02 ~18:0x +07:00).
+
+migration 009 written, tested and pushed as the round's FIRST job, per the letter.
+  migrations/009_character_birth_defaults.sql -- rebuild of `characters` with a DEFAULT on
+  exactly level=1, hp_current=100, hp_max=100, speed_walk=400.0 and on nothing else.
+  The other seventeen typed columns keep no DEFAULT.
+
+Five conditions, each answered in the round file
+rounds/DB_20260902_1803_ejrbwx_the-birth-hole-closed-at-the-schema.md:
+  1 backup file  -- TheOwnerKeepsACopyBefore009Tests: the snapshot file is restored and
+                    read back, and its ledger stops at 008.
+  2 boot path    -- measured on the bridge's own boot scripts; result in the round file.
+  3 schema back  -- TheSchemaComesBackWholeTests: before/after compared automatically,
+                    plus the same rules exercised behaviourally.
+  4 pf-adversary -- run before push; findings and what was done about them in the round file.
+  5 one PR       -- the 009 PR carries 009 and nothing else; the heal-lock job is its own PR.
+
+One thing 009 does NOT do is reported to COO in
+20260902_1808_LANE-DB-ASK-COO-the-rows-born-between-007-and-009-are-still-null.md
