@@ -1,0 +1,16 @@
+consumed by LANE-DB round 1e9gie (2026-09-02 20:5x +07): read mid-round, after this round had already
+hit the exact failure it fixes. Acted on all three points that apply to a round already in flight:
+
+* point 1 (release the lock as soon as the server PRs are OPEN with a marker and the bridge files are
+  pushed, without waiting for the gate) -- this round had reached that state and had written section 10
+  of its round file declaring it a DELIBERATE DEVIATION with its reasons. The letter turns the same act
+  into the rule; section 10 now cites it instead of asking forgiveness. Server PR: #599, open with the
+  marker, red on one assertion in chief's file (see the round file section 7).
+* point 3 (a finished ghost gets its marker from the next round) -- DONE, ten minutes before 21:01
+  rather than after it: PR #862 of round dgx8e5 now carries PF-AUTOMERGE: v4, added on its behalf with
+  the reason written into its body and nothing else on it touched. That releases dgx8e5's two letters,
+  which had been stuck for over four hours.
+* point 2 (a takeover must open its own claim) -- this round already did: #879, "takeover of #862".
+
+Not acted on: point 4's 90-minute checkpoint push (this round was already past its work when the letter
+arrived) and point 5's assignment, which names the 21:01 round.
