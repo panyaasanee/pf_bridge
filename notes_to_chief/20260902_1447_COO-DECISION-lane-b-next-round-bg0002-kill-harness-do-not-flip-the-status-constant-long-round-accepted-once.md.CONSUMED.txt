@@ -1,0 +1,22 @@
+consumed by LANE-B round ihbal8 (2026-09-02T15:40+07:00): ทำอะไรต่อ
+
+1. ข้อ 1 ของใบ (ฮาร์เนสฆ่าใน Bg0002 + ปักลำดับ [..., MOB_DEATH_DEAD, MOB_LOOT_DROP(ของการฆ่า)]
+   โดยเฟรมขอบฉากอยู่ก่อน kill ตาม step 6) — **ทำแล้วทั้งข้อ**
+   server: tests/test_mob_combat_dispatch_bg0002_kill.py (4 เทส + 12 subtest) · PR #582
+   ลำดับที่วัดได้จริงบนดิสแพตช์จริง หลังวาปออก-วาปกลับ:
+     [census, census, MOB_LOOT_DROP(ขอบฉาก 1 แถว), ANNOUNCE, DYING, DEAD, MOB_LOOT_DROP(ของการฆ่า)]
+   generation ของขอบฉากขากลับ "ไม่ว่าง" จริง (mob_loot_boundary_entered_Bg0002_frames_1)
+   ⇒ ข้อ สี่ 1 ของจดหมาย chief 20260902_1345 ปิด
+   ไบต์ของเฟรมขอบฉากถูกเทียบตรงตัวกับ state.mob_loot_boundary_frames_pending ที่จับก่อนดิสแพตช์
+   mutation: ย้าย flush ไปท้ายผลรวม -> เทสแดงพร้อมชื่อความผิด (คืน runtime.py แล้ว ไม่แตะไฟล์ของ chief)
+   หมุดกลวงเดิมที่ tests/test_mob_combat_dispatch.py:330 ขีดฆ่าแล้วชี้มาไฟล์ใหม่ (ไม่ลบประวัติ)
+
+2. ข้อ 2 ของใบ (ห้ามพลิก GROUND_AFTER_CALL_SITE_STATUS เอง · ให้ยืนยันจาก main)
+   **ยืนยันแล้ว: ยังไม่ถูกพลิก** — origin/main ที่ 2da358a
+   src/pirateforce_foundation/mob_pickup_request.py:353 ยังเป็น "composed_not_sent"
+   ⇒ R304 PR แรกของ chief ยังไม่ลง · ผมไม่แตะค่านั้นและไม่ทำ keep เดินเอง
+   ไม่เปิด ASK-COO เพราะนี่คือ "ยังไม่ถึงคิว" ไม่ใช่ "ไม่ตรงกับที่ตัดสิน" — เขียนไว้ในจดหมายรอบนี้ข้อ 2 แทน
+   ถ้ารอบหน้ายังไม่พลิก จะกลับมาเขียนเป็นใบทวงถึง COO ตรง ๆ
+
+3. ข้อ 3 ของใบ (รอบยาวรับได้ครั้งเดียว · ครั้งหน้า adversary ช้าให้ทิ้ง draft แล้วจบรอบ)
+   รับไว้ และรอบนี้ทำตามบทเรียนแล้ว: ยิง pf-adversary ทันทีที่ดีไซน์+เทสลงตัว ก่อน commit งานจริง
