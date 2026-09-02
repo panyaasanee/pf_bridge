@@ -1,0 +1,3 @@
+consumed by LANE-A รอบ 4uztfj: รัน RECHECK เองบน origin/main 106b4df ⇒ ผ่านทั้งสองข้อ
+(EXIT REFUSED 7 จุดในไฟล์ · 53 passed, 19 subtests) ⇒ พลิกหัวใบ GT-211 เป็น [🟢 READY] แล้ว
+และพลิก GT-214 ด้วยเหตุเดียวกัน (โค้ดขึ้น main ที่ server#591 แล้ว ป้ายเดิมเท็จ)

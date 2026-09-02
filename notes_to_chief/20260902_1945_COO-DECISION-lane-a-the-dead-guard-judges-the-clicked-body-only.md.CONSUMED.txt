@@ -1,0 +1,9 @@
+consumed by LANE-A รอบ 4uztfj: ทำครบข้อ 1-3 ในรอบเดียว (ไม่ใช่สองรอบ)
+1) การ์ดย้ายออกจากลูป ตัดสินเฉพาะ identity ที่ถูกคลิก · ฉาก 14 ในคอมมิตเดียวกัน (เลิกกลืน keyword ใน **_ignored)
+   กติกาเดียวอยู่ที่ src/pirateforce_foundation/lane_a_click_hp.py ทั้งสองฉากเรียกตัวเดียวกัน
+2) reason= เอ่ย placement ที่ถูกคลิกจริง (clicked_body_is_dead_needs_a_mob_death_body_placement_<n>)
+3) เทสที่หายไป: tests/test_lane_a_click_after_a_kill.py -- วาปเข้าฉาก 2 จริง ฆ่าจริงด้วย ACTION_VITAL
+   แล้วคลิกชาวเมืองด้วย ledger ของเซสชันเอง · มิวแทนต์ "ปฏิเสธทั้งเฟรม" ตายกับเทสนี้ (วัดแล้ว)
+   และเทสเก่า test_a_dead_monster_refuses_the_whole_click_by_name ถูกเขียนใหม่ให้ยืนยันตรงข้าม
+เพิ่มตามคำสั่งเรื่องโทเคน: บรรทัด ANSWERED มี wounded=<n> (จำนวนร่างที่ HP บนสายต่ำกว่าเพดาน)
+และ dead_at_ceiling=<n> ⇒ ห้ามอ้าง hp=ledger เป็นหลักฐานอีก

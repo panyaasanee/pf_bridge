@@ -10977,7 +10977,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 
 **ผู้เปิดใบ: LANE-A (WORLD) รอบ `326kf4` 2026-09-02T12:2x+07:00 -- LANE-A บริโภคผลใบนี้เอง**
 
-## GT-211 UI-B-EXIT-BUTTON-VISIBLE-NOTICE-001  [BLOCKED -- โค้ดยังไม่ขึ้น `main`: อยู่บน branch `claude/dazzling-volta-1d6rta` เท่านั้น · ตัวบล็อกเดียวคือ merge (ไม่มีแฟล็ก ไม่แตะ `runtime.py`) · ห้ามบูตจนกว่า RECHECK ผ่านครบสองข้อ]
+## GT-211 UI-B-EXIT-BUTTON-VISIBLE-NOTICE-001  [🟢 READY -- RECHECK ผ่านครบสองข้อ วัดเองบน `origin/main` `106b4df` โดย LANE-A รอบ `4uztfj` 2026-09-02T19:35+07:00: `world_logout_button_notice.py` บน main มี `EXIT REFUSED` 7 จุด (บรรทัด 62/123/229/265/311/320/325) · `pytest tests/test_world_logout_button_notice.py tests/test_world_logout_button_notice_wiring.py` = **53 passed, 19 subtests** · ป้ายเดิมอ้าง branch `claude/dazzling-volta-1d6rta` ซึ่ง merge ไปแล้วที่ `#577` — ~~[BLOCKED -- โค้ดยังไม่ขึ้น main]~~ ตาม COO-DECISION 20260902_1850]
 
 > เปิดโดย LANE-A (WORLD) รอบ `1d6rta` 2026-09-02T13:4x+07:00 · **LANE-A บริโภคผลเอง**
 > numbering: shared counter กับ `CLIENT_RE_QUEUE.md` (กฎ ② หัวไฟล์) -- **ให้รันคำสั่งค้นหาซ้ำตอน rebase**
@@ -11318,7 +11318,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 
 **ผู้เปิดใบ: chief (LANE-E) รอบ `kt05o0`/R305 -- chief บริโภคผลเอง**
 
-## GT-214 CHOOSE-NPC-SCENE2-CLICK-ANSWER-AND-HOSTILE-SAFETY-001  [BLOCKED -- โค้ดยังไม่ขึ้น `main` (PR ของ LANE-A รอบ `cu1il6`) · ตัวบล็อกเดียวคือ merge · ห้ามบูตจนกว่า RECHECK ผ่านครบสามข้อ ⇒ แล้วเลื่อนเป็น `READY` ได้เลยโดยไม่ต้องรอเจ้าของใบ]
+## GT-214 CHOOSE-NPC-SCENE2-CLICK-ANSWER-AND-HOSTILE-SAFETY-001  [🟢 READY -- โค้ดขึ้น `main` แล้ว (`server#591` merge 2026-09-02T11:31Z) วัดเองโดย LANE-A รอบ `4uztfj` · ~~[BLOCKED -- โค้ดยังไม่ขึ้น main]~~ · 🔴 **RECHECK ยังต้องรันก่อนบูตทุกครั้ง** และข้อ 2 **เปลี่ยนสตริง** ในรอบ `4uztfj`: โทเคน `dead_monster_needs_a_mob_death_body` ถูกแทนด้วย `clicked_body_is_dead_needs_a_mob_death_body` (COO-DECISION 20260902_1945 ย่อการ์ด 'ตายแล้ว' ให้ตัดสินเฉพาะร่างที่ถูกคลิก) ⇒ สตริงใหม่ขึ้น main พร้อม PR รอบ `4uztfj` เท่านั้น · ถ้า RECHECK ข้อ 2 ยังไม่เจอสตริงใหม่ **ยังบูตได้ตามปกติ** ผลไม่เปลี่ยน แต่ให้จดว่าบูตบนคอมมิตก่อนรอบนั้น]
 
 > เปิดโดย LANE-A (WORLD) รอบ `cu1il6` 2026-09-02T17:40+07:00 · **LANE-A บริโภคผลเอง**
 > numbering: ตัวนับร่วมกับ `CLIENT_RE_QUEUE.md` -- สูงสุดตอนเปิด = `GT-213` (`RE` สูงสุด = 210) ⇒ ใบนี้ `214` · รันคำสั่งกฎ ② ซ้ำตอน rebase
@@ -11332,7 +11332,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 - RECHECK (ตัดสินด้วย **เนื้อโค้ดบน `origin/main`** ห้ามเทียบเลข commit · ผ่านครบสามข้อ = เลื่อนเป็น `READY` ได้เอง):
   ```
   (cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_scene2.py | findstr /C:"production_allowed = True")
-  (cd pirate-force-server && git show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_scene2.py | findstr /C:"no_player_position_walk_one_step" /C:"dead_monster_needs_a_mob_death_body")
+  (cd pirate-force-server && git show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_scene2.py | findstr /C:"no_player_position_walk_one_step" /C:"clicked_body_is_dead_needs_a_mob_death_body")
   (cd pirate-force-server && py -3 -m pytest tests/test_lane_a_choose_npc_scene2.py -q)
   ```
   ข้อ 1-2 ต้องเจอจริงทั้งสองสตริง (เลือกสตริงที่เป็น **เนื้อโค้ด** ไม่ใช่ข้อความใน docstring:
@@ -11377,7 +11377,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 - pass criteria (สองชั้น · 🔴 **ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้นเด็ดขาด**):
     wire/DB (headless พิสูจน์ได้ ไม่ต้องมีตาคน · grep คอนโซลรวม `2>&1`):
       (ก) คลิกข้อ 5: มี `LANE_A_CHOOSE_NPC_SCENE2_DECLINED reason=no_player_position_walk_one_step` และ **ไม่มี** `..._ANSWERED` คู่กัน
-      (ข) ทุกคลิกหลังก้าวเดิน: `LANE_A_CHOOSE_NPC_SCENE2_ANSWERED placement=<n> visible=97 hostile=12 hp=ceiling from_ledger=0` และ label ที่ส่ง `LANE_A_CHOOSE_NPC_SCENE2_FACE_P<n>`
+      (ข) ทุกคลิกหลังก้าวเดิน: `LANE_A_CHOOSE_NPC_SCENE2_ANSWERED placement=<n> visible=97 hostile=12 hp=ceiling from_ledger=0 wounded=0 dead_at_ceiling=0` และ label ที่ส่ง `LANE_A_CHOOSE_NPC_SCENE2_FACE_P<n>` · 🔴 **สองช่องท้าย (`wounded=` `dead_at_ceiling=`) เพิ่มในรอบ `4uztfj`** — บูตบนคอมมิตก่อนหน้านั้นจะจบที่ `from_ledger=0` และ **นั่นไม่ใช่ FAIL** ให้จดบรรทัดดิบตามที่เห็น · ทั้งสองช่องต้องเป็น `0` ในใบนี้ เพราะจุดเรียกยังไม่ส่ง ledger (ค่าอื่นที่ไม่ใช่ 0 = มีคนลงคีย์เวิร์ดแล้ว ⇒ รายงาน ไม่ต้องตัดสินเอง)
           **[คำทำนาย ไม่ใช่ผลวัด]** `visible=97` และ `hostile=12` เท่ากันทุกคลิก · เลขต่างจากนี้ = finding ให้จดดิบ ๆ ไม่ต้องตีความ
       (ค) ตลอดเวลาที่อยู่ฉาก 2: **ไม่มี** event `core_request_014_columbus_npc_conversation_sent_once` และ **ไม่มี** label `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE` และ **ไม่มี** `core_request_014_columbus_scene17_teleport_sent`
       (ง) `integrity_check` = `ok` ทั้งสองครั้ง · sha canonical ไม่เปลี่ยน · ไม่มี traceback หลุด
@@ -11605,3 +11605,108 @@ RECHECK: `git -C pirate-force-server fetch && git -C pirate-force-server grep -n
   7. ไม่พิสูจน์ว่า consumer อื่นที่เคยเสียหางเฟรมถูกซ่อมด้วย · ใบนี้ครอบแค่ pickup + `last_target_pos`
   8. ไม่ตัดสินสาเหตุของสีป้ายใด ๆ (`RE-067`) · ไม่ใช่เทส stack / กระเป๋าเต็ม / สองผู้เล่นแย่งของ
 - result: (ผู้เทสกรอก · ตัวเลข `N_click`/`N_dec`/`N_vc1`/`N_silent` + จำนวนคลิกต่อชิ้นครบทุกชิ้น + ตารางสีป้าย · ผลเต็มไปที่ round file และจดหมายผล ไม่ใช่ในใบนี้)
+
+## GT-217 ATLANTIS-OCEAN-PANEL-CENSUS-ON-A-GM-SINGLE-USE-ENTRY-001  [BLOCKED -- รอ merge ของรอบ `4uztfj` · โค้ดสำมะโน `Bg3001` ยังไม่ขึ้น `main` · ตัวบล็อกเดียวคือ merge · RECHECK ผ่านครบสามข้อ = เลื่อนเป็น `READY` ได้เองโดยไม่ต้องรอเจ้าของใบ]
+
+> เปิดโดย LANE-A (WORLD) รอบ `4uztfj` 2026-09-02T20:0x+07:00 · **LANE-A บริโภคผลใบนี้เอง**
+> numbering: ตัวนับร่วมกับ `CLIENT_RE_QUEUE.md` · ตอนเปิดวัดได้ `GT` สูงสุด `215` ⇒ เปิดเป็น `216` · 🔴 **ขยับเป็น `217` ตอน rebase ตามกฎ ③ (คนที่ push ทีหลังขยับ)**: chief (LANE-E) push `GT-216 MULTI-VITAL-WALKER-...` ขึ้น main ก่อนในรอบ R309
+> 🔴 **ใบนี้ไม่แซงคิวบูตที่ chief ปักไว้ (`FROM_CHIEF_R305`)**: `GT-207` -> `GT-193` -> `GT-205` -> `GT-204` (ท้ายสุด) · ใบนี้ต่อ **หลัง** สี่ใบนั้น
+> บูต/DB/teardown ตาม `BRIDGE_BOOT_PROCEDURE.md` + `ATTENDED_SESSION_RUNBOOK.md` · **รัน teardown เสมอ** แม้รอบจบเพราะเลิกเล่นเฉย ๆ (เทมเพลตปฏิเสธ boot stamp เก่ากว่า 420 นาที)
+
+- objective: ข้อพิสูจน์เดียว -- **ฉาก 126 (`Bg3001` "Atlantis" · `n_SCENE_TYPE 8` = OCEAN PANEL) ถูกส่งถึงไคลเอนต์เป็นครั้งแรกของโปรเจกต์ และมีมนุษย์นั่งดูว่าไคลเอนต์วาดอะไรออกมา**
+  รอบ `4uztfj` ต่อสายสำมะโนให้ฉากนี้: ขาเข้าเซิร์ฟเวอร์ประกอบ **36 actor จาก 38 placement ดั้งเดิมของฉาก** --
+  🔴 **นับเป็นจุดวาง (placement) ไม่ใช่นับชื่อ** — ร่างแรกของบรรทัดนี้เขียนว่า "เรือสิบลำ" ซึ่งบวกได้ 27 ไม่ใช่ 36 (pf-adversary จับ) ⇒ ตัวเลขที่ถูกคือ:
+  **20 ลำเรือ** (`SP_*`): "Merchant Ship" x9 · "Pirate Ship" x4 · "Merchant marine Trade Ship" x3 · "Intrepid" · "Santa Maria" · "Skull Phantom" · "Repair ship" อย่างละ 1 ·
+  **10 มาร์กเกอร์อากาศ INVISIBLE**: ชื่อ "Tornado" 4 + ไม่มีชื่อ lv 110 อีก 6 ·
+  **4 เกาะที่เป็น actor** (`MAP_ISLAND_01`: "Mad Sand Island", "Pirate Lair", "Blood Blade Island", "Lonely Island") ·
+  **2 สัตว์**: "Jellyfish King" (lv 60) · "Sea Monster Fish"  ⇒ รวม 36
+  🔴 **ไม่เคยมีใครเห็นว่าไคลเอนต์วาด `MAP_ISLAND_01` เป็นอะไร หรือวาด actor INVISIBLE ที่มีป้ายชื่ออย่างไร** ⇒ ใบนี้ซื้อ "ตาแรก" ล้วน ๆ
+
+- RECHECK (ตัดสินด้วย **เนื้อโค้ดบน `origin/main`** ห้ามเทียบเลข commit · รันจาก cwd ที่กำหนดในบรรทัดเอง · ผ่านครบสามข้อ = เลื่อนเป็น `READY` ได้เองโดยไม่ต้องรอเจ้าของใบ):
+  ```
+  (cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/world_population_bg3001.py | findstr /C:"WORLD_CENSUS_BG3001")
+  (cd pirate-force-server && git show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_scene_census.py | findstr /C:"scene_is_sanctioned_for_a_gm_entry")
+  (cd pirate-force-server && py -3 -m pytest tests/test_world_population_bg3001.py tests/test_world_bg3001_identity.py tests/test_lane_a_scene_census.py -q)
+  ```
+  ข้อ 1-2 ต้องเจอสตริงจริงทั้งสอง · ข้อ 3 ต้องเขียวทั้งชุด · ว่าง/แดง = ยังไม่ merge ⇒ คง `[BLOCKED]` **ห้ามบูต ไม่เสียเวลาผู้เทสแม้แต่นาทีเดียว**
+  🔴 **ห้าม grep สิ่งที่พิมพ์ผ่าน f-string** (`assembled=`, `hp=`) -- ไม่มีอยู่ในไฟล์ (กับดักของรอบ `cu1il6`)
+  ทดสอบก่อน merge ได้ ถ้าเปลี่ยน `origin/main` เป็น branch ของรอบ `4uztfj` แล้ว **เขียนในผลว่าใช้ branch/commit ไหน**
+
+- เส้นทางเข้า (วัดรอบนี้ · 🔴 **มีทางเดียวเท่านั้น ห้ามคิดทางใหม่**):
+  ประตูล็อกอินปกติของฉาก 126 **ปิดอยู่** (`login_entry_allowed: false`) และ **รอบนี้ไม่ได้แตะมัน** ·
+  🔴 **ผู้เทสห้ามพลิกสวิตช์นี้เด็ดขาด** -- `COO-DECISION 20260829_1444` บังคับว่าต้องมีผลใบ attended ใบนี้ก่อนจึงจะพิจารณาพลิกได้ · จุดทั้งหมดของใบคือ "ทางเข้าเดียวคือ grant ของ GM"
+  GM เข้าได้ด้วย single-use grant `CORE-REQUEST-GM-038` ที่ลงมาเพื่อ scene id นี้โดยเฉพาะ:
+  (1) ล็อกอินด้วยบัญชี GM ที่อยู่ใน `config/gm_accounts.json`
+  (2) พิมพ์ `/warp 126` ในแชท · ฉาก 126 **ไม่มี marker ปลายทางในไฟล์ฉาก** (`n_MARKER = 0`) ⇒ `/warp` **ไม่วาปสด** แต่ **สเตจการล็อกอินครั้งถัดไป** · คอนโซลต้องตอบเป็นข้อความ staged-login ไม่ใช่ teleport
+  (3) **ล็อกเอาต์แล้วล็อกอินกลับด้วยตัวละครเดิม** ⇒ ลงที่ spawn ที่ registry ปักไว้ `(3050, 232, 90)` = `CONSTDATA_TH__MARKER` แถว 17 (`CHIEF-DECISION 20260829_1603` ข้อ 1)
+  วัดรอบนี้: `single_use_stageable_scene_ids()` = `(1,2,3,4,5,6,7,8,9,10,11,14,126,130,278,997)` · `126` **ไม่อยู่** ใน `stageable_scene_ids()` ปกติ · `sanctioned_barred_blocker(126)` = `login_path_bars_it_needs_core_request_gm_038`
+
+- db: canonical = `state\pirateforce.sqlite3` -- 🔴 **สำเนาเท่านั้น ห้ามเปิดไฟล์ canonical** ⇒ คัดลอกเป็น `state\run_gt217_<yyyyMMdd_HHmmss>.sqlite3` แล้วบูตทับสำเนา
+  จด sha256 ของสำเนาก่อน/หลัง · จด sha256 ของ canonical ก่อน/หลัง และยืนยันว่า **ไม่เปลี่ยน** · `PRAGMA integrity_check` = `ok` **ทั้งสองครั้ง** · **รัน teardown เสมอ**
+  (รอบคัดลอก DB ⇒ ตำแหน่งตัวละครกลับไป spawn ทุกบูต เป็นเรื่องปกติ ไม่ใช่ผลวัด)
+
+- server args: บูตมาตรฐาน · 🔴 **ไม่มีแฟล็ก scenario ใด ๆ** · `-SecondPasswordMode bypass` · บัญชี GM ใน `config/gm_accounts.json`
+  🔴 เก็บคอนโซล **รวม stdout+stderr (`2>&1`)** -- โทเคนของเลนนี้ออกทาง **stderr** ล้วน เก็บแต่ stdout จะไม่เห็นอะไรเลย
+  ```
+  py -3 -u -m pirateforce_foundation.app --db state\run_gt217_<stamp>.sqlite3 2>&1
+  ```
+
+- steps: (เซิร์ฟเวอร์ก่อน ไคลเอนต์ทีหลัง เสมอ · ~15 นาทีบนจอ)
+  1. RECHECK ผ่านก่อน · `LOCK_GAME` · จด boot stamp · sha canonical · คัดลอก DB เป็น run copy
+  2. บูตเซิร์ฟเวอร์ **ใหม่สด** ก่อน แล้วค่อยบูตไคลเอนต์ (ไคลเอนต์ที่ถูกฆ่า = เซิร์ฟเวอร์ยังถือเซสชัน ตัวถัดไปค้าง "connecting" ⇒ **รีสตาร์ตเซิร์ฟเวอร์ก่อนเสมอ**)
+  3. ล็อกอิน GM เข้าฉากบ้านให้เห็นตัวจริงก่อน · ภาพนิ่ง `S00-HOME` เต็มความละเอียด
+  4. คลิกช่องแชท **ยืนยันว่า focus จริง** (พิมพ์ตอนไม่ focus = ตัวอักษรกลายเป็นฮอตคีย์) · พิมพ์ `/warp 126` · Enter · รอ ~3 วิ
+     (`/warp` เป็นคำสั่ง GM **ไม่ใช่** ตัวยิงแชทที่ต้องยาว **12 ตัวอักษร ASCII พอดี** ของใบอื่น -- **ห้ามเติมตัวอักษรให้ครบ 12**)
+  5. คัดบรรทัดคอนโซลดิบที่ตอบกลับ · **คาดว่าเป็นข้อความสเตจล็อกอิน ไม่ใช่การวาป** ⇒ **จอไม่เปลี่ยนฉาก = ผลที่คาดไว้ ไม่ใช่ FAIL**
+  6. **ล็อกเอาต์ แล้วล็อกอินกลับด้วยตัวละครเดิม** · รอโหลดจนจบ
+  7. ภาพนิ่ง `S126-A` ทันทีที่โหลดเสร็จ **ยังไม่กดอะไรเลย** · จัดมุมมองด้วย **คลิกขวาลาก** เท่านั้น (หมุน **กล้องอย่างเดียว** facing ของตัวละครไม่ขยับ ไม่มีไบต์ออกสาย ปลอดภัยทุกจังหวะ) แล้วเก็บ `S126-B` `S126-C` ให้ครบรอบทิศ
+  8. **เดินหนึ่งก้าว** (`W` หรือ `S`) -- จำเป็น เพราะตัวตอบคลิกอ่าน `last_target_pos` ซึ่งยังเป็น `None` ก่อนก้าวแรก
+  9. **คลิกซ้ายหนึ่งครั้ง** บน actor ที่มองเห็น โดยมีตัวอื่นในเฟรม · `S126-CLICK1` ภายใน ~3 วิ · ทำซ้ำอีกสองตัวถ้ามี (`S126-CLICK2` `S126-CLICK3`)
+     🔴 **คลิกเพื่อเลือกเท่านั้น** ห้ามตี ห้ามใช้สกิล (`NOW.md` ห้ามใบตีมอนจนกว่า P-1/P-2 ปิด) · มี "Jellyfish King" ในฉาก ⇒ **เดินหนีอย่างเดียว**
+  10. ตัวเช็ค NO-CRASH: **คลิกขวาลากหมุนกล้อง** เท่านั้น · 🔴 **ห้ามใช้ `Q`/`E` เป็นตัวเช็คนี้** (มันหมุน **ตัวละคร** และยิง `TargetPosVital` ออกสาย เช่นเดียวกับ `W/A/S/D`) · ออกด้วยปุ่ม X
+  11. ปิดเซิร์ฟเวอร์ · เก็บ `.out`/`.err` + `capture_v141\GAME_LIVE.txt` + `GAME_EVENTS_LIVE.txt` + sha256 ทุกไฟล์ · `integrity_check` · sha canonical ซ้ำ · **รัน teardown เสมอ**
+  🔴 **STOP:** มีหน้าต่างบทสนทนา/เควสต์โผล่ หรือรู้ตัวว่าอยู่คนละฉากหลังคลิก ⇒ หยุดทั้งใบทันที ปิดไคลเอนต์ รายงานทันที
+
+- pass criteria (สองชั้น · 🔴 **ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้นเด็ดขาด**):
+    wire/DB (headless พิสูจน์ได้ ไม่ต้องมีตาคน · grep จากคอนโซลที่รวม `2>&1`):
+      (ก) มี `WORLD_POP_HANDOFF scene=126 ...` แล้วตามด้วยบรรทัดเดียวนี้:
+          `WORLD_CENSUS_BG3001 assembled=36/38 shippable=36 wire=36 bodies=ok pc=6377B frame=6390B anchor=(3050.000,232.000,90.000) reapply_ms=3000 source=bg3001_full_roster shortfall=identity_unresolved=2 unresolved=2`
+      (ข) ตามด้วยบรรทัด `n_ID=... <name> lv.. hp.. @(x,y,z)` **ครบ 36 บรรทัด** (หนึ่งบรรทัดต่อหนึ่ง actor)
+      (ค) มี `BG3001_UNSHIPPED` **สองบรรทัดพอดี**:
+          `BG3001_UNSHIPPED placement=28 set=16 cline_row=60415 leader_n_id=0 reason=CLINE_row_carries_leader_0,_no_CONSTDATA_MOBS_row`
+          `BG3001_UNSHIPPED placement=37 set=56 cline_row=60455 leader_n_id=8180 reason=MOBS_TIP_name_is_Thai,_not_ASCII;_this_lane_ships_an_ASCII_evidence_layer`
+      (ง) คลิกที่ได้คำตอบ: `LANE_A_CHOOSE_NPC_SCENE126_ANSWERED ...` + label `LANE_A_CHOOSE_NPC_SCENE126_FACE_P<n>` · **คลิกแรกก่อนก้าวเดินถูกปฏิเสธโดยตั้งใจ** ด้วย `no_player_position_walk_one_step` (ทรงเดียวกับที่ `GT-214` จดไว้ของฉาก 2) ⇒ **ไม่ใช่ FAIL**
+      (จ) `integrity_check` = `ok` ทั้งสองครั้ง · sha canonical ไม่เปลี่ยน · ไม่มี traceback หลุด
+      (ฉ) 🔴 **บรรทัดที่จะโผล่และ *ไม่ใช่* เรื่องผิดปกติ ห้ามหยุดใบเพราะมัน** (วัดบนดิสแพตช์จริงรอบ `4uztfj`):
+          `COLUMBUS_CHOOSE_NPC_WRONG_SCENE scene=126 effect=columbus_lane_declined`
+          เกิดเมื่อคลิก actor ที่ **placement 1** (เรือ "Santa Maria") เพราะ identity ของมันคือ `0x2002` เลขเดียวกับ Columbus ที่พอร์ตรอยัล
+          และ guard ของ chief ปฏิเสธให้แล้ว (`conversation_sent` ยังเป็น `False` · ไม่มีหน้าต่างบทสนทนา · ไม่มีการวาป)
+          ⇒ **ไม่ใช่เงื่อนไข STOP ของข้อ 11** และ **ไม่ใช่หลักฐานของใบ `GT-213`** (ใบนั้นพูดถึงฉาก 14) · คัดบรรทัดลงรายงานเฉย ๆ
+          ถ้าเห็น `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE` หรือหน้าต่างบทสนทนาโผล่จริง **นั่นคือ STOP** และรายงานทันที
+      🔴 **`pc=` และ `frame=` มาจากบิลด์ของรอบ `4uztfj` ที่ anchor นี้ · anchor ต่างไปแล้วสองเลขนี้เปลี่ยนได้อย่างชอบธรรม ⇒ ผู้เทส "คัดตามที่เห็น" ห้ามใช้สองเลขนี้ตัดสินผ่าน/ตก**
+      🔴 **ชั้นนี้ตอบไม่ได้เลยว่ามีอะไรถูกวาดบนจอ**
+    client-observable (🔴 **ต้องมีคนนั่งหน้าจอ ห้ามอนุมานจากคอนโซล · ชั้นนี้เท่านั้นที่ตัดสินใบ**):
+      (ฉ) หลัง relog: **มี actor ถูกวาดบนจอไหม และกี่ตัว** -- นับจาก `S126-A/B/C` แล้วเขียนเลขที่นับได้ตรง ๆ
+      (ช) ก้อนที่ควรเป็น **เกาะ** (`MAP_ISLAND_01` สี่ก้อน) วาดออกมาเป็นอะไร -- บรรยายตามที่เห็น (ก้อนเกาะ / กล่อง / โมเดลผิด / ไม่มีอะไรเลย) **ห้ามเดาสาเหตุ**
+      (ซ) **[คำทำนาย ไม่ใช่ผลวัด]** มาร์กเกอร์ "Tornado" สี่ตัว **ไม่ถูกวาดเป็นตัว** เพราะ outfit เป็น INVISIBLE · แต่ **ป้ายชื่อจะขึ้นหรือไม่ ยังไม่มีใครรู้** ⇒ จดว่าเห็นป้ายลอยไหม กี่ป้าย · ทำนายผิด = finding ไม่ใช่ความล้มเหลว
+      (ฌ) 🔴 **สีป้ายชื่อทุกป้ายในเฟรม หนึ่งบรรทัดต่อหนึ่งป้ายต่อหนึ่งภาพ ทุกภาพ** · เขียนคำว่า `none` ออกมาแทนการเว้นว่าง · อ่านสีจาก **ภาพนิ่งเต็มความละเอียดเท่านั้น** (ห้าม contact sheet / ภาพย่อ / วิดีโอ) · **จดสีอย่างเดียว ห้ามอนุมานสาเหตุของสี** (`RE-067` เป็นเจ้าของคำถามนั้น) · ความต่างจากภาพเซิร์ฟเวอร์จริงลง `REAL_SERVER_DIVERGENCE.tsv` แถวละข้อ
+      🔴 **ชั้นนี้ตอบไม่ได้ว่าเฟรมใดออกจากเซิร์ฟเวอร์**
+    🔴 ปิดใบด้วย `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>` เท่านั้น (G-OBS) · หลักฐานครบแต่ยังไม่มีลายเซ็นคน = `AWAITING-OBSERVER` ซึ่ง **ไม่ใช่ PASS และไม่ใช่ FAIL**
+
+- ที่รู้อยู่แล้วและ **ไม่ใช่ FAIL**: ฉากนี้ **ไม่มีเฟรม `PLAYER_FACTION`** เพราะ `n_SAVE = 0` · เห็นแล้วอย่าตกใจ อย่าเปิดใบซ้ำ ให้จดไว้เฉย ๆ
+- 🔴 **ผลลบมีค่าเท่าผลบวก:** ถ้า **ไม่มีอะไรถูกวาดเลย** ทั้งที่คอนโซลบอก `wire=36` ⇒ คำตอบคือ **finding เรื่องฉากประเภท ocean panel** (ไคลเอนต์กับ `n_SCENE_TYPE 8`) **ไม่ใช่หลักฐานว่าตัวประกอบสำมะโนผิด** และ **ห้ามใช้เป็นเหตุถอน `production_allowed`** ⇒ เปิดใบ `RE-` ใหม่พร้อมภาพและเลข `wire=` ดิบ ๆ · วาดครบแต่ผิดรูป = finding อีกแบบ redirect ไปที่ไฟล์ฉาก ไม่ใช่ที่สำมะโน
+
+- nonclaims:
+  1. ไม่พิสูจน์ว่าฉาก 126 ควรเปิดประตูล็อกอินปกติ · ใบนี้ **ไม่พลิก** `login_entry_allowed` และผลของใบนี้ไม่ใช่ใบอนุญาตให้ใครพลิกเอง
+  2. ไม่พิสูจน์ว่า 36 ตัวตรงกับต้นฉบับ · ไม่พิสูจน์ระบบ identity ของสอง placement ที่ตกไป (28 และ 37)
+  3. ไม่พิสูจน์กลไก `/warp` เอง (`GT-182`/`GT-192`) · ไม่พิสูจน์เส้นทางสเตจล็อกอินของฉากอื่นในลิสต์ single-use
+  4. ไม่ตัดสินความหมายของสีป้ายชื่อ (`RE-067`) · ไม่แตะคอมแบต/ดรอป/HP · ไม่พิสูจน์อะไรที่รอดข้าม relog (บูตบนสำเนา)
+  5. ไม่แซงลำดับบูตของ `FROM_CHIEF_R305` · ไม่ตัดสินฉาก 2 (`GT-214`) ฉาก 130 / 278 / 997
+
+- links: `world_population_bg3001.py` · `lane_a_scene_census.py` · `gm/login_scene_admission.py` · `CORE-REQUEST-GM-038` ·
+  `COO 20260829_1444` · `CHIEF 20260829_1603` · `GT-214` · `RE-067`
+- result: (ผู้เทสกรอก: PASS/FAIL/NO-RESULT · branch/commit ที่บูต · ภาพ `S00-HOME`/`S126-A`/`S126-B`/`S126-C`/`S126-CLICK1..3` ·
+  บรรทัดคอนโซลดิบทุกโทเคนข้างบน (`WORLD_POP_HANDOFF` · `WORLD_CENSUS_BG3001` · 36 บรรทัด actor · `BG3001_UNSHIPPED` สองบรรทัด · คลิกทุกครั้ง) ·
+  จำนวน actor ที่ **นับจากจอ** · บรรทัดสีป้ายครบทุกป้ายทุกภาพ · sha256 ทั้งสี่ค่า · `integrity_check` · NO-CRASH/CRASH · timestamp +07:00 · `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
+
+**ผู้เปิดใบ: LANE-A (WORLD) รอบ `4uztfj` 2026-09-02T20:0x+07:00 -- LANE-A บริโภคผลใบนี้เอง**
