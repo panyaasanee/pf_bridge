@@ -11537,3 +11537,71 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
   `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
 
 **ผู้เปิดใบ: chief รอบ `7uxscs` (R308) -- chief บริโภคผลใบนี้เอง**
+
+## GT-216 MULTI-VITAL-WALKER-MAKES-GROUND-PICKUP-PLAYABLE-001  [BLOCKED -- รอ merge ก่อน: pirate-force-server PR `#600` (chief, LANE-E) ยังไม่ขึ้น main]
+
+RECHECK: `git -C pirate-force-server fetch && git -C pirate-force-server grep -n "VITAL_WALK_PROMOTED" origin/main -- src/pirateforce_foundation/vital_walk.py src/pirateforce_foundation/runtime.py`
+  0 hit = ใบยัง `BLOCKED` จริง ห้ามบูต · เจอทั้งสองไฟล์ = พลิกหัวใบเป็น `READY` แล้วบูตได้เลย
+  สถานะกลางหลังรันจบแต่ยังไม่มีลายเซ็นตาคน = **`AWAITING-OBSERVER`** (ไม่ใช่ PASS ไม่ใช่ FAIL)
+  ใบนี้มีชั้น client-observable ⇒ **G-OBS บังคับ**: จดหมายผลต้องมีบรรทัด `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>` ไม่มี = chief ไม่ปิดใบ
+
+- objective: (ข้ออ้างเดียว) ตัวเดิน nested vital ตัวใหม่ (`src/pirateforce_foundation/vital_walk.py` + call site สองจุดใน `runtime.py`)
+  ทำให้ **การคลิกซ้ายเก็บของบนพื้นสำเร็จตั้งแต่คลิกแรก แทนที่จะรอด 2 จาก 46 อย่างที่วัดได้ใน `GT-204`/R303**
+  `GT-204` PASS แล้วว่า "เก็บได้อย่างน้อยหนึ่งครั้ง" · ใบนี้ถามคนละคำถาม: **มันเล่นได้จริงหรือยัง**
+- db: `default_state\pirateforce.sqlite3` -- **สำเนาเท่านั้น ห้ามเปิด canonical** · คัดไป
+  `backup\pirateforce_before_GT-216_<yyyyMMdd_HHmmss>.sqlite3` แล้ว `state\run_gt216.sqlite3` ·
+  จด sha256 สำเนาก่อน/หลัง · sha256 canonical เทียบ `CANON_SHA.txt` **ก่อนและหลัง ต้องเท่ากัน** · `PRAGMA integrity_check` = `ok` สองครั้ง
+- server args: บูตปกติบน `main` **ไม่มีแฟล็ก `--*-scenario` ใด ๆ** (production branch):
+  `py -3 -u -m pirateforce_foundation.app --db state\run_gt216.sqlite3`
+- steps: (playbook: `ATTENDED_SESSION_RUNBOOK.md` · อัดวิดีโอต่อเนื่องตลอด `LOCK_GAME`)
+    0. LOCK_GAME · boot stamp (teardown ปฏิเสธ stamp เก่ากว่า 420 นาที) · sha canonical · copy DB · รัน `RECHECK` ไม่ผ่าน = ไม่บูต
+    1. **server ก่อน client เสมอ** · เข้าเกม จด scene + X/Y/Z · ยืนยันบล็อก "สมประกอบ" จากคอนโซล
+    2. จัดกล้องด้วย **คลิกขวาค้างลาก** เท่านั้น (ไม่เปลี่ยน facing ไม่มีไบต์ขึ้นไวร์) · `Q`/`E` และ `W/A/S/D` เปลี่ยน **facing ของตัวละคร** และยิง `TargetPosVital` ⇒ ใช้ได้เฉพาะขั้นที่สั่งให้เดิน · **ห้ามพิมพ์ตัวอักษรตลอดรอบ** (ตัวอักษรตอนช่องแชทไม่โฟกัส = ฮอตคีย์)
+    3. ไปฉาก 2 · ฆ่ามอนจนได้ของบนพื้น **อย่างน้อย 10 ชิ้น** (ฆ่าหลายตัวได้) · ถ่าย full-res **S0** ตอนของกองอยู่
+    4. เปิดกระเป๋า นับช่องที่มีของ ถ่าย **S1** แล้วปิด
+    5. เดินด้วย `W/A/S/D` เข้าไปติดของ **แล้วคลิกซ้ายที่ของชิ้นนั้น "หนึ่งครั้ง"** · รอ 2 วินาที · ถ้าไม่หาย ให้คลิกซ้ำได้ **แต่ต้องนับจำนวนคลิกของชิ้นนั้นลง result ทุกครั้ง** (ตัวเลขนี้คือตัวหารของชั้น client-observable)
+    6. ทำซ้ำขั้นที่ 5 ให้ครบทุกชิ้น (>= 10 ชิ้น) · **ห้ามลากของในกระเป๋า** (item-move คนละเลน)
+    7. เปิดกระเป๋าอีกครั้ง ถ่าย **S2** · NO-CRASH ด้วย **คลิกขวาค้างลาก** (🔴 ห้ามใช้ `Q`/`E` เป็นตัวเช็ค) · **S3** · ออกเกมด้วย X มุมขวาบน
+    8. ปิดเซิร์ฟเวอร์ (**ฆ่าไคลเอนต์แล้วต้อง restart เซิร์ฟเวอร์ก่อนบูตหน้า ไม่งั้นค้าง "connecting" ตลอดกาล**) · เก็บ `.out`/`.err` + `capture_v141\GAME_LIVE.txt` + `capture_v141\GAME_EVENTS_LIVE.txt` + sha256 ทุกไฟล์ · `integrity_check` · **teardown เสมอ** · sha canonical ซ้ำ · ห้าม commit เอง
+    9. คัดดิบ ห้ามตีความ:
+       `findstr /N /C:"MOB_PICKUP_REQUEST_DECODED" /C:"MOB_PICKUP_REQUEST_REFUSED" /C:"MOB_PICKUP_ROW_INSERTED" /C:"VITAL_WALK_PROMOTED" /C:"VITAL_WALK_REFUSED" server_console_live.*.txt`
+       `findstr /N /C:"vital_walk_" capture_v141\GAME_EVENTS_LIVE.txt`
+
+- ตัวเลขที่ต้องคำนวณ (เขียนสูตรไว้เพื่อไม่ให้ตีความต่างกัน):
+    `N_click` = จำนวนคลิกซ้ายที่ของ นับจากวิดีโอ (ขั้น 5-6)
+    `N_dec`   = จำนวน `MOB_PICKUP_REQUEST_DECODED`
+    `N_vc1`   = จำนวน `MOB_PICKUP_REQUEST_REFUSED reason=vital_count_not_one` (**R303 = 42 จาก 46**)
+    `N_silent` = `N_click - N_dec - (refused ทุก reason)` = คลิกที่หายเงียบ
+
+- pass criteria: (สองชั้น 🔴 **ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้นเด็ดขาด** -- G5)
+    wire/DB          : (1) `N_click >= 10` · (2) **`N_vc1 = 0`** · (3) `N_dec >= 0.90 * N_click` ·
+      (4) `VITAL_WALK_PROMOTED vital=0x4543 vital_count=<n>` ปรากฏอย่างน้อยหนึ่งบรรทัด (= มีคลิกที่ถูกกู้จริง) ·
+      (5) `VITAL_WALK_PROMOTED vital=0x2A90 vital_count=<n>` ปรากฏ **หนึ่งบรรทัดต่อหนึ่ง connection** (มากกว่านั้น = การกันสแปมพัง รายงานเป็นข้อสังเกต) ·
+      (6) จำนวนแถวใหม่ใน `character_backpack_items` = จำนวน `MOB_PICKUP_ROW_INSERTED` (จด `item_identity`/`template_id`/`quantity`/`slot` ทุกแถว) ·
+      (7) `integrity_check` = `ok` · sha canonical ตรง `CANON_SHA.txt` ก่อน/หลัง · ไม่มี traceback ที่ไม่ถูกจับ
+      ชั้นนี้ตอบไม่ได้: บนจอของหายไหม กระเป๋าขยับไหม ต้องคลิกกี่ทีถึงติด
+    client-observable: **ต้องมีคนอยู่หน้าจอเท่านั้น ห้ามอนุมานจากคอนโซล** --
+      (1) **ของ >= 9 ชิ้นจาก 10 ชิ้นหายจากพื้นด้วยคลิกเดียว** (จดจำนวนคลิกต่อชิ้นครบทุกชิ้น) ·
+      (2) **ตัวเลข/ช่องกระเป๋าบนจอขยับขึ้นตามจำนวนชิ้นที่เก็บ** เทียบ `S1` กับ `S2` ·
+      (3) NO-CRASH/CRASH · มีข้อความระบบขึ้นไหม (คัดเป๊ะ + สี) ·
+      🔴 **จดสีป้ายชื่อทุกป้ายทุกภาพ หนึ่งบรรทัดต่อหนึ่งป้ายต่อหนึ่งภาพ** อ่านจาก **full-res เท่านั้น** · ไม่มีป้ายให้เขียน `none` ห้ามเว้นว่าง · **จดสีอย่างเดียว ห้ามเดาสาเหตุ** (`RE-067` เป็นเจ้าของ)
+      ชั้นนี้ตอบไม่ได้: `N_vc1` เป็นเท่าไร มีแถวลง DB จริงไหม
+
+- คำทำนาย (**เป็นคำทำนาย** · ทำนายผิด = ผลการวัด ไม่ใช่ความล้มเหลว):
+    P1 `N_vc1 = 0` · `N_dec ~= N_click` · ของหายคลิกเดียว => ผ่านทั้งสองชั้น
+    P2 `N_vc1 = 0` แต่โผล่ `reason=` ชื่ออื่น (เช่น `claimant_out_of_range`) => ตัวเดินทำงาน แต่เหลือประตูอื่น ⇒ **ผลลบนี้มีค่าเท่าผลบวก** redirect ไปที่ชื่อ reason นั้น
+    P3 เจอ `VITAL_WALK_REFUSED reason=unknown_vital_id` => ไคลเอนต์ยัด vital ที่ตารางไม่รู้จัก ⇒ redirect ไปขยายตารางความยาว (คัด hexdump ห้าม decode เอง)
+       🔴 บรรทัดนี้พิมพ์ **ครั้งเดียวต่อหนึ่งเหตุผลต่อหนึ่ง connection** · จำนวนครั้งจริงอ่านจาก event `vital_walk_refused_*`
+    P4 ไม่มีของให้คลิก / ของหายก่อนเดินถึง => **NO-RESULT (ประตู `GT-188`)** ไม่ใช่ FAIL
+
+- nonclaims:
+  1. ตารางความยาวของตัวเดินครอบ **สี่ vital id เท่านั้น** (จาก 49 ชื่อที่ v141 รู้จัก) · id อื่นทำให้ **ทั้งเฟรมถูกปฏิเสธ** และคงพฤติกรรมของ `main` วันนี้เป๊ะ
+  2. 🔴 **ใบนี้ไม่ตัดสินว่าใครถูกระหว่างสองหลักฐานที่ขัดกัน** -- ka1-A เขียนว่า "the request usually arrives as vital 2..5" แต่โทเคน `vital_count_not_one` 42 ครั้ง **เกิดได้เฉพาะตอน pickup vital เป็นตัวแรก** ⇒ ขัดกันตรง ๆ · ตัวเดินรองรับทั้งสองแบบ
+  3. `vital=0x2A90` พิมพ์ **ครั้งเดียวต่อ connection โดยเจตนา** ⇒ **จำนวนบรรทัดนั้นไม่ใช่จำนวน TargetPos ที่ถูกกู้** ห้ามเอาไปเป็นตัววัด
+  4. 🔴 **ความยาว body ของ `TARGET_POS` = 24 มีแหล่งเดียว ไม่ใช่สอง** -- ทั้งสองแหล่งวาง vital นี้ไว้ท้ายเฟรม ซึ่งแยก "body 24" กับ "body 22 + trailer 2" ไม่ออก
+     ⇒ ถ้าอ่านผิด เฟรมที่ `TargetPos` ไม่ได้อยู่ท้ายจะพัง **และจะโผล่เป็น `VITAL_WALK_REFUSED`** ไม่ใช่เงียบ (ดู P3)
+  5. ไม่พิสูจน์ว่าของอยู่บนพื้นนานเท่าไร และไม่พิสูจน์ว่า PRESERVE ทำงาน -- `GT-188` เป็นเจ้าของ
+  6. ไม่พิสูจน์ว่าของ **รอดข้าม relog** -- `GT-142`
+  7. ไม่พิสูจน์ว่า consumer อื่นที่เคยเสียหางเฟรมถูกซ่อมด้วย · ใบนี้ครอบแค่ pickup + `last_target_pos`
+  8. ไม่ตัดสินสาเหตุของสีป้ายใด ๆ (`RE-067`) · ไม่ใช่เทส stack / กระเป๋าเต็ม / สองผู้เล่นแย่งของ
+- result: (ผู้เทสกรอก · ตัวเลข `N_click`/`N_dec`/`N_vc1`/`N_silent` + จำนวนคลิกต่อชิ้นครบทุกชิ้น + ตารางสีป้าย · ผลเต็มไปที่ round file และจดหมายผล ไม่ใช่ในใบนี้)
