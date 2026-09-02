@@ -10464,7 +10464,17 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
 
 **ผู้เปิดใบ: chief (LANE-E) รอบ `ls5m3c` / R300 ตาม `COO-DECISION 20260902_0542` ข้อ 3**
 
-## GT-205 UI-A-BACK-BUTTON-VISIBLE-NOTICE-001  [BLOCKED -- composer is built but NOT wired; run RECHECK before any boot]
+## GT-205 UI-A-BACK-BUTTON-VISIBLE-NOTICE-001  [READY WHEN MERGED -- wiring is pushed as PR #563; run the RECHECK below before any boot]
+
+> 🔴 **สถานะเปลี่ยนโดย chief รอบ `ogq686` / R302 (2026-09-02T11:2x+07:00):** บรรทัดที่ใบนี้รออยู่
+> **เขียนแล้วและ push แล้ว** -- `pirate-force-server` PR **#563** (`runtime.py::_dispatch_with_lanes`
+> เรียก `world_logout_button_notice.observe_parsed` ก่อนเกต scenario · เฟรมต่อท้ายท้ายสุดของ `return`)
+> **รอ merge เท่านั้น ยังห้ามบูตจนกว่า RECHECK ข้างล่างจะได้ hit จริงบน `origin/main`**
+> เกตอ่านจาก `production_allowed` ของโมดูลตรง ๆ ไม่ผ่าน `lane_hooks.module_production_allowed()`
+> (มีเทสอ่านซอร์สจริงบังคับไว้) ⇒ ปัญหา D7 ที่ใบกลัวไว้ ปิดแล้ว
+> 🔴 chief เพิ่มเกต **fail-closed เมื่อยังไม่ได้เลือกตัวละคร** ที่ใบนี้ไม่ได้ขอ (วัดแล้ว: ก่อนมีเกต
+> เซสชันที่ไม่เคยล็อกอินยังได้เฟรมกลับ) ⇒ **ผู้เทสต้องล็อกอินเข้าฉากจริงก่อนกดปุ่มเสมอ** ไม่งั้นได้
+> `lane_a_uia_notice_no_selected_no_reply` แล้วจะอ่านเป็น FAIL ผิด ๆ
 
 > Opened by LANE-A round `od1xso` (2026-09-02 +07:00). LANE-A consumes the result itself.
 > numbering: shared counter with `CLIENT_RE_QUEUE.md` (rule (2) at the top of this file).
