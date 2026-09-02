@@ -105,7 +105,7 @@ REM !! AND A MISSING TOOL IS A WARNING, NOT A REFUSAL, for the same reason.
 REM `dumpbin` ships with VC, not with the game.  Refusing to install a
 REM verified-good DLL because the client machine has no compiler costs the
 REM same attended round as installing a bad one -- so the two cases are split:
-REM the tool SAYS the manifest is missing => refuse; the tool is ABSENT => say
+REM the tool SAYS the manifest is missing == refuse; the tool is ABSENT == say
 REM so loudly and continue.  `build_vs2008.bat` gates hard on the machine that
 REM has the tool, which is where the gate belongs.
 REM
@@ -133,10 +133,32 @@ echo        build_vs2008.bat gates hard on the machine that builds the file --
 echo        but it does mean nothing here has verified this particular file.
 echo        If this DLL was built by build_vs2008.bat revision 5 or later, it
 echo        was checked there. If you are not sure, stop and rebuild.
-goto do_copy
+goto pfgm_image_check
 
 :have_dumpbin
-"%DUMPBIN%" /nologo /headers "GameMaster.dll" > "%TEMP%\pf_gm_headers.txt"
+REM !! `2>&1`, and the emptiness check below, are a FALSE-RED fix
+REM (pf-adversary, round `b8xrod`, M4).  A `dumpbin.exe` that `where` finds on
+REM PATH but that runs outside a VS command prompt dies looking for `mspdb*.dll`
+REM and says so on STDERR.  With stdout alone redirected, the headers file came
+REM out EMPTY, `findstr` failed, and this block then printed
+REM `[FAIL] GameMaster.dll has no .rsrc section` -- a failure of the TOOL,
+REM reported as a finding about the DLL, refusing a good file permanently while
+REM telling the owner to "rebuild", which fails again identically.  The gate
+REM itself is unchanged: an image that really has no `.rsrc` still produces
+REM headers output and is still refused.
+"%DUMPBIN%" /nologo /headers "GameMaster.dll" > "%TEMP%\pf_gm_headers.txt" 2>&1
+set "PFGM_HDRSIZE="
+for %%S in ("%TEMP%\pf_gm_headers.txt") do set "PFGM_HDRSIZE=%%~zS"
+if not defined PFGM_HDRSIZE set "PFGM_HDRSIZE=0"
+if "%PFGM_HDRSIZE%"=="0" (
+  echo [warn] dumpbin produced no output at all, so it did not read this file.
+  echo        That is the tool failing, not a finding about GameMaster.dll --
+  echo        the usual cause is dumpbin on PATH outside a VS command prompt,
+  echo        which cannot load mspdb80/mspdb100.dll. Nothing here has checked
+  echo        the image; continuing to the resource-tree check below.
+  del /q "%TEMP%\pf_gm_headers.txt" 2>nul
+  goto pfgm_image_check
+)
 findstr /c:".rsrc" "%TEMP%\pf_gm_headers.txt" >nul
 if %errorlevel% neq 0 (
   echo.
@@ -151,6 +173,197 @@ if %errorlevel% neq 0 (
 )
 del /q "%TEMP%\pf_gm_headers.txt" 2>nul
 echo [ok] the file about to be copied carries an embedded resource
+
+REM ===========================================================================
+REM Revision 3: RUN the image checker, do not merely recommend it.
+REM
+REM COO-DECISION 2026-09-02T23:42+07:00 item 3.  Until this revision the only
+REM thing between a DLL whose manifest sits at the WRONG resource id and the
+REM owner's client folder was a printed suggestion in README.md ("step 0"),
+REM which nobody on this project has ever been observed running.
+REM
+REM `dumpbin /headers` above cannot close that hole, and this is the whole
+REM reason revision 3 exists: it sees the `.rsrc` SECTION.  A manifest
+REM embedded at `;#1` -- the EXE id, one keystroke from the right command --
+REM puts an `.rsrc` section in the image while leaving the DLL exactly as
+REM unloadable as one with no manifest at all (14001, silent, button visible,
+REM click dead).  `pirateforce_foundation.gm.plugin_image_check` parses the
+REM resource tree and requires id 2, so it is the check that decides here.
+REM
+REM THE THREE BRANCHES, AND WHY THEY ARE NOT ONE BRANCH:
+REM
+REM   no interpreter, or no checkout of the checker on this machine
+REM       -- WARN AND CONTINUE.  Fail-open is explicit in the decision: the
+REM          game PC is not the build PC and nobody has measured whether it
+REM          has Python.  Refusing a good DLL there costs the same attended
+REM          round as installing a bad one, and build_vs2008.bat already gates
+REM          hard on the machine that does have the tools.
+REM   the checker ran and answered
+REM       -- ITS VERDICT DECIDES.  `verdict=image_ok` installs; anything else
+REM          refuses and copies nothing (fail-closed).
+REM   the checker was found and started, but printed no verdict line
+REM       -- WARN AND CONTINUE, in different words from branch 1.
+REM          [ASSUMPTION OF LANE-GM - AWAITING COO] the decision does not name
+REM          this case.  It is read as "no working tool here" and not as a
+REM          finding about the DLL, because a bad DLL cannot reach it: every
+REM          parse error inside the checker is caught and turned INTO a
+REM          verdict (`PluginImageError` carries one, `inspect_plugin_file`
+REM          never lets one escape, and a truncated or non-PE file reports
+REM          `not_pe`).  A run with no verdict line is therefore a broken
+REM          environment -- a Python 2 `python.exe`, a half-synced checkout --
+REM          and never a statement about these bytes.  Asked back in
+REM          notes_to_chief/20260903_0034_LANE-GM-ASK-COO-the-checker-that-
+REM          starts-and-says-nothing.md.
+REM
+REM !! WHERE THIS STEP ACTUALLY RUNS, said plainly because the sentence
+REM "install.bat now runs the checker" is only true on some machines
+REM (pf-adversary, round `b8xrod`, H3).  On the GAME PC -- which this same
+REM script says at the top is not the build machine -- there is normally no
+REM `pirate-force-server` checkout and no Python, so control reaches
+REM `:pfgm_no_tool` and this whole step warns and copies.  It bites on the
+REM BRIDGE, where both repositories sit side by side and where a DLL is
+REM normally built and installed.  That is a real gap, not a hidden one: it
+REM is the price of the fail-open COO-DECISION `20260902_2342` item 3
+REM required, and closing it means putting a checker on the game PC, not
+REM tightening this branch.  Do not read a clean install on a bare game PC as
+REM "the image was checked".
+REM
+REM !! `--dll` ONLY, NEVER `--client-dir`, AND IT IS LOAD-BEARING.  Control
+REM only reaches this line once the [STOP] guard above has proved the target
+REM folder holds NO GameMaster.dll, so `--client-dir "%TARGET%"` would report
+REM `verdict=missing` and exit 1 EVERY SINGLE TIME -- a permanent refusal to
+REM install, on precisely the clean folder an install is for.  The build/
+REM install comparison that flag exists for belongs to step 0 AFTER an
+REM install, not to the install itself.
+REM ===========================================================================
+:pfgm_image_check
+set "PFGM_SRC="
+REM `set PF_SERVER_REPO="C:\..."` is how most people set a path with a space,
+REM and the quotes then land INSIDE the value: `if exist "%VAR%\src\..."`
+REM becomes a broken token and is false forever, sending a machine that has
+REM every tool down the warn-and-copy branch (pf-adversary, round `b8xrod`, L2).
+set "PFGM_REPO=%PF_SERVER_REPO%"
+if defined PFGM_REPO set "PFGM_REPO=%PFGM_REPO:"=%"
+if defined PFGM_REPO if exist "%PFGM_REPO%\src\pirateforce_foundation\gm\plugin_image_check.py" set "PFGM_SRC=%PFGM_REPO%\src"
+if not defined PFGM_SRC if exist "%~dp0..\..\..\Pirate Force ServerProject\src\pirateforce_foundation\gm\plugin_image_check.py" set "PFGM_SRC=%~dp0..\..\..\Pirate Force ServerProject\src"
+if not defined PFGM_SRC if exist "%~dp0..\..\..\pirate-force-server\src\pirateforce_foundation\gm\plugin_image_check.py" set "PFGM_SRC=%~dp0..\..\..\pirate-force-server\src"
+if not defined PFGM_SRC goto pfgm_no_tool
+
+REM A `py` launcher can be installed with no 3.x runtime behind it, and a
+REM `python.exe` on PATH can still be a Python 2, which cannot even import
+REM this module (`from __future__ import annotations`).  So each candidate is
+REM asked to RUN something before it is believed.
+set "PFGM_PY="
+REM `if %errorlevel%==0`, not `if not errorlevel 1`: the latter means
+REM "errorlevel is less than 1", which is TRUE for a negative code -- an
+REM interpreter that dies with 0xC0000005 would be believed (round `b8xrod`, L1).
+py -3 -c "pass" >nul 2>nul
+if %errorlevel%==0 set "PFGM_PY=py -3"
+if defined PFGM_PY goto pfgm_run
+python -c "import sys; raise SystemExit(0 if sys.version_info[0] == 3 else 1)" >nul 2>nul
+if %errorlevel%==0 set "PFGM_PY=python"
+if defined PFGM_PY goto pfgm_run
+python3 -c "pass" >nul 2>nul
+if %errorlevel%==0 set "PFGM_PY=python3"
+if not defined PFGM_PY goto pfgm_no_tool
+
+:pfgm_run
+set "PFGM_OUT=%TEMP%\pf_gm_image_check.txt"
+del /q "%PFGM_OUT%" 2>nul
+set "PYTHONPATH=%PFGM_SRC%"
+echo [..] plugin_image_check ^(%PFGM_PY%^) is reading the file about to be copied
+%PFGM_PY% -m pirateforce_foundation.gm.plugin_image_check --dll "%~dp0GameMaster.dll" > "%PFGM_OUT%" 2>&1
+set "PFGM_RC=%errorlevel%"
+if exist "%PFGM_OUT%" type "%PFGM_OUT%"
+findstr /c:"GM_PLUGIN_IMAGE build verdict=" "%PFGM_OUT%" >nul 2>nul
+if errorlevel 1 goto pfgm_no_verdict
+
+REM !! WHICH COPY ANSWERED (pf-adversary, round `b8xrod`, H2).  The module is
+REM located by GUESSING FOLDER NAMES above, and any checkout older than round
+REM `selrsl` prints `verdict=image_ok` and exits 0 for a manifest embedded at
+REM resource id 1 -- the exact shape this gate exists to catch.  The verdict
+REM token cannot tell those two copies apart.  The `rules=` line can: the old
+REM copy does not print it.  A stale checkout is therefore treated as no tool
+REM at all, not as a pass.
+findstr /c:"GM_PLUGIN_IMAGE build rules=" "%PFGM_OUT%" >nul 2>nul
+if errorlevel 1 goto pfgm_stale_tool
+findstr /c:"manifest_id2" "%PFGM_OUT%" >nul 2>nul
+if errorlevel 1 goto pfgm_stale_tool
+REM Both, not either: the exit code alone can be clobbered by anything that
+REM runs between here and the test, and the verdict line alone would miss a
+REM future check that fails the run without changing that token.
+if not "%PFGM_RC%"=="0" goto pfgm_refuse
+findstr /c:"GM_PLUGIN_IMAGE build verdict=image_ok" "%PFGM_OUT%" >nul 2>nul
+if errorlevel 1 goto pfgm_refuse
+del /q "%PFGM_OUT%" 2>nul
+echo [ok] plugin_image_check: verdict=image_ok
+echo      NONCLAIM: file-level only, and narrower than it sounds. It does NOT
+echo      say the GM window opens (only a person at the screen decides that),
+echo      and it does NOT say the manifest at id 2 CONTAINS a usable assembly
+echo      reference -- an empty or wrong-version manifest reads image_ok here
+echo      and still answers 14001. It says the id is right, not the contents.
+goto do_copy
+
+:pfgm_no_tool
+echo.
+echo [warn] plugin_image_check did NOT run on this machine, so nothing here
+echo        has read the resource tree of the file about to be copied.
+echo        Reason: no Python 3 on PATH, or no pirate-force-server checkout
+echo        found. Looked at %%PF_SERVER_REPO%%\src, then, beside the folder
+echo        that holds pf_bridge, "Pirate Force ServerProject\src" and
+echo        "pirate-force-server\src".
+echo        The .rsrc check above is NOT the same check: a manifest embedded
+echo        at resource id 1 leaves an .rsrc section behind and the DLL still
+echo        never loads.
+echo        If this DLL came from build_vs2008.bat revision 5 or later it was
+echo        checked on the build machine. If you are not sure, stop and run
+echo        step 0 by hand from the server checkout:
+echo            set PYTHONPATH=src
+echo            py -3 -m pirateforce_foundation.gm.plugin_image_check --dll "%~dp0GameMaster.dll"
+echo        Set PF_SERVER_REPO to that checkout to make this automatic.
+goto do_copy
+
+:pfgm_no_verdict
+echo.
+echo [warn] plugin_image_check started but printed no verdict line, so it has
+echo        neither passed nor failed this file. Its output is above.
+echo        That is a broken tool environment -- a Python 2 interpreter, a
+echo        half-synced checkout -- and never a finding about these bytes: the
+echo        checker turns every parse error into a verdict instead of raising,
+echo        so a bad DLL cannot land here.
+echo        Continuing, for the same reason a missing interpreter continues.
+if exist "%PFGM_OUT%" del /q "%PFGM_OUT%" 2>nul
+goto do_copy
+
+:pfgm_refuse
+echo.
+echo [FAIL] plugin_image_check refused this file. Its verdict and EVERY
+echo        blocking problem it found are printed above -- read all of them.
+echo        One attended round is not worth spending one rebuild at a time.
+echo        Nothing was copied. "%TARGET%" is untouched.
+echo        The likeliest cause of a refusal that the .rsrc check let through
+echo        is verdict=manifest_missing with a manifest at resource id 1
+echo        instead of 2. Rebuild with build_vs2008.bat revision 5 or later,
+echo        which embeds at ;#2.
+echo.
+echo        The full report is KEPT, not deleted, so it can be pasted into a
+echo        letter instead of retyped off the screen:
+echo            "%PFGM_OUT%"
+exit /b 1
+
+:pfgm_stale_tool
+echo.
+echo [warn] the plugin_image_check that answered is an OLD COPY: it printed a
+echo        verdict but no "rules=" line naming manifest_id2, and copies from
+echo        before 2026-09-02 answered verdict=image_ok for a manifest embedded
+echo        at resource id 1 -- the exact failure this step exists to catch.
+echo        Its answer is therefore NOT trusted, and this is treated like
+echo        having no checker at all: nothing here has read the image.
+echo        Fix by pulling the pirate-force-server checkout it used:
+echo            "%PFGM_SRC%"
+echo        or by pointing PF_SERVER_REPO at an up-to-date one.
+if exist "%PFGM_OUT%" del /q "%PFGM_OUT%" 2>nul
+goto do_copy
 
 :do_copy
 copy /y "GameMaster.dll" "%TARGET%\GameMaster.dll" >nul

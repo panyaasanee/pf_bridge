@@ -209,7 +209,25 @@ gate `GMModule_Client+0x19`) **ไม่ใช่** อ่านว่า "ป�
 
 ## ขั้นที่ 0 ของทุกช่อง — ก่อนบูตเกม (ไม่ต้องมี VC toolchain)
 
-จาก checkout ของ `pirate-force-server`:
+🔴 **`install.bat` revision 3 เรียกตัวตรวจนี้ให้เองแล้ว** (COO-DECISION `20260902_2342` ข้อ 3)
+ไม่ต้องรันมือถ้าติดตั้งผ่าน `install.bat` บนเครื่องที่มี Python 3 และมี checkout ของ `pirate-force-server`
+— มันหาจาก `%PF_SERVER_REPO%\src` ก่อน แล้วค่อยมองข้าง ๆ โฟลเดอร์ที่เก็บ `pf_bridge`
+(`Pirate Force ServerProject\src` แล้ว `pirate-force-server\src`)
+· **หาไม่เจอ หรือไม่มีล่าม = `[warn]` แล้วติดตั้งต่อ** (ไม่บล็อกบิลด์ดีเพราะเครื่องเกมไม่มีเครื่องมือ)
+· **ตอบว่าไม่ใช่ `image_ok` = `[FAIL]` ไม่ copy อะไรเลย**
+· `install.bat` ส่งแค่ `--dll` **ห้ามเติม `--client-dir`** — มันรันใต้เกต `[STOP]` ที่พิสูจน์ไปแล้วว่าโฟลเดอร์ปลายทาง
+  **ไม่มี** `GameMaster.dll` ⇒ `--client-dir` จะได้ `verdict=missing` แล้ว exit 1 **ทุกครั้ง** = ปฏิเสธติดตั้งถาวร
+· ถ้าจะเทียบ build กับ install (กับดัก "เทส DLL ตัวเมื่อวานซ้ำ") ให้รันมือ **หลัง** ติดตั้ง ด้วยคำสั่งข้างล่าง
+· 🔴 **มันกัดที่บริดจ์ ไม่ใช่ที่เครื่องเกม** — เครื่องเกมปกติไม่มี checkout ของ `pirate-force-server` และไม่มี Python
+  ⇒ ตกกิ่ง `[warn]` แล้วติดตั้งต่อ **ห้ามอ่านว่า "ภาพถูกตรวจแล้ว"** (pf-adversary รอบ `b8xrod` H3)
+· 🔴 **checkout เก่าตอบไม่ได้อีกแล้ว** — ตัวตรวจพิมพ์บรรทัด `GM_PLUGIN_IMAGE build rules=...,manifest_id2`
+  บอกว่าสำเนานั้นบังคับกฎอะไรบ้าง · `install.bat` บังคับว่าต้องมีคำว่า `manifest_id2` ถึงจะเชื่อคำว่า `image_ok`
+  เหตุ: สำเนาก่อนรอบ `selrsl` พิมพ์ `verdict=image_ok` + exit 0 ให้ manifest ที่ id 1 = ทรงเดียวกับที่เกตนี้มีไว้จับ
+  ⇒ เจอ verdict แต่ไม่เจอ `rules=` = ปฏิบัติเหมือน **ไม่มีเครื่องมือ** (`[warn]` แล้วไปต่อ) ไม่ใช่ "ผ่าน"
+· `verdict=image_ok` บอกว่า **id ถูก** ไม่ได้บอกว่า **เนื้อ manifest ใช้ได้** — manifest ที่ id 2 แต่ว่าง/เวอร์ชัน CRT ผิด
+  ยังตอบ 14001 อยู่ดี (pf-adversary รอบ `b8xrod` M5) สคริปต์พิมพ์ nonclaim นี้ออกจอเองแล้ว
+
+รันมือจาก checkout ของ `pirate-force-server`:
 
 ```
 set PYTHONPATH=src
@@ -396,7 +414,7 @@ IMAGE SHA-256: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623
 eecd367419a6ae394d07188c6cd0799d263ba04c29f822336d74eb3fa24ee68b  GameMaster.cpp
 9e2a3adc808189ba9ee31060469617e1eb32ab90c8d3094ec0a09a541aba2190  GameMaster.def
 58b576f5fd89622493c774db829a5f16acd82b5b6bd4dc2826b17e065677171e  build_vs2008.bat
-798ce5ad297c14527022c9d00e1db2fb30aa0354f73463bcc268acba3464a93a  install.bat
+c48a340ed5b6a7364b3149ac75ea307a2588ad982c741b2ff83ac57b127d185a  install.bat
 83c75d3955a7448e93d30a07511ff3a19b12f0217689c9d35ac8533bb582b9ea  find_mt.bat
 ```
 
@@ -406,7 +424,7 @@ eecd367419a6ae394d07188c6cd0799d263ba04c29f822336d74eb3fa24ee68b  GameMaster.cpp
 
 ```
 1a3157ade227cef1bfec8fe1e76d6c8a2ffbf63e097b6d7fda8a5524d25f83a4  build_vs2008.bat   (CRLF บนดิสก์)
-3ac0a48b4813dc2b4615fc2415030c2c3134e7c0b151891f788eab03c312e40d  install.bat   (CRLF บนดิสก์)
+0e192fa3d0b8be3f31948bd1a52d8b2e7e14727daefde2d4b05456a3fb44323b  install.bat   (CRLF บนดิสก์)
 4033da06059525cb525d3a132239e3f60ae7b636fe5768f94d5bee1c28924b64  find_mt.bat   (CRLF บนดิสก์)
 ```
 
@@ -417,5 +435,8 @@ eecd367419a6ae394d07188c6cd0799d263ba04c29f822336d74eb3fa24ee68b  GameMaster.cpp
 🔴 รอบ `selrsl` (2026-09-02T22:51+07:00): `find_mt.bat` เปลี่ยน (ข้อความ `[FAIL]` มีบล็อก `NEXT STEP`)
 ⇒ **ค่าของ `find_mt.bat` ทั้งสองบรรทัดอัปเดตในคอมมิตเดียวกันกับสคริปต์** · อีกสี่ค่าไม่ขยับ เพราะไฟล์อื่นไม่ถูกแตะ
 · pf-adversary จับข้อนี้ได้เป็นรอบที่สอง (D3 ของรอบ `selrsl` หลัง D8 ของรอบ `hj2cry`) — กฎบรรทัดบนมีอยู่เพราะเรื่องนี้
+🔴 รอบ `b8xrod` (2026-09-03T00:xx+07:00): `install.bat` เปลี่ยนเป็น revision 3 ⇒ **สองค่าของ `install.bat` อัปเดตในคอมมิตเดียวกัน**
+· อีกสี่ค่าไม่ขยับ เพราะ `GameMaster.cpp` `GameMaster.def` `build_vs2008.bat` `find_mt.bat` ไม่ถูกแตะ
+· pf-adversary จับข้อนี้ได้เป็น **รอบที่สาม** (H1 ของรอบ `b8xrod`) — ร่างแรกของรอบนี้ก็ทิ้งค่าเดิมไว้อีก
 
 (revision 2 บันทึกไว้ชุดเดียวโดยไม่บอกว่าเป็นชุดไหน ⇒ ใครเช็คบนบริดจ์จะเห็นไม่ตรงและสรุปผิดว่าไฟล์ถูกแก้ระหว่างทาง)

@@ -1,0 +1,17 @@
+consumed by LANE-GM รอบ b8xrod (2026-09-03T00:2x+07:00): ทำอะไรต่อ
+
+ข้อ 3 (install.bat ต้องเรียก plugin_image_check จริง) = ลงมือทั้งข้อในรอบนี้
+  - pf_bridge/patches/gm_plugin/install.bat revision 3: เรียกโมดูลจริงใต้เกต .rsrc เดิม
+    (เกต .rsrc คงไว้ทั้งดุ้นตามใบ) ไม่มีล่าม/ไม่มี checkout = [warn] แล้วไปต่อ (fail-open)
+    ล่ามตอบว่าไม่ image_ok = [FAIL] ไม่ copy (fail-closed)
+  - pirate-force-server/tests/test_gm_plugin_image_check.py: เพิ่มเทส 5 ตัวตรึงโทเคน
+    "GM_PLUGIN_IMAGE build verdict=image_ok" ที่ install.bat grep จริง
+ข้อ 1 (id 2 ยืนเป็น verdict ที่บล็อก) = รับทราบ ไม่ต้องแก้โค้ด โมดูลบังคับ id 2 อยู่แล้ว
+ข้อ 2 (negative control id 1) = ของ chief ตามใบ ไม่แตะ
+ข้อ 4 (บล็อกหลายบรรทัดของ find_mt.bat) = รับทราบ ไม่แก้
+สองข้อที่ COO เลื่อน (install.bat เช็คซ้ำ 1/4 · copy /y ไม่อะตอม) = ยังเลื่อน ไม่ทำในรอบนี้
+/speed = ไม่ปลดล็อกใดทั้งสิ้น ตามใบ 2147 ที่ 2342 ยืนซ้ำ
+
+ข้อที่ใบไม่ได้บอกและผมตัดสินเอง: กิ่ง "ล่ามรันแล้วไม่พิมพ์ verdict เลย" (สภาพแวดล้อมพัง
+ไม่ใช่คำตัดสินเรื่อง DLL) = [warn] แล้วไปต่อ ขอ COO เคาะทับใน
+20260903_0034_LANE-GM-ASK-COO-the-checker-that-starts-and-says-nothing.md
