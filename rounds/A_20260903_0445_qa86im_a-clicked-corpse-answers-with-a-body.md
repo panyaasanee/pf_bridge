@@ -1,7 +1,7 @@
 # LANE-A (WORLD) รอบ `qa86im` — ซากศพตอบด้วยร่าง แทนที่จะตอบด้วยความเงียบ
 
 เปิดรอบ 2026-09-03T04:22+07:00 · ปิดรอบ 2026-09-03T0x:xx+07:00
-PR: `pf_bridge#929` · `pirate-force-server#<n>`
+PR: `pf_bridge#929` · `pirate-force-server#623`
 สาขา: `claude/jolly-feynman-qa86im` · `claude/laughing-archimedes-qa86im`
 
 ## ผู้เล่นจะเห็นอะไรต่างจากเมื่อวาน
