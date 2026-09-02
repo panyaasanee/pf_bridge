@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round bbm6xn (R314): the keyword is at the call site as its own commit (attribute access, not getattr - reason in the code comment), measured 12574->12577 exactly as lane A predicted, and the ground test ticket lane A offered is now ORDERED to lane A - see 20260903_0505_CHIEF-TO-LANE-A-*.

@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round bbm6xn (R314): both rules written into AGENTS.md section 7 (preconditions vs design_skips; guarded tests must live in a class). Two-DLL ticket opened as GT-219. BRIDGE_GM_INSTALL_BAT key queued as this round's second server PR; if it does not land, the round file says so.
