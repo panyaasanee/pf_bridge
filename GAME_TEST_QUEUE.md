@@ -39,7 +39,7 @@
 
 - 🆕 **`GT-182` GM-A-WARP-NO-COORD-LIVE-SPAWN-001** (✅ **PASS — OBSERVER_CONFIRMED 2026-09-01T10:40+07:00, chief round `8zf80f`** — แก้โดย chief รอบ `liq4ri` ตาม `COO-DECISION 20260901_1341` ข้อ 2 (หัวใบเดิมล้าสมัยเขียนว่า `BLOCKED-ON-ATTENDED`) · `/warp <mapnum>` ไม่ใส่พิกัดครั้งแรกของ session ผ่านแล้ว · **แต่วาปข้ามหลายแมพติดกันแล้วเจอ NPC ทุกแมพยังไม่ผ่าน — ดูใบใหม่ `GT-192`** · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-192` GM-A-WARP-MULTI-MAP-CENSUS-CHAIN-001** (🟢 **PENDING บูตได้เลย · attended** — เปิดโดย chief ตาม `COO-DECISION 20260901_1341` ข้อ 1 (ตอบใบ `20260901_1256`) · ผู้ทำ: **LANE-GM** · วาปข้ามอย่างน้อย 3 แมพติดกันด้วย `/warp <mapnum>` (ไม่ใช่ใบแรกของการล็อกอิน — `GT-182` พิสูจน์ใบแรกแล้ว) แล้วเช็คว่าเจอ NPC ปกติครบทุกแมพที่ไปถึง — พิสูจน์ census latch ที่แก้แล้วบน `main` (`runtime.py:5459-5470`, สเปกใบ `20260901_1035`+`20260901_1120`) · ใบเต็มอยู่ท้ายไฟล์)
-- 🆕 **`GT-205` GM-PLUGIN-THREE-CELL-BUTTON-001** (🟢 **READY บูตได้เลย · attended** — ใบที่ `COO-DECISION 20260902_0846` เรียกว่า `GT-P3`/`GT-203`; เลข `203`/`204` ถูกใช้ไปแล้ว จึงเป็น **`205`** · ร่างโดย LANE-GM `0731`, ลงคิวโดย chief R301 `smrum3` · P-3 ปุ่ม GM: **สาม build เท่านั้น** ห้ามช่องที่สี่ (`COO 0648`+`0845` + ตาราง README) · `patches/gm_plugin/` **revision 4** `780d41dd` บน `main` ⇒ **คำห้าม build ถอนแล้ว** · ตัวตัดสิน = บรรทัด `[GM_PLUGIN]` ใน DebugView · 🔴 ลำดับคือ build→install→**ขั้น 0**→บูต และ **rollback ทุก build** · bounded negative ใช้ได้เฉพาะเมื่อเห็น `alive, returning interface` ทุก build · ใบเต็มท้ายไฟล์)
+- 🆕 **`GT-207` GM-PLUGIN-THREE-CELL-BUTTON-001** (🟢 **READY บูตได้เลย · attended** — ใบที่ `COO-DECISION 20260902_0846` เรียกว่า `GT-P3`/`GT-203`; เลข `203`/`204` ถูกใช้ไปแล้ว จึงเป็น **`205`** · ร่างโดย LANE-GM `0731`, ลงคิวโดย chief R301 `smrum3` · **`COO 0846` เรียกใบนี้ว่า `GT-203`; เลข 203/204/205 ถูกใช้แล้ว ⇒ `207`** · P-3 ปุ่ม GM: **สาม build เท่านั้น** ห้ามช่องที่สี่ (`COO 0648`+`0845` + ตาราง README) · `patches/gm_plugin/` **revision 4** `780d41dd` บน `main` ⇒ **คำห้าม build ถอนแล้ว** · ตัวตัดสิน = บรรทัด `[GM_PLUGIN]` ใน DebugView · 🔴 ลำดับคือ build→install→**ขั้น 0**→บูต และ **rollback ทุก build** · bounded negative ใช้ได้เฉพาะเมื่อเห็น `alive, returning interface` ทุก build · ใบเต็มท้ายไฟล์)
 - 🆕 **`GT-183` GM-B-SPEED-COMMAND-001** (🔴 **BLOCKED — BLOCKED-ON-WIRING** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (GM-B) · ผู้ทำ: **LANE-GM** · `/speed <value>` คำสั่งแชท GM จริงบน `main` เขียน `ActorAttr` x7 (+0x54 f32) — เดโมแล้วนอก main โดยเจ้าของ (`PF_ADHOC_ATTR_PROBE`) ค่าปกติประเมิน 400 ยังไม่ยืนยันตาราง/ไบนารี · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-184` UI-A-PART-A-BACK-TO-CHARSELECT-BUTTON-001** (🔴 **BLOCKED — สืบทอดจาก `GT-033` (ANSWERED — สองท่าที่ลองแล้วให้ผลลบ)** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งแรก) · ผู้ทำ: **LANE-A** · ปุ่มกลับหน้าเลือกตัวละครจากในเกม ต้องพาไปจริงกลางเซสชัน · แยกจาก `GT-185` ตามกฎหนึ่งใบหนึ่งข้อพิสูจน์ · ใบเต็มอยู่ท้ายไฟล์ · **[อัปเดต round `tmizmk` 2026-09-01 15:58+07:00] allowlist ที่หกลงแล้ว พร้อมบูตด้วย `--logout-hypothesis-scenario scenarios/logout_hypothesis_dialog_open_push.json` -- ยังไม่พลิก `production_allowed` (รอ attended pass ก่อนตาม stop_rule) พร้อมให้ผู้เทส attended หยิบได้แล้ว**)
 - 🆕 **`GT-185` UI-A-PART-B-BACK-INTO-GAME-ROUNDTRIP-001** (🔴 **BLOCKED — precondition: `GT-184` ต้อง PASS ก่อน** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งหลัง) · ผู้ทำ: **LANE-A** · จากหน้าเลือกตัวละคร เลือกแล้วกลับเข้าเกมได้จริงในโปรเซสเดิมไหม — ปลดล็อกการเปลี่ยนฉากซ้ำโดยไม่บูตใหม่ · ใบเต็มอยู่ท้ายไฟล์ · **[อัปเดต round `tmizmk`] precondition ยังคือ `GT-184` ต้อง PASS ก่อน — สถานะไม่เปลี่ยน แค่ construction path ของ `GT-184` พร้อมแล้ว**)
@@ -10430,10 +10430,133 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
 
 **ผู้เปิดใบ: chief (LANE-E) รอบ `ls5m3c` / R300 ตาม `COO-DECISION 20260902_0542` ข้อ 3**
 
-## GT-205 GM-PLUGIN-THREE-CELL-BUTTON-001  [READY]
+## GT-205 UI-A-BACK-BUTTON-VISIBLE-NOTICE-001  [BLOCKED -- composer is built but NOT wired; run RECHECK before any boot]
 
-> 🔴 **NUMBERING:** ใบที่ `COO 0846`/`LANE-GM 0731` เรียกว่า `GT-P3`/`GT-203` **คือใบนี้** · `203` เป็นของ LANE-A
-> และ `204` เป็นใบ P-1 ของ chief ไปแล้ว ⇒ +1 (หัวข้อ 4) · เลข `205` ว่างจริงตอนลง ไม่มีใบไหนถูกย้าย
+> Opened by LANE-A round `od1xso` (2026-09-02 +07:00). LANE-A consumes the result itself.
+> numbering: shared counter with `CLIENT_RE_QUEUE.md` (rule (2) at the top of this file).
+> Highest `GT` in `GAME_TEST_QUEUE.md` = `GT-204`; highest `RE` in `CLIENT_RE_QUEUE.md` = `RE-202`.
+> This entry is `205`.
+
+- objective: single claim, decided by human eyes only -- with the character standing in a live map,
+  the player opens the HOME menu and clicks "กลับหน้าเลือกตัวละคร" (back to character select), and the
+  one line `BACK REFUSED` (exactly 12 printable ASCII characters) APPEARS ON SCREEN in the local
+  chat/talk area, either while the logout dialog is still open or right after it closes.
+
+- background (read once, then work from the steps): round `od1xso` built
+  `src/pirateforce_foundation/world_logout_button_notice.py`. On `LogoutVital 0x1B40` subcode 3 (the
+  owner's own captured 34-byte frame) it composes ONE `Channel_LocalTalkMessageVital` notice via
+  `gm/say_wire.make_local_talk_notice_frame`, body exactly `BACK REFUSED`. Subcode 1 (the
+  "ออกจากเกม" button, 119-byte frame) gets NOTHING from this lane, on purpose, so `GT-194`'s evidence
+  cannot change underneath it. The wire/DB half is already proven headless (28 tests, byte-equality
+  with say_wire's composer). The tester's job in this entry is ONLY the screen half.
+
+- PRECONDITION (this is why the entry is BLOCKED): the module composes bytes but is NOT wired yet.
+  `runtime.py` is chief's file; this round asks chief for ONE call site (CORE-REQUEST in the PR body).
+  Until that line is on `main`, DO NOT BOOT this entry.
+  RECHECK: `cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/runtime.py | grep -n "world_logout_button_notice"`
+  Empty result = still not wired = entry stays BLOCKED, no boot, no tester time spent.
+  A real hit = entry becomes READY as written here; record which `main` commit was used in the result.
+
+- db: `state\pirateforce.sqlite3` -- COPY ONLY, never open the canonical file. Copy to
+  `state\run_gt205_<yyyyMMdd_HHmmss>.sqlite3` and boot against the copy. Record sha256 of the copy
+  before and after; record sha256 of the canonical file before and after and confirm it is unchanged;
+  `PRAGMA integrity_check` = `ok` on the copy both times.
+
+- server args: standard boot per `BRIDGE_BOOT_PROCEDURE.md` / `ATTENDED_SESSION_RUNBOOK.md`,
+  `-SecondPasswordMode bypass`, NO scenario flag of any kind. Once wired this path is live on a
+  default boot (`production_allowed = True`).
+  `py -3 -u -m pirateforce_foundation.app --db state\run_gt205_<stamp>.sqlite3`
+
+- steps: (cheap: about 10 minutes on screen. Server first, client second, always.)
+  1. RECHECK above must return a real hit. Then LOCK_GAME, boot stamp, sha of canonical, copy the DB.
+  2. Boot server, then client. Log in. Confirm a FRESH server start (if a client was killed earlier,
+     the server keeps the session and the next client hangs on "connecting" forever -- restart the
+     server first).
+  3. Frame the shot with RIGHT-CLICK-DRAG only (camera only; the character's facing does not move and
+     nothing goes on the wire). Do NOT change the character's facing: no `Q`/`E`, no `W/A/S/D`.
+     Do not type any characters -- with chat unfocused every keystroke is a hotkey.
+  4. Screenshot S0 BASELINE, full resolution, showing the chat/talk area. Note the wall-clock time
+     (+07:00) and the video timestamp.
+  5. Open the HOME menu. Screenshot S1 (menu open).
+  6. Click "กลับหน้าเลือกตัวละคร" ONE time. Write down the wall-clock time and the video `t` of that
+     click before doing anything else.
+  7. WATCH THE SCREEN CONTINUOUSLY FOR AT LEAST 30 SECONDS. Take S2 at about +2s, S3 at +10s,
+     S4 at +30s, all full resolution, all showing the chat/talk area. Do not click anything, do not
+     dismiss the dialog by hand during those 30 seconds unless the client itself closes it.
+  8. Record, in the result: did the twelve characters `BACK REFUSED` appear -- yes/no; WHERE on screen
+     (which panel/line); at what offset from the click; for how long it stayed; and whether the logout
+     dialog was still open at that moment or had already closed.
+  9. Optional second attempt, only if attempt 1 showed nothing: relog, repeat steps 5-8 once with the
+     chat window/tab explicitly OPEN and its history tab visible before clicking the button. Label the
+     screenshots S0b..S4b and record the two attempts separately -- do not merge them.
+  10. NO-CRASH check with RIGHT-CLICK-DRAG (never `Q`/`E`). Screenshot S5. Exit with the window X.
+  11. Shut the server down. Keep console `.out`/`.err`, `capture_v141\GAME_LIVE.txt`,
+      `capture_v141\GAME_EVENTS_LIVE.txt` + sha256 of each. `PRAGMA integrity_check`. Re-check the
+      canonical sha. Run teardown ALWAYS, even if the round ended because she simply stopped playing
+      (the template refuses a boot stamp older than 420 minutes -- do not let the round age out).
+
+- pass criteria: (TWO layers -- neither layer may ever be offered as proof of the other)
+    wire/DB          : headless-readable from the console/capture alone. The subcode-3 request arrives
+      and the console prints
+      `LANE_A_UIA_NOTICE_COMPOSED button=BACK_TO_CHARSELECT subcode=3 vitals=1 trailing=0 text=BACK REFUSED pc=56 frame=66`
+      (one line, exactly as printed -- the `pc=`/`frame=` lengths are the composed bytes, so the token
+      cannot appear unless bytes exist). If she also clicks the exit button at any point, the matching
+      line is `LANE_A_UIA_STOOD_DOWN button=EXIT_GAME subcode=1 vitals=4 trailing=85`, which shows this
+      lane composed NO BYTES for subcode 1 -- it still prints that one line, which is itself evidence
+      `GT-194`'s reader will see; "nothing at all" would be the wrong expectation. Copy both lines
+      verbatim, do not interpret.
+      Three other tokens can appear instead, and each means something different:
+      `LANE_A_UIA_WITHDRAWN` (the module is switched off), `LANE_A_UIA_NOTICE_FAILED` (the composer
+      refused -- a bug to report, not a tester error), `LANE_A_LOGOUT_FRAME_UNCLASSIFIED verdict=<word>`
+      (the frame reached this lane and was rejected; the word is the live classifier's own verdict).
+      Copy whichever appeared. `integrity_check` = `ok`; canonical sha unchanged; no uncaught traceback.
+      This layer CANNOT answer: whether anything was drawn on screen.
+    client-observable: needs the human at the screen; never inferred from the console. Within the
+      30-second window after the click, a human SEES the line `BACK REFUSED` -- twelve ASCII
+      characters, that exact spelling -- in the local chat/talk area. Compare S0 against S2/S3/S4.
+      Record for EVERY still (S0-S5, and S0b-S4b if attempt 2 was run) the colour of EVERY name label
+      in frame, one line per label per image, the word `none` written out rather than left blank.
+      Read colours from full-resolution stills only -- never from a contact sheet, a downscaled image,
+      or video. Record the colour and nothing else: what decides a label's colour is unknown and is the
+      whole subject of `RE-067`. Divergences from the original server's screenshots get one row each in
+      `REAL_SERVER_DIVERGENCE.tsv`.
+      This layer CANNOT answer: what bytes were composed, or which subcode arrived.
+
+- prediction (THIS IS A PREDICTION, not a measurement; a wrong prediction is a finding):
+    P1 console token present AND `BACK REFUSED` visible within ~2s => both layers pass.
+    P2 console token present but nothing visible in 30s => the notice channel does not render while the
+       logout dialog owns the input/render state. That is a real finding about the dialog, NOT proof the
+       composer is wrong -- redirect to an RE about the dialog's render state, do not re-run blind.
+    P3 no console token at all => the call site is not on the path she clicked; re-run RECHECK and
+       report which `main` commit was booted. NO-RESULT for the screen half, not FAIL.
+
+- nonclaims:
+  1. Does NOT test whether the client returns to the character-select screen. That is `GT-184` and it
+     remains unsolved (`GT-033` measured both known response policies leaving the client on the same
+     map for 50-77s). Seeing `BACK REFUSED` says nothing about the transition.
+  2. A negative is a real finding of equal worth: it is evidence about the logout dialog's input/render
+     state, NOT proof that the notice composer is wrong. The render evidence for this channel
+     (`GT-006`/`GT-009`) was measured with the dialog CLOSED, so this entry is the first time it is
+     asked to draw with the dialog OPEN.
+  3. Does NOT test the "ออกจากเกม" button (`GT-186`/`GT-194`) and must not be run in a way that changes
+     their evidence. If she clicks it anyway, log it as a separate observation with its own token line.
+  4. Claims nothing about `ReturnSelectServerVital 0x709E` or `HYP-PF-040`.
+  5. Does not claim the PR is merged; the RECHECK line, not this header, decides that.
+
+- links: `NOW.md` item UI-A · `GT-184` · `GT-185` · `GT-194` · `RE-197` (closed this round) ·
+  `notes_to_chief/consumed/20260901_1930_KA1A-CAPTURE-the-owner-clicked-both-UI-A-and-UI-B-buttons-herself-exact-bytes-plus-a-design-problem-for-HYP-PF-040.md`
+  · `GT-193` (the `SPEED DENIED` notice -- same channel, same 12-character shape)
+
+- result: (tester fills in: PASS/FAIL/BLOCKED/NO-RESULT · screenshots S0-S5 · verbatim console lines ·
+  label colours one line each · timestamps +07:00 · `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
+## GT-207 GM-PLUGIN-THREE-CELL-BUTTON-001  [READY]
+
+> 🔴 **NUMBERING — ใบนี้คือ `GT-207` และถูกขยับสองครั้ง เขียนไว้ให้ครบ:**
+> ใบที่ `COO 0846`/`LANE-GM 0731` เรียกว่า `GT-P3`/`GT-203` **คือใบนี้** · `203` เป็นของ LANE-A
+> และ `204` เป็นใบ P-1 ของ chief ไปแล้ว ⇒ ขยับเป็น `205` ตอนลงคิว
+> จากนั้น **LANE-A merge `GT-205 UI-A-BACK-BUTTON-VISIBLE-NOTICE-001` ขึ้น `main` ก่อน** ระหว่างรอบเดียวกัน
+> ⇒ กฎ ③ (คนที่ push ทีหลังขยับเลขของตัวเอง) · `206` ถูกใบ `RE-206` ของรอบนี้ใช้ไปแล้ว ⇒ **ใบนี้ = `207`**
+> ไม่มีใบของใครถูกลบ ย้าย หรือทับ · `GT-205` ที่ถูกต้องคือใบของ LANE-A ข้างบนนี้
 > 🔴 `NOW.md` P-3 ยังเขียนว่า "ใบ `GT-203`" — **ชี้ผิดใบ** (`GT-203` คือใบ AvatarAttr ของ LANE-A) ·
 > chief แก้ `NOW.md` เองไม่ได้ (ผู้เขียนคือ Panya กับ COO) ⇒ ขอไว้ในใบ `CHIEF-TO-COO 20260902_0920`
 
