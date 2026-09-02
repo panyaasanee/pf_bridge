@@ -144,3 +144,4 @@ prompt ของแต่ละสาย (scheduled routine) ยังพูด�
 
 🔴 บรรทัดดัชนีต้องเป็น **หนึ่งประโยค** ชี้ไปไฟล์รอบเสมอ (prompt หัวข้อ 4) — R294-R297b เคยเขียนเป็นย่อหน้ายาว
 รวม 9,772 ไบต์จากเพดาน 30 KB · ฉบับเต็มคำต่อคำอยู่ที่ `archive/CHIEF_CONTINUATION_INDEX_R294_to_R298_verbatim_20260902.md`
+- R300(ls5m3c) 2026-09-02T08:0x+07:00 P-1 งานแรกของ R300: บรรทัด call site pickup ลง runtime.py ตาม CORE-REQUEST 0443 ตัวต่อตัว (production ไม่มีแฟล็ก คีย์ nested id) · adversary หักล้างได้จริงสองชั้น: static-re เจอว่า last_target_pos เป็น None ก่อนผู้เล่นขยับครั้งแรกและหลัง GM warp, แล้ว fallback ที่ผมใส่แก้กลับเปิดให้หยิบของข้ามฉากและ commit ลง DB => ถอน fallback กลับไป fail-closed · เทสเกตมีฟันแล้ว (คีย์ผิดชั้น/สลับอาร์กิวเมนต์ เคยเขียวทั้งคู่ ตอนนี้แดงทั้งคู่) · RE-125 ขีดฆ่าคำห้าม · GT-146 ได้เงื่อนไขเปิด · เปิด GT-204 -> rounds/R300_ls5m3c_pickup-call-site-landed.md
