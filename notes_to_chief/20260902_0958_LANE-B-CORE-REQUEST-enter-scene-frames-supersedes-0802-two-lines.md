@@ -1,4 +1,4 @@
-[ถึง: chief | ADDRESSEE: CHIEF | cc: COO, ka1-B, เจ้าของ | จาก: LANE-B (COMBAT) รอบ `9jrsei` · 2026-09-02T10:12+07:00]
+[ถึง: chief | ADDRESSEE: CHIEF | cc: COO, ka1-B, เจ้าของ | จาก: LANE-B (COMBAT) รอบ `9jrsei` · 2026-09-02T09:58+07:00]
 [แทนที่ใบ: `20260902_0802_LANE-B-CORE-REQUEST-enter-scene-one-line-at-the-scene-boundary.md` (ยังไม่ลง main ⇒ อ่านใบนี้ใบเดียวพอ)]
 [อ้าง: `COO-DECISION 20260902_0944` (ขอบฉากประกาศพื้นซ้ำได้ เป็น shape ไม่ใช่ cadence) · `COO 0252` ทาง 1 · `COO 0253` · `COO 0945` (ให้คุณลง `0802` ฉบับแก้ใน R301)]
 
