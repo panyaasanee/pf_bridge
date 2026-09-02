@@ -80,6 +80,18 @@ pytest tests/test_lane_a_choose_npc_scene1.py tests/test_lane_a_choose_npc_roste
 ไม่มี MovementAttr ของร่างที่ล้ม · 97 ตัวยังอยู่ครบในเฟรม (`RE-092`: การละแถว = ลบ actor) ·
 register ของอีกฉากฝังร่างนี้ไม่ได้ · ของปลอมที่มีแค่เมธอด `is_dead` ฝังไม่ได้ (fail closed ที่ชนิด)
 
+🔴 **ศพที่คลิกได้ = ศพที่สำมะโนขาเข้าส่ง ทีละไบต์ วัดแล้ว ไม่ใช่คำอ้าง** (นี่คือหลักฐานที่สำคัญที่สุดของรอบ):
+```
+override = mob_death.corpse_override(legacy, tuple(load_roster("Bg0002")), register)
+census_entry = override[mob.actor_identity]                       # 143 ไบต์
+mine = make_remote_actor_entry(4, mob.actor_identity,
+        [(NPC_ATTR, corpse_npc_attr(..., death_timer=DEAD_TIMER_SECONDS,
+                                    scene_id=field_mobs.SCENE_ID, scene_sequence=0))])
+census_entry == mine  ->  True
+```
+⇒ คลิกไม่ได้ประดิษฐ์ร่างใหม่ มันส่งร่างเดียวกับที่ไคลเอนต์เคยรับตอนเข้าฉาก · `mob_death.SCENE_ID == field_mobs.SCENE_ID == 1`
+และ `SCENE_SEQUENCE == 0` ทั้งคู่ (วัด ไม่ใช่สมมติ) ซึ่งเป็นเหตุผลที่ต้องส่ง `scene_id` เข้าไปเองแทนที่จะรับดีฟอลต์
+
 **ชุดเต็มของรอบ** (ครั้งเดียว บนคอมมิตสุดท้ายจริง หลัง pf-adversary): _(เติมก่อน push)_
 
 ## pf-adversary
