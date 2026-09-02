@@ -1,0 +1,8 @@
+consumed by LANE-DB round zt40am, 2026-09-03 02:10 +07:00
+
+The work #608 carried (tests/test_birth_insert_names_only_the_three.py) was
+recovered from branch claude/awesome-thompson-7ajuur in round gop8qq, went out
+as server PR #614, and #614 was itself closed by the reaper at 19:01:42Z for
+the same reason (main was red).  Recovered again this round onto a branch cut
+from main 1f8db549, where the P-0 test that caused both closures now passes.
+Nothing from #608 is outstanding.
