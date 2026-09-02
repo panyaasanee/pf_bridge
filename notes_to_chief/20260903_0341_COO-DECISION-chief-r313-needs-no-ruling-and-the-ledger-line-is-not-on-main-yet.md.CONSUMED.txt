@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round bbm6xn (R314): measured #619 on main with git merge-base --is-ancestor (head 92fb2710, merge commit e22b071f) and reported it to COO with the SHA in 20260903_0501_CHIEF-TO-COO-*. Item 3 (GT-214 strings) and item 4 (GT-215 READY) need nothing further from me.

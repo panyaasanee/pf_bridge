@@ -57,6 +57,31 @@ ANSWERED_WORD = "ANSWERED"
 ANSWERED_NEGATIONS = ("UNANSWERED", "UN-ANSWERED", "NOT ANSWERED",
                       "ANSWERED-DIFFERENTLY")
 
+# [D] MANDATORY SEARCH ROW UNFILLED.  CLIENT_RE_QUEUE.md rule 4 makes one
+# search the first step of every RE ticket: look in pf_bridge\external\ and
+# gamedata\ BEFORE disassembling anything, because a hit converts the ticket
+# from "go extract" into "verify sha -> re-derive -> use".  Every ticket
+# carries the row; nothing checked that anyone filled it in.
+#
+# Measured cost of not checking (ka1-A's self-correction, 2026-09-03 03:05):
+# RE-208's two search cells sat on the placeholder from 09:5x one day to
+# 03:00 the next.  The answer was committed in external/ the whole time
+# (PF_GROUND_DROP_LIFETIME.tsv, PF_GROUND_DROP_PICKUP_CLOSURE.*), a round
+# was spent arguing that the ticket's route tag was wrong, and the tag may
+# well have been right -- it was the unfilled row that misled everyone.
+#
+# THE CHECK ka1-A ORIGINALLY ASKED FOR IS DELIBERATELY NOT BUILT: "[C] route
+# contradicts body" would have fired on RE-208 and would have been WRONG.
+# This one has no judgement in it at all; it is a placeholder string test.
+#
+# The literals are Thai, written as escapes so this file stays ASCII-only
+# on disk and on a cp874 console (see the module docstring):
+#   PLACEHOLDER = "sai RE krok"      = "(the RE lane fills this in)"
+#   SEARCH_WORD = "khon"             = "searched"
+PLACEHOLDER = "\u0e2a\u0e32\u0e22 RE \u0e01\u0e23\u0e2d\u0e01"
+SEARCH_WORD = "\u0e04\u0e49\u0e19"
+SEARCH_TREES = ("external", "gamedata")
+
 
 def answered_means_closed(head_live):
     """True only for a header whose ANSWERED is not contradicted by itself.
@@ -121,7 +146,7 @@ def audit(queue_path, notes_dir, min_num):
     names = load_result_index(notes_dir)
     tickets = split_tickets(lines)
 
-    invisible, no_route, orphan, eligible = [], [], [], []
+    invisible, no_route, orphan, eligible, unsearched = [], [], [], [], []
     for t in tickets:
         head_live = strip_struck(t["header"])
         route = [r for r in ROUTE_TAGS if r in head_live]
@@ -147,7 +172,18 @@ def audit(queue_path, notes_dir, min_num):
         elif status and not route:
             no_route.append((t, status))
 
-    return tickets, invisible, no_route, orphan, eligible
+        # [D]: an OPEN ticket whose mandatory search row is still the
+        # placeholder.  Only rows that name a tree are counted -- a ticket
+        # writes other "(the RE lane fills this in)" cells for its RESULT,
+        # and a result nobody has produced yet is the normal state of an
+        # open ticket, not a defect.
+        rows = [l for l in strip_struck(t["body"]).split("\n")
+                if PLACEHOLDER in l and SEARCH_WORD in l
+                and any(tree in l for tree in SEARCH_TREES)]
+        if rows:
+            unsearched.append((t, len(rows)))
+
+    return tickets, invisible, no_route, orphan, eligible, unsearched
 
 
 def main():
@@ -178,7 +214,8 @@ def main():
         sys.stderr.write("ERROR: queue not found: %s\n" % a.queue)
         return 2
 
-    tickets, invisible, no_route, orphan, eligible = audit(a.queue, a.notes, a.min)
+    tickets, invisible, no_route, orphan, eligible, unsearched = audit(
+        a.queue, a.notes, a.min)
 
     # A FLOOR, BECAUSE "0 PROBLEMS" AND "0 QUEUE" LOOK IDENTICAL WITHOUT ONE.
     # pf-adversary (round dfx8bu) ran both modes against a zero-byte queue file
@@ -260,6 +297,17 @@ def main():
     for t, n in orphan:
         print("    %-7s line %-6d contains %d consumer-contract sections" % (t["id"], t["line"], n))
         print("            a following ticket lost its '## ' header inside this block")
+    print("")
+
+    print("[D] MANDATORY SEARCH ROW UNFILLED (open ticket, external/gamedata cell still a placeholder)")
+    print("    ADVISORY -- not counted in RESULT below.  Rule 4 of the queue, not")
+    print("    the RE runner's filter: an unfilled row does not hide the ticket,")
+    print("    it hides that the answer may already be committed in external/.")
+    if not unsearched:
+        print("    none")
+    for t, n in unsearched:
+        print("    %-7s line %-6d %d search row(s) still unfilled" % (t["id"], t["line"], n))
+        print("            fix: run the search FIRST (queue rule 4), then write what it hit")
     print("")
 
     if a.fix and invisible:
