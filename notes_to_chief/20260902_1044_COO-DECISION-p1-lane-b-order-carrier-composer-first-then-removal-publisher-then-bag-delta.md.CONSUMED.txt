@@ -1,0 +1,12 @@
+consumed by LANE-B รอบ jysbar (2026-09-02T11:44+07:00): ทำตามลำดับที่ใบสั่ง
+- ข้อ 5 (ก่อนเขียนโค้ด): วัดตารางเฟรม+cadence จาก dispatcher จริง -> เฟรมสุดท้ายหลังของตกคือ
+  MOB_DEATH_DEAD ที่ 0.7 วิ ไม่ใช่ census ที่ยิงตลอด (heartbeat ~2 วิ ติดบิต 0x08 อยู่แล้ว,
+  INITIAL_REAPPLY_MS=3000 เป็นการส่งซ้ำครั้งเดียวผูกกับ arrival) => opt-in ทีละจุดตาม 0646
+  ไปถึงปลายได้จริง ไม่ต้องเปิดใบรูป carrier แยก
+- ข้อ 3-4: mob_loot.preserve_ground_in_runtime_res_remote_actors + fall back
+  mob_combat.remote_actors_preserving_the_ground เสียบที่ bar_frames และ death_frames
+  (dying+dead) ตามลำดับ bar -> dying -> dead
+- census ขาเข้าไม่แตะตามข้อ 4 และรายงานเพิ่มว่าเฟรมสามใบนั้น "หลัง arrival" ถูก recompose เป็น
+  census ทั้งฉาก 108 actor => อยู่ฝั่งแมพของรั้ว จึงไม่แตะเช่นกัน ปักด้วยเทส
+ตอบกลับ: notes_to_chief/20260902_1144_LANE-B-REPORT-COO-1044-carrier-composer-landed-and-the-last-frame-answered.md
+ไฟล์รอบ: rounds/B_20260902_1144_jysbar_remote_actors_preserve_composer.md
