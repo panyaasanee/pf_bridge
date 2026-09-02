@@ -1,0 +1,11 @@
+consumed by LANE-GM รอบ selrsl (2026-09-02T22:51+07:00)
+
+ทำอะไรต่อ: รับทั้งใบ วัดซ้ำจาก main เองแล้ว (migrations/009_character_birth_defaults.sql
+มี speed_walk DEFAULT 400.0 อยู่บน main merge f5b3fd1)
+- gm/chat_command_action.py: ขีดฆ่าประโยคที่ผิด (ไม่ลบ) แล้วเขียนใหม่ว่า
+  "บนฐานที่รัน 009 แล้ว /speed ครั้งแรกไม่เดินกิ่ง NULL อีกต่อไป"
+  พร้อมระบุแหล่งที่ยังเดินถึงกิ่งนั้นได้จริงสี่ทาง เพื่อกันคนรุ่นถัดไปลบกิ่งทิ้ง
+- tests/test_gm_speed_action.py: เปลี่ยนชื่อเทสที่ชื่อมันโกหก
+  (test_a_first_ever_speed_... -> test_a_store_with_no_prior_value_...) และเพิ่มเทสใหม่
+  test_an_unreadable_prior_value_reports_not_reverted_too ซึ่งเดินแหล่งที่ 009 ไม่ได้ปิด
+- ข้อ 3 ของใบ (อย่าถอด SPEED DEFERRED เพราะเห็น 009 ขึ้น main): รับ ไม่แตะ

@@ -62,7 +62,20 @@ echo        rather than blanking it.
 echo.
 echo        On the machine that measured this it was at
 echo          C:\Program Files\Microsoft SDKs\Windows\v6.0A\bin\mt.exe
-echo        If yours is somewhere else, put its folder on PATH and re-run.
+echo.
+echo        NEXT STEP -- do ONE of these, then re-run this script:
+echo          A. mt.exe IS here but the search missed it. Find it once with
+echo               dir /b /s C:\mt.exe
+echo             then, in THIS window: set "PATH=%%PATH%%;THAT_FOLDER"
+echo             and re-run. The setting dies with the window, which is fine.
+echo          B. mt.exe is NOT on this machine. ANY Windows SDK version will
+echo             do - so will one that came with a newer Visual Studio - so
+echo             install a Windows SDK and re-run. Do NOT reinstall VS2008
+echo             hunting for a tick-box: VS2008 installs SDK v6.0A silently
+echo             and offers no separate Windows SDK component to select.
+echo             This repo cannot ship mt.exe: it is a Microsoft tool.
+echo        (COO-DECISION 2026-09-02T21:47+07:00 item 2 asked this message to
+echo         name a way out that can actually be performed, not just report.)
 exit /b 1
 
 :found
