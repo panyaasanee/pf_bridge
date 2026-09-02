@@ -10723,7 +10723,11 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
 
 - result: (tester fills in: PASS/FAIL/BLOCKED/NO-RESULT · screenshots S0-S5 · verbatim console lines ·
   label colours one line each · timestamps +07:00 · `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
-## GT-207 GM-PLUGIN-THREE-CELL-BUTTON-001  [READY]
+## GT-207 GM-PLUGIN-THREE-CELL-BUTTON-001  [**PASS** on build 1 -- ka1-A/เจ้าของ 2026-09-02T18:54+07:00 · `OBSERVER_CONFIRMED` มีในใบผล · ผล: `notes_to_chief/20260902_1915_KA1A-GT-207-PASS-the-gm-button-opens-the-gmui-window-on-build-1-and-p3-is-unblocked.md` · ปิดหัวใบโดย LANE-GM (เจ้าของใบ) รอบ `selrsl` · ~~[READY]~~]
+
+> 🔴 **DEVIATION ที่ผู้เทสประกาศเอง และ LANE-GM รับ ไม่ถือว่าเป็น INCONCLUSIVE**: build 1 ออกมาไม่มี manifest ฝัง (= `verdict=manifest_missing` ตามใบ ⇒ ต้องหยุด) แต่เครื่องมี `mt.exe` และเจ้าของเลือกให้ฝังเอง (`mt.exe -manifest GameMaster.dll.manifest -outputresource:GameMaster.dll;#2`) แล้วขั้น 0 จึงผ่านเป็น `image_ok` · เหตุที่รับ: จุดประสงค์ของ STOP คือ "ห้ามบูต DLL ที่โหลดไม่ได้" การฝัง manifest คือสิ่งที่ทำให้มันโหลดได้ และไม่มีไฟล์ใน `patches/gm_plugin/` ถูกแก้ระหว่างรอบนั้นเลย · ขั้น `mt.exe` เข้าสคริปต์แล้วใน `#887` (revision 5) ⇒ รอบถัดไปไม่ต้อง deviate อีก
+> 🔴 **`PASS` ของใบนี้ไม่ย้าย `NOW.md` P-3 ไป "รอ Panya ติ๊ก"** (`COO-DECISION 20260902_2147` ข้อ 3): สคริปต์ทั้งสาม (`find_mt.bat` / `build_vs2008.bat` rev.5 / `install.bat`) **ยังไม่เคยถูกรันเลย** ใบนี้ตอบว่า "ปุ่มเปิดหน้าต่างได้เมื่อมี DLL ที่โหลดได้" ไม่ได้ตอบว่า "สคริปต์ในรีโปผลิต DLL ที่โหลดได้เอง"
+> ของแถมที่ใบนี้ตอบแล้ว: `RE-164` = **ไม่มี** `GameMaster.dll` ข้าง exe มาก่อน (สามชั้นจาก `GameClient\`)
 
 > 🔴 **NUMBERING — ใบนี้คือ `GT-207` และถูกขยับสองครั้ง เขียนไว้ให้ครบ:**
 > ใบที่ `COO 0846`/`LANE-GM 0731` เรียกว่า `GT-P3`/`GT-203` **คือใบนี้** · `203` เป็นของ LANE-A

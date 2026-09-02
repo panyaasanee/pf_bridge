@@ -62,7 +62,17 @@ echo        rather than blanking it.
 echo.
 echo        On the machine that measured this it was at
 echo          C:\Program Files\Microsoft SDKs\Windows\v6.0A\bin\mt.exe
-echo        If yours is somewhere else, put its folder on PATH and re-run.
+echo.
+echo        NEXT STEP -- do ONE of these, then re-run this script:
+echo          A. mt.exe IS on this machine, somewhere the search missed: run
+echo               set "PATH=%%PATH%%;THE_FOLDER_THAT_HOLDS_MT_EXE"
+echo             in THIS window - the setting dies with the window - re-run.
+echo          B. mt.exe is NOT on this machine: re-run the Visual Studio 2008
+echo             installer and tick the Windows SDK component -- that is what
+echo             puts v6.0A\bin\mt.exe on a machine. Nothing in this repo can
+echo             supply mt.exe: it is a Microsoft tool, not shipped here.
+echo        Printing only "not found" is what these two lines exist to stop
+echo        (COO-DECISION 2026-09-02T21:47+07:00 item 2).
 exit /b 1
 
 :found

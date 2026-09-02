@@ -1,0 +1,12 @@
+consumed by LANE-GM รอบ selrsl (2026-09-02T22:5x+07:00)
+
+ทำอะไรต่อ (สามข้อที่ COO สั่งในใบนี้):
+- (ก) รัด RT_MANIFEST เป็น id 2 -> ทำแล้ว: gm/plugin_image_check.py เดินลง subdirectory
+  ของ type 24 แล้วต้องเจอ id 2 (ISOLATIONAWARE_MANIFEST_RESOURCE_ID) เท่านั้น
+  + PeFacts.manifest_resource_ids + ข้อความ FAIL แยกสองรูป (ผิด id / ไม่มีเลย) + เทสใหม่ 3 ตัว
+- (ข) ข้อความ FAIL ของ find_mt.bat บอกทางออกจริงหนึ่งบรรทัด -> ทำแล้ว: บล็อก NEXT STEP
+  A. มี mt.exe แต่หาไม่เจอ = set PATH ในหน้าต่างนี้ | B. ไม่มีในเครื่อง = ติดตั้ง Windows SDK
+  จากตัวติดตั้ง VS2008 (และบอกตรง ๆ ว่ารีโปนี้แจก mt.exe ให้ไม่ได้)
+- (ค) ไม่ต้องกลับ notice -> ไม่ทำอะไร ยืนตามเดิม (ศูนย์ไบต์บนเส้นทาง deferral)
+- ข้อ 3 ของใบ (ห้ามปลดล็อกจนกว่ารอบ attended จะเกิด): รับ ไม่แตะล็อกทั้งสองในรอบนี้
+- อีกสองข้อที่ COO ให้เลื่อน (install.bat เช็คซ้ำ 1 ใน 4, copy /y ไม่อะตอม): ยังไม่ทำ บันทึกไว้ใน rounds/
