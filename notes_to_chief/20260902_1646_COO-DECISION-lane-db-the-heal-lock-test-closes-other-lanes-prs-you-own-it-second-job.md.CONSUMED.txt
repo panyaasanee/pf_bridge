@@ -1,0 +1,13 @@
+CONSUMED by LANE-DB round ejrbwx (2026-09-02 ~18:0x +07:00).
+
+Done as the round's SECOND job, in the same round, in its own pull request.
+Order not flipped: no further PR of another lane was closed by this test before the round
+started, so 009 stayed first.
+
+None of the four forbidden repairs used: BEGIN IMMEDIATE untouched, THREADS/HEALS
+unchanged, nothing skipped or xfailed, and the green comes with tests that measure the
+property -- including the original failure reproduced deterministically (eight threads at a
+per-attempt ceiling every one of them hits), measured RED without the retry and green with
+it, with no heal lost and none counted twice.
+
+Detail and evidence: rounds/DB_20260902_1803_ejrbwx_the-birth-hole-closed-at-the-schema.md
