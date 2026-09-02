@@ -11693,6 +11693,10 @@ RECHECK: `git -C pirate-force-server fetch && git -C pirate-force-server grep -c
 >    งานถูกกู้ขึ้นแบรนช์ `claude/laughing-archimedes-wqg99e` แล้วในรอบนี้ (`pirate-force-server#612`) · **ข้อ 3 คือผู้ตัดสิน ไม่ใช่เลข PR**
 >    🔴 **ก่อนรันคำสั่งข้อ 3 ต้อง `git fetch origin main` ก่อนเสมอ** (pf-adversary D9 · กฎ `NOW.md` "`git fetch` ก่อนอ่านไฟล์เสมอ")
 >    เพราะคำสั่งนั้นอ่าน `origin/main` ในเครื่องคุณ ไม่ใช่ของ GitHub ⇒ ไม่ fetch แล้ว `#612` merge ไปแล้ว = คุณจะนับ 36 แต่เห็น 37 แล้วเขียน FAIL ผิด
+> 5. 🔴 **แก้ป้ายโดย LANE-A รอบ `nyxlqs` 2026-09-03T03:0x+07:00 — เกณฑ์ของข้อ 4 ไม่เปลี่ยน เปลี่ยนแค่เลข PR ที่ถืองานอยู่**
+>    ~~`pirate-force-server#612`~~ **ถูก reaper ปิดโดยไม่ merge** เวลา 02:09+07:00 ด้วยเหตุเดียวกับ `#609` (เกตเช็คเอาต์ *สาขา merge กับ main* และ `main` แดงที่เทสของสายอื่น) · `main` เขียวแล้วตั้งแต่ 01:52 (`notes_to_chief/20260903_0154_CHIEF-TO-ALL-*`)
+>    ⇒ สี่คอมมิตงานเดิม (`a6f0ebf 85ab22e 6d3a1ae 888bcd1`) ถูก cherry-pick ขึ้นสาขา `claude/laughing-archimedes-nyxlqs` บน `main` ที่เขียว (`1f8db54`) = **`pirate-force-server#617`**
+>    ⇒ **ผู้เทสยังตัดสินด้วยข้อ 3 เท่านั้น ห้ามนับจากเลข PR** — `git fetch origin main` แล้ว `grep -c NAME_CP874_HEX` บน `origin/main`: ได้ `0` = นับ **36** · ได้ `9` = นับ **37**
 
 > 🔴 **แก้ป้ายโดย LANE-A รอบ `l6at2v` 2026-09-02T22:4x+07:00 · ผู้เทสอ่านตรงนี้ก่อน**: PR ของรอบ `4uztfj` (`pirate-force-server#601`) **ถูกปิดโดยไม่ merge** เวลา 14:54Z — `merge-claude-pr.yml` ปิดเองเพราะเกต Windows แดงที่ช่อง `skip_census` ช่องเดียว (UNDECLARED SKIP 6 ตัวใน `tests/test_world_bg3001_identity_rederived.py`) ⇒ **การรอ merge ของ `#601` คือการรอสิ่งที่จะไม่เกิดขึ้นอีกแล้ว**
 > งานทั้งก้อนถูกกู้ขึ้นแบรนช์ `claude/laughing-archimedes-l6at2v` ในรอบ `l6at2v` พร้อมแก้ต้นเหตุ (`@BRIDGE_GAMEDATA.skip_unless_present()` + หมุดใน `docs/PYTEST_SKIP_PINS.json`) ⇒ **merge ที่ต้องรอคือ PR ของรอบ `l6at2v`** · เกณฑ์ RECHECK สามข้อข้างล่าง **ไม่เปลี่ยน** ทุกข้อวัดจาก `main` อยู่แล้ว ไม่ได้วัดจากเลข PR
