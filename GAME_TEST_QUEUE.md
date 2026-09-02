@@ -10977,7 +10977,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 
 **ผู้เปิดใบ: LANE-A (WORLD) รอบ `326kf4` 2026-09-02T12:2x+07:00 -- LANE-A บริโภคผลใบนี้เอง**
 
-## GT-211 UI-B-EXIT-BUTTON-VISIBLE-NOTICE-001  [BLOCKED -- โค้ดยังไม่ขึ้น `main`: อยู่บน branch `claude/dazzling-volta-1d6rta` เท่านั้น · ตัวบล็อกเดียวคือ merge (ไม่มีแฟล็ก ไม่แตะ `runtime.py`) · ห้ามบูตจนกว่า RECHECK ผ่านครบสองข้อ]
+## GT-211 UI-B-EXIT-BUTTON-VISIBLE-NOTICE-001  [🟢 READY -- RECHECK ผ่านครบสองข้อ วัดเองบน `origin/main` `106b4df` โดย LANE-A รอบ `4uztfj` 2026-09-02T19:35+07:00: `world_logout_button_notice.py` บน main มี `EXIT REFUSED` 7 จุด (บรรทัด 62/123/229/265/311/320/325) · `pytest tests/test_world_logout_button_notice.py tests/test_world_logout_button_notice_wiring.py` = **53 passed, 19 subtests** · ป้ายเดิมอ้าง branch `claude/dazzling-volta-1d6rta` ซึ่ง merge ไปแล้วที่ `#577` — ~~[BLOCKED -- โค้ดยังไม่ขึ้น main]~~ ตาม COO-DECISION 20260902_1850]
 
 > เปิดโดย LANE-A (WORLD) รอบ `1d6rta` 2026-09-02T13:4x+07:00 · **LANE-A บริโภคผลเอง**
 > numbering: shared counter กับ `CLIENT_RE_QUEUE.md` (กฎ ② หัวไฟล์) -- **ให้รันคำสั่งค้นหาซ้ำตอน rebase**
@@ -11318,7 +11318,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 
 **ผู้เปิดใบ: chief (LANE-E) รอบ `kt05o0`/R305 -- chief บริโภคผลเอง**
 
-## GT-214 CHOOSE-NPC-SCENE2-CLICK-ANSWER-AND-HOSTILE-SAFETY-001  [BLOCKED -- โค้ดยังไม่ขึ้น `main` (PR ของ LANE-A รอบ `cu1il6`) · ตัวบล็อกเดียวคือ merge · ห้ามบูตจนกว่า RECHECK ผ่านครบสามข้อ ⇒ แล้วเลื่อนเป็น `READY` ได้เลยโดยไม่ต้องรอเจ้าของใบ]
+## GT-214 CHOOSE-NPC-SCENE2-CLICK-ANSWER-AND-HOSTILE-SAFETY-001  [🟢 READY -- โค้ดขึ้น `main` แล้ว (`server#591` merge 2026-09-02T11:31Z) วัดเองโดย LANE-A รอบ `4uztfj` · ~~[BLOCKED -- โค้ดยังไม่ขึ้น main]~~ · 🔴 **RECHECK ยังต้องรันก่อนบูตทุกครั้ง** และข้อ 2 **เปลี่ยนสตริง** ในรอบ `4uztfj`: โทเคน `dead_monster_needs_a_mob_death_body` ถูกแทนด้วย `clicked_body_is_dead_needs_a_mob_death_body` (COO-DECISION 20260902_1945 ย่อการ์ด 'ตายแล้ว' ให้ตัดสินเฉพาะร่างที่ถูกคลิก) ⇒ สตริงใหม่ขึ้น main พร้อม PR รอบ `4uztfj` เท่านั้น · ถ้า RECHECK ข้อ 2 ยังไม่เจอสตริงใหม่ **ยังบูตได้ตามปกติ** ผลไม่เปลี่ยน แต่ให้จดว่าบูตบนคอมมิตก่อนรอบนั้น]
 
 > เปิดโดย LANE-A (WORLD) รอบ `cu1il6` 2026-09-02T17:40+07:00 · **LANE-A บริโภคผลเอง**
 > numbering: ตัวนับร่วมกับ `CLIENT_RE_QUEUE.md` -- สูงสุดตอนเปิด = `GT-213` (`RE` สูงสุด = 210) ⇒ ใบนี้ `214` · รันคำสั่งกฎ ② ซ้ำตอน rebase
@@ -11332,7 +11332,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 - RECHECK (ตัดสินด้วย **เนื้อโค้ดบน `origin/main`** ห้ามเทียบเลข commit · ผ่านครบสามข้อ = เลื่อนเป็น `READY` ได้เอง):
   ```
   (cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_scene2.py | findstr /C:"production_allowed = True")
-  (cd pirate-force-server && git show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_scene2.py | findstr /C:"no_player_position_walk_one_step" /C:"dead_monster_needs_a_mob_death_body")
+  (cd pirate-force-server && git show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_scene2.py | findstr /C:"no_player_position_walk_one_step" /C:"clicked_body_is_dead_needs_a_mob_death_body")
   (cd pirate-force-server && py -3 -m pytest tests/test_lane_a_choose_npc_scene2.py -q)
   ```
   ข้อ 1-2 ต้องเจอจริงทั้งสองสตริง (เลือกสตริงที่เป็น **เนื้อโค้ด** ไม่ใช่ข้อความใน docstring:
@@ -11377,7 +11377,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 - pass criteria (สองชั้น · 🔴 **ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้นเด็ดขาด**):
     wire/DB (headless พิสูจน์ได้ ไม่ต้องมีตาคน · grep คอนโซลรวม `2>&1`):
       (ก) คลิกข้อ 5: มี `LANE_A_CHOOSE_NPC_SCENE2_DECLINED reason=no_player_position_walk_one_step` และ **ไม่มี** `..._ANSWERED` คู่กัน
-      (ข) ทุกคลิกหลังก้าวเดิน: `LANE_A_CHOOSE_NPC_SCENE2_ANSWERED placement=<n> visible=97 hostile=12 hp=ceiling from_ledger=0` และ label ที่ส่ง `LANE_A_CHOOSE_NPC_SCENE2_FACE_P<n>`
+      (ข) ทุกคลิกหลังก้าวเดิน: `LANE_A_CHOOSE_NPC_SCENE2_ANSWERED placement=<n> visible=97 hostile=12 hp=ceiling from_ledger=0 wounded=0 dead_at_ceiling=0` และ label ที่ส่ง `LANE_A_CHOOSE_NPC_SCENE2_FACE_P<n>` · 🔴 **สองช่องท้าย (`wounded=` `dead_at_ceiling=`) เพิ่มในรอบ `4uztfj`** — บูตบนคอมมิตก่อนหน้านั้นจะจบที่ `from_ledger=0` และ **นั่นไม่ใช่ FAIL** ให้จดบรรทัดดิบตามที่เห็น · ทั้งสองช่องต้องเป็น `0` ในใบนี้ เพราะจุดเรียกยังไม่ส่ง ledger (ค่าอื่นที่ไม่ใช่ 0 = มีคนลงคีย์เวิร์ดแล้ว ⇒ รายงาน ไม่ต้องตัดสินเอง)
           **[คำทำนาย ไม่ใช่ผลวัด]** `visible=97` และ `hostile=12` เท่ากันทุกคลิก · เลขต่างจากนี้ = finding ให้จดดิบ ๆ ไม่ต้องตีความ
       (ค) ตลอดเวลาที่อยู่ฉาก 2: **ไม่มี** event `core_request_014_columbus_npc_conversation_sent_once` และ **ไม่มี** label `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE` และ **ไม่มี** `core_request_014_columbus_scene17_teleport_sent`
       (ง) `integrity_check` = `ok` ทั้งสองครั้ง · sha canonical ไม่เปลี่ยน · ไม่มี traceback หลุด
