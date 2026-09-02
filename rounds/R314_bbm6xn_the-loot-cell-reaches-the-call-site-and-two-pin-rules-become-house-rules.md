@@ -172,6 +172,9 @@ console_tail= ['LANE_HOOK_FIRED ... lane_a_choose_npc_scene2 ...']
   `skip_census` **RESULT: PASS · exit 0**
   ⇒ เทสเพิ่มหนึ่งตัว (ตัวไล่ 13 ฉากของ D3) · **skip เท่าเดิม 81** ⇒ ไฟล์ใหม่ไม่เพิ่ม skip ไม่ต้องแตะหมุด
   เหตุที่ต้องซ้อมสองครั้ง: adversary เปลี่ยนโค้ดและเพิ่มเทส ⇒ สภาพที่ซ้อมครั้งแรกไม่ใช่สภาพที่ push
+- **ชุดเต็ม รันครั้งเดียวบนคอมมิตสุดท้ายจริง** (`699b79bb` · ต้นไม้มี `origin/main` อยู่แล้ว):
+  **8,328 passed · 323 skipped · 16,789 subtests · exit 0** — เขียว(cloud sanity)
+  รันหลังแก้ตาม adversary เสร็จแล้วเท่านั้น ไม่ใช่ก่อน · การรันครั้งแรกของรอบถูกคอนเทนเนอร์ฆ่ากลางคัน (exit 137) ไม่นับเป็นผล
 - **ledger/coverage ไม่ drift**: `verify_hypothesis_ledger.py` PASS entries=50 · `verify_functional_coverage.py` exit 0
 - ไม่มีอักขระนอก ASCII ในไฟล์ที่แตะ (คอนโซล cp874) · `git diff --check` สะอาด
 - 🔴 **ไม่มีอะไร client-observable ทั้งรอบ** เขียว = เขียว(cloud sanity) + ซ้อมทรงเกต ไม่ใช่เกต Windows
