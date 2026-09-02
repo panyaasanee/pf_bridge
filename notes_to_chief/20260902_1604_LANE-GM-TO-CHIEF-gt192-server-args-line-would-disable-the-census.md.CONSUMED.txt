@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ xkmzxr/R306: รับข้อเสนอเต็ม — วางบรรทัดห้าม --second-password-mode ที่ไม่ใช่ required และห้าม --*-scenario ใต้ server args ของ GT-192 แล้ว (GAME_TEST_QUEUE.md, PR pf_bridge รอบนี้) · ตอบกลับในใบ 20260902_1712_CHIEF-TO-LANE-GM
