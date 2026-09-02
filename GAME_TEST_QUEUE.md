@@ -39,6 +39,7 @@
 
 - 🆕 **`GT-182` GM-A-WARP-NO-COORD-LIVE-SPAWN-001** (✅ **PASS — OBSERVER_CONFIRMED 2026-09-01T10:40+07:00, chief round `8zf80f`** — แก้โดย chief รอบ `liq4ri` ตาม `COO-DECISION 20260901_1341` ข้อ 2 (หัวใบเดิมล้าสมัยเขียนว่า `BLOCKED-ON-ATTENDED`) · `/warp <mapnum>` ไม่ใส่พิกัดครั้งแรกของ session ผ่านแล้ว · **แต่วาปข้ามหลายแมพติดกันแล้วเจอ NPC ทุกแมพยังไม่ผ่าน — ดูใบใหม่ `GT-192`** · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-192` GM-A-WARP-MULTI-MAP-CENSUS-CHAIN-001** (🟢 **PENDING บูตได้เลย · attended** — เปิดโดย chief ตาม `COO-DECISION 20260901_1341` ข้อ 1 (ตอบใบ `20260901_1256`) · ผู้ทำ: **LANE-GM** · วาปข้ามอย่างน้อย 3 แมพติดกันด้วย `/warp <mapnum>` (ไม่ใช่ใบแรกของการล็อกอิน — `GT-182` พิสูจน์ใบแรกแล้ว) แล้วเช็คว่าเจอ NPC ปกติครบทุกแมพที่ไปถึง — พิสูจน์ census latch ที่แก้แล้วบน `main` (`runtime.py:5459-5470`, สเปกใบ `20260901_1035`+`20260901_1120`) · ใบเต็มอยู่ท้ายไฟล์)
+- 🆕 **`GT-207` GM-PLUGIN-THREE-CELL-BUTTON-001** (🟢 **READY บูตได้เลย · attended** — ใบที่ `COO-DECISION 20260902_0846` เรียกว่า `GT-P3`/`GT-203`; เลข `203`/`204` ถูกใช้ไปแล้ว จึงเป็น **`205`** · ร่างโดย LANE-GM `0731`, ลงคิวโดย chief R301 `smrum3` · **`COO 0846` เรียกใบนี้ว่า `GT-203`; เลข 203/204/205 ถูกใช้แล้ว ⇒ `207`** · P-3 ปุ่ม GM: **สาม build เท่านั้น** ห้ามช่องที่สี่ (`COO 0648`+`0845` + ตาราง README) · `patches/gm_plugin/` **revision 4** `780d41dd` บน `main` ⇒ **คำห้าม build ถอนแล้ว** · ตัวตัดสิน = บรรทัด `[GM_PLUGIN]` ใน DebugView · 🔴 ลำดับคือ build→install→**ขั้น 0**→บูต และ **rollback ทุก build** · bounded negative ใช้ได้เฉพาะเมื่อเห็น `alive, returning interface` ทุก build · ใบเต็มท้ายไฟล์)
 - 🆕 **`GT-183` GM-B-SPEED-COMMAND-001** (🔴 **BLOCKED — BLOCKED-ON-WIRING** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (GM-B) · ผู้ทำ: **LANE-GM** · `/speed <value>` คำสั่งแชท GM จริงบน `main` เขียน `ActorAttr` x7 (+0x54 f32) — เดโมแล้วนอก main โดยเจ้าของ (`PF_ADHOC_ATTR_PROBE`) ค่าปกติประเมิน 400 ยังไม่ยืนยันตาราง/ไบนารี · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-184` UI-A-PART-A-BACK-TO-CHARSELECT-BUTTON-001** (🔴 **BLOCKED — สืบทอดจาก `GT-033` (ANSWERED — สองท่าที่ลองแล้วให้ผลลบ)** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งแรก) · ผู้ทำ: **LANE-A** · ปุ่มกลับหน้าเลือกตัวละครจากในเกม ต้องพาไปจริงกลางเซสชัน · แยกจาก `GT-185` ตามกฎหนึ่งใบหนึ่งข้อพิสูจน์ · ใบเต็มอยู่ท้ายไฟล์ · **[อัปเดต round `tmizmk` 2026-09-01 15:58+07:00] allowlist ที่หกลงแล้ว พร้อมบูตด้วย `--logout-hypothesis-scenario scenarios/logout_hypothesis_dialog_open_push.json` -- ยังไม่พลิก `production_allowed` (รอ attended pass ก่อนตาม stop_rule) พร้อมให้ผู้เทส attended หยิบได้แล้ว**)
 - 🆕 **`GT-185` UI-A-PART-B-BACK-INTO-GAME-ROUNDTRIP-001** (🔴 **BLOCKED — precondition: `GT-184` ต้อง PASS ก่อน** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งหลัง) · ผู้ทำ: **LANE-A** · จากหน้าเลือกตัวละคร เลือกแล้วกลับเข้าเกมได้จริงในโปรเซสเดิมไหม — ปลดล็อกการเปลี่ยนฉากซ้ำโดยไม่บูตใหม่ · ใบเต็มอยู่ท้ายไฟล์ · **[อัปเดต round `tmizmk`] precondition ยังคือ `GT-184` ต้อง PASS ก่อน — สถานะไม่เปลี่ยน แค่ construction path ของ `GT-184` พร้อมแล้ว**)
@@ -9436,6 +9437,13 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
   6. Record wall-clock time for every step, to cross-check against the server console/capture log afterward.
   7. Optional, non-blocking, not part of this ticket's pass/fail: if the tracked item's model is still visible at STEP-C, the tester may click it and note whether a pickup opcode appears to fire. This is colour only -- it does not stand in for GT-146's own claim and must not be written as gating or blocking GT-146, which remains a separate ticket held under its own hold.
   8. 🔴 CHECKPOINT 2, added R299 (COO-DECISION `20260902_0347` item 4). Only after STEP-C is photographed: take exactly ONE action the server answers with a vital -- one `W` step is enough (it sends `TargetPosVital` and the server answers) -- and then STOP moving again. Full-res photo STEP-D on the same tracked item, same two separate fields as every step above: (a) non-text item model/geometry still visible y/n (dust/shadow/label text and the mob's own corpse never count), (b) name-label still visible y/n plus label colours. Record the wall-clock time of the keypress and of the photo. One action, not several: the question is whether a SINGLE answered vital wipes the ground, and a burst of them cannot tell which one did it.
+  🔴 **R301 (chief, รอบ `smrum3`) -- ห้ามพลิก checkpoint 2 เป็น "วัดผลของการแก้" ตาม `COO 0646` ข้อ 5 ยัง**
+  `COO 0646` ข้อ 5 เขียนไว้ว่าเมื่อ `action_ack` ขึ้น main ให้พลิกข้อนี้กลับเป็นการวัดผลของการแก้ · **chief ไม่พลิก และนี่คือเหตุผล** (pf-adversary รอบเดียวกัน D4, วัดแล้ว):
+  ① ขั้นนี้สั่งกด `W` = `TargetPosVital` · จุดที่ opt-in คือ **EA7D ActionVital** หลังจับ TargetVital kind 1 ⇒ คนละเส้นทาง
+  ② ขั้นนี้สั่งบูต **"No special flags required"** · จุดที่ opt-in เปิดด้วย `--scene-load-scenario ..._ea7d_ack.json` เท่านั้น ⇒ ไม่ใส่แฟล็ก = `scene_load_scenario` เป็น `None` ⇒ **บรรทัดที่แก้ไม่ถูกรันเลยแม้แต่ครั้งเดียว**
+  ⇒ ถ้าพลิกตามตัวอักษร ผลของการกด `W` บนเซิร์ฟเวอร์ที่โค้ดใหม่ไม่เคยทำงาน จะถูกบันทึกเป็นหลักฐานของโค้ดใหม่
+  **checkpoint 2 ยังเป็น "วัดสภาพวันนี้" ตามเดิม** จนกว่าจะมีขั้นที่กดปุ่มที่ไปถึงจุดนั้นจริง ใต้แฟล็กที่เปิดมันจริง · ส่งคำถามกลับ COO ในใบ `20260902_0920`
+  🔴 RECHECK ข้อ 2 ของใบนี้ (`grep install_ground_vitals_preserve app.py` ต้องไม่มีผล) **ตาบอดต่อการ opt-in รายจุด** -- มันผูกกับชื่อไฟล์และสัญลักษณ์ของ wrap ที่ถอนไปแล้ว ไม่ใช่กับ composer ที่จุดไหนใช้ · ตัวตรวจที่เห็นจริง: `git grep -n 'preserve_ground_in_runtime_res_vitals' -- src/pirateforce_foundation/`
 - pass criteria (two layers, kept separate):
     wire/DB: the server console/capture log for this boot shows the heartbeat frames sent during the STEP-B/STEP-C windows carry the PRESERVE shape (ground-list mask 0x08 present, count 0, no elements -- the same envelope `drop_collection_pc` already uses) rather than the old CLEAR shape (`0x0B, 0x00` twice, read by the client as `TerrainThingPool == NULL`). This is provable headless, from the capture log alone, and does not by itself prove what the client drew on screen.
     🔴 TWO CHECKPOINTS, GRADED SEPARATELY (R299): CHECKPOINT 1 = STEP-B/STEP-C, standing still across at least two heartbeats. CHECKPOINT 2 = STEP-D, after exactly one answered action. They are separate results and this entry records BOTH; do not collapse them into one PASS/FAIL. If checkpoint 1 passes and checkpoint 2 fails, that is the EXPECTED shape today (no vitals fix exists on `main`; see RECHECK item 2), and the heartbeat half stays regardless -- which is also what COO-DECISION `20260902_0347` item 4 ordered for the case where a vitals fix does exist and does not hold. If checkpoint 1 itself fails, checkpoint 2 tells us nothing and must be recorded as NO-RESULT rather than as a second failure.
@@ -10421,3 +10429,249 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
   ตราบใดที่ยังไม่มีบรรทัดนี้ สถานะใบคือ **`AWAITING-OBSERVER` ไม่ใช่ `PASS`** และห้ามยกผลใบนี้ไปเป็นฐานของใบอื่น
 
 **ผู้เปิดใบ: chief (LANE-E) รอบ `ls5m3c` / R300 ตาม `COO-DECISION 20260902_0542` ข้อ 3**
+
+## GT-205 UI-A-BACK-BUTTON-VISIBLE-NOTICE-001  [BLOCKED -- composer is built but NOT wired; run RECHECK before any boot]
+
+> Opened by LANE-A round `od1xso` (2026-09-02 +07:00). LANE-A consumes the result itself.
+> numbering: shared counter with `CLIENT_RE_QUEUE.md` (rule (2) at the top of this file).
+> Highest `GT` in `GAME_TEST_QUEUE.md` = `GT-204`; highest `RE` in `CLIENT_RE_QUEUE.md` = `RE-202`.
+> This entry is `205`.
+
+- objective: single claim, decided by human eyes only -- with the character standing in a live map,
+  the player opens the HOME menu and clicks "กลับหน้าเลือกตัวละคร" (back to character select), and the
+  one line `BACK REFUSED` (exactly 12 printable ASCII characters) APPEARS ON SCREEN in the local
+  chat/talk area, either while the logout dialog is still open or right after it closes.
+
+- background (read once, then work from the steps): round `od1xso` built
+  `src/pirateforce_foundation/world_logout_button_notice.py`. On `LogoutVital 0x1B40` subcode 3 (the
+  owner's own captured 34-byte frame) it composes ONE `Channel_LocalTalkMessageVital` notice via
+  `gm/say_wire.make_local_talk_notice_frame`, body exactly `BACK REFUSED`. Subcode 1 (the
+  "ออกจากเกม" button, 119-byte frame) gets NOTHING from this lane, on purpose, so `GT-194`'s evidence
+  cannot change underneath it. The wire/DB half is already proven headless (28 tests, byte-equality
+  with say_wire's composer). The tester's job in this entry is ONLY the screen half.
+
+- PRECONDITION (this is why the entry is BLOCKED): the module composes bytes but is NOT wired yet.
+  `runtime.py` is chief's file; this round asks chief for ONE call site (CORE-REQUEST in the PR body).
+  Until that line is on `main`, DO NOT BOOT this entry.
+  RECHECK: `cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/runtime.py | grep -n "world_logout_button_notice"`
+  Empty result = still not wired = entry stays BLOCKED, no boot, no tester time spent.
+  A real hit = entry becomes READY as written here; record which `main` commit was used in the result.
+
+- db: `state\pirateforce.sqlite3` -- COPY ONLY, never open the canonical file. Copy to
+  `state\run_gt205_<yyyyMMdd_HHmmss>.sqlite3` and boot against the copy. Record sha256 of the copy
+  before and after; record sha256 of the canonical file before and after and confirm it is unchanged;
+  `PRAGMA integrity_check` = `ok` on the copy both times.
+
+- server args: standard boot per `BRIDGE_BOOT_PROCEDURE.md` / `ATTENDED_SESSION_RUNBOOK.md`,
+  `-SecondPasswordMode bypass`, NO scenario flag of any kind. Once wired this path is live on a
+  default boot (`production_allowed = True`).
+  `py -3 -u -m pirateforce_foundation.app --db state\run_gt205_<stamp>.sqlite3`
+
+- steps: (cheap: about 10 minutes on screen. Server first, client second, always.)
+  1. RECHECK above must return a real hit. Then LOCK_GAME, boot stamp, sha of canonical, copy the DB.
+  2. Boot server, then client. Log in. Confirm a FRESH server start (if a client was killed earlier,
+     the server keeps the session and the next client hangs on "connecting" forever -- restart the
+     server first).
+  3. Frame the shot with RIGHT-CLICK-DRAG only (camera only; the character's facing does not move and
+     nothing goes on the wire). Do NOT change the character's facing: no `Q`/`E`, no `W/A/S/D`.
+     Do not type any characters -- with chat unfocused every keystroke is a hotkey.
+  4. Screenshot S0 BASELINE, full resolution, showing the chat/talk area. Note the wall-clock time
+     (+07:00) and the video timestamp.
+  5. Open the HOME menu. Screenshot S1 (menu open).
+  6. Click "กลับหน้าเลือกตัวละคร" ONE time. Write down the wall-clock time and the video `t` of that
+     click before doing anything else.
+  7. WATCH THE SCREEN CONTINUOUSLY FOR AT LEAST 30 SECONDS. Take S2 at about +2s, S3 at +10s,
+     S4 at +30s, all full resolution, all showing the chat/talk area. Do not click anything, do not
+     dismiss the dialog by hand during those 30 seconds unless the client itself closes it.
+  8. Record, in the result: did the twelve characters `BACK REFUSED` appear -- yes/no; WHERE on screen
+     (which panel/line); at what offset from the click; for how long it stayed; and whether the logout
+     dialog was still open at that moment or had already closed.
+  9. Optional second attempt, only if attempt 1 showed nothing: relog, repeat steps 5-8 once with the
+     chat window/tab explicitly OPEN and its history tab visible before clicking the button. Label the
+     screenshots S0b..S4b and record the two attempts separately -- do not merge them.
+  10. NO-CRASH check with RIGHT-CLICK-DRAG (never `Q`/`E`). Screenshot S5. Exit with the window X.
+  11. Shut the server down. Keep console `.out`/`.err`, `capture_v141\GAME_LIVE.txt`,
+      `capture_v141\GAME_EVENTS_LIVE.txt` + sha256 of each. `PRAGMA integrity_check`. Re-check the
+      canonical sha. Run teardown ALWAYS, even if the round ended because she simply stopped playing
+      (the template refuses a boot stamp older than 420 minutes -- do not let the round age out).
+
+- pass criteria: (TWO layers -- neither layer may ever be offered as proof of the other)
+    wire/DB          : headless-readable from the console/capture alone. The subcode-3 request arrives
+      and the console prints
+      `LANE_A_UIA_NOTICE_COMPOSED button=BACK_TO_CHARSELECT subcode=3 vitals=1 trailing=0 text=BACK REFUSED pc=56 frame=66`
+      (one line, exactly as printed -- the `pc=`/`frame=` lengths are the composed bytes, so the token
+      cannot appear unless bytes exist). If she also clicks the exit button at any point, the matching
+      line is `LANE_A_UIA_STOOD_DOWN button=EXIT_GAME subcode=1 vitals=4 trailing=85`, which shows this
+      lane composed NO BYTES for subcode 1 -- it still prints that one line, which is itself evidence
+      `GT-194`'s reader will see; "nothing at all" would be the wrong expectation. Copy both lines
+      verbatim, do not interpret.
+      Three other tokens can appear instead, and each means something different:
+      `LANE_A_UIA_WITHDRAWN` (the module is switched off), `LANE_A_UIA_NOTICE_FAILED` (the composer
+      refused -- a bug to report, not a tester error), `LANE_A_LOGOUT_FRAME_UNCLASSIFIED verdict=<word>`
+      (the frame reached this lane and was rejected; the word is the live classifier's own verdict).
+      Copy whichever appeared. `integrity_check` = `ok`; canonical sha unchanged; no uncaught traceback.
+      This layer CANNOT answer: whether anything was drawn on screen.
+    client-observable: needs the human at the screen; never inferred from the console. Within the
+      30-second window after the click, a human SEES the line `BACK REFUSED` -- twelve ASCII
+      characters, that exact spelling -- in the local chat/talk area. Compare S0 against S2/S3/S4.
+      Record for EVERY still (S0-S5, and S0b-S4b if attempt 2 was run) the colour of EVERY name label
+      in frame, one line per label per image, the word `none` written out rather than left blank.
+      Read colours from full-resolution stills only -- never from a contact sheet, a downscaled image,
+      or video. Record the colour and nothing else: what decides a label's colour is unknown and is the
+      whole subject of `RE-067`. Divergences from the original server's screenshots get one row each in
+      `REAL_SERVER_DIVERGENCE.tsv`.
+      This layer CANNOT answer: what bytes were composed, or which subcode arrived.
+
+- prediction (THIS IS A PREDICTION, not a measurement; a wrong prediction is a finding):
+    P1 console token present AND `BACK REFUSED` visible within ~2s => both layers pass.
+    P2 console token present but nothing visible in 30s => the notice channel does not render while the
+       logout dialog owns the input/render state. That is a real finding about the dialog, NOT proof the
+       composer is wrong -- redirect to an RE about the dialog's render state, do not re-run blind.
+    P3 no console token at all => the call site is not on the path she clicked; re-run RECHECK and
+       report which `main` commit was booted. NO-RESULT for the screen half, not FAIL.
+
+- nonclaims:
+  1. Does NOT test whether the client returns to the character-select screen. That is `GT-184` and it
+     remains unsolved (`GT-033` measured both known response policies leaving the client on the same
+     map for 50-77s). Seeing `BACK REFUSED` says nothing about the transition.
+  2. A negative is a real finding of equal worth: it is evidence about the logout dialog's input/render
+     state, NOT proof that the notice composer is wrong. The render evidence for this channel
+     (`GT-006`/`GT-009`) was measured with the dialog CLOSED, so this entry is the first time it is
+     asked to draw with the dialog OPEN.
+  3. Does NOT test the "ออกจากเกม" button (`GT-186`/`GT-194`) and must not be run in a way that changes
+     their evidence. If she clicks it anyway, log it as a separate observation with its own token line.
+  4. Claims nothing about `ReturnSelectServerVital 0x709E` or `HYP-PF-040`.
+  5. Does not claim the PR is merged; the RECHECK line, not this header, decides that.
+
+- links: `NOW.md` item UI-A · `GT-184` · `GT-185` · `GT-194` · `RE-197` (closed this round) ·
+  `notes_to_chief/consumed/20260901_1930_KA1A-CAPTURE-the-owner-clicked-both-UI-A-and-UI-B-buttons-herself-exact-bytes-plus-a-design-problem-for-HYP-PF-040.md`
+  · `GT-193` (the `SPEED DENIED` notice -- same channel, same 12-character shape)
+
+- result: (tester fills in: PASS/FAIL/BLOCKED/NO-RESULT · screenshots S0-S5 · verbatim console lines ·
+  label colours one line each · timestamps +07:00 · `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
+## GT-207 GM-PLUGIN-THREE-CELL-BUTTON-001  [READY]
+
+> 🔴 **NUMBERING — ใบนี้คือ `GT-207` และถูกขยับสองครั้ง เขียนไว้ให้ครบ:**
+> ใบที่ `COO 0846`/`LANE-GM 0731` เรียกว่า `GT-P3`/`GT-203` **คือใบนี้** · `203` เป็นของ LANE-A
+> และ `204` เป็นใบ P-1 ของ chief ไปแล้ว ⇒ ขยับเป็น `205` ตอนลงคิว
+> จากนั้น **LANE-A merge `GT-205 UI-A-BACK-BUTTON-VISIBLE-NOTICE-001` ขึ้น `main` ก่อน** ระหว่างรอบเดียวกัน
+> ⇒ กฎ ③ (คนที่ push ทีหลังขยับเลขของตัวเอง) · `206` ถูกใบ `RE-206` ของรอบนี้ใช้ไปแล้ว ⇒ **ใบนี้ = `207`**
+> ไม่มีใบของใครถูกลบ ย้าย หรือทับ · `GT-205` ที่ถูกต้องคือใบของ LANE-A ข้างบนนี้
+> 🔴 `NOW.md` P-3 ยังเขียนว่า "ใบ `GT-203`" — **ชี้ผิดใบ** (`GT-203` คือใบ AvatarAttr ของ LANE-A) ·
+> chief แก้ `NOW.md` เองไม่ได้ (ผู้เขียนคือ Panya กับ COO) ⇒ ขอไว้ในใบ `CHIEF-TO-COO 20260902_0920`
+
+- objective: ข้อเดียว — ปุ่ม GM ที่กดแล้วเงียบมาตั้งแต่ `RE-104` (27 ส.ค.) เปิดหน้าต่างได้หรือไม่
+  เมื่อมี `GameMaster.dll` ที่เราสร้างเองอยู่ข้าง client (สถานะ GM ยังตัดสินที่ `gm_accounts` ฝั่งเซิร์ฟเวอร์เท่านั้น)
+
+- ของที่ใช้: `patches/gm_plugin/` **revision 4** sha `780d41dd` [วัดแล้ว: เป็น ancestor ของ `main`, 07:58+07:00]
+  ไม่ใช่ revision 3 (ไม่เคย commit) · **คำห้าม build ถอนแล้ว** (`COO 0845`)
+  install/rollback ตาม `patches/gm_plugin/README.md` (`install.bat "<client folder>"` ห้าม copy เอง)
+
+- 🔴 **เปิด DebugView ค้างไว้ก่อนบูตทุกครั้ง** — ทั้งใบตัดสินด้วยบรรทัด `[GM_PLUGIN]` ไม่มีตัวจับ = อ่านผลไม่ได้เลย
+
+### ลำดับต่อหนึ่ง build (ห้ามสลับ — ขั้น 0 อยู่ **หลัง** install)
+`build` → `install.bat` → **ขั้น 0** → บูต → ล็อกอินบัญชีใน `gm_accounts` → **กดปุ่ม GM หนึ่งครั้ง** → ปิดเกม → **rollback**
+
+- **ขั้น 0** (จาก checkout ของ `pirate-force-server` · `set PYTHONPATH=src`) — 🔴 ใส่เครื่องหมายคำพูด **ทั้งสองพาธ**
+  (พาธของเจ้าของมีช่องว่าง ไม่ใส่ = argparse ตัดครึ่งแล้วรายงานผิดใบ):
+  `py -3 -m pirateforce_foundation.gm.plugin_image_check --dll "<build>\GameMaster.dll" --client-dir "<client>"`
+  · ค่าที่ต้องได้คือ `verdict=image_ok` (แปลว่า ไฟล์ที่ติดตั้ง = ไฟล์ที่เพิ่ง build)
+  · 🔴 **รันก่อน install จะได้ `verdict=missing` exit 1 เสมอ** — นั่นไม่ใช่ของเสีย แค่รันผิดลำดับ
+  · 🔴 `verdict=manifest_missing` = **หยุด build นี้ บันทึก แล้วรายงาน LANE-GM** — เป็นช่องโหว่ของ build chain
+    (`build_vs2008.bat` ไม่มีขั้น `mt.exe` และ VS2008 ไม่มี `/MANIFEST:EMBED`) **ไม่ใช่ความผิดของผู้เทส**
+    และ **ห้ามบูตทั้งที่เห็นค่านี้** [เสนอ โดย pf-adversary รอบ `smrum3` — ยังไม่มีใครสร้างจริงบน MSVC]
+  · exit code อื่นที่ไม่เป็น 0 = หยุด ห้ามบูต แก้ตามที่มันบอกก่อน
+- 🔴 `install.bat` ปฏิเสธเพราะเจอ `GameMaster.dll` เดิม → **ก่อนรายงานว่าเจอของเก่า ให้เทียบ sha256 ของไฟล์นั้น
+  กับ sha256 ที่ขั้น 0 ของ build ก่อนหน้าบันทึกไว้เสมอ** · ตรงกัน = **ของเราเองที่ลืม rollback** ให้ลบแล้วเดินต่อ ·
+  ไม่ตรง = **หยุดทั้งใบ** เก็บ sha256 แล้วรายงานทันที (นั่นคือของที่ตามหามาตั้งแต่ 27 ส.ค. `RE-164`)
+- **rollback ทุกครั้งที่จบ build ไม่ว่าผลจะเป็นอะไร**: ลบ `GameMaster.dll` ที่ติดตั้งออกจากข้าง client
+  (ไม่มี patch ไบต์ ไม่มี registry ไม่แตะ DB) · ลืมข้อนี้ = รอบหน้าจะอ่านของเราเองเป็นหลักฐาน `RE-164` ผิด ๆ
+
+### BUILD (นับเป็น **build** ไม่ใช่ "ช่อง" — เพดาน **สาม build** ทั้งใบ รวมกิ่งแครช)
+| build | `PF_GM_KEY` | `PLUS4` | คำสั่ง | build เมื่อ |
+|---|---|---|---|---|
+| 1 | `GMUI_1` | 0 | `build_vs2008.bat` เปล่า ๆ | เสมอ |
+| 2 | `GMUI_BASIC` | 0 | `set EXTRA_DEFS=/D PF_GM_KEY=L\"GMUI_BASIC\"` | build 1 มี `loaded` + `client CRT:` แต่คลิกไม่เปิด |
+| 3 | `GMUI_1` | 1 | `set EXTRA_DEFS=/D PF_GM_SLOT0_TOUCH_PLUS4=1` | build 2 ยังไม่เปิด |
+
+🔴 **`set` เขียนทับ ไม่ได้บวกกัน** — build 3 จึงกลับไปเป็น `key=GMUI_1` **โดยตั้งใจ** (ตรงกับตาราง README)
+เห็น `key=GMUI_1` ใน build 3 = **ถูกแล้ว ห้าม rebuild** · ห้าม build `GMUI_BASIC` + `PLUS4=1` (ช่องที่สี่) ทุกกรณี
+
+🔴 **STOP ก่อนเปลืองรอบ — ถ้า build 1 ขึ้น `loaded` แต่คลิกแล้ว *ไม่มี* บรรทัด `client CRT:`**
+= client ยังไม่เคยเรียก `CreateGameMaster` ⇒ `PF_GM_KEY` และ `PLUS4` **ยังไม่ถูกอ่านเลย**
+⇒ build 2 กับ build 3 เป็นการทดลองที่เหมือน build 1 ทุกประการ **หยุดทั้งใบตรงนี้ รายงาน** อย่า build ต่อ
+(นี่คือผลลัพธ์ที่มีค่า ไม่ใช่รอบเสีย: มันชี้ไป `GM-IMG-005`/`RE-164` โดยตรง)
+
+🔴 **กิ่งแครช (`COO 0845` ข้อ 2)** — แครช **ตอนคลิก**:
+- แครชใน **build 1** → build ถัดไป = `PLUS4=1` คง key เดิม (`GMUI_1`+`PLUS4=1`) = แถว 3 ของตาราง **ทำได้**
+  build นี้กินโควตาไปหนึ่ง ⇒ เหลืออีกหนึ่ง build เท่านั้นทั้งใบ
+- แครชใน **build 2** (`GMUI_BASIC`) → 🔴 **หยุดทั้งใบ รายงาน ห้าม build ต่อ** — เพราะ "คง key เดิม + `PLUS4=1`"
+  จะกลายเป็น `GMUI_BASIC`+`PLUS4=1` = **ช่องที่สี่ที่ README ห้ามไว้** · `COO 0845` กับตาราง README ขัดกันตรงนี้
+  และยังไม่มีใครตัดสิน ⇒ แครชใน build 2 เป็น **ผลที่ต้องรายงาน** ไม่ใช่เหตุให้ build ต่อ
+- 🔴 **ห้ามใช้ "sha256 เปลี่ยน" เป็นหลักฐานว่าแฟล็กถึง compiler** — DLL ฝัง `__DATE__`/`__TIME__` ทุก rebuild
+  จึงเปลี่ยน sha เสมอแม้ลืม `set` · ตัวควบคุมจริงคือบรรทัด `EXTRA_DEFS=` ที่สคริปต์พิมพ์ กับ `key=`/`slot +0x00 +4 init:`
+
+### RECHECK (ตามลำดับ ข้อ 1 ทำให้ข้ออื่นมีความหมาย · ทุกบรรทัดมีอยู่จริงในซอร์ส revision 4 [วัดแล้ว])
+1. `[GM_PLUGIN] loaded build=<วันเวลา>` **ตอนบูต** — บรรทัดแรกสุดที่ `DllMain` พิมพ์ ก่อนโค้ดที่ fault ได้
+   ⇒ **ไม่มี = DLL ไม่เคยถูกโหลด** (ข้ออื่นไม่ต้องอ่าน) · 🔴 บรรทัดนี้บอก **เวลา build ไม่ได้บอก revision**
+2. **บรรทัดผลของการคลิก — ข้อที่ตัดสินว่ารอบนี้ได้ข้อมูลจริงหรือไม่** คัดมาทั้งบรรทัด ห้ามสรุปเอง
+   หนึ่งในห้าบรรทัดนี้ต้องขึ้นตอนคลิกครั้งแรก:
+   · `alive, returning interface` ← **ปลั๊กอินทำงานครบและส่งของให้ client จริง**
+   · `FAIL alloc: client CRT operator new unavailable; returning NULL`
+   · `FAIL: msvcp90 wstring ctor unresolved and PF_GM_SLOT0_TOUCH_PLUS4=1; returning NULL` (เจอได้เฉพาะ build 3)
+   · `FAIL exception in CreateGameMaster; returning NULL`
+   · **ไม่มีสักบรรทัด** = client ไม่เคยเรียก `CreateGameMaster` (ดู STOP ข้างบน)
+3. `client CRT: ...` / `msvcp90 wstring ctor: ...` / `self-pin: ...` ขึ้น **ตอนคลิกครั้งแรก ไม่ใช่ตอนบูต**
+   [วัดแล้ว ในซอร์ส: `ResolveOnce()` ถูกเรียกจาก `CreateGameMaster` ที่เดียว · `DllMain` เขียนเองว่า deferred]
+   [เสนอ: ว่า **การคลิก** คือสิ่งที่ไปถึง `CreateGameMaster` — นั่นคือคำถามของทั้งใบ ยังไม่มีใครวัด]
+   · `client CRT:` เขียน `REFUSING` **หรือ** `NOT FOUND` ให้คัดพาธ/ข้อความที่ตามมาด้วยทั้งหมด
+4. `key=` และ `slot +0x00 +4 init:` ตรงกับตาราง BUILD ข้างบนของ build ที่กำลังเทส
+   🔴 สองบรรทัดนี้ขึ้น **สองรอบต่อเซสชัน** (ตอนบูตจาก `DllMain` และตอนคลิกครั้งแรกจาก `ResolveOnce`) — อ่าน**ของตอนบูต**
+5. **คลิกแล้วหน้าต่าง `GMUI_1` เปิด ถึง tab `GMUI_BASIC` หรือไม่** ← ข้อที่ตัดสินทั้งใบ
+6. ปิดเกมแล้วไม่แครช (มีความหมายเมื่อข้อ 1 ผ่าน) · แครชตอนปิด ให้ดู `self-pin:` ก่อนเสมอ
+7. 🔴 `slot +0x08 called with no MSVCP90 ctor` = **หลักฐานใหม่ ต้องรายงาน ห้ามแก้เอง**
+   (`GM-IMG-014` blocker `NO_PINNED_CALL_ROUTE_FOR_SLOT8`)
+
+### หลักฐานสองชั้น
+- **client-observable** = ภาพหน้าจอตอนคลิก (เปิด/ไม่เปิด) + ข้อความ debug ทั้งชุดของแต่ละ build
+- **wire/DB** = ใบนี้ **ไม่มีชั้นนี้และไม่ต้องมี** ปลั๊กอินเป็น client ล้วน ไม่แตะ vital ไม่แตะ DB ไม่เปิด canonical
+  (`gm_accounts` เป็นไฟล์ JSON allowlist ไม่ใช่ DB) · ใครอ้างว่าใบนี้พิสูจน์อะไรฝั่งเซิร์ฟเวอร์ = อ้างผิด
+
+### เกณฑ์ปิดใบ
+- **PASS** = build ใด build หนึ่งเปิดหน้าต่างได้ → บันทึกว่า build ไหน แล้วปิด P-3
+- **bounded negative** = 🔴 **ใช้ได้ต่อเมื่อทุก build ขึ้นบรรทัด `alive, returning interface`** (RECHECK 2)
+  แล้วยังไม่เปิดสักอัน → "ปลั๊กอินทำงานครบแล้ว แต่ประตูไม่ได้อยู่ที่ตัวปลั๊กอิน" → กลับไป `RE-164` ผู้ต้องสงสัยข้อ 1
+  (`GM-IMG-005` gate `GMModule_Client+0x19`) **ห้ามอ่านว่า "ปลั๊กอินใช้ไม่ได้"**
+  🔴 เห็น `FAIL ...` หรือไม่เห็นบรรทัดไหนเลย = **ไม่ใช่ bounded negative** เป็น `INCONCLUSIVE-PLUGIN-NEVER-RAN`
+  ⇒ ห้ามใช้ปิดหรือเบนงานของ `RE-164` เด็ดขาด (ปลั๊กอินไม่เคยได้ลอง key ที่ใบนี้ตั้งใจจะเทส)
+  ⚠️ ระวัง: `GM-IMG-005` เขียนเองว่าไบต์นั้นคุม **ทั้ง show และ click gate** แต่ปุ่ม **มองเห็นได้** (`RE-104`)
+  ⇒ ถ้าจะสรุปไปทางนั้น ต้องอธิบายความตึงข้อนี้ก่อน [เสนอ ยังไม่มีใครไล่ disassembly]
+- **BLOCKED** = ไม่มี `loaded` เลย → ผลของ `plugin_image_check` คือคำตอบ ไม่ใช่การเดา
+  ⚠️ `image_ok` แต่ไม่มี `loaded` **และเกมเปิดไม่ขึ้นด้วย** = คนละอาการ (ตายใต้ loader lock)
+  ⇒ ลบไฟล์ออก ยืนยันว่าเกมกลับมาเปิดได้ บันทึกแล้วรายงาน — อย่าวนไป build ถัดไป
+
+### ของแถม / result / links
+- ของแถม (`RE-164` · NOW.md P-3): มี `GameMaster.dll` อยู่ข้าง exe **ก่อน** ติดตั้งของเราไหม — ตอบ มี/ไม่มี หนึ่งบรรทัด
+  (ถามก่อนแตะอะไร เพราะหลัง build แรกจะแยกไม่ออกจากของเราเอง)
+- ก่อนเริ่ม: ยืนยันหนึ่งบรรทัดว่าบัญชีที่จะล็อกอิน **อยู่ใน** `config/gm_accounts.json` จริง —
+  ไม่งั้น "คลิกเงียบ" แยกไม่ออกระหว่าง "ไม่มีสถานะ GM" กับ "ปลั๊กอินเงียบ"
+- links: `COO 20260902_0846` `0845` `0648` · `LANE-GM 0731` `0801` `0856` · `RE-164` · `RE-104` ·
+  `patches/gm_plugin/README.md` (ตารางช่อง + install/rollback) · `PF_GM_PLUGIN_GATE.tsv` (`GM-IMG-001..017`)
+- RECHECK: `git -C <pf_bridge> merge-base --is-ancestor 780d41dd HEAD`
+  -- exit 0 = **checkout ที่จะ build อยู่จริงที่ revision 4** (ใช้ `HEAD` ไม่ใช่ `origin/main`: fetch แล้วแต่ยังไม่ merge
+  จะทำให้ `origin/main` ผ่านทั้งที่ working tree ยังเป็น revision 2 ที่ถูกห้าม) · คำสั่งเดียว ไม่มี `&&` (PS 5.1 ไม่รับ)
+- result: (ผู้เทสกรอก) จำนวน build ที่ทำจริง + บรรทัด `EXTRA_DEFS=` ของแต่ละอัน · `verdict` + sha256 คู่จากขั้น 0 ทุก build ·
+  บรรทัด `[GM_PLUGIN]` ทั้งชุดต่อ build (**แยกตอนบูต / ตอนคลิก**) · บรรทัดผลของ RECHECK 2 ทั้งบรรทัด ·
+  ภาพหน้าจอตอนคลิก · เปิด/ไม่เปิด · แครชหรือไม่ (ตอนคลิก / ตอนปิด) · rollback ทำแล้วทุก build หรือไม่ ·
+  คำตอบหนึ่งบรรทัดของ `RE-164`
+  🔴 **G-OBS:** จดหมายผลต้องมีบรรทัด `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>` ·
+  ไม่มี = **`AWAITING-OBSERVER` ไม่ใช่ `PASS`** ห้ามยกผลใบนี้ไปเป็นฐานของใบอื่น
+- nonclaim: (1) หน้าต่างเปิด **ไม่ใช่** ข้อพิสูจน์ว่าคำสั่ง GM ใดทำงาน และไม่ใช่ไมล์สโตน
+  (2) ไม่อ้างว่า revision 4 คอมไพล์ผ่าน MSVC — ไม่มี toolchain บนคลาวด์ (`COMPILE-UNVERIFIED` อยู่หัวไฟล์)
+  (3) ไม่อ้างว่าปลั๊กอินคือสาเหตุของ P-3 — กำจัดผู้ต้องสงสัยหนึ่งตัวเท่านั้น
+  (4) ใบนี้ไม่ให้สถานะ GM กับใครเลย เป็นเครื่องมือไปถึงสภาพที่จะเทส
+
+**ผู้เปิดใบ: LANE-GM รอบ `q6p0pb` (ร่าง `0731`) · chief (LANE-E) รอบ `smrum3`/R301 ลงคิวตาม `COO-DECISION 20260902_0846`**
+**แก้ตาม pf-adversary รอบเดียวกัน 16 ข้อ** (ลำดับขั้น 0 · `manifest_missing` · กิ่งแครช build 2 ขัดตาราง README ·
+`alive, returning interface` เป็นเงื่อนไขของ bounded negative · STOP เมื่อไม่มี `client CRT:` · rollback ทุก build ·
+sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้บน PS 5.1 · quote พาธ · ค่าคาดหวังต่อ build)

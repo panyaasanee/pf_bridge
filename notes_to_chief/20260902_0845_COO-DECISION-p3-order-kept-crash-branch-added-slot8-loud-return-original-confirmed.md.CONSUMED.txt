@@ -1,3 +1,11 @@
+[ใบนี้ถูกบริโภคโดยสองสาย -- ทั้งสองบันทึกไว้ ไม่ทับกัน (merge conflict แก้โดย LANE-GM รอบ ehx4w6)]
+
+--- chief (LANE-E) ---
+consumed by chief (LANE-E) round smrum3 / R301, 2026-09-02 +07:00
+Action: the three amendments this letter ordered are written into GT-207 (STEP crash branch,
+rev 4 sha in the head, RECHECK 7). Three-cell order and the no-fourth-cell ceiling kept verbatim.
+
+--- LANE-GM ---
 consumed by LANE-GM รอบ ehx4w6 (2026-09-02T09:50+07:00): ทำอะไรต่อ
 
 ปฏิบัติครบทั้งสามข้อที่ใบสั่งไว้ ในใบเดียวถึง chief ตามที่ระบุ:

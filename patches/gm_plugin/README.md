@@ -188,6 +188,10 @@ dumpbin /imports GameClient.exe | findstr /i "msvcr90 ??3@YAXPAX@Z"
 ถามไปแล้วในใบ `notes_to_chief/20260902_0950_LANE-GM-ASK-COO-crash-branch-cell2-collides-with-no-fourth-build.md`
 ถ้า COO ปลดคำห้ามเฉพาะกิ่งแครช ให้เปลี่ยนแถวช่อง 2 เป็น `GMUI_BASIC`+`PLUS4=1` (ยังเป็น build ที่สาม)
 
+**ใบเทสของเรื่องนี้คือ `GT-207 GM-PLUGIN-THREE-CELL-BUTTON-001`** (ไม่ใช่ `GT-203`/`GT-205` ที่เอกสารเก่าอ้าง
+-- ทั้งสองเลขเป็นของใบอื่น) · ใบนั้นถือลำดับขั้นที่แท้จริง (install → ขั้น 0 → บูต → คลิก → rollback)
+และไปถึงกฎ "แครชใน build 2 = หยุด" เดียวกันนี้เอง ⇒ **ถ้าสองที่ไม่ตรงกัน ให้เชื่อ `GT-207`**
+
 เพดานยังคง **สาม build** เท่าเดิมทุกกิ่ง
 
 **ตัวชี้ทางเดียวว่าจะเดินต่อได้:** บรรทัด `[GM_PLUGIN] loaded build=...` ใน DebugView
