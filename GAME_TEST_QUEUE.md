@@ -11198,7 +11198,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
       event `columbus_choose_npc_wrong_scene_<n>_lane_declined` + stderr `COLUMBUS_CHOOSE_NPC_WRONG_SCENE scene=<n> effect=columbus_lane_declined`
       🔴 คำว่า `lane_declined` ไม่ใช่ `no_reply` โดยตั้งใจ: **สายอื่นตอบคลิกนั้นจริง** (ฉาก 14 = `LANE_A_CHOOSE_NPC_SCENE14_FACE_P1`,
       ฉากโรสเตอร์ = `V98_NPC_CONVERSATION_DEFAULT_P1`) โทเคนนี้บอกได้แค่ว่า **สาย Columbus ไม่ตอบ** ห้ามอ่านว่า "ไม่มีอะไรตอบ"
-  (C) D3 (PR ที่สองของ R305): checkpoint ตำแหน่ง = ฉาก 17 ตอนข้ามจริง · 🔴 **ถ้า (C) ยังไม่ลง แถว in-memory ยังเป็นฉาก 1 หลังข้าม
+  (C) D3 (PR `server#587`): checkpoint ตำแหน่ง = ฉาก 17 ตอนข้ามจริง · 🔴 **ถ้า (C) ยังไม่ลง แถว in-memory ยังเป็นฉาก 1 หลังข้าม
       ⇒ `/warp 1` ไม่ถูกนับเป็นการข้ามฉาก ⇒ census latch ไม่ถูกปลด ⇒ Port Royal ว่างได้ · กรณีนั้น = `NO-RESULT` ของครึ่งนั้น ไม่ใช่ FAIL**
 
 - 🔴 สองข้อที่ไม่รู้แล้วเสียรอบ:
@@ -11211,7 +11211,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
   cd pirate-force-server && git fetch origin
   git show origin/main:src/pirateforce_foundation/runtime.py | grep -n "COLUMBUS_Q3021_TELEPORT_REFUSED"
   git show origin/main:src/pirateforce_foundation/runtime.py | grep -n "COLUMBUS_CHOOSE_NPC_WRONG_SCENE"
-  git show origin/main:src/pirateforce_foundation/runtime.py | grep -n "columbus_q3021_crossing_checkpoint"
+  git show origin/main:src/pirateforce_foundation/runtime.py | grep -n "columbus_q3021_crossing_row_checkpointed"
   ```
   ข้อ 1-2 ว่าง ⇒ คง `BLOCKED` **ห้ามบูต ไม่เสียเวลาผู้เทสแม้แต่นาทีเดียว** · ข้อ 3 ว่าง ⇒ บูตได้ แต่ครึ่ง `/warp 1` เป็น `NO-RESULT` ตาม (C)
 
