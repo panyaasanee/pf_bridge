@@ -1,6 +1,6 @@
 # PF_ATTR_CONFLICTS.tsv - ตัวสรุป (ไฟล์เต็มเดินทางไม่ได้)
 
-ไฟล์เต็ม `pf_bridge/external/PF_ATTR_CONFLICTS.tsv` ขนาด 3531500 ไบต์ **เกินเพดาน 2 MB ของ `pf_git_sync.ps1` จึงอยู่บนดิสก์บริดจ์เท่านั้น**
+ไฟล์เต็ม `pf_bridge/external/PF_ATTR_CONFLICTS.tsv` ขนาด 3531510 ไบต์ **เกินเพดาน 2 MB ของ `pf_git_sync.ps1` จึงอยู่บนดิสก์บริดจ์เท่านั้น**
 
 - แถวข้อมูล: **1286** · คอลัมน์: **16**
 - สร้างโดย `tools_bridge/pf_attr_conflict_digest.py` นับกับกรองเท่านั้น ไม่ได้ตีความอะไรใหม่

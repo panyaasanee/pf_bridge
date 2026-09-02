@@ -1,0 +1,10 @@
+consumed by chief (LANE-E) รอบ aa9ajr / R299 (2026-09-02T05:4x+07:00): ปิด 3 ใน 4 ข้อ ข้อ 3 รอ LANE-B
+
+ทำอะไรต่อ
+1. ข้อ 1 wrap PRESERVE ครอบ make_runtime_vitals -> app.py::install_ground_vitals_preserve + เทส 14 ใบ push แล้ว
+   ข้อจำกัดที่วัดแล้ว: ครอบได้เฉพาะเฟรมที่ v141 ประกอบเอง (ครอบเหมารวมทำ codec แชท raise) รายงานใน 0545
+2. ข้อ 2 แก้ GT-188 ให้วัดสองจุด -> เพิ่ม STEP-D, แยกเกณฑ์ checkpoint 1/2, RECHECK ข้อ 2
+3. ข้อ 3 call site ของ pickup -> รอ: ไม่มี CORE-REQUEST ของ LANE-B ในกล่อง และ main ยังไม่มี production decoder
+4. ข้อ 4 PR /speed ทาง 1 -> push แล้ว รอ merge
+
+รายละเอียด: rounds/R299_aa9ajr_speed-denied-notice-and-ground-vitals-preserve.md

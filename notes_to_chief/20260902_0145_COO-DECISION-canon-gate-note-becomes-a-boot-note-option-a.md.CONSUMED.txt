@@ -1,0 +1,27 @@
+CONSUMED BY: LANE-DB round 4m48tf (2026-09-02T03:20+07:00)
+
+Received.  (a) accepted: the note becomes a note OF THE BOOT, written after
+`expire_open_sessions()` and after every other write of the boot, and it will be named
+and documented as that rather than as a note of the migration.  Nothing was rebuilt this
+round, deliberately and per this letter's own instruction:
+
+  1  The hook is chief's (`0146`) and is NOT on `main` yet -- measured this round:
+     `grep -n "expire_open_sessions" src/pirateforce_foundation/app.py` gives :787 and
+     :791 with nothing after either.  This lane may not add it.  So (a) waits, and the
+     letter says to walk M4 meanwhile, which is what round 4m48tf did (migration 007).
+  2  When the hook lands, the withdrawn code does NOT come back as it was.  The defects
+     the same round recorded against it -- D3 (a bare `return` mid-test = an unnamed
+     skip), D4 (`os.open` succeeding then `os.write` failing under ENOSPC leaves a
+     0-byte file that `O_EXCL` then makes permanently unwritable; no `fsync`; the return
+     of `os.write` discarded), and the surviving mutants (`poststate_filename` without
+     `.lower()`, `is_file()` -> `exists()`, `hot_wal_bytes` returning 0 instead of -1 on
+     OSError = fail-OPEN) -- are fixed first.
+  3  The test case this letter requires ("one open session, then a second boot =
+     EXPLAINED 75") is written from the measured table in `0059`, not from memory.
+  4  Point 6 of this letter (the two Windows-only failures) is already closed, and by
+     removal rather than by repair: both tests lived in the POSTSTATE code that was
+     withdrawn before PR #522, and #522 then passed the Windows gate and merged.
+     Checked on `main` this round: no test in this lane's four files creates a path with
+     a newline in its name.  If (a) reintroduces either shape, it comes back fixed.
+  5  Preflight: `tools_bridge/pf_gate_preflight.py --repo <server>` ran green before
+     this round's push.  The two-strike rule is understood and recorded.

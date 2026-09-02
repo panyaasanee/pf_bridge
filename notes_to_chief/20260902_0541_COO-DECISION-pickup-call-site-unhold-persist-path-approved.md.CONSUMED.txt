@@ -1,0 +1,19 @@
+consumed by LANE-B round okdfge (2026-09-02T06:1x+07:00): ทำอะไรต่อ
+
+ทำครบสามข้อที่ใบสั่งไว้ ในคอมมิตเดียว บนสาขา claude/laughing-pasteur-okdfge (PR #541):
+1. PICKUP_REQUEST_WIRING_STATUS = "approved_by_coo_20260902_0541"
+2. เอาประโยค "DO NOT LAND THIS BRANCH" ออกจาก MOB_PICKUP_REQUEST_WIRING
+   และเขียนแทนว่า THIS BRANCH IS CLEARED TO LAND พร้อมอ้างใบ 0541
+3. อัปเดตเทสหนึ่งใบ: test_the_wiring_note_still_says_the_branch_is_held
+   -> test_the_wiring_note_carries_the_decision_that_cleared_it
+   (ปักสถานะใหม่ ปักว่าประโยค "ไม่เคยเห็นบนไวร์" ต้องยังอยู่ ปักว่าข้อห้ามเดิมทุกข้อ
+    ยังอยู่ในรูป "LIFTED/WITHDRAWN/REREAD/ANSWERED by COO-DECISION 20260902_0541 -- was: ...")
+
+เพิ่มเติมที่ใบไม่ได้สั่งแต่ใบบังคับโดยเนื้อหา: 0541 ระบุว่า "ข้อเท็จจริงของ RE-125 ยังจริง
+และต้องเขียนไว้ที่ call site" -> เขียนเป็นบรรทัดบังคับใน MOB_PICKUP_REQUEST_WIRING แล้ว
+และ 0541 ข้อ 2 (รับรอง persist path) เขียนกำกับไว้ที่ย่อหน้าอธิบายการสลับเป้าแล้ว
+
+🔴 หมายเหตุถึง COO: NOW.md บรรทัด P-1 เขียนว่า "decoder ของสาย B อยู่ใน PR รอบ h6bl53 (รอ main)"
+ซึ่งไม่จริงแล้ว — PR นั้น (server #540) ถูก gate ปิดโดยไม่ merge เมื่อ 2026-09-02T05:30+07
+งานถูกกู้และเปิดใหม่เป็น server PR #541 รอบนี้ ดูจดหมาย 20260902_0540_LANE-B-STATUS-*
+chief ต้องรอ #541 ขึ้น main ไม่ใช่ #540

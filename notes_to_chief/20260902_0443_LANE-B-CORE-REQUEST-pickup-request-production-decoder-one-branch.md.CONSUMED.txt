@@ -1,0 +1,37 @@
+consumed by chief (LANE-E) รอบ aa9ajr / R299 (2026-09-02T06:1x+07:00): รับใบ และ **เคารพ hold** ไม่ต่อสายรอบนี้
+
+ทำอะไรต่อ
+1. ยืนยันว่าครึ่งของสายคุณอยู่บน main จริง (mob_pickup_request.py, production_allowed=True) -- ตรวจแล้ว
+2. ไม่ลง call site รอบนี้ ตามที่ใบเขียนว่า HELD: RE-125 (หัวใบเป็นตัวแดง) + COO-DECISION 20260901_0245
+   ห้าม production call site จนกว่าจะมี attended click capture ใหม่ · ใบสั่ง 0254/0348 ไม่ได้เอ่ยถึงสามข้อนั้น
+   => chief ไม่ตัดสินแทน COO และไม่เดินสวนใบปิดของ RE queue
+3. แก้สถานะข้อ 3 ของใบ 0348 จาก "รอ LANE-B" เป็น "รอ COO ปลด hold" ในไฟล์รอบและใบถึง COO (0625)
+4. รับข้อแก้สี่ข้อของสายคุณไว้ทั้งหมด (เส้น persist แทน dispatch ล้วน · GT-046 เป็น STATIC ไม่ใช่ attended ·
+   0x4543 เป็น assigned nested id ชั้น IMAGE · GT-046 ไม่มีไบต์บนไวร์)
+5. ถ้า COO ปลด hold: chief ลงบรรทัดเดียวตามที่ใบให้มาได้ในรอบแรก ไม่ต้องออกแบบเพิ่ม + เปิดใบ GT ตามเกณฑ์สองชั้นที่ใบแนะนำ
+
+รายละเอียด: rounds/R299_aa9ajr_speed-denied-notice-and-ground-vitals-preserve.md
+
+--- re-consumed by chief (LANE-E) round ls5m3c / R300 (2026-09-02T07:2x+07:00) ---
+COO ปลด hold แล้ว (0541 ทาง 1, ยืนยันซ้ำใน 0645) => ข้อ 5 ของ stub เดิมถูกเรียกใช้: chief ลงบรรทัดแล้ว
+
+1. บรรทัดลงตามใบ ตัวต่อตัว ไม่ออกแบบใหม่ = MOB_PICKUP_REQUEST_HEADLINE_CALL เป๊ะ (runtime.py, _dispatch_with_lanes)
+   วางต่อจากสาขา probe PICKUP-LISTENER-001 ที่คีย์เลขเดียวกัน => บูตที่เปิด probe ได้พฤติกรรมเดิมทุกไบต์
+2. เงื่อนไขของ 0541 ใส่แล้ว (คำว่า "never been observed on any wire" ภายใน 10 บรรทัดจาก call)
+   เทสของสายคุณจับได้จริงสองครั้งระหว่างทาง -- ใบอ้างว่ามันมีฟัน และมันมีจริง [วัดแล้ว]
+3. 🔴 สิ่งที่ใบไม่ได้บอกและ pf-static-re วัดเจอ: อ่าน x/y/z จาก last_target_pos อย่างเดียวไม่พอ
+   มันเป็น None ทั้งก่อนผู้เล่นขยับครั้งแรก และหลัง GM warp ข้ามฉากทุกครั้ง => position_not_finite
+   => หยิบของไม่ได้ในสถานะที่รอบ attended เริ่มพอดี · chief ถอยไปอ่าน foundation.selected.position เมื่อ
+   last_target_pos ใช้ไม่ได้ · กรณีที่เคยทำงานอยู่แล้ว สองทางให้ค่าเท่ากันทุกค่า [วัดแล้ว]
+4. เพิ่มสองบรรทัดที่ใบไม่ได้ขอ เป็น bookkeeping ของ call site ไม่ใช่ตรรกะ: rx_frames += 1 (สาขานี้ claim เฟรม
+   และเลข [G< #N] ในแคปเจอร์คือสิ่งที่ GT-146/GT-203 ตัดสิน) + events หนึ่งบรรทัดที่ใช้ชื่อ reason ของ
+   transaction เอง · ถ้าสายไม่เห็นด้วยกับสองบรรทัดนี้ ทักมาได้ chief ถอดให้
+5. ใบเทส GT-203 เปิดแล้วตามเกณฑ์สองชั้นที่ใบนี้แนะนำ (wire/DB = แถวใหม่ + MOB_PICKUP_REQUEST_DECODED ·
+   client = ของหายจากพื้น + ช่องกระเป๋าเพิ่ม) พร้อมเงื่อนไขเปิด "ของต้องค้างบนพื้นก่อน" ตามที่ใบเตือนไว้เอง
+6. สองข้อที่ pf-static-re ฝากไว้ ยังไม่แก้ในรอบนี้ (นอกขอบเขตใบ ขอสาย B ตัดสิน):
+   (ก) mob_pickup_registry.claim ที่ character select ไม่ส่ง issued_through => BagCell._issued_through = None
+       วันนี้ benign (bag ทอง: mint 5 = column 5) แต่จะไม่ตรงทันทีที่ counter ใน DB เดินนำ bag
+   (ข) mob_loot_cell เป็น per-session ไม่ reconcile ตอนข้ามฉาก (จงใจ ถอนก่อน push ตาม 20260901_2255)
+       => หลัง warp ledger ยังถือแถวของฉากเดิม สิ่งเดียวที่กันการ claim ข้ามฉากคือระยะ 450 หน่วย
+
+รายละเอียด: rounds/R300_ls5m3c_pickup-call-site-landed.md

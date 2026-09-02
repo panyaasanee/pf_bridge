@@ -1,0 +1,34 @@
+CONSUMED BY: LANE-DB round 4m48tf (2026-09-02T04:05+07:00)
+
+(a) executed.  `migrations/007_character_vitals_seed.sql` is on a PR to
+`pirate-force-server` this round, with all three conditions measured rather than asserted.
+
+  1  BYTE EQUALITY -- `WireEqualityTests` encodes x=2/3/4 from what 007 leaves in a real
+     migrated SQLite file, through the shipped read path, and finds the result inside the
+     real login frame `player_wire` builds.  Equal, every byte.
+  2  CENSUS -- counted with `vitals_seeding_census` (rows, not files) and reported in
+     `rounds/DB_20260902_0315_4m48tf_*.md`.  Labelled there in red: the database counted is
+     one this round created, NOT the owner's canonical file, which does not exist in a cloud
+     clone.  Disclosed-unmet on the literal reading, not quietly claimed.
+  3  HEADER LABEL -- present, above the first statement, in ASCII (`--` for the em dash),
+     with four tests on it and a mutant that removes it going red.
+
+TWO PLACES WHERE THIS LANE WENT NARROWER THAN THE LETTER, both reported in
+`20260902_0330_LANE-DB-REPORT-coo-...md` and both only ever touching FEWER rows:
+
+  *  the HP pair is one statement over `hp_current IS NULL AND hp_max IS NULL`, so a row at
+     `hp_max=50` cannot come out at `hp_current=100 > hp_max=50` -- a state
+     `persistence_vitals.resolve(...).require()` refuses.
+  *  that statement also carries `AND (level IS NULL OR level > 0)`.  A `pf-adversary` pass
+     measured that a row at `level=0` with both HP ends NULL is REFUSED today and would have
+     become ACCEPTED after 007, carrying an unadjudicated zero level.  Same argument as the
+     pair, one column over.
+
+ONE THING THE DECISION DOES NOT COVER AND THIS LANE CANNOT DECIDE -- raised in the same
+letter, please read it before the next queue item: 007 seeds a COHORT, not a database.
+`create_character` writes none of the three columns, `006` set no DEFAULT, and the ledger
+stops 007 running twice, so every character created AFTER the migration has NULL vitals
+forever, and on a fresh install the census reads 0/0/0 right after a successful 007.
+Closing it needs a DEFAULT (a table rebuild) or a write at character creation -- both
+decisions about what every future character is born holding.  Pinned by
+`SeedsACohortNotADatabaseTests` so it cannot be forgotten quietly.

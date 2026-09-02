@@ -71,6 +71,14 @@ def check_cp874(repo):
                     detail.setdefault(rel, []).append((n, hex(ord(ch))))
     print("[cp874] scanned %d tracked .py files under %s"
           % (scanned, ", ".join(CP874_PREFIXES)))
+    if scanned == 0:
+        # R297 (chief, pf-adversary finding D5, second half): scanning nothing
+        # and printing PASS is the same false green as a check that could not
+        # run.  Zero tracked files under src/tools/current means --repo points
+        # somewhere that is not the server clone.
+        print("[cp874] INCONCLUSIVE - scanned 0 files. Is --repo really the")
+        print("        pirate-force-server clone?")
+        return None
     bad = []
     for rel in sorted(set(found) | set(CP874_ALLOWED)):
         got, want = found.get(rel, 0), CP874_ALLOWED.get(rel, 0)
@@ -153,16 +161,30 @@ def main():
     print("=== pf_gate_preflight on %s ===" % repo)
     results = [check_cp874(repo), check_new_skips(repo, args.base)]
     print("")
+    # R297 (chief, pf-adversary finding D5): a check that could not RUN is not
+    # a check that PASSED.  check_new_skips returns None when the base ref does
+    # not resolve (a remote named upstream, a --single-branch clone of a
+    # claude/* branch, a stale fetch).  The old test was "if False in results",
+    # and None is not False, so that run printed PREFLIGHT PASS having compared
+    # nothing -- a false green under a rule (COO-DECISION 20260902_0148 item 2)
+    # that now makes this tool mandatory before every push.
     if False in results:
         print("PREFLIGHT RED - fix the rows above before you push.")
         print("NOTE: a green preflight does NOT promise a green gate. A test")
         print("that passes on Linux and fails on Windows is out of scope here")
-        print("(that is what actually closed #495/#503); ask for a bridge job")
-        print("on Panya's machine when you touch persistence or attr code.")
+        print("(that is what actually closed #495/#503).  PANYA-DECISION")
+        print("20260902_0040: do NOT ask for a pre-push job on Panya's")
+        print("machine - she ruled that symptom is absorbed by the lanes.")
+        return 1
+    if None in results:
+        print("PREFLIGHT INCONCLUSIVE - a check could not run (see the rows")
+        print("above).  This is NOT a pass: fix the reason, usually a base ref")
+        print("that does not resolve (git fetch origin main, or pass --base).")
         return 1
     print("PREFLIGHT PASS (cp874 + no new skips).")
     print("NOTE: this does NOT promise a green gate - Windows-only runtime")
-    print("failures are out of scope and need a bridge job to catch.")
+    print("failures are out of scope.  A RED or INCONCLUSIVE preflight means")
+    print("DO NOT PUSH until it is fixed (AGENTS.md section 7).")
     return 0
 
 

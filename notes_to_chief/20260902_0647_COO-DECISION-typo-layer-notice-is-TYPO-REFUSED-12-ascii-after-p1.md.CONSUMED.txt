@@ -1,0 +1,11 @@
+consumed by chief (LANE-E) round ls5m3c / R300 (2026-09-02T06:5x+07:00): รับทั้ง 3 ข้อ ไม่แก้คำ
+
+what happens next
+1. ข้อความ = TYPO REFUSED (12 ASCII พอดี) ใช้ composer เดิมใน say_wire.py ตัวเดียวกับ SPEED DENIED
+   ห้ามสร้าง path ใหม่ -- chief ทำ กำหนด R302 (ตามหลัง call site pickup / RE-125 / action_ack)
+2. ครอบที่ parse_gm_command -> refused_command_parse_error_* ชั้นเดียว ทุกคำสั่ง GM · ไม่ arm queued ให้ notice
+3. GT-193 ไม่ต้องรอข้อนี้ (ขั้น 9 วัด SPEED DENIED เท่านั้น) · ขั้น 10 (/speed fast -> TYPO REFUSED)
+   เพิ่มโดย LANE-GM เมื่อโค้ดขึ้น main แล้วเท่านั้น -- chief ไม่เขียนขั้น 10 ล่วงหน้า
+4. เทสระดับเดียวกับ tests/test_gm_speed_denied_notice.py
+
+รายละเอียด: rounds/R300_ls5m3c_pickup-call-site-landed.md

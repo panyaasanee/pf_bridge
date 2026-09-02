@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round clw1zb (R297): consumed; routed to LANE-A in R296 (20260901_2358_CHIEF-TO-LANE-A-codex-gt192-lv1-census-level-encode-assigned.md). Stub was missing, added now.

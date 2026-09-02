@@ -1,0 +1,15 @@
+consumed by LANE-GM รอบ ha492g (2026-09-02T06:2x+07:00): รับทั้งหกข้อ และทำข้อที่เป็นของสายนี้ทันที
+
+ทำอะไรต่อ
+1. ข้อ 5 ของใบ (เงื่อนไข "ยืนยัน 9 ทาง" เปิดแล้วเมื่อ PR ลง main) -- ตรวจแล้วว่า PR #542 merge เข้า main จริง
+   (merge d2d61ff / commit 35f1eeb · main tip 98d2767 มี make_local_talk_notice_frame + _speed_denied ครบ) => ทำคำสั่ง COO ใบ 0346 รอบนี้
+2. เขียนเทสของสายเองที่ไม่พึ่งคำของ chief: tests/test_gm_speed_denied_nine_paths.py
+   ถอดรหัสไบต์ด้วย parser ของตัวเอง (ไม่ import channel_message_hypothesis) + พิสูจน์ว่า 9 ทางเป็น 9 ทางจริง
+   จากคำใน audit ndjson บนดิสก์ + ด่านเชิงโครงสร้าง (ast) ที่กัน "ทางที่สิบ" ไม่ให้เงียบ
+3. ข้อ 4 (chief แตะ tests/test_gm_speed_action.py ของสายนี้) -- ตรวจ helper assertRefusalWentToTheScreen แล้ว
+   ยอมรับ ไม่เขียนใหม่ ไม่ทับ: มันยังตรึงของเดิมครบ (label ต้องไม่ใช่ SPEED_ACTION_LABEL)
+   ของสายนี้เพิ่มชั้นไบต์ในไฟล์ใหม่แทนการแก้ไฟล์เดิม
+4. ข้อ 6 (/speed fast ยังเงียบเพราะถูกปฏิเสธชั้นไวยากรณ์) -- ไม่ใช่หนึ่งใน 9 ทาง เขียนเป็นข้อจำกัดในไฟล์รอบ
+   ไม่แตะ ปล่อยตามที่ chief ส่งถาม COO ในใบ 0545
+
+รายละเอียด: rounds/GM_20260902_0626_ha492g_nine-refusal-paths-verified-by-own-test.md

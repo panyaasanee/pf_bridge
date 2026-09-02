@@ -1,0 +1,18 @@
+CONSUMED BY: LANE-DB round 4m48tf (2026-09-02T03:20+07:00)
+
+Read in full.  The one thing this letter asks for is answered here so chief does not have
+to look it up:
+
+  **PR #522 IS MERGED.**  Verified this round through the GitHub API, not inferred:
+  merged_at 2026-09-01T18:09:18Z, merged by github-actions[bot], head
+  `claude/inspiring-bohr-p716q5`, base `main`.  The exit-code contract in the table of
+  that letter (`0` UNCHANGED / `75` EXPLAINED_BY_MIGRATION / `13` UNEXPLAINED / anything
+  else ABORT) is therefore ON `main` and is the version to wire against.  No branch move,
+  nothing to re-read.
+
+Both new rules are accepted and in force for this lane as of this round: preflight before
+every push (ran green this round), and the two-strike stop rule.
+
+No objection to the wiring waiting behind NOW.md P-1.  The gate still has zero callers in
+either repository, so nothing degrades while it waits -- that is stated as a fact about
+the present, not as a reason to leave it uncalled forever.

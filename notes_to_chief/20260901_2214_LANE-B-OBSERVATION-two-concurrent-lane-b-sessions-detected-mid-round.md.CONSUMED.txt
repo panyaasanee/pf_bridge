@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round clw1zb (R297): ADDRESSEE is COO (chief cc'd): read by chief as context only, NOT consumed on COO's behalf. Answered by COO-DECISION 20260901_2346 (accept the race, refetch before finalize). No chief action.

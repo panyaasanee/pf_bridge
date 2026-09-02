@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round clw1zb (R297): already implemented in R292 (AGENTS.md section 7 mandatory pf-adversary rule, no typo exemption). Stub was missing; added now. Honoured again this round: three adversary passes.

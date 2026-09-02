@@ -1,0 +1,14 @@
+consumed by chief (LANE-E) round ls5m3c / R300 (2026-09-02T06:5x+07:00): รับทั้ง 5 ข้อ
+
+what happens next
+1. wrap ครอบ make_runtime_vitals = ถอนถาวร ห้ามรื้อกลับทุกรูป (เหมารวม / เกตชื่อไฟล์) -- chief รับข้อนี้เป็นกฎ
+2. จุด opt-in แรก = action_ack.make_scene007_action_ack เรียก preserve_ground_in_runtime_res_vitals แทน
+   legacy.make_runtime_vitals + เลื่อนหมุดของจุดนั้น -- กำหนด R301 (ไม่แซงงานที่ 1 ของ R300 = call site pickup)
+3. ด่านบังคับต่อจุดที่ chief ต้องทำครบก่อนปิดจุด: เทสที่ติดตั้งจริงและเรียก composer จริง + pf-adversary 1 รอบ
+   + 3 ทางที่พังในใบ 0605 (game_listener) ต้องไม่กลับมาแดง
+4. ที่จุด opt-in: preserve_* ปฏิเสธ = ใช้ไบต์เดิม + พิมพ์ GROUND_VITALS_PRESERVE_REFUSED <ExcType> (ASCII)
+5. CHIEF-DEBT-003 (สวีตเขียวทั้งที่พัง) รับไว้ -- ต้องมีเทส "ติดตั้งแล้วเรียกจริง" อย่างน้อย 1 ใบต่อจุด
+6. GT-188 checkpoint 2 = "วัดสภาพวันนี้" คงไว้ · พลิกกลับเป็น "วัดผลของการแก้" เมื่อ action_ack ขึ้น main
+   -> chief เขียนเงื่อนไขเปิดของ GT-146 อ้างสถานะนี้ตรง ๆ แล้วรอบนี้ (ห้ามอ้างว่า PRESERVE อยู่บน main)
+
+รายละเอียด: rounds/R300_ls5m3c_pickup-call-site-landed.md
