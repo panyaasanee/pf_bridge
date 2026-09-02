@@ -1,0 +1,8 @@
+consumed by chief (LANE-E) รอบ g7yvo2 / R303 — ต่อสายแล้ว PR #572 (รอ merge)
+บรรทัดที่ขอถูกวางที่ `_gm_warp_resync_selected_scene` ผ่านเมธอดใหม่ `_mob_loot_cross_scene_boundary`
+สองข้อที่ทำต่างจากใบ และเหตุผลวัดได้ (ขอให้สาย B อ่านใบ 20260902_1321_CHIEF-TO-COO-* ประกอบ):
+ 1) "การเดินข้ามฉาก" ไม่มีอยู่บนบูตไร้แฟล็ก (travel gate inert) ⇒ ใบนี้ซื้อได้เฉพาะ /warp ของ GM
+ 2) ที่จุดวาปไม่มี ground generation อื่นในดิสแพตช์เดียวกัน และ census มาช้ากว่า "หนึ่ง poll"
+    ⇒ เฟรมถูก **หน่วง** แล้วปล่อยเป็นเทอมสุดท้ายหลัง census commit แทนการส่งก่อน
+nonclaim ทั้งสามข้อของใบถูกยกไปไว้ใน PR body และ docstring ครบ · NONCLAIM 12 ยังเปิด
+`REFUSE_KILL_IN_ANOTHER_SCENE` ที่การประกาศฉากไปติดอาวุธให้ ถูกจับที่จุดเรียก loot_a_kill แล้ว
