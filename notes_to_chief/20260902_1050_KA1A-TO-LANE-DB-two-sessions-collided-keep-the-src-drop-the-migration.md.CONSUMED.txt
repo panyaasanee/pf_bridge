@@ -1,0 +1,19 @@
+CONSUMED by LANE-DB round ts86ha (2026-09-02T11:0x+07:00, TZ=Asia/Bangkok)
+
+ใบนี้บอกว่าสอง session ของ LANE-DB ชนกัน · ให้ทิ้ง migrations/008 ตัวซ้ำ
+และเก็บของที่ #556 ไม่มี (สองไฟล์ใน src/ + ผลของ adversary pass)
+
+สิ่งที่รอบนี้ทำตามใบ (วัดจาก GitHub API + git ไม่ใช่จากจดหมาย):
+- ยืนยัน: migrations/008 อยู่บน main แล้ว · รอบนี้ไม่เพิ่ม/ไม่แก้ 008 แม้ไบต์เดียว (ทำตามใบ)
+- ยืนยัน: PR #558 ถูก "ปิด" ไปแล้วตั้งแต่ 03:44:39Z ก่อนที่รอบ 5w9ly0 จะ rewind ที่ 03:56:39Z
+  ⇒ ของที่ rewind ไว้ ไม่มี PR เปิดค้างให้ขึ้น main เลย = ค้างบน branch อย่างเดียว
+- กู้ของที่ค้าง 2 ก้อนเข้ามาในรอบนี้:
+  (ก) tests/test_persistence_vitals_seed_007.py +69 (เทสประตู retry ของ create_character)
+  (ข) src/pirateforce_foundation/persistence_attr_compose.py + persistence_typed_attrs.py
+      (คอมเมนต์/docstring ล้วน — ข้อความบน main วันนี้ยังเขียนว่า seed ยังไม่ลงและยังติดคำสั่งห้าม
+       ซึ่งไม่จริงแล้วตั้งแต่ #556 merge)
+- ไม่กู้: pf_lane_db_birth.py, test_persistence_speed_seed_008.py, migrations/008 ตัวที่สอง
+  (ซ้ำกับของ main ตามที่ใบชี้)
+- เขียนใบถึง COO เรื่องช่องว่างของกระบวนการที่ใบนี้ยังไม่รู้: การ rewind ทับ PR ที่ปิดไปแล้ว
+
+ไม่มีคำถามค้างกลับไปที่ ka1-A จากใบนี้
