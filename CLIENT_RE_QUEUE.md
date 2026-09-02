@@ -4117,3 +4117,45 @@ LANE-A เคยสร้างบนสมมติฐาน ก. ในรอ�
   `notes_to_chief/20260902_0205_CHIEF-TO-LANE-A-avatarattr-and-questattr-assigned.md` เรื่องที่ 2
 - numbering: `GT` สูงสุด 202, `RE` สูงสุด 201, grep `RE-202` ทั้งรีโปพบเฉพาะใบนี้ ⇒ `202`
 - result: (สาย RE กรอก: ก./ข./INCONCLUSIVE · VA + สแปน + ที่มา · timestamp)
+
+## 🔬 RE-206 TELEPORTVITAL-STRING-TAG-MISMATCH-190-AUX-PRESENCE-001 [OPEN -- เปิดโดย chief (LANE-E) รอบ `smrum3`/R301 2026-09-02T09:xx+07:00 ตามใบ `LANE-GM 20260902_0856` · ผู้ทำ: **สาย RE** (ผู้ทำสายเดียว ไม่ต้องจอง) · **LANE-GM บริโภคผลเอง** · 🔴 `[STATIC-ON-BRIDGE]` ต้องมี capture corpus ⇒ ทำบนคลาวด์ไม่ได้]
+
+`reference_codex_attr/PF_V5_FIELD_VALIDATION.md` `[MEASURED][CAPTURE]` เขียนสองแถวติดกันว่า
+`TeleportVital` **R = 190 mismatch เหตุผล `STRING_TAG`** ที่ field identity ซึ่งมีส่วน
+`DELTA:88ee2c5d...` (= `dedup_key` ของ delta แถว 613 = `TeleportAux.text` ที่ LANE-GM เพิ่งใส่ tag
+`0x48` ให้) และ **W = 188 mismatch เหตุผล `TAG` ที่ `ORDER:4`** (= `PF_SERIALIZER_FIELDS.tsv`
+แถว 570 = `TeleportTarget.scene_id` ซึ่ง **ไม่มีส่วน `DELTA` เลย**) · ยังแดงถึง V5
+
+**คำถามเดียวของใบนี้:** 190 ครั้งนั้นเกิดที่ **ไบต์ตำแหน่งใด** ของเฟรมจริงหนึ่งเฟรม
+และตรงจุดนั้น **aux presence เป็น 0 หรือ 1**
+
+- **สมมติฐานแรกที่มีคนเขียนลงกระดาษแล้ว** (`[PROPOSED]` ใน docstring ของ `gm/teleport_wire.py`):
+  static plan ประกาศ aux sub-object แบบ **ไม่มี presence gate** (แถว 579 `SUBCALL 0x005DEF10
+  DEREF(+0x1C)` ไม่มีเงื่อนไข presence) ทั้งที่ข้อความจริงมี gate ⇒ validator ไปหา `0x48`
+  ตรงจุดที่ object ไม่มีอยู่ · **ถ้าจริง**: การใส่ tag ไม่ได้ทำให้พัง แต่ทำให้ข้อบกพร่องเดิม
+  **มองเห็นได้เป็นครั้งแรก** ⇒ คำตอบนี้ปลด LANE-GM ให้เดินต่อได้โดยไม่ต้องถอน tag
+
+**เกณฑ์ปิดใบ (สองชั้นตามกติกา)**
+- ชั้น static/wire: ชี้ offset ในเฟรมจริงที่ mismatch เกิด + ค่า aux presence ณ จุดนั้น
+  พร้อม VA/สแปนของตัว validator ที่ตัดสิน · ต้องแยกให้ชัดว่าแถว W (188, ไม่มี DELTA)
+  เป็นคนละสาเหตุกับแถว R หรือสาเหตุเดียวกัน
+- ชั้น client-observable: **ใบนี้ไม่มีชั้นนี้และไม่ต้องมี** — เส้นวาปจริงที่ผู้เล่นใช้คือ
+  `legacy.make_login_teleport` (aux presence = 0) ไม่ผ่านโค้ดที่ใบนี้ถาม
+  (ใครอ้างว่าใบนี้พิสูจน์อะไรที่ผู้เล่นเห็น = อ้างผิด)
+
+**ข้อห้าม**
+- 🔴 ห้ามใช้ผลใบนี้เป็นเหตุถอน tag `0x48` โดยลำพัง — helper ตัวนั้นมีหลักฐานสามชั้นยันอยู่
+  (delta rows · `channel_message_hypothesis.py` เทียบเฟรมจริง GT-006 ตั้งแต่ 18 ส.ค. ·
+  `pf_login_game_server_v141.py:21-24` บันทึกว่า **client จริงปฏิเสธเฟรม** เมื่อส่ง `0x44`)
+- ห้ามแก้ `external/PF_FIELD_VALIDATION.tsv` (V1 aggregate ที่ยังเขียน `mismatch 0` — stale
+  สำหรับแถวนี้) ในใบนี้ · ห้ามเลื่อนสถานะ `gm/teleport_wire.py` ด้วยเทสของตัวเอง
+- กติกาหัวข้อ 14 ข้อ 13 ก/ข: แถวของ Codex เป็นหลักฐานชั้น IMAGE · อ่านคอลัมน์ `nonclaim` ก่อนใช้
+
+- links: `LANE-GM 20260902_0856` (ใบต้นทาง) · `reference_codex_attr/PF_V5_FIELD_VALIDATION.md` ·
+  `PF_A2_STRING_WIRE_TAG_DELTA.tsv` sha `e1f4f987c31f53d4dd87845aab01857c8415a8dbcd750af12df9c4cde208b3a2` ·
+  `PF_SERIALIZER_FIELDS.tsv` แถว 570/579 · `pirate-force-server/src/pirateforce_foundation/gm/teleport_wire.py` ·
+  `docs/GM_LANE.md` แถว `0x25A2` · `VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv` (`0x25A2 TeleportVital`) ·
+  ใบ ka1-B `20260901_2215`
+- numbering: รันคำสั่งกฎ ② หัว `GAME_TEST_QUEUE.md` ตอนเปิด = `205` (ใบ `GT-205` ของรอบเดียวกันนี้) ⇒ ใบนี้ = `206`
+- RECHECK: `grep -c 'TeleportVital' notes_to_chief/reference_codex_attr/PF_V5_FIELD_VALIDATION.md` -- ยังมีแถวแดงอยู่ = ใบยัง OPEN จริง
+- result: (สาย RE กรอก: offset + aux presence 0/1 + VA/สแปน + แถว W คนละสาเหตุหรือไม่ · timestamp +07:00)

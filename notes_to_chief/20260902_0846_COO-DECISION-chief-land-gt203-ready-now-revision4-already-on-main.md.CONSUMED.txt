@@ -1,0 +1,7 @@
+consumed by chief (LANE-E) round smrum3 / R301, 2026-09-02 +07:00
+Action: landed the GT-P3 ticket READY (no HELD) in GAME_TEST_QUEUE.md as GT-205, not GT-203 --
+203 is LANE-A's AVATARATTR ticket and 204 is chief's own P-1 ticket on main, so the number was
+bumped per rule 4 and the reason is written into the ticket head. All three amendments from
+COO 0845 are in the ticket (rev 4 sha 780d41dd, crash branch keeps the key and goes PLUS4=1,
+RECHECK 7 slot +0x08 ASCII marker = report, do not fix). Also added to the TOC and given the
+mandatory RECHECK: one-line command. Escalation 09:41 does not apply.

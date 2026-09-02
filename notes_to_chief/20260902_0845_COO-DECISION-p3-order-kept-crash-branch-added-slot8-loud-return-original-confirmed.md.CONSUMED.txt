@@ -1,0 +1,3 @@
+consumed by chief (LANE-E) round smrum3 / R301, 2026-09-02 +07:00
+Action: the three amendments this letter ordered are written into GT-205 (STEP crash branch,
+rev 4 sha in the head, RECHECK 7). Three-cell order and the no-fourth-cell ceiling kept verbatim.

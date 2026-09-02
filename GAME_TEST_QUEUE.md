@@ -39,6 +39,7 @@
 
 - 🆕 **`GT-182` GM-A-WARP-NO-COORD-LIVE-SPAWN-001** (✅ **PASS — OBSERVER_CONFIRMED 2026-09-01T10:40+07:00, chief round `8zf80f`** — แก้โดย chief รอบ `liq4ri` ตาม `COO-DECISION 20260901_1341` ข้อ 2 (หัวใบเดิมล้าสมัยเขียนว่า `BLOCKED-ON-ATTENDED`) · `/warp <mapnum>` ไม่ใส่พิกัดครั้งแรกของ session ผ่านแล้ว · **แต่วาปข้ามหลายแมพติดกันแล้วเจอ NPC ทุกแมพยังไม่ผ่าน — ดูใบใหม่ `GT-192`** · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-192` GM-A-WARP-MULTI-MAP-CENSUS-CHAIN-001** (🟢 **PENDING บูตได้เลย · attended** — เปิดโดย chief ตาม `COO-DECISION 20260901_1341` ข้อ 1 (ตอบใบ `20260901_1256`) · ผู้ทำ: **LANE-GM** · วาปข้ามอย่างน้อย 3 แมพติดกันด้วย `/warp <mapnum>` (ไม่ใช่ใบแรกของการล็อกอิน — `GT-182` พิสูจน์ใบแรกแล้ว) แล้วเช็คว่าเจอ NPC ปกติครบทุกแมพที่ไปถึง — พิสูจน์ census latch ที่แก้แล้วบน `main` (`runtime.py:5459-5470`, สเปกใบ `20260901_1035`+`20260901_1120`) · ใบเต็มอยู่ท้ายไฟล์)
+- 🆕 **`GT-205` GM-PLUGIN-THREE-CELL-BUTTON-001** (🟢 **READY บูตได้เลย · attended** — ใบที่ `COO-DECISION 20260902_0846` เรียกว่า `GT-P3`/`GT-203`; เลข `203`/`204` ถูกใช้ไปแล้ว จึงเป็น **`205`** · ร่างโดย LANE-GM `0731`, ลงคิวโดย chief R301 `smrum3` · P-3 ปุ่ม GM: **สาม build เท่านั้น** ห้ามช่องที่สี่ (`COO 0648`+`0845` + ตาราง README) · `patches/gm_plugin/` **revision 4** `780d41dd` บน `main` ⇒ **คำห้าม build ถอนแล้ว** · ตัวตัดสิน = บรรทัด `[GM_PLUGIN]` ใน DebugView · 🔴 ลำดับคือ build→install→**ขั้น 0**→บูต และ **rollback ทุก build** · bounded negative ใช้ได้เฉพาะเมื่อเห็น `alive, returning interface` ทุก build · ใบเต็มท้ายไฟล์)
 - 🆕 **`GT-183` GM-B-SPEED-COMMAND-001** (🔴 **BLOCKED — BLOCKED-ON-WIRING** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (GM-B) · ผู้ทำ: **LANE-GM** · `/speed <value>` คำสั่งแชท GM จริงบน `main` เขียน `ActorAttr` x7 (+0x54 f32) — เดโมแล้วนอก main โดยเจ้าของ (`PF_ADHOC_ATTR_PROBE`) ค่าปกติประเมิน 400 ยังไม่ยืนยันตาราง/ไบนารี · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-184` UI-A-PART-A-BACK-TO-CHARSELECT-BUTTON-001** (🔴 **BLOCKED — สืบทอดจาก `GT-033` (ANSWERED — สองท่าที่ลองแล้วให้ผลลบ)** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งแรก) · ผู้ทำ: **LANE-A** · ปุ่มกลับหน้าเลือกตัวละครจากในเกม ต้องพาไปจริงกลางเซสชัน · แยกจาก `GT-185` ตามกฎหนึ่งใบหนึ่งข้อพิสูจน์ · ใบเต็มอยู่ท้ายไฟล์ · **[อัปเดต round `tmizmk` 2026-09-01 15:58+07:00] allowlist ที่หกลงแล้ว พร้อมบูตด้วย `--logout-hypothesis-scenario scenarios/logout_hypothesis_dialog_open_push.json` -- ยังไม่พลิก `production_allowed` (รอ attended pass ก่อนตาม stop_rule) พร้อมให้ผู้เทส attended หยิบได้แล้ว**)
 - 🆕 **`GT-185` UI-A-PART-B-BACK-INTO-GAME-ROUNDTRIP-001** (🔴 **BLOCKED — precondition: `GT-184` ต้อง PASS ก่อน** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งหลัง) · ผู้ทำ: **LANE-A** · จากหน้าเลือกตัวละคร เลือกแล้วกลับเข้าเกมได้จริงในโปรเซสเดิมไหม — ปลดล็อกการเปลี่ยนฉากซ้ำโดยไม่บูตใหม่ · ใบเต็มอยู่ท้ายไฟล์ · **[อัปเดต round `tmizmk`] precondition ยังคือ `GT-184` ต้อง PASS ก่อน — สถานะไม่เปลี่ยน แค่ construction path ของ `GT-184` พร้อมแล้ว**)
@@ -10421,3 +10422,126 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
   ตราบใดที่ยังไม่มีบรรทัดนี้ สถานะใบคือ **`AWAITING-OBSERVER` ไม่ใช่ `PASS`** และห้ามยกผลใบนี้ไปเป็นฐานของใบอื่น
 
 **ผู้เปิดใบ: chief (LANE-E) รอบ `ls5m3c` / R300 ตาม `COO-DECISION 20260902_0542` ข้อ 3**
+
+## GT-205 GM-PLUGIN-THREE-CELL-BUTTON-001  [READY]
+
+> 🔴 **NUMBERING:** ใบที่ `COO 0846`/`LANE-GM 0731` เรียกว่า `GT-P3`/`GT-203` **คือใบนี้** · `203` เป็นของ LANE-A
+> และ `204` เป็นใบ P-1 ของ chief ไปแล้ว ⇒ +1 (หัวข้อ 4) · เลข `205` ว่างจริงตอนลง ไม่มีใบไหนถูกย้าย
+> 🔴 `NOW.md` P-3 ยังเขียนว่า "ใบ `GT-203`" — **ชี้ผิดใบ** (`GT-203` คือใบ AvatarAttr ของ LANE-A) ·
+> chief แก้ `NOW.md` เองไม่ได้ (ผู้เขียนคือ Panya กับ COO) ⇒ ขอไว้ในใบ `CHIEF-TO-COO 20260902_0920`
+
+- objective: ข้อเดียว — ปุ่ม GM ที่กดแล้วเงียบมาตั้งแต่ `RE-104` (27 ส.ค.) เปิดหน้าต่างได้หรือไม่
+  เมื่อมี `GameMaster.dll` ที่เราสร้างเองอยู่ข้าง client (สถานะ GM ยังตัดสินที่ `gm_accounts` ฝั่งเซิร์ฟเวอร์เท่านั้น)
+
+- ของที่ใช้: `patches/gm_plugin/` **revision 4** sha `780d41dd` [วัดแล้ว: เป็น ancestor ของ `main`, 07:58+07:00]
+  ไม่ใช่ revision 3 (ไม่เคย commit) · **คำห้าม build ถอนแล้ว** (`COO 0845`)
+  install/rollback ตาม `patches/gm_plugin/README.md` (`install.bat "<client folder>"` ห้าม copy เอง)
+
+- 🔴 **เปิด DebugView ค้างไว้ก่อนบูตทุกครั้ง** — ทั้งใบตัดสินด้วยบรรทัด `[GM_PLUGIN]` ไม่มีตัวจับ = อ่านผลไม่ได้เลย
+
+### ลำดับต่อหนึ่ง build (ห้ามสลับ — ขั้น 0 อยู่ **หลัง** install)
+`build` → `install.bat` → **ขั้น 0** → บูต → ล็อกอินบัญชีใน `gm_accounts` → **กดปุ่ม GM หนึ่งครั้ง** → ปิดเกม → **rollback**
+
+- **ขั้น 0** (จาก checkout ของ `pirate-force-server` · `set PYTHONPATH=src`) — 🔴 ใส่เครื่องหมายคำพูด **ทั้งสองพาธ**
+  (พาธของเจ้าของมีช่องว่าง ไม่ใส่ = argparse ตัดครึ่งแล้วรายงานผิดใบ):
+  `py -3 -m pirateforce_foundation.gm.plugin_image_check --dll "<build>\GameMaster.dll" --client-dir "<client>"`
+  · ค่าที่ต้องได้คือ `verdict=image_ok` (แปลว่า ไฟล์ที่ติดตั้ง = ไฟล์ที่เพิ่ง build)
+  · 🔴 **รันก่อน install จะได้ `verdict=missing` exit 1 เสมอ** — นั่นไม่ใช่ของเสีย แค่รันผิดลำดับ
+  · 🔴 `verdict=manifest_missing` = **หยุด build นี้ บันทึก แล้วรายงาน LANE-GM** — เป็นช่องโหว่ของ build chain
+    (`build_vs2008.bat` ไม่มีขั้น `mt.exe` และ VS2008 ไม่มี `/MANIFEST:EMBED`) **ไม่ใช่ความผิดของผู้เทส**
+    และ **ห้ามบูตทั้งที่เห็นค่านี้** [เสนอ โดย pf-adversary รอบ `smrum3` — ยังไม่มีใครสร้างจริงบน MSVC]
+  · exit code อื่นที่ไม่เป็น 0 = หยุด ห้ามบูต แก้ตามที่มันบอกก่อน
+- 🔴 `install.bat` ปฏิเสธเพราะเจอ `GameMaster.dll` เดิม → **ก่อนรายงานว่าเจอของเก่า ให้เทียบ sha256 ของไฟล์นั้น
+  กับ sha256 ที่ขั้น 0 ของ build ก่อนหน้าบันทึกไว้เสมอ** · ตรงกัน = **ของเราเองที่ลืม rollback** ให้ลบแล้วเดินต่อ ·
+  ไม่ตรง = **หยุดทั้งใบ** เก็บ sha256 แล้วรายงานทันที (นั่นคือของที่ตามหามาตั้งแต่ 27 ส.ค. `RE-164`)
+- **rollback ทุกครั้งที่จบ build ไม่ว่าผลจะเป็นอะไร**: ลบ `GameMaster.dll` ที่ติดตั้งออกจากข้าง client
+  (ไม่มี patch ไบต์ ไม่มี registry ไม่แตะ DB) · ลืมข้อนี้ = รอบหน้าจะอ่านของเราเองเป็นหลักฐาน `RE-164` ผิด ๆ
+
+### BUILD (นับเป็น **build** ไม่ใช่ "ช่อง" — เพดาน **สาม build** ทั้งใบ รวมกิ่งแครช)
+| build | `PF_GM_KEY` | `PLUS4` | คำสั่ง | build เมื่อ |
+|---|---|---|---|---|
+| 1 | `GMUI_1` | 0 | `build_vs2008.bat` เปล่า ๆ | เสมอ |
+| 2 | `GMUI_BASIC` | 0 | `set EXTRA_DEFS=/D PF_GM_KEY=L\"GMUI_BASIC\"` | build 1 มี `loaded` + `client CRT:` แต่คลิกไม่เปิด |
+| 3 | `GMUI_1` | 1 | `set EXTRA_DEFS=/D PF_GM_SLOT0_TOUCH_PLUS4=1` | build 2 ยังไม่เปิด |
+
+🔴 **`set` เขียนทับ ไม่ได้บวกกัน** — build 3 จึงกลับไปเป็น `key=GMUI_1` **โดยตั้งใจ** (ตรงกับตาราง README)
+เห็น `key=GMUI_1` ใน build 3 = **ถูกแล้ว ห้าม rebuild** · ห้าม build `GMUI_BASIC` + `PLUS4=1` (ช่องที่สี่) ทุกกรณี
+
+🔴 **STOP ก่อนเปลืองรอบ — ถ้า build 1 ขึ้น `loaded` แต่คลิกแล้ว *ไม่มี* บรรทัด `client CRT:`**
+= client ยังไม่เคยเรียก `CreateGameMaster` ⇒ `PF_GM_KEY` และ `PLUS4` **ยังไม่ถูกอ่านเลย**
+⇒ build 2 กับ build 3 เป็นการทดลองที่เหมือน build 1 ทุกประการ **หยุดทั้งใบตรงนี้ รายงาน** อย่า build ต่อ
+(นี่คือผลลัพธ์ที่มีค่า ไม่ใช่รอบเสีย: มันชี้ไป `GM-IMG-005`/`RE-164` โดยตรง)
+
+🔴 **กิ่งแครช (`COO 0845` ข้อ 2)** — แครช **ตอนคลิก**:
+- แครชใน **build 1** → build ถัดไป = `PLUS4=1` คง key เดิม (`GMUI_1`+`PLUS4=1`) = แถว 3 ของตาราง **ทำได้**
+  build นี้กินโควตาไปหนึ่ง ⇒ เหลืออีกหนึ่ง build เท่านั้นทั้งใบ
+- แครชใน **build 2** (`GMUI_BASIC`) → 🔴 **หยุดทั้งใบ รายงาน ห้าม build ต่อ** — เพราะ "คง key เดิม + `PLUS4=1`"
+  จะกลายเป็น `GMUI_BASIC`+`PLUS4=1` = **ช่องที่สี่ที่ README ห้ามไว้** · `COO 0845` กับตาราง README ขัดกันตรงนี้
+  และยังไม่มีใครตัดสิน ⇒ แครชใน build 2 เป็น **ผลที่ต้องรายงาน** ไม่ใช่เหตุให้ build ต่อ
+- 🔴 **ห้ามใช้ "sha256 เปลี่ยน" เป็นหลักฐานว่าแฟล็กถึง compiler** — DLL ฝัง `__DATE__`/`__TIME__` ทุก rebuild
+  จึงเปลี่ยน sha เสมอแม้ลืม `set` · ตัวควบคุมจริงคือบรรทัด `EXTRA_DEFS=` ที่สคริปต์พิมพ์ กับ `key=`/`slot +0x00 +4 init:`
+
+### RECHECK (ตามลำดับ ข้อ 1 ทำให้ข้ออื่นมีความหมาย · ทุกบรรทัดมีอยู่จริงในซอร์ส revision 4 [วัดแล้ว])
+1. `[GM_PLUGIN] loaded build=<วันเวลา>` **ตอนบูต** — บรรทัดแรกสุดที่ `DllMain` พิมพ์ ก่อนโค้ดที่ fault ได้
+   ⇒ **ไม่มี = DLL ไม่เคยถูกโหลด** (ข้ออื่นไม่ต้องอ่าน) · 🔴 บรรทัดนี้บอก **เวลา build ไม่ได้บอก revision**
+2. **บรรทัดผลของการคลิก — ข้อที่ตัดสินว่ารอบนี้ได้ข้อมูลจริงหรือไม่** คัดมาทั้งบรรทัด ห้ามสรุปเอง
+   หนึ่งในห้าบรรทัดนี้ต้องขึ้นตอนคลิกครั้งแรก:
+   · `alive, returning interface` ← **ปลั๊กอินทำงานครบและส่งของให้ client จริง**
+   · `FAIL alloc: client CRT operator new unavailable; returning NULL`
+   · `FAIL: msvcp90 wstring ctor unresolved and PF_GM_SLOT0_TOUCH_PLUS4=1; returning NULL` (เจอได้เฉพาะ build 3)
+   · `FAIL exception in CreateGameMaster; returning NULL`
+   · **ไม่มีสักบรรทัด** = client ไม่เคยเรียก `CreateGameMaster` (ดู STOP ข้างบน)
+3. `client CRT: ...` / `msvcp90 wstring ctor: ...` / `self-pin: ...` ขึ้น **ตอนคลิกครั้งแรก ไม่ใช่ตอนบูต**
+   [วัดแล้ว ในซอร์ส: `ResolveOnce()` ถูกเรียกจาก `CreateGameMaster` ที่เดียว · `DllMain` เขียนเองว่า deferred]
+   [เสนอ: ว่า **การคลิก** คือสิ่งที่ไปถึง `CreateGameMaster` — นั่นคือคำถามของทั้งใบ ยังไม่มีใครวัด]
+   · `client CRT:` เขียน `REFUSING` **หรือ** `NOT FOUND` ให้คัดพาธ/ข้อความที่ตามมาด้วยทั้งหมด
+4. `key=` และ `slot +0x00 +4 init:` ตรงกับตาราง BUILD ข้างบนของ build ที่กำลังเทส
+   🔴 สองบรรทัดนี้ขึ้น **สองรอบต่อเซสชัน** (ตอนบูตจาก `DllMain` และตอนคลิกครั้งแรกจาก `ResolveOnce`) — อ่าน**ของตอนบูต**
+5. **คลิกแล้วหน้าต่าง `GMUI_1` เปิด ถึง tab `GMUI_BASIC` หรือไม่** ← ข้อที่ตัดสินทั้งใบ
+6. ปิดเกมแล้วไม่แครช (มีความหมายเมื่อข้อ 1 ผ่าน) · แครชตอนปิด ให้ดู `self-pin:` ก่อนเสมอ
+7. 🔴 `slot +0x08 called with no MSVCP90 ctor` = **หลักฐานใหม่ ต้องรายงาน ห้ามแก้เอง**
+   (`GM-IMG-014` blocker `NO_PINNED_CALL_ROUTE_FOR_SLOT8`)
+
+### หลักฐานสองชั้น
+- **client-observable** = ภาพหน้าจอตอนคลิก (เปิด/ไม่เปิด) + ข้อความ debug ทั้งชุดของแต่ละ build
+- **wire/DB** = ใบนี้ **ไม่มีชั้นนี้และไม่ต้องมี** ปลั๊กอินเป็น client ล้วน ไม่แตะ vital ไม่แตะ DB ไม่เปิด canonical
+  (`gm_accounts` เป็นไฟล์ JSON allowlist ไม่ใช่ DB) · ใครอ้างว่าใบนี้พิสูจน์อะไรฝั่งเซิร์ฟเวอร์ = อ้างผิด
+
+### เกณฑ์ปิดใบ
+- **PASS** = build ใด build หนึ่งเปิดหน้าต่างได้ → บันทึกว่า build ไหน แล้วปิด P-3
+- **bounded negative** = 🔴 **ใช้ได้ต่อเมื่อทุก build ขึ้นบรรทัด `alive, returning interface`** (RECHECK 2)
+  แล้วยังไม่เปิดสักอัน → "ปลั๊กอินทำงานครบแล้ว แต่ประตูไม่ได้อยู่ที่ตัวปลั๊กอิน" → กลับไป `RE-164` ผู้ต้องสงสัยข้อ 1
+  (`GM-IMG-005` gate `GMModule_Client+0x19`) **ห้ามอ่านว่า "ปลั๊กอินใช้ไม่ได้"**
+  🔴 เห็น `FAIL ...` หรือไม่เห็นบรรทัดไหนเลย = **ไม่ใช่ bounded negative** เป็น `INCONCLUSIVE-PLUGIN-NEVER-RAN`
+  ⇒ ห้ามใช้ปิดหรือเบนงานของ `RE-164` เด็ดขาด (ปลั๊กอินไม่เคยได้ลอง key ที่ใบนี้ตั้งใจจะเทส)
+  ⚠️ ระวัง: `GM-IMG-005` เขียนเองว่าไบต์นั้นคุม **ทั้ง show และ click gate** แต่ปุ่ม **มองเห็นได้** (`RE-104`)
+  ⇒ ถ้าจะสรุปไปทางนั้น ต้องอธิบายความตึงข้อนี้ก่อน [เสนอ ยังไม่มีใครไล่ disassembly]
+- **BLOCKED** = ไม่มี `loaded` เลย → ผลของ `plugin_image_check` คือคำตอบ ไม่ใช่การเดา
+  ⚠️ `image_ok` แต่ไม่มี `loaded` **และเกมเปิดไม่ขึ้นด้วย** = คนละอาการ (ตายใต้ loader lock)
+  ⇒ ลบไฟล์ออก ยืนยันว่าเกมกลับมาเปิดได้ บันทึกแล้วรายงาน — อย่าวนไป build ถัดไป
+
+### ของแถม / result / links
+- ของแถม (`RE-164` · NOW.md P-3): มี `GameMaster.dll` อยู่ข้าง exe **ก่อน** ติดตั้งของเราไหม — ตอบ มี/ไม่มี หนึ่งบรรทัด
+  (ถามก่อนแตะอะไร เพราะหลัง build แรกจะแยกไม่ออกจากของเราเอง)
+- ก่อนเริ่ม: ยืนยันหนึ่งบรรทัดว่าบัญชีที่จะล็อกอิน **อยู่ใน** `config/gm_accounts.json` จริง —
+  ไม่งั้น "คลิกเงียบ" แยกไม่ออกระหว่าง "ไม่มีสถานะ GM" กับ "ปลั๊กอินเงียบ"
+- links: `COO 20260902_0846` `0845` `0648` · `LANE-GM 0731` `0801` `0856` · `RE-164` · `RE-104` ·
+  `patches/gm_plugin/README.md` (ตารางช่อง + install/rollback) · `PF_GM_PLUGIN_GATE.tsv` (`GM-IMG-001..017`)
+- RECHECK: `git -C <pf_bridge> merge-base --is-ancestor 780d41dd HEAD`
+  -- exit 0 = **checkout ที่จะ build อยู่จริงที่ revision 4** (ใช้ `HEAD` ไม่ใช่ `origin/main`: fetch แล้วแต่ยังไม่ merge
+  จะทำให้ `origin/main` ผ่านทั้งที่ working tree ยังเป็น revision 2 ที่ถูกห้าม) · คำสั่งเดียว ไม่มี `&&` (PS 5.1 ไม่รับ)
+- result: (ผู้เทสกรอก) จำนวน build ที่ทำจริง + บรรทัด `EXTRA_DEFS=` ของแต่ละอัน · `verdict` + sha256 คู่จากขั้น 0 ทุก build ·
+  บรรทัด `[GM_PLUGIN]` ทั้งชุดต่อ build (**แยกตอนบูต / ตอนคลิก**) · บรรทัดผลของ RECHECK 2 ทั้งบรรทัด ·
+  ภาพหน้าจอตอนคลิก · เปิด/ไม่เปิด · แครชหรือไม่ (ตอนคลิก / ตอนปิด) · rollback ทำแล้วทุก build หรือไม่ ·
+  คำตอบหนึ่งบรรทัดของ `RE-164`
+  🔴 **G-OBS:** จดหมายผลต้องมีบรรทัด `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>` ·
+  ไม่มี = **`AWAITING-OBSERVER` ไม่ใช่ `PASS`** ห้ามยกผลใบนี้ไปเป็นฐานของใบอื่น
+- nonclaim: (1) หน้าต่างเปิด **ไม่ใช่** ข้อพิสูจน์ว่าคำสั่ง GM ใดทำงาน และไม่ใช่ไมล์สโตน
+  (2) ไม่อ้างว่า revision 4 คอมไพล์ผ่าน MSVC — ไม่มี toolchain บนคลาวด์ (`COMPILE-UNVERIFIED` อยู่หัวไฟล์)
+  (3) ไม่อ้างว่าปลั๊กอินคือสาเหตุของ P-3 — กำจัดผู้ต้องสงสัยหนึ่งตัวเท่านั้น
+  (4) ใบนี้ไม่ให้สถานะ GM กับใครเลย เป็นเครื่องมือไปถึงสภาพที่จะเทส
+
+**ผู้เปิดใบ: LANE-GM รอบ `q6p0pb` (ร่าง `0731`) · chief (LANE-E) รอบ `smrum3`/R301 ลงคิวตาม `COO-DECISION 20260902_0846`**
+**แก้ตาม pf-adversary รอบเดียวกัน 16 ข้อ** (ลำดับขั้น 0 · `manifest_missing` · กิ่งแครช build 2 ขัดตาราง README ·
+`alive, returning interface` เป็นเงื่อนไขของ bounded negative · STOP เมื่อไม่มี `client CRT:` · rollback ทุก build ·
+sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้บน PS 5.1 · quote พาธ · ค่าคาดหวังต่อ build)
