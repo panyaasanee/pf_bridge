@@ -46,9 +46,49 @@ NOW.md `01:50` + `COO-DECISION 20260903_0148` ยกเจ้าของ P-0 �
    รูปเดิม (ฟังก์ชันระดับโมดูล) ⇒ นับได้ 0 ต่อ pin 3 ⇒ `test_pytest_precondition_census.py` แดง 2 ตัว
    **ผมเจอเพราะซ้อมเต็มก่อน push ไม่ใช่เพราะอ่านเจอ** — กฎนี้ไม่ได้เขียนไว้ที่ไหน
 
-## ทำไมรอบนี้รันชุดเต็มสองครั้ง
-ครั้งแรก (ซ้อมเกตในสภาพไม่มี `pf_bridge` ข้าง ๆ ตามกติกา `2344` + COO `0148` ข้อ 3)
-คือตัวที่**เจอ** `2 failed` ข้างบน ⇒ แก้ ⇒ ต้องรันใหม่บนคอมมิตสุดท้ายจริง
+## ทำไมรอบนี้รันชุดเต็มสามครั้ง
+1. ซ้อมเกตครั้งแรก (สภาพไม่มี `pf_bridge` ข้าง ๆ ตามกติกา `2344` + COO `0148` ข้อ 3)
+   ⇒ ตัวนี้คือตัวที่**เจอ** `2 failed` (`PinFileTests`) ที่ไม่มีทางเจอด้วยการอ่าน
+2. หลังแก้ ⇒ เขียวทั้งคู่ · แต่ pf-adversary ยังไม่จบ
+3. หลังแก้ตาม D2 D4 D5 D7 ⇒ **รันใหม่บนคอมมิตสุดท้ายจริง** (กติกาบังคับ)
+ครั้งที่ 1 กับ 3 ราคาเต็ม ครั้งที่ 2 คือราคาของการไม่รอ adversary ก่อน commit — รอบหน้ารอให้จบก่อน
+
+## pf-adversary หาอะไรเจอ และแก้อะไรไปแล้ว
+รันหนึ่งครั้งบน commit `862400f` (27 นาที · 60 tool call) รายงานเจ็ดข้อ D1-D7
+
+- **D1 (บล็อก)** = ตัวเดียวกับ "สองอย่างที่วัดแล้ว" ข้อ 2 ข้างบน — มันวัดซ้ำได้เอง และยืนยันว่า
+  **สแนปช็อตก่อนแก้ตายทั้งสองเครื่อง** (`2 failed` ที่ `PinFileTests`) ⇒ ปิดไปแล้วก่อนมันรายงาน
+- **D2 แก้แล้ว**: กิ่ง `AssertionError` (`../pf_bridge` มีแต่ไม่มี `install.bat`) **ไม่เคยถูกรันบนเครื่องไหนเลย**
+  มันวัด mutation: เปลี่ยนกิ่งนั้นเป็น `pytest.skip("mutant")` ⇒ **เขียวทั้งสองเครื่อง**
+  = เอารูปที่ฆ่า `#611` กลับเข้ามาแบบซ่อนไว้ ⇒ เพิ่ม
+  `test_a_missing_install_bat_raises_loudly_instead_of_skipping` (monkeypatch `_install_bat`)
+- **D4 แก้แล้ว**: ข้อความใน `AssertionError` พูดว่า "`../pf_bridge` อยู่ข้าง ๆ แต่ไม่มี install.bat"
+  **โดยไม่ได้ถาม** ⇒ บนเกตมันโกหก ⇒ แยกเป็น `_missing_install_bat_message(sibling_present)`
+  สองกิ่ง อ่านกลับได้ด้วยเทส
+- **D5 แก้แล้ว (ข้อที่คมที่สุด)**: `test_install_bat_refuses_rather_than_warns...` เดิมห้าม
+  **สตริงเดียว** `goto do_copy` มันเขียน batch ที่ทำ §7 ของ COO (`PFGM_FORCE=1`) ด้วย
+  `goto pfgm_forced_copy` แล้ววัดได้ว่า **เทสเขียว ทั้งที่การปฏิเสธไหลไปถึง copy จริง**
+  ⇒ เปลี่ยนเป็นเดินกราฟ label ของ batch (`_labels_reachable_from`) ที่นับ **fall-through เป็นเส้น**
+  ด้วย ⇒ ลบ `exit /b 1` ทิ้งแล้วตกลง `:pfgm_stale_tool` → `:do_copy` ก็จับได้
+  (เทสของ walker ใช้ batch สังเคราะห์ ไม่ใช่ไฟล์จริง เพราะบนเกตไม่มีไฟล์จริง และผู้อ่านคนที่สี่
+   จะทำให้ pin ขยับจาก 3 เป็น 4)
+- **D7 แก้แล้ว**: `note` ใน pin ไม่ได้ติดป้ายว่าเป็นข้อเสนอ ⇒ ใส่
+  `[PROPOSED - pending COO confirmation]` ลงใน `note` เอง ไม่ใช่แค่ในไฟล์รอบ
+- **D3 ไม่แก้ในรอบนี้ เขียนใบขอแทน**: `bridge_sibling` กว้างเกิน (ถามว่าโฟลเดอร์มี ไม่ได้ถามว่าไฟล์มี)
+  สะพานแบบบางหรือเก่ากว่า `8fcb92d` ⇒ 4 แดง · key แคบต้องไปอยู่ `tests/pf_preconditions.py`
+  ซึ่ง**ไม่ใช่เขตเขียนของสายนี้** และ COO อนุญาตให้แตะเฉพาะ `PYTEST_SKIP_PINS.json`
+  ⇒ ใบ `20260903_0303_LANE-GM-TO-CHIEF-*` (ผู้ทำสายเดียว: chief) · **ไม่บล็อกใคร** เพราะแดงแบบเสียงดัง
+- **D6**: มันยืนยันว่า `test_the_module_constant_and_the_pin_say_the_same_number`
+  (`vars(InstallBatContractTests)`) เป็นการวัดจริง ไม่ใช่ tautology · แต่ชี้ว่า
+  `assert "[precondition:bridge_sibling]" in BRIDGE_SIBLING.reason` เป็น tautology
+  ซ้ำกับ `RegistryTests` — **รับไว้ ไม่ลบ** เพราะบรรทัดข้าง ๆ มันคือคำถามที่ถามเครื่องจริง
+  (สะพานมีแล้ว `install.bat` ต้องมี) ซึ่ง census ถามไม่ได้
+
+## คำถามที่ pf-adversary ทิ้งไว้ และผมส่งต่อให้ chief
+"สัญญาที่ว่า skip ของ precondition ต้องอยู่ในคลาส `unittest.TestCase` — ตั้งใจ หรือเป็นอุบัติเหตุ
+ของ AST walker ตัวเดียว ที่โมดูลใหม่ทุกตัวจะค้นพบใหม่ด้วยการเสียรอบเหมือนกัน"
+ไม่มีใน `AGENTS.md` ไม่มีใน `EVIDENCE_GATES.md` และ `pf_preconditions.py` หัวไฟล์เขียน
+`skip_unless_present()` กับ `require()` ไว้เท่ากัน ⇒ อยู่ในใบ `0303` ข้อ 2
 
 ## backlog ของสายนี้ (ยังบล็อกอยู่ที่ใคร)
 - **§7 `PFGM_FORCE=1` ใน `install.bat`** — COO อนุมัติแล้วในใบ `0148` แต่สั่งเองว่า
@@ -65,7 +105,7 @@ NOW.md `01:50` + `COO-DECISION 20260903_0148` ยกเจ้าของ P-0 �
 - bridge สาขา `claude/awesome-gates-kv2vjk` · PR **#919**
 - ซ้อมแบบเกต (คัดลอกรีโปไปที่ที่ไม่มี `../pf_bridge` · ล้าง `__pycache__` · ใช้ `--ignore` สูตรเดียวกับ workflow):
 
-      pytest tests -q -rs   exit=0   7158 passed, 81 skipped, 14172 subtests passed (255s)
+      pytest tests -q -rs   exit=0   7161 passed, 81 skipped, 14172 subtests passed (245s)
       skip_census           exit=0   RESULT: PASS
                                      bridge_sibling  tests/test_gm_plugin_image_check.py  x3
 
