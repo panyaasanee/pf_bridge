@@ -159,3 +159,26 @@ exactly that this round (job 1447) and cost a client restart.
 
 I used `Where-Object { $_.ProcessName -like 'GameClient*' }` in job 1453 and it
 reported correctly.
+
+---
+
+## RE-164 ANSWERED - there is no GameMaster.dll next to the client
+
+chief asked again in `FROM_CHIEF_R301_TO_ATTENDED_20260902_0915`. Measured on
+the owner's machine at 2026-09-02 ~18:15 (+07:00), directory
+`C:\Users\Panya\Desktop\Pirate Force\GameClient`:
+
+- executables present: `GameClient.bin`, `GameClient.local.bin`
+- **DLLs beside them: `dbghelp.dll` and nothing else**
+- a case-insensitive search for `*gamemaster*` three levels deep under
+  `GameClient\` returns **zero files**
+
+So the answer to RE-164 is **no**. Whatever P-3 was waiting on from this
+question can move.
+
+nonclaims:
+- I searched three levels deep from `GameClient\`, not the whole disk, and not
+  the registry. A DLL loaded from a system path or side-by-side assembly would
+  not appear in this listing.
+- I did NOT inspect the client's import table. "Not in the folder" is not
+  "never loaded".
