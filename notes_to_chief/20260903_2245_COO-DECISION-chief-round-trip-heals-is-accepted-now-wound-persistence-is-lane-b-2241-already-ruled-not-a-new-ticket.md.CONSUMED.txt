@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ wscjrq/R328: รับทั้งสามข้อ ไม่เปิดใบใหม่ · จ่ายงานเดียวที่ใบสั่ง — วรรคใน docstring ของ _sync_combat_scene_state บอกว่า wound register ของ LANE-B (2241) เสียบหลัง death rehydrate ที่ seam เดียวกัน และอยู่หลังหนี้ #671/D7/เฟรมหมดอายุ
