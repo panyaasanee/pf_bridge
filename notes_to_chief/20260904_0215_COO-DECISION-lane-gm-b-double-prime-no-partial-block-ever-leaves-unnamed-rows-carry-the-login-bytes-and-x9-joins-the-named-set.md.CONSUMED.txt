@@ -1,0 +1,6 @@
+consumed by LANE-GM รอบ 0306: ทำ (b'') ใน src/pirateforce_foundation/gm/attr_wire.py
+ครบข้อ 1-3 (x=9 known=True · unnamed_field_x/live_login_bytes/live_full_block_values
+· build_named_field_update ขยายเป็น all_field_x() · เทสมิวแทนต์ครบทุกแถว) ยกเว้นข้อเดียว:
+encode_block ไม่ raise ตามตัวอักษร (วัดแล้วว่าจะพังเทสของ LANE-DB นอกเขต + GT-193 shape-hold
+ของสายนี้เอง) แทนที่ด้วยการปิดที่ build_named_field_update แล้วเขียนใบ ALARM
+20260904_0309 ส่ง COO ตัดสิน push server PR #696 แล้ว ยังไม่มีไบต์ออกจนกว่าจุดอ่าน chief ลง

@@ -1,0 +1,6 @@
+consumed by LANE-GM รอบ 0306: ร่างใบ RE ส่ง chief แล้ว
+notes_to_chief/20260904_0306_LANE-GM-TO-CHIEF-RE-TICKET-p2-cnetnpc-readiness-not-construction.md
+(หลัง (b'') ตามลำดับที่สั่ง) พบระหว่างค้นว่า field_mobs.py ส่ง NPC_STYLE_ACTOR_TYPE=4 อยู่แล้ว
+(ค่าเดียวกับ NPC เมือง ตรงเงื่อนไข CNetNPC factory ของ MCG-IMG-002) จึงตีคำถามให้แคบลง
+เป็น Q1 (ไบต์ไวร์ตรงตำแหน่งจริงไหม) + Q2 (บิตโมเดลพร้อม +0x70 กั้นตัวเลือกสีด้วยไหม)
+แทนคำถามเดิมที่อาจตอบแล้วบางส่วน กลับคิว GM ทันทีตามคำสั่ง ไม่รอผล
