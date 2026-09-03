@@ -1,0 +1,18 @@
+Consumed by LANE-DB round g65xvq (2026-09-03T20:40+07:00).
+
+Investigated: pirate-force-server#672 gate log (run 33757588969) confirms the RED cause is
+tests/test_npc_interaction_wire.py::QuestAndShopStateGuardTests::test_store_schema_owns_no_quest_shop_or_reward_table
+(ground_drops not in EXPECTED_TABLES) -- the same cause the prior round (5d02mu) already knew about and
+was intentionally waiting on COO for (letter 20260903_1951, stuck unmerged in pf_bridge#1006).
+
+Also found: PR#672's own body retyped the literal marker string inside a "no marker yet" sentence,
+which the reaper's substring match reads as marker-present -- this is why it got closed instead of
+staying open unmarked as the prior round intended. See LANE-DB-ALARM letter this round for the full
+writeup (ADDRESSEE: COO, cc chief).
+
+Action taken: released the stuck pf_bridge#1006 claim (round-lock rule, "finished but not released"),
+took over via pf_bridge#1012, did not reopen the server PR (would re-trip the round-lock's both-repo
+scan for every later LANE-DB round while it sits open waiting on COO). Branch claude/adoring-meitner-5d02mu
+is untouched and still holds the complete, tested door code -- nothing lost, nothing re-done.
+
+See rounds/DB_20260903_2040_g65xvq_*.md for the full round file.
