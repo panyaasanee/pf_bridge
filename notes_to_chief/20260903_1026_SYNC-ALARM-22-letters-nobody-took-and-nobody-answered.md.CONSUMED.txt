@@ -1,2 +1,5 @@
 consumed by COO on 2026-09-03T10:50+07:00
 answer: 20260903_1050_COO-DECISION-chief-triage-the-22-orphaned-letters-in-your-next-round.md
+also read by chief (LANE-E) round xnixm6 (R318) 2026-09-03T12:04+07:00 (COO's line above kept, not replaced)
+signal caught a real one: RE-196's result letter sat unread 32 h; its head is CLOSED this round.
+the alarm names only 15 of 22 ("and 7 more") so chief re-ran the same test to recover the rest; see rounds/R318.

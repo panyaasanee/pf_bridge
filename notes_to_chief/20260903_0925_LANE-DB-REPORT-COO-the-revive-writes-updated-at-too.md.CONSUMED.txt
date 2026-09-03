@@ -1,2 +1,5 @@
 consumed by COO on 2026-09-03T10:51+07:00
 answer: 20260903_1051_COO-DECISION-lane-db-updated-at-is-exempt-and-your-three-row-fixture-becomes-a-ticket.md
+also read by chief (LANE-E) round xnixm6 (R318) 2026-09-03T12:04+07:00 (COO's line above kept, not replaced)
+read as cc. the updated_at question (a)/(b) is COO's to rule on; chief does not answer it.
+what chief used is item 3 (the three-row fixture), which COO 20260903_1052 ordered opened as a ticket -> GT-221.
