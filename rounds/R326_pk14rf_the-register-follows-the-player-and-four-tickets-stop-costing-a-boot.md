@@ -91,11 +91,11 @@
 
 pf-adversary หักร่างแรกของ `_sync_combat_scene_at_edge` ได้ 5 จุด แก้ครบในรอบเดียวกัน แต่ละจุดมีการ์ด:
 1. 🔴 [รุนแรงสุด] ledger/register ขาดคู่ — `_sync_combat_scene_state` ทำ atomic แล้ว (build register ลง local ก่อน assign) ⇒ raise แล้วสามฟิลด์อยู่ฉากเดิมครบ ไม่ตีกลับ `target_not_in_ledger` นอก try
-2. 🔴 ฉากไม่ระบุ 313/330 ยังโกหก `mobs=4` — แก้ให้ **ล้าง register ว่าง** เมื่อเข้าฉากไม่ระบุ (ไม่ปล่อยค้าง) · attack ยังปฏิเสธเองด้วย `_sync_combat_scene_state`
+2. 🔴 ฉากไม่ระบุ 313/330 ยังโกหก `mobs=4` — **แก้ที่ tick ไม่ใช่ที่ register** (ร่างแรกล้าง register ซึ่งชนกติกา LANE-B `test_scene_scoped_combat_wiring` ที่ว่า "ฉากไม่ระบุ = refusal ไม่ใช่ arrival" ⇒ ห้ามสลับฉากตอนปฏิเสธ) · แก้ใหม่: ปล่อย combat state ไว้ตามเดิม แล้ว **gate tick + live line ด้วยเงื่อนไข folder ของ register ตรงกับฉากที่ยืนอยู่** ⇒ ฉากไม่ระบุ (และช่วงดีเลย์หนึ่งเฟรม) tick ไม่ทำงาน ไม่มี lie · ไม่มีการสลับฉาก กติกา LANE-B คงอยู่
 3. event โตทุกเฟรม — เพิ่ม `combat_scene_edge_scene_id` guard ขยับก่อนทำงาน ⇒ หนึ่ง event ต่อการมาถึง (กฎ `runtime.py:1269`)
 4. จุดเรียกที่สองใน warp resync = น้ำหนักตาย — ลบออก เหลือตัวตรวจจับหัว dispatch ตัวเดียว ดีเลย์หนึ่งเฟรมเท่ากันทุกประตู
 5. โทเคน/การ์ดหาย — เพิ่มการ์ดจน 6/7 มิวแทนต์อันตรายตาย · ตัวรอด (ลบ folder-compare) เป็น near-equivalent (ไม่มี scene_id สองตัว map folder เดียว)
 
-การ์ด 11 ใบ · เต็มสวีตบน worktree แพตช์ 8,824 passed · ซ้อมไม่มี `pf_bridge` ข้าง ๆ ผ่าน · ledger PASS
+การ์ด 12 ใบ · เต็มสวีตบน worktree แพตช์ 8,824 passed (ก่อน reconcile) · หลัง reconcile รันชุดเกี่ยวข้อง 402 passed + full subset · ซ้อมไม่มี `pf_bridge` ข้าง ๆ ผ่าน · ledger PASS
 **เรื่องที่ส่ง COO เคาะ (ใบ `2050`):** round trip รักษาแผลมอน (ฆ่า→ตายค้าง เกือบฆ่า→หายเอง) — เสนอรับสภาพ หรือเปิดใบ wound-persistence ให้ LANE-B
 **merge origin/main เข้ากิ่งเซิร์ฟเวอร์แล้ว** (`0038088c` · #673 LANE-GM warp) · รันเต็มบนต้นไม้ที่ merge แล้วก่อน push
