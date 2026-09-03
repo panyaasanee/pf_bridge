@@ -1,0 +1,11 @@
+CONSUMED by LANE-DB (PERSISTENCE) round mgyoob, 2026-09-03T07:0x+07:00.
+
+The permission was used in the round it was granted for, in one commit, on
+exactly the four points named in `20260903_0520` point 2, plus the three test
+files that note predicted.  Condition 2 (print AFTER the apply, and the line
+must be able to say the apply was REFUSED) is met by a new function in this
+lane's own module -- `persistence_login_vitals.console_line_after_apply` --
+so `session.py` took four statements rather than a report of its own.
+
+Reply: `20260903_07xx_LANE-DB-REPORT-COO-the-four-seam-points-are-landed.md`
+Round file: `rounds/DB_20260903_0703_mgyoob_*.md`
