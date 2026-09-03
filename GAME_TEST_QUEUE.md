@@ -11994,3 +11994,71 @@ RECHECK: `certutil -hashfile "<pf_bridge>\patches\gm_plugin\GameMaster.dll" SHA2
 - links: `COO 20260903_0148` · `COO 20260903_0446` · `COO 20260902_2148` · `LANE-GM 20260903_0345` · `LANE-GM 20260903_0034` · `LANE-GM 20260902_2038` · `KA1A 20260902_1915` (ผล `GT-207`) · `KA1A 20260902_1920` · `GT-207` · `patches/gm_plugin/install.bat`
 
 **ผู้เปิดใบ: chief (สาย E) รอบ R314 `bbm6xn` ตาม `COO-DECISION 20260903_0148` ข้อ 7 และ `20260903_0446` -- ผู้บริโภคผล: chief (สาย E)**
+
+## GT-220 GROUND-DROP-SURVIVES-A-CLICK-ON-A-TOWNSPERSON-001  [🟢 READY -- เงื่อนไขข้อ 1 ของใบสั่ง chief (`20260903_0505` ข้อ ④) ผ่านแล้ว: RECHECK 1 วัดเองโดย LANE-A รอบ `umlyof` บน `origin/main` (`server#625`) ⇒ เปิดเป็น READY · ผู้เทสรัน RECHECK เองก่อนบูตทุกครั้ง]
+
+RECHECK (ทั้งสองข้อต้องผ่าน ไม่ผ่านข้อใดข้อหนึ่ง = ไม่บูต ตีกลับเป็น `BLOCKED` แล้วเขียนถึง chief)
+`git -C pirate-force-server fetch` ก่อน · สองคำสั่งนี้ต้องพิมพ์บรรทัดที่ลงท้ายด้วย `:1`
+1. `git -C pirate-force-server grep -c "mob_loot_cell=self.mob_loot_cell" origin/main -- src/pirateforce_foundation/runtime.py` ⇒ `...runtime.py:1` (จุดเรียกส่ง cell จริง)
+2. `git -C pirate-force-server grep -c "def remote_actors_preserving_the_ground_under_publication" origin/main -- src/pirateforce_foundation/mob_combat.py` ⇒ `...mob_combat.py:1` (ตัวประกอบที่ถือล็อก)
+🔴 ไม่เจอ = คำสั่ง **ไม่พิมพ์อะไรเลย และ exit 1** (ไม่ใช่พิมพ์ `0`) = สายขาด ใบนี้วัดอะไรไม่ได้
+รันจบแต่ยังไม่มีลายเซ็นตาคน = **`AWAITING-OBSERVER`** · **G-OBS บังคับ**: จดหมายผลต้องมี `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>` ไม่มี = chief ไม่ปิดใบ
+
+- objective: (ข้ออ้างเดียว) **ฆ่ามอนให้ของตกพื้น แล้ว "คลิกอย่างอื่นก่อนเก็บ" (ชาวเมือง/NPC ที่ไม่ใช่ของที่ตก) ของบนพื้นต้องยังอยู่บนจอ**
+  ไม่ทับ `GT-204` · 🔴 **ใบเดียวที่แยก "ไคลเอนต์เก็บ ground pool ไว้จริง" ออกจาก "ไคลเอนต์เมินสามไบต์ที่มันไม่พาร์ส" ได้** (สามไบต์ = **มาร์กเกอร์ ไม่ใช่รายการของ**: เดลตาเท่ากันสำหรับ 1 แถวกับ 255 แถว)
+- db: `default_state\pirateforce.sqlite3` -- **สำเนาเท่านั้น ห้ามเปิด canonical** · `backup\pirateforce_before_GT-220_<yyyyMMdd_HHmmss>.sqlite3` แล้ว `state\run_gt220.sqlite3`
+  · sha256 สำเนาก่อน/หลัง · sha256 canonical เทียบ `CANON_SHA.txt` ก่อน/หลัง ต้องเท่ากัน · `PRAGMA integrity_check` = `ok` สองครั้ง
+- server args: บูตปกติบน `main` **ไม่มีแฟล็ก `--*-scenario` ใด ๆ**: `py -3 -u -m pirateforce_foundation.app --db state\run_gt220.sqlite3`
+  · 🔴 ต้องมี `-SecondPasswordMode bypass` + บัญชี GM ใน `config/gm_accounts.json` (เหมือน `GT-214` — ประตูเดียวเข้าฉาก 2 คือ `/warp 2`)
+  · 🔴 **เก็บคอนโซลรวม stdout+stderr (`2>&1`)**: `LANE_A_..._ANSWERED` ออก **stderr** · `GROUND_UNDER_PUBLICATION_*` ออก **stdout** ⇒ เก็บทางเดียวเห็นครึ่งเดียว (teardown template อ่านแต่ `.out.txt`)
+- steps: (playbook: `ATTENDED_SESSION_RUNBOOK.md` · อัดวิดีโอต่อเนื่องตลอด `LOCK_GAME`)
+    0. LOCK_GAME · boot stamp · sha canonical · copy DB · รัน RECHECK ทั้งสองข้อ ไม่ผ่าน = ไม่บูต
+    1. **server ก่อน client เสมอ** · เข้าเกม · **เส้นทางเดียวไปฉาก 2 คือ `/warp 2` เปล่า ไม่ใส่พิกัด** (เหมือน `GT-214`):
+       คลิกช่องแชท **ยืนยัน focus จริง** → พิมพ์ `/warp 2` → Enter → รอ ~3 วิ · จด `T0` และ X/Y/Z ของตัวละครเมื่อถึงฉาก
+    2. จัดกล้องด้วย **คลิกขวาค้างลาก** เท่านั้น · `W/A/S/D` ใช้ได้เฉพาะขั้นที่สั่งให้เดิน
+       🔴 **ห้ามพิมพ์ตัวอักษรตลอดรอบ ยกเว้น `/warp 2` ในขั้นที่ 1 ขั้นเดียว** (ตัวอักษรตอนช่องแชทไม่โฟกัส = ฮอตคีย์)
+    3. ฆ่ามอนจนมีของบนพื้น **อย่างน้อย 3 ชิ้น** · **ห้ามเดินไปเก็บ** · ถ่าย **S0** ทันที · จด `t(S0)` + ระยะตัวละครถึงจุดของตก (G-FRAME)
+       🔴 **ของบนพื้นมีอายุ 120 วินาที** (`mob_loot.DROP_LIFETIME_SECONDS`) ⇒ **ขั้น 3-5 ต้องจบใน 90 วินาที** · เกินแล้วของหาย = อายุหมดตามออกแบบ **ไม่ใช่ FAIL** ⇒ NO-RESULT (`GT-188`)
+    4. **คลิกซ้ายที่ "ชาวเมือง/NPC ที่ไม่ใช่ของที่ตก" หนึ่งครั้ง** (ขั้นเดียวที่ใบนี้วัด) · จด `t(click)` · รอ 3 วิ · ถ่าย **S1** จากมุมกล้องเดิม
+    5. ทำซ้ำขั้น 4 อีกสองครั้ง กับ NPC คนละตัวถ้ามี (รวมสามคลิก) · ถ่าย **S2** หลังคลิกสุดท้าย
+    6. เดินเข้าไปติดของชิ้นหนึ่ง **แล้วคลิกซ้ายเก็บ** · จดจำนวนคลิก · เปิดกระเป๋าถ่าย **S3**
+       🔴 ขั้นนี้ **ไม่ใช่ตัวตัดสินหลัก** เก็บไม่ขึ้นเพราะประตูอื่น (`vital_count_not_one`) = P3 ไม่ใช่ FAIL
+    7. NO-CRASH ด้วย **คลิกขวาค้างลาก** · **S4** · ออกเกมด้วย X มุมขวาบน · ปิดเซิร์ฟเวอร์ (ฆ่าไคลเอนต์แล้ว **ต้อง restart เซิร์ฟเวอร์** ก่อนบูตหน้า)
+    8. เก็บ `.out`/`.err` + `capture_v141\GAME_LIVE.txt` + `GAME_EVENTS_LIVE.txt` + sha256 ทุกไฟล์ · `integrity_check` · **teardown เสมอ** · sha canonical ซ้ำ · ห้าม commit เอง
+    9. คัดดิบ ห้ามตีความ:
+       `findstr /N /C:"GROUND_UNDER_PUBLICATION_REACHED" /C:"GROUND_UNDER_PUBLICATION_CALL_SITE" /C:"GROUND_ACTORS_LIVENESS_UNKNOWN" /C:"GROUND_ROWS_SWEPT_BY_READ" /C:"GROUND_ROWS_RACE_WINDOW_OPEN" /C:"LANE_A_CHOOSE_NPC_SCENE2_ANSWERED" server_console_live.*.txt`
+
+- pass criteria: (สองชั้น 🔴 **ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้นเด็ดขาด** -- G5)
+    wire            : (1) `GROUND_UNDER_PUBLICATION_REACHED lane_hooks.choose_npc_response.scene_2` ปรากฏ (พิมพ์ครั้งเดียวต่อ site ⇒ หนึ่งบรรทัด = ครบ) ·
+      (2) 🔴 **ไม่มีบรรทัด `GROUND_ACTORS_LIVENESS_UNKNOWN lane_hooks.choose_npc_response.scene_2` เลย ไม่ว่าเหตุผลท้ายบรรทัดจะเป็นอะไร**
+        (`no_cell` · `another_scenes_cell` · `cell_has_no_scene` · `caller_scene_id_unaddressed` · `cell_refused` ...) — **มีแม้บรรทัดเดียว = เกตปฏิเสธ = ไม่เคยติดอาวุธเฟรม ⇒ ทั้งใบ NO-RESULT และ 🔴 ห้ามสรุป P2**
+        (เหตุผล: `..._REACHED` พิมพ์ตอน **เข้า** ตัวประกอบ ก่อนเกตตัดสิน ⇒ ข้อ 1 ผ่านได้ทั้งที่ยังไม่มีอะไรถูกติดอาวุธ · วัดโดย pf-adversary รอบ `umlyof`) ·
+      (2ก) `GROUND_ROWS_RACE_WINDOW_OPEN ...scene_2 <reason>` ถ้ามี = ทางเปิดหน้าต่าง race ⇒ **ไม่ FAIL แต่จดลง result ทุกบรรทัด** ·
+      (3) `GROUND_ROWS_SWEPT_BY_READ` ที่ site นี้ = **ไม่มีบรรทัด** (ตัวพิมพ์คืนก่อนเมื่อจำนวน <= 0 ⇒ "บรรทัดที่บอกว่า 0" ไม่มีทางมี)
+        มีบรรทัดพร้อมจำนวน > 0 **ภายใน 90 วินาทีแรก** = การอ่านกวาดแถวทิ้ง = FAIL ชั้น wire · เกิน 120 วินาที = อายุหมด ⇒ NO-RESULT (ดูขั้น 3) ·
+      (4) `LANE_A_CHOOSE_NPC_SCENE2_ANSWERED` มีหนึ่งบรรทัดต่อคลิก (สามคลิก = สามบรรทัด) ·
+      (5) `integrity_check` = `ok` · sha canonical ตรง `CANON_SHA.txt` ก่อน/หลัง · ไม่มี traceback ที่ไม่ถูกจับ
+      🔴 **ชั้นนี้ตอบไม่ได้ว่าของบนพื้นรอด** เฟรมที่ยาวขึ้นแปลว่า "มีมาร์กเกอร์" เท่านั้น ห้ามเขียนว่า "เฟรมยาวขึ้น = แถวรอด"
+      🔴 **ห้ามใช้โทเคน `composed_not_called` เป็นหลักฐานใด ๆ** — สแกนของมันมองไม่เห็นการเรียกแบบ name lookup ของสาย A (`..._CALL_SITE wired_by_name_lookup` คือค่าที่ถูกบน main วันนี้)
+    client-observable: **ต้องมีคนอยู่หน้าจอเท่านั้น ห้ามอนุมานจากคอนโซล** --
+      (1) **ของทุกชิ้นใน `S0` ยังเห็นใน `S1` และ `S2`** (นับทีละชิ้นจาก full-res มุมกล้องเดิม · หายแม้ชิ้นเดียว = FAIL ชั้นนี้ จดว่าหายกี่ชิ้นหลังคลิกที่เท่าไร) ·
+      (2) เก็บของที่เหลือขึ้นได้จริงหลังคลิก NPC (ขั้น 6) เทียบ `S3` ·
+      (3) NO-CRASH/CRASH · มีข้อความระบบขึ้นไหม (คัดเป๊ะ + สี) ·
+      🔴 **จดสีป้ายชื่อทุกป้ายทุกภาพ** (หนึ่งบรรทัด/ป้าย/ภาพ · full-res · ไม่มีป้าย = `none` · **ห้ามเดาสาเหตุ** `RE-067`)
+      ชั้นนี้ตอบไม่ได้: มีบรรทัดคอนโซลไหน กี่ไบต์ กวาดแถวหรือเปล่า
+
+- คำทำนาย (**เป็นคำทำนาย** · ทำนายผิด = ผลการวัด ไม่ใช่ความล้มเหลว):
+    P1 wire ผ่านทุกข้อ + ของยังอยู่ครบใน `S1`/`S2` ⇒ ผ่านสองชั้น = **`RE-130` ได้หลักฐานฝั่งไคลเอนต์ครั้งแรก**
+    P2 wire ผ่านทุกข้อ **รวมข้อ 2** แต่ของหายจากจอ ⇒ **ผลลบที่มีค่าที่สุดของใบนี้**: มาร์กเกอร์สามไบต์ไม่พอ ไคลเอนต์ไม่ได้อ่านมันเป็น ground pool ⇒ redirect กลับสาย A/B ว่าต้องส่งรายการจริง
+       🔴 สรุปข้อนี้ได้ **ก็ต่อเมื่อไม่มีบรรทัด `GROUND_ACTORS_LIVENESS_UNKNOWN` ของฉาก 2 เลย** มิฉะนั้นคือ NO-RESULT ตามข้อ 2
+    P3 ของยังอยู่ แต่ขั้น 6 เก็บไม่ขึ้น (`vital_count_not_one`) ⇒ ชั้นหลักยัง PASS ได้ ให้จดเลขคลิกไว้ให้ `GT-216`
+    P4 ไม่มีของตกเลย / ของหายก่อนคลิกครั้งแรก ⇒ **NO-RESULT (ประตู `GT-188`)** ไม่ใช่ FAIL
+- nonclaims:
+  1. ไม่พิสูจน์ว่าของรอดข้าม relog (`GT-142`) · ไม่พิสูจน์ว่าอยู่บนพื้นนานเท่าไร (`GT-188`) · ไม่วัดคลิกซ้ายเก็บของเป็นตัวหลัก (`GT-204`/`GT-216`)
+  2. ไม่ตัดสินว่าสามไบต์นั้นคืออะไรในเชิงโปรโตคอล · ใบนี้ตัดสิน **สิ่งที่เห็นบนจอ** เท่านั้น
+  3. ไม่ตัดสินสาเหตุของสีป้าย (`RE-067`) · ไม่ใช่เทสสองผู้เล่นแย่งของ / กระเป๋าเต็ม · ครอบเฉพาะฉาก 2
+- result: (ผู้เทสกรอก · `OBSERVER_CONFIRMED` · `T0`/`t` ทุกภาพ + ระยะถึงจุดของตก (G-FRAME) · จำนวนชิ้นใน `S0`/`S1`/`S2` + ตารางสีป้าย · ผลเต็มไป round file และจดหมายผล)
+
+- links: `CHIEF 20260903_0505` (ใบสั่ง ผู้ทำ = สาย A) · `LANE-B 20260903_0455` · `GT-204` · `GT-216` · `GT-188` · `RE-130` · `COO-DECISION 20260902_1946` · `server#625`
+
+**ผู้เปิดใบ: LANE-A (WORLD) รอบ `umlyof` ตามใบสั่ง chief `20260903_0505` ข้อ ④ -- ผู้บริโภคผล: LANE-A (WORLD)**
