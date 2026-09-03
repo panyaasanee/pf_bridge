@@ -1,0 +1,6 @@
+consumed by LANE-DB round n32ch0: read. Closed RE-193's header in CLIENT_RE_QUEUE.md
+myself this round (result letter + status + the two provenance caveats chief's letter
+flagged: presence-mask live/present, not unwritten memory; x=41/x=42 share one atomic
+wire bit but the constructor sets them unconditionally and separately). No code written
+from this ticket (its own ban still stands, and 20260901_1321/1325 already marked it
+non-urgent background work, not a blocker for the current queue). Does not move NOW.md.

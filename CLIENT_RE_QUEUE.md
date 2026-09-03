@@ -3732,7 +3732,30 @@ runner/Codex บนสะพาน) ไม่ต้องพึ่งไฟล�
 (ผลลัพธ์: ยังทำไม่ได้ในวันนี้) · ข้อห้าม "ห้ามเขียนโค้ดสีมอนสเตอร์จากใบนี้" **ยังยืนอยู่** และรอบ `wggs0i`
 ปฏิบัติตามโดยไม่คัดลอก palette ลงรีโปเลยแม้แต่ค่าเดียว
 
-## 🔬 RE-193 ACTORATTR-SEVEN-UNKNOWN-FIELDS-CLIENT-DEFAULT-VALUES-001 [STATIC-ON-BRIDGE]: what does the client itself write, at object-creation time, into the 7 `ActorAttr` fields (of 55 total in `gm/attr_wire.py:166-224`) that have neither a server-owned typed-column source nor a codex `default_writer_va` row today -- `x=14 nameboard_key (0x090, u32)`, `x=25 wstr_B0 (0x0B0)`, `x=36 u8_18C (0x18C, u8)`, `x=41 q_140_pairB (0x140, u64)`, `x=42 u8_9B_pairB (0x09B, u8)`, `x=43 wstr_CC (0x0CC)`, `x=54 u16_1B0 (0x1B0, u16)` (`x=41`/`x=42` share one mask bit)?  [OPEN — assigned LANE-DB]
+## 🔬 RE-193 ACTORATTR-SEVEN-UNKNOWN-FIELDS-CLIENT-DEFAULT-VALUES-001 [STATIC-ON-BRIDGE]: what does the client itself write, at object-creation time, into the 7 `ActorAttr` fields (of 55 total in `gm/attr_wire.py:166-224`) that have neither a server-owned typed-column source nor a codex `default_writer_va` row today -- `x=14 nameboard_key (0x090, u32)`, `x=25 wstr_B0 (0x0B0)`, `x=36 u8_18C (0x18C, u8)`, `x=41 q_140_pairB (0x140, u64)`, `x=42 u8_9B_pairB (0x09B, u8)`, `x=43 wstr_CC (0x0CC)`, `x=54 u16_1B0 (0x1B0, u16)` (`x=41`/`x=42` share one mask bit)?  [🟢 **CLOSED PASS/DONE — ผลมาถึง 2026-09-02T04:53+07:00, ปิดหัวใบโดย LANE-DB รอบ `n32ch0` 2026-09-03T14:xx+07:00 ตามสัญญาผู้บริโภคของใบเอง, ดูผลด้านล่าง**] ~~[OPEN — assigned LANE-DB]~~
+
+### result — 🟢 CLOSED PASS/DONE (ปิดหัวใบโดย LANE-DB รอบ `n32ch0` 2026-09-03T14:xx+07:00, ล่าช้า 31 ชั่วโมงจากที่ผลมาถึง — `chief` รอบ `xnixm6` (R318) ชี้ว่าหัวใบยังไม่ปิดในจดหมาย `20260903_1206_CHIEF-TO-LANE-DB-*.md`)
+
+ผล: `notes_to_chief/20260902_0453_RE-193-RESULT-SEVEN-ACTORATTR-DEFAULTS-CLOSED.md`
+(มี `.CONSUMED.txt` คู่กัน — chief อ่านแล้วแต่ไม่ปิดหัวใบแทน ตามกฎ v6.3 "ใครเปิดใบ คนนั้นบริโภคผล")
+
+ตอบครบทั้งเจ็ดฟิลด์แบบ `[ORIGINAL EVIDENCE: DATA]` recursive entry-follow ปิดครบ 124/124
+instructions, 601/601 bytes: ทั้งเจ็ดฟิลด์ (`x=14,25,36,41,42,43,54`) default เป็น `0` (รวม `x=41`
+ซึ่งเป็น `u64` เต็ม) หรือสตริงว่าง `L""` (`x=25`,`x=43`) ตรงตัว พร้อม writer VA + span + `span_sha256`
+รายฟิลด์ในใบผล
+
+สองอย่างที่ต้นทางเขียนกำกับไว้ ซึ่งฝั่งบริโภค (LANE-DB) ต้องอ่านก่อนเขียนโค้ด seed ใด ๆ จากตารางนี้:
+
+1. **ไม่ใช่ "ศูนย์เพราะหน่วยความจำยังไม่ถูกเขียน"** — constructor ตั้ง presence mask `+0x1B4`/`+0x1B8`
+   เป็น `0xFFFFFFFF` และ `+0x1BC = 1` อย่างมีเงื่อนไข ⇒ ค่าเหล่านี้ **live/present จริง** ไม่ใช่หน่วยความจำ
+   ที่ยังไม่ถูกแตะ — ห้ามอ่านศูนย์เหล่านี้เป็น "ยังไม่ตั้งค่า"
+2. **`x=41` กับ `x=42` แชร์บิตร่วมกันแบบ atomic บนไวร์** (ไม่มี branch คั่นระหว่างฝั่งเขียนกับฝั่งอ่าน) **แต่
+   constructor ตั้งค่าทั้งคู่แยกกันแบบไม่มีเงื่อนไข** — ถ้าสายนี้ seed คอลัมน์ให้สองตัวนี้ในอนาคต ต้องตั้งทั้งคู่
+   พร้อมกันเสมอ ตั้งตัวเดียวไม่พอ
+
+🔴 **ทั้งใบเป็นหลักฐานชั้น IMAGE เท่านั้น** (แกะไบนารีนิ่ง) — ไม่มีอะไรถูกเห็นบนจอในผลนี้ ยังไม่มีโค้ด seed
+ใด ๆ เขียนจากใบนี้ (ข้อห้ามของใบเองยังยืน) และยังไม่เร่งด่วนตาม `20260901_1321`/`1325` — เปิดไว้เป็นงาน
+พื้นหลังปิดช่องว่าง ไม่ใช่ตัวบล็อกคิวปัจจุบันของสายนี้ (`/speed` เดินได้แล้วโดยไม่ต้องรอชุดนี้)
 
 ### ทำไมเปิดใบนี้ (มอบหมายตรงจาก COO)
 
