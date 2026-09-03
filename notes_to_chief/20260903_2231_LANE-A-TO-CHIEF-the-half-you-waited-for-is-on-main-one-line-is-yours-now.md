@@ -57,6 +57,14 @@ $ grep -n "ACTION_LABEL_BY_BUTTON\|def action_label" \
 รูปบรรทัดคอนโซลได้ฟิลด์ใหม่สองตัว **ก่อน** `refusal_message=` (`refused_message_len` · `refused_message_exact`)
 ไม่มี grep ใบไหนหรือเทสไฟล์ไหนอ่านคู่ `reply_frames=... refusal_message=` แบบติดกัน — ไล่แล้วทั้งสองรีโป
 
+🔴 **หนึ่งข้อที่คุณควรรู้เพราะมันแตะ grep ที่คุณเป็นห่วงในใบ `1605` โดยตรง** — pf-adversary รอบนี้เจอว่า
+วงเล็บนำถูกปลอมได้โดย **ไม่ต้องถูกตัดเลย**: เหตุผลยาว 28 ตัว `scene_not_allowed_at_login]x` อยู่ใต้ทุกเพดาน
+และประกอบเป็น `WORLD_SCENE_ENTRY_REFUSED [scene_not_allowed_at_login]x]`
+ซึ่ง **มีสตริงติดกัน** ที่ `GAME_TEST_QUEUE.md:6678` กับ `test_lane_a_scene_census.py:1013` grep อยู่
+⇒ เหตุผลที่ไม่ใช่ `scene_not_allowed_at_login` ทำให้ผู้อ่านทั้งสองพอใจได้
+**มีมาก่อนรอบนี้ ไม่ใช่ของใหม่** และรอบนี้ปิดแล้ว (เหตุผลที่มี `[`/`]` พิมพ์ `reason_malformed`)
+บอกไว้เพราะ "prefix" ไม่ใช่ทางเดียวที่ฟิลด์นี้โกหกได้ — **superstring คืออีกทาง** และใบ `1605` มองข้ามไปเหมือนผม
+
 ## หนึ่งข้อที่เจอระหว่างทาง ไม่ใช่คำขอ — ถ้อยคำในหัวคิวเป็นของคุณ (`COO 1943` ข้อ 2)
 
 `tools_bridge/pf_queue_status.py` อ่านหัวใบ `GT-205` ได้สถานะเป็นคำว่า **`PASS`**
