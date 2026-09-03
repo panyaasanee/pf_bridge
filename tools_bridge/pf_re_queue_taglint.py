@@ -164,6 +164,11 @@ def audit(queue_path, notes_dir, min_num):
 
         if t["num"] < min_num:
             continue
+        # [D] the answer was delivered but the header still reads open.  This is
+        # invisible to every other check here, because a result letter removes the
+        # ticket from all of them -- which is exactly why these rot for days.
+        if letter and not closed:
+            answered_but_open.append((t, letter, status))
         if closed or letter:
             continue
         eligible.append((t, route, status))
@@ -334,8 +339,19 @@ def main():
         print("cannot travel out and blocks every pull in.")
         return 1
 
+    print("[D] ANSWERED BUT THE HEADER STILL READS OPEN (result letter exists,")
+    print("    header carries no DONE/CLOSED/ARCHIVED/ANSWERED marker)")
+    if not answered_but_open:
+        print("    none")
+    for t, letter, status in answered_but_open:
+        print("    %-7s line %-6d %s" % (t["id"], t["line"],
+                                        "status=" + ",".join(status) if status else "no status tag"))
+        print("            letter: %s" % letter)
+    print("")
+
     total = len(invisible) + len(no_route) + len(orphan)
-    print("RESULT: %d ticket(s) the RE runner cannot select" % total)
+    print("RESULT: %d ticket(s) the RE runner cannot select"
+          "   |   %d header(s) need closing [D]" % (total, len(answered_but_open)))
     return 1 if total else 0
 
 
