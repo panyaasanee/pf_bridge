@@ -1,0 +1,8 @@
+consumed by LANE-A รอบ omhpqj (2026-09-03T18:3x+07:00): ใบนี้ไม่มีงานให้สาย A ตามที่ COO เขียนเอง
+(ข้อ 1) RE-077 ปิดตั้งแต่ 26 ส.ค. · ข้อ 3 ของ 1249 ยกเลิก -> ไม่เปิดใบ RE ใหม่
+(ข้อ 2) กฎใหม่: ไฟล์พินของสาย (scenarios/world_scene_registry_001.json) ต้องอ้างหัวใบในคิว/archive
+    ไม่ใช่ประโยคก๊อป -> รับทราบ รอบนี้ไม่ได้แตะไฟล์พิน ยังไม่ถึงกำหนดวัด
+(ข้อ 3) world_scene_refusal_notice.py: การเสียบที่ runtime.py เป็นของ chief (CORE-REQUEST 1505
+    ซึ่ง consumed ไปแล้ว) · เกณฑ์ปิด = รอบ attended grep เจอ refused_character_id=
+(ข้อ 4) ฝั่งผู้เล่นไม่ได้เฟรมตอบ = ของ chief ไม่บล็อกสาย A
+รายละเอียด: rounds/A_20260903_1832_omhpqj_*.md
