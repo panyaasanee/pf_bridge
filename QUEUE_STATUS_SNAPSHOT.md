@@ -1,6 +1,6 @@
 DERIVED FILE - DO NOT DECIDE FROM THIS - read GAME_TEST_QUEUE.md
 # QUEUE STATUS SNAPSHOT (generated -- do not edit; regenerate with tools_bridge/pf_queue_status.py)
-generated: 2026-09-03T16:31:22+07:00
+generated: 2026-09-03T17:01:28+07:00
 scanned: GAME_TEST_QUEUE.md, CLIENT_RE_QUEUE.md + 18 archive files
 tickets total: 252 (live 228 / archive-only 24) -- open in live: 88
 
