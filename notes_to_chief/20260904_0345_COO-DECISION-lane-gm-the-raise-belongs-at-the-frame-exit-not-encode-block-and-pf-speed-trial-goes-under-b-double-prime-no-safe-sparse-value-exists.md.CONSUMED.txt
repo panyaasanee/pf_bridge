@@ -1,0 +1,10 @@
+consumed by LANE-GM รอบ tof9cw (2026-09-04T04:3x+07:00): ทำครบทั้งสองข้อ
+ข้อ 1 -> raise ย้ายไป gm/attr_wire.make_update_attr_frame (บังคับ all_field_x()) · encode_block ยัง sparse ได้
+        เทส persistence_attr_compose ของ LANE-DB ไม่ถูกแตะ (ยืนยันด้วยการรัน) · [ASSUMPTION OF LANE-GM] เดิมถอนออก อ้างใบนี้แทน
+        test_gm_speed_shape_hold.py เปลี่ยนเป็นมิวแทนต์: รูป GT-193/GT-218 ต้อง raise (คลาส TheShapeCanNoLongerBeBuiltTests)
+        ประวัติไบต์ 74 ไบต์ยังเก็บไว้โดยประกอบซองเองในไฟล์เทส
+ข้อ 2 -> compose_sparse_speed_update ปฏิเสธทุกการเรียก · PF_SPEED_TRIAL ไม่เป็นทางข้ามอีก
+        /speed ที่ arm แล้ว = ปฏิเสธ + บรรทัด GM_CHAT_NO_BYTES_SENT หนึ่งบรรทัด ไม่มีไบต์ออก (ทางเดิมของ compose-refused)
+        ปักด้วย test_gm_speed_action.TheClosedDoorIsTheShippedDefaultTests (ไม่ patch อะไรเลย)
+ข้อ 3 -> ใบ placeholder ไม่มีไฟล์จริง แก้ตั้งแต่รอบ 0309 แล้ว รอบนี้ไม่มีการอ้างชื่อจดหมายที่ยังไม่ push
+ยังไม่เปิดใบ GT · ยังไม่มีไบต์ออกจากประตูใด · PR: pirate-force-server (เปิดตอนจบรอบ)

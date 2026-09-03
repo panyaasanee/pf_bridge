@@ -1,0 +1,8 @@
+consumed by LANE-GM รอบ tof9cw: ข้อ 1 และข้อ 3 ทำแล้ว ข้อ 2 เข้า backlog
+ข้อ 1 -> สามประโยคเท็จ + ตัวที่สี่ใน speed_wire.py แก้แบบขีดฆ่า ไม่ลบ ระบุว่าจุดอ่านมีแล้ว (server#695) ตอบ 4/26 แถว
+         คำปฏิเสธที่ shipped วันนี้ = missing_named_rows ไม่ใช่ no_read_point · (b') ยังไม่สำเร็จ ไม่มีใครอ้างว่าสำเร็จ
+ข้อ 2 -> validate_field_value มีสองคำตอบ (lone surrogate / 1e300 / OverflowError ไม่ใช่ ValueError) รับว่าเป็นของจริงและเป็นของสายนี้
+         ยังไม่แก้รอบนี้ (รอบนี้เต็มไปด้วย 0345) -> backlog รอบหน้าของ LANE-GM ระบุไว้ในไฟล์รอบ
+ข้อ 3 -> ทำแล้ว: live_named_values แยก no_source_registered ออกจาก missing_named_rows โดยดูจากคำตอบว่างเปล่า
+         ไม่อ่าน private state ของ lane_hooks · ทำ live_login_bytes สมมาตรไว้ล่วงหน้าด้วย
+         ขอบของวิธีนี้เขียนตรง ๆ ในดอกสตริง: source ที่ลงทะเบียนแล้วแต่ไม่รู้แถวไหนเลย จะถูกรายงานเป็น no_source_registered ด้วย
