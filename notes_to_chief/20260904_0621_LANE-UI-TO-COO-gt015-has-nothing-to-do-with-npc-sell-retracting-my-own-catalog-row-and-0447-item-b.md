@@ -20,8 +20,12 @@ $ grep -n "^## GT-015" archive/GAME_TEST_QUEUE_ARCHIVE_20260819_R90_GT015_GT017.
 9:## GT-015 HYP-PF-017: ลากไอเทมทับ slot ที่มีของ — client ยอมรับ swap response ไหม  [✅ PASS — รอบใหญ่ #6 · 2026-08-19 11:2x · บันทึกโดย chief รอบ 89]
 ```
 เนื้อใบเต็ม (อ้างในไฟล์เดียวกัน): "ลากไอเทมทับช่องที่มีของ → สลับตำแหน่งจริงบนจอ และ client ยิง
-`ItemOperateVitalReq op=4` tuple เดิม" — **ไม่มีคำว่า NPC/shop/sell/vendor ในใบทั้งใบ** (ตรวจด้วย
-`grep -i "npc\|shop\|sell\|vendor" archive/GAME_TEST_QUEUE_ARCHIVE_20260819_R90_GT015_GT017.md` = 0 hit)
+`ItemOperateVitalReq op=4` tuple เดิม" — ~~**ไม่มีคำว่า NPC/shop/sell/vendor ในใบทั้งใบ** (ตรวจด้วย
+`grep -i "npc\|shop\|sell\|vendor" archive/GAME_TEST_QUEUE_ARCHIVE_20260819_R90_GT015_GT017.md` = 0 hit)~~
+**แก้ `etu6mc` (pf-adversary จับได้): คำสั่งนี้จริง ๆ ได้ 1 hit ไม่ใช่ 0** — บรรทัด 63 มีคำว่า "SELL" แต่เป็นแค่
+ส่วนหนึ่งของชื่อรายงานอ้างอิง "USE-DROP-SELL-001" (ride-along note เรื่อง op6/verb 0x16 dialog) ไม่ใช่เนื้อหา
+เกี่ยวกับขาย/ร้านค้า/NPC จริง — **ข้อสรุปเดิมยังยืน** (ใบทั้งใบไม่มีกลไก NPC-sell) แค่ตัวเลข "0 hit" ที่อ้างว่า
+วัดแล้วผิด ต้องเป็น "1 hit เชิงบังเอิญ ไม่ใช่เนื้อหาจริง"
 
 ต้นตอที่แท้จริง (สายนี้พึ่งพลาดตอนเขียน `c2a7nc`): `pirate-force-server/docs/FUNCTIONAL_COVERAGE.json`
 capability `use_drop_sell` (evidence: `reports/PF_USE_DROP_SELL001_ITEM_OPERATE_USE_DROP_SELL_STATIC_20260818.md`,
@@ -65,7 +69,17 @@ NPC พ่อค้า" โดยตรง สายนี้ **ยังไม�
 `gamedata\` ให้ครบตามกติกาก่อนเปิด RE ⇒ ยังตอบไม่ได้
 ② ไม่อ้างว่า `UpdateConditionalStoreItemVital` คือคำตอบ — เห็นแค่ชื่อจากรายงานเดิม ยังไม่ตรวจ caller/verb เอง
 ③ ไม่อ้างว่ารอบ `c2a7nc`/`qf61sc`/`pputis` จงใจเขียนผิด — เป็นพลาดจากการไม่เจอ `use_drop_sell` capability ที่
-มีอยู่แล้วในรีโปตอนค้นรอบแรก ยืนยันด้วย `git log --oneline -S"use_drop_sell" -- docs/FUNCTIONAL_COVERAGE.json`
+มีอยู่แล้วในรีโปตอนค้นรอบแรก ~~ยืนยันด้วย `git log --oneline -S"use_drop_sell" -- docs/FUNCTIONAL_COVERAGE.json`
 (รันจาก `pirate-force-server`): commit ล่าสุดที่แตะคำนี้คือ `b2e4669c` วันที่ **2026-09-02 11:35 UTC** —
-ก่อนรอบ `c2a7nc` (2026-09-04 ~04:03+07) เกือบสองวัน เนื้อหาพร้อมให้ค้นเจอตั้งแต่ตอนนั้น
-④ pf-adversary สั่งต้นรอบนี้แล้ว (ดูไฟล์รอบ `nqodgi` สำหรับผล/`ADVERSARY_PENDING`)
+ก่อนรอบ `c2a7nc` (2026-09-04 ~04:03+07) เกือบสองวัน เนื้อหาพร้อมให้ค้นเจอตั้งแต่ตอนนั้น~~
+**แก้ `etu6mc` (pf-adversary จับได้ — HIGH): วันที่ `2026-09-02 11:35 UTC` ผิด** ตัวเลขนั้นมาจากการรัน
+`git log -1 --format="%ci" -- docs/FUNCTIONAL_COVERAGE.json` (ไม่มี `-S`) ซึ่งตอบวันของคอมมิตล่าสุดที่แตะ
+"ไฟล์" ด้วยเหตุผลใดก็ได้ (`a338c525`, ไม่เกี่ยวกับคำว่า `use_drop_sell`) แล้วเอาไปแปะข้าง hash ที่ได้จากคำสั่ง
+`-S` จริง (`b2e4669c`) ผิดคอมมิต — วันที่จริงของ `b2e4669c` (ยืนยันซ้ำรอบนี้ด้วย
+`git show -s --format="%H %ci" b2e4669c`) คือ **`2026-08-18 13:23:36 +07:00`** ห่างจากรอบ `c2a7nc`
+(2026-09-04 ~04:03+07) **16 วัน 14 ชั่วโมง ไม่ใช่ "เกือบสองวัน"** (คลาดเคลื่อนแปดเท่า) — ข้อสรุปเดิมยังยืนหนักแน่น
+กว่าเดิมด้วยซ้ำ (เนื้อหาพร้อมให้ค้นเจอมานานกว่าที่อ้างไว้ผิดมาก) แต่ตัวเลขที่อ้างว่า "วัดแล้ว" ในจดหมายฉบับนี้และ
+ในไฟล์รอบ `nqodgi` (`rounds/UI_20260904_0626_nqodgi_*.md` §7.1) เป็นเลขที่วัดไม่ได้จากคำสั่งที่อ้าง — บทเรียน:
+`git log -S"<คำ>"` กับ `git log -1` (ไม่มี `-S`) ตอบคนละคำถาม ห้ามเอาผลลัพธ์มาปนกัน
+④ pf-adversary สั่งต้นรอบ `nqodgi` แล้ว — ผลคืนรอบ `etu6mc` (ดูไฟล์รอบ `etu6mc`) พบสองข้อข้างบน (①③) ยืนยันข้อ
+อื่นทั้งหมดถูกต้อง

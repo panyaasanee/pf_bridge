@@ -19,6 +19,14 @@ final-buy หักเงินผู้เล่น+ใส่ของเข้
 $ grep -n -i "gold\|money\|currency" src/pirateforce_foundation/store.py
 (ไม่มีบรรทัดที่เกี่ยวกับค่าเงินจริง — มีแค่คำว่า "warns"/"under concurrency" ไม่เกี่ยวกัน)
 ```
+🔴 **แก้ `etu6mc` (pf-adversary จับได้ — LOW): ประโยคปฏิเสธข้างล่างกว้างกว่า grep ที่อ้างไว้ข้างบน** (คำสั่งเดิม
+ดู `store.py` ไฟล์เดียว แต่ประโยคสรุปครอบทั้งแพ็กเกจ) — เติม grep ที่ scope ตรงกับคำพูดจริงตามกติกา §7:
+```
+$ grep -rn -i "character_cash\|player_cash\|cash_balance\|def.*cash\|cash.*balance" src/pirateforce_foundation/*.py
+(0 hit — ไม่มีฟังก์ชัน/ตัวแปรที่เป็น interface เงินผู้เล่นจริงในไฟล์ .py ทั้งแพ็กเกจ)
+```
+(ตรวจเพิ่ม: ไฟล์ที่มีคำว่า gold/money/cash มี 25 ไฟล์ — ตรวจ `mob_loot.py` ตัวอย่างหนึ่งพบ `money_element` ที่
+**ปฏิเสธ** ไม่ให้วางเงินบนพื้น (loot-drop guard) ไม่ใช่ interface เก็บเงินผู้เล่น — ยืนยันว่าเป็นคนละเรื่อง)
 **ไม่มี interface อ่าน/เขียนเงินผู้เล่นใน `pirateforce_foundation` วันนี้เลย** — เท่าที่สายนี้ค้นเจอ เงิน
 (cash) มีสถานะดังนี้ (จาก `live_named_attr_values.py:90-103`, ของ chief/LANE-A ไม่ใช่ของสายนี้ อ่านอย่างเดียว):
 - named attr **x=24 cash** — login ส่งค่าคงตัว `legacy.V116_INITIAL_CASH` (constant ในโค้ด ไม่ใช่จาก DB)
