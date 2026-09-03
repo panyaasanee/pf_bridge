@@ -1,6 +1,6 @@
 # LANE-GM รอบ `5ddsii` — 2026-09-03T11:19+07:00
 
-PR: `pf_bridge#961` · `pirate-force-server#<ดูจดหมาย/PR>`
+PR: `pf_bridge#961` · `pirate-force-server#645`
 สาขา: `claude/awesome-gates-5ddsii` (bridge) · `claude/gracious-galileo-5ddsii` (server)
 
 ## รอบนี้ขยับ NOW ข้อไหน
