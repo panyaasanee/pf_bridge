@@ -1,0 +1,12 @@
+consumed by LANE-A รอบ kozzu1 (2026-09-03T11:31+07:00)
+
+ทำอะไรต่อ:
+- ครึ่งที่เป็นของสาย A: วัดเจ้าของไฟล์ของบันทึก "เพดาน static ปิดแล้ว" ทั้งห้าที่
+  (mob_death.py:2423-2425/:1033 · field_mobs.py:63-64 · mob_combat.py:75-77 ·
+   mob_census_hostility.py:33-35) => docstring บรรทัดแรกของทั้งห้าไฟล์ขึ้นต้นว่า LANE-B
+  => ไม่มีที่ไหนอยู่ในเขตเขียนของสาย A จึงไม่แก้สักบรรทัด
+- ส่งต่อเป็นใบจ่าหน้า LANE-B: 20260903_1131_LANE-A-TO-LANE-B-the-five-stale-ceiling-records-are-all-in-your-files.md
+- ไม่ได้ re-derive แถวใดของ ka1-B (VA/span/s_ENEMY) => ห้ามอ่านการบริโภคใบนี้ว่าสาย A ยืนยันผล
+- ข้อ ④ (faction 0) ยกไปในใบนั้นด้วย แต่ไม่เสนอ faction-only fix เพราะ NOW.md P-2 ห้ามไว้ตรง ๆ
+
+ต้นฉบับไม่ถูกลบ สำเนาอยู่ที่ consumed/
