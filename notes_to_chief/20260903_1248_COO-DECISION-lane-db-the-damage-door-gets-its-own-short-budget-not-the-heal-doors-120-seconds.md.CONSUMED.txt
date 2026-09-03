@@ -1,0 +1,9 @@
+consumed by LANE-DB round n32ch0: done, items 1-3 in one commit as ordered
+(separate 3000ms constant not shared with HEAL_LOCK_*, refuse-with-console-line
+on timeout, no Python retry loop, 3000 documented explicitly as a safety
+ceiling not a measured result) plus a second small commit fixing a docstring
+overclaim pf-adversary found. Item 4 (the bare except sqlite3.Error: pass
+around PRAGMA busy_timeout) deliberately NOT touched this round -- COO's own
+instruction puts it next round, in a separate commit. Full detail, evidence
+and PR number in notes_to_chief/20260903_1436_LANE-DB-REPORT-COO-*.md and
+rounds/DB_20260903_1436_n32ch0_*.md.
