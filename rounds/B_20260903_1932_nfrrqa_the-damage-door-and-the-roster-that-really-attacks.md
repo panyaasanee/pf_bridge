@@ -92,4 +92,39 @@
 5. ไม่อ้างอะไรเกี่ยวกับ `RE-208` รอบนี้
 
 ## 8. บันทึกท้ายรอบ
-(เติมตอนจบ)
+
+push แล้ว รอ merge PR `#674` (สถานะจริง: เปิดแล้ว ไม่ draft · marker `PF-AUTOMERGE: v4`
+ยืนยันด้วย GET · รอ gate-windows)
+
+### รายการเทสรอบนี้
+- ระหว่างทาง: `test_lane_b_mob_ai_tick.py` · `test_mob_aggro.py` · `test_mob_ai_control_dispatch.py`
+  · `test_mob_ai_control.py` · `test_mob_ai_scheduler.py` · `test_mob_ai_tick_gate_wiring.py`
+  · `test_mob_combat_dispatch_bg0002_kill.py` · `test_mob_drop_presence.py` · `test_mob_combat.py`
+  · `test_lane_scene_census_wiring.py` · `test_mob_stat_fabrication_guard.py`
+  · `test_persistence_vitals.py`
+- ชุดเต็มบนคอมมิตสุดท้าย `d935339` (หลัง pf-adversary จบและแก้ครบ): **8925 passed, 323 skipped,
+  17,442 subtests** (6:04 นาที)
+- รอบนี้รันชุดเต็ม **สองครั้ง** โดยเจตนา ตามกติกา §5: ครั้งแรก 8916 passed บน `c06ab6e` เจอเทส
+  ตัวเฝ้าประตูสองใบต้องแก้เพราะเพิ่มโมดูล lane-B ใหม่ (สาย A/B ทั่วไปเห็นล่วงหน้าไม่ได้ · ใบเดียวกัน
+  ที่ใบสั่ง `NothingIsWiredTests` ของมันเองบอกให้เขียนใหม่ในกรณีนี้) · ครั้งที่สองบนคอมมิตหลัง
+  pf-adversary ที่จ่ายหนี้ครบทุกใบและแก้ครั้งแรกเรียบร้อยแล้ว
+
+### pf-adversary
+กลับมา 11 หัวข้อ D1-D11: D1/D2/D3/D5/D7/D8/D10 แก้จริงในโค้ด และมีมิวแทนต์แปดตัวที่รอบก่อนหน้า
+รอด (paste ใบสั่งที่ hold · tick ทุกเฟรม · กลืน read-back หลังเขียน · ไม่ห่อการเขียน · character_id
+guard ตาย · per_attack guard ตาย · actor guard ตาย · hp_max เป็นศูนย์) ตอนนี้**ตายทั้งหมด** —
+รันซ้ำหลังแก้ยืนยันด้วยมือ · D4 พบร้อยแก้วเท็จตัวเดียวกันยังลง `mob_ai_control.py` (ของสายผมเอง)
+และ pin ที่ derive มาจากตรงนั้น ⇒ ขีดฆ่าในที่ + regenerate pin ผ่านตัวเขียนไม่แก้มือ (ต่างจริงหนึ่ง
+บรรทัด) · D9 กลายเป็นชื่อค่าคงที่ `STAND_DOWN_FLOOR_ALREADY_REACHED` · D11 ผูกใบ [PAID] เข้ากับ
+AST ของไฟล์เทสพี่น้อง ให้ rename/delete แดง
+
+### ล็อกรอบ
+- ต้นรอบ: ไม่มีใบ `[LANE-B]` เปิดค้าง · เปิด claim `#1009` ไม่มี marker
+- ทำงานเกิน 90 นาที (เริ่ม 19:32 · จบ ~20:36): heartbeat _claim.md **ไม่ได้** push checkpoint
+  ระหว่างรอบเพราะสายอื่นไม่มีทางเห็นก่อน gate merge · **บันทึกไว้เป็นหนี้ครั้งเดียว** ถ้าเกิดซ้ำรอบหน้า
+  ต้องเพิ่ม checkpoint push จริง
+- ปิดรอบ: push งาน pirate-force-server แล้ว เปิด PR `#674` ไม่ draft marker ตั้งแต่เปิด · GET
+  ยืนยันแล้ว
+- ต่อไปตามลำดับ: push ไฟล์รอบ + จดหมาย + stub ลงกิ่ง claim (ลบ `_claim.md` เดิม) push แล้วเติม
+  marker ให้ `#1009` = ปลดล็อก
+
