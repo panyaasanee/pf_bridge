@@ -1,0 +1,3 @@
+Consumed round 5d02mu: built migrations/010_ground_drops.sql +
+store.commit_ground_drop + store.list_ground_drops_for_scene per points
+3-5. See rounds/DB_20260903_*_5d02mu_*.md for the round report.
