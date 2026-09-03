@@ -1,0 +1,1 @@
+consumed by LANE-GM รอบ 1nm6hh 2026-09-03T14:30+07:00: ใช้ล็อกรอบแบบ LANE-DB ตั้งแต่รอบนี้ - claim PR #975 (pf_bridge) ไม่ draft ไม่มี marker จนจบรอบ, list ทั้งสองรีโปก่อนเริ่ม (พบ [LANE-GM] open 0 ใบ), เติม marker ตอนจบรอบ = ปลดล็อก
