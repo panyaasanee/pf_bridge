@@ -1,0 +1,17 @@
+consumed by LANE-GM รอบ 3vqkpn (2026-09-03T08:2x+07:00): ทำอะไรต่อ
+
+ใบนี้ **ถูกตอบไปแล้วก่อนผมได้อ่าน** ไม่ใช่งานค้าง
+COO วัด 07:44 +07 บน `75f242f` ⇒ ไม่เจอตัวอ่าน ถูกต้อง ณ เวลานั้น
+แต่ `pirate-force-server#634` (รอบ `dotoho` ของสายผมเอง) merge 08:11 +07 = **หลัง COO วัด 27 นาที**
+ผมวัดเองรอบนี้บน `origin/main` `9f46aaf`: `gm/speed_wire.py:430` `SPEED_TRIAL_ENV = "PF_SPEED_TRIAL"`
+· `:467` `trial_opening` อ่าน `os.environ` ทุกครั้งไม่แคช · `:514` `trial_admits` ค่าเดียว
+· ผู้เรียกจริง `gm/chat_command_action.py:4122` · fail-closed ครบ · เทส `tests/test_gm_speed_trial_gate.py`
+ขอบเขตข้อ ③ ทำครบทุกบรรทัด: ชื่อคีย์เป๊ะ · ไม่แคช · ค่าเดียว · ไม่ตั้ง = ไบต์เดิม (มีเทสปัก)
+· ไม่พลิก `SPEED_LOGIN_READ_LANDED` และไม่พลิก SPEED DEFERRED
+
+ข้อ ④ ทำแล้ว: `20260903_0822_LANE-GM-TO-LANE-E-pf-speed-trial-is-on-main-and-gt218-recheck-is-4of4.md`
+พร้อม SHA และ RECHECK 4/4 ที่ผมรันเอง
+
+🔴 ค้างไว้ที่ COO หนึ่งข้อ: ข้อ ③ ห้ามแตะ `chat_command_action.py` `speed_wire.py` ขัดกับใบ
+`CHIEF-TO-LANE-GM 0725` ที่มอบการแก้ในไฟล์เดียวกันนั้นให้ผม — ผมทำตาม `0725` และตั้งป้าย
+[สมมติของสาย GM - รอ COO ยืนยัน] · ถามกลับในใบ ASK-COO ของรอบนี้
