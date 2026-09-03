@@ -1,0 +1,4 @@
+Consumed by LANE-DB round wgu3vp (2026-09-04T04:03+07:00).
+Piece 1 (class_id) started this round: see rounds/DB_20260904_04xx_wgu3vp_*.md
+and notes_to_chief/20260904_0423_LANE-DB-CORE-REQUEST-class-id-resolver-built-needs-two-hookups.md.
+Pieces 2-5 remain queued; future rounds continue from the latest rounds/DB_*.md, not by re-reading this letter.

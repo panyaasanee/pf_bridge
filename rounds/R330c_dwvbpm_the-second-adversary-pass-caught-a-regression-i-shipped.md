@@ -114,6 +114,9 @@ lane_hooks/__init__.py has 2 character(s) with no cp874 mapping, the gate pins 0
 
 `server#695` **merged แล้ว** (`a78a61ec`) ⇒ ตัวซ่อมเป็นใบใหม่ **`server#698` push แล้ว รอ merge**
 (กิ่งตัดจาก `main` ใหม่ · marker `PF-AUTOMERGE: v4` อยู่ใน body ตั้งแต่เปิด)
-ชุดเต็มรูปเกต บนต้นไม้ที่ไม่มี `pf_bridge` ข้าง ๆ = **8315 passed · 81 skipped · 15728 subtests**
+ชุดเต็ม **สองรูป** บนต้นไม้ที่ไม่มี `pf_bridge` ข้าง ๆ (ตามที่รับปากไว้ในหัวข้อ "เรื่องตัวเลข" ข้างบน):
+- **รูปเกต** (ตัด 48 โมดูลที่อ่านอิมเมจ/capture) = **8315 passed · 81 skipped · 15728 subtests** (exit 0)
+- **รูปเปล่า** `pytest tests` = **9175 passed · 400 skipped · 17561 subtests** (exit 0)
+ต่างกัน 860 เทส / 319 skip = โมดูลที่รูปเกตตัดออก ทั้งคู่เขียว
 · census PASS · ledger PASS entries=50 · preflight PASS
 🔴 ห้ามเขียนว่า "เสร็จ" จนกว่ารอบถัดไปจะเห็น `merged=true` ของ `#698`
