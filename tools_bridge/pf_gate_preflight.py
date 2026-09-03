@@ -204,6 +204,84 @@ def check_new_skips(repo, base):
     return True
 
 
+def check_base_is_ancestor(repo, base):
+    """RED when `base` is not an ancestor of HEAD - the tree you tested is
+    NOT the tree the gate's pull_request run will build.
+
+    MEASURED, not argued (LANE-B round f2qyxx, from the two runs on server
+    commit 9dcf43de).  `.github/workflows/gate-windows.yml` triggers on BOTH
+    `push` (branches-ignore: ci-status) and `pull_request`, and its
+    actions/checkout@v4 step passes no `ref:`.  So the push run builds the
+    BRANCH TIP and the pull_request run builds `refs/pull/N/merge` - the
+    branch MERGED WITH main.  Both post a check named `gate`, and
+    `.github/workflows/merge-claude-pr.yml` closes the PR on a red one.
+
+    On server #697 that divergence closed a round whose own branch was green:
+      run 33802612233  gate = success  (branch tip, cut before server #695)
+      run 33802651960  gate = failure  (merged with main, which by then
+                                        carried #695's read point)
+    One card in tests/test_lane_b_mob_ai_tick.py asserted that
+    lane_hooks.current_named_attr_values did NOT exist.  On the branch that
+    was true.  On the merged tree it was false, and no local run this lane
+    could make would ever have said so.
+
+    NOW.md (COO `0053` + `0149`) already requires the full suite to be run on
+    a tree with main merged in, not on the pure branch.  This check is that
+    rule made mechanical: it does not re-run the suite, it says whether the
+    tree you ran it on was the right tree.
+
+    Returns True (base is in), False (it is not), None (base does not
+    resolve - INCONCLUSIVE, same convention as check_new_skips).
+    """
+    def git(*args):
+        return subprocess.run(
+            ["git", "--no-optional-locks", "-C", str(repo)] + list(args),
+            capture_output=True, text=True, errors="replace")
+
+    resolved = git("rev-parse", "--verify", "--quiet", base + "^{commit}")
+    if resolved.returncode != 0 or not resolved.stdout.strip():
+        print("[mainmerge] could not resolve %s - run `git fetch origin main`"
+              % base)
+        return None
+    head = git("rev-parse", "--verify", "--quiet", "HEAD^{commit}")
+    if head.returncode != 0 or not head.stdout.strip():
+        print("[mainmerge] could not resolve HEAD in %s" % repo)
+        return None
+    base_sha = resolved.stdout.strip()
+    if git("merge-base", "--is-ancestor", base_sha, "HEAD").returncode == 0:
+        print("[mainmerge] PASS - %s (%s) is already in HEAD; the gate's"
+              % (base, base_sha[:7]))
+        print("            pull_request run builds the same tree you tested.")
+        return True
+
+    behind = git("rev-list", "--count", "HEAD.." + base_sha).stdout.strip()
+    print("[mainmerge] RED - HEAD is missing %s commit(s) that %s has."
+          % (behind or "?", base))
+    print("            The gate runs TWICE on this push: once on the branch")
+    print("            tip (what you tested) and once on branch-merged-with-")
+    print("            main (what you did NOT).  Both are named `gate`, and")
+    print("            merge-claude-pr.yml closes the PR on the red one.")
+    theirs = set(filter(None, git(
+        "diff", "--name-only", "HEAD..." + base_sha).stdout.split("\n")))
+    mine = set(filter(None, git(
+        "diff", "--name-only", base_sha + "...HEAD").stdout.split("\n")))
+    both = sorted(theirs & mine)
+    if both:
+        print("            Files BOTH sides changed (merge them first):")
+        for path in both[:12]:
+            print("                %s" % path)
+        if len(both) > 12:
+            print("                ... and %d more" % (len(both) - 12))
+    else:
+        print("            No file is touched by both sides - but a test of")
+        print("            yours can still read code of theirs, which is")
+        print("            exactly how server #697 died with no conflict.")
+    print("            Fix: git fetch origin main && git merge origin/main,")
+    print("            then run the FULL suite again on that tree (NOW.md")
+    print("            `0053`/`0149`), then push.")
+    return False
+
+
 # Assembled from parts on purpose.  If the literal sat here whole, a grep of
 # this repo for the token would report a hit inside its own guard, and anyone
 # quoting the guard into a PR body would ship the token.  Nothing below ever
@@ -482,7 +560,8 @@ def main():
                   " before you push.")
         return 2
     print("=== pf_gate_preflight on %s ===" % repo)
-    results = [check_cp874(repo), check_new_skips(repo, args.base)]
+    results = [check_cp874(repo), check_new_skips(repo, args.base),
+               check_base_is_ancestor(repo, args.base)]
     if args.pr_body is None:
         # Open skip with a reason, never a silent one (AGENTS.md section 7).
         # Not appended to `results`: most callers run this tool for the cp874
@@ -518,7 +597,7 @@ def main():
         print("above).  This is NOT a pass: fix the reason, usually a base ref")
         print("that does not resolve (git fetch origin main, or pass --base).")
         return 1
-    print("PREFLIGHT PASS (cp874 + no new skips).")
+    print("PREFLIGHT PASS (cp874 + no new skips + main is in this branch).")
     print("NOTE: this does NOT promise a green gate - Windows-only runtime")
     print("failures are out of scope.  A RED or INCONCLUSIVE preflight means")
     print("DO NOT PUSH until it is fixed (AGENTS.md section 7).")
