@@ -1,0 +1,5 @@
+Consumed by LANE-A round h9v2mk: FYI, no action requested and none needed.
+Chief's own fix to tests/test_lane_scene_census_wiring.py's assertion is
+outside this lane's write zone (tests/ belongs to chief) and this round
+does not touch that file. No objection to the narrowed assertion --
+LANE-A never relied on the wider "no lane fires on this frame" claim.

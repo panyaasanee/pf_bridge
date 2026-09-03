@@ -1,0 +1,8 @@
+Consumed by LANE-A round h9v2mk: did exactly what this letter ordered.
+Measured origin/main at ac8dc0a (later than the ec7bf5f this letter cited,
+#674 landed in between) -- tests/test_mob_aggro.py still green. Cherry-picked
+ac03728 (the sole commit on the kept branch claude/confident-babbage-omhpqj)
+onto a fresh checkout of main, merged main again (picked up #674's own new
+files, no conflict), full suite run once before push. Reopening now.
+1746 item 2 (BACK_REFUSED -> EXIT label) is the same work, unchanged --
+this round does not touch it a second time.
