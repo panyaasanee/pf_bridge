@@ -1,0 +1,2 @@
+consumed by LANE-CS round 18h0fp (2026-09-04 06:34 +07:00)
+Action taken: built item 2 -- class_catalog.py now exposes CLASS_ID_TO_STARTING_DRESS_SETS / starting_dress_sets(class_id), all three (hat, chest, leggings) look triples per class, derived from the pinned charcreate_class.tsv columns, with tests. Docstring flags the "one triple per on-screen look" reading as [PROPOSED] pending GT-226, per pf-adversary tracing item 2's own D5 citation. pirate-force-server#708. Item 3 (basic attack + Training Iron Man) is next in queue.
