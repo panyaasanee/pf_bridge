@@ -1,10 +1,11 @@
 ถึง chief
 
-# RE-222 — PARTIAL: UpdateAttrVital framing and name-color gate chain
+# RE-222 — DONE/PASS: UpdateAttrVital framing and name-color gate chain
 
-- Status: **PARTIAL — Q0/Q1/Q2 DONE; Q3 main registry + lookup DONE, exact selector-list population path remains a resumable time checkpoint (not a method ceiling)**
+- Status: **DONE/PASS — Q0–Q3 closed; the selector-local list population path was resolved in the continuation pass**
 - Jobs covered this round: **Q0–Q3**
 - START: `2026-09-03T21:33:04.508+07:00`
+- Continuation START: `2026-09-04T00:56:29.280+07:00`
 - Static only. No game/server boot, no `LOCK_GAME`, no canonical DB, and no source/queue/external/gamedata mutation.
 
 ## Input pins
@@ -139,23 +140,29 @@ No sign rejection, truncation, or aliasing was found on this registration path. 
 - Context `[0x00449AD0,0x00449B40)`, SHA-256 `816563A67DBC01E559DC0FAD8B3DDB7F199478E1DE68E823A0165C12FAFA5918`, returns the local scene collection after null checks.
 - Lookup `[0x00626DC0,0x00626E7A)`, SHA-256 `4E97A02C7947A483D6CC7FB00123FA14E8692D88B51178641DCA5F2D70FC359B`, compares stored low and high dwords for exact equality and returns the actor pointer or null. Signedness is irrelevant to these equality comparisons; there is no truncation or alias inside the lookup.
 
-The missing join is the exact insertion/population path for this selector-local scene list. The main registry and the selector lookup are distinct containers, so the main-tree evidence must not be used to claim that every negative identity necessarily reaches the selector list. Bounded answer: negative identities are not rejected by the proven main registration path, and selector lookup can match a negative bit pattern if present; population of that particular list remains open.
+### Selector-local scene-list population closure
+
+The list consumed by `0x00626DC0` is the list at parent/context `+0x28`. Its record and parent codecs close the previously missing join:
+
+- Record full copy `[0x00627400,0x0062748A)`, SHA-256 `4C47DA6F6C71E189F92D43D50061B08E9AC440D09A4F5623DBA432B702E211DE`, copies identity low `src+0x10 -> dst+0x10` and high `src+0x14 -> dst+0x14` verbatim.
+- Record codec `[0x00627490,0x006275A3)`, SHA-256 `3E646B9C08F02231264DAA6D5205F0D831E189F65C667C7F5DE0D2D764FDDD05`, writes or reads the identity as one 8-byte field under tag `0x32`; the read branch targets record `+0x10` directly.
+- Parent deep-copy/list population `[0x006275B0,0x00627730)`, SHA-256 `568456A7E87B9E506E2E539B058FA81E982935FBB649BDEDB50947DFAD616CF4`, iterates the source list, allocates each record at `0x0062765D`, calls the full-copy routine at `0x00627692`, and inserts the record pointer into destination list `parent+0x28` at `0x006276AC`.
+- Parent wire codec/list population `[0x00627730,0x0062792E)`, SHA-256 `DFC262EB3B61D2899DA57F32C5BE32D1BBD5CEB7F2905DAE08CBCF76BBF4ABF3`, reads the parent identity as 8 bytes, reads the list count, then for each entry allocates at `0x006278A2`, calls the record read codec at `0x006278C5`, and inserts into `parent+0x28` at `0x006278D9`.
+
+An exhaustive mechanical `E8 + rel32` census across every file-backed executable byte independently finds the record allocator calls at `0x0062765D` and `0x006278A2`; this is positive reachability evidence rather than a linear-disassembler negative claim. Neither the direct wire-read path nor the deep-copy path performs a signed/nonpositive identity check before insertion. The record retains all 64 bits, and lookup compares both dwords exactly. Therefore a negative identity is **not rejected, truncated, or aliased** in the observed selector-list population-and-lookup chain. Main registry and selector list remain distinct containers, but each path is now measured independently.
 
 ## BUILD_IMPACT
 
 - For LANE-GM name-color work: keep `NameColorGateUnmeasured` for the identity-only FieldMob direction. Do not schedule a negative-identity FieldMob probe expecting it to reach the typed-CNetNPC tail; object type prevents that route.
-- Negative identity is not discarded by the proven main actor registry, but selector-scene membership is not yet guaranteed.
+- Negative identity is retained both by the main actor registry and by the selector-local list's direct wire/deep-copy population paths; exact selector lookup can therefore return that record. This does not bypass the independent `CNetNPC` type gate, so the identity-only FieldMob direction remains rejected.
 - For `/speed` / GT-218: stop treating the container as malformed. `0x12AD` is ActorAttr, and this handler replaces the resident object from the sparse newly constructed object. A safe builder must carry the complete current ActorAttr/BasicAttr state required by the full-copy path, or use a separately proved merge-capable operation; do not retry by tweaking tags or length.
 
-## Nonclaims and continuation checkpoint
+## Nonclaims
 
 - No claim that the 11 bytes missing from the printed GT-218 raw block are any particular transport/header structure.
 - No claim that the screen's HP-max value `1` is stored as `1` by this frame; IMAGE proves the omitted resident field is replaced from constructor default zero, while the final display transform is outside Q0.
-- No claim that the main registry is the selector-local list or that every actor registered in the former is inserted into the latter.
+- No claim that the main registry is the selector-local list or that insertion into one automatically implies insertion into the other; the two paths were evaluated independently.
+- No claim that every negative identity necessarily has a corresponding parent/list record on the wire, is rendered/clickable, or has `CNetNPC` runtime type. The static conclusion applies when the measured record is decoded or copied into this list.
 - No client-observable conclusion is made from this static work.
 
-Resume without repeating this round:
-
-1. Trace the insertion/population path of the scene list consumed by `0x00626DC0` and document any rejection before membership.
-
-Reproducible static verifier: `pf_bridge/staged/re222_static_verify.py`, SHA-256 `949E07E6A72AD7C4C8F4D20D9ECCFBD4816669A9E3583BE1A9B2F0CE3EBE0506`.
+Reproducible static verifier: `pf_bridge/staged/re222_static_verify.py`, SHA-256 `B4B7BF9F409A0AACCC0BA2030091CF8FDD5A4AB84B1716ADBF0B7A511E8E5BB9`.
