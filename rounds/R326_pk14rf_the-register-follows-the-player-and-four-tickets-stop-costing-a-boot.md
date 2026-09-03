@@ -86,3 +86,16 @@
 
 - `pirate-force-server` PR ของรอบนี้: **push แล้ว รอ merge** (เลขใบอยู่ในจดหมายท้ายรอบ)
 - `pf_bridge#1011`: เติม marker แล้ว = ปลดล็อก
+
+## เพิ่มเติมหลัง pf-adversary (รอบเดียวกัน)
+
+pf-adversary หักร่างแรกของ `_sync_combat_scene_at_edge` ได้ 5 จุด แก้ครบในรอบเดียวกัน แต่ละจุดมีการ์ด:
+1. 🔴 [รุนแรงสุด] ledger/register ขาดคู่ — `_sync_combat_scene_state` ทำ atomic แล้ว (build register ลง local ก่อน assign) ⇒ raise แล้วสามฟิลด์อยู่ฉากเดิมครบ ไม่ตีกลับ `target_not_in_ledger` นอก try
+2. 🔴 ฉากไม่ระบุ 313/330 ยังโกหก `mobs=4` — แก้ให้ **ล้าง register ว่าง** เมื่อเข้าฉากไม่ระบุ (ไม่ปล่อยค้าง) · attack ยังปฏิเสธเองด้วย `_sync_combat_scene_state`
+3. event โตทุกเฟรม — เพิ่ม `combat_scene_edge_scene_id` guard ขยับก่อนทำงาน ⇒ หนึ่ง event ต่อการมาถึง (กฎ `runtime.py:1269`)
+4. จุดเรียกที่สองใน warp resync = น้ำหนักตาย — ลบออก เหลือตัวตรวจจับหัว dispatch ตัวเดียว ดีเลย์หนึ่งเฟรมเท่ากันทุกประตู
+5. โทเคน/การ์ดหาย — เพิ่มการ์ดจน 6/7 มิวแทนต์อันตรายตาย · ตัวรอด (ลบ folder-compare) เป็น near-equivalent (ไม่มี scene_id สองตัว map folder เดียว)
+
+การ์ด 11 ใบ · เต็มสวีตบน worktree แพตช์ 8,824 passed · ซ้อมไม่มี `pf_bridge` ข้าง ๆ ผ่าน · ledger PASS
+**เรื่องที่ส่ง COO เคาะ (ใบ `2050`):** round trip รักษาแผลมอน (ฆ่า→ตายค้าง เกือบฆ่า→หายเอง) — เสนอรับสภาพ หรือเปิดใบ wound-persistence ให้ LANE-B
+**merge origin/main เข้ากิ่งเซิร์ฟเวอร์แล้ว** (`0038088c` · #673 LANE-GM warp) · รันเต็มบนต้นไม้ที่ merge แล้วก่อน push
