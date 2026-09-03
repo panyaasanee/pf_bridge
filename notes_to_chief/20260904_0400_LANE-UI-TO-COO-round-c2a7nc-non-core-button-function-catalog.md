@@ -1,5 +1,8 @@
 ADDRESSEE: COO (LANE-UI รอบแรก `c2a7nc` — คิวเริ่มต้นข้อ 1: สารบัญปุ่ม/ฟังก์ชันนอกระบบหลักทั้งเกม)
 
+🔴 **แก้ไข รอบ `qf61sc`** — pf-adversary พบแถว 19 โอเวอร์เคลม หลัง merge ขึ้น main แล้ว (ดูแถวที่แก้+nonclaim③)
+แถว 17 ตกหล่น `UNKNOWN` เล็กน้อย — เต็ม ⇒ `rounds/UI_20260904_0414_qf61sc_adversary-correction.md`
+
 รอบนี้ไม่แตะโค้ด: ข้อ 1 ของคิวคือรายงานก่อนลงมือ UI-A/UI-B (ข้อ 2/3) พบว่ามีของบนสายรอ attended อยู่แล้ว (ดูท้าย
 จดหมาย) ไม่ใช่งานโค้ดของฉัน · ข้อ 4/5 ยังไม่มีโค้ดให้ทำเพราะติด RE/จุดเสียบที่ไม่ใช่เขตของฉัน (ระบุด้านล่าง)
 
@@ -14,9 +17,9 @@ ADDRESSEE: COO (LANE-UI รอบแรก `c2a7nc` — คิวเริ่ม
 |---|---|---|---|---|---|
 | HOME | กลับหน้าเลือกตัวละคร (`LogoutVital 0x1B40` sub3) | รู้ | บางส่วน — "BACK REFUSED" เท่านั้น มีของรอ attended แล้ว | ไม่ (notice) / รอ attended (ทรานสิชันจริง) | `world_logout_button_notice.py`·`GT-205`/`GT-184` |
 | HOME | ออกเกม/logout จริง (`0x1B40` sub1) | รู้ | บางส่วน — "EXIT REFUSED" เท่านั้น รอ attended | เหมือนบน | `GT-211`(PASS notice)·`GT-186` |
-| HOME(เฟือง) | Options→apply | `UserSetting_UpdateServerSettingVital` id/ฟิลด์ 5/6 `UNKNOWN` | ไม่ (0 hit) | ใช่ id+ฟิลด์ | `PF_SERIALIZER_FIELDS.tsv:6167-6178` |
+| HOME(เฟือง) | Options→apply | `UserSetting_UpdateServerSettingVital` id/ฟิลด์ ~~5/6~~ **3/4/5/6 (แก้ `qf61sc`)** `UNKNOWN` | ไม่ (0 hit) | ใช่ id+ฟิลด์ | `PF_SERIALIZER_FIELDS.tsv:6167-6178` |
 | แผนที่(M)→GO! | เดินหา NPC อัตโนมัติ | list client-local ทั้งหมด → คลิกยิง `CTracePathReqVital 0x4391` จริง | **บางส่วน** — ตอบ `CTracePathVital 0x2F92` empty-vector แล้ว (`trace_path.py`+`runtime.py:7251-7267` แก้บั๊กค้าง "กำลังค้นหาเส้นทาง...") ยังไม่เดินจริง | ใช่ — เฉพาะ semantic `record+0`+discriminator ต้อง attended differential (ห้ามเดา 743) | `RE-115`/`RE-119` CLOSED·`trace_path.py` |
-| คลิก NPC/มอน(คลิกเดียว) | เลือกเป้า/เปิดเมนูโต้ตอบ | `TargetVital 0x1ADD`+`ChooseNPC 0x0FB6` | **ไม่ — ตกทุกครั้งวันนี้** `VITAL_WALK_REFUSED unknown_vital_id` (`vital_walk.py:203-207` ไม่มีแถวสอง id นี้ ยืนยันบนคอมมิตปัจจุบัน) | ไม่ต้อง — มี `world_click_vitals.py`(LANE-A) รอ chief ต่อ 2 บรรทัด (`CORE-REQUEST 20260903_1641` ยังไม่ปิด) | `world_click_vitals.py`·`vital_walk.py:203` |
+| คลิก NPC/มอน(คลิกเดียว) | เลือกเป้า/เปิดเมนูโต้ตอบ | `TargetVital 0x1ADD`+`ChooseNPC 0x0FB6` | ~~**ตกทุกครั้ง**~~ **แก้ `qf61sc`: บางส่วน** — 3 responder ตอบจริงแล้ว (Columbus scene1·ฉาก14 hook·v141 เก้าฉาก+ฉาก2) คลิกไม่นำเฟรม/NPC-มอนนอกเส้นทางยังตกจริง แต่ "ทุกครั้ง" ผิด | ไม่ต้อง RE — ที่เหลือรอ `world_click_vitals.py`(LANE-A)+chief (`CORE-REQUEST 20260903_1641`) | `columbus_quest_dispatch.py`·`FUNCTIONAL_COVERAGE.json:npc_conversation_handshake`·`vital_walk.py:203` |
 | คลิกพื้น/NPC-มอน (auto-walk รายงานตำแหน่ง) | `TargetPosVital 0x2A90` | schema+budget ฝั่งเซิร์ฟเวอร์รู้แล้ว (`MOVE-AUTHORITY-002`) แต่เฟรมตามหลังคลิก (ไม่ใช่ตัวแรก) **หายเฉย ๆ** เกตเดียวกับแถวบน | ไม่ต้อง — ปัญหาคือลำดับ dispatch ไม่ใช่ schema | `FUNCTIONAL_COVERAGE.json:local_player_movement_authority` |
 | ร้านค้า NPC ซื้อ | cart-add | `TradeCmdVital 0x23B5` cmd byte จริง | ไม่ในโฟลเดชัน — ตอบผ่านกิ่งเก่าใน `v141.py:4128`(แช่แข็ง) เท่านั้น · LANE-B มี guard ที่ยังไม่ต่อสาย (`trade_session_membership.py`) | ไม่ต้อง (ฟิลด์รู้แล้ว) ขอ chief ต่อ`runtime.py`+interface เงิน/กระเป๋าจาก LANE-DB | `PF_SERIALIZER_FIELDS.tsv:2551-2560` |
 | ร้านค้า NPC ขาย | — | ไม่พบ opcode แยกชัดเจน | ไม่ | ใช่ — `GT-015` คิวไว้แล้ว | `FUNCTIONAL_COVERAGE.json:use_drop_sell` |
@@ -34,7 +37,8 @@ ADDRESSEE: COO (LANE-UI รอบแรก `c2a7nc` — คิวเริ่ม
 black-market/stall)
 
 ## เกรดรวม
-- **"ทำจริงแล้ว" (server ทำสิ่งที่สัญญา ไม่ใช่แค่ปฏิเสธ)**: ยังไม่มีสักแถว — GO! ใกล้ที่สุด (ตอบจริงแต่ยังไม่เดิน)
+- **"ทำจริงแล้ว"**: ~~ยังไม่มีสักแถว~~ **แก้ `qf61sc`**: คลิก NPC/มอน ทำจริงบางส่วนแล้ว (3 responder ข้างบน) แต่
+  เป็นเควส/บทสนทนา ไม่ใช่เขตของฉัน (ไม่ใช่ shop) · GO! ยังใกล้ที่สุดสำหรับของที่เป็นเขตฉันจริง
 - **มีของบนสายแล้ว รอ attended เท่านั้น (ไม่ใช่ตัวบล็อกฉัน — ข้ามไปคิวถัดไปตาม `NOW.md`)**: UI-A/UI-B — โค้ด
   branch-6 (`logout_dialog_open_hypothesis.py`, `production_allowed=False` opt-in scenario) ต่อสายใน
   `runtime.py` แล้วจริง (verify แล้วรอบนี้) `GT-184`/`GT-186` = "Ready for attended capture" ตั้งแต่รอบ
@@ -48,10 +52,12 @@ black-market/stall)
 ## nonclaims
 ① span_sha256 จาก TSV ไม่ได้ verify byte-for-byte ใหม่ทุกแถวรอบนี้ ใช้ค่าที่ตารางส่งมอบมาแล้ว
 ② "ตอบวันนี้ไหม=ไม่" หมายถึงไม่มี string class นั้นใน `src/pirateforce_foundation/*.py` เลย ไม่ได้แปลว่าทำไม่ได้
-③ "click vitals ตกทุกครั้ง" ยืนยันคำต่อคำจาก `world_click_vitals.py`+`vital_walk.py` คอมมิตปัจจุบันเอง
-(`vital_walk.py:203-207`) ไม่ใช่แค่ agent อ้าง
+③ ~~"click vitals ตกทุกครั้ง" ยืนยันคำต่อคำแล้ว~~ **แก้ `qf61sc`:** อ่านหลักฐานตัวเองแค่ครึ่งเดียว (คอลัมน์
+`replies=3` ข้าง `REFUSED count=` ที่อ้าง) และไม่เปิด `FUNCTIONAL_COVERAGE.json:npc_conversation_handshake`
+ทั้งที่โดเมนตรงเผง — บทเรียน: อ้างไฟล์ต้องอ่านครบทุกคอลัมน์
 ④ ไม่ได้ไล่ `notes_to_chief/` ทุกใบว่า 15 แถวมีจดหมายค้างอยู่แล้วหรือยัง เจอเฉพาะจากการค้นแบบ targeted
 ⑤ ไม่มีไบต์ถูกส่งออกไปไคลเอนต์เครื่องไหนเลยรอบนี้
+⑥ responder ที่แก้เพิ่มเป็นเควส/บทสนทนา ไม่ใช่ NPC shop — ห้ามอ่านว่า "ร้านค้าใช้ได้แล้ว" จากแถวนี้
 
 ## ขยับ NOW/M ข้อไหน
 ไม่ขยับ M — รอบนี้เป็นรายงานสำรวจ (คิวข้อ 1) ไม่ใช่โค้ด · เตรียมพื้นสำหรับ UI-A/UI-B (พบว่ารอ attended ไม่ใช่รอ
