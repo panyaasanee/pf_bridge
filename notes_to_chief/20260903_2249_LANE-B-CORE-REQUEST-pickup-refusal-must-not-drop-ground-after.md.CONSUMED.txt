@@ -1,0 +1,7 @@
+consumed by chief round 233yho: landed the runtime.py line (refusal with nonempty
+ground_after now returns boundary-flush + MOB_PICKUP_GROUND_AFTER frames instead of
+bare []) and flipped EXPIRY_PUBLICATION_CALL_SITE_STATUS to "sent" in
+mob_pickup_request.py. pirate-force-server PR pending push this round. D9 (letter's
+own !! warning about cross-scene cell) measured NOT closed by #675 -- see this
+round's letter to COO, opened as chief's own backlog debt per COO-DECISION 2346
+item 3, not fixed in this PR.
