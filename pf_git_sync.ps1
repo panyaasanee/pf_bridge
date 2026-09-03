@@ -1299,6 +1299,108 @@ function ClaimPrCacheWrite($cache) {
     try { $out | Out-File -LiteralPath $p -Encoding ascii } catch { }
 }
 
+# ---------------------------------------------------------------------------
+# GHOST CLAIMS, added 2026-09-03 ~20:0x (+07:00) on the owner's order (ka1-A
+# wrote it down; the reason is pf_bridge#988).
+#
+# What happened: LANE-A round 0zoxir opened its bridge claim PR #988 at 16:22,
+# finished its SERVER half (pirate-force-server#662 merged) and died before it
+# pushed the bridge half.  The claim stayed OPEN with nothing on the branch but
+# the three-line stub.  Round h4d51r at 17:23 yielded to it for a whole hour.
+# Round omhpqj at 18:23 took it over and opened #1001 - but the house rule said
+# no lane closes another lane's PR, so #988 stayed open, a permanent phantom
+# lock every later LANE-A round has to reason about.  And this step never saw
+# it, because it only recognised the old chief-style subject 'round claim: x'
+# and not the lane-style '[LANE-A] round x: claim'.
+#
+# The owner ruled: a claim that meets ALL of these is a ghost and this step may
+# close it itself, writing the reason on the PR and in a notice:
+#   1. the bare claim is at least CLAIM_GHOST_MIN old (2 h)
+#   2. the branch carries nothing but claim stubs beyond origin/main
+#   3. the round is finished or replaced elsewhere: its server PR (same round
+#      id in the branch name) is closed or merged, OR another open bridge
+#      claim says 'takeover of #<this>'.  A server PR still OPEN for that round
+#      id means the round is alive - never a ghost.
+# Anything short of all three is still only reported, exactly as before.
+# The branch is NEVER deleted (the [5d] promise holds: nothing is lost).
+# ---------------------------------------------------------------------------
+
+$CLAIM_GHOST_MIN = 120
+
+function IsClaimSubject([string]$subject) {
+    if ($subject -like 'round claim:*') { return $true }
+    if ($subject -match '^\[[A-Za-z0-9\-]+\]\s+round\s+\S+:\s*claim') { return $true }
+    return $false
+}
+
+function GhToken() {
+    try {
+        $fill = "protocol=https`nhost=github.com`n`n" | & git credential fill 2>$null
+        foreach ($l in @($fill)) { if (([string]$l) -like 'password=*') { return ([string]$l).Substring(9) } }
+    } catch { }
+    return $null
+}
+
+function GhJsonAuth([string]$url, [string]$token) {
+    $hdr = @{ 'User-Agent' = 'pf-git-sync'; 'Accept' = 'application/vnd.github+json' }
+    if ($token) { $hdr['Authorization'] = ('Bearer ' + $token) }
+    try { return Invoke-RestMethod -Uri $url -Headers $hdr -TimeoutSec 25 } catch { return $null }
+}
+
+function GhostClaimVerdict([string]$branchShort, [int]$ageMin) {
+    # Returns a hashtable: ghost (bool), why (string), prnum (int), lane (string), roundid (string).
+    $v = @{ 'ghost' = $false; 'why' = ''; 'prnum' = 0; 'lane' = ''; 'roundid' = '' }
+    if ($ageMin -lt $CLAIM_GHOST_MIN) { $v['why'] = ('age ' + $ageMin + ' min < ' + $CLAIM_GHOST_MIN); return $v }
+    $roundId = ($branchShort -split '-')[-1]
+    $v['roundid'] = $roundId
+    # condition 2: nothing but claim stubs beyond origin/main
+    $lg = GitRun $BridgeRepo @('log', '--format=%s', ('origin/main..origin/' + $branchShort))
+    if ($lg.Code -ne 0) { $v['why'] = 'git log failed'; return $v }
+    $subs = @()
+    foreach ($l in ($lg.Out -split "`n")) { $t = ([string]$l).Trim(); if ($t -ne '') { $subs += $t } }
+    if ($subs.Count -eq 0 -or $subs.Count -gt 2) { $v['why'] = ('branch has ' + $subs.Count + ' commit(s) beyond main'); return $v }
+    foreach ($sb in $subs) { if (-not (IsClaimSubject $sb)) { $v['why'] = ('branch carries real work: ' + $sb); return $v } }
+    $token = GhToken
+    # this branch's open bridge PR
+    $open = GhJsonAuth 'https://api.github.com/repos/panyaasanee/pf_bridge/pulls?state=open&per_page=100' $token
+    if ($null -eq $open) { $v['why'] = 'GitHub unreachable'; return $v }
+    $mine = $null
+    foreach ($pr in @($open)) { if ($pr.head -ne $null -and $pr.head.ref -eq $branchShort) { $mine = $pr } }
+    if ($null -eq $mine) { $v['why'] = 'no open bridge PR for this branch'; return $v }
+    $v['prnum'] = [int]$mine.number
+    $v['lane']  = LaneFromTitle ([string]$mine.title)
+    # condition 3b: a takeover claim names this PR
+    $takeover = $false
+    foreach ($pr in @($open)) { if (([string]$pr.title) -match ('takeover of #' + $v['prnum'] + '(\D|$)')) { $takeover = $true } }
+    # condition 3a: the round's server PR is closed/merged, and none is still open
+    $srvOpen = GhJsonAuth 'https://api.github.com/repos/panyaasanee/pirate-force-server/pulls?state=open&per_page=100' $token
+    if ($null -eq $srvOpen) { $v['why'] = 'GitHub unreachable (server open PRs)'; return $v }
+    foreach ($pr in @($srvOpen)) { if ($pr.head -ne $null -and ([string]$pr.head.ref) -like ('*-' + $roundId)) { $v['why'] = ('server PR #' + $pr.number + ' for round ' + $roundId + ' is still OPEN - the round is alive'); return $v } }
+    $srvDone = $false
+    $srvClosed = GhJsonAuth 'https://api.github.com/repos/panyaasanee/pirate-force-server/pulls?state=closed&per_page=100&sort=updated&direction=desc' $token
+    if ($null -ne $srvClosed) {
+        foreach ($pr in @($srvClosed)) { if ($pr.head -ne $null -and ([string]$pr.head.ref) -like ('*-' + $roundId)) { $srvDone = $true } }
+    }
+    if (-not ($srvDone -or $takeover)) { $v['why'] = ('no closed/merged server PR for round ' + $roundId + ' and no takeover claim - not proven dead'); return $v }
+    $v['ghost'] = $true
+    $v['why'] = ('age ' + $ageMin + ' min; branch holds only ' + $subs.Count + ' claim stub(s); ' + $(if ($srvDone) { 'server PR for round ' + $roundId + ' is closed/merged' } else { 'no server PR found' }) + $(if ($takeover) { '; an open takeover claim names #' + $v['prnum'] } else { '' }))
+    return $v
+}
+
+function GhClosePr([string]$repo, [int]$num, [string]$comment) {
+    $token = GhToken
+    if (-not $token) { return 'no-token' }
+    $hdr = @{ 'Accept' = 'application/vnd.github+json'; 'User-Agent' = 'pf-git-sync'; 'Authorization' = ('Bearer ' + $token) }
+    try {
+        $body = (@{ 'body' = $comment } | ConvertTo-Json -Compress)
+        Invoke-RestMethod -Uri ('https://api.github.com/repos/' + $repo + '/issues/' + $num + '/comments') -Headers $hdr -Method Post -ContentType 'application/json' -Body $body -TimeoutSec 30 | Out-Null
+        Invoke-RestMethod -Uri ('https://api.github.com/repos/' + $repo + '/pulls/' + $num) -Headers $hdr -Method Patch -ContentType 'application/json' -Body '{"state":"closed"}' -TimeoutSec 30 | Out-Null
+        return 'closed'
+    } catch {
+        return ('failed: ' + $_.Exception.Message)
+    }
+}
+
 function ClaimOpenPrVerdict([string]$branchShort) {
     # branchShort is 'claude/xxx' with the origin/ prefix already stripped.
     # Returns 'open', 'none' or 'unknown'.  Never throws: this is a guard on a
@@ -1334,7 +1436,7 @@ if ($cf.Code -ne 0) {
         foreach ($line in ($cr.Out -split "`n")) {
             $parts = $line -split '\|'
             if ($parts.Count -lt 3) { continue }
-            if ($parts[2] -notlike 'round claim:*') { continue }
+            if (-not (IsClaimSubject ([string]$parts[2]))) { continue }
             $ageMin = [int](($nowUtc - [int64]$parts[1]) / 60)
             if ($ageMin -lt $CLAIM_STUCK_MIN) { $claimLive++; continue }
             if ($ageMin -ge $CLAIM_REAP_MIN) { continue }
@@ -1370,9 +1472,65 @@ if ($cf.Code -ne 0) {
         if (-not ($DryRun -or $SelfCheck)) { ClaimPrCacheWrite $cache }
 
         if ($reallyStuck.Count -gt 0) {
-            Shout '[5c]' ('round died holding the lock: ' + $reallyStuck.Count + ' claude/* branch(es) whose tip is still a bare round claim after ' + $CLAIM_STUCK_MIN + ' min AND whose pull request is still OPEN - every scheduled run since then is backing out of a lock nobody is using')
-            foreach ($c in $reallyStuck) { Log '[5c]' ('  !! ' + $c) }
-            Log '[5c]' 'a person must close that lock PR - this step will not touch it'
+            $stillStuck = @()
+            foreach ($c in $reallyStuck) {
+                $refShort = ($c -split '\s+')[0]
+                $branch = $refShort -replace '^origin/', ''
+                $ageMin = 0
+                if ($c -match 'age=(\d+)min') { $ageMin = [int]$Matches[1] }
+                $gv = $null
+                if ($DryRun -or $SelfCheck) { $gv = @{ 'ghost' = $false; 'why' = 'dry run'; 'prnum' = 0; 'lane' = ''; 'roundid' = '' } }
+                else { $gv = GhostClaimVerdict $branch $ageMin }
+                if (-not $gv['ghost']) {
+                    Log '[5c]' ('  not a ghost (' + $gv['why'] + '): ' + $c)
+                    $stillStuck += $c
+                    continue
+                }
+                $num = [int]$gv['prnum']
+                $comment = ('Ghost round claim, closed by pf_git_sync.ps1 step [5c] on the owner rule of 2026-09-03: ' + $gv['why'] + '. The branch ' + $branch + ' is kept; nothing is deleted. If this round is somehow still alive, reopen this PR and say so in notes_to_chief.')
+                $res = GhClosePr 'panyaasanee/pf_bridge' $num $comment
+                if ($res -eq 'closed') {
+                    Shout '[5c]' ('GHOST CLAIM CLOSED: pf_bridge#' + $num + ' (' + $branch + ') - ' + $gv['why'])
+                    $cache[$branch] = @{ 'when' = $nowUtc; 'verdict' = 'none' }
+                    try {
+                        $gn = (Get-Date -Format 'yyyyMMdd_HHmm') + '_SYNC-NOTICE-pf_bridge-pr' + $num + '-ghost-round-claim-closed.md'
+                        $gl = @()
+                        $gl += ('ADDRESSEE: ' + $gv['lane'])
+                        $gl += 'cc: COO, chief'
+                        $gl += ''
+                        $gl += ('# pf_bridge #' + $num + ' was a GHOST round claim and step [5c] closed it')
+                        $gl += ''
+                        $gl += ('written by pf_git_sync.ps1 step [5c] at ' + (Stamp) + ' (machine local time), on the owner rule of 2026-09-03 (ka1-A letter 20260903_20xx)')
+                        $gl += ''
+                        $gl += ('    branch   : ' + $branch + '   <- kept, nothing was deleted')
+                        $gl += ('    round id : ' + $gv['roundid'])
+                        $gl += ('    age      : ' + $ageMin + ' min on a bare claim tip')
+                        $gl += ('    why      : ' + $gv['why'])
+                        $gl += ''
+                        $gl += '## what a ghost claim is'
+                        $gl += '    a round pushed its claim, did its server half (or was taken over), and died before'
+                        $gl += '    it pushed the bridge half.  The open claim then reads as a live lock to every later'
+                        $gl += '    round of that lane (round h4d51r lost an hour to #988 this way).  All three of the'
+                        $gl += '    owner conditions held - age, stub-only branch, round finished or replaced - so this'
+                        $gl += '    step closed it and wrote the same reason on the PR.'
+                        $gl += ''
+                        $gl += '## if this is wrong'
+                        $gl += '    reopen the PR, say so in notes_to_chief, and ka1-A tightens the rule.  Nothing on the'
+                        $gl += '    branch was touched.'
+                        WriteAsciiFile (Join-Path (Join-Path $BridgeRepo 'notes_to_chief') $gn) $gl
+                        Log '[5c]' ('  notice written: ' + $gn)
+                    } catch { Log '[5c]' ('  notice NOT written: ' + $_.Exception.Message) }
+                } else {
+                    Shout '[5c]' ('ghost claim pf_bridge#' + $num + ' (' + $branch + ') met all three conditions but could not be closed (' + $res + ') - a person must close it')
+                    $stillStuck += $c
+                }
+            }
+            if (-not ($DryRun -or $SelfCheck)) { ClaimPrCacheWrite $cache }
+            if ($stillStuck.Count -gt 0) {
+                Shout '[5c]' ('round died holding the lock: ' + $stillStuck.Count + ' claude/* branch(es) whose tip is still a bare round claim after ' + $CLAIM_STUCK_MIN + ' min AND whose pull request is still OPEN - every scheduled run since then is backing out of a lock nobody is using')
+                foreach ($c in $stillStuck) { Log '[5c]' ('  !! ' + $c) }
+                Log '[5c]' 'not proven a ghost (see the lines above) - a person must judge that lock PR; this step only closes proven ghosts'
+            }
         }
         if ($unverified.Count -gt 0) {
             Shout '[5c]' ('' + $unverified.Count + ' bare round claim(s) older than ' + $CLAIM_STUCK_MIN + ' min, and GitHub could NOT be reached to check whether a pull request is still open - do not act on this line alone, check the PR by hand')
