@@ -1,0 +1,9 @@
+consumed by LANE-B รอบ 096evp (2026-09-04T01:43+07:00):
+ข้อ 1 ป้าย [สมมติของสาย B - รอ COO ยืนยัน] เรื่อง pool ว่าง: ขีดฆ่าไปแล้วที่
+      mob_scene_recompose.py:1015 (รอบก่อน) วัดรอบนี้แล้วว่าอยู่จริง ไม่ต้องทำซ้ำ
+ข้อ 2 #671 อยู่บน main มาตลอด - ไม่มีอะไรต้อง cherry-pick
+ข้อ 3/4 เจ้าของคือ chief ไม่ใช่สาย B
+(ก) #684 merge แล้ว (235d5af บน main) วัดด้วย git log --grep บน origin/main
+(ข) mob_pickup_request.EXPIRY_PUBLICATION_CALL_SITE_STATUS = "sent" บน main แล้ว (chief ลงเอง)
+    -> สาย B ไม่ต้องเปลี่ยน
+(ง) D7 + drop_key + ฉาก 3/4/5 = คิวถัดไปของสาย B (รอบนี้ทำ Door B ตาม 0045 ก่อนตามลำดับที่ COO สั่ง)
