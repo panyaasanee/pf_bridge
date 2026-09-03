@@ -9716,7 +9716,12 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
 
 **ผู้เปิดใบ: chief รอบ `liq4ri` 2026-09-01 (cloud)** · แก้ครั้งล่าสุด: chief รอบ `xkmzxr`/R306 (จ่ายหนี้ `COO 0544`)
 
-## GT-193 SPEED-COMMAND-SPARSE-X7-001  [🟢 READY (R299, 2026-09-02T06:2x+07:00) -- the visible-refusal blocker is CLOSED: PR #542 merged, `SPEED DENIED` verified on `main` (`origin/main:src/pirateforce_foundation/gm/say_wire.py:136`) and its 33 tests green against that clone. RECHECK item 5 passed. Bootable]
+## GT-193 SPEED-COMMAND-SPARSE-X7-001  [🔴 HOLD (chief R315, 2026-09-03T07:0x+07:00) -- ป้ายเดิมคือ `🟢 READY` (R299) และเนื้อใบไม่มีอะไรผิด · ตัวกั้นคือคำสั่งยืน `COO-DECISION 20260903_0645`: **ห้ามเรียกรอบ attended ที่มีคำว่า `/speed` หรือมีขั้นรีล็อกอินหลัง `/speed` จนกว่าเกตล็อกอินของใบนั้นจะอยู่บน `main`** เพราะแถวที่ `/speed` เขียนทิ้งไว้จะขึ้นไวร์เองตอนล็อกอินถัดไป · **ปลดเองได้เมื่อ RECHECK ข้อ 6 ผ่าน ไม่ต้องรอใคร**]
+
+RECHECK ข้อ 6 (ตัวปลด HOLD ข้างบน · เพิ่มโดย chief R315 ตามคำสั่งยืนของ `COO 0645`):
+  `(cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/login_speed.py | findstr /C:"wire_deferred")`
+  **เจอ** = เกตอยู่บน `main` แล้ว ⇒ ป้ายกลับเป็น `[🟢 READY]` ตามเดิมทุกประการ (เนื้อใบ ขั้นตอน และเกณฑ์ไม่เปลี่ยน) · **ไม่เจอ** = คง `[🔴 HOLD]` ห้ามบูต
+  สถานะ ณ R315: chief push เกตนี้ขึ้น PR แล้วในรอบเดียวกัน **ยังไม่ merge** ⇒ ยังไม่เจอบน `main` (ห้ามเชื่อคำนี้ ให้รันคำสั่งข้างบนเอง)
 
 > Opened by chief per direct COO order `notes_to_chief/20260901_1642_COO-ORDER-speed-sparse-x7-chief-open-gt-entry.md`,
 > itself citing `20260901_1640_COO-ORDER-speed-sparse-x7-approved-panya-live-override-of-1447.md` (LANE-DB,
@@ -9774,6 +9779,12 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
      the character visibly moves faster than baseline, and every name label's colour again.
   6. Re-query the same persisted attribute row from the run-copy DB. Diff field-by-field against the
      step-3 snapshot.
+     🔴 [COO-DECISION `20260903_0649` item ③, one sentence, added by chief round R315] A CHANGED ROW HERE
+     DOES NOT MEAN THE CLIENT WILL RECEIVE THAT VALUE AT THE NEXT LOGIN: once the gate of `COO-DECISION
+     20260903_0645` is on `main` (RECHECK item 6 above -- pushed in R315, not merged at the time this line
+     was written), `login_speed.resolve_for_character` returns the wire CONSTANT (400.0, reason
+     `wire_deferred`) for as long as `gm/speed_wire.send_deferred()` is true, so this diff grades the WRITE
+     only. Nothing in this step may be read as "the value was delivered".
   7. Repeat steps 3-6 once more with `/speed 100` (STEP-B, expect visibly slower than baseline).
   8. [COO-DECISION `20260901_1847`, item 4] Between step 4 and step 5, before anything else: watch for a
      client-side modal error, a dropped/closed socket, or a forced reconnect-and-relogin immediately after
@@ -11811,19 +11822,22 @@ RECHECK: `git -C pirate-force-server fetch && git -C pirate-force-server grep -c
 
 **ผู้เปิดใบ: LANE-A (WORLD) รอบ `4uztfj` 2026-09-02T20:0x+07:00 -- LANE-A บริโภคผลใบนี้เอง**
 
-## GT-218 SPEED-SAFE-VALUE-400-DRY-RUN-CLIENT-SURVIVES-001  [BLOCKED -- ล็อกทั้งสองของ `/speed` ยังปิดอยู่ · ปลดป้ายได้ก็ต่อเมื่อ RECHECK ผ่านครบสี่ข้อเท่านั้น ห้ามปลดเพราะมีคนบอกว่า merge แล้ว]
+## GT-218 SPEED-SAFE-VALUE-400-DRY-RUN-CLIENT-SURVIVES-001  [BLOCKED -- รอเกต runtime `PF_SPEED_TRIAL` ของ LANE-GM ขึ้น `main` (RECHECK ข้อ 3) · ล็อกทั้งสองของ `/speed` **ตั้งใจให้ปิดค้างไว้** ประตูเปิดในเซสชันผู้เทสเท่านั้น · ปลดป้ายได้ก็ต่อเมื่อ RECHECK ผ่านครบสี่ข้อเท่านั้น ห้ามปลดเพราะมีคนบอกว่า merge แล้ว]
 
 > เปิดโดย chief รอบ R310 ตาม `COO-DECISION 20260902_2148` ใบที่ 1 · numbering: `GT` สูงสุดในคิว = 217 · `RE` สูงสุดใน `CLIENT_RE_QUEUE.md` = 133 ⇒ ใบนี้คือ **218**
 > 🔴 โค้ดใต้ล็อกทั้งสอง **ยังไม่เคยถูกรันแม้แต่ครั้งเดียว** วันที่ล็อกที่สองเปิด = วันแรกที่มันทำงาน และมันจะทำงานต่อหน้าเจ้าของ ⇒ ใบนี้ถูกออกแบบให้ **พังได้อย่างปลอดภัย** · 🔴 **ห้ามพ่วงงานอื่นในใบนี้** ใบอื่นห้ามพังไปกับมัน
 
 RECHECK: (ตัดสินด้วยเนื้อโค้ดบน `origin/main` ห้ามเชื่อคำบอกเล่าหรือเลข commit · ผ่านครบสี่ข้อ = เลื่อนเป็น `READY` ได้เองโดยไม่ต้องรอเจ้าของใบ)
+  🔴 **บล็อกนี้ถูกเขียนใหม่ทั้งบล็อกตาม `COO-DECISION 20260903_0649` ข้อ ② (chief รอบ R315)** — รูปเดิมเรียกร้อง `SPEED_LOGIN_READ_LANDED = True` และ `SHAPES_CLEARED_BY_A_REAL_CLIENT` ไม่ว่าง **เป็นเงื่อนไขเข้ารอบ** ทั้งที่สองอย่างนั้นคือ **ผลลัพธ์ของรอบนี้เอง** ⇒ ใบไม่มีวันบูตได้ (วงปิดที่ `LANE-GM 20260903_0529` ข้อ 2 รายงาน)
+  🔴 **ล็อกทั้งสองตัวคงค่าเดิมบน `main` ตลอดใบนี้ · RECHECK ห้ามวัดว่ามันเปิด และห้ามใครพลิกมันเพื่อให้ใบนี้บูตได้** (`gm/speed_wire.py:357` = `return not SPEED_LOGIN_READ_LANDED` ⇒ ธงนั้นคือ **ล็อกตัวจริง ไม่ใช่บันทึกข้อเท็จจริง** · "`#605` ลงแล้ว" ไม่ใช่เหตุผลที่พลิกได้) · ประตูเปิด **ในเซสชันของผู้เทสเท่านั้น** ผ่านเกต runtime ข้อ 3 และปิดเองเมื่อโปรเซสตาย
   1. `(cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/session.py | findstr /C:"login_speed.resolve_for_character")`
-  2. `(cd pirate-force-server && git show origin/main:src/pirateforce_foundation/gm/speed_wire.py | findstr /C:"SPEED_LOGIN_READ_LANDED: bool = True")`
-  3. `(cd pirate-force-server && git show origin/main:src/pirateforce_foundation/gm/speed_wire.py | findstr /C:"SHAPES_CLEARED_BY_A_REAL_CLIENT: frozenset = frozenset()")`
+  2. `(cd pirate-force-server && git show origin/main:src/pirateforce_foundation/login_speed.py | findstr /C:"speed_wire.send_deferred()" /C:"wire_deferred")`
+  3. `(cd pirate-force-server && git show origin/main:src/pirateforce_foundation/gm/speed_wire.py | findstr /C:"PF_SPEED_TRIAL")`
   4. `(cd pirate-force-server && py -3 -m pytest tests/test_login_speed.py tests/test_gm_speed_deferred.py tests/test_gm_speed_shape_hold.py -q)`
   ข้อ 1 ต้อง **เจอ** = login-read ต่อที่ seam จริง (ล็อกที่ 1 · `COO 1846`)
-  ข้อ 2 ต้อง **เจอ** = `SPEED_LOGIN_READ_LANDED` ถูกพลิกเป็น `True` แล้ว (วันนี้เป็น `False` ที่ `gm/speed_wire.py:327`)
-  ข้อ 3 ต้อง **ไม่เจอ** = เซตไม่ว่างแล้ว (ล็อกที่ 2 · วันนี้เป็น `frozenset()` ที่ `gm/speed_wire.py:277`)
+  ข้อ 2 ต้อง **เจอทั้งสองคำ** = เกตล็อกอินของ `COO-DECISION 20260903_0645` อยู่บน `main` แล้ว: ขณะ `/speed` ถูกกัก ล็อกอิน **ส่งค่าคงตัว** ไม่ใช่ค่าจากแถว (ลงรอบ R315 · `login_speed.held_by_the_speed_deferral`)
+     🔴 ข้อนี้คือเหตุผลที่ขั้น "รีล็อกอินเพื่อกู้" ในใบนี้ไม่ใช่กับดัก — ไม่เจอ = **ห้ามบูตใบนี้เด็ดขาด** เพราะแถว `300.0` ที่ `GT-193` ทิ้งไว้จะขึ้นไวร์ตอนล็อกอินถัดไป (`00 00 96 43` ไบต์ชุดเดียวกับที่ล็อกไคลเอนต์ 426 เฟรม)
+  ข้อ 3 ต้อง **เจอ** = LANE-GM ลงเกต runtime `PF_SPEED_TRIAL` แล้ว (`COO-DECISION 20260903_0646`) ⇒ ผู้เทสเปิดประตูในเซสชันตัวเองได้โดยไม่ต้องแก้โค้ดและไม่ต้องพลิกล็อกบน `main` · **ยังไม่เจอวันนี้** (chief วัดบน `origin/main` `d916725` รอบ R315) ⇒ ใบคง `[BLOCKED]`
   ข้อ 4 เขียวทั้งชุด · ข้อใดไม่ตรง = คง `[BLOCKED]` **ห้ามบูต ห้ามเรียกผู้เทส**
   ใบนี้มีชั้น client-observable ⇒ **G-OBS บังคับ**: จดหมายผลต้องมี `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>` · รันจบแต่ยังไม่มีลายเซ็นตาคน = **`AWAITING-OBSERVER`** (ไม่ใช่ PASS ไม่ใช่ FAIL) · ทุกเฟรมที่ยกมาอ้างต้องมี `t` เทียบ `T0` และ `dist` (G-FRAME)
 
@@ -11835,13 +11849,18 @@ RECHECK: (ตัดสินด้วยเนื้อโค้ดบน `origi
   ⇒ ค่าตรงกับของเดิมทุกไบต์ ⇒ ถ้าไคลเอนต์ยังตายอีก **ผู้ต้องสงสัยคือทรงเฟรม ไม่ใช่ตัวเลข** ซึ่งเป็นคำตอบที่วันนี้เราไม่มี
 
 - 🔴 **อาจต้องรีล็อกอิน -- รู้ไว้ก่อนกด ไม่ใช่ตอนจอค้าง**: ถ้าไคลเอนต์ล็อกตัวเองซ้ำแบบ `GT-193` ทางออกเดียวคือปิดไคลเอนต์ **แล้วรีสตาร์ตเซิร์ฟเวอร์ก่อน** จึงบูตไคลเอนต์ใหม่ (ไม่รีสตาร์ต = ตัวถัดไปค้าง "connecting" ตลอดกาล) · การรีล็อกอินนี้เป็น **ขั้นกู้ ไม่ใช่ผลวัด** และการที่ต้องใช้มัน = **FAIL ของชั้น client-observable**
+  🔴 **ขั้นกู้นี้อยู่ได้ก็ต่อเมื่อ RECHECK ข้อ 2 ผ่านแล้วเท่านั้น** (`COO-DECISION 20260903_0649`): ก่อนเกต `0645` ลง `main` การรีล็อกอินคือทางที่แถวเก่าของ `/speed` ขึ้นไวร์เอง ⇒ ขั้นกู้กลายเป็นกับดักที่ทำซ้ำอาการเดิม · เมื่อกู้แล้วให้บูตเซิร์ฟเวอร์ใหม่ **โดยไม่ตั้ง** `PF_SPEED_TRIAL` (ประตูปิดตามค่าเริ่มต้น) เว้นแต่ใบสั่งใหม่บอกเป็นอย่างอื่น
 
 - db: canonical `state\pirateforce.sqlite3` -- 🔴 **สำเนาเท่านั้น ห้ามเปิด canonical** ⇒ `state\run_gt218_<yyyyMMdd_HHmmss>.sqlite3`
   🔴 **ชื่อสำเนาห้ามเป็น `pirateforce.sqlite3` และห้ามมี `~`** ไม่งั้นเกต `_speed_db_is_canonical` (`gm/chat_command_action.py:3463-3493`) กันคำสั่งทิ้งทั้งใบ
   sha256 สำเนาก่อน/หลัง · sha256 canonical ก่อน/หลัง ต้องเท่ากัน · `PRAGMA integrity_check` = `ok` สองครั้ง · **teardown เสมอ** (เทมเพลตปฏิเสธ boot stamp เก่ากว่า 420 นาที) · รอบคัดลอก DB ⇒ ตัวละครกลับ spawn ทุกบูต ปกติ ไม่ใช่ผลวัด
 
 - server args: บูตมาตรฐาน **ไม่มีแฟล็ก scenario ใด ๆ** · `-SecondPasswordMode bypass` · บัญชี GM ใน `config/gm_accounts.json` · 🔴 เก็บคอนโซลรวม stdout+stderr (โทเคนเลนนี้ออกทาง stderr ล้วน):
+  `set PF_SPEED_TRIAL=400`
   `py -3 -u -m pirateforce_foundation.app --db state\run_gt218_<stamp>.sqlite3 2>&1`
+  🔴 **ตั้งตัวแปรนี้ในหน้าต่างคำสั่งเดียวกับที่บูตเซิร์ฟเวอร์ ก่อนบูต** (`COO-DECISION 20260903_0646`/`0649`) — มันคือสิ่งเดียวที่เปิดประตู `/speed` ในรอบนี้ · ปิดเองเมื่อโปรเซสตาย · **ห้ามแก้โค้ดเพื่อเปิดประตู และห้ามพลิกธงบน `main`**
+  🔴 ค่าที่ตั้งต้องเป็น `400` เท่านั้น ตรงกับค่าที่ใบนี้อนุญาตให้พิมพ์ · ตั้งค่าอื่น = ออกจากขอบเขตใบ หยุดและรายงาน
+  🔴 เกตนี้เปิด **สองประตูพร้อมกัน** (`/speed` ขาออก และการอ่านแถวตอนล็อกอิน) เพราะเกตล็อกอินอ่าน `speed_wire.send_deferred()` สด ⇒ ถ้ามีการรีล็อกอินในเซสชันที่ตั้งตัวแปรนี้ ค่าจากแถวจะขึ้นไวร์ (วันนี้ = `400.0` เท่ากับค่าคงตัวอยู่แล้ว) · ถ้าคอนโซลพิมพ์ `LOGIN_SPEED wire_deferred` ทั้งที่ตั้งตัวแปรแล้ว = **finding** จดไว้ ไม่ต้องแก้อะไรระหว่างรอบ
 
 - steps: (playbook `ATTENDED_SESSION_RUNBOOK.md` · อัดวิดีโอต่อเนื่องตลอด `LOCK_GAME` · ~10 นาทีบนจอ)
     0. RECHECK ผ่านก่อน · `LOCK_GAME` · boot stamp · sha canonical · คัดลอก DB
