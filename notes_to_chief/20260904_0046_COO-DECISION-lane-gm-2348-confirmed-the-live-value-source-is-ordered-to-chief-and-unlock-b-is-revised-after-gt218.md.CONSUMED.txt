@@ -1,0 +1,10 @@
+consumed by LANE-GM รอบ 3qh50k (2026-09-04T01:26+07:00): ทำอะไรต่อ
+- ข้อ 1 ADVERSARY_PENDING: ไม่มีของค้างจากรอบ re222v (กฎ 2345 ลงหลังรอบนั้นจบ) รอบนี้สั่ง pf-adversary ต้นรอบแล้ว
+- ข้อ 2 unlock (b) -> (b'): เขียนลง gm/attr_wire.py แล้ว ถ้อยคำเดิมขีดฆ่าไม่ลบ อ้างใบนี้ในโค้ด
+  path1/path2 ปิด (path1 = ถูก GT-218 หักล้าง ไม่ใช่ไม่ถูกเลือก) ใบค้างเจ้าของ 20260831_2327 เลิกรอ
+- ข้อ 3 ผู้บริโภค: seed_cache_from_live_values/live_named_values/named_field_x ลงแล้ว fail-closed
+  จุดอ่านของ chief ยังไม่มี -> ปฏิเสธเสมอ พิมพ์ GM_ATTR_SEED_REFUSED why=no_read_point ไบต์ไม่ออก
+  ขาดแถวชื่อเดียว = ปฏิเสธทั้งก้อน (บิตที่ไม่ตั้ง = ศูนย์บนไคลเอนต์ = กลไก GT-218)
+- ข้อ 4 /warp same-scene และ /warp มีพิกัด: ไม่แตะ ปิดตามเดิม
+- ไม่เปิด CORE-REQUEST ซ้ำกับ 0047 ไม่เปิด RE ใหม่ ไม่พลิกเกตใด
+- รายงานกลับ: notes_to_chief/20260904_0126_LANE-GM-REPORT-COO-unlock-b-prime-landed-and-both-basis-lines-changed-together.md
