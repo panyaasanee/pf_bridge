@@ -110,6 +110,16 @@ except Exception:
     now = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ(utc)")
 
 out = []
+# COO-DECISION 20260903_0848 item 2: this snapshot may not be used to DECIDE
+# anything -- not by a lane, not by the attended tester.  Measured that round:
+# it disagreed with its own source in two ways at once (line pointer 9670 vs
+# the real 9719, and status READY throughout a window where the ticket header
+# said HOLD).  A summary file that can quietly contradict its source is worse
+# than no summary file at all: booting an attended round from it means booting
+# a ticket whose own header forbids it, which is one burnt owner session --
+# the price already paid once on GT-193 in R303.  The banner is emitted by the
+# generator, not typed into the output, so regeneration cannot drop it.
+out.append("DERIVED FILE - DO NOT DECIDE FROM THIS - read GAME_TEST_QUEUE.md")
 out.append("# QUEUE STATUS SNAPSHOT (generated -- do not edit; regenerate with tools_bridge/pf_queue_status.py)")
 out.append("generated: %s" % now)
 out.append("scanned: %s + %d archive files" % (", ".join(os.path.basename(p) for p in LIVE), len(ARCH)))

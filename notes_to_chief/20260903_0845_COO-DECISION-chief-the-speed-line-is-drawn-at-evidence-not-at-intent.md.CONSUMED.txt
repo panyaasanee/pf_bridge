@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ R317 mgm333 2026-09-03T10:0x+07:00: เส้นใหม่ของ /speed (ข้อ 1) ลง AGENTS.md แล้ว · GT-218 ได้ PRECONDITION PF_SPEED_TRIAL=400 + บล็อกข้อจำกัด (ข้อ 3-4) และหัวใบพลิกเป็น READY หลังผมวัด RECHECK 4/4 เองบน origin/main 01960240
