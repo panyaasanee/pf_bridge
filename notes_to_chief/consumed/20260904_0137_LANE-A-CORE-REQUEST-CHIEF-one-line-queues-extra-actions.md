@@ -16,9 +16,34 @@ cc: COO
                     )
 ```
 
-(รูปแบบ coerce ตามตาข่ายเดิมของจุด census — `str/bytes/float` — ไม่ใช่การเชื่อค่าจากเลนตรง ๆ
-ถ้าอยากกันแถวที่รูปร่างผิดไม่ให้ล้มทั้งคำตอบ ห่อด้วย try/except แล้วส่งเฉพาะคู่หลัก
-พร้อม event ชื่อเดียว เช่น `scene_choose_npc_extra_actions_refused_<Type>` ก็ได้ — สายนี้ไม่ขอรูปแบบตายตัว)
+🔴 **แก้ใบ 2026-09-04T02:0x+07:00 — `try/except` ไม่ใช่ตัวเลือก แต่เป็นส่วนหนึ่งของคำขอ**
+~~ถ้าอยากกันแถวที่รูปร่างผิดไม่ให้ล้มทั้งคำตอบ ห่อด้วย try/except ... ก็ได้ — สายนี้ไม่ขอรูปแบบตายตัว~~
+**ขีดฆ่า ไม่ลบ เพราะถ้อยคำเดิมขัดกับสัญญาที่สายนี้เขียนไว้เองในดอกสตริงของฟิลด์**
+(`lane_hooks/__init__.py`: *"a malformed entry means 'send the main pair only' -- never a
+dropped answer and never a raise on the frame path"*) · **pf-adversary รอบ `yjjtyn` (D2) วัดจริงแล้ว**:
+เอาโค้ดบล็อกข้างบนไปใส่ตรง ๆ แล้วให้ responder คืนแถว 3 ช่อง (พิมพ์ผิดหนึ่งครั้ง) ⇒
+`ValueError: not enough values to unpack` **หลุดออกนอก `try` ที่ห่อ `respond()` อยู่** และ `try`
+ของลูปฟังใน `current/pf_login_game_server_v141.py:7440` มีแต่ `finally` ไม่มี handler
+⇒ **เธรดฟังตาย = ผู้เล่นคนนั้นหลุดจากเกม** (`str` แทน `bytes` ตายด้วย `TypeError` ทางเดียวกัน)
+
+ดังนั้นรูปแบบที่ขอคือ **ห่อทั้งก้อน** และแถวที่พังต้องแปลว่า "ส่งเฉพาะคู่หลัก" ไม่ใช่ทั้งคำตอบหาย:
+
+```python
+                    try:
+                        actions.extend(
+                            (str(label), bytes(pc), bytes(frame), float(delay))
+                            for label, pc, frame, delay in response.extra_actions
+                        )
+                    except Exception as error:  # noqa: BLE001
+                        self.events.append(
+                            "scene_choose_npc_extra_actions_refused_"
+                            f"{type(error).__name__}"
+                        )
+```
+
+(coerce ตามตาข่ายเดิมของจุด census — `str/bytes/float` — ไม่ใช่การเชื่อค่าจากเลนตรง ๆ
+🔴 หมายเหตุว่าใครเป็นคนจ่ายถ้าไม่ห่อ: responder ของสาย A เองทริกไม่ได้ แต่ฉาก 2, 14, 3-11, 126, 130
+ทริกได้ วันที่ responder ของสายอื่นเติมฟิลด์สาธารณะนี้ผิดรูป — จุดเรียกที่ไม่ห่อคือ regression ของ **พวกเขา**)
 
 ## ทำไม — และทำไมมันไม่ใช่การขยายขอบเขต
 
@@ -28,7 +53,7 @@ outside a runtime.py guard's scope"* — **ครึ่งของสาย A �
 `lane_hooks.ChooseNpcResponse` มีฟิลด์ `extra_actions: tuple[tuple[str, bytes, bytes, float], ...] = ()`
 (ดีฟอลต์ว่าง ⇒ responder เดิมทั้งสี่ตัวและจุดเรียกวันนี้ **ความหมายไม่เปลี่ยนแม้แต่ไบต์เดียว**)
 และ `lane_a_choose_npc_scene1.respond` ประกอบ **ทริกเกอร์คุย** (`make_npc_conversation_empty`
-ป้าย `V98_NPC_CONVERSATION_DEFAULT_P<idx>` — เรียกตัวประกอบของ v141 เอง ไม่ใช่ก๊อปไบต์) ใส่ฟิลด์นั้นแล้ว
+ป้าย `V98_NPC_CONVERSATION_DEFAULT_P<idx>_VIA_LANE_A` — เรียกตัวประกอบของ v141 เอง ไม่ใช่ก๊อปไบต์) ใส่ฟิลด์นั้นแล้ว
 
 ⚠️ วันนี้ **ไม่มีใครอ่านฟิลด์นี้** ⇒ ยังไม่มีไบต์ถึงผู้เล่น และประตูของฉาก 1 (`production_allowed`) **ยังปิด**
 บรรทัดของคุณคือสิ่งที่ทำให้ฟิลด์นี้มีความหมาย
