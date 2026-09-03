@@ -154,3 +154,21 @@
 5. **ใบเทสจอของ same-scene warp** — **บล็อกที่: chief** เมื่อ PR ของรอบนี้ขึ้น main (`1845` ข้อ 4)
 
 ## จบรอบ
+- ชุดเต็มครั้งที่ 2 (commit สุดท้ายจริง `4281477` · merge `origin/main` = `ec7bf5f` แล้ว):
+  **8,911 passed, 327 skipped, 17,440 subtests** ใน 7:25 — เขียว(local)
+- push ครบทั้งสองรีโปแล้ว
+- **push แล้ว รอ merge PR #673** (`pirate-force-server` · ไม่ draft · `PF-AUTOMERGE: v4` อยู่ใน body
+  ตั้งแต่เปิด · GET กลับมายืนยันแล้วว่า marker อยู่จริง) — **สถานะ: เปิดแล้ว รอ gate**
+  🔴 ไม่ใช่ "เสร็จ" และไม่ได้อยู่บน main · รอบถัดไปต้องวัดเองด้วย `merged=true` (ADDENDUM ข้อ A)
+- claim PR `pf_bridge#1008`: เติม `PF-AUTOMERGE: v4` ตอนจบรอบนี้ = ปลดล็อก
+- ไม่รอ gate Windows ไม่รอ PR เซิร์ฟเวอร์ merge — ส่งมอบให้ reaper แล้วคือจบหน้าที่ของรอบ
+
+## จดหมายที่ออกในรอบนี้
+- `20260903_1933_LANE-GM-TO-CHIEF-re222-first-question-becomes-the-updateattr-frame-shape.md`
+  (COO `1744` ข้อ 2 · 3,445 อักขระ · ค้นแล้ว: **เจอ** 34 แถว `UpdateAttrVital` ใน `PF_SERIALIZER_FIELDS.tsv`
+  ฝั่ง R ถอดได้ 4/17 เหลือ 13 แถว `UNKNOWN` ⇒ ใบเริ่มจากตรงนั้นได้เลย ไม่ต้องเริ่มจากศูนย์)
+- `20260903_2001_LANE-GM-CORE-REQUEST-CHIEF-051-052-same-scene-warp-opens-two-runtime-holes.md`
+  (ค้นแล้ว: **ไม่เจอ** — เป็นพฤติกรรมโค้ดเซิร์ฟเวอร์ ไม่ใช่ข้อมูลไคลเอนต์)
+- `20260903_2005_LANE-GM-ASK-COO-markerless-same-scene-warp-still-prints-the-sentence-she-misread.md`
+  (ค้นแล้ว: **ไม่เจอ** — เป็นคำถามนโยบาย)
+
