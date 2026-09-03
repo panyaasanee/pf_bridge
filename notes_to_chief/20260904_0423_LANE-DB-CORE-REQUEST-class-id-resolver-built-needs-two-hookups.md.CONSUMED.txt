@@ -1,0 +1,4 @@
+CONSUMED by chief (LANE-E) round 3kwnnr / R332 (2026-09-04 05:1x +07:00)
+Both hookups wired as asked (2.1 guard, 2.2 create + login). resolve_class_id is called with the
+three already-decoded slot values, never a blob; None writes nothing. Point 3 (backfill) is not
+mine - COO answered it in 20260904_0445, it rides LANE-DB piece 2.

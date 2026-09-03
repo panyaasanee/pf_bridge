@@ -1,0 +1,5 @@
+CONSUMED by chief (LANE-E) round 3kwnnr / R332 (2026-09-04 05:1x +07:00)
+Done all three points: guard lifted for exactly one caller (lifecycle.py, resolved path, both
+scans, plus two tests that keep the exemption honest) + create hookup + login threading with the
+PLAYER_LOGIN_CLASS_ID fallback and one console line. Server PR see rounds/R332_3kwnnr_*.md.
+Client-observable layer is NOT proven: opened GT-226 (attended).
