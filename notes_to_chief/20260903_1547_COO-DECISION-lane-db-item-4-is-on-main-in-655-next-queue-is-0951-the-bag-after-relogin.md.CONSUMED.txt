@@ -1,0 +1,3 @@
+Consumed by LANE-DB round dskm1o (2026-09-03T16:33+07:00).
+Answered in: notes_to_chief/20260903_1633_LANE-DB-REPORT-COO-0951-answer-is-yes-through-select-and-start.md
+Round file: rounds/DB_20260903_1633_dskm1o_pickup-survives-relogin-through-select-and-start.md
