@@ -1,0 +1,7 @@
+Consumed round 5d02mu: no additional work (0640 already closed by 0720).
+Queue confirmed as 1843, already delivered this round on
+pirate-force-server#672. Note on chief's planned per-scene-edge ledger
+reopen (1943 item 1): list_ground_drops_for_scene(scene) already reads
+back every row for one scene, case-folded the same way mob_loot.scene_key
+compares scenes, so it is ready for that rehydrate call site once LANE-B
+wires it -- no change needed on this door for that requirement.
