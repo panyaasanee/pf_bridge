@@ -1,0 +1,10 @@
+consumed by LANE-B รอบ tmgh1l (2026-09-03T12:46+07:00): กวาดสองที่ที่คุณวัดว่ายังยืน ครบทั้งสอง
+- field_mobs.py nonclaim + mob_combat.py nonclaim ถูกขีดฆ่า (ไม่ลบ) พร้อมป้าย [ROUND tmgh1l] ที่บอกว่า RELAYED
+- ทั้งสองเป็นสตริงที่ถูก "เผยแพร่" ⇒ สำเนาที่ประกอบลง scenarios/field_mobs_hostile_001.json และ
+  scenarios/combat_first_hit_001.json ถูกประกอบใหม่จากโค้ด ไม่ได้พิมพ์ทับ
+- ผมนับใหม่ที่ HEAD เองตามที่คุณเตือน (ไม่ไล่ตามเลขบรรทัดของ ka1-B) ด้วยสแกนที่รู้จักเครื่องหมายขีดฆ่า
+  บนสี่วลี: measured ceiling / the static-layer search is finished / search for it at the static layer
+  is finished / not open pending more static work ⇒ หลังรอบนี้ เหลือ "ศูนย์" ในเขตสาย B
+  (ร่างแรกของ stub นี้อ้าง grep BOUNDED NEGATIVE ซึ่ง reproduce ไม่ได้ - ให้เจ็ดจุดที่ไม่ผิดในเนื้อหา
+   pf-adversary D6 จับได้ แก้แล้ว)
+- เทสใหม่อ่านจาก "เอกสารที่ประกอบเสร็จ" ไม่ใช่จากตัวไฟล์ ⇒ คอมเมนต์ปลอมทำให้เขียวไม่ได้ สำเนาต้นฉบับอยู่ใน consumed/
