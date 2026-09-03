@@ -119,3 +119,21 @@ wound register ของ LANE-B (`2241`) เสียบ **หลัง** death 
 - `python3 tools/verify_hypothesis_ledger.py` ⇒ `HYPOTHESIS_LEDGER PASS entries=50` (exit 0) · `python3 tools/verify_functional_coverage.py` ⇒ exit 0
 - `tools_bridge/pf_gate_preflight.py --repo ../pirate-force-server` ⇒ `PREFLIGHT PASS`
 - 🔴 ที่นี่ไม่ใช่เกตตัวจริง ผลข้างบนคือ **เขียว(cloud sanity)** เท่านั้น เกตตัวเต็มอยู่บนสะพาน / Actions
+
+## สถานะ PR ท้ายรอบ (ตามจริง ห้ามอ่านว่า "อยู่บน main")
+- `pirate-force-server#685` — **push แล้ว รอ merge** (เปิด 23:43 +07 · marker อยู่ใน body ยืนยันด้วย GET กลับมาแล้ว · รอ gate Windows)
+- `pf_bridge#1026` — **push แล้ว รอ merge** (claim PR ของรอบนี้ · เติม marker เมื่อ push ครบทั้งสองรีโป = ปลดล็อก · ยืนยันด้วย GET กลับมาแล้ว)
+- 🔴 งานอยู่บน `main` ต่อเมื่อรอบถัดไปเห็น `merged=true` เอง (หัวข้อ 2 ข้อ 7) — บันทึกนี้ไม่ใช่หลักฐานว่า merge แล้ว
+
+## บันทึกเหตุการณ์ push ที่ควรจำ
+`git pull --rebase origin main` เขียนประวัติของ commit claim ที่ push ไปแล้วใหม่ ⇒ push ถูกปฏิเสธแบบ non-fast-forward
+**ห้าม force ตาม §7 ข้อ 5** จึงแก้ด้วยการ merge กิ่งของตัวเองจาก origin กลับเข้ามา ซึ่งทำให้ไฟล์ claim **กลับมา** (merge base ไม่มีไฟล์ · ฝั่ง origin มี ⇒ git รับ add)
+ต้องลบซ้ำอีกหนึ่ง commit · รอบถัดไปที่ต้อง rebase หลังเปิด claim แล้ว ให้รู้ล่วงหน้าว่าต้องเจอสองขั้นนี้
+
+## เกต / เทส (ผลจริง)
+- ชุดเต็มบนต้นไม้ที่ merge `main` แล้ว **บนคอมมิตสุดท้ายจริง**: `9145 passed, 323 skipped, 17657 subtests` — **เขียว(cloud sanity)** เท่านั้น
+  · skip เท่าเดิมกับ main ไม่มี skip ใหม่ · ชุดเต็มรันสามครั้งในรอบนี้ (ครั้งแรกแดง 2 ใบที่ `test_arena.py` จากหมุด event · ครั้งที่สองหลังแก้หมุด · ครั้งที่สามหลังแก้ตาม pf-adversary) เขียนไว้ตามกฎหัวข้อ 10
+- mutation check ของฟิลด์ใหม่: ใส่ตัวกั้นแบบเฟรมเดียวกลับเข้าไป ⇒ เทสใหม่ **แดง 3 ใบ** (รวมใบที่ตรึง D1 และ D2)
+- `python3 tools/verify_hypothesis_ledger.py` ⇒ `PASS entries=50` (exit 0) · `python3 tools/verify_functional_coverage.py` ⇒ exit 0
+- `tools_bridge/pf_gate_preflight.py --repo ../pirate-force-server` ⇒ `PREFLIGHT PASS` · `--self-test` ⇒ `SELF-TEST PASS: 15 cases, 15 compared`
+- 🔴 ที่นี่ไม่ใช่เกตตัวจริง เกตตัวเต็มอยู่บนสะพาน / Actions
