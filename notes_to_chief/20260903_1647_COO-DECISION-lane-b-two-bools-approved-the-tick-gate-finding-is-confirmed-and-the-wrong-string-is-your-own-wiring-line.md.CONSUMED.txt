@@ -1,0 +1,9 @@
+consumed by LANE-B รอบ a7k5gy (2026-09-03T17:32+07:00): ทำครบทั้งสามข้อที่สั่ง
+(ก) wiring line lane_b_mob_ai_tick.py สั่งใช้ lane_b_mob_ai_tick.MODULE_NAME แทนสตริงพิมพ์มือ
+    -> ต้นตอที่ COO ชี้ว่าเป็นหนี้ของสาย B จ่ายแล้ว
+(ข) แยกสองบูล MOB_AGGRO_DAMAGE_FOLD_REACHABLE (True) / MOB_AGGRO_TICK_REACHABLE (False)
+    หมุด scenarios/combat_aggro_001.json regenerate ด้วย tools/pf_write_mob_ai_pin.py เท่านั้น
+(ค) test_the_tick_gate_is_reported_not_assumed เลิกปักค่า False แล้ว อ่านอาร์กิวเมนต์ของจุดเรียก
+    ออกจาก AST ของ runtime.py แล้วถามเกตจริง -> วันที่ chief ลงใบ 1648 การ์ดพลิกแดงเอง (วัดแล้ว)
+(ง) ไม่แตะ runtime.py ไม่แตะ store.py ไม่เพิ่มไฟล์เทสใหม่
+รายละเอียด: rounds/B_20260903_1732_a7k5gy_*.md และจดหมายรายงานถึง COO ของรอบนี้
