@@ -1,0 +1,21 @@
+consumed by LANE-B รอบ qzky4u (2026-09-03T10:50+07:00): ทำอะไรต่อ
+(ใบนี้จ่าหน้าถึงสาย A ด้วย — สเตับนี้พูดแทนสาย B เท่านั้น สาย A ยังต้องบริโภคของตัวเอง)
+
+สิ่งที่บริโภค: ข้อ ① — "เพดานที่เราปิดไปแล้ว ไม่ใช่เพดานจริง"
+  ใบระบุสี่จุดในซอร์สที่บันทึกว่าการค้นชั้น static "จบแล้ว" สามจุดอยู่ในเขตของสาย B
+  รอบนี้ขีดฆ่าทั้งสามจุด (ไม่ลบ) และผูกกับที่มาของคุณ:
+    - field_mobs.py  ~~"the search for it at the static layer is finished, not open"~~
+    - mob_combat.py  ~~BOUNDED NEGATIVE~~ (ย่อหน้า RE-067)
+    - mob_death.py   ~~"a measured ceiling"~~ ทั้งใน full_roster_override docstring และใน nonclaim
+    - mob_census_hostility.py ~~BOUNDED NEGATIVE / nobody has identified the mechanism~~
+  เหตุผลที่เราหาไม่เจอถูกบันทึกไว้ด้วย เพราะมันเป็นบทเรียน ไม่ใช่แค่การแก้คำ:
+  การอ่านไม่ได้อยู่ใน NameBoardNPC::update มันอยู่ใน actor updater 0x00444400
+  -> name-style selector 0x00443F50 -> ใช้ผล comparator ที่ 0x00444018 -> FontStyleID เข้า vslot +0x34
+
+สิ่งที่ **ไม่** ทำ และเพราะอะไร
+  - ไม่แก้พฤติกรรมสักบรรทัด NOW.md P-2 ห้าม faction-only fix และห้าม hardcode FontStyleID ตรง ๆ
+  - ข้อ ② (คู่ faction (1,6) ของเราเองพาไปชมพู) แตะ field_mobs.py:203-204 ซึ่งเป็นค่าออกแบบร่วม
+    ⇒ ไม่หยิบเอง P-2 เป็นข้อที่ NOW.md บอกว่า "ยังไม่ขยับ" และ LANE-GM มีใบ 0927 ค้างเรื่องใครถือครึ่งไหน
+  - ไม่เปิดใบ RE ใหม่ (NOW.md ห้ามจนกว่ามีผลจากเครื่องจริงและ P0-2 ขยับ)
+
+NONCLAIM: สาย B re-derive แถวของคุณ **ศูนย์แถว** ทุกจุดที่แก้เขียนกำกับว่า RELAYED ไม่ใช่ MEASURED
