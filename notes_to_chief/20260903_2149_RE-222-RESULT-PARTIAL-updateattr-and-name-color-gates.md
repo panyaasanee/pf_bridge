@@ -2,7 +2,7 @@
 
 # RE-222 — PARTIAL: UpdateAttrVital framing and name-color gate chain
 
-- Status: **PARTIAL — time checkpoint, resumable; not a method ceiling**
+- Status: **PARTIAL — Q0/Q1/Q2 DONE; Q3 main registry + lookup DONE, exact selector-list population path remains a resumable time checkpoint (not a method ceiling)**
 - Jobs covered this round: **Q0–Q3**
 - START: `2026-09-03T21:33:04.508+07:00`
 - Static only. No game/server boot, no `LOCK_GAME`, no canonical DB, and no source/queue/external/gamedata mutation.
@@ -64,12 +64,33 @@ Within the quoted bytes the UpdateAttr container starts at offset 20:
 | Offset | Bytes | Meaning | Verdict |
 |---:|---|---|---|
 | 20 | `12 01 00` | count = 1 | structurally valid |
-| 23 | `12 AD 12` | factory type key = `0x12AD` | structurally valid; concrete class unresolved |
+| 23 | `12 AD 12` | factory type key = `0x12AD` | `checksum("ActorAttr") & 0xFFFF`; exact class crosswalk |
 | 26 | `14 1E 00 00 00` | nested length = 30 | structurally valid |
-| 31–60 | 30 bytes beginning `0B 01 32 01 ...` | concrete attribute payload | not yet field-decoded |
+| 31–60 | 30-byte `ActorAttr` payload | fully decoded below |
 | 61–62 | `0B 00` | outer tail | outside the generic container |
 
-Important correction: the byte pair containing `0x40` occurs **inside the nested payload**; it is not the outer factory type key. The hand-built outer container is structurally valid. The unresolved failure surface is the `0x12AD -> concrete Attr class/vtable+0x34` mapping and that concrete codec's interpretation of the 30-byte body. Because a known factory hit bypasses generic length enforcement, a wrong known type or mismatched concrete body can consume subsequent bytes under the wrong schema. That is a static risk/inference, not yet proof of which field caused GT-218's HP/money symptoms.
+The named-ID checksum is the required crosswalk rather than an ID-equality guess: `sum((index+1)*ord(character) for "ActorAttr") & 0xFFFF = 0x12AD`. IMAGE independently links the registered `ActorAttr` name to vtable `0x00F0E7A0` and codec `0x00466230`; the vtable's `+0x34` pointer is exactly `0x00466230`.
+
+Exact 30-byte nested decode:
+
+| Nested offset | Bytes | ActorAttr inheritance field |
+|---:|---|---|
+| 0 | `0B 01` | `DBAttribute` identity-presence byte = 1 |
+| 2 | `32 01 00 01 10 00 00 00 00` | identity low=`0x10010001`, high=`0x00000000` |
+| 11 | `12 40 00` | `BasicAttr` presence mask = `0x0040` only |
+| 14 | `2A 00 00 C8 43` | `BasicAttr+0x54` f32 = `400.0` |
+| 19 | `32 00 00 00 00 00 00 00 00` | `ActorAttr` two-dword presence mask = zero |
+| 28 | `05 01` | ActorAttr extra-group byte = 1 |
+
+Important correction: `0x40` is a **BasicAttr presence-mask bit inside ActorAttr**, not an outer `attr id`. There is no tag-width-order framing error in the quoted container or nested body.
+
+### Exact GT-218 failure mechanism
+
+The protocol handler `[0x005F2400,0x005F261F)`, SHA-256 `74C1B024F064D2930831B8CEAB109EFA154F6D660BB8D079346CCB28E90A3201`, resolves the incoming Attr type through vslot `+0x10`, finds the resident Attr, then calls the incoming object's vslot `+0x24` at `0x005F2504..0x005F250C`. For ActorAttr, vtable `0x00F0E7A0 + 0x24` is `0x00464F30`.
+
+`ActorAttr` full copy `[0x00464F30,0x004652AC)`, SHA-256 `78F9C31B0FF1D75BC7845D5E340F4D525E0C8F80E034396B0E0F61699AD6A3E1`, copies the newly decoded incoming object into the resident object wholesale: it first copies the inherited BasicAttr and then every ActorAttr member, independent of the wire presence masks. The fresh BasicAttr constructor `[0x00464A80,0x00464B3D)`, SHA-256 `9A9170CD920BDDC3791BFFE8966264C88E1F2DA5B4320B336F0EEACD4884ED3D`, initializes HP current/max and MP current/max to zero. The ActorAttr constructor `[0x00464BE0,0x00464E39)`, SHA-256 `E83AE4A601A4EC700326598D6329E4B34CD2F4CF78DCF17D639D8DF8E1F1096A`, initializes cash (`+0xA8/+0xAC`) to zero.
+
+Therefore the exact error is **sending a sparse ActorAttr to an apply path with full-object replacement semantics**, not malformed framing. Only the `0x0040` BasicAttr field is supplied; all omitted BasicAttr/ActorAttr members retain constructor defaults and are then copied over the live resident object. This directly explains cash becoming zero. The resident HP-max field becomes zero statically; the observed on-screen `1` is a downstream display behavior/clamp and is not evidence of a wire offset error.
 
 ## Q1 — exact signed identity gate
 
@@ -116,7 +137,7 @@ No sign rejection, truncation, or aliasing was found on this registration path. 
 ### Selector-local scene lookup
 
 - Context `[0x00449AD0,0x00449B40)`, SHA-256 `816563A67DBC01E559DC0FAD8B3DDB7F199478E1DE68E823A0165C12FAFA5918`, returns the local scene collection after null checks.
-- Lookup `[0x00626DC0,0x00626E7A)`, SHA-256 `C51CB4335E0EF9827811B4F57056DC4E561AEB7BB24A7CDF9D26305B833BCA24`, compares stored low and high dwords for exact equality and returns the actor pointer or null. Signedness is irrelevant to these equality comparisons; there is no truncation or alias inside the lookup.
+- Lookup `[0x00626DC0,0x00626E7A)`, SHA-256 `4E97A02C7947A483D6CC7FB00123FA14E8692D88B51178641DCA5F2D70FC359B`, compares stored low and high dwords for exact equality and returns the actor pointer or null. Signedness is irrelevant to these equality comparisons; there is no truncation or alias inside the lookup.
 
 The missing join is the exact insertion/population path for this selector-local scene list. The main registry and the selector lookup are distinct containers, so the main-tree evidence must not be used to claim that every negative identity necessarily reaches the selector list. Bounded answer: negative identities are not rejected by the proven main registration path, and selector lookup can match a negative bit pattern if present; population of that particular list remains open.
 
@@ -124,19 +145,17 @@ The missing join is the exact insertion/population path for this selector-local 
 
 - For LANE-GM name-color work: keep `NameColorGateUnmeasured` for the identity-only FieldMob direction. Do not schedule a negative-identity FieldMob probe expecting it to reach the typed-CNetNPC tail; object type prevents that route.
 - Negative identity is not discarded by the proven main actor registry, but selector-scene membership is not yet guaranteed.
-- For `/speed` / GT-218: stop treating the generic outer UpdateAttr container as malformed. The next static target is the factory key `0x12AD` and its concrete codec; do not retry by tweaking the same frame blindly.
+- For `/speed` / GT-218: stop treating the container as malformed. `0x12AD` is ActorAttr, and this handler replaces the resident object from the sparse newly constructed object. A safe builder must carry the complete current ActorAttr/BasicAttr state required by the full-copy path, or use a separately proved merge-capable operation; do not retry by tweaking tags or length.
 
 ## Nonclaims and continuation checkpoint
 
 - No claim that the 11 bytes missing from the printed GT-218 raw block are any particular transport/header structure.
-- No claim yet about the semantic name or concrete class behind factory key `0x12AD`.
-- No claim yet about which nested field produced the observed max-HP/money changes.
+- No claim that the screen's HP-max value `1` is stored as `1` by this frame; IMAGE proves the omitted resident field is replaced from constructor default zero, while the final display transform is outside Q0.
 - No claim that the main registry is the selector-local list or that every actor registered in the former is inserted into the latter.
 - No client-observable conclusion is made from this static work.
 
 Resume without repeating this round:
 
-1. Trace startup/factory registration for type key `0x12AD` to its concrete Attr class and `vtable+0x34` codec, then decode the exact 30-byte GT-218 nested payload field by field.
-2. Trace the insertion/population path of the scene list consumed by `0x00626DC0` and document any rejection before membership.
+1. Trace the insertion/population path of the scene list consumed by `0x00626DC0` and document any rejection before membership.
 
-Reproducible static verifier: `pf_bridge/staged/re222_static_verify.py`, SHA-256 `B951AE23431D96AE81117265A5F78217D742E53753804209A25BAAC53A1499E9`.
+Reproducible static verifier: `pf_bridge/staged/re222_static_verify.py`, SHA-256 `949E07E6A72AD7C4C8F4D20D9ECCFBD4816669A9E3583BE1A9B2F0CE3EBE0506`.
