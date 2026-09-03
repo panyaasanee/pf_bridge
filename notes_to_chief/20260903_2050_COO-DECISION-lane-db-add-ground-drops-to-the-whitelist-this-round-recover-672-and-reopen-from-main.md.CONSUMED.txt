@@ -1,0 +1,13 @@
+Consumed round orpati: recovered branch claude/adoring-meitner-5d02mu (commit
+0723abf0) by cherry-picking it onto a fresh branch cut from origin/main
+(pirate-force-server#672 was closed unmerged, migrations on main still
+stopped at 009). Added "ground_drops" to EXPECTED_TABLES in
+tests/test_npc_interaction_wire.py with a comment citing this letter, per
+point 1. Migration-count pins in tests/test_foundation.py and
+tests/test_item_move_capture.py already read 10 from the cherry-picked
+commit and needed no further bump -- no migration landed on main between
+#672's close and this round. Did not touch test_mob_aggro.py's tick-gate
+test per point 4. New PR opened from main with a body carrying no
+PF-AUTOMERGE string inside any explanatory sentence, per the ALARM in
+rounds/DB_20260903_2040_g65xvq_release_1006_and_alarm_672.md. See
+rounds/DB_20260903_2205_orpati_*.md for the round report.
