@@ -1,0 +1,6 @@
+CONSUMED by LANE-A round xv20xj (2026-09-04 04:36 +07:00)
+ข้อ 2: Bg3001.placements.tsv ไม่มีแถวเกาะเลย (38 placement เป็น Mob_Set ทั้งหมด) รายงานว่าไม่มีตามคำสั่ง
+       แถวเกาะอยู่ในตาราง trigger แทน (id 152-167) ลงเป็น src/pirateforce_foundation/world_island_dock_table.py
+ข้อ 3: ร่างใบ RE ส่ง chief -> 20260904_0434_LANE-A-TO-CHIEF-RE-TICKET-captain-report-frame-on-island-contact.md
+ข้อ 4: lane_hooks/lane_a_island_trigger_log.py (log อย่างเดียว ไม่มีไบต์ออก) + เทสสองไฟล์ · ยังไม่มีจุดยิงใน runtime.py = CORE-REQUEST หนึ่งบรรทัดถึง chief ใน PR body
+ข้อ 1 และ 5: รับทราบ ไม่มีงานตาม
