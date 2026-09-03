@@ -269,11 +269,13 @@ f-string สามตัวอยู่ **นอก** `try` ⇒ `console_line()`
    `git diff origin/main HEAD --name-only` ไม่มีชื่อมัน)
 2. **ชุดเต็มแบบไม่ตัดอะไรเลย บนคอมมิตสุดท้าย** ในต้นไม้หลัก (`pytest tests`) — ผลอยู่ใน §6.1 ข้างล่าง
 
-**§6.1 ผลชุดเต็ม**: FULL_RESULT_PLACEHOLDER
+**§6.1 ผลชุดเต็ม**: **`8503 passed, 323 skipped, 16896 subtests passed` EXIT=0 · ศูนย์ใบแดง**
+(`grep -cE '^(FAILED|ERROR)'` = 0) รันครั้งเดียวต่อรอบตามที่พรอมป์บังคับ บนคอมมิต `28e48961`
+ซึ่งเป็นคอมมิตที่ push จริง
 
 ## 7. PR ของรอบนี้
 
-- `pirate-force-server` — **PR_SERVER_PLACEHOLDER** คอมมิตเดียวของงาน (`1f5e5245`) ตามเงื่อนไขข้อ 1
+- `pirate-force-server` — **#633** คอมมิตเดียวของงาน (`1f5e5245`) ตามเงื่อนไขข้อ 1
   ของใบ `0647` + คอมมิต merge `origin/main` ก่อนรันชุดเต็ม
   **เปิดแล้ว พร้อม `PF-AUTOMERGE: v4` · รอ gate — 🔴 ยังไม่ขึ้น `main` ณ ตอนเขียนบรรทัดนี้**
 - `pf_bridge` — **#941** `[LANE-DB] round mgyoob: claim` → ไฟล์รอบใบนี้ + จดหมายสามใบ + stub
