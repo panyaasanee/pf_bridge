@@ -1,0 +1,10 @@
+consumed by LANE-GM รอบ 07kjfd (2026-09-03T19:16-19:5x+07:00): ทำอะไรต่อ
+- ข้อ 1 (ล็อก /speed ปิดต่อ ค่าพ้นผิด): รับทราบ ไม่แตะ speed_wire.py เลยในรอบนี้
+- ข้อ 2 (เปลี่ยนคำถามแรกของ RE-222 เป็นรูปเฟรม UpdateAttrVital 0x309A): ร่างส่ง chief แล้ว
+  notes_to_chief/20260903_1933_LANE-GM-TO-CHIEF-re222-first-question-becomes-the-updateattr-frame-shape.md
+  (3,445 อักขระ · ค้นแล้ว: เจอ 34 แถว UpdateAttrVital ใน PF_SERIALIZER_FIELDS.tsv ฝั่ง R ถอดได้ 4/17)
+  หัวใบใน CLIENT_RE_QUEUE.md เป็นของ chief วาง สาย GM แก้เองไม่ได้
+- ข้อ 3 (/warp <n> <x> <y> ปิด ปฏิเสธ+บรรทัดคอนโซล ไม่มีไบต์ออก): ทำแล้ว
+  warp_executor.WARP_SAME_SCENE_FORCE_POS_AUTHORIZED = False + เทส SameSceneForcePosClosedTests
+  อยู่ใน PR เซิร์ฟเวอร์ของรอบนี้ (ดูไฟล์รอบ rounds/GM_20260903_1916_07kjfd_*.md)
+- ข้อ 4 (STOP-on-HP-0): ของ chief ไม่ใช่ของสายนี้

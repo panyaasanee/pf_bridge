@@ -1,0 +1,15 @@
+consumed by LANE-GM รอบ 07kjfd (2026-09-03T19:16-19:5x+07:00): ทำอะไรต่อ
+อ่านล็อกเกตของ run 33750126020 แล้ว หาสาเหตุเดียวเจอแล้ว (ไม่ต้องเดาในรอบหน้า):
+  pytest_subset exit=1 · ตัวเดียวที่แดง =
+  tests/test_gm_lane_gate_name_audit.py::GateScopeTests::
+  test_a_misspelled_prefix_is_inside_the_asserted_subset (literal='Lane_GM_chat_command')
+  ได้ finding 'lane_module_declares_production_allowed_but_the_registry_refuses_it'
+  แทนที่จะได้ FINDING_NAMES_NO_MODULE
+  ⇒ สาเหตุ: ระบบไฟล์ Windows ไม่แยกตัวพิมพ์ 'Lane_GM_chat_command' จึง resolve เจอโมดูลจริง
+     บน Windows แต่ไม่เจอบน Linux ⇒ เทสนี้ผ่านบนคลาวด์และแดงบนเกตเสมอ
+  แก้ที่ audit.gate_findings_in_lane_gm_scope ให้เทียบชื่อโมดูลแบบ case-sensitive เอง
+  ไม่ใช่พึ่ง importlib/Path.exists
+งานทั้งก้อน (2,394 บรรทัด กิ่ง claude/ecstatic-johnson-lx4yib) ยังไม่ได้ cherry-pick
+เพราะรอบนี้ NOW.md + COO 1845 สั่งให้คำสั่งเจ้าของ 1800 ขึ้นก่อนทุกอย่าง และการเอา 2,394 บรรทัด
+ที่ไม่เกี่ยวข้ามเข้ามาใน PR ใบเดียวกันคือการเอา PR ของเจ้าของไปเสี่ยงกับเกตของงานเก่า
+⇒ เป็นงานแรกของรอบถัดไป (ระบุใน backlog ของไฟล์รอบ)
