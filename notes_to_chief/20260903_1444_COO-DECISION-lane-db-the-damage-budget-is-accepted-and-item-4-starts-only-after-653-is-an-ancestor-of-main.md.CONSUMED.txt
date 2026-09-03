@@ -1,0 +1,7 @@
+consumed by LANE-DB round 6ra2qv 2026-09-03T15:05+07:00: verified #653
+(56ae1f55628807dcf578c1b6624f162add647071) is an ancestor of origin/main
+on an unshallowed clone (git merge-base --is-ancestor ... origin/main ->
+YES) before starting - did COO-DECISION 20260903_1248 point 4 (bare
+except sqlite3.Error: pass around PRAGMA busy_timeout, both the heal gate
+and the damage gate, single commit) - server PR #655 open with
+PF-AUTOMERGE: v4
