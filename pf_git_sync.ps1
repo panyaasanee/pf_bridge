@@ -1739,6 +1739,164 @@ if ($newOrders.Count -gt 0 -or $queueMoved) {
     Log '[6]' 'nothing new for the tester - NEW_ORDERS.txt left untouched on purpose'
 }
 
+# ---------------------------------------------------------------------------
+# [6b] LETTERS NOBODY EVER TOOK.  Approved by the owner 2026-09-03 ~10:2x
+#      (+07:00) after she asked why two substantive letters were never read.
+#
+# WHAT WAS MEASURED, AND WHAT WAS NOT
+# -----------------------------------
+# Two letters from the ka1-B session, 2026-09-01 22:00 and 22:05, addressed to
+# LANE-A/LANE-B, were never consumed and never cited by anything later.  Both
+# carry findings that matter: one refutes a bounded-negative conclusion about
+# actor name colour that four places in src still rely on, the other says
+# constructing CActorTask_Dead is not the same as it running.
+#
+# FOUR CAUSES WERE TESTED AND ALL FOUR FAILED to explain it:
+#   addressee - TO-LANE letters are consumed 91% of the time
+#   sender    - ka1-B letters are consumed 91% of the time
+#   a burst   - that hour held 16 letters and 12 were consumed
+#   size      - the 10,838-byte letter five minutes later WAS consumed
+# The two sit in the middle of a run of ten, with consumed letters on both
+# sides.  There is nothing left to read: the mailbox records that a letter was
+# TAKEN, never that one was LOOKED AT AND SKIPPED, so after the fact the
+# question is unanswerable by construction.
+#
+# So this step does not try to find the cause.  It removes the property that
+# made the cause matter: a letter nobody takes is now noticed within hours
+# instead of never.
+#
+# WHY THE CITATION TEST IS THE WHOLE TRICK
+# ----------------------------------------
+# Of 27 letters older than a day and unconsumed, 20 HAD been answered - a
+# COO-DECISION replied within minutes in several cases - and only the source
+# file was never marked.  Alerting on "unconsumed" alone would have cried wolf
+# 20 times out of 27.  A letter that any later letter quotes by its
+# yyyymmdd_hhmm stamp has demonstrably been read, whatever the marker says.
+# ---------------------------------------------------------------------------
+
+$STALE_LETTER_HOURS      = 12
+$STALE_LETTER_MAX_DAYS   = 7
+$STALE_LETTER_EVERY_MIN  = 60
+$STALE_LETTER_MAX_NAMED  = 15
+$STALE_LETTER_IGNORE     = @('CODEX-NEWGEN', 'CODEX-CHECKPOINT', 'SYNC-NOTICE',
+                             'SYNC-ALARM', '_BRIDGE_HEARTBEAT', 'CONSUMED')
+
+function StaleLetterStatePath() { return (Join-Path $BridgeRepo 'sync_state_stale_letters.log') }
+
+if ($DryRun -or $SelfCheck -or $NoServer) {
+    Log '[6b]' 'stale-letter watch skipped in this mode'
+} else {
+    $slState = StaleLetterStatePath
+    $slLast = 0
+    $slSeen = @{}
+    if (Test-Path -LiteralPath $slState) {
+        try {
+            $rows = @(Get-Content -LiteralPath $slState -ErrorAction Stop)
+            if ($rows.Count -ge 1) { [void][int64]::TryParse(([string]$rows[0]).Trim(), [ref]$slLast) }
+            for ($i = 1; $i -lt $rows.Count; $i++) {
+                $r = ([string]$rows[$i]).Trim()
+                if ($r -ne '') { $slSeen[$r] = $true }
+            }
+        } catch { }
+    }
+    $slNow = [int64](((Get-Date).ToUniversalTime() - [DateTime]'1970-01-01').TotalSeconds)
+    if (($slNow - $slLast) -lt ($STALE_LETTER_EVERY_MIN * 60)) {
+        Log '[6b]' 'stale-letter watch checked less than an hour ago - skipping this round'
+    } else {
+        $ndir = Join-Path $BridgeRepo 'notes_to_chief'
+        $cdir = Join-Path $ndir 'consumed'
+        $letters = @(Get-ChildItem -LiteralPath $ndir -Filter '*.md' -File -ErrorAction SilentlyContinue |
+                     Where-Object { $_.Name -match '^\d{8}_\d{4}_' } | Sort-Object Name)
+        $consumedNames = @{}
+        if (Test-Path -LiteralPath $cdir) {
+            foreach ($c in @(Get-ChildItem -LiteralPath $cdir -Filter '*.md' -File -ErrorAction SilentlyContinue)) {
+                $consumedNames[$c.Name] = $true
+            }
+        }
+        $cutOld = (Get-Date).AddHours(-1 * $STALE_LETTER_HOURS)
+        $cutFar = (Get-Date).AddDays(-1 * $STALE_LETTER_MAX_DAYS)
+        $cands = @()
+        foreach ($f in $letters) {
+            if ($f.LastWriteTime -gt $cutOld) { continue }
+            if ($f.LastWriteTime -lt $cutFar) { continue }
+            if ($consumedNames.ContainsKey($f.Name)) { continue }
+            if (Test-Path -LiteralPath ($f.FullName + '.CONSUMED.txt')) { continue }
+            if ($slSeen.ContainsKey($f.Name)) { continue }
+            $skip = $false
+            foreach ($ig in $STALE_LETTER_IGNORE) { if ($f.Name -like ('*' + $ig + '*')) { $skip = $true } }
+            if ($skip) { continue }
+            $cands += $f
+        }
+        $orphans = @()
+        foreach ($c in $cands) {
+            $stamp = $c.Name.Substring(0, 13)
+            $citedBy = ''
+            foreach ($later in $letters) {
+                if ($later.Name -le $c.Name) { continue }
+                $body = ''
+                try { $body = [IO.File]::ReadAllText($later.FullName) } catch { $body = '' }
+                if ($body.Contains($stamp)) { $citedBy = $later.Name; break }
+            }
+            if ($citedBy -eq '') { $orphans += $c.Name }
+        }
+        if ($orphans.Count -gt 0) {
+            $name = (Get-Date -Format 'yyyyMMdd_HHmm') + '_SYNC-ALARM-' + $orphans.Count + '-letters-nobody-took-and-nobody-answered.md'
+            $lines = @()
+            $lines += ('# SYNC ALARM - ' + $orphans.Count + ' letter(s) nobody took and nobody answered')
+            $lines += ''
+            $lines += ('written by pf_git_sync.ps1 step [6b] at ' + (Stamp) + ' (machine local time)')
+            $lines += ('Each letter is named ONCE, ever.  This alarm will not repeat for these.')
+            $lines += ''
+            $lines += '## the test that was applied'
+            $lines += ''
+            $lines += ('    older than ' + $STALE_LETTER_HOURS + ' h, newer than ' + $STALE_LETTER_MAX_DAYS + ' days')
+            $lines += '    AND has no .CONSUMED.txt sibling'
+            $lines += '    AND is not present in notes_to_chief\consumed\'
+            $lines += '    AND no later letter quotes its yyyymmdd_hhmm stamp anywhere in its body'
+            $lines += ''
+            $lines += '    The last clause is the important one.  Being unconsumed proves nothing:'
+            $lines += '    of 27 unconsumed letters older than a day on 2026-09-03, 20 had in fact'
+            $lines += '    been answered and only the source file was never marked.  A letter that'
+            $lines += '    nothing later quotes is one that demonstrably reached nobody.'
+            $lines += ''
+            $lines += '## the letters'
+            $lines += ''
+            $shown = 0
+            foreach ($o in $orphans) {
+                if ($shown -ge $STALE_LETTER_MAX_NAMED) { $lines += ('    ... and ' + ($orphans.Count - $shown) + ' more'); break }
+                $lines += ('    ' + $o)
+                $shown = $shown + 1
+            }
+            $lines += ''
+            $lines += '## what to do with this'
+            $lines += ''
+            $lines += '    Read them, then either act or write one line saying why not.  Marking a'
+            $lines += '    letter consumed without reading it defeats the whole check.'
+            $lines += ''
+            $lines += '## nonclaims'
+            $lines += ''
+            $lines += '    - this does NOT say the letters are important, only that nothing has'
+            $lines += '      referred to them.  A routine notice nobody needed to quote lands here too.'
+            $lines += '    - the citation test is a substring match on the stamp.  A reply that'
+            $lines += '      answers a letter without quoting its stamp is a false positive.'
+            $lines += '    - this step has no idea WHY a letter was skipped, and never will: the'
+            $lines += '      mailbox records taking, not looking.'
+            try {
+                $lines | Out-File -LiteralPath (Join-Path $ndir $name) -Encoding utf8
+                Shout '[6b]' ('letters nobody took: ' + $orphans.Count + ' - alarm letter written: ' + $name)
+            } catch {
+                Shout '[6b]' ('letters nobody took: ' + $orphans.Count + ' - alarm letter FAILED to write: ' + $_.Exception.Message)
+            }
+            foreach ($o in $orphans) { $slSeen[$o] = $true }
+        } else {
+            Log '[6b]' ('stale-letter watch: ' + $cands.Count + ' unconsumed candidate(s), all of them cited by a later letter - nothing orphaned')
+        }
+        $out = @([string]$slNow)
+        foreach ($k in $slSeen.Keys) { $out += $k }
+        try { $out | Out-File -LiteralPath $slState -Encoding ascii } catch { }
+    }
+}
+
 # A round that got this far means whatever needed attention is over.
 if ((Test-Path -LiteralPath $attnPath) -and (-not $DryRun)) {
     Remove-Item -LiteralPath $attnPath -Force -ErrorAction SilentlyContinue
