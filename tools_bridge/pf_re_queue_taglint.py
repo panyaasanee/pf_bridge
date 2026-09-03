@@ -147,6 +147,7 @@ def audit(queue_path, notes_dir, min_num):
     tickets = split_tickets(lines)
 
     invisible, no_route, orphan, eligible, unsearched = [], [], [], [], []
+    answered_but_open = []
     for t in tickets:
         head_live = strip_struck(t["header"])
         route = [r for r in ROUTE_TAGS if r in head_live]
@@ -164,7 +165,7 @@ def audit(queue_path, notes_dir, min_num):
 
         if t["num"] < min_num:
             continue
-        # [D] the answer was delivered but the header still reads open.  This is
+        # [E] the answer was delivered but the header still reads open.  This is
         # invisible to every other check here, because a result letter removes the
         # ticket from all of them -- which is exactly why these rot for days.
         if letter and not closed:
@@ -188,7 +189,8 @@ def audit(queue_path, notes_dir, min_num):
         if rows:
             unsearched.append((t, len(rows)))
 
-    return tickets, invisible, no_route, orphan, eligible, unsearched
+    return (tickets, invisible, no_route, orphan, eligible, unsearched,
+            answered_but_open)
 
 
 def main():
@@ -219,8 +221,8 @@ def main():
         sys.stderr.write("ERROR: queue not found: %s\n" % a.queue)
         return 2
 
-    tickets, invisible, no_route, orphan, eligible, unsearched = audit(
-        a.queue, a.notes, a.min)
+    (tickets, invisible, no_route, orphan, eligible, unsearched,
+     answered_but_open) = audit(a.queue, a.notes, a.min)
 
     # A FLOOR, BECAUSE "0 PROBLEMS" AND "0 QUEUE" LOOK IDENTICAL WITHOUT ONE.
     # pf-adversary (round dfx8bu) ran both modes against a zero-byte queue file
@@ -349,9 +351,23 @@ def main():
         print("            letter: %s" % letter)
     print("")
 
+    print("[E] ANSWERED BUT THE HEADER STILL READS OPEN (a result letter exists,")
+    print("    header carries no DONE/CLOSED/ARCHIVED/ANSWERED marker)")
+    print("    Not a runner problem -- the runner skips these correctly.  It is a")
+    print("    READING problem: anyone eyeballing the queue counts them as work,")
+    print("    and they are one archive move away from being re-run for nothing.")
+    if not answered_but_open:
+        print("    none")
+    for t, letter, status in answered_but_open:
+        print("    %-7s line %-6d %s" % (
+            t["id"], t["line"],
+            ("header says " + ",".join(status)) if status else "header has no status tag"))
+        print("            answered by: %s" % letter)
+    print("")
+
     total = len(invisible) + len(no_route) + len(orphan)
     print("RESULT: %d ticket(s) the RE runner cannot select"
-          "   |   %d header(s) need closing [D]" % (total, len(answered_but_open)))
+          "   |   %d header(s) need closing [E]" % (total, len(answered_but_open)))
     return 1 if total else 0
 
 
