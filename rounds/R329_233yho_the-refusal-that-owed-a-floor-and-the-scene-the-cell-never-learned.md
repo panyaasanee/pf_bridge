@@ -1,4 +1,4 @@
-# R329 (LANE-E, session 233yho) — 2026-09-04 00:22 - 0x:xx +07:00
+# R329 (LANE-E, session 233yho) — 2026-09-04 00:22 - 00:51 +07:00
 
 ## บริบท
 `NOW.md` งานด่วน "ต่อคิวทันทีหลังสองข้อบน" / COO-DECISION `20260903_2346` และ `20260903_2347`
@@ -30,20 +30,31 @@
 สามข้อของ `2345`/`2347`: สั่งต้นรอบ · push ได้แม้ผลยังไม่คืน (`ADVERSARY_PENDING`, รอบถัดไปหยิบก่อน
 claim ใหม่) · ห้ามเขียน "ผ่าน" ก่อนผลคืน
 
-## pf-adversary
-สั่งต้นรอบ (agent `pf-adversary`, สคีมาตาม `2345`) ตรวจ diff ของ `runtime.py`/`mob_pickup_request.py`
-ผลจะบันทึกเพิ่มในไฟล์นี้หรือจดหมายรอบหน้าถ้ายังไม่คืนตอน push — ดู PR body ของ
-`pirate-force-server` ว่าเขียน `ADVERSARY_PENDING` หรือผลจริง
+## pf-adversary — คืนผลก่อน push (ไม่ใช่ ADVERSARY_PENDING)
+สั่งต้นรอบ (agent `pf-adversary`) ตรวจ diff ของ `runtime.py`/`mob_pickup_request.py` ผลคืนก่อน push จริง
+พบข้อบกพร่องจริงหนึ่งข้อ: **กิ่งใหม่ของ refusal ไม่มีเทสรันจริงเลยแม้แต่ตัวเดียว** — เทสเดิม
+`TheConstantAndTheRuntimeAgree` เช็คแค่รูป AST ไม่ได้รัน · `test_mob_pickup_ground_expiry.py` เรียก
+`dispatch_inbound_pickup_request` ตรง ไม่ผ่าน `runtime.py`/`_mob_loot_boundary_flush()` เลย
+พิสูจน์ด้วยมิวแทนต์สองตัว (ลบเงื่อนไข `not outcome.ground_after`, สลับลำดับ boundary-flush กับ
+`ground_after`) ทั้งคู่รอดชุดเต็มโดยไม่มีเทสไหนจับได้
+
+**แก้แล้วในรอบเดียวกัน**: เพิ่มสองเทสใน `test_mob_loot_scene_boundary_wiring.py` ที่เดินผ่าน
+`state.dispatch()` จริง (`test_an_unrelated_refusal_still_leaves_a_committed_boundary_owed`,
+`test_a_refused_expired_click_flushes_the_held_boundary_first`) — ทั้งสองมิวแทนต์ตายแล้ว
+(ยืนยันด้วยมือ: ใส่มิวแทนต์กลับ เทสแดง แล้ว revert)
 
 ## เทส
-เฉพาะไฟล์ที่แตะระหว่างทำ: `test_mob_pickup_ground_expiry.py` (24/24) ·
-`test_mob_pickup_request.py` `test_mob_loot.py` (262/262 + 821 subtests) ·
-`test_mob_loot_scene_boundary_wiring.py` `test_mob_pickup.py` `test_mob_stat_fabrication_guard.py`
-`test_pickup_transaction_console_discipline.py` `test_vital_walk.py` (154/154 + 91 subtests)
-`tools/verify_hypothesis_ledger.py` PASS ไม่มี drift
-ชุดเต็มบนต้นไม้ merge main: กำลังรัน จะบันทึกผลใน PR body ก่อน push
+`test_mob_pickup_ground_expiry.py` (24/24) · `test_mob_loot_scene_boundary_wiring.py` +
+`test_mob_pickup_request.py` + `test_mob_loot.py` (313 passed + 831 subtests) ·
+`test_mob_pickup.py` `test_mob_stat_fabrication_guard.py` `test_pickup_transaction_console_discipline.py`
+`test_vital_walk.py` (154/154 + 91 subtests) · `tools/verify_hypothesis_ledger.py` +
+`tools/verify_functional_coverage.py` PASS ไม่มี drift
+ชุดเต็มบนต้นไม้ merge main รันสองครั้ง (ก่อนแก้ช่องโหว่เทสของ adversary และหลัง):
+9169 passed / 9171 passed, 323 skipped, 17659 subtests, 0 failed ทั้งสองครั้ง
 
 ## ยังไม่พิสูจน์
 - D9 (ข้างบน) — หนี้ต่อคิว
-- ผล pf-adversary ถ้ายังไม่คืนตอน push = `ADVERSARY_PENDING`
 - client-observable — เกณฑ์สองชั้นเป็นของ LANE-B เขียนต่อ (COO `2344`) chief ยังไม่เปิดใบใหม่
+
+## PR
+`pirate-force-server#689` (open, marker ยืนยันด้วย GET แล้ว, รอเกต)
