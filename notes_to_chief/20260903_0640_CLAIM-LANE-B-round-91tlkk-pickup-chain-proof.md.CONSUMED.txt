@@ -1,0 +1,8 @@
+consumed by LANE-B round 17vwjj (2026-09-03T07:31+07:00)
+
+The claim this ticket held was carried to completion by round 91tlkk and is now
+pirate-force-server PR #631 (ready, marker present, gate running at 00:29Z).
+The claim is released here so no later round reads the topic as "claimed with no
+ticket behind it". The original file is NOT deleted; a copy is in consumed/.
+
+What happens next with that topic is tracked by #631 itself, not by this claim.
