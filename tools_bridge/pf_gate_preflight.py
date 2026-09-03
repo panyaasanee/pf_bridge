@@ -122,12 +122,44 @@ SKIP_MARKERS = (
 )
 
 
+def _pinned_design_skip_modules(repo):
+    """Module names docs/PYTEST_SKIP_PINS.json's design_skips already covers.
+
+    Round 20260904 recovery (pirate-force-server#694's cause): this check used
+    to flag every newly-added skip marker line, with no way to tell a real
+    unpinned drift from a skip the SAME commit already declared to
+    tools/pf_pytest_precondition_census.py via design_skips. That gap does not
+    make the check wrong to run - an added skip is still worth naming before
+    push - but it made a properly-pinned skip look identical to an unpinned
+    one, and the fix (add the pin) left this advisory RED with no way to
+    clear it short of ignoring the tool. A module present here with at least
+    one pinned count is a skip this repository already accounts for; it is
+    reported below, never silently dropped from the printout.
+    """
+    import json
+    path = pathlib.Path(repo) / "docs" / "PYTEST_SKIP_PINS.json"
+    if not path.is_file():
+        return set()
+    try:
+        pins = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return set()
+    return {
+        entry["module"] for entry in pins.get("design_skips", [])
+        if int(entry.get("count", 0)) > 0
+    }
+
+
 def check_new_skips(repo, base):
     """Name every skip marker this branch ADDS relative to `base`.
 
     The gate pins skipped-test counts, so a skip added by this branch is RED
     even though it is green locally. This does not count skips at runtime; it
     names the lines you added, which is what a lane can act on before pushing.
+    A line in a module already pinned under design_skips in
+    docs/PYTEST_SKIP_PINS.json is reported but does not fail the check on its
+    own - that pin is the gate's own record that the skip is declared; an
+    unpinned line in any other module still turns this RED.
     """
     try:
         diff = subprocess.run(
@@ -138,6 +170,7 @@ def check_new_skips(repo, base):
     except subprocess.CalledProcessError as exc:
         print("[skips] could not diff against %s: %s" % (base, exc))
         return None
+    pinned_modules = _pinned_design_skip_modules(repo)
     added = []
     current = None
     for line in diff.split("\n"):
@@ -147,16 +180,27 @@ def check_new_skips(repo, base):
         if line.startswith("+") and not line.startswith("+++"):
             if any(m in line for m in SKIP_MARKERS):
                 added.append((current, line[1:].strip()[:110]))
-    if added:
-        print("[skips] RED - this branch ADDS %d skip marker(s):" % len(added))
-        for f, l in added:
+    if not added:
+        print("[skips] PASS - no new skip markers vs %s" % base)
+        return True
+    unpinned = [(f, l) for f, l in added if f not in pinned_modules]
+    pinned = [(f, l) for f, l in added if f in pinned_modules]
+    if pinned:
+        print("[skips] %d new skip marker(s) already pinned under "
+              "design_skips in docs/PYTEST_SKIP_PINS.json:" % len(pinned))
+        for f, l in pinned:
+            print("    %s: %s" % (f, l))
+    if unpinned:
+        print("[skips] RED - this branch ADDS %d UNPINNED skip marker(s):"
+              % len(unpinned))
+        for f, l in unpinned:
             print("    %s: %s" % (f, l))
         print("        The gate pins skip counts. A test that always skips on")
         print("        CI reads as a NEW skip and turns the run red - that is")
         print("        what closed PR #503 on 2026-09-01. Make it run, or")
         print("        delete it, or move the pin in the same commit.")
         return False
-    print("[skips] PASS - no new skip markers vs %s" % base)
+    print("[skips] PASS - %d new skip marker(s), all pinned" % len(pinned))
     return True
 
 

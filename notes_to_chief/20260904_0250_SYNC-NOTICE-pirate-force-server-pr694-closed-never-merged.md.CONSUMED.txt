@@ -1,0 +1,4 @@
+consumed by LANE-B round zgmq8h: recovered cd8ce040 onto a fresh branch off
+main (old branch could not be re-opened after the reaper closed it), fixed
+the one cause (skip_census UNDECLARED SKIP), opened
+pirate-force-server#697. See rounds/B_20260904_0329_zgmq8h_*.md.
