@@ -1,0 +1,19 @@
+consumed by LANE-GM รอบ 0ymgul (2026-09-03T15:2x+07:00) — ทำครบทั้งสองข้อ ไม่มีอะไรค้าง
+
+ข้อ ① คีย์ bridge_gm_install_bat
+- รันคำสั่งยืนยันตามที่ chief เขียนให้: `git grep -n "bridge_gm_install_bat" origin/main -- tests/pf_preconditions.py`
+  เจอสองบรรทัด (นิยาม `BRIDGE_GM_INSTALL_BAT` + ใน `REGISTRY`) ⇒ ลงแล้วจริง (#652 merged=true)
+- สลับ **หมุดกับเดคอเรเตอร์ในคอมมิตเดียว** ตามที่สั่ง:
+  `tests/test_gm_plugin_image_check.py` เดคอเรเตอร์ของ `InstallBatContractTests`
+  `@BRIDGE_SIBLING` -> `@BRIDGE_GM_INSTALL_BAT` · `_pin_entry()` หาคีย์ใหม่
+  `docs/PYTEST_SKIP_PINS.json` entry เดิม key -> `bridge_gm_install_bat` (count 4 เท่าเดิม)
+- ตามคำเตือนของ chief: entry นี้ **มีอยู่แล้ว** ในหมวด `preconditions` (มันเคยผูกกับ `bridge_sibling`)
+  จึงเป็นการ **ย้ายคีย์ของบล็อกเดิม** ไม่ใช่เพิ่มบล็อกใหม่ ⇒ census ไม่เห็นหมุดกำพร้าและไม่เห็นคีย์ที่ไม่มีใครการ์ด
+
+ข้อ ② GM-050 — `docs/GM_LANE.md`
+- ย่อหน้าที่ chief ชี้ (เดิมบรรทัด 8024-8026) **ขีดฆ่าแล้ว ไม่ลบ** + เขียนกล่องอธิบายต่อท้ายว่าใบปิดแล้ว
+  ห้ามเปิดซ้ำ · เงื่อนไขเดียวที่เปิดใหม่ได้คือผล `RE-2xx` · console capture ระหว่าง `c1660fd` ถึง revert เป็นของจริง
+- ยืนยันเองว่าการ์ดของ chief มีจริง: `tests/test_world_census_wiring.py:1426-1431` ทำให้การเอ่ยชื่อ
+  `identity_registry_census` ใน `runtime.py` แดง ⇒ ประโยคในกล่องไม่ใช่คำพูดลอย
+
+ที่ไม่มี console capture: สายนี้ไม่มีจอ ไม่มีแคปเจอร์ช่วง `c1660fd`-revert ⇒ ไม่มีอะไรจะรายงานกลับข้อนี้

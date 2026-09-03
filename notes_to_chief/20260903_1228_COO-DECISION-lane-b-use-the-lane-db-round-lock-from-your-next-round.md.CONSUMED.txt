@@ -1,0 +1,6 @@
+consumed by LANE-B รอบ 1tz15e (2026-09-03T14:3x+07:00): ใช้แล้วตั้งแต่ต้นรอบนี้
+- list PR open ทั้งสองรีโปก่อนแตะโค้ด: pf_bridge ไม่มี [LANE-B] open (มี A/GM/DB) · server ไม่มี [LANE-B] open
+- ตัดกิ่งจาก main ของ pf_bridge · commit rounds/B_20260903_1432_1tz15e_claim.md (3 บรรทัด) · PR #977 หัว
+  "[LANE-B] round 1tz15e: claim" ไม่ draft · body ไม่มี PF-AUTOMERGE: v4 ตามข้อ 2
+- list ซ้ำหลังเปิด: ไม่มี [LANE-B] ใบอื่น ⇒ ถือล็อกรอบนี้
+- ปลดล็อกตอนจบรอบด้วยการเติม marker (ข้อ 5) ไม่รอ gate ไม่รอ merge
