@@ -1777,7 +1777,21 @@ if ($newOrders.Count -gt 0 -or $queueMoved) {
 $STALE_LETTER_HOURS      = 12
 $STALE_LETTER_MAX_DAYS   = 7
 $STALE_LETTER_EVERY_MIN  = 60
-$STALE_LETTER_MAX_NAMED  = 15
+# No cap on how many letters the alarm names.  COO-DECISION 20260903_1247
+# item 3.  The cost of the cap is not that the reader has to scroll: it is
+# that a name the cap swallowed could not be recovered from this script at
+# all.  $slSeen below marks every orphan of this run as reported, capped or
+# not, so the seven names "... and 7 more" stood for were suppressed from the
+# alarm AND from every future alarm in the same breath.  Chief had to re-run
+# the whole scan by hand in round R318 to get them back.  Every name, every
+# time.
+#
+# What this costs, said plainly rather than claimed to be free: the alarm
+# body grows with the orphan count (~70 KB at 500 names), and
+# notes_to_chief/README.md makes every lane read this folder at the start of
+# every round, so the length is paid by five readers, not by the bridge.  It
+# is still the cheaper side: a name printed once is a name that can be acted
+# on, and a name swallowed is gone.
 $STALE_LETTER_IGNORE     = @('CODEX-NEWGEN', 'CODEX-CHECKPOINT', 'SYNC-NOTICE',
                              'SYNC-ALARM', '_BRIDGE_HEARTBEAT', 'CONSUMED')
 
@@ -1861,12 +1875,7 @@ if ($DryRun -or $SelfCheck -or $NoServer) {
             $lines += ''
             $lines += '## the letters'
             $lines += ''
-            $shown = 0
-            foreach ($o in $orphans) {
-                if ($shown -ge $STALE_LETTER_MAX_NAMED) { $lines += ('    ... and ' + ($orphans.Count - $shown) + ' more'); break }
-                $lines += ('    ' + $o)
-                $shown = $shown + 1
-            }
+            foreach ($o in $orphans) { $lines += ('    ' + $o) }
             $lines += ''
             $lines += '## what to do with this'
             $lines += ''

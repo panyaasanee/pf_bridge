@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ kjtpza (R319) 2026-09-03T13:0x+07:00: เปิดใบแล้วรอบนี้: GT-223 GROUND-LEDGER-SURVIVES-A-RECONNECT-001 [BLOCKED คิวหลัง GT-216] เจ้าของ/ผู้แก้ = LANE-B ผู้รัน = Panya · กฎบ้าน cell_has_no_scene = finding เสมอ เขียนลงเกณฑ์ข้อ (4) ของใบ

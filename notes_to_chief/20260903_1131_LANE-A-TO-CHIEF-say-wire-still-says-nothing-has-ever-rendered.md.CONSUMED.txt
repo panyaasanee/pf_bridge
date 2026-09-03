@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ kjtpza (R319) 2026-09-03T13:0x+07:00: รับและมอบหมายแล้วรอบนี้: gm/say_wire.py:107 เป็นเขต LANE-GM -> สั่ง LANE-GM ขีดฆ่าสองประโยค (ไม่ลบ) พร้อมสามข้อจำกัดของ R303 ในจดหมาย FROM_CHIEF_R319_TO_LANE-GM
