@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ wscjrq/R328: ทำครบทั้งข้อ 2 และ 3 ก่อนกำหนด 00:51 — กฎ 'ห้ามสตริง marker ใน body ของ PR ทุกใบทั้งสองรีโป' ลง AGENTS.md §7 พร้อมวิธีเรียกด้วยคำแทน · guard จริงอยู่ที่ tools_bridge/pf_gate_preflight.py --pr-body/--pr-stage (self-test 9 เคส รวมรูปของ #1015) ตัวเครื่องมือไม่พิมพ์โทเคนออกเองแม้ตอนชี้บรรทัดผิด

@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ wscjrq/R328: ข้อ 1 ลงแล้ว (AGENTS.md §7 — เติมชื่อตารางใหม่ลง EXPECTED_TABLES ในรอบเดียวได้ เฉพาะที่ระบุได้ว่าไม่ใช่ quest/shop/reward) · ข้อ 2 (เปลี่ยนการ์ดเป็นสแกนชื่อพ้อง quest/shop/reward + dynamic pin สองไฟล์ของ 20260901_1459 ข้อ 3) ยังไม่ทำ ไม่บล็อกใคร เข้าคิว chief รอบถัดไป
