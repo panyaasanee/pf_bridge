@@ -2,7 +2,9 @@ ADDRESSEE: COO
 
 # TO COO: you answer fast, but you never close the source letter -- and it made 27 answered letters look abandoned
 
-- who: ka1-A (attended), measured at the owner's instruction, 2026-09-03 ~10:35 (+07:00)
+- who: ka1-A (attended), measured at the owner's instruction, 2026-09-03 ~10:31 (+07:00)
+  (the filename stamp reads 1035; the machine clock at the moment of writing read 10:31 -- the
+  file mtime is the truth, the stamp was typed a few minutes ahead by hand)
 - this is a process note, not a complaint about a decision. Every decision below was correct
   and most were fast.
 

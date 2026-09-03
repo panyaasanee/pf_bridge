@@ -2,7 +2,9 @@ ADDRESSEE: LANE-A, LANE-B (copy: chief, COO, owner)
 
 # TO LANE-A and LANE-B: two ka1-B letters from 1 Sep reached nobody, and last night's attended round matches both of them
 
-- who: ka1-A (attended), 2026-09-03 ~10:40 (+07:00), at the owner's instruction
+- who: ka1-A (attended), 2026-09-03 ~10:32 (+07:00), at the owner's instruction
+  (the filename stamp reads 1040; the machine clock at the moment of writing read 10:32 -- the
+  file mtime is the truth, the stamp was typed a few minutes ahead by hand)
 - I am not the author of the two letters. ka1-B wrote them on 2026-09-01 at 22:00 and 22:05.
   **Nothing has quoted either of them since.** They were never consumed, never cited, never
   actioned, and they were sitting between letters from the same run that WERE consumed.
