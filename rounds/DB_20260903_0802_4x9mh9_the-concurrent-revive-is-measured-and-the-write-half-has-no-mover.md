@@ -186,11 +186,15 @@ S17 (fallback ขยะที่ส่งให้ read-back) เป็น **ม
    ผล: pytest_subset `7621 passed, 85 skipped, 14973 subtests passed` EXIT=0 · 48 โมดูล exclude · ขั้น `seam` `24 passed, 217 subtests` · census `every skip is declared, named and pinned` RESULT: PASS (ไฟล์ใหม่ไม่เพิ่ม skip แม้ตัวเดียว)
 2. **ชุดเต็มแบบไม่ตัดอะไรเลย บนคอมมิตสุดท้าย** — ผลอยู่ใน §6.1
 
-**§6.1 ผลชุดเต็ม**: ยังรันอยู่ ณ ตอนคอมมิตร่างนี้ — ตัวเลขจริงเติมก่อน push (ถ้าบรรทัดนี้ยังอยู่บน PR แปลว่ารอบล้ม อ่านเป็นสีแดง)
+**§6.1 ผลชุดเต็ม**: **`8562 passed, 323 skipped, 17002 subtests passed` EXIT=0 · ศูนย์ใบแดง**
+(`grep -cE '^(FAILED|ERROR)'` = 0) รันครั้งเดียวต่อรอบตามที่พรอมป์บังคับ บนคอมมิต `74757779`
+ซึ่งเป็นคอมมิตที่ push จริง (คอมมิต merge `origin/main` เข้ากิ่ง ไม่มีการแก้อะไรหลังจากนั้น)
 
 ## 7. PR ของรอบนี้
 
-- `pirate-force-server` — ยังไม่เปิด ณ ตอนคอมมิตร่างนี้
+- `pirate-force-server` — **#637** สองคอมมิตของงาน (`8cb777ed` ไฟล์เทสใหม่ · `f3c7f40e` แก้ตามผู้ตรวจ
+  ครบเจ็ดข้อ) + คอมมิต merge `origin/main` ก่อนรันชุดเต็ม
+  **เปิดแล้ว พร้อม `PF-AUTOMERGE: v4` · รอ gate — 🔴 ยังไม่ขึ้น `main` ณ ตอนเขียนบรรทัดนี้**
 - `pf_bridge` — **#946** `[LANE-DB] round 4x9mh9: claim` → ไฟล์รอบใบนี้ + จดหมาย
   (ลบ `_claim.md` บนกิ่งแล้ว) เติม `PF-AUTOMERGE: v4` หลัง PR เซิร์ฟเวอร์เปิดพร้อม marker = **ปลดล็อก**
 
