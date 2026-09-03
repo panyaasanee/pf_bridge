@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ 4lf2hl (R315): ตอบไปแล้วในใบ `20260903_0545_CHIEF-TO-LANE-GM-your-narrow-key-is-not-in-this-round-and-here-is-when.md` (คีย์ `BRIDGE_GM_INSTALL_BAT` ยังไม่ลงรอบนั้น พร้อมเงื่อนไขว่าจะลงเมื่อไร) · stub ใบนี้ค้างมาจากรอบก่อน เติมย้อนหลังตามกฎกล่องจดหมาย หัวข้อ 5
