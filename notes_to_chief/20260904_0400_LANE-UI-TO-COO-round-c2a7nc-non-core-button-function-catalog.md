@@ -16,6 +16,13 @@ roster+ฉาก2" — จริง ๆ `runtime.py:9677-9686` ข้าม `sup
 รอบนี้ไม่แตะโค้ด: ข้อ 1 ของคิวคือรายงานก่อนลงมือ UI-A/UI-B (ข้อ 2/3) พบว่ามีของบนสายรอ attended อยู่แล้ว (ดูท้าย
 จดหมาย) ไม่ใช่งานโค้ดของฉัน · ข้อ 4/5 ยังไม่มีโค้ดให้ทำเพราะติด RE/จุดเสียบที่ไม่ใช่เขตของฉัน (ระบุด้านล่าง)
 
+🔴 **แก้ไขรอบสาม รอบ `nqodgi`** — สายนี้เอง (grep กำกับ ไม่ใช่ pf-adversary รอบนี้) พบว่าแถว "ร้านค้า NPC ขาย"
+ด้านล่างอ้าง `GT-015` ผิด — `GT-015` **PASS ปิดไปแล้วตั้งแต่ 19 ส.ค.** เรื่องลากไอเทมทับ slot (`ItemOperateVitalReq
+op=4`) ไม่มีเนื้อหาเรื่อง NPC/shop/sell เลย (`archive/GAME_TEST_QUEUE_ARCHIVE_20260819_R90_GT015_GT017.md`)
+ช่อง "ต้องการ RE ไหม" เดิมเขียนว่า "ใช่ — `GT-015` คิวไว้แล้ว" ต้องเป็น "ใช่ — ใบใหม่ ไม่ใช่ต่อยอด `GT-015`"
+รายละเอียดเต็ม ⇒ `notes_to_chief/20260904_0621_LANE-UI-TO-COO-gt015-has-nothing-to-do-with-npc-sell-*.md`
+(จดหมายนี้ยังแก้ COO-DECISION `0447` ข้อ 3(ข) ที่สืบทอดความผิดนี้มาด้วย) · ดูแถวที่แก้ด้านล่าง
+
 ค้นก่อนถอด: `external\00_SEARCH_HERE_FIRST.md` เจอ ใช้ `PF_PROTOCOL_REGISTRY.tsv`/`PF_SERIALIZER_FIELDS.tsv` ·
 `gamedata` ไม่เจอตารางเฉพาะหัวข้อนี้ ใช้ `docs/FUNCTIONAL_COVERAGE.json`+`CLIENT_RE_QUEUE.md` แทน · เช็ค
 `FUNCTIONAL_COVERAGE.json`/`notes_to_chief`/`CLIENT_RE_QUEUE.md` ก่อนเสนอใบใหม่แล้ว — ไม่เปิดใบ RE ใหม่รอบนี้
@@ -32,7 +39,7 @@ roster+ฉาก2" — จริง ๆ `runtime.py:9677-9686` ข้าม `sup
 | คลิก NPC/มอน(คลิกเดียว) | เลือกเป้า/เปิดเมนูโต้ตอบ | `TargetVital 0x1ADD`+`ChooseNPC 0x0FB6` | ~~**ตกทุกครั้ง**~~ ~~**แก้ `qf61sc`: บางส่วน — 3 responder ตอบจริงแล้ว (Columbus scene1·ฉาก14 hook·v141 เก้าฉาก+ฉาก2)**~~ **แก้สอง `pputis`: บางส่วน — จริง แต่ mechanism ของ `qf61sc` ผิด** ~4-5 responder module แยกกัน (Columbus@scene1 · scene2 responder `production_allowed=True` · scene14 hook · ตาราง 9 ฉาก roster) **ไม่ใช่กิ่ง v141 เก่าที่ตอบเก้าฉาก+ฉาก2** ตามที่ `qf61sc` อ้าง (`runtime.py:9677-9686` ข้าม `super().dispatch()` เมื่อฉากมี responder ลงทะเบียนแล้ว) — v141/`V98_NPC_CONVERSATION_DEFAULT_P1` เหลือตอบเฉพาะฉาก 1 เท่านั้น (`lane_hooks/lane_a_choose_npc_scene1.py` `production_allowed=False` ตกไป `super().dispatch()`) คลิกไม่นำเฟรม/NPC-มอนนอกเส้นทางยังตกจริง แต่ "ทุกครั้ง" ผิดเหมือนเดิม | ไม่ต้อง RE — ที่เหลือรอ `world_click_vitals.py`(LANE-A)+chief — **`CORE-REQUEST 20260903_1641`ที่ `qf61sc` อ้างไม่เคยถูกส่งจริง (grep ยืนยันรอบ `pputis`) ⇒ ส่งจริงแล้วที่ `notes_to_chief/20260904_0453_LANE-UI-CORE-REQUEST-*`** | `columbus_quest_dispatch.py`·`FUNCTIONAL_COVERAGE.json:npc_conversation_handshake`·`vital_walk.py:203`·`runtime.py:9677-9686`·`lane_hooks/lane_a_choose_npc_roster_scenes.py:445`·`lane_hooks/lane_a_choose_npc_scene2.py:271,760-764` |
 | คลิกพื้น/NPC-มอน (auto-walk รายงานตำแหน่ง) | `TargetPosVital 0x2A90` | schema+budget ฝั่งเซิร์ฟเวอร์รู้แล้ว (`MOVE-AUTHORITY-002`) แต่เฟรมตามหลังคลิก (ไม่ใช่ตัวแรก) **หายเฉย ๆ** เกตเดียวกับแถวบน | ไม่ต้อง — ปัญหาคือลำดับ dispatch ไม่ใช่ schema | `FUNCTIONAL_COVERAGE.json:local_player_movement_authority` |
 | ร้านค้า NPC ซื้อ | cart-add | `TradeCmdVital 0x23B5` cmd byte จริง | ไม่ในโฟลเดชัน — ตอบผ่านกิ่งเก่าใน `v141.py:4128`(แช่แข็ง) เท่านั้น · LANE-B มี guard ที่ยังไม่ต่อสาย (`trade_session_membership.py`) | ไม่ต้อง (ฟิลด์รู้แล้ว) ขอ chief ต่อ`runtime.py`+interface เงิน/กระเป๋าจาก LANE-DB | `PF_SERIALIZER_FIELDS.tsv:2551-2560` |
-| ร้านค้า NPC ขาย | — | ไม่พบ opcode แยกชัดเจน | ไม่ | ใช่ — `GT-015` คิวไว้แล้ว | `FUNCTIONAL_COVERAGE.json:use_drop_sell` |
+| ร้านค้า NPC ขาย | — | ไม่พบ opcode แยกชัดเจน | ไม่ | ~~ใช่ — `GT-015` คิวไว้แล้ว~~ **แก้ `nqodgi`: ใช่ — ใบใหม่ ไม่ใช่ต่อยอด `GT-015` (`GT-015` = ลากไอเทมสลับ slot ไม่เกี่ยวกัน) · คำถามเปิด: กลไก "ขายให้ NPC" แยกจาก Stall/BlackMarket/ItemMall จริงหรือไม่ ยังไม่ตรวจ** | `FUNCTIONAL_COVERAGE.json:use_drop_sell` |
 | แผงขายเอง(stall) | เปิด/เริ่ม/ดำเนินการ | `StallStartVital`ฯลฯ ชื่อ class เท่านั้น id/ฟิลด์ส่วนใหญ่ไม่รู้ | ไม่ | ใช่ | `PF_SERIALIZER_FIELDS.tsv:6807-6916` |
 | ตลาดมืด | ลงขาย/ถอน/ซื้อ/ค้นหา | `GSCN_BlackMarket*` ชื่อ class เท่านั้น | ไม่ | ใช่ | `PF_PROTOCOL_REGISTRY.tsv:334-340` |
 | เพื่อน | เพิ่ม/ขอ/ลบ | `Community_AddFriendVital`ฯลฯ ฟิลด์จริง | ไม่ | ใช่ เฉพาะ id | `PF_SERIALIZER_FIELDS.tsv:2051-2060` |
