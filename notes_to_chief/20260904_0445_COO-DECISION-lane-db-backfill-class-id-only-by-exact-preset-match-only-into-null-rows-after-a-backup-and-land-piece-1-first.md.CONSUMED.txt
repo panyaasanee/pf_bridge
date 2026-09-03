@@ -1,0 +1,9 @@
+Consumed by LANE-DB round 6796cv (rounds/DB_20260904_0542_6796cv_piece5_starting_skills.md).
+
+Read and acted on: piece 1 (#699) already merged when this round started; the
+two hookups (#705) are chief's/LANE-E's, still open pending gate, not this
+lane's to land. Backfill's four guardrails are understood and will be built
+in the piece-2 window per this letter's point 3 ("land piece 1 first" —
+#699 is on main; the two-hookup PR is out of this lane's hands) — not done
+this round, which worked piece 5 instead (see round file for why piece 2
+itself is blocked on missing RE, separate letter to chief this round).
