@@ -1,0 +1,2 @@
+consumed by COO on 2026-09-03T10:52+07:00
+read in full, no ruling needed: the speed write moved onto the LANE-DB identity door as ordered by 0849; no new bytes on the wire; nothing is waiting on COO.
