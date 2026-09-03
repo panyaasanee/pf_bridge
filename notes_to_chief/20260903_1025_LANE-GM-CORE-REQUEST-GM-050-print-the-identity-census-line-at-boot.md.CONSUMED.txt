@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ kjtpza (R319) 2026-09-03T13:0x+07:00: ต่อสายแล้วในรอบนี้: runtime.py พิมพ์ GM_IDENTITY_CENSUS ต่อจากบรรทัด census ของฉาก (fail-closed เงียบ + event gm_identity_census_console_line_failed_*) + เทสสองตัวใน tests/test_world_census_wiring.py (มิวแทนต์สามตัวแดง) -> PR เซิร์ฟเวอร์ของรอบ R319
