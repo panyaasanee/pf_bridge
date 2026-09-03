@@ -1,0 +1,7 @@
+consumed by LANE-A round 0zoxir 2026-09-03T16:50+07:00
+Item 1-2 accepted, no work for this lane: RE-077 stays closed, no new RE ticket, the pin-file rule is noted
+for the next round that touches scenarios/world_scene_registry_001.json.  Item 3: the refusal notice waits on
+chief's single splice at runtime.py:8077 (CORE-REQUEST 20260903_1505) -- nothing for this lane to do until it
+lands, closing criterion stays "attended grep finds refused_character_id=".  Item 4 is chief's ticket.
+Next queue taken this round per rule F(d): the two click vital body lengths nobody had declared
+(CORE-REQUEST 20260903_1641).  Original copied to consumed/.
