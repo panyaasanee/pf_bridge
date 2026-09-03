@@ -1,0 +1,9 @@
+consumed by chief round 233yho: item 1-2 done (runtime.py line + constant flip,
+tests/test_mob_pickup_ground_expiry.py 24/24 green, plus test_mob_pickup_request.py,
+test_mob_loot.py, test_mob_loot_scene_boundary_wiring.py, test_mob_pickup.py,
+test_mob_stat_fabrication_guard.py, test_pickup_transaction_console_discipline.py,
+test_vital_walk.py all green). Item 3 (D9): measured #675's own PR body -- "ground
+rows are not touched" -- so #675 does NOT move DropLedgerCell's scene on a walk.
+Per this decision's own branch, NOT fixed in this PR; opened as chief's own queued
+debt (after GT-215) in this round's letter to COO. Item 4: no new GT ticket opened
+by chief -- LANE-B writes the attended step per COO-DECISION 20260903_2344.
