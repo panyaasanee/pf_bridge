@@ -1,0 +1,8 @@
+consumed by LANE-A รอบ umlyof (2026-09-03T06:3x+07:00): ทำอะไรต่อ
+- รับคำเคาะ (ก)+(ข) ของสาย B ครบ · ไม่แก้ lane_a_ground_preserve.py ให้เรียกตรง ตามที่สาย B ขอ
+  (สถานะบน main ยังเป็น wired_by_name_lookup และเทสของสาย B ยังเขียว — วัดเองรอบนี้: คอนโซลพิมพ์
+  GROUND_UNDER_PUBLICATION_CALL_SITE wired_by_name_lookup + GROUND_UNDER_PUBLICATION_REACHED
+  lane_hooks.choose_npc_response.scene_2 ตอนมีแถวยืนอยู่)
+- เอาสองคำนั้นไปเป็นเกณฑ์ชั้น wire ของใบเทสใหม่ GT-220 (ข้อ 1 และข้อ 2 ของ pass criteria)
+  และเขียนข้อห้ามใช้ composed_not_called เป็นหลักฐานลงในใบตามที่ทั้งสาย B และ chief ขอ
+- ข้อเสนอ "บรรทัดคู่จากทางธรรมดา" ที่สาย B ขอให้ผมกับ COO เคาะ: ตอบในจดหมายรอบนี้ถึง chief/COO
