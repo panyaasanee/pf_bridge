@@ -11795,7 +11795,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 
 **ผู้เปิดใบ: chief รอบ `7uxscs` (R308) -- chief บริโภคผลใบนี้เอง**
 
-## GT-216 MULTI-VITAL-WALKER-MAKES-GROUND-PICKUP-PLAYABLE-001  [✅ **PASS สองชั้น · OBSERVER_CONFIRMED 2026-09-03T16:51+07:00** (chief รอบ `pk14rf`/R326 · หนี้ค้างจาก `COO-DECISION 20260903_1743` ข้อ 4) — จอเจ้าของ R306: คลิกเก็บ 10 ครั้ง เข้ากระเป๋า 9 · 8 ใน 9 ติดคลิกแรก · กระเป๋า 3→12 ตรงกับ DB · `vital_count_not_one` = 0 (เดิม 42/46) · จดหมายผล `notes_to_chief/20260903_1657_KA1A-R306-RESULTS-*.md` · **ห้ามบูตซ้ำเพื่อวัดสิ่งที่วัดแล้ว** · 🔴 ที่ยัง **ไม่** อ้าง: ของหายชั่วคราวตอนตีตัวถัดไปแล้วโผล่กลับ = `RE-208` ของ LANE-B (ขั้นปิดอยู่ใน `GT-223` ตาม `COO 20260903_1942` ข้อ 4) · RECHECK เดิมของใบนี้ grep ชื่อโมดูลในตัวเอง = เกณฑ์ที่เป็นจริงไม่ได้ (`1743` ข้อ 3 ข้อย่อย 6) ยังไม่แก้ถ้อยคำ]
+## GT-216 MULTI-VITAL-WALKER-MAKES-GROUND-PICKUP-PLAYABLE-001  [✅ **PASS สองชั้น · OBSERVER_CONFIRMED 2026-09-03T16:51+07:00** (chief รอบ `pk14rf`/R326 · หนี้ค้างจาก `COO-DECISION 20260903_1743` ข้อ 4) — จอเจ้าของ R306: คลิกเก็บ 10 ครั้ง เข้ากระเป๋า 9 · 8 ใน 9 ติดคลิกแรก · กระเป๋า 3→12 ตรงกับ DB · `vital_count_not_one` = 0 (เดิม 42/46) · จดหมายผล `notes_to_chief/20260903_1657_KA1A-R306-RESULTS-*.md` · **ห้ามบูตซ้ำเพื่อวัดสิ่งที่วัดแล้ว** · 🔴 ที่ยัง **ไม่** อ้าง: ของหายชั่วคราวตอนตีตัวถัดไปแล้วโผล่กลับ = `RE-208` ของ LANE-B (ขั้นปิดอยู่ใน `GT-223` ตาม `COO 20260903_1942` ข้อ 4) · ✅ RECHECK เดิมที่ grep ชื่อโมดูลในตัวเอง (`1743` ข้อ 3 ข้อย่อย 6) **แก้ถ้อยคำแล้วรอบนี้** ถามโทเคนกับชื่อจุดเสียบแทน]
 
 ### 🔴 โทเคนที่ห้ามอ่านว่าเสีย (`COO-DECISION 20260903_0953` ข้อ 2 -- เขียนลงทุกใบที่มีคลิกเก็บของ)
   **`cell_has_no_scene` ก่อนการฆ่ามอนตัวแรก *ของเซสชันล็อกอินนั้น* = พฤติกรรมที่ถูก ไม่ใช่ความเสีย ห้ามรายงาน FAIL**
@@ -11819,8 +11819,9 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
   🔴 **ไม่มีล็อกอินถูกปฏิเสธในรอบนี้ = ไม่ต้องทำอะไร ไม่ใช่ FAIL ไม่ใช่ finding** -- ปกติล็อกอินจะไม่ถูกปฏิเสธ
   ประโยชน์: `CORE-REQUEST 20260903_1505` ปิดได้เมื่อเห็นเลขที่**ตรงกับตัวละครจริง**บนคอนโซลหนึ่งครั้ง (เทสยูนิตปิดใบนั้นไม่ได้)
 
-RECHECK: `git -C pirate-force-server fetch && git -C pirate-force-server grep -c "vital_walk" origin/main -- src/pirateforce_foundation/vital_walk.py src/pirateforce_foundation/runtime.py`
-  ต้องได้ **สองบรรทัด** (ไฟล์ละบรรทัด) = โมดูลอยู่บน main และ `runtime.py` เรียกมันจริง ⇒ ใบนี้ `READY`
+RECHECK: `git -C pirate-force-server fetch && git -C pirate-force-server grep -c "VITAL_WALK_PROMOTED_TOKEN" origin/main -- src/pirateforce_foundation/vital_walk.py && git -C pirate-force-server grep -c "_vital_walk_promote_target_pos" origin/main -- src/pirateforce_foundation/runtime.py`
+  🔴 **แก้ถ้อยคำโดย chief รอบ `pk14rf`/R326 ตาม `COO-DECISION 20260903_1743` ข้อ 3 ข้อย่อย 6** — บรรทัดเดิม grep คำว่า `vital_walk` ใน `vital_walk.py` ซึ่งเป็น **ชื่อโมดูลในตัวมันเอง** = จริงเกือบตลอดโดยไม่ได้พิสูจน์ว่าโค้ดที่ใบนี้พึ่งมีอยู่ · บรรทัดใหม่ถามสองอย่างที่ **หายได้จริง**: โทเคนที่โมดูลประกาศ และ **ชื่อจุดเสียบใน `runtime.py`** (ไม่ใช่บรรทัด import)
+  ต้องได้ **สองค่าที่ไม่ใช่ศูนย์** = โมดูลอยู่บน main และ `runtime.py` เสียบมันจริง ⇒ ใบนี้ `READY`
   ได้บรรทัดเดียวหรือศูนย์ = โค้ดหาย ให้ตีกลับเป็น `BLOCKED` แล้วเขียนถึง chief
   🔴 **บรรทัด RECHECK เดิมของใบนี้ผิด และ chief เป็นคนเขียนผิดเอง** (R309) มันสั่ง grep หาสตริง
   `VITAL_WALK_PROMOTED` ใน **ทั้งสอง** ไฟล์ แต่โทเคนนั้นเป็นค่าคงที่ที่ประกาศใน `vital_walk.py:162`
