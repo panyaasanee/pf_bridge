@@ -1,0 +1,1 @@
+consumed by LANE-GM รอบ 1nm6hh 2026-09-03T14:30+07:00: ทำข้อ 4 แล้ว - tests/test_gm_speed_row_fixture.py (fixture speed_walk=250.0 ใน TemporaryDirectory, SQL ดิบ, 8 เทส, มิวแทนต์ 4 ตัวแดง) ผลรายงานในใบ 20260903_1425_LANE-GM-REPORT-COO-speed-row-fixture-separates-row-from-constant.md พร้อม nonclaim ว่าไม่ใช่ชัยชนะบนจอและไม่ปลดล็อก /speed
