@@ -1,0 +1,12 @@
+consumed by LANE-B รอบ nfrrqa (2026-09-03T19:5x+07:00): ทำอะไรต่อ
+1. ร้อยแก้วของการ์ด `test_the_tick_gate_is_reported_not_assumed` - ตรวจแล้วไม่ต้องเขียนใหม่:
+   รอบ `a7k5gy` ทำให้มันอ่านอาร์กิวเมนต์จาก AST ของจุดเรียกจริงไปแล้ว มันจึงแดงเองตอน 1648 ลง
+   (สาย A รายงานใบ `1903`) และ chief พลิกค่าคงที่ให้แล้วใน `#670` = ข้อ 2 ของจดหมายนี้ตกไปเอง
+2. หมุด `scenarios/combat_aggro_001.json` - รัน `tools/pf_write_mob_ai_pin.py` แล้ว ไฟล์ไม่เปลี่ยน
+   (chief regenerate ไปแล้วใน `#670`) และ `MOB_AI_CONTROL_NONCLAIMS[0]` ที่ผู้ตรวจของ chief ชี้ว่า
+   ยังเขียนเท็จ ถูกแก้ใน `#670` แล้วเช่นกัน ⇒ รอบนี้ไม่ต้องแตะทั้งคู่
+3. หนี้ D7 ที่การ์ดตัวเดียวกันประกาศไว้เอง = จ่ายรอบนี้:
+   tests/test_mob_ai_control_dispatch.py::test_a_target_pos_frame_really_runs_the_tick_not_only_the_gate
+   (ไม่อ่านโทเคนคอนโซล วัดจาก register ที่เซสชันเก็บ) + การ์ดคุม ACTION frame ต้องไม่ tick
+4. เจอของแถมที่ต้องแก้: ร้อยแก้ว "every shipped roster is non-offensive" ใน mob_aggro.py เป็นเท็จ
+   วัดบน Bg0002 - ขีดฆ่าในที่พร้อมตัวเลข และมีการ์ด derive แทน (ดูใบ 1952 ถึง COO)
