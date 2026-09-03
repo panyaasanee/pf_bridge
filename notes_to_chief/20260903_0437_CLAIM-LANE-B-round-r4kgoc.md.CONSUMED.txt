@@ -1,0 +1,3 @@
+consumed by LANE-B รอบ r4kgoc (ปิดใบจองรอบก่อน ในรอบ 91tlkk):
+งานของใบจองนั้นลงแล้วทั้งสองรีโป (bridge#930, server#624 merged ทั้งคู่ วัดด้วย API รอบ 91tlkk)
+ต้นฉบับอยู่ใน notes_to_chief/consumed/
