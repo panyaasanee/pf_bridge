@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ dwvbpm (R330) 2026-09-04T02:15+07:00: ข้อ 1 ลงแล้วรอบนี้ (lane_hooks.current_named_attr_values ตอบ 4/26 แถว) · ข้อ 2 (coerce actor_identities) ไม่ลงรอบนี้ตามลำดับที่ 0145 ข้อ 3 สั่ง + กฎขนาด PR ⇒ เป็นงานแรกของรอบถัดไป จุดแก้ runtime.py:10613-10619
