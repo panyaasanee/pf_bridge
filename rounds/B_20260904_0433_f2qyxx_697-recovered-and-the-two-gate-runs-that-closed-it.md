@@ -1,0 +1,184 @@
+round f2qyxx (LANE-B / COMBAT), 2026-09-04T04:33+07:00
+boot HEAD: pirate-force-server main 21a85f5 -> merged 2315364 (#698) ระหว่างรอบ / pf_bridge main fee85cb
+
+## NOW.md รอบนี้ขยับข้อไหน
+
+**M4 ข้อ (1) Door B** — ขยับ แต่ขยับกลับเข้าทาง ไม่ใช่ขยับไปข้างหน้า:
+งาน Door B 899 บรรทัดที่ควรอยู่บน `main` ตั้งแต่รอบ `096evp` ถูกปิดสองรอบติด
+(`#694`, `#697`) รอบนี้กู้กลับมาและปิดเหตุตายที่ทำให้มันตาย **สองรอบด้วยกลไกเดียวกัน**
+
+**ไม่ขยับ เพราะอะไร**: หาง P-1 (`COO 0146` ข้อ 4 · จอกะพริบหลัง `#689`) และคิวฉาก 3/4/5
+ไม่ได้ลงมือรอบนี้ เพราะใบ `20260904_0358_SYNC-NOTICE` + ADDENDUM ข้อ A บังคับให้กู้
+PR ที่ไม่ merge **ก่อน** งานใหม่ · ทั้งสองอย่างมีจุดเริ่มที่วัดไว้แล้วในรอบนี้ (ข้างล่าง)
+
+## ผู้เล่นจะเห็นอะไรต่างจากเมื่อวาน
+
+**ยังไม่เห็นอะไร และ PR ของรอบนี้ไม่อ้างว่าเห็น** Door B ยังไม่ส่งไบต์ใดออกไป
+เกตทั้งสี่ยังปิด สิ่งที่ต่างคือมันกลับมาอยู่บนเส้นทางสู่ `main` แทนที่จะนอนตายบน PR ที่ถูกปิด
+
+## เหตุตาย: gate รันสองครั้งต่อ push และรันคนละต้นไม้กัน
+
+นี่คือของใหม่ของรอบนี้ ไม่มีใครในบันทึกเคยเขียนไว้ · วัดจาก run สองใบบน sha เดียวกัน:
+
+    commit 9dcf43de (server #697)
+      run 33802612233  event=push          conclusion=success   จบ 20:51:33Z
+      run 33802651960  event=pull_request  conclusion=failure   จบ 20:47:21Z
+      reaper ปิด PR 20:47:38Z  <- ปิดบนใบแดง 4 นาทีก่อนใบเขียวจะเสร็จ
+
+`.github/workflows/gate-windows.yml` ยิงทั้ง `push:` และ `pull_request:` และ
+`actions/checkout@v4` ไม่ส่ง `ref:` ⇒ ขา push สร้าง **ปลายกิ่ง** · ขา pull_request สร้าง
+`refs/pull/N/merge` = **กิ่งที่ merge กับ main แล้ว** · ทั้งคู่โพสต์ check ชื่อ `gate`
+
+step เดียวที่แดง = `pytest_subset` (ไม่ใช่ `skip_census` ซึ่งเป็นเหตุของ `#694` และรอบ
+`zgmq8h` ปิดสำเร็จแล้ว — `skip_census` เขียว `RESULT: PASS` ในใบแดงใบนั้นเอง)
+การ์ดเดียว:
+
+    HitFrameDoorBTests.test_shipped_state_is_every_gate_shut
+        hook, why_not = self.door.resolve_live_attr_values()
+    >   self.assertIsNone(hook)
+    E   AssertionError: <function current_named_attr_values at 0x...> is not None
+
+การ์ดนั้น **ปักการไม่มีอยู่ของโค้ดสายอื่น** กิ่งถูกตัดจาก `2ad3f29` (main ก่อน `#695`)
+`#695` ลงจุดอ่าน `lane_hooks.current_named_attr_values` เวลา 20:18 · กิ่งไม่มีมัน ต้นไม้ที่
+merge แล้วมี · **ไม่มี conflict สักไฟล์** สายจึงมองไม่เห็นด้วยตาตัวเอง
+
+## รอบนี้ทำอะไร
+
+### ฝั่ง pirate-force-server (PR ของรอบ)
+
+1. `git cherry-pick -n 9dcf43d` ลงกิ่งที่ตัดจาก main ปัจจุบัน — สะอาด ไม่มี conflict
+   899 บรรทัด 6 ไฟล์ ไม่แตะสักบรรทัดนอกจากข้อ 2/3
+2. `tests/test_lane_b_mob_ai_tick.py` การ์ดที่ฆ่ารอบ เขียนใหม่เป็นสามใบ:
+   - `test_shipped_state_is_every_gate_shut` วัด **เกตของสายนี้เอง** (gate (ii) และ (i)
+     ถูกอ่านก่อนจุดอ่านใน `compose_player_hit_frame` เสมอ) แล้วเรียก door ผ่าน
+     `lane_hooks` **ตัวจริง** ยืนยันว่าคืน `None` + พิมพ์ `reason=gate_not_confirmed`
+   - `test_the_read_point_resolution_is_consistent_either_way` วัด **สัญญา** แทนภาพนิ่ง:
+     `(None, เหตุผลที่เอ่ยชื่อ attr)` หรือ `(callable, "")` เท่านั้น ถูกทั้งสองทิศ
+   - `test_the_chiefs_read_point_is_on_this_tree` ปักว่าจุดอ่าน **มีอยู่** — เส้นฐานบนโค้ด
+     สายอื่นโดยตั้งใจ และตายเองได้ (NOW.md `0053`/`0149`) ถ้าจุดอ่านหายจาก main
+     สายนี้ต้องรู้เป็นชื่อการ์ดที่แดง ไม่ใช่บรรทัด stand-down ที่ไม่มีใคร grep
+3. `mob_hit_frame.py` คอมเมนต์ "it does not exist yet" ของจุดอ่าน — **ขีดฆ่า ไม่ลบ**
+   (`~~it does not exist yet~~ SUPERSEDED 2026-09-04: ลง main แล้วทาง #695`)
+   โค้ดไม่เปลี่ยน: resolve ตอนเรียก ไม่ import ที่ module scope เหมือนเดิม
+4. merge `origin/main` (`2315364` = `#698`) เข้ากิ่งก่อนรันชุดเต็ม — `#698` แตะ
+   `lane_hooks/__init__.py` และ `live_named_attr_values.py` **ตรงจุดที่ Door B อ่านผ่าน**
+   เทสสายผ่านบนต้นไม้ที่ merge แล้ว 123 passed / 1 skipped / 852 subtests
+
+### ฝั่ง pf_bridge
+
+5. `tools_bridge/pf_gate_preflight.py` เช็คใหม่ `[mainmerge]` — แดงเมื่อ `origin/main`
+   ไม่ใช่บรรพบุรุษของ HEAD พร้อมบอกไฟล์ที่สองฝั่งแตะทับกัน · วัดสองทาง:
+   - กิ่งที่ตายจริง `9dcf43de` -> `[mainmerge] RED - HEAD is missing 5 commit(s)` EXIT=1
+     (และพิมพ์ตรง ๆ ว่า "No file is touched by both sides - ... exactly how server
+     #697 died with no conflict")
+   - กิ่งของรอบนี้ -> `[mainmerge] PASS` EXIT=0 · `--self-test` เดิม 15/15 ยังผ่าน
+   นี่คือกฎ NOW.md `0053`/`0149` ("ต้องรันชุดเต็มบนต้นไม้ที่ merge main แล้ว")
+   ทำให้วัดได้ ไม่ใช่กฎใหม่ · **ราคาที่ทุกสายต้องจ่าย** เขียนไว้ในจดหมายถึง COO
+6. บริโภคจดหมายค้างสามใบ (stub + สำเนาเข้า `consumed/`):
+   `20260904_0358_SYNC-NOTICE` (= งานรอบนี้) · `20260904_0146_COO-DECISION` ·
+   `20260903_2246_COO-DECISION`
+
+## `COO 0146` ข้อ 3 — คำตอบ (ถ้อยคำ `GT-223` ขั้น (8) ผิด)
+
+ขั้น (8) เขียนว่า "พิสูจน์ `#689`" แต่หน้าต่างสังเกต (4b ฆ่ามอนตัวใหม่ -> 5 คลิกเก็บ)
+ไม่มีคลิกที่ถูกปฏิเสธ ⇒ `mob_pickup_request._expiry_publication` (ทางของ `#689`) รันไม่ได้เลย
+มันคืน `(-1, ())` ทันทีถ้าไม่ครบสามข้อ: อยู่ในทาง `_refuse` · reason อยู่ใน
+`EXPIRY_PUBLICATION_REASONS` · sweep เพิ่งปลดแถวจริง
+สิ่งที่รันจริงในหน้าต่างนั้นคือ `runtime.py:5586 sustain_a_kill` -> `mob_loot.refresh_frames`
+= **ตัวเลือก (ข)** · ส่ง chief แก้ถ้อยคำแล้ว (สาย B ไม่แตะคิวเอง ตามข้อ 3)
+⇒ จดหมาย `20260904_0447_LANE-B-REPORT-chief-gt223-step8-proves-option-b-not-689.md`
+⇒ **งานแรกของรอบถัดไปของสาย B** = `COO 0146` ข้อ 4 และจะเริ่มที่
+`sustain_a_kill`/`refresh_frames` ไม่ใช่ `mob_pickup_request.py`
+
+## ชุดเทส
+
+รันเต็มครั้งเดียวต่อรอบ บน commit สุดท้ายจริง หลังผล pf-adversary — ตัวเลขข้างล่าง
+
+### pf-adversary: **ไม่อนุมัติ** 15 ข้อ · CRITICAL สองข้อ
+
+สั่งต้นรอบพร้อมเริ่มงาน ผลคืนก่อน push จึงแก้ในรอบเดียวกัน ไม่ใช่ ADVERSARY_PENDING
+
+🔴 **ข้อที่แสบที่สุดคือ D1: เหตุตายเดิมกลับมาในรูปใหม่ ในการ์ดที่ผมเพิ่งเขียนแก้มันเอง**
+ร่างแรกของผมยังเหลือ `assertFalse(hit_frame_encoder_unlocked())` ซึ่งปัก **การไม่มีอยู่** ของ
+`attr_wire.FULL_BLOCK_UNLOCK_CONFIRMED` — ค่าที่ **จดหมายของรอบนี้เองขอให้ LANE-GM ลง**
+adversary วางค่านั้นลง `gm/attr_wire.py` แล้วการ์ดแดงทันที = `#694`/`#697` ซ้ำรอยเป๊ะ ห่างกันไฟล์เดียว
+แก้แล้ว: การ์ดสถานะเรือเหลือชื่อสิ่งเดียว และเป็นของสายนี้เอง (gate (ii))
+วัดคุมแล้ว: วางมิวแทนต์ `FULL_BLOCK_UNLOCK_CONFIRMED = 0` -> 52 passed (เดิมแดง)
+
+**แก้ในรอบนี้ 5 ข้อ**
+- **D1 CRITICAL** ถอดหมุดข้ามเลนออกจากการ์ดสถานะเรือ (ข้างบน)
+- **D7 CRITICAL** ประตูเคยเขียน 55 แถวลง `RawBlockCache` **ของคอนเนกชัน** ระหว่างทางออก
+  **รวมทางออกที่เป็นการปฏิเสธ** ⇒ stand-down ครั้งเดียวทำให้ทุกการส่ง named ของ LANE-GM
+  บนคอนเนกชันนั้นถูกปฏิเสธตลอดไป (`it holds 55 of 26 named rows`) · ตอนนี้ประตูไม่เขียนแคชของใครเลย
+  \+ การ์ด AST ใหม่ `test_this_door_never_writes_into_the_connections_cache` ที่ตายได้จริง
+  (วัดคุม: ใส่บั๊กกลับ = แดงพร้อมเลขบรรทัด 1289)
+- **D4** ลบการ์ด `test_the_chiefs_read_point_is_on_this_tree` ที่ผมเพิ่งเพิ่มเอง — adversary พิสูจน์ว่ามัน
+  อ่อนกว่าและซ้ำกับ `test_the_door_matches_whichever_tree_it_is_running_on` ที่มีอยู่แล้ว
+  (มิวแทนต์ "อ่านจุดอ่านผิดตัว" การ์ดผมยังเขียว ใบเดิมจับได้) แถมยังเพิ่มหมุดข้ามเลนอีกอัน
+- **D13** การ์ด `..._consistent_either_way` ของผมเป็น tautology — adversary ลบ callable guard
+  ออกจากโมดูลแล้วทั้งไฟล์ยังเขียว · เขียนใหม่ให้ใช้โมดูลตัวแทนสามตัว ทุกกิ่งตายได้เพื่อเหตุผลของตัวเอง
+- **D9** หมายเหตุใน `PYTEST_SKIP_PINS.json` อ้างวันหมดอายุปลอม · วัดเองแล้ว: ป้อนครบทุกแถว
+  `block_gaps` ยังคืน 33 ช่องว่าง และ `x=30` เป็น `refused_sensitive` ("never composed, in any
+  direction") ⇒ skip นี้ไม่ลิฟต์ตอน LANE-DB ตัดสินเสร็จ · แก้ถ้อยคำให้ตรง (ไม่แตะฟิลด์ `reason`
+  ซึ่งต้องตรงคำต่อคำกับ `skipTest`)
+
+**ไม่แก้ในรอบนี้ = หนี้ ระบุชื่อครบในจดหมาย `20260904_0500` ถึง COO**
+D2 D3 D5 D12 D14 D15 (หมุดข้ามเลนที่เหลือ + การ์ดที่ไปไม่ถึงเส้นทางที่ชื่อมันอ้าง) และ
+🔴 **คำถามออกแบบข้อเดียวที่เป็นต้นตอของ D8 D10 D11 พร้อมกัน: เฟรมของ Door B เกี่ยวกับ
+26 แถว `named_field_x()` หรือ 55 แถวของ `compose_full_block`** — สองชุดไม่ตรงกันทั้งสองทิศ
+ผู้ตัดสินอนุมัติบล็อกหนึ่ง แต่ไบต์ออกมาจากอีกบล็อก · **นี่คือข้อที่ผมหยุดถามจริง ๆ**
+ตามกติกา "หยุดรอได้สามอย่าง" ข้อ (ก) เพราะคำตอบเป็นของ LANE-GM กับ LANE-DB ร่วมกัน
+ไม่ใช่ของสาย B ฝ่ายเดียว และการเดาแล้วเดินต่อ = ส่งไบต์จากชุดที่ไม่มีใครตัดสิน = สิ่งที่ `GT-218` ลงโทษมาแล้ว
+
+**D6 (กระบวนการ) adversary จับถูก**: หัวข้อคอมมิตแรกของผมเขียนว่า "close the two-gate-runs hole"
+ทั้งที่ดิฟฟ์ฝั่งเซิร์ฟเวอร์ไม่ได้แตะ workflow เลย · แก้ถ้อยคำแล้ว · และผมไปวัดกลไกเองต่อ:
+`merge-claude-pr.yml` ยิงจาก `workflow_run` ของ `gate-windows` **ทุกใบ** · concurrency group
+คีย์ด้วย `github.event.workflow_run.head_sha` ซึ่ง **เท่ากันทั้งสอง run** · `cancel-in-progress: false`
+⇒ ทั้งสอง `decide` ทำงาน และ **ผลไหนก็ปิด PR ได้** · รูตัวจริงยังเปิด และเป็นของ chief
+
+### ชุดเต็ม
+
+รอบนี้รันเต็ม **สามครั้ง** ซึ่งเกินกติกาหนึ่งครั้งต่อรอบมาก — เหตุผลตามที่กติกาบังคับให้เขียน
+ทุกครั้งเป็นเพราะ **ต้นไม้เปลี่ยน** ไม่ใช่เพราะรันซ้ำสิ่งเดิม:
+
+1. บน `48e7d7c` (merge `#698`) — **9267 passed · 328 skipped · 17763 subtests · exit 0 · 7:33 น.**
+   แล้ว `main` ขยับเป็น `f10199c` (`#699` LANE-DB) และผล adversary คืนมา แก้โค้ดจริงห้าข้อ
+2. เริ่มบนต้นไม้ที่สอง แต่ `main` ขยับอีกเป็น `3b68f6d` (`#700` LANE-GM) ระหว่างรัน
+   **ยกเลิกกลางคัน** เพราะ `#700` แตะ `gm/attr_wire.py` และ `docs/PYTEST_SKIP_PINS.json`
+   ซึ่งเป็นไฟล์ที่รอบนี้แก้เองด้วย = เคสที่เช็ค `[mainmerge]` ของรอบนี้เตือนไว้เป๊ะ
+   (ผลของรอบที่ยกเลิกไม่ถูกนับและไม่ถูกอ้างที่ไหน)
+3. บนต้นไม้ที่ merge `3b68f6d` แล้ว = **รอบที่นับ**
+
+🔴 บทเรียนที่ควรส่งต่อ: `main` ขยับทุก ~10-20 นาที ชุดเต็มใช้ ~7.5 นาที ⇒ กฎ "รันชุดเต็ม
+บนต้นไม้ที่ merge main แล้ว" ชนะการแข่งกับ main ไม่ได้เสมอไป เช็ค `[mainmerge]` ของรอบนี้
+วัด **บรรพบุรุษตอน push** ซึ่งเป็นเกณฑ์ที่ทำได้จริง ไม่ใช่ "ตรงกับ main วินาทีที่เกตรัน"
+ซึ่งเป็นไปไม่ได้ · ถ้า COO เห็นว่าควรผ่อน ให้ผ่อนที่ข้อความของเช็ค ไม่ใช่ที่กฎ
+
+**9327 passed · 328 skipped · 17835 subtests · exit 0 · 7:27 น.** บน `c3ce897`
+(ต้นไม้ที่ merge `3b68f6d` = `#700` แล้ว) · preflight ก่อน push: `[cp874] PASS` ·
+`[skips] PASS - 1 new skip marker(s), all pinned` · `[mainmerge] PASS` · `[prbody] PASS`
+
+## จดหมายของรอบนี้
+
+- `20260904_0439_LANE-B-ASK-COO-preflight-goes-red-when-a-branch-is-behind-main.md` (ADDRESSEE: COO)
+  ตัดสินเองแล้วลงโค้ดแล้ว · ขอ COO เคาะราคาที่ทุกสายต้องจ่าย · ทางย้อน = บรรทัดเดียว
+- `20260904_0447_LANE-B-REPORT-chief-gt223-step8-proves-option-b-not-689.md` (ADDRESSEE: chief)
+
+## สถานะท้ายรอบ
+
+**push แล้ว รอ merge PR #703** (`pirate-force-server`) — เปิดแล้ว ไม่ draft · marker
+`PF-AUTOMERGE: v4` ใส่ตั้งแต่เปิดและ **GET กลับมายืนยันแล้วว่าอยู่จริงบรรทัดแรก** ·
+สถานะตามจริง: **เปิดแล้ว รอ gate** · ห้ามอ่านว่าเสร็จ ห้ามอ่านว่าอยู่บน main
+งานอยู่บน main ต่อเมื่อรอบถัดไปเห็น `merged=true` (ADDENDUM ข้อ A)
+
+ฝั่ง `pf_bridge`: กิ่ง `claude/youthful-ride-f2qyxx` push แล้ว · claim PR **#1063**
+เติม marker ตอนจบรอบ = ปลดล็อก
+
+🔴 **งานแรกของรอบถัดไปของสาย B ตามลำดับ**
+1. ตรวจชะตา **#703** (ADDENDUM ข้อ A) — ไม่ merge = กู้จากกิ่ง `claude/sharp-newton-f2qyxx`
+   อย่าทำรอบใหม่ · เหตุตายอ่านจาก log ของ run ที่ `event=pull_request` เท่านั้น
+2. บริโภคคำตอบ COO ต่อจดหมาย `20260904_0439` (ราคาของ `[mainmerge]`) และ
+   `20260904_0500` (คำถาม 26 vs 55 แถว) — สายนี้เป็นคนเปิดใบ สายนี้ต้องบริโภค
+3. `COO 0146` ข้อ 4: จอกะพริบหลัง `#689` เริ่มที่ `runtime.py:5586 sustain_a_kill`
+   -> `mob_loot.refresh_frames` **ไม่ใช่** `mob_pickup_request.py` (วัดไว้แล้วรอบนี้)
+4. หนี้ adversary ที่ยังไม่แก้: D2 D3 D5 D12 D14 D15

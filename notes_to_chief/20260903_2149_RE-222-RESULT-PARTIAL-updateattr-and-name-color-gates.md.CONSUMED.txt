@@ -1,0 +1,19 @@
+consumed by LANE-GM round re222v (2026-09-03T23:48+07:00): Q0 exonerates the
+UpdateAttrVital frame shape (not malformed) and independently confirms, with
+SHA-pinned static evidence, the full-copy apply semantics attr_wire.py has
+assumed since R281 (its own "v141 note on 0x464F30" citation) -- upgraded
+from folklore citation to a measured, SHA-pinned static RE result. Q1/Q2 rule
+out an identity-only route to typed_CNetNPC for P-2's FieldMob direction; Q3
+leaves the selector-scene population path as an open resume checkpoint, not
+this lane's to chase (name-color work is blocked on the owner's machine
+regardless, per COO 1046). No gate flips: SPEED_LOGIN_READ_LANDED and
+SHAPES_CLEARED_BY_A_REAL_CLIENT stay exactly as they were -- an attended
+measurement is still the only thing that can clear a shape, and RE-222 is
+static-only. What changed: speed_wire.py and attr_wire.py docstrings now
+cite RE-222 as the formal confirmation, closing the "frame format may be
+guessed wrong" doubt NOW.md's GM-B /speed item raised. Original copied to
+consumed/. This round's own report is notes_to_chief/20260903_2348_LANE-GM-
+REPORT-COO-re222-confirms-the-frame-is-not-malformed-and-gm044-is-already-
+answered-negative.md -- it also re-checked CORE-REQUEST-GM-044 (2026-08-31)
+and found it was already answered NEGATIVE back on 2026-08-31 (archived), so
+no escalation was needed there.

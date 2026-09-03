@@ -1,23 +1,40 @@
 # PIRATE FORCE — Chief Architect continuation file
 
-## 🔴 ลำดับงานปัจจุบัน — ไมล์สโตน M1-M6 พักไว้ (คำสั่งตรงเจ้าของ 2026-09-01T02:15 ผ่านกะ1-A)
+## 🔴 ลำดับงานปัจจุบัน — ไมล์สโตนเปิดกลับมา ไม่มีกำหนดวัน (`PANYA-DECISION 20260904_0233` ผ่าน `COO-DECISION 0243` · แทนคำสั่งพัก 2026-09-01T02:15 เดิม)
 
-อ่านหัวข้อนี้ก่อนมอบหมายงานใดๆ ทุกรอบ — อย่ามอบงาน milestone (M1-M6/CHARTER-02) ใหม่จนกว่าเจ้าของจะสั่งกลับมา
-(พัก ไม่ใช่ยกเลิก) ใบเต็ม: `notes_to_chief/consumed/20260901_0215_PANYA-ORDER-*.md` · มอบหมายสาย:
-`notes_to_chief/consumed/20260901_0302_FROM_CHIEF_R278_*.md`
+อ่านหัวข้อนี้ก่อนมอบหมายงานใดๆ ทุกรอบ — milestone (M1-M final/CHARTER-02) กลับมามอบหมายได้ตามปกติ **ห้ามรายงาน
+"เลยกำหนด" อีก** (ไม่มีคอลัมน์กำหนดแล้ว) ผ่าน M(n) ก่อนจึงประกาศ v(n) ใบเต็ม:
+`notes_to_chief/20260904_0233_*.md` · `notes_to_chief/20260904_0243_COO-DECISION-*.md` ·
+ประวัติการพัก: `notes_to_chief/consumed/20260901_0215_PANYA-ORDER-*.md`
 
-- **P-1** ของดรอปต้องอยู่บนพื้นนานพอให้เดินไปเก็บทัน → **LANE-B**
-- **P-2** สีชื่อมอนต้องถูกสถานะ: ปกติ=ส้ม / สู้=แดง / ตาย=เทา (ห้ามชมพู) → **LANE-GM**
-- **P-3** เปิดปุ่ม GM ให้ได้ → **LANE-GM** (Codex ป้อนข้อมูลเรื่อยๆ ใบที่แตะ P-3 หยิบใช้ทันที ไม่เข้าคิวรอ)
-- งานสร้างใหม่คู่ขนาน: GM-A `/warp` ไม่ใส่พิกัด (LANE-GM, GT-182 **PASS** รอบ 8zf80f) ·
-  UI-A/UI-B ปุ่มกลับหน้าเลือกตัวละคร/logout (LANE-A)
-- 🆕 GM-B `/speed` **ย้ายเจ้าของจาก LANE-GM ไป LANE-DB** (`COO-DECISION/ORDER 20260901_1059/1100/1101`
-  ทับของเดิมเฉพาะจุดนี้) — เป็นงานส่งมอบชิ้นแรกของสายใหม่ LANE-DB (ดูหัวข้อ "ทีมและเขตเขียน" ด้านล่าง)
-- `GT-146`/ใบตีมอนทั้งหมด **ห้ามเข้าคิว attended** จนกว่า P-1 และ P-2 จะเสร็จ
+### CHARTER-02 — บันไดไมล์สโตน (คอลัมน์ "กำหนด" ถูกลบตาม `0243` ข้อ 2 · กฎสี่ข้อของเวอร์ชัน + วินัยหลักฐานคงเดิม)
 
-🔴 KA1A-FINDING 20260901_1110 (`notes_to_chief/consumed/`): บล็อกนี้อยู่ใน **จดหมาย/ไฟล์นี้เท่านั้น** —
-prompt ของแต่ละสาย (scheduled routine) ยังพูดถึงแต่ milestone เดิม เพราะ**เจ้าของเท่านั้นที่แก้ prompt ได้จริง**
-(chief แก้แทนไม่ได้ ห้ามลองด้วย) จนกว่าเธอจะทำ ให้ chief ทุกรอบอ่านบล็อกนี้ก่อนมอบงานใหม่ แทนการพึ่ง prompt สาย
+- ✅ **M1/v1** เมืองมีชีวิต — ประกาศแล้ว (R249)
+- ⏳ **M2/v2** ออกจากเมืองได้ — เหลือเกณฑ์เดียว: ใกล้เกาะ client ยิง `TriggerVital` (`0x1FB2`) → server ตอบ
+  หน้า "รายงานกัปตัน เรือเทียบท่า [ชื่อเกาะ]" → ผู้เล่นกดยืนยัน → วาปเข้าเกาะ 2 (Prison Exile) และเกาะ 3
+  (Spice Paradise) ได้จริงบนจอ **ทั้งสองเกาะ** → **LANE-A**
+- **M3** สนามมีมอนสเตอร์ (= P-2 ยกระดับ): สีชื่อมอนถูกตามสถานะ **และ** attr + relation/faction ของมอนถูกจริง
+  ไม่ใช่แค่ทาสี → LANE-GM (สี) ร่วม LANE-B (attr/relation ของ roster)
+- **M4** ตีได้ตายได้ — สี่ข้อครบบนจอ: (1) มอนตีกลับ HP ผู้เล่นลดจริง (2) ตายถูกต้อง ท่าตาย/ชื่อเทา/ไม่มี
+  ข้อความ-ตัวนับของผู้เล่น (3) ศพไม่แข็งค้าง (4) เกิดใหม่ได้ (`GT-224`) → LANE-B
+- **M5** เก็บของได้ (คงเดิม) — เก็บได้ + รอด relog · หนี้: ของผี 120 วิ · หาง P-1 · ไอคอน/ใช้ของ → LANE-B
+- **M final** (ไม่มีเลข แทน M6) — เกมเล่นได้ครบวงจร เกิด-เดินทาง-สู้-เก็บ-โต-กลับมา
+
+- **P-1** ของดรอปต้องอยู่บนพื้นนานพอให้เดินไปเก็บทัน → **LANE-B** (ตัวหลักติ๊กแล้ว · หางค้าง: กะพริบหลัง
+  `#689` + หนี้ `DropLedgerCell` = `GT-225`)
+- **P-2** สีชื่อมอนต้องถูกสถานะ: ปกติ=ส้ม / สู้=แดง / ตาย=เทา (ห้ามชมพู) → **LANE-GM** ร่วม LANE-B (attr/relation)
+  — เกณฑ์ผ่าน M3 ตั้งแต่ `0233`
+- **P-3** ทุกปุ่ม/ทุกฟังก์ชันใน GMUI ทั้ง 3 หน้าต้องทำงานจริงครบทุกตัว → **LANE-GM**
+- 🆕 UI-A/UI-B (ปุ่มกลับหน้าเลือกตัวละคร/logout) **ย้ายเจ้าของจาก LANE-A ไป LANE-UI** ตาม
+  `notes_to_chief/20260904_0330_COO-DECISION-*.md` — ดูหัวข้อ "ทีมและเขตเขียน — สายที่ 6/7" ด้านล่าง
+- 🆕 GM-B `/speed` เจ้าของ **LANE-DB** (`COO-DECISION/ORDER 20260901_1059/1100/1101`)
+- `GT-146`/ใบตีมอนทั้งหมด **ห้ามเข้าคิว attended** จนกว่า P-2 จะปิด (P-1 ผ่านจอแล้ว)
+- **"ตัวละคร" (class/สแตท/HP จากตาราง class)** ไม่เปิดเลนใหม่ (`0243` ข้อ 3) — แถว typed HP/เลเวล = LANE-DB ·
+  `class_id` NULL = chief (`GT-215`) · ค่าเริ่มต้น HP/สแตทจากตาราง class = chief ออก CORE-REQUEST ให้ LANE-DB
+  เมื่อ `GT-215` ปิด — M4 ข้อ (1) ต้องมีแถวนี้ก่อน
+
+`SERVER_VERSIONS.md` (ที่รากรีโปเซิร์ฟเวอร์) ตารางแผน v2-v-final: ลบคอลัมน์วันที่ตามเดียวกัน — งานถัดไปของ chief
+(ยังไม่ลงรอบนี้ เพื่อคุมขนาด PR ให้อยู่หนึ่งเรื่องต่อใบ)
 
 ## ทีมและเขตเขียน — 🆕 สายที่ 5: LANE-DB (PERSISTENCE)
 
@@ -55,6 +72,37 @@ prompt ของแต่ละสาย (scheduled routine) ยังพูด�
   พร้อมเข้าคิว attended ภายใน 2026-09-02 12:00
 - นัยต่อ M4 (ตีได้ตายได้): schema ปัจจุบันไม่มีคอลัมน์ HP เลย — LANE-DB คือตัวปลดล็อกจริง คิวถัดจาก
   `/speed` คือ HP/เลเวล (ตามที่ COO ตั้งข้อสังเกตไว้ในใบ `1100`)
+
+## ทีมและเขตเขียน — 🆕 สายที่ 6: LANE-CS (CLASS / SKILL) และสายที่ 7: LANE-UI (UI / FUNCTIONS)
+
+ตั้งโดย Panya สด (`PANYA-DECISION 20260904_0328`) ผ่าน `COO-ORDER 0329` ลงทะเบียนที่นี่โดย chief รอบ
+`spo2u9` ตาม `notes_to_chief/20260904_0330_COO-DECISION-*.md` (แบบอย่างการตั้งเลน: หัวข้อ LANE-DB ข้างบน):
+
+- **LANE-CS** — ภารกิจ: อาชีพหลัก/รอง · สกิลทุกชนิด (basic attack/skill attack/AOE/buff/heal/passive) ·
+  สูตรดาเมจ · สนามเทส = หุ่น Training Iron Man `template_id 916` (`RE-155`)
+  - **เขตเขียนใน `pirate-force-server`:** โมดูลใหม่ `src/pirateforce_foundation/skill_*.py` `class_*.py`
+    `damage_*.py` · `tests/test_skill_*` `test_class_*` `test_damage_*` · `rounds/CS_*`
+  - **รับโอน** `skill_attr_hypothesis.py` `learn_skill_request_hypothesis.py`
+    `learn_skill_result_hypothesis.py` `damage_model_hypothesis.py` `damage_hp_link_hypothesis.py`
+    `stats_progression_hypothesis.py` — chief ยืนยันรอบนี้ว่าไม่มีสายไหนถืออยู่ (grep `HYPOTHESIS_LEDGER.json`
+    ไม่พบเจ้าของ) ถ้ามีให้แจ้ง chief
+  - **ไม่ใช่ของ CS:** แถวสกิลใน DB (LANE-DB) · HP/ตายของมอน (LANE-B)
+  - **จุดเสียบ `runtime.py`/`app.py`:** ยังไม่มี — chief สร้างครั้งเดียวเมื่อ CS ร้องขอ
+- **LANE-UI** — ภารกิจ: ปุ่ม/ฟังก์ชัน/ระบบยิบย่อยนอกระบบหลัก (ห้ามแตะ มอน/เควส/คอมแบต/สกิล) เช่น ปุ่มกลับ
+  หน้าเลือกตัวละคร · ออกจากเกม · เดินไปหา NPC/มอนอัตโนมัติ · ร้านค้า NPC
+  - **เขตเขียนใน `pirate-force-server`:** `src/pirateforce_foundation/ui_*.py` · `tests/test_ui_*` ·
+    `rounds/UI_*`
+  - **รับโอน UI-A/UI-B จาก LANE-A ทั้งสองข้อ** (ปุ่มกลับหน้าเลือกตัวละคร + ปุ่ม logout จริง รวมป้าย
+    `BACK_REFUSED` ของ UI-B ตามใบ `1746` ข้อ 2) — **LANE-A เลิกถือ UI-A/UI-B ตั้งแต่รอบนี้** เหลือ M2
+    (ออกจากเมืองได้) เป็นงานเดียว
+  - **ไม่ใช่ของ UI:** GMUI 3 หน้า (LANE-GM P-3) · ฉาก/เดินทาง/`TriggerVital` (LANE-A M2)
+  - **จุดเสียบ `runtime.py`/`app.py`:** ยังไม่มี — chief สร้างครั้งเดียวเมื่อ UI ร้องขอ
+- **§7 ล็อกรอบ:** ตัวนำหน้า claim ใหม่ `CS`/`UI` — claim PR หัว `[LANE-CS] round <id>: claim` /
+  `[LANE-UI] round <id>: claim` ใน `pf_bridge` (เพิ่มเข้า `AGENTS.md` §7 บรรทัดตัวนำหน้าสายรอบนี้)
+- **CORE-REQUEST-022** (login hardcode `class=1`) **โอนเจ้าของให้ LANE-DB** ตาม `0329` ข้อ 2 — chief เหลือ
+  เฉพาะจุดเสียบเมื่อ LANE-DB ร้องขอ (ไม่มีแถวเปิดของใบนี้อยู่ในตารางด้านล่างแล้ว ณ รอบที่ลงทะเบียนนี้)
+- 🔴 **สองเลนนี้ยังไม่มีอยู่จริงจนกว่า Panya จะวาง routine** (พรอมป์ `0331`/`0332`) — ห้ามใครทำงานของ
+  CS/UI แทนระหว่างรอ ยกเว้นข้อ 4 ของ `0329` (LANE-DB ส่งเฟรมรายการสกิลชั่วคราว)
 
 ## ดัชนีรอบเก่า (รอบ 44-178) — ย้ายไป `archive/CHIEF_CONTINUATION_ARCHIVE_INDEX.md` แล้วทั้งบล็อก ไม่มีการลบเนื้อหา
 
@@ -108,20 +156,10 @@ prompt ของแต่ละสาย (scheduled routine) ยังพูด�
   `archive/CHIEF_CONTINUATION_ARCHIVE_20260901_R289.md` (moved R296, size housekeeping)
   `archive/CHIEF_CONTINUATION_ARCHIVE_20260902_R290_R291.md` (moved R297, size housekeeping)
   `archive/CHIEF_CONTINUATION_ARCHIVE_20260902_R292_R293.md` (moved R297b, size housekeeping)
-- R294(happy-dirac-69cabr/focused-turing-69cabr) 2026-09-01T~21:2x+07:00 ต่อสาย CORE-REQUEST-GM-049 (/speed sparse x=7) + แก้ PRAGMA leak ของ store.py + RE-198 เปิดและปิด · GT-193 ยัง PENDING -> rounds/R294_happy-dirac-69cabr_gm049-speed-wired-store-leak-fixed-re198-opened-closed.md
-- R295(f7zt8z) 2026-09-01T~23:2x+07:00 ต่อสาย CORE-REQUEST 031 (UI-B logout envelope, GT-194 -> READY) + RE-157 job2 ทั้งสองจุดข้ามฉาก · ส่ง CODEX P05 ให้สาย B -> rounds/R295_f7zt8z_ui-b-logout-wired-re157-job2-both-crossings-wired-codex-p05-routed.md
-- R296(wjdlnr) 2026-09-01T~23:5x+07:00 กู้รอบ R295 ที่ PR #766 ถูกปิดโดยไม่ merge (cherry-pick 40 ไฟล์) + ตัดสินกติกาชื่อ .CONSUMED.txt (ตรวจสองแบบ ไม่ rename) + ส่ง CODEX GT-192 ให้สาย A -> rounds/R296_wjdlnr_recover-lost-r295-pfbridge-round-plus-mailbox-naming-decision-plus-codex-gt192-routed.md
-- R297(clw1zb) 2026-09-02T02:1x+07:00 ต่อสาย corpse re-arm ของสาย B ใน runtime.py + ปลด RE runner ที่ NO-WORK 13 รอบ + ลงกฎ preflight/หยุดสองครั้ง + AGENTS.md ลงมาใต้ 25 KB -> rounds/R297_clw1zb_p1-corpse-drop-wired-re-runner-unblocked-two-strike-rule.md
-- R297b(clw1zb) 2026-09-02T02:5x+07:00 การแก้คำของรอบเดียวกันหลัง pf-adversary: ถอนการต่อสาย drop ข้ามฉาก และถอนคำอ้างของตัวเองว่ารอบนั้น 'ขยับ P-1' (ยังไม่ขยับ) -> rounds/R297_clw1zb_p1-corpse-drop-wired-re-runner-unblocked-two-strike-rule.md (ภาคผนวกท้ายไฟล์)
-- R298(dfx8bu) 2026-09-02T03:3x+07:00 คิว RE เลิกโกหก Codex (ย้ายบล็อกสถานะค้าง 8 วันเข้า archive + taglint รู้จัก ANSWERED แบบแยกชั้น + มีพื้นกันรายงานเขียวบนคิวที่ถูกทำลาย) · GT-193 ไม่พลิกเป็น READY เพราะทางปฏิเสธ /speed เงียบบนจอทั้ง 9 ทาง · HYP-PF-042 ลงทะเบียน (49->50) · เจอกับดัก prose-mention อีก 20+ จุด -> rounds/R298_dfx8bu_re-queue-tells-the-truth-gt193-held-hyp042-registered.md
-- R299(aa9ajr) 2026-09-02T05:5x+07:00 /speed ที่ถูกปฏิเสธพูดออกจอแล้วทั้ง 9 ทาง (`SPEED DENIED` 12 ASCII บน 0xAC52) + ถอน wrap PRESERVE ของ vitals ทั้งใบก่อน commit (adversary วัดว่ามันฆ่าเธรด listener 3 ทาง ช่วย P-1 ศูนย์ทาง) + GT-188 วัดสองจุด + GT-193 -> READY ON MERGE -> rounds/R299_aa9ajr_speed-denied-notice-and-ground-vitals-preserve.md
+- (R294-R303 ย้ายไป `archive/CHIEF_CONTINUATION_ARCHIVE_INDEX.md` แล้ว โดย chief รอบ `gjyxt5` (R324) 2026-09-03 ตามเพดาน 30 KB ของหัวข้อ 17 ข้อ 9 (ง) — ไม่มีบรรทัดไหนถูกลบ)
 
 🔴 บรรทัดดัชนีต้องเป็น **หนึ่งประโยค** ชี้ไปไฟล์รอบเสมอ (prompt หัวข้อ 4) — R294-R297b เคยเขียนเป็นย่อหน้ายาว
 รวม 9,772 ไบต์จากเพดาน 30 KB · ฉบับเต็มคำต่อคำอยู่ที่ `archive/CHIEF_CONTINUATION_INDEX_R294_to_R298_verbatim_20260902.md`
-- R300(ls5m3c) 2026-09-02T08:0x+07:00 บรรทัด call site pickup ลง runtime.py แบบ fail-closed หลัง adversary ถอน fallback ที่เปิดให้หยิบของข้ามฉาก -> rounds/R300_ls5m3c_pickup-call-site-landed.md
-- R301(smrum3) 2026-09-02T09:2x+07:00 `GT-207` READY หลัง adversary หักล้างร่างแรก 16 ข้อ + จุด opt-in แรกของ preserve composer + เปิด `RE-206` -> rounds/R301_smrum3_gt205-landed-and-the-first-preserve-opt-in-site.md
-- R302(ogq686) 2026-09-02T11:4x+07:00 ปุ่ม UI-A ตอบ `BACK REFUSED` บนไวร์ (#563) + `TYPO REFUSED` + `GT-204` READY หลัง adversary หักล้างห้าข้อ -> rounds/R302_ogq686_uia_receipt_wired_gt204_ready_gt207_recheck7.md
-- R303(g7yvo2) 2026-09-02T13:2x+07:00 ต่อสายใบ v2 ที่จุด GM warp แล้วหน่วงเฟรมจนกว่า census ของฉากที่เข้าจะ commit (#572) + scene guard Columbus merge (#570) -> rounds/R303_g7yvo2_v2-boundary-frames-wired-at-the-warp-columbus-scene-guard-landed.md
 - R304(g1y1yc) 2026-09-02T15:4x+07:00 บรรทัด `ground_after` ที่สาขา pickup + พลิกหมุดสถานะเป็น `sent` (#581) หลัง adversary หักล้างห้าข้อและมิวแทนต์ทั้งห้าแดงแล้ว -> rounds/R304_g1y1yc_ground-after-call-site-and-columbus.md
 - R305(kt05o0) 2026-09-02T16:5x+07:00 Columbus ตามเส้นตาย COO: D2+D1+D4 = `server#584` (เกตวาปด้วยฉากบ้าน · ฉาก 14 arm อยู่บน main จริง · guard สองตัวมีชื่อบน stderr) · D3 = `server#587` (checkpoint แถว=ฉาก 17 ⇒ `/warp 1` = cross-scene · ปิดแถวเสีย GT-106 ที่เขียน scene 1 พร้อม XYZ ฉาก 17 ด้วย · re-pin X06 4->5 พร้อมรายชื่อบรรทัด) · 🔴 adversary หักล้างเก้าข้อ ถูกทุกข้อ: โทเคนที่ COO ร่างว่า `no_reply` เป็นเท็จ (สายอื่นตอบคลิกนั้นจริง) ⇒ `lane_declined` · ปิด `RE-206` · เปิด `GT-213` · #581 อยู่บน main -> rounds/R305_kt05o0_columbus-teleport-gate-and-the-checkpoint-that-was-never-written.md
 - R306(xkmzxr) 2026-09-02T17:4x+07:00 รอบที่ชนกับเซสชัน chief อีกตัว: ผมเขียน D3 ใหม่ทั้งใบเพราะวัดตอน 16:52 ว่าไม่มีบนสาขาไหนเลย แต่เซสชัน `kt05o0` ยังไม่ตาย และ push `server#587` ตอน 17:14 merge 17:27 (สรุปเดียวกันทุกข้อ รวม X06 4->5) ⇒ **ทิ้งของผมทั้งใบ ไม่ push ซ้ำ** · สิ่งที่รอบนี้ส่งจริงคือหนี้หัวใบ `GT-192` ของ COO `0544` ที่ค้าง 11 ชม. + กติกาสองบรรทัดของ `1648` -> rounds/R306_xkmzxr_columbus-d3-rewritten-and-gt192-debt-paid.md
@@ -140,3 +178,13 @@ prompt ของแต่ละสาย (scheduled routine) ยังพูด�
 - R319(kjtpza) 2026-09-03T13:5x+07:00 `CORE-REQUEST-GM-050` ต่อสาย (`GM_IDENTITY_CENSUS` ที่จุดพิมพ์ census ของฉาก · `server#651` **push แล้ว รอ merge**) · กติกาล็อกรอบของ `COO 1226` ลง `AGENTS.md` §7 และผมใช้เองรอบนี้ (claim ไม่ใช่ draft · marker ใส่ตอนจบ = ปลดล็อก) · `GT-223` เปิดตาม `COO 1048` · `RE-222` วางคิว (ร่างของ LANE-GM เลข `RE-211` ชนตัวนับร่วม) · `GT-221`/`[6b]` ตาม `COO 1247` · 🔴 pf-adversary สองรอบ 22 ข้อ: `AGENTS.md` ของผมทะลุเพดานเจ้าของ 2,213 อักขระ (ย้ายที่มาไป `archive/AGENTS_HISTORY_20260903.md` เหลือ 24,804) · `GT-223` ร่างแรกจะทำให้ผู้เทสรายงานข้อบกพร่องปลอมจาก cell ใหม่หลังรีล็อกอิน · และผมเขียนประโยคปฏิเสธเรื่อง `RE-211` โดย grep ไม่ครบ **เป็นรอบที่สองติดกัน** -> rounds/R319_kjtpza_the-identity-census-line-and-the-round-lock-every-lane-now-shares.md
 - R320(88qfv3) 2026-09-03T14:1x+07:00 🔴 **บรรทัด `GM_IDENTITY_CENSUS` ของ R319 ถูกถอนออกจาก `main`** (`#651` merge ไปแล้วที่ `c1660fd` 13:41+07 ก่อนใบสั่ง `COO 1349` ข้อ 4 + `1351` มาถึง ⇒ revert `f29bc82` แทน · โมดูล+เทสของ LANE-GM ไม่ถูกแตะ · มีการ์ด derive จากซอร์สกันต่อสายเงียบ) ⇒ **บรรทัด R319 ข้างบนที่เขียนว่า "push แล้ว รอ merge" ถูกต้องตอนเขียน แต่ผลสุดท้ายคือถอน อย่าอ่านว่าบรรทัดนี้พิมพ์อยู่วันนี้** · กฎบ้าน 3 ข้อลง `AGENTS.md` §7 (สแกนไฟล์เดียวพิสูจน์ "ไม่มี" ไม่ได้ · derive จำนวนที่ · **ห้าม derive ประวัติคอมมิตบนโคลน shallow**) · คีย์ `BRIDGE_GM_INSTALL_BAT` ลงแล้ว (หนี้ 5 รอบของ LANE-GM) · **แฮช `3e8541e` ไม่ได้เก่า** ใบสั่งข้อนั้นตีกลับพร้อมหลักฐาน -> rounds/R320_88qfv3_gm050-withdrawn-and-the-hash-that-was-never-stale.md
 - R321(xcmfr6) 2026-09-03T15:3x+07:00 คำสั่ง `COO 0054` ข้อ 2 ปิดที่ชั้นโค้ด: สามชื่อของ `MOB_LOOT_BOUNDARY_STASH_CLEARED` เหลือ **ผู้ผลิตชุดเดียว** (`runtime.py` เรียกตัวประกอบใน `mob_loot.py` แทนการประกอบเอง · คำและสี่ฟิลด์บนคอนโซลไม่เปลี่ยน · `server#656` **push แล้ว รอ merge**) · 🔴 **การรวมทำให้คำสั่ง RECHECK ข้อ 5 ของ `GT-204` ตอบ 0 hit ทั้งที่ของอยู่บน main** ⇒ แก้คำสั่งในใบ + จดหมายถึงผู้เทสในรอบเดียวกัน · กฎ shallow clone รับเป็นกฎบ้านตาม `COO 1443` (+ ครึ่ง `merge-base`) · จดหมาย **812 ใบ** ที่ stub แล้วและเก่ากว่า 48 ชม. เข้า archive (1,624 rename ไม่มีลบ) · 🔴 pf-adversary 9 ข้อ แก้ 8: การ์ดใบแรกของผม **เขียวทั้งที่ผู้ผลิตสองชุดกลับมาได้** ด้วยค่าคงที่ของโมดูล ⇒ เขียนใหม่เป็นการ์ดเชิงโครงสร้าง · และเทสเทียบสองฝั่งของ LANE-B เข้าสาขา `adopted` = บอดี้ไม่ถูกรันอีก (แจ้ง ไม่แก้ให้) -> rounds/R321_xcmfr6_the-three-names-get-one-producer-and-the-recheck-that-would-have-gone-stale.md
+- R322(l39ees) 2026-09-03T16:0x+07:00 `CORE-REQUEST 20260903_1505` ต่อสายแล้ว: คำปฏิเสธล็อกอินบอกชื่อ/ไอดีคนที่ถูกปฏิเสธ (`runtime.py` ตัวจับ `SceneEntryRefused` **ตัวที่สอง** เรียก `world_scene_refusal_notice.refusal_console_line` · ตัวจับแรกโพรบ GM ไม่ถูกแตะ · `server#661` **push แล้ว รอ merge**) · วัดบรรทัดจริงจาก dispatcher จริงเอง **434 อักขระ ASCII** `refused_character_id=1 ... refused_name=test01` · `RE-138` ปิด `[✅ CLOSED/ANSWERED]` + กรอก `result:` (สมมติฐานของใบถูกหักล้าง: bit ชื่อถูกละ = client copy ชื่อเดิม ไม่ใช่ล้าง) แต่ 🔴 **อาการจริงยังไม่มีเจ้าของ** ขอ COO ตัดสิน · กฎ `COO 1545` ข้อ 3 (grep คิวก่อนลบสตริง) ลง `AGENTS.md` §7 · **24,989 อักขระ** ไม่เกินเพดาน · stub 14 ใบ · archive จดหมาย 8 ใบ · 🔴 **`pf-adversary` 12 ข้อ และมันตบร่างแรกของผมล้ม**: การ์ดของผมตอบคำถามผิดข้อ (ชั้นรูป ไม่ใช่ชั้นค่า) -- สลับอาร์กิวเมนต์สองตัวทำให้ทุกช่องพิมพ์ `none` **และเทส 8,749 ตัวเขียวเท่าเดิมทุกตัว รวมการ์ดของผมเอง** · แก้เป็นเทสชั้นค่าที่ขับการปฏิเสธจริงแล้วเทียบเลขกับ store · และ `getattr` ที่ผมใส่ "กันไว้ก่อน" เป็นการป้องกันที่ตายแล้ว (บรรทัดเหนือขึ้นไป deref เดียวกันแบบไม่มีเงื่อนไข) ถอนออก · ตัวเลขความยาวที่ผมรายงานครั้งแรก (356) วัดจากเคสที่เอื้อมไม่ถึง -> rounds/R322_l39ees_the-refusal-line-names-the-login-and-the-rule-i-wrote-caught-me-an-hour-later.md
+- R324(gjyxt5) 2026-09-03T18:0x+07:00 🔴 **เกต tick ของมอนไม่เคยเปิดเลยสักเฟรม ~2 วัน** (`COO 1648` + `CORE-REQUEST 1639` ของ LANE-B): `runtime.py` พิมพ์ชื่อเป็นสตริง `"lane_hooks.lane_b_mob_ai_tick"` ⇒ resolver เติมข้างหน้าเป็นคีย์ที่ไม่มีเจ้าของ ⇒ `False` ทุกเฟรม ⇒ `maybe_tick` ไม่เคยถูกเรียก · แก้เป็น `lane_b_mob_ai_tick.MODULE_NAME` (ไม่แตะ resolver ตามคำสั่ง) + บรรทัด `MOB_AI_TICK_LIVE scene=/mobs=` หนึ่งบรรทัดต่อเซสชัน + การ์ดชั้นค่าใบใหม่ที่บูต dispatcher จริง (มิวแทนต์ 7 ตัว ตาย 7 · 🔴 ตัวที่รอดรอบแรกคือ `scene=1` ฮาร์ดโค้ด เพราะบูตมาตรฐานยืนฉาก 1 พอดี ⇒ เพิ่มการ์ดที่ seed ฉาก 278) · แก้เทสสองใบที่แดงตามที่ LANE-B ทำนายไว้ (ตารางของสาย B + assertion ของสาย A) · `GT-224` เปิด `[BLOCKED รอ merge]` · 🔴 **ไม่มีไบต์ออกถึงไคลเอนต์แม้แต่ไบต์เดียว ห้ามอ่านเป็นชัยชนะบนจอ** (`tick_session` ไม่ประกอบเฟรม · `ATTACK_INTENT_DELIVERABLE=False`) -> rounds/R324_gjyxt5_the-tick-that-never-ran-and-the-card-that-could-not-see-it.md
+- R326(pk14rf) 2026-09-03T20:1x+07:00 `roster=0` ชั้นที่หนึ่งปิดแล้ว: `_sync_combat_scene_at_edge()` re-open register+ledger ที่ขอบฉาก **ทุกฉาก** (ตัวตรวจจับที่หัว `dispatch` + จุด warp · no-op 0.84 µs/เฟรม · ไม่แตะแถว ground · มิวแทนต์แดงสองตัวแยกจุด) ตาม `COO 1943` ข้อ 1 · กฎ `PANYA 1934` ลงหัวคิว + ตัดสิน 6 ใบ (GT-141/128/204/187 ยกเลิก · GT-178/205 ไม่ยกเลิก) · พลิกหัวใบหนี้ค้าง `1743`: GT-216/210/212/211 PASS · GT-218 FAIL · GT-192 PASS สองชั้น · GT-224 ปลดบล็อก · **push แล้ว รอ merge PR เซิร์ฟเวอร์ของรอบนี้** -> rounds/R326_pk14rf_the-register-follows-the-player-and-four-tickets-stop-costing-a-boot.md
+- R327(wvsamp) 2026-09-03T21:2x+07:00 `CORE-REQUEST-GM-051/052` ลงแล้ว (`server#678` **push แล้ว รอ merge**): โทเคน `GM_WARP_POSITION_CONFIRMED` เทียบกับเป้าหมายที่สั่งก่อนพิมพ์ ไม่ใช่พิมพ์แล้วขัดกับ `MISMATCH` ทีหลัง · หน้าต่างผ่อนผัน move-authority ไม่เปิดให้วาประยะศูนย์อีกต่อไป (`position_matches_target` ไม่ใช่ `<= 0.0` ที่ pf-adversary จับได้ว่าถูกแค่โดยบังเอิญ) · 10 เทสใหม่/แก้ + มิวแทนต์มือ · ชุดเต็มบนต้นไม้ merge main: 9048 passed/323 skipped · ข้อที่สามของ `-051` (ฟิลด์ `client_confirmed_scene`) ยังไม่ลง เป็นงานแรกรอบหน้า · ไม่แตะ GT queue (headless-only, `GT-128` ยัง CANCELLED) -> rounds/R327_wvsamp_the-confirm-token-stops-lying-about-itself-and-a-warp-that-moves-nobody-stops-buying-grace.md
+- R328(wscjrq) 2026-09-03T23:1x+07:00 guard กันสตริง automerge marker หลุดลง PR body ลงแล้ว (`COO 2141` ข้อ 2+3 จ่ายครบก่อนกำหนด) + `client_confirmed_scene` ตอบ `CORE-REQUEST-GM-051` ข้อ 3 — **วัดแล้วว่าไม่มีเฟรมขาเข้าใบไหนพกเลขฉากมาเลย** จึงลง corroboration ชั้น wire แทนฟิลด์ที่ไคลเอนต์บอกชื่อ (**push แล้ว รอ merge** `server#685` + `pf_bridge#1026`) -> rounds/R328_wscjrq_marker_guard_and_the_scene_the_client_actually_confirmed.md
+- R329(233yho) 2026-09-04T00:2x+07:00 `CORE-REQUEST 2249` ลง `runtime.py` (คลิกที่ถูกปฏิเสธส่งพื้นที่ B ประกอบไว้แทนทิ้ง) + `EXPIRY_PUBLICATION_CALL_SITE_STATUS="sent"` — D9 วัดแล้ว `#675` ไม่ปิด (ground rows ไม่ถูกแตะ) เปิดเป็นหนี้ chief ต่อคิวหลัง GT-215 · `AGENTS.md` §7 กฎเวลา pf-adversary (`2347`) ลงคนละ PR (**push แล้ว รอ merge**) -> rounds/R329_233yho_the-refusal-that-owed-a-floor-and-the-scene-the-cell-never-learned.md
+- R330(dwvbpm) 2026-09-04T02:1x+07:00 จุดอ่านค่าฟิลด์สด `lane_hooks.current_named_attr_values` ลงตาม `COO 0047` ข้อ 1 (**push แล้ว รอ merge**) — วัดแล้วเซิร์ฟเวอร์รู้ค่าจริง **4 จาก 26 แถว** (ชื่อ/เลเวล/HP/HPmax) อีก 21 แถวคอลัมน์มีแต่ NULL ทุกตัวละคร ⇒ คำปฏิเสธเปลี่ยนจาก `no_read_point` เป็น `missing_named_rows` ซึ่งเป็นรายการงานของ LANE-DB/RE-122 · `GT-223` ปลดบล็อกเป็น READY (ประตูอยู่บน main ทาง `#680` ไม่ใช่ `#672`) · หนี้ `DropLedgerCell` ได้เลขใบ `GT-225` · `COO 0047` ข้อ 2 (coerce `actor_identities` ที่ `runtime.py:10613-10619`) และ CORE-REQUEST `0137` ของ LANE-A (รอ `#691` merge) = สองงานแรกของรอบถัดไป -> rounds/R330_dwvbpm_live-named-attr-read-point-gt223-unblocked-gt225-opened.md
+- R330b(dwvbpm) 2026-09-04T03:0x+07:00 🔴 **แก้บันทึกของ R330 เอง: `pf-adversary` ไม่ได้ค้าง มันคืนผลใน 37 นาที** (ผมอ่านขนาด transcript เป็นตัวชี้ว่ามีชีวิตไหม ซึ่งผิด) ⇒ `ADVERSARY_PENDING server#695` **ปิดในรอบนี้เอง ไม่ยกไปรอบหน้า** · มันจับได้สามข้อที่ชุดเทสทั้งชุดเขียวทั้งที่โค้ดพัง (พิสูจน์ด้วยมิวแทนต์เองแล้ว): เดาค่า `class_id` เข้าไปได้โดยไม่มีเทสแดง · source ที่อ่านตัวละครผิดคนผ่านทุกเทส · เทสจุดต่อสายเป็น grep ข้อความที่คอมเมนต์หลอกได้ · แก้ครบใน `server#695` (ยังไม่ merge) + `values.items()` หลุดตาข่าย + คีย์ float ถูกตัดเศษลง `level` เงียบ ๆ + เพิ่มโทเคน `LANE_HOOK_LIVE_ATTR_SOURCE` ให้ WIRED-v2 มีอะไรให้ grep · ที่ยังไม่แก้: `_withdraw()` ไม่ล้างแหล่งค่า (ใบของตัวเอง) · สามประโยคเท็จใน `gm/attr_wire.py` (จดหมาย `0305` ถึง LANE-GM) -> rounds/R330b_dwvbpm_adversary-verdict-and-the-fixes-it-forced.md
+- R331(spo2u9) 2026-09-04T03:3x+07:00 ตอบจดหมายค้างสองใบถึง chief: ลงทะเบียนสายที่ 6/7 LANE-CS/LANE-UI (เขตเขียน/รับโอน hypothesis/รับโอน UI-A-UI-B จาก LANE-A · ยังไม่มีอยู่จริงจนกว่า Panya วาง routine) + CORE-REQUEST-022 โอนเจ้าของให้ LANE-DB (`0330`) · เขียน CHARTER-02 ใหม่ไม่มีคอลัมน์กำหนดตาม `0233`/`0243`, เปิดหัวข้อไมล์สโตนกลับจาก "พักไว้" · `AGENTS.md` §7 เพิ่มตัวนำหน้า claim `CS`/`UI` · เอกสารล้วน ไม่แตะโค้ด ไม่มี GT ใหม่ · `SERVER_VERSIONS.md` (ลบคอลัมน์วันที่) เลื่อนเป็น PR แยกรอบหน้า -> rounds/R331_spo2u9_lane-cs-lane-ui-registered-charter02-rewritten-no-deadline-column.md
+- R330c(dwvbpm) 2026-09-04T04:0x+07:00 🔴 **`pf-adversary` รอบสองจับได้ว่า "ตัวแก้" ของ R330b สร้างของพังใหม่สี่ข้อ และ `#695` merge ไปแล้ว** ⇒ ซ่อมของบน main: **N1 `str.isdigit()` เป็นจริงกับเลขทุกสคริปต์** ⇒ `int("²")` raise หลุดออกจากฟังก์ชันที่บอกว่าไม่มีวัน raise · `int("٣")` **สำเร็จ** แล้วลงที่ x=3 `hp_current` เงียบ ๆ (แก้: `isascii()`) · N2 ประกาศ no-source ไม่ติดอาวุธใหม่เมื่อล้างแหล่ง · N3 เทส `ast` ยังเขียวกับ `if False:` และฟังก์ชันซ้อน (แก้: บังคับเป็น statement ตรงใน body) · N4 `values_for` พิมพ์ไม่จำกัด ขัดเหตุผลที่เขียนเองห่างไป 60 บรรทัด · **บทเรียน: ตัวแก้ต้องผ่าน adversary เหมือนของใหม่** · ยังไม่แก้: D6 `_withdraw()` ไม่ล้างแหล่ง (ใบของตัวเอง) · D8/D10 ไฟล์ LANE-GM (จดหมาย `0305`) -> rounds/R330c_dwvbpm_the-second-adversary-pass-caught-a-regression-i-shipped.md

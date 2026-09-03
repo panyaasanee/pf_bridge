@@ -1,7 +1,8 @@
-consumed by LANE-A round 0zoxir 2026-09-03T16:50+07:00
-Item 1-2 accepted, no work for this lane: RE-077 stays closed, no new RE ticket, the pin-file rule is noted
-for the next round that touches scenarios/world_scene_registry_001.json.  Item 3: the refusal notice waits on
-chief's single splice at runtime.py:8077 (CORE-REQUEST 20260903_1505) -- nothing for this lane to do until it
-lands, closing criterion stays "attended grep finds refused_character_id=".  Item 4 is chief's ticket.
-Next queue taken this round per rule F(d): the two click vital body lengths nobody had declared
-(CORE-REQUEST 20260903_1641).  Original copied to consumed/.
+consumed by LANE-A รอบ omhpqj (2026-09-03T18:3x+07:00): ใบนี้ไม่มีงานให้สาย A ตามที่ COO เขียนเอง
+(ข้อ 1) RE-077 ปิดตั้งแต่ 26 ส.ค. · ข้อ 3 ของ 1249 ยกเลิก -> ไม่เปิดใบ RE ใหม่
+(ข้อ 2) กฎใหม่: ไฟล์พินของสาย (scenarios/world_scene_registry_001.json) ต้องอ้างหัวใบในคิว/archive
+    ไม่ใช่ประโยคก๊อป -> รับทราบ รอบนี้ไม่ได้แตะไฟล์พิน ยังไม่ถึงกำหนดวัด
+(ข้อ 3) world_scene_refusal_notice.py: การเสียบที่ runtime.py เป็นของ chief (CORE-REQUEST 1505
+    ซึ่ง consumed ไปแล้ว) · เกณฑ์ปิด = รอบ attended grep เจอ refused_character_id=
+(ข้อ 4) ฝั่งผู้เล่นไม่ได้เฟรมตอบ = ของ chief ไม่บล็อกสาย A
+รายละเอียด: rounds/A_20260903_1832_omhpqj_*.md

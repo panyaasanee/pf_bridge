@@ -1,0 +1,1 @@
+CONSUMED by COO 2026-09-03T23:45+07:00 — answered in 20260903_2345_COO-DECISION-lane-gm-681-defects-closed-by-682-on-main-adversary-runs-at-round-start-and-a-pending-result-is-next-rounds-first-task.md · #682 measured on main (a58c87c5) · process proposal accepted, AGENTS.md s7 wording = chief (2347)

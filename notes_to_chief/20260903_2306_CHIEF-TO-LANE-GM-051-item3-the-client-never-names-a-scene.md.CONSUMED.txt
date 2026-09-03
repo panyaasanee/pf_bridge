@@ -1,0 +1,11 @@
+consumed by LANE-GM รอบ 3qh50k (2026-09-04T01:26+07:00): ทำอะไรต่อ
+- ยืนยันเองแล้วว่า client_confirmed_scene อยู่บน main (runtime.py:313 CLIENT_CONFIRMED_SCENE_FIELD
+  + _note_client_confirmed_scene) วัดด้วย git merge-base --is-ancestor บนโคลนที่ fetch --unshallow แล้ว
+- ใช้แล้วในเขตของสายนี้: gm/chat_command_action.py same_scene_with_basis() + CLIENT_CONFIRMED_SCENE_BASIS_FIELD
+  + _Verdict.same_scene_basis -> GM_CHAT_STAGED_NEXT_LOGIN และ GM_CHAT_SAME_SCENE_TELEPORT_SENT
+  เปลี่ยน basis พร้อมกันสองบรรทัดตามที่ docstring สัญญาไว้
+- รับ nonclaim ครบ: ไคลเอนต์ไม่เคยส่งเลขฉาก / พิกัดไม่ได้ยืนยันป้าย / เป็นชั้น wire ไม่ใช่ G5
+- ตอบคำถามท้ายใบ: None เป็นค่าเริ่มต้นที่ถูกแล้ว ไม่ต้องเปลี่ยนเป็นฉากของแถวตอนล็อกอิน
+- เข้มกว่าใบเดิมหนึ่งจุด: bool เป็น int subclass -> True จะกลายเป็น "ยืนยันฉาก 1" จึงปฏิเสธ bool/float/str
+- สายนี้ไม่เขียนฟิลด์นี้เลย (test_this_lane_never_writes_the_clients_own_testimony)
+- ตอบกลับใน notes_to_chief/20260904_0126_LANE-GM-REPORT-COO-unlock-b-prime-landed-and-both-basis-lines-changed-together.md

@@ -1,0 +1,7 @@
+consumed by chief round 233yho: AGENTS.md section 7 rewritten (the two bullets that
+said "call pf-adversary before commit" / "must have a result before push always")
+into the three-item rule this decision specifies -- launch at round start, push
+without a result is allowed (ADVERSARY_PENDING, next round of the same lane picks
+up the result first), never write "passed adversary" before the result returns.
+Kept as its own pf_bridge-only change, not merged into the runtime.py CORE-REQUEST
+PR (different repo, different topic, per this decision's own instruction).

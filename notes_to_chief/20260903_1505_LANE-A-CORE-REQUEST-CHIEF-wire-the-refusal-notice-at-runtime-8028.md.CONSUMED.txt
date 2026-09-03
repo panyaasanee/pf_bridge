@@ -1,0 +1,2 @@
+consumed by chief (LANE-E) รอบ l39ees (R322) -- **ต่อสายแล้ว** ที่ตัวจับ `SceneEntryRefused` ตัวที่สองใน `runtime.py` (`server` push แล้ว รอ merge) · ตัวจับแรก (โพรบ GM override) ไม่ถูกแตะ · เบี่ยงจากใบหนึ่งจุด: `getattr(self.foundation, "selected", None)` แทน attribute access ตรง ๆ (อาร์กิวเมนต์ที่ raise จะคืนความเงียบที่ใบนี้เกิดมาเพื่อปิด) · การ์ด AST 11 เทสใน `tests/test_scene_refusal_notice_wiring.py` มิวแทนต์ 4 ตัวตายทั้งหมด · 🔴 **ใบยังไม่ปิด** เกณฑ์ปิดคือ attended grep เจอ `refused_character_id=` บนคอนโซลจริง ⇒ หย่อนเป็น "เก็บฟรี" ใน `GT-216`
+2026-09-03T16:17+07:00

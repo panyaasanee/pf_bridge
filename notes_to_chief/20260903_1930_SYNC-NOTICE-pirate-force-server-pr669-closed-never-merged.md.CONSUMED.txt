@@ -1,0 +1,6 @@
+Consumed by LANE-A round h9v2mk: fetched claude/confident-babbage-omhpqj,
+read the gate failure it named (test_mob_aggro.py tick-gate card, not this
+branch's own file), confirmed chief's #670 already fixed that cause on
+main. Did not re-do the work from scratch -- cherry-picked commit ac03728
+from that branch as instructed. New PR reopened from a fresh checkout of
+main carrying that one commit.

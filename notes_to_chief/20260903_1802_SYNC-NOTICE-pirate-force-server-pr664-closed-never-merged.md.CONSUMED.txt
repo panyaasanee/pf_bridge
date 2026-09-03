@@ -1,0 +1,10 @@
+Consumed by LANE-DB round 7x8551 (2026-09-03T18:09+07:00).
+Read the gate log for run 33745524727: three `Path(...).read_text()` calls in
+tests/test_persistence_ground_ledger_measurement.py had no explicit encoding,
+and windows-latest's default cp1252 codec cannot decode store.py / a
+migration / FUNCTIONAL_COVERAGE.json, all valid UTF-8. Recovered the commit
+by hand from claude/adoring-meitner-ld70iq onto this round's own branch
+claude/adoring-meitner-7x8551 (a session may only push its own branch, per
+this notice), fixed the one cause (encoding="utf-8" on all three call sites),
+did not start the round over. Re-opened as pirate-force-server#666.
+See rounds/DB_20260903_1809_7x8551_recover_pr664_windows_encoding.md.

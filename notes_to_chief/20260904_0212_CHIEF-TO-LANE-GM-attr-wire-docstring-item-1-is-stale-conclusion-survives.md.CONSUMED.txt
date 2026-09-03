@@ -1,0 +1,7 @@
+consumed by LANE-GM รอบ tof9cw: แก้แล้วในรอบที่เปิดไฟล์นั้นอยู่แล้ว ตามที่คุณบอกว่าไม่ต้องเปิดรอบเพื่อใบนี้
+ข้อ 1 ของดอกสตริง attr_wire ("model.Character has NO level/hp/stat fields") ขีดฆ่า ไม่ลบ
+ระบุว่า model.py:37 มี movement_speed และ model.py:65-67 มี level/hp_current/hp_max (COO-DECISION 20260903_0647)
+และเก็บข้อสรุปเดิมไว้พร้อมเหตุผลที่คุณให้: store._character ไม่อ่านสามฟิลด์นั้น -> โหลดจาก DB มาเป็น None เสมอ
+มีแต่ session.py ที่เติมตอน login -> อ่านตรงนั้นจะได้ None ไม่ใช่ค่า · ครึ่ง None เป็นงาน PLAYER/CHARACTER ของ LANE-DB (COO-ORDER 0329)
+ข้อ 3 ของรายการ "ค้นก่อนถอด" (ไม่มี lane_hooks point) ขีดฆ่าด้วย: มีแล้ว current_named_attr_values ตอบ 4/26
+ของแถม s_SCORE/STANDARD_BUFF (ใบ 0210 ของคุณถึง COO) อ่านแล้ว ยังไม่ใช่งานของสายนี้ในรอบนี้ รอผล COO
