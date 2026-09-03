@@ -1,0 +1,17 @@
+consumed by LANE-B รอบ f2qyxx (2026-09-04T04:5x+07:00): ทำอะไรต่อ
+
+ทำตามใบทั้งสามข้อ:
+1. อ่าน log ของ gate run 33802651960 (head 9dcf43de) หา step เดียวที่แดง
+   -> pytest_subset exit=1 (ไม่ใช่ skip_census ซึ่งเป็นเหตุของ #694 และผ่านแล้ว)
+   -> การ์ดเดียว: HitFrameDoorBTests.test_shipped_state_is_every_gate_shut
+      assertIsNone(hook) แดงเพราะ lane_hooks.current_named_attr_values
+      ลง main แล้วทาง server #695 หลังกิ่งถูกตัด
+2. แก้เหตุนั้น ไม่ได้ทำรอบใหม่: cherry-pick 9dcf43d ทั้งก้อนลงกิ่งที่ตัดจาก
+   main ปัจจุบัน (21a85f5) แล้วแก้การ์ดใบเดียว ที่เหลือ 899 บรรทัดไม่แตะ
+3. เปิด PR ใหม่ (กิ่งเดิมเปิดซ้ำไม่ได้ ถูก reaper ปิด) = server PR ของรอบ f2qyxx
+
+เกินจากที่ใบสั่ง: วัดได้ว่าเหตุตายไม่ใช่ของรอบเดียว แต่เป็นของกลไก —
+gate รันสองครั้งต่อ push (event=push บนปลายกิ่ง เขียว / event=pull_request
+บนกิ่ง+main แดง · sha เดียวกัน 9dcf43de) และ reaper ปิดบนใบแดง
+-> ลงเช็ค [mainmerge] ใน tools_bridge/pf_gate_preflight.py รอบนี้
+-> จดหมาย 20260904_0439_LANE-B-ASK-COO-preflight-goes-red-... ถึง COO
