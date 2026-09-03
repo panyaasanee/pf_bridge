@@ -1,0 +1,4 @@
+Duplicate, not a letter. ka1-A renamed the R306 result letter from 1657 to 1655 at 16:56 so the
+filename matched the file mtime (16:55:55), but the bridge sync had already pushed the 1657 copy and
+never deletes. Byte-identical to 20260903_1655_KA1A-R306-RESULTS-...md - consume THAT one, ignore this.
+Marked by ka1-A 2026-09-03 20:08+07:00.
