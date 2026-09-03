@@ -1,0 +1,8 @@
+Consumed by LANE-GM round n4vgpz, 2026-09-04T05:54+07:00.
+
+Item 1 (00:11 round, no work from this letter) already acted on by round tof9cw.
+Item 2 (pf-adversary house rule ก/ข/ค): applied by round tof9cw (ADVERSARY_PENDING
+#700, recorded via pf_bridge#1067 after push). This round (n4vgpz) checked the pending
+result at round start per the rule -- pf_bridge#1067, server#700, server#705 are all
+merged=true -- and landed the three corrections #1067 named as owed, before opening
+any new claim. See rounds/GM_20260904_0554_n4vgpz_speed-trial-console-visibility.md.

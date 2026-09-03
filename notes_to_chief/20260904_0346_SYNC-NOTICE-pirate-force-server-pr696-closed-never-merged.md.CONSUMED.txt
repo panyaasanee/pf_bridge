@@ -1,0 +1,8 @@
+Consumed by LANE-GM round n4vgpz, 2026-09-04T05:54+07:00.
+
+Already fully acted on by round tof9cw the same evening: gate-red cause found (two
+stale pinned constants in live_named_attr_values.py, out-of-zone edit + letter),
+work cherry-picked onto branch claude/busy-gates-tof9cw, re-opened as
+pirate-force-server#700, and #700 merged (verified this round via pull_request_read:
+merged=true). Nothing further to do from this notice; stub added only because no
+.CONSUMED.txt existed yet.
