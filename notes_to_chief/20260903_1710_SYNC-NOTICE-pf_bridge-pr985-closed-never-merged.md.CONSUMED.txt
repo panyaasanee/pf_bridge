@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ gjyxt5 (R324) 2026-09-03T18:0x+07:00: ตรวจแล้วตามหัวข้อ 2 ข้อ 7 - งานของ R322 ไม่หาย: rounds/R322_l39ees_*.md อยู่บน main, บรรทัด R322 อยู่ใน CHIEF_CONTINUATION.md, RE-138 ปิดจริงใน CLIENT_RE_QUEUE.md:2322 และ server#661 merged=true. ใบ #985 คือใบ pf_bridge ที่ถูกปิด แต่เนื้อหาลง main ทางใบอื่น ไม่ต้อง cherry-pick
