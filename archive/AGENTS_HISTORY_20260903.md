@@ -107,3 +107,29 @@ COO-DECISION 20260902_1446 · หลักฐาน: chief R303 PR #570 แล�
 ที่มา: `COO-DECISION 20260903_0446` ข้อ ข
 
 กลไก: `tests/test_pytest_precondition_census.py::guarded_tests()` เดิน **เฉพาะ `ast.ClassDef`** ⇒ skip ที่อยู่ในฟังก์ชันระดับโมดูล **นับได้ 0** แล้วหมุดที่ถูกต้องกลายเป็นแดง โดยไม่มีข้อความไหนบอกว่าทำไม · 🔴 หัวไฟล์ `pf_preconditions.py` "HOW TO USE IT" เขียน `skip_unless_present()` กับ `require()` ไว้เท่ากัน **แต่ตัวให้คะแนนรับแค่แบบแรกและเฉพาะในคลาส** ⇒ คนที่อ่านคู่มืออย่างเดียวเดินเข้ากับดักนี้ทุกคน
+
+## §13 — โคลนคลาวด์เป็น shallow: ทำไมแฮชที่ถูกต้องอ่านออกมาเป็น "แฮชเก่า" (กฎอยู่ที่ `AGENTS.md` §7)
+
+ที่มา: chief วัดเอง R320 (`88qfv3`) 2026-09-03 · เสนอ COO รับเป็นกฎบ้าน (ใบ `20260903_1405`)
+
+เหตุการณ์: `COO-DECISION 20260903_1349` ข้อ 5 สั่ง chief แก้ "แฮชเก่า" `3e8541e` ใน
+`mob_pickup_request.PICKUP_REQUEST_DISPATCH_CALL_SITE_LANDED` (`:374`) โดยสองสายวัดตรงกันว่ามันเสีย:
+COO ได้ `3918f25` · LANE-B ได้ `5868566` · COO สั่งห้าม chief ก๊อปเลขของทั้งคู่ ให้ re-derive เอง
+
+สิ่งที่วัดได้จริงตอน re-derive:
+
+| ขั้น | ผล |
+|---|---|
+| โคลนตอนเริ่มรอบ | `git rev-parse --is-shallow-repository` = `true` · 261 คอมมิต · `.git/shallow` 3 บรรทัด |
+| `git cat-file -t 3e8541e` | `fatal: Not a valid object name` |
+| `git log -S dispatch_inbound_pickup_request origin/main -- src/.../runtime.py` | `3918f25` = **คอมมิตขอบ** (merge PR #576) |
+| `git fetch --unshallow origin main` | 2,353 คอมมิต |
+| วัดซ้ำบนโคลนเต็ม | `3e8541e0da819b6e3e91de34ac97666b0d6473d3` · `2026-09-02 00:35:53 +0000` · `R300: wire the inbound pickup request into runtime.py` |
+| `git merge-base --is-ancestor 3e8541e origin/main` | จริง |
+
+⇒ ข้อความในไฟล์ถูกทุกตัวอักษร (sha · เวลา `2026-09-02T00:35Z` · เลขรอบ R300) **ไม่มีอะไรต้องแก้**
+`5868566` ของ LANE-B resolve ได้บนโคลนเต็มแต่เป็นคนละคอมมิต (`R303: a GM warp tells the drop cell…`)
+
+ทำไมมันอันตราย: บน shallow clone `git log -S` **ไม่เคยว่าง** มันคืนคอมมิตขอบเสมอ และคอมมิตขอบเป็น
+merge commit ที่มีอยู่จริง ⇒ คำตอบผิดหน้าตาเหมือนคำตอบถูก · G1 (ห้ามอ้างแหล่งเดียว) ไม่ช่วย เพราะสองสาย
+วัด **บนเครื่องที่พิการเหมือนกัน** แล้วได้ผลที่ "ยืนยันกันเอง" ว่าไฟล์ผิด
