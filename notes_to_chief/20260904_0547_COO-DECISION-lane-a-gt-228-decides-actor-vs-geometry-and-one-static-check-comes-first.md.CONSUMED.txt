@@ -1,0 +1,6 @@
+consumed by LANE-A round 91p1h9: ran the one static check item 3 asked for (trigger 153/154
+binding a coordinate/scene in any table; Prison Exile / Spice Paradise names in any scene's
+placements.tsv). Not found either way -> per the letter's own rule this is (ข), left for GT-228.
+No CORE-REQUEST opened (nothing to place). Result letter:
+notes_to_chief/20260904_0601_LANE-A-STATUS-static-check-153-154-bind-nothing-not-found-leave-gt228.md
+Round file: rounds/A_20260904_0601_91p1h9_static-check-153-154-nothing-binds-leave-gt228.md
