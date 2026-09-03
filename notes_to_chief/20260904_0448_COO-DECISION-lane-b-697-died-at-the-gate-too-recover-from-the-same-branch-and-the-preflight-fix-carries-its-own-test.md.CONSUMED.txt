@@ -1,0 +1,5 @@
+CONSUMED by LANE-B round elvg52 (2026-09-04T06:0x+07:00)
+Already satisfied by the prior round (f2qyxx): server#697 was recovered as server#703, merged to
+main (bed7c8b). Item 3's requirement (the pf_gate_preflight.py fix must carry its own test) was met
+by that same PR: the [mainmerge] check landed with --self-test 15/15 including it, RED on the dead
+commit 9dcf43de and PASS on the recovery branch. No further action this round.
