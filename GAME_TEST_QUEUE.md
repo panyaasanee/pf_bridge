@@ -9716,12 +9716,32 @@ Slave), Aston/Hood (Slave Traders), กลุ่มทาสหลายคน, 
 
 **ผู้เปิดใบ: chief รอบ `liq4ri` 2026-09-01 (cloud)** · แก้ครั้งล่าสุด: chief รอบ `xkmzxr`/R306 (จ่ายหนี้ `COO 0544`)
 
-## GT-193 SPEED-COMMAND-SPARSE-X7-001  [🔴 HOLD (chief R315, 2026-09-03T07:0x+07:00) -- ป้ายเดิมคือ `🟢 READY` (R299) และเนื้อใบไม่มีอะไรผิด · ตัวกั้นคือคำสั่งยืน `COO-DECISION 20260903_0645`: **ห้ามเรียกรอบ attended ที่มีคำว่า `/speed` หรือมีขั้นรีล็อกอินหลัง `/speed` จนกว่าเกตล็อกอินของใบนั้นจะอยู่บน `main`** เพราะแถวที่ `/speed` เขียนทิ้งไว้จะขึ้นไวร์เองตอนล็อกอินถัดไป · **ปลดเองได้เมื่อ RECHECK ข้อ 6 ผ่าน ไม่ต้องรอใคร**]
+## GT-193 SPEED-COMMAND-SPARSE-X7-001  [🟢 READY **เฉพาะขั้น 9 และ 10** · 🔴 **ขั้น 4-7 ยังเป็น `PENDING interface` ห้ามเกรด** -- HOLD ของ R315 ปลดแล้วตาม `COO-DECISION 20260903_0745` ข้อ ② (chief วัด RECHECK ข้อ 6 เองบน `1e184532`) แต่ **ปลดอันตราย ≠ เกรดได้** และ pf-adversary รอบ `pa5pn8` หักล้างว่าผมกำลังจะปล่อยใบที่เผารอบทิ้ง:
+>
+> 🔴 **ทำไมขั้น 4-7 เกรดไม่ได้วันนี้** -- `gm/speed_wire.py:342` `SPEED_LOGIN_READ_LANDED = False` ⇒ `send_deferred()` (บรรทัด 357) คืน **True** ⇒ `gm/chat_command_action.py:3994` **กันเฟรมไว้ทุกครั้ง ไม่มีไบต์ออกเลย** (chief วัดเองบน `origin/main 1e184532` รอบ `pa5pn8`) ⇒ เกณฑ์ wire ข้อ (ก) (change-mask บิต `0x0040`) และเกณฑ์ client-observable ("เดินเร็วขึ้นไหม") **เป็นจริงไม่ได้ทั้งคู่** — ไม่ใช่ FAIL แต่เป็นเกตที่ทำงานถูกต้อง
+> **ห้ามเกรดขั้น 4-7 เป็น FAIL เด็ดขาด** · ถ้าบูตแล้วเห็นศูนย์ไบต์ = ถูกแล้ว จดว่า `SPEED DEFERRED` แล้วข้ามไปขั้น 9
+>
+> 🔴 **และหน้าจอเงียบ** -- แขนง deferral ไม่ส่ง notice action ใด ๆ (`[ASSUMPTION OF LANE-GM, AWAITING COO]` ในซอร์สเอง) ⇒ เงื่อนไข "ห้ามเงียบ" ของ `COO-DECISION 20260902_0147` ที่ RECHECK ข้อ 5 ปิดไปแล้วสำหรับ*คำปฏิเสธ* **เปิดใหม่สำหรับ*การรับคำสั่ง*** (เกิดหลัง R299 เมื่อ 2026-09-02T18:47) ⇒ บรรทัด "Do NOT promote to READY" ในเนื้อใบ (9906/9930) **ยังยืนสำหรับขั้น 4-7 เท่านั้น**
+>
+> 🟢 **ขั้น 9 (`/speed 1e40`) และขั้น 10 (`/speed fast`) เกรดได้ตามปกติ** -- ทางปฏิเสธอยู่ **เหนือ** เกต deferral (`_speed_denied(...)` ยิงก่อนบรรทัด 3994) ⇒ นี่คือของที่รอบ attended รอบนี้ได้จริง
+>
+> 🔴 **แก้คำของ chief เอง**: R316 ฉบับแรกของผมเขียนว่า "เนื้อใบ ขั้นตอน และเกณฑ์ไม่เปลี่ยนสักข้อจาก R299" -- **เท็จ** ขั้น 10 เพิ่ม R303 · ประโยคในขั้น 6 และ RECHECK ข้อ 6 เพิ่ม R315 · ที่ COO เขียนว่า "ตามเดิมทุกประการ" หมายถึงเทียบกับ**ตอน HOLD** ไม่ใช่เทียบ R299
+>
+> 🔴 **RECHECK ข้อ 6 ไม่ใช่ตัวกันประตูที่ฆ่าตัวละคร** -- อันตรายที่ `GT-193` วัดได้จริงใน R303 คือ**เฟรมขาออกในเซสชัน** (DB ฝั่งเราสะอาด) ประตูนั้นถือโดย `SPEED_LOGIN_READ_LANDED` ไม่ใช่โดยเกตล็อกอิน ⇒ RECHECK ข้อ 6 ถูกเสริมเป็นสามคำในรอบนี้ (ดูข้างล่าง) และมี **ตัวรีล็อกอัตโนมัติ** ที่ใบนี้เคยไม่มี]
 
-RECHECK ข้อ 6 (ตัวปลด HOLD ข้างบน · เพิ่มโดย chief R315 ตามคำสั่งยืนของ `COO 0645`):
-  `(cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/login_speed.py | findstr /C:"wire_deferred")`
-  **เจอ** = เกตอยู่บน `main` แล้ว ⇒ ป้ายกลับเป็น `[🟢 READY]` ตามเดิมทุกประการ (เนื้อใบ ขั้นตอน และเกณฑ์ไม่เปลี่ยน) · **ไม่เจอ** = คง `[🔴 HOLD]` ห้ามบูต
-  สถานะ ณ R315: chief push เกตนี้ขึ้น PR แล้วในรอบเดียวกัน **ยังไม่ merge** ⇒ ยังไม่เจอบน `main` (ห้ามเชื่อคำนี้ ให้รันคำสั่งข้างบนเอง)
+RECHECK ข้อ 6 (ตัวปลด/ตัวรีล็อก · เพิ่มโดย chief R315 · **เสริมเป็นสามคำโดย chief R316** หลัง pf-adversary หักล้างว่ารูปเดิมพอใจกับคำใน docstring):
+  🔴 **ทำไมรูปเดิมอ่อน (วัดแล้ว R316)**: `findstr /C:"wire_deferred"` ติดที่ `login_speed.py:90` และ `:379` ซึ่งเป็น **docstring** ⇒ ถอดบรรทัด `held = held_by_the_speed_deferral(fallback)` ที่ 424 ออก แล้วเกตนี้ก็ยัง "ผ่าน" · ห้ามใช้รูปเดิมอีก
+  **ทั้งสามคำต้องเจอครบ จึงถือว่าผ่าน** (รูปเดียวกับ RECHECK ข้อ 2 ของ `GT-218` ที่ chief เขียนไว้เองรอบก่อน):
+  `(cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/login_speed.py | findstr /C:"held_by_the_speed_deferral(fallback)")`
+  `(cd pirate-force-server && git show origin/main:src/pirateforce_foundation/gm/speed_wire.py | findstr /C:"send_deferred")`
+  `(cd pirate-force-server && git show origin/main:src/pirateforce_foundation/gm/chat_command_action.py | findstr /C:"speed_wire.send_deferred()")`
+  **เจอครบสาม** = ประตูล็อกอิน**และ**ประตูขาออกยังปิดทั้งคู่ ⇒ ขั้น 9-10 บูตได้ · **ขาดข้อใดข้อหนึ่ง** = กลับเป็น `[🔴 HOLD]` ทันที ห้ามบูต
+  🔴 **ตัวรีล็อกอัตโนมัติ (ใหม่ R316 · ใบนี้ไม่เคยมี)**: ถ้า
+  `(cd pirate-force-server && git show origin/main:src/pirateforce_foundation/gm/speed_wire.py | findstr /C:"SPEED_LOGIN_READ_LANDED: bool = True")`
+  **เจอ** ⇒ ประตูขาออกเปิดแล้ว ⇒ ใบนี้กลับเป็น `[🔴 HOLD]` **ทันทีและอัตโนมัติ** ห้ามบูตจนกว่ารอบ `GT-218` (ค่า `400` ค่าเดียว พร้อมวิดีโอและกฎ STOP-on-HP-0) จะเกิดและมีผล ตาม `COO 2147` · เหตุผล: ขั้น 4 ของใบนี้พิมพ์ `/speed 800` ซึ่ง **2.67 เท่าของ `300` ที่ฆ่าตัวละครมาแล้ว** และซอร์สวันนี้ **ไม่มี clamp ไม่มี allow-list** (`GT-218` nonclaim 2)
+  สถานะ ณ R316 (2026-09-03T08:3x+07:00): เจอครบสามคำบน `origin/main = 1e184532` (chief วัดเอง) และ `SPEED_LOGIN_READ_LANDED` ยังเป็น `False`
+  🔴 **บรรทัดนี้ไม่ใช่ประวัติ** ยังเป็นเกตของทุกการบูต — โคลนเก่า/สาขาเก่าให้ผลว่างได้ ให้รันเองทุกครั้ง
+  🔴 **แก้บันทึกที่ผิด (chief R316 · หลักฐาน git ไม่ใช่จดหมาย)**: `COO 0745` ข้อ ② เขียนว่าตัวปลดของ chief "เขียวแล้วตั้งแต่ตอนเขียนใบ" และว่า chief วัด `d916725` ที่ "เก่ากว่าหัวจริง" — **ไม่จริง** · `git log -1 75f242f0` = `2026-09-03T00:41:09Z` = **07:41+07** แต่ใบ `CHIEF-REPORT 0715` เขียน **07:15+07** และ `git show d9167254:...login_speed.py | grep -c held_by_the_speed_deferral` = **0** ⇒ ตอน chief เขียนว่า "push แล้ว รอ merge" **นั่นถูกต้อง** เกตยังไม่ขึ้น main อีก 26 นาที · บันทึกไว้ที่นี่เพื่อไม่ให้รอบหลังอ้างผิด
 
 > Opened by chief per direct COO order `notes_to_chief/20260901_1642_COO-ORDER-speed-sparse-x7-chief-open-gt-entry.md`,
 > itself citing `20260901_1640_COO-ORDER-speed-sparse-x7-approved-panya-live-override-of-1447.md` (LANE-DB,
@@ -9947,8 +9967,22 @@ RECHECK ข้อ 6 (ตัวปลด HOLD ข้างบน · เพิ่�
 - numbering: highest `GT` at open time is `GT-192`; highest `RE` in `CLIENT_RE_QUEUE.md` is `RE-195`.
   This entry is `193`.
 
-- result: (tester/build lane fills in: PASS/FAIL/BLOCKED, evidence, timestamp, OBSERVER_CONFIRMED line
-  per G-OBS once client-observable evidence exists)
+- result:
+  🔴 **RUN 1 -- R303, 2026-09-02 (attended, เจ้าของหน้าจอ): FAIL, และมันฆ่าเซสชัน**
+  ใบนี้**เคยรันแล้วและล้ม** -- บันทึกไว้ตรงนี้โดย chief R316 เพราะเดิมช่องนี้ว่างเปล่า ทำให้ผู้เทสที่อ่านจากคิว
+  (ซึ่งคือคนที่ป้าย `🟢 READY` มีไว้ให้) เห็นเป็นใบใหม่ที่ไม่เคยรัน · หลักฐานเต็มอยู่ที่
+  `notes_to_chief/20260902_1755_KA1A-R303-RESULTS-*.md` และ `NOW.md` หัวข้อ GM-B
+  - `/speed 300` ⇒ **HP 0 · เงินหาย · ตัวละครตาย** แล้ว **ไคลเอนต์ล็อกตัวเอง** (426 เฟรมถัดมาไม่มีคลิกเลยแม้แต่ครั้งเดียว)
+  - ชั้น wire/DB: **DB ฝั่งเราสะอาด** (`characters.speed_walk = 300.0`, `hp 100/100`) ⇒ ความเสียหาย**ไม่ได้ถูกเขียนลง DB**
+    มันอยู่ใน **เฟรมขาออกในเซสชัน** -- นี่คือเหตุผลที่เกตล็อกอิน (RECHECK ข้อ 6) **ไม่ใช่** ตัวกันประตูบานที่ฆ่าตัวละคร
+  - ทางกู้ที่ใช้จริง: ปิดไคลเอนต์ **แล้วรีสตาร์ตเซิร์ฟเวอร์ก่อน** จึงบูตไคลเอนต์ใหม่ (ไม่รีสตาร์ต = ตัวถัดไปค้าง "connecting" ตลอดกาล)
+  🔴 **กฎที่ยกมาจาก `GT-218` โดย chief R316 เพราะใบนี้อันตรายกว่าแต่ไม่มีเฟอร์นิเจอร์กันตาย:**
+  (ก) **อัดวิดีโอต่อเนื่อง** ตั้งแต่ก่อนพิมพ์ `/speed` จนจบ ไม่ใช่ถ่ายภาพนิ่งเป็นช่วง
+  (ข) **STOP ทันทีถ้า HP แตะ 0** -- หยุดทั้งรอบ ไม่ต้องทำขั้นถัดไป จดเวลาแล้วรายงาน
+  (ค) ขั้น 8 (เฝ้าดู modal error / socket หลุด / บังคับรีล็อกอิน) **ต้องอ่านก่อนเริ่มขั้น 4** ไม่ใช่ตอนถึงคิวมัน
+  (ง) วันที่ประตูขาออกเปิด (ดูตัวรีล็อกใน RECHECK ข้อ 6) **ใบนี้ห้ามบูตก่อน `GT-218`** ซึ่งครอบค่า `400` ค่าเดียวและมีหลักฐานสามแหล่ง
+  RUN ถัดไป (tester/build lane เติม): PASS/FAIL/BLOCKED, evidence, timestamp, OBSERVER_CONFIRMED line
+  per G-OBS once client-observable evidence exists
 
 **ผู้เปิดใบ: chief รอบ `57alcd` 2026-09-01 (cloud), per COO-ORDER `1642`**
 
