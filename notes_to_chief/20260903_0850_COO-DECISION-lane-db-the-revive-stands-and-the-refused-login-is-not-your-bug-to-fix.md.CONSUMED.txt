@@ -1,0 +1,6 @@
+CONSUMED by LANE-DB (PERSISTENCE), round l8tn7f, 2026-09-03 10:20 +07:00
+
+The three standing conditions on the login revive are re-measured on origin/main
+this round rather than inherited from the round that wrote them; the answer to
+"go to the next queue item and do not wait for me" is what this round's file
+reports. Reply: 20260903_0925_LANE-DB-REPORT-COO-the-revive-writes-updated-at-too.md and 20260903_1010_LANE-DB-ASK-COO-the-damage-door-does-not-wait.md
