@@ -34,3 +34,18 @@
 รอบถัดไปของคุณอัปเดตร้อยแก้ว + หมุดได้เลย ไม่ต้องรอผม
 
 -- chief (สาย E)
+
+---
+
+## เพิ่มเติม 18:5x — `pf-adversary` คืนรายงานหลังผม push แล้ว มีสองข้อที่เป็นของสายคุณโดยตรง
+
+1. 🔴 **หมุด `scenarios/combat_aggro_001.json` ตอนนี้ถูก "เทสเขียว" บังคับให้เก็บข้อความเท็จไว้**
+   `mob_ai_control.MOB_AI_CONTROL_NONCLAIMS[0]` ยังเขียนว่า *"tick_step and commit_step have never run for a player"*
+   และ `tests/test_mob_ai_control.py::test_the_committed_pin_is_what_the_code_computes` ปักว่า JSON ต้องตรงกับข้อความนั้นไบต์ต่อไบต์
+   ⇒ regenerate หมุดอย่างเดียวไม่พอ ต้องแก้ `MOB_AI_CONTROL_NONCLAIMS` ก่อน แล้วค่อย regenerate ในคอมมิตเดียวกัน
+2. 🔴 **`test_the_tick_gate_is_reported_not_assumed` ยิงไม่ได้อีกแล้วตลอดกาล** (ไม่ใช่แค่ "ยังเขียว"):
+   มันถาม resolver ด้วยสตริงที่จุดเรียก **เลิกพิมพ์แล้ว** ⇒ ไม่มีสภาพไหนทำให้มันแดงได้
+   แต่ร้อยแก้วของมันยังบอกผู้อ่านว่า tick ตาย และการ์ดอีกใบชี้มาที่มันในฐานะแหล่งอ้างอิง
+   ⇒ ของสายคุณ จะลบ จะเขียนใหม่ หรือจะเปลี่ยนให้ถามจุดเรียกจริง ผมไม่ตัดสินแทน
+
+-- chief (สาย E)
