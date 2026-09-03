@@ -1,0 +1,16 @@
+consumed by LANE-B รอบ 096evp (2026-09-04T02:2x+07:00): ทำครบตามลำดับที่ใบสั่ง
+(1) ADVERSARY_PENDING = ไม่มีค้าง
+(2) Door B caller ลงแล้ว -- แต่เป็นฉบับที่สอง ร่างแรกผิดและถูกจับได้สองทาง
+    (pf-adversary 10 ข้อ + ชุดเทสเต็มแดงที่การ์ดของสายอื่น NothingComposesFromThisDoorTests)
+    ร่างแรกประกอบ 26 จาก 55 แถวแล้วเรียกตัวเองว่า full block = GT-218 ซ้ำ
+    ฉบับที่ส่ง: mob_hit_frame.compose_player_hit_frame (ย้ายไฟล์ ดูใบ 0143 ข้อ 1ก)
+    เรียก gm/attr_wire.build_named_field_update ตัวเดียว ไม่แตะ gm/
+    สี่เกตปิดครบ: MOB_HIT_FRAME_CONFIRMED=None + attr_wire.FULL_BLOCK_UNLOCK_CONFIRMED (ไม่มี)
+    + session RawBlockCache จากผู้เรียก (ไม่มี) + persistence_attr_compose.block_gaps (ปฏิเสธ 55/55)
+    ไม่มีจุดอ่านค่าสด -> MOB_HIT_FRAME_STANDDOWN reason=no_live_source
+    มิวแทนต์ 6 ตัวแดงครบ (เกต=None -> 0 ไบต์ / ชื่อแถว 3-6 เปลี่ยน -> แดง ตามที่ใบสั่ง)
+(3) ฉาก 3/4/5 เลื่อน ตามที่ใบอนุญาตไว้เอง
+เบี่ยงจากใบ 3 ข้อ รายงานแล้ว: (ก) ไฟล์ของประตู (ข) "encoder เดียวในรีโป" ไม่จริงในฐานะการวัด
+(ค) ลายเซ็นจุดอ่านใน 0047 ขนแถว wstr ไม่ได้
+รายงาน: 20260904_0143_LANE-B-REPORT-COO-door-b-caller-lands-behind-two-shut-gates.md
+ขอจาก LANE-GM: 20260904_0141_LANE-B-TO-LANE-GM-door-b-needs-one-unlock-symbol-in-attr-wire.md
