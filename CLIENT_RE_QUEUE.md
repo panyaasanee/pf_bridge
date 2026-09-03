@@ -2319,7 +2319,7 @@ and not self.v138_marker1_population_sent` (`TARGET_VITAL=0x1ADD`, `CHOOSE_NPC=0
 - wire/DB: แผนที่ฟิลด์ครบ 54 ไบต์ + เลข descriptor ที่ส่งจริง พร้อม file:line ของ builder
 - client-observable: ต้องเป็นใบเทสรอบใหม่ (แก้แล้วคลิก Columbus ต้องได้บทของ Columbus) -- ยังไม่เปิด
 
-## 🆕🔬 RE-138 NAME-LABELS-VANISH-AFTER-MOVE-001 [STATIC-ON-CLOUD]: ป้ายชื่อ (เขียว) ของทุกตัวในแมพหายหลังผู้เล่นเดินออกจากบริเวณแรก เหลือแต่ป้ายฉายา (ฟ้า) -- รอบ reconcile ส่งอะไรไม่ครบ  [OPEN]
+## 🔬 RE-138 NAME-LABELS-VANISH-AFTER-MOVE-001 [STATIC-ON-CLOUD]: ป้ายชื่อ (เขียว) ของทุกตัวในแมพหายหลังผู้เล่นเดินออกจากบริเวณแรก เหลือแต่ป้ายฉายา (ฟ้า) -- รอบ reconcile ส่งอะไรไม่ครบ  [✅ CLOSED/ANSWERED -- ปิดโดย chief (ผู้เปิดใบ) รอบ `l39ees` (R322) 2026-09-03T16:01+07:00 ตาม `COO-DECISION 20260903_1546` · ผล: `notes_to_chief/20260903_0253_RE-138-RESULT-BASICATTR-OMISSION-PRESERVES-NAME.md` · **คำถามของใบตอบแล้ว และสมมติฐานของใบเองถูกหักล้าง**: mask ที่แคบกว่า **ไม่ล้าง** ชื่อเดิม -- BasicAttr merge `0x00465610` ตรวจ bit `0x0001` ที่ `0x0046564E` แล้วเมื่อ bit **ถูกละ** จะ copy ชื่อเดิมจาก `source+0x28` (`0x00465654..0x0046565B`) ⇒ การที่เซิร์ฟเวอร์ละ name bit **ไม่ใช่** ต้นเหตุที่ป้ายชื่อหาย · ฝั่งเซิร์ฟเวอร์: retained กับ entrant ได้ BasicAttr mask `0x030C` เท่ากัน ไม่มี name bit ทั้งคู่ (`population.py:206-213`) ต่างกันแค่ entrant ได้ MovementAttr `0xFF` (`:214-223`) ⇒ ประโยค "retained เป็น NPCAttr-only" ไม่ได้แปลว่าไม่มี BasicAttr · 🔴 **ชั้น client-observable ของใบนี้ไม่เคยเปิด ⇒ ห้ามยกใบนี้ไปเป็นฐานว่า "ป้ายชื่อไม่หายแล้ว"** อาการที่เจ้าของเห็น (ภาพ 235212) **ยังไม่มีเจ้าของ** -- ที่เหลือคือ object lifetime / actor generation reuse (กรณีที่ **ไม่มี attr เก่าให้ merge**) ซึ่งใบนี้ระบุเป็น nonclaim ของตัวเอง · chief ไม่เปิดใบใหม่ในรอบนี้ตามคำสั่ง `NOW.md` P-2 (ห้ามเปิด RE ใหม่) เสนอ COO ในจดหมายรอบ R322]
 
 **ADDRESSEE: RE** · ผู้เปิดใบ: chief (สาย E) รอบ `wi1m62` (R218) 2026-08-29T01:0x+07:00
 **ต้นเรื่อง:** ใบผลเดียวกัน ข้อ ④.2 (เจ้าของเห็นเอง ยืนยันแล้ว)
@@ -2350,6 +2350,27 @@ and not self.v138_marker1_population_sent` (`TARGET_VITAL=0x1ADD`, `CHOOSE_NPC=0
 🔴 [ยังไม่วัด — ห้ามข้ามไปสรุป] การส่ง NPCAttr ที่ mask แคบกว่า **ล้าง**ค่าเดิม (ชื่อ/faction) ในฝั่ง client
 หรือไม่ ยังไม่มีใครวัด · `RE-092` พิสูจน์ replace-by-omission ที่ระดับ **ชุด actor** ไม่ใช่ระดับ **บิตใน mask**
 ⇒ นี่คือคำถามจริงของใบนี้ และเป็นคำถามที่ต้องใช้เครื่องสะพาน
+
+### result: [✅ ANSWERED · 2026-09-03 · ใบผล `20260903_0253` · กรอกโดย chief R322 ตาม `COO-DECISION 20260903_1546`]
+
+**ตอบคำถามของใบตรง ๆ (ชั้น wire/source):** retained และ entrant ได้ `NPCAttr` ทั้งคู่ ซึ่ง serialize `BasicAttr` mask `0x030C`
+เท่ากัน และ **ไม่มี name bit `0x0001` ทั้งคู่** (`src/pirateforce_foundation/population.py:206-213`) · entrant ต่างตรงที่ได้
+`MovementAttr` full mask `0xFF` เพิ่ม (`:214-223`) · ตัวประกอบแช่แข็งให้รูปเดียวกัน (`current/pf_login_game_server_v141.py:1139-1141`,
+`:1149-1152`, `:1837-1853`) ⇒ ชื่ออยู่ใน `BasicAttr +0x28` และถูกส่งเฉพาะเมื่อ `basic_name` ไม่ว่าง
+
+**ตอบคำถามที่ใบเขียนว่า "ต้องใช้เครื่องสะพาน" (ชั้น client static):** การละ bit **ไม่ล้างค่าเดิม** เมื่อมี attr เก่าให้ merge ·
+`NPCAttr` merge `0x00466DC0` เรียก `BasicAttr` merge `0x00465610` · ที่ `0x0046564E` ทดสอบ `[destination+0x70] & 0x0001` ·
+bit มี = ใช้ค่าที่ decode เข้ามา · **bit ถูกละ = copy `source+0x28` ทับ `destination+0x28`** (`0x00465654..0x0046565B`) ·
+เป็น positive complete-function evidence ไม่ใช่ linear disassembly
+
+**⇒ สมมติฐานอันดับหนึ่งของใบ (mask แคบกว่าล้างค่าใน attr object) ถูกหักล้าง**
+
+**สิ่งที่ยังไม่ตอบ และห้ามใครอ่านผลนี้แล้วสรุปแทน**
+- ชั้น client-observable **ไม่เคยเปิด** — ไม่มีใครเดินไปกลับแล้วดูป้ายในบิลด์นี้ · `G-OBS` ยังไม่มีลายเซ็น
+- อาการจริงที่เจ้าของเห็น (ภาพ 235212) **ยังไม่มีต้นเหตุ** — เส้นทางที่เหลือคือ object lifetime / actor generation reuse
+  (ถ้า reconciler สร้าง object ใหม่ ก็ไม่มี attr เก่าให้เติม ค่า default ชื่อว่างยังเป็นไปได้) หรือเส้นทาง UI อื่น
+- **BUILD_IMPACT: ไม่ต้องแก้ client** · การเติม `basic_name` ใน population reconcile ยังสมเหตุผลตามนโยบายข้อ 12 (ตัวละครสมประกอบ)
+  แต่เป็น **hardening ไม่ใช่ root-cause fix** ห้ามรายงานว่าแก้แล้วป้ายจะกลับมา
 
 ## 🔬 RE-139 P33-P58-IDENTITY-CONTRADICTION-001 [STATIC-ON-CLOUD]: บูตเดียวส่ง **ตัวตนสองชุดที่ขัดกัน** ให้ placement เดียวกัน -- สำมะโนบอกว่า Babu/Juliet ตาราง roster บอกว่า Fighting Fish soldier/Jungle Big Tiger  [✅ DONE/RESOLVED-BY-MIGRATION -- ปิดโดย chief (ผู้เปิดใบ) รอบ `hxri6s` (R254) 2026-08-31T04:0x+07:00 · ผล: `notes_to_chief/20260830_1633_RE-139-RESULT-legacy-setnum-window-closed-roster-is-4-not-13.md` (สาย A รอบ `qlp30w`) · **ทั้งสองแหล่งเคยขัดกันจริงในบูตเดียว แต่เฉพาะในหน้าต่างที่ COO-DECISION 2026-08-29T00:41+07:00 ("nine rows get one round only") อนุมัติไว้ล่วงหน้า -- หน้าต่างนั้นปิดไปแล้วก่อนรอบ `qlp30w`** HEAD ปัจจุบัน (`field_mob_tables.SHIPPED_PLACEMENTS`) มีความจริงชุดเดียว: Babu/Juliet, roster=4 ไม่ใช่ 13 · **ปลดเงื่อนไข `GT-104`** "ห้ามเกรด identity ก่อนอ่าน RE-139" -- identity ไม่ขัดกันอีกต่อไป แต่ nonclaim อื่นของ `GT-104` (เลนคุย NPC บล็อกการโจมตี ฯลฯ) ยังไม่ถูกแตะ]
 
