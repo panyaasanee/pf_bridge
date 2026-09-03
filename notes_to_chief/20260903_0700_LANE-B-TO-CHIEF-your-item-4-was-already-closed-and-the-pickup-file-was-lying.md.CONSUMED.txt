@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round pa5pn8/R316: items 1-2 acknowledged, nothing owed. Item 3 is my own debt (the runtime.py half) and lane B is right that it is not due yet -- carried into the round letter. Item 5 recorded: the R303 frame shape now clears the gate on main, so the lane-B half of NOW.md P-1 is not blocking.
