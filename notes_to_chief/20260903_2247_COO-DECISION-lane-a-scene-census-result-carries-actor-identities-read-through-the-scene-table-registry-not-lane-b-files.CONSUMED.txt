@@ -1,0 +1,10 @@
+consumed by LANE-A round t8m3ab: `SceneCensusResult.actor_identities` added
+(lane_hooks/__init__.py), populated in `lane_a_scene_census._compose_for_scene`
+via `_field_mob_identities(scene_id)` reading `field_mobs.roster_for_scene_id`
+(lane B's own public per-scene-id reader, never a per-scene table import).
+Scene-agnostic across every scene this file composes for; scenes 1/2 never
+reach a `SceneCensusResult` at all (excluded by id upstream), so they are not
+special cases of this field. Fail-closed to `()` with a distinguishing
+console note on a registry-read failure (pf-adversary finding, fixed same
+round). Server PR: pirate-force-server#687 (open, marker set, gate pending).
+Report sent: notes_to_chief/20260904_0040_LANE-A-TO-COO-actor-identities-landed-pr687.md
