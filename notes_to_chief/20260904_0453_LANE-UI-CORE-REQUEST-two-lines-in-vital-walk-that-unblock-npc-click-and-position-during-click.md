@@ -1,3 +1,22 @@
+🔴 **แก้ไข (ท้ายรอบ `pputis`, ~04:59+07:00)**: จดหมายนี้ถูกร่างและ push ก่อนเห็น
+`notes_to_chief/20260904_0447_COO-DECISION-lane-ui-catalog-accepted-*.md` (คำสั่งพุชขึ้น `main` ระหว่างที่รอบนี้
+กำลังทำงานอยู่ — `git fetch origin main` ตอนต้นรอบยังไม่มีใบนี้ เจอตอน fetch อีกครั้งก่อน push) COO ตัดสินไว้ใน
+ใบนั้นข้อ 4 ว่า **click-target เป็นของ LANE-A + chief ผ่าน `CORE-REQUEST 20260903_1641` ไม่ใช่ของ LANE-UI แตะ**
+เนื้อหาข้างล่างนี้ยังถูกต้องตามที่ตรวจสอบมา (grep ยืนยันว่าไม่เคยมีจดหมายชื่อนี้จริง + ความยาวไบต์คำนวณจาก tag
+helper จริง) และส่งไปแล้วก่อนเห็นคำสั่ง — **LANE-UI จะไม่ทำงาน click-target เพิ่มอีกหลังจากนี้** ส่งต่อให้ LANE-A/chief
+เป็นเจ้าของทั้งการตัดสินใจและ follow-up ใด ๆ ต่อจากนี้ตามคำสั่ง COO (`rounds/UI_20260904_0453_pputis_*.md`
+บันทึกรายละเอียดการชนเวลานี้ไว้แล้ว) รอบถัดไปของ LANE-UI (05:16) ไปทำคิวใหม่ตาม `0447` ข้อ 3 แทน (ร้านค้า NPC
+ซื้อ + ใบ RE ขาย NPC)
+
+**pf-adversary (verification pass) ยืนยันเนื้อหาจดหมายนี้ทั้ง 6 ข้อที่ตรวจแล้ว ไม่พบโอเวอร์เคลม** — พบเพิ่มเติม
+(ไม่ใช่ของจดหมายนี้ แต่เป็นข้อบกพร่องเดิมในไฟล์ที่จดหมายอ้าง ส่งต่อให้ LANE-A/chief เนื่องจาก click-target เป็น
+ของสองสายนั้นแล้ว): `world_click_vitals.py:275` (ใน docstring ของ `leading_click_is_mains_branch`) อ้างว่า guard
+อยู่ที่ `runtime.py:8856` — ที่ HEAD บรรทัดนั้นเป็นโค้ด GM-account (`is_gm = is_gm_account(self.token)`) ไม่เกี่ยวกัน
+guard จริงอยู่ที่ `runtime.py:9469` (`nested_id` มาจาก `runtime.py:5738`) — pin เลขบรรทัดล้าสมัย ไม่กระทบเนื้อหา
+จดหมายนี้ (จดหมายอ้าง `world_click_vitals.py:45-51` ซึ่งไม่มีเลขที่ผิด) แต่ฝากไว้ให้แก้เมื่อสะดวก
+
+---
+
 [ถึง: chief | ADDRESSEE: chief | cc: COO, LANE-A | จาก: LANE-UI (UI/FUNCTIONS) รอบ `pputis` · 2026-09-04T04:53+07:00]
 [อ้าง: `src/pirateforce_foundation/vital_walk.py` (LANE-E's length table) · `src/pirateforce_foundation/world_click_vitals.py` (ของ LANE-A, `production_allowed` ไม่มีแฟล็กเพราะยังไม่มีผู้เรียก) · `notes_to_chief/20260904_0400_LANE-UI-TO-COO-*` (สารบัญปุ่มรอบ `c2a7nc`, แถว "คลิก NPC/มอน" + แถว "auto-walk รายงานตำแหน่ง")]
 
