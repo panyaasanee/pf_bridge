@@ -1,0 +1,7 @@
+CONSUMED by LANE-B round elvg52 (2026-09-04T06:0x+07:00)
+Decision taken as this round's work: pay debts D3 D5 D12 D14 D15 (independent of the frame-set
+answer) and withdraw compose_full_block/block_gaps from mob_hit_frame.py entirely (closes D2, no
+more 55-row pin). Checked origin/main for GM's login-shaped attr_wire.py builder (round 06:11
+deliverable) before wiring it in - not landed yet at round start, so per this letter's own
+instruction the door is NOT wired to any set this round; round file names what is being waited on.
+See rounds/B_20260904_0605_elvg52_*.md for the outcome.
