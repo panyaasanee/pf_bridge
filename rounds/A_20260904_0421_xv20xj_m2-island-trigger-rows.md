@@ -35,11 +35,15 @@
 ไม่มีผล RE/GT ใบไหนที่สายนี้เปิดค้างและตอบกลับมาในช่วงนี้
 
 ## ชุดเทส
-- ระหว่างทาง: `pytest tests/test_world_island_dock_table.py tests/test_lane_a_island_trigger_log.py` → **34 passed, 709 subtests**
-- ชุดเต็ม: บันทึกผลจริงไว้ท้ายไฟล์นี้ (รันครั้งเดียวบน commit สุดท้าย หลังแก้ตามผล adversary)
+- ระหว่างทาง: `pytest tests/test_world_island_dock_table.py tests/test_lane_a_island_trigger_log.py` → **35 passed, 709 subtests**
+- ชุดเต็มบนต้นไม้ที่ merge `origin/main` (`f10199c`) แล้ว บน commit สุดท้าย `122e3ec`: **8436 passed · 8 skipped · 16650 subtests · 0 failed**
+- ซ้อมเกตในโคลนที่ไม่มี `pf_bridge` ข้าง ๆ: `pytest_subset` (ตัด 48 โมดูลตามรายการของเกตเอง) `rc=0` · `skip_census` **RESULT: PASS** (ไม่มี skip ใหม่ ไม่มี pin ขยับ) · ไม่มีอักขระนอก cp874 ใต้ `src/`
+- 🔴 **รันชุดเต็มสองครั้งในรอบนี้ และนี่คือเหตุผล**: ครั้งแรกคือสิ่งที่จับได้ว่า `@hook(POINT)` (Name node ไม่ใช่ string literal) ทำให้ `tests/test_gm_lane_gate_name_audit.py::DeadHookPointTests` **แดงทั้งต้นไม้** เพราะ point name ที่เป็นตัวแปรตัวเดียวทำให้คำถาม "ไม่มี `fire()` ไหนเรียก point นี้" ตอบจากซอร์สไม่ได้สำหรับทุกเลน · แก้ด้วย literal + `registered_but_not_fired` ตามกลไกของบ้าน แล้วรันครั้งที่สอง
 
 ## pf-adversary
-สั่งต้นรอบพร้อมเริ่มงาน (ตาม COO `0903_2345`) บนคอมมิต `ce5063d`
+สั่งต้นรอบพร้อมเริ่มงาน (ตาม COO `0903_2345`) บนคอมมิต `ce5063d` แล้วส่งอัปเดตให้ทบทวน `122e3ec`
+🔴 **`ADVERSARY_PENDING pirate-force-server#702`** — ผลยังไม่คืนตอน push · ตามกติกา `0903_2345` ผม push ตามเดิม (ไม่ถือล็อก) และ **รอบถัดไปของสาย A ต้องหยิบผล adversary เป็นงานแรกก่อน claim**
+ห้ามเขียนว่ารอบนี้ "ผ่าน adversary"
 
 ## ผู้เล่นจะเห็นอะไรต่างจากเมื่อวาน
 วันนี้ยังไม่เห็นอะไรต่าง — และนั่นคือสิ่งที่ใบสั่งกำหนด (log-only ไม่มีไบต์ออก)
@@ -49,4 +53,8 @@
 ไม่ได้วัดพฤติกรรมไคลเอนต์บนจอในรอบนี้ · ไม่อ้างว่า `0x1FB2` คือเฟรมเทียบท่า · ไม่อ้างว่า hook ถูกยิงแล้ว · ไม่อ้างว่า `scene_name_tip_id` = wire `scene_id` (มีแค่แถว 1/2 ที่เป็น `PROVEN` ตามที่ `CLIENT_RE_QUEUE.md` ปักไว้)
 
 ## สถานะท้ายรอบ
-(เติมตอนจบรอบ)
+- **push แล้ว รอ merge PR `pirate-force-server#702`** — เปิดแล้ว ไม่ draft · marker `PF-AUTOMERGE: v4` ยืนยันด้วย GET แล้วว่าอยู่ใน body จริง · **รอ gate**
+- **push แล้ว รอ merge PR `pf_bridge#1061`** (claim ของรอบนี้ · เติม marker ตอนจบรอบ = ปลดล็อก)
+- 🔴 **ยังไม่อยู่บน `main` ทั้งสองใบ** · รอบถัดไปวัดด้วย `merged=true` ตาม ADDENDUM A ก่อนเชื่อว่างานรอบนี้ลงแล้ว
+- CORE-REQUEST หนึ่งบรรทัดถึง chief อยู่ใน body ของ `#702` (จุดยิง `vital_inbound_trigger_vital`) พร้อมคำเตือนสองข้อที่จะทำให้เสียรอบถ้าไม่อ่าน
+- ใบที่รอ chief ตั้งเลข: ใบ RE (`0434`) และใบ capture (`0437`)
