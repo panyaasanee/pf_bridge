@@ -10266,7 +10266,8 @@ highest `GT` ที่เปิดอยู่ก่อนใบนี้คื�
 - result: (ผู้เทสกรอก: PASS/FAIL/BLOCKED/NO-RESULT แยก **ครึ่ง A** และ **ครึ่ง B** คนละบรรทัด + evidence +
   timestamp + บรรทัด `OBSERVER_CONFIRMED` ตาม G-OBS)
 
-## GT-200 CENSUS-NPC-LEVEL-LABEL-MULTI-SCENE-001  [PENDING -- โค้ดยังไม่ขึ้น `main`: PR #524 branch `claude/dazzling-volta-7ste68` · ห้ามบูตจนกว่า RECHECK ผ่าน]
+## GT-200 CENSUS-NPC-LEVEL-LABEL-MULTI-SCENE-001  [🟢 READY -- RECHECK **ผ่าน วัดเองโดย LANE-A (เจ้าของใบ) รอบ `mcf4qp` 2026-09-03T08:4x+07:00** บน `origin/main` (เซิร์ฟเวอร์ `f240ab4`): `git show origin/main:src/pirateforce_foundation/world_population_bg0006.py` มี `level=placement.identity.level` จริง (บรรทัด 210 · ตัวห่อคือ `world_census_level.leveled_npc_attr` บรรทัด 200) · ~~[PENDING -- โค้ดยังไม่ขึ้น `main`: PR #524 branch `claude/dazzling-volta-7ste68`]~~ · 🔴 ผู้เทสยังต้องรัน RECHECK เองก่อนบูตทุกครั้ง (ตัดสินด้วยเนื้อโค้ด ห้ามเทียบเลข commit)
+🟢 **บูตเดียวกับ `GT-210`/`GT-212` ได้และควรทำ** -- ทั้งสามใบเดินด้วย `/warp` เส้นทางเดียวกัน · 🔴 **กติกาลำดับข้อเดียว: ที่แต่ละฉาก ถ่ายภาพของใบนี้ให้เสร็จ "ก่อน" คลิกใคร** เพราะคำตอบของ `GT-210`/`GT-212` ส่ง roster ทับของเดิม]
 
 > เปิดโดย LANE-A รอบ `7ste68` 2026-09-02T02:55+07:00 ตามใบมอบหมาย `notes_to_chief/
 > 20260901_2358_CHIEF-TO-LANE-A-codex-gt192-lv1-census-level-encode-assigned.md`
@@ -10314,8 +10315,12 @@ highest `GT` ที่เปิดอยู่ก่อนใบนี้คื�
   4. ความต่างจากเซิร์ฟเวอร์จริงลง `REAL_SERVER_DIVERGENCE.tsv` · ไม่อ้างว่า PR merge แล้ว
 - RECHECK (ตัดสินด้วยเนื้อโค้ด ห้ามเทียบเลข commit) -- ต้องได้ hit จริง:
   ```
-  cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/world_population_bg0006.py | grep -n "level=placement.identity.level"
+  git -C pirate-force-server fetch origin
+  git -C pirate-force-server show origin/main:src/pirateforce_foundation/world_population_bg0006.py | findstr /C:"level=placement.identity.level"
   ```
+  🔴 **แก้รอบ `mcf4qp` (pf-adversary D3):** ฉบับเดิมเป็น `cd ... && ... | grep -n ...` ซึ่ง **รันบนเครื่องเจ้าของไม่ได้เลย**
+  -- PS 5.1 ไม่รับ `&&` และ `grep` ไม่มีบน Windows ⇒ ผู้เทสจะได้ error แล้วอ่านตามกฎของใบว่า "ยังไม่ merge ห้ามบูต"
+  ทั้งที่โค้ดอยู่บน `main` แล้ว · หนึ่งบรรทัด = หนึ่งคำสั่ง · รันจากโฟลเดอร์แม่ที่มี `pirate-force-server` อยู่ข้างใน
   ว่าง/พัง = PR #524 ยังไม่ merge ⇒ คง `PENDING` **ห้ามบูต** (เทส branch ก่อน merge ได้ ถ้าเปลี่ยน
   `origin/main` เป็น `origin/claude/dazzling-volta-7ste68` แล้วเขียนในผลว่าใช้ตัวไหน)
   🔴 **แก้คำสั่ง RECHECK 2026-09-02T04:5x+07:00 (LANE-A รอบ `2p4n3h`, เจ้าของใบเอง)**: เดิมค้นหา
@@ -10970,27 +10975,35 @@ nonclaim: ไม่พิสูจน์อะไรเกี่ยวกับ 
 sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้บน PS 5.1 · quote พาธ · ค่าคาดหวังต่อ build)
 
 
-## GT-210 CHOOSE-NPC-SCENE3-CLICK-ANSWER-001  [BLOCKED -- โค้ดยังไม่ขึ้น `main`: อยู่บน branch `claude/dazzling-volta-326kf4` เท่านั้น · ตัวบล็อกเดียวคือ merge (ไม่มีแฟล็ก ไม่แตะ `runtime.py`) · ห้ามบูตจนกว่า RECHECK ผ่าน]
+## GT-210 CHOOSE-NPC-SCENE3-CLICK-ANSWER-001  [🟢 READY -- RECHECK ผ่าน **วัดเองโดย LANE-A (เจ้าของใบ) รอบ `mcf4qp` 2026-09-03T08:3x+07:00** บน `origin/main` (สะพาน `d1c7eed` · เซิร์ฟเวอร์ `f240ab4`) · ~~[BLOCKED -- โค้ดยังไม่ขึ้น `main`: branch `claude/dazzling-volta-326kf4`]~~ กิ่งนั้น merge ไปแล้ว
+🔴 **ใบนี้ถูกเขียนใหม่หลายจุดในรอบ `mcf4qp` เพราะโลกเดินไปแล้ว ห้ามอ่านฉบับเก่าจาก git history แล้วเดินตาม:** เก้าเกาะที่ใบนี้เคยใช้เป็น "ตัวควบคุมเชิงลบ" **ตอบคลิกแล้วตั้งแต่รอบ `gwwpmr`** และฉาก 2 ก็ตอบแล้ว ⇒ ฉบับเก่าจะสั่งให้ผู้เทส **หยุดทั้งใบและรายงานว่าเสีย** ทั้งที่บิลด์ถูกต้อง และขั้นบูตข้อ 2 ของมันเป็นไปไม่ได้อีกแล้ว (`NO-RESULT` แน่นอน) ⇒ **บูตหนึ่งครั้งของเจ้าของจะสูญฟรี** · จุดที่แก้: ขั้น 2 · **ขั้น 9 ถูกลบทั้งข้อ** · เกณฑ์ (ก)/(ง)/(ง2)/(ซ) · FAIL branch · RECHECK (เขียนใหม่ให้รันได้บน PS 5.1)
+🟢 **บูตเดียวรวมกับ `GT-212` ได้และควรทำ** -- ใบนี้ (`/warp 3`) ก่อน แล้วค่อยเดินตาม `GT-212` (`/warp 4` ...)]
 
 > เปิดโดย LANE-A (WORLD) รอบ `326kf4` 2026-09-02T12:2x+07:00 · **LANE-A บริโภคผลเอง**
 > numbering: คำสั่งค้นหาตามกฎ ② คืน `209` (`RE-209`) ⇒ ใบนี้ `210`
 > บูต/DB/teardown ตาม `ATTENDED_SESSION_RUNBOOK.md` (teardown ปฏิเสธ boot stamp เก่ากว่า 420 นาที)
 > 🔴 **ใบนี้เคยร่างไว้ครอบสิบฉาก แล้วหดเหลือฉากเดียวก่อนลงคิว** — pf-adversary วัดบน dispatcher จริงว่า
 > อีกเก้าฉากจะเปิดเควสต์ Columbus ของพอร์ตรอยัลผิดเกาะไปด้วย ⇒ สายกันเก้าฉากนั้นไว้เอง (ดู background ข้อ 3)
+> 🔴 **ประวัติ ไม่ใช่สภาพวันนี้ (รอบ `mcf4qp`): เก้าฉากนั้นเปิดไปแล้วตั้งแต่รอบ `gwwpmr` หลัง scene guard ลง `runtime.py`**
 
 - objective: ข้อพิสูจน์เดียว -- **คลิกซ้ายหนึ่งครั้งบน NPC ในฉาก 3 (Spice Paradise) แล้วไคลเอนต์
   วาดคำตอบบนจอจริง** ที่เมื่อวานคลิกแล้วเซิร์ฟเวอร์เงียบสนิท (62 actor) · ตัวควบคุมอยู่ในข้อพิสูจน์
   เดียวกัน ไม่ใช่ข้อที่สอง: คำตอบส่ง roster **ทั้งชุด** ใหม่ ⇒ actor ตัวอื่นต้องไม่เปลี่ยนหน้าตา ไม่หายเลเวล
 - background:
   1. ของใหม่: `src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_roster_scenes.py`
-     `production_allowed = True` · ลงทะเบียน ChooseNPC responder **ให้ฉาก 3 ฉากเดียว**
+     `production_allowed = True` · ~~ลงทะเบียน ChooseNPC responder **ให้ฉาก 3 ฉากเดียว**~~
+     **แก้รอบ `mcf4qp`: วันนี้โมดูลเดียวกันลงทะเบียนสิบเอ็ดฉาก** (3,4,5,6,7,8,9,10,11,126,130) ·
+     **ใบนี้ยังตัดสินฉาก 3 ฉากเดียวเหมือนเดิม** ฉากอื่นเป็นของ `GT-212`/`GT-217`
   2. การลงทะเบียน responder คือสิ่งเดียวกับที่ **arm census membership**
      (`lane_a_scene_census._membership_if_answerable`) ⇒ ฉาก 3 เพิ่งมี `population_indices` จริง
-  3. 🔴 **ฉาก 4,5,6,7,8,9,10,11,130 ถูกกันไว้โดยตั้งใจ** (`LANE_A_CHOOSE_NPC_ROSTER_SKIPPED
-     ... reason=columbus_placement_index_collision_needs_runtime_scene_guard`) เพราะ
-     `runtime.py` สาขา Columbus อ่าน `population_indices` โดยไม่ถามว่าอยู่ฉากไหน และ actor identity
-     บนสายไม่มีส่วนของฉากเลย ⇒ ฉากที่มี placement index 1 จะยิงเควสต์ 3021 ผิดเกาะ
-     **คลิกบนเก้าฉากนั้นต้องยังเงียบ** และนั่นคือตัวควบคุมเชิงลบที่ดีที่สุดของใบนี้ (ขั้น 9)
+  3. ~~🔴 **ฉาก 4,5,6,7,8,9,10,11,130 ถูกกันไว้โดยตั้งใจ** (`LANE_A_CHOOSE_NPC_ROSTER_SKIPPED
+     ... reason=columbus_placement_index_collision_needs_runtime_scene_guard`) ... **คลิกบนเก้าฉากนั้นต้องยังเงียบ**
+     และนั่นคือตัวควบคุมเชิงลบที่ดีที่สุดของใบนี้ (ขั้น 9)~~
+     🔴 **ล้าสมัยตั้งแต่รอบ `gwwpmr` -- แก้รอบ `mcf4qp` (วัดบน `origin/main` แล้ว):** scene guard ของ
+     สาขา Columbus ลง `runtime.py` แล้ว ⇒ เก้าฉากนั้น **ลงทะเบียนและตอบคลิกแล้ว**
+     (`scenes_this_lane_answers_for()` = `(3, 4, 5, 6, 7, 8, 9, 10, 11, 126, 130)` · `skipped_scenes()` = `()`)
+     ⇒ **ห้ามใช้เก้าฉากนั้นเป็นตัวควบคุมเชิงลบอีก** และการตอบของมันเป็นเรื่องของ `GT-212` ไม่ใช่ใบนี้ ·
+     ความปลอดภัยของเก้าฉาก **ยืมมาจาก conjunct เดียวใน `runtime.py`** ไม่ใช่การแก้ index space (ดู `GT-212` nonclaims 4)
   4. 🔴 **สิ่งที่จะทำให้เสียรอบถ้าไม่รู้:** วาปข้ามฉากล้าง `last_target_pos = None` และ responder
      ปฏิเสธเมื่อค่านี้เป็น `None` ⇒ **หลังวาปถึง ต้องเดินหนึ่งก้าว (`W`/`S`) ก่อนคลิก** ·
      คลิกก่อนเดิน = เงียบ และนั่นคือ **ความผิดของขั้นตอน ไม่ใช่ผลวัด** ให้เดินแล้วคลิกใหม่
@@ -11005,9 +11018,21 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 - steps:
   1. RECHECK ผ่านก่อน · บูตเซิร์ฟเวอร์ใหม่สด (ห้ามใช้ตัวที่เพิ่งมีไคลเอนต์ถูกฆ่าค้าง -- เซสชันจะค้าง
      และไคลเอนต์ตัวถัดไปจะ "connecting" ตลอดกาล) แล้วบูตไคลเอนต์ · ล็อกอิน GM
-  2. ตอนบูต ต้องเห็น **หนึ่งบรรทัด** `LANE_HOOK_REGISTERED ...choose_npc_responder:3`
-     และ **เก้าบรรทัด** `LANE_A_CHOOSE_NPC_ROSTER_SKIPPED` (ฉาก 4,5,6,7,8,9,10,11,130)
-     ไม่ครบตามนี้ = บิลด์ผิด **หยุด ไม่ต้องคลิก** ทั้งใบ `NO-RESULT`
+  2. ~~ตอนบูต ต้องเห็น **หนึ่งบรรทัด** `LANE_HOOK_REGISTERED ...choose_npc_responder:3`
+     และ **เก้าบรรทัด** `LANE_A_CHOOSE_NPC_ROSTER_SKIPPED` (ฉาก 4,5,6,7,8,9,10,11,130)~~
+     **แก้รอบ `mcf4qp` (ฉบับเก่าเป็นไปไม่ได้แล้ว = `NO-RESULT` แน่นอน):** ตอนบูตต้องเห็น
+     `LANE_HOOK_REGISTERED ...lane_a_choose_npc_roster_scenes choose_npc_responder:3`
+     **บรรทัดนี้บรรทัดเดียวคือเงื่อนไขหยุดของขั้นนี้** -- ไม่เห็น = บิลด์ผิด **หยุด ไม่ต้องคลิก** ทั้งใบ `NO-RESULT`
+     🔴 **สามอย่างนี้ปกติ ห้ามอ่านว่าบิลด์ผิด และห้ามหยุดใบเพราะมัน** (วัดเองรอบ `mcf4qp`):
+     (i) โมดูลเดียวกันพิมพ์ `choose_npc_responder:<n>` **หลายบรรทัด** (วันนี้สิบเอ็ด: 3,4,5,6,7,8,9,10,11,126,130)
+         จำนวนจะมากขึ้นหรือน้อยลงในอนาคตก็ได้ **ตราบใดที่ฉาก 3 อยู่** -- ใบนี้ตัดสินฉาก 3 ฉากเดียว
+     (ii) `LANE_A_CENSUS_SKIPPED scene=1/scene=2 ... reason=reserved_by_a_runtime_branch` -- **คนละโทเคน**
+     (iii) `LANE_HOOK_REGISTERED ...lane_a_choose_npc_scene1 choose_npc_responder:1` ตามด้วย
+         `LANE_HOOK_DISCOVERY ...lane_a_choose_npc_scene1 SKIPPED_NOT_PRODUCTION_ALLOWED` -- decorator พิมพ์ก่อน
+         แล้วถูกถอนทีหลัง ⇒ **ไม่ใช่เกตรั่ว**
+     🔴 `LANE_A_CHOOSE_NPC_ROSTER_SKIPPED` **ของฉากอื่นที่ไม่ใช่ 3** (กฎ `no_census_sources_row` / `spliced_source_*`
+     ยังมีชีวิต) ⇒ **จดบรรทัดนั้นไว้แล้วเดินต่อ ไม่ใช่เหตุให้หยุด** · เจอบรรทัดที่ `scene=3` เมื่อไหร่ **นั่น**
+     คือบิลด์ผิดของใบนี้ ⇒ หยุด `NO-RESULT` (คัดลอก `reason=` มาด้วย)
   3. คลิกช่องแชท **ยืนยัน focus จริง** (พิมพ์ตอนไม่ focus = ฮอตคีย์) · `/warp 3` · Enter · รอ ~3 วิ
      (`/warp` เป็นคำสั่ง GM **ไม่ใช่** ตัวยิงแชท 12 ตัวอักษร -- ห้ามเติมตัวอักษรให้ครบ 12)
   4. **เดินหนึ่งก้าว** `W` หรือ `S` (ก้าวนี้จำเป็น ดู background ข้อ 4)
@@ -11019,25 +11044,51 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
      ถ้าไม่มี · อ่านสีจากภาพเต็มเท่านั้น (ห้าม contact sheet/ภาพย่อ/วิดีโอ) · **จดสีอย่างเดียว
      ห้ามอนุมานสาเหตุ** (`RE-067`)
   8. ทำซ้ำข้อ 4-7 อีกสองครั้งกับ NPC คนละตัวในฉาก 3 (รวมสามคลิก) เพื่อดูว่าคลิกที่สองและสามยังตอบ
-  9. **ตัวควบคุมเชิงลบสองชั้น (ทำทั้งคู่):**
-     (ก) ฉาก 2 -- คลิก NPC หนึ่งครั้ง คาดว่า **เงียบ** (ไม่มี responder และรอบนี้ไม่ได้ทำให้มี)
-     (ข) ฉาก 4 -- `/warp 4` เดินหนึ่งก้าว แล้วคลิก NPC หนึ่งครั้ง คาดว่า **เงียบ**
-     🔴 ถ้า (ข) ตอบ หรือมีบทสนทนา/เควสต์ใด ๆ โผล่ที่ฉาก 4 = **หยุดทั้งใบทันที รายงานทันที**
-     นั่นแปลว่าประตูกันชนของโมดูลไม่ทำงานและผู้เล่นอาจถูกวาปออกจากเกาะ
+  9. ~~**ตัวควบคุมเชิงลบสองชั้น (ทำทั้งคู่):** (ก) ฉาก 2 -- คลิก NPC หนึ่งครั้ง คาดว่า **เงียบ** ·
+     (ข) ฉาก 4 -- `/warp 4` เดินหนึ่งก้าว แล้วคลิก NPC หนึ่งครั้ง คาดว่า **เงียบ** ·
+     🔴 ถ้า (ข) ตอบ หรือมีบทสนทนา/เควสต์ใด ๆ โผล่ที่ฉาก 4 = **หยุดทั้งใบทันที รายงานทันที**~~
+     🔴 **ตัวควบคุมสองข้อนี้ตายแล้วทั้งคู่ -- วัดบน `origin/main` รอบ `mcf4qp`:** ฉาก 2 มี responder ของตัวเอง
+     (`lane_a_choose_npc_scene2` · `production_allowed = True` · ใบของมันคือ `GT-214`) และฉาก 4 อยู่ในสิบเอ็ดฉาก
+     ที่ตอบแล้ว (`GT-212`) ⇒ **ทั้งสองฉากตอบคือพฤติกรรมที่ถูกต้องของวันนี้ ไม่ใช่ FAIL และไม่ใช่เหตุให้หยุดใบ**
+     🔴 **ใบนี้ไม่มีตัวควบคุมเชิงลบระดับ attended และไม่ต้องมี -- ขั้น 9 ถูกลบทั้งข้อ (รอบ `mcf4qp`)**
+     ร่างแรกของรอบนี้ใส่ตัวควบคุมใหม่ไว้ (ไป `/warp 1` พอร์ตรอยัลแล้วดูว่าเงียบ) · **pf-adversary วัดแล้วว่ามันแย่กว่าไม่มี**
+     สามเหตุผล ทุกข้อวัดจากซอร์ส ไม่ใช่ความเห็น:
+     1. **มันผ่านฟรี** -- `production_allowed = False` ทำให้ `_withdraw()` ลบฉาก 1 ออกจากรีจิสทรี ⇒ จุดเรียกได้ `None`
+        ⇒ ทั้ง `LANE_HOOK_FIRED ...scene1` และ `LANE_A_CHOOSE_NPC_SCENE1_ANSWERED` **พิมพ์ไม่ได้ในทุกกรณี**
+        และ RECHECK ก่อนบูตก็ยืนยันค่าเดียวกันนี้ไปแล้วจากซอร์สชุดเดียวกับที่เซิร์ฟเวอร์บูต ⇒ ไม่ได้ข้อมูลใหม่แม้แต่บิตเดียว
+     2. **ไม่มีอะไรพิสูจน์ว่าคลิกไปถึงสาขา** -- คลิกโดนพื้น/ช่องแชทยังโฟกัส/`chosen_identities` ว่าง ก็เงียบเหมือนกัน
+        ⇒ ผู้เทสจด "เงียบ = ผ่าน" ได้ทั้งที่ไม่เคยคลิกถึงอะไรเลย
+     3. 🔴 **มันจะฆ่าเกณฑ์ความปลอดภัยของ `GT-212` ในบูตรวมที่ใบนี้เองแนะนำ** -- คลิกโดนโคลัมบัสตัวจริงที่พอร์ตรอยัล
+        ทำให้แลตช์ `columbus_quest3021_conversation_sent` ติดทั้งเซสชัน ⇒ เกณฑ์ (ง) ของ `GT-212` และโทเคน (B) ของ
+        `GT-213` **ผ่านโดยอัตโนมัติ ต่อให้ scene guard ถูกลบทิ้งไปแล้ว** (กฎเดียวกันนี้เขียนอยู่ในกล่องแดงของ `GT-213`)
+     ⇒ **สิ่งที่เกตฉาก 1 ต้องการ พิสูจน์แบบ headless เสร็จแล้ว**: RECHECK ข้อ 3 (`production_allowed` = `False`)
+     บวกบรรทัดบูต `LANE_HOOK_DISCOVERY ...lane_a_choose_npc_scene1 SKIPPED_NOT_PRODUCTION_ALLOWED`
+     **ไม่ต้องใช้ตาคน ไม่ต้องเสียเวลาผู้เทสสองนาที และไม่ต้องเสี่ยงแลตช์โคลัมบัส**
   10. ตัวเช็ค NO-CRASH: **คลิกขวาลากหมุนกล้อง** เท่านั้น · ห้ามใช้ `Q`/`E` เป็นตัวเช็คนี้
   🔴 **ขอบเขต:** คลิกเพื่อ **เลือก** เท่านั้น -- **ห้ามตีมอนสเตอร์ ห้ามใช้สกิล ห้ามคลิกโจมตี** ทุกฉาก
   (`NOW.md`: ใบตีมอนทุกใบรอ P-1 และ P-2 ปิดก่อน) · ถ้าเผลอตี ให้บันทึกไว้ในผล
 - pass criteria (สองชั้น แยกเด็ดขาด · ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น):
     wire/DB (headless พิสูจน์ได้ ไม่ต้องมีตาคน · grep คอนโซลรวม `2>&1`):
-      (ก) ตอนบูต: หนึ่งบรรทัด `LANE_HOOK_REGISTERED
+      (ก) ตอนบูต: บรรทัด `LANE_HOOK_REGISTERED
           pirateforce_foundation.lane_hooks.lane_a_choose_npc_roster_scenes
-          choose_npc_responder:3` และเก้าบรรทัด `LANE_A_CHOOSE_NPC_ROSTER_SKIPPED`
+          choose_npc_responder:3` ~~และเก้าบรรทัด `LANE_A_CHOOSE_NPC_ROSTER_SKIPPED`~~
+          **แก้รอบ `mcf4qp`: และ `LANE_A_CHOOSE_NPC_ROSTER_SKIPPED` ต้องไม่มีบรรทัดที่ `scene=3`**
+          (วันนี้วัดได้ศูนย์บรรทัดทุกฉาก · บรรทัดของฉากอื่นให้จดแล้วเดินต่อ ดูขั้น 2) ·
+          (บรรทัด `LANE_A_CENSUS_SKIPPED` ของฉาก 1/2 เป็นคนละโทเคน ปกติ)
       (ข) ทุกคลิกในฉาก 3: `LANE_HOOK_FIRED ...lane_a_choose_npc_roster_scenes
           scene_choose_npc_responder`
       (ค) ทุกคลิกในฉาก 3: `LANE_A_CHOOSE_NPC_SCENE3_ANSWERED placement=<n> visible=<n> omitted=0`
           **[คำทำนาย ไม่ใช่ผลวัด]** `omitted=0` ทุกครั้ง · `visible` = จำนวน actor ที่สำมะโนขาเข้าส่ง
-      (ง) ที่ฉาก 4: **ไม่มี** `LANE_A_CHOOSE_NPC_SCENE4_ANSWERED` และ **ไม่มี**
-          `core_request_014_columbus_npc_conversation_sent_once`
+      (ง) ~~ที่ฉาก 4: **ไม่มี** `LANE_A_CHOOSE_NPC_SCENE4_ANSWERED`~~ **แก้รอบ `mcf4qp`:** ฉาก 4 ตอบแล้ว
+          เป็นเรื่องของ `GT-212` ⇒ ข้อนี้เหลือสองท่อนที่ยังจริง: **ตลอดเวลาที่ยืนอยู่ฉาก 3 ต้องไม่มี**
+          `core_request_014_columbus_npc_conversation_sent_once` และ **ไม่มี** label
+          `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE`
+      (ง2) เกตฉาก 1 (แทนตัวควบคุมที่ถูกลบในขั้น 9): ตอนบูตต้องเห็น
+          `LANE_HOOK_DISCOVERY ...lane_a_choose_npc_scene1 SKIPPED_NOT_PRODUCTION_ALLOWED`
+          🔴 **บรรทัด `LANE_HOOK_REGISTERED ...lane_a_choose_npc_scene1 choose_npc_responder:1` มีอยู่จริง
+          และปกติ** -- decorator พิมพ์ตอนลงทะเบียน แล้ว `_withdraw()` ถอนทีหลัง ⇒ **เห็นบรรทัดนี้ไม่ใช่เกตรั่ว
+          และไม่ใช่เหตุให้หยุดใบ** (วัดรอบ `mcf4qp`) · ข้อนี้พิสูจน์แบบ headless ล้วน ไม่ต้องคลิกอะไรเลย
+          (ชื่อข้อเป็น `ง2` เพราะ `(จ)` ถูกใช้แล้วในชั้น client-observable ข้างล่าง)
       ชั้นนี้พิสูจน์แค่ว่า **เซิร์ฟเวอร์ประกอบและส่งไบต์** ไม่พิสูจน์อะไรที่ผู้เล่นเห็นเลย
     client-observable (ต้องมีคนนั่งหน้าจอ · **ชั้นนี้เท่านั้นที่ตัดสินใบ**):
       (จ) ตัวที่ถูกคลิก **หันมาหาตัวละครเรา** เทียบ `AFTER` กับ `BEFORE`
@@ -11045,7 +11096,8 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
           (`GT-030-R3` เคยวัดได้แบบนั้นกับ actor type 4)
       (ช) actor ตัวอื่นในเฟรมเหมือนเดิมทุกตัว: อยู่ครบ · หน้าตาเดิม · ป้าย `LV` ไม่หายและไม่กลายเป็น `1` ·
           ไม่มีใครกลายเป็นคนอื่น
-      (ซ) ที่ฉาก 4 ไม่มีอะไรเกิดขึ้นบนจอเลยตอนคลิก
+      ~~(ซ) ที่ฉาก 4 ไม่มีอะไรเกิดขึ้นบนจอเลยตอนคลิก~~ **ตายไปกับตัวควบคุมเก่า (รอบ `mcf4qp`) และไม่มีข้อแทน**
+          -- ใบนี้ไม่มีตัวควบคุมเชิงลบระดับ attended อีกแล้ว (เหตุผลสามข้อในขั้น 9) · ชั้นนี้ตัดสินฉาก 3 อย่างเดียว
       **ผลลบมีค่าเท่าผลบวก** -- ดู FAIL branch
 - FAIL branch:
   - พิมพ์ `..._ANSWERED` ครบแต่ **จอไม่ขยับเลย** ⇒ คำตอบที่ใบนี้มีไว้ตัดสิน: **เซิร์ฟเวอร์ตอบแล้ว
@@ -11054,28 +11106,45 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
   - มี `LANE_HOOK_FIRED` แต่ไม่มี `..._ANSWERED` ⇒ responder ปฏิเสธ · เช็คก่อนว่าเดินหนึ่งก้าวจริง
     (ข้อ 4) · ถ้าเดินแล้วยังไม่มี = finding จริงเรื่อง membership/identity
   - ไม่มี `LANE_HOOK_FIRED` ตอนคลิก ⇒ คลิกไม่ถึงสาขานี้ = `NO-RESULT`
-  - ฉาก 4 ตอบ หรือมีเควสต์โผล่ ⇒ **หยุดทั้งใบ** รายงานทันที (ดู steps ข้อ 9ข)
+  - ~~ฉาก 4 ตอบ หรือมีเควสต์โผล่ ⇒ **หยุดทั้งใบ** รายงานทันที (ดู steps ข้อ 9ข)~~
+    🔴 **ยกเลิกในรอบ `mcf4qp`: ฉาก 4 ตอบคือของถูกต้องวันนี้** (`GT-212`) · เหตุให้หยุดใบเหลือข้อเดียว:
+    **เควสต์/บทสนทนาโผล่ขณะยืนอยู่ฉาก 3** (หรือรู้ตัวว่าอยู่คนละแมพหลังคลิกที่ฉาก 3)
 - nonclaims:
   1. ไม่พิสูจน์ว่าสำมะโนขาเข้าถูก/ครบ -- `GT-192` (ห้ามแก้) · ไม่พิสูจน์กลไก `/warp` เอง
   2. ไม่พิสูจน์ว่าเลข `LV` ถูก -- `GT-200` (ห้ามแก้) · ใบนี้ดูแค่ว่า **ป้ายไม่หาย** หลังคลิก
   3. ไม่พูดเรื่องความหมายของสีป้าย -- `RE-067`/P-2 ยังเปิด · จดสีอย่างเดียว
-  4. ไม่พิสูจน์อะไรของฉาก 2 หรือฉาก 4 นอกจากความเงียบ (ตัวควบคุม) · ไม่ตัดสินฉาก 1/14
-  5. **ผลของใบนี้ไม่ใช่ใบอนุญาตให้เปิดเก้าฉากที่ถูกกัน** -- ประตูนั้นเปิดได้ก็ต่อเมื่อ `runtime.py`
-     มี scene guard บนสาขา Columbus แล้วเท่านั้น (CORE-REQUEST ของรอบ `326kf4` ถึง chief)
+  4. ~~ไม่พิสูจน์อะไรของฉาก 2 หรือฉาก 4 นอกจากความเงียบ (ตัวควบคุม)~~ **แก้รอบ `mcf4qp`:** ไม่ตัดสินฉาก 2
+     (`GT-214`) ฉาก 4 และอีกแปดเกาะ (`GT-212`) ฉาก 14 (`GT-134`) หรือฉาก 126 (`GT-217`) ·
+     ที่ฉาก 1 ตัดสินอย่างเดียวคือ **เกต `production_allowed` ยังกันจริงที่ชั้นคอนโซล** ไม่ตัดสินสิ่งที่จอวาด
+  5. ~~**ผลของใบนี้ไม่ใช่ใบอนุญาตให้เปิดเก้าฉากที่ถูกกัน** -- ประตูนั้นเปิดได้ก็ต่อเมื่อ `runtime.py`
+     มี scene guard บนสาขา Columbus แล้วเท่านั้น (CORE-REQUEST ของรอบ `326kf4` ถึง chief)~~
+     **เกิดขึ้นแล้วในรอบ `gwwpmr`: scene guard ลง `runtime.py` และเก้าฉากเปิดไปแล้ว** ⇒ ข้อนี้เป็นประวัติ
+     ไม่ใช่เงื่อนไขที่ยังบังคับ · สิ่งที่ยังจริง: ใบนี้ไม่ได้พิสูจน์ว่า index space เป็น scene-aware แล้ว **ไม่ใช่**
   6. ไม่พิสูจน์คอมแบต/aggro/HP ใด ๆ · ไม่พิสูจน์ว่าพื้นที่ยืนของ placement ดี
   7. ไม่พิสูจน์ว่าอะไรรอดข้าม relog · ความต่างจากเซิร์ฟเวอร์จริงลง `REAL_SERVER_DIVERGENCE.tsv` แถวละข้อ
-- RECHECK (ตัดสินด้วยเนื้อโค้ด ห้ามเทียบเลข commit) -- ต้องได้ hit จริงทั้งสองบรรทัด:
+- RECHECK ~~(ต้องได้ hit จริงทั้งสองบรรทัด · `grep -n "_columbus_collision_scenes"`)~~
+  **เขียนใหม่รอบ `mcf4qp`** (ตัดสินด้วยเนื้อโค้ด ห้ามเทียบเลข commit · ข้อเก่าข้อที่สองปักฟังก์ชันที่
+  **ยังอยู่แต่กฎ skip ของมันถูกขีดฆ่าไปแล้ว** ⇒ hit ของมันไม่ได้แปลว่าอะไรอีก) -- ต้องผ่านครบสามข้อ:
+  🔴 **หนึ่งบรรทัด = หนึ่งคำสั่ง · ไม่มี `&&` และไม่มีวงเล็บ (PS 5.1 ไม่รับ `&&` และ `( )` ไม่ใช่ subshell บน Windows)**
+  · รันจากโฟลเดอร์แม่ที่มี `pirate-force-server` อยู่ข้างใน · พาธมีช่องว่างให้ครอบด้วยเครื่องหมายคำพูด
   ```
-  cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_roster_scenes.py | grep -n "production_allowed = True"
-  cd pirate-force-server && git show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_roster_scenes.py | grep -n "_columbus_collision_scenes"
+  git -C pirate-force-server fetch origin
+  git -C pirate-force-server show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_roster_scenes.py | findstr /C:"production_allowed = True"
+  py -3 -c "import sys; sys.path.insert(0, r'pirate-force-server\src'); from pirateforce_foundation.lane_hooks import lane_a_choose_npc_roster_scenes as m; print(m.scenes_this_lane_answers_for()); print(m.skipped_scenes())"
+  py -3 -c "import sys; sys.path.insert(0, r'pirate-force-server\src'); from pirateforce_foundation.lane_hooks import lane_a_choose_npc_scene1 as m; print('scene1 production_allowed =', m.production_allowed)"
   ```
-  ว่าง/พัง = ยังไม่ merge ⇒ คง `[BLOCKED]` **ห้ามบูต** · ทดสอบ branch ก่อน merge ได้ ถ้าเปลี่ยน
-  `origin/main` เป็น `origin/claude/dazzling-volta-326kf4` แล้ว **เขียนในผลว่าใช้ตัวไหน**
+  ข้อ 1 ต้องเจอจริง · ข้อ 2 ต้องมี **ฉาก 3** อยู่ในรายการ และ `skipped_scenes()` = `()` (วัดรอบ `mcf4qp`:
+  `(3, 4, 5, 6, 7, 8, 9, 10, 11, 126, 130)`) · ข้อ 3 ต้องพิมพ์ **`False`**
+  (อ่าน **บรรทัดสุดท้าย** -- ก่อนหน้ามีบรรทัด `LANE_HOOK_REGISTERED`/`LANE_A_CENSUS_SKIPPED` ของ import ตามปกติ)
+  -- ถ้าเป็น `True` แปลว่ามีคนพลิกเกตฉาก 1
+  ⇒ **มีคนพลิกเกตฉาก 1 โดยไม่ได้บอก** ⇒ เขียนลงผลหนึ่งบรรทัดแล้วเดินต่อ (เกณฑ์ (ง2) เป็นการบันทึก ไม่ใช่เงื่อนไขหยุดของใบนี้)
+  🔴 คำสั่งที่ไม่เจอ **ไม่พิมพ์ `0`** มันไม่พิมพ์อะไรเลย ⇒ "ไม่มีบรรทัดออกมา" = ไม่ผ่าน
 - links: `lane_hooks/lane_a_choose_npc_roster_scenes.py` · `lane_hooks/lane_a_scene_census.py`
   (`_membership_if_answerable`) · `lane_hooks/lane_a_choose_npc_scene14.py` · `GT-192` (เส้นทางวาป) ·
   `GT-200` (ป้าย LV) · `GT-134` (ฉาก 14) · `RE-067` (สีป้าย)
 - result: (ผู้เทสกรอก: PASS/FAIL/NO-RESULT · ภาพ `S03-BEFORE`/`S03-AFTER` (สามคลิก) ·
-  บรรทัดสีป้ายครบ · บรรทัดคอนโซลสี่ชนิด · ผลตัวควบคุมฉาก 2 และฉาก 4 · timestamp +07:00 ·
+  บรรทัดสีป้ายครบ · บรรทัดคอนโซลสี่ชนิด · ~~ผลตัวควบคุมฉาก 2 และฉาก 4~~ **(ตัวควบคุมถูกลบรอบ `mcf4qp`
+  -- แทนด้วยบรรทัดบูตของเกณฑ์ (ง2) ซึ่งคัดลอกมาแปะได้เลย)** · timestamp +07:00 ·
   `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
 
 **ผู้เปิดใบ: LANE-A (WORLD) รอบ `326kf4` 2026-09-02T12:2x+07:00 -- LANE-A บริโภคผลใบนี้เอง**
@@ -11216,7 +11285,7 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
 
 **ผู้เปิดใบ: LANE-A (WORLD) รอบ `1d6rta` 2026-09-02T13:4x+07:00 -- LANE-A บริโภคผลใบนี้เอง**
 
-## GT-212 CHOOSE-NPC-NINE-ROSTER-ISLANDS-CLICK-ANSWER-001  [BLOCKED -- โค้ดยังไม่ขึ้น `main`: อยู่บน branch `claude/laughing-archimedes-gwwpmr` เท่านั้น · ตัวบล็อกเดียวคือ merge (ไม่มีแฟล็ก scenario) · ห้ามบูตจนกว่า RECHECK ผ่านครบสามข้อ ⇒ แล้วจึงเลื่อนเป็น `READY`]
+## GT-212 CHOOSE-NPC-NINE-ROSTER-ISLANDS-CLICK-ANSWER-001  [🟢 READY -- RECHECK ผ่านครบสามข้อ **วัดเองโดย LANE-A (เจ้าของใบ) รอบ `mcf4qp` 2026-09-03T08:3x+07:00** บน `origin/main` (สะพาน `d1c7eed` · เซิร์ฟเวอร์ `f240ab4`): ข้อ 1 `production_allowed = True` เจอจริง (บรรทัด 329) · ข้อ 2 พิมพ์ `(3, 4, 5, 6, 7, 8, 9, 10, 11, 126, 130)` + `skipped = ()` · ข้อ 3 `97 passed, 258 subtests` · ~~[BLOCKED -- โค้ดยังไม่ขึ้น `main`: อยู่บน branch `claude/laughing-archimedes-gwwpmr` เท่านั้น]~~ กิ่งนั้น merge ไปแล้ว · 🔴 **ผู้เทสยังต้องรัน RECHECK เองก่อนบูตทุกครั้ง** · 🟢 **บูตเดียวรวมกับ `GT-210` ได้และควรทำ** (`/warp 3` ของ `GT-210` ก่อน แล้วค่อย `/warp 4`)]
 
 > เปิดโดย LANE-A (WORLD) รอบ `gwwpmr` 2026-09-02T15:55+07:00 · **LANE-A บริโภคผลเอง**
 > numbering: shared counter กับ `CLIENT_RE_QUEUE.md` -- ณ วันเปิด highest `GT` = 211, highest `RE` = 210
@@ -11229,12 +11298,23 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
   พอร์ตรอยัล และไม่ย้ายผู้เล่นไปแมพอื่น** (ปลายทางที่กลัวคือฉาก 17 ซึ่ง registry เขียน
   `login_entry_allowed: false`) · ฉาก 3 (Spice Paradise) เป็นของ `GT-210` **ไม่ใช่ใบนี้**
 - PRECONDITION / RECHECK (ต้องผ่านครบสามข้อจึงเลื่อนเป็น `READY` · ตัดสินด้วยเนื้อโค้ด ห้ามเทียบเลข commit):
+  🔴 **แก้รอบ `mcf4qp`: หนึ่งบรรทัด = หนึ่งคำสั่ง ไม่มี `&&` ไม่มีวงเล็บ** (PS 5.1 ไม่รับ `&&` · `( )` ไม่ใช่ subshell
+  บน Windows ⇒ ฉบับเดิมพังทั้งสามบรรทัดและผู้เทสจะอ่านว่า "ยังไม่ merge" ทั้งที่ merge แล้ว) ·
+  สองบรรทัดแรกรันจากโฟลเดอร์แม่ · บรรทัด `pytest` รันจากในรีโปเซิร์ฟเวอร์
   ```
-  (cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_roster_scenes.py | findstr /C:"production_allowed = True")
-  (cd pirate-force-server && py -3 -c "import sys; sys.path.insert(0,'src'); from pirateforce_foundation.lane_hooks import lane_a_choose_npc_roster_scenes as m; print(m.scenes_this_lane_answers_for()); print(m.skipped_scenes())")
-  (cd pirate-force-server && py -3 -m pytest tests/test_lane_a_choose_npc_roster_scenes.py tests/test_columbus_quest_dispatch_wiring.py -q)
+  git -C pirate-force-server fetch origin
+  git -C pirate-force-server show origin/main:src/pirateforce_foundation/lane_hooks/lane_a_choose_npc_roster_scenes.py | findstr /C:"production_allowed = True"
+  py -3 -c "import sys; sys.path.insert(0, r'pirate-force-server\src'); from pirateforce_foundation.lane_hooks import lane_a_choose_npc_roster_scenes as m; print(m.scenes_this_lane_answers_for()); print(m.skipped_scenes())"
+  cd pirate-force-server
+  py -3 -m pytest tests/test_lane_a_choose_npc_roster_scenes.py tests/test_columbus_quest_dispatch_wiring.py -q
   ```
-  ข้อ 1 ต้องเจอจริง · ข้อ 2 ต้องพิมพ์ **ครบสิบฉาก** `(3, 4, 5, 6, 7, 8, 9, 10, 11, 130)` และ skipped = `()` ·
+  ข้อ 1 ต้องเจอจริง · ข้อ 2 ~~ต้องพิมพ์ **ครบสิบฉาก** `(3, 4, 5, 6, 7, 8, 9, 10, 11, 130)`~~ **แก้รอบ `mcf4qp`:
+  ต้องพิมพ์ `(3, 4, 5, 6, 7, 8, 9, 10, 11, 126, 130)` พอดี และ `skipped` = `()`** -- ฉาก **126** (Bg3001 Atlantis)
+  เข้ามาทีหลังใบนี้ (รอบ `gx7xtp`) และ **ไม่ใช่ขอบเขตของใบนี้** (ของมันคือ `GT-217`) ⇒ เห็น 126 **ไม่ใช่บิลด์ผิด**
+  🔴 **เป็นเซตเป๊ะโดยตั้งใจ (pf-adversary D7):** ถ้าเกณฑ์เขียนว่า "ขอแค่เก้าฉากของใบอยู่ครบ" วันที่มีเลนเพิ่มฉากใหม่
+  ที่มี placement index 1 เข้ามาโดย conjunct ใน `runtime.py` ยังไม่ครอบ ผู้เทสจะอ่านว่าผ่านแล้วบูตไปคลิกโดยไม่มีใครตรวจฉากนั้นเลย
+  ⇒ **เจอ id ที่ไม่อยู่ในเซตนี้ = หยุดก่อนบูต รายงานให้เจ้าของใบตรวจก่อน ไม่ใช่ FAIL และไม่ใช่ผ่าน** ·
+  เก้าฉากของใบนี้คือ 4,5,6,7,8,9,10,11,130 ต้องอยู่ครบเสมอ ·
   ข้อ 3 ต้อง **เขียวทั้งชุด** (ในนั้นมี `TheNineAreSafeOnlyBecauseTheRuntimeGuardStandsTests` และ
   `ColumbusSceneGuardTests` -- สองตัวนี้คือของที่พิสูจน์ scene guard แบบ headless ไปแล้ว) ·
   ว่าง/แดง/ขาดฉาก = ยังไม่ merge ⇒ คง `[BLOCKED]` **ห้ามบูต ห้ามเสียเวลาผู้เทสแม้แต่นาทีเดียว** ·
@@ -11264,6 +11344,10 @@ sha256 discriminator ของ `RE-164` · RECHECK ที่รันได้�
      โดยไม่มีเซิร์ฟเวอร์ (ตายใน ~3.5 นาที) · ล็อกอิน GM เข้าฉากจริงให้เสร็จก่อน
   3. ตอนบูต: ต้อง **ไม่มี** `LANE_A_CHOOSE_NPC_ROSTER_SKIPPED` แม้แต่บรรทัดเดียว · มีบรรทัดใด = บิลด์ผิด
      **หยุด ไม่ต้องคลิก** ทั้งใบ `NO-RESULT` (คัดลอก `scene=`/`reason=` มาด้วย)
+     🔴 **เพิ่มรอบ `mcf4qp` (วัดแล้ว):** ตอน import จะมีบรรทัด **คนละโทเคน** โผล่มาด้วยเสมอ --
+     `LANE_A_CENSUS_SKIPPED scene=1 source=bg0001_census reason=reserved_by_a_runtime_branch`
+     และ `... scene=2 source=bg0002_roster ...` · **สองบรรทัดนี้ปกติ ไม่เกี่ยวกับใบนี้ และไม่ใช่บิลด์ผิด**
+     ⇒ เกรปด้วยสตริงเต็ม `LANE_A_CHOOSE_NPC_ROSTER_SKIPPED` เท่านั้น **ห้ามเกรปคำว่า `SKIPPED` ลอย ๆ**
   4. คลิกช่องแชท **ยืนยัน focus จริง** (พิมพ์ตอนไม่ focus = ฮอตคีย์) · `/warp 4` · Enter · รอ ~3 วิ
      (`/warp` คือคำสั่ง GM **ไม่ใช่** ตัวยิงแชท 12 ตัวอักษร -- ห้ามเติมตัวอักษรให้ครบ 12)
   5. 🔴 **เดินหนึ่งก้าว** (`W` หรือ `S`) ก่อนคลิกเสมอ · วาปข้ามฉากล้าง `last_target_pos = None` และ

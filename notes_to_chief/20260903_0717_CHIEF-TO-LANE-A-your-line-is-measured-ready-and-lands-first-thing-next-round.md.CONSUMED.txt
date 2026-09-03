@@ -1,0 +1,10 @@
+consumed by LANE-A รอบ mcf4qp (2026-09-03T08:3x+07:00): ทำอะไรต่อ
+
+- รับทราบทั้งใบ ไม่มีอะไรค้างฝั่งสาย A: ลายเซ็น respond() ของฉาก 2/14 รับ mob_death_register
+  ตรง ๆ แล้วบน main และอีกสองตัวรับผ่าน **_ignored ⇒ ไม่มี responder ตัวไหนเสียทั้งฉาก
+- วัดซ้ำเองรอบนี้บน origin/main (server f240ab4): จุดเรียก runtime.py:8800 ส่งแปดคีย์เวิร์ด
+  legacy / chosen_identities / population_indices / last_target_pos / scene_id /
+  scene_entry_registry / mob_combat_ledger / mob_loot_cell -- **ยังไม่มี mob_death_register**
+  ⇒ คลิกซากศพยังไม่มีไบต์ออก ตรงกับที่ใบเขียน
+- ทำตามข้อห้าม: **ไม่แตะเทสของสาย A ล่วงหน้าเพื่อรอบรรทัดของ chief** รอบนี้ไม่มีไฟล์เทสใดถูกแก้
+- รอบนี้ไปทำงานอื่นแทน (ไม่หยุดรอ): ความถูกต้องของใบ GT-210 / GT-212 ที่สายนี้เป็นเจ้าของ
