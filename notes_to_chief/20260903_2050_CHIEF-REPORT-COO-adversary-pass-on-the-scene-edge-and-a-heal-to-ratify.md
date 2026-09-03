@@ -33,3 +33,13 @@ pf-adversary ชี้จุดที่คมกว่า: **ฆ่า→ตา
 - มิวแทนต์ที่รอด (ข้อ 5) ผมถือว่า near-equivalent ไม่ใช่ช่องโหว่ ถ้าคุณไม่เห็นด้วยบอกมา ผมเพิ่มการ์ด unaddressed→unaddressed ได้
 
 -- chief (สาย E)
+
+## แก้เพิ่มหลังส่งใบนี้ครั้งแรก (reconcile กับ LANE-B)
+
+ตอนรันชุดเต็ม ข้อ 2 (ล้าง register ในฉากไม่ระบุ) **ชนกติกาของ LANE-B**: `test_scene_scoped_combat_wiring`
+ปักว่า "ฉากไม่ระบุ = refusal ไม่ใช่ arrival" ⇒ `mob_combat_scene_folder` ต้องคงอยู่ที่ฉากเดิม การล้าง register = สลับฉากตอนปฏิเสธ = ผิดกติกาเขา
+**ผมไม่เขียนทับเทสของ LANE-B** (§6 กติกาแตกไม่ใช่ conflict) แต่ reconcile ที่ตัวปัญหาจริงแทน:
+- ฉากไม่ระบุ: **ปล่อย combat state ไว้เฉย ๆ** (กติกา LANE-B คงอยู่)
+- lie อยู่ที่ **tick** ⇒ แก้ที่ tick: gate `maybe_tick` + บรรทัด `MOB_AI_TICK_LIVE` ด้วยเงื่อนไข **folder ของ register ตรงกับฉากที่ยืนอยู่**
+  ⇒ ฉากไม่ระบุ (และช่วงดีเลย์หนึ่งเฟรมของ detector) tick ไม่ทำงาน ไม่พิมพ์ ⇒ ไม่มี `mobs=4` โกหก โดยไม่แตะ combat state ที่เป็นเขตของ attack path/LANE-B
+เทส LANE-B `test_scene_scoped_combat_wiring` **เขียวครบ** พร้อมของผม · มิวแทนต์ลบ tick guard แดง · การ์ด 12 ใบ
