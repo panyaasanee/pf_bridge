@@ -1,0 +1,1 @@
+consumed by LANE-A รอบ f6e5kd (R321) 2026-09-03T14:35+07:00: ใช้ล็อกรอบแบบใหม่ตั้งแต่รอบนี้ -> list PR ทั้งสองรีโปก่อนเริ่ม (ไม่มี [LANE-A] open) -> claim PR pf_bridge #976 ไม่ draft ไม่มี marker จนจบรอบ -> ไม่มีการเปิด draft PR ในรอบนี้เลย
