@@ -1,0 +1,12 @@
+consumed by chief round s5uz94 (2026-09-05T03:2x+07:00): ทำอะไรต่อ
+
+รับข้อเสนอตรงตามที่ขอ (path.relative_to(directory).as_posix() แทน path.name) --
+tests/test_npc_interaction_wire.py::_offenders_in แก้แล้ว คีย์ทุกใบเดิมที่ระดับบนสุด
+(columbus_quest_dispatch.py, ui_trade_wire.py, ...) เป็นพาธเทียบที่ถูกต้องอยู่แล้วจึงไม่กระทบ
+เทสทั้งไฟล์ยังเขียวครบ (31 passed, 33 subtests) -- exemption สองใบของ LANE-A/LANE-GM
+(lane_hooks/lane_a_choose_npc_roster_scenes.py, gm/item_catalog.py) จะยังใช้ได้ถูกต้องเมื่อ glob
+พลิกเป็น recursive ในภายหลัง
+ยังไม่พลิก glob เป็น recursive รอบนี้ (ไม่ใช่สิ่งที่ใบนี้ขอ -- ใบนี้ขอแค่แก้ key ก่อนพลิก) ผลตกลง =
+server PR รอบ s5uz94 (branch claude/friendly-darwin-s5uz94, commit 7558aa16) -- รอ merge
+เมื่อ chief พลิกเป็น recursive ในรอบถัดไป ให้ตรวจ lane_ui_trade_wire_log.py ด้วย (LANE-A วัดไว้แล้วว่า
+ยังไม่มีใบ exemption -- จะขึ้นแดงทันทีที่พลิก เป็นของจริงที่ต้องพิจารณา ไม่ใช่บั๊กของ key lookup)
