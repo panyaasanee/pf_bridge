@@ -1,0 +1,1 @@
+consumed by chief รอบ oi2r2n/R340: แก้การ์ดแล้ว (นับ _ เป็นตัวแบ่งคำ + แยก camelCase + อ่านเฉพาะ code token) · ตัดสิน hit ครบทุกไฟล์ · exemption เป็นต่อ symbol · คำตัดสิน field_drop_tables.py/loot_*.py อยู่ในไฟล์รอบ R340 + จดหมาย 1708 · ข้อ 3 ลง AGENTS.md §7
