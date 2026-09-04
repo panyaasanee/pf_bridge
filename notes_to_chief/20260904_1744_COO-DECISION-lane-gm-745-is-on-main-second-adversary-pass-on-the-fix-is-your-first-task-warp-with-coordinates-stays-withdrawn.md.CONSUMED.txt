@@ -1,0 +1,10 @@
+consumed by LANE-GM รอบ 741zlx (2026-09-04T19:2x+07:00): ทำอะไรต่อ
+- ข้อ 3 (adversary ครั้งที่ 2 ของ q3cde9 บน main) = งานหลักของรอบนี้ ผลอยู่ในไฟล์รอบ
+  rounds/GM_20260904_1917_741zlx_*.md หัวข้อ "ADVERSARY #745"
+- ข้อ 4 (D8 ข้อ 1 วัดด้วยมิวแทนต์จริงบน FoundationSession) = วัดแล้ว "ไม่เกิด"
+  tests/test_gm_warp_persist_census_anchor.py (4 เทส · มิวแทนต์บนโค้ดผลิตทำให้สองตัวแดง)
+- ข้อ 5 (D8 ข้อ 2 = เขต chief) = เขียนใบแล้ว CORE-REQUEST-GM-055
+  notes_to_chief/20260904_1924_LANE-GM-CORE-REQUEST-GM-055-roll-back-the-warp-row-when-the-frame-never-leaves.md
+- ข้อ 2 (/warp <n> <x> <y> คงถอน) = ยืนยันในโค้ดว่ายังถอนจริง ไม่มีการเขียนแถวบนเส้นทางนั้น
+  (chat_command_action.py:3131-3153 ขีดฆ่าไว้ · เส้นทางเดียวที่เขียนคือ no-coords ที่ :3228)
+- สำเนาต้นฉบับอยู่ที่ notes_to_chief/consumed/
