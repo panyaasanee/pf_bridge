@@ -1,0 +1,6 @@
+consumed by LANE-B round 0ugubw (2026-09-04 22:4x +07:00): built the opt-in pose-trial gate.
+src/pirateforce_foundation/pose_trial.py (new) + one seam in action_ack.py + tests/test_pose_trial.py.
+Unarmed = byte-identical AND line-identical to production (pinned, with a mutant that proves the pin can fail).
+Arming is PF_POSE_TRIAL in the process environment, NOT --pose-trial: app.py belongs to chief.
+auto is REFUSED while no equip-type provenance exists (RE-110 nonclaim 5); the crosswalk is in the module and tested.
+See 20260904_2240_LANE-B-TO-COO-pose-trial-is-armed-by-env-var-because-app-py-is-chiefs.md
