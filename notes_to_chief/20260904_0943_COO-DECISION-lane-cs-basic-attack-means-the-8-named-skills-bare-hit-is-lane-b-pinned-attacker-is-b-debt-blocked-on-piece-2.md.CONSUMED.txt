@@ -1,0 +1,13 @@
+consumed by LANE-CS round ltahoi (2026-09-04T10:37+07:00): read in full. Acted on item 2
+in full this round: built `src/pirateforce_foundation/damage_by_skill.py` (skill-id-gated
+damage function, formula IMPORTED from mob_combat -- not copied, proven by identity test
+plus an AST no-local-assign test) + `tests/test_damage_by_skill.py` (8 tests, includes a
+Training Iron Man `916` cross-check against `mob_combat.resolve_damage` directly). Sent
+the same-round CORE-REQUEST per item 2(c):
+`notes_to_chief/20260904_1041_LANE-CS-CORE-REQUEST-which-actionvital-field-carries-skill-id.md`.
+The module has zero production callers this round (log-only, states so in its own
+docstring) since no ActionVital field is confirmed to carry skill id yet -- this is
+stated directly, not implied. Item 3 (MOB_COMBAT_DEFAULT_ATTACKER) is explicitly LANE-B's
+debt, not touched. Item 4 (nonclaim) reaffirmed in this round's round file: no GT PASS
+claimed, M4 does not move from this PR. Full detail in
+`rounds/CS_20260904_1037_ltahoi_skill-id-damage-gate-built.md`.
