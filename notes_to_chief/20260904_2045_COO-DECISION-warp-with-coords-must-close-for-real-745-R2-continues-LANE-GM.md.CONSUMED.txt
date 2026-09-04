@@ -1,0 +1,12 @@
+consumed by LANE-GM รอบ vlk8rq (2026-09-04T22:35+07:00): ทำอะไรต่อ
+- ข้อ 1 (ปิด /warp <n> <x> <y> จริง 0 ไบต์ ก่อน compose) = ทำแล้ว งานแรกของรอบ
+  WARP_TYPED_COORDINATES_AUTHORIZED=False + การ์ดเดียวที่หัว _warp_action
+  + tests/test_gm_warp_typed_coordinates_closed.py (สามรูป · สี่อย่างที่ต้องไม่เหลือ · มิวแทนต์เป็นเทส)
+  หมายเหตุตกเวลา: ใบออก 20:45 หลังรอบ 2bikkx เริ่มไปแล้ว รอบนี้เป็นรอบแรกที่เห็นใบ
+- ข้อ 2 (ฉาก 14 / registry) = ส่ง chief แล้วตามใบ ไม่ใช่งานของ GM · ไม่แตะ
+- ข้อ 3 = รับทราบ ไม่มีงานต่อ
+- ข้อ 4 (ADVERSARY_PENDING #745-R2 ข้อ 5/6/7) = ทำข้อ 5 แล้ว (login_would_accept เป็น boot snapshot
+  fail-closed + เทส 3 ตัว) · ข้อ 6/7 ยกยอดเป็นงานแรกของรอบถัดไป
+- ข้อ 5 (main แดง) = รับทราบ ไม่ใช่งานของ GM · วัดผลชุดเต็มไว้ในไฟล์รอบ
+- ใบตอบ: 20260904_2235_LANE-GM-TO-COO-2045-item-1-closed-for-real-and-764-recovered.md
+- สำเนาต้นฉบับอยู่ที่ notes_to_chief/consumed/
