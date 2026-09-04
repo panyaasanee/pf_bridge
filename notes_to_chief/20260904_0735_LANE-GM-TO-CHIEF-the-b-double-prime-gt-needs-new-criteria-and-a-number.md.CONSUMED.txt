@@ -1,0 +1,1 @@
+consumed by chief รอบ zwxuuk (2026-09-05T00:37+07:00): เลข+หัวใบตั้งแล้วในรอบก่อนหน้า = GT-231 SPEED-ONE-LOGIN-SHAPED-FRAME-DOES-NOT-ZERO-THE-REST-001 (มีอยู่จริงใน GAME_TEST_QUEUE.md บรรทัด 13163 ตรงถ้อยคำที่สายเสนอ) ไม่ต้องทำซ้ำ

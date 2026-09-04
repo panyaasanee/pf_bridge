@@ -13734,19 +13734,20 @@ LANE-UI เป็นผู้ตัดสินความหมายของ
 
 ---
 
-## GT-247 ATTACK-POSE-ONE-FIELD-AB-001  [🔴 **BLOCKED** -- ปลดเป็น `READY` เมื่อแฟล็ก `--pose-trial` ของ **LANE-B** (`COO-DECISION 20260904_2141`) ขึ้น `main` และ `RECHECK` ด้านล่างผ่านครบ · เลขใบตั้งโดย chief (LANE-E) รอบ `epkucn`/R344 ตาม `COO-DECISION 20260904_2142` ข้อ 1 · เนื้อใบ = `notes_to_chief/20260904_2133_KA1A-TO-COO-attack-pose-*` §1 (ผู้ร่าง ka1-A) · **เจ้าของใบ/ผู้บริโภคผล = LANE-B** · ผู้รัน = Panya (attended) ~10-15 นาที · 🔴 **Panya ยกเว้นกฎ "ห้ามใบตีมอนจนกว่า P-2 จะปิด" ให้ใบนี้ใบเดียว** (คำสั่งสด 2026-09-04 21:15 · `NOW.md` หัวข้อ "ห้ามทำจนกว่า P-2 จะปิด") -- ใบนี้วัด **ท่า** ไม่วัดสี ไม่วัดดาเมจ · **บูตเดี่ยว ไม่พ่วง `GT-114`** (`GT-114` ยกเลิกแล้วตาม `COO-DECISION 20260904_2158`)]
+## GT-247 ATTACK-POSE-ONE-FIELD-AB-001  [🟢 **READY** -- ปลดโดย chief (LANE-E) รอบ `zwxuuk` ตาม `COO-DECISION 20260904_2347`: แฟล็กของ **LANE-B** อยู่บน `main` จริง (server `#771`, `be725d4`, merged 23:37) และ `RECHECK` ด้านล่างผ่านครบ · เลขใบตั้งโดย chief (LANE-E) รอบ `epkucn`/R344 ตาม `COO-DECISION 20260904_2142` ข้อ 1 · เนื้อใบ = `notes_to_chief/20260904_2133_KA1A-TO-COO-attack-pose-*` §1 (ผู้ร่าง ka1-A) · **เจ้าของใบ/ผู้บริโภคผล = LANE-B** · ผู้รัน = Panya (attended) ~10-15 นาที · 🔴 **Panya ยกเว้นกฎ "ห้ามใบตีมอนจนกว่า P-2 จะปิด" ให้ใบนี้ใบเดียว** (คำสั่งสด 2026-09-04 21:15 · `NOW.md` หัวข้อ "ห้ามทำจนกว่า P-2 จะปิด") -- ใบนี้วัด **ท่า** ไม่วัดสี ไม่วัดดาเมจ · **บูตเดี่ยว ไม่พ่วง `GT-114`** (`GT-114` ยกเลิกแล้วตาม `COO-DECISION 20260904_2158`) · ไม่ออกท่าทั้ง 6 ค่า = **NEGATIVE** (ผลลบที่มีค่า) ไม่ใช่ FAIL (`COO-DECISION 20260904_2346`)]
 
 **คำถามเดียว:** เมื่อ reply ต่อ `ActionVital` ใส่ `+0x30` = behavior id ของอาวุธที่ถือจริง (ไม่ใช่ echo `0xEA7D`) ไคลเอนต์เล่นอนิเมชันโจมตีของ performer ซ้ำได้ทุกครั้งหรือไม่
 
 **ที่มา:** `RE-110-RESULT` 2026-08-27 18:32 (archive) ข้อ "one-field A/B เท่านั้น" + `BUILD_IMPACT` ของมัน · chief `1405` ยืนยัน [PROVEN] crosswalk `EQUIP_VALUE.n_EQUIPTYPE -> n_ATTACK_SKILL -> BEHAVIOR.n_ID` = 280/282/284/286/288/290
 
-**สิ่งที่สายต้องสร้างก่อนบูต (LANE-B · ตาม `BUILD_IMPACT`):** ทางเลือก opt-in ที่ไม่แตะ production -- แฟล็ก `--pose-trial <behavior_id|auto>` (`auto` = resolve จาก equip type ของ actor ถ้ามี provenance ถ้าไม่มีใช้ `<id>` ตรง ๆ) · พิมพ์ `POSE_TRIAL sent=+0x30=<id> control|mutant` ทุก reply · ไม่มีแฟล็ก = production เดิมทุกไบต์
+**สวิตช์จริง = ตัวแปรแวดล้อม ไม่ใช่แฟล็กบรรทัดคำสั่ง** (`COO-DECISION 20260904_2346`: `app.py` เป็นของ chief, LANE-B แก้ไม่ได้ จึงเลือกอ่าน process environment แบบเดียวกับ `PF_SPEED_TRIAL`) -- ก่อนบูตแต่ละครั้ง พิมพ์ **`set PF_POSE_TRIAL=<id>`** ใน cmd.exe ของสะพาน (**ห้ามใช้ `setx`** -- `setx` เขียนลง registry ติดค้างทุกบูตในอนาคตแบบมองไม่เห็น ส่วน `set` เป็นของหน้าต่างนั้นบานเดียว) แล้วค่อยบูตเซิร์ฟเวอร์ · **ต้องเห็นบรรทัดคอนโซล `POSE_TRIAL_BOOT armed=<id>` ก่อนคลิกทุกครั้ง** -- ไม่เห็น = ตัวแปรไม่ติด อย่าคลิกต่อ · ไม่ตั้งตัวแปร/ตั้งว่าง/พิมพ์ผิด/`auto` ที่ไม่มี provenance = production เดิมทุกไบต์ (fail-closed) · แฟล็กบรรทัดคำสั่ง `--pose-trial <id>` เป็นแค่ alias สะดวกมือหนึ่งบรรทัดที่ยังไม่มีใครเขียน ไม่ใช่ตัวบล็อกใบนี้
+**ระยะยืน:** ตัวกรอง range gate ที่ `0x44EB1D -> 0x4758D0` ใช้ `n_RANGE = 75` (ระยะยกกำลังสอง) -- **ยืนให้ชิดมอนกว่าค่านี้ก่อนคลิก** ไม่งั้นค่าที่ resolve ได้จริงอาจโดนเกตนี้ปฏิเสธจนดูเหมือนไม่ออกท่าทั้งที่ id ถูก
 
-**RECHECK (ก่อนปลด READY):** แฟล็ก + โทเคน `POSE_TRIAL` อยู่บน `main` · pytest ของโมดูลเขียว · ไม่มีแฟล็ก = byte-identical กับ production (มีเทสตรึง)
+**RECHECK (ก่อนปลด READY) -- ผ่านครบแล้ว:** ✅ ตัวแปร `PF_POSE_TRIAL` + โทเคน `POSE_TRIAL_BOOT`/`POSE_TRIAL` อยู่บน `main` (server `#771`) · ✅ `pytest tests/test_pose_trial.py tests/test_action_ack.py -q` เขียว (33 passed, 69 subtests) · ✅ ไม่ตั้งตัวแปร = byte-identical กับ production (มีเทสตรึง)
 
-**steps (~10-15 นาทีหน้าจอ · ฉาก 2 มอน Fighting Fish soldier ที่ตีได้อยู่แล้ว):**
-1. `LOCK_GAME` · สำเนา DB · บูต **control** (`--pose-trial 60029` = ค่า echo เดิม) -> คลิกตีมอน 1 ครั้ง -> Panya ดูว่าออกท่าไหม (คาด: ไม่) · ถ่าย 1 ใบ
-2. relaunch ตามที่สายกำหนด แล้วบูต **mutant** ทีละค่า **280 -> 284 -> 288 -> 282 -> 290 -> 286** (หรือ `auto` ก่อนถ้ามี provenance) -> คลิกตีมอน 1 ครั้งต่อค่า -> Panya บอก "ออกท่า / ไม่ออก / ท่าอะไร" · ถ่ายเฉพาะค่าที่ออกท่า
+**steps (~10-15 นาทีหน้าจอ · ฉาก 2 มอน Fighting Fish soldier ที่ตีได้อยู่แล้ว · ยืนชิดมอน <75 ทุกครั้งก่อนคลิก):**
+1. `LOCK_GAME` · สำเนา DB · ปิด cmd.exe เดิม เปิดใหม่ พิมพ์ `set PF_POSE_TRIAL=60029` (ค่า echo เดิม = **control**) -> บูต -> เห็น `POSE_TRIAL_BOOT armed=60029` แล้วค่อยคลิกตีมอน 1 ครั้ง -> Panya ดูว่าออกท่าไหม (คาด: ไม่) · ถ่าย 1 ใบ
+2. teardown แล้วเปิด cmd.exe ใหม่ทุกรอบ พิมพ์ `set PF_POSE_TRIAL=<id>` ทีละค่า **280 -> 284 -> 288 -> 282 -> 290 -> 286** -> บูต -> เห็น `POSE_TRIAL_BOOT armed=<id>` -> คลิกตีมอน 1 ครั้งต่อค่า -> Panya บอก "ออกท่า / ไม่ออก / ท่าอะไร" · ถ่ายเฉพาะค่าที่ออกท่า
 3. ค่าที่ออกท่า: **ไม่กดอะไรต่อ 10 วินาที** -- ดูว่าไคลเอนต์ตีซ้ำเอง (auto-repeat) ไหม (ตอบ objective 1 ของ `RE-110` ที่ static ตัน) · สายจดเวลาเฟรม `ActionVital` ขาเข้าเทียบ
 4. teardown ตามปกติ
 
@@ -13765,15 +13766,277 @@ LANE-UI เป็นผู้ตัดสินความหมายของ
 
 ---
 
-## GT-249 SKILL-WINDOW-CONTENT-AFTER-0x673C-001  [🟡 **PENDING -- เนื้อใบยังไม่ครบ: LANE-CS ร่างเต็มด้วย `pf-queue-author` รอบถัดไป** (`COO-DECISION 20260904_2154` · ตก 23:36 = escalation) · เลขใบตั้งโดย chief (LANE-E) รอบ `epkucn`/R344 ตามข้อ "chief 22:21 หรือ 23:51: ตั้งเลข + หัวใบ" · **พ่วงบูตเดียวกับ `GT-243`** (ตัวละครเดียวกัน precondition เดียวกัน = P0 ตัวละครมีสกิลจริง) · **เจ้าของใบ/ผู้บริโภคผล = LANE-CS** · ผู้รัน = Panya (attended) · ไม่บล็อกใคร · รันหลังใบ M2 (`GT-233`)]
+## GT-249 LEARN-SKILL-RESULT-REAL-KIT-CONTENT-001  [🟢 **READY** -- เนื้อใบเต็มคัดลอกจาก LANE-CS's `pf-queue-author` draft (`notes_to_chief/20260904_2256_LANE-CS-TO-CHIEF-gt-draft-real-skill-id-frame-plus-server-pr.md` / `rounds/CS_20260904_2256_30kpco_...md` §2) โดย chief (LANE-E) รอบ `zwxuuk` ตาม `COO-DECISION 20260905_0044` (หนี้ค้างตั้งแต่ 22:56 ที่ยังไม่ถูกคัดลง) · เลขใบตั้งโดย chief รอบ `epkucn`/R344 · **พ่วงบูตเดียวกับ `GT-243`** แต่**ไม่ใช่ boot เดียวกัน** (ดู BOOT ORDER ด้านล่าง — คนละ server args คนละ flag) · **เจ้าของใบ/ผู้บริโภคผล = LANE-CS** · ผู้รัน = Panya (attended) · ไม่บล็อกใคร · กำหนด **02:21** (`COO-DECISION 20260905_0044`)]
 
-**ขอบเขตที่ COO เคาะไว้ (`2154` ข้อ 2) -- LANE-CS เขียนรายละเอียดทับได้ ห้ามขยายขอบเขต:**
-- ส่ง `0x673C` ด้วย **skill id จริง** จากคลัง 8 ตัวของ `skill_catalog.py` (ไม่ใช่ค่า probe) ให้ตัวละครที่ผ่านเงื่อนไข `GT-116`
-- ส่งผ่าน**แฟล็ก attended-only เท่านั้น** · `production_allowed=False` คงเดิม
-- ผ่าน = หน้าต่างสกิล (ปุ่ม K) มีรายการขึ้น และตรง **4 สกิลเริ่มต้นของ class นั้น**
-- STOP ถ้าไคลเอนต์ปิดตัว
-- ผลใดหักล้างสมมติฐาน `HYP-PF-033` => LANE-CS ปิด/แก้หัวใบเก่าในรอบเดียวกัน (`PANYA-DECISION 20260903_1934`)
-- ที่มาของช่องว่าง: `GT-058`/`GT-059`/`GT-064` ปิดเพราะหน้าต่างเปิดไม่ได้ ไม่ใช่เพราะพิสูจน์ · `GT-116` ปลดเงื่อนไขนั้นตั้งแต่ 2026-08-28 แต่ไม่มีใบไหนถามต่อ
+owner/consumer of result = LANE-CS -- runs attended, piggybacked in the same attended appointment as GT-243
+(same class_id=1/level=1 character, saves a second scheduled sitting) -- NOT the same server process as
+GT-243 (see BOOT ORDER note, GT-243's own server args explicitly forbid any `--*-scenario` flag)
+
+> NUMBERING NOTE: `GT-249`/`RE-249` = 0 hit ทั้งสามที่ก่อนวาง (chief รอบ `epkucn`/R344) ใบนี้ไม่แตะ/ไม่
+> reopen/ไม่ supersede `GT-058`/`GT-059`/`GT-064` (archived CLOSED — คำถามคนละอัน: หน้าต่างเปิดหรือไม่)
+> หรือ `GT-116` (CLOSED PASS 2026-08-28, `GAME_TEST_QUEUE.md:5183`: หน้าต่างเปิดสำหรับตัวละคร
+> class_id=1/level=1 ที่มี 0 entries) หรือ `GT-243` (PENDING, คำถามคนละอัน: hotbar dispatch producer ของ
+> สกิล 99) ใบนี้เป็นใบใหม่ เปิดตาม `COO-DECISION 20260904_2154` ตอบจดหมาย LANE-CS เอง
+> `notes_to_chief/20260904_2113_LANE-CS-TO-COO-backup-item1-read-plus-gt116-reopens-skill-window-content-question.md`
+
+### source (links only)
+- `notes_to_chief/20260904_2154_COO-DECISION-skill-window-content-gt-approved-piggyback-gt243-LANE-CS.md` --
+  the approval: send 0x673C with REAL skill ids from class_id=1's own starting kit (not arbitrary probe
+  values) to a character that already satisfies GT-116's precondition; PASS = skill window (K) populates
+  with exactly the 4 starting skills of that class; attended-only, production_allowed stays False; STOP if
+  the client closes; a result that refutes HYP-PF-033's content claim closes/rewords the parent module's
+  open question in the same round (PANYA-DECISION 20260903_1934).
+- `rounds/CS_20260904_2113_fv5xnu_backup-item1-read-plus-gt116-reopens-skill-window-content.md` -- the
+  finding that reopened this: GT-058/GT-059/GT-064 (archived CLOSED) could never answer "does the window's
+  CONTENT track anything the server sends" because in every one of those sessions the window never opened at
+  all (class was always 0). GT-116 removed that blocker on 2026-08-28 but GT-116 itself explicitly says "[no
+  claim] that the skill list shown is a correct Gladiator kit -- not yet measured" and no ticket since has
+  asked the content question.
+- GT-116 (`GAME_TEST_QUEUE.md:5183`, CLOSED PASS 2026-08-28): the window opens for a class_id=1/level=1
+  character, 0 entries at level 1 is normal. This entry's precondition IS GT-116's own proven precondition.
+  class_id=1 is presently wired into every flagless production login (CORE-REQUEST-022), so an ordinary
+  character already satisfies it -- no special character build is required beyond what GT-243 already needs.
+- `src/pirateforce_foundation/learn_skill_result_hypothesis.py` (HYP-PF-033, vital 0x673C) -- the module this
+  entry exercises. Its own docstring nonclaims (read before using anything from it): the three record member
+  positions (record_u32_0 / record_u16_4 / record_u32_8) have UNKNOWN semantics, the trailing u8 has UNKNOWN
+  semantics, production_allowed=False, database_write=none. The module's own `[UPDATE, round fv5xnu's
+  finding + COO-DECISION 20260904_2154]` paragraph names the sixth sweep step this entry fires:
+  `COUNT4_REAL_SKILL_IDS_CLASS1_TRAIL0`, sending 4 records, each repeating one of
+  `class_catalog.starting_skill_ids(1)`'s 4 ids (111 "VIP Strive Jump", 40000 "Gladiator Basic Training", 99
+  "Normal Attack", 110 "Strive Jump", in that order) in all three wire positions of its own record, trailing
+  byte 0 -- because the position that means "skill id", if any, is unproven, this removes the need to guess
+  which field the client reads before judging the on-screen result.
+- The other five steps of the same sweep (COUNT0_TRAIL0, COUNT1_TRAIL0, COUNT1_TRAIL1, COUNT3_TRAIL0,
+  COUNT3_TRAIL1) are UNCHANGED, pre-existing, and send arbitrary tellable-apart probe values (not real game
+  data) -- this entry's own claim is about the 6th frame only; anything the first five frames visibly do is
+  noted as a secondary observation, not this entry's pass/fail measure.
+
+### objective (single claim)
+Sent to the SAME class_id=1/level=1 character GT-116 already proved opens the skill window (K /
+Bt_main_Skill), does the LAST frame of the HYP-PF-033 sweep -- the one whose 4 records carry class_id=1's own
+real starting-kit skill ids (111, 40000, 99, 110) -- make that window populate with entries a human can
+recognize as those 4 skills (VIP Strive Jump, Gladiator Basic Training, Normal Attack, Strive Jump), by
+whatever names/icons the client actually shows? This is the FIRST attended measurement of whether anything
+HYP-PF-033 sends is rendered as content at all, as opposed to merely accepted on the wire without visible
+effect (which is all GT-050's static work and this module's own unit tests can ever show).
+
+### predictions (a wrong prediction is a finding, not a failure)
+- P1 [proposed, the heart of the entry]: after the full 6-frame sweep completes, the skill window shows
+  exactly 4 entries, one per real starting-kit skill id, recognizable (by name text and/or icon, whatever the
+  client actually renders) as VIP Strive Jump / Gladiator Basic Training / Normal Attack / Strive Jump.
+- P2 [corollary, proposed]: the 4 entries appear in the same order the 6th frame sent them (111, 40000, 99,
+  110). If the window instead shows them in a different order, or sorted some other way, write that down --
+  it is a finding about display order, not a failure of P1.
+- P3 [falsifier]: the window still shows 0 entries (or something clearly unrelated/garbled) after the full
+  sweep, despite all 6 frames going out unrejected on the wire -- a REAL NEGATIVE, not a failure. Per
+  PANYA-DECISION 20260903_1934, whoever consumes this result must, in the SAME round, close or reword the
+  open "does the client render anything" question in learn_skill_result_hypothesis.py's own module
+  docstring/NONCLAIMS section -- do not leave that question looking open once this ticket has answered it.
+- P4 [possible mixed outcome, not pre-judged]: the window shows some but not all of the 4 entries, or shows
+  extra/garbled entries left over from the 5 earlier arbitrary-probe frames (COUNT0/COUNT1/COUNT3 pairs) that
+  fired 3.0s-9.0s earlier in the same sweep -- if this happens, it tells us the window is CUMULATIVE across
+  frames rather than replace-on-receipt, a separate finding from the main content claim.
+
+### PRECONDITION (verify before step 1, not a footnote)
+P0. Same as GT-116's own proven precondition: a normal login on the currently-merged production login path
+    (class_id=1/level=1 into every login unconditionally, CORE-REQUEST-022, GT-116 CLOSED PASS). No special
+    character build required for THIS ticket's own claim. SEPARATE precondition from GT-243's own P0 (skill
+    99 learned and placed on a named hotbar/skillbar slot) -- satisfying either does not hurt or require the
+    other.
+P1. Server before client always; a client left open with no server dies on its own in ~3.5 minutes.
+P2. Killing a client leaves the server holding the session -- restart the server before opening the next
+    client or it hangs on "connecting" forever.
+P3. A round copies the DB; character position resets to spawn every boot, expected, not a measured result.
+P4. Teardown template refuses a boot stamp older than 420 minutes -- run teardown even if the session ends
+    because the tester stopped.
+
+### BOOT ORDER / piggyback note (read before scheduling)
+Approved to run in the SAME ATTENDED APPOINTMENT as GT-243, to save booking a second sitting -- NOT the same
+server process boot. GT-243's own server args are explicit: no `--*-scenario` flag of any kind (it needs a
+bare wire to observe the hotkey-dispatch path cleanly). This entry needs
+`--learn-skill-result-hypothesis-scenario`, which GT-243 forbids. Run them as two separate boots, back to
+back, in either order, inside the same LOCK_GAME hold: fresh DB copy per boot, full teardown between them if
+the boot-stamp/server-restart rules require it. Do not merge the two into one boot.
+
+### BEFORE BOOT -- gate 0/1/2 (merge status; do not skip, do not eyeball a SHA)
+Gate 0 -- **cleared**: `pirate-force-server#768` (commit `bdfc7885`) merged to `main` (chief confirmed
+directly against `src/pirateforce_foundation/learn_skill_result_hypothesis.py` and
+`scenarios/learn_skill_result_hypothesis_learn_sweep.json` on `main`, round `zwxuuk` -- six-step
+`LEARN_SKILL_RESULT_STEP_ORDER` including `COUNT4_REAL_SKILL_IDS_CLASS1_TRAIL0` and `frames_per_accepted_
+request: 6` both present).
+Gate 1 -- resolve a green commit:
+```
+py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch
+```
+Only exit 0 with a printed `BOOT_COMMIT: <sha>` means bootable. exit 3 = this ticket waits on the gate, not
+on the tester -- do not boot, do not checkout a branch directly to skip the resolver.
+Gate 2 -- confirm the resolved SHA actually carries the code:
+```
+git grep -n "learn-skill-result-hypothesis-scenario" <SHA> -- src/pirateforce_foundation/app.py
+git grep -n "COUNT4_REAL_SKILL_IDS_CLASS1_TRAIL0" <SHA> -- src/pirateforce_foundation/learn_skill_result_hypothesis.py
+git cat-file -e <SHA>:scenarios/learn_skill_result_hypothesis_learn_sweep.json && echo SCENARIO_PRESENT
+```
+Need a hit on all three. Read the exact pin values (payload/pc/frame size and sha256, per step label)
+straight from `scenarios/learn_skill_result_hypothesis_learn_sweep.json ->
+probe.per_step.COUNT4_REAL_SKILL_IDS_CLASS1_TRAIL0` in the commit you actually boot -- do NOT trust any hash
+or size written in this ticket.
+
+### db (a copy, always -- never open the canonical file)
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-249_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt249_<yyyyMMdd_HHmmss>.sqlite3
+```
+- sha256 of the canonical file, before and after, must match `CANON_SHA.txt` both times.
+- `database_write=none` for this lane (confirmed in the module docstring) -- expect the working copy's only
+  diff from a bare login to be the usual +1 row in `sessions`; `PRAGMA integrity_check = ok` both times.
+
+### server args (exact -- opt-in only, production_allowed stays False)
+```
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+py -3 -u -m pirateforce_foundation.app --db state\run_gt249_<stamp>.sqlite3 --learn-skill-result-hypothesis-scenario scenarios\learn_skill_result_hypothesis_learn_sweep.json
+```
+`--db` is required and must point at an existing file. Keep stdout+stderr captured together (2>&1). The
+server console must show whatever mode banner the resolved commit prints for this scenario.
+
+### chat trigger -- exactly 12 printable ASCII characters
+- This lane's dispatcher fires on ANY chat-input frame whose text is exactly 12 printable ASCII characters --
+  shape-triggered, not string-triggered (`classify_chat_input_attempt` -> ascii12). One character short or
+  long reaches the server and the condition silently fails to match -- no error, the sweep just does not
+  fire.
+- Use `SKILLCONTENT` for this ticket (S-K-I-L-L-C-O-N-T-E-N-T = 12 characters exactly).
+- Click the chat box to focus it before typing -- characters typed while chat is NOT focused become hotkeys,
+  not chat text. Type the 12 characters, press Enter once, then immediately click empty ground to drop focus
+  again before pressing K.
+- One accepted trigger fires ALL 6 frames of the sweep, 3.0s apart, the first at 0.0s delay -- the 6th frame
+  (this ticket's own frame) lands roughly 15s after Enter, plus send/composition time. Budget at least 18-20s
+  of continuous recording after Enter before judging the final window state.
+- The sweep is not one-shot -- firing the trigger again re-sends all 6 frames from the top.
+
+### steps (click by click; record continuous video for the whole session)
+Before start: hold LOCK_GAME, note boot stamp, compare canonical sha, copy DB per the db block, clear gate
+0/1/2 above, stage TEMPLATE_teardown_generic.ps1.
+1. Start the server first (`Get-NetTCPConnection -State Established` on ports 10188/10189 must be 0 before
+   opening the client) -- console shows the scenario's mode banner.
+2. Open client -> select server -> PVP dialog left button -> character select -> the character used in this
+   sitting -> the middle of the 5 bottom buttons = enter game (never the leftmost -- that deletes the
+   character). Start continuous recording before pressing enter-game.
+3. T0 -- HP bar / minimap / map name visible. Photograph full-res (S00-HOME). Record every name-label colour
+   in this still, one line per label, "none" written out where there is none.
+4. NO-CRASH check: right-click-drag to sweep the camera once. Camera-only, character facing never moves,
+   nothing goes out on the wire -- safe at any point. Never use Q/E or W/A/S/D for this check.
+5. BASELINE: confirm chat is not focused (click empty ground) -> press K (or click Bt_main_Skill) ->
+   photograph full-res (S-BASE-K). Expect the same state GT-116 measured (window opens, 0 entries) -- if
+   baseline already shows something else, write it down prominently before continuing.
+6. Close the window if it opened. Click the chat box to focus it -> type `SKILLCONTENT` -> press Enter once
+   -> immediately click empty ground to drop chat focus. Record the clock time (HH:MM:SS+07:00) of Enter as
+   T_TRIGGER.
+7. Best-effort intermediate captures (not this ticket's pass/fail measure, useful context for P4): press K
+   roughly every 3s after T_TRIGGER if quick enough to catch a window already open, photographing each time
+   (S-MID-1 .. S-MID-5), noting the approximate elapsed time since T_TRIGGER for each. If timing is missed,
+   write "not caught" rather than guessing.
+8. Wait until at least 20s have elapsed since T_TRIGGER. Press K (or click Bt_main_Skill) -> photograph
+   full-res (S-FINAL-K). This still is the primary evidence for this ticket's own claim.
+9. If the window is open: photograph its full content full-res, transcribe what it shows character-for-
+   character from the still -- every visible entry's name/label/icon description, count of entries, any
+   entry that does not obviously correspond to one of the 4 real skill names. Write "illegible" rather than
+   inferring.
+10. Secondary positive control: press C to open the CHARACTER window, photograph, close.
+11. NO-CRASH check again (right-click-drag).
+12. Fire the trigger a second time (type `SKILLCONTENT`, Enter, drop focus) to confirm repeatability -- wait
+    20s again, press K, photograph (S-REPEAT-K). Record whether the second sweep changes anything from
+    S-FINAL-K.
+13. Log out -> teardown via TEMPLATE_teardown_generic.ps1 (boot stamp must still be under 420 min) -> recheck
+    canonical sha256 -> sha256 every capture.
+STOP: if the game client crashes or closes at any point, stop immediately, record it as a measured result
+with the frame/step it happened at, and still run teardown.
+
+Colour rule: one line per name label per image, write "none" not blank, read colours from full-resolution
+stills only, never infer a cause for a colour (RE-067 owns that question). Divergences from the original
+server's own screenshots go into REAL_SERVER_DIVERGENCE.tsv, one row each.
+
+### pass criteria (two layers, never mixed, never offered as proof of each other)
+
+wire/DB (headless-provable from GAME_LIVE.txt / server console+log, no human needed for this layer):
+- Raw capture around T_TRIGGER shows exactly 6 outbound frames spaced ~3.0s apart, the 6th and last being the
+  COUNT4_REAL_SKILL_IDS_CLASS1_TRAIL0 composition (largest of the 6, per the module's own pinned sizes).
+- That 6th frame's body decodes to: u16 tag 0x12 count=4; then 4 records in order, each u32 tag 0x14 / u16
+  tag 0x12 / u32 tag 0x14 all three equal to the same skill id, in the order 111, 40000, 99, 110; trailing u8
+  tag 0x0B value 0 -- byte-exact against the payload/pc/frame sha256 and size pinned in
+  `scenarios/learn_skill_result_hypothesis_learn_sweep.json` for this label at the booted commit.
+- `sessions` table +1 row per login; `lease_generation` does not go backward; `PRAGMA integrity_check = ok`
+  both times; canonical sha256 matches `CANON_SHA.txt` before and after; no other table changes.
+- No traceback, no unexpected socket close, in either console log.
+- This layer CANNOT say whether anything appeared on screen -- do not use it as a stand-in for the
+  client-observable layer below.
+
+client-observable (a human at the screen only, never inferred from console/log):
+- S-BASE-K: baseline state before the trigger (expected: window opens, 0 entries, matching GT-116; write down
+  verbatim if it does not).
+- S-FINAL-K (>=20s after T_TRIGGER): the PRIMARY reading for this ticket. Write, in plain language, exactly
+  what is in the window -- entry count, and for each entry whatever name/icon/tooltip text the client shows.
+  PASS reading = exactly 4 entries, each independently recognizable as one of VIP Strive Jump / Gladiator
+  Basic Training / Normal Attack / Strive Jump (record the literal display strings, do not paraphrase them).
+  NEGATIVE reading = 0 entries, or entries that do not correspond to any of the 4 names, after confirming the
+  wire layer above shows the frame went out clean.
+- S-MID-1..5 (best-effort): whatever was caught mid-sweep, with elapsed time noted, or "not caught".
+- S-REPEAT-K: whether firing the trigger a second time changes S-FINAL-K's state.
+- C / CHARACTER window control check (step 10).
+- Both NO-CRASH checks pass.
+- Name-label colours recorded per the colour rule above, one line per label per full-res still, for every
+  photograph taken this session.
+- This layer CANNOT say what bytes actually left the server -- do not use it as a stand-in for the wire/DB
+  layer above.
+
+### outcome boxes (pick one, report which; a negative result is worth as much as a positive)
+A. S-FINAL-K shows exactly 4 entries and all 4 are independently recognizable as the 4 real class_id=1
+   starting-kit skills -> PASS. Record display order too (P2).
+B. S-FINAL-K shows some but not all 4, or shows extras/garbled entries alongside them -> PARTIAL/MIXED, not a
+   clean PASS. Write exactly which of the 4 are present, which are missing, and describe anything extra
+   verbatim. Do not average this into a PASS or a FAIL.
+C. S-FINAL-K shows 0 entries despite the wire layer confirming all 6 frames went out clean and unrejected ->
+   NEGATIVE, complete and valid (P3). Redirect: per PANYA-DECISION 20260903_1934, whoever consumes this
+   result closes or rewords the "does the client render this vital's content" open question inside
+   `learn_skill_result_hypothesis.py`'s own module docstring/NONCLAIMS in the SAME round.
+D. S-FINAL-K shows entries but none of them resemble any of the 4 real skill names/icons -> NEGATIVE of a
+   different flavour than C -- the window renders SOMETHING from this vital but not identifiably the sent
+   content. Record verbatim; do not guess at what it might mean.
+E. Client crashes/closes, or a frame is rejected on the wire, before the 6th frame's window (T_TRIGGER+20s)
+   -> NO-RESULT, report exactly where it stopped, still run teardown.
+
+### things this ticket must not conclude (evidence discipline)
+- Does not name any of the three record-wire positions (record_u32_0 / record_u16_4 / record_u32_8) as "the"
+  skill-id field even on a clean PASS -- each record in this frame repeats the same id in all three
+  positions specifically so this question stays open.
+- Does not claim anything about the trailing u8's meaning -- this step sends 0 only, no companion is sent.
+- Does not claim the original (defunct) server ever sent 0x673C in this shape, this order, or on this
+  trigger -- the step plan, values, spacing and trigger policy are this project's own design.
+- A PASS here does not prove the 4 skills are actually usable, learnable through any real game action, or
+  persisted anywhere (`database_write=none`) -- only that the window can be made to display them via this
+  hand-composed frame.
+- Does not decide the cause of any name-label colour observed (RE-067 owns that question).
+- If gate 0/1/2 does not clear, the entire entry is BLOCKED, not NO-RESULT/FAIL -- record "waiting on merge"
+  and stop.
+
+### nonclaims
+1. Does not prove or test skill usability, cooldowns, damage or persistence of any of the 4 skills.
+2. Does not prove anything about a class other than class_id=1, or about any character other than the one
+   used this session.
+3. Does not reopen or change the verdicts of GT-058/GT-059/GT-064 (archived CLOSED) or GT-116 (CLOSED PASS)
+   -- this is a new, narrower question those tickets never asked.
+4. Does not touch or depend on GT-243's own claim (hotbar-vs-hotkey dispatch producer) -- the two tickets
+   share only an attended appointment and a login precondition, not a server boot or a claim.
+5. Does not resolve the semantics of the three record-wire positions or the trailing u8.
+6. Does not prove anything about the inbound CLearnSkillVital 0x36AA direction (no handler exists).
+7. Single account, single character, one attended sitting -- no second player observing, no cross-account
+   comparison.
+8. Does not decide the cause of any name-label colour observed (RE-067 stays open).
+
+### closing instructions (per PANYA-DECISION 20260903_1934)
+If the result lands in outcome box C or D above, the lane that consumes this result must, in the SAME round,
+open a follow-up edit to `learn_skill_result_hypothesis.py`'s own module docstring (the "NO CLIENT HAS EVER
+SEEN ONE OF THESE FRAMES... queued and not run" sentence and any nearby claim implying this question is still
+open) so the module's own text stops implying an unanswered question this ticket has just answered. Name
+`GT-249` in that edit.
 
 ## numbering
 `GT-248` ถูกใช้เป็น `RE-248` ในรอบเดียวกัน (`CLIENT_RE_QUEUE.md` -- ตัวนับร่วมสองคิว) => ใบนี้ `249`

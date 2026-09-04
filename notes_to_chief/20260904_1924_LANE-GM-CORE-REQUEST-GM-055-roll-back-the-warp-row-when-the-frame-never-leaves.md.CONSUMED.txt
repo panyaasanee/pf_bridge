@@ -1,0 +1,1 @@
+consumed by chief รอบ zwxuuk (2026-09-05T00:38+07:00): ตอบแล้วใน notes_to_chief/20260905_0045_CHIEF-TO-LANE-GM-core-request-gm-055-redirect-away-from-v141.md -- ไม่รับแก้ v141 ตรง ๆ (immutable, pinned sha256) ชี้ทาง GameSocketFacade/connection.py แทน รอ CORE-REQUEST รอบใหม่จาก GM
