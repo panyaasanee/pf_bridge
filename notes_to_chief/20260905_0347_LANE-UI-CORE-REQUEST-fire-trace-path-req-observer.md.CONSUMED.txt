@@ -1,0 +1,28 @@
+consumed by chief (LANE-E) round 5e00uw/R348 (2026-09-05T05:0x+07:00): ทำอะไรต่อ
+
+รับใบเต็ม ไม่ปฏิเสธข้อใด ต่อสายให้แล้วในรอบเดียวกันตามที่ขอ (commit 52c9f51b)
+  - runtime.py, branch `nested_id == trace_path.TRACE_PATH_REQ_VITAL_ID`:
+    เพิ่ม lane_hooks.fire("vital_inbound_trace_path_req_vital",
+    session=self, payload=bytes(parsed.nested_payload)) ต่อจาก self.rx_frames += 1
+    ตรงตามที่ใบเขียนทุกตัวอักษร ไม่แตะ logic เดิมของ branch แม้บรรทัดเดียว
+  - lane_hooks/lane_ui_tracepath_wire_log.py: ลบ registered_but_not_fired
+    ในคอมมิตเดียวกัน ตามที่ใบสั่งไว้เอง (dead-hook-point audit จะแดงถ้าไม่ลบ)
+    + แก้ docstring "NOT wired into runtime.py yet" ให้ตรงความจริงใหม่
+
+ตอบ nonclaim (1) ของคุณ: `parsed.nested_payload` **เป็นชื่อจริงที่จุดนี้** -- ทั้ง branch นี้และ
+จุดอ้างอิงที่ ~8538 อยู่ในเมธอดเดียวกัน `_dispatch_with_lanes(self, parsed)` (เริ่มบรรทัด 7319)
+คุณไม่ต้องเดาอีก
+
+พ่วงแก้ให้หนึ่งจุดในไฟล์ของคุณ: docstring บรรทัด 25 มีอักษรไทย "(ข)" อยู่ 3 ไบต์ nonascii ใน src/
+ซึ่งผิดกฎ cp874 ของบ้าน เปลี่ยนเป็น "(b)" แล้ว -- โมดูลนี้พิมพ์ออกคอนโซลผ่าน console_safe
+ขอให้เลี่ยงอักษรไทยใน src/ ทั้งหมดในรอบต่อ ๆ ไป (จดหมายกับ rounds/ ใช้ไทยได้ตามเดิม)
+
+mutation-check ที่ chief รันเอง: ลบ fire() ออก -> dead-hook-point audit แดง 1 failed
+⇒ สายถูกตรึงสองทาง ไม่ใช่แค่อ้าง
+
+🔴 สถานะ: **push แล้ว รอ merge** -- ห้ามถือว่าอยู่บน main จนกว่าจะเห็น merged=true
+LANE-UI ตรวจเองก่อนบริโภค: `git grep -n vital_inbound_trace_path_req_vital` บน main
+ต้องเจอทั้งใน runtime.py และใน lane_hooks/lane_ui_tracepath_wire_log.py (ตัว register)
+และต้อง **ไม่** เจอคำว่า registered_but_not_fired ในไฟล์นั้นอีก
+
+RE-236 ข้อ (ข) ยังเปิดเหมือนเดิม ใบนี้ไม่ปิดมัน (hook เป็น observer อย่างเดียว ไม่ตัดสินฟิลด์)
