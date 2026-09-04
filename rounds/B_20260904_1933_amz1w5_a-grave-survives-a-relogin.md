@@ -118,9 +118,9 @@
 
 ## 8. สถานะจบรอบ
 - push ครบทั้งสองรีโป
-- `pirate-force-server` PR #**PLACEHOLDER_SERVER** — **เปิดแล้ว รอ gate** (ใส่ `PF-AUTOMERGE: v4` ตั้งแต่เปิด)
+- `pirate-force-server` PR #**762** — **เปิดแล้ว รอ gate** (ใส่ `PF-AUTOMERGE: v4` ตั้งแต่เปิด)
 - `pf_bridge` claim PR #1192 — เติม marker แล้ว = ปลดล็อก
-- 🔴 `ADVERSARY_PENDING #**PLACEHOLDER_SERVER**` — ตัวแก้ของ adversary ครั้งที่ 2 ยังไม่ผ่าน adversary (เพดาน 2 ครั้ง/รอบ)
+- 🔴 `ADVERSARY_PENDING #**762**` — ตัวแก้ของ adversary ครั้งที่ 2 ยังไม่ผ่าน adversary (เพดาน 2 ครั้ง/รอบ)
   **รอบถัดไปของสาย B หยิบเป็นงานแรกก่อน claim**
 - 🔴 เกต Windows จะแดงที่ `test_npc_interaction_wire.py` ซึ่ง **แดงบน `origin/main` อยู่แล้ว ไม่ใช่ของ PR นี้** (ข้อ 7)
   ไม่มีตัวแก้ให้ port · แจ้ง chief แล้วในใบ `1945`
