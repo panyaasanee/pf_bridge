@@ -13354,7 +13354,7 @@ LOGIN_CLASS_ID fallback class_id=1 reason=row_has_no_class_id
 
 ---
 
-## GT-243 LIVE-WARP-SCENE-PERSISTS-ACROSS-LOGIN-001  [BLOCKED -- do not boot until pf-adversary's second pass on server#745's second commit (D1/D2 fix, code q3cde9) has returned clean · STOP-on-HP-0]
+## GT-244 LIVE-WARP-SCENE-PERSISTS-ACROSS-LOGIN-001  [BLOCKED -- do not boot until pf-adversary's second pass on server#745's second commit (D1/D2 fix, code q3cde9) has returned clean · STOP-on-HP-0]
 
 > Closes finding F-3 under `GT-172` (live warp changes the on-screen scene immediately but
 > historically did not update the `character_positions` row used at next login -- a player who
@@ -13497,9 +13497,12 @@ LOGIN_CLASS_ID fallback class_id=1 reason=row_has_no_class_id
   (`GM_WARP_SCENE_PERSIST_FAILED` implementation, PR push not yet confirmed merged as of that
   round's own end) -- `pirate-force-server#745` (`c2610cc`) --
   `src/pirateforce_foundation/gm/warp_scene_persist.py`
-- numbering: highest confirmed entry in this file before this one was `GT-242`; grepped
-  `GT-24[0-9]` across `pf_bridge` (this file, `CLIENT_RE_QUEUE.md`, `archive/`, `rounds/`,
-  `notes_to_chief/`) and found no existing `GT-243` anywhere. This entry is `243`.
+- numbering: originally drafted as `GT-243` after grepping `GT-24[0-9]` across the working tree
+  and finding no existing `GT-243` -- but that check ran against a stale local clone. LANE-CS
+  independently opened `GT-243` (`HOTBAR-SKILL-99-VS-WIELD-Z-SAME-SESSION-HEX-DIFF-001`) around
+  the same time and it landed on `main` first (`git show origin/main:GAME_TEST_QUEUE.md` confirms
+  it). Per prompt section 4 ("เลขชนกับที่มีอยู่ ห้ามทับ ให้ +1"): renumbered to `244` by chief
+  round `ub8svt` before merging main into this branch, no other change.
 - result: (tester fills in: PASS/FAIL/still-BLOCKED, evidence for both layers separately,
   console lines verbatim, DB row read verbatim, sha256, boot stamp, `OBSERVER_CONFIRMED`
   timestamp)

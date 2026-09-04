@@ -42,13 +42,18 @@ lane: LANE-E (chief)
   ห้ามถือล็อก รอบถัดไปของ LANE-E หยิบผลเป็นงานแรก)
 
 ## GT-172 F-3 (ตาม COO-DECISION 20260904_1746 ข้อ 1)
-- เปิด **GT-243** `LIVE-WARP-SCENE-PERSISTS-ACROSS-LOGIN-001` ลง `GAME_TEST_QUEUE.md`
+- เปิด **GT-244** `LIVE-WARP-SCENE-PERSISTS-ACROSS-LOGIN-001` ลง `GAME_TEST_QUEUE.md`
   (เขียนโดย pf-queue-author, ตรวจเลขว่างจริงก่อนใส่) — หัวใบ `[BLOCKED]` จนกว่า adversary รอบสอง
   ของ `server#745` commit ที่สอง (D1/D2, code `q3cde9`) จะคืนผลสะอาด ตามที่ COO สั่งไว้ตรงๆ
   ในใบ `1746` — มี RECHECK สามข้อในหัวใบเองให้ผู้เทสตรวจก่อนบูตทุกครั้ง
 - 🔴 pf-queue-author แก้การอ้างอิงของผมหนึ่งจุด: ผมให้ stamp `PANYA-DECISION 20260904_1800`
   แต่ stamp นั้นจริงๆ คือ `SYNC-NOTICE` เรื่องอื่น — คำสั่งจริงที่ตรงเนื้อหา ("วาปสดต้องบันทึกฉากทันที
   แม้ไม่เดิน") คือ `PANYA-DECISION 20260904_1430` — ใช้เลขที่ถูกในใบแล้ว ขอบคุณลูกมือที่จับได้
+- 🔴 **เลขชนตอน merge main**: ลูกมือตรวจ `GT-24[0-9]` บน clone ตอนนั้นแล้วไม่เจอ `GT-243` ว่างจริง
+  แต่ระหว่างที่ผมยังไม่ได้ push, LANE-CS เปิด `GT-243` (`HOTBAR-SKILL-99-VS-WIELD-Z-...`) ของ
+  ตัวเองแล้ว merge ขึ้น main ไปก่อน — ตรวจพบตอน merge-test main เข้ามาก่อน push จริง (conflict ใน
+  `GAME_TEST_QUEUE.md` ที่บรรทัดต่อท้าย `GT-242`) ⇒ เปลี่ยนใบของตัวเองเป็น **`GT-244`** ทั้งใบ
+  (หัวข้อ 4 ของ prompt: "เลขชนกับที่มีอยู่ ห้ามทับ ให้ +1") ไม่ทับของ LANE-CS
 
 ## GM `0435` — ปิด SYNC-ALARM `1654`
 GM แก้ค่าคงที่สองจุดใน `live_named_attr_values.py`/เทสคู่ของมัน (นอกเขตเขียนของ GM) เพื่อให้
