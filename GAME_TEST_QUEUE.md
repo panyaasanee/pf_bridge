@@ -13266,11 +13266,11 @@ LOGIN_CLASS_ID fallback class_id=1 reason=row_has_no_class_id
 
 ---
 
-## GT-233 M2-PROVISIONING-TRIAL-001  [🔴 BLOCKED -- รอ `pirate-force-server#751` (กิ่ง `claude/charming-mendel-0foax0`) ขึ้น `main` **และ** chief's CORE-REQUEST call site/msg_id (pf_bridge `notes_to_chief/20260904_1806_LANE-A-STATUS-*`) -- เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-A** · ผู้บริโภคผล = LANE-A]
+## GT-233 M2-PROVISIONING-TRIAL-001  [🔴 BLOCKED -- รอ `pirate-force-server#753` (กิ่ง `claude/charming-mendel-0foax0`) ขึ้น `main` **และ** chief's CORE-REQUEST call site/msg_id (pf_bridge `notes_to_chief/20260904_1806_LANE-A-STATUS-*`) -- เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-A** · ผู้บริโภคผล = LANE-A]
 
 > 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `wjqykr`/R338 2026-09-04T14:0x+07:00** ตาม `COO-DECISION 20260904_1345` ข้อ 3(ค) และ `20260904_1346` ข้อ 2(จ)
-> **เนื้อใบเขียนแล้วโดย LANE-A รอบ `0foax0` 2026-09-04T18:1x+07:00** -- ยืนยันตรงกับ (ก)/(ข) ที่ push แล้วใน `#751`: responder override id 2/3 + `world_m2_provisioning_trial.py` composer (ยังไม่มีไบต์ส่งจริง จนกว่า chief เดินสายจุดเรียก `runtime.py` + wire msg_id)
-> 🔴 **ห้ามเรียกผู้เทสจนกว่า `#751` จะ merge และ chief's call site ขึ้น `main`** — บูตวันนี้ยังไม่มีจุดส่งจริง จะได้ FAIL ปลอมจากการยังไม่ได้ wiring ไม่ใช่จากกลไก
+> **เนื้อใบเขียนแล้วโดย LANE-A รอบ `0foax0` 2026-09-04T18:1x+07:00** -- ยืนยันตรงกับ (ก)/(ข) ที่ push แล้วใน `#753`: responder override id 2/3 + `world_m2_provisioning_trial.py` composer (ยังไม่มีไบต์ส่งจริง จนกว่า chief เดินสายจุดเรียก `runtime.py` + wire msg_id)
+> 🔴 **ห้ามเรียกผู้เทสจนกว่า `#753` จะ merge และ chief's call site ขึ้น `main`** — บูตวันนี้ยังไม่มีจุดส่งจริง จะได้ FAIL ปลอมจากการยังไม่ได้ wiring ไม่ใช่จากกลไก
 
 - **คำถามของใบ**: บูตบิลด์ที่ provision `NavigationEx_AddSurveyDataVtial` record ของเกาะ 2 (Prison Exile) และ 3 (Spice Paradise) แล้วแล่นเรือชนเกาะทั้งสอง — ไคลเอนต์เปิดหน้า "รายงานกัปตัน เรือเทียบท่า [ชื่อเกาะ]" เองหรือไม่
 - **เกณฑ์ชั้น wire/DB**: เฟรม `AddSurveyData` ออกจากเซิร์ฟเวอร์จริงสองแถว (byte `+0x10`=1 · u16 ทดลอง = 2/3 · XYZ ตาม `COO 1345` ข้อ 2: เกาะ 2 = rx152 `-5613.8, 4162.5, 186.0` · เกาะ 3 = rx433 `-1563.5, -5275.1, 186.0`) · บันทึกทุกเฟรมขาออก/ขาเข้าเป็น hex

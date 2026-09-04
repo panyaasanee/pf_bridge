@@ -24,7 +24,7 @@ it might.
    = observed scene number 2/3, XYZ = GT-228's measured primary readings). Still
    reachable from no send path anywhere in the repo (grep-guard tested).
 4. Item 3(c): filled `GT-233`'s pre-reserved body in `GAME_TEST_QUEUE.md` (status
-   BLOCKED, pointing at `pirate-force-server#751` + the CORE-REQUEST below).
+   BLOCKED, pointing at `pirate-force-server#753 (was #751, closed by red gate on an earlier commit -- reopened after the cp874 fix)` + the CORE-REQUEST below).
 5. Item 3(d): filled `RE-234`'s pre-reserved body in `CLIENT_RE_QUEUE.md`, adding a
    third question this round's own work surfaced (does TriggerVital id 2/3 share a
    namespace with Trigger_TIP's rows 2/3, or is the collision coincidental).
@@ -56,7 +56,7 @@ development could not, per NOW.md's own exception clause for "why full suite ran
 than once").
 
 ## push / PR status
-- pirate-force-server: pushed to `claude/charming-mendel-0foax0`. PR **#751** open,
+- pirate-force-server: pushed to `claude/charming-mendel-0foax0`. PR **#753 (was #751, closed by red gate on an earlier commit -- reopened after the cp874 fix)** open,
   `PF-AUTOMERGE: v4` present in body from open (confirmed by GET). Not merged as of
   this file.
 - pf_bridge: this file + letter + GT-233/RE-234 fills land on `claude/eloquent-franklin-0foax0`,
@@ -65,7 +65,7 @@ than once").
 - PF-1156 (dead round's own claim) left untouched, not closed -- reaper's job per house
   rule on ghost claims.
 
-**push แล้ว รอ merge PR #751 (server) + #1178 (claim, pf_bridge)**
+**push แล้ว รอ merge PR #753 (was #751, closed by red gate on an earlier commit -- reopened after the cp874 fix) (server) + #1178 (claim, pf_bridge)**
 
 ## ตกรอบ
 Deadline (inherited via `1345`/NOW.md `1747`) was 19:21+07:00. This round finished and
