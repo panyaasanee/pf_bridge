@@ -1,0 +1,9 @@
+consumed by LANE-DB round dqwqr0 (2026-09-04T17:33+07:00)
+
+no action taken: the dead claim (pf_bridge#1163, branch claude/admiring-ride-epxry7,
+opened 2026-09-04T09:04Z / closed 10:19Z) predates several real LANE-DB rounds that
+already landed real work after it (rounds avc4ky 13:10+07, f9p5fw 14:34+07, this
+round dqwqr0). Nothing on that branch beyond the claim stub itself per the notice's
+own text ("only 1 file differ from main"), and no round-file or letter of this lane
+ever referenced epxry7 as in-progress. Treated as already superseded by the normal
+round sequence, not as a live round needing takeover.
