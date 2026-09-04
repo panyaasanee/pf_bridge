@@ -78,6 +78,14 @@ import: `from . import mob_death_persistence`
 ขอให้คุณทราบว่าใบนั้นต้องการ **สองจุดเรียก** ไม่ใช่จุดเดียว: `seed_cell` (ใบ `1652`) สำหรับของบนพื้น
 และบรรทัดข้างบนสำหรับศพ · ลงจุดเดียวแล้วรัน GT-223 = ผ่านครึ่งใบ
 
+## 🔴 แถม: ชุดเต็มแดงบน `origin/main` อยู่แล้ว ไม่ใช่ของ PR ไหน
+วัดเอง 2026-09-04T20:2x บน worktree สะอาดจาก `origin/main` (`90d5aaa`) ไม่มี diff ของผมเลย:
+`tests/test_npc_interaction_wire.py::QuestAndShopStateGuardTests::test_every_symbol_exemption_is_still_earned`
+`module='runtime.py'` → ข้อยกเว้นสองตัว `columbus_quest3021_dispatch_refused_` / `columbus_quest3205_dispatch_refused_`
+ไม่แมตช์ชื่อใน `runtime.py` แล้ว ("exemption no longer matches any code name here")
+เป็นการ์ดของคุณ (`COO 1847`) ในไฟล์ของคุณ ผมไม่แตะ · **เกต Windows จะแดงด้วยเหตุนี้กับทุก PR ของทุกสาย** จนกว่าจะแก้
+(น่าจะเป็นการเปลี่ยนชื่อ/ลบชื่อใน `runtime.py` รอบไหนสักรอบแล้วลิสต์ข้อยกเว้นค้าง — ซึ่งเป็นสิ่งที่เทสตัวนี้เกิดมาจับพอดี)
+
 ## nonclaim
 ① ผมไม่แตะ `runtime.py` ในรอบนี้ ② ยังไม่พิสูจน์บนจอ — พิสูจน์แล้วเฉพาะชั้น wire
    (register ที่สร้างจากศูนย์แล้ว seed บอกว่ามันตาย · `live_roster` ไม่คืนมันมา · การฆ่าครั้งถัดไปยัง commit ได้)

@@ -84,6 +84,14 @@
 
 ## 7. ชุดเทส
 - ระหว่างทาง: `tests/test_mob_death_persistence.py` + ไฟล์ที่แตะ `commit_death` ทั้งหมด (9 ไฟล์ 381 ผ่าน 73 subtest)
-- ชุดเต็ม: ครั้งเดียว บน commit สุดท้าย หลัง merge `origin/main` — ผลอยู่ท้ายไฟล์นี้
+- ชุดเต็ม: **รันสองครั้ง** และนี่คือเหตุผลตามที่กติกาบังคับให้เขียน — ครั้งแรกจบตอน pf-adversary ยังไม่คืนผล
+  ผลของมันบังคับให้แก้โค้ด (D1/D2 เป็นตัวหยุดรอบ ไม่ใช่ข้อคิดเห็น) ⇒ ต้องรันใหม่บนต้นไม้ที่แก้แล้ว
+  - ครั้งที่ 1 (ก่อนแก้): `1 failed, 9226 passed, 8 skipped, 17548 subtests` 369.60s
+  - ครั้งที่ 2 (commit สุดท้าย · merge `origin/main` `90d5aaa` แล้ว): **`1 failed, 9238 passed, 8 skipped, 17548 subtests`** 365.18s
+- 🔴 **`1 failed` ตัวนั้นไม่ใช่ของ PR นี้ — แดงบน `origin/main` เหมือนกัน** (วัดเอง: worktree สะอาดจาก `origin/main`
+  `pytest tests/test_npc_interaction_wire.py` → `1 failed` เดิมเป๊ะ) ⇒ `QuestAndShopStateGuardTests::test_every_symbol_exemption_is_still_earned`
+  `module='runtime.py'` · ข้อยกเว้น `columbus_quest3021_dispatch_refused_` / `columbus_quest3205_dispatch_refused_`
+  ไม่แมตช์ชื่อในโค้ดแล้ว · **เป็นการ์ดของ chief (`COO 1847`) และเป็นไฟล์ของ chief** — ผมไม่แตะ แจ้งไว้ในใบถึง chief
+  รอบนี้ไม่มีตัวแก้ให้ port · เกต Windows จะแดงด้วยเหตุนี้กับทุก PR จนกว่า chief จะแก้
 
 ## 8. สถานะจบรอบ
