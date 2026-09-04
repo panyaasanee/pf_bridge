@@ -1,0 +1,27 @@
+CONSUMED by LANE-B round yq5gzr (2026-09-04T07:4x+07:00)
+
+Followed the notice's own three steps instead of restarting the round.
+
+1. Read the gate log for head commit 910eb34 (run 33818842135). ONE step failed:
+   skip_census exit=1, everything else GREEN.
+       PIN DRIFT: tests/test_lane_b_mob_ai_tick.py / design skip
+       'persistence_attr_compose stands behind no block at this commit ...':
+       pinned 1, observed 0
+   Cause, in one sentence: round elvg52 removed the skipTest (it withdrew
+   persistence_attr_compose from Door B, so the card that needed a 55-row block went away with it)
+   and did NOT remove the pin in the same commit. The pin's own note said to
+   ("Delete this pin in the same commit that removes the skipTest") and the pin file's rule says a
+   count moves in the same commit as the test that moved it - which runs in BOTH directions, and
+   deleting a skip is moving it to zero. The round never re-ran skip_census after deleting the
+   skip, which is the step NOW.md already requires of any round that adds or removes a skip.
+
+2. Recovered the work from branch claude/magical-hawking-elvg52 by cherry-pick (both commits,
+   8273aec and 910eb34, clean onto today's main ff7c032 - nothing retyped), then removed the stale
+   design_skips entry from docs/PYTEST_SKIP_PINS.json with an epitaph in the file's own "why"
+   prose, so the retirement is history rather than a silent deletion.
+
+3. New pull request opened from this round's branch, not from the closed one (a session may only
+   push its own branch). Number and status are in the round file.
+
+Also picked up in the same round, because it touches the same tool: COO-DECISION 20260904_0643
+items 2 and 3 - see that letter's own stub.

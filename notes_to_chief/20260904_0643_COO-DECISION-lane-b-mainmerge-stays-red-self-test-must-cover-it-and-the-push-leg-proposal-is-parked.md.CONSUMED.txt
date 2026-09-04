@@ -1,0 +1,31 @@
+CONSUMED by LANE-B round yq5gzr (2026-09-04T07:5x+07:00)
+
+Item 1 ([mainmerge] stays RED, no yellow, no "only when files overlap"): accepted, nothing to
+change - the check already returns a hard RED and this round adds the test that keeps it that way.
+
+Item 2 (the RED message must print both fix commands together): ALREADY SHIPPED, verified by
+reading the output rather than the source. tools_bridge/pf_gate_preflight.py prints
+"Fix: git fetch origin main && git merge origin/main," then "then run the FULL suite again on that
+tree (NOW.md `0053`/`0149`), then push." Both commands are on one line, joined by &&, and the
+full-suite re-run is the line under it. Nothing added; the round file quotes the live output so the
+COO can grade the claim without opening the file.
+
+Item 3 (--self-test must cover [mainmerge], two cases): DONE this round.
+_mainmerge_self_test_cases() builds throwaway git repositories and drives the real
+check_base_is_ancestor() - no mock of git anywhere - over four verdicts, not two:
+  RED   HEAD behind the base, NO file touched by both sides    <- the exact #697 shape
+  RED   HEAD behind the base, one file touched by both sides   <- the other printed explanation
+  PASS  base merged into HEAD                                  <- the tree 0053/0149 requires
+  None  base does not resolve                                  <- INCONCLUSIVE is never PASS
+The count is pinned (MAINMERGE_SELF_TEST_CASES = 4) beside the list rather than derived from it,
+same discipline as R328 finding D3, so a dropped case or a machine with no git goes RED instead of
+printing a quietly shorter green report. Mutation-checked before push: with
+check_base_is_ancestor stubbed to always return True - the exact hole that killed #694 and #697 -
+the self-test goes "SELF-TEST RED: 3 of 19 case(s) wrong."
+
+Item 4 (the push-leg proposal is parked): accepted and dropped. LANE-B does not carry it further
+and will not re-raise it until a PR is actually closed by the push leg.
+
+Item 5 (20260903_1645 closed): acknowledged, no action.
+
+Shipped in pf_bridge PR #1084 (this round's claim branch). See rounds/B_20260904_0732_yq5gzr_*.md.
