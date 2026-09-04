@@ -23,13 +23,18 @@ grep `record+0`/`743`/`CTracePathReqVital` ทั่ว `notes_to_chief/` (ร�
 float ผ่าน `cvtsi2ss` ที่ consumer `[0x006EAC47,0x006EACB3)` — **ไม่ใช่** raw32 ตัวที่คิดว่าเป็น vec3+scalar เดิม
 ก่อนหน้านี้ ข้อสมมติฐานนั้นถูกหักล้างแล้วโดย `RE-119` เอง) — `PF_SERIALIZER_FIELDS.tsv:5491-5520`
 
-**server ตอบอะไรอยู่ตอนนี้**: `pirateforce_foundation/trace_path.py` + `runtime.py:7321-7338` ตอบ empty-vector
-เสมอ (count=0) โดย**ไม่แตะ**ค่า `u16@+0x14` ของ request เลย เกตอยู่ที่ `self.foundation.selected is None` ของ
-server เอง ไม่ใช่การอ่านฟิลด์ 743 — ตรงตามขอบเขตที่ `CORE-REQUEST-025` ตั้งใจ (`trace_path.py:13-20`) ปิดแค่ปัญหา
-"ปุ่มค้าง" (`GT-120` PASS) เท่านั้น มี headless test 4 ตัวยืนยัน (`tests/test_trace_path_wiring.py`)
+**server ตอบอะไรอยู่ตอนนี้**: `pirateforce_foundation/trace_path.py` + `runtime.py:7321-7338` ~~ตอบ empty-vector
+เสมอ~~ **แก้ `7kr753`**: แม่นยำกว่า — ตอบ empty-vector (count=0) เมื่อ `self.foundation.selected is not None`
+เท่านั้น ถ้า `selected is None` **ไม่ตอบอะไรเลย** (`return []`, ยืนยันจาก
+`tests/test_trace_path_wiring.py::test_no_selected_character_gets_no_reply`) — ทั้งสองกรณี**ไม่แตะ**ค่า
+`u16@+0x14` ของ request เลย เกตอยู่ที่ `self.foundation.selected is None` ของ server เอง ไม่ใช่การอ่านฟิลด์ 743
+— ตรงตามขอบเขตที่ `CORE-REQUEST-025` ตั้งใจ (`trace_path.py:13-20`) ปิดแค่ปัญหา "ปุ่มค้าง" (`GT-120` PASS) เท่านั้น
+มี headless test 4 ตัวยืนยัน (`tests/test_trace_path_wiring.py`)
 
 ## สิ่งที่ static ปิดไม่ได้ — ของที่ขอรอบนี้
-`u16@+0x14=743` ชนทั้ง `CONSTDATA_TH__QUEST.tsv n_ID=743` (ฉาก 5) **และ** `CONSTDATA_TH__MOBS.tsv n_ID=743`
+`u16@+0x14=743` ชนทั้ง ~~`CONSTDATA_TH__QUEST.tsv`~~ **แก้ `7kr753` (pf-adversary จับได้): ชื่อไฟล์ผิด — ตาราง
+เควสจริงคือ `gamedata/tables/QUESTDATA_TH__QUEST.tsv` (ยืนยันซ้ำเอง: แถว 599, คอลัมน์ 1 `n_ID=743`,
+คอลัมน์ 3 `n_SCENE=5` ตรงกับที่อ้าง)** `n_ID=743` (ฉาก 5) **และ** `CONSTDATA_TH__MOBS.tsv n_ID=743`
 ("Jail Dead Prisoner") พร้อมกัน — เลขตรงกันสองตารางพิสูจน์ semantic ไม่ได้ (`RE-119` T4 เขียนไว้เอง "ห้ามสรุปจาก
 เลขตรงกันเฉย ๆ") มีสามความเป็นไปได้ที่ยังไม่ตัด: quest id / NPC `n_ID` / list-index ภายใน UI
 
