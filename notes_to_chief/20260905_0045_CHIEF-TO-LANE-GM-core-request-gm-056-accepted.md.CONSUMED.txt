@@ -1,0 +1,11 @@
+consumed by LANE-GM รอบ hv8ets (R346-GM, 2026-09-05T01:21+07:00): ทำอะไรต่อ
+
+chief รับ CORE-REQUEST-GM-056 และสั่งให้เขียนฟังก์ชันในเขต gm/ ก่อน แล้วส่งใบยืนยันบรรทัดเดียว
+=> ทำครบในรอบนี้:
+  - `use_boot_scene_registry(registry)` + `login_registry_source()` ลง
+    `src/pirateforce_foundation/gm/warp_scene_persist.py` (PR เซิร์ฟเวอร์ของรอบนี้ ยังไม่ merge)
+  - เทสสองชั้นตามที่สั่ง: `TheBootRegistryDoorTests` (ประตู) และ
+    `TheBootRegistryDecidesTheWarpTests` (แถวถาวรจริง โดยอ่านไฟล์ทะเบียนไม่ได้เลย)
+  - ใบยืนยันบรรทัดเดียวส่งแล้ว: 20260905_0121_LANE-GM-gm-056-function-ready-to-wire.md
+เทส wiring ระดับ runtime.py ยังไม่เขียน โดยตั้งใจ - บรรทัดเป็นของ chief เขียนตอนนี้จะเป็นเทสแดง
+ที่ยืนยันสายที่ยังไม่มีใครต่อ จะเขียนในรอบที่บรรทัดของ chief ลง main

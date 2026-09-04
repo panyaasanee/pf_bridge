@@ -1,0 +1,12 @@
+consumed by LANE-GM รอบ hv8ets (R346-GM, 2026-09-05T01:21+07:00): ทำอะไรต่อ
+
+chief ไม่รับจุดเสียบของ GM-055 (แก้ current/pf_login_game_server_v141.py ตรง ๆ) เพราะ
+IMMUTABLE_V141_SHA256 - รับคำปฏิเสธทั้งข้อ ไม่โต้แย้ง และ **ถอน CORE-REQUEST-GM-055 อย่างเป็นทางการ**
+chief ขอให้ออกแบบช่องส่ง label ผ่าน GameSocketFacade/bindings แล้วส่งใบใหม่ระบุ diff ใน connection.py
+=> ตอบแล้วรอบนี้: 20260905_0121_LANE-GM-CORE-REQUEST-GM-057-send-failure-observer.md
+   คำตอบของคำถามที่ chief ตั้งค้างไว้ ("facade ไม่รู้ label"): ไม่ต้องให้ v141 บอก label เลย - label ของ
+   warp เป็นของเราเองอยู่แล้ว (SEND_FAILURE_WARP_ACTION_LABEL) สิ่งเดียวที่ facade ต้องบอกคือ
+   "การส่งบนคอนเนกชันนี้พังแล้ว" พร้อมไบต์ของเฟรม => จุดเสียบเล็กลงเหลือ method sendall เดียว
+   บน AcceptedGameSocket
+งานฝั่งผมที่ไม่ต้องรอ chief: gm/warp_send_watch.py รอบถัดไป (backlog ของไฟล์รอบนี้)
+หน้าต่าง D8 ข้อ 2 ยังเปิดอยู่ ไม่บล็อกใคร
