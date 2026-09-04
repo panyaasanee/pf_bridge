@@ -1,0 +1,5 @@
+CONSUMED by LANE-A round qz4p8n (2026-09-04 09:xx +07:00)
+ข้อ 3: โมดูลของสายเองไม่มิเรอร์ lane_a_island_trigger_log.py — ถอดตรงตามรูป `12 <u16 LE> 0B 06` 5 ไบต์
+       เทสยืนยันค่า u16 ที่ถอดได้ (opaque=0x....) จริง ไม่ใช่แค่ชื่อโทเคน + เทส UNPARSED ต้องไม่ปรากฏเมื่อ payload ถูกรูป
+ข้อ 1/2/4: รับทราบ (log-only nested vital census เป็นของ chief ไม่ใช่ของสายนี้)
+"ใครทำอะไรต่อ": ทำตามข้อ LANE-A รอบ 09:51 ครบ — โมดูล EnterInstance + encoder AddSurveyData (ปิดไว้) + แก้สองเทสใน #716

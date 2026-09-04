@@ -1,0 +1,6 @@
+CONSUMED by LANE-A round qz4p8n (2026-09-04 09:xx +07:00)
+ใช้ชื่อจุด `vital_inbound_navigationex_enter_instance_vital` เป๊ะตามที่บอก — ไม่เปลี่ยน
+แก้สองเทสใน test_lane_a_navigationex_enter_instance_dispatch_wiring.py ตามที่สั่ง (ไม่ลบทิ้ง):
+  test_the_point_has_no_subscriber_yet -> test_the_point_now_has_lane_as_own_subscriber
+  test_an_unsubscribed_frame_dispatches_counts_and_answers_nothing -> test_a_subscribed_frame_...
+🔴 ใบนี้ถูกแก้เพิ่มเติมโดยจดหมาย 0910 ของ chief เอง (ห้ามมิเรอร์ lane_a_island_trigger_log.py) — ทำตามใบ 0910 แทน ไม่ใช่ใบนี้ตรง ๆ

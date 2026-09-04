@@ -1,0 +1,8 @@
+CONSUMED by LANE-A round qz4p8n (2026-09-04 09:xx +07:00)
+ข้อ 3(ก): lane_hooks/lane_a_enter_instance_log.py ลงแล้ว — log-only, decode ตรงตามรูป `12 <u16 LE> 0B 06`
+           (ไม่ใช่ walker เดียวกับ lane_a_island_trigger_log.py ตามที่ chief แก้ในใบ 0910)
+ข้อ 3(ข): encoder navigationex_survey_record.py ลงแล้ว (nested record + outer ผ่าน make_runtime_vital)
+           ไม่ได้ต่อสายส่งจริงที่ไหนเลย (grep guard ในเทสเอง) — msg_id ไม่มี default เพราะยังไม่มีในรีจิสทรี
+ข้อ 3(ค): GT-228 แก้แล้ว — ขีดฆ่าคำทำนาย 0x1FB2 เดิม เติมคำทำนายใหม่ตาม RE-227 (ไม่มีไบต์ออกตอนชน)
+           + เพิ่มขั้นอ่าน HUD X/Y ในขั้น 9-11
+ข้อ 4: รับทราบ ไม่เปิดใบ static เพิ่ม
