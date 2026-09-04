@@ -83,8 +83,20 @@
 
 เทส: `python3 -m pytest tests/test_damage_by_skill.py tests/test_skill_catalog.py -q` = 33 passed,
 62 subtests · ชุดเต็ม `python3 -m pytest tests/ -q -rs` บนต้นไม้ที่ merge origin/main แล้ว (`90d5aaa`
-อยู่ใน HEAD ตลอด รอบนี้ merge เป็น no-op เพราะ branch ตัดจาก origin/main สดอยู่แล้ว) = ผลอยู่ท้ายไฟล์นี้
-(รันตอนเขียนไฟล์รอบ) · `python3 tools_bridge/pf_gate_preflight.py --repo ../pirate-force-server` = PASS
+อยู่ใน HEAD ตลอด รอบนี้ merge เป็น no-op เพราะ branch ตัดจาก origin/main สดอยู่แล้ว) รันสองครั้งอิสระ
+ได้ผลเดียวกันทั้งคู่: **`1 failed, 10052 passed, 327 skipped, 19379 subtests passed`** ตัวที่ตกคือ
+`tests/test_npc_interaction_wire.py::...::test_every_symbol_exemption_is_still_earned` บน entry
+`columbus_quest3021_dispatch_refused_`/`columbus_quest3205_dispatch_refused_` — **นี่คือช่องว่างที่
+รู้จักและบันทึกไว้แล้ว** ในคอมเมนต์ของ `ALLOWED_SYMBOLS["runtime.py"]` เอง (บรรทัดใกล้ 535):
+Python **<=3.11** ทำให้ f-string ทั้งก้อนเป็นโทเคน `STRING` เดียว ⇒ `module_code_text()` (ตัด
+`tokenize.STRING` ทิ้ง) มองไม่เห็นสองสัญลักษณ์นี้เลย ส่วนเกตจริง (`gate-windows.yml`) ปัก Python
+**3.14** ซึ่งอ่านเห็นปกติ (PEP 701 `FSTRING_MIDDLE`) — chief เขียนไว้ตรง ๆ ว่า "ถ้าเทสนี้แดงบน entry
+สองตัวนี้บน interpreter <=3.11 คือช่องว่างที่รู้จักแล้ว ไม่ใช่ regression ห้ามลบ/แก้เทสเพื่อให้เขียว"
+(round `R341_ub8svt`/`pirate-force-server#754`) ตรวจ `python3 --version` บนเครื่องนี้ = **3.11.15**
+ตรงกับเงื่อนไขที่เอกสารไว้เป๊ะ · `git diff --stat origin/main..HEAD` (ก่อนคอมมิตรอบนี้) ยืนยันว่าตัวตก
+ไม่เกี่ยวกับ diff ของผม (`damage_by_skill.py` ไฟล์เดียว ไม่แตะ `runtime.py`/`test_npc_interaction_wire.py`
+เลย) ⇒ **ไม่ใช่ของรอบนี้ ไม่ใช่ regression ใหม่ ไม่แก้** ตาม nonclaims/grep rule ของบ้าน ·
+`python3 tools_bridge/pf_gate_preflight.py --repo ../pirate-force-server` = PASS
 
 **pf_bridge**:
 - ไฟล์นี้ (แทน `rounds/CS_plg1ne_claim.md`)
