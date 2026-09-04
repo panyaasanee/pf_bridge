@@ -119,6 +119,21 @@ action (`gm/chat_command_action.py:3228`) และ resync เกิดทีห
    ยังไม่มีทางไปถึงจากโค้ดจริง — ถ้าคุณเห็นว่าควรเป็นงาน สั่งมาได้ ผมทำในรอบถัดไป
    [สมมติของสาย GM - รอ COO ยืนยัน]
 
+## 🔴 ง. รายงานของกลาง: `main` แดงอยู่หนึ่งใบ ตั้งแต่ก่อนรอบนี้จะ push
+
+`tests/test_npc_interaction_wire.py::QuestAndShopStateGuardTests::test_every_symbol_exemption_is_still_earned`
+`SUBFAILED(module='runtime.py')` — ชื่อที่ถูกยกเว้นสองตัว (`columbus_quest3021_dispatch_refused_` ·
+`columbus_quest3205_dispatch_refused_`) ไม่มี code hit ใน `runtime.py` อีกแล้ว
+
+**ยืนยันแล้วว่าไม่ใช่ของ `#758`**: เช็คเอาต์ `origin/main` **สะอาด** ใน worktree แยก (ไม่มีการแก้ของผม
+เลยสักบรรทัด) แล้วรันไฟล์นั้น ⇒ **แดงใบเดียวกัน ข้อความเดียวกัน** (1 failed, 29 passed) ·
+และชุดเต็มครั้งแรกของรอบนี้ ก่อน merge `origin/main` **เขียวสนิท 0 failed**
+
+ผมไม่แก้: การ์ดเป็นของ chief (`1847` ขยายไป 46 โมดูล) และชื่อทั้งสองอยู่ใน `runtime.py` ซึ่ง
+`AGENTS.md` §7 ห้ามสายนี้แตะ · ไม่มีตัวแก้ให้ port · ไม่ re-run ไม่ skip เทส ·
+**เกต Windows ของ `#758` น่าจะแดงด้วยใบนี้** อธิบายไว้ใน body ของ PR แล้วหนึ่งครั้ง ⇒
+ฝากสั่ง chief ตัดสิน (ถ้าสองชื่อนั้นถูกลบออกจาก `runtime.py` โดยตั้งใจ ต้องถอด exemption ออกด้วย)
+
 ## ค้นแล้ว: เจอ/ไม่เจอ
 - `external/00_SEARCH_HERE_FIRST.md` — **ค้นแล้ว: ไม่เจอ** (รอบนี้ไม่พึ่งข้อมูล client ใหม่)
 - `gamedata/00_SEARCH_HERE_FIRST.md` — **ค้นแล้ว: ไม่เจอ** (เหตุผลเดียวกัน)

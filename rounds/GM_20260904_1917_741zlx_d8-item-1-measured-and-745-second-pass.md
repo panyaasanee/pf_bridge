@@ -1,4 +1,4 @@
-# LANE-GM รอบ `741zlx` — 2026-09-04T19:17+07:00 → (จบรอบ)
+# LANE-GM รอบ `741zlx` — 2026-09-04T19:17+07:00 → 19:53+07:00
 
 รหัสรอบ: `741zlx` (จาก branch ที่ระบบให้: `claude/eloquent-galileo-741zlx` / `claude/busy-gates-741zlx`)
 claim PR: `pf_bridge#1190` (เปิด 19:18 · ไม่ draft · ไม่มี marker จนกว่าจะ push ครบสองรีโป)
@@ -232,7 +232,31 @@ early-return แบบ same-scene ⇒ `last_target_pos` **ยังเป็น�
   9 subtests (ฐานของมิวแทนต์สามตัว)
 - `tests/test_gm_warp_persist_census_anchor.py` (ไฟล์ใหม่) — 4 passed
 
-ชุดเต็ม: กำลังรันบน commit สุดท้าย (จะเติมผลจริงในคอมมิตถัดไปของกิ่งนี้ ก่อนเติม marker)
+ชุดเต็ม **รันสองครั้งในรอบนี้ — เหตุผลตามที่ `COO 1428` สั่งให้เขียนไว้**:
+
+1. ครั้งแรกบน `86c193b` (ไฟล์วัด D8-1 + docs) ก่อน adversary คืนผล:
+   **10049 passed, 327 skipped, 19365 subtests passed, 0 failed, exit 0** (389.84s)
+   — เขียว(cloud sanity, local pytest) **เขียวสนิท**
+2. adversary คืนผลหลังจากนั้น เจอ CRITICAL + MAJOR สามข้อ ⇒ โค้ดผลิตเปลี่ยน ⇒ กติกาห้าม push
+   สภาพที่ไม่เคยถูกรันเต็ม ⇒ ครั้งที่สองบน `ea65a36` (ต้นไม้ที่ merge `origin/main` แล้ว):
+   **10074 passed, 327 skipped, 19381 subtests passed, 1 failed** (376.35s)
+   — เขียว(cloud sanity, local pytest) ยกเว้นใบเดียวที่ไม่ใช่ของรอบนี้ ⇒ ข้างล่าง
+
+### 🔴 หนึ่งใบแดง — แดงบน `main` อยู่แล้ว ไม่ใช่ของรอบนี้
+
+`tests/test_npc_interaction_wire.py::QuestAndShopStateGuardTests::test_every_symbol_exemption_is_still_earned`
+`SUBFAILED(module='runtime.py')` — สองชื่อที่ถูกยกเว้น (`columbus_quest3021_dispatch_refused_` ·
+`columbus_quest3205_dispatch_refused_`) ไม่มี code hit ใน `runtime.py` อีกแล้ว
+
+**วิธียืนยันว่าไม่ใช่ของเรา** (ไม่ใช่การเดา ไม่ใช่คำว่า "flake"): เช็คเอาต์ `origin/main` **สะอาด**
+ใน `git worktree add --detach` แยก ไม่มีการแก้ของรอบนี้เลยสักบรรทัด แล้วรัน
+`pytest tests/test_npc_interaction_wire.py` ⇒ **แดงใบเดียวกัน ข้อความเดียวกัน** (1 failed, 29 passed)
+· และชุดเต็มครั้งแรกของรอบนี้ (ก่อน merge `origin/main`) **เขียวสนิท 0 failed** ⇒ มันมาพร้อม main
+ตอน merge เก็บ worktree ทิ้งแล้ว
+
+**ไม่แก้ และไม่มีตัวแก้ให้ port**: การ์ดนี้เป็นของ chief (`COO 1847` ขยายการ์ด quest/shop ไป 46 โมดูล)
+และชื่อที่ถูกยกเว้นทั้งสองอยู่ใน `runtime.py` ซึ่ง `AGENTS.md` §7 ห้ามสายนี้แตะ ⇒ รายงานใน body ของ
+`#758` หนึ่งครั้ง และในใบ `1930` ถึง COO · **ไม่ re-run · ไม่ skip เทส · ไม่ปิดใบ**
 
 ## ค้นแล้ว: เจอ/ไม่เจอ
 
@@ -262,7 +286,20 @@ early-return แบบ same-scene ⇒ `last_target_pos` **ยังเป็น�
 
 ## จบรอบ
 
-กำลังดำเนินการ — จะเติมเมื่อชุดเต็มคืนผลและ push ครบทั้งสองรีโป (marker ยังไม่เติม)
+1. **push ครบทั้งสองรีโปแล้ว**
+   - `pirate-force-server` กิ่ง `claude/busy-gates-741zlx` — 3 commit (`86c193b` วัด D8-1 ·
+     `e8cbb32` ตัวแก้สี่ข้อของ adversary · `ea65a36` merge `origin/main`)
+   - `pf_bridge` กิ่ง `claude/eloquent-galileo-741zlx` — ไฟล์รอบ + จดหมายสองใบ + stub สามใบ
+     (ไฟล์ `_claim.md` ถูกลบบนกิ่งแล้ว ไฟล์รอบใบนี้แทนที่)
+2. **`pirate-force-server#758`** "[LANE-GM] A withheld /warp no longer leaves the row moved, and D8
+   item 1 is measured rather than argued" — เปิดแล้ว **ไม่ draft** · `PF-AUTOMERGE: v4` ใส่ตั้งแต่เปิด
+   · **GET กลับมายืนยันแล้วว่า marker อยู่จริงใน body** (`mergeable_state: unstable` = เกตยังไม่ตัดสิน)
+3. **`pf_bridge#1190`** (claim) — เติม `PF-AUTOMERGE: v4` เป็นขั้นสุดท้ายหลังข้อ 1/2 เสร็จ = **ปลดล็อก**
+4. **push แล้ว รอ merge PR #758** · PR เซิร์ฟเวอร์: **เปิดแล้ว รอ gate**
+   ไม่รอ gate ไม่รอ merge ตามกติกาจบรอบใหม่ (`COO 1229` — เกิดจริงกับ `#862` ค้าง 4 ชั่วโมง)
+   🔴 **ไม่เขียนว่าเสร็จ และไม่เขียนว่าอยู่บน main** — จะรู้ก็ต่อเมื่อรอบถัดไปเห็น `merged=true` (ข้อ A)
+   🔴 คาดไว้ล่วงหน้า: เกต Windows น่าจะแดงด้วยใบ `test_every_symbol_exemption_is_still_earned`
+   ที่แดงบน `main` อยู่แล้ว — ไม่ใช่ของ PR นี้ อธิบายไว้ใน body ของ `#758` แล้ว
 
 ## nonclaim
 
