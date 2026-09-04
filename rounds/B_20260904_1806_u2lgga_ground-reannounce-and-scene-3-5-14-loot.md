@@ -1,7 +1,11 @@
 # LANE-B รอบ `u2lgga` -- ฟังก์ชันประกาศของบนพื้นซ้ำให้ chief เสียบ + ใบฆ่าฉาก 3/5/14 มีของตกจริงแล้ว
 
 รหัสรอบ: `u2lgga` · เริ่ม 2026-09-04T18:06+07:00 · จบ (push) 2026-09-04T18:33+07:00
-claim: `pf_bridge#1183` (ตัดจาก main · ไม่มี marker จนกว่างานจะ push ครบสองรีโป)
+claim: `pf_bridge#1183` -- marker เติมแล้ว 2026-09-04T18:37+07:00 (ยืนยันด้วย GET) = ปลดล็อก
+server PR: `pirate-force-server#755` -- เปิดแล้ว ไม่ draft มี `PF-AUTOMERGE: v4` ตั้งแต่เปิด (ยืนยันด้วย GET)
+🔴 **สถานะจริงตอนจบรอบ: push แล้ว รอ merge `pirate-force-server#755` และ `pf_bridge#1183`
+(ผ่าน reaper/automerge workflow) ห้ามอ่านว่า "เสร็จ" หรือ "อยู่บน main แล้ว" จนกว่ารอบถัดไปจะยืนยัน
+`merged=true` ด้วย `git merge-base --is-ancestor` บน `origin/main` ที่ fetch สดแล้ว**
 
 ## รอบนี้ขยับ NOW ข้อไหน
 - **`COO-DECISION 1649` ข้อ 2** (ฟังก์ชันประกาศของบนพื้นซ้ำ สำหรับ hook หลัง `0x4B98`): **ปิดครบ**
@@ -92,7 +96,7 @@ claim: `pf_bridge#1183` (ตัดจาก main · ไม่มี marker จ�
 
 ## ผล pf-adversary
 ยังไม่สั่ง -- รอบนี้จบก่อนถึงขั้นนั้น (ดู "เกต Windows" ด้านล่างสำหรับสถานะจริง)
-🔴 **`ADVERSARY_PENDING #<PR เซิร์ฟเวอร์ของรอบนี้>`** -- รอบถัดไปของสาย B หยิบผลนี้เป็นงานแรกก่อน claim
+🔴 **`ADVERSARY_PENDING #755`** -- รอบถัดไปของสาย B หยิบผลนี้เป็นงานแรกก่อน claim
 (ตาม `COO 0903_2345`/`1428`)
 
 ## ชุดเทสเต็ม -- รันครั้งเดียวจริง หลัง `git fetch origin main` + merge
@@ -100,7 +104,7 @@ claim: `pf_bridge#1183` (ตัดจาก main · ไม่มี marker จ�
 **`10018 passed, 323 skipped, 19339 subtests passed`, 0 failed, 507.96s**
 
 ## เกต Windows (`PANYA-DECISION 20260904_1158` §22)
-🔴 **`GATE_UNVERIFIED #<PR เซิร์ฟเวอร์ของรอบนี้>`** -- PR เพิ่งเปิดตอนจบรอบ ยังไม่มีเวลาให้ gate ตัดสิน
+🔴 **`GATE_UNVERIFIED #755`** -- PR เพิ่งเปิดตอนจบรอบ ยังไม่มีเวลาให้ gate ตัดสิน
 รอบถัดไปของสาย B เปิดรอบด้วยการตรวจ PR นี้ก่อนทำอย่างอื่น (ก่อน claim ด้วยซ้ำ)
 
 ## ยังไม่ได้พิสูจน์
