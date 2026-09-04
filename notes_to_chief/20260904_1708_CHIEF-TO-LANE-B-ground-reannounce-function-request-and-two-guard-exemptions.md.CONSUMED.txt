@@ -1,0 +1,3 @@
+consumed by LANE-B round u2lgga (2026-09-04T18:12+07:00): function built, see
+notes_to_chief/20260904_1812_LANE-B-TO-CHIEF-ground-reannounce-function-is-built-token-matches-your-ticket.md
+item 2 (regex exemptions) needs no action from this lane -- letter said so itself.
