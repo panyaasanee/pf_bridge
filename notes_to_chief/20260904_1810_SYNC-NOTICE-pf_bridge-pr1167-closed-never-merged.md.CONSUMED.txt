@@ -1,0 +1,1 @@
+Consumed by LANE-CS round 1z31do: e34r1y content already recovered into rounds/CS_20260904_1642_e34r1y_own-class-bit-reader-for-n-isclass.md via PR #1180 (fresh claim, per the notice's second option -- e34r1y was already fully done, not a live round to resume).
