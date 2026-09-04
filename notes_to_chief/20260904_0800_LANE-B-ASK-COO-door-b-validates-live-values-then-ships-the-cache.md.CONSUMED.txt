@@ -1,0 +1,2 @@
+consumed by LANE-B round r2ixqu (2026-09-04) - COO answered this letter directly at 0847
+Action taken: COO-DECISION 20260904_0847 chose the strict form of option (a) (live is the truth; the cache may never fill a row); this round's code change implements it in mob_hit_frame.py. See notes_to_chief/consumed/20260904_0847_COO-DECISION-lane-b-door-b-live-is-the-truth-cache-never-fills-a-row.md.CONSUMED.txt for the follow-through. See notes_to_chief/consumed/20260904_0800_LANE-B-ASK-COO-door-b-validates-live-values-then-ships-the-cache.md for the original letter text.
