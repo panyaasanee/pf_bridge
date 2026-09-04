@@ -4885,7 +4885,7 @@ apply ยังไม่มีใครดู · 🔴 **ใบ R306 เขีย
 
 ---
 
-## 🔬 RE-234 CLIENT-RESPONSE-PATH-FOR-TRIGGERVITAL-1FB2-ISLAND-001  [🟡 RESERVED -- 🔴 `[STATIC-ON-BRIDGE]` · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-A** · ผู้บริโภคผล = LANE-A]
+## 🔬 RE-234 CLIENT-RESPONSE-PATH-FOR-TRIGGERVITAL-1FB2-ISLAND-001  [🟡 PENDING (RESERVED - เนื้อใบยังไม่ถูกเขียน ห้ามลงรอบเทส) -- 🔴 `[STATIC-ON-BRIDGE]` · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-A** · ผู้บริโภคผล = LANE-A]
 
 > 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `wjqykr`/R338 2026-09-04T14:0x+07:00** ตาม `COO-DECISION 20260904_1345` ข้อ 3(ง) และ `20260904_1346` ข้อ 2(จ) · ตัวนับร่วมสองคิวคืน `233` (`GT-233` รอบเดียวกัน) ⇒ ใบนี้ `234` · `RE-234`/`GT-234` = **0 hit ทั้งสามที่ก่อนวาง**
 > 🔴 บล็อกนี้คือการจองเลข เนื้อใบเป็นของ **LANE-A** รอบ 14:21 · ใบนี้ **แทน** `0343` ข้อ 3 ฉบับเดิมที่ไล่จาก id 153/154 — คำทำนาย 153/154 ตกไปแล้วตาม `GT-228` ห้ามอ้างต่อ
@@ -4897,21 +4897,21 @@ apply ยังไม่มีใครดู · 🔴 **ใบ R306 เขีย
 
 ---
 
-## 🔬 RE-235 BLACK-MARKET-AND-SHIP-SURVEY-WINDOW-OPCODES-001  [🟡 RESERVED -- เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-UI** · ผู้บริโภคผล = LANE-UI]
+## 🔬 RE-235 BLACK-MARKET-AND-SHIP-SURVEY-WINDOW-OPCODES-001  [🟡 PENDING (RESERVED - เนื้อใบยังไม่ถูกเขียน ห้ามลงรอบเทส) -- เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-UI** · ผู้บริโภคผล = LANE-UI]
 
 > 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `wjqykr`/R338** ตาม `COO-DECISION 20260904_1346` ข้อ 2(ฉ) · ที่มา `notes_to_chief/20260904_1137_LANE-UI-RE-TICKET-black-market-and-ship-survey-window-opcodes-not-in-r38-registry.md` · ตัวนับร่วมสองคิวคืน `234` ⇒ ใบนี้ `235` · **0 hit ทั้งสามที่ก่อนวาง**
 > 🔴 บล็อกนี้คือการจองเลข เนื้อใบ (คำถาม · ขอบเขต · สิ่งที่ค้นแล้ว · route ตาม §18) เป็นของ **LANE-UI** ให้เขียนทับทั้งก้อนในรอบถัดไปของสายนั้น · ใบนี้ยังไม่ถือว่าเปิดจนกว่าเนื้อจะลง
 
 ---
 
-## 🔬 RE-236 TRACEPATH-RECORD0-SEMANTIC-ATTENDED-DIFFERENTIAL-001  [🟡 RESERVED -- 🔴 `[NEEDS-ATTENDED-CAPTURE]` · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-UI** · ผู้บริโภคผล = LANE-UI]
+## 🔬 RE-236 TRACEPATH-RECORD0-SEMANTIC-ATTENDED-DIFFERENTIAL-001  [🟡 PENDING (RESERVED - เนื้อใบยังไม่ถูกเขียน ห้ามลงรอบเทส) -- 🔴 `[NEEDS-ATTENDED-CAPTURE]` · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-UI** · ผู้บริโภคผล = LANE-UI]
 
 > 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `wjqykr`/R338** ตาม `COO-DECISION 20260904_1346` ข้อ 2(ฉ) และ `20260904_1244` (มินิแมป = แถว auto-walk ไม่เปิดใบ RE แยก) · ที่มา `notes_to_chief/20260904_1226_LANE-UI-RE-TICKET-tracepath-record0-semantic-needs-attended-differential.md` · ตัวนับร่วมสองคิวคืน `235` ⇒ ใบนี้ `236` · **0 hit ทั้งสามที่ก่อนวาง**
 > 🔴 บล็อกนี้คือการจองเลข เนื้อใบเป็นของ **LANE-UI** · การวัดจริงคือ differential ที่เครื่อง Panya (คลิกพื้น / คลิก NPC / คลิกมินิแมป อย่างละครั้ง เก็บเฟรม `CTracePathReqVital` เทียบค่า `record+0`) = อยู่ใน "รอเครื่องคุณ" ข้อ 7 ของ `NOW.md` · **ไม่บล็อก LANE-UI**
 
 ---
 
-## 🔬 RE-237 OPTIONS-APPLY-SERVER-SETTING-VITAL-FIELDS-001  [🟡 RESERVED -- 🔴 `[NEEDS-ATTENDED-CAPTURE]` (ตามที่ใบต้นทางระบุเองว่าต้อง dynamic capture) · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-UI** · ผู้บริโภคผล = LANE-UI]
+## 🔬 RE-237 OPTIONS-APPLY-SERVER-SETTING-VITAL-FIELDS-001  [🟡 PENDING (RESERVED - เนื้อใบยังไม่ถูกเขียน ห้ามลงรอบเทส) -- 🔴 `[NEEDS-ATTENDED-CAPTURE]` (ตามที่ใบต้นทางระบุเองว่าต้อง dynamic capture) · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-UI** · ผู้บริโภคผล = LANE-UI]
 
 > 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `wjqykr`/R338 2026-09-04T14:0x+07:00** · ที่มา `notes_to_chief/20260904_1054_LANE-UI-RE-TICKET-options-apply-server-setting-vital-fields-need-dynamic-capture.md` · ตัวนับร่วมสองคิวคืน `236` ⇒ ใบนี้ `237` · `RE-237`/`GT-237` = **0 hit ทั้งสามที่ก่อนวาง**
 > 🔴 บล็อกนี้คือการจองเลข เนื้อใบเป็นของ **LANE-UI** — ใบต้นทางเขียนคำถามและ "ค้นก่อนถอด" ไว้ครบแล้ว ให้ยกลงมาทั้งก้อนในรอบถัดไปของสายนั้น · chief ไม่แก้ถ้อยคำ
@@ -4919,14 +4919,14 @@ apply ยังไม่มีใครดู · 🔴 **ใบ R306 เขีย
 
 ---
 
-## 🔬 RE-238 SELECTOR-CATEGORY-TO-ALT-HP-PAIR-MAPPING-001  [🟡 RESERVED -- 🔴 `[STATIC-ON-BRIDGE]` · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-GM** · ผู้ทำ = สาย RE (RE runner local) · ผู้บริโภคผล = LANE-GM]
+## 🔬 RE-238 SELECTOR-CATEGORY-TO-ALT-HP-PAIR-MAPPING-001  [🟡 PENDING (RESERVED - เนื้อใบยังไม่ถูกเขียน ห้ามลงรอบเทส) -- 🔴 `[STATIC-ON-BRIDGE]` · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-GM** · ผู้ทำ = สาย RE (RE runner local) · ผู้บริโภคผล = LANE-GM]
 
 > 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `wjqykr`/R338** · ที่มา `notes_to_chief/20260904_1154_LANE-GM-RE-0x430E10-TICKET-selector-category-to-alt-hp-pair-mapping.md` (ใบร่างใช้ชื่อชั่วคราว `RE-0x430E10` ซึ่งไม่ใช่เลขใบ) · ตัวนับร่วมสองคิวคืน `237` ⇒ ใบนี้ `238` · **0 hit ทั้งสามที่ก่อนวาง**
 > 🔴 บล็อกนี้คือการจองเลข — เนื้อใบร่างครบอยู่ในจดหมายต้นทางแล้ว ให้ **LANE-GM** ยกลงมาทั้งก้อนใต้หัวใบนี้ในรอบถัดไปของสายนั้น แล้วแทนที่ทุกจุดที่เขียนว่า `RE-0x430E10` ด้วย `RE-238` (ชื่อชั่วคราวนั้นค้นไม่เจอด้วยตัวนับใบ)
 
 ---
 
-## 🔬 RE-239 SECOND-PASSWORD-INCOMING-CREDENTIAL-FRAME-001  [🟡 RESERVED -- 🔴 route ให้ **LANE-DB** ติดป้ายตาม §18 ตอนวางเนื้อใบ (`STATIC-ON-BRIDGE` หรือ `NEEDS-ATTENDED-CAPTURE`) · เจ้าของใบ/ผู้บริโภคผล = **LANE-DB**]
+## 🔬 RE-239 SECOND-PASSWORD-INCOMING-CREDENTIAL-FRAME-001  [🟡 PENDING (RESERVED - เนื้อใบยังไม่ถูกเขียน ห้ามลงรอบเทส) -- 🔴 route ให้ **LANE-DB** ติดป้ายตาม §18 ตอนวางเนื้อใบ (`STATIC-ON-BRIDGE` หรือ `NEEDS-ATTENDED-CAPTURE`) · เจ้าของใบ/ผู้บริโภคผล = **LANE-DB**]
 
 > 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `wjqykr`/R338** · ที่มา `notes_to_chief/20260904_1309_LANE-DB-RE-TICKET-second-password-incoming-credential-frame.md` ตาม `COO-DECISION 20260904_1150` ข้อ 2 · ตัวนับร่วมสองคิวคืน `238` ⇒ ใบนี้ `239` · **0 hit ทั้งสามที่ก่อนวาง**
 > 🔴 บล็อกนี้คือการจองเลข เนื้อใบเป็นของ **LANE-DB** · `COO 20260904_1347` รับไว้แล้วว่าชิ้น 4 ปิดยกเว้นเฟรมขาเข้าใบนี้ และ **ไม่มีกำหนดวัน** — ใบนี้จึงไม่บล็อกคิว DB

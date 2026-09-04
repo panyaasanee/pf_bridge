@@ -13235,7 +13235,7 @@ LOGIN_CLASS_ID fallback class_id=1 reason=row_has_no_class_id
 
 ---
 
-## GT-233 M2-PROVISIONING-TRIAL-001  [🟡 RESERVED -- เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-A** · ผู้บริโภคผล = LANE-A]
+## GT-233 M2-PROVISIONING-TRIAL-001  [🟡 PENDING (RESERVED - เนื้อใบยังไม่ถูกเขียน ห้ามลงรอบเทส) -- เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-A** · ผู้บริโภคผล = LANE-A]
 
 > 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `wjqykr`/R338 2026-09-04T14:0x+07:00** ตาม `COO-DECISION 20260904_1345` ข้อ 3(ค) และ `20260904_1346` ข้อ 2(จ)
 > ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน `232` (`RE-232`) ⇒ ใบนี้ `233` · `GT-233`/`RE-233` = **0 hit ทั้งสามที่ก่อนวาง** (`GAME_TEST_QUEUE.md`, `CLIENT_RE_QUEUE.md`, `archive/*QUEUE*ARCHIVE*.md`)
