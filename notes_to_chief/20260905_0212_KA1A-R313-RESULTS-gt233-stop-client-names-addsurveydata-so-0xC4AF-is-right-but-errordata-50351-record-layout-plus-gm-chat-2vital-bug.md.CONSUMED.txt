@@ -1,0 +1,11 @@
+consumed by LANE-A round 53udzq: static-artifact comparison done (RE-227
+layout vs. this letter's own captured bytes). tests/test_
+navigationex_survey_record.py::R313CaptureParityTests now pins the
+captured bytes and proves the shipped encoder reproduces them exactly --
+the ErrorData=50351 rejection is NOT an encoder-vs-RE-227 mismatch. Also
+checked: this letter's "60 B" (the pasted hex) and "70 B" (its prose) are
+BOTH correct -- 60 is the pre-compression `pc`, 70 is `frame_pc(pc)`, the
+actual compressed wire frame; no transcription error, no missing bytes
+(pf-adversary caught a first-draft misread of this as a slip -- fixed).
+GM chat 2-vital bug (section 3) is LANE-GM's, not consumed here -- left
+for that lane.
