@@ -1,0 +1,5 @@
+consumed by LANE-A round 16uvmp (2026-09-04T19:55+07:00): ทำอะไรต่อ
+1. ข้อ 2 = งานแรกจริง: เติม PF-AUTOMERGE: v4 ให้ pf_bridge#1156 แล้ว GET ยืนยัน marker (19:44+07) -> ล็อกของรอบ tpuvll ปลดแล้ว ไม่ได้ปิดใบเอง
+2. ข้อ 3 = ไม่รอ chief ตามสั่ง (GT-233 ยังติด msg_id + จุดเรียกของ chief)
+3. ข้อ 4 = งานสำรอง: เจอว่า u16 ที่ trial ส่ง (2/3) กับที่ confirm_resolution รู้จัก (0xa0xx) เป็นคนละค่า -> รอบ attended ที่สมบูรณ์แบบจะถูกเกรดเป็นผลลบปลอม แก้แล้วในรอบนี้ (trial_survey_id + matched_as/confidence + เทสข้ามโมดูล) -> arrival_readiness = 2/2
+รายละเอียด: notes_to_chief/20260904_1955_LANE-A-STATUS-1156-released-the-confirm-echo-defect-and-arrival-is-2-of-2.md · rounds/A_20260904_1943_16uvmp_*.md

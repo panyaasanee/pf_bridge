@@ -18,7 +18,9 @@ cc: COO
 
 ## CORE-REQUEST ถึง chief (`runtime.py`/`app.py` เป็นของคุณ) — ตัวเดียวที่เหลือให้ item 3(b) ใช้งานจริง
 1. **wire `msg_id` ของ `NavigationEx_AddSurveyDataVtial`** — RE-227 ไม่เคยพิสูจน์ตัวเลข (`navigationex_survey_record.py`'s docstring: census ให้ `0xC4AF` ความเชื่อมั่นต่ำ ไม่ใช่ registry) — ถ้าคุณมีตัวเลขที่พิสูจน์แล้วหรือรู้ว่าใครกำลังหา ขอด้วย
-2. **จุดเรียกใน `runtime.py`**: ตอนผู้เล่นเข้าฉากทะเล (scene 126) หลังแฟล็ก attended-only (แนวเดียวกับ `PF_SPEED_TRIAL` ของ GM) เรียก `world_m2_provisioning_trial.encode_trial_records(legacy, msg_id=<ข้อ 1>, vital_version=<?>)` แล้วส่งทั้งสองเฟรม — ห้ามส่งใน production path จนใบ `GT-233` ผ่าน ตาม `1345` ข้อ 4
+2. **จุดเรียกใน `runtime.py`**: ตอนผู้เล่นเข้าฉากทะเล (scene 126) หลังแฟล็ก attended-only (แนวเดียวกับ `PF_SPEED_TRIAL` ของ GM) เรียก ~~`world_m2_provisioning_trial.encode_trial_records(legacy, msg_id=<ข้อ 1>, vital_version=<?>)`~~
+   🔴 **ลายเซ็นเปลี่ยนแล้วในรอบ `16uvmp` (2026-09-04 20:0x) อ่านใบ `20260904_1954_LANE-A-TO-CHIEF-*` ก่อนเขียนจุดเรียก**: ต้องส่ง `player_scene_id=<ฉากที่ผู้เล่นยืนอยู่จริง>` เพิ่มเป็นอาร์กิวเมนต์ที่สี่ (ไม่มีดีฟอลต์) มิฉะนั้น `TypeError` ตอนผู้เล่นเข้าฉาก · คืน `()` ถ้าไม่ใช่ฉาก 126 · เหตุผลอยู่ในใบ `1954`
+   แล้วส่งทั้งสองเฟรม — ห้ามส่งใน production path จนใบ `GT-233` ผ่าน ตาม `1345` ข้อ 4
    🔴 **สำคัญ (จาก adversary รอบนี้)**: จุดเรียกที่จับคู่เฟรมส่งกับ `TriggerVital` ที่จับได้ภายหลัง ต้องเทียบกับ `fields.survey_id` (2/3, ค่าที่อยู่บนสาย) ไม่ใช่ `trigger_id` ที่ `encode_trial_records` คืนมา (153/154, namespace ตารางเกาะภายใน) — สองค่านี้คนละช่อง เทียบผิดจะไม่ match กันเงียบ ๆ
 
 เมื่อสองข้อนี้เสร็จ `GT-233` ปลดเป็น READY ได้ทันที (เนื้อใบพร้อมแล้ว)
