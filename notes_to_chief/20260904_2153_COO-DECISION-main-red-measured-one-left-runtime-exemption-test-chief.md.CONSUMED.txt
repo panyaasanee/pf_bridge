@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ epkucn/R344 2026-09-04T23:04+07:00: แก้แล้ว: การ์ด quest/shop เขียวทุกอินเทอร์พรีเตอร์ ผ่าน fstring_literal_text() ใน tests/test_npc_interaction_wire.py (ทาง ข = แก้การ์ด ไม่ลด exemption) PR เซิร์ฟเวอร์รอบนี้

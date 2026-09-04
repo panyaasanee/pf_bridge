@@ -5003,7 +5003,7 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt109.sqlite3
 
 ---
 
-## GT-114 DIAG-MULTI-OBJECT-001 [attended, in-game]: five diagnostic objects at the city-center test point (X=11865, Y=6147), each one field away from control D0 -- does each single-field difference produce the on-screen effect that field is predicted to control, jointly closing the attended half of RE-107/RE-108/RE-109's own proposed follow-ups  [PENDING -- wiring landed R202 (9b6zl6), see server args below. D1b has no death handling this round, see nonclaim (12).]
+## GT-114 DIAG-MULTI-OBJECT-001 [attended, in-game]: five diagnostic objects at the city-center test point (X=11865, Y=6147), each one field away from control D0 -- does each single-field difference produce the on-screen effect that field is predicted to control, jointly closing the attended half of RE-107/RE-108/RE-109's own proposed follow-ups  [CANCELLED - covered by R309 (D0 · RE-108) / refuted by production DYING_TIMER_SECONDS=20 (D1a · ภาพ 185937) / covered by GT-129 (D1b) / D2 control-only / covered by GT-084-R2 + P-2/RE-067 (D3) — Panya agreed 2026-09-04 21:4x · ปิดโดย chief รอบ `epkucn`/R344 2026-09-04 22:56 +07:00 ตาม `COO-DECISION 20260904_2158` (ถอน `2142` ข้อ 2 = ไม่พ่วงบูตกับ `ATTACK-POSE-ONE-FIELD-AB-001`) · กฎ `PANYA-DECISION 20260903_1934` · เหตุผลรายข้ออยู่ใน `notes_to_chief/20260904_2133_KA1A-TO-COO-attack-pose-*` §1 · เดิม: PENDING -- wiring landed R202 (9b6zl6)]
 
 > NUMBERING NOTE: grep confirmed before reserving -- `GT-114`/`RE-114` = 0 hits in both files, archive included (2026-08-27, this round). Highest number in use is `113` (`RE-113`, CLOSED PASS/DONE) => this entry is `114`.
 > Entries `RE-085`-`RE-113` and `GT-101`-`GT-110` stay exactly where they are, unchanged -- this is a new entry, not a replacement for any of them.
@@ -13266,7 +13266,7 @@ LOGIN_CLASS_ID fallback class_id=1 reason=row_has_no_class_id
 
 ---
 
-## GT-233 M2-PROVISIONING-TRIAL-001  [🔴 **BLOCKED -- อย่าเพิ่งบูต** (ปลดเป็น READY ชั่วคราวเมื่อ 20:2x แล้ว **ปิดกลับทันทีเวลา 20:4x** โดย chief รอบเดียวกัน `t7bsfx`/R342) -- 🔴 เหตุผล: pf-adversary จับได้ว่า envelope ของเฟรมที่ `#760` (merge แล้ว `13:35Z`) ส่งออก **ขาดไบต์ท้าย `0B 00` (derived-class change mask)** เพราะ encoder ใช้ `make_runtime_vital` ตัวเอกพจน์ · ในรีโปนี้มีเหตุการณ์ที่บันทึกไว้ **สามครั้ง** ว่า envelope แบบนั้นทำให้ไคลเอนต์ `ErrorData=28317` (GT-010 2026-08-18 · GT-107/RE-113 · คอมเมนต์ของ v141:706-710) และ R306 วัดว่า error นั้น **ปิดไคลเอนต์** ⇒ บูตตอนนี้ = เสี่ยงเสียรอบ attended ทั้งรอบด้วย STOP ที่หน้าตาเหมือน "msg_id ผิด" ทั้งที่เป็น envelope · **ปลดเป็น READY อีกครั้งเมื่อ PR แก้ของ chief (ตามหลัง `#760`) merge** — ดูจดหมาย `FROM_CHIEF_R342b` · เมื่อปลดแล้ว: บูตด้วย `PF_M2_SURVEY_TRIAL=1` · ยืนยันบิลด์จากคอนโซล `M2_SURVEY_TRIAL_SENT scene=126 records=2 msg_id=0xC4AF version=0 confirmed=<n> guess=<0|1>` และ **อ้างบรรทัด `[G>] M2_SURVEY_TRIAL_SURVEY2_DOCK153_INITIAL` เป็นหลักฐานว่าไบต์ออกจริง ไม่ใช่บรรทัด `..._SENT`** (บรรทัดแรกพิมพ์ตอนประกอบ ไม่ใช่ตอนส่ง) · `msg_id`/`vital_version` เป็นค่าทดลอง — หน้าไม่เด้งให้ลอง XYZ สำรองก่อน แล้วค่อยแปร `vital_version` · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-A** · ผู้บริโภคผล = LANE-A · เนื้อของ LANE-A ที่ main แก้ระหว่างรอบ เก็บไว้ครบ: ~~รอ `#753`~~ **merged 2026-09-04 18:42 `55c9a05`** · ตัวบล็อก "CORE-REQUEST call site/msg_id ของ chief" **จ่ายแล้วโดย `#760`** (merge `13:35Z`) แต่ `#760` ถือ defect envelope ข้างบน ⇒ ตัวบล็อกที่เหลือคือ `#763` เท่านั้น]
+## GT-233 M2-PROVISIONING-TRIAL-001  [READY -- ปลดเป็น READY 2026-09-04 22:55 +07:00 โดย chief รอบ `epkucn`/R344 ตาม `COO-DECISION 20260904_2050` ข้อ 1 + `2153` -- ตัวบล็อกทั้งสองจ่ายแล้วบน `main`: `#760` (จุดเรียกฉาก 126 + `msg_id=0xC4AF` · merge `13:35Z`) และ `#763` (envelope `0B 00` derived-class change mask + `player_scene_id` · merge `14:32Z` = `7f5eaaf`) · เหตุที่เคย BLOCKED: envelope ของ `#760` ขาด `0B 00` → มีบันทึกสามครั้งว่า envelope แบบนั้นทำให้ไคลเอนต์ `ErrorData=28317` (GT-010 · GT-107/RE-113 · v141:706-710) และ R306 วัดว่า error นั้นปิดไคลเอนต์ — `#763` แก้จุดนี้แล้ว · วิธีบูต: `PF_M2_SURVEY_TRIAL=1` · ยืนยันบิลด์จากคอนโซล `M2_SURVEY_TRIAL_SENT scene=126 records=2 msg_id=0xC4AF version=0 confirmed=<n> guess=<0|1>` และ **อ้างบรรทัด `[G>] M2_SURVEY_TRIAL_SURVEY2_DOCK153_INITIAL` เป็นหลักฐานว่าไบต์ออกจริง ไม่ใช่บรรทัด `..._SENT`** (บรรทัดแรกพิมพ์ตอนประกอบ ไม่ใช่ตอนส่ง) · `msg_id`/`vital_version` เป็นค่าทดลอง — หน้าไม่เด้งให้ลอง XYZ สำรองก่อน แล้วค่อยแปร `vital_version` · STOP ถ้าไคลเอนต์ปิดตัว · เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = **LANE-A** · เนื้อใบของ LANE-A เก็บไว้ครบ (`#753` merged 2026-09-04 18:42 `55c9a05`)]
 
 > 🔴 **ตัวบล็อกที่สอง (LANE-A รอบ `m1wqqy` 20:54+07, วัดแยกจาก envelope defect ข้างบน)**: `runtime.py`'s call site (`#760`) ไม่เคยส่ง `player_scene_id=` ให้ `encode_trial_records` เลย (อาร์กิวเมนต์บังคับ ไม่มี default) ⇒ ทุกครั้งที่ armed จะโดน `TypeError` ปฏิเสธเงียบ (วัดแล้วบน `origin/main` ปัจจุบัน: `tests/test_m2_survey_trial.py::DispatchWiringTests` แดง 2 ตัว) -- **เช็คแล้ว: `#763` (เปิดอยู่แล้ว, กิ่ง `claude/gallant-noether-t7bsfx`) มีตัวแก้อยู่แล้ว** (`player_scene_id=m2_survey_scene` บรรทัด 11635 · `pytest tests/test_m2_survey_trial.py -q` บนกิ่งนั้น = 22 passed) -- ไม่ต้องมี CORE-REQUEST ใหม่ (`notes_to_chief/20260904_2117_LANE-A-STATUS-*`) -- **ทั้งสองตัวบล็อก (envelope + player_scene_id) อยู่ใน `#763` ใบเดียวกันแล้ว ปลดเป็น READY ได้เมื่อ `#763` merge**
 
@@ -13731,5 +13731,52 @@ LANE-UI เป็นผู้ตัดสินความหมายของ
 `GT-246`/`RE-246` = 0 hit ทั้งสามที่ก่อนวาง (ตรวจโดย chief รอบ `t7bsfx`/R342)
 
 **ผู้เปิดใบ: chief (LANE-E) ตาม `COO-DECISION 20260904_1948` ข้อ 4 -- ผู้บริโภคผล: LANE-UI**
+
+---
+
+## GT-247 ATTACK-POSE-ONE-FIELD-AB-001  [🔴 **BLOCKED** -- ปลดเป็น `READY` เมื่อแฟล็ก `--pose-trial` ของ **LANE-B** (`COO-DECISION 20260904_2141`) ขึ้น `main` และ `RECHECK` ด้านล่างผ่านครบ · เลขใบตั้งโดย chief (LANE-E) รอบ `epkucn`/R344 ตาม `COO-DECISION 20260904_2142` ข้อ 1 · เนื้อใบ = `notes_to_chief/20260904_2133_KA1A-TO-COO-attack-pose-*` §1 (ผู้ร่าง ka1-A) · **เจ้าของใบ/ผู้บริโภคผล = LANE-B** · ผู้รัน = Panya (attended) ~10-15 นาที · 🔴 **Panya ยกเว้นกฎ "ห้ามใบตีมอนจนกว่า P-2 จะปิด" ให้ใบนี้ใบเดียว** (คำสั่งสด 2026-09-04 21:15 · `NOW.md` หัวข้อ "ห้ามทำจนกว่า P-2 จะปิด") -- ใบนี้วัด **ท่า** ไม่วัดสี ไม่วัดดาเมจ · **บูตเดี่ยว ไม่พ่วง `GT-114`** (`GT-114` ยกเลิกแล้วตาม `COO-DECISION 20260904_2158`)]
+
+**คำถามเดียว:** เมื่อ reply ต่อ `ActionVital` ใส่ `+0x30` = behavior id ของอาวุธที่ถือจริง (ไม่ใช่ echo `0xEA7D`) ไคลเอนต์เล่นอนิเมชันโจมตีของ performer ซ้ำได้ทุกครั้งหรือไม่
+
+**ที่มา:** `RE-110-RESULT` 2026-08-27 18:32 (archive) ข้อ "one-field A/B เท่านั้น" + `BUILD_IMPACT` ของมัน · chief `1405` ยืนยัน [PROVEN] crosswalk `EQUIP_VALUE.n_EQUIPTYPE -> n_ATTACK_SKILL -> BEHAVIOR.n_ID` = 280/282/284/286/288/290
+
+**สิ่งที่สายต้องสร้างก่อนบูต (LANE-B · ตาม `BUILD_IMPACT`):** ทางเลือก opt-in ที่ไม่แตะ production -- แฟล็ก `--pose-trial <behavior_id|auto>` (`auto` = resolve จาก equip type ของ actor ถ้ามี provenance ถ้าไม่มีใช้ `<id>` ตรง ๆ) · พิมพ์ `POSE_TRIAL sent=+0x30=<id> control|mutant` ทุก reply · ไม่มีแฟล็ก = production เดิมทุกไบต์
+
+**RECHECK (ก่อนปลด READY):** แฟล็ก + โทเคน `POSE_TRIAL` อยู่บน `main` · pytest ของโมดูลเขียว · ไม่มีแฟล็ก = byte-identical กับ production (มีเทสตรึง)
+
+**steps (~10-15 นาทีหน้าจอ · ฉาก 2 มอน Fighting Fish soldier ที่ตีได้อยู่แล้ว):**
+1. `LOCK_GAME` · สำเนา DB · บูต **control** (`--pose-trial 60029` = ค่า echo เดิม) -> คลิกตีมอน 1 ครั้ง -> Panya ดูว่าออกท่าไหม (คาด: ไม่) · ถ่าย 1 ใบ
+2. relaunch ตามที่สายกำหนด แล้วบูต **mutant** ทีละค่า **280 -> 284 -> 288 -> 282 -> 290 -> 286** (หรือ `auto` ก่อนถ้ามี provenance) -> คลิกตีมอน 1 ครั้งต่อค่า -> Panya บอก "ออกท่า / ไม่ออก / ท่าอะไร" · ถ่ายเฉพาะค่าที่ออกท่า
+3. ค่าที่ออกท่า: **ไม่กดอะไรต่อ 10 วินาที** -- ดูว่าไคลเอนต์ตีซ้ำเอง (auto-repeat) ไหม (ตอบ objective 1 ของ `RE-110` ที่ static ตัน) · สายจดเวลาเฟรม `ActionVital` ขาเข้าเทียบ
+4. teardown ตามปกติ
+
+**pass criteria (สองชั้น ห้ามใช้ชั้นเดียวอ้างอีกชั้น):**
+- wire/DB: โทเคน `POSE_TRIAL` ครบทุกค่า + hex ของ reply แต่ละค่า ต่างกัน**เฉพาะ** `+0x30`
+- client-observable: ตารางค่า -> ท่า (ออก/ไม่ออก) จาก Panya + ภาพของค่าที่ออกท่า · ต้องมี `OBSERVER_CONFIRMED: <ISO+07:00>`
+- **PASS = อย่างน้อยหนึ่งค่าออกท่าซ้ำได้** · ทุกค่าไม่ออกท่า = ผลลบที่มีค่า (field map ผิด -> กลับไป RE) ไม่ใช่รอบเสีย
+
+**STOP:** ไคลเอนต์ปิดตัว / `ErrorData` ใด ๆ -> หยุดทันที บันทึกค่าที่ส่งล่าสุด
+
+**nonclaims:** ไม่ตัดสิน cadence (ค่า 600 ms ชั่วคราวคงเดิม) · ไม่ตัดสินดาเมจ/สูตร (LANE-CS/LANE-B) · ไม่ใช่ M4 (มอนตีกลับ) · ไม่แตะ production ถ้าไม่มีแฟล็ก · ไม่ยืนยัน equip type ของ Arena01 (ยังไม่มี provenance = เหตุผลที่ต้องไล่ทั้งหกค่า)
+
+## numbering
+ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืนสูงสุดที่ `246` (`GT-246`) => ใบนี้ `247`
+`GT-247`/`RE-247` = 0 hit ทั้งสามที่ก่อนวาง (ตรวจโดย chief รอบ `epkucn`/R344)
+
+---
+
+## GT-249 SKILL-WINDOW-CONTENT-AFTER-0x673C-001  [🟡 **PENDING -- เนื้อใบยังไม่ครบ: LANE-CS ร่างเต็มด้วย `pf-queue-author` รอบถัดไป** (`COO-DECISION 20260904_2154` · ตก 23:36 = escalation) · เลขใบตั้งโดย chief (LANE-E) รอบ `epkucn`/R344 ตามข้อ "chief 22:21 หรือ 23:51: ตั้งเลข + หัวใบ" · **พ่วงบูตเดียวกับ `GT-243`** (ตัวละครเดียวกัน precondition เดียวกัน = P0 ตัวละครมีสกิลจริง) · **เจ้าของใบ/ผู้บริโภคผล = LANE-CS** · ผู้รัน = Panya (attended) · ไม่บล็อกใคร · รันหลังใบ M2 (`GT-233`)]
+
+**ขอบเขตที่ COO เคาะไว้ (`2154` ข้อ 2) -- LANE-CS เขียนรายละเอียดทับได้ ห้ามขยายขอบเขต:**
+- ส่ง `0x673C` ด้วย **skill id จริง** จากคลัง 8 ตัวของ `skill_catalog.py` (ไม่ใช่ค่า probe) ให้ตัวละครที่ผ่านเงื่อนไข `GT-116`
+- ส่งผ่าน**แฟล็ก attended-only เท่านั้น** · `production_allowed=False` คงเดิม
+- ผ่าน = หน้าต่างสกิล (ปุ่ม K) มีรายการขึ้น และตรง **4 สกิลเริ่มต้นของ class นั้น**
+- STOP ถ้าไคลเอนต์ปิดตัว
+- ผลใดหักล้างสมมติฐาน `HYP-PF-033` => LANE-CS ปิด/แก้หัวใบเก่าในรอบเดียวกัน (`PANYA-DECISION 20260903_1934`)
+- ที่มาของช่องว่าง: `GT-058`/`GT-059`/`GT-064` ปิดเพราะหน้าต่างเปิดไม่ได้ ไม่ใช่เพราะพิสูจน์ · `GT-116` ปลดเงื่อนไขนั้นตั้งแต่ 2026-08-28 แต่ไม่มีใบไหนถามต่อ
+
+## numbering
+`GT-248` ถูกใช้เป็น `RE-248` ในรอบเดียวกัน (`CLIENT_RE_QUEUE.md` -- ตัวนับร่วมสองคิว) => ใบนี้ `249`
+`GT-249`/`RE-249` = 0 hit ทั้งสามที่ก่อนวาง (ตรวจโดย chief รอบ `epkucn`/R344)
 
 ---
