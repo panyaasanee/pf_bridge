@@ -11,7 +11,7 @@ cc: COO
    🔴 ความเสี่ยงที่ยอมรับไว้ (บันทึกในด็อกสตริง): id=3 ชนกับเฟรมจริงของ R307 (Seafood Cargo prop ระหว่างแล่นเรือ ไม่เกี่ยวกับเกาะ) — เฟรมนั้นจะพิมพ์ ISLAND ผิดด้วย ตาม `1345` ยอมรับเป็นสมมุติฐานหลัก จนกว่า `RE-234` ข้อ 3 จะตอบ
 3. **item 3(b)**: โมดูลใหม่ `world_m2_provisioning_trial.py` — ประกอบ record ทั้งสองเกาะจาก `world_m2_survey_plan.planned_records()` + เข้ารหัสผ่าน `navigationex_survey_record.encode_add_survey_data_outer` · `survey_id` = `scene_name_tip_id` (2/3 ตาม item 1 — ค่าทดลอง ไม่ใช่ handle ภายในของ `SURVEY_HANDLE_BASE`) · x/y/z จาก `MEASURED_XYZ` เดียวกับที่กู้มา
    🔴 **ยังไม่มีไบต์ส่งจากที่ไหนในรีโปนี้** — เทสยืนยันด้วย grep guard (`tests/test_world_m2_provisioning_trial.py::NotWiredToAnySendPathTests`) และผมขยายเทสเดิมของ `navigationex_survey_record` ให้ยกเว้นไฟล์ใหม่สองไฟล์นี้ (ตอนแรกด้วย basename เฉย ๆ — pf-adversary จับได้ว่ารั่ว แก้เป็นเทียบ relative path แล้ว)
-4. **item 3(c)**: เติมเนื้อใบ `GT-233` (จองเลขไว้แล้วโดยคุณ) เต็มก้อนใน `GAME_TEST_QUEUE.md` — สถานะ `BLOCKED` ชี้ไปที่ `#751` + CORE-REQUEST ข้างล่าง ห้ามเรียกผู้เทสจนกว่าจะขึ้น main
+4. **item 3(c)**: เติมเนื้อใบ `GT-233` (จองเลขไว้แล้วโดยคุณ) เต็มก้อนใน `GAME_TEST_QUEUE.md` — สถานะ `BLOCKED` ชี้ไปที่ `#753 (was #751, closed by red gate on an earlier commit -- reopened after the cp874 fix)` + CORE-REQUEST ข้างล่าง ห้ามเรียกผู้เทสจนกว่าจะขึ้น main
 5. **item 3(d)**: เติมเนื้อใบ `RE-234` (จองเลขไว้แล้ว) เต็มก้อนใน `CLIENT_RE_QUEUE.md` — เพิ่มคำถามข้อ 3 (namespace ของ id 2/3 ชนกับ Trigger_TIP จริงไหม) จากสิ่งที่เจอตอนทำข้อ 2
 6. **pf-adversary**: รันแล้ว (agent async) ผลกลับมาก่อน push — พบ 1 defect ระดับกลาง (grep guard ยกเว้นด้วย basename รั่ว) + 2 จุดเล็ก (`min_level=` หายจากบรรทัด override, docstring ของ `TrialSurveyRecord`/`world_island_dock_table.DestinationRow` ไม่ชัดเรื่อง trigger_id vs wire id) — แก้ครบทุกข้อในคอมมิตที่สอง ไม่เรียกครั้งที่สาม (กติกา 2 ครั้ง/รอบ)
 7. **full suite**: `git fetch origin main` + merge (สะอาด ไม่ชนกับ mob-ground-persistence ที่ merge ระหว่างรอบ) แล้วรันเต็มครั้งเดียวบนต้นไม้ที่ merge แล้ว — ผลอยู่ใน push report/ไฟล์รอบ
@@ -24,6 +24,6 @@ cc: COO
 เมื่อสองข้อนี้เสร็จ `GT-233` ปลดเป็น READY ได้ทันที (เนื้อใบพร้อมแล้ว)
 
 ## ตกรอบ
-`1345` ให้เดดไลน์ 19:21 (สืบทอดจากรอบเดิมที่เลื่อนมา) · push ครบทั้งสองรีโปแล้วภายในเดดไลน์ — สถานะ "push แล้ว รอ merge PR #751 (server) + #1178 (claim)"
+`1345` ให้เดดไลน์ 19:21 (สืบทอดจากรอบเดิมที่เลื่อนมา) · push ครบทั้งสองรีโปแล้วภายในเดดไลน์ — สถานะ "push แล้ว รอ merge PR #753 (was #751, closed by red gate on an earlier commit -- reopened after the cp874 fix) (server) + #1178 (claim)"
 
 — LANE-A, round 0foax0, 2026-09-04 18:06+07:00 (ปรับปรุงล่าสุด ~18:2x+07:00)
