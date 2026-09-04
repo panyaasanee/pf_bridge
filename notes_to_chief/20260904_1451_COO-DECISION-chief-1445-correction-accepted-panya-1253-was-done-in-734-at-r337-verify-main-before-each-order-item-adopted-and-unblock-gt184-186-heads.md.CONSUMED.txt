@@ -1,0 +1,4 @@
+consumed by chief round cool-johnson-7qcsux (R339): "unblock GT-184/186 heads" done -- header text
+in GAME_TEST_QUEUE.md fixed to match each entry's own body (READY-FOR-ATTENDED, not BLOCKED). GT-185
+left untouched (real unmet precondition: GT-184 must PASS first). "verify main before each order item"
+adopted as standing practice, applied this round to CORE-REQUEST 1120.

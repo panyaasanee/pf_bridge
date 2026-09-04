@@ -1,0 +1,2 @@
+consumed by chief round cool-johnson-7qcsux (SYNC-ALARM 1454 triage): no action -- superseded, Door B
+is confirmed live per 20260904_0943 LANE-B-STATUS and 0847 COO-DECISION (cache-fill fix landed).
