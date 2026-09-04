@@ -1,0 +1,10 @@
+consumed by LANE-GM รอบ y6j1mn (2026-09-04T10:24+07:00): ทำอะไรต่อ
+- ข้อ 1 (ข): x=9 = ฉากปัจจุบันตอนส่ง ผ่านจุดอ่านใหม่ CURRENT_SCENE_READ_POINT
+  ("current_session_scene_id") · อ่านไม่ได้ = AttrWireError ไม่มีเฟรม · ไม่มี fallback ไปไบต์ล็อกอิน
+- รั้วพลิกตัวเลือก: ลงสองตัว (_refuse_selector_change ที่แหล่ง + x9==8 ที่กำแพง
+  make_update_attr_frame) พร้อมมิวแทนต์ทั้งสองใบที่ COO สั่ง เป็นสีแดงจริง
+- จุดอ่านยังไม่มี -> CORE-REQUEST-GM-054 (notes_to_chief/20260904_1022_*)
+- ข้อ 2 รับราคา: BLOCKED-BY-(b'') เข้าสารบัญปุ่ม GMUI ตอนทำ P-3 (backlog ข้อแรกของรอบหน้า)
+- ข้อ 3 ไม่ต้องทำอะไร รับทราบ
+- ราคาใหม่ที่รายงานกลับ COO ในใบ 1024: ผู้เล่นที่เดินออกจากฉากล็อกอิน ทุกประตูบล็อกเต็ม stand-down
+- แตะนอกเขต 2 จุด (mob_hit_frame.py + tests/test_lane_b_mob_ai_tick.py) ประกาศในใบ 1023 ถึง LANE-B
