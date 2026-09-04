@@ -5038,11 +5038,24 @@ login ส่งมา" (การเปลี่ยนแปลง ไม่ใ�
 
 ---
 
-## 🔬 RE-241 MONSTER-ACTOR-ENTRY-IS-CNETNPC-AND-MODEL-READY-BIT-ORDER-001  [OPEN -- 🔴 `[STATIC-ON-BRIDGE]` · ผู้เปิดใบ = **chief (LANE-E)** รอบ `oi2r2n`/R340 · ผู้ทำ = **สาย RE (RE runner local / Codex static)** · **ผู้บริโภคผล = LANE-GM**]
+## 🔬 RE-241 MONSTER-ACTOR-ENTRY-IS-CNETNPC-AND-MODEL-READY-BIT-ORDER-001  [🟢 **CLOSED PASS/DONE** -- ผลมาถึง `notes_to_chief/20260904_1948_RE-241-RESULT-TYPE4-CNETNPC-MODEL-READY-PRECEDES-COLOR.md` (RE runner local · static/read-only · image SHA `96272114…7028b623`) · ปิดหัวใบโดย chief (LANE-E) รอบ `t7bsfx`/R342 (ผู้เปิดใบ = ผู้ปิดใบ) · **ผู้บริโภคผล = LANE-GM** · ดู `### result:` ใต้ใบก่อนอ้างต่อ] ~~[OPEN -- 🔴 `[STATIC-ON-BRIDGE]`]~~
 
 > 🔢 เลขใบตั้งโดย chief รอบ `oi2r2n`/R340 2026-09-04T16:5x+07:00 · ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน `240` ⇒ ใบนี้ `241` · `RE-241`/`GT-241` = **0 hit ทั้งสามที่ก่อนวาง**
 > ที่มา: ร่างของ LANE-GM `notes_to_chief/20260904_0306_LANE-GM-TO-CHIEF-RE-TICKET-p2-cnetnpc-readiness-not-construction.md` ตาม `COO-DECISION 20260904_0217` ข้อ 2 · ตั้งเลขตาม `COO-DECISION 20260904_1650` ข้อ 2
 > 🔴 **ใบนี้คือทาง M3 ทางเดียวที่เหลือของ P-2** (`RE-222` ปิดทิศเดิมไปแล้ว) · ร่างของ GM ถูกรับมาทั้งฉบับ ไม่ส่งกลับให้ร่างใหม่ · ส่วนที่ chief เติมเองมีบรรทัดกำกับไว้ทุกจุด (`[chief เติม]`)
+
+
+### result: (กรอกโดย chief รอบ `t7bsfx`/R342 ตามที่ใบผลขอ · 2026-09-04 20:0x+07:00)
+
+**Q1 = PASS.** `field_mobs.hostile_actor_entry()` ส่ง `NPC_STYLE_ACTOR_TYPE` (= 4, `population.py:23`) เป็นอาร์กิวเมนต์แรกของ `legacy.make_remote_actor_entry()` ซึ่งเขียนเป็นฟิลด์แรก `u8tag(0x0B, actor_type)` (ตัวอย่างรันจริง read-only ได้ `0b043288776655443322110b00` = เห็น `0B 04` บนสายจริง ไม่ใช่อนุมานจากชื่อค่าคงที่) · ฝั่งอิมเมจ factory `MCG-IMG-002` span `[0x00446990,0x00446B2C)` SHA `5f68239f…eeb697d` อ่าน record เดียวกันที่ `actor_entry+0x10` แล้วเดิน jump-table ไป **CNetNPC type node** ⇒ **เส้นทาง census ของเราส่งมอนเข้าคลาส CNetNPC ถูกช่องอยู่แล้วในชั้น static/wire**
+
+**Q2 = PASS แบบมีขอบเขต.** bit `+0x70 & 0x40` (ตั้งโดย model callback `[0x00444730,0x0044497B)` SHA `bff91e77…04f5a33` ที่ `0x004448B4`, `MCG-IMG-046`) เป็น **historical prerequisite ทางอ้อม** ของ selector `0x00443F50` ผ่าน latch `+0x260` (readiness updater `[0x0045C500,0x0045C559)` นับ `+0x264` เฉพาะเมื่อ bit `0x40` ตั้ง แล้ว latch `+0x260=1` ที่การอัปเดตเข้าเงื่อนไขครั้งที่ 11 · actor updater `[0x00444400,0x004446E9)` ต้องผ่าน controller/distance/`+0x258!=0`/`+0x260!=0` ก่อนเรียก selector) · 🔴 selector **ไม่ได้ test bit นี้ตรง ๆ ทุกครั้ง** และการ clear bit หลัง latch แล้วไม่ reset latch ⇒ **ห้ามเขียนว่า bit ต้องเป็น 1 ณ ทุก call ของ selector**
+
+**สิ่งที่ผลนี้แปลว่าอะไรสำหรับ P-2 (chief อ่าน · LANE-GM เป็นผู้ทำ)**: ทิศ "เปลี่ยน identity/type เพื่อให้ได้สี" **ปิด** — ไม่ใช่เพราะไปไม่ถึง CNetNPC (Q1 บอกว่าไปถึงแล้ว) แต่เพราะสิ่งที่ขาดคือ **readiness latch** ไม่ใช่ชนิดวัตถุ · `BUILD_IMPACT` ของใบผลเอง: "ไม่มีโดยตรงในใบนี้ ... ห้ามแก้ปัญหาสีด้วยการเปลี่ยน identity/type จาก static result นี้"
+
+**baseline ของ P-2 ที่ผูกกับใบนี้ (`COO-DECISION 20260904_1948` ข้อ 6)**: วัดบนจอแล้วรอบ R310 (`notes_to_chief/20260904_1911_KA1A-R310-RESULTS-*` ข้อ 4 · ฉาก 2 มอน `Fighting Fish soldier` Lv.25) — **ชื่อมอน = ชมพู ทั้งสามสถานะ** (ก่อนตี `185906.png` · โดนตี 1 ครั้ง `185916.png` HP 2172/3138 · ตายแล้ว `185937.png`) · NPC ในกรง: ยศ `Nautilus Leader` = ฟ้า, ชื่อ `Carle` = เขียว · `OBSERVER_CONFIRMED: 2026-09-04T18:49+07:00` ⇒ **นี่คือค่าตั้งต้น หลังแก้ต้องไม่ชมพู** (ส้ม=ปกติ · แดง=กำลังสู้ · เทา=ตาย) · ไม่ต้องเปิดใบ GT ใหม่สำหรับพิกเซล
+
+**nonclaims ของผล (ยกมาทั้งชุด ห้ามตัด)**: `MCG-IMG-002` "This proves actor type 4 builds CNetNPC; it does not name actor type 4 monster" · `MCG-IMG-004` ชื่อ RTTI จริงยังไม่พิสูจน์ · `MCG-IMG-043` ไม่พิสูจน์ว่า `+0x258/+0x260` ผ่านทุกเฟรม · `MCG-IMG-046` bit นี้คือ readiness state ไม่ใช่ geometry/pixels · รอบนี้ไม่มีหลักฐานชั้น client-observable เลย
 
 ## ค้นก่อนถอด (ผู้ทำต้องกรอกในผล ห้ามเว้น)
 - `ค้นใน pf_bridge\external\ แล้ว: เจอ <อะไร> / ไม่เจอ`

@@ -1,0 +1,1 @@
+consumed by chief รอบ t7bsfx/R342 ตาม COO-DECISION 20260904_1948: GT-219 ปิด PASS สองขั้น (OBSERVER_CONFIRMED 18:49) · GT-244 ปิด CLOSED/CANCELLED (ข้อ 3 ปิด PANYA-DECISION 1430) · ข้อ 2 auto-walk differential ตั้งเลข GT-246 + เขียนผลลงใบครบ (ผู้บริโภค LANE-UI ห้ามบูตซ้ำ) · ข้อ 4 P-2 baseline ชมพู 3 สถานะ เขียนลงใบ RE-241 · ข้อ 5 ส่งต่อเป็น GT-245 (เนื้อใบของ LANE-DB)
