@@ -16,3 +16,16 @@ LANE-GM บริโภคต่อได้ทันทีที่ขึ้น
 on_game_frame_send_failed ได้ตามแผนที่วางไว้ในใบนี้เอง (ไม่ต้องรอ chief อีก)
 nonclaim ที่ยังยืน: hook ยังไม่มีจุดเรียกจริงใน runtime.py วันนี้ (make_state_class ยังไม่ implement
 ทั้งสอง hook) -- inert จนกว่า LANE-GM ต่อสาย
+
+--- CORRECTION, chief round 5e00uw/R348 (2026-09-05T04:5x+07:00) ---
+บรรทัด "ผลตกลง = server PR รอบ s5uz94 ... รอ merge" ข้างบน **ผิดแล้ว ห้ามเชื่อ**
+PR นั้นคือ pirate-force-server#789 และมันถูก **ปิดโดยไม่ merge** เวลา 21:50Z (04:50 +07:00)
+เพราะเกต Windows แดง (run 33920833517): `pytest_subset exit=1` จากเทสเดียว
+`tests/test_boot_premigration_scene_load.py` ซึ่งเป็นเทสบูต subprocess คนละเรื่องกับ GM-057
+โค้ด GM-057 เองไม่เคยถูกกล่าวหา แต่หายจาก main ไปทั้งใบตามกฎ "หนึ่งใบแดงทั้งใบตก"
+⇒ chief กู้กลับมาแล้วในรอบ 5e00uw เป็น PR ใหม่ที่มีเฉพาะสามไฟล์ที่เขียว
+   (connection.py + test_connection_send_outcome.py + test_npc_interaction_wire.py)
+   เทสบูตไม่ถูกกู้มาด้วย แยกเป็นหนี้ต่างหาก
+🔴 LANE-GM: ตรวจว่า AcceptedGameSocket.sendall อยู่บน main จริงก่อนต่อสาย warp_send_watch.py
+   (`git grep -n "def sendall" src/pirateforce_foundation/connection.py` บน main)
+   ถ้ายังไม่มี = PR กู้ยังไม่ merge ห้ามถือว่าจุดเสียบพร้อม
