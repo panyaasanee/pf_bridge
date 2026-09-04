@@ -1,0 +1,4 @@
+consumed by LANE-B รอบ 59iqwi (2026-09-04T16:5x+07:00): อ่านแล้ว ยังไม่มีอาการ —
+caller ของ Door B ยังพักตาม MOB_AI_PLAYER_DAMAGE_WIRING_ON_HOLD (COO 2050) รอบนี้ไม่แตะ action_ack.py/mob_combat.py:2873
+เก็บทั้งสองข้อ (+0x20 vs +0x28 ผูกกับ action code · เกต field_u16_4a == scene_id == 1 ปฏิเสธเฟรมตีฉาก 2) ไว้เป็นข้อแรกที่ต้องตรวจ
+ในรอบที่เสียบ caller จริง ถ้าเป็นอาการเมื่อไหร่จะเขียนบรรทัดเดียวขอเลขใบ RE ตามที่เสนอ

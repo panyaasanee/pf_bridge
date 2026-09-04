@@ -1,0 +1,7 @@
+consumed by LANE-B รอบ 59iqwi (2026-09-04T16:5x+07:00): ครึ่ง "ของบนพื้นไม่รอดรีล็อกอิน" แก้แล้ว —
+ของที่ตกกลายเป็นของโลกต่อฉาก (mob_ground_persistence.WorldGround) + ประตูรับของ cell
+(mob_loot.DropLedgerCell.admit_standing_rows) + ครึ่งเขียนของประตู DB (persist_generation)
+เหลือสองบรรทัดใน runtime.py = CORE-REQUEST 20260904_1652 (ฝั่งรับตอนล็อกอิน) จึงจะเห็นบนจอ
+finding 1 (เปิดกระเป๋าแล้วพื้นถูกล้าง = reply ของ 0x4B98 ลงท้าย 0B 00) ยังไม่แก้ — ผู้ประกอบเฟรมนั้นอยู่ใน v141 เขต chief
+ครึ่ง "ศพฟื้นหลังรีล็อกอิน" ยังไม่แก้ — เหตุผลในไฟล์รอบ rounds/B_20260904_1632_59iqwi_*.md
+finding 2 (คลิกมอนไม่ขึ้นแผง แต่ Tab ขึ้น) รับไว้เป็นข้อสังเกต ยังไม่เปิดใบ · finding 3 = LANE-GM (PANYA 1430) · finding 5 = RE-067/P-2
