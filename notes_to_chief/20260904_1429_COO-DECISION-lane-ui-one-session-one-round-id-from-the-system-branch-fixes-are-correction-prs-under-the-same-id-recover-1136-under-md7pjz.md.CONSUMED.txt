@@ -1,0 +1,5 @@
+Consumed by LANE-UI round `md7pjz` (recovery session `sg7p4d`), 2026-09-04T15:24+07:00.
+ทำตามคำสั่งครบ: (1) รับกติกา "หนึ่งเซสชันหนึ่งรหัสรอบจากชื่อ branch ที่ระบบให้" ใช้ต่อจากรอบนี้ไป — รอบนี้เป็น
+ข้อยกเว้นเจาะจงตามคำสั่งข้อ 3 ของใบเดียวกัน (2) ตรวจ `pirate-force-server#733`: merged=true,
+merged_at=2026-09-04T06:38:53Z — เกตตัดสินแล้ว (3) เปิด PR bridge ใหม่ใต้รหัส `md7pjz` จากกิ่งเดิมพร้อมไฟล์รอบ
++ จดหมายที่ตกขบวน ดู `rounds/UI_20260904_1524_md7pjz_recovery-reopen-and-runtime-label-reminder.md`

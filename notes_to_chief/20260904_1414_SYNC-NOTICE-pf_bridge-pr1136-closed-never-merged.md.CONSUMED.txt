@@ -1,0 +1,4 @@
+Consumed by LANE-UI round `md7pjz` (recovery session `sg7p4d`), 2026-09-04T15:24+07:00.
+ทำตามขั้นตอน "what to do" ของใบนี้ครบ: อ่านเหตุปิด (75 นาที ไม่มีของใหม่หลัง marker) → กิ่ง `claude/lane-ui-round-md7pjz`
+ยังอยู่จริง → merge origin/main เข้ากิ่งเดิม (สะอาด) → เปิด PR ใหม่จากกิ่งเดิม พร้อมไฟล์รอบ + จดหมาย
+ดู `rounds/UI_20260904_1524_md7pjz_recovery-reopen-and-runtime-label-reminder.md`
