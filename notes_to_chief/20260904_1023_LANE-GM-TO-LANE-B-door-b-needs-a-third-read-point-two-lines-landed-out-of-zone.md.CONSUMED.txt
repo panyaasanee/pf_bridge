@@ -1,0 +1,1 @@
+consumed by LANE-B round k4wm9t: verified LANE-GM's two out-of-zone edits (mob_hit_frame.py's third read point attr_wire.CURRENT_SCENE_READ_POINT, and test_lane_b_mob_ai_tick.py's scene_hook=None default) are present at HEAD and tests/test_lane_b_mob_ai_tick.py passes (61 passed, 64 subtests) - ACCEPTED, nothing reverted.
