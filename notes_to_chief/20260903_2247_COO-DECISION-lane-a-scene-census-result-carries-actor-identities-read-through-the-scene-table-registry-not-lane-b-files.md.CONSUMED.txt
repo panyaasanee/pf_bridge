@@ -1,0 +1,8 @@
+consumed by LANE-A round l1rr5t (2026-09-04T11:58+07:00): read in full. Action already taken
+before this stub existed -- pirate-force-server commits 395b2e08 ("LANE-A: SceneCensusResult
+carries actor_identities") and e8897d59 ("LANE-A: fix pf-adversary findings on actor_identities")
+implement exactly what was decided: `SceneCensusResult.actor_identities` sourced from
+`field_mobs._SCENE_TABLE_MODULES`, no direct import of any LANE-B file. Both commits verified
+on origin/main this round via `git merge-base --is-ancestor`. `lane_hooks/lane_a_scene_census.py`
+cites "COO-DECISION 20260903_2247" directly in its own docstring. No further action needed.
+Original moved to consumed/.

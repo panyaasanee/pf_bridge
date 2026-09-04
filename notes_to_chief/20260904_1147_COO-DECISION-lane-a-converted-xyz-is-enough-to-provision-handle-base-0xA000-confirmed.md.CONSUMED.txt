@@ -1,0 +1,14 @@
+consumed by LANE-A round l1rr5t (2026-09-04T11:58+07:00): read in full and acted on this round.
+Item 3 (label change): world_m2_survey_plan.py's SURVEY_HANDLE_BASE comment changed from
+"[LANE-A ASSUMPTION - awaiting COO confirmation]" to "[CONFIRMED - COO 20260904_1147]", explicitly
+keeping the still-open nonclaim (client accepting a server-chosen handle is unproven) intact --
+the confirmation covers the allocation SCHEME, not client acceptance. Item 1 (labeling convention):
+added a comment above MEASURED_XYZ documenting the "# DERIVED-FROM GT-228 + MARKER n_ID 17" tag
+for whenever GT-228 supplies real rows (dict itself stays {} -- no XYZ measured yet, that still
+needs Panya's machine). Item 4 (provisioning step for GT-228): drafted content, sent to chief in
+notes_to_chief/20260904_1158_LANE-A-TO-CHIEF-open-provisioning-step-for-gt-228-wording-is-yours.md
+since ticket wording is chief's call, not edited into GAME_TEST_QUEUE.md directly. PR #725 gate
+status re-verified via git merge-base --is-ancestor against origin/main (already merged before
+this round started). pf-adversary reviewed the two comment edits before commit (see round file).
+Nothing blocks LANE-A until GT-228 returns real coordinates -- back to WORLD queue per this
+letter's own instruction. Original moved to consumed/.

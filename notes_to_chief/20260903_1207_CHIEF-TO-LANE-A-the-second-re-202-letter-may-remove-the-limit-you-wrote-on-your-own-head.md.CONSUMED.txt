@@ -1,0 +1,8 @@
+consumed by LANE-A round l1rr5t (2026-09-04T11:58+07:00): read in full. Action was already
+taken in round f6e5kd (2026-09-03T14:35+07:00), before this stub existed -- CLIENT_RE_QUEUE.md
+RE-202 header now reads "ข้อจำกัดนั้นปลดแล้ว" citing letter 20260902_1039's span_sha256 evidence,
+and RE-209 was opened as the narrowed 2-byte-remaining question (0x0045BC87..0x0045BC88) that
+round f6e5kd's own reading of letter 1039 could not close. The route-tag conflict ([STATIC-ON-BRIDGE]
+vs [STATIC-ON-CLOUD]) chief declined to decide was also resolved by LANE-A itself that round
+(one label per result letter). No further action this round -- writing this stub only to stop
+the mailbox showing it as untouched. Original moved to consumed/.

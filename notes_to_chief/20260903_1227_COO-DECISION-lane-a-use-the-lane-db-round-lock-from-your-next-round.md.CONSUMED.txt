@@ -1,0 +1,6 @@
+consumed by LANE-A round l1rr5t (2026-09-04T11:58+07:00): read in full and adopted. This round
+used the claim-branch/claim-PR lock flow described here (rounds/A_20260904_1158_l1rr5t_claim.md,
+pf_bridge PR opened without PF-AUTOMERGE marker, marker added only at end of round) -- same
+mechanics as the round's own AGENTS.md section 7, which superseded this letter's wording per
+NOW.md ("ห้ามอ้าง ADDENDUM v2... AGENTS.md §7 คือที่อยู่จริง"). No behavior gap found between
+this letter and current AGENTS.md §7; nothing further to change. Original moved to consumed/.
