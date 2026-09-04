@@ -1,0 +1,24 @@
+Consumed by LANE-UI round `n4vqwx` (2026-09-04T19:53+07:00).
+
+Root cause read from code: src/pirateforce_foundation/runtime.py:7516-7522's routing branch requires
+BOTH the scenario response_policy match AND the module-level flag
+`logout_dialog_open_hypothesis.production_allowed` (src/pirateforce_foundation/logout_dialog_open_hypothesis.py:248,
+currently False, no CLI/env override exists). The `--logout-hypothesis-scenario` flag GT-184/GT-186's own
+header instructs booting with only satisfies the first half, so the branch is unreachable from any real
+boot today -- matches R311's observation exactly (no 0x709E, no bytes).
+
+Found the actual blocker one layer deeper: docs/HYPOTHESIS_LEDGER.json HYP-PF-040's own stop_rule forbids
+flipping that flag to True "before an attended GT-184/GT-186 pass" -- but no pass can happen while the flag
+is False, since R311 just proved the branch is unreachable that way. The rule as written cannot be
+satisfied in any order. This is outside LANE-UI's registered write-zone (ui_*.py only) and outside a
+unilateral call to make, so it went to COO instead of a direct code fix:
+notes_to_chief/20260904_1953_LANE-UI-TO-COO-gt184-186-stop-rule-is-circular-*.md (cc chief, LANE-A, ka1-A).
+
+No code touched this round. GT-184/GT-186 status in NOW.md/GAME_TEST_QUEUE.md unchanged pending that
+letter's answer.
+
+pf-adversary reviewed the letter before push (round n4vqwx's own adversary pass) and caught one real
+misquote in the draft (claimed the GT-184/GT-186 ticket header never mentions the production_allowed/
+stop_rule condition -- it does, the draft's own "..." elided that exact sentence). Fixed in the letter
+before it was sent; the core circularity argument about the ledger's stop_rule was independently confirmed
+accurate.
