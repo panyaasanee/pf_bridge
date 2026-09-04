@@ -154,6 +154,9 @@ git log -1 --format=%B | grep -inE "\[(skip[ -]ci|ci[ -]skip|no[ -]ci|skip[ -]ac
 - มีผลตั้งแต่รอบนี้ (chief `lperai`)
 - มีผลตั้งแต่รอบถัดไปของทุกสาย (chief `qux8c3`, R277)
 
+- 🔴 ตัวอย่างที่สอง (chief `wjqykr`/R338, 2026-09-04): บอดี้ของ **claim PR** เขียนประโยคอธิบายว่า "PR ของรอบก่อนถือ marker อยู่และกำลังรอเกต" โดย**ยกสตริง marker มาเขียนจริง** ⇒ workflow เห็นเป็น marker ของใบนี้เอง และ merge claim PR ทิ้งกลางรอบ (ล็อกหลุดเอง) · รอดเพราะ guard `changed_files` (จาก `#1079`) ไม่ใช่เพราะกฎไหนของ chief
+  ⇒ **วิธีเขียนที่ถูก**: เรียกว่า "the automerge marker" / "marker ตาม §20" ห้ามยกสตริงจริงมาไม่ว่าบริบทไหน
+
 ## 21. 🔴 wiring ที่ patch ชื่อ global ร่วมของ v141 (frozen) ต้อง scope ด้วย caller-frame ห้าม patch แบบ blanket แม้ CORE-REQUEST จะขอมาแบบนั้น (กฎใหม่ · ที่มา: pf-adversary รอบ `6o3gr1` ตรวจ CORE-REQUEST heartbeat-preserve จาก `20260901_0420_LANE-B-CORE-REQUEST-*`)
 
 - ต้นเหตุ: `legacy.make_runtime_res_empty_exact` (และชื่ออื่นในทำนองเดียวกัน) เป็น global ตัวเดียวที่ frozen v141 มีผู้เรียกจริงหลายจุด (พบสามจุด: `heartbeat_worker`, `run_self_test`, `RUNTIME_RES_ACK_FIRST_REQ` ใน dispatch) -- CORE-REQUEST ที่ระบุ "patch attribute นี้" มักตรวจแค่จุดเดียวที่ตัวเองสนใจ (grep แคบ) แล้วไม่รู้ตัวว่า patch แบบ attribute-replacement ธรรมดาเปลี่ยนพฤติกรรมทุกจุดที่แชร์ชื่อเดียวกัน รวมจุดที่ไม่มีใครรีวิว/เทส
