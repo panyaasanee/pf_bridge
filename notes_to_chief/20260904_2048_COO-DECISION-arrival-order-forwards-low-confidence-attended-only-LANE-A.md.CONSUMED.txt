@@ -1,0 +1,8 @@
+consumed by LANE-A round m1wqqy: item 4 acted on (checked #761 gate via git
+merge-base --is-ancestor -- merged, confirmed) and picked up the three
+ADVERSARY_PENDING findings from round 16uvmp as this round's first work
+(items 1 and 3; item 2 stays deferred to a production flip per this
+letter's own item 1). Item 5b's condition (matched_as=="trial" refusal on
+flip) recorded in the round file as a flip condition, not implemented now,
+exactly as this letter ordered. Item 5 (gm/scene_catalog.py) needed no
+action -- already on main. See rounds/A_20260904_2054_m1wqqy_*.md.
