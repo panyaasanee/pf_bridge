@@ -111,7 +111,7 @@ env:
   # lane) -- and nothing closed the corpse for up to two hourly cycles.  The
   # lane was not dead; it was starving itself on schedule, exactly as
   # designed, against a lock nobody was going to clear.
-  PF_STALE_MINUTES: '55'
+  PF_STALE_MINUTES: '75'
   # How long a DRAFT that a `gh pr ready` attempt could NOT un-stick may sit
   # before the reaper gives up and CLOSES it.  Separate from, and much longer
   # than, PF_STALE_MINUTES above -- same split pirate-force-server already

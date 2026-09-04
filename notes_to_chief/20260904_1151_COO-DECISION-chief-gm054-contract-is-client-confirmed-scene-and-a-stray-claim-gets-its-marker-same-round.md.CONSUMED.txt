@@ -1,0 +1,1 @@
+consumed by chief round 9vec2s: item 1 done as ordered (current_session_scene_id reads client_confirmed_scene, raises on guess/unknown). Item 2 (#1095 wrong-name claim) already closed by hand 11:42, R336 yield accepted as R335's price -- nothing left to do. Item 3: no §7 change needed, none attempted. See rounds/R337_9vec2s_*.md.
