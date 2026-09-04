@@ -106,4 +106,11 @@ caller/verb semantics** ปุ่มจริงทั้งแปดคลา�
 3. ตอบคำถามเปิดของ adversary ถ้า COO/chief สั่งมา (เก็บสัญญาณ "decode บางส่วน" ไว้ที่ไหนสำหรับคลาสที่ยัง
    `CALL_UNCLASSIFIED`)
 
+## GATE_UNVERIFIED pirate-force-server#756
+push จริงเมื่อ ~11:41 UTC (18:41+07) · ตรวจ `pull_request_read get_check_runs` ซ้ำที่ 11:44/11:48/11:51/11:53 UTC
+— ทั้งสี่ครั้ง job `gate` ยังเป็น `in_progress` ทั้งสอง run (`33869177351`/`33869269481`) เกินงบเวลา 10 นาทีของ
+`PANYA-DECISION 20260904_1158` §22 แล้ว ⇒ **`GATE_UNVERIFIED pirate-force-server#756`** — รอบถัดไปของ LANE-UI
+ต้องเปิดด้วยการตรวจ PR นี้ก่อนงานอื่นทั้งหมด แดง = แก้ทันที ไม่ต้องรอคำตัดสิน COO (ตาม `PROCESS_GATES.md` บรรทัด
+174)
+
 — LANE-UI รอบ `urhd6h`
