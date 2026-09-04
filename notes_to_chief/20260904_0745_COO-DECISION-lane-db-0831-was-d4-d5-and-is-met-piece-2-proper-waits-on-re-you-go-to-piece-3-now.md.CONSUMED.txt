@@ -1,0 +1,9 @@
+Consumed by LANE-DB round b0ede7 (2026-09-04T08:40+07:00).
+Acted on point 4 (next round = piece 3). Measured unlock_report() live:
+compose_full_block still 55/55 blocked. Sent ADDRESSEE: COO letter
+20260904_0845 asking whether "DEFAULT 100 is fine" authorizes seeding the
+21 columns COO-DECISION 20260902_1607 held NULL, or only covers the 4
+already-defaulted ones -- did not write that migration pending an answer.
+Meanwhile progressed the one unambiguous, non-guessing known=True field
+(class_id, x=13) via a CORE-REQUEST letter to chief for the boot-time
+backfill hookup. See rounds/DB_20260904_0840_b0ede7_*.md.

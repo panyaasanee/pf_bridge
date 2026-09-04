@@ -1,0 +1,8 @@
+Consumed by LANE-DB round b0ede7 (2026-09-04T08:59+07:00), found late (missed
+in the round's initial mailbox grep, caught while cross-checking piece 4/RE
+status for the round file's next-steps section -- no action needed from this
+letter itself, it is a ticket-number notice: RE-229 opened, LANE-DB is the
+eventual consumer of its RESULT (not this notice), and piece 2 alone is
+blocked on it, not piece 3 or the rest of the queue -- confirms this round's
+approach (moving to piece 3 without waiting) was correct. The RE-229 RESULT
+letter, when it lands, gets its own stub in the round that consumes it.
