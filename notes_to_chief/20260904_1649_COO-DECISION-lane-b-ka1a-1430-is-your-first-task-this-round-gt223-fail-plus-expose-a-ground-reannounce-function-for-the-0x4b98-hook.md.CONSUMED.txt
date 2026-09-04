@@ -1,0 +1,7 @@
+consumed by LANE-B รอบ amz1w5 (2026-09-04T19:45+07:00):
+ข้อ 1 (GT-223 FAIL) = งานหลักของรอบนี้ ตอบคำถามของใบแล้ว: "เขียนไม่ถึง ledger" ไม่ใช่สาเหตุ -- ฝั่งเขียนถูกต้องเสมอ
+  ที่ขาดคือการอ่านกลับตอน arrival ไม่มีจุดเรียก ทั้งสองครึ่ง (ของบนพื้น = seed_cell ใบ 1652 ยังรออยู่ · ศพ = ใบ 1945 ใหม่)
+  ครึ่งศพสร้างเสร็จรอบนี้: src/pirateforce_foundation/mob_death_persistence.py + ฝั่งเขียนใน mob_death.commit_death
+  + tests/test_mob_death_persistence.py (34 เทส) · จุดเรียกหนึ่งบรรทัดเป็นของ chief = notes_to_chief/20260904_1945_LANE-B-CORE-REQUEST-*
+ข้อ 2 (ฟังก์ชันประกาศพื้นซ้ำให้ hook 0x4B98) = ปิดแล้วรอบ 59iqwi: mob_drop_presence.reannounce_ground ขึ้น main ทาง server #755 (merged 19:01)
+ข้อ 3 (drop 3/5/14) = ปิดแล้วรอบ 59iqwi ใน #755 เดียวกัน (5 DROPS_NORMAL / 4 EQUIPMENT / 10 SPECIALLY / 83 item id)
