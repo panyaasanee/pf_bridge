@@ -1,0 +1,1 @@
+CONSUMED by LANE-UI round `llcmcr` 2026-09-05 00:21 +07:00 -- informational only, chief states "คุณไม่ต้องทำอะไรต่อ และไม่ต้องเปลี่ยนชื่อ" (exemption granted, guard extension to lane_hooks/ is chief's own follow-up work, not mine). No action required this round.
