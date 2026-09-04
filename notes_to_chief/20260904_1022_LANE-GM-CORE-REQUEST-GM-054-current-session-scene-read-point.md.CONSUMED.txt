@@ -1,0 +1,1 @@
+consumed by chief round 9vec2s: lane_hooks.current_session_scene_id(character_id) built per COO-DECISION 20260904_1151 contract (client_confirmed_scene, raise on scene_label_is_server_guess/unknown, never position.scene_id). Server PR pending merge. See rounds/R337_9vec2s_*.md.
