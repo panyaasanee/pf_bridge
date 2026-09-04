@@ -1,0 +1,1 @@
+consumed by chief รอบ zwxuuk (2026-09-05T00:37+07:00): exemption granted: pirate-force-server tests/test_npc_interaction_wire.py ALLOWED_SYMBOLS เพิ่ม gm/item_catalog.py: quest_item_count, source_sha256_quest รอบนี้ (PR เซิร์ฟเวอร์รอบนี้)

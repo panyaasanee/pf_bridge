@@ -13734,19 +13734,20 @@ LANE-UI เป็นผู้ตัดสินความหมายของ
 
 ---
 
-## GT-247 ATTACK-POSE-ONE-FIELD-AB-001  [🔴 **BLOCKED** -- ปลดเป็น `READY` เมื่อแฟล็ก `--pose-trial` ของ **LANE-B** (`COO-DECISION 20260904_2141`) ขึ้น `main` และ `RECHECK` ด้านล่างผ่านครบ · เลขใบตั้งโดย chief (LANE-E) รอบ `epkucn`/R344 ตาม `COO-DECISION 20260904_2142` ข้อ 1 · เนื้อใบ = `notes_to_chief/20260904_2133_KA1A-TO-COO-attack-pose-*` §1 (ผู้ร่าง ka1-A) · **เจ้าของใบ/ผู้บริโภคผล = LANE-B** · ผู้รัน = Panya (attended) ~10-15 นาที · 🔴 **Panya ยกเว้นกฎ "ห้ามใบตีมอนจนกว่า P-2 จะปิด" ให้ใบนี้ใบเดียว** (คำสั่งสด 2026-09-04 21:15 · `NOW.md` หัวข้อ "ห้ามทำจนกว่า P-2 จะปิด") -- ใบนี้วัด **ท่า** ไม่วัดสี ไม่วัดดาเมจ · **บูตเดี่ยว ไม่พ่วง `GT-114`** (`GT-114` ยกเลิกแล้วตาม `COO-DECISION 20260904_2158`)]
+## GT-247 ATTACK-POSE-ONE-FIELD-AB-001  [🟢 **READY** -- ปลดโดย chief (LANE-E) รอบ `zwxuuk` ตาม `COO-DECISION 20260904_2347`: แฟล็กของ **LANE-B** อยู่บน `main` จริง (server `#771`, `be725d4`, merged 23:37) และ `RECHECK` ด้านล่างผ่านครบ · เลขใบตั้งโดย chief (LANE-E) รอบ `epkucn`/R344 ตาม `COO-DECISION 20260904_2142` ข้อ 1 · เนื้อใบ = `notes_to_chief/20260904_2133_KA1A-TO-COO-attack-pose-*` §1 (ผู้ร่าง ka1-A) · **เจ้าของใบ/ผู้บริโภคผล = LANE-B** · ผู้รัน = Panya (attended) ~10-15 นาที · 🔴 **Panya ยกเว้นกฎ "ห้ามใบตีมอนจนกว่า P-2 จะปิด" ให้ใบนี้ใบเดียว** (คำสั่งสด 2026-09-04 21:15 · `NOW.md` หัวข้อ "ห้ามทำจนกว่า P-2 จะปิด") -- ใบนี้วัด **ท่า** ไม่วัดสี ไม่วัดดาเมจ · **บูตเดี่ยว ไม่พ่วง `GT-114`** (`GT-114` ยกเลิกแล้วตาม `COO-DECISION 20260904_2158`) · ไม่ออกท่าทั้ง 6 ค่า = **NEGATIVE** (ผลลบที่มีค่า) ไม่ใช่ FAIL (`COO-DECISION 20260904_2346`)]
 
 **คำถามเดียว:** เมื่อ reply ต่อ `ActionVital` ใส่ `+0x30` = behavior id ของอาวุธที่ถือจริง (ไม่ใช่ echo `0xEA7D`) ไคลเอนต์เล่นอนิเมชันโจมตีของ performer ซ้ำได้ทุกครั้งหรือไม่
 
 **ที่มา:** `RE-110-RESULT` 2026-08-27 18:32 (archive) ข้อ "one-field A/B เท่านั้น" + `BUILD_IMPACT` ของมัน · chief `1405` ยืนยัน [PROVEN] crosswalk `EQUIP_VALUE.n_EQUIPTYPE -> n_ATTACK_SKILL -> BEHAVIOR.n_ID` = 280/282/284/286/288/290
 
-**สิ่งที่สายต้องสร้างก่อนบูต (LANE-B · ตาม `BUILD_IMPACT`):** ทางเลือก opt-in ที่ไม่แตะ production -- แฟล็ก `--pose-trial <behavior_id|auto>` (`auto` = resolve จาก equip type ของ actor ถ้ามี provenance ถ้าไม่มีใช้ `<id>` ตรง ๆ) · พิมพ์ `POSE_TRIAL sent=+0x30=<id> control|mutant` ทุก reply · ไม่มีแฟล็ก = production เดิมทุกไบต์
+**สวิตช์จริง = ตัวแปรแวดล้อม ไม่ใช่แฟล็กบรรทัดคำสั่ง** (`COO-DECISION 20260904_2346`: `app.py` เป็นของ chief, LANE-B แก้ไม่ได้ จึงเลือกอ่าน process environment แบบเดียวกับ `PF_SPEED_TRIAL`) -- ก่อนบูตแต่ละครั้ง พิมพ์ **`set PF_POSE_TRIAL=<id>`** ใน cmd.exe ของสะพาน (**ห้ามใช้ `setx`** -- `setx` เขียนลง registry ติดค้างทุกบูตในอนาคตแบบมองไม่เห็น ส่วน `set` เป็นของหน้าต่างนั้นบานเดียว) แล้วค่อยบูตเซิร์ฟเวอร์ · **ต้องเห็นบรรทัดคอนโซล `POSE_TRIAL_BOOT armed=<id>` ก่อนคลิกทุกครั้ง** -- ไม่เห็น = ตัวแปรไม่ติด อย่าคลิกต่อ · ไม่ตั้งตัวแปร/ตั้งว่าง/พิมพ์ผิด/`auto` ที่ไม่มี provenance = production เดิมทุกไบต์ (fail-closed) · แฟล็กบรรทัดคำสั่ง `--pose-trial <id>` เป็นแค่ alias สะดวกมือหนึ่งบรรทัดที่ยังไม่มีใครเขียน ไม่ใช่ตัวบล็อกใบนี้
+**ระยะยืน:** ตัวกรอง range gate ที่ `0x44EB1D -> 0x4758D0` ใช้ `n_RANGE = 75` (ระยะยกกำลังสอง) -- **ยืนให้ชิดมอนกว่าค่านี้ก่อนคลิก** ไม่งั้นค่าที่ resolve ได้จริงอาจโดนเกตนี้ปฏิเสธจนดูเหมือนไม่ออกท่าทั้งที่ id ถูก
 
-**RECHECK (ก่อนปลด READY):** แฟล็ก + โทเคน `POSE_TRIAL` อยู่บน `main` · pytest ของโมดูลเขียว · ไม่มีแฟล็ก = byte-identical กับ production (มีเทสตรึง)
+**RECHECK (ก่อนปลด READY) -- ผ่านครบแล้ว:** ✅ ตัวแปร `PF_POSE_TRIAL` + โทเคน `POSE_TRIAL_BOOT`/`POSE_TRIAL` อยู่บน `main` (server `#771`) · ✅ `pytest tests/test_pose_trial.py tests/test_action_ack.py -q` เขียว (33 passed, 69 subtests) · ✅ ไม่ตั้งตัวแปร = byte-identical กับ production (มีเทสตรึง)
 
-**steps (~10-15 นาทีหน้าจอ · ฉาก 2 มอน Fighting Fish soldier ที่ตีได้อยู่แล้ว):**
-1. `LOCK_GAME` · สำเนา DB · บูต **control** (`--pose-trial 60029` = ค่า echo เดิม) -> คลิกตีมอน 1 ครั้ง -> Panya ดูว่าออกท่าไหม (คาด: ไม่) · ถ่าย 1 ใบ
-2. relaunch ตามที่สายกำหนด แล้วบูต **mutant** ทีละค่า **280 -> 284 -> 288 -> 282 -> 290 -> 286** (หรือ `auto` ก่อนถ้ามี provenance) -> คลิกตีมอน 1 ครั้งต่อค่า -> Panya บอก "ออกท่า / ไม่ออก / ท่าอะไร" · ถ่ายเฉพาะค่าที่ออกท่า
+**steps (~10-15 นาทีหน้าจอ · ฉาก 2 มอน Fighting Fish soldier ที่ตีได้อยู่แล้ว · ยืนชิดมอน <75 ทุกครั้งก่อนคลิก):**
+1. `LOCK_GAME` · สำเนา DB · ปิด cmd.exe เดิม เปิดใหม่ พิมพ์ `set PF_POSE_TRIAL=60029` (ค่า echo เดิม = **control**) -> บูต -> เห็น `POSE_TRIAL_BOOT armed=60029` แล้วค่อยคลิกตีมอน 1 ครั้ง -> Panya ดูว่าออกท่าไหม (คาด: ไม่) · ถ่าย 1 ใบ
+2. teardown แล้วเปิด cmd.exe ใหม่ทุกรอบ พิมพ์ `set PF_POSE_TRIAL=<id>` ทีละค่า **280 -> 284 -> 288 -> 282 -> 290 -> 286** -> บูต -> เห็น `POSE_TRIAL_BOOT armed=<id>` -> คลิกตีมอน 1 ครั้งต่อค่า -> Panya บอก "ออกท่า / ไม่ออก / ท่าอะไร" · ถ่ายเฉพาะค่าที่ออกท่า
 3. ค่าที่ออกท่า: **ไม่กดอะไรต่อ 10 วินาที** -- ดูว่าไคลเอนต์ตีซ้ำเอง (auto-repeat) ไหม (ตอบ objective 1 ของ `RE-110` ที่ static ตัน) · สายจดเวลาเฟรม `ActionVital` ขาเข้าเทียบ
 4. teardown ตามปกติ
 

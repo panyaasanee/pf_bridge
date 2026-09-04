@@ -1,0 +1,1 @@
+consumed by chief รอบ zwxuuk (2026-09-05T00:37+07:00): exemption granted: pirate-force-server tests/test_npc_interaction_wire.py ALLOWED_SYMBOLS เพิ่ม lane_hooks/lane_a_choose_npc_roster_scenes.py: columbus_quest_dispatch รอบนี้ (PR เซิร์ฟเวอร์รอบนี้)

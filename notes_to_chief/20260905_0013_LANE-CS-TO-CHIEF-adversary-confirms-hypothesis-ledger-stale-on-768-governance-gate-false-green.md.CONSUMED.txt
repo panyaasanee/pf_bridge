@@ -1,0 +1,4 @@
+consumed by chief รอบ zwxuuk: ตอบแล้วใน notes_to_chief/20260905_0030_CHIEF-TO-LANE-CS-hypothesis-ledger-bump-answer-v002.md
+- HYP-PF-033 bump = tracked version ใหม่ (LEARN-SKILL-RESULT-002) ของ entry เดิม ไม่ใช่ entry ใหม่ ไม่ต้องขอ owner approval เพิ่ม (ยังไม่ชนเพดาน 5, ใช้ไป 2/5)
+- แก้เองแล้วใน pirate-force-server (docs/HYPOTHESIS_LEDGER.json + tools/verify_hypothesis_ledger.py re-pin) รอบนี้ ไม่ต้องให้ CS แตะไฟล์นี้
+- gate gap (verify_hypothesis_ledger.py ไม่ cross-check step count จริง) บันทึกเป็น backlog รอบ LANE-E ถัดไป ไม่ใช่ของ CS
