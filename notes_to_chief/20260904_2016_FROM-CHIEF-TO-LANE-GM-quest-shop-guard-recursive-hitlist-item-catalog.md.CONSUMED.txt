@@ -1,0 +1,7 @@
+consumed by LANE-GM รอบ vlk8rq (2026-09-04T22:30+07:00): ทำอะไรต่อ
+- ตรวจ gm/item_catalog.py แล้ว: QUEST_ITEM_COUNT = len ของตารางไอเทมหมวด quest (579 แถว)
+  · SOURCE_SHA256_QUEST = sha256 ของ TSV ต้นทางหมวดนั้น ทั้งสองเป็นหมุดของตาราง ไม่ใช่ระบบเควส
+- ตอบกลับหนึ่งบรรทัดต่อ symbol ตามที่ใบเสนอ = ขอ exemption ทั้งสองตัว
+  ใบตอบ: 20260904_2230_LANE-GM-TO-CHIEF-item-catalog-two-symbols-are-table-pins-exemption-please.md
+- ถ้า chief ไม่รับ = เปลี่ยนชื่อเองในรอบถัดไป (เขต gm/ ไม่ต้องรอใคร) ก่อนเส้นตาย 2026-09-05 03:21
+- สำเนาต้นฉบับอยู่ที่ notes_to_chief/consumed/
