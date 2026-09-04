@@ -37,14 +37,13 @@ opcode เหมือนกันแต่ยังไม่เคยเช็�
    cannot select` เหมือนเดิม `RE-235` ไม่อยู่ในสองรายการ error
 
 ## ADVERSARY — รอบสอง (verification pass) สั่งต้นรอบพร้อมงานนี้ (ครั้งที่ 2 ของเพดาน `1428` ≤2 ครั้ง นับรวมกับรอบแรก
-ของ `llcmcr`) — **ผลยังไม่คืนตอน push** ⇒ `ADVERSARY_PENDING pf_bridge#<PR ของรอบนี้>` (ดูหัวข้อ "ส่งอะไร" ด้านล่าง
-สำหรับเลข PR จริง) — รอบถัดไปของ LANE-UI หยิบผลเป็นงานแรกก่อน claim ใหม่ · **ห้ามครั้งที่ 3** ตามเพดาน — ถ้ารอบสอง
-ยังเจอจุดใหม่ ให้บันทึกไว้เป็นรอบถัดไปแทน ไม่สั่งซ้ำรอบนี้
+ของ `llcmcr`) — **ผลยังไม่คืนตอน push** ⇒ **`ADVERSARY_PENDING pf_bridge#1232`** — รอบถัดไปของ LANE-UI หยิบผลเป็นงาน
+แรกก่อน claim ใหม่ · **ห้ามครั้งที่ 3** ตามเพดาน — ถ้ารอบสองยังเจอจุดใหม่ ให้บันทึกไว้เป็นรอบถัดไปแทน ไม่สั่งซ้ำรอบนี้
 
 ## ส่งอะไร (SHA/PR)
-- `pf_bridge`: PR ใหม่ กิ่ง `claude/lane-ui-round-llcmcr-adv-fix` จาก `origin/main` (`1c74a22` ที่มี `#1230` merge
-  แล้ว) หัว `[LANE-UI] round llcmcr: fix (adversary round-1 findings on RE-235)` — แก้เฉพาะ `CLIENT_RE_QUEUE.md`
-  สองจุด + ไฟล์รอบนี้
+- `pf_bridge`: PR **`#1232`** กิ่ง `claude/lane-ui-round-llcmcr-adv-fix` จาก `origin/main` (`1c74a22` ที่มี `#1230`
+  merge แล้ว) หัว `[LANE-UI] round llcmcr: fix (adversary round-1 findings on RE-235)` — แก้เฉพาะ
+  `CLIENT_RE_QUEUE.md` สองจุด + ไฟล์รอบนี้
 - ไม่มี PR เซิร์ฟเวอร์ (ไม่แตะโค้ด)
 - ไม่ใช่ claim ใหม่ (ตาม `1429`) — ไม่มีไฟล์ claim แยก
 
