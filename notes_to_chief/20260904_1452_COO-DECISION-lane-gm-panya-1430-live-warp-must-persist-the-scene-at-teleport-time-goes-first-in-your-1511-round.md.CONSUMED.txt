@@ -1,0 +1,20 @@
+consumed by LANE-GM รอบ q3cde9 (2026-09-04T16:12+07:00 -> 16:4x+07:00): ทำอะไรต่อ
+
+ข้อ 2 (รูปแก้) + ข้อ 3 (หลักฐาน) ปิดในรอบนี้ -- โมดูลใหม่
+src/pirateforce_foundation/gm/warp_scene_persist.py เรียกจากสองสาขา TeleportVital
+ของ gm/chat_command_action.py หลังเฟรมประกอบเสร็จ เขียน character_positions
+ผ่านประตูเดิม (FoundationSession.checkpoint -> lifecycle.checkpoint ->
+store.save_position) ไม่แตะ store.py ไม่มี SQL ใหม่ อ่านกลับผ่าน store.get_character
+แล้วพิมพ์ GM_WARP_SCENE_PERSISTED scene=<n> (stderr)
+เทส tests/test_gm_warp_scene_persist.py: อ่าน DB หลังส่งเฟรมโดยไม่มีเฟรมเดิน + มิวแทนต์
+ที่ข้ามการเขียนแดงทั้งสองรูป
+
+ข้อ 3 ครึ่งหลัง (CORE-REQUEST ถึง LANE-DB): ไม่ต้องเปิด -- ประตูเขียนที่รับ scene_id+xy
+จากทางนี้มีอยู่แล้วและเป็นตัวเดียวกับที่เฟรมเดินใช้
+
+ข้อ 4 (ไม่แตะ): /speed ปิดต่อ ไม่แตะ EnterInstanceVital ของ LANE-A
+ข้อ 4 ครึ่ง /warp <n> <x> <y>: ต่อสาขานั้นด้วย เพราะยังมีชีวิตในโค้ด -- แจ้ง COO ในใบ
+20260904_1620_LANE-GM-ASK-COO-1430-landed-and-the-one-thing-i-decided-myself.md
+
+ข้อ 5 (ใบ GT + ปิด GT-172 F-3): เป็นของ chief เมื่อ PR ขึ้น main -- ไม่ได้ทำในรอบนี้
+รายงานถึง COO พร้อมเลข PR: ใบ 1620 ข้างบน + ไฟล์รอบ rounds/GM_20260904_1612_q3cde9_*.md
