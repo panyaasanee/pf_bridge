@@ -62,7 +62,7 @@
 - 🚀 **`PROMOTE-153` CHAT-ECHO-ON-A-DEFAULT-BOOT-001 [CHIEF-WORK · ไม่ใช่ใบเทส]** (🟢 **OPEN — เจ้าของ: chief** · ใบแรกของท่อ promotion ตาม `PANYA-DIRECTIVE 20260829_2222` + `COO-DECISION 20260829_2246` · แชทใบ้บนบูตปกติเพราะเส้นทาง echo อยู่ในเลน hypothesis ที่ `production_allowed: False` ทั้งสองเลน [วัดแล้ว รอบ k882hm] · เส้นตายข้อ 1 ของ directive: 30 ส.ค. 21:00 · ใบเต็มอยู่ท้ายไฟล์)
 - 📌 [บรรทัดสารบัญโดย chief R235 (t7t5yd) — เนื้อใบไม่ถูกแตะ] **`RIDER-149-A`** (ของสาย B ท้ายไฟล์): chief ต่อสายห้าบรรทัด `MOB_DROP_PRESENCE` ตามใบ 2246 แล้ว **รอ merge `pirate-force-server#291`** — ด่านบิลด์ของ rider (grep `MOB_DROP_PRESENCE` ตอนฆ่า) จะผ่านเมื่อ merge เท่านั้น ก่อนหน้านั้นบูตได้ `NO-RESULT` ตามที่ใบเขียนไว้เอง
 - 🆕 **`GT-148` SCENE17-STOWAWAY-ACTORS-FIRST-EYES-001** (🟢 **PENDING บูตได้เลย · attended** · เปิดโดย LANE-A รอบ `2pdf6j` · ขึ้นเรือ Columbus ออกทะเลแล้ว **ยังเห็นชาวเมืองไหม** — สี่ตัวอยู่ในรัศมี 2000 หน่วยจากจุดลงเรือ · **ผลลบกับผลบวกมีค่าเท่ากัน** · ใบเต็มอยู่ท้ายไฟล์)
-- 🔥 **`GT-146` PICKUP-CLICK-OPCODE-CAPTURE-001** (🟢 **PENDING บูตได้เลย · หัวคิวกะ attended ถัดไป ตาม `COO-DECISION 20260829_1241` ข้อ 2** · เปิดโดย LANE-B รอบ `uq2lxw2` · คลิกซ้ายบน element ของตกที่เซิร์ฟเวอร์ส่งเอง (คู่เลน hypothesis ที่ Panya อนุมัติ 20260824) แล้วเก็บทุกเฟรมขาเข้า — ใบ capture ที่ปลด `RE-125`/`GT-124`/M5 · ผลลบไม่ปิดใบ · ใบเต็มอยู่ท้ายไฟล์ · [บรรทัดสารบัญนี้เติมโดย chief R226 ตามกติกาสารบัญ — เนื้อใบไม่ถูกแตะ])
+- 🔥 **`GT-146` PICKUP-CLICK-OPCODE-CAPTURE-001** (🔴 **BLOCKED - until P-2 closes (NOW)** — เงื่อนไขเดียว · chief `kj0s6r`/R346 ตาม `COO-DECISION 20260904_2349` ข้อ 5 · ~~PENDING บูตได้เลย · หัวคิวกะ attended ถัดไป ตาม `COO-DECISION 20260829_1241` ข้อ 2~~ ถอนแล้ว · เปิดโดย LANE-B รอบ `uq2lxw2` · คลิกซ้ายบน element ของตกที่เซิร์ฟเวอร์ส่งเอง (คู่เลน hypothesis ที่ Panya อนุมัติ 20260824) แล้วเก็บทุกเฟรมขาเข้า — ใบ capture ที่ปลด `RE-125`/`GT-124`/M5 · ผลลบไม่ปิดใบ · ใบเต็มอยู่ท้ายไฟล์ · [บรรทัดสารบัญนี้เติมโดย chief R226 ตามกติกาสารบัญ — เนื้อใบไม่ถูกแตะ])
 - 🆕 **`GT-142` M5-KILL-PICKUP-RELOG-ROUNDTRIP-001** (🔴 **BLOCKED — `BLOCKED-BY: STORE-INSERT-001`** · เปิดโดย chief R222 ตาม `COO-DECISION 20260829_0441` gate-2 ข้อ 3 · ใบปิดวง M5: ฆ่ามอนใน `Bg0002` → เก็บของ → relog → ของยังอยู่ไหม · 🔴 **ห้ามขึ้นหัวคิว ห้ามเรียกผู้เทส** ~~จนกว่าตั๋วราก `STORE-INSERT-001` ปิด~~ [chief R226: ตั๋วรากปิดแล้ว เงื่อนไขย้ายเป็น: จนกว่า `GT-146` ให้ opcode และ call site `GT-124` ลง main] (มติข้อ 6 กฎ 2-3) · 🔴 เกรดไม่ได้จนกว่า `RE-139` ปิด (กฎ 4) · ใบเต็มอยู่ท้ายไฟล์)
 - 🛠️ **`STORE-INSERT-001` [CHIEF-WORK · ไม่ใช่ใบเทส]** (✅ **CLOSED -- `#244` merged แล้ว (ยืนยันด้วย API รอบ R226: merged_at 2026-08-29T00:56Z)** · ~~🟡 push แล้ว รอ merge `pirate-force-server#244` (R224 `4gqnwm`)~~ — ~~#241~~ ถูกปิดเพราะเกตแดง (เทสของรอบนี้เองรั่ว sqlite handle บน Windows) แก้แล้วและเปิดใบใหม่บน branch เดิม — เจ้าของ: chief · ~~`store.py` ยังไม่มี INSERT แถวของที่เก็บได้ และไม่เดิน `character_backpacks.next_item_identity` ⇒ ของที่เก็บไม่รอดข้าม DB · เป็นตัวบล็อกเดียวของ `GT-142`~~ [chief R226: ทั้งประโยคเป็นอดีตแล้ว — `store.commit_acquired_backpack_item` อยู่บน main (#244) ตัวบล็อกของ GT-142 ดูบรรทัดของมัน] · M5 ครบกำหนด 31 ส.ค. 12:00 · ใบเต็มอยู่ท้ายไฟล์)
 - 🆕 **`GT-147` COUNTER-RESYNC-RECOVERY-TOOL-001** (🔴 **BLOCKED-ON-TOOL · ไม่ด่วน — ห้ามขึ้นหัวคิว** · เปิดโดย chief R227 ตาม `COO-DECISION 20260829_1344` ทาง 3 · เครื่องมือกู้ตัวนับ `next_item_identity` ที่ล้าหลังแถวจริง (attended-only เจ้าของรันเอง · เซิร์ฟเวอร์ปิด · diff → หยุดถาม → ค่อยเขียน) + ตรวจรับงานแก้ข้อความ `PermissionError` ที่ชี้ `HYP-PF-008` ผิดเรื่องในใบเดียวกัน · สล็อตสร้างเครื่องมือ = คิวปกติของ chief หลังงาน M5 · เคสจริงยังไม่เคยเกิด — กติกา restore-ทั้ง-DB ใน `AGENTS.md` §7 กันเหตุแทบทั้งหมด · ใบเต็มอยู่ท้ายไฟล์)
@@ -861,7 +861,7 @@
 ## GT-051 RENDER-SYNTHESIS-001 [เอกสารล้วน · ✅ **DONE — chief cloud ทำเองเสร็จใน R128 (2026-08-23 ~18:1x +07:00) · ไม่ใช่งานสะพาน ไม่มีอะไรให้ผ... -- archived 20260827 (closed; verbatim in `archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md`)
 ## ⭐ GT-058 LEARN-SKILL-RESULT-001 [attended, in-game]: ไคลเอนต์ "ทำอะไร" กับเฟรม CLearnSkillResultVital (0x673C) เมื่อรับ sweep 5 สเต็ป — อัปเ... -- archived 20260827 (closed; verbatim in `archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md`)
 ## GT-059 SKILL-ATTR-WINDOW-GATE-001 [attended, in-game]: ส่ง `CSkillAttr` (attr block `0x1661` ขี่ `UpdateAttrVital` `0x309A`) แล้วหน้าต่างสกิ... -- archived 20260827 (closed; verbatim in `archive/GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md`)
-## ⭐ GT-060 PICKUP-CLICK-CAPTURE-001 [attended, in-game]: คลิกซ้ายบน drop-object ที่วาดจริงบนจอ แล้วจับเฟรม `PickupTerrainThing` **ตัวจริงตัวแรก** บน wire — id `0x4543` ที่ derive ไว้ ถูกหรือผิด  [🔴 **BLOCKED-CONDITIONAL — ห้ามบูตจนกว่าเงื่อนไข (ก)(ข)(ค) ข้างล่างครบทั้งสามข้อ** · เลน server = HYP-PF-036 (R151 · ✅ (ก) ปิดแล้ว R152: PR #22 merge เข้า `main` `2c0e3ba`) · เงื่อนไข (ข) เหลือแค่ผลตา GT-045 (นัด 2026-08-26) — คำเคาะ composition มาแล้ว (จดหมาย 1831 §①) และโค้ด composed-boot merge เข้า `main` แล้ว (R154: PR #23 → `cad3e28` เขียว Actions run 32726495224) · ✅ **(ค) ปลดแล้ว — Panya ปลดพักเลน attended ทั้งเลน (2026-08-24 ~21:1x +07:00 · จดหมาย 2120 §① · บันทึกโดย R155)** — คำสั่งพัก 16:56 ของ 23 ส.ค. สิ้นสุด · กฎรอบ unattended ยังเหมือนเดิมทุกตัวอักษร · 🆕 R155: คำเคาะ 2120 §② ขยาย allow-list เป็น**สามตัว** `ground-loot + pickup-listener + item-operate-res` — ใบนี้ได้ประโยชน์ถ้ารวมบูตกับ GT-063 (โค้ดสามตัว = PR #25 รอ gate — ดูหัวใบ GT-063)]
+## ⭐ GT-060 PICKUP-CLICK-CAPTURE-001 [attended, in-game]: คลิกซ้ายบน drop-object ที่วาดจริงบนจอ แล้วจับเฟรม `PickupTerrainThing` **ตัวจริงตัวแรก** บน wire — id `0x4543` ที่ derive ไว้ ถูกหรือผิด  [❌ **CANCELLED - covered by GT-146** · ปิดโดย chief (LANE-E) รอบ `kj0s6r`/R346 2026-09-05T02:0x+07:00 ตาม `COO-DECISION 20260904_2349` ข้อ 4 · `GT-146` ถามคำถามเดียวกัน (คลิกซ้ายบนของตกที่เซิร์ฟเวอร์ส่งเอง แล้วไคลเอนต์ยิงเฟรมอะไร) ด้วยขั้นตอนที่ใหม่กว่า ⇒ ใบนี้ไม่ต้องใช้เวลาผู้เทสอีกใบ · 🔴 หมายเหตุ: `GT-146` เองอยู่ในสถานะ `BLOCKED - until P-2 closes (NOW)` ⇒ คำถาม opcode ยังไม่ถูกตอบด้วยตา ยังเปิดอยู่ แต่ถืออยู่ที่ `GT-146` ใบเดียว ไม่ใช่สองใบ · เนื้อใบและเงื่อนไขเดิมเก็บไว้ข้างล่างเพื่อการอ้างอิง (ห้ามลบ) — เดิม: **BLOCKED-CONDITIONAL — ห้ามบูตจนกว่าเงื่อนไข (ก)(ข)(ค) ข้างล่างครบทั้งสามข้อ** · เลน server = HYP-PF-036 (R151 · ✅ (ก) ปิดแล้ว R152: PR #22 merge เข้า `main` `2c0e3ba`) · เงื่อนไข (ข) เหลือแค่ผลตา GT-045 (นัด 2026-08-26) — คำเคาะ composition มาแล้ว (จดหมาย 1831 §①) และโค้ด composed-boot merge เข้า `main` แล้ว (R154: PR #23 → `cad3e28` เขียว Actions run 32726495224) · ✅ **(ค) ปลดแล้ว — Panya ปลดพักเลน attended ทั้งเลน (2026-08-24 ~21:1x +07:00 · จดหมาย 2120 §① · บันทึกโดย R155)** — คำสั่งพัก 16:56 ของ 23 ส.ค. สิ้นสุด · กฎรอบ unattended ยังเหมือนเดิมทุกตัวอักษร · 🆕 R155: คำเคาะ 2120 §② ขยาย allow-list เป็น**สามตัว** `ground-loot + pickup-listener + item-operate-res` — ใบนี้ได้ประโยชน์ถ้ารวมบูตกับ GT-063 (โค้ดสามตัว = PR #25 รอ gate — ดูหัวใบ GT-063)]
 
 **ที่มา:** สามใบประกอบกัน — **GT-046** (STATIC PASS: `PickupTerrainThing` เป็น **outbound** สร้างที่ call `0x006B0639` เติมค่าจาก live runtime drop-object · ตัวจุดชนวน = `WM_LBUTTONDOWN` ที่ `0x006B0570` **เฉพาะเส้นทาง in-range**) + **GT-045** (WIRE PASS / CLIENT NO-RESULT — การวาด drop-object จาก wire ยังพิสูจน์ไม่ได้ รอเทสตา) + เลน server ใหม่ **HYP-PF-036** (R151): inbound listener หลัง `--pickup-listener-hypothesis-scenario` — เมื่อเฟรมขาเข้ามี nested vital id `0x4543` มันจะ decode-count-record (`object_ref_u32` · `opaque_u8` · raw body hex) ลง session state `pickup_listener_accepted_count`/`records`/`refusals` และปล่อย **log บรรทัดเดียว ASCII** · **ไม่ตอบกลับ ไม่เขียน DB** · ไบต์ผิดรูป = refusal มีชื่อถูกจดไว้ · codec อิง `external\PF_SERIALIZER_FIELDS.tsv` แถว 859-862
 
@@ -2453,7 +2453,7 @@ ffmpeg -ss <T_ENTER - 20.00> -i $mkv -t 40.00 -vsync 0 GT079_ENTER_%03d.png
 
 ---
 
-## 🆕 GT-080 EMPTY-VIEW-IS-THE-MAP-NOT-THE-SEND-001 [attended, in-game]: ยืนสองจุดในบูตเดียวที่สำมะโน **ไม่เปลี่ยนแม้แต่ไบต์เดียว** — **"ไม่เห็นใคร" ที่จุดเกิดเป็นคุณสมบัติของ *ที่ที่ยืน* หรือของ *จำนวนที่ส่ง***  [🔴 **BLOCKED — BLOCKED-ON-WIRING** (`world_population` / `world_density` ยังไม่ถูก import จาก `runtime.py` หรือ `app.py` เลย — grep ทั้งแพ็กเกจ) · เปิดใบโดย LANE-A (สาย A · WORLD) 2026-08-26 ~02:2x (+07:00) ตาม `CHARTER-02` BUILD-001 / M1 · ร่างใบโดย `pf-queue-author` · **แก้ตามผล `pf-adversary` ก่อนวาง**]
+## 🆕 GT-080 EMPTY-VIEW-IS-THE-MAP-NOT-THE-SEND-001 [attended, in-game]: ยืนสองจุดในบูตเดียวที่สำมะโน **ไม่เปลี่ยนแม้แต่ไบต์เดียว** — **"ไม่เห็นใคร" ที่จุดเกิดเป็นคุณสมบัติของ *ที่ที่ยืน* หรือของ *จำนวนที่ส่ง***  [🟢 **READY** — `unblocked by chief (LANE-E) 2026-09-05T02:0x+07:00 measured on main 2a71c0a5` ตาม `COO-DECISION 20260904_2349` ข้อ 3 · เหตุบล็อกเดิม (BLOCKED-ON-WIRING: "`world_population`/`world_density` ยังไม่ถูก import จาก `runtime.py` หรือ `app.py` เลย") **หมดจริง** — วัดบน `main` ของ pirate-force-server sha `2a71c0a5`: `runtime.py:28` `from . import world_density` · `runtime.py:33` `from . import world_population` · และถูกเรียกจริงไม่ใช่แค่ import (`runtime.py:470` `world_population.WIRE_HEADER_BYTES` · `runtime.py:1131` `world_population.effective_actor_count(...)`) · เจ้าของใบ **LANE-A** ทักท้วงได้หนึ่งรอบผ่านจดหมาย ไม่ทักท้วง = ยืน · เปิดใบโดย LANE-A (สาย A · WORLD) 2026-08-26 ~02:2x (+07:00) ตาม `CHARTER-02` BUILD-001 / M1 · ร่างใบโดย `pf-queue-author` · **แก้ตามผล `pf-adversary` ก่อนวาง**]
 
 > 🔴 **เรื่องเลขใบ:** ตัวนับเป็น **ชุดเดียวร่วมกับ `CLIENT_RE_QUEUE.md`** — prefix สองแบบ ตัวนับเดียว **ห้ามแยกตัวนับ**
 > `GT-074` (chief R170) · `RE-075` · `GT-076` (BUILD-001) · `RE-077` · `GT-078` (chief R172) · `GT-079` (LANE-A) ถูกใช้แล้วทั้งหมด · **grep ก่อนจอง: `GT-080` = 0 hit ทั้งสองไฟล์** ⇒ **ใบนี้คือ `GT-080`** · **เลขว่างถัดไป = 081**
@@ -3731,7 +3731,7 @@ notes_to_chief/20260827_1445_GT101-RESULT-client-rejects-0x5A19-version-1-error-
 
 ---
 
-## GT-102 CORE-REQUEST-014 COLUMBUS-NPCCONVERSATION-QUEST3021-DIALOGUE-001: คลิก Columbus ที่ Port Royal (MOBS n_ID 156, bg0001 placement index 1) ครั้งแรกหลัง CORE-REQUEST-014 -- เห็นบทสนทนาเควสต์ 3021 จริงไหม (เมื่อวานคลิกแล้วเงียบ)  [**PARTIAL** -- เกรดโดย chief รอบ `wi1m62` 2026-08-29T01:0x+07:00 (ผู้เทสเสนอ `PARTIAL`/`PASS-WITH-FINDING`, chief เลือก `PARTIAL` เพราะคำถามหัวใบถามถึง**บทของเควสต์ 3021** ซึ่งยังไม่ถูกพิสูจน์) · `OBSERVER_CONFIRMED: 2026-08-29T00:17+07:00` · ที่ผ่าน: เส้น `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE` (54 bytes) ยิงจริงครั้งเดียว หน้าต่างบทสนทนาเปิดจริงพร้อมสองออปชัน · ที่ยังไม่ผ่าน: ป้ายผู้พูด+เสียงพากย์+เนื้อบทเป็นชุดของ **Sebastian** ไม่ใช่ Columbus ⇒ ชี้ขาดต้องถอดไบต์เฟรม 54 bytes ตรง ๆ = `RE-137` · ผล: `notes_to_chief/20260829_0018_KA3A-*` ข้อ ②]
+## GT-102 CORE-REQUEST-014 COLUMBUS-NPCCONVERSATION-QUEST3021-DIALOGUE-001: คลิก Columbus ที่ Port Royal (MOBS n_ID 156, bg0001 placement index 1) ครั้งแรกหลัง CORE-REQUEST-014 -- เห็นบทสนทนาเควสต์ 3021 จริงไหม (เมื่อวานคลิกแล้วเงียบ)  [**PARTIAL** -- เกรดโดย chief รอบ `wi1m62` 2026-08-29T01:0x+07:00 (ผู้เทสเสนอ `PARTIAL`/`PASS-WITH-FINDING`, chief เลือก `PARTIAL` เพราะคำถามหัวใบถามถึง**บทของเควสต์ 3021** ซึ่งยังไม่ถูกพิสูจน์) · `OBSERVER_CONFIRMED: 2026-08-29T00:17+07:00` · ที่ผ่าน: เส้น `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE` (54 bytes) ยิงจริงครั้งเดียว หน้าต่างบทสนทนาเปิดจริงพร้อมสองออปชัน · ที่ยังไม่ผ่าน: ป้ายผู้พูด+เสียงพากย์+เนื้อบทเป็นชุดของ **Sebastian** ไม่ใช่ Columbus ⇒ ~~ชี้ขาดต้องถอดไบต์เฟรม 54 bytes ตรง ๆ = `RE-137`~~ **เส้นทางนี้ปิดแล้ว ไม่ใช่ตัวชี้ขาดอีกต่อไป** (chief `kj0s6r`/R346 2026-09-05T02:0x+07:00) · ผล: `notes_to_chief/20260829_0018_KA3A-*` ข้อ ② · 🔴 **คงสถานะ `PARTIAL` ต่อไป — ห้ามเกรดเป็น PASS** (ka1-A `20260905_0106` หมวด ค. เสนอเป็นนัยว่า `GT-106-R2`+`GT-131` ครอบแล้ว · **ตรวจแล้วไม่จริง**: จดหมายผล `GT-106-R2` (`consumed/20260831_1036`) บันทึกแค่ว่าหน้าต่าง Story ของ Columbus เปิดพร้อมตัวเลือก **ไม่บันทึกป้ายผู้พูด เสียงพากย์ หรือเนื้อบท** ซึ่งคือสามอย่างที่ใบนี้ค้าง · `GT-131` PASS เป็นป้ายชื่อสำมะโนเมือง คนละชั้นคนละเฟรม = ผิดกฎ G5) · **ตัวชี้ขาดใหม่ = ดูด้วยตาหนึ่งครั้งหลังตัวแก้ลง main**: `RE-137` ตอบแล้วว่าไคลเอนต์ประกอบชื่อ/เสียง/บทจาก `MOBS_TIP` ของ template ที่มันเชื่อว่า actor เป็น ไม่ใช่จาก quest id (`consumed/20260829_0238`) · และตัวแก้นั้น**อยู่บน production path แล้ว** — `world_face_frame.py:173` ส่ง `basic_name=identity.name` แทนเลข Mob-Set ของแถวแช่แข็ง (`:209` ระบุว่าอยู่บน production path · พินโดย `tests/test_face_frame_identity_contradiction.py`) ⇒ **ยังไม่มีใครมองป้ายผู้พูดหลังตัวแก้ลง** ราคาเทส ~5 วินาที พ่วงกับใบ Columbus ใบไหนก็ได้ · ต้องมี `OBSERVER_CONFIRMED` ก่อนเกรดเป็น PASS]
 
 > **UPDATE 2026-08-29T03:0x+07:00 (chief สาย E รอบ `c5nwjc`/R220) -- ต้นเหตุของ "ป้ายผู้พูดเป็น Sebastian" ปิดแล้วที่ชั้น wire รอ merge**
 > สาย A หาตัวเจอ (`notes_to_chief/20260829_0146_LANE-A-CORE-REQUEST-*`): เฟรมหน้า (face frame) ตอนคลิก
@@ -7157,7 +7157,7 @@ git grep -n "def login_entry_is_pinned" <SHA> -- src/pirateforce_foundation/gm/l
 
 ---
 
-## GT-142 M5-KILL-PICKUP-RELOG-ROUNDTRIP-001 [attended, in-game]: ฆ่ามอนใน `Bg0002` -> เก็บของที่ตก -> relog แล้ว **ของชิ้นนั้นยังอยู่ในกระเป๋า** จริงหรือไม่ -- ใบปิดวง M5 ใบเดียว  [BLOCKED]
+## GT-142 M5-KILL-PICKUP-RELOG-ROUNDTRIP-001 [attended, in-game]: ฆ่ามอนใน `Bg0002` -> เก็บของที่ตก -> relog แล้ว **ของชิ้นนั้นยังอยู่ในกระเป๋า** จริงหรือไม่ -- ใบปิดวง M5 ใบเดียว  [🔴 **BLOCKED - P-2 not closed (NOW) + GT-223 FAIL R309 owned by LANE-B 1649** · ตั้งโดย chief (LANE-E) รอบ `kj0s6r`/R346 2026-09-05T02:0x+07:00 ตาม `COO-DECISION 20260904_2349` ข้อ 2 · ตัวบล็อกเดิม (`STORE-INSERT-001` · opcode จาก `GT-146` · call site `GT-124`) หมดจริงแล้ว **แต่ใบนี้เป็นใบตีมอน** ⇒ ยังห้ามปลดเป็น READY จนกว่า P-2 จะปิด (`NOW.md` หัวข้อ "ห้ามทำจนกว่า P-2 จะปิด")]
 
 > 🔴 **บรรทัดบังคับของใบตีมอนทุกใบ (`COO-DECISION 20260902_1848` ข้อ 2 · ร่างโดย LANE-B ใบ `20260902_2240` · เติมโดย chief R311):**
 > **ข้ามฉากแล้ววาปกลับ = เลือดมอนกลับเต็ม เป็นของที่รู้อยู่แล้ว ประกาศไม่แก้ ไม่ใช่ FAIL ของการตี**
@@ -7451,7 +7451,7 @@ OBSERVER_CONFIRMED  :
 
 ---
 
-## GT-146 PICKUP-CLICK-OPCODE-CAPTURE-001 [attended, in-game]: คลิกซ้ายลงบน element ของตกที่เซิร์ฟเวอร์เราส่งเอง แล้ว **ไคลเอนต์ยิงเฟรมอะไรออกสาย** -- ใบ capture ที่ปลด `RE-125`/`GT-124`/M5  [PENDING · เปิดโดย LANE-B รอบ `uq2lxw2` · แก้ขั้นตอนตาม `PANYA-ORDER 20260830_1450` ที่รอบ `xt0g9c`]
+## GT-146 PICKUP-CLICK-OPCODE-CAPTURE-001 [attended, in-game]: คลิกซ้ายลงบน element ของตกที่เซิร์ฟเวอร์เราส่งเอง แล้ว **ไคลเอนต์ยิงเฟรมอะไรออกสาย** -- ใบ capture ที่ปลด `RE-125`/`GT-124`/M5  [🔴 **BLOCKED - until P-2 closes (NOW)** — เงื่อนไขเดียว ไม่มีเงื่อนไขอื่น · ตั้งโดย chief (LANE-E) รอบ `kj0s6r`/R346 2026-09-05T02:0x+07:00 ตาม `COO-DECISION 20260904_2349` ข้อ 5 · ที่มา: `NOW.md` หัวข้อ "ห้ามทำจนกว่า P-2 จะปิด" ระบุชื่อใบนี้ตรง ๆ · เงื่อนไข `GT-188` checkpoint 2 **ตัดทิ้งแล้ว** (`GT-188`/`GT-188cp1` ยกเลิกตาม `PANYA-DECISION 20260903_1934` · `COO 20260904_1648`) · เปิดโดย LANE-B รอบ `uq2lxw2` · แก้ขั้นตอนตาม `PANYA-ORDER 20260830_1450` ที่รอบ `xt0g9c`]
 
 > 🔴 **บรรทัดบังคับของใบตีมอนทุกใบ (`COO-DECISION 20260902_1848` ข้อ 2 · เติมโดย LANE-B รอบ `di7ers`):**
 > **ข้ามฉากแล้ววาปกลับ = เลือดมอนกลับเต็ม เป็นของที่รู้อยู่แล้ว ประกาศไม่แก้ ไม่ใช่ FAIL ของการตี**
@@ -7881,7 +7881,7 @@ OBSERVER_CONFIRMED  :
 
 ---
 
-## 🆕🔬 GT-158 ACTIONVITAL-FIELD-U16-4A-LIVE-SCENE-TRACKING-001 [attended, in-game, opt-in scenario required]: `field_u16_4a` ของ `ActionVital` ถูกตั้งชื่อ/ใช้เป็น `scene_id` โดย `action_ack.py` -- มันติดตามฉากปัจจุบันของไคลเอนต์แบบสดจริงหรือเป็นค่าที่ผูกไว้ตายตัวต่อการทดลอง
+## 🆕🔬 GT-158 ACTIONVITAL-FIELD-U16-4A-LIVE-SCENE-TRACKING-001 [attended, in-game, opt-in scenario required]: `field_u16_4a` ของ `ActionVital` ถูกตั้งชื่อ/ใช้เป็น `scene_id` โดย `action_ack.py` -- มันติดตามฉากปัจจุบันของไคลเอนต์แบบสดจริงหรือเป็นค่าที่ผูกไว้ตายตัวต่อการทดลอง  [🟡 **PENDING** · `STATUS-SET-BY-CHIEF 2026-09-05T02:0x+07:00 from body` ตาม `COO-DECISION 20260904_2349` ข้อ 6 · เหตุผลที่เลือกป้ายนี้: เนื้อใบไม่มีตัวบล็อกโค้ด — โค้ดที่ต้องใช้ (`action_ack.py` · `runtime.py:6483-6501`) เดินสายอยู่แล้ว ใบนี้แค่ต้องบูตด้วย `--scene-load-scenario` ตามที่หัวใบระบุ (`opt-in scenario required`) แล้วเดินข้ามฉากใน **หนึ่ง session เดียว** ซึ่งเป็นสิ่งที่ยังไม่มีใครทำ · ไม่บล็อกใคร ต่อคิวหลังรายการใน `NOW.md` · **เจ้าของใบ (LANE-A) แก้ป้ายนี้ได้หนึ่งรอบผ่านจดหมาย ไม่แก้ = ยืน**]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง 2026-08-30T13:5x+07:00: `GT-158`/`RE-158` = 0 hit ทั้งสองไฟล์ ·
 > สูงสุดก่อนหน้า `RE-157` (`GT`/`RE` ใช้ตัวนับเดียวร่วมกัน ตามกฎที่ `RE-152` หัวใบเคยระบุไว้)
@@ -7937,7 +7937,7 @@ session ในตัวเดียวไม่ได้ภายใต้ข้
 **ผู้เปิดใบ: LANE-A (สาย A · WORLD) รอบ `re156-answer` 2026-08-30T13:5x+07:00** — คำถามอยู่นอกโดเมนของ
 สายนี้ (combat ไม่ใช่ world) แต่เปิดใบไว้ตามกฎ "เจอสิ่งที่ไม่รู้ ให้เปิดใบ" แทนการหยุดสร้างของเพื่อค้นเอง
 
-## 🆕🔬 GT-159 M2-DEST-COLUMBUS-MARKER17-TRANSFORM-TO-SHIP-001 [attended, in-game]: ถ้าเซิร์ฟเวอร์เคยส่งฉาก 126 ที่ `MARKER[17]` พิกัด `(3050, 232, 90)` หันหน้า 6 แทนฉาก 17 -- ผู้เล่น**แปลงร่างเป็นเรือและอยู่ในทะเล**ตามที่เจ้าของจำได้ (`GT-106` ข้อ ④.2) จริงหรือไม่ -- ตัดสินด้วยตา ไม่ใช่ด้วยการเถียงตาราง
+## 🆕🔬 GT-159 M2-DEST-COLUMBUS-MARKER17-TRANSFORM-TO-SHIP-001 [attended, in-game]: ถ้าเซิร์ฟเวอร์เคยส่งฉาก 126 ที่ `MARKER[17]` พิกัด `(3050, 232, 90)` หันหน้า 6 แทนฉาก 17 -- ผู้เล่น**แปลงร่างเป็นเรือและอยู่ในทะเล**ตามที่เจ้าของจำได้ (`GT-106` ข้อ ④.2) จริงหรือไม่ -- ตัดสินด้วยตา ไม่ใช่ด้วยการเถียงตาราง  [🔴 **BLOCKED** · `STATUS-SET-BY-CHIEF 2026-09-05T02:0x+07:00 from body` ตาม `COO-DECISION 20260904_2349` ข้อ 6 · เหตุผล: เนื้อใบต้องการ "เซิร์ฟเวอร์ที่ถูกแก้ให้ส่งฉาก 126 ที่ `MARKER[17]`" ซึ่ง **ไม่มีอยู่บน `main`** — `world_m2_sea_destination.DESTINATION_SCENE_N_ID` ยังเป็น `17` และใบนี้ประกาศเองว่าไม่แตะโค้ดนั้น ⇒ บูตวันนี้ได้ผลของฉาก 17 ไม่ใช่คำตอบของคำถาม · 🔴 **เสนอ COO ตรวจว่าใบนี้ถูก supersede หรือยัง**: กลไก M2 ที่เดินอยู่จริงตอนนี้คือ `RE-227` (provision `AddSurveyData` → หน้ารายงานกัปตัน → ไคลเอนต์ส่ง `EnterInstance` เอง · `GT-233`) ไม่ใช่การสลับปลายทางของ Columbus dispatch ⇒ คำถาม "17 หรือ 126" อาจไม่ต้องพิสูจน์อีก · **ห้ามปิดเองจนกว่า COO ตัดสิน** (`PANYA-DECISION 20260903_1934` ต้องระบุใบที่ครอบ) · เจ้าของใบ (LANE-A) แก้ป้ายได้หนึ่งรอบ]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง 2026-08-30T14:2x+07:00: `GT-159`/`RE-159` = 0 hit ทั้งสองไฟล์ ·
 > สูงสุดก่อนหน้า `GT-158` (`GT`/`RE` ใช้ตัวนับเดียวร่วมกัน ตามกฎที่ `RE-152` หัวใบเคยระบุไว้)
@@ -7997,7 +7997,7 @@ COO-DECISION รอบนี้ ไม่ใช่ริเริ่มเอง
 
 ---
 
-## 🆕🎮 GT-160 TRAINING-DUMMY-NAME-COLOUR-001 [attended, in-game]: หุ่นซ้อม (n_ID 916, `Training Iron Man`) สี่ตัวใน Port Royal ขึ้นชื่อสีศัตรู (แดง/ส้ม ตาม GT-032) บนจอจริงหรือไม่ ทั้งที่ `rank=0`/`ai_combat=0`
+## 🆕🎮 GT-160 TRAINING-DUMMY-NAME-COLOUR-001 [attended, in-game]: หุ่นซ้อม (n_ID 916, `Training Iron Man`) สี่ตัวใน Port Royal ขึ้นชื่อสีศัตรู (แดง/ส้ม ตาม GT-032) บนจอจริงหรือไม่ ทั้งที่ `rank=0`/`ai_combat=0`  [🟢 **READY** · `STATUS-SET-BY-CHIEF 2026-09-05T02:0x+07:00 from body` ตาม `COO-DECISION 20260904_2349` ข้อ 6 · เหตุผล: เนื้อใบเป็น client-observable ชั้นเดียวล้วน ไม่มีตัวบล็อกโค้ด ไม่มีแฟล็ก ไม่ต้องรอ PR ใด — ยืนที่ Port Royal มองป้ายชื่อหุ่นซ้อมสี่ตัว (~1 นาที) · ✅ **ไม่ใช่ใบตีมอน** จึงไม่ติดข้อห้าม "ห้ามใบเทสตีมอนจน P-2 ปิด" ใน `NOW.md` — ห้ามตีหุ่น ให้ดูสีป้ายอย่างเดียว · ผลของใบนี้ป้อน P-2 โดยตรง (เงื่อนไขสีดูที่ `rank`/`ai_combat` หรือดูที่อย่างอื่น) · ไม่บล็อกใคร ต่อคิวหลังรายการใน `NOW.md` · เจ้าของใบ (LANE-B) แก้ป้ายได้หนึ่งรอบ]
 
 > 🔢 **หมายเหตุเลข:** grep ยืนยันซ้ำที่ round `xt0g9c` 2026-08-30T15:3x+07:00 หลัง recovery ของ PR #498
 > (round `309h1a` จองเลข `GT-159` ไว้ แต่ PR ไม่ merge เพราะชนกับ lane A ที่จอง `GT-159` สำเร็จก่อน --
@@ -9052,7 +9052,7 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 - result: (tester/build lane fills in: PASS/FAIL/BLOCKED, evidence, timestamp,
   OBSERVER_CONFIRMED line per G-OBS once client-observable evidence exists)
 
-## GT-183 GM-B-SPEED-COMMAND-001  [BLOCKED]
+## GT-183 GM-B-SPEED-COMMAND-001  [❌ **CANCELLED - refuted by GT-218 (`/speed 400` killed the client in one frame, R306); open question carried by GT-231 and the (b'') gate in NOW** · ปิดโดย chief (LANE-E) รอบ `kj0s6r`/R346 2026-09-05T02:0x+07:00 ตาม `COO-DECISION 20260904_2349` ข้อ 1 · ไม่ขัด `PANYA-ORDER 20260830_0215` §3 เพราะเจตนา ("คำสั่ง speed ใช้ได้") ยังเดินอยู่ใน `GT-231` และเกต (b'') ใน `NOW.md` · **Panya กลับคำได้ = เปิดใหม่ด้วยการลบวงเล็บนี้หนึ่งบรรทัด**]
 
 > 🔴 **chief (LANE-E) รอบ `8nh6q5`/R334 2026-09-04T08:4x+07:00 — ไม่ปิดใบนี้ และนี่คือเหตุผล**
 > LANE-GM (`notes_to_chief/20260904_0735`) เสนอให้ปิดด้วย `CANCELLED - covered by <ใบใหม่>` ตาม
@@ -13297,7 +13297,7 @@ LOGIN_CLASS_ID fallback class_id=1 reason=row_has_no_class_id
 
 ---
 
-## GT-242 BACKPACK-OPEN-DOES-NOT-WIPE-THE-GROUND-001  [🔴 **BLOCKED -- ตัวแก้ยังไม่อยู่บน `main` ทั้งสองชิ้น**: (ก) ฟังก์ชันประกาศของบนพื้นซ้ำ ที่ **LANE-B** ต้องเปิดให้ (`COO 20260904_1649` ข้อ 2) · (ข) จุดเรียกของ chief ใน responder `0x4B98` (`COO 20260904_1648` ข้อ 2) · `RECHECK` ผ่านครบ = ปลดเป็น `READY` · เปิดโดย chief รอบ `oi2r2n`/R340 · เจ้าของใบ/ผู้บริโภคผล = **chief (LANE-E)** · ผู้รัน = **Panya (attended)** ~8 นาที]
+## GT-242 BACKPACK-OPEN-DOES-NOT-WIPE-THE-GROUND-001  [🟠 **BLOCKED -- เหลือชิ้นเดียว รอ `pirate-force-server#781` merge เข้า `main`** (อัปเดตโดย chief รอบ `kj0s6r`/R346 2026-09-05T02:3x+07:00) · ✅ **(ก) ฟังก์ชันประกาศของบนพื้นซ้ำ = อยู่บน `main` แล้ว** (`mob_drop_presence.reannounce_ground` · LANE-B ตาม `COO 20260904_1649` ข้อ 2) · 🟠 **(ข) จุดเรียกของ chief = push แล้ว รอเกต+merge ที่ `#781`** (`COO 20260904_1648` ข้อ 2 · commit `3393eb85` · ทดสอบ headless 8 ใบ มิวแทนต์ตายสองตัว · ชุดเต็ม 10360 passed / 0 failed เขียว(cloud sanity) `python3 -V` = 3.11.15) · 🔴 **ห้ามบูตจนกว่ารอบถัดไปจะเห็น `#781` `merged=true` แล้วปลดหัวใบเป็น `READY` เอง** (`AGENTS.md` §7: อยู่บน main ต่อเมื่อรอบถัดไปวัดได้) · `RECHECK` ผ่านครบ = ปลดเป็น `READY` · เปิดโดย chief รอบ `oi2r2n`/R340 · เจ้าของใบ/ผู้บริโภคผล = **chief (LANE-E)** · ผู้รัน = **Panya (attended)** ~8 นาที]
 
 > 🔴 **ใบข้อบกพร่อง ไม่ใช่ใบสำรวจ** — อาการวัดแล้ว ใบนี้พิสูจน์ว่า**ตัวแก้ได้ผล**
 > 🔴 **ห้ามผูก ห้ามต่อคิว ห้ามเกรดรวมกับ `GT-223`** (`COO 20260904_1648` ข้อ 2 คำต่อคำ) — ใบนี้อยู่ในเซสชันล็อกอินเดียว ไม่มีรีล็อกอิน
@@ -13309,13 +13309,19 @@ LOGIN_CLASS_ID fallback class_id=1 reason=row_has_no_class_id
   ```
   git -C ../pirate-force-server fetch origin
   git -C ../pirate-force-server grep -c "GROUND_REANNOUNCE_AFTER_SECOND_PWD" origin/main -- src/
-  git -C ../pirate-force-server grep -n "GROUND_REANNOUNCE_AFTER_SECOND_PWD" origin/main -- src/pirateforce_foundation/runtime.py
+  git -C ../pirate-force-server grep -n "mob_drop_presence.reannounce_ground" origin/main -- src/pirateforce_foundation/runtime.py
   ```
-  ข้อ 1 ต้อง **>= 1 hit** · ข้อ 2 ต้องอยู่ในบล็อกตอบ second password (`runtime.py` ~10110-10160)
-  🔴 **ชื่อโทเคนข้างบนเป็นชื่อที่ chief เสนอ ยังไม่มีในโค้ด** — ชื่อจริงที่ลงต่างจากนี้ = chief แก้หัวใบ + RECHECK + เกณฑ์ (3) ก่อนส่งให้ผู้รัน **ห้ามให้ผู้รันเดา**
+  ข้อ 1 ต้อง **>= 1 hit** · ข้อ 2 ต้อง **>= 1 hit** และอยู่ทันทีหลังบรรทัด `actions = super().dispatch(parsed)` (`runtime.py` ~10051-10125)
+  ✅ **แก้แล้วโดย chief รอบ `kj0s6r`/R346 — คำสั่ง grep เดิมใช้ไม่ได้ ต้องแก้พร้อมโค้ดในรอบเดียวกัน** (`AGENTS.md` §7 · `NOW.md`): ชื่อโทเคนที่เคยเสนอไว้ (`GROUND_REANNOUNCE_AFTER_SECOND_PWD`) **ไม่ได้อยู่ใน `runtime.py`** — มันเป็นค่าคงที่ของ `mob_drop_presence.py` (ฟังก์ชันเป็นคนพิมพ์เอง) ⇒ grep เดิมจะได้ **0 hit ตลอดกาล** และ RECHECK จะไม่มีวันผ่าน แม้สายจะเสียบถูกทุกอย่าง · คำสั่งข้างบนคือชื่อจริงที่ลงบน `main` แล้ว
+  🔴 **จุดเสียบไม่ใช่ที่ที่ใบขอไว้เดิม และนี่คือความตั้งใจ** (วัดแล้วรอบ `kj0s6r` ด้วยการรันจริง): `GROUND_REANNOUNCE_WIRING` ชี้ไปที่บล็อกที่เรียก `make_proactive_second_password_ok` ซึ่ง **ทั้งสองบล็อกอยู่หลัง `second_password_mode == "bypass"`** ⇒ เป็นโค้ดตายบนบูต attended ทุกครั้ง (บิลด์ attended ต้องเป็น `required` มิฉะนั้นสำมะโนดับทั้ง 13 แมพ) · เฟรมตอบ 44 ไบต์ถูกส่งบนบูต `required` จริง **ผ่านการสืบทอด** (`PersistentGameSessionState(legacy.GameSessionState)` → `super().dispatch()` → `pf_login_game_server_v141.py:3864-3867`) ซึ่งเป็นเหตุที่ grep หาชื่อ vital ใน `runtime.py` ไม่เจอ · ยืนยันจากบันทึก R309 เอง: `14:18:01 client CheckSecondPwdVital 0x4B98 (64 B) -> server V110_CHECK_SECOND_PASSWORD_OK (44 B)` บนบูตไม่มีธง
 
 - db: **สำเนาเท่านั้น** `copy state\pirateforce.sqlite3 state\run_gt242_<stamp>.sqlite3` แล้วบูตทับสำเนา · sha256 canonical ก่อน/หลังต้องตรง `CANON_SHA.txt` · `PRAGMA integrity_check` = `ok` สองครั้ง
 - server args: บูตมาตรฐาน · `-SecondPasswordMode bypass` · 🔴 **ไม่มีแฟล็ก `--*-scenario`** · เก็บคอนโซลรวม `2>&1` + `capture_v141\GAME_LIVE.txt`
+  🔴🔴 **กับดัก GT-192 ซ้ำ — chief เติมบรรทัดกันไว้รอบ `kj0s6r`/R346** (`notes_to_chief/20260902_1604_LANE-GM-TO-CHIEF-gt192-server-args-line-would-disable-the-census.md`):
+  `-SecondPasswordMode bypass` **ขีดเดียว = แฟล็กของไคลเอนต์** ใส่ตรงบรรทัดคำสั่งเปิด `GameClient` เท่านั้น ·
+  🔴 **ห้ามส่ง `--second-password-mode` (สองขีด) ให้เซิร์ฟเวอร์เด็ดขาด** — ค่าที่ไม่ใช่ `required` ทำให้
+  `world_census_enabled` เป็นเท็จและ **สำมะโนดับทั้ง 13 แมพ** ⇒ ไม่มีมอนให้ฆ่า ไม่มีของตก ใบนี้กลายเป็น NO-RESULT
+  ที่ดูเหมือนความผิดของตัวแก้ · เซิร์ฟเวอร์ของใบนี้บูตด้วยค่าเริ่มต้น (`required`) เท่านั้น และ**นั่นคือบูตที่ตัวแก้ทำงาน**
   ```
   py -3 -u -m pirateforce_foundation.app --db state\run_gt242_<stamp>.sqlite3
   ```
@@ -13339,7 +13345,8 @@ LOGIN_CLASS_ID fallback class_id=1 reason=row_has_no_class_id
 - pass criteria: 🔴 **สองชั้น ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น** · ครบชั้นเดียว = `🟡 <ชั้นที่ครบ> ... · <ชั้นที่ขาด> = NOT MEASURED · ใบยังไม่ปิด` **ห้ามปั๊ม PASS**
   - **wire/DB** (คอนโซล + `GAME_LIVE.txt` · ไม่ต้องมีตาคน):
     (1) ขั้น 4 มีครบคู่ `MOB_LOOT_DROPS_CENSUS ... items=<id>:x1@<obj>` และ `MOB_DROP_PRESENCE ... live=1 announced=1 ... declared_lifetime=<n>`
-    (2) ขั้น 5 มี `CheckSecondPwdVital` ขาเข้า (64 B) + reply 44 B · คัด**ท้ายเฟรม 2 ไบต์** ของ reply — อ่านไม่ได้เขียน `tail=unread` **ห้ามเดา** · `tail=0B 00` = **FAIL ชั้นนี้**
+    (2) ขั้น 5 มี `CheckSecondPwdVital` ขาเข้า (64 B) + reply 44 B · คัด**ท้ายเฟรม 2 ไบต์** ของ reply — อ่านไม่ได้เขียน `tail=unread` **ห้ามเดา** · ~~`tail=0B 00` = **FAIL ชั้นนี้**~~ 🔴 **ถอนเกณฑ์นี้ทิ้ง — chief รอบ `kj0s6r`/R346 (วัดแล้ว)**: reply 44 ไบต์คือ `make_check_second_password_success()` ซึ่งถูก **พินด้วย sha256** (`second_password_bypass.SECOND_PASSWORD_OK_FRAME_SHA256`) และมาจาก v141 ที่แช่แข็ง ⇒ ท้ายเฟรมของมัน **เป็น `0B 00` เสมอและเปลี่ยนไม่ได้** ตัวแก้ของรอบนี้ต่อเฟรมประกาศซ้ำ *เพิ่ม* หลัง reply ไม่ได้แก้ตัว reply ⇒ เกณฑ์เดิมทำให้รอบที่**ทำงานถูกทุกอย่าง**ยังรายงาน FAIL ชั้น wire และใบปิดไม่ได้ตลอดกาล (เสียเวลาผู้เทส 8 นาทีโดยรับประกันว่าไม่ปิด) · **อีกอย่าง `0B 00` ไม่ใช่ "รายการของบนพื้นที่ว่าง"**: มันคือ derived-class change mask = 0 ที่ `make_runtime_vitals` ต่อท้าย **ทุกเฟรม** runtime-vitals (V99 show-message และ V100 music ก็ลงท้าย `0B 00` เหมือนกัน) ⇒ รายการของบนพื้น **ไม่มีอยู่ในเฟรม** (derived bit `0x08` ไม่ถูกตั้ง) ไม่ใช่ "มีแต่ว่าง" · คำถามว่า member ที่ไม่มีอยู่ล้าง pool ของไคลเอนต์ไหม **ยัง UNMEASURED** ตามที่ LANE-B เขียนไว้เอง (`mob_loot.py:5189-5195` `[ASSUMPTION OF LANE B - AWAITING COO]`)
+    **(2-ใหม่) แทนที่**: ขั้น 5 ต้องมี `CheckSecondPwdVital` ขาเข้า (64 B) + reply 44 B · แล้ว**ทันทีหลัง reply** ต้องมีบรรทัดคอนโซล `GROUND_REANNOUNCE_AFTER_SECOND_PWD scene=<n> items=<k>` **หนึ่งบรรทัด** (`items=0` = พื้นโล่งจริง ตรวจแล้ว · ไม่มีบรรทัดนี้เลย = **บิลด์เก่า ไม่ใช่ผลลบ** ⇒ NO-RESULT ห้ามเกรด) · `GROUND_REANNOUNCE_AFTER_SECOND_PWD_REFUSED` = ชั้นนี้ FAIL พร้อม `reason=` ที่พิมพ์มา · คัด `tail=` ของ reply ไว้เป็น**บันทึก** ไม่ใช่เกณฑ์
     (3) `GROUND_REANNOUNCE_AFTER_SECOND_PWD scene=<n> items=<n>` อย่างน้อยหนึ่งบรรทัด**หลัง** reply ของขั้น 5 และ `items >= 1` · **0 บรรทัด = `NO-RESULT` ไม่ใช่ FAIL** (บูตบิลด์ที่ยังไม่มีตัวแก้ — รายงาน commit ที่บูต)
     (4) `MOB_DROP_PRESENCE ... oldest_left=<s>` ที่ออก**หลัง**ขั้น 5 ต้อง `> 0` · `<= 0` หรือไม่มีบรรทัด = **`NO-RESULT` รันใหม่ให้เร็วขึ้น**
     (5) `integrity_check` = `ok` · sha canonical ตรง · ไม่มี traceback
@@ -13624,9 +13631,14 @@ E. **ไคลเอนต์ตาย/ตัวจับแพ็กเก็�
 
 ---
 
-## GT-245 CHARACTER-SELECT-SCREEN-SHOWS-THE-REAL-SCENE-001  [🔴 BLOCKED -- รอ PR ของ LANE-DB ขึ้น `main` ก่อนบูต · **เนื้อใบเป็นของ LANE-DB** (`COO-DECISION 20260904_1947` ข้อ 5 สั่งให้ DB เขียน body ในรอบเดียวกับ PR) · เลขใบตั้งโดย chief (LANE-E) รอบ `t7bsfx`/R342 ตาม `COO-DECISION 20260904_1948` ข้อ 3 · ผู้รัน = Panya (attended) · เจ้าของใบ/ผู้บริโภคผล = **LANE-DB**]
+## GT-245 CHARACTER-SELECT-SCREEN-SHOWS-THE-REAL-SCENE-001  [🟢 READY -- บูตได้ทันที (chief R346 `kj0s6r` 2026-09-05T02:0x+07:00) · **เนื้อใบเป็นของ LANE-DB** (`COO-DECISION 20260904_1947` ข้อ 5 สั่งให้ DB เขียน body ในรอบเดียวกับ PR) · เลขใบตั้งโดย chief (LANE-E) รอบ `t7bsfx`/R342 ตาม `COO-DECISION 20260904_1948` ข้อ 3 · ผู้รัน = Panya (attended) · เจ้าของใบ/ผู้บริโภคผล = **LANE-DB**]
 
-> 🔢 **ใบนี้ยังเป็นหัวใบเปล่าโดยตั้งใจ** -- chief ตั้งเลขให้เท่านั้น เพื่อให้ LANE-DB มีเลขอ้างอิงตั้งแต่รอบ 20:01 · ห้ามใครนอกจาก LANE-DB เขียนเนื้อใบนี้ (เขตเขียนใบ = เจ้าของใบ)
+> 🟢 **ตัวบล็อกปลดแล้ว -- วัดจาก `main` ของ pirate-force-server ในรอบที่เขียน (R346, 2026-09-05 ~01:5x +07:00)**:
+> `pirate-force-server#778` merged เป็น `2a71c0a5` (commit งาน `66f9802d` "LANE-DB round fqc0na: RE-248 answered -- flip SCENE_FIELD to FIELD_A") ·
+> ยืนยันด้วยการอ่านซอร์สบน main: `src/pirateforce_foundation/persistence_scene_field_patch.py:76` = `SCENE_FIELD: str | None = FIELD_A` (บรรทัด 67 `FIELD_A = "A"`) ·
+> ที่ปลดล็อกได้เพราะ `RE-248` (จดหมาย `20260905_0053`) ตอบว่า tag `0x12` ตัวแรก `+0x20` = scene id · ตัวที่สอง `+0x22` = level
+>
+> 🔢 **หัวใบยังไม่มีเนื้อใบเต็มโดยตั้งใจ** -- chief ตั้งเลขและปลดสถานะให้เท่านั้น · เกณฑ์ผ่านสองบรรทัดข้างล่างมาจาก `COO-DECISION 20260904_1947` ข้อ 5 และ **เพียงพอต่อการบูต** · การขยายเป็นเกณฑ์สองชั้นเต็มยังเป็นของ **LANE-DB** เท่านั้น (เขตเขียนใบ = เจ้าของใบ) · ผู้เทสรันจากเกณฑ์ที่มีอยู่ได้เลย ไม่ต้องรอ LANE-DB เขียนเพิ่ม
 
 - **ที่มา**: `PANYA-DECISION 20260904_1857` (หน้าเลือกตัวละครพิมพ์ "Port Royal" ใต้ชื่อเสมอ ทั้งที่ DB = ฉาก 2 และเข้าเกมแล้วอยู่เกาะคุก) · หลักฐานภาพ `20260904_185512.png` ใน `notes_to_chief/20260904_1911_KA1A-R310-RESULTS-*` ข้อ 5 · ต้นเหตุที่ COO วัดจาก main `90d5aaa`: `character_list()` ต่อ `c.actor_wire` ที่แช่แข็งตอนสร้างตัวละคร (ฝัง `scene_id`=1) ทั้งที่ `list_characters` JOIN `character_positions` มาแล้ว (`COO-DECISION 20260904_1947` ข้อ 2)
 - **เกณฑ์ผ่าน (จาก `1947` ข้อ 5 -- LANE-DB ขยายเป็นสองชั้นเต็มในเนื้อใบ)**: `/warp 2` → ปิดเกม → relaunch → **หน้าเลือกตัวพิมพ์ Prison Exile ไม่ใช่ Port Royal** แล้ว `/warp 1` → relaunch → กลับเป็น Port Royal
@@ -14044,9 +14056,10 @@ open) so the module's own text stops implying an unanswered question this ticket
 
 ---
 
-## GT-<chief assigns> ISLAND-155-CONTACT-TRIGGER-FRAME-CAPTURE-001  [PENDING -- แนบท้ายบูตของ `GT-233` · เจ้าของใบ/ผู้บริโภคผล = **LANE-A** · ผู้รัน = attended (Panya) · ~10-12 นาทีบนจอ **ต่อท้าย** GT-233 · ร่างโดย LANE-A รอบ `qqqtqp` 2026-09-05T01:35+07:00]
+## GT-254 ISLAND-155-CONTACT-TRIGGER-FRAME-CAPTURE-001  [🟡 PENDING -- แนบท้ายบูตของ `GT-233` · เจ้าของใบ/ผู้บริโภคผล = **LANE-A** · ผู้รัน = attended (Panya) · ~10-12 นาทีบนจอ **ต่อท้าย** GT-233 · ร่างโดย LANE-A รอบ `qqqtqp` 2026-09-05T01:35+07:00]
 
-> **เลขใบเป็นของ chief** -- ปล่อยไว้เป็น `GT-<chief assigns>` ผู้เทสและ LANE-A ห้ามตั้งเลขเอง (ตัวนับร่วมสองคิว + archive) · หัวใบใน index ข้างบนให้ chief เป็นคนวางพร้อมเลข
+> ✅ **เลขตั้งแล้ว = `GT-254`** โดย chief (LANE-E) รอบ `kj0s6r`/R346 2026-09-05T02:4x+07:00 (ใบนี้กับใบ `GT-250`-`GT-253` ของ chief ต่อท้ายไฟล์เดียวกันในรอบเดียวกัน ⇒ ชนกันตอน rebase · เก็บทั้งสองฝั่งครบ ไม่มีใบไหนถูกทิ้ง · ตัวนับร่วมสองคิว + `archive/` คืนสูงสุด `249` ก่อนรอบนี้ ⇒ ชุดนี้กิน `250`-`254`) · `GT-254`/`RE-254` = 0 hit ทั้งสามที่ก่อนวาง
+> ~~**เลขใบเป็นของ chief** -- ปล่อยไว้เป็น `GT-254`~~ ผู้เทสและ LANE-A ห้ามตั้งเลขเอง (ตัวนับร่วมสองคิว + archive) · หัวใบใน index ข้างบนให้ chief เป็นคนวางพร้อมเลข
 > ใบนี้เป็นน้องของ `GT-228` (PASS R308) ทุกประการ: **ใบ "เก็บ hex" ไม่ใช่ใบตัดสินการเทียบท่า** และไม่ใช่ใบเข้าเกาะ
 > 🔴 **PIGGYBACK -- ห้ามบูตรอบใหม่เพื่อใบนี้**: เดินบน **บูตเดียวกับ `GT-233`** (เจ้าของเครื่องจะบูตเพื่อ `GT-233` อยู่แล้ว บูตซ้ำ = เสียเปล่า) · **ทำ `GT-233` ให้จบทุกขั้นและจดผลของมันครบก่อน** แล้วจึงเริ่มขั้น 1 ของใบนี้
 > 🔴 **เกรดแยกใบเด็ดขาด**: ผลลบของใบนี้ **ไม่ใช่** ความล้มเหลวของ `GT-233` และผล `GT-233` ไม่ตัดสินใบนี้ · เขียนผลสองใบแยกจดหมาย/แยกหัวข้อ
@@ -14122,3 +14135,272 @@ open) so the module's own text stops implying an unanswered question this ticket
 - result: (ผู้เทสกรอก **แยกสองชั้น · ชั้นไหนไม่ได้วัดเขียน `NOT MEASURED`**: PASS / PASS+`NO-FRAME` / NO-RESULT + กล่อง A-E · branch+commit ที่บูต · `T_START` · เวลาสัมผัสทุกครั้ง · hex ดิบของหน้าต่าง +/-5 วิ · บรรทัด `LANE_A_TRIGGER_VITAL` ทุกบรรทัดหลัง `T_START` (หรือ "ไม่มี") · มี/ไม่มี `LANE_HOOK_REGISTERED` · **HUD `X Y` ทั้งสองครั้ง** · ป้ายชื่อเกาะคัดตามตัวอักษร · สิ่งที่เห็นบนจอตอนชนทีละครั้ง · **บรรทัดสีป้ายครบทุกป้ายทุกภาพ** · ภาพ `S155-*` · sha256 ทุกไฟล์ + canonical ก่อน/หลัง · `integrity_check` · NO-CRASH/CRASH · teardown รันแล้ว · `OBSERVER_CONFIRMED`)
 
 **ผู้เปิดใบ: LANE-A รอบ `qqqtqp` -- ผู้บริโภคผล: LANE-A**
+---
+
+## GT-250 NAME-LABEL-PERSISTS-AFTER-WALK-AWAY-001  [🟢 **READY** -- บูตได้ทันที ไม่มีธง ไม่รอโค้ด · **เจ้าของใบ/ผู้บริโภคผล = LANE-A** (ป้ายชื่อ / population reconcile) · ผู้เปิดใบ = chief (LANE-E) รอบ `kj0s6r`/R346 2026-09-05T02:0x+07:00 ตาม `COO-DECISION 20260904_2143` ข้อ 3 และคำตัดสิน COO ใน `NOW.md` 2026-09-05 01:45 (กวาด RE→GT ของ ka1-A) · ผู้รัน = Panya (attended) ~5 นาที · **ลำดับที่ COO เคาะ: ใบนี้เป็นข้อ 1 ใน 4 ใบ** (GT-250 > GT-251 > GT-252 > GT-253) · **ต่อท้ายคิว `รอเครื่องคุณ` ปัจจุบัน ไม่ใช่หัวคิว** (GT-247 / GT-249 / GT-245 อยู่ก่อน · ลำดับในคิวนั้นเป็นสิทธิ์ COO) · ไม่บล็อกสายใด · **ไม่มีการตีมอนในใบนี้** จึงไม่ชนกฎ "ห้ามใบเทสตีมอนจนกว่า P-2 จะปิด"]
+
+- objective (ข้ออ้างเดียว): บนบิลด์ปัจจุบัน หลังผู้เล่นเดินออกจากจุดเกิดจนตัวละคร/NPC ชุดแรกหลุดจอ แล้วเดินกลับมาที่เดิม **ป้ายชื่อ (เขียว) ที่เห็นตอน T0 ยังอยู่ครบหรือไม่** -- นี่คือชั้น client-observable ของ `RE-138` ที่ใบนั้นเขียนเองว่า "ไม่เคยเปิด" (ไม่มีใครเดินไปกลับแล้วดูป้ายในบิลด์นี้) ใบนี้**ไม่**ถามว่าทำไม และ**ไม่**รื้อชั้น wire ของ `RE-138` ที่ปิดไปแล้ว
+
+- db (สำเนาเสมอ ห้ามเปิด canonical):
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-250_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt250_<yyyyMMdd_HHmmss>.sqlite3
+```
+  sha256 ของ canonical ต้องตรง `CANON_SHA.txt` ทั้งก่อนและหลัง · `PRAGMA integrity_check = ok` ทั้งสองครั้ง
+
+- server args (ไม่มีแฟล็ก scenario ใด ๆ -- production path ล้วน):
+```
+py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+py -3 -u -m pirateforce_foundation.app --db state\run_gt250_<stamp>.sqlite3
+```
+  เฉพาะ exit 0 + บรรทัด `BOOT_COMMIT: <sha>` เท่านั้นที่บูตได้ · เก็บ stdout+stderr รวมกัน (2>&1)
+  🔴 **ตั้งใจไม่ใส่ `--population-scenario`**: เลน V94 reconcile (retained/entrant mask ที่ `population.py:206-223`) เป็น opt-in ผูกกับแฟล็กนั้น (`app.py:146` · จุดเรียก `runtime.py:4541-4619`) ใบนี้วัด **เส้นทาง production ที่ไม่มีธง** ซึ่งเป็นเส้นทางเดียวกับที่ Panya เห็นอาการเอง · ถ้า LANE-A อยากเห็น mask ของ V94 บนจอ = คนละบูต คนละใบ
+
+- steps (~5 นาที · Port Royal · อัดวิดีโอต่อเนื่องทั้งเซสชัน):
+  0. ถือ `LOCK_GAME` · จด boot stamp · เทียบ sha canonical · สำเนา DB · เตรียม `TEMPLATE_teardown_generic.ps1`
+  1. เปิดเซิร์ฟเวอร์ก่อนเสมอ (พอร์ต 10188/10189 ต้องว่างก่อนเปิดไคลเอนต์) แล้วค่อยเปิดไคลเอนต์ -> เลือกเซิร์ฟเวอร์ -> ปุ่มซ้ายของกล่อง PVP -> หน้าเลือกตัวละคร -> **ปุ่มกลางจาก 5 ปุ่มล่าง = เข้าเกม** (ห้ามปุ่มซ้ายสุด = ลบตัวละคร)
+  2. **T0** -- ยืนนิ่งที่จุดเกิด ถ่ายภาพเต็มความละเอียด `S0-SPAWN` · จดพิกัด X/Y ที่ HUD · จด **ทุกป้ายในเฟรม บรรทัดละหนึ่งป้าย**: ข้อความป้าย + สี + ว่าเป็นป้ายชื่อหรือป้ายฉายา (ไม่มี = เขียนคำว่า "none" ห้ามเว้นว่าง)
+  3. NO-CRASH check: **คลิกขวาลากกล้อง** หนึ่งครั้ง (กล้องอย่างเดียว ทิศทางตัวละครไม่ขยับ ไม่มีไบต์ออกสาย ปลอดภัยทุกจังหวะ) · **ห้ามใช้ `Q`/`E` เป็น NO-CRASH check** -- สองปุ่มนั้นหันตัวละครจริงและยิง `TargetPosVital`
+  4. เดินออกด้วย `W/A/S/D` เท่านั้น (ยิง `TargetPosVital` เป็นเรื่องปกติของขั้นนี้) จนกว่า **ไม่มี NPC ตัวใดจากภาพ `S0-SPAWN` อยู่ในเฟรม** แล้วเดินต่ออีก ~5 วินาที · หยุดนิ่ง ถ่าย `S1-FAR` + จดพิกัด HUD + จดทุกป้ายในเฟรม
+  5. เดินกลับมาที่จุดเดิม (พิกัด HUD ใกล้เคียง `S0-SPAWN` ที่สุดเท่าที่ทำได้) หยุดนิ่ง 3 วินาที ถ่าย `S1-BACK` + จดพิกัด + จดทุกป้าย
+  6. ทำซ้ำข้อ 4-5 อีกสองรอบ ได้ `S2-FAR`/`S2-BACK`/`S3-FAR`/`S3-BACK`
+  7. NO-CRASH check อีกครั้ง (คลิกขวาลากกล้อง)
+  8. logout -> teardown ด้วย `TEMPLATE_teardown_generic.ps1` (boot stamp ต้องยังไม่เกิน 420 นาที · รอบที่จบเพราะเลิกเล่นก็ต้อง teardown) -> เทียบ sha canonical -> sha256 ทุกภาพ
+  🔴 **ห้ามคลิกอะไรทั้งสิ้นตลอดใบ** (ห้ามคลิกพื้น ห้ามคลิก NPC ห้ามคลิกมินิแมป) -- คลิก NPC เปิดบทสนทนาและทำให้เซิร์ฟเวอร์ประกอบสำมะโนใหม่ทั้งฉาก ซึ่งจะปนเปื้อนคำถามของใบนี้ · ถ้าเผลอคลิก ให้จดเวลาไว้ตรง ๆ แล้วเดินต่อ อย่าลบรอบทิ้ง
+
+- pass criteria (สองชั้น ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น):
+    wire/DB (พิสูจน์ headless ได้ ไม่ต้องมีตาคน):
+      W1. เก็บเฟรมขาออก/ขาเข้าทุกเฟรมตลอด 3 รอบเดิน พร้อม opcode + ขนาดไบต์ + `t` เทียบ `T0` **และระยะจากตัวละครถึง NPC ที่กล่าวถึง** (กติกา `G-FRAME` -- เฟรมที่ยกมาเป็นหลักฐานต้องมีสองค่านี้เสมอ ใช้พิกัด HUD ที่จดไว้แต่ละภาพเป็นฐานคำนวณ)
+      W2. ระบุให้ชัดว่ามีเฟรมที่บรรจุ `NPCAttr`/`BasicAttr` ออกจากเซิร์ฟเวอร์ระหว่างการเดินหรือไม่ (มี = กี่เฟรม เวลาใด · ไม่มี = เขียน "0 frames" ตรง ๆ)
+      W3. `sessions` +1 แถวต่อการล็อกอิน · `lease_generation` ไม่ถอยหลัง · `integrity_check = ok` · sha canonical ก่อน=หลัง · ไม่มี traceback ไม่มี socket ปิดผิดจังหวะ
+      ชั้นนี้**ตอบไม่ได้**ว่าบนจอเห็นป้ายอะไร ห้ามใช้แทนชั้นล่าง
+    client-observable (ต้องมีคนอยู่หน้าจอ ห้ามอนุมานจากไฟล์จับสาย):
+      C1. ตารางเทียบ `S0-SPAWN` vs `S1-BACK` / `S2-BACK` / `S3-BACK`: ป้ายชื่อของแต่ละตัวที่เคยมีใน `S0-SPAWN` ยังมีอยู่หรือหายไป (ระบุเป็นรายตัว)
+      C2. **บรรทัดสีป้ายครบทุกป้ายทุกภาพ** (ข้อบังคับ R163 คำสั่ง Panya 2026-08-25): หนึ่งบรรทัดต่อหนึ่งป้ายต่อหนึ่งภาพ · เขียนคำว่า "none" ไม่เว้นว่าง · อ่านสีจากภาพนิ่งเต็มความละเอียดเท่านั้น ห้ามอ่านจาก contact sheet / ภาพย่อ / วิดีโอ · **ผู้เทสจดสีอย่างเดียว ห้ามอนุมานสาเหตุของสี** (สาเหตุเป็นคำถามของ `RE-067` ทั้งใบ)
+      C3. ต่างจากภาพเซิร์ฟเวอร์เดิม = ลง `REAL_SERVER_DIVERGENCE.tsv` แถวละหนึ่งข้อ
+      C4. NO-CRASH check ผ่านทั้งสองครั้ง
+      **ไม่มี `OBSERVER_CONFIRMED: <ISO+07:00>` = ชั้นนี้ยังไม่ PASS** ไม่ว่าชั้น wire จะสวยแค่ไหน
+    การอ่านผล: **PASS** = ป้ายชื่อใน `S3-BACK` ครบเท่ากับ `S0-SPAWN` ทุกตัว · **NEGATIVE (มีค่าเท่าผลบวก)** = หายอย่างน้อยหนึ่งตัว -> ระบุตัวที่หาย แล้ว redirect ไปทาง object lifetime / actor generation reuse ที่ `RE-138` ระบุเป็น nonclaim ของตัวเอง (เปิดใบ RE ใหม่ ห้ามรันใบนี้ซ้ำแบบเดา)
+
+- predictions (คำทำนายคือคำทำนาย · ทายผิด = finding ไม่ใช่ความล้มเหลว):
+  - P1 [เสนอ · หัวใจของใบ]: ป้ายชื่อยังอยู่ครบทั้ง 3 รอบ เพราะบิลด์นี้ไม่มีรอบ reconcile ที่ทำงานโดยไม่มีธง
+  - P2 [เสนอ · ชั้น wire]: W2 = **0 frames** เพราะเลน V94 ผูกกับ `--population-scenario` ซึ่งบูตนี้ไม่ได้ใส่
+  - P3 [ตัวหักล้าง]: ป้ายชื่อหายจริงเหมือนภาพ 235212 ของเจ้าของ ทั้งที่ W2 = 0 frames -> เป็นผลลบที่สมบูรณ์ และชี้ไปที่ฝั่งไคลเอนต์/lifetime ไม่ใช่ mask
+
+- nonclaims:
+  1. ไม่ตัดสินสาเหตุของการหาย/ไม่หายของป้าย และไม่ตัดสินสาเหตุของสีใด ๆ (`RE-067` เป็นเจ้าของคำถามสี)
+  2. ไม่รื้อ ไม่กลับคำ ชั้น wire ของ `RE-138` ที่ปิดแล้ว (mask แคบกว่าไม่ล้างชื่อ -- พิสูจน์แล้ว)
+  3. ไม่วัดเลน V94 `--population-scenario` เลย (คนละบูต คนละใบ)
+  4. ไม่พิสูจน์อะไรกับฉากอื่นนอก Port Royal · ตัวละครเดียว เซสชันเดียว
+  5. ไม่ตัดสินว่าการเติม `basic_name` ใน reconcile คุ้มหรือไม่ (`RE-138` เรียกมันว่า hardening ไม่ใช่ root-cause fix)
+
+- STOP: **STOP ถ้าไคลเอนต์ปิดตัว** -- หยุดทันที บันทึกว่าหยุดที่ขั้นไหน แล้ว teardown อยู่ดี · STOP เพิ่มเติม: ถ้ามีหน้าต่างบทสนทนา/error เด้งขึ้นมาเอง ให้หยุดและบันทึกภาพก่อนทำอะไรต่อ
+
+- links: `CLIENT_RE_QUEUE.md:2322` (`RE-138` ทั้งใบ · บรรทัด "ชั้น client-observable ไม่เคยเปิด") · `notes_to_chief/20260903_0253_RE-138-RESULT-BASICATTR-OMISSION-PRESERVES-NAME.md` · `notes_to_chief/20260905_0106_KA1A-BACKSWEEP-re-to-gt-gap-list-4-open-1-defer-3-stale-bookkeeping.md` หมวด ก. ข้อ 1 · `pirate-force-server/src/pirateforce_foundation/population.py:206-223` · `.../app.py:146` · `.../runtime.py:4541-4619`
+
+- 🔴 หมายเหตุจาก chief (`kj0s6r`/R346) — **ความต่างที่ตั้งใจ ระหว่างใบนี้กับข้อเสนอของ ka1-A**: ka1-A เสนอให้ฝั่งเซิร์ฟเวอร์ "capture เฟรม reconcile (retained/entrant mask `population.py:206-223`)" แต่โค้ดชุดนั้นเป็น **opt-in หลังแฟล็ก `--population-scenario`** ⇒ ใบนี้เขียนแบบ **ไม่มีธง** เพื่อวัดเส้นทางเดียวกับที่ Panya เห็นอาการเอง และประกาศไว้ตรง ๆ ว่า mask ของ V94 **ไม่ถูกวัดในใบนี้** · ถ้า LANE-A ต้องการเฟรม reconcile จริง = ใบที่สอง คนละบูต (ขอเลขจาก chief) — **ตัดสินก่อนเรียกผู้เทส อย่าให้ผู้เทสเจอความกำกวมหน้าเครื่อง**
+
+- result:
+  (ว่าง -- ผู้เทสกรอก)
+
+## numbering
+`GT-250`/`RE-250` = **0 hit ทั้งสามที่** (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/`) ก่อนวาง -- ตรวจโดย chief รอบ `kj0s6r`/R346 · ตัวนับร่วมสองคิว + archive คืนสูงสุดที่ `249` => ใบนี้ `250`
+
+---
+
+## GT-251 TRACEPATH-GO-TWO-TARGETS-DISCRIMINATOR-001  [🟢 **READY** -- บูตได้ทันที ไม่มีธง (dispatch `0x4391` เป็น production ไม่มี `--*-scenario` ตั้งแต่ `CORE-REQUEST-025`) · **เจ้าของใบ/ผู้บริโภคผล = LANE-UI** (สายที่เปิด `RE-236`) · ผู้เปิดใบ = chief (LANE-E) รอบ `kj0s6r`/R346 ตาม `COO-DECISION 20260904_2143` ข้อ 3 และคำตัดสิน COO `NOW.md` 2026-09-05 01:45 · ผู้รัน = Panya (attended) ~5 นาที · **ข้อ 2 ใน 4 ใบ** (GT-250 > GT-251 > GT-252 > GT-253) · **ต่อท้ายคิว `รอเครื่องคุณ` ไม่ใช่หัวคิว** (GT-247 / GT-249 / GT-245 อยู่ก่อน) · ไม่บล็อกสายใด · **ไม่มีการตีมอน**]
+
+- objective (ข้ออ้างเดียว): ใน `CTracePathReqVital` (`0x4391`) ที่ไคลเอนต์ยิงตอนกดปุ่ม **GO!** ในหน้าต่างแผนที่ ฟิลด์ `u16@+0x14` (discriminator) **ผูกกับตัวไหน** ระหว่าง quest id / NPC id / index ของแถวในรายการที่คลิก -- ปิดข้อ (ข) ของ `RE-236` ที่ `RE-119` T4 ทิ้งไว้ bounded-negative ตั้งแต่ 28 ส.ค. (ค่าเดียวที่เคยจับได้ `743` ชนทั้ง `QUESTDATA_TH__QUEST.tsv n_ID=743` และ `CONSTDATA_TH__MOBS.tsv n_ID=743` พร้อมกัน)
+
+- db (สำเนาเสมอ):
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-251_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt251_<yyyyMMdd_HHmmss>.sqlite3
+```
+  sha256 canonical ต้องตรง `CANON_SHA.txt` ก่อนและหลัง · `integrity_check = ok` ทั้งสองครั้ง · ใบนี้คาดว่าไม่มีการเขียน DB นอกจาก `sessions` +1 แถว
+
+- server args (ไม่มีแฟล็ก scenario):
+```
+py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch
+git grep -n "0x4391\|TRACE_PATH_REQ_VITAL_ID" <SHA> -- src/pirateforce_foundation/runtime.py
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+py -3 -u -m pirateforce_foundation.app --db state\run_gt251_<stamp>.sqlite3
+```
+  ต้องได้อย่างน้อย 1 บรรทัดจากคำสั่ง `git grep` · ไม่ได้ = BLOCKED ห้ามบูต · เก็บ stdout+stderr รวมกัน (2>&1) · เปิด capture root ใหม่ (`GameClient\capture_gt251_<stamp>\`) ให้ `GAME_EVENTS_LIVE.txt` ครอบทั้งเซสชัน
+
+- steps (~5 นาที · อัดวิดีโอต่อเนื่อง):
+  0. `LOCK_GAME` · boot stamp · sha canonical · สำเนา DB · เตรียม teardown
+  1. เซิร์ฟเวอร์ก่อน แล้วเปิดไคลเอนต์ -> เข้าเกม (ปุ่มกลางของ 5 ปุ่ม ห้ามปุ่มซ้ายสุด)
+  2. **T0** -- ยืนนิ่ง ถ่าย `S0-HOME` เต็มความละเอียด · จดพิกัด HUD · จดทุกป้ายในเฟรม (บรรทัดละป้าย · "none" ถ้าไม่มี)
+  3. NO-CRASH check: คลิกขวาลากกล้อง (กล้องอย่างเดียว ไม่มีไบต์ออกสาย) · ห้ามใช้ `Q`/`E`
+  4. กด `M` เปิดหน้าต่างแผนที่ · ถ่าย `S1-MAP-LIST` เต็มความละเอียด · **คัดรายการที่เห็นทั้งหมดแบบตัวต่อตัว**: ชื่อแถว + ลำดับแถว (นับจาก 1 บนลงล่าง) + หมวด/แท็บที่มันอยู่ · อ่านไม่ออกให้เขียน "illegible" ห้ามเดา
+  5. **เป้า A** -- เลือกแถวหนึ่ง (ควรเป็น NPC) จด **ชื่อแถว + เลขลำดับแถว + หมวด** แล้วกด **GO!** หนึ่งครั้ง · จดเวลานาฬิกา `T_GO_A` (HH:MM:SS+07:00) · ถ่าย `S2-AFTER-GO-A` ทันที และอีกใบที่ ~3 วินาที
+  6. **เป้า B** -- เลือกอีกแถวที่ **ชื่อและลำดับแถวต่างจาก A ชัดเจน** และถ้ามีหมวดเควส/จุดสำรวจแยกจากหมวด NPC ให้เลือก**คนละหมวดกับ A** (เพิ่มโอกาสที่ค่าจะแยกได้) · จดชื่อ + เลขลำดับ + หมวด แล้วกด **GO!** หนึ่งครั้ง · จด `T_GO_B` · ถ่าย `S3-AFTER-GO-B` + อีกใบที่ ~3 วินาที
+  7. **control (ไม่ใช่ข้ออ้างของใบ)** -- คลิกมินิแมป 1 ครั้ง จดเวลา · `GT-246` วัดไว้แล้วว่าเฟรมนี้ได้ `+0x14=0` ใช้เป็นตัวเช็คว่า decoder ของรอบนี้อ่านตรงกับรอบก่อน
+  8. NO-CRASH check อีกครั้ง · logout -> teardown (boot stamp < 420 นาที) -> เทียบ sha canonical -> sha256 ทุกภาพ
+  🔴 ถ้ารายการในหน้าต่างแผนที่มีแถวเดียวหรือกด GO! ไม่ได้: **หยุด บันทึกภาพ แล้วรายงานว่าใบนี้เดินไม่ถึงจุดวัด** (ไม่ใช่ FAIL ไม่ใช่ NO-RESULT -- คือ "ด่านหน้าจอไม่เปิด")
+
+- pass criteria (สองชั้น ห้ามปน):
+    wire/DB (headless):
+      W1. จับเฟรม `CTracePathReqVital 0x4391` ได้ **สองเฟรม** (A และ B) เก็บ hex ดิบทั้งก้อน (คาด 25 B ต่อเฟรม) พร้อม `t` เทียบ `T0` **และระยะจากตัวละครถึงจุด/เป้าที่กด GO!** (กติกา `G-FRAME`) · ถ้าอ่านระยะไม่ได้ ให้เขียนพิกัด HUD ที่จดไว้แทนและระบุว่าคำนวณระยะไม่ได้
+      W2. ถอดทั้งสองเฟรมตาม schema `external/PF_SERIALIZER_FIELDS.tsv:5521-5528` (8 ฟิลด์ tag ตรงทุกไบต์ ไม่มีไบต์เหลือ) รายงานค่า `+0x14` `+0x16` `+0x18` `+0x1C` `+0x1E` `+0x20` `+0x22` `+0x24` ของทั้งสอง
+      W3. บันทึก reply ของเซิร์ฟเวอร์ต่อแต่ละ request (คาด `TRACE_PATH_EMPTY_VECTOR_REPLY`) และเฟรมอื่นที่ออกในช่วงเดียวกัน
+      W4. `sessions` +1 · `lease_generation` ไม่ถอยหลัง · `integrity_check = ok` · sha canonical ก่อน=หลัง · ไม่มี traceback
+      **การตัดสินของใบ (ทำนอกจอ หลังรอบ)**: เอา `+0x14` ของ A และ B ไปเทียบกับ (ก) `QUESTDATA_TH__QUEST.n_ID` ของแถวที่กด (ข) `CONSTDATA_TH__MOBS.n_ID` / NPC id ของเป้า (ค) เลขลำดับแถวที่ผู้เทสจดไว้ · **ปิดขาด = ตรงกับตัวใดตัวหนึ่ง 2/2 ครั้ง และตัวอื่นไม่ตรง** · ยังชนสองทางเหมือนเดิม = **bounded-negative ที่สมบูรณ์**
+      ชั้นนี้ตอบไม่ได้ว่าผู้เทสคลิกแถวไหน/ชื่ออะไร -- ค่านั้นมาจากชั้นล่างเท่านั้น
+    client-observable (ต้องมีตาคน):
+      C1. ข้อความในรายการหน้าต่างแผนที่ ตัวต่อตัว + เลขลำดับแถวของ A และ B + หมวดของแต่ละอัน (นี่คือหลักฐานชิ้นเดียวที่ทำให้ตัวเลือก "list index" ตัดสินได้ ไม่มีทางเดาจากสาย)
+      C2. บนจอเกิดอะไรหลังกด GO! แต่ละครั้ง -- ข้อความสีส้มกลางจอ ขึ้น/ไม่ขึ้น/หายใน ~กี่วินาที · มีข้อความแชทไหม (คัดตัวต่อตัว) · ตัวละครขยับหรือไม่
+      C3. บรรทัดสีป้ายชื่อครบทุกป้ายทุกภาพ (หนึ่งบรรทัดต่อป้ายต่อภาพ · "none" ไม่เว้นว่าง · อ่านจากภาพเต็มความละเอียดเท่านั้น · ห้ามอนุมานสาเหตุของสี -- `RE-067` เป็นเจ้าของคำถามนั้น) · ต่างจากภาพเซิร์ฟเวอร์เดิม = ลง `REAL_SERVER_DIVERGENCE.tsv` แถวละข้อ
+      C4. NO-CRASH check ผ่านทั้งสองครั้ง
+      **ไม่มี `OBSERVER_CONFIRMED: <ISO+07:00>` = ชั้นนี้ไม่ PASS**
+
+- predictions (ทายผิด = finding):
+  - P1 [เสนอ]: `+0x14` ของ A กับ B **ต่างกัน** และตรงกับตัวแปรใดตัวหนึ่งใน 3 ตัว 2/2 -> ปิดข้อ (ข) ของ `RE-236`
+  - P2 [ตัวหักล้างที่มีน้ำหนักจริง]: `+0x14` = **0 ทั้งสองเฟรม** สอดคล้องกับ `RE-119` T4 ที่พิสูจน์จาก disassembly ว่า constructor `0x006EBA90` zero ฟิลด์ `+0x14..+0x24` ทุกครั้ง -> **bounded-negative ที่สมบูรณ์** และ redirect ไปคำถามที่ `RE-236` เปิดค้างไว้เอง (ใครเขียนค่าที่ไม่ใช่ศูนย์ที่เห็นในเฟรมมินิแมปของ `GT-246` -- write-site ตัวที่สอง)
+  - P3 [คาดบนจอ ไม่ใช่เกณฑ์ผ่าน]: ข้อความสีส้ม "กำลังค้นหาเส้นทาง..." หายเองภายในราว 1 วินาที ตามด้วยข้อความแชทว่าหาเป้าหมายไม่พบ (พฤติกรรม empty-vector ที่ `GT-120` PASS ไว้แล้ว) · ตัวละครไม่เดินไปไหน -- ถ้าตัวละคร**เดิน**จริง ให้เขียนเป็น finding แยก ไม่ใช่ผลของใบนี้
+
+- nonclaims:
+  1. ไม่ตัดสินความหมายของ `+0x16`/`+0x18`/`+0x1C..+0x24` (ยังไม่มีใครตัดสิน ห้ามเดา)
+  2. ไม่พิสูจน์ว่า auto-walk / `RunFindPath` ทำงานได้ -- เซิร์ฟเวอร์ตอบ empty-vector เท่านั้น
+  3. ไม่ปิด ไม่กลับคำ `RE-119` (CLOSED PASS/DONE) และไม่แตะ `GT-246` (ANSWERED · ห้ามบูตซ้ำ)
+  4. ไม่ตัดสินสาเหตุของสีป้ายใด ๆ · ฉากเดียว เซสชันเดียว สองเป้า
+  5. ไม่พิสูจน์ว่าเป้าอื่น/ฉากอื่นให้ผลเดียวกัน
+
+- STOP: **STOP ถ้าไคลเอนต์ปิดตัว** (บันทึกว่าหยุดที่เฟรม/ขั้นไหน แล้ว teardown อยู่ดี) · STOP ถ้าเจอ `ErrorData` ใด ๆ -- จดค่าที่ส่งล่าสุดก่อนหยุด
+
+- 🔴 หมายเหตุจาก chief (`kj0s6r`/R346) — **สองจุดที่ยังไม่มีใครวัด อย่าให้ผู้เทสเจอเองหน้าเครื่อง**: (1) ไม่มีบันทึกไหนบอกว่าหน้าต่างแผนที่ของบิลด์ปัจจุบัน **มีแถวให้เลือกกี่แถวและเป็นอะไรบ้าง** (`GT-120` บอกแค่ "เลือก NPC แล้วกด GO!" · `GT-246` คลิกแต่มินิแมป) ⇒ ความเป็นไปได้ที่จะหาสองแถวที่ `QUEST.n_ID`/`MOBS.n_ID` ไม่ชนกันบนจอ **ยังไม่ถูกยืนยัน** จึงมีทางออกที่ขั้น 9 ไว้ให้ · (2) "ระยะจากตัวละครถึงเป้า" ของเป้าบนแผนที่อาจคำนวณไม่ได้จริง ⇒ อนุญาตให้บันทึกพิกัด HUD แทนพร้อมระบุว่าคำนวณไม่ได้ (ทำตามเจตนาของ `G-FRAME` ไม่ใช่ตามตัวอักษร)
+
+- links: `CLIENT_RE_QUEUE.md` (`RE-236` · ข้อ (ข) และวิธีปิดที่ `RE-119` T4 กำหนดไว้เอง) · `GT-246` (ANSWERED · payload มินิแมป 25 B) · `GT-120` (PASS · เส้นทางคลิก `M` -> เลือกเป้า -> GO!) · `external/PF_SERIALIZER_FIELDS.tsv:5521-5528` · `notes_to_chief/20260904_1226_LANE-UI-RE-TICKET-tracepath-record0-semantic-needs-attended-differential.md` · `notes_to_chief/20260905_0106_KA1A-BACKSWEEP-*.md` หมวด ก. ข้อ 2
+
+- result:
+  (ว่าง -- ผู้เทสกรอก)
+
+## numbering
+`GT-251`/`RE-251` = **0 hit ทั้งสามที่** (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/`) ก่อนวาง -- ตรวจโดย chief รอบ `kj0s6r`/R346
+
+---
+
+## GT-252 COLUMBUS-OPTION2-BORNAGAIN-CLICK-CAPTURE-001  [🟢 **READY** -- บูตได้ทันที ไม่มีธง · **รันบนสำเนา DB ของรอบ (DB run-copy) เสมอ** · **เจ้าของใบ/ผู้บริโภคผล = LANE-A** (สายที่ปิด `RE-112` และเป็นเจ้าของ `CORE-REQUEST-019`) · ผู้เปิดใบ = chief (LANE-E) รอบ `kj0s6r`/R346 ตาม `COO-DECISION 20260904_2143` ข้อ 3 และคำตัดสิน COO `NOW.md` 2026-09-05 01:45 · ผู้รัน = Panya (attended) ~3 นาที · **ข้อ 3 ใน 4 ใบ** (GT-250 > GT-251 > GT-252 > GT-253) · **ต่อท้ายคิว `รอเครื่องคุณ` ไม่ใช่หัวคิว** · ไม่บล็อกสายใด · ค่าต่ำแต่จริง: `BUILD_IMPACT` ของ `RE-112` คง quest 3205 เป็น refusal "จนกว่าจะมี capture จริง" · **ไม่มีการตีมอน**]
+
+- objective (ข้ออ้างเดียว): กด option 2 ของบทสนทนา Columbus ("ตั้งฐานทัพที่ Port Royal" = quest 3205 / Q_BORNAGAIN) **หนึ่งครั้ง** บนเซิร์ฟเวอร์วันนี้ แล้วเส้นทางปฏิเสธของ `CORE-REQUEST-019` ทำงานตามที่เขียนไว้จริงหรือไม่ -- คือ **มีเฟรม `QuestOperateVital` ขาเข้าจริง และไม่มีไบต์ตอบกลับเลยบนเส้นทางนั้น** โดยที่ไคลเอนต์**ไม่ค้าง ไม่ขึ้น error** (นี่คือ attended capture ที่แคบที่สุดที่ใบผล `RE-112` เสนอไว้เอง)
+
+- db (สำเนาเสมอ · ห้ามเปิด canonical · ใบนี้แตะเส้นทางที่โดยหลักการเขียน DB ได้):
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-252_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt252_<yyyyMMdd_HHmmss>.sqlite3
+```
+  sha256 canonical ตรง `CANON_SHA.txt` ก่อนและหลัง · `integrity_check = ok` ทั้งสองครั้ง · คาดว่า `character_positions.scene_id` ยังเป็น 1 หลังจบรอบ (`HOME_SCENE_ID` · `world_scene_travel.py:177`)
+
+- server args (ไม่มีแฟล็ก scenario):
+```
+py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch
+git grep -n "COLUMBUS_QUEST3205_BORNAGAIN_REFUSED" <SHA> -- src/pirateforce_foundation/columbus_quest_dispatch.py
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+py -3 -u -m pirateforce_foundation.app --db state\run_gt252_<stamp>.sqlite3
+```
+  ต้องได้อย่างน้อย 1 บรรทัดจาก `git grep` · ไม่ได้ = BLOCKED ห้ามบูต · เก็บ stdout **และ** stderr รวมกัน (2>&1) -- บรรทัดปฏิเสธของเส้นทางนี้อยู่คนละสตรีมกัน
+
+- PRECONDITION (ตรวจก่อนขั้นที่ 1 ไม่ใช่เชิงอรรถ):
+  P0. ต้องยืนอยู่ **Port Royal (scene 1)** ตอนกด option 2 · ยืนฉากอื่น = เซิร์ฟเวอร์ปฏิเสธคนละเหตุผล (`runtime.py:6444-6464`) และใบนี้จะไม่ได้คำตอบ
+  P1. ต้องเปิดบทสนทนา Columbus ในเซสชันเดียวกันก่อน (latch `columbus_quest3021_conversation_sent`) มิฉะนั้น op1 ของ 3205 ไปไม่ถึง branch
+  P2. เซิร์ฟเวอร์ก่อนไคลเอนต์เสมอ · ไคลเอนต์ที่เปิดค้างโดยไม่มีเซิร์ฟเวอร์ตายเองใน ~3.5 นาที
+  P3. ฆ่าไคลเอนต์แล้วเซิร์ฟเวอร์ยังถือ session ไว้ -- ต้องรีสตาร์ตเซิร์ฟเวอร์ก่อนเปิดไคลเอนต์ตัวถัดไป ไม่งั้นค้าง "connecting" ตลอดไป
+  P4. รอบนี้ก๊อป DB ตำแหน่งตัวละครรีเซ็ตกลับจุดเกิดทุกบูต = ปกติ ไม่ใช่ผลที่วัดได้
+  P5. teardown ปฏิเสธ boot stamp ที่เก่ากว่า 420 นาที -- รอบที่จบเพราะเลิกเล่นก็ต้อง teardown
+
+- steps (~3 นาที · อัดวิดีโอต่อเนื่อง):
+  1. `LOCK_GAME` · boot stamp · sha canonical · สำเนา DB · เซิร์ฟเวอร์ก่อน แล้วเปิดไคลเอนต์ -> เข้าเกม (ปุ่มกลางของ 5 ปุ่ม)
+  2. **T0** -- ยืนนิ่ง ถ่าย `S0-HOME` เต็มความละเอียด · จดพิกัด HUD · จดทุกป้ายในเฟรม (บรรทัดละป้าย · "none")
+  3. NO-CRASH check: คลิกขวาลากกล้อง · ห้ามใช้ `Q`/`E`
+  4. เดินเข้าหา Columbus ด้วย `W/A/S/D` จนอยู่ใกล้พอคลิกได้ · คลิกซ้ายที่ Columbus 1 ครั้ง -> หน้าต่างบทสนทนาเปิด · ถ่าย `S1-DIALOG` · **คัดข้อความของตัวเลือกทั้งสองบรรทัดแบบตัวต่อตัว** พร้อมระบุว่าบรรทัดบน = option 1 บรรทัดล่าง = option 2 (อ่านไม่ออก = "illegible")
+  5. 🔴 **คลิก option 2 (บรรทัดที่สอง) ครั้งเดียว** · จดเวลานาฬิกา `T_CLICK` (HH:MM:SS+07:00)
+  6. **ไม่กดอะไรอีก 10 วินาที** · ถ่ายภาพที่ ~1 วิ / ~3 วิ / ~10 วิ (`S2-A1` `S2-A2` `S2-A3`) · จดว่า หน้าต่างปิดเอง / ค้างเปิด / ตัวเลือกเทา / มีกล่อง error / มีข้อความแชท (คัดตัวต่อตัว)
+  7. NO-CRASH check อีกครั้ง (คลิกขวาลากกล้อง)
+  8. ถ้าหน้าต่างยังเปิดอยู่: คลิก option 2 **อีกครั้งหนึ่ง** แล้วบันทึกผลบนจอ -- **นี่เป็นการสังเกตแยก ไม่ใช่ข้ออ้างของใบ** (latch `columbus_quest3205_dispatch_attempted` ที่ `runtime.py:6465` ทำให้ครั้งที่สองไม่เข้า dispatch อยู่แล้ว) ต้องเขียนกำกับว่าเป็นคลิกที่สอง
+  9. logout -> teardown -> เทียบ sha canonical -> sha256 ทุกภาพ
+  🔴 **ห้ามคลิก option 1 ตลอดใบ** -- option 1 (quest 3021) วาร์ปไปฉาก 17 และหลังจากนั้น option 2 จะถูกปฏิเสธด้วยเหตุผล "ผิดฉาก" แทน ทำให้ใบนี้เสียรอบทั้งใบ
+
+- pass criteria (สองชั้น ห้ามปน):
+    wire/DB (headless):
+      W1. จับเฟรมขาเข้าที่บรรจุ `QuestOperateVital` ตอน `T_CLICK` ได้ เก็บ hex ดิบทั้งก้อน พร้อม `t` เทียบ `T0` **และระยะจากตัวละครถึง Columbus** (กติกา `G-FRAME`)
+      W2. คอนโซลพิมพ์ `COLUMBUS_QUEST3205_BORNAGAIN_REFUSED reason=no_home_marker_persistence_row_evidence` **หนึ่งครั้ง** (`columbus_quest_dispatch.py:762` + ค่าคงที่ที่ `:268-270`) และมี event `columbus_quest3205_dispatch_refused_no_home_marker_persistence_row_evidence`
+      W3. **ไม่มี** บรรทัด `COLUMBUS_Q3205_BORNAGAIN_REFUSED scene=<n> reason=not_home_scene` บน stderr -- ถ้ามี แปลว่า P0 พัง (ยืนผิดฉาก) ให้บันทึกเป็น **NO-RESULT ของ precondition** ไม่ใช่ FAIL
+      W4. **ช่วงไม่มีขาออก**: ตั้งแต่ `T_CLICK` ถึง `T_CLICK+5s` ไม่มีไบต์ออกบนเส้นทางนี้ · เฟรมอื่นที่ออกในช่วงนั้น (keepalive/heartbeat/ผลของการเดินก่อนหน้า) ให้ระบุแยกทีละเฟรมพร้อมเวลา ห้ามรวบเป็น "ไม่มีอะไร"
+      W5. DB: `character_positions.scene_id` ยังเป็น 1 · `sessions` +1 แถว · `lease_generation` ไม่ถอยหลัง · `integrity_check = ok` · sha canonical ก่อน=หลัง · ไม่มี traceback
+      ชั้นนี้ตอบไม่ได้ว่าหน้าต่างบนจอทำอะไร ห้ามใช้แทนชั้นล่าง
+    client-observable (ต้องมีตาคน):
+      C1. ข้อความตัวเลือกทั้งสองบรรทัด ตัวต่อตัว จาก `S1-DIALOG`
+      C2. หลังคลิก option 2 หนึ่งครั้ง บนจอเกิดอะไรใน 10 วินาที -- เขียนเป็นภาษาปกติ: หน้าต่างปิดเอง / ค้าง / ไม่มีอะไรเกิดขึ้นเลย / มี error / มีข้อความแชท (คัดตัวต่อตัว) · **นี่คือคำตอบหลักของใบ**
+      C3. ผลของคลิกที่สอง (ถ้าได้ทำ) แยกบรรทัดชัดเจน
+      C4. บรรทัดสีป้ายชื่อครบทุกป้ายทุกภาพ (หนึ่งบรรทัดต่อป้ายต่อภาพ · "none" ไม่เว้นว่าง · อ่านจากภาพเต็มความละเอียดเท่านั้น ห้ามอ่านจากภาพย่อ/วิดีโอ · **ห้ามอนุมานสาเหตุของสี** -- `RE-067`) · ต่างจากภาพเซิร์ฟเวอร์เดิม = `REAL_SERVER_DIVERGENCE.tsv` แถวละข้อ
+      C5. NO-CRASH check ผ่านทั้งสองครั้ง
+      **ไม่มี `OBSERVER_CONFIRMED: <ISO+07:00>` = ชั้นนี้ไม่ PASS**
+    การอ่านผล: **PASS** = W1+W2+W4 ครบ และบนจอไคลเอนต์ไม่ค้าง ไม่ error (ปฏิเสธเงียบตามที่ตั้งใจ) · **NEGATIVE ที่มีค่าเท่ากัน** = ไคลเอนต์ค้าง/ขึ้น error/รออะไรบางอย่าง -> แปลว่าไคลเอนต์**รอ ack จริง** ซึ่งเป็นคำตอบที่ `RE-112` หาอยู่พอดี และ redirect ไปหา shape ของ ack (ใบ RE ใหม่ ห้ามเดาเฟรมแล้วส่งไบต์ออก)
+
+- predictions (ทายผิด = finding):
+  - P1 [เสนอ]: หน้าต่างค้างเปิดอยู่เฉย ๆ ไม่มี error ไม่มีข้อความ -- ไคลเอนต์ไม่รออะไร สอดคล้องกับ `RE-112` ที่วัดว่า binding ฝั่งไคลเอนต์เป็น `xor eax,eax; ret 4`
+  - P2 [เสนอ]: ช่วง `T_CLICK` -> `+5s` มี 0 ไบต์ออกบนเส้นทางนี้
+  - P3 [ตัวหักล้าง]: ไคลเอนต์ค้าง/ขึ้น error/หน้าต่างไม่ตอบสนอง = ผลลบที่สมบูรณ์ และเป็นหลักฐานว่ามี ack ที่หายไป
+
+- nonclaims:
+  1. ไม่ claim ว่า option 2 พร้อมต่อสายจริง -- `BUILD_IMPACT` ของ `RE-112` ยังบังคับให้ quest 3205 เป็น named refusal จนกว่าจะมีทั้ง persistence schema ที่ chief อนุมัติ **และ** capture/crosswalk จริง
+  2. ไม่ตัดสินหน้าตาคอลัมน์ DB ของ home marker (เป็นคำถามฝั่ง schema · `CORE-REQUEST-019`)
+  3. ไม่พิสูจน์ว่า `ReliveMarkerVital 0x3DD6` เกี่ยวข้อง -- `RE-112` ปิดไว้ว่าไม่มี call edge ผูกกับ quest 3205
+  4. ไม่แตะข้ออ้างของ `GT-106` (จุดลงฉาก 17) และ `GT-106-R2` (เรนเดอร์ฉากกลางเซสชัน) -- ใช้ trigger ใกล้กันแต่คนละคำถาม
+  5. ไม่ตัดสินสาเหตุของสีป้ายใด ๆ · เซสชันเดียว ตัวละครเดียว คลิกเดียว
+
+- STOP: **STOP ถ้าไคลเอนต์ปิดตัว** (บันทึกว่าหยุดที่ขั้นไหน แล้ว teardown อยู่ดี) · STOP ถ้าจอวาร์ปไปฉากอื่น -- แปลว่าคลิกโดน option 1 ให้บันทึกตามจริงและจบใบ ห้ามคลิก option 2 ต่อในบูตนั้น · STOP ถ้าเจอ `ErrorData`
+
+- 🔴 หมายเหตุจาก chief (`kj0s6r`/R346): ข้อความไทยจริงของ option 2 บนจอ **ไม่มีใครเคยคัดไว้** -- ในซอร์สเก็บไว้แค่ทับศัพท์ (`COLUMBUS_QUEST_BORNAGAIN_LABEL_TH_TRANSLIT`) โดยตั้งใจ ⇒ ใบนี้จึงชี้ตัวเลือกด้วย **ตำแหน่งบรรทัด** (บรรทัดที่สอง) ไม่ใช่ด้วยข้อความ และขอให้ผู้เทสคัดทั้งสองบรรทัดกลับมา · หน้าต่าง 10 วินาทีและ 5 วินาทีเป็นตัวเลขจากข้อเสนอของใบผล `RE-112` เอง **ไม่ใช่ค่าที่วัดมา**
+
+- links: `CLIENT_RE_QUEUE.md` (`RE-112` ทั้งใบ · objective ข้อ 3 = attended capture ที่แคบที่สุด · `BUILD_IMPACT`) · `notes_to_chief/20260827_1912_RE-112-RESULT-RESETMARKER-NOOP-ACK-BOUNDED.md` · `pirate-force-server/src/pirateforce_foundation/columbus_quest_dispatch.py:268-270,727-767` · `.../runtime.py:6363-6479` · `.../world_scene_travel.py:177` · `GT-106-R2` (เส้นทางคลิกบทสนทนา Columbus ที่เดินถึงจริงแล้ว) · `notes_to_chief/20260905_0106_KA1A-BACKSWEEP-*.md` หมวด ก. ข้อ 3
+
+- result:
+  (ว่าง -- ผู้เทสกรอก)
+
+## numbering
+`GT-252`/`RE-252` = **0 hit ทั้งสามที่** (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/`) ก่อนวาง -- ตรวจโดย chief รอบ `kj0s6r`/R346
+
+---
+
+## GT-253 OPTIONS-APPLY-ONE-SETTING-DIFFERENTIAL-CAPTURE-001  [🔴 **BLOCKED -- บล็อกที่ LANE-UI ต้องเขียนเนื้อใบ `RE-237` ก่อน** · `CLIENT_RE_QUEUE.md` วันนี้เป็น **บล็อกจองเลขเปล่า** ("เนื้อใบยังไม่ถูกเขียน ห้ามลงรอบเทส") · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-UI** -- สายเดียวกับที่เป็นเจ้าของ `RE-237` เป็นผู้ขยายใบนี้ให้เต็มในรอบเดียวกับที่กรอกเนื้อ `RE-237` (ตามกติกา `COO 20260904_2142` / `AGENTS.md` §7: ผล RE ที่ขอ attended capture ⇒ ผู้บริโภคผลเปิดใบ GT ในรอบเดียวกัน) · ผู้เปิดใบ/ตั้งเลข = chief (LANE-E) รอบ `kj0s6r`/R346 ตาม `COO-DECISION 20260904_2143` ข้อ 3 และคำตัดสิน COO `NOW.md` 2026-09-05 01:45 · ผู้รัน = Panya (attended) ~3 นาที **เมื่อปลดบล็อกแล้วเท่านั้น** · **ข้อ 4 (ท้ายสุด) ใน 4 ใบ** (GT-250 > GT-251 > GT-252 > GT-253) · **ต่อท้ายคิว `รอเครื่องคุณ` ไม่ใช่หัวคิว** · ไม่บล็อกสายใด รวมทั้งไม่บล็อก LANE-UI เอง · **ไม่มีการตีมอน**]
+
+> 🔴 **ทำไมใบนี้ถึงมีอยู่ทั้งที่ยังรันไม่ได้**: `RE-237` เป็นคำขอ attended capture ที่ค้างอยู่ในคิว RE ล้วน ๆ ซึ่งเป็นรูปแบบเดียวกับที่ทำให้ `RE-110` เงียบไป 8 วัน (คำขอตายที่รอยต่อ RE→GT) · ka1-A จึงขอให้ตั้งเลขใบ GT ไว้ก่อน **เพื่อให้คำขอมีที่อยู่ในคิวของผู้เทส** ไม่ใช่เพื่อให้บูตวันนี้ · ห้ามลบ ห้ามย้ายใบนี้จนกว่าจะถูกทดสอบจริง (กติกาคิว: `PENDING`/`READY`/`BLOCKED`/`RUNNING` อยู่ที่เดิมเสมอ)
+
+- objective (ข้ออ้างเดียวที่ตั้งใจให้ใบนี้พิสูจน์ เมื่อปลดบล็อกแล้ว): ในเฟรม `UserSetting_UpdateServerSettingVital` ที่ไคลเอนต์ยิงตอนกด **Apply** ในหน้าต่าง Options (ปุ่มเฟืองมุมซ้ายล่าง) **ไบต์ที่เปลี่ยนไประหว่างสองครั้งที่เปลี่ยนค่าคนละค่า ตรงกับฟิลด์ไหนของฟิลด์ 3-6** -- โดยเทียบกับครั้งที่กด Apply โดยไม่เปลี่ยนอะไรเลยเป็น control
+
+- 🔴 สิ่งที่ **ขาดอยู่จริง** และทำให้ยังบูตไม่ได้ (ระบุตรง ๆ ตามที่วัดได้ ไม่แต่งเติม):
+  1. **เนื้อ `RE-237` ยังไม่ถูกเขียน** -- หัวใบเขียนเองว่า "ห้ามลงรอบเทส" ยังไม่มี objective/nonclaims/เกณฑ์จบใบของ RE ให้ใบ GT นี้อ้างอิง
+  2. **ยังไม่มีใครยืนยันว่ารอบ attended บนสะพานตัดสินคำถามนี้ได้จริง** -- เกณฑ์ PASS/FAIL สามข้อในจดหมายต้นทางของ LANE-UI (breakpoint ที่ callee `0x00720FC0` · log ปลายทาง vtable ที่ resolve จริง · log identity ของอ็อบเจกต์ที่ `ECX+0x0C`) เป็นงานระดับ **debugger/instrumentation ในโปรเซสไคลเอนต์** ไม่ใช่การอ่านไบต์บนสาย และจดหมายต้นทางเองติดป้าย `[PROPOSED]` ไว้ว่า "ไม่ใช่วิธีที่ chief ยืนยันแล้วว่าทำได้จริงบนเครื่องมือ capture ที่มีอยู่" · `RE-237` ต้องบอกให้ชัดว่า **รอบที่อ่านได้แค่ไบต์บนสาย ตัดสินอะไรได้บ้าง**
+  3. **ยังไม่มีใครระบุว่าจะเปลี่ยน "ค่าไหน"** -- ไม่มีรายชื่อสวิตช์/สไลเดอร์ในหน้าต่าง Options ที่ผูกกับ 6 ฟิลด์นี้ ผู้เทสจึงยังไม่รู้ว่าต้องขยับอะไรบนจอ
+  4. **ยังไม่มี offset ของไบต์ให้เล็ง** -- resolved จริงมีแค่ 2 แถวจาก 12 (field 1 ทิศ W และ field 2 ทิศ R · tag `0x0B` `STACK@0x00721D10+0x18` len=1) · ฟิลด์ 3/4/5/6 เป็น `UNKNOWN` ทั้งหมด (`external/PF_SERIALIZER_FIELDS.tsv:6167-6178`) ⇒ ถ้าไม่มีเกณฑ์ตัดสินล่วงหน้า ใบนี้จะกลายเป็น "จับสัญญาณได้" แทนที่จะเป็น "พิสูจน์ว่าใช่/ไม่ใช่ฟิลด์จริง" -- ซึ่งจดหมายต้นทางเตือนเรื่องนี้ไว้เองตรง ๆ
+  5. **ยังไม่มีใครตอบว่าไคลเอนต์ยิงเฟรมนี้ไหมถ้าไม่ได้เปลี่ยนอะไร** -- ซึ่งเป็นตัว control ของใบ
+
+- โครงขั้นตอนที่ ka1-A เสนอไว้ (ยกมาเป็น **โครงร่าง ไม่ใช่คำสั่งที่รันได้** -- LANE-UI เป็นผู้เคาะ): เปิดปุ่มเฟือง/Options -> เปลี่ยน **1 ค่า** -> Apply · เปลี่ยนอีก **1 ค่า** (คนละค่า) -> Apply · Apply โดยไม่เปลี่ยนอะไรเลย · ฝั่งเซิร์ฟเวอร์เก็บ hex ของเฟรม W ทั้งสาม แล้ว diff ไบต์เทียบกับค่าที่เปลี่ยน
+
+- db / server args: **ยังไม่กำหนด** -- LANE-UI เป็นผู้เขียน · ข้อบังคับของบ้านที่ใบนี้จะต้องมีเมื่อเขียนเสร็จ: บูตบน **สำเนา** `state\pirateforce.sqlite3` เสมอ (ห้ามเปิด canonical · sha256 ก่อน=หลัง ตรง `CANON_SHA.txt` · `integrity_check = ok`) · ผ่านด่าน `py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch` (เฉพาะ exit 0 + `BOOT_COMMIT: <sha>`) · เซิร์ฟเวอร์ก่อนไคลเอนต์เสมอ · ฆ่าไคลเอนต์แล้วต้องรีสตาร์ตเซิร์ฟเวอร์ก่อนเปิดตัวถัดไป · teardown ทุกครั้ง (boot stamp < 420 นาที)
+
+- pass criteria (สองชั้น -- **โครงบังคับ** ที่ LANE-UI ต้องเติมให้ครบ ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น):
+    wire/DB (headless · ยังต้องเติมรายละเอียด): hex เต็มของเฟรม `UserSetting_UpdateServerSettingVital` ทิศ W ทั้งสามครั้ง พร้อม `t` เทียบ `T0` **และระยะจากตัวละครถึงจุดที่กล่าวถึง** (กติกา `G-FRAME`) · ตาราง diff ไบต์ต่อไบต์ระหว่างสามเฟรม · **เกณฑ์ตัดสินล่วงหน้าว่าไบต์ที่ต่างกัน "นับเป็นฟิลด์จริง" เมื่อใด = ช่องที่ `RE-237` ต้องเติม** · `sessions` +1 · `integrity_check = ok` · sha canonical ก่อน=หลัง
+    client-observable (ต้องมีตาคน · ยังต้องเติมรายละเอียด): ชื่อและตำแหน่งบนจอของค่าที่ถูกเปลี่ยนทั้งสองครั้ง (คัดตัวต่อตัวจากภาพเต็มความละเอียด) · หน้าต่างตอบสนองอย่างไรหลัง Apply แต่ละครั้ง · **บรรทัดสีป้ายชื่อครบทุกป้ายทุกภาพ** (หนึ่งบรรทัดต่อป้ายต่อภาพ · "none" ไม่เว้นว่าง · อ่านจากภาพเต็มความละเอียดเท่านั้น · ห้ามอนุมานสาเหตุของสี -- `RE-067`) · ต่างจากภาพเซิร์ฟเวอร์เดิม = `REAL_SERVER_DIVERGENCE.tsv` แถวละข้อ · **ไม่มี `OBSERVER_CONFIRMED: <ISO+07:00>` = ชั้นนี้ไม่ PASS**
+
+- predictions: **ยังไม่เขียน** -- เป็นของ LANE-UI พร้อมเนื้อ `RE-237` (ทายผิด = finding ไม่ใช่ความล้มเหลว · ผลลบมีค่าเท่าผลบวก และต้องเขียนไว้ในใบว่าผลลบจะ redirect ไปทางไหน)
+
+- nonclaims (ที่ยืนได้แล้ววันนี้):
+  1. ชั้น CAPTURE เดิม (`external/PF_FIELD_VALIDATION.tsv`: เฟรม W 197 ครั้งจาก 117 ไฟล์ · `mismatch=0` · ทิศ R `NOT_OBSERVED`) **ไม่ได้ตอบ**ว่าฟิลด์ 3-6 คืออะไร -- ห้ามอ่านว่า "แคปเจอร์ตอบแล้ว"
+  2. ไม่ยืนยันว่าฟิลด์ 4/5 เป็น "ขยะ refcount" -- เอกสารวิธีการของโปรเจกต์เองปฏิเสธคำนี้เพราะพิสูจน์ alias ไม่ได้
+  3. ไม่ยืนยันว่าฟิลด์ 3 หรือ 6 เป็น helper ที่เคยแก้ที่อื่นมาก่อน (ไม่มี precedent ในคลัง)
+  4. ใบนี้ไม่ตัดสินสาเหตุของสีป้ายใด ๆ (`RE-067`)
+  5. ใบนี้ไม่เกี่ยวกับแถวอื่นในสารบัญ 15 แถวของ LANE-UI และไม่บล็อกแถวเหล่านั้น
+
+- STOP: **STOP ถ้าไคลเอนต์ปิดตัว** (บันทึกว่าหยุดที่ขั้นไหน แล้ว teardown อยู่ดี) · **STOP ก่อนบูตด้วยซ้ำ**: ถ้า `RE-237` ยังเป็นบล็อกจองเลขเปล่า ห้ามบูตใบนี้ -- บันทึกว่า "รอ LANE-UI เขียนเนื้อ `RE-237`" แล้วข้ามไปใบถัดไป (สถานะคง `BLOCKED` ไม่ใช่ FAIL ไม่ใช่ NO-RESULT)
+
+- links: `CLIENT_RE_QUEUE.md` (`RE-237` บล็อกจองเลข) · `notes_to_chief/20260904_1054_LANE-UI-RE-TICKET-options-apply-server-setting-vital-fields-need-dynamic-capture.md` (คำถาม · ตาราง 12 แถว · เกณฑ์ `[PROPOSED]` สามข้อ · nonclaims ①-⑦) · `external/PF_SERIALIZER_FIELDS.tsv:6167-6178` · `external/PF_FIELD_VALIDATION.tsv` แถว `UserSetting_UpdateServerSettingVital` · `notes_to_chief/20260905_0106_KA1A-BACKSWEEP-*.md` หมวด ก. ข้อ 4 (คำขอให้ LANE-UI ร่างใบ GT พร้อมกับตอนกรอกเนื้อ RE)
+
+- result:
+  (ว่าง -- ยังบูตไม่ได้ · ปลดบล็อกแล้วค่อยรัน)
+
+## numbering
+`GT-253`/`RE-253` = **0 hit ทั้งสามที่** (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/`) ก่อนวาง -- ตรวจโดย chief รอบ `kj0s6r`/R346 · ตัวนับร่วมสองคิว + archive คืนสูงสุดที่ `249` ก่อนวางชุดนี้ · ใบชุดนี้กิน `250`-`253` ตามลำดับที่ COO เคาะ
