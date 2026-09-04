@@ -25,8 +25,7 @@
   ยืนยัน" และ "ไม่ตัดสินว่าเซิร์ฟเวอร์เราจำลองพฤติกรรมร้านของค่ายถูกต้อง"
 
 ## สั่ง pf-adversary ต้นรอบพร้อมเริ่มงานตามกติกา
-ผลยังไม่คืนตอน push ⇒ **`ADVERSARY_PENDING <PR pf_bridge รอบนี้>`** (ดูไฟล์รอบ `rounds/UI_20260904_0923_ziuhft_*`
-สำหรับเลข PR จริง) — ตรวจการอ้างเลขบรรทัด/ข้อความจาก `inventory.py`/`store.py`/`trade_session_membership.py`/
+ผลยังไม่คืนตอน push ⇒ **`ADVERSARY_PENDING pf_bridge#1096`** — ตรวจการอ้างเลขบรรทัด/ข้อความจาก `inventory.py`/`store.py`/`trade_session_membership.py`/
 `GT-104` ทุกจุดที่ใบใหม่อ้างถึง · **ห้ามเขียนว่า "ผ่าน adversary" จนกว่าผลจะคืน** · รอบถัดไปของ LANE-UI หยิบผล
 เป็นงานแรกก่อน claim
 
