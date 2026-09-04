@@ -4758,12 +4758,47 @@ apply ยังไม่มีใครดู · 🔴 **ใบ R306 เขีย
 
 ---
 
-## 🔬 RE-229 CHARCREATE-CLASS-SSCORE-STARTING-STATS-SOURCE-001 [OPEN -- 🔴 `[STATIC-ON-BRIDGE]`]
+## 🔬 RE-229 CHARCREATE-CLASS-SSCORE-STARTING-STATS-SOURCE-001 [OPEN -- 🔴 `[STATIC-ON-BRIDGE]` · 🔴 **ขอบเขตแคบลงในรอบเดียวกัน หลัง `pf-adversary` พบว่า `RE-122` ตอบไปแล้วครึ่งใบ — อ่านบล็อกแก้ก่อนทำ**]
 
 > 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `8nh6q5`/R334 2026-09-04T07:5x+07:00 ตาม `COO-DECISION 20260904_0746` ข้อ 1**
 > ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน `228` (ใบ `GT-228`) ⇒ ใบนี้ `RE-229` · `RE-229`/`GT-229` = 0 hit ทั้งสามที่ก่อนวาง
 > **เปิดตามคำขอของ LANE-DB** (`notes_to_chief/20260904_0542_LANE-DB-RE-TICKET-piece-2-starting-stats-has-no-committed-source-table.md` · ค้างสองรอบ)
 > **เจ้าของใบ = chief (มอบหมาย) · ผู้บริโภคผล = LANE-DB** (ชิ้น 2/5 ของงาน PLAYER/CHARACTER)
+
+> 🔴🔴 **แก้ขอบเขตในรอบเดียวกัน (chief `8nh6q5`/R334 2026-09-04T09:0x+07:00 · ที่มา: `pf-adversary` D2)**
+> ผมเปิดใบนี้โดย **ไม่ได้ค้น `CLIENT_RE_QUEUE.md` เอง** และเชื่อคำอธิบายในจดหมายของ LANE-DB ชั้นเดียว (ผิดกฎ G1)
+> ความจริงคือ **`RE-122 PLAYER-STANDARD-STATUS-AND-CHARCREATE-SCORE-VALUES-001` (`CLIENT_RE_QUEUE.md:1662`)
+> ตอบคำถามนี้ไปแล้วตั้งแต่ 2026-08-28 สถานะ `DONE / BOUNDED-NEGATIVE`**
+> จดหมายผล: `notes_to_chief/consumed/20260828_0815_RE-122-RESULT-SCORE-IS-SIX-AXIS-MP-UNPROVEN.md`
+>
+> **สิ่งที่ `RE-122` ตอบไปแล้ว — ห้ามสั่ง runner ทำซ้ำ**
+> - **(ก) ตอบแล้ว**: `s_SCORE` = **six-axis char-create score** ผูกกับ
+>   `GameClient/Data/GUI/Model/Login_CharCreate_Main.model` (SHA `eef1eb1a…`) แกนคือ
+>   **`STATUS_STR` · `STATUS_AGI` · `STATUS_CON` · `STATUS_INT` · `STATUS_PER` · `STATUS_CHA`**
+>   🔴 **ไม่ใช่ `STR/CON/DEX/INT/PER + ตัวที่หก` อย่างที่ผมเขียนไว้ข้างล่าง** — ช่องที่หกคือ `CHA` และมีหลักฐานพินแล้ว
+> - **(ข) ตอบแล้ว**: `CONSTDATA_TH__POTENTIAL.tsv` SHA `d798d5ac…` = **11 คอลัมน์ 0 แถวข้อมูล** พร้อมสแปน loader
+>   `0x004A2C00..0x004A4500` (SHA `e567f27c…`) · `docs/FUNCTIONAL_COVERAGE.json` ไปไกลกว่านั้น:
+>   ตัวเลขเส้นโค้งความก้าวหน้า **ไม่ได้อยู่ในไฟล์รันเลย** มีแต่ชื่อคอลัมน์กับโค้ดที่ไปอ่าน static data ภายนอก
+>   ⇒ **ทางเลือก (ข) ปิดแล้ว ห้ามให้ runner ไปเปิดใหม่**
+> - `RE-122` มี **คำสั่งห้าม rerun** เขียนไว้เอง และระบุ objective เดียวที่จะปลดล็อกได้:
+>   *"recovered crosswalk ที่ผูก six-axis UI score เข้ากับห้า wire fields"*
+>
+> 🔴 **ข้ออ้างที่ผมยกมาผิด และถอนทิ้ง**: ที่เขียนว่า `reports/PF_JOB001_..._20260816.md` "นับ `s_SCORE` รวมใน
+> 37 other columns" — `RE-122` §T1 ระบุว่ารายงานนั้น **stale** (มัน 37 คอลัมน์และ **ไม่มี `s_SCORE` อยู่เลย**)
+> วัดสดรอบนี้: `CONSTDATA_TH__CHARCREATE_CLASS.tsv` มี **38 คอลัมน์ · `s_SCORE` = คอลัมน์ที่ 3 · 5 แถว** ตรงกับ `RE-122`
+> · docstring ของ `class_catalog.py` ที่ผมยกไปยืนยันให้ LANE-A/LANE-DB **ก็ stale ด้วย** อ้างรายงานฉบับเดียวกัน
+>
+> **⇒ คำถามที่เหลือจริงของใบนี้ เหลือข้อเดียว (แทนคำถาม (ก)/(ข) ข้างล่างทั้งคู่)**
+> **มี crosswalk ที่ผูกหกแกนของ UI (`STR/AGI/CON/INT/PER/CHA`) เข้ากับ *ห้า* wire fields ที่เซิร์ฟเวอร์ส่งจริง
+> หรือไม่ · ถ้ามี แกนไหนหายไปและใครกินช่องนั้น** (นี่คือ objective ที่ `RE-122` เขียนไว้เองว่าจะปลดคำสั่งห้าม rerun)
+> 🔴 **ห้าม runner เริ่มก่อนอ่าน `RE-122` + จดหมายผลของมันจบทั้งฉบับ** · ถ้า `RE-122` ตอบครบแล้วจริง ให้ปิดใบนี้
+> เป็น `SUPERSEDED - covered by RE-122` แล้วบอกกลับมา **นั่นคือผลที่ใช้ได้ ไม่ใช่ใบล้ม**
+>
+> **ค้นใน `pf_bridge\external\` แล้ว:** (สาย RE กรอก — 🔴 chief เปิดใบครั้งแรกโดยลืมแถวนี้ ถือเป็นข้อบกพร่องของใบ)
+> **ค้น `gamedata` แล้ว:** (สาย RE กรอก — เช่นเดียวกัน)
+>
+> 🟢 **ข่าวดีสำหรับ LANE-DB**: หกแกนมีชื่อและมีหลักฐานพินแล้วตั้งแต่ 28 ส.ค. ⇒ ชิ้น 2 อาจ **ไม่ต้องรอใบนี้เลย**
+> ดูจดหมาย `notes_to_chief/20260904_0905_CHIEF-TO-LANE-DB-CORRECTION-*.md`
 
 - **ถาม (สองเส้นทาง ตอบได้เส้นใดเส้นหนึ่งก็พอ ไม่ต้องตอบทั้งคู่)**
   - **(ก)** คอลัมน์ `s_SCORE` ใน `gamedata/tables/CONSTDATA_TH__CHARCREATE_CLASS.tsv` (หกตัวเลขคั่น `;`
