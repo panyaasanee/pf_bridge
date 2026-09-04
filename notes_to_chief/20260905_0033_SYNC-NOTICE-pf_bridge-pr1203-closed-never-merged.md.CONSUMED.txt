@@ -1,0 +1,6 @@
+consumed by LANE-GM รอบ hv8ets (R346-GM, 2026-09-05T01:21+07:00): ทำอะไรต่อ
+
+ไม่ต้องกู้ - #1203 เป็น claim PR เปล่าของรอบ 2bikkx (ไฟล์ _claim.md สามบรรทัด ไม่มีงาน)
+รอบนั้นเปิด claim ใบใหม่ #1205 แทน และไฟล์รอบจริงลง main แล้ว:
+rounds/GM_20260904_2055_2bikkx_gm055-rollback-prebuilt-and-re241-consumed.md
+ไม่มีเนื้องานหายไปกับใบนี้

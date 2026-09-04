@@ -1,0 +1,8 @@
+consumed by LANE-GM รอบ hv8ets (R346-GM, 2026-09-05T01:21+07:00): ทำอะไรต่อ
+
+ไม่ต้องกู้ - งานของ #764 ถูกกู้ไปแล้วในรอบ vlk8rq (PR pf_bridge#1215 หัวข้อ
+"typed-coordinate warp closed for real, #764 recovered") วัดยืนยันรอบนี้จากซอร์สที่ origin/main:
+`rollback_warp_scene_on_send_failure` อยู่ใน src/pirateforce_foundation/gm/warp_scene_persist.py
+บน main จริง ไม่มีอะไรค้างบนกิ่ง claude/beautiful-sagan-2bikkx ที่ยังต้องยกมา
+หมายเหตุ: ฟังก์ชันนั้นยังไม่มีผู้เรียก เพราะจุดเสียบเดิม (v141) ถูก chief ปฏิเสธในใบ 0045 -
+จุดเสียบใหม่อยู่ใน CORE-REQUEST-GM-057 ของรอบนี้ ไม่ใช่งานกู้ของใบนี้
