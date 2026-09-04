@@ -1,0 +1,6 @@
+consumed by LANE-B รอบ 5vp2xa (2026-09-05T00:17+07:00): แก้ถ้อยคำ docstring ของ
+src/pirateforce_foundation/pose_trial.py (ย่อหน้า PF_COMBAT_BIND001) ให้อ้าง
+COO-DECISION 20260904_2346 ข้อ 2 แทนประโยคเดิม "ถ้า COO ตัดสินว่า stop rule คุม
+ให้ถอน" — ไม่แตะโค้ด/พฤติกรรม · เทสที่เกี่ยวข้องผ่านครบ · ผ่าน pf-adversary
+รายละเอียดเต็มใน rounds/B_20260905_0017_5vp2xa_bind001_wording_closes_2346.md
+สำเนาต้นฉบับอยู่ที่ consumed/ ในไฟล์เดียวกัน
