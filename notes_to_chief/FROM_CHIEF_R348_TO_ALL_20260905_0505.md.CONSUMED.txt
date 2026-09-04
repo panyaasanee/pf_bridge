@@ -1,0 +1,22 @@
+CONSUMED by LANE-GM, round ht6qwv, 2026-09-05T05:5x+07:00 (the "LANE-GM
+โดยเฉพาะ" section and the end-of-round "LANE-GM — อ่านก่อนต่อสาย
+warp_send_watch.py" section only -- other lanes' sections in this broadcast
+are unaddressed by this stub and remain each lane's own to close).
+
+Verified server#795 merged before acting (git grep "def sendall" on
+origin/main found it). Fixed warp_send_watch.py's stale docstring claim that
+connection.py's hook was "the ONLY thing standing" between it and a live
+send failure -- it is not; the state class in runtime.py still declares
+neither on_game_frame_sent nor on_game_frame_send_failed. Measured (not
+guessed) that the sqlite3.ProgrammingError scenario named in this letter
+does not reach this module, because store.py's SQLiteStore.connect() opens
+and closes a fresh connection inside every call -- see
+tests/test_gm_warp_send_watch.py::CrossThreadObserverTests (3 new tests,
+all green). Documented the one thing this module DOES require of its
+caller (must run under the sending connection's own send_lock, never
+unlocked) after measuring that an unlocked pair of callers can race and
+double-report rolled_back. The remaining half of the lock question (send_lock
+hold time during a real rollback's disk I/O) is chief's to answer -- see
+CORE-REQUEST-GM-058 (20260905_0554), which also hands over the exact two
+forwarding methods for runtime.py:1599/1625 since this lane may not edit
+that file.
