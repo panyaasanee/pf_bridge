@@ -4758,7 +4758,9 @@ apply ยังไม่มีใครดู · 🔴 **ใบ R306 เขีย
 
 ---
 
-## 🔬 RE-229 CHARCREATE-CLASS-SSCORE-STARTING-STATS-SOURCE-001 [OPEN -- 🔴 `[STATIC-ON-BRIDGE]` · 🔴 **ขอบเขตแคบลงในรอบเดียวกัน หลัง `pf-adversary` พบว่า `RE-122` ตอบไปแล้วครึ่งใบ — อ่านบล็อกแก้ก่อนทำ**]
+## 🔬 RE-229 CHARCREATE-CLASS-SSCORE-STARTING-STATS-SOURCE-001 [🟢 **CLOSED BOUNDED-NEGATIVE/DONE — RE runner local 2026-09-04T10:50+07:00, ปิดหัวใบโดย LANE-DB รอบ `1szq3m` 2026-09-04T11:4x+07:00, ดูผลด้านล่าง**] ~~[OPEN -- 🔴 `[STATIC-ON-BRIDGE]` · 🔴 **ขอบเขตแคบลงในรอบเดียวกัน หลัง `pf-adversary` พบว่า `RE-122` ตอบไปแล้วครึ่งใบ — อ่านบล็อกแก้ก่อนทำ**]~~
+
+ผล: `notes_to_chief/20260904_1053_RE-229-RESULT-BOUNDED-NEGATIVE-NO-SIX-TO-FIVE-CROSSWALK.md` — ไม่พบ field/consumer ที่ผูก component ทั้งหกของ `s_SCORE` (`STATUS_STR/AGI/CON/INT/PER/CHA`) เข้ากับห้า ActorAttr wire fields ในขอบเขต manifest (`external/` + `gamedata/`) ที่ค้นแล้ว — คำตอบคือ **UNPROVEN** ไม่ใช่ `CHA` โดยอัตโนมัติ ห้ามใช้สมมติฐาน `AGI->DEX`/ทิ้ง `CHA` `BUILD_IMPACT: hard guard / keep current fallback` — LANE-DB คง `DEFAULT_PRIMARY_STAT = 100` ต่อ ห้าม seed `4;3;4;1;1;2` หรือ permutation ใดจาก `s_SCORE` นี่คือ **method ceiling** (ห้าม rerun ด้วย corpus/image เดิม) ไม่ใช่ time checkpoint — ชิ้น 2/5 ของ PLAYER/CHARACTER ยังไม่มีกำหนด ตาม `COO-DECISION 20260904_0745`/`0942`
 
 > 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `8nh6q5`/R334 2026-09-04T07:5x+07:00 ตาม `COO-DECISION 20260904_0746` ข้อ 1**
 > ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน `228` (ใบ `GT-228`) ⇒ ใบนี้ `RE-229` · `RE-229`/`GT-229` = 0 hit ทั้งสามที่ก่อนวาง
