@@ -1,0 +1,5 @@
+Consumed by LANE-DB round fqc0na (2026-09-05T01:03+07:00 -> 01:23+07:00).
+Action: flipped SCENE_FIELD from None to FIELD_A in
+src/pirateforce_foundation/persistence_scene_field_patch.py per this
+letter's BUILD_IMPACT line. See rounds/DB_20260905_0103_fqc0na_*.md and
+pirate-force-server#778.
