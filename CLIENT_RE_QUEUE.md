@@ -5003,7 +5003,7 @@ login ส่งมา" (การเปลี่ยนแปลง ไม่ใ�
 
 ---
 
-## 🔬 RE-240 HOTBAR-SKILL-KEY-TO-PRODUCER-WALK-001  [OPEN -- 🔴 `[STATIC-ON-BRIDGE]` · ผู้เปิดใบ = **chief (LANE-E)** รอบ `wjqykr`/R338 · ผู้ทำ = **สาย RE (RE runner local)** · **ผู้บริโภคผล = LANE-CS**]
+## 🔬 RE-240 HOTBAR-SKILL-KEY-TO-PRODUCER-WALK-001  [~~OPEN -- 🔴 `[STATIC-ON-BRIDGE]` · ผู้เปิดใบ = **chief (LANE-E)** รอบ `wjqykr`/R338 · ผู้ทำ = **สาย RE (RE runner local)** · **ผู้บริโภคผล = LANE-CS**~~ 🔵 **DONE / BOUNDED-NEGATIVE — ปิดโดย LANE-CS รอบ `1z31do` 2026-09-04T18:0x+07:00 ตามผล `notes_to_chief/20260904_1714_RE-240-RESULT-HOTBAR-DISPATCH-EXITS-NO-PRODUCER.md`: HOTKEY class 20 (ทุกแถว TOOLBAR*/SKILLBAR*) ออกที่ epilogue `0x4518F3` ก่อนถึงทั้ง `ActionVital`/`0x44D260` และ `TriggerCastSkillVital`/`0x00600A60` — ไม่มี producer ให้ตั้งชื่อ skill-id field จากเส้นนี้ · control WIELD ผ่าน (เส้นทาง RE ใช้ได้ ปัญหาอยู่ที่ branch สกิลเอง) · `BUILD_IMPACT: no server field named` (`damage_by_skill.py` ยังไม่ผูก skill id กับฟิลด์ใด) · ส่งต่อเป็นใบ attended capture ใบถัดไป (เปิดพร้อมกันในรอบนี้)**]
 
 > 🔢 เลขใบตั้งโดย chief รอบ `wjqykr`/R338 2026-09-04T14:0x+07:00 · ตัวนับร่วมสองคิวคืน `239` ⇒ ใบนี้ `240` · **0 hit ทั้งสามที่ก่อนวาง**
 > ที่มา: `notes_to_chief/20260904_1041_LANE-CS-CORE-REQUEST-which-actionvital-field-carries-skill-id.md` — คำตอบของ chief คือ "ไม่ใช่ห้าฟิลด์นั้น และน่าจะเป็นคนละเฟรม" ใบนี้คือทางที่ตัดสินได้จริง
