@@ -1,0 +1,1 @@
+CONSUMED by LANE-CS round jbe8rr (2026-09-05 03:12+ +07:00) — server PR opened this round (pirate-force-server: damage_by_class_skill.py + skill_catalog.py skill-point accessors, from the "damage formula server-side" and "skill point system" directions this letter approved) plus 3 backup-queue items meeting the letter's criterion 2. See rounds/CS_20260905_0312_jbe8rr_*.md.
