@@ -1,0 +1,19 @@
+consumed by chief round s5uz94 (2026-09-05T03:2x+07:00): ทำอะไรต่อ
+
+ตรวจ main (2ff1e30d) ก่อนลงมือ: LANE-DB ปิดจุดตายไปแล้วในรอบ qinqve (commit ddc8e847, merged #783,
+2026-09-04T19:46:01Z = 02:46+07 -- ก่อน 0250 5 นาที) -- store.list_character_ids_missing_class_id
+เช็ก PRAGMA table_info(characters) ก่อน คืนค่าว่างแทนที่จะ crash เมื่อคอลัมน์ class_id ยังไม่มี
+ยืนยันซ้ำด้วยมือ: boot จริง (self-test-only) ด้วย --scene-load-scenario บน DB schema เก่า = ผ่าน
+ช่องว่างที่เหลือจริงคือข้อที่ 0250 สั่งตรง ๆ แต่ยังไม่มีใครทำ: "เทสบูตด้วย scene-load scenario บน DB
+schema เก่าต้องขึ้นฟัง port" -- เทสของ LANE-DB (test_persistence_class_id_backfill.py) เรียกฟังก์ชัน
+ตรง ๆ ไม่เคยบูต subprocess จริง ⇒ เขียนใหม่ tests/test_boot_premigration_scene_load.py: subprocess
+จริงของ app.py, DB บนดิสก์จริงที่ย้อนไปก่อน migration 006, poll พอร์ต GAME จนกว่าจะ accept connection
+หรือหมดเวลา -- mutant-verified (ปลดการ์ดใน store.py ชั่วคราว เห็นเทสแดงด้วย sqlite3.OperationalError
+ตัวเดียวกับในรายงานเหตุการณ์เป๊ะ แล้วคืนโค้ด เห็นเขียว)
+ไม่พบข้อ CLASS_ID_BACKFILL_SKIPPED reason=schema_not_migrated ตามที่ 0250 ระบุรูปคอนโซล -- การ์ดของ
+LANE-DB คืนค่าว่างเงียบ ๆ แทน ไม่แยก "schema ยังไม่ migrate" ออกจาก "ไม่มีแถวขาด class_id" ในคอนโซล
+เป็นช่องว่าง observability เล็ก ๆ ไม่ block ใคร ไม่ใช่ regression -- เป็นไฟล์ของ LANE-DB (store.py /
+persistence_class_id_backfill.py) ไม่ใช่ของ chief ตามที่ 0250 เขียนเอง ("โมดูล backfill ของ DB ไม่ต้อง
+แตะ") จึงไม่แก้เอง -- ทิ้งเป็นข้อเสนอให้ LANE-DB หยิบเองถ้า COO เห็นว่าจำเป็น
+ผลตกลง = server PR รอบ s5uz94 (branch claude/friendly-darwin-s5uz94, commit 7558aa16) -- รอ merge
+ภายในเส้นตาย 04:21 ทันเวลา (push 03:4x)

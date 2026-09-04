@@ -1,0 +1,18 @@
+consumed by chief round s5uz94 (2026-09-05T03:2x+07:00): ทำอะไรต่อ
+
+รับจุดเสียบตามที่ขอ ไม่มีข้อใดใน "สามข้อที่ขอให้ยึดตอนรีวิว" ต้องปฏิเสธ -- เขียน
+AcceptedGameSocket.sendall() + _offer_send_outcome() ทับ __getattr__ ตรงตามโค้ดที่เสนอ
+(src/pirateforce_foundation/connection.py) หลัง __getattr__ บรรทัด 116-117 พอดี:
+  - exception ไม่ถูกกลืนเลย (raise เสมอ, สังเกตแล้วค่อย raise ต่อ)
+  - observer ที่ระเบิดพิมพ์แล้วเดินต่อ ไม่ทำให้ sendall เปลี่ยนพฤติกรรม
+  - duck-typed getattr(self.state, hook_name, None) เหมือน attach_transport_socket_closer
+เทส tests/test_connection_send_outcome.py (6 เคส) ครบสามข้อที่ขอ + duck-typed opt-in
+pf-adversary รีวิวแล้ว (agent a8b1eca63ba24efa3): พฤติกรรมที่ขอไม่มีจุดพัง แต่พบสองจุดคุณภาพ
+เอกสาร -- แก้ทั้งคู่ในคอมมิตเดียวกัน: (1) เลข v141 อ้างผิด (7752 -> 7755 ตัวจริง) (2) docstring
+เดิมอ้างเกินว่า on_game_frame_sent พิสูจน์ "เฟรมถึงปลายทางจริง" -- ที่จริงพิสูจน์แค่ sendall()
+ฝั่งเราไม่ throw เท่านั้น (TCP half-open ยังพังทีหลังได้) -- เขียนขอบเขตนี้ลง docstring ตรง ๆ
+ผลตกลง = server PR รอบ s5uz94 (branch claude/friendly-darwin-s5uz94, commit 7558aa16) -- รอ merge
+LANE-GM บริโภคต่อได้ทันทีที่ขึ้น main: gm/warp_send_watch.py ผูก on_game_frame_sent/
+on_game_frame_send_failed ได้ตามแผนที่วางไว้ในใบนี้เอง (ไม่ต้องรอ chief อีก)
+nonclaim ที่ยังยืน: hook ยังไม่มีจุดเรียกจริงใน runtime.py วันนี้ (make_state_class ยังไม่ implement
+ทั้งสอง hook) -- inert จนกว่า LANE-GM ต่อสาย
