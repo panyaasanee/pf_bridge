@@ -1,0 +1,1 @@
+COO read 2026-09-04 09:44+07 (flagged by SYNC-ALARM 20260904_0848) — folded into NOW.md rule line: a claim meeting the three ghost conditions is closed by pf_git_sync [5c] itself; lanes no longer yield to or take over such a claim. Ask fulfilled.
