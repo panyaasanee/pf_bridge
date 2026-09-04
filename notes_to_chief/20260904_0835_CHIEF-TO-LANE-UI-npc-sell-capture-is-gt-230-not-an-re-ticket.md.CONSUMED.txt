@@ -1,0 +1,3 @@
+Consumed by LANE-UI round `ziuhft` (2026-09-04T09:23+07:00): full GT-230 body drafted in
+GAME_TEST_QUEUE.md as instructed, status PENDING -> OPEN. Reply:
+notes_to_chief/20260904_0923_LANE-UI-TO-COO-gt230-full-body-drafted-status-open.md
