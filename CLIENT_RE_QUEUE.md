@@ -4884,3 +4884,86 @@ apply ยังไม่มีใครดู · 🔴 **ใบ R306 เขีย
 - **ผลกระทบถ้าไม่ตอบ**: LANE-CS ไม่มีเส้นทางอื่นตอบคำถามชนิดสกิลตอนนี้ · ไม่บล็อกอะไรใน M1-M5 (LANE-CS ยังไม่แตะดาเมจจนกว่าจะอ่าน `mob_combat.py` ของ LANE-B ให้ครบตาม `0755`)
 
 ---
+
+## 🔬 RE-234 CLIENT-RESPONSE-PATH-FOR-TRIGGERVITAL-1FB2-ISLAND-001  [🟡 RESERVED -- 🔴 `[STATIC-ON-BRIDGE]` · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-A** · ผู้บริโภคผล = LANE-A]
+
+> 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `wjqykr`/R338 2026-09-04T14:0x+07:00** ตาม `COO-DECISION 20260904_1345` ข้อ 3(ง) และ `20260904_1346` ข้อ 2(จ) · ตัวนับร่วมสองคิวคืน `233` (`GT-233` รอบเดียวกัน) ⇒ ใบนี้ `234` · `RE-234`/`GT-234` = **0 hit ทั้งสามที่ก่อนวาง**
+> 🔴 บล็อกนี้คือการจองเลข เนื้อใบเป็นของ **LANE-A** รอบ 14:21 · ใบนี้ **แทน** `0343` ข้อ 3 ฉบับเดิมที่ไล่จาก id 153/154 — คำทำนาย 153/154 ตกไปแล้วตาม `GT-228` ห้ามอ้างต่อ
+
+- **คำถาม (ฉบับแคบ)**: (1) ไคลเอนต์ทำอะไรกับ **response** ของ `TriggerVital 0x1FB2` id 2/3 — มี handler ที่อ่านคำตอบของเซิร์ฟเวอร์ไหม หรือเป็นการแจ้งทางเดียว (2) เส้นทางที่เปิดหน้า "รายงานกัปตัน" มีกี่ทาง — `AddSurveyData` + เช็กระยะ ≤500 ในเครื่อง (สมมติฐานหลักตาม `RE-227`) เทียบกับ response ของ `0x1FB2` (ทางสำรอง)
+- **ทำไม**: ถ้า `GT-233` ไม่เด้ง ใบนี้คือทางเดียวที่บอกว่ากลไกผิดที่ provisioning หรือผิดที่การไม่ตอบ trigger
+- **route**: `STATIC-ON-BRIDGE` (ต้องดิสแอสเซมภาพไคลเอนต์ ทำบนคลาวด์ไม่ได้)
+- **ห้ามอ้าง**: ชื่อ prop ใน `TEXTDATA_TH__Trigger_TIP` เป็นคนละ namespace จนกว่าจะพิสูจน์ตรงข้าม (`COO 1345` ข้อ 1)
+
+---
+
+## 🔬 RE-235 BLACK-MARKET-AND-SHIP-SURVEY-WINDOW-OPCODES-001  [🟡 RESERVED -- เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-UI** · ผู้บริโภคผล = LANE-UI]
+
+> 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `wjqykr`/R338** ตาม `COO-DECISION 20260904_1346` ข้อ 2(ฉ) · ที่มา `notes_to_chief/20260904_1137_LANE-UI-RE-TICKET-black-market-and-ship-survey-window-opcodes-not-in-r38-registry.md` · ตัวนับร่วมสองคิวคืน `234` ⇒ ใบนี้ `235` · **0 hit ทั้งสามที่ก่อนวาง**
+> 🔴 บล็อกนี้คือการจองเลข เนื้อใบ (คำถาม · ขอบเขต · สิ่งที่ค้นแล้ว · route ตาม §18) เป็นของ **LANE-UI** ให้เขียนทับทั้งก้อนในรอบถัดไปของสายนั้น · ใบนี้ยังไม่ถือว่าเปิดจนกว่าเนื้อจะลง
+
+---
+
+## 🔬 RE-236 TRACEPATH-RECORD0-SEMANTIC-ATTENDED-DIFFERENTIAL-001  [🟡 RESERVED -- 🔴 `[NEEDS-ATTENDED-CAPTURE]` · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-UI** · ผู้บริโภคผล = LANE-UI]
+
+> 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `wjqykr`/R338** ตาม `COO-DECISION 20260904_1346` ข้อ 2(ฉ) และ `20260904_1244` (มินิแมป = แถว auto-walk ไม่เปิดใบ RE แยก) · ที่มา `notes_to_chief/20260904_1226_LANE-UI-RE-TICKET-tracepath-record0-semantic-needs-attended-differential.md` · ตัวนับร่วมสองคิวคืน `235` ⇒ ใบนี้ `236` · **0 hit ทั้งสามที่ก่อนวาง**
+> 🔴 บล็อกนี้คือการจองเลข เนื้อใบเป็นของ **LANE-UI** · การวัดจริงคือ differential ที่เครื่อง Panya (คลิกพื้น / คลิก NPC / คลิกมินิแมป อย่างละครั้ง เก็บเฟรม `CTracePathReqVital` เทียบค่า `record+0`) = อยู่ใน "รอเครื่องคุณ" ข้อ 7 ของ `NOW.md` · **ไม่บล็อก LANE-UI**
+
+---
+
+## 🔬 RE-237 OPTIONS-APPLY-SERVER-SETTING-VITAL-FIELDS-001  [🟡 RESERVED -- 🔴 `[NEEDS-ATTENDED-CAPTURE]` (ตามที่ใบต้นทางระบุเองว่าต้อง dynamic capture) · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-UI** · ผู้บริโภคผล = LANE-UI]
+
+> 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `wjqykr`/R338 2026-09-04T14:0x+07:00** · ที่มา `notes_to_chief/20260904_1054_LANE-UI-RE-TICKET-options-apply-server-setting-vital-fields-need-dynamic-capture.md` · ตัวนับร่วมสองคิวคืน `236` ⇒ ใบนี้ `237` · `RE-237`/`GT-237` = **0 hit ทั้งสามที่ก่อนวาง**
+> 🔴 บล็อกนี้คือการจองเลข เนื้อใบเป็นของ **LANE-UI** — ใบต้นทางเขียนคำถามและ "ค้นก่อนถอด" ไว้ครบแล้ว ให้ยกลงมาทั้งก้อนในรอบถัดไปของสายนั้น · chief ไม่แก้ถ้อยคำ
+> chief ตั้งเลขให้โดยไม่รอ `COO 1346` เพราะการรอเลขใบจาก chief คือคอขวดที่ห้ามเกิด (หัวข้อ 0 ของพรอมป์สาย E)
+
+---
+
+## 🔬 RE-238 SELECTOR-CATEGORY-TO-ALT-HP-PAIR-MAPPING-001  [🟡 RESERVED -- 🔴 `[STATIC-ON-BRIDGE]` · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-GM** · ผู้ทำ = สาย RE (RE runner local) · ผู้บริโภคผล = LANE-GM]
+
+> 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `wjqykr`/R338** · ที่มา `notes_to_chief/20260904_1154_LANE-GM-RE-0x430E10-TICKET-selector-category-to-alt-hp-pair-mapping.md` (ใบร่างใช้ชื่อชั่วคราว `RE-0x430E10` ซึ่งไม่ใช่เลขใบ) · ตัวนับร่วมสองคิวคืน `237` ⇒ ใบนี้ `238` · **0 hit ทั้งสามที่ก่อนวาง**
+> 🔴 บล็อกนี้คือการจองเลข — เนื้อใบร่างครบอยู่ในจดหมายต้นทางแล้ว ให้ **LANE-GM** ยกลงมาทั้งก้อนใต้หัวใบนี้ในรอบถัดไปของสายนั้น แล้วแทนที่ทุกจุดที่เขียนว่า `RE-0x430E10` ด้วย `RE-238` (ชื่อชั่วคราวนั้นค้นไม่เจอด้วยตัวนับใบ)
+
+---
+
+## 🔬 RE-239 SECOND-PASSWORD-INCOMING-CREDENTIAL-FRAME-001  [🟡 RESERVED -- 🔴 route ให้ **LANE-DB** ติดป้ายตาม §18 ตอนวางเนื้อใบ (`STATIC-ON-BRIDGE` หรือ `NEEDS-ATTENDED-CAPTURE`) · เจ้าของใบ/ผู้บริโภคผล = **LANE-DB**]
+
+> 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `wjqykr`/R338** · ที่มา `notes_to_chief/20260904_1309_LANE-DB-RE-TICKET-second-password-incoming-credential-frame.md` ตาม `COO-DECISION 20260904_1150` ข้อ 2 · ตัวนับร่วมสองคิวคืน `238` ⇒ ใบนี้ `239` · **0 hit ทั้งสามที่ก่อนวาง**
+> 🔴 บล็อกนี้คือการจองเลข เนื้อใบเป็นของ **LANE-DB** · `COO 20260904_1347` รับไว้แล้วว่าชิ้น 4 ปิดยกเว้นเฟรมขาเข้าใบนี้ และ **ไม่มีกำหนดวัน** — ใบนี้จึงไม่บล็อกคิว DB
+
+---
+
+## 🔬 RE-240 HOTBAR-SKILL-KEY-TO-PRODUCER-WALK-001  [OPEN -- 🔴 `[STATIC-ON-BRIDGE]` · ผู้เปิดใบ = **chief (LANE-E)** รอบ `wjqykr`/R338 · ผู้ทำ = **สาย RE (RE runner local)** · **ผู้บริโภคผล = LANE-CS**]
+
+> 🔢 เลขใบตั้งโดย chief รอบ `wjqykr`/R338 2026-09-04T14:0x+07:00 · ตัวนับร่วมสองคิวคืน `239` ⇒ ใบนี้ `240` · **0 hit ทั้งสามที่ก่อนวาง**
+> ที่มา: `notes_to_chief/20260904_1041_LANE-CS-CORE-REQUEST-which-actionvital-field-carries-skill-id.md` — คำตอบของ chief คือ "ไม่ใช่ห้าฟิลด์นั้น และน่าจะเป็นคนละเฟรม" ใบนี้คือทางที่ตัดสินได้จริง
+
+## คำถาม (เดินทางเดียว มี control ในตัว)
+ตาราง byte ที่ `0x4519C4` แปลง HOTKEY class → branch ของ dispatcher `0x450B20-0x450B38` · **แถวของช่องสกิล/ฮอตบาร์เดินไปถึง producer ตัวไหน**
+- ไปถึง `0x44D260` / serializer `0x0074E6A0` (= `ActionVital`) หรือ
+- ไปถึง serializer `0x00600A60` (= `TriggerCastSkillVital 0x5CD2`, handler `0x00601810`)
+และ **เลขสกิลที่ผู้เล่นกดไปลงที่ไบต์ไหนของเฟรมนั้น** (offset + tag + width)
+
+## control ที่ต้องทำในรอบเดียวกัน (ห้ามข้าม)
+เดินแถว **WIELD** ซ้ำให้ได้ผลเดิม: HOTKEY 71 → class 11 → branch `0x451026` → producer `0x44BC70` ที่ **hardcode `0xEA7E`** ลง `+0x30`
+(ที่มา `pirate-force-server/reports/PF_RE_V128_Wield_Z_ActionVital_Capture_20260814.md:25-33` = ห่วงโซ่ปุ่ม→producer · **:47-60 โดยเฉพาะบรรทัด 55** = จุดที่บอกว่าค่านั้นลงที่ `+0x30` — ต้องเปิดทั้งสองช่วง ไม่งั้นยืนยัน control ไม่ได้) — เดินแถวนี้ไม่ตรง = ผลของทั้งใบใช้ไม่ได้
+
+## เกณฑ์ปิดใบ
+- **บวก**: ระบุ producer + offset/tag/width ที่พกเลขสกิล พร้อม VA ทุกตัวที่เดินผ่าน และ control WIELD ตรง
+- **bounded-negative**: เดินครบแล้วชนเพดาน (เช่น ตารางถูกสร้าง runtime) ⇒ ระบุเพดานให้ชัดว่าตันตรงไหน แล้วส่งต่อเป็นใบ attended capture (กด skill 99 จากฮอตบาร์ + control กด Z ในเซสชันเดียวกัน ต้องได้ hex ตระกูล V128 เดิม)
+
+## ห้ามสรุปสิ่งเหล่านี้ (กติกาหลักฐาน)
+- 🔴 **ห้ามใช้เลขตรงกันเป็นข้อผูก (G6)**: `CONSTDATA_TH__BEHAVIOR.tsv` มี `n_ID = 99` และ `CONSTDATA_TH__SKILL_CONTEXT.tsv` ก็มี `n_ID = 99` — สอง id space ชนกันที่เลขนี้พอดี
+- ห้าม**เริ่มต้น**ด้วยสมมติฐานว่า `TriggerCastSkillVital` เป็นเฟรมของการร่ายสกิล — ความพยายามหา producer ก่อนหน้านี้จบลงที่ `RE-056` (`METHOD-FAIL`) และ `GT-050` job 4 (`TRIGGER-DIRECTION-UNRESOLVED`)
+  🔴 **แต่ "UNRESOLVED" คือคำสั่งเรื่องวิธีที่ใช้แล้วไม่เจอ ไม่ใช่ข้อพิสูจน์เรื่องสายไฟ** — ถ้าการเดินตาราง `0x4519C4` รอบนี้ไปโผล่ที่ serializer `0x00600A60` จริง **นั่นคือผลบวก ให้รายงานเป็นผลบวก** ห้ามให้บรรทัดนี้บังคับให้เขียนว่า inconclusive
+  ข้อเท็จจริงที่ต้องถือไว้ด้วยกัน: `external/PF_SERIALIZER_FIELDS.tsv:1501-1506` ให้ `TriggerCastSkillVital` มีฟิลด์ทิศ W จริงสามตัว (`0x0F@+0x14/2` · `0x08@+0x16/1` · `0x14@+0x18/4` · `ALWAYS`) ไม่มี `EMPTY` สักแถว
+- `PF_FIELD_VALIDATION.tsv:198-199` เขียนว่า `TriggerCastSkillVital` = `NOT_OBSERVED` (0 เฟรมใน 26 ไฟล์ capture) — นั่นคือคำสั่งเรื่อง corpus ที่ไม่มีใครร่ายสกิล ไม่ใช่ข้อพิสูจน์ว่าไคลเอนต์ไม่เคยส่ง
+
+## แยกจากใบไหน
+- `RE-232` (ปิดแล้ว) ถาม grammar ของ `s_CAST_CONDITION`/`s_CAST_BEHAVIOR` — คนละคำถาม
+- `RE-110` (ปิดแล้ว) ตอบว่า `+0x30` คือ **ตัวเลือกท่า/behavior** (`EQUIP_VALUE.n_EQUIPTYPE → n_ATTACK_SKILL → BEHAVIOR.n_ID`, ค่า 280/282/284/286/288/290) — ใบนี้ต่อจากตรงนั้น ไม่ใช่ถามซ้ำ
+
+## ผลไปถึงใคร
+จดหมายผลจ่าหน้า **LANE-CS** (cc chief) · LANE-CS บริโภคเองและปิดหัวใบนี้ในรอบของตัวเอง
+
+---

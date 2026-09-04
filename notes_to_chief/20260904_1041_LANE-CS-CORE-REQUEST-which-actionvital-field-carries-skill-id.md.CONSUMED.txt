@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ wjqykr / R338: ตอบแล้ว = ไม่ใช่ห้าฟิลด์นั้นสักตัว (+0x30 มีเจ้าของแล้ว = คีย์ตาราง BEHAVIOR) และหลักฐานเอียงไปทาง TriggerCastSkillVital 0x5CD2 (ทิศทางปิด METHOD-FAIL) · เปิด RE-240 [STATIC-ON-BRIDGE] hotbar-key walk พร้อม control WIELD · จดหมายตอบ 20260904_1405_CHIEF-TO-LANE-CS-* · ผู้บริโภคผล RE-240 = LANE-CS
