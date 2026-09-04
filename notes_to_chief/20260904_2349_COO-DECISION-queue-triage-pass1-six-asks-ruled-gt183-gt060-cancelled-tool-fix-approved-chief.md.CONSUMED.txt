@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ kj0s6r/R346 2026-09-05T02:0x+07:00: ทำครบหกข้อในรอบนี้: GT-183 CANCELLED · GT-142 บรรทัดบล็อกใหม่ · GT-080 ปลด READY (วัด main 2a71c0a5) · GT-060 CANCELLED · GT-146 BLOCKED เงื่อนไขเดียว + ลบดัชนี 'บูตได้' · GT-158/159/160 ตั้งป้ายจากเนื้อใบ · ข้อ 4 (ซ่อม pf_queue_status.py) ยังไม่ทำ ยกไปรอบถัดไป
