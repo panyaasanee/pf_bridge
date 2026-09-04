@@ -11,7 +11,7 @@
   addendum (`#1069`) สั่งไว้เอง ("รอบถัดไปของ LANE-E หยิบผลนี้เป็นงานแรกก่อน claim") · แก้ทั้งสองข้อ
   (`pirate-force-server#709`)
 - **ขยับ**: R332 ข้อค้าง #2 — **CORE-REQUEST ของ LANE-A** (`0434`/`0437`, จุดยิง `0x1FB2`) ต่อสายแล้ว
-  (`pirate-force-server` local commit, ยังไม่ push — ดูเหตุผลด้านล่าง)
+  (`pirate-force-server#711`)
 - **ยังไม่ขยับ**: `0453` ข้อ 1.1 (สองแถวความยาวใน `vital_walk._LENGTHS_BY_LEGACY_NAME` สำหรับคลิก NPC) —
   เจอระหว่างรอบ ตรวจแล้วมีเทส "tripwire" ทั้งคลาสใน `test_world_click_vitals.py::DispatchTodayTests` ที่ต้อง
   เขียนใหม่ตามที่ผลของมันสั่งไว้เอง เป็นอีกหัวข้อหนึ่งเต็ม ๆ ⇒ ยกให้รอบถัดไปของ LANE-E แทนที่จะทำครึ่ง ๆ
@@ -32,11 +32,11 @@
 จับมิวแทนต์ที่ตรงกันได้อยู่แล้ว): `write_typed_attribute_if_unset` ไม่มีรั้วซ้ำสองชั้นแบบที่ `write_typed_attributes`
 มี — บันทึกไว้เป็นข้อเสนอ hardening รอบหน้า ไม่ใช่ของค้าง
 
-## หัวข้อ 2 — `pirate-force-server` (PR ยังไม่เปิด): จุดยิง `TriggerVital` (0x1FB2)
-Commit อยู่บนกิ่งของรอบนี้แล้ว (`claude/friendly-darwin-zsctq7`, local) **แต่ยังไม่ push/เปิด PR** — กติกา §7
-"รอบที่มีหลายเรื่อง = เปิดหลาย PR ต่อเนื่องในรอบเดียว (ใบต่อไปเปิดหลังใบก่อน merge)" และกิ่งของเซสชันนี้มีกิ่งเดียว
-คงที่ (คนละแบบกับที่ระบบสุ่มชื่อใหม่ทุก PR) ⇒ รอ `#709` merge ก่อน แล้วจึง `git pull` กิ่งให้ตามทัน `main`
-เติม commit ที่มีอยู่แล้ว (topic 2) แล้วเปิด PR ที่สอง
+## หัวข้อ 2 — `pirate-force-server#711`: จุดยิง `TriggerVital` (0x1FB2)
+เปิดหลัง `#709` merge ตามกติกา §7 ("ใบต่อไปเปิดหลังใบก่อน merge") — commit เดิมบนกิ่งเดียวกันของรอบนี้
+(`claude/friendly-darwin-zsctq7`) ก่อน push: `git fetch origin main` แล้ว merge (ไม่ rebase) เข้ามา
+เก็บ `#708` (LANE-CS) ที่ merge แทรกระหว่างรอนี้ด้วย ไม่มี conflict · รันเทสที่เกี่ยวข้องซ้ำบนต้นไม้ที่ merge
+แล้วก่อน push (154 เขียว)
 
 รายละเอียด: `runtime.py` เพิ่มกิ่ง `if nested_id == legacy.TRIGGER_VITAL:` (ข้าง
 `GM_RUN_GM_COMMAND_VITAL_ID` ที่มันเลียนแบบ) เรียก `lane_hooks.fire("vital_inbound_trigger_vital", ...)` ·
@@ -53,9 +53,17 @@ Commit อยู่บนกิ่งของรอบนี้แล้ว (`c
   tests/test_gm_login_scene_override_position_resync.py tests/test_persistence_class_id.py` = เขียวหมด
   (329 เทส + 391 subtests)
 - `tools/verify_hypothesis_ledger.py` = `PASS entries=50`
-- ชุดเต็มแบบเดียวกับเกต (48 โมดูลที่ถูก exclude ตรงพิน, สำเนาไม่มี `pf_bridge` ข้าง ๆ): **เริ่มรันแล้วก่อน push
-  แต่ยังไม่จบตอน push รอบนี้** — ห้ามเขียนว่า "เขียว" โดยไม่มีที่มา (§1) จึงไม่อ้างที่นี่ · เกต Windows จริงบน
-  `#709`/`#710`(?) จะเป็นตัวตัดสิน · ถ้ารันจบก่อนจบรอบและเจอแดง จะแก้ในรอบนี้เอง ไม่ผลักไปรอบหน้า
+- ชุดเต็มแบบเดียวกับเกต (48 โมดูลที่ถูก exclude ตรงพิน, สำเนาไม่มี `pf_bridge` ข้าง ๆ) — รันบนสำเนาที่มีทั้งสอง
+  หัวข้อของรอบนี้ แต่ยังไม่มี `#708` (LANE-CS ที่ merge แทรกระหว่างรอ `#709`) เพราะรันก่อน push ครั้งแรก:
+  `8512 passed, 0 failed, 84 skipped` (ทุกใบ skip มีชื่อ/เหตุผล/พิน) · `tools/pf_pytest_precondition_census.py`
+  รันจากสำเนาเดียวกัน = FAIL เหลือ 1 ใบ (`test_world_avatar_attr.py` precondition `bridge_attr_corpus`) แต่เป็น
+  **สิ่งประดิษฐ์จาก path ของสำเนาชั่วคราวเอง** ไม่ใช่ drift จริง (บรรทัด skip พิมพ์ path ญาติแบบ
+  `../../../../../../../home/user/...` เพราะสำเนาอยู่ลึกใน `/tmp/` ทำให้ census เทียบสตริง path ไม่ตรงกับพิน
+  แม้ตัวเลขจะตรง 1/1) — เทียบ `docs/PYTEST_SKIP_PINS.json` ด้วยตาว่า `bridge_attr_corpus` ปักไว้ = 1 ตรงกับที่
+  สังเกตจริง จึงไม่ใช่ของค้าง
+  🔴 **ห้ามอ้างว่าเลข 8512/84 นี้คือเกตของ `#711`** — มันคือรันก่อน merge `#708`/`#709` ไม่ใช่ต้นไม้ที่ push จริง
+  (§1) ต้นไม้ที่ push จริง (merge main แล้วมี `#708`) รันแค่ sweep เจาะจงในหัวข้อ 2 ข้างบน (154 เขียว) ไม่ใช่ชุดเต็ม
+  ⇒ **เกต Windows จริงบน `#711` คือคำตอบสุดท้าย** ดู `origin/ci-status` ก่อนเชื่อ ไม่ใช่บรรทัดนี้
 
 ## WIRED (§17 ข้อ 3 · นิยาม v2)
 - **WIRED = +1 รอบนี้** (นับตามนิยาม v2: ต้องมี emission จริงบน production path ไม่ใช่แค่ import)
@@ -67,9 +75,7 @@ Commit อยู่บนกิ่งของรอบนี้แล้ว (`c
   ยังไม่ได้อ่านละเอียดรอบนี้ — ยกไปรอบหน้า ไม่ได้อ่านแล้วเงียบ
 
 ## ค้างไว้ให้รอบถัดไปของ LANE-E (เรียงตามลำดับที่ต้องทำ)
-1. **push topic 2** (จุดยิง `TriggerVital`) เป็น PR ที่สอง หลัง `#709` merge — commit มีอยู่แล้วบนกิ่งของรอบนี้
-   ถ้ากิ่งของรอบนี้ตายไปแล้ว (เซสชันใหม่) ให้ cherry-pick commit `5efb55d7` จาก
-   `pf_bridge` ไม่ได้ช่วยตรงนี้ — ต้องดูจาก reflog/branch ของเซสชันนี้ถ้ายังอยู่ หรือทำใหม่จากคำอธิบายในไฟล์นี้
+1. ยืนยันเกต Windows จริงของ `#711` เขียว (`origin/ci-status`) ก่อนเชื่อว่าหัวข้อ 2 จบจริง — ยังไม่เห็นตอนไฟล์นี้ปิด
 2. `0453` ข้อ 1.1: สองแถวใน `vital_walk._LENGTHS_BY_LEGACY_NAME` (`TARGET_VITAL`: 11, `CHOOSE_NPC`: 9 —
    เลขมาจาก `world_click_vitals.body_lengths()` ที่มีอยู่แล้ว, derive จาก tag helper จริง) + เขียนเทสทั้งคลาส
    `test_world_click_vitals.py::DispatchTodayTests` ใหม่ตามที่ docstring ของมันสั่งไว้เอง (5-6 เทสต้องเปลี่ยน
@@ -83,7 +89,7 @@ Commit อยู่บนกิ่งของรอบนี้แล้ว (`c
 
 ## หมายเหตุความสัตย์ซื่อ
 - ยืนยันชื่อ marker `PF-AUTOMERGE: v4` ทุกครั้งก่อนเขียน body
-- claim PR (`#1077`) ยังไม่มี marker — จะเติมตอนจบรอบ (งานทั้งหมด push ครบทั้งสองรีโปก่อน) ตาม `NOW.md`
-  กติกาของไฟล์นี้ข้อ "ห้ามเติม marker ลง claim PR จนกว่างานของรอบนั้นจะ push ครบทั้งสองรีโป"
-- topic 2 (TriggerVital) มี commit อยู่จริงแต่ยังไม่ปรากฏบน GitHub จนกว่าจะ push — นี่คือเหตุผลที่ไฟล์รอบนี้ยัง
-  ไม่ปิดว่า "push แล้ว" สำหรับหัวข้อนั้น จะแก้ไฟล์นี้ (หรือเขียนไฟล์รอบเสริม) เมื่อ push จริง
+- **สถานะจริงตอนปิดไฟล์นี้**: `pirate-force-server#709` (D1/D2) **merged=true** ยืนยันด้วย GET แล้ว · `#711`
+  (TriggerVital) **push แล้ว เปิด PR แล้ว รอ merge** — ยังไม่ยืนยัน merged (§3 ข้อ 4: ห้ามเขียนว่า "เสร็จ/
+  landed/อยู่บน main" จนกว่ารอบถัดไปจะเห็น `merged=true`) · claim PR `pf_bridge#1077` กำลังจะเติม marker
+  ในคอมมิตถัดไปหลังไฟล์นี้ (งาน push ครบทั้งสองรีโปแล้ว ณ จุดนี้)
