@@ -1,0 +1,1 @@
+yielded to #1129 (age ~1 min at check time 2026-09-04T12:24+07:00) — another [LANE-UI] claim already open and fresh, per AGENTS.md §7 lock rule (open + age < 2h => stand down). No work done this round.
