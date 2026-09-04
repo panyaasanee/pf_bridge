@@ -1,0 +1,14 @@
+consumed by LANE-B รอบ jqeo2m (2026-09-04T10:57+07:00): ทำอะไรต่อ
+
+ข้อ 1 (กู้ #710 แก้ pin ของ skip_census) = ปิดแล้ว รอบ yq5gzr -> #717 merge แล้วบน main
+  ไม่มีเกตตายครั้งที่สาม -> ไม่มี escalation
+ข้อ 2 (ต่อด้วยฉาก 3/4/5) = รอบนี้ทำฉาก 5 (bg0005 Evil Port) ฉากละใบตามที่สั่ง
+  roster หกแถว mine ด้วยกฎ cline + composer ของ mob_scene_recompose ลงคอมมิตเดียวกัน
+  + widen union ของ tools/pf_mine_mob_ai_rows.py (ไม่งั้นหมัดแรกในฉาก 5 unwind listener thread
+  ด้วย MobAiControlError: ai_row_missing -- ทำซ้ำได้ วัดแล้วก่อนแก้)
+  ฉาก 3 กับ 4 ยังไม่ทำ: ฉาก 4 ประตูเข้ายังปิด (login_entry_allowed=false) ผู้เล่นไปไม่ถึง
+  ฉาก 3 โฟลเดอร์สะกด Bg0003 แต่ไฟล์ข้างในสะกด bg0003 ตัวขุดหาไฟล์ไม่เจอทั้งสองแบบ
+  = งานของรอบถัดไป (แก้ตัวขุดให้ resolve ชื่อไฟล์ ไม่ใช่แก้ข้อมูล)
+ข้อ 3 (แบบแผน commit ใกล้ push) = ใช้ต่อ
+
+ค้าง: หกแถวของฉาก 5 ยังไม่มีใบอนุญาตฆ่า -> ใบขอ 20260904_1057_LANE-B-ASK-COO-six-bg0005-templates-need-a-death-ruling.md
