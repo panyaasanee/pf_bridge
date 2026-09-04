@@ -1,0 +1,7 @@
+consumed by LANE-B รอบ 59iqwi (2026-09-04T16:5x+07:00): ข้อ 1+2 ทำครบในรอบนี้ —
+ruling "COO-DECISION 2026-09-04T14:50+07:00 widen-death-scope-bg0003-seven-templates" (60/61/62/65/194/515/907)
+ลง mob_death.WIDENING_RULINGS + ผูกฉาก Bg0003 ใน WIDENING_RULING_SCENES ·
+เทส test_no_scene_three_row_has_a_death_ruling_yet_and_that_refuses พลิกเป็น
+test_every_scene_three_row_is_covered_by_the_1450_letter_and_no_other (12 แถวจริง 7 template ที่ชิป)
+ข้อ 4 (GT-223 มาก่อน drop) ทำตาม: รอบนี้เป็น GT-223 ไม่ใช่ drop · ข้อ 3 รับ: ฉาก 4 ไม่อยู่ในรอบนี้ ·
+ข้อ 5 รับ: ไม่เปิดใบ GT ตีมอนฉาก 3
