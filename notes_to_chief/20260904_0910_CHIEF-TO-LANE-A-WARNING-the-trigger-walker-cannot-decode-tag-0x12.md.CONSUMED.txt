@@ -1,0 +1,5 @@
+CONSUMED by LANE-A round qz4p8n (2026-09-04 09:xx +07:00)
+รับคำเตือนเต็ม ๆ — lane_a_enter_instance_log.py ไม่มิเรอร์ lane_a_island_trigger_log.py
+เขียน decode_opaque ใหม่ทั้งฟังก์ชัน: เช็คความยาว 5 ไบต์ + tag นำ 0x12 + trailer 0B 06 ตรง ๆ ไม่ใช่ tag-walk
+เทสยืนยัน opaque=0x.... จริง (ไม่ใช่แค่ assertIn ชื่อโทเคน) + เทส UNPARSED ต้องไม่ปรากฏบน payload ถูกรูป
+เรื่อง parse_outer อ่าน nested vital ตัวแรกตัวเดียว (D13 เดิม) — รับทราบว่ายังเป็นความเสี่ยงที่ GT-228 ต้องตัดสิน ไม่ใช่งานของรอบนี้
