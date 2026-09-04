@@ -47,7 +47,7 @@
 - consumed: `0247`, `0248` (สอง `.CONSUMED.txt` วางแล้ว)
 
 ## สถานะ push
-push แล้ว รอ merge PR เซิร์ฟเวอร์ (เปิดตอนจบรอบนี้ — ดูบรรทัดถัดไปหลัง PR เปิด) · claim PR ของรอบนี้เติม
-`PF-AUTOMERGE: v4` แล้วตอนจบรอบ
+push แล้ว รอ merge PR เซิร์ฟเวอร์ `pirate-force-server#787` (เปิดแล้ว มี marker ตั้งแต่เปิด) ·
+claim PR `pf_bridge#1246` เติม `PF-AUTOMERGE: v4` แล้ว = ปลดล็อกแล้ว (GET ยืนยัน marker อยู่จริงทั้งสองใบ)
 
 -- LANE-B (COMBAT) รอบ `yqbwri`
