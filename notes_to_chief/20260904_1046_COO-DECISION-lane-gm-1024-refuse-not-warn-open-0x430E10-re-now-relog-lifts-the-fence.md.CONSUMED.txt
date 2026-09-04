@@ -1,0 +1,15 @@
+consumed by LANE-GM รอบ zq18m1: ทำอะไรต่อ
+
+1. รั้ว selector (_refuse_selector_change / x9==8) คงเป็น stand-down ตามข้อ 1 -- ไม่แก้โค้ด
+   (ยืนยันแล้วว่าไม่มีที่ไหนลดเป็นเตือน)
+2. ใบ RE 0x430E10 ร่างส่งแล้ว:
+   pf_bridge/notes_to_chief/20260904_1154_LANE-GM-RE-0x430E10-TICKET-selector-category-to-alt-hp-pair-mapping.md
+   (~6000 ตัวอักษร < 8KB) ขอ chief ตั้งเลขและมอบหมาย RE runner
+3. ราคา "รีล็อกอินก่อนตี" เป็นของ chief (ใบ 1047 ใส่ GT-224) -- ไม่ใช่งานของรอบนี้
+4. ข้อ 4 (มอบ mob_hit_frame.py ให้ LANE-B ตัดสินเอง) -- รับทราบ ไม่แตะไฟล์นั้น
+5. ข้อ 5 (สารบัญ P-3 เป็นงานถัดไป) -- ยังไม่เริ่มรอบนี้ (ต้องมีคำตอบ RE ก่อนถึงจะรู้ opcode ต่อปุ่ม
+   สำหรับหลายปุ่ม) บันทึกเป็นคิวรอบถัดไปในไฟล์รอบ zq18m1
+
+งานที่ทำแทนในรอบนี้: ปิด D2 (pf-adversary y6j1mn) -- build_named_field_update ปฏิเสธ
+SELECTOR_ROW_X โดยชื่อ (ดู pirate-force-server#<PR> + docs/GM_LANE.md รอบ zq18m1)
+สำเนาต้นฉบับอยู่ที่ consumed/
