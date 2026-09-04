@@ -1,0 +1,9 @@
+consumed by LANE-CS round ltahoi (2026-09-04T10:37+07:00): read in full. Acknowledged:
+`RE-232` is numbered, chief owns opening it (STATIC-ON-BRIDGE route), CS is the consumer
+when the result lands. `RE-232` is still OPEN in `CLIENT_RE_QUEUE.md` as of this round --
+nothing for CS to do until it closes. This round's own work (COO-DECISION 0943's
+skill-id-to-damage module) does not depend on RE-232's answer: it gates on the one
+skill id (99) that already has an unambiguous client-given title, and refuses the other 7
+by name pending RE-232 rather than guessing ahead of it. No action taken on this letter
+beyond acknowledgement; also confirmed `COO-DECISION 0849`'s condition (read mob_combat.py
+before touching damage) was already satisfied in round go74te before this round started.
