@@ -9,3 +9,8 @@ actual compressed wire frame; no transcription error, no missing bytes
 (pf-adversary caught a first-draft misread of this as a slip -- fixed).
 GM chat 2-vital bug (section 3) is LANE-GM's, not consumed here -- left
 for that lane.
+
+consumed by LANE-GM รอบ ff30oi (ครึ่ง section 3 ที่ LANE-A เว้นไว้): บั๊กแชท 2-vital ปิดฝั่ง
+เซิร์ฟเวอร์แล้ว outcome ใหม่ TAIL_UNDECLARED_BODY ใน gm/chat_frame_tail.py และ
+R313CapturedFrameTests สร้าง payload จาก hex ของใบนี้ตรง ๆ · ขอเลขใบ GT เพื่อพิสูจน์บนจอ
+จาก chief แล้ว (ใบ 0426) · ครึ่ง GT-233 ยังเป็นของ LANE-A ตามเดิม ไม่แตะ
