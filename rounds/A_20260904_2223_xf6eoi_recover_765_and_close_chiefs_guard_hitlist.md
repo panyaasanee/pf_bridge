@@ -1,4 +1,4 @@
-# LANE-A รอบ `xf6eoi` — 2026-09-04 22:23-2x:xx +07:00
+# LANE-A รอบ `xf6eoi` — 2026-09-04 22:23-23:1x +07:00
 
 ## NOW.md ก่อนอื่น
 อ่าน `NOW.md` เป็นไฟล์แรก (ตรวจล่าสุด 22:00 โดย COO)
@@ -98,10 +98,18 @@
 ส่งจริง แทนที่จะบอกว่า "บิลด์นี้ส่งเป็น"** — ต่างกันตรงที่อย่างหลังอ่านว่าผ่านได้ทั้งที่ไม่มีอะไรออกไปเลย
 
 ## เทส
-- ระหว่างทาง (เฉพาะไฟล์ที่แตะ): `tests/test_lane_a_enter_instance_log.py` `tests/test_m2_survey_trial.py`
-  `tests/test_world_m2_survey_plan.py` `tests/test_world_m2_provisioning_trial.py` = 129 passed
-  · `tests/test_lane_a_choose_npc_scene1.py` = 29 passed · `tests/test_lane_a_modules_are_guard_clean.py` = 2 passed
-- ชุดเต็ม: ครั้งเดียวต่อรอบ บน commit สุดท้าย หลัง pf-adversary — ผลอยู่ท้ายไฟล์นี้
+- ระหว่างทาง (เฉพาะไฟล์ที่แตะ) เขียวทุกไฟล์
+- **mutation สองครั้ง** เพราะเทสที่แดงไม่ได้ไม่ใช่เทส: เปลี่ยนชื่อ event ใน `runtime.py` ⇒
+  `TheProducerOfTheOnlyEventFragment` **แดง** (แล้วคืน `runtime.py` ให้ไบต์ตรงเดิม `git diff` ว่าง) ·
+  เปลี่ยน import เป็น alias + f-string ⇒ `test_every_pending_name_is_still_an_import_in_that_module` **แดง**
+- ชุดเต็มบน commit สุดท้าย (merge `origin/main` `7f5eaaf` แล้ว) **รันแบบเดียวกับเกต**
+  (สร้างลิสต์ยกเว้น `GameClient|capture_v141` เอง แล้วส่ง `--ignore` ต่อโมดูล · `-rs`):
+  **9,363 passed · 8 skipped · 17,650 subtests passed · 1 failed** ใน 408 วินาที
+  แดงใบเดียว = `test_every_symbol_exemption_is_still_earned` ของ chief (ช่องว่าง PEP 701 บน 3.11 · เกตปัก 3.14 เขียว)
+- **ซ้อม `skip_census` ด้วย** เพราะรอบนี้เพิ่มไฟล์เทสใหม่ (กติกา NOW ข้อ 30):
+  `tools/pf_pytest_precondition_census.py` = **RESULT: PASS** · 8 skip ประกาศครบ · ไฟล์ใหม่ไม่เพิ่ม skip และไม่ขยับตัวเลขทางไหน
+- 🔴 **ทำไมรันเต็มสองครั้ง**: ครั้งแรกรันบนงานกู้ `#765` · ผล pf-adversary (สั่งต้นรอบตาม NOW ข้อ 29) กลับมาหลังจากนั้น
+  พร้อม 9 ข้อ ซึ่ง 8 ข้อแก้โค้ด ⇒ ต้นไม้เปลี่ยนหลังรันเต็ม ต้องรันใหม่ก่อน push (กติกา NOW ข้อ 30)
 
 ## pf-adversary — ครั้งที่ 1 (สั่งต้นรอบพร้อมเริ่มงาน ตาม NOW ข้อ 29) · เจอ 9 ข้อ · **แก้ในรอบนี้ 8 ข้อ**
 | # | เจออะไร | ทำอะไร |
@@ -129,3 +137,12 @@
 - ไม่ได้แตะ `runtime.py` ไม่ได้แตะตาราง `ALLOWED_SYMBOLS` ของ chief ไม่ได้แตะไฟล์ของสายอื่น
 - `test_every_symbol_exemption_is_still_earned` แดงบนคลาวด์ (python 3.11) = ช่องว่าง PEP 701 ที่ chief
   เขียนอธิบายไว้ในตัวเทสเอง เกตปัก 3.14 จึงเขียว — **ไม่ใช่แดงจริง และไม่ใช่เหตุที่ `#765` ตาย**
+
+## จบรอบ
+- **push แล้ว รอ merge PR `pirate-force-server#769`** (เปิดแล้ว ไม่ draft · `PF-AUTOMERGE: v4` อยู่ใน body ตั้งแต่เปิด · GET ยืนยันแล้ว)
+  สถานะเกต: **เปิดแล้ว รอ gate** — ยังไม่เขียว ยังไม่อยู่บน `main`
+- claim `pf_bridge#1216` เติม marker ตอนจบรอบตามลำดับ (ไฟล์รอบลงกิ่งเดียวกัน · ลบ `_claim.md` แล้ว)
+- 🔴 **สิ่งที่ยังค้างและไม่ใช่ของรอบนี้**: `GT-233` ในคิวยังหัว `BLOCKED` ทั้งที่ตัวบล็อกสุดท้าย (`#763`)
+  merge ไปแล้ว 21:32 — การพลิกหัวใบเป็น `READY` เป็นงานที่ `COO 2050` ข้อ 1 มอบให้ **chief** รอบ 22:21
+  ผมไม่แตะหัวใบแทน (ไฟล์ร่วม · เสี่ยง conflict กับรอบ chief ที่อาจกำลังทำอยู่) แต่บันทึกไว้ให้ COO เห็นว่า
+  ณ 23:1x ยังไม่ถูกพลิก ⇒ เกณฑ์สุดท้ายของ M2 ยังไปไม่ถึงเครื่องเจ้าของ
