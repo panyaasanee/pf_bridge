@@ -1319,8 +1319,12 @@ function ClaimPrCacheWrite($cache) {
 #   2. the branch carries nothing but claim stubs beyond origin/main
 #   3. the round is finished or replaced elsewhere: its server PR (same round
 #      id in the branch name) is closed or merged, OR another open bridge
-#      claim says 'takeover of #<this>'.  A server PR still OPEN for that round
-#      id means the round is alive - never a ghost.
+#      claim says 'takeover of #<this>', OR the round already wrote its
+#      finished-round file rounds/*_<roundid>_<slug>.md to origin/main (the
+#      *_claim.md stub does not count - a round that mis-named its branch
+#      never gets a server PR with that id, so the round file is the proof;
+#      pf_bridge#1095 sat unprovable for 2 h that way).  A server PR still
+#      OPEN for that round id means the round is alive - never a ghost.
 # Anything short of all three is still only reported, exactly as before.
 # The branch is NEVER deleted (the [5d] promise holds: nothing is lost).
 # ---------------------------------------------------------------------------
@@ -1381,9 +1385,17 @@ function GhostClaimVerdict([string]$branchShort, [int]$ageMin) {
     if ($null -ne $srvClosed) {
         foreach ($pr in @($srvClosed)) { if ($pr.head -ne $null -and ([string]$pr.head.ref) -like ('*-' + $roundId)) { $srvDone = $true } }
     }
-    if (-not ($srvDone -or $takeover)) { $v['why'] = ('no closed/merged server PR for round ' + $roundId + ' and no takeover claim - not proven dead'); return $v }
+    # condition 3c: the round already wrote its finished-round file to origin/main
+    # (rounds/<lane>_<date>_<time>_<roundid>_<slug>.md or rounds/R###_<roundid>_<slug>.md;
+    # the *_claim.md stub is the claim itself and does not count)
+    $roundFile = ''
+    $lt = GitRun $BridgeRepo @('ls-tree', '--name-only', 'origin/main', 'rounds/')
+    if ($lt.Code -eq 0) {
+        foreach ($l in ($lt.Out -split "`n")) { $t = ([string]$l).Trim(); if (($t -like ('*_' + $roundId + '_*')) -and (-not ($t -like '*_claim.md'))) { $roundFile = $t } }
+    }
+    if (-not ($srvDone -or $takeover -or ($roundFile -ne ''))) { $v['why'] = ('no closed/merged server PR for round ' + $roundId + ', no takeover claim and no finished-round file on main - not proven dead'); return $v }
     $v['ghost'] = $true
-    $v['why'] = ('age ' + $ageMin + ' min; branch holds only ' + $subs.Count + ' claim stub(s); ' + $(if ($srvDone) { 'server PR for round ' + $roundId + ' is closed/merged' } else { 'no server PR found' }) + $(if ($takeover) { '; an open takeover claim names #' + $v['prnum'] } else { '' }))
+    $v['why'] = ('age ' + $ageMin + ' min; branch holds only ' + $subs.Count + ' claim stub(s); ' + $(if ($srvDone) { 'server PR for round ' + $roundId + ' is closed/merged' } elseif ($roundFile -ne '') { 'finished-round file already on main: ' + $roundFile } else { 'no server PR found' }) + $(if ($takeover) { '; an open takeover claim names #' + $v['prnum'] } else { '' }))
     return $v
 }
 
