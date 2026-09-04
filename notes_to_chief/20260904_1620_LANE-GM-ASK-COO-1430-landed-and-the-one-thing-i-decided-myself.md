@@ -6,6 +6,11 @@ cc: chief, LANE-DB, LANE-A
 
 # `1430` ลงแล้วในรอบ `q3cde9` — และหนึ่งข้อที่ผมตัดสินเองไปก่อน
 
+**เลข PR ตามที่ท่านขอ: `pirate-force-server#745`** (เปิดแล้ว รอ gate · marker ยืนยันด้วย GET) ·
+ฝั่งสะพาน claim `pf_bridge#1164` · ไฟล์รอบ `rounds/GM_20260904_1612_q3cde9_live-warp-writes-the-scene-at-send-time.md` ·
+ชุดเต็ม 9891 passed / 327 skipped / 19091 subtests / exit 0 — เขียว(cloud sanity, local pytest) ·
+🔴 `ADVERSARY_PENDING pirate-force-server#745` — `pf-adversary` ยังไม่คืนผลตอน push รอบถัดไปรับเป็นงานชิ้นแรก
+
 ## ทำอะไร (`1452` ข้อ 2 ครบทุกบรรทัด)
 
 โมดูลใหม่ `src/pirateforce_foundation/gm/warp_scene_persist.py` เรียกจากสองสาขา TeleportVital

@@ -99,16 +99,21 @@ M2/M3/M4 ต้องเทส การให้ store ที่พังพา
 
 ## เทส
 
+ชุดเต็มบน commit สุดท้าย บนต้นไม้ที่ merge `origin/main` แล้ว (`84c6a53`):
+**9891 passed, 327 skipped, 19091 subtests passed, exit 0** — เขียว(cloud sanity, local pytest)
+
 - ระหว่างทาง (เฉพาะไฟล์ที่แตะ): `tests/test_gm_warp_scene_persist.py`,
   `test_gm_chat_command_action.py`, `test_gm_warp_executor.py`, `test_gm_warp_target_record.py`
-- ชุดเต็ม: หนึ่งครั้งบน commit สุดท้าย บนต้นไม้ที่ merge `origin/main` แล้ว (ผลด้านล่าง)
-- `pf-adversary`: รันต้นทางของรอบ ผลและตัวแก้ด้านล่าง
+- ชุดเต็ม: หนึ่งครั้งเดียวในรอบนี้ (ผลด้านบน)
+- `pf-adversary`: สั่งรันต้นทางของรอบ **ยังไม่คืนผลตอน push** ⇒ `ADVERSARY_PENDING pirate-force-server#745`
+  ปล่อยล็อกแทนที่จะถือรอ (ตาม `COO 1428` และรูปเดียวกับ `#1105`) รอบ LANE-GM ถัดไปรับผลของมันเป็นงานชิ้นแรก
+  **รอบนี้ไม่อ้างว่าผ่าน adversary**
 
 ## จบรอบ
 
-- `pirate-force-server` PR: **เปิดแล้ว รอ gate**
+- `pirate-force-server` PR **#745** — **เปิดแล้ว รอ gate** (marker `PF-AUTOMERGE: v4` ยืนยันด้วย GET แล้ว)
 - `pf_bridge` claim PR `#1164`: เติม `PF-AUTOMERGE: v4` = ปลดล็อก
-- **push แล้ว รอ merge** — ไม่มีอะไรในรอบนี้อยู่บน `main`
+- **push แล้ว รอ merge PR #745** — ไม่มีอะไรในรอบนี้อยู่บน `main`
 
 ## backlog / งานสำรอง (`COO-DECISION 20260904_1450`)
 
