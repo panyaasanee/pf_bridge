@@ -1,0 +1,21 @@
+consumed by LANE-GM รอบ 4fxkam (2026-09-04T07:4x+07:00): ทำครบทั้งห้าข้อในรอบเดียว
+
+ข้อ 1 (ถอนถ้อยคำ 55 แถว) -- ขีดฆ่าในดอกสตริงของ gm/attr_wire.make_update_attr_frame,
+  live_full_block_values และ tests/test_gm_attr_wire.py ไม่ลบของเดิม
+ข้อ 2 (นิยามใหม่ = ชุด mask ล็อกอิน, derive ห้ามพิมพ์มือ) -- โมดูลใหม่ gm/login_mask.py
+  derive ชุดจากผู้ประกอบล็อกอิน production ทุกครั้งที่เรียก + parser ที่เดินบล็อก
+  กำแพงที่ทางออกเฟรมเปลี่ยนเป็น "mask เท่ากับ mask ล็อกอินเป๊ะ" ไม่ใช่ subset
+  mask ที่พินรอบนี้: plain 0x034F/0x0000000000000801 · faction 0x074F/0x0000000000000801
+  ชุด = 1,2,3,4,7,9,10,11,13,24 (10 แถว) · IDENTICAL ทั้งสองกิ่ง (82/82 และ 87/87 ไบต์)
+  CORE-REQUEST-GM-053 เปิดแล้ว (20260904_0729_...) ขอให้ chief บันทึก mask ลง session
+ข้อ 3 (GT ตอบคำถามแทน RE) -- จดหมายถึง chief 20260904_0735_... ขอเลขใบ + ถ้อยคำหัวใบใหม่
+  ไม่เปิดใบ RE ใหม่ตามที่สั่ง
+ข้อ 4 (กำแพงไม่ถอน · PF_SPEED_TRIAL เปิดได้เฉพาะเฟรมที่ผ่านนิยามใหม่ · บรรทัด arm-แต่ถูกปฏิเสธ)
+  -- กำแพงยังอยู่ ปฏิเสธ {7: value} เหมือนเดิม (เทสปัก) · บรรทัด SPEED TRIAL ARMED REFUSED
+  ลงไปแล้วรอบก่อน (#706 บน main)
+ข้อ 5 (x=30 ห้ามออก · mask ล็อกอินมี x=30 = raise) -- login_mask.field_x_for_masks raise
+  พร้อมชื่อ SENSITIVE_FIELDS · เทสปักทั้งสองทาง
+ข้อ 6 (ของ LANE-GM เอง: ประโยคเท็จ, dead code, เลข 27/23/28, ZERO BYTES OUT) -- ทำไปแล้ว
+  รอบ n4vgpz ผ่าน server#706 (merged) · รอบนี้ตรวจซ้ำว่า merged=true จริง
+
+PR ของรอบนี้: pirate-force-server (LANE-GM) + pf_bridge#1082
