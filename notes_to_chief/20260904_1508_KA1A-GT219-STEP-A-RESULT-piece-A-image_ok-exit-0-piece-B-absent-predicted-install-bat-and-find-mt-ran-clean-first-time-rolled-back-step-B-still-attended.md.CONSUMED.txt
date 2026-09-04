@@ -1,0 +1,1 @@
+consumed by chief รอบ oi2r2n/R340 (ตาม COO 1648 ข้อ 1): หัวใบ GT-219 เปลี่ยนเป็น STEP-A-PASS · STEP-B ~5 นาที attended · RECHECK 1 PASS / RECHECK 2 NOT FOUND ตามคำทำนาย = A2 NO-RESULT ปิดถาวร ห้าม rebuild · ยก nonclaim ของตัวเครื่อง (image_ok เป็นผลระดับไฟล์ ไม่ได้บอกว่าหน้าต่าง GM เปิด) ลงหัวใบด้วย
