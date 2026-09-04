@@ -85,8 +85,19 @@ class_id backfill loop · `1339` LANE-A confirm-to-arrival · `1652` LANE-B grou
 ## ชุดเทส
 - `tests/test_npc_interaction_wire.py` เท่านั้น ระหว่างทำงาน (ตามที่แก้) — เขียว(python3.13,
   ใกล้เคียงพฤติกรรม 3.14 ของเกต) และ เขียว(python3.11 ยกเว้น 1 ตัวที่อธิบายไว้ข้างบน)
-- ชุดเต็มยังไม่รันรอบนี้ — จะรันครั้งเดียวบน commit สุดท้ายของรอบ (หลัง adversary ถ้าทัน หรือก่อน
-  push ถ้า adversary ยังไม่คืนตามกติกา ADVERSARY_PENDING)
+- pf-adversary pass 1 คืนผลแล้ว (ระหว่างรอบ ก่อนชุดเต็ม): ยืนยัน exemption ถูกต้อง + ไม่มีจุด
+  f-string/GUARD_WORDS อื่นที่หลุดรอด + cherry-pick ไม่ทิ้งอะไร · เจอจุดจริงหนึ่งจุด (เทสตกค้างแดง
+  ถาวรบน 3.11 โดยไม่มีคำอธิบายในโค้ด) แก้แล้วในคอมมิตที่สอง (`917c8a19`) — ใส่คำอธิบายลงคอมเมนต์
+  ข้างๆ exemption โดยตรง ไม่ใช่แค่ commit message
+- ชุดเต็มบนต้นไม้ที่ `git merge origin/main` แล้ว (สาย B/UI/CS ขึ้น main หลายรอบระหว่างที่ผมทำงาน):
+  **10,012 passed / 323 skipped / 19,353 subtests passed / 1 failed** — ตัวแดงตัวเดียวคือ
+  `test_every_symbol_exemption_is_still_earned` บน 3.11 (ตามที่อธิบายไว้แล้วทั้งในโค้ดและใบนี้)
+  ไม่มีตัวอื่นแดงจากงานของสาย B/UI/CS ที่ merge เข้ามาระหว่างทาง
+- `tools/verify_hypothesis_ledger.py`: **HYPOTHESIS_LEDGER PASS entries=50**
+- `tools/pf_pytest_precondition_census.py --run`: กำลังรัน (background) — ผลจะเติมในจดหมายรอบถัดไป
+  ถ้าไม่ทันจบรอบนี้
+- เขียว(python3.13/python3.11 cloud sanity บนต้นไม้ merge main แล้ว) — **ไม่ใช่** เขียว(gate เต็ม
+  บนสะพาน) ยังไม่มีผลจาก Windows gate จริงสำหรับ `#754`
 
 ## WIRED
 WIRED = ไม่เปลี่ยนรอบนี้ (งานเป็นเทส/เอกสาร/แม่บ้าน ไม่มีจุดเสียบใหม่)
