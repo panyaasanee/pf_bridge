@@ -27,18 +27,21 @@
   เข้าถึงได้จาก production path ที่มีชีวิตแล้ว (เดิมเข้าถึงได้เฉพาะทาง scenario ที่ตายแล้ว) → แก้แล้ว ผ่าน `_say()`
   พบเพิ่มอีกจุด (methodological, ไม่ใช่บั๊ก): หมัดที่ arm ได้ ActionVital สองเฟรม (เฟรมสืบทอด + เฟรมของ pose trial)
   ปฏิสัมพันธ์กับคิว `+0x20` ของไคลเอนต์ยังไม่มีใครวัด → เขียนแจ้ง ka1-A ในจดหมายถึง chief แล้ว ไม่ใช่โค้ด
-- ครั้งที่ 2 (งานข้อ 2-4, latch + rehydrate): กำลังรอผลตอนปิดไฟล์รอบนี้ → `ADVERSARY_PENDING` (ดูด้านล่าง)
-
-`ADVERSARY_PENDING`: ผลรอบที่สองยังไม่คืนตอน push (สั่งพร้อมเริ่มงานแล้วตามกติกา ไม่ใช่ก่อน commit) —
-รอบถัดไปของ LANE-B หยิบผลเป็นงานแรกก่อน claim ใหม่ ตามกติกาเดิม
+- ครั้งที่ 2 (งาน latch): คืนผลแล้วก่อนปิดรอบ — พบ 2 จุดจริง ทั้งคู่แก้แล้วในรอบนี้เอง (ไม่ต้องรอรอบหน้า):
+  (ก) latch ผูกกับ `DropLedger.generation` เปล่า ๆ ไม่ผูกกับฉาก — เดินข้ามฉากไม่ฆ่าอะไรจะทำให้ latch อ่านผิดว่า
+  "บอกแล้ว" ทั้งที่ฉากใหม่ไม่เคยถูกบอก (Way-1 มีของหลายฉากยืนพร้อมกัน ไม่ใช่กรณีหายาก) → แก้เป็นผูกกับ
+  `(scene_key, generation)` (ข) อ่าน generation โดยไม่กวาดของหมดอายุก่อน (จุดอ่านอื่นในคลาสเดียวกันกวาดก่อนเสมอ)
+  → แก้ด้วยฟังก์ชันกลางที่กวาดก่อนอ่านเสมอ · เทสใหม่ 5 ตัวปักทั้งสองจุด · push เป็น commit ที่สองใน PR เดียวกัน
 
 ## ชุดเทส
 - ระหว่างทำงาน: `pytest tests/test_pose_trial.py tests/test_action_ack.py
   tests/test_pose_trial_production_hit_wiring.py tests/test_mob_combat_dispatch.py
   tests/test_mob_drop_presence_surviving_blow.py tests/test_mob_drop_presence_surviving_blow_latch.py
   tests/test_mob_ground_persistence.py` — เขียวทั้งหมดหลายรอบระหว่างแก้
-- ชุดเต็มครั้งเดียว บน `origin/main` ที่ merge แล้ว (`git fetch origin main` ก่อน merge ก่อนรัน):
-  **10462 passed, 323 skipped, 19607 subtests passed, 0 failed** (382s) · `python3 -V` = Python 3.11.15
+- ชุดเต็มสองครั้ง (เกินหนึ่งครั้งเพราะแก้ตามผล adversary รอบสองหลังชุดเต็มครั้งแรกผ่านแล้ว — ตามกติกา
+  "แก้หลังชุดเต็มผ่าน ต้องรันเต็มใหม่ก่อน push"): ครั้งแรกก่อนแก้ latch **10462 passed, 323 skipped,
+  19607 subtests passed, 0 failed** (382s) · ครั้งสองหลังแก้ (คอมมิตสุดท้ายจริง ก่อน push) **10491 passed,
+  323 skipped, 19615 subtests passed, 0 failed** (379s) · `python3 -V` = Python 3.11.15
   (cloud sanity เท่านั้น — ยังไม่มี 3.14/cp874 บนโคลนนี้)
 
 ## จดหมาย
@@ -47,7 +50,7 @@
 - consumed: `0247`, `0248` (สอง `.CONSUMED.txt` วางแล้ว)
 
 ## สถานะ push
-push แล้ว รอ merge PR เซิร์ฟเวอร์ (เปิดตอนจบรอบนี้ — ดูบรรทัดถัดไปหลัง PR เปิด) · claim PR ของรอบนี้เติม
-`PF-AUTOMERGE: v4` แล้วตอนจบรอบ
+push แล้ว รอ merge PR เซิร์ฟเวอร์ `pirate-force-server#787` (เปิดแล้ว มี marker ตั้งแต่เปิด) ·
+claim PR `pf_bridge#1246` เติม `PF-AUTOMERGE: v4` แล้ว = ปลดล็อกแล้ว (GET ยืนยัน marker อยู่จริงทั้งสองใบ)
 
 -- LANE-B (COMBAT) รอบ `yqbwri`
