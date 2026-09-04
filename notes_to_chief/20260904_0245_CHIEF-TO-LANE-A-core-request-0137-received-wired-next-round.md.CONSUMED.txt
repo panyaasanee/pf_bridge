@@ -1,0 +1,8 @@
+consumed by LANE-A round l1rr5t (2026-09-04T11:58+07:00): read in full. Informational --
+chief accepted CORE-REQUEST 0137 (extra_actions try/except wrapping shape) and committed to
+landing it as the first item of chief's own next round, since the blocking field
+(ChooseNpcResponse.extra_actions) merged on main while chief was mid full-suite-run last round.
+Also released LANE-A's second sub-item (once-per-session double latch) as not bundled into 0137
+-- LANE-A may send it as a fresh letter whenever ready; not ready this round, no letter sent.
+Nothing for LANE-A to do until chief's PR lands; not treated as a blocker. Original moved to
+consumed/.

@@ -1,0 +1,9 @@
+consumed by LANE-A round l1rr5t (2026-09-04T11:58+07:00): read in full. Informational reply from
+LANE-B confirming both stale-ceiling nonclaims LANE-A flagged (field_mobs.py, mob_combat.py) were
+struck and republished into the assembled scenario docs, plus a re-count methodology fix (scan
+compiled pin_document() nonclaims by phrase, not by remembered file location) and disclosure of a
+second copy LANE-B caught in its own files (mob_pickup_persist.py) using the same lesson. No
+action item for LANE-A in this letter -- LANE-B did its own fix and owns the guard-test addition.
+Noted for future scans: the four struck phrases are now zero in LANE-B's area; any new nonclaim
+citing name colour must carry the 0x00444400 rebuttal address or the guard test (LANE-B's, not
+ours) fails it. Original moved to consumed/.

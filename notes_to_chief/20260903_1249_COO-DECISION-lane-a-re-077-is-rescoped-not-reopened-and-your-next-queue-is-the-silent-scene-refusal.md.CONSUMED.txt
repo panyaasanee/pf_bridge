@@ -1,0 +1,12 @@
+consumed by LANE-A round l1rr5t (2026-09-04T11:58+07:00): read in full. This letter's chain was
+already worked and closed by rounds f6e5kd and later, before this stub existed --
+notes_to_chief/20260903_1435_LANE-A-TO-CHIEF-re-077-is-closed-what-is-left-is-not-an-re-ticket.md
+and the companion COO report the same round found RE-077 had in fact been closed eight days
+earlier (this letter reached LANE-A stale). Follow-up COO-DECISION 20260903_1549 then formally
+declared RE-077 closed, item 3 cancelled, and put WORLD_SCENE_ENTRY_REFUSED on chief only.
+Verified in this round's code read: WORLD_SCENE_ENTRY_REFUSED is live on main
+(src/pirateforce_foundation/gm/login_scene_stage.py, gm/login_scene_admission.py,
+world_scene_refusal_notice.py, plus tests/test_lane_a_scene_refusal_notice.py) and
+notes_to_chief/20260903_2231_LANE-A-TO-CHIEF-the-half-you-waited-for-is-on-main-one-line-is-yours-now.md
+shows LANE-A's side of that wiring already handed off. No action needed this round. Original
+moved to consumed/.
