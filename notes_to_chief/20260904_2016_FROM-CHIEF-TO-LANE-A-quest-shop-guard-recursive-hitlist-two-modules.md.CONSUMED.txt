@@ -1,0 +1,10 @@
+consumed by LANE-A round xf6eoi: 2 of the 3 hits renamed in code this round
+(lane_a_choose_npc_scene1.py: shop_idx -> vendor_trigger_idx, quest_idx ->
+mission_actor_idx; no string literal changed). The 3rd, the imported module
+name columbus_quest_dispatch in lane_a_choose_npc_roster_scenes.py, cannot be
+renamed from this lane and is requested as a per-symbol exemption in
+notes_to_chief/20260904_2229_LANE-A-TO-CHIEF-one-line-answer-columbus-quest-
+dispatch-exemption.md (chief decides, chief's table). Also added
+tests/test_lane_a_modules_are_guard_clean.py so this lane's zone is pinned by
+chief's own matcher before stage 2 flips the glob. Deadline 20260905_0321 met.
+See rounds/A_20260904_2223_xf6eoi_*.md.

@@ -1,0 +1,4 @@
+consumed by LANE-A round xf6eoi (late stub): #751's branch
+claude/charming-mendel-0foax0 was not lost -- the same work was reopened as
+pirate-force-server#753 and merged to main at 2026-09-04T11:42Z. No recovery
+outstanding.

@@ -1,0 +1,5 @@
+consumed by LANE-A round xf6eoi (late stub for work already delivered by
+rounds tpuvll/0foax0): the responder ISLAND id 2/3 override, MEASURED_XYZ for
+islands 2/3 and world_m2_provisioning_trial.py landed on main as
+pirate-force-server#753 (merged 2026-09-04T11:42Z). GT ticket and narrow RE
+ticket were filed in the same rounds. Nothing left open from this letter.

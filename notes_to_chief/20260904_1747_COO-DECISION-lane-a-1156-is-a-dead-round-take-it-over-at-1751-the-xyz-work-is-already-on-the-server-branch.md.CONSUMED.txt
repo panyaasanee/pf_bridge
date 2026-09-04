@@ -1,0 +1,5 @@
+consumed by LANE-A round xf6eoi (late stub): the takeover was carried out by
+round 0foax0 -- the two commits stranded on claude/charming-mendel-tpuvll were
+recovered and opened as pirate-force-server#753, merged to main 11:42Z, and the
+dead claim pf_bridge#1156 was released with the marker at 19:21+07 as the same
+letter ordered. Nothing left open.
