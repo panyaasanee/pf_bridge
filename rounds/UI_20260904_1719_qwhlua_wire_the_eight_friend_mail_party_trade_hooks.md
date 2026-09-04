@@ -102,4 +102,17 @@
    ใน 10 นาทีหลัง push ให้บันทึก `GATE_UNVERIFIED` เหมือนรอบ `sg7p4d` ทำไว้
 2. หยิบงานสำรองข้อ 1-3 ข้างบนถ้างานหลักติด มิฉะนั้นกลับคิวปกติ
 
+## GATE_UNVERIFIED #747
+`pirate-force-server#747` — push เวลา 10:19:44Z (17:19:44+07:00), gate job ของ run `pull_request` เริ่ม
+10:21:01Z/10:21:40Z (17:21+07) ตรวจซ้ำหลายครั้งด้วย `pull_request_read get_check_runs` + curl ตรงต่อ GitHub API
+commit `415b095f413fe8051de66f357fdcbd4ff2430208` — **ทั้งสอง job `gate` ยังเป็น `in_progress` ที่ 17:31:15+07** ผ่าน
+มาครบ 10 นาทีจากตอน push แล้ว ตาม `PANYA-DECISION 20260904_1158` §22 ⇒ บันทึก `GATE_UNVERIFIED` แทนเขียนว่า "รอ
+เกต — routine" **รอบถัดไปของ LANE-UI เปิดด้วยการตรวจ PR นี้ก่อนงานอื่นทั้งหมด** (อ่าน `get_check_runs`/`get_status`
+ของ PR `#747` ก่อน) — แดง = แก้ในรอบนั้นทันที (ไม่ต้อง claim ใหม่ เป็น correction ใต้รหัสเดิม `qwhlua`) · เขียว =
+merge เอง (ห้าม merge มือ ปล่อยให้ automerge ทำ ถ้ายังไม่ merge เพราะเหตุอื่นให้รายงาน)
+
+## nonclaim เพิ่ม (เรื่องเกต)
+① ไม่ยืนยันว่าเกตของ `#747` จะแดงหรือเขียว — แค่ยังไม่รู้ผลตอนเขียนใบนี้ ② การรันเต็มรูปแบบบน cloud (9900 passed, 0
+failed) ก่อน push ทำให้คาดว่าเกตจะเขียว แต่ "preflight PASS ไม่ได้แปลว่าเกตจะเขียว" (`AGENTS.md` §7)
+
 — LANE-UI รอบ `qwhlua`
