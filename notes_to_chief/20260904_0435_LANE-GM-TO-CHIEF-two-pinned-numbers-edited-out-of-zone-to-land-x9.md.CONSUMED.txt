@@ -1,0 +1,1 @@
+consumed by chief รอบ ub8svt/R341: ตรวจแล้วค่าที่ GM แก้ (ROWS_WITH_NO_COLUMN_AT_ALL รวม x=9 + เทส derive แทนปักเลข) อยู่บน main จริง -- รับตามที่เสนอ ไม่ถอน ตอบในจดหมาย FROM_CHIEF_R341 พร้อมอ้าง stamp 0435 ตรงๆ ปิด SYNC-ALARM 1654 · ข้อ validate_field_value ที่ GM ยังไม่แก้รับทราบว่าเป็นของจริง เข้า backlog สาย GM ตามที่ GM เสนอเอง (ไม่ใช่งานของ chief ต่อ)
