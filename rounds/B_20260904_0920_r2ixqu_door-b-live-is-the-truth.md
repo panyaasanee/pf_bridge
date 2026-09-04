@@ -74,6 +74,54 @@ gates (`STANDDOWN_LIVE_SOURCE_NOT_A_FIELD`/`_NOT_NAMED`) are unchanged in
 code but now guard data that actually reaches the wire, per the COO
 letter's item 3.
 
+## pf-adversary (ordered at round start, worktree review, never the live checkout)
+Returned before push. Two real findings against the first draft, both
+fixed here, mutation-confirmed against the fixed code:
+
+- **HIGH, reproduced live**: `RawBlockCache.capture_initial` is "PUBLIC
+  and unvalidated" by its own docstring -- the cache's key set (`shape`)
+  was not proven to hold only real `attr_wire.FIELDS` rows before being
+  handed to `live_full_block_values`. A bogus row number in `shape`,
+  answered by the login-byte hook, reached `attr_wire.live_named_values`/
+  `live_login_bytes`'s own unguarded `BY_X[x]` lookup and raised a bare
+  `KeyError` -- not `AttrWireError`, so NOT caught by this door's `except
+  attr_wire.AttrWireError` -- straight through the module's own promise
+  that nothing below the argument checks raises.
+  `attr_wire.build_named_field_update` (the function this door used to
+  route through) already carried an equivalent check on its cache's key
+  set, for this exact reason, before this door stopped calling it. Fixed
+  by validating `shape` against `login_mask.admitted_field_x_sets(legacy)`
+  before it is used for anything else -- membership in an admitted shape
+  is itself proof every row in it is real. New reason
+  `STANDDOWN_CACHE_SHAPE_NOT_ADMITTED`. Added
+  `test_an_unadmitted_cache_shape_is_a_stand_down_not_a_keyerror`,
+  mutation-confirmed: removing the check reproduces the exact `KeyError:
+  9999` this finding measured.
+- **MEDIUM**: the module's own key-validity pre-check (`not_fields`/
+  `stray`) called the named hook directly to get a `live` dict to
+  validate, and then `live_full_block_values` called the SAME hook a
+  SECOND, independent time to build the values the frame actually sends
+  -- so those two gates validated one call's answer while the bytes sent
+  could come from a different one, with nothing anywhere proving the hook
+  is idempotent between calls. Fixed: the named hook is now called at
+  most once per compose (a small `hooks=` stand-in reuses the
+  already-fetched, already-validated `live` dict instead of letting
+  `live_full_block_values` re-invoke the real hook). Added
+  `test_the_named_hook_is_called_at_most_once_per_compose`,
+  mutation-confirmed: reverting to the raw double-call makes the card's
+  own raise-on-second-call hook trip.
+
+Both mutation checks were run by hand against a throwaway copy of the
+file (temporarily reverting each fix in turn), confirmed red, then
+reverted back -- not left in the tree.
+
+One item raised and NOT acted on: `STANDDOWN_LIVE_SOURCE_INCOMPLETE` is
+reused for "the shape itself omits `hp_current`" as well as "a live
+source failed to answer a row the shape needs" -- a structurally
+different condition, today unreachable (every admitted shape carries the
+four named vital rows). Left as-is rather than adding a third reason for
+an unreachable path.
+
 ## Tests
 `tests/test_lane_b_mob_ai_tick.py::HitFrameDoorBTests`:
 - New helpers `_adjudicated_login_byte_values` (the login-byte hook's own
@@ -120,9 +168,13 @@ letter's item 3.
   (previously it happened via `build_named_field_update`'s cache merge,
   reachable with an unseeded default cache -- unseeded no longer reaches
   that far).
+- New: `test_an_unadmitted_cache_shape_is_a_stand_down_not_a_keyerror`,
+  `test_the_named_hook_is_called_at_most_once_per_compose`
+  (pf-adversary findings, above).
 
-Targeted: `pytest tests/test_lane_b_mob_ai_tick.py -q` -- 59 passed, 64
-subtests passed. Also re-ran `tests/test_foundation_legacy_seam.py`,
+Targeted: `pytest tests/test_lane_b_mob_ai_tick.py -q` -- 61 passed, 64
+subtests passed (after the adversary fixes; 59 passed before them). Also
+re-ran `tests/test_foundation_legacy_seam.py`,
 `tests/test_mob_stat_fabrication_guard.py` (both read this module for
 ASCII/legacy-seam contracts), `tests/test_persistence_vitals_or_none.py`
 (scans for a file naming both the vitals door and an attribute
@@ -130,24 +182,21 @@ composer -- mob_hit_frame.py names neither `read_character_vitals_or_none`
 nor any of that card's `COMPOSERS` list), `tests/test_gm_attr_wire.py`,
 `tests/test_gm_login_mask.py`, `tests/test_gm_speed_wire.py`,
 `tests/test_live_named_attr_values.py` (this door's own dependencies) --
-all green, no regressions.
-
-pf-adversary (ordered at round start, worktree review, never the live
-checkout): ADVERSARY_PENDING -- ordered before this checkpoint, not
-returned yet. Per `COO-DECISION 20260903_2345`: push proceeds (checkpoint,
-not a hand-off), the result is picked up as this round's own first item
-before the claim marker goes on, and this section is rewritten with the
-real findings before the marker is added.
-
-Full suite: NOT YET RUN. House rule is once, on the true final commit,
-after pf-adversary's findings (if any) are applied -- not before. Will run
-after the section above is filled in, and before the claim PR's marker is
-added.
+293 passed, 376 subtests passed, all green, no regressions.
 
 ## pf_gate_preflight
 `tools_bridge/pf_gate_preflight.py --repo /home/user/pirate-force-server
 --base origin/main`: `[cp874] PASS`, `[skips] PASS - no new skip markers`,
-`[mainmerge] PASS - origin/main (ecfeec5) is already in HEAD`.
+`[mainmerge] PASS - origin/main (c1b2857) is already in HEAD` (re-run
+after merging main, which moved from `ecfeec5` to `c1b2857` mid-round --
+picks up `#718` LANE-DB and `#719` LANE-GM, merged clean, no conflicts,
+re-tested green).
+
+Full suite, once, on the true final commit merged with `origin/main`
+(`c1b2857`): **9534 passed, 327 skipped, 18710 subtests passed**, exit 0
+(367s). `tools/verify_functional_coverage.py`: `FUNCTIONAL_COVERAGE PASS
+domains=8`. `tools/verify_hypothesis_ledger.py`: `HYPOTHESIS_LEDGER PASS
+entries=50`.
 
 ## Not in this round
 - Does not wire the caller. `MOB_HIT_FRAME_CONFIRMED` stays `None`;
@@ -161,7 +210,7 @@ added.
   something this door's own compose logic decides.
 
 ## Server side
-`pirate-force-server` PR: not opened yet at this checkpoint -- code is
-pushed to `claude/magical-hawking-r2ixqu`; the PR opens at round end per
-the lock protocol's close-out order, after pf-adversary's result is folded
-in.
+`pirate-force-server` PR #721 -- open, not draft, `PF-AUTOMERGE: v4`
+present since open (verified by a GET after create), waiting on the gate.
+Final commit `58ce3c4`, both gate channels (cp874, skips, mainmerge) green
+on it after `main` was merged in.
