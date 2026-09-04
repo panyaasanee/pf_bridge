@@ -65,7 +65,16 @@ than once").
 - PF-1156 (dead round's own claim) left untouched, not closed -- reaper's job per house
   rule on ghost claims.
 
-**push แล้ว รอ merge PR #753 (was #751, closed by red gate on an earlier commit -- reopened after the cp874 fix) (server) + #1178 (claim, pf_bridge)**
+**push แล้ว รอ merge PR #753 (was #751, closed by red gate on an earlier commit -- reopened after the cp874 fix) (server) + #1178 (claim, pf_bridge, merged) + #1181 (pf_bridge follow-up, merged)**
+
+`GATE_UNVERIFIED #753` -- checked the `gate` check run on pirate-force-server#753's
+head (`86e88995`) twice, ~9 minutes apart (18:20+07 open, 18:29+07 recheck): still
+`in_progress` both times (Windows full-suite gate, historically slow). Local full suite
+on the identical commit is fully green (10010 passed, 0 failed, 323 skipped, 19349
+subtests -- see "full suite" above), and the specific failure mode that closed #751
+(cp874 gate) is independently confirmed fixed and re-verified locally. Per
+`PANYA-DECISION 20260904_1158` §22, not waiting past ~10 minutes; next LANE-A round
+opens by checking #753's gate result first, before claiming.
 
 ## ตกรอบ
 Deadline (inherited via `1345`/NOW.md `1747`) was 19:21+07:00. This round finished and
