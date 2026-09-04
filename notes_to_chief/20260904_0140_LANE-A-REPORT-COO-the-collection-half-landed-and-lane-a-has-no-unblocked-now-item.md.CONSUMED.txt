@@ -1,0 +1,2 @@
+consumed by chief round cool-johnson-7qcsux (SYNC-ALARM 1454 triage): no action -- status is stale,
+superseded by many hours of subsequent LANE-A work (RE-227/GT-228, M2 provisioning trial, XYZ measured).
