@@ -1,6 +1,6 @@
 DERIVED FILE - DO NOT DECIDE FROM THIS - read GAME_TEST_QUEUE.md
 # QUEUE STATUS SNAPSHOT (generated -- do not edit; regenerate with tools_bridge/pf_queue_status.py)
-generated: 2026-09-04T20:19:56+07:00
+generated: 2026-09-04T20:41:06+07:00
 scanned: GAME_TEST_QUEUE.md, CLIENT_RE_QUEUE.md + 18 archive files
 tickets total: 275 (live 251 / archive-only 24) -- open in live: 96
 
@@ -79,7 +79,7 @@ tickets total: 275 (live 251 / archive-only 24) -- open in live: 96
 | GT-226 | BLOCKED | live:GAME_TEST_QUEUE.md:12740 | header |
 | GT-230 | OPEN | live:GAME_TEST_QUEUE.md:13045 | header |
 | GT-231 | BLOCKED | live:GAME_TEST_QUEUE.md:13163 | header |
-| GT-233 | READY | live:GAME_TEST_QUEUE.md:13269 | header |
+| GT-233 | BLOCKED | live:GAME_TEST_QUEUE.md:13269 | header |
 | GT-242 | OPEN | live:GAME_TEST_QUEUE.md:13289 | header |
 | GT-243 | PENDING | live:GAME_TEST_QUEUE.md:13357 | header |
 | GT-245 | BLOCKED | live:GAME_TEST_QUEUE.md:13616 | header |
