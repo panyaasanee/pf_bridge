@@ -16,7 +16,7 @@ git merge-base --is-ancestor 5efb55d origin/main   ->  YES (ancestor ของ m
 ## รอบนี้ไม่ใช่การทำซ้ำเทสของ chief — ช่องที่ยังเปิดคือ "ไบต์จริง × dispatcher จริง"
 - เทสของ LANE-A เดิม: ไบต์จริงห้าเฟรม R307 ✅ แต่หยุดที่ `console_line()` ไม่มี dispatcher
 - เทสของ chief R333: dispatcher จริง ✅ แต่ payload ประกอบมือสามไบต์ `0F <id> 00`
-- **รอบนี้**: `FRAME_114` ของจริง 69 ไบต์ ผ่าน `make_state_class` + `state.dispatch` ทั้งเส้น
+- **รอบนี้**: `FRAME_114` ของจริง ~~69 ไบต์~~ **60 ไบต์** (เฟรมบนสาย 69 · จดหมายยกมา 60 ก่อนถูกตัด · แก้รอบ `azhl15b`) ผ่าน `make_state_class` + `state.dispatch` ทั้งเส้น
 
 **ข้อเท็จจริงที่วัดได้รอบนี้ และเป็นเหตุผลว่าทำไมความต่างนั้นสำคัญ**: เฟรมจริงมี `vital_count = 2`
 และ `parse_outer` ส่ง `nested_payload` ยาว **40 ไบต์** ให้ hook ทั้งที่ trigger vital ยาว **20 ไบต์**
@@ -30,7 +30,7 @@ git merge-base --is-ancestor 5efb55d origin/main   ->  YES (ancestor ของ m
 - 🔴 **ตัวกัน ISLAND ปลอม**: เฟรมที่ trigger vital ไม่มี `0x0F` เลย แต่ vital ตัวหลังถือ `0F 99 00`
   → ต้องได้ `UNPARSED` + hex · ห้ามมีคำว่า ISLAND · **มิวแทนต์ยืนยันแล้ว**: เติม `0x12: 2` เข้า `_TAG_WIDTHS`
   → เทสข้อนี้แดงตัวเดียว (1 failed / 31 passed) แล้วคืนซอร์ส `git diff src/` ว่าง
-- ห้าเฟรม R307 ยิงต่อกันในเซสชันเดียว → ห้าบรรทัด ห้า id ถูกชื่อครบ · `actions == []` ทุกครั้ง · `rx_frames +5`
+- ~~ห้าเฟรม R307~~ **เฟรมจับจริงหนึ่งเฟรม × ห้า id** (แก้รอบ `azhl15b`) ยิงต่อกันในเซสชันเดียว → ห้าบรรทัด ห้า id ถูกชื่อครบ · `actions == []` ทุกครั้ง · `rx_frames +5`
 - บรรทัดที่ผู้เทสต้องคัด ปลอดภัยทั้ง `ascii` และ `cp874`
 
 `pytest tests/test_lane_a_island_trigger_log.py` = 32 passed, 356 subtests · ชุดเต็มรันบนคอมมิตสุดท้าย
