@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ epkucn/R344 2026-09-04T23:04+07:00: ข้อ 1 ทำแล้ว: GT-233 หัวใบ BLOCKED -> READY (ตัวบล็อก #760 + #763 บน main)
