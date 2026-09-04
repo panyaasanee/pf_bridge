@@ -118,7 +118,11 @@
 
 ## 8. สถานะจบรอบ
 - push ครบทั้งสองรีโป
-- `pirate-force-server` PR #**762** — **เปิดแล้ว รอ gate** (ใส่ `PF-AUTOMERGE: v4` ตั้งแต่เปิด)
+- `pirate-force-server` PR #**762** — **เปิดแล้ว รอ gate** (ใส่ `PF-AUTOMERGE: v4` ตั้งแต่เปิด · GET ยืนยัน marker แล้ว)
+  gate ตื่นเองจาก event เปิด PR (2 run เริ่ม 20:31/20:32 +07) **ไม่ต้อง push "wake gate"**
+- 🔴 **`GATE_UNVERIFIED #762`** (`PANYA-DECISION 1158` §22): รอครบ 10 นาทีแล้วยัง `in_progress` ทั้งสอง run
+  **รอบถัดไปของสาย B เปิดด้วยการตรวจ PR นี้ก่อน** · คาดว่าแดงที่ `test_npc_interaction_wire.py` ซึ่งแดงบน main อยู่แล้ว (ข้อ 7)
+  ถ้าแดงที่อื่น = ของรอบนี้ ต้องแก้
 - `pf_bridge` claim PR #1192 — เติม marker แล้ว = ปลดล็อก
 - 🔴 `ADVERSARY_PENDING #**762**` — ตัวแก้ของ adversary ครั้งที่ 2 ยังไม่ผ่าน adversary (เพดาน 2 ครั้ง/รอบ)
   **รอบถัดไปของสาย B หยิบเป็นงานแรกก่อน claim**
