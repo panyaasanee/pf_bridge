@@ -1,6 +1,6 @@
 DERIVED FILE - DO NOT DECIDE FROM THIS - read GAME_TEST_QUEUE.md
 # QUEUE STATUS SNAPSHOT (generated -- do not edit; regenerate with tools_bridge/pf_queue_status.py)
-generated: 2026-09-04T20:41:06+07:00
+generated: 2026-09-04T20:57:08+07:00
 scanned: GAME_TEST_QUEUE.md, CLIENT_RE_QUEUE.md + 18 archive files
 tickets total: 275 (live 251 / archive-only 24) -- open in live: 96
 
@@ -80,9 +80,9 @@ tickets total: 275 (live 251 / archive-only 24) -- open in live: 96
 | GT-230 | OPEN | live:GAME_TEST_QUEUE.md:13045 | header |
 | GT-231 | BLOCKED | live:GAME_TEST_QUEUE.md:13163 | header |
 | GT-233 | BLOCKED | live:GAME_TEST_QUEUE.md:13269 | header |
-| GT-242 | OPEN | live:GAME_TEST_QUEUE.md:13289 | header |
-| GT-243 | PENDING | live:GAME_TEST_QUEUE.md:13357 | header |
-| GT-245 | BLOCKED | live:GAME_TEST_QUEUE.md:13616 | header |
+| GT-242 | OPEN | live:GAME_TEST_QUEUE.md:13298 | header |
+| GT-243 | PENDING | live:GAME_TEST_QUEUE.md:13366 | header |
+| GT-245 | BLOCKED | live:GAME_TEST_QUEUE.md:13625 | header |
 | RE-104 | OPEN | live:CLIENT_RE_QUEUE.md:472 | header |
 | RE-107 | UNKNOWN | live:GAME_TEST_QUEUE.md:6251 | ? |
 | RE-122 | UNKNOWN | live:CLIENT_RE_QUEUE.md:1662 | ? |
@@ -211,8 +211,8 @@ GT-213: index=BLOCKED vs body=READY -- อ่านทั้งสองที�
 | GT-216 | PASS | live:GAME_TEST_QUEUE.md:11839 |
 | GT-219 | PASS | live:GAME_TEST_QUEUE.md:12176 |
 | GT-228 | PASS | live:GAME_TEST_QUEUE.md:12891 |
-| GT-244 | CLOSED | live:GAME_TEST_QUEUE.md:13459 |
-| GT-246 | ANSWERED | live:GAME_TEST_QUEUE.md:13628 |
+| GT-244 | CLOSED | live:GAME_TEST_QUEUE.md:13468 |
+| GT-246 | ANSWERED | live:GAME_TEST_QUEUE.md:13637 |
 | RE-056 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md:468 |
 | RE-057 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md:589 |
 | RE-058 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md:728 |
