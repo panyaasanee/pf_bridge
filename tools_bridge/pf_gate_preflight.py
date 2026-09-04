@@ -399,6 +399,106 @@ def check_pr_body(body_path, stage):
     return None
 
 
+# How many [mainmerge] verdicts the self-test must actually compare.  Pinned
+# beside the case list, not derived from it, for the R328 D3 reason: a count
+# derived from the thing it grades cannot fail when that thing shrinks.
+MAINMERGE_SELF_TEST_CASES = 4
+
+
+def _mainmerge_self_test_cases(tmp):
+    """Drive check_base_is_ancestor() against real throwaway git repos.
+
+    COO-DECISION 20260904_0643 item 3, answering LANE-B's own ask
+    20260904_0439: the tool that decides `[mainmerge]` had no test, and
+    "a gate tool with no test is what killed #694".  The hand measurement
+    in the 0439 letter proved the two verdicts once, by hand, on one
+    machine; it is not a test and nothing re-runs it.
+
+    Two verdicts have to be provable, and this builds a repository for
+    each rather than mocking git:
+      RED  - HEAD is behind the base (what server #694 and #697 pushed),
+             in both shapes: no file touched by both sides (the #697
+             shape, where nothing conflicts and the round still dies) and
+             one file touched by both.
+      PASS - the base has been merged into HEAD (the tree NOW.md `0053`
+             and `0149` require the full suite to have been run on).
+    The third return value, INCONCLUSIVE, is covered too: a base that
+    does not resolve must be None and must never be read as PASS.
+
+    Returns (failures, ran).
+    """
+    def git(repo, *args):
+        return subprocess.run(
+            ["git", "--no-optional-locks", "-C", str(repo)] + list(args),
+            capture_output=True, text=True, errors="replace")
+
+    def build(repo, overlap):
+        """A repo whose HEAD (branch `work`) is one commit behind `mainline`.
+
+        `overlap` decides whether both sides touched the same file, which
+        selects the two different RED explanations the check prints.
+        """
+        repo.mkdir(parents=True)
+        git(repo, "init", "-q", "-b", "mainline")
+        git(repo, "config", "user.email", "selftest@pf.local")
+        git(repo, "config", "user.name", "pf preflight self-test")
+        git(repo, "config", "commit.gpgsign", "false")
+        (repo / "shared.txt").write_text("base\n", encoding="ascii")
+        git(repo, "add", "-A")
+        git(repo, "commit", "-q", "-m", "base commit")
+        git(repo, "branch", "work")
+        # mainline moves on, exactly like main did under #697.
+        (repo / ("shared.txt" if overlap else "theirs.txt")).write_text(
+            "mainline moved\n", encoding="ascii")
+        git(repo, "add", "-A")
+        git(repo, "commit", "-q", "-m", "mainline moves ahead")
+        git(repo, "checkout", "-q", "work")
+        (repo / ("shared.txt" if overlap else "mine.txt")).write_text(
+            "my round\n", encoding="ascii")
+        git(repo, "add", "-A")
+        git(repo, "commit", "-q", "-m", "the round's own work")
+
+    probe = subprocess.run(["git", "--version"],
+                           capture_output=True, text=True, errors="replace")
+    if probe.returncode != 0:
+        print("  SELF-TEST RED: git is not runnable here, so the "
+              "[mainmerge] cases cannot run at all.")
+        return 1, 0
+
+    failures = 0
+    ran = 0
+    root = pathlib.Path(tmp) / "mainmerge"
+    checks = []
+    for overlap in (False, True):
+        repo = root / ("overlap" if overlap else "disjoint")
+        build(repo, overlap)
+        checks.append((
+            "HEAD behind mainline, %s"
+            % ("one file touched by both sides"
+               if overlap else "no file touched by both (the #697 shape)"),
+            repo, "mainline", False))
+    # The same repo, after the fix the RED message tells you to apply.
+    merged = root / "merged"
+    build(merged, False)
+    git(merged, "merge", "-q", "--no-edit", "mainline")
+    checks.append(
+        ("mainline merged into HEAD - the tree the suite must be run on",
+         merged, "mainline", True))
+    # A base that does not resolve is INCONCLUSIVE, never PASS.
+    checks.append(
+        ("base does not resolve (nothing fetched)",
+         merged, "origin/no-such-branch", None))
+
+    for label, repo, base, expected in checks:
+        got = check_base_is_ancestor(repo, base)
+        ran += 1
+        ok = got is expected
+        failures += 0 if ok else 1
+        print("  mainmerge %-62s expected=%-5s got=%-5s %s\n"
+              % (label[:62], expected, got, "ok" if ok else "SELF-TEST RED"))
+    return failures, ran
+
+
 def _self_test():
     """Prove the guard on this clone, with no PR and no network.
 
@@ -476,15 +576,21 @@ def _self_test():
         failures += 0 if ok else 1
         print("  case %d %-58s expected=None  got=%-5s %s"
               % (ran, "undecodable bytes", got, "ok" if ok else "SELF-TEST RED"))
+        mm_failures, mm_ran = _mainmerge_self_test_cases(tmp)
+        failures += mm_failures
+        ran += mm_ran
     if failures:
         print("SELF-TEST RED: %d of %d case(s) wrong." % (failures, ran))
         return 1
-    if ran != len(cases) + 2:
+    if ran != len(cases) + 2 + MAINMERGE_SELF_TEST_CASES:
         # pf-adversary R328 D3: the old green line was the string "9 cases",
         # so an empty case list still printed it.  A token that fires on "no
-        # failures were recorded" is satisfied by running nothing.
+        # failures were recorded" is satisfied by running nothing.  The
+        # [mainmerge] block is counted the same way and for the same reason:
+        # if git disappears, or a case is dropped, the arithmetic goes red
+        # instead of the report going quietly shorter.
         print("SELF-TEST RED: expected %d cases, ran %d."
-              % (len(cases) + 2, ran))
+              % (len(cases) + 2 + MAINMERGE_SELF_TEST_CASES, ran))
         return 1
     print("SELF-TEST PASS: %d cases, %d compared." % (ran, ran))
     return 0
