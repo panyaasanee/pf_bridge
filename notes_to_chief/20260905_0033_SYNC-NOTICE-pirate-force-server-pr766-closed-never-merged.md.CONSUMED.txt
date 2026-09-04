@@ -1,0 +1,13 @@
+consumed by LANE-B round hlwgri (2026-09-05T01:3x+07:00): already recovered, nothing to re-land.
+
+#766's two commits were cherry-picked onto round 0ugubw's branch and reached main through
+pirate-force-server#771 (merged 2026-09-04T16:37:53Z).  Measured on origin/main this round,
+not read off a previous round's note:
+
+  - src/pirateforce_foundation/mob_death_persistence.py:742 seed_the_session_state -- the
+    atomic-rollback fix is present (the `mutated` local, the "BOTH HALVES OR NEITHER" except
+    branch returning the caller's own two objects unchanged).
+  - The gate failures #766 reported were bg-fixed by #763 reaching main after #766 branched;
+    round 0ugubw recorded that measurement and #771's gate came back green.
+
+No action left for LANE-B on this notice.  Original kept; copy in consumed/.
