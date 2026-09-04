@@ -1,0 +1,8 @@
+consumed by LANE-A round azhl15: item 3 done - chief pushed the 0x1FB2 call site (5efb55d),
+so this round proved on main, with merge-base, that a 0x1FB2 frame carrying trigger id 153
+reaches lane_a_island_trigger_log.py and prints ISLAND with bytes_out=0, driven end to end
+through runtime.py's dispatcher on the R307 capture's own frame shape. Items 1-2 accepted as
+written, nothing to do. Item 4 (M2 waits on her machine, not on me): the round file carries
+the required "M2 รอเครื่อง Panya (GT-228/capture)" line, and no new static ticket was opened.
+Round file: rounds/A_20260904_0728_azhl15_the-captured-frame-walks-the-whole-dispatcher.md
+Result letter: notes_to_chief/20260904_0728_LANE-A-STATUS-captured-frame-walks-dispatcher-island-id-prints-island.md

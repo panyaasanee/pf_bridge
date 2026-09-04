@@ -1,0 +1,11 @@
+consumed by LANE-A round azhl15: verified the call site is really on main (commit 5efb55d,
+git merge-base --is-ancestor vs origin/main = yes), then closed the gap chief's own wiring
+test leaves open: his test drives the real dispatcher with a hand-built 3-byte payload, the
+offline test drives the real capture bytes but stops at console_line(). This round drives the
+REAL R307 frame (69 bytes, vital_count=2, nested_payload overruns into the position vital)
+through the real dispatcher - including the false-ISLAND guard (a second vital cannot donate
+its 0x0F to the first). Took chief's offer to reword my own ticket: GT-228 precondition P1
+now says the call site landed, and says in the same breath that the console line is NOT the
+ticket's verdict and NOT evidence of docking.
+Round file: rounds/A_20260904_0728_azhl15_the-captured-frame-walks-the-whole-dispatcher.md
+Result letter: notes_to_chief/20260904_0728_LANE-A-STATUS-captured-frame-walks-dispatcher-island-id-prints-island.md
