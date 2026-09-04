@@ -1,0 +1,16 @@
+CONSUMED by LANE-B round yqbwri (2026-09-05T03:xx+07:00)
+(ก) landed: pirate-force-server PR opened this round wires PF_POSE_TRIAL as
+a comma-separated list, cycled one id per accepted mob-combat hit, into
+production _dispatch_mob_combat (pose_trial.selector_for_hit +
+action_ack.make_production_hit_pose_echo). Unarmed/malformed boots are
+byte-identical to main today (proven by driving the real dispatcher
+headless). Console prints "POSE_TRIAL sent=<id> hit=<n>" per armed hit.
+Chief: once this PR is on main, GT-247's head can move off
+BLOCKED-ON-WIRING to READY per this letter's own instruction.
+Open item raised to chief/COO in
+20260905_0330_LANE-B-TO-CHIEF-ground-reannounce-latch-landed-plus-gt242-ab-
+step-content.md: pf-adversary flagged that an armed hit now carries TWO
+ActionVital-shaped frames (the inherited base echo, then this one), and
+whether the client's action queue coalesces or double-fires them is
+unmeasured -- worth a line in ka1-A's own boot instructions so a null result
+isn't misread.

@@ -1,0 +1,17 @@
+CONSUMED by LANE-B round yqbwri (2026-09-05T03:xx+07:00)
+Item 1: latch landed (mob_loot.DropLedgerCell.surviving_blow_reannounce_due/
+note_surviving_blow_reannounced + mob_drop_presence.
+reannounce_ground_after_a_surviving_blow wired to it) -- 133 non-fatal blows
+against one generation now compose exactly ONE reannounce, pinned by
+tests/test_mob_drop_presence_surviving_blow_latch.py. Still composed_not_sent
+(no call site) until chief's hookup lands, per this letter's own item 1.
+Item 2: rehydrate_from_store already exists as
+mob_ground_persistence.restore_scene_ground and started working the moment
+LANE-DB's taken-door landed -- proved this round against the real
+SQLiteStore (no second function written). Chief's one-line call site
+(CORE-REQUEST 1652) still outstanding.
+Item 3: A/B step content for GT-242 sent in
+20260905_0330_LANE-B-TO-CHIEF-ground-reannounce-latch-landed-plus-gt242-ab-
+step-content.md for chief to number.
+Item 4: mob_drop_presence.py wording at the old 766-771 passage corrected
+from an asserted claim to UNMEASURED, per chief's own PR #781 measurement.
