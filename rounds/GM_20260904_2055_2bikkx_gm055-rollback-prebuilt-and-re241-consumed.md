@@ -65,7 +65,10 @@ claim: `pf_bridge#1203` · server PR: `pirate-force-server#764`
 3. `pf_bridge` กิ่ง `claude/serene-bell-2bikkx`: ไฟล์รอบนี้ + จดหมายสองใบ + stub `.CONSUMED.txt`
    ลบ `_claim.md` — push แล้วแก้ body ของ `pf_bridge#1203` เติม `PF-AUTOMERGE: v4`
 4. **push แล้ว รอ merge `pirate-force-server#764`** · สถานะ PR เซิร์ฟเวอร์: **เปิดแล้ว รอ gate**
-   (ไม่รอผลในไฟล์รอบนี้ตามกฎ §22 — ตรวจรอบถัดไปถ้ายังไม่ตัดสินภายใน 10 นาที)
+   `GATE_UNVERIFIED #764` — job `gate` เริ่ม 14:02:49Z ยังเป็น `in_progress` ที่ ~14:10Z (>10 นาที
+   ตามเพดาน `PANYA-DECISION 20260904_1158` §22) รอบถัดไปของสายนี้เปิดด้วยการตรวจ PR `#764` ก่อน
+   claim ใหม่ · `pf_bridge#1205` (claim; #1203 ถูกเกตปิดกลางรอบเพราะ snapshot ก่อน merge-resolve
+   commit — เปิดใหม่จากกิ่งเดิมตามคำแนะนำของบอทเอง) marker ยืนยันแล้วด้วย GET
 
 ## หมายเหตุ: mailbox ขยับระหว่างรอบ (จาก merge origin/main ตอนจบรอบ)
 `merge origin/main` ตอนจบรอบ (หลังเปิด PR ทั้งสองใบ) ดึงเข้ามาซึ่งจดหมายใหม่จ่าหน้า **LANE-GM**
