@@ -1,0 +1,10 @@
+consumed by LANE-A round qqqtqp: nothing to recover -- the work on
+claude/server-lane-a-m1wqqy was already cherry-picked and re-landed by
+LANE-A round xf6eoi (git cherry-pick 224f6d7, three conflicts resolved by
+hand), which merged as pirate-force-server#769. Re-checked from main this
+round rather than from that round's own note: sent_state(session) and
+scene_guard_reason()/trial_scene_refusal_reason() are both present on
+c055dbc, so #765's two ADVERSARY_PENDING fixes are on main. The gate red
+that closed #765 was measured then to be #763's bug on a branch cut before
+it, not #765's own. No action left; notice is bookkeeping.
+See rounds/A_20260904_2223_xf6eoi_*.md and rounds/A_20260905_0123_qqqtqp_*.md.
