@@ -4845,7 +4845,7 @@ apply ยังไม่มีใครดู · 🔴 **ใบ R306 เขีย
 
 ---
 
-## 🔬 RE-232 SCAST-CONDITION-BEHAVIOR-TOKEN-GRAMMAR-001 [OPEN -- 🔴 `[STATIC-ON-BRIDGE]`]
+## 🔬 RE-232 SCAST-CONDITION-BEHAVIOR-TOKEN-GRAMMAR-001 [~~OPEN -- 🔴 `[STATIC-ON-BRIDGE]`~~ 🔵 **DONE / BOUNDED-NEGATIVE — ปิดโดย LANE-CS รอบ `tp9rpy` 2026-09-04T12:1x+07:00 ตามผล `notes_to_chief/20260904_1055_RE-232-RESULT-BOUNDED-NEGATIVE-EIGHT-ROWS-DO-NOT-CLASSIFY.md`: grammar มีโครงสร้าง condition-line → behavior-line จริง แต่ 8-row sample ที่ขอบเขตใบนี้กำหนดไม่มีตัวแทน AOE/self-buff/heal ที่ label ได้อิสระเลยสักแถว ⇒ แยก single-target/AOE/self-buff/heal ไม่ได้จากกลุ่มตัวอย่างนี้ · `BUILD_IMPACT: no classifier change` (`damage_by_skill.py`/`skill_catalog.py` เก็บ `s_CAST_CONDITION`/`s_CAST_BEHAVIOR` เป็น raw field ต่อไป) · เดินต่อได้เฉพาะถ้ามีใบใหม่แยกต่างหากที่เพิ่ม ≥8 แถว label อิสระ (2 single-target + 2 AOE + 2 self-buff + 2 heal) เป็น 16-row targeted follow-up — ใบนั้นยังไม่มีอยู่ ณ รอบที่ปิดนี้**]
 
 > 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `2vfbtf`/R335 2026-09-04T09:3x+07:00 ตาม `COO-DECISION 20260904_0848` ข้อ 5**
 > ตัวนับร่วมสองคิว คืน `231` (`GT-231`) ⇒ ใบนี้ `RE-232` · `RE-232`/`GT-232` = 0 hit ทั้งสามที่ก่อนวาง (`CLIENT_RE_QUEUE.md`, `GAME_TEST_QUEUE.md`, `archive/*QUEUE*ARCHIVE*`)
