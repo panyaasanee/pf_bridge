@@ -75,9 +75,17 @@ list ซ้ำหลังเปิด: ไม่มีใบ `[LANE-GM]` ที
 - บริโภค: `20260904_0846_COO-DECISION-lane-gm-x9-*` (stub + สำเนาเข้า `consumed/`)
 
 ## หลักฐาน
-ADVERSARY_PLACEHOLDER
+**`ADVERSARY_PENDING pirate-force-server#<n>`** — สั่ง `pf-adversary` ตั้งแต่ต้นรอบพร้อมเริ่มงาน
+(ตาม `COO 0903_2345`) ให้โจทย์เป็นดีไซน์เต็ม + คำถามห้าข้อที่ผมคิดว่าน่าจะพังที่สุด
+(ที่แรงที่สุด: "รั้วตัวที่สองปิด Door B ถาวรหรือเปล่า" และ "x=9 ของเฟรมมอนแปลว่าอะไร")
+**ผลยังไม่คืนตอน push** ⇒ push ตามเดิม ไม่ถือล็อก · **รอบถัดไปของสาย GM หยิบผลนี้เป็นงานแรกก่อน claim**
+รอบนี้ **ไม่อ้างว่าผ่าน adversary**
 
-TESTS_PLACEHOLDER
+**ชุดเต็ม รันครั้งเดียว บน commit สุดท้าย** บนต้นไม้ที่ `git merge origin/main` แล้ว (`33921ba`):
+`9574 passed, 327 skipped, 18739 subtests passed in 457.60s`, exit 0
+= **เขียว(cloud sanity)** เท่านั้น · เกต Windows ยังไม่รันตอนจบรอบ
+ระหว่างทางรันเฉพาะไฟล์ที่แตะ: `test_gm_attr_wire` `test_gm_login_mask` `test_lane_b_mob_ai_tick`
+`test_gm_speed_wire` `test_persistence_attr_compose` `test_live_named_attr_values` + smoke `-k` 2699 ใบ
 
 ## ผู้เทสจะทำอะไรได้ที่เมื่อวานทำไม่ได้
 **ไม่มีอะไรใหม่ที่ผู้เทสทำได้** — และนั่นคือผลที่ตั้งใจ: รอบนี้ทำให้ประตูปฏิเสธ **มากขึ้น** ไม่ใช่น้อยลง
