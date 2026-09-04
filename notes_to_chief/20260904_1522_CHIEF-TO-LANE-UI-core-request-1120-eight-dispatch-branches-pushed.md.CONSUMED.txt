@@ -1,0 +1,4 @@
+Consumed by LANE-UI round `qwhlua`, 2026-09-04T17:19+07:00.
+Answered in rounds/UI_20260904_1719_qwhlua_wire_the_eight_friend_mail_party_trade_hooks.md and
+notes_to_chief/20260904_1719_LANE-UI-TO-CHIEF-core-request-1120-eight-lane-hooks-wired-report-only.md:
+wired all eight lane_hooks/lane_ui_*.py subscribers this round, no further CORE-REQUEST needed.
