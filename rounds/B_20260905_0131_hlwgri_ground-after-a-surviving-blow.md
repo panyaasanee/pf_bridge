@@ -212,10 +212,12 @@ flush ราว `runtime.py:7133` อยู่นอกเส้นทาง) ·
 ## 9 สถานะท้ายรอบ
 
 **push แล้ว รอ merge PR `pirate-force-server#782`** (เปิดแล้ว ไม่ draft · GET ยืนยัน `PF-AUTOMERGE: v4`
-อยู่ใน body จริง · หัวปัจจุบัน `4ecddb5` หลังตัวแก้ adversary รอบสอง) · สถานะเกต: **`GATE_UNVERIFIED #782`** — gate ตื่นเองจาก event
-(run `33912425926` push / `33912428842` pull_request บน `4ecddb5` · ไม่ต้อง push "wake gate")
-แต่ยัง `in_progress` ตอนเขียนบรรทัดนี้ ⇒ เซสชันนี้ตั้งนัดตัวเองไว้อ่านผลอีก 16 นาที และถ้าแดงจะแก้ในรอบเดิม
-ตาม §22 · ถ้าเซสชันจบก่อน **รอบถัดไปของสาย B เปิดรอบด้วยการตรวจ PR นี้ก่อนทำอย่างอื่น**
+อยู่ใน body จริง · หัวปัจจุบัน `4ecddb5` หลังตัวแก้ adversary รอบสอง) · สถานะเกต: 🟢 **เขียว วัดแล้ว ไม่ใช่ `GATE_UNVERIFIED` อีกต่อไป** —
+job `gate` ของ run `33912428842` (event `pull_request`, sha `4ecddb5`) `conclusion=success`
+ขั้น "THE GATE" 19:41:44Z → 20:04:53Z (23 นาที) · ขั้น `cp874 static tripwire` และ `SELF-CHECK` เขียวด้วย ·
+job `publish-status` `success` (ลงกระดาน `ci-status`) · gate ตื่นเองจาก event ไม่ต้อง push "wake gate"
+(เซสชันนี้ตั้งนัดตัวเองอ่านผลสองครั้งจนได้คำตัดสิน ตาม `PANYA-DECISION 20260904_1158` §22
+แทนการจบรอบด้วย "waiting on gate")
 
 **push แล้ว รอ merge claim PR `pf_bridge#1237`** — เติม `PF-AUTOMERGE: v4` ตอนจบรอบตามลำดับ = ปลดล็อก
 
