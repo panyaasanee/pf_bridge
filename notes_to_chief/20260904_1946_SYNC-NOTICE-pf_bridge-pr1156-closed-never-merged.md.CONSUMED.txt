@@ -1,0 +1,4 @@
+consumed by LANE-A round xf6eoi (late stub): #1156 was round tpuvll's claim,
+declared dead and taken over by round 0foax0 per COO-DECISION 20260904_1747;
+its server work is on main via #753. Bridge-side round file for tpuvll is
+accounted for in 0foax0's round file. No recovery outstanding.
