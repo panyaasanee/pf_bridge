@@ -67,11 +67,28 @@ registry ไม่ได้เปิด `PF_SERIALIZER_FIELDS.tsv` ดู — �
 จดหมายใหม่แทน (ธรรมเนียมเดียวกับที่ `RE-235`'s round แก้เลขบรรทัดของจดหมายเก่าโดยไม่ย้อนแก้ไฟล์เดิม)
 
 ## ADVERSARY
-สั่งระหว่างรอบ (ก่อนสรุปงาน) ให้ตรวจข้อเท็จจริง/เลขในจดหมาย `0456` ข้างบน (opcode, field count, grep results,
-`NOT_OBSERVED` claim, `FUNCTIONAL_COVERAGE.json` 0-hit claim) — **🔴 ยังไม่คืนผลตอนเขียนไฟล์รอบนี้และตอน push**
-⇒ `ADVERSARY_PENDING pf_bridge#1260` (ใบนี้ไม่มี PR เซิร์ฟเวอร์รอบนี้ เพราะไม่มีโค้ดแตะฝั่ง server — ผลคืนแล้ว
-เจอข้อบกพร่องจริง = แก้จดหมาย `0456` ในรอบถัดไปก่อนคิวอื่น ตามกติกา `0903_2345`/`AGENTS.md` §7) · **ห้ามเขียนว่า
-"ผ่าน adversary" ก่อนผลคืน** — ยังไม่เขียน
+สั่งระหว่างรอบ (ก่อนสรุปงาน) ให้ตรวจข้อเท็จจริง/เลขในจดหมาย `0456` ข้างบน — **ผลคืนแล้วก่อนจบรอบ (ไม่ต้องยก
+`ADVERSARY_PENDING` ไปรอบหน้า)**: เจอข้อบกพร่องจริง 2 จุด + จุดเล็กอีก 1 จุด — **แก้ในคอมมิตเดียวกันก่อน push
+สุดท้าย**:
+1. **จริง/สูง**: จดหมายเดิมเขียนว่า `docs/FUNCTIONAL_COVERAGE.json` "0 hit ทั้งคำว่า stall และ guild storage" —
+   ผิดครึ่งหนึ่ง: capability `use_drop_sell` มี `notes` พูดถึง `StallOperateVital` พร้อมสมมติฐานว่า `+0x20`
+   (`u32` tag `0x14`) = **ราคา** (อ้างอิงรายงานเก่า chief round 75) — grep ชื่อ key/id พลาดเพราะข้อมูลอยู่ใน
+   สตริง `notes` ไม่ใช่ key ระดับบน ⇒ **แก้จดหมาย `0456`**: เพิ่มสมมติฐานนี้เป็นฐานตั้งต้นของ trial แรกในหัวข้อ
+   "ขอ RE" + แก้ nonclaim② ที่เคยเขียนเกินจริงว่า "ไม่ยืนยันความหมาย field ใดเลยสักตัว"
+2. **จริง/กลาง**: `GuildStorageOpenVital`(`0x5CAD`)/`GuildStorageResultVital`(`0x70D0`) ชื่อเปล่า (ไม่มี prefix)
+   ที่จดหมายเดิมนับรวมอยู่ใน bucket "12 คลาสที่เหลือ 0/4-136/293" — จริง ๆ **ไม่มีแถวในทั้ง
+   `PF_SERIALIZER_FIELDS.tsv` และ `PF_FIELD_VALIDATION.tsv` เลยแม้แต่แถวเดียว** (verify ซ้ำด้วยมือรอบนี้:
+   `grep -c "^GuildStorageOpenVital\b"` ทั้งสองไฟล์ = 0 ทั้งคู่ — hit ที่เจอตอน grep ไม่ anchor คือคนละคลาส
+   `GCSS_GuildStorageOpenVital`/`GCGSSS_GuildStorageResultVital`) — สถานะแย่กว่า "0/4" คือ "ไม่ถูก track เลย" ⇒
+   **แก้จดหมาย**: แยกสองคลาสนี้ออกจาก bucket เป็นแถวของตัวเอง (bucket เหลือ 10 คลาสไม่ใช่ 12)
+3. **เล็ก**: จดหมายเดิมเขียนว่า `grep -in "stall\b"` "กัน install/stalled ออก" — `\b` ไม่ได้กัน `install` จริง
+   (`install` มี `stall` เป็น substring ที่จบพอดีท้ายคำ) ผลลัพธ์ยืนตามเดิมเพราะกรองด้วยมือ ไม่ใช่เพราะ `\b` ⇒ แก้
+   ถ้อยคำให้ตรง
+
+verify ทั้งสามจุดซ้ำด้วยมือเองก่อนแก้ (ไม่เชื่อผลตัวเครื่องมือเปล่า ๆ): เปิด `docs/FUNCTIONAL_COVERAGE.json`
+ด้วย `python3 -c "import json; ..."` เดินทั้ง `notes` field จริง (ไม่ใช่แค่ key) ยืนยันพบ `StallOperateVital`/
+ราคา · `grep -c "^GuildStorageOpenVital\b"`/`"^GuildStorageResultVital\b"` สองไฟล์ = 0 ทั้งคู่ยืนยันแล้ว —
+**ห้ามเขียนว่า "ผ่าน adversary" ก่อนผลคืน** ข้อนี้ไม่ผิดเพราะผลคืนแล้วจริงก่อนจบรอบ ไม่ใช่การเขียนล่วงหน้า
 
 ## เช็คที่ทำเองก่อน push (นอกเหนือ adversary)
 - ไม่มีไฟล์โค้ด/เทสถูกแตะรอบนี้ (จดหมาย + ไฟล์รอบเท่านั้น) ⇒ ไม่ต้องรัน preflight ฝั่ง `pirate-force-server`/
@@ -82,29 +99,30 @@ registry ไม่ได้เปิด `PF_SERIALIZER_FIELDS.tsv` ดู — �
   รอบนี้)
 
 ## ส่งอะไร (SHA/PR)
-- `pf_bridge`: PR `#1260` หัว `[LANE-UI] round npixtd: claim` กิ่ง `claude/happy-davinci-npixtd` จาก
-  `origin/main` — ไฟล์ใหม่: จดหมาย `notes_to_chief/20260905_0456_LANE-UI-RE-TICKET-stall-and-guild-storage-
-  opcodes-known-fields-partial.md` + ไฟล์รอบนี้ (แทน `_claim.md`) — จะ PATCH body ให้มี `PF-AUTOMERGE: v4` ตอน
-  จบรอบ
+- `pf_bridge`: PR `#1260` หัว `[LANE-UI] round npixtd: stall + guild storage RE ticket request` กิ่ง
+  `claude/happy-davinci-npixtd` จาก `origin/main` — ไฟล์ใหม่: จดหมาย `notes_to_chief/20260905_0456_LANE-UI-
+  RE-TICKET-stall-and-guild-storage-opcodes-known-fields-partial.md` (แก้แล้วตามผล adversary — ดูหัวข้อ
+  ADVERSARY ข้างบน) + ไฟล์รอบนี้ (แทน `_claim.md`) — PATCH body มี `PF-AUTOMERGE: v4` แล้ว = ปลดล็อก
 - `pirate-force-server`: **ไม่มี PR รอบนี้** — ไม่มีโค้ด/เทสที่แตะฝั่งนี้ (จดหมาย RE-ticket ล้วน ตามธรรมเนียมรอบ
   `llcmcr` ที่เปิด `RE-235` ก็ไม่มี PR เซิร์ฟเวอร์เช่นกัน)
 - ไม่มีเลข GT/RE ใหม่ในคิวจริงรอบนี้ (จดหมายขอเลขเท่านั้น ยังไม่ใช่ใบที่ chief ตั้งเลขให้)
 
 ## nonclaims
 ① ไม่เขียนเนื้อใบ RE ลง `CLIENT_RE_QUEUE.md` เอง — รอ chief ตั้งเลขก่อน (กันชนตัวนับเลขร่วมกับสายอื่น)
-② ไม่ยืนยันความหมาย field ใดของ stall/guild storage เลยสักตัว — ดูรายละเอียดเต็มในจดหมาย `0456`
+② ไม่ยืนยันความหมาย field ใดของ stall/guild storage ด้วยหลักฐาน attended จริง — จดหมาย `0456` (แก้แล้วตามผล
+adversary) มีสมมติฐานเดียวที่มีอยู่แล้ว (`StallOperateVital`'s `+0x20` = ราคา, chief round 75) แต่ยังไม่ยืนยัน
 ③ ไม่แก้หัวใบ `GT-253` ที่ค้างข้อมูลเก่า — ไม่ใช่เขตเขียนของสายนี้ (`GAME_TEST_QUEUE.md`) บันทึกซ้ำให้ chief เท่านั้น
 ④ ไม่ยืนยันว่า chief จะรับ CORE-REQUEST `0347` (fire trace_path observer) เมื่อไหร่ — แค่ตรวจว่ายังไม่รับ
 ⑤ ไม่มีไบต์ออกไปไคลเอนต์เครื่องไหนเลยรอบนี้ (จดหมาย+ไฟล์รอบล้วน ไม่มีโค้ด)
-⑥ ADVERSARY_PENDING รอบนี้ — ดูหัวข้อ ADVERSARY ข้างบน
+⑥ ไม่มี `ADVERSARY_PENDING` ค้างข้ามรอบนี้ — ผลคืนและแก้ครบก่อน push สุดท้ายแล้ว (ดูหัวข้อ ADVERSARY)
 
 ## งานสำรอง (พร้อมเริ่มได้ทันทีรอบถัดไปถ้างานหลักติด — ตาม `PANYA 1450` ข้อ 6)
-1. **หยิบผล `pf-adversary` เป็นงานแรกก่อนคิวอื่น** (`ADVERSARY_PENDING` ข้างบน) — แก้จดหมาย `0456` ถ้ามีข้อบกพร่อง
-   จริง (เลข/opcode/grep ผิด)
-2. เช็คว่า chief ตอบจดหมาย `0456` (ตั้งเลข RE ใหม่) แล้วหรือยัง — ถ้าตั้งแล้ว กรอกเนื้อใบเต็มลง
+1. เช็คว่า chief ตอบจดหมาย `0456` (ตั้งเลข RE ใหม่) แล้วหรือยัง — ถ้าตั้งแล้ว กรอกเนื้อใบเต็มลง
    `CLIENT_RE_QUEUE.md` ในรอบเดียวกัน (ตามธรรมเนียม `RE-235`/`RE-237`)
-3. เช็คผล attended `HYP-PF-040` (กิ่งทิ้ง `e678a37`) กลับมาหรือยัง — ถ้ากลับมา อ่านผลแล้วตัดสิน UI-A/UI-B ต่อ
+2. เช็คผล attended `HYP-PF-040` (กิ่งทิ้ง `e678a37`) กลับมาหรือยัง — ถ้ากลับมา อ่านผลแล้วตัดสิน UI-A/UI-B ต่อ
    (พลิกถาวรบน main ถ้าผลบวก / falsified ปิดถ้าลบ ตาม `COO-DECISION 20260904_2047`)
+3. เช็คว่า chief รับ CORE-REQUEST `0347` (fire trace_path observer, `runtime.py:7509`) แล้วหรือยัง — ถ้ารับแล้ว
+   ลบ `registered_but_not_fired` ออกจาก `lane_ui_tracepath_wire_log.py` ในรอบเดียวกัน
 
 ## รอบถัดไปทำอะไรต่อ (ถ้า COO/NOW.md ไม่สั่งเปลี่ยน)
 1. เช็คงานสำรองข้อ 1-3 ข้างบนตามลำดับ
