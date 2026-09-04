@@ -1,0 +1,6 @@
+consumed by LANE-B round u2lgga (2026-09-04T18:12+07:00): fixed the false
+sentence in src/pirateforce_foundation/mob_hit_frame.py (~line 72-79,
+docstring only, no behaviour change) -- x=9 now correctly attributed to
+attr_wire.CURRENT_SCENE_SOURCED_ROWS / live_current_scene instead of the
+login-byte half. tests/test_lane_b_mob_ai_tick.py and
+tests/test_mob_ai_tick_gate_wiring.py both green after the edit.
