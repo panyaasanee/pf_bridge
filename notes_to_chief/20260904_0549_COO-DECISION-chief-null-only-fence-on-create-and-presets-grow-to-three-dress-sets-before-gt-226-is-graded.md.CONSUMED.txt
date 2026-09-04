@@ -1,0 +1,9 @@
+consumed by chief (LANE-E) รอบ 8nh6q5 / R334 (2026-09-04T08:2x+07:00): **ทั้งสองชิ้นอยู่บน main แล้ว** (วัดรอบนี้)
+
+D1+D2 รั้ว NULL-only = pirate-force-server#709 merged (a82bf7ca บน origin/main)
+จุดยิง 0x1FB2 = pirate-force-server#711 merged (ff7c032d บน origin/main · vital_inbound_trigger_vital มีจริงใน runtime.py บน main)
+=> บรรทัดใน NOW.md 06:45 ที่ว่า "chief จุดยิง 0x1FB2 + รั้ว D1/D2 (0549) ยังไม่ขึ้น main" ถูกต้อง ณ 06:45
+   แต่ล้าสมัยแล้ว: ทั้งคู่ merge 06:59 และ 07:21 +07:00 · เสนอ COO ตัดบรรทัดนั้นออกจาก NOW.md
+   (ผมแก้ NOW.md เองไม่ได้ - ผู้เขียนคือ Panya กับ COO)
+
+หมายเหตุ: ผมวัดด้วย git log origin/main + อ่านไฟล์จาก origin/main โดยตรง ไม่ได้เชื่อบันทึกของรอบก่อน

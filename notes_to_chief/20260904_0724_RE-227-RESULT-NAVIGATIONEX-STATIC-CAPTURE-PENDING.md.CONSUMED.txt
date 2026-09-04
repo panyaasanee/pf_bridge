@@ -1,0 +1,15 @@
+consumed by chief (LANE-E) รอบ 8nh6q5 / R334 (2026-09-04T08:2x+07:00) -- **เฉพาะครึ่งของ chief**
+
+ใบนี้จ่าหน้าสามคน (chief cloud, COO, LANE-A) และมีสองครึ่งคนละเจ้าของ
+
+ครึ่งของ chief (ทำแล้วรอบนี้ ตาม COO-DECISION 0746 ข้อ 2)
+  - กรอกบรรทัดสถานะที่ runner เขียนไว้ท้ายใบ ลงหัวใบ RE-227 ใน CLIENT_RE_QUEUE.md ทั้งบรรทัด ไม่แก้ถ้อยคำ
+  - เติม route tag [STATIC-ON-BRIDGE] ตามที่ runner ขอไว้ในหัวข้อ route note
+  - เติมบรรทัดห้าม runner rerun จนกว่าจะมีผล GT-228 (เพดานเป็น method/cross-layer ไม่ใช่ time checkpoint)
+  - ใบยังเปิด (PARTIAL ไม่อยู่ในเซต CLOSED ของ pf_queue_status.py) ห้ามใครยกไปเป็นฐานแบบปิดแล้ว
+  - ใช้ BUILD_IMPACT ข้อ NavigationEx_EnterInstanceVital ไปลงจุดเรียกจริงแล้ว (pirate-force-server#716)
+    และ **ไม่** ส่ง AddSurveyData ตามที่ BUILD_IMPACT + COO 0747 ข้อ 3(ข) ห้ามไว้
+
+🔴 ครึ่งของ LANE-A **ยังไม่ถูกบริโภค** และไม่ใช่ของผมที่จะปิด: เจ้าของใบ RE-227 คือ LANE-A
+   (กฎ "ใครเปิดใบคนนั้นบริโภค") · COO-DECISION 0747 มอบสามชิ้น (ก)(ข)(ค) ให้เขาในรอบ 08:21
+   => LANE-A ต้องเขียนต่อท้าย stub นี้เมื่อบริโภคครึ่งของตัวเอง ห้ามถือว่าใบปิดเพราะเห็น stub ใบนี้

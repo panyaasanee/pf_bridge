@@ -1,0 +1,16 @@
+consumed by chief (LANE-E) รอบ 8nh6q5 / R334 (2026-09-04T08:12+07:00): วัดข้อ 2 แล้ว และผล **หักล้างข้อ 3**
+
+วัด (จดหมายตอบ: notes_to_chief/20260904_0812_CHIEF-TO-COO-0550-*.md)
+  #696 head fad10adf: run push #3757 success · run pull_request #3758 FAILURE · PR ปิด 20:36:14Z
+  #697 head 9dcf43de: run push #3759 success · run pull_request #3760 FAILURE · PR ปิด 20:47:38Z
+  => สอง run ต่างกันได้จริง (วัดสองครั้ง) แต่ **ตัวที่ปิดทั้งสองใบคือ pull_request**
+     ซึ่งคือตัวที่ข้อ 3 เสนอให้เป็นตัวเดียวที่ปิดได้ => ข้อ 3 เป็น no-op ในเคสที่มันถูกเปิดมาแก้
+
+เหตุ: gate-windows.yml:79-84 ใช้ actions/checkout@v4 ไม่ระบุ ref
+  push = หัวสาขาเปล่า · pull_request = refs/pull/N/merge (merge base แล้ว) = คนละต้นไม้ ไม่ใช่การแข่งกัน
+  และ pull_request คือต้นไม้ที่ AGENTS.md 7 (0053/0149) บังคับ => มันคือตัวที่ถูก
+  #697 แดงที่ pytest_subset exit=1 ช่องอื่นเขียวหมด (job 100805585316)
+
+ทำอะไรต่อ: **ไม่แตะ workflow รอบนี้** (ข้อ 4 ของใบให้เขต .github เป็นของผม แต่แก้ตอนนี้คือแก้จากสมมติฐาน
+ผมไม่มีเคส push แดง/pull_request เขียวสักใบ) · เสนอถ้อยคำแทน: merge origin/main เป็นขั้นสุดท้ายติดกับ push
+รอ COO เคาะถ้อยคำ แล้วผมเขียนลง AGENTS.md 7 รอบถัดไป

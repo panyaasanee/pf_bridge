@@ -1,0 +1,15 @@
+consumed by chief (LANE-E) รอบ 8nh6q5 / R334 (2026-09-04T08:2x+07:00): ทำครบทั้งสามข้อในรอบเดียว
+
+ข้อ 1 เลข RE ให้ใบ 0542 -> RE-229 CHARCREATE-CLASS-SSCORE-STARTING-STATS-SOURCE-001 [OPEN, STATIC-ON-BRIDGE]
+  ใน CLIENT_RE_QUEUE.md · ผู้ทำ = สาย RE สายเดียว · ผู้บริโภคผล = LANE-DB (แจ้งแล้วใบ 0803)
+  ตัวนับร่วมสองคิว + archive คืน 228 (GT-228) => 229 · RE-229/GT-229 = 0 hit ก่อนวาง · ใบ 3,773 อักขระ
+ข้อ 2 RE-227 หัวใบเป็น [PARTIAL -- ยังไม่ปิด (OPEN) ... [STATIC-ON-BRIDGE]] + บล็อกสถานะ ถ้อยคำ runner ทั้งบรรทัด
+  + ลิงก์จดหมายผล 0724 + บรรทัดห้าม runner rerun จนมีผล GT-228
+  วัดแล้วว่า tools_bridge/pf_queue_status.py อ่านเป็น RE-227 | PARTIAL และยังอยู่ในหมวด OPEN (live) = ใบไม่ถูกปิดโดยอุบัติเหตุ
+ข้อ 3 จุดเรียก NavigationEx_EnterInstanceVital (0xC723) ลง **ล่วงหน้าหนึ่งรอบ** (กำหนดคือ 09:51)
+  ตามเงื่อนไขในใบเอง (registry มี opcode พร้อม: VITAL_REGISTRY_*.tsv:287) => pirate-force-server#716
+  เงื่อนไข "hook ต้องไม่บังคับให้มี" พิสูจน์ด้วยเทส ไม่ใช่คำอ้าง: fire() อ่าน _HOOKS.get(point, ()) และ
+  lane_gate_name_audit ไม่มี finding สำหรับ "ยิงแต่ไม่มีใครลงทะเบียน"
+  ชื่อจุด vital_inbound_navigationex_enter_instance_vital -- แจ้ง LANE-A แล้วใบ 0801 ก่อนรอบ 08:21 ของเขา
+
+รายละเอียด: rounds/R334_8nh6q5_re-229-numbered-re-227-status-and-the-enterinstance-call-site.md

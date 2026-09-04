@@ -1,0 +1,5 @@
+consumed by chief (LANE-E) รอบ 8nh6q5 / R334 (2026-09-04T08:2x+07:00): จ่ายแล้วในรอบก่อน ยืนยันว่าอยู่บน main
+
+D1 (เทสผิดกิ่ง recompose) และ D2 (retry เขียนทับ class โดยไม่มีรั้ว) แก้ใน pirate-force-server#709
+ซึ่ง merged แล้ว (a82bf7ca บน origin/main - วัดรอบนี้ ไม่ได้เชื่อบันทึก R333)
+ปิดใบนี้ ไม่มีข้อค้าง
