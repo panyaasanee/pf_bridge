@@ -122,7 +122,20 @@
 - ไม่มีไฟล์เทสใหม่ในรอบนี้ (แก้ไฟล์เดิม) ⇒ ไม่ต้องซ้อม `skip_census`
 
 ## จบรอบ
-- `pirate-force-server`: push แล้ว เปิด PR (ไม่ draft · marker ตั้งแต่เปิด) — เลขและสถานะเติมด้านล่าง
+- `pirate-force-server`: **push แล้ว รอ merge PR `#780`** — เปิดแล้ว ไม่ draft · GET กลับมายืนยันว่า `PF-AUTOMERGE: v4`
+  อยู่ในหัว body จริง · สถานะตามจริง ณ เวลาเขียน: **"เปิดแล้ว รอ gate"** (ไม่ใช่ "เสร็จ" ไม่ใช่ "อยู่บน main")
 - `pf_bridge`: ไฟล์รอบ + จดหมายสองใบ + ใบเทส + stub `.CONSUMED.txt` ลงกิ่งเดียวกับ claim (`claude/eloquent-volta-qqqtqp`)
   ลบไฟล์ `_claim.md` บนกิ่ง push แล้วเติม `PF-AUTOMERGE: v4` ให้ `#1236` = ปลดล็อก
 - **ไม่รอเกต Windows ไม่รอ PR เซิร์ฟเวอร์ merge** ตามหัวข้อจบรอบ
+
+## ผลชุดเต็ม (commit สุดท้าย `c8280a6` = merge `origin/main` `2a71c0a` แล้ว)
+    10,353 passed · 327 skipped · 19,571 subtests passed · 0 failed · 444.26s
+🔴 **แดง 0 ใบ** — รวมถึง `test_every_symbol_exemption_is_still_earned` ของ chief ที่รอบก่อน ๆ แดงบน 3.11 ประจำ
+ตอนนี้เขียวบนล่ามตัวเดียวกัน ซึ่งเป็นการวัดเดียวกับที่ทำให้บล็อก 3.11-vs-3.14 ในไฟล์เทสของผมถูกขีดฆ่า (ข้อ F)
+
+## หนี้ที่ยกไปรอบหน้าโดยตั้งใจ (ไม่ใช่ `ADVERSARY_PENDING` — ไม่มีค้าง)
+1. **pf-adversary ข้อ H**: `_modules()` คัดไฟล์ด้วยชื่อ ไม่มีตัวปักขอบเขต — ทางที่ถูกคือชุด **ชื่อ** แบบ
+   `test_the_unscanned_subpackages_are_named_and_counted` ของ chief ไม่ใช่ `assertEqual(len(...), 9)`
+   ไม่อยู่บนนาฬิกา 03:21 จึงไม่ยัดลงรอบนี้
+2. **ตามผลของ chief**: ถ้าเขาแก้ lookup แล้ว `BLOCKED_ON_CHIEFS_LOOKUP` จะรายงานตัวเองว่าหมดอายุ = ลบรายการนั้น (แก้บรรทัดเดียว)
+3. **ตามผลของ `GT-233`**: เด้งไม่ติด ⇒ เปิดใบ RE (ง) ตาม `COO 0343` ข้อ 3 ทันที · PASS ⇒ ใบเกาะ 155 ที่วางไว้รอบนี้เดินต่อได้เลย
