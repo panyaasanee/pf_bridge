@@ -18,24 +18,37 @@ predicate ที่อ่านได้อยู่แล้ว (`live_scenes()
 
 รอบนี้จึงสร้าง `src/pirateforce_foundation/scene_door_walk.py` (production · ไม่มีแฟล็ก) ที่ **เรียกฟังก์ชันจริง**
 ทีละแถว: `mob_combat.strike` → `mob_death.ruling_for` + `mob_death.kill` → `mob_loot.roll_drops` +
-`DropLedgerCell.loot_a_kill` · ประตูเปิดเพราะโมดูลนี้เปิดมันจริง ไม่ใช่เพราะตารางบอกว่าน่าจะเปิด
+`DropLedgerCell.loot_a_kill` และ **`mob_ai_control.open_register`** ก่อน `strike` (ตามลำดับที่ dispatch จริงเรียก)
+ประตูเปิดเพราะโมดูลนี้เปิดมันจริง ไม่ใช่เพราะตารางบอกว่าน่าจะเปิด
 
 ## ผลที่วัดได้ (บรรทัดคอนโซลจริง `SCENE_DOORS`)
 ```
-SCENE_DOORS scene='Bg0002' rows=12 target=12 kill=12 drop=12 every_door=yes short=none
-SCENE_DOORS scene='Bg0003' rows=12 target=12 kill=12 drop=12 every_door=yes short=none
-SCENE_DOORS scene='Bg0015' rows=12 target=12 kill=11 drop=11 every_door=no  short=87/t924
-SCENE_DOORS scene='bg0001' rows=4  target=4  kill=4  drop=0  every_door=no  short=103/t916,105/t916,107/t916,109/t916
-SCENE_DOORS scene='bg0005' rows=6  target=6  kill=6  drop=6  every_door=yes short=none
-SCENE_DOORS summary live_scenes=5 every_door=Bg0002,Bg0003,bg0005
+SCENE_DOORS scene='Bg0002' rows=12 owner_refusal_list=8 ai=open target=12 kill=12 drop=12 every_door=yes short=none
+SCENE_DOORS scene='Bg0003' rows=12 owner_refusal_list=0 ai=open target=12 kill=12 drop=12 every_door=yes short=none
+SCENE_DOORS scene='Bg0015' rows=12 owner_refusal_list=0 ai=open target=12 kill=11 drop=11 every_door=no  short=87/t924
+SCENE_DOORS scene='bg0001' rows=4  owner_refusal_list=0 ai=open target=4  kill=4  drop=0  every_door=no  short=103/t916,...
+SCENE_DOORS scene='bg0005' rows=6  owner_refusal_list=0 ai=open target=6  kill=6  drop=6  every_door=yes short=none
+SCENE_DOORS summary live_scenes=5 owner_refusal_list=8 every_door=Bg0002,Bg0003,bg0005
 ```
+
+🔴 **อ่าน `refused_by_owner` คู่กับ `rows` เสมอ** — pf-adversary รอบนี้ชี้ว่าคำตัดสินนี้เป็น **เศษส่วน**
+และเจ้าของย่อตัวส่วนได้: `Bg0002` ชิป 20 placement แต่ roster ส่งให้เซสชัน 12 (ปฏิเสธ 8) ·
+ทดสอบแล้วว่าถ้าใครใส่ placement 87 ของฉาก 14 ลง `OWNER_REFUSED_PLACEMENTS` ฉาก 14 จะพลิกเป็น
+`every_door=yes` ทันทีทั้งที่คาร์ลอสยังตายไม่ได้เหมือนเดิม ⇒ ตัวเลขนี้จึงถูกพิมพ์ติดมาเสมอ
+**สองฉากที่ผมรายงานว่าครบ (`Bg0003` และ `bg0005`) ปฏิเสธศูนย์แถวทั้งคู่** — ตัวส่วนเต็ม ไม่ได้ครบเพราะตัดแถวที่พังทิ้ง
+(เทสปักข้อนี้ไว้: ถ้าวันหนึ่งสองฉากนี้มีแถวที่ถูกปฏิเสธ เทสแดงทันที)
+
+`ai=open` = `mob_ai_control.open_register` เปิดจริงสำหรับ roster นั้น — ประตูเป้าต้องผ่านทั้งสองครึ่ง
+เพราะ dispatch จริงเรียก `open_register` **ก่อน** `strike` (บทเรียนของ `mob_combat_bg0015_gates` เอง)
 **ฉาก 3 (Bg0003) ครบทั้งสามประตู ทั้ง 12 แถว** · ฉาก 5 (bg0005) ครบเช่นกัน ทั้ง 6 แถว
 (นับ "ครบ" แบบทุกแถว ไม่ใช่ "อย่างน้อยหนึ่งตัว" — ฉากที่มอน 11 ตัวตายได้และตัวที่ 12 ยืนที่ 0 HP ตลอดกาล
 ไม่ใช่ฉากที่เสร็จ และนั่นคือสภาพที่ข้อ 3 ของใบคุณมีไว้เพื่อหยุดพอดี)
 
 ## สองข้อลบ ถูกปักไว้แข็งเท่าข้อบวก
-- **bg0001 สี่แถว = template 916 Training Iron Man** — ฆ่าได้ ดรอปศูนย์ เพราะไม่ได้ชี้ชุดดรอปที่ตารางชิปมาเลย
-  (0 จาก 32 seed ทุกเมล็ด) นั่นคือ "หุ่นซ้อม" ไม่ใช่รู
+- **bg0001 สี่แถว = template 916 Training Iron Man** — ฆ่าได้ ดรอปศูนย์ เพราะแถว MOBS ของมัน
+  **ไม่ได้ชี้ชุดดรอปเลยสักชุด** (`drops_normal` `drops_equipment` `drops_specially` เป็น 0 ทั้งสาม · `drop_sets=0`)
+  ไม่ใช่ "ชี้ชุดที่ตารางไม่มี" ซึ่งเป็นคนละสภาพและจะออกมาเป็นคำปฏิเสธ (pf-adversary D7 แก้ถ้อยคำนี้ให้)
+  นั่นคือ "หุ่นซ้อม" ไม่ใช่รู
 - **Bg0015 placement 87 (template 924 Carlos · identity `0x2058`)** — **เป็นเป้าได้ แต่ตายไม่ได้**
   `COO-RULING-20260901-1046` คุ้ม 6 ใน 7 template และกันคาร์ลอสไว้โดยตั้งใจ ⇒ ผมส่งเป็นใบถามแยก
   (`0452` LANE-B-ASK-COO) เพราะการแก้คือการเปลี่ยนสิ่งที่ผู้เล่นทำกับมอนที่เจ้าของกันไว้เอง = คำตัดสินของคุณ ไม่ใช่ของผม
@@ -46,7 +59,10 @@ SCENE_DOORS summary live_scenes=5 every_door=Bg0002,Bg0003,bg0005
    ผมจะเปลี่ยนเกณฑ์ใน `SceneDoors.every_door_open` ให้ตรง — มันเป็น property เดียว ไม่ใช่การเขียนใหม่
 
 ## ที่ไม่ได้อ้าง
-ไม่มีข้ออ้างเรื่องหน้าจอ ทุก "เปิด" ในใบนี้เป็นฝั่งเซิร์ฟเวอร์: ไบต์ถูกประกอบ และคำปฏิเสธไม่เกิด ·
+ไม่มีข้ออ้างเรื่องหน้าจอ ทุก "เปิด" ในใบนี้เป็นฝั่งเซิร์ฟเวอร์ · **สองประตูประกอบเฟรมจริง (เป้า/ฆ่า)
+ประตูดรอปวางแถวบนพื้นแต่ไม่ประกอบไบต์** (`sustain_a_kill` เป็นตัวประกอบ และโมดูลนี้ตั้งใจไม่เรียกมัน
+เพื่อไม่ไปเขียนพื้นโลกของโปรเซส) — pf-adversary D8 แก้ถ้อยคำ "ไบต์ถูกประกอบ" ที่กว้างเกินจริงให้ ·
+ประตูฆ่าไม่ได้เรียก `commit_death` ด้วย ·
 NOW ยังห้ามเปิดใบ GT ตีมอนฉาก 3/5/14 จน P-2 ปิด และใบนี้ไม่เปิดอะไรใน `GAME_TEST_QUEUE.md` ·
 ประตูดรอป "เปิด" = มีแถวยืนบนพื้นของเซิร์ฟเวอร์นี้ ไม่ใช่ว่ามีโมเดลของโผล่ใต้ป้าย (GT-045 วัดแล้วว่าไม่ใช่เรื่องเดียวกัน)
 
