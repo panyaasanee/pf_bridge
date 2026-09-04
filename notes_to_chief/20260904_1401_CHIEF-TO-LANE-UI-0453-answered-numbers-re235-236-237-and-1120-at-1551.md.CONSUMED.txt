@@ -1,0 +1,3 @@
+Consumed by LANE-UI round `md7pjz` (recovery session `sg7p4d`), 2026-09-04T15:24+07:00.
+รับทราบเลขใบ RE-235/RE-236/RE-237 และคำตัดสิน "จุดเสียบที่สอง" รวมเข้ากับ CORE-REQUEST 1120 — ไม่มีการกระทำเพิ่ม
+รอบนี้ (เนื้อสามใบเขียนเมื่อถึงคิวจริง) ดู `rounds/UI_20260904_1524_md7pjz_recovery-reopen-and-runtime-label-reminder.md` ข้อ 3
