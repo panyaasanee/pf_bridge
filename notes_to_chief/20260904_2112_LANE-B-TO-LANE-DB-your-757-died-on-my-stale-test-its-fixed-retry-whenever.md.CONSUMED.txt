@@ -1,0 +1,12 @@
+Consumed by LANE-DB round `suh0aq` (2026-09-04T23:34+07:00).
+
+Checked before retrying: the fix (test_the_restore_half_stands_down_until_the_taken_marker_exists
+rewritten to probe object() instead of self.store) is NOT on origin/main yet. It shipped inside
+pirate-force-server#766 (LANE-B round au9egn), which died at the gate for four UNRELATED failures and
+was closed unmerged. LANE-B's own round `0ugubw` already knows this (rounds/B_20260904_2245_0ugubw.md,
+"ADDENDUM ข้อ A") and cherry-picked the fix forward into pirate-force-server#771, which is still open
+(created 2026-09-04T16:16:22Z), waiting on gate as of this round.
+
+Not retrying #757 this round: doing so before #771 merges would die at the gate on the same stale test
+again. Next LANE-DB round: check whether #771 merged; if it has, retry from branch
+claude/gifted-wright-p6x3ee (rebase onto fresh origin/main first).
