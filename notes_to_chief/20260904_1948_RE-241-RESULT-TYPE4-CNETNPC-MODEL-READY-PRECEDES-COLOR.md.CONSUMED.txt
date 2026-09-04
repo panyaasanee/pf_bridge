@@ -1,0 +1,1 @@
+consumed by chief รอบ t7bsfx/R342 (ผู้เปิดใบ = ผู้ปิดใบ): กรอก "### result:" ใน CLIENT_RE_QUEUE.md ครบตามที่ใบผลขอ + ปิดหัวใบ RE-241 เป็น CLOSED PASS/DONE + ผูก P-2 baseline (ชมพู 3 สถานะ) ไว้ในใบเดียวกัน -- 🔴 LANE-GM ยังต้องอ่านเนื้อผลเอง: ทิศ "เปลี่ยน identity/type เพื่อให้ได้สี" ปิดแล้ว (Q1: census เข้า CNetNPC ถูกช่องอยู่แล้ว) สิ่งที่ขาดคือ readiness latch +0x260

@@ -52,9 +52,9 @@
 - 🆕 **`GT-213` COLUMBUS-SCENE-GUARDS-VISIBLE-COST-001** (🔴 **BLOCKED — รอ merge `server#584` (+ ใบ D3 ของรอบเดียวกัน)** · เปิดโดย chief (LANE-E) รอบ `kt05o0`/R305 ตาม `COO-DECISION 20260902_1347` · ผู้ทำ: **ผู้เทส attended** · chief บริโภคผลเอง · ข้ามไปฉาก 17 ด้วย Columbus แล้ว `/warp 1` กลับมา Port Royal ต้องมีชาวเมือง + คลิก actor index 1 ของฉาก 14 ต้องไม่เปิดบทสนทนา · ใบเต็มอยู่ท้ายไฟล์ · เลขขยับจาก 212 เพราะ LANE-A push ก่อน)
 - 🆕 **`GT-207` GM-PLUGIN-THREE-CELL-BUTTON-001** (✅ **PASS บน build 1** 2026-09-02T18:54+07:00 — หัวใบจริงที่บรรทัด `## GT-207` ปิดไปแล้วตั้งแต่รอบ `selrsl` แต่บรรทัดสารบัญนี้ยังเขียนว่า READY อยู่จนถึงรอบ `p7q74c` ⇒ แก้ให้ตรงกัน (ปิดโดย LANE-GM เจ้าของใบ) · ~~🟢 READY บูตได้เลย~~ · attended — ใบที่ `COO-DECISION 20260902_0846` เรียกว่า `GT-P3`/`GT-203`; เลข `203`/`204` ถูกใช้ไปแล้ว จึงเป็น **`205`** · ร่างโดย LANE-GM `0731`, ลงคิวโดย chief R301 `smrum3` · **`COO 0846` เรียกใบนี้ว่า `GT-203`; เลข 203/204/205 ถูกใช้แล้ว ⇒ `207`** · P-3 ปุ่ม GM: **สาม build เท่านั้น** ห้ามช่องที่สี่ (`COO 0648`+`0845` + ตาราง README) · `patches/gm_plugin/` **revision 4** `780d41dd` บน `main` ⇒ **คำห้าม build ถอนแล้ว** · ตัวตัดสิน = บรรทัด `[GM_PLUGIN]` ใน DebugView · 🔴 ลำดับคือ build→install→**ขั้น 0**→บูต และ **rollback ทุก build** · bounded negative ใช้ได้เฉพาะเมื่อเห็น `alive, returning interface` ทุก build · ใบเต็มท้ายไฟล์)
 - 🆕 **`GT-183` GM-B-SPEED-COMMAND-001** (🔴 **BLOCKED — BLOCKED-ON-WIRING** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (GM-B) · ผู้ทำ: **LANE-GM** · `/speed <value>` คำสั่งแชท GM จริงบน `main` เขียน `ActorAttr` x7 (+0x54 f32) — เดโมแล้วนอก main โดยเจ้าของ (`PF_ADHOC_ATTR_PROBE`) ค่าปกติประเมิน 400 ยังไม่ยืนยันตาราง/ไบนารี · ใบเต็มอยู่ท้ายไฟล์)
-- 🆕 **`GT-184` UI-A-PART-A-BACK-TO-CHARSELECT-BUTTON-001** (🟢 **READY-FOR-ATTENDED — สืบทอดจาก `GT-033` (ANSWERED — สองท่าที่ลองแล้วให้ผลลบ)** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งแรก) · ผู้ทำ: **LANE-A** · ปุ่มกลับหน้าเลือกตัวละครจากในเกม ต้องพาไปจริงกลางเซสชัน · แยกจาก `GT-185` ตามกฎหนึ่งใบหนึ่งข้อพิสูจน์ · ใบเต็มอยู่ท้ายไฟล์ · **[อัปเดต round `tmizmk` 2026-09-01 15:58+07:00] allowlist ที่หกลงแล้ว พร้อมบูตด้วย `--logout-hypothesis-scenario scenarios/logout_hypothesis_dialog_open_push.json` -- ยังไม่พลิก `production_allowed` (รอ attended pass ก่อนตาม stop_rule) พร้อมให้ผู้เทส attended หยิบได้แล้ว** · **[อัปเดตหัวใบ chief round cool-johnson-7qcsux 2026-09-04 15:22+07:00 ตาม `COO-DECISION 20260904_1451` ข้อ "unblock GT-184/186 heads": หัวเดิมพิมพ์ BLOCKED ทั้งที่ body บอกว่าพร้อมหยิบตั้งแต่รอบ `tmizmk` — แก้หัวให้ตรง body ไม่ใช่การเปลี่ยนสถานะใหม่**)
+- 🆕 **`GT-184` UI-A-PART-A-BACK-TO-CHARSELECT-BUTTON-001** (🔴 **BLOCKED-ON-WIRING (R311 = NEGATIVE / hypothesis not exercised) — เดิม READY-FOR-ATTENDED, สืบทอดจาก `GT-033` (ANSWERED — สองท่าที่ลองแล้วให้ผลลบ)** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งแรก) · ผู้ทำ: **LANE-A** · ปุ่มกลับหน้าเลือกตัวละครจากในเกม ต้องพาไปจริงกลางเซสชัน · แยกจาก `GT-185` ตามกฎหนึ่งใบหนึ่งข้อพิสูจน์ · ใบเต็มอยู่ท้ายไฟล์ · **[อัปเดต round `tmizmk` 2026-09-01 15:58+07:00] allowlist ที่หกลงแล้ว พร้อมบูตด้วย `--logout-hypothesis-scenario scenarios/logout_hypothesis_dialog_open_push.json` -- ยังไม่พลิก `production_allowed` (รอ attended pass ก่อนตาม stop_rule) พร้อมให้ผู้เทส attended หยิบได้แล้ว** · **[อัปเดตหัวใบ chief round cool-johnson-7qcsux 2026-09-04 15:22+07:00 ตาม `COO-DECISION 20260904_1451` ข้อ "unblock GT-184/186 heads": หัวเดิมพิมพ์ BLOCKED ทั้งที่ body บอกว่าพร้อมหยิบตั้งแต่รอบ `tmizmk` — แก้หัวให้ตรง body ไม่ใช่การเปลี่ยนสถานะใหม่** · **[อัปเดตหัวดัชนี chief รอบ `t7bsfx`/R342 2026-09-04 20:0x+07:00 ตาม `COO-DECISION 20260904_1948` ข้อ 5: รันแล้ว R311 = NEGATIVE / hypothesis not exercised — push `0x709E` ไม่เคยออกจากเซิร์ฟเวอร์ ⇒ กลับเป็น BLOCKED-ON-WIRING รอ LANE-UI แก้ก่อนรันใหม่]**)
 - 🆕 **`GT-185` UI-A-PART-B-BACK-INTO-GAME-ROUNDTRIP-001** (🔴 **BLOCKED — precondition: `GT-184` ต้อง PASS ก่อน** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-A ครึ่งหลัง) · ผู้ทำ: **LANE-A** · จากหน้าเลือกตัวละคร เลือกแล้วกลับเข้าเกมได้จริงในโปรเซสเดิมไหม — ปลดล็อกการเปลี่ยนฉากซ้ำโดยไม่บูตใหม่ · ใบเต็มอยู่ท้ายไฟล์ · **[อัปเดต round `tmizmk`] precondition ยังคือ `GT-184` ต้อง PASS ก่อน — สถานะไม่เปลี่ยน แค่ construction path ของ `GT-184` พร้อมแล้ว**)
-- 🆕 **`GT-186` UI-B-REAL-LOGOUT-BUTTON-001** (🟢 **READY-FOR-ATTENDED** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-B) · ผู้ทำ: **LANE-A** · ปุ่ม logout จริง (คนละ subcode กับ `GT-184`) ต้องจบเซสชันสะอาดโดยไม่ต้องปิดหน้าต่างด้วย X · ใบเต็มอยู่ท้ายไฟล์ · **[อัปเดต round `tmizmk`] ไม่ใช่ BLOCKED-ON-WIRING อีกต่อไป — allowlist ที่หกลงแล้ว พร้อมบูตด้วยแฟล็กเดียวกับ `GT-184` ด้านบน ยังไม่พลิก `production_allowed`** · **[อัปเดตหัวใบ chief round cool-johnson-7qcsux 2026-09-04 15:22+07:00 ตาม `COO-DECISION 20260904_1451`: หัวเดิมพิมพ์ BLOCKED-ON-WIRING ทั้งที่ body บอกว่าไม่ใช่แล้วตั้งแต่รอบ `tmizmk` — แก้หัวให้ตรง body**)
+- 🆕 **`GT-186` UI-B-REAL-LOGOUT-BUTTON-001** (🔴 **BLOCKED-ON-WIRING (R311 = NEGATIVE / hypothesis not exercised) — เดิม READY-FOR-ATTENDED** [NEEDS-ATTENDED-CAPTURE] · เปิดโดย chief ตาม `PANYA-ORDER 20260901_0215` ข้อ 3 (UI-B) · ผู้ทำ: **LANE-A** · ปุ่ม logout จริง (คนละ subcode กับ `GT-184`) ต้องจบเซสชันสะอาดโดยไม่ต้องปิดหน้าต่างด้วย X · ใบเต็มอยู่ท้ายไฟล์ · **[อัปเดต round `tmizmk`] ไม่ใช่ BLOCKED-ON-WIRING อีกต่อไป — allowlist ที่หกลงแล้ว พร้อมบูตด้วยแฟล็กเดียวกับ `GT-184` ด้านบน ยังไม่พลิก `production_allowed`** · **[อัปเดตหัวใบ chief round cool-johnson-7qcsux 2026-09-04 15:22+07:00 ตาม `COO-DECISION 20260904_1451`: หัวเดิมพิมพ์ BLOCKED-ON-WIRING ทั้งที่ body บอกว่าไม่ใช่แล้วตั้งแต่รอบ `tmizmk` — แก้หัวให้ตรง body** · **[อัปเดตหัวดัชนี chief รอบ `t7bsfx`/R342 2026-09-04 20:0x+07:00 ตาม `COO-DECISION 20260904_1948` ข้อ 5: รันแล้ว R311 = NEGATIVE / hypothesis not exercised — push `0x709E` ไม่เคยออกจากเซิร์ฟเวอร์ ⇒ กลับเป็น BLOCKED-ON-WIRING รอ LANE-UI แก้ก่อนรันใหม่]**)
 - 🆕 **`GT-221` LOGIN-SENDS-THE-ROW-NOT-THE-CONSTANT-THREE-SHAPES-001** (🔴 **BLOCKED — รอ fixture สามแถวของใบ `COO 20260903_1051` ที่ LANE-DB จะลง `main` (เขียนผ่าน `store.write_typed_attributes` บน run copy · `COO 20260903_1247` ข้อ 1: ทาง (ก) เท่านั้น · migration ปฏิเสธ)** · เปิดโดย chief รอบ `xnixm6` (R318) ตามใบสั่ง `COO-DECISION 20260903_1052` · **เจ้าของเนื้อหา/ผู้บริโภคผล = LANE-DB · ผู้รัน = Panya** · ใบแรกที่แยก "เซิร์ฟเวอร์อ่านแถว" ออกจาก "เซิร์ฟเวอร์ส่งค่าคงตัว" ได้จริง ซึ่ง `GT-215` ทำไม่ได้โดยโครงสร้าง · 🔴 **ต่อคิวหลัง `GT-216` ห้ามแย่งลำดับกับ P-1** · `RECHECK 1` เป็นตัวปลดป้าย · ใบเต็มท้ายไฟล์)
 - 🆕 **`GT-223` GROUND-LEDGER-SURVIVES-A-RECONNECT-001** (🟢 **READY เมื่อ RECHECK ข้อ 1 ผ่าน — ตัวบล็อกหมดอายุทั้งสองตัว** (chief รอบ `dwvbpm`/R330 ตาม `COO-DECISION 20260904_0145` ข้อ 1): `GT-216` PASS (R306) และประตู persistence อยู่บน main แล้วทาง **`#680`** ไม่ใช่ `#672` (chief วัดเอง 2026-09-04T01:5x: `store.py:2261` `commit_ground_drop` · `store.py:2392` `list_ground_drops_for_scene`) · ~~ตัวบล็อกที่เหลือคือ `pirate-force-server#672`~~ **ถอนแล้ว วัดผิด** · 🔴 **ใบนี้คือที่อยู่ของขั้น "ป้ายชื่อของไม่กะพริบ" ของ `RE-208`** ตาม `COO-DECISION 20260903_1942` ข้อ 4 (chief เลือกใบ · LANE-B เขียนขั้น) · ~~คิวหลัง `GT-216` เท่านั้น~~ · เปิดโดย chief รอบ `kjtpza` (R319) ตามใบสั่ง `COO-DECISION 20260903_1048` · **เจ้าของใบ/ผู้แก้ = LANE-B · ผู้รัน = Panya** · ใบข้อบกพร่อง ไม่ใช่ใบสำรวจ: ของที่ดรอปแล้วเป็นของ **โลกต่อฉาก** ไม่ใช่ของเซสชัน ⇒ รีล็อกอินแล้ว ledger ว่าง = **ข้อบกพร่องจริง** · `RECHECK 1` เป็นตัวปลดป้าย · ใบเต็มท้ายไฟล์)
 - 🆕 **`GT-224` MOB-AI-TICK-GATE-IS-OPEN-AND-STILL-INVISIBLE-001** (🟢 **READY เมื่อ RECHECK ผ่าน — `#668` merged แล้ว 11:49Z และ `#670` ปลด main แดงแล้ว 12:26Z · เกณฑ์ `mobs=` เปลี่ยน อ่านหัวใบก่อนบูต (chief รอบ `pk14rf`/R326)** · ~~🔴 BLOCKED รอ merge `#668`~~ · เปิดโดย chief รอบ `gjyxt5` (R324) ตาม `COO-DECISION 20260903_1648` · **เจ้าของใบ/ผู้บริโภคผล = chief ร่วม LANE-B · ผู้รัน = ผู้เทส** · 🔴 **PASS ของชั้นจอคือคำว่า "ไม่มีอะไรเปลี่ยน"** มอนขยับ/เข้าตี = finding ไม่ใช่ PASS · `RECHECK` สองข้อเป็นตัวปลดป้าย · ใบเต็มท้ายไฟล์)
@@ -9157,7 +9157,7 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 - result: (tester/build lane fills in: PASS/FAIL/BLOCKED, evidence, timestamp,
   OBSERVER_CONFIRMED line per G-OBS once client-observable evidence exists)
 
-## GT-184 UI-A-PART-A-BACK-TO-CHARSELECT-BUTTON-001  [BLOCKED -- branch-6 (dialog-open unsolicited 0x709E push) module built round `bkgaq8`, `pirate-force-server` PR `#471`: src/pirateforce_foundation/logout_dialog_open_hypothesis.py, not wired into runtime.py yet. CORE-REQUEST open in this letter's own round file/letter for chief to wire; production_allowed stays False until wired + re-read by pf-adversary once more. Do not boot this ticket until wiring lands on main] [STALE as of round `tmizmk` 2026-09-01T15:58+07:00 -- wiring landed round `liq4ri` (PR #476); sixth allowlist profile landed round `tmizmk` (PR pending merge). Boot now with `--logout-hypothesis-scenario scenarios/logout_hypothesis_dialog_open_push.json`. `production_allowed` still False, unchanged -- stop_rule still requires an attended GT-184/GT-186 pass first. Ready for attended capture.] [MEASURED, round `2ahq88` 2026-09-01T16:35+07:00 -- "PR pending merge" above is stale: `pull_request_read get` confirms `pirate-force-server#484` merged=true (merged_at 2026-09-01T09:17:06Z) and `pf_bridge#724` merged=true (merged_at 2026-09-01T09:08:21Z). Sixth allowlist profile is on `main` now, not pending. No other change to this ticket's status -- still awaiting attended capture.]
+## GT-184 UI-A-PART-A-BACK-TO-CHARSELECT-BUTTON-001  [🔴 BLOCKED-ON-WIRING -- รันแล้ว R311 (`notes_to_chief/20260904_1931_KA1A-R311-RESULTS-*`) = **NEGATIVE / hypothesis not exercised**: ปุ่ม "กลับหน้าเลือกตัว" ส่ง `GetWorldInfoVital 0x3D4B` เต็ม 268 B (เซิร์ฟไม่ตอบ) แล้ว `0x1B40` subcode 03 → `HYP_PF_013_LOGOUT_SUBCODE03_ACK_THEN_SERVER_SOCKET_CLOSE` 46 B แล้วปิด socket · จอไม่เปลี่ยน ไม่มีข้อความ 90 วิ (ภาพ `20260904_192129.png`) · `OBSERVER_CONFIRMED: 2026-09-04T19:26+07:00` · 🔴 **push `0x709E` ของ scenario `logout_hypothesis_dialog_open_push` ไม่เคยออกจากเซิร์ฟเวอร์** (ไม่มี `[G>]` เฟรมนั้นทั้งรอบ) ⇒ ยังตัดสิน HYP-PF-040 ไม่ได้ · ห้ามบูตซ้ำจนกว่า **LANE-UI** จะแก้ให้ push ออกจริง (รันใหม่ ~6 นาที) · ป้ายเขียนโดย chief (LANE-E) รอบ `t7bsfx`/R342 ตาม `COO-DECISION 20260904_1948` ข้อ 5] [ประวัติป้ายเดิม] [BLOCKED -- branch-6 (dialog-open unsolicited 0x709E push) module built round `bkgaq8`, `pirate-force-server` PR `#471`: src/pirateforce_foundation/logout_dialog_open_hypothesis.py, not wired into runtime.py yet. CORE-REQUEST open in this letter's own round file/letter for chief to wire; production_allowed stays False until wired + re-read by pf-adversary once more. Do not boot this ticket until wiring lands on main] [STALE as of round `tmizmk` 2026-09-01T15:58+07:00 -- wiring landed round `liq4ri` (PR #476); sixth allowlist profile landed round `tmizmk` (PR pending merge). Boot now with `--logout-hypothesis-scenario scenarios/logout_hypothesis_dialog_open_push.json`. `production_allowed` still False, unchanged -- stop_rule still requires an attended GT-184/GT-186 pass first. Ready for attended capture.] [MEASURED, round `2ahq88` 2026-09-01T16:35+07:00 -- "PR pending merge" above is stale: `pull_request_read get` confirms `pirate-force-server#484` merged=true (merged_at 2026-09-01T09:17:06Z) and `pf_bridge#724` merged=true (merged_at 2026-09-01T09:08:21Z). Sixth allowlist profile is on `main` now, not pending. No other change to this ticket's status -- still awaiting attended capture.]
 
 > Opened by chief this round, directly per Panya's order, same provenance as `GT-182`.
 > Source: PANYA-ORDER `notes_to_chief/20260901_0215_PANYA-ORDER-*.md` section 3 (UI-A,
@@ -9309,7 +9309,7 @@ actor ขึ้นจอหรือไม่ (นับคร่าว ๆ พ�
 - result: (tester/build lane fills in: PASS/FAIL/BLOCKED/NOT-YET-RUN, evidence, timestamp,
   OBSERVER_CONFIRMED line per G-OBS once client-observable evidence exists)
 
-## GT-186 UI-B-REAL-LOGOUT-BUTTON-001  [BLOCKED -- branch-6 (dialog-open unsolicited 0x709E push) module built round `bkgaq8`, `pirate-force-server` PR `#471`: src/pirateforce_foundation/logout_dialog_open_hypothesis.py, not wired into runtime.py yet. CORE-REQUEST open in this letter's own round file/letter for chief to wire; production_allowed stays False until wired + re-read by pf-adversary once more. Do not boot this ticket until wiring lands on main] [STALE as of round `tmizmk` 2026-09-01T15:58+07:00 -- wiring landed round `liq4ri` (PR #476); sixth allowlist profile landed round `tmizmk` (PR pending merge). Boot now with `--logout-hypothesis-scenario scenarios/logout_hypothesis_dialog_open_push.json`. `production_allowed` still False, unchanged -- stop_rule still requires an attended GT-184/GT-186 pass first. Ready for attended capture.] [MEASURED, round `2ahq88` 2026-09-01T16:35+07:00 -- "PR pending merge" above is stale: `pull_request_read get` confirms `pirate-force-server#484` merged=true (merged_at 2026-09-01T09:17:06Z) and `pf_bridge#724` merged=true (merged_at 2026-09-01T09:08:21Z). Sixth allowlist profile is on `main` now, not pending. No other change to this ticket's status -- still awaiting attended capture.]
+## GT-186 UI-B-REAL-LOGOUT-BUTTON-001  [🔴 BLOCKED-ON-WIRING -- รันแล้ว R311 (`notes_to_chief/20260904_1931_KA1A-R311-RESULTS-*`) = **NEGATIVE / hypothesis not exercised**: ปุ่ม "ออกจากเกม" ส่ง `GetWorldInfoVital 0x3D4B` เต็ม 268 B (เซิร์ฟไม่ตอบ) แล้ว `0x1B40` subcode 01 → `HYP_PF_013_LOGOUT_SUBCODE01_ACK_THEN_SERVER_SOCKET_CLOSE` 46 B แล้วปิด socket · จอไม่เปลี่ยน ไม่มีข้อความ 90 วิ (ภาพ `20260904_192633.png`) · `OBSERVER_CONFIRMED: 2026-09-04T19:26+07:00` · 🔴 **push `0x709E` ของ scenario `logout_hypothesis_dialog_open_push` ไม่เคยออกจากเซิร์ฟเวอร์** (ไม่มี `[G>]` เฟรมนั้นทั้งรอบ) ⇒ ยังตัดสิน HYP-PF-040 ไม่ได้ · ห้ามบูตซ้ำจนกว่า **LANE-UI** จะแก้ให้ push ออกจริง (รันใหม่ ~6 นาที) · ป้ายเขียนโดย chief (LANE-E) รอบ `t7bsfx`/R342 ตาม `COO-DECISION 20260904_1948` ข้อ 5] [ประวัติป้ายเดิม] [BLOCKED -- branch-6 (dialog-open unsolicited 0x709E push) module built round `bkgaq8`, `pirate-force-server` PR `#471`: src/pirateforce_foundation/logout_dialog_open_hypothesis.py, not wired into runtime.py yet. CORE-REQUEST open in this letter's own round file/letter for chief to wire; production_allowed stays False until wired + re-read by pf-adversary once more. Do not boot this ticket until wiring lands on main] [STALE as of round `tmizmk` 2026-09-01T15:58+07:00 -- wiring landed round `liq4ri` (PR #476); sixth allowlist profile landed round `tmizmk` (PR pending merge). Boot now with `--logout-hypothesis-scenario scenarios/logout_hypothesis_dialog_open_push.json`. `production_allowed` still False, unchanged -- stop_rule still requires an attended GT-184/GT-186 pass first. Ready for attended capture.] [MEASURED, round `2ahq88` 2026-09-01T16:35+07:00 -- "PR pending merge" above is stale: `pull_request_read get` confirms `pirate-force-server#484` merged=true (merged_at 2026-09-01T09:17:06Z) and `pf_bridge#724` merged=true (merged_at 2026-09-01T09:08:21Z). Sixth allowlist profile is on `main` now, not pending. No other change to this ticket's status -- still awaiting attended capture.]
 
 > Opened by chief this round, directly per Panya's order, same provenance as `GT-182`.
 > Source: PANYA-ORDER `notes_to_chief/20260901_0215_PANYA-ORDER-*.md` section 3 (UI-B: "a
@@ -12173,7 +12173,7 @@ RECHECK: (ตัดสินด้วยเนื้อโค้ดบน `origi
 
 ---
 
-## GT-219 GM-IMAGE-CHECKER-MEETS-TWO-REAL-DLLS-001  [🟢 STEP-A-PASS · STEP-B ~5 นาที attended -- ชิ้น (ก) ผ่านครบ · ชิ้น (ข) **ไม่มีในเครื่อง ตามคำทำนาย** = `A2 NO-RESULT` ปิดถาวร ไม่ rebuild · เหลือขั้น B (กดปุ่ม GM ในเกม) พ่วงรอบ attended ถัดไปได้ทันที]
+## GT-219 GM-IMAGE-CHECKER-MEETS-TWO-REAL-DLLS-001  [✅ PASS ทั้งสองขั้น -- ปิดใบ · ขั้น A `20260904_1508` (ชิ้น (ก) ผ่านครบ · ชิ้น (ข) `A2 NO-RESULT` ปิดถาวร ไม่ rebuild) · ขั้น B `20260904_1911` ข้อ 1 R310: `install.bat` จริง → `image_ok` → `[OK] installed` sha `4a0ecb58…d743b` 14,848 B · DebugView จับ `[GM_PLUGIN] alive` 10 บรรทัด × 2 การเปิด · หน้าต่าง `GMUI` เปิด 3 แท็บ (ภาพ `184909.png`) · NO-CRASH · rollback ครบ · `OBSERVER_CONFIRMED: 2026-09-04T18:49+07:00` · ปิดโดย chief (LANE-E) รอบ `t7bsfx`/R342 ตาม `COO-DECISION 20260904_1948` ข้อ 1 · nonclaim คงเดิม: หน้าต่างเปิด ≠ ปุ่มใน GMUI ทำงาน (P-3 ขั้นถัดไป · LANE-GM)]
 
 > 🔢 **ป้ายเปลี่ยนโดย chief (LANE-E) รอบ `oi2r2n`/R340** ตาม `COO-DECISION 20260904_1648` ข้อ 1 · ผลที่ปลดป้าย: `notes_to_chief/20260904_1508_KA1A-GT219-STEP-A-RESULT-*` (ka1-A · jobs `1497` + `1497b` · ไม่มีเซิร์ฟเวอร์ ไม่มีเกม ไม่แตะ DB)
 > **RECHECK 1 = PASS**: `patches\gm_plugin\GameMaster.dll` size=`14848` sha256=`4a0ecb5817c15b0bf08964bc16972bc7340666357c494e9d0308ee9ce72d743b` (certutil + Get-FileHash ตรงกันสองเครื่องมือ) · บรรทัด `RECHECK1=FAIL` ใน log ของ job 1497 **ผิดเพราะฟังก์ชัน `H` ถูก alias `Get-History` บัง** = บทเรียนเครื่องมือ ไม่ใช่ผลวัด
@@ -13266,7 +13266,7 @@ LOGIN_CLASS_ID fallback class_id=1 reason=row_has_no_class_id
 
 ---
 
-## GT-233 M2-PROVISIONING-TRIAL-001  [🔴 BLOCKED -- รอ `pirate-force-server#753` (กิ่ง `claude/charming-mendel-0foax0`) ขึ้น `main` **และ** chief's CORE-REQUEST call site/msg_id (pf_bridge `notes_to_chief/20260904_1806_LANE-A-STATUS-*`) -- เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-A** · ผู้บริโภคผล = LANE-A]
+## GT-233 M2-PROVISIONING-TRIAL-001  [🟢 **READY-FOR-ATTENDED -- รอ merge `pirate-force-server#760` ก่อนบูตเท่านั้น** (จุดเรียก+`msg_id` ของ chief push แล้ว 2026-09-04 20:2x+07:00 · `#753` ของ LANE-A merge ไปแล้ว `55c9a05`) -- 🔴 **ต้องบูตด้วยแฟล็ก `PF_M2_SURVEY_TRIAL=1`** (ไม่มีแฟล็ก = ไม่มีไบต์ออก คอนโซลพิมพ์ `M2_SURVEY_TRIAL_NOT_THIS_BOOT reason=unset`) · ยืนยันบิลด์ถูกจากคอนโซล: `M2_SURVEY_TRIAL_SENT scene=126 records=2 msg_id=0xC4AF version=0` เมื่อเข้าฉาก 126 · `msg_id`/`vital_version` เป็น **ค่าทดลอง** (ดูจดหมาย `FROM_CHIEF_R342`) — หน้าไม่เด้ง ให้ลอง XYZ สำรองก่อน แล้วค่อยแปร `vital_version` · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-A** · ผู้บริโภคผล = LANE-A · ป้ายเปลี่ยนโดย chief รอบ `t7bsfx`/R342 ตาม `COO-DECISION 20260904_1845` ข้อ 1(ค)]
 
 > 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `wjqykr`/R338 2026-09-04T14:0x+07:00** ตาม `COO-DECISION 20260904_1345` ข้อ 3(ค) และ `20260904_1346` ข้อ 2(จ)
 > **เนื้อใบเขียนแล้วโดย LANE-A รอบ `0foax0` 2026-09-04T18:1x+07:00** -- ยืนยันตรงกับ (ก)/(ข) ที่ push แล้วใน `#753`: responder override id 2/3 + `world_m2_provisioning_trial.py` composer (ยังไม่มีไบต์ส่งจริง จนกว่า chief เดินสายจุดเรียก `runtime.py` + wire msg_id)
@@ -13456,7 +13456,7 @@ E. **ไคลเอนต์ตาย/ตัวจับแพ็กเก็�
 
 ---
 
-## GT-244 LIVE-WARP-SCENE-PERSISTS-ACROSS-LOGIN-001  [BLOCKED -- do not boot until pf-adversary's second pass on server#745's second commit (D1/D2 fix, code q3cde9) has returned clean · STOP-on-HP-0]
+## GT-244 LIVE-WARP-SCENE-PERSISTS-ACROSS-LOGIN-001  [🚫 CLOSED -- CANCELLED - covered by 20260904_1911 R310 ข้อ 3 -- ห้ามบูตใบนี้ · คำถามของใบถูกตอบบนจอไปแล้วในรอบ R310 ก่อนที่ใครจะเรียกใบ: `/warp 2` → `GM_WARP_SCENE_PERSISTED scene=2` ทันที · `character_positions` = (2, 26905, 21185, 1680) โดยผู้เล่นไม่ขยับ → ปิด X → relaunch → ล็อกอินโผล่เกาะคุก (ภาพ `185526.png`) · `GM_WARP_SCENE_PERSIST_FAILED` = 0 ⇒ `PANYA-DECISION 20260904_1430` ปิด · ยกเลิกโดย chief (LANE-E) รอบ `t7bsfx`/R342 ตาม `COO-DECISION 20260904_1948` ข้อ 2 (`PANYA 1934`) · ไม่แตะ F-1/F-2 ของ `GT-172` ที่ยังเปิดอยู่]
 
 > Closes finding F-3 under `GT-172` (live warp changes the on-screen scene immediately but
 > historically did not update the `character_positions` row used at next login -- a player who
@@ -13610,5 +13610,115 @@ E. **ไคลเอนต์ตาย/ตัวจับแพ็กเก็�
   timestamp)
 
 **ผู้เปิดใบ: chief (LANE-E) ตาม `COO-DECISION 20260904_1746` -- ผู้บริโภคผล: chief (LANE-E)**
+
+---
+
+## GT-245 CHARACTER-SELECT-SCREEN-SHOWS-THE-REAL-SCENE-001  [🔴 BLOCKED -- รอ PR ของ LANE-DB ขึ้น `main` ก่อนบูต · **เนื้อใบเป็นของ LANE-DB** (`COO-DECISION 20260904_1947` ข้อ 5 สั่งให้ DB เขียน body ในรอบเดียวกับ PR) · เลขใบตั้งโดย chief (LANE-E) รอบ `t7bsfx`/R342 ตาม `COO-DECISION 20260904_1948` ข้อ 3 · ผู้รัน = Panya (attended) · เจ้าของใบ/ผู้บริโภคผล = **LANE-DB**]
+
+> 🔢 **ใบนี้ยังเป็นหัวใบเปล่าโดยตั้งใจ** -- chief ตั้งเลขให้เท่านั้น เพื่อให้ LANE-DB มีเลขอ้างอิงตั้งแต่รอบ 20:01 · ห้ามใครนอกจาก LANE-DB เขียนเนื้อใบนี้ (เขตเขียนใบ = เจ้าของใบ)
+
+- **ที่มา**: `PANYA-DECISION 20260904_1857` (หน้าเลือกตัวละครพิมพ์ "Port Royal" ใต้ชื่อเสมอ ทั้งที่ DB = ฉาก 2 และเข้าเกมแล้วอยู่เกาะคุก) · หลักฐานภาพ `20260904_185512.png` ใน `notes_to_chief/20260904_1911_KA1A-R310-RESULTS-*` ข้อ 5 · ต้นเหตุที่ COO วัดจาก main `90d5aaa`: `character_list()` ต่อ `c.actor_wire` ที่แช่แข็งตอนสร้างตัวละคร (ฝัง `scene_id`=1) ทั้งที่ `list_characters` JOIN `character_positions` มาแล้ว (`COO-DECISION 20260904_1947` ข้อ 2)
+- **เกณฑ์ผ่าน (จาก `1947` ข้อ 5 -- LANE-DB ขยายเป็นสองชั้นเต็มในเนื้อใบ)**: `/warp 2` → ปิดเกม → relaunch → **หน้าเลือกตัวพิมพ์ Prison Exile ไม่ใช่ Port Royal** แล้ว `/warp 1` → relaunch → กลับเป็น Port Royal
+- **ข้อห้ามที่ติดมากับใบ** (`1947` ข้อ 4): ห้าม migration/backfill คอลัมน์ `characters.actor_wire` · แก้ที่จุดฉายเท่านั้น · ห้ามแตะ `runtime.py` (ถ้าจำเป็น = CORE-REQUEST ถึง chief พร้อม diff)
+
+**ผู้เปิดใบ: chief (LANE-E) -- เนื้อใบและผู้บริโภคผล: LANE-DB**
+
+---
+
+## GT-246 AUTO-WALK-CLICK-DIFFERENTIAL-001  [ANSWERED -- วัดครบแล้วในรอบ attended R310 (2026-09-04 18:45-19:07 +07:00) ตั้งแต่ก่อนใบนี้มีเลข -- ห้ามบูตซ้ำ ไม่มีขั้นตอนเหลือให้รัน -- เลขใบตั้งโดย chief (LANE-E) รอบ `t7bsfx`/R342 ตาม `COO-DECISION 20260904_1948` ข้อ 4 ("ตั้งเลขใบ differential auto-walk แล้วเขียนผลจาก `1911` ข้อ 2 ลงใบเลย ... ผู้บริโภค = LANE-UI ไม่ต้องบูตซ้ำ") -- เจ้าของใบ/ผู้บริโภคผล = **LANE-UI**]
+
+> ใบนี้ตั้งเลขย้อนหลัง: การวัดเกิดก่อนเลขใบ ผู้ขับ = Panya ผู้วัด/เขียน = ka1-A
+> ทุกค่าในหัวข้อ result คัดจาก `notes_to_chief/20260904_1911_KA1A-R310-RESULTS-*.md` ข้อ 2 คำต่อคำ
+> chief ไม่ได้วัดใหม่ ไม่ได้ตีความเพิ่ม ไม่ได้เติมค่าที่จดหมายไม่มี
+
+## คำถามเดิมที่ใบนี้ถูกเปิดมาตอบ
+มาจาก `notes_to_chief/20260904_1226_LANE-UI-RE-TICKET-tracepath-record0-semantic-needs-attended-differential.md`
+บวก `COO-DECISION 20260904_1244` ข้อ 2 (มินิแมปพับเข้าชุด differential เดียวกัน ไม่เปิดใบแยก):
+**คลิกพื้น / คลิก NPC / คลิกมินิแมป -- สามอย่างนี้ทำให้ client ส่งเฟรมคลาสไหนออกสาย และอันไหน (ถ้ามี) ที่ยิง
+`CTracePathReqVital` (`0x4391`)** สมมติฐานตั้งต้นของสารบัญ LANE-UI คือมินิแมปน่าจะเป็น `TargetPosVital` (`0x2A90`)
+เหมือนคลิกพื้น -- ใบนี้วัดว่าจริงหรือไม่ (คำทำนายผิดคือ finding ไม่ใช่ความล้มเหลว)
+
+- objective: (ข้ออ้างเดียว) คลาสของเฟรมขาออกต่างกันตามชนิดของคลิก และ **มีเฉพาะคลิกมินิแมปเท่านั้นที่ยิง
+  `CTracePathReqVital 0x4391`** ส่วนคลิกพื้นและคลิก NPC ไม่แตะ trace-path เลย
+  (ความหมายของ payload 0x4391 ไม่ใช่ข้ออ้างของใบนี้ -- ดู nonclaims 1)
+- db: R310 บูตบน **สำเนา** `state\run_gt219_20260904_184529.sqlite3` (สำเนาที่ทำไว้สำหรับ GT-219 รอบเดียวกัน
+  ใบนี้อาศัยบูตนั้น ไม่ได้บูตของตัวเอง) canonical ไม่ถูกเปิด sha256 ก่อน = หลัง `4FF37060...A548454`
+  `PRAGMA integrity_check` = ok -- teardown PASS (job 1500: stopped x1, traceback 0, listeners 0, client 0)
+- server args: `pirate-force-server` commit `d01ae973124abcc3dfcfaff2b0eda679f872a8ae` (newest green)
+  **ไม่มีแฟล็ก scenario ใด ๆ** -- ฉากตามที่จดหมายจด: บรรทัดบูตเขียน `Arena01` ข้อ 2 เขียน "ฉาก 1" session 1
+  (จดไว้ตามที่เป็น ไม่รวบเป็นค่าเดียว) raw capture `GAME_20260904_184*`
+  capture root `GameClient\capture_r310_20260904_184529\`
+- steps: **ไม่มีขั้นตอนให้ทำ -- ห้ามบูต** บันทึกไว้เป็นประวัติว่าอะไรถูกกดจริงในรอบ R310:
+  คลิกพื้น 1 ครั้ง -> คลิก NPC (Columbus P65) 1 ครั้ง -> คลิกมินิแมป 1 ครั้ง ในเซสชันเดียวกัน
+  จับสายด้วย `GAME_EVENTS_LIVE.txt` (seq 2-5) ตลอดช่วง
+- pass criteria (สองชั้น -- ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น):
+    wire/DB (headless พิสูจน์ได้ ไม่ต้องมีตาคน):
+      (1) เฟรมขาออกของทั้งสามคลิกถูกจับครบ พร้อม opcode/ขนาดไบต์/เวลา -- **ส่งมอบครบ** (ตาราง result)
+      (2) ระบุได้ว่าคลิกใดยิง `0x4391` และคลิกใดไม่ยิง -- **ส่งมอบครบ** (มีเฉพาะมินิแมป)
+      (3) จับ payload ดิบของ `0x4391` ไว้ทั้งก้อน -- **ส่งมอบครบ** (25 B, hex เต็มใน `GAME_EVENTS_LIVE.txt`)
+      (4) integrity ok + canonical sha ไม่เปลี่ยน + teardown -- **ส่งมอบครบ**
+      **ไม่ส่งมอบ**: การถอดความหมายฟิลด์ใน payload (ไม่ใช่ของชั้นนี้และไม่ใช่ของใบนี้)
+      ชั้นนี้ตอบไม่ได้ว่าบนจอเห็นอะไร
+    client-observable (ต้องมีตาคน -- ห้ามอนุมานจากไฟล์จับสาย):
+      (5) สิ่งเดียวที่ชั้นนี้ได้จริงคือ **"คลิกพื้นแล้วตัวละครเดิน"** ตามที่จดหมายเขียนกำกับแถวแรกว่า "(เดิน)"
+          -- เท่านี้ ไม่มีมากกว่านี้
+      **ไม่ส่งมอบ (จดตามจริง ไม่กลบ)**:
+        (ก) ไม่มีภาพนิ่งใดอยู่ในช่วง 18:50-18:52 (ภาพในรอบคือ 184909/185512/185526/185844/1859xx)
+            จึง **ไม่มีบรรทัดสีป้ายชื่อของเฟรมที่เป็นของใบนี้เลย** -- ข้อบังคับ R163 (คำสั่ง Panya 2026-08-25)
+            ไม่ได้ถูกสนองสำหรับใบนี้ และแก้ไม่ได้เพราะห้ามบูตซ้ำ (บรรทัดสีที่มีในจดหมายเป็นของ GT-219 ภาพ
+            184909 และของ P-2 ภาพ 1859xx -- คนละการสังเกต ห้ามยืมมาใช้กับใบนี้)
+        (ข) จดหมาย **ไม่ได้บอก** ว่าคลิก NPC หรือคลิกมินิแมปทำให้ตัวละครขยับหรือไม่ ประโยคสรุป
+            "มีแค่คลิกมินิแมปที่เดิน 0x4391" หมายถึงเส้นทางบนสาย ไม่ใช่ว่าตัวละครเดิน -- ห้ามอ่านเป็นอย่างหลัง
+      **ใบนี้ไม่มีลายเซ็นผู้สังเกตของตัวเอง**: `OBSERVER_CONFIRMED: 2026-09-04T18:49+07:00` ในจดหมายเป็น
+      บรรทัดปิดของ **ข้อ 1 (GT-219 ขั้น B)** และมีเวลา **ก่อน** ทั้งสามคลิก (18:50-18:52) จึงเซ็นใบนี้ไม่ได้
+      สิ่งที่ใบนี้พิงแทนคือ: ชั้น wire/DB ที่พิสูจน์ headless ได้ทั้งหมด + ข้อเท็จจริงว่าเป็นรอบ attended จริง
+      (ผู้ขับ Panya อยู่หน้าจอ ผู้วัด ka1-A) + teardown PASS + canonical sha ก่อน=หลัง
+      => สถานะจึงเป็น `ANSWERED` (คำถามบนสายถูกตอบครบ) **ไม่ใช่ `PASS`** เพราะชั้น client-observable
+      ไม่ครบตามมาตรฐานบ้านและไม่มีลายเซ็น
+
+## result (คัดคำต่อคำจาก `20260904_1911` ข้อ 2 -- R310 ฉาก 1 session 1 raw `GAME_20260904_184*`)
+| คลิก | เวลา | เฟรมที่ client ส่ง |
+|---|---|---|
+| พื้น 1 ครั้ง | ~18:50-18:51 | **`TargetPosVital` เท่านั้น** (เดิน) -- ไม่มี 0x4391 |
+| NPC (Columbus P65 actor 0x2042) 1 ครั้ง | 18:51:52 / 18:51:54 | `TargetVital 0x1ADD` (40 B, kind=2) แล้ว `ChooseNPC 0x0FB6` (38 B) |
+| มินิแมป 1 ครั้ง | 18:52:12 | **`CTracePathReqVital 0x4391`** 25 B payload `0F00000F000014000000000F01000F65010FB2000F007D0802` -> server ตอบ `TRACE_PATH_EMPTY_VECTOR_REPLY` (35 B) ตามด้วย `TargetVital target=clear` 18:52:16 |
+
+สรุปที่จดหมายบันทึก: **มีแค่คลิกมินิแมปที่เดิน 0x4391 -- คลิกพื้น/NPC ไม่แตะ trace-path เลย**
+hex เต็มอยู่ที่ `GAME_EVENTS_LIVE.txt` seq 2-5 ใต้ capture root ข้างบน
+ผลข้างเคียงที่ต้องบันทึก: สมมติฐานเดิมของสารบัญ LANE-UI ที่ว่ามินิแมป = `TargetPosVital` (`0x2A90`)
+**ถูกหักล้าง** -- นี่คือ finding ของใบนี้ ไม่ใช่ข้อผิดพลาดของใคร
+
+## ของที่เหลือ (ชี้ทางเฉย ๆ ไม่ใช่ขั้นตอน attended ใหม่ในใบนี้)
+LANE-UI เป็นผู้ตัดสินความหมายของ payload `0x4391` 25 ไบต์ข้างบน (field layout ปิดไว้แล้วโดย `RE-119`
+`external/PF_SERIALIZER_FIELDS.tsv:5521-5536`) -- ทำจาก static ล้วนได้ ไม่ต้องใช้เครื่อง
+คำถามคนละใบที่ **ยังไม่ถูกแตะ** โดย R310: semantic ของ `u16@+0x14` (เคย capture ได้ `743` ซึ่งชนทั้ง
+`gamedata/tables/QUESTDATA_TH__QUEST.tsv n_ID=743` และ `CONSTDATA_TH__MOBS.tsv n_ID=743`) --
+วิธีปิดที่ `1226` เสนอไว้คือกด GO! ไปสองเป้าที่ n_ID ไม่ชนกัน ซึ่ง **R310 ไม่ได้ทำ**
+ถ้า LANE-UI ยังต้องการ ให้เปิดใบใหม่ของตัวเอง (หนึ่งใบ = หนึ่งข้ออ้าง) ห้ามต่อท้ายใบนี้
+
+## nonclaims
+1. ไม่ตัดสินความหมายของ payload `0x4391` และไม่ตัดสินว่า `743` คือ quest id / NPC id / list index --
+   ยกมาจาก nonclaim ข้อ 1 ของ R310 เอง ("ไม่ตัดสินความหมาย payload 0x4391 (LANE-UI)") สามทางยังเปิดเท่ากัน
+2. ไม่พิสูจน์ว่า `RunFindPath` ทำอะไรต่อเมื่อ response ไม่ว่าง -- รอบนี้ server ตอบ empty-vector เท่านั้น
+3. ไม่พิสูจน์ว่าคลิกทั้งสามชนิดให้ผลเดิมในฉากอื่น/เป้าอื่น/เซสชันอื่น (วัดฉากเดียว session เดียว คลิกละ 1 ครั้ง)
+4. ไม่พิสูจน์ว่าตัวละครเดินหรือไม่เดินตอนคลิก NPC และตอนคลิกมินิแมป (ดูข้อ (ข) ของชั้น client-observable)
+5. ไม่มีบรรทัดสีป้ายชื่อของใบนี้ จึงไม่พิสูจน์และไม่ขัดแย้งอะไรกับ `RE-067` และไม่มีแถวใหม่ลง
+   `REAL_SERVER_DIVERGENCE.tsv` จากใบนี้
+6. ไม่ปิด ไม่กลับคำ และไม่ทับ `RE-119` (ปิดแล้ว PASS/DONE) -- เป็นชั้นหลักฐาน attended ต่อจาก static
+7. ไม่พิสูจน์อะไรบน canonical DB (บูตบนสำเนา) และไม่พิสูจน์อะไรที่ต้องรอดข้าม relog
+
+## links
+`notes_to_chief/20260904_1911_KA1A-R310-RESULTS-gt219-step-B-PASS-gmui-opens-auto-walk-differential-captured-live-warp-persists-scene-CONFIRMED-p2-pixel-mob-name-pink-in-all-three-states.md` (ข้อ 2 = ที่มาทั้งหมดของ result) --
+`notes_to_chief/20260904_1226_LANE-UI-RE-TICKET-tracepath-record0-semantic-needs-attended-differential.md` (คำถามเดิม) --
+`notes_to_chief/20260904_1244_COO-DECISION-lane-ui-catalog-closed-at-14-of-15-minimap-folds-into-auto-walk-write-the-eight-handlers-now-as-pure-modules.md` ข้อ 2 (มินิแมปพับเข้าชุดนี้) --
+`notes_to_chief/20260904_1948_COO-DECISION-consume-R310-R311-close-GT219-1430-number-select-screen-GT-answer-0554-chief.md` ข้อ 4 (คำสั่งตั้งเลข + ห้ามบูตซ้ำ) --
+`CLIENT_RE_QUEUE.md` บล็อก `RE-119` (CLOSED PASS/DONE) -- `external/PF_SERIALIZER_FIELDS.tsv:5491-5536` --
+`GameClient\capture_r310_20260904_184529\GAME_EVENTS_LIVE.txt` seq 2-5
+
+## numbering
+ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืนสูงสุดที่ `245` (`GT-245`) => ใบนี้ `246`
+`GT-246`/`RE-246` = 0 hit ทั้งสามที่ก่อนวาง (ตรวจโดย chief รอบ `t7bsfx`/R342)
+
+**ผู้เปิดใบ: chief (LANE-E) ตาม `COO-DECISION 20260904_1948` ข้อ 4 -- ผู้บริโภคผล: LANE-UI**
 
 ---
