@@ -172,7 +172,9 @@ jobs:
           BASE_REF=$(printf '%s' "$META" | jq -r '.base.ref')
           BODY=$(printf '%s' "$META" | jq -r '.body // ""')
           DRAFT=$(printf '%s' "$META" | jq -r '.draft')
-          echo "PR #${PR} ${HEAD_REF} -> ${BASE_REF} state=${STATE} draft=${DRAFT} headrepo=${HEAD_REPO}"
+          TITLE=$(printf '%s' "$META" | jq -r '.title')
+          CHANGED=$(printf '%s' "$META" | jq -r '.changed_files')
+          echo "PR #${PR} ${HEAD_REF} -> ${BASE_REF} state=${STATE} draft=${DRAFT} headrepo=${HEAD_REPO} changed_files=${CHANGED}"
 
           [ "$STATE" = "open" ] || { echo "not open - nothing to do"; exit 0; }
           [ "$DRAFT" = "false" ] || { echo "draft - skipped"; exit 0; }
@@ -190,6 +192,42 @@ jobs:
           case "$BODY" in
             *"$PF_MARKER"*) : ;;
             *) echo "body does not carry the marker '${PF_MARKER}' - skipped, ON PURPOSE"; exit 0 ;;
+          esac
+
+          # [MEASURED, #1079, LANE-CS 20260904_0755]: a round claim PR (title
+          # ends "claim") that carries the marker from the moment it is opened
+          # gets merged as a one-file stub within seconds -- before the round
+          # has pushed any of the actual work the marker is supposed to mean is
+          # done.  AGENTS.md section 2/3 forbids adding the marker to a claim PR
+          # until the round's work is pushed to that same branch; this is the
+          # workflow-side backstop for a round that violates the rule anyway.
+          #
+          # [pf-adversary, chief R335, 2026-09-04]: the FIRST version of this
+          # guard used `commits <= 1`, and would NOT have caught #1079 itself
+          # -- #1079's own history has TWO commits at open (the claim commit,
+          # plus a no-op "merge main before push" commit AGENTS.md section 7
+          # mandates before every push, which routinely lands as a second
+          # commit before any round work exists, because the Windows bridge
+          # commits to `main` every few minutes). `commits` counts noise a
+          # mandatory house step adds for free; it is not a signal of real work.
+          #
+          # `changed_files` (base...head, i.e. what the round's branch actually
+          # differs from `${DEFAULT_BRANCH}` by) does not have that hole: a
+          # merge-main-before-push step that is genuinely a no-op changes
+          # nothing relative to that same `${DEFAULT_BRANCH}`, so it never
+          # moves `changed_files` off 1 (the claim file alone). Real round work
+          # -- the round file, a CHIEF_CONTINUATION.md line, letters, a queue
+          # update, per AGENTS.md section 3 -- is always more than one file, so
+          # `changed_files > 1` is what actually distinguishes "the round did
+          # something" from "the round only opened its claim (and maybe caught
+          # main up)".
+          case "$TITLE" in
+            *[Cc]laim)
+              if [ "$CHANGED" -le 1 ]; then
+                echo "::warning::#${PR} '${TITLE}' carries the marker with only ${CHANGED} changed file(s) against ${DEFAULT_BRANCH} - refusing to merge (see #1079). The round must push its work to this branch before the marker can release the lock."
+                exit 0
+              fi
+              ;;
           esac
 
           # `mergeable` is computed asynchronously and is null until ready.
@@ -368,12 +406,48 @@ jobs:
             BODY=$(printf '%s' "$META" | jq -r '.body // ""')
             DRAFT=$(printf '%s' "$META" | jq -r '.draft')
             CREATED=$(printf '%s' "$META" | jq -r '.created_at')
+            TITLE=$(printf '%s' "$META" | jq -r '.title')
+            CHANGED=$(printf '%s' "$META" | jq -r '.changed_files')
             [ "$HEAD_REPO" = "$REPO" ] || continue
             [ "$BASE_REF" = "$DEFAULT_BRANCH" ] || continue
             case "$HEAD_REF" in claude/*) : ;; *) continue ;; esac
             case "$BODY" in *"$PF_MARKER"*) : ;; *) echo "--- #${PR} ${HEAD_REF}: no marker - left alone ON PURPOSE (a human must add it)"; continue ;; esac
             CSEC=$(date -u -d "$CREATED" +%s 2>/dev/null || echo "$NOW")
             AGE=$(( NOW - CSEC ))
+            # Same #1079 guard as the `merge` job above, same `changed_files`
+            # signal (see the long comment there for why `commits` was wrong).
+            # UNLIKE every other skip in this file this one WAS unbounded in
+            # its first version [pf-adversary, chief R335]: a claim PR that
+            # legitimately violates the "no marker until work is pushed" rule
+            # and then dies (crashes, never pushes anything else) would sit
+            # here forever -- not merged (the guard blocks it), never reaching
+            # the close paths below either (a lone new file rarely conflicts,
+            # so `mergeable` stays true and the guard's own `continue` means
+            # the mergeable check is never reached).  Bounded here the same
+            # way every other "still working" skip in this file is bounded:
+            # PF_STALE_MINUTES to leave it be, then CLOSE with the same
+            # "branch kept, comment why" shape everything else in this
+            # reaper uses -- a ghost lock is still a lock.
+            case "$TITLE" in
+              *[Cc]laim)
+                if [ "$CHANGED" -le 1 ]; then
+                  if [ "$AGE" -lt "$LIMIT" ]; then
+                    echo "--- #${PR} ${HEAD_REF}: '${TITLE}' carries the marker with only ${CHANGED} changed file(s) - within ${PF_STALE_MINUTES}m, left alone (see #1079)"
+                    continue
+                  fi
+                  echo "--- #${PR} ${HEAD_REF}: '${TITLE}' carries the marker with only ${CHANGED} changed file(s) past ${PF_STALE_MINUTES}m - no round work ever arrived; closing (see #1079)"
+                  gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
+                    "**This claim pull request carries the automerge marker but only ${CHANGED} file(s) differ from \`${DEFAULT_BRANCH}\`, ${PF_STALE_MINUTES} minutes after it was opened - closing it.**" \
+                    "" \
+                    "A claim pull request's body must not carry the marker until the round's real work (the round file, a CHIEF_CONTINUATION.md line, letters, a queue update) is pushed to this same branch (AGENTS.md section 2/3). This one has the marker but nothing beyond the claim file itself, well past the point a live round would still be working -- see pf_bridge#1079 for the incident this guard exists to catch." \
+                    "" \
+                    "**The branch \`${HEAD_REF}\` is kept.** If the round that opened this is still alive somewhere, pushing its real work here will let it merge normally on the next event; otherwise the next round of this lane should treat this as a dead claim and start its own.")" \
+                    || echo "::warning::could not comment - closing anyway"
+                  if gh pr close "$PR" --repo "$REPO"; then echo "  CLOSED unripe claim (see #1079) -> branch kept"; else echo "::error::COULD NOT CLOSE #${PR}. The lane lock is STUCK until a human closes it."; fi
+                  continue
+                fi
+                ;;
+            esac
             echo "--- #${PR} ${HEAD_REF} draft=${DRAFT} age=$(( AGE / 60 ))m ---"
 
             if [ "$DRAFT" = "true" ]; then
