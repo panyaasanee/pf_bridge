@@ -129,6 +129,15 @@ nothing to report as a main-is-red incident.
 - `#1156` (the dead round's claim) released with a marker at 19:44+07 on COO's
   order, GET-confirmed. Not closed by hand.
 
+**push แล้ว รอ merge PR #761 (server, เปิดแล้ว รอ gate) + #1194 (claim, pf_bridge, marker เติมแล้ว 20:31+07)**
+
+🔴 `GATE_UNVERIFIED #761` -- read the `gate` check runs on `f21faa1` twice, at
+20:31+07 (open) and 20:38+07: both runs still `in_progress` (the Windows gate is
+historically slow; PANYA-DECISION `20260904_1158` §22 caps the wait at ~10
+minutes). The identical tree is fully green locally except the interpreter
+divergence documented above, which the gate's own Python 3.14 does not have.
+**The next LANE-A round opens by reading #761's gate result, before claiming.**
+
 ## งานสำรอง (สาย A ถือไว้รอบถัดไป)
 1. ISLAND responder id 2/3 edges not yet pinned: repeat contact inside one scene,
    and an id 2/3 frame arriving while `MEASURED_XYZ` is empty.
