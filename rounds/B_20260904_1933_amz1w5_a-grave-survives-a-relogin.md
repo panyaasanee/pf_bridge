@@ -104,8 +104,12 @@
 - ระหว่างทาง: `tests/test_mob_death_persistence.py` + ไฟล์ที่แตะ `commit_death` ทั้งหมด (9 ไฟล์ 381 ผ่าน 73 subtest)
 - ชุดเต็ม: **รันสองครั้ง** และนี่คือเหตุผลตามที่กติกาบังคับให้เขียน — ครั้งแรกจบตอน pf-adversary ยังไม่คืนผล
   ผลของมันบังคับให้แก้โค้ด (D1/D2 เป็นตัวหยุดรอบ ไม่ใช่ข้อคิดเห็น) ⇒ ต้องรันใหม่บนต้นไม้ที่แก้แล้ว
-  - ครั้งที่ 1 (ก่อนแก้): `1 failed, 9226 passed, 8 skipped, 17548 subtests` 369.60s
-  - ครั้งที่ 2 (commit สุดท้าย · merge `origin/main` `90d5aaa` แล้ว): **`1 failed, 9238 passed, 8 skipped, 17548 subtests`** 365.18s
+  - ครั้งที่ 1 (ก่อน adversary ครั้งที่ 1): `1 failed, 9226 passed, 8 skipped, 17548 subtests` 369.60s
+  - ครั้งที่ 2 (หลังแก้ตาม adversary ครั้งที่ 1): `1 failed, 9238 passed, 8 skipped, 17548 subtests` 365.18s
+  - ครั้งที่ 3 (**commit สุดท้ายจริง** · หลังแก้ตาม adversary ครั้งที่ 2 · merge `origin/main` แล้ว):
+    **`1 failed, 9274 passed, 8 skipped, 17550 subtests passed`** 365.74s
+  🔴 สามครั้งเพราะ adversary คืนผลสองครั้ง และผลทั้งสองครั้งบังคับให้แก้โค้ด (ไม่ใช่ถ้อยคำ) — ครั้งที่ 2 เจอตัวหยุดรอบจริง
+  (ตัวแก้ของผมเองทำให้ listener thread ตาย) กติกาห้าม push สภาพที่ไม่เคยถูกรันเต็ม จึงต้องรันใหม่ทุกครั้งที่โค้ดขยับ
 - 🔴 **`1 failed` ตัวนั้นไม่ใช่ของ PR นี้ — แดงบน `origin/main` เหมือนกัน** (วัดเอง: worktree สะอาดจาก `origin/main`
   `pytest tests/test_npc_interaction_wire.py` → `1 failed` เดิมเป๊ะ) ⇒ `QuestAndShopStateGuardTests::test_every_symbol_exemption_is_still_earned`
   `module='runtime.py'` · ข้อยกเว้น `columbus_quest3021_dispatch_refused_` / `columbus_quest3205_dispatch_refused_`
@@ -113,3 +117,11 @@
   รอบนี้ไม่มีตัวแก้ให้ port · เกต Windows จะแดงด้วยเหตุนี้กับทุก PR จนกว่า chief จะแก้
 
 ## 8. สถานะจบรอบ
+- push ครบทั้งสองรีโป
+- `pirate-force-server` PR #**PLACEHOLDER_SERVER** — **เปิดแล้ว รอ gate** (ใส่ `PF-AUTOMERGE: v4` ตั้งแต่เปิด)
+- `pf_bridge` claim PR #1192 — เติม marker แล้ว = ปลดล็อก
+- 🔴 `ADVERSARY_PENDING #**PLACEHOLDER_SERVER**` — ตัวแก้ของ adversary ครั้งที่ 2 ยังไม่ผ่าน adversary (เพดาน 2 ครั้ง/รอบ)
+  **รอบถัดไปของสาย B หยิบเป็นงานแรกก่อน claim**
+- 🔴 เกต Windows จะแดงที่ `test_npc_interaction_wire.py` ซึ่ง **แดงบน `origin/main` อยู่แล้ว ไม่ใช่ของ PR นี้** (ข้อ 7)
+  ไม่มีตัวแก้ให้ port · แจ้ง chief แล้วในใบ `1945`
+- ห้ามอ่านว่า "เสร็จ": ผู้เล่นยังไม่เห็นอะไรต่างจนกว่าบรรทัดของ chief จะขึ้น main
