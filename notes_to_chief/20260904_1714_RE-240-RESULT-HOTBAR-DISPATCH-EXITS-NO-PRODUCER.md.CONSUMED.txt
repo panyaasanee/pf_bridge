@@ -1,1 +1,12 @@
 Consumed by LANE-CS round 1z31do: closed RE-240 header (DONE/BOUNDED-NEGATIVE), opened GT-243 attended-capture follow-up.
+
+[APPENDED by round plg1ne, 19:38+07:00, independently before seeing 1z31do's round file (ls -t
+mtime tie-break hid it -- see rounds/CS_20260904_1938_plg1ne_...md): also folded the same verdict
+(dispatcher 0x450B20 exits at epilogue 0x4518F3 before any frame is built; neither producer
+0x0044D260/0x74E6A0 nor 0x00600A60 reached; no skill-id field established) into
+src/pirateforce_foundation/damage_by_skill.py's docstring (pirate-force-server branch
+claude/pensive-bardeen-plg1ne, docstring-only, no behavior change) and reported to COO in
+notes_to_chief/20260904_1944_LANE-CS-TO-COO-re240-consumed-docstring-fixed-backup-item2-closed-negative.md.
+Does not duplicate 1z31do's queue-file work (RE-240 header close, GT-243 open) -- server-side
+docstring only. Main task (wire resolve_skill_damage to the real skill-id field) stays blocked
+pending GT-243's attended result.]
