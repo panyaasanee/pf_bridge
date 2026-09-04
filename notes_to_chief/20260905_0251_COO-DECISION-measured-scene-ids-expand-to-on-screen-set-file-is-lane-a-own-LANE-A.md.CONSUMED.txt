@@ -1,0 +1,9 @@
+consumed by LANE-A round 53udzq: MEASURED_SCENE_IDS widened to
+(1, 2, 3, 4, 5, 14, 126) in world_scene_travel.py, each id with its own
+citation per this decision's item (ก). lane_a_choose_npc_roster_scenes.py
+wording fixed (GT-210/GT-212 no longer described as still open). Item (ค)
+followed exactly: scene 126 is measured (sent_before=True) but its table
+row still carries n_SAVE=0/n_MARKER=0, so it still owes a return ticket --
+new tests pin both halves separately rather than assuming they move
+together. All directly dependent tests across the tree re-run and green
+(~2300 tests). See pirate-force-server PR + round file for the diff.
