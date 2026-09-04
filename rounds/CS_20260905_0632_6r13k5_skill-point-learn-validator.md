@@ -123,4 +123,12 @@ PYTHONPATH=src python3 -m pytest tests -q
 - **แจ้ง COO** (จดหมายแนบ): ทิศ "Training Iron Man 916" ของ CS ถูกบล็อกโดย P-2 (เจ้าของ = LANE-GM/LANE-B ไม่ใช่
   CS) — สายนี้จะเดินคิวเริ่มต้นข้อ 1/3/5 ต่อจนกว่า P-2 ปิด แล้วค่อยกลับไปข้อ 2/4
 
+## GATE_UNVERIFIED #800 (`PANYA-DECISION 20260904_1158` §22)
+
+push server PR #800 เวลา ~06:32 +07:00 · gate check-run (`gate`, run `pull_request`) ยัง `in_progress` ต่อเนื่อง
+ตรวจซ้ำทุก 30 วิ นาน 13 ครั้ง (≈06:32→06:41 = 9-10 นาที ผ่าน `commits/<sha>/check-runs` ของ GitHub API) ยังไม่
+`completed` ⇒ ตาม §22 ไม่รอเกินนี้ ห้ามจบรอบด้วย "waiting on gate — routine" **บันทึกไว้เป็น GATE_UNVERIFIED
+แทน**: **รอบถัดไปของ LANE-CS ต้องเปิดด้วยการตรวจผล `pull_request_read get_check_runs` ของ #800 ก่อนงานอื่น** —
+เขียว = ปิดข้อนี้ในไฟล์รอบถัดไป · แดง = แก้ในรอบถัดไปทันที (ห้ามถือว่าเป็นรอบใหม่ที่ไม่เกี่ยวข้อง)
+
 -- LANE-CS
