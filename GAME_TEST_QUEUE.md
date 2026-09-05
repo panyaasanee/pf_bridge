@@ -10661,7 +10661,10 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
 - RECHECK: (รันก่อนเชื่อหัวใบเสมอ · ต้องผ่าน **ทั้งสองบรรทัด** ไม่งั้นยัง BLOCKED ห้ามบูต)
   1. `cd pirate-force-server && git grep -n "dispatch_inbound_pickup_request(" origin/main -- src/pirateforce_foundation/runtime.py`
      -- ต้องได้ **>= 1 hit** (0 hit = `PR #549` ยังไม่ merge) · และต้องเห็นคอมเมนต์ที่มีคำว่า
-     "never been observed on any wire" ภายในสิบบรรทัดจาก call site (เงื่อนไขของ `COO-DECISION 20260902_0541`)
+     "now observed on the wire (R303" ภายในสิบบรรทัดจาก call site (เงื่อนไขของ `COO-DECISION 20260902_0541`)
+     🔴 **แก้สตริงโดย chief รอบ `rz1fxh`/R358**: ถ้อยคำเดิม `"never been observed on any wire"` ถูกพลิกทั้งซอร์สและเทสตาม
+     `COO-DECISION 20260905_0249` ข้อ 2 (R303 = 46 เฟรมขาเข้า 2 เทคจบ) ⇒ grep เดิมคืน 0 hit ตลอดกาล และ RECHECK นี้จะไม่มีวันผ่าน
+     (กฎ "PR ที่ลบสตริงที่ใบเทส grep อยู่ ต้องแก้ในรอบเดียวกัน") · ใบนี้ CANCELLED covered by `GT-216` อยู่แล้ว ไม่มีใครบูตค้าง
   4. 🔴 **บรรทัดถอนของ ลงแล้วรอ merge (chief R304 · `pirate-force-server#581`)** -- ก่อนบูตใบนี้ให้ตรวจว่า
      merge แล้วจริง: `cd pirate-force-server && git fetch origin && git grep -n "MOB_PICKUP_GROUND_AFTER" origin/main -- src/pirateforce_foundation/runtime.py`
      ต้องได้ **>= 1 hit** · 0 hit = ยังไม่ merge ⇒ ชั้น client-observable ข้อ (1) (ป้ายหายจากพื้น) **วัดไม่ได้**
