@@ -1,6 +1,6 @@
 # COMMON_LANE_ROUND — ระเบียบหนึ่งรอบ ใช้ร่วมทุกสาย builder
 
-> ไฟล์นี้คือ "เครื่องยนต์รอบ" ที่ทุกสาย builder ใช้เหมือนกัน (A · B · DB · GM · CS · UI)
+> ไฟล์นี้คือ "เครื่องยนต์รอบ" ที่ทุกสาย builder ใช้เหมือนกัน (A · B · DB · GM · CS · UI · Q)
 > สายของคุณอ่านไฟล์นี้ **ต่อจาก** ไฟล์สายของตัวเอง (`prompts/<TAG>.md`) ทุกรอบ
 > ไฟล์สายบอก **ตัวคุณ** (ป้าย ภารกิจ เขตเขียน คิว) · ไฟล์นี้บอก **วิธีเดินรอบ**
 > คำที่ต้องแทนด้วยค่าของสายคุณ (อยู่หัวไฟล์สาย): `<TAG>` = ป้าย PR เช่น `[LANE-A]` · `<PREFIX>` = คำนำหน้าไฟล์รอบ เช่น `A`
@@ -37,10 +37,11 @@
 - 🔴 งบเวลา 75 นาที: ถึงนาที 75 นับจากเริ่มรอบ ห้ามเริ่มงานชิ้นใหม่ push สิ่งที่มี เปิด PR ปลดล็อก งานที่เหลือเขียนลง "รอบหน้าทำอะไร" (รอบเกิน 90 นาทีทำให้รอบถัดไปตื่นเปล่า = เสียครึ่งรอบ)
 - รอบทำเกิน 90 นาที: push อัปเดต `_claim.md` หนึ่งครั้ง (checkpoint ไม่ใช่โค้ด) ให้รอบถัดไปเห็นว่ายังมีชีวิต
 - 🔴 ปลดล็อกแล้ว = รอบจบ ห้ามแตะโค้ด ห้าม push เพิ่ม ห้ามเปิด PR ใหม่ในรอบเดียวกัน · ผล pf-adversary เพิ่งคืน/เจอของต้องแก้หลังปลด ⇒ เขียนลงไฟล์รอบ รอบถัดไปหยิบเป็นงานแรก
-- 🔴 รอบว่างไม่มีอีกแล้ว: งานหลักติด ⇒ หยิบ `## งานสำรอง` ในไฟล์สายของคุณ (backlog pre-approved · RE/STATIC ที่ตอบได้จากซอร์ส · ใบเทส · technical debt ที่ adversary ชี้) · ทำไม่ได้จริงต้องเขียน "ว่างเพราะรอ <ใคร/ใบไหน>" ให้ COO นับ · ห้ามเงียบเฉยว่า "ไม่มีอะไรทำ"
+- 🔴 รอบว่างไม่มีอีกแล้ว: งานหลักติด ⇒ **งานสำรองข้อแรกของทุกสาย = ปลดแฟล็ก 1 ตัว**: เปิด `docs/PROMOTION_BACKLOG.md` (รีโปเซิร์ฟเวอร์ · chief ดูแล · COO จัดอันดับ) หยิบ scenario/hypothesis ในเขตตัวเองที่พิสูจน์แล้วแต่ยัง `production_allowed = false` มาทำให้ทำงานไร้แฟล็ก + เทส + ใบ GT (Panya 2026-09-05: 60 scenario พิสูจน์แล้ว โปรโมตแค่ 10) · ถัดไปค่อยเป็น `## งานสำรอง` ในไฟล์สาย (โค้ดก่อน กระดาษทีหลัง) · ทำไม่ได้จริงต้องเขียน "ว่างเพราะรอ <ใคร/ใบไหน>" ให้ COO นับ · ห้ามเงียบเฉยว่า "ไม่มีอะไรทำ"
 
 ## ทำงาน + หลักฐาน
 - สั่ง `pf-adversary` **ต้นรอบพร้อมเริ่มงาน** (ไม่ใช่ก่อน commit — งานเครื่องมือกิน 25-50 นาที) · ผลยังไม่คืนตอน push ⇒ push ตามเดิม บันทึก `ADVERSARY_PENDING <PR>` · **ห้ามเขียน "ผ่าน adversary" ก่อนผลคืน** · สูงสุด 2 ครั้งต่อรอบ
+- เซสชันที่ค้นแล้ว (ToolSearch/Agent) **ไม่มี** `pf-adversary` ให้เรียกจริง ⇒ บันทึก `ADVERSARY_UNAVAILABLE <PR/กิ่ง>` ในไฟล์รอบ (token เดียวกันทุกสาย) + ทำ self-review: อ่านทุก hunk ใน `git diff --cached` · รันมิวแทนต์เฉพาะไฟล์เทสที่แตะ · แล้วเดินต่อตามกฎ draft/marker เดิม · **รอบถัดไปของสายเดียวกันสั่ง adversary บนกิ่งนั้นเป็นงานแรก** เหมือนกรณี PENDING (วัด 5 ก.ย.: ทุกสายเจอ tool หายเป็นบางรอบ chief กำลังหาสาเหตุ)
 - ทำงานหนึ่งชิ้นที่ **ผู้เล่นเห็นได้จริงบนจอ** (ไม่ใช่ probe/แฟล็ก/รายงาน) · หลักฐานสองชั้นแยกกันเสมอ (client-observable กับ wire/DB ห้ามใช้ชั้นหนึ่งอ้างอีกชั้น) · ทุกผลมี nonclaims · ผลลบ = ผลที่มีค่า บันทึกเต็ม
 - "ต่อสายแล้ว/WIRED" = observed ไม่ใช่ named · ประโยคปฏิเสธ ("ไม่มี/ไม่เคยวัด") ต้องมี `grep` กำกับ และ grep ครบทุกที่ก่อนประกาศ
 - ก่อน push: `git merge origin/main` เข้ากิ่งเป็นขั้นสุดท้าย → รันชุดเต็ม (`pytest tests/`) ครั้งเดียวต่อรอบบนต้นไม้นั้น เป็น commit สุดท้ายจริง · ระหว่างทางรันเฉพาะไฟล์เทสที่แตะ (`pytest tests/test_<x>.py`) ห้ามรันชุดเต็มระหว่างทาง
@@ -51,8 +52,14 @@
 1. `pf_bridge/VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv` = สารบัญการกระทำบนสาย (327 แถว · id + ชื่อ · 1 แถว = 1 การกระทำจริง)
 2. `external/PF_PROTOCOL_REGISTRY.tsv` = VA ของ serializer/handler/getter สำหรับ static RE (519 คลาส · 209 ตัวที่เกินจากข้อ 1 เป็น struct/module ไม่ใช่ฟังก์ชัน)
 3. `external/PF_SERIALIZER_FIELDS.tsv` = layout ที่พิสูจน์แล้ว + ทิศทาง W/R · เริ่มค้นที่ `external/00_SEARCH_HERE_FIRST.md` · ค่า attr ที่พิสูจน์แล้ว `notes_to_chief/reference_codex_attr/`
-ของสายคุณอยู่ในนั้นแล้ว (grep ชื่อเหล่านี้ก่อนเดา): **A** Trigger*/Teleport*/COnLand/CVehicle/Instance*/NavigationEx_* · **B** TargetVital/Action*/Relive*/CPotion/CArena*/CPVPState · **DB** Equipment_* (17)/Storage*/GuildStorage*/ItemLock/ItemBinding/ItemSynthesis/UserSetting/ItemMall_*/SetItemOnHotKey · **CS** CLearnSkill*/CRevertSkill/TriggerCastSkill/CBuff/CFightMsg/CHitResult/CMissileHitResult/CSkillAttr/FightAttr/Channel_JoinClassChannel · **GM** GM_*/Cheat*/Teleport* · **UI** Community_/Express_/Channel_/BuildingCrystal_/Pets_/… (แผนใน `docs/UI_LANE.md`)
+ของสายคุณอยู่ในนั้นแล้ว (grep ชื่อเหล่านี้ก่อนเดา): **A** Trigger*/Teleport*/COnLand/CVehicle/Instance*/NavigationEx_* · **B** TargetVital/Action*/Relive*/CPotion/CArena*/CPVPState · **DB** Equipment_* (17)/Storage*/GuildStorage*/ItemLock/ItemBinding/ItemSynthesis/UserSetting/ItemMall_*/SetItemOnHotKey · **CS** CLearnSkill*/CRevertSkill/TriggerCastSkill/CBuff/CFightMsg/CHitResult/CMissileHitResult/CSkillAttr/FightAttr/Channel_JoinClassChannel · **GM** GM_*/Cheat*/Teleport* · **UI** Community_/Express_/Channel_/BuildingCrystal_/Pets_/… (แผนใน `docs/UI_LANE.md`) · **Q** สคริปต์ต้นฉบับ `gamedata/lua/` (616 ไฟล์) + API 160 ฟังก์ชันใน `gamedata/PF_LUA_API_SPEC.md`
 🔴 ใบ RE ที่ถามสิ่งที่มี layout ในข้อ 3 อยู่แล้ว = เสียรอบ RE runner ฟรี (เวลา RE runner = เวลาเครื่อง Panya) — grep ก่อน แล้วเขียน "grep แล้ว: เจอ/ไม่เจอ" ลงใบ
+🔴 ใบใดต้องการ capture จากเครื่อง Panya (`NEEDS-ATTENDED-CAPTURE` / ใบ GT ที่ต้องดูจอ) **ต้องมีบล็อก `ATTENDED:` ≤5 บรรทัด**: กดอะไร/พิมพ์อะไร · ดูเฟรม id หรือค่าอะไร · ผ่าน/ไม่ผ่านตัดสินจากอะไร · ต้องบูตด้วยทรี/ธง/env อะไร (ไม่มีบล็อก = chief ไม่จัดคิว) — เพราะบูต attended หนึ่งครั้งเก็บ**ทุกใบ**ที่มีบล็อกนี้พร้อมกัน (รถบัส capture · Panya 2026-09-05) ใบที่เขียนบล็อกไม่ครบคือใบที่ตกรถ
+
+## ผลผลิตที่นับ = Scoreboard (Panya 2026-09-05) — ทุกไฟล์รอบจบด้วยบรรทัดนี้ บรรทัดเดียว รูปแบบตายตัว
+`SCOREBOARD: <DONE|COMING|STUCK|NONE> | <ประโยคที่ผู้เล่นเข้าใจ: ทำอะไรได้ที่เมื่อวานทำไม่ได้> | <หลักฐาน: PR/GT/sha>`
+- DONE = ผู้เล่นทำได้จริงบนบูตปกติไร้แฟล็ก (มี GT ยืนยันบนจอ) · COMING = โค้ดถึง main/รอ merge/รอ GT · STUCK = พิสูจน์แล้วแต่ยังไม่ถึงมือผู้เล่น (ติดแฟล็ก/ติดสายอื่น) · NONE = รอบนี้ไม่มีอะไรขยับ (เขียนเหตุผลสั้น)
+- chief รวมบรรทัดนี้จาก `rounds/*.md` เป็น `SCOREBOARD_FACTS.tsv` → `PLAYER_STATUS.html` ทุกรอบ · COO รายงานเจ้าของด้วย "แถวที่ย้ายเข้า DONE" ไม่ใช่จำนวนรอบ · ไม่มีบรรทัดนี้ = รอบไม่นับ
 
 ## จบรอบ ตามลำดับ ห้ามสลับ
 1. push งานให้ครบทั้งสองรีโป (git ไม่พึ่ง tool)

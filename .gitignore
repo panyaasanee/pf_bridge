@@ -225,6 +225,14 @@
 !/gamedata/scene/**/
 !/gamedata/scene/**/*.placements.tsv
 
+# ---- scoreboard (Panya ruling 2026-09-05, ka1-A): the DONE/COMING/STUCK board
+# the owner reads. Facts are derived by the chief from SCOREBOARD: lines in
+# rounds/*.md; the generator lives in tools_bridge/ (name-only entry, same rule
+# as the other tools there). Text only; hard-deny block below still rules.
+!/SCOREBOARD_FACTS.tsv
+!/PLAYER_STATUS.html
+!/tools_bridge/pf_scoreboard.py
+
 # ---- workflows: merge a cloud round's pull request (chief round 110) ----
 # Line 1 of this file is `/*`, so git does not even descend into .github/
 # unless the directory is opened by name BEFORE its contents.  Both lines are

@@ -8,7 +8,7 @@
 
 ## 0. โครงสร้างทีม
 มี COO + สาย builder ทำงานขนานกับคุณ — คุณไม่ได้ทำทุกอย่างคนเดียว
-- DB PERSISTENCE · GM TOOLS · A WORLD · B COMBAT · CS CLASS/SKILL · UI UI/FUNCTIONS — ทุกสายยิงทุก 90 นาที (สอง routine สลับ) · COO ตัดสินแทนเจ้าของ ตอบจดหมาย ยิงทุกชั่วโมง :41 · RE runner static บนสะพาน
+- DB PERSISTENCE · GM TOOLS · A WORLD · B COMBAT · CS CLASS/SKILL · UI UI/FUNCTIONS · **Q SCRIPT/QUEST** (Lua host ให้สคริปต์ต้นฉบับ 616 ไฟล์รัน — ตั้ง 5 ก.ย.) — ทุกสายยิงทุก 90 นาที (สอง routine สลับ) · COO ตัดสินแทนเจ้าของ ตอบจดหมาย ยิงทุกชั่วโมง :41 · RE runner static บนสะพาน · ka1-A/ka1-B = เซสชัน attended (เทส/ระบบ)
 - (ลำดับนาทีของแต่ละสายอยู่ในตาราง routine ที่เดียว — ห้ามคำนวณเวลาจากมัน ดู §cadence)
 งานหลักของคุณ = PLATFORM + รีวิว + merge + สั่งงานสาย A/B/GM/DB/CS/UI
 🔴 หน้าที่ของ chief คือ **ห้ามเป็นคอขวด** — ตั้งแต่ lane_hooks ลง main สายต่อสายเอง คุณเหลือรีวิว · CORE-REQUEST เหลือเฉพาะกรณีจุดเสียบไม่พอ
@@ -41,7 +41,8 @@
 ## 6. เขตเขียน
 chief: `docs/ tools/ .github/ src/ tests/` · `GAME_TEST_QUEUE.md` `CLIENT_RE_QUEUE.md` `CHIEF_CONTINUATION.md` `AGENTS.md` `SERVER_VERSIONS.md` · `rounds/R*`
 🔴 `runtime.py` · `app.py` · `current/pf_login_game_server_v141.py` เป็นของคุณคนเดียว — สายขอมาเป็นบรรทัดใน PR body คุณเดินสายให้รอบเดียวกัน
-เขตของสาย: A `scenarios/world_*.json` · B `scenarios/combat_*.json` · GM `gm/`+`scenarios/gm_*.json` · DB `migrations/`(เลขใหม่)+`persistence_*.py`+method ใหม่ใน store.py · CS `skill_*/class_*/damage_*.py` · UI `ui_*.py` · ทุกสาย `lane_hooks/lane_<x>_*` + หัวใบ RE/GT ที่ตัวเองเปิด · COO `notes_to_chief/`+`NOW.md`
+เขตของสาย: A `scenarios/world_*.json` · B `scenarios/combat_*.json` · GM `gm/`+`scenarios/gm_*.json` · DB `migrations/`(เลขใหม่)+`persistence_*.py`+method ใหม่ใน store.py · CS `skill_*/class_*/damage_*.py` · UI `ui_*.py`+`docs/UI_LANE.md` · **Q `script_*.py` + `lua_api/` + `tests/test_script_*` + `docs/SCRIPT_LANE.md`** (อ่าน `gamedata/lua` ได้ ห้ามแก้) · ทุกสาย `lane_hooks/lane_<x>_*` + หัวใบ RE/GT ที่ตัวเองเปิด · COO `notes_to_chief/`+`NOW.md`
+ของ chief เพิ่ม (Panya 2026-09-05): `docs/PROMOTION_BACKLOG.md` (ทะเบียน scenario/hypothesis ที่พิสูจน์แล้วแต่ยัง `production_allowed=false` + "ผู้เล่นจะเห็นอะไร" + สายเจ้าของ · regenerate ทุกรอบที่มี scenario ใหม่ · COO จัดอันดับ) · `SCOREBOARD_FACTS.tsv` + `PLAYER_STATUS.html` (รวมจากบรรทัด `SCOREBOARD:` ใน `rounds/*.md` ด้วย `tools_bridge/pf_scoreboard.py` ทุกรอบ — นี่คือตัววัดผลผลิตของทีม ไม่ใช่จำนวนรอบ)
 🔴 lane_hooks (เจ้าของอนุมัติ 27 ส.ค. ใบ 1230): `src/pirateforce_foundation/lane_hooks/` ที่ runtime.py auto-discover ตอนบูต — แต่ละสายเป็นเจ้าของไฟล์ตัวเอง เขียนได้โดยไม่ต้องขอคุณ · hook fail-closed + พิมพ์ token ตอนลงทะเบียนและยิงจริง · production_allowed เกตเดิม · pf-adversary รีวิว
 🔴 เจอผู้เทส/สายแก้ `CHIEF_CONTINUATION.md` หรือเนื้อใบในคิว = กติกาแตก ไม่ใช่ conflict — merge เนื้อเขาเข้ามาแล้วเตือนในจดหมาย (ยกเว้น archive ตามใบสั่ง และสายปิดหัวใบที่ตัวเองเปิด)
 
@@ -65,6 +66,8 @@ job publish-status ท้าย `gate-windows.yml` เขียนคำตั�
 ทุกรอบต้องอย่างใดอย่างหนึ่ง: เพิ่ม/แก้รายการใน GAME_TEST_QUEUE.md หรือเขียนว่าทำไมรอบนี้ไม่มีอะไรให้เทส · pass criteria สองชั้นเสมอ (wire/DB กับ client-observable)
 🔴 ห้ามลบ/ย้ายรายการที่ยังไม่ได้เทส ไม่ว่านานแค่ไหน (archive ได้เฉพาะ PASS/FAIL/DONE/supersede-by-ชื่อชัด) · คิวยาวแก้ด้วยสารบัญ ไม่ใช่เอาออก
 🔴 คัดกรองใบ attended = หน้าที่ต่อเนื่องของ chief (เจ้าของ GAME_TEST_QUEUE.md · PANYA 2148) ทุกรอบที่แตะคิว + อย่างน้อยทุก 6 ชม. · ไฟล์รอบมีบรรทัด `QUEUE_TRIAGE:` และ `READY/PENDING ที่ไม่อยู่ใน NOW รอเครื่องคุณ:` · ยกเลิกไม่ใช่ลบ (`CANCELLED - refuted by/covered by <อ้างอิง>`) · ไม่แน่ใจถามCOO หนึ่งบรรทัด
+🔴 รถบัส capture (Panya 2026-09-05): ใบที่ต้องการเครื่อง Panya ต้องมีบล็อก `ATTENDED:` ≤5 บรรทัด (กดอะไร · ดูเฟรม/ค่าอะไร · เกณฑ์ผ่าน · ทรี/ธง/env) ก่อนเข้า READY — ไม่มีบล็อก = ตีกลับให้สายเจ้าของเติม ไม่จัดคิว · บรรทัด `READY/PENDING …` ต้องเรียงใบที่บูตร่วมกันได้ไว้ด้วยกัน เพราะ ka1-A เก็บทั้งกองในบูตเดียว
+🔴 ขนาดไฟล์กลาง (Panya 2026-09-05 · บังคับด้วยเกตไม่ใช่กฎ): `GAME_TEST_QUEUE.md` ≤300 KB · `CLIENT_RE_QUEUE.md` ≤200 KB · `AGENTS.md` ≤30 KB · `CHIEF_CONTINUATION.md` ≤30 KB · `NOW.md` ≤12 KB — `pf_gate_preflight.py` ตรวจก่อน push ทุกสาย เกิน = แดง · ใบปิดแล้ว >24 ชม. → archive ทิ้ง stub ทุกรอบ (วัด 5 ก.ย.: คิว 2.8 MB ใบปิด 92/153 ยังอยู่ ทำให้ทุกรอบเสียเวลาอ่านและเกิน 75 นาที)
 
 ## 12. กติกาหลักฐาน
 G1-G8 ครบ (G1 ห้ามอ้างแหล่งเดียว · G5 สองชั้นห้ามรวมข้ามชั้น · G6 ห้ามประกาศความหมายฟิลด์จากการอ่านครั้งเดียว · G8 ติดป้าย [วัดแล้ว]/[เสนอ]) · G-OBS (client-observable ต้องมี OBSERVER_CONFIRMED) · G-FRAME (เฟรมหลักฐานต้องมี t เทียบ T0 + ระยะ) · รายละเอียด ⇒ EVIDENCE_GATES.md
