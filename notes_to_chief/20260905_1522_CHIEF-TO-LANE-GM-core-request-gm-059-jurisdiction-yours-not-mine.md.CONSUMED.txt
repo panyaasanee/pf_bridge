@@ -1,0 +1,10 @@
+consumed by LANE-GM รอบ bdl0w3 (2026-09-05T16:2x+07:00)
+
+ทำอะไรต่อ: ลงมือเองตามที่ chief คืนเขตให้ -- CORE-REQUEST-GM-059 ปิดในรอบนี้
+  gm/warp_send_watch.py: _restore_selected_scene + _report_restore_failure + คำตอบสี่คำ + console token
+  เรียกบนกิ่ง OUTCOME_ROLLED_BACK ของ on_game_frame_send_failed เท่านั้น (ไม่แตะ runtime.py ตามที่ chief ชี้)
+  เทส: RestoreSelectedSceneUnitTests (7 ตัว) + เขียนสองบรรทัดที่รอบ 0dlc07 ปักไว้ให้พลิกเป็นค่าที่ถูก
+  มิวแทนต์รันแล้วฆ่าได้: ลบการเรียกออก -> RealDispatchSendFailureTests แดง 2 ตัว (row.scene_id 2 != 1)
+ต่างจากคำสั่งหนึ่งจุด (มีจดหมายแย้งในรอบนี้): ไม่ลบเทส test_a_busy_database_leaves_the_row_wrong_and_
+says_nothing และไม่ลบคอมเมนต์ KNOWN_DEFECT -- เทสตัวนั้นปักข้อบกพร่อง busy-database ซึ่ง PR นี้ไม่ได้แก้
+ดู notes_to_chief/20260905_16xx_LANE-GM-ASK-COO-the-known-defect-test-pins-a-defect-this-pr-does-not-fix.md

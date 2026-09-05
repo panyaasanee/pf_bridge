@@ -1,0 +1,170 @@
+# LANE-GM รอบ `bdl0w3` — `CORE-REQUEST-GM-059` ปิด: ป้ายฉากใน `selected` กลับมาหลัง rollback
+
+- เริ่ม 2026-09-05T16:12+07:00 · เขียน 2026-09-05T16:2x+07:00 (+07:00 ทุกบรรทัด)
+- ล็อกรอบ: `[LANE-GM]` open = **ไม่มี** ทั้ง `pirate-force-server` และ `pf_bridge` ตอนต้นรอบ
+  ⇒ ตัดกิ่ง claim เอง (ไม่ใช่ takeover) · claim PR = `pf_bridge#1344`
+- อ่าน `NOW.md` เป็นไฟล์แรก **ก่อน** อ่านกล่องจดหมายและก่อนแตะโค้ด
+
+## รอบนี้ขยับ NOW ข้อไหน
+**ขยับ 1 ข้อ · ไม่ขยับ 1 ข้อ (มีเหตุผลวัดได้)**
+
+1. ✅ **ขยับ: `NOW` บล็อก 14:53 ข้อ (3) — "GM-059 ... งานแรก 14:51 PR จุดคืน `selected` ตก 16:21"**
+   ปิดในรอบนี้ · chief คืนเขตให้สายนี้ (`1522`) และสายนี้ลงบรรทัดเองใน `gm/warp_send_watch.py`
+   ไม่แตะ `runtime.py` เลย · PR เซิร์ฟเวอร์ = ดูท้ายไฟล์
+2. ❌ **ไม่ขยับ: `NOW` "GM-A `/warp <เลขแมพ>`" ข้อ `1347` (เทสปักวาป 126 สด · ตก 17:11)**
+   **เพราะ precondition ของใบยังไม่เกิด และวัดแล้ว ไม่ใช่เดา**: `1347` ข้อ 2 เขียนว่า
+   "รอบแรกของ GM **หลัง PR นั้นบน main**" -- PR ของ LANE-A (ใบ `1346`) **ยังไม่ขึ้น main
+   และยังไม่มี PR เปิดด้วยซ้ำ**
+   - วัดบน `origin/main` `77b9fc3` รอบนี้:
+     `warp_no_coords_live_target(126)` = `None` · `world_scene_travel.destination(126).
+     has_authored_entry` = `False` (`spawn` = `(3050.0, 232.0, 90.0)` มีอยู่แล้ว แต่เกตอยู่ที่
+     marker ไม่ใช่ spawn) ⇒ `/warp 126` ยัง **stage** ตามกฎเดิม
+   - `list_pull_requests(state=open)` ของ `pirate-force-server` = `#833` (LANE-E) และ `#794`
+     (LANE-E) เท่านั้น · ไม่มีใบของ LANE-A
+   - 🔴 **ไม่แตะเกตของ `1347` ข้อ 3 ล่วงหน้า** (`chat_command_action.py:167` ชุด 126 ·
+     preflight) เพราะ `1347` ผูกไว้ว่า "แก้ใน**รอบเดียวกัน**" กับเทสปัก และเทสปักยังเขียนไม่ได้
+     · แก้ตอนนี้ = แก้ตามสมมติฐานว่า A จะลงมาหน้าตาแบบไหน และเสี่ยงพลิกเทสที่ปัก `GT-141` ไว้
+     (`ProductionCallShapeTests::test_the_default_argument_call_stages_where_gt141_says_it_does`)
+- **ว่างเพราะรอ**: `LANE-A` ใบ `20260905_1346_*` (registry ให้ `warp_no_coords_live_target(126)`
+  คืนเป้า) · ตกของ A = 15:51 · ตอนวัด 16:2x ยังไม่มา ⇒ ตกของ GM (17:11) ยังไม่เริ่มนับ
+
+NO_FEATURE_WAITING: RE-263 bounded-negative -- second P-2 route dead, blocker unchanged
+(บรรทัดตามแบบที่ `COO 1452` สั่งเติม · ย้อนอ้างรอบ `0dlc07` ที่เขียนเป็นร้อยแก้วแทน · `PANYA 1130`)
+
+TWO_SESSIONS_SAME_SCENE: ไม่เกี่ยว -- รอบนี้ไม่แตะสถานะโลกต่อฉากเลย ป้ายที่คืนคือ
+`foundation.selected.position.scene_id` ของ **เซสชันเดียว** (ตำแหน่งตัวละคร = ของบัญชี ลง DB ตาม
+`PANYA 1057/1140` ไม่ใช่ roster/มอน/ศพ/ของพื้น) · ไม่มีเฟรมออกจากเซิร์ฟเวอร์เพิ่มแม้แต่ไบต์เดียว
+
+BYTECODE_PURGED: ทั้งรอบรันด้วย `PYTHONDONTWRITEBYTECODE=1` + `python3 -B` · และหลังคืนค่ามิวแทนต์
+รัน `find . -name __pycache__ -type d -prune -exec rm -rf {} +` ก่อนชุดเต็ม (`COO 1446`)
+
+## กล่องจดหมาย (ขั้นที่สองของรอบ)
+`ADDRESSEE: LANE-GM` ที่ยังไม่มี `.CONSUMED.txt` ตอนต้นรอบ = **3 ใบ**
+- ✅ `1452` COO (RE-263 ตรวจคู่) — **บริโภคแล้ว** · เติมบรรทัด `NO_FEATURE_WAITING:` ข้างบน · stub วางแล้ว
+- ✅ `1522` chief (GM-059 คืนเขต) — **บริโภคแล้ว** · ลงมือทั้งใบในรอบนี้ · stub วางแล้ว
+- 🔶 `1347` COO (`/warp 126` สด) — **อ่านแล้ว วัด precondition แล้ว แต่ตั้งใจไม่วาง stub**
+  งานยังค้างจริง ๆ · ปล่อยใบเปิดไว้เพื่อให้รอบถัดไปเห็นเป็นงานแรก (กติกากล่องจดหมาย ข้อ B)
+  ไม่ใช่การมองข้าม -- เหตุผลอยู่ในหัวข้อ "ไม่ขยับ" ข้างบน และในจดหมายรายงาน `16xx`
+
+## งานของรอบ — `CORE-REQUEST-GM-059` (ครึ่งเซิร์ฟเวอร์)
+
+### ข้อบกพร่องที่ปิด (D-2 · วัดแล้ว ไม่ใช่ทฤษฎี)
+`/warp <n>` ข้ามฉาก → `persist_warp_scene` เขียนแถวถาวรเป็นฉากปลายทางแล้วคืน `selected` ให้สะอาด →
+`runtime.py` `_gm_warp_resync_selected_scene` **relabel** `selected.position.scene_id` เป็นฉากปลายทาง
+(ตั้งใจ · `CORE-REQUEST-GM-045` · census ต้องอ่านฉากใหม่) → **send ล้ม** →
+`rollback_warp_scene` คืน**แถวถาวร**ถูกต้อง `OUTCOME_ROLLED_BACK` → **ไม่มีใครคืนป้ายใน `selected`**
+→ เฟรมเดินถัดไป (`runtime.py:4164`) เขียน `candidate` ที่เอา `scene_id` จาก `selected` แต่เอา x/y/z
+จากรายงานไคลเอนต์ ⇒ **แถวถาวรกลับไปเป็นฉากปลายทางที่ไคลเอนต์ไม่เคยไปถึง พร้อมพิกัดจริงของฉากที่ยืนอยู่**
+= undo ที่สำเร็จถูกลบล้างเงียบ ๆ ด้วยก้าวเดินหนึ่งก้าว
+
+### สิ่งที่ลง (2 ไฟล์ · เขต `gm/` + เทสของสายนี้เท่านั้น · **ไม่แตะ `runtime.py`**)
+- `src/pirateforce_foundation/gm/warp_send_watch.py`
+  - `_restore_selected_scene(session, previous)` — คืน **`scene_id` อย่างเดียว** x/y/z/heading ไม่แตะ
+    (อินเวิร์สของ relabel เป๊ะ ๆ ไม่มากกว่านั้น) · `dataclasses.replace` สองชั้นแบบเดียวกับที่
+    `runtime.py` ใช้ในทิศตรงข้าม · **อ่านกลับหลังเขียน** (setattr ที่กลืนค่าเงียบ ๆ ไม่ raise)
+  - เรียก **เฉพาะ** เมื่อ `outcome == OUTCOME_ROLLED_BACK` และ**เฉพาะกิ่ง `usable`** ที่มี
+    `record.previous_position` ที่ park ไว้ · กิ่ง fallback
+    (`rollback_warp_scene_on_send_failure`) ไม่เรียก เพราะตัวนั้น derive แถวจาก `selected` เอง
+    การคืนป้ายจากแถวที่มันเพิ่งเขียนคือวงกลม
+  - คำตอบสี่คำเข้า `session.events` ทุกครั้ง: `selected_scene_restored` /
+    `_already_there` / `_unreadable` / `_not_restored` — เพราะ rollback สองแบบทิ้งแถวถาวร
+    **หน้าตาเหมือนกัน** ต่างกันแค่ในเทรล · `_not_restored` เท่านั้นที่พิมพ์คอนโซล
+    `GM_WARP_SELECTED_SCENE_RESTORE_FAILED scene=<n>` (กฎ "ห้ามเงียบ")
+  - **NEVER RAISES** ทุกกิ่ง — มันรันอยู่ในเฟรม send ที่ล้มแล้ว ใต้ `send_lock` ตัวเดียวกับ
+    `heartbeat_worker` (R348) · คอนโซลตายไม่คิดค่าคำตอบ (`_note` `console_lost_*` แทน)
+- `tests/test_gm_warp_send_watch.py`
+  - `RestoreSelectedSceneUnitTests` (7 ตัว) — คืนสำเร็จ+พิกัดไม่ขยับ · ป้ายตรงอยู่แล้ว =
+    คำตอบคนละคำและวัตถุเดิม (identity) · session ที่อ่านแล้ว raise · `Position` ปลอม ·
+    write ที่ถูกกลืนเงียบ (จับได้ด้วย read-back) · `replace` ที่ raise · คอนโซลตาย
+  - เขียน **สองบรรทัดที่รอบ `0dlc07` ปักไว้ให้พลิก** เป็นค่าที่ถูก (ไม่ใช่ปล่อยแดง ไม่ใช่ผ่อนเป็น
+    `assertIn`) ตามที่ docstring ของคลาสนั้นสั่งไว้เอง + ขีดฆ่าย่อหน้าที่ตอนนี้เท็จ (ห้ามลบประวัติ)
+
+### หลักฐาน
+- **มิวแทนต์ รันจริงและฆ่าได้**: ลบการเรียก `_restore_selected_scene` ทิ้งทั้งก้อน →
+  `RealDispatchSendFailureTests` แดง **2 ตัว**
+  (`test_a_walk_reported_after_the_rollback_does_not_raise_through_dispatch` ที่ `row.scene_id`
+  = `2 != 1` · และ `test_a_real_send_failure_after_the_relabel_still_rolls_back_the_row`
+  ทั้งทูเพิลในหน่วยความจำและคำในเทรล) · คืนค่าแล้วล้าง `__pycache__` แล้วรันใหม่ = เขียว
+  🔴 เส้นทางที่มิวแทนต์นี้เดินคือ **`runtime.dispatch` จริง + SQLite จริง + `/warp` ที่ compose จริง
+  + ซ็อกเก็ตที่ `sendall` โยน `ConnectionResetError` จริง** ไม่ใช่การเรียก action ตรง ๆ
+  (นั่นคือหนี้ที่รอบ `0dlc07` บันทึกไว้ว่าสายนี้ไม่มีเทสเดินเส้นนี้เลย -- จ่ายไปแล้วรอบ `f5htuc`
+  ตอนสร้าง `RealDispatchSendFailureTests` และรอบนี้ใช้มันเป็นที่วัด)
+- แคบ: `tests/test_gm_warp_send_watch.py` + `tests/test_gm_source_is_cp874_safe.py`
+  = **121 passed, 80 subtests**
+- **ชุดเต็ม รันครั้งเดียว** บนต้นไม้ที่ `git fetch origin main` + merge `77b9fc3` แล้ว (`COO 0053`/`0149`)
+  = **1 failed, 11038 passed, 327 skipped, 20343 subtests passed** (782.60s)
+  🔴 **ตัวที่แดงเป็นของเดิม ไม่ใช่ของรอบนี้ และวัดแล้วสามทาง**:
+  `tests/test_combat_pose.py::SourcePinTests::test_the_generator_reproduces_the_shipped_tables_
+  when_it_can_run` ล้มเพราะ `tools/pf_equip_attack_behavior_extract.py` ไม่มีในโคลน
+  · `git check-ignore -v` = `.gitignore:119:/tools/*` ⇒ ไฟล์ไม่เคยถูก ship
+  · `git diff --stat origin/main...HEAD` = 2 ไฟล์ ไม่มี `tools/` และไม่มี `combat_pose.py`
+  · รายงานไปแล้วโดยสายอื่นสองใบ: LANE-DB `20260905_1450_*SYNC-NOTICE-combat-pose-source-pin-*`
+    และ claim ของ LANE-B `pf_bridge#1342` · chief เองก็บันทึกตัวเดียวกันใน body ของ `#833`
+- ไบต์ > 127 ในบรรทัดที่ **เพิ่ม**: encode `cp874` ได้ทั้งหมด (0 บรรทัดที่ encode ไม่ได้)
+- 🔴 **ADVERSARY_PENDING** — ดูหัวข้อ "adversary" ท้ายไฟล์
+
+### สิ่งที่ **ไม่** ทำตามคำสั่ง หนึ่งจุด (มีจดหมายแย้ง เดินต่อแล้ว ไม่รอ)
+`COO 1150` ข้อ 1 / `chief 1522` สั่งลบเทส (หรือคอมเมนต์) `KNOWN_DEFECT` ในคอมมิตเดียวกัน
+**ไม่ลบทั้งคู่** เพราะ `test_a_busy_database_leaves_the_row_wrong_and_says_nothing` ปัก
+ข้อบกพร่อง **busy-database** ซึ่ง PR นี้ไม่ได้แก้แม้แต่บรรทัดเดียว -- พิสูจน์ได้จากตัวมันเอง:
+มัน **ยังเขียว** หลังตัวแก้ลง · ลบตอนนี้ = ลบการวัดของข้อบกพร่องที่ยังมีชีวิตบน main
+แก้คอมเมนต์แทน (บอกว่า GM-059 ลงแล้วและไม่ใช่ PR ที่ปลดเทสนี้) ·
+จดหมาย `20260905_1622_LANE-GM-ASK-COO-known-defect-test-pins-a-defect-this-pr-does-not-fix.md`
+[สมมติของสาย GM - รอ COO ยืนยัน] · COO ยืนตามตัวอักษร = สายนี้ลบให้รอบถัดไปทันที
+
+### `GT-258` (ใบเทสที่ผูกกับงานนี้)
+แก้เนื้อใบ: ขีดฆ่าประโยค "จุดแก้อยู่ใน `runtime.py` = เขตของ chief" (เท็จแล้ว) + บันทึกว่าครึ่ง
+เซิร์ฟเวอร์ลงแล้ว · 🔴 **เกณฑ์ W6 ไม่แก้แม้แต่ตัวเดียว และใบยังต้องรัน** -- ครึ่งเซิร์ฟเวอร์เป็น
+headless ไม่ใช่หลักฐานบนจอ · ถ้าขั้น 5b เกิดแล้ว W6 ยังอ่านฉากปลายทาง = ตัวแก้ไปไม่ถึงเส้นทางจริง
+
+## ผู้เทสจะทำอะไรได้ที่เมื่อวานทำไม่ได้
+เดินต่อหนึ่งก้าวหลัง `/warp` ที่ส่งไม่สำเร็จ แล้วอ่าน `character_positions` ได้ **ฉากก่อนวาป**
+แทนที่จะเป็นฉากปลายทางที่ตัวละครไม่เคยไปถึง -- คือขั้น 5b ของ `GT-258` มีโอกาสอ่านว่าผ่านได้จริง
+เป็นครั้งแรก (ก่อนหน้านี้ถ้าขั้น 5b เกิด มันต้อง FAIL เสมอโดยโครงสร้าง)
+
+## nonclaim (บังคับทุกรอบของสายนี้)
+- **ไม่มีอะไรผ่านจอ** ทั้งรอบไม่มีการบูตไคลเอนต์ ไม่มี capture ไม่มีภาพ
+- **ไม่ประกาศว่าไมล์สโตนใดขยับ** M2/M3/M4 ไม่ขยับจากรอบนี้ · GM คือเครื่องมือไปถึงสภาพที่จะเทส
+  ไม่ใช่หลักฐานว่าฟีเจอร์ทำงาน
+- **ใช้ GM ข้ามขั้นไหน**: รอบนี้ไม่ได้ใช้สถานะ GM ข้ามขั้นใดเลย เพราะไม่มีการรันเกม · เส้นทาง
+  `/warp` ที่เทสเดินผ่านใช้การอนุญาต GM จริงทุกครั้ง (`gm_accounts` ไฟล์จริงใน temp dir ของเทสเอง)
+  ไม่เคยข้าม · ไม่มีบัญชีใดได้หรือเสียสถานะ GM · ไม่มี `production_allowed` ในเส้นทางนี้
+- ครึ่งเซิร์ฟเวอร์ = wire/DB layer เท่านั้น · ชั้น client-observable ยังเป็นของ `GT-258` ที่ยังไม่รัน
+
+## งานสำรอง (3 ข้อ · เริ่มได้ทันทีไม่รอใคร · จากคิวของสายเอง · `PANYA 0904_14:4x` / `COO 0155`)
+1. **`scene_label_is_server_guess` ค้าง `True` หลัง rollback** — หลังรอบนี้ ป้ายฉากกลับมาถูกแล้ว
+   แต่ธงที่ `_gm_warp_resync_selected_scene` ตั้งไว้ไม่มีใครล้าง ⇒ `client_confirmed_scene`
+   ไม่มีวันขยับอีกทั้งเซสชัน · ออกเป็น **ใบวัด headless + CORE-REQUEST ถึง chief** (ธงอยู่ใน
+   `runtime.py`) · เริ่มได้ทันที ไม่รอใคร
+2. **`/speed` (b'') — บันทึก mask ล็อกอินจริง** (`COO 0545` นิยามใหม่ · `NOW` "ต่อคิวทันที")
+   PR ในเขต `gm/attr_wire.py` + CORE-REQUEST หนึ่งใบ · ตัวบล็อกไม่ใช่จุดอ่านของ chief อีกแล้ว
+3. **P-3 สารบัญปุ่ม GMUI ทั้ง 3 หน้า** (`COO 0245`) — ทำได้เท่าที่ไม่ต้องเปิด client image:
+   ไล่จากสตริง/ตารางที่ commit แล้วใน `pf_bridge/gamedata/` + `external/` แล้วเปิดใบ RE แคบ
+   สำหรับปุ่มที่ต้องการ image · ออกเป็นใบ ไม่ใช่รายงานวิจัย
+
+## backlog (อะไรบล็อกอยู่ที่ใคร)
+- **`1347` `/warp 126` สด** → บล็อกที่ **LANE-A** ใบ `1346` (registry 126 · ตก 15:51 ยังไม่มา)
+  · รอบถัดไปของ GM: ตรวจ `warp_no_coords_live_target(126)` บน main เป็นข้อแรก ก่อนอย่างอื่น
+- **P-2 สีชื่อมอน** → บล็อกที่ **chief** ยังไม่ตั้งเลข RE ใบที่สอง (สายนี้ร่างส่งตั้งแต่ `0306`
+  = 13 ชม. · `SYNC-ALARM 1554` · `COO 1650` ตั้งให้ตก 18:21 = escalation) · ตัวบล็อกเดียวที่เหลือ
+  คือ `faction_is_a_fallback_operand_only` (`RE-263` ปิดทางที่สองไปแล้ว)
+- **P-3 ปุ่ม GM** → บล็อกที่ **RE runner บนสะพาน** (คลาวด์ไม่มี client image) · ไม่บล็อกรอบ
+- **`KNOWN_DEFECT` / rollback เทียบปลายทาง** → รอ COO ตอบใบ `1622` (เดินต่อแล้ว ไม่รอ)
+
+## adversary (`COO 0903_2345` · `Panya 0904_14:1x` / `COO 1428`)
+🔴 **`ADVERSARY_PENDING` — สั่งต้นรอบพร้อมเริ่มงาน (ครั้งที่ 1 จากโควตา 2) ผลยังไม่คืนตอน push**
+สั่งเวลา ~16:24 · ยังรันอยู่ตอน 16:4x · **ไม่ถือล็อกรอ** ตามกติกา ⇒ push ตามเดิม
+🔴 **ห้ามอ่านไฟล์นี้ว่า "ผ่าน adversary"** — ยังไม่มีผลคืน
+**รอบถัดไปของ LANE-GM หยิบผลนี้เป็นงานแรก ก่อน claim** · เจออะไร = PR แก้ใต้รหัสรอบ `bdl0w3`
+ขอบเขตที่สั่งตรวจ: ลำดับ/เธรดใต้ `send_lock` · การคืน `scene_id` อย่างเดียวพอไหม (ธง
+`scene_label_is_server_guess` และ latch census ที่ resync ล้างไว้) · เคสที่ **ไม่ควร** ยิง
+(same-scene · วาปซ้อน `DoubleWarpTests` · กิ่ง fallback · park ของตัวละครอื่น) · มิวแทนต์เพิ่มเติม
+· ข้อความใน docstring ที่ซอร์สไม่รองรับ
+
+## สถานะ push
+- `pf_bridge` claim PR `#1344` — marker เติม **หลัง** push ครบทั้งสองรีโปเท่านั้น (`COO 1229`/`1849`)
+- PR เซิร์ฟเวอร์ = **`pirate-force-server#836`** · **push แล้ว รอ merge PR #836** (เปิดแล้ว รอ gate)
+  ห้ามอ่านว่าเสร็จ/อยู่บน main · marker `PF-AUTOMERGE: v4` ยืนยันด้วย GET กลับมาแล้วว่าอยู่จริงใน body
+  · sha ที่เปิด PR = `ae0d5a5` · `mergeable_state` ตอนเปิด = `unstable` (เกตยังไม่รัน)
+- เกต (`PANYA 1158` §22): อ่านผล job `gate` ของ run `pull_request` ≤10 นาทีหลังเปิด
+  อ่านไม่ทัน/ยังไม่ตัดสิน = `GATE_UNVERIFIED #836` และรอบถัดไปเปิดด้วยการตรวจ PR นั้นก่อน

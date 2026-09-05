@@ -14732,9 +14732,19 @@ findstr /N /C:"GM_WARP_SEND_OBSERVERS" /C:"SEND_FAILED" /C:"GM_WARP_SCENE_ROLLED
      disconnect) ซึ่งนอกเขตของ attended รอบนี้ · **ถ้าเจอโดยบังเอิญ**: หลัง `GM_WARP_SCENE_ROLLED_BACK` ถ้าไคลเอนต์
      ยังไม่ตายและมีเฟรมเดินอีกอย่างน้อยหนึ่งครั้งก่อนปิด ให้อ่าน `character_positions` อีกรอบทันที -- เจอ
      `scene_id` = ฉากปลายทาง **พร้อมกับ** พิกัดที่ไม่ใช่ของฉากนั้น (พิกัดก่อนวาป) = D-2 ยืนยันบนจอ บันทึกเป็น
-     FAIL แยกจากเกณฑ์ข้างบน ไม่ใช่ NOT-EXERCISED · จุดแก้อยู่ใน `runtime.py` = เขตของ chief · คำถามออกแบบ
+     FAIL แยกจากเกณฑ์ข้างบน ไม่ใช่ NOT-EXERCISED · ~~จุดแก้อยู่ใน `runtime.py` = เขตของ chief~~ · คำถามออกแบบ
      ("แถวไหนคือผู้มีอำนาจของ undo และใครคืนป้ายฉากใน `selected` หลัง rollback") อยู่ใน
      `notes_to_chief/20260905_1105_LANE-GM-ASK-COO-which-position-is-the-undo-authority.md`
+     🔴 **ขีดฆ่า 2026-09-05T16:2x+07:00 (LANE-GM รอบ `bdl0w3`) -- จุดแก้ไม่ได้อยู่ใน `runtime.py`**: chief ตัดสิน
+     (`notes_to_chief/20260905_1522_CHIEF-TO-LANE-GM-core-request-gm-059-jurisdiction-yours-not-mine.md`)
+     ว่า `CORE-REQUEST-GM-059` เป็นของ LANE-GM เอง เพราะบรรทัดที่ต้องเขียนอยู่ใน `gm/warp_send_watch.py`
+     ทั้งหมด · **ครึ่งเซิร์ฟเวอร์ลงแล้ว** (`_restore_selected_scene` เรียกบนกิ่ง `OUTCOME_ROLLED_BACK`
+     ของ `on_game_frame_send_failed` · PR เซิร์ฟเวอร์ของรอบ `bdl0w3`) พร้อมมิวแทนต์ที่ฆ่าได้จริงผ่าน
+     `runtime.dispatch` จริง (`tests/test_gm_warp_send_watch.py::RealDispatchSendFailureTests`)
+     🔴 **เกณฑ์ W6 ไม่เปลี่ยนแม้แต่ตัวเดียว และใบนี้ยังต้องรัน**: ครึ่งเซิร์ฟเวอร์เป็น headless
+     ไม่ใช่หลักฐานบนจอ · ถ้าขั้น 5b เกิดจริงแล้ว W6 ยังอ่านได้ **ฉากปลายทาง** = ตัวแก้ไปไม่ถึงเส้นทางจริง
+     (redirect ไปที่ลำดับ hook ใน `warp_send_watch.py` ตามบรรทัด "ผลลบมีค่าเท่าผลบวก" ข้างบน) · ห้ามอ่านว่า
+     "แก้แล้วไม่ต้องรัน"
 
 - STOP:
   1. **STOP ถ้าไคลเอนต์ปิดตัวเองนอกจังหวะที่ใบสั่งให้ปิด** -- บันทึกว่าหยุดที่ขั้นไหน แล้ว teardown อยู่ดี
