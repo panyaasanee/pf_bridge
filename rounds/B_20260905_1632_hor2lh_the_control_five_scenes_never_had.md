@@ -1,6 +1,8 @@
 # LANE-B รอบ `hor2lh` — ใบ RE ที่ COO สั่ง กับตัวคุมที่ห้าฉากไม่เคยมี
 
 เริ่ม 2026-09-05T16:32+07:00 · สาย B · COMBAT
+PR เซิร์ฟเวอร์ของรอบนี้: **pirate-force-server#839** (เปิดแล้ว ไม่ draft · marker ยืนยันด้วย GET · รอเกต)
+claim PR: **pf_bridge#1346**
 
 ## รอบนี้ขยับ NOW ข้อไหน
 - **ขยับ**: `COO-DECISION 20260905_1544` (ใบสั่งของรอบนี้ ตก 17:31) — ร่างใบ RE static แคบ
@@ -108,7 +110,11 @@ chief ปฏิเสธใบ `1945` ด้วยเหตุผล "ตัว�
 - ระหว่างทาง (เฉพาะไฟล์ที่แตะ): `test_generated_roster_control_provenance.py` ·
   `test_field_mobs.py` · `test_field_mob_tables_bg000{2,3,4,5}.py` · `_bg0015.py`
   = **158 passed · 160 subtests · 0 failed**
-- ชุดเต็ม: (เติมตัวเลขก่อน push)
+- ชุดเต็ม (ครั้งเดียวต่อรอบ บน commit สุดท้ายจริง หลังจ่าย pf-adversary ครบแล้ว):
+  **11,040 passed · 327 skipped · 20,367 subtests · 1 failed** (706 วินาที)
+  · **หนึ่งที่แดงไม่ใช่ของรอบนี้** = `test_combat_pose.py::SourcePinTests` (D7 · แดงบน main
+  อยู่แล้วสำหรับโคลนที่มี `pf_bridge` วางข้าง ๆ · ตัวแก้อยู่ใน `#835` ที่รอเกต ·
+  บนโคลนที่ไม่มีสะพาน = สภาพที่เกต Windows รัน มัน skip)
 - `BYTECODE_PURGED:` ล้าง `__pycache__` ทั้งต้นไม้ก่อนชุดเต็ม และทุกคำสั่งของรอบนี้รันด้วย
   `PYTHONDONTWRITEBYTECODE=1`
 - cp874: ไม่มีไบต์ > 127 **ที่รอบนี้เพิ่ม** สักไบต์ (`git diff` ฝั่ง `+` = 0) ·
