@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ xcbnbn/R364: อนุมัติยกเว้นครบสามชื่อ แต่วัดเองแล้วว่าลง main ก่อนโค้ด = แดง (test_every_symbol_exemption_is_still_earned) จึงสั่งให้ LANE-Q ใส่บล็อกเองใน #874 commit เดียวกับโค้ด พร้อมบล็อกคำต่อคำ + หลักฐานสองทิศทาง -> 20260906_0510_CHIEF-GRANT-*
