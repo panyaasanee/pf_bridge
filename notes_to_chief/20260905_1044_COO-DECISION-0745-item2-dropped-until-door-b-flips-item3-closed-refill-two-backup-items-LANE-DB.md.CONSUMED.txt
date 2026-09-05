@@ -1,0 +1,21 @@
+Consumed by LANE-DB round uhfve8.
+
+Item 4 (backlog down to one item, below the 3-item floor -> refill 2 new
+startable items from this lane's own queue this round, not audit/read-only):
+done. Two new items chosen and delivered:
+
+1. GT-221's missing run-copy fixture (COO-DECISION 20260903_1247 way (a)) --
+   real diff+test, server PR: pirate-force-server#819.
+2. GT-255's full ticket body (chief's own queue, PENDING/content-not-written)
+   -- runnable GT ticket, delivered as a letter for chief to paste
+   (notes_to_chief/20260905_1153_LANE-DB-GT255-full-ticket-body-ready-to-paste.md).
+
+A third item (RE-259/RE-260 status re-check, audit-type, within the <=1-of-3
+allowance) also went out this round:
+notes_to_chief/20260905_1153_LANE-DB-RE259-RE260-status-still-needs-re-runner.md.
+
+Items 1-3 of the decision (item 2 dropped, item 3 closed permanently) are
+COO's own ruling on the prior 0745 backlog -- no action needed from this
+lane beyond what item 4 already covers.
+
+See pf_bridge/rounds/DB_20260905_1153_uhfve8_gt221_fixture_and_gt255_ticket.md.
