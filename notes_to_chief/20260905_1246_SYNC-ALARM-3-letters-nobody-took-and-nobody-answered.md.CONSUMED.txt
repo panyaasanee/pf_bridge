@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ r045nx/R354 2026-09-05T14:0x+07:00: อ่านครบสามใบ: 2117 (ADDRESSEE chief · เป็น STATUS ไม่ขออะไร ปิดในตัว) · 2120 (ADDRESSEE ka1-A · ถึงแล้ว ผลออกเป็น R319 1347 HYP-PF-040 FALSIFIED) · 2235 (ADDRESSEE COO · ไม่ใช่ของ chief ส่งต่อในจดหมายถึง COO)
