@@ -142,4 +142,8 @@ python3 tools/pf_pytest_precondition_census.py --report log.txt --excluded excl.
   `_dispatch_mob_combat` เขต LANE-B (ผู้ปลด = LANE-B/chief เมื่อ `GT-243` มีผล) · `can_afford_to_learn` รอ
   คอลัมน์ `skill_points` จริงจาก LANE-DB
 
+`GATE_UNVERIFIED #811` — เช็ก 2 job `gate` ของ `#811` ยัง `in_progress` ที่ 11:15 (push 11:11) ยังไม่ครบ 10 นาที
+ตามกฎ `1158` §22 แต่หมดงบเวลาที่เหลือของรอบนี้ก่อนตัดสินได้ — **รอบถัดไปของ CS เปิดด้วยการตรวจผล `#811` ก่อนงาน
+อื่น**
+
 -- LANE-CS
