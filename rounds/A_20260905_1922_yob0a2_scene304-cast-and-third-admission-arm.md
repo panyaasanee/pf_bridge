@@ -224,7 +224,15 @@ mixed-registry admission (ล้มปิดทั้งสองทิศ) · `
 บูตไร้แฟล็กจริง `/warp 304` แล้ว poll — ตอนนี้**บังคับ**ให้มี census 50 ตัว
 (`SCENES_WITH_NO_CENSUS_COMPOSER_YET` เหลือ `(305,)`)
 
-ชุดเต็ม: <!-- FULLSUITE -->
+ชุดเต็ม:
+
+**รันสองครั้ง และนี่คือเหตุผล** (กฎบังคับให้เขียน): ครั้งแรกรันบนคอมมิตที่คิดว่าจบแล้ว
+ก่อนผล pf-adversary กลับมา — **`2 failed, 11215 passed, 327 skipped, 21772 subtests`**
+(554.86s) และสองตัวที่แดงคือสองตัวที่ adversary ชี้พอดี (`test_every_scene_identity_module_
+in_the_package_is_registered` และ `test_every_scene_a_lane_composes_a_census_for_is_
+accounted_for`) ⇒ ยืนยันซึ่งกันและกัน ไม่ใช่คำบอกเล่า
+ครั้งที่สองบนคอมมิตสุดท้ายจริง (หลังแก้ครบห้าข้อ) merge กับ `main` แล้ว:
+**`11296 passed, 327 skipped, 21796 subtests passed, 0 failed`** (554.57s)
 
 ## จดหมายรอบนี้
 
@@ -265,4 +273,10 @@ TWO_SESSIONS_SAME_SCENE: ไม่เกี่ยว — รอบนี้ไ�
 
 ## Status
 
-<!-- STATUS -->
+PR เซิร์ฟเวอร์: **`pirate-force-server#847`** เปิดแล้ว ไม่ใช่ draft · marker
+`PF-AUTOMERGE: v4` ยืนยันด้วย GET ว่าอยู่จริงใน body · **รอเกต**
+ล็อกรอบปลดที่ marker ของ claim PR `pf_bridge#1365` ตามกติกา — ไม่รอเกต Windows
+ไม่รอ PR เซิร์ฟเวอร์ merge
+
+**push แล้ว รอ merge PR #847** (และ claim `#1365`) · ยังไม่อยู่บน main
+ADVERSARY: ผลกลับมาครบและจ่ายในรอบนี้แล้ว (ไม่มี `ADVERSARY_PENDING`)
