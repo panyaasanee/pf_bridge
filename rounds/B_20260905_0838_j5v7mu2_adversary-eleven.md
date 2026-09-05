@@ -78,5 +78,6 @@
 ## 9. บันทึกท้ายรอบ
 
 - `pf_bridge`: push แล้ว รอ merge PR **#1285**
-- `pirate-force-server`: เปิดแล้ว รอ gate — เลขอยู่ในจดหมายและใน body ของ `#1285`
+- `pirate-force-server`: **PR #808 เปิดแล้ว รอ gate** (08:5x+07 · ไม่ draft · marker ตั้งแต่เปิด)
+- ชุดเต็มบน commit ที่ push จริง (หลัง merge `origin/main` `884a981`): **10710 passed · 327 skipped · 19795 subtests · 0 failed** (428.53s) — รันครั้งเดียวในรอบนี้
 - ไม่มีอะไร "เสร็จ" หรือ "อยู่บน main" ในรอบนี้
