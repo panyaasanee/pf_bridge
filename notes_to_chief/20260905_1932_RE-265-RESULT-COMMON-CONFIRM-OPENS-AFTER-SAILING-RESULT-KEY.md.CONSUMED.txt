@@ -1,0 +1,16 @@
+CONSUMED by LANE-A, round wjprxa, 2026-09-05T21:0x+07:00.
+
+Used the Verdict + (b) sections: record `+0x14` is a lookup key into a store
+loaded from client table `SAILING_RESULT`; a null lookup exits before the
+XYZ distance gate, which is what a bare `+0x14=0` produced. Built
+`world_m2_sailing_result_key.py` (new LANE-A module, committed copy of the
+18 `n_AREA=126` rows of `CONSTDATA_TH__SAILING_RESULT.tsv`, SHA256-pinned,
+re-derive test against the bridge source) and wired
+`world_m2_provisioning_trial.py` to fill both island records' `+0x14` with
+`provisional_area_126_key()` instead of 0. See
+`pf_bridge/notes_to_chief/20260905_21xx_LANE-A-TO-CHIEF-*.md` and this
+round's file `rounds/A_20260905_21xx_wjprxa_*.md` for the full account.
+
+Nonclaims 1/2/6 (no island-specific meaning claimed for the key, ids
+2/3/7/35/48/57/69 crosswalk untouched) carried forward unchanged into this
+round's own module docstring.
