@@ -5384,7 +5384,7 @@ Q1 ตอบว่าไบต์ **ไม่ตรง** (มอนไม่ไ�
 
 ---
 
-## 🔬 RE-256 ADDSURVEYDATA-OUTER-PRESENCE-BYTE-VALUE-001  [🟠 **OPEN** -- 🔴 `[STATIC-ON-BRIDGE]` (ต้องเปิด client image = RE runner บนเครื่อง Panya · LANE-A บนคลาวด์ไม่มีไบนารี `LANE-A 0435` · `COO-DECISION 20260905_0645` รับทาง 2) · เลขใบตั้งโดย chief (LANE-E) รอบ `rs8uyz`/R350 ตาม `LANE-A-RE-TICKET 20260905_0430` (ฉบับแก้ทับ 05:15 หลัง pf-adversary) + `COO-DECISION 20260905_0645`/`0646` · ผู้ทำ = **RE runner (local)** สายเดียว · **เจ้าของใบ/ผู้บริโภคผล = LANE-A** · ตัวบล็อกของ `GT-233` (BLOCKED-ON-LAYOUT) และของบันได **M2**]
+## 🔬 RE-256 ADDSURVEYDATA-OUTER-PRESENCE-BYTE-VALUE-001  [✅ **DONE -- ตอบแล้ว 2026-09-05 10:07 +07:00** · ปิดหัวโดย chief (LANE-E) รอบ `pv4zg1`/R352 ตามใบผล `notes_to_chief/20260905_1007_RE-256-RESULT-PRESENCE-ONE-SINGLE-RECORD-VERSION-ZERO.md` · คำตอบ: outer byte tag `0x0B` = **pointer-presence boolean** (`cmp dword ptr [esi+0x14],0` / `setne al` ที่ `0x00733586-0x0073358E`) ⇒ หนึ่ง record = `0B 01` · ไม่มี record = `0B 00` · **ไม่ใช่ record count** · `vital_version` ของคลาสนี้ต้องเป็น `0` แบบ exact equality (`0x005F3EFC/0x005F3F01`) · BUILD_IMPACT ลงโค้ดแล้วโดย LANE-A รอบ `vwekfq` = server `#810` (`c3454949`) บน main `b49a4e45` [วัดแล้ว `--is-ancestor` exit 0 · chief `pv4zg1`] · ผู้บริโภคผล = LANE-A (บริโภคแล้ว) ⇒ `GT-233` ปลดหัวเป็น READY ในรอบเดียวกัน · เดิม: 🟠 **OPEN** -- 🔴 `[STATIC-ON-BRIDGE]` (ต้องเปิด client image = RE runner บนเครื่อง Panya · LANE-A บนคลาวด์ไม่มีไบนารี `LANE-A 0435` · `COO-DECISION 20260905_0645` รับทาง 2) · เลขใบตั้งโดย chief (LANE-E) รอบ `rs8uyz`/R350 ตาม `LANE-A-RE-TICKET 20260905_0430` (ฉบับแก้ทับ 05:15 หลัง pf-adversary) + `COO-DECISION 20260905_0645`/`0646` · ผู้ทำ = **RE runner (local)** สายเดียว · **เจ้าของใบ/ผู้บริโภคผล = LANE-A** · ตัวบล็อกของ `GT-233` (BLOCKED-ON-LAYOUT) และของบันได **M2**]
 
 > 🔢 ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืนสูงสุดที่ `255` (`GT-255`) => ใบนี้ `256` · `RE-256`/`GT-256` = 0 hit ทั้งสามที่ก่อนวาง
 
@@ -5421,5 +5421,170 @@ Q1 ตอบว่าไบต์ **ไม่ตรง** (มอนไม่ไ�
 
 ## ผลไปถึงใคร
 จดหมายผลจ่าหน้า **LANE-A** (cc chief, COO) · LANE-A บริโภคเองและปิดหัวใบนี้ในรอบของตัวเอง (§5 "ใครเปิดใบคนนั้นบริโภค") · ถ้าผลขอ attended capture ⇒ LANE-A เปิดใบ GT ในรอบเดียวกัน (`COO 2142`)
+
+---
+
+---
+
+## RE-259 UPDATEATTRVITAL-0X309A-IS-IT-EVER-SENT-FOR-CNETNPC-001  [OPEN -- `[STATIC-ON-BRIDGE]` (ต้องเปิด client image = RE runner บนเครื่อง Panya · `external/` ทั้งต้นไม้ไม่มีคำว่า `CNetNPC`/`CMyActor` เลย ดูช่องค้น) · **เจ้าของใบ/ผู้บริโภคผล = LANE-DB** (`compose_full_block` / `RESEND_ADJUDICATED` -- จดหมายต้นทางไม่ได้เขียนชื่อเจ้าของเป็นคำ ๆ chief ระบุให้ตรงนี้ตาม §5 "ใครเปิดใบคนนั้นบริโภค") · ผู้ทำ = **RE runner (local)** · **ไม่บล็อก GT ใบใดในวันนี้** (Door B ถอนแล้ว `COO-DECISION 20260904_0546` ข้อ 2 · ไม่มีผู้เรียก `compose_full_block` ในโปรดักชัน) => สั่งไว้ท้ายคิวได้]
+
+> numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืนสูงสุดที่ `256` (`RE-256`) · `257`/`258` ถูกจองโดยใบ GT สองใบในรอบเดียวกันนี้ => ใบนี้ `259` · `RE-259`/`GT-259` = **0 hit ทั้งสามที่ก่อนวาง** [วัดแล้ว chief `pv4zg1`/R352]
+> ที่มา: `notes_to_chief/20260904_1748_LANE-DB-RE-TICKET-piece3-resend-adjudication-11-outlier-vas-sharpened.md` ข้อ (ก) -- จดหมายฉบับนั้นสั่งชัดว่าต้องเป็น **สองใบคนละรูป** ใบนี้ = กลุ่ม 1+2 (9 VA) · กลุ่ม 3 (x=26,27) = `RE-260` **ห้ามรวมสองใบเข้าด้วยกัน**
+
+## ค้นแล้วก่อนเปิดใบ (ผลการ grep -- กติกาใหม่ `AGENTS.md` §7 · `COO 0646` ข้อ 2)
+**เจอ**
+- `VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv:66` = `0x309A UpdateAttrVital` [วัดแล้ว chief] (ไฟล์อยู่ราก `pf_bridge` ไม่ใช่ใน `external/`)
+- `archive/CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md:1025` และ `:1032-1036` (`RE-061`/`RE-062` ปิดแล้ว) -- **ตัดคำถามออกไปแล้วครึ่งใบ** [วัดแล้ว chief]: handler ของ `UpdateAttrVital` = `0x5F2400` · resolve target ด้วย **class id ใน generic attribute map** (`lookup 0x463800` / `insert 0x463720`) ไม่ใช่ `[actor+0x3E8]` ไม่ใช่ identity tag `0x32` · bind thunk `0x4698B0` **type-check `CMyActor`** แล้วอ่าน slot ที่ `0x4698DF` โดยไม่สร้าง · slot สร้างที่ `CMyActor` ctor (`0x44CA71`/`0x44CBC1`) · image SHA `9627...B623`
+  => 🔺 ชุดนี้ derive จาก attr block ของ `CSkillAttr` (class id `0x1661`) ไม่ใช่ ActorAttr ของ 9 VA นี้ -- **PER-CLASS (§14 ข้อ 13 ค) ห้ามเหมา** ใบนี้จึงยังเปิดจริง แต่คำถามแคบลงตามหัวข้อล่าง
+- `notes_to_chief/reference_codex_attr/pf_rederive_attr_semantics.py:5432-5448` = บล็อก `("CNetNPC", {...})` ของ x=7: `source_load_va=0x0045C109` · `producer_va=0x0045C11A` · span `[0x0045BF40,0x0045C15D)` · `span_sha256=afb5662a3f1a81c98de8ed77d82262747b8563ce25be88d041c8dea89e52fb72` · semantic `MOBS.n_SPEED_WALK_...` [วัดแล้ว chief] · `:5471-5472` `("BasicAttr",0x68)/(0x6C) -> "CNetNPC"` มีอยู่แล้วในไฟล์เดียวกัน [วัดแล้ว chief]
+- `CLIENT_RE_QUEUE.md:4158` `RE-198` (vital_version byte) · `:3841` `RE-194` (ค่าของ x=7) · `:3756` `RE-193` (ค่า default 7 ฟิลด์) -- แตะคลาสเดียวกันแต่ **คนละคำถามทั้งสามใบ** ไม่มีใบใดถามว่า "ส่งถึง actor คลาสอะไร" [วัดแล้ว chief] => ไม่ใช่ใบซ้ำ
+
+**ไม่เจอ**
+- `ค้นใน pf_bridge\external\ แล้ว: ไม่เจอ` -- `grep -rn "CNetNPC\|CMyActor" external/` = **0 hit ทั้งต้นไม้** [วัดแล้ว chief] ⇒ ตอบจาก `external/` ไม่ได้ นี่คือเหตุผลของป้าย `STATIC-ON-BRIDGE`
+- `ค้น gamedata แล้ว: ไม่เจอ` -- `grep -in "ActorAttr\|UpdateAttr\|CNetNPC" gamedata/` = **0 hit** [วัดแล้ว chief] (ตรงขอบเขต: เรื่อง wire ไม่ใช่ตารางข้อมูลเกม)
+- บรรทัดที่มีทั้ง `UpdateAttrVital|0x309A` และ `CNetNPC|CMyActor` พร้อมกันทั้ง `pf_bridge` = มีแต่ **จดหมายต้นทางเอง** (`...1748...md:73`) กับบันทึกรอบของ LANE-DB (`rounds/DB_20260904_1733_...md:99`) ⇒ เป็นคำถาม ไม่ใช่หลักฐาน [วัดแล้ว chief]
+- `persistence_attr_compose.py` **ไม่มีอยู่ในต้นไม้ `pf_bridge`** (`grep -rn RESEND_ADJUDICATED` เจอเฉพาะร้อยแก้วใน `rounds/`+`notes_to_chief/`) [วัดแล้ว chief] ⇒ เลขบรรทัดสองแหล่งขัดกันเอง (จดหมายว่า `:95-113` · `rounds/DB_20260904_1434_f9p5fw...md:49` ว่า "บรรทัด 420") **ห้ามผู้ทำอ้างเลขบรรทัดใดเลย** [ทั้งสองเลข = [เสนอ] ของต้นทาง]
+- negative check ของจดหมาย (11 VA + 15 span vs `external/PF_SERIALIZER_FIELDS.tsv` range-intersection = ไม่ตรงสัก span) = **[เสนอ] ของ LANE-DB ยังไม่ทำซ้ำ** · ส่วนที่ chief ยืนยันเองได้: `grep -in "0045C11A\|0045C0D6\|0045C0F9\|0045BF40\|00464AAF" external/` = **0 hit** [วัดแล้ว chief] -- สอดคล้องกัน แต่คนละวิธี ไม่ใช่การ verify วิธีเดิม (G1)
+
+## คำถามเดียว (หนึ่งใบหนึ่งคำถาม ห้ามพ่วง)
+เส้นทาง `0x309A`/`UpdateAttrVital` **address ถึง actor คลาส `CNetNPC` ได้หรือไม่ หรือรับเฉพาะ player-class (`CMyActor`) เท่านั้น** -- เดินต่อจากสิ่งที่ปิดแล้ว: (1) type-check `CMyActor` ที่ bind thunk `0x4698B0` เป็น gate เดียวบนเส้นทางหรือไม่ · (2) target resolution ของ handler `0x5F2400` (`0x463800`/`0x463720`) ยอมรับ receiver ที่ไม่ใช่ `CMyActor` ไหม · (3) มี bind/apply site อื่นของ `0x309A` นอก `0x4698B0` อีกไหม
+
+## เกณฑ์ปิดใบ (ชั้นเดียว -- static IMAGE เท่านั้น ไม่มีชั้น client-observable)
+- **PASS**: รายชื่อ call site + VA ของ gate ทุกจุดตั้งแต่ handler ถึง apply พร้อม `span_sha256` ทุกช่วง + image sha + `generation_id` แล้วตอบว่า `CNetNPC` เข้าถึงได้/ไม่ได้
+- **bounded negative = คำตอบเต็ม ไม่ใช่ผลรอง**: ถ้าพิสูจน์ได้ว่า "player-class เท่านั้น" ⇒ กลุ่ม 1 (x=7,11,12) + กลุ่ม 2 (x=15,30,46,49,50,51) รวม **9 แถวตกประเด็นทั้งชุด** โดย LANE-DB ไม่ต้องวัดอะไรเพิ่ม
+- เดินครบแล้วตัน ⇒ ระบุ VA ที่ตัน + บอกว่าอะไรจะปลดล็อก (capture ชนิดไหน หรือใบ static ถัดไป)
+
+## ใบนี้ไม่ขอ
+ไม่ขอ **ค่า** ของฟิลด์ใดเลย (`RE-194`/`RE-193` ปิดแล้ว ห้ามขอซ้ำ) · ไม่ขอเรื่อง x=26/27 (= `RE-260` **ห้ามรวม**) · ไม่ขอชั้น client-observable · **ห้ามบูตไคลเอนต์เพื่อปิดใบนี้** · ไม่ขอให้แตะโค้ด
+
+## ห้ามสรุปสิ่งเหล่านี้ (nonclaims -- ยกจากจดหมายต้นทางครบทั้งสี่ข้อ ห้ามตัด)
+1. ห้ามเขียนว่าผลใบนี้ทำให้ `RESEND_ADJUDICATED` เติมได้แม้แถวเดียว -- เซตว่าง **โดยเจตนา** และต้องว่างต่อไปหลังใบนี้ปิด
+2. negative check กับ `PF_SERIALIZER_FIELDS.tsv` **ไม่** พิสูจน์ว่าไม่มี codec ใดแตะที่อยู่เหล่านี้ในอิมเมจ ~10MB -- พิสูจน์แค่ว่าไม่อยู่ในสารบัญที่สำรวจไว้
+3. ยังไม่มีใครตรวจว่า `0x309A` เคยส่งให้ `CNetNPC` จริง -- นั่นคือคำถามของใบนี้ ห้ามตั้งต้นว่ารู้คำตอบ
+4. ห้ามเดาความหมาย x=26/27 จากชื่อฟิลด์ (`state_record_forced_flag`/`source_state_appearance_byte`)
+5. `[chief เติม]` ผล `RE-061`/`RE-062` เป็นของ `CSkillAttr` (`0x1661`) **PER-CLASS ห้ามเหมา** · และกลุ่ม 1 เป็น **คำเตือน ไม่ใช่คำตอบ**: x=7/11/12 มาจาก MOBS template ของ `CNetNPC` คนละแหล่งกับ construction default ของ 17 แถวที่ใช้ `default_writer_va` กลาง (`0x00464AAF-0x00464E16`) -- resend ค่าเดียวกันให้ NPC อาจผิดตัว
+6. `[chief เติม]` G8: ทุกแถวในผลติดป้าย `[วัดแล้ว]`/`[เสนอ]` · G1: ห้ามปิดข้อใดด้วยแหล่งเดียว
+
+## แยกจากใบไหน
+`RE-198`/`RE-194`/`RE-193` (คนละคำถาม ปิดแล้วทั้งสาม) · `RE-241` (มอนเดินเข้า `CNetNPC` จริงในชั้น static/wire -- ใบนี้ถามฝั่ง **ส่ง attr** ไม่ใช่ฝั่ง census) · `RE-260` (กลุ่ม 3 -- จดหมายต้นทางห้ามปนกับใบนี้โดยตรง)
+
+## ถ้าผลออกทางลบ
+"player-class เท่านั้น" = **ปิด PASS** และ redirect: LANE-DB ตัด 9 แถวออกจากรายการค้างของ piece 3 ได้ทันที เหลือเฉพาะกลุ่ม 3 ที่ `RE-260` ถือ · ถ้าตอบว่า `CNetNPC` เข้าถึงได้จริง ⇒ เป็นคำเตือนแรง (ห้าม resend default กลางให้ NPC) และ LANE-DB ต้องเปิดใบใหม่เรื่อง per-class default -- **ใบถัดไป ไม่ใช่ใบนี้**
+
+## ผลไปถึงใคร
+จดหมายผลจ่าหน้า **LANE-DB** (cc chief, COO) · บรรทัดแรกเขียนว่า `ขอให้ LANE-DB กรอก ### result: และปิดหัวใบเอง` (§5) · ไม่ผูก deadline (`PANYA-DECISION 20260904_0233` บันไดไมล์สโตนไม่มีกำหนดวัน)
+
+### result:
+(ว่าง -- รอ RE runner)
+
+---
+
+
+---
+
+## RE-260 ACTORATTR-0X99-0X9A-CONCRETE-OWNER-CLASS-001  [OPEN -- `[STATIC-ON-BRIDGE]` (ต้องเปิด client image · RTTI/vtable/consumer census ไม่มีในสะพาน) · **เจ้าของใบ/ผู้บริโภคผล = LANE-DB** (`compose_full_block` / `RESEND_ADJUDICATED` -- จดหมายต้นทางไม่ระบุเจ้าของเป็นคำ ๆ chief ระบุให้ตรงนี้) · ผู้ทำ = **RE runner (local)** · **ไม่บล็อก GT ใบใดในวันนี้** (Door B ถอนแล้ว `COO-DECISION 20260904_0546` ข้อ 2) => สั่งไว้ท้ายคิวได้]
+
+> numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืนสูงสุดที่ `256` (`RE-256`) · `257`/`258` ถูกจองโดยใบ GT สองใบรอบเดียวกัน · `259` = `RE-259` => ใบนี้ `260` · `RE-260`/`GT-260` = **0 hit ทั้งสามที่ก่อนวาง** [วัดแล้ว chief `pv4zg1`/R352]
+> ที่มา: `notes_to_chief/20260904_1748_LANE-DB-RE-TICKET-piece3-resend-adjudication-11-outlier-vas-sharpened.md` ข้อ (ข) = **กลุ่ม 3 เท่านั้น (x=26, x=27)** · 🔺 จดหมายห้ามรวมใบนี้กับ `RE-259` โดยตรง ("คนละระดับ ห้ามปนกัน") -- ใบนี้เริ่มจากศูนย์ ใบโน้นเดินบนเส้นทางที่มีของอยู่แล้ว
+
+## ค้นแล้วก่อนเปิดใบ (ผลการ grep -- กติกาใหม่ `AGENTS.md` §7 · `COO 0646` ข้อ 2)
+**เจอ**
+- `notes_to_chief/reference_codex_attr/PF_A2_ATTR_FIELD_DELTA.tsv:8-9` = `ActorAttr@0x99` (R และ W) · `:10-11` = `ActorAttr@0x9A` (R และ W) [วัดแล้ว chief -- เปิดอ่านทีละแถวเอง ไม่ใช่เชื่อบทสรุป] แถวทั้งสี่ให้: `applies_to_class=UNKNOWN_CONCRETE_OWNER_OF_ActorAttr` · `scope_status=UNKNOWN` · `EXPLICIT_AUDIT_OPEN_NO_COMPLETE_TYPED_OWNER_CENSUS` · `scope_blocker="the field behavior/meaning is bounded, but no complete typed owner/consumer-class census proves which concrete class attaches and consumes this Attr field"` · สายสืบทอด `PcRefObject>Attribute>DBAttribute>BasicAttr>ActorAttr` · field name `state_record_forced_flag` (`@0x99`) / `source_state_appearance_byte` (`@0x9A`) · tag `0x0B` len 1 · gate `+0x1BC != 0 AND +0x1B4 & 0x00002000` · `default_writer_va=0x00464D5D` · image sha `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
+  => **สิ่งที่ตารางให้แล้ว ถูกตัดออกจากคำถามใบนี้แล้ว** (พฤติกรรม/ตำแหน่ง/gate/ค่า default) เหลือเฉพาะ **ใครเป็นเจ้าของคลาสรูปธรรม**
+- `external/PF_SERIALIZER_FIELDS.tsv:8-9` -- **เจอแถวชื่อ `ActorAttr` จริง แต่เป็น `EMPTY`** (`wire_empty_argument_value_copier@0x0043BB80` · span `[0x0043BB80,0x0043BB91)` · sha `b625098be0bbf3e36927c8dce2ccf3cf171563fc8f1465a41039974b332c19c0`) [วัดแล้ว chief] ⇒ สารบัญ serializer **ไม่ให้เจ้าของคลาส** ห้ามอ้างแถวนี้ว่าตอบใบนี้แล้ว
+- `CLIENT_RE_QUEUE.md:3756` `RE-193` (ปิดแล้ว) ครอบ x=14,25,36,41,42,43,54 -- 🔺 **ใกล้มากแต่ไม่ใช่**: x=42 ของใบนั้นคือ `u8_9B_pairB (0x09B)` ไม่ใช่ `@0x99`/`@0x9A` [วัดแล้ว chief: `grep -n "0x099\|0x09A\|0x09B" CLIENT_RE_QUEUE.md` คืน `3756`/`3806` ซึ่งเป็น `0x09B` ทั้งคู่]
+
+**ไม่เจอ**
+- `ค้นใน pf_bridge\external\ แล้ว: ไม่เจอเจ้าของคลาส` -- `grep -rn "CNetNPC\|CMyActor" external/` = **0 hit ทั้งต้นไม้** [วัดแล้ว chief] ⇒ census คลาสรูปธรรมทำจากสะพานไม่ได้ นี่คือเหตุผลของป้าย `STATIC-ON-BRIDGE`
+- `ค้น gamedata แล้ว: ไม่เจอ` -- `grep -in "ActorAttr\|UpdateAttr\|CNetNPC" gamedata/` = **0 hit** [วัดแล้ว chief]
+- `grep -rn "ActorAttr@0x99\|ActorAttr@0x9A\|state_record_forced_flag\|source_state_appearance_byte"` ใน `CLIENT_RE_QUEUE.md` / `GAME_TEST_QUEUE.md` / `archive/` = **0 hit ทั้งสามที่** [วัดแล้ว chief] ⇒ ไม่เคยมีใบไหนถามสองฟิลด์นี้เลย ไม่ใช่ใบซ้ำ
+- ไม่มี RTTI / string / consumer class ผูกกับสองฟิลด์นี้แม้แต่ตัวเดียวในคลัง commit -- [วัดแล้ว LANE-DB ในจดหมาย `1748` · chief ยืนยันซ้ำเฉพาะคอลัมน์ของ `PF_A2_ATTR_FIELD_DELTA.tsv` ข้างบน ไม่ได้ census เอง]
+
+## คำถามเดียว (หนึ่งใบหนึ่งคำถาม)
+**คลาสรูปธรรมใดเป็นผู้ attach และผู้บริโภคของ `ActorAttr@0x99` และ `ActorAttr@0x9A`** -- ตอบด้วย RTTI/vtable/type node + span ของ consumer จริง ไม่ใช่ด้วยชื่อฟิลด์ ไม่ใช่ด้วยการอนุมานจากคลาสฐาน `ActorAttr`
+
+## เกณฑ์ปิดใบ (ชั้นเดียว -- static IMAGE เท่านั้น ไม่มีชั้น client-observable)
+- **PASS**: ชื่อคลาสรูปธรรม + เส้นทาง attachment (RTTI/vtable/type node) + VA ของจุดบริโภคจริง + `span_sha256` ทุกช่วง + image sha + `generation_id` · ถ้ามีมากกว่าหนึ่งคลาส ให้ **แยกหนึ่งแถวต่อหนึ่งคลาส** ตามที่คอลัมน์ `scope_next_step` ของตารางสั่งไว้เอง
+- **bounded negative รับเป็นคำตอบปิดใบ**: "census เดินครบแล้วยังไม่ผูกคลาสรูปธรรมได้ เพราะตันที่ VA/โครงสร้างใด" ปิดใบได้ -- และมีค่าเท่าผลบวก เพราะมันเปลี่ยนสถานะจาก "ไม่มีใครลอง" เป็น "ลองแล้วตันตรงนี้" แล้ว LANE-DB จะรู้ว่าต้องรอ capture ชนิดใดแทน
+- 🔺 ทั้งสองฟิลด์ต้องตอบ **แยกกัน** (`@0x99` หนึ่งข้อ `@0x9A` หนึ่งข้อ) ห้ามตอบรวมเป็นข้อเดียว แม้จะได้คลาสเดียวกัน
+
+## ใบนี้ไม่ขอ
+ไม่ขอ **ค่า**/พฤติกรรม/ตำแหน่งของฟิลด์ (ตารางปิดไปแล้ว: `PROVEN_EXACT`/`PROVEN_ROLE_ONLY`) · ไม่ขอเรื่องเส้นทาง `0x309A`/`CNetNPC` (= `RE-259`) · ไม่ขอชั้น client-observable · **ห้ามบูตไคลเอนต์เพื่อปิดใบนี้** · ไม่ขอให้แตะโค้ด
+
+## ห้ามสรุปสิ่งเหล่านี้ (กติกาหลักฐาน)
+- 🔺 **ห้ามเดาความหมายจากชื่อฟิลด์** `state_record_forced_flag`/`source_state_appearance_byte` -- ชื่อพวกนี้เป็น role name ที่ codex ตั้ง ไม่ใช่หลักฐานว่าใครเป็นเจ้าของ (nonclaim ข้อ 4 ของจดหมายต้นทาง ยกมาทั้งข้อ)
+- 🔺 ห้ามอ้าง `external/PF_SERIALIZER_FIELDS.tsv:8-9` ว่าตอบใบนี้แล้ว -- แถวนั้นเป็น `EMPTY` ให้ span ของ copier ไม่ให้เจ้าของ
+- 🔺 ห้ามเหมาผลของ `RE-193` (`@0x9B`) มาใช้กับ `@0x99`/`@0x9A` -- PER-CLASS/PER-FIELD (§14 ข้อ 13 ค) ต่อให้ไบต์ติดกัน
+- 🔺 ห้ามอ้างว่าใบนี้เติม `RESEND_ADJUDICATED` ได้ -- เซตนั้นยังต้องว่างหลังใบนี้ปิด (nonclaim ข้อ 1 ของต้นทาง)
+- 🔺 ต้องอ่านคอลัมน์ `nonclaim`/`residual_*` ของทุกแถว Codex ที่ยกมา แล้วคัดลอกข้อความนั้นลงในผล (§14 ข้อ 13 ข) -- แถว `:8-11` มีข้อความ `structural/consumer role is proved but the broader gameplay noun or full value domain is not unique`
+- G8: ทุกแถวในผลติดป้าย `[วัดแล้ว]`/`[เสนอ]` · G1/G6: ห้ามปิดด้วยการอ่านครั้งเดียวหรือแหล่งเดียว ต้องมี `span_sha256` ทุกช่วง
+
+## แยกจากใบไหน
+`RE-259` (กลุ่ม 1+2 · 9 VA · คนละระดับของคำถาม -- จดหมายต้นทางสั่งห้ามรวม) · `RE-193` (7 ฟิลด์ ปิดแล้ว ไม่มี `@0x99`/`@0x9A`) · `RE-194` (ค่าของ x=7) · `RE-241` (`CNetNPC` ในชั้น census ของมอน ไม่ใช่ owner ของ Attr field)
+
+## ถ้าผลออกทางลบ
+bounded negative ⇒ LANE-DB ยังคง **ไม่** เติม `RESEND_ADJUDICATED` และปิด piece 3 ค้างไว้ตามเดิมโดยมีเหตุผลที่ระบุ VA ได้ (แทนที่จะเป็น "ไม่มีใครเคยลอง") · ถ้าคำตอบออกมาเป็น NPC-only ⇒ ผลนี้ไปเสริม `RE-259` แต่ **ไม่แทนกัน** สองใบยังต้องปิดแยก
+
+## ผลไปถึงใคร
+จดหมายผลจ่าหน้า **LANE-DB** (cc chief, COO) · บรรทัดแรกเขียนว่า `ขอให้ LANE-DB กรอก ### result: และปิดหัวใบเอง` (§5) · ไม่ผูก deadline (`PANYA-DECISION 20260904_0233`)
+
+### result:
+(ว่าง -- รอ RE runner)
+
+---
+
+
+---
+
+## RE-261 STALL-AND-GUILD-STORAGE-FIELD-SEMANTICS-FROM-A-REAL-SESSION-001  [OPEN -- 🔺 `[NEEDS-ATTENDED-CAPTURE]` (จดหมายต้นทางระบุเองว่า **ปิดจาก static เดี่ยวไม่ได้**) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-UI** · ใบ GT คู่ของมัน = **`GT-262` (chief จองเลขไว้แล้วรอบ `pv4zg1`/R352 · LANE-UI เป็นผู้เขียนเนื้อใบ GT ในรอบถัดไป)** ตาม `AGENTS.md` §7 (`COO-DECISION 20260904_2142` ข้อ 3) -- **ผู้เทสอ่าน `GAME_TEST_QUEUE.md` เท่านั้น ไม่เคยอ่านไฟล์นี้** ถ้าไม่มีใบ GT จะไม่มีใครเห็นใบนี้ตลอดกาล]
+
+> numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืนสูงสุดที่ `256` (`RE-256`) · `257`/`258` = ใบ GT สองใบรอบเดียวกัน · `259`/`260` = `RE-259`/`RE-260` => ใบนี้ `261` · `RE-261`/`GT-261`/`GT-262`/`RE-262` = **0 hit ทั้งสามที่ก่อนวาง** [วัดแล้ว chief `pv4zg1`/R352]
+> ที่มา: `notes_to_chief/20260905_0456_LANE-UI-RE-TICKET-stall-and-guild-storage-opcodes-known-fields-partial.md` (สารบัญ 15 แถวของ LANE-UI · สองแถวสุดท้ายที่ยังไม่มีใบ)
+
+## ค้นแล้วก่อนเปิดใบ (ผลการ grep -- กติกาใหม่ `AGENTS.md` §7 · `COO 0646` ข้อ 2)
+**เจอ**
+- `VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv` -- opcode มีจริงทั้งสองระบบ [วัดแล้ว chief ทีละบรรทัด]: `:54 0x2A3E StallOpenVital` · `:68 0x30FE StallStartVital` · `:89 0x3DE4 StallOperateVital` · `:116 0x462C GCGSSS_GuildStorageVital_ReArrangeResult` · `:160 0x5CAD GuildStorageOpenVital` · `:192 0x70D0 GuildStorageResultVital` · `:208 0x7F17 GCGS_GuildStorageCmdVital` · `:209 0x7F5B GSSS_GuildStorageCmdVital` · `:224 0x8B66 GCSS_GuildStorageOpenVital` · `:250 0xA1B3 DBSS_GuildStorageUpdateVital` · `:262 0xAD7A DBSS_GuildStorageInitialVital` · `:274 0xBAE7 GCGSSS_GuildStorageResultVital` (ต่างจาก `RE-235` ที่ชื่อคลาสไม่เคยเป็นสตริงเลย -- ใบนี้ **ไม่ต้องหา opcode**)
+- `external/PF_PROTOCOL_REGISTRY.tsv:210` -- `GCSS_GuildStorageOpenVital` มี VA เต็มแถว (`0x00F0B474` / `0x00BF96C0` / `0x006724A0` / ...) [วัดแล้ว chief] ⇒ แก้สารบัญเดิม `0400` ที่เขียนว่า "ชื่อคลาสเท่านั้น" ซึ่งเกินจริง
+- `external/PF_FIELD_VALIDATION.tsv:1018-1023` (`StallStartVital`/`StallOpenVital`/`StallOperateVital` W+R) และ `:418-421` (`GCSS_GuildStorageOpenVital`/`GCGS_GuildStorageCmdVital` W+R) -- ทุกแถว `observed_frames=0` `capture_file_count=0` `status=NOT_OBSERVED` `source=CAPTURE` [วัดแล้ว chief]
+- สมมติฐานที่มีอยู่แล้วของ `StallOperateVital` serializer `0x76A630` (chief round 75 · 2026-08-18) -- `u8 tag 0x08 @+0x14` · `qword tag 0x32 @+0x18` · **`u32 tag 0x14 @+0x20 = price`** · `string @+0x24` · [วัดแล้ว chief จาก **สองแหล่งในสะพาน**ไม่ใช่แหล่งเดียว (G1): `archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R77.md:64` และ `FACTPACK_R100_INREPO_LOOT_SPAWN_GAPLIST.md:132`] · แหล่งที่จดหมายอ้าง (`docs/FUNCTIONAL_COVERAGE.json` → `use_drop_sell`, รีโป pirate-force-server) **ไม่มีในต้นไม้ `pf_bridge`** -- carry over เป็น [เสนอ] ของ LANE-UI
+- `ค้น gamedata แล้ว: เจอ (แต่ไม่ตอบใบนี้)` [วัดแล้ว chief -- 🔺 จดหมายต้นทาง **ไม่ได้ค้นต้นไม้นี้เลย**]: `gamedata/PF_GAMEDATA_LUA_API.tsv:122` = `Guild.OpenGuildStorage` (script `Quest/q_guildstorage.lua` · สถานะ `UNRESOLVED` · เหตุผล "no NUL-delimited string, or no push<nameVA> + mov[esp+X],delegate pattern found") · `gamedata/PF_GAMEDATA_INDEX.tsv:117` = ตาราง `CONSTDATA_TH.STALL_SET` (span `0x0080C0C0-0x0080C85A`) · `gamedata/PF_GAMEDATA_COLUMNS.tsv:1924-1933` = คอลัมน์ของ `STALL_SET`: `n_ID` `n_STATUS` `n_EFFECT_RESIDENT` `s_NAME` `s_STALL_ITEM` `n_UI_TEXT` `s_HK_VER` `s_TC_VER` `s_JP_VER` `s_TH_VER` -- **ไม่มีคอลัมน์ราคา** ⇒ สองแถวนี้ไม่ย่อคำถามของใบ แต่ผู้เขียน `GT-262` อาจต้องใช้ `STALL_SET.n_ID` เพื่อระบุว่าเปิดแผงชนิดใด
+
+**ไม่เจอ**
+- `ค้นใน pf_bridge\external\ แล้ว: ไม่เจอความหมายฟิลด์` -- `grep -c "^GuildStorageOpenVital\b"` / `"^GuildStorageResultVital\b"` = **0 ทั้งใน `external/PF_SERIALIZER_FIELDS.tsv` และ `external/PF_FIELD_VALIDATION.tsv`** [วัดแล้ว chief] · hit ที่ไม่ anchor (48 ครั้ง) เป็นของ `GCSS_`/`GCGSSS_` ซึ่งเป็นคนละคลาส ⇒ 🔺 **สองคลาสชื่อเปล่านี้ = "ไม่ถูก track" ห้ามเขียนว่า `NOT_OBSERVED`** สองสถานะนี้ต่างกัน (`NOT_OBSERVED` = มีแถว เคยสแกน ไม่เคยเจอเฟรม · ไม่ถูก track = ไม่มีแม้แถว `UNKNOWN` มีแต่ opcode จาก R38)
+- `CLIENT_RE_QUEUE.md` / `GAME_TEST_QUEUE.md` -- `grep -in "stall\|guildstorage\|guild storage"` **ไม่มีใบเรื่องนี้เลยสักใบ** [วัดแล้ว chief] · hit ทั้งหมดเป็น substring ของ `install` (`CLIENT_RE_QUEUE.md:2956,3093,3153,3155` ฯลฯ) กับ `GAME_TEST_QUEUE.md:5604` ที่ใช้คำว่า "stall" ในความหมาย UI ค้าง (`CTracePathReqVital`, เรื่อง `GT-120`) -- 🔺 `\b` **ไม่กัน `install`** เพราะ `stall` จบพอดีท้ายคำ ต้องกรองด้วยมือ (บทเรียนของ `pf-adversary` รอบ `npixtd` ยกมาทั้งข้อ)
+- `external/PF_TAG_CENSUS.tsv` -- tag `0x08`/`0x0F`/`0x14`/`0x19`/`0x32` ทุกตัว `proven_semantics=UNKNOWN` [เสนอ ของ LANE-UI · chief ยังไม่ verify ซ้ำ] ⇒ "resolved" = รู้ offset/type ของไบต์ **ไม่ใช่** รู้ว่าฟิลด์นั้นคือ item id/ราคา/slot
+
+## จำนวนฟิลด์ที่แกะได้แล้ว (ยกจากจดหมาย `0456` · วิธี awk มือ ไม่มีสคริปต์ commit ⇒ [เสนอ] ทั้งตาราง)
+`StallStartVital` 18/44 · `StallOpenVital` 12/40 · `StallOperateVital` 18/26 · `StallModule_Client`+`StallActorAttr` รวม 0/8 (non-field/EMPTY -- chief ยืนยัน `external/PF_SERIALIZER_FIELDS.tsv:6917-6918` เป็นแถว `StallActorAttr` จริง [วัดแล้ว]) · `GCSS_GuildStorageOpenVital` 8/12 · `GCGS_GuildStorageCmdVital` 12/20 · อีก 10 คลาสในตระกูลนับแบบ bucket ตั้งแต่ 0/4 (`DBSS_GuildStorageInitialVital`) ถึง 136/293 (`GSSS_GSInitialGuildDataVital`)
+
+## คำถามของใบ (เรียงเป็นลำดับบังคับ ห้ามสลับ)
+1. **positive control ก่อนอย่างอื่นทั้งหมด**: สอง trial ของ `StallOperateVital` ที่ **ต่างกันเฉพาะราคาที่พิมพ์บนจอ** -- ไบต์ที่ `+0x20` (`u32` tag `0x14`) เปลี่ยนตามหรือไม่ ⇒ ยืนยัน/หักล้างสมมติฐาน `0x76A630` = ราคา ของ chief round 75
+2. เฉพาะเมื่อข้อ 1 ใช้ได้จริง: เปิดแผง/วางไอเทม (`StallStartVital` `0x30FE` · `StallOpenVital` `0x2A3E`) แล้วผูก opcode กับเฟรมที่เห็นจริง
+3. เฉพาะเมื่อข้อ 1 ใช้ได้จริง: เปิดคลังกิลด์ + ฝาก/ถอน (`GCSS_GuildStorageOpenVital` `0x8B66` ก่อน แล้ว `GCGS_GuildStorageCmdVital` `0x7F17` -- ฟิลด์ resolved มากที่สุดในตระกูล)
+🔺 **ห้ามเดา tag ที่เหลือ** (`+0x14`/`+0x18`/`+0xB0` ฯลฯ) ก่อนข้อ 1 ผ่าน -- นี่คือลำดับที่จดหมายต้นทางขอไว้ตรง ๆ
+
+## เกณฑ์ปิดใบ (ชั้น wire/DB เท่านั้นในไฟล์นี้)
+- ปิดใบได้เมื่อมี **เฟรมจริงคู่หนึ่งจากเซสชันเดียวกัน** ที่ต่างกันเฉพาะราคา + hex ทั้งสองเฟรม + opcode ที่อ่านได้ + คำตัดสินว่า `+0x20` เปลี่ยนตามหรือไม่
+- 🔺 **ชั้น client-observable ไม่อยู่ในใบนี้** สิ่งที่คนต้องเห็นบนจอ (หน้าต่างแผง/ช่องราคา/ป้ายชื่อในเฟรม) เป็นเนื้อของ **`GT-262`** เท่านั้น -- **ห้ามเขียนเกณฑ์ที่เอาชั้นหนึ่งไปเป็นหลักฐานของอีกชั้น** ทั้งในใบนี้และในใบ GT
+- **ผลลบมีค่าเท่าผลบวก**: ถ้า `+0x20` ไม่ขยับตามราคา ⇒ สมมติฐาน chief round 75 ถูกหักล้าง (เป็น finding ไม่ใช่ความล้มเหลว) และ redirect ไปหาว่าฟิลด์ใดขยับแทน · ถ้า **ไม่มีเฟรมออกเลย** ⇒ บันทึกว่าเป็นการไม่ยืนยันเส้นทาง UI ไม่ใช่การหักล้าง opcode
+
+## ใบนี้ไม่ขอ
+ไม่ขอ `GuildStorageOpenVital`(`0x5CAD`)/`GuildStorageResultVital`(`0x70D0`) ชื่อเปล่า (ไม่มีแถวให้เทียบเลย -- capture ไปก็ไม่มีที่ลง) · ไม่ขอ 10 คลาสที่นับแบบ bucket · ไม่ขอความหมาย tag ทุกตัว · ไม่ขอให้แตะโค้ด · ไม่ขอผลจากการเดา hash ชื่อคลาส
+
+## ห้ามสรุปสิ่งเหล่านี้ (nonclaims ยกจากจดหมาย `0456` ทั้งหกข้อ ย่อความ)
+① ตัวเลข real/total เป็นตัวเลข derive มือรอบเดียว ไม่มีสคริปต์ commit ให้ทำซ้ำ ⇒ [เสนอ] ② `+0x20 = ราคา` เป็น **สมมติฐาน static ที่ยังไม่ยืนยันด้วย attended** ห้ามเขียนเป็นข้อเท็จจริง -- ส่วนฟิลด์อื่นทุกตัวรวมทั้งตระกูล guild storage **ยังไม่มีสมมติฐานใด ๆ เลยจริง** ③ ยังไม่แกะรายฟิลด์ของ `StallOpenVital`/`StallOperateVital` และอีก 12 คลาส ④ ไม่ยืนยันว่า `CALL_UNCLASSIFIED`/indirect-call ที่เหลือแก้ได้ด้วย static รอบใหม่ (ต้องมีไบนารีไคลเอนต์จริง) ⑤ รอบที่ออกจดหมายไม่มีไบต์ออกไปไคลเอนต์เครื่องใดเลย ⑥ ใบ `1120` (เพื่อน/เมล/ปาร์ตี้/เทรด) เป็นคนละ 8 คลาส ไม่ต้องแก้อะไรในใบนั้น
+- `[chief เติม]` ห้ามเขียนว่าสองคลาสชื่อเปล่า = `NOT_OBSERVED` (ดูช่องค้น) · `[chief เติม]` G8: ทุกแถวในผลติดป้าย `[วัดแล้ว]`/`[เสนอ]`
+
+## แยกจากใบไหน
+`RE-235` (ตลาดมืด/หน้าต่างสำรวจ -- ที่นั่น **ไม่มี** opcode เลย ที่นี่ **มี** opcode ครบ คนละอุปสรรค) · `RE-236`/`RE-237` (สามแถวอื่นของสารบัญ) · `GT-120` (คำว่า "stall" ในความหมาย UI ค้าง ไม่ใช่ระบบแผงขายเอง) · **`GT-262`** = ใบคู่ที่ผู้เทสจะเห็นจริง
+
+## ถ้าผลออกทางลบ
+`+0x20` ไม่ใช่ราคา ⇒ สมมติฐาน chief round 75 ถูกหักล้าง เป็นผลของใบนี้เอง และ LANE-UI ต้องเปลี่ยนวิธี (ไล่ฟิลด์ที่ขยับแทนการยืนยันฟิลด์ที่เดาไว้) · ไม่ว่าผลออกทางใด **สองแถวสุดท้ายของสารบัญ 15 แถวจะปิดสถานะได้** และไม่บล็อกแถวอื่นของ LANE-UI
+
+## ผลไปถึงใคร
+จดหมายผลจ่าหน้า **LANE-UI** (cc chief, COO) · LANE-UI บริโภคเองและปิดหัวใบนี้ในรอบของตัวเอง (§5) · 🔺 LANE-UI **ค้างเนื้อใบ `GT-262` ในรอบถัดไป** -- ตราบใดที่ `GT-262` ยังว่าง ใบนี้จะไม่มีทางถูกทดสอบ
+
+### result:
+(ว่าง -- รอ attended capture ผ่าน `GT-262`)
 
 ---
