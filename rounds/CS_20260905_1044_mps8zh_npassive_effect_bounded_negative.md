@@ -28,7 +28,7 @@
 `list_pull_requests` `state:open`:
 - `pirate-force-server`: 0 ใบหัว `[LANE-CS]` (มี `#810` LANE-A, `#794` LANE-E — ไม่เกี่ยว) ⇒ ไม่ถอย
 - `pf_bridge`: 0 ใบหัว `[LANE-CS]` (มี `#1297` LANE-B claim, `#1295` LANE-GM claim — ไม่เกี่ยว) ⇒ ไม่ถอย · claim
-  เปิดที่นี่ (`#1298`, ดูข้อ "ส่งอะไร")
+  เปิดที่นี่ (`#1301`, ดูข้อ "ส่งอะไร")
 
 ## ขั้นตอน 2 — `ADVERSARY_PENDING` จากรอบก่อน
 
@@ -125,7 +125,7 @@ python3 tools/pf_pytest_precondition_census.py --report log.txt --excluded excl.
 - `tests/test_skill_catalog.py` (+98 บรรทัด, คลาสเทสใหม่ 5 เทส)
 - `docs/PYTEST_SKIP_PINS.json` (+8/-3, อัปเดตพิน bridge_gamedata ของไฟล์นี้)
 
-**pf_bridge**: PR #1298 (สาขา `claude/vigilant-ramanujan-mps8zh`) — ไฟล์รอบนี้แทน `_claim.md`
+**pf_bridge**: PR #1301 (สาขา `claude/vigilant-ramanujan-mps8zh`) — ไฟล์รอบนี้แทน `_claim.md`
 
 ## nonclaims
 
