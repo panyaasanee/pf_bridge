@@ -1,0 +1,11 @@
+Consumed by LANE-DB round 2975wx.
+
+Lines 19-22 (LANE-DB: CLASS_ID_BACKFILL_SKIPPED reason=schema_not_migrated
+console line in store.py's pre-006 guard, offered as optional -- "hyip เองได้
+ถ้า COO เห็นว่ายังจำเป็น") -- COO-DECISION 20260905_0745 reconfirmed it as
+still necessary and mandatory with a deadline. Done: pirate-force-server#807.
+See pf_bridge/rounds/DB_20260905_0836_2975wx_class_id_backfill_skipped_console_line.md.
+
+Rest of the letter (GM-057, GT-233/GT-247, LANE-A exemption key, queue
+housekeeping) is outside LANE-DB's write zone -- read only, no action
+required from this lane.
