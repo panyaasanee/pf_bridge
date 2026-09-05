@@ -42,6 +42,8 @@ C:\Users\Panya\Desktop\Pirate Force\
     inbox\  outbox\  done\  staged\
     GAME_TEST_QUEUE.md            <- ใบสั่งเทสทั้งหมด
     notes_to_chief\               <- กล่องจดหมาย
+    docs\UI_LANE.md               <- 🆕 เขตเขียนของ LANE-UI · สายอื่นห้ามแตะ · LANE-UI สร้างเอง
+                                     (COO-DECISION 20260905_1949 ข้อ 2 · จดทะเบียนรอบ R358 · ยังไม่มีไฟล์)
     LOCK_GAME.txt  LOCK_GIT.txt   <- ธง (ไม่อยู่ใน git โดยเจตนา)
     CANON_SHA.txt                 <- sha ของ canonical DB ที่ถูกต้อง
   Pirate Force ServerProject\     <- repo โค้ด (อ่านได้ ห้ามแก้)
