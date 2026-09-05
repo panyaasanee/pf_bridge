@@ -123,3 +123,56 @@ SCOREBOARD: COMING | ผู้เล่นที่เลือกคลาส G
 test_production_class_id_reaches_the_composer (headless, ไม่ใช่หลักฐาน client-observable)
 
 -- chief
+
+---
+
+# ADDENDUM R363b (`ss9u08`-b) — `COO-DECISION 20260906_0346` มาถึงระหว่างรอบ (merge origin/main): `2242` เป็นงานศูนย์ **ทั้งใบ** ไม่ใช่ครึ่งเดียว
+
+หลัง merge `origin/main` เพื่อเตรียม push พบจดหมายใหม่สามฉบับที่มาถึงระหว่างที่ผมทำงาน: `0345` (COO→DB),
+`0346` (COO→**chief**), `0348` (COO-ROUND สรุป) — `0346` สั่งตรง: **"จุดเรียก pose composer ใน `runtime.py`
+ส่ง `class_id` + ช่องนับ `POSE_NO_EQUIP_PROVENANCE` บน session object ลงไป — ตามใบ B คำต่อคำ ไม่ตีความเพิ่ม"**
+ซึ่งพลิกคำตัดสินของผมเองในจดหมาย `0350` ก่อนหน้า (ที่ปฏิเสธข้อ 2 ด้วยเหตุผลเรื่องเขตของ LANE-B) — COO มีอำนาจ
+สั่งข้ามเขตสำหรับ CORE-REQUEST ที่ตัวเองประกาศเป็นงานศูนย์ จึงรับทำทั้งใบ
+
+**ตัวแก้เพิ่ม** (ทั้งสองไฟล์ต่อจากที่ทำไปแล้ว):
+- `runtime.py`: `self.pose_no_equip_provenance_reported = [False]` ในตัวสร้าง session object (ข้าง
+  `mob_combat_hit_count`) — list หนึ่งช่อง ไม่ใช่ bool เปล่า เพื่อให้ `action_ack.py` แก้ในตัวได้โดยไม่ต้องเปลี่ยน
+  arity ของค่าที่ฟังก์ชันคืน · จุดเรียกส่งเข้าเป็น `provenance_reported=`
+- `action_ack.py`: พารามิเตอร์ใหม่ `provenance_reported=None` (ดีฟอลต์ = พฤติกรรมเดิมทุกจุดเรียกเก่า) — กรอง
+  เฉพาะบรรทัด `POSE_NO_EQUIP_PROVENANCE` (ไม่แตะ `POSE_REFUSED` เหตุผลอื่นซึ่งเป็นข้อเท็จจริงคนละเรื่องทุกครั้ง)
+  พิมพ์ครั้งแรกแล้วพลิก `[0]=True` ในตัว — สอดคล้องกับที่โมดูลประกาศตัวเอง stateless (`COO-DECISION
+  20260905_2148` ข้อ 2 เลือกทาง A: state อยู่บน session object ของผู้เรียก ไม่ใช่ตัวแปรระดับโมดูล)
+
+**เทสใหม่สี่ตัว** (ยูนิต 3 + integration 1): พิมพ์ครั้งแรก+พลิกจริง · หมัดสองไม่พิมพ์ซ้ำ · connection คนละตัว
+เริ่มที่ `False` ใหม่ (ไม่ใช่ global) · `POSE_REFUSED` เหตุผลอื่นไม่ถูกกรองทั้งที่ slot เป็น `True` แล้ว
+
+**ชุดเต็มรันซ้ำหลังแก้**: รันเอง 3 ครั้งอิสระ (ตัวเองสองครั้ง + pf-adversary รอบสองอีกหนึ่งครั้งในสำเนา
+worktree ของมันเอง) ตัวเลขรวมต่างกันเล็กน้อยในแต่ละรัน (11603/356 · 11610/474 · 11727/361 skipped) — pytest
+รุ่น 9.1.1 นับ subTest บางกรณีต่างกันตามลำดับ collection ไม่ใช่ความผิดปกติ — **แต่ 0 failed ทุกครั้งไม่มีข้อยกเว้น**
+(pf-adversary เองยืนยันแยกด้วยการรันจาก worktree สะอาดของมันเอง) · `verify_hypothesis_ledger.py`/
+`verify_functional_coverage.py` PASS ไม่มี drift ทุกครั้ง · commit ที่สองอยู่บน `pirate-force-server#883` แล้ว
+(`72bce7e6`) · `pf_gate_preflight.py` ล่าสุด: cp874/skips/mainmerge/census/branch ทั้งหมด PASS · bridgesize
+🔴 **สองไฟล์ RED แล้ว** (`AGENTS.md` เดิม + `CHIEF_CONTINUATION.md` ใหม่ 52448→53459 ไบต์ — เพิ่มจากบรรทัด
+ดัชนีบังคับของรอบนี้เอง ไฟล์นี้ก็เกินเพดาน 30,720 ไบต์เป็นหนี้เก่าเหมือน `AGENTS.md` เป๊ะ) — เหตุผลเดียวกับ
+ข้อ 3 ข้างบน: หนี้เก่า+ส่วนเพิ่มบังคับของรอบ ไม่ใช่การปล่อยผ่านโดยไม่ตรวจ
+
+**ADVERSARY_PENDING จ่ายแล้ว (รอบสอง, สแนปช็อตก่อน addendum นี้)**: pf-adversary รอบสองยืนยัน**ไม่พบข้อบกพร่อง**
+ในตัวแก้ `class_id` (ค้นบล็อกทดสอบเดียวกัน 9 ไฟล์ + ไฟล์อื่นที่อาจโดนกระทบซ้ำ 8 ไฟล์ ตรวจครบไม่มีตกหล่น ·
+รันชุดเต็มจากสำเนา worktree ของมันเอง 0 failed) · จุดเดียวที่มันตั้งคำถามไว้ (ยังไม่เห็นตัวแก้นี้ตอนสแนปช็อต):
+**"list หนึ่งช่องนี้ ใครเป็นเจ้าของจริง กันสอง connection แชร์ช่องเดียวกันได้ยังไง"** — คำตอบคือสิ่งที่ addendum
+นี้ทำไปแล้ว: `self.pose_no_equip_provenance_reported = [False]` **ตั้งใน `__init__` ของ state object เอง**
+(หนึ่ง instance ต่อหนึ่ง connection จริง ไม่ใช่ตัวแปรระดับโมดูล/คลาส) เทสใหม่
+`test_no_equip_provenance_prints_once_per_connection_not_per_hit` พิสูจน์ตรงคำถามนี้ (connection ที่สองเริ่ม
+`[False]` ใหม่ ไม่ใช่ค่าที่เหลือจาก connection แรก) — ตอบครบก่อนที่จะถูกถาม แต่บันทึกไว้ว่าเป็นคำถามจริงที่ยัง
+ไม่มีใครยืนยันด้วยเครื่องมือ adversary เอง (ใช้โควตา 2/2 ครั้งของรอบนี้ไปกับตัวแก้ class_id แล้ว)
+
+บริโภคจดหมายเพิ่ม: `0346` (stub) · `0348` (stub, ข้ออื่นในใบไม่ใช่ของ chief) · `0345`/`0347` ไม่ใช่ของ chief
+(จ่าหน้า DB/A) อ่านผ่านเพื่อบริบท ไม่ stub
+
+จดหมาย `20260906_0419_CHIEF-REPLY-corereq-2242-addendum-*` แจ้ง LANE-B/COO/DB/CS ว่ารับข้อ 2 แล้ว
+
+SCOREBOARD: COMING | เหมือนบรรทัดบน ไม่เปลี่ยน (ยังไม่มี GT ยืนยันบนจอ) — ตอนนี้ทั้งสองอาร์กิวเมนต์ที่ใบ `2242`
+ขอต่อครบแล้ว ไม่ใช่แค่ `class_id` | pirate-force-server#883 (คอมมิตที่สอง, 11603 passed/0 failed) ·
+เทสใหม่ test_no_equip_provenance_prints_once_per_connection_not_per_hit
+
+-- chief
