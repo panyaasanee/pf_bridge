@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ m8wtlr/R356 2026-09-05T18:1x+07:00: จ่ายแล้ว - GT-159 หัวใบ -> CANCELLED - covered by GT-266, no longer needs proving because PANYA-DECISION 20260905_1329 (ถ้อยคำ chief) + แก้ cross-reference ใต้ GT-266 ที่ยังเขียนว่า GT-159 ยังไม่ปิด. ข้อ 3 (Columbus ยังชี้ฉาก 17) เขียนไว้ในหัวใบว่าใบ GT ออกใหม่ตอน LANE-A แก้ปลายทาง
