@@ -1,119 +1,121 @@
 DERIVED FILE - DO NOT DECIDE FROM THIS - read GAME_TEST_QUEUE.md
 # QUEUE STATUS SNAPSHOT (generated -- do not edit; regenerate with tools_bridge/pf_queue_status.py)
-generated: 2026-09-05T23:02:55+07:00
-scanned: GAME_TEST_QUEUE.md, CLIENT_RE_QUEUE.md + 20 archive files
-tickets total: 297 (live 273 / archive-only 24) -- open in live: 104
+generated: 2026-09-06T02:11:26+07:00
+scanned: GAME_TEST_QUEUE.md, CLIENT_RE_QUEUE.md + 22 archive files
+tickets total: 299 (live 275 / archive-only 24) -- open in live: 106
 
 ## OPEN (live)
 | ใบ | status | ที่อยู่ | อ่านจาก |
 |---|---|---|---|
-| GT-002 | UNKNOWN | live:GAME_TEST_QUEUE.md:616 | ? |
-| GT-036 | BLOCKED | live:GAME_TEST_QUEUE.md:758 | header |
-| GT-060 | BLOCKED | live:GAME_TEST_QUEUE.md:876 | header |
-| GT-069 | BLOCKED | live:GAME_TEST_QUEUE.md:989 | header |
-| GT-072 | PARTIAL | live:GAME_TEST_QUEUE.md:1270 | header |
-| GT-074 | PENDING | live:GAME_TEST_QUEUE.md:1378 | header |
-| GT-076 | BLOCKED | live:GAME_TEST_QUEUE.md:1693 | header |
-| GT-079 | READY | live:GAME_TEST_QUEUE.md:2137 | header |
-| GT-080 | READY | live:GAME_TEST_QUEUE.md:2427 | header |
-| GT-099 | PENDING | live:GAME_TEST_QUEUE.md:3407 | header |
-| GT-102 | PARTIAL | live:GAME_TEST_QUEUE.md:3705 | header |
-| GT-103 | NO-RESULT | live:GAME_TEST_QUEUE.md:3943 | header |
-| GT-104 | NO-RESULT | live:GAME_TEST_QUEUE.md:4042 | header |
-| GT-106 | PARTIAL | live:GAME_TEST_QUEUE.md:4275 | header |
-| GT-107 | UNKNOWN | live:GAME_TEST_QUEUE.md:4406 | ? |
-| GT-109 | PENDING | live:GAME_TEST_QUEUE.md:4586 | header |
-| GT-110 | PENDING | live:GAME_TEST_QUEUE.md:4711 | header |
-| GT-114 | PENDING | live:GAME_TEST_QUEUE.md:4874 | header |
-| GT-124 | BLOCKED-ON-WIRING | live:GAME_TEST_QUEUE.md:5214 | header |
-| GT-125 | UNKNOWN | live:GAME_TEST_QUEUE.md:5368 | ? |
-| GT-128 | BLOCKED | live:GAME_TEST_QUEUE.md:5398 | header |
-| GT-129 | BLOCKED | live:GAME_TEST_QUEUE.md:5497 | header |
-| GT-132 | READY | live:GAME_TEST_QUEUE.md:5558 | body+7 |
-| GT-133 | BLOCKED | live:GAME_TEST_QUEUE.md:5673 | header |
-| GT-140 | BLOCKED | live:GAME_TEST_QUEUE.md:5762 | header |
-| GT-141 | READY | live:GAME_TEST_QUEUE.md:5807 | header |
-| GT-142 | BLOCKED | live:GAME_TEST_QUEUE.md:5994 | header |
-| GT-144 | BLOCKED | live:GAME_TEST_QUEUE.md:6113 | header |
-| GT-146 | UNKNOWN | live:GAME_TEST_QUEUE.md:6230 | ? |
-| GT-147 | BLOCKED | live:GAME_TEST_QUEUE.md:6339 | header |
-| GT-151 | OPEN | live:GAME_TEST_QUEUE.md:6460 | header |
-| GT-158 | PENDING | live:GAME_TEST_QUEUE.md:6580 | header |
-| GT-159 | BLOCKED | live:GAME_TEST_QUEUE.md:6636 | body+6 |
-| GT-160 | READY | live:GAME_TEST_QUEUE.md:6702 | header |
-| GT-164 | UNKNOWN | live:GAME_TEST_QUEUE.md:6738 | ? |
-| GT-166 | READY | live:GAME_TEST_QUEUE.md:6796 | header |
-| GT-170 | UNKNOWN | live:GAME_TEST_QUEUE.md:6843 | ? |
-| GT-171 | READY | live:GAME_TEST_QUEUE.md:6872 | header |
-| GT-173 | READY | live:GAME_TEST_QUEUE.md:6917 | header |
-| GT-174 | READY | live:GAME_TEST_QUEUE.md:6968 | header |
-| GT-176 | READY | live:GAME_TEST_QUEUE.md:7074 | header |
-| GT-177 | BLOCKED | live:GAME_TEST_QUEUE.md:7131 | header |
-| GT-178 | READY | live:GAME_TEST_QUEUE.md:7199 | body+9 |
-| GT-179 | BLOCKED | live:GAME_TEST_QUEUE.md:7326 | header |
-| GT-180 | BLOCKED | live:GAME_TEST_QUEUE.md:7383 | header |
-| GT-181 | PENDING | live:GAME_TEST_QUEUE.md:7453 | header |
-| GT-183 | UNKNOWN | live:GAME_TEST_QUEUE.md:7490 | ? |
-| GT-184 | BLOCKED | live:GAME_TEST_QUEUE.md:7595 | header |
-| GT-185 | BLOCKED | live:GAME_TEST_QUEUE.md:7674 | header |
-| GT-186 | BLOCKED | live:GAME_TEST_QUEUE.md:7747 | header |
-| GT-189 | BLOCKED | live:GAME_TEST_QUEUE.md:7868 | header |
-| GT-190 | BLOCKED-ON-WIRING | live:GAME_TEST_QUEUE.md:7893 | header |
-| GT-193 | READY | live:GAME_TEST_QUEUE.md:7954 | header |
-| GT-194 | READY | live:GAME_TEST_QUEUE.md:8224 | header |
-| GT-199 | PENDING | live:GAME_TEST_QUEUE.md:8336 | header |
-| GT-200 | READY | live:GAME_TEST_QUEUE.md:8459 | header |
-| GT-202 | UNKNOWN | live:GAME_TEST_QUEUE.md:8534 | ? |
-| GT-203 | PENDING | live:GAME_TEST_QUEUE.md:8557 | header |
-| GT-213 | READY | live:GAME_TEST_QUEUE.md:8779 | header |
-| GT-214 | READY | live:GAME_TEST_QUEUE.md:8872 | header |
-| GT-215 | READY | live:GAME_TEST_QUEUE.md:8964 | header |
-| GT-217 | READY | live:GAME_TEST_QUEUE.md:9100 | header |
-| GT-218 | READY | live:GAME_TEST_QUEUE.md:9232 | header |
-| GT-220 | READY | live:GAME_TEST_QUEUE.md:9449 | header |
-| GT-221 | BLOCKED | live:GAME_TEST_QUEUE.md:9517 | header |
-| GT-223 | READY | live:GAME_TEST_QUEUE.md:9627 | header |
-| GT-224 | OPEN | live:GAME_TEST_QUEUE.md:9722 | header |
-| GT-225 | BLOCKED | live:GAME_TEST_QUEUE.md:9836 | header |
-| GT-226 | BLOCKED | live:GAME_TEST_QUEUE.md:9904 | header |
-| GT-230 | OPEN | live:GAME_TEST_QUEUE.md:10209 | header |
-| GT-231 | BLOCKED | live:GAME_TEST_QUEUE.md:10327 | header |
-| GT-233 | READY | live:GAME_TEST_QUEUE.md:10433 | header |
-| GT-242 | OPEN | live:GAME_TEST_QUEUE.md:10483 | header |
-| GT-243 | PENDING | live:GAME_TEST_QUEUE.md:10558 | header |
-| GT-245 | PARTIAL | live:GAME_TEST_QUEUE.md:10817 | header |
-| GT-249 | READY | live:GAME_TEST_QUEUE.md:10971 | header |
-| GT-250 | READY | live:GAME_TEST_QUEUE.md:11250 | header |
-| GT-251 | READY | live:GAME_TEST_QUEUE.md:11322 | header |
-| GT-252 | READY | live:GAME_TEST_QUEUE.md:11395 | header |
-| GT-253 | PENDING | live:GAME_TEST_QUEUE.md:11478 | header |
-| GT-255 | READY | live:GAME_TEST_QUEUE.md:11557 | header |
-| GT-257 | READY | live:GAME_TEST_QUEUE.md:11648 | header |
-| GT-258 | READY | live:GAME_TEST_QUEUE.md:11741 | header |
-| GT-262 | READY | live:GAME_TEST_QUEUE.md:11856 | header |
-| GT-264 | BLOCKED-ON-WIRING | live:GAME_TEST_QUEUE.md:11968 | header |
-| GT-266 | READY | live:GAME_TEST_QUEUE.md:11997 | header |
-| GT-267 | UNKNOWN | live:GAME_TEST_QUEUE.md:12049 | ? |
-| RE-107 | UNKNOWN | live:GAME_TEST_QUEUE.md:5512 | ? |
+| GT-002 | UNKNOWN | live:GAME_TEST_QUEUE.md:617 | ? |
+| GT-036 | BLOCKED | live:GAME_TEST_QUEUE.md:677 | header |
+| GT-060 | BLOCKED | live:GAME_TEST_QUEUE.md:795 | header |
+| GT-069 | BLOCKED | live:GAME_TEST_QUEUE.md:908 | header |
+| GT-072 | PARTIAL | live:GAME_TEST_QUEUE.md:1189 | header |
+| GT-074 | PENDING | live:GAME_TEST_QUEUE.md:1297 | header |
+| GT-076 | BLOCKED | live:GAME_TEST_QUEUE.md:1612 | header |
+| GT-079 | READY | live:GAME_TEST_QUEUE.md:2056 | header |
+| GT-080 | READY | live:GAME_TEST_QUEUE.md:2346 | header |
+| GT-099 | PENDING | live:GAME_TEST_QUEUE.md:3326 | header |
+| GT-102 | PARTIAL | live:GAME_TEST_QUEUE.md:3624 | header |
+| GT-103 | NO-RESULT | live:GAME_TEST_QUEUE.md:3862 | header |
+| GT-104 | NO-RESULT | live:GAME_TEST_QUEUE.md:3961 | header |
+| GT-106 | PARTIAL | live:GAME_TEST_QUEUE.md:4194 | header |
+| GT-107 | UNKNOWN | live:GAME_TEST_QUEUE.md:4325 | ? |
+| GT-109 | PENDING | live:GAME_TEST_QUEUE.md:4505 | header |
+| GT-110 | PENDING | live:GAME_TEST_QUEUE.md:4630 | header |
+| GT-114 | PENDING | live:GAME_TEST_QUEUE.md:4793 | header |
+| GT-124 | BLOCKED-ON-WIRING | live:GAME_TEST_QUEUE.md:4975 | header |
+| GT-125 | UNKNOWN | live:GAME_TEST_QUEUE.md:5129 | ? |
+| GT-128 | BLOCKED | live:GAME_TEST_QUEUE.md:5159 | header |
+| GT-129 | BLOCKED | live:GAME_TEST_QUEUE.md:5258 | header |
+| GT-132 | READY | live:GAME_TEST_QUEUE.md:5319 | body+7 |
+| GT-133 | BLOCKED | live:GAME_TEST_QUEUE.md:5434 | header |
+| GT-140 | BLOCKED | live:GAME_TEST_QUEUE.md:5523 | header |
+| GT-141 | READY | live:GAME_TEST_QUEUE.md:5568 | header |
+| GT-142 | BLOCKED | live:GAME_TEST_QUEUE.md:5704 | header |
+| GT-144 | BLOCKED | live:GAME_TEST_QUEUE.md:5823 | header |
+| GT-146 | UNKNOWN | live:GAME_TEST_QUEUE.md:5940 | ? |
+| GT-147 | BLOCKED | live:GAME_TEST_QUEUE.md:6049 | header |
+| GT-151 | OPEN | live:GAME_TEST_QUEUE.md:6090 | header |
+| GT-158 | PENDING | live:GAME_TEST_QUEUE.md:6210 | header |
+| GT-159 | BLOCKED | live:GAME_TEST_QUEUE.md:6266 | body+6 |
+| GT-160 | READY | live:GAME_TEST_QUEUE.md:6332 | header |
+| GT-164 | UNKNOWN | live:GAME_TEST_QUEUE.md:6368 | ? |
+| GT-166 | READY | live:GAME_TEST_QUEUE.md:6426 | header |
+| GT-170 | UNKNOWN | live:GAME_TEST_QUEUE.md:6473 | ? |
+| GT-171 | READY | live:GAME_TEST_QUEUE.md:6502 | header |
+| GT-173 | READY | live:GAME_TEST_QUEUE.md:6547 | header |
+| GT-174 | READY | live:GAME_TEST_QUEUE.md:6598 | header |
+| GT-176 | READY | live:GAME_TEST_QUEUE.md:6652 | header |
+| GT-177 | BLOCKED | live:GAME_TEST_QUEUE.md:6709 | header |
+| GT-178 | READY | live:GAME_TEST_QUEUE.md:6777 | body+9 |
+| GT-179 | BLOCKED | live:GAME_TEST_QUEUE.md:6904 | header |
+| GT-180 | BLOCKED | live:GAME_TEST_QUEUE.md:6961 | header |
+| GT-181 | PENDING | live:GAME_TEST_QUEUE.md:7031 | header |
+| GT-183 | UNKNOWN | live:GAME_TEST_QUEUE.md:7068 | ? |
+| GT-184 | BLOCKED | live:GAME_TEST_QUEUE.md:7173 | header |
+| GT-185 | BLOCKED | live:GAME_TEST_QUEUE.md:7252 | header |
+| GT-186 | BLOCKED | live:GAME_TEST_QUEUE.md:7325 | header |
+| GT-189 | BLOCKED | live:GAME_TEST_QUEUE.md:7446 | header |
+| GT-190 | BLOCKED-ON-WIRING | live:GAME_TEST_QUEUE.md:7471 | header |
+| GT-193 | READY | live:GAME_TEST_QUEUE.md:7532 | header |
+| GT-194 | READY | live:GAME_TEST_QUEUE.md:7802 | header |
+| GT-199 | PENDING | live:GAME_TEST_QUEUE.md:7914 | header |
+| GT-200 | READY | live:GAME_TEST_QUEUE.md:8037 | header |
+| GT-202 | UNKNOWN | live:GAME_TEST_QUEUE.md:8112 | ? |
+| GT-203 | PENDING | live:GAME_TEST_QUEUE.md:8135 | header |
+| GT-213 | READY | live:GAME_TEST_QUEUE.md:8357 | header |
+| GT-214 | READY | live:GAME_TEST_QUEUE.md:8450 | header |
+| GT-215 | READY | live:GAME_TEST_QUEUE.md:8542 | header |
+| GT-217 | READY | live:GAME_TEST_QUEUE.md:8678 | header |
+| GT-218 | READY | live:GAME_TEST_QUEUE.md:8810 | header |
+| GT-220 | READY | live:GAME_TEST_QUEUE.md:8918 | header |
+| GT-221 | BLOCKED | live:GAME_TEST_QUEUE.md:8986 | header |
+| GT-223 | READY | live:GAME_TEST_QUEUE.md:9096 | header |
+| GT-224 | OPEN | live:GAME_TEST_QUEUE.md:9191 | header |
+| GT-225 | BLOCKED | live:GAME_TEST_QUEUE.md:9305 | header |
+| GT-226 | BLOCKED | live:GAME_TEST_QUEUE.md:9373 | header |
+| GT-230 | OPEN | live:GAME_TEST_QUEUE.md:9526 | header |
+| GT-231 | BLOCKED | live:GAME_TEST_QUEUE.md:9644 | header |
+| GT-233 | READY | live:GAME_TEST_QUEUE.md:9750 | header |
+| GT-242 | OPEN | live:GAME_TEST_QUEUE.md:9808 | header |
+| GT-243 | PENDING | live:GAME_TEST_QUEUE.md:9883 | header |
+| GT-245 | PARTIAL | live:GAME_TEST_QUEUE.md:9986 | header |
+| GT-249 | READY | live:GAME_TEST_QUEUE.md:10136 | header |
+| GT-250 | READY | live:GAME_TEST_QUEUE.md:10415 | header |
+| GT-251 | READY | live:GAME_TEST_QUEUE.md:10487 | header |
+| GT-252 | READY | live:GAME_TEST_QUEUE.md:10560 | header |
+| GT-253 | PENDING | live:GAME_TEST_QUEUE.md:10643 | header |
+| GT-255 | READY | live:GAME_TEST_QUEUE.md:10722 | header |
+| GT-257 | READY | live:GAME_TEST_QUEUE.md:10813 | header |
+| GT-258 | READY | live:GAME_TEST_QUEUE.md:10906 | header |
+| GT-262 | READY | live:GAME_TEST_QUEUE.md:11021 | header |
+| GT-264 | BLOCKED-ON-WIRING | live:GAME_TEST_QUEUE.md:11133 | header |
+| GT-266 | READY | live:GAME_TEST_QUEUE.md:11162 | header |
+| GT-267 | UNKNOWN | live:GAME_TEST_QUEUE.md:11214 | ? |
+| GT-269 | READY | live:GAME_TEST_QUEUE.md:11224 | header |
+| RE-107 | UNKNOWN | live:GAME_TEST_QUEUE.md:5273 | ? |
 | RE-122 | UNKNOWN | live:CLIENT_RE_QUEUE.md:156 | ? |
 | RE-128 | UNKNOWN | live:CLIENT_RE_QUEUE.md:255 | ? |
-| RE-135 | PENDING | live:CLIENT_RE_QUEUE.md:471 | header |
-| RE-155 | OPEN | live:CLIENT_RE_QUEUE.md:661 | header |
-| RE-169 | UNKNOWN | live:GAME_TEST_QUEUE.md:6845 | ? |
-| RE-208 | OPEN | live:CLIENT_RE_QUEUE.md:1228 | header |
-| RE-209 | OPEN | live:CLIENT_RE_QUEUE.md:1292 | header |
-| RE-222 | OPEN | live:CLIENT_RE_QUEUE.md:1335 | header |
-| RE-227 | UNKNOWN | live:CLIENT_RE_QUEUE.md:1413 | ? |
-| RE-235 | OPEN | live:CLIENT_RE_QUEUE.md:1642 | header |
-| RE-237 | PENDING | live:CLIENT_RE_QUEUE.md:1816 | header |
-| RE-238 | OPEN | live:CLIENT_RE_QUEUE.md:1960 | header |
-| RE-239 | PENDING | live:CLIENT_RE_QUEUE.md:2036 | header |
-| RE-248 | OPEN | live:CLIENT_RE_QUEUE.md:2121 | header |
-| RE-261 | OPEN | live:CLIENT_RE_QUEUE.md:2308 | header |
-| RE-266 | OPEN | live:CLIENT_RE_QUEUE.md:2451 | header |
+| RE-135 | PENDING | live:CLIENT_RE_QUEUE.md:411 | header |
+| RE-155 | OPEN | live:CLIENT_RE_QUEUE.md:453 | header |
+| RE-169 | UNKNOWN | live:GAME_TEST_QUEUE.md:6475 | ? |
+| RE-208 | OPEN | live:CLIENT_RE_QUEUE.md:620 | header |
+| RE-209 | OPEN | live:CLIENT_RE_QUEUE.md:684 | header |
+| RE-222 | OPEN | live:CLIENT_RE_QUEUE.md:727 | header |
+| RE-227 | UNKNOWN | live:CLIENT_RE_QUEUE.md:805 | ? |
+| RE-235 | OPEN | live:CLIENT_RE_QUEUE.md:911 | header |
+| RE-237 | PENDING | live:CLIENT_RE_QUEUE.md:1085 | header |
+| RE-238 | OPEN | live:CLIENT_RE_QUEUE.md:1229 | header |
+| RE-239 | PENDING | live:CLIENT_RE_QUEUE.md:1305 | header |
+| RE-248 | OPEN | live:CLIENT_RE_QUEUE.md:1387 | header |
+| RE-261 | OPEN | live:CLIENT_RE_QUEUE.md:1574 | header |
+| RE-266 | OPEN | live:CLIENT_RE_QUEUE.md:1745 | header |
+| RE-270 | OPEN | live:CLIENT_RE_QUEUE.md:1717 | header |
 
-## DRIFT -- open แต่ไม่มีในสารบัญมือ (65)
-GT-002, GT-036, GT-060, GT-069, GT-099, GT-102, GT-103, GT-104, GT-106, GT-107, GT-109, GT-110, GT-114, GT-125, GT-128, GT-129, GT-133, GT-140, GT-141, GT-144, GT-151, GT-158, GT-159, GT-160, GT-164, GT-166, GT-170, GT-171, GT-173, GT-174, GT-176, GT-177, GT-178, GT-179, GT-180, GT-181, GT-189, GT-190, GT-193, GT-194, GT-199, GT-200, GT-202, GT-214, GT-217, GT-218, GT-220, GT-230, GT-231, GT-243, GT-245, GT-249, RE-107, RE-122, RE-128, RE-135, RE-155, RE-169, RE-209, RE-222, RE-235, RE-238, RE-239, RE-248, RE-266
+## DRIFT -- open แต่ไม่มีในสารบัญมือ (66)
+GT-002, GT-036, GT-060, GT-069, GT-099, GT-102, GT-103, GT-104, GT-106, GT-107, GT-109, GT-110, GT-114, GT-125, GT-128, GT-129, GT-133, GT-140, GT-141, GT-144, GT-151, GT-158, GT-159, GT-160, GT-164, GT-166, GT-170, GT-171, GT-173, GT-174, GT-176, GT-177, GT-178, GT-179, GT-180, GT-181, GT-189, GT-190, GT-193, GT-194, GT-199, GT-200, GT-202, GT-214, GT-217, GT-218, GT-220, GT-230, GT-231, GT-243, GT-245, GT-249, RE-107, RE-122, RE-128, RE-135, RE-155, RE-169, RE-209, RE-222, RE-235, RE-238, RE-239, RE-248, RE-266, RE-270
 
 ## DRIFT -- อยู่ในสารบัญมือแต่สถานะจริงปิดแล้ว (21)
 GT-030, GT-032, GT-033, GT-045, GT-078, GT-121, GT-131, GT-148, GT-182, GT-188, GT-192, GT-207, GT-216, GT-219, GT-228, GT-254, RE-077, RE-125, RE-130, RE-139, RE-256
@@ -124,7 +126,7 @@ GT-106: live=PARTIAL but archived-closed=PASS (GAME_TEST_QUEUE_ARCHIVE_20260905_
 RE-107: live=UNKNOWN but archived-closed=CLOSED (CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md) -- likely stale live entry or duplicate reopen
 RE-169: live=UNKNOWN but archived-closed=CLOSED (CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md) -- likely stale live entry or duplicate reopen
 
-## DRIFT -- สารบัญกับหัวใบบอกสถานะไม่ตรงกัน (11)
+## DRIFT -- สารบัญกับหัวใบบอกสถานะไม่ตรงกัน (10)
 GT-079: index=BLOCKED vs body=READY -- อ่านทั้งสองที่ก่อนใช้ (ฝั่งไหนใหม่กว่าดูป้ายรอบ/เวลาในบรรทัด)
 GT-080: index=PASS vs body=READY -- อ่านทั้งสองที่ก่อนใช้ (ฝั่งไหนใหม่กว่าดูป้ายรอบ/เวลาในบรรทัด)
 GT-131: index=PENDING vs body=PASS -- อ่านทั้งสองที่ก่อนใช้ (ฝั่งไหนใหม่กว่าดูป้ายรอบ/เวลาในบรรทัด)
@@ -133,14 +135,13 @@ GT-148: index=PENDING vs body=PASS -- อ่านทั้งสองที่
 GT-184: index=BLOCKED-ON-WIRING vs body=BLOCKED -- อ่านทั้งสองที่ก่อนใช้ (ฝั่งไหนใหม่กว่าดูป้ายรอบ/เวลาในบรรทัด)
 GT-186: index=BLOCKED-ON-WIRING vs body=BLOCKED -- อ่านทั้งสองที่ก่อนใช้ (ฝั่งไหนใหม่กว่าดูป้ายรอบ/เวลาในบรรทัด)
 GT-213: index=BLOCKED vs body=READY -- อ่านทั้งสองที่ก่อนใช้ (ฝั่งไหนใหม่กว่าดูป้ายรอบ/เวลาในบรรทัด)
-GT-233: index=BLOCKED vs body=READY -- อ่านทั้งสองที่ก่อนใช้ (ฝั่งไหนใหม่กว่าดูป้ายรอบ/เวลาในบรรทัด)
 GT-253: index=BLOCKED vs body=PENDING -- อ่านทั้งสองที่ก่อนใช้ (ฝั่งไหนใหม่กว่าดูป้ายรอบ/เวลาในบรรทัด)
 GT-262: index=PENDING vs body=READY -- อ่านทั้งสองที่ก่อนใช้ (ฝั่งไหนใหม่กว่าดูป้ายรอบ/เวลาในบรรทัด)
 
 ## CLOSED / archive
 | ใบ | status | ที่อยู่ |
 |---|---|---|
-| GT-001 | PASS | live:GAME_TEST_QUEUE.md:624 |
+| GT-001 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260818.md:341 |
 | GT-003 | CLOSED | archive:GAME_TEST_QUEUE_ARCHIVE_20260817.md:220 |
 | GT-005 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260817.md:280 |
 | GT-006 | DONE | archive:GAME_TEST_QUEUE_ARCHIVE_20260817.md:492 |
@@ -153,7 +154,7 @@ GT-262: index=PENDING vs body=READY -- อ่านทั้งสองที�
 | GT-013 | UNKNOWN | archive:GAME_TEST_QUEUE_ARCHIVE_20260818_R78_BIGROUND3.md:83 |
 | GT-014 | UNKNOWN | archive:GAME_TEST_QUEUE_ARCHIVE_20260818_R78_BIGROUND3.md:133 |
 | GT-015 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260819_R90_GT015_GT017.md:10 |
-| GT-016 | PASS | live:GAME_TEST_QUEUE.md:5738 |
+| GT-016 | PASS | live:GAME_TEST_QUEUE.md:5499 |
 | GT-017 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260819_R90_GT015_GT017.md:68 |
 | GT-018 | PENDING | archive:GAME_TEST_QUEUE_ARCHIVE_20260819_GT018_GT019_GT020.md:16 |
 | GT-019 | PENDING | archive:GAME_TEST_QUEUE_ARCHIVE_20260819_GT018_GT019_GT020.md:60 |
@@ -163,7 +164,7 @@ GT-262: index=PENDING vs body=READY -- อ่านทั้งสองที�
 | GT-023 | READY | archive:GAME_TEST_QUEUE_ARCHIVE_20260820_R93_BIGROUND8.md:7 |
 | GT-024 | READY | archive:GAME_TEST_QUEUE_ARCHIVE_20260820_R93_BIGROUND8.md:67 |
 | GT-025 | READY | archive:GAME_TEST_QUEUE_ARCHIVE_20260820_R93_BIGROUND8.md:136 |
-| GT-026 | PASS | live:GAME_TEST_QUEUE.md:708 |
+| GT-026 | PASS | live:GAME_TEST_QUEUE.md:627 |
 | GT-027 | PENDING | archive:GAME_TEST_QUEUE_ARCHIVE_20260820_R102_GT027_028_029.md:4 |
 | GT-028 | PENDING | archive:GAME_TEST_QUEUE_ARCHIVE_20260820_R102_GT027_028_029.md:21 |
 | GT-029 | PENDING | archive:GAME_TEST_QUEUE_ARCHIVE_20260820_R102_GT027_028_029.md:30 |
@@ -198,39 +199,39 @@ GT-262: index=PENDING vs body=READY -- อ่านทั้งสองที�
 | GT-064 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md:3444 |
 | GT-078 | CLOSED | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:3 |
 | GT-081 | ARCHIVED-STUB | archive:GAME_TEST_QUEUE_ARCHIVE_20260827_closed.md:3553 |
-| GT-084 | PASS/DONE | live:GAME_TEST_QUEUE.md:2805 |
-| GT-101 | PASS | live:GAME_TEST_QUEUE.md:3511 |
+| GT-084 | PASS/DONE | live:GAME_TEST_QUEUE.md:2724 |
+| GT-101 | PASS | live:GAME_TEST_QUEUE.md:3430 |
 | GT-116 | CLOSED | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:149 |
 | GT-120 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:548 |
-| GT-121 | PASS | live:GAME_TEST_QUEUE.md:5054 |
+| GT-121 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260906_closed.md:245 |
 | GT-122 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:360 |
 | GT-127 | CLOSED | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:715 |
 | GT-131 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:760 |
 | GT-134 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:849 |
-| GT-143 | ANSWERED | live:GAME_TEST_QUEUE.md:5941 |
+| GT-143 | ANSWERED | archive:GAME_TEST_QUEUE_ARCHIVE_20260906_closed.md:405 |
 | GT-145 | DONE | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:1189 |
 | GT-148 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:1248 |
-| GT-149 | ANSWERED | live:GAME_TEST_QUEUE.md:6378 |
+| GT-149 | ANSWERED | archive:GAME_TEST_QUEUE_ARCHIVE_20260906_closed.md:458 |
 | GT-165 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:1329 |
 | GT-172 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:1368 |
-| GT-175 | PASS | live:GAME_TEST_QUEUE.md:7020 |
+| GT-175 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260906_closed.md:540 |
 | GT-182 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:1439 |
 | GT-187 | ARCHIVED-STUB | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:1607 |
-| GT-188 | PASS | live:GAME_TEST_QUEUE.md:7822 |
+| GT-188 | PASS | live:GAME_TEST_QUEUE.md:7400 |
 | GT-192 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:1697 |
 | GT-198 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:1849 |
 | GT-204 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:1902 |
-| GT-205 | PASS | live:GAME_TEST_QUEUE.md:8620 |
+| GT-205 | PASS | live:GAME_TEST_QUEUE.md:8198 |
 | GT-207 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:2139 |
 | GT-210 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:2325 |
 | GT-211 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:2499 |
 | GT-212 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:2665 |
 | GT-216 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:2792 |
-| GT-219 | PASS | live:GAME_TEST_QUEUE.md:9338 |
-| GT-228 | PASS | live:GAME_TEST_QUEUE.md:10055 |
-| GT-244 | CLOSED | live:GAME_TEST_QUEUE.md:10660 |
-| GT-246 | ANSWERED | live:GAME_TEST_QUEUE.md:10834 |
-| GT-247 | PASS | live:GAME_TEST_QUEUE.md:10932 |
+| GT-219 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260906_closed.md:594 |
+| GT-228 | PASS | archive:GAME_TEST_QUEUE_ARCHIVE_20260906_closed.md:705 |
+| GT-244 | CLOSED | archive:GAME_TEST_QUEUE_ARCHIVE_20260906_closed.md:3 |
+| GT-246 | ANSWERED | archive:GAME_TEST_QUEUE_ARCHIVE_20260906_closed.md:859 |
+| GT-247 | PASS | live:GAME_TEST_QUEUE.md:10097 |
 | GT-254 | CLOSED | archive:GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md:2891 |
 | RE-056 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md:468 |
 | RE-057 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md:589 |
@@ -285,13 +286,13 @@ GT-262: index=PENDING vs body=READY -- อ่านทั้งสองที�
 | RE-123 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:1529 |
 | RE-125 | CLOSED | live:CLIENT_RE_QUEUE.md:207 |
 | RE-126 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:1606 |
-| RE-129 | CLOSED | live:CLIENT_RE_QUEUE.md:406 |
+| RE-129 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md:3 |
 | RE-130 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:1663 |
-| RE-132 | CLOSED | live:CLIENT_RE_QUEUE.md:469 |
+| RE-132 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260831_R274_closed.md:3 |
 | RE-133 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:2634 |
-| RE-136 | ANSWERED | live:CLIENT_RE_QUEUE.md:502 |
-| RE-137 | ANSWERED | live:CLIENT_RE_QUEUE.md:584 |
-| RE-138 | CLOSED | live:CLIENT_RE_QUEUE.md:603 |
+| RE-136 | ANSWERED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md:68 |
+| RE-137 | ANSWERED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md:150 |
+| RE-138 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md:169 |
 | RE-139 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:1745 |
 | RE-149 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:1766 |
 | RE-150 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:1807 |
@@ -302,18 +303,18 @@ GT-262: index=PENDING vs body=READY -- อ่านทั้งสองที�
 | RE-161 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:2062 |
 | RE-162 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:2192 |
 | RE-163 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:2129 |
-| RE-164 | CLOSED | live:CLIENT_RE_QUEUE.md:731 |
-| RE-167 | ANSWERED | live:CLIENT_RE_QUEUE.md:958 |
-| RE-168 | ANSWERED | live:CLIENT_RE_QUEUE.md:1002 |
+| RE-164 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md:222 |
+| RE-167 | ANSWERED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md:449 |
+| RE-168 | ANSWERED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md:493 |
 | RE-170 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:2323 |
 | RE-171 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:2360 |
 | RE-172 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:2411 |
 | RE-173 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:2454 |
 | RE-188 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:2517 |
 | RE-189 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:2579 |
-| RE-191 | CLOSED | live:CLIENT_RE_QUEUE.md:1052 |
+| RE-191 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md:535 |
 | RE-193 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:2652 |
-| RE-194 | DONE | live:CLIENT_RE_QUEUE.md:1148 |
+| RE-194 | DONE | live:CLIENT_RE_QUEUE.md:540 |
 | RE-195 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:2737 |
 | RE-196 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:2836 |
 | RE-197 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:2921 |
@@ -322,14 +323,14 @@ GT-262: index=PENDING vs body=READY -- อ่านทั้งสองที�
 | RE-202 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:3108 |
 | RE-206 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:3256 |
 | RE-210 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:3298 |
-| RE-229 | CLOSED | live:CLIENT_RE_QUEUE.md:1494 |
-| RE-232 | DONE | live:CLIENT_RE_QUEUE.md:1581 |
-| RE-234 | DONE | live:CLIENT_RE_QUEUE.md:1621 |
-| RE-236 | ANSWERED | live:CLIENT_RE_QUEUE.md:1683 |
-| RE-240 | DONE | live:CLIENT_RE_QUEUE.md:2043 |
+| RE-229 | CLOSED | archive:CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md:630 |
+| RE-232 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md:717 |
+| RE-234 | DONE | live:CLIENT_RE_QUEUE.md:890 |
+| RE-236 | ANSWERED | live:CLIENT_RE_QUEUE.md:952 |
+| RE-240 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md:757 |
 | RE-241 | ARCHIVED-STUB | archive:CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md:3344 |
-| RE-256 | DONE | live:CLIENT_RE_QUEUE.md:2156 |
-| RE-259 | PASS | live:CLIENT_RE_QUEUE.md:2198 |
-| RE-260 | DONE | live:CLIENT_RE_QUEUE.md:2254 |
-| RE-263 | CLOSED | live:CLIENT_RE_QUEUE.md:2369 |
-| RE-265 | CLOSED | live:CLIENT_RE_QUEUE.md:2409 |
+| RE-256 | DONE | live:CLIENT_RE_QUEUE.md:1422 |
+| RE-259 | PASS | live:CLIENT_RE_QUEUE.md:1464 |
+| RE-260 | DONE | live:CLIENT_RE_QUEUE.md:1520 |
+| RE-263 | CLOSED | live:CLIENT_RE_QUEUE.md:1635 |
+| RE-265 | CLOSED | live:CLIENT_RE_QUEUE.md:1675 |
