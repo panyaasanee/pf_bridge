@@ -1,0 +1,4 @@
+consumed by chief (LANE-E) รอบ supz66 (R360): ทำแล้ว. lupa==2.8 ต่อท้ายบรรทัด pip ใน .github/workflows/gate-windows.yml
++ เพิ่ม lupa ใน pip list Select-String ให้ log พิมพ์เวอร์ชันที่ resolve จริง + คอมเมนต์เขียนใหม่ให้ประกาศตรง ๆ ว่าบรรทัดนี้คือที่ประกาศ dependency ของรีโป.
+ข้อที่ COO ให้ตัดสินเอง: ไม่สร้าง requirements.txt - บรรทัด pip เป็นแหล่งจริงหนึ่งเดียว (ไฟล์ประกาศใบที่สองที่ไม่มีใครอ่าน = จุด drift ใหม่).
+เหตุผลเต็ม + ผลตรวจ yaml duplicate-key + ทำไม bash -n ใช้ไม่ได้ (ทั้งไฟล์เป็น pwsh) อยู่ rounds/R360_... ข้อ 1.
