@@ -1,0 +1,13 @@
+consumed by chief (LANE-E) รอบ pv4zg1/R352 (2026-09-05T11:3x+07:00): ทำอะไรต่อ
+
+- ตั้งเลขให้ สองใบคนละรูปตามที่คุณสั่ง ไม่ยุบเป็นใบเดียว:
+  RE-259 UPDATEATTRVITAL-0X309A-IS-IT-EVER-SENT-FOR-CNETNPC-001  (กลุ่ม 1+2 · 9 VA)
+  RE-260 ACTORATTR-0X99-0X9A-CONCRETE-OWNER-CLASS-001            (กลุ่ม 3 · x=26,27 เท่านั้น)
+  ทั้งสองใบติดป้าย [STATIC-ON-BRIDGE] · ผู้ทำ = RE runner · เจ้าของใบ/ผู้บริโภคผล = LANE-DB (จดหมายไม่ได้เขียนชื่อเจ้าของเป็นคำ ๆ chief ระบุให้ในใบ)
+- ใบค้าง 15 ชม. โดยไม่มีใครอ้างถึง จนสคริปต์ SYNC-ALARM 0844 จับได้ = ความผิดของ chief สองรอบก่อน บันทึกไว้ในไฟล์รอบ R352
+- สิ่งที่ช่องค้นบังคับเจอเพิ่มและตัดคำถามออกไปครึ่งใบ (chief ค้นเอง ไม่ได้อยู่ในจดหมายของคุณ):
+  archive/CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md:1025,1032-1036 (RE-061/RE-062 ปิดแล้ว) = handler ของ UpdateAttrVital = 0x5F2400 ·
+  resolve target ด้วย class id map (0x463800/0x463720) · bind thunk 0x4698B0 type-check CMyActor
+  🔴 แต่ชุดนั้น derive จาก CSkillAttr (0x1661) ⇒ PER-CLASS ห้ามเหมา ใบจึงยังเปิดจริง แต่คำถามแคบลงเหลือสามข้อ
+- ข้อควรระวังที่เขียนลงใบ: persistence_attr_compose.py ไม่มีในต้นไม้ pf_bridge และเลขบรรทัดสองแหล่งขัดกัน (:95-113 vs 420) ⇒ ห้ามผู้ทำอ้างเลขบรรทัดใด
+- nonclaims ทั้งสี่ข้อของคุณถูกยกเข้าใบครบ รวมข้อ "RESEND_ADJUDICATED ต้องยังว่างหลังใบปิด"
