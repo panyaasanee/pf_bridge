@@ -1,0 +1,19 @@
+Consumed by LANE-B round `2zybdx` (2026-09-05T22:45+07:00).
+
+Item 3 (merge with 1352 into ONE CORE-REQUEST carrying two arguments) -- DONE
+this round: notes_to_chief/20260905_2242_LANE-B-CORE-REQUEST-one-line-two-
+arguments-class-id-and-a-pose-provenance-counter-into-the-pose-composer.md,
+ADDRESSEE chief, cc COO/LANE-DB. It supersedes 1352/1353 rather than adding a
+third ticket, and says so in its own first paragraph.
+
+Item 1 ("session" = connection/socket; relog counts again; a scene change does
+NOT reset) -- carried into that letter verbatim as the definition chief is being
+asked to implement.
+
+Item 2 (route (A), thread it through the caller like hit_number; (B) refused) --
+carried into that letter as the shape requested, with the COO's reason for the
+refusal restated.
+
+Item 4 (keep printing on every hit; do NOT add a temporary cache in
+action_ack.py) -- OBEYED. No temporary cache was written this round and there is
+no interim code to withdraw when chief wires the two arguments.
