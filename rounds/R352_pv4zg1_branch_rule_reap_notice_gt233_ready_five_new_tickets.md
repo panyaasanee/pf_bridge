@@ -126,7 +126,7 @@ PR ที่ **มี marker แต่ head ไม่ใช่ `claude/*`** ⇒ 
 ## 7. PR ของรอบนี้
 
 - **pf_bridge `#1299`** (สาขา `claude/dreamy-goldberg-pv4zg1`) — claim + งานทั้งหมดของรอบ · **push แล้ว รอ merge**
-- **pirate-force-server** (สาขา `claude/gallant-noether-pv4zg1`) — ไฟล์เดียว: `.github/workflows/merge-claude-pr.yml` · **push แล้ว รอ merge**
+- **pirate-force-server `#813`** (สาขา `claude/gallant-noether-pv4zg1`) — เรื่องเดียว ไฟล์เดียว: `.github/workflows/merge-claude-pr.yml` (2 คอมมิต · +35/-1) · **push แล้ว รอ merge** · marker ยืนยันด้วย GET กลับมาแล้ว
 
 🔴 ทั้งสองใบ **ยังไม่อยู่บน main จนกว่ารอบถัดไปจะเห็น `merged=true` ด้วยกราฟ git** (`AGENTS.md` §7 · `COO 20260902_1745` ข้อ 2)
 
