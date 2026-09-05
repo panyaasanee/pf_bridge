@@ -5494,7 +5494,7 @@ Q1 ตอบว่าไบต์ **ไม่ตรง** (มอนไม่ไ�
 
 ---
 
-## RE-259 UPDATEATTRVITAL-0X309A-IS-IT-EVER-SENT-FOR-CNETNPC-001  [OPEN -- `[STATIC-ON-BRIDGE]` (ต้องเปิด client image = RE runner บนเครื่อง Panya · `external/` ทั้งต้นไม้ไม่มีคำว่า `CNetNPC`/`CMyActor` เลย ดูช่องค้น) · **เจ้าของใบ/ผู้บริโภคผล = LANE-DB** (`compose_full_block` / `RESEND_ADJUDICATED` -- จดหมายต้นทางไม่ได้เขียนชื่อเจ้าของเป็นคำ ๆ chief ระบุให้ตรงนี้ตาม §5 "ใครเปิดใบคนนั้นบริโภค") · ผู้ทำ = **RE runner (local)** · **ไม่บล็อก GT ใบใดในวันนี้** (Door B ถอนแล้ว `COO-DECISION 20260904_0546` ข้อ 2 · ไม่มีผู้เรียก `compose_full_block` ในโปรดักชัน) => สั่งไว้ท้ายคิวได้]
+## RE-259 UPDATEATTRVITAL-0X309A-IS-IT-EVER-SENT-FOR-CNETNPC-001  [PASS -- LANE-DB ปิดแล้ว 2026-09-05, ดู pf_bridge/notes_to_chief/20260905_1323_RE-259-RESULT-UPDATEATTR-TARGETS-CMYACTOR-ONLY.md, ตัดกลุ่ม 1+2 (9 VA) ออกจากรายการค้างของ piece 3, ไม่เปิดใบใหม่ (player-only)]
 
 > numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืนสูงสุดที่ `256` (`RE-256`) · `257`/`258` ถูกจองโดยใบ GT สองใบในรอบเดียวกันนี้ => ใบนี้ `259` · `RE-259`/`GT-259` = **0 hit ทั้งสามที่ก่อนวาง** [วัดแล้ว chief `pv4zg1`/R352]
 > ที่มา: `notes_to_chief/20260904_1748_LANE-DB-RE-TICKET-piece3-resend-adjudication-11-outlier-vas-sharpened.md` ข้อ (ก) -- จดหมายฉบับนั้นสั่งชัดว่าต้องเป็น **สองใบคนละรูป** ใบนี้ = กลุ่ม 1+2 (9 VA) · กลุ่ม 3 (x=26,27) = `RE-260` **ห้ามรวมสองใบเข้าด้วยกัน**
@@ -5550,7 +5550,7 @@ Q1 ตอบว่าไบต์ **ไม่ตรง** (มอนไม่ไ�
 
 ---
 
-## RE-260 ACTORATTR-0X99-0X9A-CONCRETE-OWNER-CLASS-001  [OPEN -- `[STATIC-ON-BRIDGE]` (ต้องเปิด client image · RTTI/vtable/consumer census ไม่มีในสะพาน) · **เจ้าของใบ/ผู้บริโภคผล = LANE-DB** (`compose_full_block` / `RESEND_ADJUDICATED` -- จดหมายต้นทางไม่ระบุเจ้าของเป็นคำ ๆ chief ระบุให้ตรงนี้) · ผู้ทำ = **RE runner (local)** · **ไม่บล็อก GT ใบใดในวันนี้** (Door B ถอนแล้ว `COO-DECISION 20260904_0546` ข้อ 2) => สั่งไว้ท้ายคิวได้]
+## RE-260 ACTORATTR-0X99-0X9A-CONCRETE-OWNER-CLASS-001  [DONE -- LANE-DB ปิดแล้ว 2026-09-05, ดู pf_bridge/notes_to_chief/20260905_1327_RE-260-RESULT-CONCRETE-OWNER-BOUNDED-AT-GENERIC-ACTORATTR.md, x=26/x=27 คงนอก RESEND_ADJUDICATED, ไม่เปิดใบใหม่, ห้าม rerun image เดิมจนกว่าจะมีหลักฐานชนิดใหม่]
 
 > numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืนสูงสุดที่ `256` (`RE-256`) · `257`/`258` ถูกจองโดยใบ GT สองใบรอบเดียวกัน · `259` = `RE-259` => ใบนี้ `260` · `RE-260`/`GT-260` = **0 hit ทั้งสามที่ก่อนวาง** [วัดแล้ว chief `pv4zg1`/R352]
 > ที่มา: `notes_to_chief/20260904_1748_LANE-DB-RE-TICKET-piece3-resend-adjudication-11-outlier-vas-sharpened.md` ข้อ (ข) = **กลุ่ม 3 เท่านั้น (x=26, x=27)** · 🔺 จดหมายห้ามรวมใบนี้กับ `RE-259` โดยตรง ("คนละระดับ ห้ามปนกัน") -- ใบนี้เริ่มจากศูนย์ ใบโน้นเดินบนเส้นทางที่มีของอยู่แล้ว
