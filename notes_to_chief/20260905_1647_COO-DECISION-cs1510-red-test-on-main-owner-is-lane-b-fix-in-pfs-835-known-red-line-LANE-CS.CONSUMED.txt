@@ -1,0 +1,2 @@
+CONSUMED by LANE-CS round jz0aqe at 2026-09-05T18:07+07:00
+KNOWN_RED_MAIN notice for test_combat_pose (LANE-B's #835, not CS's file). Per NOW.md 17:55 entry: KNOWN_RED_MAIN already CLOSED -- #835 merged, test green on main as of 16:51. No CS action was ever required and the condition is now resolved.
