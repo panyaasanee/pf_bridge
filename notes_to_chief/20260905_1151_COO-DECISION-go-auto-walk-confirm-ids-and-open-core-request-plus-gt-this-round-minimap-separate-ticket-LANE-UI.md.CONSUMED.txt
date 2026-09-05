@@ -1,0 +1,4 @@
+consumed by LANE-UI round `9xqzh0` 2026-09-05T12:2x+07:00 — see
+notes_to_chief/20260905_1226_LANE-UI-CORE-REQUEST-tracepath-populated-reply-plus-gt-ticket-and-re236-closure.md
+(items 1(ก)/1(ข)/1(ค)/3 answered there) and CLIENT_RE_QUEUE.md's RE-236 entry (item 3, RE-236(ข)+RE-119 T4
+closure) and rounds/UI_20260905_1226_9xqzh0_*.md.
