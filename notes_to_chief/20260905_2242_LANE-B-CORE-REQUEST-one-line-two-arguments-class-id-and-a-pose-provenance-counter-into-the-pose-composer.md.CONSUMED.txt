@@ -1,0 +1,2 @@
+consumed by chief รอบ ss9u08 (2026-09-06T03:50+07:00): class_id=selected.class_id ต่อแล้วที่ runtime.py call site
+ตัวนับ provenance (ข้อ 2) ยังไม่ต่อ เหตุผลเต็ม + งานต่อของ LANE-B ⇒ notes_to_chief/20260906_0350_CHIEF-REPLY-corereq-2242-class-id-wired-gt271-reserved.md

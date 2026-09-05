@@ -198,6 +198,96 @@ def check_bridge_file_sizes(bridge_root=None, base="origin/main"):
     return True
 
 
+def _git_blob_text(repo, ref, relname):
+    """Text content of `relname` at `ref`, or None (does not resolve there)."""
+    proc = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(repo), "show",
+         "%s:%s" % (ref, relname)],
+        capture_output=True, text=True, errors="replace",
+    )
+    return proc.stdout if proc.returncode == 0 else None
+
+
+def _manual_rows(text):
+    """The set of raw TSV lines whose source column (index 4) is 'manual'."""
+    rows = set()
+    for line in (text or "").splitlines():
+        if not line or line.startswith("#"):
+            continue
+        p = line.split("\t")
+        if len(p) >= 5 and p[4] == "manual":
+            rows.add(line)
+    return rows
+
+
+def check_scoreboard_manual_rows(bridge_root=None, base="origin/main",
+                                  allow_manual_edit=False):
+    """RED when THIS BRANCH adds, edits, or removes a `manual`-source row in
+    SCOREBOARD_FACTS.tsv, unless `allow_manual_edit` is set.
+
+    COO-DECISION 20260906_0042 item 1: a `manual` row is the one row shape
+    in the scoreboard no lane can derive from its own round file (every
+    other row is rebuilt from a `SCOREBOARD:` line and cannot be forged by
+    typing a different one), so it is the one row shape a lane or chief must
+    not be able to mint or edit either - the same house rule NOW.md already
+    states in prose ("'เสร็จ' ติ๊กได้โดย Panya คนเดียว"). Writers of a manual
+    row are Panya and ka1-A ONLY (attended, or via a courier PR); every
+    other PR - any `[LANE-*]` or `[COO]` head - that diffs a manual row is
+    RED, whether it added, changed, or deleted one. Pass
+    `--allow-manual-scoreboard-edit` ONLY from a courier PR that is actually
+    carrying Panya's or ka1-A's own edit.
+
+    Compares full raw lines (not parsed fields), so a text-only edit to a
+    manual row (e.g. changing its sentence) is caught as one removed line
+    plus one added line, same as a delete-then-mint would be. `bridge_root`
+    defaults to this file's own repository, same convention as
+    `check_bridge_file_sizes`.
+
+    Returns True (no manual row differs from `base`, or allow_manual_edit),
+    False (a manual row differs and is not allowed - RED), None
+    (SCOREBOARD_FACTS.tsv missing here, or `base` does not resolve -
+    INCONCLUSIVE, same convention as the other bridge-only checks).
+    """
+    root = pathlib.Path(bridge_root) if bridge_root is not None \
+        else pathlib.Path(__file__).resolve().parent.parent
+    tsv_path = root / "SCOREBOARD_FACTS.tsv"
+    if not tsv_path.is_file():
+        print("[scoreboard-manual] INCONCLUSIVE - SCOREBOARD_FACTS.tsv not "
+              "found under %s." % root)
+        return None
+    base_resolves = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(root), "rev-parse",
+         "--verify", "--quiet", base + "^{commit}"],
+        capture_output=True, text=True, errors="replace",
+    ).returncode == 0
+    if not base_resolves:
+        print("[scoreboard-manual] INCONCLUSIVE - %s does not resolve in %s."
+              % (base, root))
+        return None
+    if allow_manual_edit:
+        print("[scoreboard-manual] SKIPPED (--allow-manual-scoreboard-edit) "
+              "- courier/ka1-A edit, not checked.")
+        return True
+    current_rows = _manual_rows(
+        tsv_path.read_text(encoding="utf-8", errors="replace"))
+    base_rows = _manual_rows(_git_blob_text(root, base, "SCOREBOARD_FACTS.tsv"))
+    added = current_rows - base_rows
+    removed = base_rows - current_rows
+    if not added and not removed:
+        print("[scoreboard-manual] PASS - no `manual`-source row changed vs %s."
+              % base)
+        return True
+    print("[scoreboard-manual] RED - %d manual row(s) added, %d removed vs %s."
+          % (len(added), len(removed), base))
+    print("                    Only Panya/ka1-A may write a manual row")
+    print("                    (COO-DECISION 20260906_0042, AGENTS.md section 7).")
+    for line in sorted(added):
+        print("     + %s" % line[:120])
+    for line in sorted(removed):
+        print("     - %s" % line[:120])
+    return False
+
+
 def tracked_py_files(repo):
     out = subprocess.run(
         ["git", "--no-optional-locks", "-C", str(repo), "ls-files"],
@@ -819,6 +909,7 @@ MAINMERGE_SELF_TEST_CASES = 4
 BRANCHNAME_SELF_TEST_CASES = 4
 CENSUS_SELF_TEST_CASES = 2
 BRIDGESIZE_SELF_TEST_CASES = 6
+SCOREBOARD_MANUAL_SELF_TEST_CASES = 8
 
 
 def _bridgesize_git_root(tmp, dirname, sizes, skip_name=None):
@@ -886,6 +977,84 @@ def _bridgesize_self_test_cases(tmp):
     ]
     for label, root, base, expected in cases:
         got = check_bridge_file_sizes(root, base=base)
+        ran += 1
+        ok = got is expected
+        failures += 0 if ok else 1
+        print("  case %-58s expected=%-5s got=%-5s %s"
+              % (label[:58], expected, got, "ok" if ok else "SELF-TEST RED"))
+    return failures, ran
+
+
+def _scoreboard_manual_git_root(tmp, dirname, base_rows, working_rows):
+    """A real git repo: commit `base_rows` as SCOREBOARD_FACTS.tsv at HEAD
+    ('main'), then overwrite the (uncommitted) working tree with
+    `working_rows` - same "base commit + mutated working tree = a branch
+    ahead of origin/main" shape `_bridgesize_git_root` uses.
+    """
+    root = pathlib.Path(tmp) / dirname
+    root.mkdir()
+    subprocess.run(["git", "init", "-q", "-b", "main", str(root)], check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.email", "t@t"],
+                    check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.name", "t"],
+                    check=True)
+    (root / "SCOREBOARD_FACTS.tsv").write_text(
+        "# header\n" + "\n".join(base_rows) + "\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
+    subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "base"],
+                    check=True)
+    (root / "SCOREBOARD_FACTS.tsv").write_text(
+        "# header\n" + "\n".join(working_rows) + "\n", encoding="utf-8")
+    return root
+
+
+def _scoreboard_manual_self_test_cases(tmp):
+    """Drive check_scoreboard_manual_rows() against synthetic bridge roots.
+
+    Eight provable shapes: no manual row touched (PASS); a manual row
+    added, removed, or text-edited (all RED); only a derived row changed
+    (PASS - not this gate's business); --allow-manual-scoreboard-edit
+    skipping the check entirely; the TSV missing (INCONCLUSIVE); and a
+    `base` ref that does not resolve (INCONCLUSIVE).
+    """
+    failures = ran = 0
+    row_a = "DONE\thand\tkept row\tGT-9\tmanual\t2026-09-06 03:11 +07:00"
+    row_a_edited = "DONE\thand\tEDITED row\tGT-9\tmanual\t2026-09-06 03:11 +07:00"
+    derived_row = ("STUCK\tLANE-A round x\tsentence\tPR #1\t"
+                    "A_20260906_0001_x_t.md\t2026-09-06 00:01 +07:00")
+
+    root_unchanged = _scoreboard_manual_git_root(
+        tmp, "sm_unchanged", [row_a, derived_row], [row_a, derived_row])
+    root_added = _scoreboard_manual_git_root(
+        tmp, "sm_added", [derived_row], [derived_row, row_a])
+    root_removed = _scoreboard_manual_git_root(
+        tmp, "sm_removed", [row_a, derived_row], [derived_row])
+    root_edited = _scoreboard_manual_git_root(
+        tmp, "sm_edited", [row_a, derived_row], [row_a_edited, derived_row])
+    root_derived_only = _scoreboard_manual_git_root(
+        tmp, "sm_derived_only", [derived_row], [derived_row + "x"])
+    root_missing = pathlib.Path(tmp) / "sm_missing"
+    root_missing.mkdir()
+    subprocess.run(["git", "init", "-q", "-b", "main", str(root_missing)],
+                    check=True)
+
+    cases = [
+        ("no manual row changed - PASS", root_unchanged, "main", False, True),
+        ("a manual row added - RED", root_added, "main", False, False),
+        ("a manual row removed - RED", root_removed, "main", False, False),
+        ("a manual row edited (text changed) - RED",
+         root_edited, "main", False, False),
+        ("only a derived row changed - PASS (not this gate's business)",
+         root_derived_only, "main", False, True),
+        ("--allow-manual-scoreboard-edit skips the check",
+         root_added, "main", True, True),
+        ("SCOREBOARD_FACTS.tsv missing - INCONCLUSIVE",
+         root_missing, "main", False, None),
+        ("base ref does not resolve - INCONCLUSIVE",
+         root_unchanged, "origin/no-such-branch", False, None),
+    ]
+    for label, root, base, allow, expected in cases:
+        got = check_scoreboard_manual_rows(root, base=base, allow_manual_edit=allow)
         ran += 1
         ok = got is expected
         failures += 0 if ok else 1
@@ -1175,13 +1344,16 @@ def _self_test():
         bs_failures, bs_ran = _bridgesize_self_test_cases(tmp)
         failures += bs_failures
         ran += bs_ran
+        sm_failures, sm_ran = _scoreboard_manual_self_test_cases(tmp)
+        failures += sm_failures
+        ran += sm_ran
     if failures:
         print("SELF-TEST RED: %d of %d case(s) wrong." % (failures, ran))
         return 1
     expected_cases = (
         len(cases) + 2 + MAINMERGE_SELF_TEST_CASES
         + BRANCHNAME_SELF_TEST_CASES + CENSUS_SELF_TEST_CASES
-        + BRIDGESIZE_SELF_TEST_CASES
+        + BRIDGESIZE_SELF_TEST_CASES + SCOREBOARD_MANUAL_SELF_TEST_CASES
     )
     if ran != expected_cases:
         # pf-adversary R328 D3: the old green line was the string "9 cases",
@@ -1221,6 +1393,11 @@ def main():
     ap.add_argument("--self-test", action="store_true",
                     help="run the PR-body guard's own cases and exit; needs no "
                          "repo, no network, no PR")
+    ap.add_argument("--allow-manual-scoreboard-edit", action="store_true",
+                    help="this PR is a courier PR actually carrying Panya's "
+                         "or ka1-A's own edit to a `manual` row in "
+                         "SCOREBOARD_FACTS.tsv (COO-DECISION 20260906_0042). "
+                         "Every other PR that diffs a manual row is RED.")
     args = ap.parse_args()
     if args.self_test:
         return _self_test()
@@ -1271,7 +1448,10 @@ def main():
                check_base_is_ancestor(repo, args.base),
                check_precondition_census(repo),
                check_branch_is_mergeable_by_the_reaper(repo),
-               check_bridge_file_sizes(base=args.base)]
+               check_bridge_file_sizes(base=args.base),
+               check_scoreboard_manual_rows(
+                   base=args.base,
+                   allow_manual_edit=args.allow_manual_scoreboard_edit)]
     if args.pr_body is None:
         # Open skip with a reason, never a silent one (AGENTS.md section 7).
         # Not appended to `results`: most callers run this tool for the cp874
@@ -1310,7 +1490,8 @@ def main():
     print("PREFLIGHT PASS (cp874 + no new skips + main is in this branch"
           " + precondition census agrees")
     print("                + both branches are mergeable by the reaper"
-          " + bridge files are under their size ceiling).")
+          " + bridge files are under their size ceiling")
+    print("                + no manual scoreboard row was touched).")
     print("NOTE: this does NOT promise a green gate - Windows-only runtime")
     print("failures are out of scope.  A RED or INCONCLUSIVE preflight means")
     print("DO NOT PUSH until it is fixed (AGENTS.md section 7).")
