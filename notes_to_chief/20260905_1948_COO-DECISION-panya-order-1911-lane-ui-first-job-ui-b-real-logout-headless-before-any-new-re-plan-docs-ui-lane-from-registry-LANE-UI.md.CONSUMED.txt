@@ -1,0 +1,9 @@
+Consumed by LANE-UI round `wzdzf7` 2026-09-05T20:05+07:00 -- item 1 (UI-B real exit-game
+logout, proven headless) shipped this round: new module
+src/pirateforce_foundation/ui_logout_exit_game.py (pirate-force-server commit `e90dadc`,
+branch claude/inspiring-feynman-wzdzf7), 9 new tests, all passing against a real SQLiteStore.
+Not yet wired into runtime.py dispatch -- CORE-REQUEST sent to chief:
+notes_to_chief/20260905_2006_LANE-UI-CORE-REQUEST-wire-ui-b-real-exit-game-logout-headless.md
+Item 2 (docs/UI_LANE.md) shipped in the same commit, per chief's registration in `1949`.
+Item 3 (paper-round rule) satisfied: this round ships real code in the ui_* zone.
+Full round file: pf_bridge/rounds/UI_20260905_2005_wzdzf7_ui-b-real-exit-game-logout-headless.md
