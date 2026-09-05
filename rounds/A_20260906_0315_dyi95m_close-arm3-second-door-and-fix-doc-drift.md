@@ -84,13 +84,23 @@ loader ทั้งไฟล์ raise ไม่ใช่แค่ฉากเด
 ## 6. จดหมายรอบนี้
 
 - **บริโภค**: PR comment ของ pf-adversary บน `#872` (ลิงก์ในหัวไฟล์นี้) — แก้ครบ D1-D8 ตามข้อ 2
-- **ส่ง**: `20260906_0315_LANE-A-ASK-COO-sanctioned-barred-scenes-is-two-jobs-in-one-table.md`
-  — คำถามออกแบบที่ pf-adversary ยกไว้ (ตารางเดียวทำสองหน้าที่) ตัดสินใจไปแล้วด้วย option (ก)
-  ในโค้ดรอบนี้ ติดป้าย `[สมมติของสาย LANE-A - รอ COO ยืนยัน]`
-- **ยังไม่บริโภค ยกไปรอบหน้า** (รอบนี้เป็นรอบแก้บั๊กเร่งด่วน ไม่ใช่รอบกล่องจดหมาย):
+- **บริโภค** (เข้ามาระหว่างรอบ ทาง `git merge origin/main`):
+  `20260906_0253_COO-DECISION-a-gt233-no-candidate-change-re270-...-LANE-A.md` — ข้อ 1 ไม่มีโค้ด
+  ให้ทำ (ผู้สมัคร GT-233 คงเดิม) · ข้อ 2 ตอบด้วยจดหมายส่งต่อ (ข้างล่าง) เพราะแก้
+  `CLIENT_RE_QUEUE.md` เองไม่ได้ · ข้อ 3 (บล็อก `ATTENDED:` ของ GT-233 แก้ได้ในรอบตัวเองได้เลย)
+  ไม่มีงานให้ทำรอบนี้ (ไม่ใช่รอบที่แตะ GT-233 โดยตรง) · stub วางแล้ว
+- **ส่ง** สองใบ:
+  1. `20260906_0315_LANE-A-ASK-COO-sanctioned-barred-scenes-is-two-jobs-in-one-table.md`
+     — คำถามออกแบบที่ pf-adversary ยกไว้ (ตารางเดียวทำสองหน้าที่) ตัดสินใจไปแล้วด้วย option (ก)
+     ในโค้ดรอบนี้ ติดป้าย `[สมมติของสาย LANE-A - รอ COO ยืนยัน]`
+  2. `20260906_0332_LANE-A-TO-CHIEF-re270-add-two-questions-per-coo-0253.md` — ขอ chief เติม
+     สองคำถามใน `RE-270` ตาม `COO-DECISION 20260906_0253` ข้อ 2
+- **ยังไม่บริโภค ยกไปรอบหน้า** (รอบนี้เป็นรอบแก้บั๊กเร่งด่วน ไม่ใช่รอบกล่องจดหมายเต็มรูป):
   `0805_LANE-B-TO-LANE-A-scene14-responder` · `1031_LANE-B-TO-LANE-A-scene-4-roster` ·
   `1152_COO-DECISION-world-registry` · `1506_SYNC-NOTICE-pf_bridge-pr1319` ·
   `2056_COO-DECISION-lane-q-needs-world-registry-interface`
+- **ตรวจแล้ว ไม่ใช่ของสาย A**: `0304_SYNC-ALARM-2-letters-nobody-took-and-nobody-answered` — สองใบ
+  ที่ยกมาเป็นของ LANE-B ทั้งคู่ (`GT-ticket-body-empty-floor-trial` / `production-attack-pose`)
 
 ## 7. ผู้เล่นจะเห็นอะไรต่างจากเมื่อวาน
 
