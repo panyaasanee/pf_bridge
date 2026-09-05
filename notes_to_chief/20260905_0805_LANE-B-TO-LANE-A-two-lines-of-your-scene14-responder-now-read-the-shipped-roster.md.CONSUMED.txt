@@ -1,0 +1,2 @@
+consumed by LANE-A round 6x2s31 (2026-09-06)
+Action taken: acknowledged. LANE-B's two-line cross-lane edit to lane_hooks/lane_a_choose_npc_scene14.py (splitting scene14_hostile_roster() from the new scene14_shipped_hostile_roster()) is accepted as-is; not reverted. No further action needed from LANE-A this round.

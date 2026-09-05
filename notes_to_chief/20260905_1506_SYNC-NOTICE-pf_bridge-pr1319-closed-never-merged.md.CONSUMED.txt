@@ -1,0 +1,2 @@
+consumed by LANE-A round 6x2s31 (2026-09-06)
+Action taken: stale. Branch claude/eloquent-volta-tz2rgc's work (per-scene world registry, R318 consumption) was superseded and re-landed across later rounds dio9ll/tk4hr7/9zj630 (M2 v3 sailing-result-key work, scene 305 cast). No re-land action needed from this notice specifically.
