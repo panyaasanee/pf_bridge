@@ -1,47 +1,47 @@
 # NOW — งานที่ต้องมาก่อนทุกอย่าง (สถานะปัจจุบันเท่านั้น · เพดาน 12 KB / 60 บรรทัด · ประวัติอยู่ในจดหมาย `COO-ROUND-*`)
 
-ตรวจล่าสุด: 2026-09-06 01:48 +07:00 โดย COO (รอบกล่องจดหมาย · 2 ใบตัดสิน + 1 รับทราบ · รายละเอียด `0149`) — รอบนี้ขยับ:
-- ✅ **`#865` A บน main 00:56** (D1 lazy-load + ผู้สมัครแยกคอลัมน์) ⇒ **chief พลิกหัว GT-233 v3 = งานแรกรอบหน้า** (`2349` `0147`) แล้วใบขึ้นเครื่องคุณ
-- ✅ เกตปิด 2 ใบ re-land ครบ: lupa `#870` chief 01:11 · `'learned'` `#863` DB 00:40 · `#794` `#1336` `#1377` ปิดแล้ว 01:43 ⇒ รายการรอคุณว่าง
-- 🔴 **COO ค้างส่ง 09:41**: PANYA `1130` ประเมินกำลัง 8 สายพร้อมตัวเลข (ทวง `2225`) — ≤15 บรรทัด ต่อสาย = ค้าง/โค้ด 24 ชม./คอขวด · พอไหม · สายที่ 9?
-- Q ขอใบ RE trigger-id → ไฟล์ `.lua` (`0029`) ⇒ **เปิด** · Q เขียนเนื้อใบ (`0146`) · chief ตั้งเลข (`0147`) · สะพานเดิน `01:32` · PR เปิด server: 0 · pf_bridge: claim 4 ใบ (GM/A/B/CS) ไม่มีผี · Scoreboard: 10 แถว DONE 0
+ตรวจล่าสุด: 2026-09-06 02:57 +07:00 โดย COO (รอบกล่องจดหมาย · 5 ใบตัดสิน · รายละเอียด `0257`) — สถานะตอนนี้:
+- 🔴 **PANYA-ORDER `0155`/`0156` เส้นตาย 14:00**: **GM `/lv <n>`** · **DB สวมอาวุธได้จริง** — บนจอ + คงหลัง relog · งานแรกก่อนคิวเดิม · ใบ RE ต้นรอบ ห้ามเดา opcode · ปิดด้วยใบ GT · ติดอะไรจดหมาย COO ทันที · **COO รอบ 14:41 รายงานเจ้าของถ้าไม่ถึง**
+- **GT-233 บูตได้** (chief พลิก v3 R362 · COO `0252`: ไม่รอ RE-270 · ผู้สมัคร (1,126) คงเดิม) · `#876` B viewer slot บน main ⇒ chief เสียบ `viewer_identity` + เลข GT สี (`0256`)
+- 🔴 **COO ค้างส่ง 09:41**: PANYA `1130` ประเมินกำลัง 8 สายพร้อมตัวเลข (ทวง `2225`) — ≤15 บรรทัด · พอไหม · สายที่ 9?
+- สะพานเดิน `02:36` · PR เปิด server: 0 · pf_bridge: claim 3 ไม่มีผี · **Q `#874` ถูกเกตปิด** (guard quest/shop · Q ขอยกเว้น `0209` → chief ข้อแรก `0256`) · Scoreboard: 10 แถว DONE 0
 
 ## รอ Panya ติ๊ก  ← คุณดูหัวข้อนี้หัวข้อเดียวพอ
 (ว่าง = ไม่มีอะไรค้างคุณ · ห้ามเกิน 5 ข้อ · ติ๊กแล้วลบทั้งข้อ)
 (ว่าง)
 
 ## รอเครื่องคุณ (ไม่นับเป็นงานค้างของสายไหน · บูต attended หนึ่งครั้งเก็บทุกใบที่มี `ATTENDED:`)
-1. **`GT-233` M2 provisioning trial** — `#857`+`#865` บน main ✅ · **บูตได้ทันทีที่ chief พลิกหัว v3** (`2349`) · **คอลัมน์ key ยังไม่รู้** (A ขอใบ RE derivation `0004` ถึง chief) · ใบ GT ต้องมีประโยค "เงียบทั้งสองนัด ≠ ทฤษฎีผิด" · R318 NEGATIVE ไม่มี BACKUP
-2. **`GT-266`** `/warp 126` วาปสด + relog ยังอยู่ Rising Sun Sea (`#838`+`#844` บน main) · GM เติม `ATTENDED:` (`2051`) · **`GT-NNN` cast 304** (`1953` รอ chief ตั้งเลข · `#847` ปิดไม่ merge ⇒ A re-land หลัง D1 `2349`)
-3. **`GT-230`** ร้านค้า NPC hex (UI) · **`GT-243`** skill 99 hotbar+Z (CS) · RE-235/237/261 (UI · ต้องมี `ATTENDED:` `2054`) · GT-255/257 — รันหลังใบ M2
+1. **`GT-233` M2 provisioning trial — บูตได้ทันที** · env `PF_M2_SURVEY_TRIAL=1` ใบแรกของรถบัส · 🔴 นัดเดียวไม่มี BACKUP · อ่านผลตามบล็อก D1 (เด้ง dock 153 = `n_ID` · เฉพาะ 154 = ไม่ชี้ขาด · เงียบ ≠ ทฤษฎีผิด) · **จดเลเวลตัวละครลงผล** (แถวที่ key ชี้: เลเวล 30-40 / 80-90) · คอลัมน์จริง = `RE-270` ขนาน
+2. **`GT-266`** ka1-A R320 (`0155`): วาปสด **PASS** · relog NOT MEASURED (persist ถูกปฏิเสธ) ⇒ chief ปิด/แยกใบ + ตั้งเลขใบ "เข้า 126 หลัง relog" (Panya ถาม) · **`GT-269`** GMUI พ่วงท้ายได้ · cast 304 `#872` บน main ✅ (`GT-268` รอ A เติม `ATTENDED:` + census 304)
+3. GT-257/255/230/243 · RE-235/237/261 รัน R320 แล้ว ผล `0155` รอ chief ปิด/แยกใบ · GT สี P-2 รอ chief ตั้งเลข (B `0146`)
 
 ## กติกาของไฟล์นี้ (ห้ามลบสี่บรรทัดนี้)
 - ผู้เขียน: **Panya และ COO เท่านั้น** · คนอื่นเสนอผ่านจดหมายจ่าหน้า `ADDRESSEE: COO`
 - **"เสร็จ" ติ๊กได้โดย Panya คนเดียว** — สถานะสูงสุดที่ COO ไปถึงได้คือ `รอเจ้าของยืนยัน` (โค้ดขึ้น main ไม่ใช่ "เสร็จ" · `production_allowed = False` ยังไม่นับว่าขยับ)
 - **COO มีหน้าที่เตือน** — ย้ายข้อที่คิดว่าเสร็จขึ้น `รอ Panya ติ๊ก` ทันทีในรอบที่ตัดสิน · ค้างเกิน 6 ชม. = ทวงเธอผ่านช่องทางที่เธอเห็นจริง
 - เพดาน **12 KB / 60 บรรทัด** (PANYA `2039` ข้อ 1 · เกต preflight ของ chief) · ข้อที่ปิดแล้ว **ลบทิ้ง** · กฎบ้านอยู่ `AGENTS.md §7` + `prompts/COMMON_LANE_ROUND.md` — NOW ไม่เก็บกฎซ้ำ ยกเว้นที่ยังไม่ลง §7
-- 🔴 ยังไม่ลง §7 (chief `2038` ข้อ 1/7): **ห้ามแฟล็ก `-r` ของ rm ทุกการสะกด** ใช้ `mktemp -d` (PANYA `1546`) · `ATTENDED:` บังคับ · `SCOREBOARD:` บังคับ · `prompts/` ของ Panya ห้ามสายแก้ · เพดานไฟล์ (GT 300 KB · RE 200 KB · AGENTS/CHIEF_CONTINUATION 30 KB · NOW 12 KB)
-- 🔴 **shared world** (PANYA `1057`/`1140`): สถานะโลกต่อฉากอยู่ใน process แชร์ทุก session · reboot = โลกใหม่ · A = world registry · B เขียน combat state ลง registry ของ A · DB ไม่รับงานโลก · ทุก PR ตอบ `TWO_SESSIONS_SAME_SCENE:` · `#827` companion ยัง session-scoped ❌ · ผู้อ่านสมุดโลกใน `runtime.py` ยังไม่มี (`2149`)
+- 🔴 ยังไม่ลง §7 (chief `2038` ข้อ 1/7): **ห้ามแฟล็ก `-r` ของ rm ทุกการสะกด** ใช้ `mktemp -d` (PANYA `1546`) · `ATTENDED:` บังคับ · `SCOREBOARD:` บังคับ · `prompts/` ของ Panya ห้ามสายแก้ · เพดานไฟล์ (GT 300 KB · RE 200 KB · AGENTS/CHIEF_CONTINUATION 30 KB · NOW 12 KB) · **grep ที่ห้า `notes_to_chief/reference_codex_attr/`** (`0256` ข้อ 3)
+- 🔴 **shared world** (PANYA `1057`/`1140`): สถานะโลกต่อฉากอยู่ใน process แชร์ทุก session · reboot = โลกใหม่ · A = world registry · B เขียน combat state ลง registry ของ A · DB ไม่รับงานโลก · ทุก PR ตอบ `TWO_SESSIONS_SAME_SCENE:` · `#827` companion ยัง session-scoped ❌ · ไบต์บนสายต่อคนดูต่างกันได้ (`2348`)
 - 🔴 RE ตอบแล้ว → ใบสร้าง+GT รอบเดียวกัน หรือ `NO_FEATURE_WAITING:` (PANYA `1130` · ผู้ตรวจคู่ = COO) · `KNOWN_RED_MAIN:` ตอนนี้ **ไม่มี**
 
 ## บันไดไมล์สโตน (PANYA `20260904_0233` · ไม่มีกำหนดวัน ห้ามรายงาน "เลยกำหนด" · ผ่าน M(n) ก่อนจึงประกาศ v(n) · `SERVER_VERSIONS.md` ของ chief)
 - ✅ **M1/v1** ประกาศแล้ว (R249 · `SERVER_VERSIONS.md` v1)
-- ⏳ **M2 "ออกจากเมืองได้" — โปรเจกต์อยู่ตรงนี้ · ตัวบล็อกโค้ด 0**: key `SAILING_RESULT` ที่ record `+0x14` (RE-265) = `#857` + D1/ผู้สมัคร `#865` **บน main ครบ** ⇒ chief พลิกหัว GT-233 v3 → เครื่องคุณ · เกณฑ์ผ่าน: ใกล้เกาะ → "รายงานกัปตัน" → ผู้เล่นกด → วาปเข้า **เกาะ 2 และ 3 บนจอ** · ห้ามเซิร์ฟเวอร์ส่ง `EnterInstanceVital` เอง · ห้ามเช็คเลเวลฝั่งเซิร์ฟเวอร์ · ชั้นถัดไป = Trigger.* ของ Q · งานสำรอง A: cast 305
+- ⏳ **M2 "ออกจากเมืองได้" — โปรเจกต์อยู่ตรงนี้ · ตัวบล็อกโค้ด 0 · GT-233 อยู่บนเครื่องคุณ**: key `SAILING_RESULT` ที่ record `+0x14` (RE-265) = `#857` + D1/ผู้สมัคร `#865` บน main · เกณฑ์ผ่าน: ใกล้เกาะ → "รายงานกัปตัน" → ผู้เล่นกด → วาปเข้า **เกาะ 2 และ 3 บนจอ** · ห้ามเซิร์ฟเวอร์ส่ง `EnterInstanceVital` เอง · ห้ามเช็คเลเวลฝั่งเซิร์ฟเวอร์ · ชั้นถัดไป = Trigger.* ของ Q · งานสำรอง A: cast 305
 - **M3 "สนามมีมอนสเตอร์" = P-2** · **M4 "ตีได้ตายได้"** สี่ข้อ: มอนตีกลับ HP ลดจริง · ตายถูกต้อง · ศพไม่ค้าง · เกิดใหม่ (LANE-B · `GT-224`) · **M5** เก็บได้+รอด relog · **M final** ครบวงจร · ตาราง CHARTER-02 ใน `CHIEF_CONTINUATION.md`
-- 🔴 **PLAYER/CHARACTER = LANE-DB มาก่อนทุกอย่างในคิว DB** (`0328`): ชิ้น 1 class_id ✅ (เหลือบรรทัด chief `runtime.py:5159`) · ชิ้น 2 **รอ RE `s_SCORE`** DEFAULT 100 · ชิ้น 3 `0x309A` typed · ชิ้น 4 นามแฝง+รหัสรอง (RE ก่อน) · ชิ้น 5 ✅ · **ตอนนี้: `select_character_honoring_home_marker` บน main (`#851`) ⇒ chief สลับจุดเรียก · ประตูเควส/flag สำหรับ Q หายกับ session ⇒ DB สร้างใหม่**หลัง** chief whitelist ขึ้น main (`2353` `0148`) · `'learned'` `#863` บน main ✅**
-- **ทีม 8 สาย**: chief(E) · A · B · DB · GM · CS (:06/:36) · UI (:16/:46) · **Q SCRIPT/QUEST** (`prompts/LANE-Q.md` · Lua host 616 สคริปต์ · Trigger.* 5/17 จริง · **บล็อกที่ mapping id→`.lua` = ใบ RE รอเลข** (`0146`/`0147`) → Quest.* 25 → Player.* 73)
+- 🔴 **LANE-DB: PANYA-ORDER สวมอาวุธ (`0156` · 14:00) มาก่อนทุกอย่าง** · ถัดไป PLAYER/CHARACTER (`0328`): ชิ้น 1 class_id ✅ (เหลือ chief `runtime.py:5159`) · ชิ้น 2 **รอ RE `s_SCORE`** · ชิ้น 3 `0x309A` typed · ชิ้น 4 นามแฝง+รหัสรอง (RE ก่อน) · ชิ้น 5 ✅ · home-marker `#851` ⇒ chief สลับจุดเรียก · ประตูเควส/flag ⇒ DB สร้าง**หลัง** chief whitelist (`2353`)
+- **ทีม 8 สาย**: chief(E) · A · B · DB · GM · CS (:06/:36) · UI (:16/:46) · **Q SCRIPT/QUEST** (`prompts/LANE-Q.md` · Lua host 616 สคริปต์ · Trigger.* 5/17 · Quest.* `#874` ถูกเกตปิด → รอ chief ยกเว้น guard `0209` · ใบ RE mapping id→`.lua` `0155` รอเลข)
 
 ## งานด่วนตอนนี้ (P-1/P-2/P-3 ซ้อนกับบันไดข้างบน)
-- **หาง P-1**: ของหายชั่วคราวแล้วโผล่กลับ (PANYA `0125`) · `#689` บน main · ปิดด้วย `GT-223` บนจอ · หนี้ `DropLedgerCell` ข้ามฉาก chief ตั้งเลขใบ · ห้ามลบแถว ledger
-- **P-2 สีชื่อมอน (= M3)**: ส้ม/แดง/เทา ห้ามชมพู + attr/relation ถูก (B) · มอนเรามาทาง census ไม่ใช่ `CNetNPC` (RE-222 · RE-263 = ใบสีที่ตอบแล้ว · RE-259/260 ไม่ใช่เรื่องสี) ⇒ **COO เคาะ `2348`: สี = คู่ (คนดู, มอน) ผ่าน `NPCAttr+0x98` · จุด compose ต่อคนดู = chief runtime · GM ยื่น CORE-REQUEST ถึง LANE-E + ใบ GT รอบหน้า** · ห้าม faction-only / hardcode FontStyleID
-- **P-3 ปุ่ม GM ทั้ง 3 หน้าทำงานจริง** (LANE-GM · งานสำรองข้อแรกของ GM `2150`) · GMUI เปิดแล้ว เหลือไล่ทีละปุ่ม · `/speed` ล็อกปิดจน (b'') mask ล็อกอิน (`0545`) · `/warp <n> <x> <y>` ปิดถาวร · `/warp <n>` ในฉากเดียวกัน = วาปไป spawn ทันที (PANYA `1800`)
-- **M4 · LANE-B**: caller `apply_hp_damage` พักจน Door B ส่งจริง · roster ฉาก 3/4/5/14 บน main · **งานแรก: สัญญาต่อฉาก generic + ปิดรูฉาก 3 (`1246` ค)** · `#848` บน main · respawn 120 s (`2147`) · ผู้อ่าน `DEATH_SEED_WIRING` = chief (`2149`) · CORE-REQUEST `1352`+flag ใบเดียว (`2148`)
-- **M4 · chief**: lupa `#870` ✅ · ลำดับ `0147`: พลิกหัว GT-233 v3 → ตั้งเลข RE ให้ Q → PROMOTION_BACKLOG (+หัว AGENTS หน่วยไบต์ `2352` · preflight ทาง ก `2350`) → whitelist ประตูเควส `2353` → `DEATH_SEED_WIRING` · คิวเดิม: `runtime.py:5159` class_id · สลับจุดเรียก home-marker · attr+x=9 · coerce `actor_identities` · ปลดบล็อก `GT-223`
-- **LANE-UI**: UI-B `#846` บน main ✅ · `#860` เปิด (UI_LANE.md + RE-266) · `ATTENDED:` RE-235/237/261 (`2054`) · GT-184/186 หลัง RE-266 (`2259`)
-- **CS**: `#845` `#854` `#866` บน main · `'learned'` `#863` บน main ✅ ⇒ ต่อสาย `grant_learned_skill` (2 อาร์กิวเมนต์ `2228`) ได้แล้ว
+- **หาง P-1**: ของหายชั่วคราวแล้วโผล่กลับ (PANYA `0125`) · `#689` บน main · ปิดด้วย `GT-223` บนจอ · หนี้ `DropLedgerCell` ข้ามฉาก chief ตั้งเลข · ห้ามลบแถว ledger
+- **P-2 สีชื่อมอน (= M3)**: ส้ม/แดง/เทา ห้ามชมพู + attr/relation ถูก (B) · มอนเรามาทาง census ไม่ใช่ `CNetNPC` (RE-222 · RE-263) · สี = คู่ (คนดู, มอน) ผ่าน `NPCAttr+0x98` (`2348` · ไม่ต้องรอบ RE `0254`) · **B ส่ง `viewer_identity` แล้ว `#876` ⇒ เหลือ chief เสียบ census + เลข GT สี (`0256`)** · GM ขยายยาม tripwire คลุม `mob_viewer_link.py` หลัง `/lv` (`0255`) · ห้าม faction-only / hardcode FontStyleID
+- **LANE-GM: PANYA-ORDER `/lv <n>` (`0155` · 14:00) มาก่อน P-3** · P-3 ปุ่ม GM ทั้ง 3 หน้าทำงานจริง (`2150`) · `/speed` ล็อกปิดจน (b'') mask ล็อกอิน (`0545`) · `/warp <n> <x> <y>` ปิดถาวร · `/warp <n>` ฉากเดียวกัน = วาปไป spawn (PANYA `1800`) · `GM_WARP_POSITION_TARGET_MISMATCH` (R320) ดู
+- **M4 · LANE-B**: caller `apply_hp_damage` พักจน Door B ส่งจริง · roster ฉาก 3/4/5/14 บน main · **งานแรก: สัญญาต่อฉาก generic + ปิดรูฉาก 3 (`1246` ค)** · respawn 120 s (`2147`) · ผู้อ่าน `DEATH_SEED_WIRING` = chief (`2149` · รวม `0014`/`0015`) · CORE-REQUEST `1352`+flag ใบเดียว (`2148`)
+- **M4 · chief** ลำดับ `0256`: (1) เลข RE ให้ Q `0155` + ยกเว้น guard `0209` (2) เสียบ `viewer_identity` ที่ census + เลข GT สี (3) §7 ที่ห้า (4) D1 GT-233 `0252` + `RE-270` คำถามเพิ่ม (5) PROMOTION_BACKLOG + หัว AGENTS หน่วยไบต์ `2351`/`2352` · scoreboard `0042` (03:11) · `DEATH_SEED_WIRING` · whitelist (บล็อก: `persistence_quest_state.py` ยังไม่บน main) · mirror `pf-adversary.md` · `runtime.py:5159` · home-marker · attr+x=9 · `actor_identities` · `GT-223` · `ADVERSARY_PENDING #1409` จ่ายก่อน
+- **LANE-UI**: `#846` `#875` บน main ✅ · `#860` เปิด (RE-266) · RE-235/237/261 รัน R320 แล้ว ผล `0155` · GT-184/186 หลัง RE-266 (`2259`)
+- **CS**: `#845` `#854` `#866` `#871` บน main · `grant_learned_skill` ต่อสายได้ · เทสสกิลท่าโจมตีรอ `/lv` (GM) + สวมอาวุธ (DB)
 
 ## ห้ามทำจนกว่า P-2 จะปิด
 - GT-146 และใบเทสตีมอนทุกใบ · ยกเว้น `ATTACK-POSE-ONE-FIELD-AB-001` (Panya 0904_21:15)
 
 ## เมื่อไม่มีงานด่วน — ท่อ promotion (PANYA `2039` ข้อ 3)
-- 5 ตัวแรกที่ควรปลดแฟล็ก + เจ้าของ: **รอ `docs/PROMOTION_BACKLOG.md` จาก chief (ใบที่ 2 ใน `2351`)** ⇒ COO จัดอันดับ 09:41 · จนกว่านั้นทุกสายปลด scenario ในเขตตัวเองที่พิสูจน์แล้ว 1 ตัว (`production_allowed=true` 10/60) = งานสำรองข้อแรก
+- 5 ตัวแรกที่ควรปลดแฟล็ก + เจ้าของ: **รอ `docs/PROMOTION_BACKLOG.md` จาก chief (`2351`)** ⇒ COO จัดอันดับ 09:41 · จนกว่านั้นทุกสายปลด scenario ในเขตตัวเองที่พิสูจน์แล้ว 1 ตัว (`production_allowed=true` 10/60) = งานสำรองข้อแรก
