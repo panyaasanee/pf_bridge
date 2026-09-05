@@ -293,6 +293,149 @@ def check_base_is_ancestor(repo, base):
 # census, which is the ONLY thing that notices a module the gate drops.
 PRECONDITION_CENSUS_TEST = "tests/test_pytest_precondition_census.py"
 
+#: Substrings that mark the ONE line of the census failure that names the
+#: culprit.  pf-adversary D6, R350: the old printout was `out[-12:]`, and with
+#: a real planted drift the actionable line ("newly hidden ...") sits at line
+#: 33 of ~120 while the last twelve are six arbitrary module names cut out of
+#: the middle of the OTHER failing test's 48-name list.  A reader could easily
+#: take one of those for the culprit.
+CENSUS_CULPRIT_MARKERS = (
+    "newly hidden",
+    "newly visible",
+    "no longer hidden",
+    "AssertionError",
+    "FAILED ",
+)
+
+
+def _safe(value):
+    """Text with every character the bridge console cannot print replaced.
+
+    The console is cp874. Anything read back from a subprocess, a filename or
+    an exception can carry a character with no cp874 mapping, and print()
+    raises UnicodeEncodeError on it mid-report - rounds 86 and 142 both died
+    that way. Every foreign string this file prints goes through here.
+    """
+    return "".join(
+        ch if _cp874_safe(ch) else "?" for ch in str(value)
+    )
+
+
+def _print_census_tail(out):
+    """Print the census failure so the culprit line is always in it.
+
+    The tail alone is not enough (D6). The lines that NAME the drifting
+    module are matched first and printed under their own heading; the tail
+    follows for context.
+    """
+    lines = out.splitlines()
+    named = [line for line in lines
+             if any(marker in line for marker in CENSUS_CULPRIT_MARKERS)]
+    if named:
+        print("         the line(s) that name the drift:")
+        for line in named[:8]:
+            print("         >> %s" % _safe(line.strip()))
+        print("         and the tail:")
+    for line in lines[-12:]:
+        print("         | %s" % _safe(line))
+
+
+def _uncommitted_paths(repo):
+    """Tracked paths that differ from HEAD, so a verdict can say so (D3).
+
+    Never raises and never blocks a verdict: a repo git cannot read returns
+    an empty list, which only costs the warning, not the check.
+    """
+    try:
+        proc = subprocess.run(
+            ["git", "-C", str(repo), "status", "--porcelain",
+             "--untracked-files=no"],
+            capture_output=True, text=True, errors="replace", timeout=60,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return []
+    if proc.returncode != 0:
+        return []
+    return [line[3:] for line in (proc.stdout or "").splitlines() if line[3:]]
+
+
+def check_branch_is_mergeable_by_the_reaper(repo):
+    """RED when this branch's name makes its pull request UNMERGEABLE.
+
+    THE ROUND THIS COST (pf-adversary D15, R350, and the round it reviewed).
+    `.github/workflows/merge-claude-pr.yml` in BOTH repositories filters on
+    the head ref before anything else:
+
+        case "$HEAD_REF" in claude/*) : ;; *) ... skip ;;
+
+    and it does so in `decide`, in `finish` AND in `reap`.  A pull request
+    from a branch named anything else is therefore never merged, never
+    closed, and never reaped: it sits open for ever, with no comment and no
+    warning anywhere.  Measured on server #794 -- gate green at 05:53, marker
+    present, zero conflicts, and the reaper merged five other lanes' work
+    past it over the next two hours while its own job log said
+    "not a claude/ branch - skipped".  A whole round's work was invisible on
+    `main` for nine hours and was only found because a later round is
+    required to check the fate of the previous one.
+
+    It is WORSE in pf_bridge, where the round LOCK is a pull request: a lane
+    that pushes a hand-named branch there never releases its lock again, and
+    every one of its later rounds ends on sight.
+
+    Nothing mechanical prevented a repeat, which is what this row is.  It
+    costs one `git rev-parse` and it is checked for BOTH clones - this tool's
+    own repository as well as the server one - because the trap is in both.
+
+    Returns True (both branches can be merged), False (one cannot - RED),
+    None (a branch name could not be read - INCONCLUSIVE).
+    """
+    here = pathlib.Path(__file__).resolve().parent.parent
+    verdicts = []
+    for label, clone in (("server", repo), ("bridge", here)):
+        try:
+            proc = subprocess.run(
+                ["git", "-C", str(clone), "rev-parse", "--abbrev-ref", "HEAD"],
+                capture_output=True, text=True, errors="replace", timeout=60,
+            )
+        except (OSError, subprocess.SubprocessError) as exc:
+            print("[branch] INCONCLUSIVE - could not read the %s branch: %s"
+                  % (label, _safe(exc)))
+            verdicts.append(None)
+            continue
+        name = (proc.stdout or "").strip()
+        if proc.returncode != 0 or not name:
+            print("[branch] INCONCLUSIVE - could not read the %s branch name."
+                  % label)
+            verdicts.append(None)
+            continue
+        if name == "HEAD":
+            # A detached head has no branch to push; nothing to say.
+            print("[branch] INCONCLUSIVE - the %s clone is on a detached HEAD."
+                  % label)
+            verdicts.append(None)
+            continue
+        if name.startswith("claude/"):
+            print("[branch] PASS - %s is on '%s'." % (label, _safe(name)))
+            verdicts.append(True)
+            continue
+        print("[branch] RED - the %s clone is on '%s', which does NOT start"
+              % (label, _safe(name)))
+        print("         with 'claude/'. A pull request from this branch is"
+              " invisible to")
+        print("         merge-claude-pr.yml: it will never be merged, never"
+              " closed, and")
+        print("         never reaped. Measured on server #794, which sat green"
+              " and orphaned")
+        print("         for hours. Push to the branch the session was given"
+              " instead of")
+        print("         naming one yourself.")
+        verdicts.append(False)
+    if False in verdicts:
+        return False
+    if None in verdicts:
+        return None
+    return True
+
 
 def check_precondition_census(repo):
     """RED when the server clone's precondition census does not agree with
@@ -329,36 +472,89 @@ def check_precondition_census(repo):
         print("         Is --repo really the pirate-force-server clone?"
               " Nothing was compared.")
         return None
+    # THIS ROW GRADES THE WORKING TREE, NOT HEAD, AND SAYS SO (pf-adversary
+    # D3, R350).  The two rows above are git-based (`base...HEAD`,
+    # `git ls-files`); this one shells pytest over the filesystem.  The
+    # adversary demonstrated the false green: commit the drift, revert it in
+    # the working tree only, and this row prints PASS on a commit that is
+    # red.  The realistic trigger is the RED message's own remedy -- "move
+    # docs/PYTEST_SKIP_PINS.json in the same commit" is two files, and the
+    # pin file is the easy one to leave unstaged.  A dirty tree is named
+    # rather than graded away.
+    dirty = _uncommitted_paths(repo)
+
+    # errors="replace", like every other subprocess.run in this file (lines
+    # ~174, ~245, ~513, ~542).  pf-adversary D4, R350: this was the only one
+    # without it.  On Panya's Thai-locale box `text=True` decodes the child
+    # with the LOCALE encoding, cp874 has 31 undefined byte positions, and
+    # 63 tracked tests/*.py in the server repo carry bytes cp874 cannot
+    # decode (the cp874 tripwire only scans tools/, src/, current/).
+    # UnicodeDecodeError is neither OSError nor SubprocessError, so it would
+    # escape this function, escape main(), and kill the mandatory pre-push
+    # tool with a traceback and exit 1 -- indistinguishable from a clean RED,
+    # which is verbatim the incident this file already documents further
+    # down.  Reintroducing it here would have been the same scar twice.
     try:
         proc = subprocess.run(
             [sys.executable, "-m", "pytest", PRECONDITION_CENSUS_TEST, "-q"],
-            cwd=str(repo), capture_output=True, text=True, timeout=600,
+            cwd=str(repo), capture_output=True, text=True,
+            errors="replace", timeout=600,
         )
     except (OSError, subprocess.SubprocessError) as exc:
-        print("[census] INCONCLUSIVE - could not run pytest: %s" % exc)
+        print("[census] INCONCLUSIVE - could not run pytest: %s" % _safe(exc))
         return None
     out = (proc.stdout or "") + (proc.stderr or "")
     if proc.returncode == 0:
         print("[census] PASS - %s agrees with the modules the gate collects."
               % PRECONDITION_CENSUS_TEST)
+        if dirty:
+            print("         WARNING - this verdict is about your WORKING TREE."
+                  " %d tracked file(s)" % len(dirty))
+            print("         differ from HEAD, so it does NOT speak for the"
+                  " commit you are about to")
+            print("         push. Commit them and run this again:")
+            for path in dirty[:5]:
+                print("           %s" % _safe(path))
+            if len(dirty) > 5:
+                print("           ... and %d more" % (len(dirty) - 5))
         return True
-    # pytest exit 5 is "no tests collected", which is not a census failure -
-    # it is the check being unable to say anything, and a green verdict there
-    # would be exactly the false pass this row exists to remove.
-    if proc.returncode == 5:
-        print("[census] INCONCLUSIVE - pytest collected 0 tests from %s."
-              % PRECONDITION_CENSUS_TEST)
+    # EVERYTHING THAT IS NOT A CENSUS DISAGREEMENT IS INCONCLUSIVE, NOT RED
+    # (pf-adversary D5, R350).  This used to map every non-zero code except 5
+    # to RED with the module-exclusion story attached.  Measured with a venv
+    # lacking pytest: `python -m pytest` exits 1, so a lane on a fresh clone
+    # got a mandatory RED and went hunting an exclusion drift that did not
+    # exist.  pytest's own codes: 0 pass, 1 tests failed, 2 interrupted /
+    # collection error, 3 internal error, 4 usage error, 5 nothing collected.
+    # Only 1 can mean the census disagreed, and even 1 needs the test to have
+    # actually run - which is what the marker below checks.
+    if proc.returncode != 1:
+        print("[census] INCONCLUSIVE - pytest exited %d, which is not a census"
+              % proc.returncode)
+        print("         disagreement (2 collection error, 3 internal, 4 usage,"
+              " 5 nothing collected).")
+        print("         Nothing was compared. pytest said:")
+        _print_census_tail(out)
+        return None
+    if " passed" not in out and " failed" not in out:
+        # Exit 1 without a result line at all: pytest died before running
+        # anything (no pytest module, a bad interpreter). Not a census fact.
+        print("[census] INCONCLUSIVE - pytest exited 1 without running any"
+              " test. Nothing was")
+        print("         compared. pytest said:")
+        _print_census_tail(out)
         return None
     print("[census] RED - %s does not agree with what the gate will collect."
           % PRECONDITION_CENSUS_TEST)
     print("         This is the shape that killed #785 and #789: a module")
     print("         the gate EXCLUDES (usually a client artifact's name")
     print("         spelled in a docstring or comment) still passes cp874")
-    print("         and skips, and dies on the count.  pytest said:")
-    for line in out.splitlines()[-12:]:
-        print("         | %s" % "".join(
-            ch if _cp874_safe(ch) else "?" for ch in line
-        ))
+    print("         and skips, and dies on the count.")
+    if dirty:
+        print("         (Your working tree also differs from HEAD in %d"
+              " file(s), so this RED may" % len(dirty))
+        print("          be about uncommitted work rather than about the"
+              " commit you would push.)")
+    _print_census_tail(out)
     return False
 
 
@@ -483,6 +679,111 @@ def check_pr_body(body_path, stage):
 # beside the case list, not derived from it, for the R328 D3 reason: a count
 # derived from the thing it grades cannot fail when that thing shrinks.
 MAINMERGE_SELF_TEST_CASES = 4
+
+# Same pinning discipline, same reason, for the two rows R350 added.
+# pf-adversary D7: `check_precondition_census` shipped able to turn a push RED
+# with no case and no place in this arithmetic, in a file whose own doctrine is
+# "a gate tool with no test is what killed #694".
+BRANCHNAME_SELF_TEST_CASES = 4
+CENSUS_SELF_TEST_CASES = 2
+
+
+def _branchname_self_test_cases(tmp):
+    """Drive check_branch_is_mergeable_by_the_reaper() on real git repos.
+
+    The row it grades exists because a hand-named branch cost R348 its whole
+    round (server #794).  Both verdicts have to be provable, and a detached
+    head must not be graded as either.
+    """
+    def git(repo, *args):
+        subprocess.run(["git", "-C", str(repo)] + list(args),
+                       check=True, capture_output=True, text=True,
+                       errors="replace")
+
+    def build(branch):
+        repo = pathlib.Path(tmp) / ("bn_" + branch.replace("/", "_"))
+        repo.mkdir()
+        git(repo, "init", "-q")
+        git(repo, "config", "user.email", "t@t")
+        git(repo, "config", "user.name", "t")
+        (repo / "f.txt").write_text("x\n", encoding="utf-8")
+        git(repo, "add", "f.txt")
+        git(repo, "commit", "-qm", "c")
+        git(repo, "checkout", "-q", "-b", branch)
+        return repo
+
+    failures = 0
+    ran = 0
+    good = build("claude/lucky-name-abc123")
+    bad = build("lane-e-handmade-name")
+    # The row grades BOTH clones, and this file's own repository is the
+    # second one, so a case has to pin each position independently.  Passing
+    # `good` as the server clone still consults the real bridge clone, which
+    # is why the expected value below is "not False" rather than True: on a
+    # developer machine sitting on a claude/* branch it is True, and in any
+    # other checkout the bridge half may legitimately be INCONCLUSIVE.  What
+    # must never happen is a RED from the good case.
+    for label, repo, expected_red in (
+        ("server on a claude/ branch is not RED", good, False),
+        ("server on a hand-named branch is RED", bad, True),
+    ):
+        got = check_branch_is_mergeable_by_the_reaper(repo)
+        ran += 1
+        ok = (got is False) == expected_red
+        failures += 0 if ok else 1
+        print("  case %d %-58s expected_red=%-5s got=%-5s %s"
+              % (ran, label, expected_red, got, "ok" if ok else "SELF-TEST RED"))
+    # A detached HEAD has no branch to push and must not be graded either way.
+    detached = build("claude/temp-for-detach")
+    head = subprocess.run(
+        ["git", "-C", str(detached), "rev-parse", "HEAD"],
+        capture_output=True, text=True, errors="replace",
+    ).stdout.strip()
+    git(detached, "checkout", "-q", head)
+    got = check_branch_is_mergeable_by_the_reaper(detached)
+    ran += 1
+    ok = got is not False
+    failures += 0 if ok else 1
+    print("  case %d %-58s expected=not RED  got=%-5s %s"
+          % (ran, "detached HEAD is not RED", got, "ok" if ok else "SELF-TEST RED"))
+    # A path that is not a git repository at all: INCONCLUSIVE, never a
+    # verdict.  This is the shape a wrong --repo takes.
+    notrepo = pathlib.Path(tmp) / "bn_notrepo"
+    notrepo.mkdir()
+    got = check_branch_is_mergeable_by_the_reaper(notrepo)
+    ran += 1
+    ok = got is not True
+    failures += 0 if ok else 1
+    print("  case %d %-58s expected=not PASS got=%-5s %s"
+          % (ran, "a non-repo path never passes", got, "ok" if ok else "SELF-TEST RED"))
+    return failures, ran
+
+
+def _census_self_test_cases(tmp):
+    """Pin the two verdicts of check_precondition_census that need no pytest.
+
+    The RED path needs a real server clone and is exercised for real every
+    time this tool runs against one; what a self-test CAN pin without one is
+    that a missing file and a non-repo path are INCONCLUSIVE rather than
+    PASS.  pf-adversary D5's whole point: everything that is not a census
+    disagreement must refuse to be a verdict.
+    """
+    failures = 0
+    ran = 0
+    empty = pathlib.Path(tmp) / "census_empty"
+    (empty / "tests").mkdir(parents=True)
+    for label, repo in (
+        ("a clone without the census test is INCONCLUSIVE", empty),
+        ("a path that does not exist is INCONCLUSIVE",
+         pathlib.Path(tmp) / "census_missing"),
+    ):
+        got = check_precondition_census(repo)
+        ran += 1
+        ok = got is None
+        failures += 0 if ok else 1
+        print("  case %d %-58s expected=None  got=%-5s %s"
+              % (ran, label, got, "ok" if ok else "SELF-TEST RED"))
+    return failures, ran
 
 
 def _mainmerge_self_test_cases(tmp):
@@ -659,10 +960,20 @@ def _self_test():
         mm_failures, mm_ran = _mainmerge_self_test_cases(tmp)
         failures += mm_failures
         ran += mm_ran
+        bn_failures, bn_ran = _branchname_self_test_cases(tmp)
+        failures += bn_failures
+        ran += bn_ran
+        cs_failures, cs_ran = _census_self_test_cases(tmp)
+        failures += cs_failures
+        ran += cs_ran
     if failures:
         print("SELF-TEST RED: %d of %d case(s) wrong." % (failures, ran))
         return 1
-    if ran != len(cases) + 2 + MAINMERGE_SELF_TEST_CASES:
+    expected_cases = (
+        len(cases) + 2 + MAINMERGE_SELF_TEST_CASES
+        + BRANCHNAME_SELF_TEST_CASES + CENSUS_SELF_TEST_CASES
+    )
+    if ran != expected_cases:
         # pf-adversary R328 D3: the old green line was the string "9 cases",
         # so an empty case list still printed it.  A token that fires on "no
         # failures were recorded" is satisfied by running nothing.  The
@@ -670,7 +981,7 @@ def _self_test():
         # if git disappears, or a case is dropped, the arithmetic goes red
         # instead of the report going quietly shorter.
         print("SELF-TEST RED: expected %d cases, ran %d."
-              % (len(cases) + 2 + MAINMERGE_SELF_TEST_CASES, ran))
+              % (expected_cases, ran))
         return 1
     print("SELF-TEST PASS: %d cases, %d compared." % (ran, ran))
     return 0
@@ -748,7 +1059,8 @@ def main():
     print("=== pf_gate_preflight on %s ===" % repo)
     results = [check_cp874(repo), check_new_skips(repo, args.base),
                check_base_is_ancestor(repo, args.base),
-               check_precondition_census(repo)]
+               check_precondition_census(repo),
+               check_branch_is_mergeable_by_the_reaper(repo)]
     if args.pr_body is None:
         # Open skip with a reason, never a silent one (AGENTS.md section 7).
         # Not appended to `results`: most callers run this tool for the cp874
@@ -785,7 +1097,8 @@ def main():
         print("that does not resolve (git fetch origin main, or pass --base).")
         return 1
     print("PREFLIGHT PASS (cp874 + no new skips + main is in this branch"
-          " + precondition census agrees).")
+          " + precondition census agrees")
+    print("                + both branches are mergeable by the reaper).")
     print("NOTE: this does NOT promise a green gate - Windows-only runtime")
     print("failures are out of scope.  A RED or INCONCLUSIVE preflight means")
     print("DO NOT PUSH until it is fixed (AGENTS.md section 7).")
