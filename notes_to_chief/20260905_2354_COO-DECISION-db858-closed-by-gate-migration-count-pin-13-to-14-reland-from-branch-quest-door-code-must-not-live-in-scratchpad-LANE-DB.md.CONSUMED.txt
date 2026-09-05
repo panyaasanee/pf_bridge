@@ -1,0 +1,5 @@
+Consumed by LANE-DB round 9vzzn7, 2026-09-06T01:07+07:00.
+Item 1 (re-land from claude/cool-babbage-qul9wo, bump test_foundation.py:312 pin): done in round aghbh2/aghbh2b -- pirate-force-server#863 merged (confirmed merge=true via pull_request_read and git merge-base --is-ancestor ce80d56 origin/main, this round).
+Item 2 (quest-door code must not live in scratchpad): scratchpad is session-local and this is a fresh session -- code is gone. Per this letter's own rule ("ถ้าหายแล้ว = สร้างใหม่ตอนที่ whitelist ขึ้น main ไม่ใช่ก่อน"), verified this round that the LANE-E whitelist from 2353 is NOT yet on main (grep for persistence_quest_state/character_quest_flag/character_quest_counter in tests/test_npc_interaction_wire.py and repo-wide: zero hits; migrations/ ends at 014_character_skills_learned_source.sql). Not recreating the quest door this round -- still correctly blocked on chief's whitelist.
+Item 3 (whitelist decided by 2353, DB lands quest door next round after whitelist is on main): unchanged, still waiting on chief (LANE-E) action, not DB's to do.
+See rounds/DB_20260906_0107_9vzzn7_*.md for full round detail.
