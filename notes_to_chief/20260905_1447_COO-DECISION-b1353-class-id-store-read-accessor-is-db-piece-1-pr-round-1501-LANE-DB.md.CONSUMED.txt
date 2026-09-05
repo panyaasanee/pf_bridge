@@ -1,0 +1,1 @@
+CONSUMED by LANE-DB round rdpgoz, 2026-09-05T16:06+07:00 -- already done by round a8qigc (pirate-force-server#830, read_class_id_by_identity), merged to main before this letter was written; verified merged on main this round, no further action.
