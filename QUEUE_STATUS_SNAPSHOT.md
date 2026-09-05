@@ -1,8 +1,8 @@
 DERIVED FILE - DO NOT DECIDE FROM THIS - read GAME_TEST_QUEUE.md
 # QUEUE STATUS SNAPSHOT (generated -- do not edit; regenerate with tools_bridge/pf_queue_status.py)
-generated: 2026-09-06T02:25:29+07:00
+generated: 2026-09-06T05:00:52+07:00
 scanned: GAME_TEST_QUEUE.md, CLIENT_RE_QUEUE.md + 22 archive files
-tickets total: 299 (live 275 / archive-only 24) -- open in live: 105
+tickets total: 302 (live 278 / archive-only 24) -- open in live: 108
 
 ## OPEN (live)
 | ใบ | status | ที่อยู่ | อ่านจาก |
@@ -78,7 +78,7 @@ tickets total: 299 (live 275 / archive-only 24) -- open in live: 105
 | GT-231 | BLOCKED | live:GAME_TEST_QUEUE.md:9523 | header |
 | GT-233 | READY | live:GAME_TEST_QUEUE.md:9629 | header |
 | GT-242 | OPEN | live:GAME_TEST_QUEUE.md:9691 | header |
-| GT-243 | PENDING | live:GAME_TEST_QUEUE.md:9766 | header |
+| GT-243 | BLOCKED | live:GAME_TEST_QUEUE.md:9766 | header |
 | GT-245 | PARTIAL | live:GAME_TEST_QUEUE.md:9869 | header |
 | GT-249 | READY | live:GAME_TEST_QUEUE.md:9988 | header |
 | GT-250 | READY | live:GAME_TEST_QUEUE.md:10267 | header |
@@ -93,6 +93,7 @@ tickets total: 299 (live 275 / archive-only 24) -- open in live: 105
 | GT-266 | READY | live:GAME_TEST_QUEUE.md:11014 | header |
 | GT-267 | UNKNOWN | live:GAME_TEST_QUEUE.md:11066 | ? |
 | GT-269 | READY | live:GAME_TEST_QUEUE.md:11076 | header |
+| GT-272 | READY | live:GAME_TEST_QUEUE.md:11100 | header |
 | RE-107 | UNKNOWN | live:GAME_TEST_QUEUE.md:5355 | ? |
 | RE-122 | UNKNOWN | live:CLIENT_RE_QUEUE.md:156 | ? |
 | RE-128 | UNKNOWN | live:CLIENT_RE_QUEUE.md:210 | ? |
@@ -112,9 +113,11 @@ tickets total: 299 (live 275 / archive-only 24) -- open in live: 105
 | RE-261 | OPEN | live:CLIENT_RE_QUEUE.md:1540 | header |
 | RE-266 | OPEN | live:CLIENT_RE_QUEUE.md:1711 | header |
 | RE-270 | OPEN | live:CLIENT_RE_QUEUE.md:1683 | header |
+| RE-272 | OPEN | live:CLIENT_RE_QUEUE.md:1738 | header |
+| RE-273 | OPEN | live:CLIENT_RE_QUEUE.md:1783 | header |
 
-## DRIFT -- open แต่ไม่มีในสารบัญมือ (66)
-GT-002, GT-036, GT-060, GT-069, GT-099, GT-102, GT-103, GT-104, GT-106, GT-107, GT-109, GT-110, GT-114, GT-125, GT-128, GT-129, GT-133, GT-140, GT-144, GT-151, GT-158, GT-159, GT-160, GT-164, GT-166, GT-170, GT-171, GT-173, GT-174, GT-176, GT-177, GT-178, GT-179, GT-180, GT-181, GT-189, GT-190, GT-193, GT-194, GT-199, GT-200, GT-202, GT-214, GT-217, GT-218, GT-220, GT-230, GT-231, GT-243, GT-245, GT-249, RE-107, RE-122, RE-128, RE-132, RE-135, RE-155, RE-169, RE-209, RE-222, RE-235, RE-238, RE-239, RE-248, RE-266, RE-270
+## DRIFT -- open แต่ไม่มีในสารบัญมือ (69)
+GT-002, GT-036, GT-060, GT-069, GT-099, GT-102, GT-103, GT-104, GT-106, GT-107, GT-109, GT-110, GT-114, GT-125, GT-128, GT-129, GT-133, GT-140, GT-144, GT-151, GT-158, GT-159, GT-160, GT-164, GT-166, GT-170, GT-171, GT-173, GT-174, GT-176, GT-177, GT-178, GT-179, GT-180, GT-181, GT-189, GT-190, GT-193, GT-194, GT-199, GT-200, GT-202, GT-214, GT-217, GT-218, GT-220, GT-230, GT-231, GT-243, GT-245, GT-249, GT-272, RE-107, RE-122, RE-128, RE-132, RE-135, RE-155, RE-169, RE-209, RE-222, RE-235, RE-238, RE-239, RE-248, RE-266, RE-270, RE-272, RE-273
 
 ## DRIFT -- อยู่ในสารบัญมือแต่สถานะจริงปิดแล้ว (22)
 GT-030, GT-032, GT-033, GT-045, GT-078, GT-121, GT-131, GT-148, GT-182, GT-183, GT-188, GT-192, GT-207, GT-216, GT-219, GT-228, GT-254, RE-077, RE-125, RE-130, RE-139, RE-256

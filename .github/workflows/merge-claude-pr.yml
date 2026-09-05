@@ -131,6 +131,28 @@ env:
   # "try ready" attempt and the destructive close, which is not a decision,
   # only an accident of only ever having one variable.
   PF_STALE_CLOSE_HOURS: '6'
+  # [chief R364] "Did this round's real work arrive?", asked of a PR's file
+  # list, for the #1079 unripe-claim guard in BOTH jobs below.  Two signals,
+  # OR'd, because each alone is gameable in a direction pf-adversary
+  # demonstrated this round:
+  #   - NAME: a `rounds/*.md` that is not a claim placeholder.  Matched
+  #     case-INSENSITIVELY and allowing a trailing id, because `main` carries
+  #     26 placeholders spelled `_CLAIM.md` / `_claim_<id>.md`; a
+  #     case-sensitive `_claim\.md$` would have let every one of those shapes
+  #     merge a ghost claim (pf-adversary D3).
+  #   - SIZE: any `rounds/*.md` adding >= 20 lines.  A claim placeholder is
+  #     three lines by COMMON_LANE_ROUND's own template; a round file is
+  #     hundreds.  This is what keeps a REAL round file from being misread as
+  #     a placeholder just because its slug happens to contain the word
+  #     "claim" (e.g. a round about this very guard).
+  # `status != "removed"` because deleting a rounds/*.md is not work arriving
+  # (pf-adversary D4).
+  PF_ROUND_FILE_FILTER: >-
+    .[] | select(.status != "removed")
+        | select(.filename | test("^rounds/.*\\.md$"))
+        | select((.filename | test("_claim(_[a-z0-9]+)?\\.md$"; "i") | not)
+                 or (.additions >= 20))
+        | .filename
 
 jobs:
   merge:
@@ -232,11 +254,58 @@ jobs:
           # `changed_files > 1` is what actually distinguishes "the round did
           # something" from "the round only opened its claim (and maybe caught
           # main up)".
+          #
+          # [chief R364, from ka1-B 20260906_0445; MEASURED on pf_bridge#1414,
+          # #1410, #1386] `changed_files > 1` is the WRONG proxy and it closed
+          # three real rounds in six hours, one of them the LANE-GM round
+          # carrying the owner's 14:00 `/lv` order.  Reason: COMMON_LANE_ROUND
+          # step 3 tells every lane to DELETE `_claim.md` on the branch and add
+          # the real round file.  A claim file that never reached
+          # ${DEFAULT_BRANCH} contributes nothing to a base...head diff when it
+          # is deleted, so a round whose code all went to the OTHER repository
+          # and whose bridge side is just its round file lands on exactly
+          # `changed_files == 1` -- byte-identical, to this guard, to an empty
+          # claim.  #1414 was 1 file / +273 lines of finished round file,
+          # mergeable_state=clean, and was closed unmerged.
+          #
+          # The signal the guard actually wants is not a count, it is: did a
+          # round FILE arrive?  `rounds/<PREFIX>_<time>_<id>_<slug>.md` is what
+          # every lane writes when it has done something; a `_claim` placeholder
+          # is what it writes when it has not.  `PF_ROUND_FILE_FILTER` (top of
+          # this file) asks that, by name AND by size -- see its comment for
+          # why either signal alone is gameable.  An empty claim (claim file +
+          # marker, nothing else) is still caught, in every spelling of the
+          # placeholder name `main` actually carries.  The extra API call only
+          # happens on the `CHANGED <= 1` branch, i.e. for a PR with at most one
+          # file to list, so `per_page=100` never needs paging.
           case "$TITLE" in
             *[Cc]laim)
               if [ "$CHANGED" -le 1 ]; then
-                echo "::warning::#${PR} '${TITLE}' carries the marker with only ${CHANGED} changed file(s) against ${DEFAULT_BRANCH} - refusing to merge (see #1079). The round must push its work to this branch before the marker can release the lock."
-                exit 0
+                # Two failure directions, kept apart on purpose.  `api` dying
+                # (rate limit, 502) must NOT read as "no round file arrived" --
+                # under `set -euo pipefail` a failed pipeline gives the same
+                # empty string a genuinely empty round gives.  So take the file
+                # list in its own step, and treat an unreadable list as "do not
+                # merge, do not claim to know" rather than as evidence.
+                if ! api "repos/${REPO}/pulls/${PR}/files?per_page=100" >/tmp/pf_prfiles.json; then
+                  echo "::warning::#${PR} '${TITLE}' has ${CHANGED} changed file(s) and its file list could not be read - refusing to merge this sweep (see #1079). Not a verdict about the round; the next sweep re-reads it."
+                  exit 0
+                fi
+                # A jq failure is NOT the same fact as "no round file", and
+                # `api()` folds stderr into stdout, so a `gh` warning line on an
+                # otherwise-successful call is enough to make the parse die
+                # [pf-adversary D2, this round].  Separate the parse from the
+                # verdict, and refuse on a parse error rather than reading it
+                # as evidence.
+                if ! ROUND_FILES=$(jq -r "$PF_ROUND_FILE_FILTER" </tmp/pf_prfiles.json); then
+                  echo "::warning::#${PR} '${TITLE}' has ${CHANGED} changed file(s) and its file list did not parse - refusing to merge this sweep (see #1079)."
+                  exit 0
+                fi
+                if [ -z "$ROUND_FILES" ]; then
+                  echo "::warning::#${PR} '${TITLE}' carries the marker with only ${CHANGED} changed file(s) and no rounds/ file that is not a claim - refusing to merge (see #1079). The round must push its work to this branch before the marker can release the lock."
+                  exit 0
+                fi
+                echo "#${PR} has ${CHANGED} changed file(s) but a real round file arrived (${ROUND_FILES}) - guard #1079 does not apply"
               fi
               ;;
           esac
@@ -473,21 +542,71 @@ jobs:
             # reaper uses -- a ghost lock is still a lock.
             case "$TITLE" in
               *[Cc]laim)
+                # [chief R364, reported by ka1-B 20260906_0445] Same correction
+                # as the `merge` job above, and this is the copy that did the
+                # damage.  MEASURED: three claim-titled PRs were closed unmerged
+                # here at 1 changed file -- #1386 (76m), #1410 (82m), #1414
+                # (76m), spanning 3h58m; the closer's own comment is quoted in
+                # each of the three `notes_to_chief/*SYNC-NOTICE-pf_bridge-
+                # pr1{386,410,414}-closed-never-merged.md`.  chief then read
+                # #1414 from the API directly (not from the report): 1 changed
+                # file, +273 lines, `mergeable_state: clean`, `merged: false`,
+                # and that one file was `rounds/GM_20260906_0244_vz8mru_*.md`
+                # -- a finished round file, and that round carried the owner's
+                # 14:00 `/lv` order.  (#1410 was a stand-down PR, not a work
+                # round; whether this edit would have saved it depends on how
+                # it named its file, which cannot be checked now -- said here
+                # rather than counted as a third rescue.)
+                # For the delete-`_claim.md`-on-the-branch rule that puts a
+                # real round on exactly `changed_files == 1`, see
+                # `prompts/COMMON_LANE_ROUND.md`, the END-OF-ROUND section
+                # (the last one in the file), step 3 -- NOT the round-lock
+                # section's step 3, which is about releasing someone else's
+                # claim and would mislead anyone who greps for "step 3".
                 if [ "$CHANGED" -le 1 ]; then
-                  if [ "$AGE" -lt "$LIMIT" ]; then
-                    echo "--- #${PR} ${HEAD_REF}: '${TITLE}' carries the marker with only ${CHANGED} changed file(s) - within ${PF_STALE_MINUTES}m, left alone (see #1079)"
+                  ROUND_FILES=""
+                  UNREADABLE=""
+                  if api "repos/${REPO}/pulls/${PR}/files?per_page=100" >/tmp/pf_prfiles_${PR}.json; then
+                    ROUND_FILES=$(jq -r "$PF_ROUND_FILE_FILTER" \
+                                  </tmp/pf_prfiles_${PR}.json) || UNREADABLE="unparseable"
+                  else
+                    UNREADABLE="unreachable"
+                  fi
+                  # Cannot tell whether work arrived.  Do not close on a guess
+                  # -- but do not hold the lane lock forever either: this file
+                  # ruled at R335, and again for the liveness reprieve, that
+                  # EVERY leave-open states the age at which it stops applying
+                  # (pf-adversary D1, this round).  So: leave it alone while a
+                  # live round could still be working, and past
+                  # PF_STALE_CLOSE_HOURS hand it to the ordinary draft/stale
+                  # handling below, which carries its own bounds.  A ghost lock
+                  # is still a lock.
+                  if [ -n "$UNREADABLE" ]; then
+                    if [ "$AGE" -lt "$CLOSE_LIMIT" ]; then
+                      echo "::warning::#${PR} ${HEAD_REF}: ${CHANGED} changed file(s), file list ${UNREADABLE} - left alone this sweep, NOT closed (bound ${PF_STALE_CLOSE_HOURS}h)"
+                      continue
+                    fi
+                    echo "::warning::#${PR} ${HEAD_REF}: file list ${UNREADABLE} for over ${PF_STALE_CLOSE_HOURS}h at age $(( AGE / 60 ))m - guard #1079 cannot decide; handing to the ordinary stale handling rather than holding the lane lock"
+                  elif [ -n "$ROUND_FILES" ]; then
+                    # A real round file arrived.  Fall through to the ordinary
+                    # draft/stale handling below exactly as a `CHANGED > 1` PR
+                    # does -- do NOT reach the close path.
+                    echo "--- #${PR} ${HEAD_REF}: ${CHANGED} changed file(s) but a real round file arrived (${ROUND_FILES}) - guard #1079 does not apply"
+                  elif [ "$AGE" -lt "$LIMIT" ]; then
+                    echo "--- #${PR} ${HEAD_REF}: '${TITLE}' carries the marker with only ${CHANGED} changed file(s) and no round file - within ${PF_STALE_MINUTES}m, left alone (see #1079)"
+                    continue
+                  else
+                    echo "--- #${PR} ${HEAD_REF}: '${TITLE}' carries the marker with only ${CHANGED} changed file(s) and no round file past ${PF_STALE_MINUTES}m - no round work ever arrived; closing (see #1079)"
+                    gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
+                      "**This claim pull request carries the automerge marker but no \`rounds/\` file other than its own claim placeholder, ${PF_STALE_MINUTES} minutes after it was opened - closing it.**" \
+                      "" \
+                      "A claim pull request's body must not carry the marker until the round's real work (the round file, a CHIEF_CONTINUATION.md line, letters, a queue update) is pushed to this same branch (AGENTS.md section 2/3). This one has the marker but nothing beyond the claim file itself, well past the point a live round would still be working -- see pf_bridge#1079 for the incident this guard exists to catch." \
+                      "" \
+                      "**The branch \`${HEAD_REF}\` is kept.** If the round that opened this is still alive somewhere, pushing its real work here will let it merge normally on the next event; otherwise the next round of this lane should treat this as a dead claim and start its own.")" \
+                      || echo "::warning::could not comment - closing anyway"
+                    if gh pr close "$PR" --repo "$REPO"; then echo "  CLOSED unripe claim (see #1079) -> branch kept"; else echo "::error::COULD NOT CLOSE #${PR}. The lane lock is STUCK until a human closes it."; fi
                     continue
                   fi
-                  echo "--- #${PR} ${HEAD_REF}: '${TITLE}' carries the marker with only ${CHANGED} changed file(s) past ${PF_STALE_MINUTES}m - no round work ever arrived; closing (see #1079)"
-                  gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
-                    "**This claim pull request carries the automerge marker but only ${CHANGED} file(s) differ from \`${DEFAULT_BRANCH}\`, ${PF_STALE_MINUTES} minutes after it was opened - closing it.**" \
-                    "" \
-                    "A claim pull request's body must not carry the marker until the round's real work (the round file, a CHIEF_CONTINUATION.md line, letters, a queue update) is pushed to this same branch (AGENTS.md section 2/3). This one has the marker but nothing beyond the claim file itself, well past the point a live round would still be working -- see pf_bridge#1079 for the incident this guard exists to catch." \
-                    "" \
-                    "**The branch \`${HEAD_REF}\` is kept.** If the round that opened this is still alive somewhere, pushing its real work here will let it merge normally on the next event; otherwise the next round of this lane should treat this as a dead claim and start its own.")" \
-                    || echo "::warning::could not comment - closing anyway"
-                  if gh pr close "$PR" --repo "$REPO"; then echo "  CLOSED unripe claim (see #1079) -> branch kept"; else echo "::error::COULD NOT CLOSE #${PR}. The lane lock is STUCK until a human closes it."; fi
-                  continue
                 fi
                 ;;
             esac
