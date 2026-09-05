@@ -100,6 +100,15 @@ claim PR: **pf_bridge#1366**
 - cp874: ไฟล์ใหม่ทั้งสองเป็น ASCII ล้วน (ตรวจไบต์ต่อไบต์ = 0 ไบต์ >= 0x80) ·
   `grep -nE "rm +-[a-z]*r"` ในคำสั่งของรอบนี้: ว่าง (ใช้ `mktemp -d` + worktree ตาม `1546`)
 
+## เกต (PANYA-DECISION `20260904_1158` §22)
+**`GATE_UNVERIFIED #848`** — เปิด PR 20:30+07 · รอผล job `gate` ของ run `pull_request`
+บน sha `b18b493` เต็ม 10 นาทีตามกติกา (ตรวจทุก 30 วินาที) · ทั้งสอง run ยังเป็น
+`in_progress` ไม่มี conclusion ⇒ **ยังไม่ตัดสิน ไม่ใช่แดง** · ปล่อยล็อกตามลำดับจบรอบ
+🔴 **รอบถัดไปของสาย B เปิดด้วยการตรวจ `#848` ก่อนทำอย่างอื่น** (แดง = แก้ใต้รหัสรอบเดิม ·
+merged = ไปต่อ · closed ไม่ merge = `git fetch` กิ่ง `claude/sharp-newton-qamp70` แล้ว
+cherry-pick `b18b493` ตาม ADDENDUM ข้อ A)
+· ไม่ push commit เปล่า "wake gate" เพราะ run เกิดเองจาก event เปิด PR แล้วทั้งสองอัน
+
 ## หมายเหตุ adversary
 สั่ง `pf-adversary` หนึ่งครั้ง (จากสองครั้งที่กติกา `1428` ให้) บนสภาพก่อน commit
 **เจอ 12 ข้อ จ่ายครบทุกข้อในรอบนี้** ไม่มีข้อไหนถูกยกไป `ADVERSARY_PENDING`
