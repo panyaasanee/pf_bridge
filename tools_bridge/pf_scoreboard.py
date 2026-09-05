@@ -41,7 +41,14 @@ STATUSES = ("DONE", "COMING", "STUCK", "NONE")
 RENDERED = ("DONE", "COMING", "STUCK")
 MANUAL = "manual"
 
-SCOREBOARD_RE = re.compile(r"^SCOREBOARD:\s*(.*)$")
+# A lane writes the line with whatever markdown decoration its round file
+# uses.  pf-adversary R360 D1, measured: anchoring on a bare "SCOREBOARD:"
+# dropped BOTH of LANE-GM's real rows this round ("## SCOREBOARD: ...") and
+# said "0 malformed" while doing it - a silent drop is the one failure this
+# collector must not have, because "no row" is read by COO as a lane that
+# produced nothing (prompts/COO.md: three such rounds = escalation).
+SCOREBOARD_RE = re.compile(r"^(?:[#>*\-]+\s*)?\**\s*SCOREBOARD:\**\s*(.*)$")
+FENCE_RE = re.compile(r"^(?:```|~~~)")
 # A_20260905_2104_wjprxa_topic.md / R359_5ahimz_topic.md / DB_..._claim.md
 LANE_RE = re.compile(r"^(R\d+|[A-Z]{1,3})_")
 STAMP_RE = re.compile(r"(\d{8})_(\d{4})")
@@ -127,12 +134,22 @@ def collect(rounds_dir=ROUNDS):
             malformed.append((name, 0, "unreadable: %s" % exc.__class__.__name__, ""))
             continue
         lines = text.splitlines()
-        i = 0
+        i, in_fence, found_here = 0, False, 0
         while i < len(lines):
-            m = SCOREBOARD_RE.match(lines[i].strip())
+            stripped = lines[i].strip()
+            # A round file that DOCUMENTS the format quotes it inside a fence.
+            # pf-adversary R360 D7: without fence tracking the quoted template
+            # is reported as a malformed line and the page shows a red box
+            # naming a lane whose real line was perfect.
+            if FENCE_RE.match(stripped):
+                in_fence = not in_fence
+                i += 1
+                continue
+            m = None if in_fence else SCOREBOARD_RE.match(stripped)
             if not m:
                 i += 1
                 continue
+            found_here += 1
             lineno = i + 1
             # The rule says "one line", but every round file so far is written
             # in a hard-wrapping editor: measured 2026-09-05, six of the seven
@@ -145,7 +162,8 @@ def collect(rounds_dir=ROUNDS):
             i += 1
             while i < len(lines):
                 nxt = lines[i].strip()
-                if not nxt or nxt.startswith("#") or SCOREBOARD_RE.match(nxt):
+                if (not nxt or nxt.startswith("#") or nxt.startswith("---")
+                        or FENCE_RE.match(nxt) or SCOREBOARD_RE.match(nxt)):
                     break
                 body += " " + nxt
                 i += 1
@@ -166,25 +184,53 @@ def collect(rounds_dir=ROUNDS):
                 malformed.append((name, lineno,
                                   "only %d field(s), expected 3 (status|sentence|evidence)"
                                   % len(parts), body[:80]))
-            sentence = parts[1] if len(parts) > 1 else ""
-            evidence = " | ".join(parts[2:]) if len(parts) > 2 else "(no evidence field on the line)"
+            # A sentence may itself contain " | ".  The evidence is what the
+            # lane put LAST, so take the last field as evidence and keep the
+            # whole sentence, instead of cutting the claim in half and
+            # displaying its tail to the owner as proof (adversary R360 D9).
+            if len(parts) > 3:
+                sentence = " | ".join(parts[1:-1])
+                evidence = parts[-1]
+                malformed.append((name, lineno,
+                                  "%d fields; treated the LAST as evidence and "
+                                  "kept the rest as the sentence" % len(parts),
+                                  body[:80]))
+            else:
+                sentence = parts[1] if len(parts) > 1 else ""
+                evidence = parts[2] if len(parts) > 2 else "(no evidence field on the line)"
+            # An empty half is not a filled-in half.  A trailing pipe used to
+            # make len(parts)==3 with nothing after it, so an unevidenced DONE
+            # rendered green with a blank cell and no warning (adversary D3).
+            if not sentence.strip():
+                malformed.append((name, lineno, "sentence field is empty", body[:80]))
+            if not evidence.strip():
+                evidence = "(evidence field is empty)"
+                malformed.append((name, lineno, "evidence field is empty", body[:80]))
             rows.append([status, who_from_filename(name),
                          sentence.replace("\t", " "), evidence.replace("\t", " "), name])
+        # COMMON_LANE_ROUND says one line per round file.  Extra lines are not
+        # dropped - nothing here is ever dropped - but they ARE named, because
+        # the metric counts rows and extra sections would otherwise let a lane
+        # multiply its own row count (adversary R360 D6: chief held 3 of 8).
+        if found_here > 1:
+            malformed.append((name, 0, "%d SCOREBOARD lines in one round file "
+                              "(spec says one); all %d kept and counted"
+                              % (found_here, found_here), ""))
     order = commit_times([r[4] for r in rows])
     rows.sort(key=lambda r: (order.get(r[4], ""), r[4]), reverse=True)
     return rows, malformed, files_seen
 
 
-def read_manual(tsv=TSV):
+def read_manual(tsv=TSV, known_sources=()):
     """Hand-written rows survive regeneration; derived rows do not.
 
     A row is manual when its source column is exactly 'manual'.  Everything
     else in the file came from a round file and is rebuilt from that round
     file, so a stale derived row cannot outlive the round that wrote it.
     """
-    keep = []
+    keep, unknown = [], []
     if not os.path.exists(tsv):
-        return keep
+        return keep, unknown
     for line in open(tsv, encoding="utf-8"):
         line = line.rstrip("\n")
         if not line or line.startswith("#"):
@@ -192,7 +238,15 @@ def read_manual(tsv=TSV):
         p = line.split("\t")
         if len(p) >= 5 and p[4] == MANUAL and p[0] in STATUSES:
             keep.append(p[:5])
-    return keep
+        elif len(p) >= 5 and p[4] not in known_sources and p[0] in STATUSES:
+            # A hand-written row in a schema this tool did not write (the
+            # 14 seed rows in KA1A 20260905_2043 end in a DATE, not the word
+            # 'manual').  The old code dropped these silently: paste the
+            # owner's own seed rows, run the tool, watch 14 rows evaporate
+            # under a success message (adversary R360 D5).  Keep them and say
+            # so; losing the owner's board is worse than an odd column.
+            unknown.append(p[:5])
+    return keep, unknown
 
 
 def now_stamp():
@@ -291,15 +345,54 @@ def _self_test():
         put("DB_20260905_2104_6o6qnr_topic.md",
             "prose above\n\nSCOREBOARD: COMING | wrapped sentence\n"
             "second half of it | PR:\nserver#999\n\nnext paragraph\n")
+        # the four shapes pf-adversary R360 found the first version got wrong
+        put("GM_20260905_2110_pdcech_topic.md",
+            "## SCOREBOARD: COMING | heading-prefixed, real GM shape | PR #850\n")
+        put("UI_20260905_0001_aaaaaa_topic.md",
+            "```\nSCOREBOARD: <DONE|COMING|STUCK|NONE> | <s> | <ev>\n```\n"
+            "SCOREBOARD: DONE | real ui row | GT-2\n")
+        put("A_20260905_0002_bbbbbb_topic.md",
+            "SCOREBOARD: DONE | player can walk | and run | GT-3\n")
+        put("B_20260905_0003_cccccc_topic.md",
+            "SCOREBOARD: DONE | claim with a trailing pipe | \n")
+        put("Q_20260905_0004_dddddd_topic.md",
+            "SCOREBOARD: COMING | first | GT-4\n\nprose\n\n"
+            "SCOREBOARD: STUCK | second | GT-5\n")
         put("notes.txt", "SCOREBOARD: DONE | not a round file | x\n")  # ignored
         rows, malformed, seen = collect(rd)
 
         by_src = {r[4]: r for r in rows}
         cases = [
-            ("seven .md files seen, notes.txt ignored", seen, 7),
-            ("six rows kept (BANANA rejected)", len(rows), 6),
-            ("two malformed reported (missing evidence + bogus status)",
-             len(malformed), 2),
+            ("twelve .md files seen, notes.txt ignored", seen, 12),
+            ("twelve rows kept (BANANA rejected, 2 from one Q file)",
+             len(rows), 12),
+            ("a '## SCOREBOARD:' heading is collected, not dropped",
+             by_src["GM_20260905_2110_pdcech_topic.md"][0], "COMING"),
+            ("a SCOREBOARD template quoted inside a fence is not a row",
+             by_src["UI_20260905_0001_aaaaaa_topic.md"][2], "real ui row"),
+            ("a sentence containing ' | ' is kept whole",
+             by_src["A_20260905_0002_bbbbbb_topic.md"][2],
+             "player can walk | and run"),
+            ("...and the LAST field is the evidence",
+             by_src["A_20260905_0002_bbbbbb_topic.md"][3], "GT-3"),
+            ("a trailing pipe is an EMPTY evidence field, not a filled one",
+             by_src["B_20260905_0003_cccccc_topic.md"][3],
+             "(evidence field is empty)"),
+            ("two SCOREBOARD lines in one file are both kept",
+             sum(1 for r in rows if r[4] == "Q_20260905_0004_dddddd_topic.md"), 2),
+            ("...and that file is named in the malformed report",
+             any(m[0] == "Q_20260905_0004_dddddd_topic.md" and "one round file" in m[2]
+                 for m in malformed), True),
+            ("malformed report names every real problem and no false one",
+             sorted({m[0] for m in malformed}),
+             sorted({"CS_20260905_2113_danva2_topic.md",
+                     "GM_20260905_2100_zzzzzz_topic.md",
+                     "A_20260905_0002_bbbbbb_topic.md",
+                     "B_20260905_0003_cccccc_topic.md",
+                     "Q_20260905_0004_dddddd_topic.md"})),
+            ("the fence-quoting UI file is NOT accused",
+             any(m[0] == "UI_20260905_0001_aaaaaa_topic.md" for m in malformed),
+             False),
             ("a wrapped line keeps its sentence whole",
              by_src["DB_20260905_2104_6o6qnr_topic.md"][2],
              "wrapped sentence second half of it"),
@@ -331,13 +424,25 @@ def _self_test():
             "# header\n"
             "DONE\thand\tkept row\tGT-9\tmanual\n"
             "DONE\tstale\tdropped row\tGT-8\tR001_old_topic.md\n")
-        kept = read_manual(t)
+        kept, unk = read_manual(t, known_sources={"R001_old_topic.md"})
         cases.append(("only the manual row survives regeneration", len(kept), 1))
         cases.append(("and it is the right one", kept[0][2], "kept row"))
+        cases.append(("a derived row with a known source is not re-kept",
+                      len(unk), 0))
 
         # writing then re-reading keeps the manual row and no derived rows
         write_tsv(kept + rows, malformed, t)
-        cases.append(("round-trip: manual row still manual", len(read_manual(t)), 1))
+        cases.append(("round-trip: manual row still manual",
+                      len(read_manual(t, known_sources={r[4] for r in rows})[0]), 1))
+
+        # the owner's seed format ends in a DATE, not the word 'manual'
+        t2 = os.path.join(tmp, "seed.tsv")
+        open(t2, "w", encoding="utf-8").write(
+            "DONE\tseed row\tnote\tGT-7\t2026-08-29\n")
+        k2, u2 = read_manual(t2, known_sources=set())
+        cases.append(("a seed row in the owner's own format is NOT dropped",
+                      len(u2), 1))
+        cases.append(("and it is not silently promoted to 'manual'", len(k2), 0))
 
         # render must not crash and must not print NONE rows
         out = os.path.join(tmp, "p.html")
@@ -356,8 +461,8 @@ def _self_test():
     if failures:
         print("SELF-TEST RED: %d of %d cases failed." % (failures, ran))
         return 1
-    if ran != 19:
-        print("SELF-TEST RED: expected 19 cases, ran %d." % ran)
+    if ran != 30:
+        print("SELF-TEST RED: expected 30 cases, ran %d." % ran)
         return 1
     print("SELF-TEST PASS: %d cases." % ran)
     return 0
@@ -374,9 +479,14 @@ def main():
         return _self_test()
 
     rows, malformed, files_seen = collect()
-    manual = read_manual()
+    manual, unknown = read_manual(known_sources={r[4] for r in rows})
+    if unknown:
+        for u in unknown:
+            malformed.append((os.path.basename(TSV), 0,
+                              "kept a hand-written row whose source column is "
+                              "%r, not 'manual' and not a round file" % (u[4],), ""))
     none_count = sum(1 for r in rows if r[0] == "NONE")
-    allrows = manual + rows
+    allrows = manual + unknown + rows
 
     # A collector that finds nothing must not print success.  This is the way
     # the old scoreboard died: it kept rendering a page that no longer had any
@@ -392,7 +502,7 @@ def main():
              sum(1 for r in rows if r[0] == "DONE"),
              sum(1 for r in rows if r[0] == "COMING"),
              sum(1 for r in rows if r[0] == "STUCK"),
-             none_count, len(manual), len(malformed)))
+             none_count, len(manual) + len(unknown), len(malformed)))
     for name, lineno, reason, _raw in malformed:
         print("  MALFORMED %s:%s - %s" % (name, lineno, reason))
     if a.check:
