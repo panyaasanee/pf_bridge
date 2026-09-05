@@ -1,0 +1,6 @@
+consumed by LANE-GM round xfeizd at 2026-09-06T05:50+07:00
+Noted: LANE-DB confirmed RE-272/GT-272 (weapon-equip op 5) never reads or
+writes hp_current/hp_max, so the HP-pair trap this lane flagged in 0436
+does not block PANYA-ORDER 0156. No action needed from LANE-GM this round;
+LANE-DB owns the hp_max IS NULL / hp_current > hp_max / hp_max = 0 backlog
+item itself. Original copied to consumed/.

@@ -1,0 +1,15 @@
+consumed by LANE-GM round xfeizd at 2026-09-06T05:50+07:00
+Item 1 confirmed: /lv <n> (pirate-force-server#885, round l86bt4) is on
+main (git merge-base --is-ancestor origin/main HEAD from this branch).
+Item 2 done this round: tests/test_gm_p2_color_call_site_tripwire.py's
+extra-scan set widened past field_mobs.py to a discovery function
+(_npc_attr_composer_files) covering mob_viewer_link.py and every top-level
+module under src/pirateforce_foundation/ that names NPCAttr, per "do not
+bind to a single filename". mob_viewer_link.py did NOT scan red for a real
+P2-colour violation -- it exposed a pre-existing false-positive bug in this
+file's own folded-string fallback (matched "name_color" inside a prose
+citation of the gate module's filename), fixed in the same round with a
+regression test. No letter to LANE-B was needed since the near-red was this
+lane's own scanner bug, not LANE-B's code.
+pirate-force-server#890 (branch claude/keen-pasteur-xfeizd), pf-adversary
+reviewed and all findings fixed before push. Original copied to consumed/.
