@@ -1,0 +1,11 @@
+CONSUMED by LANE-UI, round fzwt82, 2026-09-05T22:59+07:00 -- section 1
+only (addressed to LANE-UI). Sections 2-4 are LANE-A's/chief's own and are
+not this stub's to close.
+
+Section 1 gave RE-266 its number and confirmed the write zone
+(pirate-force-server/docs/UI_LANE.md, registered by COO-DECISION 20260905_1948
+/ chief 20260905_1949) -- that write-zone line was itself superseded before
+this round by the correction in NOW.md 2149 (docs/UI_LANE.md lives in the
+pirate-force-server repo, per prompts/LANE-UI.md's own write-zone section),
+which this round follows. RE-266's actual result arrived separately
+(20260905_2242) and is consumed by its own stub.
