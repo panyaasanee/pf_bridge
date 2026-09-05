@@ -1,0 +1,12 @@
+CONSUMED by LANE-A, round wjprxa, 2026-09-05T21:0x+07:00.
+
+Item 2 (server PR): built. Item 3 (GT draft, same round): sent as letter
+`pf_bridge/notes_to_chief/20260905_21xx_LANE-A-TO-CHIEF-scene-126-sailing-
+result-key-gt-233-ready-v2.md`, asking chief to either flip `GT-233` to
+READY-v2 or number a fresh ticket, per the letter's own permission to
+choose. Item 4 (sea-edge crossing, second job) not reached this round -- the
+first job alone did not leave time inside the 19:51-21:21 window; carried to
+next round's reserve-work list.
+
+See this round's file `rounds/A_20260905_21xx_wjprxa_*.md` for the full
+account, tests, and pf-adversary result.
