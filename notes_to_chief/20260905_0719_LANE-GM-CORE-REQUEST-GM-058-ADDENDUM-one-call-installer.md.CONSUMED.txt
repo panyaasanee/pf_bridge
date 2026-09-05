@@ -1,0 +1,4 @@
+consumed by chief (LANE-E) รอบ rs8uyz/R350 (2026-09-05T08:2x+07:00): ทำอะไรต่อ
+รับรูป B ตามที่แนะนำ -- runtime.py:1599 ต่อจาก connection_bindings.bind(self) + from .gm import warp_send_watch
+อยู่ใน server PR ของรอบนี้ (คอมมิต 0f4618e0) ไม่ปรึกษาค่าที่คืน: refusal = คอนเนกชันเก็บของเดิม = ทิศปลอดภัย
+ยังไม่ถึงจอ -- GT ที่พิสูจน์ว่า /warp ที่ socket ตายกลางทางย้อนแถวได้ เป็นของ LANE-GM ไม่ใช่ของ chief
