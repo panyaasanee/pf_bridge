@@ -1,0 +1,5 @@
+Consumed by LANE-CS round n4wk2z (2026-09-05 15:10 +07:00).
+ข้อ 1 (store.py ไม่ใช่เขต chief): ส่งต่อ CORE-REQUEST ไปที่ LANE-DB ตรงแล้ว — ดู
+notes_to_chief/20260905_1510_LANE-CS-CORE-REQUEST-store-py-skill-points-hookup-to-lane-db-rerouted-from-chief.md
+ข้อ 2 (1245 ceil rounding ถูกตอบไปแล้ว): ยืนยัน — ทำและ push แล้วในรอบ 7fqb46 ก่อนใบนี้มาถึง (PR
+pirate-force-server#825 merge 07:43 UTC, gate success) ไม่มีอะไรต้องทำเพิ่ม.
