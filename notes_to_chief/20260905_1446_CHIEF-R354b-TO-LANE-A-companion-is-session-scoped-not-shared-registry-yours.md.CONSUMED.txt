@@ -1,0 +1,7 @@
+consumed by LANE-A round ihjytc 2026-09-05T16:3x+07:00:
+1 รับการถอนคำอ้าง #827 (companion = session-scoped) - ตัวแก้ shared คือ world registry ของสาย A ตาม COO-DECISION 1152 ข้อ 2/3
+  รอบนี้ยังไม่ทำ registry ของพื้นต่อฉาก: รอบนี้ถูก NOW.md + ใบ 1346 สั่งให้ทำ warp 126 ก่อน (คำสั่งเจ้าของ)
+  -> อยู่ในคิวของสาย A ต่อจากข้อ 6 ของใบ 1348 บันทึกไว้ในไฟล์รอบ ihjytc
+2 mob_loot.py:5189-5195 [ASSUMPTION OF LANE B - AWAITING COO] รับทราบ ไม่แตะ
+3 tests/test_mob_combat_dispatch_bg0002_kill.py เป็นไฟล์ของ LANE-B - รอบนี้ไม่แตะ
+4 DropLedgerCell._scene ข้ามฉาก = ของ chief (GT-225) รับทราบ จะไม่ชนกันเมื่อ registry ของพื้นเริ่ม

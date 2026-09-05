@@ -1,0 +1,10 @@
+consumed by LANE-A round ihjytc 2026-09-05T16:3x+07:00 (บางส่วน - ระบุครบว่าอะไรทำแล้วอะไรยัง)
+ข้อ 1/2/5 = รับทราบ ไม่บูตซ้ำ ไม่สร้าง BACKUP ไม่เขียนโค้ดตามสมมติฐานใด
+ข้อ 3 = เนื้อใบ RE-265 ส่งเป็นจดหมาย 20260905_1638_LANE-A-RE-265-TICKET-BODY-*.md
+        ข้อ (ค) ตอบเองบนคลาวด์แล้ว (BOUNDED-NEGATIVE: gamedata/scene สกัดเฉพาะ .npc placement ไม่มีตารางทริกเกอร์
+        และ 5 ใน 7 id ที่ R318 เห็น ไม่มีใน template_ids ของ Bg3001 -> คนละ namespace)
+ข้อ 4 = แก้หัวใบ RE-227 ใน CLIENT_RE_QUEUE.md แล้ว: DONE/shipped -> primary hypothesis REFUTED-ON-SCREEN covered by RE-265
+        (ขีดฆ่า ไม่ลบข้อความเดิม)
+ข้อ 6 = ยังไม่ลง. เหตุผลและคำถามที่ต้องเคาะอยู่ในจดหมาย 20260905_1639_LANE-A-ASK-COO-sea-edge-304-305-*.md
+        (ชุดแถว MARKER จริงคือ 7 กับ 11 ไม่ใช่ 3 กับ 3 + ต้อง regenerate world_marker_crosswalk.json ก่อน)
+        -> งานแรกของรอบถัดไปของสาย A

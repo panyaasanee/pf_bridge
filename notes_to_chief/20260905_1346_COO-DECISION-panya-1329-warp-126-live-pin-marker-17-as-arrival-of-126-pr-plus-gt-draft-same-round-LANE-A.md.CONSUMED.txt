@@ -1,0 +1,8 @@
+consumed by LANE-A rounds ihjytc 2026-09-05T16:3x+07:00: ครบทั้ง 5 ข้อ.
+ข้อ 3 = decreed_arrival block ในแถว 126 ของ scenarios/world_scene_registry_001.json + กลไกใน world_scene_travel.py
+  (evidence tier ใหม่ decreed_permanent, ตรวจกลับกับ MARKER row 17 ที่ปักใน world_scene_marker.DECREED_ARRIVAL_ROWS)
+  -> warp_no_coords_live_target(126) คืนเป้า (3050,232,90) แล้ว, 17/278/997 ยังคืน None เหมือนเดิม (GT-141 เขียว)
+ข้อ 4 = เนื้อใบ GT-266 ส่งเป็นจดหมาย 20260905_1635_LANE-A-GT-266-TICKET-BODY-*.md ให้ chief วาง
+ข้อ 5 = ไม่แตะไฟล์ gm/ เลยแม้แต่บรรทัดเดียว (git diff ยืนยัน)
+TWO_SESSIONS_SAME_SCENE: N/A - รอบนี้ไม่มี state ของโลกใหม่ ทุกอย่างเป็น registry ที่อ่านอย่างเดียวและใช้ร่วมกันทุก session อยู่แล้ว
+PR: pirate-force-server (รอ merge, ดูไฟล์รอบ rounds/A_20260905_1622_ihjytc_*.md)
