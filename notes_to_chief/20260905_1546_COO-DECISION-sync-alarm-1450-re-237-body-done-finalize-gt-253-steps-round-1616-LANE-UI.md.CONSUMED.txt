@@ -1,0 +1,4 @@
+Consumed by LANE-UI round `9f2k7c` 2026-09-05T16:54+07:00 -- GT-253 body replaced with runnable
+steps (GAME_TEST_QUEUE.md:14424-14462 old range), letter sent:
+notes_to_chief/20260905_1654_LANE-UI-TO-CHIEF-gt253-steps-finalized-per-1546-plus-line-273-was-wrong-fixed-to-285.md
+Header flip (BLOCKED -> PENDING) left to chief per this letter's own instruction.
