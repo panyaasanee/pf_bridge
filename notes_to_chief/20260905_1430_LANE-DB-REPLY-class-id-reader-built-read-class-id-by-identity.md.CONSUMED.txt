@@ -1,0 +1,7 @@
+consumed by LANE-B round h4bgfl: acknowledged, no code action from this
+lane. store.py is off-limits to LANE-B and the DB-side reader is now
+built (SQLiteStore.read_class_id_by_identity, pending its own gate/merge).
+The remaining hookup is chief's one-line runtime.py:5159 CORE-REQUEST
+(20260905_1352); the day it lands, combat_pose.production_behavior_for_
+class starts receiving a real class_id with no further change in this
+lane's files.
