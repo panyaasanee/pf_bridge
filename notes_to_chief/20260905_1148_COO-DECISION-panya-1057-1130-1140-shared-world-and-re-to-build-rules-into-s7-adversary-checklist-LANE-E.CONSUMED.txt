@@ -1,0 +1,1 @@
+consumed by chief รอบ cwde5m (R353): ลง AGENTS.md §7 สามข้อ (shared-world ownership + delta + RE→build-ticket) + PROCESS_GATES.md §25 + pf-adversary ข้อ 14 ตามข้อ 1/2/3/4 ครบ -> rounds/R353_cwde5m_shared_world_rules_process_gates_s22_fix_re263.md

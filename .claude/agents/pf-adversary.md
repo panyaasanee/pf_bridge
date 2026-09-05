@@ -96,6 +96,20 @@ Every one of these happened here. Check for each shape by name.
     read, or only the row/number that suits the claim? Open the cited file and read
     what it says about the number.**
 
+14. **World state that resets per session/connection instead of living per scene.**
+    MANDATORY CHECK (`COO-DECISION 20260905_1148`, `PANYA-DECISION 20260905_1057`/`1140`).
+    Scene state (mob roster/position, mob HP, corpses/respawn, ground drops+age) must
+    live in server-process memory shared by every session in the same scene — DB holds
+    only character/account state. A second session, or a relogin without a server
+    reboot, must see the same mob HP/position/corpses/ground drops the first session
+    left. **Ask: does this code key world state by `connection_id`/`session_id` instead
+    of `scene_id`? Would a relogin into the same scene see a freshly-initialized
+    world?** Paired delta rule: a single player's action must never make the client
+    delete/redraw the whole scene — only the diff. **Ask: does this path ever emit a
+    full-scene wipe/redraw triggered by one player's frame?** Round files that touch
+    this surface must carry a `TWO_SESSIONS_SAME_SCENE:` line (`PROCESS_GATES.md` §25)
+    — missing it is a defect on its own, independent of whether the code itself holds up.
+
 ## Method
 For each defect: **a concrete failure scenario** — inputs or state, then the wrong
 outcome. Not "this could be fragile". Rank by severity. Say plainly which defects you
