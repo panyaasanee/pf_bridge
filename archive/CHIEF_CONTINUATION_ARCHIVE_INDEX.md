@@ -42,3 +42,31 @@
 - R301(smrum3) 2026-09-02T09:2x+07:00 `GT-207` READY หลัง adversary หักล้างร่างแรก 16 ข้อ + จุด opt-in แรกของ preserve composer + เปิด `RE-206` -> rounds/R301_smrum3_gt205-landed-and-the-first-preserve-opt-in-site.md
 - R302(ogq686) 2026-09-02T11:4x+07:00 ปุ่ม UI-A ตอบ `BACK REFUSED` บนไวร์ (#563) + `TYPO REFUSED` + `GT-204` READY หลัง adversary หักล้างห้าข้อ -> rounds/R302_ogq686_uia_receipt_wired_gt204_ready_gt207_recheck7.md
 - R303(g7yvo2) 2026-09-02T13:2x+07:00 ต่อสายใบ v2 ที่จุด GM warp แล้วหน่วงเฟรมจนกว่า census ของฉากที่เข้าจะ commit (#572) + scene guard Columbus merge (#570) -> rounds/R303_g7yvo2_v2-boundary-frames-wired-at-the-warp-columbus-scene-guard-landed.md
+
+
+## ย้ายเพิ่มรอบ R360 (`supz66`) 2026-09-05 — ดัชนีรอบ R322 ถึง R341b
+> ย้ายคำต่อคำจาก `CHIEF_CONTINUATION.md` เพื่อให้ไฟล์เข้าเพดาน 30 KB (`PANYA-ORDER 20260905_2038` ข้อ 1 · `prompts/CHIEF.md` §17 ข้อ 9 "ดัชนี 20 รอบล่าสุด")
+> ไม่มีบรรทัดไหนถูกลบหรือย่อ
+
+- R322(l39ees) 2026-09-03T16:0x+07:00 ต่อสาย login-refusal console line + ปิด RE-138 แต่ pf-adversary จับได้ว่าการ์ดชั้นรูปของตัวเองผิด (แก้เป็นชั้นค่า) -> rounds/R322_l39ees_the-refusal-line-names-the-login-and-the-rule-i-wrote-caught-me-an-hour-later.md
+- R324(gjyxt5) 2026-09-03T18:0x+07:00 พบมอบ AI tick ไม่เคยรันจริงราวสองวัน (ชื่อ resolver ผิด) แก้แล้วแต่ยังไม่มีไบต์ออกถึงไคลเอนต์ -> rounds/R324_gjyxt5_the-tick-that-never-ran-and-the-card-that-could-not-see-it.md
+- R326(pk14rf) 2026-09-03T20:1x+07:00 roster=0 ชั้นที่หนึ่งปิด (re-sync register/ledger ทุกฉาก) + ตัดสิน 6 GT ticket ตาม PANYA 1934 -> rounds/R326_pk14rf_the-register-follows-the-player-and-four-tickets-stop-costing-a-boot.md
+- R327(wvsamp) 2026-09-03T21:2x+07:00 CORE-REQUEST-GM-051/052 ต่อสาย (GM_WARP_POSITION_CONFIRMED ไม่โกหก + ปิดช่องวาประยะศูนย์) -> rounds/R327_wvsamp_the-confirm-token-stops-lying-about-itself-and-a-warp-that-moves-nobody-stops-buying-grace.md
+- R328(wscjrq) 2026-09-03T23:1x+07:00 automerge-marker guard ลง + client_confirmed_scene ตอบ GM-051 ข้อ 3 -> rounds/R328_wscjrq_marker_guard_and_the_scene_the_client_actually_confirmed.md
+- R329(233yho) 2026-09-04T00:2x+07:00 คลิกที่ถูกปฏิเสธส่งพื้นที่ B ประกอบไว้แทนทิ้ง + AGENTS.md §7 กฎเวลา pf-adversary -> rounds/R329_233yho_the-refusal-that-owed-a-floor-and-the-scene-the-cell-never-learned.md
+- R330(dwvbpm) 2026-09-04T02:1x+07:00 จุดอ่านค่าฟิลด์สด lane_hooks.current_named_attr_values ลง (4/26 แถวมีค่าจริง) + GT-223 ปลดบล็อก + GT-225 เปิด -> rounds/R330_dwvbpm_live-named-attr-read-point-gt223-unblocked-gt225-opened.md
+- R330b(dwvbpm) 2026-09-04T03:0x+07:00 pf-adversary จับได้ 3 ข้อของ R330 (class_id เดา/source ผิดคน/เทส grep หลอกได้) แก้ครบใน server#695 -> rounds/R330b_dwvbpm_adversary-verdict-and-the-fixes-it-forced.md
+- R331(spo2u9) 2026-09-04T03:3x+07:00 ลงทะเบียน LANE-CS/LANE-UI + เขียน CHARTER-02 ใหม่ไม่มีคอลัมน์กำหนด (เอกสารล้วน) -> rounds/R331_spo2u9_lane-cs-lane-ui-registered-charter02-rewritten-no-deadline-column.md
+- R330c(dwvbpm) 2026-09-04T04:0x+07:00 pf-adversary รอบสองจับได้ว่าตัวแก้ของ R330b สร้างของพังใหม่สี่ข้อ (N1-N4) ซ่อมบน main แล้ว -> rounds/R330c_dwvbpm_the-second-adversary-pass-caught-a-regression-i-shipped.md
+- R332(3kwnnr) 2026-09-04T05:2x+07:00 ต่อสองจุดเสียบ class_id (สร้างตัวละคร + ล็อกอิน) เปิด GT-226 ADVERSARY_PENDING -> rounds/R332_3kwnnr_class-id-create-and-login-wiring.md
+- R333(zsctq7) 2026-09-04T06:2x+07:00 ปิดผล adversary ของ #705 (D1/D2) merged เป็น #709 + ต่อจุดยิง TriggerVital 0x1FB2 -> rounds/R333_zsctq7_adversary-d1-d2-fix-and-trigger-vital-call-site.md
+- R334(8nh6q5) 2026-09-04T08:2x+07:00 ตั้งเลข RE-229 + RE-227=PARTIAL + จุดเรียก NavigationEx_EnterInstanceVital ล่วงหน้าหนึ่งรอบ -> rounds/R334_8nh6q5_re-229-numbered-re-227-status-and-the-enterinstance-call-site.md
+- R335(2vfbtf) 2026-09-04T09:2x+07:00 ตรวจพบ 6 bad-merge ยืนยันแล้ว + แก้ gate-windows ให้ตัดสินจาก pull_request run เท่านั้น + claim-guard + RE-232 -> rounds/R335_2vfbtf_push-run-merge-race-audit-six-confirmed-plus-claim-guard-agents-wording-re232-dispatch-visibility.md
+- R337(9vec2s) 2026-09-04T12:2x+07:00 GM-054 scene read point + login-attr-bytes จุดอ่านที่สอง + LANE-B census actor_identities + LANE-A click-vital lengths, push server#734 -> rounds/R337_9vec2s_gm054-login-bytes-actor-identities-click-vitals.md
+- R338 2026-09-04T14:09+07:00 wjqykr: reaper PF_STALE_MINUTES 45->75 + PROCESS_GATES §22 + เลขใบ GT-233/RE-234..239 + GT-228 PASS -> rounds/R338_wjqykr_panya-reaper-75-plus-process-gates-s22-plus-eight-ticket-numbers.md
+- R338b 2026-09-04T14:46+07:00 wjqykr: GATE_UNVERIFIED #739 -- รอบถัดไปเปิดดูก่อนงานใหม่ (server#739 ถูกจัดการแล้วในรอบ R339) -> rounds/R338_wjqykr_panya-reaper-75-plus-process-gates-s22-plus-eight-ticket-numbers.md
+- R339(cool-johnson-7qcsux) 2026-09-04T15:22+07:00 GT-184/186 หัวคิว BLOCKED->READY-FOR-ATTENDED + LANE-UI CORE-REQUEST 1120 แปดคลาส dispatch, push server#743 -> rounds/R339_cool-johnson-7qcsux_lane-ui-1120-dispatch-plus-gt184-186-header-fix-plus-sync-alarm-triage.md
+- R340 2026-09-04 16:52-18:3x+07:00 RE-241 numbered + แก้การ์ด quest/shop ให้อ่าน code token จริง + GT-242 เปิด, PR server#748/bridge#1169 -- 🔴 server#748 ปิดเกตแดงภายหลัง ดู R340b และ R341(ub8svt) -> rounds/R340_oi2r2n_re241_guard_regex_gt242_and_the_logout_label.md
+- R340b 2026-09-04 17:51+07:00 oi2r2n: GATE_UNVERIFIED #748 (เกตยังไม่ตัดสินที่เพดาน 10 นาที) -- ผลจริงคือเกตแดง ดู R341(ub8svt) ที่กู้และแก้ -> rounds/R340_oi2r2n_re241_guard_regex_gt242_and_the_logout_label.md
+- R341(ub8svt) 2026-09-04T18:2x-18:4x+07:00 กู้ #748 gate-red (cherry-pick 4fc2b213 + แก้ f-string/3.14 tokenizer gap ที่การ์ด quest/shop มองไม่เห็นบน 3.11), push server#754 ADVERSARY_PENDING + เปิด GT-244 ปิด GT-172 F-3 + รับค่า GM 0435 ปิด SYNC-ALARM 1654 + CHIEF_CONTINUATION 75.6KB->30KB -> rounds/R341_ub8svt_gate_red_recovery_gt172_f3_gm0435_and_chief_continuation_housekeeping.md
+- R341b(ub8svt) 2026-09-04T18:53+07:00 GATE_UNVERIFIED #754 (เกตยังไม่ตัดสินที่เพดาน 10 นาที) -- รอบถัดไปของ LANE-E เปิด #754 ดูก่อนงานใหม่ (รวมลำดับที่ COO วางไว้ใน 1845) -> rounds/R341b_ub8svt_gate_unverified_754.md
