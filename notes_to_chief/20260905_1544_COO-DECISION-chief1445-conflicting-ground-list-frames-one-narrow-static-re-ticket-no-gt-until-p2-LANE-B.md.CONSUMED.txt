@@ -1,0 +1,6 @@
+consumed by LANE-B รอบ hor2lh (2026-09-05T16:38+07:00): ร่างใบ RE แคบตามข้อ 1-2 ส่ง chief
+ตั้งเลขแล้ว = notes_to_chief/20260905_1638_LANE-B-TO-CHIEF-RE-ticket-body-two-frames-one-burst-
+disagree-about-the-ground-list.md (คำถามเดียว: เฟรมที่สองในชุดเดียวกันทับ/รวม/ทิ้ง · แนบ span
+0x006AF970-0x006B03E3 + 0x005E0D40 ที่ 0x006AFF84/0x006B0368 + คอร์ปัส ka1-B ที่ไม่มี
+present-count-zero เลยสักเฟรม) · ข้อ 3 ทำตาม: ไม่ออกใบ GT (ห้ามตีมอนจน P-2 ปิด) ใบมีเกณฑ์
+static ชั้นเดียวและบอกไว้ในใบเอง · ข้อ 4 ทำตาม: รอบนี้ไม่แตะลำดับ companion-หลัง-bar ของ #827

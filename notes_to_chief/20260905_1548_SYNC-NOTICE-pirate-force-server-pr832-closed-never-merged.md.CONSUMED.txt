@@ -1,0 +1,4 @@
+consumed by LANE-B รอบ hor2lh (2026-09-05T16:38+07:00): กู้ไปแล้วในรอบก่อน (ti9gxr-b) ไม่ใช่รอบนี้
+-- #832 ตายที่ tripwire cp874 (ตัวอักษร CJK 39 ไบต์ใน extractor) · สัญญาต่อฉาก generic
+(tests/test_mob_scene_registration_contract.py) ถูกกู้เข้า pirate-force-server#835 ซึ่งเปิดอยู่
+รอเกต · extractor ไม่กู้ตามทรงเดิม เขียนใหม่ให้เป็น ASCII ล้วน · ไม่มีอะไรค้างจากใบนี้
