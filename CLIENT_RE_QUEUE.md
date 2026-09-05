@@ -1734,3 +1734,85 @@ ATTENDED: ผลที่ส่งกลับ = ชื่อคอลัมน�
 (ว่าง)
 
 > 🔴 **ห้ามสายอื่นใช้เลข `RE-266`** · numbering: `RE-266` = 0 hit ทั้งสามที่ (`CLIENT_RE_QUEUE.md` · `GAME_TEST_QUEUE.md` · `archive/*QUEUE*ARCHIVE*`) ก่อนตั้ง **[วัดแล้ว รอบ `rz1fxh`/R358]** · ใบนี้มีหัวข้อ "ค้นแล้วก่อนเปิดใบ" ตาม `AGENTS.md` §98 ตามที่ RE runner ท้วงใน `1932`
+
+## RE-272 ITEMOPERATEVITALREQ-EQUIP-FROM-BAG-RESPONSE-001  [🔴 **OPEN** · 🔺 `[NEEDS-ATTENDED-CAPTURE]` · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-DB** · ตั้งเลขโดย chief (LANE-E) รอบ `ss9u08`/R363 ตาม `PANYA-ORDER 20260906_0156` + `COO-DECISION 20260906_0345` · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_0404_LANE-DB-TO-CHIEF-order-0156-arm-b-re-draft-and-gt-draft-ready-for-numbering.md` คำต่อคำ · ใบ GT คู่ของมัน = **`GT-272`** (พ่วงบูตเดียวกัน)]
+
+**ทำไมต้องมีใบนี้**: `PANYA-ORDER 20260906_0156` ("เสร็จ" คำต่อคำ = เปิดกระเป๋า → กดสวม → ช่องอุปกรณ์เปลี่ยนบนจอ → relog → ยังสวม) ต้องการทาง (ข) แบบโต้ตอบจริง — ฝั่งคำขอรู้ schema ครบแล้ว (ตารางล่าง) แต่ฝั่งตอบกลับไม่เคยมีใครวัด
+
+## ค้นแล้วก่อนเปิดใบ (`AGENTS.md` §7 grep-before-RE · LANE-DB รายงานใน `0404`)
+**เจอ**: `PF_PROTOCOL_REGISTRY.tsv:46` `ItemOperateVitalReq` VA ครบทุกช่อง · `PF_SERIALIZER_FIELDS.tsv:763-768` W และ R มีสามฟีลด์พร้อม `span_sha256` · `PF_FIELD_VALIDATION.tsv:90-91` **W = VALIDATED (8 capture instances) · R = NOT_OBSERVED (0)** — ยืนยันตรงกับคำถามใบนี้ · `PF_PROTOCOL_PRIORITY.tsv:46` serializer_status = CLOSED (เฉพาะฝั่งคำขอ)
+**ไม่เจอ**: ไม่มีแถว field-level ของ `ItemBagAttr_Equiped`/`CollectionBagAttr` (มีแค่ VA ระดับคลาสที่ `PF_PROTOCOL_REGISTRY.tsv:12-13`, ทั้งคู่ `direct_call_not_proven_serializer`) · `gamedata/` ไม่มีแถวเกี่ยวข้อง (คำถามพฤติกรรม runtime ไม่ใช่ตารางข้อมูลเกม) · `archive/` และ `notes_to_chief/consumed/` grep `ItemOperateVitalReq|0x4BED|CollectionBagAttr|ItemBagAttr_Equiped` = ไม่เจอใบเก่าตอบฝั่งตอบกลับมาก่อน
+
+## สิ่งที่รู้แล้ว (static — `current/pf_login_game_server_v141.py:101-113,2481-2486,3869-3903`, `span_sha256` ที่ `PF_SERIALIZER_FIELDS.tsv:763-768`)
+| ทิศทาง | offset | ความหมาย | ค่าที่พิสูจน์แล้ว | ที่มา |
+|---|---|---|---|---|
+| W (request) | `+0x14` | operation byte | `5` = equip-from-bag (producer `0x59F800`) | `v141.py:2485`, `PF_SERIALIZER_FIELDS.tsv:763` |
+| W (request) | `+0x18` | value32 (มาสก์แม็ปจาก item control) | `{8, 16}` เลือกจาก `0x4000` row mask ผ่าน `0x5A6814-0x5A683F`/`0x448EC0(0x10)` | `v141.py:2486,3869-3878`, `PF_SERIALIZER_FIELDS.tsv:764` |
+| W (request) | `+0x20/+0x24` | item identity (qword) | recovered ผ่าน `0x5A6879/0x4DF1C0` | `v141.py:107-113`, `PF_SERIALIZER_FIELDS.tsv:765` |
+| R (response) | -- | **ไม่มี** | V123 journal-only: "emits no response or inventory mutation" | `v141.py:113` |
+
+🔴 นี่คือ capture ของ V123 (ตัวจับภาพทดสอบ) ไม่ใช่โค้ดโปรดัคชัน — ใบนี้ไม่ขอแก้/อ้าง v141 เป็นโค้ดจริง ขอแค่ citation ของ schema ที่มันบันทึกไว้
+
+## คำถาม
+กดสวมอาวุธจากกระเป๋าจริงหนึ่งครั้ง (เฟรม `ItemOperateVitalReq` `0x4BED` operation `5`) เซิร์ฟเวอร์ต้นฉบับตอบอะไรกลับ และ `ItemBagAttr_Equiped`/`CollectionBagAttr` เปลี่ยนยังไง
+
+## เกณฑ์ปิดใบ (ชั้น static เท่านั้น — ชั้น client-observable อยู่ในใบ `GT-272` คู่กัน)
+ปิดได้เมื่อบันทึก: (ก) มี/ไม่มีเฟรมตอบกลับ (ข) ถ้ามี ระบุ opcode/offset ที่เปลี่ยน `ItemBagAttr_Equiped`/`CollectionBagAttr` (ค) StartGame ครั้งถัดไปของตัวละครเดียวกันส่งอะไรสำหรับช่องที่เพิ่งสวม — **ผลลบก็ปิดได้** ("ไม่มีเฟรมตอบ ไคลเอนต์อัปเดตเองฝั่งเดียว" ใช้ได้) ห้ามเดาไบต์ที่ยังไม่เห็น (`PANYA-ORDER 0156` ข้อ 2)
+
+## ใบนี้ไม่ขอ
+ไม่ขอยืนยันซ้ำฝั่งคำขอ (ปิดแล้วจาก static ตารางบน) · ไม่ขอทดลองสวมมากกว่าหนึ่งครั้งต่อรอบ (กันข้อมูลกำกวมจากหลายเฟรมพร้อมกัน) · ไม่ขอเดาความหมายมาสก์ `8`/`16` เกินกว่า comment ของโค้ด (แค่ "normal/alternate" ไม่ใช่ `n_SLOT_RHAND`/`LHAND` ที่ยังไม่มีใครเทียบ namespace)
+
+## nonclaims
+1. ไม่อ้างว่า `8`/`16` ตรงกับ `n_SLOT_RHAND`(bit10)/`n_SLOT_LHAND` ของ `CHARCREATE_CLASS` — คนละ namespace ยังไม่มีใครเทียบ
+2. ไม่อ้างว่า V123 journal-only เคยรันบนเซิร์ฟเวอร์โปรดัคชัน — เป็นเครื่องมือทดสอบ static ใน `v141.py`
+3. ไม่อ้างว่าฝั่งตอบกลับ "ไม่มีแน่นอน" — แค่ว่า **ไม่เคยมีใครวัด** (`NOT_OBSERVED`)
+
+ATTENDED: บูตปกติ ไม่มีธง ตัวละคร Gladiator (ซีด `migrations/003_character_inventory.sql` มี template `2200002` slot 3 ให้แล้ว) เปิดกระเป๋า กดสวมอาวุธช่องนั้น **หนึ่งครั้ง**
+ATTENDED: จับแพ็กเก็ตทั้งขาเข้า/ขาออกช่วง ±5 วินาทีรอบการกด บันทึกทุกเฟรมที่ผ่าน ไม่กรองก่อน
+ATTENDED: ถ่ายภาพช่องอุปกรณ์/กระเป๋าก่อนกดและหลังกด (สองภาพ)
+ATTENDED: ผ่าน = จับได้อย่างน้อยหนึ่งคู่คำขอ `0x4BED` op `5` + สิ่งที่เกิดขึ้นถัดจากนั้น (มี/ไม่มีเฟรมตอบ, ช่องอุปกรณ์เปลี่ยนบนจอหรือไม่)
+ATTENDED: ไม่ผ่าน = กดไม่ติด/ไม่เห็นเฟรม `0x4BED` เลย (รายงานตามกติกาคลิกไม่ติด 3 ครั้งของ `AGENTS.md` §8)
+
+### result:
+(ว่าง)
+
+> 🔴 **ห้ามสายอื่นใช้เลข `RE-272`** · numbering: คำสั่งนับเลขของบ้าน คืน **271** (จาก `RE-271` ที่ LANE-CS อ้างถึงใน `GT-243` หัวใบ รอบ `88ej1z`, ยังไม่ลงเนื้อใบเต็ม) ⇒ เลขว่างตัวถัดไปคือ **272** [วัดแล้ว รอบ `ss9u08`/R363] · 🔴 chief แก้คำผิดของตัวเอง: จดหมาย `20260906_0350_CHIEF-REPLY-*` ของรอบเดียวกันเขียนว่า "จอง GT-271" ให้ LANE-B/LANE-CS **ก่อน**รู้ว่า `RE-271` ถูกอ้างไปแล้ว — เป็นการฝ่าฝืนกฎ ① ของไฟล์นี้เอง (ห้ามจองเลขล่วงหน้า) ที่ chief ทำเอง แก้ในจดหมาย `20260906_0430_CHIEF-SELFCORRECTION-*` (LANE-B/LANE-CS ต้องรันคำสั่งนับสดเองตอนเปิดใบจริง ไม่ใช้เลข 271 ที่เคยเสนอ)
+
+---
+
+## RE-273 TRIGGER-ID-TO-LUA-SCRIPT-FILE-MAPPING-001  [🔴 **OPEN** · 🔺 `[STATIC-ON-BRIDGE]` เป็นเส้นทางแรก และ `[NEEDS-ATTENDED-CAPTURE]` เป็นเส้นทางที่สอง (สองเส้นทาง หนึ่งใบ ตาม `COO-DECISION 20260906_0146` ข้อ 2) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-Q** · ตั้งเลขโดย chief (LANE-E) รอบ `xcbnbn`/R364 ตาม `COO-DECISION 20260906_0256` ข้อ 1 · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_0155_LANE-Q-RE-TICKET-trigger-id-to-lua-file-mapping.md` คำต่อคำ · **ตัวบล็อกเดียวที่เหลือของเกณฑ์ charter สาย Q** ("ผู้เทสแล่นเรือชนทริกเกอร์แล้วสคริปต์ทำงาน")]
+
+**คำถามของใบ**: อะไรคือตาราง/เส้นทางโค้ดที่แม็ป trigger id ของเฟรม `TriggerVital` (`0x1FB2`) ไปเป็นไฟล์ `.lua` ที่ไคลเอนต์ต้นฉบับรันสำหรับทริกเกอร์นั้น · มีสคริปต์ทริกเกอร์ที่ ship มา 309 ไฟล์ (`gamedata/lua/t_*.lua`) แต่ไม่มีสิ่งที่ commit ไว้ที่ไหนบอกว่า id ไหนยิงไฟล์ไหน · `lua_api/trigger.py` (state machine 5/17 real รอบ `456vso`) พร้อมถูกเรียกแล้ว ขาดแค่เส้นทาง dispatch สดที่ป้อน trigger id จริงให้มัน
+
+### ค้นแล้ว (รอบ `4jsydv` ยืนยันซ้ำรอบ `vqng2z`) — เริ่มต่อจากนี้ ห้าม grep ซ้ำ
+- `gamedata/tables/`: ไม่มีคอลัมน์ไหนตรง `\.lua|ScriptStart|script_name|s_Script` เลย · `CONSTDATA_TH__Trigger.tsv` มีแค่ `n_ID`/voice/`n_MESSAGE_TYPE` ไม่มีคอลัมน์ชื่อสคริปต์
+- `gamedata/scene/*/*.placements.tsv`: ตรวจแถวหัวแล้ว ไม่มีคอลัมน์ชื่อสคริปต์
+- `external/`: มีแค่ `PF_SERIALIZER_FIELDS.tsv` (layout ของเฟรม ไม่ใช่ตาราง id->file)
+- `archive/` และ `notes_to_chief/consumed/`: ไม่เจอ
+- **ชื่อไฟล์สคริปต์ไม่ได้เข้ารหัส id ในตัวเอง** — `t_nex_t6.lua` ไม่ได้แปลว่า "ทริกเกอร์ 6 ในฉาก nex" (อ่านซอร์สแล้ว: `Var1..Var6` ของมันคือทริกเกอร์**อื่น**หกตัวที่มันรออยู่ ไม่เกี่ยวกับชื่อตัวเอง)
+- **grep ที่ห้า** `notes_to_chief/reference_codex_attr/` — chief ตรวจเองรอบ `xcbnbn`: `grep -rilE 'trigger.*lua|script_name|s_Script'` = 0 hit (ที่นี้เป็นตาราง ActorAttr ต่อคลาส ไม่ใช่ตารางสคริปต์)
+
+### สองเส้นทาง หนึ่งใบ (`COO-DECISION 20260906_0146` ข้อ 2)
+1. **`[STATIC-ON-BRIDGE]` ก่อน**: `pf-static-re` ค้น artifact ที่ commit แล้วซึ่งถอดมาจากไคลเอนต์ หาอย่างใดอย่างหนึ่ง (ก) ไฟล์ `.scn` ที่ `*.placements.tsv` เป็นเพียงการถอดบางส่วนของมัน ถ้ามีอยู่ในรีโป หรือ (ข) ตาราง lookup resource-path ในไบนารีใดก็ตามที่ disassemble ไว้แล้วใต้ `external/`/`archive/` — เซสชันคลาวด์ grep เองแล้วไม่เจอตามข้างบน pass ที่ลึกกว่านั้นต้องให้ `pf-static-re` รันข้างสำเนาไคลเอนต์ของสะพาน (`GameClient\` read-only)
+2. **`[NEEDS-ATTENDED-CAPTURE]` ถ้า (1) ว่าง**: RE runner ทำ static disassembly pass บนอิมเมจไคลเอนต์จริงของสะพาน หาตาราง/ฟังก์ชัน lookup id -> resource path รูปเดียวกับ `RE-263`/`RE-266`
+
+### `ATTENDED:` (ห้าบรรทัดพอดี ตาม `COO-DECISION 20260906_0146` ข้อ 3)
+ATTENDED: แล่นเรือไปที่ทริกเกอร์ของ Prison Exile Island id `153` (ฉาก/พิกัดเดียวกับที่ `GT-233` บูตเข้าไปอยู่แล้ว) แล้วจับ log เครือข่ายฝั่งไคลเอนต์ ณ วินาทีที่ไปถึง
+ATTENDED: ใน capture อ่านค่าของ `TriggerVital` (`0x1FB2`) tag `0x0F` (ฟิลด์ที่ `RE-234`/รอบ `ihjytc` พิสูจน์แล้วว่าถือ trigger id) คู่กับสิ่งที่ debug/log ของไคลเอนต์พิมพ์ใน tick เดียวกัน — ชื่อไฟล์สคริปต์หรือ resource path ถ้ามันพิมพ์เลย
+ATTENDED: ผ่าน = จับคู่ trigger id (ค่าของ `0x1FB2` tag `0x0F`) กับชื่อไฟล์สคริปต์หนึ่งชื่อจาก capture เดียวกันได้อย่างน้อยหนึ่งคู่
+ATTENDED: ไม่ผ่าน (ยังมีค่า) = ยืนยันว่าไม่มี log ฝั่งไคลเอนต์ที่บอกชื่อไฟล์สคริปต์ที่ verbosity ปกติ = บีบเส้นทาง 2 ให้เหลือ binary RE ล้วนไม่มีทางลัด
+ATTENDED: บูต = บูตไคลเอนต์ปกติเข้าฉากแล่นเรือ M2 ที่อยู่ในทรี `GT-233` แล้ว ไม่มีธง/env พิเศษ (เป็น pass สังเกตการณ์บนทริกเกอร์ที่ไปถึงได้อยู่แล้ว ไม่ใช่เส้นทางโค้ดใหม่)
+
+### เกณฑ์ปิดใบ
+ปิดได้เมื่อตอบข้อใดข้อหนึ่ง: (ก) ชี้ตาราง/ฟังก์ชันที่แม็ป id -> ไฟล์ พร้อม VA/แถวอ้างอิง หรือ (ข) **BOUNDED-NEGATIVE**: ทั้งสองเส้นทางว่าง = การแม็ปอยู่ในโค้ดไคลเอนต์ที่ยังไม่มี disassembly ⇒ ขั้นถัดไปของ LANE-Q คือ CORE-REQUEST ขอ hook สังเกตการณ์ฝั่งเซิร์ฟเวอร์ (log trigger id ที่ไคลเอนต์ส่งจริงต่อฉาก) **ไม่ใช่การถอยของสิ่งที่สร้างไปแล้ว**
+
+### ใบนี้ไม่ขอ / nonclaims
+1. ไม่อ้างว่าการแม็ปนี้ไม่มีในไคลเอนต์ — อ้างแค่ว่าไม่มีในสิ่งที่ commit ไว้ในรีโปนี้ (หลักฐาน grep ข้างบน)
+2. ไม่อ้างว่า capture `ATTENDED:` จำเป็นเหนือเส้นทาง 1 — เป็น fallback ที่ระบุชื่อไว้ถ้า static RE บนสำเนาไคลเอนต์ของสะพานว่าง
+3. ไม่อ้างว่า `0x1FB2` tag `0x0F` เป็นฟิลด์**เดียว**ที่เกี่ยวในเฟรม — เป็นแค่ฟิลด์เดียวที่งาน RE ก่อนหน้า (`RE-234`) พิสูจน์แล้วว่าถือ trigger id
+
+### result:
+(ว่าง)
+
+> 🔴 **ห้ามสายอื่นใช้เลข `RE-273`** · numbering: คำสั่งนับเลขของบ้าน (ข้อ ② หัวไฟล์นี้) รันสดรอบ `xcbnbn`/R364 คืน **272** ⇒ เลขว่างตัวถัดไปคือ **273** [วัดแล้ว รอบนี้] · ตรวจ 0 hit ของ `GT-273`/`RE-273` ทั้งสามที่ (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/*QUEUE*ARCHIVE*.md`) ก่อนวาง
+> 🔴 **ใบ GT คู่ของมันยังไม่มี และยังไม่ควรมี** — ใบนี้เป็นคำถาม static เส้นทางแรก ยังไม่มีสิ่งที่ผู้เทสจะเห็นบนจอจนกว่าจะรู้การแม็ป · เมื่อใบนี้ตอบแล้ว LANE-Q เปิดใบสร้าง + ใบ GT ในรอบเดียวกัน หรือเขียน `NO_FEATURE_WAITING:` (`COO-DECISION 20260906_0146` ข้อ 5)

@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ xcbnbn/R364: ตั้งเลขเป็น RE-273 วางลง CLIENT_RE_QUEUE.md คำต่อคำ + เติมผล grep ที่ห้า (reference_codex_attr/ = 0 hit, chief รันเอง) · taglint = RE runner เลือกใบได้

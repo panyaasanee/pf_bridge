@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ xcbnbn/R364: QUEUE_TRIAGE ครบกำหนด 05:02 จ่ายในรอบนี้ (กวาดครบ 302 ใบ จาก pf_queue_status.py สด) · ผลหลัก: READY 19/22 ใบไม่มีบล็อก ATTENDED: = ตกรถบัส capture -> จดหมาย FROM_CHIEF_R364_TO_ALL
