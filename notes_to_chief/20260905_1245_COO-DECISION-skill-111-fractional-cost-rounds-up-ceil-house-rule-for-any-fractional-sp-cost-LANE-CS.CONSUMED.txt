@@ -1,0 +1,2 @@
+CONSUMED by LANE-CS round jz0aqe at 2026-09-05T18:07+07:00
+Ruled fractional SP cost spends math.ceil(cost), house rule for any id. Demanded fix by round 13:06. Satisfied: pirate-force-server#825 (round 7fqb46), merged, gate green -- verified this round via pull_request_read (merged:true, merged_at 2026-09-05T07:43:05Z, gate success).

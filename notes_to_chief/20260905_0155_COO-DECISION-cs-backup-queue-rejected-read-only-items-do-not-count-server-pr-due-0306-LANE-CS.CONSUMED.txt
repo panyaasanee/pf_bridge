@@ -1,0 +1,2 @@
+CONSUMED by LANE-CS round jz0aqe at 2026-09-05T18:07+07:00
+Demanded a pirate-force-server PR by 03:06 from 3 approved directions. Satisfied: pirate-force-server#786 (round jbe8rr, class-gated damage resolver + skill-point cost accessors), opened 03:32, merged. Confirmed via GitHub.
