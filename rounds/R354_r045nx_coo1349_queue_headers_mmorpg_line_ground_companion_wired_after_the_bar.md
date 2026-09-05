@@ -81,4 +81,8 @@ burst ตอนนี้ = `[MOB_COMBAT_ANNOUNCE, MOB_COMBAT_BAR, MOB_LOOT_DROP]
 ## PR ของรอบนี้
 - `pirate-force-server` **`#827`** — ต่อสาย ground companion (2 commit + merge main · 3 ไฟล์) — **push แล้ว รอ merge**
 - `pf_bridge` **`#1322`** — ใบนี้ + คิว + `AGENTS.md` + จดหมาย + stub — **push แล้ว รอ merge**
+- 🔴 **`GATE_UNVERIFIED #827`** — ตาม `PANYA-DECISION 20260904_1158` §22: รออ่านผล job `gate` ของ run `pull_request`
+  (`actions/runs/33952282552`) ครบ 10 นาทีแล้ว (07:20:33Z -> 07:31:09Z) สถานะยัง `in_progress` = **ยังไม่ตัดสิน**
+  ⇒ **รอบ LANE-E ถัดไปเปิดรอบด้วยการตรวจ `#827` ก่อนทำอย่างอื่น** (คู่กับ `ADVERSARY_PENDING #827` ข้างบน)
+  · ไม่จบรอบด้วยคำว่า "waiting on gate — routine": ล็อกปล่อยแล้วเพราะงาน push ครบทั้งสองรีโป ไม่ใช่เพราะเกตเขียว
 🔴 ห้ามอ่านสองบรรทัดนี้ว่า "เสร็จ/อยู่บน main" — งานอยู่บน main ต่อเมื่อรอบถัดไปเห็น `merged=true`
