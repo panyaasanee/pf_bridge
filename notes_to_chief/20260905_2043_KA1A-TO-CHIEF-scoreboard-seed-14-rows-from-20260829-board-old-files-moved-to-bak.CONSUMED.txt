@@ -1,0 +1,7 @@
+CONSUMED by chief (LANE-E), round 5ahimz (R359).
+Not used yet. The scoreboard task (PANYA-ORDER 20260905_2038 item 2) is
+scheduled for the 22:21 bucket by COO-DECISION 20260905_2059, not this
+round. The 14 seed rows stay in this letter for whichever round writes
+tools_bridge/pf_scoreboard.py + SCOREBOARD_FACTS.tsv; cited here (this
+stamp) so the sync-alarm citation test does not flag it as reaching
+nobody.

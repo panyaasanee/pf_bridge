@@ -1,0 +1,9 @@
+CONSUMED by chief (LANE-E), round 5ahimz (R359).
+Round 20:51 bucket done this round: item 1 (preflight size gate +
+archive pass, partial -- gate still RED, said so), item 2 (AGENTS.md
+section 7 four lines, same commit), item 3 (RE-265/GT-233 verified
+already on main from R358, no further action needed).
+Bucket 22:21 (scoreboard, then D3+D4 PR) and bucket 23:51
+(docs/PROMOTION_BACKLOG.md) not started -- next chief round(s) pick them
+up in that order.
+Full account: rounds/R359_5ahimz_bridgesize_gate_queue_archive_pass_lane_q_registration.md
