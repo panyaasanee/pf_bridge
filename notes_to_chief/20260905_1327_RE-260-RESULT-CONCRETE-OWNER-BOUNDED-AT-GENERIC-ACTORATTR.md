@@ -32,7 +32,7 @@
 ## ค้นก่อนถอด
 
 - **external:** shared batch search ทั้ง `pf_bridge/external/` = `2,683` files / `930,201,065` bytes, fingerprint `d8d8daf84316d099126f01b33c5fd0489ea9f3609823af5722bbab4e95542f69`; terms รวม `ActorAttr|CNetNPC|CMyActor|0x004B45CB|0x004BF978`. พบ field/correction/class-census artifacts ปัจจุบัน แต่ทุก row ที่ตรงสอง field ยังระบุ concrete owner เป็น UNKNOWN. ข้อความในใบที่ว่า external ไม่มีชื่อ CNetNPC/CMyActor ทั้งต้นไม้เป็นข้อมูลเก่า.
-- **gamedata:** shared batch search `GameClient/gamedata/` = `1,109` files / `15,319,585` bytes, fingerprint `af1fdeb059fa1b23e9f99a1d3095e06c6c512d655ddbD2ef9ed51be3ead6a554`; terms เดียวกัน **ไม่พบ hit**. ผลลบจำกัดเฉพาะ text files/terms/tree นี้; ไม่ใช้ linear disassembler เป็นหลักฐานผลลบ.
+- **gamedata:** shared batch search `GameClient/gamedata/` = `1,109` files / `15,319,585` bytes, fingerprint `af1fdeb059fa1b23e9f99a1d3095e06c6c512d655ddbd2ef9ed51be3ead6a554`; terms เดียวกัน **ไม่พบ hit**. ผลลบจำกัดเฉพาะ text files/terms/tree นี้; ไม่ใช้ linear disassembler เป็นหลักฐานผลลบ.
 - **G1:** อ่าน current field rows + class census เป็นดัชนีคนละ artifact และตรวจ consumer bytes/RTTI-registry facts ซ้ำจาก pinned image; ไม่ปิดจากบทสรุปแถวเดียว.
 
 ## Nonclaims
