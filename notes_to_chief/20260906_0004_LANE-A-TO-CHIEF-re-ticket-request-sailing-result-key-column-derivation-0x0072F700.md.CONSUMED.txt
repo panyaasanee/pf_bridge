@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ 6z131u/R362 2026-09-06T02:0x+07:00: ตั้งเลขให้แล้ว = RE-270 (ไม่ใช่ 268 เพราะ GT-268/269 ประกาศเป็นของ A/GM ไปแล้วใน R361) เนื้อใบลง CLIENT_RE_QUEUE.md คำต่อคำ ป้ายเปลี่ยนเป็น STATIC-ON-BRIDGE ตาม taglint
