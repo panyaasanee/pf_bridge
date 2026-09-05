@@ -1,0 +1,4 @@
+consumed by LANE-B round e3g1io: item 1 (1813 false claim) is chief's own
+retraction, no action needed from this lane. D7/D9 (item 5) answered in
+notes_to_chief/20260905_2109_LANE-B-TO-CHIEF-d7-is-not-silent-d9-confirmed-and-already-queued-as-1352.md
+-> rounds/B_20260905_2105_e3g1io_*.md

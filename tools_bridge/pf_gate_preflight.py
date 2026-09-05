@@ -30,6 +30,19 @@ The remaining shape - a test that genuinely passes on Linux and fails on
 Windows - CANNOT be caught here and this script does not pretend to.  For
 that, ask for a bridge job on Panya's machine before pushing.
 
+FOURTH CHECK - BRIDGE FILE SIZE CEILINGS (added R359, PANYA-ORDER
+20260905_2038 item 1).  Five pf_bridge files are read by every lane, every
+round, before it can even claim: GAME_TEST_QUEUE.md, CLIENT_RE_QUEUE.md,
+AGENTS.md, CHIEF_CONTINUATION.md, NOW.md.  Measured 2026-09-05: the first had
+reached 2.8 MB with 92 of its 153 tickets already closed, the second 925 KB
+with 102 of 121 closed, and round `wzdzf7` (LANE-UI) spent 19 minutes just
+reading these five files before it could open a claim.  A closed ticket does
+not get smaller by staying in the file every lane greps every round; it gets
+archived (`archive/*_ARCHIVE_<date>_*.md`, one-line stub left behind) or the
+reading cost is paid again forever.  Ceilings are owner-set (NOW.md's own
+text names its cap: "12 KB / 60 บรรทัด"), enforced here rather than only in
+prose so a lane finds out before push, not after the fact in a letter.
+
 THIRD CHECK - PR BODY AUTOMERGE MARKER (added R328, COO-DECISION
 20260903_2141).  The reaper that merges our PRs looks for the automerge
 marker as a BARE SUBSTRING of the PR body, with no anchor and no line
@@ -64,6 +77,65 @@ CP874_ALLOWED = {
     "tools/pf_vital_name_thunk_static.py": 0,
     "tools/pf_vital_thunk_census_static.py": 0,
 }
+
+
+# PANYA-ORDER 20260905_2038 item 1. Bytes on disk, not lines: bytes are what
+# a slow read actually costs, and NOW.md's own cap ("12 KB / 60 บรรทัด") is
+# the only one of the five stated in both units.
+BRIDGE_FILE_SIZE_CEILINGS = (
+    ("GAME_TEST_QUEUE.md", 300 * 1024),
+    ("CLIENT_RE_QUEUE.md", 200 * 1024),
+    ("AGENTS.md", 30 * 1024),
+    ("CHIEF_CONTINUATION.md", 30 * 1024),
+    ("NOW.md", 12 * 1024),
+)
+
+
+def check_bridge_file_sizes(bridge_root=None):
+    """RED when a pf_bridge file every lane reads every round is over its
+    ceiling.
+
+    `bridge_root` defaults to this file's own repository (tools_bridge/ lives
+    directly under the pf_bridge root, one parent up), so a lane running the
+    command AGENTS.md section 7 gives gets a real answer with no extra flag -
+    the same pattern `check_branch_is_mergeable_by_the_reaper` already uses
+    for the bridge clone.  A caller with a bridge checkout somewhere else (a
+    self-test, a bridge clone at a nonstandard path) can pass one.
+
+    Returns True (all five files are at or under their ceiling), False (one
+    or more is over - RED, every size printed), None (one of the five names
+    does not exist under `bridge_root` - this is not the pf_bridge checkout,
+    or a listed file was renamed and this table was not updated with it).
+    """
+    root = pathlib.Path(bridge_root) if bridge_root is not None \
+        else pathlib.Path(__file__).resolve().parent.parent
+    missing, over = [], []
+    for name, ceiling in BRIDGE_FILE_SIZE_CEILINGS:
+        p = root / name
+        if not p.is_file():
+            missing.append(name)
+            continue
+        size = p.stat().st_size
+        red = size > ceiling
+        print("  %s %-24s %9d bytes  (ceiling %9d)"
+              % ("RED" if red else "ok ", name, size, ceiling))
+        if red:
+            over.append(name)
+    if missing:
+        print("[bridgesize] INCONCLUSIVE - %s not found under %s."
+              % (", ".join(missing), root))
+        print("             Is this really the pf_bridge checkout?")
+        return None
+    if over:
+        print("[bridgesize] RED - %d of 5 file(s) over their ceiling"
+              % len(over))
+        print("             (PANYA-ORDER 20260905_2038 item 1). Archive")
+        print("             closed tickets to archive/*_ARCHIVE_<date>_*.md")
+        print("             with a one-line stub left in place; never delete")
+        print("             or move an item that has not been tested yet.")
+        return False
+    print("[bridgesize] PASS - all five files at or under their ceiling.")
+    return True
 
 
 def tracked_py_files(repo):
@@ -686,6 +758,42 @@ MAINMERGE_SELF_TEST_CASES = 4
 # "a gate tool with no test is what killed #694".
 BRANCHNAME_SELF_TEST_CASES = 4
 CENSUS_SELF_TEST_CASES = 2
+BRIDGESIZE_SELF_TEST_CASES = 3
+
+
+def _bridgesize_self_test_cases(tmp):
+    """Drive check_bridge_file_sizes() against synthetic bridge roots.
+
+    Three provable shapes: every file under its ceiling, one file over, and
+    a root missing one of the five names entirely (not a bridge checkout).
+    """
+    failures = ran = 0
+
+    def make_root(dirname, oversize_name=None, skip_name=None):
+        root = pathlib.Path(tmp) / dirname
+        root.mkdir()
+        for name, ceiling in BRIDGE_FILE_SIZE_CEILINGS:
+            if name == skip_name:
+                continue
+            size = ceiling + 1 if name == oversize_name else 64
+            (root / name).write_bytes(b"x" * size)
+        return root
+
+    cases = [
+        ("all five under ceiling", make_root("bs_ok"), True),
+        ("one file over ceiling", make_root(
+            "bs_red", oversize_name=BRIDGE_FILE_SIZE_CEILINGS[0][0]), False),
+        ("not a bridge checkout - one file missing", make_root(
+            "bs_missing", skip_name=BRIDGE_FILE_SIZE_CEILINGS[-1][0]), None),
+    ]
+    for label, root, expected in cases:
+        got = check_bridge_file_sizes(root)
+        ran += 1
+        ok = got is expected
+        failures += 0 if ok else 1
+        print("  case %-58s expected=%-5s got=%-5s %s"
+              % (label[:58], expected, got, "ok" if ok else "SELF-TEST RED"))
+    return failures, ran
 
 
 def _branchname_self_test_cases(tmp):
@@ -966,12 +1074,16 @@ def _self_test():
         cs_failures, cs_ran = _census_self_test_cases(tmp)
         failures += cs_failures
         ran += cs_ran
+        bs_failures, bs_ran = _bridgesize_self_test_cases(tmp)
+        failures += bs_failures
+        ran += bs_ran
     if failures:
         print("SELF-TEST RED: %d of %d case(s) wrong." % (failures, ran))
         return 1
     expected_cases = (
         len(cases) + 2 + MAINMERGE_SELF_TEST_CASES
         + BRANCHNAME_SELF_TEST_CASES + CENSUS_SELF_TEST_CASES
+        + BRIDGESIZE_SELF_TEST_CASES
     )
     if ran != expected_cases:
         # pf-adversary R328 D3: the old green line was the string "9 cases",
@@ -1060,7 +1172,8 @@ def main():
     results = [check_cp874(repo), check_new_skips(repo, args.base),
                check_base_is_ancestor(repo, args.base),
                check_precondition_census(repo),
-               check_branch_is_mergeable_by_the_reaper(repo)]
+               check_branch_is_mergeable_by_the_reaper(repo),
+               check_bridge_file_sizes()]
     if args.pr_body is None:
         # Open skip with a reason, never a silent one (AGENTS.md section 7).
         # Not appended to `results`: most callers run this tool for the cp874
@@ -1098,7 +1211,8 @@ def main():
         return 1
     print("PREFLIGHT PASS (cp874 + no new skips + main is in this branch"
           " + precondition census agrees")
-    print("                + both branches are mergeable by the reaper).")
+    print("                + both branches are mergeable by the reaper"
+          " + bridge files are under their size ceiling).")
     print("NOTE: this does NOT promise a green gate - Windows-only runtime")
     print("failures are out of scope.  A RED or INCONCLUSIVE preflight means")
     print("DO NOT PUSH until it is fixed (AGENTS.md section 7).")

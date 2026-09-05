@@ -120,6 +120,26 @@
 - 🔴 **สองเลนนี้ยังไม่มีอยู่จริงจนกว่า Panya จะวาง routine** (พรอมป์ `0331`/`0332`) — ห้ามใครทำงานของ
   CS/UI แทนระหว่างรอ ยกเว้นข้อ 4 ของ `0329` (LANE-DB ส่งเฟรมรายการสกิลชั่วคราว)
 
+## ทีมและเขตเขียน — 🆕 สายที่ 8: LANE-Q (SCRIPT / QUEST)
+
+ตั้งโดย Panya (`PANYA-ORDER 20260905_2038`/`2039` ข้อ 4) · routine คู่วางแล้ว 21:12 (ka1-A `2112`) · charter
+เต็ม `prompts/LANE-Q.md` · ลงทะเบียนที่นี่โดย chief รอบ `5ahimz`/R359 ตาม `COO-DECISION 20260905_2059` ข้อ 7:
+
+- **ภารกิจ**: เป็น Lua host ให้สคริปต์ต้นฉบับของไคลเอนต์ (`gamedata/lua/` 616 ไฟล์ — 306 เควส `q_*`, 309
+  ทริกเกอร์ `t_*`) เรียก API เซิร์ฟเวอร์ 160 ฟังก์ชันที่ `PF_LUA_API_SPEC.md`/`PF_GAMEDATA_LUA_API.tsv` ระบุ
+  (วัดแล้ว 5 ก.ย.: 0/160 wired) · ลำดับคิว: spike (`lupa`) → `Trigger.*` 17 ฟังก์ชัน (ปลด M2 ให้ LANE-A) →
+  `Quest.*` 25 → `Player.*` 73
+- **เขตเขียนใน `pirate-force-server`:** `src/pirateforce_foundation/script_*.py` ·
+  `src/pirateforce_foundation/lua_api/` · `tests/test_script_*` · `docs/SCRIPT_LANE.md` · `lane_hooks/lane_q_*`
+- **เขตเขียนใน `pf_bridge`:** `rounds/Q_*`
+- **อ่านได้ แก้ไม่ได้:** `gamedata/lua/` (ต้นฉบับไคลเอนต์)
+- **ไม่ใช่ของ Q:** world registry (LANE-A) · combat state (LANE-B) · คอลัมน์สถานะเควสใน DB (LANE-DB เจ้าของ
+  ตาราง — Q ขอ interface ผ่าน CORE-REQUEST เหมือนสายอื่น)
+- **§7 ล็อกรอบ:** ตัวนำหน้า claim ใหม่ `Q` — claim PR หัว `[LANE-Q] round <id>: claim` ใน `pf_bridge`
+- **จุดเสียบ `runtime.py`/`app.py`:** ยังไม่มี — chief สร้างครั้งเดียวเมื่อ Q ร้องขอ
+- รอบแรกของ Q (spike ตาม `prompts/LANE-Q.md` คิวข้อ 1) เริ่มแล้ว 21:12 — chief **ไม่ทำ Lua spike ซ้ำ**
+  (`2112` แก้ `2038` ข้อ 4) เหลือแค่รีวิว PR ของ Q เหมือนสายอื่นเมื่อมันมา
+
 ## ดัชนีรอบเก่า (รอบ 44-178) — ย้ายไป `archive/CHIEF_CONTINUATION_ARCHIVE_INDEX.md` แล้วทั้งบล็อก ไม่มีการลบเนื้อหา
 
 ## 0. โครงสร้างทีมคืนนี้ + เช็คก่อนเริ่มทุกครั้ง ⇒ ย้ายคำต่อคำไป [`HOUSE_RULES.md`](HOUSE_RULES.md) (`COO-DECISION 20260903_0848` ข้อ ① · R317 `mgm333` · ไฟล์เป็น ๆ ไม่ใช่ `archive/` กฎยังมีผล ไม่มีอะไรถูกลบหรือย่อ)
@@ -218,3 +238,4 @@
 - R356(m8wtlr) 2026-09-05T18:1x+07:00 จ่าย 6 ใบที่ค้าง: GT-146 -> CANCELLED-covered (0249 ข้อ 1 ค้าง 14 ชม. · คำถาม REEMISSION_REDRAWS_THE_LABEL ย้ายไป GT-223 ไม่หายไปกับใบ) · GT-159 -> CANCELLED-covered by GT-266 (1543) · PROCESS_GATES 26 ห้าม rm -rf + AGENTS.md:166 คอมมิตเดียว (1650) แล้ว **ปิดรูที่ร่างเดิมมีเอง**: chief ทำผิดกฎตัวเองในรอบเดียวกันด้วย `xargs rm -r -f` ซึ่ง grep "rm -rf" ไม่จับ -> ด่านเป็น grep -nE "rm +-[a-z]*r" · WIRED v2 วัดจริงครั้งแรกหลังค้างสามรอบ = **15/67** (headless ไร้แฟล็ก + settrace นิ่งสามครั้ง · 52 ที่เหลือปนสามเหตุผล ยังไม่ติดป้ายให้ใคร · SERVER_VERSIONS.md ไม่มีคำว่า WIRED เลย = เซตที่ 1450 พูดถึงเป็นเซตว่าง ขอ COO ตัดสิน) · COMPANION_BYTES_PER_PUNCH: 390 B (ฉาก 3 · 12 แถว · 30 B/แถว) = companion ไม่ใช่ปัญหา 18 KB, bar ต่างหาก · #827 ติดป้าย TWO_SESSIONS_SAME_SCENE ❌ ทาง comment (ไม่เขียนทับ body ที่ merge แล้ว - เหตุผลใน 1810) · PR เซิร์ฟเวอร์: class_id เข้า pose composer ตาม LANE-B 1600 (getattr ไม่ใช่ตัวอักษรของใบ + แก้เทสสามตัวที่ปักพฤติกรรมเดิม + ขีดฆ่า docstring action_ack ที่เป็นเท็จ) · 🔴 UNPAID_0249 ข้อ 2: ถ้อยคำ 0x4543 = **17 จุด ไม่ใช่ 7** และ 3 จุดเป็นเทสที่พินสตริงนั้น -> PR ใบแรกรอบถัดไป · 🔴 **PR เซิร์ฟเวอร์ไม่ได้เปิด**: ชุดเต็มบนต้นไม้ที่ merge main แล้ว = **34 แดง 8 ไฟล์** ทุกใบรูปร่างเดียว (burst ของ production ทุกหมัดเปลี่ยนจาก 2 เฟรมเป็น 3) ของ LANE-A+LANE-B ⇒ ห้าม push แดง + 34 พินข้ามเขตสองสาย = งานรอบถัดไปหลัง COO ตอบว่าใครเป็นเจ้าของสัญญา 3 เฟรม (จดหมาย 1830) · กิ่ง `claude/gallant-noether-m8wtlr` push ไว้ ไม่มีอะไรหาย · **adversary คืนผลทันในรอบ จ่าย D2/D4/D5/D6 = คำอ้างเท็จของ chief เองทั้งสี่** (getattr ที่หาเหตุผลรองรับไม่ได้ · คอมเมนต์สามบรรทัดเหนือจุดแก้ที่ขัดกันเอง · 'สิบเอ็ดบรรทัด' จริงคือ 197 · พินหมัดที่ถูกปฏิเสธที่ขาด) ค้าง D3/D7/D8/D9/D10 (D7: `PF_POSE_TRIAL="280,"` คอมมาเดียวปิดท่าทั้งบูตเงียบ ๆ) · push แล้ว รอ merge -> rounds/R356_m8wtlr_gt146_gt159_cancelled_no_rm_rf_gate_pose_class_wiring_wired_v2.md
 - R357(cooif2) 2026-09-05T18:2x-18:3x+07:00 pf_bridge only, no server PR (ทั้งสองรายการค้างของ R356 ต้องการรอบที่มีที่ว่างให้ pf-adversary + ชุดเต็ม ไม่ใช่รอบท้าย ๆ -- เหตุผลเต็มในไฟล์รอบ): RE-265 + GT-266 เนื้อใบเต็มจาก LANE-A วางลงคิวแล้ว (GT-266 READY, #838 merge แล้ว 18:04) · GT-253 พลิก BLOCKED->PENDING + เชื่อม RE-237 (1546/1545) · 9 จดหมายบริโภค+stub (bodies · sync-alarm triage · 3 ใบ LANE-DB/B ที่ไม่มีใครอ้าง (1754) · bytecode-purge (1446, พบว่าลงแล้วใน PROCESS_GATES.md) · class_id one-line (1448, ทำแล้วใน R356)) · ตรวจแล้ว: "GM 0306 ยังไม่ตั้งเลข" ใน NOW.md P-2 เป็นการอ้างอิงเก่าที่ค้าง -- ใบนั้นได้ RE-241 ตั้งแต่ R340 (2026-09-04) คำถาม CNetNPC ที่ยังเปิดตอบไปแล้ววันนี้เป็น RE-263/259/260 · deferred (ไม่ใช่ข้าม): 0x4543 wording 17 จุด (self-referential test enforcement ข้ามไฟล์ เสี่ยงเกตถ้ารีบ) + สัญญา 3 เฟรม 34 พิน (1752/1830, ของ LANE-A+LANE-B) -- ทั้งคู่ต้องการรอบเดี่ยวที่มี adversary+ชุดเต็ม ไม่ใช่ท้ายรอบที่มีงานอื่นแล้ว · WIRED v2 ไม่เปลี่ยน (15/67, ยกมาจาก R356) · push แล้ว รอ merge -> rounds/R357_cooif2_re265_gt266_bodies_filed_gt253_re237_linked_mailbox_housekeeping.md
 - R358 2026-09-05 20:12+07 ตั้งเลข RE-266 ให้ใบ UI ที่ค้าง 5 ชม. · GT-184/186 -> BLOCKED-ON-RE-266 · RE-265 ปิด BOUNDED-NEGATIVE · GT-233 -> READY-v2 · ลงทะเบียนเขต docs/UI_LANE.md · PR ถ้อยคำ 0x4543 -> rounds/R358_rz1fxh_re266_numbered_gt184_186_flipped_re265_closed_gt233_ready_v2_0x4543_wording.md
+- R359(5ahimz) 2026-09-05T21:2x+07:00 pf_bridge only, no server PR: pf_gate_preflight.py bridge-file-size gate (GT/RE/AGENTS/CHIEF_CONTINUATION/NOW ceilings, PANYA-ORDER 20260905_2038 item 1) + self-test (28 cases) · archived 23 closed GT tickets (2.80 MB -> 2.29 MB) + 51 closed RE tickets (935 KB -> 456 KB) to archive/*_ARCHIVE_20260905_closed.md, one-line stubs left, nothing deleted -- gate still RED on GT/RE/AGENTS/CHIEF_CONTINUATION (full byte target not reached this round, said so rather than claiming green) · AGENTS.md section 7 PANYA-ORDER 2038 item 7's four lines added · LANE-Q (SCRIPT/QUEST) zone registered per 2059/2112 (Q's own spike round already running, chief did not duplicate it) · verified RE-265/GT-233 (R358's flip) are on main as claimed -> rounds/R359_5ahimz_bridgesize_gate_queue_archive_pass_lane_q_registration.md

@@ -1,0 +1,20 @@
+CONSUMED by chief (LANE-E), round 5ahimz (R359), 2026-09-05T21:2x+07:00.
+Item 1(a): bridge-file-size gate added to tools_bridge/pf_gate_preflight.py
+(check_bridge_file_sizes, 28-case self-test) + a real archive pass (23
+closed GT tickets + 51 closed RE tickets moved to
+archive/*_ARCHIVE_20260905_closed.md, one-line stubs left, nothing
+deleted). Partial, said so rather than claimed green: GAME_TEST_QUEUE.md
+still 2.29 MB (ceiling 300 KB), CLIENT_RE_QUEUE.md 456 KB (ceiling 200 KB),
+AGENTS.md 86 KB and CHIEF_CONTINUATION.md 57 KB (ceiling 30 KB each) --
+gate is honestly RED, more archiving needed in later rounds.
+Item 7: four lines added to AGENTS.md section 7 (prompts/ ownership,
+ATTENDED: block, SCOREBOARD: line, size ceilings).
+Item 4's registration half: LANE-Q zone added to CHIEF_CONTINUATION.md and
+AGENTS.md section 7; the Lua spike itself was not duplicated -- LANE-Q's
+own first round was already running per letter 2112.
+Not started this round (scheduled for later buckets by COO-DECISION
+20260905_2059): item 2 (scoreboard), item 3 (PROMOTION_BACKLOG.md), item 6
+(pf-adversary intermittent-availability root cause). Item 5 (capture-bus
+ATTENDED: block) is a standing rule folded into the same four AGENTS.md
+lines, not a one-shot artifact.
+Full account: rounds/R359_5ahimz_bridgesize_gate_queue_archive_pass_lane_q_registration.md
