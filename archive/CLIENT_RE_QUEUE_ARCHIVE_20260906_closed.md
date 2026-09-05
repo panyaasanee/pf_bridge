@@ -65,6 +65,305 @@ VA ตั้งต้นที่มีอยู่แล้วในโปร�
 
 ## RE-132 GM-GLOBAL-MESSAGE-VITAL-VERSION-001 [ARCHIVED 2026-08-31 R274, closed >24h per หัวข้อ 11] -- moved verbatim to `archive/CLIENT_RE_QUEUE_ARCHIVE_20260831_R274_closed.md` (was CLOSED/PASS since 2026-08-29; byte size corrected here: real span measured heading-to-next-heading is 8,059 B, not the 154,463 B cited in notes_to_chief/20260831_1747_PANYA-DECISION-*.md and repeated in the 22:55 CHASE3 letter -- that figure was a measurement error, not this entry)
 
+## 🆕🔬 RE-137 NPCCONVERSATION-54B-WHOSE-SCRIPT-001 [STATIC-ON-CLOUD]: เฟรม 54 ไบต์ที่ `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE` ส่ง -- descriptor ที่ถึงจอเป็นชุด `q3021` (Columbus) หรือ `q3020` (Sebastian)  [✅ **ANSWERED (ชั้นตาราง) - answered by `notes_to_chief/consumed/20260829_0238_LANE-A-RESULT-for-RE-137-the-54B-frame-is-not-what-titles-that-window.md`** · ปิดหัวใบโดย chief (LANE-E) รอบ `kj0s6r`/R346 2026-09-05T02:0x+07:00 · **คำตอบคือ "ไม่ใช่ทั้งสองข้อ"**: เฟรม 54 ไบต์เป็น `q3021` แน่นอน **แต่ไม่ใช่สิ่งที่ตั้งชื่อ/เนื้อ/เสียงของหน้าต่างนั้น** — ไคลเอนต์ประกอบจาก `TEXTDATA_TH__MOBS_TIP.tsv` ของ template ที่มันเชื่อว่า actor ตัวนั้นเป็น (`n_ID=2` Sebastian · `s_NPC_VOICE 20;21`) ไม่ใช่จาก quest id ที่เราส่ง · มี **control** ในจดหมาย: กฎ decode เดียวกันคืนสตริงที่ขึ้นจอจริงในบูตเดียวกันสองอัน (`Atlantic Ocean:Rising Sun Sea`, `Port Royal`) · 🔴 **nonclaim**: VA ฝั่ง UI ที่อ่าน `MOBS_TIP` ยัง `[UNKNOWN]` — ต้องเปิดอิมเมจ ทำบนคลาวด์ไม่ได้ ⇒ อยู่กับ `GT-170` (`STATIC-ON-BRIDGE`) · จดหมายผลถูก consume ตั้งแต่ 29 ส.ค. แต่ไม่มีใครปิดหัวใบ = ค้างบัญชี 7 วัน ไม่ใช่ช่องเทส (พบโดยลูกมือตรวจของ chief รอบนี้ จากรายการกวาดของ ka1-A `20260905_0106`)]
+
+**ADDRESSEE: RE** · ผู้เปิดใบ: chief (สาย E) รอบ `wi1m62` (R218) 2026-08-29T01:0x+07:00
+**ต้นเรื่อง:** ใบผลเดียวกัน ข้อ ② · ปิดครึ่งที่ค้างของ `GT-102` (เกรด `PARTIAL` เพราะข้อนี้ข้อเดียว)
+
+**สิ่งที่วัดแล้ว [MEASURED]:** คลิก Columbus ⇒ ยิง `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE`
+(54 bytes) ครั้งเดียวจริง · หน้าต่างเปิดจริงพร้อมสองออปชัน · **แต่ป้ายผู้พูด = "Sebastian"**
+เนื้อบทขึ้นต้น "Prison Exile Island ข้าคือผู้..." และ **เสียงพากย์ที่ดังขึ้นเป็นเสียง Sebastian**
+(เจ้าของจำเสียงจากเซิร์ฟเวอร์ต้นฉบับได้ -- ยืนยันตอน 00:17)
+
+**คำถาม:** ถอดไบต์ 54 ตัวนั้นทีละฟิลด์จาก builder ที่ commit แล้ว แล้วบอกว่า **เลข descriptor
+ที่เราส่งจริงคือเลขอะไร** และตรงกับ `q3021` หรือ `q3020` ในตารางที่เรามี
+[เสนอ ยังไม่วัด] คอนโซลบิลด์นี้พิมพ์เองว่า ChooseNPC path ส่ง "one **q3020** NPCConversation descriptor"
+⇒ ถ้าจริง เราส่งบทของ Sebastian ทุกครั้งโดยไม่เกี่ยวกับ NPC ที่คลิก **ห้ามสรุปจากบรรทัดคอนโซลนั้นอย่างเดียว**
+
+**เกณฑ์ผ่านสองชั้น**
+- wire/DB: แผนที่ฟิลด์ครบ 54 ไบต์ + เลข descriptor ที่ส่งจริง พร้อม file:line ของ builder
+- client-observable: ต้องเป็นใบเทสรอบใหม่ (แก้แล้วคลิก Columbus ต้องได้บทของ Columbus) -- ยังไม่เปิด
+
+## 🔬 RE-138 NAME-LABELS-VANISH-AFTER-MOVE-001 [STATIC-ON-CLOUD]: ป้ายชื่อ (เขียว) ของทุกตัวในแมพหายหลังผู้เล่นเดินออกจากบริเวณแรก เหลือแต่ป้ายฉายา (ฟ้า) -- รอบ reconcile ส่งอะไรไม่ครบ  [✅ CLOSED/ANSWERED -- ปิดโดย chief (ผู้เปิดใบ) รอบ `l39ees` (R322) 2026-09-03T16:01+07:00 ตาม `COO-DECISION 20260903_1546` · ผล: `notes_to_chief/20260903_0253_RE-138-RESULT-BASICATTR-OMISSION-PRESERVES-NAME.md` · **คำถามของใบตอบแล้ว และสมมติฐานของใบเองถูกหักล้าง**: mask ที่แคบกว่า **ไม่ล้าง** ชื่อเดิม -- BasicAttr merge `0x00465610` ตรวจ bit `0x0001` ที่ `0x0046564E` แล้วเมื่อ bit **ถูกละ** จะ copy ชื่อเดิมจาก `source+0x28` (`0x00465654..0x0046565B`) ⇒ การที่เซิร์ฟเวอร์ละ name bit **ไม่ใช่** ต้นเหตุที่ป้ายชื่อหาย · ฝั่งเซิร์ฟเวอร์: retained กับ entrant ได้ BasicAttr mask `0x030C` เท่ากัน ไม่มี name bit ทั้งคู่ (`population.py:206-213`) ต่างกันแค่ entrant ได้ MovementAttr `0xFF` (`:214-223`) ⇒ ประโยค "retained เป็น NPCAttr-only" ไม่ได้แปลว่าไม่มี BasicAttr · 🔴 ~~ชั้น client-observable ของใบนี้ไม่เคยเปิด ⇒ ห้ามยกใบนี้ไปเป็นฐานว่า "ป้ายชื่อไม่หายแล้ว"~~ **ปิดแล้ว (LANE-A รอบ `2mnd7b` 2026-09-05T12:0x+07:00, NOW.md `1152` ข้อ 4)**: `GT-250` (R317, `notes_to_chief/20260905_1125_KA1A-R317-RESULTS-*.md` §2) วัดตรงอาการเดิม (ภาพ 235212 = ป้ายชื่อหายหลังเดินออกนอกสายตา) บนบิลด์ปัจจุบัน — เดินออกจนพ้นสายตา (X:-4,735 Y:-1,219) แล้วกลับ: **ป้ายชื่อครบทุกตัวเหมือนเดิม ไม่มีตัวไหนเหลือแต่ title** ⇒ **NEGATIVE, ไม่ reproduce** หลัง fix นี้ขึ้น main · ชั้น client-observable ของใบนี้ปิดด้วยผลลบที่วัดจริงแล้ว object lifetime / actor generation reuse ที่เคยเป็น nonclaim ค้างไว้ **ไม่ใช่ต้นเหตุที่ยังพิสูจน์อยู่ ณ ตอนนี้** เพราะอาการไม่เกิดให้ไล่ต่อ (ถ้าเกิดใหม่ในอนาคต NOW.md M-ladder ระบุเจ้าของถัดไป = LANE-A หลัง P-2) อาการที่เจ้าของเห็น (ภาพ 235212) **มีเจ้าของแล้ว: RE-138's BasicAttr-omission fix, ยืนยัน client-observable ด้วย `GT-250`** · chief ไม่เปิดใบใหม่ในรอบนี้ตามคำสั่ง `NOW.md` P-2 (ห้ามเปิด RE ใหม่) เสนอ COO ในจดหมายรอบ R322]
+
+**ADDRESSEE: RE** · ผู้เปิดใบ: chief (สาย E) รอบ `wi1m62` (R218) 2026-08-29T01:0x+07:00
+**ต้นเรื่อง:** ใบผลเดียวกัน ข้อ ④.2 (เจ้าของเห็นเอง ยืนยันแล้ว)
+
+**สิ่งที่วัดแล้ว [MEASURED, ภาพ 235212]:** `Fighting Fish soldier` เหลือ title ฟ้าลอยเดี่ยว ไม่มีชื่อเขียว ·
+`Loie` เหลือ "Royal Navy Engineer" ฟ้า ไม่มีชื่อ · ตัวที่มีแต่ป้ายฟ้าอยู่แล้ว = ป้ายหายทั้งใบ
+
+**คำถาม:** ในรอบ reconcile หลังผู้เล่นเดิน โค้ดส่ง attr อะไรให้ตัวที่ **retained** และอะไรให้ตัวที่ **entrant**
+-- ตัว retained ได้ `BasicAttr` (ที่ถือชื่อ) ซ้ำหรือไม่ ยกบรรทัดที่ตัดสินมาเป็น file:line
+[เสนอ ห้ามใช้เป็นฐานใบอื่นจนกว่าจะวัด] คอนโซลบิลด์นี้เขียนเองว่า retained actors เป็น **NPCAttr-only**
+ส่วน entrants ใช้ full-mask MovementAttr ⇒ ถ้าจริง ตัว retained เสียชื่อในรอบ reconcile โดยการ **ละ** ไม่ใช่การ **ลบ**
+อ่านคู่กับ `RE-130` (reconcile แทนด้วย omission)
+
+**เกณฑ์ผ่านสองชั้น**
+- wire/DB: mask ที่ส่งจริงของ retained vs entrant พร้อม file:line · ระบุว่าชื่ออยู่ใน attr ตัวไหน
+- client-observable: ใบเทสรอบใหม่หลังแก้ (เดินไปกลับแล้วป้ายชื่อยังอยู่) -- ยังไม่เปิด
+
+🔴 นโยบายของบ้านนี้ข้อ 12 (ตัวละครสมประกอบ) แตะเรื่องนี้ตรง ๆ: "ส่ง attr ให้ครบที่สุดเท่าที่รู้
+ไม่ใช่ขั้นต่ำที่พอไม่พัง" -- ใบนี้คือกรณีที่ขั้นต่ำที่พอไม่พัง ทำให้ผู้เล่นเห็นแมพที่ไม่มีชื่อใครเลย
+
+### 🔎 กลไกที่เป็นตัวเก็งอันดับหนึ่ง -- เจอจากซอร์สรอบ `wi1m62` (chief + `pf-static-re`)
+[วัดแล้ว ชั้นซอร์ส] `make_v98_conversation_face_state` (`current/pf_login_game_server_v141.py:1078-1106`)
+**ประกอบสมาชิกทั้งฉากใหม่ทั้งหมด** จาก `PORT_ROYAL_UNAMBIGUOUS_PLACEMENTS` ผ่าน
+`make_npc_attr(template_id, aid, 1, 0, preset)` ทุกครั้งที่มีคนคลิกอะไรสักตัว
+และ `make_npc_attr` (`v141:1139-1141`) **ไม่มีพารามิเตอร์ faction เลย** · ค่าตั้งต้น `basic_name=""`, `hp=100/100`
+⇒ แพ็กเกต 10,610 ไบต์ทุกใบไม่มีชื่อ ไม่มี faction 6 ไม่มี HP ที่ขุดมา และใช้ template id ดิบของ Mob-Set
+⇒ **ทุกคลิกล้าง `full_roster_override` ของทั้งเมืองในทางส่ง** (`runtime.py:6086-6094` เป็นคนใส่ค่านั้น)
+🔴 [ยังไม่วัด — ห้ามข้ามไปสรุป] การส่ง NPCAttr ที่ mask แคบกว่า **ล้าง**ค่าเดิม (ชื่อ/faction) ในฝั่ง client
+หรือไม่ ยังไม่มีใครวัด · `RE-092` พิสูจน์ replace-by-omission ที่ระดับ **ชุด actor** ไม่ใช่ระดับ **บิตใน mask**
+⇒ นี่คือคำถามจริงของใบนี้ และเป็นคำถามที่ต้องใช้เครื่องสะพาน
+
+### result: [✅ ANSWERED · 2026-09-03 · ใบผล `20260903_0253` · กรอกโดย chief R322 ตาม `COO-DECISION 20260903_1546`]
+
+**ตอบคำถามของใบตรง ๆ (ชั้น wire/source):** retained และ entrant ได้ `NPCAttr` ทั้งคู่ ซึ่ง serialize `BasicAttr` mask `0x030C`
+เท่ากัน และ **ไม่มี name bit `0x0001` ทั้งคู่** (`src/pirateforce_foundation/population.py:206-213`) · entrant ต่างตรงที่ได้
+`MovementAttr` full mask `0xFF` เพิ่ม (`:214-223`) · ตัวประกอบแช่แข็งให้รูปเดียวกัน (`current/pf_login_game_server_v141.py:1139-1141`,
+`:1149-1152`, `:1837-1853`) ⇒ ชื่ออยู่ใน `BasicAttr +0x28` และถูกส่งเฉพาะเมื่อ `basic_name` ไม่ว่าง
+
+**ตอบคำถามที่ใบเขียนว่า "ต้องใช้เครื่องสะพาน" (ชั้น client static):** การละ bit **ไม่ล้างค่าเดิม** เมื่อมี attr เก่าให้ merge ·
+`NPCAttr` merge `0x00466DC0` เรียก `BasicAttr` merge `0x00465610` · ที่ `0x0046564E` ทดสอบ `[destination+0x70] & 0x0001` ·
+bit มี = ใช้ค่าที่ decode เข้ามา · **bit ถูกละ = copy `source+0x28` ทับ `destination+0x28`** (`0x00465654..0x0046565B`) ·
+เป็น positive complete-function evidence ไม่ใช่ linear disassembly
+
+**⇒ สมมติฐานอันดับหนึ่งของใบ (mask แคบกว่าล้างค่าใน attr object) ถูกหักล้าง**
+
+**สิ่งที่ยังไม่ตอบ และห้ามใครอ่านผลนี้แล้วสรุปแทน**
+- ชั้น client-observable **ไม่เคยเปิด** — ไม่มีใครเดินไปกลับแล้วดูป้ายในบิลด์นี้ · `G-OBS` ยังไม่มีลายเซ็น
+- อาการจริงที่เจ้าของเห็น (ภาพ 235212) **ยังไม่มีต้นเหตุ** — เส้นทางที่เหลือคือ object lifetime / actor generation reuse
+  (ถ้า reconciler สร้าง object ใหม่ ก็ไม่มี attr เก่าให้เติม ค่า default ชื่อว่างยังเป็นไปได้) หรือเส้นทาง UI อื่น
+- **BUILD_IMPACT: ไม่ต้องแก้ client** · การเติม `basic_name` ใน population reconcile ยังสมเหตุผลตามนโยบายข้อ 12 (ตัวละครสมประกอบ)
+  แต่เป็น **hardening ไม่ใช่ root-cause fix** ห้ามรายงานว่าแก้แล้วป้ายจะกลับมา
+
+## 🔬 RE-191 MONSTER-NAME-COLOR-FONTSTYLE63-RGB-001 [STATIC-ON-BRIDGE]: `CODEX_CHECKPOINT 20260901_1135` closed the same-actor conditional static path for the monster-name-color write (`MCG-IMG-025..033` now `PROVEN_EXACT`, death branch conditionally writes style 63 via `CNetNPC` vslot `+0x3C` -> `0x0043BD70`) but never read the actual RGB triple that `fontstyle_id=63` resolves to through `UILabel_FontStyleID_parser_setter` (`0x00AA488F`) — what color does style 63 actually set, compared against the already-decoded controls 61/62? 🔴 **ไม่ใช่การยืนยันล่วงหน้าว่า 63 = เทา** — `20260901_0921_LANE-GM-STATUS-*.md`'s own nonclaim ①: "ไม่อ้างว่า fontstyle 63 คือสีเทาของมอนตาย — ตารางเองปฏิเสธการอ้างนี้ตรง ๆ" ใบนี้มีอยู่เพื่อหาคำตอบนั้น ไม่ใช่เพื่อยืนยัน `NOW.md` P-2's ตาย=เทา ที่ยังไม่มีหลักฐาน  [🟢 **CLOSED PASS/DONE (ชั้น conditional static + DATA palette เท่านั้น; runtime pixels ยังเปิด) — ผลมาถึง 2026-09-01T14:39+07:00 (Codex static RE), ปิดหัวใบโดย LANE-GM รอบ `wggs0i` 2026-09-02T10:35+07:00 ตามสัญญาผู้บริโภคของใบเอง, ดูผลด้านล่าง**] ~~[OPEN — assigned LANE-GM]~~
+
+### ทำไมเปิดใบนี้ (มอบหมายตรงจาก COO)
+
+`COO-DECISION 20260901_1241_p2-re-routing-fontstyle63` (`ADDRESSEE: chief`) สั่งตรงให้ chief มอบข้อนี้
+ให้สาย RE/Codex เป็นลำดับแรกของรอบถัดไปที่มี capacity — **นี่คือรอบที่สามที่สาย GM ขอเรื่องนี้**
+(`h6rsgl` → `p4cndg` → `sched-20260901`, ใบล่าสุด `notes_to_chief/20260901_1225_LANE-GM-STATUS-*.md`)
+โดยไม่มีของใหม่ให้ทำต่อเพราะติดอยู่ที่ข้อเดียวนี้ P-2 (สีชื่อมอนสเตอร์) เป็นหนึ่งในสามอันดับสูงสุดของ
+`PANYA-ORDER 20260901_0215` — ไมล์สโตนอื่นทั้งหมดพักไว้จนกว่า P-1/P-2 จะปิด และ `GT-146`/ใบตีมอนทุกใบ
+ถูกล็อกจนกว่า P-1/P-2 จะปิด ⇒ ข้อนี้คือคอขวดเดียวที่เหลือของ P-2 ทั้งก้อน ไม่ใช่แค่ของสาย GM
+
+`CODEX_CHECKPOINT 20260901_1135` ระบุวิธีปิดไว้เองแล้ว (static/IMAGE-layer ล้วน — **ไม่ต้อง attended
+capture**): เทียบ `fontstyle_id=63` กับ 61/62 ที่ถอดแล้วเป็น control ผ่าน parser/setter ตัวเดียวกัน
+(`0x00AA488F`) — ใบนี้ทำแค่จุดเดียวที่ checkpoint ทิ้งไว้เปิด ไม่เปิดเลนใหม่
+
+### ค้นแล้ว (ก่อนเปิดใบ ตามกฎบังคับข้อ ④)
+
+`pf_bridge/external/PF_MONSTER_COLOR_GATE.tsv`/`.md` ที่ checkpoint อ้างถึง (SHA-256 `f99347e4...`/
+`7b6626ac...`) **ยังไม่มีในโคลนคลาวด์นี้** (`external/` ไม่มีไฟล์ชื่อนี้ ณ commit ที่ fetch รอบนี้ —
+`git log --oneline -- external/` ล่าสุดคือ sync ไฟล์เดียวตอน 05:24 ไม่ใช่ไฟล์นี้) — **สาเหตุ (แก้ไขจาก
+draft แรกที่เข้าใจง่ายเกินไป, pf-adversary จับได้):** ไม่ใช่แค่รอคนหน้าสะพาน `git add` — `.gitignore` ของ
+`pf_bridge` ใช้ deny-all กับ `external/` (`/external/*` แล้วค่อย allowlist ทีละไฟล์ตรง ๆ) และ
+`PF_MONSTER_COLOR_GATE.tsv`/`.md` (รวมถึง `PF_GROUND_DROP_LIFETIME.tsv`/`.md`) **ยังไม่อยู่ใน allowlist
+นั้นเลย** ⇒ ต้องแก้ `.gitignore` เพิ่มบรรทัด allow ตรงชื่อไฟล์ก่อน แล้วค่อย `git add` (`pf_git_sync.ps1`'s
+`SHARED_TRACKED` สแกนด้วย `--untracked-files=no` — ไฟล์ที่ gitignore กันไว้จะไม่มีวัน sync แม้ `git add`
+เพราะไม่มีทาง track ได้ตั้งแต่แรก) — เข้าเค้าเดียวกับ "deny-all `.gitignore` กลืนทั้งโฟลเดอร์" ที่โปรเจกต์นี้
+เจอมาก่อน — **ไม่ใช่เหตุให้ปิดใบหรือหยุดรอ**: งานถอด RGB ทำบนอิมเมจโดยตรง (RE
+runner/Codex บนสะพาน) ไม่ต้องพึ่งไฟล์นี้ในคลาวด์เลย ไฟล์นี้เป็นแค่บริบทอ้างอิง ถ้าใครเจอไฟล์หายบนสะพานเอง
+ให้บันทึกลง `IMAGE_ACCESS_COST.tsv` ตามกติกา
+
+### สิ่งที่ต้องตอบ
+
+1. RGB triple (หรือ ARGB ถ้า parser คืนแบบนั้น) ที่ `fontstyle_id=63` ตั้งจริงผ่าน
+   `UILabel_FontStyleID_parser_setter` (`0x00AA488F`) — อ่านจากตารางค่าคงที่/args ของ call site เดียวกับ
+   ที่ปิด 61/62 แล้ว ไม่ใช่การเดาจากชื่อ "เทา"
+2. ค่าที่ได้เทียบกับ 61/62 อย่างไร (ทั้งสามค่าคนละสี / บางคู่ซ้ำกัน) — บันทึกทั้งสามค่าไว้ในผลเดียวกัน
+   เพื่อกันเปิดใบซ้ำถ้าอนาคตต้องการ cross-check style อื่น
+3. ระบุด้วยว่า path นี้เป็น conditional (ตามที่ checkpoint บอกว่า `MCG-IMG-025..033` ยัง "conditional
+   static path" ไม่ใช่ unconditional render) — RGB ที่พบเป็นค่าที่ตั้งเมื่อ path นี้ทำงานจริงเท่านั้น
+   ไม่ใช่การยืนยันว่า path ทำงานทุกครั้ง (ข้อนั้นเป็นคำถามคนละชั้น ไม่ใช่ของใบนี้)
+
+### pass criteria
+
+- **PASS**: RGB ของ 63 อ่านได้ตรงจาก parser/setter เดียวกับ 61/62 พร้อม provenance (VA/offset/args)
+  ครบเหมือนที่ปิด 61/62 ไปแล้ว — ปิดใบ ส่งผลกลับให้ chief ต่อสาย GM ไปใช้เขียนโค้ดสี (ยังไม่ใช่งานของใบนี้)
+- **BOUNDED-NEGATIVE**: parser คืนค่าที่ resolve ไม่ได้ตรง ๆ (เช่น ต้องผ่าน lookup table ที่ยังไม่ถอด) —
+  เขียนไว้ตรง ๆ ว่าต้องถอดอะไรเพิ่มก่อนถึงจะปิดได้ ไม่ใช่เดาสี
+
+### ข้อห้าม
+
+ห้ามเขียนโค้ดสีมอนสเตอร์ใด ๆ จากใบนี้ (ขัด `RE-109` `BUILD_IMPACT: NONE` — สาย GM ยืนยันเองในจดหมาย
+`1225` ว่ายังไม่เขียนโค้ดจนกว่าจะรู้ RGB จริง) · ห้ามเดาว่า 63 = เทา จากชื่อ state โดยไม่มี provenance
+จากไบนารี
+
+### สัญญาผู้บริโภค
+
+เปิดโดย chief (มอบหมายตรงจาก `COO-DECISION 20260901_1241`) — **สาย GM บริโภคผล** (ผู้ที่ขอเรื่องนี้มา
+สามรอบและเป็นผู้เขียนโค้ดสีต่อ) ตามกฎ "ใครเปิดใบคนนั้นบริโภค" ข้อยกเว้นที่ chief เปิดแทนเพราะเป็นงาน
+มอบหมายข้ามสาย (RE/Codex ไม่ใช่ chief ไม่ใช่ GM) — สาย GM อ่านผลรอบถัดไปที่เห็นแล้วปิดหัวใบเอง
+
+### links
+
+`notes_to_chief/CODEX_CHECKPOINT_20260901_1135_COLOR-DROP-GM-STATIC-UNLOCK.md` (วิธีปิดที่ checkpoint
+ระบุไว้) · `notes_to_chief/20260901_1241_COO-DECISION-p2-re-routing-fontstyle63-third-round-waiting.md`
+(คำสั่งมอบหมายตรง) · `notes_to_chief/20260901_1225_LANE-GM-STATUS-sched-20260901-*.md` (รอบที่สามที่ขอ)
+· `notes_to_chief/20260901_0921_LANE-GM-STATUS-p2-color-static-research-fontstyle63-gap-re-followup-proposed.md` (รอบ `h6rsgl` ที่เสนอวิธีปิดนี้ครั้งแรก) ·
+`pf_bridge/NOW.md` P-2
+
+
+### result — 🟢 CLOSED PASS/DONE (ปิดหัวใบโดย LANE-GM รอบ `wggs0i` 2026-09-02T10:35+07:00)
+
+ผล: `notes_to_chief/20260901_1439_CODEX-RE191-RESULT-FONTSTYLE63-RGBA.md`
+(LANE-GM บริโภคไปแล้วตั้งแต่รอบ `r2jfjm` — มี `.CONSUMED.txt` คู่กัน) — **แต่หัวใบไม่เคยถูกปิด**
+จึงค้างอยู่ใน `python tools_bridge/pf_re_queue_taglint.py --list-open` ต่อมาอีก ~20 ชม.
+
+🔴 **ทำไมเครื่องมือถึงมองไม่เห็นว่าใบนี้มีผลแล้ว (วัดจริงรอบนี้ ไม่ใช่สมมติฐาน):**
+`pf_re_queue_taglint.py::has_result_letter()` เทียบ `ticket_id in filename` ตรงตัว = มองหา `"RE-191"`
+แต่ชื่อไฟล์ผลเขียนว่า `CODEX-RE191-RESULT-...` (**ไม่มีขีด**) ⇒ ไม่แมตช์ ⇒ ใบถูกรายงานว่ายังเปิด
+`tools_bridge/` ไม่ใช่เขตเขียนของสาย GM — แจ้ง chief ไว้ในใบ `20260902_1035_LANE-GM-TO-CHIEF-*`
+(นี่เป็นคนละเรื่องกับข้อสังเกตของ ka1-B ใบ `0955` ที่ว่า runner ข้ามเพราะป้าย `assigned LANE-GM`
+ซึ่ง ka1-B ติดป้าย `[สมมติฐาน]` ไว้เอง — รอบนี้ไม่ยืนยันและไม่หักล้างข้อนั้น วัดได้แค่ข้อของเครื่องมือ)
+
+**คำตอบของใบ (สรุปสามบรรทัด — ตัวเลขจริงอยู่ในใบผล ไม่คัดลอกมาที่นี่ และไม่คัดลอกลงโค้ด
+ตาม "ข้อห้าม" ของใบนี้เอง):**
+1. คำถามหลักปิดแล้ว: FontColor/OutlineEffectColor RGBA ของ 61 / 62 / 63 อ่านได้ครบทั้งสามค่าพร้อม provenance
+   `[ORIGINAL EVIDENCE: DATA]` แยกจาก `[ORIGINAL EVIDENCE: IMAGE / MCG-IMG-057..058]`
+2. **premise ของใบถูกแก้โดยผลเอง**: `0x00AA488F` **ไม่ใช่** RGB parser — เป็น branch ของ `UILabel.FontStyleID`
+   ตัว palette จริงเดินผ่าน `0x00A9DAE0` (มี direct caller แค่ 2 จุดจาก full six-section E8 census)
+3. เพดานที่ยังยืน: conditional static + DATA เท่านั้น · **ไม่ได้แปลว่า style 63 = ตาย ในทุกบริบท**
+   และยังไม่มีหลักฐานว่า live actor ผ่าน gate นั้น (ต้องเห็น live registry node + requested/applied ID + pixels)
+
+**คำถามที่เหลือของ P-2 ไม่ใช่ RGB อีกต่อไป** แต่เป็น reachability — เดินต่อและปิดใน `RE-195` ด้านล่าง
+(ผลลัพธ์: ยังทำไม่ได้ในวันนี้) · ข้อห้าม "ห้ามเขียนโค้ดสีมอนสเตอร์จากใบนี้" **ยังยืนอยู่** และรอบ `wggs0i`
+ปฏิบัติตามโดยไม่คัดลอก palette ลงรีโปเลยแม้แต่ค่าเดียว
+
+## 🔬 RE-229 CHARCREATE-CLASS-SSCORE-STARTING-STATS-SOURCE-001 [🟢 **CLOSED BOUNDED-NEGATIVE/DONE — RE runner local 2026-09-04T10:50+07:00, ปิดหัวใบโดย LANE-DB รอบ `1szq3m` 2026-09-04T11:4x+07:00, ดูผลด้านล่าง**] ~~[OPEN -- 🔴 `[STATIC-ON-BRIDGE]` · 🔴 **ขอบเขตแคบลงในรอบเดียวกัน หลัง `pf-adversary` พบว่า `RE-122` ตอบไปแล้วครึ่งใบ — อ่านบล็อกแก้ก่อนทำ**]~~
+
+ผล: `notes_to_chief/20260904_1053_RE-229-RESULT-BOUNDED-NEGATIVE-NO-SIX-TO-FIVE-CROSSWALK.md` — ไม่พบ field/consumer ที่ผูก component ทั้งหกของ `s_SCORE` (`STATUS_STR/AGI/CON/INT/PER/CHA`) เข้ากับห้า ActorAttr wire fields ในขอบเขต manifest (`external/` + `gamedata/`) ที่ค้นแล้ว — คำตอบคือ **UNPROVEN** ไม่ใช่ `CHA` โดยอัตโนมัติ ห้ามใช้สมมติฐาน `AGI->DEX`/ทิ้ง `CHA` `BUILD_IMPACT: hard guard / keep current fallback` — LANE-DB คง `DEFAULT_PRIMARY_STAT = 100` ต่อ ห้าม seed `4;3;4;1;1;2` หรือ permutation ใดจาก `s_SCORE` นี่คือ **method ceiling** (ห้าม rerun ด้วย corpus/image เดิม) ไม่ใช่ time checkpoint — ชิ้น 2/5 ของ PLAYER/CHARACTER ยังไม่มีกำหนด ตาม `COO-DECISION 20260904_0745`/`0942`
+
+> 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `8nh6q5`/R334 2026-09-04T07:5x+07:00 ตาม `COO-DECISION 20260904_0746` ข้อ 1**
+> ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน `228` (ใบ `GT-228`) ⇒ ใบนี้ `RE-229` · `RE-229`/`GT-229` = 0 hit ทั้งสามที่ก่อนวาง
+> **เปิดตามคำขอของ LANE-DB** (`notes_to_chief/20260904_0542_LANE-DB-RE-TICKET-piece-2-starting-stats-has-no-committed-source-table.md` · ค้างสองรอบ)
+> **เจ้าของใบ = chief (มอบหมาย) · ผู้บริโภคผล = LANE-DB** (ชิ้น 2/5 ของงาน PLAYER/CHARACTER)
+
+> 🔴🔴 **แก้ขอบเขตในรอบเดียวกัน (chief `8nh6q5`/R334 2026-09-04T09:0x+07:00 · ที่มา: `pf-adversary` D2)**
+> ผมเปิดใบนี้โดย **ไม่ได้ค้น `CLIENT_RE_QUEUE.md` เอง** และเชื่อคำอธิบายในจดหมายของ LANE-DB ชั้นเดียว (ผิดกฎ G1)
+> ความจริงคือ **`RE-122 PLAYER-STANDARD-STATUS-AND-CHARCREATE-SCORE-VALUES-001` (`CLIENT_RE_QUEUE.md:1662`)
+> ตอบคำถามนี้ไปแล้วตั้งแต่ 2026-08-28 สถานะ `DONE / BOUNDED-NEGATIVE`**
+> จดหมายผล: `notes_to_chief/consumed/20260828_0815_RE-122-RESULT-SCORE-IS-SIX-AXIS-MP-UNPROVEN.md`
+>
+> **สิ่งที่ `RE-122` ตอบไปแล้ว — ห้ามสั่ง runner ทำซ้ำ**
+> - **(ก) ตอบแล้ว**: `s_SCORE` = **six-axis char-create score** ผูกกับ
+>   `GameClient/Data/GUI/Model/Login_CharCreate_Main.model` (SHA `eef1eb1a…`) แกนคือ
+>   **`STATUS_STR` · `STATUS_AGI` · `STATUS_CON` · `STATUS_INT` · `STATUS_PER` · `STATUS_CHA`**
+>   🔴 **ไม่ใช่ `STR/CON/DEX/INT/PER + ตัวที่หก` อย่างที่ผมเขียนไว้ข้างล่าง** — ช่องที่หกคือ `CHA` และมีหลักฐานพินแล้ว
+> - **(ข) ตอบแล้ว**: `CONSTDATA_TH__POTENTIAL.tsv` SHA `d798d5ac…` = **11 คอลัมน์ 0 แถวข้อมูล** พร้อมสแปน loader
+>   `0x004A2C00..0x004A4500` (SHA `e567f27c…`) · `docs/FUNCTIONAL_COVERAGE.json` ไปไกลกว่านั้น:
+>   ตัวเลขเส้นโค้งความก้าวหน้า **ไม่ได้อยู่ในไฟล์รันเลย** มีแต่ชื่อคอลัมน์กับโค้ดที่ไปอ่าน static data ภายนอก
+>   ⇒ **ทางเลือก (ข) ปิดแล้ว ห้ามให้ runner ไปเปิดใหม่**
+> - `RE-122` มี **คำสั่งห้าม rerun** เขียนไว้เอง และระบุ objective เดียวที่จะปลดล็อกได้:
+>   *"recovered crosswalk ที่ผูก six-axis UI score เข้ากับห้า wire fields"*
+>
+> 🔴 **ข้ออ้างที่ผมยกมาผิด และถอนทิ้ง**: ที่เขียนว่า `reports/PF_JOB001_..._20260816.md` "นับ `s_SCORE` รวมใน
+> 37 other columns" — `RE-122` §T1 ระบุว่ารายงานนั้น **stale** (มัน 37 คอลัมน์และ **ไม่มี `s_SCORE` อยู่เลย**)
+> วัดสดรอบนี้: `CONSTDATA_TH__CHARCREATE_CLASS.tsv` มี **38 คอลัมน์ · `s_SCORE` = คอลัมน์ที่ 3 · 5 แถว** ตรงกับ `RE-122`
+> · docstring ของ `class_catalog.py` ที่ผมยกไปยืนยันให้ LANE-A/LANE-DB **ก็ stale ด้วย** อ้างรายงานฉบับเดียวกัน
+>
+> **⇒ คำถามที่เหลือจริงของใบนี้ เหลือข้อเดียว (แทนคำถาม (ก)/(ข) ข้างล่างทั้งคู่)**
+> **มี crosswalk ที่ผูกหกแกนของ UI (`STR/AGI/CON/INT/PER/CHA`) เข้ากับ *ห้า* wire fields ที่เซิร์ฟเวอร์ส่งจริง
+> หรือไม่ · ถ้ามี แกนไหนหายไปและใครกินช่องนั้น** (นี่คือ objective ที่ `RE-122` เขียนไว้เองว่าจะปลดคำสั่งห้าม rerun)
+> 🔴 **ห้าม runner เริ่มก่อนอ่าน `RE-122` + จดหมายผลของมันจบทั้งฉบับ** · ถ้า `RE-122` ตอบครบแล้วจริง ให้ปิดใบนี้
+> เป็น `SUPERSEDED - covered by RE-122` แล้วบอกกลับมา **นั่นคือผลที่ใช้ได้ ไม่ใช่ใบล้ม**
+>
+> **ค้นใน `pf_bridge\external\` แล้ว:** (สาย RE กรอก — 🔴 chief เปิดใบครั้งแรกโดยลืมแถวนี้ ถือเป็นข้อบกพร่องของใบ)
+> **ค้น `gamedata` แล้ว:** (สาย RE กรอก — เช่นเดียวกัน)
+>
+> 🟢 **ข่าวดีสำหรับ LANE-DB**: หกแกนมีชื่อและมีหลักฐานพินแล้วตั้งแต่ 28 ส.ค. ⇒ ชิ้น 2 อาจ **ไม่ต้องรอใบนี้เลย**
+> ดูจดหมาย `notes_to_chief/20260904_0905_CHIEF-TO-LANE-DB-CORRECTION-*.md`
+
+- **ถาม (สองเส้นทาง ตอบได้เส้นใดเส้นหนึ่งก็พอ ไม่ต้องตอบทั้งคู่)**
+  - **(ก)** คอลัมน์ `s_SCORE` ใน `gamedata/tables/CONSTDATA_TH__CHARCREATE_CLASS.tsv` (หกตัวเลขคั่น `;`
+    ต่อแถว เช่น Gladiator `4;3;4;1;1;2`) ไคลเอนต์อ่านไปทำอะไร · **ลำดับของหกช่องคืออะไร**
+    (สมมติฐานที่ต้องหักล้างหรือยืนยัน: STR/CON/DEX/INT/PER + ตัวที่หกอีกหนึ่ง) ·
+    ค่าที่อ่านได้เป็น **ค่าสแตทเริ่มต้นจริง** หรือเป็นน้ำหนัก/แถบพรีวิวตอนสร้างตัว หรืออย่างอื่นทั้งดุ้น
+  - **(ข)** `gamedata/tables/CONSTDATA_TH__POTENTIAL.tsv` มีแต่ header ไม่มีแถวใน snapshot นี้ —
+    ในไบนารีไคลเอนต์มีแถวจริงของตารางนี้ที่ยังไม่ถูกดึงเข้า `gamedata/tables/` หรือไม่ ·
+    ถ้ามี ให้คืนสคีมา + แถว พร้อมที่อยู่ที่ดึงมา
+
+- **ทำไมถึงเปิดใบ (วัดแล้ว ไม่ใช่สมมติฐาน — LANE-DB `0542`)**
+  ชิ้น 2/5 คือ "ค่าเกิดจากตารางแทน `DEFAULT 100`" แต่สองตารางที่ `PANYA-DECISION 20260904_0328` ระบุชื่อไว้
+  **ไม่มีคอลัมน์สแตทเริ่มต้นต่อคลาสเลย**:
+  1. `CONSTDATA_TH__STANDARD_STATUS.tsv` 255 แถว = ตาราง EXP/แต้มความสามารถ **ต่อเลเวล**
+     (`n_ID`=เลเวล · `n_EXP_CURRENTLV` · `n_POINT_ABILITY` · `n_DEADLOSS` · `n_PVP_*` · `n_DEFENCE_CONSTANT`) ·
+     `n_POINT_ABILITY` = แต้มที่ได้ตอนเลเวลอัพ (0 ที่เลเวล 1) ไม่ใช่ค่าที่มีอยู่แล้ว
+  2. `CHARCREATE_CLASS.s_SCORE` = ตัวเลือกเดียวที่รูปร่างเหมือนสแตท แต่ **ไม่เคยถูก RE เลย** —
+     `class_catalog.py` บน main เขียนใน docstring ของตัวเองว่า "s_SCORE's semantics have never been RE'd" ·
+     `reports/PF_JOB001_CHARCREATE_CLASS_STATIC_BOUNDARY_20260816.md` นับมันรวมใน "37 other columns" โดยไม่ถอดสักตัว
+  3. `POTENTIAL.tsv` = ตารางเดียวที่ `docs/FUNCTIONAL_COVERAGE.json` เรียกว่าผู้สมัครจริง แต่ไม่มีแถว
+
+- **สิ่งที่ยังไม่ใช่หลักฐาน (nonclaim บังคับของใบนี้)**
+  🔴 **ความยาวหกช่องเข้ากับจำนวนสแตทที่เราคิดว่ามี = ความเข้ากันได้ ไม่ใช่การพิสูจน์** ·
+  ห้ามใครประกาศลำดับช่องจากการนับจำนวนหรือจากค่าที่ "ดูสมเหตุสมผล" ·
+  ห้ามยกใบนี้ปิดด้วยการอ่าน `.tsv` ซ้ำ — คำตอบต้องมาจากโค้ดที่ **อ่านคอลัมน์นี้** ในอิมเมจ (G6: ห้ามประกาศความหมายของฟิลด์จากการอ่านครั้งเดียว)
+
+- **อิมเมจที่ต้องยึด**
+  `GameClient.local.bin` 14,759,424 ไบต์ sha256 `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
+  ทางเข้าที่แนะนำ: ตัวโหลด `CHARCREATE_CLASS` (ชื่อตาราง/ชื่อคอลัมน์เป็นสตริงในอิมเมจ) → ตัวที่ split `;`
+  → ผู้บริโภคของแต่ละช่อง · เทียบกับ `POTENTIAL` loader เส้นคู่ขนาน
+
+- **เกณฑ์ปิด (ชั้นเดียวพอ — ใบนี้เป็น static ล้วน ไม่มีชั้น client-observable)**
+  ① ระบุสแปนที่อ่าน พร้อม `span_sha256` ทุกสแปน (`RE_STATIC_SEARCH_RULES.md` §1) ·
+  ② สำหรับ **แต่ละช่องในหกช่อง** ระบุ consumer crosswalk จริง หรือประกาศตรง ๆ ว่าช่องนั้น `opaque` ·
+  ③ ตอบแบบ **bounded** ได้ ถ้าตอบได้บางช่อง — ระบุว่าช่องไหนค้างและค้างเพราะอะไร
+  🔴 ตอบไม่ได้เลยก็เป็นผลที่ใช้ได้ (`BOUNDED-NEGATIVE`) — LANE-DB จะได้เลิกรอและคง `DEFAULT 100` ต่ออย่างเปิดเผย
+
+- **ผลไปถึงใคร**: จดหมายผลจ่าหน้า **LANE-DB** (cc chief, COO) · LANE-DB บริโภคเองและปิดหัวใบนี้ในรอบที่ผลถึง
+  (กฎ "ใครเปิดใบคนนั้นบริโภค" — ใบนี้เปิดแทน LANE-DB ตามคำขอของเขา)
+- **ผู้ทำ**: **สาย RE (RE runner local)** — สายเดียว ไม่ต้องจอง · route `STATIC-ON-BRIDGE` เพราะต้องดิสแอสเซมบลีอิมเมจ ⇒ ทำบนคลาวด์ไม่ได้
+- **ผลกระทบถ้าไม่ตอบ**: ชิ้น 2/5 ของ PLAYER/CHARACTER **ไม่มีกำหนด** (`COO-DECISION 20260904_0745`) · `DEFAULT 100` คงไว้ ห้ามเดา
+
+---
+
+## 🔬 RE-232 SCAST-CONDITION-BEHAVIOR-TOKEN-GRAMMAR-001 [~~OPEN -- 🔴 `[STATIC-ON-BRIDGE]`~~ 🔵 **DONE / BOUNDED-NEGATIVE — ปิดโดย LANE-CS รอบ `tp9rpy` 2026-09-04T12:1x+07:00 ตามผล `notes_to_chief/20260904_1055_RE-232-RESULT-BOUNDED-NEGATIVE-EIGHT-ROWS-DO-NOT-CLASSIFY.md`: grammar มีโครงสร้าง condition-line → behavior-line จริง แต่ 8-row sample ที่ขอบเขตใบนี้กำหนดไม่มีตัวแทน AOE/self-buff/heal ที่ label ได้อิสระเลยสักแถว ⇒ แยก single-target/AOE/self-buff/heal ไม่ได้จากกลุ่มตัวอย่างนี้ · `BUILD_IMPACT: no classifier change` (`damage_by_skill.py`/`skill_catalog.py` เก็บ `s_CAST_CONDITION`/`s_CAST_BEHAVIOR` เป็น raw field ต่อไป) · เดินต่อได้เฉพาะถ้ามีใบใหม่แยกต่างหากที่เพิ่ม ≥8 แถว label อิสระ (2 single-target + 2 AOE + 2 self-buff + 2 heal) เป็น 16-row targeted follow-up — ใบนั้นยังไม่มีอยู่ ณ รอบที่ปิดนี้**]
+
+> 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `2vfbtf`/R335 2026-09-04T09:3x+07:00 ตาม `COO-DECISION 20260904_0848` ข้อ 5**
+> ตัวนับร่วมสองคิว คืน `231` (`GT-231`) ⇒ ใบนี้ `RE-232` · `RE-232`/`GT-232` = 0 hit ทั้งสามที่ก่อนวาง (`CLIENT_RE_QUEUE.md`, `GAME_TEST_QUEUE.md`, `archive/*QUEUE*ARCHIVE*`)
+> **เปิดตามคำขอของ LANE-CS** (`notes_to_chief/20260904_0755_LANE-CS-TO-COO-round-6o11t1-orphan-closed-marker-risk-found-npassive-is-not-the-type-column.md` ข้อ 4)
+> **เจ้าของใบ = chief (มอบหมาย) · ผู้บริโภคผล = LANE-CS**
+
+- **ถาม**: token grammar ของคอลัมน์ `s_CAST_CONDITION`/`s_CAST_BEHAVIOR` (มินิแลงเกวจ `GO(0)`, `CHASE(n)`, `SKIP(n)`, `ISVIP_I(n)`, ... ที่ `GT-052` 24 ส.ค. นับ token distinct ไว้ 224/2112 ตัว ยังไม่มีใครถอด) แยกแยะ "โจมตีเป้าเดียว vs AOE vs buff ตัวเอง vs heal" ได้จริงหรือไม่ · ถ้าได้ กติกา token ที่แยกแต่ละคู่คืออะไร
+  🔴 **ขอบเขตแคบ ตามคำขอของ LANE-CS เอง**: ถอดเฉพาะแถวของ **8 สกิลที่มีอยู่ในสารบัญตอนนี้** (`skill_catalog.py` บน main) — **ห้ามขยายไปตาราง `s_CAST_*` เต็ม 2,165 แถว** ในใบนี้ ถ้าผลจาก 8 สกิลชี้ว่าต้องขยาย ให้เปิดใบใหม่แยกต่างหากพร้อมเหตุผล
+
+- **ทำไมถึงเปิดใบ (วัดแล้ว ไม่ใช่สมมติฐาน — LANE-CS `0755` ข้อ 3)**
+  `n_PASSIVE` (คอลัมน์ที่เคยสงสัยว่าเป็นชนิดสกิล basic/attack/AOE/buff/heal/passive) **ถูกหักล้างแล้วสองทาง**
+  (`pf-static-re` ไล่ title/description ทั้ง 6 ค่า + `pf-adversary` ตรวจ 8 สกิลที่รู้จักคู่ขนาน): สกิล 99
+  "Normal Attack" มี `n_PASSIVE=2` **เท่ากับ** สกิลกระโดด 110/111 (ไม่ใช่โจมตี) และ **ต่างจาก** Basic
+  Training ทั้งห้า (`n_PASSIVE=1` ทั้งหมด) · แพทเทิร์นจริงดูเหมือนเป็น "แถวนี้เป็นของระบบย่อยไหน" ไม่ใช่ชนิด
+  สกิลเชิงเกม — ปักไว้แล้วด้วยเทส `NPassiveIsNotATypeColumnTests` ใน `tests/test_skill_catalog.py`
+  ⇒ **`n_PASSIVE` ปิดทางนี้แล้ว** ที่เหลือที่ยังไม่ลองคือ `s_CAST_CONDITION`/`s_CAST_BEHAVIOR`
+
+- **สิ่งที่ยังไม่ใช่หลักฐาน (nonclaim บังคับของใบนี้)**
+  🔴 **ผลจาก 8 สกิลนี้ไม่ใช่การพิสูจน์ว่ากติกาใช้ได้กับตารางเต็ม** — 8 แถวคือกลุ่มตัวอย่างเพื่อตอบคำถาม
+  "grammar นี้มีศักยภาพตอบคำถามหรือไม่" ไม่ใช่การ derive กติกาสุดท้าย · ห้ามอ้างว่าปิดคำถามชนิดสกิลทั้งระบบ
+  จากใบนี้ใบเดียว · ห้ามประกาศความหมาย token จากการอ่านครั้งเดียว (G6) — ต้องยันกับ ≥2 สกิลต่อ token ที่อ้างว่าเข้าใจ
+
+- **อิมเมจที่ต้องยึด**
+  `GameClient.local.bin` 14,759,424 ไบต์ sha256 `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
+  ทางเข้าที่แนะนำ: ตัวโหลด/ตัว parse `s_CAST_CONDITION`/`s_CAST_BEHAVIOR` ของ 8 สกิลใน `skill_catalog.py`
+  → ตัวแปล token (`GO`/`CHASE`/`SKIP`/`ISVIP_I`/...) → ผู้บริโภคของแต่ละ token ในโค้ดฝั่งไคลเอนต์
+
+- **เกณฑ์ปิด (ชั้นเดียวพอ — ใบนี้เป็น static ล้วน ไม่มีชั้น client-observable)**
+  ① ระบุสแปนที่อ่าน พร้อม `span_sha256` ทุกสแปน (`RE_STATIC_SEARCH_RULES.md` §1) ·
+  ② สำหรับ 8 สกิล ระบุว่า token ไหนแปลได้ + ความหมาย พร้อมหลักฐาน ≥2 จุดต่อ token ที่อ้าง หรือประกาศ `opaque` ตรง ๆ ·
+  ③ ตอบตรง ๆ ว่า grammar นี้แยก "โจมตีเป้าเดียว vs AOE vs buff ตัวเอง vs heal" ได้หรือไม่จากกลุ่มตัวอย่างนี้ ·
+  ④ ตอบแบบ `BOUNDED-NEGATIVE` ได้ ถ้า 8 สกิลไม่พอสรุป — ระบุว่าต้องขยายไปกี่แถวจึงจะพอ
+
+- **ผลไปถึงใคร**: จดหมายผลจ่าหน้า **LANE-CS** (cc chief) · LANE-CS บริโภคเองและปิดหัวใบนี้ในรอบที่ผลถึง
+- **ผู้ทำ**: **สาย RE (RE runner local)** — สายเดียว ไม่ต้องจอง · route `STATIC-ON-BRIDGE` เพราะต้องดิสแอสเซมบลีอิมเมจ ⇒ ทำบนคลาวด์ไม่ได้
+- **ผลกระทบถ้าไม่ตอบ**: LANE-CS ไม่มีเส้นทางอื่นตอบคำถามชนิดสกิลตอนนี้ · ไม่บล็อกอะไรใน M1-M5 (LANE-CS ยังไม่แตะดาเมจจนกว่าจะอ่าน `mob_combat.py` ของ LANE-B ให้ครบตาม `0755`)
+
+---
+
+## 🔬 RE-240 HOTBAR-SKILL-KEY-TO-PRODUCER-WALK-001  [~~OPEN -- 🔴 `[STATIC-ON-BRIDGE]` · ผู้เปิดใบ = **chief (LANE-E)** รอบ `wjqykr`/R338 · ผู้ทำ = **สาย RE (RE runner local)** · **ผู้บริโภคผล = LANE-CS**~~ 🔵 **DONE / BOUNDED-NEGATIVE — ปิดโดย LANE-CS รอบ `1z31do` 2026-09-04T18:0x+07:00 ตามผล `notes_to_chief/20260904_1714_RE-240-RESULT-HOTBAR-DISPATCH-EXITS-NO-PRODUCER.md`: HOTKEY class 20 (ทุกแถว TOOLBAR*/SKILLBAR*) ออกที่ epilogue `0x4518F3` ก่อนถึงทั้ง `ActionVital`/`0x44D260` และ `TriggerCastSkillVital`/`0x00600A60` — ไม่มี producer ให้ตั้งชื่อ skill-id field จากเส้นนี้ · control WIELD ผ่าน (เส้นทาง RE ใช้ได้ ปัญหาอยู่ที่ branch สกิลเอง) · `BUILD_IMPACT: no server field named` (`damage_by_skill.py` ยังไม่ผูก skill id กับฟิลด์ใด) · ส่งต่อเป็นใบ attended capture ใบถัดไป (เปิดพร้อมกันในรอบนี้)**]
+
+> 🔢 เลขใบตั้งโดย chief รอบ `wjqykr`/R338 2026-09-04T14:0x+07:00 · ตัวนับร่วมสองคิวคืน `239` ⇒ ใบนี้ `240` · **0 hit ทั้งสามที่ก่อนวาง**
+> ที่มา: `notes_to_chief/20260904_1041_LANE-CS-CORE-REQUEST-which-actionvital-field-carries-skill-id.md` — คำตอบของ chief คือ "ไม่ใช่ห้าฟิลด์นั้น และน่าจะเป็นคนละเฟรม" ใบนี้คือทางที่ตัดสินได้จริง
+
 ## 🆕🔴 RE-136 MOBS-ANSWER-AS-NPC-DISPATCH-001 [STATIC-ON-CLOUD]: คลิกซ้ายบน hostile roster placement ถูกเซิร์ฟเวอร์ตอบด้วย **เลนคุย NPC** แทนเลนต่อสู้ -- จุดไหนในโค้ดตัดสิน และมันแยก mob ออกจาก NPC ด้วยอะไร (ถ้าแยก)  [**ANSWERED (ชั้นซอร์ส) โดย chief รอบ `wi1m62` 2026-08-29T01:2x+07:00 -- ไม่ต้องส่งให้ RE runner แล้ว · เหลือ "งานแก้" ซึ่งอยู่ในไฟล์ของ chief** -- คำตอบสี่ข้อและใบสั่งงานอยู่ท้ายใบนี้]
 
 **ADDRESSEE: RE (ตอบได้จากซอร์สที่ commit แล้ว ไม่ต้องมีอิมเมจ)** · ผู้เปิดใบ: chief (สาย E) รอบ `wi1m62` (R218) 2026-08-29T01:0x+07:00
@@ -146,78 +445,6 @@ and not self.v138_marker1_population_sent` (`TARGET_VITAL=0x1ADD`, `CHOOSE_NPC=0
   ตอบไม่ได้จากที่นี่ ต้องใช้เครื่องสะพาน
 - ไม่อ้างว่าคลิกซ้ายบน hostile "ควร" ยิง `ActionVital` · หลักฐาน negative ของ SCENE-005 วัดด้วย **Tab** ไม่ใช่เมาส์
 - ไม่อ้างว่าการถอด V98 ออกจะทำให้ตีได้ -- มันถอดสิ่งกีดขวางหนึ่งชิ้นเท่านั้น
-
-## 🆕🔬 RE-137 NPCCONVERSATION-54B-WHOSE-SCRIPT-001 [STATIC-ON-CLOUD]: เฟรม 54 ไบต์ที่ `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE` ส่ง -- descriptor ที่ถึงจอเป็นชุด `q3021` (Columbus) หรือ `q3020` (Sebastian)  [✅ **ANSWERED (ชั้นตาราง) - answered by `notes_to_chief/consumed/20260829_0238_LANE-A-RESULT-for-RE-137-the-54B-frame-is-not-what-titles-that-window.md`** · ปิดหัวใบโดย chief (LANE-E) รอบ `kj0s6r`/R346 2026-09-05T02:0x+07:00 · **คำตอบคือ "ไม่ใช่ทั้งสองข้อ"**: เฟรม 54 ไบต์เป็น `q3021` แน่นอน **แต่ไม่ใช่สิ่งที่ตั้งชื่อ/เนื้อ/เสียงของหน้าต่างนั้น** — ไคลเอนต์ประกอบจาก `TEXTDATA_TH__MOBS_TIP.tsv` ของ template ที่มันเชื่อว่า actor ตัวนั้นเป็น (`n_ID=2` Sebastian · `s_NPC_VOICE 20;21`) ไม่ใช่จาก quest id ที่เราส่ง · มี **control** ในจดหมาย: กฎ decode เดียวกันคืนสตริงที่ขึ้นจอจริงในบูตเดียวกันสองอัน (`Atlantic Ocean:Rising Sun Sea`, `Port Royal`) · 🔴 **nonclaim**: VA ฝั่ง UI ที่อ่าน `MOBS_TIP` ยัง `[UNKNOWN]` — ต้องเปิดอิมเมจ ทำบนคลาวด์ไม่ได้ ⇒ อยู่กับ `GT-170` (`STATIC-ON-BRIDGE`) · จดหมายผลถูก consume ตั้งแต่ 29 ส.ค. แต่ไม่มีใครปิดหัวใบ = ค้างบัญชี 7 วัน ไม่ใช่ช่องเทส (พบโดยลูกมือตรวจของ chief รอบนี้ จากรายการกวาดของ ka1-A `20260905_0106`)]
-
-**ADDRESSEE: RE** · ผู้เปิดใบ: chief (สาย E) รอบ `wi1m62` (R218) 2026-08-29T01:0x+07:00
-**ต้นเรื่อง:** ใบผลเดียวกัน ข้อ ② · ปิดครึ่งที่ค้างของ `GT-102` (เกรด `PARTIAL` เพราะข้อนี้ข้อเดียว)
-
-**สิ่งที่วัดแล้ว [MEASURED]:** คลิก Columbus ⇒ ยิง `CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE`
-(54 bytes) ครั้งเดียวจริง · หน้าต่างเปิดจริงพร้อมสองออปชัน · **แต่ป้ายผู้พูด = "Sebastian"**
-เนื้อบทขึ้นต้น "Prison Exile Island ข้าคือผู้..." และ **เสียงพากย์ที่ดังขึ้นเป็นเสียง Sebastian**
-(เจ้าของจำเสียงจากเซิร์ฟเวอร์ต้นฉบับได้ -- ยืนยันตอน 00:17)
-
-**คำถาม:** ถอดไบต์ 54 ตัวนั้นทีละฟิลด์จาก builder ที่ commit แล้ว แล้วบอกว่า **เลข descriptor
-ที่เราส่งจริงคือเลขอะไร** และตรงกับ `q3021` หรือ `q3020` ในตารางที่เรามี
-[เสนอ ยังไม่วัด] คอนโซลบิลด์นี้พิมพ์เองว่า ChooseNPC path ส่ง "one **q3020** NPCConversation descriptor"
-⇒ ถ้าจริง เราส่งบทของ Sebastian ทุกครั้งโดยไม่เกี่ยวกับ NPC ที่คลิก **ห้ามสรุปจากบรรทัดคอนโซลนั้นอย่างเดียว**
-
-**เกณฑ์ผ่านสองชั้น**
-- wire/DB: แผนที่ฟิลด์ครบ 54 ไบต์ + เลข descriptor ที่ส่งจริง พร้อม file:line ของ builder
-- client-observable: ต้องเป็นใบเทสรอบใหม่ (แก้แล้วคลิก Columbus ต้องได้บทของ Columbus) -- ยังไม่เปิด
-
-## 🔬 RE-138 NAME-LABELS-VANISH-AFTER-MOVE-001 [STATIC-ON-CLOUD]: ป้ายชื่อ (เขียว) ของทุกตัวในแมพหายหลังผู้เล่นเดินออกจากบริเวณแรก เหลือแต่ป้ายฉายา (ฟ้า) -- รอบ reconcile ส่งอะไรไม่ครบ  [✅ CLOSED/ANSWERED -- ปิดโดย chief (ผู้เปิดใบ) รอบ `l39ees` (R322) 2026-09-03T16:01+07:00 ตาม `COO-DECISION 20260903_1546` · ผล: `notes_to_chief/20260903_0253_RE-138-RESULT-BASICATTR-OMISSION-PRESERVES-NAME.md` · **คำถามของใบตอบแล้ว และสมมติฐานของใบเองถูกหักล้าง**: mask ที่แคบกว่า **ไม่ล้าง** ชื่อเดิม -- BasicAttr merge `0x00465610` ตรวจ bit `0x0001` ที่ `0x0046564E` แล้วเมื่อ bit **ถูกละ** จะ copy ชื่อเดิมจาก `source+0x28` (`0x00465654..0x0046565B`) ⇒ การที่เซิร์ฟเวอร์ละ name bit **ไม่ใช่** ต้นเหตุที่ป้ายชื่อหาย · ฝั่งเซิร์ฟเวอร์: retained กับ entrant ได้ BasicAttr mask `0x030C` เท่ากัน ไม่มี name bit ทั้งคู่ (`population.py:206-213`) ต่างกันแค่ entrant ได้ MovementAttr `0xFF` (`:214-223`) ⇒ ประโยค "retained เป็น NPCAttr-only" ไม่ได้แปลว่าไม่มี BasicAttr · 🔴 ~~ชั้น client-observable ของใบนี้ไม่เคยเปิด ⇒ ห้ามยกใบนี้ไปเป็นฐานว่า "ป้ายชื่อไม่หายแล้ว"~~ **ปิดแล้ว (LANE-A รอบ `2mnd7b` 2026-09-05T12:0x+07:00, NOW.md `1152` ข้อ 4)**: `GT-250` (R317, `notes_to_chief/20260905_1125_KA1A-R317-RESULTS-*.md` §2) วัดตรงอาการเดิม (ภาพ 235212 = ป้ายชื่อหายหลังเดินออกนอกสายตา) บนบิลด์ปัจจุบัน — เดินออกจนพ้นสายตา (X:-4,735 Y:-1,219) แล้วกลับ: **ป้ายชื่อครบทุกตัวเหมือนเดิม ไม่มีตัวไหนเหลือแต่ title** ⇒ **NEGATIVE, ไม่ reproduce** หลัง fix นี้ขึ้น main · ชั้น client-observable ของใบนี้ปิดด้วยผลลบที่วัดจริงแล้ว object lifetime / actor generation reuse ที่เคยเป็น nonclaim ค้างไว้ **ไม่ใช่ต้นเหตุที่ยังพิสูจน์อยู่ ณ ตอนนี้** เพราะอาการไม่เกิดให้ไล่ต่อ (ถ้าเกิดใหม่ในอนาคต NOW.md M-ladder ระบุเจ้าของถัดไป = LANE-A หลัง P-2) อาการที่เจ้าของเห็น (ภาพ 235212) **มีเจ้าของแล้ว: RE-138's BasicAttr-omission fix, ยืนยัน client-observable ด้วย `GT-250`** · chief ไม่เปิดใบใหม่ในรอบนี้ตามคำสั่ง `NOW.md` P-2 (ห้ามเปิด RE ใหม่) เสนอ COO ในจดหมายรอบ R322]
-
-**ADDRESSEE: RE** · ผู้เปิดใบ: chief (สาย E) รอบ `wi1m62` (R218) 2026-08-29T01:0x+07:00
-**ต้นเรื่อง:** ใบผลเดียวกัน ข้อ ④.2 (เจ้าของเห็นเอง ยืนยันแล้ว)
-
-**สิ่งที่วัดแล้ว [MEASURED, ภาพ 235212]:** `Fighting Fish soldier` เหลือ title ฟ้าลอยเดี่ยว ไม่มีชื่อเขียว ·
-`Loie` เหลือ "Royal Navy Engineer" ฟ้า ไม่มีชื่อ · ตัวที่มีแต่ป้ายฟ้าอยู่แล้ว = ป้ายหายทั้งใบ
-
-**คำถาม:** ในรอบ reconcile หลังผู้เล่นเดิน โค้ดส่ง attr อะไรให้ตัวที่ **retained** และอะไรให้ตัวที่ **entrant**
--- ตัว retained ได้ `BasicAttr` (ที่ถือชื่อ) ซ้ำหรือไม่ ยกบรรทัดที่ตัดสินมาเป็น file:line
-[เสนอ ห้ามใช้เป็นฐานใบอื่นจนกว่าจะวัด] คอนโซลบิลด์นี้เขียนเองว่า retained actors เป็น **NPCAttr-only**
-ส่วน entrants ใช้ full-mask MovementAttr ⇒ ถ้าจริง ตัว retained เสียชื่อในรอบ reconcile โดยการ **ละ** ไม่ใช่การ **ลบ**
-อ่านคู่กับ `RE-130` (reconcile แทนด้วย omission)
-
-**เกณฑ์ผ่านสองชั้น**
-- wire/DB: mask ที่ส่งจริงของ retained vs entrant พร้อม file:line · ระบุว่าชื่ออยู่ใน attr ตัวไหน
-- client-observable: ใบเทสรอบใหม่หลังแก้ (เดินไปกลับแล้วป้ายชื่อยังอยู่) -- ยังไม่เปิด
-
-🔴 นโยบายของบ้านนี้ข้อ 12 (ตัวละครสมประกอบ) แตะเรื่องนี้ตรง ๆ: "ส่ง attr ให้ครบที่สุดเท่าที่รู้
-ไม่ใช่ขั้นต่ำที่พอไม่พัง" -- ใบนี้คือกรณีที่ขั้นต่ำที่พอไม่พัง ทำให้ผู้เล่นเห็นแมพที่ไม่มีชื่อใครเลย
-
-### 🔎 กลไกที่เป็นตัวเก็งอันดับหนึ่ง -- เจอจากซอร์สรอบ `wi1m62` (chief + `pf-static-re`)
-[วัดแล้ว ชั้นซอร์ส] `make_v98_conversation_face_state` (`current/pf_login_game_server_v141.py:1078-1106`)
-**ประกอบสมาชิกทั้งฉากใหม่ทั้งหมด** จาก `PORT_ROYAL_UNAMBIGUOUS_PLACEMENTS` ผ่าน
-`make_npc_attr(template_id, aid, 1, 0, preset)` ทุกครั้งที่มีคนคลิกอะไรสักตัว
-และ `make_npc_attr` (`v141:1139-1141`) **ไม่มีพารามิเตอร์ faction เลย** · ค่าตั้งต้น `basic_name=""`, `hp=100/100`
-⇒ แพ็กเกต 10,610 ไบต์ทุกใบไม่มีชื่อ ไม่มี faction 6 ไม่มี HP ที่ขุดมา และใช้ template id ดิบของ Mob-Set
-⇒ **ทุกคลิกล้าง `full_roster_override` ของทั้งเมืองในทางส่ง** (`runtime.py:6086-6094` เป็นคนใส่ค่านั้น)
-🔴 [ยังไม่วัด — ห้ามข้ามไปสรุป] การส่ง NPCAttr ที่ mask แคบกว่า **ล้าง**ค่าเดิม (ชื่อ/faction) ในฝั่ง client
-หรือไม่ ยังไม่มีใครวัด · `RE-092` พิสูจน์ replace-by-omission ที่ระดับ **ชุด actor** ไม่ใช่ระดับ **บิตใน mask**
-⇒ นี่คือคำถามจริงของใบนี้ และเป็นคำถามที่ต้องใช้เครื่องสะพาน
-
-### result: [✅ ANSWERED · 2026-09-03 · ใบผล `20260903_0253` · กรอกโดย chief R322 ตาม `COO-DECISION 20260903_1546`]
-
-**ตอบคำถามของใบตรง ๆ (ชั้น wire/source):** retained และ entrant ได้ `NPCAttr` ทั้งคู่ ซึ่ง serialize `BasicAttr` mask `0x030C`
-เท่ากัน และ **ไม่มี name bit `0x0001` ทั้งคู่** (`src/pirateforce_foundation/population.py:206-213`) · entrant ต่างตรงที่ได้
-`MovementAttr` full mask `0xFF` เพิ่ม (`:214-223`) · ตัวประกอบแช่แข็งให้รูปเดียวกัน (`current/pf_login_game_server_v141.py:1139-1141`,
-`:1149-1152`, `:1837-1853`) ⇒ ชื่ออยู่ใน `BasicAttr +0x28` และถูกส่งเฉพาะเมื่อ `basic_name` ไม่ว่าง
-
-**ตอบคำถามที่ใบเขียนว่า "ต้องใช้เครื่องสะพาน" (ชั้น client static):** การละ bit **ไม่ล้างค่าเดิม** เมื่อมี attr เก่าให้ merge ·
-`NPCAttr` merge `0x00466DC0` เรียก `BasicAttr` merge `0x00465610` · ที่ `0x0046564E` ทดสอบ `[destination+0x70] & 0x0001` ·
-bit มี = ใช้ค่าที่ decode เข้ามา · **bit ถูกละ = copy `source+0x28` ทับ `destination+0x28`** (`0x00465654..0x0046565B`) ·
-เป็น positive complete-function evidence ไม่ใช่ linear disassembly
-
-**⇒ สมมติฐานอันดับหนึ่งของใบ (mask แคบกว่าล้างค่าใน attr object) ถูกหักล้าง**
-
-**สิ่งที่ยังไม่ตอบ และห้ามใครอ่านผลนี้แล้วสรุปแทน**
-- ชั้น client-observable **ไม่เคยเปิด** — ไม่มีใครเดินไปกลับแล้วดูป้ายในบิลด์นี้ · `G-OBS` ยังไม่มีลายเซ็น
-- อาการจริงที่เจ้าของเห็น (ภาพ 235212) **ยังไม่มีต้นเหตุ** — เส้นทางที่เหลือคือ object lifetime / actor generation reuse
-  (ถ้า reconciler สร้าง object ใหม่ ก็ไม่มี attr เก่าให้เติม ค่า default ชื่อว่างยังเป็นไปได้) หรือเส้นทาง UI อื่น
-- **BUILD_IMPACT: ไม่ต้องแก้ client** · การเติม `basic_name` ใน population reconcile ยังสมเหตุผลตามนโยบายข้อ 12 (ตัวละครสมประกอบ)
-  แต่เป็น **hardening ไม่ใช่ root-cause fix** ห้ามรายงานว่าแก้แล้วป้ายจะกลับมา
 
 ## 🔬 RE-164 BT-GM-CLICK-FOUR-SUSPECTS-002 [CLOSED เฉพาะ**ชั้น static** ครบสี่ข้อ (#2 มีชั้น attended ด้วย) — ~~#1 STATIC-PARTIAL~~ ปิดโดย `RE-164 RESULT` `20260902_1143` รอบ `qhowwu` · 🔴 **ชั้น client-observable ของข้อ 3 ยังไม่ปิด และใบนี้ไม่เคยปิดมัน** — ถูกถือโดยขั้นที่ตัดสินของ `GT-207` (คลิกแล้ว `GMUI_BASIC` เปิดไหม) ซึ่งแทนที่ "`GT-164` variant ใหม่" ที่ nonclaim 7 พูดถึงและจะไม่มีวันมี]: **ของสี่ผู้ต้องสงสัยที่ `RE-126` ทิ้งไว้โดยไม่เดา (connection context / query-0x25 gate ตอนคลิก / current-UI object-key จริง / create path `0x007280D0`) ตัวไหนคือประตูที่หยุด `GMUI_BASIC` จริง — ข้อ 2 กับ 4 ปิดแล้วด้วย static synthesis จากใบเก่า (`RE-104`+`RE-118`) ที่ไม่เคย cross-reference กันมาก่อน ข้อ 2 ได้ชั้น attended เพิ่มจาก `GT-164` (bounded negative: 14/14 variant คลิกแล้วไม่เปิด)**
 
@@ -446,315 +673,122 @@ ADDENDUM v2 ข้อ A ที่ห้ามเชื่อ `rounds/`/`docs/` �
 `notes_to_chief/reference_codex_attr/PF_COMBAT_LETHAL_TAIL_DELTA.tsv:13` ·
 `notes_to_chief/20260901_2132_RE-164-RESULT-item3-closed-item1-writesite-found-plus-gamemasterdll-flag.md`
 
-## 🔬 RE-167 CENSUS-FRAME-INTERMITTENT-ABORT-001 [~~OPEN — assigned LANE-A~~ 🔵 **wire/DB ANSWERED bounded-negative, client-observable STILL PENDING — LANE-A รอบ `qoj8ei` 2026-08-31T11:36+07:00, ผล `notes_to_chief/20260831_1136_RE-167-RESULT-wire-layer-no-server-buffer-timeout-cause-found-bounded-negative.md`: ไม่พบ server-side buffer/timeout/race ที่อธิบาย 10053 ได้ จาก static analysis; chunking ต้องแก้ frozen `current/pf_login_game_server_v141.py` ซึ่งเป็นไฟล์ที่ทั้งโปรเจกต์ตกลงห้ามแก้ — ส่งเป็นคำถามเชิงโครงสร้างให้ chief/COO ตัดสิน ไม่ใช่ CORE-REQUEST ปกติ; ยังไม่มี fix ให้เทส จึงยังไม่เปิด GT ใหม่**]: เฟรม `WORLD_CENSUS_INITIAL` ขนาด ~20 KB (Port Royal, 108-115 actor) ทำสายไคลเอนต์ขาดเป็นครั้งคราว (`ConnectionAbortedError 10053`) — เกิดที่จุดไหนของ send/parse และทำไมไม่เกิดทุกครั้งบนเฟรมขนาดเท่ากัน
+## RE-125 PICKUP-REQUEST-VITAL-ID-001: what wire vital id (opcode) does a real client send when the player left-clicks a ground drop / `PickupTerrainThing` object, and what does its payload contain (object reference dword position, anything else)  [**CLOSED — 🔴 คำอ้างเชิงลบของใบนี้ถูกหักล้างแล้ว 2026-09-05**: `0x4543` **ถูกเห็นบนไวร์แล้ว** — R303 attended capture 20260902_1755 = 46 เฟรมขาเข้า 2 เทคจบ ยืนยันซ้ำ R306 · `COO-DECISION 20260905_0249` ข้อ 1 ปิด `GT-146` ด้วยเหตุผลนี้ และข้อ 2 สั่งพลิกถ้อยคำในซอร์ส ซึ่ง chief จ่ายรอบ `rz1fxh`/R358 (13 จุด 12 ไฟล์) · หัวใบนี้แก้ในรอบเดียวกันเพราะคำอ้างเก่ากับใหม่อยู่ด้วยกันไม่ได้ (chief `1810` §3) · ถ้อยคำเดิมที่ถอนแล้วแต่เก็บเป็นประวัติ: ~~**CLOSED BOUNDED-NEGATIVE — opcode ยัง UNOBSERVED: `0x4543` เป็นค่า DERIVED จากชื่อคลาสเท่านั้น, corpus ปัจจุบัน 2,106 ไฟล์ / 75,208 blocks มี `PickupTerrainThing` W=0/R=0 ⇒ ~~🔴 ห้ามต่อ production call site ของ `dispatch_pickup_request` ใน `runtime.py` ด้วย `0x4543` · ปลดล็อกได้ด้วย attended click capture ใหม่เท่านั้น (ใบแยก)~~ **LIFTED by COO-DECISION 20260902_0541** (ขีดฆ่า ไม่ลบ) — call site ต่อแล้วโดยคำตัดสิน `0541` ทาง 1 · ~~สิ่งที่ **ยังจริงไม่เปลี่ยน**: เลข `0x4543` ยัง **UNOBSERVED บนไวร์**~~ 🔴 **ถอนโดย chief (LANE-E) รอบ `kj0s6r`/R346 2026-09-05T02:0x+07:00 — ข้อความนี้ถูกหักล้างแล้วตั้งแต่ 2026-09-02**: รอบ attended R303 (`notes_to_chief/20260902_1755_KA1A-R303-RESULTS-*` หัวข้อ "0x4543 IS NO LONGER DERIVED - please strike the caveat") วัดเฟรมขาเข้า `0x4543` **46 เฟรม** และสองเฟรมในนั้นทำให้เกิดแถวในกระเป๋าจริง · ยืนยันซ้ำ R306 (`20260903_1657` · `VITAL_WALK_PROMOTED vital=0x4543`) ⇒ `0x4543` เป็น **OBSERVED บนไวร์** แล้ว ไม่ใช่ค่า derive จากชื่อคลาสอย่างเดียวอีกต่อไป · จดหมาย R303 ถูก consume แล้วแต่ไม่มีใครลงมือถอน ค้าง 3 วัน (พบโดยลูกมือตรวจของ chief รอบนี้) · 🔴 **คอมเมนต์ในซอร์สเซิร์ฟเวอร์ยังไม่ถูกแก้และผมยังแก้ไม่ได้ในรอบนี้** — `runtime.py:7886` · `mob_pickup_request.py:23` · `mob_loot.py:935` · `loot_roll.py:37` · `app.py:282` · `runtime.py:2835` · `runtime.py:7945` ยังเขียนว่า never observed และถูก **พินด้วยเทสบนเกต** (`test_the_call_site_is_absent_or_is_the_published_one`) ตาม `COO-DECISION 20260902_0542` ข้อ 1 ⇒ เกตกำลังบังคับข้ออ้างที่การวัดหักล้างแล้ว · **แก้ต้องผ่าน COO** เพราะถ้อยคำนั้นถูกคำตัดสินตรึงไว้ = จดหมาย `20260905_02xx_CHIEF-ASK-COO-*` และเงื่อนไขของ `0541` คือข้อเท็จจริงนี้ต้องเขียนไว้ที่ call site (เทส `test_the_call_site_is_absent_or_is_the_published_one` บังคับบน gate) · ต่อเป็น persist path (`dispatch_inbound_pickup_request`) ไม่ใช่ dispatch ล้วน ตาม `0541` ข้อ 2 · payload shape ปิดแบบ conditional-static แล้ว: class body = `object_ref_u32` + `opaque_u8` ไม่มี claimant identity/XYZ ⇒ เซิร์ฟเวอร์ต้องอ่านตัวตน/ตำแหน่งจาก authenticated session state · ปิดโดย RE runner LOCAL 2026-08-28T11:12+07:00, บริโภคโดย LANE-B รอบ `rbuta4` 2026-08-28T17:49+07:00, ดู `notes_to_chief/20260828_1112_RE-125-RESULT-NO-CAPTURED-PICKUP-OPCODE.md`**~~]
 
-### หลักฐานตั้งต้น
-`notes_to_chief/20260831_1036_GT106R2-RESULT-PASS-client-renders-the-destination-scene-mid-session-plus-two-new-findings.md`
-(ของใหม่ข้อ 1) — สามจุดข้อมูล: Port Royal 20,112B ครั้งแรกสายขาด (`10053`) ครั้งถัดมาผ่านทั้ง
-INITIAL/REAPPLY, Slave Market (BG0004) 18,997B ขึ้นข้อความ "ยังไม่สามารถรับข้อมูล Server ได้" แต่เล่นต่อได้
-— **เกิดเป็นครั้งคราวบนเฟรมขนาดเท่ากัน ห้ามเขียนว่า "20 KB พังเสมอ"**
+> NUMBERING NOTE: shared counter with `GAME_TEST_QUEUE.md` -- this round also opened `GT-124` there (grep
+> confirmed 2026-08-28: `GT-124`/`RE-124`/`RE-125` = 0 hits before either was reserved). `GT-124` took `124`
+> first (opened earlier in the same round); this entry is `125`. Highest prior number was `RE-123`
+> (BG0002-MIRAGE-REEL-QUEST-SPAWN-CROSSWALK-001, CLOSED).
 
-### ที่มา
-ก่อนหน้านี้ Port Royal ส่ง actor แค่ 3 ตัว (`V134_P0_P30_P91_ISOLATED`) ตอนนี้ส่ง 108/115 — เฟรมโตจาก
-หลักร้อยไบต์เป็น ~20 KB เป็นผลข้างเคียงของงานสำมะโนที่เพิ่งลง main ไม่ใช่บั๊กเก่าที่เพิ่งโผล่
+**ค้นใน `pf_bridge\external\ แล้ว:** ไม่เจอ -- `grep -in "pickup|Terrain.*Thing|4543|ground.*loot|item.*operate"
+external/00_SEARCH_HERE_FIRST.md` ให้ผล 0 แถว (ตรวจตามกฎบังคับข้อแรกของไฟล์นี้ก่อนเปิดใบ)
 
-### จุดที่ยังไม่แน่ชัด
-1. ฝั่งเซิร์ฟเวอร์ (`runtime.py`/`app.py` ส่ง `WORLD_CENSUS_INITIAL`): มี buffer/timeout ใดที่ทำให้ send
-   ถูก abort เป็นบางครั้งบนเพย์โหลดขนาดนี้ — ตรวจ log บริเวณจุด send ว่ามี retry/partial-write หรือไม่
-2. ฝั่งไคลเอนต์ (จากข้อสังเกต ไม่ใช่ disassembly ใหม่): ไคลเอนต์อ่านเฟรมสำมะโนเป็นก้อนเดียวหรือแบ่งอ่าน —
-   ถ้าไม่มี client image ให้ตอบจาก log ฝั่งเซิร์ฟเวอร์ + เอกสารโปรโตคอลที่ commit แล้วเท่านั้น
-3. ควรแบ่งเฟรมสำมะโนใหญ่เป็นหลายก้อน (chunking) หรือไม่ — ถ้าตอบได้จาก static analysis ให้เสนอ threshold
-4. ผลลบก็เป็นคำตอบ: ถ้าสรุปได้ว่าเป็นเงื่อนไข race ฝั่งเน็ตเวิร์กที่ไม่มีทางแก้จากโค้ดเซิร์ฟเวอร์ ให้ปิดเป็น
-   bounded-negative พร้อมเหตุผล
+### ทำไมเปิดใบนี้ (lane B, round `pnd0a5`, 2026-08-28)
+`pirate-force-server`'s `src/pirateforce_foundation/mob_pickup.py` มีกลไก CLAIM ฝั่งเซิร์ฟเวอร์ครบแล้ว
+(`resolve_claim`/`commit_pickup`/`dispatch_pickup_request`, unit-tested เขียวหมด) แต่ `runtime.py` **ไม่มี
+call site เรียกมันเลยแม้แต่จุดเดียว** (grep ยืนยันรอบนี้: `dispatch_pickup_request` = 0 hits ใน `runtime.py`)
+-- เพราะไม่มีใครยืนยัน **vital id จริง** ที่ client ส่งมาตอนคลิกเก็บของ (`runtime.py` มีคอมเมนต์ของตัวเองบอก
+ตรงๆ ว่า "there is no known vital id for a client-originated pickup request on this project's wire yet")
+สิ่งนี้เป็นคนละด่านกับ "ด่าน 2" (`session.select_and_start`'s `is_unmoved_baseline`, เลื่อนไป 30-31 ส.ค.
+ตาม `notes_to_chief/20260827_1350_COO-DECISION-bagwall-second-wall-redesign-deferred-post-M4.md`) -- นี่คือ
+ด่านที่**อยู่ก่อนหน้านั้นอีกชั้น**: ต่อให้ด่าน 2 เปิดวันที่ 30-31 ก็ยังเก็บของไม่ได้ถ้าไม่มีทางรับคำขอเข้ามา
+ก่อน `GT-060` (`GAME_TEST_QUEUE.md`) เคยแตะคำถามใกล้เคียง (id derive `0x4543` สำหรับ `PickupTerrainThing`)
+แต่เป็นคนละ pipeline (`HYP-PF-036` hypothesis scenario, ไม่ใช่เส้นทาง production ของ `mob_pickup.py`) --
+ใบนี้ถามเฉพาะเส้นทาง production
 
-### pass criteria — สองชั้น แยกกันเด็ดขาด
+### objective
+1. หา vital id (opcode) ที่ client ส่งมาเมื่อผู้เล่นคลิกซ้ายบนวัตถุของตกพื้น (`PickupTerrainThing` หรือชื่อ
+   เทียบเท่าในตารางเวิร์คของ Codex/`external/`) -- ยืนยันจาก capture corpus/ตารางที่ commit ไว้แล้วเท่านั้น
+   ห้ามเดาจาก pattern ของ id อื่น
+2. ถ้าเจอ: ระบุ payload shape เต็ม (object reference dword ที่ `mob_loot`/`mob_pickup` ใช้เป็น `drop_key`
+   อยู่แล้วหรือฟิลด์อื่น, ตำแหน่งผู้เล่นมากับเฟรมหรือเซิร์ฟเวอร์ต้องอ่านจาก session state เอง, มี opaque byte
+   อื่นที่ `mob_pickup.PickupClaim`/`opaque_u8` ต้องรองรับไหม) พร้อม provenance (offset/แถวตาราง/capture ไฟล์)
+3. ถ้าชนเพดาน static (ไม่มี capture ที่มีการคลิกเก็บของจริงเลย) ให้เขียน bounded negative ตามกฎ -- ระบุด้วยว่า
+   ต้องใช้ attended capture ใหม่ (คนละงานกับใบนี้) หรือยังมีมุมมอง static อื่นที่ยังไม่ลอง
 
-**ชั้น wire/DB (ปิดใบนี้ได้บางส่วน):** คำตอบต่อข้อ 1-4 จาก static analysis ของซอร์ส/log ที่ commit แล้ว
-พร้อมเลขบรรทัด — ผลลบก็เป็นคำตอบ
+### กติกาบังคับ (เหมือนทุกใบ static)
+อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (แถว/คอลัมน์/offset/capture) · ชนเพดานให้เขียน bounded
+negative แล้วปิด ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
 
-**ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องมีคนหน้าจอ):** เปิด GT ใหม่ถ้าต้องยืนยันว่า fix (เช่น chunking)
-แก้อาการ 10053 จริงในเซสชันยาว — สาย A เปิดใบเมื่อมีของให้เทส
+### เกณฑ์จบใบ
+vital id + payload shape พร้อม provenance พอให้ chief เขียน call site จริงใน `runtime.py` (ต่อกับ
+`mob_pickup.dispatch_pickup_request` ที่มีอยู่แล้ว) **หรือ** bounded negative ที่ชัดเจนว่า static ไปต่อไม่ได้
+และต้องรอ attended capture ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
 
-### ข้อห้าม
-🔴 **ห้ามแก้ด้วยการลดจำนวน actor เงียบ ๆ** — นั่นคือถอยหลังจากงานสำมะโนที่เพิ่งทำสำเร็จ (ตามที่ผู้เทสเน้นไว้
-ในใบต้นเรื่อง) · ห้ามอ้างว่าพบสาเหตุแท้จริงจากการอ่าน log ครั้งเดียว (G1) · 🔴 **CHARTER-02 §⑥**:
-`WORLD_CENSUS_INITIAL` ถูกประกอบ/ส่งจาก `runtime.py` (`src/pirateforce_foundation/runtime.py:8096`) ซึ่งเป็น
-เขตของ chief คนเดียว — ถ้าคำตอบชั้น wire/DB สรุปว่า fix (เช่น chunking) ต้องแก้ใน `runtime.py`/`app.py`/
-`pf_login_game_server_v141.py` **LANE-A ห้ามแตะไฟล์เหล่านั้นเอง** ให้เปิด CORE-REQUEST ขอ chief ต่อสายแทน
-ตามกติกาเขตเขียนปกติ
+**ทำไมมีค่า:** เป็นด่านที่บล็อก BUILD-006 (M5, กำหนด 31 ส.ค. 23:59) อยู่ก่อนด่าน 2 เสียอีก และไม่เคยถูกตั้ง
+คำถามตรงๆ มาก่อน (50 กว่ารอบของสาย B ที่ผ่านมาพูดถึงแต่ด่าน 1/2/3 ของกำแพงกระเป๋า ไม่เคยเช็คว่า runtime.py
+มีทางรับคำขอ pickup เข้ามาหรือยัง) -- ถ้าไม่ตอบ ต่อให้ด่าน 2 ออกแบบเสร็จวันที่ 30-31 ตามกำหนด BUILD-006 ก็ยัง
+ทำไม่ได้อยู่ดีเพราะไม่มีทางส่งคำขอเข้าเซิร์ฟเวอร์เลย
 
-### สัญญาผู้บริโภค
-ผู้เปิดใบเป็นผู้บริโภคผล (LANE-A) ตามกฎ "ใครเปิดใบคนนั้นบริโภค" — มอบหมายโดย chief รอบ `iby4ui` ตามคำขอ
-ของกะ1-A ในใบต้นเรื่อง (ADDRESSEE เดียวต่อใบ)
+## 🔬 RE-194 BASICATTR-0X54-SPEED-PLAYER-VS-NPC-CONFLICT-001 [STATIC-ON-BRIDGE]: `BasicAttr+0x54` (f32, mask `0x0040`, tag `0x2A`) has two different [MEASURED] client-write values for the same offset -- which one does a freshly-created *player* object actually carry?  [✅ **DONE / PASS - answered by `notes_to_chief/20260902_0501_RE-194-RESULT-PLAYER-FRESH-DEFAULT-400-NPC150-IS-WIRE.md`** · ปิดหัวใบโดย chief (LANE-E) รอบ `kj0s6r`/R346 2026-09-05T02:0x+07:00 · **คำตอบ: ผู้เล่นที่เพิ่งสร้างพก `400.0f`** · `150.0` เป็นค่าที่มาทีหลังบนไวร์ของ NPC ไม่ใช่ค่าเกิดของผู้เล่น · จดหมายผลเขียนไว้เองว่า "ขอให้ chief กรอก `### result:` และปิดหัวใบให้ด้วย" แต่ไม่มีใครทำ ค้าง 3 วัน ทั้งที่ผลถูกใช้ปลายน้ำไปแล้ว (`COO-DECISION 20260902_0742` ปลดแบนเลข `400.0` หลัง RE-194 · LANE-DB `20260902_0623` ใช้ปิดคำถาม speed-walk seed) = ค้างบัญชี ไม่ใช่ช่องเทส (พบโดยลูกมือตรวจของ chief รอบนี้ จากรายการกวาดของ ka1-A `20260905_0106`) · เดิม assigned LANE-DB]
 
-### links
-`notes_to_chief/20260831_1036_GT106R2-RESULT-PASS-client-renders-the-destination-scene-mid-session-plus-two-new-findings.md`
+### result:
+**DONE / PASS · 2026-09-02T05:01+07:00 · แหล่ง: `notes_to_chief/20260902_0501_RE-194-RESULT-PLAYER-FRESH-DEFAULT-400-NPC150-IS-WIRE.md` (RE runner) · กรอกลงหัวใบโดย chief (LANE-E) รอบ `kj0s6r`/R346**
 
-## 🔬 RE-168 SCENE-TRANSITION-UI-LAYER-NOT-RESET-001 [~~OPEN — assigned LANE-A~~ 🔵 **wire/DB ANSWERED partial, client-observable STILL PENDING — LANE-A รอบ `qoj8ei` 2026-08-31T11:42+07:00, ผล `notes_to_chief/20260831_1142_RE-168-RESULT-no-dialogue-close-signal-exists-server-is-stateful-enough-to-add-one.md`: เฟรม `kind=clear` ที่มีอยู่เป็น population เท่านั้น ไม่มีช่องปิด UI; เซิร์ฟเวอร์จำสถานะ conversation ได้จริง (`columbus_quest3021_conversation_sent`) แต่ไม่มี opcode ปิด dialogue ที่ characterize แล้วในเขตนี้ — เปิดใบใหม่ให้สาย RE หา opcode ก่อน; ยังไม่มี fix ให้เทส จึงยังไม่เปิด GT ใหม่**]: หน้าต่างบทสนทนา NPC (Columbus quest 3021) ค้างอยู่บนจอหลัง teleport ข้ามฉาก ทั้งที่ actor ถูกล้างแล้ว (`population=none`, เฟรม `kind=clear` ยิงก่อน teleport) — ชั้น UI ควรถูกสั่งรีเซ็ตตอนไหน และตอนนี้เซิร์ฟเวอร์ส่งสัญญาณนั้นหรือไม่
-
-### หลักฐานตั้งต้น
-`notes_to_chief/20260831_1036_GT106R2-RESULT-PASS-client-renders-the-destination-scene-mid-session-plus-two-new-findings.md`
-(ของใหม่ข้อ 2) — เจ้าของรายงานตรง ๆ ว่า "หลังวาร์ปไปฉาก 17 ภาพ/หน้าต่างบทสนทนาของ Columbus ยังค้างอยู่บนจอ"
-รายละเอียดเฟรม `WORLD_M2_CROSSING_HANDOFF kind=clear ... slot=before_teleport ... held=108` มาจากจดหมาย
-คู่กันบูตเดียวกัน (`notes_to_chief/20260831_1037_GT148-and-GT165-RESULT-stowaways-cleared-and-slave-market-island-has-life.md`
-บรรทัด ①) ไม่ใช่ใบ 1036 **คนละชั้นกับที่ `GT-148` ถาม** (`GT-148` ถามเรื่อง actor ค้าง — ตามใบ 1037 สาย A
-เจ้าของใบรายงานว่าจะปิดเป็น PASS เอง แต่ ณ เวลาที่เขียนใบนี้ `GAME_TEST_QUEUE.md` ยังขึ้น PENDING (สาย A
-ยังไม่ปิดหัวใบจริง) — ใบนี้ถามเรื่อง UI ค้าง ซึ่งเป็นชั้นคนละอันแม้ทริกเกอร์เดียวกัน ไม่ขึ้นกับผลของ `GT-148`)
-
-### จุดที่ยังไม่แน่ชัด
-1. เฟรม `kind=clear` ที่มีอยู่แล้ว (`WORLD_M2_CROSSING_HANDOFF`) สั่งล้างเฉพาะ actor หรือมีช่องสั่งปิด UI
-   ด้วย — ถ้าไม่มี ต้องมีเฟรม/สัญญาณแยกสำหรับปิด dialogue window
-2. การเปิดหน้าต่างบทสนทนา Columbus มาจากจุดเสียบไหน (`CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE`
-   ตามที่ log ใบต้นเรื่องแสดง) — จุดเสียบเดียวกันควรมีคู่ปิดหรือไม่
-3. เป็นปัญหาฝั่งเซิร์ฟเวอร์ (ไม่ส่งสัญญาณปิด) หรือฝั่งไคลเอนต์ (ได้สัญญาณแต่ไม่ทำตาม) — ตอบจาก wire/log
-   ที่ commit แล้วเท่านั้น ถ้าต้องอ่าน client behavior ให้ตอบเป็น bounded-negative ว่าตอบไม่ได้จากฝั่งนี้
-4. ผลลบก็เป็นคำตอบ: ถ้าเซิร์ฟเวอร์ไม่มีทางรู้ว่า dialogue window เปิดอยู่ (stateless ฝั่งนี้) ให้ปิดเป็น
-   bounded-negative พร้อมเสนอทางแก้ (เช่น ผูก dialogue-close เข้ากับ `kind=clear` เดิม)
-
-### pass criteria — สองชั้น แยกกันเด็ดขาด
-
-**ชั้น wire/DB (ปิดใบนี้ได้บางส่วน):** คำตอบต่อข้อ 1-4 จาก static analysis ของซอร์ส/log ที่ commit แล้ว
-
-**ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องมีคนหน้าจอ):** เปิด GT ใหม่เพื่อยืนยันว่า fix ปิดหน้าต่างจริง
-หลัง teleport — สาย A เปิดใบเมื่อมีของให้เทส
-
-### ข้อห้าม
-ห้ามนับเป็น FAIL ของ `GT-148` (ตามใบ 1037 ผลชั้น actor เป็นบวก — ไม่มี actor ค้าง — ไม่ว่าหัวใบจะถูกปิด
-เป็น PASS เมื่อไหร่ก็ตาม) · ห้ามอ้างว่ารู้พฤติกรรม client รวมโดยไม่มี client image/capture ยืนยัน ·
-🔴 **CHARTER-02 §⑥**: ถ้าคำตอบชั้น wire/DB สรุปว่าต้องผูกสัญญาณปิด UI เข้ากับเฟรมที่ `runtime.py`/`app.py`
-ประกอบ **LANE-A ห้ามแตะไฟล์เหล่านั้นเอง** ให้เปิด CORE-REQUEST ขอ chief ต่อสายแทน
-
-### สัญญาผู้บริโภค
-ผู้เปิดใบเป็นผู้บริโภคผล (LANE-A) — มอบหมายโดย chief รอบ `iby4ui` ตามคำขอของกะ1-A ในใบต้นเรื่อง (ใบใหม่
-ไม่ใช่ส่วนขยายของ `GT-148`)
-
-### links
-`notes_to_chief/20260831_1036_GT106R2-RESULT-PASS-client-renders-the-destination-scene-mid-session-plus-two-new-findings.md` ·
-`notes_to_chief/20260831_1037_GT148-and-GT165-RESULT-stowaways-cleared-and-slave-market-island-has-life.md`
-
-## 🔬 RE-191 MONSTER-NAME-COLOR-FONTSTYLE63-RGB-001 [STATIC-ON-BRIDGE]: `CODEX_CHECKPOINT 20260901_1135` closed the same-actor conditional static path for the monster-name-color write (`MCG-IMG-025..033` now `PROVEN_EXACT`, death branch conditionally writes style 63 via `CNetNPC` vslot `+0x3C` -> `0x0043BD70`) but never read the actual RGB triple that `fontstyle_id=63` resolves to through `UILabel_FontStyleID_parser_setter` (`0x00AA488F`) — what color does style 63 actually set, compared against the already-decoded controls 61/62? 🔴 **ไม่ใช่การยืนยันล่วงหน้าว่า 63 = เทา** — `20260901_0921_LANE-GM-STATUS-*.md`'s own nonclaim ①: "ไม่อ้างว่า fontstyle 63 คือสีเทาของมอนตาย — ตารางเองปฏิเสธการอ้างนี้ตรง ๆ" ใบนี้มีอยู่เพื่อหาคำตอบนั้น ไม่ใช่เพื่อยืนยัน `NOW.md` P-2's ตาย=เทา ที่ยังไม่มีหลักฐาน  [🟢 **CLOSED PASS/DONE (ชั้น conditional static + DATA palette เท่านั้น; runtime pixels ยังเปิด) — ผลมาถึง 2026-09-01T14:39+07:00 (Codex static RE), ปิดหัวใบโดย LANE-GM รอบ `wggs0i` 2026-09-02T10:35+07:00 ตามสัญญาผู้บริโภคของใบเอง, ดูผลด้านล่าง**] ~~[OPEN — assigned LANE-GM]~~
+- **คำตอบ**: `BasicAttr+0x54` ของ *player* object ที่เพิ่งถูกสร้าง = **`400.0f`** · ค่า `150.0` ที่เคยขัดกันคือค่าของ NPC ที่มาทีหลังบนไวร์ ไม่ใช่ค่าเกิดของผู้เล่น ⇒ ความขัดแย้ง "สองค่าที่ offset เดียวกัน" ไม่ใช่ความขัดแย้ง แต่เป็นคนละ object คนละจังหวะ
+- **ชั้นหลักฐาน**: wire/DB (static-on-bridge) ชั้นเดียว — **ไม่มีชั้น client-observable** จึงไม่ต้องมี `OBSERVER_CONFIRMED` และห้ามยกผลนี้ไปอ้างว่า "เห็นบนจอ"
+- **ผลถูกใช้ไปแล้วปลายน้ำ (ก่อนหัวใบจะถูกปิด)**: `COO-DECISION 20260902_0742` ปลดแบนเลข `400.0` · LANE-DB `20260902_0623` ปิดคำถาม speed-walk seed ด้วยใบนี้ · RE runner log `2026-09-02T05:05 RE-194 DONE jobs=1`
+- 🔴 **nonclaim**: ใบนี้ตอบว่าค่าเกิดคืออะไร **ไม่ได้** ตอบว่าฟิลด์นี้แปลว่า "ความเร็ว" (G6 — ห้ามประกาศความหมายของฟิลด์จากการอ่านครั้งเดียว) · เกต `/speed` และเงื่อนไข (b'') ใน `NOW.md` ไม่ถูกแตะโดยใบนี้
 
 ### ทำไมเปิดใบนี้ (มอบหมายตรงจาก COO)
 
-`COO-DECISION 20260901_1241_p2-re-routing-fontstyle63` (`ADDRESSEE: chief`) สั่งตรงให้ chief มอบข้อนี้
-ให้สาย RE/Codex เป็นลำดับแรกของรอบถัดไปที่มี capacity — **นี่คือรอบที่สามที่สาย GM ขอเรื่องนี้**
-(`h6rsgl` → `p4cndg` → `sched-20260901`, ใบล่าสุด `notes_to_chief/20260901_1225_LANE-GM-STATUS-*.md`)
-โดยไม่มีของใหม่ให้ทำต่อเพราะติดอยู่ที่ข้อเดียวนี้ P-2 (สีชื่อมอนสเตอร์) เป็นหนึ่งในสามอันดับสูงสุดของ
-`PANYA-ORDER 20260901_0215` — ไมล์สโตนอื่นทั้งหมดพักไว้จนกว่า P-1/P-2 จะปิด และ `GT-146`/ใบตีมอนทุกใบ
-ถูกล็อกจนกว่า P-1/P-2 จะปิด ⇒ ข้อนี้คือคอขวดเดียวที่เหลือของ P-2 ทั้งก้อน ไม่ใช่แค่ของสาย GM
+`COO-DECISION 20260901_1447` ข้อ 1 (`ADDRESSEE: chief`) สั่งเปิด RE ใบนี้ตรง ๆ เป็น **เคสนำร่อง**
+ของคำถามใหญ่กว่า (25 ฟิลด์ที่มี default พิสูจน์แล้วแต่ยังไม่ยืนยันว่า resend กลางเกมปลอดภัย -- ดูใบ
+`1420`/`1335` ของ LANE-DB) ตรวจแล้วทั้งสองเลขมีอยู่จริงในซอร์สที่ commit แล้ว ไม่ได้เชื่อจากใบขอเฉย ๆ:
 
-`CODEX_CHECKPOINT 20260901_1135` ระบุวิธีปิดไว้เองแล้ว (static/IMAGE-layer ล้วน — **ไม่ต้อง attended
-capture**): เทียบ `fontstyle_id=63` กับ 61/62 ที่ถอดแล้วเป็น control ผ่าน parser/setter ตัวเดียวกัน
-(`0x00AA488F`) — ใบนี้ทำแค่จุดเดียวที่ checkpoint ทิ้งไว้เปิด ไม่เปิดเลนใหม่
+- `src/pirateforce_foundation/player_wire.py:76` -- `PLAYER_LOGIN_MOVEMENT_SPEED = 400.0`, คอมเมนต์
+  บรรทัด 66 อ้างว่าไคลเอนต์เขียน `400.0f` ลง `+0x54` ที่ `0x00464AF2` "on every fresh instance"
+- `src/pirateforce_foundation/persistence_attr_compose.py:233/241` -- ค่า `400.0` เดียวกัน ที่ VA
+  เดียวกัน (`0x00464AF2`) ถูกใช้เป็น candidate seed ของคอลัมน์ DB แต่คอมเมนต์บรรทัด 152/239 ของไฟล์
+  เดียวกันเองเขียนไว้ตรง ๆ ว่า "+0x54 is the player's walk speed" เป็น **[สมมติของสาย DB - รอ RE]**
+  ยังไม่ปิด
+- `tests/test_npc_gait_wire.py:59` -- `PROVEN_WALK_SPEED = 150.0` (runtime_pass, สำหรับ **NPC** ไม่ใช่
+  player) offset เดียวกันตามที่ `docs/FUNCTIONAL_COVERAGE.json` อ้างถึง
+- `src/pirateforce_foundation/mob_death.py:856` -- `BASIC_BIT_MOVEMENT_SPEED = 0x0040 # f32 tag 0x2A
+  @ +0x54` ยืนยัน offset/mask/tag ตรงกับทั้งสองจุดข้างบน เป็นฟิลด์เดียวกันแน่นอน ไม่ใช่การชนกันของเลข
+  offset คนละฟิลด์
 
-### ค้นแล้ว (ก่อนเปิดใบ ตามกฎบังคับข้อ ④)
-
-`pf_bridge/external/PF_MONSTER_COLOR_GATE.tsv`/`.md` ที่ checkpoint อ้างถึง (SHA-256 `f99347e4...`/
-`7b6626ac...`) **ยังไม่มีในโคลนคลาวด์นี้** (`external/` ไม่มีไฟล์ชื่อนี้ ณ commit ที่ fetch รอบนี้ —
-`git log --oneline -- external/` ล่าสุดคือ sync ไฟล์เดียวตอน 05:24 ไม่ใช่ไฟล์นี้) — **สาเหตุ (แก้ไขจาก
-draft แรกที่เข้าใจง่ายเกินไป, pf-adversary จับได้):** ไม่ใช่แค่รอคนหน้าสะพาน `git add` — `.gitignore` ของ
-`pf_bridge` ใช้ deny-all กับ `external/` (`/external/*` แล้วค่อย allowlist ทีละไฟล์ตรง ๆ) และ
-`PF_MONSTER_COLOR_GATE.tsv`/`.md` (รวมถึง `PF_GROUND_DROP_LIFETIME.tsv`/`.md`) **ยังไม่อยู่ใน allowlist
-นั้นเลย** ⇒ ต้องแก้ `.gitignore` เพิ่มบรรทัด allow ตรงชื่อไฟล์ก่อน แล้วค่อย `git add` (`pf_git_sync.ps1`'s
-`SHARED_TRACKED` สแกนด้วย `--untracked-files=no` — ไฟล์ที่ gitignore กันไว้จะไม่มีวัน sync แม้ `git add`
-เพราะไม่มีทาง track ได้ตั้งแต่แรก) — เข้าเค้าเดียวกับ "deny-all `.gitignore` กลืนทั้งโฟลเดอร์" ที่โปรเจกต์นี้
-เจอมาก่อน — **ไม่ใช่เหตุให้ปิดใบหรือหยุดรอ**: งานถอด RGB ทำบนอิมเมจโดยตรง (RE
-runner/Codex บนสะพาน) ไม่ต้องพึ่งไฟล์นี้ในคลาวด์เลย ไฟล์นี้เป็นแค่บริบทอ้างอิง ถ้าใครเจอไฟล์หายบนสะพานเอง
-ให้บันทึกลง `IMAGE_ACCESS_COST.tsv` ตามกติกา
+**ทำไมสำคัญ**: `persistence_typed_attrs.py:28/38/45` วางแผนจะ seed คอลัมน์ DB ของผู้เล่นจาก `400.0`
+(ค่าตอนสร้างวัตถุ) แต่ถ้าไคลเอนต์จริงเขียนทับด้วยค่าอื่น (เช่น `150.0` เหมือน NPC หรือค่าที่คำนวณจาก
+คลาส/สเตตัสตัวละคร) ทุกตัวละครที่ผ่าน path นี้จะได้ speed ผิดพร้อมกันเงียบ ๆ ก่อนที่ LANE-DB จะเริ่ม
+เขียนโค้ด seed จริง (`COO-DECISION 20260901_1447` ข้อ 2 ยังไม่เปิดประตูส่ง `/speed` รออันนี้ก่อน)
 
 ### สิ่งที่ต้องตอบ
 
-1. RGB triple (หรือ ARGB ถ้า parser คืนแบบนั้น) ที่ `fontstyle_id=63` ตั้งจริงผ่าน
-   `UILabel_FontStyleID_parser_setter` (`0x00AA488F`) — อ่านจากตารางค่าคงที่/args ของ call site เดียวกับ
-   ที่ปิด 61/62 แล้ว ไม่ใช่การเดาจากชื่อ "เทา"
-2. ค่าที่ได้เทียบกับ 61/62 อย่างไร (ทั้งสามค่าคนละสี / บางคู่ซ้ำกัน) — บันทึกทั้งสามค่าไว้ในผลเดียวกัน
-   เพื่อกันเปิดใบซ้ำถ้าอนาคตต้องการ cross-check style อื่น
-3. ระบุด้วยว่า path นี้เป็น conditional (ตามที่ checkpoint บอกว่า `MCG-IMG-025..033` ยัง "conditional
-   static path" ไม่ใช่ unconditional render) — RGB ที่พบเป็นค่าที่ตั้งเมื่อ path นี้ทำงานจริงเท่านั้น
-   ไม่ใช่การยืนยันว่า path ทำงานทุกครั้ง (ข้อนั้นเป็นคำถามคนละชั้น ไม่ใช่ของใบนี้)
+คำถามเดียว: object ผู้เล่น (ไม่ใช่ NPC/mob) ที่สร้างใหม่ตอนล็อกอิน มีค่าอะไรจริงที่ `BasicAttr+0x54`
+ณ จุดที่สร้างเสร็จ ก่อน wire ใด ๆ จะมาทับ --
+
+1. เป็น `400.0` แบบเดียวกับที่ `player_wire.py:66` อ้าง (แยกจาก NPC path ที่ใช้ `150.0`) หรือ
+2. เป็น `150.0` เหมือน NPC (แชร์ constructor เดียวกัน) หรือ
+3. เป็นค่าอื่น ที่คำนวณจากคลาส/สเตตัสตัวละคร ไม่ใช่ literal คงที่ตัวเดียว
+
+อ่านจาก call site ที่ `0x00464AF2` โดยตรง (เส้นทางเดียวกับที่ `player_wire.py:66` อ้างถึง) --
+แยกให้ชัดว่า call site นั้นถูกเรียกจาก constructor ของ **player** object จริง ไม่ใช่ constructor ที่ใช้
+ร่วมกับ NPC/mob (ถ้าใช้ร่วมกัน ต้องหา branch/parameter ที่แยกค่าระหว่างสองประเภท)
 
 ### pass criteria
 
-- **PASS**: RGB ของ 63 อ่านได้ตรงจาก parser/setter เดียวกับ 61/62 พร้อม provenance (VA/offset/args)
-  ครบเหมือนที่ปิด 61/62 ไปแล้ว — ปิดใบ ส่งผลกลับให้ chief ต่อสาย GM ไปใช้เขียนโค้ดสี (ยังไม่ใช่งานของใบนี้)
-- **BOUNDED-NEGATIVE**: parser คืนค่าที่ resolve ไม่ได้ตรง ๆ (เช่น ต้องผ่าน lookup table ที่ยังไม่ถอด) —
-  เขียนไว้ตรง ๆ ว่าต้องถอดอะไรเพิ่มก่อนถึงจะปิดได้ ไม่ใช่เดาสี
+- **PASS**: ระบุค่าจริงของ player object พร้อม VA/offset ของ call site และแยกให้เห็นว่าเส้นทางของ
+  player กับ NPC เป็น constructor เดียวกันหรือคนละตัว (ถ้าเดียวกัน ต้องโชว์จุดที่ค่าต่างกัน)
+- **BOUNDED-NEGATIVE**: ถ้า `0x00464AF2` เป็น shared constructor ที่ resolve ไม่ได้ว่า branch ไหนใช้
+  กับ player จริง (ต้องมี runtime trace ไม่ใช่ static เพียงอย่างเดียว) -- เขียนไว้ตรง ๆ ว่า static ปิด
+  ไม่ได้ ต้องส่งต่อเป็น GT (attended, วัด speed จริงบนจอ) ไม่ใช่เดา
 
 ### ข้อห้าม
 
-ห้ามเขียนโค้ดสีมอนสเตอร์ใด ๆ จากใบนี้ (ขัด `RE-109` `BUILD_IMPACT: NONE` — สาย GM ยืนยันเองในจดหมาย
-`1225` ว่ายังไม่เขียนโค้ดจนกว่าจะรู้ RGB จริง) · ห้ามเดาว่า 63 = เทา จากชื่อ state โดยไม่มี provenance
-จากไบนารี
+ห้ามเขียนโค้ด DB/persistence/attr-wire ใด ๆ จากใบนี้ -- LANE-DB เป็นเจ้าของโค้ด seed ต่อ · ห้ามสรุปว่า
+`400.0` หรือ `150.0` ถูกโดยไม่มี VA ของ call site ที่แยก player ออกจาก NPC ชัดเจน
 
 ### สัญญาผู้บริโภค
 
-เปิดโดย chief (มอบหมายตรงจาก `COO-DECISION 20260901_1241`) — **สาย GM บริโภคผล** (ผู้ที่ขอเรื่องนี้มา
-สามรอบและเป็นผู้เขียนโค้ดสีต่อ) ตามกฎ "ใครเปิดใบคนนั้นบริโภค" ข้อยกเว้นที่ chief เปิดแทนเพราะเป็นงาน
-มอบหมายข้ามสาย (RE/Codex ไม่ใช่ chief ไม่ใช่ GM) — สาย GM อ่านผลรอบถัดไปที่เห็นแล้วปิดหัวใบเอง
+เปิดโดย chief (มอบหมายตรงจาก `COO-DECISION 20260901_1447` ข้อ 1) -- **สาย DB บริโภคผล** (ผู้ใช้ค่านี้
+seed คอลัมน์ DB ต่อ) เหมือนกับ `RE-193` ข้อยกเว้นเดียวกัน -- สาย DB อ่านผลรอบถัดไปที่เห็นแล้วปิดหัวใบเอง
 
 ### links
 
-`notes_to_chief/CODEX_CHECKPOINT_20260901_1135_COLOR-DROP-GM-STATIC-UNLOCK.md` (วิธีปิดที่ checkpoint
-ระบุไว้) · `notes_to_chief/20260901_1241_COO-DECISION-p2-re-routing-fontstyle63-third-round-waiting.md`
-(คำสั่งมอบหมายตรง) · `notes_to_chief/20260901_1225_LANE-GM-STATUS-sched-20260901-*.md` (รอบที่สามที่ขอ)
-· `notes_to_chief/20260901_0921_LANE-GM-STATUS-p2-color-static-research-fontstyle63-gap-re-followup-proposed.md` (รอบ `h6rsgl` ที่เสนอวิธีปิดนี้ครั้งแรก) ·
-`pf_bridge/NOW.md` P-2
-
-
-### result — 🟢 CLOSED PASS/DONE (ปิดหัวใบโดย LANE-GM รอบ `wggs0i` 2026-09-02T10:35+07:00)
-
-ผล: `notes_to_chief/20260901_1439_CODEX-RE191-RESULT-FONTSTYLE63-RGBA.md`
-(LANE-GM บริโภคไปแล้วตั้งแต่รอบ `r2jfjm` — มี `.CONSUMED.txt` คู่กัน) — **แต่หัวใบไม่เคยถูกปิด**
-จึงค้างอยู่ใน `python tools_bridge/pf_re_queue_taglint.py --list-open` ต่อมาอีก ~20 ชม.
-
-🔴 **ทำไมเครื่องมือถึงมองไม่เห็นว่าใบนี้มีผลแล้ว (วัดจริงรอบนี้ ไม่ใช่สมมติฐาน):**
-`pf_re_queue_taglint.py::has_result_letter()` เทียบ `ticket_id in filename` ตรงตัว = มองหา `"RE-191"`
-แต่ชื่อไฟล์ผลเขียนว่า `CODEX-RE191-RESULT-...` (**ไม่มีขีด**) ⇒ ไม่แมตช์ ⇒ ใบถูกรายงานว่ายังเปิด
-`tools_bridge/` ไม่ใช่เขตเขียนของสาย GM — แจ้ง chief ไว้ในใบ `20260902_1035_LANE-GM-TO-CHIEF-*`
-(นี่เป็นคนละเรื่องกับข้อสังเกตของ ka1-B ใบ `0955` ที่ว่า runner ข้ามเพราะป้าย `assigned LANE-GM`
-ซึ่ง ka1-B ติดป้าย `[สมมติฐาน]` ไว้เอง — รอบนี้ไม่ยืนยันและไม่หักล้างข้อนั้น วัดได้แค่ข้อของเครื่องมือ)
-
-**คำตอบของใบ (สรุปสามบรรทัด — ตัวเลขจริงอยู่ในใบผล ไม่คัดลอกมาที่นี่ และไม่คัดลอกลงโค้ด
-ตาม "ข้อห้าม" ของใบนี้เอง):**
-1. คำถามหลักปิดแล้ว: FontColor/OutlineEffectColor RGBA ของ 61 / 62 / 63 อ่านได้ครบทั้งสามค่าพร้อม provenance
-   `[ORIGINAL EVIDENCE: DATA]` แยกจาก `[ORIGINAL EVIDENCE: IMAGE / MCG-IMG-057..058]`
-2. **premise ของใบถูกแก้โดยผลเอง**: `0x00AA488F` **ไม่ใช่** RGB parser — เป็น branch ของ `UILabel.FontStyleID`
-   ตัว palette จริงเดินผ่าน `0x00A9DAE0` (มี direct caller แค่ 2 จุดจาก full six-section E8 census)
-3. เพดานที่ยังยืน: conditional static + DATA เท่านั้น · **ไม่ได้แปลว่า style 63 = ตาย ในทุกบริบท**
-   และยังไม่มีหลักฐานว่า live actor ผ่าน gate นั้น (ต้องเห็น live registry node + requested/applied ID + pixels)
-
-**คำถามที่เหลือของ P-2 ไม่ใช่ RGB อีกต่อไป** แต่เป็น reachability — เดินต่อและปิดใน `RE-195` ด้านล่าง
-(ผลลัพธ์: ยังทำไม่ได้ในวันนี้) · ข้อห้าม "ห้ามเขียนโค้ดสีมอนสเตอร์จากใบนี้" **ยังยืนอยู่** และรอบ `wggs0i`
-ปฏิบัติตามโดยไม่คัดลอก palette ลงรีโปเลยแม้แต่ค่าเดียว
-
-## 🔬 RE-229 CHARCREATE-CLASS-SSCORE-STARTING-STATS-SOURCE-001 [🟢 **CLOSED BOUNDED-NEGATIVE/DONE — RE runner local 2026-09-04T10:50+07:00, ปิดหัวใบโดย LANE-DB รอบ `1szq3m` 2026-09-04T11:4x+07:00, ดูผลด้านล่าง**] ~~[OPEN -- 🔴 `[STATIC-ON-BRIDGE]` · 🔴 **ขอบเขตแคบลงในรอบเดียวกัน หลัง `pf-adversary` พบว่า `RE-122` ตอบไปแล้วครึ่งใบ — อ่านบล็อกแก้ก่อนทำ**]~~
-
-ผล: `notes_to_chief/20260904_1053_RE-229-RESULT-BOUNDED-NEGATIVE-NO-SIX-TO-FIVE-CROSSWALK.md` — ไม่พบ field/consumer ที่ผูก component ทั้งหกของ `s_SCORE` (`STATUS_STR/AGI/CON/INT/PER/CHA`) เข้ากับห้า ActorAttr wire fields ในขอบเขต manifest (`external/` + `gamedata/`) ที่ค้นแล้ว — คำตอบคือ **UNPROVEN** ไม่ใช่ `CHA` โดยอัตโนมัติ ห้ามใช้สมมติฐาน `AGI->DEX`/ทิ้ง `CHA` `BUILD_IMPACT: hard guard / keep current fallback` — LANE-DB คง `DEFAULT_PRIMARY_STAT = 100` ต่อ ห้าม seed `4;3;4;1;1;2` หรือ permutation ใดจาก `s_SCORE` นี่คือ **method ceiling** (ห้าม rerun ด้วย corpus/image เดิม) ไม่ใช่ time checkpoint — ชิ้น 2/5 ของ PLAYER/CHARACTER ยังไม่มีกำหนด ตาม `COO-DECISION 20260904_0745`/`0942`
-
-> 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `8nh6q5`/R334 2026-09-04T07:5x+07:00 ตาม `COO-DECISION 20260904_0746` ข้อ 1**
-> ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน `228` (ใบ `GT-228`) ⇒ ใบนี้ `RE-229` · `RE-229`/`GT-229` = 0 hit ทั้งสามที่ก่อนวาง
-> **เปิดตามคำขอของ LANE-DB** (`notes_to_chief/20260904_0542_LANE-DB-RE-TICKET-piece-2-starting-stats-has-no-committed-source-table.md` · ค้างสองรอบ)
-> **เจ้าของใบ = chief (มอบหมาย) · ผู้บริโภคผล = LANE-DB** (ชิ้น 2/5 ของงาน PLAYER/CHARACTER)
-
-> 🔴🔴 **แก้ขอบเขตในรอบเดียวกัน (chief `8nh6q5`/R334 2026-09-04T09:0x+07:00 · ที่มา: `pf-adversary` D2)**
-> ผมเปิดใบนี้โดย **ไม่ได้ค้น `CLIENT_RE_QUEUE.md` เอง** และเชื่อคำอธิบายในจดหมายของ LANE-DB ชั้นเดียว (ผิดกฎ G1)
-> ความจริงคือ **`RE-122 PLAYER-STANDARD-STATUS-AND-CHARCREATE-SCORE-VALUES-001` (`CLIENT_RE_QUEUE.md:1662`)
-> ตอบคำถามนี้ไปแล้วตั้งแต่ 2026-08-28 สถานะ `DONE / BOUNDED-NEGATIVE`**
-> จดหมายผล: `notes_to_chief/consumed/20260828_0815_RE-122-RESULT-SCORE-IS-SIX-AXIS-MP-UNPROVEN.md`
->
-> **สิ่งที่ `RE-122` ตอบไปแล้ว — ห้ามสั่ง runner ทำซ้ำ**
-> - **(ก) ตอบแล้ว**: `s_SCORE` = **six-axis char-create score** ผูกกับ
->   `GameClient/Data/GUI/Model/Login_CharCreate_Main.model` (SHA `eef1eb1a…`) แกนคือ
->   **`STATUS_STR` · `STATUS_AGI` · `STATUS_CON` · `STATUS_INT` · `STATUS_PER` · `STATUS_CHA`**
->   🔴 **ไม่ใช่ `STR/CON/DEX/INT/PER + ตัวที่หก` อย่างที่ผมเขียนไว้ข้างล่าง** — ช่องที่หกคือ `CHA` และมีหลักฐานพินแล้ว
-> - **(ข) ตอบแล้ว**: `CONSTDATA_TH__POTENTIAL.tsv` SHA `d798d5ac…` = **11 คอลัมน์ 0 แถวข้อมูล** พร้อมสแปน loader
->   `0x004A2C00..0x004A4500` (SHA `e567f27c…`) · `docs/FUNCTIONAL_COVERAGE.json` ไปไกลกว่านั้น:
->   ตัวเลขเส้นโค้งความก้าวหน้า **ไม่ได้อยู่ในไฟล์รันเลย** มีแต่ชื่อคอลัมน์กับโค้ดที่ไปอ่าน static data ภายนอก
->   ⇒ **ทางเลือก (ข) ปิดแล้ว ห้ามให้ runner ไปเปิดใหม่**
-> - `RE-122` มี **คำสั่งห้าม rerun** เขียนไว้เอง และระบุ objective เดียวที่จะปลดล็อกได้:
->   *"recovered crosswalk ที่ผูก six-axis UI score เข้ากับห้า wire fields"*
->
-> 🔴 **ข้ออ้างที่ผมยกมาผิด และถอนทิ้ง**: ที่เขียนว่า `reports/PF_JOB001_..._20260816.md` "นับ `s_SCORE` รวมใน
-> 37 other columns" — `RE-122` §T1 ระบุว่ารายงานนั้น **stale** (มัน 37 คอลัมน์และ **ไม่มี `s_SCORE` อยู่เลย**)
-> วัดสดรอบนี้: `CONSTDATA_TH__CHARCREATE_CLASS.tsv` มี **38 คอลัมน์ · `s_SCORE` = คอลัมน์ที่ 3 · 5 แถว** ตรงกับ `RE-122`
-> · docstring ของ `class_catalog.py` ที่ผมยกไปยืนยันให้ LANE-A/LANE-DB **ก็ stale ด้วย** อ้างรายงานฉบับเดียวกัน
->
-> **⇒ คำถามที่เหลือจริงของใบนี้ เหลือข้อเดียว (แทนคำถาม (ก)/(ข) ข้างล่างทั้งคู่)**
-> **มี crosswalk ที่ผูกหกแกนของ UI (`STR/AGI/CON/INT/PER/CHA`) เข้ากับ *ห้า* wire fields ที่เซิร์ฟเวอร์ส่งจริง
-> หรือไม่ · ถ้ามี แกนไหนหายไปและใครกินช่องนั้น** (นี่คือ objective ที่ `RE-122` เขียนไว้เองว่าจะปลดคำสั่งห้าม rerun)
-> 🔴 **ห้าม runner เริ่มก่อนอ่าน `RE-122` + จดหมายผลของมันจบทั้งฉบับ** · ถ้า `RE-122` ตอบครบแล้วจริง ให้ปิดใบนี้
-> เป็น `SUPERSEDED - covered by RE-122` แล้วบอกกลับมา **นั่นคือผลที่ใช้ได้ ไม่ใช่ใบล้ม**
->
-> **ค้นใน `pf_bridge\external\` แล้ว:** (สาย RE กรอก — 🔴 chief เปิดใบครั้งแรกโดยลืมแถวนี้ ถือเป็นข้อบกพร่องของใบ)
-> **ค้น `gamedata` แล้ว:** (สาย RE กรอก — เช่นเดียวกัน)
->
-> 🟢 **ข่าวดีสำหรับ LANE-DB**: หกแกนมีชื่อและมีหลักฐานพินแล้วตั้งแต่ 28 ส.ค. ⇒ ชิ้น 2 อาจ **ไม่ต้องรอใบนี้เลย**
-> ดูจดหมาย `notes_to_chief/20260904_0905_CHIEF-TO-LANE-DB-CORRECTION-*.md`
-
-- **ถาม (สองเส้นทาง ตอบได้เส้นใดเส้นหนึ่งก็พอ ไม่ต้องตอบทั้งคู่)**
-  - **(ก)** คอลัมน์ `s_SCORE` ใน `gamedata/tables/CONSTDATA_TH__CHARCREATE_CLASS.tsv` (หกตัวเลขคั่น `;`
-    ต่อแถว เช่น Gladiator `4;3;4;1;1;2`) ไคลเอนต์อ่านไปทำอะไร · **ลำดับของหกช่องคืออะไร**
-    (สมมติฐานที่ต้องหักล้างหรือยืนยัน: STR/CON/DEX/INT/PER + ตัวที่หกอีกหนึ่ง) ·
-    ค่าที่อ่านได้เป็น **ค่าสแตทเริ่มต้นจริง** หรือเป็นน้ำหนัก/แถบพรีวิวตอนสร้างตัว หรืออย่างอื่นทั้งดุ้น
-  - **(ข)** `gamedata/tables/CONSTDATA_TH__POTENTIAL.tsv` มีแต่ header ไม่มีแถวใน snapshot นี้ —
-    ในไบนารีไคลเอนต์มีแถวจริงของตารางนี้ที่ยังไม่ถูกดึงเข้า `gamedata/tables/` หรือไม่ ·
-    ถ้ามี ให้คืนสคีมา + แถว พร้อมที่อยู่ที่ดึงมา
-
-- **ทำไมถึงเปิดใบ (วัดแล้ว ไม่ใช่สมมติฐาน — LANE-DB `0542`)**
-  ชิ้น 2/5 คือ "ค่าเกิดจากตารางแทน `DEFAULT 100`" แต่สองตารางที่ `PANYA-DECISION 20260904_0328` ระบุชื่อไว้
-  **ไม่มีคอลัมน์สแตทเริ่มต้นต่อคลาสเลย**:
-  1. `CONSTDATA_TH__STANDARD_STATUS.tsv` 255 แถว = ตาราง EXP/แต้มความสามารถ **ต่อเลเวล**
-     (`n_ID`=เลเวล · `n_EXP_CURRENTLV` · `n_POINT_ABILITY` · `n_DEADLOSS` · `n_PVP_*` · `n_DEFENCE_CONSTANT`) ·
-     `n_POINT_ABILITY` = แต้มที่ได้ตอนเลเวลอัพ (0 ที่เลเวล 1) ไม่ใช่ค่าที่มีอยู่แล้ว
-  2. `CHARCREATE_CLASS.s_SCORE` = ตัวเลือกเดียวที่รูปร่างเหมือนสแตท แต่ **ไม่เคยถูก RE เลย** —
-     `class_catalog.py` บน main เขียนใน docstring ของตัวเองว่า "s_SCORE's semantics have never been RE'd" ·
-     `reports/PF_JOB001_CHARCREATE_CLASS_STATIC_BOUNDARY_20260816.md` นับมันรวมใน "37 other columns" โดยไม่ถอดสักตัว
-  3. `POTENTIAL.tsv` = ตารางเดียวที่ `docs/FUNCTIONAL_COVERAGE.json` เรียกว่าผู้สมัครจริง แต่ไม่มีแถว
-
-- **สิ่งที่ยังไม่ใช่หลักฐาน (nonclaim บังคับของใบนี้)**
-  🔴 **ความยาวหกช่องเข้ากับจำนวนสแตทที่เราคิดว่ามี = ความเข้ากันได้ ไม่ใช่การพิสูจน์** ·
-  ห้ามใครประกาศลำดับช่องจากการนับจำนวนหรือจากค่าที่ "ดูสมเหตุสมผล" ·
-  ห้ามยกใบนี้ปิดด้วยการอ่าน `.tsv` ซ้ำ — คำตอบต้องมาจากโค้ดที่ **อ่านคอลัมน์นี้** ในอิมเมจ (G6: ห้ามประกาศความหมายของฟิลด์จากการอ่านครั้งเดียว)
-
-- **อิมเมจที่ต้องยึด**
-  `GameClient.local.bin` 14,759,424 ไบต์ sha256 `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
-  ทางเข้าที่แนะนำ: ตัวโหลด `CHARCREATE_CLASS` (ชื่อตาราง/ชื่อคอลัมน์เป็นสตริงในอิมเมจ) → ตัวที่ split `;`
-  → ผู้บริโภคของแต่ละช่อง · เทียบกับ `POTENTIAL` loader เส้นคู่ขนาน
-
-- **เกณฑ์ปิด (ชั้นเดียวพอ — ใบนี้เป็น static ล้วน ไม่มีชั้น client-observable)**
-  ① ระบุสแปนที่อ่าน พร้อม `span_sha256` ทุกสแปน (`RE_STATIC_SEARCH_RULES.md` §1) ·
-  ② สำหรับ **แต่ละช่องในหกช่อง** ระบุ consumer crosswalk จริง หรือประกาศตรง ๆ ว่าช่องนั้น `opaque` ·
-  ③ ตอบแบบ **bounded** ได้ ถ้าตอบได้บางช่อง — ระบุว่าช่องไหนค้างและค้างเพราะอะไร
-  🔴 ตอบไม่ได้เลยก็เป็นผลที่ใช้ได้ (`BOUNDED-NEGATIVE`) — LANE-DB จะได้เลิกรอและคง `DEFAULT 100` ต่ออย่างเปิดเผย
-
-- **ผลไปถึงใคร**: จดหมายผลจ่าหน้า **LANE-DB** (cc chief, COO) · LANE-DB บริโภคเองและปิดหัวใบนี้ในรอบที่ผลถึง
-  (กฎ "ใครเปิดใบคนนั้นบริโภค" — ใบนี้เปิดแทน LANE-DB ตามคำขอของเขา)
-- **ผู้ทำ**: **สาย RE (RE runner local)** — สายเดียว ไม่ต้องจอง · route `STATIC-ON-BRIDGE` เพราะต้องดิสแอสเซมบลีอิมเมจ ⇒ ทำบนคลาวด์ไม่ได้
-- **ผลกระทบถ้าไม่ตอบ**: ชิ้น 2/5 ของ PLAYER/CHARACTER **ไม่มีกำหนด** (`COO-DECISION 20260904_0745`) · `DEFAULT 100` คงไว้ ห้ามเดา
-
----
-
-## 🔬 RE-232 SCAST-CONDITION-BEHAVIOR-TOKEN-GRAMMAR-001 [~~OPEN -- 🔴 `[STATIC-ON-BRIDGE]`~~ 🔵 **DONE / BOUNDED-NEGATIVE — ปิดโดย LANE-CS รอบ `tp9rpy` 2026-09-04T12:1x+07:00 ตามผล `notes_to_chief/20260904_1055_RE-232-RESULT-BOUNDED-NEGATIVE-EIGHT-ROWS-DO-NOT-CLASSIFY.md`: grammar มีโครงสร้าง condition-line → behavior-line จริง แต่ 8-row sample ที่ขอบเขตใบนี้กำหนดไม่มีตัวแทน AOE/self-buff/heal ที่ label ได้อิสระเลยสักแถว ⇒ แยก single-target/AOE/self-buff/heal ไม่ได้จากกลุ่มตัวอย่างนี้ · `BUILD_IMPACT: no classifier change` (`damage_by_skill.py`/`skill_catalog.py` เก็บ `s_CAST_CONDITION`/`s_CAST_BEHAVIOR` เป็น raw field ต่อไป) · เดินต่อได้เฉพาะถ้ามีใบใหม่แยกต่างหากที่เพิ่ม ≥8 แถว label อิสระ (2 single-target + 2 AOE + 2 self-buff + 2 heal) เป็น 16-row targeted follow-up — ใบนั้นยังไม่มีอยู่ ณ รอบที่ปิดนี้**]
-
-> 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `2vfbtf`/R335 2026-09-04T09:3x+07:00 ตาม `COO-DECISION 20260904_0848` ข้อ 5**
-> ตัวนับร่วมสองคิว คืน `231` (`GT-231`) ⇒ ใบนี้ `RE-232` · `RE-232`/`GT-232` = 0 hit ทั้งสามที่ก่อนวาง (`CLIENT_RE_QUEUE.md`, `GAME_TEST_QUEUE.md`, `archive/*QUEUE*ARCHIVE*`)
-> **เปิดตามคำขอของ LANE-CS** (`notes_to_chief/20260904_0755_LANE-CS-TO-COO-round-6o11t1-orphan-closed-marker-risk-found-npassive-is-not-the-type-column.md` ข้อ 4)
-> **เจ้าของใบ = chief (มอบหมาย) · ผู้บริโภคผล = LANE-CS**
-
-- **ถาม**: token grammar ของคอลัมน์ `s_CAST_CONDITION`/`s_CAST_BEHAVIOR` (มินิแลงเกวจ `GO(0)`, `CHASE(n)`, `SKIP(n)`, `ISVIP_I(n)`, ... ที่ `GT-052` 24 ส.ค. นับ token distinct ไว้ 224/2112 ตัว ยังไม่มีใครถอด) แยกแยะ "โจมตีเป้าเดียว vs AOE vs buff ตัวเอง vs heal" ได้จริงหรือไม่ · ถ้าได้ กติกา token ที่แยกแต่ละคู่คืออะไร
-  🔴 **ขอบเขตแคบ ตามคำขอของ LANE-CS เอง**: ถอดเฉพาะแถวของ **8 สกิลที่มีอยู่ในสารบัญตอนนี้** (`skill_catalog.py` บน main) — **ห้ามขยายไปตาราง `s_CAST_*` เต็ม 2,165 แถว** ในใบนี้ ถ้าผลจาก 8 สกิลชี้ว่าต้องขยาย ให้เปิดใบใหม่แยกต่างหากพร้อมเหตุผล
-
-- **ทำไมถึงเปิดใบ (วัดแล้ว ไม่ใช่สมมติฐาน — LANE-CS `0755` ข้อ 3)**
-  `n_PASSIVE` (คอลัมน์ที่เคยสงสัยว่าเป็นชนิดสกิล basic/attack/AOE/buff/heal/passive) **ถูกหักล้างแล้วสองทาง**
-  (`pf-static-re` ไล่ title/description ทั้ง 6 ค่า + `pf-adversary` ตรวจ 8 สกิลที่รู้จักคู่ขนาน): สกิล 99
-  "Normal Attack" มี `n_PASSIVE=2` **เท่ากับ** สกิลกระโดด 110/111 (ไม่ใช่โจมตี) และ **ต่างจาก** Basic
-  Training ทั้งห้า (`n_PASSIVE=1` ทั้งหมด) · แพทเทิร์นจริงดูเหมือนเป็น "แถวนี้เป็นของระบบย่อยไหน" ไม่ใช่ชนิด
-  สกิลเชิงเกม — ปักไว้แล้วด้วยเทส `NPassiveIsNotATypeColumnTests` ใน `tests/test_skill_catalog.py`
-  ⇒ **`n_PASSIVE` ปิดทางนี้แล้ว** ที่เหลือที่ยังไม่ลองคือ `s_CAST_CONDITION`/`s_CAST_BEHAVIOR`
-
-- **สิ่งที่ยังไม่ใช่หลักฐาน (nonclaim บังคับของใบนี้)**
-  🔴 **ผลจาก 8 สกิลนี้ไม่ใช่การพิสูจน์ว่ากติกาใช้ได้กับตารางเต็ม** — 8 แถวคือกลุ่มตัวอย่างเพื่อตอบคำถาม
-  "grammar นี้มีศักยภาพตอบคำถามหรือไม่" ไม่ใช่การ derive กติกาสุดท้าย · ห้ามอ้างว่าปิดคำถามชนิดสกิลทั้งระบบ
-  จากใบนี้ใบเดียว · ห้ามประกาศความหมาย token จากการอ่านครั้งเดียว (G6) — ต้องยันกับ ≥2 สกิลต่อ token ที่อ้างว่าเข้าใจ
-
-- **อิมเมจที่ต้องยึด**
-  `GameClient.local.bin` 14,759,424 ไบต์ sha256 `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
-  ทางเข้าที่แนะนำ: ตัวโหลด/ตัว parse `s_CAST_CONDITION`/`s_CAST_BEHAVIOR` ของ 8 สกิลใน `skill_catalog.py`
-  → ตัวแปล token (`GO`/`CHASE`/`SKIP`/`ISVIP_I`/...) → ผู้บริโภคของแต่ละ token ในโค้ดฝั่งไคลเอนต์
-
-- **เกณฑ์ปิด (ชั้นเดียวพอ — ใบนี้เป็น static ล้วน ไม่มีชั้น client-observable)**
-  ① ระบุสแปนที่อ่าน พร้อม `span_sha256` ทุกสแปน (`RE_STATIC_SEARCH_RULES.md` §1) ·
-  ② สำหรับ 8 สกิล ระบุว่า token ไหนแปลได้ + ความหมาย พร้อมหลักฐาน ≥2 จุดต่อ token ที่อ้าง หรือประกาศ `opaque` ตรง ๆ ·
-  ③ ตอบตรง ๆ ว่า grammar นี้แยก "โจมตีเป้าเดียว vs AOE vs buff ตัวเอง vs heal" ได้หรือไม่จากกลุ่มตัวอย่างนี้ ·
-  ④ ตอบแบบ `BOUNDED-NEGATIVE` ได้ ถ้า 8 สกิลไม่พอสรุป — ระบุว่าต้องขยายไปกี่แถวจึงจะพอ
-
-- **ผลไปถึงใคร**: จดหมายผลจ่าหน้า **LANE-CS** (cc chief) · LANE-CS บริโภคเองและปิดหัวใบนี้ในรอบที่ผลถึง
-- **ผู้ทำ**: **สาย RE (RE runner local)** — สายเดียว ไม่ต้องจอง · route `STATIC-ON-BRIDGE` เพราะต้องดิสแอสเซมบลีอิมเมจ ⇒ ทำบนคลาวด์ไม่ได้
-- **ผลกระทบถ้าไม่ตอบ**: LANE-CS ไม่มีเส้นทางอื่นตอบคำถามชนิดสกิลตอนนี้ · ไม่บล็อกอะไรใน M1-M5 (LANE-CS ยังไม่แตะดาเมจจนกว่าจะอ่าน `mob_combat.py` ของ LANE-B ให้ครบตาม `0755`)
-
----
-
-## 🔬 RE-240 HOTBAR-SKILL-KEY-TO-PRODUCER-WALK-001  [~~OPEN -- 🔴 `[STATIC-ON-BRIDGE]` · ผู้เปิดใบ = **chief (LANE-E)** รอบ `wjqykr`/R338 · ผู้ทำ = **สาย RE (RE runner local)** · **ผู้บริโภคผล = LANE-CS**~~ 🔵 **DONE / BOUNDED-NEGATIVE — ปิดโดย LANE-CS รอบ `1z31do` 2026-09-04T18:0x+07:00 ตามผล `notes_to_chief/20260904_1714_RE-240-RESULT-HOTBAR-DISPATCH-EXITS-NO-PRODUCER.md`: HOTKEY class 20 (ทุกแถว TOOLBAR*/SKILLBAR*) ออกที่ epilogue `0x4518F3` ก่อนถึงทั้ง `ActionVital`/`0x44D260` และ `TriggerCastSkillVital`/`0x00600A60` — ไม่มี producer ให้ตั้งชื่อ skill-id field จากเส้นนี้ · control WIELD ผ่าน (เส้นทาง RE ใช้ได้ ปัญหาอยู่ที่ branch สกิลเอง) · `BUILD_IMPACT: no server field named` (`damage_by_skill.py` ยังไม่ผูก skill id กับฟิลด์ใด) · ส่งต่อเป็นใบ attended capture ใบถัดไป (เปิดพร้อมกันในรอบนี้)**]
-
-> 🔢 เลขใบตั้งโดย chief รอบ `wjqykr`/R338 2026-09-04T14:0x+07:00 · ตัวนับร่วมสองคิวคืน `239` ⇒ ใบนี้ `240` · **0 hit ทั้งสามที่ก่อนวาง**
-> ที่มา: `notes_to_chief/20260904_1041_LANE-CS-CORE-REQUEST-which-actionvital-field-carries-skill-id.md` — คำตอบของ chief คือ "ไม่ใช่ห้าฟิลด์นั้น และน่าจะเป็นคนละเฟรม" ใบนี้คือทางที่ตัดสินได้จริง
+`notes_to_chief/20260901_1447_COO-ORDER-re-basicattr-0x54-speed-value-hold-speed-send-gate-staged-ps1-ownership.md`
+(คำสั่งมอบหมายตรง ข้อ 1) · `src/pirateforce_foundation/player_wire.py:59-76` (ค่า 400.0 + คอมเมนต์
+อ้าง VA) · `tests/test_npc_gait_wire.py:59` (ค่า 150.0 ของ NPC) ·
+`src/pirateforce_foundation/persistence_attr_compose.py:233-241,284-288` (nonclaim ของสาย DB เอง
+เรื่องค่านี้ยังไม่ปิด) · `src/pirateforce_foundation/mob_death.py:850-856` (ยืนยัน offset/mask/tag
+เดียวกัน)

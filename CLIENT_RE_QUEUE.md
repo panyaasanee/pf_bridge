@@ -204,52 +204,7 @@ wire POSITION ของทั้งหกช่องนี้ **ปิดแล
 ---
 
 ## 🆕🔬 RE-123 BG0002-MIRAGE-REEL-QUEST-SPAWN-CROSSWALK-001 [STATIC-ON-BRIDGE]: **NPC "Mirage reel" ที่หน้าต่างแผนที่เกาะคุกของเจ้าของแสดงไว้ (ยืนหน้าเต็นท์ Mo Yuzi) มี n_ID ไหน และมันมาจากไฟล์ placemen... -- archived 20260905 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md`)
-## RE-125 PICKUP-REQUEST-VITAL-ID-001: what wire vital id (opcode) does a real client send when the player left-clicks a ground drop / `PickupTerrainThing` object, and what does its payload contain (object reference dword position, anything else)  [**CLOSED — 🔴 คำอ้างเชิงลบของใบนี้ถูกหักล้างแล้ว 2026-09-05**: `0x4543` **ถูกเห็นบนไวร์แล้ว** — R303 attended capture 20260902_1755 = 46 เฟรมขาเข้า 2 เทคจบ ยืนยันซ้ำ R306 · `COO-DECISION 20260905_0249` ข้อ 1 ปิด `GT-146` ด้วยเหตุผลนี้ และข้อ 2 สั่งพลิกถ้อยคำในซอร์ส ซึ่ง chief จ่ายรอบ `rz1fxh`/R358 (13 จุด 12 ไฟล์) · หัวใบนี้แก้ในรอบเดียวกันเพราะคำอ้างเก่ากับใหม่อยู่ด้วยกันไม่ได้ (chief `1810` §3) · ถ้อยคำเดิมที่ถอนแล้วแต่เก็บเป็นประวัติ: ~~**CLOSED BOUNDED-NEGATIVE — opcode ยัง UNOBSERVED: `0x4543` เป็นค่า DERIVED จากชื่อคลาสเท่านั้น, corpus ปัจจุบัน 2,106 ไฟล์ / 75,208 blocks มี `PickupTerrainThing` W=0/R=0 ⇒ ~~🔴 ห้ามต่อ production call site ของ `dispatch_pickup_request` ใน `runtime.py` ด้วย `0x4543` · ปลดล็อกได้ด้วย attended click capture ใหม่เท่านั้น (ใบแยก)~~ **LIFTED by COO-DECISION 20260902_0541** (ขีดฆ่า ไม่ลบ) — call site ต่อแล้วโดยคำตัดสิน `0541` ทาง 1 · ~~สิ่งที่ **ยังจริงไม่เปลี่ยน**: เลข `0x4543` ยัง **UNOBSERVED บนไวร์**~~ 🔴 **ถอนโดย chief (LANE-E) รอบ `kj0s6r`/R346 2026-09-05T02:0x+07:00 — ข้อความนี้ถูกหักล้างแล้วตั้งแต่ 2026-09-02**: รอบ attended R303 (`notes_to_chief/20260902_1755_KA1A-R303-RESULTS-*` หัวข้อ "0x4543 IS NO LONGER DERIVED - please strike the caveat") วัดเฟรมขาเข้า `0x4543` **46 เฟรม** และสองเฟรมในนั้นทำให้เกิดแถวในกระเป๋าจริง · ยืนยันซ้ำ R306 (`20260903_1657` · `VITAL_WALK_PROMOTED vital=0x4543`) ⇒ `0x4543` เป็น **OBSERVED บนไวร์** แล้ว ไม่ใช่ค่า derive จากชื่อคลาสอย่างเดียวอีกต่อไป · จดหมาย R303 ถูก consume แล้วแต่ไม่มีใครลงมือถอน ค้าง 3 วัน (พบโดยลูกมือตรวจของ chief รอบนี้) · 🔴 **คอมเมนต์ในซอร์สเซิร์ฟเวอร์ยังไม่ถูกแก้และผมยังแก้ไม่ได้ในรอบนี้** — `runtime.py:7886` · `mob_pickup_request.py:23` · `mob_loot.py:935` · `loot_roll.py:37` · `app.py:282` · `runtime.py:2835` · `runtime.py:7945` ยังเขียนว่า never observed และถูก **พินด้วยเทสบนเกต** (`test_the_call_site_is_absent_or_is_the_published_one`) ตาม `COO-DECISION 20260902_0542` ข้อ 1 ⇒ เกตกำลังบังคับข้ออ้างที่การวัดหักล้างแล้ว · **แก้ต้องผ่าน COO** เพราะถ้อยคำนั้นถูกคำตัดสินตรึงไว้ = จดหมาย `20260905_02xx_CHIEF-ASK-COO-*` และเงื่อนไขของ `0541` คือข้อเท็จจริงนี้ต้องเขียนไว้ที่ call site (เทส `test_the_call_site_is_absent_or_is_the_published_one` บังคับบน gate) · ต่อเป็น persist path (`dispatch_inbound_pickup_request`) ไม่ใช่ dispatch ล้วน ตาม `0541` ข้อ 2 · payload shape ปิดแบบ conditional-static แล้ว: class body = `object_ref_u32` + `opaque_u8` ไม่มี claimant identity/XYZ ⇒ เซิร์ฟเวอร์ต้องอ่านตัวตน/ตำแหน่งจาก authenticated session state · ปิดโดย RE runner LOCAL 2026-08-28T11:12+07:00, บริโภคโดย LANE-B รอบ `rbuta4` 2026-08-28T17:49+07:00, ดู `notes_to_chief/20260828_1112_RE-125-RESULT-NO-CAPTURED-PICKUP-OPCODE.md`**~~]
-
-> NUMBERING NOTE: shared counter with `GAME_TEST_QUEUE.md` -- this round also opened `GT-124` there (grep
-> confirmed 2026-08-28: `GT-124`/`RE-124`/`RE-125` = 0 hits before either was reserved). `GT-124` took `124`
-> first (opened earlier in the same round); this entry is `125`. Highest prior number was `RE-123`
-> (BG0002-MIRAGE-REEL-QUEST-SPAWN-CROSSWALK-001, CLOSED).
-
-**ค้นใน `pf_bridge\external\ แล้ว:** ไม่เจอ -- `grep -in "pickup|Terrain.*Thing|4543|ground.*loot|item.*operate"
-external/00_SEARCH_HERE_FIRST.md` ให้ผล 0 แถว (ตรวจตามกฎบังคับข้อแรกของไฟล์นี้ก่อนเปิดใบ)
-
-### ทำไมเปิดใบนี้ (lane B, round `pnd0a5`, 2026-08-28)
-`pirate-force-server`'s `src/pirateforce_foundation/mob_pickup.py` มีกลไก CLAIM ฝั่งเซิร์ฟเวอร์ครบแล้ว
-(`resolve_claim`/`commit_pickup`/`dispatch_pickup_request`, unit-tested เขียวหมด) แต่ `runtime.py` **ไม่มี
-call site เรียกมันเลยแม้แต่จุดเดียว** (grep ยืนยันรอบนี้: `dispatch_pickup_request` = 0 hits ใน `runtime.py`)
--- เพราะไม่มีใครยืนยัน **vital id จริง** ที่ client ส่งมาตอนคลิกเก็บของ (`runtime.py` มีคอมเมนต์ของตัวเองบอก
-ตรงๆ ว่า "there is no known vital id for a client-originated pickup request on this project's wire yet")
-สิ่งนี้เป็นคนละด่านกับ "ด่าน 2" (`session.select_and_start`'s `is_unmoved_baseline`, เลื่อนไป 30-31 ส.ค.
-ตาม `notes_to_chief/20260827_1350_COO-DECISION-bagwall-second-wall-redesign-deferred-post-M4.md`) -- นี่คือ
-ด่านที่**อยู่ก่อนหน้านั้นอีกชั้น**: ต่อให้ด่าน 2 เปิดวันที่ 30-31 ก็ยังเก็บของไม่ได้ถ้าไม่มีทางรับคำขอเข้ามา
-ก่อน `GT-060` (`GAME_TEST_QUEUE.md`) เคยแตะคำถามใกล้เคียง (id derive `0x4543` สำหรับ `PickupTerrainThing`)
-แต่เป็นคนละ pipeline (`HYP-PF-036` hypothesis scenario, ไม่ใช่เส้นทาง production ของ `mob_pickup.py`) --
-ใบนี้ถามเฉพาะเส้นทาง production
-
-### objective
-1. หา vital id (opcode) ที่ client ส่งมาเมื่อผู้เล่นคลิกซ้ายบนวัตถุของตกพื้น (`PickupTerrainThing` หรือชื่อ
-   เทียบเท่าในตารางเวิร์คของ Codex/`external/`) -- ยืนยันจาก capture corpus/ตารางที่ commit ไว้แล้วเท่านั้น
-   ห้ามเดาจาก pattern ของ id อื่น
-2. ถ้าเจอ: ระบุ payload shape เต็ม (object reference dword ที่ `mob_loot`/`mob_pickup` ใช้เป็น `drop_key`
-   อยู่แล้วหรือฟิลด์อื่น, ตำแหน่งผู้เล่นมากับเฟรมหรือเซิร์ฟเวอร์ต้องอ่านจาก session state เอง, มี opaque byte
-   อื่นที่ `mob_pickup.PickupClaim`/`opaque_u8` ต้องรองรับไหม) พร้อม provenance (offset/แถวตาราง/capture ไฟล์)
-3. ถ้าชนเพดาน static (ไม่มี capture ที่มีการคลิกเก็บของจริงเลย) ให้เขียน bounded negative ตามกฎ -- ระบุด้วยว่า
-   ต้องใช้ attended capture ใหม่ (คนละงานกับใบนี้) หรือยังมีมุมมอง static อื่นที่ยังไม่ลอง
-
-### กติกาบังคับ (เหมือนทุกใบ static)
-อิมเมจ/ไฟล์อ่านอย่างเดียว · ทุกข้อสรุปมี provenance (แถว/คอลัมน์/offset/capture) · ชนเพดานให้เขียน bounded
-negative แล้วปิด ไม่เดาต่อ · ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่แตะ canonical DB
-
-### เกณฑ์จบใบ
-vital id + payload shape พร้อม provenance พอให้ chief เขียน call site จริงใน `runtime.py` (ต่อกับ
-`mob_pickup.dispatch_pickup_request` ที่มีอยู่แล้ว) **หรือ** bounded negative ที่ชัดเจนว่า static ไปต่อไม่ได้
-และต้องรอ attended capture ⇒ ปิดใบพร้อมบรรทัด `BUILD_IMPACT:`
-
-**ทำไมมีค่า:** เป็นด่านที่บล็อก BUILD-006 (M5, กำหนด 31 ส.ค. 23:59) อยู่ก่อนด่าน 2 เสียอีก และไม่เคยถูกตั้ง
-คำถามตรงๆ มาก่อน (50 กว่ารอบของสาย B ที่ผ่านมาพูดถึงแต่ด่าน 1/2/3 ของกำแพงกระเป๋า ไม่เคยเช็คว่า runtime.py
-มีทางรับคำขอ pickup เข้ามาหรือยัง) -- ถ้าไม่ตอบ ต่อให้ด่าน 2 ออกแบบเสร็จวันที่ 30-31 ตามกำหนด BUILD-006 ก็ยัง
-ทำไม่ได้อยู่ดีเพราะไม่มีทางส่งคำขอเข้าเซิร์ฟเวอร์เลย
+## RE-125 PICKUP-REQUEST-VITAL-ID-001: what wire vital id (opcode) does a real client send when the player left-clicks a ground drop / `PickupTerrainT... -- archived 20260906 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md`)
 
 ## RE-126 BT-GM-CONTROL-OBJECT-IDENTITY-001: ปุ่ม `BT_GM` ที่ RE-104 พินไว้ ถูกผูกกับ handler `0x0053B9B0` จริงหรือกับ dispatcher ตัวอื่น -- และ `this+0x48` (ประตูบานแรกของ handler) ถูกตั้งค่าจากที่ไห... -- archived 20260905 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md`)
 ## 🆕🔬 RE-128 SCENE-ORDINAL-TO-MOBS-NID-TABLE-LOCATION-001 [STATIC-ON-BRIDGE]: **ไฟล์/ตารางไหนของไคลเอนต์เก็บ mapping "เลขชุดต่อฉาก (1..115) → `MOBS.n_ID` (ถึง 10,080)" — ตัวที่หายไปทั้งโปรเจกต์ และเป็นตัวเดียวที่ทำให้ Port Royal เกิด NPC ผิดตัวทุกจุด**
@@ -406,7 +361,7 @@ vital id + payload shape พร้อม provenance พอให้ chief เข
 ## RE-129 FORCE-POS-VITAL-VERSION-001: ไบต์ `vital_version` ของ `ForcePos` (`0x0E80`) ที่ client ยอมรับคือค่าอะไร -- prototype constructor ของ vital น... -- archived 20260906 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md`)
 
 ## ✅🔬 RE-130 GROUND-LABEL-LIST-MEMBERSHIP-001 [STATIC-ON-BRIDGE] — **CLOSED / DONE-PASS · บริโภคแล้วโดย LANE-B รอบ `zxnwtd`**: **ป้ายชื่อไอเทมบนพื้นผูกกับการที่ element ยังอยู่ในลิสต์ `0x08` (object+`... -- archived 20260905 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md`)
-## RE-132 GM-GLOBAL-MESSAGE-VITAL-VERSION-001 [ARCHIVED 2026-08-31 R274, closed >24h per หัวข้อ 11] -- moved verbatim to `archive/CLIENT_RE_QUEUE_ARCH... -- archived 20260906 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md`)
+## RE-132 GM-GLOBAL-MESSAGE-VITAL-VERSION-001 [ARCHIVED 2026-08-31 R274, closed >24h per หัวข้อ 11] -- moved verbatim to `archive/CLIENT_RE_QUEUE_ARCH... -- (stub เก่า R274) ถูกย้ายรอบ 20260906 ไป `archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md` 🔴 **แต่เนื้อใบจริงอยู่ที่ `archive/CLIENT_RE_QUEUE_ARCHIVE_20260831_R274_closed.md` ไม่ใช่ไฟล์ 20260906** (ไฟล์นั้นเก็บได้แค่ stub นี้ — แก้ถ้อยคำที่ชี้ผิดโดย chief รอบ `6z131u`-b ตาม pf-adversary D12)
 
 ## 🆕🔬 RE-135 CP874-CENSUS-ARTIFACT-REGEN-001 [STATIC-ON-BRIDGE]: ลบ `U+1F534` ตัวสุดท้ายใน `tools/pf_vital_thunk_census_static.py` แล้ว regenerate artifact ในคอมมิตเดียวกัน  [PENDING]
 
@@ -520,11 +475,93 @@ FONT_COLOR ID/n_SKIN_COLOR จนกว่าจะมี attended one-field cro
 ## 🆕🔬 RE-161 CORPSE-POSE-APPLIES-AT-NEXT-RECOMPOSE-NOT-AT-DEATH-FRAME-001 [STATIC-ON-BRIDGE]: **ทำไมโมเดลไม่ล้มตอนได้เฟรมตาย แต่ล้มตอนคิลถัดไปมาถึงแทน** [~~🟢 OPEN — เปิดโดย LANE-B รอบ `qb1ytr` 2026-08... -- archived 20260905 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md`)
 ## 🆕🔬 RE-163 MOB-LOOT-DROP-LATE-MS-SOURCE-001 [STATIC-ON-BRIDGE]: **เฟรม `MOB_LOOT_DROP` มาถึงช้า 351-949ms — ช้าเพราะอะไร ไม่ใช่ตำแหน่งคิว** [~~🟢 OPEN — เปิดโดย LANE-B รอบใหม่ (scheduled) 2026-08-30T... -- archived 20260905 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md`)
 ## 🆕🔬 RE-162 IN-SESSION-SCENE-CHANGE-WIRE-001 [STATIC-ON-BRIDGE]: **ไบต์ไหนสั่งให้ client เปลี่ยนแมพขณะออนไลน์ (ไม่ผ่านล็อกเอาต์)** [~~🟢 OPEN~~ 🔵 **DONE / MIXED — ปิดโดย chief รอบ `bunu7v` (R246) 2026... -- archived 20260905 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md`)
-## 🔬 RE-164 BT-GM-CLICK-FOUR-SUSPECTS-002 [CLOSED เฉพาะ**ชั้น static** ครบสี่ข้อ (#2 มีชั้น attended ด้วย) — ~~#1 STATIC-PARTIAL~~ ปิดโดย `RE-164 RESU... -- archived 20260906 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md`)
+## 🔬 RE-164 BT-GM-CLICK-FOUR-SUSPECTS-002 [CLOSED เฉพาะ**ชั้น static** ครบสี่ข้อ (#2 มีชั้น attended ด้วย) — ~~#1 STATIC-PARTIAL~~ ปิดโดย `RE-164 RESU... -- archived 20260906 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md`) 🔴 **ค้างจริง: ข้อ #2 ของใบมีชั้น attended ที่ยังไม่มีใครวัด** (chief รอบ `6z131u`-b ตาม pf-adversary D6) — ใครหยิบต่อ เปิดใบ GT ใหม่ อย่าถือว่าจบไปกับ RE-164
 
-## 🔬 RE-167 CENSUS-FRAME-INTERMITTENT-ABORT-001 [~~OPEN — assigned LANE-A~~ 🔵 **wire/DB ANSWERED bounded-negative, client-observable STILL PENDING — L... -- archived 20260906 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md`)
+## 🔬 RE-167 CENSUS-FRAME-INTERMITTENT-ABORT-001 [~~OPEN — assigned LANE-A~~ 🔵 **wire/DB ANSWERED bounded-negative, client-observable STILL PENDING — LANE-A รอบ `qoj8ei` 2026-08-31T11:36+07:00, ผล `notes_to_chief/20260831_1136_RE-167-RESULT-wire-layer-no-server-buffer-timeout-cause-found-bounded-negative.md`: ไม่พบ server-side buffer/timeout/race ที่อธิบาย 10053 ได้ จาก static analysis; chunking ต้องแก้ frozen `current/pf_login_game_server_v141.py` ซึ่งเป็นไฟล์ที่ทั้งโปรเจกต์ตกลงห้ามแก้ — ส่งเป็นคำถามเชิงโครงสร้างให้ chief/COO ตัดสิน ไม่ใช่ CORE-REQUEST ปกติ; ยังไม่มี fix ให้เทส จึงยังไม่เปิด GT ใหม่**]: เฟรม `WORLD_CENSUS_INITIAL` ขนาด ~20 KB (Port Royal, 108-115 actor) ทำสายไคลเอนต์ขาดเป็นครั้งคราว (`ConnectionAbortedError 10053`) — เกิดที่จุดไหนของ send/parse และทำไมไม่เกิดทุกครั้งบนเฟรมขนาดเท่ากัน
 
-## 🔬 RE-168 SCENE-TRANSITION-UI-LAYER-NOT-RESET-001 [~~OPEN — assigned LANE-A~~ 🔵 **wire/DB ANSWERED partial, client-observable STILL PENDING — LANE-A... -- archived 20260906 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md`)
+### หลักฐานตั้งต้น
+`notes_to_chief/20260831_1036_GT106R2-RESULT-PASS-client-renders-the-destination-scene-mid-session-plus-two-new-findings.md`
+(ของใหม่ข้อ 1) — สามจุดข้อมูล: Port Royal 20,112B ครั้งแรกสายขาด (`10053`) ครั้งถัดมาผ่านทั้ง
+INITIAL/REAPPLY, Slave Market (BG0004) 18,997B ขึ้นข้อความ "ยังไม่สามารถรับข้อมูล Server ได้" แต่เล่นต่อได้
+— **เกิดเป็นครั้งคราวบนเฟรมขนาดเท่ากัน ห้ามเขียนว่า "20 KB พังเสมอ"**
+
+### ที่มา
+ก่อนหน้านี้ Port Royal ส่ง actor แค่ 3 ตัว (`V134_P0_P30_P91_ISOLATED`) ตอนนี้ส่ง 108/115 — เฟรมโตจาก
+หลักร้อยไบต์เป็น ~20 KB เป็นผลข้างเคียงของงานสำมะโนที่เพิ่งลง main ไม่ใช่บั๊กเก่าที่เพิ่งโผล่
+
+### จุดที่ยังไม่แน่ชัด
+1. ฝั่งเซิร์ฟเวอร์ (`runtime.py`/`app.py` ส่ง `WORLD_CENSUS_INITIAL`): มี buffer/timeout ใดที่ทำให้ send
+   ถูก abort เป็นบางครั้งบนเพย์โหลดขนาดนี้ — ตรวจ log บริเวณจุด send ว่ามี retry/partial-write หรือไม่
+2. ฝั่งไคลเอนต์ (จากข้อสังเกต ไม่ใช่ disassembly ใหม่): ไคลเอนต์อ่านเฟรมสำมะโนเป็นก้อนเดียวหรือแบ่งอ่าน —
+   ถ้าไม่มี client image ให้ตอบจาก log ฝั่งเซิร์ฟเวอร์ + เอกสารโปรโตคอลที่ commit แล้วเท่านั้น
+3. ควรแบ่งเฟรมสำมะโนใหญ่เป็นหลายก้อน (chunking) หรือไม่ — ถ้าตอบได้จาก static analysis ให้เสนอ threshold
+4. ผลลบก็เป็นคำตอบ: ถ้าสรุปได้ว่าเป็นเงื่อนไข race ฝั่งเน็ตเวิร์กที่ไม่มีทางแก้จากโค้ดเซิร์ฟเวอร์ ให้ปิดเป็น
+   bounded-negative พร้อมเหตุผล
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้บางส่วน):** คำตอบต่อข้อ 1-4 จาก static analysis ของซอร์ส/log ที่ commit แล้ว
+พร้อมเลขบรรทัด — ผลลบก็เป็นคำตอบ
+
+**ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องมีคนหน้าจอ):** เปิด GT ใหม่ถ้าต้องยืนยันว่า fix (เช่น chunking)
+แก้อาการ 10053 จริงในเซสชันยาว — สาย A เปิดใบเมื่อมีของให้เทส
+
+### ข้อห้าม
+🔴 **ห้ามแก้ด้วยการลดจำนวน actor เงียบ ๆ** — นั่นคือถอยหลังจากงานสำมะโนที่เพิ่งทำสำเร็จ (ตามที่ผู้เทสเน้นไว้
+ในใบต้นเรื่อง) · ห้ามอ้างว่าพบสาเหตุแท้จริงจากการอ่าน log ครั้งเดียว (G1) · 🔴 **CHARTER-02 §⑥**:
+`WORLD_CENSUS_INITIAL` ถูกประกอบ/ส่งจาก `runtime.py` (`src/pirateforce_foundation/runtime.py:8096`) ซึ่งเป็น
+เขตของ chief คนเดียว — ถ้าคำตอบชั้น wire/DB สรุปว่า fix (เช่น chunking) ต้องแก้ใน `runtime.py`/`app.py`/
+`pf_login_game_server_v141.py` **LANE-A ห้ามแตะไฟล์เหล่านั้นเอง** ให้เปิด CORE-REQUEST ขอ chief ต่อสายแทน
+ตามกติกาเขตเขียนปกติ
+
+### สัญญาผู้บริโภค
+ผู้เปิดใบเป็นผู้บริโภคผล (LANE-A) ตามกฎ "ใครเปิดใบคนนั้นบริโภค" — มอบหมายโดย chief รอบ `iby4ui` ตามคำขอ
+ของกะ1-A ในใบต้นเรื่อง (ADDRESSEE เดียวต่อใบ)
+
+### links
+`notes_to_chief/20260831_1036_GT106R2-RESULT-PASS-client-renders-the-destination-scene-mid-session-plus-two-new-findings.md`
+
+## 🔬 RE-168 SCENE-TRANSITION-UI-LAYER-NOT-RESET-001 [~~OPEN — assigned LANE-A~~ 🔵 **wire/DB ANSWERED partial, client-observable STILL PENDING — LANE-A รอบ `qoj8ei` 2026-08-31T11:42+07:00, ผล `notes_to_chief/20260831_1142_RE-168-RESULT-no-dialogue-close-signal-exists-server-is-stateful-enough-to-add-one.md`: เฟรม `kind=clear` ที่มีอยู่เป็น population เท่านั้น ไม่มีช่องปิด UI; เซิร์ฟเวอร์จำสถานะ conversation ได้จริง (`columbus_quest3021_conversation_sent`) แต่ไม่มี opcode ปิด dialogue ที่ characterize แล้วในเขตนี้ — เปิดใบใหม่ให้สาย RE หา opcode ก่อน; ยังไม่มี fix ให้เทส จึงยังไม่เปิด GT ใหม่**]: หน้าต่างบทสนทนา NPC (Columbus quest 3021) ค้างอยู่บนจอหลัง teleport ข้ามฉาก ทั้งที่ actor ถูกล้างแล้ว (`population=none`, เฟรม `kind=clear` ยิงก่อน teleport) — ชั้น UI ควรถูกสั่งรีเซ็ตตอนไหน และตอนนี้เซิร์ฟเวอร์ส่งสัญญาณนั้นหรือไม่
+
+### หลักฐานตั้งต้น
+`notes_to_chief/20260831_1036_GT106R2-RESULT-PASS-client-renders-the-destination-scene-mid-session-plus-two-new-findings.md`
+(ของใหม่ข้อ 2) — เจ้าของรายงานตรง ๆ ว่า "หลังวาร์ปไปฉาก 17 ภาพ/หน้าต่างบทสนทนาของ Columbus ยังค้างอยู่บนจอ"
+รายละเอียดเฟรม `WORLD_M2_CROSSING_HANDOFF kind=clear ... slot=before_teleport ... held=108` มาจากจดหมาย
+คู่กันบูตเดียวกัน (`notes_to_chief/20260831_1037_GT148-and-GT165-RESULT-stowaways-cleared-and-slave-market-island-has-life.md`
+บรรทัด ①) ไม่ใช่ใบ 1036 **คนละชั้นกับที่ `GT-148` ถาม** (`GT-148` ถามเรื่อง actor ค้าง — ตามใบ 1037 สาย A
+เจ้าของใบรายงานว่าจะปิดเป็น PASS เอง แต่ ณ เวลาที่เขียนใบนี้ `GAME_TEST_QUEUE.md` ยังขึ้น PENDING (สาย A
+ยังไม่ปิดหัวใบจริง) — ใบนี้ถามเรื่อง UI ค้าง ซึ่งเป็นชั้นคนละอันแม้ทริกเกอร์เดียวกัน ไม่ขึ้นกับผลของ `GT-148`)
+
+### จุดที่ยังไม่แน่ชัด
+1. เฟรม `kind=clear` ที่มีอยู่แล้ว (`WORLD_M2_CROSSING_HANDOFF`) สั่งล้างเฉพาะ actor หรือมีช่องสั่งปิด UI
+   ด้วย — ถ้าไม่มี ต้องมีเฟรม/สัญญาณแยกสำหรับปิด dialogue window
+2. การเปิดหน้าต่างบทสนทนา Columbus มาจากจุดเสียบไหน (`CORE_REQUEST_014_COLUMBUS_Q3021_NPC_CONVERSATION_ONCE`
+   ตามที่ log ใบต้นเรื่องแสดง) — จุดเสียบเดียวกันควรมีคู่ปิดหรือไม่
+3. เป็นปัญหาฝั่งเซิร์ฟเวอร์ (ไม่ส่งสัญญาณปิด) หรือฝั่งไคลเอนต์ (ได้สัญญาณแต่ไม่ทำตาม) — ตอบจาก wire/log
+   ที่ commit แล้วเท่านั้น ถ้าต้องอ่าน client behavior ให้ตอบเป็น bounded-negative ว่าตอบไม่ได้จากฝั่งนี้
+4. ผลลบก็เป็นคำตอบ: ถ้าเซิร์ฟเวอร์ไม่มีทางรู้ว่า dialogue window เปิดอยู่ (stateless ฝั่งนี้) ให้ปิดเป็น
+   bounded-negative พร้อมเสนอทางแก้ (เช่น ผูก dialogue-close เข้ากับ `kind=clear` เดิม)
+
+### pass criteria — สองชั้น แยกกันเด็ดขาด
+
+**ชั้น wire/DB (ปิดใบนี้ได้บางส่วน):** คำตอบต่อข้อ 1-4 จาก static analysis ของซอร์ส/log ที่ commit แล้ว
+
+**ชั้น client-observable (ใบนี้ตอบไม่ได้ ต้องมีคนหน้าจอ):** เปิด GT ใหม่เพื่อยืนยันว่า fix ปิดหน้าต่างจริง
+หลัง teleport — สาย A เปิดใบเมื่อมีของให้เทส
+
+### ข้อห้าม
+ห้ามนับเป็น FAIL ของ `GT-148` (ตามใบ 1037 ผลชั้น actor เป็นบวก — ไม่มี actor ค้าง — ไม่ว่าหัวใบจะถูกปิด
+เป็น PASS เมื่อไหร่ก็ตาม) · ห้ามอ้างว่ารู้พฤติกรรม client รวมโดยไม่มี client image/capture ยืนยัน ·
+🔴 **CHARTER-02 §⑥**: ถ้าคำตอบชั้น wire/DB สรุปว่าต้องผูกสัญญาณปิด UI เข้ากับเฟรมที่ `runtime.py`/`app.py`
+ประกอบ **LANE-A ห้ามแตะไฟล์เหล่านั้นเอง** ให้เปิด CORE-REQUEST ขอ chief ต่อสายแทน
+
+### สัญญาผู้บริโภค
+ผู้เปิดใบเป็นผู้บริโภคผล (LANE-A) — มอบหมายโดย chief รอบ `iby4ui` ตามคำขอของกะ1-A ในใบต้นเรื่อง (ใบใหม่
+ไม่ใช่ส่วนขยายของ `GT-148`)
+
+### links
+`notes_to_chief/20260831_1036_GT106R2-RESULT-PASS-client-renders-the-destination-scene-mid-session-plus-two-new-findings.md` ·
+`notes_to_chief/20260831_1037_GT148-and-GT165-RESULT-stowaways-cleared-and-slave-market-island-has-life.md`
 
 ## 🔬 RE-169 NPC-DIALOGUE-CLOSE-OPCODE-001 [🔴 **CLOSED bounded-positive-with-caveats — ปิดโดยผู้เปิดใบ (chief) รอบ `uy54tw` (R313) 2026-09-03T03:1x+07:00 จากผลชั้น IMAGE ของ RE runner บนสะพาน ใบ `notes... -- archived 20260905 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md`)
 ## 🔬 RE-170 BG0005-SCENE-LEVEL-CONTROL-MEDIAN-GAP-001 [🔴 **CLOSED bounded-negative — ปิดโดยผู้เปิดใบ LANE-A รอบ `rdhel6` 2026-09-01T08:4x+07:00, ดูผลด้านล่าง**]: `world_bg0015_identity.SCENE_LEVEL_CON... -- archived 20260905 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md`)
@@ -537,78 +574,7 @@ FONT_COLOR ID/n_SKIN_COLOR จนกว่าจะมี attended one-field cro
 ## 🔬 RE-191 MONSTER-NAME-COLOR-FONTSTYLE63-RGB-001 [STATIC-ON-BRIDGE]: `CODEX_CHECKPOINT 20260901_1135` closed the same-actor conditional static path... -- archived 20260906 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md`)
 
 ## 🔬 RE-193 ACTORATTR-SEVEN-UNKNOWN-FIELDS-CLIENT-DEFAULT-VALUES-001 [STATIC-ON-BRIDGE]: what does the client itself write, at object-creation time, into the 7 `ActorAttr` fields (of 55 total in `gm/a... -- archived 20260905 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md`)
-## 🔬 RE-194 BASICATTR-0X54-SPEED-PLAYER-VS-NPC-CONFLICT-001 [STATIC-ON-BRIDGE]: `BasicAttr+0x54` (f32, mask `0x0040`, tag `0x2A`) has two different [MEASURED] client-write values for the same offset -- which one does a freshly-created *player* object actually carry?  [✅ **DONE / PASS - answered by `notes_to_chief/20260902_0501_RE-194-RESULT-PLAYER-FRESH-DEFAULT-400-NPC150-IS-WIRE.md`** · ปิดหัวใบโดย chief (LANE-E) รอบ `kj0s6r`/R346 2026-09-05T02:0x+07:00 · **คำตอบ: ผู้เล่นที่เพิ่งสร้างพก `400.0f`** · `150.0` เป็นค่าที่มาทีหลังบนไวร์ของ NPC ไม่ใช่ค่าเกิดของผู้เล่น · จดหมายผลเขียนไว้เองว่า "ขอให้ chief กรอก `### result:` และปิดหัวใบให้ด้วย" แต่ไม่มีใครทำ ค้าง 3 วัน ทั้งที่ผลถูกใช้ปลายน้ำไปแล้ว (`COO-DECISION 20260902_0742` ปลดแบนเลข `400.0` หลัง RE-194 · LANE-DB `20260902_0623` ใช้ปิดคำถาม speed-walk seed) = ค้างบัญชี ไม่ใช่ช่องเทส (พบโดยลูกมือตรวจของ chief รอบนี้ จากรายการกวาดของ ka1-A `20260905_0106`) · เดิม assigned LANE-DB]
-
-### result:
-**DONE / PASS · 2026-09-02T05:01+07:00 · แหล่ง: `notes_to_chief/20260902_0501_RE-194-RESULT-PLAYER-FRESH-DEFAULT-400-NPC150-IS-WIRE.md` (RE runner) · กรอกลงหัวใบโดย chief (LANE-E) รอบ `kj0s6r`/R346**
-
-- **คำตอบ**: `BasicAttr+0x54` ของ *player* object ที่เพิ่งถูกสร้าง = **`400.0f`** · ค่า `150.0` ที่เคยขัดกันคือค่าของ NPC ที่มาทีหลังบนไวร์ ไม่ใช่ค่าเกิดของผู้เล่น ⇒ ความขัดแย้ง "สองค่าที่ offset เดียวกัน" ไม่ใช่ความขัดแย้ง แต่เป็นคนละ object คนละจังหวะ
-- **ชั้นหลักฐาน**: wire/DB (static-on-bridge) ชั้นเดียว — **ไม่มีชั้น client-observable** จึงไม่ต้องมี `OBSERVER_CONFIRMED` และห้ามยกผลนี้ไปอ้างว่า "เห็นบนจอ"
-- **ผลถูกใช้ไปแล้วปลายน้ำ (ก่อนหัวใบจะถูกปิด)**: `COO-DECISION 20260902_0742` ปลดแบนเลข `400.0` · LANE-DB `20260902_0623` ปิดคำถาม speed-walk seed ด้วยใบนี้ · RE runner log `2026-09-02T05:05 RE-194 DONE jobs=1`
-- 🔴 **nonclaim**: ใบนี้ตอบว่าค่าเกิดคืออะไร **ไม่ได้** ตอบว่าฟิลด์นี้แปลว่า "ความเร็ว" (G6 — ห้ามประกาศความหมายของฟิลด์จากการอ่านครั้งเดียว) · เกต `/speed` และเงื่อนไข (b'') ใน `NOW.md` ไม่ถูกแตะโดยใบนี้
-
-### ทำไมเปิดใบนี้ (มอบหมายตรงจาก COO)
-
-`COO-DECISION 20260901_1447` ข้อ 1 (`ADDRESSEE: chief`) สั่งเปิด RE ใบนี้ตรง ๆ เป็น **เคสนำร่อง**
-ของคำถามใหญ่กว่า (25 ฟิลด์ที่มี default พิสูจน์แล้วแต่ยังไม่ยืนยันว่า resend กลางเกมปลอดภัย -- ดูใบ
-`1420`/`1335` ของ LANE-DB) ตรวจแล้วทั้งสองเลขมีอยู่จริงในซอร์สที่ commit แล้ว ไม่ได้เชื่อจากใบขอเฉย ๆ:
-
-- `src/pirateforce_foundation/player_wire.py:76` -- `PLAYER_LOGIN_MOVEMENT_SPEED = 400.0`, คอมเมนต์
-  บรรทัด 66 อ้างว่าไคลเอนต์เขียน `400.0f` ลง `+0x54` ที่ `0x00464AF2` "on every fresh instance"
-- `src/pirateforce_foundation/persistence_attr_compose.py:233/241` -- ค่า `400.0` เดียวกัน ที่ VA
-  เดียวกัน (`0x00464AF2`) ถูกใช้เป็น candidate seed ของคอลัมน์ DB แต่คอมเมนต์บรรทัด 152/239 ของไฟล์
-  เดียวกันเองเขียนไว้ตรง ๆ ว่า "+0x54 is the player's walk speed" เป็น **[สมมติของสาย DB - รอ RE]**
-  ยังไม่ปิด
-- `tests/test_npc_gait_wire.py:59` -- `PROVEN_WALK_SPEED = 150.0` (runtime_pass, สำหรับ **NPC** ไม่ใช่
-  player) offset เดียวกันตามที่ `docs/FUNCTIONAL_COVERAGE.json` อ้างถึง
-- `src/pirateforce_foundation/mob_death.py:856` -- `BASIC_BIT_MOVEMENT_SPEED = 0x0040 # f32 tag 0x2A
-  @ +0x54` ยืนยัน offset/mask/tag ตรงกับทั้งสองจุดข้างบน เป็นฟิลด์เดียวกันแน่นอน ไม่ใช่การชนกันของเลข
-  offset คนละฟิลด์
-
-**ทำไมสำคัญ**: `persistence_typed_attrs.py:28/38/45` วางแผนจะ seed คอลัมน์ DB ของผู้เล่นจาก `400.0`
-(ค่าตอนสร้างวัตถุ) แต่ถ้าไคลเอนต์จริงเขียนทับด้วยค่าอื่น (เช่น `150.0` เหมือน NPC หรือค่าที่คำนวณจาก
-คลาส/สเตตัสตัวละคร) ทุกตัวละครที่ผ่าน path นี้จะได้ speed ผิดพร้อมกันเงียบ ๆ ก่อนที่ LANE-DB จะเริ่ม
-เขียนโค้ด seed จริง (`COO-DECISION 20260901_1447` ข้อ 2 ยังไม่เปิดประตูส่ง `/speed` รออันนี้ก่อน)
-
-### สิ่งที่ต้องตอบ
-
-คำถามเดียว: object ผู้เล่น (ไม่ใช่ NPC/mob) ที่สร้างใหม่ตอนล็อกอิน มีค่าอะไรจริงที่ `BasicAttr+0x54`
-ณ จุดที่สร้างเสร็จ ก่อน wire ใด ๆ จะมาทับ --
-
-1. เป็น `400.0` แบบเดียวกับที่ `player_wire.py:66` อ้าง (แยกจาก NPC path ที่ใช้ `150.0`) หรือ
-2. เป็น `150.0` เหมือน NPC (แชร์ constructor เดียวกัน) หรือ
-3. เป็นค่าอื่น ที่คำนวณจากคลาส/สเตตัสตัวละคร ไม่ใช่ literal คงที่ตัวเดียว
-
-อ่านจาก call site ที่ `0x00464AF2` โดยตรง (เส้นทางเดียวกับที่ `player_wire.py:66` อ้างถึง) --
-แยกให้ชัดว่า call site นั้นถูกเรียกจาก constructor ของ **player** object จริง ไม่ใช่ constructor ที่ใช้
-ร่วมกับ NPC/mob (ถ้าใช้ร่วมกัน ต้องหา branch/parameter ที่แยกค่าระหว่างสองประเภท)
-
-### pass criteria
-
-- **PASS**: ระบุค่าจริงของ player object พร้อม VA/offset ของ call site และแยกให้เห็นว่าเส้นทางของ
-  player กับ NPC เป็น constructor เดียวกันหรือคนละตัว (ถ้าเดียวกัน ต้องโชว์จุดที่ค่าต่างกัน)
-- **BOUNDED-NEGATIVE**: ถ้า `0x00464AF2` เป็น shared constructor ที่ resolve ไม่ได้ว่า branch ไหนใช้
-  กับ player จริง (ต้องมี runtime trace ไม่ใช่ static เพียงอย่างเดียว) -- เขียนไว้ตรง ๆ ว่า static ปิด
-  ไม่ได้ ต้องส่งต่อเป็น GT (attended, วัด speed จริงบนจอ) ไม่ใช่เดา
-
-### ข้อห้าม
-
-ห้ามเขียนโค้ด DB/persistence/attr-wire ใด ๆ จากใบนี้ -- LANE-DB เป็นเจ้าของโค้ด seed ต่อ · ห้ามสรุปว่า
-`400.0` หรือ `150.0` ถูกโดยไม่มี VA ของ call site ที่แยก player ออกจาก NPC ชัดเจน
-
-### สัญญาผู้บริโภค
-
-เปิดโดย chief (มอบหมายตรงจาก `COO-DECISION 20260901_1447` ข้อ 1) -- **สาย DB บริโภคผล** (ผู้ใช้ค่านี้
-seed คอลัมน์ DB ต่อ) เหมือนกับ `RE-193` ข้อยกเว้นเดียวกัน -- สาย DB อ่านผลรอบถัดไปที่เห็นแล้วปิดหัวใบเอง
-
-### links
-
-`notes_to_chief/20260901_1447_COO-ORDER-re-basicattr-0x54-speed-value-hold-speed-send-gate-staged-ps1-ownership.md`
-(คำสั่งมอบหมายตรง ข้อ 1) · `src/pirateforce_foundation/player_wire.py:59-76` (ค่า 400.0 + คอมเมนต์
-อ้าง VA) · `tests/test_npc_gait_wire.py:59` (ค่า 150.0 ของ NPC) ·
-`src/pirateforce_foundation/persistence_attr_compose.py:233-241,284-288` (nonclaim ของสาย DB เอง
-เรื่องค่านี้ยังไม่ปิด) · `src/pirateforce_foundation/mob_death.py:850-856` (ยืนยัน offset/mask/tag
-เดียวกัน)
+## 🔬 RE-194 BASICATTR-0X54-SPEED-PLAYER-VS-NPC-CONFLICT-001 [STATIC-ON-BRIDGE]: `BasicAttr+0x54` (f32, mask `0x0040`, tag `0x2A`) has two different [M... -- archived 20260906 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md`)
 
 ## 🔬 RE-195 FONTSTYLEID-RELATIONSHIP-PREDICATE-VS-FACTION-COMPARATOR-001 [STATIC-ON-BRIDGE]: does `UILabel_FontStyleID_parser_setter`'s `relationship_predicate` (`0x0043C380..0x0043C63C`) read the sam... -- archived 20260905 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md`)
 ## 🔬 RE-196 RETURNSELECTSERVERVITAL-FIELD3-TAG-BYTE-001 [STATIC-ON-BRIDGE]: field 3 (the string field, object `+0x20`) of `ReturnSelectServerVital` (0x709E) -- is there an instruction that writes a ta... -- archived 20260905 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md`)
