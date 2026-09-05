@@ -1,7 +1,8 @@
 # LANE-B รอบ `qamp70` — ประตูที่บอกว่า "มอนตัวนี้กลับมามีชีวิตแล้ว"
 
 เริ่ม 2026-09-05T19:32+07:00 · สาย B · COMBAT
-PR เซิร์ฟเวอร์ของรอบนี้: **pirate-force-server#PENDING**
+PR เซิร์ฟเวอร์ของรอบนี้: **pirate-force-server#848** (เปิดแล้ว ไม่ draft · marker
+ยืนยันด้วย GET แล้ว · รอเกต)
 claim PR: **pf_bridge#1366**
 
 ## รอบนี้ขยับ NOW ข้อไหน
@@ -44,19 +45,25 @@ claim PR: **pf_bridge#1366**
   ทีละแถวตาม `self.mob_death_register` และ **ไม่มีอะไรในทรีนี้เคยเอาแถวออกจาก register นั้น**
   ⇒ ฆ่ามอน 12 ตัวในฉาก 3 = ฉาก 3 ว่างจนกว่าจะรีสตาร์ตโปรเซส
 - `grep runtime.py`: **ไม่ import `mob_death_persistence` / `mob_ground_persistence` /
-  `world_scene_registry` เลยสักตัว** · `commit_death` ถูกเรียกสองจุดโดยไม่ส่ง `world=`
-  ⇒ สมุดหลุมศพของโลกว่างเปล่าบน production (ยกให้ COO ในจดหมาย `1953`)
+  `world_scene_registry` เลยสักตัว** ⇒ สิ่งที่ขาดคือ **ผู้อ่าน** (`DEATH_SEED_WIRING`)
+  (ยกให้ COO ในจดหมาย `1953`)
+  🔴 **สายนี้เขียนผิดในร่างแรกและถอนแล้วในรอบเดียวกัน**: ร่างแรกอ้างว่า "สมุดโลกว่างเปล่า
+  เพราะ `commit_death` ไม่ส่ง `world=`" — เท็จ `commit_death` เรียก `remember_death(...)`
+  ทุกครั้ง และ `remember_death` แปลง `world=None` เป็น singleton ⇒ **ทุกการฆ่าถูกฝังลง
+  สมุดโลกอยู่แล้ว** (pf-adversary D2) · ผลคือค่าปริยายของ `world=` เปลี่ยนเป็นสมุดโลกจริง
 
 **สิ่งที่ส่ง**:
-- `sweep_the_session_register(register, *, now=None, world=None, delay=...)` →
+- `sweep_the_session_register(register, *, now=None, world=THE_PROCESS_BOOK, delay=...)` →
   `(register, RespawnOutcome)` · **ไม่ raise เข้าหาผู้เรียกเลย** ทุกความล้มเหลวเป็นชื่อ
-- ลบเป็น **removal** จาก register (และจากสมุดโลกผ่าน `WorldDeaths.forget` เมื่อส่ง `world=`)
-  ไม่ใช่ filter ที่ census — เหตุผลเต็มใน docstring: ledger/register ที่ขัดกันคือ
-  `REFUSE_LEDGER_DISAGREES_WITH_REGISTER` ที่จุดเรียกซึ่งทำให้เธรด listener คลาย
+- ลบเป็น **removal** จาก register **และจากสมุดหลุมศพของโลกพร้อมกันโดยค่าปริยาย**
+  (`WorldDeaths.forget`) ไม่ใช่ filter ที่ census — เหตุผลเต็มใน docstring: ledger/register
+  ที่ขัดกันคือ `REFUSE_LEDGER_DISAGREES_WITH_REGISTER` ที่จุดเรียกซึ่งทำให้เธรด listener คลาย
 - generation ขยับเมื่อ **ลบ** เท่านั้น ไม่ขยับตอนลงเวลา (เพราะ `buried_at` เป็น `compare=False`
   = ค่าเดียวกัน) และ sweep ที่ไม่ขยับอะไรเลย **คืน object เดิม** ไม่ใช่สำเนา
 - `mob_death.DeathRecord.buried_at` (`compare=False, repr=False`) + `REFUSE_CLOCK_NOT_A_READING`
 - `MOB_RESPAWN_WIRING` = ประโยคเดียวที่ chief วางได้ พร้อมเหตุผลว่าทำไมต้องจุดนั้นจุดเดียว
+
+**สิ่งที่ pf-adversary จับได้และแก้ในรอบนี้ทั้งหมด (12 ข้อ)** — ดูหัวข้อ adversary ข้างล่าง
 
 **ข้อจำกัดที่ยอมรับ ไม่ใช่ซ่อน**: `mob_death.py` ห้าม import `time` (เทสของมันเองปักไว้
 ข้าง `socket`/`random`) ⇒ `kill()` ปล่อยหลุมศพไว้ไม่มีเวลา และ sweep ลงเวลาให้ครั้งแรกที่เห็น
@@ -74,24 +81,54 @@ claim PR: **pf_bridge#1366**
 (ไม่ใช่ `NO_FEATURE_WAITING` เพราะไม่มี RE ปิดใหม่ที่รอบนี้บริโภค — กติกา `1130` ไม่เข้าเงื่อนไข)
 
 ## เทส
-- ไฟล์ใหม่เดี่ยว: `pytest tests/test_mob_respawn.py` — **44 passed**
+- ไฟล์ใหม่เดี่ยว: `pytest tests/test_mob_respawn.py` — **59 passed** (44 ก่อน adversary)
 - ระหว่างทาง (ไฟล์ที่รอบนี้แตะ + เพื่อนบ้านที่อ่าน DeathRecord): mob_death ·
   mob_death_persistence · hp_death_encoder · hp_death_respawn_static · hp_death_erratum ·
   static_verifier_pins_cloud · world_scene_registry · mob_combat · mob_respawn —
   **475 passed · 20 skipped · 130 subtests**
 - **ซ้อมเกตในสภาพไม่มี `pf_bridge` ข้าง ๆ** (`git worktree add --detach "$(mktemp -d)" HEAD`
-  แล้วคัดลอกสามไฟล์เข้าไป): `test_mob_respawn.py` **44 passed · 0 skipped** ·
+  แล้วคัดลอกไฟล์เข้าไป): `test_mob_respawn.py` **44 passed · 0 skipped** (วัดก่อน adversary) ·
   `test_mob_death.py` + `test_mob_death_persistence.py` **158 passed · 0 skipped**
   ⇒ ไฟล์เทสใหม่ **ไม่เพิ่ม skip แม้แต่ตัวเดียว** `skip_census` จึงขยับไม่ได้ และไม่มีสตริง
   `capture_v141`/`GameClient` ใน docstring (ไม่หลุดออกจาก selection ของเกต)
-- ชุดเต็ม (ครั้งเดียวต่อรอบ บน commit สุดท้ายจริง หลัง `git fetch origin main` + merge): FULLSUITE
+- ชุดเต็ม (ครั้งเดียวต่อรอบ บน commit สุดท้ายจริง `b18b493` หลัง `git fetch origin main` +
+  merge `f12a904` เข้าต้นไม้แล้ว = **หลัง**แก้ตามผล adversary ครบ):
+  **11279 passed · 327 skipped · 20985 subtests passed · 0 failed** (589 วินาที)
+  — ไม่มีตัวแดงเลย · `KNOWN_RED_MAIN:` **ไม่มี**
 - `BYTECODE_PURGED:` ทุกคำสั่งของรอบนี้รันด้วย `PYTHONDONTWRITEBYTECODE=1` + `python3 -B`
   ทั้งรอบ ไม่มี `.pyc` ถูกเขียนเลย จึงไม่มีแคชให้ค้าง
 - cp874: ไฟล์ใหม่ทั้งสองเป็น ASCII ล้วน (ตรวจไบต์ต่อไบต์ = 0 ไบต์ >= 0x80) ·
   `grep -nE "rm +-[a-z]*r"` ในคำสั่งของรอบนี้: ว่าง (ใช้ `mktemp -d` + worktree ตาม `1546`)
 
 ## หมายเหตุ adversary
-ADVERSARY
+สั่ง `pf-adversary` หนึ่งครั้ง (จากสองครั้งที่กติกา `1428` ให้) บนสภาพก่อน commit
+**เจอ 12 ข้อ จ่ายครบทุกข้อในรอบนี้** ไม่มีข้อไหนถูกยกไป `ADVERSARY_PENDING`
+
+สองข้อที่ไม่ใช่บั๊ก แต่เป็น **คำอ้างเท็จของสายนี้เอง** — บันทึกไว้เพราะสำคัญกว่าบั๊ก:
+- **D2** docstring อ้างว่าสมุดหลุมศพของโลกไม่มีผู้เขียนฝั่ง production · เท็จ ·
+  `commit_death` → `remember_death(step.record, world=world)` ทุกครั้ง และ `remember_death`
+  แปลง `world=None` เป็น singleton `world_deaths()` ⇒ ทุกการฆ่าถูกฝังอยู่แล้ว
+  **ถ้าปล่อยไว้**: sweep จะเปิดหลุมศพในเซสชันแต่ทิ้งไว้บนสมุดโลก = สองสมุดขัดกัน และวันที่
+  `DEATH_SEED_WIRING` ลง seed จะดึงกลับมาพร้อม `buried_at=None` ทุกครั้ง = **respawn เป็นศูนย์
+  ถาวรและเงียบ** · แก้: `world=` ค่าปริยาย = สมุดโลกจริง (`THE_PROCESS_BOOK`)
+- **D5** ใบสั่งบอก chief ให้วาง `print(console_safe(line))` · `runtime.py` ไม่มีชื่อเปล่านั้น
+  (มีแต่ `lane_hooks.console_safe`) ⇒ วางตามจะเป็น `NameError` ในสาขาที่ถูก catch = เงียบสนิท
+  ทรงเดียวกับเกตตาย 3 วันของ `a7k5gy` · แก้ + เทสอ่าน `runtime.py` จริงทุกชื่อที่ใบสั่งใช้
+
+ข้ออื่นที่จ่ายแล้ว: **D1** ลืมลงทะเบียนโมดูลใหม่ใน `LANE_B_MODULES` (เทส fabrication guard แดง) ·
+**D3** ฟิลด์ `mob_death_register` ต้องประกาศในบล็อก atomic เท่านั้น ไม่ใช่เหนือจุด raise ของ
+`open_register` (ไม่งั้นเซสชันค้าง `ledger_disagrees_with_register`) · **D4** สมุดโลกที่ raise
+= ผลบางส่วนที่นับได้ ไม่ใช่ refusal และไม่ทิ้งหลุมศพที่เหลือ (`break`→`continue`) ·
+**D7** โทเคน `alive_again` เป็น delta ที่สวมชื่อเป้าหมาย → `removed_from_the_death_register` ·
+**D8** sweep ที่ลงเวลาอย่างเดียวต้องพิมพ์ ไม่ใช่เงียบ · **D9** "ตารางเวลาเดียวกัน" → "ระยะเวลา
+เท่ากัน คนละจุดเริ่ม" · **D10** เทสสองตัวที่ล้มไม่ได้ (substring import check, `is not None`)
+เปลี่ยนเป็น AST และเป็นการเทียบไบต์กับเซสชันที่ไม่เคยฆ่าอะไร พร้อมตัวคุมด้านลบ ·
+**D11** `describe_sweep` ที่ได้ชนิดผิดตอบเป็นชื่อ ไม่ใช่ความเงียบ · **D12** บรรทัด
+`TWO_SESSIONS_SAME_SCENE:` (อยู่ท้ายไฟล์นี้และในหัว PR)
+
+**มิวแทนต์ที่รอดชุดเทสเดิม 2 ตัว ตายแล้วทั้งคู่** (รันซ้ำยืนยันในรอบนี้):
+`keep.append` ในสาขา clock-went-backwards ถูกลบ → 1 แดง · `continue`→`break` ในลูปสมุดโลก
+→ 1 แดง · เพิ่มมิวแทนต์ที่สาม (ค่าปริยาย `world=` ไม่ถึงสมุดโลก) → 1 แดง
 
 ## งานสำรอง (3 ข้อ สำหรับรอบถัดไป)
 1. หนี้ `DropLedgerCell` ค้างฉากเดิมเมื่อผู้เล่นข้ามฉาก (`#675` ไม่ปิด · `NOW` หาง P-1) —
@@ -102,10 +139,15 @@ ADVERSARY
    นอกจาก `_digest` (ยกมาจากรอบก่อน ยังไม่ได้ตรวจ)
 
 ## ผู้เล่นจะเห็นอะไรต่างจากเมื่อวาน
-PLAYERDIFF
+**วันนี้ยังไม่เห็น และรอบนี้พูดตรง ๆ แทนที่จะเลี่ยง** — สิ่งที่ลงคือประตูกับหลักฐาน
+บรรทัดที่เหลืออยู่ใน `runtime.py` ซึ่งเป็นไฟล์ของ chief และ PR นี้แนบใบสั่งไปด้วยแล้ว
 
-TWO_SESSIONS_SAME_SCENE: ประโยคที่ขอให้ chief วางกวาด register ของ **เซสชันเดียว** ⇒ ผู้เล่นคนที่
-สองที่ยืนอยู่ในฉากเดียวกันยังเห็นศพของตัวเองจนกว่าจะเปิดฉากเอง · ครึ่งที่แชร์คือ `world=`
-(`mob_death_persistence.WorldDeaths`) ซึ่งฟังก์ชันรับไว้แล้วและมีเทสแล้ว แต่ **สมุดโลกยังไม่มี
-ผู้เขียนฝั่ง production** (`runtime.py` เรียก `commit_death` โดยไม่ส่ง `world=`) = ใบ `1650`
-ที่เงียบเป็นรอบที่สาม ยกให้ COO ในจดหมาย `1953` · หนี้ที่มีชื่อ ไม่ใช่การหรี่
+ทันทีที่ใบสั่งนั้นถูกวาง: **ฆ่ามอนในฉาก 3 เดินออกไปฉาก 4 กลับมาหลัง 120 วินาที — มอนยืนอยู่
+ที่เลือดเต็ม** แทนที่จะเป็นศพจนกว่าจะรีสตาร์ตโปรเซสเซิร์ฟเวอร์ นั่นคือ M4 ข้อ (4) ซึ่ง
+`NOW.md` บันทึกวันนี้ว่าเป็นศูนย์ที่วัดแล้ว
+
+TWO_SESSIONS_SAME_SCENE: ครึ่งเซสชันของ sweep เป็นของเซสชันเดียว ⇒ ผู้เล่นคนที่สองที่ยืนอยู่ใน
+ฉากเดียวกันยังเห็นศพของตัวเองจนกว่าจะเปิดฉากเอง · **สมุดหลุมศพของโลกถูกเปิดให้ทุกคนด้วยการ
+เรียกเดียวกัน** (ค่าปริยาย `world=` หลังแก้ D2) · ส่วนที่ยังต่างกันเป็นหนี้ของ **ผู้อ่านที่ยัง
+ไม่มี** (`mob_death_persistence.DEATH_SEED_WIRING` ยังไม่ถูกวางใน `runtime.py`) ยกให้ COO
+จัดลำดับในจดหมาย `1953` · หนี้ที่มีชื่อ ไม่ใช่การหรี่
