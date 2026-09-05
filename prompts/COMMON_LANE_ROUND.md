@@ -47,6 +47,13 @@
 - `python3 tools_bridge/pf_gate_preflight.py --repo <server>` ต้องเขียวก่อน push · เพิ่ม/ลบ/ย้าย skip หรือเพิ่มไฟล์เทสใหม่ ⇒ ซ้อม `pytest_subset` + `skip_census` ในสภาพไม่มี `pf_bridge` ข้าง ๆ (คำสั่งเต็มใน `AGENTS.md` §7)
 - 🔴 ห้าม `git add -A` (stage ทีละไฟล์ อ่าน `git diff --cached` ก่อน commit) · ห้ามแตะ canonical DB · ห้าม skip/disable เทสเพื่อให้เขียว · เกตแดงสาเหตุเดิมสองรอบติด ⇒ ห้ามส่งใบที่สาม เขียนจดหมาย COO
 
+## แผนที่โปรโตคอลของเกม — ดูก่อนเขียนว่า "ยังไม่รู้เฟรม" หรือออกใบ RE ทุกครั้ง (Panya 2026-09-05)
+1. `pf_bridge/VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv` = สารบัญการกระทำบนสาย (327 แถว · id + ชื่อ · 1 แถว = 1 การกระทำจริง)
+2. `external/PF_PROTOCOL_REGISTRY.tsv` = VA ของ serializer/handler/getter สำหรับ static RE (519 คลาส · 209 ตัวที่เกินจากข้อ 1 เป็น struct/module ไม่ใช่ฟังก์ชัน)
+3. `external/PF_SERIALIZER_FIELDS.tsv` = layout ที่พิสูจน์แล้ว + ทิศทาง W/R · เริ่มค้นที่ `external/00_SEARCH_HERE_FIRST.md` · ค่า attr ที่พิสูจน์แล้ว `notes_to_chief/reference_codex_attr/`
+ของสายคุณอยู่ในนั้นแล้ว (grep ชื่อเหล่านี้ก่อนเดา): **A** Trigger*/Teleport*/COnLand/CVehicle/Instance*/NavigationEx_* · **B** TargetVital/Action*/Relive*/CPotion/CArena*/CPVPState · **DB** Equipment_* (17)/Storage*/GuildStorage*/ItemLock/ItemBinding/ItemSynthesis/UserSetting/ItemMall_*/SetItemOnHotKey · **CS** CLearnSkill*/CRevertSkill/TriggerCastSkill/CBuff/CFightMsg/CHitResult/CMissileHitResult/CSkillAttr/FightAttr/Channel_JoinClassChannel · **GM** GM_*/Cheat*/Teleport* · **UI** Community_/Express_/Channel_/BuildingCrystal_/Pets_/… (แผนใน `docs/UI_LANE.md`)
+🔴 ใบ RE ที่ถามสิ่งที่มี layout ในข้อ 3 อยู่แล้ว = เสียรอบ RE runner ฟรี (เวลา RE runner = เวลาเครื่อง Panya) — grep ก่อน แล้วเขียน "grep แล้ว: เจอ/ไม่เจอ" ลงใบ
+
 ## จบรอบ ตามลำดับ ห้ามสลับ
 1. push งานให้ครบทั้งสองรีโป (git ไม่พึ่ง tool)
 2. `pirate-force-server`: เปิด PR ไม่ draft หัวขึ้นต้น `<TAG>` เป็นคำอธิบายจริง · body มีบรรทัด `PF-AUTOMERGE: v4` (เป๊ะ บรรทัดของมันเอง) ตั้งแต่เปิด แล้ว GET ยืนยัน marker อยู่จริง (ยกเว้น PR ที่แตะเส้นบูต/ล็อกอิน/ตัวตน actor/เฟรมที่ส่งไคลเอนต์ = draft จนกว่า adversary คืน)
