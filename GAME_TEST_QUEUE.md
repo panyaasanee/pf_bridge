@@ -63,6 +63,9 @@
 - 🆕 **`GT-252` COLUMBUS-OPTION2-BORNAGAIN-CLICK-CAPTURE-001** (🟢 **READY** — เจ้าของ = LANE-A · เปิดโดย chief รอบ `kj0s6r`/R346 · TOC เติมโดย chief รอบ `s5uz94` — ใบเต็มท้ายไฟล์)
 - 🆕 **`GT-253` OPTIONS-APPLY-ONE-SETTING-DIFFERENTIAL-CAPTURE-001** (🔴 **BLOCKED** — รอ LANE-UI เขียนเนื้อ `RE-237` ก่อน · เจ้าของ = LANE-UI · เปิดโดย chief รอบ `kj0s6r`/R346 · TOC เติมโดย chief รอบ `s5uz94` — ใบเต็มท้ายไฟล์)
 - 🆕 **`GT-254` ISLAND-155-CONTACT-TRIGGER-FRAME-CAPTURE-001** (🟡 **PENDING** — แนบท้ายบูตของ `GT-233` (ปัจจุบัน BLOCKED-ON-LAYOUT — ดูหัวใบ) · เจ้าของ = LANE-A · เปิดโดย chief รอบ `kj0s6r`/R346 · TOC เติมโดย chief รอบ `s5uz94` — ใบเต็มท้ายไฟล์)
+- 🆕 **`GT-257` CHAT-TWO-VITAL-TAIL-ONE-TYPING-001** (🟢 **READY** · พ่วงบูตอื่นได้ ไม่ต้องบูตเดี่ยว · เจ้าของ = LANE-GM · เลขตั้งโดย chief รอบ `pv4zg1`/R352 ตาม `COO-DECISION 20260905_0947` ข้อ 3 — ใบเต็มท้ายไฟล์)
+- 🆕 **`GT-258` WARP-SEND-FAILURE-ROLLS-THE-SCENE-BACK-001** (🟢 **READY** · STOP เดิมปลดแล้ว (`#806` บน main) · เจ้าของ = LANE-GM · เลขตั้งโดย chief รอบ `pv4zg1`/R352 — ใบเต็มท้ายไฟล์)
+- 🆕 **`GT-262` STALL-AND-GUILD-STORAGE-ATTENDED-CAPTURE-001** (🟡 **PENDING — เลขตั้งแล้ว (RESERVED) เนื้อใบยังไม่เขียน** · เจ้าของ = LANE-UI · คู่กับ `RE-261` — ใบเต็มท้ายไฟล์)
 - 🆕 **`GT-255` SECOND-PASSWORD-AND-BAG-INBOUND-FRAME-CAPTURE-001** (🟡 **PENDING — เลขตั้งแล้ว เนื้อใบยังไม่เขียน** · เจ้าของ/ผู้เขียนเนื้อ = **LANE-DB** · เลขตั้งโดย chief รอบ `5e00uw`/R348 ตาม `COO-DECISION 20260905_0347` ข้อ 1 · พ่วงบูตเดียวกับ `GT-242` · ท้ายคิว "รอเครื่องคุณ" ไม่บล็อกใคร — ใบเต็มท้ายไฟล์)
 - 🆕 **`GT-225` GROUND-CELL-FOLLOWS-A-WALKING-PLAYER-ACROSS-A-SCENE-EDGE-001** (🔴 **BLOCKED — คิวหลัง `GT-215`** · เปิดโดย chief รอบ `dwvbpm`/R330 ตาม `COO-DECISION 20260904_0145` ข้อ 2 · **เจ้าของใบ/ผู้แก้ = chief (LANE-E)** ตาม `COO 20260903_2250` ข้อ 5 ไม่ใช่ LANE-B · ใบข้อบกพร่อง: `_mob_loot_cross_scene_boundary()` มีผู้เรียกจุดเดียวคือเส้นทาง GM warp (`runtime.py:6749/6751`) ⇒ ผู้เล่นที่ **เดิน** ข้ามขอบฉากไม่เคยบอก `DropLedgerCell` · `#675` วัดแล้วไม่ปิด · `RECHECK` เป็นตัวปลดป้าย · ใบเต็มท้ายไฟล์)
 - 🚀 **`PROMOTE-153` CHAT-ECHO-ON-A-DEFAULT-BOOT-001 [CHIEF-WORK · ไม่ใช่ใบเทส]** (🟢 **OPEN — เจ้าของ: chief** · ใบแรกของท่อ promotion ตาม `PANYA-DIRECTIVE 20260829_2222` + `COO-DECISION 20260829_2246` · แชทใบ้บนบูตปกติเพราะเส้นทาง echo อยู่ในเลน hypothesis ที่ `production_allowed: False` ทั้งสองเลน [วัดแล้ว รอบ k882hm] · เส้นตายข้อ 1 ของ directive: 30 ส.ค. 21:00 · ใบเต็มอยู่ท้ายไฟล์)
@@ -14458,3 +14461,191 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt252_<stamp>.sqlite3
 
 ## numbering
 `GT-255`/`RE-255` = **0 hit ทั้งสามที่** (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/*QUEUE*ARCHIVE*`) ก่อนวาง -- ตรวจโดย chief รอบ `5e00uw`/R348 · ตัวนับร่วมสองคิว + archive คืนสูงสุดที่ `254` ก่อนวางใบนี้ ⇒ ใบนี้ `255`
+
+---
+
+## GT-257 CHAT-TWO-VITAL-TAIL-ONE-TYPING-001  [🟢 **READY** -- บูตได้ทันที **แต่ไม่ต้องบูตเดี่ยว: พ่วงบูตอื่นได้** · ไม่บล็อกสายใด · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-GM** · ผู้ตั้งเลข/เปิดใบ = chief (LANE-E) รอบ `pv4zg1`/R352 ตาม `COO-DECISION 20260905_0947` ข้อ 3 ("ใบขอเลข GT ของ GM `20260905_0426` ค้าง 5 ชม. ผ่านมาสองรอบ -- ไม่รับค้างต่อ") และ "ใครทำอะไรต่อ" ข้อ (2) ของใบเดียวกัน · ผู้รัน = Panya (attended) ~3 นาทีบนจอ · **ลำดับ: ท้ายคิว `รอเครื่องคุณ` พ่วงกับบูตใดก็ได้ที่ล็อกอินด้วยบัญชี GM อยู่แล้ว** · **ไม่มีการตีมอน** จึงไม่ชนกฎ "ห้ามใบเทสตีมอนจนกว่า P-2 จะปิด"]
+
+- precondition ของใบ (จ่ายแล้ว): จดหมาย `20260905_0426` เขียนเงื่อนไขตัวเองว่า "PR รอบ `ff30oi` ขึ้น main แล้ว"
+  **[วัดแล้ว chief (LANE-E) รอบ `pv4zg1` 2026-09-05T11:2x+07:00 บน clone ของเซิร์ฟเวอร์เอง]**:
+  `git grep -n "TAIL_UNDECLARED_BODY" origin/main -- src/pirateforce_foundation/gm/chat_frame_tail.py` = **เจอ 3 บรรทัด** (`:48` `:156` `:159` · นิยามจริงอยู่ที่ `:156`)
+  **[วัดแล้ว บนสะพาน · แหล่งที่สองที่ไม่ใช่จดหมายต้นเรื่อง]** `rounds/GM_20260905_0558_ht6qwv_*.md:28-29` = `#792` merged บน main (`bdd1938`)
+  ⇒ เงื่อนไขของใบจ่ายครบสองแหล่งที่เป็นอิสระต่อกัน (กราฟ git + ไฟล์รอบของ LANE-GM) · **ด่านก่อนบูตข้อ 0 ยังต้องรันอยู่ดี** เพราะมันวัด commit ที่จะบูตจริง ไม่ใช่ main เมื่อชั่วโมงก่อน
+
+- objective (ข้ออ้างเดียว): บนบิลด์ที่มี `TAIL_UNDECLARED_BODY` แล้ว เมื่อไคลเอนต์ส่ง **เฟรมแชทที่มี vital ที่สองพ่วงมาในเฟรมเดียวกัน** (`0x0F01` `UserSetting_UpdateServerSettingVital` ที่ยิงทุกครั้งที่เปิด/ปิดหน้าต่าง UI ตาม R313 §3) คำสั่ง GM ในเฟรมนั้น **ทำงานจากการพิมพ์ครั้งเดียว** ไม่ใช่ครั้งที่สอง -- นี่คือชั้นบนจอของบั๊ก R313 §3 ที่ปิดฝั่งเซิร์ฟเวอร์ไปแล้วรอบ `ff30oi` ใบนี้**ไม่**ตัดสินความหมายของฟิลด์ใน `0x0F01` และ**ไม่**ประกาศความยาว body ของมัน
+
+- db (สำเนาเสมอ ห้ามเปิด canonical):
+  - **พ่วงบูต (ทางหลัก)**: ใช้ไฟล์ run-copy ของบูตเจ้าภาพที่เปิดอยู่แล้ว **ห้ามคัดลอก DB ใหม่กลางบูต**
+  - **ถ้ารันเดี่ยว**:
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-257_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt257_<yyyyMMdd_HHmmss>.sqlite3
+```
+  sha256 canonical ต้องตรง `CANON_SHA.txt` ทั้งก่อนและหลัง · `PRAGMA integrity_check = ok` ทั้งสองครั้ง
+  🔴 ชื่อสำเนา **ห้ามเป็น** `pirateforce.sqlite3` และ **ห้ามมี `~`** ไม่งั้นเกต `_speed_db_is_canonical` (`gm/chat_command_action.py`) กันคำสั่ง GM ทิ้งทั้งใบ [วัดแล้ว · `GAME_TEST_QUEUE.md:12122`]
+  รอบคัดลอก DB ⇒ ตัวละครกลับจุดเกิดทุกบูต = ปกติ ไม่ใช่ผลวัด
+
+- server args (บูตมาตรฐาน **ไม่มีแฟล็ก scenario ใด ๆ**):
+```
+py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch
+git grep -n "TAIL_UNDECLARED_BODY" <SHA> -- src/pirateforce_foundation/gm/chat_frame_tail.py
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+py -3 -u -m pirateforce_foundation.app --db state\run_gt257_<stamp>.sqlite3 2>&1
+```
+  บัญชีที่ล็อกอินต้องอยู่ใน `config/gm_accounts.json` (หรือสำเนาที่ `PF_GM_ACCOUNTS_CONFIG` ชี้ไป -- **ห้ามแก้ไฟล์จริง**) · เก็บ stdout+stderr รวมกัน (`2>&1`) เพราะโทเคนเลนนี้ออกทาง **stderr** ล้วน [วัดแล้ว · `GAME_TEST_QUEUE.md:12125`]
+
+- steps (~3 นาที · playbook `ATTENDED_SESSION_RUNBOOK.md` · อัดวิดีโอต่อเนื่อง):
+  0. **ด่านก่อนบูต**: คำสั่ง `git grep` ข้างบนต้องได้ **อย่างน้อย 1 บรรทัด** · ไม่ได้ = `[BLOCKED]` ห้ามบูต ห้ามเรียกผู้เทส · ถือ `LOCK_GAME` · จด boot stamp · เทียบ sha canonical
+  1. **เซิร์ฟเวอร์ก่อนไคลเอนต์เสมอ** (พอร์ต 10188/10189 ต้องว่างก่อน) แล้วเข้าเกม (ปุ่มกลางของ 5 ปุ่มล่าง · ห้ามปุ่มซ้ายสุด = ลบตัวละคร) · ยืนยันจากคอนโซลว่าบัญชีนี้เป็น GM จริง
+  2. **T0** -- ยืนนิ่ง ถ่าย `S0-BEFORE` เต็มความละเอียด · จดฉากที่ยืน + พิกัด HUD + **ทุกป้ายชื่อในเฟรม บรรทัดละหนึ่งป้าย** (ไม่มี = เขียน "none" ห้ามเว้นว่าง)
+  3. NO-CRASH check: **คลิกขวาค้างลาก** หนึ่งครั้ง (กล้องอย่างเดียว · ทิศทางตัวละครไม่ขยับ · ไม่มีไบต์ออกสาย ปลอดภัยทุกจังหวะ) · 🔴 **ห้ามใช้ `Q`/`E` เป็น NO-CRASH check** -- สองปุ่มนั้นหัน**ตัวละคร**จริงและยิง `TargetPosVital`
+  4. **ขั้นวัด (ครั้งที่ 1)** -- กด `M` เปิดหน้าต่างแผนที่ แล้วกดปิดทันที (ไคลเอนต์ยิง `UserSetting_UpdateServerSettingVital` ทุกครั้งที่เปิด/ปิด ตาม R313 §3) → คลิกช่องแชท **ยืนยันด้วยตาว่าเคอร์เซอร์อยู่ในช่องจริง** → พิมพ์ `/warp 2` แล้ว Enter **ทันที ห้ามรอ 5 วินาที** · จดเวลานาฬิกา `T_TYPE_1` (HH:MM:SS+07:00)
+     🔴 `/warp 2` เป็น **คำสั่ง GM ยาว 7 ตัวอักษร ไม่ใช่ทริกเกอร์แชท 12 ตัวอักษร** -- **ห้ามเติมอักษรให้ครบ 12** และ **ห้ามพิมพ์อักษรใดขณะช่องแชทไม่โฟกัส** (ตัวอักษรจะกลายเป็นฮอตคีย์)
+  5. **ห้ามแตะอะไร 5 วินาที** จ้องจอ · ถ่าย `S1-AFTER-1` ภายใน ~3 วิ · บันทึกตรง ๆ ว่าฉากเปลี่ยนหรือไม่ (และถ้าไม่เปลี่ยน มีข้อความอะไรขึ้นบ้าง คัดตามตัวอักษร)
+  6. **ถ้าจอยังไม่ขยับ** -- พิมพ์ `/warp 2` **ซ้ำครั้งที่สอง** จด `T_TYPE_2` ถ่าย `S2-AFTER-2` (การพิมพ์ซ้ำครั้งนี้ **คือหลักฐานของ FAIL** ไม่ใช่การกู้รอบ ห้ามข้ามไม่บันทึก)
+  7. **ทำซ้ำได้ไม่เกิน 3 ครั้งในบูตเดียวกัน** โดยสลับปลายทางเพื่อไม่ให้คำสั่งซ้ำฉากเดิม: ครั้งที่ 2 ใช้ `/warp 1` (Port Royal = `HOME_SCENE_ID`) ครั้งที่ 3 ใช้ `/warp 2` · ทุกครั้งต้องเปิด/ปิดหน้าต่างก่อนพิมพ์เสมอ · ถ่าย `S3-*` ตามลำดับ + จดป้ายทุกภาพ
+  8. NO-CRASH check อีกครั้ง (คลิกขวาค้างลาก) · logout → teardown ด้วย `TEMPLATE_teardown_generic.ps1` (**boot stamp ต้องไม่เกิน 420 นาที** · รอบที่จบเพราะเลิกเล่นก็ต้อง teardown) → เทียบ sha canonical → sha256 ทุกภาพ
+  9. คัดดิบ ห้ามตีความ:
+```
+findstr /N /C:"LANE_GM_CHAT_TAIL" /C:"LANE_GM_CHAT_ACTION" /C:"GM_CHAT_STAGED" /C:"GM_CHAT_NO_BYTES_SENT" /C:"GM_CHAT_WARP_REFUSED" server_console_live.*.txt
+```
+
+- pass criteria (สองชั้น 🔴 **ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้นเด็ดขาด**):
+    wire/DB (พิสูจน์ headless ได้ ไม่ต้องมีตาคน):
+      W1. คอนโซลมีบรรทัด `LANE_GM_CHAT_TAIL reason=tail_undeclared_body tail_vitals>=1 ids=0x0F01 chat_bytes=<n>` **และ** `LANE_GM_CHAT_ACTION warp` **จากการพิมพ์ครั้งเดียวกัน** (เทียบเวลากับ `T_TYPE_1`)
+          หมายเหตุการอ่านบรรทัด (ไม่ใช่การผ่อนเกณฑ์): `tail_vitals>=1` หมายถึง **ฟิลด์ `tail_vitals` มีค่าตั้งแต่ 1 ขึ้นไป** ไม่ใช่ข้อความ `>=` ตามตัวอักษร · บรรทัดจริงอาจมีฟิลด์ต่อท้ายเพิ่ม เช่น `payload_bytes=<n>` [วัดแล้ว · คอนโซลจริงของ R313 พิมพ์ `payload_bytes=151`] และบรรทัด action จริงเคยพิมพ์เต็มว่า `LANE_GM_CHAT_ACTION warp route=action` [วัดแล้ว · `GAME_TEST_QUEUE.md:6226-6228`] ⇒ **จับคู่ที่ชื่อฟิลด์ ไม่ใช่ทั้งบรรทัดตรงตัว** · คัดบรรทัดดิบทั้งบรรทัดลงผลใบเสมอ
+      W2. **ไม่มี** `GM_CHAT_NO_BYTES_SENT ... command=warp why=...` และ **ไม่มี** `GM_CHAT_WARP_REFUSED` ในช่วงเดียวกัน (มี = คัดดิบ แล้วดูกล่องอ่านผลด้านล่าง)
+      W3. `character_positions.scene_id` ของตัวละครทดสอบในสำเนา DB = ฉากปลายทางของ **การพิมพ์ครั้งแรก** · `sessions` +1 แถวต่อการล็อกอิน · `lease_generation` ไม่ถอยหลัง · `integrity_check = ok` สองครั้ง · sha canonical ก่อน=หลัง · ไม่มี traceback
+      🔴 **ชั้นนี้ตอบไม่ได้ว่าตัวละครย้ายฉากบนจอจริงหรือไม่** -- ห้ามใช้แทนชั้นล่าง
+    client-observable (🔴 ต้องมีคนนั่งหน้าจอ ห้ามอนุมานจากคอนโซล):
+      C1. **ตัวละครย้ายฉาก (หรือขึ้นสถานะ staged ตามปลายทาง) จากการพิมพ์ครั้งเดียว ไม่ใช่ครั้งที่สอง** -- เขียนเป็นตาราง: ครั้งที่พิมพ์ / เวลา / จอเปลี่ยนหรือไม่ / ข้อความบนจอคัดตามตัวอักษร
+      C2. **บรรทัดสีป้ายครบทุกป้ายทุกภาพ** (ข้อบังคับ R163 คำสั่ง Panya 2026-08-25): หนึ่งบรรทัดต่อหนึ่งป้ายต่อหนึ่งภาพ · "none" เขียนออกมา ไม่เว้นว่าง · อ่านสีจาก **ภาพนิ่งเต็มความละเอียด** เท่านั้น ห้ามอ่านจาก contact sheet / ภาพย่อ / วิดีโอ · **ผู้เทสจดสีอย่างเดียว ห้ามอนุมานสาเหตุ** (สาเหตุคือทั้งใบของ `RE-067`)
+      C3. ต่างจากภาพเซิร์ฟเวอร์เดิม = ลง `REAL_SERVER_DIVERGENCE.tsv` แถวละหนึ่งข้อ
+      C4. NO-CRASH check ผ่านทั้งสองครั้ง
+      **ไม่มี `OBSERVER_CONFIRMED: <ISO+07:00>` = ชั้นนี้ยังไม่ PASS** ไม่ว่าคอนโซลจะสวยแค่ไหน (G-OBS) · รันจบแต่ยังไม่มีลายเซ็นตาคน = `AWAITING-OBSERVER` ไม่ใช่ PASS ไม่ใช่ FAIL
+    การอ่านผล (เก็บสองชั้นแยกกันก่อน แล้วค่อยตัดสิน · นิยามตามจดหมาย `20260905_0426` ตรงตัว):
+      **PASS** = ครั้งเดียวติด (W1 ครบสองบรรทัดจากการพิมพ์ครั้งเดียว **และ** C1 = จอย้ายฉากจากการพิมพ์ครั้งนั้น)
+      **FAIL** = ยังต้องพิมพ์ซ้ำ (จอขยับจากการพิมพ์ครั้งที่สอง หรือไม่ขยับเลย)
+      **NOT-EXERCISED** = **ไม่มีบรรทัด `LANE_GM_CHAT_TAIL` เลย** แปลว่าเฟรมที่ส่งเป็น vital เดี่ยว ไม่ใช่เฟรมพ่วง ⇒ ใบยังไม่ถูกทดสอบ ต้องบูตใหม่ให้เฟรมพ่วงกันจริง (ไม่ใช่ FAIL ไม่ใช่ NO-RESULT) · **ห้ามเปิดบูตเดี่ยวเพื่อไล่ให้เจอ** -- พ่วงบูตหน้าแทน
+      🔴 **ผลลบมีค่าเท่าผลบวก**: FAIL = บั๊ก R313 §3 ยังไม่ปิดบนจอ ⇒ redirect กลับไปที่ `gm/chat_frame_tail.py` ฝั่งเซิร์ฟเวอร์ (เจ้าของ = LANE-GM) พร้อมไบต์เฟรมจริงของรอบนี้ ไม่ใช่ให้ผู้เทสรันซ้ำแบบเดา
+
+- predictions (คำทำนายคือคำทำนาย · ทายผิด = finding ไม่ใช่ความล้มเหลว):
+  - P1 [เสนอ · หัวใจของใบ]: PASS -- ครั้งเดียวติด เพราะ `TAIL_UNDECLARED_BODY` เก็บ body ไว้แล้วเมื่อ prefix ถูกรับครบทุกไบต์
+  - P2 [เสนอ]: บรรทัด `LANE_GM_CHAT_TAIL` จะมี `ids=0x0F01` ตัวเดียว และ `tail_vitals=1`
+  - P3 [ตัวหักล้าง]: เห็น `LANE_GM_CHAT_TAIL` แต่ไม่มี `LANE_GM_CHAT_ACTION warp` ตามมา ⇒ ขอบเขต body ถูกเก็บแล้วแต่ตัวส่งต่อยังทิ้ง = finding ใหม่คนละจุดกับที่ `ff30oi` แก้
+
+- ผลพ่วงถ้า PASS (ไม่ใช่เกณฑ์ผ่าน · เจ้าของ = LANE-GM): บรรทัด "ผู้เทสควรรอ ~5 วิหลังเข้าแมพก่อนพิมพ์คำสั่ง GM" ในหมวด "บทเรียนเครื่องมือ" ของ R313 **ถอนได้เมื่อใบนี้ PASS** · ก่อนหน้านั้นยังคงไว้
+
+- nonclaims:
+  1. ไม่ตัดสินความหมายของฟิลด์ใด ๆ ใน `0x0F01` และไม่ประกาศความยาว body ของมัน
+  2. ไม่พิสูจน์ว่าคำสั่ง GM อื่น (`/say` `/speed` `/lv` `/item`) รอดเงื่อนไขเดียวกัน -- วัด `/warp` อย่างเดียว
+  3. ไม่ปิด ไม่ทวง `CORE-REQUEST-GM-057` และไม่แตะคำถาม thread/lock ของ `send_lock`
+  4. ไม่พิสูจน์อะไรที่ต้องรอดข้าม relog (บูตบนสำเนา DB)
+  5. ไม่ตัดสินสาเหตุของสีป้ายใด ๆ (`RE-067`) · ไม่แตะเกณฑ์ของใบเจ้าภาพที่พ่วงบูตอยู่ (ถ้าใบเจ้าภาพต้องหยุด ใบนี้หยุดด้วย ไม่ใช่เหตุผลให้บูตเพิ่ม)
+  6. ไม่มีการตีมอน
+
+- STOP: **STOP ถ้าไคลเอนต์ปิดตัว** -- หยุด บันทึกว่าหยุดที่ขั้นไหน แล้ว teardown อยู่ดี · 🔴 ถ้าไคลเอนต์ตายแล้วต้องเปิดใหม่ **ต้องรีสตาร์ตเซิร์ฟเวอร์ก่อนเสมอ** (เซิร์ฟเวอร์ยังถือเซสชันเดิม ไคลเอนต์ตัวถัดไปจะค้าง "connecting" ตลอดกาล) · STOP ถ้าเจอ `ErrorData` ใด ๆ ที่ไม่เกี่ยวกับใบนี้ -- จดค่าที่ส่งล่าสุดก่อนหยุด
+
+- links: `notes_to_chief/20260905_0426_LANE-GM-TO-CHIEF-r313-chat-2vital-closed-need-gt-number.md` (ใบต้นเรื่อง · เกณฑ์สองชั้นฉบับผู้เขียน) · `notes_to_chief/20260905_0212_KA1A-R313-RESULTS-*.md` §3 (ไบต์จริงของเฟรม #8 171 ไบต์) · `rounds/GM_20260905_0411_ff30oi_*.md:58-101` (ตัวแก้ · เหตุ · เทส `R313CapturedFrameTests`) · `rounds/GM_20260905_0558_ht6qwv_*.md:28-29` (`#792` merged บน main `bdd1938`) · `notes_to_chief/20260905_0947_COO-DECISION-*.md` ข้อ 3 · `src/pirateforce_foundation/gm/chat_frame_tail.py` · `GAME_TEST_QUEUE.md:6226-6228` (ตารางอ่านโทเคน `LANE_GM_CHAT_ACTION`) · `ATTENDED_SESSION_RUNBOOK.md` + `BRIDGE_BOOT_PROCEDURE.md`
+
+- result:
+  (ว่าง -- ผู้เทสกรอก **แยกสองชั้น · ชั้นไหนไม่ได้วัดเขียน `NOT MEASURED`**: PASS / FAIL / NOT-EXERCISED / AWAITING-OBSERVER · branch+commit ที่บูต · `T0` · `T_TYPE_*` ทุกครั้ง · บรรทัดคอนโซลดิบทุกบรรทัดจาก `findstr` · `scene_id` ก่อน/หลัง · ภาพ `S0`-`S3` + sha256 · **บรรทัดสีป้ายครบทุกป้ายทุกภาพ** · sha canonical ก่อน/หลัง · `integrity_check` · NO-CRASH/CRASH · teardown รันแล้ว · `OBSERVER_CONFIRMED`)
+
+## numbering
+`GT-257`/`RE-257` = **0 hit ทั้งสามที่** (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/*QUEUE*ARCHIVE*`) ก่อนวาง **[วัดแล้ว รอบนี้]** · ตัวนับร่วมสองคิว + archive คืนสูงสุดที่ `256` (`RE-256`) ⇒ ใบนี้ `257` · ตรวจโดย chief (LANE-E) รอบ `pv4zg1`/R352
+
+---
+
+## GT-258 WARP-SEND-FAILURE-ROLLS-THE-SCENE-BACK-001  [🟢 **READY** -- **STOP ก่อนบูตของใบต้นเรื่องปลดแล้ว**: `COO-DECISION 20260905_0948` บรรทัด 20 = "`#806` ขึ้น main แล้ว 08:58 -- STOP ก่อนบูตในใบ GT ที่ขอเลขไว้ (`0852`) ปลดได้ทันทีที่ chief ตั้งเลข" **[วัดแล้ว chief `pv4zg1` 11:2x บน clone ของเซิร์ฟเวอร์เอง: `git grep -n "install_send_outcome_observers" origin/main -- src/pirateforce_foundation/runtime.py` = เจอที่ `runtime.py:1627`] · [แหล่งที่สอง บนสะพาน: `notes_to_chief/20260905_0948_*.md:20` + `NOW.md:3` บล็อก 09:48 ("`#806` chief · `#807` DB · `#808` B · `#809` E ขึ้น main 08:58-09:35")]** · เลขตั้งแล้วในใบนี้ ⇒ STOP ปลด · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-GM** · ผู้ตั้งเลข/เปิดใบ = chief (LANE-E) รอบ `pv4zg1`/R352 · ผู้รัน = Panya (attended) · **ต่อท้ายคิว `รอเครื่องคุณ` ไม่ใช่หัวคิว** · ไม่บล็อกสายใด · **ไม่มีการตีมอน**]
+
+- ทำไมใบนี้ถึงมีอยู่ (ประวัติ ไม่ลบ ขีดฆ่าแทน): ~~`pirate-force-server#806` เปิดอยู่ ยังไม่ merge (`mergeable_state: unstable`) และมันคือ PR เดียวที่มีบรรทัด `runtime.py:1599` เรียก `warp_send_watch.install_send_outcome_observers(self)` -- ก่อนบรรทัดนี้ขึ้น `main` ฟังก์ชันทั้งชุด (`gm/warp_send_watch.py`, `gm/warp_scene_persist.py`) มีชีวิตอยู่แค่ในเทสของสายนี้~~ **← จริงตอนเขียนใบ 08:52 · หักล้างแล้ว 08:58 ตาม `0948` บรรทัด 20** · เหตุผลที่ใบถูกตั้งเลขก่อนบูตได้ยังเหมือนเดิม: ไม่ให้คำขอตายที่รอยต่อ (`COO 20260904_2142` / `AGENTS.md` §7) แบบเดียวกับ `GT-253`/`GT-255`
+
+- objective (ข้ออ้างเดียว): เมื่อเฟรม `TeleportVital` ของคำสั่ง `/warp <n>` ที่เพิ่งเขียนแถว `character_positions` ปลายทางแบบถาวรแล้ว **ไม่ไปถึงไคลเอนต์จริง** (ซ็อกเก็ตตายในช่วงระหว่างเขียน DB กับส่งเฟรม) แถวย้อนกลับไปฉากก่อนวาปจริง -- และเมื่อเฟรม **ไปถึงจริง** แถวต้อง **ไม่** ย้อน แม้จะมี disconnect อื่นที่ไม่เกี่ยวข้องตามมาทันที (= ข้อบกพร่อง D1 ที่ pf-adversary จับได้และ `#804` แก้แล้ว **ในเทส** · ใบนี้คือครั้งแรกที่มีตาคนยืนยันบนจอ)
+
+- db (สำเนาเสมอ ห้ามเปิด canonical):
+```
+copy state\pirateforce.sqlite3 pf_bridge\backup\pirateforce_before_GT-258_<yyyyMMdd_HHmmss>.sqlite3
+copy state\pirateforce.sqlite3 state\run_gt258_<yyyyMMdd_HHmmss>.sqlite3
+```
+  🔴 **คัดลอกครั้งเดียวต่อรอบ** -- ทุกรอบย่อย (kill ไคลเอนต์ → รีสตาร์ตเซิร์ฟเวอร์ → เปิดไคลเอนต์ใหม่) ต้องชี้ **ไฟล์ run-copy เดิม** · คัดลอกใหม่กลางรอบ = ตำแหน่งกลับจุดเกิด และหลักฐานการย้อน/ไม่ย้อนหายทั้งใบ
+  🔴 ชื่อสำเนา **ห้ามเป็น** `pirateforce.sqlite3` และ **ห้ามมี `~`** (เกต `_speed_db_is_canonical` ของเส้นทางคำสั่ง GM · [วัดแล้ว · `GAME_TEST_QUEUE.md:12122`])
+  sha256 canonical ตรง `CANON_SHA.txt` ก่อนและหลัง · `PRAGMA integrity_check = ok` ทั้งสองครั้ง
+
+- server args (บูตมาตรฐาน ไม่มีแฟล็ก scenario · **ด่านก่อนบูตอยู่บรรทัดที่สอง**):
+```
+py -3 pf_resolve_green_boot.py --repo C:\path\to\pirate-force-server --fetch
+git grep -n "install_send_outcome_observers" -- src/pirateforce_foundation/runtime.py
+$env:PYTHONPATH = Join-Path (Get-Location) 'src'
+py -3 -u -m pirateforce_foundation.app --db state\run_gt258_<stamp>.sqlite3 2>&1
+```
+  บัญชี GM จาก `config/gm_accounts.json` (หรือสำเนาผ่าน `PF_GM_ACCOUNTS_CONFIG` -- ห้ามแก้ไฟล์จริง) · เก็บ stdout+stderr รวมกัน (โทเคนเลนนี้ออกทาง stderr)
+
+- steps (playbook `ATTENDED_SESSION_RUNBOOK.md` · อัดวิดีโอต่อเนื่องตลอด `LOCK_GAME`):
+  0. **ด่านก่อนบูต**: `git grep` ข้างบนต้องเจอบรรทัดเรียก `install_send_outcome_observers` ใน `runtime.py` บนคอมมิตที่จะบูต · **ไม่เจอ = `[BLOCKED]` บันทึก "รอ #806" ข้ามใบนี้ ไม่ใช่ FAIL ไม่ใช่ NO-RESULT** · ถือ `LOCK_GAME` · boot stamp · sha canonical · คัดลอก DB ครั้งเดียว
+  1. เซิร์ฟเวอร์ก่อนไคลเอนต์เสมอ → เข้าเกม (ปุ่มกลางของ 5 ปุ่มล่าง ห้ามปุ่มซ้ายสุด) · ยืนยันคอนโซลมี `GM_WARP_SEND_OBSERVERS <outcome>` **หนึ่งบรรทัดต่อการเชื่อมต่อ** · ไม่มี = ดูกล่อง STOP ข้อ 3
+  2. **T0** -- ยืนนิ่ง ถ่าย `S0-BEFORE` เต็มความละเอียด · จดฉากที่ยืน + พิกัด HUD + **ทุกป้ายในเฟรม บรรทัดละหนึ่งป้าย** ("none" ถ้าไม่มี) · NO-CRASH check = **คลิกขวาค้างลาก** (กล้องอย่างเดียว ทิศทางตัวละครไม่ขยับ ไม่มีไบต์ออกสาย) · 🔴 **ห้ามใช้ `Q`/`E` เป็น NO-CRASH check**
+  3. **ขั้นควบคุม (confirm case)** -- คลิกช่องแชท ยืนยันโฟกัสด้วยตา พิมพ์ `/warp <ฉากอื่น>` ตามปกติ **ปล่อยให้จอเปลี่ยนฉากจริงก่อน** ถ่าย `S1-ARRIVED` แล้ว **ค่อย** ปิดไคลเอนต์ทันที (จำลอง disconnect ที่ไม่เกี่ยวข้อง)
+     🔴 `/warp <n>` เป็นคำสั่ง GM **ไม่ใช่ทริกเกอร์แชท 12 ตัวอักษร ห้ามเติมอักษรให้ครบ 12** · **ห้ามพิมพ์อักษรใดขณะช่องแชทไม่โฟกัส** (กลายเป็นฮอตคีย์)
+  4. **รีสตาร์ตเซิร์ฟเวอร์ก่อนเสมอ** แล้วค่อยเปิดไคลเอนต์ใหม่ (เซิร์ฟเวอร์ยังถือเซสชันเดิมหลัง kill ไคลเอนต์ · ไม่รีสตาร์ต = ตัวถัดไปค้าง "connecting" ตลอดกาล) · ชี้ไฟล์ DB เดิม · relog แล้ว **อ่านฉากที่ตัวละครยืนจริงบนจอ** ถ่าย `S2-RELOG-CONFIRM` + จดป้ายทุกป้าย
+  5. **ขั้นทดลองความล้มเหลว (fail case)** -- พิมพ์ `/warp <ฉากอื่น>` แล้ว **End Task ไคลเอนต์ทันทีที่กด Enter** ก่อนเห็นจอเปลี่ยนฉากเลย → รีสตาร์ตเซิร์ฟเวอร์ → เปิดไคลเอนต์ใหม่ (DB ไฟล์เดิม) → อ่านฉากบนจอ ถ่าย `S3-RELOG-FAIL-<i>` + จดป้าย
+     🔴 **บังคับคนไม่ได้ว่าจะติดจังหวะไหน -- นี่คือข้อจำกัดของใบนี้ ไม่ใช่ความผิดพลาดของผู้ทดสอบ**: อาจสุ่มได้ทั้งสองผล เซิร์ฟเวอร์อาจส่งเฟรมทันจริง (ได้ confirm case ซ้ำ) หรือซ็อกเก็ตตายก่อนส่ง (ได้ fail case) · **บันทึกผลที่คอนโซลบอกจริง ไม่ใช่ผลที่ตั้งใจจะเทส**
+  6. ทำซ้ำข้อ 5 จนกว่าจะเจอทั้งสองผลอย่างละครั้ง · **ไม่เกิน 6 รอบบูต** แล้ว STOP แบบ `NO-RESULT` เฉพาะกรณีที่ยังไม่เจอ (อีกกรณีที่เจอแล้วยังนับเป็นผล)
+  7. ทุกรอบย่อย: อ่าน `character_positions` ตรงจากไฟล์ DB **หลัง** แต่ละบูต แล้วจดคู่กับบรรทัดคอนโซลของรอบนั้น
+```
+py -3 -c "import sqlite3;print(sqlite3.connect(r'state\run_gt258_<stamp>.sqlite3').execute('select * from character_positions').fetchall())"
+findstr /N /C:"GM_WARP_SEND_OBSERVERS" /C:"SEND_FAILED" /C:"GM_WARP_SCENE_ROLLED_BACK" /C:"GM_WARP_SCENE_ROLLBACK_FAILED" /C:"LANE_GM_CHAT_ACTION" server_console_live.*.txt
+```
+  8. NO-CRASH check ครั้งสุดท้าย · logout → teardown ด้วย `TEMPLATE_teardown_generic.ps1` (**boot stamp ต้องไม่เกิน 420 นาที** · รอบที่จบเพราะเลิกเล่นก็ต้อง teardown) → เทียบ sha canonical → sha256 ทุกภาพ
+
+- pass criteria (สองชั้น 🔴 **ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น**):
+    wire/DB (อ่านคอนโซลเซิร์ฟเวอร์ + ไฟล์ DB · ไม่ต้องมีตาคน):
+      W1. ตอนล็อกอิน: `GM_WARP_SEND_OBSERVERS <outcome>` **หนึ่งบรรทัดต่อการเชื่อมต่อ** (จาก `warp_send_watch.INSTALL_CONSOLE_TOKEN` ที่มาจาก `runtime.py:1599`) = ยืนยันว่า hookup มีจริงบน **build ที่กำลังเทส** ไม่ใช่แค่บน `main` เฉย ๆ
+      W2. กรณีส่งไม่สำเร็จ: v141 send loop พิมพ์ `SEND_FAILED <label> <exception!r>` (label = `warp_scene_persist.SEND_FAILURE_WARP_ACTION_LABEL`) ตามด้วย `GM_WARP_SCENE_ROLLED_BACK` (สำเร็จ) หรือ `GM_WARP_SCENE_ROLLBACK_FAILED scene=<n> reason=<...>` (ล้ม -- **เจอแบบนี้ = FAIL ทันที ไม่ใช่แค่บันทึกไว้**)
+      W3. กรณีส่งสำเร็จ: **ไม่มี** `SEND_FAILED` และ **ไม่มี** `GM_WARP_SCENE_ROLLED_BACK` เลยสักบรรทัด
+      W4. `character_positions` ของบัญชีทดสอบ อ่านตรงจาก DB **หลัง** แต่ละบูต ต้องตรงกับผลที่คอนโซลบอกเป๊ะ (ย้อน = ฉากก่อนวาป · ไม่ย้อน = ฉากปลายทาง) -- **ไม่มีฉากที่สามที่ไม่มีใครทำนาย**
+      W5. sha canonical ก่อน=หลัง ตรง `CANON_SHA.txt` · `integrity_check = ok` · บูตบนสำเนาเสมอ · `sessions` +1 ต่อการล็อกอิน · `lease_generation` ไม่ถอยหลัง · ไม่มี traceback
+      🔴 **ชั้นนี้ตอบไม่ได้ว่าคนเห็นอะไรบนจอ** -- ห้ามใช้แทนชั้นล่าง
+    client-observable (🔴 ต้องมีตาคน ห้ามอนุมานจากคอนโซล):
+      C1. **ขั้นควบคุม**: จอเปลี่ยนฉากจริงก่อนปิดไคลเอนต์ (ระบุชื่อฉาก/สิ่งที่เห็น) แล้ว relog **ต้องยังอยู่ฉากปลายทาง** -- นี่คือสิ่งที่ D1 เคยพังมาก่อน `#804`
+      C2. **ขั้นทดลองความล้มเหลว**: relaunch แล้วอ่าน **ฉากที่ตัวละครยืนจริงบนจอ** ทีละรอบ เทียบกับที่คอนโซลบอกไว้ก่อนปิด -- เขียนเป็นตารางรอบต่อรอบ (รอบที่ / กดอะไร / เห็นอะไรก่อนปิด / เห็นอะไรหลัง relog)
+          ช่องอ่านผลเสริมบนจอ **[วัดแล้ว: `GT-245` ครึ่งแรก PASS R315 -- `/warp 2` แล้ว relaunch ทำให้หน้าเลือกตัวละครพิมพ์ "Prison Exile Island"]** · **[เสนอ]** ใช้ข้อความบนหน้าเลือกตัวละครเป็นการอ่านฉากครั้งที่สองได้ ถ้าปลายทางเป็นฉาก 2 -- **บันทึกทั้งสองที่ ห้ามใช้แทนการเข้าเกมจริง**
+      C3. **บรรทัดสีป้ายครบทุกป้ายทุกภาพ** (ข้อบังคับ R163 คำสั่ง Panya 2026-08-25): หนึ่งบรรทัดต่อหนึ่งป้ายต่อหนึ่งภาพ · "none" เขียนออกมา ไม่เว้นว่าง · อ่านจาก **ภาพนิ่งเต็มความละเอียด** เท่านั้น (ห้าม contact sheet / ภาพย่อ / วิดีโอ) · **จดสีอย่างเดียว ห้ามอนุมานสาเหตุ** (`RE-067` เป็นเจ้าของคำถามนั้น) · ต่างจากภาพเซิร์ฟเวอร์เดิม = ลง `REAL_SERVER_DIVERGENCE.tsv` แถวละหนึ่งข้อ
+      C4. NO-CRASH check ผ่านทุกครั้งที่กำหนด
+      **`OBSERVER_CONFIRMED: <ISO+07:00>` เป็นข้อบังคับแข็งของชั้นนี้ (G-OBS) -- ไม่มี = ชั้นนี้ไม่ PASS** · รันจบแต่ไม่มีลายเซ็นตาคน = `AWAITING-OBSERVER` ไม่ใช่ PASS ไม่ใช่ FAIL
+    การอ่านผล: **PASS** = ได้ทั้ง confirm case และ fail case อย่างละหนึ่งครั้ง และทั้งสองครั้ง W2/W3/W4 ตรงกับ C1/C2 ที่เก็บแยกกัน · **FAIL** = เจอ `GM_WARP_SCENE_ROLLBACK_FAILED` หรือฉากบนจอขัดกับแถว DB · **NO-RESULT** = ครบ 6 รอบบูตแล้วยังไม่เจอกรณีที่สอง (บันทึกกรณีที่เจอไว้เป็นผลจริง) · **ผลลบมีค่าเท่าผลบวก**: ไม่มีการย้อนเลยทั้งที่ `SEND_FAILED` ขึ้น = redirect ไปที่ลำดับ hook ใน `warp_send_watch.py` ไม่ใช่ที่ `warp_scene_persist.py`
+
+- predictions (ทายผิด = finding ไม่ใช่ความล้มเหลว):
+  - P1 [เสนอ]: confirm case = ไม่มี `SEND_FAILED` เลย และ relog อยู่ฉากปลายทาง
+  - P2 [เสนอ]: fail case จะเจอภายใน 6 รอบ และคอนโซลจะพิมพ์ `SEND_FAILED` ตามด้วย `GM_WARP_SCENE_ROLLED_BACK`
+  - P3 [ตัวหักล้าง]: End Task ทันทีที่กด Enter ยังทัน "ส่งสำเร็จ" ทุกครั้ง ⇒ ใบนี้บังคับ fail case ไม่ได้จากหน้าจอ = ข้อจำกัดที่ต้องเขียนลงผล และ redirect ไปหาวิธีอื่นที่ไม่ใช่ attended
+
+- nonclaims:
+  1. ไม่ตอบคำถาม thread/lock ของ `send_lock` vs `heartbeat_worker` (`20260905_0554` ครึ่งหลัง) -- ใบนั้นตอบแล้วว่า "ไม่มีคำถามกลับ" (`store.connect` เปิด-ปิดต่อคอล) แต่ไม่มีใครวัดบนจอว่าจริงภายใต้ภาระจริง **ใบนี้ไม่ใช่ใบนั้น** (เจ้าของ = LANE-GM รอบ 11:11 ตาม `0948` ข้อ 2(ข))
+  2. ไม่ประกาศไมล์สโตนใดขยับ (M2/M3/M4/P-1/P-2/P-3)
+  3. ไม่ตัดสินว่า design "replace ไม่ใช่ queue" ของ `park_warp_send` เมื่อมีหลาย `/warp` ค้างพร้อมกันถูกไหม (ปิดแยกไปแล้วโดย `DoubleWarpTests` · `COO-DECISION 20260905_0345` ข้อ 3) -- ใบนี้ทดสอบ **วาปเดียวต่อบูต**
+  4. ไม่ตัดสินสาเหตุของสีป้ายใด ๆ (`RE-067`)
+  5. ไม่มีการตีมอน
+
+- STOP:
+  1. **STOP ถ้าไคลเอนต์ปิดตัวเองนอกจังหวะที่ใบสั่งให้ปิด** -- บันทึกว่าหยุดที่ขั้นไหน แล้ว teardown อยู่ดี
+  2. STOP ถ้าเจอ `ErrorData` ใด ๆ ที่ไม่เกี่ยวกับใบนี้
+  3. STOP ถ้าคอนโซล **ไม่มีบรรทัดใดในสี่บรรทัดที่กำหนดเลย** หลังทำตามขั้นตอน -- แปลว่า observer ไม่ได้ถูกเรียกจริง (hookup อาจ merge แต่ path การเรียกไม่ตรงที่คาด) ⇒ **FINDING ใหม่ ไม่ใช่ FAIL เงียบ ๆ**
+  4. ~~STOP ก่อนบูตถ้า `#806` ยังไม่ merge~~ **← ปลดแล้ว** (`COO-DECISION 20260905_0948` บรรทัด 20 · `NOW.md:3`) · เหลือเป็น **ด่านก่อนบูตข้อ 0** (`git grep`) ซึ่งเป็นการวัดจริงบนคอมมิตที่จะบูต ไม่ใช่การอ้างจดหมาย
+
+- links: `notes_to_chief/20260905_0852_LANE-GM-GT-TICKET-REQUEST-warp-send-failure-rollback-on-screen.md` (ใบต้นเรื่อง · เนื้อเต็ม) · `notes_to_chief/20260905_0948_COO-DECISION-*.md:20` (STOP ปลด) · `NOW.md:3` (บล็อก 09:48) · `pirate-force-server#806` (GM-058 hookup · `runtime.py:1599`) · `pirate-force-server#804` (D1 fix · merged `b2ea1a0`) · `src/pirateforce_foundation/gm/warp_send_watch.py` (`on_game_frame_sent`, `on_game_frame_send_failed`, `install_send_outcome_observers`, `INSTALL_CONSOLE_TOKEN`) · `src/pirateforce_foundation/gm/warp_scene_persist.py` (`rollback_warp_scene_on_send_failure`, `ROLLBACK_CONSOLE_TOKEN`, `ROLLBACK_FAIL_CONSOLE_TOKEN`, `SEND_FAILURE_WARP_ACTION_LABEL`) · `tests/test_gm_warp_send_watch.py` · `notes_to_chief/20260905_0719_LANE-GM-REPORT-COO-second-layer-built-in-zone-one-line-left.md` · `ATTENDED_SESSION_RUNBOOK.md` + `BRIDGE_BOOT_PROCEDURE.md`
+
+- result:
+  (ว่าง -- ผู้เทสกรอก **แยกสองชั้น · ชั้นไหนไม่ได้วัดเขียน `NOT MEASURED`**: PASS / FAIL / NO-RESULT / AWAITING-OBSERVER · branch+commit ที่บูต · ผลของ `git grep` ด่านข้อ 0 · ตารางรอบย่อยทุกรอบ · บรรทัดคอนโซลดิบทุกบรรทัดจาก `findstr` · ผลอ่าน `character_positions` หลังทุกบูต · ภาพ `S0`-`S3` + sha256 · **บรรทัดสีป้ายครบทุกป้ายทุกภาพ** · sha canonical ก่อน/หลัง · `integrity_check` · NO-CRASH/CRASH · teardown รันแล้ว · `OBSERVER_CONFIRMED: <ISO+07:00>`)
+
+## numbering
+`GT-258`/`RE-258` = **0 hit ทั้งสามที่** (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/*QUEUE*ARCHIVE*`) ก่อนวาง **[วัดแล้ว รอบนี้]** · ตัวนับร่วมสองคิว + archive คืนสูงสุดที่ `256` (`RE-256`) ⇒ ใบชุดนี้กิน `257`-`258` · ตรวจโดย chief (LANE-E) รอบ `pv4zg1`/R352
+
+---
+
+## GT-262 STALL-AND-GUILD-STORAGE-ATTENDED-CAPTURE-001  [🟡 **PENDING -- เลขตั้งแล้ว (RESERVED) เนื้อใบยังไม่เขียน** · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-UI** · เลขตั้งโดย chief (LANE-E) รอบ `pv4zg1`/R352 คู่กับ `RE-261` ตาม `AGENTS.md` §7 (`COO-DECISION 20260904_2142` ข้อ 3: ผล RE ที่ขอ attended capture ⇒ ผู้บริโภคผลเปิดใบ GT ในรอบเดียวกัน) · ผู้รัน = Panya (attended) · 🔴 **LANE-UI ค้างเนื้อใบนี้ในรอบถัดไปของตัวเอง** -- ตราบใดที่ใบนี้ยังว่าง `RE-261` จะไม่มีวันถูกทดสอบ เพราะผู้เทสอ่าน `GAME_TEST_QUEUE.md` เท่านั้น ไม่เคยอ่าน `CLIENT_RE_QUEUE.md` · **ห้ามใครใช้เลข 262 กับเรื่องอื่น** · ยังไม่เข้าคิว "รอเครื่องคุณ" จนกว่าเนื้อใบจะมา]
+
+- เนื้อที่ต้องมี (chief ระบุขอบเขต ไม่ได้เขียนใบแทน): ขั้นบนจอของ `RE-261` เท่านั้น -- เปิดแผงขายเอง วางไอเทม **ตั้งราคาสองค่าที่ต่างกันข้าม trial** (positive control ของ `+0x20`) · เปิดคลังกิลด์ ฝาก-ถอนจริง · เกณฑ์สองชั้นแยกกันเด็ดขาด (ไบต์ = `RE-261` · สิ่งที่ตาเห็น = ใบนี้) · `OBSERVER_CONFIRMED: <ISO+07:00>` บังคับ (G-OBS)
+- links: `CLIENT_RE_QUEUE.md` `RE-261` · `notes_to_chief/20260905_0456_LANE-UI-RE-TICKET-stall-and-guild-storage-*.md`
+
+## numbering
+`GT-262`/`RE-262` = **0 hit ทั้งสามที่** (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/*QUEUE*ARCHIVE*`) ก่อนวาง [วัดแล้ว chief `pv4zg1`/R352] · ตัวนับร่วมสองคิวคืนสูงสุดที่ `256` ก่อนรอบนี้ · รอบนี้กิน `257`-`262`
