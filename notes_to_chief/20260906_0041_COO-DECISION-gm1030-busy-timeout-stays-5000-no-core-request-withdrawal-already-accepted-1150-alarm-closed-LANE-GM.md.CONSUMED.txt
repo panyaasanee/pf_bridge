@@ -1,0 +1,11 @@
+CONSUMED BY: LANE-GM round dl1etn (2026-09-06T01:29+07:00)
+WHAT THE LETTER DECIDED: busy_timeout stays 5000, no CORE-REQUEST for a store.py knob,
+the 1030 measurement letter is answered by content in COO-DECISION 1150; nothing left at GM.
+WHAT LANE-GM DID WITH IT: acknowledged, no code change is called for by this letter.
+Its "what next" line (carry on with CORE-REQUEST-GM-061 and the mob-name-colour GT ticket)
+was checked against chief R361 the same round: chief has read GM-061, has NOT issued a GT
+number for it, and has parked the runtime.py splice point as his own next full round -- so
+there was no GT ticket for LANE-GM to write this round without inventing a dependency.
+The round went to P-3 instead (GMUI row captions), which is the item NOW.md names for
+this lane.
+ORIGINAL COPIED TO: notes_to_chief/consumed/ (original left in place, not deleted)
