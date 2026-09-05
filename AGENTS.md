@@ -88,7 +88,7 @@ C:\Users\Panya\Desktop\Pirate Force\
 - `prompts/` เป็นของเจ้าของ Panya เท่านั้น — ห้ามทุกสายแก้ไฟล์ในไดเรกทอรีนี้ (จดหมาย `20260905_1910`)
 - ใบที่ต้องการเครื่องเจ้าของ (attended) ต้องมีบล็อก `ATTENDED:` ≤5 บรรทัดก่อนเข้าคิว READY — ไม่มี = ตีกลับสายเจ้าของ ไม่จัดคิว (`PANYA-ORDER 20260905_2038` ข้อ 5)
 - ทุกไฟล์รอบต้องจบด้วยบรรทัด `SCOREBOARD:` (รูปแบบใน `prompts/COMMON_LANE_ROUND.md`) — ไม่มีบรรทัดนี้ = รอบไม่นับ
-- เพดานขนาดไฟล์กลาง — บังคับด้วยเกต ไม่ใช่กฎ (`tools_bridge/pf_gate_preflight.py` ตรวจก่อน push ทุกสาย): `GAME_TEST_QUEUE.md` ≤300 KB · `CLIENT_RE_QUEUE.md` ≤200 KB · `AGENTS.md` ≤30 KB · `CHIEF_CONTINUATION.md` ≤30 KB · `NOW.md` ≤12 KB — เกินเพดาน = RED · ใบปิดแล้ว >24 ชม. → archive ทิ้ง stub บรรทัดเดียวทุกรอบ
+- เพดานขนาดไฟล์กลาง — บังคับด้วยเกต ไม่ใช่กฎ (`tools_bridge/pf_gate_preflight.py` ตรวจก่อน push ทุกสาย): `GAME_TEST_QUEUE.md` ≤300 KB · `CLIENT_RE_QUEUE.md` ≤200 KB · `AGENTS.md` ≤30 KB · `CHIEF_CONTINUATION.md` ≤30 KB · `NOW.md` ≤12 KB — 🔴 **RED เฉพาะไฟล์ที่กิ่งของคุณทำให้ *โตขึ้นกว่า* `origin/main` ขณะยังเกินเพดาน (หรือดันเพิ่งเกินเพดานเป็นครั้งแรก)** ไม่ใช่แค่ไฟล์ที่บังเอิญเกินเพดานอยู่แล้วจากหนี้เก่า (pf-adversary R359: เวอร์ชันแรกเช็คขนาดสัมบูรณ์ตรง ๆ จะกันทุกสายไม่ให้ push ได้เลยตราบใดที่คิวยังเกิน ซึ่งยังไม่มีกำหนดจบ) · ใบปิดแล้ว >24 ชม. → archive ทิ้ง stub บรรทัดเดียวทุกรอบ (ลดหนี้เก่าที่ค้างอยู่ ไม่ใช่แค่กันไม่ให้โตต่อ)
 
 🔴 **เขตเขียนของ LANE-Q (SCRIPT/QUEST — สายใหม่ตั้งแล้ว `COO-DECISION 20260905_2055`/`2112`)**: `src/pirateforce_foundation/script_*.py` · `src/pirateforce_foundation/lua_api/` · `tests/test_script_*` · `docs/SCRIPT_LANE.md` · `lane_hooks/lane_q_*` (pf_bridge) `rounds/Q_*` — อ่าน `gamedata/lua/` ได้ ห้ามแก้ · charter เต็ม `prompts/LANE-Q.md`
 
