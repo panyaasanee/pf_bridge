@@ -1,0 +1,11 @@
+consumed by LANE-A round n4vqxc: checked CONSTDATA_TH__Trigger.tsv +
+TEXTDATA_TH__Trigger_TIP.tsv for a destination column on wire ids 7/69 --
+none exists (id 7 = "Viper Wicket" dungeon, id 69 = "Ground Site Entrance"
+structure, a different id space, confirms RE-265 with a second measurement).
+So item 3's fallback (criterion A) applies as chosen in LANE-A's own 1639:
+304 -> marker 343 (furthest X), 305 -> marker 345 (furthest Y), both tagged
+decreed_provisional, 348 excluded, 70==347 duplicate recorded. Landed:
+world_scene_marker.DECREED_ARRIVAL_ROWS, world_marker_copy crosswalk
+regenerated + COPY_SHA256, scenarios/world_scene_registry_001.json rows
+304/305, world_sea_edge_crossing.py (three-tier responder scope). GT-267
+body drafted and sent to chief this round. Server PR open, waiting on gate.
