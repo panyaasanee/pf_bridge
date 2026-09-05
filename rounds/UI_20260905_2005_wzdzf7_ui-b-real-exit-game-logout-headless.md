@@ -68,27 +68,37 @@
 `python3 -m pytest tests/test_logout_ack_close.py tests/test_logout_hypothesis.py tests/test_world_logout_button_notice.py tests/test_world_logout_button_notice_wiring.py -q` = **82 passed, 22 subtests passed** (ไม่มีอะไรแดง -- โมดูลใหม่ไม่แตะ dispatch จริงเลยสักบรรทัด จึงคาดไว้แล้วว่าเทสเดิมต้องเขียวหมด)
 `python3 tools_bridge/pf_gate_preflight.py --repo /home/user/pirate-force-server` = **PREFLIGHT PASS**
 (cp874/skips/mainmerge/census/branch ผ่านครบ)
-ชุดเต็ม `pytest tests/` ครั้งเดียวก่อน push: **ดูหัวข้อ ADVERSARY/สถานะด้านล่าง** (ใช้เวลานานกว่า
-budget ของคำสั่งเดียว -- รันเป็น background process แล้ว)
+ชุดเต็ม `pytest tests/` ครั้งเดียวก่อน push (รันเป็น background process เพราะเกินเวลาของคำสั่งเดียว --
+ครั้งแรกชน budget 580s เอง ตี exit 143, รันใหม่ไม่มี cap): **11152 passed, 327 skipped, 20966 subtests
+passed, 0 failed** (547.24s, exit 0) -- เขียวสนิท ไม่มี `KNOWN_RED_MAIN` ให้บันทึกรอบนี้ ยืนยันว่า diff
+ที่เพิ่มไฟล์ใหม่ 3 ไฟล์ (ไม่แก้ไฟล์เดิมสักไฟล์) ไม่ทำให้อะไรพังทั้งระบบ
 `BYTECODE_PURGED:` ไม่เกี่ยว (ไม่มีการคืนค่ามิวแทนต์ในรอบนี้)
 
 ## ADVERSARY
 `pf-adversary` (Agent/Task subagent) **ไม่มีให้เรียกในสภาพแวดล้อมของเซสชันนี้เลย** (ตรวจด้วย
 `ToolSearch` สองครั้งด้วยคำค้นต่างกัน -- ไม่พบ tool ชื่อนี้หรือ subagent type ใดที่ตรงกัน) --
 **ADVERSARY_UNAVAILABLE** ไม่ใช่ `ADVERSARY_PENDING` (ต่างจากกรณีที่สั่งแล้วแต่ยังไม่คืนผล) diff รอบนี้
-แตะ session-teardown/socket-close ซึ่งเข้าเกณฑ์ "wire-frames-sent-to-client"-ประชิดตาม `AGENTS.md` §7
-⇒ **PR เซิร์ฟเวอร์ของรอบนี้เปิดเป็น DRAFT ค้างไว้** จนกว่าจะมีรอบถัดไปที่ adversary ใช้ได้จริงมารีวิว
-(ไม่ใช่การเลี่ยงกฎ -- เป็นผลของ "ทำไม่ได้จริงต้องเขียนบอก ไม่ใช่ปั๊มว่าผ่าน")
+แตะ session-teardown/socket-close ซึ่งเข้าเกณฑ์ `AGENTS.md:149` ("PR ที่แตะเส้นบูต/ล็อกอิน/ตัวตน
+actor/เฟรมที่ส่งไคลเอนต์ ⇒ draft เท่านั้น จน adversary คืน") ⇒ **PR เซิร์ฟเวอร์ของรอบนี้เปิดเป็น DRAFT
+ค้างไว้** (ไม่ใช่การเลี่ยงกฎ -- เป็นผลของ "ทำไม่ได้จริงต้องเขียนบอก ไม่ใช่ปั๊มว่าผ่าน")
+
+🔴 **ผลต่อการปลดล็อกรอบ**: `AGENTS.md:180` เขียนตรง ๆ ว่า "PR ที่ยังเป็น draft เพราะรอ `pf-adversary`
+ไม่นับว่าพร้อม -- ปล่อยล็อกทั้งที่ใบยังเป็น draft = reaper ปลด draft ให้เองที่นาที 45 แล้ว merge โดยไม่มี
+ใครถือรอบอยู่" ⇒ **claim PR `pf_bridge#1370` รอบนี้จะไม่ถูกเติม `PF-AUTOMERGE: v4`** ล็อกของ LANE-UI
+ยังค้างอยู่หลังรอบนี้จบโดยตั้งใจ จนกว่าจะมีเซสชันที่ `pf-adversary` ใช้ได้จริงมารีวิว diff นี้แล้วปลด
+draft -- ส่งใบ `notes_to_chief/20260905_2015_LANE-UI-ASK-COO-*.md` บันทึกไว้ (ไม่ใช่คำร้องเรียน แค่บันทึก
+สถานะให้รอบหน้าไม่ต้องเจอเป็นเรื่องใหม่)
 
 ## ส่งอะไร (SHA/PR)
 - `pirate-force-server`: กิ่ง `claude/inspiring-feynman-wzdzf7` -> commit `e90dadc`
   ("[LANE-UI] round wzdzf7: real UI-B exit-game logout, headless-proven") -- ไฟล์ใหม่ 3 ไฟล์
   (`src/pirateforce_foundation/ui_logout_exit_game.py`, `tests/test_ui_logout_exit_game.py`,
-  `docs/UI_LANE.md`), 568 บรรทัดรวม, ไม่แก้ไฟล์เดิมสักไฟล์ -- PR **DRAFT** (เหตุผลข้างบน) หมายเลข PR
-  ดูหัวข้อ "รอบหน้าทำอะไรต่อ" ถ้าเปิดหลังไฟล์รอบนี้ push (ลำดับ COMMON_LANE_ROUND กำหนดให้เปิด PR
-  เซิร์ฟเวอร์ก่อนเติม marker ฝั่ง bridge)
-- `pf_bridge`: กิ่ง `claude/peaceful-pascal-wzdzf7` -> claim PR `#1370` -> ไฟล์รอบนี้แทน `_claim.md` +
-  จดหมายใหม่ 1 ฉบับ (`notes_to_chief/20260905_2006_LANE-UI-CORE-REQUEST-wire-ui-b-real-exit-game-logout-headless.md`)
+  `docs/UI_LANE.md`), 568 บรรทัดรวม, ไม่แก้ไฟล์เดิมสักไฟล์ -> PR **`pirate-force-server#846`, DRAFT**
+  (เหตุผลข้างบน)
+- `pf_bridge`: กิ่ง `claude/peaceful-pascal-wzdzf7` -> claim PR **`pf_bridge#1370`** (ไม่มี marker,
+  ตั้งใจ) -> commit ที่สอง `3f50e17` แทน `_claim.md` ด้วยไฟล์รอบนี้ + จดหมายใหม่สองฉบับ
+  (`20260905_2006_LANE-UI-CORE-REQUEST-*`, `20260905_2015_LANE-UI-ASK-COO-*`) + consumed stub ของ
+  `20260905_1948`
 
 ## nonclaims
 1. ไม่ได้พิสูจน์ว่า client จริงทำอะไรหลังได้รับ FIN จากการปิด socket -- ไม่มีการบูตสดรอบนี้เลย (ตาม
