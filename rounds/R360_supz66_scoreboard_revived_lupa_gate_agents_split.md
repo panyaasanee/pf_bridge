@@ -69,7 +69,15 @@ CONFLICT 4 ใบ (live เปิด/archive ปิด) ยังไม่แก
 5. หนี้เก่าที่ยังไม่หาย: `runtime.py:5159` class_id · สลับจุดเรียก `select_character_honoring_home_marker` (`#851` บน main แล้ว = ปลดบล็อก) · WIRED v2 ไม่ได้วัดรอบนี้ (15/67 ยกมาจาก R356)
 
 ## 7. adversary
-สั่ง `pf-adversary` ตอนเริ่มงานตาม COMMON (ไม่ใช่ก่อน commit) บนทั้งสองชิ้น พร้อมสั่งให้เขียนมิวแทนต์ยันว่า self-test ล้มได้จริง
+สั่ง `pf-adversary` ตอนเริ่มงานตาม COMMON (ไม่ใช่ก่อน commit) บนทั้งสองชิ้น พร้อมสั่งให้เขียนมิวแทนต์ยันว่า self-test ล้มได้จริง (ลบ loop ต่อย่อหน้า · ให้ `read_manual` เก็บทุกแถว · ให้ `collect` คืน `[]`)
+🔴 `ADVERSARY_PENDING pirate-force-server#859 + pf_bridge#1389` — ผลยังไม่คืนตอนปลดล็อก ⇒ push ตามเดิมตาม COMMON · **ห้ามอ่านรอบนี้ว่า "ผ่าน adversary"** ยังไม่ผ่าน ยังไม่มีผล
+⇒ งานแรกของรอบ LANE-E ถัดไป: อ่านผล adversary บนกิ่ง `claude/eloquent-fermat-supz66` + `claude/upbeat-hamilton-supz66` แล้วจ่ายเป็นตัวแก้ใต้รหัสรอบ `supz66` ตาม `PANYA-DECISION 20260904_1429` **ก่อน** เริ่ม `PROMOTION_BACKLOG.md`
+
+## 8. ผลรันที่ยันได้ (ติดป้ายตาม §1 ของ prompt)
+- ชุดเต็มเซิร์ฟเวอร์บนต้นไม้ที่ merge `origin/main` แล้ว เป็นคอมมิตสุดท้ายจริง: **11,335 passed · 349 skipped · 21,052 subtests passed · 0 failed** (598 วินาที) = **เขียว (cloud sanity)** ไม่ใช่เกตเต็มบนสะพาน
+- `pf_gate_preflight.py --repo ../pirate-force-server` = **PASS** ทุกแถว (cp874 · no new skips · main อยู่ในกิ่ง · census ตรง · reaper-mergeable ทั้งสองกิ่ง · bridgesize)
+- `pf_scoreboard.py --self-test` = **PASS 19 เคส**
+- เกต Windows เต็ม: **ยังไม่มีผล** — PR `#859` เพิ่งเปิด รอเกต ห้ามใครอ่านว่าเขียว
 
 TWO_SESSIONS_SAME_SCENE: ไม่เกี่ยว — รอบนี้ไม่มีโค้ดที่รันในเซิร์ฟเวอร์เกม (บรรทัด pip ของ CI · เครื่องมือบนสะพาน · ไฟล์กฎ) ไม่มีสถานะต่อฉากและไม่มีเฟรมถึงไคลเอนต์
 NO_FEATURE_WAITING: ไม่มีผล RE ที่ตอบใบของ chief ค้างอยู่ในรอบนี้
