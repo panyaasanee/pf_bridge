@@ -91,24 +91,64 @@ BRIDGE_FILE_SIZE_CEILINGS = (
 )
 
 
-def check_bridge_file_sizes(bridge_root=None):
-    """RED when a pf_bridge file every lane reads every round is over its
-    ceiling.
+def _git_blob_size(repo, ref, relname):
+    """Size in bytes of `relname` as it exists at `ref`, or None (the ref
+    does not resolve, or does not have that path - a new file this branch
+    adds, which has no "before" to regress from).
+    """
+    proc = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(repo), "cat-file", "-s",
+         "%s:%s" % (ref, relname)],
+        capture_output=True, text=True, errors="replace",
+    )
+    if proc.returncode != 0:
+        return None
+    try:
+        return int(proc.stdout.strip())
+    except ValueError:
+        return None
 
-    `bridge_root` defaults to this file's own repository (tools_bridge/ lives
-    directly under the pf_bridge root, one parent up), so a lane running the
-    command AGENTS.md section 7 gives gets a real answer with no extra flag -
-    the same pattern `check_branch_is_mergeable_by_the_reaper` already uses
-    for the bridge clone.  A caller with a bridge checkout somewhere else (a
-    self-test, a bridge clone at a nonstandard path) can pass one.
 
-    Returns True (all five files are at or under their ceiling), False (one
-    or more is over - RED, every size printed), None (one of the five names
-    does not exist under `bridge_root` - this is not the pf_bridge checkout,
-    or a listed file was renamed and this table was not updated with it).
+def check_bridge_file_sizes(bridge_root=None, base="origin/main"):
+    """RED when THIS BRANCH makes an already-oversized pf_bridge file bigger
+    (or pushes a file over its ceiling for the first time) - not merely when
+    the file happens to be over ceiling right now.
+
+    pf-adversary, R359: the first cut of this check graded the file's
+    absolute on-disk size against the ceiling with no regard for whether the
+    branch being checked touched the file at all. Measured against this
+    project's own history (AGENTS.md/CHIEF_CONTINUATION.md sitting over
+    these same ceilings for days, repeatedly deferred - R338/R347/R350's own
+    letters), that shape would fail EVERY lane's mandatory preflight on
+    EVERY push, including one that touches none of these five files, for as
+    long as the multi-round cleanup runs - which is not bounded. A gate the
+    whole team cannot pass stops being a gate and starts being noise lanes
+    learn to ignore, which corrodes the other four checks' credibility too.
+
+    So: compare the current size against the same file's size at `base`
+    (default `origin/main`, the tree the gate's `pull_request` run actually
+    builds - same rationale as `check_base_is_ancestor`). A file already
+    over ceiling that this branch left the same size, or shrank, is
+    reported but does NOT fail the check - the debt is real and visible,
+    just not this branch's to answer for. A file this branch made bigger
+    while already over ceiling, or pushed over ceiling for the first time,
+    is RED. `bridge_root` defaults to this file's own repository
+    (tools_bridge/ lives directly under the pf_bridge root, one parent up) -
+    same pattern `check_branch_is_mergeable_by_the_reaper` already uses.
+
+    Returns True (no file both over ceiling and grown vs `base`), False (one
+    or more is - RED, every size printed), None (one of the five names does
+    not exist under `bridge_root` - this is not the pf_bridge checkout - or
+    `base` does not resolve at all, e.g. `git fetch origin main` was never
+    run; same INCONCLUSIVE convention as `check_new_skips`).
     """
     root = pathlib.Path(bridge_root) if bridge_root is not None \
         else pathlib.Path(__file__).resolve().parent.parent
+    base_resolves = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(root), "rev-parse",
+         "--verify", "--quiet", base + "^{commit}"],
+        capture_output=True, text=True, errors="replace",
+    ).returncode == 0
     missing, over = [], []
     for name, ceiling in BRIDGE_FILE_SIZE_CEILINGS:
         p = root / name
@@ -116,9 +156,20 @@ def check_bridge_file_sizes(bridge_root=None):
             missing.append(name)
             continue
         size = p.stat().st_size
-        red = size > ceiling
-        print("  %s %-24s %9d bytes  (ceiling %9d)"
-              % ("RED" if red else "ok ", name, size, ceiling))
+        base_size = _git_blob_size(root, base, name) if base_resolves else None
+        if size <= ceiling:
+            status, red = "ok ", False
+        elif base_size is None:
+            # New file over ceiling on day one, or base unresolvable: no
+            # "before" to compare against, so the absolute reading stands.
+            status, red = "RED", True
+        elif size > base_size:
+            status, red = "RED", True
+        else:
+            status, red = "old", False  # over ceiling, not grown - not this branch's
+        print("  %s %-24s %9d bytes  (ceiling %9d%s)"
+              % (status, name, size, ceiling,
+                 ", base %d" % base_size if base_size is not None else ""))
         if red:
             over.append(name)
     if missing:
@@ -126,15 +177,24 @@ def check_bridge_file_sizes(bridge_root=None):
               % (", ".join(missing), root))
         print("             Is this really the pf_bridge checkout?")
         return None
+    if not base_resolves:
+        print("[bridgesize] INCONCLUSIVE - %s does not resolve in %s."
+              % (base, root))
+        print("             git fetch origin main, or pass --base.")
+        return None
     if over:
-        print("[bridgesize] RED - %d of 5 file(s) over their ceiling"
+        print("[bridgesize] RED - %d file(s) grew past their ceiling on this"
               % len(over))
-        print("             (PANYA-ORDER 20260905_2038 item 1). Archive")
-        print("             closed tickets to archive/*_ARCHIVE_<date>_*.md")
-        print("             with a one-line stub left in place; never delete")
-        print("             or move an item that has not been tested yet.")
+        print("             branch (PANYA-ORDER 20260905_2038 item 1;"
+              " regression-only, R359 pf-adversary fix).")
+        print("             Archive closed tickets to")
+        print("             archive/*_ARCHIVE_<date>_*.md with a one-line")
+        print("             stub left in place; never delete or move an")
+        print("             item that has not been tested yet.")
         return False
-    print("[bridgesize] PASS - all five files at or under their ceiling.")
+    print("[bridgesize] PASS - no file both over its ceiling and grown vs %s"
+          " (pre-existing debt, if any, is 'old' above, not this branch's)."
+          % base)
     return True
 
 
@@ -758,36 +818,74 @@ MAINMERGE_SELF_TEST_CASES = 4
 # "a gate tool with no test is what killed #694".
 BRANCHNAME_SELF_TEST_CASES = 4
 CENSUS_SELF_TEST_CASES = 2
-BRIDGESIZE_SELF_TEST_CASES = 3
+BRIDGESIZE_SELF_TEST_CASES = 6
+
+
+def _bridgesize_git_root(tmp, dirname, sizes, skip_name=None):
+    """A real git repo: commit `sizes` (name -> byte count) as the base
+    state, HEAD/`main` points at that commit. Caller mutates the working
+    tree afterward (uncommitted) to represent "this branch"'s current state
+    - check_bridge_file_sizes() reads current size from disk and base size
+    from the git blob, exactly like a real branch ahead of `origin/main`.
+    """
+    root = pathlib.Path(tmp) / dirname
+    root.mkdir()
+    subprocess.run(["git", "init", "-q", "-b", "main", str(root)], check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.email", "t@t"],
+                    check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.name", "t"],
+                    check=True)
+    for name, ceiling in BRIDGE_FILE_SIZE_CEILINGS:
+        if name == skip_name:
+            continue
+        (root / name).write_bytes(b"x" * sizes.get(name, 64))
+    subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
+    subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "base"],
+                    check=True)
+    return root
 
 
 def _bridgesize_self_test_cases(tmp):
     """Drive check_bridge_file_sizes() against synthetic bridge roots.
 
-    Three provable shapes: every file under its ceiling, one file over, and
-    a root missing one of the five names entirely (not a bridge checkout).
+    Six provable shapes, all against `base="main"` (this repo's own base
+    branch, standing in for `origin/main`): all under ceiling; a file
+    already over ceiling that this branch left unchanged (must NOT be RED -
+    this is exactly the false-positive pf-adversary found in R359's first
+    cut); the same file made bigger by this branch (RED); a file under
+    ceiling at base that this branch pushes over ceiling for the first time
+    (RED); a missing file (INCONCLUSIVE, unchanged from before); and a
+    `base` ref that does not resolve at all (INCONCLUSIVE).
     """
     failures = ran = 0
+    gt_name, gt_ceiling = BRIDGE_FILE_SIZE_CEILINGS[0]
 
-    def make_root(dirname, oversize_name=None, skip_name=None):
-        root = pathlib.Path(tmp) / dirname
-        root.mkdir()
-        for name, ceiling in BRIDGE_FILE_SIZE_CEILINGS:
-            if name == skip_name:
-                continue
-            size = ceiling + 1 if name == oversize_name else 64
-            (root / name).write_bytes(b"x" * size)
-        return root
+    root_ok = _bridgesize_git_root(tmp, "bs_ok", {})
+    root_old_debt = _bridgesize_git_root(
+        tmp, "bs_old_debt", {gt_name: gt_ceiling + 500})
+    root_grown = _bridgesize_git_root(
+        tmp, "bs_grown", {gt_name: gt_ceiling + 500})
+    (root_grown / gt_name).write_bytes(b"x" * (gt_ceiling + 5000))
+    root_new_violation = _bridgesize_git_root(
+        tmp, "bs_new_violation", {gt_name: 64})
+    (root_new_violation / gt_name).write_bytes(b"x" * (gt_ceiling + 1))
+    root_missing = _bridgesize_git_root(
+        tmp, "bs_missing", {}, skip_name=BRIDGE_FILE_SIZE_CEILINGS[-1][0])
 
     cases = [
-        ("all five under ceiling", make_root("bs_ok"), True),
-        ("one file over ceiling", make_root(
-            "bs_red", oversize_name=BRIDGE_FILE_SIZE_CEILINGS[0][0]), False),
-        ("not a bridge checkout - one file missing", make_root(
-            "bs_missing", skip_name=BRIDGE_FILE_SIZE_CEILINGS[-1][0]), None),
+        ("all five under ceiling, base resolves", root_ok, "main", True),
+        ("already over ceiling, unchanged vs base - not this branch's",
+         root_old_debt, "main", True),
+        ("already over ceiling, grown vs base - RED",
+         root_grown, "main", False),
+        ("under ceiling at base, pushed over now - RED",
+         root_new_violation, "main", False),
+        ("not a bridge checkout - one file missing",
+         root_missing, "main", None),
+        ("base ref does not resolve", root_ok, "origin/no-such-branch", None),
     ]
-    for label, root, expected in cases:
-        got = check_bridge_file_sizes(root)
+    for label, root, base, expected in cases:
+        got = check_bridge_file_sizes(root, base=base)
         ran += 1
         ok = got is expected
         failures += 0 if ok else 1
@@ -1173,7 +1271,7 @@ def main():
                check_base_is_ancestor(repo, args.base),
                check_precondition_census(repo),
                check_branch_is_mergeable_by_the_reaper(repo),
-               check_bridge_file_sizes()]
+               check_bridge_file_sizes(base=args.base)]
     if args.pr_body is None:
         # Open skip with a reason, never a silent one (AGENTS.md section 7).
         # Not appended to `results`: most callers run this tool for the cp874
