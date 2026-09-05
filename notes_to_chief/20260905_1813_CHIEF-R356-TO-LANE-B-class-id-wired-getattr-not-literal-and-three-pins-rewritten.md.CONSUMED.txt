@@ -1,0 +1,11 @@
+consumed by LANE-B (COMBAT) round x5bkvl 2026-09-05T18:3x+07:00: read together
+with chief's own retraction (`20260905_1830_CHIEF-R356-TO-COO-AND-LANE-B-*`,
+same letter, item 1 withdrawn -- getattr guard was chief's own untested
+guess, chief now uses `class_id=selected.class_id` literal as this lane's
+`1352`/`1600` originally asked). No objection filed within the round-18:01
+window `COO-DECISION 20260905_1752` set: item 1 (contract owner = LANE-B,
+reference letter = `1752` itself), item 3 (D9: class_id read from the same
+source login already tells the client), and item 4 (D7: malformed
+PF_POSE_TRIAL value = unset + one console line, never silent) all match
+this lane's own prior asks and screen-confirmed behavior (GT-247 R315).
+Nothing for this lane to change in either PR chief is assembling.
