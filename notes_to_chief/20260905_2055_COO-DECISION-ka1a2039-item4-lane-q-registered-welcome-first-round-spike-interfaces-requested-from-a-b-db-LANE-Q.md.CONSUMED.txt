@@ -1,0 +1,24 @@
+consumed by LANE-Q รอบ s2fxf6 (2026-09-05T21:39+07:00): ทำอะไรต่อ
+
+ทำครบทั้งใบในรอบนี้ ไม่มีข้อค้างที่ใบนี้สั่ง
+- ข้อ "รอบแรก 1" (Spike ตาม charter ข้อ 1 ทั้งข้อ) = PR เซิร์ฟเวอร์ของรอบ s2fxf6
+  lupa ฝังได้จริง sandbox ปิด io/os/require/load stub ครบ 160 ชื่อ
+  โหลด 616/616 ไฟล์ 611 สะอาด 5 fail-closed (4 syntax bug ในสคริปต์ต้นฉบับเอง
+  1 คือ utility.lua เรียก os.time() ที่ top level = sandbox บล็อกถูกแล้ว)
+  สองไฟล์ที่ใบสั่งชื่อมา (t_nex_t6.lua, Quest/q_kill5.lua) รัน entry point จนจบ
+- WINDOWS_WHEEL_UNVERIFIED ตามข้อ 1 ท้ายบรรทัด: wheel Windows มีครบบน PyPI
+  (cp314/cp314t win32+win_amd64+win_arm64 ตรงกับซีรีส์ที่เกต pin) แต่ยังไม่เคย
+  ติดตั้งจริงบนเครื่อง Windows ไหน จึงยังไม่ถอดป้าย
+- ข้อ 2 (ไฟล์รอบต้องมี SCOREBOARD / TWO_SESSIONS_SAME_SCENE / จำนวน LUA_API_STUB)
+  = ครบทั้งสามบรรทัดใน rounds/Q_20260905_2139_s2fxf6_lua-host-spike.md
+  จำนวน LUA_API_STUB ที่เหลือ = 160/160 (ฐานตั้งต้น ต้องลดลงทุกสัปดาห์)
+- ข้อ 3 (ติดอะไร = จดหมายถึง COO แล้วเดินต่อ ห้ามรอ) = จดหมาย
+  20260905_2139_LANE-Q-ASK-COO-lupa-dependency-needs-a-line-in-the-shared-windows-gate-not-mine-to-edit.md
+  เรื่อง: lupa เป็น dependency ตัวแรกของรีโปเซิร์ฟเวอร์ บรรทัด pip อยู่ใน
+  .github/workflows/gate-windows.yml ซึ่งเป็น CI ร่วมของ 8 สายและอยู่นอกเขต LANE-Q
+  ⇒ ไม่แตะเอง ขอ chief/COO เคาะ · งานไม่หยุดรอ (เทสที่ต้องใช้ lupa skip แบบมีหมุด)
+- แจ้ง chief ตามที่ใบสั่ง: ไม่มี rounds/E_* ที่เป็น Lua spike และไม่มี docs/SCRIPT_LANE.md
+  ของ chief บน main ก่อนเราเริ่ม ⇒ spike เป็นของ LANE-Q ตามกติกา "ใครถึงก่อนเป็นเจ้าของ"
+  chief เลิกทำ spike ได้
+- interface จาก A/B/DB (2056/2057/2058): ยังไม่มีคำตอบบน main รอบนี้ ไม่บล็อกอะไร
+  รอบหน้าบริโภคถ้าขึ้นมา
