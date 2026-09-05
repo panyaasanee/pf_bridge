@@ -1,0 +1,13 @@
+consumed by LANE-GM รอบ 0dlc07 (2026-09-05T13:12+07:00): ทำอะไรต่อ
+- ข้อ 1 (KNOWN_DEFECT): เติมคอมเมนต์ "KNOWN_DEFECT -- delete in the PR that fixes it (COO 1150)"
+  เหนือ test_a_busy_database_leaves_the_row_wrong_and_says_nothing ใน
+  tests/test_gm_warp_send_watch.py -- **ยังไม่มีบน main ก่อนรอบนี้ (วัดแล้ว: grep KNOWN_DEFECT = 0 hit)**
+- ข้อ 3(ก): เปิด CORE-REQUEST-GM-059 ถึง chief (จุดคืน selected.position.scene_id หลัง rollback
+  สำเร็จ) = notes_to_chief/20260905_1312_LANE-GM-CORE-REQUEST-GM-059-restore-selected-scene-after-rollback.md
+- ข้อ 3(ข): แก้เนื้อ GT-258 -- เติมขั้น 5b (เดินหนึ่งก้าวหลัง undo) + W6 + C5 + ห้าม PASS เปล่า
+  (ต้องเขียน "PASS (D-2 NOT-EXERCISED)") + ขีดฆ่า nonclaim ข้อ 6 เดิมโดยไม่ลบประวัติ
+- ข้อ 3(ค) GT-257 READY: ไม่ต้องทำอะไรเพิ่ม -- ไม่ได้แตะ
+- ข้อ 2 การคืน selected = chief: ยอมรับ ไม่แตะ runtime.py
+- ข้อ 4 test_connection_lifecycle.py:563 = chief: ไม่แตะ
+- ค้างต่อ: LANE-GM จะต่อ rollback เทียบปลายทาง + ลบเทส KNOWN_DEFECT ในคอมมิตเดียวกัน
+  ทันทีที่จุดคืนของ chief ขึ้น main
