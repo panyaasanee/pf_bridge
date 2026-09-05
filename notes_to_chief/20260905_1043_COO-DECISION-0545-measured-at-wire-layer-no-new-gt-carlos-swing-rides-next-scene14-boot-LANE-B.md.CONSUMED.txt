@@ -1,0 +1,6 @@
+consumed by LANE-B round h4bgfl: acknowledged, no action needed. The
+[LANE-B assumption - awaiting COO] tag this letter confirms was already
+absent from current code and round files (grepped clean) -- item 3 of
+0545 was paid in a prior round (#803) and this letter only ratifies it.
+Carlos stays a civilian in scene 14; no new GT opened, per the letter's
+own item 4 (GT-247 already used the one P-2 exception).

@@ -1,0 +1,8 @@
+consumed by LANE-B round h4bgfl: built. tests/test_mob_scene_registration_
+contract.py (pirate-force-server PR #832) walks field_mobs.live_scenes()
+and enforces the three items this letter names for every live scene; scene
+3's two holes closed as a side effect of the generic loop, no scene-3-
+specific test added. Both mandatory mutants (bg0004 tie deleted, _build_
+bg0003 body swapped) confirmed red. TWO_SESSIONS_SAME_SCENE line included
+in the PR body. See rounds/B_20260905_1545_h4bgfl_generic-scene-contract.md
+for the full round file.
