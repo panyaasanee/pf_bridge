@@ -41,7 +41,7 @@ Natural outer codec `[0x005EB800,0x005EB8A9)` SHA `42022332...C93D1` อ่า�
 - `0x005DF420` ที่ `0x005E07FF` decode field ของ record (`[0x005DF420,0x005DF4D9)` SHA `DB16491D...73F04`).
 - `0x00708E20` ที่ `0x005E0827` เป็น ordered-map insertion keyed by record `+0x10` (`[0x00708E20,0x00708F0F)` SHA `56574DB5...B9384`), ไม่ใช่ state-transition/reply gate.
 
-Natural handler `[0x005F0B00,0x005F0C0B)` SHA `425ED743...E2E27` สร้าง local payload จาก `vital+0x14`, lookup receiver ชื่อ `SystemSetting_Switch`, `SystemSetting_Logout`, และ `SystemSetting_ESC`, แล้วเรียก vfunc `+0x210` ของ receiver ที่พบแต่ละตัว. ถ้า receiver ใดไม่พบก็ข้าม; handler ยังคืน `AL=1`. ใน full handler ไม่มี read/write pending-request flag, ไม่มี comparison กับ request-in-flight, ไม่มี clear-ack bit และไม่มี call ขอ state transition.
+Natural handler `[0x005F0B00,0x005F0C0B)` SHA `425ED743...E2E27` สร้าง local payload จาก `vital+0x14`, lookup receiver ด้วย string ตาม image คือ `SystemSetting_Switch`, **`SysetmSetting_Logout`** (สะกด `Sysetm` จริงในไบนารี), และ `SystemSetting_ESC`, แล้วเรียก vfunc `+0x210` ของ receiver ที่พบแต่ละตัว. ถ้า receiver ใดไม่พบก็ข้าม; handler ยังคืน `AL=1`. ใน full handler ไม่มี read/write pending-request flag, ไม่มี comparison กับ request-in-flight, ไม่มี clear-ack bit และไม่มี call ขอ state transition.
 
 **คำตอบข้อ 2:** สอง `CALL_UNCLASSIFIED` ที่ใบชี้เป็น container mechanics; natural R handler fan-out ข้อมูลไปยังสาม SystemSetting receivers. ไม่พบหลักฐาน static ว่า reply `0x3D4B` เป็น ack ที่ gate dialog ถัดไป. นี่เป็น **ผลลบแบบมีขอบเขต** เฉพาะ codec + natural handler; ไม่ใช่ image-wide proof ว่าไม่มี subsystem อื่นรอข้อมูล world และไม่แทน attended observation.
 
