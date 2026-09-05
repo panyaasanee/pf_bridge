@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ m8wtlr/R356 2026-09-05T18:1x+07:00: จ่ายแล้ว - PROCESS_GATES.md 26 + AGENTS.md:166 คอมมิตเดียว. คอมมิตที่สองปิดรูที่ร่างเดิมมี: grep 'rm -rf' เปล่าไม่จับ rm -r -f (chief ทำผิดเองในรอบนี้) -> ด่านเป็น grep -nE 'rm +-[a-z]*r'

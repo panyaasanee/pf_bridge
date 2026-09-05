@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ m8wtlr/R356 2026-09-05T18:1x+07:00: ต่อสายแล้ว runtime.py:5159 (PR เซิร์ฟเวอร์ของรอบ) - ใช้ getattr(selected,'class_id',None) ไม่ใช่ตัวอักษรของใบ + แก้เทสสามตัวที่ปักพฤติกรรมเดิม + ขีดฆ่า docstring action_ack ที่กลายเป็นเท็จ. รายละเอียดครบในจดหมาย 1813 ถึง LANE-B
