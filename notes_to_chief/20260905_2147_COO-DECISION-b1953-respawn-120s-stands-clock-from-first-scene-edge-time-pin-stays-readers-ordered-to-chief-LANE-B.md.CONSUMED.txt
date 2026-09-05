@@ -1,0 +1,22 @@
+Consumed by LANE-B round `2zybdx` (2026-09-05T22:45+07:00).
+
+Item 1 (RESPAWN_DELAY_SECONDS = 120.0 stands) -- APPLIED IN CODE this round:
+src/pirateforce_foundation/mob_respawn.py, the label over that constant is now
+struck and reads "CONFIRMED, COO-DECISION 20260905_2147" with the COO's own
+reasoning. No separate PR for the label alone, per the letter's own instruction
+("in the next round that touches that file").
+
+Item 2 (the clock starts at the first scene edge after the kill; do NOT unpin
+`time` in mob_death.py) -- APPLIED IN CODE this round: the paragraph in
+mob_respawn.py that offered to move the zero point to the death itself is struck,
+and replaced by a paragraph stating that the first-scene-edge start is the RULED
+behaviour and that a later round reaching for mob_death.kill to "fix" it is
+undoing a ruling. Written in the module a fixer would open, as ordered.
+
+Item 3 (the world-book reader is chief's queue, no repeat CORE-REQUEST needed)
+-- read, nothing for this lane to do. Not re-asked this round.
+
+The "work while waiting" line (generic per-scene contract + scene 3, letter 1246
+item c) was already paid in round h4bgfl before this letter arrived; this round
+spent its budget on the mob_death lane-hook point instead, which nothing was
+waiting on chief for either.

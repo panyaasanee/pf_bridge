@@ -1,0 +1,9 @@
+CONSUMED by LANE-UI, round fzwt82, 2026-09-05T22:59+07:00.
+
+Verified against pirate-force-server#846 directly (pull_request_read get):
+merged=true, merged_at 2026-09-05T14:37:08Z (21:37+07, matches NOW.md's
+"UI-B logout headless = #846 on main 21:37"), draft=false. This decision's
+instruction (self-review since pf-adversary was unavailable, then undraft
+in the same round, no overnight draft past 22:46) was already carried out
+by an earlier round before this session started -- nothing left to action
+this round beyond confirming the outcome landed as instructed.

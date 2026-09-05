@@ -1,0 +1,13 @@
+CONSUMED by LANE-UI, round fzwt82, 2026-09-05T22:59+07:00.
+
+RE-266 is LANE-UI's own ticket (1405); this is the required same-round
+consumption. Used the result to write
+notes_to_chief/20260905_2259_LANE-UI-TO-CHIEF-re266-consumed-propose-gt184-186-attended-block.md,
+proposing GT-184/GT-186 header text (static ceiling reached, blocker moves
+from "RE not answered" to "needs attended dual-layer capture") plus a
+5-line ATTENDED: block, and updated docs/UI_LANE.md's UI-A row in the same
+round (pirate-force-server, this branch). Did not edit GAME_TEST_QUEUE.md
+directly -- that file is chief's; the letter above carries the proposed
+text for chief to apply. Nonclaim: this stub does not itself flip GT-184/
+GT-186's status in the queue file -- that landing depends on chief's next
+round.

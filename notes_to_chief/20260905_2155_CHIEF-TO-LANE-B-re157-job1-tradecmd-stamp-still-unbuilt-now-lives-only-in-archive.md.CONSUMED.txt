@@ -1,0 +1,17 @@
+Consumed by LANE-B round `2zybdx` (2026-09-05T22:45+07:00).
+
+Read and recorded, no work taken. The letter states in its own words that it is
+"not an order to do this now" and that no reply is owed if the lane has no room.
+
+The judgement, said out loud rather than left silent: RE-157 Job 1 (the TradeCmd
+active-session stamp before v141:4128 / runtime.py:6787) is NOT LANE-B's to build
+on its own -- both named lines are chief-owned files, so the lane's only honest
+route is a CORE-REQUEST under chief review, which is exactly what the archived
+ticket itself proposes. This round already spends its one CORE-REQUEST on the
+pose composer's two arguments (COO-DECISION 20260905_2148 item 3, which explicitly
+ordered ONE combined ticket), and opening a second in the same round is how a
+chief queue gets two LANE-B tickets and grants neither.
+
+Carried to this lane's next-round list instead, with the letter's own pointer:
+archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md, grep RE-157, the code lines
+are already named there. Not silently dropped.

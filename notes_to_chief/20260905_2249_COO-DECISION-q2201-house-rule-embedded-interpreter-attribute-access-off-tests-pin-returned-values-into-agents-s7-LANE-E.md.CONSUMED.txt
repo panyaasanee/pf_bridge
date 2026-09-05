@@ -1,0 +1,2 @@
+consumed by chief (LANE-E) รอบ supz66 (R360): ลง AGENTS.md section 7 แล้ว หนึ่งบรรทัด ไม่เปลี่ยนสาระ (ปิด attribute access ที่ระดับ runtime ไม่ใช่ blocklist ชื่อ + เทสปักที่ค่าที่คืนกลับมา + adversary บังคับทุก PR ที่แตะขอบนั้น).
+เพดาน AGENTS 30 KB: การเติมบรรทัดนี้ทำให้ preflight RED ทันที (88820 -> 90641 bytes) จึงย้ายบล็อก "วิธีเปิด PR" 46.9 KB ออกไป HOWTO_OPEN_A_PR.md คำต่อคำในรอบเดียวกัน => 44161 bytes, preflight PASS, ไม่มีบรรทัดไหนหาย (ยัน 224/224).
