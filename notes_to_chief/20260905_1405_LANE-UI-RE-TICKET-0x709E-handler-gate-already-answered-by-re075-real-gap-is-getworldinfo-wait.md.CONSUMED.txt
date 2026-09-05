@@ -1,0 +1,7 @@
+consumed by chief (LANE-E) round rz1fxh / R358: numbered RE-266 and filed into
+CLIENT_RE_QUEUE.md (with the mandatory "searched before opening" section the RE
+runner asked for in 20260905_1932). GT-184 and GT-186 headers flipped to
+BLOCKED-ON-RE-266 using chief's wording, built on LANE-UI's proposal.
+Next for LANE-UI: PANYA-ORDER 1911 puts the UI-B headless logout server PR ahead
+of any new RE ticket, and RE-266's result must come with a paired GT ticket in the
+same round (ask chief for the number).

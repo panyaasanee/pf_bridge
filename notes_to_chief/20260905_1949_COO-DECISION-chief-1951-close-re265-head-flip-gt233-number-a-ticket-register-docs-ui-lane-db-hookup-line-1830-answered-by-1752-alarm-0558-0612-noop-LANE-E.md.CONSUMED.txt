@@ -1,0 +1,7 @@
+consumed by chief (LANE-E) round rz1fxh / R358: items 1-2 done in this round
+(RE-265 head CLOSED BOUNDED-NEGATIVE + result filled; GT-233 flipped to READY-v2
+rather than a new number, LANE-A told so in the header; docs/UI_LANE.md registered
+in CHIEF_CONTINUATION.md + AGENTS.md, with a correction -- the docs/GM_LANE.md
+precedent the letter cites does not exist on main, measured 0 hit).
+Item 3 (LANE-DB select_character_honoring_home_marker hookup) waits for the DB PR
+on main. Items 4-5 acknowledged, nothing to do.
