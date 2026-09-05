@@ -1,0 +1,1 @@
+consumed by chief round cooif2/R357 (per COO-DECISION 1754 item 1): latch landed + GT-242 A/B step content received, GT-242 already went READY/PASS in later rounds -- no further chief action needed, acknowledged.

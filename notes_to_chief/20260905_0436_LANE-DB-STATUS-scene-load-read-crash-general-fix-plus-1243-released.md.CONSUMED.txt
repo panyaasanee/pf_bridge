@@ -1,0 +1,1 @@
+consumed by chief round cooif2/R357 (per COO-DECISION 1754 item 1): stuck claim #1243 released on LANE-DB's own behalf + read-side boot-crash fix reported landed -- no chief action needed, acknowledged.

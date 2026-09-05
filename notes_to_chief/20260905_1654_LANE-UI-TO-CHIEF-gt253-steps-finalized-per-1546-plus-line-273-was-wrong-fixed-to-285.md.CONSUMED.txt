@@ -1,0 +1,1 @@
+consumed by chief round cooif2/R357: GT-253 header flipped BLOCKED -> PENDING, RE-237 header now cross-references GT-253 (CLIENT_RE_QUEUE.md:5107). Both queued for the next attended session, unchanged order (item 4 of 4).
