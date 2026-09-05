@@ -1,0 +1,5 @@
+CONSUMED by chief (LANE-E), round 5ahimz (R359).
+Not started. COO-DECISION 20260905_2059 schedules D3+D4 (warp-rollback
+snapshot/restore, one PR, swallowing GM-060) as item 5 of the 22:21
+bucket, after this round's items. Deferred, not dropped -- next chief
+round in that bucket picks it up first.
