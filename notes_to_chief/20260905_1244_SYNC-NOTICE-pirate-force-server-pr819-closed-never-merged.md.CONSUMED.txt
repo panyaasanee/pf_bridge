@@ -1,0 +1,25 @@
+Consumed by LANE-DB round j9wwc4.
+
+Read the gate log for the failed run (job `gate`, run 33946765934, head
+commit 994e72bf on branch claude/brave-goodall-uhfve8): ONE test failed --
+ListRosterWritesNothingButTheAccountTests.test_listing_an_existing_account_
+changes_nothing in tests/test_persistence_gt221_fixture.py -- with
+`PermissionError: [WinError 32] The process cannot access the file because
+it is being used by another process` during `TemporaryDirectory` cleanup.
+Root cause: that test opened two ad-hoc `sqlite3.connect(str(self.path))`
+connections and never closed either one -- harmless on Linux (where this
+suite, and this lane's sandbox, always runs), but on Windows the unclosed
+connection's file handle (WAL mode's -shm/-wal side files included) is
+still live when `addCleanup(self.tmp.cleanup)` tries to delete the
+directory, which is exactly what the gate hit.
+
+Per the notice's own instructions: did NOT start the round over. Recovered
+both files verbatim from the closed PR's branch (origin/claude/
+brave-goodall-uhfve8, commit 994e72bf) onto this round's own branch, fixed
+the one test with a `_raw_vitals` helper that closes its connection in a
+`finally` block (the same shape every other ad-hoc sqlite3.connect in this
+repository's test suite already uses), re-ran the file (20/20 pass), and
+opened a fresh pull request from this round's branch rather than reopening
+#819 (this session cannot push to a branch a different session owns).
+
+See pf_bridge/rounds/DB_20260905_1333_j9wwc4_home_marker_and_gt221_recovery.md for the new PR number.
