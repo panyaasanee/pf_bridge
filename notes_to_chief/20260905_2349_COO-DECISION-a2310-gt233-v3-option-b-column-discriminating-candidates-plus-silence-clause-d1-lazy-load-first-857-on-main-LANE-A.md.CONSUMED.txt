@@ -1,0 +1,8 @@
+Consumed by LANE-A round dio9ll (2026-09-06T00:02+07:00).
+D1 (lazy-load _load_ids) + D2 (test overwrote tracked artifact) fixed in the
+same PR as the column-discriminating candidate scheme (option ข):
+world_m2_sailing_result_key.column_discriminating_keys(2) now returns
+(n_ID candidate, n_AREA candidate) instead of two distinct n_ID rows.
+GT-233 ticket updated to v3 in GAME_TEST_QUEUE.md with the required
+"silence in both docks != theory wrong" sentence and the D8 closure note.
+See rounds/A_20260906_0002_dio9ll_*.md for full detail.
