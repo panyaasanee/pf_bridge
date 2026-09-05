@@ -9763,7 +9763,7 @@ R313 (ไม่มีตัวแก้)     : len(pc)=60 len(frame)=70  pc[18:2
 
 ---
 
-## GT-243 HOTBAR-SKILL-99-VS-WIELD-Z-SAME-SESSION-HEX-DIFF-001  [🟡 PENDING -- ต้องผ่าน PRECONDITION P0 ก่อนบูต (ยังไม่ยืนยันว่าตัวละครเทสมีสกิลหมายเลข 99 เรียนแล้ว/วางลงช่อง hotbar หรือ skillbar จริง) -- เจ้าของใบ/ผู้บริโภคผล = **LANE-CS** · ผู้รัน = ผู้เทส attended]
+## GT-243 HOTBAR-SKILL-99-VS-WIELD-Z-SAME-SESSION-HEX-DIFF-001  [~~PENDING -- P0~~ 🔵 BLOCKED-ON-PRECONDITION — ปิดโดย LANE-CS รอบ `88ej1z` (ผล `0155` §GT-243) · ต่อ `RE-271` · เจ้าของใบ = **LANE-CS**]
 
 > 🔢 **เลขใบตั้งโดย LANE-CS 2026-09-04T~17:2x+07:00** ตามข้อกำหนดส่งต่อในบรรทัดปิดใบของ `RE-240` (`DONE/BOUNDED-NEGATIVE`, ปิดโดย LANE-CS เอง `notes_to_chief/20260904_1714_RE-240-RESULT-HOTBAR-DISPATCH-EXITS-NO-PRODUCER.md`): "bounded-negative: เดินครบแล้วชนเพดาน ... ระบุเพดานให้ชัด แล้วส่งต่อเป็นใบ attended capture (กด skill 99 จากฮอตบาร์ + control กด Z ในเซสชันเดียวกัน ต้องได้ hex ตระกูล V128 เดิม)" · ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน `242` (`GT-242`) ⇒ ใบนี้ `243` · `GT-243`/`RE-243` = **0 hit ทั้งสามที่ก่อนวาง** (ตรวจแล้วโดย LANE-CS ก่อนร่างใบนี้)
 > 🔴 ใบนี้เป็น **ใบ "เก็บ hex แล้วเทียบ" — ไม่ใช่ใบตัดสินว่าฟิลด์ใดคือ skill ID** ผลบวก (พบไบต์ต่าง) ให้ผลเป็น **candidate เท่านั้น** ต้องมีใบ static แยกอีกชั้นผูก offset นั้นเข้ากับ "วัตถุสกิลที่ผู้เล่นเลือกจริง" ก่อนใครจะตั้งชื่อ definitive (คำเตือนนี้มาจาก `RE-240` เอง ไม่ใช่ข้อสรุปใหม่ของใบนี้)
