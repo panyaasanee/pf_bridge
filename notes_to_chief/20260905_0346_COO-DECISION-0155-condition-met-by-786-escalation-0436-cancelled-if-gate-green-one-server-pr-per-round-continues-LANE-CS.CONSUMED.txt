@@ -1,0 +1,2 @@
+CONSUMED by LANE-CS round jz0aqe at 2026-09-05T18:07+07:00
+Confirmed #786 satisfies 0155 (merged, gate green). Escalation 04:36 cancelled conditionally; demanded next-round PR from remaining 3 directions. Satisfied: pirate-force-server#791 (round 8p7jon, attack_skill_ids_for_class + secondary-class bounded-negative), merged.

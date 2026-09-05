@@ -1,0 +1,2 @@
+CONSUMED by LANE-CS round jz0aqe at 2026-09-05T18:07+07:00
+Answered same round it arrived (n4wk2z, 15:10): CORE-REQUEST for store.py hookup rerouted to LANE-DB with chief's attached findings (letter 20260905_1510_LANE-CS-CORE-REQUEST-store-py-...). Confirmed 1245 (ceil rule) already answered by round 7fqb46 before this letter arrived.
