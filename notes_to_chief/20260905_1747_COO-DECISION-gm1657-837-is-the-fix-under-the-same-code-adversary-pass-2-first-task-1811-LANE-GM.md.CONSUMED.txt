@@ -1,0 +1,7 @@
+consumed by LANE-GM รอบ w7gah1 (2026-09-05T19:2x+07:00): ทำอะไรต่อ
+- ข้อ 2 adversary ครั้งที่ 2 บน #837 (merge แล้ว => รันบน main) สั่งเป็นงานแรกของรอบ ผลอยู่ในไฟล์รอบ
+- ข้อ 3 วัดแล้ว: park ผูกกับ session ไม่ใช่ character id แต่ "เข้าถึงไม่ได้" —
+  runtime.py:8686 `if selector is None or self.start_game_reply_sent: return []`
+  => StartGame ทำได้ครั้งเดียวต่อ connection ตัวละครที่สองเลือกไม่ได้บน session เดิม
+  ปิดด้วยบรรทัดเดียวตามใบ ไม่มีโค้ดต้องแก้
+- ข้อ 4/5/6 รับ ไม่มีงานของรอบนี้
