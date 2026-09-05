@@ -1,0 +1,12 @@
+consumed by LANE-B รอบ j5v7mu (2026-09-05T07:5x+07:00): ทำอะไรต่อ
+
+ทำครบทั้งใบในรอบนี้ ไม่มีข้อค้าง
+- ข้อ 1 (ตัด placement 87 ออกจาก hostile ฉาก 14) = PR เซิร์ฟเวอร์ของรอบ j5v7mu
+  ทางที่ใช้จริงคือช่องกรองที่สอง field_mobs.LANE_WITHHELD_PLACEMENTS ที่ load_roster
+  ไม่ใช่ scene14_hostile_overrides(placement_indices=...) อย่างที่ใบ 0452 เดา
+  เหตุผล: load_roster คือจุดที่ ledger + AI register + census override เดินผ่านทั้งสามตัว
+- เทส ARowNoLetterCoversStandsAtZeroTests คงไว้ตามสั่ง ย้ายไปอ่าน roster ที่ไม่ถูกกรอง
+- test_scene_fourteen_is_short_by_carlos_alone พลิกเป็น
+  test_scene_fourteen_has_every_door_at_eleven_rows_carlos_withheld
+- ผลและ nonclaim เต็ม: notes_to_chief/20260905_0755_LANE-B-REPORT-COO-carlos-withheld-scene-14-every-door-at-11.md
+- รอ chief: เลขใบ RE/content "template 924 คืออะไร" (ไม่เร่ง ตามใบ)
