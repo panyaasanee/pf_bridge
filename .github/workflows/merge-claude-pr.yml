@@ -1,7 +1,13 @@
 # pf_bridge - merge a cloud chief's pull request as soon as it is opened.
 #
-# INSTALL PATH (this file is a DRAFT and does nothing where it currently sits):
-#   pf_bridge/.github/workflows/merge-claude-pr.yml
+# INSTALLED AND LIVE at pf_bridge/.github/workflows/merge-claude-pr.yml - this
+# file merges pull requests every day.  (Until chief round pv4zg1 this header
+# still said "this file is a DRAFT and does nothing where it currently sits",
+# which was true only of the copy in drafts/ that it was written for.  A
+# reviewer who believed the first paragraph would have read the whole reaper
+# as inert - pf-adversary D8.  The stale second copy at
+# drafts/WORKFLOW_bridge_merge-claude-pr.yml is 274 lines against this file
+# 666 and must NOT be re-installed over this one.)
 # It also needs two lines in pf_bridge/.gitignore - see
 #   drafts/INSTALL_merge_workflows_20260820.md
 # Line 1 of that .gitignore is `/*`, so .github/ is invisible to git until it is
@@ -87,6 +93,11 @@ env:
   # reason installing this file cannot retroactively merge a pull request that
   # was opened before it existed.
   PF_MARKER: 'PF-AUTOMERGE: v4'
+  # The one sentence the reaper says to a marked pull request that is sitting
+  # on a branch nobody's automation can see, and the string it greps its own
+  # comments for so it says it exactly once.  ASCII only: it is printed to a
+  # cp874 console on the bridge when a lane pastes the reap log.
+  PF_NONCLAUDE_NOTICE: 'invisible to automerge: re-push on a claude/ branch'
   # How long a DRAFT may sit before the reaper TRIES to un-stick it with its
   # own token (`gh pr ready`).  Trying is never destructive on its own, so
   # this bound only governs when the attempt starts -- CLOSING a draft that
@@ -410,7 +421,39 @@ jobs:
             CHANGED=$(printf '%s' "$META" | jq -r '.changed_files')
             [ "$HEAD_REPO" = "$REPO" ] || continue
             [ "$BASE_REF" = "$DEFAULT_BRANCH" ] || continue
-            case "$HEAD_REF" in claude/*) : ;; *) continue ;; esac
+            # [COO-DECISION 20260905_0847 item 4, option (a); chief round pv4zg1]
+            # A pull request whose head is NOT `claude/*` is invisible to this
+            # reaper AND to the `merge` job above, marker or no marker.  That is
+            # the gate working as designed - a stranger must not be able to give
+            # themselves a merge by writing two strings - but it used to be
+            # SILENT: server #794 was gate-green at 05:53 and was neither merged
+            # nor closed for 2.5 hours, with nothing anywhere saying why.  So:
+            # say it once, in the one place its author is looking, and change
+            # nothing else.  No merge, no close, no un-draft, no exception to
+            # the claude/* gate itself.
+            case "$HEAD_REF" in
+              claude/*) : ;;
+              *)
+                # No marker means nobody asked for a merge, so there is nothing
+                # surprising to report - stay quiet, exactly as before.
+                case "$BODY" in *"$PF_MARKER"*) : ;; *) continue ;; esac
+                SAID=$(api "repos/${REPO}/issues/${PR}/comments?per_page=100" \
+                       | jq -r --arg s "$PF_NONCLAUDE_NOTICE" \
+                              '[.[] | select((.body // "") | contains($s))] | length') || SAID=""
+                if [ -z "$SAID" ]; then
+                  echo "::warning::#${PR} ${HEAD_REF}: marked but not a claude/ branch - could not read its comments, saying nothing this sweep"
+                elif [ "$SAID" != "0" ]; then
+                  echo "--- #${PR} ${HEAD_REF}: marked but not a claude/ branch - already told once, left alone"
+                else
+                  api "repos/${REPO}/issues/${PR}/comments" \
+                      -f "body=**${PF_NONCLAUDE_NOTICE}**"$'\n\n'"This pull request carries the automerge marker line, but its head branch is \`${HEAD_REF}\`, and both the \`merge\` job and this reaper skip every head that does not start with \`claude/\`. Nothing will merge it and nothing will close it, so it would otherwise sit here green and silent - that is what happened to pirate-force-server#794 for 2.5 hours."$'\n\n'"Push the same commits to the branch this session was given (\`claude/...\`) and open the pull request from there. Leave this one for its own author to close: pf_bridge PROCESS_GATES.md section 24, which is also where the branch rule itself lives."\
+                      >/dev/null \
+                    && echo "--- #${PR} ${HEAD_REF}: marked but not a claude/ branch - commented once, left open ON PURPOSE" \
+                    || echo "::warning::#${PR} ${HEAD_REF}: marked but not a claude/ branch - comment failed, left open"
+                fi
+                continue
+                ;;
+            esac
             case "$BODY" in *"$PF_MARKER"*) : ;; *) echo "--- #${PR} ${HEAD_REF}: no marker - left alone ON PURPOSE (a human must add it)"; continue ;; esac
             CSEC=$(date -u -d "$CREATED" +%s 2>/dev/null || echo "$NOW")
             AGE=$(( NOW - CSEC ))

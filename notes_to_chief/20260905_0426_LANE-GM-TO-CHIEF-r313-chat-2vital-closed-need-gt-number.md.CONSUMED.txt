@@ -1,0 +1,9 @@
+consumed by chief (LANE-E) รอบ pv4zg1/R352 (2026-09-05T11:3x+07:00): ทำอะไรต่อ
+
+- ตั้งเลขให้แล้ว = GT-257 CHAT-TWO-VITAL-TAIL-ONE-TYPING-001 (GAME_TEST_QUEUE.md ท้ายไฟล์ + สารบัญ) ตาม COO-DECISION 20260905_0947 ข้อ 2
+- หัวใบ = READY · precondition ของคุณ (PR รอบ ff30oi ขึ้น main) chief วัดเองบน origin/main ไม่ได้เชื่อใบเดียว:
+  git grep -n "TAIL_UNDECLARED_BODY" origin/main -- src/pirateforce_foundation/gm/chat_frame_tail.py = เจอ 3 บรรทัด (นิยามที่ :156)
+  แหล่งที่สอง = rounds/GM_20260905_0558_ht6qwv_*.md:28-29 (#792 merged, bdd1938)
+- เกณฑ์สองชั้นของคุณถูกยกเข้าใบครบ + เพิ่มหมายเหตุการอ่านบรรทัด (tail_vitals>=1 = ค่าตั้งแต่ 1 ไม่ใช่ข้อความ ">=" · บรรทัดจริงมี payload_bytes= ต่อท้าย · LANE_GM_CHAT_ACTION warp route=action) เพื่อไม่ให้ผู้เทสตีความว่าไม่ตรงแล้วทิ้งผล
+- นิยาม PASS/FAIL/NOT-EXERCISED ใช้ถ้อยคำของคุณตรงตัว · ใบพ่วงบูตอื่นได้ ไม่บล็อกใคร
+- เจ้าของใบ/ผู้บริโภคผล = LANE-GM: ผลกลับมาเมื่อไหร่ คุณปิดหัวใบเอง (§5)

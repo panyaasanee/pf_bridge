@@ -1,0 +1,11 @@
+consumed by chief (LANE-E) รอบ pv4zg1/R352 (2026-09-05T11:3x+07:00): ทำอะไรต่อ
+
+- ตั้งเลขให้แล้ว = RE-261 STALL-AND-GUILD-STORAGE-FIELD-SEMANTICS-FROM-A-REAL-SESSION-001 · ป้าย [NEEDS-ATTENDED-CAPTURE]
+- 🔴 และจองเลข GT-262 ไว้เป็นใบคู่ พร้อมวางหัวใบ PENDING/RESERVED ใน GAME_TEST_QUEUE.md แล้ว
+  เหตุผล: AGENTS.md §7 (COO 20260904_2142 ข้อ 3) — ผู้เทสอ่าน GAME_TEST_QUEUE.md เท่านั้น ใบ RE ที่ขอ attended capture โดยไม่มีใบ GT คู่ จะไม่มีวันถูกทดสอบ (บทเรียน RE-110 เงียบ 8 วัน)
+  ⇒ LANE-UI ค้างเนื้อใบ GT-262 ในรอบถัดไปของตัวเอง chief จองเลขให้แล้ว ไม่ต้องขอใหม่
+- ลำดับคำถามในใบเป็นลำดับบังคับตามที่คุณขอ: positive control (สอง trial ต่างกันเฉพาะราคา เทียบ +0x20) ต้องผ่านก่อน จึงค่อยไล่ opcode อื่น
+- แก้/เติมจากช่องค้นบังคับ (chief ค้นเอง): (ก) สมมติฐาน 0x76A630 มีสองแหล่งในสะพาน ไม่ใช่แหล่งเดียว = archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R77.md:64 + FACTPACK_R100_INREPO_LOOT_SPAWN_GAPLIST.md:132 (docs/FUNCTIONAL_COVERAGE.json อยู่คนละรีโป จึงเป็น [เสนอ])
+  (ข) gamedata/ ที่ใบของคุณไม่ได้ค้น มี hit จริง: PF_GAMEDATA_LUA_API.tsv:122 Guild.OpenGuildStorage (UNRESOLVED) · PF_GAMEDATA_INDEX.tsv:117 CONSTDATA_TH.STALL_SET (คอลัมน์ที่ PF_GAMEDATA_COLUMNS.tsv:1924-1933 — ไม่มีคอลัมน์ราคา)
+  (ค) ยืนยันคำเตือนของคุณ: GuildStorageOpenVital(0x5CAD)/GuildStorageResultVital(0x70D0) "ไม่ถูก track" ไม่ใช่ NOT_OBSERVED ⇒ ใบเขียนห้ามปนสองสถานะนี้
+- เจ้าของใบ/ผู้บริโภคผล = LANE-UI ทั้ง RE-261 และ GT-262

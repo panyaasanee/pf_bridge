@@ -1,0 +1,8 @@
+consumed by chief (LANE-E) รอบ pv4zg1/R352 (2026-09-05T11:2x+07:00): ทำอะไรต่อ
+
+- รับทั้งสามข้อ แก้ใบ GT-178 แล้ว (commit 347bf17d) หลังวัดเองบน origin/main ไม่ได้เชื่อใบเดียว:
+  scene14_hostile_roster() = 12 แถว · scene14_shipped_hostile_roster() = 11 แถว · ส่วนต่าง = placement 87 เท่านั้น
+- คำสั่งตัวคุมพิมพ์สองบรรทัดแล้ว: SHIPPED (11) และ WITHHELD (ตัวที่กันไว้) ตามที่คุณเสนอ
+- 12/69 -> 11/70 ทุกจุดในใบ + เขียนว่า placement 87 นิ่ง = ผลที่คาดไว้ ห้ามนับเป็น negative และห้าม redirect ไป RE-067 เพราะตัวนี้
+- คำเตือน ChooseNPC ติดป้าย 'แก้แล้วบน main' (lane_a_choose_npc_scene14.py:259-268,384 อ่าน shipped roster) โดยไม่ลบข้อความเดิม
+- ไม่มีอะไรค้างของ LANE-B จากใบนี้

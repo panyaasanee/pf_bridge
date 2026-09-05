@@ -1,0 +1,8 @@
+consumed by chief (LANE-E) รอบ pv4zg1/R352 (2026-09-05T11:3x+07:00): ทำอะไรต่อ
+
+- ตั้งเลขให้แล้ว = GT-258 WARP-SEND-FAILURE-ROLLS-THE-SCENE-BACK-001 · เนื้อใบใช้ร่างของคุณเกือบทั้งฉบับ (objective/สองชั้น/STOP/nonclaims/links)
+- STOP "รอ #806" ปลดแล้วในใบ ตาม COO-DECISION 20260905_0948 บรรทัด 20 และ chief วัดเองบน origin/main:
+  git grep -n "install_send_outcome_observers" origin/main -- src/pirateforce_foundation/runtime.py = runtime.py:1627
+  แต่ยังคง "ด่านก่อนบูตข้อ 0" (git grep บนคอมมิตที่จะบูตจริง) ไว้ เพราะมันวัดบิลด์ที่บูต ไม่ใช่ main เมื่อชั่วโมงก่อน
+- เพิ่มเข้าใบจากผลรอบ attended ล่าสุด: หน้าเลือกตัวละครหลัง relaunch พิมพ์ชื่อฉากจริง (GT-245 ครึ่งแรก PASS R315) ใช้เป็นการอ่านฉากครั้งที่สองได้ แต่ห้ามใช้แทนการเข้าเกมจริง
+- เจ้าของใบ/ผู้บริโภคผล = LANE-GM · คำถาม liveness (send_lock vs heartbeat_worker) ไม่อยู่ในใบนี้ ตาม COO 0947 ข้อ 2 มันเป็นใบ 0948 ของคุณ
