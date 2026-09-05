@@ -229,6 +229,14 @@
 # Line 1 of this file is `/*`, so git does not even descend into .github/
 # unless the directory is opened by name BEFORE its contents.  Both lines are
 # needed; the first one alone opens an empty door.
+# ---- prompts/: routine prompts, one source of truth (chief R-prompts scheme).
+# Same trap as tools_bridge/NOW.md: line 1 is /*, so the dir must be opened by
+# name BEFORE its files, AND 'prompts' must be in pf_git_sync.ps1 $ALLOWLIST or
+# an untracked prompt file can never travel out from the bridge. Both are needed.
+# Text only (.md); the 2 MB and hard-deny blocks below still have the final word.
+!/prompts/
+!/prompts/**
+
 !/.github/
 !/.github/**
 

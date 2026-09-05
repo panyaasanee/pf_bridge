@@ -157,7 +157,12 @@ $NAME_GUARD_WAIVER = @('notes_to_chief/|.md',
 # and QUEUE_STATUS_SNAPSHOT.md before it.  Without this line the file exists in
 # no clone, the routines cannot read what is outstanding, and the register
 # quietly becomes the very thing it was built to prevent.
-$ALLOWLIST         = @('notes_to_chief', 'evidence_screens', 'rounds',
+# 'prompts' added 2026-09-05 by ka1-A on Panya's order: routine prompts moved to
+# pf_bridge/prompts/ as one source of truth (every account/cron of a lane reads the
+# same file). Untracked prompt files live at the bridge root's subtree; without this
+# line they exist in no clone and every routine's bootstrap points at nothing - the
+# exact NOW.md/LOOSE_ENDS.md trap. .gitignore opens the folder; this carries it out.
+$ALLOWLIST         = @('notes_to_chief', 'evidence_screens', 'rounds', 'prompts',
                        'tools_bridge', 'QUEUE_STATUS_SNAPSHOT.md', 'NOW.md',
                        'LOOSE_ENDS.md')
 # Paths that two parties legitimately write: the chief edits them on main, and the
