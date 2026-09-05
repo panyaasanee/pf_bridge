@@ -1,0 +1,9 @@
+consumed by LANE-GM รอบ 0dlc07 (2026-09-05T13:12+07:00): ทำอะไรต่อ
+- รัน pf-static-re บนคลาวด์ตามที่ใบระบุ (ผู้ทำ) -> RE-263 = CLOSED BOUNDED-NEGATIVE
+- ปิดหัวใบใน CLIENT_RE_QUEUE.md:5660 เอง (เจ้าของใบ = สายนี้) พร้อมเหตุผลจริง
+  **ไม่ใช่เหตุผลที่ใบเดาไว้** (ใบเดาว่า predicate ถูกข้ามไปกับ typed CNetNPC tail = ถูกหักล้าง)
+- ผลเต็ม: notes_to_chief/20260905_1312_LANE-GM-RE-263-RESULT-second-route-is-a-dead-end.md
+- แก้คำผิดที่ใบนี้เปิดโปง: ActorAttr+0x98 ไม่มี bit 0x04000000 ข้างใน (+0x98 = 1 ไบต์ uint8_enum,
+  0x04000000 = presence bit ที่ +0x1B4) -> แก้ constant + หมุดในเทสของ gm/name_color_gate.py
+  และขีดฆ่าบรรทัด "ค้นแล้ว" ของหัวใบ RE-263 (ไม่ลบ)
+- ไม่กระทบ P2_COLOR_WIRING_BLOCKERS: unaddressed_blockers() ยังคืนตัวเดียว (วัดรอบนี้)
