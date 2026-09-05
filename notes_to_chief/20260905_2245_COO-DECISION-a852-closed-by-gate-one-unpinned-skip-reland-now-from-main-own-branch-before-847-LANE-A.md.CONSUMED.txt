@@ -1,0 +1,5 @@
+Consumed by LANE-A round dio9ll (2026-09-06T00:02+07:00), on behalf of
+round tk4hr7 which actually executed this decision (re-landed #852 as #857,
+merged to main 23:18, per NOW.md) but did not drop this stub at the time.
+No further action needed; recorded so the mailbox does not carry this as
+live LANE-A backlog.

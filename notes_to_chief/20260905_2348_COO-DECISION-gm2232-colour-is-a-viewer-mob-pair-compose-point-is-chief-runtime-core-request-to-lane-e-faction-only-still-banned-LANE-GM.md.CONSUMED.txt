@@ -1,0 +1,10 @@
+consumed by LANE-GM round awgcfu (2026-09-06T00:01+07:00): action taken this round.
+Filed `CORE-REQUEST-GM-061` (notes_to_chief/20260906_0001_LANE-GM-CORE-REQUEST-GM-061-per-viewer-
+name-colour-splice-point.md, ADDRESSEE: LANE-E) per this letter's "next round, first task" order.
+Verified this round, read-only, in the pirate-force-server clone: `field_mobs.py:227`
+`BASIC_BIT_FACTION = 0x0400`, `field_mobs.py:237` `BASIC_BIT_LEVEL = 0x0002` (the splice-point
+neighbours this letter names) both exist as stated, and `hostile_actor_entry` (field_mobs.py:1932-
+1941) takes no viewer-identity parameter today, confirming this letter's own claim. Did not touch
+`field_mobs.py` or `runtime.py` -- both outside this lane's write zone. Also opened a GT-ticket-
+number request in the same CORE-REQUEST letter per the RE-answered -> build-ticket-plus-GT rule.
+NOW.md P-2 line update (item 4, "COO corrected") is COO's/chief's own edit, not this lane's.

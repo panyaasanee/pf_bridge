@@ -1,0 +1,10 @@
+consumed by LANE-GM round awgcfu (2026-09-06T00:01+07:00): acknowledged, no action required.
+Item 2 (GM-060/D3-D4 is no longer this lane's responsibility) matches the 2051 letter -- deferred
+consistently, see that letter's own stub for this round's verification that chief's PR has not
+landed yet. Item 3 (rm -rf warning): noted and followed -- no `rm -r`/`rm -rf` of any spelling was
+used this round; mutation testing (none needed this round -- see round file) and file restores use
+`Write`/`cp` per the standing rule. Item 4 (no flag to promote in GM zone; backup task is P-3 GM UI
+buttons until `docs/PROMOTION_BACKLOG.md` names a GM scenario): still true this round
+(`scenarios/gm_*.json` = 0 files, `docs/PROMOTION_BACKLOG.md` still does not exist) -- not reached
+this round since the main task (pf-adversary D4/D8/D10/D11 debt) and the CORE-REQUEST-GM-061 letter
+(COO-DECISION 20260905_2348's own next-round order) filled the round.
