@@ -1,8 +1,8 @@
 DERIVED FILE - DO NOT DECIDE FROM THIS - read GAME_TEST_QUEUE.md
 # QUEUE STATUS SNAPSHOT (generated -- do not edit; regenerate with tools_bridge/pf_queue_status.py)
-generated: 2026-09-05T14:55:43+07:00
+generated: 2026-09-05T14:56:20+07:00
 scanned: GAME_TEST_QUEUE.md, CLIENT_RE_QUEUE.md + 18 archive files
-tickets total: 296 (live 272 / archive-only 24) -- open in live: 109
+tickets total: 296 (live 272 / archive-only 24) -- open in live: 108
 
 ## OPEN (live)
 | ใบ | status | ที่อยู่ | อ่านจาก |
@@ -88,7 +88,6 @@ tickets total: 296 (live 272 / archive-only 24) -- open in live: 109
 | GT-251 | READY | live:GAME_TEST_QUEUE.md:14268 | header |
 | GT-252 | READY | live:GAME_TEST_QUEUE.md:14341 | header |
 | GT-253 | BLOCKED | live:GAME_TEST_QUEUE.md:14424 | header |
-| GT-254 | PENDING | live:GAME_TEST_QUEUE.md:14111 | body+4 |
 | GT-255 | READY | live:GAME_TEST_QUEUE.md:14466 | header |
 | GT-257 | READY | live:GAME_TEST_QUEUE.md:14557 | header |
 | GT-258 | READY | live:GAME_TEST_QUEUE.md:14650 | header |
@@ -120,8 +119,8 @@ tickets total: 296 (live 272 / archive-only 24) -- open in live: 109
 ## DRIFT -- open แต่ไม่มีในสารบัญมือ (70)
 GT-002, GT-036, GT-060, GT-069, GT-099, GT-102, GT-103, GT-104, GT-106, GT-107, GT-109, GT-110, GT-114, GT-125, GT-128, GT-129, GT-133, GT-140, GT-141, GT-144, GT-151, GT-158, GT-159, GT-160, GT-164, GT-166, GT-170, GT-171, GT-173, GT-174, GT-176, GT-177, GT-178, GT-179, GT-180, GT-181, GT-187, GT-189, GT-190, GT-193, GT-194, GT-199, GT-200, GT-202, GT-214, GT-217, GT-218, GT-220, GT-230, GT-231, GT-243, GT-245, GT-249, RE-104, RE-107, RE-122, RE-128, RE-135, RE-155, RE-169, RE-209, RE-222, RE-235, RE-238, RE-239, RE-241, RE-248, RE-259, RE-260, RE-265
 
-## DRIFT -- อยู่ในสารบัญมือแต่สถานะจริงปิดแล้ว (21)
-GT-030, GT-032, GT-033, GT-045, GT-078, GT-121, GT-131, GT-148, GT-182, GT-188, GT-192, GT-207, GT-216, GT-219, GT-228, RE-077, RE-125, RE-130, RE-139, RE-227, RE-256
+## DRIFT -- อยู่ในสารบัญมือแต่สถานะจริงปิดแล้ว (22)
+GT-030, GT-032, GT-033, GT-045, GT-078, GT-121, GT-131, GT-148, GT-182, GT-188, GT-192, GT-207, GT-216, GT-219, GT-228, GT-254, RE-077, RE-125, RE-130, RE-139, RE-227, RE-256
 
 ## CONFLICT -- live เปิดแต่ archive ปิด (1)
 GT-002: live=UNKNOWN but archived-closed=PASS (GAME_TEST_QUEUE_ARCHIVE_20260817.md) -- likely stale live entry or duplicate reopen
@@ -228,6 +227,7 @@ GT-262: index=PENDING vs body=READY -- อ่านทั้งสองที�
 | GT-244 | CLOSED | live:GAME_TEST_QUEUE.md:13522 |
 | GT-246 | ANSWERED | live:GAME_TEST_QUEUE.md:13696 |
 | GT-247 | PASS | live:GAME_TEST_QUEUE.md:13794 |
+| GT-254 | CLOSED | live:GAME_TEST_QUEUE.md:14111 |
 | RE-056 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md:468 |
 | RE-057 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md:589 |
 | RE-058 | DONE | archive:CLIENT_RE_QUEUE_ARCHIVE_20260827_closed.md:728 |
