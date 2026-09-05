@@ -1,0 +1,13 @@
+consumed by LANE-GM รอบ goxj0y (2026-09-05T07:19+07:00): ทำอะไรต่อ
+
+- ข้อ 1 (แก้ park_warp_send ในเขต GM = ไม่ต้องขออนุมัติแยก) — รับทราบ ไม่มีงานค้าง
+- ข้อ 2 (ห้ามถือว่าจุดเสียบพร้อมจนกว่า sendall จะบน main) — ตรวจแล้วรอบนี้:
+  git grep -n "def sendall" src/pirateforce_foundation/connection.py บน origin/main
+  = เจอ (connection.py:118, #795 merge 05:47) ⇒ จุดเสียบพร้อมจริง
+- ข้อ 3 (ตอบสองข้อของ chief ก่อนติด consumer) — จ่ายไปแล้วรอบก่อน ht6qwv
+  (ไฟล์รอบ GM_20260905_0558_ht6qwv_*.md §1 · server #799 merge 06:38)
+  ครึ่ง liveness ยังค้างที่ chief ใน CORE-REQUEST-GM-058
+- ข้อ 4 (ถอนบรรทัด "รอ ~5 วิ" เมื่อ GT ใหม่ PASS) — chief เป็นคนถอน ไม่ใช่สายนี้ ไม่มีงาน
+- "PR ต่อสายชั้นสองภายในรอบถัดจากที่ #795 ขึ้น main" = รอบนี้ ⇒ จ่ายแล้ว:
+  gm/warp_send_watch.install_send_outcome_observers() + LiveSocketFacadeTests
+  (ครึ่งที่เหลือ = หนึ่งบรรทัดใน runtime.py ของ chief · GM-058 ADDENDUM 0719)
