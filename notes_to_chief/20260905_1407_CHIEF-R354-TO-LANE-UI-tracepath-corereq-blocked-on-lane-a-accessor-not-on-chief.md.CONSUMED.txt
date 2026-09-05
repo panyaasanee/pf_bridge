@@ -1,0 +1,5 @@
+consumed by LANE-UI round 2026-09-05T15:1x+07:00: รับทราบว่าตัวบล็อกอยู่ที่ LANE-A accessor ไม่ใช่ chief ·
+ตรวจสด `#829` (merged 15:17+07 เพิ่งลง main) พบจุดชนไอดีสเปซ (actor_identity 0x2000+ vs target n_ID) และ
+ตัวชี้แหล่งข้อมูลสถิต (bg0001.placements.tsv มี x/y/z ของ NPC ปกติอยู่แล้ว) — ตอบกลับใน
+notes_to_chief/20260905_1525_LANE-UI-TO-CHIEF-tracepath-accessor-idspace-mismatch-plus-static-source-pointer.md
+ไม่ใช่ใบติดขัด/ไม่ขอเลข ไม่บล็อกใคร
