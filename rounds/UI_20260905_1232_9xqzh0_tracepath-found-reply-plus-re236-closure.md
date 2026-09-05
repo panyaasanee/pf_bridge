@@ -79,10 +79,17 @@ numeric-collision ที่ไม่ผ่านจริง · โค้ดท�
 ## ส่งอะไร (SHA/PR)
 - `pirate-force-server`: commit `503f9d1` บนกิ่ง `claude/keen-gates-9xqzh0` (merge `origin/main@62c2592`
   แล้ว · สามคอมมิต: `434c1ae` โค้ด+เทสหลัก · `67fde8b` แก้ NameError ที่ adversary เจอ · `503f9d1` แก้ census
-  ที่ชุดเต็มเจอ) — PR `[LANE-UI] round 9xqzh0: tracepath found-reply encoder + GT-251 id extractor`
-- `pf_bridge`: PR claim เดิมของรอบนี้ (กิ่ง `claude/wizardly-knuth-9xqzh0`) — ไฟล์: จดหมาย CORE-REQUEST +
-  `CLIENT_RE_QUEUE.md` (RE-236 ปิด) + `.CONSUMED.txt` ของ `1151` + ไฟล์รอบนี้ (แทน `_claim.md`)
+  ที่ชุดเต็มเจอ) — **PR `#822`** `[LANE-UI] round 9xqzh0: tracepath found-reply encoder + GT-251 id
+  extractor` เปิดแล้ว ไม่ใช่ draft มี `PF-AUTOMERGE: v4` (ยืนยันด้วย GET body กลับมาดูจริงแล้ว)
+- `pf_bridge`: **PR `#1315`** `[LANE-UI] round 9xqzh0: claim` เปิดแล้ว ไม่ใช่ draft มี `PF-AUTOMERGE: v4`
+  (ยืนยันด้วย GET body กลับมาดูจริงแล้ว) — ไฟล์: จดหมาย CORE-REQUEST + `CLIENT_RE_QUEUE.md` (RE-236 ปิด) +
+  `.CONSUMED.txt` ของ `1151`/`1232` + ไฟล์รอบนี้ (แทน `_claim.md`) ⇒ **ปลดล็อกแล้ว** (ทั้งสอง PR เปิด+
+  ไม่ draft ตามข้อ 5 ของ §7)
 - เลขใบใหม่ที่ขอในรอบนี้: **ไม่มีเลขที่ตั้งเอง** (RE-236/RE-119 ใช้เลขเดิม · GT ใหม่รอ chief ตั้งเลข)
+- 🔴 **`GATE_UNVERIFIED #822`**: job `gate-windows` ของ PR `#822` ยัง `in_progress` เกิน 10 นาทีหลัง push
+  (เช็คซ้ำ 4 ครั้ง 05:49→06:02 UTC ≈ 13 นาที ยังไม่จบ — Windows runner รันชุดเต็มช้ากว่าปกติในรอบนี้ ไม่ใช่
+  แดงที่วัดได้) ตาม `PANYA-DECISION 20260904_1158` §22 — **รอบถัดไปของ LANE-UI เปิดด้วยการตรวจ PR `#822`
+  ก่อนอย่างอื่น**: เขียวแล้วปิดเรื่องนี้ · แดง = แก้ในรอบถัดไปทันที (root cause จริง ไม่ใช่ retry เปล่า)
 
 ## nonclaims
 ① ไม่อ้างว่าจุดเสียบ `runtime.py` ขึ้น main แล้ว — เป็นคำขอ CORE-REQUEST ยังไม่มีโค้ดแตะไฟล์นั้นเลยรอบนี้
