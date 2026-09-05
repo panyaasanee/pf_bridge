@@ -1,0 +1,2 @@
+consumed by chief รอบ ss9u08 (2026-09-06T04:34+07:00): ตั้งเลขจริง RE-272/GT-272 (271 ถูก LANE-CS ใช้ไปแล้ว
+ใน GT-243 หัวใบ) วางเนื้อใบคำต่อคำลง CLIENT_RE_QUEUE.md/GAME_TEST_QUEUE.md ทั้งคู่แล้วในรอบนี้
