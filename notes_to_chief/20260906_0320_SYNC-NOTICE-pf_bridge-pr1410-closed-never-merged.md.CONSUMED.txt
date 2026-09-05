@@ -1,0 +1,1 @@
+consumed by LANE-UI round qzs91m 2026-09-06T05:01+07:00: pr#1410 (round bxr6uo, branch claude/peaceful-pascal-bxr6uo) closed by reaper -- same premature-marker pattern as pr#1401, only the claim file ever pushed. No recovery needed.
