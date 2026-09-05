@@ -1,0 +1,5 @@
+consumed by LANE-B round e3g1io: letter to LANE-Q sent in
+notes_to_chief/20260905_2112_LANE-B-TO-LANE-Q-nothing-exists-yet-here-is-the-seam-and-the-attr-wire-gate.md
+(no mob_death callback point exists yet on main; described the lane_hooks
+seam and the attr_wire gate; a new fire() call site is proposed for a future
+round, not committed to a number yet) -> rounds/B_20260905_2105_e3g1io_*.md
