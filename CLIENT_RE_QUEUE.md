@@ -1734,3 +1734,46 @@ ATTENDED: ผลที่ส่งกลับ = ชื่อคอลัมน�
 (ว่าง)
 
 > 🔴 **ห้ามสายอื่นใช้เลข `RE-266`** · numbering: `RE-266` = 0 hit ทั้งสามที่ (`CLIENT_RE_QUEUE.md` · `GAME_TEST_QUEUE.md` · `archive/*QUEUE*ARCHIVE*`) ก่อนตั้ง **[วัดแล้ว รอบ `rz1fxh`/R358]** · ใบนี้มีหัวข้อ "ค้นแล้วก่อนเปิดใบ" ตาม `AGENTS.md` §98 ตามที่ RE runner ท้วงใน `1932`
+
+## RE-272 ITEMOPERATEVITALREQ-EQUIP-FROM-BAG-RESPONSE-001  [🔴 **OPEN** · 🔺 `[NEEDS-ATTENDED-CAPTURE]` · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-DB** · ตั้งเลขโดย chief (LANE-E) รอบ `ss9u08`/R363 ตาม `PANYA-ORDER 20260906_0156` + `COO-DECISION 20260906_0345` · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_0404_LANE-DB-TO-CHIEF-order-0156-arm-b-re-draft-and-gt-draft-ready-for-numbering.md` คำต่อคำ · ใบ GT คู่ของมัน = **`GT-272`** (พ่วงบูตเดียวกัน)]
+
+**ทำไมต้องมีใบนี้**: `PANYA-ORDER 20260906_0156` ("เสร็จ" คำต่อคำ = เปิดกระเป๋า → กดสวม → ช่องอุปกรณ์เปลี่ยนบนจอ → relog → ยังสวม) ต้องการทาง (ข) แบบโต้ตอบจริง — ฝั่งคำขอรู้ schema ครบแล้ว (ตารางล่าง) แต่ฝั่งตอบกลับไม่เคยมีใครวัด
+
+## ค้นแล้วก่อนเปิดใบ (`AGENTS.md` §7 grep-before-RE · LANE-DB รายงานใน `0404`)
+**เจอ**: `PF_PROTOCOL_REGISTRY.tsv:46` `ItemOperateVitalReq` VA ครบทุกช่อง · `PF_SERIALIZER_FIELDS.tsv:763-768` W และ R มีสามฟีลด์พร้อม `span_sha256` · `PF_FIELD_VALIDATION.tsv:90-91` **W = VALIDATED (8 capture instances) · R = NOT_OBSERVED (0)** — ยืนยันตรงกับคำถามใบนี้ · `PF_PROTOCOL_PRIORITY.tsv:46` serializer_status = CLOSED (เฉพาะฝั่งคำขอ)
+**ไม่เจอ**: ไม่มีแถว field-level ของ `ItemBagAttr_Equiped`/`CollectionBagAttr` (มีแค่ VA ระดับคลาสที่ `PF_PROTOCOL_REGISTRY.tsv:12-13`, ทั้งคู่ `direct_call_not_proven_serializer`) · `gamedata/` ไม่มีแถวเกี่ยวข้อง (คำถามพฤติกรรม runtime ไม่ใช่ตารางข้อมูลเกม) · `archive/` และ `notes_to_chief/consumed/` grep `ItemOperateVitalReq|0x4BED|CollectionBagAttr|ItemBagAttr_Equiped` = ไม่เจอใบเก่าตอบฝั่งตอบกลับมาก่อน
+
+## สิ่งที่รู้แล้ว (static — `current/pf_login_game_server_v141.py:101-113,2481-2486,3869-3903`, `span_sha256` ที่ `PF_SERIALIZER_FIELDS.tsv:763-768`)
+| ทิศทาง | offset | ความหมาย | ค่าที่พิสูจน์แล้ว | ที่มา |
+|---|---|---|---|---|
+| W (request) | `+0x14` | operation byte | `5` = equip-from-bag (producer `0x59F800`) | `v141.py:2485`, `PF_SERIALIZER_FIELDS.tsv:763` |
+| W (request) | `+0x18` | value32 (มาสก์แม็ปจาก item control) | `{8, 16}` เลือกจาก `0x4000` row mask ผ่าน `0x5A6814-0x5A683F`/`0x448EC0(0x10)` | `v141.py:2486,3869-3878`, `PF_SERIALIZER_FIELDS.tsv:764` |
+| W (request) | `+0x20/+0x24` | item identity (qword) | recovered ผ่าน `0x5A6879/0x4DF1C0` | `v141.py:107-113`, `PF_SERIALIZER_FIELDS.tsv:765` |
+| R (response) | -- | **ไม่มี** | V123 journal-only: "emits no response or inventory mutation" | `v141.py:113` |
+
+🔴 นี่คือ capture ของ V123 (ตัวจับภาพทดสอบ) ไม่ใช่โค้ดโปรดัคชัน — ใบนี้ไม่ขอแก้/อ้าง v141 เป็นโค้ดจริง ขอแค่ citation ของ schema ที่มันบันทึกไว้
+
+## คำถาม
+กดสวมอาวุธจากกระเป๋าจริงหนึ่งครั้ง (เฟรม `ItemOperateVitalReq` `0x4BED` operation `5`) เซิร์ฟเวอร์ต้นฉบับตอบอะไรกลับ และ `ItemBagAttr_Equiped`/`CollectionBagAttr` เปลี่ยนยังไง
+
+## เกณฑ์ปิดใบ (ชั้น static เท่านั้น — ชั้น client-observable อยู่ในใบ `GT-272` คู่กัน)
+ปิดได้เมื่อบันทึก: (ก) มี/ไม่มีเฟรมตอบกลับ (ข) ถ้ามี ระบุ opcode/offset ที่เปลี่ยน `ItemBagAttr_Equiped`/`CollectionBagAttr` (ค) StartGame ครั้งถัดไปของตัวละครเดียวกันส่งอะไรสำหรับช่องที่เพิ่งสวม — **ผลลบก็ปิดได้** ("ไม่มีเฟรมตอบ ไคลเอนต์อัปเดตเองฝั่งเดียว" ใช้ได้) ห้ามเดาไบต์ที่ยังไม่เห็น (`PANYA-ORDER 0156` ข้อ 2)
+
+## ใบนี้ไม่ขอ
+ไม่ขอยืนยันซ้ำฝั่งคำขอ (ปิดแล้วจาก static ตารางบน) · ไม่ขอทดลองสวมมากกว่าหนึ่งครั้งต่อรอบ (กันข้อมูลกำกวมจากหลายเฟรมพร้อมกัน) · ไม่ขอเดาความหมายมาสก์ `8`/`16` เกินกว่า comment ของโค้ด (แค่ "normal/alternate" ไม่ใช่ `n_SLOT_RHAND`/`LHAND` ที่ยังไม่มีใครเทียบ namespace)
+
+## nonclaims
+1. ไม่อ้างว่า `8`/`16` ตรงกับ `n_SLOT_RHAND`(bit10)/`n_SLOT_LHAND` ของ `CHARCREATE_CLASS` — คนละ namespace ยังไม่มีใครเทียบ
+2. ไม่อ้างว่า V123 journal-only เคยรันบนเซิร์ฟเวอร์โปรดัคชัน — เป็นเครื่องมือทดสอบ static ใน `v141.py`
+3. ไม่อ้างว่าฝั่งตอบกลับ "ไม่มีแน่นอน" — แค่ว่า **ไม่เคยมีใครวัด** (`NOT_OBSERVED`)
+
+ATTENDED: บูตปกติ ไม่มีธง ตัวละคร Gladiator (ซีด `migrations/003_character_inventory.sql` มี template `2200002` slot 3 ให้แล้ว) เปิดกระเป๋า กดสวมอาวุธช่องนั้น **หนึ่งครั้ง**
+ATTENDED: จับแพ็กเก็ตทั้งขาเข้า/ขาออกช่วง ±5 วินาทีรอบการกด บันทึกทุกเฟรมที่ผ่าน ไม่กรองก่อน
+ATTENDED: ถ่ายภาพช่องอุปกรณ์/กระเป๋าก่อนกดและหลังกด (สองภาพ)
+ATTENDED: ผ่าน = จับได้อย่างน้อยหนึ่งคู่คำขอ `0x4BED` op `5` + สิ่งที่เกิดขึ้นถัดจากนั้น (มี/ไม่มีเฟรมตอบ, ช่องอุปกรณ์เปลี่ยนบนจอหรือไม่)
+ATTENDED: ไม่ผ่าน = กดไม่ติด/ไม่เห็นเฟรม `0x4BED` เลย (รายงานตามกติกาคลิกไม่ติด 3 ครั้งของ `AGENTS.md` §8)
+
+### result:
+(ว่าง)
+
+> 🔴 **ห้ามสายอื่นใช้เลข `RE-272`** · numbering: คำสั่งนับเลขของบ้าน คืน **271** (จาก `RE-271` ที่ LANE-CS อ้างถึงใน `GT-243` หัวใบ รอบ `88ej1z`, ยังไม่ลงเนื้อใบเต็ม) ⇒ เลขว่างตัวถัดไปคือ **272** [วัดแล้ว รอบ `ss9u08`/R363] · 🔴 chief แก้คำผิดของตัวเอง: จดหมาย `20260906_0350_CHIEF-REPLY-*` ของรอบเดียวกันเขียนว่า "จอง GT-271" ให้ LANE-B/LANE-CS **ก่อน**รู้ว่า `RE-271` ถูกอ้างไปแล้ว — เป็นการฝ่าฝืนกฎ ① ของไฟล์นี้เอง (ห้ามจองเลขล่วงหน้า) ที่ chief ทำเอง แก้ในจดหมาย `20260906_0430_CHIEF-SELFCORRECTION-*` (LANE-B/LANE-CS ต้องรันคำสั่งนับสดเองตอนเปิดใบจริง ไม่ใช้เลข 271 ที่เคยเสนอ)

@@ -1,1 +1,7 @@
 consumed by chief (LANE-E) รอบ 6z131u/R362 2026-09-06T02:0x+07:00: รับคำสั่งครบสี่ข้อ - ใช้สิทธิ์ 'รอบ 03:11' ที่ใบเขียนเอง เพราะเป็นงานแก้ pf_scoreboard.py + pf_gate_preflight.py พร้อม self-test ⇒ งานแรกของรอบ LANE-E ถัดไปคู่กับผล adversary
+--
+consumed by chief รอบ ss9u08 (2026-09-06T03:50+07:00): ทำครบสี่ข้อ - date column (6) ใน pf_scoreboard.py,
+MALFORMED สำหรับแถว manual ที่ขาดวันที่/GT-ref, เกต pf_gate_preflight.py ปฏิเสธ PR ที่แตะแถว manual
+(--allow-manual-scoreboard-edit สำหรับ courier/ka1-A), หัว TSV แก้ข้อความ + AGENTS.md §7 หนึ่งบรรทัด
+AGENTS.md เกิน ceiling อยู่แล้ว (44161->44628 ไบต์) การเติมบรรทัดนี้ทำให้ bridgesize check เป็น RED
+เฉพาะไฟล์นี้ - บันทึกไว้ในไฟล์รอบ ไม่ใช่ CI บังคับจริง (R362b D11: ไม่มี workflow รัน preflight นี้)

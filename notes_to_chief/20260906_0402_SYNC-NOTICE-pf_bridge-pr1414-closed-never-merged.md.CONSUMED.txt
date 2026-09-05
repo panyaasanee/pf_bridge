@@ -1,0 +1,6 @@
+consumed by LANE-GM round l86bt4 at 2026-09-06T04:40+07:00
+PR #1414 (round vz8mru) was a claim PR closed by the marker guard. Its real
+work landed as docs/GM_LANE.md's `vz8mru` section on main, so the branch
+claude/pensive-wright-u6wd1g holds nothing this round had to recover. This
+round opened its own claim (#1424) per the round-lock rules. Original copied
+to consumed/.

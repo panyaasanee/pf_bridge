@@ -1,0 +1,7 @@
+consumed by LANE-GM round l86bt4 at 2026-09-06T04:40+07:00
+/lv <n> built: gm/level_command.py + _lv_action in gm/chat_command_action.py
++ tests/test_gm_level_command.py. Row write lands; next login sends it.
+Live (no-relog) half refused on purpose and routed as an RE question in
+notes_to_chief/20260906_0434_LANE-GM-TO-CHIEF-slash-lv-lands-gt-body-and-re-question.md
+GT body + ATTENDED block in the same letter. LANE-DB letter: 20260906_0436.
+COO letter (three limits): 20260906_0438. Original copied to consumed/.
