@@ -31,9 +31,22 @@
 NO_FEATURE_WAITING: RE-263 bounded-negative -- second P-2 route dead, blocker unchanged
 (บรรทัดตามแบบที่ `COO 1452` สั่งเติม · ย้อนอ้างรอบ `0dlc07` ที่เขียนเป็นร้อยแก้วแทน · `PANYA 1130`)
 
-TWO_SESSIONS_SAME_SCENE: ไม่เกี่ยว -- รอบนี้ไม่แตะสถานะโลกต่อฉากเลย ป้ายที่คืนคือ
+TWO_SESSIONS_SAME_SCENE: ~~ไม่เกี่ยว -- รอบนี้ไม่แตะสถานะโลกต่อฉากเลย ป้ายที่คืนคือ
 `foundation.selected.position.scene_id` ของ **เซสชันเดียว** (ตำแหน่งตัวละคร = ของบัญชี ลง DB ตาม
-`PANYA 1057/1140` ไม่ใช่ roster/มอน/ศพ/ของพื้น) · ไม่มีเฟรมออกจากเซิร์ฟเวอร์เพิ่มแม้แต่ไบต์เดียว
+`PANYA 1057/1140` ไม่ใช่ roster/มอน/ศพ/ของพื้น) · ไม่มีเฟรมออกจากเซิร์ฟเวอร์เพิ่มแม้แต่ไบต์เดียว~~
+🔴 **ขีดฆ่า -- ประโยคนี้ผิด และ `pf-adversary` D5 วัดหักล้างได้** (ห้ามลบประวัติ)
+ตัวป้ายยังเป็นของเซสชันเดียวจริง และรอบนี้ยังไม่เขียน roster/มอน/ศพ/ของพื้นจริง **แต่ประโยค
+"ไม่มีเฟรมออกเพิ่มแม้แต่ไบต์เดียว" เท็จ**: dispatch ถัดไปหลัง send ล้ม วัดได้ว่า
+- **มีตัวแก้**: `WORLD_CENSUS_INITIAL_108` + `REAPPLY_108` (roster ฉาก 1 · 108 ตัว)
+- **ไม่มีตัวแก้ (control)**: `WORLD_CENSUS_BG0002_INITIAL_97` + `REAPPLY_97` (roster ฉาก 2 · 97 ตัว)
+⇒ ป้ายที่รอบนี้คืน **เป็นตัวตัดสินว่าฉากไหนถูกประกาศ roster ใหม่ทั้งฉาก** = สถานะโลกต่อฉาก และเป็นไบต์จริง
+🔴 **การประกาศซ้ำทั้งฉากเองเป็นของเดิม ไม่ใช่ของรอบนี้** — `world_census_sent = False` ถูกตั้งโดย
+`_gm_warp_resync_selected_scene` (`runtime.py` · `CORE-REQUEST-GM-045`) ไม่ใช่โดยโค้ดของรอบนี้
+สิ่งที่รอบนี้ตัดสินคือ **ฉากไหน** ไม่ใช่ **ประกาศซ้ำหรือไม่** · แต่กติกา delta (`PROCESS_GATES §25(ก)`)
+แตะเรื่องนี้ ⇒ **บันทึกเป็นหนี้ที่เปิดเผย ไม่ใช่ "ไม่เกี่ยว"** และเข้า backlog ข้อ 1 ของรอบถัดไป
+🔴 **และรอยต่อที่ยังเปิด (D5 ครึ่งที่สอง · วัดว่ามีจริง ผลกระทบยัง PROPOSED)**: `mob_loot_cell.
+current_scene` ยังเป็น `Bg0002` ขณะที่ป้ายถูกคืนแล้ว ⇒ ถ้ามีการฆ่ามอนหลังจุดนั้น เฟรมจะประกอบด้วย
+scene key คนละตัว · **สายนี้ยังไม่ได้ขับเส้นทางฆ่าจริง** จึงไม่อ้างว่าพัง แต่ไม่ปิดปากเรื่องนี้เช่นกัน
 
 BYTECODE_PURGED: ทั้งรอบรันด้วย `PYTHONDONTWRITEBYTECODE=1` + `python3 -B` · และหลังคืนค่ามิวแทนต์
 รัน `find . -name __pycache__ -type d -prune -exec rm -rf {} +` ก่อนชุดเต็ม (`COO 1446`)
@@ -91,7 +104,11 @@ BYTECODE_PURGED: ทั้งรอบรันด้วย `PYTHONDONTWRITEBYTE
   ตอนสร้าง `RealDispatchSendFailureTests` และรอบนี้ใช้มันเป็นที่วัด)
 - แคบ: `tests/test_gm_warp_send_watch.py` + `tests/test_gm_source_is_cp874_safe.py`
   = **121 passed, 80 subtests**
-- **ชุดเต็ม รันครั้งเดียว** บนต้นไม้ที่ `git fetch origin main` + merge `77b9fc3` แล้ว (`COO 0053`/`0149`)
+- 🔴 **ชุดเต็มรันสองครั้งในรอบนี้ และนี่คือเหตุผล** (กติกาบังคับให้เขียน): ครั้งแรกรันบน commit
+  `ae0d5a5` ที่เปิด `#836` · จากนั้น `pf-adversary` คืนผล **NOT APPROVED** พร้อม D1/D2/D3 ระดับ
+  ship-blocking ⇒ โค้ดเปลี่ยน ⇒ **ห้าม push สภาพที่ไม่เคยถูกรันเต็ม** จึงต้องรันใหม่ทั้งชุด
+  ครั้งที่สองคือชุดที่นับ และเป็น commit สุดท้ายจริง
+- **ชุดเต็ม ครั้งที่ 1** (commit `ae0d5a5` · ก่อนผล adversary) บนต้นไม้ที่ merge `77b9fc3` แล้ว
   = **1 failed, 11038 passed, 327 skipped, 20343 subtests passed** (782.60s)
   🔴 **ตัวที่แดงเป็นของเดิม ไม่ใช่ของรอบนี้ และวัดแล้วสามทาง**:
   `tests/test_combat_pose.py::SourcePinTests::test_the_generator_reproduces_the_shipped_tables_
@@ -143,6 +160,14 @@ headless ไม่ใช่หลักฐานบนจอ · ถ้าขั�
    สำหรับปุ่มที่ต้องการ image · ออกเป็นใบ ไม่ใช่รายงานวิจัย
 
 ## backlog (อะไรบล็อกอยู่ที่ใคร)
+- 🔴 **หนี้ที่ `pf-adversary` เปิดในรอบนี้ = งานของสายนี้เอง รอบถัดไป** (ไม่ใช่ของใครอื่น)
+  1. **park ไม่ผูกกับ character id** — `on_game_frame_send_failed` ไม่เทียบ `selected.id` กับตัวละคร
+     ที่ park ไว้ · ถ้าเปลี่ยนตัวละครได้บนคอนเนกชันเดียว rollback จะเขียนแถว A ทับ B
+     **ยังไม่ได้วัด** (ฮาร์เนสไปไม่ถึง) ⇒ งานแรกคือ **วัดว่าเข้าถึงได้ไหม** ไม่ใช่แก้ทันที
+  2. **census ประกาศซ้ำทั้งฉาก** หลัง rollback (D5) — ตัวตั้งอยู่ใน `runtime.py` ของ chief
+     สายนี้ตัดสินแค่ "ฉากไหน" ⇒ ใบวัด headless ก่อน แล้วค่อยตัดสินว่าเป็น CORE-REQUEST หรือไม่
+  3. **`mob_loot_cell.current_scene` ไม่ตรงกับป้ายหลัง rollback** — วัดว่ามีจริงแล้ว
+     ผลกระทบต่อเฟรมตอนฆ่ายัง PROPOSED · ต้องขับเส้นทางฆ่าจริงก่อนจึงจะเรียกว่าข้อบกพร่องได้
 - **`1347` `/warp 126` สด** → บล็อกที่ **LANE-A** ใบ `1346` (registry 126 · ตก 15:51 ยังไม่มา)
   · รอบถัดไปของ GM: ตรวจ `warp_no_coords_live_target(126)` บน main เป็นข้อแรก ก่อนอย่างอื่น
 - **P-2 สีชื่อมอน** → บล็อกที่ **chief** ยังไม่ตั้งเลข RE ใบที่สอง (สายนี้ร่างส่งตั้งแต่ `0306`
@@ -152,14 +177,68 @@ headless ไม่ใช่หลักฐานบนจอ · ถ้าขั�
 - **`KNOWN_DEFECT` / rollback เทียบปลายทาง** → รอ COO ตอบใบ `1622` (เดินต่อแล้ว ไม่รอ)
 
 ## adversary (`COO 0903_2345` · `Panya 0904_14:1x` / `COO 1428`)
-🔴 **`ADVERSARY_PENDING` — สั่งต้นรอบพร้อมเริ่มงาน (ครั้งที่ 1 จากโควตา 2) ผลยังไม่คืนตอน push**
-สั่งเวลา ~16:24 · ยังรันอยู่ตอน 16:4x · **ไม่ถือล็อกรอ** ตามกติกา ⇒ push ตามเดิม
-🔴 **ห้ามอ่านไฟล์นี้ว่า "ผ่าน adversary"** — ยังไม่มีผลคืน
-**รอบถัดไปของ LANE-GM หยิบผลนี้เป็นงานแรก ก่อน claim** · เจออะไร = PR แก้ใต้รหัสรอบ `bdl0w3`
-ขอบเขตที่สั่งตรวจ: ลำดับ/เธรดใต้ `send_lock` · การคืน `scene_id` อย่างเดียวพอไหม (ธง
-`scene_label_is_server_guess` และ latch census ที่ resync ล้างไว้) · เคสที่ **ไม่ควร** ยิง
-(same-scene · วาปซ้อน `DoubleWarpTests` · กิ่ง fallback · park ของตัวละครอื่น) · มิวแทนต์เพิ่มเติม
-· ข้อความใน docstring ที่ซอร์สไม่รองรับ
+~~🔴 `ADVERSARY_PENDING` — ผลยังไม่คืนตอน push~~ **ผลคืนแล้วเวลา ~17:0x และเป็น NOT APPROVED**
+(ครั้งที่ 1 จากโควตา 2 · สั่ง ~16:24 · คืน ~17:0x · ขีดฆ่าไว้เพราะบรรทัดบนคือสภาพจริงตอน push รอบแรก)
+🔴 **ตัวแก้ทั้งหมดข้างล่างถูก push ทับ `#836` ใบเดิมก่อนเกตเขียว** (ยังไม่ merge ⇒ ไม่ต้องเปิด PR ใหม่)
+
+### D1 (HIGH · รับ · แก้แล้ว) — ตัวแก้รอบแรก **ใช้ค่าผิดตัว**
+`record.previous_position` คือ **แถวถาวรใน DB** (`row_before_warp` อ่าน store) แต่สิ่งที่ resync
+เขียนทับคือ **ป้ายในหน่วยความจำ** `foundation.selected.position.scene_id` — คนละค่า และ**แยกจากกันได้จริง**:
+`lifecycle.py:311` เขียนแถวถาวรเฉพาะเมื่อ `is_position_persist_allowed(scene_id)` จริง แต่
+`FoundationSession.checkpoint` (`session.py:446`) อัปเดต `selected` **ทุกครั้งไม่มีเงื่อนไข**
+⇒ ตัวละครที่ยืนในฉาก **17** (`persist_position_allowed=False` ใน registry · GT-106) มีป้าย = 17
+แต่แถวถาวร = 1 · ตัวแก้รอบแรกจะคืนเป็น **1 = ฉากที่เซสชันไม่เคยอยู่** แล้วเทรลบอกว่า `restored`
+**ตัวแก้**: `ParkedWarpSend` พกฟิลด์ที่สอง `previous_selected_scene_id` อ่านที่ compose time
+(จังหวะสุดท้ายที่ป้ายจริงยังอ่านได้ — `persist_warp_scene` คืน `selected` แล้ว และ resync ยังไม่รัน)
+· `_restore_selected_scene` รับ **ป้าย** ไม่ใช่แถว · park ที่ไม่มีป้าย = `selected_scene_unknown`
+**เขียนอะไรไม่ได้เลย ห้ามเดาจากแถวถาวร** (และปฏิเสธ `bool` ด้วย เพราะ `True == 1`)
+**เทสที่ปิด**: `test_the_label_restored_is_the_in_memory_one_not_the_durable_rows` — เดินฉาก 17
+ผ่านประตูจริง (`foundation.checkpoint`) แล้ว `/warp 2` ให้ send ล้ม · ยืนยัน
+`is_position_persist_allowed(17)` เป็นเท็จในเทสเอง ไม่ใช่สมมติ
+
+### D2 (HIGH · รับ · แก้แล้ว) — คำว่า `already_there` เคย**โกหก**
+วัดได้: `/warp 1` จากเซสชันที่ป้าย = 17 → resync relabel 17→1 → ตอบ `selected_scene_already_there`
+ซึ่ง docstring ของมันเองแปลว่า "ไม่มีการ relabel" ทั้งที่ `gm_warp_selected_scene_resynced_1`
+อยู่ในเทรลเดียวกันสองบรรทัดก่อนหน้า · หายเองเมื่อเทียบกับ **ป้าย** แทนแถว (D1) · เทสคู่:
+`test_a_same_scene_warp_from_a_divergent_label_is_not_called_restored`
+
+### D3 (HIGH · test defect · รับ · แก้แล้ว) — เกต `OUTCOME_ROLLED_BACK` ไม่มีอะไรยึด
+มิวแทนต์ `if outcome == OUTCOME_ROLLED_BACK:` → `if True:` **รอดทั้งไฟล์ (118 passed)** และไม่ equivalent:
+บน rollback ที่ถูกปฏิเสธ มันทิ้งแถวถาวรไว้ที่ฉากปลายทางแต่ดึงป้ายกลับ = สร้างความไม่ตรงกันขึ้นมาเอง
+**เทสที่ปิด**: `test_a_refused_rollback_leaves_the_label_where_the_resync_put_it`
+
+### D4 (MEDIUM-HIGH · test defect · รับ · แก้แล้ว) — "asserted, not incidental" ไม่ได้ assert อะไรเลย
+fixture เดิมสร้างด้วย `replace(PREVIOUS, scene_id=...)` ⇒ x/y/z ของ treatment กับ control เท่ากัน
+การ assert พิกัดจึงเป็น tautology · แก้เป็นพิกัด `WALKED` ที่**เข้าถึงไม่ได้จากอาร์กิวเมนต์**
+
+### D5 (MEDIUM · รับ) — ดูหัวข้อ `TWO_SESSIONS_SAME_SCENE` ข้างบน (ขีดฆ่าและเขียนใหม่แล้ว)
+
+### D6 (LOW · รับ · แก้แล้ว) — `NEVER RAISES` มีบรรทัดที่ไม่มี `try`
+`current.scene_id == previous.scene_id` อยู่นอก `try` ทุกก้อน · ห่อแล้ว + เทส `_RaisingSceneId`
+
+### D7 (LOW · รับ · แก้แล้ว) — หมุดบรรทัดค้าง `runtime.py:6827` → **`6887`** (วัดใหม่: `def` อยู่ 6887)
+
+### D8 (LOW · **ไม่รับ · ข้อสรุปของ adversary ผิด ตัวเลขถูก**)
+adversary รันในกิ่ง `/tmp` ที่**ไม่มี `pf_bridge` วางข้าง ๆ** จึงได้ `0 failed / 421 skipped` แล้วสรุปว่า
+"ไฟล์ที่หายทำให้แดงไม่ได้ ต้องเป็นอย่างอื่น" · **หลักฐานที่หักล้าง**: เทสนั้นมีเดคอเรเตอร์
+`@BRIDGE_GAMEDATA.skip_unless_present()` และ `tests/pf_preconditions.py:397-399` นิยาม
+`BRIDGE_GAMEDATA` = `SIBLING / "pf_bridge" / "gamedata" / "tables"` ⇒ **มีสะพานข้าง ๆ = รัน · ไม่มี = skip**
+โคลนของรอบนี้มี `/home/user/pf_bridge/gamedata` จริง ⇒ เทสรัน แล้วแดงเพราะเครื่องมือที่ถูก gitignore หาย
+นี่คือหัวข้อของใบ LANE-DB เป๊ะ ๆ: `*SYNC-NOTICE-combat-pose-source-pin-test-fails-with-pf-bridge-alongside*`
+ส่วนต่าง 93/94 ก็คือชุดเทสที่ประตูสะพานบานเดียวกันเปิด/ปิด · **ข้อวินิจฉัยของรอบนี้ยืน**
+
+### ที่ adversary ลองแล้วไม่แตก (บันทึกไว้)
+same-scene · `DoubleWarpTests` วาปซ้อน · กิ่ง fallback · ต้นทุนต่อ listener thread (ไม่มี I/O ไม่มีล็อก)
+· มิวแทนต์ที่ตายอยู่แล้ว 6 ตัว (read-back · type gate · คำสี่คำ) · ชุดเต็มไม่มี regression
+
+### ที่ยังเปิดอยู่ ไม่ปิดปาก
+- **ตัวละครถูกเลือกใหม่ระหว่างวาปกับ send ล้ม** — `on_game_frame_send_failed` ไม่เคยเทียบ `selected.id`
+  กับตัวละครที่ park ไว้ และ `park_warp_send` ไม่บันทึก character id · adversary **ไปไม่ถึง** ในฮาร์เนส
+  (`_V25_REAL_CREATE_PC` ใช้ id 1 ซ้ำ) ⇒ **ข้อสงสัย ยังไม่ได้วัด** · ถ้าเข้าถึงได้จริง
+  `rollback_warp_scene` เขียนแถวตัวละคร A ทับ B อยู่ก่อนแล้ว ตัวแก้นี้แค่ขยายไปถึงป้าย
+  **= หนี้ของสายนี้ เข้า backlog รอบถัดไป ไม่ใช่ของรอบนี้ที่จะปิด**
+- โควตา adversary: ใช้ไป **1 จาก 2** · ตัวแก้ชุดนี้ยังไม่ผ่าน adversary รอบสอง
+  🔴 **ห้ามอ่านไฟล์นี้ว่า "ผ่าน adversary"** — ผ่านคือรอบที่ adversary คืนว่าไม่เจอ ซึ่งยังไม่เกิด
 
 ## สถานะ push
 - `pf_bridge` claim PR `#1344` — marker เติม **หลัง** push ครบทั้งสองรีโปเท่านั้น (`COO 1229`/`1849`)
