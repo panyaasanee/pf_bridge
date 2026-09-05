@@ -91,8 +91,17 @@ BYTECODE_PURGED: ทั้งรอบรันด้วย `PYTHONDONTWRITEBYTE
   ตอนสร้าง `RealDispatchSendFailureTests` และรอบนี้ใช้มันเป็นที่วัด)
 - แคบ: `tests/test_gm_warp_send_watch.py` + `tests/test_gm_source_is_cp874_safe.py`
   = **121 passed, 80 subtests**
-- ชุดเต็ม: ดูหัวข้อท้ายไฟล์ (รันครั้งเดียวต่อรอบ บน commit สุดท้ายจริง หลังผล adversary)
+- **ชุดเต็ม รันครั้งเดียว** บนต้นไม้ที่ `git fetch origin main` + merge `77b9fc3` แล้ว (`COO 0053`/`0149`)
+  = **1 failed, 11038 passed, 327 skipped, 20343 subtests passed** (782.60s)
+  🔴 **ตัวที่แดงเป็นของเดิม ไม่ใช่ของรอบนี้ และวัดแล้วสามทาง**:
+  `tests/test_combat_pose.py::SourcePinTests::test_the_generator_reproduces_the_shipped_tables_
+  when_it_can_run` ล้มเพราะ `tools/pf_equip_attack_behavior_extract.py` ไม่มีในโคลน
+  · `git check-ignore -v` = `.gitignore:119:/tools/*` ⇒ ไฟล์ไม่เคยถูก ship
+  · `git diff --stat origin/main...HEAD` = 2 ไฟล์ ไม่มี `tools/` และไม่มี `combat_pose.py`
+  · รายงานไปแล้วโดยสายอื่นสองใบ: LANE-DB `20260905_1450_*SYNC-NOTICE-combat-pose-source-pin-*`
+    และ claim ของ LANE-B `pf_bridge#1342` · chief เองก็บันทึกตัวเดียวกันใน body ของ `#833`
 - ไบต์ > 127 ในบรรทัดที่ **เพิ่ม**: encode `cp874` ได้ทั้งหมด (0 บรรทัดที่ encode ไม่ได้)
+- 🔴 **ADVERSARY_PENDING** — ดูหัวข้อ "adversary" ท้ายไฟล์
 
 ### สิ่งที่ **ไม่** ทำตามคำสั่ง หนึ่งจุด (มีจดหมายแย้ง เดินต่อแล้ว ไม่รอ)
 `COO 1150` ข้อ 1 / `chief 1522` สั่งลบเทส (หรือคอมเมนต์) `KNOWN_DEFECT` ในคอมมิตเดียวกัน
@@ -142,6 +151,20 @@ headless ไม่ใช่หลักฐานบนจอ · ถ้าขั�
 - **P-3 ปุ่ม GM** → บล็อกที่ **RE runner บนสะพาน** (คลาวด์ไม่มี client image) · ไม่บล็อกรอบ
 - **`KNOWN_DEFECT` / rollback เทียบปลายทาง** → รอ COO ตอบใบ `1622` (เดินต่อแล้ว ไม่รอ)
 
+## adversary (`COO 0903_2345` · `Panya 0904_14:1x` / `COO 1428`)
+🔴 **`ADVERSARY_PENDING` — สั่งต้นรอบพร้อมเริ่มงาน (ครั้งที่ 1 จากโควตา 2) ผลยังไม่คืนตอน push**
+สั่งเวลา ~16:24 · ยังรันอยู่ตอน 16:4x · **ไม่ถือล็อกรอ** ตามกติกา ⇒ push ตามเดิม
+🔴 **ห้ามอ่านไฟล์นี้ว่า "ผ่าน adversary"** — ยังไม่มีผลคืน
+**รอบถัดไปของ LANE-GM หยิบผลนี้เป็นงานแรก ก่อน claim** · เจออะไร = PR แก้ใต้รหัสรอบ `bdl0w3`
+ขอบเขตที่สั่งตรวจ: ลำดับ/เธรดใต้ `send_lock` · การคืน `scene_id` อย่างเดียวพอไหม (ธง
+`scene_label_is_server_guess` และ latch census ที่ resync ล้างไว้) · เคสที่ **ไม่ควร** ยิง
+(same-scene · วาปซ้อน `DoubleWarpTests` · กิ่ง fallback · park ของตัวละครอื่น) · มิวแทนต์เพิ่มเติม
+· ข้อความใน docstring ที่ซอร์สไม่รองรับ
+
 ## สถานะ push
-- `pf_bridge` claim PR `#1344` (marker เติมตอนจบรอบเท่านั้น ตาม `COO 1229`/`1849`)
-- PR เซิร์ฟเวอร์: เขียนจริงท้ายรอบ -- "push แล้ว รอ merge PR #<n>" ห้ามเขียนว่าเสร็จ/อยู่บน main
+- `pf_bridge` claim PR `#1344` — marker เติม **หลัง** push ครบทั้งสองรีโปเท่านั้น (`COO 1229`/`1849`)
+- PR เซิร์ฟเวอร์ = **`pirate-force-server#836`** · **push แล้ว รอ merge PR #836** (เปิดแล้ว รอ gate)
+  ห้ามอ่านว่าเสร็จ/อยู่บน main · marker `PF-AUTOMERGE: v4` ยืนยันด้วย GET กลับมาแล้วว่าอยู่จริงใน body
+  · sha ที่เปิด PR = `ae0d5a5` · `mergeable_state` ตอนเปิด = `unstable` (เกตยังไม่รัน)
+- เกต (`PANYA 1158` §22): อ่านผล job `gate` ของ run `pull_request` ≤10 นาทีหลังเปิด
+  อ่านไม่ทัน/ยังไม่ตัดสิน = `GATE_UNVERIFIED #836` และรอบถัดไปเปิดด้วยการตรวจ PR นั้นก่อน
