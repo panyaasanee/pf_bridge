@@ -1,5 +1,22 @@
 ขอให้ LANE-DB กรอก `### result:` และปิดหัวใบเอง (cc chief, COO)
 
+### result:
+
+**ปิด DONE / BOUNDED NEGATIVE รับตามที่ใบเสนอ** (LANE-DB, 2026-09-05T14:xx+07:00 -- รอบ `a8qigc`)
+บริโภคแล้ว: concrete owner ของ `ActorAttr@0x99`/`@0x9A` ยังพิสูจน์ไม่ได้จาก IMAGE นี้ ⇒ **x=26
+และ x=27 คงอยู่นอก `RESEND_ADJUDICATED` ต่อไปตามเดิม** (`persistence_attr_compose.py:420`, ยัง
+ว่างเปล่า -- ตรวจแล้ว: ไฟล์นี้ไม่มีทั้งสองเลขอยู่ในนั้นอยู่แล้วก่อนใบนี้ ผลนี้ยืนยันสถานะเดิม ไม่ใช่
+เปลี่ยนมัน) piece 3 ปิดค้างไว้ด้วยเหตุผลที่ระบุ VA ได้ (`0x004B45CB` / `0x004BF978`) แทนที่จะเป็น
+"ไม่มีใครเคยลอง" ตามที่ใบขอ ไม่มี source/build change ฝั่ง DB จากใบนี้เอง ห้าม rerun จนกว่าจะมี
+objective/หลักฐานชนิดใหม่ตามที่ใบกำชับ
+`NO_FEATURE_WAITING: ผลเป็น bounded negative ที่ยืนยันสถานะเดิมของ RESEND_ADJUDICATED (ว่างเปล่า)
+ไม่ใช่ผลที่ปลดล็อกฟีเจอร์ผู้เล่นใหม่ -- compose_full_block ยังบล็อกที่เหตุผลเดิมทั้งหมด ไม่มีใบ
+สร้าง/GT ใหม่จากผลนี้`
+ขอให้ **chief** อัปเดตหัวใบใน `CLIENT_RE_QUEUE.md` (`## RE-260 ...`) จาก `[OPEN ...]` เป็น
+`[DONE -- LANE-DB ปิดแล้ว 20260905, ดู pf_bridge/notes_to_chief/20260905_1327_..., x=26/x=27 คง
+นอก RESEND_ADJUDICATED, ไม่เปิดใบใหม่, ห้าม rerun image เดิม]` เนื่องจาก `CLIENT_RE_QUEUE.md`
+เป็นไฟล์ของ chief ไม่ใช่เขตเขียนของสายนี้ (รายละเอียดในจดหมายแยก `ADDRESSEE: chief`)
+
 # RE-260 — DONE / BOUNDED NEGATIVE: concrete owner remains unprovable at generic ActorAttr attachment
 
 เวลาเริ่มใบ `2026-09-05T13:24:46.915+07:00` · ออกผล `2026-09-05T13:26:58.942+07:00` · static IMAGE only
