@@ -10431,6 +10431,12 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt251_<stamp>.sqlite3
 
 - links: `CLIENT_RE_QUEUE.md` (`RE-236` · ข้อ (ข) และวิธีปิดที่ `RE-119` T4 กำหนดไว้เอง) · `GT-246` (ANSWERED · payload มินิแมป 25 B) · `GT-120` (PASS · เส้นทางคลิก `M` -> เลือกเป้า -> GO!) · `external/PF_SERIALIZER_FIELDS.tsv:5521-5528` · `notes_to_chief/20260904_1226_LANE-UI-RE-TICKET-tracepath-record0-semantic-needs-attended-differential.md` · `notes_to_chief/20260905_0106_KA1A-BACKSWEEP-*.md` หมวด ก. ข้อ 2
 
+ATTENDED: กด `M` เปิดแผนที่ คัด list ตัวต่อตัว (ชื่อ+ลำดับแถว+หมวด) แล้วเลือกเป้า A (จดชื่อ/ลำดับ/หมวด) กด **GO!** ครั้งเดียว จดเวลา `T_GO_A` ถ่าย `S2-AFTER-GO-A` -- ทำซ้ำกับเป้า B ที่ชื่อ/ลำดับ/หมวดต่างจาก A ชัดเจน จด `T_GO_B` ถ่าย `S3-AFTER-GO-B` แล้วคลิกมินิแมป 1 ครั้งเป็น control
+ATTENDED: จับเฟรม `CTracePathReqVital 0x4391` สองเฟรม (A/B) ดูค่า `u16@+0x14` ของแต่ละเฟรมเทียบกับ `QUESTDATA_TH__QUEST.n_ID`/`CONSTDATA_TH__MOBS.n_ID`/เลขลำดับแถวที่จดไว้
+ATTENDED: PASS ชั้นจอ = ข้อความสีส้มขึ้น/หายตามที่คาด ไม่ค้าง ไม่ error ทั้งสองครั้งกด GO! + บรรทัดสีป้ายครบทุกภาพ + `OBSERVER_CONFIRMED: <ISO+07:00>` -- ไม่มีลายเซ็นนี้ = ไม่ PASS ไม่ว่าเฟรมจะครบแค่ไหน
+ATTENDED: บูตมาตรฐาน ไม่มีแฟล็ก `--*-scenario` ใด ๆ (dispatch `0x4391` เป็น production) เปิด capture root ใหม่ `capture_gt251_<stamp>\` ครอบทั้งเซสชัน
+ATTENDED: หน้าต่างแผนที่มีแถวเดียว/กด GO! ไม่ได้ = หยุด บันทึกภาพ รายงาน "เดินไม่ถึงจุดวัด" (ไม่ใช่ FAIL/NO-RESULT)
+
 - result:
   (ว่าง -- ผู้เทสกรอก)
 
@@ -11009,6 +11015,12 @@ findstr /N /C:"GM_WARP_SEND_OBSERVERS" /C:"SEND_FAILED" /C:"GM_WARP_SCENE_ROLLED
   `external/PF_FIELD_VALIDATION.tsv:1018-1023,418-421` (ทุกแถว `NOT_OBSERVED` ก่อนใบนี้) ·
   `pirate-force-server/src/pirateforce_foundation/inventory.py:39-49` (`INITIAL_BACKPACK`) · `pirate-force-server/src/pirateforce_foundation/store.py:575,674` (`_insert_initial_backpack`) ·
   `ATTENDED_SESSION_RUNBOOK.md` + `BRIDGE_BOOT_PROCEDURE.md` + `TEMPLATE_teardown_generic.ps1`
+
+ATTENDED: สร้างตัวละครใหม่ 1 ตัว ไล่คลิก/ไล่เมนูหาทางเข้า "แผงขายเอง" (เพดาน 15 นาที/20 คลิก) -- เจอแล้วเปิดแผง วางไอเทม 1 ชิ้น ตั้งราคา trial A แล้วเปลี่ยนเป็นราคา trial B ในเซสชันเดียวกัน (ห้ามปิด-เปิดแผงใหม่) -- แยกรอบไล่คลิกหา "คลังกิลด์" (เพดาน 10 นาที/15 คลิก) เปิดแล้วฝากไอเทม 1 ชิ้นแล้วถอนกลับ
+ATTENDED: ดูเฟรม `StallStartVital 0x30FE`/`StallOpenVital 0x2A3E`/`StallOperateVital 0x3DE4` (สองเฟรม trial A/B) และ `GCSS_GuildStorageOpenVital 0x8B66`/`GCGS_GuildStorageCmdVital 0x7F17` (ฝาก/ถอน) -- ใบนี้ไม่ตัดสินว่า `+0x20` แปลว่าราคา (เป็นของ `RE-261`)
+ATTENDED: PASS ชั้นจอ = ภาพ `S1-PRICE-A`/`S1-PRICE-B` อ่านตัวเลขราคาต่างกันได้ชัด + แผง/คลังเปิดจริงเห็นไอเทมย้าย (หรือข้อความปฏิเสธตามตัวอักษรถ้าเปิดไม่ได้ = ผล `E`) + บรรทัดสีป้ายครบทุกภาพ + `OBSERVER_CONFIRMED: <ISO+07:00>` -- ไม่มี = ไม่ PASS
+ATTENDED: บูตมาตรฐาน ไม่มีแฟล็ก scenario ใด ๆ `-SecondPasswordMode bypass` ตัวจับแพ็กเก็ตต้องเปิดตลอดใบ (`capture_v141\GAME_LIVE.txt` + `GAME_EVENTS_LIVE.txt`)
+ATTENDED: ไล่คลิกครบเพดานแล้วไม่เจอทางเข้า = ไปผล `C` (`NO-STALL-ENTRY-FOUND`/`NO-GUILDSTORAGE-ENTRY-FOUND`) แยกกันได้ต่อระบบ -- ไม่ใช่ใบล้ม
 
 - result: (ผู้เทสกรอก: PASS `A`/`PRICE-BYTE-NOT-CONFIRMED`/`NO-STALL-ENTRY-FOUND`/`NO-GUILDSTORAGE-ENTRY-FOUND`/`NO-GUILDSTORAGE-ACCESS` หรือ `NO-RESULT` · branch+commit ที่บูต · ผลของ `git grep` ด่านข้อ 0 · ทุกจุดคลิกของทั้งสองรอบไล่คลิกพร้อมเวลาและผลลัพธ์ · hex ดิบครบของ trial A/B (`StallOperateVital`) พร้อม `[G<#N]` · hex ดิบของ `StallStartVital`/`StallOpenVital`/`GCSS_GuildStorageOpenVital`/`GCGS_GuildStorageCmdVital` ถ้าจับได้ · ภาพ `S00-HOME`/`S1-STALL-OPEN`/`S1-ITEM-PLACED`/`S1-PRICE-A`/`S1-PRICE-B`/`S1-STALL-CLOSE`/`S3-GS-OPEN`/`S3-GS-DEPOSIT`/`S3-GS-WITHDRAW`/`S3-GS-CLOSE` (เฉพาะที่ถ่ายได้จริง) + sha256 ทุกภาพ · **บรรทัดสีป้ายครบทุกป้ายทุกภาพ** · sha canonical ก่อน/หลัง · `integrity_check` สองครั้ง · NO-CRASH/CRASH · teardown รันแล้ว (boot stamp ไม่เกิน 420 นาที) · `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>` · 🔴 **คัดลอกผล hex + คำตัดสิน `+0x20` (ถ้าวัดได้) ไปกรอกใน `RE-261:result` ด้วยตัวเอง (LANE-UI) — ใบนี้ไม่กรอกให้**)
 
