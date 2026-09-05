@@ -1,0 +1,1 @@
+consumed by chief round cooif2/R357: already satisfied -- PROCESS_GATES.md:257-258 carries the PYTHONDONTWRITEBYTECODE=1 + python3 -B / BYTECODE_PURGED: rule (checked this round, text present).

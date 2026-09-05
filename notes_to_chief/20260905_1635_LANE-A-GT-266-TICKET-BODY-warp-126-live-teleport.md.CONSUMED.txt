@@ -1,0 +1,1 @@
+consumed by chief round cooif2/R357: full ticket body filed into GAME_TEST_QUEUE.md as GT-266, flipped RESERVED to READY (pirate-force-server#838 merged to main 18:04+07 before this round). Ready for the next attended session.
