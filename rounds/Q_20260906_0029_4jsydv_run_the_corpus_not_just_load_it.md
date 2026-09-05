@@ -1,4 +1,4 @@
-# LANE-Q round `4jsydv` -- 2026-09-05T23:59+07:00 to 2026-09-06T0x:xx+07:00
+# LANE-Q round `4jsydv` -- 2026-09-05T23:59+07:00 to 2026-09-06T00:41+07:00
 
 ## Lock
 
@@ -135,19 +135,19 @@ is worth remembering next time anyone re-derives one of these census numbers by 
 - `python3 tools_bridge/pf_gate_preflight.py --repo ../pirate-force-server` (run from this `pf_bridge`
   checkout) = **PREFLIGHT PASS** (cp874, no new skips, main is in this branch, precondition census
   agrees, both branches `claude/*`, bridge files under their size ceilings).
-- Full suite, once, on the final merged tree (`origin/main` already an ancestor): **PENDING AT WRITE
-  TIME -- started before this file was written, still running; see the claim-PR's own body/commit for
-  the actual pass/fail line once it finishes. Not pushing until it reports green**, per house rule
-  ("รันชุดเต็มครั้งเดียวต่อรอบ ... เป็น commit สุดท้ายจริง").
+- Full suite, once, on the final merged tree (`origin/main` already an ancestor): **11457 passed, 327
+  skipped, 21301 subtests passed, 0 failed (600.92s)**. Ran in the background while this file was being
+  drafted; not pushed until it reported green, per house rule ("รันชุดเต็มครั้งเดียวต่อรอบ ... เป็น
+  commit สุดท้ายจริง").
 - ASCII-checked every changed file (0 bytes above 127), including the new JSON pin entry.
 
 ## Sent (SHA/PR)
 
 - `pirate-force-server` branch `claude/happy-tesla-4jsydv`: commit `6e8f414` (run_corpus_entry_points +
   tests + docs + pin) + merge commits bringing `origin/main` (which itself picked up round `456vso`'s
-  `#862`, merged mid-round -- confirmed via `git merge-base --is-ancestor`) -> PR opening after this
-  file (see claim PR `#1395`'s body once updated, or the next round file, for the exact PR number and
-  marker-confirmed-present line).
+  `#862`, merged mid-round -- confirmed via `git merge-base --is-ancestor`) -> PR `#868` **open, not
+  draft, `PF-AUTOMERGE: v4` confirmed present by GET** (touches no boot/login/actor-identity/client-frame
+  code, so opened directly per `PROCESS_GATES.md`).
 - `pf_bridge` branch `claude/gracious-lovelace-4jsydv`: this round file + one new letter
   (`notes_to_chief/20260906_0029_LANE-Q-ASK-COO-trigger-id-to-script-file-mapping-needs-an-RE-ticket.md`)
   replace `rounds/Q_20260905_2359_4jsydv_claim.md` on this branch.
@@ -199,4 +199,4 @@ persists across files or across calls to the function, and nothing here reads or
 
 -- LANE-Q (round `4jsydv`)
 
-SCOREBOARD: STUCK | เซิร์ฟเวอร์รันสคริปต์ 616 ไฟล์จริงและนับได้ว่าฟังก์ชัน API ตัวไหนยังเป็น stub อยู่กี่ครั้ง (5057 ครั้ง จาก 137 ชื่อ ไม่รวม 346 ครั้งที่เป็นของจริงแล้ว) พร้อมเจอบั๊กจริง 2 แบบในสคริปต์ต้นฉบับที่ไม่เคยถูกมองเห็นมาก่อน แต่ผู้เล่นยังไม่เห็นอะไรเปลี่ยนบนจอ เพราะงานหลัก (Trigger.*/Quest.* ต่อ) ติดคอขวดนอกเขต Q ทั้งสามข้อ (ตาราง trigger-id->สคริปต์ที่ไม่มีในเอกสาร, PR ประตูเควสของ DB ยังไม่ขึ้น main, seam ที่เหลือของ Trigger.* ต้องรอสายอื่น) | server PR (เลขรอตอนจบรอบ, commit `6e8f414`) · pf_bridge round file นี้ · จดหมาย ASK-COO เรื่อง RE ticket
+SCOREBOARD: STUCK | เซิร์ฟเวอร์รันสคริปต์ 616 ไฟล์จริงและนับได้ว่าฟังก์ชัน API ตัวไหนยังเป็น stub อยู่กี่ครั้ง (5057 ครั้ง จาก 137 ชื่อ ไม่รวม 346 ครั้งที่เป็นของจริงแล้ว) พร้อมเจอบั๊กจริง 2 แบบในสคริปต์ต้นฉบับที่ไม่เคยถูกมองเห็นมาก่อน แต่ผู้เล่นยังไม่เห็นอะไรเปลี่ยนบนจอ เพราะงานหลัก (Trigger.*/Quest.* ต่อ) ติดคอขวดนอกเขต Q ทั้งสามข้อ (ตาราง trigger-id->สคริปต์ที่ไม่มีในเอกสาร, PR ประตูเควสของ DB ยังไม่ขึ้น main, seam ที่เหลือของ Trigger.* ต้องรอสายอื่น) | server PR `#868` (commit `6e8f414`) · pf_bridge round file นี้ · จดหมาย ASK-COO เรื่อง RE ticket
