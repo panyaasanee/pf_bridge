@@ -68,7 +68,9 @@ burst ตอนนี้ = `[MOB_COMBAT_ANNOUNCE, MOB_COMBAT_BAR, MOB_LOOT_DROP]
   และตัวแก้นี้**ลด**การลบโลกทั้งฉาก (กฎ delta) ไม่ใช่เพิ่ม
 - **ชุดเต็มรันสองครั้งในรอบเดียว** — เหตุผลตามที่กฎบังคับให้เขียน: ครั้งแรกจับบั๊กตำแหน่งได้ (1 failed / 10912 passed / 323 skipped
   / 20216 subtests · 410 วิ) ⇒ แก้โค้ด ⇒ ต้องรันใหม่บนต้นไม้ที่ merge `origin/main` สด ตามกฎ "ห้าม push สภาพที่ไม่เคยถูกรันเต็ม"
-- `ADVERSARY` สั่งตั้งแต่ต้นงาน (บนคอมมิต `d8b561ce` + ต้นไม้ bridge) — ผลยังไม่คืนตอนเขียนบรรทัดนี้
+- **`ADVERSARY_PENDING #827`** — สั่งตั้งแต่ต้นงาน (บนคอมมิต `d8b561ce` + ต้นไม้ bridge) ผลยังไม่คืนตอน push
+  ⇒ ตามกฎ `COO 0903_2345` push ตามเดิม ห้ามถือล็อก · **รอบ LANE-E ถัดไปหยิบผลนี้เป็นงานแรกก่อน claim**
+  · ห้ามใครเขียนว่า "ผ่าน adversary" สำหรับ `#827` จนกว่าผลจะคืน
 
 ## งานสำรอง (3 ข้อ · เริ่มได้ทันทีไม่รอใคร · ตามคิวของ chief เอง)
 1. **วัด WIRED v2 จริง** — บูต headless แล้ว grep คอนโซลหา emission ของแต่ละโมดูลเลนที่ `production_allowed` (หนี้ค้างสามรอบ)
@@ -77,5 +79,6 @@ burst ตอนนี้ = `[MOB_COMBAT_ANNOUNCE, MOB_COMBAT_BAR, MOB_LOOT_DROP]
 3. **`CHIEF_CONTINUATION.md` -> ≤ 30 KB และ `AGENTS.md` -> ≤ 25 KB** (หัวข้อ 17 ข้อ 9 ง/จ · ใบละ PR · ค้างมาหลายรอบ)
 
 ## PR ของรอบนี้
-- `pirate-force-server` — ต่อสาย ground companion (2 commit · 3 ไฟล์) — **push แล้ว รอ merge**
-- `pf_bridge` — ใบนี้ + คิว + `AGENTS.md` + จดหมาย + stub — **push แล้ว รอ merge**
+- `pirate-force-server` **`#827`** — ต่อสาย ground companion (2 commit + merge main · 3 ไฟล์) — **push แล้ว รอ merge**
+- `pf_bridge` **`#1322`** — ใบนี้ + คิว + `AGENTS.md` + จดหมาย + stub — **push แล้ว รอ merge**
+🔴 ห้ามอ่านสองบรรทัดนี้ว่า "เสร็จ/อยู่บน main" — งานอยู่บน main ต่อเมื่อรอบถัดไปเห็น `merged=true`
