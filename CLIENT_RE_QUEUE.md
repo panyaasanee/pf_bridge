@@ -2319,7 +2319,7 @@ and not self.v138_marker1_population_sent` (`TARGET_VITAL=0x1ADD`, `CHOOSE_NPC=0
 - wire/DB: แผนที่ฟิลด์ครบ 54 ไบต์ + เลข descriptor ที่ส่งจริง พร้อม file:line ของ builder
 - client-observable: ต้องเป็นใบเทสรอบใหม่ (แก้แล้วคลิก Columbus ต้องได้บทของ Columbus) -- ยังไม่เปิด
 
-## 🔬 RE-138 NAME-LABELS-VANISH-AFTER-MOVE-001 [STATIC-ON-CLOUD]: ป้ายชื่อ (เขียว) ของทุกตัวในแมพหายหลังผู้เล่นเดินออกจากบริเวณแรก เหลือแต่ป้ายฉายา (ฟ้า) -- รอบ reconcile ส่งอะไรไม่ครบ  [✅ CLOSED/ANSWERED -- ปิดโดย chief (ผู้เปิดใบ) รอบ `l39ees` (R322) 2026-09-03T16:01+07:00 ตาม `COO-DECISION 20260903_1546` · ผล: `notes_to_chief/20260903_0253_RE-138-RESULT-BASICATTR-OMISSION-PRESERVES-NAME.md` · **คำถามของใบตอบแล้ว และสมมติฐานของใบเองถูกหักล้าง**: mask ที่แคบกว่า **ไม่ล้าง** ชื่อเดิม -- BasicAttr merge `0x00465610` ตรวจ bit `0x0001` ที่ `0x0046564E` แล้วเมื่อ bit **ถูกละ** จะ copy ชื่อเดิมจาก `source+0x28` (`0x00465654..0x0046565B`) ⇒ การที่เซิร์ฟเวอร์ละ name bit **ไม่ใช่** ต้นเหตุที่ป้ายชื่อหาย · ฝั่งเซิร์ฟเวอร์: retained กับ entrant ได้ BasicAttr mask `0x030C` เท่ากัน ไม่มี name bit ทั้งคู่ (`population.py:206-213`) ต่างกันแค่ entrant ได้ MovementAttr `0xFF` (`:214-223`) ⇒ ประโยค "retained เป็น NPCAttr-only" ไม่ได้แปลว่าไม่มี BasicAttr · 🔴 **ชั้น client-observable ของใบนี้ไม่เคยเปิด ⇒ ห้ามยกใบนี้ไปเป็นฐานว่า "ป้ายชื่อไม่หายแล้ว"** อาการที่เจ้าของเห็น (ภาพ 235212) **ยังไม่มีเจ้าของ** -- ที่เหลือคือ object lifetime / actor generation reuse (กรณีที่ **ไม่มี attr เก่าให้ merge**) ซึ่งใบนี้ระบุเป็น nonclaim ของตัวเอง · chief ไม่เปิดใบใหม่ในรอบนี้ตามคำสั่ง `NOW.md` P-2 (ห้ามเปิด RE ใหม่) เสนอ COO ในจดหมายรอบ R322]
+## 🔬 RE-138 NAME-LABELS-VANISH-AFTER-MOVE-001 [STATIC-ON-CLOUD]: ป้ายชื่อ (เขียว) ของทุกตัวในแมพหายหลังผู้เล่นเดินออกจากบริเวณแรก เหลือแต่ป้ายฉายา (ฟ้า) -- รอบ reconcile ส่งอะไรไม่ครบ  [✅ CLOSED/ANSWERED -- ปิดโดย chief (ผู้เปิดใบ) รอบ `l39ees` (R322) 2026-09-03T16:01+07:00 ตาม `COO-DECISION 20260903_1546` · ผล: `notes_to_chief/20260903_0253_RE-138-RESULT-BASICATTR-OMISSION-PRESERVES-NAME.md` · **คำถามของใบตอบแล้ว และสมมติฐานของใบเองถูกหักล้าง**: mask ที่แคบกว่า **ไม่ล้าง** ชื่อเดิม -- BasicAttr merge `0x00465610` ตรวจ bit `0x0001` ที่ `0x0046564E` แล้วเมื่อ bit **ถูกละ** จะ copy ชื่อเดิมจาก `source+0x28` (`0x00465654..0x0046565B`) ⇒ การที่เซิร์ฟเวอร์ละ name bit **ไม่ใช่** ต้นเหตุที่ป้ายชื่อหาย · ฝั่งเซิร์ฟเวอร์: retained กับ entrant ได้ BasicAttr mask `0x030C` เท่ากัน ไม่มี name bit ทั้งคู่ (`population.py:206-213`) ต่างกันแค่ entrant ได้ MovementAttr `0xFF` (`:214-223`) ⇒ ประโยค "retained เป็น NPCAttr-only" ไม่ได้แปลว่าไม่มี BasicAttr · 🔴 ~~ชั้น client-observable ของใบนี้ไม่เคยเปิด ⇒ ห้ามยกใบนี้ไปเป็นฐานว่า "ป้ายชื่อไม่หายแล้ว"~~ **ปิดแล้ว (LANE-A รอบ `2mnd7b` 2026-09-05T12:0x+07:00, NOW.md `1152` ข้อ 4)**: `GT-250` (R317, `notes_to_chief/20260905_1125_KA1A-R317-RESULTS-*.md` §2) วัดตรงอาการเดิม (ภาพ 235212 = ป้ายชื่อหายหลังเดินออกนอกสายตา) บนบิลด์ปัจจุบัน — เดินออกจนพ้นสายตา (X:-4,735 Y:-1,219) แล้วกลับ: **ป้ายชื่อครบทุกตัวเหมือนเดิม ไม่มีตัวไหนเหลือแต่ title** ⇒ **NEGATIVE, ไม่ reproduce** หลัง fix นี้ขึ้น main · ชั้น client-observable ของใบนี้ปิดด้วยผลลบที่วัดจริงแล้ว object lifetime / actor generation reuse ที่เคยเป็น nonclaim ค้างไว้ **ไม่ใช่ต้นเหตุที่ยังพิสูจน์อยู่ ณ ตอนนี้** เพราะอาการไม่เกิดให้ไล่ต่อ (ถ้าเกิดใหม่ในอนาคต NOW.md M-ladder ระบุเจ้าของถัดไป = LANE-A หลัง P-2) อาการที่เจ้าของเห็น (ภาพ 235212) **มีเจ้าของแล้ว: RE-138's BasicAttr-omission fix, ยืนยัน client-observable ด้วย `GT-250`** · chief ไม่เปิดใบใหม่ในรอบนี้ตามคำสั่ง `NOW.md` P-2 (ห้ามเปิด RE ใหม่) เสนอ COO ในจดหมายรอบ R322]
 
 **ADDRESSEE: RE** · ผู้เปิดใบ: chief (สาย E) รอบ `wi1m62` (R218) 2026-08-29T01:0x+07:00
 **ต้นเรื่อง:** ใบผลเดียวกัน ข้อ ④.2 (เจ้าของเห็นเอง ยืนยันแล้ว)
@@ -4701,6 +4701,12 @@ apply ยังไม่มีใครดู · 🔴 **ใบ R306 เขีย
   span sha ทุกช่วง · timestamp)
 
 
+## 🔬 RE-227 CAPTAIN-REPORT-ON-ISLAND-CONTACT-001 [🔵 **DONE / BOUNDED — ปิดโดย LANE-A รอบ `2mnd7b` 2026-09-05T12:0x+07:00 (NOW.md `1152` ข้อ 4)**]
+
+> **ปิดยังไง**: ชั้น ① STATIC (AddSurveyData → proximity ≤500 → local prompt → confirm ส่ง `EnterInstance` body `12 <u16> 0B 06`) ยืนตามผลเดิม (`notes_to_chief/20260904_0724_RE-227-RESULT-*.md`) และ**เป็นกลไกที่ขึ้น main แล้วจริง**: `world_m2_provisioning_trial.py`/`navigationex_survey_record.py` (PR เซิร์ฟเวอร์ `#753`/`#760`/`#797`/`#810`, ล่าสุด `RE-256` ปิด outer-presence byte) — `GT-233` READY รอเครื่อง Panya ยืนยัน E2E บนจอ
+> ชั้น ② (ทาบกับสาย) ของคำถามเดิม**เปลี่ยนรูปคำถาม ไม่ใช่ปิดตามเกณฑ์เดิมที่ตั้งไว้แต่แรก** — เกณฑ์เดิมสมมติว่า `TriggerVital 0x1FB2` (id `153`/`154`) อาจเป็นอีกเส้นทางยืนยัน สมมติฐานย่อยนั้นถูกแยกเป็นใบ `RE-234` ไปแล้วตั้งแต่รอบ `0foax0` และตอนนี้ `RE-234` กลับผลแล้ว (`notes_to_chief/20260904_1953_RE-234-RESULT-*.md`, DONE/MIXED): (ก) `GT-228`/R308 (`notes_to_chief/20260904_1331_KA1A-R308-RESULTS-*.md`) วัดว่าเรือชนเกาะจริงยิง `TriggerVital` id **`2`**(Prison Exile)/**`3`**(Spice Paradise) — **ไม่ใช่** `153`/`154` ตามที่ใบนี้เดาไว้แต่แรก (ก) ถูกหักล้าง (ข) `RE-234` พิสูจน์ static ว่า natural handler ของ `TriggerVital` response เป็น **success no-op ห้าไบต์** ไม่เปิดหน้าต่างอะไรเลย ⇒ เส้นทางคู่แข่งที่ใบนี้เปิดค้างไว้ (`0x1FB2` response) **ไม่ใช่กลไกจริง** ยืนยันซ้ำว่ามีทางเดียวคือ AddSurveyData
+> ⇒ **CANCELLED (secondary hypothesis) / DONE (primary hypothesis, shipped)** — `covered by RE-234` สำหรับครึ่งที่ใบนี้ทิ้งไว้เป็นคำถามเปิด · ไม่มี BUILD_IMPACT ใหม่ (กลไกที่ยืนยันคือกลไกที่โค้ดทำอยู่แล้ว) · เหลือเฉพาะการยืนยัน on-screen ซึ่งเป็นของ `GT-233` (คนละใบ ไม่ใช่ของ `RE-227`)
+
 ## 🔬 RE-227 CAPTAIN-REPORT-ON-ISLAND-CONTACT-001 [PARTIAL -- ยังไม่ปิด (OPEN) · ร่างโดย LANE-A รอบ `xv20xj` · 🔴 `[STATIC-ON-BRIDGE]`]
 
 > 🟡 **สถานะ 2026-09-04T07:24+07:00 (กรอกโดย chief รอบ `8nh6q5`/R334 ตาม `COO-DECISION 20260904_0746` ข้อ 2 · ถ้อยคำตามที่ runner เขียนท้ายใบ ไม่แก้)**
@@ -4892,6 +4898,14 @@ apply ยังไม่มีใครดู · 🔴 **ใบ R306 เขีย
 - **ผลกระทบถ้าไม่ตอบ**: LANE-CS ไม่มีเส้นทางอื่นตอบคำถามชนิดสกิลตอนนี้ · ไม่บล็อกอะไรใน M1-M5 (LANE-CS ยังไม่แตะดาเมจจนกว่าจะอ่าน `mob_combat.py` ของ LANE-B ให้ครบตาม `0755`)
 
 ---
+
+## 🔬 RE-234 CLIENT-RESPONSE-PATH-FOR-TRIGGERVITAL-1FB2-ISLAND-001 [🔵 **DONE / MIXED PASS + BOUNDED-NEGATIVE — ปิดโดย LANE-A รอบ `2mnd7b` 2026-09-05T12:0x+07:00**]
+
+> ผล: `notes_to_chief/20260904_1953_RE-234-RESULT-TRIGGERVITAL-NOOP-ID-ONLY-UNSAFE.md` (repro verifier `pf_bridge/staged/re234_static_verify.py` PASS 18/18)
+> **(1)** natural handler ของ `TriggerVital` response = `[0x00710440,0x00710445)` **success no-op ห้าไบต์** (`B0 01 C2 04 00`) — ไม่อ่าน ไม่เปิด UI ไม่มีผลบนจอ
+> **(2)** ของสองเส้นทางที่ใบนี้ถาม มีทางเดียวที่พิสูจน์ว่าเปิดหน้ารายงานกัปตันได้จริง = **AddSurveyData + proximity ≤500** (`RE-227`) · `TriggerVital` response **ไม่ใช่** เส้นทางนั้น (พิสูจน์แล้วจากข้อ 1)
+> **(3) BOUNDED-NEGATIVE**: พิสูจน์ไม่ได้ว่า `TriggerVital` id `2`/`3` เป็น namespace เดียวกับ `TEXTDATA_TH__Trigger_TIP` (`GT-228` เห็น id `3` ทั้งตอนชนเกาะและตอนแล่นเรือปกติ) ⇒ `lane_hooks/lane_a_island_trigger_log.py`'s `M2_OBSERVED_ISLAND_TRIGGER_IDS` **เป็น log-only, ไม่มี BUILD_IMPACT ต่อ production** แต่ถือเป็นตัวจำแนกที่ไม่ปลอดภัยถ้าใครเอาไปใช้ตัดสินโลก — บันทึกเป็นงานสำรอง (แคบ scope ด้วย scene/context ก่อนใช้อ้างอิงเกาะ) ยังไม่ทำรอบนี้ (ไม่บล็อกอะไร)
+> ปิด `RE-227` ในรอบเดียวกันโดยอ้างผลนี้ (ดูหัวใบ `RE-227` ด้านบน)
 
 ## 🔬 RE-234 CLIENT-RESPONSE-PATH-FOR-TRIGGERVITAL-1FB2-ISLAND-001  [OPEN -- 🔴 `[STATIC-ON-BRIDGE]` · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-A** · ผู้บริโภคผล = LANE-A]
 
@@ -5640,5 +5654,45 @@ bounded negative ⇒ LANE-DB ยังคง **ไม่** เติม `RESEND_
 
 ### result:
 (ว่าง -- รอ attended capture ผ่าน `GT-262`)
+
+---
+
+## RE-263 PAIR-RELATION-ZERO-GATE-REACHABILITY-AND-DEFAULT-BIT-001  [OPEN -- `[STATIC-ON-BRIDGE]` (artifact ที่ commit ไว้แล้ว ไม่ต้องรอเครื่อง Panya เว้นแต่ผลชี้ว่าต้องอ่าน disassembly ที่ยังไม่มีในสะพาน แล้วให้แก้ป้ายเป็น `[NEEDS-CLIENT-IMAGE]`) · **เจ้าของใบ/ผู้บริโภคผล = LANE-GM** (เหมือน `RE-222` เดิม) · ผู้ทำ = `pf-static-re` บนคลาวด์ · **ไม่บล็อกใคร** -- P-2 ยังรอ `faction_is_a_fallback_operand_only` เหมือนเดิม ใบนี้แค่เปิดทางที่สองที่ยังไม่มีใครเดิน]
+
+> numbering: ตัวนับร่วมสองคิว คืนสูงสุดที่ `261` (`RE-261`) · `262` = `GT-262` (จองแล้ว) ⇒ ใบนี้ `263`
+> ที่มา: `notes_to_chief/20260905_1150_LANE-GM-TO-CHIEF-re-ticket-request-pair-relation-zero-gate-reachability.md` (รอบ `srn7ksvmt`)
+
+## ค้นแล้วก่อนเปิดใบ (ผลการ grep -- กติกา `AGENTS.md` §7 · `COO 0646` ข้อ 2 -- ยกจากจดหมายต้นทาง)
+**เจอ** -- `notes_to_chief/reference_codex_attr/PF_A2_ATTR_FIELD_DELTA.tsv` rows 6-7 (`grep -n "0x0043C531" notes_to_chief/reference_codex_attr/PF_A2_ATTR_FIELD_DELTA.tsv`): span `0x0043C531`-`0x0043C547` -- อยู่ใน `RELATIONSHIP_PREDICATE_SPAN` เดียวกับที่ `RE-195` วัด (`0x0043C380`-`0x0043C63C`) และมาก่อน `FACTION_COMPARATOR_SOLE_CALL_SITE_VA` (`0x0043C5E0`) · ทดสอบ `ActorAttr+0x98` bit `0x04000000` · semantic name ที่ TSV ตั้งเอง: `CNetActor_pair_relation_zero_gate__CMyActor_value_1_selects_LABEL_NAME_FontStyleID_56_else_55` (พูดถึง FontStyleID ตรง ๆ 56 vs 55) · status = `PROVEN_ROLE_ONLY` (คำของ TSV เอง: "structural/consumer role is proved but the broader gameplay noun or full value domain is not unique") · แถวนี้มาจาก census คนละรอบ **ไม่เคยถูก cross-reference กับ `faction_is_a_fallback_operand_only` มาก่อน**
+**ไม่เจอ** -- `grep -rn "FontStyle" gamedata/ external/ archive/ notes_to_chief/consumed/` [วัดแล้ว chief `cwde5m`/R353 addendum, แทนบรรทัดฉบับแรกที่ตัดสินโดยหมวดหมู่ ไม่ใช่ grep จริง — `AGENTS.md` บรรทัด "ประโยคปฏิเสธต้องมี grep กำกับ"]: hit จริง 49 ไฟล์ ทั้งหมดอยู่ใน `archive/` เป็นประวัติของ `RE-191`/style 63 RGB และของจดหมาย `20260831_2245_KA1B-TO-CHIEF-nameboard-fontstyle-selector-presentation-only.md` (ดูหมายเหตุด้านล่าง) -- **ไม่มีแถวไหนใน `gamedata/tables/` เอง** ตอบคำถามสามข้อของใบนี้โดยตรง (reachability ของมอน server-sent ผ่าน gate นี้) `external/00_SEARCH_HERE_FIRST.md`/`gamedata/00_SEARCH_HERE_FIRST.md` เอง ไม่มีแถวชี้มาที่ span `0x0043C400`-`0x0043C547`
+🔴 **สิ่งที่เจอใน archive/ ที่ต้องอ่านก่อนตอบใบนี้ (ไม่ใช่ nonclaim ปกติ)**: `archive/notes_to_chief_2026-08/20260831_2245_KA1B-TO-CHIEF-nameboard-fontstyle-selector-presentation-only.md:34` -- **`FontStyle 55 = ขาว, 56 = ชมพูตัวหนา` วัดจากจอจริงแล้ว (MEASURED, client-observable, probe 27 ส.ค.)** ไม่ใช่แค่ IMAGE layer เหมือนแถวอื่นของ TSV เดียวกัน -- ใบนี้ **ไม่ได้ถามความหมายของ 55/56** (รู้แล้ว) แต่ถามว่า**เซิร์ฟเวอร์ไปถึง gate ที่เลือกระหว่างสองค่านั้นได้ไหม**สำหรับมอน (คนละคำถามกับที่ `2245` ปิดไปแล้วสำหรับผู้เล่น) -- ห้ามอ่านผลของใบนี้เป็นการค้นความหมายสี ความหมายรู้แล้ว
+
+## ตรวจไม่ให้ทับ `RE-195` (ปิดแล้ว บังคับตาม `AGENTS.md` §7 "ก่อนเปิดใบ RE ต้อง grep... สิ่งที่ค้นเจอแล้วต้องถูกตัดออกจากคำถามของใบ")
+`RE-195` (`CLIENT_RE_QUEUE.md:3914`, CLOSED BOUNDED-NEGATIVE) วัดตาราง style **56/58/59/60/61 ครบแล้ว** แต่บรรทัดสรุปของมันเอง (อ้างที่ `CLIENT_RE_QUEUE.md:5313`) ระบุตรง ๆ ว่า **"ไม่มีแถวชื่อ ชมพู"** ในตารางนั้น -- คือ RE-195 วัดตระกูล 56/58/59/60/61 ในความหมาย "reachable ทางไหน" แต่ตัวแยก **55 vs 56** (ซึ่งคือคำถามของใบนี้) ไม่ได้อยู่ในผลของมัน ⇒ **คำถามของใบนี้ไม่ถูกตัดออก ยังเป็นคำถามที่ยังไม่มีคำตอบจริง** ไม่ใช่การถามซ้ำ
+
+## คำถามของใบ (จาก `PROVEN_ROLE_ONLY` ไปสู่คำตอบที่ใช้ได้จริง)
+1. มอนที่ผ่านทาง `field_mobs`/`load_roster` (measured-bypass identity class เดิม) เคยไปถึง gate นี้จริงไหม หรือ gate นี้ถูกข้ามไปพร้อมกับ typed `CNetNPC` tail ทั้งก้อน (อ่าน disassembly/RTTI จริง ไม่ใช่เดาจากชื่อ)
+2. ถ้าไปถึง -- ไคลเอนต์อ่านค่า default ของ `ActorAttr+0x98` bit `0x04000000` อย่างไรเมื่อเซิร์ฟเวอร์ไม่เคยส่งบิตนี้เจตนา (เราไม่เคยส่งบิตนี้)
+3. gate นี้กับ faction comparator (`0x0043C5E0`) เป็นเส้นทาง**คู่ขนาน**ที่ predicate เดียวกันเช็คก่อนถึงจุดไหน หรือเป็นเส้นทาง**แยกกันคนละผล** (ถ้าขนาน อาจเป็นทางที่สองที่ไปถึง FontStyleID ได้โดยไม่ผ่าน faction เลย)
+
+## เกณฑ์ปิดใบ (ชั้น static เท่านั้นในไฟล์นี้)
+- ปิดใบ **PASS/ANSWERED** ได้เมื่อทั้งสามข้อข้างบนมีคำตอบจาก disassembly/RTTI จริง (ไม่ใช่จากชื่อ semantic ที่ TSV ตั้งเอง) พร้อม VA/offset ที่อ้างอิงได้
+- ปิดใบ **BOUNDED-NEGATIVE** ได้ถ้าข้อ 1 ตอบว่า "ไม่ถึง" (มอน server-sent ข้าม gate นี้ไปกับ typed tail ทั้งก้อน) -- คำตอบนี้ถือว่าปิดใบเช่นกัน (ปิด P-2 เส้นทางที่สองนี้เป็น dead end ไม่ใช่ความล้มเหลวของใบ) และไม่ต้องตอบข้อ 2/3 ต่อ
+- ปิดใบ **NEEDS-CLIENT-IMAGE** ได้ถ้า `pf-static-re` พบว่าต้องอ่าน disassembly ที่ไม่มีในสะพาน -- แก้ป้ายแล้วส่งต่อคิว RE runner ตามปกติ ไม่ใช่การปิดใบ
+
+## ใบนี้ไม่ขอ
+ไม่ขอเปลี่ยนคำตอบของ `P2_COLOR_WIRING_BLOCKERS` (`unaddressed_blockers()` ยังคืน 1 ตัวเหมือนเดิม) · ไม่ขอแตะ `gm/name_color_gate.py` เพิ่มจากที่ปักไว้แล้วในรอบ `srn7ksvmt` (ดู PR เซิร์ฟเวอร์ของรอบนั้น) · ไม่อ้างว่าเร่งด่วนกว่าใบอื่นในคิว · ไม่ขอความหมายของ FontStyle 55/56 (รู้แล้ว MEASURED — ดูช่องค้นด้านบน)
+
+## ห้ามสรุปสิ่งเหล่านี้ (nonclaims)
+① `PROVEN_ROLE_ONLY` เป็นคำตัดสินของ `PF_A2_ATTR_FIELD_DELTA.tsv` เอง (ชั้น IMAGE) ไม่ใช่คำตัดสินของใบนี้ ② ห้ามเดาคำตอบข้อ 3 (ขนาน/แยกกัน) จากชื่อ semantic ที่ TSV ตั้งเอง ("`pair_relation_zero_gate`" เป็นชื่อที่คนตั้งใบ TSV ให้ ไม่ใช่ผลจาก disassembly ของใบนี้) ③ การที่ span อยู่ใน `RELATIONSHIP_PREDICATE_SPAN` เดียวกับ `RE-195` **ไม่ได้แปลว่า** reachability ของทั้งสองจุดเหมือนกัน (ดูหัวข้อ "ตรวจไม่ให้ทับ RE-195" ด้านบน) ④ ไม่มีข้อมูล capture ของมอนจริงในใบนี้ — สามข้อคำถามตอบได้จาก static เท่านั้น ถ้าตอบไม่ได้จาก static ⇒ ป้าย `[NEEDS-CLIENT-IMAGE]`
+
+## ถ้าผลออกทางลบ
+ข้อ 1 ตอบ "ไม่ถึง" (มอน server-sent ข้าม gate นี้ไปกับ typed `CNetNPC` tail ทั้งก้อน) ⇒ **ปิดใบ BOUNDED-NEGATIVE** ตามเกณฑ์ข้างบน ไม่ใช่ความล้มเหลว — เป็นคำตอบที่ปิดเส้นทางที่สองของ P-2 ให้ชัดว่าไม่ใช่ทางออก และ `faction_is_a_fallback_operand_only` (ของ `RE-222`) ยังเป็นทางเดียวที่เหลือเหมือนเดิม · ไม่ว่าผลออกทางใด **ไม่กระทบ `P2_COLOR_WIRING_BLOCKERS`** โดยตรง (ใบนี้ไม่ได้ขอแก้บล็อกนั้น)
+
+## ผลไปถึงใคร
+จดหมายผลจ่าหน้า **LANE-GM** (cc chief) · LANE-GM บริโภคเองและปิดหัวใบนี้ในรอบของตัวเอง (§5)
+
+### result:
+(ว่าง)
 
 ---
