@@ -10015,30 +10015,29 @@ owner/consumer of result = LANE-CS -- runs attended, piggybacked in the same att
 (same class_id=1/level=1 character, saves a second scheduled sitting) -- NOT the same server process as
 GT-243 (see BOOT ORDER note, GT-243's own server args explicitly forbid any `--*-scenario` flag)
 
-> NUMBERING NOTE: `GT-249`/`RE-249` = 0 hit ทั้งสามที่ก่อนวาง (chief รอบ `epkucn`/R344) ใบนี้ไม่แตะ/ไม่
-> reopen/ไม่ supersede `GT-058`/`GT-059`/`GT-064` (archived CLOSED — คำถามคนละอัน: หน้าต่างเปิดหรือไม่)
-> หรือ `GT-116` (CLOSED PASS 2026-08-28, `GAME_TEST_QUEUE.md:5183`: หน้าต่างเปิดสำหรับตัวละคร
-> class_id=1/level=1 ที่มี 0 entries) หรือ `GT-243` (PENDING, คำถามคนละอัน: hotbar dispatch producer ของ
-> สกิล 99) ใบนี้เป็นใบใหม่ เปิดตาม `COO-DECISION 20260904_2154` ตอบจดหมาย LANE-CS เอง
+ATTENDED: บูต `--learn-skill-result-hypothesis-scenario ...learn_sweep.json` (คนละบูตกับ GT-243) Gladiator lv1 กด K ถ่ายภาพ baseline (S-BASE-K)
+ATTENDED: focus แชท พิมพ์ `SKILLCONTENT` (12 ตัว) Enter ดึง focus ออก รอ >=20s กด K ถ่ายภาพ (S-FINAL-K)
+ATTENDED: ผ่าน = S-FINAL-K มี 4 รายการ: VIP Strive Jump/Gladiator Basic Training/Normal Attack/Strive Jump
+ATTENDED: ไม่ผ่าน = 0 รายการ/ไม่ตรงชื่อแม้เฟรม 6 ออกสะอาดแล้ว = finding ไม่ใช่ FAIL (ปิดคำถามเปิดในโมดูลรอบเดียวกัน P3)
+ATTENDED: gate 0/1/2 ผ่านก่อนบูต ห้ามเดา SHA
+
+> NUMBERING NOTE: `GT-249`/`RE-249` = 0 hit ก่อนวาง (chief `epkucn`/R344) -- ไม่ reopen/supersede `GT-058`/
+> `GT-059`/`GT-064`/`GT-116`/`GT-243` (คำถามคนละอัน) เปิดตาม `COO-DECISION 20260904_2154` ตอบจดหมาย
 > `notes_to_chief/20260904_2113_LANE-CS-TO-COO-backup-item1-read-plus-gt116-reopens-skill-window-content-question.md`
 
 ### source (links only)
 - `notes_to_chief/20260904_2154_COO-DECISION-skill-window-content-gt-approved-piggyback-gt243-LANE-CS.md` --
-  the approval: send 0x673C with REAL skill ids from class_id=1's own starting kit (not arbitrary probe
-  values) to a character that already satisfies GT-116's precondition; PASS = skill window (K) populates
-  with exactly the 4 starting skills of that class; attended-only, production_allowed stays False; STOP if
-  the client closes; a result that refutes HYP-PF-033's content claim closes/rewords the parent module's
-  open question in the same round (PANYA-DECISION 20260903_1934).
-- `rounds/CS_20260904_2113_fv5xnu_backup-item1-read-plus-gt116-reopens-skill-window-content.md` -- the
-  finding that reopened this: GT-058/GT-059/GT-064 (archived CLOSED) could never answer "does the window's
-  CONTENT track anything the server sends" because in every one of those sessions the window never opened at
-  all (class was always 0). GT-116 removed that blocker on 2026-08-28 but GT-116 itself explicitly says "[no
-  claim] that the skill list shown is a correct Gladiator kit -- not yet measured" and no ticket since has
-  asked the content question.
-- GT-116 (`GAME_TEST_QUEUE.md:5183`, CLOSED PASS 2026-08-28): the window opens for a class_id=1/level=1
-  character, 0 entries at level 1 is normal. This entry's precondition IS GT-116's own proven precondition.
-  class_id=1 is presently wired into every flagless production login (CORE-REQUEST-022), so an ordinary
-  character already satisfies it -- no special character build is required beyond what GT-243 already needs.
+  the approval: send 0x673C with REAL skill ids from class_id=1's own starting kit (not probe values) to a
+  character satisfying GT-116's precondition; PASS = skill window (K) populates with exactly the 4 starting
+  skills; attended-only, production_allowed stays False; STOP if client closes; a refuting result
+  closes/rewords the parent module's open question same round (PANYA-DECISION 20260903_1934).
+- `rounds/CS_20260904_2113_fv5xnu_backup-item1-read-plus-gt116-reopens-skill-window-content.md` -- reopened
+  this: GT-058/GT-059/GT-064 (archived CLOSED) never answered "does the window's CONTENT track anything the
+  server sends" (window never opened in those sessions, class always 0). GT-116 removed that blocker
+  2026-08-28 but itself says "[no claim] the skill list is a correct Gladiator kit -- not yet measured".
+- GT-116 (`GAME_TEST_QUEUE.md:5183`, CLOSED PASS 2026-08-28): window opens for class_id=1/level=1, 0 entries
+  at level 1 is normal -- this entry's precondition IS that proven precondition. class_id=1 is wired into
+  every flagless production login (CORE-REQUEST-022) -- no special build needed beyond what GT-243 needs.
 - `src/pirateforce_foundation/learn_skill_result_hypothesis.py` (HYP-PF-033, vital 0x673C) -- the module this
   entry exercises. Its own docstring nonclaims (read before using anything from it): the three record member
   positions (record_u32_0 / record_u16_4 / record_u32_8) have UNKNOWN semantics, the trailing u8 has UNKNOWN
