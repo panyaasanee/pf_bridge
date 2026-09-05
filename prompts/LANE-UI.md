@@ -10,11 +10,13 @@
 - วิธีหา: ปุ่มไหนส่งเฟรม/opcode อะไร ค้นจาก client image ที่ commit แล้วด้วย pf-static-re · ไม่รู้รูปเฟรมตอบ ⇒ ออกใบ RE ≤12,000 อักขระ · 🔴 ห้ามเดา opcode แล้วส่งไบต์ออก (`/warp x y` ทำไคลเอนต์ปิดตัวมาแล้ว ใบ 1744)
 - ทุกชิ้นปิดด้วยใบ GT ที่ผู้เทสกดจริงบนจอ
 
-## แผนที่ฟังก์ชันของเกม = Protocol Registry (Panya สั่ง 2026-09-05 19:0x)
-- `pf_bridge/external/PF_PROTOCOL_REGISTRY.tsv` = ทะเบียนคลาสโปรโตคอลทั้งเกมที่แกะจาก client (~520 คลาส มี VA ของ serializer/handler) — **นี่คือรายการ "เกมนี้มีฟังก์ชันอะไรให้เล่นบ้าง"** อ่านคู่กับ `external/00_SEARCH_HERE_FIRST.md` และ `external/PF_SERIALIZER_FIELDS.tsv` (layout ที่พิสูจน์แล้ว) ก่อนตัดสินว่าอะไร "ยังไม่รู้"
-- ดูแล **แผนงานแกะทีละฟังก์ชัน** ไฟล์เดียว `docs/UI_LANE.md` ในรีโปเซิร์ฟเวอร์ (แบบเดียวกับ `docs/GM_LANE.md` ของสาย GM): ตารางเดียว — กลุ่มฟังก์ชัน (Pet/Guild/Storage/Market/Party/Trade/Stall/Mail/Friend/Trace/Title/Rank/…) → vital ที่เกี่ยว (c→s / s→c) → ผู้เล่นเห็นอะไร → สถานะ (layout รู้แล้วจาก SERIALIZER_FIELDS / ต้องการ RE static / ต้องการ capture attended) → ขั้นถัดไป → ใบ GT
-- แผนต้องมีอยู่ตั้งแต่รอบแรกที่อ่านข้อนี้ (ร่างจาก registry + สารบัญที่ส่ง COO ไปแล้ว 4 ก.ย.) และอัปเดตทุกรอบเฉพาะแถวที่แตะ · **ลำดับหยิบงาน: ฟังก์ชันที่ layout รู้แล้วก่อน (ไม่ต้องรอ RE) → ที่ต้องการ RE static → ที่ต้องการ capture ท้ายสุด**
-- ใบ RE ใหม่ทุกใบต้องอ้างแถวในแผนนี้ และต้องเขียน "grep แล้วใน external/ + archive/: เจอ/ไม่เจอ" ตาม AGENTS.md §7
+## แผนที่ฟังก์ชันของเกม (Panya สั่ง 2026-09-05 19:0x) — สามไฟล์ สามหน้าที่ อ่านครบ
+1. **สารบัญ "เกมทำอะไรได้บ้าง"** = `pf_bridge/VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv` (327 แถว · id บนสาย + ชื่อ · 1 แถว = 1 การกระทำจริง) — จัดกลุ่มตาม prefix ก่อน `_`: Community 38 (friendship/soulmate/จดหมายในขวด/penpal/system mail) · Equipment 17 · Pets 16 · Channel 16 (แชท) · Express 12 · BuildingCrystal 12 · Activity 9 · CollectionObj 6 · Winemaking 5 · KnowledgeGuru 5 · HitParade 5 (อันดับ) · TreasureHunt 3 · Gathering 3 · NavigationEx 2 · UserSetting · Dyeing · Appraisal · Stall · Trade · Party · Arena · Vehicle · Potion · Relive · ItemLock … · 147 ชื่อไม่มี prefix = ระบบหลัก ส่วนใหญ่เป็นของสาย A/B/GM/CS **ไม่ใช่ของคุณ** (กรองตามภารกิจ)
+2. **"จะสร้างยังไง"** = `external/PF_PROTOCOL_REGISTRY.tsv` (519 คลาส · VA ของ serializer/handler/getter สำหรับ static RE) — 209 ชื่อที่เกินจากข้อ 1 เป็น data struct/module ไม่ใช่ฟังก์ชัน อย่าเอามาทำสารบัญ · และ 17 ชื่อมีเฉพาะในข้อ 1 ⇒ อ่านทั้งคู่เสมอ
+3. **"รู้รูปเฟรมหรือยัง"** = `external/PF_SERIALIZER_FIELDS.tsv` (layout ที่พิสูจน์แล้ว + ทิศทาง W/R) · เริ่มค้นจาก `external/00_SEARCH_HERE_FIRST.md` ก่อนตัดสินว่าอะไร "ยังไม่รู้"
+- ดูแล **แผนงานแกะทีละฟังก์ชัน** ไฟล์เดียว `docs/UI_LANE.md` ในรีโปเซิร์ฟเวอร์ (แบบ `docs/GM_LANE.md`): ตารางเดียว — กลุ่ม (จากข้อ 1) → vital + id (c→s / s→c) → ผู้เล่นเห็นอะไร → สถานะ (layout รู้แล้วจากข้อ 3 / ต้องการ RE static ผ่านข้อ 2 / ต้องการ capture attended) → ขั้นถัดไป → ใบ GT
+- แผนต้องมีอยู่ตั้งแต่รอบแรกที่อ่านข้อนี้ (ร่างจากข้อ 1 + สารบัญที่ส่ง COO ไปแล้ว 4 ก.ย.) และอัปเดตทุกรอบเฉพาะแถวที่แตะ · **ลำดับหยิบงาน: layout รู้แล้วก่อน (ไม่ต้องรอ RE) → ต้องการ RE static → ต้องการ capture ท้ายสุด**
+- ใบ RE ใหม่ทุกใบต้องอ้างแถวในแผนนี้ และเขียน "grep แล้วใน external/ + archive/: เจอ/ไม่เจอ" ตาม AGENTS.md §7
 
 ## เขตเขียน (chief ลงทะเบียนตาม COO-DECISION 20260904_0330 · `docs/UI_LANE.md` เพิ่มตามคำสั่ง Panya 2026-09-05)
 `pirate-force-server`: โมดูลใหม่ `src/pirateforce_foundation/ui_*.py` · `tests/test_ui_*` · `docs/UI_LANE.md` · `rounds/UI_*`
