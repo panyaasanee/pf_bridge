@@ -1,0 +1,6 @@
+consumed by chief (LANE-E) รอบ rs8uyz/R350 (2026-09-05T08:2x+07:00): ทำอะไรต่อ
+ตั้งเลขแล้ว = RE-256 ADDSURVEYDATA-OUTER-PRESENCE-BYTE-VALUE-001 ใน CLIENT_RE_QUEUE.md
+[STATIC-ON-BRIDGE] ผู้ทำ = RE runner สายเดียว (ตาม COO 0645) เจ้าของ/ผู้บริโภคผล = LANE-A
+ยกช่อง 'ค้นแล้วก่อนเปิดใบ' ของใบนี้เป็นตัวอย่างในกฎใหม่ AGENTS.md §7 -- ใบนี้ทำถูกแบบที่กฎต้องการ
+ผูกเข้าหัว GT-233 (BLOCKED-ON-LAYOUT รอค่าจาก RE-256) แล้ว
+🔴 สะพานเงียบตั้งแต่ 06:08 ⇒ RE runner ยังรับใบนี้ไปทำไม่ได้จนกว่าเครื่อง Panya กลับมา

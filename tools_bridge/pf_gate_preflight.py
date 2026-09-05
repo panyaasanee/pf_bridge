@@ -20,7 +20,13 @@ seen that day are pure text properties and reproduce anywhere:
   2. skip-count drift - the gate pins skipped-test counts; a NEW skip is RED
      in the same way a new failure is.  A test that always skips on CI is
      what killed PR #503.
-The third shape - a test that genuinely passes on Linux and fails on
+  3. precondition census - the gate EXCLUDES a whole test module whose text
+     names a client artifact, and pins how many it collects.  A module lost
+     that way passes both checks above and still turns the gate red on the
+     count.  That is what killed #785 and #789 on 2026-09-04, both on
+     commits where this tool had already printed PASS twice (added R350,
+     COO-DECISION 20260905_0646 item 3).
+The remaining shape - a test that genuinely passes on Linux and fails on
 Windows - CANNOT be caught here and this script does not pretend to.  For
 that, ask for a bridge job on Panya's machine before pushing.
 
@@ -279,6 +285,80 @@ def check_base_is_ancestor(repo, base):
     print("            Fix: git fetch origin main && git merge origin/main,")
     print("            then run the FULL suite again on that tree (NOW.md")
     print("            `0053`/`0149`), then push.")
+    return False
+
+
+# The one server test file this check runs.  It derives the set of test
+# modules the gate will actually collect and compares it against the pinned
+# census, which is the ONLY thing that notices a module the gate drops.
+PRECONDITION_CENSUS_TEST = "tests/test_pytest_precondition_census.py"
+
+
+def check_precondition_census(repo):
+    """RED when the server clone's precondition census does not agree with
+    the modules the gate will collect.
+
+    WHY THIS IS HERE (COO-DECISION 20260905_0646 item 3, chief R350).  The
+    two checks above are TEXT properties, and a file can satisfy both while
+    still being silently dropped from the gate's collection.  That is not
+    hypothetical, it is what killed two pull requests inside twelve hours:
+
+      #785 (LANE-A, 2026-09-04)  a COMMENT spelled a client artifact's name,
+                                 which makes the gate exclude the whole
+                                 module.  The census then counted 49 where 48
+                                 are pinned, and the gate went red on a file
+                                 whose own tests all passed.
+      #789 (LANE-GM, closed by the gate 04:50)  the same shape.
+
+    Both runs printed `[cp874] PASS` and `[skips] PASS` from this very tool,
+    on the exact commit that died.  A preflight that is green on the commit
+    that loses the round is not a preflight, which is why this is now a
+    mandatory row rather than a suggestion in a letter.
+
+    It is cheap enough to be mandatory: measured 3.24s on this clone, pure
+    Python, no Windows, no network.
+
+    Returns True (census agrees), False (it does not - RED), None (could not
+    run: no python, no pytest, file absent - INCONCLUSIVE, same convention as
+    check_new_skips and check_base_is_ancestor).
+    """
+    target = repo / PRECONDITION_CENSUS_TEST
+    if not target.exists():
+        print("[census] INCONCLUSIVE - %s is not in this clone."
+              % PRECONDITION_CENSUS_TEST)
+        print("         Is --repo really the pirate-force-server clone?"
+              " Nothing was compared.")
+        return None
+    try:
+        proc = subprocess.run(
+            [sys.executable, "-m", "pytest", PRECONDITION_CENSUS_TEST, "-q"],
+            cwd=str(repo), capture_output=True, text=True, timeout=600,
+        )
+    except (OSError, subprocess.SubprocessError) as exc:
+        print("[census] INCONCLUSIVE - could not run pytest: %s" % exc)
+        return None
+    out = (proc.stdout or "") + (proc.stderr or "")
+    if proc.returncode == 0:
+        print("[census] PASS - %s agrees with the modules the gate collects."
+              % PRECONDITION_CENSUS_TEST)
+        return True
+    # pytest exit 5 is "no tests collected", which is not a census failure -
+    # it is the check being unable to say anything, and a green verdict there
+    # would be exactly the false pass this row exists to remove.
+    if proc.returncode == 5:
+        print("[census] INCONCLUSIVE - pytest collected 0 tests from %s."
+              % PRECONDITION_CENSUS_TEST)
+        return None
+    print("[census] RED - %s does not agree with what the gate will collect."
+          % PRECONDITION_CENSUS_TEST)
+    print("         This is the shape that killed #785 and #789: a module")
+    print("         the gate EXCLUDES (usually a client artifact's name")
+    print("         spelled in a docstring or comment) still passes cp874")
+    print("         and skips, and dies on the count.  pytest said:")
+    for line in out.splitlines()[-12:]:
+        print("         | %s" % "".join(
+            ch if _cp874_safe(ch) else "?" for ch in line
+        ))
     return False
 
 
@@ -667,7 +747,8 @@ def main():
         return 2
     print("=== pf_gate_preflight on %s ===" % repo)
     results = [check_cp874(repo), check_new_skips(repo, args.base),
-               check_base_is_ancestor(repo, args.base)]
+               check_base_is_ancestor(repo, args.base),
+               check_precondition_census(repo)]
     if args.pr_body is None:
         # Open skip with a reason, never a silent one (AGENTS.md section 7).
         # Not appended to `results`: most callers run this tool for the cp874
@@ -703,7 +784,8 @@ def main():
         print("above).  This is NOT a pass: fix the reason, usually a base ref")
         print("that does not resolve (git fetch origin main, or pass --base).")
         return 1
-    print("PREFLIGHT PASS (cp874 + no new skips + main is in this branch).")
+    print("PREFLIGHT PASS (cp874 + no new skips + main is in this branch"
+          " + precondition census agrees).")
     print("NOTE: this does NOT promise a green gate - Windows-only runtime")
     print("failures are out of scope.  A RED or INCONCLUSIVE preflight means")
     print("DO NOT PUSH until it is fixed (AGENTS.md section 7).")
