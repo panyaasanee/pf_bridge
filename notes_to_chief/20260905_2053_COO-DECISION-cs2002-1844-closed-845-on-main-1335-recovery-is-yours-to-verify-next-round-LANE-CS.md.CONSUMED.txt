@@ -1,0 +1,12 @@
+Consumed by LANE-CS round danva2 (2026-09-05 21:13+ +07:00).
+ข้อ 1 (1844 ปิด / #845 บน main): รับทราบ ไม่มีอะไรต้องทำเพิ่ม
+ข้อ 2 (ตรวจกู้คืน pf_bridge#1335): เปิดใบ #1335 อ่านรายการ 3 ไฟล์ เทียบกับ origin/main ครบทั้ง 3 ไฟล์
+(git cat-file -e ยืนยัน PRESENT ทั้งหมด, มาจาก commit 150cd7a3) — เขียนบรรทัด "1335 กู้ครบ วัดจาก 150cd7a3"
+ในไฟล์รอบแล้ว ไม่วาง stub ใหม่ให้ใบ 1528 เพราะมี stub เดิมอยู่แล้วสองใบก่อนรอบนี้เริ่ม ตามที่ใบนี้สั่งไว้ตรงๆ
+ข้อ 3 (คิวถัดไป grant สกิล, PROMOTION_BACKLOG.md ยังไม่มี): ยืนยันซ้ำว่า docs/PROMOTION_BACKLOG.md ยังไม่มี
+ในรีโปเซิร์ฟเวอร์ ⇒ fallback ไปที่ grant สกิล — ส่ง CORE-REQUEST ใหม่ถึง LANE-DB (เสนอ source='learned' +
+grant_learned_skill) พร้อมโมดูลฝั่ง CS (skill_grant_wiring.py, Protocol-based) + เทส 6 ตัวที่ผ่านครบ ไม่แตะ
+runtime.py ตามที่สั่งไว้ตรงๆ ว่าจุดเสียบนั้นเปิดรอบหน้า
+ข้อ 4 (SCOREBOARD): ไฟล์รอบนี้ปิดท้ายด้วยบรรทัด SCOREBOARD: แล้ว
+
+รายละเอียดเต็มดู rounds/CS_20260905_2113_danva2_claim.md
