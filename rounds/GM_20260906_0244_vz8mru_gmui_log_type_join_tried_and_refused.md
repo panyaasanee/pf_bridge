@@ -4,6 +4,34 @@ round id: `vz8mru` -- claim PR `pf_bridge#1414` -- server PR
 **`pirate-force-server#878`** (open, not draft, PF-AUTOMERGE: v4 confirmed by GET --
 open, not merged, not on main yet)
 
+## ADDENDUM, discovered while merging origin/main before push -- own mailbox bug
+
+While merging `origin/main` at the end of this round (post-work, pre-push),
+`PANYA-ORDER 20260906_0155` surfaced: **owner-ordered `/lv <n>` (set character
+level), addressed to LANE-GM, deadline 2026-09-06 14:00, "start immediately,
+before all of this lane's existing queue, P-3 waits"**. `COO-DECISION 0255`
+confirms it again directly to LANE-GM: "nothing in this letter overtakes /lv".
+
+This should have been caught at THIS round's own mailbox check
+(step 2 of `prompts/COMMON_LANE_ROUND.md`'s truth-source order), not discovered
+by accident during the final merge. Root cause, checked directly: this round's
+mailbox grep used `grep -l "ADDRESSEE: GM"`, but this lane's real address tag
+(per `prompts/LANE-GM.md` line 3) is `LANE-GM`, not bare `GM` -- and
+`"ADDRESSEE: GM"` is not a substring of `"ADDRESSEE: LANE-GM"` (the "LANE-"
+prefix sits between the colon and the "GM"), so the grep silently matched
+nothing and this round read that as "mailbox empty" instead of "grep is wrong".
+`PANYA-ORDER 20260906_0155` was already on `origin/main` at this round's branch
+point (`dc9ef32c`, synced 02:36) and would have been found by a correct grep at
+lock time, before any of the P-3 work below was started.
+
+**This round's P-3 work is still real and still correctly done** -- nothing in
+it was wasted effort, and the deadline on `/lv` was not yet public knowledge at
+this round's own lock time in any form this round could have found some other
+way. But the process bug is this round's own to confess, not to bury: the next
+LANE-GM round (started immediately after this one closes, see below) treats
+`/lv <n>` as the ONLY task, per the owner's own ordering, and the mailbox grep
+is fixed to `ADDRESSEE: LANE-GM` from that round onward.
+
 ## round lock
 
 Followed `prompts/COMMON_LANE_ROUND.md` steps 1-8 before touching code:
@@ -216,6 +244,18 @@ of their own.
 
 ## next round
 
+0. **SUPERSEDES everything below**: `PANYA-ORDER 20260906_0155` (see ADDENDUM
+   above) -- build `/lv <n>` (owner-ordered chat command, sets the logged-in
+   character's level, must show on screen and survive relog), deadline
+   **2026-09-06 14:00 +07:00**. Owner's own ordering for the round: (1) open
+   the RE ticket FIRST (clue already named: `RE-117` BasicAttr bit `0x0002` =
+   level, and this lane's own `gm/attr_wire.py`) -- do not guess an opcode and
+   send bytes; (2) send the `ADDRESSEE: LANE-DB` letter for the level column
+   /writer in the SAME round, first round, not last (LANE-DB already has the
+   paired order `20260906_0156` and will prioritise it); (3) anything this lane
+   cannot unblock itself -> letter to COO within the first round, do not wait
+   for the deadline. P-3 (items 1-3 below) is on hold until this closes or is
+   blocked on something outside this lane.
 1. Check `pirate-force-server#878` merge state with `git merge-base
    --is-ancestor f617e932 origin/main` before writing "on main" anywhere.
 2. Re-check items 1 and 2 from this round's own list above (chief's D3/D4/
