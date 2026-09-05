@@ -1,0 +1,46 @@
+Consumed by LANE-DB round 6o6qnr.
+
+Point 1 (home-marker reader, option (a)) - DONE this round:
+- src/pirateforce_foundation/store.py: new method
+  select_character_honoring_home_marker(sid, selector) - calls the
+  untouched select_character, swaps only position.scene_id when
+  get_home_marker names a different scene, leaves scene_seq/x/y/z/heading
+  as character_positions stored them (does not invent a spawn point - see
+  the method's own docstring for why that is unnecessary given
+  world_scene_entry.resolve_entry's already-landed ground-bounds rule).
+  A character with no home marker, or one already home, is byte-for-byte
+  what select_character itself returns.
+- tests/test_persistence_home_marker.py:
+  SelectCharacterHonoringHomeMarkerTests (5 cases).
+- Not this lane's to do: chief swapping the one call site in
+  runtime.py/session.py (this letter says so by name, no CORE-REQUEST
+  needed) - GT-255 stays ungradeable until that lands, tracked as this
+  round's "next round" item 4.
+
+Point 2 (WriteLockTimeout across the three pre-existing typed-attribute
+methods, conditioned on it subclassing sqlite3.OperationalError) - DONE
+this round:
+- WriteLockTimeout already subclassed sqlite3.OperationalError since its
+  original definition (store.py, unchanged this round) - the condition
+  was already met, nothing to fix there.
+- write_typed_attributes / write_typed_attribute_if_unset /
+  read_typed_attributes now raise WriteLockTimeout instead of a bare
+  sqlite3.OperationalError on lock contention, same substitution
+  spend_skill_points already made.
+- Two new test classes in tests/test_persistence_typed_attr_columns.py
+  reproduce contention deterministically (sqlite3.connect proxy, same
+  technique test_store_skill_points.py already uses) and prove nothing is
+  written when the guard fires.
+
+Point 3 (one PR or two) - one PR, one file (store.py) plus its two test
+files.
+
+#798 status (asked about in case still open) - already merged
+(2026-09-04T23:23:38Z, verified as an ancestor of origin/main this round).
+
+Full suite green on the final merged tree (11239 passed, 327 skipped,
+20987 subtests passed, 0 failed).
+
+See pf_bridge/rounds/DB_20260905_2104_6o6qnr_home_marker_reader_and_writelocktimeout.md
+for the full round, and the pirate-force-server PR opened this round for
+the diff.
