@@ -62,6 +62,30 @@ RED" ของ `#847` ไม่มีเลข job) และชี้ผิด�
 (cp874 / no new skips / mainmerge / census / bridgesize ทั้งหมดเขียว หลังแก้ข้อ 5)
 เก็บ `git diff` ของกิ่งไว้ครบก่อน push
 
+## 3b. ผล pf-adversary (สั่งต้นรอบ, คืนผลระหว่างรอบ, จ่ายครบก่อนปลด draft)
+
+สั่ง `pf-adversary` ตรวจ diff ทั้งชุดก่อนเริ่ม commit (worktree แยก ไม่แตะ checkout จริง) ผลคืนพบ
+**สองข้อจริง**:
+
+1. **D8 fix รอบแรกไม่พอ** -- `column_discriminating_keys` กันแค่สองผู้สมัครไม่ให้เท่ากันเอง
+   ไม่เคยเช็คกับ `+0x12` (survey_id) ที่ trial จะส่งจริง · adversary พิสูจน์ด้วยการ monkeypatch
+   `provisional_area_126_key()` ให้คืน `2` (สมมติอนาคตที่เป็นไปได้จริง เพราะสำเนา TSV มีแถว
+   `n_ID=2` อยู่แล้ว) แล้วเห็นชนกับ `+0x12` ของ dock 153 ผ่านเงียบ ⇒ **แก้จริง**: ย้ายการ์ดไปไว้ที่
+   `world_m2_provisioning_trial.trial_survey_records` (จุดเดียวที่รู้ทั้งสองฟิลด์) เช็คทุก `+0x14`
+   ที่จะส่งกับทุก `+0x12` ของรอบเดียวกัน raise ก่อนประกอบถ้าชน · เพิ่มเทสสองทิศ (forge ทั้งฝั่ง `n_ID`
+   และฝั่ง `n_AREA`) ยืนยันด้วยการรันจริงว่า exception ขึ้นตามคาด · แก้ docstring ของ
+   `column_discriminating_keys` ไม่ให้อ้างว่า "ปิด D8" เอง (มันทำไม่ได้ ไม่รู้ `+0x12`) ระบุชัดว่า
+   การ์ดจริงอยู่ชั้นผู้เรียก
+2. **D6 citation ผิดไฟล์** -- note ใน `docs/PYTEST_SKIP_PINS.json` ที่แก้รอบนี้ชี้ไปที่
+   `pf_bridge/AGENTS.md:176-181` ทั้งที่ผมตรวจเองแล้วพบว่าช่วงนั้นเป็นเรื่องลำดับหยิบใบเทส
+   ไม่มีสูตร rehearsal อยู่เลย -- สูตรจริงย้ายไปอยู่ `pf_bridge/HOWTO_OPEN_A_PR.md:24-31` แล้ว
+   (ย้ายออกจาก `AGENTS.md` ตั้งแต่รอบ `supz66`/R360 ก่อนรอบนี้) ⇒ แก้ citation ให้ตรง
+   ตรวจเองด้วยการเปิดทั้งสองไฟล์จริงก่อนแก้ ไม่เชื่อคำแนะนำเปล่า
+
+ทั้งสองข้อแก้แล้ว push เป็น commit ที่สองบนกิ่งเดียวกัน (`bcc6ce2`) รันชุดเต็มซ้ำหลังแก้ = **11432
+passed / 355 skipped / 0 failed** (379.07s) · preflight PASS ซ้ำ · จึงปลด PR จาก draft
+(`ADVERSARY_PENDING` ปิด, ผลจ่ายครบก่อนปลด draft ตามกฎ)
+
 ## 4. GT-233 v3 (pf_bridge, `GAME_TEST_QUEUE.md`)
 
 แก้หัวใบจาก `READY-v2` เป็น `READY-v3` เติมบล็อกควตอธิบาย: สองเรคอร์ด discriminate คอลัมน์แทนแถว
@@ -97,9 +121,10 @@ preflight PASS ทุกข้อ ไม่แตะใบของสายอ�
 ## 7. adversary
 
 สั่ง `pf-adversary` ต้นรอบพร้อมเริ่มงาน (ก่อน commit) ให้ตรวจ diff ทั้งชุด (D1/D2/D4/D6/D7/D10 +
-การออกแบบ column-discriminating ใหม่) -- ผลยังไม่คืนตอน push ⇒ `ADVERSARY_PENDING
-pirate-force-server (กิ่ง claude/magical-goldberg-dio9ll)` ตามกฎ ห้ามเขียนว่า "ผ่าน adversary"
-ก่อนผลคืน · รอบถัดไปของสาย A อ่านผลบนกิ่งนี้เป็นงานแรกถ้ายังไม่คืนตอนจบรอบนี้
+การออกแบบ column-discriminating ใหม่) -- ผลยังไม่คืนตอน push ครั้งแรก ⇒ `ADVERSARY_PENDING
+pirate-force-server (กิ่ง claude/magical-goldberg-dio9ll)` ตามกฎ ไม่เขียนว่า "ผ่าน adversary"
+ก่อนผลคืน · **ผลคืนระหว่างรอบ พบสองข้อจริง จ่ายครบแล้ว** ดูรายละเอียดเต็มข้อ 3b -- ปลด PR จาก
+draft เป็นไม่ draft แล้วหลังผลจ่ายครบ (commit ที่สอง `bcc6ce2`)
 
 ## 8. ผู้เล่นจะเห็นอะไรต่างจากเมื่อวาน
 
@@ -110,19 +135,17 @@ pirate-force-server (กิ่ง claude/magical-goldberg-dio9ll)` ตามก�
 
 ## 9. สถานะท้ายรอบ
 
-push ครบทั้งสองรีโป · `pirate-force-server`: เปิด PR ไม่ draft หัว `[LANE-A]` มี
-`PF-AUTOMERGE: v4` ตั้งแต่เปิด (ดูเลข PR ในจดหมาย/PR body) · `pf_bridge`: claim
-`pf_bridge#1396` เติม marker ปลดล็อกหลัง PR เซิร์ฟเวอร์ยืนยันเปิดไม่ draft มี marker แล้ว ·
-ไม่รอ gate ไม่รอ merge ก่อนปิดรอบ
+push ครบทั้งสองรีโป (สองคอมมิตบนกิ่งเซิร์ฟเวอร์: โค้ดหลัก + จ่าย adversary) · `pirate-force-server`:
+PR `#865` เปิดแล้ว **ไม่ draft** หัว `[LANE-A]` มี `PF-AUTOMERGE: v4` ตั้งแต่เปิด ยืนยันด้วย GET
+สองครั้ง (ตอนเปิดเป็น draft และตอนปลด draft หลังจ่าย adversary ครบ) · `pf_bridge`: claim
+`pf_bridge#1396` เติม marker ปลดล็อกในรอบนี้ (ดูข้างล่าง) · ไม่รอ gate ไม่รอ merge ก่อนปิดรอบ
 
 ## รอบหน้าทำอะไร
 
-0. อ่านผล `pf-adversary` บนกิ่ง `claude/magical-goldberg-dio9ll` ก่อนอย่างอื่น ถ้ายังไม่คืนตอนจบ
-   รอบนี้
-1. วัดว่า PR ของรอบนี้ขึ้น `main` หรือยังด้วย `git merge-base --is-ancestor`
+1. วัดว่า PR `#865` ขึ้น `main` หรือยังด้วย `git merge-base --is-ancestor`
 2. เมื่อขึ้น `main` แล้ว แจ้ง chief พลิกหัว `GT-233` v3 เป็นบูตได้จริง (ตาม `2349` ข้อ 5)
 3. re-land cast ฉาก 304 จากกิ่ง `claude/great-ride-yob0a2` (`#847`) -- ยังค้างจากรอบ `tk4hr7`
    ไม่ใช่งานของรอบนี้
 4. บริโภคจดหมายที่ยกมาในข้อ 6 เมื่อถึงคิว
 
-SCOREBOARD: COMING | เซิร์ฟเวอร์ไม่มีทางล้มทั้งบูตอีกต่อไปเพราะไฟล์ SAILING_RESULT สำเนาเพี้ยน (D1) และ `GT-233` v3 ใช้สองเรคอร์ดแยกแยะคอลัมน์คีย์จริงแทนแยกแยะแถว (ปิด D8) -- ผู้เล่นยังไม่เห็นอะไรใหม่จนกว่า PR จะ merge และ Panya บูต `GT-233` v3 | PR: pirate-force-server (กิ่ง `claude/magical-goldberg-dio9ll`), claim `pf_bridge#1396`, ชุดเต็ม 11429 passed/0 failed, gate preflight PASS
+SCOREBOARD: COMING | เซิร์ฟเวอร์ไม่มีทางล้มทั้งบูตอีกต่อไปเพราะไฟล์ SAILING_RESULT สำเนาเพี้ยน (D1) และ `GT-233` v3 ใช้สองเรคอร์ดแยกแยะคอลัมน์คีย์จริงแทนแยกแยะแถว โดยมีการ์ดโค้ดจริงกันการชนกับ `+0x12` (ไม่ใช่แค่ข้อมูลวันนี้บังเอิญไม่ชน) -- ผู้เล่นยังไม่เห็นอะไรใหม่จนกว่า PR จะ merge และ Panya บูต `GT-233` v3 | PR: pirate-force-server#865 (ไม่ draft, marker ยืนยัน), claim pf_bridge#1396, ชุดเต็ม 11432 passed/0 failed, gate preflight PASS, pf-adversary 2 ข้อจริงจ่ายครบ
