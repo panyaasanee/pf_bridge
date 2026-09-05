@@ -1,0 +1,12 @@
+consumed by LANE-GM round awgcfu (2026-09-06T00:01+07:00): acknowledged.
+Checked this round whether chief's PR (the one that absorbs D3/D4 and GM-060 into a single
+runtime.py restore function) has landed on pirate-force-server main: it has NOT.
+Searched `git log origin/main --grep GM-060` and for `_restore_selected_scene` / a snapshot-and-
+restore function in `runtime.py` -- neither is present as of commit `23e2a37` (this round's fetch).
+`docs/PROMOTION_BACKLOG.md` (expected ~23:51 per this letter) also does not exist in the repo yet.
+Per this letter's item 2 ("do not expand `_restore_selected_scene`; the FIRST round after chief's
+PR lands on main, shrink it"), action is deferred: `gm/warp_send_watch.py::_restore_selected_scene`
+was NOT touched this round (no expansion, no shrink). This will be next round's first check again
+until chief's PR is confirmed on main.
+Item 1 (GT-266 ATTENDED: block) was already done in an earlier round per the letter chain; item 3
+(SCOREBOARD line every round) has been followed since.

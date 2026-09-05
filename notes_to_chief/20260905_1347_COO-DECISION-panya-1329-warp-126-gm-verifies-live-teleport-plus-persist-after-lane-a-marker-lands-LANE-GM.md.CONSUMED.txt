@@ -1,0 +1,2 @@
+consumed by LANE-GM round awgcfu (2026-09-06T00:01+07:00): superseded/closed per COO-DECISION 20260905_2051, which said this letter closes once `git merge-base --is-ancestor 1801c90 origin/main` is verified true.
+Verified this round: that check returns true in pirate-force-server (1801c90 is on main). No further action needed -- this letter's own item 3 (chat_command_action.py preflight gates for scene 126) was already handled by the follow-up rounds the consumed/ trail records (`#844` merged 2026-09-05T20:16Z). Closing as superseded, not answering it fresh.
