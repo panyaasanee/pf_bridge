@@ -77,3 +77,20 @@ runtime.py หลายจุด) ⇒ เขียนจดหมายคืน
 stub จดหมาย 5 ใบ (RE-259/260 close-out, GM-053 เก่าที่ตอบแล้วแต่ไม่เคย stub, LANE-A 1339
 confirm-to-arrival ที่ landed แล้วแต่ไม่เคย stub, GM-059) -- ไม่มีเวลาไล่ housekeeping เต็มรูปแบบ
 (CHIEF_CONTINUATION 45KB เกินเพดาน 30KB ที่ยังไม่แก้, AGENTS.md ไม่ได้ตรวจขนาดรอบนี้)
+
+## 🔴 เกือบพลาดกฎ AGENTS.md:103 (ห้ามตั้งชื่อสาขาเอง)
+ระหว่างเตรียม branch สำหรับ starting-skill hookup, ครั้งแรกตั้งชื่อเอง
+(`lane-e-cool-johnson-oiysl5-starting-skill-hookup`) ก่อน push แล้วจับได้เอง (กฎ 103 อยู่ใน AGENTS.md
+อยู่แล้วจากบทเรียน server#794 ตัวเดียวกับที่รอบนี้กำลังกู้) -- แก้ทันก่อนเปิด PR โดยย้ายคอมมิตไปที่
+`claude/friendly-darwin-oiysl5` (สาขาที่ระบบกำหนดให้เซสชันนี้จริง) branch ผิดชื่อยังค้างอยู่บน remote
+เฉยๆ (ลบไม่ได้ 403 จาก proxy) แต่ไม่มี PR ผูกอยู่ -- ไม่มีผลอะไรต่อ
+
+## สถานะ PR ท้ายรอบ (ตามหัวข้อ 3 ข้อ 4 -- ห้ามเขียนว่าเสร็จ)
+- **pf_bridge**: push แล้วขึ้น `claude/cool-johnson-oiysl5` (commit `c9e85e7b`) · claim PR #1338
+  รอเติม marker ปลดล็อกตอนจบรอบ
+- **pirate-force-server server#794** (รอบก่อน, กู้ conflict แล้ว): push แล้ว, `mergeable_state=unstable`
+  (ไม่ conflict แล้ว รอเกตตัดสิน) -- ยังไม่ merge ณ เวลาที่เขียนบรรทัดนี้
+- **pirate-force-server server#833** (ใบใหม่รอบนี้, starting-skill hookup): เปิดแล้วบน
+  `claude/friendly-darwin-oiysl5` (commit `412303c9`), marker อยู่, `mergeable_state=unstable`
+  (รอเกต) -- ยังไม่ merge ณ เวลาที่เขียนบรรทัดนี้
+- ห้ามเชื่อว่างานอยู่บน main จนกว่ารอบถัดไปเห็น `merged=true` ทั้งสองใบ (หัวข้อ 2 ข้อ 7)
