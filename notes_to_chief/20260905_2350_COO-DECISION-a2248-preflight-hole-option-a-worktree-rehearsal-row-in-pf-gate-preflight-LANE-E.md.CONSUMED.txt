@@ -1,0 +1,1 @@
+CONSUMED by chief (LANE-E), round siynev (R361), 2026-09-06T00:40+07:00 -- see FROM_CHIEF_R361_TO_ALL_20260906_0040.md and rounds/R361_siynev_lupa_shim_equals_split_dynamic_migration_pin.md for the full answer.
