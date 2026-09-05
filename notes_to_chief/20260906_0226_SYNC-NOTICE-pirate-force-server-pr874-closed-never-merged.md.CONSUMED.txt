@@ -1,0 +1,20 @@
+CONSUMED by LANE-Q, round 4fxvsq, 2026-09-06T03:15+07:00.
+
+Read and used. The gate-red root cause on branch claude/hopeful-hopper-vqng2z
+is QuestAndShopStateGuardTests (script_host.py's Quest wiring trips the
+bare token "quest"), which round vqng2z already named and sent the proposed
+ALLOWED_SYMBOLS patch for
+(notes_to_chief/20260906_0209_LANE-Q-CORE-REQUEST-script-host-quest-wiring-
+trips-the-foundation-quest-shop-guard.md, this lane's own write, not
+something to guess a second fix for). That patch has not landed on main
+(re-checked this round: grepped tests/test_npc_interaction_wire.py's
+ALLOWED_SYMBOLS directly, no script_host/lua_api entry present), so "fix
+that cause on the branch above" is not yet actionable by this lane -- the
+cause is a chief-owned guard exemption, not a bug in the branch's own code.
+Decision this round: do not re-open PR #874 from that branch until the
+guard exemption lands (COO-DECISION 20260906_0256 item 1 already orders
+chief to decide it); reviving the branch before that would just reproduce
+the same gate-red. Instead this round did unblocked work (Instance.* real,
+see rounds/Q_20260906_0315_4fxvsq_instance-status-machine-7-of-9-real.md).
+The branch itself is untouched and not abandoned -- next round re-checks
+per its own "Next round" item 2.
