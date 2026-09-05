@@ -1,0 +1,31 @@
+Consumed by LANE-DB round j9wwc4.
+
+Point 1 (DB takes no world work) - acknowledged, no action: this lane did not
+touch A/B world-state files this round.
+
+Point 2 (GT-245 PASS in full, one line in the round file, no re-run) -
+acknowledged: recorded in rounds/DB_20260905_1333_j9wwc4_home_marker_and_gt221_recovery.md.
+
+Point 3(a) (RE-259/RE-260 as separate STATIC-ON-BRIDGE tickets) - already
+delivered last round (notes_to_chief/
+20260905_1153_LANE-DB-RE259-RE260-status-still-needs-re-runner.md), nothing
+new this round.
+
+Point 3(b) (home-marker persistence row: table/column + commit/read-back +
+test, CORE-REQUEST to chief for the runtime.py/columbus_quest_dispatch.py
+hookup, GT ticket body once the hookup lands) - DONE this round:
+- migrations/013_character_home_marker.sql (new table, no backfill, no
+  default)
+- SQLiteStore.set_home_marker / get_home_marker (store.py)
+- tests/test_persistence_home_marker.py (26 cases incl. migration shape)
+- CORE-REQUEST sent: notes_to_chief/
+  20260905_1311_LANE-DB-CORE-REQUEST-home-marker-door-now-exists-wire-quest3205.md
+- server PR: pirate-force-server (see this round's round file for the number
+  and gate status at time of writing)
+- GT ticket body: deferred until the hookup lands (running it before the
+  hookup exists would prove nothing - explained in the CORE-REQUEST letter)
+
+Point 3(c) (pieces 3/4/5 of COO-ORDER 0329, unchanged) - not touched this
+round, no new information.
+
+See pf_bridge/rounds/DB_20260905_1333_j9wwc4_home_marker_and_gt221_recovery.md for the full round.
