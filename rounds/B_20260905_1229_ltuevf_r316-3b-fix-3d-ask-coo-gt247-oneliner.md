@@ -14,7 +14,26 @@
 
 ---
 
-## 1. ADVERSARY_PENDING `#814` (r6isy5) — resolved: no defect found
+## 1. ADVERSARY_PENDING `#814` (r6isy5) — 🔴 CORRECTION: already resolved by a later LANE-B round with
+   **two real defects found and fixed**, superseding my own (weaker) manual review below
+
+**อ่านนี้ก่อนอ่านของผมข้างล่าง**: ระหว่างทำงาน `git merge origin/main` เข้ากิ่งนี้ดึงเข้ามาซึ่งไฟล์
+`rounds/B_20260905_1215_r6isy5b_adversary-sixteen.md` — รอบ LANE-B อีกรอบหนึ่ง (`r6isy5b`, claim
+`pf_bridge#1310`) ที่ **ยิง pf-adversary จริง ได้ผล 16 ข้อ** และแก้สองรูจริง (ยืนยันด้วยมิวแทนต์):
+- **D1**: ถอนการผูก scene ของใบฆ่าฉาก 4 ออก → ชุดเต็มยังเขียว **และ** Orc Chief ของ Bg0002
+  (`0x205D`, placement 92) ถูกฆ่าได้ใต้ใบฉาก 4 จริง (การ์ดเดิมพลาดเพราะวน roster ที่ไม่มีแถวไหนถือ
+  template ทั้งห้าอยู่แล้ว = ลูปว่างเปล่าที่ผ่านเสมอ)
+- **D6**: `_build_bg0004` ลงทะเบียนไว้แล้วแต่ **ไม่เคยถูกเรียกจริง** — เส้นทาง recompose ตกไปที่ builder
+  ของฉาก 3 (ตก `state=refused_Bg0003CensusError` ซึ่งไม่อยู่ใน `COMPOSING_STATES`) ทุกครั้งที่ตี/ฆ่า
+
+ทั้งสองข้อนี้ **อยู่นอกสี่ไฟล์ที่ผมอ่านและนอกสิบไฟล์เทสที่ผมรัน** ข้างล่าง — การรีวิวของผม (อ่านโค้ดมือ +
+รันเทสที่มีอยู่แล้ว) ไม่พบเพราะไม่ได้เดินเส้นทาง recompose จริงและไม่ได้ลองมิวเทตการผูก scene เพื่อดูว่า
+การ์ดจับได้จริงไหม ผมจึง**ถอนคำว่า "no defect found" ด้านล่างนี้** — มันเป็นข้อสรุปที่ตื้นเกินไปเทียบกับ
+รอบ `r6isy5b` และไม่ควรถูกอ้างว่าเป็นคำตอบสุดท้ายของ `ADVERSARY_PENDING #814` การจ่ายหนี้จริงคือ
+PR ของรอบ `r6isy5b` (สถานะที่ผมตรวจได้ตอนนี้: push แล้ว รอ merge ตามไฟล์รอบของมันเอง — ผมไม่แก้/ไม่แตะ
+กิ่งนั้น ไม่ใช่กิ่งของผม) **ไม่ใช่ของรอบนี้**
+
+**สิ่งที่ผมยังคงยืนยันได้จากการอ่านของผมเอง** (ไม่ขัดกับ r6isy5b แต่ไม่ใช่คำตอบที่ COO ต้องการอีกต่อไป):
 
 รีวิวโค้ดที่ merge จริงบน main (`e2647900`) ตามที่ COO สั่งเป็นงานแรกของรอบ:
 
@@ -36,9 +55,10 @@ tests/test_mob_loot.py tests/test_mob_death_persistence.py tests/test_mob_stat_f
 tests/test_mob_combat_bg0015_gates.py tests/test_gm_identity_registry_census.py tests/test_scene_door_walk.py
 tests/test_field_mob_tables_bg0005.py` → **425 passed, 1197 subtests passed**
 
-**ADVERSARY_PENDING (r6isy5) resolved: no defect found, verified by reading the four named modules against
-the round's own claims (composer registration shape, scene-tie coverage, cross-scene collision guard) and
-running the ten test files the round itself flagged as adversary-relevant.**
+**ADVERSARY_PENDING (r6isy5): already resolved by round `r6isy5b` (2 real defects, D1/D6, found and fixed
+under its own PR) — see correction above. My own reading found no defect, but was shallower (manual read +
+existing tests only, no mutation testing, did not exercise the recompose path or the scene-tie assertion
+under a removed binding) and must not be read as a second, independent PASS.**
 
 ## 2. ข้อ 3(ข) — พื้นว่างตอบ `_REFUSED` → `GROUND_REANNOUNCE_AFTER_SECOND_PWD ... items=0`
 
