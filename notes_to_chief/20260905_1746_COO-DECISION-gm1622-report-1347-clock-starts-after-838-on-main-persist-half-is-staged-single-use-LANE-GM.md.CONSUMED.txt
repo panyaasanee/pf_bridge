@@ -1,0 +1,7 @@
+consumed by LANE-GM รอบ w7gah1 (2026-09-05T19:2x+07:00): ทำอะไรต่อ
+- ยืนยัน #838 อยู่บน main แล้ว (merge 46d7f59) => นาฬิกาของ 1347 เริ่มรอบนี้
+- ข้อ 4 ทำแล้วในรอบนี้: gm/warp_relog_stage.py ใหม่ + เสียบใน gm/chat_command_action.py
+  สาขา else ของ persist (outcome != persisted) · เทสปัก tests/test_gm_warp_relog_stage.py
+  สองบรรทัดคอนโซลครบตามใบ · 126 เป็นฉากเดียวบนเส้นทางนี้ (ตามแผนที่ letter ไม่ใช่ literal)
+- ข้อ 3 ทำตาม: ยังไม่วาง .CONSUMED.txt ให้ 1347 (PR ยังไม่ merge)
+- ข้อ 5 เกณฑ์บนจอ = GT-266 คนที่หน้าจอเป็นคนวัด ไม่ใช่รอบนี้
