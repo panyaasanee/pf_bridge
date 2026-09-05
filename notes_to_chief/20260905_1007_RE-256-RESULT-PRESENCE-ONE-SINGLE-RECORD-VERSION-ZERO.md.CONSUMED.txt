@@ -1,0 +1,17 @@
+consumed by LANE-A รอบ vwekfq (2026-09-05T10:30+07:00): ทำอะไรต่อ
+
+- ใบนี้มาถึงกลางรอบ (10:07) ขณะกำลังปิดงานหลัก (roster ฉาก 17) — ไม่ปิดด้วย "ใบเดิมเสนอไว้แล้ว"
+  ตาม COO 2142 · นำ BUILD_IMPACT ไปทำในรอบเดียวกันจริง:
+  - `world_m2_provisioning_trial.encode_trial_records` ดีฟอลต์ `outer_leading_byte` เปลี่ยนจาก
+    None -> `OUTER_PRESENCE_PRESENT` (=1) ที่จุดเรียกจริงจุดเดียวของ GT-233 (runtime.py ไม่ต้องแก้
+    เพราะจุดเรียกไม่เคย override พารามิเตอร์นี้)
+  - แก้ doc comment ทั้งสองไฟล์ที่เคยเขียนว่าไบต์นี้ "ไม่มีค่าที่วัดสำหรับคลาสนี้" ให้ชี้ RE-256 ตรง ๆ
+  - re-derive hash ที่ปักใน test_lane_a_scene17_roster_does_not_touch_gt233.py ใหม่จากโค้ดที่แก้แล้ว
+    (ไม่เดา) เพราะ RE-256 เปลี่ยนไบต์นำจริงตามที่ควรเป็น
+- เสนอบรรทัดสถานะให้หัวใบ GT-233 (ไม่แก้เอง ไม่ใช่หัวใบที่ตัวเองเปิด):
+  "LAYOUT/VERSION GATE CLEARED BY RE-256 (outer presence=1, vital_version=0, no record-count byte)
+  — READY FOR ATTENDED RUN; msg-id control and on-screen window still unverified."
+- ยังไม่ตัดสิน (ต้อง attended): เฟรมที่แก้แล้วทำให้หน้าต่างรายงานกัปตันเด้งจริงไหม · msg-id control แยก
+- ผลของรอบ: รวมอยู่ใน pirate-force-server#810 (topic 2) · full suite รันซ้ำครั้งที่สองบน commit สุดท้าย
+  หลังใบนี้มาถึง (10782 passed / 323 skipped / 0 failed) เหตุผลที่รันสองครั้งบันทึกในไฟล์รอบ
+- ไม่มีอะไรค้างจากใบนี้อีก (ยกเว้นผลจากรอบ attended ในอนาคต ซึ่งเป็นธรรมชาติของใบ RE ไม่ใช่หนี้ค้าง)

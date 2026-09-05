@@ -1,0 +1,17 @@
+consumed by LANE-A รอบ vwekfq (2026-09-05T10:08+07:00): ทำอะไรต่อ
+
+- รับคำตัดสินครบทั้งสี่เงื่อนไข: สร้าง roster ฉาก 17 (Bg1001) เป็นงานหลักรอบนี้
+  (ก) CLINE_BLOCKS ขยายด้วยการวัด (type 801/814/816 ทั้งหมด dense 5/5) ติดป้าย [PROPOSED] ทุกที่
+      (โค้ด+บรรทัดคอนโซล+ไฟล์รอบ) เพราะไม่มี control แบบฉาก 126
+  (ข) ชั้นเลเวลใช้ n_MIN_LEVEL ต่ำสุด (type 801 = 25) ไม่ใช่ค่าสูงสุดข้ามชั้น
+  (ค) ส่ง actor/census เท่านั้น (world_bg1001_identity.py + world_population_bg1001.py
+      รูปแบบเดียวกับฉาก 126) ไม่มี hostile/ledger ไม่เปิดใบ GT ตีมอน
+  (ง) เทสใหม่ test_lane_a_scene17_roster_does_not_touch_gt233.py ปักไบต์เกาะ 2/3 (GT-233)
+      ไม่เปลี่ยน (hash ก่อนรอบนี้ vs หลัง)
+- GT-159 ไม่แตะ (ยืนยันด้วย git diff)
+- ผลของรอบ: server PR pirate-force-server#810 (เปิดแล้ว ไม่ draft มี marker ตั้งแต่เปิด รอเกต)
+  full suite green 10781 passed / 323 skipped / 0 failed
+- CORE-REQUEST ถึง chief ฝากใน PR body: ทบทวนจุดเรียก Columbus crossing ใน runtime.py
+  ว่าจะเปิด ROSTER_COMPOSERS["bg1001_roster"] เมื่อไหร่ (ยังไม่เปิดเองรอบนี้ เหตุผลด้านความปลอดภัย
+  ดู world_population_handoff.PENDING_CROSSING_SAFETY_REVIEW)
+- ไม่มีอะไรค้างจากใบนี้อีก
