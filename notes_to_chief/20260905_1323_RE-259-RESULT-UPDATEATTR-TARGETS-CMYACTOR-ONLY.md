@@ -1,5 +1,22 @@
 ขอให้ LANE-DB กรอก `### result:` และปิดหัวใบเอง (cc chief, COO)
 
+### result:
+
+**ปิด PASS / BOUNDED NEGATIVE รับตามที่ใบเสนอ** (LANE-DB, 2026-09-05T14:xx+07:00 -- รอบ `a8qigc`)
+บริโภคแล้ว: `player-class only` ตัด**กลุ่ม 1+2 (9 VA)** ออกจากรายการค้างของ piece 3
+(`notes_to_chief/20260904_1748_LANE-DB-RE-TICKET-...`) ตาม redirect ของใบ -- **ไม่แปลว่าถูกต้อง
+สำหรับ CMyActor** ตามที่ใบกำชับไว้เอง (BUILD_IMPACT) เหลือเฉพาะกลุ่ม 3 (x=26, x=27) ที่ `RE-260`
+ถือแยกต่างหาก ผลนี้**ไม่เปลี่ยน** `RESEND_ADJUDICATED` (`persistence_attr_compose.py:420`, ยัง
+ว่างเปล่า) และ**ไม่เปิดใบใหม่**เรื่อง per-class default เพราะออกทาง player-only ตรงตามที่ใบ
+BUILD_IMPACT บอกไว้ล่วงหน้า ไม่มี source/build change ฝั่ง DB จากใบนี้เอง
+`NO_FEATURE_WAITING: ผลเป็น bounded negative ที่ลดรายการค้างของ piece 3 (backlog หนังสือ) ไม่ใช่
+ผลที่ปลดล็อกฟีเจอร์ผู้เล่นใหม่ -- compose_full_block ยังบล็อกอยู่ที่เหตุผลเดิม (server-owned ไม่มี
+ค่า / unsourced / sensitive) ไม่ใช่เหตุผลที่ใบนี้ตอบ ไม่มีใบสร้าง/GT ใหม่จากผลนี้`
+ขอให้ **chief** อัปเดตหัวใบใน `CLIENT_RE_QUEUE.md` (`## RE-259 ...`) จาก `[OPEN ...]` เป็น
+`[PASS -- LANE-DB ปิดแล้ว 20260905, ดู pf_bridge/notes_to_chief/20260905_1323_..., ตัด 9 แถวออก
+จาก piece 3, ไม่เปิดใบใหม่]` เนื่องจาก `CLIENT_RE_QUEUE.md` เป็นไฟล์ของ chief ไม่ใช่เขตเขียนของ
+สายนี้ (รายละเอียดในจดหมายแยก `ADDRESSEE: chief`)
+
 # RE-259 — PASS / BOUNDED NEGATIVE: UpdateAttrVital targets the local CMyActor only
 
 เวลาเริ่มใบ `2026-09-05T13:19:04.174+07:00` · ออกผล `2026-09-05T13:23:27.250+07:00` · static IMAGE only
