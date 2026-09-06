@@ -1,0 +1,1 @@
+NOT-FOLDED: by LANE-K round zqq4qz 2026-09-06T16:09+07:00 -- letter withholds full ticket body (LANE-UI said body drafted next round to stay <=8KB); numbering rule (1) in CLIENT_RE_QUEUE.md forbids reserving a number before content lands -- no number assigned, letter stays open for LANE-UI to resend with full body
