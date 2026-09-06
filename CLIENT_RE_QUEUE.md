@@ -213,7 +213,7 @@ wire POSITION ของทั้งหกช่องนี้ **ปิดแล
 ## ✅🔬 RE-130 GROUND-LABEL-LIST-MEMBERSHIP-001 [STATIC-ON-BRIDGE] — **CLOSED / DONE-PASS · บริโภคแล้วโดย LANE-B รอบ `zxnwtd`**: **ป้ายชื่อไอเทมบนพื้นผูกกับการที่ element ยังอยู่ในลิสต์ `0x08` (object+`... -- archived 20260905 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md`)
 ## RE-132 GM-GLOBAL-MESSAGE-VITAL-VERSION-001 [ARCHIVED 2026-08-31 R274, closed >24h per หัวข้อ 11] -- moved verbatim to `archive/CLIENT_RE_QUEUE_ARCH... -- (stub เก่า R274) ถูกย้ายรอบ 20260906 ไป `archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md` 🔴 **แต่เนื้อใบจริงอยู่ที่ `archive/CLIENT_RE_QUEUE_ARCHIVE_20260831_R274_closed.md` ไม่ใช่ไฟล์ 20260906** (ไฟล์นั้นเก็บได้แค่ stub นี้ — แก้ถ้อยคำที่ชี้ผิดโดย chief รอบ `6z131u`-b ตาม pf-adversary D12)
 
-## 🆕🔬 RE-135 CP874-CENSUS-ARTIFACT-REGEN-001 [STATIC-ON-BRIDGE]: ลบ `U+1F534` ตัวสุดท้ายใน `tools/pf_vital_thunk_census_static.py` แล้ว regenerate artifact ในคอมมิตเดียวกัน  [PENDING]
+## 🆕🔬 RE-135 CP874-CENSUS-ARTIFACT-REGEN-001 [STATIC-ON-BRIDGE]: ลบ `U+1F534` ตัวสุดท้ายใน `tools/pf_vital_thunk_census_static.py` แล้ว regenerate artifact ในคอมมิตเดียวกัน  [🔴 **BLOCKED (ไม่ใช่ time checkpoint, ไม่ใช่ method ceiling) — ติดที่สิทธิ์เขียน/คอมมิต ไม่ใช่ที่ความรู้** · คำต่อคำจากจดหมาย `notes_to_chief/20260907_0338_RE-135-RESULT-BLOCKED-ON-COMMIT-RIGHTS-artifact-is-one-line-stale-and-the-guard-is-red-now.md` (2026-09-07T03:38+07:00) · พับโดย LANE-K รอบ `dmef5j` 2026-09-07T04:09+07:00 · เดิม `[PENDING]`]
 
 > NUMBERING: จองเลข `133` ตอนเปิดรอบ (grep = 0 hit ทั้งสองไฟล์) แต่ระหว่างรอบ **สาย GM merge `RE-132` + จอง `GT-133`**
 > และ **สาย A merge `GT-134`** เข้า main ก่อน ⇒ ตามกฎ "ชนแล้วห้ามทับ" ใบนี้ขยับเป็น **`RE-135`**
@@ -243,6 +243,21 @@ wire POSITION ของทั้งหกช่องนี้ **ปิดแล
 
 **🔴 ไม่บล็อกใคร:** อักขระตัวนี้ไม่เคยถูก `print()` (วัดแล้ว ดูจดหมาย 0010) เกตก็เขียวอยู่เพราะพินไว้แล้ว
 ⇒ ใบนี้เป็นงานเก็บกวาด ทำเมื่อสะดวก ห้ามแซงใบที่บล็อกไมล์สโตน
+
+### result: (พับโดย LANE-K รอบ `dmef5j` 2026-09-07T04:09+07:00 คำต่อคำจากจดหมาย
+`notes_to_chief/20260907_0338_RE-135-RESULT-BLOCKED-ON-COMMIT-RIGHTS-artifact-is-one-line-stale-and-the-guard-is-red-now.md`
+— สถานะที่จดหมายเขียนเอง: **BLOCKED (ไม่ใช่ time checkpoint, ไม่ใช่ method ceiling) — ติดที่สิทธิ์เขียน/คอมมิต ไม่ใช่ที่ความรู้**)
+
+สรุปคำต่อคำจากจดหมาย: ขั้นที่ 1 และ 3 ของใบ **ทำไปแล้ว** (คอมมิต `51da9f53`) แต่ **ขั้นที่ 2
+(regenerate artifact) ไม่เคยเกิดขึ้น** ⇒ `tools/pf_vital_thunk_census_static.py` **FAIL อยู่ ณ ตอนนี้**
+และ `tests/test_tree_is_cp874_safe.py` ที่รันเครื่องมือนี้ก็จะแดงตาม — ตรงกับที่ใบเตือนไว้เองเป๊ะ
+· ส่วนต่างจริง = **2 บรรทัด (สตริงเดียว)** `🔴 THIS IS NOT A NAME TABLE.` → `!! THIS IS NOT A NAME TABLE.`
+· ไฟล์ที่ derive ได้ 71,645 ไบต์ sha256 `05fab2964211c55be5a14e114a341b16c20fc4620201397cec0ab4261761c6ec`
+· จดหมายระบุ BUILD_IMPACT: **"มี และเป็นของแดงอยู่ตอนนี้"** บน main ปัจจุบัน
+· ข้อเสนอในจดหมาย (ยกมา ไม่ตัดสิน): **"ควรย้ายผู้รับผิดชอบไปเลนที่ push ได้ (LANE-A/K) หรือปิดใบแล้วเปิดใหม่ในรูปงานคอมมิต"**
+
+🔴 **หมายเหตุจาก LANE-K (ไม่ใช่การตัดสิน)**: ใบนี้จ่าหน้า `ADDRESSEE: chief` และคำขอย้ายผู้รับผิดชอบ
+เป็นเรื่องของ COO/chief — เสมียนพับสถานะให้เท่านั้น ไม่ได้รับใบมาทำเอง · แจ้ง COO ในจดหมายรอบ `dmef5j`
 
 ## 🆕🔴 RE-136 MOBS-ANSWER-AS-NPC-DISPATCH-001 [STATIC-ON-CLOUD]: คลิกซ้ายบน hostile roster placement ถูกเซิร์ฟเวอร์ตอบด้วย **เลนคุย NPC** แทนเลนต่อสู้... -- archived 20260906 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md`)
 
@@ -433,7 +448,7 @@ INITIAL/REAPPLY, Slave Market (BG0004) 18,997B ขึ้นข้อความ
 ## 🔬 RE-201 BG0001-PORT-ROYAL-MINED-LEVEL-COLUMN-001 [**CLOSED ANSWERED-IN-ROUND / OPENED-IN-ERROR** -- ปิดหัวใบโดย LANE-A (เจ้าของใบ) รอบ `7ste68` 2026-09-02T02:5x+07:00 ในรอบเดียวกับที่เปิด · **ไม่ต... -- archived 20260905 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md`)
 ## 🔬 RE-202 QUEST-ICON-BOARD-SKIP-GATE-0X70-OWNER-001 [CLOSED -- ตอบ **ข. `CNetNPC+0x70`** โดย LANE-A (ผู้เปิดใบ = ผู้บริโภคผล) รอบ `8z9h9n` 2026-09-02T10:35+07:00 · ใบผล **สองใบ**: `notes_to_chief/20... -- archived 20260905 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md`)
 ## 🔬 RE-206 TELEPORTVITAL-STRING-TAG-MISMATCH-190-AUX-PRESENCE-001 [DONE/PASS -- ปิดโดย chief (LANE-E) รอบ `kt05o0`/R305 2026-09-02T16:0x+07:00 ตามใบผล `20260902_1052_RE-206-RESULT-AUX-PRESENCE-ZERO-O... -- archived 20260905 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260905_closed.md`)
-## 🔬 RE-208 GROUND-POOL-REMOVAL-PATH-FOR-THE-LAST-OBJECT-001 [OPEN -- เปิดโดย LANE-B รอบ `9jrsei` 2026-09-02T09:5x+07:00 · ผู้ทำ: **สาย RE** (ผู้ทำสายเดียว ไม่ต้องจอง) · **LANE-B บริโภคผลเอง** · `STATIC-ON-CLOUD`]
+## 🔬 RE-208 GROUND-POOL-REMOVAL-PATH-FOR-THE-LAST-OBJECT-001 [🟡 **RESULT ส่งแล้ว 2026-09-03 · จดหมายไม่เขียนสถานะปิดใบ — รอ LANE-B (เจ้าของผล) เคาะ**  · จดหมาย `notes_to_chief/20260903_0300_RE-208-RESULT-there-is-no-remove-by-key-message-the-pool-shape-is-the-only-selector.md` · พับโดย LANE-K รอบ `dmef5j` 2026-09-07T04:09+07:00 · เดิม OPEN -- เปิดโดย LANE-B รอบ `9jrsei` 2026-09-02T09:5x+07:00 · ผู้ทำ: **สาย RE** (ผู้ทำสายเดียว ไม่ต้องจอง) · **LANE-B บริโภคผลเอง** · `STATIC-ON-CLOUD`]
 
 **คำถามเดียวของใบนี้: มีข้อความที่ถอน "ของบนพื้น" ทีละชิ้นไหม หรือ generation ที่ไม่ว่างคือทางเดียว**
 
@@ -496,6 +511,21 @@ apply ยังไม่มีใครดู · 🔴 **ใบ R306 เขีย
 - ค้นใน `pf_bridge\external\` แล้ว: (สาย RE กรอก) · ค้น `gamedata` แล้ว: (สาย RE กรอก)
 - numbering: ใบนี้เปิดเป็น `206` ตอน 09:5x แล้ว **ขยับเป็น `208`** ตอน merge ตามกฎ ③ (คนที่ push ทีหลังขยับ): ระหว่างรอบเดียวกัน chief merge `RE-206` (TeleportVital) และ `GT-207` ขึ้น main ⇒ สูงสุดใหม่ = 207 ⇒ `208` · grep `RE-208` ทั้งรีโปพบเฉพาะใบนี้
 - result: (สาย RE กรอก: มี/ไม่มี · VA + สแปน + ที่มา · timestamp)
+
+### result: (พับโดย LANE-K รอบ `dmef5j` 2026-09-07T04:09+07:00 คำต่อคำจากจดหมาย
+`notes_to_chief/20260903_0300_RE-208-RESULT-there-is-no-remove-by-key-message-the-pool-shape-is-the-only-selector.md`
+— สถานะที่จดหมายเขียนเอง: **จดหมายไม่มีบรรทัด `RESULT:` และไม่มีหัวข้อ "สถานะที่เสนอ" — LANE-K ไม่ตั้งสถานะให้เอง**)
+
+คำตอบของใบยกคำต่อคำจากจดหมาย:
+- **LAYER 1 — คำถามเดียวของใบ: "NO. There is no remove-by-key / destroy-one path reachable from a distinct message."**
+- **LAYER 2 — "can a non-empty generation carrying one dummy row retire a real object?" "NO, and it is worse than useless."**
+- วิธีทำ: **ไม่ได้ดิสแอสเซมบลีใหม่** — ตามกฎข้อ 4 ของไฟล์นี้ ค้น `pf_bridge\external\` ก่อน **เจอ** ⇒ ใบกลายเป็น
+  "verify sha → adversarial re-derive → use" · ผู้ทำ: **ka1-A (attended)** ตามคำสั่งเจ้าของโดยตรง 2026-09-03 ~02:5x-03:00
+- NONCLAIM ที่จดหมายเน้นเอง: *"An adversarial re-derive of the reconcile spans was NOT performed."*
+
+🔴 **ทำไมหัวใบเป็น 🟡 ไม่ใช่ CLOSED**: กติกาเหล็กข้อ 1 ของสาย K = "พับ = คัดลอก ไม่ใช่ตัดสิน" ·
+จดหมายตอบคำถามทั้งสองชั้นแล้วแต่ **ไม่ได้เขียนสถานะปิดใบ** ⇒ ต้องให้ **LANE-B (ผู้บริโภคผลตามหัวใบ)**
+ตอบกลับหนึ่งบรรทัดว่าปิดหรือไม่ปิด · จดหมายฉบับนี้ค้างพับมาตั้งแต่ **2026-09-03** (ดูจดหมายรอบ `dmef5j`)
 
 ## 🔬 RE-209 QUEST-SETTER-PROLOGUE-11-BYTES-ESI-PROVENANCE-001 [✅ **DONE / POSITIVE (bounded) — พับผลโดย LANE-K รอบ `x91eo8` 2026-09-06T18:2x+07:00** จากจดหมาย `notes_to_chief/20260906_1821_RE-209-RESULT-two-bytes-are-a-jcc-esi-single-object-branch-b-closes.md` (สถานะที่เสนอโดยผู้ทำ RE runner คำต่อคำ) (เดิม: OPEN **ย่อเหลือ 2 ไบต์**) -- เปิดโดย LANE-A รอบ `8z9h9n` 2026-09-02T11:0x+07:00 · **ย่อขอบเขตโดย LANE-A รอบ `f6e5kd` 2026-09-03** หลังบริโภคใบผล `notes_to_chief/20260902_1039_RE-202-RESULT-CNETNPC-RUNTIME-BIT-NOT-BASICATTR.md` · ผู้ทำ: **สาย RE** (ผู้ทำสายเดียว ไม่ต้องจอง) · **LANE-A บริโภคผลเอง (ยังไม่บริโภค ณ ตอนพับ — รอ LANE-A อ่านผล)** · 🔴 `[STATIC-ON-BRIDGE]` ต้องดิสแอสเซมบลีอิมเมจ ⇒ ทำบนคลาวด์ไม่ได้]
 
@@ -784,7 +814,7 @@ apply ยังไม่มีใครดู · 🔴 **ใบ R306 เขีย
 ## 🔬 RE-236 TRACEPATH-RECORD0-SEMANTIC-ATTENDED-DIFFERENTIAL-001  [🟢 ANSWERED (ทั้งสองข้อปิดแล้ว) — ข้อ (ก) มินิแมป ปิดแล้ว (REFUTED ผ่าน `GT-246`/R310) · ข้อ (ข) ปิดรอบ `9xqzh0` 2026-09-05T12:2x+07:00 ผ่าน `GT-251`/R317 (ดูข้อ (ข) ข้างล่าง) · เจ้าของใบ/ผู้เขียนเนื้อใบ = **LANE-UI** · ผู้บริโภคผล = LANE-UI] -- archived 20260906 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md`)
 
 ## 🔬 RE-237 OPTIONS-APPLY-SERVER-SETTING-VITAL-FIELDS-001  [🔧 LANE-K พับผล รอบ `slug54` 2026-09-06T13:15+07:00 — CAPTURED hex ครบ — R320 2026-09-06 §RE-237:... -- archived 20260906 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md`)
-## 🔬 RE-238 SELECTOR-CATEGORY-TO-ALT-HP-PAIR-MAPPING-001  [OPEN -- ร่างโดย LANE-GM รอบ `zq18m1` (ใบ `notes_to_chief/20260904_1154_LANE-GM-RE-0x430E10-TICKET-selector-category-to-alt-hp-pair-mapping.md`) ตาม `COO-DECISION 20260904_1046` ข้อ 2 · **วางคิวและมอบหมายโดย chief รอบ `wjqykr` (R338) 2026-09-04T14:09+07:00** · ผู้ทำ: **สาย RE** (RE runner local, ไม่ต้องจอง) · **LANE-GM บริโภคผลเอง** · 🔴 `[STATIC-ON-BRIDGE]` ต้องดิสแอสเซมบลีอิมเมจ ⇒ ทำบนคลาวด์ไม่ได้]
+## 🔬 RE-238 SELECTOR-CATEGORY-TO-ALT-HP-PAIR-MAPPING-001  [✅ **PASS/DONE — SCENE_NAME.n_SCENE_TYPE=8 keys 126/127/128/304/305 pinned** · คำต่อคำจากจดหมาย `notes_to_chief/20260904_1709_RE-238-RESULT-SCENE-TYPE-8-MAPPED.md` (2026-09-04T17:09+07:00) · พับโดย LANE-K รอบ `dmef5j` 2026-09-07T04:09+07:00 · เดิม OPEN -- ร่างโดย LANE-GM รอบ `zq18m1` (ใบ `notes_to_chief/20260904_1154_LANE-GM-RE-0x430E10-TICKET-selector-category-to-alt-hp-pair-mapping.md`) ตาม `COO-DECISION 20260904_1046` ข้อ 2 · **วางคิวและมอบหมายโดย chief รอบ `wjqykr` (R338) 2026-09-04T14:09+07:00** · ผู้ทำ: **สาย RE** (RE runner local, ไม่ต้องจอง) · **LANE-GM บริโภคผลเอง** · 🔴 `[STATIC-ON-BRIDGE]` ต้องดิสแอสเซมบลีอิมเมจ ⇒ ทำบนคลาวด์ไม่ได้]
 
 > 🔴 **เลขใบเปลี่ยนจากชื่อร่างชั่วคราว `RE-0x430E10` เป็น `RE-238`** — ชื่อร่างไม่ใช่เลขใบและตัวนับใบค้นไม่เจอ
 > (chief ยืนยัน `notes_to_chief/20260904_1409_CHIEF-TO-LANE-GM-your-0x430E10-ticket-is-re238-paste-the-body.md`) ·
@@ -859,6 +889,23 @@ login ส่งมา" (การเปลี่ยนแปลง ไม่ใ�
   timestamp)
 
 ---
+
+### result: (พับโดย LANE-K รอบ `dmef5j` 2026-09-07T04:09+07:00 คำต่อคำจากจดหมาย
+`notes_to_chief/20260904_1709_RE-238-RESULT-SCENE-TYPE-8-MAPPED.md`
+— สถานะที่จดหมายเขียนเอง: **RE-238 PASS/DONE — SCENE_NAME.n_SCENE_TYPE=8 keys 126/127/128/304/305 pinned**)
+
+คำต่อคำจากจดหมาย: `0x430E10` คือ **`SCENE_NAME.n_ID -> n_SCENE_TYPE`** — เป็น **lookup โดยตรงผ่าน named
+gamedata table ไม่ใช่สูตรคำนวณ ไม่ใช่ switch/jump table ใน image** · ค่าที่คืน 8 ครบคือ **126, 127, 128, 304, 305**
+· image `GameClient/GameClient.local.bin` 14,759,424 ไบต์ sha256 `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`
+· ticket input `CLIENT_RE_QUEUE.md` sha256 `792a6ea3…d704b` · บล็อก RE-238 normalized sha256 `06eee0a1…972ff`
+· เริ่ม `2026-09-04T17:02:15.621+07:00` ปิด `2026-09-04T17:09:11.598+07:00`
+
+BUILD_IMPACT (ยกคำต่อคำ): LANE-GM แทน guard แบบ `x9 == 8` ด้วย lookup ที่เทียบ `category_5C` กับ exact set
+`{126,127,128,304,305}` ได้ · ต้องรักษา sentinel rule ของ `0` แยกจาก set · **ห้ามตั้งชื่อ `n_SCENE_TYPE=8` เกินหลักฐาน**
+Nonclaims: ไม่อ้างชื่อเชิงเกมของ type 8 · ไม่มีชั้น client-observable (ไม่เปิดเกม ไม่มี capture ใหม่) ·
+ไม่อ้างว่า server guard ปัจจุบันถูกแก้แล้ว
+
+🔴 **หมายเหตุ LANE-K**: ผลนี้ค้างพับมาตั้งแต่ **2026-09-04T17:09** (2 วันครึ่ง) ⇒ หัวใบบอก `OPEN` ทั้งที่ตอบแล้ว
 
 ## 🔬 RE-239 SECOND-PASSWORD-INCOMING-CREDENTIAL-FRAME-001  [🟡 PENDING (RESERVED - เนื้อใบยังไม่ถูกเขียน ห้ามลงรอบเทส) -- 🔴 route ให้ **LANE-DB** ติดป้ายตาม §18 ตอนวางเนื้อใบ (`STATIC-ON-BRIDGE` หรือ `NEEDS-ATTENDED-CAPTURE`) · เจ้าของใบ/ผู้บริโภคผล = **LANE-DB**]
 
@@ -1212,7 +1259,7 @@ bounded negative ⇒ LANE-DB ยังคง **ไม่** เติม `RESEND_
 
 ---
 
-## RE-270 SAILING-RESULT-STORE-KEY-COLUMN-DERIVATION-001  [🔴 **OPEN** · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-A** · ตั้งเลขโดย chief (LANE-E) รอบ `6z131u`/R362 ตาม `COO-DECISION 20260905_2349` ข้อ 3 + `20260906_0147` ข้อ 3 · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_0004_LANE-A-TO-CHIEF-re-ticket-request-*` คำต่อคำ · ป้ายเส้นทางของบ้าน **[STATIC-ON-BRIDGE]** (ต้องเปิดอิมเมจ client จึงเป็นงานบนเครื่องสะพาน ไม่ใช่คลาวด์ · `CHIEF.md` §1) — LANE-A เสนอคำว่า `[NEEDS-CLIENT-IMAGE]` ใน `0004` ซึ่งไม่ใช่หนึ่งในสามป้ายที่ `pf_re_queue_taglint.py` รู้จัก chief จึงแปลงเป็นป้ายบ้านให้ ความหมายเดียวกัน · **ไม่บล็อก `GT-233` v3** (`2349` ข้อ 3 ระบุชัดว่า "ไม่เลือก (ก) เป็นเงื่อนไขบูต")]
+## RE-270 SAILING-RESULT-STORE-KEY-COLUMN-DERIVATION-001  [✅ **CLOSED / BOUNDED-POSITIVE (static answered)** · คำต่อคำจากจดหมาย `notes_to_chief/20260906_1330_RE-270-RESULT-SAILING-RESULT-STORE-IS-KEYED-BY-N-ID-COLUMN-ZERO.md` (2026-09-06T13:30+07:00) · พับโดย LANE-K รอบ `dmef5j` 2026-09-07T04:09+07:00 · เดิม 🔴 **OPEN** · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-A** · ตั้งเลขโดย chief (LANE-E) รอบ `6z131u`/R362 ตาม `COO-DECISION 20260905_2349` ข้อ 3 + `20260906_0147` ข้อ 3 · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_0004_LANE-A-TO-CHIEF-re-ticket-request-*` คำต่อคำ · ป้ายเส้นทางของบ้าน **[STATIC-ON-BRIDGE]** (ต้องเปิดอิมเมจ client จึงเป็นงานบนเครื่องสะพาน ไม่ใช่คลาวด์ · `CHIEF.md` §1) — LANE-A เสนอคำว่า `[NEEDS-CLIENT-IMAGE]` ใน `0004` ซึ่งไม่ใช่หนึ่งในสามป้ายที่ `pf_re_queue_taglint.py` รู้จัก chief จึงแปลงเป็นป้ายบ้านให้ ความหมายเดียวกัน · **ไม่บล็อก `GT-233` v3** (`2349` ข้อ 3 ระบุชัดว่า "ไม่เลือก (ก) เป็นเงื่อนไขบูต")]
 
 **ทำไมต้องมีใบนี้**: `RE-265` ปิด BOUNDED-NEGATIVE โดยวัดได้ว่า record `+0x14` ถูก lookup ใน store ที่ client สร้างจากตาราง `SAILING_RESULT` จริง **แต่ไม่เคยวัดว่า store นั้นคีย์ด้วยคอลัมน์ไหน** (pf-adversary รอบ `tk4hr7` D3: `n_ID` เป็นสมมติ ไม่ใช่ค่าที่วัด) · `GT-233` v3 ใช้นัดเดียวที่มีทดสอบสองสมมติฐานพร้อมกัน (dock 153 = `n_ID` · dock 154 = `n_AREA`) — ใบนี้ตอบคำถามเดียวกันจาก disassembly แทนที่จะต้องเดาจากผลบนจอ
 
@@ -1235,7 +1282,23 @@ ATTENDED: สิ่งที่ต้องมีบนเครื่อง = �
 ATTENDED: ผลที่ส่งกลับ = ชื่อคอลัมน์ + VA + `span_sha256` — หรือคำว่า "อ่านแล้วแยกไม่ออก" พร้อมเขตที่ค้น
 
 ### result:
-(ว่าง)
+(พับโดย LANE-K รอบ `dmef5j` 2026-09-07T04:09+07:00 คำต่อคำจากจดหมาย
+`notes_to_chief/20260906_1330_RE-270-RESULT-SAILING-RESULT-STORE-IS-KEYED-BY-N-ID-COLUMN-ZERO.md`
+— หัวข้อ "สถานะที่ขอให้ chief ปิด" ของจดหมายเขียนว่า:)
+
+**`RE-270` → CLOSED / BOUNDED-POSITIVE (static answered) · checkpoint = method ceiling ของชั้น static
+(ตอบครบคำถามเดียวของใบแล้ว) ⇒ ห้าม rerun image เดิมกับคำถามนี้จนกว่า chief จะเปลี่ยน objective**
+
+คำตอบหนึ่งบรรทัด: `SAILING_RESULT` store ที่ `0x0072FE50` คีย์ด้วย **`n_ID`** (คอลัมน์ที่ 0 ของ record)
+
+BUILD_IMPACT (ยกคำต่อคำ): **ไม่มีการแก้โค้ดในรอบนี้** (ใบเป็นคำถาม static ล้วน) · ผลที่ LANE-A ใช้ได้ทันที:
+ถ้าจะ provision ให้ record `+0x14` ของ `NavigationEx_AddSurveyDataVtial` lookup ติด ต้องส่งค่าที่เป็น
+**`n_ID` ของแถว `SAILING_RESULT`** (1..138 ตามไฟล์ที่ commit) — **ไม่ใช่ `n_AREA`** (ค่า `126` ฯลฯ) ·
+สมมติฐาน dock 154 = `n_AREA` ของ `COO-DECISION 20260905_2349` **ถูกหักล้างจากฝั่ง static แล้ว**
+แต่ `GT-233` v3 ยังเป็นชั้นที่ยืนยันบนจอ
+
+🔴 **หมายเหตุ LANE-K**: `NOW.md` `PANYA 1910` สั่ง **"GT-233 ปิด ห้าม trial `AddSurveyData`"** ⇒ เสมียนยก
+BUILD_IMPACT มาคำต่อคำตามหน้าที่ แต่ **ไม่ได้แปลว่าให้ใครไปทำ** — ใครจะใช้ผลนี้ต้องอ่าน NOW ก่อน
 
 > 🔴 **ห้ามสายอื่นใช้เลข `RE-270`** · numbering: คำสั่งนับเลขของบ้าน (`grep -ohE '\b(GT|RE)-[0-9]{3}\b' GAME_TEST_QUEUE.md CLIENT_RE_QUEUE.md archive/*QUEUE*ARCHIVE*.md | ... | tail -1`) คืน **267** รอบ `6z131u` ⇒ เลขว่างตัวแรกคือ 268 **แต่ chief ข้ามไป 270** โดยเจตนา: `GT-268` (LANE-A ฉาก 304 census) และ `GT-269` (LANE-GM P-3 GMUI) ถูกประกาศเป็นของสองสายนั้นไปแล้วในจดหมาย `FROM_CHIEF_R361_TO_ALL_20260906_0040.md` (เนื้อใบยังไม่ลงไฟล์ จึงยังไม่นับในคำสั่งข้อ ②) — การหยิบ 268/269 มาใช้จะชนกับสองสายที่กำลังเขียนเนื้อใบอยู่
 > 🔵 ตัวนับร่วมกับ `GAME_TEST_QUEUE.md` · ใบนี้ไม่จองเลขล่วงหน้า — เนื้อใบมาครบก่อนลงไฟล์ตามข้อ ① ของกติกาไฟล์นี้
@@ -1498,7 +1561,7 @@ s_SCORE หกตัวเลขคืออะไร (ลำดับ STR/CON/D
 
 > 🔴 **ห้ามสายอื่นใช้เลข `RE-282`** · numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน **281** (`GT-281`, ตั้งเลขรอบเดียวกัน `zqq4qz`) ⇒ ใบนี้ **282** · ตรวจ 0 hit ของ `GT-282`/`RE-282` ทั้งสามที่ก่อนวาง [ตรวจโดย LANE-K รอบ `zqq4qz`]
 
-## RE-283 GMUI-THREE-PAGES-BUTTON-TO-OPCODE-MAP-001  [🔴 **OPEN** · 🔺 `[NEEDS-CLIENT-IMAGE]` (ต้องอ่าน `.model`/`.project` + โค้ดไคลเอนต์จริง ไม่ใช่งานคลาวด์) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-GM** · ตั้งเลขโดย LANE-K รอบ `zqq4qz` 2026-09-06T16:09+07:00 (คำขอค้างจากรอบ `rsmsia`/`n3s0rg`) · เนื้อใบมาจากจดหมาย `notes_to_chief/20260904_1328_LANE-GM-RE-TICKET-gmui-three-pages-button-to-opcode-map.md` คำต่อคำ · อ้าง: `COO-DECISION 20260904_0245` ข้อ 1 · `COO-DECISION 20260904_1149` · `PANYA-DECISION 20260904_0233` ข้อ 3]
+## RE-283 GMUI-THREE-PAGES-BUTTON-TO-OPCODE-MAP-001  [✅ **ปิดครบทั้ง 5 ข้อแล้ว** (คำของจดหมายเอง) · `notes_to_chief/20260907_0331_RE-283-RESULT-FINAL-BUTTON-OK-SENDS-GM_RunGMCommandVital-NO-LOGTYPE-ON-THE-WIRE.md` (2026-09-07T03:31+07:00) · พับโดย LANE-K รอบ `dmef5j` 2026-09-07T04:09+07:00 · เดิม 🔴 **OPEN** · 🔺 `[NEEDS-CLIENT-IMAGE]` (ต้องอ่าน `.model`/`.project` + โค้ดไคลเอนต์จริง ไม่ใช่งานคลาวด์) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-GM** · ตั้งเลขโดย LANE-K รอบ `zqq4qz` 2026-09-06T16:09+07:00 (คำขอค้างจากรอบ `rsmsia`/`n3s0rg`) · เนื้อใบมาจากจดหมาย `notes_to_chief/20260904_1328_LANE-GM-RE-TICKET-gmui-three-pages-button-to-opcode-map.md` คำต่อคำ · อ้าง: `COO-DECISION 20260904_0245` ข้อ 1 · `COO-DECISION 20260904_1149` · `PANYA-DECISION 20260904_0233` ข้อ 3]
 
 **หัวเรื่อง**: สารบัญปุ่ม GMUI ทั้งสามหน้า — ปุ่มไหนอยู่หน้าไหน และแต่ละปุ่มส่ง opcode อะไร
 
@@ -1545,7 +1608,25 @@ widget ตัวไหนยิงเฟรมอะไร ทั้งสอง
 artifact รองรับจริง 7 vital + 97 ประเภท log + ตารางปุ่มว่างโดยเจตนา + `assert_backed()`)
 
 ### result:
-(ว่าง)
+(พับโดย LANE-K รอบ `dmef5j` 2026-09-07T04:09+07:00 คำต่อคำจากจดหมาย
+`notes_to_chief/20260907_0331_RE-283-RESULT-FINAL-BUTTON-OK-SENDS-GM_RunGMCommandVital-NO-LOGTYPE-ON-THE-WIRE.md`
+— หัวจดหมายเขียนเองว่า **"ต่อจาก PARTIAL · ปิดครบทั้ง 5 ข้อแล้ว"**)
+
+- **ข้อ 3 — เฟรมที่ส่งจริง: `GM_RunGMCommandVital`** (ยืนยันด้วยโซ่ static ครบ ไม่ใช่การอนุมานจาก `RE-091`)
+- **ข้อ 5 — `n_LogType` (97 ชนิดใน `TEXTDATA_TH__GMTOOL`): ไม่มีบนสาย (bounded negative)**
+- ข้อความที่ผู้เล่นพิมพ์ในช่อง Cheatcode ถูกส่ง **โดยตัด `/` ตัวแรกทิ้งแล้ว** — เซิร์ฟเวอร์ต้องไม่คาดหวัง `/` นำหน้า
+- ฝั่งรับของไคลเอนต์ใช้ handler `0x00A106C0` ที่ **แชร์กัน 11 คลาส** ⇒ ไคลเอนต์ไม่ทำอะไรเป็นพิเศษเมื่อได้รับ `0x51E9` กลับ
+
+BUILD_IMPACT (ยกคำต่อคำ): ไม่มีการแก้โค้ดโดย RE runner · ปลดบล็อกฝั่งความรู้ให้สาย GM เขียน handler ฝั่งเซิร์ฟเวอร์
+ของ `0x51E9` ได้ครบ: อ่าน presence byte → อ่าน (u32 บิตฟังก์ชัน, u32 ตัวเลข, u8 แฟล็ก, string, string) แล้ว
+dispatch ตามบิต · `n_LogType` เลือกฝั่งเซิร์ฟเวอร์เอง
+
+Nonclaims (ยกคำต่อคำ): ไม่อ้างว่าเซิร์ฟเวอร์ต้องตอบอะไรกลับ · ไม่อ้างความหมายของสตริงที่สอง (`+0x38`) ·
+ไม่อ้างว่า 17 บิตครบทุกฟังก์ชันของ GMUI · **ไม่ได้ยืนยันด้วย capture จริง** (`PF_FIELD_VALIDATION` ของเฟรมนี้
+ยังเป็นเรื่องของชั้น attended) · read-only ล้วน
+
+🔴 **หมายเหตุ LANE-K**: `NOW.md` (`0405`) บันทึกไว้แล้วว่า P-3 `GT-279` **"ปุ่มส่ง `0x51E9` จริง แต่
+`capture_raw_gm_command` ไม่เขียนไฟล์ (RE-283 `0331`)"** ⇒ ชั้น attended ยังไม่ปิด ใบนี้ปิดเฉพาะชั้น static
 
 > 🔴 **ห้ามสายอื่นใช้เลข `RE-283`** · numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน **282** (`RE-282`, ตั้งเลขรอบเดียวกัน `zqq4qz`) ⇒ ใบนี้ **283** · ตรวจ 0 hit ของ `GT-283`/`RE-283` ทั้งสามที่ก่อนวาง [ตรวจโดย LANE-K รอบ `zqq4qz`]
 
