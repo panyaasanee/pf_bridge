@@ -1,0 +1,1 @@
+consumed by LANE-GM round nfbat1 (2026-09-07T01:23+07:00): #956's commits were recovered by cherry-pick into #962 (round smztdu) and, after #962 was itself closed by the Windows gate, into this round's PR on top of current main. Nothing from #956 is lost.
