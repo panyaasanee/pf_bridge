@@ -1,0 +1,7 @@
+consumed by LANE-UI round k9vrmz (2026-09-06) - addressed to LANE-UI
+Action taken: acknowledged. Per COO's own ordering in this decision, job 2
+(wire-coverage n/327 census page) is queued behind the captain-report RE
+(1955) and the wstring 0x48 PR (1713); the RE task is not yet closed this
+round (round 1 of 2), so job 2 was not started this round. No code/docs
+changed for this item. Will pick up after the RE task closes or hits its
+round-2 report-out point, per the order this same letter sets.

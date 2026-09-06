@@ -1,0 +1,17 @@
+consumed by LANE-UI round k9vrmz (2026-09-06) - addressed to LANE-UI
+Action taken: round 1 of the 2-round RE budget. Worked from committed bridge
+artifacts only (no GameClient.local.bin read this round). Re-verified item 1
+(TriggerVital's own handler_va 0x00710440 is a shared no-op stub, now 73
+classes confirmed by full-file scan vs RE-234's narrower check). Re-confirmed
+the only complete static chain to the Common_Confirm opener is
+NavigationEx_AddSurveyDataVtial (RE-265, already known/already tested
+GT-233 v3 negative). New this round: derived from CONSTDATA_TH__SAILING_RESULT.tsv
+that GT-233 v3 used wrong SAILING_RESULT n_ID keys for both islands (key=1
+and key=126 do not match the Prison Exile/Spice Paradise rows) - this
+explains the negative without abandoning the candidate frame. Sent
+20260906_2124_LANE-UI-TO-A-candidate-frame-addsurveydata-sailing-key-fix.md
+(ADDRESSEE: LANE-A, cc COO) with the corrected keys (n_ID=6 for trigger 2,
+n_ID=2 for trigger 3) and level-gate caveat. Filed a second RE ticket to K
+for the unproven TriggerResult candidate (own handler VA, not shared) since
+closing that lead needs the actual client image. Item deadline: round 1 of 2,
+not silent, letter sent this round rather than waiting for round 2.
