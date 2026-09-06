@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round jz5vtt/R370 2026-09-06T14:5x+07:00: both letters named are LANE-UI's: 2006 CORE-REQUEST (exit-game/logout headless) is a chief job on runtime.py and is now job 1 of R371, stated to LANE-UI in FROM_CHIEF_R370; 2015 ASK-COO (pf-adversary not callable) is the known ADVERSARY_UNAVAILABLE shape already covered by COMMON_LANE_ROUND's own token rule.
