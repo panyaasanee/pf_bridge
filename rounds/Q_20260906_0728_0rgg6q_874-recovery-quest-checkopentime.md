@@ -104,10 +104,17 @@ sections before writing that code, not re-derive them.
 - Full suite, first commit, on `origin/main` `a05ad4d` in:
   `python3 -m pytest tests -q -rs` = `11940 passed, 369 skipped, 23158
   subtests passed in 595.97s`, exit 0.
-- Full suite again, final commit (after the adversary-fix commit):
-  `11940 passed, 369 skipped, 23158 subtests passed in 563.70s`, exit 0.
+- Full suite again, final commit (after the adversary-fix commit), still
+  on `origin/main` `a05ad4d`: `11940 passed, 369 skipped, 23158 subtests
+  passed in 563.70s`, exit 0.
+- `origin/main` advanced to `ed2d8d4` (6 commits, none touching this
+  round's files) while the PR sat open; preflight caught it (`[mainmerge]
+  RED`) before push. Merged `origin/main` into the branch (clean, no
+  conflicts) and ran the full suite a third time on that merged tree:
+  `11976 passed, 369 skipped, 23166 subtests passed in 562.16s`, exit 0.
 - `python3 tools_bridge/pf_gate_preflight.py --repo ../pirate-force-server`:
-  PREFLIGHT PASS (both before and after the adversary-fix commit).
+  PREFLIGHT PASS (after the adversary-fix commit, and again after the
+  `origin/main` merge -- `[mainmerge] PASS` on the final run).
 - `python3 tools_bridge/pf_gate_preflight.py --repo ../pirate-force-server
   --pr-body <file> --pr-stage final`: PREFLIGHT PASS, marker check PASS
   (exactly one `PF-AUTOMERGE: v4` line).
@@ -129,13 +136,11 @@ PR body.
 
 ## Sent (SHA/PR)
 
-- `pirate-force-server` branch `claude/hopeful-hopper-0rgg6q`: two commits
-  (the cherry-pick + merge resolution, then the adversary-fix follow-up)
-  -- PR `#900`, open, not draft, `PF-AUTOMERGE: v4` present from open,
-  verified via GET after creation. `mergeable_state` was `unstable`
-  (pending checks) at push time; separately confirmed with
-  `git merge-tree` against the latest fetched `main` that no real conflict
-  exists against the newest tip.
+- `pirate-force-server` branch `claude/hopeful-hopper-0rgg6q`: three
+  commits (the cherry-pick + merge resolution, the adversary-fix
+  follow-up, then a merge of `origin/main` after it advanced 6 commits
+  while the PR sat open) -- PR `#900`, open, not draft, `PF-AUTOMERGE: v4`
+  present from open, verified via GET after creation.
 - `pf_bridge` branch `claude/kind-albattani-0rgg6q`: this round file --
   claim PR `#1447`.
 
