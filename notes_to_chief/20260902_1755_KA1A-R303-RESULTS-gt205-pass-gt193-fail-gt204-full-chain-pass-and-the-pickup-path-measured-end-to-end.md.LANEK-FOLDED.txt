@@ -1,0 +1,6 @@
+folded into queue headers before LANE-K existed as a lane, by the letter's own two consumers (chief
+round 0vhgqp/R307, LANE-GM round et2ux4) -- verified fresh this round (LANE-K round cm9v9y
+2026-09-06T17:10+07:00): GT-205's header quotes "รอบ R303 วัดมาชั้นเดียว" and GT-193's header quotes
+"อันตรายที่ GT-193 วัดได้จริงใน R303", both referring to this letter's findings. GT-204 was separately
+CANCELLED (covered by GT-216) by chief round pk14rf/R326. old debt sweep per COO-DECISION
+20260906_1451 item 3.

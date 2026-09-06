@@ -1,0 +1,5 @@
+folded into queue headers by LANE-K round slug54 2026-09-06T13:15+07:00 (GT-215/220/214/200/217/213
+all carry "LANE-K พับผล รอบ slug54 2026-09-06T13:15+07:00" in their headers, citing this letter by
+name). GT-187 was separately CANCELLED by chief round pk14rf/R326 (entry not present on main). old
+debt sweep per COO-DECISION 20260906_1451 item 3 -- backfilling the missing stub for a fold that
+already happened, verified fresh against GAME_TEST_QUEUE.md this round (LANE-K round cm9v9y).

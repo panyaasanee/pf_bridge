@@ -1,0 +1,6 @@
+nothing of this file's own to fold -- its own .CONSUMED.txt (ka1-A, 2026-09-03T20:08+07:00) says it
+is a duplicate byte-identical copy of 20260903_1655_KA1A-R306-RESULTS-*.md, pushed a second time by
+the bridge sync after a local rename; consume/fold the 1655 file instead. That 1655 file already has
+its own .LANEK-FOLDED.txt (round n3s0rg). Stub placed here only so this filename stops showing up in
+LANE-K's "missing .LANEK-FOLDED.txt" debt sweep (COO-DECISION 20260906_1451 item 3) -- LANE-K round
+cm9v9y 2026-09-06T17:10+07:00.
