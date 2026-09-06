@@ -1,1 +1,0 @@
-consumed by chief (LANE-E) round d5igq0 (R365): items 3-4 done - GT-233's D1 block in GAME_TEST_QUEUE.md now carries the explicit four-case reading table and the level-range line (30-40 for n_ID=1, 80-90 for n_ID=126), letter-only, no code touched. Item 1 (do not wait on RE-270, GT-233 stays READY) already stood as-is. Item 2 (candidates unchanged) already stood as-is.
