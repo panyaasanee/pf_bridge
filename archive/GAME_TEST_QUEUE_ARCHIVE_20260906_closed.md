@@ -2073,3 +2073,33 @@ RECHECK: (ตัดสินด้วยเนื้อโค้ดบน `origi
 
 ---
 
+
+## GT-277 LV-SET-CHARACTER-LEVEL-RELOG-001  [✅ **PASS สองชั้น · OBSERVER_CONFIRMED (ผู้เทสไม่ได้เขียน ISO เป๊ะ แต่ทำซ้ำสามครั้ง 11:13/12:18/12:20 +07:00 2026-09-06)** — ตั้งเลข+วางเนื้อ+พับ+archive ในรอบเดียวโดย LANE-K รอบ `n3s0rg` 2026-09-06T14:10+07:00 ตาม `COO-DECISION 20260906_1346` ข้อ 3(ก) · เนื้อใบคำต่อคำจาก `notes_to_chief/20260906_0434_LANE-GM-TO-CHIEF-slash-lv-lands-gt-body-and-re-question.md` ข้อ 1 · ผลคำต่อคำจาก `notes_to_chief/20260906_1255_KA1A-R321-RESULTS-*.md` §3 (`RESULT: GT-LV(no number) PASS R321 2026-09-06 11:13-12:21`) · เจ้าของใบ = LANE-GM · ปิด `PANYA-ORDER 20260906_0155` (เส้นตาย 14:00) ทางเอกสาร]
+
+- objective: `/lv <n>` (คำสั่ง GM) เขียนเลเวลลง DB จริง และเลเวลใหม่ปรากฏบนจอหลัง relog
+- owner/consumer = LANE-GM
+
+ATTENDED: บูต run-copy DB (`--db state\run_gtlv.sqlite3`) ด้วยบัญชี GM · เข้าเกมด้วยตัวละครหนึ่งตัว
+ATTENDED: จดเลเวลที่จอแสดงตอนนี้ · พิมพ์ในช่องแชต: `/lv 30`
+ATTENDED: ดู (ก) ประโยค `LV SET RELOG` โผล่ในช่องแชตภายใน 5 วินาที (ข) คอนโซลเซิร์ฟเวอร์มีบรรทัดขึ้นต้น `GM_LV`
+ATTENDED: logout แล้ว login ใหม่ด้วยตัวละครเดิม · ดูเลเวลที่หน้าต่างสถานะและที่ป้ายชื่อ
+ATTENDED: PASS = ข้อ 4 เห็นเลขที่ตั้ง · FAIL = ยังเห็นเลขเดิม (จดว่าเห็นที่ไหนบ้าง/ไม่เห็นที่ไหน)
+
+**เกณฑ์ผ่านสองชั้น**
+- **wire/DB**: แชท `LV SET RELOG` + คอนโซล `GM_LV ... level -> <n> (row written; next login sends it)`
+- **client-observable**: หลัง relog จอ/ป้ายชื่อแสดงเลเวลใหม่ (`LOGIN_VITALS from_row level=<n>`)
+
+**nonclaims** (คำต่อคำจากผู้เขียนใบ, LANE-GM):
+- ผลลบมีค่าเท่าผลบวก: ถ้าแถวเปลี่ยนแต่จอไม่เปลี่ยน = ไคลเอนต์ไม่ได้วาดจาก BasicAttr bit `0x0002` (คำตอบเดียวกับที่ `GT-200` ยังค้างอยู่)
+- ห้ามใช้ `/lv` เป็นหลักฐานว่า M-อะไรผ่าน · ใบไหนใช้ `/lv` ไปถึงสภาพเทสต้องมี nonclaim ว่าข้ามขั้นไหน
+- ยาม canonical DB ทำให้ `/lv` ทำงานเฉพาะบูต run-copy ⇒ เลเวลอยู่รอด relog **ภายในบูตเดียว** เท่านั้น บูตถัดไปที่ copy DB ใหม่จะกลับเป็นค่าเดิม (ข้ามบูตต้องเป็นคำสั่งใหม่ของเจ้าของ)
+
+**result** (คัดลอกคำต่อคำจาก `notes_to_chief/20260906_1255_KA1A-R321-RESULTS-*.md` §3):
+`/lv 5` 11:13:09 → แชท `[ทั่วไป] : LV SET RELOG` · err `GM_LV … level -> 5 (row written; next login sends it)` · จอยัง LV 1 (ตั้งใจ ยังไม่ relog) → relog 11:17 → **จอ LV 5** · `LOGIN_VITALS from_row level=5` · `/lv 1` 12:18 → relog → LV 1 · `/lv 5` 12:20 → relog → LV 5 · ทำซ้ำ 3 ครั้งตรงทุกครั้ง
+สถานะที่เสนอ (ka1-A): **PASS สองชั้น** — chief/COO สั่งว่าตั้งเลขใบแล้วปิดจากผลนี้ได้เลย ไม่ต้องบูตซ้ำ (`COO-DECISION 20260906_1346` ข้อ 3(ก))
+
+**links**: `RE-LV-LIVE-UPDATE-FRAME-001` (`RE-278`, คำถามต่อยอด: เฟรม live-update เลเวลไม่ต้อง relog) · `GT-200` (ยังค้าง, คำถามเดียวกันเรื่อง BasicAttr bit `0x0002`) · `attr_wire.py:424` แถว x=2 (`RE-117`)
+
+**ผู้เปิดใบ: LANE-GM (ผ่าน `notes_to_chief/20260906_0434_LANE-GM-TO-CHIEF-*`) ตาม `PANYA-ORDER 20260906_0155` -- ตั้งเลข/วาง/พับ/archive: LANE-K รอบ `n3s0rg` ตาม `COO-DECISION 20260906_1346` ข้อ 3(ก) -- ผู้บริโภคผล: LANE-GM**
+
+---
