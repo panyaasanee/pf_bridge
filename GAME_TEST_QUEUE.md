@@ -9213,83 +9213,7 @@ R313 (ไม่มีตัวแก้)     : len(pc)=60 len(frame)=70  pc[18:2
 
 ---
 
-## GT-242 BACKPACK-OPEN-DOES-NOT-WIPE-THE-GROUND-001  [🔧 LANE-K พับผล รอบ `n3s0rg` 2026-09-06T14:10+07:00 — 🔴 ผลค้างพับก่อนหน้าที่รอบ `slug54` มองข้าม: **R316 2026-09-05T11:02+07:00 เสนอ PASS สองชั้น** — wire (1)(2)(3)(5) ครบ + client (7)(8)(9) ครบ (ของยังอยู่บนจอก่อน/ระหว่าง/หลังเปิดกระเป๋า) · เฉพาะข้อ (4) `oldest_left` เดี่ยว = NO-RESULT (ไม่กระทบข้ออื่น) · `OBSERVER_CONFIRMED: 2026-09-05T10:50+07:00` · จาก `notes_to_chief/20260905_1102_KA1A-R316-RESULTS-*.md` · RESULT: GT-242 PASS-สองชั้น(เว้น item4 NO-RESULT) R316 2026-09-05 · [สมมติของสาย LANE-K - รอ COO ยืนยัน] ไม่ทราบว่า R321 (2026-09-06 ด้านล่าง) ตั้งใจวัดซ้ำทั้งที่ R316 ผ่านแล้ว หรือ R316 ยังไม่นับปิดใบเพราะเหตุผลอื่น — ถามแล้วใน `notes_to_chief/20260906_1410_LANE-K-ASK-COO-gt242-r316-pass-vs-r321-blocked.md` · **ยังไม่ archive จนกว่า COO ตอบ** · ---- 🔧 LANE-K พับผล รอบ `slug54` 2026-09-06T13:15+07:00 — BLOCKED (R321 2026-09-06 §8: ต้องฆ่ามอน แต่มอนฉาก 2 เขียว/ตีไม่ได้จากบั๊ก §1 login-126-no-faction — ไม่ใช่ผลของเกณฑ์ใบนี้เอง) · RESULT: GT-242 BLOCKED R321 2026-09-06 (same as GT-220/223) · จาก notes_to_chief/20260906_1255_KA1A-R321-*.md · ✅ **READY -- บูตได้ทันที** (ปลดหัวโดย chief รอบ `rs8uyz`/R350 2026-09-05T08:2x+07:00) · **วัดจาก `main` ในรอบที่เขียน ไม่ใช่จากบันทึกรอบก่อน** (`NOW.md` `COO 1849`): `#781` merge แล้ว = `f71cb9ae` · `mob_drop_presence.py:818` มี `GROUND_REANNOUNCE_AFTER_SECOND_PWD` บน main · จุดเรียก `runtime.py:10130` `reannounce_ground(` บน main — สองครึ่งครบ · เดิม: 🟠 BLOCKED รอ `#781` (chief รอบ `kj0s6r`/R346 2026-09-05T02:3x+07:00) · ✅ **(ก) ฟังก์ชันประกาศของบนพื้นซ้ำ = อยู่บน `main` แล้ว** (`mob_drop_presence.reannounce_ground` · LANE-B ตาม `COO 20260904_1649` ข้อ 2) · 🟠 **(ข) จุดเรียกของ chief = push แล้ว รอเกต+merge ที่ `#781`** (`COO 20260904_1648` ข้อ 2 · commit `3393eb85` · ทดสอบ headless 8 ใบ มิวแทนต์ตายสองตัว · ชุดเต็ม 10360 passed / 0 failed เขียว(cloud sanity) `python3 -V` = 3.11.15) · ✅ ~~ห้ามบูตจนกว่ารอบถัดไปจะเห็น `#781` `merged=true`~~ **จ่ายแล้ว R350** (`AGENTS.md` §7: อยู่บน main ต่อเมื่อรอบถัดไปวัดได้ — R350 วัดแล้ว ดูหัวใบ) · `RECHECK` ผ่านครบ = ปลดเป็น `READY` · เปิดโดย chief รอบ `oi2r2n`/R340 · เจ้าของใบ/ผู้บริโภคผล = **chief (LANE-E)** · ผู้รัน = **Panya (attended)** ~8 นาที]
-
-> 🔴 **ใบข้อบกพร่อง ไม่ใช่ใบสำรวจ** — อาการวัดแล้ว ใบนี้พิสูจน์ว่า**ตัวแก้ได้ผล**
-> 🔴 **ห้ามผูก ห้ามต่อคิว ห้ามเกรดรวมกับ `GT-223`** (`COO 20260904_1648` ข้อ 2 คำต่อคำ) — ใบนี้อยู่ในเซสชันล็อกอินเดียว ไม่มีรีล็อกอิน
-
-- objective: ข้ออ้างเดียว -- **การเปิดกระเป๋าไม่ทำให้ของที่ยังอยู่บนพื้น (เซิร์ฟเวอร์ยังถือ ยังไม่หมดอายุ) หายไปจากจอ**
-- ที่มา (วัดแล้ว ไม่ใช่การเดา): `notes_to_chief/20260904_1430_KA1A-R309-RESULTS-*` finding 1 — ดรอป `2205601` แล้วเจ้าของ **เปิดกระเป๋าเฉย ๆ** ⇒ ของหายจากจอ · ไคลเอนต์ส่ง `CheckSecondPwdVital 0x4B98` (64 B) → เราตอบ `V110_CHECK_SECOND_PASSWORD_OK` (44 B) **ท้ายเฟรม `0B 00` = ground-list ว่าง** · หลังจากนั้นคอนโซลยังพิมพ์ `MOB_DROP_PRESENCE ... live=1 announced=0 carried=1 oldest_left=65.6s` ⇒ **ของไม่ได้หมดอายุ**
-
-- RECHECK: (รันจากราก `pf_bridge` · ข้อใดไม่ผ่าน = ยัง BLOCKED ห้ามบูต)
-  ```
-  git -C ../pirate-force-server fetch origin
-  git -C ../pirate-force-server grep -c "GROUND_REANNOUNCE_AFTER_SECOND_PWD" origin/main -- src/
-  git -C ../pirate-force-server grep -n "mob_drop_presence.reannounce_ground" origin/main -- src/pirateforce_foundation/runtime.py
-  ```
-  ข้อ 1 ต้อง **>= 1 hit** · ข้อ 2 ต้อง **>= 1 hit** และอยู่ทันทีหลังบรรทัด `actions = super().dispatch(parsed)` (`runtime.py` ~10051-10125)
-  ✅ **แก้แล้วโดย chief รอบ `kj0s6r`/R346 — คำสั่ง grep เดิมใช้ไม่ได้ ต้องแก้พร้อมโค้ดในรอบเดียวกัน** (`AGENTS.md` §7 · `NOW.md`): ชื่อโทเคนที่เคยเสนอไว้ (`GROUND_REANNOUNCE_AFTER_SECOND_PWD`) **ไม่ได้อยู่ใน `runtime.py`** — มันเป็นค่าคงที่ของ `mob_drop_presence.py` (ฟังก์ชันเป็นคนพิมพ์เอง) ⇒ grep เดิมจะได้ **0 hit ตลอดกาล** และ RECHECK จะไม่มีวันผ่าน แม้สายจะเสียบถูกทุกอย่าง · คำสั่งข้างบนคือชื่อจริงที่ลงบน `main` แล้ว
-  🔴 **จุดเสียบไม่ใช่ที่ที่ใบขอไว้เดิม และนี่คือความตั้งใจ** (วัดแล้วรอบ `kj0s6r` ด้วยการรันจริง): `GROUND_REANNOUNCE_WIRING` ชี้ไปที่บล็อกที่เรียก `make_proactive_second_password_ok` ซึ่ง **ทั้งสองบล็อกอยู่หลัง `second_password_mode == "bypass"`** ⇒ เป็นโค้ดตายบนบูต attended ทุกครั้ง (บิลด์ attended ต้องเป็น `required` มิฉะนั้นสำมะโนดับทั้ง 13 แมพ) · เฟรมตอบ 44 ไบต์ถูกส่งบนบูต `required` จริง **ผ่านการสืบทอด** (`PersistentGameSessionState(legacy.GameSessionState)` → `super().dispatch()` → `pf_login_game_server_v141.py:3864-3867`) ซึ่งเป็นเหตุที่ grep หาชื่อ vital ใน `runtime.py` ไม่เจอ · ยืนยันจากบันทึก R309 เอง: `14:18:01 client CheckSecondPwdVital 0x4B98 (64 B) -> server V110_CHECK_SECOND_PASSWORD_OK (44 B)` บนบูตไม่มีธง
-
-- db: **สำเนาเท่านั้น** `copy state\pirateforce.sqlite3 state\run_gt242_<stamp>.sqlite3` แล้วบูตทับสำเนา · sha256 canonical ก่อน/หลังต้องตรง `CANON_SHA.txt` · `PRAGMA integrity_check` = `ok` สองครั้ง
-- server args: บูตมาตรฐาน · `-SecondPasswordMode bypass` · 🔴 **ไม่มีแฟล็ก `--*-scenario`** · เก็บคอนโซลรวม `2>&1` + `capture_v141\GAME_LIVE.txt`
-  🔴🔴 **กับดัก GT-192 ซ้ำ — chief เติมบรรทัดกันไว้รอบ `kj0s6r`/R346** (`notes_to_chief/20260902_1604_LANE-GM-TO-CHIEF-gt192-server-args-line-would-disable-the-census.md`):
-  `-SecondPasswordMode bypass` **ขีดเดียว = แฟล็กของไคลเอนต์** ใส่ตรงบรรทัดคำสั่งเปิด `GameClient` เท่านั้น ·
-  🔴 **ห้ามส่ง `--second-password-mode` (สองขีด) ให้เซิร์ฟเวอร์เด็ดขาด** — ค่าที่ไม่ใช่ `required` ทำให้
-  `world_census_enabled` เป็นเท็จและ **สำมะโนดับทั้ง 13 แมพ** ⇒ ไม่มีมอนให้ฆ่า ไม่มีของตก ใบนี้กลายเป็น NO-RESULT
-  ที่ดูเหมือนความผิดของตัวแก้ · เซิร์ฟเวอร์ของใบนี้บูตด้วยค่าเริ่มต้น (`required`) เท่านั้น และ**นั่นคือบูตที่ตัวแก้ทำงาน**
-  ```
-  py -3 -u -m pirateforce_foundation.app --db state\run_gt242_<stamp>.sqlite3
-  ```
-
-- steps: (เซิร์ฟเวอร์ก่อน ไคลเอนต์ทีหลัง · ฆ่าไคลเอนต์แล้วต้องรีสตาร์ตเซิร์ฟเวอร์ก่อน · 🔴 **ห้ามพิมพ์ลงแชท** ตัวอักษรตอนแชทไม่ focus = ฮอตคีย์)
-  1. RECHECK ผ่านครบ · `LOCK_GAME` · boot stamp · sha canonical · คัดลอก DB
-  2. บูตเซิร์ฟเวอร์ใหม่สด → บูตไคลเอนต์ → ล็อกอินลงฉาก 2 → รอโหลดจบ
-  3. 🔴 **NEGATIVE CONTROL ห้ามข้าม:** ตอนพื้น**ยังไม่มีของ** เปิดกระเป๋า → ภาพ `S0` เต็มความละเอียด → ปิด · จดว่าเปิดด้วยปุ่ม/คีย์อะไร แล้วใช้ท่าเดิมทุกครั้ง
-  4. ฆ่ามอนหนึ่งตัวให้มีของตก · **อย่าเก็บ อย่าเดินหนี** · ภาพ `S1` (เห็นโมเดล + ป้ายชื่อของ) · จด **T0 = เวลา (+07:00) ของบรรทัด `MOB_LOOT_DROPS_CENSUS` ของการตกครั้งนี้**
-  5. 🔴 **ภายใน 30 วินาทีจาก T0** (อายุประกาศ 120 วิ — ช้ากว่านี้เสี่ยงวัดการหมดอายุแทน) เปิดกระเป๋าท่าเดิม · **ห้ามคลิกอะไรทั้งในแผงและบนพื้น** · รอ ~10 วิ · ภาพ `S2` **มุมเดียวกับ `S1`** เห็นทั้งแผงกระเป๋าและพื้นจุดที่ของตกในภาพเดียว
-  6. ปิดกระเป๋า · ภาพ `S3` มุมเดียวกับ `S1`
-  7. NO-CRASH: **คลิกขวาค้างลากกล้องอย่างเดียว** (🔴 ห้ามใช้ `Q`/`E` — มันหมุนตัวละครและยิง `TargetPosVital`) · ออกด้วยปุ่ม X
-  8. ปิดเซิร์ฟเวอร์ แล้วคัดหลักฐาน:
-     ```
-     findstr /C:"MOB_LOOT_DROPS_CENSUS" /C:"MOB_DROP_PRESENCE" <คอนโซลรวม>
-     findstr /C:"GROUND_REANNOUNCE_AFTER_SECOND_PWD" <คอนโซลรวม>
-     findstr /C:"CheckSecondPwdVital" /C:"V110_CHECK_SECOND_PASSWORD_OK" <คอนโซลรวม>
-     ```
-  9. sha256 ทุกไฟล์ · `integrity_check` · sha canonical ซ้ำ · **รัน teardown เสมอ** · ห้าม commit เอง
-
-- pass criteria: 🔴 **สองชั้น ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น** · ครบชั้นเดียว = `🟡 <ชั้นที่ครบ> ... · <ชั้นที่ขาด> = NOT MEASURED · ใบยังไม่ปิด` **ห้ามปั๊ม PASS**
-  - **wire/DB** (คอนโซล + `GAME_LIVE.txt` · ไม่ต้องมีตาคน):
-    (1) ขั้น 4 มีครบคู่ `MOB_LOOT_DROPS_CENSUS ... items=<id>:x1@<obj>` และ `MOB_DROP_PRESENCE ... live=1 announced=1 ... declared_lifetime=<n>`
-    (2) ขั้น 5 มี `CheckSecondPwdVital` ขาเข้า (64 B) + reply 44 B · คัด**ท้ายเฟรม 2 ไบต์** ของ reply — อ่านไม่ได้เขียน `tail=unread` **ห้ามเดา** · ~~`tail=0B 00` = **FAIL ชั้นนี้**~~ 🔴 **ถอนเกณฑ์นี้ทิ้ง — chief รอบ `kj0s6r`/R346 (วัดแล้ว)**: reply 44 ไบต์คือ `make_check_second_password_success()` ซึ่งถูก **พินด้วย sha256** (`second_password_bypass.SECOND_PASSWORD_OK_FRAME_SHA256`) และมาจาก v141 ที่แช่แข็ง ⇒ ท้ายเฟรมของมัน **เป็น `0B 00` เสมอและเปลี่ยนไม่ได้** ตัวแก้ของรอบนี้ต่อเฟรมประกาศซ้ำ *เพิ่ม* หลัง reply ไม่ได้แก้ตัว reply ⇒ เกณฑ์เดิมทำให้รอบที่**ทำงานถูกทุกอย่าง**ยังรายงาน FAIL ชั้น wire และใบปิดไม่ได้ตลอดกาล (เสียเวลาผู้เทส 8 นาทีโดยรับประกันว่าไม่ปิด) · **อีกอย่าง `0B 00` ไม่ใช่ "รายการของบนพื้นที่ว่าง"**: มันคือ derived-class change mask = 0 ที่ `make_runtime_vitals` ต่อท้าย **ทุกเฟรม** runtime-vitals (V99 show-message และ V100 music ก็ลงท้าย `0B 00` เหมือนกัน) ⇒ รายการของบนพื้น **ไม่มีอยู่ในเฟรม** (derived bit `0x08` ไม่ถูกตั้ง) ไม่ใช่ "มีแต่ว่าง" · คำถามว่า member ที่ไม่มีอยู่ล้าง pool ของไคลเอนต์ไหม **ยัง UNMEASURED** ตามที่ LANE-B เขียนไว้เอง (`mob_loot.py:5189-5195` `[ASSUMPTION OF LANE B - AWAITING COO]`)
-    **(2-ใหม่) แทนที่**: ขั้น 5 ต้องมี `CheckSecondPwdVital` ขาเข้า (64 B) + reply 44 B · แล้ว**ทันทีหลัง reply** ต้องมีบรรทัดคอนโซล `GROUND_REANNOUNCE_AFTER_SECOND_PWD scene=<n> items=<k>` **หนึ่งบรรทัด** (`items=0` = พื้นโล่งจริง ตรวจแล้ว · ไม่มีบรรทัดนี้เลย = **บิลด์เก่า ไม่ใช่ผลลบ** ⇒ NO-RESULT ห้ามเกรด) · `GROUND_REANNOUNCE_AFTER_SECOND_PWD_REFUSED` = ชั้นนี้ FAIL พร้อม `reason=` ที่พิมพ์มา · คัด `tail=` ของ reply ไว้เป็น**บันทึก** ไม่ใช่เกณฑ์
-    (3) `GROUND_REANNOUNCE_AFTER_SECOND_PWD scene=<n> items=<n>` อย่างน้อยหนึ่งบรรทัด**หลัง** reply ของขั้น 5 และ `items >= 1` · **0 บรรทัด = `NO-RESULT` ไม่ใช่ FAIL** (บูตบิลด์ที่ยังไม่มีตัวแก้ — รายงาน commit ที่บูต)
-    (4) `MOB_DROP_PRESENCE ... oldest_left=<s>` ที่ออก**หลัง**ขั้น 5 ต้อง `> 0` · `<= 0` หรือไม่มีบรรทัด = **`NO-RESULT` รันใหม่ให้เร็วขึ้น**
-    (5) `integrity_check` = `ok` · sha canonical ตรง · ไม่มี traceback
-    🔴 (6) **NEGATIVE CONTROL:** บรรทัด (3) ตอนขั้น 3 (พื้นว่าง) ต้อง**ไม่มี หรือ `items=0`** · ได้ `items >= 1` ตอนพื้นว่าง = **finding ต้องรายงาน**
-    **ชั้นนี้ตอบไม่ได้เลยว่าบนจอผู้เล่นเห็นของอยู่หรือหาย**
-  - **client-observable** (ต้องมีตาคน · ห้ามอนุมานจากคอนโซล):
-    (7) `S1` เห็นโมเดล + ป้ายชื่อของบนพื้น **ก่อน** เปิดกระเป๋า
-    (8) 🔴 `S2` (แผงกระเป๋าเปิด) **ยังเห็นของชิ้นเดิม ตำแหน่งเดิม** — พื้นว่าง = **FAIL ชั้นนี้ และคือข้อบกพร่องที่ใบนี้เปิดมาจับ ⇒ ผลนั้นมีค่า ต้องส่ง**
-    (9) `S3` (ปิดกระเป๋า) ยังเห็นของที่เดิม
-    (10) บันทึกสีป้ายชื่อทุกป้ายในเฟรม หนึ่งบรรทัดต่อป้ายต่อภาพ ครบ `S0`-`S3` · ไม่มีป้ายเขียน `none` ห้ามเว้นว่าง · อ่านจาก**ภาพนิ่งเต็มความละเอียดเท่านั้น** · **จดสีอย่างเดียว ห้ามอนุมานสาเหตุ** (`RE-067` เป็นเจ้าของคำถามนั้น)
-    (11) 🔴 **`G-FRAME` ทุกภาพที่ยกมาอ้าง:** `FRAME: <ไฟล์>  t=+<วินาที> จาก T0=<ISO+07:00>  dist=<หน่วยเกม> ถึงจุดที่ของตก` (วัด `dist` ไม่ได้เขียน `dist=unmeasured` ห้ามเว้นว่าง) · จดหมายผลต้องมีบรรทัด `UNMEASURED_DIST: <n>/<ทั้งหมด>`
-    🔴 (12) **`S0` ไม่ใช่หลักฐานของข้อ (8)** — รอบที่เปิดกระเป๋าตอนพื้นว่างอย่างเดียว = `NO-RESULT: ไม่มีของบนพื้นตอนเปิดกระเป๋า` **ห้ามอ่านว่า PASS**
-  🔴 ปิดใบด้วย `OBSERVER_CONFIRMED: <ISO+07:00>` เท่านั้น (`G-OBS`) · หลักฐานครบแต่ไม่มีลายเซ็นคน = `AWAITING-OBSERVER` **ไม่ใช่ PASS ไม่ใช่ FAIL**
-
-- prediction (**คำทำนาย ไม่ใช่ผลวัด** · ทำนายผิด = finding): P1 โทเคน `items>=1` **และ** `S2` เห็นของ ⇒ ผ่านสองชั้น · P2 ไม่มีโทเคนเลย ⇒ `NO-RESULT` ชี้ที่บิลด์ ไม่ใช่โค้ด · P3 มีโทเคนแต่ `S2` พื้นว่าง ⇒ **ผลที่มีค่าที่สุด** ชี้ที่รูปเฟรม/ลำดับส่ง = ใบถัดไปของ **LANE-B** · 🔴 **ผลลบมีค่าเท่าผลบวก** P2/P3 ส่งงานคนละสาย
-
-- nonclaims: ① ไม่ผูก/ไม่เกรดร่วมกับ `GT-223` ② ไม่พิสูจน์ว่าเก็บของหลังปิดกระเป๋าได้ (คนละใบ) ③ ไม่พิสูจน์ว่า `0x4B98` เป็น action เดียวที่ล้างพื้น ④ ไม่ตัดสินว่า reply 44 B "ควร" มีรูปอะไร ⑤ ไม่แตะสาเหตุสีป้าย (`RE-067`) · ไม่พิสูจน์อะไรบน canonical (บูตบนสำเนา)
-- links: `20260904_1430_KA1A-R309-RESULTS-*` finding 1 · `COO 20260904_1648` ข้อ 2 · `COO 20260904_1649` ข้อ 2 · `COO 20260904_1247` (chief ห้ามประกอบเฟรมดรอปเอง) · `runtime.py:10110-10160` · `mob_loot.py refresh_frames` · `mob_drop_presence.py CONSOLE_TOKEN` · `GT-188` cp2 (กลไกเดียวกัน) · `GT-215` (วินัย db/teardown)
-- numbering: ตัวนับร่วม (กฎ ②) คืน `240` · `RE-241` ลง `CLIENT_RE_QUEUE.md` ⇒ ใบนี้ `242`
-- result: **R316 2026-09-05T11:02+07:00** (พับโดย LANE-K รอบ `n3s0rg`, คัดลอกคำต่อคำจาก `notes_to_chief/20260905_1102_KA1A-R316-RESULTS-*.md`, ยกมาไว้ตรงนี้เพราะเป็นครั้งเดียวที่ใบนี้เคยถูกวัดจริง — ดูจดหมายต้นฉบับสำหรับ hex/ภาพเต็ม):
-  wire/DB: (1) `MOB_LOOT_DROPS_CENSUS ... items=2400046:x1,2204801:x1` + `MOB_DROP_PRESENCE live=2 announced=2` ✓ (2-ใหม่)(3) `CheckSecondPwdVital` 64B ขาเข้า → reply 44B → ทันทีตามด้วย `GROUND_REANNOUNCE_AFTER_SECOND_PWD scene='Bg0002' items=2` ✓ (4) `oldest_left` หลังขั้น 5: ไม่มีบรรทัดใหม่หลัง reply (ไม่ได้ฆ่าเพิ่ม) = **NO-RESULT เดี่ยว** (5) integrity ok · canonical sha ไม่เปลี่ยน (`4FF37060D3A2E876A41A479A348E062557D6C2FA2FF355548FAF81830A548454`) · traceback 0 (6) negative control (พื้นว่าง เซสชัน 1): ไม่ใช่ `items=0` ธรรมดา แต่เป็น `GROUND_REANNOUNCE_AFTER_SECOND_PWD_REFUSED reason=refused_cell_has_no_scene_to_publish` = finding ก (บันทึกไว้ ไม่ตัดคะแนน)
-  client-observable: (7)(8)(9) ของ (Blood/Exile crystal) อยู่ก่อนเปิด/ระหว่างเปิด (กระพริบหนึ่งที)/หลังปิด ✓ ภาพ `104708.png` (10) สีป้ายบันทึกแล้ว (มอนชมพู ของส้ม/แดงเข้ม) (11) `UNMEASURED_DIST: 4/4`
-  `OBSERVER_CONFIRMED: 2026-09-05T10:50+07:00`
-  หมายเหตุ: R316 ใช้สองเซสชัน (negative control เซสชัน 1, วัดจริงเซสชัน 2) ต่างจาก steps ในใบนี้ที่สั่งเซสชันเดียว — ผู้เขียนจดหมายอธิบายว่าเซสชันแรกเปิดกระเป๋าตอนพื้นว่างไปแล้วก่อนมีของ (เห็น negative control ไปแบบไม่ตั้งใจ) จึง relogin ทำเซสชันใหม่เพื่อให้ "เปิดกระเป๋าครั้งแรก" ตรงกับตอนมีของจริงตามที่ใบต้องการ
-
-**ผู้เปิดใบ: chief (LANE-E) รอบ `oi2r2n`/R340 ตาม `COO-DECISION 20260904_1648` ข้อ 2 -- ผู้บริโภคผล: chief (LANE-E)**
-
+## GT-242 BACKPACK-OPEN-DOES-NOT-WIPE-THE-GROUND-001  [✅ **ปิดใบ: PASS สองชั้น (เว้น item(4) NO-RESULT) ตาม `R316` 2026-09-05T11:02+07:00** — ยืนยันโดย `COO-DECISION 20260906_1452` (R321 ด้านล่างในบล็อกประวัติ = ความพยายามวัดซ้ำหลัง PASS ไม่ใช่ผลใหม่) · พับปิด+archive โดย LANE-K รอบ `rsmsia` 2026-09-06T15:09+07:00 -- archived 20260906 (closed; verbatim in `archive/GAME_TEST_QUEUE_ARCHIVE_20260906_closed.md`)]
 ---
 
 ## GT-243 HOTBAR-SKILL-99-VS-WIELD-Z-SAME-SESSION-HEX-DIFF-001  [~~PENDING -- P0~~ 🔵 BLOCKED-ON-PRECONDITION — ปิดโดย LANE-CS รอบ `88ej1z` (ผล `0155` §GT-243) · ต่อ `RE-271` · เจ้าของใบ = **LANE-CS**]
@@ -10244,3 +10168,71 @@ boot: `py -3 -u -m pirateforce_foundation.app --db state\run_gt276_<stamp>.sqlit
 > numbering: เลขว่างตัวถัดไปหลัง `RE-273`/`GT-274`/`GT-275` (จองไว้ก่อนหน้า ยังไม่ลงเนื้อใบ) ⇒ **276** [ตรวจโดย LANE-K รอบ `slug54r2` — grep ไม่เจอ `GT-276`/`RE-276` ที่อื่นในรีโปก่อนวาง]
 
 ## GT-277 LV-SET-CHARACTER-LEVEL-RELOG-001  [✅ **PASS สองชั้น** (ตั้งเลข+วางเนื้อ+พับ+archive ในรอบเดียวโดย LANE-K รอบ `n3s0rg` 2026-09-06T14:10+07:00 ตาม `COO-DECISION 20260906_1346` ข้อ 3(ก) · ผลคำต่อคำจาก R321 §3 · เจ้าของใบ = LANE-GM) -- archived 20260906 (closed; verbatim in `archive/GAME_TEST_QUEUE_ARCHIVE_20260906_closed.md`)]
+
+---
+
+## GT-274 PRODUCTION-ATTACK-POSE-BY-CLASS-CONFIRMED-001  [🟢 **READY -- arm (i) บูตได้ทันที ไม่มีธง (ต้องผ่านกาน "ก่อนบูต (gate)" ด้านล่างก่อน) · arm (ii) พ่วงได้เมื่อ `GT-272` ผ่านก่อนในบูตเดียวกัน** · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-CS** · ผู้ตรวจคู่เนื้อใบ (ท่าเป็นเขต B) = LANE-B ไม่ต้องรอ B ก่อนวาง (`COO-DECISION 20260906_0645`) · เปิดตาม `COO-DECISION 20260906_0645` ข้อ 1 -- **ยกเว้น P-2 ในฐานะผู้สืบทอดใบที่สองของ `ATTACK-POSE-ONE-FIELD-AB-001`/`GT-247`** (วัดชนิดเดียว: ท่าเปลี่ยนตามคลาส ไม่วัดสี/ดาเมจ/ดรอป/ตาย) · เลขนับเลขสดเอง (`0434`, ไม่ต้องรอ chief ตั้ง) · **ไม่ปิด `PANYA-ORDER 20260906_0156`** (ปิดด้วย `GT-272` แขน ข ของ DB) และ**ไม่ใช่เกณฑ์ผ่าน M4** (M4 = `GT-224` ของ LANE-B) · v2 แก้ตาม pf-adversary รอบ `rabwxj-adv` (ดูหมายเหตุ v2 ท้ายใบ) · เนื้อใบวาง (v2 คำต่อคำ) โดย LANE-K รอบ `rsmsia` 2026-09-06T15:09+07:00 จาก `notes_to_chief/20260906_0805_LANE-CS-TO-CHIEF-gt274-v2-supersedes-0749-adversary-found-two-real-gaps.md`]
+
+**คำถามของใบ**: บนบูต production ไม่มีแฟล็ก เมื่อตัวละคร Gladiator (class_id=1) ตี Training Iron Man (`n_ID 916`) หนึ่งครั้งที่ยอมรับ ท่าตีบนจอตรงกับดาบตามที่ `GT-247`/R315 ยืนยันแล้วหรือไม่ (BEHAVIOR 280) -- และเมื่อตัวละครอีกตัวที่สร้างใหม่เลือกอาชีพ Paladin ตอนสร้างตัว (look #1 -- ตัวเลือกแรก/ซ้ายสุดในแผงเลือกหน้าตา ณ จอสร้างตัวละคร ถ้าจอไม่มีตัวเลือกแยกชัดเจนให้ใช้ค่าเริ่มต้นที่จอเลือกไว้แล้วบันทึกว่าเลือกโดยไม่ได้กดเปลี่ยน) ตี Training Iron Man ตัวเดิม ท่าต่างจากตัวแรกอย่างเห็นได้ชัดหรือไม่ (คาด BEHAVIOR 284 ค้อน) -- อ่านคู่กับบรรทัดคอนโซล `POSE_PRODUCTION`/`POSE_REFUSED`/`POSE_NO_EQUIP_PROVENANCE` ของ `combat_pose.py` ที่พิมพ์สดต่อฮิต ไม่ใช่สร้างย้อนหลัง
+
+**ก่อนบูต (gate 0/1/2 -- เนื้อจริง ไม่ใช่แค่ชื่อ)**: arm (i) พึ่ง `pirate-force-server` commit `d52cae3` (`CORE-REQUEST 20260905_2242`, ต่อ `class_id=selected.class_id` เข้า `combat_pose` ที่ `runtime.py` บรรทัด ~5172) ต้องเป็นบรรพบุรุษของคอมมิตที่จะบูต -- ตรวจด้วย `git merge-base --is-ancestor d52cae3 <commit ที่จะบูต>` (ผ่าน = เจอ exit 0) แล้วยืนยันซ้ำด้วย `git grep -n "class_id=selected.class_id" <commit นั้น> -- src/pirateforce_foundation/runtime.py` ต้องเจอ 1 บรรทัด -- ใช้ `tools/pf_resolve_green_boot.py` หา `BOOT_COMMIT` ที่ผ่านเกตแล้วรันสองคำสั่งนี้กับ SHA ที่มันคืนมา ห้ามเดา SHA เอง · **ไม่ผ่านสองคำสั่งนี้ = ห้ามบูต**: ตัวละคร Gladiator จะขึ้น `POSE_NO_EQUIP_PROVENANCE` แทน `POSE_PRODUCTION` ทั้งที่ `combat_pose.py` เองไม่มีปัญหา (คอมมิตที่บูตแค่ยังไม่มีสายที่ป้อน `class_id` เข้าไป) -- นี่คือผลลวงที่เช็คนี้มีไว้กันโดยเฉพาะ
+
+**หมายเหตุ (ไม่ใช่ FAIL)**: `persistence_class_id.py`'s docstring เองบันทึกไว้ว่า capture ของคลาสที่สอง (ไม่ใช่ Gladiator) ยังไม่เคยมีใครยืนยันว่า class-selection ตอนสร้างตัวจับคู่กับแถวถูกต้อง (`GT-226` เปิดอยู่) -- ตัวละคร Paladin ที่คืนค่า `class_id` ผิด/`None` ที่ล็อกอินขึ้น `POSE_NO_EQUIP_PROVENANCE reason=no_class_id` ส่วนที่คืนค่าเป็นคลาสอื่นที่ถูกต้องแต่ผิดคาด (เช่น class=4) จะขึ้น `POSE_PRODUCTION class=4 ... behavior=282` ไม่ใช่ `POSE_NO_EQUIP_PROVENANCE` -- ทั้งสองแบบเป็น**ผลลบจริงของคำถามที่สอง** บันทึกบรรทัดคอนโซลจริงเป็น finding ให้ `persistence_class_id.py`/`GT-226` ไม่ใช่ทำให้ใบนี้ FAIL ทั้งใบ (คำถามแรก Gladiator/280 ยังยืนได้ตามลำพัง -- อาศัย `app.py`'s `backfill_missing_class_ids` ที่รันทุกบูตเติม `class_id` ให้ตัวละครเก่าที่แถวยังว่าง ตรวจแล้วว่ามีจริงในบูตปกติไม่มีแฟล็ก)
+
+**ส่วนขยาย (arm ii, ไม่บังคับ)**: ถ้า `GT-272` (DB แขน ข, สวมอาวุธจากกระเป๋าคงอยู่ข้าม relog) ผ่านแล้วในบูตเดียวกัน ให้ตัวละคร Gladiator ตีหุ่นซ้ำอีกครั้งหลังสวมอาวุธ+relog -- คาดว่าท่ายังเป็นดาบ 280 เหมือนเดิม (`combat_pose.py` อ่านอาวุธเริ่มต้นของคลาสเท่านั้น ยังไม่อ่านช่องอุปกรณ์ที่สวมจริง ตามที่โมดูลระบุเป็นรอยต่อที่ยังไม่ต่อ) -- arm (ii) ไม่ผ่าน/ไม่ได้ทำ **ห้ามบล็อก arm (i)**
+
+ATTENDED: บูตปกติ ไม่มีธง (ผ่านกาน "ก่อนบูต (gate)" ข้างบนก่อน) ล็อกอินตัวละคร Gladiator (class 1, ตัวเดิมจาก `GT-116`/`GT-243`/`GT-249`) เดินไปตี Training Iron Man (`n_ID 916`) หนึ่งครั้งที่ยอมรับ ถ่ายภาพท่าตี + คัดลอกบรรทัดคอนโซล `POSE_*` คู่ฮิตนั้น
+ATTENDED: ล็อกเอาต์ สร้างตัวละครใหม่เลือกอาชีพ Paladin (look #1) หน้าจอสร้างตัวละคร ล็อกอินตัวใหม่ เดินไปตี Training Iron Man ตัวเดิมหนึ่งครั้งที่ยอมรับ ถ่ายภาพท่าตี + คัดลอกบรรทัดคอนโซล `POSE_*` คู่ฮิตนั้น
+ATTENDED: (ถ้า `GT-272` ผ่านแล้วในบูตนี้) ให้ตัวละคร Gladiator สวมอาวุธจากกระเป๋าตาม `GT-272` ขั้น 2 แล้ว relog แล้วตีหุ่นซ้ำหนึ่งครั้ง ถ่ายภาพ + คัดลอกบรรทัดคอนโซลอีกชุด (arm ii ส่วนขยาย ข้ามได้ถ้า `GT-272` ยังไม่ผ่าน)
+ATTENDED: ผ่าน = สองภาพแรกต่างกันจริงบนจอ **และ** คอนโซลตัวแรกอ่าน `POSE_PRODUCTION class=1 ... behavior=280` -- ตัวที่สองอ่าน `POSE_PRODUCTION class=2 ... behavior=284` ถือเป็นผ่านเต็ม ถ้าตัวที่สองอ่านอย่างอื่นถือเป็นผ่านคำถามแรกอย่างเดียว + finding แยกตามหมายเหตุข้างบน (ไม่ใช่ FAIL ทั้งใบ)
+ATTENDED: ไม่ผ่าน = ตัวแรก (Gladiator) ไม่ขึ้น `POSE_PRODUCTION class=1` หรือท่าไม่ใช่ดาบ หรือคอนโซลไม่มีบรรทัด `POSE_*` เลยคู่ฮิตนั้น **หลังผ่านกาน "ก่อนบูต (gate)" แล้ว** -- ไม่ผ่านกานเองไม่นับ FAIL ให้หยุดก่อนบูตตามที่กานสั่ง
+
+**เกณฑ์ผ่านสองชั้น**
+- **client-observable**: ภาพท่าตีของสองตัวละครต่างกันจริงบนจอ (ผู้สังเกตยืนยัน)
+- **wire/DB**: บรรทัดคอนโซล `POSE_PRODUCTION`/`POSE_REFUSED`/`POSE_NO_EQUIP_PROVENANCE` ที่ `combat_pose.production_behavior_for_class` พิมพ์สดต่อฮิต (ค่าเดียวกับ selector ที่ประกอบเป็นเฟรม ไม่ใช่ reconstructed) -- ห้ามอ้างชั้นนี้แทนชั้นบน หรือกลับกัน
+
+**nonclaims**: ไม่วัดสีชื่อ ไม่วัด HP ลด ไม่วัดดรอป ไม่วัดตาย (ขอบเขตยกเว้น P-2 แคบเฉพาะท่า -- พบสีผิดระหว่างเทสให้จดเป็นข้อสังเกตของ P-2 ห้ามนับผ่าน/ตกของใบนี้) · ไม่อ้างว่า `persistence_class_id.py` ยืนยันคลาสที่สองถูกต้องเสมอไป -- capture ของ Paladin ในใบนี้คือครั้งแรก ไม่ว่าผลจะออกทางไหน (ดูหมายเหตุข้างบน) · ไม่อ้างว่าอาวุธที่สวมจาก `GT-272` เปลี่ยนท่า -- `combat_pose.py` อ่านอาวุธเริ่มต้นของคลาสเท่านั้น (module docstring, seam ยังไม่ต่อ) · ไม่อ้างว่าใบนี้ปิด `PANYA-ORDER 0156` หรือผ่านเกณฑ์ M4 · ไม่อ้างว่ามอนอื่นหรือใบตีมอนที่วัดดาเมจ/ดรอป/สีได้รับยกเว้นเดียวกัน (ยกเว้นเฉพาะใบนี้กับ `GT-247`/`ATTACK-POSE-ONE-FIELD-AB-001` เท่านั้น)
+
+TWO_SESSIONS_SAME_SCENE: ไม่เกี่ยว -- ใบนี้อ่าน `class_id` จาก `Character` ที่ผูกกับ session/connection ของผู้ตีเอง (`combat_pose.production_behavior_for_class` ต่อฮิตต่อคน) ไม่แตะ world registry/มอน/ตำแหน่ง/ของพื้น/ศพที่แชร์ข้าม session ตามกฎ shared-world (สอดคล้องกับที่ chief เองตอบไว้ใน `CORE-REQUEST 2242` ที่ใบนี้อ้างอิงโค้ดเดียวกัน)
+
+> 🔴 **ห้ามสายอื่นใช้เลข `GT-274`** · numbering: เลขจองไว้ก่อนหน้า (จดหมาย `0749`/`0805`) ⇒ **274** -- ตรวจซ้ำโดย LANE-K รอบ `rsmsia`: `GT-274`/`RE-274` = 0 hit จริงใน `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md`/`archive/*QUEUE*ARCHIVE*` ก่อนวาง (สองที่ที่ขึ้นตอน grep คือ "จองไว้" ในหัวใบ `GT-276` เท่านั้น ไม่ใช่เนื้อใบซ้ำ)
+
+> v2 (รอบ `rabwxj-adv`): pf-adversary จับได้สองข้อจาก v1 -- (1) ขาดบรรทัด `TWO_SESSIONS_SAME_SCENE:` บังคับตาม `PROCESS_GATES.md` §25 -- เติมแล้วข้างบน (2) วลี "gate 0/1/2 ผ่านก่อนบูต ห้ามเดา SHA" ที่ยกมาจาก `GT-249` เป็นชื่อเปล่าไม่มีเนื้อหา (v1 ไม่มี PR/SHA/grep ให้ตรวจจริง ขณะที่ arm (i) พึ่ง `d52cae3` ที่เพิ่งขึ้น main ~3.5 ชม.ก่อนร่างใบ) -- เติมย่อหน้า "ก่อนบูต (gate)" ให้มีคำสั่งตรวจจริงแล้วข้างบน · แก้เพิ่มสองจุดเล็ก: หมายเหตุ (แยก `POSE_NO_EQUIP_PROVENANCE` ออกจากกรณี class อื่นที่ถูกต้อง) และ "look #1" (นิยามสั้นกันทดสอบเข้าใจผิด)
+
+**ผู้เปิดใบ: LANE-CS (ผ่าน `notes_to_chief/20260906_0749_LANE-CS-TO-CHIEF-gt274-ticket-body-ready-for-numbering.md` + v2 `20260906_0805_*`) -- ตั้งเลข/วาง: LANE-K รอบ `rsmsia` -- ผู้บริโภคผล: LANE-CS**
+
+---
+
+## GT-279 GM-PANEL-BUTTON-CAPTURE-001  [🟢 **READY -- attended -- ไม่แตะเซิร์ฟเวอร์ (อ่านไฟล์ capture ที่เขียนเองหลังคลิก) ⇒ ขึ้นรถบัส capture คันเดียวกับ `GT-233`/`GT-266`/`GT-269` ได้** · เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-GM · เสนอเวลา: ท้ายรอบ attended ที่บูตอยู่แล้ว ~2 นาที · ตั้งเลข/วางเนื้อโดย LANE-K รอบ `rsmsia` 2026-09-06T15:09+07:00 (เนื้อคำต่อคำจาก `notes_to_chief/20260906_0852_LANE-GM-TO-CHIEF-p3-button-capture-gt-body.md`)]
+
+## ใบ GT ที่ขอ (เนื้อพร้อมลอก — ผมแก้ `GAME_TEST_QUEUE.md` เองไม่ได้)
+
+รอบก่อน (`83wujr`) วัดได้ว่า: `gm/dispatch.py:11,56` เรียก `command_capture.capture_raw_gm_command` ให้กับ **ทุก** เฟรม 0x51E9 ขาเข้า (`GM_RunGMCommandVital`) — ไม่ใช่แค่ประกาศไว้เฉย ๆ — และเขียนไฟล์ลง `capture/gm_command_capture/` (ค่าเริ่มต้นใน `gm/command_capture.py:43`) ยืนยันซ้ำในรอบนี้ (`zaeg4o`) ด้วย grep เดียวกัน: ยังเจอที่บรรทัดเดิม ไม่มีอะไรเปลี่ยน ⇒ คำถาม "ปุ่ม GM ปุ่มไหนส่งอะไร" ไม่ใช่คำถาม RE ที่ต้องมี image เปล่าอีกต่อไป (ไม่มีการรับสายให้สงสัย) แต่เป็นคำถามที่ตอบได้ฟรีจากรถบัส capture ที่บูตอยู่แล้ว: คนกดปุ่มแล้วเปิดไฟล์ที่เขียนไว้ดู
+
+ATTENDED: เปิด GMUI ด้วยปุ่ม GM แบบเดียวกับ GT-207/GT-269 (บูตปกติ ไม่ต้องมีธง ไม่ต้องบัญชีพิเศษ)
+ATTENDED: คลิกทีละปุ่ม/แถวที่มี radio ทั้ง 3 หน้า (7/5/5 ตาม GT-269) เว้น 2 วิ ต่อปุ่ม -- ปุ่มที่ทำให้ป๊อปอัปค้างหรือขอ input เพิ่ม ให้กด Cancel/Esc แล้วข้ามไปปุ่มถัดไป (จดชื่อ/ตำแหน่งที่ข้าม)
+ATTENDED: หลังคลิกครบ ปิดไคลเอนต์ (ไม่ต้อง logout พิเศษ) แล้วเปิดโฟลเดอร์ capture/gm_command_capture/ บนเครื่องที่รันเซิร์ฟเวอร์ -- นับจำนวนไฟล์ที่ mtime อยู่ในช่วงที่เพิ่งคลิก
+ATTENDED: ผ่าน = มีไฟล์ capture อย่างน้อย 1 ไฟล์ที่ mtime ตรงช่วงคลิก -- แนบชื่อไฟล์ + เนื้อ decode section (ส่วน hex dump/decode ที่ command_capture.py เขียน ไม่ใช่ทั้งไฟล์ถ้ายาว) กี่ไฟล์ก็ได้
+ATTENDED: ไม่ผ่าน = คลิกครบทุกปุ่มแล้วโฟลเดอร์ว่างเปล่า/ไม่มีไฟล์ mtime ตรงช่วง -- นี่คือผลลบมีค่า (แปลว่าไคลเอนต์ปุ่มเหล่านั้นไม่ส่ง 0x51E9 เลย ไม่ใช่ว่า capture พัง)
+
+**เกณฑ์ผ่านสองชั้น**
+- **client-observable**: ปุ่มไหนกดแล้วมี dialog/ข้อความอะไรขึ้นจอบ้าง (แม้จะเป็น error) — จดทุกปุ่ม
+- **wire**: ไฟล์ใน `capture/gm_command_capture/` ที่ mtime ตรงช่วง — เนื้อ decode section บอกว่าไบต์ตรงพิน `RE-088` หรือ `FAILED`
+
+**nonclaims**
+- ไม่อ้างว่ารู้ความหมายของฟิลด์ในเฟรม (ชื่อคำสั่ง/อาร์กิวเมนต์) — นั่นคือ `RE-091` คนละใบ (`command_capture.py` docstring บรรทัด 12-13)
+- ไม่อ้างว่าปุ่มที่ไม่ส่งอะไรเป็นปุ่ม "เสีย" — อาจเป็นปุ่มที่ยังไม่ผูก handler ฝั่งไคลเอนต์เลยก็ได้ ข้อมูลนี้ตอบไม่ได้จากใบนี้
+- ไม่อ้างว่าใบนี้ให้สถานะ GM กับบัญชีไหน — ไม่มีการเปลี่ยนบัญชีในใบนี้
+- ไม่อ้างว่า `/lv`/`npc`/`item`/`spawn`/`say` (คำสั่งแชท) ทำงานจากผลใบนี้ — ใบนี้วัดเฉพาะปุ่ม GMUI คนละเส้นกับดิสแพตช์แชท (`gm/chat_command_action.py`)
+
+**grep แล้ว: เจอ/ไม่เจอ** (รอบ `zaeg4o`, ผู้เขียนใบ LANE-GM)
+- เจอ: `gm/dispatch.py:11,56` เรียก `capture_raw_gm_command` ทุกเฟรม 0x51E9 ขาเข้า
+- เจอ: `gm/command_capture.py:43` `DEFAULT_CAPTURE_ROOT = "capture/gm_command_capture"`
+- เจอ: `GAME_TEST_QUEUE.md` GT-269 (READY) ยืนยันว่าเปิด GMUI ด้วยปุ่ม GM ได้จากบูตปกติไม่ต้องมีธง เค้าโครง 7/5/5 แถวสามหน้า
+- ไม่เจอ: หลักฐานว่าเคยมีใครกดปุ่มจริงแล้วดู `capture/gm_command_capture/` มาก่อน
+
+> numbering: ตัวนับร่วม (กฎ ②) คืน `278` ⇒ ใบนี้ `279` -- ตรวจ 0 hit `GT-279`/`RE-279` ทั้ง `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md`/`archive/*QUEUE*ARCHIVE*` + ไม่มี RESERVED ใน `NOW.md` ก่อนวาง โดย LANE-K รอบ `rsmsia`
+
+**ผู้เปิดใบ: LANE-GM (ผ่าน `notes_to_chief/20260906_0852_LANE-GM-TO-CHIEF-p3-button-capture-gt-body.md`) -- ตั้งเลข/วาง: LANE-K รอบ `rsmsia` -- ผู้บริโภคผล: LANE-GM**
+
+---

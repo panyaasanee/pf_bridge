@@ -1,0 +1,2 @@
+NOT-FOLDED: ยังไม่ได้พับลงคิว
+consumed by LANE-K round rsmsia 2026-09-06T15:09+07:00 -- v1 draft superseded by v2 (20260906_0805_LANE-CS-TO-CHIEF-gt274-v2-*.md) before either was placed (grep confirmed 0 hit for GT-274 before v2 arrived). v2 body placed instead; this v1 draft was never used verbatim.

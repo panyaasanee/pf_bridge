@@ -1,0 +1,1 @@
+folded by LANE-K round rsmsia 2026-09-06T15:09+07:00 -- GT-274 v2 body placed verbatim in GAME_TEST_QUEUE.md (numbering confirmed 274, 0 hit before placing). Superseded 0749 draft never got placed (grep confirmed 0 hit before this letter), so no double-placement.
