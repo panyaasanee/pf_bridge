@@ -157,7 +157,6 @@
 
 ---
 
-
 ## GT-121 CORE-REQUEST-026 BG0002-ARRIVAL-CENSUS-NO-WASD-001: after CORE-REQUEST-026 makes the Bg0002 (Prison Exile Island) census fire on `teleport_sent + runtime_ack_sent` (arrival) instead of waiting for the first `TargetPosVital`, does a real client actually show NPCs/monsters standing on screen the moment the loading screen clears -- **before the player presses any movement key at all** -- closing gap ① from M1-P's own PASS result (`20260828_0150_M1P-RESULT-PASS-*.md`: "เข้าฉากแล้วไม่มีอะไรเกิดขึ้นจนกว่าจะกด Q/E/A/S/D/W หนึ่งครั้ง")  [✅ PASS -- ปิดโดยสาย A (LANE-A) รอบ `kr1kme` (2026-08-28T10:2x+07:00) จากผล attended กะ1-A `20260828_0925_GT116-121-120-RESULT-*.md` · OBSERVER_CONFIRMED: 2026-08-28T09:2x+07:00 (BOOT_COMMIT `98307ae` = main HEAD) · claim เดียว (สำมะโนมาก่อนขยับ) เท่านั้น: wire `WORLD_CENSUS assembled=97/97 source=bg0002_full_roster` พิมพ์ที่ HB#5 ก่อน first `TargetPosVital` ที่ HB#15 (10 heartbeat ต่อมา) · จอเจ้าของ: "เข้าแมพมา NPC ทุกตัวเกิดมารออยู่แล้ว ผ่าน" -- ช่องว่างข้อ ① ของ M1-P ปิด · [ไม่อ้าง] เรื่อง facing/สี/ความหนาแน่นของ actor (คนละเรื่อง, gap ②/③/④/⑥ ของ M1-P ยังเปิดอยู่ -- ไม่รวมข้อ ⑤ ที่แยกเรื่อง Mirage Reel/RE-123 ซึ่งก็ยังเปิดเช่นกัน)]
 
 > NUMBERING NOTE: grep confirmed before reserving (2026-08-28T06:38+07:00, this round) -- `GT-121`/`RE-120` = 0
@@ -367,7 +366,6 @@ client-observable (a human at the screen only, never inferred from the console):
 > **เบาะแสที่ไม่ใช่หลักฐาน:** `MOBS 917` คือตัวล่องหนคู่แฝดของ `MOBS 916` "Training Iron Man" ที่ Port Royal ship เป็นหุ่นซ้อม และห้าจุดนี้อยู่รวมกันเป็นกระจุก (x 17194-17927, y 5434-6142) ⇒ อ่านได้ว่าเป็น**ลานฝึก** · ถ้าผู้เทสเห็นว่าบริเวณนั้นมีรูปร่างแบบลานฝึก ให้จดไว้ด้วย
 
 **nonclaim:** ใบนี้ไม่ได้ตัดสินกฎตัวตนของโปรเจกต์ — มันตอบคำถามเดียวว่าพิกัดห้าจุดนี้มีอะไร · คนตัดสินคือเจ้าของ · และ `Bg0002` จะไม่ถูกแก้จนกว่าจะมีคำเคาะ
-
 
 ---
 
@@ -629,7 +627,6 @@ RECHECK: `certutil -hashfile "<pf_bridge>\patches\gm_plugin\GameMaster.dll" SHA2
 > ผู้บริโภคผลคือ **LANE-A** ตามกฎ "ใครเปิดใบคนนั้นบริโภค" — chief ปิดหัวใบให้ตามคำสั่ง `COO 20260904_1346` ข้อ 2(จ) เท่านั้น
 
 > 🔢 **เลขใบตั้งโดย chief (LANE-E) รอบ `3kwnnr`/R332 2026-09-04T05:2x+07:00 ตาม `COO-DECISION 20260904_0344` ข้อ 3** — ตัวนับร่วมสองคิว + archive คืน `226` (ใบ `GT-226` ของรอบเดียวกัน) ⇒ ใบนี้ `GT-228` · `GT-228` = 0 hit ทั้งสามที่ก่อนวาง · เนื้อใบวางทั้งก้อนตามที่ LANE-A ร่าง ไม่แก้ถ้อยคำใด ๆ นอกจากเติมเลขใบ · **เจ้าของใบและผู้บริโภคผล = LANE-A**
-
 
 > เปิดโดย LANE-A · ผลกลับมาที่ LANE-A · numbering: ตัวนับร่วมกับ `CLIENT_RE_QUEUE.md` — **chief เป็นคนตั้งเลข ผู้เทสห้ามตั้งเอง**
 > บูต/DB/teardown ตาม `BRIDGE_BOOT_PROCEDURE.md` + `ATTENDED_SESSION_RUNBOOK.md` · **รัน teardown เสมอ** แม้รอบจบเพราะเลิกเล่นเฉย ๆ (เทมเพลตปฏิเสธ boot stamp เก่ากว่า 420 นาที)
@@ -1017,3 +1014,516 @@ git grep -n "def login_entry_is_pinned" <SHA> -- src/pirateforce_foundation/gm/l
 - numbering: see `GT-182`'s numbering note. This entry is `183`.
 - result: (tester/build lane fills in: PASS/FAIL/BLOCKED, evidence, timestamp,
   OBSERVER_CONFIRMED line per G-OBS once client-observable evidence exists)
+
+## GT-001 Smoke: full-loop บน canonical DB หลังทุก commit สำคัญ  [🟢 **PASS รอบ UA1 — ปิดโดย chief R232**: `OBSERVER_CONFIRMED: 2026-08-29T19:1x+07:00 โดย Panya ("ยืนยัน" ทั้งรอบ UA1 · ถ่ายทอดผ่านกะ3-A ใบ `20260829_1919` §① — นาทีเป๊ะตามที่ใบบันทึก)` · หลักฐาน smoke = รอบ unattended UA1 (ใบ `20260829_1552` §③, BOOT_COMMIT `33572b24`: boot→login→เข้าแมพ→teardown สะอาด) · **HOLD (recurring) ปลดสำหรับรอบนี้ตามเงื่อนไข v6.3 หัวข้อ 18 ข้อ 7 — recurring ใบยังเปิด รอบถัดไป re-arm ตามปกติ** · ประวัติ HOLD: ดูการแก้ไขของ chief R175 ใต้หัวใบ · 🟡 บันทึกเดิม R230 (ก่อนคำยืนยันมา): AWAITING-OBSERVER เพราะใบ `1728` ยืนยันเฉพาะ GT-063 · **PASS ล่าสุด: `f8562c1` (R168) 2026-08-25 20:43 (+07:00) — PASS พร้อม erratum** · *(PASS ก่อนหน้า: `fa1e804` 2026-08-24 09:41 · R145)*] 🔁
+
+> ### 🔴🔴 R175 correction (chief R175 · 2026-08-26, พบโดย `pf-adversary`) — HOLD ไม่ได้ถูกปลด ต้องขอโทษที่เขียนผิดไปก่อนหน้านี้ในรอบเดียวกัน
+> รอบนี้เคยแก้หัวใบเป็น "HOLD ปลดแล้ว" โดยอ้าง `parse errors = 0` และ "ทดสอบสองทาง (หันอยู่กับที่/เดิน 40 หน่วย)"
+> **ข้อความสองท่อนนั้นสืบไม่ถึงเอกสารใดในรีโปเลย** — ตรวจแล้วด้วย `pf-adversary`: `notes_to_chief/consumed/20260825_2335_COO-DECISION-R170-*.md:32`
+> (จดหมายที่ให้เลขบรรทัด 37-44 มาแต่แรก) เขียนไว้เองชัดเจนว่า **"ยังไม่ได้รัน... จะไม่ขอปลด HOLD จนกว่าจะมีจ็อบ parse-check รันผ่านจริง"**
+> และตารางท้ายจดหมายเดียวกันยังคงให้ "parse-check `1166` แล้วรายงาน" เป็นงานค้างข้อ 2 (ยังไม่มีเครื่องหมายว่าเสร็จที่ไหน)
+> ที่มาของข้อความที่เขียนผิดไปคือ bullet เดี่ยวในจดหมายส่งมอบกะสองใบ (`HANDOVER-TO-SHIFT-1` และ `HANDOVER-CHIEF-PROMPT-v6-full`)
+> ที่บอกว่า "รันผ่านจริงแล้ว" **โดยไม่มีเลขจ็อบ ไม่มีเวลา ไม่มี output แนบมาเลย** — ไม่ต่างจาก bullet เดี่ยว จึงไม่นับเป็นรายงานตาม G1/G8
+> ⇒ **คืนสถานะ HOLD** จนกว่าจะมีจดหมายที่อ้างเลขจ็อบ/เวลา/ output จริงของการรัน `1166_gt001_teardown_verify_update_canon.ps1` แบบ parse-check
+> 🔴 **บทเรียน:** ห้ามยกรายละเอียดที่ "ฟังดูสมเหตุสมผล" (เช่นวิธีทดสอบสองทาง) มาเติมให้ข้อความบาง ๆ ดูสมบูรณ์ขึ้น — ถ้าไม่มีจดหมายอ้างอิงได้ ให้เขียนว่า "ยังไม่มีรายงาน" ตรง ๆ
+>
+> ### 🔴🔴 HOLD เดิม (chief R170 · `pf-adversary` จับได้) — ยังมีผลอยู่ ยังไม่ปลด
+> เกณฑ์ `samePos` ยังเทียบ `heading` อยู่ และ **`heading` เปลี่ยนทุกครั้งที่ตัวละครหันหน้า**
+> ⇒ หยิบใบนี้ตอนนี้ = **`ABORT(20)` ซ้ำแน่นอน ก่อนถึงขั้นอัปเดต `CANON_SHA.txt`** ⇒ **การ์ด CANON ของทุกใบ abort ตาม = สะพานบูตไม่ได้ทั้งสะพานอีกรอบ**
+> 🟢 **ปลด HOLD ได้เมื่อ:** สคริปต์เทียบเฉพาะ `X`/`Y`/`Z` และรายงาน `heading` โดยไม่ตัดสิน (ใบสั่งอยู่ในจดหมาย `FROM_CHIEF_R170_*`) ⇒ ผู้ที่แก้ **ตอบกลับมาว่าแก้บรรทัดไหน** แล้ว chief ปลดให้รอบถัดไป
+> 🔴 **chief ปลดเองจากคลาวด์ไม่ได้** — สคริปต์อยู่บนสะพาน ไม่อยู่ในรีโป
+
+> ### 🟢 ผลรอบ 2026-08-25 20:43 (+07:00) — **PASS พร้อม erratum** (chief R170 · จ็อบ 1164/1165/1166)
+>
+> **boot:** `f8562c14781809b39a124f11029d1a6faff60f63` (คอมมิต R168 · merge เข้า `main` ทาง PR #34) ⇒ **ครอบทุกอย่างที่ merge วันนั้น**
+> ```
+> selected        10 -> 11      ตรงที่ใบคาด
+> lease           11 -> 12      ตรงที่ใบคาด
+> open sessions   0             integrity ok      FK 0      กระเป๋าเหมือนเดิมทุกแถว
+> POS  X -8553.947265625   Y -2579.68896484375   Z 186.0    <- เหมือนเดิมทุกหลัก
+>      heading  4.53208589553833 -> 3.1123385429382324      <- เปลี่ยน
+> ```
+>
+> 🔴 **erratum — ข้อบกพร่องของ *เกณฑ์* ไม่ใช่ของเซิร์ฟเวอร์:** `1166_gt001_teardown_verify_update_canon.ps1` เทียบแถว `POS` **ทั้งแถวรวม heading** ⇒ `samePos=False` ⇒ `ABORT(20) DB delta criteria failed`
+> **ทุกเกณฑ์อื่นผ่านหมด และเดลต้าทั้งก้อนคือสิ่งที่ใบคาดไว้เอง** ⇒ **chief ตัดสิน: ใบนี้ = PASS**
+> 🟢 **คำตัดสินเกณฑ์ (chief R170):** เกณฑ์ `samePos` ต้องเทียบ **`X`/`Y`/`Z` เท่านั้น** · **`heading` ให้รายงานแต่ไม่ตัดสิน**
+> 🔴 **สคริปต์อยู่บนสะพาน — chief แก้เองไม่ได้จากคลาวด์** ⇒ ใบสั่งแก้อยู่ในจดหมาย `FROM_CHIEF_R170_*` (แก้แล้วให้ตอบกลับมาว่าแก้บรรทัดไหน)
+>
+> 🆕 **ของแถมที่ไม่มีใครเคยจด: เซิร์ฟเวอร์เขียน `heading` ลง canonical จริง**
+> ตัวละคร **ไม่ได้เคลื่อนที่เลย** (X/Y/Z ตรงกันทุกหลัก) แต่ **ทิศที่หันหน้าถูกบันทึก** ⇒ ต่อยอดจาก `GT-041`
+> 🔴 **nonclaim:** ยังไม่รู้ว่า heading ถูกเขียน **ตอนไหน** (ระหว่างเล่น / ตอนออก) และ **ไม่รู้ว่าอ่านกลับมาใช้ตอน relog หรือไม่** — **สังเกตครั้งเดียว ยังไม่ใช่คุณสมบัติ**
+>
+> 🔴 **ผลลูกโซ่ของการ abort — และคำเคาะของเจ้าของ:** จ็อบ abort **ก่อน** ขั้นอัปเดต `CANON_SHA.txt` ⇒ canonical เปลี่ยนแล้วแต่ไฟล์ยังเป็นค่าเก่า ⇒ **การ์ด CANON ของทุกใบ abort ทั้งหมด**
+> 🟢 **เจ้าของเคาะ: รับค่าใหม่เป็นฐานใหม่** (คำเคาะข้อ 1 · จดหมาย `20260825_2110`) ⇒ ผู้ช่วยอัปเดตแล้วและ chief ยืนยันค่าในรีโป:
+> ```
+> CANON_SHA.txt  670CE534...FEC21  ->  4FF37060D3A2E876A41A479A348E062557D6C2FA2FF355548FAF81830A548454
+> backup ก่อนรอบ: backup\pirateforce_before_GT-001_20260825_204328.sqlite3 = 670CE534...FEC21  (ตรวจ sha แล้ว)
+> ```
+> 🔴 **กฎใหม่ที่ chief รับจากข้อเสนอของผู้ช่วย:** *จ็อบที่ **เขียน** canonical ต้องอัปเดต `CANON_SHA.txt` **ก่อน** ตรวจเกณฑ์ผล หรือไม่ก็ต้องมีขั้นกู้คืนเมื่อ abort*
+> เหตุผล: ตอนนี้ **การ abort ของเกณฑ์ตัวเดียวทำให้สะพานทั้งสะพานบูตไม่ได้** — abort ที่แพงเกินกว่าเหตุ
+
+> 🔁 **อัปเดต chief R167 · 2026-08-25 ~19:xx (+07:00) — ใบนี้ *ถึงกำหนดจริง* ไม่ใช่ของแถม**
+> ตั้งแต่ PASS ล่าสุด (`fa1e804`) `main` ขยับไปแล้วทั้ง PR #24–#32 **และ R167 กำลัง merge เลนใหม่ที่แตะ `src/` อีกก้อน**
+> (`ground_loot_nameprop_hypothesis.py` + wiring ใน `app.py`/`runtime.py` + เพดานเวอร์ชัน ledger ทั้งไฟล์)
+> ⇒ บูตที่ commit **หลัง merge ของ R167** · `CANON_SHA` จะขยับตามที่ใบคาดไว้เพราะใบนี้รันบน canonical DB จริง (ต่างจากรอบ GT-033 ที่รันบนสำเนา)
+
+> ✅ **PASS R145 (ผลหน้าสะพาน 2026-08-24 09:41 +07:00 · Codex LOCAL):** full loop บน resolver-green `fa1e804` (tree ตรง main HEAD `94f0ce3`) — login → Port Royal → ออกด้วย X · selected sessions `9→10` · max lease `10→11` · open sessions หลังหยุด 0 · `integrity_check=ok` FK 0 · frame proof 3/3 · **`CANON_SHA.txt` อัปเดตแล้วโดยสะพาน** `EE785A79…` → `670CE534…` (การเข้าเกมเพิ่ม selected session/lease ตามที่ใบคาด)
+
+> ✅ **RESULT 2026-08-23 01:10–01:14 (+07:00) — PASS บน main HEAD `cf81730` (worktree clean)** · full loop: login → Channel 1 → PVP → Arena01 → เข้าแมพ (HP 100/100 · Port Royal · chat online) → ออกด้วย X+ยืนยัน → Ctrl+C สะอาด
+> canonical DB SHA เปลี่ยน**แบบคาดหมาย** (session +1): `6BFCEDD5…FE498FC7` → `23FD885AC4CBBFAC5E06C9B11506F6EA9F985DA82F4522383DFCC14A91C1816A` · `CANON_SHA.txt` อัปเดตแล้วโดยผู้เทส · backup ค่าเก่ายังอยู่
+> ผลเต็ม: `notes_to_chief/20260823_0115_GT001-PASS-latest-main-smoke.md` (บริโภค R123)
+
+> ✅ **RESULT รอบใหญ่ #3 — PASS ทุกเกณฑ์ที่ `f286945`** · รายละเอียดเต็มย้ายไป archive รอบ 97:
+> `archive\GAME_TEST_QUEUE_ARCHIVE_20260820_R97_CLOSED_STUBS.md` ก้อน 2
+> - 🔁 **re-arm รอบ 78:** commit รอบ 78 แตะ `src/` (app.py + runtime.py + โมดูลใหม่ — ทุกจุดอยู่หลังธง scenario ที่ boot ปกติไม่ใช้ → ความเสี่ยง regression ต่ำมาก) → เทสที่ HEAD ใหม่ของรอบ 78
+> - 🔁 **re-arm รอบ 95:** commit `72d6129` แตะ `src/` (damage_model_hypothesis.py + runtime.py — ทั้งหมดอยู่หลังธง scenario opt-in ที่ boot ปกติไม่ใช้ · full suite 1530 passed บน Windows · ความเสี่ยง regression ต่ำมาก)
+> - 🔁 **re-arm รอบ 97 (ล่าสุด — ครอบ commit รอบ 96+97):** `8dfd303` (remote_player) และ `af10536` (damage_hp_link) แตะ `src/` ทั้งคู่ (app.py + runtime.py + โมดูลใหม่ — ทุกจุดอยู่หลังธง scenario opt-in ที่ boot ปกติไม่ใช้ · full suite **1803 passed 1 skipped** บน Windows · ความเสี่ยง regression ต่ำมาก) → **GT-001 = PENDING ที่ `af10536`** รันในรอบใหญ่ถัดไปตามท่ามาตรฐาน PLAYBOOK
+> - 🔁 **re-arm R125 (ล่าสุด):** PR #9 GROUND-LOOT-001 merge เข้า `main` แตะ `src/` (app.py + runtime.py + โมดูลใหม่ —
+>   ทุกจุดอยู่หลังธง scenario opt-in ที่ mutually exclusive กับโหมดอื่น · boot ปกติไม่เปลี่ยน · เขียว(Actions run 32616696590 · subset))
+>   → **GT-001 = PENDING** · **บูต commit จาก `pf_resolve_green_boot.py` ตอนจะรันจริง — จงใจไม่พิน hash ในใบนี้**
+>   (ทุก merge ระหว่างหน้าต่างไม่เฝ้าเครื่องจะขยับ HEAD ได้อีก · resolver คือคำตอบเดียวที่ไม่ stale)
+
+> 🗂 **ประวัติ re-arm รอบ 52 / 53 / 65 (superseded โดย re-arm รอบ 78 ด้านบน) ย้ายไป
+> `pf_bridge\archive\GAME_TEST_QUEUE_ARCHIVE_20260819_R85_HOUSEKEEPING.md`** (chief รอบ 85)
+
+- objective: ยืนยันว่า commit ล่าสุดบน main ไม่ทำให้ loop พื้นฐานพัง
+  (login → select → เข้าแมพ → ออก → server exit 0)
+- db: `state\pirateforce.sqlite3` (ค่าเริ่มต้น)
+- server args: `-SecondPasswordMode bypass`
+- steps: ตาม PLAYBOOK ทั้ง 8 ข้อ
+- pass criteria: เข้าแมพเห็นครบ (HP/minimap/ชื่อแมพ/chat online) + ออกสะอาด X+ยืนยัน +
+  stopped ×1 + stderr 0B + listeners 0 + sessions +1 (นับแบบ selected_character_id IS NOT
+  NULL) + lease +1 + backpack `[1@0,2@1,4@3]` เดิม + position เดิม (ถ้าไม่เดิน) + integrity ok
+- nonclaims: ไม่พิสูจน์ inventory/combat/movement · path delete/logout/chat แยกเทสของตัวเอง
+- หมายเหตุ recurring: หลัง commit ใดแตะ src/ ให้ตั้งกลับเป็น PENDING พร้อม hash ที่จะเทส
+- result: (ผู้เทสกรอก)
+
+## GT-026 EXIT-PATHS-001: ปิดเกม "ตอนอยู่ในแมพ" และปุ่ม logout ในเกม  [ท่อน A ✅ **PASS** · ท่อน B 🟡 **รันแล้ว (default scenario) — request ยืนยัน · ไม่ freeze · handler เป็น opt-in ไม่ active** · ข้อ 8 🔴 **BLOCKED** บน logout-transition ที่ทำงาน → ดู GT-033]
+
+> 🟡 **รันแล้วรอบใหญ่ #9 (2026-08-20 09:52→10:20, HEAD `87f0769`, จ็อบ 933-937, tester next 938) — ผลเต็มบริโภคโดย chief รอบ 100:** ท่อน A PASS สองชั้น (X ในแมพ → dialog "ต้องการปิดเกมหรือไม่?" ปุ่ม `ยืนยัน`/`ยกเลิก` → กดยืนยัน หน้าต่างหาย ≤1 วิ · wire/DB: `closed_at` ถูกเติมตรงเวลากด = ออกสะอาดในสายตา server) · ท่อน B รันบน **default scenario** (handler HYP-PF-012/013 เป็น opt-in จึงไม่ active): client ส่ง `LogoutVital 0x1B40` จริงถูกต้อง มี **mode discriminator `08 03`=กลับหน้าเลือกตัวละคร / `08 01`=ออกจากเกม** · server default ไม่ตอบ · **client ไม่ transition แต่ก็ไม่ freeze** (รับคลิกปกติ ปิดด้วย X ได้) — ปมอยู่ที่ response shape ที่ทำให้ client เปลี่ยนหน้า ซึ่งรอบ 100 static RE (agent D) พบว่า **echo ทำไม่ได้แน่นอน** (inbound 0x446F30 เป็น reconcile pass ล้วน) → ดู GT-033
+
+> **เปิดโดย chief รอบ 92 (2026-08-20)** — มาจาก **nonclaims ของ LOCALTEST-001 โดยตรง**
+> ผู้เทส local พิสูจน์แล้วว่าปุ่ม X ใช้ได้ **แต่พิสูจน์จากหน้า disconnect dialog เท่านั้น**
+> ⇒ ยังไม่มีใครรู้ว่า **ตอนอยู่ในแมพ** (ซึ่งมี dialog ยืนยัน) และ **ปุ่ม logout ในเกม** ทำงานยังไงจากฝั่ง local
+> 🔴 นี่ไม่ใช่รายการ "ของแถม" — **ทุกรอบใหญ่จบด้วยการออกจากเกม** ถ้าเส้นทางออกไม่ถูกพิสูจน์
+> teardown ของทุกเทสจะยืนอยู่บนสมมติฐาน และ **การออกไม่สะอาดคือต้นเหตุของวงจรอุดตันที่กินเวลาเราไปทั้งคืน 2 รอบแล้ว**
+
+- **ไม่ต้อง commit อะไรก่อน** — เทสพฤติกรรม client + เส้นทางออก ไม่ได้เทสฟีเจอร์ใหม่
+- **scenario:** ค่าเริ่มต้น (ไม่ต้องเปิด flag ใด ๆ) · **db:** สำเนา canonical ตามปกติ · **server args:** `-SecondPasswordMode bypass`
+- **เปิด client ด้วย `Invoke-CimMethod Win32_Process Create`** (ข้อ 8b ในหัวไฟล์ — อย่าใช้ `Start-Process` กับ `.bin`)
+
+## ⭐ GT-060 PICKUP-CLICK-CAPTURE-001 [attended, in-game]: คลิกซ้ายบน drop-object ที่วาดจริงบนจอ แล้วจับเฟรม `PickupTerrainThing` **ตัวจริงตัวแรก** บน wire — id `0x4543` ที่ derive ไว้ ถูกหรือผิด  [❌ **CANCELLED - covered by GT-146** · ปิดโดย chief (LANE-E) รอบ `kj0s6r`/R346 2026-09-05T02:0x+07:00 ตาม `COO-DECISION 20260904_2349` ข้อ 4 · `GT-146` ถามคำถามเดียวกัน (คลิกซ้ายบนของตกที่เซิร์ฟเวอร์ส่งเอง แล้วไคลเอนต์ยิงเฟรมอะไร) ด้วยขั้นตอนที่ใหม่กว่า ⇒ ใบนี้ไม่ต้องใช้เวลาผู้เทสอีกใบ · 🔴 หมายเหตุ: `GT-146` เองอยู่ในสถานะ `BLOCKED - until P-2 closes (NOW)` ⇒ คำถาม opcode ยังไม่ถูกตอบด้วยตา ยังเปิดอยู่ แต่ถืออยู่ที่ `GT-146` ใบเดียว ไม่ใช่สองใบ · เนื้อใบและเงื่อนไขเดิมเก็บไว้ข้างล่างเพื่อการอ้างอิง (ห้ามลบ) — เดิม: **BLOCKED-CONDITIONAL — ห้ามบูตจนกว่าเงื่อนไข (ก)(ข)(ค) ข้างล่างครบทั้งสามข้อ** · เลน server = HYP-PF-036 (R151 · ✅ (ก) ปิดแล้ว R152: PR #22 merge เข้า `main` `2c0e3ba`) · เงื่อนไข (ข) เหลือแค่ผลตา GT-045 (นัด 2026-08-26) — คำเคาะ composition มาแล้ว (จดหมาย 1831 §①) และโค้ด composed-boot merge เข้า `main` แล้ว (R154: PR #23 → `cad3e28` เขียว Actions run 32726495224) · ✅ **(ค) ปลดแล้ว — Panya ปลดพักเลน attended ทั้งเลน (2026-08-24 ~21:1x +07:00 · จดหมาย 2120 §① · บันทึกโดย R155)** — คำสั่งพัก 16:56 ของ 23 ส.ค. สิ้นสุด · กฎรอบ unattended ยังเหมือนเดิมทุกตัวอักษร · 🆕 R155: คำเคาะ 2120 §② ขยาย allow-list เป็น**สามตัว** `ground-loot + pickup-listener + item-operate-res` — ใบนี้ได้ประโยชน์ถ้ารวมบูตกับ GT-063 (โค้ดสามตัว = PR #25 รอ gate — ดูหัวใบ GT-063)]
+
+**ที่มา:** สามใบประกอบกัน — **GT-046** (STATIC PASS: `PickupTerrainThing` เป็น **outbound** สร้างที่ call `0x006B0639` เติมค่าจาก live runtime drop-object · ตัวจุดชนวน = `WM_LBUTTONDOWN` ที่ `0x006B0570` **เฉพาะเส้นทาง in-range**) + **GT-045** (WIRE PASS / CLIENT NO-RESULT — การวาด drop-object จาก wire ยังพิสูจน์ไม่ได้ รอเทสตา) + เลน server ใหม่ **HYP-PF-036** (R151): inbound listener หลัง `--pickup-listener-hypothesis-scenario` — เมื่อเฟรมขาเข้ามี nested vital id `0x4543` มันจะ decode-count-record (`object_ref_u32` · `opaque_u8` · raw body hex) ลง session state `pickup_listener_accepted_count`/`records`/`refusals` และปล่อย **log บรรทัดเดียว ASCII** · **ไม่ตอบกลับ ไม่เขียน DB** · ไบต์ผิดรูป = refusal มีชื่อถูกจดไว้ · codec อิง `external\PF_SERIALIZER_FIELDS.tsv` แถว 859-862
+
+**หมวด:** attended, in-game — ต้องมีคนหน้าจอ **และต้องมีมือคลิก** · จับ `LOCK_GAME` ตามปกติ
+
+**ค้น external แล้ว: เจอ** — `PF_SERIALIZER_FIELDS.tsv` แถว 859-862 (codec ที่ listener ใช้) · `PF_FIELD_VALIDATION` แถว 102-103 (**corpus มีเฟรม `PickupTerrainThing` = 0 เฟรม** — ไม่มีของจริงให้เทียบ) · `FACTPACK_L2_CLASSCENSUS001` แถว 1003 (id `0x4543` เป็นค่า **derive จาก name-hash** ไม่ใช่ค่าที่เคยเห็นบนสาย)
+**ค้น gamedata แล้ว: เจอแต่ไม่ใช้เพิ่ม** — `TEXTDATA_TH__MESSAGE.tsv` ผูก `0x1F/0x03/0x22` แล้ว (addendum GT-046 R132) · ใบนี้ไม่แตะข้อความตอบกลับใด (server เราไม่ตอบเลยโดยดีไซน์)
+
+## GT-084-R2 HOSTILE-PAIR-VISIBLE-001: รอบสองของ GT-084 -- คู่ faction (1,6) ที่ผู้เล่นได้ครึ่งของตัวเองแล้ว ทำให้ Tornado Eagle ขึ้นศัตรูจริงบนจอไหม (~~ชื่อแดง + แผงเป้าแดง~~ [UPDATE 2026-08-27T17:34+07:00 LANE-B ต่อยอด PANYA-REFERENCE 16:35+07:00: เกณฑ์สีที่ถูกต้องคือ **ส้ม (ยังไม่ aggro) → แดงเข้ม (aggro) → เทา (ตาย)**, ไม่ใช่ "แดง" เฉยๆ] + แผงเป้า) บนบูตไร้แฟล็ก -- ก่อนจะไปถึงเรื่องตี  [🟡 **RESULT -- claim หลัก (hostile ที่ตาเห็น) PASS ด้วยหลักฐานพฤติกรรม (ขอบแดง+ลูกศรแดงคู่, ดับเบิลคลิกตีติดจริง) แต่ไม่ใช่สีตามใบเป๊ะ (ชื่อชมพู/magenta ตลอด ไม่ใช่ส้ม→แดงเข้ม→เทาตามลำดับสถานะจริง, ไม่มีแผงเป้า) -- ผลต่อขั้นตี-ตาย: ดู GT-084 -- รายละเอียด notes_to_chief/20260827_1620_GT084R2-RESULT-*.md, RE-107/RE-108 ปิดแล้ว (bounded negative), RE-109 เปิดใหม่ถามครบ 6 สี, สถานะสุดท้าย (PASS/MIXED) รอ chief ตั้ง**]
+
+🆕 **RIDER-084-B (เจ้าของใบ LANE-B · รอบ `szdkgs` · 2026-08-29 ~01:0x +07:00) — ตัวตนของเป้าหมายในใบนี้ถูกแก้แล้วครึ่งหนึ่ง ไม่แก้ objective/เกณฑ์ผ่านของใบแม่แม้แต่ตัวอักษรเดียว**
+รอบนี้ `field_mob_tables.py` ถูก regenerate ผ่าน crosswalk ของ `RE-128` (`SCENE_NAME.n_CLINE_TYPE` → `CLINE.n_LEADER_BK1`) ผลที่ผู้เทสจะเห็นต่างจากรอบก่อน:
+- **สี่ placement 103/105/107/109** เมื่อวานส่งเป็น `Mutant Green Eagle` (เลขชุด 97) วันนี้ส่งเป็น **`n_ID 916 Training Iron Man`** avatar `M016_000_000_N` (เมื่อวานคือ `M011_000_002_SP3`) — **ของจริงตามตาราง ไม่ใช่การประกอบเอง** และเป็นตัวที่ `COO-DECISION widen-death-scope-916-training-iron-man 2026-08-27T09:55+07:00` อนุญาตให้ฆ่าไว้แล้ว
+- **อีกเก้า placement (รวม P30 `0x201F` เป้าหมายของใบนี้)** ยังส่งไบต์เดิมทุกอย่างในรอบนี้ ⇒ **ใบนี้ยังรันได้เหมือนเดิม ไม่ต้องแก้ขั้นตอน** 🔴 แต่ให้รู้ไว้ว่า **ชื่อ "Tornado Eagle" ของ P30 ถูกพิสูจน์แล้วว่าไม่ใช่ตัวตนจริงของ placement นั้น** (crosswalk บอกว่า Mob-Set 31 = `n_ID 248 Da Vinci`) การย้ายอีกเก้าแถวไปตัวตนจริงเป็นงานรอบถัดไปของสาย B (ประมาณ 840 pin)
+- 🔴 **สิ่งที่ควรจดเพิ่มถ้าได้นั่งรอบนี้ (ไม่ใช่เกณฑ์ผ่าน):** ที่พิกัดราว (11789..15649, 9317..9364, 2200) มีหุ่นสี่ตัว — **หน้าตาเปลี่ยนจากนกเป็นหุ่นเหล็กหรือไม่** และชื่อใต้ตัวอ่านว่า `Training Iron Man` หรือไม่ · ตอบ "เปลี่ยน/ไม่เปลี่ยน" พอ ไม่ต้องตีความ
+
+> เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md. เลขสูงสุด ณ เวลาเขียนใบนี้: GT-099 / RE-098.
+> 🔢 **ใบนี้ไม่กินเลขคิวใหม่** -- เป็น **รอบที่สองของ GT-084** เลนเดียวกัน (มอนสเตอร์เป้าหมายเดียวกัน 0x201F
+> Tornado Eagle, บูตไร้แฟล็กเดียวกัน, ท่าเดียวกับ GT-030-R3 ที่อยู่ใต้เลขเดิม) ตามคำสั่งเจ้าของ (Panya)
+> 2026-08-27 09:15 ผ่าน notes_to_chief/20260827_0915_PANYA-CHASE-owner-decisions-...md ข้อ ①.2 ประโยคสุดท้าย,
+> และ notes_to_chief/20260827_0520_ATTENDED-URGENT-R187-...md ง§④ ข้อ 3-4. ใบ `GT-084` เดิม (รวม
+> `RIDER-084-A` และทุกอัปเดตต่อท้ายถึง R188) **ยังอยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ** -- ใบนี้ยืน
+> อยู่บนผลของมัน ไม่ใช่ใบแทน.
+
+🆕 **ความคืบหน้า world-wipe (ยังไม่ใช่ "พร้อม") — LANE-B รอบ `rbuta4` 2026-08-28T18:1x+07:00:**
+เพิ่ม headless proof `pirate-force-server/tests/test_world_wipe_headless_proof.py` — บูตไร้แฟล็ก
+→ โดนตี 1 → ตาย 1 → เฟรม `MOB_COMBAT_BAR`/`MOB_DEATH_DYING`/`MOB_DEATH_DEAD` ยังมีครบทุกตัวที่
+census ตอน arrival ส่งไป **วัดจาก `frame` ซึ่งเป็นบัฟเฟอร์ที่ `v141:7755 c.sendall(out_frame)` ส่งออกจริง**
+(ไม่ใช่ `pc` ซึ่งไคลเอนต์ไม่เคยได้รับ) เทียบกับเฟรม arrival ของเซสชันเดียวกัน
+🔴 **แก้คำผิดของอัปเดตฉบับแรก (เขียนไว้ 17:49 น. ถอนแล้ว):** ฉบับแรกเขียนว่า "grep token เชื่อได้แล้ว
+ผู้เทส grep ได้โดยไม่ต้องกลัว" — **ผิด และถอนคำนั้น** `pf-adversary` สร้าง regression จริงที่ทำให้เทสทั้ง 19 ใบ
+เขียว ในขณะที่เฟรมที่ออกสายมี body เดียว (เฟรมของ `MOB_DEATH_*` ยังผูกกับ `death_step` ตัวเก่าขณะที่ `pc`
+ถูกอัปเดตแล้ว) เพราะเทสฉบับแรกวัด `pc` ไม่ใช่ `frame` แก้แล้วในรอบเดียวกันนี้
+🔴 **ผู้เทส: ยังห้ามใช้บรรทัด `*_CENSUS_RECOMPOSE actor_count=115` เป็นหลักฐานเดี่ยว** มันพิมพ์
+`world_census_actor_count` ที่อ่านจาก session state **ก่อน** ประกอบเฟรม ⇒ เป็น **INPUT ไม่ใช่ผลลัพธ์**
+บรรทัดนี้ยืนยันได้แค่ว่า "เส้นทาง recompose ถูกเดิน" ไม่ได้ยืนยันว่า "เฟรมมีครบ 115" — หลักฐานจำนวนตัวจริง
+เป็นชั้น headless ในเทส ไม่ใช่ชั้นคอนโซล
+🔴 **นี่คือชั้น wire เท่านั้น ไม่ใช่ชั้นจอ** — `RIDER-084-A` `OW1`-`OW3` **ยังเป็นขั้นสังเกตบังคับเหมือนเดิมทุก
+ตัวอักษร** ห้ามอ่านบรรทัดนี้ว่า world-wipe ปิดแล้วบนจอ ใบนี้และริเดอร์ไม่ถูกแก้แม้แต่ตัวอักษรเดียวจากอัปเดตนี้
+🔴 **addendum-G ยัง "ไม่ปิด"** — `pf-adversary` ยก 14 ข้อ ระดับ critical 2 ข้อ รอบนี้แก้ที่โค้ดแล้ว
+แต่การประกาศปิดเกณฑ์เป็นของ COO ไม่ใช่ของสาย B ⇒ ดู `archive/rounds_2026-08-27_to_28/B_20260828_1749_world_wipe_headless_proof.md` ก่อนตัดสิน
+
+🆕 **RIDER-084-C (เจ้าของใบ LANE-B · รอบ `sn42vo` · 2026-08-29T03:53+07:00) — เป้าหมายของใบนี้ถูกถอนออกจาก roster แล้ว · ไม่แก้ objective/เกณฑ์ผ่านของใบแม่แม้แต่ตัวอักษรเดียว**
+🔴 **อ่านก่อนบูต:** `pirate-force-server#221` (merged 2026-08-29T03:32+07:00) ถอนเก้าแถวเลขชุดออกตาม COO-DECISION 00:41 ⇒ **`0x201F` (P30 "Tornado Eagle") ไม่อยู่ใน roster อีกแล้ว** ข้อความใน `RIDER-084-B` ที่ว่า "อีกเก้า placement (รวม P30 `0x201F`) ยังส่งไบต์เดิม" ~~เป็นจริง ณ รอบ `szdkgs`~~ **หมดอายุแล้ว ณ รอบนี้** (ขีดฆ่า ไม่ลบ ตามกติกา)
+วัดสดบน main รอบนี้ (`field_mobs.load_roster()`): roster = **4 แถว** ทั้งหมด `n_ID 916 Training Iron Man` avatar `M016_000_000_N` · placement **103/105/107/109** ⇒ actor identity **`0x2068` `0x206A` `0x206C` `0x206E`** · level 100 · HP 198125 · `rank=0` · `ai_combat=0` · `n_DROPS_*` = 0 ทั้งสามคอลัมน์ · scene bg0001
+⇒ **ใบนี้รันตามขั้นตอนเดิมไม่ได้** เพราะไม่มีเป้าหมายเดิมให้คลิก · ตัวที่ยืนอยู่จริงคือหุ่นสี่ตัว และ COO เคาะไว้แล้วว่ามันคือ **หุ่นซ้อม ไม่ใช่มอนสเตอร์ของฉากนี้** (`rank=0`, `ai_combat=0`) 🔴 **คำถามหลักของใบนี้ (ส้ม→แดงเข้ม→เทา) อาจถามกับหุ่นซ้อมไม่ได้ตั้งแต่ต้น** — สถานะใบและเป้าหมายทดแทนเป็นของ chief/COO ตั้ง ไม่ใช่ของสาย B ตั้งเอง สาย B รายงานข้อเท็จจริงเท่านั้น
+
+🔴 **เกณฑ์ addendum-G ข้อ "census หลังเหตุการณ์ยัง 115/115 (grep คอนโซลได้)" — สาย B รายงานว่า *เขียนแบบนี้แล้วปิดไม่ได้* ไม่ใช่ว่ายังไม่ได้ทำ**
+สองเหตุผล วัดแล้วทั้งคู่:
+1. **เลข 115 ไม่ใช่เลขของบูตไร้แฟล็ก** — 115 คือขนาดตาราง placement ที่แช่ไว้ · สิ่งที่บูตไร้แฟล็ก **ประกอบได้จริง** คือ **108** (`SHIPPED_CENSUS_COUNT`, `tests/test_world_wipe_headless_proof.py:156`, ที่มา RE-128/CLINE) ⇒ เกณฑ์ที่ถูกคือ **108/108**
+2. **ชั้นคอนโซลตอบคำถามนี้ไม่ได้เลย** — บรรทัด `*_CENSUS_RECOMPOSE actor_count=N` พิมพ์ `world_census_actor_count` ที่อ่านจาก session state **ก่อน** ประกอบเฟรม ⇒ เป็น **INPUT ไม่ใช่ผลลัพธ์หลังเหตุการณ์** (รอบ `rbuta4` ถอนคำอ้างนี้ไปแล้วเอง) มัน grep ได้ แต่ยืนยันได้แค่ "เส้นทาง recompose ถูกเดิน"
+⇒ **สิ่งที่จะปิดเกณฑ์นี้ได้จริง** คือบรรทัดคอนโซลที่นับ **จำนวน body ในเฟรมที่ประกอบเสร็จแล้ว** แล้วพิมพ์หลังประกอบ · จุดพิมพ์อยู่ใน `runtime.py` ซึ่ง **เป็นเขตของ chief** ⇒ สาย B เปิดเป็น CORE-REQUEST ใน body ของ `pirate-force-server#228` แทนการแก้เอง
+~~🔴 **สาย B ไม่เขียนบรรทัด "พร้อมสำหรับ GT-084-R2" ในรอบนี้ และจงใจไม่เขียน** — ชั้น wire ปิดแล้วจริง (`test_world_wipe_headless_proof.py` 7 ใบ วัดจาก `frame` ที่ `v141:7755` ส่งออก ไม่ใช่ `pc`) แต่ชั้นที่เกณฑ์ขอ (คอนโซล) ยังไม่มีของให้ grep และเป้าหมายของใบก็เพิ่งหายไป ⇒ เขียน "พร้อม" ตอนนี้คือคำอ้างที่รอบ `rbuta4` เพิ่งถอนไปเอง~~
+
+🆕 **RIDER-084-D (เจ้าของใบ LANE-B · รอบ `z096sw` · 2026-08-29T18:5x+07:00) — ครึ่งคอนโซลของเกณฑ์ addendum-G ปิดแล้ว วัดจริง · ไม่แก้ objective/เกณฑ์ผ่านของใบแม่แม้แต่ตัวอักษรเดียว**
+
+รอบก่อนเขียนไว้เองว่า "สิ่งที่จะปิดเกณฑ์นี้ได้จริงคือบรรทัดคอนโซลที่นับจากเฟรมที่ประกอบเสร็จแล้ว · จุดพิมพ์อยู่ใน `runtime.py` ซึ่งเป็นเขตของ chief" — **ข้อหลังผิด**: กฎบัตรสาย B ข้อ G มอบบล็อก `bar_frames`/`death_frames` ให้สายนี้แก้ได้หนึ่งครั้งเพื่องานนี้โดยตรง ⇒ รอบนี้แก้เองแทนที่จะรอ CORE-REQUEST
+
+**🟢 พร้อมสำหรับ GT-084-R2 — เฉพาะครึ่ง world-wipe ของเกณฑ์ addendum-G** (ไม่ใช่ทั้งใบ ดูข้อจำกัดท้ายบล็อก)
+
+🔴 **อ่านย่อหน้านี้ก่อน — ฉบับแรกของริเดอร์นี้เขียนเกินหลักฐาน และ pf-adversary จับได้ก่อน push**
+ฉบับแรกยกบรรทัด `actor_count=108 wire_actors=108` เป็นหลักฐานว่า "โลกรอด" · **นั่นเป็น tautology ไม่ใช่การวัด**:
+เมื่อ compose สำเร็จ `wire_actors` เท่ากับ `actor_count` เสมอโดยพีชคณิต (recompose เรียก
+`build_world_population(legacy, anchor, count)` ด้วย `count` ตัวเดียวกัน และ `census_order` อ่านตารางนิ่ง
+ที่หดไม่ได้) ⇒ มิวแทนต์ที่ **ไม่อ่านสายเลย พิมพ์ input ซ้ำ** เขียวทั้งสวีต
+🟢 **สิ่งที่ทำให้บรรทัดนี้มีค่าจริงคือของที่แก้หลังจากนั้น** ไม่ใช่เลข 108/108:
+บรรทัดถูกย้ายออกมา **นอก `if` และนอก `try`** ⇒ สองเส้นทาง fallback (compose โยน / ไม่มี anchor ซึ่ง
+คอมเมนต์ใน `runtime.py` เองบอกว่า "เกิดในการเล่นปกติ") **เคยส่งเฟรม one-entry ออกสาย = ตัว world wipe เอง
+แล้วคอนโซลเงียบสนิท** — นั่นคือสภาพเดียวที่ผู้เทสต้องการบรรทัดที่สุด และเป็นสภาพเดียวที่ไม่มีบรรทัด
+
+grep token ที่ผู้เทสต้องใช้ (ASCII ล้วน · cp874 ปลอดภัย):
+
+```
+MOB_COMBAT_BAR_CENSUS_RECOMPOSE        actor_count=<input>  wire_actors=<measured>  target=0x....
+MOB_DEATH_FRAMES_CENSUS_RECOMPOSE_DYING actor_count=<input> wire_actors=<measured>  target=0x....
+MOB_DEATH_FRAMES_CENSUS_RECOMPOSE       actor_count=<input> wire_actors=<measured>  target=0x....
+```
+
+🔴 **อ่านสองฟิลด์นี้ให้ต่างกัน ไม่ใช่ฟิลด์เดียวกันเขียนสองครั้ง**
+- `actor_count=` **ของเดิม ความหมายเดิม ไม่เปลี่ยน** = `world_census_actor_count` อ่านจาก session state **ก่อน** ประกอบเฟรม (INPUT) · เก็บชื่อเดิมไว้เพราะใบนี้กับ runbook สั่ง grep คำนี้อยู่แล้ว การเปลี่ยนความหมายเงียบ ๆ แย่กว่าดีเฟกต์ที่กำลังแก้
+- `wire_actors=` **ของใหม่รอบนี้** = จำนวนที่ **collection header ของเฟรมที่ส่งออกจริงประกาศ** อ่านหลังประกอบ ด้วย `world_population_handoff.wire_count_of` ตัวเดียวกับที่ headless proof เรียก และ**อ่านต่อเมื่อ `frame == legacy.frame_pc(pc)` ผ่านแล้วเท่านั้น**
+- ถ้าอ่านไม่ได้จะพิมพ์ `wire_actors=unmeasured reason=<ชื่อ>` **ไม่เคยพิมพ์ตัวเลขที่เดาไว้** (`frame_is_not_this_pc` / `header_unreadable` / `legacy_refused` / `pc_not_bytes` / `frame_not_bytes`)
+
+**วัดจริงบนบูตไร้แฟล็ก รอบนี้** (สคริปต์ขับ harness เดียวกับ `test_world_wipe_headless_proof.py` · ไม่ใช่ค่าที่เทสคำนวณเอง):
+
+```
+arrival        : WORLD_CENSUS assembled=108/115 wire=108 ... (collection header ประกาศ 108)
+
+--- บูตปกติ compose สำเร็จ (โลกรอด) ---
+ตี 1 ครั้ง      : MOB_COMBAT_BAR_CENSUS_RECOMPOSE        actor_count=108 wire_actors=108 target=0x2068
+ตาย 1 ตัว      : MOB_DEATH_FRAMES_CENSUS_RECOMPOSE_DYING actor_count=108 wire_actors=108 target=0x2068
+                MOB_DEATH_FRAMES_CENSUS_RECOMPOSE       actor_count=108 wire_actors=108 target=0x2068
+compose refusals/skips : ไม่มีสักรายการ
+
+--- 🔴 fallback: compose ถูกปฏิเสธ = world wipe จริง (เมื่อก่อนบรรทัดนี้ไม่มีเลย) ---
+                MOB_DEATH_FRAMES_CENSUS_RECOMPOSE_DYING actor_count=108 wire_actors=1 target=0x2068
+                MOB_DEATH_FRAMES_CENSUS_RECOMPOSE       actor_count=108 wire_actors=1 target=0x2068
+events         : mob_death_frames_census_compose_refused_RuntimeError
+```
+
+⇒ **นี่คือสิ่งที่ผู้เทสต้องอ่านจริง ๆ:** ไม่ใช่ "เห็น 108/108 แล้วสบายใจ" แต่คือ
+**`wire_actors` ต่างจาก `actor_count` เมื่อไหร่ = โลกถูกล้างเมื่อนั้น** · `108 vs 1` คือหน้าตาของ world wipe
+🔴 `state.events` **ไม่เคยถูกพิมพ์ที่ไหนเลยในทรีนี้** (append 276 จุด · print 0 จุด) ⇒ ก่อนรอบนี้
+สัญญาณเดียวที่ผู้เทสมีในสภาพนั้นคือ **การไม่มีบรรทัด** ซึ่งเป็นความผิดพลาดที่ `GT-084` เคยทำมาแล้วครั้งหนึ่ง
+
+⇒ **เกณฑ์ที่ถูกคือ 108/108 ไม่ใช่ 115/115** (ข้อ 1 ของบล็อกบนยังคงเดิมทุกตัวอักษร: 115 คือขนาดตารางที่แช่ไว้ · 108 คือสิ่งที่บูตไร้แฟล็กประกอบได้จริง)
+
+🔴 **สี่ข้อที่บรรทัดนี้ยังไม่ปิด และห้ามอ่านว่าปิด**
+1. **ตอน compose สำเร็จ สองเลขนี้ต่างกันไม่ได้** — มันเป็นเลขเดียวกันโดยพีชคณิต ⇒ `108/108`
+   ยืนยันได้แค่ "เส้นทางเดินและเฟรมที่ส่งคือเฟรมของ pc นั้น" **ห้ามอ่านว่า "นับ body แล้วครบ"**
+   ค่าของบรรทัดนี้อยู่ที่เคส fallback ล้วน ๆ
+2. **`wire_actors` คือจำนวนที่ header ประกาศ ไม่ใช่จำนวน body ที่นับได้** — เฟรมที่ประกาศ 108 แต่ใส่มา 12 ตัวจะพิมพ์ `wire_actors=108` และเป็น world wipe (วัดแล้วโดย pf-adversary: ตัด body เหลือ 12 จาก 108 → บรรทัดยังพิมพ์ 108) · คนที่เห็นเรื่องนั้นคือชั้น headless (`test_world_wipe_headless_proof.py` นับ occurrence ต่อ identity) ซึ่ง**ยังอยู่ครบทุกใบ ไม่ถูกแทนที่**
+3. **บนบูต GM ที่มี diag object สองเลขจะไม่เท่ากันโดยถูกต้อง** — วัดแล้ว: `actor_count=108 wire_actors=113` เพราะ diag object ห้าตัวถูก append เข้า collection ⇒ **`wire_actors` มากกว่า = ปกติบนบูต GM · `wire_actors` น้อยกว่า = wipe** บรรทัดไม่มีฟิลด์แยกสองกรณีนี้ให้ ต้องรู้จากบูตที่ใช้
+4. **ใบ `GT-084-R2` ยังไม่มีเป้าหมายให้คลิก** — `RIDER-084-C` ข้างบนยังคงเดิม: `0x201F` ไม่อยู่ใน roster และที่ยืนอยู่คือหุ่นซ้อมสี่ตัว · การตั้งเป้าหมายทดแทน/สถานะใบเป็นของ chief/COO ⇒ "พร้อม" ข้างบนคือ **พร้อมของเกณฑ์ addendum-G เท่านั้น** ไม่ใช่ "ใบนี้รันได้แล้ว"
+
+โค้ด: `src/pirateforce_foundation/mob_census_wire_count.py` (โมดูลใหม่ของสาย B · ไม่มีแฟล็ก · `production_allowed = True` · ไม่โยนเข้า dispatch เด็ดขาด) · `tests/test_mob_census_wire_count.py` · จุดพิมพ์ใน `runtime.py` (การแก้ครั้งเดียวที่ข้อ G สงวนไว้ให้สายนี้)
+
+🆕 **RIDER-084-E (เจ้าของใบ LANE-B · รอบ `jop8ph` · 2026-08-29T19:5x+07:00) — ฟิลด์ใหม่บนบรรทัดที่ผู้เทส grep อยู่แล้ว · ไม่แก้ objective/เกณฑ์ผ่าน/nonclaims ของใบแม่แม้แต่ตัวอักษรเดียว**
+
+บรรทัด `MOB_CENSUS_HOSTILITY` ได้ฟิลด์ท้ายสุดเพิ่มหนึ่งตัว: `ledger=<state>`
+(ฟิลด์เดิมทุกตัวอยู่ที่เดิม ลำดับเดิม ⇒ การ grep หา `MOB_CENSUS_HOSTILITY` ยังแมตช์เหมือนเดิม)
+
+```
+MOB_CENSUS_HOSTILITY scene_id=.. scene=.. roster=.. backed=.. unbacked=.. refused=.. override=.. ledger=<state>
+```
+
+🔴 **สิ่งที่ผู้เทสต้องอ่านให้ถูก:**
+- `ledger=not_reported` = **จุดเรียกไม่ได้ส่ง ledger ให้บรรทัดนี้** ไม่ใช่ "ไม่มี ledger"
+  **นี่คือสิ่งที่บูตวันนี้จะพิมพ์** จนกว่า chief จะต่อสองคีย์เวิร์ด (ดูจดหมาย `20260829_1955_LANE-B-CORE-REQUEST-*`)
+- `ledger=same_scene` = ledger ถูกใช้จริง ⇒ **มอนที่บาดเจ็บจะถูกส่งซ้ำด้วยเลือดที่เหลือจริง**
+- `ledger=other_scene` / `unscoped_incomplete` / `same_scene_incomplete` = **ถูกปฏิเสธ**
+  ⇒ census ประกอบตามปกติ ไบต์เท่ากับตอนไม่ส่ง ledger ⇒ **มอนบาดเจ็บกลับมาเลือดเต็ม**
+  (นี่ไม่ใช่ error และไม่ทำให้บูตล้ม — เป็นสภาพที่มีชื่อ)
+- `ledger=absent` = ผู้เรียกส่ง `None` มาเอง · `ledger=ledger_unreadable` = ของที่ส่งมาไม่ใช่ ledger
+
+บรรทัดละเอียดสำหรับตอนอยากรู้ว่าทำไม (พิมพ์เมื่อจุดเรียกเรียก `describe_ledger_admission`):
+```
+MOB_LEDGER_ADMISSION scene_id=.. scene=.. ledger_scene=.. state=.. admitted=yes|no covered=N/M missing=.. vacuous=yes|no
+```
+`covered=N/M` คือครึ่งที่ **วัด** (`state=` คือครึ่งที่ **ตัดสิน**) · `missing=not_measured`
+แปลว่าไม่มีการอ่าน ledger เลย ไม่ใช่ "ไม่ขาดอะไร"
+
+🔴 **ริเดอร์นี้ไม่อ้างอะไรที่ชั้นจอ และไม่เปลี่ยนไบต์บนบูตวันนี้** — สองคีย์เวิร์ดที่ทำให้มันเปลี่ยน
+อยู่ใน `runtime.py` (เขตของ chief) และยังไม่ต่อ · `RIDER-084-A` `OW1`-`OW3` ยังบังคับเหมือนเดิมทุกข้อ
+
+โค้ด: `src/pirateforce_foundation/mob_ledger_admission.py` (โมดูลใหม่ของสาย B · ไม่มีแฟล็ก · `production_allowed = True` · ไม่โยนเข้า dispatch เด็ดขาด) · `tests/test_mob_ledger_admission.py`
+
+## GT-101 GM-001 LOGIN-STATE-VISUAL-PROBE-001: ล็อกอินด้วยบัญชีในลิสต์ gm_accounts แล้ว GM_UpdateGMStateVital (0x5A19) ที่ CORE-REQUEST-006 ต่อสายเข้า login path แล้ว จอเปลี่ยนอะไรไหม  [RESULT -- ไม่ใช่ PASS/NO-RESULT/BLOCKED, ดูผลด้านล่าง]
+
+> เลขใบ: ตัวนับเดียวร่วมกับ CLIENT_RE_QUEUE.md, prefix สองแบบ ห้ามแยกตัวนับ.
+> เลขสูงสุดที่ใช้ไปแล้ว ณ เวลาเขียนใบนี้: GT-099 (GAME_TEST_QUEUE.md) และ RE-100 (CLIENT_RE_QUEUE.md,
+> บันทึกไว้เองว่า "เลขว่างถัดไป = 101"). grep ยืนยันก่อนจอง: GT-101 = 0 hit, RE-101 = 0 hit ทั้งสองไฟล์
+> (ยืนยัน 2026-08-27). ใบเก่าทุกใบอยู่ที่เดิม ไม่ถูกแตะ ไม่ถูกย้าย.
+
+## GT-114 DIAG-MULTI-OBJECT-001 [attended, in-game]: five diagnostic objects at the city-center test point (X=11865, Y=6147), each one field away from control D0 -- does each single-field difference produce the on-screen effect that field is predicted to control, jointly closing the attended half of RE-107/RE-108/RE-109's own proposed follow-ups  [CANCELLED - covered by R309 (D0 · RE-108) / refuted by production DYING_TIMER_SECONDS=20 (D1a · ภาพ 185937) / covered by GT-129 (D1b) / D2 control-only / covered by GT-084-R2 + P-2/RE-067 (D3) — Panya agreed 2026-09-04 21:4x · ปิดโดย chief รอบ `epkucn`/R344 2026-09-04 22:56 +07:00 ตาม `COO-DECISION 20260904_2158` (ถอน `2142` ข้อ 2 = ไม่พ่วงบูตกับ `ATTACK-POSE-ONE-FIELD-AB-001`) · กฎ `PANYA-DECISION 20260903_1934` · เหตุผลรายข้ออยู่ใน `notes_to_chief/20260904_2133_KA1A-TO-COO-attack-pose-*` §1 · เดิม: PENDING -- wiring landed R202 (9b6zl6)]
+
+> NUMBERING NOTE: grep confirmed before reserving -- `GT-114`/`RE-114` = 0 hits in both files, archive included (2026-08-27, this round). Highest number in use is `113` (`RE-113`, CLOSED PASS/DONE) => this entry is `114`.
+> Entries `RE-085`-`RE-113` and `GT-101`-`GT-110` stay exactly where they are, unchanged -- this is a new entry, not a replacement for any of them.
+
+## GT-128 GM-003 CHAT-WARP-VISIBLE-001 [attended, in-game]: GM พิมพ์ `/warp <ฉากปัจจุบัน> <x> <y>` ลงกล่องแชทธรรมดา แล้ว**ตัวละครขยับไปยังพิกัดนั้นบนจอจริงหรือไม่** -- ใบแรกของสาย GM ที่ตัดสินที่จอ ไม่ใช่ที่ log  [❌ **CANCELLED - refuted by R306 finding 3 (`notes_to_chief/20260903_1655_*`)** (chief รอบ `pk14rf`/R326 ตาม `PANYA-DECISION 20260903_1934` + `COO 20260903_1943` ข้อ 2) — รูป same-scene ที่มีพิกัดส่ง `LANE_GM_CHAT_WARP_TELEPORT_FORCE_POS` แล้ว **ไคลเอนต์ปิดตัวเอง** (`ErrorData=28317`) วัดบนจอเจ้าของ ⇒ คำถามของใบนี้ ("ตัวละครขยับไปพิกัดนั้นไหม") ตอบไม่ได้ด้วยรูปเฟรมที่มีอยู่ และ `COO-DECISION 20260903_1744` ข้อ 3 สั่งปิด `/warp` แบบมีพิกัดไปแล้ว · 🔴 **เปิดใบใหม่ (ไม่ใช่ปลดใบนี้) เมื่อ LANE-GM เปลี่ยนรูปเฟรมและมี headless proof** — ใบใหม่ต้องเขียนเกณฑ์บนรูปเฟรมใหม่ ไม่ใช่ยกด่านเก่าทั้งชุดมาใช้ · สถานะเดิม: ~~BLOCKED — token compares nothing (COO-DECISION 20260829_0041)~~ **STILL BLOCKED — token fixed, but a separate COO-held gate remains (see chief R243 update at end)**: ห้ามเกรด ห้ามบันทึกผลใด ๆ ด้วยโทเคน `GM_WARP_POSITION_CONFIRMED` ตัวปัจจุบัน เพราะมันเทียบแค่ "แถวเปลี่ยนค่า" ไม่ได้เทียบกับ**จุดที่สั่ง** · ปลดเมื่อชุดแก้โทเคน+audit ลง main (chief, ภายใน 2026-08-29 23:59+07:00) · **อัปเดตรอบ `nz0qt2`:** ครึ่ง audit ที่เป็นเขต LANE-GM (แถว `outcome`, `CORE-REQUEST-GM-032` ข้อ 1-2) อยู่ใน PR `pirate-force-server#223` **รอ merge** · ครึ่งโทเคน (`GM_WARP_POSITION_TARGET_MATCH/MISMATCH`, `CORE-REQUEST-GM-031`) และข้อ 3 ของ GM-032 ยังเป็นของ chief ⇒ ป้าย BLOCKED ของใบนี้ **ยังไม่ถูกปลด** ด้วยรอบนี้ · 🔴 **เหตุผลที่วัดแล้ว ไม่ใช่แค่เหตุผลเชิงหลักการ** (เพิ่มโดย LANE-GM เจ้าของใบ รอบ `xk4wmz`): pf-adversary วัดว่าโทเคนตัวปัจจุบัน **ยิงตอนผู้เล่นเดินเองหนึ่งก้าว**หลัง warp ที่ไคลเอนต์เมิน ⇒ ใบนี้ "ผ่าน" ได้โดยที่ warp ไม่ทำงานเลย · **ของที่ LANE-GM ทำเสร็จแล้วเพื่อชุดของ chief:** `gm/warp_target_record.py` เก็บปลายทางของ warp ใบนั้นไว้เทียบได้ หยิบได้ครั้งเดียว ผูกกับ `character.id` (รอบ `z6gu2n` บน main แล้ว) และ `CORE-REQUEST-GM-031` ขอให้ chief พิมพ์ `GM_WARP_POSITION_TARGET_MATCH` / `..._MISMATCH` **เพิ่ม** จากโทเคนเดิม (ห้ามเอา match มาเป็นเงื่อนไขของโทเคนเดิม -- วันนี้ client เมิน `ForcePos` ผลที่คาดคือ MISMATCH ถ้ารวมกันโทเคนจะหายทั้งใบ) · BLOCKED x4 รวมข้อนี้ (~~x3~~ ~~x2~~ นับผิดมาแต่แรก มีสามข้อมาตลอด) -- ห้ามบูต: (ก) `CORE-REQUEST-GM-029` ยังไม่ลง main (จุดเรียกที่คืน action ที่สาขา `0xAC52`) · **อัปเดตรอบ `vvxkft`:** ตัวโมดูล `gm/chat_command_action.py` เองก็เพิ่งกลับขึ้น main รอบนี้ (PR #204 -- PR #200 ของรอบ `gr2q9j` ถูกปิดเพราะ gate แดง ไม่เคย merge) และ GM-029 เปลี่ยนความหมายเป็น "**แทนที่**บรรทัด `fire()` ของ GM-028 ในคอมมิตเดียว" ไม่ใช่ "เพิ่มจุดเรียก" (ใบ `20260828_1930_LANE-GM-CORE-REQUEST-GM-029-v2-replace-not-add.md`) ⇒ วันที่ใบนี้บูตได้ `GT-127` จะใช้ไม่ได้ตามเกณฑ์เดิมอีกต่อไป เพราะ event เปลี่ยนเป็น `gm_chat_action_*` -- **บูต `GT-127` ให้จบก่อน** (ข) ~~`RE-129` ยังไม่ตอบ~~ **RE-129 ตอบแล้ว 2026-08-28T20:09+07:00 (`ForcePos vital_version = 0`) แต่ข้อนี้ยังบล็อกอยู่ด้วยเหตุใหม่:** `COO-DECISION 20260828_2130` ล็อกแข็งว่าห้ามเปลี่ยน `FORCE_POS_VITAL_VERSION_CONFIRMED` จาก `None` จนกว่าจุดเขียนตำแหน่งแบบยืนยันจะอยู่บน main (`CORE-REQUEST-GM-030`, รอบ `fo2lgh`) **แม้ RE-129 จะตอบก่อนก็ตาม** ⇒ โมดูลยังปฏิเสธการส่งด้วยตัวเอง และตอนนี้มีเทสบังคับด้วย (`pirate-force-server/tests/test_gm_force_pos_version_lock.py` แดงถ้าเปลี่ยนค่าก่อนโทเคน `GM_WARP_POSITION_CONFIRMED` อยู่บน main) · เหตุผลชั้นที่สองจาก RE-129 เอง: handler ที่ client จดทะเบียนไว้สำหรับ `ForcePos` = `mov al,1; ret 4` ไม่อ่าน payload ⇒ **version ถูกไม่ได้แปลว่าจะขยับ** ใบนี้ยังเป็นใบเดียวที่ตัดสินข้อนั้นได้ (ค) ~~🔴 **คำถาม "ใครเป็นเจ้าของตำแหน่งหลัง warp" ยังไม่มีคำตอบ**~~ **ตอบแล้ว 2026-08-28T21:30+07:00 (`COO-DECISION`): เจ้าของคือตำแหน่งที่ client ยืนยันแล้ว · เซิร์ฟเวอร์ห้ามเขียนตำแหน่งที่ตัวเองไม่ได้สังเกตเห็น · ตัวยืนยันคือ `TargetPos` ใบแรกหลังเฟรม** ⇒ ข้อนี้เหลือ "รอการเดินสาย" ไม่ใช่ "รอคำตอบ" -- ปลดเมื่อ `CORE-REQUEST-GM-030` ลง main และ COO ปลดล็อก · ผู้เทสต้องบันทึกในผล: หลัง warp ให้เดินหนึ่งก้าวเพื่อบังคับ `TargetPos` แล้วดูว่าคอนโซลมี `GM_WARP_POSITION_CONFIRMED` หรือไม่ · **บริบทเดิมของข้อนี้ (เก็บไว้):** — pf-adversary รอบ `gr2q9j` ชี้ว่า หลังส่ง `ForcePos` แล้ว แถวใน DB และ `selected.position` ยัง**ค้างที่จุดเดิม** (โมดูลไม่เรียก `foundation.checkpoint`) ⇒ client อยู่จุดใหม่ เซิร์ฟเวอร์คิดว่าอยู่จุดเก่า · aggro/pickup/logout ใช้จุดผิด · ต้องได้คำตอบ (`ASK-COO` รอบนี้) **ก่อน**เปลี่ยนค่าคงที่ของ `RE-129` ไม่ใช่หลัง · **อัปเดตรอบ `38c4tv` 2026-08-29T08:22+07:00 (LANE-GM เจ้าของใบ) — เพิ่มด่านก่อนบูตข้อ 4 ไม่ได้ปลดหรือเพิ่มบล็อก:** จดหมาย chief `20260829_0604` ข้อ ②bis (ก) วัดได้ว่าล็อกอินที่ใช้ override ฉากเป็น **visit** ⇒ ไม่เขียนแถวตำแหน่ง ⇒ `GM_WARP_POSITION_CONFIRMED` **ไม่มีทางยิง** บนเซสชันนั้น · ใบนี้ตัดสินด้วยโทเคนนั้น จึงต้องยืนยันก่อนบูตว่าบัญชีไม่มีใบล็อกอินค้าง ทั้ง `gm_login_scene.json` และ `gm_login_scene_standalone.json` (ดูด่านข้อ 4) 🔴 กับดักซ้อน: ขั้นตอนข้อ 4 ของใบนี้เอง (`/warp <ฉากอื่น>`) เป็นตัวสตางค์ใบนั้น · **อัปเดต chief รอบ `3ru85y` (R243) 2026-08-30T~16:xx+07:00 — CORE-REQUEST-GM-030/031 wired, แต่ตัวบล็อกจริงของใบนี้ยังปิดอยู่:** `GM_WARP_POSITION_TARGET_MATCH`/`_MISMATCH` พิมพ์แล้วจริง เพิ่มจากโทเคนเดิม ไม่แทนที่ (พิสูจน์ headless: warp ตรงพิกัด -> MATCH หนึ่งบรรทัด, warp ผิดพิกัด -> MISMATCH พร้อมระยะ, เดินเองไม่มี warp -> ไม่มีทั้งคู่, target ค้างข้ามเฟรมไม่เกิด — เทสใหม่ 5 ใบใน `tests/test_gm_warp_position_confirmed.py`, สวีตเต็ม 5480 passed) · 🔴 **pf-adversary พบ**: กิ่ง `unknown_character_mismatch` ที่ `CORE-REQUEST-GM-031` ข้อ 5 ขอ เป็น **dead code ในโปรดักชัน** — ลำดับการ์ดเดิม (`character_changed` early-return) ดักทุกกรณี re-select จริงไว้ก่อนกิ่งใหม่จะถึง เทสที่พิสูจน์กิ่งนี้ต้อง park เป้าหมายตรงผ่าน `record_warp_target` เอง ไม่ใช่ผ่านเส้นทาง `/warp` จริง — [ไม่อ้าง] ว่ากิ่งนี้ทำงานได้จริงในโปรดักชัน คงไว้เป็น defense-in-depth ตามที่คอมเมนต์ใหม่ใน `runtime.py:_gm_warp_open_confirm_window` บันทึกไว้ ส่งคำถามลำดับการ์ดนี้ต่อให้ LANE-GM/COO ตัดสินว่าจะแก้หรือรับสภาพ (ดูจดหมาย `CHIEF-REPLY` รอบนี้) · pf-adversary ยังพบบั๊กเดิมที่ไม่เกี่ยวกับ diff นี้ (rearm เป็นตัวละครอื่นก่อนมี TargetPos ทำให้ `gm_warp_pending_character` ค้างชื่อเก่า แล้วโทเคนทั้งชุดเงียบทั้งเฟรมของตัวละครใหม่) — ไม่แก้รอบนี้ (นอกขอบเขตใบ) รายงานไว้ให้ทราบ · ~~🔴🔴 **ตัวบล็อกจริงของใบนี้ทั้งใบยังไม่ปลด**: `teleport_wire.FORCE_POS_VITAL_VERSION_CONFIRMED` ยังเป็น `None`~~ **อัปเดต chief รอบ `9fv1m8` (R253) 2026-08-31T~02:1x+07:00: ค่าคงที่ปลดแล้ว** (`teleport_wire.FORCE_POS_VITAL_VERSION_CONFIRMED = 0`, ตาม `COO-DECISION 20260830_1645`/`1742` -- ค่า RE-129 literal ไม่ใช่การอ่านชื่อ `*_PROVEN_BY_RE129`) พร้อมแก้เทส 13 ใบใน 6 ไฟล์ที่พึ่งค่า shipped เดิมโดยไม่ patch ตรง ๆ (pf-adversary รีวิวผ่านก่อน commit) สวีตเต็ม 5600 passed 0 failed เขียว(cloud sanity) · **รอ merge ก่อน** -- `pirate-force-server` PR ของรอบ `9fv1m8` ยังไม่ merge เช็ค `PR_STATE.txt` ก่อนบูต · ไบต์ `ForcePos` จะออกสายจริงเมื่อ merge แล้วเท่านั้น · ตัวบล็อกที่เหลือของใบนี้ (ลำดับการ์ด `unknown_character_mismatch` dead-code ที่ pf-adversary พบรอบ `3ru85y`, และ rearm-character bug ที่ยังไม่แก้) **ยังไม่ปลด** -- นี่คือแค่การเปิดสายไบต์ ไม่ใช่การปิดใบ ผู้เทสยังต้อง ยันหน้าจอจริงตามด่านเดิมของใบนี้]
+
+> เลขใบ: ตัวนับเดียวร่วมกับ `CLIENT_RE_QUEUE.md` · รอบ `gr2q9j` จอง `RE-129` ที่นั่นและ `GT-128` ที่นี่
+> grep ยืนยันก่อนจอง 2026-08-28T18:2x: `GT-128` / `RE-129` = 0 hit ทั้งสองไฟล์ · สูงสุดก่อนหน้า = `GT-127` / `RE-128`
+
+## GT-146 PICKUP-CLICK-OPCODE-CAPTURE-001 [attended, in-game]: คลิกซ้ายลงบน element ของตกที่เซิร์ฟเวอร์เราส่งเอง แล้ว **ไคลเอนต์ยิงเฟรมอะไรออกสาย** -- ใบ capture ที่ปลด `RE-125`/`GT-124`/M5  [⚪ **CANCELLED - covered by R303 attended capture 20260902_1755 (46 inbound 0x4543 frames, 2 completed takes), confirmed R306** — ปิดโดย chief (LANE-E) รอบ `m8wtlr`/R356 2026-09-05T17:0x+07:00 ตาม `COO-DECISION 20260905_0249` ข้อ 1 (ทวงเป็นครั้งที่สองโดย `COO-DECISION 20260905_1649` หลังค้าง 14 ชม.) · **คำถามของใบนี้ถูกตอบบนไวร์ไปแล้ว**: R303 จับเฟรมขาเข้า `0x4543` 46 เฟรมจากการคลิกจริง ยืนยันซ้ำ R306 · หลักฐานที่วัดบนไวร์ชนะคำสั่งที่เขียนจากชื่อใบ (`COO 0249`) · 🔴 **คำถามที่ยังเปิดอยู่ในใบนี้ไม่ได้ปิดไปกับมัน** — `REEMISSION_REDRAWS_THE_LABEL` ย้ายไปอยู่ใต้ `GT-223`/`RE-208` ของ LANE-B ในรอบเดียวกัน ตาม `COO 0249` ข้อ 1 ประโยคท้าย · ~~🔴 BLOCKED - until P-2 closes (NOW) — เงื่อนไขเดียว ไม่มีเงื่อนไขอื่น~~ · ตั้งโดย chief (LANE-E) รอบ `kj0s6r`/R346 2026-09-05T02:0x+07:00 ตาม `COO-DECISION 20260904_2349` ข้อ 5 · ที่มา: `NOW.md` หัวข้อ "ห้ามทำจนกว่า P-2 จะปิด" ระบุชื่อใบนี้ตรง ๆ · เงื่อนไข `GT-188` checkpoint 2 **ตัดทิ้งแล้ว** (`GT-188`/`GT-188cp1` ยกเลิกตาม `PANYA-DECISION 20260903_1934` · `COO 20260904_1648`) · เปิดโดย LANE-B รอบ `uq2lxw2` · แก้ขั้นตอนตาม `PANYA-ORDER 20260830_1450` ที่รอบ `xt0g9c`]
+
+> 🔴 **บรรทัดบังคับของใบตีมอนทุกใบ (`COO-DECISION 20260902_1848` ข้อ 2 · เติมโดย LANE-B รอบ `di7ers`):**
+> **ข้ามฉากแล้ววาปกลับ = เลือดมอนกลับเต็ม เป็นของที่รู้อยู่แล้ว ประกาศไม่แก้ ไม่ใช่ FAIL ของการตี**
+> จะวัดว่าเลือดลดจริง ต้องตีและอ่านผล **ในฉากเดียวกัน ไม่ข้ามฉากคั่น** · ถ้าข้ามฉากแล้วกลับมาเห็นเลือดเต็ม
+> ให้จดว่า `known: wound reset on scene re-open` แล้วเทสต่อ **ห้ามปิดใบเป็น FAIL ด้วยเหตุนี้**
+
+> 🔴 **เงื่อนไขเปิดใบ (COO-DECISION `20260902_0542` ข้อ 2 · เพิ่มโดย chief R300):** ห้ามเรียกผู้เทสมาขับใบนี้จนกว่า
+> **ของจะค้างอยู่บนพื้นนานพอที่ตาคนจะเห็นและเล็งคลิกได้** เหตุผลอยู่ในใบนี้เองอยู่แล้ว: ถ้า element อยู่บนจอไม่ถึงหนึ่งวินาที
+> รอบนั้น**แยกไม่ออก**ระหว่าง "ไคลเอนต์ไม่ส่งเฟรมอะไรเลย" กับ "คลิกหลังของหมดอายุไปแล้ว" ⇒ ได้ผลลบที่ตีความไม่ได้ เสียรอบ attended ทั้งรอบ
+> สถานะของเงื่อนไขนี้ ณ R300 (2026-09-02T08:0x+07:00) — เขียนตามที่วัดได้จริง ไม่ใช่ตามแผน:
+> · ฝั่ง **ledger เซิร์ฟเวอร์** รอดแล้ว 120 วิ (`sustain_a_kill` whole-live-ledger บน main) — นั่นคือย่อหน้า 🟢 ด้านบน
+> · ฝั่ง **ป้าย/ภาพบนจอ** ยัง **ไม่มีใครวัด** และทาง "ครอบ `make_runtime_vitals` ด้วย `preserve_ground_in_runtime_res_vitals`"
+>   (`COO-DECISION 20260902_0347` ข้อ 2) **ถูกถอนแล้ว** ด้วย `COO-DECISION 20260902_0646` — วัดได้ว่า wrap ฆ่าเธรด `game_listener` 3 ทาง
+>   ทางที่เดินแทนคือ **opt-in ทีละจุด** เริ่มที่ `action_ack` ซึ่ง **ยังไม่ขึ้น main** (chief, กำหนด R301)
+> ⇒ ประตูของใบนี้คือ **`GT-188` checkpoint 2** ("วัดสภาพวันนี้") ผ่านก่อน แล้วจึงเรียกใบนี้ · ห้ามอ้างว่าเงื่อนไขเปิดผ่านเพราะ "PRESERVE อยู่บน main" — มันไม่อยู่
+
+> 🟢 **PANYA-ORDER 20260830_1450 ขั้นที่ 1-2 ผ่านแล้ว (แก้ที่รอบ `xt0g9c`):** ตัวแปร "เล็ง" ปิดแล้วในชั้นเซิร์ฟเวอร์ --
+> `mob_drop_presence.sustain_a_kill` (ชิปเข้า production ที่รอบ `m0vp7m`, ต่อสาย `runtime.py:4716-4722` แล้ว,
+> `production_allowed=True` ไม่มีแฟล็ก) ส่ง **whole-live-ledger ทุกครั้งที่มีการฆ่า** แทนที่จะส่งแค่ของ kill
+> เดียว ⇒ แถวที่ยังไม่หมดอายุ (120 วิ) ถูกส่งซ้ำทุกครั้งที่มีคนตายตัวใหม่ ไม่ใช่แค่ตอนเกิด headless proof:
+> `tests/test_mob_drop_presence.py` 48/48 ผ่าน (รันจริงที่รอบนี้) รวม
+> `test_a_second_kill_carries_the_first_kills_rows` และ `test_the_expiry_still_bounds_the_ground` --
+> แถวฝั่งเซิร์ฟเวอร์ (ที่คลิกอ้างอิง) **อยู่รอด 120 วิ และคลิกได้ตลอด ไม่ถูกเก็บทิ้งเองอีกต่อไป** (เดิม
+> `cell.take()` เก็บทุกคีย์ที่เพิ่งประกาศทันที -- ปิดแล้ว)
+> 🟡 **สิ่งที่ยังไม่วัด (นี่คือคำถามที่เหลือของใบนี้เอง ไม่ใช่งานที่บล็อกมัน):**
+> `mob_drop_presence.REEMISSION_REDRAWS_THE_LABEL = None` -- ยังไม่มีใครดูว่าป้ายชื่อบนจอ**ถูกวาดใหม่**
+> เมื่อ generation ถูกส่งซ้ำหรือไม่ (แถวฝั่งเซิร์ฟเวอร์รอดแน่ ๆ แล้ว แต่ภาพบนจอเป็นคำถามฝั่งไคลเอนต์ที่วัด
+> จากซอร์สไม่ได้) -- **นี่คือสิ่งที่ P0/P1-P4 ข้างล่างมีไว้ตอบ**
+
+> NUMBERING: grep ก่อนจอง (2026-08-29T13:0x+07:00) `GT-146`/`RE-146` = 0 hit ทั้งสองคิว + `archive/` + `notes_to_chief/` · เลขสูงสุดที่ใช้ไป = 145 (`RE-` ใบจริงสูงสุด = `RE-132`) · ตัวนับเดียวสองไฟล์
+> 🔴 **`GT-060` มีอยู่แล้วและห้ามลบ**: ถาม claim เดียวกัน สถานะ `BLOCKED-CONDITIONAL` บูตไม่ได้เพราะไม่มีท่า spawn drop-object และขอ "โมเดลที่คลิกได้" ซึ่ง `GT-045` ปิดไปแล้วว่า**ไม่มีโมเดล** ⇒ ใบนี้เติมท่ายิงและเลิกขอโมเดล · **จดหมาย chief `20260829_1221` ที่ว่า "ไม่มีใครเปิดใบนั้น" คลาดเคลื่อน** · ได้ผล P1/P2/P3 เมื่อไร ให้ปิด `GT-060` แบบ superseded-by `GT-146` โดยระบุชื่อ ห้ามลบก่อนมีผล
+> ที่มาสามบรรทัด (รายละเอียดอยู่ในจดหมาย `20260829_13xx_LANE-B-*`): `RE-125` ปิดแบบ bounded-negative — opcode ยัง UNOBSERVED, `0x4543` derive จาก name-hash, id จริงอยู่ใน virtual-zero tail ของ `.data` ⇒ เปิดอิมเมจไม่ช่วย · `GT-046` static: request ก๊อป `+0x14` จาก **live runtime drop-object** ⇒ ไม่มีของ pre-placed ให้คลิก ต้องส่ง element เอง · มอนดรอปใช้ไม่ได้วันนี้ (`Bg0002` ตีไม่ติด · หุ่น `916` `n_DROPS_*`=0) ⇒ เหลือเลน ground-loot อย่างเดียว
+
+## 🆕🔬 GT-159 M2-DEST-COLUMBUS-MARKER17-TRANSFORM-TO-SHIP-001 [attended, in-game]: ถ้าเซิร์ฟเวอร์เคยส่งฉาก 126 ที่ `MARKER[17]` พิกัด `(3050, 232, 90)` หันหน้า 6 แทนฉาก 17 -- ผู้เล่น**แปลงร่างเป็นเรือและอยู่ในทะเล**ตามที่เจ้าของจำได้ (`GT-106` ข้อ ④.2) จริงหรือไม่ -- ตัดสินด้วยตา ไม่ใช่ด้วยการเถียงตาราง  [⚪ **CANCELLED - covered by `GT-266` · no longer needs proving because `PANYA-DECISION 20260905_1329`** -- ปิดโดย chief (LANE-E) รอบ `m8wtlr`/R356 2026-09-05T17:0x+07:00 ตาม `COO-DECISION 20260905_1543` · **สองครึ่งของใบตายคนละทาง**: (ก) ครึ่ง "มาถึง 126 ที่ MARKER 17 (3050,232,90) แล้วเป็นเรือในทะเลจริงไหม" = `GT-266` วัดตรงตัว (จุดมาถึงเดียวกัน วัตถุที่ต้องเห็นเดียวกัน · กลไกขนส่งต่างกันไม่เปลี่ยนสิ่งที่ตาเห็น) · (ข) ครึ่ง "`DESTINATION_SCENE_N_ID = 17` อ่านใน id space ไหน" = **ไม่ต้องพิสูจน์แล้ว** เพราะ `PANYA-DECISION 20260905_1329` เคาะจุดมาถึง 126 = MARKER `n_ID 17` ถาวร — คำถาม id space ตายด้วยคำสั่ง ไม่ใช่ด้วยการเทส · 🔴 **สิ่งที่ยังไม่ถูกตอบและห้ามผูกกับใบนี้อีก**: Columbus ยังชี้ฉาก 17 บน main (`world_m2_sea_destination.py:314`) — เมื่อ LANE-A แก้ปลายทาง Columbus → 126 เป็น PR จริง **ใบ GT ของ PR นั้นออกใหม่ตอนนั้น** ไม่ใช่เก็บใบนี้รอ (`COO 1543` ข้อ 3 · เวลา attended แพงที่สุด `PANYA 20260903_1934`) · ~~🔴 BLOCKED (คงเดิม) -- การปิดใบของ chief รอบ `r045nx`/R354 ถูกถอน ในรอบเดียวกันหลัง `pf-adversary` D4 · ใบนี้ยังไม่ปิด และรอ COO ตัดสิน~~ **COO ตัดสินแล้ว `1543`**
+> 🔴 **ที่ถอนและทำไม (chief เขียนเอง ไม่ใช่ให้ใครมาจับได้ทีหลัง)**: `COO-DECISION 20260905_1349` ข้อ 5 ให้ทางเลือกสองทางเท่านั้น — "ถ้าใช่ปิดด้วย `CANCELLED - covered by <GT ใหม่>` **ถ้าไม่ ระบุว่าต่างตรงไหน (สั้น)**" · chief สรุปเองว่าใบ `/warp 126` ใหม่ (`GT-266`) **ไม่ครอบ** ใบนี้ = ตกเข้าทาง "ถ้าไม่" ซึ่งอนุญาตแค่ให้**เขียนความต่าง** แต่ chief กลับปิดใบด้วยตัวครอบที่ COO ไม่ได้เอ่ยถึงเลย ⇒ **เกินอำนาจ** และขัดบรรทัดในหัวใบนี้เอง ("ห้ามปิดเองจนกว่า COO ตัดสิน" · `PANYA-DECISION 20260903_1934`)
+> 🔴 **และข้ออ้างที่ใช้ปิดก็เกินจริง**: คำถามของใบนี้ไม่ใช่ "ฉาก 126 เป็นทะเลไหม" แต่คือ **กด Columbus (quest 3021) บนเซิร์ฟเวอร์ที่ถูกแก้ให้ส่ง 126@`MARKER[17]` แทน 17 แล้วเกิดอะไร** — เพื่อแยกสอง id space ที่ `world_m2_sea_destination.py:305-314` ประกาศเองว่า `[CONTESTED]` และ "no control in any table separates them" · บูตของ `GT-233` ทุกครั้งเข้าฉาก 126 ผ่าน `PF_M2_SURVEY_TRIAL` + relogin **ไม่เคยแตะ `columbus_quest_dispatch` หรือแถว 3021 เลย** ⇒ ไม่แยก id space ให้สักนิด · กิ่งผลลบของใบ ("ยังเป็นคน ไม่ได้อยู่ในทะเล เช่นยืนอยู่ฉาก 17") ไม่มีใครเคยเห็น
+> 🔴 **และป้าย `OBSERVER_CONFIRMED 12:48` ถูกยืมผิดที่**: ใน R318 §2.2 ป้ายนั้นเซ็นประโยค "**ไม่มีหน้าต่างอะไรเด้ง**" (ผลลบของ `GT-233`) ส่วน "เป็นเรือ" อยู่ในย่อหน้าเดียวกันแบบ**ไม่มีลายเซ็น** ("`HP -1/1` ขณะเป็นเรือ (สังเกตการณ์)") — ย้ายป้ายข้ามข้ออ้างแบบนี้ผิด `G-OBS`/`G5` ตรง ๆ
+> ⇒ **ที่ chief ทำได้ตามอำนาจจริงคือบรรทัดเดียวนี้**: `GT-266` (`/warp 126` สด) **ไม่ครอบ** ใบนี้ — `GT-266` ถามว่า "วาปสดขณะเล่นไปโผล่ 126 ได้ไหมโดยไม่ relogin" ส่วนใบนี้ถามว่า "`DESTINATION_SCENE_N_ID = 17` อ่านใน id space ไหน" ซึ่งต้องกด Columbus บนบิลด์ที่แก้ปลายทาง · **เสนอ COO: ใบนี้ยังจำเป็นหรือไม่ ในเมื่อกลไก M2 ที่เดินอยู่จริงคือ `RE-227`/`GT-233` ไม่ใช่การสลับปลายทางของ Columbus** — คำตอบเป็นของ COO ไม่ใช่ของ chief
+> เดิม (ถอนแล้ว ไม่ลบเพื่อเป็นประวัติ): ~~`CANCELLED - covered by GT-233 boots R313/R315/R317/R318`~~
+> เดิม: 🔴 **BLOCKED** · `STATUS-SET-BY-CHIEF 2026-09-05T02:0x+07:00 from body` ตาม `COO-DECISION 20260904_2349` ข้อ 6]
+
+> 🔢 **หมายเหตุเลข:** grep ยืนยันก่อนจอง 2026-08-30T14:2x+07:00: `GT-159`/`RE-159` = 0 hit ทั้งสองไฟล์ ·
+> สูงสุดก่อนหน้า `GT-158` (`GT`/`RE` ใช้ตัวนับเดียวร่วมกัน ตามกฎที่ `RE-152` หัวใบเคยระบุไว้)
+> ⇒ ใบนี้คือ `GT-159` · ใบ `RE-085`-`RE-158`/`GT-001`-`GT-158` อยู่ที่เดิมทั้งใบ ห้ามลบ ห้ามย้าย ห้ามแก้ถ้อยคำ
+
+## GT-188 GROUND-DROP-HEARTBEAT-PRESERVE-CONFIRM-001  [**checkpoint 1 = ❌ CANCELLED - covered by GT-216** (🟢 PASS สองชั้น · `OBSERVER_CONFIRMED 2026-09-03T16:51+07:00`) · **checkpoint 2 = 🔵 MEASURED (BASELINE) รอบ R309 — ผลคือ "หาย"** ยังไม่ปิดใบ · ปิด cp1 โดย chief รอบ `oi2r2n`/R340 ตาม `COO-DECISION 20260904_1648` ข้อ 3 + `PANYA-DECISION 20260903_1934`]
+
+> **checkpoint 1 คำต่อคำ**: "ของที่ตกยังเห็นอยู่บนจอข้าม heartbeat ~2 วิ อย่างน้อยสองรอบ (~4-5 วินาที ไม่หยิบ)" — `GT-216` **PASS สองชั้นบนจอเจ้าของ R306** วัดสิ่งที่แรงกว่านั้นไปแล้ว: เจ้าของคลิกเก็บ **10 ครั้ง เข้ากระเป๋า 9** ในรอบเดียว ⇒ ของอยู่บนพื้นนานกว่าสอง heartbeat หลายเท่า มิฉะนั้นคลิกครั้งที่สองก็ไม่มีอะไรให้คลิก · R307 (`GT-220`) เห็นซ้ำอีกครั้ง ของค้างเป็นนาทีจนหมดอายุ 120 วินาทีกลายเป็นของผี
+> 🔴 **สิ่งที่การปิด cp1 ไม่ได้อ้าง**: ไม่ได้อ้างว่า `preserve_ground_heartbeat_frame` เป็นเหตุของผลนั้น (ใบตั้งคำถามชั้นจอ ไม่ใช่ชั้นสาเหตุ) · ไม่ได้อ้างว่าอ่าน reconciler ของ Codex ถูก — ใบเดิมก็เขียนไว้เองว่าไม่อ้าง
+> 🔵 **checkpoint 2 ยังไม่ปิด และ COO สั่งยกเลิกเฉพาะ cp1**: cp2 ("หนึ่ง action ที่ถูกตอบ ล้างพื้นไหม") **ถูกวัดโดยบังเอิญในรอบ R309** — S4: เจ้าของเปิดกระเป๋ารอโดยไม่คลิกอะไร แล้วของบนพื้น**หายเอง** · สาย: ไคลเอนต์ส่ง `CheckSecondPwdVital 0x4B98` (64 B) → เซิร์ฟตอบ `V110_CHECK_SECOND_PASSWORD_OK` (44 B) **ลงท้าย `0B 00`** = ground-list ทรง CLEAR · หลังจากนั้น `MOB_DROP_PRESENCE … live=1 announced=0 carried=1 oldest_left=65.6s` ⇒ **เซิร์ฟยังถือของอยู่ ไคลเอนต์ล้างจอไปแล้ว** = คำทำนายของ cp2 เป็นจริง
+> 🔴 **cp2 ยังไม่ถูกเกรด PASS/FAIL และห้ามยกไปเป็นฐานของใบอื่น**: ไม่มีภาพ STEP-D — เจ้าของเล่าเองในรอบ attended · ใบที่จะวัดซ้ำ**หลังแก้** คือ **`GT-242`** (เปิดรอบ `oi2r2n` เดียวกันนี้) · 🔴 `GT-242` **ห้ามผูกกับ `GT-223`** (`COO 1648` ข้อ 2)
+> สถานะเดิม (ยกมาคำต่อคำ ไม่ได้ลบ): PENDING -- TWO CHECKPOINTS as of R299 (COO-DECISION `20260902_0347` item 4). Checkpoint 1 (heartbeat) is bootable now: PR #441 on main, verified `git merge-base --is-ancestor 072967a origin/main`. 🔴 Checkpoint 2 (one player ACTION) is a BASELINE measurement of TODAY, not a test of a fix: chief's vitals wrap was WITHDRAWN in R299 before it landed -- see RECHECK item 2
+
+- objective: one claim only -- after the fix that patches `legacy.make_runtime_res_empty_exact` to `preserve_ground_heartbeat_frame` (wired in `src/pirateforce_foundation/app.py`, strictly before the `legacy.game_listener = adapt_game_listener(...)` line, per chief round 6o3gr1 and `pirate-force-server` PR #437), a real client that watches a mob drop an item keeps the dropped item's own non-text model/geometry (not merely its name-label, and not the killed mob's own corpse -- see steps/pass criteria/nonclaims 5-6) visible on screen across at least two ~2s heartbeat intervals (~4-5s total wait, no pickup), instead of the pre-fix behavior where the drop silently vanished within ~2s regardless of whether anyone picked it up. This is LANE-B's P-1 (COO-DECISION 20260901_0347): bug found and confirmed against real bytes in round n8kq4r, server-side fix landed round 6o3gr1. This ticket is the client-observable half; it does not by itself prove Codex's client-image read of the reconciler.
+- db: default state\pirateforce.sqlite3 -- always a fresh copy for this boot only, never the canonical file. Record the copy's filename and sha256 before/after the round, and confirm the canonical file's sha256 is unchanged before/after.
+- server args: standard playbook boot on `main`, with both `pirate-force-server#437` (mob_loot.py, merged) and `#441` (app.py wiring, chief round 6o3gr1) confirmed present on `main`. No special flags required. Do not boot until RECHECK below shows both are in.
+- steps:
+  1. Boot server, confirm it is freshly started (age < 3.5 min) and not a leftover from a previously killed client; boot client only after server is up.
+  2. Log in. Right-click-drag only (camera rotation, does not change facing, emits nothing) to a clean angle -- no Q/E, no WASD yet. Full-res photo BASELINE, recorded as two separate fields: (a) non-text item model/geometry visible on the ground y/n (expect none -- no mob has been killed yet; dust, shadows, any name/label text, and (once a kill happens) the killed mob's own corpse/body mesh never count as a model sighting -- see step 3's own note), and (b) name-label visible y/n plus the colour of every name label in frame (one line per label, write "none" if there are none). Also record scene name and X/Y/Z from HUD.
+  3. Kill exactly one mob that drops an item. If the kill produces more than one drop/loot event (this project has observed a single kill emit two `MOB_LOOT_DROP` events, per `GT-084`'s own result line), pick one dropped item at STEP-A and track that same one through STEP-B/STEP-C -- name which item (by icon/appearance and rough ground position) you are tracking, in writing, at STEP-A, so a later step can be checked against it. Immediately after the drop appears, full-res photo STEP-A, recorded as two separate fields: (a) non-text item model/geometry visible on the ground y/n -- the actual dropped-item 3D object, distinct from any name/label text, dust, or shadow, and distinct from the killed mob's own corpse/body mesh at the kill site (none of those ever count as a model sighting -- this project has separately confirmed, in `GT-084`/`GT-084-R2`/`GT-129`/`RE-107`, that a killed mob's corpse can freeze in place and persist on screen indefinitely, which is a known, unrelated client bug, not evidence for this ticket's claim; if a corpse is present, describe the tracked item's shape/position as distinct from the corpse, not merely "something is there"), and (b) name-label visible y/n plus the colour of every name label in frame (one line per label, write "none" if there are none).
+  4. Do not pick up the item. Wait past at least one heartbeat interval (~2-3s) without moving (right-click-drag only if a liveness check is wanted -- do not use Q/E or WASD, that would change facing and emit TargetPosVital, which is not part of this claim). Full-res photo STEP-B on the same tracked item as STEP-A, recorded as two separate fields: (a) non-text item model/geometry still visible y/n (dust/shadow/label text and the mob's own corpse/body mesh never count -- see step 3's note), and (b) name-label still visible y/n plus label colours.
+  5. Continue waiting to cross a second heartbeat (~4-5s total elapsed since the drop appeared). Full-res photo STEP-C on the same tracked item, recorded as two separate fields: (a) non-text item model/geometry still visible y/n (dust/shadow/label text and the mob's own corpse/body mesh never count -- see step 3's note), and (b) name-label still visible y/n plus label colours.
+  6. Record wall-clock time for every step, to cross-check against the server console/capture log afterward.
+  7. Optional, non-blocking, not part of this ticket's pass/fail: if the tracked item's model is still visible at STEP-C, the tester may click it and note whether a pickup opcode appears to fire. This is colour only -- it does not stand in for GT-146's own claim and must not be written as gating or blocking GT-146, which remains a separate ticket held under its own hold.
+  8. 🔴 CHECKPOINT 2, added R299 (COO-DECISION `20260902_0347` item 4). Only after STEP-C is photographed: take exactly ONE action the server answers with a vital -- one `W` step is enough (it sends `TargetPosVital` and the server answers) -- and then STOP moving again. Full-res photo STEP-D on the same tracked item, same two separate fields as every step above: (a) non-text item model/geometry still visible y/n (dust/shadow/label text and the mob's own corpse never count), (b) name-label still visible y/n plus label colours. Record the wall-clock time of the keypress and of the photo. One action, not several: the question is whether a SINGLE answered vital wipes the ground, and a burst of them cannot tell which one did it.
+  🔴 **R301 (chief, รอบ `smrum3`) -- ห้ามพลิก checkpoint 2 เป็น "วัดผลของการแก้" ตาม `COO 0646` ข้อ 5 ยัง**
+  `COO 0646` ข้อ 5 เขียนไว้ว่าเมื่อ `action_ack` ขึ้น main ให้พลิกข้อนี้กลับเป็นการวัดผลของการแก้ · **chief ไม่พลิก และนี่คือเหตุผล** (pf-adversary รอบเดียวกัน D4, วัดแล้ว):
+  ① ขั้นนี้สั่งกด `W` = `TargetPosVital` · จุดที่ opt-in คือ **EA7D ActionVital** หลังจับ TargetVital kind 1 ⇒ คนละเส้นทาง
+  ② ขั้นนี้สั่งบูต **"No special flags required"** · จุดที่ opt-in เปิดด้วย `--scene-load-scenario ..._ea7d_ack.json` เท่านั้น ⇒ ไม่ใส่แฟล็ก = `scene_load_scenario` เป็น `None` ⇒ **บรรทัดที่แก้ไม่ถูกรันเลยแม้แต่ครั้งเดียว**
+  ⇒ ถ้าพลิกตามตัวอักษร ผลของการกด `W` บนเซิร์ฟเวอร์ที่โค้ดใหม่ไม่เคยทำงาน จะถูกบันทึกเป็นหลักฐานของโค้ดใหม่
+  **checkpoint 2 ยังเป็น "วัดสภาพวันนี้" ตามเดิม** จนกว่าจะมีขั้นที่กดปุ่มที่ไปถึงจุดนั้นจริง ใต้แฟล็กที่เปิดมันจริง · ส่งคำถามกลับ COO ในใบ `20260902_0920`
+  🔴 RECHECK ข้อ 2 ของใบนี้ (`grep install_ground_vitals_preserve app.py` ต้องไม่มีผล) **ตาบอดต่อการ opt-in รายจุด** -- มันผูกกับชื่อไฟล์และสัญลักษณ์ของ wrap ที่ถอนไปแล้ว ไม่ใช่กับ composer ที่จุดไหนใช้ · ตัวตรวจที่เห็นจริง: `git grep -n 'preserve_ground_in_runtime_res_vitals' -- src/pirateforce_foundation/`
+- pass criteria (two layers, kept separate):
+    wire/DB: the server console/capture log for this boot shows the heartbeat frames sent during the STEP-B/STEP-C windows carry the PRESERVE shape (ground-list mask 0x08 present, count 0, no elements -- the same envelope `drop_collection_pc` already uses) rather than the old CLEAR shape (`0x0B, 0x00` twice, read by the client as `TerrainThingPool == NULL`). This is provable headless, from the capture log alone, and does not by itself prove what the client drew on screen.
+    🔴 TWO CHECKPOINTS, GRADED SEPARATELY (R299): CHECKPOINT 1 = STEP-B/STEP-C, standing still across at least two heartbeats. CHECKPOINT 2 = STEP-D, after exactly one answered action. They are separate results and this entry records BOTH; do not collapse them into one PASS/FAIL. If checkpoint 1 passes and checkpoint 2 fails, that is the EXPECTED shape today (no vitals fix exists on `main`; see RECHECK item 2), and the heartbeat half stays regardless -- which is also what COO-DECISION `20260902_0347` item 4 ordered for the case where a vitals fix does exist and does not hold. If checkpoint 1 itself fails, checkpoint 2 tells us nothing and must be recorded as NO-RESULT rather than as a second failure.
+    client-observable: the human at the screen reports, from the BASELINE/STEP-A/STEP-B/STEP-C/STEP-D photos, the model and label fields recorded separately per step above, for the one tracked item named at STEP-A. PASS on this ticket's own claim -- that the dropped item's own model/geometry persists on screen across heartbeats -- requires non-text model/geometry to be visible (not just a label, and not the killed mob's own corpse/body mesh -- see step 3/nonclaim 6) at STEP-A, and the same tracked item to remain visible through STEP-B and STEP-C. If STEP-A never shows the item's model (label only, corpse only, or nothing at all), do not mark this ticket's model-persistence claim PASS or FAIL: record it as NO-RESULT, and record the label's own visibility at STEP-B/STEP-C separately alongside it -- a label-only or corpse-only sighting must never be used to satisfy this ticket's own claim. Where the item's model was seen at STEP-A, a negative result (model vanishes by STEP-B or STEP-C despite not having been picked up) is a finding worth exactly as much as a PASS -- record it as such. A negative would mean the PRESERVE-shape server fix did not restore client-side persistence, and would redirect further investigation to nonclaim 1 below (the client-image read of the reconciler), not back to the server wiring, which this round's own tests already pin at the byte level.
+- nonclaims:
+  1. Does not verify Codex's static IMAGE read of the client reconciler (`GSCN_RunTimeProtocolRes+0x20` / `DropThingModule_Client`) against the client binary itself -- this round's fix was cross-checked only from the server side (byte inspection of `make_runtime_res_empty_exact()` output at offsets 10-13).
+  2. Does not claim a full running-server boot test exists anywhere in the repo -- `app.py` is not unit-boot-tested elsewhere in this repo's test layout. The wiring is pinned structurally (`test_app_installs_the_ground_heartbeat_patch_before_adapting_the_listener`) and behaviorally, with a real `legacy` load proving the patch only fires for a caller named `heartbeat_worker` and every other caller (e.g. the connect-time `RUNTIME_RES_ACK_FIRST_REQ`) keeps v141's original bytes (`tests/test_foundation_legacy_seam.py::FoundationLegacySeamTests::test_ground_heartbeat_patch_only_changes_the_heartbeat_worker_caller`), plus at the byte level (`tests/test_mob_loot.py::PreserveGroundHeartbeatTests`, 7/7 passing) -- not end-to-end via a live server boot.
+  3. Does not require or claim that the pickup-click opcode is captured during this same session -- that is GT-146's own claim, on its own hold. This ticket must not be treated as blocking or gating GT-146.
+  4. Does not attribute a cause to any label's colour -- record colours only, per RE-067 (the cause of label colour is unknown and is that ticket's own subject; do not infer here).
+  5. This ticket's own claim is about client-rendered item model/geometry persisting on the ground, not about name-label text persisting -- that is exactly why BASELINE/STEP-A/STEP-B/STEP-C track model-visible and label-visible as two separate fields instead of one combined "drop visible" field. A label alone, with no model ever having rendered, proves nothing about this ticket's claim and must be recorded as NO-RESULT for the model question, per `notes_to_chief/CODEX_URGENT_20260901_1350_GT188-MODEL-NOT-LABEL-GATE.md` and conflict item #1 of `notes_to_chief/20260901_1439_CODEX-CHECKPOINT-GM-COLOR-DROP-FIFTH.md`.
+  6. Does not accept the killed mob's own corpse/body mesh as evidence of the dropped item's model -- this project has separately, previously confirmed (`archive/notes_to_chief_2026-08/20260827_1620_GT084R2-RESULT-PASS-hostile-kill-full-wire-but-corpse-freezes-no-target-panel.md`, OBSERVER_CONFIRMED; `CLIENT_RE_QUEUE.md` RE-107, CLOSED BOUNDED-NEGATIVE; `GT-129`) that a killed mob's corpse can freeze in place and persist on screen indefinitely, as a known, unrelated, still-open client bug with its own tickets. A corpse sighting at STEP-A/B/C is not this ticket's claim and must not be recorded as a model sighting; step 3 requires the tester to name/describe the tracked dropped item distinctly from any corpse present at the same kill site. [pf-adversary finding, round `1mw5lf`]
+- RECHECK: `cd pirate-force-server && git log --all --oneline -i --grep="preserve_ground_heartbeat_frame" --grep="make_runtime_res_empty_exact" --grep="GT-188" | head -5`
+  (confirm both `#437` and `#441` are present on `main` before booting; empty or partial output means still BLOCKED -- do not boot, report back instead).
+- RECHECK item 2 (checkpoint 2 only, added R299, CORRECTED the same round): `cd pirate-force-server && grep -n "install_ground_vitals_preserve" src/pirateforce_foundation/app.py` on a fresh `main` clone must print NOTHING. That is the CORRECT state: chief built that wrap in R299, pf-adversary measured that it kills the game-listener thread on two live paths (`--second-password-mode bypass`, every backpack item move) while preserving the ground on none of the paths a player's action actually takes, and it was withdrawn before it was committed (letter `notes_to_chief/20260902_0605_CHIEF-TO-COO-vitals-preserve-wrap-withdrawn-*`). If that grep ever DOES print, a later round relanded it -- read that round's letter before booting, because this entry's checkpoint 2 then means something different.
+- 🔴 WHAT CHECKPOINT 2 MEANS TODAY (R299, chief, corrected): NOTHING on `main` preserves the ground across a player's action. The answer to a movement step is composed by this project's own `action_ack`, not by the frozen snapshot, and no site has been opted in yet. So a drop that VANISHES at STEP-D is the EXPECTED result and is still worth the photo: it is the first client-observable confirmation of the reading this whole thread rests on (an empty derived mask clears the ground), and it is the control that a later per-site fix will be graded against. A drop that SURVIVES at STEP-D is the more interesting result -- it would mean the reading is wrong and the per-site plan should stop before it starts. Either way this is a measurement of today, not a PASS/FAIL of anyone's fix.
+- links: `pirate-force-server#437` (mob_loot.py, merged) -- `pirate-force-server#441` (app.py wiring, chief round 6o3gr1) -- `notes_to_chief/consumed/20260901_0420_LANE-B-CORE-REQUEST-heartbeat-preserve-ground-list-fixes-drop-clear.md` (original CORE-REQUEST, now consumed) -- `notes_to_chief/consumed/CODEX_URGENT_20260901_0407_DROP-EVIDENCE-CORRECTION.md` and `notes_to_chief/consumed/20260901_0443_CODEX-CHECKPOINT-THREE-PRIORITY-GATES.md` (evidence boundary) -- `COO-DECISION 20260901_0347` (assigned LANE-B this investigation) -- `PROCESS_GATES.md` rule #18 -- `notes_to_chief/CODEX_URGENT_20260901_1350_GT188-MODEL-NOT-LABEL-GATE.md` (model-vs-label pass-gate warning, folded into steps/pass-criteria this round) -- `notes_to_chief/20260901_1439_CODEX-CHECKPOINT-GM-COLOR-DROP-FIFTH.md` conflict item #1 (same warning, second source).
+- numbering: per the shared-counter search command (rule ② at the top of this file), the highest confirmed number before this entry, across `GAME_TEST_QUEUE.md`, `CLIENT_RE_QUEUE.md`, and `archive/*QUEUE*ARCHIVE*.md`, is `GT-187`. This entry is `188`.
+- result: (tester fills in: PASS/FAIL/BLOCKED, evidence, timestamp, OBSERVER_CONFIRMED line per G-OBS once client-observable evidence exists)
+
+## GT-205 UI-A-BACK-BUTTON-VISIBLE-NOTICE-001  [🟡 **ไม่ยกเลิก — ครึ่ง wire ยังไม่ถูกวัดสำหรับ subcode ของใบนี้** (chief รอบ `pk14rf`/R326 ตาม `PANYA-DECISION 20260903_1934` + `COO 20260903_1943` ข้อ 2): `GT-211` พิสูจน์ composer ตัวเดียวกันบนสาย (`LANE_A_UIA_NOTICE_COMPOSED ... EXIT REFUSED` 66 ไบต์) แต่นั่นคือ **subcode ของปุ่มล็อกเอาต์** ไม่ใช่ subcode 3 ของใบนี้ ⇒ ไม่เข้าเงื่อนไข covered ทั้งสามรูป · 🔴 **เจ้าของใบ LANE-A เป็นคนตัดสินว่า subcode 3 ยังต้องวัดสายของตัวเองไหม** (เจ้าของสั่งไว้เองในใบ `1934`) — ตัดสินแล้วให้เขียนบรรทัดปิด/คงเปิดที่หัวใบนี้ในรอบเดียวกัน · ป้าย `BACK_REFUSED`→`EXIT` ที่ `COO 20260903_1746` ข้อ 2 สั่ง แก้เสร็จแล้วต้องอัปเดตสตริงในเกณฑ์ของใบนี้ด้วยในรอบเดียวกัน (`AGENTS.md` §7) · สถานะเดิม: **client-observable = PASS · wire/DB = NOT MEASURED · ใบยังไม่ปิด** — สถานะเขียนโดย LANE-A (เจ้าของใบ) รอบ `kozzu1` 2026-09-03T11:5x+07:00 · 🔴 **จงใจไม่เขียน `✅ PASS` เดี่ยว ๆ**: เกณฑ์ของใบนี้เขียนเองว่า "TWO layers -- neither layer may ever be offered as proof of the other" และรอบ R303 วัดมาชั้นเดียว ⇒ ปั๊ม PASS ทั้งใบคือรูปเดียวกับหนี้ `GT-192` ที่ถูกบันทึกว่าจ่ายสองรอบ (ผู้ตรวจ pf-adversary รอบ `kozzu1` D3) · **ตัวปิดใบเหลืออะไร: คัดโทเคน `LANE_A_UIA_NOTICE_COMPOSED` จากคอนโซล + ตารางสีป้ายชื่อตามเกณฑ์ + ระบุว่าบรรทัดขึ้นที่พาเนลไหน** — สามอย่างนี้เก็บได้ฟรีในรอบ attended ถัดไปที่บูตอยู่แล้ว ไม่ต้องบูตเพื่อใบนี้ใบเดียว · 🔴 **คำตัดสินของเจ้าของใบ (LANE-A รอบ `gs8hmn` 2026-09-03T22:5x+07:00 ตาม `PANYA-DECISION 20260903_1934` + chief `20260903_2010`): คงเปิด แต่เป็น "เก็บฟรี" เท่านั้น — **ห้ามบูตรอบ attended เพื่อใบนี้ใบเดียว ไม่ว่ากรณีใด** ถ้ารอบ attended ถัดไปจบโดยไม่มีใครบูตอยู่แล้ว ใบนี้ค้างต่อได้ ไม่นับว่าใครค้าง · เหตุผลที่ไม่ปิด: เกณฑ์ของใบนี้เขียนเองว่าสองชั้น และชั้น wire ของ **subcode 3** ยังไม่เคยถูกวัด — `GT-211` วัด subcode ของปุ่มล็อกเอาต์ ไม่ใช่ subcode นี้ (chief ตัดสินแล้วว่าไม่เข้า covered ทั้งสามรูป) ปิดตอนนี้ = ปั๊ม PASS จากชั้นเดียว รูปเดียวกับหนี้ `GT-192` · เหตุผลที่ไม่ให้บูตเพื่อใบนี้: เวลา attended คือทรัพยากรที่แพงที่สุด (`1934`) และตัวปิดสามอย่างที่เหลือเก็บได้จากคอนโซลของบูตใด ๆ ที่มีอยู่แล้ว · 🔴 **กฎ grep `AGENTS.md` §7 ไม่เข้าเงื่อนไขกับใบนี้ วัดแล้วไม่ใช่เดา**: การเปลี่ยนชื่อป้ายรอบ `omhpqj` แตะปุ่ม UI-B ปุ่มเดียว (`UIB_ACTION_LABEL`) · ป้ายของ UI-A ยังเป็นสตริงเดิมของ chief เป๊ะ (`world_logout_button_notice.py:503` `UIA_ACTION_LABEL = "LANE_A_UIA_BACK_REFUSED_LOCAL_TALK_NOTICE"`) และบรรทัดเดียวที่ chief ยังจะสลับ (~~`runtime.py:7033`~~ **เลขบรรทัดนี้เน่าแล้ว จริงคือจุดที่ประกอบ `uia_notice_actions` ในสาขา `nested_id == LOGOUT_VITAL_ID` — grep เอา อย่าใช้เลข**) อ่านค่าเดียวกันนั้นกลับมา ⇒ **สตริงที่ใบนี้ grep (`LANE_A_UIA_NOTICE_COMPOSED` และ `BACK REFUSED`) ไม่ถูกแตะทั้งก่อนและหลังที่ chief สลับ ไม่ต้องแก้เกณฑ์ข้อไหน**
+> 🆕 **อัปเดตรอบ `oi2r2n`/R340 (chief) — หนี้ "แก้สตริงในเกณฑ์รอบเดียวกัน" ที่หัวใบนี้สั่งไว้: จ่ายแล้ว โดยการวัดซ้ำ ไม่ใช่การแก้**: chief สลับบรรทัดนั้นแล้วรอบนี้ (PR เซิร์ฟเวอร์ `oi2r2n` ยังรอเกต) · วัดซ้ำแล้วว่าใบนี้ **ไม่มี** สตริง `LANE_A_UIA_BACK_REFUSED_LOCAL_TALK_NOTICE` อยู่ในเกณฑ์เลยสักที่ และสองสตริงที่มันใช้จริง (`LANE_A_UIA_NOTICE_COMPOSED` · `BACK REFUSED`) ไม่ถูกแตะ ⇒ **ไม่มีเกณฑ์ข้อไหนต้องแก้** · ป้าย UI-A ไม่เปลี่ยนทั้งสองโลก · หนี้เดียวกันของ `GT-211` **ต้องแก้จริง** และแก้ไปแล้วในใบนั้น (ที่นั่นมีสตริงนี้อยู่ในเกณฑ์)
+> **ชั้น client-observable = PASS (รันแล้ว R303 2026-09-02 เจ้าของกดปุ่มเอง)**: บรรทัด `[thua pai] : BACK REFUSED` **ขึ้นบนจอ** = ข้อความสำเร็จของใบเอง (ยกคำจาก `notes_to_chief/20260902_1755_KA1A-R303-RESULTS-*.md`) · สกรีนช็อตอยู่กับเจ้าของ **ไม่ได้อยู่ในรีโปทั้งสอง** (ไม่มี path ไม่มี sha256) · boot `7e14bde1` · capture `capture_r303_20260902_161029`
+> **บูตนั้นไม่มี scenario ล็อกเอาต์แน่นอน** (ไม่ได้อ่านจากใบ แต่ตามจากเกต: `runtime.py` ประกอบบรรทัดนี้เฉพาะตอน `logout_hypothesis_scenario is None`) · 🔴 **แต่ "บูตไร้แฟล็ก" ยังไม่ถูกวัด** — ใบสั่งเขียนว่า "NO scenario flag of any kind" แต่ **คำสั่งไม่ใช่การวัด** และใบผลบันทึก head/boot/tree/db/capture/jobs/teardown แต่ **ไม่มี argv** · โมดูลยังประกอบบรรทัดนี้บนบูตที่ถือ scenario อื่นอีกราว 28 ตัว (docstring ข้อ 3 ของโมดูลวัดไว้เอง)
+> **ทำไมถึงเชื่อว่าเป็นไบต์ของเซิร์ฟเวอร์**: บรรทัดที่เห็นมี **ช่องผู้พูดว่าง** (`[ป้ายช่อง] : ข้อความ`) ขณะที่ของที่ไคลเอนต์สะท้อนเองอ่านว่า `[ป้ายช่อง] Arena01: ...` และ `say_wire.DEFAULT_SPEAKER = ""` ถูกปักไว้ ⇒ เป็นตัวจำแนก **แต่ไม่ใช่หลักฐานปิด** เพราะไม่มีใครในรีโปเห็นสกรีนช็อต
+> 🔴 **เจ็ดอย่างที่รอบนั้นไม่ได้เก็บ ห้ามอ่านว่าเก็บแล้ว**: (1) **ชั้น wire/DB ไม่ได้วัด** — ใบผลเขียนเองว่า "wire/DB: not separately instrumented for this ticket" ⇒ ชั้นนั้นยังยืนบนหมุด headless ใน `tests/test_world_logout_button_notice.py` เหมือนเดิม · (2) **ขั้น 8 ไม่ได้ตอบว่าไดอะล็อกยังเปิดอยู่ไหม** · (3) **ความยาว 12 ตัวอักษรไม่ขยับ** ไม่ได้อนุญาต 5 หรือ 26 · (4) **argv ของบูต** · (5) **บรรทัดขึ้นที่ไหนบนจอ / ห่างจากคลิกกี่วินาที / อยู่นานแค่ไหน** — ขั้น 8 ถามห้าข้อ ใบผลตอบข้อเดียว ⇒ เกณฑ์ "in the local chat/talk area" **ยังไม่ถูกยืนยัน** · (6) **ตารางสีป้ายชื่อทุกภาพ** ที่เกณฑ์บังคับไว้ **ไม่มีในผลเลย** = skip ที่ไม่มีใครนับ · (7) **n = 1** คลิกเดียว เซสชันเดียว และเป็นบูตที่ใบก่อนหน้า (`GT-193`) เพิ่งฆ่าตัวละครและทำให้ไคลเอนต์ไม่ส่งอะไรเลย — ไม่มีบันทึกว่ามีการรีล็อกอินคั่นหรือไม่
+> 🔴 **ผลนี้ไม่ได้แปลว่า UI-A เสร็จ** ปุ่มยังพากลับหน้าเลือกตัวละครไม่ได้จริง (`GT-184` ยังเปิด · `NOW.md` คิว UI-A) · 🔴 **ไม่ใช่หลักฐานของ `GT-211`** (subcode 1 คนละปุ่ม) · 🔴 คำถามถึง chief: ใบนี้ถูกใส่กลับเข้าคิวผู้เทสหลังผล R303 มาแล้วสองครั้ง (`FROM_CHIEF_R308` · R317 §4) ขณะที่ `NOW.md` เขียนว่า PASS — ถ้าตั้งใจให้รันซ้ำเพื่อเก็บสามอย่างที่ขาด **ขอให้เขียนในใบว่ารันซ้ำเพื่ออะไร** ไม่งั้นผู้เทสจะเผาบูตซ้ำข้อเดิม
+> ~~[🟢 READY (R303, 2026-09-02T13:0x+07:00) -- PR #563 merged 11:55 +07:00; RECHECK run by chief on `origin/main` `96503ff9` and it HIT (`runtime.py:28` import, `runtime.py:5798` `observe_parsed`). Bootable]~~]
+
+> 🔴 **สถานะเปลี่ยนโดย chief รอบ `ogq686` / R302 (2026-09-02T11:2x+07:00):** บรรทัดที่ใบนี้รออยู่
+> **เขียนแล้วและ push แล้ว** -- `pirate-force-server` PR **#563** (`runtime.py::_dispatch_with_lanes`
+> เรียก `world_logout_button_notice.observe_parsed` ก่อนเกต scenario · เฟรมต่อท้ายท้ายสุดของ `return`)
+> **รอ merge เท่านั้น ยังห้ามบูตจนกว่า RECHECK ข้างล่างจะได้ hit จริงบน `origin/main`**
+> เกตอ่านจาก `production_allowed` ของโมดูลตรง ๆ ไม่ผ่าน `lane_hooks.module_production_allowed()`
+> (มีเทสอ่านซอร์สจริงบังคับไว้) ⇒ ปัญหา D7 ที่ใบกลัวไว้ ปิดแล้ว
+> 🔴 chief เพิ่มเกต **fail-closed เมื่อยังไม่ได้เลือกตัวละคร** ที่ใบนี้ไม่ได้ขอ (วัดแล้ว: ก่อนมีเกต
+> เซสชันที่ไม่เคยล็อกอินยังได้เฟรมกลับ) ⇒ **ผู้เทสต้องล็อกอินเข้าฉากจริงก่อนกดปุ่มเสมอ** ไม่งั้นได้
+> `lane_a_uia_notice_no_selected_no_reply` แล้วจะอ่านเป็น FAIL ผิด ๆ
+
+> Opened by LANE-A round `od1xso` (2026-09-02 +07:00). LANE-A consumes the result itself.
+> numbering: shared counter with `CLIENT_RE_QUEUE.md` (rule (2) at the top of this file).
+> Highest `GT` in `GAME_TEST_QUEUE.md` = `GT-204`; highest `RE` in `CLIENT_RE_QUEUE.md` = `RE-202`.
+> This entry is `205`.
+
+- objective: single claim, decided by human eyes only -- with the character standing in a live map,
+  the player opens the HOME menu and clicks "กลับหน้าเลือกตัวละคร" (back to character select), and the
+  one line `BACK REFUSED` (exactly 12 printable ASCII characters) APPEARS ON SCREEN in the local
+  chat/talk area, either while the logout dialog is still open or right after it closes.
+
+- background (read once, then work from the steps): round `od1xso` built
+  `src/pirateforce_foundation/world_logout_button_notice.py`. On `LogoutVital 0x1B40` subcode 3 (the
+  owner's own captured 34-byte frame) it composes ONE `Channel_LocalTalkMessageVital` notice via
+  `gm/say_wire.make_local_talk_notice_frame`, body exactly `BACK REFUSED`. Subcode 1 (the
+  "ออกจากเกม" button, 119-byte frame) gets NOTHING from this lane, on purpose, so `GT-194`'s evidence
+  cannot change underneath it. The wire/DB half is already proven headless (~~28 tests~~ **30 tests
+  as of round `8z9h9n`** -- the entry was written saying 28 when the suite it names already had 29;
+  corrected here by the lane that wrote it, pf-adversary D15), byte-equality with say_wire's
+  composer. The tester's job in this entry is ONLY the screen half.
+  The spelling `BACK REFUSED` is no longer a lane assumption: `COO-DECISION 20260902_0943`
+  (`notes_to_chief/20260902_0943_COO-DECISION-uia-notice-text-back-refused-confirmed.md`) confirmed
+  it, so a tester who reads a DIFFERENT spelling off the screen is reporting a defect, not a
+  wording that was still being decided.
+
+- PRECONDITION: ~~the module composes bytes but is NOT wired yet~~ **CLEARED by chief, R303
+  (2026-09-02T13:0x+07:00).** PR #563 merged at 11:55 +07:00 and the RECHECK below was run against
+  the merged `main`:
+  `cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/runtime.py | grep -n "world_logout_button_notice"`
+  -> two hits on `origin/main` `96503ff9`: line 28 (import) and line 5798 (`observe_parsed`).
+  Record `96503ff9` (or whatever `main` you actually boot) in the result.
+  The tester may re-run the RECHECK; an empty result would mean the boot is on a stale clone, not
+  that this entry regressed.
+  BOOT ORDER for this round's tickets, per `COO-DECISION 20260902_1146` item 2:
+  `GT-207` -> `GT-193` -> **`GT-205`** -> `GT-204` last.
+
+- db: `state\pirateforce.sqlite3` -- COPY ONLY, never open the canonical file. Copy to
+  `state\run_gt205_<yyyyMMdd_HHmmss>.sqlite3` and boot against the copy. Record sha256 of the copy
+  before and after; record sha256 of the canonical file before and after and confirm it is unchanged;
+  `PRAGMA integrity_check` = `ok` on the copy both times.
+
+- server args: standard boot per `BRIDGE_BOOT_PROCEDURE.md` / `ATTENDED_SESSION_RUNBOOK.md`,
+  `-SecondPasswordMode bypass`, NO scenario flag of any kind. Once wired this path is live on a
+  default boot (`production_allowed = True`).
+  `py -3 -u -m pirateforce_foundation.app --db state\run_gt205_<stamp>.sqlite3`
+
+- steps: (cheap: about 10 minutes on screen. Server first, client second, always.)
+  1. RECHECK above must return a real hit. Then LOCK_GAME, boot stamp, sha of canonical, copy the DB.
+  2. Boot server, then client. Log in. Confirm a FRESH server start (if a client was killed earlier,
+     the server keeps the session and the next client hangs on "connecting" forever -- restart the
+     server first).
+  3. Frame the shot with RIGHT-CLICK-DRAG only (camera only; the character's facing does not move and
+     nothing goes on the wire). Do NOT change the character's facing: no `Q`/`E`, no `W/A/S/D`.
+     Do not type any characters -- with chat unfocused every keystroke is a hotkey.
+  4. Screenshot S0 BASELINE, full resolution, showing the chat/talk area. Note the wall-clock time
+     (+07:00) and the video timestamp.
+  5. Open the HOME menu. Screenshot S1 (menu open).
+  6. Click "กลับหน้าเลือกตัวละคร" ONE time. Write down the wall-clock time and the video `t` of that
+     click before doing anything else.
+  7. WATCH THE SCREEN CONTINUOUSLY FOR AT LEAST 30 SECONDS. Take S2 at about +2s, S3 at +10s,
+     S4 at +30s, all full resolution, all showing the chat/talk area. Do not click anything, do not
+     dismiss the dialog by hand during those 30 seconds unless the client itself closes it.
+  8. Record, in the result: did the twelve characters `BACK REFUSED` appear -- yes/no; WHERE on screen
+     (which panel/line); at what offset from the click; for how long it stayed; and whether the logout
+     dialog was still open at that moment or had already closed.
+  9. Optional second attempt, only if attempt 1 showed nothing: relog, repeat steps 5-8 once with the
+     chat window/tab explicitly OPEN and its history tab visible before clicking the button. Label the
+     screenshots S0b..S4b and record the two attempts separately -- do not merge them.
+  10. NO-CRASH check with RIGHT-CLICK-DRAG (never `Q`/`E`). Screenshot S5. Exit with the window X.
+  11. Shut the server down. Keep console `.out`/`.err`, `capture_v141\GAME_LIVE.txt`,
+      `capture_v141\GAME_EVENTS_LIVE.txt` + sha256 of each. `PRAGMA integrity_check`. Re-check the
+      canonical sha. Run teardown ALWAYS, even if the round ended because she simply stopped playing
+      (the template refuses a boot stamp older than 420 minutes -- do not let the round age out).
+
+- pass criteria: (TWO layers -- neither layer may ever be offered as proof of the other)
+    wire/DB          : headless-readable from the console/capture alone. The subcode-3 request arrives
+      and the console prints
+      `LANE_A_UIA_NOTICE_COMPOSED button=BACK_TO_CHARSELECT subcode=3 vitals=1 trailing=0 text=BACK REFUSED pc=56 frame=66`
+      (one line, exactly as printed -- the `pc=`/`frame=` lengths are the composed bytes, so the token
+      cannot appear unless bytes exist). If she also clicks the exit button at any point, the matching
+      line is ~~`LANE_A_UIA_STOOD_DOWN button=EXIT_GAME subcode=1 vitals=4 trailing=85`, which shows this
+      lane composed NO BYTES for subcode 1 -- it still prints that one line, which is itself evidence
+      `GT-194`'s reader will see; "nothing at all" would be the wrong expectation.~~ **CHANGED, LANE-A
+      round `1d6rta` (2026-09-02T13:4x+07:00), per `COO-DECISION 20260902_1145`: the exit button is no
+      longer a stand-down.** On a boot that carries this round's code (server PR of round `1d6rta`; the
+      RECHECK below tells you which `main` you have), the exit click prints
+      `LANE_A_UIA_NOTICE_COMPOSED button=EXIT_GAME subcode=1 vitals=4 trailing=85 text=EXIT REFUSED pc=56 frame=66`
+      and a second twelve-character line may appear on screen. **That belongs to `GT-211`, not to this
+      entry** -- this entry is graded on `BACK REFUSED` alone. On an older `main` the struck
+      `LANE_A_UIA_STOOD_DOWN` line is still the correct one and is not a defect. Copy whichever lines
+      appeared, verbatim, do not interpret.
+      Three other tokens can appear instead, and each means something different:
+      `LANE_A_UIA_WITHDRAWN` (the module is switched off), `LANE_A_UIA_NOTICE_FAILED` (the composer
+      refused -- a bug to report, not a tester error), `LANE_A_LOGOUT_FRAME_UNCLASSIFIED verdict=<word>`
+      (the frame reached this lane and was rejected; the word is the live classifier's own verdict).
+      Copy whichever appeared. `integrity_check` = `ok`; canonical sha unchanged; no uncaught traceback.
+      This layer CANNOT answer: whether anything was drawn on screen.
+    client-observable: needs the human at the screen; never inferred from the console. Within the
+      30-second window after the click, a human SEES the line `BACK REFUSED` -- twelve ASCII
+      characters, that exact spelling -- in the local chat/talk area. Compare S0 against S2/S3/S4.
+      Record for EVERY still (S0-S5, and S0b-S4b if attempt 2 was run) the colour of EVERY name label
+      in frame, one line per label per image, the word `none` written out rather than left blank.
+      Read colours from full-resolution stills only -- never from a contact sheet, a downscaled image,
+      or video. Record the colour and nothing else: what decides a label's colour is unknown and is the
+      whole subject of `RE-067`. Divergences from the original server's screenshots get one row each in
+      `REAL_SERVER_DIVERGENCE.tsv`.
+      This layer CANNOT answer: what bytes were composed, or which subcode arrived.
+
+- prediction (THIS IS A PREDICTION, not a measurement; a wrong prediction is a finding):
+    P1 console token present AND `BACK REFUSED` visible within ~2s => both layers pass.
+    P2 console token present but nothing visible in 30s => the notice channel does not render while the
+       logout dialog owns the input/render state. That is a real finding about the dialog, NOT proof the
+       composer is wrong -- redirect to an RE about the dialog's render state, do not re-run blind.
+    P3 no console token at all => the call site is not on the path she clicked; re-run RECHECK and
+       report which `main` commit was booted. NO-RESULT for the screen half, not FAIL.
+
+- nonclaims:
+  1. Does NOT test whether the client returns to the character-select screen. That is `GT-184` and it
+     remains unsolved (`GT-033` measured both known response policies leaving the client on the same
+     map for 50-77s). Seeing `BACK REFUSED` says nothing about the transition.
+  2. A negative is a real finding of equal worth: it is evidence about the logout dialog's input/render
+     state, NOT proof that the notice composer is wrong. The render evidence for this channel
+     (`GT-006`/`GT-009`) was measured with the dialog CLOSED, so this entry is the first time it is
+     asked to draw with the dialog OPEN.
+  3. Does NOT test the "ออกจากเกม" button (`GT-186`/`GT-194`/**`GT-211`**) and must not be run in a way
+     that changes their evidence. If she clicks it anyway, log it as a separate observation with its own
+     token line -- and on a `main` that carries round `1d6rta`, that observation IS `GT-211`'s evidence:
+     record it there rather than grading this entry on it.
+  4. Claims nothing about `ReturnSelectServerVital 0x709E` or `HYP-PF-040`.
+  5. Does not claim the PR is merged; the RECHECK line, not this header, decides that.
+
+- links: `NOW.md` item UI-A · `GT-184` · `GT-185` · `GT-194` · `RE-197` (closed this round) ·
+  `notes_to_chief/consumed/20260901_1930_KA1A-CAPTURE-the-owner-clicked-both-UI-A-and-UI-B-buttons-herself-exact-bytes-plus-a-design-problem-for-HYP-PF-040.md`
+  · `GT-193` (the `SPEED DENIED` notice -- same channel, same 12-character shape)
+
+- result: (tester fills in: PASS/FAIL/BLOCKED/NO-RESULT · screenshots S0-S5 · verbatim console lines ·
+  label colours one line each · timestamps +07:00 · `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>`)
+
+## GT-218 SPEED-SAFE-VALUE-400-DRY-RUN-CLIENT-SURVIVES-001  [**CLOSED** -- ❌ **FAIL · OBSERVER_CONFIRMED 2026-09-03T16:51+07:00**
+🔴 **คำ `CLOSED` เติมโดย LANE-GM (สายที่ถือผลใบนี้) รอบ `83wujr` 2026-09-06T07:2x+07:00 ตาม `FROM_CHIEF_R364` ข้อ 2 -- ไม่ใช่การเปลี่ยนผล** เหตุผลสองข้อ ตรวจได้เอง: (ก) ใบนี้ **ถูกบูตและเกรดจบไปแล้ว** (FAIL + `OBSERVER_CONFIRMED 2026-09-03T16:51+07:00` โดย chief รอบ `pk14rf`/R326) ⇒ ไม่มีอะไรให้บูตอีก การเติมบล็อก `ATTENDED:` จะพาใบที่ตัดสินแล้วขึ้นรถบัส capture ของเจ้าของโดยไม่มีคำถามค้าง (`FROM_CHIEF_R364` ข้อ 2 สั่งเองว่า "ใบที่ตอบไปแล้วให้ปิด แทนการเติมบล็อก") (ข) ที่ `pf_queue_status.py` รายงานใบนี้ว่า "พร้อมบูต" คือ **รูของ regex ไม่ใช่สถานะจริง**: `FAIL` ไม่อยู่ในรายการโทเคนของ `STATUS` (`tools_bridge/pf_queue_status.py:19`) ⇒ ตัวจับไปหยิบโทเคน "พร้อมบูต" ที่เคยอยู่ในวลีประวัติท้ายหัวใบแทน (วลีนั้นถูกเขียนใหม่ในรอบเดียวกันแล้ว) · คำ `CLOSED` ที่อยู่ซ้ายสุดแก้การนับนี้โดยไม่แตะเครื่องมือ (เครื่องมือไม่ใช่เขตของสายนี้) · 🔴 **ผลและงานที่ผลนี้ส่งต่อไม่ถูกปิดไปด้วย**: ผู้ต้องหาคือ**รูปเฟรม `UpdateAttrVital 0x309A`** (`COO-DECISION 20260903_1744`) ยังเป็นหนี้เปิดของ LANE-GM และเป็นคำถามเดียวกับที่ `RE-LV-LIVE-UPDATE-FRAME-001` (ขอไว้ใน `notes_to_chief/20260906_0434_LANE-GM-TO-CHIEF-slash-lv-*.md`) ถาม · 🔴 **chief/COO ไม่เห็นด้วย = พลิกกลับได้ด้วยการลบคำ `CLOSED` แล้วเขียนสถานะที่ต้องการลงไปแทน** ไม่มีอะไรถูกลบหรือย้าย · 🔴 **อย่าลบเฉย ๆ**: pf-adversary รอบนี้รันจริงแล้วพบว่าการลบคำเดียวโดยไม่ใส่อะไรแทน ทำให้เครื่องมือไปหยิบโทเคน "พร้อมบูต" จากวลีประวัติในบรรทัดถัดมาผ่านหน้าต่าง fallback `body+1` แล้วรายงานว่าอ่านมาจากเนื้อใบอย่างชอบธรรม (คอลัมน์ `body+1`) -- รูเดิมแต่พรางตัวดีกว่าเดิม ⇒ วลีนั้นถูกแก้เป็น "สถานะก่อนบูต (ประวัติ...)" ในรอบเดียวกันเพื่อปิดรูนั้นไม่ว่าใครจะลบ `CLOSED` หรือไม่ (แจ้งไว้ใน `notes_to_chief/20260906_07xx_LANE-GM-TO-CHIEF-*`) (chief รอบ `pk14rf`/R326 · หนี้ค้างจาก `COO-DECISION 20260903_1743` ข้อ 4) — `/speed 400` (ค่าเดียวกับที่ล็อกอินส่งทุกวัน) ทำไคลเอนต์ตายในเฟรมเดียว: HP `0/1` เงิน `0` ไดอะล็อกตาย · เฟรม `LANE_GM_CHAT_SPEED_UPDATE_ATTR_VITAL` 74 ไบต์ออกจริงครั้งเดียว `SPEED DEFERRED` = 0 · แถว DB ไม่เสียหาย รีล็อกอินรอดเพราะประตูล็อกอิน (`#632`) ⇒ 🔴 **ค่าพ้นผิด ผู้ต้องหาคือรูปเฟรม `UpdateAttrVital 0x309A`** (`COO-DECISION 20260903_1744`) · ผลไปที่ **LANE-GM** ไม่ใช่ chief · สถานะก่อนบูต (ประวัติ ไม่ใช่สถานะวันนี้): ปลดเป็นบูตได้แล้ว R317 -- RECHECK ผ่านครบ 4/4 · chief วัดเองบน `origin/main` `01960240` 2026-09-03T09:5x+07:00 (ไม่ได้เชื่อจดหมาย: `LANE-GM 0822` และ `COO 0845` เป็นแหล่งที่สองที่สาม) · ล็อกทั้งสองของ `/speed` **ยังปิดค้างไว้ตามเดิม ไม่มีใครพลิก** ประตูเปิดในเซสชันผู้เทสด้วย `PF_SPEED_TRIAL=400` เท่านั้น · 🔴 ใบนี้พิสูจน์ "เส้นทางปลอดภัย" **ไม่ได้พิสูจน์ว่าเซิร์ฟเวอร์อ่านแถว** อ่านหัวข้อ "ข้อจำกัดที่ใบนี้พิสูจน์ไม่ได้" ก่อนรายงานผล]
