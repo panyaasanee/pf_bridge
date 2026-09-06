@@ -190,8 +190,38 @@ env:
   # unset and the close still happens, still comments on the pull request, and
   # says loudly in the log that the record could not be written.  Never a
   # silent close.
+  #
+  # STOP [chief R371] THAT SECRET MUST NOT BE CREATED - pf-adversary finding 7,
+  # and the round that proposed it (R370) was wrong.  A token with
+  # `contents: write` on pf_bridge, stored in pirate-force-server, is reachable
+  # by any agent round: `gate-windows.yml` triggers on `pull_request`, same-repo
+  # pull requests DO receive secrets, and any lane can open a same-repo pull
+  # request that touches a workflow.  That hands a cloud round the one capability
+  # this whole design exists to deny - writing `main` directly (see the file
+  # header: "a cloud round cannot push `main` in EITHER repository").  So the
+  # cross-repo write is DISABLED, not credentialed: a close in a repository other
+  # than PF_REAP_NOTE_REPO comments on the pull request, says loudly in the log
+  # that it is unrecorded, and is picked up by chief's next round, which already
+  # has read access to both repositories and no stored credential at all.
   PF_REAP_NOTE_DIR: 'notes_to_chief'
-  PF_REAP_NOTE_REPO: 'panyaasanee/pf_bridge'
+  # Derived, not pinned: R370 hardcoded 'panyaasanee/pf_bridge' and its round file
+  # claimed it had not (adversary finding 12).  A case difference or an owner
+  # rename would have flipped this repository onto the cross-repo branch and
+  # silently stopped recording every close.
+  PF_REAP_NOTE_REPO: ${{ github.repository_owner }}/pf_bridge
+  # [chief R371] The name-only half of PF_ROUND_FILE_FILTER, for the stale-claim
+  # category ONLY.  pf-adversary finding 6, measured: the OR'd SIZE signal in
+  # PF_ROUND_FILE_FILTER (any `rounds/*.md` adding >= 20 lines) is satisfied by a
+  # fat `_claim.md` CHECKPOINT, and `main` really carries such files
+  # (rounds/CS_20260905_2113_danva2_claim.md is 159 lines), which made those
+  # claims permanently un-reapable - the exact ghost this category exists for.
+  # The size signal stays on the marker path, where it protects a real round file
+  # whose slug contains the word "claim".
+  PF_REAP_CLAIM_FILE_FILTER: >-
+    .[] | select(.status != "removed")
+        | select(.filename | test("^rounds/.*\\.md$"))
+        | select(.filename | test("_claim(_[a-z0-9]+)?\\.md$"; "i") | not)
+        | .filename
 
 jobs:
   merge:
@@ -495,8 +525,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-          # Empty unless a human has created the secret; see PF_REAP_NOTE_REPO.
-          PF_NOTES_TOKEN: ${{ secrets.PF_BRIDGE_NOTES_TOKEN }}
         run: |
           set -euo pipefail
 
@@ -509,6 +537,24 @@ jobs:
               return "$rc"
             fi
             printf '%s' "$out"
+          }
+
+          # [chief R371, pf-adversary finding 4] Drop fenced code blocks so a
+          # letter QUOTING the declaration syntax (this file's own comments do)
+          # can never close a pull request.  BOTH markdown fence styles, because
+          # R370 stripped only ``` and a `~~~`-fenced declaration was MEASURED
+          # closing a pull request.  A fence that is never closed hides nothing:
+          # the toggle is remembered per style and an unterminated block is
+          # emitted rather than swallowing the rest of the body (R370 inverted a
+          # single flag, so one stray ``` blinded it to everything after).
+          unfence() {
+            awk '
+              /^[[:space:]]*```/  { if (f=="") { f="b"; next } else if (f=="b") { f=""; next } }
+              /^[[:space:]]*~~~/  { if (f=="") { f="t"; next } else if (f=="t") { f=""; next } }
+              f=="" { print; next }
+              { buf = buf $0 "\n" }
+              END { if (f != "") printf "%s", buf }
+            '
           }
 
           # [PANYA-ORDER 20260906_1315] Close a pull request the OWNER authorised
@@ -529,15 +575,17 @@ jobs:
             echo "  CLOSED #${pr}: ${tag} -> branch kept"
             stamp=$(date -u -d '+7 hours' +%Y%m%d_%H%M)
             path="${PF_REAP_NOTE_DIR}/${stamp}_REAPER-CLOSED-${REPO##*/}-${pr}.md"
-            note="REAPER-CLOSED ${REPO}#${pr}: ${tag} - ${detail} (branch kept; PANYA-ORDER 20260906_1315)"
+            # ADDRESSEE on line 2 because PROCESS_GATES section 15 makes chief
+            # hand-label every letter that lacks one, which would turn each
+            # automatic close into manual work for chief (adversary finding 9).
+            note="# REAPER-CLOSED ${REPO}#${pr}: ${tag}"$'\n'"ADDRESSEE: COO"$'\n\n'"${detail} (branch kept; PANYA-ORDER 20260906_1315). No reply needed; this letter exists so the close is countable."
             enc=$(printf '%s\n' "$note" | base64 -w0)
             tok="$GH_TOKEN"
             if [ "$PF_REAP_NOTE_REPO" != "$REPO" ]; then
-              if [ -z "${PF_NOTES_TOKEN:-}" ]; then
-                echo "::warning::#${pr} CLOSED but NOT recorded: writing ${PF_REAP_NOTE_REPO}/${path} needs repository secret PF_BRIDGE_NOTES_TOKEN, which is not set. ${note}"
-                return 0
-              fi
-              tok="$PF_NOTES_TOKEN"
+              # No cross-repo credential, ON PURPOSE - see PF_REAP_NOTE_REPO's
+              # comment (pf-adversary finding 7).  Loud, never silent.
+              echo "::warning::#${pr} CLOSED but NOT recorded in ${PF_REAP_NOTE_REPO}: this repository has no cross-repo write path and must not be given one. chief's next round records it. ${note}"
+              return 0
             fi
             if GH_TOKEN="$tok" gh api --method PUT "repos/${PF_REAP_NOTE_REPO}/contents/${path}" \
                  -f "message=reaper: closed ${REPO}#${pr} (${tag})" \
@@ -612,72 +660,146 @@ jobs:
                 # through to the old `left alone ON PURPOSE` line below, which is
                 # still the fate of every unmarked code pull request.
                 #
-                # (2) first: the author retired their own pull request by hand.
-                # Fenced code blocks are stripped so that a letter QUOTING the
-                # syntax (this file's own documentation does) cannot close a
-                # pull request; a quoted line (`> SUPERSEDED-BY: #1`) fails the
-                # `^` anchor by itself.
+                # [chief R371, after pf-adversary reviewed R370's version of this
+                # block and MEASURED four ways to make it close something it must
+                # not] every test below that is not in the order itself is here
+                # because a fixture run closed a live lock without it:
+                #   - IDLE (one clock for both categories) = now - max(created_at,
+                #     head commit date).  R370 applied an idle bound to category
+                #     (1) only, so ONE comment carrying `DUPLICATE-OF: #n` closed
+                #     a claim whose round was still running (adversary finding 1,
+                #     measured: `CLOSED #1492 ... -> branch kept` on a 10-minute
+                #     old head).  The `max(created_at, ...)` floor is finding 14:
+                #     a resumed session pushes a branch whose head commit is
+                #     already older than the bound, and without the floor its
+                #     pull request was closable seconds after it opened.
+                #   - MONOTONIC target: a replacement is always a LATER pull
+                #     request number.  `SUPERSEDED-BY:` is directional English and
+                #     the natural error is to write it on the NEW pull request
+                #     meaning "this supersedes #old" (finding 3, measured: the
+                #     live PR died and the corpse survived).  It also catches the
+                #     cross-repo number: the order's own example is the bare form
+                #     `SUPERSEDED-BY: #906`, and #906 exists in BOTH repositories
+                #     (server is at ~918, this repository at ~1495), so "the
+                #     target must be merged or open" filtered almost nothing.
+                #   - REAP-HOLD: any line starting `REAP-HOLD:` in the body or in
+                #     a comment exempts the pull request from both categories.
+                #     Finding 11: `types:` includes `reopened`, so a human who
+                #     reopened a wrongly reaped claim had it closed again within
+                #     seconds with no way to say "leave this one alone".
+                #   - both fence styles are stripped, and an UNCLOSED fence hides
+                #     nothing (finding 4 measured `~~~`-fenced text closing a
+                #     pull request, and an unclosed ``` hiding the rest of a body).
+                #   - a near-miss line is LOGGED.  `**SUPERSEDED-BY: #n**` (this
+                #     project's own bold style) and `- SUPERSEDED-BY: #n` do NOT
+                #     match on purpose - widening the anchor is how a quoted
+                #     letter closes a pull request - but silence taught the writer
+                #     nothing, so say it.
+                REAP_HOLD=""
+                REAP_HOLD=$(printf '%s\n' "$BODY" | tr -d '\r' | grep -ciE '^REAP-HOLD:' ) || REAP_HOLD="0"
+                CMTS=""
+                CMTS=$(api "repos/${REPO}/issues/${PR}/comments?per_page=100") || CMTS=""
+                if [ "${REAP_HOLD:-0}" = "0" ] && [ -n "$CMTS" ]; then
+                  REAP_HOLD=$(printf '%s' "$CMTS" | jq -r '[.[] | .body // ""] | join("\n")' \
+                              | tr -d '\r' | grep -ciE '^REAP-HOLD:') || REAP_HOLD="0"
+                fi
+                if [ "${REAP_HOLD:-0}" != "0" ]; then
+                  echo "--- #${PR} ${HEAD_REF}: REAP-HOLD: present - exempt from both owner-authorised closes, left alone"
+                  echo "--- #${PR} ${HEAD_REF}: no marker - left alone ON PURPOSE (a human must add it)"
+                  continue
+                fi
+                # ONE clock for both categories, with the created_at floor.
+                HSEC=""
+                if HC=$(api "repos/${REPO}/commits/${HEAD_SHA}"); then
+                  HSEC=$(date -u -d "$(printf '%s' "$HC" | jq -r '.commit.committer.date // ""')" +%s 2>/dev/null) || HSEC=""
+                fi
+                CSEC0=$(date -u -d "$CREATED" +%s 2>/dev/null) || CSEC0=""
+                if [ -z "$HSEC" ] || [ -z "$CSEC0" ]; then
+                  echo "::warning::#${PR} ${HEAD_REF}: head commit date or created_at unreadable - exempt from both owner-authorised closes this sweep (fail closed)"
+                  echo "--- #${PR} ${HEAD_REF}: no marker - left alone ON PURPOSE (a human must add it)"
+                  continue
+                fi
+                NEWEST="$HSEC"; [ "$CSEC0" -gt "$NEWEST" ] && NEWEST="$CSEC0"
+                IDLE=$(( NOW - NEWEST ))
+                # (2) the author retired their own pull request by hand.
                 SUP_N=""
-                SUP_TXT=$(printf '%s\n' "$BODY" | tr -d '\r' \
-                          | awk 'BEGIN{f=0} /^[[:space:]]*```/{f=!f; next} f==0{print}' \
+                SUP_SRC=""
+                SUP_TXT=$(printf '%s\n' "$BODY" | tr -d '\r' | unfence \
                           | grep -oiE "$PF_REAP_SUPERSEDE_RE" | head -1) || SUP_TXT=""
-                if [ -z "$SUP_TXT" ]; then
+                [ -n "$SUP_TXT" ] && SUP_SRC="body"
+                if [ -z "$SUP_TXT" ] && [ -n "$CMTS" ]; then
                   AUTHOR=$(printf '%s' "$META" | jq -r '.user.login // ""')
-                  ACMT=$(api "repos/${REPO}/issues/${PR}/comments?per_page=100" \
-                         | jq -r --arg a "$AUTHOR" \
+                  ACMT=$(printf '%s' "$CMTS" | jq -r --arg a "$AUTHOR" \
                                 '[.[] | select((.user.login // "") == $a) | .body // ""] | last // ""') || ACMT=""
-                  SUP_TXT=$(printf '%s\n' "$ACMT" | tr -d '\r' \
-                            | awk 'BEGIN{f=0} /^[[:space:]]*```/{f=!f; next} f==0{print}' \
+                  SUP_TXT=$(printf '%s\n' "$ACMT" | tr -d '\r' | unfence \
                             | grep -oiE "$PF_REAP_SUPERSEDE_RE" | head -1) || SUP_TXT=""
+                  [ -n "$SUP_TXT" ] && SUP_SRC="the author's latest comment"
                 fi
                 if [ -n "$SUP_TXT" ]; then
                   SUP_N=$(printf '%s' "$SUP_TXT" | grep -oE '[0-9]+' | head -1) || SUP_N=""
+                else
+                  NEARMISS=$(printf '%s\n%s\n' "$BODY" "$(printf '%s' "${CMTS:-[]}" | jq -r '[.[] | .body // ""] | join("\n")' 2>/dev/null)" \
+                             | tr -d '\r' | grep -ciE 'SUPERSEDED-BY:|DUPLICATE-OF:') || NEARMISS="0"
+                  if [ "${NEARMISS:-0}" != "0" ]; then
+                    echo "::warning::#${PR}: ${NEARMISS} line(s) mention SUPERSEDED-BY:/DUPLICATE-OF: but none is a bare declaration at the start of a line (no bold, no bullet, no trailing text, not inside a code fence) - NOT closing. Re-post the declaration as its own plain line if that is what you meant."
+                  fi
                 fi
-                if [ -n "$SUP_N" ] && [ "$SUP_N" != "$PR" ]; then
-                  if TGT=$(api "repos/${REPO}/pulls/${SUP_N}"); then
+                if [ -n "$SUP_N" ] && [ "$SUP_N" -gt "$PR" ] 2>/dev/null; then
+                  if [ "$IDLE" -le "$STALE_CLAIM_LIMIT" ]; then
+                    echo "--- #${PR} ${HEAD_REF}: declares supersede by #${SUP_N} in ${SUP_SRC}, but its own last activity was $(( IDLE / 60 ))m ago - inside the ${PF_REAP_STALE_CLAIM_HOURS}h bound, left alone (a declaration must not kill a pull request that is still being worked on)"
+                  elif TGT=$(api "repos/${REPO}/pulls/${SUP_N}"); then
                     TSTATE=$(printf '%s' "$TGT" | jq -r '.state // ""')
                     TMERGED=$(printf '%s' "$TGT" | jq -r '.merged // false')
-                    BACK=$(printf '%s\n' "$(printf '%s' "$TGT" | jq -r '.body // ""')" | tr -d '\r' \
-                           | awk 'BEGIN{f=0} /^[[:space:]]*```/{f=!f; next} f==0{print}' \
+                    # Cycle detection reads the target's body AND its comments:
+                    # R370 read only the body, and the order's own prescribed flow
+                    # puts the line in a comment, so a two-comment cycle closed
+                    # BOTH pull requests in one sweep (adversary finding 2,
+                    # measured).
+                    TALL=$(printf '%s' "$TGT" | jq -r '.body // ""')
+                    TCM=$(api "repos/${REPO}/issues/${SUP_N}/comments?per_page=100" \
+                          | jq -r '[.[] | .body // ""] | join("\n")') || TCM=""
+                    BACK=$(printf '%s\n%s\n' "$TALL" "$TCM" | tr -d '\r' | unfence \
                            | grep -oiE "$PF_REAP_SUPERSEDE_RE" | grep -oE '[0-9]+' | head -1) || BACK=""
                     if [ "$BACK" = "$PR" ]; then
                       echo "::warning::#${PR}: declares supersede by #${SUP_N} and #${SUP_N} declares supersede by #${PR} - a cycle, closing NEITHER (a human must break it)"
+                      echo "--- #${PR} ${HEAD_REF}: no marker - left alone ON PURPOSE (a human must add it)"
+                      continue
                     elif [ "$TSTATE" = "open" ] || [ "$TMERGED" = "true" ]; then
                       if reap_close "$PR" "REAPED: superseded by #${SUP_N}" \
-                           "Its own author declared this pull request retired in favour of #${SUP_N}, which is ${TSTATE}$( [ "$TMERGED" = "true" ] && printf ' and merged' ) in this repository."; then
+                           "Its own author declared this pull request retired in favour of #${SUP_N} (in ${SUP_SRC}), which is ${TSTATE}$( [ "$TMERGED" = "true" ] && printf ' and merged' ) in this repository, and nothing has happened here for $(( IDLE / 3600 ))h."; then
                         continue
                       fi
                     else
                       echo "--- #${PR}: declared superseded by #${SUP_N}, but #${SUP_N} is ${TSTATE} and unmerged - left alone (the replacement has to be alive)"
+                      echo "--- #${PR} ${HEAD_REF}: no marker - left alone ON PURPOSE (a human must add it)"
+                      continue
                     fi
                   else
                     echo "::warning::#${PR}: declared superseded by #${SUP_N}, which is not a pull request in ${REPO} - left alone"
                   fi
+                elif [ -n "$SUP_N" ]; then
+                  echo "::warning::#${PR}: declares supersede by #${SUP_N}, which is NOT a later pull request number in this repository - NOT closing. A replacement is always opened after what it replaces; put the line on the OLD pull request, and use the number from THIS repository."
                 fi
-                # (1) a stale round claim.  Same "did the round's real work
-                # arrive?" test as the #1079/#1430 guard - one criterion, two
-                # paths - and the HEAD COMMIT, not `updated_at`, decides silence:
-                # any push at all (including the `_claim.md` checkpoint that
-                # COMMON_LANE_ROUND asks a round over 90 minutes for) buys
-                # another PF_REAP_STALE_CLAIM_HOURS.
+                # (1) a stale round claim.  The file test is NAME-ONLY here, not
+                # the OR'd `PF_ROUND_FILE_FILTER`: adversary finding 6 measured
+                # that a `_claim.md` checkpoint of >= 20 added lines satisfies
+                # that filter's SIZE signal and so made a claim PERMANENTLY
+                # exempt from this category - and `main` really carries such
+                # files (rounds/CS_20260905_2113_danva2_claim.md is 159 lines).
+                # The size signal stays where it belongs, on the marker path,
+                # where it protects a real round file whose slug says "claim".
                 if printf '%s' "$TITLE" | grep -qiE 'round[[:space:]]+[^[:space:]]+:[[:space:]]*claim[[:space:]]*$'; then
-                  HSEC=""
-                  if HC=$(api "repos/${REPO}/commits/${HEAD_SHA}"); then
-                    HSEC=$(date -u -d "$(printf '%s' "$HC" | jq -r '.commit.committer.date // ""')" +%s 2>/dev/null) || HSEC=""
-                  fi
-                  if [ -z "$HSEC" ]; then
-                    echo "::warning::#${PR} ${HEAD_REF}: claim-titled but its head commit date is unreadable - left alone this sweep (fail closed)"
-                  elif [ $(( NOW - HSEC )) -le "$STALE_CLAIM_LIMIT" ]; then
-                    echo "--- #${PR} ${HEAD_REF}: claim, last commit $(( (NOW - HSEC) / 60 ))m ago - inside the ${PF_REAP_STALE_CLAIM_HOURS}h bound, left alone"
+                  if [ "$IDLE" -le "$STALE_CLAIM_LIMIT" ]; then
+                    echo "--- #${PR} ${HEAD_REF}: claim, last activity $(( IDLE / 60 ))m ago - inside the ${PF_REAP_STALE_CLAIM_HOURS}h bound, left alone"
                   elif ! CFILES=$(api "repos/${REPO}/pulls/${PR}/files?per_page=100"); then
                     echo "::warning::#${PR} ${HEAD_REF}: claim older than the bound but its file list is unreadable - left alone (fail closed)"
-                  elif ! CROUND=$(printf '%s' "$CFILES" | jq -r "$PF_ROUND_FILE_FILTER"); then
+                  elif ! CROUND=$(printf '%s' "$CFILES" | jq -r "$PF_REAP_CLAIM_FILE_FILTER"); then
                     echo "::warning::#${PR} ${HEAD_REF}: claim older than the bound but its file list will not parse - left alone (fail closed)"
                   elif [ -n "$CROUND" ]; then
-                    echo "--- #${PR} ${HEAD_REF}: claim older than the bound BUT carries a real round file - left alone (a finished round still owed its marker; the marker path decides it)"
+                    echo "--- #${PR} ${HEAD_REF}: claim older than the bound BUT carries a real round file - left alone. NOTE: an unmarked pull request with a real round file has NO automatic close path in this file (adversary finding 5); if it also cannot merge, a human or the lane's next round must retire it with a SUPERSEDED-BY: line."
                   else
                     reap_close "$PR" "REAPED: stale claim >${PF_REAP_STALE_CLAIM_HOURS}h, no round file" \
-                      "No commit on \`${HEAD_REF}\` for $(( (NOW - HSEC) / 3600 ))h and the only file under \`rounds/\` is this round's own \`*_claim.md\` placeholder, so the round that opened this lock died before it pushed any work. Closing it releases the lane lock." || true
+                      "Nothing has happened on \`${HEAD_REF}\` for $(( IDLE / 3600 ))h and the only file under \`rounds/\` is this round's own \`*_claim.md\` placeholder, so the round that opened this lock died before it pushed any work. Closing it releases the lane lock." || true
                     continue
                   fi
                 fi
