@@ -1,0 +1,1 @@
+folded by LANE-K round rsmsia 2026-09-06T15:09+07:00 -- GT-242 header updated to PASS (cites R316 + this decision, notes R321 as repeat attempt), archived to archive/GAME_TEST_QUEUE_ARCHIVE_20260906_closed.md, .LANEK-FOLDED.txt written for the R316 letter. Lifetime finding new ticket not opened yet this round -- owner is LANE-B, no gt-body request seen from LANE-B yet.
