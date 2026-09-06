@@ -1,11 +1,11 @@
 # NOW — สถานะปัจจุบัน (ประวัติอยู่ใน `COO-ROUND-*`)
 
-ตรวจล่าสุด: 2026-09-07 04:45 +07:00 โดย COO (รอบ `0445` ใบ ×7 → 11 คำสั่ง):
+ตรวจล่าสุด: 2026-09-07 05:46 +07:00 โดย COO (รอบ `0546` ×8 ใบ):
 - 🔴 **`HEADLESS_PROOF:` ทุกใบ attended** (PANYA `0159`): บรรทัดเดียวในบล็อก `ATTENDED:` = โทเคนคอนโซลจากรัน headless **บนคอมมิต main ปัจจุบัน** ว่ากลไกติดอาวุธในฉากเป้าหมาย + วันที่/คอมมิต (≤3 วัน) · ไม่มี = ไม่ขึ้นรถบัส · ใบบนรถบัสเติมใน **2 รอบของเจ้าของ** · ka1-A รันซ้ำก่อนบูต ไม่ตรง = ตัดใบ
-- 🔴 **คัดใบ attended = LANE-K** (`0159`): (ก) >7 วัน (ข) โค้ดที่ใบพึ่งพาเปลี่ยน (ค) มีผลใหม่ครอบคลุม → ถอนจากสแนปช็อต เจ้าของยืนยันซ้ำ/ยกเลิก (K ยกเลิกเองไม่ได้) · **ถอนแล้ว รอเจ้าของตอบ `*-TO-K-*` รอบถัดไป**: `GT-262` UI · `GT-151`+`GT-193` A · `GT-272` DB · ใบขา `[STATIC-ON-BRIDGE]` = ติดธง ไม่ถอน (`0445`)
-- 🔴 **`.claude/settings.json` = เขต COO+chief** (PANYA `0316` · `deny` ครบ + ไม่มี `enableAllProjectMcpServers` ลง main แล้วทั้งสองรีโป `74c606e`/`a353976`) · สายอื่นแตะ = preflight แดง
-- ✅ **main เขียวสองรีโป** · PR ที่ reaper ปิด กู้ด้วย cherry-pick **บนฐาน main ปัจจุบัน หนึ่ง PR ต่อรอบ** · fetch main ก่อนเปิด PR
-- 🔴 **5 แดงบนคลาวด์ ≠ เกตแดง** (`0402`): `lua_api_message` ×3 (lupa) · `ui_wire_name_census` ×2 (`161!=160`) — **ไม่ใช่ของคุณ อย่าถอย** · Q/UI แก้แล้วลบบรรทัดนี้
+- 🔴 **คัดใบ attended = LANE-K** (`0159`): (ก) >7 วัน (ข) โค้ดที่ใบพึ่งพาเปลี่ยน (ค) มีผลใหม่ครอบคลุม → ถอนจากสแนปช็อต เจ้าของยืนยันซ้ำ/ยกเลิก (K ยกเลิกเองไม่ได้) · **ถอนแล้ว ยังรอตอบ**: `GT-193` A · `GT-272` DB (`GT-151`/`GT-262` ยกเลิก · `GT-258` ยืนยันกลับแล้ว) · ใบขา `[STATIC-ON-BRIDGE]` = ติดธง ไม่ถอน (`0445`)
+- 🔴 **`.claude/settings.json` = เขต COO+chief** (PANYA `0316`) · สายอื่นแตะ = preflight แดง
+- PR ที่ reaper ปิด กู้ด้วย cherry-pick **บนฐาน main ปัจจุบัน หนึ่ง PR ต่อรอบ** · fetch main ก่อนเปิด PR
+- 🔴 **แดงบนโคลนคลาวด์ ≠ เกตแดง** (`0546` บน `263d139`): census เขียวแล้ว (`#988`) ⇒ 🔴 `#987` ต้อง merge main + `--emit` ก่อน ไม่งั้นแดงย้อนทาง · `lua_api_message` ×3 = อิมเมจไม่มี `lupa` (Q ใส่ยาม) · รันชุดเต็มซ้ำในโคลนเดิม = แดง 53 ใบ ⇒ ลบ `state/*.sqlite3`
 - 🔴 **PANYA `1910`**: GT-233 ปิด ห้าม trial `AddSurveyData` · ห้ามขอเครื่องเจ้าของเพื่อ M2 จนมีเฟรมอ้าง binary · ชื่อไฟล์ใหม่ ≤100 รวม `.md` ห้าม rename ไฟล์เก่า · **เลขใบ/เนื้อใบ/พับผล/archive/snapshot = LANE-K** (`1259`) เนื้อใบส่ง `*-TO-K-gt-body-*`
 
 ## รอ Panya ติ๊ก  ← คุณดูหัวข้อนี้หัวข้อเดียวพอ
@@ -14,7 +14,7 @@
 
 ## รอเครื่องคุณ (คิวจริง = `QUEUE_STATUS_SNAPSHOT.md`)
 1. **`GT-288` (B) ใบแรก** — sweep บน main แล้ว รอ B พลิก READY + `HEADLESS_PROOF:`
-2. ถัดไป `GT-276` CS · `GT-220`/`GT-223` — **ทุกใบต้องมี `HEADLESS_PROOF:` ก่อน** · M2 ยังไม่มีใบ
+2. ถัดไป `GT-276` CS · `GT-220`/`GT-223` — **ทุกใบต้องมี `HEADLESS_PROOF:`** · M2 ยังไม่มีใบ
 
 ## กติกาของไฟล์นี้ (ห้ามลบสี่บรรทัดนี้)
 - ผู้เขียน: **Panya และ COO เท่านั้น** · คนอื่นเสนอผ่านจดหมายจ่าหน้า `ADDRESSEE: COO`
@@ -32,17 +32,17 @@
 - ⏳ **M2 "ออกจากเมืองได้" ← อยู่ตรงนี้ · ทาง (ก) `1910`**: ตัวบล็อก = เฟรมตอบ `0x1FB2` trigger 2/3 (`RE-286` ตัด `TriggerResult` แล้ว · A ต่อสาย) · TIER 3 ต้องมี discriminator วัดจริงว่า "เกาะ ≠ น้ำเปล่า" (`0405`) — เติมเฟรมเปล่าไม่ปลดล็อก · เกณฑ์ผ่าน: ใกล้เกาะ → "รายงานกัปตัน" → กด → วาปเข้า **เกาะ 2 และ 3 บนจอ** · ห้าม server ส่ง `EnterInstanceVital` เอง · ห้ามเช็คเลเวล
 - **M3 = P-2** (ชั้นแรก ✅ GT-281 · ชั้นสอง สี = `GT-288`) · **M4 "ตีได้ตายได้"**: มอนตีกลับ HP ลด · ตาย · ศพไม่ค้าง · เกิดใหม่ (B `GT-224`) · **M5** เก็บได้+รอด relog · **M final** ครบวงจร
 - 🔴 **LANE-DB**: แขน (ข) seam `1452` (`RE-282` `2322`: `POTENTIAL` ว่าง) · `0x309A` RE-blocked · `GT-272` ถูกถอน — ตอบ K ว่ายังวัดของเดิมไหม + `HEADLESS_PROOF:` · ใบสร้าง A/DB: ออก 126 คืน HP · BoatHealth ≠ -1
-- **Q**: message-wire ✅ → **5 exp-level = งานถัดไป** · การ์ด `[precondition:lupa_package]` 3 ตัว + แก้เลข 5/17 ของ `RE-273` (`0445`) · `Player.MobAppear` = A หลัง P-2 · `CastSkill*` encoder = CS ทำเมื่อ Q ขอ
+- **Q**: message-wire ✅ → **ยาม `lupa` งานแรก** → 5 exp-level ครึ่งอ่าน `Protocol`+`STUB_DEFAULT` (ข) · ครึ่งเขียน = ขอคอลัมน์ DB (`0546`) · การ์ด `[precondition:lupa_package]` 3 ตัว + แก้เลข 5/17 ของ `RE-273` (`0445`) · `Player.MobAppear` = A หลัง P-2 · `CastSkill*` encoder = CS ทำเมื่อ Q ขอ
 - **LANE-K**: รอบถัดไป = พับ `RE-286` · `GT-258` กลับสแนปช็อต · เกณฑ์ (ค) · แล้ว archive · ticket ใหญ่→`tickets/` ≤400 KB/PR
 
 ## งานด่วนตอนนี้
 - **หาง P-1**: ปิดด้วย `GT-223` · หนี้ `DropLedgerCell` ข้ามฉาก · ห้ามลบแถว ledger
 - **P-2 สีชื่อ (= M3)**: ค่าจริงจาก `GT-288` · สี = คู่ (คนดู, มอน) `NPCAttr+0x98` · ห้าม faction-only/hardcode FontStyleID
-- **LANE-GM**: ดัน PR รอบ `vxr32s` ให้เขียว · P-3 `GT-279`: ปุ่มส่ง `0x51E9` จริง แต่ `capture_raw_gm_command` ไม่เขียนไฟล์ (RE-283 `0331`) · `RE-278` ส่ง mask ทั้งก้อน · "สาเหตุเดิม" นับที่ **เทส/กลไก** (`0445`) · host-property แดงซ้ำ = หยุด เขียน COO
-- **M4 · LANE-B**: **D1 คีย์ใหม่อ้างสแตมป์ใบ `0405`** → **1b R322B: `bg0002.HOSTILE_PLACEMENTS` 17 แถว vs roster rank-1 12 ตัว → regenerate จากกฎบน roster จริง** → 2 `2032` parser (ห้ามแตะ wire) → respawn 120 s → สมุดโลก · `apply_hp_damage` พักจน Door B · `GT-288` พลิก READY + `HEADLESS_PROOF:`
-- **chief (`0445` หนึ่งงานต่อรอบ)**: (1) exemption `.LANEK-FOLDED.txt` ก่อน preflight blocking → **(2) `-rfE` พิมพ์ชื่อเทสแดงใน `gate-windows.yml` (`1921`) — ห้ามใครแซง ไม่ลงใน 2 รอบ = ESCALATION** → (3) job checkout **สองรีโป** รันชุดที่มีการ์ด (UI `0335`) รายงานก่อน แล้วบล็อก → (4) ตัด `AGENTS.md` 44 KB < 30 KB + ด่านเกินเพดาน → (5) §7 (+host-property) → (6) preflight ฝั่ง server → (7) coverage `make_show_message` (Q `0322`) → (8) #948 seed
-- **LANE-A**: TIER 3 รับแล้ว → เนื้อใบ RE `Bg3001.tgr` ให้ K ตั้งเลข → ใบ attended · `GT-151`+`GT-193` ตอบ K สองบรรทัด (ค้าง 2 รอบ = ESCALATION) · **ห้ามส่งเฟรมเดา**
-- **LANE-UI**: งาน 2 `2032` แถบ n/327 · pin census 161 + re-emit · `GT-262` ตอบ K · express/community ยังห้าม · **CS** (`0445`): ใบ RE หา STR ผู้เล่น + `CORE-REQUEST` ครึ่ง level · เปลี่ยนสูตรต้องขยับ pin 891 คอมมิตเดียวกัน · ห้ามปลดแฟล็ก 6 เฟรม
+- **LANE-GM**: ดัน PR `vxr32s` ให้เขียว · P-3 `GT-279`: ปุ่มส่ง `0x51E9` จริง แต่ `capture_raw_gm_command` ไม่เขียนไฟล์ · `RE-278` ส่ง mask ทั้งก้อน · host-property แดงซ้ำ = หยุด เขียน COO
+- **M4 · LANE-B**: **1b R322B: `bg0002.HOSTILE_PLACEMENTS` 17 แถว vs roster rank-1 12 ตัว → regenerate จากกฎบน roster จริง** → 2 `2032` parser (ห้ามแตะ wire) → respawn 120 s → สมุดโลก · `apply_hp_damage` พักจน Door B · **`_letter_exists_for` สแกน `archive/` ด้วย งานแรก (`0546`)** · `GT-288` พลิก READY + `HEADLESS_PROOF:`
+- **chief (`0546` หนึ่งงานต่อรอบ · (1)(2) ลงแล้ว `1627`/`#989`)**: **(3) job checkout สองรีโป + `PF_BRIDGE_DIR`** (เกตจดหมายไม่รันบน CI) → (4) ตัด `AGENTS.md` 44 KB < 30 KB + ด่านเกินเพดาน → (5) §7 (+host-property) → (6) preflight ฝั่ง server → (7) coverage `make_show_message` → (8) #948 seed → (9) `state/*.sqlite3` ที่เทสสร้างเอง → (10) เพดานชื่อยกเว้น 180 + ห้ามซ้อนซัฟฟิกซ์ (`0546`)
+- **LANE-A**: TIER 3 รับแล้ว → เนื้อใบ RE `Bg3001.tgr` ให้ K ตั้งเลข → ใบ attended · `GT-193` ตอบ K (ค้าง 2 รอบ = ESCALATION) · **ห้ามส่งเฟรมเดา**
+- **LANE-UI**: งาน 2 `2032` แถบ n/327 · **`#987` re-derive ก่อน merge** (พิน 160/160/7) · tool ข้าม docstring ด้วย AST (`0546`) · `GT-262` ตอบ K · express/community ยังห้าม · **CS** (`0445`): ใบ RE หา STR ผู้เล่น + `CORE-REQUEST` ครึ่ง level · เปลี่ยนสูตรต้องขยับ pin 891 คอมมิตเดียวกัน · ห้ามปลดแฟล็ก 6 เฟรม
 
 ## ห้ามทำจนกว่า P-2 ปิด
 - GT-146 + ใบเทสตีมอนทุกใบ · ยกเว้น `ATTACK-POSE-ONE-FIELD-AB-001` (`0904_2115`) + `GT-274` (`0645`)
