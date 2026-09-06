@@ -125,7 +125,7 @@ consumedstub) — `[prbody] SKIPPED` เพราะยังไม่มี PR 
 
 ทั้งสองมิวแทนต์ทำบนไฟล์จริงแล้วคืนค่าด้วย backup ก่อนคอมมิต (ไม่มีมิวแทนต์หลงเหลือใน diff ที่ commit)
 
-`ADVERSARY_PENDING pirate-force-server#TBD` (เซสชันหลักเป็นคนสั่ง pf-adversary จริงและเติมเลข PR)
+`ADVERSARY_PENDING pirate-force-server#951` (เปิดแล้ว มี marker ยืนยันด้วย GET แล้ว — เซสชันหลักสั่ง pf-adversary บนกิ่งนี้แล้ว ผลยังไม่คืนตอนบันทึกบรรทัดนี้)
 
 ## 5. `TWO_SESSIONS_SAME_SCENE:`
 
@@ -173,4 +173,4 @@ consumedstub) — `[prbody] SKIPPED` เพราะยังไม่มี PR 
 
 เริ่ม 20:58 · เพดาน 75 นาที = 22:13 · ณ เวลาบันทึกไฟล์นี้ (~21:16) ยังอยู่ในงบ
 
-SCOREBOARD: NONE | ผู้เล่นยังเห็นเหมือนเมื่อวานทุกอย่าง — ช่องตอบ TriggerVital เกาะ 2/3 เตรียมที่ว่างไว้แล้วแต่ยังไม่มีเฟรมให้ตอบ เพราะฝ่าย UI ยังไม่ส่งเฟรมผู้สมัครที่อ้างอิงได้จริง (ตามคำสั่ง COO ห้ามเดา) | pirate-force-server commit `19d5dee5` (กิ่ง `claude/magical-goldberg-whpkwf`, PR ยังไม่เปิด ณ เวลาที่เขียนไฟล์นี้) · pf_bridge claim `#1561` · เทสใหม่ 12 passed · ชุดเต็ม 12492 passed/369 skipped/1 failed-pre-existing-unrelated/26248 subtests passed (506.17s) · preflight PASS · ADVERSARY_PENDING pirate-force-server#TBD
+SCOREBOARD: NONE | ผู้เล่นยังเห็นเหมือนเมื่อวานทุกอย่าง — ช่องตอบ TriggerVital เกาะ 2/3 เตรียมที่ว่างไว้แล้วแต่ยังไม่มีเฟรมให้ตอบ เพราะฝ่าย UI ยังไม่ส่งเฟรมผู้สมัครที่อ้างอิงได้จริง (ตามคำสั่ง COO ห้ามเดา) | pirate-force-server`#951` (open, marker confirmed, commit `19d5dee5`, กิ่ง `claude/magical-goldberg-whpkwf`) · pf_bridge claim `#1561` · เทสใหม่ 12 passed · ชุดเต็ม 12492 passed/369 skipped/1 failed-pre-existing-unrelated/26248 subtests passed (506.17s) · preflight PASS · ADVERSARY_PENDING pirate-force-server#951
