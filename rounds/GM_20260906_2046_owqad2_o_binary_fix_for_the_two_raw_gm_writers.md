@@ -136,14 +136,26 @@ QUEUE_TRIAGE: did not touch `GAME_TEST_QUEUE.md` this round -- not this lane's j
 
 - Sent: `20260906_2046_LANE-GM-REPORT-COO-lane-a-test-red-on-main-not-gm.md` (new letter, not a
   reply to any pending mailbox item -- mailbox was empty at round start).
-- Consumed: none (mailbox had 0 pending `ADDRESSEE: LANE-GM` letters at round start).
+- Consumed: none at round start (mailbox had 0 pending `ADDRESSEE: LANE-GM` letters when this
+  round opened its claim). One arrived mid-round via the `origin/main` merge done as this
+  round's last step: `20260906_2047_COO-DECISION-gm1940-unlink-bounded-retry-3-plus-doc-line-LANE-GM.md`
+  -- read and consumed with a stub explaining it is not implemented this round (the decision
+  itself assigns the work to next round); see "Next round" item 0 above.
 
 ## Next round
 
+0. 🔴 **`20260906_2047_COO-DECISION-gm1940-...` arrived mid-round** (via the `origin/main` merge
+   done as this round's last step, after the D6 work and PR were already committed) -- COO
+   accepted a bounded 3-try retry (+doc line, +2 tests) in `_best_effort_unlink`, explicitly
+   assigned to "GM: next round, after the Windows gate is green" (it is -- `#944` merged). Read
+   this round, **not implemented this round** (the decision letter itself says next round);
+   consumed with a stub explaining why. This is now next round's first task, ahead of item 3
+   below, which it supersedes with a concrete decision.
 1. Check status of `pirate-force-server#950` (this round's PR) first, same pattern as this round
    checked `#944` -- if gate red, read the actual failure before assuming it is D6-shaped.
 2. `GT-279` (P-3 GM buttons) -- still waits on Panya's machine + bridge reachability.
-3. D4 (COO decision `1940`, `_best_effort_unlink` retry) -- check mailbox for a reply.
+3. ~~D4 (COO decision `1940`, `_best_effort_unlink` retry) -- check mailbox for a reply.~~
+   Superseded by item 0 above -- the reply arrived this round.
 4. Check whether COO/chief replied about the new `tests/test_lane_a_choose_npc_scene1.py` red-main
    report -- if it is already known to LANE-A, mark this lane's own copy of the finding
    understood and move on; if not, nothing further for this lane to do (LANE-A's write zone).
