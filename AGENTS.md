@@ -89,7 +89,7 @@ C:\Users\Panya\Desktop\Pirate Force\
 - ใบที่ต้องการเครื่องเจ้าของ (attended) ต้องมีบล็อก `ATTENDED:` ≤5 บรรทัดก่อนเข้าคิว READY — ไม่มี = ตีกลับสายเจ้าของ ไม่จัดคิว (`PANYA-ORDER 20260905_2038` ข้อ 5)
 - ทุกไฟล์รอบต้องจบด้วยบรรทัด `SCOREBOARD:` (รูปแบบใน `prompts/COMMON_LANE_ROUND.md`) — ไม่มีบรรทัดนี้ = รอบไม่นับ
 - แถว `manual` ใน `SCOREBOARD_FACTS.tsv` เขียนได้เฉพาะ Panya/ka1-A เท่านั้น ต้องมี `GT-<เลข>` PASS + คอลัมน์วันที่ ไม่งั้นขึ้น `MALFORMED` (ไม่ลบ) · ไม่หมดอายุตามเวลา · `pf_gate_preflight.py` ปฏิเสธ PR สายอื่นที่แตะแถวนี้ (`COO-DECISION 20260906_0042`)
-- เพดานขนาดไฟล์กลาง — บังคับด้วยเกต ไม่ใช่กฎ (`tools_bridge/pf_gate_preflight.py` ตรวจก่อน push ทุกสาย): `GAME_TEST_QUEUE.md` ≤300 KB · `CLIENT_RE_QUEUE.md` ≤200 KB · `AGENTS.md` ≤30 KB · `CHIEF_CONTINUATION.md` ≤30 KB · `NOW.md` ≤12 KB — 🔴 **RED เฉพาะไฟล์ที่กิ่งของคุณทำให้ *โตขึ้นกว่า* `origin/main` ขณะยังเกินเพดาน (หรือดันเพิ่งเกินเพดานเป็นครั้งแรก)** ไม่ใช่แค่ไฟล์ที่บังเอิญเกินเพดานอยู่แล้วจากหนี้เก่า (pf-adversary R359: เวอร์ชันแรกเช็คขนาดสัมบูรณ์ตรง ๆ จะกันทุกสายไม่ให้ push ได้เลยตราบใดที่คิวยังเกิน ซึ่งยังไม่มีกำหนดจบ) · ใบปิดแล้ว >24 ชม. → archive ทิ้ง stub บรรทัดเดียวทุกรอบ (ลดหนี้เก่าที่ค้างอยู่ ไม่ใช่แค่กันไม่ให้โตต่อ)
+- เพดานขนาดไฟล์กลาง — **บังคับด้วยเกต ไม่ใช่กฎ**: `tools_bridge/pf_gate_preflight.py` (`BRIDGE_FILE_SIZE_CEILINGS` = แหล่งเดียวของตัวเลข · regression-only: แดงเมื่อไฟล์ที่เกินเพดานอยู่แล้ว**โตขึ้น**บนกิ่งนี้) · ฉบับเต็ม ⇒ [`archive/AGENTS_HISTORY_20260906.md`](archive/AGENTS_HISTORY_20260906.md)
 
 🔴 **เขตเขียนของ LANE-Q (SCRIPT/QUEST — สายใหม่ตั้งแล้ว `COO-DECISION 20260905_2055`/`2112`)**: `src/pirateforce_foundation/script_*.py` · `src/pirateforce_foundation/lua_api/` · `tests/test_script_*` · `docs/SCRIPT_LANE.md` · `lane_hooks/lane_q_*` (pf_bridge) `rounds/Q_*` — อ่าน `gamedata/lua/` ได้ ห้ามแก้ · charter เต็ม `prompts/LANE-Q.md`
 
@@ -98,7 +98,7 @@ C:\Users\Panya\Desktop\Pirate Force\
 🔴 **บรรทัด `SCOREBOARD:` — ฟิลด์ที่สาม (หลักฐาน) บังคับ ไม่ใช่ของแถม** (`SCOREBOARD: <สถานะ> | <ประโยคผู้เล่น> | <หลักฐาน>`) · ตัวเก็บ `tools_bridge/pf_scoreboard.py` ต่อบรรทัดที่ **ตัดขึ้นบรรทัดใหม่** ให้เอง (ย่อหน้าจบที่บรรทัดว่าง) — วัด 2026-09-05: 6 ใน 7 บรรทัดจริงใน `rounds/` เขียนพาดสองถึงสี่บรรทัด ⇒ ห้ามใครแก้ไฟล์รอบให้ "บรรทัดเดียวจริง ๆ" เพื่อเอาใจเครื่องมือ · ไม่มีฟิลด์ที่สาม = ขึ้นเป็นแถว `MALFORMED` ในหน้า `PLAYER_STATUS.html` ให้เจ้าของเห็น
 
 ```
-ห้ามแตะ canonical DB ตัวจริง (ยกเว้น LANE-DB ผ่าน migration ที่ผ่าน pytest+pf-adversary — `COO-DECISION 20260901_1112`, ดู CHIEF_CONTINUATION.md)
+ห้ามแตะ canonical DB ตัวจริง (ยกเว้น LANE-DB ผ่าน migration ที่ผ่าน pytest+pf-adversary — `COO-DECISION 20260901_1112`, ดู prompts/LANE-DB.md)
 ห้ามแก้ src/ tools/ tests/ ของ repo โค้ด
 ห้าม git commit / push / merge / rebase / force / reset / clean / stash
 ห้ามแก้ GAME_TEST_QUEUE.md หรือ CHIEF_CONTINUATION.md   <- สองไฟล์นี้เป็นของ chief
@@ -158,6 +158,8 @@ C:\Users\Panya\Desktop\Pirate Force\
 - 🔴 **ชื่อไฟล์ใหม่ทุกไฟล์ใน `pf_bridge` ≤100 ตัวอักษรรวมนามสกุล** (`PANYA-ORDER 20260906_1910` ข้อ 3.3 ผ่าน `COO-DECISION 1955`) — ไฟล์เพิ่ม/เปลี่ยนใน PR ที่ชื่อยาวเกิน = เกตแดงพร้อมบอกชื่อ (`tools_bridge/pf_gate_preflight.py` `check_new_filename_length`) · regression-only: **ไฟล์เก่าห้าม rename** (ชื่อยาวทำให้ clone ฝั่ง Windows ของเจ้าของ pull ไม่ผ่าน — เกิดจริง `SYNC_STUCK` 1816-1844)
 - 🔴 **`GT-233` ปิดแล้วสถานะ `NEGATIVE-v3`** (R322A 18:57 ผ่าน `PANYA-ORDER 1910`/`COO-DECISION 1955`) — **ห้ามบูต trial `AddSurveyData` (`PF_M2_SURVEY_TRIAL`) อีกทุกสาย** · M2 เดินทาง (ก): เซิร์ฟตอบ `TriggerVital 0x1FB2` trigger 2/3 เอง · ห้ามขอเครื่องเจ้าของสำหรับ M2 จนกว่าจะมีเฟรมผู้สมัครที่อ้าง binary ได้
 - ประวัติ/เหตุผลใต้กฎของ §7 ที่ย้ายออกไปแล้ว ⇒ [`archive/AGENTS_HISTORY_20260906.md`](archive/AGENTS_HISTORY_20260906.md) (chief รอบ `l5tqxc`/R376 · คำต่อคำ ไม่มีการลบ)
+- 🔴 **migration ที่แตะ canonical ต้องหมุน `CANON_SHA.txt` ใน PR เดียวกันเสมอ ห้ามแยกสองรอบ** (`COO-DECISION 20260901_1241` ข้อ ② · ขาดข้อนี้ = attended รอบถัดไป abort ที่ด่าน sha แล้วดูเหมือน DB พัง คนจะปลดด่านทิ้ง = เสียตัวจับ corruption ตัวเดียวที่มี) · ข้อ ①/③ ยังเป็นช่องว่างไม่มีเจ้าของ ⇒ [archive](archive/CHIEF_CONTINUATION_ARCHIVE_20260906_lane_charters_db_cs_ui_q.md)
+- 🔴 **ช่องค้นบังคับของใบ RE ผูก*ผู้บริโภคผล*ด้วย ไม่ใช่ผู้เขียนใบฝ่ายเดียว** — ต้องตามการอ้างอิงในช่องค้นก่อนสั่งงานต่อ (`LANE-A 20260905_0430` · ตัวอย่างถูก `RE-256`)
 ### 🔴 วิธีเปิด PR (บังคับทุกสาย) ⇒ [`HOWTO_OPEN_A_PR.md`](HOWTO_OPEN_A_PR.md) (ย้ายคำต่อคำ · R360) · ผู้เทสไม่เปิด PR ตาม §7 · marker `PF-AUTOMERGE: v4` เป๊ะ · claim PR ห้ามมีสตริง marker จนจบรอบ · ห้าม merge/ปิด PR เอง · ขนาด ≤ ~6 ไฟล์ต่อใบ
 
 ---
