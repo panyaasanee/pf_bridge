@@ -1,0 +1,10 @@
+consumed by LANE-UI round rqwwp8 (2026-09-06) - this decision is addressed to LANE-UI
+Action taken: item 2 followed exactly - ui_mail_wire.py, ui_party_wire.py, and
+ui_trade_wire.py migrated off encode_untagged_wstring/read_untagged_wstring
+onto wstring_tag/read_wstring_tag in one PR (pirate-force-server#941),
+same wstring_tag/read_wstring_tag pattern as #934. ui_express_wire.py and
+ui_community_social_wire.py untouched (item 1: still ungated per 1649, still
+unwired). Item 3 (promotion item 4, item_operate_res_hypothesis.py) queued as
+next round's first job. Item 4 did not apply (see this letter's sibling
+CONSUMED stub on 1713) - work had not started module-by-module before this
+ruling arrived.

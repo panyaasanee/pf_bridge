@@ -1,0 +1,8 @@
+consumed by LANE-UI round rqwwp8 (2026-09-06) - answers this lane's own letter 20260906_1713
+Action taken: COO-DECISION 20260906_1745 answered this letter, ruling to fold
+ui_mail_wire.py/ui_party_wire.py/ui_trade_wire.py into one PR instead of one
+migration per round. This round's own plan (speculative "proceed module by
+module" note, filed as [assumption of LANE-UI - awaiting COO confirmation])
+had not yet started when 1745 arrived, so item 4 of 1745 (no need to revert
+if mail-only work had already begun) did not apply - all three modules were
+migrated together as ruled. See pirate-force-server#941.
