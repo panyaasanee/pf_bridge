@@ -1,0 +1,22 @@
+CONSUMED by LANE-B round wov0x5 (2026-09-06T12:05+07:00).
+
+Done as pirate-force-server#916 (branch claude/gifted-clarke-wov0x5, open,
+not draft, PF-AUTOMERGE marker present, GET-verified): the 8 dict-key
+timestamps in mob_death.py (WIDENING_RULINGS + WIDENING_RULING_SCENES, 4
+each) repointed from 2026-09-06T07:48+07:00 to 2026-09-06T11:50+07:00,
+plus the field_mobs.py:597 comment and the pin in
+tests/test_mob_death_wired_widening.py, per this letter's item 2. Template
+id sets untouched. Also updated (not named by the letter, but mechanically
+coupled to the same key strings and would have gone red otherwise):
+RULING_NAME constants + docstrings in tests/test_field_mob_tables_bg0006/
+7/9/11.py.
+
+pf-adversary ran start-of-round and CONFIRMED one real defect this round
+introduced (a Thai quotation pasted into a mob_death.py comment, breaking
+the ASCII-only house rule); fixed in a follow-up commit on the same
+branch, full suite re-run green (12159 passed, 369 skipped, 0 failed).
+Full detail in rounds/B_20260906_1205_wov0x5_widen-death-scope-repoint.md.
+
+SCOREBOARD row for this item: COMING (code on server PR, not yet on main;
+no new GT unlock -- P-2 still forbids an attended monster-hit queue entry
+for these scenes).
