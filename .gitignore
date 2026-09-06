@@ -245,6 +245,13 @@
 !/prompts/
 !/prompts/**
 
+# ---- the generator's fallback output.  `!/*.md` above would otherwise track
+# it, and it is derived: pf_queue_status.py writes it whenever the canonical
+# QUEUE_STATUS_SNAPSHOT.md is somebody else's hand-authored file, so it appears
+# in every lane's `git status` the moment anyone runs the tool.  Regenerate it,
+# never commit it, and never copy it over the canonical path by hand.
+/QUEUE_STATUS_SNAPSHOT.generated.md
+
 # ---- tickets/: the body of any queue ticket over 8,192 B, one file per id
 # (PANYA-ORDER 20260906_1448 part (b) via the courier, accepted by
 # COO-DECISION 20260906_1546 item 2 / 20260906_1547).  The queue files keep

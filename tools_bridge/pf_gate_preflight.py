@@ -1502,7 +1502,7 @@ def main():
     print("PREFLIGHT PASS (cp874 + no new skips + main is in this branch"
           " + precondition census agrees")
     print("                + both branches are mergeable by the reaper"
-          " + bridge files are under their size ceiling")
+          " + no bridge file grew past its ceiling on this branch")
     print("                + no manual scoreboard row was touched).")
     print("NOTE: this does NOT promise a green gate - Windows-only runtime")
     print("failures are out of scope.  A RED or INCONCLUSIVE preflight means")
