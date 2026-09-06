@@ -12,7 +12,7 @@
 - ไม่ขยับ: ลำดับ NOW ข้อ (2) `gate-windows` failure-detail · ข้อ (3) `AGENTS.md` ≤30 KB · ข้อ (4) `#948` seed
   เหตุผลเขียนไว้ท้ายไฟล์ "รอบหน้าทำอะไร" ไม่ใช่เพราะลืม
 
-## งานที่ 1 — sweep ไปกับ census เฟรมเดียว (`pirate-force-server` PR ของรอบนี้)
+## งานที่ 1 — sweep ไปกับ census เฟรมเดียว (`pirate-force-server#981` · **draft ไม่มี marker** ตามกฎเฟรมถึงไคลเอนต์ + `ADVERSARY_PENDING`)
 
 **ทำไมมันเร่งด่วนกว่าลำดับใน NOW**: `rounds/R380_52u95a_addendum_adversary_after_unlock.md` (D2) เขียนไว้เองว่า
 "ทางแก้ที่ถูก และเป็นงานแรกของรอบหน้า" และผมส่งจดหมาย `0345` บอก LANE-K ให้หยุดจัดคิวจนกว่าจะแก้
@@ -49,7 +49,8 @@
 - เส้นทาง refusal **ถูกรันจริง** ไม่ใช่เขียนไว้เฉย ๆ (D5): มิวแทนต์ `FieldMobContractError` ผ่าน `sweep_entries`
   ⇒ census สองใบยังคิว ไม่มี suffix มี event `name_colour_sweep_refused_FieldMobContractError` และเธรดไม่ตาย
 - `pf_gate_preflight.py --repo <server>`: **PREFLIGHT PASS**
-- ชุดเต็ม: ดูบรรทัด "ชุดเต็ม" ท้ายไฟล์
+- **ชุดเต็มบนต้นไม้สุดท้าย (merge `origin/main` ก่อน): 12,629 passed / 380 skipped / 0 failed / 26,578 subtests / 590.70s** (Python 3.11 บนโคลนคลาวด์ ไม่ได้พูดแทนเกต Windows)
+- ชุดเต็มรอบแรก **จับ drift จริงและถูก**: `append_census_entries` เป็น `make_runtime_remote_actors` call site ใหม่ ⇒ re-pin census 44 -> 45 ที่ verifier + report + เทสที่ตรึงเลขเดียวกัน ในคอมมิตของมันเอง (ไม่ skip ไม่ปิดเทส) — นี่คือเหตุผลที่ PR แตะ 7 ไฟล์ ไม่ใช่ 4
 
 **สิ่งที่ยังผิดอยู่และเขียนลงใบ attended แทนที่จะเงียบ**: การตีที่ถูกรับจะ recompose census ใหม่ที่ไม่มีหุ่น ⇒ แถวหาย
 · `/warp` ออกแล้วกลับ ปลดล็อก census ใหม่ · หุ่นยืนที่ anchor แช่แข็ง (`V135_PLAYER_*`) ไม่ใช่ `last_target_pos` ของ census (D4)
@@ -84,15 +85,54 @@ READY/PENDING ที่ไม่อยู่ใน NOW รอเครื่อ�
 BYTECODE_PURGED: ล้าง `__pycache__` ด้วย `find -exec` (ไม่มี `rm -r` ในรอบนี้ ตาม PROCESS_GATES ข้อ 26)
 
 ## ลูกมือ
-`pf-adversary` สั่งต้นรอบพร้อมเริ่มงาน (ตาม COMMON) บนกิ่ง `claude/eloquent-edison-ky8m6j` — คำถาม A-E เขียนไว้ให้หักล้าง
+`pf-adversary` **คืนผลแล้วในรอบนี้** (ไม่ใช่ PENDING) — สั่งต้นรอบพร้อมเริ่มงาน (ตาม COMMON) บนกิ่ง `claude/eloquent-edison-ky8m6j` — คำถาม A-E เขียนไว้ให้หักล้าง
 การผนวกเข้า census, membership, ความปลอดภัยของ helper ใหม่, ระยะวาดของ anchor แช่แข็ง และทางที่ใบ attended จะได้ผลลวง
 
+## ผล pf-adversary — **คืนก่อนปลดล็อก จ่ายในรอบนี้ 5 ข้อ ที่เหลือส่งต่อ**
+สั่งต้นรอบพร้อมเริ่มงานตาม COMMON · คืนผลตอน ~04:0x ก่อนปลดล็อก ⇒ ไม่เข้าเงื่อนไข "คืนหลังปลด"
+- 🔴 **D1 CRITICAL [วัดแล้ว] คลิก NPC ในเมืองครั้งเดียว = แถวหายถาวรทั้ง session** เส้นทาง ChooseNPC face frame
+  (`v141:4395-4410` → `make_v98_conversation_face_state` `v141:1078-1106`) ส่ง collection เต็ม 108 ตัวที่สร้างจากตาราง
+  Port Royal แช่แข็ง ซึ่งโดยโครงสร้าง **ไม่มีทางมีหุ่นอยู่ในนั้น** (วัด: `pc=14142 wire=108 sweep=NO`)
+  และ `world_census_sent` ยัง latch อยู่ ⇒ ไม่มีอะไร re-arm · การตี/ฆ่าก็เหมือนกัน (`pc=20446/20384 sweep=NO`)
+  🔴 **จ่ายด้วยใบ attended ในรอบนี้** (ห้ามคลิก/ตี/ฆ่าก่อนอ่านครบ) · **ยังไม่จ่ายด้วยโค้ด** — ดู "คำถามที่ออกแบบยังไม่ตอบ"
+  · แก้ที่ผมเขียนผิดในใบเดิม: **`/warp` ออก-กลับ ปลอดภัย** (`runtime.py:7080` ล้าง `world_census_sent` ⇒ re-arm ทั้ง census และ sweep)
+  · เดินไกลแค่ไหนก็ปลอดภัย (วัด +500/+1200/+3000/+9000 หน่วย)
+- 🔴 **D2 CRITICAL [วัดแล้วจากรายงานในรีโปเราเอง] ชุด 2 ผู้สมัคร `actor_type=3` ให้ผลลวงทั้งสองทาง**
+  `reports/PF_MPAUDIT_FOLLOWUP001_ACTOR_TYPE_DISPATCH_STATIC_20260818.md:129` — thunk `+0x38` ของ `NPCAttr` รับเฉพาะ
+  `CNetNPC` (4, 5) ⇒ `N-AT3`/`M-AT3` เป็น `CMyActor` ถือ `NPCAttr` ที่ถูก drop ⇒ **ไม่มีป้ายชื่อเลย** = FAIL ปลอม
+  และ RE-092 ยกเว้น `CMyActor` จากการกวาด ⇒ AT3 เป็นตัวเดียวที่รอดตอนแถวโดนลบ = PASS ปลอม
+  ⇒ **สั่ง K ว่าชุด 2 ยังห้ามบูต** (ชุด 1 บูตได้) และส่งใบให้ LANE-B ตัดผู้สมัครใหม่ (`3 → 5 CAvatarNPC`) — เป็นการเลือกผู้สมัคร ของสาย B ไม่ใช่ของผม
+- **D3 HIGH [วัดแล้ว] เกณฑ์ผ่านในใบผมเองแยก BLOCKED ไม่ออก** (`_MERGE_REFUSED`/`_UNARMED` ไม่มีในลิสต์ และ
+  `[G>]` จริงคือ `(N bytes; late=X ms)`) ⇒ **จ่ายแล้ว** ใบ attended เขียนสามโทเคน BLOCKED ครบและสั่ง grep ที่ชื่อ label
+- **D4/D6/D7/D8/D9 จ่ายด้วยโค้ดในรอบนี้** (คอมมิตของตัวเอง): `NAME_COLOUR_SWEEP_ARMED` อ่าน `wire=` กลับจากไบต์ที่คิวจริง ·
+  ห่อ `unrecognised_env_value` (call เดียวที่ยังอยู่นอก try — รูปเดียวกับที่รอบก่อนเพิ่งปิด) · NONCLAIM ของ
+  `append_census_entries` (guard ตรวจ **ผลรวม** ของ `entry_bytes` ไม่ใช่ **จำนวน** · บรรทัด frame drift ยิงไม่ได้) ·
+  แก้คอมเมนต์ membership ที่กลายเป็นเท็จไป 8 identity · บอกว่าบรรทัด `WORLD_CENSUS` อธิบาย generation ก่อน splice
+- **D5 หักล้างได้ [วัดแล้ว]**: adversary รายงานว่า `tests/test_name_colour_sweep_wiring.py` แดง 6 เคสและไม่มีเทสของ
+  `append_census_entries` — **ไม่จริงบนต้นไม้ของรอบนี้** worktree ของมันสร้างจาก HEAD ก่อนคอมมิตเทสของผม
+  วัดซ้ำ: `grep append_census_entries tests/` เจอ 5 จุด · ไฟล์นั้น **21 passed** · ชุดเต็มเขียว 12,629 (ดูข้างบน)
+- **ที่ adversary ยืนยันว่าหักไม่ลง**: `build_sweep_population` ไบต์ต่อไบต์เท่าเดิมหลัง extract (sha ตรงทั้งสองชุด) ·
+  บูตไม่ arm เหมือนเดิมทุกไบต์ (pc/frame/events/console sha ตรงกับ `651c70e`) · `except Exception` จับ
+  `FieldMobContractError`/`AttributeError`/`struct.error` ได้จริง (`KeyboardInterrupt` หลุด ซึ่งถูกแล้ว) ·
+  การเหวี่ยงใส่หุ่นถูกปฏิเสธสะอาดที่ประตู roster ไม่ใช่ที่ membership (`mob_combat_target_not_a_field_mob_no_reply`) ·
+  ไม่มี identity ชนกัน · ทุกบรรทัดใหม่เป็น ASCII
+- **D10 [วัดแล้ว] ส่งต่อให้ B**: `N-BASE` ยืนทับจุดเกิดของผู้เล่นพอดี · ไม่มี NPC จริงในรัศมี 1,000 หน่วยจากจุดเกิด
+  (ตัวใกล้สุด 1,227 หน่วย) ⇒ การเทียบตามคำสั่ง PANYA `2142` ต้องเดินไป · และตำแหน่งตัวละคร **persist** ⇒ ใบสั่งใช้ตัวละครใหม่
+
+## 🔴 คำถามที่ออกแบบยังไม่ตอบ (adversary ตั้ง · เขียนไว้ให้รอบหน้าไม่ใช่ให้ลืม)
+ฉาก bg0001 มี emitter ของ collection เดียวกันอีก **สี่จุด** (ChooseNPC face · combat bar recompose · death recompose ×2)
+ทุกจุดรู้จัก diag-widen และ mob-death override แต่ **ไม่มีจุดไหนรู้ว่ามี sweep** ⇒ ต้องเลือกหนึ่งใน:
+(ก) ย้าย sweep ไปอยู่ที่เดียวกับ `census_anchor_record`/`mob_scene_recompose` เพื่อให้ทุก recompose ปล่อยแถวซ้ำ
+(ข) ยอมรับว่าใบนี้คือ "มองครั้งเดียว ห้ามแตะอะไร" อย่างเปิดเผย — รอบนี้เลือก (ข) **และเขียนไว้ในใบ attended จริง ๆ**
+ไม่ใช่เงียบ · (ก) เป็นงานที่ควรทำถ้า GT-288 ต้องบูตซ้ำหลายรอบ
+
 ## รอบหน้าทำอะไร
-1. ผล `pf-adversary` ของรอบนี้ (ถ้าคืนหลังปลดล็อก = งานแรกของรอบถัดไป ตามกฎบ้าน)
+1. **D1 ทางเลือก (ก)**: ทำให้ recompose ทั้งสี่จุดของ bg0001 ปล่อยแถว sweep ซ้ำ ถ้า GT-288 ต้องบูตมากกว่าครั้งเดียว · และรอ B ตัดผู้สมัคร AT3 ใหม่ (D2)
+1b. `#973` ประกาศ `SUPERSEDED-BY: #981` แล้ว (reaper ปิดเองเมื่อครบเกณฑ์ idle 3 ชม. · ห้ามปิดมือ)
 2. NOW ลำดับ (2): `gate-windows.yml` — บล็อก `--- pytest_subset failure detail ---` ของ R350 **ไม่พิมพ์เลย**
    ใน run `34045847454` (COO วัดเอง ใบ `0148` ข้อ 2 + GM `0123`) และ `FAILED/ERROR` ท้าย job (`1921`)
 3. NOW ลำดับ (3): ตัด `AGENTS.md` ลงใต้เพดาน (รอคำเคาะ COO ตามจดหมาย `0341`) + กฎ `2241`/`2345`/`0039`
 4. NOW ลำดับ (4): `#948` seed แขน (ข) + conftest · (5) ตอบ GM `1215` GM-063
 5. ส่งใบยืนยันให้ K เมื่อ PR ของรอบนี้ merge ("เฟรมเดียวอยู่บน main แล้ว" = สัญญาในจดหมาย `0345`)
 
-SCOREBOARD: COMING | ผู้เทสที่บูต PF_NAME_COLOUR_SWEEP=1 จะเห็นแถวหุ่นติดป้าย 8 ตัวยืนอยู่ในเมืองที่ NPC ยังอยู่ครบ แทนที่จะเห็นเมืองว่างเปล่า (ซึ่งคือสิ่งที่โค้ดเมื่อวานจะทำ) | pirate-force-server PR ของรอบ ky8m6j · pf_bridge#1617 · GT-288
+SCOREBOARD: COMING | ผู้เทสที่บูต PF_NAME_COLOUR_SWEEP=1 จะเห็นแถวหุ่นติดป้าย 8 ตัวยืนอยู่ในเมืองที่ NPC ยังอยู่ครบ แทนที่จะเห็นเมืองว่างเปล่า (ซึ่งคือสิ่งที่โค้ดเมื่อวานจะทำ) | pirate-force-server#981 (draft ตามกฎเฟรมถึงไคลเอนต์ · adversary คืนแล้ว จ่าย 5 ข้อในรอบ) · pf_bridge#1617 · GT-288
