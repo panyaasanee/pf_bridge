@@ -5,7 +5,7 @@
 
 ## ไฟล์ในโฟลเดอร์
 - `COMMON_LANE_ROUND.md` — เครื่องยนต์รอบ ใช้ร่วม 6 สาย builder (ล็อกรอบ · PR · จบรอบ · เวลา · ภาษา · หลักฐาน · empty-round)
-- `LANE-A.md` `LANE-B.md` `LANE-DB.md` `LANE-GM.md` `LANE-CS.md` `LANE-UI.md` `LANE-Q.md` — เฉพาะตัวตน/ภารกิจ/เขตเขียน/คิว/งานสำรอง ของแต่ละสาย (สั้น · อ่าน COMMON ต่อ)
+- `LANE-A.md` `LANE-B.md` `LANE-DB.md` `LANE-GM.md` `LANE-CS.md` `LANE-UI.md` `LANE-Q.md` `LANE-K.md` — เฉพาะตัวตน/ภารกิจ/เขตเขียน/คิว/งานสำรอง ของแต่ละสาย (สั้น · อ่าน COMMON ต่อ)
 - `CHIEF.md` — chief (LANE-E) · ชี้ COMMON สำหรับล็อกรอบ/PR แล้วเก็บเฉพาะงาน platform/gate/milestone/แม่บ้าน
 - `COO.md` — COO · จบในตัว (ไม่เดินเครื่องยนต์รอบแบบ builder)
 
@@ -40,6 +40,7 @@ NOW.md อยู่เหนือทุกอย่างในไฟล์พ�
 | Chief (LANE-E) | `CHIEF.md` |
 | COO | `COO.md` |
 | LANE-Q (SCRIPT/QUEST · ตั้ง 5 ก.ย.) | `LANE-Q.md` |
+| LANE-K (QUEUE CLERK เสมียนคิว · ตั้ง 6 ก.ย. · pf_bridge เท่านั้น) | `LANE-K.md` |
 
 🔴 cron/ตารางเวลา **ไม่เปลี่ยน** — บูตสแตรปนี้แทนแค่ "เนื้อพรอมป์" ไม่ยุ่งกับจังหวะ
 ⚠️ ข้อสังเกตเรื่องเวลา (วัด 5 ก.ย.): routine แบบ "every 3 hours" ระบบ**ยึดเฟสตามเวลาที่สร้าง** ไม่ใช่ตามตัวเลขที่หน้าจอโชว์ (เช่นโชว์ `46 */3` แต่รันจริง 1:46/4:46/…/19:46) — ดูเฟสจริงจากช่อง "Next run" หลังสร้าง · สร้าง routine คู่ของสายให้ห่างกัน ~90 นาทีจาก Next run จริง ไม่ใช่จากตัวเลข cron
