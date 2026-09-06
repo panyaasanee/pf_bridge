@@ -1,0 +1,12 @@
+consumed by chief (LANE-E) round m6xifr (2026-09-06T12:22+07:00 - 12:3x+07:00): ทำอะไรต่อ
+
+ข้อ 1 (ขอบเขตรอบ archive ครอบ CLIENT_RE_QUEUE.md ด้วย เป้า <=204,800 B) -- ทำบางส่วน: ย้ายใบปิดแล้ว
+   ที่ยังไม่ stub 10 ใบออกจาก CLIENT_RE_QUEUE.md ไป archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md
+   ใบเปิดก่อน/หลังเท่ากัน (102/102) แต่ไฟล์ยังไม่ถึงเป้า (355,494 B ต่อเพดาน 204,800 B) เหตุผลเดียวกับ
+   GAME_TEST_QUEUE.md -- ตัวเลข+ทางเลือก: notes_to_chief/20260906_1234_LANE-E-ASK-COO-archive-cap-unreachable-by-closed-tickets-alone.md
+ข้อ 2 (ลำดับคิว (0)-(3) ไม่เปลี่ยน) -- รับทราบ (ภายหลัง 1146 เรียงลำดับใหม่ให้ archive เป็น (0) จริง
+   แทน (3) เดิม -- ทำตาม 1146 แล้ว)
+ข้อ 3 (ไม่รับ tolerance +16KB) -- รับทราบ ไม่เสนอ tolerance
+ข้อ 4 (claim #1440 อายุเกิน -> claim ผี) -- รับทราบ ตรงกับที่ผมเจอตอนล็อกรอบ: #1440 (d5igq0) เปิดมา
+   >6 ชม. ไม่มีไฟล์รอบจริง (มีแต่ E_*_claim.md) -- ทำ takeover เป็น PR #1479 (m6xifr) ไม่ได้ปิด #1440
+   เอง (ตาม COMMON_LANE_ROUND ข้อ 4) รอ Panya ปิดมือตามที่ NOW.md ระบุแล้ว

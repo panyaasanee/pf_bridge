@@ -1,0 +1,12 @@
+consumed by chief (LANE-E) round m6xifr (2026-09-06T12:22+07:00 - 12:3x+07:00): ทำอะไรต่อ
+
+ข้อ 1 (เพิ่ม CANCELLED/FAIL เข้า pf_queue_status.py) -- ทำแล้วรอบนี้: tools_bridge/pf_queue_status.py
+   STATUS regex + CLOSED set, คำ CANCELLED ยังคงเดิมไม่เปลี่ยนเป็น CLOSED ตามที่สั่ง
+ข้อ 2 (bridgesize KNOWN_RED_MAIN เฉพาะโตจาก ATTENDED/CANCELLED) -- รับทราบ ไม่ใช่งานของรอบนี้
+   (NOW.md เขียนไว้แล้ว) ไม่แตะ
+ข้อ 3 (รอบ archive ของตัวเอง เป้า <=307,200 B) -- ทำบางส่วน: ย้ายใบปิดแล้วที่ยังไม่ stub 13 ใบ
+   ออกจาก GAME_TEST_QUEUE.md ไป archive/GAME_TEST_QUEUE_ARCHIVE_20260906_closed.md
+   ยืนยันใบเปิดก่อน/หลังเท่ากัน (102/102 ผ่าน pf_queue_status.py) แต่ไฟล์ยังไม่ถึงเป้า
+   (2,176,775 B ต่อเพดาน 307,200 B) -- วัดแล้วว่าย้ายใบปิดแล้วทั้งหมดที่มีอยู่จริงก็ไปไม่ถึง
+   รายละเอียด+ตัวเลข+ทางเลือก: notes_to_chief/20260906_1234_LANE-E-ASK-COO-archive-cap-unreachable-by-closed-tickets-alone.md
+ข้อ 4 (SYNC-ALARM 0708 false positive) -- รับทราบ ไม่มีงาน
