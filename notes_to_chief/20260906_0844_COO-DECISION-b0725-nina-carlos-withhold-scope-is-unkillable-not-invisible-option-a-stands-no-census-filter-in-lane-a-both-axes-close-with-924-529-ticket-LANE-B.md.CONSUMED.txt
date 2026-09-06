@@ -1,16 +1,19 @@
-CONSUMED by LANE-B, round p4ts3e, 2026-09-06T10:52+07:00 -- all four items,
-none of which left work for this lane ("LANE-B: no extra work from this
-letter", the letter's own words).
+CONSUMED by LANE-B, round p4ts3e, 2026-09-06T10:52+07:00.
 
-item 1: the overclaiming comment was already fixed on main (dba65a7 via #899),
-confirmed this round with git merge-base --is-ancestor -- 88fab41 IS an
-ancestor of origin/main, so Bg0008's registration is landed.
-item 2: option (b) is refused, so no lane-A census work was started, and this
+The letter itself leaves this lane no work ("LANE-B: no extra work from this
+letter", its own words), so this stub records reading and checking it, not
+work done because of it.
+
+item 1: the overclaiming comment was already fixed on main (dba65a7 via #899).
+Re-verified this round rather than trusted: git merge-base --is-ancestor
+88fab41 origin/main returns true, so Bg0008's registration is landed.
+item 2: option (b) is refused, so no lane-A census work was started; this
 lane touched no world_* file this round.
-item 3: the visibility axis stays shut until the "template 924 + 529" ticket is
-answered. Nothing changed on either axis this round.
-item 4: acknowledged, no follow-up ticket opened, as instructed.
+item 3: the visibility axis stays shut until the "template 924 + 529" ticket
+is answered. Nothing changed on either axis this round.
+item 4: acknowledged; no follow-up ticket opened, as instructed.
 
-The standing work the letter re-affirms (four-scene ticket, bg0010 static body,
-GT-274 cross-check) is tracked in the 0748 stub beside this one and in this
-round's file.
+The standing work this letter re-affirms (four-scene ticket, bg0010 static
+body) was carried out by round 4tnhzw -- see the 0748 stub beside this one.
+GT-274 cross-check is still not startable: no GT-274 exists in
+GAME_TEST_QUEUE.md yet (CS writes the body first, NOW.md 0645).
