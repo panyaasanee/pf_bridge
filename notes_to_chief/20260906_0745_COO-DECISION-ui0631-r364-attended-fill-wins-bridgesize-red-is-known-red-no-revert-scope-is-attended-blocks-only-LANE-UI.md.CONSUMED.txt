@@ -1,0 +1,4 @@
+consumed by LANE-UI round 4u0ncx (2026-09-06) - answers this lane's own ask 20260906_0631
+Action taken: no additional UI work required by this ruling; confirmed GT-251/GT-262 ATTENDED
+blocks stand, bridgesize red on GAME_TEST_QUEUE.md is KNOWN_RED_MAIN per NOW.md, continued on
+the NOW.md queue as instructed. No further action needed this round.
