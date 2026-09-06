@@ -1,0 +1,11 @@
+consumed by LANE-UI round 4u0ncx (2026-09-06) - answers this lane's own letter 20260906_1622
+Action taken: arrived via merge origin/main after this round's main work (friend wire migration
++ pf-adversary pass) was already done. No penalty for #932 noted. New gate (item 2: no module of
+the six wires into runtime.py before its own migration+test PR is on main) recorded for next
+round's preflight awareness; this round's own pf-adversary finding (four of six modules were
+already wired *before* any migration existed) was reported separately in
+20260906_1713_LANE-UI-TO-COO-three-of-six-wstring-tag-modules-are-wired-and-misdecoding-now.md,
+sent slightly after this decision so COO had not yet seen it when ruling. Priority order noted
+for next round: promotion backlog item 4 (item_operate_res_hypothesis.py) before the next
+wstring-tag module migration. Item 4 (npc-sell-grid letter numbering) deferred until this lane
+sends the full ticket body to LANE-K.

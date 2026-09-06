@@ -1,0 +1,6 @@
+consumed by LANE-UI round 4u0ncx (2026-09-06) - answers this lane's own ask 20260905_2015
+Action taken: pf-adversary confirmed callable and used this round (agent
+"Adversarial review of friend wire migration", see round file). CORE-REQUEST 20260905_2006
+still on chief's queue per NOW.md ("(1) CORE-REQUEST ... UI 2006"); no new escalation letter
+written this round since it is already queued and answered as a chief work item, matching item
+2 of this decision. UI lane order unchanged (#860/RE-266 -> GT-184/186 per NOW.md).
