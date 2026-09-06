@@ -70,6 +70,7 @@
 - 🆕 **`GT-264` RECOMPOSE-MID-COMBAT-KEEPS-ANOTHER-MOBS-GROUND-DROPS-001** (🔴 **BLOCKED-ON-WIRING** — เนื้อใบเขียนโดย LANE-A (`#818` merged) · เลขตั้งโดย chief รอบ `r045nx`/R354 ตามคำขอ `notes_to_chief/20260905_1250_LANE-A-TO-CHIEF-*` ข้อ 1 · ปลดเป็น READY เมื่อบรรทัด `ground_companion_actions` อยู่บน main — ใบเต็มท้ายไฟล์)
 - ✅ **`GT-266` WARP-126-LIVE-TELEPORT-001** (✅ **PASS (วาปสด + ไม่ต้อง relog) — chief รอบ `d5igq0`/R365 ตามผล `notes_to_chief/20260906_0155_KA1A-R320-RESULTS-*` + `COO-DECISION 20260906_0256` ข้อ 6 · ส่วน relog แยกไปที่ `GT-274` ใหม่** · ~~⚪ RESERVED~~ — ใบเต็มท้ายไฟล์)
 - 🆕 **`GT-274` WARP-126-RELOG-PERSIST-001** (🟢 **READY -- attended, in-game** · แยกจาก `GT-266` โดย chief รอบ `d5igq0`/R365 · เจ้าของ = LANE-GM + LANE-A · relog หลัง `/warp 126` โผล่ที่ไหน + ประตู login ของฉาก 126 ทำงานถูกไหม (`GM_WARP_SCENE_PERSIST_FAILED reason=login_would_refuse` วัดแล้ว) · ใบเต็มท้ายไฟล์)
+- 🆕 **`GT-275` MONSTER-NAME-COLOUR-PER-VIEWER-001** (🟢 **READY -- attended, in-game, pending merge `#894`** · M3/P-2 · เจ้าของเนื้อใบ = LANE-B (`0146`) · เสียบจุด census โดย chief รอบ `d5igq0`/R365 · `[PROPOSED]` จนเห็นบนจอ · สอง session ดูมอนตัวเดียวกันเห็นสีชื่อต่างกันตามคู่ (คนดู,มอน) หรือไม่ · ใบเต็มท้ายไฟล์)
 - 🆕 **`GT-267` SEA-EDGE-CROSSING-126-TO-304-AND-305-001** (⚪ **RESERVED — เลขจองโดย chief รอบ `r045nx`/R354 ตาม `COO-DECISION 20260905_1349` ข้อ 4(ค) + `1348` ข้อ 6 · เนื้อใบเขียนโดย LANE-A ร่วม LANE-GM · ห้ามสายอื่นใช้เลขนี้**)
 - 🆕 **`GT-255` SECOND-PASSWORD-AND-BAG-INBOUND-FRAME-CAPTURE-001** (🟢 **READY (พ่วงบูตเจ้าภาพ) — เนื้อใบเต็มวางแล้วโดย chief รอบ `r045nx`/R354 · 🔴 เจ้าภาพบูตเดิม (`GT-242`) PASS ไปแล้ว R316 อ่านบล็อก "เจ้าภาพบูต" ที่หัวใบก่อนลงรอบ** · เจ้าของ/ผู้เขียนเนื้อ = **LANE-DB** · เลขตั้งโดย chief รอบ `5e00uw`/R348 ตาม `COO-DECISION 20260905_0347` ข้อ 1 · พ่วงบูตเดียวกับ `GT-242` · ท้ายคิว "รอเครื่องคุณ" ไม่บล็อกใคร — ใบเต็มท้ายไฟล์)
 - 🆕 **`GT-225` GROUND-CELL-FOLLOWS-A-WALKING-PLAYER-ACROSS-A-SCENE-EDGE-001** (🔴 **BLOCKED — คิวหลัง `GT-215`** · เปิดโดย chief รอบ `dwvbpm`/R330 ตาม `COO-DECISION 20260904_0145` ข้อ 2 · **เจ้าของใบ/ผู้แก้ = chief (LANE-E)** ตาม `COO 20260903_2250` ข้อ 5 ไม่ใช่ LANE-B · ใบข้อบกพร่อง: `_mob_loot_cross_scene_boundary()` มีผู้เรียกจุดเดียวคือเส้นทาง GM warp (`runtime.py:6749/6751`) ⇒ ผู้เล่นที่ **เดิน** ข้ามขอบฉากไม่เคยบอก `DropLedgerCell` · `#675` วัดแล้วไม่ปิด · `RECHECK` เป็นตัวปลดป้าย · ใบเต็มท้ายไฟล์)
@@ -11179,3 +11180,21 @@ ATTENDED: ไม่ผ่าน = ล็อกอินซ้ำไม่ได�
 **nonclaims**: ไม่อ้างว่า "ประตู login ของ 126" มีอยู่แล้วในโค้ด — `reason=login_would_refuse` เป็นแค่ชื่อ reason ที่วัดจาก log ยังไม่ได้อ่านโค้ดจริงว่า refuse เพราะอะไร (RE ใบคู่ขนานถ้าต้องการอ่านโค้ด เป็นงานของ LANE-GM/LANE-A แยกจากใบนี้) · ไม่อ้างว่า `GM_WARP_POSITION_TARGET_MISMATCH` ที่เห็นตอน `/warp 1` ท้ายบูตเดียวกันเกี่ยวกับใบนี้ (แจ้ง LANE-GM แยกต่างหาก คนละคำถาม)
 
 > 🔴 **`GM_WARP_POSITION_TARGET_MISMATCH`** (เห็นตอน `/warp 1` 00:34:39 ท้ายบูตเดียวกับ `GT-266`/นี้ ใน `notes_to_chief/20260906_0155_KA1A-R320-RESULTS-*`) **ไม่ใช่ของใบนี้** — ส่งต่อให้ LANE-GM อ่านเป็นเรื่องแยก (chief round `d5igq0`/R365)
+
+## GT-275 MONSTER-NAME-COLOUR-PER-VIEWER-001  [🟢 **READY -- attended, in-game, pending merge `pirate-force-server#894`** · **เจ้าของใบ/ผู้เขียนเนื้อใบ = LANE-B (block ยกมาคำต่อคำจาก `0146`) · ผู้เสียบจุด census = chief (LANE-E) รอบ `d5igq0`/R365** · ตั้งเลขโดย chief ตาม `COO-DECISION 20260906_0256` ข้อ 2 · เป็น M3/P-2 (สีชื่อมอน) · `[PROPOSED]` จนกว่าจะเห็นบนจอจริง — **ชั้นหลักฐาน: IMAGE (codec ไคลเอนต์เอง) ≠ ไคลเอนต์รับแล้ว** ไม่มี capture ไหนในโปรเจกต์นี้เคยแสดงไคลเอนต์รับ body ที่มีฟิลด์นี้]
+
+**คำถามของใบ**: session สองอันดูมอนตัวเดียวกันพร้อมกัน จะเห็นสีชื่อมอนต่างกันตามคู่ (คนดู, มอน) หรือไม่ — ทดสอบฟิลด์ `NPCAttr+0x98` (associated actor id, tag `0x32`, presence mask `+0xBC & 0x08`) ที่ `mob_viewer_link.link_viewer_to_npc_attr` splice เข้าไปตอน census ต่อ session ใน `runtime.py` (ทั้งสองสาขา bg0001/bg0002)
+
+ATTENDED: บูตทรีที่มี PR `#894` merge แล้ว (จุดเสียบ viewer_identity ของ chief) -> ล็อกอินสองบัญชี เข้าฉากเดียวกันที่มีมอนของ roster (bg0001/bg0002)
+ATTENDED: ดูชื่อมอนตัวเดียวกันจากทั้งสองจอ -> ถ้าไคลเอนต์ไม่แครช = ผ่านครึ่งแรก (ลำดับฟิลด์ถูก)
+ATTENDED: ตัดสินสีจากจอ: ส้ม/แดง/เทา = ผ่าน -- ยังชมพูทั้งคู่ = ฟิลด์ถูกส่งแต่ยังไม่พอ ต้องวัด faction comparator ต่อ
+ATTENDED: แครช/มอนหาย/ชื่อหาย = ฟิลด์ไม่ถูกยอมรับ (ดูหัวข้อ "ยังไม่ได้พิสูจน์" ด้านบน) ⇒ รายงานกลับ LANE-B ห้ามเดาตำแหน่งใหม่เอง
+ATTENDED: relog หนึ่งครั้ง: สถานะมอน (เลือด/ตำแหน่ง) ต้องเหมือนเดิม -- ฟิลด์นี้ห้ามทำให้โลกกลายเป็นต่อ session
+
+**เกณฑ์ผ่านสองชั้น**
+- **client-observable**: ภาพหน้าจอสองจอพร้อมกัน (หรือใกล้เคียง) แสดงสีชื่อมอนตัวเดียวกัน + ไม่แครช
+- **wire/server**: `full_roster_override`/`hostile_override_for_scene_id` เรียกด้วย `viewer_identity` ต่างกันจริงสองค่า (ยืนยันจาก console/log ถ้ามี token)
+
+**nonclaims**: ไม่อ้างว่า faction comparator/relation predicate ถูกด้วย (คนละกลไก ตาม `mob_viewer_link.py`'s nonclaims) · ไม่อ้างว่าโค้ดนี้ทำให้มอนเปลี่ยนพฤติกรรม (เขียนไบต์อย่างเดียว ไม่กระทบ AI/damage/loot)
+
+> 🔵 **TWO_SESSIONS_SAME_SCENE**: วัดแล้วในโค้ด (chief รอบ `d5igq0`, pf-adversary รอบเดียวกันยืนยันซ้ำ) — `viewer_identity` สองค่าต่างกันให้ไบต์ต่างกันจริง (ความยาวเท่ากัน ต่างแค่ 8 ไบต์ associated-actor-id ที่ต่อท้าย) ผ่านฟังก์ชันบริสุทธิ์ ไม่มี state ต่อ session ที่ไหนถูกจำไว้ — สถานะมอน (roster/เลือด/ศพ) ยังอยู่ครั้งเดียวต่อฉากใน registry ของ A ตามเดิม ไม่ขัด shared world
