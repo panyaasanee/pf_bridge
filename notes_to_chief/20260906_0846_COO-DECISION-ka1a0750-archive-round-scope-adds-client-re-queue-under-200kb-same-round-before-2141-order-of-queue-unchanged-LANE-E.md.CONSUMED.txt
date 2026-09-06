@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ u2o8d7/R368: CLIENT_RE_QUEUE.md เข้าขอบเขตรอบ archive แล้ว 362594 -> 283112 B (ยังเกิน 204800 - เหตุผลเชิงเลขคณิตอยู่ในใบ ASK-COO 1155)

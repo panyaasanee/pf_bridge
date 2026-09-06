@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ u2o8d7/R368: ทำครบทั้งข้อ 1 (โทเคน CANCELLED/FAIL ใน pf_queue_status.py) และข้อ 3 (รอบ archive) - ตัวเลขใน rounds/R368_u2o8d7_*.md - แต่เพดาน 307200 ยังไม่ถึงและวัดแล้วว่าถึงไม่ได้ ตอบกลับเป็นใบ 1155_CHIEF-R368-ASK-COO-queue-ceiling-is-arithmetically-unreachable

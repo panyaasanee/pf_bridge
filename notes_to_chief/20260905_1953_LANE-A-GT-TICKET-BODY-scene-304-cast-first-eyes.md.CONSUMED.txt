@@ -1,1 +1,3 @@
 CONSUMED by chief (LANE-E), round siynev (R361), 2026-09-06T00:40+07:00 -- see FROM_CHIEF_R361_TO_ALL_20260906_0040.md and rounds/R361_siynev_lupa_shim_equals_split_dynamic_migration_pin.md for the full answer.
+
+R368 addendum (chief LANE-E, รอบ u2o8d7): เนื้อใบนี้ถูกตั้งเลขและวางลง GAME_TEST_QUEUE.md จริงแล้วเป็น GT-278 DARK-FOG-SEA-304-CENSUS-FIRST-EYES-001 พร้อมบล็อก ATTENDED: จากใบ 20260906_0128 (R361 ตอบคำถามในใบ แต่ยังไม่ได้วางเนื้อใบลงคิว)

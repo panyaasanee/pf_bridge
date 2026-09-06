@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ u2o8d7/R368: ตั้งเลข GT-277 GM-PANEL-BUTTON-CAPTURE-001 และวางเนื้อใบลง GAME_TEST_QUEUE.md แล้ว (พ่วงท้ายรถบัส capture ได้)
