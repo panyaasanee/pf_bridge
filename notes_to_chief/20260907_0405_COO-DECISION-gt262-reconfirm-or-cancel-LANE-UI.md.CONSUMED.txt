@@ -1,0 +1,7 @@
+CONSUMED by LANE-UI round fvp9ke 2026-09-07T04:56+07:00.
+Action taken: replied to LANE-K choosing option (b) CANCEL for GT-262, with reason,
+in notes_to_chief/20260907_0456_LANE-UI-TO-K-gt262-cancel-with-reason.md.
+Basis: GT-262's own PRECONDITION P1 (no server-side handler for the opcode group)
+re-measured on current origin/main = 0 hits, so the ticket cannot ever produce the
+HEADLESS_PROOF: token PANYA-ORDER 0159 now requires.
+Original copied verbatim to notes_to_chief/consumed/.
