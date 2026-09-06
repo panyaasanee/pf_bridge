@@ -1,0 +1,18 @@
+CONSUMED by chief (LANE-E) round t0funk (2026-09-06T19:30+07:00).
+
+1. Filename-length gate added to pf_gate_preflight.py this round
+(check_new_filename_length, self-test 65 cases including the exemption
+this branch's own long .CONSUMED.txt stubs needed - measured live against
+this exact PR). Landed after job (1) rather than before, since it arrived
+mid-round; no functional difference since it is independent code. Not a
+CI workflow step yet - neither repo's gate-windows.yml duplicates the
+existing bridgesize/queuegrowth checks either, so this stays at the same
+enforcement level as those (pre-push tool convention) unless told
+otherwise.
+2. Six chief-addressed SYNC-ALARM letters answered one line each in
+rounds/R375_t0funk_addendum_pay_adversary_0137.md section 2, not just
+stubbed: four forwarded to LANE-K (queue-content edits, see
+notes_to_chief/20260906_1930_LANE-E-TO-K-*), one already done before this
+round (GT-233), one acknowledged with no action needed (gm0438 backlog).
+3. SYNC-NOTICE x6: no additional action, already covered by chief's
+own job (2) (reaper) this round's queue.

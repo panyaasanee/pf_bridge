@@ -691,6 +691,89 @@ def check_new_skips(repo, base):
     return True
 
 
+# COO-DECISION 20260906_1846 item 1, answering SYNC_STUCK 20260906_1816:
+# AGENTS.md section 7 has said "filenames <= 100 characters, every pile"
+# since before this tool existed, but nothing ever checked it mechanically.
+# Measured this round against origin/main: notes_to_chief/ alone carries
+# 498 files over 140 characters (23 over 200, longest 222), and the real
+# cost landed on the bridge, not just as debt: Windows's own filesystem
+# refused six of them ("Filename too long"), so pf_git_sync could not
+# fast-forward past them at all. Only NEW files (added vs `base`) are
+# checked - an old long name already on main is that same debt, real but
+# not this branch's to fix by renaming (renaming would be a delete+add on
+# the bridge, which pf_git_sync's own contract refuses).
+NEW_FILENAME_LENGTH_CEILING = 100
+
+
+def check_new_filename_length(repo, base="origin/main"):
+    """RED when this branch ADDS a file whose basename is longer than
+    `NEW_FILENAME_LENGTH_CEILING` characters, compared to `base`.
+
+    Character count, not bytes: the ceiling is about what a path component
+    costs a filesystem and a terminal to display, not encoding size (unlike
+    the byte ceilings `check_bridge_file_sizes`/`check_queue_growth_cap`
+    use for file CONTENT, where the cost is bytes read).
+
+    Returns True (no added file over the ceiling), False (one or more are -
+    RED, every offending name printed), None (`repo` is not a git checkout,
+    or `base` does not resolve - INCONCLUSIVE, same convention as
+    `check_new_skips`).
+    """
+    root = pathlib.Path(repo)
+    if not (root / ".git").exists():
+        print("[filenamelen] INCONCLUSIVE - %s is not a git checkout." % root)
+        return None
+    base_resolves = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(root), "rev-parse",
+         "--verify", "--quiet", base + "^{commit}"],
+        capture_output=True, text=True, errors="replace",
+    ).returncode == 0
+    if not base_resolves:
+        print("[filenamelen] INCONCLUSIVE - %s does not resolve in %s."
+              % (base, root))
+        print("              git fetch origin main, or pass --base.")
+        return None
+    diff = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(root), "diff",
+         "--name-only", "--diff-filter=A", base],
+        capture_output=True, text=True, errors="replace",
+    )
+    added = [line.strip() for line in diff.stdout.splitlines() if line.strip()]
+    offenders = []
+    for name in added:
+        basename = pathlib.Path(name).name
+        if len(basename) <= NEW_FILENAME_LENGTH_CEILING:
+            continue
+        # A `.CONSUMED.txt` stub whose underlying letter ALREADY EXISTS at
+        # `base`: every lane's stub convention is a fixed
+        # `<letter-name>.CONSUMED.txt` suffix, so its length is entirely
+        # inherited from a name this branch did not choose and is not
+        # allowed to rename (measured against this exact commit, R375: a
+        # letter already on main at 89 characters becomes a 102-character
+        # stub with no new content in the excess 13). Only the STUB is
+        # exempt this way - a `.CONSUMED.txt` name whose own letter is ALSO
+        # new on this branch is still this branch's choice end to end.
+        if basename.endswith(".CONSUMED.txt"):
+            underlying = name[: -len(".CONSUMED.txt")]
+            if _git_blob_size(root, base, underlying) is not None:
+                continue
+        offenders.append((name, len(basename)))
+    if offenders:
+        print("[filenamelen] RED - %d new file(s) have a basename over %d"
+              " characters:" % (len(offenders), NEW_FILENAME_LENGTH_CEILING))
+        for name, length in offenders:
+            print("    %d chars: %s" % (length, name))
+        print("              Shorten the filename before you push - a name")
+        print("              already on main is old debt, not this")
+        print("              branch's, but this branch must not add a new")
+        print("              one (SYNC_STUCK 20260906_1816: Windows refused")
+        print("              to even fast-forward past six of these).")
+        return False
+    print("[filenamelen] PASS - %d new file(s), none over %d characters."
+          % (len(added), NEW_FILENAME_LENGTH_CEILING))
+    return True
+
+
 def check_base_is_ancestor(repo, base):
     """RED when `base` is not an ancestor of HEAD - the tree you tested is
     NOT the tree the gate's pull_request run will build.
@@ -1170,6 +1253,7 @@ CENSUS_SELF_TEST_CASES = 2
 BRIDGESIZE_SELF_TEST_CASES = 6
 QUEUEGROWTH_SELF_TEST_CASES = 8
 CONSUMEDSTUB_SELF_TEST_CASES = 9
+FILENAMELEN_SELF_TEST_CASES = 9
 SCOREBOARD_MANUAL_SELF_TEST_CASES = 8
 
 
@@ -1238,6 +1322,111 @@ def _bridgesize_self_test_cases(tmp):
     ]
     for label, root, base, expected in cases:
         got = check_bridge_file_sizes(root, base=base)
+        ran += 1
+        ok = got is expected
+        failures += 0 if ok else 1
+        print("  case %-58s expected=%-5s got=%-5s %s"
+              % (label[:58], expected, got, "ok" if ok else "SELF-TEST RED"))
+    return failures, ran
+
+
+def _filenamelen_git_root(tmp, dirname, added_names, base_names=()):
+    """A real git repo: `base_names` (relative paths) committed as `main`,
+    then `added_names` added in a SECOND commit on a `feature` branch - so
+    `git diff --diff-filter=A main` on the checked-out tree sees only
+    `added_names` as newly added, the same shape a real lane branch ahead
+    of `origin/main` has. Empty `added_names` still produces a valid
+    base+feature pair with nothing added, for the "nothing new" case.
+    """
+    root = pathlib.Path(tmp) / dirname
+    root.mkdir()
+    subprocess.run(["git", "init", "-q", "-b", "main", str(root)], check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.email", "t@t"],
+                    check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.name", "t"],
+                    check=True)
+    (root / ".keep").write_text("x\n", encoding="utf-8")
+    for relname in base_names:
+        path = root / relname
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("base content\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
+    subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "base"],
+                    check=True)
+    subprocess.run(["git", "-C", str(root), "checkout", "-q", "-b", "feature"],
+                    check=True)
+    for relname in added_names:
+        path = root / relname
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("x\n", encoding="utf-8")
+    if added_names:
+        subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
+        subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "add"],
+                        check=True)
+    return root
+
+
+def _filenamelen_self_test_cases(tmp):
+    """Drive check_new_filename_length() against synthetic git repos.
+
+    Nine provable shapes against `base="main"`: no files added; one short
+    new name; a name at EXACTLY the ceiling (not RED - a ceiling caps what
+    is over it, not what equals it); one character over the ceiling (RED);
+    a long full PATH whose basename alone is short (not RED - only the
+    basename is measured, the same "cost to a filesystem/terminal" the
+    ceiling is about); a `.CONSUMED.txt` stub over the ceiling whose
+    underlying letter ALREADY EXISTS at base (not RED - inherited debt,
+    R375's own real shape the day this check first ran); the same stub
+    shape but the underlying letter is ALSO new on this branch (RED - this
+    branch's own choice end to end); a repo path that is not a git
+    checkout at all (INCONCLUSIVE); and a `base` ref that does not resolve
+    (INCONCLUSIVE).
+    """
+    failures = ran = 0
+    at_ceiling_name = "a" * (NEW_FILENAME_LENGTH_CEILING - 3) + ".md"
+    over_ceiling_name = "a" * (NEW_FILENAME_LENGTH_CEILING - 2) + ".md"
+    assert len(at_ceiling_name) == NEW_FILENAME_LENGTH_CEILING
+    assert len(over_ceiling_name) == NEW_FILENAME_LENGTH_CEILING + 1
+    long_path_short_name = ("dir/" * 40) + "short.md"
+    long_letter_name = "notes/" + ("b" * 98) + ".md"  # 101-char basename
+    assert len("b" * 98 + ".md") == NEW_FILENAME_LENGTH_CEILING + 1
+
+    root_none = _filenamelen_git_root(tmp, "fl_none", [])
+    root_short = _filenamelen_git_root(tmp, "fl_short", ["notes/short.md"])
+    root_at_ceiling = _filenamelen_git_root(
+        tmp, "fl_at_ceiling", ["notes/" + at_ceiling_name])
+    root_over_ceiling = _filenamelen_git_root(
+        tmp, "fl_over_ceiling", ["notes/" + over_ceiling_name])
+    root_long_path = _filenamelen_git_root(
+        tmp, "fl_long_path", [long_path_short_name])
+    root_old_stub = _filenamelen_git_root(
+        tmp, "fl_old_stub", [long_letter_name + ".CONSUMED.txt"],
+        base_names=[long_letter_name])
+    root_new_stub = _filenamelen_git_root(
+        tmp, "fl_new_stub",
+        [long_letter_name, long_letter_name + ".CONSUMED.txt"])
+    root_not_repo = pathlib.Path(tmp) / "fl_not_repo"
+    root_not_repo.mkdir()
+
+    cases = [
+        ("no files added", root_none, "main", True),
+        ("one short new name", root_short, "main", True),
+        ("basename at exactly the ceiling - not RED",
+         root_at_ceiling, "main", True),
+        ("basename one over the ceiling - RED",
+         root_over_ceiling, "main", False),
+        ("long full path, short basename - not RED",
+         root_long_path, "main", True),
+        ("CONSUMED stub of an old (base) long letter - not RED",
+         root_old_stub, "main", True),
+        ("CONSUMED stub whose letter is ALSO new - RED",
+         root_new_stub, "main", False),
+        ("not a git checkout", root_not_repo, "main", None),
+        ("base ref does not resolve",
+         root_short, "origin/no-such-branch", None),
+    ]
+    for label, root, base, expected in cases:
+        got = check_new_filename_length(root, base=base)
         ran += 1
         ok = got is expected
         failures += 0 if ok else 1
@@ -1863,6 +2052,9 @@ def _self_test():
         bs_failures, bs_ran = _bridgesize_self_test_cases(tmp)
         failures += bs_failures
         ran += bs_ran
+        fl_failures, fl_ran = _filenamelen_self_test_cases(tmp)
+        failures += fl_failures
+        ran += fl_ran
         qg_failures, qg_ran = _queuegrowth_self_test_cases(tmp)
         failures += qg_failures
         ran += qg_ran
@@ -1878,7 +2070,8 @@ def _self_test():
     expected_cases = (
         len(cases) + 2 + MAINMERGE_SELF_TEST_CASES
         + BRANCHNAME_SELF_TEST_CASES + CENSUS_SELF_TEST_CASES
-        + BRIDGESIZE_SELF_TEST_CASES + QUEUEGROWTH_SELF_TEST_CASES
+        + BRIDGESIZE_SELF_TEST_CASES + FILENAMELEN_SELF_TEST_CASES
+        + QUEUEGROWTH_SELF_TEST_CASES
         + CONSUMEDSTUB_SELF_TEST_CASES + SCOREBOARD_MANUAL_SELF_TEST_CASES
     )
     if ran != expected_cases:
@@ -1976,6 +2169,10 @@ def main():
                check_branch_is_mergeable_by_the_reaper(repo),
                check_bridge_file_sizes(base=args.base),
                check_queue_growth_cap(base=args.base),
+               check_new_filename_length(repo, base=args.base),
+               check_new_filename_length(
+                   pathlib.Path(__file__).resolve().parent.parent,
+                   base=args.base),
                check_scoreboard_manual_rows(
                    base=args.base,
                    allow_manual_edit=args.allow_manual_scoreboard_edit)]
