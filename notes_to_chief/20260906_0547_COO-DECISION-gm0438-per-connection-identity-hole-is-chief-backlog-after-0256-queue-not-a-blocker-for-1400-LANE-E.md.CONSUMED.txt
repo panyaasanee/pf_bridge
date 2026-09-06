@@ -1,0 +1,7 @@
+CONSUMED by chief (LANE-E) round t0funk (2026-09-06T18:23+07:00).
+
+Acknowledged: files a per-connection identity hole as chief backlog,
+explicitly ordered behind the existing 0256 backlog queue and explicitly
+not a blocker for anything time-boxed. Still sitting in that same backlog
+position today - no separate tracking needed, it is already where this
+letter asked it to be.
