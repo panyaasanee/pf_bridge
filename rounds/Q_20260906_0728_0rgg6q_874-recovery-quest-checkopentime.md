@@ -49,8 +49,7 @@ part of this lane's charter (`Quest.* #874 -> 0510`), and closes out the
 
 All letters addressed to `LANE-Q` in `notes_to_chief/` were already
 consumed by round `xltzkx` (`.CONSUMED.txt` stubs present for all of
-them, checked fresh this round, not assumed). No new letter addressed to
-`LANE-Q` specifically arrived since. Read
+them, checked fresh this round, not assumed). Read
 `notes_to_chief/FROM_CHIEF_R364_TO_ALL_20260906_0515.md` (broadcast to
 all lanes, two items: a reaper-gate bug that closed 3 rounds' PRs without
 merging, since fixed in `#1430`; and a queue-triage sweep for missing
@@ -61,6 +60,37 @@ trigger-id-to-script-file mapping ticket, opened via
 listed in `CLIENT_RE_QUEUE.md`, still `OPEN`, blocked on an RE runner
 (Panya) -- nothing new to consume, this lane already wrote and submitted
 that ticket's content verbatim in a prior round.
+
+A new letter arrived mid-round (fetched via `git merge origin/main` right
+before this round's own push):
+`notes_to_chief/20260906_0727_LANE-A-TO-LANE-Q-world-registry-interface-and-trigger-hit-hook-point.md`,
+LANE-A's answer to the `20260905_2056` COO-DECISION this lane's own
+earlier round was waiting on. Read in full. It documents: (a) three
+process-shared world registries that exist on `main` today
+(`world_scene_registry`/`mob_ground_persistence`/`mob_death_persistence`,
+keyed by case-folded scene folder, not raw scene id -- three named
+footguns for Q specifically: the folder-vs-id key mismatch, `note_balance`
+refusing HP=0, and every write door returning a `NoteOutcome.refusal`
+string instead of raising, which this lane's fail-closed sandbox would
+otherwise mask silently); (b) a hook point already safe to register on
+today, `lane_hooks.hook("vital_inbound_trigger_vital")`, firing on every
+inbound `TriggerVital` `0x1FB2` a ship-vs-trigger collision sends, with
+`first_tag_value(...)` to read the trigger id out of the payload without
+hand-rolling TLV parsing; and (c) what does NOT exist yet
+(`Player.MobAppear`/live `Scene.*` movement -- no spawn/despawn/move door
+that sends a frame -- and registry-1's own seed wiring into `runtime.py`
+is an unbuilt CORE-REQUEST) with an explicit invitation to write back if
+that blocks this lane rather than wait silently.
+
+This is next round's job to use, not this one's: this round's own work
+(`Quest.CheckOpenTime`) neither reads nor writes any world registry, and
+the hook point is for `Trigger.*` real-implementation work, which is
+blocked on `RE-273` (still `OPEN`). Consumed here (copied to
+`consumed/`, `.CONSUMED.txt` stub placed) because it has been read and
+its non-use explained, per house rule -- not because it has been acted
+on. Whichever future round resumes `Trigger.*` (after `RE-273` answers,
+or `GetContactMode` specifically) must re-read this letter's (a)/(b)/(c)
+sections before writing that code, not re-derive them.
 
 ## Tests + gates
 
@@ -153,7 +183,14 @@ clock and returns a bool; no registry, not even a private one.
    check its status fresh in `CLIENT_RE_QUEUE.md`; if still `OPEN`,
    nothing to do but wait for an RE runner. If answered, that unblocks
    `Trigger.GetContactMode` (the highest-call-count remaining
-   `Trigger.*` stub) as the very next real-API target.
+   `Trigger.*` stub) as the very next real-API target. Whichever round
+   picks this up must re-read
+   `notes_to_chief/consumed/20260906_0727_LANE-A-TO-LANE-Q-*.md` first --
+   it names the live hook point (`lane_hooks.hook("vital_inbound_trigger_vital")`),
+   the trigger-id payload reader (`first_tag_value`), and three footguns
+   in the world-registry write doors (scene-folder-vs-id key mismatch,
+   HP=0 refusal, unchecked `.refusal` strings) that this lane's own
+   fail-closed sandbox would otherwise mask.
 3. If both of the above stay blocked: per the backup-work rule, audit the
    remaining stub surface (72 `Player.*` + `Guild.*`/`Party.*` low-call
    names) for another pure-function candidate needing neither the LANE-DB
