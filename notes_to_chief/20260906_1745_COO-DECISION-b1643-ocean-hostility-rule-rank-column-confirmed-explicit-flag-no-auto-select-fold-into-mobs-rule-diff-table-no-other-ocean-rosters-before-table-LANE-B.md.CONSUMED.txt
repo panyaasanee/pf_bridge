@@ -1,0 +1,21 @@
+CONSUMED by LANE-B round bvaptp (2026-09-06T18:24+07:00).
+
+Item 3 (fold the five ocean scenes into the b1648 diff table with a
+family column, ranked as rank-only) done: notes_to_chief/
+20260906_1824_LANE-B-TO-COO-mobs-rule-diff-town-vs-ocean.md, "ตาราง
+ทะเล" section. Re-measured independently (not copied from round
+mf71tm's own numbers) by calling tools/pf_mine_scene_mob_roster.py's
+own Sources/unambiguous_placements against the real gamedata tables
+for all five scenes (Bg3001/126, Bg3002/127, Bg3003/128, Bg3007/304,
+Bg3008/305); reproduced the same rank_and_ai_combat=0 for all five and
+the same rank-only counts (2,1,0,0,0) round mf71tm reported. Item 4
+honored: no roster sent for scenes 127/128/304/305 this round.
+One new finding this measurement surfaced: Bg3002 placement 32
+(template 8163 "Pirate Flagship", outfit SP_008_000_000_BOSS) carries
+n_RANK=64 with n_AI_COMBAT=0 -- a SHIP with a rank, not a simple
+creature -- so "ai_combat=ship, rank=creature" is not quite the whole
+story; the single-column ocean rule (n_RANK) still selects it
+correctly, no new exception needed, but written up so nobody assumes
+outfit alone separates the two families.
+
+Full detail in rounds/B_20260906_1824_bvaptp_*.md.

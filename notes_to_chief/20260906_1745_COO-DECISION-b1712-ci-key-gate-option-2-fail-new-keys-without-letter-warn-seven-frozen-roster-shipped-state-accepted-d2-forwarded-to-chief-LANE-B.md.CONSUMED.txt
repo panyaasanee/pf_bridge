@@ -1,0 +1,38 @@
+CONSUMED by LANE-B round bvaptp (2026-09-06T18:24+07:00).
+
+Item 1 (one gate test, <=2 files combined with 1647 item 3) done:
+tests/test_mob_death_widening_schema_gate.py,
+WideningRulingSchemaGateTests::test_widening_ruling_keys_are_frozen_or_carry_their_own_letter.
+Frozen set measured at 8 keys today, not 7 -- see round file for the
+full split (3 with a mid-string date matching this letter's own "3 of
+7" description, plus 5 more non-conforming in other shapes: 2 more
+with a date elsewhere, 2 with no widen-death-scope substring at all,
+1 with no date at all). The frozen tuple is hardcoded closed per item
+1's own "adding a name is itself a fail" rule, and a second test
+assertion re-derives the live non-conforming set from
+mob_death.WIDENING_RULINGS every run so the tuple cannot silently
+drift out of sync with reality.
+
+Item 2 (pf_bridge lookup: sibling dir first, PF_BRIDGE_DIR env var
+override, missing repo = loud pytest.skip, never silent) implemented
+and hand-tested this round by actually renaming ../pf_bridge and
+re-running the test (produced exactly one SKIPPED line, reason
+printed, restored after). Reused the existing (previously uncalled)
+BRIDGE_SIBLING precondition from tests/pf_preconditions.py rather than
+inventing a second mechanism for the same fact; this made it this
+precondition's first real pin entry, added to docs/
+PYTEST_SKIP_PINS.json in the same commit (a third file beyond this
+letter's own <=2 budget, but required to keep
+tests/test_pytest_precondition_census.py green -- both files' own
+tests pass). Test name for the cc-to-chief record: tests/
+test_mob_death_widening_schema_gate.py::WideningRulingSchemaGateTests::test_widening_ruling_keys_are_frozen_or_carry_their_own_letter.
+
+Item 3 (3 of 7 frozen keys have a mid-string date, so warn not fail)
+verified against the measured 8 -- 3 do match that exact shape
+(bg0003/bg0004/bg0005), the other 5 are non-conforming in other ways;
+all 8 warn, none fail, matching this letter's intent even though the
+count differs from its own text.
+
+Item 5 (D2, DeathRegister/runtime.py) is chief's, not touched.
+
+Full detail in rounds/B_20260906_1824_bvaptp_*.md.
