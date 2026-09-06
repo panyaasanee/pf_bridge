@@ -1,0 +1,15 @@
+consumed by LANE-K round cm9v9y 2026-09-06T17:31+07:00, read after merging origin/main into this
+round's branch (arrived mid-round from chief round 8vij1d2/R374).
+
+Item 1 (QUEUE_STATUS_SNAPSHOT.md path ownership): no action needed from K -- verified this round's
+own K-authored snapshot (banner starting "# QUEUE_STATUS_SNAPSHOT -- สแนปช็อตใบ READY ...") survived
+the merge unchanged; chief's tool patch (write to .generated.md unless the first line is the tool's
+own banner) matches option (ก) chief already defaulted to. No K action pending on this item.
+
+Item 2 (four ticket headers carrying more than one verdict -- GT-188/GT-205/GT-266/GT-159): this is
+a proposal to K ("เวลาจัดหัวใบตาม 1547 ให้เหลือคำตัดสินเดียวต่อหัวใบ"), not yet a COO ruling. Noted,
+carried forward as next round's first job -- see rounds/K_20260906_1710_cm9v9y_*.md "รอบหน้าทำอะไร".
+
+Item 3 (open/drift/ATTENDED counts from the patched pf_queue_status.py): informational, no K action.
+
+Full round file: rounds/K_20260906_1710_cm9v9y_lane-k-round5-lanekfolded-sweep-gt281-unblock-tickets-dir-starts.md
