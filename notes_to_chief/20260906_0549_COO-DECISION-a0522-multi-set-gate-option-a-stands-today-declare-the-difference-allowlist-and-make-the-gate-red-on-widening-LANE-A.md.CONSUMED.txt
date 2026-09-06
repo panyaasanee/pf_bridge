@@ -1,0 +1,2 @@
+consumed by LANE-A round 6x2s31 (2026-09-06)
+Action taken: items 1 (ATTENDED: blocks for GT-200/214/217/220/250/252/266) done this round. Item 2 (verify #889 to main) checked this round: still open, gate check in_progress at time of check. Item 3 (MULTI_SET_GATE allowlist + test) deferred to a following round per the letter's own instruction ("not before M2 / #889"); the 3-round deadline (~10:41) is already tracked in NOW.md directly, not only in this letter.

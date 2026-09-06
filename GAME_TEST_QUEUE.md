@@ -7916,6 +7916,12 @@ highest `GT` ที่เปิดอยู่ก่อนใบนี้คื�
 ## GT-200 CENSUS-NPC-LEVEL-LABEL-MULTI-SCENE-001  [🟢 READY -- RECHECK **ผ่าน วัดเองโดย LANE-A (เจ้าของใบ) รอบ `mcf4qp` 2026-09-03T08:4x+07:00** บน `origin/main` (เซิร์ฟเวอร์ `f240ab4`): `git show origin/main:src/pirateforce_foundation/world_population_bg0006.py` มี `level=placement.identity.level` จริง (บรรทัด 210 · ตัวห่อคือ `world_census_level.leveled_npc_attr` บรรทัด 200) · ~~[PENDING -- โค้ดยังไม่ขึ้น `main`: PR #524 branch `claude/dazzling-volta-7ste68`]~~ · 🔴 ผู้เทสยังต้องรัน RECHECK เองก่อนบูตทุกครั้ง (ตัดสินด้วยเนื้อโค้ด ห้ามเทียบเลข commit)
 🟢 **บูตเดียวกับ `GT-210`/`GT-212` ได้และควรทำ** -- ทั้งสามใบเดินด้วย `/warp` เส้นทางเดียวกัน · 🔴 **กติกาลำดับข้อเดียว: ที่แต่ละฉาก ถ่ายภาพของใบนี้ให้เสร็จ "ก่อน" คลิกใคร** เพราะคำตอบของ `GT-210`/`GT-212` ส่ง roster ทับของเดิม]
 
+ATTENDED: RECHECK ผ่านก่อน -> บูตปกติ ไม่มีแฟล็ก scenario -> ล็อกอิน GM -> จัดมุมด้วย **คลิกขวาลาก** เท่านั้น (ห้าม Q/E) เป็นตัวเช็ค NO-CRASH -> คลิกช่องแชทยืนยัน focus -> `/warp 3` Enter รอ ~3 วิ เดินเข้าใกล้ NPC ถ่ายภาพนิ่งเต็มความละเอียด -> ซ้ำกับ `/warp 6` และ `/warp 14` (เหลือเวลาค่อยทำ `/warp 130` และฉาก 1)
+ATTENDED: แต่ละฉากบันทึก >= 4 ตัว ตัวละบรรทัด: ชื่อ · `LV` · สีป้าย (อ่านจากภาพเต็มความละเอียดเท่านั้น "none" ถ้าไม่มี) -- ฉาก 14 เพิ่มอีกหนึ่งบรรทัดเป็นตัวควบคุม: `LV` ของมอนสเตอร์ศัตรูหนึ่งตัว (Glaucoma/Lava shakers/Carlos) คาดว่าเป็น LV 105/115 ไม่ใช่ 1
+ATTENDED: ชั้น client-observable เท่านั้นที่ตัดสินใบ -- PASS ต้องเห็น `LV` ไม่ใช่ 1 และต่างกันรายตัวในฉากเดียวกัน ครบ >= 3 ฉาก โดยมีอย่างน้อยหนึ่งฉากช่วงกว้าง (3/4/5/6/14) -- ยังเห็น `LV 1` ทั้งที่ wire ผ่านแล้ว = ผลลบ/finding ไม่ใช่ FAIL ของใบนี้ (เปิด RE ใหม่พร้อมภาพนิ่ง) ระบุชื่อฉากที่พลาด -- `/warp` พังกลางทาง = NO-RESULT ของใบนี้ (เป็นหลักฐานของ GT-192)
+ATTENDED: ไม่มีแฟล็ก บูตปกติ ไม่ต้องตั้ง env หรือ tree ใด ๆ เพิ่ม
+ATTENDED: 🔴 บูตร่วมกับ GT-210/GT-212 ได้ แต่ต้องถ่ายภาพของใบนี้ให้เสร็จ "ก่อน" คลิกใครในแต่ละฉาก (คำตอบของ GT-210/GT-212 ส่ง roster ทับของเดิม) -- ถ้ารันก่อนรอบ `2p4n3h` ขึ้น main ห้ามคลิก NPC ก่อนถ่ายภาพ (เฟรมหลังคลิกไม่มีฟิลด์เลเวลจะย้อนเป็น LV 1) ถ้ารันหลังจากนั้นคลิกได้ตามปกติแต่บันทึกไว้ว่ารันบน main รุ่นไหน
+
 > เปิดโดย LANE-A รอบ `7ste68` 2026-09-02T02:55+07:00 ตามใบมอบหมาย `notes_to_chief/
 > 20260901_2358_CHIEF-TO-LANE-A-codex-gt192-lv1-census-level-encode-assigned.md`
 > · **LANE-A บริโภคผลเอง** · numbering: คำสั่งค้นหาคืน `199` ⇒ ใบนี้ `200` · บูต/DB/teardown ตาม
@@ -8328,6 +8334,12 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
 
 ## GT-214 CHOOSE-NPC-SCENE2-CLICK-ANSWER-AND-HOSTILE-SAFETY-001  [🟢 READY -- โค้ดขึ้น `main` แล้ว (`server#591` merge 2026-09-02T11:31Z) วัดเองโดย LANE-A รอบ `4uztfj` · ~~[BLOCKED -- โค้ดยังไม่ขึ้น main]~~ · 🔴 **RECHECK ยังต้องรันก่อนบูตทุกครั้ง** และข้อ 2 **เปลี่ยนสตริง** ในรอบ `4uztfj`: โทเคน `dead_monster_needs_a_mob_death_body` ถูกแทนด้วย `clicked_body_is_dead_needs_a_mob_death_body` (COO-DECISION 20260902_1945 ย่อการ์ด 'ตายแล้ว' ให้ตัดสินเฉพาะร่างที่ถูกคลิก) ⇒ สตริงใหม่ขึ้น main พร้อม PR รอบ `4uztfj` เท่านั้น · ถ้า RECHECK ข้อ 2 ยังไม่เจอสตริงใหม่ **ยังบูตได้ตามปกติ** ผลไม่เปลี่ยน แต่ให้จดว่าบูตบนคอมมิตก่อนรอบนั้น · 🔴 **แก้ข้อ (ข) และคำทำนายข้อ 10 ในรอบ `qa86im`** (ใบ chief `20260903_0300`): จุดเรียกส่ง ledger แล้วตั้งแต่ `server#619` ⇒ บรรทัด `..._ANSWERED` เปลี่ยนสองช่องเอง และรอบ `qa86im` เพิ่มช่องที่สาม `dead_as_corpse=` · **เกณฑ์ตัดสินไม่เปลี่ยนสักข้อ** ใบนี้ยังห้ามฆ่ามอน ⇒ สามช่องท้ายยังต้องเป็น 0]
 
+ATTENDED: บูต DB สำเนา `state\run_gt214_<stamp>.sqlite3` เท่านั้น (ห้ามเปิด canonical) เซิร์ฟก่อนไคลเอนต์ทีหลัง ไม่มีแฟล็ก scenario ใด ๆ, เก็บคอนโซล `2>&1` ทั้ง stdout+stderr -> โฟกัสช่องแชทจริง พิมพ์ `/warp 2` Enter รอ ~3 วิ -> ถ่าย `S02-BEFORE` (คลิกขวาลากจัดกล้องได้ ไม่ยิงอะไร) -> คลิกซ้าย actor **หนึ่งครั้งก่อนเดิน** (คาดว่าเงียบ = ผลที่ถูกต้อง ไม่ใช่ FAIL) แล้วเดินหนึ่งก้าว (`W`/`S`) หลังจากนั้นห้ามเปลี่ยน facing อีกนอกจากก้าวที่สั่ง
+ATTENDED: หาโทเคนคอนโซล -- คลิกก่อนเดิน: ต้องเจอ `LANE_A_CHOOSE_NPC_SCENE2_DECLINED reason=no_player_position_walk_one_step` และไม่มี `..._ANSWERED` คู่กัน · คลิกหลังเดิน (สามครั้งคนละ actor): ต้องเจอ `LANE_A_CHOOSE_NPC_SCENE2_ANSWERED placement=<n> visible=97 hostile=12 ...` ทุกครั้ง โดยช่อง `wounded=` `dead_at_ceiling=` `dead_as_corpse=` ต้องเป็น `0` ทั้งสาม (ใบนี้ห้ามตีมอน) · ถ่าย `S02-AFTER` x3, `S02-MOB-BEFORE/AFTER`, `S02-COL+2s/+30s` เต็มความละเอียด พร้อมจดสีป้ายชื่อทุกป้ายทุกภาพ (เขียน `none` ถ้าไม่มีสี ห้ามอนุมานสาเหตุ)
+ATTENDED: ตัดสิน PASS/FAIL ที่ **ชั้น client-observable เท่านั้น**: `S02-BEFORE` เห็นฝูง actor ยืนจริง, `S02-AFTER` ตัวที่ถูกคลิกหันมาหาเราและมีชื่อ/แถบ HP ขึ้น (ชื่อว่าง = บันทึกไม่ใช่ FAIL อัตโนมัติ), `S02-MOB-AFTER` มอนยังเป็นมอนไม่กลายเป็นชาวบ้านไม่หาย, `S02-COL+30s` ครบ 30 วิไม่มีหน้าต่างบทสนทนา/เควสต์และยังอยู่ฉาก 2 -- ชั้น wire/DB (grep คอนโซล, sha256, integrity_check) พิสูจน์ได้แต่ **ตอบไม่ได้ว่าเห็นอะไรบนจอ** ห้ามใช้แทนกัน · มี `..._ANSWERED` ครบแต่จอไม่ขยับ = ผลลบที่ถูกต้อง ไม่ใช่ FAIL · ไม่มี `LANE_HOOK_FIRED` เลยตอนคลิก = `NO-RESULT`
+ATTENDED: บูตต้องเป็นโค้ดที่ RECHECK ผ่านครบสามข้อบน `origin/main` เท่านั้น (ว่าง/แดง = ยังคง BLOCKED ห้ามบูต) จดสตริงเวอร์ชันที่เจอจริง (`hp=ceiling`/`from_ledger=0` ของคอมมิตเก่า หรือ `hp=ledger from_ledger=12 dead_as_corpse=0` ของ `server#619`/รอบ `qa86im`) พร้อม branch/commit ที่บูต ทั้งสองไม่ใช่ FAIL
+ATTENDED: 🔴 STOP ทันทีถ้ามีหน้าต่างบทสนทนา/เควสต์โผล่ หรือรู้ตัวว่าอยู่คนละแมพหลังคลิก -- ปิดไคลเอนต์ รายงานทันทีเป็น FAIL, ห้ามใช้ `Q`/`E` เป็นตัวเช็ค NO-CRASH ให้ใช้คลิกขวาลากกล้องเท่านั้น
+
 > เปิดโดย LANE-A (WORLD) รอบ `cu1il6` 2026-09-02T17:40+07:00 · **LANE-A บริโภคผลเอง**
 > numbering: ตัวนับร่วมกับ `CLIENT_RE_QUEUE.md` -- สูงสุดตอนเปิด = `GT-213` (`RE` สูงสุด = 210) ⇒ ใบนี้ `214` · รันคำสั่งกฎ ② ซ้ำตอน rebase
 > 🔴 **ใบนี้ไม่แซงคิวบูต** ของ `FROM_CHIEF_R305`: `GT-207` -> `GT-193` -> `GT-205` -> `GT-204` (ท้ายสุด) · ใบนี้ต่อ **หลัง** สี่ใบนั้น
@@ -8555,6 +8567,12 @@ Codex ไม่ตรงกับสิ่งที่ไคลเอนต์�
 
 ## GT-216 MULTI-VITAL-WALKER-MAKES-GROUND-PICKUP-PLAYABLE-001  [✅ **PASS สองชั้น · OBSERVER_CONFIRMED 2026-09-03T16:51+07:00** (chief รอบ `pk14rf`/R326 · หนี้ค้างจาก `COO-DECISION 20260903_1743` ข้อ 4... -- archived 20260905 (closed; verbatim in `archive/GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md`)
 ## GT-217 ATLANTIS-OCEAN-PANEL-CENSUS-ON-A-GM-SINGLE-USE-ENTRY-001  [🟢 READY -- merge ที่รอเกิดขึ้นจริงแล้ว (`pirate-force-server#606` merged 2026-09-02T23:20+07:00) · ผู้เทสรัน RECHECK สามข้อข้างล่างก่อนบูตเสมอ]
+
+ATTENDED: RECHECK สามข้อผ่านก่อนเสมอ (`WORLD_CENSUS_BG3001` + `scene_is_sanctioned_for_a_gm_entry` เจอบน `origin/main` + pytest เขียวทั้งชุด) แล้วค่อยบูต -> ล็อกอิน GM เข้าฉากบ้านถ่าย `S00-HOME` -> คลิกช่องแชทยืนยัน focus จริง พิมพ์ `/warp 126` Enter รอ ~3 วิ (ทางเข้าเดียว = single-use grant `CORE-REQUEST-GM-038` เพราะฉาก 126 `login_entry_allowed=false` และผู้เทสห้ามพลิกสวิตช์นั้น) -> **ล็อกเอาต์แล้วล็อกอินกลับด้วยตัวละครเดิม** เพื่อลงสเตจที่ spawn `(3050,232,90)` ถ่าย `S126-A/B/C` (หมุนด้วยคลิกขวาลากเท่านั้น) -> เดินหนึ่งก้าว (`W`/`S`) แล้วคลิกซ้ายเลือก actor 1-3 ตัวถ่าย `S126-CLICK1..3` (ห้ามตี ห้ามใช้สกิล มี Jellyfish King ในฉาก)
+ATTENDED: คัดคอนโซลรวม `2>&1` หา `WORLD_POP_HANDOFF scene=126` ตามด้วย `WORLD_CENSUS_BG3001 assembled=36/38 ...` + บรรทัด actor ครบ 36 บรรทัด + `BG3001_UNSHIPPED` สองบรรทัด (placement=28, placement=37) + คลิกตอบ `LANE_A_CHOOSE_NPC_SCENE126_ANSWERED`/label `FACE_P<n>` (คลิกแรกก่อนก้าวเดินถูกปฏิเสธด้วย `no_player_position_walk_one_step` = ไม่ใช่ FAIL) · เห็น `COLUMBUS_CHOOSE_NPC_WRONG_SCENE` ก็คัดลงเฉย ๆ ไม่ใช่ STOP
+ATTENDED: ผลตัดสินอยู่ที่ **client-observable เท่านั้น** (คอนโซลตอบไม่ได้ว่าอะไรถูกวาดบนจอ) -- นับจำนวน actor ที่วาดจริงจาก `S126-A/B/C` เขียนเลขตรง ๆ, บรรยายก้อนเกาะ `MAP_ISLAND_01` สี่ก้อนวาดออกมาเป็นอะไรตามที่เห็นห้ามเดาสาเหตุ, จดว่าเห็นป้ายลอยของมาร์กเกอร์ Tornado กี่ป้ายไหม (นี่คือคำทำนาย ทำนายผิด = finding ไม่ใช่ล้มเหลว), และ **สีป้ายชื่อทุกป้ายทุกภาพหนึ่งบรรทัดต่อป้าย** (เขียน `none` แทนเว้นว่าง อ่านจากภาพนิ่งเต็มความละเอียดเท่านั้น จดสีอย่างเดียวห้ามอนุมานสาเหตุ)
+ATTENDED: บูต = มาตรฐาน ไม่มีแฟล็ก scenario ใด ๆ + `-SecondPasswordMode bypass` + บัญชี GM จาก `config/gm_accounts.json` บนสำเนา DB `state\run_gt217_<stamp>.sqlite3` เท่านั้น (ห้ามเปิด canonical เด็ดขาด จด sha256 ก่อน/หลังทั้งสำเนาและ canonical) -- เซิร์ฟเวอร์บูตใหม่สดก่อนไคลเอนต์เสมอ, ไม่วาปสดเพราะฉาก 126 ไม่มี marker ปลายทาง จอไม่เปลี่ยนฉากตอน `/warp` = ผลที่คาดไว้ไม่ใช่ FAIL
+ATTENDED: STOP ทันทีถ้าเห็นหน้าต่างบทสนทนา/เควสต์ หรือรู้ตัวว่าอยู่คนละฉากหลังคลิก (ปิดไคลเอนต์รายงานทันที ห้าม retry) -- ใช้คลิกขวาลากหมุนกล้องเป็นตัวเช็ค NO-CRASH เท่านั้น ห้ามใช้ `Q`/`E` (ยิง `TargetPosVital` ออกสาย) -- ปิดใบด้วย `OBSERVER_CONFIRMED: <timestamp>` เท่านั้น หลักฐานครบแต่ไม่มีลายเซ็นคน = `AWAITING-OBSERVER` ไม่ใช่ PASS และไม่ใช่ FAIL
 
 > 🔴 **แก้ป้ายโดย LANE-A รอบ `gx7xtp` 2026-09-02T23:4x+07:00 · อ่านสองย่อหน้านี้ก่อนนับ actor บนจอ**
 > 1. **ตัวบล็อกหมดแล้ว**: PR ของรอบ `l6at2v` merge เข้า `main` แล้ว ⇒ ป้าย `[BLOCKED]` เดิมผิดตั้งแต่เวลานั้น · เกณฑ์ RECHECK สามข้อข้างล่าง **ไม่เปลี่ยน** ยังต้องรันก่อนบูต
@@ -8795,6 +8813,12 @@ RECHECK: (ตัดสินด้วยเนื้อโค้ดบน `origi
 ## GT-219 GM-IMAGE-CHECKER-MEETS-TWO-REAL-DLLS-001  [✅ PASS ทั้งสองขั้น -- ปิดใบ · ขั้น A `20260904_1508` (ชิ้น (ก) ผ่านครบ · ชิ้น (ข) `A2 NO-RESULT`... -- archived 20260906 (closed; verbatim in `archive/GAME_TEST_QUEUE_ARCHIVE_20260906_closed.md`)
 
 ## GT-220 GROUND-DROP-SURVIVES-A-CLICK-ON-A-TOWNSPERSON-001  [🟢 READY -- เงื่อนไขข้อ 1 ของใบสั่ง chief (`20260903_0505` ข้อ ④) ผ่านแล้ว: RECHECK 1 วัดเองโดย LANE-A รอบ `umlyof` บน `origin/main` (`server#625`) ⇒ เปิดเป็น READY · ผู้เทสรัน RECHECK เองก่อนบูตทุกครั้ง]
+
+ATTENDED: บูตปกติบน `main` ไม่มีแฟล็ก `--*-scenario` ใด ๆ ด้วย `-SecondPasswordMode bypass` + บัญชี GM -> เข้าเกม พิมพ์ `/warp 2` เปล่า (คลิกช่องแชทยืนยัน focus จริงก่อน) -> ฆ่ามอนให้ของตกพื้นอย่างน้อย 3 ชิ้น ห้ามเดินไปเก็บ ถ่าย S0 ทันที -> คลิกซ้ายที่ชาวเมือง/NPC (ไม่ใช่ของที่ตก) หนึ่งครั้ง รอ 3 วิ ถ่าย S1 แล้วทำซ้ำอีกสองครั้งกับ NPC คนละตัวถ้ามี ถ่าย S2 หลังคลิกสุดท้าย ทั้งหมดต้องจบภายใน 90 วินาทีจาก S0 (ของมีอายุ 120 วิ)
+ATTENDED: หาโทเคนคอนโซล (stdout+stderr รวม `2>&1`): `GROUND_UNDER_PUBLICATION_REACHED lane_hooks.choose_npc_response.scene_2` ต้องมี · ต้องไม่มี `GROUND_ACTORS_LIVENESS_UNKNOWN` ของฉาก 2 เลยไม่ว่าเหตุผลใด · ดู `GROUND_ROWS_SWEPT_BY_READ` ว่ามีบรรทัดจำนวน >0 ภายใน 90 วิแรกหรือไม่ · `LANE_A_CHOOSE_NPC_SCENE2_ANSWERED` ต้องมีหนึ่งบรรทัดต่อคลิก (สามคลิก)
+ATTENDED: ตัวตัดสินจริงคือชั้น client-observable เท่านั้น (ห้ามอนุมานจากคอนโซล): ของทุกชิ้นที่เห็นใน S0 ต้องยังเห็นใน S1 และ S2 จากมุมกล้องเดิม แบบนับทีละชิ้นแบบ full-res -- หายแม้ชิ้นเดียวหลังคลิกใด = FAIL ชั้นนี้ (จดว่าหายกี่ชิ้นหลังคลิกที่เท่าไร) · ของครบ = PASS ชั้นนี้ · ถ้ามี `GROUND_ACTORS_LIVENESS_UNKNOWN` ของฉาก 2 แม้บรรทัดเดียว (wire ชั้น 2 ตก) หรือของหมดอายุเกิน 90/120 วิ หรือไม่มีของตกเลยตั้งแต่แรก = NO-RESULT ไม่ใช่ FAIL
+ATTENDED: ไม่มีแฟล็ก `--*-scenario` ใด ๆ ใช้ DB สำเนา (`state\run_gt220.sqlite3`) เท่านั้น ห้ามเปิด canonical -- ต้องมี `-SecondPasswordMode bypass` + บัญชี GM ใน `config/gm_accounts.json`
+ATTENDED: 🔴 ห้ามพิมพ์ตัวอักษรตลอดรอบยกเว้น `/warp 2` ในขั้นที่ 1 ขั้นเดียว (ตัวอักษรตอนช่องแชทไม่โฟกัส = ฮอตคีย์) จัดกล้องด้วยคลิกขวาค้างลากเท่านั้น (ไม่เปลี่ยนการหันหน้าตัวละคร) -- NO-CRASH check ก็ใช้คลิกขวาค้างลากเท่านั้น ห้ามใช้ Q/E · ต้องจดสีป้ายชื่อทุกป้ายทุกภาพจาก full-res เท่านั้น (ไม่มีป้าย = `none`)
 
 RECHECK (ทั้งสองข้อต้องผ่าน ไม่ผ่านข้อใดข้อหนึ่ง = ไม่บูต ตีกลับเป็น `BLOCKED` แล้วเขียนถึง chief)
 `git -C pirate-force-server fetch` ก่อน · สองคำสั่งนี้ต้องพิมพ์บรรทัดที่ลงท้ายด้วย `:1`
@@ -10000,30 +10024,29 @@ owner/consumer of result = LANE-CS -- runs attended, piggybacked in the same att
 (same class_id=1/level=1 character, saves a second scheduled sitting) -- NOT the same server process as
 GT-243 (see BOOT ORDER note, GT-243's own server args explicitly forbid any `--*-scenario` flag)
 
-> NUMBERING NOTE: `GT-249`/`RE-249` = 0 hit ทั้งสามที่ก่อนวาง (chief รอบ `epkucn`/R344) ใบนี้ไม่แตะ/ไม่
-> reopen/ไม่ supersede `GT-058`/`GT-059`/`GT-064` (archived CLOSED — คำถามคนละอัน: หน้าต่างเปิดหรือไม่)
-> หรือ `GT-116` (CLOSED PASS 2026-08-28, `GAME_TEST_QUEUE.md:5183`: หน้าต่างเปิดสำหรับตัวละคร
-> class_id=1/level=1 ที่มี 0 entries) หรือ `GT-243` (PENDING, คำถามคนละอัน: hotbar dispatch producer ของ
-> สกิล 99) ใบนี้เป็นใบใหม่ เปิดตาม `COO-DECISION 20260904_2154` ตอบจดหมาย LANE-CS เอง
+ATTENDED: บูต `--learn-skill-result-hypothesis-scenario ...learn_sweep.json` (คนละบูตกับ GT-243) Gladiator lv1 กด K ถ่ายภาพ baseline (S-BASE-K)
+ATTENDED: focus แชท พิมพ์ `SKILLCONTENT` (12 ตัว) Enter ดึง focus ออก รอ >=20s กด K ถ่ายภาพ (S-FINAL-K)
+ATTENDED: ผ่าน = S-FINAL-K มี 4 รายการ: VIP Strive Jump/Gladiator Basic Training/Normal Attack/Strive Jump
+ATTENDED: ไม่ผ่าน = 0 รายการ/ไม่ตรงชื่อแม้เฟรม 6 ออกสะอาดแล้ว = finding ไม่ใช่ FAIL (ปิดคำถามเปิดในโมดูลรอบเดียวกัน P3)
+ATTENDED: gate 0/1/2 ผ่านก่อนบูต ห้ามเดา SHA
+
+> NUMBERING NOTE: `GT-249`/`RE-249` = 0 hit ก่อนวาง (chief `epkucn`/R344) -- ไม่ reopen/supersede `GT-058`/
+> `GT-059`/`GT-064`/`GT-116`/`GT-243` (คำถามคนละอัน) เปิดตาม `COO-DECISION 20260904_2154` ตอบจดหมาย
 > `notes_to_chief/20260904_2113_LANE-CS-TO-COO-backup-item1-read-plus-gt116-reopens-skill-window-content-question.md`
 
 ### source (links only)
 - `notes_to_chief/20260904_2154_COO-DECISION-skill-window-content-gt-approved-piggyback-gt243-LANE-CS.md` --
-  the approval: send 0x673C with REAL skill ids from class_id=1's own starting kit (not arbitrary probe
-  values) to a character that already satisfies GT-116's precondition; PASS = skill window (K) populates
-  with exactly the 4 starting skills of that class; attended-only, production_allowed stays False; STOP if
-  the client closes; a result that refutes HYP-PF-033's content claim closes/rewords the parent module's
-  open question in the same round (PANYA-DECISION 20260903_1934).
-- `rounds/CS_20260904_2113_fv5xnu_backup-item1-read-plus-gt116-reopens-skill-window-content.md` -- the
-  finding that reopened this: GT-058/GT-059/GT-064 (archived CLOSED) could never answer "does the window's
-  CONTENT track anything the server sends" because in every one of those sessions the window never opened at
-  all (class was always 0). GT-116 removed that blocker on 2026-08-28 but GT-116 itself explicitly says "[no
-  claim] that the skill list shown is a correct Gladiator kit -- not yet measured" and no ticket since has
-  asked the content question.
-- GT-116 (`GAME_TEST_QUEUE.md:5183`, CLOSED PASS 2026-08-28): the window opens for a class_id=1/level=1
-  character, 0 entries at level 1 is normal. This entry's precondition IS GT-116's own proven precondition.
-  class_id=1 is presently wired into every flagless production login (CORE-REQUEST-022), so an ordinary
-  character already satisfies it -- no special character build is required beyond what GT-243 already needs.
+  the approval: send 0x673C with REAL skill ids from class_id=1's own starting kit (not probe values) to a
+  character satisfying GT-116's precondition; PASS = skill window (K) populates with exactly the 4 starting
+  skills; attended-only, production_allowed stays False; STOP if client closes; a refuting result
+  closes/rewords the parent module's open question same round (PANYA-DECISION 20260903_1934).
+- `rounds/CS_20260904_2113_fv5xnu_backup-item1-read-plus-gt116-reopens-skill-window-content.md` -- reopened
+  this: GT-058/GT-059/GT-064 (archived CLOSED) never answered "does the window's CONTENT track anything the
+  server sends" (window never opened in those sessions, class always 0). GT-116 removed that blocker
+  2026-08-28 but itself says "[no claim] the skill list is a correct Gladiator kit -- not yet measured".
+- GT-116 (`GAME_TEST_QUEUE.md:5183`, CLOSED PASS 2026-08-28): window opens for class_id=1/level=1, 0 entries
+  at level 1 is normal -- this entry's precondition IS that proven precondition. class_id=1 is wired into
+  every flagless production login (CORE-REQUEST-022) -- no special build needed beyond what GT-243 needs.
 - `src/pirateforce_foundation/learn_skill_result_hypothesis.py` (HYP-PF-033, vital 0x673C) -- the module this
   entry exercises. Its own docstring nonclaims (read before using anything from it): the three record member
   positions (record_u32_0 / record_u16_4 / record_u32_8) have UNKNOWN semantics, the trailing u8 has UNKNOWN
@@ -10275,6 +10298,12 @@ open) so the module's own text stops implying an unanswered question this ticket
 ## GT-254 ISLAND-155-CONTACT-TRIGGER-FRAME-CAPTURE-001  [⛔ **CLOSED = `CANCELLED - refuted by KA1A-R318 §3 (Slave Market Island/แถว 155 อยู่ฉาก 304 Dark Fog Sea ไม่ใช่ 126)`** -- ปิดโดย chief (LANE-E)... -- archived 20260905 (closed; verbatim in `archive/GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md`)
 ## GT-250 NAME-LABEL-PERSISTS-AFTER-WALK-AWAY-001  [🟢 **READY** -- บูตได้ทันที ไม่มีธง ไม่รอโค้ด · **เจ้าของใบ/ผู้บริโภคผล = LANE-A** (ป้ายชื่อ / population reconcile) · ผู้เปิดใบ = chief (LANE-E) รอบ `kj0s6r`/R346 2026-09-05T02:0x+07:00 ตาม `COO-DECISION 20260904_2143` ข้อ 3 และคำตัดสิน COO ใน `NOW.md` 2026-09-05 01:45 (กวาด RE→GT ของ ka1-A) · ผู้รัน = Panya (attended) ~5 นาที · **ลำดับที่ COO เคาะ: ใบนี้เป็นข้อ 1 ใน 4 ใบ** (GT-250 > GT-251 > GT-252 > GT-253) · **ต่อท้ายคิว `รอเครื่องคุณ` ปัจจุบัน ไม่ใช่หัวคิว** (GT-247 / GT-249 / GT-245 อยู่ก่อน · ลำดับในคิวนั้นเป็นสิทธิ์ COO) · ไม่บล็อกสายใด · **ไม่มีการตีมอนในใบนี้** จึงไม่ชนกฎ "ห้ามใบเทสตีมอนจนกว่า P-2 จะปิด"]
 
+ATTENDED: บูตเซิร์ฟไม่มีแฟล็กใด ๆ (ไม่ใส่ `--population-scenario`) ตามหัวใบ บูตได้ทันที -> ล็อกอินตัวละครที่ Port Royal -> ยืนนิ่งที่จุดเกิดถ่าย `S0-SPAWN` จดพิกัด HUD + ทุกป้ายในเฟรม -> NO-CRASH check ด้วยคลิกขวาลากกล้องเท่านั้น (ห้าม `Q`/`E`) -> เดินออกด้วย `W/A/S/D` จนไม่มี NPC จาก `S0` เหลือในเฟรม +5 วิ ถ่าย `S1-FAR` -> เดินกลับพิกัดเดิม นิ่ง 3 วิ ถ่าย `S1-BACK` -> ทำซ้ำอีก 2 รอบ (`S2`/`S3`) · ห้ามคลิกอะไรทั้งสิ้นตลอดใบ (คลิก NPC/พื้น/มินิแมปทำให้เซิร์ฟเวอร์ประกอบสำมะโนใหม่ ปนเปื้อนผล)
+ATTENDED: ดูคอนโซลว่ามีเฟรม `NPCAttr`/`BasicAttr` ออกจากเซิร์ฟเวอร์ระหว่างเดินหรือไม่ (นับจำนวนให้ตรง) และดูบนจอว่าป้ายชื่อ (เขียว) แต่ละตัวใน `S0-SPAWN` ยังอยู่ใน `S1-BACK`/`S2-BACK`/`S3-BACK` หรือหาย · จดบรรทัดข้อความป้าย+สีครบทุกป้ายทุกภาพ (ไม่มี = เขียน "none" ห้ามเว้นว่าง)
+ATTENDED: PASS = ป้ายชื่อใน `S3-BACK` ครบเท่ากับ `S0-SPAWN` ทุกตัว และมี `OBSERVER_CONFIRMED` กำกับ · NEGATIVE (มีค่าเท่าผลบวก) = หายอย่างน้อยหนึ่งตัว -> ระบุตัวที่หาย แล้วเปิดใบ RE ใหม่ ห้ามรันใบนี้ซ้ำแบบเดา · ไม่มี `OBSERVER_CONFIRMED` = ชั้น client-observable ยังไม่ PASS ไม่ว่าชั้น wire จะสวยแค่ไหน
+ATTENDED: ไม่มีแฟล็กใด ๆ ไม่มีธง ไม่รอโค้ด บูตทันทีตามหัวใบ (production path ล้วน ไม่มี `--population-scenario`)
+ATTENDED: STOP ทันทีถ้าไคลเอนต์ปิดตัวหรือมีหน้าต่างบทสนทนา/error เด้งขึ้นเอง บันทึกขั้นที่หยุดแล้ว teardown อยู่ดี · ถ้าเผลอคลิกให้จดเวลาไว้ตรง ๆ อย่าลบรอบทิ้ง
+
 - objective (ข้ออ้างเดียว): บนบิลด์ปัจจุบัน หลังผู้เล่นเดินออกจากจุดเกิดจนตัวละคร/NPC ชุดแรกหลุดจอ แล้วเดินกลับมาที่เดิม **ป้ายชื่อ (เขียว) ที่เห็นตอน T0 ยังอยู่ครบหรือไม่** -- นี่คือชั้น client-observable ของ `RE-138` ที่ใบนั้นเขียนเองว่า "ไม่เคยเปิด" (ไม่มีใครเดินไปกลับแล้วดูป้ายในบิลด์นี้) ใบนี้**ไม่**ถามว่าทำไม และ**ไม่**รื้อชั้น wire ของ `RE-138` ที่ปิดไปแล้ว
 
 - db (สำเนาเสมอ ห้ามเปิด canonical):
@@ -10410,6 +10439,12 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt251_<stamp>.sqlite3
 
 - links: `CLIENT_RE_QUEUE.md` (`RE-236` · ข้อ (ข) และวิธีปิดที่ `RE-119` T4 กำหนดไว้เอง) · `GT-246` (ANSWERED · payload มินิแมป 25 B) · `GT-120` (PASS · เส้นทางคลิก `M` -> เลือกเป้า -> GO!) · `external/PF_SERIALIZER_FIELDS.tsv:5521-5528` · `notes_to_chief/20260904_1226_LANE-UI-RE-TICKET-tracepath-record0-semantic-needs-attended-differential.md` · `notes_to_chief/20260905_0106_KA1A-BACKSWEEP-*.md` หมวด ก. ข้อ 2
 
+ATTENDED: กด `M` เปิดแผนที่ คัด list ตัวต่อตัว (ชื่อ+ลำดับแถว+หมวด) แล้วเลือกเป้า A (จดชื่อ/ลำดับ/หมวด) กด **GO!** ครั้งเดียว จดเวลา `T_GO_A` ถ่าย `S2-AFTER-GO-A` -- ทำซ้ำกับเป้า B ที่ชื่อ/ลำดับ/หมวดต่างจาก A ชัดเจน จด `T_GO_B` ถ่าย `S3-AFTER-GO-B` แล้วคลิกมินิแมป 1 ครั้งเป็น control
+ATTENDED: จับเฟรม `CTracePathReqVital 0x4391` สองเฟรม (A/B) ดูค่า `u16@+0x14` ของแต่ละเฟรมเทียบกับ `QUESTDATA_TH__QUEST.n_ID`/`CONSTDATA_TH__MOBS.n_ID`/เลขลำดับแถวที่จดไว้
+ATTENDED: PASS ชั้นจอ = ข้อความสีส้มขึ้น/หายตามที่คาด ไม่ค้าง ไม่ error ทั้งสองครั้งกด GO! + บรรทัดสีป้ายครบทุกภาพ + `OBSERVER_CONFIRMED: <ISO+07:00>` -- ไม่มีลายเซ็นนี้ = ไม่ PASS ไม่ว่าเฟรมจะครบแค่ไหน
+ATTENDED: บูตมาตรฐาน ไม่มีแฟล็ก `--*-scenario` ใด ๆ (dispatch `0x4391` เป็น production) เปิด capture root ใหม่ `capture_gt251_<stamp>\` ครอบทั้งเซสชัน
+ATTENDED: หน้าต่างแผนที่มีแถวเดียว/กด GO! ไม่ได้ = หยุด บันทึกภาพ รายงาน "เดินไม่ถึงจุดวัด" (ไม่ใช่ FAIL/NO-RESULT)
+
 - result:
   (ว่าง -- ผู้เทสกรอก)
 
@@ -10419,6 +10454,12 @@ py -3 -u -m pirateforce_foundation.app --db state\run_gt251_<stamp>.sqlite3
 ---
 
 ## GT-252 COLUMBUS-OPTION2-BORNAGAIN-CLICK-CAPTURE-001  [🟢 **READY** -- บูตได้ทันที ไม่มีธง · **รันบนสำเนา DB ของรอบ (DB run-copy) เสมอ** · **เจ้าของใบ/ผู้บริโภคผล = LANE-A** (สายที่ปิด `RE-112` และเป็นเจ้าของ `CORE-REQUEST-019`) · ผู้เปิดใบ = chief (LANE-E) รอบ `kj0s6r`/R346 ตาม `COO-DECISION 20260904_2143` ข้อ 3 และคำตัดสิน COO `NOW.md` 2026-09-05 01:45 · ผู้รัน = Panya (attended) ~3 นาที · **ข้อ 3 ใน 4 ใบ** (GT-250 > GT-251 > GT-252 > GT-253) · **ต่อท้ายคิว `รอเครื่องคุณ` ไม่ใช่หัวคิว** · ไม่บล็อกสายใด · ค่าต่ำแต่จริง: `BUILD_IMPACT` ของ `RE-112` คง quest 3205 เป็น refusal "จนกว่าจะมี capture จริง" · **ไม่มีการตีมอน**]
+
+ATTENDED: บูตเซิร์ฟบนสำเนา DB run-copy เสมอ (`state\run_gt252_<stamp>.sqlite3` จาก `pirateforce.sqlite3`) ไม่มีแฟล็ก scenario -> ต้องยืนฉาก Port Royal (scene 1) และเปิดบทสนทนา Columbus มาก่อน -> เดินเข้าหาด้วย `W/A/S/D` คลิกซ้าย Columbus 1 ครั้งให้หน้าต่างเปิด -> คัดข้อความสองบรรทัดของตัวเลือก แล้ว **คลิก option 2 (บรรทัดที่สอง) ครั้งเดียว** จดเวลา `T_CLICK` -- ห้ามคลิก option 1 เด็ดขาด (วาร์ปฉาก 17 ทำให้ใบเสียทั้งใบ)
+ATTENDED: ไม่กดอะไรอีก 10 วินาที ถ่าย `S2-A1/A2/A3` ที่ ~1/3/10 วิ แล้วดูคอนโซลหา `COLUMBUS_QUEST3205_BORNAGAIN_REFUSED reason=no_home_marker_persistence_row_evidence` หนึ่งครั้ง (`2>&1` รวม stdout/stderr) -- เห็น `reason=not_home_scene` แทน = precondition พัง บันทึกเป็น NO-RESULT ไม่ใช่ FAIL · ทำ NO-CRASH check ด้วยคลิกขวาลากกล้องเท่านั้น ห้ามใช้ `Q`/`E`
+ATTENDED: ผ่านชั้น client-observable (คำตอบหลักของใบ) = หลังคลิก option 2 ใน 10 วินาที ไคลเอนต์ไม่ค้าง ไม่ error (ปฏิเสธเงียบตามที่ตั้งใจ) · NEGATIVE ที่มีค่าเท่ากัน = ค้าง/error/รอ ack จริง · ไม่มี `OBSERVER_CONFIRMED: <ISO+07:00>` = ชั้นนี้ไม่ PASS ไม่ว่าชั้น wire/DB จะครบแค่ไหน
+ATTENDED: จดบรรทัดสีป้ายชื่อทุกป้ายทุกภาพ (บรรทัดละป้ายต่อภาพ "none" ไม่เว้นว่าง อ่านจากภาพเต็มความละเอียดเท่านั้น ห้ามอนุมานสาเหตุของสี) -- ต่างจากภาพเซิร์ฟเวอร์เดิมให้ลง `REAL_SERVER_DIVERGENCE.tsv`
+ATTENDED: STOP ทันทีถ้าไคลเอนต์ปิดตัว หรือจอวาร์ปไปฉากอื่น (โดนคลิก option 1) หรือเจอ `ErrorData` -- บันทึกตามจริงแล้ว teardown อยู่ดี ห้ามคลิก option 2 ต่อในบูตนั้น
 
 - objective (ข้ออ้างเดียว): กด option 2 ของบทสนทนา Columbus ("ตั้งฐานทัพที่ Port Royal" = quest 3205 / Q_BORNAGAIN) **หนึ่งครั้ง** บนเซิร์ฟเวอร์วันนี้ แล้วเส้นทางปฏิเสธของ `CORE-REQUEST-019` ทำงานตามที่เขียนไว้จริงหรือไม่ -- คือ **มีเฟรม `QuestOperateVital` ขาเข้าจริง และไม่มีไบต์ตอบกลับเลยบนเส้นทางนั้น** โดยที่ไคลเอนต์**ไม่ค้าง ไม่ขึ้น error** (นี่คือ attended capture ที่แคบที่สุดที่ใบผล `RE-112` เสนอไว้เอง)
 
@@ -10983,6 +11024,12 @@ findstr /N /C:"GM_WARP_SEND_OBSERVERS" /C:"SEND_FAILED" /C:"GM_WARP_SCENE_ROLLED
   `pirate-force-server/src/pirateforce_foundation/inventory.py:39-49` (`INITIAL_BACKPACK`) · `pirate-force-server/src/pirateforce_foundation/store.py:575,674` (`_insert_initial_backpack`) ·
   `ATTENDED_SESSION_RUNBOOK.md` + `BRIDGE_BOOT_PROCEDURE.md` + `TEMPLATE_teardown_generic.ps1`
 
+ATTENDED: สร้างตัวละครใหม่ 1 ตัว ไล่คลิก/ไล่เมนูหาทางเข้า "แผงขายเอง" (เพดาน 15 นาที/20 คลิก) -- เจอแล้วเปิดแผง วางไอเทม 1 ชิ้น ตั้งราคา trial A แล้วเปลี่ยนเป็นราคา trial B ในเซสชันเดียวกัน (ห้ามปิด-เปิดแผงใหม่) -- แยกรอบไล่คลิกหา "คลังกิลด์" (เพดาน 10 นาที/15 คลิก) เปิดแล้วฝากไอเทม 1 ชิ้นแล้วถอนกลับ
+ATTENDED: ดูเฟรม `StallStartVital 0x30FE`/`StallOpenVital 0x2A3E`/`StallOperateVital 0x3DE4` (สองเฟรม trial A/B) และ `GCSS_GuildStorageOpenVital 0x8B66`/`GCGS_GuildStorageCmdVital 0x7F17` (ฝาก/ถอน) -- ใบนี้ไม่ตัดสินว่า `+0x20` แปลว่าราคา (เป็นของ `RE-261`)
+ATTENDED: PASS ชั้นจอ = ภาพ `S1-PRICE-A`/`S1-PRICE-B` อ่านตัวเลขราคาต่างกันได้ชัด + แผง/คลังเปิดจริงเห็นไอเทมย้าย (หรือข้อความปฏิเสธตามตัวอักษรถ้าเปิดไม่ได้ = ผล `E`) + บรรทัดสีป้ายครบทุกภาพ + `OBSERVER_CONFIRMED: <ISO+07:00>` -- ไม่มี = ไม่ PASS
+ATTENDED: บูตมาตรฐาน ไม่มีแฟล็ก scenario ใด ๆ `-SecondPasswordMode bypass` ตัวจับแพ็กเก็ตต้องเปิดตลอดใบ (`capture_v141\GAME_LIVE.txt` + `GAME_EVENTS_LIVE.txt`)
+ATTENDED: ไล่คลิกครบเพดานแล้วไม่เจอทางเข้า = ไปผล `C` (`NO-STALL-ENTRY-FOUND`/`NO-GUILDSTORAGE-ENTRY-FOUND`) แยกกันได้ต่อระบบ -- ไม่ใช่ใบล้ม
+
 - result: (ผู้เทสกรอก: PASS `A`/`PRICE-BYTE-NOT-CONFIRMED`/`NO-STALL-ENTRY-FOUND`/`NO-GUILDSTORAGE-ENTRY-FOUND`/`NO-GUILDSTORAGE-ACCESS` หรือ `NO-RESULT` · branch+commit ที่บูต · ผลของ `git grep` ด่านข้อ 0 · ทุกจุดคลิกของทั้งสองรอบไล่คลิกพร้อมเวลาและผลลัพธ์ · hex ดิบครบของ trial A/B (`StallOperateVital`) พร้อม `[G<#N]` · hex ดิบของ `StallStartVital`/`StallOpenVital`/`GCSS_GuildStorageOpenVital`/`GCGS_GuildStorageCmdVital` ถ้าจับได้ · ภาพ `S00-HOME`/`S1-STALL-OPEN`/`S1-ITEM-PLACED`/`S1-PRICE-A`/`S1-PRICE-B`/`S1-STALL-CLOSE`/`S3-GS-OPEN`/`S3-GS-DEPOSIT`/`S3-GS-WITHDRAW`/`S3-GS-CLOSE` (เฉพาะที่ถ่ายได้จริง) + sha256 ทุกภาพ · **บรรทัดสีป้ายครบทุกป้ายทุกภาพ** · sha canonical ก่อน/หลัง · `integrity_check` สองครั้ง · NO-CRASH/CRASH · teardown รันแล้ว (boot stamp ไม่เกิน 420 นาที) · `OBSERVER_CONFIRMED: <YYYY-MM-DDTHH:MM+07:00>` · 🔴 **คัดลอกผล hex + คำตัดสิน `+0x20` (ถ้าวัดได้) ไปกรอกใน `RE-261:result` ด้วยตัวเอง (LANE-UI) — ใบนี้ไม่กรอกให้**)
 
 - **ลำดับ**: ต่อท้าย "รอเครื่องคุณ" ของ `NOW.md` — **ไม่แซง** `GT-233` / `GT-230` / `GT-243` (งานที่ค้างอยู่ก่อนแล้ว) · ไม่บล็อกใคร
@@ -11021,6 +11068,12 @@ findstr /N /C:"GM_WARP_SEND_OBSERVERS" /C:"SEND_FAILED" /C:"GM_WARP_SCENE_ROLLED
 **STOP:** ไคลเอนต์ปิดตัว / `ErrorData` ใด ๆ -> หยุดทันที บันทึกสิ่งที่กดล่าสุด
 
 ## GT-266 WARP-126-LIVE-TELEPORT-001  [🟢 **READY -- attended, in-game** · **เจ้าของใบ/ผู้เขียนเนื้อใบ = LANE-A** (ตรวจสด/persist = LANE-GM ตาม `COO-DECISION 20260905_1347`) · เนื้อใบเต็มวางโดย chief (LANE-E) รอบ `cooif2`/R357 · PR ที่ใบนี้เทส (`pirate-force-server#838`, decreed arrival) **merged to main 2026-09-05T18:04+07:00**]
+
+ATTENDED: บูตเซิร์ฟปกติ **ไม่มีแฟล็ก ไม่ตั้ง env** บนโค้ด main (PR `#838` merge แล้ว) -> ล็อกอิน GM ที่ Port Royal รอเห็นเมืองก่อน -> จดฉาก/สิ่งที่เห็น (ภาพก่อน) -> พิมพ์ในช่องแชต `/warp 126` -> **ห้ามล็อกเอาต์ ห้ามรีสตาร์ต** ดูจอทันทีนับ 10 วินาที
+ATTENDED: มองหาบรรทัดคอนโซล `WORLD_SCENE scene_id=126 ... marker=0 ... decreed_arrival=17` (สองค่านี้ต้องคู่กัน) และ **ไม่มี** `STAGED_NEXT_LOGIN` สำหรับคำสั่งนี้ · ต้องมี `GM_WARP_SCENE_PERSIST_FAILED scene=126 reason=login_would_refuse` ด้วย (คาดไว้ว่าจะเห็น -- ไม่เห็นบรรทัดนี้ = ผิดคาด ให้รายงาน)
+ATTENDED: ชั้นตัดสิน PASS/FAIL = **client-observable บนจอ ไม่ relogin**: จอเปลี่ยนจากเมืองเป็นทะเลภายใน 10 วินาที + ตัวละครอยู่ในสภาพเป็นเรือ (ไม่ใช่คนเดินน้ำ) + ไม่มีหน้าจอโหลดพาไปหน้าเลือกตัวละคร ไม่มีการตัดการเชื่อมต่อ -- ครบทั้งสามข้อ = PASS · ขาดข้อใดข้อหนึ่ง = FAIL · เห็นแต่ `WORLD_SCENE` ในคอนโซลแต่จอไม่เปลี่ยน = NO-RESULT ชั้น client ให้จดแยกจากชั้น wire/DB ห้ามเอาชั้นหนึ่งมาแทนอีกชั้น
+ATTENDED: ต่อในบูตเดียวกันถ้าขั้นบนผ่าน: `/warp 126 3050 232 90` ต้องถูกปฏิเสธไม่มีไบต์ออก · `/warp 278` ต้องยัง stage เหมือนเดิม · `/warp 2` ต้องยังวาปสดเหมือนเดิม -- ผลตรงข้ามข้อใดข้อหนึ่ง = เกตพัง รายงานทันที ห้ามพ่วงบูตกับ `GT-233`
+ATTENDED: 🔴 หลังจากนี้ห้ามล็อกเอาต์แล้วล็อกอินใหม่ในบูตนี้เพื่อเช็คฉาก 126 -- ประตูล็อกอินของ 126 ยังปิดโดยตั้งใจ คาดว่าจะถูกดีดกลับ Port Royal พร้อม `WORLD_SCENE_ENTRY_REFUSED` (ไม่ใช่ข้อบกพร่อง) · เจอ `.err.txt` มี `ErrorData=` ที่ไม่เคยเห็น หรือไคลเอนต์ปิดตัวเอง/ค้าง = STOP ทันที จดเลขแล้วออก ห้าม retry
 
 > **คำถามเดียวที่ใบนี้ตอบ**: พิมพ์ `/warp 126` แล้ว **ย้ายเดี๋ยวนี้** หรือยังต้องล็อกอินใหม่
 > **ทำไมถึงมีใบนี้**: `PANYA-DECISION 20260905_1329` -- "`/warp 126` ต้องวาปสดเหมือน `/warp 2`" · จุดมาถึงถาวรของฉาก 126 = `CONSTDATA_TH__MARKER.tsv` แถว `n_ID 17` (3050, 232, 90, `n_DIRTECTION` 6)

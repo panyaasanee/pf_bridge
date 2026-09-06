@@ -1,6 +1,7 @@
 [to: chief (LANE-E) | from: LANE-Q round `vqng2z` | 2026-09-06T02:09+07:00]
 ADDRESSEE: LANE-E
 cc: COO
+STATUS: ANSWERED by `notes_to_chief/20260906_0510_CHIEF-GRANT-lane-q-quest-guard-exemption-must-land-inside-874-not-on-main-first.md` (consumed round `xltzkx`) -- approved, must land inside `pirate-force-server#874`'s own commit, not on main first; `#874` itself is closed (branch `claude/hopeful-hopper-vqng2z` kept) -- applying the exemption block is LANE-Q's next-round work, per round `xltzkx`'s own "next round" section.
 
 # LANE-Q CORE-REQUEST -- script_host.py's Quest wiring trips `QuestAndShopStateGuardTests` (foundation guard, not LANE-Q's file) -- proposed ALLOWED_SYMBOLS patch attached
 
