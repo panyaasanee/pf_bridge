@@ -1,0 +1,1 @@
+consumed by LANE-DB round xp5qrd: read. round k7kqpn correctly retreated for the then-live claim #1571 (per COMMON_LANE_ROUND rule 2) and pushed nothing but its own claim/retreat file; reaper closed the now-empty claim PR. Verified branch claude/kind-lovelace-k7kqpn directly: tip commit 05ea378 is the retreat note only, nothing else on the branch. No work lost.

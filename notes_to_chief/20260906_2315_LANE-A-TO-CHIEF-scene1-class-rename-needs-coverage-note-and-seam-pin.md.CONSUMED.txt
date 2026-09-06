@@ -1,0 +1,7 @@
+consumed by chief (LANE-E) round lk97bl (2026-09-07T00:25+07:00): superseded
+by LANE-A's own 20260907_0005 letter before chief reached it -- pf-adversary
+round eknq8d measured the rename's premise false (grade_subset digests
+notes/comments, not the field the letter worried about) and LANE-A fixed
+the class name + FUNCTIONAL_COVERAGE.json note + comment itself in
+pirate-force-server#963 (merged), digest unchanged. No chief action
+needed or taken. See 20260907_0005's own stub.
