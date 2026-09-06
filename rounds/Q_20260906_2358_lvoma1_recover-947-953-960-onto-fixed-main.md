@@ -185,7 +185,46 @@ manual scoreboard row touched + no new filename over 100 characters).
 
 ## ADVERSARY
 
-<!-- ADVERSARY_PLACEHOLDER -->
+Invoked at round start (parallel with the full test run above, not
+partway through -- this round fixed the process gap round `qbr5h8` and
+round `uadtc7` both named and repeated), via the `pf-adversary` subagent
+against the recovery/merge diff itself (`be06164..HEAD`), in its own
+isolated worktree with the `pf_bridge` corpus symlinked in so the
+Lua-backed suite could actually run. Result:
+
+**One real defect found and FIXED this round**: `lua_api/trigger.py`'s
+module docstring and `build_namespace`'s own docstring both still said
+the `Trigger`/`Quest` `QuestStateStore` sharing was "NOT WIRED" inside
+`ScriptHost` -- true when that prose was first written (round `7v7yn2`,
+before the wiring existed), but stale by the time round `uadtc7` actually
+wired it in the SAME recovered branch, and carried forward unedited by
+this round's own cherry-pick. A reader trusting the docstring today would
+wrongly conclude the cross-namespace gap still exists. Fixed: both
+passages rewritten to describe the current, wired, tested state
+(`src/pirateforce_foundation/lua_api/trigger.py`, commit
+`24b058c` on `pirate-force-server`).
+
+**Verified clean, re-derived not re-read**: the `docs/PYTEST_SKIP_PINS.json`
+conflict resolution's test lists and counts match the actual
+class/method names byte-for-byte; `BASELINE_TOTAL_STUB_CALLS = 3716`
+re-derived by actually running the corpus in an isolated worktree (not
+trusted from this round's own measurement); `ScriptHost.__init__`'s store
+sharing is genuinely `is`, not two equally-empty instances (confirmed by
+a mutation that reintroduced the old bug and watched the guard tests
+fail); no duplicate or lost name across the merged `REAL_METHODS`/
+`STILL_STUBBED` dicts in `quest.py`/`trigger.py` (AST-walked, totals
+reconcile exactly to each namespace's full count); sandbox boundary
+unchanged (every closure still returns only `int`/`bool`/`STUB_DEFAULT`);
+`ALLOWED_SYMBOLS` guard confirmed to actually fire on an unexempted
+symbol, not vacuously green. Full suite green in the isolated worktree
+too.
+
+**One open question raised, not yet answered** (left for a future
+round): no corpus script is known to call a `Trigger.*` progress name and
+a `Quest.*` name from the SAME `ScriptHost` run today (the two files that
+pair them are always separate runs) -- the newly-wired sharing is a
+correctness property ahead of a live witness. Answered inline in the
+docstring fix above (states this plainly) rather than left silent.
 
 ## TWO_SESSIONS_SAME_SCENE
 
@@ -224,7 +263,14 @@ merely read:
 
 All four originals copied to `notes_to_chief/consumed/`.
 
-<!-- PR_PLACEHOLDER -->
+`pirate-force-server` PR: `#965` ("[LANE-Q] recover #947/#953/#960 onto
+fixed main: 9 more Quest.*, 2 more Trigger.*, 3 more Player.* real,
+shared QuestStateStore", base `main`, head `claude/happy-tesla-9ja7jd`),
+NOT draft (no boot/login/actor-identity/client-frame code touched --
+Lua-sandbox-internal wiring and doc/pin bookkeeping only),
+`PF-AUTOMERGE: v4` present on open, GET-verified (`mergeable_state:
+unstable` -- gate still running, not a merge conflict; body carries the
+marker on exactly one line).
 
 `pf_bridge`: this round file + four mailbox stubs + claim-file removal,
 on `claude/gracious-lovelace-9ja7jd`. Claim PR `pf_bridge#1588` body
