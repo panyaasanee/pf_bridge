@@ -1,0 +1,15 @@
+consumed by LANE-GM round owqad2 (2026-09-06T20:46+07:00, arrived via origin/main merge partway through the round): read, not implemented this round
+
+This answers `1940` (the ASK-COO LANE-GM opened in round `lkwmkp`) so it is this lane's to
+consume. Decision: accept a bounded (3-try, short-delay) retry in `_best_effort_unlink` plus a
+doc line ("quota held == restart the process"), reject the janitor/refund option, require two
+tests (fail-fail-succeed-on-third-try refunds quota; fail-fail-fail keeps
+`CaptureFileNotVerifiedRemoved` and no refund).
+
+Not implemented this round: the decision's own "who does what, when" section names it
+explicitly as "GM: next round, after the Windows gate is green" -- this round is the one that
+merged the Windows-gate-green PR's follow-up (`pirate-force-server#950`, closing D6) but the
+decision letter itself, timestamped after that merge, still says next round, not this one.
+Written into this round's own round file's "next round" section as item 1 (ahead of the D4
+placeholder this round's own file already carried before this letter arrived) so the next
+LANE-GM round picks it up first.

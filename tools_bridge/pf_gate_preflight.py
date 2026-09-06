@@ -705,6 +705,46 @@ def check_new_skips(repo, base):
 NEW_FILENAME_LENGTH_CEILING = 100
 
 
+def _basenames_at(root, ref):
+    """Every basename tracked at `ref`, as a set.  Empty set on any failure.
+
+    An empty set is the SAFE failure: it exempts nothing, so a broken read
+    can only make this check stricter, never let a new long name through.
+    """
+    listing = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(root),
+         "-c", "core.quotePath=false", "ls-tree", "-r", "--name-only", ref],
+        capture_output=True, text=True, errors="replace",
+    )
+    if listing.returncode != 0:
+        return set()
+    return {pathlib.Path(line).name
+            for line in listing.stdout.splitlines() if line.strip()}
+
+
+def _print_inherited_long_names(inherited):
+    """An exemption is an OPEN skip: named, counted, never silent.
+
+    AGENTS.md section 7's own rule about skips, applied to this tool: a skip
+    with a reason is fine, a silent one is not.  pf-adversary (round
+    `l5tqxc`, B1) measured the previous version asserting "none over 100
+    characters" in the same breath as it waved a 211-character name through.
+    """
+    if not inherited:
+        return
+    longest = max(length for _name, length in inherited)
+    print("[filenamelen] SKIPPED (open) - %d path(s) over %d characters whose"
+          " basename" % (len(inherited), NEW_FILENAME_LENGTH_CEILING))
+    print("              is already on the base branch, so this branch did"
+          " not choose it and")
+    print("              the owner order forbids renaming it. Longest: %d"
+          " characters." % longest)
+    for name, length in sorted(inherited, key=lambda row: -row[1])[:10]:
+        print("    inherited %d chars: %s" % (length, name))
+    if len(inherited) > 10:
+        print("    ... and %d more" % (len(inherited) - 10))
+
+
 def check_new_filename_length(repo, base="origin/main"):
     """RED when this branch ADDS a file whose basename is longer than
     `NEW_FILENAME_LENGTH_CEILING` characters, compared to `base`.
@@ -712,7 +752,32 @@ def check_new_filename_length(repo, base="origin/main"):
     Character count, not bytes: the ceiling is about what a path component
     costs a filesystem and a terminal to display, not encoding size (unlike
     the byte ceilings `check_bridge_file_sizes`/`check_queue_growth_cap`
-    use for file CONTENT, where the cost is bytes read).
+    use for file CONTENT, where the cost is bytes read).  `core.quotePath`
+    is turned OFF for every git call here for exactly that reason:
+    pf-adversary (round `l5tqxc`, B4) measured a 43-character Thai basename
+    arriving as 485 characters of octal escape and turning this check RED,
+    with the name it printed for the lane to fix unreadable.
+
+    RENAMES COUNT.  `AGENTS.md` section 7 says the rule covers a file
+    "added or changed", and a rename is how a long name most naturally
+    enters a repo that forbids renaming old ones (an archive sweep, a round
+    file given a better name).  pf-adversary (B2) measured `git mv short.md
+    <113 chars>.md` passing this check green under the old `--diff-filter=A`.
+    The destination path of a rename is what `--name-only` reports, and that
+    is the name being introduced.
+
+    A NAME THIS BRANCH DID NOT CHOOSE IS NOT THIS BRANCH'S DEBT.  Any added
+    path whose BASENAME already exists somewhere at `base` is a move or a
+    copy of an old name, not a new one - the mandated `consumed/` copy of a
+    letter, an archive sweep that edits a header as it moves (pf-adversary
+    B3 measured 1,300 RED lines from one such sweep, every one of them a
+    name that was already on main, with no legal remedy because the owner
+    order forbids renaming old files).  The exemption is COUNTED AND NAMED,
+    never silent: pf-adversary (B1) measured the old `.CONSUMED.txt`
+    exemption passing a 211-character stub under the sentence "none over 100
+    characters", which is the band (190-222) that actually stopped the
+    bridge on 2026-09-06.  An exemption nobody counts is indistinguishable
+    from a check nobody wrote.
 
     Returns True (no added file over the ceiling), False (one or more are -
     RED, every offending name printed), None (`repo` is not a git checkout,
@@ -734,15 +799,25 @@ def check_new_filename_length(repo, base="origin/main"):
         print("              git fetch origin main, or pass --base.")
         return None
     diff = subprocess.run(
-        ["git", "--no-optional-locks", "-C", str(root), "diff",
-         "--name-only", "--diff-filter=A", base],
+        ["git", "--no-optional-locks", "-C", str(root),
+         "-c", "core.quotePath=false", "diff",
+         "--name-only", "--diff-filter=AR", base],
         capture_output=True, text=True, errors="replace",
     )
     added = [line.strip() for line in diff.stdout.splitlines() if line.strip()]
+    old_basenames = _basenames_at(root, base)
     offenders = []
+    inherited = []
     for name in added:
         basename = pathlib.Path(name).name
         if len(basename) <= NEW_FILENAME_LENGTH_CEILING:
+            continue
+        # A name that already exists at `base` under some path: this branch
+        # is moving or copying it, which the owner order requires it to be
+        # able to do ("old files must never be renamed").  Counted below,
+        # never silently dropped.
+        if basename in old_basenames:
+            inherited.append((name, len(basename)))
             continue
         # A `.CONSUMED.txt` stub whose underlying letter ALREADY EXISTS at
         # `base`: every lane's stub convention is a fixed
@@ -756,9 +831,11 @@ def check_new_filename_length(repo, base="origin/main"):
         if basename.endswith(".CONSUMED.txt"):
             underlying = name[: -len(".CONSUMED.txt")]
             if _git_blob_size(root, base, underlying) is not None:
+                inherited.append((name, len(basename)))
                 continue
         offenders.append((name, len(basename)))
     if offenders:
+        _print_inherited_long_names(inherited)
         print("[filenamelen] RED - %d new file(s) have a basename over %d"
               " characters:" % (len(offenders), NEW_FILENAME_LENGTH_CEILING))
         for name, length in offenders:
@@ -769,8 +846,15 @@ def check_new_filename_length(repo, base="origin/main"):
         print("              one (SYNC_STUCK 20260906_1816: Windows refused")
         print("              to even fast-forward past six of these).")
         return False
-    print("[filenamelen] PASS - %d new file(s), none over %d characters."
-          % (len(added), NEW_FILENAME_LENGTH_CEILING))
+    _print_inherited_long_names(inherited)
+    if inherited:
+        print("[filenamelen] PASS - %d new path(s); %d over %d characters,"
+              " every one a name inherited from %s (listed above)."
+              % (len(added), len(inherited), NEW_FILENAME_LENGTH_CEILING,
+                 base))
+    else:
+        print("[filenamelen] PASS - %d new path(s), none over %d characters."
+              % (len(added), NEW_FILENAME_LENGTH_CEILING))
     return True
 
 
@@ -1253,7 +1337,7 @@ CENSUS_SELF_TEST_CASES = 2
 BRIDGESIZE_SELF_TEST_CASES = 6
 QUEUEGROWTH_SELF_TEST_CASES = 8
 CONSUMEDSTUB_SELF_TEST_CASES = 9
-FILENAMELEN_SELF_TEST_CASES = 9
+FILENAMELEN_SELF_TEST_CASES = 12
 SCOREBOARD_MANUAL_SELF_TEST_CASES = 8
 
 
@@ -1366,6 +1450,20 @@ def _filenamelen_git_root(tmp, dirname, added_names, base_names=()):
     return root
 
 
+def _filenamelen_rename_root(tmp, dirname, old_name, new_name):
+    """A repo where the feature branch RENAMES a base file to `new_name`.
+
+    pf-adversary round `l5tqxc` B2: git reports this as `R`, which the old
+    `--diff-filter=A` excluded, so a 113-character name reached main green.
+    """
+    root = _filenamelen_git_root(tmp, dirname, [], base_names=[old_name])
+    subprocess.run(["git", "-C", str(root), "mv", old_name, new_name],
+                    check=True)
+    subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "rename"],
+                    check=True)
+    return root
+
+
 def _filenamelen_self_test_cases(tmp):
     """Drive check_new_filename_length() against synthetic git repos.
 
@@ -1407,6 +1505,20 @@ def _filenamelen_self_test_cases(tmp):
         [long_letter_name, long_letter_name + ".CONSUMED.txt"])
     root_not_repo = pathlib.Path(tmp) / "fl_not_repo"
     root_not_repo.mkdir()
+    # pf-adversary round `l5tqxc`, the three shapes it MEASURED wrong.
+    root_rename = _filenamelen_rename_root(
+        tmp, "fl_rename", "notes/short.md", "notes/" + over_ceiling_name)
+    # The mandated consume/archive copy: the SAME long basename at a new
+    # path, with different content (a header added as it moves), which is
+    # what turns git's output into D+A instead of R.
+    root_inherited_copy = _filenamelen_git_root(
+        tmp, "fl_inherited_copy", ["notes/consumed/" + ("b" * 98) + ".md"],
+        base_names=[long_letter_name])
+    # 43 real characters, 123 bytes, 485 characters of octal escape under
+    # git's default core.quotePath.
+    thai_name = "notes/" + ("\u0e01" * 40) + ".md"
+    assert len(pathlib.Path(thai_name).name) == 43
+    root_thai = _filenamelen_git_root(tmp, "fl_thai", [thai_name])
 
     cases = [
         ("no files added", root_none, "main", True),
@@ -1421,6 +1533,12 @@ def _filenamelen_self_test_cases(tmp):
          root_old_stub, "main", True),
         ("CONSUMED stub whose letter is ALSO new - RED",
          root_new_stub, "main", False),
+        ("a RENAME to a long name - RED (adversary l5tqxc B2)",
+         root_rename, "main", False),
+        ("the mandated consumed/ copy of an old long letter - not RED",
+         root_inherited_copy, "main", True),
+        ("a 43-character Thai basename - not RED (B4, was 485 escaped)",
+         root_thai, "main", True),
         ("not a git checkout", root_not_repo, "main", None),
         ("base ref does not resolve",
          root_short, "origin/no-such-branch", None),
@@ -2220,7 +2338,12 @@ def main():
     print("                + both branches are mergeable by the reaper"
           " + no bridge file grew past its ceiling on this branch")
     print("                + neither queue file grew past its per-PR cap"
-          " + no manual scoreboard row was touched).")
+          " + no manual scoreboard row was touched")
+    # pf-adversary round `l5tqxc`, B6: this banner is what a lane pastes
+    # into a PR body as evidence, and it was a hardcoded list that had
+    # stopped matching what `results` actually contains.
+    print("                + no new file name over %d characters in either"
+          " repo)." % NEW_FILENAME_LENGTH_CEILING)
     print("NOTE: this does NOT promise a green gate - Windows-only runtime")
     print("failures are out of scope.  A RED or INCONCLUSIVE preflight means")
     print("DO NOT PUSH until it is fixed (AGENTS.md section 7).")
