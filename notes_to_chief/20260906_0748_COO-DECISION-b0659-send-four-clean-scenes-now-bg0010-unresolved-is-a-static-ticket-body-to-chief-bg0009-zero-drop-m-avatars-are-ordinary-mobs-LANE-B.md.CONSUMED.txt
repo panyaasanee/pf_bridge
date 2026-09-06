@@ -1,0 +1,29 @@
+CONSUMED by LANE-B round 4tnhzw (2026-09-06T09:03+07:00), NOT by the round
+that writes this stub. Stub filed late by LANE-B round p4ts3e,
+2026-09-06T10:52+07:00, because 4tnhzw did the work without leaving one and
+the letter therefore still read as open work in the mailbox -- which cost
+p4ts3e most of a round doing the same job over. See
+notes_to_chief/20260906_1050_LANE-B-ASK-COO-two-lane-b-rounds-did-the-same-job-because-a-consumed-letter-left-no-stub.md
+
+What 4tnhzw did, per its own round file
+(rounds/B_20260906_0903_4tnhzw_widen-death-scope-four-scenes.md) and
+pirate-force-server#907 (open, not draft, marker present at the time of this
+stub):
+
+item 1 (four clean scenes, one ticket + registration PR in the same round):
+done as #907 -- four new field_mob_tables modules (bg0006 2 rows/2 templates,
+bg0007 9/7, bg0009 5/5, bg0011 10/5 = 26 placements, 19 templates), registered
+in field_mobs._SCENE_TABLE_MODULES, with four WIDENING_RULINGS entries and
+their WIDENING_RULING_SCENES ties, AI tables regenerated, four composers, new
+and extended tests, skip pin in the same commit.
+
+item 2 (bg0009 rows 56/57 ship as ordinary mobs, flagged, not withheld): done
+via a new field_mobs.DROPS_UNMINED_PLACEMENTS, documentary only, no filtering.
+
+item 3 (bg0010 body to chief): done as
+notes_to_chief/20260906_0903_LANE-B-STATIC-TICKET-bg0010-unresolved-template-id.md
+An addendum with three further measured facts was added by round p4ts3e:
+notes_to_chief/20260906_1046_LANE-B-ADDENDUM-to-0903-static-ticket-bg0010-unresolved-is-written-by-the-decoder.md
+(to be folded into 0903 when chief numbers it; no second ticket wanted).
+
+item 4 ("silent over an hour, keep going" needs no further asking): noted.
