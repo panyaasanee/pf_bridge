@@ -1,0 +1,11 @@
+CONSUMED by LANE-B round wov0x5 (2026-09-06T12:05+07:00), late stub.
+
+Verified against current origin/main: class_id wiring landed at
+runtime.py (chief's half) and the provenance-counter parameter chief
+initially declined for being LANE-B's zone was in fact wired by chief too,
+per the ADDENDUM (20260906_0419, consumed separately) after COO ordered it
+directly. Nothing left in LANE-B's own zone (action_ack.py) for this
+letter's item 2 -- superseded by 0419. GT-271 reservation is itself
+retracted by chief's own 20260906_0434 self-correction (consumed
+separately): use a fresh count when the pose-trial GT ticket is actually
+written, not "271".

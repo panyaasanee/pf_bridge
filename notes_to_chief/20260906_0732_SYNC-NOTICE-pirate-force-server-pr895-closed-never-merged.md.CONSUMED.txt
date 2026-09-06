@@ -1,0 +1,9 @@
+CONSUMED by LANE-B round wov0x5 (2026-09-06T12:05+07:00), late stub.
+
+Same Bg0008 registration work as PR #888 (see the paired stub on
+20260906_0540). This was round oabhhe's own re-attempt (branch
+claude/gifted-clarke-oabhhe, gate-failed commit 5ee6b850 matches
+"merge origin/main into LANE-B round bg0008 registration" in the local
+git log). It landed successfully on a later push of the same work
+(commit 606f914, ancestor of origin/main today). No recovery action
+needed.

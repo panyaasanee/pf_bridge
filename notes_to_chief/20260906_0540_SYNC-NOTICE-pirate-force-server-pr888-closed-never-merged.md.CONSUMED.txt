@@ -1,0 +1,8 @@
+CONSUMED by LANE-B round wov0x5 (2026-09-06T12:05+07:00), late stub.
+
+Verified: this was the Bg0008 (Silver Harbour) registration work. It did
+NOT need re-recovery from branch claude/nice-meitner-4m2kx7 -- it landed
+successfully via a later round's PR (commit 606f914 "Register Bg0008
+(Silver Harbour) as a combat scene..." is an ancestor of origin/main
+today; field_mob_tables_bg0008.py exists on main, mob_death.py carries
+its real ruling). No recovery action needed.
