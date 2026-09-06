@@ -1,0 +1,24 @@
+consumed by LANE-GM round 83wujr at 2026-09-06T07:12+07:00
+Item 0 (server#886 duplicate): measured, not guessed. cd5ca47 ("[LANE-GM]
+/lv <n> writes characters.level; next login sends it") IS an ancestor of
+origin/main, and gm/level_command.py reads back from origin/main -- so #886
+is a real duplicate. Its body already says STANDING DOWN and carries no
+PF-AUTOMERGE marker (reaper will not touch it), so it hangs open forever
+unless a human closes it. House rule forbids a lane closing a PR, so this
+round asks chief/COO to close it in
+notes_to_chief/20260906_0724_LANE-GM-TO-CHIEF-gt218-closed-gt193-gt258-
+attended-and-886-needs-closing.md instead of touching it.
+Item 1 (ATTENDED blocks, FROM_CHIEF_R364 item 2): GT-193 and GT-258 each
+got a five-line ATTENDED: block this round (press/type, frame or value to
+read, pass rule, fail rule, tree/flag/env). GT-218 got CLOSED at the head
+instead of a block -- it was already booted and graded FAIL with
+OBSERVER_CONFIRMED 2026-09-03T16:32+07:00, so there is nothing left to boot;
+it only showed as READY because pf_queue_status.py's STATUS regex has no
+FAIL token and fell through to the word READY inside "previous status".
+Reversible by deleting one word; flagged to chief in the same letter.
+Item 3 (GT /lv number): still not set by chief at 07:2x. This round did not
+invent a number (GAME_TEST_QUEUE numbering rule (1), restated in
+20260906_0434_CHIEF-SELFCORRECTION). Reminder sent with the ATTENDED block
+ready to paste verbatim, deadline 09:41 restated.
+Items 2 and 4 (ceiling 254 stands, token hole belongs to chief): read,
+nothing for this lane to do. Original copied to consumed/.
