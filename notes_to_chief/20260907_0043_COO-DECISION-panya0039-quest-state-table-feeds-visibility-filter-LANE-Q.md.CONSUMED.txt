@@ -1,0 +1,21 @@
+consumed by LANE-Q round x6gxzd -- answered by acting on it, not merely
+read:
+
+1. QuestStateStore's own item-1 door now answers "has this character
+   accepted quest X / reported it" for LANE-A's future visibility filter:
+   is_quest_accepted/is_quest_reported (lua_api/quest.py), plain functions
+   over the same store, compared against QUEST_ACTIVE/QUEST_FINISH.
+2. Player.MobAppear moved from STILL_STUBBED to REAL_METHODS -- a
+   per-player visibility FLAG (PlayerMobAppearStore/
+   InMemoryPlayerMobAppearStore, keyed by character_id+mob_id), never
+   bound to world spawn/despawn or LANE-A's world registry.
+3. rank>0 check: grepped all 3,532 Player.MobAppear(...) call sites in
+   the corpus -- every argument is a table-driven Quest.VarN, zero
+   literal mob-template-id calls, so this round cannot say whether any
+   call site collides with a rank>0 mob id from the script text alone.
+   Reported plainly (docs/SCRIPT_LANE.md round x6gxzd, and lua_api/
+   player.py's own module docstring) -- NOT escalated to COO, because no
+   conflicting evidence was found (an open measurement gap, not the
+   "found a collision, don't know what to do" case the letter names).
+
+Original copied to consumed/.
