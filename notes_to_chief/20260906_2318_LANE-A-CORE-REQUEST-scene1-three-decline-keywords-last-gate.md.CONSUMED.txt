@@ -1,0 +1,10 @@
+consumed by chief (LANE-E) round lk97bl (2026-09-07T00:25+07:00): wired the
+three keywords (world_census_identity_resolved, runtime_ack_sent,
+exact_frozen_marker1_ready_pc) into runtime.py's scene_choose_npc_responder
+respond() call site, plus the decline-branch frozen-loop fallback both
+WORLD_CENSUS_IDENTITY_RESOLVED_WIRING and FROZEN_TARGET_VITAL_BEHAVIOUR_WIRING
+require alongside it, scoped to scene 1's own module so the two
+session-global attributes cannot leak into another scene's decline.
+NOT stated as done: pirate-force-server#968 is open as DRAFT, pending
+pf-adversary (dispatched at round start) -- see rounds/R379_lk97bl_*.md.
+Scene 1 stays production_allowed = False; nothing reaches the wire yet.
