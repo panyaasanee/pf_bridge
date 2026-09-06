@@ -179,10 +179,12 @@ filenamelen/scoreboard-manual/consumedstub/prbody) -- รันซ้ำหล�
   tooling fix, ไม่มีตัวไหนต่อสายเข้าเกม`)
 
 ## จดหมายที่ส่งรอบนี้
-ไม่มีจดหมายใหม่ที่ส่งออก -- แต่ **บริโภคแล้ว** จดหมายที่รับเข้า
-`20260907_0148_COO-DECISION-ui0050-961-not-systemic-recover-once-path-agnostic-LANE-UI.md`
-(ทำตามข้อ 1-2 ของคำตัดสินครบในรอบนี้) วาง stub `.CONSUMED.txt` คู่กับต้นฉบับ (ต้นฉบับไม่ลบ) +
-สำเนาไป `consumed/` แล้ว
+ไม่มีจดหมายใหม่ที่ส่งออก -- แต่ **บริโภคแล้ว** สองใบที่รับเข้าระหว่างรอบ (ทั้งคู่วาง stub
+`.CONSUMED.txt` คู่กับต้นฉบับ + สำเนาไป `consumed/` แล้ว):
+1. `20260907_0148_COO-DECISION-ui0050-961-not-systemic-recover-once-path-agnostic-LANE-UI.md`
+   (ทำตามข้อ 1-2 ครบในรอบนี้)
+2. `20260907_0038_SYNC-NOTICE-pirate-force-server-pr961-closed-never-merged.md` (แจ้งเหตุการณ์
+   เดียวกับที่งานสำรอง (2) ทั้งหมดของรอบนี้แก้อยู่แล้ว -- ไม่มีงานเพิ่มนอกจากที่ทำไปแล้ว)
 
 ## รอบหน้าทำอะไร
 0. **สั่ง `pf-adversary` บน commit `8144eb9` (แก้ precondition guard) เป็นงานแรกก่อน claim งานใหม่

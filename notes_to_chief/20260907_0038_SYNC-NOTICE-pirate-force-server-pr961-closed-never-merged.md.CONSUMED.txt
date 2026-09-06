@@ -1,0 +1,1 @@
+consumed by LANE-UI round on8hbb 2026-09-07T02:47+07:00: informational sync notice about #961's closure (the same event this round's whole "recover #961" workstream already addresses -- see rounds/UI_20260907_0148_on8hbb_community_social_wire_partial_migration.md). No separate action beyond what that round file already did.
