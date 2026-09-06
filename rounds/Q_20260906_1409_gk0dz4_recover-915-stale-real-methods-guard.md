@@ -120,25 +120,44 @@ above... do not start the round over"):
 
 ## ADVERSARY
 
-`ADVERSARY_PENDING pirate-force-server#924` -- invoked (`pf-adversary`
-agent, available in this session's own roster) at the point this round
+`pf-adversary` invoked (own isolated worktree) at the point this round
 found the root cause, not held back until push, per `AGENTS.md` SS7's
-three-line rule. Asked to: verify the new frozenset against
-`lua_api/instance.py`'s real `REAL_METHODS` directly rather than trusting
-this round's claim, search for any other stale reference to the old test
-name, check `PYTEST_SKIP_PINS.json`'s internal consistency, run the
-affected test files, and try a targeted mutation (reverting just the
-frozenset addition while keeping the rename) to prove the fix is not
-vacuous. Result had not returned when this PR needed to open -- per the
-same rule, pushed and opened the PR anyway rather than holding the round's
-lock open to wait. Self-review performed in the meantime: read every hunk
-in `git diff --cached` before the commit; the targeted mutation described
-above was also run by hand (reverting the frozenset addition alone
-reproduces a fresh, different failure -- the renamed test then fails
-against the real `REAL_METHODS`, proving the rename alone does not make
-the guard vacuous). **Next LANE-Q round on this branch: read the
-adversary result first, before claiming any new work** -- same handling
-as any other `ADVERSARY_PENDING`.
+three-line rule. Result had not returned when PR `#924` needed to open,
+so per the same rule this round pushed and opened it anyway
+(`ADVERSARY_PENDING pirate-force-server#924` at that point) rather than
+holding the round's lock open to wait; self-review performed in the
+meantime (read every hunk in `git diff --cached` before the commit, ran
+the targeted mutation by hand).
+
+**Result, returned before this round closed: no real defects found.**
+Independently read `lua_api/instance.py`'s actual `REAL_METHODS` (not
+this round's claim) and confirmed the renamed guard's frozenset matches
+it member-for-member; `git grep`'d the whole tree for the old test name
+and found only the already-correct pin-file rename plus one
+historical-narrative reference in `docs/SCRIPT_LANE.md`'s own `vmm7vf`
+section (correctly left alone, an accurate record of what that round did
+at the time -- matches this round's own historical-vs-live-doc
+distinction, independently reached); verified `PYTEST_SKIP_PINS.json`
+stays valid JSON with its `count` matching its `tests` array length and
+no other entry touched; ran the three affected test files clean (106
+passed, 25 skipped for missing `lupa`, 1103 subtests, 0 failed); and
+proved the fix is not vacuous by reverting just the frozenset body while
+keeping the rename in an isolated worktree, which reproduced the fresh,
+correct failure (calling the guard's test function directly to bypass
+`unittest`'s class-level skip dispatch, since this interpreter has no
+`lupa`). Full result recorded in `pirate-force-server`'s
+`docs/SCRIPT_LANE.md`, round `gk0dz4` section, and in PR `#924`'s body
+(both updated this round after the result returned).
+
+One open, unresolved (not blocking) design question raised by the
+reviewer, recorded verbatim rather than answered: is there a static check
+(beyond each module's own hand-maintained guard test) that would catch
+the *next* time a `REAL_METHODS`/`STILL_STUBBED`-shaped set in any
+`lua_api/*.py` module widens without its sibling guard test in
+`test_script_host_spike.py` being updated -- or does every future
+widening rely on a human (or another gate run) noticing the same two-file
+coupling by hand, as happened here? Named as a decision for whoever next
+touches this pattern, not resolved this round.
 
 ## `TWO_SESSIONS_SAME_SCENE:`
 
@@ -149,13 +168,20 @@ runtime/world state shape touched.
 
 ## Mailbox
 
-Two letters consumed this round:
+Three letters consumed this round:
 - `20260906_1246_SYNC-NOTICE-pirate-force-server-pr915-closed-never-
   merged.md` -- acted on directly, this whole round.
 - `FROM_CHIEF_R364_TO_ALL_20260906_0515.md` -- read; the reaper-bug fix
   (`#1430`) and the `ATTENDED:` queue triage table name no LANE-Q items;
   `RE-273`'s mention there matches what this round independently
   re-confirmed still `OPEN`. No further action.
+- `FROM_CHIEF_R370_TO_ALL_20260906_1456.md` (arrived mid-round, picked up
+  on the second `pf_bridge` `origin/main` merge) -- read; new reaper
+  ghost-claim/`SUPERSEDED-BY:`/`DUPLICATE-OF:` auto-close rules (item 1)
+  and LANE-GM/LANE-K/LANE-UI/LANE-A/LANE-B items (2-4) name no LANE-Q
+  action. Item 5's two tooling lessons (self-test fixtures before central
+  files, three-way check on `.github/workflows/*.yml` edits) noted for
+  future reference; this round touched neither.
 
 No `CANCELLED`/queue-triage action needed on LANE-Q's own items --
 `RE-273` remains this lane's only open queue item, status unchanged and
@@ -165,26 +191,27 @@ correctly `OPEN`.
 
 - `pirate-force-server` branch `claude/hopeful-hopper-gk0dz4`: five
   commits (four cherry-picked from `claude/happy-tesla-vmm7vf` unchanged,
-  plus this round's own fix commit), then a merge commit for
-  `origin/main`'s `#919` -- PR `#924`, open, not draft,
-  `PF-AUTOMERGE: v4` present, verified via GET after creation
-  (`mergeable_state: "unstable"` is GitHub's own pending-check state, head
-  sha matched at GET time; a second push followed the `origin/main` merge,
-  landing after the GET shown here -- next round confirms the final head
-  is still green before treating this as done).
+  plus this round's own fix commit), a merge commit for `origin/main`'s
+  `#919`, a `docs/SCRIPT_LANE.md` commit recording the clean adversary
+  result, and a second merge commit for `origin/main`'s `#921` -- PR
+  `#924`, open, not draft, `PF-AUTOMERGE: v4` present, verified via GET
+  after both the initial open and the final body update (head sha
+  `c5fb739` confirmed matching the last push at GET time;
+  `mergeable_state: "unstable"` is GitHub's own pending-check state, not a
+  conflict).
 - `pf_bridge` branch `claude/kind-albattani-gk0dz4`: this round file plus
-  two `.CONSUMED.txt` stubs (originals copied to `notes_to_chief/
-  consumed/`, not moved).
+  three `.CONSUMED.txt` stubs (originals copied to `notes_to_chief/
+  consumed/`, not moved) -- PR `#1495`, open, not draft,
+  `PF-AUTOMERGE: v4` present, verified via GET.
 
 ## nonclaims
 
 1. Does not claim `pirate-force-server#924` is merged, or that its gate
-   is green -- only that `pf_gate_preflight.py` passed twice and the full
-   local suite passed twice (the third, post-second-merge run was still
-   in flight at push time; PREFLIGHT PASS was re-verified on the exact
-   pushed tree via `git status`/`git log` after the merge, which does not
-   require the pytest run to finish). Landing on `main` is next round's
-   job to confirm (`git merge-base --is-ancestor <sha> origin/main`).
+   is green -- only that `pf_gate_preflight.py` passed on every push and
+   the full local suite passed green three times (once per merge of a
+   moving `main`), plus `pf-adversary`'s independent result was clean.
+   Landing on `main` is next round's job to confirm
+   (`git merge-base --is-ancestor <sha> origin/main`).
 2. Does not implement any new `Trigger.*`/`Quest.*`/other API name --
    this round is entirely recovery of already-real work, not new charter
    progress. Both named blockers (`RE-273`, `persistence_quest_state.py`)
@@ -199,21 +226,21 @@ correctly `OPEN`.
 4. Does not touch `runtime.py`/`app.py`/`store.py`, any other lane's
    write zone, `GAME_TEST_QUEUE.md`, or `CHIEF_CONTINUATION.md`. No new
    CORE-REQUEST opened.
-5. Does not claim the adversary review is clean -- it is PENDING, stated
-   plainly, with a named next step.
+5. Does not resolve the adversary's one open design question (a static
+   coupling check across `lua_api/*.py` modules for the
+   `REAL_METHODS`/guard-test pattern this round's bug was an instance of)
+   -- recorded as a decision for whoever next touches this pattern, not
+   answered here.
 
 ## Next round
 
-1. Confirm `pirate-force-server#924`'s final head (after the
-   `origin/main` merge pushed this round) landed on `main`
+1. Confirm `pirate-force-server#924`'s final head landed on `main`
    (`git merge-base --is-ancestor <sha> origin/main`) before anything
-   else, and read the third full-suite run's result if it was captured.
-2. Read the `pf-adversary` result against this round's diff first, before
-   claiming any new work.
-3. Re-check the same two named blockers fresh again: `RE-273`'s status in
+   else.
+2. Re-check the same two named blockers fresh again: `RE-273`'s status in
    `CLIENT_RE_QUEUE.md`, `persistence_quest_state.py` landing on `main`.
    Whichever clears first is the next round's first real-API job.
-4. If both stay blocked: `docs/SCRIPT_LANE.md`'s round `vmm7vf` section
+3. If both stay blocked: `docs/SCRIPT_LANE.md`'s round `vmm7vf` section
    names the fresh backup-work candidate -- a pure-function stub audit
    across `Guild.*`/`Party.*`/`Mob.*`/`Player.*` for a name with the same
    "unambiguous from every call site, no state door needed" shape
