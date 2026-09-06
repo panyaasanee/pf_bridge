@@ -2854,89 +2854,7 @@ sha สำเนาหลังตอบปฏิเสธ/หลังเขี
 ## GT-148 SCENE17-STOWAWAY-ACTORS-FIRST-EYES-001 [attended, in-game]: ออกทะเลกับ Columbus แล้ว **ไคลเอนต์ยังโชว์ actor ของ Port Royal ที่ถูกส่งไปตอนล็อกอินอยู่หรือไม่**  [~~PENDING · เปิดโดย LANE-A (W... -- archived 20260905 (closed; verbatim in `archive/GAME_TEST_QUEUE_ARCHIVE_20260905_closed.md`)
 ## GT-149 DROP-LIFETIME-MEASURE-001 [attended, in-game · แนบไปกับรอบถ่ายวิดีโอของเจ้าของ · ~10 นาที]: ฆ่ามอนแล้ว **จงใจไม่เก็บ** -- ของบนพื้นอยู่ได้กี... -- archived 20260906 (closed; verbatim in `archive/GAME_TEST_QUEUE_ARCHIVE_20260906_closed.md`)
 
-## GT-151 PORT-ROYAL-SEVEN-HOLES-EYES-001 [attended, in-game]: 108 จาก 115 ขึ้นจอ -- **เจ็ดรูที่ผู้เล่นเดินไปเจอ ใช่เจ็ดจุดที่คอนโซลเรียกชื่อหรือไม่**  [OPEN (PARTIAL) · เปิดโดย LANE-A (สาย A · WORLD) รอบ `tz2eri` · 🆕 **อัปเดตโดยเจ้าของใบ LANE-A รอบ `n4wj7k` 2026-08-30T08:30+07:00 — 1/7 จุดตรวจแล้ว ใบไม่ปิด:** กะ3-A ใบ `notes_to_chief/20260830_0030_KA3A-GT131-PASS-owner-confirmed-gt151-partial-plus-four-polish-gaps-and-mob-vs-npc-question.md` เดินไปตรวจจุด P0 (Navy Transfer เดิม) พบว่าง ไม่มีใครยืน มีตัวคุมชัด (Columbus/Loie ยืนใกล้ในเฟรมเดียวกัน) สอดคล้องคำทำนาย "ว่าง" · อีก 6 จุดยังไม่ได้เดินไปตรวจ ตามกติกาใบเขียนว่า "ไม่ได้ตรวจ" ห้ามเดา — ยกไปรอบ attended ถัดไป · 🔴 **[LANE-K รอบ `kxpzxi` 2026-09-07T03:15+07:00] ถอนออกจาก `QUEUE_STATUS_SNAPSHOT.md` ชั่วคราว ตาม `PANYA-ORDER 20260907_0159` ข้อ 2** (หน้าที่คัดใบ attended ที่ไม่จำเป็น PANYA `2148` ย้ายมาอยู่กับ LANE-K): ใบนี้เข้าเกณฑ์ (ก) **อายุ >7 วัน** (เปิด 2026-08-29 = 9 วัน) และเป็นหนึ่งใน ใบที่เจ้าของยกเป็นหลักฐานในคำสั่งเอง · **K ยกเลิกใบเองไม่ได้ (พับ=คัดลอก)** — ใบยังเปิดอยู่ทุกตัวอักษร ไม่มีอะไรถูกลบ · **เจ้าของใบ LANE-A ต้องตอบกลับ: ยืนยันซ้ำว่ายังต้องบูตจริง (แล้ว K ใส่กลับรถบัส) หรือยกเลิกพร้อมเหตุผลตามกฎ PANYA `20260903_1934`** · จดหมายแจ้ง: `notes_to_chief/20260907_0315_LANE-K-CULL-3-tickets-off-bus-need-owner-reconfirm.md`]] [🚫 **CANCELLED โดยเจ้าของใบ LANE-A รอบ `tsdl0w` 2026-09-07T04:26+07:00** — วางโดย LANE-K รอบ `70l5du` 2026-09-07T05:10+07:00 · K ไม่ได้ยกเลิกเอง (พับ=คัดลอก) · จดหมาย `notes_to_chief/20260907_0426_LANE-A-TO-K-gt151-cancelled-no-longer-needs-proving.md` · บรรทัดของเจ้าของใบคำต่อคำตามรูปแบบบังคับของ `PANYA-DECISION 20260903_1934`: "CANCELLED - no longer needs proving because M1/v1 was declared on GT-131's on-screen population pass (R249) and the six unchecked spots only refine WHICH seven of 115 are missing, which blocks no milestone and no other ticket; the one spot LANE-A did walk (P0, round n4wj7k) matched the console prediction, so there is no measured disagreement to chase, and the console side of the question is derivable headless without owner-machine time." · เจ้าของใบรับผิดชอบต่อ: ถ้ารอบ attended ในอนาคตบูตที่ Port Royal (bg0001) อยู่แล้ว LANE-A จะเสนอหกจุดที่เหลือเป็น **rider บรรทัดเดียวในใบนั้น** ไม่ขอที่นั่งบนรถบัสของตัวเอง · nonclaim ที่ยกมาด้วย: ประชากร bg0001 ยังเป็น **108/115** ไม่ใช่ครบ · หกจุดที่เหลือ**ยังไม่ตรวจ** และยกเลิกโดยรู้ตัวว่ายังไม่ตรวจ]
-
-> NUMBERING: grep ก่อนจอง -- `GT-150`/`GT-151`/`GT-152` = 0 hit ทั้งสองไฟล์ · สูงสุดก่อนหน้า = `GT-149` (`RE-` สูงสุด = 150) ⇒ ใบนี้ = `GT-151` · ตัวนับเดียวร่วม `CLIENT_RE_QUEUE.md`
-> ที่มา: จดหมายผล `RE-149` (`notes_to_chief/20260829_1814_RE-149-RESULT-NO-SHIPPED-AVATAR-SOURCE.md`) · โค้ดที่พิมพ์บรรทัด = `world_population.ceiling_console_token` / `undressable_console_token` (ลงใน `pirate-force-server#271`) · ชั้น wire/DB ของ `BUILD-001` วัดครบแล้ว: บูตไร้แฟล็กประกอบ **108 จาก 115** แถวแช่แข็งของ `bg0001` และเจ็ดตัวที่ตกมี**เหตุผลระบุชื่อรายตัว**บนคอนโซลรอบนี้ · สิ่งที่ยังไม่มีใครยืนยันด้วยตา คือรูบนจอเป็นเจ็ดจุด**นั้น** ไม่ใช่เจ็ดจุดอื่น
-> 🔴 **ไม่ซ้ำกับ `GT-131`**: `GT-131` (PENDING) ถามว่า NPC ที่ **มาถึง** แสดง **ตัวจริง** หรือไม่ (เรื่องตัวตน หลัง `GT-078` ถูกเจ้าของปฏิเสธ) · ใบนี้ถามคนละข้อ -- **จุดที่ว่าง ใช่จุดที่ถูกเรียกชื่อหรือไม่** · ห้ามปิดใบหนึ่งด้วยผลของอีกใบ
-> 🆕 **อัปเดตโดยเจ้าของใบ LANE-A รอบ `6oyud5` 2026-08-31T04:34+07:00 — ใบไม่ปิด, เครื่องมือใหม่เท่านั้น:** เจ็ดพิกัดในตารางด้านล่างนี้เคยมาจากการเปิดซอร์สคำนวณมือครั้งเดียวตอนรอบ `tz2eri`
-> ตอนนี้บูตไร้แฟล็กทุกบูตพิมพ์พิกัดเดียวกันเองบนบรรทัด `WORLD_CENSUS` ท้ายสุด (`undressable_positions=7 P0@x,y,z,...`, `world_population.undressable_placements_positioned`/
-> `undressable_positions_console_token`, ยังไม่ merge -- ดู `PR_STATE.txt`) จึงไม่มีทางเพี้ยนจากตารางค้างเก่าถ้าตารางแช่แข็งเคยเปลี่ยน และใบพี่น้อง (`GT-143`, คนละฉาก) ไม่ต้องคำนวณมือซ้ำอีก
-> **ไม่เปลี่ยนตัวคุมหรือ pass criteria ของใบนี้แม้แต่ข้อเดียว** -- เจ็ดจุดในตารางด้านล่างยังใช้เดินได้เหมือนเดิมทุกประการ ตัวเลขตรงกันทั้งสองแหล่ง (ยืนยันด้วย test คนละไฟล์)
-
-### objective (claim เดียว)
-เจ็ดพิกัดที่คอนโซลเรียกชื่อว่าถูกตัด **ว่างเปล่าบนจอจริง** -- ใบนี้ตอบข้อเดียว: "ตรงจุดนี้มีอะไรยืนอยู่ไหม"
-
-### db / server args (เป๊ะ)
-สำเนา `state\run_gt151.sqlite3` · 🔴 ห้ามเปิด canonical `state\pirateforce.sqlite3` · sha256 canonical ก่อน-หลังต้องเท่ากัน
-```
-py -3 -u -m pirateforce_foundation.app --db state\run_gt151.sqlite3
-```
-🔴 **บูตไร้แฟล็ก** ห้ามมีแฟล็กฉากใด ๆ (`--*-scenario`, `--world-census-actors`) · client `-SecondPasswordMode bypass` · 🔴 **restart เซิร์ฟเวอร์ก่อนบูตไคลเอนต์ทุกครั้ง** (session ค้าง ⇒ ไคลเอนต์ถัดไปค้าง "connecting") · จด `BOOT_COMMIT`
-
-### เจ็ดจุด (P = `placement_index` ของแถวเอง 🔴 ไม่ใช่ลำดับในรายการ -- การอ่านรอบก่อนพลาดตรงนี้)
-
-| ลำดับ | P | set | lead | x | y | z | ชื่อในไฟล์ฉาก | ชื่อฝั่งไคลเอนต์ |
-|---|---|---|---|---|---|---|---|---|
-| 1 | P0 | set1 | lead155 | -9139.96 | -2780.05 | 223.29 | Navy Transfer | Port transportation |
-| 2 | P145 | set110 | lead9107 | 1788.80 | -1528.39 | 930.42 | Filet | Jack |
-| 3 | P147 | set112 | lead937 | 5882.73 | -2021.71 | 1985.66 | Rude pirates | Mengsk |
-| 4 | P148 | set113 | lead942 | 13396.38 | -5367.95 | 2210.97 | Pirates from afar | NON_ASCII (CJK พิมพ์บน cp874 ไม่ได้) |
-| 5 | P86 | set86 | lead0 | -10974.88 | -1231.23 | 747.38 | Mori Hiroko | (ไม่มีสิ่งมีชีวิต) |
-| 6 | P87 | set87 | lead0 | -15017.48 | -12759.95 | 308.27 | Sea Phantom | (ไม่มีสิ่งมีชีวิต) |
-| 7 | P75 | set76 | lead819 | 19984.35 | 18249.38 | 1111.40 | Hasan | Tuna |
-
-🔴 **P0 แทบไม่มีต้นทุน**: ห่างจุดเกิดล็อกอิน `(-9239.957, -2780.045, 223.292)` ราว **100 หน่วย** ⇒ ได้ข้อมูลจุดแรกโดยไม่ต้องเดินไปไหน · **ใบนี้คุ้มรันแม้ทำแค่ P0 จุดเดียว** · จุดที่ไม่ได้ทำเขียนว่า "ไม่ได้ทำ" ไม่ใช่ PARTIAL
-
-### ขั้นตอน
-0. มาตรฐานบ้าน: LOCK · boot stamp (+07:00) · sha canonical · copy DB · จด `BOOT_COMMIT`
-1. **server ก่อน client เสมอ** · 🔴 **ห้ามพิมพ์ตัวอักษรใด ๆ ตลอดรอบ** -- ตัวอักษรตอนช่องแชตไม่โฟกัสกลายเป็น hotkey
-2. ล็อกอิน ยังไม่ขยับ → **S0** ภาพนิ่ง full-res ที่จุดเกิด
-3. 🔴 **ตัวคุม (หัวใจของใบ)**: ก่อนรายงานว่า P0 ว่าง ต้องเห็น **NPC ที่มาถึงอย่างน้อยหนึ่งตัว**บริเวณรอบ P0 และถ่ายติดมาด้วย -- ไม่มีตัวคุม จอที่ว่างเพราะสำมะโนไม่มาถึงจะถูกอ่านเป็น PASS โดยบังเอิญ
-4. เดินไป P0 ด้วย `A/S/D/W/Q/E` (click-to-walk ปิดในตั้งค่า) → ถ่าย **full-res** + จดพิกัดที่ UI แสดง
-5. ทำซ้ำข้อ 3-4 กับจุดที่เหลือตามลำดับตาราง จุดละหนึ่งภาพ **พร้อมตัวคุมของจุดนั้น** (หรือเขียนว่า "รอบจุดนี้ไม่มีใครเลย" ซึ่งเป็นผลสำคัญ)
-6. NO-CRASH ด้วย **คลิกขวาค้างลากเท่านั้น** (หมุนกล้องอย่างเดียว ไม่มีไบต์ออกสาย · 🔴 ห้ามใช้ `Q`/`E` เป็นตัววัด NO-CRASH มันหัน**ตัวละคร**จริงและยิง `TargetPosVital`)
-7. ออกเกมด้วย X → ปิดเซิร์ฟเวอร์ → เก็บภาพ + console `.out`/`.err` + sha256 ทุกไฟล์ · `PRAGMA integrity_check` บน**สำเนา** · **teardown เสมอ ภายใน 420 นาทีจาก boot stamp** (`TEMPLATE_teardown_generic.ps1:135`) · sha canonical ซ้ำ · 🔴 ห้าม commit เอง
-
-### pass criteria (สองชั้น 🔴 ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น)
-**wire/DB (headless ล้วน · grep บรรทัดเดียวจากคอนโซลบูต · 🔴 grep ต้องมี `2>&1` บางโทเคนอยู่บน stderr):** คัดลอกดิบ ๆ ท้ายบรรทัดต้องอ่านได้ว่า
-```
-| undressable=7 P0/set1/lead155/Port_transportation,P75/set76/lead819/Tuna,P86/set86/lead0/NO_CREATURE,P87/set87/lead0/NO_CREATURE,P145/set110/lead9107/Jack,P147/set112/lead937/Mengsk,P148/set113/lead942/NON_ASCII | ceiling=108/115 client_data_bounded RE-149:BOUNDED-NEGATIVE no_avatar_source=5,no_creature=2
-```
-+ `integrity_check`=ok · `sessions` +1 ต่อการเข้าเกม · `max(lease_generation)` ไม่ถอยหลัง · sha canonical ตรงก่อน-หลัง
-🔴 ชั้นนี้ **ตอบไม่ได้ว่ามีอะไรอยู่บนจอ**
-**client-observable (ต้องมีคนหน้าจอ):** ภาพนิ่ง full-res ต่อจุด + sha256 · ต่อจุดตอบสองอย่าง**แยกกัน**: (ก) บนจุดนั้นมีอะไรยืนอยู่ไหม ถ้ามีชื่ออะไร (ข) **ตัวคุม** รอบจุดเห็น NPC อื่นกี่ตัว · **จดสีป้ายชื่อทุกป้ายทุกภาพ** บรรทัดละป้าย รวมป้ายตัวเอง ไม่มีป้ายเขียน `none` · อ่านสีจาก **ภาพนิ่ง full-res เท่านั้น** ห้ามอ่านจาก contact sheet ภาพย่อ หรือวิดีโอ · 🔴 **จดสีอย่างเดียว ห้ามเดาสาเหตุ** (`RE-067`) · ต่างจากภาพเซิร์ฟเวอร์จริง → `REAL_SERVER_DIVERGENCE.tsv` แถวละหนึ่งข้อ · NO-CRASH/CRASH · `OBSERVER_CONFIRMED`
-🔴 ชั้นนี้ **ตอบไม่ได้ว่าเฟรมใดออกจากเซิร์ฟเวอร์**
-**PASS** = ทุกจุดที่ทำ **ว่าง** และ **รอบจุดนั้นมีคนอยู่** (ตัวคุมผ่าน) -- ขาดตัวคุม = PARTIAL ไม่ใช่ PASS
-**FAIL / ของน่าสนใจ** = (ก) มีอะไรยืนบนจุดที่ถูกเรียกชื่อ ⇒ รายชื่อที่ตัดไม่ตรงกับจอ · (ข) รอบจุดว่างด้วย ⇒ เรื่องใหญ่กว่าเจ็ด · **ทั้งสองแบบมีค่าเท่ากับ PASS** ⇒ redirect เป็นใบใหม่ ไม่ใช่ความล้มเหลว
-
-### คำทำนาย (เป็นคำทำนาย ผิด = ผล ไม่ใช่ความล้มเหลว)
-**P1** เจ็ดจุดว่าง รอบ ๆ มีคน ⇒ รายชื่อที่ตัดตรงกับจอ · **P2** จุดใดมีคนยืน ⇒ index ที่ใช้อ้างแถวเพี้ยน เปิดใบ RE ทันที · **P3** รอบจุดว่างด้วย ⇒ สำมะโนไม่มาถึงบริเวณนั้น ใหญ่กว่าใบนี้
-
-### กฎจุดเกิด
-รอบนี้ก๊อป DB ⇒ ตัวละครกลับจุดเกิดทุกบูต · ตามกฎ `pf-attended-test` (เกิด**ใกล้และหันหน้าเข้าหา**สิ่งที่ทดสอบ) จุดเกิดล็อกอินห่าง P0 ~100 หน่วยอยู่แล้ว ไม่ต้องตั้งค่าเพิ่ม
-
-### [ไม่อ้าง] nonclaims
-1. **ไม่ตัดสินว่า 108 ตัวที่มาถึงแสดงตัวตนถูกหรือไม่** -- นั่นคือ `GT-131` ห้ามปิดสองใบทับกัน
-2. ไม่ตัดสินว่าห้าตัวที่ไม่มีแหล่ง avatar จะวาดได้ในอนาคตไหม -- `RE-149` ตอบจากข้อมูลสถิตล้วน และประกาศเองว่า**ไม่ได้ดูจอ**
-3. ไม่ตัดสินเลข 115 ในตารางแช่แข็ง · ไม่ตัดสิน encoding ของชื่อ CJK (`GT-145`) · ไม่วัดว่าเซิร์ฟเวอร์ต้นฉบับมีใครยืนตรงนั้น
-
-### links
-`notes_to_chief/20260829_1814_RE-149-RESULT-NO-SHIPPED-AVATAR-SOURCE.md` · `world_population.undressable_placements_named` + `population.load_port_royal_placements` (ที่มาพิกัดเจ็ดจุด วัดรอบนี้) · `pirate-force-server#271` · `GT-131` (คนละข้ออ้าง) · `GT-143` (ใบพี่น้อง วิธีเดียวกันคนละฉาก) · เพิ่มรอบ `6oyud5`: `world_population.undressable_placements_positioned` / `undressable_positions_console_token` (พิมพ์เจ็ดพิกัดนี้เองทุกบูต, ยังไม่ merge)
-
-**ผู้เปิดใบ: LANE-A (สาย A · WORLD) รอบ `tz2eri` 2026-08-29T18:4x+07:00** -- ผลกลับมาที่สาย A บริโภค
-
-### result (ผู้เทสกรอก -- หนึ่งบรรทัดต่อจุด)
-```
-BOOT_COMMIT :
-บรรทัด undressable/ceiling จากคอนโซล (คัดดิบ grep 2>&1) :
-P0 / P145 / P147 / P148 / P86 / P87 / P75 :
-   วาง | มีคนยืน(ชื่อ) | ไม่ได้ทำ  + ตัวคุม: รอบจุดเห็น NPC อื่นกี่ตัว/ชื่อ (หรือ "ไม่มีเลย")
-สีป้ายชื่อทุกป้ายทุกภาพ (บรรทัดละป้าย, ไม่มี = none) :
-path + sha256 ของภาพ/console/DB :
-CANON_SHA ก่อน/หลัง · integrity_check · sessions · lease_generation · NO-CRASH/CRASH :
-OBSERVER_CONFIRMED  :
-```
+## GT-151 PORT-ROYAL-SEVEN-HOLES-EYES-001 [attended, in-game]: 108 จาก 115 ขึ้นจอ -- **เจ็ดรูที่ผู้เล่นเดินไปเจอ ใช่เจ็ดจุดที่คอนโซลเรียกชื่อหรือไม่**... -- archived 20260907 (CANCELLED by owner LANE-A round `tsdl0w` 2026-09-07T04:26+07:00; verbatim in `archive/GAME_TEST_QUEUE_ARCHIVE_20260907_closed.md`)
 
 ---
 
@@ -6459,7 +6377,7 @@ findstr /N /C:"GM_WARP_SEND_OBSERVERS" /C:"SEND_FAILED" /C:"GM_WARP_SCENE_ROLLED
 
 ---
 
-## GT-262 STALL-AND-GUILD-STORAGE-ATTENDED-CAPTURE-001  [🟢 **READY -- เนื้อใบเต็มลงแล้วโดยเจ้าของใบ (LANE-UI)** · สถานะเปลี่ยนจาก `PENDING` (เลขจองไว้ เนื้อยังว่าง) → `READY` เพราะเนื้อใบมาครบแล้ว (รูปแบบเดียวกับ `GT-230` ที่พลิกจาก `PENDING`→`OPEN` รอบ `ziuhft` เมื่อ LANE-UI เติมเนื้อใบเอง) · คู่กับ `RE-261 STALL-AND-GUILD-STORAGE-FIELD-SEMANTICS-FROM-A-REAL-SESSION-001` (`CLIENT_RE_QUEUE.md:5607`) ตาม `AGENTS.md` §7 (`COO-DECISION 20260904_2142` ข้อ 3: ผล RE ที่ขอ attended capture ⇒ ผู้บริโภคผลเปิดใบ GT รอบเดียวกัน) · เลขตั้งโดย chief (LANE-E) รอบ `pv4zg1`/R352 · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-UI** · ผู้รัน = Panya (attended) · **ต่อท้ายคิว "รอเครื่องคุณ" ไม่ใช่หัวคิว** · ไม่บล็อกใคร · ไม่มีการตีมอน · 🔴 **[LANE-K รอบ `kxpzxi` 2026-09-07T03:15+07:00] ถอนออกจาก `QUEUE_STATUS_SNAPSHOT.md` ชั่วคราว ตาม `PANYA-ORDER 20260907_0159` ข้อ 2** (หน้าที่คัดใบ attended ที่ไม่จำเป็น PANYA `2148` ย้ายมาอยู่กับ LANE-K): ใบนี้เข้าเกณฑ์ (ก) **อายุ >7 วัน** (เปิด 2026-08-25 = 13 วัน) และเป็นหนึ่งใน ใบที่เจ้าของยกเป็นหลักฐานในคำสั่งเอง · **K ยกเลิกใบเองไม่ได้ (พับ=คัดลอก)** — ใบยังเปิดอยู่ทุกตัวอักษร ไม่มีอะไรถูกลบ · **เจ้าของใบ LANE-UI ต้องตอบกลับ: ยืนยันซ้ำว่ายังต้องบูตจริง (แล้ว K ใส่กลับรถบัส) หรือยกเลิกพร้อมเหตุผลตามกฎ PANYA `20260903_1934`** · จดหมายแจ้ง: `notes_to_chief/20260907_0315_LANE-K-CULL-3-tickets-off-bus-need-owner-reconfirm.md`]]
+## GT-262 STALL-AND-GUILD-STORAGE-ATTENDED-CAPTURE-001  [🟢 **READY -- เนื้อใบเต็มลงแล้วโดยเจ้าของใบ (LANE-UI)** · สถานะเปลี่ยนจาก `PENDING` (เลขจองไว้ เนื้อยังว่าง) → `READY` เพราะเนื้อใบมาครบแล้ว (รูปแบบเดียวกับ `GT-230` ที่พลิกจาก `PENDING`→`OPEN` รอบ `ziuhft` เมื่อ LANE-UI เติมเนื้อใบเอง) · คู่กับ `RE-261 STALL-AND-GUILD-STORAGE-FIELD-SEMANTICS-FROM-A-REAL-SESSION-001` (`CLIENT_RE_QUEUE.md:5607`) ตาม `AGENTS.md` §7 (`COO-DECISION 20260904_2142` ข้อ 3: ผล RE ที่ขอ attended capture ⇒ ผู้บริโภคผลเปิดใบ GT รอบเดียวกัน) · เลขตั้งโดย chief (LANE-E) รอบ `pv4zg1`/R352 · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-UI** · ผู้รัน = Panya (attended) · **ต่อท้ายคิว "รอเครื่องคุณ" ไม่ใช่หัวคิว** · ไม่บล็อกใคร · ไม่มีการตีมอน · 🔴 **[LANE-K รอบ `kxpzxi` 2026-09-07T03:15+07:00] ถอนออกจาก `QUEUE_STATUS_SNAPSHOT.md` ชั่วคราว ตาม `PANYA-ORDER 20260907_0159` ข้อ 2** (หน้าที่คัดใบ attended ที่ไม่จำเป็น PANYA `2148` ย้ายมาอยู่กับ LANE-K): ใบนี้เข้าเกณฑ์ (ก) **อายุ >7 วัน** (เปิด 2026-08-25 = 13 วัน) และเป็นหนึ่งใน ใบที่เจ้าของยกเป็นหลักฐานในคำสั่งเอง · **K ยกเลิกใบเองไม่ได้ (พับ=คัดลอก)** — ใบยังเปิดอยู่ทุกตัวอักษร ไม่มีอะไรถูกลบ · **เจ้าของใบ LANE-UI ต้องตอบกลับ: ยืนยันซ้ำว่ายังต้องบูตจริง (แล้ว K ใส่กลับรถบัส) หรือยกเลิกพร้อมเหตุผลตามกฎ PANYA `20260903_1934`** · จดหมายแจ้ง: `notes_to_chief/20260907_0315_LANE-K-CULL-3-tickets-off-bus-need-owner-reconfirm.md`]] [🚫 **CANCELLED โดยเจ้าของใบ LANE-UI รอบ `fvp9ke` 2026-09-07T04:56+07:00** — วางโดย LANE-K รอบ `rlapyk` 2026-09-07T06:11+07:00 · K ไม่ได้ยกเลิกเอง (พับ=คัดลอก) · จดหมาย `notes_to_chief/20260907_0456_LANE-UI-TO-K-gt262-cancel-with-reason.md` · บรรทัดของเจ้าของใบคำต่อคำ: "`GT-262` = ยกเลิก (CANCELLED BY OWNER) — K ไม่ต้องใส่กลับรถบัส" · เหตุผลคำต่อคำตามกฎ `PANYA 20260903_1934`: "ไม่มีกลไกให้ 'ติดอาวุธ' ในฉากเป้าหมาย ⇒ **ใบนี้ออก `HEADLESS_PROOF:` ไม่ได้เลยโดยโครงสร้าง** ไม่ใช่เพราะเจ้าของใบขี้เกียจเติม แต่เพราะยังไม่มีอะไรให้ headless พิมพ์ออกมา ... การยืนยันซ้ำจึงเป็นการถือที่นั่งบนรถบัสไว้เฉย ๆ ยกเลิกจึงตรงกว่าและซื่อสัตย์กว่า" · วัดซ้ำหน้างานที่เจ้าของใบยกมา: `grep -rn "Stall\|GuildStorage" src/pirateforce_foundation/ --include=*.py` = 0 hit · `StallOpenVital 0x2A3E`/`StallStartVital 0x30FE`/`StallOperateVital 0x3DE4` = `NAME-ONLY` · `GuildStorageOpenVital 0x5CAD`/`GuildStorageResultVital 0x70D0` = `UNTOUCHED` · **`RE-261` ยังเปิดอยู่ ไม่ได้ถูกยกเลิกไปด้วย** (คำของเจ้าของใบ) · nonclaim ที่ยกมาด้วย: เจ้าของใบไม่ได้อ้างว่า layout ที่รู้แล้ว = WIRED และไม่ได้แตะสถานะใบอื่นที่ K ถอน]
 
 - ทำไมใบนี้ถึงมีอยู่: `RE-261` ปิดจาก static เดี่ยวไม่ได้ (จดหมายต้นทางของมันเองยอมรับ `[NEEDS-ATTENDED-CAPTURE]`) เพราะ opcode ของทั้งสองระบบมีจริงในไบนารีแต่ `external/PF_FIELD_VALIDATION.tsv` ทุกแถวเป็น `NOT_OBSERVED`/`serializer_status=OPEN` — ไม่เคยมีเฟรมจริงจากสองระบบนี้ในคลังแคปเจอร์เลยสักครั้ง · ตาม `AGENTS.md` §7 (`COO-DECISION 20260904_2142` ข้อ 3) ผลของมันต้องมีใบ GT คู่ในรอบเดียวกัน มิเช่นนั้น `RE-261` จะไม่มีวันถูกทดสอบ (ผู้เทสอ่าน `GAME_TEST_QUEUE.md` เท่านั้น ไม่เคยอ่าน `CLIENT_RE_QUEUE.md`) · ใบนี้คือใบนั้น
 
@@ -6698,7 +6616,7 @@ ATTENDED: ไม่ผ่าน = กดไม่ติด (รายงาน�
 
 > 🔴 **ห้ามสายอื่นใช้เลข `GT-272`** · numbering: คำสั่งนับเลขของบ้าน คืน **271** (จาก `RE-271` ที่ LANE-CS อ้างถึงใน `GT-243` หัวใบ รอบ `88ej1z`, ยังไม่ลงเนื้อใบเต็ม) ⇒ เลขว่างตัวถัดไปคือ **272** [วัดแล้ว รอบ `ss9u08`/R363] · เลขเดียวกับ `RE-272` ตามที่ LANE-DB ขอ (วางพร้อมกันรอบเดียว)
 
-## GT-276 LEARN-SKILL-RESULT-WALKLOCK-ISOLATE-001  [🟢 **READY -- attended -- เจ้าของใบ/ผู้บริโภคผล = LANE-CS** · ตั้งเลขโดย LANE-K รอบ `slug54r2` 2026-09-06T13:40+07:00 ตามคำขอ `notes_to_chief/20260906_1252_LANE-CS-TO-CHIEF-gt249-grade-plus-walklock-isolate-ticket.md` ข้อ 2 (เนื้อใบวางคำต่อคำจากร่างท้ายจดหมายนั้น) · เลขว่างตัวถัดไปหลัง `GT-274`/`GT-275` (จองไว้ก่อนหน้า ยังไม่วางเนื้อใบ — ไม่ชนกัน) · ยืนยันไม่ซ้ำ: grep `GT-276`/`RE-276` ทั้ง `GAME_TEST_QUEUE.md` `CLIENT_RE_QUEUE.md` `archive/` `notes_to_chief/` `NOW.md` = ไม่เจอที่อื่นก่อนวาง] 🔴 [LANE-K รอบ `70l5du` 2026-09-07T05:10+07:00] เนื้อใบส่วน `boot:`/`ATTENDED:` **ถูกแทนคำต่อคำ** ตามคำขอเจ้าของใบ (`notes_to_chief/20260907_0437_LANE-CS-TO-K-gt-body-gt276-headless-proof-plus-corrected-boot.md`) เพราะใบเดิมสั่งใช้เครื่องมือที่ไม่มีในทรี = ใบตกรถแน่นอน · `HEADLESS_PROOF:` มาแล้วแต่ผูกกับคอมมิต `c6a9a95` ซึ่ง**ยังไม่ใช่ main** ⇒ ยังไม่ขึ้นรถบัส (หมวด ค.)
+## GT-276 LEARN-SKILL-RESULT-WALKLOCK-ISOLATE-001  [🟢 **READY -- attended -- เจ้าของใบ/ผู้บริโภคผล = LANE-CS** · ตั้งเลขโดย LANE-K รอบ `slug54r2` 2026-09-06T13:40+07:00 ตามคำขอ `notes_to_chief/20260906_1252_LANE-CS-TO-CHIEF-gt249-grade-plus-walklock-isolate-ticket.md` ข้อ 2 (เนื้อใบวางคำต่อคำจากร่างท้ายจดหมายนั้น) · เลขว่างตัวถัดไปหลัง `GT-274`/`GT-275` (จองไว้ก่อนหน้า ยังไม่วางเนื้อใบ — ไม่ชนกัน) · ยืนยันไม่ซ้ำ: grep `GT-276`/`RE-276` ทั้ง `GAME_TEST_QUEUE.md` `CLIENT_RE_QUEUE.md` `archive/` `notes_to_chief/` `NOW.md` = ไม่เจอที่อื่นก่อนวาง] 🔴 [LANE-K รอบ `70l5du` 2026-09-07T05:10+07:00] เนื้อใบส่วน `boot:`/`ATTENDED:` **ถูกแทนคำต่อคำ** ตามคำขอเจ้าของใบ (`notes_to_chief/20260907_0437_LANE-CS-TO-K-gt-body-gt276-headless-proof-plus-corrected-boot.md`) เพราะใบเดิมสั่งใช้เครื่องมือที่ไม่มีในทรี = ใบตกรถแน่นอน · `HEADLESS_PROOF:` มาแล้วแต่ผูกกับคอมมิต `c6a9a95` ซึ่ง**ยังไม่ใช่ main** ⇒ ยังไม่ขึ้นรถบัส (หมวด ค.) [🟢 **เงื่อนไขข้อ (1) ของเจ้าของใบเป็นจริงแล้ว — K วัดเอง รอบ `rlapyk` 2026-09-07T06:11+07:00** · เจ้าของใบ LANE-CS เขียนเงื่อนไขไว้เองสามข้อ: (1) PR รอบ `li5jc1` เข้า main (2) LANE-CS รันคำสั่งเดิมซ้ำบน main (3) เปลี่ยนเลขคอมมิตในใบ · K วัดสดบนโคลนที่ `git fetch origin main` (`pirate-force-server` head `550a36d`): `git cat-file -e c6a9a95^{commit}` = **มีแล้ว** และ `git merge-base --is-ancestor c6a9a95 origin/main` = **ผ่าน** ⇒ คอมมิตที่ผลิตโทเคน `LEARN_SKILL_STEP_ARMED_SUMMARY steps=6 one_frame_each=yes RESULT=PASS` **อยู่บน `origin/main` แล้ว** (รอบก่อน `70l5du` วัดตอน main = `e4670a5` ยังไม่มีอ็อบเจกต์นี้) · 🔴 **K ไม่พลิกใบขึ้นรถบัสเอง** — ข้อ (2)(3) เป็นของเจ้าของใบ (พับ=คัดลอก ไม่ใช่ตัดสิน) · จดหมายแจ้ง LANE-CS: `notes_to_chief/20260907_0611_LANE-K-TO-CS-gt276-token-commit-is-on-main-now.md` · ใบจะขึ้นหมวด ข. ของสแนปช็อตในรอบแรกที่ LANE-CS ตอบกลับ]
 
 **คำถามของใบ**: ส่งทีละเฟรมของ sweep 6 ขั้น `learn_skill_result_hypothesis_learn_sweep.json` (คนละรอบจาก `GT-249` ที่ส่งครบ 6 เฟรมรวด) แล้ว "เดินไม่ได้" (พบครั้งแรกใน `GT-249`/R312) มาจากเฟรมไหน
 
@@ -6946,7 +6864,7 @@ body: `tickets/GT-287.md`
 
 ---
 
-## GT-288 NAME-COLOUR-SWEEP-DUMMY-ROW-001  [PENDING -- หมายเหตุจากผู้เปิดใบ (B): สปาวน์เนอร์ยังไม่ต่อสายเข้า runtime.py/app.py จนกว่าจะมี CORE-REQUEST แยกต่อสาย env -> dispatch ใบนี้ยังบูตขึ้นจริงไม่ได้ · 🔴 เงื่อนไขที่สอง (chief ถอนคำสั่งตัวเอง `20260907_0345`, พับโดย LANE-K รอบ `kxpzxi` 2026-09-07T03:13+07:00): **ห้ามขึ้นรถบัส attended** จนกว่า chief ส่งใบยืนยันว่าแก้เป็น **เฟรมเดียวผนวกเข้า census** ลง main แล้ว -- เฟรม collection แยกจะลบ NPC ทั้งเมืองออกจากจอ (RE-092 replace-by-omission) ทำให้ตัวควบคุม `N-BASE` ใช้ไม่ได้ · คำสั่ง "รอ 4 วินาที" และรายการป้ายชื่อในบล็อก `0250` **ถูกถอนแล้ว** (ค่าที่ถูก: รอ >=8 วินาที · ชุด `=1` ไม่มี `N-AT3`/`N-SKIN`) -- ดูบล็อก "ใบถอนของ chief" ใน `tickets/GT-288.md`] -- objective: "RE-155 ใบแรกของ B ตามเส้นตาย 02:00 -- แถวหุ่นทดลอง สองต้นแบบ (NPC + Training Iron Man 916) พร้อมโค้ดสปาวน์ รายการผู้สมัคร บล็อก ATTENDED" (คำต่อคำจากหัวจดหมาย) -- เนื้อใบเต็ม (steps/pass criteria/ตารางผู้สมัคร) อยู่ที่ `tickets/GT-288.md` (>8,192 B ตั้งแต่เกิด, per `PANYA-ORDER 1448`) · เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้ทดสอบ = LANE-B (ตาม PANYA `2142`+`2150` ใน `NOW.md`: "เจ้าของ = B") · ผู้บริโภคผล = LANE-B/COO/Panya · ตั้งเลขโดย LANE-K รอบ `6rj6h1` 2026-09-07T01:09+07:00 (ก่อนเส้นตาย NOW `07 ก.ย. 02:00`) · เนื้อใบมาจากจดหมาย `notes_to_chief/20260907_0021_LANE-B-TO-K-gt-body-RE-155-dummy-row-npc-and-916-sweep.md` คำต่อคำ 🔴 [LANE-K รอบ `70l5du` 2026-09-07T05:10+07:00] **บล็อก `ATTENDED:` ใหม่ (เฟรมเดียวผนวกเข้า census) วางแล้วใน `tickets/GT-288.md`** คำต่อคำจาก `notes_to_chief/20260907_0341_FROM_CHIEF-TO-K-re155-one-frame-with-the-census.md` ซึ่งแทนบล็อกในจดหมาย `0250` และ `0345` ทั้งสองใบ · บล็อกเดิมของ LANE-B ไม่ถูกลบ แต่ห้ามใช้บูต · **ยังไม่ขึ้นรถบัส**: chief เขียนเองว่าโค้ดอยู่ใน `pirate-force-server#981` (draft) **ยังไม่ใช่ main** และ "ยังไม่จัดคิวจนกว่าผมส่งใบว่า merge แล้ว" ⇒ ใบยังอยู่หมวด **ง. ตกรถ** · ยังไม่มี `HEADLESS_PROOF:` (โทเคน census มาจากกิ่ง ไม่ใช่ main) · 🔴 **ชุด 2 (`=2`) ห้ามบูต** — `N-AT3`/`M-AT3` ใช้ `actor_type=3` (`CMyActor`) ซึ่ง thunk `+0x38` ของ `NPCAttr` รับเฉพาะ `CNetNPC` (4,5) ⇒ ได้ทั้ง FAIL ปลอมและ PASS ปลอม รอ LANE-B ตัดผู้สมัครใหม่ (3 -> 5 `CAvatarNPC`)
+## GT-288 NAME-COLOUR-SWEEP-DUMMY-ROW-001  [PENDING -- หมายเหตุจากผู้เปิดใบ (B): สปาวน์เนอร์ยังไม่ต่อสายเข้า runtime.py/app.py จนกว่าจะมี CORE-REQUEST แยกต่อสาย env -> dispatch ใบนี้ยังบูตขึ้นจริงไม่ได้ · 🔴 เงื่อนไขที่สอง (chief ถอนคำสั่งตัวเอง `20260907_0345`, พับโดย LANE-K รอบ `kxpzxi` 2026-09-07T03:13+07:00): **ห้ามขึ้นรถบัส attended** จนกว่า chief ส่งใบยืนยันว่าแก้เป็น **เฟรมเดียวผนวกเข้า census** ลง main แล้ว -- เฟรม collection แยกจะลบ NPC ทั้งเมืองออกจากจอ (RE-092 replace-by-omission) ทำให้ตัวควบคุม `N-BASE` ใช้ไม่ได้ · คำสั่ง "รอ 4 วินาที" และรายการป้ายชื่อในบล็อก `0250` **ถูกถอนแล้ว** (ค่าที่ถูก: รอ >=8 วินาที · ชุด `=1` ไม่มี `N-AT3`/`N-SKIN`) -- ดูบล็อก "ใบถอนของ chief" ใน `tickets/GT-288.md`] -- objective: "RE-155 ใบแรกของ B ตามเส้นตาย 02:00 -- แถวหุ่นทดลอง สองต้นแบบ (NPC + Training Iron Man 916) พร้อมโค้ดสปาวน์ รายการผู้สมัคร บล็อก ATTENDED" (คำต่อคำจากหัวจดหมาย) -- เนื้อใบเต็ม (steps/pass criteria/ตารางผู้สมัคร) อยู่ที่ `tickets/GT-288.md` (>8,192 B ตั้งแต่เกิด, per `PANYA-ORDER 1448`) · เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้ทดสอบ = LANE-B (ตาม PANYA `2142`+`2150` ใน `NOW.md`: "เจ้าของ = B") · ผู้บริโภคผล = LANE-B/COO/Panya · ตั้งเลขโดย LANE-K รอบ `6rj6h1` 2026-09-07T01:09+07:00 (ก่อนเส้นตาย NOW `07 ก.ย. 02:00`) · เนื้อใบมาจากจดหมาย `notes_to_chief/20260907_0021_LANE-B-TO-K-gt-body-RE-155-dummy-row-npc-and-916-sweep.md` คำต่อคำ 🔴 [LANE-K รอบ `70l5du` 2026-09-07T05:10+07:00] **บล็อก `ATTENDED:` ใหม่ (เฟรมเดียวผนวกเข้า census) วางแล้วใน `tickets/GT-288.md`** คำต่อคำจาก `notes_to_chief/20260907_0341_FROM_CHIEF-TO-K-re155-one-frame-with-the-census.md` ซึ่งแทนบล็อกในจดหมาย `0250` และ `0345` ทั้งสองใบ · บล็อกเดิมของ LANE-B ไม่ถูกลบ แต่ห้ามใช้บูต · **ยังไม่ขึ้นรถบัส**: chief เขียนเองว่าโค้ดอยู่ใน `pirate-force-server#981` (draft) **ยังไม่ใช่ main** และ "ยังไม่จัดคิวจนกว่าผมส่งใบว่า merge แล้ว" ⇒ ใบยังอยู่หมวด **ง. ตกรถ** · ยังไม่มี `HEADLESS_PROOF:` (โทเคน census มาจากกิ่ง ไม่ใช่ main) · 🔴 **ชุด 2 (`=2`) ห้ามบูต** — `N-AT3`/`M-AT3` ใช้ `actor_type=3` (`CMyActor`) ซึ่ง thunk `+0x38` ของ `NPCAttr` รับเฉพาะ `CNetNPC` (4,5) ⇒ ได้ทั้ง FAIL ปลอมและ PASS ปลอม รอ LANE-B ตัดผู้สมัครใหม่ (3 -> 5 `CAvatarNPC`) [🟡 **ยังเป็น PENDING ต่อ — เจ้าของใบ LANE-B ตอบ K แล้วว่า "ยังพลิก READY ไม่ได้"** · วางโดย LANE-K รอบ `rlapyk` 2026-09-07T06:11+07:00 · จดหมาย `notes_to_chief/20260907_0441_LANE-B-TO-K-gt288-cannot-flip-ready-no-caller-on-main.md` · ถ้อยคำเจ้าของใบคำต่อคำ: "ไม่ใช่เพราะ B ไม่ยอมพลิก แต่เพราะเขียนบรรทัด `HEADLESS_PROOF:` ให้เป็นจริงไม่ได้บนคอมมิต main ปัจจุบัน" · สิ่งที่เจ้าของใบวัด (บน `pirate-force-server` `70e6018`): โมดูล `src/pirateforce_foundation/name_colour_sweep.py` อยู่บน main จริง แต่ `git grep -n "name_colour_sweep" origin/main -- '*.py'` เจอแค่ตัวไฟล์เอง + คอมเมนต์ใน `tools/pf_runtimeres_actor_entry_static.py` ⇒ **ไม่มีผู้เรียกใน `src/`** · `git grep -rn "sweep_entries\|NAME_COLOUR_SWEEP_UNARMED" origin/main` = 0 แถว · บูต headless ด้วย `PF_NAME_COLOUR_SWEEP=1` ไม่มีโทเคนออกคอนโซล · **K ต้องทำอะไร: "ยังไม่ต้องทำอะไร" (คำของเจ้าของใบ)** ⇒ ใบคงสถานะเดิม ไม่ขึ้น `QUEUE_STATUS_SNAPSHOT.md` · ผู้สมัคร `actor_type` เปลี่ยน 3 -> 5 (`CAvatarNPC`) แล้วโดย B แต่ **อยู่ใน `pirate-force-server#990` ซึ่ง `notes_to_chief/20260907_0604_SYNC-NOTICE-pirate-force-server-pr990-closed-never-merged.md` แจ้งว่าถูกปิดโดยไม่ merge (gate RED)** — งานยังอยู่บนกิ่ง `claude/magical-albattani-b08g3z` · คำถามป้ายชื่อของ AT5 ได้เลขใบแล้ว = **`RE-290`** (ตั้งเลขรอบเดียวกัน `rlapyk`) · nonclaim ที่เจ้าของใบยกมาด้วย: ใบนี้ไม่ได้บอกว่าสีบนจอเป็นอะไร และไม่ได้บอกว่า `actor_type 5` จะเรนเดอร์จริง] [🟢 **เงื่อนไขที่เจ้าของใบ LANE-B ตั้งไว้เองเป็นจริงแล้ว — K วัดเอง รอบ `rlapyk` 2026-09-07T06:11+07:00** · จดหมาย `0441` ของเจ้าของใบเขียนว่า B จะส่ง `*-TO-K-*` พลิก READY "ในรอบแรกที่ `git grep -n \"name_colour_sweep\" origin/main -- 'src/*.py'` มีผู้เรียกจริง" · K วัดสดบน `pirate-force-server` head `550a36d`: **มีผู้เรียกแล้ว** — `runtime.py:27` `from . import name_colour_sweep` และ `runtime.py:12095` `sweep_bodies = name_colour_sweep.sweep_entries(` พร้อมโทเคน `NAME_COLOUR_SWEEP_ARMED` (`runtime.py:12202`) / `NAME_COLOUR_SWEEP_UNARMED value=` (`12231`) / `NAME_COLOUR_SWEEP_REFUSED` (`12105`) · เทียบกับรอบ `b08g3z` ที่ B วัดบน `70e6018` แล้วเจอ 0 แถว ⇒ ตัวเชื่อมลง main ระหว่างสองคอมมิตนี้ · 🔴 **K ไม่พลิก READY เอง และไม่เขียน `HEADLESS_PROOF:` ให้ใคร** — เจ้าของใบต้องรัน headless เองบน main แล้วส่งโทเคนมา (พับ=คัดลอก) · จดหมายแจ้ง LANE-B: `notes_to_chief/20260907_0611_LANE-K-TO-B-gt288-the-caller-you-waited-for-is-on-main.md`]
 
 owner: LANE-B
 ATTENDED:
@@ -6966,3 +6884,49 @@ body: `tickets/GT-288.md`
 **ผู้เปิดใบ: LANE-B (ผ่าน `notes_to_chief/20260907_0021_LANE-B-TO-K-gt-body-RE-155-dummy-row-npc-and-916-sweep.md`) -- ตั้งเลข/วาง: LANE-K รอบ `6rj6h1` -- ผู้บริโภคผล: LANE-B/COO/Panya**
 
 ---
+
+## GT-291 CHARACTER-HP-BAR-RETURNS-AFTER-LEAVING-126-001  [🟡 **OPEN · ยังไม่ขึ้นรถบัส** (`HEADLESS_PROOF:` ยังไม่ผ่านเกณฑ์ `PANYA-ORDER 20260907_0159` -- ดูบล็อก "K วัดอะไรเอง" ท้ายใบ) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-DB** · **ผู้ร่วมเขต (ทางออกจากฉาก) = LANE-A** · ตั้งเลขโดย LANE-K รอบ `rlapyk` 2026-09-07T06:11+07:00 (ภายในรอบที่เห็นคำขอ) · เนื้อใบมาจากจดหมาย `notes_to_chief/20260907_0532_LANE-DB-TO-K-gt-body-hp-bar-after-leaving-126.md` คำต่อคำ · เปิดตามบรรทัด `NOW.md` (COO รอบ `0445`) "ใบสร้าง A/DB: ออก 126 คืน HP · BoatHealth != -1" และคำขอใน `notes_to_chief/20260907_0123_KA1A-R322B-RESULTS-*.md` ให้แยกออกจาก `GT-281`]
+
+"ออกจาก 126 แล้วหลอด HP ตัวละครต้องกลับมา"
+
+ใบนี้คือ **ใบสร้าง A/DB** ที่ `NOW.md` (COO รอบ `0445`) สั่งไว้หนึ่งบรรทัด และที่ `notes_to_chief/20260907_0123_KA1A-R322B-RESULTS-*.md` ขอให้แยกออกจาก `GT-281` — คำขอเดิมคำต่อคำ: *"ออกจาก 126 ต้องส่ง HP/หลอดตัวละครกลับ และ BoatHealth ห้ามเป็น -1"*
+
+**เจ้าของใบ / ผู้เขียนเนื้อใบ / ผู้บริโภคผล = LANE-DB** · **ผู้ร่วมเขต (ทางออกจากฉาก) = LANE-A**
+
+### สิ่งที่วัด (หนึ่งอย่าง)
+หลังผู้เล่นออกจากฉาก 126 มาขึ้นบก แล้วคลิกตัวเอง **แผงตัวเองแสดง HP ของตัวละคร (ไม่ใช่ -1)** และหลอดใต้ชื่อไม่ใช่หลอดฟ้าค้าง
+
+### ทำไมถึงเป็นไปได้ที่จะเห็น -1 (หลักฐานในรีโป ไม่ใช่การเดา)
+- `src/pirateforce_foundation/gm/attr_wire.py` แถว `x=9` = `category_5C` (BasicAttr +0x5C, u16) โน้ตของแถวเอง: `0x430E10(this)==8 swaps HP to x52/53`
+- แถว `x=52`/`x=53` = `alt_hp_current`/`alt_hp_max` (ActorAttr +0x1A8/+0x1AC, u32) "used when 0x430E10(x9)==8"
+- `SELECTOR_NOTE_R301` (ไฟล์เดียวกัน) ระบุรูปเป๊ะ: **ไม่ใช่เอา x=9 ไปเทียบ 8** แต่เอา x=9 ป้อน `0x430E10` แล้วเทียบ **ผลลัพธ์** กับ 8 · สองเส้นทางอิสระ (nameboard `0x5BD3C0..0x5BD3DB` และ HUD `0x53F180` ผ่านไบต์แคช `[actor+0x358]` ที่ผู้เขียนเดียวคือ `al = (0x430E10(sceneId) == 8)`)
+- `persistence_attr_compose.CLIENT_CONSTRUCTION_DEFAULTS`: `x=52 = 0xFFFFFFFF`, `x=53 = 1` ⇒ **ถ้าเซิร์ฟไม่เคยตั้งคู่สำรอง ไคลเอนต์แสดง -1/1 เอง** ตรงกับที่เจ้าของเห็น
+- วัดสดรอบนี้: ไม่มีคอลัมน์ใดของ `characters` แมปเข้า `x=52`/`x=53` (`SERVER_OWNED_FIELDS` มี 22 แถว ไม่มีสองตัวนี้) ⇒ เซิร์ฟไม่มีอะไรจะส่งให้คู่สำรองแม้อยากส่ง
+
+### 🔴 ที่ใบนี้ **ไม่** อ้าง (สำคัญ อย่าเติมให้)
+- **ไม่อ้างว่าฉาก 126 คือ category 8** · `SELECTOR_NOTE_R301` เขียนไว้ตรง ๆ ว่า "WHAT CATEGORY 8 IS: not decoded" และร่างเก่าของโน้ตนั้นเองเคยต้องขีดฆ่าประโยคที่บอกผู้เทสว่าให้ไปฉากไหน — ใบนี้จึงไม่บอกว่าฉากไหนได้คู่สำรอง
+- **ไม่อ้างว่า x=9 คือ scene id** · สวีปไบต์ของรีโปนี้เองถอนชื่อนั้นแล้ว
+- ไม่วัดสีชื่อ ไม่วัดดาเมจ ไม่วัดดรอป ไม่วัดตาย ไม่วัดเลเวล
+- ไม่อ้างว่าเซิร์ฟวันนี้ส่ง `x=9`/`x=52`/`x=53` ให้ไคลเอนต์ — **ไม่มีเส้นทางส่ง** (ดู `HEADLESS_PROOF:` ด้านล่างซึ่งบอกตรง ๆ ว่าพิสูจน์อะไรและไม่พิสูจน์อะไร)
+
+ATTENDED:
+1. บูตปกติ ไม่มีธง เข้าเกม ออกทะเลไปฉาก 126 (เส้นทางเดียวกับ `GT-281`/R322B) แล้ว **คลิกตัวเอง** อ่านตัวเลข HP บนแผง จดค่าที่เห็นคำต่อคำ
+2. กลับขึ้นบก (ออกจาก 126) แล้ว **คลิกตัวเองซ้ำ** อ่าน HP บนแผงอีกครั้ง + ดูหลอดใต้ชื่อว่ายังเป็นหลอดฟ้าไหม
+3. ผ่าน = ขั้น 2 แสดง HP ของตัวละครเป็นบวก (เช่น 100/100) และไม่มี -1 · ไม่ผ่าน = ขั้น 2 ยังเป็น -1 หรือหลอดฟ้ายังค้าง
+4. ฝั่งสาย: คัดลอกบรรทัดคอนโซลของเซิร์ฟช่วงออกจาก 126 ทั้งบล็อก (ยังไม่มีโทเคนเฉพาะของกลไกนี้ — ต้องการ raw เพื่อดูว่ามีเฟรม attr ออกตอนเปลี่ยนฉากหรือไม่)
+5. บูตด้วยทรี `origin/main` ปัจจุบัน ไม่ต้องตั้งธง ไม่ต้องใช้ GM
+
+HEADLESS_PROOF:
+`HP_PAIR_SELECTOR_REPORT character_id=1 primary x=3/4 shows 100/100 | alternate x=52/53 shows -1/1 (client construction default) | alternate_pair_supplied_by_this_server=False` — รัน headless 2026-09-07 บนกิ่ง `claude/loving-mccarthy-o5zblc` คอมมิต `c19132f` (ฐาน `origin/main` `9da75bf`) · 🔴 **พูดตรง**: โทเคนนี้พิสูจน์ว่า **ฝั่ง DB รู้ HP จริงของตัวละคร (100/100) ขณะที่คู่สำรองจะพิมพ์ -1/1** — มัน **ไม่** พิสูจน์ว่ามีกลไก "ติดอาวุธในฉาก 126" เพราะวันนี้ไม่มีเส้นทางส่ง `x=9`/`x=52`/`x=53` เลยทั้งรีโป · ใบนี้เป็น **ใบสังเกตฝั่งไคลเอนต์** (ดูแผง HP) ที่ไม่ต้องติดอาวุธอะไรบนเซิร์ฟก่อน · ถ้า K/COO ตัดสินว่ารูปนี้ไม่พอผ่านกติกา `0159` ให้ตีกลับมาที่ DB ได้เลย เราจะไม่เติมโทเคนปลอมให้ผ่านเกณฑ์
+
+### 🔴 K วัดอะไรเอง (ไม่เชื่อจดหมาย · `NOW.md` `0159` "ka1-A รันซ้ำก่อนบูต ไม่ตรง = ตัดใบ")
+วัดสดในรอบ `rlapyk` บนโคลนที่ `git fetch origin main` แล้ว (`pirate-force-server` head `550a36d`):
+- `git cat-file -e 9da75bf^{commit}` = มี · `git merge-base --is-ancestor 9da75bf origin/main` = **ผ่าน** (ฐานอยู่บน main จริง)
+- `git cat-file -e c19132f^{commit}` = **ไม่มีอ็อบเจกต์นี้ในโคลนที่ fetch main แล้ว** ⇒ คอมมิตที่รันโทเคน **ไม่ reachable จาก `origin/main`**
+⇒ สองเหตุผลที่ใบนี้ยังไม่ขึ้น `QUEUE_STATUS_SNAPSHOT.md`: (1) โทเคนไม่ได้มาจากคอมมิต main ปัจจุบัน (2) **เจ้าของใบเขียนเองว่าโทเคนไม่ได้พิสูจน์ว่ากลไกติดอาวุธในฉากเป้าหมาย** ซึ่งเป็นถ้อยคำที่ `0159` บังคับ
+🔴 **K ไม่ได้ตัดสินว่าใบนี้ผิดหรือใช้ไม่ได้** — K คัดลอกสิ่งที่เจ้าของใบเขียนไว้เอง แล้วยกคำถาม "ใบสังเกตฝั่งไคลเอนต์ล้วนต้องมี `HEADLESS_PROOF:` แบบติดอาวุธไหม" ให้ COO ตัดสิน ตามที่เจ้าของใบขอมาในจดหมายเอง · จดหมาย: `notes_to_chief/20260907_0611_LANE-K-ASK-COO-headless-proof-for-observation-only-tickets.md`
+
+### result:
+(ว่าง)
+
+> numbering: ตัวนับร่วมสองคิว + `archive/*ARCHIVE*` + `tickets/` คืนสูงสุด **290** (`RE-290`, ตั้งเลขรอบเดียวกัน `rlapyk`) ⇒ ใบนี้ **291** · ตรวจ 0 hit ของ `GT-291`/`RE-291` ทั้งสี่ที่ (live สองคิว + `archive/*ARCHIVE*` + `tickets/` + `notes_to_chief/FROM_CHIEF_*`/`*COO-DECISION*`) ก่อนวาง [ตรวจโดย LANE-K รอบ `rlapyk`]
