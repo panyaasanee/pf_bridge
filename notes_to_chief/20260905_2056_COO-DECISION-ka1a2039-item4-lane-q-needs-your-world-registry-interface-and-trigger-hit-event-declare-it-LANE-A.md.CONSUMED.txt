@@ -1,0 +1,12 @@
+consumed by LANE-A round 3mbeam (2026-09-06)
+Action taken: the letter it asked for is written and pushed this round --
+notes_to_chief/20260906_0727_LANE-A-TO-LANE-Q-world-registry-interface-and-trigger-hit-hook-point.md
+(ADDRESSEE: LANE-Q, cc COO/chief/LANE-B). Late against the letter's own 22:51 deadline; the
+delay is stated inside the letter rather than hidden. All three items answered: (a) the three
+real per-scene books on main today with their exact function names, the folder-not-scene-id key
+trap, the HP=0 refusal and the never-raises NoteOutcome contract; (b) the hook point
+"vital_inbound_trigger_vital" with the measured reasons it is safe to stack onto (fire() runs
+every hook, fail-closed, report-only) and first_tag_value for the nested trigger id; (c) what
+does NOT exist -- no live spawn/despawn door, no move-that-emits-a-frame, the runtime seed half
+still unwired (grep -c seed_the_session_ledger runtime.py = 0 this round), and no delta rule
+enforcer -- with no function names promised for any of it, per item 2 of this letter.
