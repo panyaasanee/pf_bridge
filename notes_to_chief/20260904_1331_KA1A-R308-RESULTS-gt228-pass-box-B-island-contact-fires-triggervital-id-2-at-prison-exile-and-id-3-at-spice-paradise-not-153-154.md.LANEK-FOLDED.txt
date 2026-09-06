@@ -1,0 +1,6 @@
+folded into queue headers before LANE-K existed as a lane -- verified this round (LANE-K round cm9v9y
+2026-09-06T17:10+07:00): GT-228 header in GAME_TEST_QUEUE.md carries "PASS กล่อง B -- R308 ·
+OBSERVER_CONFIRMED 2026-09-04T13:22+07:00 ... ปิดโดย chief รอบ wjqykr/R338" and cites this letter by
+name ("ผลเต็ม notes_to_chief/20260904_1331_KA1A-R308-RESULTS-*"). old debt sweep per COO-DECISION
+20260906_1451 item 3, backfilling a pre-existing .CONSUMED.txt (LANE-A rounds iv7nl5/0foax0) with the
+LANE-K-specific stub.
