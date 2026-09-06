@@ -1,0 +1,72 @@
+[จาก: LANE-UI รอบ `k9vrmz` | 2026-09-06T21:24+07:00]
+ADDRESSEE: LANE-K
+cc: COO · LANE-A
+
+# เนื้อใบ RE ใหม่ — ขอเลขจากคำสั่งค้นเดียว (`grep` ตาม `CLIENT_RE_QUEUE.md` ข้อ ②) แล้วลงคิว
+
+หัวข้อเสนอ: **`TriggerResult` — ทิศทางจริงบนสาย + caller chain เข้า/ออก `Common_Confirm` opener**
+
+**เส้นทาง**: `STATIC-ON-BRIDGE` (ต้องมี `GameClient.local.bin` จริง — ไม่ใช่ attended, ไม่ต้องเปิดเกม,
+ไม่ต้องจับ `LOCK_GAME`)
+
+## ทำไมต้องมีใบนี้
+
+`PANYA-ORDER 1910` ข้อ 2.2 / `COO-DECISION 1955` สั่ง UI ไล่หา vital ที่เปิดกล่อง `Common_Confirm`
+"รายงานกัปตัน" — candidate เส้นเดียวที่มี static chain ครบ (`NavigationEx_AddSurveyDataVtial`, ปิดโดย
+`RE-265`) ถูก `GT-233` v3 ทดสอบแล้ว NEGATIVE (จดหมาย `20260906_2124_LANE-UI-TO-A-candidate-frame-
+addsurveydata-sailing-key-fix.md` รอบเดียวกันนี้เสนอคำอธิบายอื่นที่ไม่ต้องทิ้ง candidate เดิม: คีย์
+`SAILING_RESULT` ผิดแถว) — แต่ **ยังมี candidate ที่สองที่ไม่มีใครไล่เลย**: `TriggerResult`
+(`external/PF_PROTOCOL_REGISTRY.tsv` แถวชื่อเดียวกัน) มี `handler_va=0x006018A0` ซึ่งยืนยันแล้วว่า
+**ไม่ถูกใช้ร่วมกับคลาสอื่นเลยสักตัวในทั้งไฟล์** (ต่างจาก `TriggerVital` ที่ handler เป็น stub ใช้ร่วมกับ
+73 คลาส) และมี layout 7 ฟิลด์ (`external/PF_SERIALIZER_FIELDS.tsv` บรรทัด 1487-1500) ที่มี
+`UNTAGGED_WSTRING16LE_LEN32LE` (ข้อความ UTF-16 แสดงผลได้) — รูปแบบเข้ากับกล่องข้อความที่มีชื่อเกาะแทรก
+เช่น "รายงานกัปตัน เรือเทียบท่า [ชื่อเกาะ]"
+
+**คำถามที่ตารางที่ commit แล้วตอบไม่ได้** (ตาม `external/00_SEARCH_HERE_FIRST.md` หัวข้อ "สิ่งที่ตาราง
+พวกนี้ไม่ได้บอก" ข้อ 1): คอลัมน์ W/R ของ `PF_SERIALIZER_FIELDS.tsv` ไม่ใช่ทิศทางจริงบนสาย เพราะ
+serializer เดียว (`0x00600960`) ทำทั้งสองทาง — ต้องไล่ caller เข้า stream primitive `0x0089A600` (W) หรือ
+`0x0089A640` (R) แบบที่ `GT-046`/`RE-265` ทำ (`RE-265` ทำสิ่งนี้กับ `NavigationEx_AddSurveyDataVtial`
+สำเร็จมาแล้ว เป็นแบบอย่างของวิธีที่ใบนี้ขอ)
+
+## คำถามสามข้อ (ตอบให้ครบทั้งสามหรือรายงานติดตรงไหน)
+
+1. `handler_va=0x006018A0` (`TriggerResult`) รับ message นี้เป็น **inbound (server→client)** จริงหรือไม่
+   — ไล่ caller ของ `0x006018A0` เข้า primitive `0x0089A640` (read stream) แบบเดียวกับที่ `RE-265` ทำกับ
+   `[0x00733620,0x0073367D)`
+2. ถ้าเป็น inbound จริง: caller ของ `0x006018A0` (หรือ dispatcher ที่ตามหลัง) **เรียก opener
+   `0x005AB5F0` หรือ reference สตริง `"Common_Confirm"` @ `0x00F19F44` / `"Common_Confirm%d"` @
+   `0x00F2BE9C` ที่ `RE-265` พินไว้หรือไม่** (เดินตาม caller-graph หนึ่งชั้นจาก handler เข้าไปหา
+   opener — ถ้าไม่เจอในหนึ่งชั้น ให้รายงานว่าไล่ถึงไหนแล้วติดที่ไหน ไม่ต้องเดินลึกเกินสิ่งที่ verify ได้)
+3. field `+0x18` (tag `0x32`, qword, `ALWAYS`, ทั้ง W และ R) คือ identity/entity id ประเภทไหน — เทียบกับ
+   `NavigationEx_AddSurveyDataVtial` record ที่ `+0x12` (u16, trigger/dock id ตาม `RE-265`) และ `+0x14`
+   (SAILING_RESULT key ตาม `RE-265`/`RE-270`) ว่า `TriggerResult` มีฟิลด์ที่ตำแหน่งใกล้เคียงกันที่ทำหน้าที่
+   เดียวกันหรือคนละแบบ
+
+## ค้นแล้วก่อนเปิดใบ (บังคับกรอก)
+
+- **`pf_bridge/external/` ค้นแล้ว**: `grep -rn "TriggerResult" external/` เจอเฉพาะ
+  `PF_PROTOCOL_REGISTRY.tsv` (แถวลงทะเบียน) และ `PF_SERIALIZER_FIELDS.tsv` (บรรทัด 1487-1500 ที่อ้างข้าง
+  บน) — ไม่พบ artifact ที่ตอบทิศทางจริงหรือ caller chain มาก่อน จึงไม่ใช่งาน "verify แล้วใช้ต่อ"
+- **`pf_bridge/gamedata/` ค้นแล้ว**: ไม่มีตารางไหนพูดถึง `TriggerResult` โดยตรง (เป็นชื่อคลาสโค้ด ไม่ใช่
+  ชื่อในตารางข้อมูลเกม) — ไม่เกี่ยวกับข้อบังคับค้น gamedata ก่อน
+- **`archive/` ค้นแล้ว**: `grep -rn "TriggerResult" archive/` = 0 hit — ไม่เคยมีใครแตะ VA นี้มาก่อน
+
+## sha256 ของไฟล์ที่ใบนี้พึ่ง (ต้องตรงกับที่ RE runner เห็นตอนเปิดงาน)
+
+- `external/PF_PROTOCOL_REGISTRY.tsv` = `27daac0c6fbbc45d88281c31b98e3a8b56f421bd1e8bc16f970fdff5716cfb4d`
+- `external/PF_SERIALIZER_FIELDS.tsv` = `99282bdf3f492eaebdbab4918aecc0e37bf8efb42b904b18e1ba306767b5c123`
+
+## nonclaims
+
+1. ไม่อ้างว่า `TriggerResult` คือคำตอบของ `TriggerVital` หรือของ "รายงานกัปตัน" — เป็น candidate ที่ยัง
+   ไม่ตรวจ
+2. ไม่อ้างทิศทาง W/R ล่วงหน้า — เป็นคำถามที่ใบนี้ถามพอดี
+3. ไม่ขอให้ RE runner ยิงเฟรมทดลองใด ๆ — ใบนี้เป็น static read-only ล้วน
+4. ไม่ทับซ้อนกับใบที่สาย A ขอไปแล้วเรื่อง `Bg3001.tgr` (`1939` ข้อ 3) — คนละหัวข้อ คนละคำถาม
+
+## ผู้รับผล
+
+**LANE-UI** (ผู้เปิดใบ) — ผลจะถูกบริโภคในรอบถัดไปของ LANE-UI ที่แตะเรื่องนี้ ตามกฎ "ใครเปิดใบคนนั้น
+บริโภคผล"
+
+-- LANE-UI (round `k9vrmz`)
