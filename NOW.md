@@ -1,48 +1,48 @@
 # NOW — งานที่ต้องมาก่อนทุกอย่าง (สถานะปัจจุบันเท่านั้น · เพดาน 12 KB / 60 บรรทัด · ประวัติอยู่ในจดหมาย `COO-ROUND-*`)
 
-ตรวจล่าสุด: 2026-09-06 08:47 +07:00 โดย COO (กล่องจดหมาย 2 ใบ · 3 คำตัดสิน · `0847`) — สถานะตอนนี้:
-- 🔴 **PANYA-ORDER `0155`/`0156` เส้นตาย 14:00**: **GM `/lv <n>` บน main** (`#885` · เพดาน 254 · run-copy เท่านั้น `0546`) · **DB สวมอาวุธ** แขน (ก) ท่าตามคลาส บน main `#883` ✅ · แขน (ข) `RE-272`/`GT-272` ⇒ DB โค้ด op 5 · ปิดเฉพาะ**บนจอ + คงหลัง relog** · **COO รายงานเจ้าของ 14:41**
-- **GT-233 บูตได้** (`0252` · ผู้สมัคร (1,126)) · chief `viewer_identity` `#894` เปิดอยู่ + เลข GT สี (`0256`) · GT `/lv` รอ chief ตั้งเลข (GM `0434`) — ก่อน 09:41
-- 🔴 **COO ค้างส่ง 09:41**: PANYA `1130` ประเมินกำลัง 8 สาย+ตัวเลข ≤15 บรรทัด · สายที่ 9? · จัดอันดับ PROMOTION_BACKLOG
-- 🔴 **R364 ข้อ 2**: READY 19 ใบไม่มี `ATTENDED:` = ไม่ขึ้นรถบัส — ทุกสายเติมใบของตัวเอง**ก่อนงานใหม่** (A 7 · GM 3 · E 3 · UI 2 · B/CS/DB 1) · เกต `bridgesize` แดงจากบล็อกนี้ = known-red ข้างล่าง push ได้ (`0745`) · ปิดใบใช้ `CANCELLED - covered by` (`0747`)
-- สะพานเดิน `08:32` · PR เปิด server: 2 (`#894` E ตั้งแต่ `06:56` · `#886` GM) · pf_bridge: 2 claim (`#1440` E `06:22` ผีถ้าค้างถึง 09:41 · `#1454` DB) · Scoreboard: 10 แถว DONE 0
+ตรวจล่าสุด: 2026-09-06 10:41 +07:00 โดย COO (รอบผู้บริหาร `1041` · กำลังทีม `1042` · DB `1043` · ESCALATION CS `1044`):
+- 🔴 **PANYA-ORDER `0155`/`0156` เส้นตาย 14:00**: **GM `/lv <n>` บน main** (`#885` · เพดาน 254 · run-copy `0546` · `#886` duplicate ถอนแล้ว) · **DB สวมอาวุธ** แขน (ก) `#883` ✅ · แขน (ข) `RE-272`/`GT-272` วางแล้ว **รอ capture บนเครื่องคุณ (ค้าง 6 ชม.)** ⇒ DB โค้ด op 5 · ปิดเฉพาะ**บนจอ + คงหลัง relog** · **COO รายงาน 14:41**
+- **GT-233 บูตได้** (`0252` · ผู้สมัคร (1,126)) · census `#906` บน main ✅ · chief ค้าง: **เลข GT สี** (`0256`) · **เลข GT `/lv`** (GM `0434` 6 ชม.) · **วาง GT-274** (CS `0805`)
+- 🔴 **R364 ข้อ 2**: READY 19 ใบไม่มี `ATTENDED:` = ไม่ขึ้นรถบัส — ทุกสายเติมใบตัวเอง**ก่อนงานใหม่** (A 7 · GM 3 · E 3 · UI 2 · B/CS/DB 1) · `bridgesize` แดงจากบล็อกนี้ = known-red push ได้ (`0745`) · ปิดใบใช้ `CANCELLED - covered by` (`0747`)
+- สะพานเดิน `10:36` · Scoreboard 40 แถว **DONE 1** (server merge 43/12 ชม. · CS COMING 0 ⇒ `1044`) · PR เปิด server `#908` GM `#907` B ปกติ
 
 ## รอ Panya ติ๊ก  ← คุณดูหัวข้อนี้หัวข้อเดียวพอ
-(ว่าง = ไม่มีอะไรค้างคุณ · ห้ามเกิน 5 ข้อ · ติ๊กแล้วลบทั้งข้อ)
-(ว่าง)
+(ห้ามเกิน 5 ข้อ · ติ๊กแล้วลบทั้งข้อ)
+1. **เคาะสายที่ 9** ใบ `1042`: (ก) LANE-K เสมียนคิว (COO แนะนำ) / (ข) DB ถือชั่วคราว / (ค) ไม่ทำ
+2. **ปิดมือ 3 ใบ**: `pf_bridge#1440` claim ผี · `server#894` ถูกแทนด้วย `#906` · `server#886` duplicate `#885`
 
 ## รอเครื่องคุณ (บูต attended หนึ่งครั้งเก็บทุกใบที่มี `ATTENDED:`)
-1. **`GT-233` M2 provisioning trial — บูตได้ทันที** · env `PF_M2_SURVEY_TRIAL=1` ใบแรกของรถบัส · 🔴 นัดเดียวไม่มี BACKUP · อ่านผลตามบล็อก D1 (เด้ง dock 153 = `n_ID` · เฉพาะ 154 = ไม่ชี้ขาด · เงียบ ≠ ทฤษฎีผิด) · **จดเลเวลตัวละครลงผล** · `RE-270` ขนาน
-2. **`GT-272`** สวมอาวุธ op 5 (DB · `0156` แขน ข) — บูตได้เมื่อโค้ด DB ขึ้น main · **`GT-269`** GMUI พ่วงท้ายได้ · cast 304 `#872` บน main ✅ (`GT-268` รอ A `ATTENDED:`)
-3. GT-266 (วาปสด PASS · relog ไม่ได้วัด)/257/255/230/243 · RE-235/237/261 รัน R320 แล้ว ผล `0155` รอ chief ปิด/แยกใบ
+1. **`GT-233` M2 provisioning trial — บูตได้ทันที** · env `PF_M2_SURVEY_TRIAL=1` ใบแรกของรถบัส · 🔴 นัดเดียวไม่มี BACKUP · อ่านผลตามบล็อก D1 ในใบ (เงียบ ≠ ทฤษฎีผิด) · **จดเลเวลตัวละครลงผล** · `RE-270` ขนาน
+2. **`GT-272`** สวมอาวุธ op 5 (DB · `0156` แขน ข) — capture `RE-272` ก่อน แล้วโค้ด DB ขึ้น main · **`GT-269`** GMUI พ่วงท้ายได้ · `GT-268` รอ A `ATTENDED:`
+3. GT-266/257/255/230/243 · RE-235/237/261 รัน R320 แล้ว ผล `0155` รอ chief ปิด/แยกใบ
 
 ## กติกาของไฟล์นี้ (ห้ามลบสี่บรรทัดนี้)
 - ผู้เขียน: **Panya และ COO เท่านั้น** · คนอื่นเสนอผ่านจดหมายจ่าหน้า `ADDRESSEE: COO`
 - **"เสร็จ" ติ๊กได้โดย Panya คนเดียว** — สถานะสูงสุดที่ COO ไปถึงได้คือ `รอเจ้าของยืนยัน` (โค้ดขึ้น main ไม่ใช่ "เสร็จ" · `production_allowed = False` ยังไม่นับว่าขยับ)
 - **COO มีหน้าที่เตือน** — ย้ายข้อที่คิดว่าเสร็จขึ้น `รอ Panya ติ๊ก` ทันทีในรอบที่ตัดสิน · ค้างเกิน 6 ชม. = ทวงเธอผ่านช่องทางที่เธอเห็นจริง
 - เพดาน **12 KB / 60 บรรทัด** (PANYA `2039` ข้อ 1 · เกต preflight ของ chief) · ข้อที่ปิดแล้ว **ลบทิ้ง** · กฎบ้านอยู่ `AGENTS.md §7` + `prompts/COMMON_LANE_ROUND.md` — NOW ไม่เก็บกฎซ้ำ ยกเว้นที่ยังไม่ลง §7
-- 🔴 ยังไม่ลง §7 (chief `2038` ข้อ 1/7): **ห้ามแฟล็ก `-r` ของ rm ทุกการสะกด** ใช้ `mktemp -d` (PANYA `1546`) · `ATTENDED:`/`SCOREBOARD:` บังคับ · `prompts/` ของ Panya ห้ามสายแก้ · เพดานไฟล์ (GT 300 KB · RE 200 KB · AGENTS/CHIEF_CONTINUATION 30 KB · NOW 12 KB) · **grep ที่ห้า `notes_to_chief/reference_codex_attr/`** (`0256` ข้อ 3)
+- 🔴 ยังไม่ลง §7 (chief `2038` ข้อ 1/7): **ห้ามแฟล็ก `-r` ของ rm ทุกการสะกด** ใช้ `mktemp -d` (PANYA `1546`) · `ATTENDED:`/`SCOREBOARD:` บังคับ · `prompts/` ห้ามสายแก้ · เพดานไฟล์ (GT 300 KB · RE 200 KB · AGENTS/CHIEF_CONTINUATION 30 KB · NOW 12 KB) · **grep ที่ห้า `notes_to_chief/reference_codex_attr/`** (`0256` ข้อ 3)
 - 🔴 **shared world** (PANYA `1057`/`1140`): สถานะโลกต่อฉากอยู่ใน process แชร์ทุก session · reboot = โลกใหม่ · A = world registry · B เขียน combat state ลง registry ของ A · DB ไม่รับงานโลก · ทุก PR ตอบ `TWO_SESSIONS_SAME_SCENE:` · `#827` companion ยัง session-scoped ❌ · ไบต์บนสายต่อคนดูต่างกันได้ (`2348`)
-- 🔴 RE ตอบแล้ว → ใบสร้าง+GT รอบเดียวกัน หรือ `NO_FEATURE_WAITING:` (PANYA `1130` · ผู้ตรวจคู่ = COO) · `KNOWN_RED_MAIN:` **2 แถว** = (1) `skip_census PIN DRIFT test_script_lua_api_instance.py/bridge_lua_scripts pinned 1 observed 0` (Q แก้ PR แยก `0550`) (2) `bridgesize GAME_TEST_QUEUE.md 2.2 MB > 300 KB` **เฉพาะโตจาก `ATTENDED:`/`CANCELLED` ตาม R364 ข้อ 2** (chief archive `0747` · โตจากอย่างอื่นยังแดงจริง) · chief ห้ามปิด PR สายอื่นด้วยสองแถวนี้
+- 🔴 RE ตอบแล้ว → ใบสร้าง+GT รอบเดียวกัน หรือ `NO_FEATURE_WAITING:` (PANYA `1130` · ผู้ตรวจคู่ = COO) · `KNOWN_RED_MAIN:` **2 แถว** = (1) `skip_census PIN DRIFT test_script_lua_api_instance.py/bridge_lua_scripts pinned 1 observed 0` (Q `#891` แล้ว รอ census ยืนยัน) (2) `bridgesize GAME_TEST_QUEUE.md > 300 KB` **เฉพาะโตจาก `ATTENDED:`/`CANCELLED` ตาม R364 ข้อ 2** (chief archive `0747` · โตจากอย่างอื่นยังแดงจริง) · chief ห้ามปิด PR สายอื่นด้วยสองแถวนี้
 
 ## บันไดไมล์สโตน (PANYA `20260904_0233` · ไม่มีกำหนดวัน ห้ามรายงาน "เลยกำหนด" · ผ่าน M(n) ก่อนจึงประกาศ v(n) · `SERVER_VERSIONS.md` ของ chief)
 - ✅ **M1/v1** ประกาศแล้ว (R249 · `SERVER_VERSIONS.md` v1)
-- ⏳ **M2 "ออกจากเมืองได้" — โปรเจกต์อยู่ตรงนี้ · ตัวบล็อกโค้ด 0 · GT-233 อยู่บนเครื่องคุณ**: key `SAILING_RESULT` ที่ record `+0x14` (RE-265) = `#857` + D1/ผู้สมัคร `#865` บน main · เกณฑ์ผ่าน: ใกล้เกาะ → "รายงานกัปตัน" → ผู้เล่นกด → วาปเข้า **เกาะ 2 และ 3 บนจอ** · ห้ามเซิร์ฟเวอร์ส่ง `EnterInstanceVital` เอง · ห้ามเช็คเลเวลฝั่งเซิร์ฟเวอร์ · ชั้นถัดไป = Trigger.* ของ Q
+- ⏳ **M2 "ออกจากเมืองได้" — โปรเจกต์อยู่ตรงนี้ · ตัวบล็อกโค้ด 0 · GT-233 อยู่บนเครื่องคุณ**: `SAILING_RESULT` key `+0x14` (RE-265) `#857`/`#865` บน main · เกณฑ์ผ่าน: ใกล้เกาะ → "รายงานกัปตัน" → ผู้เล่นกด → วาปเข้า **เกาะ 2 และ 3 บนจอ** · ห้ามเซิร์ฟเวอร์ส่ง `EnterInstanceVital` เอง · ห้ามเช็คเลเวลฝั่งเซิร์ฟเวอร์ · ชั้นถัดไป = Trigger.* ของ Q
 - **M3 "สนามมีมอนสเตอร์" = P-2** · **M4 "ตีได้ตายได้"** สี่ข้อ: มอนตีกลับ HP ลดจริง · ตายถูกต้อง · ศพไม่ค้าง · เกิดใหม่ (LANE-B · `GT-224`) · **M5** เก็บได้+รอด relog · **M final** ครบวงจร · ตาราง CHARTER-02 ใน `CHIEF_CONTINUATION.md`
-- 🔴 **LANE-DB: PANYA-ORDER สวมอาวุธ (`0156` · 14:00) มาก่อนทุกอย่าง** (`0345`) · ถัดไป PLAYER/CHARACTER (`0328`): ชิ้น 1 class_id ✅ · ชิ้น 2 **รอ RE `s_SCORE`** · ชิ้น 3 `0x309A` typed · ชิ้น 4 นามแฝง+รหัสรอง (RE ก่อน) · home-marker `#851` ⇒ chief · ประตูเควส/flag **หลัง** chief whitelist (`2353`)
-- **Q SCRIPT/QUEST**: `prompts/LANE-Q.md` · Trigger.* 5/17 · Quest.* `#874` → `0510` · `RE-273` · งานแรก = pin drift PR แยก (`0550`)
+- 🔴 **LANE-DB: PANYA-ORDER สวมอาวุธ (`0156` · 14:00) มาก่อนทุกอย่าง** (`0345`) · PLAYER/CHARACTER (`0328`): ชิ้น 1 ✅ · ชิ้น 2 รอ RE `s_SCORE` · **ชิ้น 3 `0x309A` typed ทำเลย (`1043`)** · ชิ้น 4 นามแฝง+รหัสรอง (RE ก่อน) · home-marker `#851` ⇒ chief · ประตูเควส/flag **หลัง** chief whitelist (`2353`)
+- **Q SCRIPT/QUEST**: `prompts/LANE-Q.md` · Trigger.* 5/17 · Quest.* 1/25 (`#904`) · `RE-273` · pin drift `#891` ✅
 
 ## งานด่วนตอนนี้ (P-1/P-2/P-3 ซ้อนกับบันไดข้างบน)
 - **หาง P-1** (PANYA `0125`): `#689` บน main · ปิดด้วย `GT-223` บนจอ · หนี้ `DropLedgerCell` ข้ามฉาก chief ตั้งเลข · ห้ามลบแถว ledger
-- **P-2 สีชื่อมอน (= M3)**: ส้ม/แดง/เทา ห้ามชมพู + attr/relation ถูก (B) · สี = คู่ (คนดู, มอน) ผ่าน `NPCAttr+0x98` (`0254`) · **chief เสียบ census `#894` เปิด + เลข GT สี (`0256`)** · GM ขยายยาม tripwire คลุม `mob_viewer_link.py` หลัง `/lv` (`0255`) · ห้าม faction-only / hardcode FontStyleID
-- **LANE-GM: `/lv` บน main ✅ → GT บนจอ (`0546`) ก่อน P-3** · P-3 ปุ่ม GM 3 หน้าทำงานจริง (`2150`) · `/speed` ล็อกปิดจน (b'') mask ล็อกอิน (`0545`) · `/warp <n> <x> <y>` ปิดถาวร · `/warp <n>` ฉากเดียวกัน = วาปไป spawn (PANYA `1800`)
-- **M4 · LANE-B**: caller `apply_hp_damage` พักจน Door B ส่งจริง · roster ฉาก 3/4/5/14 บน main · **ฉาก 8 บน main ✅ `#899` · Nina/Carlos = ตายไม่ได้แต่เห็นตัว (`0844`)** · 4 ฉาก bg0006/7/9/11 ใบเดียว ≈10:41 + bg0010 ใบ STATIC ถึง chief (`0748`) · respawn 120 s (`2147`) · `2242` บน main ✅ → B ปิด pose สองเรื่อง · GT (ก) = `GT-274` CS วาง B ตรวจคู่ (`0645`)
-- **M4 · chief** ลำดับ (งานศูนย์ `2242` ✅ · `RE-272/273` ✅ · `0510` ✅): **(0) เลข GT `/lv` (GM `0434`)** → **(1) โทเคน `CANCELLED`+`FAIL` เข้า `pf_queue_status.py` (`0747`)** → (2) `#894` census + เลข GT สี → **(3) archive `GAME_TEST_QUEUE.md` ≤300 KB + `CLIENT_RE_QUEUE.md` ≤200 KB ก่อน 21:41 (`0747`/`0846`)** → `0256`: §7 ที่ห้า · D1 GT-233 `0252` + `RE-270` · หัว AGENTS ไบต์ `2352` · backlog `0547` `0042` DEATH_SEED_WIRING whitelist-DB mirror-adversary home-marker attr+x=9 actor_identities 924+529 · เลขใบ STATIC bg0010 (B)
+- **P-2 สีชื่อมอน (= M3)**: ส้ม/แดง/เทา ห้ามชมพู + attr/relation ถูก (B) · สี = คู่ (คนดู, มอน) ผ่าน `NPCAttr+0x98` (`0254`) · census `#906` บน main ✅ · **chief ตั้งเลข GT สี (`0256`)** · GM ขยายยาม tripwire คลุม `mob_viewer_link.py` หลัง `/lv` (`0255`) · ห้าม faction-only / hardcode FontStyleID
+- **LANE-GM: `/lv` บน main ✅ → GT บนจอ (`0546`) ก่อน P-3** · P-3 ปุ่ม GM 3 หน้า (`2150`) · `/speed` ล็อกปิดจน (b'') mask ล็อกอิน (`0545`) · `/warp <n> <x> <y>` ปิดถาวร · `/warp <n>` ฉากเดียวกัน = วาปไป spawn (PANYA `1800`)
+- **M4 · LANE-B**: caller `apply_hp_damage` พักจน Door B ส่งจริง · roster ฉาก 3/4/5/14/8 บน main (`#899` · Nina/Carlos ตายไม่ได้แต่เห็นตัว `0844`) · 4 ฉาก bg0006/7/9/11 = `#907` เปิด · bg0010 STATIC ถึง chief (`0903`) · respawn 120 s (`2147`) · `2242` ✅ → B ปิด pose สองเรื่อง · GT (ก) = `GT-274` CS วาง B ตรวจคู่ (`0645`)
+- **M4 · chief** ลำดับ (ปิดแล้ว `2242` `RE-272/273` `0510` `#906`): **(0) เลข GT `/lv` (GM `0434`) + เลข GT สี + วาง GT-274/275** → **(1) โทเคน `CANCELLED`+`FAIL` เข้า `pf_queue_status.py` (`0747`)** → **(2) archive `GAME_TEST_QUEUE.md` ≤300 KB + `CLIENT_RE_QUEUE.md` ≤200 KB ก่อน 21:41 (`0747`/`0846` · วัดสด 2.23 MB / 363 KB)** → ตอบ CORE-REQUEST B `20260905_1952` + A `0914` → `0256` §7 ที่ห้า · D1 GT-233 `0252`+`RE-270` · AGENTS ไบต์ `2352` · นิยาม DONE (`1041`) · backlog `0547` `0042` DEATH_SEED_WIRING whitelist-DB home-marker attr+x=9 924+529 · เลขใบ STATIC bg0010
 - **LANE-UI**: `#860` เปิด (RE-266) · GT-184/186 หลัง RE-266 (`2259`)
-- **CS**: `grant_learned_skill` ต่อสายได้ · `GT-274` เนื้อใบรอบนี้ (`0645`) · เทสสกิลรอ `/lv` + สวมอาวุธ · **DB**: `#896` hp-pair audit สำรอง ไม่รันบน DB จริงก่อน `0156` ปิด (`0749`)
+- **CS**: ESCALATION `1044` — เลิกอ้าง `#886` · รอบถัดไปส่ง `skill_attr_hypothesis.py` ปลดแฟล็กหรือใบ GT "กด K" + `ATTENDED:` · **DB**: `1043` — ระหว่างรอ capture ทำชิ้น 3 `0x309A` · `#896`/`#902` ไม่รันบน DB จริงก่อน `0156` ปิด (`0749`)
 
 ## ห้ามทำจนกว่า P-2 จะปิด
 - GT-146 และใบเทสตีมอนทุกใบ · ยกเว้น `ATTACK-POSE-ONE-FIELD-AB-001` (Panya 0904_21:15) + ผู้สืบทอด `GT-274` หุ่น 916 วัดท่าเท่านั้น (`0645`)
 
 ## เมื่อไม่มีงานด่วน — ท่อ promotion (PANYA `2039` ข้อ 3)
-- 5 ตัวแรกที่ควรปลดแฟล็ก + เจ้าของ: **`docs/PROMOTION_BACKLOG.md` อยู่ใน `#894` (chief) รอ merge** ⇒ COO จัดอันดับ 09:41 · จนกว่านั้นทุกสายปลด scenario พิสูจน์แล้วในเขตตัวเอง 1 ตัว (10/60) = งานสำรอง
+- 5 ตัวแรก (COO `1041` จาก `docs/PROMOTION_BACKLOG.md` · เกณฑ์: เห็นบนจอ + ไม่ติด P-2): **1. `skill_attr_hypothesis.py` CS** (กด K) · **2. `remote_player_hypothesis.py` A** (`1057`) · **3. `lane_hooks/lane_a_choose_npc_scene1.py` A** (คลิก NPC → trigger) · **4. `ground_loot_hypothesis.py` B** (หาง P-1) · **5. `item_operate_res_hypothesis.py` UI** (แชทเขียว) · 9 แถว B HP/ตี/ตาย **รอ P-2** · วิธี: PR ปลดแฟล็ก + เทสคู่ + adversary + ใบ GT `ATTENDED:` · 10/60
