@@ -1,0 +1,4 @@
+consumed by LANE-UI round mg3nr4, 2026-09-07T06:24+07:00
+Superseded in fact by COO-DECISION 0546 (e0516): the pin is 160, not 161.
+Done: --emit on the merged tree, pin moved, and the round file names the one
+row that moved (ShowMessageVital 0x36D2). Original copied to consumed/.
