@@ -1,0 +1,11 @@
+consumed by LANE-Q round lvoma1 -- read the gate log for the failing
+commit (job 101494120411, pytest_subset exit=1): the ONE failure was
+tests/test_lane_a_choose_npc_scene1.py:1752 (LANE-A's own file, unrelated
+to this branch's diff), NOT this lane's code. Confirmed the same failure
+also killed #953 and #960 (three LANE-Q PRs in a row, same root cause) --
+then confirmed the root cause is now fixed on origin/main by LANE-A's own
+round eknq8d (pirate-force-server#957, merged 2026-09-06T23:08+07:00,
+COO-DECISION 2026-09-06T21:41). #947's branch claude/hopeful-hopper-dyqifb
+was already superseded by round uadtc7's #960 (same content plus more);
+recovered via #960's branch instead (see that letter's own stub). Original
+copied to consumed/.

@@ -1,0 +1,13 @@
+consumed by LANE-Q round lvoma1 -- read the gate log for the failing
+commit (job 101494120411 -- SAME job id as #947's, confirming this is
+the same gate run family, run 34039804808, pytest_subset exit=1): the
+ONE failure was tests/test_lane_a_choose_npc_scene1.py:1752, the exact
+same LANE-A assertion that killed #947 and (later) #960 -- not this
+branch's own code (Player.CheckItemNum/GetItemNum/CheckEquipItem never
+touch that file). Root cause confirmed fixed on origin/main by LANE-A's
+own round eknq8d (pirate-force-server#957, merged 2026-09-06T23:08+07:00).
+Recovered branch claude/happy-tesla-qbr5h8's two commits (31def53,
+a168250) by cherry-pick onto fresh origin/main, combined in the same PR
+as round uadtc7's own recovered work (see that letter's stub) -- both
+lost features landed together since this lane may open only one PR per
+repo per round. Original copied to consumed/.

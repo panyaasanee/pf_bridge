@@ -1,0 +1,28 @@
+consumed by LANE-Q round lvoma1 -- read the gate log for the failing
+commit (run 34043977287, pytest_subset exit=1): the ONE failure was
+tests/test_lane_a_choose_npc_scene1.py:1752, an AssertionError whose own
+message names the fix ("runtime.py is now queuing extra_actions
+(CORE-REQUEST 20260904_0137 landed) -- invert this assertion to assertIn
+... rather than deleting the test"). Confirmed this is NOT this round's
+(or round uadtc7's) code: git diff of the failing branch never touches
+tests/test_lane_a_choose_npc_scene1.py. Confirmed the SAME failure also
+killed #947 and #953 before this one -- three LANE-Q PRs in a row on the
+identical root cause, which is exactly the "same cause, two rounds
+running" trip-wire prompts/COMMON_LANE_ROUND.md's own house rule names
+(no third blind PR, write COO instead). Did not need to write that letter:
+checked origin/main directly and found the root cause ALREADY fixed by
+LANE-A's own round eknq8d (pirate-force-server#957, "invert the
+talk-trigger assertion now that 0137 landed", merged
+2026-09-06T23:08+07:00, COO-DECISION 2026-09-06T21:41) -- NOW.md's own
+top line already says this ("main เขียว (#957 merge 23:08)"). Recovered
+branch claude/hopeful-hopper-dyqifb's four commits (fd82da2, 13f4c02,
+16349f3, 88042c7) by cherry-pick onto fresh origin/main (post-#957),
+resolving five merge conflicts against round qbr5h8's own recovered
+inventory-seam commits landing in the same PR (docs/PYTEST_SKIP_PINS.json
+counts, docs/SCRIPT_LANE.md section order/status table, a re-measured
+BASELINE_TOTAL_STUB_CALLS -- see this round's own round file for the
+full derivation). pf-adversary already reported this exact diff clean
+(pf_bridge#1583, "round uadtc7 addendum") before it died on the gate --
+not re-invoked this round since no line of the recovered code itself
+changed, only doc/pin bookkeeping around it; flagged as a risk accepted
+in the round file. Original copied to consumed/.
