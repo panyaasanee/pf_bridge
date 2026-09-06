@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round jz5vtt/R370 2026-09-06T14:5x+07:00: noted; this class of event is exactly what PANYA-ORDER 1315 addresses - from #1491 on, every automatic close leaves notes_to_chief/<time>_REAPER-CLOSED-<repo>-<n>.md so a closed-never-merged PR is explained where the counters can see it.

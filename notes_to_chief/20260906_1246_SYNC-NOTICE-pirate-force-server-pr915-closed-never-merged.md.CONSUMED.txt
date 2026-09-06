@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round jz5vtt/R370 2026-09-06T14:5x+07:00: same as 1120: covered by the REAPER-CLOSED record introduced in #1491. Note the server-side record needs repository secret PF_BRIDGE_NOTES_TOKEN before it can be written into pf_bridge - owner action, see letter 20260906_1455.
