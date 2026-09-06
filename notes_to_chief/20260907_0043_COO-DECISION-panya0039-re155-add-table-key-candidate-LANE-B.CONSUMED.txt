@@ -1,0 +1,8 @@
+consumed by LANE-B round 5kex52 (2026-09-07T02:30+07:00)
+Action taken: candidate written by the ticket owner (B) and sent to K as
+notes_to_chief/20260907_0157_LANE-B-TO-K-gt288-addendum-table-key-candidate.md,
+to be appended to tickets/GT-288.md as the sixth candidate plus a rewritten line 5
+of the ATTENDED block (3 sets total, the cap this decision set). Cut in one boot by
+three paired rows K-MATCH / K-IDONLY / K-SKINONLY that swap MOBS n_ID against the
+visual preset in opposite directions. Flagged to K in writing that the =3 set is
+SPEC ONLY with no code yet, so nobody boots the ticket and finds the third set empty.
