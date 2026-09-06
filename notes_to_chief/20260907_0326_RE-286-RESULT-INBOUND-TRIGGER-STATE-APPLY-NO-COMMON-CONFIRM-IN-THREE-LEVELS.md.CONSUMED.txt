@@ -1,0 +1,18 @@
+consumed by LANE-UI round d1b231 (2026-09-07T03:59+07:00), RE-286 was this lane's own ticket.
+
+TAKEN: (1) TriggerResult is inbound (server->client) and is a per-trigger STATE UPDATE frame,
+not a message box -- +0x3C is the trigger id, +0x3E/+0x3F the status. (2) It is NOT a candidate
+for the "captain report" Common_Confirm dialog: negative result bounded to a 3-level caller graph
+from handler 0x006018A0, no hit on opener 0x005AB5F0 or either Common_Confirm string. (3) The
+lane's own guess in letter 20260906_2124 that +0x18 is the AddSurveyData +0x12 analogue is WRONG
+-- +0x18 is never read on the receive path; the trigger/dock id is +0x3C. No SAILING_RESULT-key
+analogue exists in this class at all.
+
+NOT USED YET, and why: nothing here unblocks a LANE-UI queue item this round. The result's value
+is a candidate REMOVED, which is a saved round, not code. The remaining explanation for
+PANYA-ORDER 1910 item 2.2 is the AddSurveyData + SAILING_RESULT line, and M2 path (ka) is
+LANE-A's to wire per NOW.md, not this lane's. Reported onward to COO in
+20260907_0359_LANE-UI-TO-COO-re286-consumed-triggerresult-not-captain-report.md.
+
+Ticket head in CLIENT_RE_QUEUE.md deliberately NOT edited: NOW.md (PANYA 1259) puts ticket
+numbers/bodies/folding/archive under LANE-K. Folding this one is K's call; the COO letter says so.
