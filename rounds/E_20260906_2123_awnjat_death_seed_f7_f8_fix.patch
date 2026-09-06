@@ -1,0 +1,143 @@
+diff --git a/tests/test_death_seed_call_site.py b/tests/test_death_seed_call_site.py
+index e5d9b65..8c26a08 100644
+--- a/tests/test_death_seed_call_site.py
++++ b/tests/test_death_seed_call_site.py
+@@ -136,6 +136,46 @@ class TheDeathSeedCallSiteTests(unittest.TestCase):
+         state.current_scene_music_sent = True
+         return state
+ 
++    def _relogin(self, token):
++        """Log the SAME account back in, into its EXISTING character.
++
++        F7 (pf-adversary, this round): the test this replaces called
++        ``_session`` twice with two DIFFERENT tokens and called the second
++        one ``relogged`` -- ``_synthetic_client_login_pc``/``ensure_account``
++        key the account by the token string, and ``_V25_REAL_CREATE_PC``
++        mints a character every time it runs, so two tokens is two accounts
++        and two characters, never a relog.  The world's grave book is
++        process-global (``PANYA 20260906_1057/1140``: a scene's deaths
++        belong to the world, not the connection), so a fresh SECOND
++        identity would see the first one's kill too -- the test that named
++        itself a relogin was proving the SAME thing
++        ``test_a_second_session_in_the_same_scene_sees_the_first_ones_kill``
++        already proves, under a different name.
++
++        A real relog is the SAME token (so ``ensure_account`` resolves the
++        SAME account_id) without ``_V25_REAL_CREATE_PC`` (which would mint a
++        SECOND character on that account instead of re-entering the first
++        one): login, then ``list_characters`` finds the character the
++        earlier ``_session(token)`` call already created, and start_game
++        selects it directly.
++        """
++        state_type = make_state_class(
++            self.legacy, self.lifecycle, self.projector,
++        )
++        state = state_type(token)
++        with contextlib.redirect_stdout(io.StringIO()):
++            state.dispatch(self.legacy.parse_outer(
++                self.legacy._synthetic_client_login_pc(token)))
++            character = self.store.list_characters(
++                state.foundation.account_id)[-1]
++            state.dispatch(self.legacy.parse_outer(
++                self.legacy._synthetic_start_game_pc(character.selector)))
++        state.teleport_sent = True
++        state.runtime_ack_sent = True
++        state.welcome_message_sent = True
++        state.current_scene_music_sent = True
++        return state
++
+     def _kill_the_victim(self, state):
+         """An accepted kill, through the same commit_death production uses.
+ 
+@@ -168,12 +208,27 @@ class TheDeathSeedCallSiteTests(unittest.TestCase):
+     # ---- the seam ---------------------------------------------------
+ 
+     def test_a_relogin_finds_the_monster_it_killed_still_dead(self) -> None:
+-        first = self._session("seed-relog-a")
++        token = "seed-relog"
++        first = self._session(token)
+         self._kill_the_victim(first)
+ 
+         # The connection dies here.  Everything the player did to the world
+         # that is still true is in the world's book, not in this object.
+-        relogged = self._session("seed-relog-b")
++        # SAME token as `first` -- a real relog, the same account and the
++        # same character, not a second identity that would trivially see
++        # the first one's kill through the shared-scene path instead (F7).
++        relogged = self._relogin(token)
++        self.assertEqual(
++            relogged.foundation.account_id, first.foundation.account_id,
++            "this must be the SAME account relogging, not a second one",
++        )
++        self.assertEqual(
++            relogged.foundation.selected.id, first.foundation.selected.id,
++            "this must be the SAME character re-entering, not a fresh one"
++            " -- otherwise the test below cannot tell a relog from"
++            " test_a_second_session_in_the_same_scene_sees_the_first_ones_"
++            "kill",
++        )
+         self.assertFalse(
+             relogged.mob_death_register.is_dead(
+                 self.victim.actor_identity, self.folder),
+@@ -284,6 +339,61 @@ class TheDeathSeedCallSiteTests(unittest.TestCase):
+             relogged.mob_death_register.is_dead(
+                 self.victim.actor_identity, self.folder))
+ 
++    def test_the_seed_must_run_before_the_respawn_sweep_sees_it(
++        self,
++    ) -> None:
++        """F8 (pf-adversary, this round): a mutant moving the two-line seed
++        statement to the END of ``_sync_combat_scene_state`` survived 6/6
++        on this file, because every test above syncs a session on its OWN
++        boot scene -- ``__init__`` seeds ``mob_combat_scene_folder`` to
++        match it, so ``if folder != self.mob_combat_scene_folder:`` (where
++        ``mob_respawn.sweep_the_session_register`` lives) is false on the
++        very first evaluation and never runs.  Nothing between the seed's
++        real position and the end of the method ever reads what it wrote,
++        so the mutant was invisible to every assertion above: the seed
++        still runs once per sync either way, and by the time anything
++        checks ``is_dead``/HP the late seed has already caught up.
++
++        Forcing the branch open (no real scene change; scene identity is
++        not this test's subject) makes the ONE place the order is load-
++        bearing observable: MEASURED (both orders run against the SAME
++        real grave, only this file's own explore script diffed) -- the
++        seed-first order feeds the newly-buried grave into THIS call's
++        ``mob_respawn.sweep_the_session_register``, which prints a
++        ``MOB_RESPAWN`` line naming it as freshly dated; the seed-last
++        order hands that same sweep a virgin register, the grave is
++        invisible to it, the sweep has nothing to report and prints
++        nothing, and the world book's own respawn timer for that mob is
++        never consulted on this dispatch at all -- silently, since the
++        late seed still lands the grave in the register a moment later
++        and every register/ledger assertion in this file would pass
++        anyway.
++        """
++        first = self._session("seed-order-a")
++        self._kill_the_victim(first)
++
++        relogged = self._session("seed-order-b")
++        # Force the scene-change branch open on the very next sync without
++        # moving anywhere: `_sync` must already have seeded the register
++        # BEFORE this runs the branch's own respawn sweep.
++        relogged.mob_combat_scene_folder = None
++        console = io.StringIO()
++        with contextlib.redirect_stdout(console):
++            relogged._sync_combat_scene_state()
++
++        self.assertIn(
++            "MOB_RESPAWN", console.getvalue(),
++            "the scene-change branch's own respawn sweep printed nothing"
++            " for a grave the world book already held when this sync"
++            " began -- the seed ran AFTER the sweep instead of before it",
++        )
++        self.assertTrue(
++            relogged.mob_death_register.is_dead(
++                self.victim.actor_identity, self.folder),
++            "the grave must still land even when this assertion alone"
++            " cannot tell the two orders apart (see docstring)",
++        )
++
+ 
+ if __name__ == "__main__":                              # pragma: no cover
+     unittest.main()
