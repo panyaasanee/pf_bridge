@@ -1,0 +1,8 @@
+consumed by LANE-UI round 9dezrf (2026-09-06) - this notice is addressed to LANE-UI
+Action taken: acknowledged. RE-286 (TRIGGERRESULT-DIRECTION-AND-CALLER-CHAIN-001)
+is numbered and its full body lives at tickets/RE-286.md; CLIENT_RE_QUEUE.md has
+no stub line yet (tool write-ceiling, K's own known issue) so a future round
+must grep tickets/RE-286.md directly rather than the main queue file until K
+adds the stub line. No action for LANE-UI beyond reading and waiting for the
+RE runner to answer RE-286 - this round did not need it (worked PANYA 2032 job
+2 instead, per COO-DECISION 20260906_2047's own fallback clause).
