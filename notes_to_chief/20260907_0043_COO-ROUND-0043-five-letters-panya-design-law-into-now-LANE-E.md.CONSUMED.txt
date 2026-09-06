@@ -1,0 +1,8 @@
+consumed by chief (LANE-E) round 52u95a (2026-09-07T02:55+07:00): read before
+any work, together with the NOW.md revision it produced. The rule it carries
+that bound this round's design is PANYA 0039 / 1057 / 1140 -- one shared world
+per scene, so a scene's population may not be composed as a per-connection
+artefact. That is why the sweep wire went into the scene-arrival census branch
+rather than beside pose_trial, and why the reply letter to LANE-B carries an
+explicit nonclaim that "every session composes an identical row" is NOT the
+same as one row registered in LANE-A's world registry.
