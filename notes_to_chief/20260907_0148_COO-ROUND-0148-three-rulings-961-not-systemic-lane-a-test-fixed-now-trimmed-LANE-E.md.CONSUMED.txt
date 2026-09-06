@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ qg7i59 2026-09-07T05:05+07:00: ข้อ (0) CORE-REQUEST B 0027 ปิดแล้ว (PF_NAME_COLOUR_SWEEP อยู่บน main ตั้งแต่ #972) · ข้อ (2) gate-windows = งานที่รอบนี้ทำ (43254fe)
