@@ -817,6 +817,63 @@ def check_new_skips(repo, base):
 # the bridge, which pf_git_sync's own contract refuses).
 NEW_FILENAME_LENGTH_CEILING = 100
 
+# COO-DECISION 20260907_0405 item 1, answering LANE-K `0223`: the stub
+# suffixes whose whole length is INHERITED from the letter they point at.
+# Every one of these is a fixed suffix a lane appends to a letter name that
+# already exists at `base` - the lane chooses the suffix, never the 80-odd
+# characters in front of it, and the owner order forbids renaming the
+# letter to make room.  `.LANEK-FOLDED.txt` is 4 characters longer than
+# `.CONSUMED.txt`, which is the whole of why LANE-K's mandated fold stubs
+# went RED under a check that exempted only `.CONSUMED.txt` (round R378
+# addendum, D7).  RE-DERIVED at this commit, not carried over from that
+# addendum, which pf-adversary (round `qg7i59`, D10) measured as already
+# stale when it was written: `git ls-tree -r --name-only origin/main |
+# grep 'LANEK-FOLDED.txt$'` = 31 files, 25 of them over the ceiling,
+# LONGEST 197 characters.  The 22/101 pair the addendum reported was the
+# count at an older tip, and 101 is the SHORTEST offender, not the worst
+# case - read as the worst case it understates the problem by 96
+# characters.
+# Adding a suffix here does NOT widen the exemption to any name a branch
+# invents: the underlying letter must already be a blob at `base` (see
+# `check_new_filename_length`), so a stub whose letter is new on this
+# branch stays this branch's own choice, and stays RED.
+INHERITED_STUB_SUFFIXES = (".CONSUMED.txt", ".LANEK-FOLDED.txt")
+
+
+def _inherited_stub_suffix(basename):
+    """The LONGEST suffix in `INHERITED_STUB_SUFFIXES` that `basename` ends
+    with, or None.
+
+    Longest, not first-in-tuple: today no suffix in the tuple is a suffix
+    of another, so the two rules agree, but a future third suffix that ends
+    with an existing one would make tuple order decide which underlying
+    name gets probed - and the SHORTER strip probes a name that is itself a
+    stub, which is not the letter the exemption is about.
+    """
+    matches = [suffix for suffix in INHERITED_STUB_SUFFIXES
+               if basename.endswith(suffix) and len(basename) > len(suffix)]
+    if not matches:
+        return None
+    return max(matches, key=len)
+
+
+def _git_path_is_blob(repo, ref, relname):
+    """True when `relname` exists at `ref` AS A FILE.
+
+    `_git_blob_size` answers "cat-file -s succeeded", which is also true of
+    a TREE: a stub named after a DIRECTORY that happens to exist at base
+    would inherit an exemption from something that is not a letter at all.
+    A stub points at a file or it points at nothing.
+    """
+    if not relname:
+        return False
+    proc = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(repo), "cat-file", "-t",
+         "%s:%s" % (ref, relname)],
+        capture_output=True, text=True, errors="replace",
+    )
+    return proc.returncode == 0 and proc.stdout.strip() == "blob"
+
 
 def _basenames_at(root, ref):
     """Every basename tracked at `ref`, as a set.  Empty set on any failure.
@@ -835,6 +892,17 @@ def _basenames_at(root, ref):
             for line in listing.stdout.splitlines() if line.strip()}
 
 
+# The two exemptions do not mean the same thing, and pf-adversary (round
+# `qg7i59`, D2) measured the old single sentence claiming BOTH of them for
+# a stub row, where all of it is false: a stub's basename is NOT on the
+# base branch, the branch DID choose to create that path, and nothing is
+# being renamed.  A reviewer could not tell a 220-character archive move
+# (real inherited debt) from a 239-character name that has never existed
+# on any filesystem.  Each row now carries the reason that is true of it.
+INHERITED_MOVE = "basename already on base (a move or copy)"
+INHERITED_STUB = "stub of a letter already on base (suffix is the only new part)"
+
+
 def _print_inherited_long_names(inherited):
     """An exemption is an OPEN skip: named, counted, never silent.
 
@@ -842,18 +910,20 @@ def _print_inherited_long_names(inherited):
     with a reason is fine, a silent one is not.  pf-adversary (round
     `l5tqxc`, B1) measured the previous version asserting "none over 100
     characters" in the same breath as it waved a 211-character name through.
+
+    `inherited` rows are `(name, length, reason)`.
     """
     if not inherited:
         return
-    longest = max(length for _name, length in inherited)
-    print("[filenamelen] SKIPPED (open) - %d path(s) over %d characters whose"
-          " basename" % (len(inherited), NEW_FILENAME_LENGTH_CEILING))
-    print("              is already on the base branch, so this branch did"
-          " not choose it and")
-    print("              the owner order forbids renaming it. Longest: %d"
-          " characters." % longest)
-    for name, length in sorted(inherited, key=lambda row: -row[1])[:10]:
-        print("    inherited %d chars: %s" % (length, name))
+    longest = max(length for _name, length, _why in inherited)
+    print("[filenamelen] SKIPPED (open) - %d path(s) over %d characters this"
+          " branch adds" % (len(inherited), NEW_FILENAME_LENGTH_CEILING))
+    print("              whose length the branch did not choose, and which"
+          " the owner order")
+    print("              forbids fixing by renaming. Longest: %d characters."
+          % longest)
+    for name, length, why in sorted(inherited, key=lambda row: -row[1])[:10]:
+        print("    inherited %d chars (%s): %s" % (length, why, name))
     if len(inherited) > 10:
         print("    ... and %d more" % (len(inherited) - 10))
 
@@ -885,8 +955,11 @@ def check_new_filename_length(repo, base="origin/main"):
     letter, an archive sweep that edits a header as it moves (pf-adversary
     B3 measured 1,300 RED lines from one such sweep, every one of them a
     name that was already on main, with no legal remedy because the owner
-    order forbids renaming old files).  The exemption is COUNTED AND NAMED,
-    never silent: pf-adversary (B1) measured the old `.CONSUMED.txt`
+    order forbids renaming old files).  The same holds for a STUB whose
+    name is `<letter><suffix>` for one of `INHERITED_STUB_SUFFIXES` and
+    whose letter is already a blob at `base` - the branch chose the suffix,
+    not the 80-odd characters in front of it.  The exemption is COUNTED AND
+    NAMED, never silent: pf-adversary (B1) measured the old `.CONSUMED.txt`
     exemption passing a 211-character stub under the sentence "none over 100
     characters", which is the band (190-222) that actually stopped the
     bridge on 2026-09-06.  An exemption nobody counts is indistinguishable
@@ -930,21 +1003,24 @@ def check_new_filename_length(repo, base="origin/main"):
         # able to do ("old files must never be renamed").  Counted below,
         # never silently dropped.
         if basename in old_basenames:
-            inherited.append((name, len(basename)))
+            inherited.append((name, len(basename), INHERITED_MOVE))
             continue
-        # A `.CONSUMED.txt` stub whose underlying letter ALREADY EXISTS at
-        # `base`: every lane's stub convention is a fixed
-        # `<letter-name>.CONSUMED.txt` suffix, so its length is entirely
-        # inherited from a name this branch did not choose and is not
-        # allowed to rename (measured against this exact commit, R375: a
-        # letter already on main at 89 characters becomes a 102-character
-        # stub with no new content in the excess 13). Only the STUB is
-        # exempt this way - a `.CONSUMED.txt` name whose own letter is ALSO
-        # new on this branch is still this branch's choice end to end.
-        if basename.endswith(".CONSUMED.txt"):
-            underlying = name[: -len(".CONSUMED.txt")]
-            if _git_blob_size(root, base, underlying) is not None:
-                inherited.append((name, len(basename)))
+        # A stub (`.CONSUMED.txt`, `.LANEK-FOLDED.txt`) whose underlying
+        # letter ALREADY EXISTS at `base`: every lane's stub convention is a
+        # fixed `<letter-name><suffix>`, so its length is entirely inherited
+        # from a name this branch did not choose and is not allowed to
+        # rename (measured against this exact commit, R375: a letter already
+        # on main at 89 characters becomes a 102-character `.CONSUMED.txt`
+        # stub with no new content in the excess 13; the same letter becomes
+        # a 106-character `.LANEK-FOLDED.txt` stub). Only the STUB is exempt
+        # this way - a stub whose own letter is ALSO new on this branch is
+        # still this branch's choice end to end, and the letter must be a
+        # BLOB at base, not a directory that happens to share the name.
+        stub_suffix = _inherited_stub_suffix(basename)
+        if stub_suffix is not None:
+            underlying = name[: -len(stub_suffix)]
+            if _git_path_is_blob(root, base, underlying):
+                inherited.append((name, len(basename), INHERITED_STUB))
                 continue
         offenders.append((name, len(basename)))
     if offenders:
@@ -1450,7 +1526,7 @@ CENSUS_SELF_TEST_CASES = 2
 BRIDGESIZE_SELF_TEST_CASES = 6
 QUEUEGROWTH_SELF_TEST_CASES = 8
 CONSUMEDSTUB_SELF_TEST_CASES = 9
-FILENAMELEN_SELF_TEST_CASES = 12
+FILENAMELEN_SELF_TEST_CASES = 16
 SCOREBOARD_MANUAL_SELF_TEST_CASES = 8
 
 
@@ -1589,7 +1665,14 @@ def _filenamelen_self_test_cases(tmp):
     underlying letter ALREADY EXISTS at base (not RED - inherited debt,
     R375's own real shape the day this check first ran); the same stub
     shape but the underlying letter is ALSO new on this branch (RED - this
-    branch's own choice end to end); a repo path that is not a git
+    branch's own choice end to end); the same two shapes again for
+    `.LANEK-FOLDED.txt` (COO-DECISION `0405` item 1), with the negative
+    case built so the LETTER is under the ceiling and only the STUB is
+    over it, so the RED can come from nothing but the stub; a stub whose
+    underlying name is a DIRECTORY at base, not a letter (RED); a doubly
+    suffixed `<letter>.CONSUMED.txt.LANEK-FOLDED.txt` whose
+    `<letter>.CONSUMED.txt` is at base (not RED - longest-suffix strip
+    probes the name that actually exists); a repo path that is not a git
     checkout at all (INCONCLUSIVE); and a `base` ref that does not resolve
     (INCONCLUSIVE).
     """
@@ -1616,6 +1699,32 @@ def _filenamelen_self_test_cases(tmp):
     root_new_stub = _filenamelen_git_root(
         tmp, "fl_new_stub",
         [long_letter_name, long_letter_name + ".CONSUMED.txt"])
+    # COO-DECISION 20260907_0405 item 1 / R378 addendum D7: LANE-K's
+    # mandated fold stub, whose suffix is 4 characters longer than
+    # `.CONSUMED.txt` and which therefore went RED on every K round.
+    root_old_fold = _filenamelen_git_root(
+        tmp, "fl_old_fold", [long_letter_name + ".LANEK-FOLDED.txt"],
+        base_names=[long_letter_name])
+    # The negative side, built so ONLY the stub can be the offender: the
+    # letter is 90 characters (under the ceiling, so not itself RED) and
+    # new on this branch, and its 107-character stub must still be RED.
+    short_new_letter = "notes/" + ("c" * 87) + ".md"
+    assert len("c" * 87 + ".md") == 90
+    root_new_fold = _filenamelen_git_root(
+        tmp, "fl_new_fold",
+        [short_new_letter, short_new_letter + ".LANEK-FOLDED.txt"])
+    # A stub named after a DIRECTORY that exists at base is not a stub of a
+    # letter: `cat-file -s` succeeds on a tree, `cat-file -t` does not say
+    # "blob", and the exemption is about letters.
+    root_dir_stub = _filenamelen_git_root(
+        tmp, "fl_dir_stub", [long_letter_name + ".LANEK-FOLDED.txt"],
+        base_names=[long_letter_name + "/inner.txt"])
+    # Folded AFTER being consumed: the longest matching suffix is stripped,
+    # so the name probed at base is the `.CONSUMED.txt` stub that is there.
+    root_double_stub = _filenamelen_git_root(
+        tmp, "fl_double_stub",
+        [long_letter_name + ".CONSUMED.txt.LANEK-FOLDED.txt"],
+        base_names=[long_letter_name, long_letter_name + ".CONSUMED.txt"])
     root_not_repo = pathlib.Path(tmp) / "fl_not_repo"
     root_not_repo.mkdir()
     # pf-adversary round `l5tqxc`, the three shapes it MEASURED wrong.
@@ -1646,6 +1755,14 @@ def _filenamelen_self_test_cases(tmp):
          root_old_stub, "main", True),
         ("CONSUMED stub whose letter is ALSO new - RED",
          root_new_stub, "main", False),
+        ("LANEK-FOLDED stub of an old (base) long letter - not RED",
+         root_old_fold, "main", True),
+        ("LANEK-FOLDED stub whose letter is ALSO new (letter itself"
+         " short) - RED", root_new_fold, "main", False),
+        ("stub named after a DIRECTORY at base, not a letter - RED",
+         root_dir_stub, "main", False),
+        ("CONSUMED stub folded afterwards (double suffix) - not RED",
+         root_double_stub, "main", True),
         ("a RENAME to a long name - RED (adversary l5tqxc B2)",
          root_rename, "main", False),
         ("the mandated consumed/ copy of an old long letter - not RED",
@@ -2537,8 +2654,17 @@ def main():
         print("BRIDGE PREFLIGHT PASS (no bridge file grew past its ceiling")
         print("                       + neither queue file grew past its"
               " per-PR cap")
+        # pf-adversary (round `qg7i59`, D2) measured this line closing a
+        # run that had just printed a 112-character new path as an open
+        # exemption - the same "asserts the opposite of what it printed"
+        # defect B1 found in the check itself and that was fixed only
+        # inside `_print_inherited_long_names`, never here.  The sentence
+        # now says what is actually true on both paths; the exempted names
+        # themselves are above, one line each, with their reason.
         print("                       + no new file name over %d characters"
-              % NEW_FILENAME_LENGTH_CEILING)
+              " except names" % NEW_FILENAME_LENGTH_CEILING)
+        print("                         whose length is inherited (each one"
+              " named above)")
         print("                       + no manual scoreboard row was"
               " touched")
         print("                       + .claude/ untouched or carried by"
@@ -2629,7 +2755,9 @@ def main():
     # into a PR body as evidence, and it was a hardcoded list that had
     # stopped matching what `results` actually contains.
     print("                + no new file name over %d characters in either"
-          " repo" % NEW_FILENAME_LENGTH_CEILING)
+          " repo, except" % NEW_FILENAME_LENGTH_CEILING)
+    print("                  names whose length is inherited (each one named"
+          " above)")
     print("                + .claude/ untouched or carried by chief/COO).")
     print("NOTE: this does NOT promise a green gate - Windows-only runtime")
     print("failures are out of scope.  A RED or INCONCLUSIVE preflight means")
