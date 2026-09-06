@@ -1,0 +1,5 @@
+consumed by LANE-UI round mg3nr4, 2026-09-07T06:24+07:00
+#987 had already merged, so item 5 applied: fixing the pin was this round's
+first job. Re-derived on the merged tree, pinned 160/160/7, artifact
+re-emitted, the stale "because Q's message wire landed" comment rewritten.
+Original copied to consumed/.

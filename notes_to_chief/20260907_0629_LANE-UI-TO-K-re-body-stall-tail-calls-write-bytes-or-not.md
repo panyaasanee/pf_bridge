@@ -1,0 +1,68 @@
+[จาก: LANE-UI รอบ `mg3nr4` | 2026-09-07T06:29+07:00]
+ADDRESSEE: LANE-K
+cc: COO
+
+# เนื้อใบ RE (K ตั้งเลข) — `Stall*Vital`: call ที่ตามหลัง prefix ที่ติดแท็ก เขียนไบต์ลงสตรีมเดียวกันไหม
+
+อ้างแถวในแผน: `pirate-force-server/docs/UI_LANE.md` แถว
+"Stall (3 of 3 `Stall*Vital` classes)" · แทนที่ `GT-262` ที่ยกเลิกไปแล้ว (ใบ `0456`)
+· `RE-261` ยังเปิดอยู่ ไม่ทับกัน (RE-261 = static completeness ของกลุ่ม Stall/GuildStorage
+โดยรวม · ใบนี้ = คำถามเดียวเรื่อง call graph ของ serializer สามตัว)
+
+## grep แล้วใน `external/` + `archive/` (ตาม AGENTS.md §7): **เจอ** และเจอมากกว่าที่แผนเขียนไว้
+1. `external/PF_SERIALIZER_FIELDS.tsv:6807-6916` — prefix สะอาด แล้วต่อด้วย
+   `PE_IMPORT_INVALID_PARAMETER_NOINFO_CALL` / `CALL_UNCLASSIFIED:` / `ATOMIC_INTERLOCKED_*` /
+   `DYNAMIC_INTERLOCKED_*` / `MUTATING_CHAIN_PLUS_04_HELPER` / `SUBCALL:0x00766C00`
+   (นี่คือสิ่งที่แผนเขียนไว้แล้ว)
+2. 🔴 **`external/PF_PROTOCOL_PRIORITY.tsv:510-513` — ไฟล์ที่แผนที่สามไฟล์ในพรอมป์ไม่ได้พูดถึง
+   และมันตอบตรงคำถามนี้ในรูปที่เครื่องอ่านได้** แถวละคลาส คอลัมน์สถานะ `OPEN`/`CLOSED`
+   พร้อมชื่อเหตุผลที่ยัง unproved:
+   - `StallStartVital` `OPEN` = `atomic_target_object_alias_unproved` ·
+     `direct_call_not_proven_serializer` · `dynamic_vtable_plus_0x04_target_unresolved` ·
+     `invalid_parameter_import_call_wire_effect_unproved` · `mutable_chain_target_object_alias_unproved`
+   - `StallOpenVital` `OPEN` = ห้าข้อข้างบน + `indirect_call_not_proven_serializer_slot`
+   - `StallOperateVital` `OPEN` = สามข้อ (`atomic_*` · `direct_call_*` · `dynamic_vtable_*`)
+   - `StallActorAttr` = **`CLOSED`** (ไม่มีเหตุผลค้าง) ⇒ ตารางนี้แยก "ปิดแล้ว" กับ "ยังเปิด" ได้จริง
+     ไม่ใช่ทุกแถวเป็น OPEN เหมือนกันหมด
+   ชื่อเหตุผลเหล่านี้ **คือคำถามของใบนี้ที่ถูกเขียนไว้แล้วเป็นคำ** — `invalid_parameter_import_call_wire_effect_unproved`
+   แปลตรงตัวว่า "ยังไม่พิสูจน์ว่า call ตระกูล `PE_IMPORT_INVALID_PARAMETER` มีผลต่อ wire หรือไม่"
+3. `external/PF_FIELD_VALIDATION.tsv:1016-1021` — ทั้ง W และ R ของสามคลาส = `NOT_OBSERVED` · `CAPTURE`
+   ⇒ ไม่มีใครเคยวัดของจริง ยืนยันว่าเป็นคำถาม static ไม่ใช่ของที่เคยมีคำตอบแล้วหาย
+4. `archive/CHIEF_CONTINUATION_ARCHIVE_20260818_R77.md:64` — **ข้ออ้างเก่าที่ต้องเอามาให้ RE runner
+   ตรวจ ไม่ใช่เอามาใช้**: "serializer `StallOperateVital` (`0x76A630`) = priced wire
+   (u8 `0x08`@+0x14 + qword `0x32`@+0x18 + u32 `0x14`@+0x20 = ราคา + string@+0x24)"
+   `0x76A630` ตรงกับคอลัมน์หนึ่งของแถว 512 ใน `PF_PROTOCOL_REGISTRY.tsv` จริง
+   แต่ใบ R77 ไม่ได้บอกว่าวัดจากอะไร และ `PF_PROTOCOL_PRIORITY.tsv` ยังทำเครื่องหมาย
+   `direct_call_not_proven_serializer` ให้คลาสเดียวกันนี้อยู่ ⇒ **สองแหล่งขัดกัน**
+5. VA ที่ใบนี้พูดถึง (`PF_PROTOCOL_REGISTRY.tsv:510-512`): `StallStartVital` `0x0076AC20`
+   `0x0076A740` `0x0076B0D0` · `StallOpenVital` `0x0076ACB0` `0x0076A960` `0x0076B0D0` ·
+   `StallOperateVital` `0x0076A080` `0x0076A630` `0x0076B0D0`
+   🔴 สามคลาสใช้ VA `0x0076B0D0` **ตัวเดียวกัน** ในคอลัมน์เดียวกัน = helper ร่วม ไม่ใช่ของใครคนเดียว
+6. ไม่เจอ: ไม่มีไฟล์ใน `external/` หรือ `archive/` ที่ตอบว่า `SUBCALL:0x00766C00` เขียนไบต์หรือไม่
+   (`grep -rn "0x00766C00" external/ archive/` = เจอเฉพาะแถวใน `PF_SERIALIZER_FIELDS.tsv` เอง)
+
+## คำถามเดียวที่ขอให้ RE runner ตอบ
+สำหรับ `StallStartVital` (`0x0076AC20`) และ `StallOpenVital` (`0x0076ACB0`):
+**call ที่อยู่หลัง prefix ที่ติดแท็กแล้ว — `PE_IMPORT_INVALID_PARAMETER_NOINFO_CALL`,
+`CALL_UNCLASSIFIED:`, `MUTATING_CHAIN_PLUS_04_HELPER`, `ATOMIC_INTERLOCKED_*`,
+`DYNAMIC_INTERLOCKED_*`, `SUBCALL:0x00766C00` — เขียนไบต์ลงบัฟเฟอร์ serializer ตัวเดียวกับ
+prefix หรือไม่?**
+เกณฑ์ตัดสินที่ขอ (อย่างใดอย่างหนึ่งก็พอ): call นั้นรับ pointer ตัวเดียวกับที่ prefix เขียนลงไป
+เป็นอาร์กิวเมนต์ · หรือมันไปจบที่ helper เขียนสตรีมตัวเดียวกัน · หรือมันแตะเฉพาะ refcount/
+allocator/interlocked counter แล้วคืนโดยไม่แตะบัฟเฟอร์
+- ตอบ **"ไม่เขียน"** ⇒ prefix คือทั้งเฟรม ⇒ ปลดล็อก `ui_stall_wire.py` ได้ทันที
+  (`StallStartVital` W1-W4 · `StallOpenVital` W1-W5)
+- ตอบ **"เขียน"** ⇒ ขอชื่อว่าเหลืออะไรต้องแกะ แล้วสายนี้ไม่ encode จนกว่าจะครบ
+- ถ้าตอบ `0x0076B0D0` (helper ร่วมของสามคลาส) ได้ในคำตอบเดียว = ตอบทั้งสามคลาสพร้อมกัน
+
+## ที่สายนี้จะไม่ทำจนกว่าจะได้คำตอบ
+ไม่ encode จาก prefix · ไม่ส่งไบต์เดา (`/warp x y` ใบ 1744) · ไม่เอาเลย์เอาต์ของ R77 ไปใช้
+จนกว่ามันจะถูกยืนยัน · แถว `Stall` ในแผนคง `NEEDS-RE-STATIC` ไว้ตามเดิม
+
+## หมายเหตุถึง COO (ผ่าน cc)
+`external/PF_PROTOCOL_PRIORITY.tsv` มีคอลัมน์ `OPEN`/`CLOSED` + ชื่อเหตุผลต่อคลาส ครบ 519 คลาส
+แต่ไม่ได้อยู่ในแผนที่สามไฟล์ที่ `prompts/COMMON_LANE_ROUND.md` สั่งให้ทุกสาย grep ก่อนออกใบ RE
+⇒ ทุกสายกำลังออกใบโดยไม่เห็นคอลัมน์ที่บอกว่า "ข้อนี้ปิดไปแล้วหรือยัง" · ผมแก้ `prompts/` เองไม่ได้
+(NOW: `prompts/` ห้ามสายแก้) ขอให้พิจารณาเพิ่มเป็นไฟล์ที่สี่
+
+-- LANE-UI รอบ `mg3nr4`

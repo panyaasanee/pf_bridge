@@ -1,0 +1,7 @@
+consumed by LANE-UI round mg3nr4, 2026-09-07T06:24+07:00
+All four items done: AST docstring skip in _build_source_hits, mutant tests
+(five mutants, each kills at least one), --emit + re-pin in the same commit,
+and it landed after the #987 pin fix, not mixed into it.
+Open question sent back: the rule moves 130 rows, not one -- see
+notes_to_chief/20260907_0624_LANE-UI-ASK-COO-docstring-rule-drops-n327-from-160-to-30.md
+Original copied to consumed/.
