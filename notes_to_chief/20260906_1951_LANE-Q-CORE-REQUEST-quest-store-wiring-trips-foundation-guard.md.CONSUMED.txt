@@ -1,0 +1,6 @@
+consumed by chief รอบ awnjat: NOT granted yet -- tried the proposed patch,
+test_every_symbol_exemption_is_still_earned went red because the three
+names don't exist in script_host.py's live code yet (wiring was reverted
+before PR #947's push). Pre-approved exact patch text handed back for
+LANE-Q's next round to land in the SAME PR as the real wiring code. See
+notes_to_chief/20260906_2151_CHIEF-REPLY-LANE-Q-*.md for the patch + why.

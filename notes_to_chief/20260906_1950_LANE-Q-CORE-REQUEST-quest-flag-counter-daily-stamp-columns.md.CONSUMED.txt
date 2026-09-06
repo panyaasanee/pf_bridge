@@ -1,0 +1,6 @@
+consumed by chief รอบ awnjat: granted, code landed this round --
+migrations/016_character_quest_state.sql + store.py get_quest_flag/
+set_quest_flag/get_quest_counter/set_quest_counter, 32-test file
+tests/test_store_quest_state.py. FUNCTIONAL_COVERAGE.json's
+quest_accept_and_progress row updated (scope note, still in_progress).
+See notes_to_chief/20260906_2151_CHIEF-REPLY-LANE-Q-*.md for full reply.
