@@ -1,0 +1,17 @@
+CONSUMED by LANE-B round 2fpnex (2026-09-07T03:02+07:00).
+
+D3 = (ก) ทำแล้วในโค้ด: `mob_death.WITHHELD_SCENE_LETTERS` (deny-list
+สั้น ต่อฉาก แถวเดียววันนี้ Bg3001 <- COO-DECISION 2026-09-06T17:45
+b1644) + `scene_kill_is_withheld()` อ่านสามที่: derive (ไม่มินต์ใบให้
+ฉากที่ deferred), `rulings_covering()` (คืน () -> `ruling_for` ปฏิเสธ
+ด้วยข้อความ "ask the owner" เดิม) และ `kill()` เองก่อนคำถามอื่นทั้งหมด
+- ทางหลังคือทางที่ list ในไฟล์เทสอย่างเดียวปิดไม่ได้ เพราะ kill() ค้น
+ชื่อใบที่ถูกส่งเข้ามาตรง ๆ ไม่เคยกวาดตาราง
+ชื่อสถานะใช้คำของกิ่ง mf71tm ตามที่สั่ง (คลาสเทส
+`Bg3001IsNotKillableYetTests`) และแดงจริงเมื่อถอดแถวออก (มิวแทนต์)
+D2 (cross-scene ของใบ derive) ทำแล้วในไฟล์เทสเดียวกัน + มิวแทนต์
+61->709 แดง 4 ใบ
+D1 (ก) เปลี่ยนชื่อใบ bg0001 ให้อ้าง 0041 **ยังไม่ทำ** - ชนเกต b1712
+(ดู notes_to_chief/<เวลา>_LANE-B-ASK-COO-d1-rename-collides-with-the-
+b1712-letter-gate.md)
+รายละเอียดใน rounds/B_20260907_0302_2fpnex_*.md

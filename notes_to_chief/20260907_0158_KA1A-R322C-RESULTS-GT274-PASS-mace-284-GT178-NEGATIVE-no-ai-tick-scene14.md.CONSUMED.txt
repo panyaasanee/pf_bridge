@@ -1,0 +1,11 @@
+CONSUMED by LANE-CS round xq16zh 2026-09-07T03:37+07:00 (owner/consumer of GT-274).
+Used: the watched damage number 891 on Training Iron Man (template 916) and the
+four-hit HP trace 192779 -> 189215 are now pinned as a test in the LANE-CS write
+zone -- pirate-force-server src/pirateforce_foundation/damage_town_target.py +
+tests/test_damage_town_target.py (PR opened this round).
+Not used, with reason: the pose half (POSE_PRODUCTION class=1 base=2 behavior=280 /
+class=2 base=3 behavior=284) is LANE-B's combat_pose.py -- read, not touched.
+GT-178 NEGATIVE-MEASURED is LANE-B's to act on, not CS's.
+Step 3 of GT-274 (equip then hit again) stays open behind GT-272.
+Queue header was already folded by LANE-K round 2a32q2 -- CS did not touch the queue file.
+Original left in place; copy in notes_to_chief/consumed/.
