@@ -2235,6 +2235,19 @@ def main():
                          "or ka1-A's own edit to a `manual` row in "
                          "SCOREBOARD_FACTS.tsv (COO-DECISION 20260906_0042). "
                          "Every other PR that diffs a manual row is RED.")
+    ap.add_argument("--bridge-only", action="store_true",
+                    help="run ONLY the checks that live entirely inside this "
+                         "pf_bridge checkout (file size ceilings, per-PR queue "
+                         "growth cap, new file names over %d characters, "
+                         "manual scoreboard rows) and do not require a "
+                         "pirate-force-server clone to exist. This is the mode "
+                         "CI runs in: a workflow in pf_bridge has one "
+                         "repository checked out and nothing else."
+                         % NEW_FILENAME_LENGTH_CEILING)
+    ap.add_argument("--bridge-root", default=None,
+                    help="path to the pf_bridge checkout to judge (default: "
+                         "the checkout this script is being run from). Only "
+                         "meaningful with --bridge-only.")
     args = ap.parse_args()
     if args.self_test:
         return _self_test()
@@ -2264,6 +2277,60 @@ def main():
         print("")
         print("PREFLIGHT INCONCLUSIVE - see the row above.")
         return 1
+
+    bridge_root = pathlib.Path(args.bridge_root).expanduser() \
+        if args.bridge_root is not None \
+        else pathlib.Path(__file__).resolve().parent.parent
+
+    # --bridge-only EXISTS SO THAT A WORKFLOW CAN RUN THIS FILE AT ALL.
+    # COO-DECISION 20260906_2141 (answering chief `2015` item 1) made it a
+    # condition that a workflow really call this tool: "a gate that does not
+    # enforce does not count as set" - and `grep -rn pf_gate_preflight
+    # .github/` was 0 hits in BOTH repositories on 2026-09-06.  The reason it
+    # was 0 is right below this block: with no pirate-force-server clone
+    # beside it, main() returns 2 having run nothing, and a CI job in pf_bridge
+    # has exactly one repository checked out.  Exit 2 is not RED, so a
+    # workflow wired to the old code would have printed FATAL and gone green.
+    # The bridge-side checks need no server clone at all (they read this
+    # checkout and `base`), so they are reachable without one here.
+    if args.bridge_only:
+        print("=== pf_gate_preflight --bridge-only on %s ===" % bridge_root)
+        print("    (server-repo checks - cp874, new skips, base-is-ancestor,")
+        print("     precondition census, reaper mergeability - are NOT run in")
+        print("     this mode and this run says nothing about them.)")
+        results = [
+            check_bridge_file_sizes(bridge_root=bridge_root, base=args.base),
+            check_queue_growth_cap(bridge_root=bridge_root, base=args.base),
+            check_new_filename_length(bridge_root, base=args.base),
+            check_scoreboard_manual_rows(
+                bridge_root=bridge_root, base=args.base,
+                allow_manual_edit=args.allow_manual_scoreboard_edit),
+        ]
+        check_consumed_stub_warning(bridge_root=bridge_root, base=args.base)
+        print("")
+        if False in results:
+            print("BRIDGE PREFLIGHT RED - fix the rows above. This mode judges")
+            print("the pf_bridge checkout only; it is not a full preflight.")
+            return 1
+        if None in results:
+            print("BRIDGE PREFLIGHT INCONCLUSIVE - a check could not run (see")
+            print("the rows above). This is NOT a pass: the usual cause is a")
+            print("base ref that does not resolve (git fetch origin main, or")
+            print("pass --base).")
+            return 1
+        print("BRIDGE PREFLIGHT PASS (no bridge file grew past its ceiling")
+        print("                       + neither queue file grew past its"
+              " per-PR cap")
+        print("                       + no new file name over %d characters"
+              % NEW_FILENAME_LENGTH_CEILING)
+        print("                       + no manual scoreboard row was"
+              " touched).")
+        print("NOTE: the server-repo half of this tool did NOT run. A lane"
+              " still")
+        print("      runs the full `--repo ../pirate-force-server` line before"
+              " it")
+        print("      pushes (AGENTS.md section 7).")
+        return 0
 
     repo = pathlib.Path(args.repo).expanduser()
     if not (repo / ".git").exists():

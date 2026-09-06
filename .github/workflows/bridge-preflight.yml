@@ -1,0 +1,97 @@
+# pf_bridge - run pf_gate_preflight.py on every pull request.
+#
+# WHY THIS FILE EXISTS.  PANYA-ORDER 2026-09-06 19:10 capped every NEW file
+# name in this repository at 100 characters, after six over-long letter names
+# stopped the bridge from fast-forwarding at all (SYNC_STUCK_20260906_1816 and
+# five more that hour).  The check that enforces the cap was written into
+# tools_bridge/pf_gate_preflight.py the same day - and then nothing ran it:
+# `grep -rn pf_gate_preflight .github/` was 0 hits in BOTH repositories on
+# 2026-09-06.  COO-DECISION 20260906_2141 (answering chief `2015` item 1) made
+# closing that hole a condition: "a gate that does not enforce does not count
+# as set".  This workflow is the half that makes the tool RUN on every pull
+# request; the half that makes a RED one actually stop a merge is described
+# under LIMITS below and is not yet installed.
+#
+# WHAT IT JUDGES.  `--bridge-only`: the checks that live entirely inside this
+# checkout - the five file-size ceilings, the per-PR queue growth cap, new
+# basenames over 100 characters, and manual SCOREBOARD_FACTS.tsv rows.  The
+# server-repo half of that tool (cp874, new skips, precondition census) cannot
+# run here, because a workflow in this repository has one repository checked
+# out; the tool says so out loud rather than reporting a pass it did not earn.
+# Lanes still run the full `--repo ../pirate-force-server` line before pushing.
+#
+# LIMITS - READ BEFORE TRUSTING A GREEN TICK HERE.
+#  1. THIS IS ADVISORY TODAY.  merge-claude-pr.yml in this repository merges a
+#     `claude/*` pull request that carries the marker as soon as it is
+#     mergeable and NEVER READS A CHECK RUN, so a red tick here does not stop
+#     it.  Making it blocking is chief's next round.
+#  2. WHEN IT IS MADE BLOCKING, THE VERDICT MUST NOT COME FROM THIS FILE.
+#     `on: pull_request` runs the workflow AS IT EXISTS IN THE PULL REQUEST, so
+#     a lane could edit this file in the same pull request the gate is judging
+#     and hand itself a green tick.  That is tolerable while the verdict only
+#     informs a human; it is not tolerable as a merge condition.  The enforcing
+#     half therefore belongs in the merge job (`pull_request_target`, which
+#     runs the copy on the base branch), evaluating the pull request head as
+#     DATA with the base-branch copy of pf_gate_preflight.py - never by
+#     checking out or executing the head, which is the invariant the header of
+#     merge-claude-pr.yml depends on for its unguarded merge.
+#  3. It follows that a green tick here means "the base-branch rules, as this
+#     branch chose to run them, found nothing" - not "this pull request is
+#     safe to merge".
+#
+# The token is read-only and no secret is used: the job clones and runs one
+# Python file with no network access of its own.
+#
+# ASCII only, like every other file in this pipeline (the bridge console is
+# cp874 and a non-ASCII byte kills the tool that reads these logs).
+name: bridge-preflight
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bridge-preflight-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # fetch-depth: 0 is load-bearing, not caution.  Every check in
+      # --bridge-only mode compares this branch against the base COMMIT
+      # (`git diff --diff-filter=AR <base>`, `git cat-file` on the base's
+      # blobs).  On a shallow clone that commit is absent, the checks return
+      # None, and the tool exits 1 as INCONCLUSIVE - which is the correct
+      # refusal, but a useless one to look at every round.
+      - name: Checkout (full history - the base commit must be present)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Say which two commits are being compared
+        run: |
+          set -euo pipefail
+          echo "head    : $(git rev-parse HEAD)"
+          echo "base sha: ${BASE_SHA}"
+          # A named branch would be the wrong thing to compare against: `main`
+          # moves while this job runs, and a file another round merged in the
+          # meantime would be reported as this branch's.  The base SHA the
+          # pull request event carries does not move.
+          git cat-file -e "${BASE_SHA}^{commit}"
+          echo "base commit is present in this checkout"
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.sha }}
+
+      - name: pf_gate_preflight --bridge-only
+        run: |
+          set -euo pipefail
+          python3 tools_bridge/pf_gate_preflight.py \
+            --bridge-only --base "${BASE_SHA}"
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.sha }}
