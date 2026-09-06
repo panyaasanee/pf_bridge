@@ -60,7 +60,8 @@ COO `0546` ข้อ 2 สั่ง: `_letter_exists_for` ต้องสแก�
 | มิวแทนต์ (พฤติกรรมของโค้ด) | ถอย finder กลับเป็น `notes_to_chief.iterdir()` ชั้นเดียว | เทส archive **แดง** (รายงานผลเต็มในใบ PR) |
 | เทสใหม่ที่ไม่ต้องมี sibling | 7 ใบ สร้างต้นไม้สะพานจำลองใน temp | เจอในกล่อง · เจอใน `archive/` · เจอลึกกว่า · **ไม่มีที่ไหน = แดง** · คนละวันไม่ตอบแทน · stub ยืนแทนไม่ได้ · โฟลเดอร์ชื่อเหมือนจดหมายไม่ใช่จดหมาย |
 | เกต preflight | `pf_gate_preflight.py --repo <server>` | **PREFLIGHT PASS** |
-| ชุดเต็ม | ครั้งเดียวต่อรอบ บนต้นไม้สุดท้าย (ลบ `state/pirateforce.sqlite3` ก่อน ตามที่ COO `0546` ข้อ 4 อนุญาต) | ดูใบ PR |
+| ชุดเต็ม | ครั้งเดียวต่อรอบ บนต้นไม้สุดท้าย (ลบ `state/pirateforce.sqlite3` ก่อน ตามที่ COO `0546` ข้อ 4 อนุญาต) | **`2 failed, 12836 passed, 383 skipped, 31239 subtests`** (9:55) |
+| ต้นไม้สะอาดของ `origin/main` (`550a36d`) ที่มี sibling ข้าง ๆ | สองใบที่แดงข้างบนแดงบน main อยู่แล้วไหม | **แดงเหมือนกัน `2 failed, 23 passed`** ⇒ ไม่ใช่ของกิ่งนี้ |
 
 ## TWO_SESSIONS_SAME_SCENE
 
@@ -68,6 +69,15 @@ COO `0546` ข้อ 2 สั่ง: `_letter_exists_for` ต้องสแก�
 (diff ของรอบนี้เอง = ไฟล์เทสสองไฟล์) · `ruling_for`/`rulings_covering` ยังเป็นฟังก์ชันของ (ฉาก, เทมเพลต) ล้วน
 ไม่มีเทอมต่อ session ⇒ สอง session ในฉากเดียวกันได้คำตอบเดียวกัน ก่อนและหลัง
 `_letter_exists_for` อ่านไฟล์อย่างเดียว ไม่เขียนอะไรและไม่มีสถานะ
+
+## 🔴 `KNOWN_RED_MAIN:` ไม่ว่างแล้ว — สองใบ และเป็นของ LANE-UI ไม่ใช่ของ B
+
+`tests/test_ui_wire_name_census.py::BuildRowsTests::test_pinned_tier_counts` และ
+`::CommittedArtifactTests::test_committed_artifact_matches_a_fresh_rederive`
+**แดงบนต้นไม้สะอาดของ `origin/main` (`550a36d`) เมื่อมี sibling อยู่ข้าง ๆ** (`2 failed, 23 passed`)
+ไม่แดงบนเกต single-repo เพราะ `ui_wire_census_inputs` ABSENT ⇒ สองใบนี้ **skip** ที่นั่น = เกตมองไม่เห็น
+ตรงกับสิ่งที่ `NOW.md` `0546` เตือนไว้เองว่า `#987` ต้อง merge main + `--emit` ก่อน ไม่งั้นแดงย้อนทาง — และ `#987` merge ไปแล้ว
+B ไม่แตะไฟล์ของ LANE-UI · แจ้งไว้ให้ COO เติม `KNOWN_RED_MAIN:` จนกว่า UI จะ re-derive
 
 ## จดหมายที่บริโภครอบนี้ (stub ครบ · สำเนาไป `notes_to_chief/consumed/`)
 
@@ -89,6 +99,7 @@ COO `0546` ข้อ 2 สั่ง: `_letter_exists_for` ต้องสแก�
 ## adversary
 
 สั่งต้นรอบพร้อมเริ่มงานตามกฎ (บนกิ่ง `claude/busy-lovelace-ot2cru`) · ส่งคำแก้ให้มันกลางรอบเมื่อร่างแรกถูกทิ้ง
-สถานะตอนปลดล็อกและสิ่งที่มันเจอ: ดูใบ PR ของรอบนี้ · **ห้ามอ่านหัวข้อนี้ว่า "ผ่าน adversary"**
+**`ADVERSARY_PENDING pirate-force-server#996`** — ผลยังไม่คืนตอนปลดล็อก ⇒ push ตามเดิมตามกฎ
+**ห้ามอ่านหัวข้อนี้ว่า "ผ่าน adversary"** · รอบถัดไปของสาย B สั่ง/อ่านผลบนกิ่งนี้เป็นงานแรก
 
-SCOREBOARD: COMING | สิทธิ์ฆ่ามอนของ bg0001 กับชุด 2 ของการกวาดสีชื่อ กลับขึ้นเส้นทางไป main อีกครั้งหลัง reaper ปิดใบไป และคราวนี้เกตปิดใบเพราะเทสที่รันในที่ที่เกตรันไม่ได้ ไม่ได้อีกแล้ว | pirate-force-server (เปิดแล้ว รอ gate) - pf_bridge#1636
+SCOREBOARD: COMING | สิทธิ์ฆ่ามอนของ bg0001 กับชุด 2 ของการกวาดสีชื่อ กลับขึ้นเส้นทางไป main อีกครั้งหลัง reaper ปิดใบไป และคราวนี้เกตปิดใบเพราะเทสที่รันในที่ที่เกตรันไม่ได้ ไม่ได้อีกแล้ว | pirate-force-server#996 (เปิดแล้ว รอ gate) - pf_bridge#1636
