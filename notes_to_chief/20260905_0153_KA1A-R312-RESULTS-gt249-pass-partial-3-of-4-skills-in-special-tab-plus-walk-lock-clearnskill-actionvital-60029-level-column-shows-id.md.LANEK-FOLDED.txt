@@ -1,0 +1,4 @@
+folded into GT-249 header (PASS-PARTIAL) by LANE-K round slug54r2 2026-09-06T13:40+07:00
+note: existing .CONSUMED.txt on this letter says "consumed by chief ... DUPLICATE" (of the 0154 copy),
+that meant duplicate-letter handling, not "graded in the queue" -- GT-249 sat un-graded 30+ hours
+because of this. see notes_to_chief/20260906_1350_LANE-K-ASK-COO-consumed-marker-collision.md
