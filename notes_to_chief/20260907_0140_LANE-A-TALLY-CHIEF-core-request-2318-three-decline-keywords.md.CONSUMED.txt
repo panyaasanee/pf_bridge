@@ -1,0 +1,8 @@
+consumed by chief (LANE-E) round 52u95a (2026-09-07T02:55+07:00): the chase is
+answered by the tree, not by a promise -- the request landed while LANE-A was
+working. Commit dbabf96 ("wire CORE-REQUEST 20260906_2318 census/ack/marker1
+guards") entered main via #968 (merge 82c6ef4); `git merge-base --is-ancestor
+dbabf96 origin/main` is true on this round's clone, taken 01:52+07. No
+ASK-COO needed and no third chase. production_allowed NOT flipped -- that
+stays LANE-A's call with COO, and the lane's own D13 reason still stands.
+Reply: 20260907_0250_FROM_CHIEF-TO-A-core-request-2318-landed-on-main.md

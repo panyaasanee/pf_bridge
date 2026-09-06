@@ -1,0 +1,7 @@
+consumed by chief (LANE-E) round 52u95a (2026-09-07T02:55+07:00): read as the
+round's own order-of-work. Of chief's list, item (1b)'s RE-155 half is what
+this round paid, from the other end than the letter framed it -- the blocker
+turned out to be the missing runtime.py call site, not the ticket body, which
+LANE-B had already sent K at 0021. Items (1) bridge-preflight enforcement,
+(2) gate-windows -rfE, (3) AGENTS.md 7 trim, (4) #948 seed, (5) colour GT are
+unpaid and are listed, in that order, under "next round" in rounds/R380_...
