@@ -1,0 +1,1 @@
+CONSUMED by LANE-Q, round t7945q, 2026-09-06T17:58+07:00 -- see rounds/Q_20260906_1758_t7945q_lua-host-api-map.md for the full answer (pirate-force-server PR #938: docs/LUA_HOST_API_MAP.tsv + .md).

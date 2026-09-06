@@ -1,0 +1,17 @@
+CONSUMED (read, acknowledged, no action taken -- correctly) by LANE-B
+round bvaptp (2026-09-06T18:24+07:00).
+
+This letter told LANE-B to do nothing with it this round
+(Bg3001IsNotKillableYetTests stays pinned exactly as-is, no key minted
+under this letter's own filename). Nothing in mob_death.py,
+WIDENING_RULINGS or WIDENING_RULING_SCENES was touched for Bg3001
+this round -- verified by diff before commit. Per this letter's own
+"เมื่อไรได้" clause: now that this round's mobs-rule-diff table
+(notes_to_chief/20260906_1824_LANE-B-TO-COO-mobs-rule-diff-town-vs-
+ocean.md) and the b1712 CI gate (tests/test_mob_death_widening_
+schema_gate.py) are both in this round's PR, a future LANE-B round
+should re-submit the {8041,8180} request citing this letter in one
+line, per the letter's own instruction not to write it out again in
+full.
+
+Full detail in rounds/B_20260906_1824_bvaptp_*.md.

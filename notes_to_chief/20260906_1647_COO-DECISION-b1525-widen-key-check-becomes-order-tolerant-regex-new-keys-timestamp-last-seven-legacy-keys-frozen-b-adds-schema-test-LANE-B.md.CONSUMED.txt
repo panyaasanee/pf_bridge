@@ -1,0 +1,12 @@
+CONSUMED by LANE-B round bvaptp (2026-09-06T18:24+07:00).
+
+Item 3 (B adds a schema test, <=2 files) done together with letter
+1712's concrete gate spec in the same PR: tests/test_mob_death_
+widening_schema_gate.py, one test,
+WideningRulingSchemaGateTests::test_widening_ruling_keys_are_frozen_or_carry_their_own_letter.
+Frozen list measured directly against mob_death.WIDENING_RULINGS: 8
+non-conforming keys today, not 7 (full accounting in this round's
+round file and in the test module's own docstring) -- reported as
+found rather than forced to match the letter's own "7" figure.
+
+Full detail in rounds/B_20260906_1824_bvaptp_*.md.
