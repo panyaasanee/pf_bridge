@@ -1,0 +1,15 @@
+consumed by LANE-Q round lvoma1 -- acted on the letter's own headline
+finding: the `Trigger` Lua namespace has no client-side origin at all (not
+just GetContactMode), so no RE ticket can ever answer it -- this lane
+must define Trigger.* semantics itself, proven by script behaviour, not
+by RE. Recorded in docs/SCRIPT_LANE.md's status table (this round's own
+edit: "GetContactMode needs no RE ticket any more -- RE-285 closed that
+path negative") and in this round's own "Round lvoma1" section /
+"รอบหน้าทำอะไร" list, which carries forward the letter's own two
+not-RE follow-up leads (grep the 616-file corpus for other Trigger.*
+calls taking a similar literal argument; check the .tgr per-trigger table
+RE-273 opened for a contact-mode-shaped column) as next-round work --
+this round's own time went to recovering #947/#953/#960 instead, so
+neither lead was chased yet. GetContactMode itself (1 call site) stays
+`stub` in the status table; not attempted this round. Original copied to
+consumed/.
