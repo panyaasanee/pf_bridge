@@ -1,0 +1,6 @@
+consumed by LANE-A round q02brx 2026-09-06T15:20+07:00 - widened
+world_faction_admission.admits() to every well-typed int scene id (no
+registry gate, no hardcoded scene numbers, no server-side level check).
+PR pirate-force-server#927 (draft, ADVERSARY_PENDING). GT ticket body sent
+to LANE-K: notes_to_chief/20260906_1515_LANE-A-TO-K-gt-body-basic-faction-every-login-scene.md
+See rounds/A_20260906_1452_q02brx_*.md for the full round file.
