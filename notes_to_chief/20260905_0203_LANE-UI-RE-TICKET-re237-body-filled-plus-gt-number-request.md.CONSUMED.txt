@@ -1,0 +1,1 @@
+folded by LANE-K round rsmsia 2026-09-06T15:09+07:00 -- already actioned by chief round cooif2/R357 (see GAME_TEST_QUEUE.md GT-253 header + line ~9708 "เนื้อใบเคาะจบแล้ว (LANE-UI รอบ hq4wtb 02:03)"); RE-237 body and GT-253 number both landed already. Writing the missing bookkeeping stub only, no new queue edit.
