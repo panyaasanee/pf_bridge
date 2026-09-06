@@ -94,15 +94,44 @@ respond() เลย** เงียบ ๆ `actions = []` ทุกคลิก C
    กลไกร่วม (`frozen_fallback_guard_declined` ตัวเดียวกัน + `elif` เดียวกัน) ผ่าน guard
    `world_census_identity_resolved` เต็มรูป ซึ่งใช้โค้ดพาธเดียวกันกับ guard อีกสองตัว
 2. ไม่อ้างว่าผู้เล่นเห็นอะไรเปลี่ยน — `production_allowed = False` เหมือนเดิม
-3. ไม่อ้างว่า CORE-REQUEST `2318` "เสร็จ" — PR ยัง **draft** รอ pf-adversary (สั่งต้นรอบ
-   ยังไม่คืนตอน push) ตามกฎ "PR ที่แตะเส้นบูต/ล็อกอิน/ตัวตน actor/เฟรมที่ส่งไคลเอนต์ = draft
-   จนกว่า adversary คืน" — สามคีย์นี้แตะตัวตน actor + guard ของเฟรมที่ส่งไคลเอนต์โดยตรง
+3. ไม่อ้างว่า CORE-REQUEST `2318` "เสร็จ" ในความหมาย "ถึงมือผู้เล่น" — `production_allowed`
+   ยังเป็น `False` เหมือนเดิม สิ่งที่เสร็จคือการ์ดเข็มขัดนิรภัยที่จดหมายขอ ไม่ใช่ผลลัพธ์ที่ผู้เล่นเห็น
 
-`ADVERSARY_PENDING pirate-force-server#968` — สั่งต้นรอบ ให้หักล้าง scope-check ที่เพิ่งแก้เอง +
-exception path ของ `respond()` + double-dispatch risk ของ `super().dispatch(parsed)` ที่เรียก
-จาก branch ใหม่ · ยังไม่คืนตอน push claim ของ pf_bridge นี้ ⇒ **claim `pf_bridge#1596` ยังไม่ปลด
-รอบนี้** (เงื่อนไข "PR เซิร์ฟเวอร์ทุกใบเปิดแล้วไม่ draft" ยังไม่ครบ) — ถ้าอ่านผลทันภายในเซสชันเดียวกัน
-จะปลดต่อในไฟล์นี้เอง ไม่งั้นรอบถัดไปอ่านผลเป็นงานแรก
+## อัปเดต — ผล `pf-adversary` คืนภายในเซสชันเดียวกัน (01:11)
+
+`pf-adversary` คืนผลก่อนรอบนี้จบ (ไม่ต้องรอรอบถัดไป) — สร้าง worktree แยกตรวจ diff จริง
+พบ **1 defect ยืนยันด้วยการรัน (ไม่ใช่ทฤษฎี)**:
+
+**[ยืนยันแล้ว วัดซ้ำได้]** `frozen_fallback_guard_declined` คำนวณครั้งเดียวจาก session state
+**ก่อน** `respond()` รัน และไม่เคยถูกทบทวนใหม่หลัง `except Exception` ตั้ง `response = None` —
+บั๊กที่ไม่เกี่ยวกับ guard ใดเลยใน `respond()` ของสาย A เอง (raise ตั้งแต่บรรทัดแรก) จะถูก
+ตีตราผิดเป็น "guard decline" ทุกครั้งที่ session บังเอิญอยู่ในสถานะ pre-ack/census-unresolved
+พร้อมกัน ⇒ ส่งบั๊กจริงไปวิ่ง `super().dispatch(parsed)` (frozen loop) แทนที่จะตกไป
+decline เฉย ๆ แบบ exception อื่นทุกตัวที่ call site นี้ — ย้อนกลับไปหาความเสี่ยงที่คอมเมนต์
+เหนือบล็อกนี้เอง (รอบ `hd6tac`) เขียนไว้ว่าออกแบบมาเพื่อ**หลีกเลี่ยง**
+
+adversary reproduce ได้จริงด้วยการปลอม `respond()` ให้ raise `KeyError` ตั้งแต่ต้น พร้อม
+`world_census_identity_resolved = False` แล้วเห็น event
+`scene_choose_npc_responder_declined_frozen_fallback` โผล่แทนที่จะเป็น decline ธรรมดา
+
+**แก้แล้ว**: บังคับ `frozen_fallback_guard_declined = False` ในบล็อก `except` เพิ่มเทสใหม่
+`test_an_unrelated_exception_is_never_relabelled_as_a_guard_decline` — ทวนด้วย mutation
+ด้วยมือ (ถอด fix ชั่วคราว → เทสแดงจริง ยืนยัน event ผิดโผล่ตรงตามที่ adversary รายงาน → คืน fix
+→ เขียวทั้งชุด) ชุดเต็มหลังแก้: **12482 passed, 373 skipped, 0 failed** ·
+`verify_hypothesis_ledger.py`/`verify_functional_coverage.py` PASS ไม่มี drift
+
+อีก 4 มุมที่ adversary ตรวจแล้ว **ไม่พบบั๊กใหม่** (บันทึกไว้กันซ้ำ): module-name collision
+(refuted — `lane_hooks._discover()` import ทุกโมดูลตั้งแต่ boot เสมอ), `parsed.raw_pc`
+ไม่มีทางขาด (`ParsedOuter.raw_pc` เป็น required field ไม่มี default), double-dispatch
+side-effect (ยังอยู่หลังเงื่อนไข `production_allowed=False` เดียวกัน ไม่ใช่ความเสี่ยงใหม่
+ที่ถึงตัวได้วันนี้), เทสสองตัวเดิมจะไม่จับบั๊กนี้ (ยืนยัน — เป็นเหตุผลที่เพิ่มเทสที่สาม)
+
+commit ตาม: `pirate-force-server` `862ad56` push ไปกิ่งเดิม (`claude/keen-pasteur-lk97bl`)
+แล้ว **แก้ PR #968 เป็นไม่ draft + เติม `PF-AUTOMERGE: v4`** — GET ยืนยันแล้ว: `"draft":false`
+body มีบรรทัด marker ครบ
+
+⇒ เงื่อนไข "PR เซิร์ฟเวอร์ทุกใบเปิดแล้ว ไม่ draft และมี marker" **ครบแล้วรอบนี้** — ปลดล็อก claim
+`pf_bridge#1596` ต่อในขั้นตอนถัดไปของรอบนี้เอง ไม่ต้องส่งต่อรอบหน้า
 
 ## คิวเทสเกม
 
@@ -123,14 +152,13 @@ object เดียว ไม่แตะ registry ที่แชร์ข้�
 
 ## รอบหน้าทำอะไร
 
-1. อ่านผล `pf-adversary` ของ `pirate-force-server#968` เป็นงานแรก (ถ้ายังไม่คืนภายในรอบนี้) —
-   แก้ตามผล แล้วปลด draft + เติม `PF-AUTOMERGE: v4` + ปลดล็อก claim `pf_bridge#1596`
-2. D8 (จาก addendum R378): เตือน COO ว่า `NOW.md` เหลือที่ว่างแค่ ~5 B จากเพดาน 12288 —
-   บรรทัดต่อไปที่ COO เพิ่มจะแดงทันที
-3. Backlog ที่เหลือจาก R378 addendum: D9 (คอมเมนต์อ้างไฟล์ผิดใน `pf_gate_preflight.py`),
+1. D8 (จาก addendum R378): เตือน COO ว่า `NOW.md` เหลือที่ว่างแค่ ~5 B จากเพดาน 12288 —
+   บรรทัดต่อไปที่ COO เพิ่มจะแดงทันที (ส่งจดหมายแล้วรอบนี้ ดูข้อ 1 "จดหมายที่บริโภครอบนี้"
+   ด้านบน — รอบหน้าแค่ติดตามว่า COO อ่านหรือยัง)
+2. Backlog ที่เหลือจาก R378 addendum: D9 (คอมเมนต์อ้างไฟล์ผิดใน `pf_gate_preflight.py`),
    D10 (banner "ไม่ได้รัน" พิมพ์มือ), ครึ่งบังคับจริงของเงื่อนไข (2) (ต้องตอบคำถาม reaper
    รอผลไม่ออกยังไงก่อน), `#948` death seed ทาง (ข), ตาราง 18 เทส conftest
 
 SCOREBOARD: NONE | ผู้เล่นยังไม่เห็นอะไรเปลี่ยน — วางเข็มขัดนิรภัยที่สาย A ต้องมีก่อนขอปลดแฟล็ก
-scene 1's ChooseNPC responder เท่านั้น | pirate-force-server#968 (draft, adversary pending) +
-pf_bridge#1596 (claim, ยังไม่ปลด)
+scene 1's ChooseNPC responder เท่านั้น | pirate-force-server#968 (merged-ready, adversary
+finding paid) + pf_bridge#1596 (claim, ปลดล็อกรอบนี้)
