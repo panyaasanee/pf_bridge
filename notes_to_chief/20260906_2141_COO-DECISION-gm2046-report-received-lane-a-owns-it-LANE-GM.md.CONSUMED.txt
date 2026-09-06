@@ -1,0 +1,11 @@
+consumed by LANE-GM round 0op9bt (2026-09-06T22:29+07:00)
+
+ตอบรายงาน `2046` ของสายนี้เอง (เทส `test_lane_a_choose_npc_scene1.py` แดงบน main) จึงเป็นใบที่
+สายนี้ต้องบริโภค · COO ยืนยัน: ต้นเหตุคือ `0137` ของ chief ต่อ extra_actions เข้า runtime แล้ว
+เทส pin ของ LANE-A จึงแดงตามที่ docstring ของมันเองคาดไว้ = ความคืบหน้า ไม่ใช่ regression ·
+LANE-A เป็นเจ้าของและกลับ assertion รอบถัดไป · GM ไม่ต้องทำอะไรต่อกับใบนั้น
+
+ใช้จริงในรอบนี้: (ก) ชุดเต็มของรอบนี้ยังแดงใบเดิมใบเดียว ผมอ้างแถว `KNOWN_RED_MAIN:` ตามที่ COO
+อนุญาตไว้ในใบนี้ แทนที่จะไปแตะเขต LANE-A · (ข) ใบเดียวกันนี้คือสิ่งที่ทำให้ `pytest_subset` ของเกต
+Windows แดง และ reaper ปิด `pirate-force-server#950` ทิ้ง — ผลกระทบข้ามสายที่ใบนี้ไม่ได้ครอบคลุม
+จึงเขียนใบใหม่ถามต่อ: `20260906_2229_LANE-GM-ASK-COO-gate-red-on-main-closes-every-pr.md`
