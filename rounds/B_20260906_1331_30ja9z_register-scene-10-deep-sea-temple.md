@@ -110,7 +110,27 @@ self-review ที่ทำแทนระหว่างรอ: อ่านท
   tick · fabrication guard) → เขียวหลังซ่อมครบทั้งสี่ข้อข้างบน
 - `git merge origin/main` เข้ากิ่งก่อน push → Already up to date (ไม่มี commit ใหม่
   ระหว่างรอบ)
-- ชุดเต็ม `pytest tests/ -q` + `pf_gate_preflight.py` → ผลอยู่ท้ายไฟล์นี้
+- `python3 tools_bridge/pf_gate_preflight.py --repo <server>` -> **PREFLIGHT PASS**
+  (cp874 + ไม่มี skip ใหม่ + main อยู่ในกิ่ง + precondition census ตรง + สองกิ่ง reaper
+  merge ได้ + ไฟล์สะพานไม่โต + ไม่แตะแถว scoreboard มือ)
+- `--pr-body <file> --pr-stage final` -> **PASS** มี marker บรรทัดเดียว (บรรทัด 61)
+- **ซ้อมไฟล์เทสใหม่ในสภาพไม่มี `pf_bridge` ข้าง ๆ** (บังคับเพราะรอบนี้เพิ่มไฟล์เทสใหม่):
+  `git worktree add --detach` ไปที่ `mktemp -d` ที่ไม่มีรีโปสะพานอยู่ข้าง แล้วรัน
+  `pytest tests/test_pytest_precondition_census.py tests/test_field_mob_tables_bg0010.py`
+  -> **78 passed, 1 skipped** (ตัวที่ skip คือ `Bg0010RegenerateTests` ตามที่ออกแบบ)
+  แล้วเก็บ worktree ด้วย `git worktree remove` (ไม่ใช้ `rm -r` ทุกการสะกด)
+- 🔴 **ชุดเต็ม `pytest tests/ -q` ยังไม่จบตอน push — บันทึกตามจริง ไม่ใช่ข้ามไป**
+  สั่งรันแล้วสองครั้งบนต้นไม้ที่ push จริง · เครื่องรอบนี้มี `pytest tests/` ของ
+  pf-adversary รันขนานอยู่สองชุดพร้อมกัน ทำให้ชุดของสายนี้เดินได้ ~9% ในเกือบ 40 นาที
+  (ปกติ ~7 นาที) · ครั้งแรกโดน `timeout 900` ฆ่า ครั้งที่สองยังเดินอยู่ตอนปลดล็อก
+  **เลือกปลดล็อกแทนที่จะรอ**: กฎรอบบอกเองว่า "รอ = ล็อกไม่ปลด" เป็นความเสียหายจริง
+  (เกิดกับ `#862` ค้าง 4 ชม.) และเกต Windows รันชุดเต็มซ้ำอยู่แล้ว · **ห้ามใครอ่านว่า
+  "ชุดเต็มเขียว"** จนกว่าจะมีผลจริง
+  สิ่งที่**เขียวจริงแล้ว**: ไฟล์เทสทุกไฟล์ที่รอบนี้แตะ + คลัสเตอร์ข้างเคียงทั้งกลุ่ม
+  (field_mobs · scene binding · single scene guard · mob_ai_control ×2 · mob_death ·
+  wired widening · registration contract · scene recompose · lane_b ai tick ·
+  fabrication guard · bg0010) = 74-411 passed / 1886-3649 subtests ในแต่ละชุด 0 failed
+- **รอบหน้าเป็นงานแรกคู่กับผล adversary**: รันชุดเต็มบนกิ่งนี้ให้จบแล้วบันทึกตัวเลข
 
 TWO_SESSIONS_SAME_SCENE: roster ของฉากนี้เป็นตารางค่าคงที่ระดับโมดูล อ่านอย่างเดียว
 ไม่มี state ต่อ session · composer ถูกเรียกใหม่ทุกครั้งเป็นฟังก์ชันบริสุทธิ์ของ
