@@ -41,105 +41,8 @@
 `SERVER_VERSIONS.md` (ที่รากรีโปเซิร์ฟเวอร์) ตารางแผน v2-v-final: ลบคอลัมน์วันที่ตามเดียวกัน — งานถัดไปของ chief
 (ยังไม่ลงรอบนี้ เพื่อคุมขนาด PR ให้อยู่หนึ่งเรื่องต่อใบ)
 
-## ทีมและเขตเขียน — 🆕 สายที่ 5: LANE-DB (PERSISTENCE)
-
-ตั้งโดย COO ตามคำสั่งตรงเจ้าของ 2026-09-01T10:5x (`notes_to_chief/consumed/20260901_1059_COO-DECISION-*.md`,
-`.../20260901_1100_COO-DECISION-create-lane-db-*.md`, `.../20260901_1101_COO-ORDER-lane-db-first-*.md`)
-ลงทะเบียนที่นี่โดย chief รอบ `8zf80f` ตามที่ COO ขอ ("รอบ :51 วันนี้"):
-
-- **ภารกิจ:** persistence ข้าม session แบบ MMORPG จริง — typed columns ใน DB เป็นแหล่งความจริง
-  (ความเร็ว/HP/เลเวล/สแตท/EXP/ของสวมใส่/เควส) compose attr block จากค่า typed + บล็อบ creation ของ
-  ตัวละครเอง ห้ามเดาฟิลด์ที่ไม่รู้จักเป็นศูนย์ (ข้อห้ามตรงของเจ้าของ ใบ `1059`)
-- **เขตเขียนใน `pirate-force-server`:** `migrations/` (ไฟล์เลขใหม่เท่านั้น ห้ามแก้ไฟล์ที่ apply แล้ว) ·
-  โมดูลใหม่ `src/pirateforce_foundation/persistence_*.py` · เพิ่ม method ใหม่ใน `store.py` ได้
-  แต่ห้ามเปลี่ยน behavior ของ method เดิม · `rounds/DB_*`
-- **จุดเสียบ `runtime.py`/`app.py`:** ยังไม่มี — chief สร้างให้ครั้งเดียวเมื่อ LANE-DB ร้องขอ (แบบเดียวกับ
-  LANE-B `COO-DECISION 20260830_0046`) ยังไม่มีการร้องขอเข้ามาถึงรอบนี้
-- **v141:** ห้ามแตะตลอดกาล เหมือนทุกสาย
-- 🔴 **canonical DB (`COO-DECISION 20260901_1112` แก้ทับถ้อยคำใบ `1100`):** เป็นปลายทางที่ LANE-DB
-  พัฒนาไปหา ไม่ใช่ของต้องห้าม (1) ยกระดับผ่านไฟล์ migration ของ LANE-DB **ที่ผ่าน pytest +
-  pf-adversary แล้วเท่านั้น** รันอัตโนมัติตอน server boot (runner ใน `store.py` +
-  `schema_migrations` checksum ledger — migration 003/004 คือแบบอย่าง) (2) ห้ามแก้ไฟล์ `.db` จริง
-  ด้วยมือ/SQL ตรง/สคริปต์เฉพาะกิจ นอกเส้น migration เด็ดขาด ไม่มีข้อยกเว้น
-  (3) migration ที่แตะแถวข้อมูลเดิม (backfill/UPDATE/rebuild) ต้องมี backup อัตโนมัติ (สำเนาไฟล์ .db
-  ก่อน apply) มาก่อนหรือพร้อมกันใน PR เดียวกัน
-- 🔴 **ห้ามชี้บูตไปที่ canonical จนกว่าจะมีสามอย่างนี้พร้อมกันใน PR เดียว (`COO-DECISION
-  20260901_1241_canon-sha-rotation`, ต่อจาก `1112`):** (1241-①) ด่านตรวจ sha ต้องแยก "sha เปลี่ยนเพราะ
-  migration N apply สำเร็จ" (อ่าน `schema_migrations` เทียบ checksum — คาดหมายได้) ออกจาก "sha เปลี่ยน
-  เพราะอย่างอื่น" (abort เหมือนเดิม) (1241-②) PR ที่ลง migration ที่แตะ canonical ต้องหมุนค่าใหม่ลง
-  `CANON_SHA.txt` พร้อม log ชัดเจนอยู่ใน PR เดียวกันเสมอ ห้ามแยกสองรอบ (1241-③) ต้องระบุชัดว่าใครเป็นผู้บูต
-  ครั้งที่ยกระดับ canonical จริง (จ็อบเฉพาะของ LANE-DB หรือแก้ `9001_play_boot.ps1`) — วันนี้ยังไม่มี
-  เส้นทางไหนทำ ต้องออกแบบใหม่ ไม่ปล่อยให้เกิดเอง · เหตุผล: ขาดข้อ 1241-①/② = รอบเทส attended ถัดไปจะ abort
-  ที่ด่าน sha (`exit 16 canonical mismatch`) แล้วดูเหมือน DB พัง คนจะแก้ด้วยการปลดด่านทิ้งเพราะเข้าใจผิด
-  แล้วโปรเจกต์จะเสียตัวจับ corruption ตัวเดียวที่มีอยู่ไปเงียบ ๆ — ตรงกับข้อห้ามของเจ้าของเรื่อง "ปัญหาเงียบ"
-  โดยตรง
-- **งานแรก:** `/speed <ตัวคูณ>` ใช้เทสได้จริง (ใบ `1101`) — deadline PR แรกภายในรอบ 14:01 วันนี้,
-  พร้อมเข้าคิว attended ภายใน 2026-09-02 12:00
-- นัยต่อ M4 (ตีได้ตายได้): schema ปัจจุบันไม่มีคอลัมน์ HP เลย — LANE-DB คือตัวปลดล็อกจริง คิวถัดจาก
-  `/speed` คือ HP/เลเวล (ตามที่ COO ตั้งข้อสังเกตไว้ในใบ `1100`)
-
-## ทีมและเขตเขียน — 🆕 สายที่ 6: LANE-CS (CLASS / SKILL) และสายที่ 7: LANE-UI (UI / FUNCTIONS)
-
-ตั้งโดย Panya สด (`PANYA-DECISION 20260904_0328`) ผ่าน `COO-ORDER 0329` ลงทะเบียนที่นี่โดย chief รอบ
-`spo2u9` ตาม `notes_to_chief/20260904_0330_COO-DECISION-*.md` (แบบอย่างการตั้งเลน: หัวข้อ LANE-DB ข้างบน):
-
-- **LANE-CS** — ภารกิจ: อาชีพหลัก/รอง · สกิลทุกชนิด (basic attack/skill attack/AOE/buff/heal/passive) ·
-  สูตรดาเมจ · สนามเทส = หุ่น Training Iron Man `template_id 916` (`RE-155`)
-  - **เขตเขียนใน `pirate-force-server`:** โมดูลใหม่ `src/pirateforce_foundation/skill_*.py` `class_*.py`
-    `damage_*.py` · `tests/test_skill_*` `test_class_*` `test_damage_*` · `rounds/CS_*`
-  - **รับโอน** `skill_attr_hypothesis.py` `learn_skill_request_hypothesis.py`
-    `learn_skill_result_hypothesis.py` `damage_model_hypothesis.py` `damage_hp_link_hypothesis.py`
-    `stats_progression_hypothesis.py` — chief ยืนยันรอบนี้ว่าไม่มีสายไหนถืออยู่ (grep `HYPOTHESIS_LEDGER.json`
-    ไม่พบเจ้าของ) ถ้ามีให้แจ้ง chief
-  - **ไม่ใช่ของ CS:** แถวสกิลใน DB (LANE-DB) · HP/ตายของมอน (LANE-B)
-  - **จุดเสียบ `runtime.py`/`app.py`:** ยังไม่มี — chief สร้างครั้งเดียวเมื่อ CS ร้องขอ
-- **LANE-UI** — ภารกิจ: ปุ่ม/ฟังก์ชัน/ระบบยิบย่อยนอกระบบหลัก (ห้ามแตะ มอน/เควส/คอมแบต/สกิล) เช่น ปุ่มกลับ
-  หน้าเลือกตัวละคร · ออกจากเกม · เดินไปหา NPC/มอนอัตโนมัติ · ร้านค้า NPC
-  - **เขตเขียนใน `pirate-force-server`:** `src/pirateforce_foundation/ui_*.py` · `tests/test_ui_*` ·
-    `rounds/UI_*`
-  - 🆕 **เขตเขียนใน `pf_bridge`: `docs/UI_LANE.md`** — ลงทะเบียนโดย chief รอบ `rz1fxh`/R358 ตาม
-    `COO-DECISION 20260905_1949` ข้อ 2 · LANE-UI สร้างและเขียนไฟล์นี้ได้เองโดยไม่ต้องขอ chief ·
-    สายอื่นห้ามแตะ · **ยังไม่มีไฟล์และยังไม่มีโฟลเดอร์ `docs/` ใน `pf_bridge`** ⇒ LANE-UI สร้างทั้งสองอย่าง
-    ในรอบที่เขียนแผน · 🔴 **แก้คำอ้างในใบ `1949`**: ใบอ้าง `docs/GM_LANE.md` เป็น precedent แต่
-    **ไฟล์นั้นไม่มีอยู่จริง** — `find . -name "*GM_LANE*"` บน `main` รอบนี้ = 0 hit [วัดแล้ว R358] ⇒
-    ทะเบียนนี้เป็นเขตแรกของชนิดนี้ ไม่ใช่การทำตามแบบที่มีอยู่ (แจ้ง COO ในจดหมายรอบ)
-  - 🔴 **PANYA-ORDER `20260905_1911` (ผ่าน ka1-A · COO `1948`) — สามข้อ มีผลทันที**
-    1. **งานแรกของ LANE-UI = UI-B ปุ่มล็อกเอาต์จริง headless เป็น PR เซิร์ฟเวอร์ ก่อนใบ RE ใหม่ทุกใบ**
-       ถัดไปคือ UI-A · `RE-235`/`RE-237`/`RE-261` = รอเครื่อง Panya ห้ามตรวจซ้ำ
-    2. **แผนเลนเขียนลง `docs/UI_LANE.md` โดย derive จาก Protocol Registry** ไม่ใช่จากการเดา
-    3. **กฎ "ไม่แตะโค้ด 2 รอบติด ⇒ รอบที่ 3 ต้องมี PR ในเขต `ui_*`"** — รอบ 21:16 ไม่มี PR = escalation
-  - **รับโอน UI-A/UI-B จาก LANE-A ทั้งสองข้อ** (ปุ่มกลับหน้าเลือกตัวละคร + ปุ่ม logout จริง รวมป้าย
-    `BACK_REFUSED` ของ UI-B ตามใบ `1746` ข้อ 2) — **LANE-A เลิกถือ UI-A/UI-B ตั้งแต่รอบนี้** เหลือ M2
-    (ออกจากเมืองได้) เป็นงานเดียว
-  - **ไม่ใช่ของ UI:** GMUI 3 หน้า (LANE-GM P-3) · ฉาก/เดินทาง/`TriggerVital` (LANE-A M2)
-  - **จุดเสียบ `runtime.py`/`app.py`:** ยังไม่มี — chief สร้างครั้งเดียวเมื่อ UI ร้องขอ
-- **§7 ล็อกรอบ:** ตัวนำหน้า claim ใหม่ `CS`/`UI` — claim PR หัว `[LANE-CS] round <id>: claim` /
-  `[LANE-UI] round <id>: claim` ใน `pf_bridge` (เพิ่มเข้า `AGENTS.md` §7 บรรทัดตัวนำหน้าสายรอบนี้)
-- **CORE-REQUEST-022** (login hardcode `class=1`) **โอนเจ้าของให้ LANE-DB** ตาม `0329` ข้อ 2 — chief เหลือ
-  เฉพาะจุดเสียบเมื่อ LANE-DB ร้องขอ (ไม่มีแถวเปิดของใบนี้อยู่ในตารางด้านล่างแล้ว ณ รอบที่ลงทะเบียนนี้)
-- 🔴 **สองเลนนี้ยังไม่มีอยู่จริงจนกว่า Panya จะวาง routine** (พรอมป์ `0331`/`0332`) — ห้ามใครทำงานของ
-  CS/UI แทนระหว่างรอ ยกเว้นข้อ 4 ของ `0329` (LANE-DB ส่งเฟรมรายการสกิลชั่วคราว)
-
-## ทีมและเขตเขียน — 🆕 สายที่ 8: LANE-Q (SCRIPT / QUEST)
-
-ตั้งโดย Panya (`PANYA-ORDER 20260905_2038`/`2039` ข้อ 4) · routine คู่วางแล้ว 21:12 (ka1-A `2112`) · charter
-เต็ม `prompts/LANE-Q.md` · ลงทะเบียนที่นี่โดย chief รอบ `5ahimz`/R359 ตาม `COO-DECISION 20260905_2059` ข้อ 7:
-
-- **ภารกิจ**: เป็น Lua host ให้สคริปต์ต้นฉบับของไคลเอนต์ (`gamedata/lua/` 616 ไฟล์ — 306 เควส `q_*`, 309
-  ทริกเกอร์ `t_*`) เรียก API เซิร์ฟเวอร์ 160 ฟังก์ชันที่ `PF_LUA_API_SPEC.md`/`PF_GAMEDATA_LUA_API.tsv` ระบุ
-  (วัดแล้ว 5 ก.ย.: 0/160 wired) · ลำดับคิว: spike (`lupa`) → `Trigger.*` 17 ฟังก์ชัน (ปลด M2 ให้ LANE-A) →
-  `Quest.*` 25 → `Player.*` 73
-- **เขตเขียนใน `pirate-force-server`:** `src/pirateforce_foundation/script_*.py` ·
-  `src/pirateforce_foundation/lua_api/` · `tests/test_script_*` · `docs/SCRIPT_LANE.md` · `lane_hooks/lane_q_*`
-- **เขตเขียนใน `pf_bridge`:** `rounds/Q_*`
-- **อ่านได้ แก้ไม่ได้:** `gamedata/lua/` (ต้นฉบับไคลเอนต์)
-- **ไม่ใช่ของ Q:** world registry (LANE-A) · combat state (LANE-B) · คอลัมน์สถานะเควสใน DB (LANE-DB เจ้าของ
-  ตาราง — Q ขอ interface ผ่าน CORE-REQUEST เหมือนสายอื่น)
-- **§7 ล็อกรอบ:** ตัวนำหน้า claim ใหม่ `Q` — claim PR หัว `[LANE-Q] round <id>: claim` ใน `pf_bridge`
-- **จุดเสียบ `runtime.py`/`app.py`:** ยังไม่มี — chief สร้างครั้งเดียวเมื่อ Q ร้องขอ
-- รอบแรกของ Q (spike ตาม `prompts/LANE-Q.md` คิวข้อ 1) เริ่มแล้ว 21:12 — chief **ไม่ทำ Lua spike ซ้ำ**
-  (`2112` แก้ `2038` ข้อ 4) เหลือแค่รีวิว PR ของ Q เหมือนสายอื่นเมื่อมันมา
-
+## ทีมและเขตเขียนของสาย DB / CS / UI / Q ⇒ ย้ายคำต่อคำไป `archive/CHIEF_CONTINUATION_ARCHIVE_20260906_R368_lane_charters.md` (chief R368 · งานแม่บ้าน §17 ข้อ 9 เพื่อให้ไฟล์กลับใต้เพดาน 30,720 B — ไม่มีอะไรถูกลบหรือย่อ)
+- เขตเขียนที่**มีผลจริง**อ่านจาก `prompts/<สาย>.md` และ `CHIEF.md` §6 เสมอ ไม่ใช่จากไฟล์นี้
 ## ดัชนีรอบเก่า (รอบ 44-178) — ย้ายไป `archive/CHIEF_CONTINUATION_ARCHIVE_INDEX.md` แล้วทั้งบล็อก ไม่มีการลบเนื้อหา
 
 ## 0. โครงสร้างทีมคืนนี้ + เช็คก่อนเริ่มทุกครั้ง ⇒ ย้ายคำต่อคำไป [`HOUSE_RULES.md`](HOUSE_RULES.md) (`COO-DECISION 20260903_0848` ข้อ ① · R317 `mgm333` · ไฟล์เป็น ๆ ไม่ใช่ `archive/` กฎยังมีผล ไม่มีอะไรถูกลบหรือย่อ)
@@ -200,9 +103,6 @@
 - ดัชนีรอบ R322-R340b ด้านล่างนี้ถูกย่อเหลือหนึ่งประโยคต่อรอบ (chief รอบ ub8svt, เพดาน 30 KB) — ถ้อยคำเต็มคำต่อคำอยู่ที่ `archive/CHIEF_CONTINUATION_ARCHIVE_20260904_R322_R340b_verbatim.md`
 - 🔴 ดัชนีรอบเก่ากว่า 20 รอบล่าสุด (RR322-RR341b) ⇒ [`archive/CHIEF_CONTINUATION_ARCHIVE_INDEX.md`](archive/CHIEF_CONTINUATION_ARCHIVE_INDEX.md) (ย้ายคำต่อคำ R360 · ไม่มีอะไรถูกลบ)
 - ดัชนีรอบ R350-R357 -> ย้ายไป `archive/CHIEF_CONTINUATION_ARCHIVE_20260906_R350_R357.md` แล้วทั้งบล็อก ไม่มีการลบเนื้อหา (chief รอบ `ald09i`/R367)
-- R358 2026-09-05 20:12+07 ตั้งเลข RE-266 ให้ใบ UI ที่ค้าง 5 ชม. · GT-184/186 -> BLOCKED-ON-RE-266 · RE-265 ปิด BOUNDED-NEGATIVE · GT-233 -> READY-v2 · ลงทะเบียนเขต docs/UI_LANE.md · PR ถ้อยคำ 0x4543 -> rounds/R358_rz1fxh_re266_numbered_gt184_186_flipped_re265_closed_gt233_ready_v2_0x4543_wording.md
-- R359(5ahimz) 2026-09-05T21:2x+07:00 pf_bridge only, no server PR: pf_gate_preflight.py bridge-file-size gate (GT/RE/AGENTS/CHIEF_CONTINUATION/NOW ceilings, PANYA-ORDER 20260905_2038 item 1) + self-test (28 cases) · archived 23 closed GT tickets (2.80 MB -> 2.29 MB) + 51 closed RE tickets (935 KB -> 456 KB) to archive/*_ARCHIVE_20260905_closed.md, one-line stubs left, nothing deleted -- gate still RED on GT/RE/AGENTS/CHIEF_CONTINUATION (full byte target not reached this round, said so rather than claiming green) · AGENTS.md section 7 PANYA-ORDER 2038 item 7's four lines added · LANE-Q (SCRIPT/QUEST) zone registered per 2059/2112 (Q's own spike round already running, chief did not duplicate it) · verified RE-265/GT-233 (R358's flip) are on main as claimed -> rounds/R359_5ahimz_bridgesize_gate_queue_archive_pass_lane_q_registration.md
-- R360(supz66) 2026-09-05T22:52-23:5x+07:00 Scoreboard คืนชีพจริง (`PANYA-ORDER 2038` ข้อ ข ที่ตายตั้งแต่ 29 ส.ค.): `pf_scoreboard.py` เดิมเป็น render อย่างเดียวและ `SCOREBOARD_FACTS.tsv` ไม่มีในรีโป = crash ที่ `open(SRC)` ถ้ามีใครรัน ⇒ เขียนใหม่เป็น collector เก็บบรรทัด `SCOREBOARD:` จาก `rounds/*.md` 625 ใบ (คอลัมน์เครดิต derive จากชื่อไฟล์ ไม่ใช่เนื้อบรรทัด · แถว `manual` รอดข้าม regenerate · มีไฟล์รอบแต่ parse ได้ 0 บรรทัด = exit 1 ไม่ใช่ render หน้าเดิมต่อ · stdout ASCII ล้วน · self-test 19 เคส) **ผลจริงตัวแรก: 8 แถว DONE=0** · 🔴 ร่างแรกเกือบส่งจดหมายกล่าวหา 6 สายว่าไม่ส่งฟิลด์หลักฐาน — เปิดไบต์จริงแล้วไม่จริง ทุกใบเขียนเป็นย่อหน้าที่ตัดขึ้นบรรทัดใหม่ 2-4 บรรทัด หลักฐานอยู่บรรทัดถัดไปครบ ⇒ แก้ collector ให้ต่อย่อหน้า + ลงกฎ §7 ห้ามใครแก้ไฟล์รอบให้เป็นบรรทัดเดียวเพื่อเอาใจเครื่องมือ · `lupa==2.8` เข้าบรรทัด pip ของ `gate-windows.yml` (`COO 2247` · ตัดสินไม่สร้าง `requirements.txt` บรรทัด pip เป็นแหล่งจริงใบเดียว · yaml duplicate-key ผ่าน · `bash -n` ใช้ไม่ได้ทั้งไฟล์เป็น pwsh เขียนไว้ตรง ๆ) · กฎ embedded-interpreter RCE ลง §7 (`COO 2249`) · 🔴 เกต bridgesize ของ R359 จับ chief เองเป็นรายแรก: เติมกฎสองบรรทัด -> `AGENTS.md` 88820->90641 RED ⇒ ย้าย "วิธีเปิด PR" 46.9 KB ไป `HOWTO_OPEN_A_PR.md` คำต่อคำ = 44161 bytes / 21,926 อักขระ (ต่ำกว่าเพดาน 25,000 อักขระของเจ้าของครั้งแรก) ยัน 224/224 บรรทัดไม่หาย ไม่ตัดกฎข้อไหน · 🔴 ถาม COO: หน่วยเพดานขัดกันเอง หัว `AGENTS.md` สั่งนับอักขระและห้าม `wc -c` แต่ preflight ของ chief เองนับไบต์ 30720 (ไทย 3 ไบต์/อักขระ = เข้มกว่าคำสั่งเจ้าของ 3 เท่า) · หนี้ยกไปรอบหน้าตามลำดับ COO: (1) `docs/PROMOTION_BACKLOG.md` (2) `DEATH_SEED_WIRING` — เปิด PR เซิร์ฟเวอร์ได้ใบเดียวต่อรอบ ใช้ไปกับ lupa ตาม `2247` ที่สั่งให้แยกใบ · push แล้ว รอ merge -> rounds/R360_supz66_scoreboard_revived_lupa_gate_agents_split.md
 - R361(siynev) 2026-09-06T00:22-01:1x+07:00 [เติมย้อนหลังโดยรอบ R362 -- รอบ R361 ไม่ได้เขียนบรรทัดดัชนีของตัวเอง] `#859` lupa (`python -m pip`) + `#858` หมุด migration แบบ dynamic วินิจฉัยจบและ re-land -> merge เป็น `#870` บน main 01:11 · ไม่ได้ขยับ PROMOTION_BACKLOG/whitelist/DEATH_SEED_WIRING (เหตุผลรายข้ออยู่ในไฟล์รอบ) -> rounds/R361_siynev_lupa_shim_equals_split_dynamic_migration_pin.md
 - R362(6z131u) 2026-09-06T01:51-02:1x+07:00 GT-233 v3 พลิกเป็น "บูตได้ทันที" หลังวัดเอง (#857/#865 ancestor จริง · D1 lazy · dock153 key=1 dock154 key=126 · len(pc)=62) + เติมบล็อก ATTENDED ที่ใบไม่เคยมีตั้งแต่ R358 · RE-270 ตั้งเลขให้ LANE-A (ข้าม 268/269 ที่ประกาศเป็นของ A/GM ไปแล้ว) · GT-269 ลงคิว READY · archive 20 ใบปิด (GT 2.33->2.22 MB · RE 467->352 KB) เปิดหัวคิวให้ใบใหม่ · ADVERSARY_PENDING -> rounds/R362_6z131u_gt233_v3_bootable_re270_numbered_gt269_filed_queue_archival_pass.md
 - R363(ss9u08) 2026-09-06T03:49-04:2x+07:00 PANYA-ORDER 0156 ทาง (ก): CORE-REQUEST 2242 รับ (class_id=selected.class_id ต่อ runtime.py:5159) ปลดเส้นทาง production pose ที่ตายมาตลอด, pf-adversary จับ blast radius จริง 21 แดง/7 ไฟล์เทสที่ไม่ได้แตะ แก้ครบ (ชุดเต็ม 11603 passed/0 failed) -> pirate-force-server#883 (draft, adversary รอบสองรอผล) · COO-DECISION 0042: scoreboard date column + MALFORMED สำหรับแถว manual + เกต pf_gate_preflight.py ปฏิเสธ PR ที่แตะแถว manual + AGENTS.md หนึ่งบรรทัด (ทำให้ AGENTS.md 44161->44628 ไบต์ RED เฉพาะกิ่งนี้ บันทึกไว้ตรง ๆ ไม่ใช่ CI บังคับจริง) -> rounds/R363_ss9u08_panya_order_0156_class_id_wired_scoreboard_manual_row_gate.md
@@ -210,4 +110,5 @@
 - R365(d5igq0) 2026-09-05T23:22-2026-09-06T00:09+07:00 mailbox triage (AGENTS.md §7 grep ที่ห้า `reference_codex_attr/` · GT-233 D1 สี่กรณี+ช่วงเลเวล · GT-266 ปิด PASS ขอบเขต live-warp/no-relog แยก GT-274 · LANE-Q ALLOWED_SYMBOLS ยกเว้นครั้งเดียวอนุมัติแบบมีเงื่อนไข) · `docs/PROMOTION_BACKLOG.md` ใหม่ (18 แถว) + เสียบ `viewer_identity` เข้า scene-arrival override (CORE-REQUEST-GM-061) -> `pirate-force-server#894` **แต่ pf-adversary รอบเดียวกันพบว่าเสียบไม่ครบ** (recompose_frames/hostile_census_frames ทุกการตี/ตายยังไม่มี) ⇒ #894 ค้าง draft, GT-275 ถูกตั้งเลขแต่พลิกกลับ BLOCKED-ON-WIRING · claim `pf_bridge#1440` ไม่ปลด (ไม่มี marker) รอรอบหน้าปิดช่องว่างต่อ -> rounds/E_20260906_0621_d5igq0 (ไม่มีไฟล์รอบจริง — งานอยู่ที่คอมมิตบนกิ่ง `claude/adoring-fermat-d5igq0` และ PR #1440/#894 เอง เก็บย้อนหลังโดยรอบ `ald09i`/R367)
 - R366(19wyif) 2026-09-06T07:51+07:00 ถอยให้ `#1440` (อายุ 91 นาที ตอนนั้นยังไม่ถึงเกณฑ์ 120 นาทีของข้อ 2 · เช็คข้อ 3 ก่อนแล้วไม่เข้าเพราะ `#894` ยัง draft) — ไม่ขยับ NOW/M ข้อไหน ถอยตามกฎล็อกรอบล้วน ๆ -> rounds/R366_19wyif_yield.md
 - R367(ald09i) 2026-09-06T09:22+07:00 takeover of `#1440`/R365 (อายุเกิน 3 ชม.แล้วตอนตรวจ): ปิดช่องว่างที่ R365 เปิดค้าง — เสียบ `viewer_identity` ผ่าน `mob_death.hostile_census_frames`/`diag_multi_object_wiring.hostile_census_frames`/`mob_scene_recompose.recompose_frames` ครบสามจุดที่เหลือ + ต่อเข้า `runtime.py` ทั้งสามจุดเรียกจริง (บาร์ตอนตี, dying/dead ตอนตาย) · ต่อสาย LANE-B D11 (`commit_death_and_prepare_hook`+เขียนกลับก่อนยิง hook) · **pf-adversary พบข้อบกพร่องจริง**: เทสสองไฟล์ที่พลาดตอนแรกทำให้ 5 เคสแดงบน commit ที่ push ไปแล้วก่อนชุดเต็มรันเสร็จจริง — แก้ในรอบเดียวกัน (`ff71c44`) ยืนยันชุดเต็มเขียว 12031 passed/365 skipped/0 failed บนต้นไม้ merge origin/main สองรอบ (`#902`,`#903`) · TWO_SESSIONS_SAME_SCENE ตอบแล้วด้วยการอ่านโค้ด `dispatch()` จริง (per-connection instance, ไม่มีทางถึง session อื่น) · GT-275 ร่างเนื้อใบเต็มแล้วแต่ถอนจาก `GAME_TEST_QUEUE.md` รอบนี้เพราะเกต bridgesize แดงจริง (ไม่เข้าข้อยกเว้นแคบของ R364) — เก็บไว้ในไฟล์รอบ รอ archive pass รอบหน้า · archive ดัชนีรอบเก่า R350-R357 ไปไฟล์แยกเพื่อดันไฟล์นี้กลับลงมาใกล้เพดาน (57236->~4x KB) · CORE-REQUEST ใหม่จาก LANE-A (`0914`, world-ground เข้า ground-companion recompose) มาถึงกลางรอบ ยังไม่ทำ ยกเป็นงานที่สองของรอบหน้า -> rounds/R367_ald09i_viewer_identity_combat_recompose_plus_d11_hook_ordering.md
-- R368 2026-09-06 11:5x+07 archive round: GAME_TEST_QUEUE 2.23MB->1.94MB · CLIENT_RE_QUEUE 363KB->283KB · ใบเปิด 102->102 หายศูนย์ใบ · โทเคน CANCELLED/FAIL ลง pf_queue_status.py · ตั้งเลข GT-274/275/276/277/278 + RE-275 วางเนื้อใบจริงครบ · เพดานยังไม่ถึงและวัดแล้วว่าถึงไม่ได้ (ใบ ASK-COO 1155) -> rounds/R368_u2o8d7_queue_archive_cancelled_fail_tokens_five_gt_numbers_landed.md
+
+- R368(u2o8d7) 2026-09-06T10:51-12:5x+07:00 takeover of `#1440` (ครั้งที่สอง อายุ 4:29) · โทเคน CANCELLED/FAIL ลง pf_queue_status.py (เปิด 107->102 ห้าใบ ไม่มีใบกลับเป็นเปิด) · ตั้งเลข+วางเนื้อใบจริง GT-274/275/276/277/278 + RE-275 + บล็อก ATTENDED ของ GT-255 · รอบ archive **ถอนฉบับ regex แล้วทำใหม่แบบ allowlist มือ** หลัง pf-adversary พบว่า regex ตัดเนื้อใบเปิด GT-178/GT-133 ขาดและย้ายใบที่ยังไม่ปิด 6 ใบ (D1/D2) · GT queue 2,235,655->2,155,007 · RE queue 362,594->356,520 · เพดานยังไม่ถึงและวัดแล้วว่าถึงไม่ได้ (ใบ ASK-COO 1155) -> rounds/R368_u2o8d7_queue_archive_cancelled_fail_tokens_five_gt_numbers_landed.md
