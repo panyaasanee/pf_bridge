@@ -12,7 +12,7 @@
 - ไม่ขยับ: ลำดับ NOW ข้อ (2) `gate-windows` failure-detail · ข้อ (3) `AGENTS.md` ≤30 KB · ข้อ (4) `#948` seed
   เหตุผลเขียนไว้ท้ายไฟล์ "รอบหน้าทำอะไร" ไม่ใช่เพราะลืม
 
-## งานที่ 1 — sweep ไปกับ census เฟรมเดียว (`pirate-force-server#981` · **draft ไม่มี marker** ตามกฎเฟรมถึงไคลเอนต์ + `ADVERSARY_PENDING`)
+## งานที่ 1 — sweep ไปกับ census เฟรมเดียว (`pirate-force-server#981` · เปิดแล้ว ไม่ draft มี marker · adversary คืนในรอบ จึงปลดเงื่อนไข draft ได้)
 
 **ทำไมมันเร่งด่วนกว่าลำดับใน NOW**: `rounds/R380_52u95a_addendum_adversary_after_unlock.md` (D2) เขียนไว้เองว่า
 "ทางแก้ที่ถูก และเป็นงานแรกของรอบหน้า" และผมส่งจดหมาย `0345` บอก LANE-K ให้หยุดจัดคิวจนกว่าจะแก้
@@ -44,12 +44,12 @@
 **หลักฐาน (ชั้น wire/headless — ไม่ใช่จอ)**
 - `WORLD_CENSUS_INITIAL_108_SWEEP_8` + `WORLD_CENSUS_REAPPLY_108_SWEEP_8`, **collection เดียว**,
   pc 21,877 B เทียบกับ census ล้วน 20,446 B · `NAME_COLOUR_SWEEP_ARMED actors=8 census_actors=108`
-- เทส 21 เคส (15 wiring + 6 บน helper ใหม่) · เคสที่สำคัญที่สุดคือ `test_no_second_collection_is_ever_queued`
+- เทส 22 เคส (16 wiring + 6 บน helper ใหม่) · เคสที่สำคัญที่สุดคือ `test_no_second_collection_is_ever_queued`
 - **มิวแทนต์**: ตัด `merged.extend(entries)` ออกจาก `append_census_entries` ⇒ **10 เคสแดง** (คืนค่าแล้ว 21 เขียว)
 - เส้นทาง refusal **ถูกรันจริง** ไม่ใช่เขียนไว้เฉย ๆ (D5): มิวแทนต์ `FieldMobContractError` ผ่าน `sweep_entries`
   ⇒ census สองใบยังคิว ไม่มี suffix มี event `name_colour_sweep_refused_FieldMobContractError` และเธรดไม่ตาย
 - `pf_gate_preflight.py --repo <server>`: **PREFLIGHT PASS**
-- **ชุดเต็มบนต้นไม้สุดท้าย (merge `origin/main` ก่อน): 12,629 passed / 380 skipped / 0 failed / 26,578 subtests / 590.70s** (Python 3.11 บนโคลนคลาวด์ ไม่ได้พูดแทนเกต Windows)
+- **ชุดเต็มบนต้นไม้สุดท้าย (merge `origin/main` ก่อน · หลังจ่าย adversary): 12,630 passed / 380 skipped / 0 failed / 26,578 subtests / 589.47s** (Python 3.11 บนโคลนคลาวด์ ไม่ได้พูดแทนเกต Windows)
 - ชุดเต็มรอบแรก **จับ drift จริงและถูก**: `append_census_entries` เป็น `make_runtime_remote_actors` call site ใหม่ ⇒ re-pin census 44 -> 45 ที่ verifier + report + เทสที่ตรึงเลขเดียวกัน ในคอมมิตของมันเอง (ไม่ skip ไม่ปิดเทส) — นี่คือเหตุผลที่ PR แตะ 7 ไฟล์ ไม่ใช่ 4
 
 **สิ่งที่ยังผิดอยู่และเขียนลงใบ attended แทนที่จะเงียบ**: การตีที่ถูกรับจะ recompose census ใหม่ที่ไม่มีหุ่น ⇒ แถวหาย
@@ -135,4 +135,7 @@ BYTECODE_PURGED: ล้าง `__pycache__` ด้วย `find -exec` (ไม่
 4. NOW ลำดับ (4): `#948` seed แขน (ข) + conftest · (5) ตอบ GM `1215` GM-063
 5. ส่งใบยืนยันให้ K เมื่อ PR ของรอบนี้ merge ("เฟรมเดียวอยู่บน main แล้ว" = สัญญาในจดหมาย `0345`)
 
-SCOREBOARD: COMING | ผู้เทสที่บูต PF_NAME_COLOUR_SWEEP=1 จะเห็นแถวหุ่นติดป้าย 8 ตัวยืนอยู่ในเมืองที่ NPC ยังอยู่ครบ แทนที่จะเห็นเมืองว่างเปล่า (ซึ่งคือสิ่งที่โค้ดเมื่อวานจะทำ) | pirate-force-server#981 (draft ตามกฎเฟรมถึงไคลเอนต์ · adversary คืนแล้ว จ่าย 5 ข้อในรอบ) · pf_bridge#1617 · GT-288
+SCOREBOARD: COMING | ผู้เทสที่บูต PF_NAME_COLOUR_SWEEP=1 จะเห็นแถวหุ่นติดป้าย 8 ตัวยืนอยู่ในเมืองที่ NPC ยังอยู่ครบ แทนที่จะเห็นเมืองว่างเปล่า (ซึ่งคือสิ่งที่โค้ดเมื่อวานจะทำ) | pirate-force-server#981 (เปิดแล้ว รอเกต · adversary คืนในรอบ จ่าย 5 ข้อ) · pf_bridge#1617 · GT-288
+
+
+สถานะ PR ตามจริงตอนจบรอบ: `pirate-force-server#981` **เปิดแล้ว ไม่ draft มี marker รอเกต Windows** (ไม่ใช่ merged ไม่ใช่อยู่บน main) · `pf_bridge#1617` ปลดล็อกด้วยการเติม marker · `#973` ประกาศ superseded แล้ว ปล่อยให้ reaper ปิดเอง
