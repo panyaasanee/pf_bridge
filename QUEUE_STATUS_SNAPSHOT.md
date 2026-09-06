@@ -1,16 +1,14 @@
 # QUEUE_STATUS_SNAPSHOT — สแนปช็อตใบ READY + มี `ATTENDED:` + ยังไม่มี `RESULT`
 
 🔴 **ไฟล์นี้ generate สดโดย LANE-K ทุกรอบ ห้ามอ่านเป็นประวัติ — เชื่อเฉพาะฉบับล่าสุด** (ka1-A ใช้ไฟล์นี้จัดรถบัส capture แทนการอ่าน `GAME_TEST_QUEUE.md` 2 MB เอง)
-สร้างโดย: LANE-K รอบ `43htls` · เวลา 2026-09-07T00:09+07:00 · แหล่ง: อ่านสดจาก `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md` บน `origin/main` (เซสชันนี้มี `git clone`+push จริง) + `tools_bridge/pf_queue_status.py` (315 tickets total, **96 open** — ไม่เปลี่ยนจากรอบก่อน) — ดู `rounds/K_20260907_0009_43htls_*.md`
+สร้างโดย: LANE-K รอบ `6rj6h1` · เวลา 2026-09-07T01:16+07:00 · แหล่ง: อ่านสดจาก `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md` บน `origin/main` (เซสชันนี้มี `git clone`+push จริง) + `tools_bridge/pf_queue_status.py` (315 tickets total, **96 open** — ไม่เปลี่ยนจากรอบก่อน, ตอนนี้มี GT-288 เพิ่มแต่ยังไม่ READY จึงยังไม่กระทบตัวนับ open) — ดู `rounds/K_20260907_0109_6rj6h1_*.md`
 
-🆕 **[K 43htls 00:09] ย้ายเนื้อเต็มไป `tickets/` อีก 3 ใบ (ไม่มี `ATTENDED:` ทั้งสามใบ ไม่กระทบรถบัส capture)**: `GT-084-R2` (52,625 B) · `GT-101` (29,329 B) · `GT-102` (39,082 B) — สตับแทนที่ในคิวหลักตามฟอร์แมต `PANYA-ORDER 1448`/`COO-DECISION 1547`, verbatim, ตรวจ byte-exact ก่อนตัด
-🆕 **[K 43htls 00:09] กวาดสารบัญ "ใบที่ยังไม่ปิด" (`GAME_TEST_QUEUE.md` หัวไฟล์) 15 แถวที่ชี้ใบปิด+archived แล้ว — ลบทิ้ง (แก้ดัชนี ไม่แตะเนื้อใบ)**: `GT-146`/`148`/`182`/`183`/`192`/`207`/`228`/`242`/`250`/`251`/`252`/`254`/`255`/`257`/`269` (ทุกใบตรวจแล้วว่าหัวใบเขียน "archived ... closed" จริง ก่อนลบแถวดัชนี) — ปิดหนี้ค้างจาก `COO-DECISION 20260906_1346` ข้อ 5(ก) ที่ค้างตั้งแต่รอบ `slug54` (13:33) · **`GT-213`/`GT-223` ที่เครื่องมือ `pf_queue_status.py` เคยฟ้องว่า "drift-closed-in-index" ตรวจแล้วว่ายังเปิดจริง (รอ RECHECK ก่อนบูต) ⇒ ไม่ลบ เครื่องมือ false-positive จุดนี้** (drift-closed-in-index ลดจาก 34 → 16 แถวที่เหลือคือ noise ของ regex เครื่องมือเอง อ้างอิงจากคำในเนื้อใบอื่น ไม่ใช่แถวดัชนีจริง)
-🆕 **[K 43htls 00:09] ตอบ COO-DECISION `k2217` สองฉบับ (23:45) แล้ว** — consumed: (1) บล็อก `ATTENDED:` ≤5 บรรทัดของใบเปิด = เจ้าของใบเขียนเอง K ไม่ย่อ · `GT-079` ห้าม K แตะทั้งใบ (2) กติกาถาวรรอบไม่มี git — ไม่กระทบรอบนี้เพราะมี git จริง
-🔴 **ใบที่มี RESULT/ปิดแล้วไม่อยู่ในรายการนี้แล้ว**: GT-214 · GT-217 · GT-220 · GT-223 · GT-224 · GT-233 · GT-242 · GT-249 · GT-250 · GT-251 · GT-252 · GT-253 · GT-255 · GT-257 · GT-266 · GT-269 · GT-272 · GT-277 · GT-287 (PENDING, เจ้าของใบยังไม่เปลี่ยนเป็น READY) · RE-235 · RE-237 · RE-261 · RE-272 · RE-282 (รายละเอียดผล ⇒ หัวใบใน `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md` หรือจดหมายรอบ)
+🆕 **[K 6rj6h1 01:09] `RE-155` ตอบแล้วโดย LANE-B ภายในเส้นตาย 02:00** (`notes_to_chief/20260907_0021_LANE-B-TO-K-gt-body-RE-155-dummy-row-npc-and-916-sweep.md`, ADDRESSEE: LANE-K) — สปาวน์เนอร์ `name_colour_sweep.py` + ตารางผู้สมัคร (faction/actor_type/skin ทดสอบได้ · relation +0x98/rank ตั้งใจไม่ตัด) + บล็อก `ATTENDED:` (เขียนโดย B เอง) → ตั้งเลข **`GT-288`** NAME-COLOUR-SWEEP-DUMMY-ROW-001 (เนื้อเต็มที่ `tickets/GT-288.md`, สตับ+ATTENDED เต็มที่ `GAME_TEST_QUEUE.md`) · ประกาศในจดหมาย `notes_to_chief/20260907_0116_LANE-K-NUMBERED-GT-288.md` · อัปเดตหัวใบ `RE-155` ใน `CLIENT_RE_QUEUE.md` ให้ชี้มาที่ GT-288 แล้ว (ของเดิมขีดฆ่าเก็บไว้ ไม่ลบ) · consumed จดหมายต้นทางแล้ว
+🔴 **`GT-288` ยัง `[PENDING]` ไม่ขึ้นรถบัส capture รอบนี้** — จดหมายต้นทาง (B) เขียนเองว่าสปาวน์เนอร์ยังไม่ต่อสายเข้า `runtime.py`/`app.py` ต้องมี CORE-REQUEST แยกต่อสาย env→dispatch ก่อนจึงบูตขึ้นจริง (เหมือน `pose_trial`/`speed_wire`) — K ไม่ตัดสินความพร้อม รอ B/COO ยืนยันแล้วสั่งพลิกเป็น READY รอบถัดไป (ดูหมวด ง. ด้านล่าง)
+🔴 **ใบที่มี RESULT/ปิดแล้วไม่อยู่ในรายการนี้แล้ว**: GT-214 · GT-217 · GT-220 · GT-223 · GT-224 · GT-233 · GT-242 · GT-249 · GT-250 · GT-251 · GT-252 · GT-253 · GT-255 · GT-257 · GT-266 · GT-269 · GT-272 · GT-277 · GT-287 (PENDING, เจ้าของใบยังไม่เปลี่ยนเป็น READY) · GT-288 (PENDING, รอ wiring — ดูข้างบน) · RE-235 · RE-237 · RE-261 · RE-272 · RE-282 (รายละเอียดผล ⇒ หัวใบใน `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md` หรือจดหมายรอบ)
 **ยัง BLOCKED (ยืนยันแล้วว่าไม่มีจดหมายใหม่เปลี่ยนสถานะรอบนี้)**: `GT-284` WORLD-SCENE-STATE-SURVIVES-RELOGIN-001 ยัง BLOCKED ไม่เข้ารายการบูต · `RE-280`/`RE-283`/`RE-285`/`RE-286` เป็นใบ RE runner (static/client-image) ไม่ใช่ใบ attended-capture ของผู้เทสหน้าจอเกม — ไม่เข้าเกณฑ์สแนปช็อตนี้แม้ `RE-280` จะมีบล็อก `ATTENDED:` แล้วก็ตาม
-🔴 **`RE-155` (COO-DECISION `20260906_2241`+`2345`: ต้องเป็นใบแรกของบูตถัดไป ก่อน `RE-280`) — B ยังไม่ส่งเนื้อใบ+`ATTENDED:` มา ณ เวลา generate นี้ (00:09)** เส้นตาย 2026-09-07T02:00+07:00 **ยังไม่ถึง** ⇒ ยังอยู่หมวด ง. ด้านล่างตามเดิม ไม่ใช่ escalation — ถ้าถึงเส้นตายแล้วยังไม่มี ให้รอบถัดไปบันทึก escalation ตามที่ COO สั่งไว้เอง
 🆕 **`GT-079` ยังคงสถานะเดิม (`BLOCKED-BY-PLACEHOLDER`) — K ห้ามแตะทั้งใบตาม `COO-DECISION k2217 (1/2)`** จนกว่า chief จะเติม placeholder แล้วส่ง `*-TO-K-*` มาเปลี่ยนสถานะเอง
-**รายการ ก./ข./ค. ที่เหลือ (`GT-272`/`GT-274`/`GT-258`/`GT-262`/`GT-279`/`GT-193`/`GT-151`/`GT-178`/`GT-276`/`RE-273`) ตรวจสดผ่าน `pf_queue_status.py` รอบนี้แล้วว่ายัง READY/OPEN ไม่มี RESULT ใหม่ — เนื้อ ATTENDED ไม่เปลี่ยนจากฉบับรอบ `x91eo8r2`/`cm9v9y`/`ec26p6` (ไม่มีจดหมายใหม่แตะใบเหล่านี้รอบนี้)
+**รายการ ก./ข./ค. ที่เหลือ (`GT-272`/`GT-274`/`GT-258`/`GT-262`/`GT-279`/`GT-193`/`GT-151`/`GT-178`/`GT-276`/`RE-273`) ตรวจสดผ่าน `pf_queue_status.py` รอบนี้แล้วว่ายัง READY/OPEN ไม่มี RESULT ใหม่ — เนื้อ ATTENDED ไม่เปลี่ยนจากฉบับรอบ `x91eo8r2`/`cm9v9y`/`ec26p6`/`43htls` (ไม่มีจดหมายใหม่แตะใบเหล่านี้รอบนี้ นอกจาก RE-155/GT-288 ข้างบน)
 
 ---
 
@@ -37,8 +35,8 @@
 
 ---
 
-## ง. ใบ NEEDS-ATTENDED-CAPTURE ที่ตกรถ (ไม่มีบล็อก `ATTENDED:` — chief ไม่จัดคิวได้จนกว่าเจ้าของใบจะเติม)
-- `RE-155` ACTOR-NAME-COLOR-NPC-VS-HOSTILE-MOB-ONE-FIELD-CROSSWALK-001 — ไม่พบบล็อก `ATTENDED:` ในใบ ณ ตอน generate สแนปช็อตนี้
+## ง. ใบ NEEDS-ATTENDED-CAPTURE ที่ตกรถ
+- `RE-155`/`GT-288` NAME-COLOUR-SWEEP-DUMMY-ROW-001 — **มีบล็อก `ATTENDED:` แล้ว** (เขียนโดยเจ้าของใบ B เอง, ครบ 5 บรรทัด) แต่ตกรถเพราะ **สปาวน์เนอร์ยังไม่ต่อสายเข้า `runtime.py`/`app.py`** (จดหมายต้นทางเขียนเอง) — รอ CORE-REQUEST ต่อสาย env→dispatch จาก B แล้วบูตขึ้นจึงจะขึ้นรถบัส capture ได้จริง
 
 ## จ. nonclaims ของสแนปช็อตนี้
 - ไม่ได้ไล่ทุกบรรทัดของ `CLIENT_RE_QUEUE.md` แบบ RE ล้วน (สแกนเฉพาะแท็ก `NEEDS-ATTENDED-CAPTURE`) — RE เฉพาะที่ไม่มีแท็กนี้ไม่ถูกนับ (ปกติไม่ต้อง capture)
