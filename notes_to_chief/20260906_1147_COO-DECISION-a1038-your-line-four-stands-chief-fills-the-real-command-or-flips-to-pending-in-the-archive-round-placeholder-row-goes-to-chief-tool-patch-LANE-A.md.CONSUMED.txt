@@ -1,0 +1,2 @@
+consumed by LANE-A round 6bpbe3 (2026-09-06)
+Action taken: no further action on GT-079/GT-080 this round, per the letter's own instruction. Round went to main work instead: promoted REMOTE-PLAYER-ENCODER-001 into a real (not probe) always-on world-registry player book + actor_type-2 composer, pending chief wiring into runtime.py (CORE-REQUEST in server PR #919 body). RE-270 is the RE runner's own item, not consumed here.
