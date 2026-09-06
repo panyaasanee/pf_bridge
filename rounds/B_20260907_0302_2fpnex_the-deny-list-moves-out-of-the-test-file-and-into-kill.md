@@ -46,6 +46,11 @@ COO `2241` เลือก (ก): ฉากใหม่เข้าอัตโ�
 - **D2**: วนใบ derive ทุกใบ ยืนยัน `rulings_covering` ชื่อมัน **และ** `kill()` ปฏิเสธเทมเพลตของใบนั้น
   เมื่อถูกยื่นในอีกฉากหนึ่ง
 
+## PR ของรอบนี้
+
+`pirate-force-server#977` — **เปิดแล้ว ไม่ draft มี `PF-AUTOMERGE: v4` ยืนยันด้วย GET · รอ gate**
+🔴 **ยังไม่อยู่บน main** รอบหน้าต้องยืนยันด้วย `git merge-base --is-ancestor <sha> origin/main` เอง ห้ามเชื่อบรรทัดนี้
+
 ## หลักฐานสองชั้น แยกกัน (ไม่มีชั้นไหนอ้างอีกชั้น)
 
 | ชั้น | วัดอะไร | ผล |
@@ -53,6 +58,10 @@ COO `2241` เลือก (ก): ฉากใหม่เข้าอัตโ�
 | มิวแทนต์ (พฤติกรรมของโค้ด) | `61 -> 709` ในตัว derive | **แดง 4 ใบ** (`test_every_registered_scenes_monsters_are_killable_under_the_rule`, `test_the_rule_names_the_ruling_for_a_shipped_monster`, subtest `scene='Bg0003' template=61` ×2) คืนค่าแล้วเขียวหมด |
 | มิวแทนต์ (พฤติกรรมของโค้ด) | ถอดการเช็ค deny-list ใน `kill()` | **แดง 2 ใบ** (`test_kill_refuses_the_deferred_scene_under_a_named_signed_letter`, `test_removing_the_row_is_what_changes_the_answer`) คืนค่าแล้วเขียวหมด |
 | สถานะจริงของ repo (ไม่ใช่โค้ดของรอบนี้) | `#972` อยู่บน main จริงไหม | `git merge-base --is-ancestor 07c21e07 origin/main` **exit 0** |
+| ซ้อมเกตในทรีที่ **ไม่มี** `pf_bridge` ข้าง (`git worktree add --detach`) | โมดูลใหม่ skip ตรงกับพินไหม | `1 skipped, 11 passed` = พินเป๊ะ |
+| ทรีเดียวกัน รูปเกตเต็ม (สร้าง exclusion list จาก `gate-windows.yml` เอง) | `pytest_subset` + `skip_census` | `11603 passed, 204 skipped` exit=0 · `every skip is declared, named and pinned` **PASS** exit=0 |
+| ต้นไม้สุดท้ายหลัง `git merge origin/main` (รับ `#974`) | ชุดเต็มครั้งเดียวต่อรอบ | **12627 passed, 380 skipped, 28005 subtests, 0 failed** (7:38) |
+| เกต preflight | `pf_gate_preflight.py --repo <server>` และซ้ำอีกครั้งพร้อม `--pr-body --pr-stage final` | **PREFLIGHT PASS** ทั้งสองครั้ง |
 
 🔴 **anti-vacuity ที่รอบนี้ต้องแก้ตัวเอง สองครั้ง** — ร่างแรกของสองเทสไม่ได้วัดอะไรเลย:
 1. `test_removing_the_row_is_what_changes_the_answer` ร่างแรกสร้าง stand-in ในฉาก `Bg3001`
@@ -112,8 +121,10 @@ NOW: "chief ต่อสาย `0027` → B แจ้ง K พลิก READY" �
 
 ## adversary
 
-`ADVERSARY_PENDING pirate-force-server#<PR ของรอบนี้> / claude/busy-lovelace-2fpnex`
+`ADVERSARY_PENDING pirate-force-server#977 / claude/busy-lovelace-2fpnex`
 สั่งต้นรอบพร้อมเริ่มงานตามกฎ (5 ข้อ: derive ยังเป็น subset ของใบเซ็นบน main วันนี้ไหม ·
 cross-scene · มิวแทนต์ `61->709` และ `if templates:` → `if True:` · ฉากไหนจะแดง/เขียวใต้ tripwire ·
 เขตเขียนของสองคอมมิตที่ cherry-pick มา)
 **ไม่มีที่ไหนในรอบนี้เขียนว่า "ผ่าน adversary"** — รอบหน้าของสาย B รับผลบนกิ่งนี้เป็นงานแรก
+
+SCOREBOARD: COMING | ฉากที่เจ้าของยังไม่ให้สิทธิ์ฆ่า (ทะเล Bg3001) จะฆ่าไม่ได้จริง ๆ แม้โค้ดจะลงทะเบียน roster ของมันแล้ว - เดิมคำสั่งห้ามนั้นอยู่แต่ในไฟล์เทสที่ kill() ไม่เคยอ่าน | pirate-force-server#977 (เปิดแล้ว รอ gate) · pf_bridge#1613 · sha b7b045d
