@@ -101,24 +101,23 @@ faction ของ NPC (`_npc_faction_body`) ผิดรูปหรือไม
 - `python3 tools_bridge/pf_gate_preflight.py --repo pirate-force-server` (ก่อน
   commit) -> **PREFLIGHT PASS** (cp874, ไม่มี skip ใหม่, main อยู่ใน HEAD, census
   ตรง, ชื่อไฟล์ใหม่ 2 ไฟล์ <=100 ตัวอักษร)
-- ชุดเต็ม `pytest tests/` บนต้นไม้ commit จริง (`5a718e2`): **สั่งรันแล้ว กำลังรอผล
-  ตอนจบไฟล์รอบนี้** (คำสั่งใช้เวลานาน, รอบก่อนวัดได้ ~7 นาทีสำหรับ ~12,500 เทส) --
-  ถ้าผลไม่เขียวเมื่อ push จริง จะแก้ก่อน push ตามกฎ "ห้าม push ถ้าชุดเต็มแดง"
+- ชุดเต็ม `pytest tests/` บนต้นไม้ commit จริงที่ push แล้ว (`86b3870`, หลังแก้ตามผล
+  adversary ครบ): **12494 passed · 373 skipped · 26245 subtests passed · 0 failed
+  (493.38s)** -- เขียวจริงก่อน push ตามกฎ
 - ทุกไฟล์ที่แตะเป็น ASCII ล้วน (พบ 2 จุดภาษาไทยในคอมเมนต์ตอนแรก แก้เป็นอังกฤษแล้ว
   ตรวจซ้ำด้วย `str.isascii()`) · stage ทีละไฟล์ อ่าน `git diff --cached` ทุก hunk
   ก่อน commit · ไม่ใช้ `git add -A`
 
 ## PR/status
-- `pf_bridge` claim `#1590` (`claude/practical-knuth-dipufa`) -- ปลดเมื่อจบรอบ
-  (ดูข้อ 3 ของ "จบรอบ")
-- `pirate-force-server`: commit บนกิ่ง `claude/gifted-clarke-dipufa` (`5a718e2` +
-  แก้ตามผล adversary ข้อ 2/7 + census ที่เพิ่มขึ้น 4 ไฟล์) -- **PR เปิดไม่ draft**
-  พร้อม `PF-AUTOMERGE: v4` ตั้งแต่เปิด: adversary คืนผลแล้ว ข้อบกพร่องจริง (2, 7)
-  แก้แล้วในคอมมิตเดียวกัน ข้อที่เหลือ (3-6) ตรวจแล้วไม่พบบั๊ก ข้อ 1 เป็นเรื่องที่
-  จดหมายเปิดเผยไว้แล้วไม่ใช่บั๊กของโค้ด -- เข้าเงื่อนไข "draft จนกว่า adversary คืน"
-  ครบแล้ว (คืนและแก้แล้วในรอบเดียวกัน)
-- ชุดเต็ม `pytest tests/` รันซ้ำหลังแก้ตามผล adversary ก่อน push -- ผลลงในหัวข้อ
-  verification ข้างบน (ถ้าไม่เขียว ไม่ push จนกว่าจะแก้)
+- `pf_bridge` claim `#1590` (`claude/practical-knuth-dipufa`) -- **ปลดแล้ว**: body
+  เติม `PF-AUTOMERGE: v4` แล้ว GET ยืนยัน (`updated_at` ขยับ, marker อยู่จริง)
+- `pirate-force-server` **`#966` เปิดแล้ว ไม่ draft** หัว `86b3870` body มี
+  `PF-AUTOMERGE: v4` ตั้งแต่เปิด GET ยืนยันแล้ว (`draft: false`) -- adversary คืนผล
+  แล้ว ข้อบกพร่องจริง (2, 7) แก้แล้วในคอมมิตเดียวกัน ข้อที่เหลือ (3-6) ตรวจแล้วไม่พบ
+  บั๊ก ข้อ 1 เป็นเรื่องที่จดหมายเปิดเผยไว้แล้วไม่ใช่บั๊กของโค้ด -- เข้าเงื่อนไข "draft
+  จนกว่า adversary คืน" ครบแล้ว (คืนและแก้แล้วในรอบเดียวกัน) · **สถานะตามจริง: เปิดแล้ว
+  รอ gate** (ไม่ใช่ landed/merged -- รอบถัดไปยืนยันด้วย `git merge-base
+  --is-ancestor` ก่อนเชื่อว่าอยู่บน main)
 
 ## รอบหน้าทำอะไร (เรียงแล้ว)
 1. **D1(ก) + D2 tripwire ฉากที่ 13 + 924/529** บน PR `#958` (หรือกิ่งใหม่ถ้า reaper
