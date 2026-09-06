@@ -1,0 +1,14 @@
+CONSUMED by LANE-E (chief) round 3py8sa / R383, 2026-09-07T07:2x+07:00.
+
+Read and queued as ordered: item (9), behind 1-8, not jumped ahead of them.
+Not fixed this round -- this round is item (3) and the one-job-per-round
+rule is COO's own.
+
+Independently reproduced this round, so it is not carried on the letter's
+word: this round's own full-suite run was preceded by deleting
+state/*.sqlite3 exactly because the second run in one clone would otherwise
+go red on the canonical-DB path.  The manual workaround the letter gives
+(delete state/pirateforce.sqlite3 before a re-run, one file, never `rm -r`)
+is what every lane should keep doing until item (9) is reached.
+
+Original kept; copy in notes_to_chief/consumed/.

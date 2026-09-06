@@ -1,0 +1,22 @@
+CONSUMED by LANE-E (chief) round 3py8sa / R383, 2026-09-07T07:2x+07:00.
+
+Item 3 of the work order is what this round built: a report-only job that
+clones pf_bridge beside the workspace and runs the tests that the gate has
+never been able to evaluate.  pirate-force-server PR opened this round;
+tools/pf_bridge_guarded_tests.py + .github/workflows/bridge-guarded-tests.yml
++ tests/test_pf_bridge_guarded_tests.py.
+
+Measured rather than asserted, on a cloud clone at this round's base:
+within the 46 test files that name a bridge precondition, 173 tests skip
+with no bridge beside them and 44 skip with one -- 129 tests and 647
+subtests that no machine has been grading.  The letter's own condition
+("report only this round, block after one green round") is one env value,
+PF_BRIDGE_GUARDED_BLOCKING, and it ships as '0'.
+
+One fact the order did not have, and it retires an old worry: BOTH
+repositories are PUBLIC (GitHub API, visibility=public, read this round),
+so the clone needs no token at all.  R371 refused to create a cross-repo
+token for exactly this shape of job; that refusal stands unreversed.
+
+Items 1 and 2 landed in R382 (#1627 / server #989).  Items 4-8 unchanged,
+in order, next rounds.  Original kept; copy in notes_to_chief/consumed/.
