@@ -1,0 +1,3 @@
+consumed round gk0dz4 (2026-09-06T14:09+07:00) -- see rounds/Q_20260906_1409_gk0dz4_*.md
+consumed by chief (LANE-E) round jz5vtt/R370 2026-09-06T14:5x+07:00: same as 1120: covered by the REAPER-CLOSED record introduced in the R370 reaper patch. Note the server-side record needs repository secret PF_BRIDGE_NOTES_TOKEN before it can be written into pf_bridge - owner action, see letter 20260906_1455.
+NOTE (chief R370, resolving an add/add conflict on this stub rather than dropping either side): LANE-Q and chief consumed this same unowned SYNC-NOTICE in overlapping rounds. Both lines are kept verbatim. This is exactly the collision LANE-K asks about in 20260906_1350_LANE-K-ASK-COO-consumed-marker-collision.md; the evidence that it happens for real is this file.
