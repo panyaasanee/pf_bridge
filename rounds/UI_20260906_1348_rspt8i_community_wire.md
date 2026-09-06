@@ -130,6 +130,20 @@ u64+wstring+u8 ทั้งหมด; `ReplyLetterInABottleVital`/`UseBlankPenpa
    ควรเริ่มจากหลักฐานนั้น ไม่ใช่เริ่มจากศูนย์
 4. `KNOWN_RED_MAIN` เรื่อง `bridgesize` บน `GAME_TEST_QUEUE.md` ไม่ใช่ของ LANE-UI แก้ -- ยังเป็น
    จริงรอบนี้เหมือนเดิม
+5. เช็ค `CORE-REQUEST 20260905_2006` (เสียบ `LogoutVital` subcode 1 ใน `runtime.py`) ว่า chief
+   ตอบหรือยัง (สั่งเป็นงาน (1) ของ chief รอบถัดไปตาม `COO-DECISION 1341` ข้อ 2, ดูหัวข้อ
+   "กล่องจดหมายเพิ่มเติม" ข้างบน) -- ถ้ายังไม่ตอบ เขียน COO บรรทัดเดียว
+
+## กล่องจดหมายเพิ่มเติม (มาถึงระหว่างรอบ ผ่าน `git merge origin/main` ก่อน push)
+`notes_to_chief/20260906_1349_COO-DECISION-ui2015-*-LANE-UI.md` (รอบ COO `1341`): ปิดใบ
+`20260905_2015_LANE-UI-ASK-COO-pf-adversary-not-a-callable-tool-this-session.md` ด้วยทาง (ก)
+เดิม -- pf-adversary กลับมาใช้ได้ตั้งแต่รอบ `g1ss4s` (5 รอบหลังจากนั้นทุกรอบมีผลจริงในไฟล์รอบ รวม
+ทั้งรอบนี้) ไม่ต้องแจ้ง Panya เพิ่ม · ข้อ 2: `CORE-REQUEST 20260905_2006` (เสียบ `LogoutVital`
+subcode 1 ใน `runtime.py`) สั่ง chief ตอบเป็นงาน (1) รอบถัดไปของ chief (`1345` ข้อ 5) -- **รอบหน้า
+ของ LANE-UI ต้องเช็คว่า chief ตอบหรือยัง ถ้ายังไม่ตอบให้เขียน COO บรรทัดเดียว** (เพิ่มในหัวข้อ
+"รอบหน้าทำอะไร" ด้านล่าง) · ข้อ 3: GT ticket ใหม่ทุกใบจากนี้ส่ง `*-TO-K-gt-body-*` ให้ LANE-K ตั้งเลข
+แทน chief (PANYA `1259`) -- รอบนี้ไม่ได้เปิดใบใหม่จึงยังไม่ใช้กฎนี้จริง แต่บันทึกไว้สำหรับรอบหน้า ·
+วาง `.CONSUMED.txt` + สำเนาไป `notes_to_chief/consumed/` แล้ว
 
 ## QUEUE_TRIAGE
 ไม่ใช่หน้าที่ของ LANE-UI (ของ chief ตาม `AGENTS.md` section 7) -- ไม่เขียนบรรทัดนี้
