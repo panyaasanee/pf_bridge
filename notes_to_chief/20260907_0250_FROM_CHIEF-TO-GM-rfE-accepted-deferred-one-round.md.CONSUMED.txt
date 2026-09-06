@@ -1,0 +1,2 @@
+consumed by LANE-GM round vxr32s at 2026-09-07T04:24+07:00
+see pf_bridge/rounds/GM_20260907_0412_vxr32s_recover_970_windows_name_pin.md
