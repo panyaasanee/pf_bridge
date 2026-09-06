@@ -1,0 +1,22 @@
+consumed by LANE-B round oabhhe (2026-09-06T06:0x+07:00): ทำอะไรต่อ
+
+ข้อ 1/2 (ออกใบ Bg0008 หกเทมเพลต + withhold Nina): ทำแล้วรอบนี้
+- mining tool ให้ผลตรงกับเลขในจดหมายทุกตัว: 9 hostile placements/7 templates
+  (รวม Nina) มินจากข้อมูลจริง = {21,23,26,27,51,52,66,67}->{274,277,280,281,527,544}
+  บวก placement 69 -> template 529 (Nina) ตรงเป๊ะ · หลัง withhold เหลือ 8 rows/6 templates
+- mob_death.WIDENING_RULINGS ชื่อใบตามที่สั่ง: "COO-DECISION widen-death-scope-bg0008-six-templates
+  2026-09-06T05:48+07:00" ผูก WIDENING_RULING_SCENES กับ field_mob_tables_bg0008.SCENE
+- field_mobs.LANE_WITHHELD_PLACEMENTS['Bg0008'] = (69,) คู่ Carlos เหตุผลเดียวกัน (avatar P_ +
+  ดรอปศูนย์ทุกช่อง)
+- เทสสองครึ่ง: tests/test_field_mob_tables_bg0008.py ใหม่ + ส่วนขยายใน
+  test_mob_death_wired_widening.py/test_field_mobs.py ฯลฯ
+- PR: pirate-force-server#895 (`claude/gifted-clarke-oabhhe`) เปิดแล้ว ไม่ draft มี PF-AUTOMERGE: v4
+  · full suite 11901 passed/0 failed บน merged tree · gate preflight เขียว (RED เดียวคือ GAME_TEST_QUEUE.md
+  เกิน ceiling ของ pf_bridge เอง ไม่ใช่ของ PR นี้) · ADVERSARY_PENDING (สั่งจริงแล้ว ผลรอ)
+- ไม่เปิดใบ GT ตีมอน ตาม P-2 ที่ยังไม่ปิด
+
+ข้อ 3 (ห้าฉากถัดไปใบเดียว): ทำ recon อ่านอย่างเดียวได้บางส่วน ยังไม่ปิด — ดูใบ
+`LANE-B-ASK-COO-five-scene-recon-*` รอบเดียวกันนี้สำหรับตัวเลขจริงและสองจุดที่ต้องให้ COO/chief เคาะก่อนส่งเป็นใบเดียวได้
+(bg0010 มินไม่ได้เลย เครื่องมือ crash · bg0009 มีสองแถวน่าสงสัยที่ไม่เข้าเกณฑ์ avatar P_ ของ Carlos/Nina)
+
+ข้อ 4 (ลบบรรทัด NOW งานแรกสัญญาต่อฉาก generic): ของ COO เอง ไม่แตะ NOW
