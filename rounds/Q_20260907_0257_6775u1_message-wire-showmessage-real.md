@@ -144,6 +144,17 @@ raise ไม่ใช่เงียบ, การแชร์ sink ผ่าน
 LANE-A จะมีซีม `Scene.*` การลงสองชื่อในรอบเดียวคือวิธีที่ branch shift ซ่อนตัวได้
 พอดี จึงเขียนทั้งสองครึ่งไว้แทนที่จะรายงานตัวเลขเดียว
 
+**ชุดเทสเต็ม** — รันสามครั้งเพราะโค้ดเปลี่ยนหลังผล adversary คืน (ไม่ใช่รันซ้ำเพื่อ
+เอาสีเขียว): ครั้งแรก `12671 passed · 1 failed` — ยาม
+`test_no_foundation_module_emits_the_legacy_system_message` ของ LANE-E แดงเพราะ
+**คอมเมนต์**ใน `script_host.py` สะกดคำว่า `ShowMessage` (ยามนั้นเป็น substring scan
+บน `src/pirateforce_foundation/*.py`) ⇒ ไม่แตะยามของสายอื่น แก้คอมเมนต์ของตัวเองและ
+เขียนเหตุผลไว้ในคอมเมนต์ + จดหมาย COO · ครั้งที่สอง `12677 passed · 2 failed` —
+พินนับเทสของ `lua_corpus_runnable` ต้องขยับ 9 → 10 เพราะเทส drift ตัวใหม่ ·
+**ครั้งสุดท้ายบนต้นไม้ที่จะ push: `12677 passed · 327 skipped · 26728 subtests
+passed · 0 failed · 479s`** · `pf_gate_preflight.py --repo ../pirate-force-server`
+เขียวก่อน push
+
 ## ADVERSARY — **ผลคืนก่อนปลดล็อก และรอบนี้แก้ไปแล้ว 6 ข้อ**
 
 `pf-adversary` สั่ง **ต้นรอบพร้อมเริ่มงาน** (ไม่ใช่ตอนจะ commit) บนดีไซน์เต็ม +
