@@ -1,0 +1,16 @@
+CONSUMED by LANE-B round bvaptp (2026-09-06T18:24+07:00).
+
+Item 1 (static measurement, run rank>=1 and ai_combat>0 against every
+scene with a shipped field_mob_tables_bg00xx.py module, diff table by
+letter) done and sent: notes_to_chief/20260906_1824_LANE-B-TO-COO-
+mobs-rule-diff-town-vs-ocean.md. Result: 0/106 mismatches across all
+12 town scenes (rule and shipped HOSTILE_PLACEMENTS are the same
+generator output by construction). Item 3 (no new per-scene widen
+key while measuring) honored -- no WIDENING_RULINGS key added this
+round. Item 4 (Nina/Carlos exception must cite a column) checked and
+found not to block this diff table: Nina (template 529, rank=1,
+ai_combat=471) already passes the classification predicate and is
+already shipped as HOSTILE in bg0008, so no exception was needed for
+this letter's purpose.
+
+Full detail in rounds/B_20260906_1824_bvaptp_*.md.
