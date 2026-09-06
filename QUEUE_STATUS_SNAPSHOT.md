@@ -1,10 +1,11 @@
 # QUEUE_STATUS_SNAPSHOT — สแนปช็อตใบ READY + มี `ATTENDED:` + ยังไม่มี `RESULT`
 
 🔴 **ไฟล์นี้ generate สดโดย LANE-K ทุกรอบ ห้ามอ่านเป็นประวัติ — เชื่อเฉพาะฉบับล่าสุด** (ka1-A ใช้ไฟล์นี้จัดรถบัส capture แทนการอ่าน `GAME_TEST_QUEUE.md` 2 MB เอง)
-สร้างโดย: LANE-K รอบ `slug54r2` · เวลา 2026-09-06T13:40+07:00 · แหล่ง: `GAME_TEST_QUEUE.md` + `CLIENT_RE_QUEUE.md` บน `origin/main` หลังแก้ผล pf-adversary ของรอบ `slug54` — ดู `rounds/K_20260906_1340_slug54r2_*.md`
+สร้างโดย: LANE-K รอบ `n3s0rg` · เวลา 2026-09-06T14:10+07:00 · แหล่ง: `GAME_TEST_QUEUE.md` + `CLIENT_RE_QUEUE.md` บนกิ่งรอบนี้ (`claude/loving-curie-n3s0rg`, เท่ากับ `origin/main` `5949d7e` + งานรอบนี้) — ดู `rounds/K_20260906_1410_n3s0rg_*.md`
 ลำดับ: (1) PANYA-ORDER (2) ไมล์สโตนใน `NOW.md` (3) อายุใบ (เก่าสุดก่อน) · แยกตามชนิดบูต
 
-🔴 **ใบที่มี RESULT แล้วไม่อยู่ในรายการนี้แล้ว** (พับแล้วรอบ `slug54`/`slug54r2`): GT-214 · GT-217 · GT-220 · GT-223 · GT-224 · GT-242 · GT-249 · GT-250 · GT-251 · GT-252 · GT-253 · GT-255 · GT-257 · GT-266 · GT-269 · GT-272 · RE-235 · RE-237 · RE-261 · RE-272 (รายละเอียดผล ⇒ หัวใบใน `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md` หรือจดหมายรอบ) · 🔴 **`GT-223`/`GT-224`/`GT-249` แก้เข้าใหม่รอบ `slug54r2`** — รอบ `slug54` เคยพลาด (GT-223 เขียนผิดว่า "ไม่มีผล" ทั้งที่มี FAIL จริงจาก R309 · GT-249 ไม่ถูกแตะเลยทั้งที่มี PASS-PARTIAL ค้างเกรด >30 ชม. จาก R312) เพราะจดหมายเหล่านั้นมี `.CONSUMED.txt` จากสายอื่นเพื่อจุดประสงค์อื่นอยู่ก่อนแล้ว — pf-adversary จับได้ ดู `notes_to_chief/20260906_1350_LANE-K-ASK-COO-consumed-marker-collision.md`
+🔴 **ใบที่มี RESULT แล้วไม่อยู่ในรายการนี้แล้ว** (พับแล้วรอบ `slug54`/`slug54r2`/`n3s0rg`): GT-214 · GT-217 · GT-220 · GT-223 · GT-224 · GT-242 · GT-249 · GT-250 · GT-251 · GT-252 · GT-253 · GT-255 · GT-257 · GT-266 · GT-269 · GT-272 · **GT-277 (ใหม่ — ตั้งเลข+พับ+archived ในรอบเดียวโดย `n3s0rg`)** · RE-235 · RE-237 · RE-261 · RE-272 (รายละเอียดผล ⇒ หัวใบใน `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md` หรือจดหมายรอบ) · 🔴 **`GT-223`/`GT-224`/`GT-249` แก้เข้าใหม่รอบ `slug54r2`** — รอบ `slug54` เคยพลาด (GT-223 เขียนผิดว่า "ไม่มีผล" ทั้งที่มี FAIL จริงจาก R309 · GT-249 ไม่ถูกแตะเลยทั้งที่มี PASS-PARTIAL ค้างเกรด >30 ชม. จาก R312) เพราะจดหมายเหล่านั้นมี `.CONSUMED.txt` จากสายอื่นเพื่อจุดประสงค์อื่นอยู่ก่อนแล้ว — pf-adversary จับได้ ดู `notes_to_chief/20260906_1350_LANE-K-ASK-COO-consumed-marker-collision.md`
+🔴 **`GT-242` ห้ามบูตซ้ำจนกว่า COO ตอบ** — รอบ `slug54` เคยพับผิด (เขียน BLOCKED ทับ โดยไม่เห็นว่า `R316` เคยผ่าน PASS มาก่อนแล้ว) รอบ `n3s0rg` แก้หัวใบให้มีทั้งสองผลแล้ว แต่ยังไม่ archive/ปิดใบเพราะไม่ชัดว่า PASS ของ R316 นับเป็นปิดใบสมบูรณ์หรือไม่ — ถามแล้วใน `notes_to_chief/20260906_1410_LANE-K-ASK-COO-gt242-r316-pass-vs-r321-blocked.md` ห้ามเรียก Panya บูตใบนี้จนกว่าจะมีคำตอบ
 
 ---
 

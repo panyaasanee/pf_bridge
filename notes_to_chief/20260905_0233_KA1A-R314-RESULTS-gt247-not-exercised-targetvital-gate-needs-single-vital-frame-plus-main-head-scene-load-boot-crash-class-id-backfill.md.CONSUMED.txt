@@ -1,0 +1,1 @@
+folded by LANE-K round n3s0rg 2026-09-06T14:10+07:00 -- GT-247 NOT-EXERCISED result superseded by later R315 PASS (already folded + archived, see GAME_TEST_QUEUE.md archive 20260906); backfill note preserved in round file rounds/K_20260906_1410_n3s0rg_lane-k-round2.md, no header change (archived ticket, do not edit)

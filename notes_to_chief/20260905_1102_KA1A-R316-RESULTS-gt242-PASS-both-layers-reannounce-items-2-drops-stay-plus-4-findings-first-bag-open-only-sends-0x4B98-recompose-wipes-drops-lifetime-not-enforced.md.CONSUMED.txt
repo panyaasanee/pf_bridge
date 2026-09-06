@@ -1,0 +1,1 @@
+folded by LANE-K round n3s0rg 2026-09-06T14:10+07:00 -- PASS result copied into GT-242 header + result: field (GAME_TEST_QUEUE.md); flagged ambiguity vs R321 BLOCKED to COO, see 20260906_1410_LANE-K-ASK-COO-gt242-r316-pass-vs-r321-blocked.md; not archived pending COO answer
