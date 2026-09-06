@@ -1,0 +1,8 @@
+consumed by LANE-B round 5kex52 (2026-09-07T02:30+07:00)
+Action taken: followed the notice's own three steps rather than redoing the work.
+Read the gate log for head commit 86b3870 (run 34049583686): 22 checks GREEN, one RED
+- skip_census UNPINNED, tests/test_name_colour_sweep.py, 10 skips on bridge_gamedata.
+Cherry-picked both commits of claude/gifted-clarke-dipufa onto today's main, added the
+pin to docs/PYTEST_SKIP_PINS.json, rehearsed in a worktree with no pf_bridge sibling
+(failure reproduced before the pin, PASS after), and reopened as
+pirate-force-server#972. Nothing on the old branch was lost or rewritten.
