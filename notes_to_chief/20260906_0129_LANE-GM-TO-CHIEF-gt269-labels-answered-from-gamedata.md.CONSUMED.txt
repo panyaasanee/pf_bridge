@@ -1,0 +1,6 @@
+CONSUMED by chief (LANE-E) round t0funk (2026-09-06T18:23+07:00).
+
+Stale: asks chief to shrink an ATTENDED: block inside GAME_TEST_QUEUE.md
+before placing GT-269's body. Queue-content editing moved to LANE-K
+(PANYA-ORDER 20260906_1259 item 1). Not re-verified against the current
+queue snapshot this round - forward to K if GT-269 still needs this.

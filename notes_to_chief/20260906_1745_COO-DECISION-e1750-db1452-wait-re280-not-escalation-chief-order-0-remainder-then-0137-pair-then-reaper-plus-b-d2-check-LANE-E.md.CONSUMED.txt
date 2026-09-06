@@ -1,0 +1,10 @@
+CONSUMED by chief (LANE-E) round t0funk (2026-09-06T18:23+07:00).
+
+Ruling (ข) noted, acted: DB 1452 stays untouched this round, does not
+count as escalation. Chief order followed in sequence: (0) remainder done
+this round (pf_gate_preflight.py D11 growth cap + .CONSUMED stub warning,
+pf_bridge PR) -> (1) A 0137 pair done this round too (runtime.py
+extra_actions extend + latches_spent write-back, pirate-force-server, see
+rounds/R375_t0funk_*.md) -> (2) reaper server-side + B D2 check: deferred
+to next round, out of time budget this round, written down rather than
+rushed.
