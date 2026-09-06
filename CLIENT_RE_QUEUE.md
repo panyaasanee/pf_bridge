@@ -1648,3 +1648,263 @@ ATTENDED: บูต = บูตไคลเอนต์ปกติเข้า�
 (ว่าง)
 
 > 🔴 **ห้ามสายอื่นใช้เลข `RE-278`** · numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน **277** (`GT-277`, วางพร้อมกันรอบเดียว) ⇒ ใบนี้ **278** · ตรวจ 0 hit ของ `GT-278`/`RE-278` ทั้งสามที่ (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/`) ก่อนวาง [ตรวจโดย LANE-K รอบ `n3s0rg`]
+
+## RE-280 ITEMOPERATEVITALRES-EQUIP-WORN-FLAG-AND-W9-CROSSCHECK-001  [🔴 **OPEN** · 🔥 **PANYA-ORDER `20260906_0156` เส้นตาย 23:00 — บล็อกแขน (ข)** · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-DB** · ตั้งเลขโดย LANE-K รอบ `zqq4qz` 2026-09-06T16:09+07:00 ตาม `COO-DECISION 20260906_1547` ข้อ 4(1) ("ตั้งเลข RE ของ DB `1449` ก่อนใบอื่นทั้งหมด") · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_1449_LANE-DB-RE-TICKET-itemoperatevitalres-equip-worn-flag-and-w9-crosscheck.md` คำต่อคำ · จากสาย: LANE-DB รอบ `xqi5p4` ต่อจาก `rounds/DB_20260906_1316_rjqssc_...md` §7]
+
+**หัวเรื่อง**: ItemOperateVitalRes (0x4C13) สำหรับ "สวมอาวุธ" (op=5): field `ItemAttr@+0x39` worn-flag ความหมายคืออะไร + cross-check ว่า W9 คือ plain itembag codec จริงหรือไม่สำหรับฟังก์ชันนี้โดยเฉพาะ
+
+### ค้นใน `pf_bridge\external\` แล้ว: เจอ <อะไร> / ไม่เจอ
+เจอ `external/PF_SERIALIZER_FIELDS.tsv:769-794` (26 แถว ItemOperateVitalRes) และ `external/PF_PROTOCOL_REGISTRY.tsv:47` (vtable/handler/serializer VA) — **ไม่มี layout ที่ครบพอสร้าง encoder** (ดู §1)
+
+### ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ
+ไม่เกี่ยว — นี่คือคำถามระดับ wire/static-image ไม่ใช่ตารางข้อมูลเกม
+
+### บริบท (ทำไมใบนี้เปิด)
+`ItemOperateVitalReq` (0x4BED) op=5 (สวม), value=8, identity=0x4 ("Blade") ยืนยันซ้ำ 3 ครั้งจริง
+(`notes_to_chief/20260906_1255_KA1A-R321-RESULTS-*.md` §2 ภาคผนวก A) แต่ server ไม่ตอบ (RE-272
+CAPTURED). `PANYA-ORDER 20260906_1312` สั่งให้ LANE-DB ตอบ op=5 ด้วย `ItemOperateVitalRes` (0x4C13,
+`VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv:125`, คู่กับ 0x4BED ที่ `:123`) รอบนี้ (`xqi5p4`) พยายาม
+ประกอบ encoder แล้วพบว่ายังไม่พอ — รายละเอียดสองชั้นด้านล่าง
+
+### §1 ชั้น static-image (pf-static-re agent รอบนี้, ไม่ใช้ client binary): NOT PROVABLE จาก TSV อย่างเดียว
+`external/PF_SERIALIZER_FIELDS.tsv:769-794` (26 แถว, ฟังก์ชัน `0x005EDA20-0x005EDC31`): จาก 13 W-order
+field มีแค่ 5 ที่มี tag/size/source ครบ (W1 tag `0x08` size 1 จาก `+0x30` · W2 tag `0x0B` size 1 จาก
+`STACK+0x19` · W4 tag `0x08` size 1 จาก `STACK+0x1A` · W6 tag `0x32` size 8 จาก `DEREF(...)+0x24...+0x10`
+PHI-branched · W8 tag `0x08` size 1 จาก `DEREF(...)+0x24...+0x18` PHI-branched) — อีก 8 แถวเป็น
+`UNKNOWN`: W3/W12 `indirect_call_not_proven_serializer_slot` (`:772,:789`) · W5/W7
+`invalid_parameter_import_call_wire_effect_unproved` (`:775,:778`, CRT `_invalid_parameter_noinfo`) ·
+W9 `direct_call_not_proven_serializer` เรียก `0x0046F4D0` (`:783`) · W10/W11 atomic
+increment/decrement ที่ vtable+0x04/+0x0C (`:785,:787`) · W13 `direct_call_not_proven_serializer` เรียก
+`0x005ED2F0` (`:794`, ไม่มี closure ในทั้ง `pf_bridge` ที่อธิบายที่อยู่นี้เลย)
+
+สถานะโครงการเองยืนยันซ้ำ: `notes_to_chief/reference_codex_attr/PF_V5_P1_OPEN.tsv:77` และ
+`PF_PROTOCOL_PRIORITY.tsv:47` ระบุ `ItemOperateVitalRes` เป็น `OPEN` ทั้ง base/effective
+serializer/structural status, blocker `DYNAMIC_DISPATCH_OR_SUBCALL_UNRESOLVED`,
+`applied_overlay_chain=BASE_ONLY` (ยังไม่ได้ apply overlay ที่ reclassify การเรียก `0x0046F4D0` เป็น
+non-wire แบบที่ `PF_A2_POOL_46F4D0_DELTA.tsv` ทำให้ 4 ข้อความอื่นแล้ว — grep `"ItemOperateVital"` ใน
+ไฟล์ delta นั้น = 0 hit) · `PF_FIELD_VALIDATION.tsv:92` ระบุ capture layer `NOT_OBSERVED` — ไม่เคยมี
+frame 0x4C13 จริงถูกจับจากฝั่ง server เลย (ตรงกับที่ server ไม่เคยตอบ op=5)
+
+### §2 หลักฐานที่แรงกว่า: `tests/test_equip_state_static.py` (commit แล้วในรีโป server, gate ด้วย
+`GAME_INSTALL_TREE.skip_unless_present()` — ต้องเครื่อง Panya ถึงจะรัน แต่ assertion ถูก pin sha256
+ไว้แล้วในไฟล์นี้เอง ไม่ใช่ของใหม่ที่ใบนี้ขอ) ให้ข้อเท็จจริงที่แคบกว่าและตรงประเด็นกว่าทั้ง §1:
+
+1. `test_item_operate_result_optional_bag_is_plain_not_collection` (บรรทัด 316-337): พิสูจน์แล้วว่า
+   ฟังก์ชัน `item_operate_result_codec` (=`0x005EDA20`, ตัวเดียวกับ ItemOperateVitalRes) เรียก
+   `0x46F4D0` (`plain_itembag_factory`) จริง สร้างกล่อง 0x68-byte ("plain ItemBag") ไม่ใช่ 0x90-byte
+   `CollectionBagAttr` — **นี่คือคำตอบของ RE ask #1 ใน §1 สำหรับฟังก์ชันนี้โดยเฉพาะ (ไม่ใช่ analogy
+   ข้ามข้อความแบบที่ `PF_V5_P1_OPEN.tsv` เตือน)** แต่ยังไม่ได้ผูกกลับเข้า `PF_A2_POOL_46F4D0_DELTA.tsv`
+   หรือปลด `OPEN` status ใน `PF_V5_P1_OPEN.tsv:77`/`PF_PROTOCOL_PRIORITY.tsv:47`
+2. `test_character_equipment_ui_requests_collection_bag_not_equipped_bag` (บรรทัด 267-313): ช่อง
+   อุปกรณ์บนจอ (equipment UI) **ไม่ได้อ่านจาก `ItemBagAttr_Equiped`** แต่คำนวณจาก `CollectionBagAttr`
+   ที่ map ทุก `ItemAttr` ใน backpack ที่ byte `+0x39` (ตรงกับ `ItemAttrState.raw_u8_39` ใน
+   `inventory.py`) ผ่าน `mov dl, byte ptr [ecx+0x39]` แล้ว `shl edx, cl` (บรรทัด `0x5833AF`/`0x5833FE`)
+   — คือใช้ค่า `+0x39` เป็น**shift count**สร้าง bitmask ของช่องที่สวมอยู่ ไม่ใช่คอนเทนเนอร์แยก
+3. `notes_to_chief/reference_codex_attr/PF_ATTR_FIELD_SEMANTICS.tsv:478` ยืนยัน `+0x39` ค่า sentinel
+   คือ `0xFF` (ตรงกับ `ItemAttrState.raw_u8_39` default ใน `inventory.py:27`) แต่ "gameplay identity
+   is not uniquely bound to Data or an exact UI slot" — **ความหมายของค่าที่ไม่ใช่ 0xFF (ตัวเลขอะไรคือ
+   'สวมอาวุธ'/'สวมโล่'/ฯลฯ) ยังไม่มีใครพิสูจน์**
+
+### §3 สรุป: คำถามที่เหลือแคบกว่าที่ §1 ทำให้ดูเหมือน (ไม่ใช่ "5 call site ไม่รู้ความหมาย" อีกต่อไป)
+เพราะ §2 ข้อ 1-2 ตอบคำถาม "โครงสร้างเฟรมเป็นยังไง" ไปแล้ว (คือ codec เดียวกับที่ `inventory.py`/
+`item_operate_res_hypothesis.py` พิสูจน์แล้วสำหรับ pickup — ItemAttr ก้อนเดียวในกล่อง plain itembag)
+คำถามที่เหลือจริง ๆ มีข้อเดียวที่ block arm (b): **ต้องตั้งค่า `raw_u8_39` (หรือฟิลด์ไหน) เป็นเลขอะไร
+ในเฟรมตอบ เพื่อให้ client คำนวณ bitmask แล้วโชว์ "Blade" เป็นอาวุธที่สวมอยู่ในช่องอุปกรณ์บนจอ**
+
+### สิ่งที่ขอให้ RE runner ตอบ (เรียงตามลำดับความสำคัญ)
+1. **[หลัก]** ในเครื่อง Panya: หา call site หรือ const-data ที่เขียนค่า `+0x39` ที่ไม่ใช่ `0xFF` ให้
+   `ItemAttr` จริง (grep VA รอบ ๆ `0x5833AF`/`0x5833FE`/`0x46B466` — จุดที่ตั้งค่า sentinel `0xFF` เอง
+   อาจอยู่ใกล้จุดที่ตั้งค่าอื่นด้วย) แล้วตอบ: ค่า N ที่ไม่ใช่ 0xFF หมายถึง "สวมอยู่ที่ shift-bit N" ใช่
+   หรือไม่ และมีตารางแม็ป N → equip-type (weapon/shield/head/...) ที่ไหนไหม (เทียบกับ
+   `n_EQUIPTYPE`/`n_SLOT_RHAND` ใน `src/pirateforce_foundation/data/creation_gear_by_class.tsv` — ค่า
+   value=8 ที่ client ส่งมาใน `ItemOperateVitalReq` op=5 บังเอิญตรงกับ `n_EQUIPTYPE=8` ของ
+   `n_CLASS_ID=16` แถวเดียวในตารางนั้น — **สังเกตการณ์เฉยๆ ไม่ใช่ข้อสรุป** อาจเป็นเรื่องบังเอิญ)
+2. **[รอง, เพื่อปิด status ให้ตรงของจริง ไม่ใช่เพื่อ arm (b)]** ยืนยัน/ปฏิเสธว่า W3/W5/W7/W10/W11/W12/W13
+   ใน `PF_SERIALIZER_FIELDS.tsv:769-794` ล้วนเป็น non-wire lifecycle/refcount/CRT-param-check
+   artifact (ตามรูปแบบที่ `PF_A2_POOL_46F4D0_DELTA.tsv`/`PF_A2_INVALID_PARAMETER_NONWIRE_DELTA.tsv`
+   ทำกับ 4 ข้อความอื่นแล้ว) **เฉพาะสำหรับฟังก์ชันนี้** ไม่ใช่โดย analogy แล้วเติมแถว
+   `ItemOperateVitalRes` เข้าไฟล์ delta ทั้งสอง ถ้าจริง — จะปลด `OPEN` status ใน `PF_V5_P1_OPEN.tsv:77`
+3. resolve `0x005ED2F0` (W13, `:794`) — ไม่มี closure ไหนในทั้ง `pf_bridge` อธิบายที่อยู่นี้เลย
+
+### เกณฑ์ที่ทำให้ตอบได้ (ไม่ต้องเปิดเกม ไม่ต้องแคปเจอร์สด — static ล้วนถ้าเครื่อง Panya มี binary)
+ตอบข้อ 1 อย่างเดียวก็พอให้ LANE-DB เขียน encoder ได้ (มีโครงสร้างเฟรมพร้อมจาก §2 แล้ว เหลือแค่ค่า
+`raw_u8_39` ที่ถูกต้อง) — ข้อ 2/3 เป็นการปิดบัญชี status ให้ตรงความจริง ไม่ block arm (b)
+
+### nonclaims
+1. ไม่อ้างว่า value=8/identity=4 ที่ client ส่งมาคือ n_EQUIPTYPE จริง — สังเกตค่าตรงกันหนึ่งแถวเท่านั้น
+2. ไม่อ้างว่า `test_equip_state_static.py` เคยรันจริงในรอบนี้ (gate ด้วย binary ที่ cloud clone ไม่มี) —
+   อ่านเนื้อไฟล์/assertion ที่ commit ไว้เท่านั้น
+3. ไม่อ้างว่าโครงสร้างเฟรม (tag/size ตาม §2) พิสูจน์แล้วสำหรับ "สวม" โดยเฉพาะ — พิสูจน์แล้วสำหรับ
+   "pickup" (`item_operate_res_hypothesis.py`/RE-059) เท่านั้น ยังไม่มี capture ของเฟรมตอบ "สวม" จริง
+   (`PF_FIELD_VALIDATION.tsv:92`: `NOT_OBSERVED`) — สมมติว่าโครงสร้างเดียวกันใช้ได้กับ "สวม" ด้วย เป็น
+   ข้อสันนิษฐานที่สมเหตุสมผล (โค้ดฝั่ง client ใช้ handler เดียวกันสำหรับทุกกรณีของ 0x4C13) ไม่ใช่ข้อพิสูจน์
+
+**links**: `notes_to_chief/20260906_1316_...rjqssc...md` §7 · `notes_to_chief/20260906_1255_KA1A-R321-
+RESULTS-*.md` §2 · `notes_to_chief/reference_codex_attr/PF_ATTR_FIELD_SEMANTICS.tsv:478` ·
+`notes_to_chief/reference_codex_attr/PF_V5_P1_OPEN.tsv:77` · `notes_to_chief/reference_codex_attr/
+PF_A2_POOL_46F4D0_DELTA.tsv` · `pirate-force-server tests/test_equip_state_static.py:267-337` ·
+`pirate-force-server src/pirateforce_foundation/inventory.py:21-28`
+
+### result:
+(ว่าง)
+
+> 🔴 **ห้ามสายอื่นใช้เลข `RE-280`** · numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน **279** (`GT-279`, ตั้งเลขรอบ `rsmsia`) ⇒ ใบนี้ **280** · ตรวจ 0 hit ของ `GT-280`/`RE-280` ทั้งสามที่ (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/*QUEUE*ARCHIVE*.md`) ก่อนวาง [ตรวจโดย LANE-K รอบ `zqq4qz`] · เร่งด่วน: `PANYA-ORDER 0156` เส้นตาย 23:00 +07:00 คืนนี้ (`COO-DECISION 20260906_1547` ข้อ 4(1) สั่งตั้งเลขนี้ก่อนใบอื่นทั้งหมด)
+
+## RE-282 CHARCREATE-CLASS-S-SCORE-STARTING-STATS-SEMANTICS-001  [🔴 **OPEN** · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-DB** · ตั้งเลขโดย LANE-K รอบ `zqq4qz` 2026-09-06T16:09+07:00 (คำขอค้างจากรอบ `rsmsia`/`n3s0rg` — จดหมายเดิมส่งถึง chief ไม่ใช่ K โดยตรง แต่รูปแบบไฟล์ตรง `*RE-TICKET*` ตามนิยามคำขอเลขใบของ `prompts/LANE-K.md`) · เนื้อใบมาจากจดหมาย `notes_to_chief/20260904_0542_LANE-DB-RE-TICKET-piece-2-starting-stats-has-no-committed-source-table.md` คำต่อคำ · อ้าง: `COO-ORDER 20260904_0329` ข้อ 2 · `PANYA-DECISION 20260904_0328` ข้อ 1]
+
+**หัวเรื่อง**: piece 2 ("ค่าเกิดจาก CHARCREATE_CLASS/STANDARD_STATUS แทน DEFAULT 100") ไม่มีตารางที่ commit แล้วให้ค่าได้จริง
+
+### วัดมาแล้ว ไม่ใช่สมมติฐาน
+พยายามเริ่มชิ้น 2/5 ก่อนชิ้น 5/5 แล้วพบว่าสองตารางที่ `PANYA-DECISION 20260904_0328`
+ระบุชื่อไว้ไม่มีคอลัมน์ STR/CON/DEX/INT/PER/HP/MP เริ่มต้นต่อคลาสเลย:
+
+1. `gamedata/tables/CONSTDATA_TH__STANDARD_STATUS.tsv` — 255 แถว, คอลัมน์คือ
+   `n_ID` (เลเวล), `n_EXP_CURRENTLV`, `n_POINT_ABILITY`, `n_DEADLOSS`, `n_PVP_EXP`,
+   `n_PVP_SP`, `n_PVP_MONEY`, `n_DEFENCE_CONSTANT` — เป็นตาราง EXP/แต้มความสามารถ
+   **ต่อเลเวล** ไม่ใช่สแตทเริ่มต้นต่อคลาส `n_POINT_ABILITY` คือแต้มที่ได้ตอนเลเวลอัพ
+   (0 ที่เลเวล 1) ไม่ใช่ค่า STR/CON/DEX/INT/PER ที่มีอยู่แล้ว
+2. `gamedata/tables/CONSTDATA_TH__CHARCREATE_CLASS.tsv` คอลัมน์ `s_SCORE` (6 ตัวเลขคั่น `;`
+   ต่อแถว เช่น Gladiator `4;3;4;1;1;2`) เป็นตัวเลือกเดียวที่ดูเหมือนสแทท แต่ **ไม่เคยถูก RE
+   เลยในโปรเจกต์นี้** — `LANE-CS` (`class_catalog.py` ที่ commit แล้วบน main) เขียนไว้ตรง ๆ ใน
+   docstring ของตัวเองว่า "s_SCORE's semantics have never been RE'd" และอ้าง
+   `reports/PF_JOB001_CHARCREATE_CLASS_STATIC_BOUNDARY_20260816.md` ที่นับ s_SCORE รวมอยู่ใน
+   "37 other columns" โดยไม่ถอดรหัสสักตัว
+3. `gamedata/tables/CONSTDATA_TH__POTENTIAL.tsv` — ตารางเดียวที่
+   `docs/FUNCTIONAL_COVERAGE.json` เรียกว่าผู้สมัครจริงสำหรับ ability stat — **มีแต่ header
+   ไม่มีแถวข้อมูลเลยใน snapshot นี้**
+
+### ผลคือ
+ไม่มีแหล่งค่าที่ commit แล้วให้ resolve HP_max/MP_max/STR/CON/DEX/INT/PER เริ่มต้นต่อคลาสได้
+โดยไม่เดา (`COO-DECISION 20260901_1059` ห้ามส่งค่าเดา)
+
+### ขอ RE
+s_SCORE หกตัวเลขคืออะไร (ลำดับ STR/CON/DEX/INT/PER + ตัวที่หก?) หรือ POTENTIAL.tsv มีแถวจริงใน
+ไบนารีไคลเอนต์ที่ยังไม่ถูกดึงเข้า `gamedata/tables/` หรือไม่ — สองเส้นทางไหนก็ได้ที่ยืนยันได้ ไม่ใช่
+สมมติฐานสาย DB เอง (ขอบเขตของสายนี้ไม่ครอบ static RE)
+
+### result:
+(ว่าง)
+
+> 🔴 **ห้ามสายอื่นใช้เลข `RE-282`** · numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน **281** (`GT-281`, ตั้งเลขรอบเดียวกัน `zqq4qz`) ⇒ ใบนี้ **282** · ตรวจ 0 hit ของ `GT-282`/`RE-282` ทั้งสามที่ก่อนวาง [ตรวจโดย LANE-K รอบ `zqq4qz`]
+
+## RE-283 GMUI-THREE-PAGES-BUTTON-TO-OPCODE-MAP-001  [🔴 **OPEN** · 🔺 `[NEEDS-CLIENT-IMAGE]` (ต้องอ่าน `.model`/`.project` + โค้ดไคลเอนต์จริง ไม่ใช่งานคลาวด์) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-GM** · ตั้งเลขโดย LANE-K รอบ `zqq4qz` 2026-09-06T16:09+07:00 (คำขอค้างจากรอบ `rsmsia`/`n3s0rg`) · เนื้อใบมาจากจดหมาย `notes_to_chief/20260904_1328_LANE-GM-RE-TICKET-gmui-three-pages-button-to-opcode-map.md` คำต่อคำ · อ้าง: `COO-DECISION 20260904_0245` ข้อ 1 · `COO-DECISION 20260904_1149` · `PANYA-DECISION 20260904_0233` ข้อ 3]
+
+**หัวเรื่อง**: สารบัญปุ่ม GMUI ทั้งสามหน้า — ปุ่มไหนอยู่หน้าไหน และแต่ละปุ่มส่ง opcode อะไร
+
+### ค้นแล้ว: เจอ/ไม่เจอ
+- `pf_bridge/external/00_SEARCH_HERE_FIRST.md` — **ค้นแล้ว: ไม่เจอ** สารบัญ widget/ปุ่มของ GMUI
+  ไม่มี artifact ใดใน `external/` ที่ผูก widget → หน้า → opcode
+- `pf_bridge/gamedata/00_SEARCH_HERE_FIRST.md` + `gamedata/tables/` — **ค้นแล้ว: เจอบางส่วน**
+  - `TEXTDATA_TH__GMTOOL.tsv` = 97 แถว `n_ID / n_LogType / s_MESSAGE` (ประเภท log ของ GM tool)
+    🔴 นี่คือ **ประเภท log ของปฏิบัติการ GM ไม่ใช่ปุ่ม** ไม่มี artifact ไหนผูกแถวเหล่านี้กับ widget
+    (คัดลอกเข้ารีโปเซิร์ฟเวอร์แล้วที่ `gm/data/gm_tool_log_types.tsv` พิน sha)
+  - `TEXTDATA_TH__UI_MESSAGE.tsv` — สตริง `GMUI` โผล่แถวเดียว (id 1549) ไม่มีรายชื่อปุ่ม
+- `patches/gm_plugin/GameMaster.cpp` (GM-DATA-001/002) + `docs/GM_LANE.md` —
+  **ค้นแล้ว: เจอ** `GMUI.project` ประกาศ `GMUI_1` · `GMUI_1.model` เป็นไฟล์เดียวใน 534 `.model`
+  ที่มีแท็บลูกชื่อ `GMUI_BASIC` · **ไม่มี** `GMUI_BASIC.model`
+  ⇒ ชื่อหน้าที่มี artifact รองรับ = **หนึ่งหน้า** (`GMUI_BASIC`) จากสามหน้าที่เจ้าของเห็นบนจอ
+
+### ทำไมสายนี้ทำเองไม่ได้
+โคลนคลาวด์ของสายนี้ **ไม่มี client image · ไม่มี capture corpus · ไม่มีหน้าจอ** สารบัญที่ `0245`
+สั่งต้องอ่านจาก image: `.model`/`.project` บอกว่า widget ตัวไหนอยู่แท็บไหน และโค้ดของไคลเอนต์บอกว่า
+widget ตัวไหนยิงเฟรมอะไร ทั้งสองอย่างอ่านที่นี่ไม่ได้ สายนี้จะ **ไม่เดา** แถวสารบัญ
+
+### คำถามของใบนี้ (ตอบเป็นตาราง)
+สำหรับ **ทั้งสามหน้า** ของ GMUI (หน้าที่รู้ชื่อแล้ว = `GMUI_BASIC` · อีกสองหน้าต้องได้ชื่อจาก image):
+1. **ชื่อหน้า** ทั้งสาม ตามที่ `GMUI_1.model` (หรือไฟล์ `.model`/`.project` ที่เกี่ยวข้อง) ประกาศจริง
+2. ต่อหนึ่งหน้า: **รายชื่อ widget ที่กดได้** (ชื่อ resource ตามที่ shipped data สะกด) และป้ายบนจอถ้ามี
+3. ต่อหนึ่ง widget: **เฟรมที่ไคลเอนต์ส่งเมื่อกด** — vital id (hex) และ layout ถ้าอ่านได้
+   ตอบว่า "ไม่ส่งอะไรออกสาย" ก็เป็นคำตอบที่ใช้ได้ ต้องบอกว่ารู้ได้อย่างไร
+4. widget ที่กดแล้ว **ต้องกรอกค่าก่อน** (ช่องกรอก/ดรอปดาวน์) ให้ระบุว่าค่านั้นไปอยู่ฟิลด์ไหนของเฟรม
+5. ถ้า widget ไหนผูกกับแถวใน `TEXTDATA_TH__GMTOOL` (97 ประเภท log) ให้ระบุ `n_LogType`
+   ไม่ผูก = ตอบว่าไม่ผูก 🔴 ห้ามจับคู่ด้วยความหมายของข้อความ ต้องมีหลักฐานจาก image
+
+### เกณฑ์ปิดใบ (สองชั้น)
+- ชั้น wire/static: ตารางครบสามหน้า ทุกแถวมี provenance (ไฟล์ + offset/VA หรือชื่อ resource)
+  แถวที่ตอบไม่ได้ต้องเขียนว่า "ตอบไม่ได้ เพราะ ..." ไม่ใช่เว้นว่าง
+- ชั้น client-observable: **ไม่ใช่เกณฑ์ของใบนี้** — ใบนี้เป็น static ล้วน ใบ GT ต่อปุ่มจะเปิดทีละใบ
+  ตาม `0245` เมื่อรู้แล้วว่าปุ่มมีกี่ตัว
+
+### ใบนี้เป็นใบเดียว ไม่ใช่ใบต่อปุ่ม — เพราะอะไร
+`0245` สั่ง "ปุ่มที่ต้องการ RE ให้ออกใบ RE ทีละใบ" ซึ่งถูกต้องเมื่อรู้รายชื่อปุ่มแล้ว
+ตอนนี้ยังไม่รู้แม้แต่จำนวน ⇒ ใบนี้คือใบที่ทำให้ "ทีละใบ" เป็นไปได้ ใบต่อปุ่มจะตามมาหลังใบนี้ปิด
+
+### links
+`src/pirateforce_foundation/gm/gmui_catalog.py` (รอบ `zjbjys`, สร้างไปแล้วโดยไม่รอใบนี้ — ถือแถวที่มี
+artifact รองรับจริง 7 vital + 97 ประเภท log + ตารางปุ่มว่างโดยเจตนา + `assert_backed()`)
+
+### result:
+(ว่าง)
+
+> 🔴 **ห้ามสายอื่นใช้เลข `RE-283`** · numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน **282** (`RE-282`, ตั้งเลขรอบเดียวกัน `zqq4qz`) ⇒ ใบนี้ **283** · ตรวจ 0 hit ของ `GT-283`/`RE-283` ทั้งสามที่ก่อนวาง [ตรวจโดย LANE-K รอบ `zqq4qz`]
+
+## RE-285 TRIGGER-GETCONTACTMODE-ARGUMENT-SEMANTICS-001  [🔴 **OPEN** · 🔺 `[STATIC-ON-BRIDGE]` เป็นเส้นทางแรก และ `[NEEDS-CLIENT-IMAGE]` เป็นเส้นทางที่สอง (สองเส้นทาง หนึ่งใบ เหมือนรูปแบบ `RE-273`) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-Q** · ตั้งเลขโดย LANE-K รอบ `zqq4qz` 2026-09-06T16:09+07:00 · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_0435_LANE-Q-RE-TICKET-DRAFT-getcontactmode-trigger22-semantics-unknown.md` คำต่อคำ (จดหมายจ่าหน้าถึง LANE-E/chief แต่รูปแบบไฟล์ตรง `*RE-TICKET*` ตามนิยามคำขอเลขใบของ `prompts/LANE-K.md`)]
+
+**หัวเรื่อง**: `Trigger.GetContactMode` semantics unknown -- last of `lua_api/trigger.py`'s twelve stubbed names with no cross-lane dependency once its return value is known
+
+### Why this ticket
+`Trigger.GetContactMode` is the last of `lua_api/trigger.py`'s twelve still-stubbed names that is not
+already blocked on another lane's wire frame or on Quest state. It has exactly one call site in the
+real 616-file corpus and no cross-lane dependency once its return value is known -- a pure per-trigger
+read, same shape as the `TriggerStatusRegistry` methods already real. The one thing missing is what the
+number it returns MEANS.
+
+### Search already done (all four required sources, before drafting)
+- `gamedata/tables/`: `grep -rli "contact.*mode\|contactmode"` -- **0 hits**.
+- `external/`: same grep -- **0 hits**.
+- `archive/`: same grep -- 2 hits, both `20260824_0055_LUA-NPC-EXTRACTED-616OK-289OK.md` (a corpus
+  extraction status note, matches on an unrelated word inside it, not on contact-mode semantics --
+  read in full, no relevant content).
+- `notes_to_chief/consumed/`: same grep -- **0 hits**.
+- The one call site, read in full (`gamedata/lua/t_popmo_ui1.lua`):
+  ```
+  if(Player.GetItemNum(Trigger.Var3) < Trigger.Var4)then
+      if(Trigger.GetContactMode(22) == 1)then
+          Player.ShowMessage(859)
+      end
+      return 0
+  else
+      ...
+  end
+  ```
+  The `22` is a literal argument, not `Trigger.VarN` -- unlike every other `Trigger.*` call in the
+  corpus, which all read the trigger's OWN `Var1..Var20` fields. This suggests `22` may address a
+  DIFFERENT trigger's contact state (cross-trigger read), not the calling trigger's own -- a shape
+  `lua_api/trigger.py`'s current registry (keyed by `(scene, own trigger_id)` only) does not yet
+  support and would need to, if confirmed.
+
+### Two paths, one ticket (same shape as `RE-273`)
+1. **`[STATIC-ON-BRIDGE]` first**: `pf-static-re` on the committed `PF_LUA_API_SPEC.md`/
+   `PF_GAMEDATA_LUA_API.tsv` provenance columns (`binding_status`/`delegate_va`/`registration_va`) for
+   `Trigger.GetContactMode` -- does the client-side native implementation of this API name resolve to
+   a VA already disassembled under `external/`? Not found by this round's grep (those TSVs are the
+   bridge repository's business, not vendored into the server clone this session has).
+2. **`[NEEDS-CLIENT-IMAGE]` if (1) comes up empty**: RE runner reads whatever native code backs
+   `Trigger.GetContactMode` in the client binary for what "contact mode" enumerates and whether the
+   argument addresses the calling trigger or an arbitrary one by id.
+
+### `ATTENDED:` (stub only -- NOT ready to queue, names its own missing prerequisite per nonclaim 3)
+- Stand at the placement that runs `t_popmo_ui1.lua` (scene/placement TBD -- this ticket's own path 1/2
+  must resolve the id-to-file mapping first via the OTHER open ticket, `RE-273`; this block is a stub
+  until that lands, named here so the ticket is not silently missing it).
+- Trigger the script with fewer than `Trigger.Var4` of item `Trigger.Var3` in inventory.
+- Read whether message 859 appears, and whether trigger id 22 in the same scene shows any
+  observable state change beforehand that would explain a "contact mode" of 1 vs. not-1.
+- Pass: message 859's appearance correlates with trigger 22's own observable state. Fail (still
+  informative): no observable correlate exists in this capture, narrowing to pure binary RE.
+
+### nonclaims
+1. Does not claim the literal `22` is definitely a cross-trigger reference -- only that it is the one
+   observable fact this round's read of the single call site found, and that it does not match every
+   other `Trigger.*` call in the corpus (which all read `Trigger.VarN`).
+2. Does not claim this is high priority -- one call site, one file, versus `Quest.*`'s 25 names across
+   221-366 files each.
+3. Does not claim the ATTENDED block above is ready to queue -- it names its own missing prerequisite
+   (the id-to-file mapping ticket, `RE-273`) rather than guessing a scene/placement.
+
+**links**: `RE-273` (trigger-id-to-lua-file mapping, this ticket's own prerequisite) · `lua_api/trigger.py` `STILL_STUBBED` dict
+
+### result:
+(ว่าง)
+
+> 🔴 **ห้ามสายอื่นใช้เลข `RE-285`** · numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน **284** (`GT-284`, ตั้งเลขรอบเดียวกัน `zqq4qz`) ⇒ ใบนี้ **285** · ตรวจ 0 hit ของ `GT-285`/`RE-285` ทั้งสามที่ก่อนวาง [ตรวจโดย LANE-K รอบ `zqq4qz`]

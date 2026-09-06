@@ -1,11 +1,12 @@
 # QUEUE_STATUS_SNAPSHOT — สแนปช็อตใบ READY + มี `ATTENDED:` + ยังไม่มี `RESULT`
 
 🔴 **ไฟล์นี้ generate สดโดย LANE-K ทุกรอบ ห้ามอ่านเป็นประวัติ — เชื่อเฉพาะฉบับล่าสุด** (ka1-A ใช้ไฟล์นี้จัดรถบัส capture แทนการอ่าน `GAME_TEST_QUEUE.md` 2 MB เอง)
-สร้างโดย: LANE-K รอบ `rsmsia` · เวลา 2026-09-06T15:09+07:00 · แหล่ง: `GAME_TEST_QUEUE.md` + `CLIENT_RE_QUEUE.md` บนกิ่งรอบนี้ (`claude/loving-curie-rsmsia`, เท่ากับ `origin/main` `1f57462` + งานรอบนี้) — ดู `rounds/K_20260906_1509_rsmsia_*.md`
+สร้างโดย: LANE-K รอบ `zqq4qz` · เวลา 2026-09-06T16:09+07:00 · แหล่ง: `GAME_TEST_QUEUE.md` + `CLIENT_RE_QUEUE.md` บนกิ่งรอบนี้ (`claude/loving-curie-zqq4qz`, เท่ากับ `origin/main` `61adae7` + งานรอบนี้) — ดู `rounds/K_20260906_1609_zqq4qz_*.md`
 ลำดับ: (1) PANYA-ORDER (2) ไมล์สโตนใน `NOW.md` (3) อายุใบ (เก่าสุดก่อน) · แยกตามชนิดบูต
 
-🔴 **ใบที่มี RESULT แล้วไม่อยู่ในรายการนี้แล้ว** (พับแล้วรอบ `slug54`/`slug54r2`/`n3s0rg`/`rsmsia`): GT-214 · GT-217 · GT-220 · GT-223 · GT-224 · GT-242 · GT-249 · GT-250 · GT-251 · GT-252 · GT-253 · GT-255 · GT-257 · GT-266 · GT-269 · GT-272 · GT-277 · **GT-242 (ปิด PASS + archived รอบนี้ ตาม `COO-DECISION 20260906_1452` — ห้ามเรียก Panya บูตใบนี้ซ้ำอีก ไม่ใช่แค่ห้ามชั่วคราวแล้ว)** · RE-235 · RE-237 · RE-261 · RE-272 (รายละเอียดผล ⇒ หัวใบใน `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md` หรือจดหมายรอบ)
-🆕 **ใหม่รอบนี้ (`rsmsia`) — READY มี `ATTENDED:` ยังไม่มี RESULT ⇒ อยู่ในรายการ ก. ด้านล่าง**: `GT-274` (ตั้งเลข+วางเนื้อ v2) · `GT-279` (ตั้งเลข+วางเนื้อใหม่)
+🔴 **ใบที่มี RESULT แล้วไม่อยู่ในรายการนี้แล้ว** (พับแล้วรอบ `slug54`/`slug54r2`/`n3s0rg`/`rsmsia`): GT-214 · GT-217 · GT-220 · GT-223 · GT-224 · GT-242 · GT-249 · GT-250 · GT-251 · GT-252 · GT-253 · GT-255 · GT-257 · GT-266 · GT-269 · GT-272 · GT-277 · **GT-242 (ปิด PASS + archived รอบ `rsmsia` ตาม `COO-DECISION 20260906_1452` — ห้ามเรียก Panya บูตใบนี้ซ้ำอีก)** · RE-235 · RE-237 · RE-261 · RE-272 (รายละเอียดผล ⇒ หัวใบใน `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md` หรือจดหมายรอบ)
+🆕 **ใหม่รอบนี้ (`zqq4qz`) — ตั้งเลขแล้ว แต่ยัง**ไม่ใช่ READY** ⇒ ไม่อยู่ในรายการบูต ก./ข./ค. ด้านล่าง**: `GT-281` BASIC-FACTION-EVERY-LOGIN-SCENE-SEA-126-001 (🔴 BLOCKED-ON-WIRING — รอ PR `pirate-force-server` LANE-A round `q02brx` ขึ้น main) · `GT-284` WORLD-SCENE-STATE-SURVIVES-RELOGIN-001 (🔴 BLOCKED — รอ `CORE-REQUEST world_scene_registry.WORLD_REGISTRY_SEED_WIRING` + LANE-B เรียก `note_balance` ขึ้น main ก่อน ตรวจสดรอบนี้ = ยังไม่ถึง) · `RE-280`/`RE-282`/`RE-283`/`RE-285` เป็นใบ RE runner (static/client-image) ไม่ใช่ใบ attended-capture ของผู้เทสหน้าจอเกม — ไม่เข้าเกณฑ์สแนปช็อตนี้
+🆕 **เดิมยังอยู่ในรายการ (ตั้งเลขรอบก่อนหน้า)**: `GT-274`/`GT-279` (รอบ `rsmsia`) ยังไม่มี RESULT ⇒ ยังอยู่ในรายการ ก. ด้านล่างเหมือนเดิม
 
 ---
 
