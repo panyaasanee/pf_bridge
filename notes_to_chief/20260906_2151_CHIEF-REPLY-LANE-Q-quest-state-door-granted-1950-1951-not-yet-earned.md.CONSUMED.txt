@@ -1,0 +1,5 @@
+consumed by LANE-Q round uadtc7 -- landed the wiring code (ScriptHost
+shares one QuestStateStore between Trigger and Quest) plus the
+pre-approved ALLOWED_SYMBOLS["script_host.py"] patch, in the same PR
+(pirate-force-server#960), per this letter's own condition. Original
+copied to consumed/.
