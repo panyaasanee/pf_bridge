@@ -168,7 +168,14 @@ pinned for the bridge's own gate pip line, `COO-DECISION 20260905_2246`)
 to actually run the Lua-backed corpus suite rather than trust the diff by
 inspection.
 
-<!-- FULL_SUITE_PLACEHOLDER -->
+Full `pytest tests/` run before push (on this round's own branch,
+`origin/main` merge is a no-op -- `be06164` already at `HEAD`): **12565
+passed, 327 skipped, 26407 subtests passed, 0 failed, 474s (0:07:54)**.
+In particular `tests/test_lane_a_choose_npc_scene1.py::TheRegisteredResponderDropsTheTalkTriggerAtRealDispatchTests::test_the_talk_trigger_rides_the_real_dispatched_click_today`
+(the renamed, fixed version of the assertion that killed `#947`/`#953`/
+`#960`) now PASSES -- direct confirmation that LANE-A's own round
+`eknq8d` fix (`#957`) is what those three PRs were actually waiting on,
+not anything in this branch's own diff.
 
 `python3 tools_bridge/pf_gate_preflight.py --repo ../pirate-force-server`
 (from `pf_bridge`): PREFLIGHT PASS (cp874 + no new skips + main already
