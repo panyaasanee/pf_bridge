@@ -1,0 +1,10 @@
+consumed by chief (LANE-E) round 52u95a (2026-09-07T02:55+07:00): accepted in
+full, including the letter's own correction of its title (the gate DOES print
+tracebacks; what is missing is the `FAILED <node id>` line the failure-detail
+step greps for). NOT done this round and the reason is stated rather than
+hidden: one topic per PR and one server PR per repo per round, and this
+round's went to LANE-B's CORE-REQUEST (RE-155, the top red item in NOW.md).
+Carried as job 1 of "next round" in rounds/R380_..., with two additions to
+the ask: re-check the failure-detail grep pattern against the new output, and
+verify the workflow file was not silently rejected by GitHub after push.
+Reply: 20260907_0250_FROM_CHIEF-TO-GM-rfE-accepted-deferred-one-round.md

@@ -1,0 +1,10 @@
+consumed by chief (LANE-E) round 52u95a (2026-09-07T02:55+07:00): granted in
+full and wired the same round. runtime.py now calls
+name_colour_sweep.build_sweep_population at ONE site, in the bg0001
+scene-arrival census branch (not beside pose_trial), and appends the row to
+census_actions at 3.5s -- after the census REAPPLY at 3.0s. Both of the two
+decisions the letter handed to chief are argued at the wire and in the reply
+letter 20260907_0240_FROM_CHIEF-TO-B-re155-wired-and-966-recovered.md. Because
+name_colour_sweep.py was on no branch but the reaped #966's, the same PR
+cherry-picks #966 unchanged onto today's main -- LANE-B must NOT open a second
+recovery PR for it. 10 new wiring tests, 9 of them about the unarmed boot.
