@@ -236,10 +236,14 @@ session ในฉากนั้นอ่านได้ (`broadcasts_for(scene)
 
 ## จบรอบ
 
-`pirate-force-server`: PR เปิดแล้วไม่ draft (ไม่ได้แตะเส้นบูต/ล็อกอิน/ตัวตน
-actor/เฟรมที่ส่ง client — งานทั้งหมดอยู่ในแซนด์บ็อกซ์ Lua กับเอกสาร/พิน) พร้อม
-marker `PF-AUTOMERGE: v4` ตั้งแต่เปิด แล้ว GET ยืนยัน — เลขใบและสถานะจริงเติมไว้
-ท้ายไฟล์นี้
+`pirate-force-server`: **PR `#979`** ("[LANE-Q] message-wire: Player.ShowMessage
++ Trigger.TriggerShowMessage real against the game's own message table" · base
+`main` · head `claude/festive-cerf-6775u1` · 3 commits · 10 ไฟล์ · +1942/-39)
+**ไม่ draft** (ไม่ได้แตะเส้นบูต/ล็อกอิน/ตัวตน actor/เฟรมที่ส่ง client — งานทั้งหมด
+อยู่ในแซนด์บ็อกซ์ Lua กับเอกสาร/พิน) · marker `PF-AUTOMERGE: v4` อยู่บรรทัดแรก
+ของ body ตั้งแต่เปิด **GET ยืนยันแล้ว** (`mergeable_state: unstable` = เกตยังวิ่ง
+ไม่ใช่ merge conflict) · สถานะจริงตอนจบรอบ: **เปิดแล้ว รอเกต** ไม่ใช่ landed —
+รอบถัดไปยืนยันด้วย `git merge-base --is-ancestor` ก่อนจะพูดว่าอยู่บน main
 
 `pf_bridge`: ไฟล์รอบนี้ + ลบ `_claim.md` บนกิ่ง `claude/inspiring-curie-6775u1`
 ไม่มีจดหมายใหม่และไม่มี stub `.CONSUMED.txt` รอบนี้ (กล่องจดหมายว่าง) · claim
@@ -266,6 +270,5 @@ SCOREBOARD: COMING | ผู้เล่นยังไม่เห็นอะ�
 ที่เคยแค่ log ว่า "ยังไม่ได้ทำ" ตอนนี้อ่านเลขข้อความจากตารางของเกมเองได้จริง รู้ว่า
 ข้อความไหนมีอยู่จริง ผู้ฟังคือใคร และบันทึกไว้ให้ dispatch หยิบไปยิง `ShowMessageVital`
 ได้เมื่อมีคนต่อสาย — ประกาศระดับฉากเก็บในถังของฉาก ผู้เล่นคนที่สองในฉากเดียวกันจึงอ่าน
-ได้ด้วย (ยังไม่มีใครต่อ dispatch = ยังไม่ถึงจอ) | pirate-force-server PR ของรอบนี้
-(เลขท้ายไฟล์) · API จริง 34/160 · corpus stub calls 2620 -> 2597 · adversary 12 ข้อ
+ได้ด้วย (ยังไม่มีใครต่อ dispatch = ยังไม่ถึงจอ) | pirate-force-server#979 · API จริง 34/160 · corpus stub calls 2620 -> 2597 · adversary 12 ข้อ
 แก้ในรอบ 6
