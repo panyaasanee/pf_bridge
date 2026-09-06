@@ -148,3 +148,25 @@ NO_FEATURE_WAITING: `RE-289` ตั้งเลขแล้วแต่ **ยั
 ## 9. เวลา
 เริ่ม 05:51 · เพดาน 75 นาที = **07:06** · ปิดไฟล์นี้ 06:1x
 ก้อนเวลาใหญ่สุด = ชุดเต็ม (รันคู่ขนานกับการเขียนจดหมาย) กับ pf-adversary ที่สั่งต้นรอบ
+
+## 10. เกต · ชุดเต็ม · KNOWN_RED_MAIN (พิสูจน์ด้วย control ไม่ใช่คำยืนยัน)
+- `python3 tools_bridge/pf_gate_preflight.py --repo <server> --base origin/main` = **PREFLIGHT PASS**
+  (รันสองครั้ง: ก่อน commit และบนต้นไม้ที่ commit แล้ว)
+- **ชุดเต็มบนต้นไม้สุดท้าย**: `2 failed, 12836 passed, 383 skipped, 31236 subtests passed in 529.58s`
+- 🔴 **สองใบที่แดง ไม่ใช่ของสายนี้ และพิสูจน์แล้ว ไม่ได้อ้างลอย ๆ**:
+  `tests/test_ui_wire_name_census.py::BuildRowsTests::test_pinned_tier_counts`
+  · `tests/test_ui_wire_name_census.py::CommittedArtifactTests::test_committed_artifact_matches_a_fresh_rederive`
+  **control**: `git worktree add --detach <tmp> origin/main` + symlink `pf_bridge` ข้าง ๆ
+  (เทส census จะ **SKIP** ถ้าไม่มีรีโปพี่น้องอยู่ข้าง ๆ — worktree เปล่าจึงดู "เขียว" หลอก ๆ)
+  ⇒ บน `origin/main` เปล่า ได้ **`2 failed, 23 passed`** เทสสองใบเดียวกันเป๊ะ
+  ⇒ ตรงกับ `NOW.md` รอบ `0402` "5 แดงบนคลาวด์ ≠ เกตแดง ... ไม่ใช่ของคุณ อย่าถอย"
+  · ข้อความจริงที่พิมพ์: `CENSUS DRIFT: reports/PF_UI_WIRE_NAME_CENSUS_20260906.tsv does not match
+  a fresh re-derive` (ของ LANE-UI/CS ตาม `COO-DECISION 0445` `db0402-census-pin-161-re-emit-artifact`)
+- **`lua_api_message` ×3 (lupa) ไม่ได้แดงในรันนี้** — ต่างจากที่ `NOW.md` เขียนไว้ · ไม่รู้สาเหตุ
+  และ **ไม่อ้างว่ารู้** (ไม่ได้ตรวจว่า lupa ติดตั้งอยู่ในอิมเมจนี้หรือเทสถูก skip) บันทึกไว้เฉย ๆ
+  เพราะ LANE-UI/Q กำลังถือเรื่องนี้อยู่ (`0540`/`0454`)
+- 🔴 `ADVERSARY_PENDING pirate-force-server#993` — สั่ง pf-adversary ต้นรอบตามกติกา
+  ผลยังไม่คืนตอนปลดล็อก ⇒ **รอบถัดไปของสาย A สั่ง adversary บนกิ่งนี้เป็นงานแรก** และจ่ายข้อที่คืนมา
+  **ยังไม่มีสิทธิ์เขียนว่า "ผ่าน adversary"** และไฟล์นี้ไม่ได้เขียน
+
+SCOREBOARD: COMING | ผู้เล่นยังไม่เห็นอะไรต่างวันนี้ แต่ใบเทสที่ต้องให้เจ้าของเปิดเครื่องขยับจริงสองใบ: GT-266 (วาปเข้าทะเลฉาก 126 สด ๆ ไม่ต้องรีล็อกอิน) ได้บรรทัดหลักฐาน headless ที่ขาดไปจนตกรถบัส โดยรันบนคอมมิต main ปัจจุบันแล้วได้ marker=0 คู่กับ decreed_arrival=17 ตรงตามที่ใบสั่งให้ผู้เทสมองหา ⇒ ใบกลับขึ้นรถบัสได้ · และ GT-193 ถูกยกเลิกโดยเจ้าของใบพร้อมเหตุผลที่วัดเอง ⇒ คืนเวลาเครื่องเจ้าของอีกหนึ่งที่นั่งแทนที่จะเผาไปกับใบที่วัดประตูซึ่งปิดไปแล้ว | pirate-force-server#993 (เปิดแล้ว ไม่ draft · GET ยืนยัน marker แล้ว · 1 commit · 2 files · +326/-31 · **สถานะจริง: รอ gate ไม่ใช่ landed**) · pf_bridge claim #1633 · จดหมาย K สองฉบับ (0603 ยกเลิกสองใบ · 0604 HEADLESS_PROOF ของ GT-266) · adversary A2/A3b/A4/A5/A6/A7/A8/A9 + LOW จ่ายครบเป็นโค้ด · โมดูล 42 passed/72 subtests (จาก 32/61) · มิวแทนต์ 8 ตัวตายครบ (สามตัวเคยรอด) · ชุดเต็ม 2 failed ที่ control พิสูจน์แล้วว่าแดงบน origin/main อยู่ก่อน · preflight PASS
