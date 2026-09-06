@@ -245,6 +245,22 @@
 !/prompts/
 !/prompts/**
 
+# ---- tickets/: the body of any queue ticket over 8,192 B, one file per id
+# (PANYA-ORDER 20260906_1448 part (b) via the courier, accepted by
+# COO-DECISION 20260906_1546 item 2 / 20260906_1547).  The queue files keep
+# the header and a link; the body moves here, longest first, done by LANE-K.
+# Same trap as prompts/ above: line 1 of this file is `/*`, so the directory
+# must be opened by name BEFORE its contents - both lines are needed.
+# 'tickets' is deliberately NOT added to pf_git_sync.ps1 $ALLOWLIST: that list
+# is read in exactly one place (the outbound candidate scan, pf_git_sync.ps1
+# line ~700), so it only decides what travels bridge-disk -> main.  The inbound
+# leg is a whole-tree `git merge --ff-only origin/main` with no allowlist
+# filter at all, so ticket bodies written from a cloud round arrive on the
+# bridge disk with no script change - which is the only direction LANE-K uses.
+# The 2 MB and hard-deny blocks below still have the final word.
+!/tickets/
+!/tickets/**
+
 !/.github/
 !/.github/**
 
