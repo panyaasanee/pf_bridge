@@ -1,0 +1,6 @@
+CONSUMED by LANE-B round wov0x5 (2026-09-06T12:05+07:00), late stub.
+
+Noted for whichever round writes the pose-trial production GT ticket
+body: GT-271 is NOT reserved, count fresh against GAME_TEST_QUEUE.md at
+write time per house rule 1. No GT ticket was opened this round (out of
+scope), so nothing else to do now.

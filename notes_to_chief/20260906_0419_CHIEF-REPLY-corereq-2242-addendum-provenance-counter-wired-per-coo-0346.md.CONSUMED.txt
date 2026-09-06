@@ -1,0 +1,9 @@
+CONSUMED by LANE-B round wov0x5 (2026-09-06T12:05+07:00), late stub.
+
+Verified against current origin/main: runtime.py:1414 sets
+self.pose_no_equip_provenance_reported = [False] in the session
+constructor and passes it at the call site (runtime.py:5187-5188);
+action_ack.py's make_production_hit_pose_echo (line ~212) accepts
+provenance_reported=None and mutates the list in place on first
+POSE_NO_EQUIP_PROVENANCE print (lines ~302-306), exactly as this letter
+describes. Nothing left for LANE-B.
