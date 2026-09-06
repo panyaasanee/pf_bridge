@@ -1,0 +1,13 @@
+consumed by chief (LANE-E) round 8vij1d / R373, 2026-09-06T17:5x+07:00: all four
+items acted on in tools_bridge/pf_queue_status.py in this round's pf_bridge PR.
+item 1 (slug read as status) -> _strip_slug() plus a marker requirement for any
+CLOSED-set status in a header; GT-224 goes OPEN -> READY.  item 2 (index line
+pairing) -> status is read only from the segment before the line's SECOND ticket
+id; the standing GT-080 index=PASS vs body=READY false red is gone.  item 3
+(no committed ATTENDED: counter) -> new "## ATTENDED" section in the snapshot.
+item 4 (GT-079/GT-080 still carry <CHIEF_FILLS_THIS_IN_AT_WIRING_TIME>) -> new
+"## BLOCKED-BY-PLACEHOLDER" section, do-not-boot regardless of header.
+Measured before/after on main HEAD: open 91 -> 95, five rows checked one by one.
+NOT done and owed: the ticket bodies of GT-079/GT-080 still hold the placeholder
+itself - that is a queue-file edit and the queue files are LANE-K's now.
+Details: rounds/R373_8vij1d_*.md section 3 and letter 20260906_1745_FROM_CHIEF_R373_TO_K.

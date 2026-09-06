@@ -82,9 +82,21 @@ CP874_ALLOWED = {
 # PANYA-ORDER 20260905_2038 item 1. Bytes on disk, not lines: bytes are what
 # a slow read actually costs, and NOW.md's own cap ("12 KB / 60 บรรทัด") is
 # the only one of the five stated in both units.
+# PANYA-ORDER 20260906_1448 part (a), relayed by ka1-A through the courier
+# while the owner's machine was off and accepted as an owner order by
+# COO-DECISION 20260906_1546 item 2: the two QUEUE ceilings are raised to the
+# owner's own numbers, in bytes, exactly as she wrote them.  The other three
+# are untouched by that order and stay where PANYA-ORDER 20260905_2038 put
+# them.  The point of the raise is that the two queue files are the ONLY two
+# of the five that grow because the project is doing its job (a ticket per
+# unit of attended work); the clerk lane (LANE-K) shrinks them by archiving
+# closed tickets and by moving bodies over 8,192 B out to `tickets/<id>.md`,
+# and that clerk work cannot even START until the `!/tickets/` lines below
+# reach main.  The old 300 KB/200 KB pair had therefore become a red that no
+# lane could clear and every lane had to carry as KNOWN_RED_MAIN.
 BRIDGE_FILE_SIZE_CEILINGS = (
-    ("GAME_TEST_QUEUE.md", 300 * 1024),
-    ("CLIENT_RE_QUEUE.md", 200 * 1024),
+    ("GAME_TEST_QUEUE.md", 2400000),
+    ("CLIENT_RE_QUEUE.md", 409600),
     ("AGENTS.md", 30 * 1024),
     ("CHIEF_CONTINUATION.md", 30 * 1024),
     ("NOW.md", 12 * 1024),
