@@ -1,0 +1,114 @@
+round 2a32q2
+start 2026-09-07T02:09+07:00
+claim (ไม่มี LANE-K claim อื่นเปิดอยู่ตอนตรวจ)
+
+# K round `2a32q2` — พับผล R322B+R322C ครบสี่ใบ · ต่อท้าย GT-288 addendum ตามคำขอ B
+
+## กล่องจดหมาย (ADDRESSEE: LANE-K ที่ไม่มี `.CONSUMED.txt`)
+พบ 1 ฉบับ: `notes_to_chief/20260907_0157_LANE-B-TO-K-gt288-addendum-table-key-candidate.md`
+(LANE-B รอบ `5kex52` 01:57) — consumed แล้วรอบนี้ (stub `.CONSUMED.txt`) — รายละเอียดอยู่หัวข้อ
+"ตั้งเลข/เนื้อใบ" ด้านล่าง (ไม่ใช่คำขอตั้งเลข แต่เป็นคำขอต่อท้ายเนื้อใบที่เจ้าของใบ B เขียนเอง
+ตามรูปแบบ `*-TO-K-gt-body-*`)
+
+## พับผล
+สแกน `*RESULTS*`/`*OBSERVER_CONFIRMED*` ที่ไม่มี `.LANEK-FOLDED.txt` — พบ 2 ฉบับ:
+
+1. `notes_to_chief/20260907_0123_KA1A-R322B-RESULTS-GT281-screen-PASS-GT279-execute-0x51E9-x3-bg0002-hostile-gap.md`
+   (R322B, OBSERVER_CONFIRMED 01:05) — สองใบ:
+   - `GT-281` BASIC-FACTION-EVERY-LOGIN-SCENE-SEA-126-001: หัวใบเดิม `🟢 READY — ชั้น wire PASS R322A`
+     → พับเป็น `✅ PASS ทั้งสองชั้น — R322B` (client: `/warp 2` มอนชมพูไม่เขียว ตีตายได้ · wire:
+     `PLAYER_FACTION basic_faction=1` บน login ทะเล) เติม `### result:` ด้วยบล็อกคำต่อคำจากจดหมาย —
+     **ปลดคอขวด P-2/M3 ชั้นแรก** ตามที่ `NOW.md` รอมา · หลอดฟ้า/BoatHealth ยังเป็นปัญหาแยกที่ A/DB ต้อง
+     เปิดใบใหม่ (ไม่ใช่ของ K)
+   - `GT-279` GM-PANEL-BUTTON-CAPTURE-001: หัวใบเดิม `🟢 READY` → พับเป็น `🟡 ผลสองชั้นแยกทาง — R322B`
+     (client PASS: ปุ่ม "ปฏิบัติ" ส่ง 0x51E9 จริง 3 เฟรม · server NEGATIVE: `capture_raw_gm_command`
+     ไม่เขียนไฟล์จริง) — สถานะนี้เป็นคำที่จดหมายเขียนเองตรง ๆ (`RESULT: GT-279
+     CAPTURED-CLIENT-NEGATIVE-SERVER`) ไม่ใช่ K ตัดสินเอง เติม `### result:` ใหม่ (ใบนี้ไม่เคยมีมาก่อน)
+     ก่อนบรรทัด `> numbering:`
+
+2. `notes_to_chief/20260907_0158_KA1A-R322C-RESULTS-GT274-PASS-mace-284-GT178-NEGATIVE-no-ai-tick-scene14.md`
+   (R322C, OBSERVER_CONFIRMED 01:48) — สองใบ:
+   - `GT-274` PRODUCTION-ATTACK-POSE-BY-CLASS-CONFIRMED-001: หัวใบเดิม `🟢 READY` → พับเป็น
+     `✅ PASS ทั้งสองชั้น (arm i เต็ม · arm ii รอ GT-272)` (Gladiator ท่าดาบ 280 R322B · Paladin ท่ากระบอง
+     284 R322C) เติม `### result:` ใหม่ก่อนบรรทัด `TWO_SESSIONS_SAME_SCENE:`
+   - `GT-178` BG0015-HOSTILE-TWELVE-AGGRO-001: หัวใบเดิมไม่มีวงเล็บสถานะแบบสาย (`[attended, in-game]`
+     เฉย ๆ) → เติมวงเล็บสถานะใหม่ต่อท้าย `🔴 NEGATIVE-MEASURED — R322C` (roster=11 backed=11 แต่ไม่มี
+     `MOB_AI_TICK_LIVE` ฉาก 14 เลยทั้งเซสชัน — register ทำไว้แค่ฉาก 1/2 · แม้ฉาก 1 ที่ tick เดินก็
+     `attack_undeliverable`) โดยไม่ลบข้อความเดิม กรอกช่อง `### result (ผู้เทสกรอก)` ที่ว่างอยู่แล้วด้วยบล็อก
+     คำต่อคำ — ใบสร้างสองข้อที่ B เสนอ (register ต่อฉาก + ต่อสาย attack_undeliverable→deliver) เป็นงานของ
+     B ไม่ใช่ K เปิดเอง
+
+ทั้งสองฉบับ: เขียน `.LANEK-FOLDED.txt` แล้ว (`folded by LANE-K round 2a32q2 2026-09-07T02:12+07:00`)
+
+## ตั้งเลข/เนื้อใบ: ไม่มีคำขอเลขใหม่รอบนี้ — มีคำขอต่อท้ายเนื้อใบ 1 ฉบับ
+`notes_to_chief/20260907_0157_LANE-B-TO-K-gt288-addendum-table-key-candidate.md` (LANE-B รอบ `5kex52`
+01:57, ตอบ `COO-DECISION 20260907_0043`/PANYA `0039`) ขอให้ K ต่อท้าย (ไม่แก้ของเดิม) สอง
+จุดใน `tickets/GT-288.md`:
+1. แถวผู้สมัครที่หก "key ที่ client ใช้เปิดตาราง MOBS" (ชุด env `=3`, ยังไม่ implement) เข้าตาราง
+   "รายการผู้สมัครทั้งหมด" + เพิ่มหัวข้อใหม่ "วิธีตัดผู้สมัครให้ขาดในบูตเดียว" (K-MATCH/K-IDONLY/K-SKINONLY)
+   คำต่อคำจากจดหมาย พร้อมหมายเหตุ 🔴 "ชุด =3 = SPEC ONLY (ยังไม่มีโค้ด)" ตามที่จดหมายเสนอ (discretionary
+   แต่ใส่เพื่อกันคนบูตชุดที่สามที่ยังไม่มีจริง)
+2. แก้บรรทัด 5 ของบล็อก `ATTENDED:` ให้ครอบทั้งสามชุด (`=1`/`=2`/`=3`) — เก็บบรรทัดเดิมไว้ในวงเล็บใต้บล็อก
+   ไม่ลบ ตามกฎ archive spirit "ห้ามลบอะไร" แม้จะเป็นแค่หัวใบ/เนื้อใบก็ตาม
+สถานะหัวใบ `GT-288` **ไม่เปลี่ยน** (ยัง `[PENDING]` ตามที่จดหมายสั่งชัดเจน — K ไม่ตัดสินความพร้อม) ·
+เขียน `.CONSUMED.txt` ให้จดหมายนี้แล้ว
+
+## archive
+ไม่ได้ทำรอบนี้ — `GAME_TEST_QUEUE.md` = 1,442,599 B (เกินเพดาน 300 KB มาก) ·
+`CLIENT_RE_QUEUE.md` = 310,786 B (เกินเพดาน 200 KB) ยังเป็นหนี้เดิมต่อเนื่องจากหลายรอบก่อน
+(`zqq4qz`/`cm9v9y`/`x91eo8`/`cu7c2r`/`ec26p6`/`camatf`/`hf1gs9`/`43htls`/`6rj6h1`) — รอบนี้ให้เวลากับการ
+พับผลสี่ใบ (สองฉบับ RESULTS ค้างจริง ตาม "ตัววัด PANYA 1259 ข้อ 2" ที่ COO ใช้จับ "ผลค้างพับ >6 ชม.") และ
+คำขอต่อท้าย GT-288 ก่อน — **ทั้งสองงานเสร็จในรอบนี้ ไม่มีอะไรค้างข้ามรอบจากที่ทำ** แต่หนี้ archive ไม่ลดลง
+รอบนี้ ตัวเลขจริงและก้อนที่ควรหยิบก่อน (ตัวใหญ่สุดจาก `pf_queue_status.py`/regex กันอิโมจิ) อยู่ใน
+"รอบหน้าทำอะไร" ด้านล่าง — **นี่คือหนี้ที่ยาวขึ้นเรื่อย ๆ ควรเป็นงานหลักของรอบ K ถัดไปที่ไม่มีจดหมายผลค้าง**
+
+## `QUEUE_STATUS_SNAPSHOT.md`
+อัปเดตหัวไฟล์ (รอบ `2a32q2` 02:17) + บูลเลตรอบนี้ (พับผล R322B/R322C ครบสี่ใบ · GT-288 addendum) · ย้าย
+`GT-178`/`GT-274`/`GT-279`/`GT-281` จากหมวด ก. (READY ไม่มีผล) ไปอยู่ในรายการ "มี RESULT/ปิดแล้วไม่อยู่ใน
+รายการนี้แล้ว" (บรรทัดเดียวรวมทุกใบที่มีผล) · หมวด ก. เหลือ 6 รายการ (เดิม 10) เรียงเลขใหม่ตามลำดับเดิม ·
+หมวด ค./ง./จ. อัปเดตข้อความ nonclaims ตัดข้อสังเกตเรื่องกาน `GT-274` ที่ปิดใบแล้วไม่เกี่ยวแล้ว · เพิ่ม
+nonclaim บอกขนาดไฟล์คิวหลักที่ยังเกินเพดาน (อ้างไฟล์รอบนี้แทนตัวเลขซ้ำ)
+
+## เครื่องมือ
+`python3 tools_bridge/pf_queue_status.py` รันได้ปกติ 2 ครั้ง (ก่อน/หลังแก้) — ก่อนแก้: 316 tickets/95 open ·
+หลังแก้: **316/95 open ไม่เปลี่ยนตามตัวเลขเครื่องมือ** (`GT-274`/`GT-281` เครื่องมือจับ `PASS` จากวงเล็บใหม่
+ได้เอง แต่ `GT-279`/`GT-178` เครื่องมือยังอ่านเป็น READY เพราะ regex ไม่รู้จักสัญลักษณ์ 🟡 กับรูปแบบวงเล็บ
+สองชั้นของ `GT-178` — **ไม่เชื่อเลขนี้** ทั้งสองใบมี `RESULT:` จริงในไฟล์แล้ว ตัดออกจาก
+`QUEUE_STATUS_SNAPSHOT.md` ตามที่ควรเป็น) · ลบสำเนา `.generated.md` ทิ้งหลังอ่านตัวเลข ไม่ commit ·
+ไม่มี `ADVERSARY_PENDING`/`ADVERSARY_UNAVAILABLE` (K ไม่แตะโค้ดเซิร์ฟเวอร์ ไม่มี PR ฝั่ง
+`pirate-force-server` รอบนี้ตามเขตเขียนของสาย)
+
+## จดหมายผลที่ยังพับไม่ได้
+ไม่มี — กล่องจดหมาย `*RESULTS*`/`*OBSERVER_CONFIRMED*` ว่างหลังรอบนี้ (grep ยืนยันแล้ว: 0 ฉบับไม่มี
+`.LANEK-FOLDED.txt`)
+
+## ต่อท้ายรอบเดียวกัน (พบระหว่าง `git merge origin/main` ขั้นสุดท้าย — จดหมายใหม่ถึง K)
+`notes_to_chief/20260907_0250_FROM_CHIEF-TO-K-re155-boot-is-live-schedule-after-merge.md`
+(chief รอบ `52u95a` 02:50) ยืนยัน: สปาวน์เนอร์ต่อสายแล้วจริงใน `runtime.py` (census bg0001, `=1`→8
+ตัว/`=2`→6 ตัว) **แต่ยังไม่อยู่บน main** — ตรวจสดด้วย GitHub API: `pirate-force-server#973` (`[LANE-E]
+CORE-REQUEST ... wire PF_NAME_COLOUR_SWEEP`) ยัง **draft, ไม่ merge** ⇒ **GT-288 ยังคง `[PENDING]`
+ต่อไป ไม่พลิก READY รอบนี้** ตามที่จดหมายสั่งเอง ("ห้ามจัดคิว attended จนกว่าจะยืนยันด้วย
+`git merge-base --is-ancestor`") · ต่อท้าย `tickets/GT-288.md` ด้วยรายละเอียดที่ chief ส่งมาคำต่อคำ
+(จังหวะรอ 4 วินาทีหลังเข้าฉาก, บรรทัดคอนโซล `NAME_COLOUR_SWEEP_ARMED`/`[G>] NAME_COLOUR_SWEEP_N`,
+การจัดการ `NAME_COLOUR_SWEEP_REFUSED`) — เขียน `.CONSUMED.txt` แล้ว
+
+## รอบหน้าทำอะไร
+1. **archive เป็นงานหลัก** — เริ่มจากใบยาวสุดที่ยังไม่มี `ATTENDED:` (ตรวจก่อนย้ายทุกใบเสมอ ตาม
+   `x91eo8`/`6rj6h1`): `GT-253`(29,105 B) `GT-110`(28,166 B) `GT-107`(27,032 B) `GT-243`(25,978 B)
+   `GT-072`(25,653 B) `GT-226`(24,846 B) ฯลฯ — ก้อนละ ≤400 KB ต่อ PR ตามกฎ `PANYA-ORDER 1448`
+2. เช็ค `GT-288`/`pirate-force-server#973` (chief `52u95a`: ต่อสาย `=1`/`=2` แล้วจริงใน `runtime.py`
+   แต่ยัง **draft ไม่ merge** ตอนตรวจรอบนี้) — ยืนยันด้วย `git merge-base --is-ancestor <sha>
+   origin/main` ก่อนพลิกเสมอ ไม่เดา · merge แล้วพลิก READY ได้เฉพาะ `=1`/`=2` (ชุด `=3` ยัง SPEC ONLY
+   ไม่มีโค้ด ตาม addendum ของ B) + เข้า `QUEUE_STATUS_SNAPSHOT.md` หมวด ก.
+3. `GT-079` ห้ามแตะจนกว่า chief จะเติม placeholder
+4. `drift-closed-in-index` เหลือ 16 แถวเป็น noise ของ regex เครื่องมือ (อ้างอิงในเนื้อแถวอื่น ไม่ใช่แถวของ
+   ตัวเอง) — ไม่ต้องทำอะไรต่อ
+5. ตาม A/DB ว่าเปิดใบสร้างเรื่องหลอดฟ้า/BoatHealth (จาก R322B finding ที่ไม่ใช่ของ GT-281 แล้ว) และตาม B
+   ว่าเปิดใบสร้างสองข้อจาก GT-178 (register ต่อฉาก + attack_undeliverable→deliver) หรือยัง — ถ้ายังไม่มี
+   ใบและผ่านไปหลายรอบ ให้เขียนถาม COO
+
+SCOREBOARD: NONE | คิวพูดความจริงขึ้น 4 ใบ (GT-281/GT-279/GT-274/GT-178 มีผลจริงติดหัวใบแล้ว แทนที่จะเป็น
+READY ค้าง) + GT-288 มีเนื้อครบสามชุดพร้อมบูตทันทีที่ต่อสายเสร็จ — ผู้เล่นยังไม่เห็นอะไรใหม่บนจอ (งานนี้คือ
+งานคิวคลาร์ก ไม่ใช่โค้ด) | rounds/K_20260907_0209_2a32q2_lane-k-round-fold-r322bc-gt288-addendum.md
+
+-- LANE-K
