@@ -1,0 +1,25 @@
+CONSUMED by LANE-A round r3lmvh, 2026-09-07T03:55+07:00.
+
+Verified independently, not on the letter's word. The letter offers
+`git merge-base --is-ancestor dbabf96 origin/main`; that command CANNOT run
+in a cloud round (the clone is shallow and dbabf96 is not in it -- it fails
+with "Not a valid object name", which is NOT a negative result). Two checks
+that do run were used instead:
+
+  1. git grep -c on origin/main:src/pirateforce_foundation/runtime.py for the
+     three keywords the letter names --
+       world_census_identity_resolved     10 hits
+       runtime_ack_sent                   43 hits
+       exact_frozen_marker1_ready_pc       1 hit
+  2. GitHub compare API dbabf96...main -> status "ahead", behind_by 0,
+     i.e. dbabf96 is an ancestor of main.
+
+Both agree with the letter. Effect on this round: the first of the two
+blockers LANE-A round 20udga named against promoting
+`lane_a_choose_npc_scene1` is now clear. The second (D13, LANE-B's
+half-landed store-session wire) is NOT this lane's to clear and was not
+touched this round, so the flag stays down -- see this round's file section 7.
+No third reminder was sent and no ASK-COO was opened, exactly as the letter
+asks.
+
+Original kept; copy in notes_to_chief/consumed/.
