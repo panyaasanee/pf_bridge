@@ -557,6 +557,119 @@ def tracked_py_files(repo):
             and r.strip().startswith(CP874_PREFIXES)]
 
 
+CLAUDE_CONFIG_PREFIX = ".claude/"
+# Who is allowed to change the harness config, expressed as evidence that is
+# already on the branch: chief's round files (`rounds/R<N>_...`, and the
+# `rounds/E_..._claim.md` a chief round opens with) and the COO's own letters.
+# No lane tag is trusted from a PR title -- a title is typed by hand at the
+# end of a round, the round file is the thing the round cannot finish without.
+_CHIEF_ROUND_FILE_RE = re.compile(r"^rounds/(?:R[0-9]+[a-z]?_|E_)")
+_COO_LETTER_RE = re.compile(
+    r"^notes_to_chief/[^/]*COO-(?:ROUND|DECISION)", re.IGNORECASE)
+CLAUDECFG_SELF_TEST_CASES = 6
+
+
+def _touched_since(root, base, prefix):
+    """Paths under `prefix` this branch changed, or None if `base` is unknown.
+
+    Working tree against `base`, plus untracked files, for the same reason
+    every other check here does it that way: a lane runs this BEFORE it
+    commits, and a guard that only sees committed bytes is a guard that lets
+    the first push through.
+    """
+    resolves = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(root), "rev-parse",
+         "--verify", "--quiet", base + "^{commit}"],
+        capture_output=True, text=True, errors="replace",
+    ).returncode == 0
+    if not resolves:
+        return None
+    diff = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(root), "diff",
+         "--name-only", base, "--", prefix],
+        capture_output=True, text=True, errors="replace",
+    )
+    if diff.returncode != 0:
+        return None
+    untracked = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(root), "ls-files",
+         "--others", "--exclude-standard", "--", prefix],
+        capture_output=True, text=True, errors="replace",
+    )
+    names = set(diff.stdout.split())
+    if untracked.returncode == 0:
+        names.update(untracked.stdout.split())
+    return sorted(names)
+
+
+def check_claude_settings_owner(repo=None, bridge_root=None,
+                                base="origin/main"):
+    """RED when a branch touches `.claude/` and is not chief's or the COO's.
+
+    PANYA-ORDER 2026-09-07 03:16 (ka1-A writing for Panya), item 4, chief's
+    half: `.claude/settings.json` runs every routine session under
+    `bypassPermissions`, so its `deny` list is the only thing left standing
+    between a lane round and `git push --force`.  A file with that job may be
+    changed by chief and the COO through a PR and by nobody else, and the
+    owner asked for that to be a GATE rather than a sentence in a prompt.
+
+    THE EVIDENCE IS THE ROUND FILE, NOT A TAG.  A PR title is typed by hand
+    at the end of a round and can say anything; `rounds/R<N>_...md` (chief)
+    or a `COO-ROUND`/`COO-DECISION` letter is what those two rounds cannot
+    finish without, and both are already required by COMMON_LANE_ROUND.  A
+    lane that wants a change here writes the letter and lets chief carry it,
+    which is the same path every other `prompts/`-level rule takes.
+
+    Judges BOTH repositories: the harness config exists in each, and a lane
+    round touching the server copy is the same act as touching this one.
+    Returns True (nothing touched, or touched with the evidence present),
+    False (touched without it), or None when a base ref does not resolve and
+    the question could not be asked at all.
+    """
+    roots = []
+    if bridge_root is not None:
+        roots.append(("pf_bridge", pathlib.Path(bridge_root)))
+    else:
+        roots.append(("pf_bridge",
+                      pathlib.Path(__file__).resolve().parent.parent))
+    if repo is not None and (pathlib.Path(repo) / ".git").exists():
+        roots.append(("pirate-force-server", pathlib.Path(repo)))
+    touched = []
+    for name, root in roots:
+        names = _touched_since(root, base, CLAUDE_CONFIG_PREFIX)
+        if names is None:
+            print("[claudecfg] INCONCLUSIVE - %s in %s does not resolve, so "
+                  "the .claude/ question was never asked." % (base, name))
+            return None
+        touched.extend("%s:%s" % (name, path) for path in names)
+    if not touched:
+        print("[claudecfg] PASS - this branch does not touch .claude/.")
+        return True
+    bridge = roots[0][1]
+    evidence = _touched_since(bridge, base, "rounds/") or []
+    evidence += _touched_since(bridge, base, "notes_to_chief/") or []
+    owner_files = [
+        path for path in evidence
+        if _CHIEF_ROUND_FILE_RE.match(path) or _COO_LETTER_RE.match(path)
+    ]
+    for path in touched:
+        print("[claudecfg] touched %s" % path)
+    if owner_files:
+        print("[claudecfg] PASS - carried by %s (chief/COO round)."
+              % owner_files[0])
+        return True
+    print("[claudecfg] RED - .claude/ is chief's and the COO's file "
+          "(PANYA-ORDER 20260907_0316 item 4).")
+    print("            It runs every session under bypassPermissions; its "
+          "deny list is")
+    print("            the only thing between a round and `git push "
+          "--force`.  A lane")
+    print("            that needs a change here writes "
+          "notes_to_chief/<time>_<TAG>-ASK-COO-...")
+    print("            and lets chief carry it, in chief's own PR.")
+    return False
+
+
 def check_cp874(repo):
     found, detail, scanned = {}, {}, 0
     for rel in tracked_py_files(repo):
@@ -2081,6 +2194,103 @@ def _mainmerge_self_test_cases(tmp):
     return failures, ran
 
 
+def _claudecfg_git_root(tmp, dirname):
+    """A bridge-shaped repo whose base commit already carries .claude/.
+
+    Base state = the file exists and is committed, because the incident this
+    guards is a lane EDITING it, not a lane inventing it.  The caller mutates
+    the working tree afterwards, exactly as a branch ahead of origin/main
+    looks to this tool before its first commit.
+    """
+    root = pathlib.Path(tmp) / dirname
+    (root / ".claude").mkdir(parents=True)
+    (root / "rounds").mkdir()
+    (root / "notes_to_chief").mkdir()
+    (root / ".claude" / "settings.json").write_text(
+        '{"permissions": {"deny": []}}\n', encoding="utf-8")
+    (root / "rounds" / ".keep").write_text("", encoding="utf-8")
+    (root / "notes_to_chief" / ".keep").write_text("", encoding="utf-8")
+    subprocess.run(["git", "init", "-q", "-b", "main", str(root)], check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.email", "t@t"],
+                   check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.name", "t"],
+                   check=True)
+    subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
+    subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "base"],
+                   check=True)
+    return root
+
+
+def _claudecfg_self_test_cases(tmp):
+    """Drive check_claude_settings_owner() against synthetic branches.
+
+    The case that matters is the third one: a lane round that edits the deny
+    list must be RED, and it must be RED because of what is in `rounds/`,
+    not because of anything typed into a PR title.
+    """
+    probe = subprocess.run(["git", "--version"],
+                           capture_output=True, text=True, errors="replace")
+    if probe.returncode != 0:
+        print("  SELF-TEST RED: git is not runnable here, so the "
+              "[claudecfg] cases cannot run at all.")
+        return 1, 0
+
+    def touch_settings(root):
+        (root / ".claude" / "settings.json").write_text(
+            '{"permissions": {"deny": ["Bash(git push --force*)"]}}\n',
+            encoding="utf-8")
+
+    cases = []
+
+    root = _claudecfg_git_root(tmp, "claudecfg_untouched")
+    (root / "rounds" / "A_20260907_0400_zzz.md").write_text(
+        "lane round", encoding="utf-8")
+    cases.append(("lane round that does not touch .claude/", root, "main",
+                  True))
+
+    root = _claudecfg_git_root(tmp, "claudecfg_chief")
+    touch_settings(root)
+    (root / "rounds" / "R381_ky8m6j_deny_list.md").write_text(
+        "chief round", encoding="utf-8")
+    cases.append(("chief round file present", root, "main", True))
+
+    root = _claudecfg_git_root(tmp, "claudecfg_lane")
+    touch_settings(root)
+    (root / "rounds" / "A_20260907_0400_zzz.md").write_text(
+        "lane round", encoding="utf-8")
+    cases.append(("LANE-A round editing the deny list", root, "main", False))
+
+    root = _claudecfg_git_root(tmp, "claudecfg_coo")
+    touch_settings(root)
+    (root / "notes_to_chief"
+     / "20260907_0400_COO-ROUND-0400-deny-list.md").write_text(
+        "coo round", encoding="utf-8")
+    cases.append(("COO round letter present", root, "main", True))
+
+    root = _claudecfg_git_root(tmp, "claudecfg_claim")
+    touch_settings(root)
+    (root / "rounds" / "E_20260907_0400_ky8m6j_claim.md").write_text(
+        "chief claim", encoding="utf-8")
+    cases.append(("chief claim file, round file not written yet", root,
+                  "main", True))
+
+    root = _claudecfg_git_root(tmp, "claudecfg_nobase")
+    touch_settings(root)
+    cases.append(("base ref does not resolve", root, "origin/no-such-branch",
+                  None))
+
+    failures = 0
+    ran = 0
+    for label, root, base, expected in cases:
+        got = check_claude_settings_owner(bridge_root=root, base=base)
+        ran += 1
+        ok = got is expected
+        failures += 0 if ok else 1
+        print("  claudecfg %-58s expected=%-5s got=%-5s %s\n"
+              % (label[:58], expected, got, "ok" if ok else "SELF-TEST RED"))
+    return failures, ran
+
+
 def _self_test():
     """Prove the guard on this clone, with no PR and no network.
 
@@ -2182,6 +2392,9 @@ def _self_test():
         sm_failures, sm_ran = _scoreboard_manual_self_test_cases(tmp)
         failures += sm_failures
         ran += sm_ran
+        cc_failures, cc_ran = _claudecfg_self_test_cases(tmp)
+        failures += cc_failures
+        ran += cc_ran
     if failures:
         print("SELF-TEST RED: %d of %d case(s) wrong." % (failures, ran))
         return 1
@@ -2191,6 +2404,7 @@ def _self_test():
         + BRIDGESIZE_SELF_TEST_CASES + FILENAMELEN_SELF_TEST_CASES
         + QUEUEGROWTH_SELF_TEST_CASES
         + CONSUMEDSTUB_SELF_TEST_CASES + SCOREBOARD_MANUAL_SELF_TEST_CASES
+        + CLAUDECFG_SELF_TEST_CASES
     )
     if ran != expected_cases:
         # pf-adversary R328 D3: the old green line was the string "9 cases",
@@ -2305,6 +2519,8 @@ def main():
             check_scoreboard_manual_rows(
                 bridge_root=bridge_root, base=args.base,
                 allow_manual_edit=args.allow_manual_scoreboard_edit),
+            check_claude_settings_owner(
+                bridge_root=bridge_root, base=args.base),
         ]
         check_consumed_stub_warning(bridge_root=bridge_root, base=args.base)
         print("")
@@ -2324,7 +2540,9 @@ def main():
         print("                       + no new file name over %d characters"
               % NEW_FILENAME_LENGTH_CEILING)
         print("                       + no manual scoreboard row was"
-              " touched).")
+              " touched")
+        print("                       + .claude/ untouched or carried by"
+              " chief/COO).")
         print("NOTE: the server-repo half of this tool did NOT run. A lane"
               " still")
         print("      runs the full `--repo ../pirate-force-server` line before"
@@ -2360,7 +2578,8 @@ def main():
                    base=args.base),
                check_scoreboard_manual_rows(
                    base=args.base,
-                   allow_manual_edit=args.allow_manual_scoreboard_edit)]
+                   allow_manual_edit=args.allow_manual_scoreboard_edit),
+               check_claude_settings_owner(repo=repo, base=args.base)]
     # Advisory only (chief D-something, LANE-B 20260906_1050): never added to
     # `results` - a forgotten .CONSUMED.txt stub is a warning, not a reason
     # to block a push that is otherwise clean.
@@ -2410,7 +2629,8 @@ def main():
     # into a PR body as evidence, and it was a hardcoded list that had
     # stopped matching what `results` actually contains.
     print("                + no new file name over %d characters in either"
-          " repo)." % NEW_FILENAME_LENGTH_CEILING)
+          " repo" % NEW_FILENAME_LENGTH_CEILING)
+    print("                + .claude/ untouched or carried by chief/COO).")
     print("NOTE: this does NOT promise a green gate - Windows-only runtime")
     print("failures are out of scope.  A RED or INCONCLUSIVE preflight means")
     print("DO NOT PUSH until it is fixed (AGENTS.md section 7).")
