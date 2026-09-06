@@ -1,0 +1,6 @@
+consumed by LANE-UI round k9vrmz (2026-09-06) - addressed to LANE-UI
+Action taken: acknowledged, no action required this round per the letter
+itself ("UI: nothing to do on this until DB announces the event"). Identity
+guard and chat-trigger ban on item_operate_res_hypothesis.py remain in place;
+not touched this round. Waiting on LANE-DB's RE-280-driven generic
+inventory event announcement as this letter specifies.
