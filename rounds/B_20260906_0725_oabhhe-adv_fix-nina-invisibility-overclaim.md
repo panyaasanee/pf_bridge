@@ -30,6 +30,29 @@
    pf-adversary ยืนยันด้วยการรันโค้ดจริง ไม่พบการละเมิดกฎ shared-world/delta ในโค้ดของรอบ `oabhhe` เอง —
    ช่องว่างที่แท้จริงคือ **เอกสาร** (ไฟล์รอบไม่มีบรรทัดนี้) ไม่ใช่ตัวโค้ด
 
+5. 🔴 **`#895` โดน reaper ปิดจริงระหว่างรอบนี้ — gate RED ที่ `skip_census`**: commit `5ee6b850`
+   (ก่อนแก้คอมเมนต์) แดงที่ Windows gate ด้วยเหตุคนละเรื่องกับที่ pf-adversary เจอ:
+   `tests/test_field_mob_tables_bg0008.py` ใหม่มีเทสที่ skip บน precondition `bridge_gamedata`
+   ในโคลนสดที่ไม่มี `pf_bridge` ข้าง ๆ (Windows gate) — รอบ `oabhhe` **ไม่ได้เติม pin ให้**
+   `docs/PYTEST_SKIP_PINS.json` ทั้งที่ `AGENTS.md` §7 สั่งไว้ตรง ๆ อยู่แล้วว่า "เพิ่มไฟล์เทสใหม่ที่มี skip
+   ⇒ ซ้อม skip_census ในสภาพไม่มี pf_bridge ข้างๆ" — sandbox ที่ build โมดูลนี้มี `pf_bridge` เป็น sibling
+   เสมอ เทสนี้จึงไม่เคย skip ตอน build เลย ไม่มีใครเห็นช่องว่าง จนกระทั่ง gate จริงรันจากโคลนสด
+   reaper ปิด `#895` อัตโนมัติตามกฎ (`.github/workflows/merge-claude-pr.yml`) — **กิ่งไม่หาย** คอมมิตยังอยู่
+   บน `claude/gifted-clarke-oabhhe` ตามที่ reaper บอก
+   **แก้แล้ว**: เพิ่ม entry `bridge_gamedata`/`tests/test_field_mob_tables_bg0008.py`/count 1 ใน
+   `docs/PYTEST_SKIP_PINS.json` (commit `88fab41`) · **พิสูจน์ด้วย `git worktree add --detach` ไปที่
+   `/tmp` (ไม่มี `pf_bridge` เป็น sibling จริง จำลองสภาพ gate ได้ตรง)**: ก่อนแก้ `pf_pytest_precondition_
+   census.py` รายงาน `UNPINNED` ตรงกับที่ gate เจอเป๊ะ หลังแก้ `RESULT: PASS` · full suite รอบสองบน merged
+   tree: **11935 passed, 365 skipped, 0 failed, 23426 subtests** (559s) · `pf_gate_preflight.py` PASS เต็ม
+   ทุกข้อ · ลบ worktree ทิ้งเรียบร้อยแล้ว (`git worktree remove --force` + `prune`)
+   **เปิดใบใหม่ `pirate-force-server#899`** แทน `#895` ที่ปิดไปแล้ว (กิ่งเดิม คอมมิตเดิม + คอมมิตแก้ pin)
+   ไม่ draft มี `PF-AUTOMERGE: v4` ยืนยันแล้ว
+
+## บทเรียน (ตัวเองทำผิดกฎที่มีอยู่แล้ว ไม่ใช่กฎใหม่)
+รอบ `oabhhe` ควรซ้อม skip_census ในสภาพไม่มี `pf_bridge` ข้างๆ **ก่อน push ครั้งแรก** ตามที่ `AGENTS.md` §7
+สั่งไว้อยู่แล้ว แต่ไม่ได้ทำ — เพิ่งมาซ้อมตอนรอบนี้หลังจาก gate จับได้เอง ผลคือเสียรอบ reaper ไปหนึ่งใบ (`#895`)
+ไม่ใช่ช่องโหว่ของกฎ เป็นการไม่ทำตามกฎที่มีอยู่แล้วของรอบก่อน บันทึกไว้เตือนตัวเอง/สายอื่นที่เพิ่มไฟล์เทสใหม่
+
 ## ผลตรวจของ pf-adversary ที่ไม่ต้องแก้ (บันทึกไว้เฉย ๆ)
 - คอมเมนต์เก่าใน `tests/test_mob_ai_control.py:234-235` ("Bg0015 is not in `_SCENE_TABLE_MODULES`") ยืนยัน
   ว่าเท็จจริง (Bg0015 อยู่ในดิกนั้นมาหลายรอบแล้ว) แต่ **ยืนยันว่ามีอยู่ก่อนรอบ `oabhhe`แล้ว** (เช็ค
@@ -40,15 +63,17 @@
 
 ## สิ่งที่ยังไม่ปิด
 - ใบถาม `0725` รอ COO เคาะ (ทางเลือก ก/ข/ค) — ไม่บล็อกผู้เล่นวันนี้
-- `pirate-force-server#895` ยังไม่ merge ตอนปิดรอบนี้ (ห้ามเขียนว่าอยู่บน main จนกว่ารอบถัดไปยืนยัน)
-- full suite รอบสองหลังคอมมิตแก้คอมเมนต์: รันอยู่ตอนเขียนไฟล์นี้ (background, timeout 120s ของเชลล์)
-  ผลจะเติมในจดหมาย follow-up ถ้าล้มเหลว มิฉะนั้นถือว่าผ่านตามที่ pf-adversary เองก็รันแล้วผ่านมาก่อนแก้
+- `pirate-force-server#899` ยังไม่ merge ตอนปิดรอบนี้ (ห้ามเขียนว่าอยู่บน main จนกว่ารอบถัดไปยืนยันด้วย
+  `git merge-base --is-ancestor`) · gate ยังไม่รันจริงบน `#899` ตอนปิดรอบนี้ (แค่ preflight local เขียว)
 
 ## รอบหน้าทำอะไร
-1. เช็คว่า COO ตอบใบ `0725` หรือยัง — ถ้าตอบ (ข) ต้องเพิ่มโค้ดให้ census ฐานของสาย A อ่าน
+1. เช็ค gate ของ `#899` จริง (ไม่ใช่แค่ preflight local) ก่อนเชื่อว่าผ่าน — ถ้าแดงอีกด้วยเหตุอื่น อ่านล็อก
+   ก่อนเดา (`mcp__github__get_job_logs`)
+2. เช็คว่า COO ตอบใบ `0725` หรือยัง — ถ้าตอบ (ข) ต้องเพิ่มโค้ดให้ census ฐานของสาย A อ่าน
    `LANE_WITHHELD_PLACEMENTS`/`LANE_WITHHELD_REASON` ด้วย (งานข้ามสาย ต้องคุยกับ A ก่อนแตะ `world_*`)
-2. เช็คว่า `#895` merge แล้วหรือยัง ด้วย `git merge-base --is-ancestor` ก่อนเขียนว่า "อยู่บน main"
-3. งานหลักเดิม: ต่อจดหมาย `0659` (five-scene recon ค้าง bg0009/bg0010)
+3. เช็คว่า `#899` merge แล้วหรือยัง ด้วย `git merge-base --is-ancestor` ก่อนเขียนว่า "อยู่บน main"
+4. งานหลักเดิม: ต่อจดหมาย `0659` (five-scene recon ค้าง bg0009/bg0010)
 
-SCOREBOARD: NONE | ไม่มีอะไรใหม่ที่ผู้เล่นเห็นวันนี้ — รอบนี้แก้เอกสาร/คอมเมนต์ให้ตรงความจริงก่อน
-`#895` merge เท่านั้น ไม่ใช่ฟีเจอร์ใหม่ | `pirate-force-server#895` commit `dba65a7`
+SCOREBOARD: COMING | ผู้เล่นยังไม่เห็นอะไรวันนี้ (P-2/GT ยังปิดเหมือนเดิม) แต่โค้ดที่ทำให้มอน 6 ตัวใน
+Silver Harbour ตายได้จริงถึง PR แล้วรอบสอง หลังแก้ทั้งคอมเมนต์เท็จ (pf-adversary) และ pin ที่หายไป
+(Windows gate) ที่ทำให้ใบแรกโดนปิด | `pirate-force-server#899` commit `88fab41`
