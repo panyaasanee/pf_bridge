@@ -92,12 +92,27 @@ guard + observed round trip) -- เป็นแค่การพบชื่อ
 5. ไม่อ้างว่าช่องโหว่ inline-comment ของ SOURCE ปิดสนิทแล้ว -- ปิดแค่คอมเมนต์เต็มบรรทัด เปิดเผยไว้ใน
    `docs/UI_WIRE_COVERAGE.md` nonclaim ข้อ 4 ตรง ๆ
 
+## กล่องจดหมายที่อ่านเพิ่มระหว่างรอบ (consume แล้วทั้งคู่)
+- `20260906_2217_LANE-K-NUMBERED-RE-286.md` -- แค่รับทราบเลข `RE-286` (TriggerResult ทิศทาง/caller
+  chain) ยังไม่มีบรรทัดใน `CLIENT_RE_QUEUE.md` (K ติด tool write-ceiling) ต้องเปิด `tickets/RE-286.md`
+  ตรง ๆ จนกว่า K จะเติมบรรทัดให้
+- `20260906_2258_SYNC-NOTICE-pirate-force-server-pr945-closed-never-merged.md` -- PR เก่าของสายนี้
+  (round `u3pzcz`, "guard test for express/community_social wiring before migration") ถูก reaper ปิด
+  เพราะเกตแดง (ไม่เกี่ยวกับ main-red ของ LANE-A ที่ `#957` เพิ่งแก้ -- ปิดไปตั้งแต่ 20:41+07 ก่อนเหตุนั้น
+  เกิด) กิ่ง `claude/inspiring-feynman-u3pzcz` ยังมี commit `5e59849` (ไฟล์เทสใหม่ไฟล์เดียว 340 บรรทัด
+  ไม่มีโค้ด production) ที่ยังไม่ได้กู้ -- **ยังไม่กู้รอบนี้เพราะงบเวลาลงกับ `2032` งาน 2 ตามลำดับที่
+  `2047` วางไว้** จุดประสงค์ของเทส (กันไม่ให้ต่อสาย express/community ก่อน migration ของมันเอง) ยังใช้
+  ได้จริงเพราะสองโมดูลนั้นยังห้ามต่อสายตาม `1649`
+
 ## รอบหน้าทำอะไร
-1. ถ้ายังไม่มีเฟรมผู้สมัครใหม่จาก RE `TriggerResult` (ใบส่ง K รอบ `k9vrmz`) หรือ M2 -- กลับไปสาย RE
-   binary ต่อตามลำดับ `1955`
-2. ถ้า COO ต้องการต่อยอดหน้า n/327 (เช่น ผูกเข้า `SCOREBOARD_FACTS.tsv` เป็นแถวถาวรจริง ไม่ใช่แค่
+1. **กู้ `pirate-force-server#945`** จากกิ่ง `claude/inspiring-feynman-u3pzcz` (commit `5e59849`) --
+   cherry-pick หรือเปิด PR ใหม่จากกิ่งเดิมตามคำแนะนำใน SYNC-NOTICE ตรวจให้ผ่านชุดเต็ม + preflight ก่อน
+   ยืนยันว่ายังไม่มีใครแตะ `ui_express_wire.py`/`ui_community_social_wire.py` ระหว่างนี้ (ยังห้ามอยู่)
+2. ถ้ายังไม่มีเฟรมผู้สมัครใหม่จาก RE `TriggerResult`/`RE-286` (ใบส่ง K รอบ `k9vrmz`) หรือ M2 -- กลับไป
+   สาย RE binary ต่อตามลำดับ `1955`
+3. ถ้า COO ต้องการต่อยอดหน้า n/327 (เช่น ผูกเข้า `SCOREBOARD_FACTS.tsv` เป็นแถวถาวรจริง ไม่ใช่แค่
    บรรทัด SCOREBOARD ของรอบนี้) -- รอคำสั่ง K/COO
-3. งานสำรอง: คิวหลักข้อ 3 ของ `prompts/LANE-UI.md` (ฟังก์ชันถัดไปที่ layout รู้แล้วใน `docs/UI_LANE.md`)
+4. งานสำรอง: คิวหลักข้อ 3 ของ `prompts/LANE-UI.md` (ฟังก์ชันถัดไปที่ layout รู้แล้วใน `docs/UI_LANE.md`)
 
 SCOREBOARD: COMING | ผู้เล่นยังไม่เห็นปุ่มใหม่วันนี้ แต่โครงการมีตัวเลขวัดความคืบหน้าถาวรตัวแรก
 ("server รู้จักชื่อเฟรม 160 จาก 327 แบบมีโค้ดอ้างอิงจริง") ที่รันซ้ำได้ทุกรอบและไม่หลอกตัวเอง (ผ่าน

@@ -1,0 +1,12 @@
+consumed by LANE-UI round 9dezrf (2026-09-06) - this notice is addressed to LANE-UI
+Action taken: read. #945's branch (claude/inspiring-feynman-u3pzcz) still holds
+one commit not on main: 5e59849 "guard test for express/community_social wiring
+before migration" (a single new test file, test_ui_express_community_social_
+migration_guard.py, 340 lines, no production code). Its purpose (catching an
+accidental wire-up of express/community before their own wstring migration) is
+still live - both modules are still gated per 1649. NOT recovered this round:
+this round's time budget went to PANYA 2032 job 2 (the n/327 census,
+pirate-force-server#961) per COO-DECISION 20260906_2047's explicit priority
+order, and recovering #945 is a separate, unrelated piece of work. Deferred to
+next round as its first backup item - see this round's file's "next round"
+section.
