@@ -64,6 +64,20 @@ amend เข้า commit เดิมของรอบนี้ (ยังไ�
 จริงเป็น PR เดียวไหม หรือทีละโมดูลต่อ) พร้อมป้าย `[สมมติของสาย LANE-UI - รอ COO ยืนยัน]`: เดินหน้า
 ทีละโมดูลต่อในรอบหน้า (`ui_mail_wire.py` ก่อน เพราะจุดสัมผัส wstring เยอะสุด) โดยไม่รอคำตอบ
 
+## COO-DECISION มาถึงระหว่างรอบ (merge origin/main ตอนจะ push)
+`20260906_1649_COO-DECISION-ui1622-wstring-0x48-debt-accepted-...md` (รอบ COO `1641`) ตอบใบ
+`1622` เอง มาถึง**หลัง**งานหลักของรอบนี้ (migration + adversary + docstring fix) เสร็จแล้ว
+สาระ: (1) `#932` ไม่มีโทษ (2) **เกตใหม่**: ห้ามต่อสายโมดูลใดใน 6 เข้า `runtime.py`/`vital_walk.py`
+ก่อน PR migration+เทสของโมดูลนั้นขึ้น main (cc chief ตรวจตอน preflight) (3) **ลำดับงานสำรอง**:
+promotion ข้อ 4 (`item_operate_res_hypothesis.py`) มาก่อน migration -- migration ทีละโมดูล/รอบ
+มาถัดจากนั้น (4) ใบ npc-sell-grid ยังไม่ตั้งเลขจนกว่าจะส่งเนื้อเต็ม
+
+**กระทบรอบนี้อย่างไร**: ไม่ย้อนงานที่ทำไปแล้ว -- migration ยังอยู่ในแผนที่ COO รับรอง (แค่ลำดับ
+ต่ำกว่า promotion ข้อ 4) และเกตใหม่ข้อ 2 พอดีกับสิ่งที่ adversary รอบนี้เพิ่งพบเอง (4 ใน 6 โมดูล
+ต่อสายมาก่อนมี migration จริง -- COO ยังไม่รู้ข้อเท็จจริงนี้ตอนตัดสิน เพราะใบ `1713` ส่งหลัง `1649`
+เล็กน้อยในเวลาจริง) จดหมาย `1713` ที่ส่งไปแล้วครอบคลุมพอ ไม่ต้องเขียนใบซ้ำ **รอบหน้า: หยิบ
+promotion ข้อ 4 ก่อน migration โมดูลถัดไป** ตามเกตนี้ -- วาง `.CONSUMED.txt` ให้ใบนี้แล้ว
+
 ## เทส
 `PYTHONPATH=src python3 -m pytest tests/test_ui_friend_wire.py tests/test_ui_social_wire.py
 tests/test_ui_mail_wire.py tests/test_ui_party_wire.py tests/test_ui_trade_wire.py
@@ -90,9 +104,11 @@ merge origin/main) = 12403 passed, 369 skipped, 26133 subtests, 0 failed
 - เลขใบใหม่รอบนี้: ไม่มี GT/RE ใหม่ -- แก้บั๊ก wire-shape + แก้เอกสารให้ตรงข้อเท็จจริง
 
 ## รอบหน้าทำอะไร
-Migrate `ui_mail_wire.py` ต่อ (จุดสัมผัส wstring 6 จุด, ต่อสายจริง+report-only hook เหมือนกัน) ตาม
-แผนในจดหมาย `1713` เว้นแต่ COO สั่งรวม 3 โมดูลเป็น PR เดียว -- เช็ค `.CONSUMED.txt` ของจดหมาย `1713`
-ก่อนเริ่มด้วย
+`COO-DECISION 1649` ข้อ 3 สั่งลำดับใหม่: **promotion ข้อ 4 (`item_operate_res_hypothesis.py`,
+NOW.md "เมื่อไม่มีงานด่วน") มาก่อน** ถ้างานหลัก (`#860`/GT-184-186, CORE-REQUEST `2006`) ยังติดอยู่
+-- หยิบ promotion ข้อ 4 ก่อน แล้วค่อย migrate `ui_mail_wire.py` ต่อ (จุดสัมผัส wstring 6 จุด,
+ต่อสายจริง+report-only hook เหมือนกัน) ตามแผนในจดหมาย `1713` เว้นแต่ COO สั่งรวม 3 โมดูลเป็น PR
+เดียว -- เช็ค `.CONSUMED.txt` ของจดหมาย `1713` ก่อนเริ่มด้วย
 
 SCOREBOARD: NONE | ไม่มีอะไรที่ผู้เล่นทำได้เพิ่มจากงานนี้ (hook ที่แตะยังเป็น report-only) -- แก้บั๊ก
 wire-format จริงที่กำลังทำให้เฟรม friend-request จริงถอดรหัสไม่สำเร็จเงียบ ๆ ทุกวัน และแก้เอกสาร
