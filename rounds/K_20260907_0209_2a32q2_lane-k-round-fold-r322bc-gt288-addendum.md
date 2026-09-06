@@ -82,13 +82,24 @@ nonclaim บอกขนาดไฟล์คิวหลักที่ยั�
 ไม่มี — กล่องจดหมาย `*RESULTS*`/`*OBSERVER_CONFIRMED*` ว่างหลังรอบนี้ (grep ยืนยันแล้ว: 0 ฉบับไม่มี
 `.LANEK-FOLDED.txt`)
 
+## ต่อท้ายรอบเดียวกัน (พบระหว่าง `git merge origin/main` ขั้นสุดท้าย — จดหมายใหม่ถึง K)
+`notes_to_chief/20260907_0250_FROM_CHIEF-TO-K-re155-boot-is-live-schedule-after-merge.md`
+(chief รอบ `52u95a` 02:50) ยืนยัน: สปาวน์เนอร์ต่อสายแล้วจริงใน `runtime.py` (census bg0001, `=1`→8
+ตัว/`=2`→6 ตัว) **แต่ยังไม่อยู่บน main** — ตรวจสดด้วย GitHub API: `pirate-force-server#973` (`[LANE-E]
+CORE-REQUEST ... wire PF_NAME_COLOUR_SWEEP`) ยัง **draft, ไม่ merge** ⇒ **GT-288 ยังคง `[PENDING]`
+ต่อไป ไม่พลิก READY รอบนี้** ตามที่จดหมายสั่งเอง ("ห้ามจัดคิว attended จนกว่าจะยืนยันด้วย
+`git merge-base --is-ancestor`") · ต่อท้าย `tickets/GT-288.md` ด้วยรายละเอียดที่ chief ส่งมาคำต่อคำ
+(จังหวะรอ 4 วินาทีหลังเข้าฉาก, บรรทัดคอนโซล `NAME_COLOUR_SWEEP_ARMED`/`[G>] NAME_COLOUR_SWEEP_N`,
+การจัดการ `NAME_COLOUR_SWEEP_REFUSED`) — เขียน `.CONSUMED.txt` แล้ว
+
 ## รอบหน้าทำอะไร
 1. **archive เป็นงานหลัก** — เริ่มจากใบยาวสุดที่ยังไม่มี `ATTENDED:` (ตรวจก่อนย้ายทุกใบเสมอ ตาม
    `x91eo8`/`6rj6h1`): `GT-253`(29,105 B) `GT-110`(28,166 B) `GT-107`(27,032 B) `GT-243`(25,978 B)
    `GT-072`(25,653 B) `GT-226`(24,846 B) ฯลฯ — ก้อนละ ≤400 KB ต่อ PR ตามกฎ `PANYA-ORDER 1448`
-2. เช็ค `GT-288` — ถ้า B ส่ง CORE-REQUEST ต่อสาย env→dispatch แล้ว landed (ทั้งสามชุด `=1/=2/=3`) ให้พลิก
-   เป็น READY + เข้า `QUEUE_STATUS_SNAPSHOT.md` หมวด ก. (ปัจจุบัน `pirate-force-server#972` เปิดแล้ว รอ
-   gate ยังไม่อยู่บน main — ตรวจสดก่อนพลิก)
+2. เช็ค `GT-288`/`pirate-force-server#973` (chief `52u95a`: ต่อสาย `=1`/`=2` แล้วจริงใน `runtime.py`
+   แต่ยัง **draft ไม่ merge** ตอนตรวจรอบนี้) — ยืนยันด้วย `git merge-base --is-ancestor <sha>
+   origin/main` ก่อนพลิกเสมอ ไม่เดา · merge แล้วพลิก READY ได้เฉพาะ `=1`/`=2` (ชุด `=3` ยัง SPEC ONLY
+   ไม่มีโค้ด ตาม addendum ของ B) + เข้า `QUEUE_STATUS_SNAPSHOT.md` หมวด ก.
 3. `GT-079` ห้ามแตะจนกว่า chief จะเติม placeholder
 4. `drift-closed-in-index` เหลือ 16 แถวเป็น noise ของ regex เครื่องมือ (อ้างอิงในเนื้อแถวอื่น ไม่ใช่แถวของ
    ตัวเอง) — ไม่ต้องทำอะไรต่อ
