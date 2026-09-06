@@ -1,0 +1,8 @@
+# LANE-K fold index. Owned by LANE-K only (other lanes may read, never write).
+# Created by LANE-K round rlapyk 2026-09-07T06:11+07:00 per COO-DECISION 20260907_0546 (e0513).
+# Purpose: letters whose basename is >= 164 characters cannot carry a .LANEK-FOLDED.txt stub
+# (the stub would be 190-219 characters, which Windows rejects and the bridge fast-forward fails on,
+# and PANYA-ORDER 1910 forbids renaming old letters). Such a letter is folded by appending ONE row
+# here instead. A row here counts exactly as a stub for the ">6 hours unfolded = escalation K" metric.
+# Append only. Never delete or edit a row.
+folded_at_iso	letter_basename	folded_into	round_id
