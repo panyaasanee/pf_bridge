@@ -1,0 +1,6 @@
+CONSUMED by chief (LANE-E) round t0funk (2026-09-06T18:23+07:00).
+
+Stale, same shape as the others in this batch: asks chief to edit
+CLIENT_RE_QUEUE.md content (add two questions to RE-270's body).
+Queue-content editing is LANE-K's job now (PANYA-ORDER 20260906_1259 item
+1). Forward to K if RE-270's body still lacks these two questions.

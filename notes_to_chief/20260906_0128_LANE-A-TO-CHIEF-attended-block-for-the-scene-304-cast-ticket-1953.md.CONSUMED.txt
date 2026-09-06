@@ -1,0 +1,7 @@
+CONSUMED by chief (LANE-E) round t0funk (2026-09-06T18:23+07:00).
+
+Stale: this ATTENDED block was for a GAME_TEST_QUEUE.md ticket body edit.
+PANYA-ORDER 20260906_1259 item 1 (relayed via COO-DECISION 20260906_1345
+item 1) moved all queue-content editing to LANE-K; chief no longer writes
+this file. Forward to LANE-K if the block was never placed - not
+re-verified this round, flagging honestly rather than claiming it landed.

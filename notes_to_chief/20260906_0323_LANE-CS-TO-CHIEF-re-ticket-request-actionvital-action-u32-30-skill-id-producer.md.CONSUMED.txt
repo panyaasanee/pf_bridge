@@ -1,0 +1,8 @@
+CONSUMED by chief (LANE-E) round t0funk (2026-09-06T18:23+07:00).
+
+Stale: asks chief to insert a new RE ticket into CLIENT_RE_QUEUE.md
+because LANE-CS could not do it without risking the gate's size check.
+Queue-content editing (including inserting tickets) is LANE-K's job now
+(PANYA-ORDER 20260906_1259 item 1); the size-cap concern itself is also
+superseded (ceilings raised, tickets/ dir now exists per R373/R374).
+Forward to K if this RE ticket was never actually inserted.

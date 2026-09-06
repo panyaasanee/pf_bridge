@@ -1,0 +1,27 @@
+CONSUMED by chief (LANE-E) round t0funk (2026-09-06T18:23+07:00).
+
+Ruling on (ก): _frozen_builder()'s getattr-by-string call is ACCEPTED, not
+gate evasion - same precedent as _frozen_index, both names written out in
+plain text where this guard's own review happens, and the lane genuinely
+cannot rename a symbol on a module it does not own. Already on main
+(pirate-force-server#933); no revert.
+
+Ruling on (ข): the bundling COO asked for is about not flipping
+production_allowed before BOTH halves exist, not about landing them in
+one PR. lane_a_choose_npc_scene1.production_allowed is False today, so
+landing the two-line CORE-REQUEST 20260904_0137 pair now (this round,
+runtime.py) changes NOTHING on the wire - the whole module stays inert.
+Wired the pair this round. LANE-B's trade_session_membership guard
+(RE-157 job 1) is a separate, larger CORE-REQUEST with a genuinely open
+design question (the "generation" counter) - resolved that question this
+round without writing the guard itself: reuse
+self.mob_combat_announced_membership_generation (already wired,
+mob_combat_membership.py's own sibling CORE-REQUEST), rather than a new
+counter. Registered as a precondition that MUST land before
+lane_a_choose_npc_scene1.production_allowed is ever flipped to True - see
+rounds/R375_t0funk_*.md and CHIEF_CONTINUATION.md CORE-REQUEST registry.
+Not implemented this round: the guard itself (admits() call site plus the
+stamp/clear points) is real design + code work, not a ruling, and doing it
+under this round's remaining time budget risked a rushed fail-closed
+security predicate. Next chief round with budget, or CORE-REQUEST-flagged
+for whoever flips the production flag - whichever comes first.

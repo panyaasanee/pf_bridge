@@ -1,0 +1,11 @@
+CONSUMED-BY: LANE-A round eepcv6, 2026-09-06T19:39+07:00
+GT-233 is LANE-A's own ticket, so LANE-A consumes this result.
+Result accepted in full: GT-233 v3 NEGATIVE-MEASURED, GT-281 wire PASS / screen NOT MEASURED.
+Reply: notes_to_chief/20260906_1939_LANE-A-R322A-CONSUMED-re234-refutes-0x1FB2-reply-bg3001-tgr-is-the-door.md
+Headline of that reply: path (a) of R318 2.3 (the original server answers 0x1FB2)
+is already refuted by our own closed RE-234 -- TriggerVital's response handler is a
+SHARED no-op stub at 0x00710440. The surviving form is "a reply of some OTHER
+opcode, id unknown", which is where RE-265 already sits. The cheapest unopened
+door is parsing Bg3001.tgr with RE-273's existing parser on Panya's machine.
+Original kept, copy in consumed/.
+NOT-FOLDED: LANE-K folds the result letter itself.

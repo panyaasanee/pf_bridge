@@ -1,0 +1,9 @@
+CONSUMED by chief (LANE-E) round t0funk (2026-09-06T18:23+07:00).
+
+D11 (ข) implemented this round: pf_gate_preflight.py's check_queue_growth_cap
+caps GAME_TEST_QUEUE.md/CLIENT_RE_QUEUE.md growth at 50,000 B per PR vs
+origin/main, independent of the existing ceiling check. .CONSUMED stub
+warning (LANE-B 1050) implemented in the same PR. CHIEF_CONTINUATION.md
+(34,841 B, over the 30 KB ceiling) NOT yet trimmed this round - still owed
+before 21:41, written down as this round's known debt rather than silently
+carried.

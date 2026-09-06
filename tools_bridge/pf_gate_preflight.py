@@ -43,6 +43,18 @@ reading cost is paid again forever.  Ceilings are owner-set (NOW.md's own
 text names its cap: "12 KB / 60 บรรทัด"), enforced here rather than only in
 prose so a lane finds out before push, not after the fact in a letter.
 
+FIFTH AND SIXTH CHECKS - QUEUE GROWTH CAP AND CONSUMED-STUB WARNING (added
+R375, COO-DECISION 20260906_1726/1745, chief D11 and LANE-B 20260906_1050).
+The fourth check above only turns RED once GAME_TEST_QUEUE.md or
+CLIENT_RE_QUEUE.md is ALREADY over its ceiling; with those ceilings just
+raised to 2,400,000/409,600 B a single PR could still add hundreds of KB
+below that line unnoticed, so check_queue_growth_cap caps how much EITHER
+file may grow in one PR, separately from the ceiling. check_consumed_stub_
+warning is advisory only: it flags a round file that names a
+notes_to_chief/ letter addressed to its own lane with no .CONSUMED.txt
+stub on the branch, the exact gap that made LANE-B round `p4ts3e` redo work
+round `4tnhzw` had already finished.
+
 THIRD CHECK - PR BODY AUTOMERGE MARKER (added R328, COO-DECISION
 20260903_2141).  The reaper that merges our PRs looks for the automerge
 marker as a BARE SUBSTRING of the PR body, with no anchor and no line
@@ -208,6 +220,241 @@ def check_bridge_file_sizes(bridge_root=None, base="origin/main"):
           " (pre-existing debt, if any, is 'old' above, not this branch's)."
           % base)
     return True
+
+
+# chief D11, COO-DECISION 20260906_1726 item 3 (answering LANE-E's own
+# ASK-COO the same round): check_bridge_file_sizes only turns RED once a
+# file is ALREADY over its ceiling. The two queue files' ceilings were just
+# raised to 2,400,000 / 409,600 B (PANYA-ORDER 20260906_1448 part (a)),
+# which leaves a gap - 397,704 B under CLIENT_RE_QUEUE.md's old debt alone -
+# that no per-PR check was watching: two lanes opening tickets at the same
+# hour (a routine event, LANE-K's own job every round) could each add
+# hundreds of KB and both land clean. This is the second, independent
+# criterion COO chose over widening the ceilings themselves, which stay
+# Panya's number to move (COO-DECISION 20260906_1345 item 3).
+QUEUE_GROWTH_CAP_PER_PR = 50000
+
+#: The two files LANE-K's ticket-per-unit-of-work growth is expected to
+#: touch every round - not the other three BRIDGE_FILE_SIZE_CEILINGS names,
+#: which only ever shrink through deliberate archiving, never grow as a
+#: side effect of normal attended-test throughput.
+QUEUE_GROWTH_WATCHED_FILES = ("GAME_TEST_QUEUE.md", "CLIENT_RE_QUEUE.md")
+
+
+def check_queue_growth_cap(bridge_root=None, base="origin/main"):
+    """RED when THIS BRANCH grows GAME_TEST_QUEUE.md or CLIENT_RE_QUEUE.md by
+    more than QUEUE_GROWTH_CAP_PER_PR bytes versus `base` - independent of
+    whether the file is over its BRIDGE_FILE_SIZE_CEILINGS entry, so a PR
+    can be caught here well before that ceiling is anywhere close.
+    Shrinking is never capped, by any amount.
+
+    Returns True (both files grew no more than the cap, or shrank, or are
+    unchanged), False (one grew past the cap - RED), None (bridge_root is
+    not a pf_bridge checkout, or `base` does not resolve - INCONCLUSIVE,
+    same convention as check_bridge_file_sizes).
+    """
+    root = pathlib.Path(bridge_root) if bridge_root is not None \
+        else pathlib.Path(__file__).resolve().parent.parent
+    base_resolves = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(root), "rev-parse",
+         "--verify", "--quiet", base + "^{commit}"],
+        capture_output=True, text=True, errors="replace",
+    ).returncode == 0
+    missing, over = [], []
+    for name in QUEUE_GROWTH_WATCHED_FILES:
+        p = root / name
+        if not p.is_file():
+            missing.append(name)
+            continue
+        size = p.stat().st_size
+        base_size = _git_blob_size(root, base, name) if base_resolves else None
+        # A brand-new file has no "before" - its whole size is the growth.
+        growth = size if base_size is None else (size - base_size)
+        red = growth > QUEUE_GROWTH_CAP_PER_PR
+        print("  %s %-20s grew %9d bytes this branch (cap %9d)"
+              % ("RED" if red else "ok ", name, growth,
+                 QUEUE_GROWTH_CAP_PER_PR))
+        if red:
+            over.append(name)
+    if missing:
+        print("[queuegrowth] INCONCLUSIVE - %s not found under %s."
+              % (", ".join(missing), root))
+        return None
+    if not base_resolves:
+        print("[queuegrowth] INCONCLUSIVE - %s does not resolve in %s."
+              % (base, root))
+        print("              git fetch origin main, or pass --base.")
+        return None
+    if over:
+        print("[queuegrowth] RED - %d file(s) grew more than %d B on this"
+              " branch vs %s" % (len(over), QUEUE_GROWTH_CAP_PER_PR, base))
+        print("              (chief D11, COO-DECISION 20260906_1726 item 3)."
+              "  Split into more")
+        print("              than one PR, or move the longest ticket bodies"
+              " to tickets/<id>.md.")
+        return False
+    print("[queuegrowth] PASS - neither queue file grew more than %d B on"
+          " this branch vs %s." % (QUEUE_GROWTH_CAP_PER_PR, base))
+    return True
+
+
+# LANE-B `20260906_1050` (ASK-COO), accepted as chief's job by
+# COO-DECISION 20260906_1148 item 3: round `p4ts3e` re-did work round
+# `4tnhzw` had already finished on main, because `4tnhzw` consumed
+# COO-DECISION `0748`/`0844` in full but never wrote the `.CONSUMED.txt`
+# stub COMMON_LANE_ROUND already requires - so the mailbox kept showing both
+# letters as "waiting for you" for the next round of the SAME lane. Advisory
+# only, never RED: a round may deliberately consume only part of a letter,
+# and text-scanning a round file cannot tell partial from forgotten.
+ROUND_FILE_PREFIX_TO_TAG = {
+    "A": "LANE-A", "B": "LANE-B", "DB": "LANE-DB", "GM": "LANE-GM",
+    "CS": "LANE-CS", "UI": "LANE-UI", "Q": "LANE-Q", "K": "LANE-K",
+}
+
+# pf-adversary (round `t0funk`), MEASURED against the real notes_to_chief/
+# corpus, not assumed: an exact-string ADDRESSEE match against "LANE-E"
+# misses the great majority of letters actually addressed to chief. Real
+# spellings in this repository include "chief" (lower-case, the single most
+# common one), "CHIEF", "LANE-CHIEF", "chief (LANE-E)", and "LANE-E
+# (chief)" - a survey of every ADDRESSEE line in notes_to_chief/*.md this
+# round counted 178 chief-addressed letters under some spelling of "chief"
+# against 106 under "LANE-E". Matched by SUBSTRING (case-insensitive)
+# against the whole ADDRESSEE line, not equality - the same shape
+# COMMON_LANE_ROUND section "source of truth" #2 already uses
+# (`grep -l "ADDRESSEE: <TAG>"`), which is why it survives a
+# comma-separated multi-lane line ("ADDRESSEE: LANE-A, LANE-B (copy: ...)")
+# where an exact first-token match does not.
+LANE_ADDRESSEE_ALIASES = {
+    "LANE-E": ("LANE-E", "CHIEF"),
+}
+
+# A letter addressed to every lane is addressed to this one too. Spelled as
+# \u escapes to keep this file's own source ASCII, the house rule
+# COMMON_LANE_ROUND states for code (this file is outside the gate's cp874
+# scan prefixes, but there is no reason to be the one non-ASCII exception).
+_UNIVERSAL_ADDRESSEE_MARKERS = (
+    "ALL",
+    "ทุกสาย",  # thuk saai - "every lane"
+    "ทุกคน",  # thuk khon - "everyone"
+)
+
+
+def _addressed_to_own_lane(addressee_line, own_tag):
+    """True when a letter's raw ADDRESSEE: line reaches `own_tag`.
+
+    Substring, case-insensitive, against the WHOLE line (not the first
+    token) - deliberately generous, for the two reasons above: real
+    ADDRESSEE lines are free text ("LANE-UI (owner of ...) - cc chief,
+    COO", "LANE-A, LANE-B"), and this check is advisory-only, so a false
+    WARN costs a reader one glance while a false PASS defeats the whole
+    point (pf-adversary's own finding on the exact-match version this
+    replaced).
+    """
+    text = addressee_line.upper()
+    if any(marker.upper() in text for marker in _UNIVERSAL_ADDRESSEE_MARKERS):
+        return True
+    aliases = LANE_ADDRESSEE_ALIASES.get(own_tag, (own_tag,))
+    return any(alias in text for alias in aliases)
+
+
+# Lane round files: `<PREFIX>_<...>.md` (PREFIX one of the table above).
+# Chief round files: `R<N>_<...>.md`, optionally suffixed with a bare
+# lowercase letter for a same-round continuation file (`R330b_...`,
+# `R341b_...` - real names on main, both missed by the original `R[0-9]+_`
+# until pf-adversary measured it against rounds/) - own tag is LANE-E,
+# hard-coded below rather than added to the table, since "R" is not a
+# claim-PR prefix any lane opens.
+_ROUND_FILENAME_RE = re.compile(r"^(?:([A-Z]{1,2})_|R[0-9]+[a-z]?_)")
+_LETTER_MENTION_RE = re.compile(r"notes_to_chief/([A-Za-z0-9_.-]+?\.md)\b")
+_ADDRESSEE_RE = re.compile(r"^ADDRESSEE:\s*(.+?)\s*$", re.MULTILINE)
+
+
+def check_consumed_stub_warning(bridge_root=None, base="origin/main"):
+    """WARN (print only - never appears in main()'s `results`, so it can
+    never make PREFLIGHT RED or INCONCLUSIVE by itself) for every
+    notes_to_chief/ letter that a round file NEW on this branch mentions by
+    name, is addressed (ADDRESSEE:) to the SAME lane that wrote that round
+    file, and has no matching <name>.md.CONSUMED.txt on this branch.
+
+    Returns the number of WARN lines printed (0 means PASS - always a
+    non-negative int, never treated as a `results`-list verdict since this
+    is advisory only), or None when bridge_root plainly is not a pf_bridge
+    checkout (no rounds/ or notes_to_chief/ directory) - the one case this
+    prints nothing and signals "could not run".
+    """
+    root = pathlib.Path(bridge_root) if bridge_root is not None \
+        else pathlib.Path(__file__).resolve().parent.parent
+    rounds_dir = root / "rounds"
+    notes_dir = root / "notes_to_chief"
+    if not rounds_dir.is_dir() or not notes_dir.is_dir():
+        return None
+    base_resolves = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(root), "rev-parse",
+         "--verify", "--quiet", base + "^{commit}"],
+        capture_output=True, text=True, errors="replace",
+    ).returncode == 0
+    if base_resolves:
+        diff = subprocess.run(
+            ["git", "--no-optional-locks", "-C", str(root), "diff",
+             "--name-only", "--diff-filter=A", base, "--", "rounds/"],
+            capture_output=True, text=True, errors="replace",
+        )
+        new_round_files = [line.strip() for line in diff.stdout.splitlines()
+                            if line.strip()]
+    else:
+        # No base to diff against: check every round file present instead -
+        # noisier (it can re-warn about a stub an OLDER round already owed)
+        # but still correct, and still better than printing nothing.
+        new_round_files = sorted(
+            "rounds/%s" % p.name for p in rounds_dir.glob("*.md"))
+    warned = 0
+    for relpath in new_round_files:
+        name = pathlib.Path(relpath).name
+        if name.endswith("_claim.md"):
+            continue
+        m = _ROUND_FILENAME_RE.match(name)
+        if not m:
+            continue
+        own_tag = "LANE-E" if m.group(1) is None \
+            else ROUND_FILE_PREFIX_TO_TAG.get(m.group(1))
+        if own_tag is None:
+            continue
+        fpath = root / relpath
+        if not fpath.is_file():
+            continue
+        try:
+            text = fpath.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        for letter_name in sorted(set(_LETTER_MENTION_RE.findall(text))):
+            letter_path = notes_dir / letter_name
+            if not letter_path.is_file():
+                continue
+            if (notes_dir / (letter_name + ".CONSUMED.txt")).exists():
+                continue
+            try:
+                letter_text = letter_path.read_text(
+                    encoding="utf-8", errors="replace")
+            except OSError:
+                continue
+            addressee = _ADDRESSEE_RE.search(letter_text)
+            if not addressee or not _addressed_to_own_lane(
+                    addressee.group(1), own_tag):
+                continue
+            print("[consumedstub] WARN - %s mentions"
+                  " notes_to_chief/%s (ADDRESSEE: %s) with no"
+                  % (relpath, letter_name, own_tag))
+            print("               .CONSUMED.txt stub on this branch. If this"
+                  " round really consumed it,")
+            print("               add the stub before you push"
+                  " (COMMON_LANE_ROUND \"who opens a letter")
+            print("               consumes it\"); if not - a deliberate"
+                  " partial read - ignore this line.")
+            warned += 1
+    if warned == 0:
+        print("[consumedstub] PASS - no own-lane letter mentioned by a new"
+              " round file is missing its .CONSUMED.txt stub.")
+    return warned
 
 
 def _git_blob_text(repo, ref, relname):
@@ -441,6 +688,89 @@ def check_new_skips(repo, base):
         print("        delete it, or move the pin in the same commit.")
         return False
     print("[skips] PASS - %d new skip marker(s), all pinned" % len(pinned))
+    return True
+
+
+# COO-DECISION 20260906_1846 item 1, answering SYNC_STUCK 20260906_1816:
+# AGENTS.md section 7 has said "filenames <= 100 characters, every pile"
+# since before this tool existed, but nothing ever checked it mechanically.
+# Measured this round against origin/main: notes_to_chief/ alone carries
+# 498 files over 140 characters (23 over 200, longest 222), and the real
+# cost landed on the bridge, not just as debt: Windows's own filesystem
+# refused six of them ("Filename too long"), so pf_git_sync could not
+# fast-forward past them at all. Only NEW files (added vs `base`) are
+# checked - an old long name already on main is that same debt, real but
+# not this branch's to fix by renaming (renaming would be a delete+add on
+# the bridge, which pf_git_sync's own contract refuses).
+NEW_FILENAME_LENGTH_CEILING = 100
+
+
+def check_new_filename_length(repo, base="origin/main"):
+    """RED when this branch ADDS a file whose basename is longer than
+    `NEW_FILENAME_LENGTH_CEILING` characters, compared to `base`.
+
+    Character count, not bytes: the ceiling is about what a path component
+    costs a filesystem and a terminal to display, not encoding size (unlike
+    the byte ceilings `check_bridge_file_sizes`/`check_queue_growth_cap`
+    use for file CONTENT, where the cost is bytes read).
+
+    Returns True (no added file over the ceiling), False (one or more are -
+    RED, every offending name printed), None (`repo` is not a git checkout,
+    or `base` does not resolve - INCONCLUSIVE, same convention as
+    `check_new_skips`).
+    """
+    root = pathlib.Path(repo)
+    if not (root / ".git").exists():
+        print("[filenamelen] INCONCLUSIVE - %s is not a git checkout." % root)
+        return None
+    base_resolves = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(root), "rev-parse",
+         "--verify", "--quiet", base + "^{commit}"],
+        capture_output=True, text=True, errors="replace",
+    ).returncode == 0
+    if not base_resolves:
+        print("[filenamelen] INCONCLUSIVE - %s does not resolve in %s."
+              % (base, root))
+        print("              git fetch origin main, or pass --base.")
+        return None
+    diff = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(root), "diff",
+         "--name-only", "--diff-filter=A", base],
+        capture_output=True, text=True, errors="replace",
+    )
+    added = [line.strip() for line in diff.stdout.splitlines() if line.strip()]
+    offenders = []
+    for name in added:
+        basename = pathlib.Path(name).name
+        if len(basename) <= NEW_FILENAME_LENGTH_CEILING:
+            continue
+        # A `.CONSUMED.txt` stub whose underlying letter ALREADY EXISTS at
+        # `base`: every lane's stub convention is a fixed
+        # `<letter-name>.CONSUMED.txt` suffix, so its length is entirely
+        # inherited from a name this branch did not choose and is not
+        # allowed to rename (measured against this exact commit, R375: a
+        # letter already on main at 89 characters becomes a 102-character
+        # stub with no new content in the excess 13). Only the STUB is
+        # exempt this way - a `.CONSUMED.txt` name whose own letter is ALSO
+        # new on this branch is still this branch's choice end to end.
+        if basename.endswith(".CONSUMED.txt"):
+            underlying = name[: -len(".CONSUMED.txt")]
+            if _git_blob_size(root, base, underlying) is not None:
+                continue
+        offenders.append((name, len(basename)))
+    if offenders:
+        print("[filenamelen] RED - %d new file(s) have a basename over %d"
+              " characters:" % (len(offenders), NEW_FILENAME_LENGTH_CEILING))
+        for name, length in offenders:
+            print("    %d chars: %s" % (length, name))
+        print("              Shorten the filename before you push - a name")
+        print("              already on main is old debt, not this")
+        print("              branch's, but this branch must not add a new")
+        print("              one (SYNC_STUCK 20260906_1816: Windows refused")
+        print("              to even fast-forward past six of these).")
+        return False
+    print("[filenamelen] PASS - %d new file(s), none over %d characters."
+          % (len(added), NEW_FILENAME_LENGTH_CEILING))
     return True
 
 
@@ -921,6 +1251,9 @@ MAINMERGE_SELF_TEST_CASES = 4
 BRANCHNAME_SELF_TEST_CASES = 4
 CENSUS_SELF_TEST_CASES = 2
 BRIDGESIZE_SELF_TEST_CASES = 6
+QUEUEGROWTH_SELF_TEST_CASES = 8
+CONSUMEDSTUB_SELF_TEST_CASES = 9
+FILENAMELEN_SELF_TEST_CASES = 9
 SCOREBOARD_MANUAL_SELF_TEST_CASES = 8
 
 
@@ -994,6 +1327,369 @@ def _bridgesize_self_test_cases(tmp):
         failures += 0 if ok else 1
         print("  case %-58s expected=%-5s got=%-5s %s"
               % (label[:58], expected, got, "ok" if ok else "SELF-TEST RED"))
+    return failures, ran
+
+
+def _filenamelen_git_root(tmp, dirname, added_names, base_names=()):
+    """A real git repo: `base_names` (relative paths) committed as `main`,
+    then `added_names` added in a SECOND commit on a `feature` branch - so
+    `git diff --diff-filter=A main` on the checked-out tree sees only
+    `added_names` as newly added, the same shape a real lane branch ahead
+    of `origin/main` has. Empty `added_names` still produces a valid
+    base+feature pair with nothing added, for the "nothing new" case.
+    """
+    root = pathlib.Path(tmp) / dirname
+    root.mkdir()
+    subprocess.run(["git", "init", "-q", "-b", "main", str(root)], check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.email", "t@t"],
+                    check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.name", "t"],
+                    check=True)
+    (root / ".keep").write_text("x\n", encoding="utf-8")
+    for relname in base_names:
+        path = root / relname
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("base content\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
+    subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "base"],
+                    check=True)
+    subprocess.run(["git", "-C", str(root), "checkout", "-q", "-b", "feature"],
+                    check=True)
+    for relname in added_names:
+        path = root / relname
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("x\n", encoding="utf-8")
+    if added_names:
+        subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
+        subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "add"],
+                        check=True)
+    return root
+
+
+def _filenamelen_self_test_cases(tmp):
+    """Drive check_new_filename_length() against synthetic git repos.
+
+    Nine provable shapes against `base="main"`: no files added; one short
+    new name; a name at EXACTLY the ceiling (not RED - a ceiling caps what
+    is over it, not what equals it); one character over the ceiling (RED);
+    a long full PATH whose basename alone is short (not RED - only the
+    basename is measured, the same "cost to a filesystem/terminal" the
+    ceiling is about); a `.CONSUMED.txt` stub over the ceiling whose
+    underlying letter ALREADY EXISTS at base (not RED - inherited debt,
+    R375's own real shape the day this check first ran); the same stub
+    shape but the underlying letter is ALSO new on this branch (RED - this
+    branch's own choice end to end); a repo path that is not a git
+    checkout at all (INCONCLUSIVE); and a `base` ref that does not resolve
+    (INCONCLUSIVE).
+    """
+    failures = ran = 0
+    at_ceiling_name = "a" * (NEW_FILENAME_LENGTH_CEILING - 3) + ".md"
+    over_ceiling_name = "a" * (NEW_FILENAME_LENGTH_CEILING - 2) + ".md"
+    assert len(at_ceiling_name) == NEW_FILENAME_LENGTH_CEILING
+    assert len(over_ceiling_name) == NEW_FILENAME_LENGTH_CEILING + 1
+    long_path_short_name = ("dir/" * 40) + "short.md"
+    long_letter_name = "notes/" + ("b" * 98) + ".md"  # 101-char basename
+    assert len("b" * 98 + ".md") == NEW_FILENAME_LENGTH_CEILING + 1
+
+    root_none = _filenamelen_git_root(tmp, "fl_none", [])
+    root_short = _filenamelen_git_root(tmp, "fl_short", ["notes/short.md"])
+    root_at_ceiling = _filenamelen_git_root(
+        tmp, "fl_at_ceiling", ["notes/" + at_ceiling_name])
+    root_over_ceiling = _filenamelen_git_root(
+        tmp, "fl_over_ceiling", ["notes/" + over_ceiling_name])
+    root_long_path = _filenamelen_git_root(
+        tmp, "fl_long_path", [long_path_short_name])
+    root_old_stub = _filenamelen_git_root(
+        tmp, "fl_old_stub", [long_letter_name + ".CONSUMED.txt"],
+        base_names=[long_letter_name])
+    root_new_stub = _filenamelen_git_root(
+        tmp, "fl_new_stub",
+        [long_letter_name, long_letter_name + ".CONSUMED.txt"])
+    root_not_repo = pathlib.Path(tmp) / "fl_not_repo"
+    root_not_repo.mkdir()
+
+    cases = [
+        ("no files added", root_none, "main", True),
+        ("one short new name", root_short, "main", True),
+        ("basename at exactly the ceiling - not RED",
+         root_at_ceiling, "main", True),
+        ("basename one over the ceiling - RED",
+         root_over_ceiling, "main", False),
+        ("long full path, short basename - not RED",
+         root_long_path, "main", True),
+        ("CONSUMED stub of an old (base) long letter - not RED",
+         root_old_stub, "main", True),
+        ("CONSUMED stub whose letter is ALSO new - RED",
+         root_new_stub, "main", False),
+        ("not a git checkout", root_not_repo, "main", None),
+        ("base ref does not resolve",
+         root_short, "origin/no-such-branch", None),
+    ]
+    for label, root, base, expected in cases:
+        got = check_new_filename_length(root, base=base)
+        ran += 1
+        ok = got is expected
+        failures += 0 if ok else 1
+        print("  case %-58s expected=%-5s got=%-5s %s"
+              % (label[:58], expected, got, "ok" if ok else "SELF-TEST RED"))
+    return failures, ran
+
+
+def _queuegrowth_git_root(tmp, dirname, base_sizes):
+    """A real git repo: commit GAME_TEST_QUEUE.md/CLIENT_RE_QUEUE.md as
+    `main`. `base_sizes` maps name -> byte count for a file that should
+    exist at base with a NON-default size; a name simply absent from the
+    dict still gets a 1000 B baseline file (both watched files exist by
+    default - only `base_sizes[name] = None` explicitly leaves one out, to
+    build the "new file on this branch" and "missing" cases). Caller
+    mutates the working tree afterward for "this branch"'s current state,
+    same pattern as _bridgesize_git_root.
+    """
+    root = pathlib.Path(tmp) / dirname
+    root.mkdir()
+    subprocess.run(["git", "init", "-q", "-b", "main", str(root)], check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.email", "t@t"],
+                    check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.name", "t"],
+                    check=True)
+    for name in QUEUE_GROWTH_WATCHED_FILES:
+        size = base_sizes.get(name, 1000)
+        if size is None:
+            continue
+        (root / name).write_bytes(b"x" * size)
+    (root / ".keep").write_text("x\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
+    subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "base"],
+                    check=True)
+    return root
+
+
+def _queuegrowth_self_test_cases(tmp):
+    """Drive check_queue_growth_cap() against synthetic bridge roots.
+
+    Eight provable shapes against `base="main"`: both files unchanged; one
+    grown by exactly the cap (still ok - the cap is a ceiling on growth, not
+    a strict-less-than); one grown by cap+1 (RED); one shrunk by a huge
+    amount (never capped, any size); a file new on this branch at/under the
+    cap (ok - its whole size is the "growth"); a new file over the cap
+    (RED); one of the two watched files missing entirely (INCONCLUSIVE); and
+    a `base` ref that does not resolve (INCONCLUSIVE).
+    """
+    failures = ran = 0
+    a_name, b_name = QUEUE_GROWTH_WATCHED_FILES
+
+    root_unchanged = _queuegrowth_git_root(
+        tmp, "qg_unchanged", {a_name: 1000, b_name: 1000})
+
+    root_at_cap = _queuegrowth_git_root(tmp, "qg_at_cap", {a_name: 1000})
+    (root_at_cap / a_name).write_bytes(
+        b"x" * (1000 + QUEUE_GROWTH_CAP_PER_PR))
+
+    root_over_cap = _queuegrowth_git_root(tmp, "qg_over_cap", {a_name: 1000})
+    (root_over_cap / a_name).write_bytes(
+        b"x" * (1000 + QUEUE_GROWTH_CAP_PER_PR + 1))
+
+    root_shrunk = _queuegrowth_git_root(
+        tmp, "qg_shrunk", {b_name: 5 * QUEUE_GROWTH_CAP_PER_PR})
+    (root_shrunk / b_name).write_bytes(b"x" * 10)
+
+    root_new_ok = _queuegrowth_git_root(tmp, "qg_new_ok", {a_name: None})
+    (root_new_ok / a_name).write_bytes(b"x" * (QUEUE_GROWTH_CAP_PER_PR - 1))
+
+    root_new_over = _queuegrowth_git_root(tmp, "qg_new_over", {b_name: None})
+    (root_new_over / b_name).write_bytes(
+        b"x" * (QUEUE_GROWTH_CAP_PER_PR + 1))
+
+    root_missing = _queuegrowth_git_root(
+        tmp, "qg_missing", {a_name: 64, b_name: None})
+
+    cases = [
+        ("both unchanged vs base", root_unchanged, "main", True),
+        ("grown by exactly the cap - not RED", root_at_cap, "main", True),
+        ("grown by cap+1 - RED", root_over_cap, "main", False),
+        ("shrunk by far more than the cap - never capped",
+         root_shrunk, "main", True),
+        ("new file at/under the cap", root_new_ok, "main", True),
+        ("new file over the cap", root_new_over, "main", False),
+        ("one watched file missing entirely", root_missing, "main", None),
+        ("base ref does not resolve",
+         root_unchanged, "origin/no-such-branch", None),
+    ]
+    for label, root, base, expected in cases:
+        got = check_queue_growth_cap(root, base=base)
+        ran += 1
+        ok = got is expected
+        failures += 0 if ok else 1
+        print("  case %-58s expected=%-5s got=%-5s %s"
+              % (label[:58], expected, got, "ok" if ok else "SELF-TEST RED"))
+    return failures, ran
+
+
+def _consumedstub_git_root(tmp, dirname):
+    """A real git repo with a base commit holding nothing under rounds/ or
+    notes_to_chief/ yet - every case adds its round file and letters to the
+    WORKING TREE only, uncommitted, exactly like the real thing: the round
+    file and its stub are new-on-this-branch relative to `main`.
+    """
+    root = pathlib.Path(tmp) / dirname
+    root.mkdir()
+    (root / "rounds").mkdir()
+    (root / "notes_to_chief").mkdir()
+    subprocess.run(["git", "init", "-q", "-b", "main", str(root)], check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.email", "t@t"],
+                    check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.name", "t"],
+                    check=True)
+    (root / ".keep").write_text("x\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
+    subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "base"],
+                    check=True)
+    return root
+
+
+def _consumedstub_committed_git_root(
+        tmp, dirname, letter_name, addressee, round_relname):
+    """A real git repo where the round file and its letter are COMMITTED on
+    a branch ahead of `main`, not left uncommitted in the working tree -
+    the shape `base_resolves=True`'s `git diff --diff-filter=A` path
+    actually reads on a real push. `_consumedstub_git_root`'s cases all
+    pass an unresolvable base on purpose to reach the *other* branch (no
+    base -> scan every file on disk); pf-adversary (round `t0funk`)
+    measured that as a result NEITHER branch of check_consumed_stub_
+    warning's own two code paths that read git output was exercised by the
+    five original cases - only the disk-glob fallback was. This one drives
+    the real thing: `main` stays at the base commit, `feature` adds the
+    round file and the letter in a second commit, matching a lane branch
+    ahead of `origin/main`.
+    """
+    root = pathlib.Path(tmp) / dirname
+    root.mkdir()
+    (root / "rounds").mkdir()
+    (root / "notes_to_chief").mkdir()
+    subprocess.run(["git", "init", "-q", "-b", "main", str(root)], check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.email", "t@t"],
+                    check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.name", "t"],
+                    check=True)
+    (root / ".keep").write_text("x\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
+    subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "base"],
+                    check=True)
+    subprocess.run(["git", "-C", str(root), "checkout", "-q", "-b", "feature"],
+                    check=True)
+    (root / "notes_to_chief" / letter_name).write_text(
+        "[from: COO]\nADDRESSEE: %s\ncc: nobody\n\nbody.\n" % addressee,
+        encoding="utf-8")
+    (root / "rounds" / round_relname).write_text(
+        "round body mentions notes_to_chief/%s here.\n" % letter_name,
+        encoding="utf-8")
+    subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
+    subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "round"],
+                    check=True)
+    return root
+
+
+def _consumedstub_self_test_cases(tmp):
+    """Drive check_consumed_stub_warning() against synthetic bridge roots.
+
+    Nine provable shapes: the LANE-B `p4ts3e` incident itself (own-lane
+    letter named, no stub - 1 WARN); the same letter WITH its stub (0 WARN);
+    a letter named that is addressed to a DIFFERENT lane (0 WARN - not this
+    lane's to consume); a `_claim.md` round file, which is never scanned (0
+    WARN even though it names an unconsumed own-lane letter); a
+    bridge_root missing rounds/ or notes_to_chief/ entirely (None); the
+    real committed-branch code path (1 WARN, not the disk-glob fallback);
+    a comma-separated multi-lane ADDRESSEE line (1 WARN - pf-adversary's
+    own finding on the exact-match version this replaced); chief addressed
+    as "CHIEF" rather than "LANE-E" (1 WARN, same finding); and a same-round
+    continuation file name like `R330b_...md` (1 WARN, also pf-adversary,
+    also a real name under rounds/ on main today).
+    """
+    failures = ran = 0
+
+    def letter(root, name, addressee):
+        (root / "notes_to_chief" / name).write_text(
+            "[from: COO]\nADDRESSEE: %s\ncc: nobody\n\nbody.\n" % addressee,
+            encoding="utf-8")
+
+    def stub(root, name):
+        (root / "notes_to_chief" / (name + ".CONSUMED.txt")).write_text(
+            "CONSUMED.\n", encoding="utf-8")
+
+    def round_file(root, relname, mentions):
+        (root / "rounds" / relname).write_text(
+            "round body mentions notes_to_chief/%s here.\n" % mentions,
+            encoding="utf-8")
+
+    letter_name = "20260906_1050_COO-DECISION-test.md"
+
+    root_forgotten = _consumedstub_git_root(tmp, "cs_forgotten")
+    letter(root_forgotten, letter_name, "LANE-B")
+    round_file(root_forgotten, "B_20260906_1200_test_round.md", letter_name)
+
+    root_stubbed = _consumedstub_git_root(tmp, "cs_stubbed")
+    letter(root_stubbed, letter_name, "LANE-B")
+    stub(root_stubbed, letter_name)
+    round_file(root_stubbed, "B_20260906_1200_test_round.md", letter_name)
+
+    root_other_lane = _consumedstub_git_root(tmp, "cs_other_lane")
+    letter(root_other_lane, letter_name, "LANE-A")
+    round_file(root_other_lane, "B_20260906_1200_test_round.md", letter_name)
+
+    root_claim_only = _consumedstub_git_root(tmp, "cs_claim_only")
+    letter(root_claim_only, letter_name, "LANE-B")
+    round_file(root_claim_only, "B_20260906_1200_test_round_claim.md",
+               letter_name)
+
+    root_not_checkout = pathlib.Path(tmp) / "cs_not_checkout"
+    root_not_checkout.mkdir()
+
+    root_committed = _consumedstub_committed_git_root(
+        tmp, "cs_committed", letter_name, "LANE-B",
+        "B_20260906_1200_test_round.md")
+
+    root_multilane = _consumedstub_git_root(tmp, "cs_multilane")
+    letter(root_multilane, letter_name, "LANE-A, LANE-B (copy: chief, COO)")
+    round_file(root_multilane, "B_20260906_1200_test_round.md", letter_name)
+
+    root_chief_alias = _consumedstub_git_root(tmp, "cs_chief_alias")
+    letter(root_chief_alias, letter_name, "CHIEF")
+    round_file(root_chief_alias, "R400_test_round.md", letter_name)
+
+    root_continuation = _consumedstub_git_root(tmp, "cs_continuation")
+    letter(root_continuation, letter_name, "LANE-E")
+    round_file(root_continuation, "R330b_test_round.md", letter_name)
+
+    cases = [
+        ("own-lane letter named, no stub - the p4ts3e incident",
+         root_forgotten, "origin/no-such-branch", 1),
+        ("same shape, stub present", root_stubbed, "origin/no-such-branch", 0),
+        ("letter addressed to a different lane",
+         root_other_lane, "origin/no-such-branch", 0),
+        ("only a _claim.md round file exists - never scanned",
+         root_claim_only, "origin/no-such-branch", 0),
+        ("real committed-branch diff path, base resolves",
+         root_committed, "main", 1),
+        ("comma-separated multi-lane ADDRESSEE line",
+         root_multilane, "origin/no-such-branch", 1),
+        ("chief addressed as CHIEF, not LANE-E",
+         root_chief_alias, "origin/no-such-branch", 1),
+        ("same-round continuation file name (R330b-style)",
+         root_continuation, "origin/no-such-branch", 1),
+    ]
+    for label, root, base, expected in cases:
+        got = check_consumed_stub_warning(root, base=base)
+        ran += 1
+        ok = got == expected
+        failures += 0 if ok else 1
+        print("  case %-58s expected=%-5s got=%-5s %s"
+              % (label[:58], expected, got, "ok" if ok else "SELF-TEST RED"))
+    got = check_consumed_stub_warning(root_not_checkout, base="main")
+    ran += 1
+    ok = got is None
+    failures += 0 if ok else 1
+    print("  case %-58s expected=%-5s got=%-5s %s"
+          % ("not a pf_bridge checkout", None, got, "ok" if ok else "SELF-TEST RED"))
     return failures, ran
 
 
@@ -1356,6 +2052,15 @@ def _self_test():
         bs_failures, bs_ran = _bridgesize_self_test_cases(tmp)
         failures += bs_failures
         ran += bs_ran
+        fl_failures, fl_ran = _filenamelen_self_test_cases(tmp)
+        failures += fl_failures
+        ran += fl_ran
+        qg_failures, qg_ran = _queuegrowth_self_test_cases(tmp)
+        failures += qg_failures
+        ran += qg_ran
+        cs_stub_failures, cs_stub_ran = _consumedstub_self_test_cases(tmp)
+        failures += cs_stub_failures
+        ran += cs_stub_ran
         sm_failures, sm_ran = _scoreboard_manual_self_test_cases(tmp)
         failures += sm_failures
         ran += sm_ran
@@ -1365,7 +2070,9 @@ def _self_test():
     expected_cases = (
         len(cases) + 2 + MAINMERGE_SELF_TEST_CASES
         + BRANCHNAME_SELF_TEST_CASES + CENSUS_SELF_TEST_CASES
-        + BRIDGESIZE_SELF_TEST_CASES + SCOREBOARD_MANUAL_SELF_TEST_CASES
+        + BRIDGESIZE_SELF_TEST_CASES + FILENAMELEN_SELF_TEST_CASES
+        + QUEUEGROWTH_SELF_TEST_CASES
+        + CONSUMEDSTUB_SELF_TEST_CASES + SCOREBOARD_MANUAL_SELF_TEST_CASES
     )
     if ran != expected_cases:
         # pf-adversary R328 D3: the old green line was the string "9 cases",
@@ -1461,9 +2168,18 @@ def main():
                check_precondition_census(repo),
                check_branch_is_mergeable_by_the_reaper(repo),
                check_bridge_file_sizes(base=args.base),
+               check_queue_growth_cap(base=args.base),
+               check_new_filename_length(repo, base=args.base),
+               check_new_filename_length(
+                   pathlib.Path(__file__).resolve().parent.parent,
+                   base=args.base),
                check_scoreboard_manual_rows(
                    base=args.base,
                    allow_manual_edit=args.allow_manual_scoreboard_edit)]
+    # Advisory only (chief D-something, LANE-B 20260906_1050): never added to
+    # `results` - a forgotten .CONSUMED.txt stub is a warning, not a reason
+    # to block a push that is otherwise clean.
+    check_consumed_stub_warning(base=args.base)
     if args.pr_body is None:
         # Open skip with a reason, never a silent one (AGENTS.md section 7).
         # Not appended to `results`: most callers run this tool for the cp874
@@ -1503,7 +2219,8 @@ def main():
           " + precondition census agrees")
     print("                + both branches are mergeable by the reaper"
           " + no bridge file grew past its ceiling on this branch")
-    print("                + no manual scoreboard row was touched).")
+    print("                + neither queue file grew past its per-PR cap"
+          " + no manual scoreboard row was touched).")
     print("NOTE: this does NOT promise a green gate - Windows-only runtime")
     print("failures are out of scope.  A RED or INCONCLUSIVE preflight means")
     print("DO NOT PUSH until it is fixed (AGENTS.md section 7).")
