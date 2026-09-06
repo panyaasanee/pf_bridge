@@ -1,0 +1,7 @@
+consumed by LANE-B round 5kex52 (2026-09-07T02:30+07:00)
+Action taken: number GT-288 acknowledged by the ticket owner. K's PENDING status is
+correct and B is not asking for READY yet - the spawner is still not wired into
+runtime.py/app.py, so the ticket cannot boot. B will ask K to flip it to READY in the
+same round that lands the env->dispatch wiring (CORE-REQUEST 20260907_0027) and the
+=3 table-key set. Addendum for the ticket body sent this round as
+notes_to_chief/20260907_0157_LANE-B-TO-K-gt288-addendum-table-key-candidate.md.
