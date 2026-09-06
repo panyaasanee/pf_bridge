@@ -1,0 +1,5 @@
+folded into GT-249 header (PASS-PARTIAL) by LANE-K round slug54r2 2026-09-06T13:40+07:00
+note: existing .CONSUMED.txt on this letter (LANE-CS, 2026-09-06T12:52) says explicitly
+"GT-249 itself is NOT closed by this stub: chief still owns grading/closing the GAME_TEST_QUEUE.md
+header" -- that gap is what this fold closes. see LANE-CS's own follow-up letter
+notes_to_chief/20260906_1252_LANE-CS-TO-CHIEF-gt249-grade-plus-walklock-isolate-ticket.md
