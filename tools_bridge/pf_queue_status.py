@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # pf_queue_status.py - generate one canonical queue-status table from ticket HEADERS
 # (not the hand-maintained index). Scans GAME_TEST_QUEUE.md + CLIENT_RE_QUEUE.md + archive/*QUEUE*ARCHIVE*.md
-# Output: pf_bridge/QUEUE_STATUS_SNAPSHOT.md  (derived file - safe to regenerate anytime)
+# Output: pf_bridge/QUEUE_STATUS_SNAPSHOT.md, but ONLY when that file is this
+# generator's own output (first line = the DERIVED FILE banner).  LANE-K keeps a
+# hand-authored snapshot at the same path that ka1-A schedules the capture bus
+# from, so when the file is not ours this writes QUEUE_STATUS_SNAPSHOT.generated.md
+# and says so.  Never copy one over the other by hand.
 # Rules implemented:
 #  - live file wins over archive; ticket present in BOTH with open-status in live but closed in archive => CONFLICT flag
 #  - open tickets missing from the hand index => DRIFT list
@@ -31,19 +35,37 @@ STRIKE = re.compile(r"~~.*?~~", re.S)
 # to READY; EVIL-PORT-FIRST-EYES-001 -> FIRST-PASS-EYES-001 moved an open
 # ticket to PASS and took "open in live" from 107 to 106 with no warning).
 # The fix is deliberately narrow: blank out ONLY the slug that immediately
-# follows the ticket id.  A real status token (BLOCKED-ON-WIRING, PASS/DONE)
-# never ends in -<3 digits>, so no status can be eaten by this.
+# follows the ticket id.  R373 claimed here that "no status can be eaten by
+# this" because a status never ends in -<3 digits>; pf-adversary measured that
+# claim false in the same round.  The house writes real blocker statuses of the
+# shape BLOCKED-ON-RE-266 (3 live occurrences today: GT-184, GT-186, RE-266),
+# which does end in -<3 digits> and which _strip_slug would blank, dropping the
+# header through to whatever status word came next.  So a candidate whose tail
+# is a ticket reference (-RE-nnn / -GT-nnn) is left alone: that is a pointer at
+# another ticket, never an ordinal, and no house slug ends that way.
 SLUG_AFTER_ID = re.compile(r"((?:GT|RE)-\d{3}\W{0,4})([A-Z0-9][A-Z0-9-]*-\d{3})\b")
+SLUG_IS_STATUS_REF = re.compile(r"-(?:RE|GT)-\d{3}$")
 # A ticket body that still carries a wiring placeholder cannot be booted, no
 # matter what its header says (LANE-A 20260906_1041 item 4: GT-079/GT-080 are
 # READY in their headers while the server command line in the body is still
 # <CHIEF_FILLS_THIS_IN_AT_WIRING_TIME>).  Booting one burns an owner session.
-PLACEHOLDER = re.compile(r"<[A-Z][A-Z0-9_]{5,}>")
+# R373 used <[A-Z][A-Z0-9_]{5,}> and pf-adversary measured the false positives:
+# the house's own <YYYYMMDD_HHMM> letter-naming convention and <PREFIX> from the
+# round-file convention both matched, and so would std::vector<UINT32> in a code
+# sample.  A ticket body quoting the letter convention would have landed under a
+# heading that says "do not boot regardless of the header".  Two or more
+# underscores keeps <CHIEF_FILLS_THIS_IN_AT_WIRING_TIME> and drops all three.
+PLACEHOLDER = re.compile(r"<[A-Z][A-Z0-9]*(?:_[A-Z0-9]+){2,}>")
 # LANE-A 20260906_1041 item 3: three different arbiters were answering "which
 # tickets can board the attended bus" with three different numbers, and the 19
 # in R364 came from an ad-hoc regex that was never committed.  Count it here,
 # in the file everyone already runs, so the argument is over one number.
-ATTENDED = re.compile(r"^\s*(?:[*_`>\-]{0,4}\s*)ATTENDED:", re.M)
+# R373's leading run could not contain a space, so 7 of the 122 ATTENDED: lines
+# already in the two queues did not match: "- **ATTENDED:**", "> **ATTENDED:**",
+# "### `ATTENDED:`" (RE-285 today) and an emoji-led one.  A lane would then be
+# told to add a block that already exists.  Thai and Latin letters are \w, so
+# allowing any run of non-word characters cannot swallow a sentence.
+ATTENDED = re.compile(r"^[^\w\n]{0,16}ATTENDED:", re.M)
 
 
 def _strip_slug(line):
@@ -53,7 +75,11 @@ def _strip_slug(line):
     spaces rather than deleted so that every column offset in the line (and so
     every message that quotes it) stays where it was.
     """
-    return SLUG_AFTER_ID.sub(lambda m: m.group(1) + " " * len(m.group(2)), line)
+    def blank(m):
+        if SLUG_IS_STATUS_REF.search(m.group(2)):
+            return m.group(0)
+        return m.group(1) + " " * len(m.group(2))
+    return SLUG_AFTER_ID.sub(blank, line)
 STATUS = re.compile(r"\b(PASS/DONE|BOUNDED-NEGATIVE|AWAITING-OBSERVER|AWAITING-DECISION|READY-CONDITIONAL|BLOCKED-ON-WIRING|BLOCKED-ON-TOOL|BLOCKED-CONDITIONAL|BLOCKED-BY|NO-RESULT|ANSWERED|FALSIFIED|CANCELLED|CLOSED|PENDING|BLOCKED|PARTIAL|READY|OPEN|HOLD|DONE|PASS|FAIL)\b")
 CLOSED = {"PASS","PASS/DONE","CLOSED","DONE","ANSWERED","FALSIFIED","BOUNDED-NEGATIVE","ARCHIVED-STUB","CANCELLED","FAIL"}
 # One status marker pattern, used for the header and for the body scan alike
@@ -65,8 +91,8 @@ MARKED_STATUS = re.compile(
 # a status word, so it can be asked about one particular match rather than
 # about the line as a whole.
 MARKER_TAIL = re.compile(
-    r"(?:\*\*|\[|\(|[\U0001F7E0-\U0001F7EB\U0001F534\U0001F535\U0001F527"
-    r"\u26D4\u2705\u2014\u00B7])\s*\(?\*{0,2}$")
+    r"(?:\*\*|\[|/|[\U0001F7E0-\U0001F7EB\U0001F534\U0001F535\U0001F527"
+    r"\U0001F6AB\u274C\u26D4\u2705\u2014])\s*\(?\*{0,2}$")
 
 def scan(path):
     out = {}
@@ -78,7 +104,12 @@ def scan(path):
     hdr_idx = [i for i, l in enumerate(lines) if HDR.match(l)]
     for n, i in enumerate(hdr_idx):
         tid = HDR.match(lines[i]).group(1)
-        stop = hdr_idx[n+1] if n+1 < len(hdr_idx) else min(i+40, len(lines))
+        # The last ticket's body is the rest of the file, not 40 lines of it.
+        # The old i+40 cap hid RE-285's own "### `ATTENDED:`" stub 45 lines
+        # below its header, so the new counter reported it as missing a block
+        # it actually has.  Status resolution is unaffected: the body scan
+        # below still stops at i+16.
+        stop = hdr_idx[n+1] if n+1 < len(hdr_idx) else len(lines)
         body = "\n".join(lines[i:stop])
         if tid not in flags:
             flags[tid] = (bool(PLACEHOLDER.search(body)),
@@ -100,17 +131,36 @@ def scan(path):
         # header is now read with the SAME marker-anchored pattern the body
         # scan below has always used: a status counts only where it stands
         # right after a status marker (an emoji, a bold run, a bracket), which
-        # is how every house header actually writes its verdict.  A status word
-        # sitting mid-sentence ("wire = PASS", "GT-121 \u0E1C\u0E48\u0E32\u0E19 (PASS)") no longer
-        # counts anywhere.  When the header therefore says nothing, the body
-        # scan runs exactly as before, and a ticket with no marker anywhere is
-        # UNKNOWN - which keeps it in the OPEN table.  That asymmetry is on
-        # purpose: a ticket wrongly listed open costs one read, a ticket
-        # wrongly listed closed costs one burnt attended session.
+        # is how every house header actually writes its verdict.
+        #
+        # R374, paying pf-adversary's review of R373: the marker rule alone was
+        # not enough either, and the counterexample R373's own comment promised
+        # could not happen did happen.  GT-188's header reads "checkpoint 1 =
+        # CANCELLED - covered by GT-216** (PASS ...) ... checkpoint 2 ... not
+        # closed yet": the CANCELLED was rejected (its emoji was missing from
+        # the marker set) and GT-216's PASS was accepted as GT-188's verdict.
+        # So a CLOSED-set status must ALSO stand before any OTHER ticket id in
+        # the header - a verdict written after another ticket's number belongs
+        # to that ticket.  This is the same narrowing the index lines already
+        # got, applied where it was missing.  It is deliberately NOT applied to
+        # open statuses: doing that lost the real status of six open tickets
+        # (GT-074, GT-109, GT-110, GT-160, GT-253, RE-261) for nothing, because
+        # reading an open ticket as open by a different word is not a failure.
+        # Same asymmetry throughout: a ticket wrongly listed open costs one
+        # read, a ticket wrongly listed closed costs one burnt attended
+        # session.  When the header says nothing the body scan runs as before,
+        # and a ticket with no marker anywhere is UNKNOWN - which keeps it in
+        # the OPEN table.
+        others = [x for x in TID.finditer(hl) if x.group(1) != tid]
+        cut = others[0].start() if others else len(hl)
         for m in STATUS.finditer(hl):
-            if m.group(1) not in CLOSED or MARKER_TAIL.search(hl[:m.start()]):
-                status, src = m.group(1), "header"
+            if m.group(1) not in CLOSED:
+                status, src = m.group(1), "header"       # open: anywhere
                 break
+            if m.start() < cut and MARKER_TAIL.search(hl[:m.start()]):
+                status, src = m.group(1), "header"       # closed: marked, and
+                break                                    # before another id
+
         if status is None:
             for j in range(i+1, min(stop, i+16)):
                 clean = _strip_slug(STRIKE.sub(" ", lines[j]))
@@ -253,5 +303,32 @@ out.append("|---|---|---|")
 for r in sorted(rows, key=lambda x: x[0]):
     if r not in open_rows:
         out.append("| %s | %s | %s |" % (r[0], r[1], r[2]))
-open(os.path.join(ROOT, "QUEUE_STATUS_SNAPSHOT.md"), "w", encoding="utf-8").write("\n".join(out) + "\n")
-print("wrote QUEUE_STATUS_SNAPSHOT.md: %d tickets, %d open, drift-missing=%d, drift-closed-in-index=%d, conflicts=%d" % (len(allids), len(open_rows), len(missing_idx), len(closed_in_idx), len(conflicts)))
+# Two writers, one path, and until now no lock.  This file's own banner says
+# "regenerate with tools_bridge/pf_queue_status.py" and the header above says
+# "safe to regenerate anytime", but the QUEUE_STATUS_SNAPSHOT.md that lives on
+# main is a HAND-AUTHORED LANE-K document (its first line names the round that
+# wrote it) that ka1-A reads to schedule the capture bus - and the generator
+# truncated it unconditionally.  QUEUE_STATUS_SNAPSHOT.md is also in
+# pf_git_sync.ps1 $ALLOWLIST, so one regeneration on the bridge disk pushes the
+# clobber to main and the bus is scheduled from a file nobody wrote.  So: this
+# script now refuses to overwrite a file it did not write.  It only replaces a
+# file whose first line is its own banner; anything else (including no file at
+# all being ours) goes to the sibling path and says so loudly.  Deciding who
+# owns the canonical path is not a tool's call - the letter for this round asks
+# LANE-K and the COO.
+BANNER = "DERIVED FILE - DO NOT DECIDE FROM THIS - read GAME_TEST_QUEUE.md"
+dest = os.path.join(ROOT, "QUEUE_STATUS_SNAPSHOT.md")
+try:
+    with open(dest, encoding="utf-8", errors="replace") as fh:
+        ours = fh.readline().strip() == BANNER
+except OSError:
+    ours = True          # no file yet: the path is free, take it
+if not ours:
+    dest = os.path.join(ROOT, "QUEUE_STATUS_SNAPSHOT.generated.md")
+open(dest, "w", encoding="utf-8").write("\n".join(out) + "\n")
+if not ours:
+    print("REFUSED to overwrite QUEUE_STATUS_SNAPSHOT.md: its first line is not")
+    print("this generator's banner, so somebody else wrote it (LANE-K writes a")
+    print("hand-authored snapshot at that path).  Wrote QUEUE_STATUS_SNAPSHOT.generated.md")
+    print("instead.  Read that one, and do not copy it over the other by hand.")
+print("wrote %s: %d tickets, %d open, drift-missing=%d, drift-closed-in-index=%d, conflicts=%d" % (os.path.basename(dest), len(allids), len(open_rows), len(missing_idx), len(closed_in_idx), len(conflicts)))
