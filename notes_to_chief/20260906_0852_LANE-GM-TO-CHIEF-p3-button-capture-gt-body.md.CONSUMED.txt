@@ -1,0 +1,1 @@
+folded by LANE-K round rsmsia 2026-09-06T15:09+07:00 -- ticket body placed verbatim in GAME_TEST_QUEUE.md as GT-279 GM-PANEL-BUTTON-CAPTURE-001 (letter proposed no number; LANE-K assigned 279, the next free slot after 278, 0 hit confirmed before placing).

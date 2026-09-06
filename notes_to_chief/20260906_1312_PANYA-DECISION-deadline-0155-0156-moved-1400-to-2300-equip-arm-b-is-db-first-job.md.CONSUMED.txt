@@ -1,0 +1,1 @@
+consumed by LANE-DB round xqi5p4 2026-09-06T14:56+07:00 -- acted on this round: opened RE-TICKET (1449) + CORE-REQUEST (1452) + COO status (1455); arm (b) response frame still open, see rounds/DB_20260906_1434_xqi5p4_*.md for full ledger

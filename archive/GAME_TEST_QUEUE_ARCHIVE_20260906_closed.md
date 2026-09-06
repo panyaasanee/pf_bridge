@@ -2103,3 +2103,83 @@ ATTENDED: PASS = ข้อ 4 เห็นเลขที่ตั้ง · FAIL 
 **ผู้เปิดใบ: LANE-GM (ผ่าน `notes_to_chief/20260906_0434_LANE-GM-TO-CHIEF-*`) ตาม `PANYA-ORDER 20260906_0155` -- ตั้งเลข/วาง/พับ/archive: LANE-K รอบ `n3s0rg` ตาม `COO-DECISION 20260906_1346` ข้อ 3(ก) -- ผู้บริโภคผล: LANE-GM**
 
 ---
+
+## GT-242 BACKPACK-OPEN-DOES-NOT-WIPE-THE-GROUND-001  [✅ **ปิดใบ: PASS สองชั้น (เว้น item(4) NO-RESULT) ตาม `R316` 2026-09-05T11:02+07:00 `OBSERVER_CONFIRMED: 2026-09-05T10:50+07:00`** — ยืนยันโดย `COO-DECISION 20260906_1452`: R316 คือผลปิดใบ (`GROUND_REANNOUNCE_AFTER_SECOND_PWD scene='Bg0002' items=2` ครบ + negative control `REFUSED` ตอนพื้นว่าง + ของอยู่บนจอก่อน/ระหว่าง/หลัง ตรง objective เดียวของใบ) · **`R321` (ในบล็อกประวัติด้านล่าง) BLOCKED = ความพยายามวัดซ้ำหลัง PASS แล้ว ไม่ใช่ผลใหม่ที่หักล้าง** (บูตซ้ำเกิดเพราะ R316 ไม่เคยถูกพับ ไม่ใช่เพราะผลขัดแย้งกัน) · item(4) `oldest_left` NO-RESULT แยกเป็นข้อค้นพบ "lifetime not enforced" ต่างหาก ไม่ถ่วงใบนี้ (ใบใหม่เจ้าของ **LANE-B** ยังไม่มีคนตั้งเลข ณ รอบนี้ — รอ LANE-B ส่งเนื้อใบ) · พับปิด+archive โดย **LANE-K รอบ `rsmsia`** 2026-09-06T15:09+07:00 · ---- 🔧 LANE-K พับผล รอบ `n3s0rg` 2026-09-06T14:10+07:00 — 🔴 ผลค้างพับก่อนหน้าที่รอบ `slug54` มองข้าม: **R316 2026-09-05T11:02+07:00 เสนอ PASS สองชั้น** — wire (1)(2)(3)(5) ครบ + client (7)(8)(9) ครบ (ของยังอยู่บนจอก่อน/ระหว่าง/หลังเปิดกระเป๋า) · เฉพาะข้อ (4) `oldest_left` เดี่ยว = NO-RESULT (ไม่กระทบข้ออื่น) · `OBSERVER_CONFIRMED: 2026-09-05T10:50+07:00` · จาก `notes_to_chief/20260905_1102_KA1A-R316-RESULTS-*.md` · RESULT: GT-242 PASS-สองชั้น(เว้น item4 NO-RESULT) R316 2026-09-05 · [สมมติของสาย LANE-K - รอ COO ยืนยัน] ไม่ทราบว่า R321 (2026-09-06 ด้านล่าง) ตั้งใจวัดซ้ำทั้งที่ R316 ผ่านแล้ว หรือ R316 ยังไม่นับปิดใบเพราะเหตุผลอื่น — ถามแล้วใน `notes_to_chief/20260906_1410_LANE-K-ASK-COO-gt242-r316-pass-vs-r321-blocked.md` · **ยังไม่ archive จนกว่า COO ตอบ** · ---- 🔧 LANE-K พับผล รอบ `slug54` 2026-09-06T13:15+07:00 — BLOCKED (R321 2026-09-06 §8: ต้องฆ่ามอน แต่มอนฉาก 2 เขียว/ตีไม่ได้จากบั๊ก §1 login-126-no-faction — ไม่ใช่ผลของเกณฑ์ใบนี้เอง) · RESULT: GT-242 BLOCKED R321 2026-09-06 (same as GT-220/223) · จาก notes_to_chief/20260906_1255_KA1A-R321-*.md · ✅ **READY -- บูตได้ทันที** (ปลดหัวโดย chief รอบ `rs8uyz`/R350 2026-09-05T08:2x+07:00) · **วัดจาก `main` ในรอบที่เขียน ไม่ใช่จากบันทึกรอบก่อน** (`NOW.md` `COO 1849`): `#781` merge แล้ว = `f71cb9ae` · `mob_drop_presence.py:818` มี `GROUND_REANNOUNCE_AFTER_SECOND_PWD` บน main · จุดเรียก `runtime.py:10130` `reannounce_ground(` บน main — สองครึ่งครบ · เดิม: 🟠 BLOCKED รอ `#781` (chief รอบ `kj0s6r`/R346 2026-09-05T02:3x+07:00) · ✅ **(ก) ฟังก์ชันประกาศของบนพื้นซ้ำ = อยู่บน `main` แล้ว** (`mob_drop_presence.reannounce_ground` · LANE-B ตาม `COO 20260904_1649` ข้อ 2) · 🟠 **(ข) จุดเรียกของ chief = push แล้ว รอเกต+merge ที่ `#781`** (`COO 20260904_1648` ข้อ 2 · commit `3393eb85` · ทดสอบ headless 8 ใบ มิวแทนต์ตายสองตัว · ชุดเต็ม 10360 passed / 0 failed เขียว(cloud sanity) `python3 -V` = 3.11.15) · ✅ ~~ห้ามบูตจนกว่ารอบถัดไปจะเห็น `#781` `merged=true`~~ **จ่ายแล้ว R350** (`AGENTS.md` §7: อยู่บน main ต่อเมื่อรอบถัดไปวัดได้ — R350 วัดแล้ว ดูหัวใบ) · `RECHECK` ผ่านครบ = ปลดเป็น `READY` · เปิดโดย chief รอบ `oi2r2n`/R340 · เจ้าของใบ/ผู้บริโภคผล = **chief (LANE-E)** · ผู้รัน = **Panya (attended)** ~8 นาที]
+
+> 🔴 **ใบข้อบกพร่อง ไม่ใช่ใบสำรวจ** — อาการวัดแล้ว ใบนี้พิสูจน์ว่า**ตัวแก้ได้ผล**
+> 🔴 **ห้ามผูก ห้ามต่อคิว ห้ามเกรดรวมกับ `GT-223`** (`COO 20260904_1648` ข้อ 2 คำต่อคำ) — ใบนี้อยู่ในเซสชันล็อกอินเดียว ไม่มีรีล็อกอิน
+
+- objective: ข้ออ้างเดียว -- **การเปิดกระเป๋าไม่ทำให้ของที่ยังอยู่บนพื้น (เซิร์ฟเวอร์ยังถือ ยังไม่หมดอายุ) หายไปจากจอ**
+- ที่มา (วัดแล้ว ไม่ใช่การเดา): `notes_to_chief/20260904_1430_KA1A-R309-RESULTS-*` finding 1 — ดรอป `2205601` แล้วเจ้าของ **เปิดกระเป๋าเฉย ๆ** ⇒ ของหายจากจอ · ไคลเอนต์ส่ง `CheckSecondPwdVital 0x4B98` (64 B) → เราตอบ `V110_CHECK_SECOND_PASSWORD_OK` (44 B) **ท้ายเฟรม `0B 00` = ground-list ว่าง** · หลังจากนั้นคอนโซลยังพิมพ์ `MOB_DROP_PRESENCE ... live=1 announced=0 carried=1 oldest_left=65.6s` ⇒ **ของไม่ได้หมดอายุ**
+
+- RECHECK: (รันจากราก `pf_bridge` · ข้อใดไม่ผ่าน = ยัง BLOCKED ห้ามบูต)
+  ```
+  git -C ../pirate-force-server fetch origin
+  git -C ../pirate-force-server grep -c "GROUND_REANNOUNCE_AFTER_SECOND_PWD" origin/main -- src/
+  git -C ../pirate-force-server grep -n "mob_drop_presence.reannounce_ground" origin/main -- src/pirateforce_foundation/runtime.py
+  ```
+  ข้อ 1 ต้อง **>= 1 hit** · ข้อ 2 ต้อง **>= 1 hit** และอยู่ทันทีหลังบรรทัด `actions = super().dispatch(parsed)` (`runtime.py` ~10051-10125)
+  ✅ **แก้แล้วโดย chief รอบ `kj0s6r`/R346 — คำสั่ง grep เดิมใช้ไม่ได้ ต้องแก้พร้อมโค้ดในรอบเดียวกัน** (`AGENTS.md` §7 · `NOW.md`): ชื่อโทเคนที่เคยเสนอไว้ (`GROUND_REANNOUNCE_AFTER_SECOND_PWD`) **ไม่ได้อยู่ใน `runtime.py`** — มันเป็นค่าคงที่ของ `mob_drop_presence.py` (ฟังก์ชันเป็นคนพิมพ์เอง) ⇒ grep เดิมจะได้ **0 hit ตลอดกาล** และ RECHECK จะไม่มีวันผ่าน แม้สายจะเสียบถูกทุกอย่าง · คำสั่งข้างบนคือชื่อจริงที่ลงบน `main` แล้ว
+  🔴 **จุดเสียบไม่ใช่ที่ที่ใบขอไว้เดิม และนี่คือความตั้งใจ** (วัดแล้วรอบ `kj0s6r` ด้วยการรันจริง): `GROUND_REANNOUNCE_WIRING` ชี้ไปที่บล็อกที่เรียก `make_proactive_second_password_ok` ซึ่ง **ทั้งสองบล็อกอยู่หลัง `second_password_mode == "bypass"`** ⇒ เป็นโค้ดตายบนบูต attended ทุกครั้ง (บิลด์ attended ต้องเป็น `required` มิฉะนั้นสำมะโนดับทั้ง 13 แมพ) · เฟรมตอบ 44 ไบต์ถูกส่งบนบูต `required` จริง **ผ่านการสืบทอด** (`PersistentGameSessionState(legacy.GameSessionState)` → `super().dispatch()` → `pf_login_game_server_v141.py:3864-3867`) ซึ่งเป็นเหตุที่ grep หาชื่อ vital ใน `runtime.py` ไม่เจอ · ยืนยันจากบันทึก R309 เอง: `14:18:01 client CheckSecondPwdVital 0x4B98 (64 B) -> server V110_CHECK_SECOND_PASSWORD_OK (44 B)` บนบูตไม่มีธง
+
+- db: **สำเนาเท่านั้น** `copy state\pirateforce.sqlite3 state\run_gt242_<stamp>.sqlite3` แล้วบูตทับสำเนา · sha256 canonical ก่อน/หลังต้องตรง `CANON_SHA.txt` · `PRAGMA integrity_check` = `ok` สองครั้ง
+- server args: บูตมาตรฐาน · `-SecondPasswordMode bypass` · 🔴 **ไม่มีแฟล็ก `--*-scenario`** · เก็บคอนโซลรวม `2>&1` + `capture_v141\GAME_LIVE.txt`
+  🔴🔴 **กับดัก GT-192 ซ้ำ — chief เติมบรรทัดกันไว้รอบ `kj0s6r`/R346** (`notes_to_chief/20260902_1604_LANE-GM-TO-CHIEF-gt192-server-args-line-would-disable-the-census.md`):
+  `-SecondPasswordMode bypass` **ขีดเดียว = แฟล็กของไคลเอนต์** ใส่ตรงบรรทัดคำสั่งเปิด `GameClient` เท่านั้น ·
+  🔴 **ห้ามส่ง `--second-password-mode` (สองขีด) ให้เซิร์ฟเวอร์เด็ดขาด** — ค่าที่ไม่ใช่ `required` ทำให้
+  `world_census_enabled` เป็นเท็จและ **สำมะโนดับทั้ง 13 แมพ** ⇒ ไม่มีมอนให้ฆ่า ไม่มีของตก ใบนี้กลายเป็น NO-RESULT
+  ที่ดูเหมือนความผิดของตัวแก้ · เซิร์ฟเวอร์ของใบนี้บูตด้วยค่าเริ่มต้น (`required`) เท่านั้น และ**นั่นคือบูตที่ตัวแก้ทำงาน**
+  ```
+  py -3 -u -m pirateforce_foundation.app --db state\run_gt242_<stamp>.sqlite3
+  ```
+
+- steps: (เซิร์ฟเวอร์ก่อน ไคลเอนต์ทีหลัง · ฆ่าไคลเอนต์แล้วต้องรีสตาร์ตเซิร์ฟเวอร์ก่อน · 🔴 **ห้ามพิมพ์ลงแชท** ตัวอักษรตอนแชทไม่ focus = ฮอตคีย์)
+  1. RECHECK ผ่านครบ · `LOCK_GAME` · boot stamp · sha canonical · คัดลอก DB
+  2. บูตเซิร์ฟเวอร์ใหม่สด → บูตไคลเอนต์ → ล็อกอินลงฉาก 2 → รอโหลดจบ
+  3. 🔴 **NEGATIVE CONTROL ห้ามข้าม:** ตอนพื้น**ยังไม่มีของ** เปิดกระเป๋า → ภาพ `S0` เต็มความละเอียด → ปิด · จดว่าเปิดด้วยปุ่ม/คีย์อะไร แล้วใช้ท่าเดิมทุกครั้ง
+  4. ฆ่ามอนหนึ่งตัวให้มีของตก · **อย่าเก็บ อย่าเดินหนี** · ภาพ `S1` (เห็นโมเดล + ป้ายชื่อของ) · จด **T0 = เวลา (+07:00) ของบรรทัด `MOB_LOOT_DROPS_CENSUS` ของการตกครั้งนี้**
+  5. 🔴 **ภายใน 30 วินาทีจาก T0** (อายุประกาศ 120 วิ — ช้ากว่านี้เสี่ยงวัดการหมดอายุแทน) เปิดกระเป๋าท่าเดิม · **ห้ามคลิกอะไรทั้งในแผงและบนพื้น** · รอ ~10 วิ · ภาพ `S2` **มุมเดียวกับ `S1`** เห็นทั้งแผงกระเป๋าและพื้นจุดที่ของตกในภาพเดียว
+  6. ปิดกระเป๋า · ภาพ `S3` มุมเดียวกับ `S1`
+  7. NO-CRASH: **คลิกขวาค้างลากกล้องอย่างเดียว** (🔴 ห้ามใช้ `Q`/`E` — มันหมุนตัวละครและยิง `TargetPosVital`) · ออกด้วยปุ่ม X
+  8. ปิดเซิร์ฟเวอร์ แล้วคัดหลักฐาน:
+     ```
+     findstr /C:"MOB_LOOT_DROPS_CENSUS" /C:"MOB_DROP_PRESENCE" <คอนโซลรวม>
+     findstr /C:"GROUND_REANNOUNCE_AFTER_SECOND_PWD" <คอนโซลรวม>
+     findstr /C:"CheckSecondPwdVital" /C:"V110_CHECK_SECOND_PASSWORD_OK" <คอนโซลรวม>
+     ```
+  9. sha256 ทุกไฟล์ · `integrity_check` · sha canonical ซ้ำ · **รัน teardown เสมอ** · ห้าม commit เอง
+
+- pass criteria: 🔴 **สองชั้น ห้ามใช้ชั้นหนึ่งเป็นหลักฐานของอีกชั้น** · ครบชั้นเดียว = `🟡 <ชั้นที่ครบ> ... · <ชั้นที่ขาด> = NOT MEASURED · ใบยังไม่ปิด` **ห้ามปั๊ม PASS**
+  - **wire/DB** (คอนโซล + `GAME_LIVE.txt` · ไม่ต้องมีตาคน):
+    (1) ขั้น 4 มีครบคู่ `MOB_LOOT_DROPS_CENSUS ... items=<id>:x1@<obj>` และ `MOB_DROP_PRESENCE ... live=1 announced=1 ... declared_lifetime=<n>`
+    (2) ขั้น 5 มี `CheckSecondPwdVital` ขาเข้า (64 B) + reply 44 B · คัด**ท้ายเฟรม 2 ไบต์** ของ reply — อ่านไม่ได้เขียน `tail=unread` **ห้ามเดา** · ~~`tail=0B 00` = **FAIL ชั้นนี้**~~ 🔴 **ถอนเกณฑ์นี้ทิ้ง — chief รอบ `kj0s6r`/R346 (วัดแล้ว)**: reply 44 ไบต์คือ `make_check_second_password_success()` ซึ่งถูก **พินด้วย sha256** (`second_password_bypass.SECOND_PASSWORD_OK_FRAME_SHA256`) และมาจาก v141 ที่แช่แข็ง ⇒ ท้ายเฟรมของมัน **เป็น `0B 00` เสมอและเปลี่ยนไม่ได้** ตัวแก้ของรอบนี้ต่อเฟรมประกาศซ้ำ *เพิ่ม* หลัง reply ไม่ได้แก้ตัว reply ⇒ เกณฑ์เดิมทำให้รอบที่**ทำงานถูกทุกอย่าง**ยังรายงาน FAIL ชั้น wire และใบปิดไม่ได้ตลอดกาล (เสียเวลาผู้เทส 8 นาทีโดยรับประกันว่าไม่ปิด) · **อีกอย่าง `0B 00` ไม่ใช่ "รายการของบนพื้นที่ว่าง"**: มันคือ derived-class change mask = 0 ที่ `make_runtime_vitals` ต่อท้าย **ทุกเฟรม** runtime-vitals (V99 show-message และ V100 music ก็ลงท้าย `0B 00` เหมือนกัน) ⇒ รายการของบนพื้น **ไม่มีอยู่ในเฟรม** (derived bit `0x08` ไม่ถูกตั้ง) ไม่ใช่ "มีแต่ว่าง" · คำถามว่า member ที่ไม่มีอยู่ล้าง pool ของไคลเอนต์ไหม **ยัง UNMEASURED** ตามที่ LANE-B เขียนไว้เอง (`mob_loot.py:5189-5195` `[ASSUMPTION OF LANE B - AWAITING COO]`)
+    **(2-ใหม่) แทนที่**: ขั้น 5 ต้องมี `CheckSecondPwdVital` ขาเข้า (64 B) + reply 44 B · แล้ว**ทันทีหลัง reply** ต้องมีบรรทัดคอนโซล `GROUND_REANNOUNCE_AFTER_SECOND_PWD scene=<n> items=<k>` **หนึ่งบรรทัด** (`items=0` = พื้นโล่งจริง ตรวจแล้ว · ไม่มีบรรทัดนี้เลย = **บิลด์เก่า ไม่ใช่ผลลบ** ⇒ NO-RESULT ห้ามเกรด) · `GROUND_REANNOUNCE_AFTER_SECOND_PWD_REFUSED` = ชั้นนี้ FAIL พร้อม `reason=` ที่พิมพ์มา · คัด `tail=` ของ reply ไว้เป็น**บันทึก** ไม่ใช่เกณฑ์
+    (3) `GROUND_REANNOUNCE_AFTER_SECOND_PWD scene=<n> items=<n>` อย่างน้อยหนึ่งบรรทัด**หลัง** reply ของขั้น 5 และ `items >= 1` · **0 บรรทัด = `NO-RESULT` ไม่ใช่ FAIL** (บูตบิลด์ที่ยังไม่มีตัวแก้ — รายงาน commit ที่บูต)
+    (4) `MOB_DROP_PRESENCE ... oldest_left=<s>` ที่ออก**หลัง**ขั้น 5 ต้อง `> 0` · `<= 0` หรือไม่มีบรรทัด = **`NO-RESULT` รันใหม่ให้เร็วขึ้น**
+    (5) `integrity_check` = `ok` · sha canonical ตรง · ไม่มี traceback
+    🔴 (6) **NEGATIVE CONTROL:** บรรทัด (3) ตอนขั้น 3 (พื้นว่าง) ต้อง**ไม่มี หรือ `items=0`** · ได้ `items >= 1` ตอนพื้นว่าง = **finding ต้องรายงาน**
+    **ชั้นนี้ตอบไม่ได้เลยว่าบนจอผู้เล่นเห็นของอยู่หรือหาย**
+  - **client-observable** (ต้องมีตาคน · ห้ามอนุมานจากคอนโซล):
+    (7) `S1` เห็นโมเดล + ป้ายชื่อของบนพื้น **ก่อน** เปิดกระเป๋า
+    (8) 🔴 `S2` (แผงกระเป๋าเปิด) **ยังเห็นของชิ้นเดิม ตำแหน่งเดิม** — พื้นว่าง = **FAIL ชั้นนี้ และคือข้อบกพร่องที่ใบนี้เปิดมาจับ ⇒ ผลนั้นมีค่า ต้องส่ง**
+    (9) `S3` (ปิดกระเป๋า) ยังเห็นของที่เดิม
+    (10) บันทึกสีป้ายชื่อทุกป้ายในเฟรม หนึ่งบรรทัดต่อป้ายต่อภาพ ครบ `S0`-`S3` · ไม่มีป้ายเขียน `none` ห้ามเว้นว่าง · อ่านจาก**ภาพนิ่งเต็มความละเอียดเท่านั้น** · **จดสีอย่างเดียว ห้ามอนุมานสาเหตุ** (`RE-067` เป็นเจ้าของคำถามนั้น)
+    (11) 🔴 **`G-FRAME` ทุกภาพที่ยกมาอ้าง:** `FRAME: <ไฟล์>  t=+<วินาที> จาก T0=<ISO+07:00>  dist=<หน่วยเกม> ถึงจุดที่ของตก` (วัด `dist` ไม่ได้เขียน `dist=unmeasured` ห้ามเว้นว่าง) · จดหมายผลต้องมีบรรทัด `UNMEASURED_DIST: <n>/<ทั้งหมด>`
+    🔴 (12) **`S0` ไม่ใช่หลักฐานของข้อ (8)** — รอบที่เปิดกระเป๋าตอนพื้นว่างอย่างเดียว = `NO-RESULT: ไม่มีของบนพื้นตอนเปิดกระเป๋า` **ห้ามอ่านว่า PASS**
+  🔴 ปิดใบด้วย `OBSERVER_CONFIRMED: <ISO+07:00>` เท่านั้น (`G-OBS`) · หลักฐานครบแต่ไม่มีลายเซ็นคน = `AWAITING-OBSERVER` **ไม่ใช่ PASS ไม่ใช่ FAIL**
+
+- prediction (**คำทำนาย ไม่ใช่ผลวัด** · ทำนายผิด = finding): P1 โทเคน `items>=1` **และ** `S2` เห็นของ ⇒ ผ่านสองชั้น · P2 ไม่มีโทเคนเลย ⇒ `NO-RESULT` ชี้ที่บิลด์ ไม่ใช่โค้ด · P3 มีโทเคนแต่ `S2` พื้นว่าง ⇒ **ผลที่มีค่าที่สุด** ชี้ที่รูปเฟรม/ลำดับส่ง = ใบถัดไปของ **LANE-B** · 🔴 **ผลลบมีค่าเท่าผลบวก** P2/P3 ส่งงานคนละสาย
+
+- nonclaims: ① ไม่ผูก/ไม่เกรดร่วมกับ `GT-223` ② ไม่พิสูจน์ว่าเก็บของหลังปิดกระเป๋าได้ (คนละใบ) ③ ไม่พิสูจน์ว่า `0x4B98` เป็น action เดียวที่ล้างพื้น ④ ไม่ตัดสินว่า reply 44 B "ควร" มีรูปอะไร ⑤ ไม่แตะสาเหตุสีป้าย (`RE-067`) · ไม่พิสูจน์อะไรบน canonical (บูตบนสำเนา)
+- links: `20260904_1430_KA1A-R309-RESULTS-*` finding 1 · `COO 20260904_1648` ข้อ 2 · `COO 20260904_1649` ข้อ 2 · `COO 20260904_1247` (chief ห้ามประกอบเฟรมดรอปเอง) · `runtime.py:10110-10160` · `mob_loot.py refresh_frames` · `mob_drop_presence.py CONSOLE_TOKEN` · `GT-188` cp2 (กลไกเดียวกัน) · `GT-215` (วินัย db/teardown)
+- numbering: ตัวนับร่วม (กฎ ②) คืน `240` · `RE-241` ลง `CLIENT_RE_QUEUE.md` ⇒ ใบนี้ `242`
+- result: **R316 2026-09-05T11:02+07:00** (พับโดย LANE-K รอบ `n3s0rg`, คัดลอกคำต่อคำจาก `notes_to_chief/20260905_1102_KA1A-R316-RESULTS-*.md`, ยกมาไว้ตรงนี้เพราะเป็นครั้งเดียวที่ใบนี้เคยถูกวัดจริง — ดูจดหมายต้นฉบับสำหรับ hex/ภาพเต็ม):
+  wire/DB: (1) `MOB_LOOT_DROPS_CENSUS ... items=2400046:x1,2204801:x1` + `MOB_DROP_PRESENCE live=2 announced=2` ✓ (2-ใหม่)(3) `CheckSecondPwdVital` 64B ขาเข้า → reply 44B → ทันทีตามด้วย `GROUND_REANNOUNCE_AFTER_SECOND_PWD scene='Bg0002' items=2` ✓ (4) `oldest_left` หลังขั้น 5: ไม่มีบรรทัดใหม่หลัง reply (ไม่ได้ฆ่าเพิ่ม) = **NO-RESULT เดี่ยว** (5) integrity ok · canonical sha ไม่เปลี่ยน (`4FF37060D3A2E876A41A479A348E062557D6C2FA2FF355548FAF81830A548454`) · traceback 0 (6) negative control (พื้นว่าง เซสชัน 1): ไม่ใช่ `items=0` ธรรมดา แต่เป็น `GROUND_REANNOUNCE_AFTER_SECOND_PWD_REFUSED reason=refused_cell_has_no_scene_to_publish` = finding ก (บันทึกไว้ ไม่ตัดคะแนน)
+  client-observable: (7)(8)(9) ของ (Blood/Exile crystal) อยู่ก่อนเปิด/ระหว่างเปิด (กระพริบหนึ่งที)/หลังปิด ✓ ภาพ `104708.png` (10) สีป้ายบันทึกแล้ว (มอนชมพู ของส้ม/แดงเข้ม) (11) `UNMEASURED_DIST: 4/4`
+  `OBSERVER_CONFIRMED: 2026-09-05T10:50+07:00`
+  หมายเหตุ: R316 ใช้สองเซสชัน (negative control เซสชัน 1, วัดจริงเซสชัน 2) ต่างจาก steps ในใบนี้ที่สั่งเซสชันเดียว — ผู้เขียนจดหมายอธิบายว่าเซสชันแรกเปิดกระเป๋าตอนพื้นว่างไปแล้วก่อนมีของ (เห็น negative control ไปแบบไม่ตั้งใจ) จึง relogin ทำเซสชันใหม่เพื่อให้ "เปิดกระเป๋าครั้งแรก" ตรงกับตอนมีของจริงตามที่ใบต้องการ
+
+**ผู้เปิดใบ: chief (LANE-E) รอบ `oi2r2n`/R340 ตาม `COO-DECISION 20260904_1648` ข้อ 2 -- ผู้บริโภคผล: chief (LANE-E)**
+
+
+---

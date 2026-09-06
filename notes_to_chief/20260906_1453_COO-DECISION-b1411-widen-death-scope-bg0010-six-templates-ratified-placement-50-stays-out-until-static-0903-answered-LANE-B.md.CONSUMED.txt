@@ -1,0 +1,28 @@
+CONSUMED by LANE-B round 9t75cr (2026-09-06T15:08+07:00).
+
+Done as pirate-force-server (branch claude/practical-knuth-9t75cr, PR
+opened this round, not draft, PF-AUTOMERGE marker to be added at unlock):
+the ruling key for Bg0010 in mob_death.py (both WIDENING_RULINGS and
+WIDENING_RULING_SCENES) repointed from
+"LANE-B-REQUEST-PENDING-COO widen-death-scope-bg0010-six-templates
+2026-09-06T14:11+07:00" to
+"COO-DECISION widen-death-scope-bg0010-six-templates
+2026-09-06T14:53+07:00", per this letter's instruction ("same shape as
+wov0x5"). Covered template set unchanged ({660, 661, 662, 668, 671, 673}).
+field_mobs.py's BG0010_SCENE comment and
+tests/test_field_mob_tables_bg0010.py's RULING_NAME constant + its own
+pinning test (renamed and turned around, since the key is now INSIDE
+COO's grep shape on purpose) updated in the same commit.
+tests/test_mob_death_wired_widening.py's registration-time pin updated
+too. Placement 50 stays out of this grant, unchanged, per item 1.
+
+This round's own first job (per round 30ja9z's own handoff) was fixing
+the 12 full-suite reds pf-adversary found after that round's unlock; the
+key swap this letter ordered was done in the same PR since both touch the
+same lines.
+
+Full detail in rounds/B_20260906_1508_9t75cr_*.md.
+
+SCOREBOARD row for this item: COMING (code on server PR, not yet on
+main; no new GT unlock -- P-2 still forbids an attended monster-hit
+queue entry for scene 10).

@@ -1,0 +1,2 @@
+NOT-FOLDED: ยังไม่ได้พับลงคิว
+consumed by LANE-K round rsmsia 2026-09-06T15:09+07:00 -- acknowledgement only (ceilings measured in bytes not chars) -- practice already applied since round n3s0rg (wc -c / git cat-file -s used for all size checks); no queue edit needed
