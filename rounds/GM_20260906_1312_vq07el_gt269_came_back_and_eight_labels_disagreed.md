@@ -42,7 +42,7 @@ Panya ปิดมือ ไม่ใช่ล็อกของสายนี�
 **ผิด สองทางอิสระ** (ยืนยันเองด้วยการอ่านซอร์สทีละบรรทัด ไม่ใช่รับรายงาน):
 - `app.py:733` โหลด v141 · `app.py:930/933` ติดตั้ง `legacy.game_listener` + `legacy.main` ·
   `connection.py:290` สร้างใหม่ด้วย `types.FunctionType(original.__code__, ...)` = โค้ดออบเจ็กต์เดิม ⇒
-  `print(...IDs={ids})` และ `STRUCTURAL_IDS` ของ v41 ที่อยู่ก่อน `state.dispatch(parsed)` **ทำงานจริง**
+  `print(...IDs={ids})` และ `STRUCTURAL_IDS` ของ v141 ที่อยู่ก่อน `state.dispatch(parsed)` **ทำงานจริง**
 - `runtime.py:6710` บรรทัดแรกของ `dispatch()` เรียก `_say_dispatch_nested_vitals()` ซึ่ง docstring ตัวเอง
   เขียนว่า "One log-only console line per frame" พิมพ์ `first_nested_id=0x%04X` ทุกเฟรมไม่มีเงื่อนไข ·
   ลงมาตั้งแต่ `COO-DECISION 20260904_0848` ข้อ 4 = **ก่อนที่รอบก่อนจะเขียนว่า "ไม่มี" สองวัน**
@@ -145,8 +145,12 @@ import พัง ไม่ใช่เทสเขียว)
 
 - `tests/test_gm_gmui_observed_labels.py` + `test_gm_gmui_catalog.py` + `test_gm_gmui_log_type_join.py`:
   **87 passed, 69 subtests passed** (0.29s)
-- ชุดเต็มบนกิ่งที่ merge `origin/main` แล้ว: ดูบรรทัด SCOREBOARD (รันครั้งเดียวต่อรอบ เป็นคอมมิตสุดท้าย)
-- `python3 tools_bridge/pf_gate_preflight.py --repo ../pirate-force-server`: ดูบรรทัด SCOREBOARD
+- ชุดเต็มบนกิ่งที่ merge `origin/main` แล้ว (คอมมิตสุดท้าย `74556ee`): **12227 passed, 369 skipped,
+  0 failed** (479.43s)
+- `python3 tools_bridge/pf_gate_preflight.py --repo ../pirate-force-server`: **PREFLIGHT PASS** (รันสองครั้ง
+  ก่อนแต่ละ push)
+- **PR เซิร์ฟเวอร์ `pirate-force-server#921` เปิดแล้ว ไม่ draft มี `PF-AUTOMERGE: v4` (GET ยืนยันแล้ว) รอ gate**
+  -- ยังไม่อยู่บน main จนกว่ารอบถัดไปจะยืนยันด้วย `git merge-base --is-ancestor`
 - `pf-adversary` **คืนก่อนปลดล็อก** — จ่าย D1/D2/D3/D4/D8 ในรอบนี้ ค้าง D9/D10/D11 พร้อมเหตุผล ·
   เทสของสองคอมมิตหลัง `test_lane_gm_unknown_vital_counter.py` + `test_gm_command_dispatch.py` +
   `test_gm_activity_cheat_code_dispatch.py` + `test_gm_lane_gate_name_audit.py` = **122 passed,
@@ -204,5 +208,5 @@ archive ยังไม่ลง (chief revert R368 ทั้งชุดเม�
 
 SCOREBOARD: COMING | ผู้เล่นยังทำอะไรใหม่ไม่ได้บนจอในรอบนี้ แต่ P-3 หยุดเดาแล้ว: 17 แถวของหน้าต่าง GM มี
 คำอ่านจากจอจริงครบทุกแถวอยู่ในโค้ด และ 8 แถวที่จอกับตารางพูดไม่ตรงกันถูกบันทึกเป็นคำถามเปิดแทนที่จะถูกกลบ |
-`pirate-force-server` PR ของรอบนี้ (สองคอมมิต) + `pf_bridge#1483` · จดหมาย `20260906_1322` + `1334` ·
+`pirate-force-server#921` (สองคอมมิต เปิดแล้ว รอ gate) + `pf_bridge#1483` · จดหมาย `20260906_1322` + `1334` ·
 เทสที่แตะทุกไฟล์ 87 + 122 passed · มิวแทนต์สามตัวแดงตามที่ควรก่อนคืนโค้ดจริง
