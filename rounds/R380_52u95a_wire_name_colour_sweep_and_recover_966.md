@@ -68,8 +68,13 @@
   ห้ามอ่านใบนี้ว่าชุดเต็มเขียว** ใบ PR เป็น draft อยู่แล้วทั้งจากกฎเฟรมถึงไคลเอนต์และจาก
   adversary ที่ยังไม่คืน ⇒ รอบหน้ายืนยันตัวเลขก่อนปลด draft
 
+## PR เซิร์ฟเวอร์ของรอบนี้
+`pirate-force-server#973` — **เปิดแล้ว เป็น draft ไม่มี marker** ด้วยสองเหตุผลพร้อมกัน:
+แตะเฟรมที่ส่งไคลเอนต์ (กฎ draft ยืนพื้น) และ adversary ยังไม่คืน · ยังไม่อยู่บน main
+รอบหน้ายืนยันด้วย `git merge-base --is-ancestor <sha> origin/main` ก่อนเขียนว่าอะไรลงแล้ว
+
 ## adversary
-`ADVERSARY_PENDING pirate-force-server#<ใบรอบนี้>` — สั่งตั้งแต่ต้นรอบพร้อมเริ่มงาน (ไม่ใช่ก่อน commit)
+`ADVERSARY_PENDING pirate-force-server#973` — สั่งตั้งแต่ต้นรอบพร้อมเริ่มงาน (ไม่ใช่ก่อน commit)
 ให้ตรวจ 8 ข้อ รวมทั้ง: unarmed byte-identity จริงไหม · `sweep_actors` ที่ถูกเรียกสองครั้ง pure ไหม
 · exception อื่นนอก `NameColourSweepError` ที่ตอนนี้จะทำ listener thread ตายจากจุดเรียกที่เพิ่งเกิด
 · มีเทสไหน pin ความยาว/label ของ `census_actions` ไหม · คำอ้างในคอมเมนต์ของผมข้อไหน overstated
@@ -93,4 +98,4 @@ READY/PENDING ที่ไม่อยู่ใน NOW รอเครื่อ�
 4. `AGENTS.md` §7 ≤30 KB + กฎใหม่ `2241`+`2345`+`0039`
 5. `#948` death seed แขน (ข) + ตาราง 18 เทส conftest · GT สี `0256` ตาม `2150`
 
-SCOREBOARD: COMING | เครื่องมือตอบคำถาม "ทำไมชื่อ NPC เป็นสีเขียว" บูตขึ้นได้จริงแล้ว — ตั้ง PF_NAME_COLOUR_SWEEP=1 แล้วเข้าเมือง จะมีแถวหุ่นติดป้ายยืนให้อ่านสีทีละตัว ที่เมื่อวานตั้ง env แล้วไม่มีอะไรเกิดขึ้นเลย | pirate-force-server PR รอบนี้ (recovers #966) + tests/test_name_colour_sweep_wiring.py
+SCOREBOARD: COMING | เครื่องมือตอบคำถาม "ทำไมชื่อ NPC เป็นสีเขียว" บูตขึ้นได้จริงแล้ว — ตั้ง PF_NAME_COLOUR_SWEEP=1 แล้วเข้าเมือง จะมีแถวหุ่นติดป้ายยืนให้อ่านสีทีละตัว ที่เมื่อวานตั้ง env แล้วไม่มีอะไรเกิดขึ้นเลย | pirate-force-server#973 (draft, recovers #966) + tests/test_name_colour_sweep_wiring.py
