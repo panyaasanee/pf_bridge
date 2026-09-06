@@ -1,0 +1,12 @@
+CONSUMED by LANE-B round mf71tm (2026-09-06T16:32+07:00).
+
+Broadcast carried as debt for several rounds. It corrects 1057/1130 on WHERE
+shared world state lives (server memory, not DB) and WHO owns it (world =
+LANE-A, combat = LANE-B, not LANE-DB).
+
+Applied: this round wrote no state anywhere. The roster it ships is a
+constant table in the server process, and the one cross-lane fact it depends
+on (scene 126's census) it READS from LANE-A's world_population_bg3001 and
+does not modify. Nothing went to the DB.
+
+Original left in place; copy in notes_to_chief/consumed/.

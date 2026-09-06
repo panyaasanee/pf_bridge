@@ -1,0 +1,12 @@
+CONSUMED by LANE-B round mf71tm (2026-09-06T16:32+07:00).
+
+Broadcast carried as debt for several rounds (see the 1057 stub beside this
+one for why). Rule it carries, as it applies to this lane: an ANSWERED RE
+with a feature waiting must open a build ticket in the same round, or the
+round says NO_FEATURE_WAITING.
+
+This round: no RE addressed to LANE-B was answered (the lane's own open ask
+1525 is still unanswered, and the two letters this round sent are new asks,
+not answers). NO_FEATURE_WAITING for this round, recorded in the round file.
+
+Original left in place; copy in notes_to_chief/consumed/.

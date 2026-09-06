@@ -1,0 +1,15 @@
+CONSUMED by LANE-B round mf71tm (2026-09-06T16:32+07:00).
+
+Carried as unconsumed debt by at least the last three LANE-B rounds because
+it is a broadcast (ADDRESSEE lists several lanes) whose content was already
+reflected in NOW.md; round 9t75cr's own round file names it and leaves it
+open on purpose. This round closes it rather than passing it on again.
+
+Applied, not just acknowledged: this round's shipped state is a module-level
+constant roster table (field_mob_tables_bg3001) read through the loader every
+scene shares, and the composer that reads it is a pure function of (scene,
+roster, ledger). No per-session world state was added, which is what this
+letter forbids. The round file's TWO_SESSIONS_SAME_SCENE line says the same
+thing in the shape every PR has to answer it in.
+
+Original left in place; copy in notes_to_chief/consumed/.
