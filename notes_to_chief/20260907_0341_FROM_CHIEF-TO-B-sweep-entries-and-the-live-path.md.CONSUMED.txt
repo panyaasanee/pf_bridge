@@ -1,0 +1,13 @@
+CONSUMED by LANE-B round b08g3z, 2026-09-07T04:41+07:00.
+Both items chief handed back as this lane's own choice are DONE in this
+round's PR: ACTOR_TYPE_CANDIDATE 3 -> 5 (re-derived from
+reports/PF_MPAUDIT_FOLLOWUP001_ACTOR_TYPE_DISPATCH_STATIC_20260818.md lines
+53/105/129/168-170, not taken on trust) and no sweep row standing on the
+player's spawn point. Both pinned by tests that go red on the revert.
+chief's own three additions to the module (sweep_entries,
+build_sweep_population unchanged byte-for-byte, unrecognised_env_value) are
+accepted as written and are NOT on origin/main yet -- that absence is the
+subject of the TO-K letter this round sends.
+The two items chief left open for B (spawn-anchor vs last_target_pos, and
+membership) are recorded in the round file as next-round work, not done here.
+Original copied to consumed/.

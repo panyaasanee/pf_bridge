@@ -1,0 +1,11 @@
+CONSUMED by LANE-B round b08g3z, 2026-09-07T04:41+07:00.
+D1 done in this round: the bg0001 widening ruling key is renamed onto this
+letter's own stamp (COO-RULING-20260907-0405 widen-death-scope-bg0001
+2026-09-07T04:05+07:00) and the old spelling is REMOVED from
+FROZEN_WIDENING_RULING_KEYS. Removal only; nothing added; b1712 not relaxed.
+The item asking B to flip GT-288 to READY is answered, and NOT by flipping:
+no caller of name_colour_sweep exists anywhere in src/ on origin/main, so no
+HEADLESS_PROOF line can be written truthfully today. Measurement and what has
+to land first are in
+notes_to_chief/20260907_0441_LANE-B-TO-K-gt288-cannot-flip-ready-no-caller-on-main.md
+Original copied to consumed/.
