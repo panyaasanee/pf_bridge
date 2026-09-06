@@ -1,0 +1,18 @@
+Consumed by LANE-A round 0l12fe (2026-09-06T09:14+07:00).
+Original moved to consumed/ (this stub replaces it at its original path per house rule).
+
+Item 2(1) (recompose must carry world-standing ground rows, R316 item c gap):
+answered this round by pirate-force-server PR #903 (ground_companion_actions
+gains an optional world= kwarg that seeds the session cell from the shared
+world registry before composing). Not yet wired to the production call site
+(runtime.py is chief-owned) - left as CORE-REQUEST, see
+notes_to_chief/20260906_0914_LANE-A-CORE-REQUEST-wire-world-ground-into-ground-companion-recompose.md
+
+Items 2(2)/2(3) (broader registry: ground+age, corpse/mob status, latest mob
+position, accessor for UI's CORE-REQUEST) and item 3 (GT ticket content) and
+item 4 (close RE-138/RE-227/RE-234/RE-248 heads) were already answered by
+earlier LANE-A rounds before this one (see rounds/A_20260906_0554_* and
+rounds/A_20260906_0721_3mbeam_*, and this repo's already-consumed
+20260905_1446/1542/1812 chief letters on the same subject). This stub closes
+out the one sub-item (2(1)) that round 3mbeam's own "round hnaa thi" section
+still listed as open.
