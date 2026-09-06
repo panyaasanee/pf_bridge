@@ -1,10 +1,10 @@
 # QUEUE_STATUS_SNAPSHOT — สแนปช็อตใบ READY + มี `ATTENDED:` + ยังไม่มี `RESULT`
 
 🔴 **ไฟล์นี้ generate สดโดย LANE-K ทุกรอบ ห้ามอ่านเป็นประวัติ — เชื่อเฉพาะฉบับล่าสุด** (ka1-A ใช้ไฟล์นี้จัดรถบัส capture แทนการอ่าน `GAME_TEST_QUEUE.md` 2 MB เอง)
-สร้างโดย: LANE-K รอบ `slug54` · เวลา 2026-09-06T13:15+07:00 · แหล่ง: `GAME_TEST_QUEUE.md` + `CLIENT_RE_QUEUE.md` บน `origin/main` ก่อนพับผลรอบนี้ (หลังพับผล R307/R317/R320/R321 หลายใบหลุดจากรายการนี้แล้วเพราะมี RESULT แล้ว — ดู `rounds/K_20260906_1315_slug54_*.md`)
+สร้างโดย: LANE-K รอบ `slug54r2` · เวลา 2026-09-06T13:40+07:00 · แหล่ง: `GAME_TEST_QUEUE.md` + `CLIENT_RE_QUEUE.md` บน `origin/main` หลังแก้ผล pf-adversary ของรอบ `slug54` — ดู `rounds/K_20260906_1340_slug54r2_*.md`
 ลำดับ: (1) PANYA-ORDER (2) ไมล์สโตนใน `NOW.md` (3) อายุใบ (เก่าสุดก่อน) · แยกตามชนิดบูต
 
-🔴 **ใบที่มี RESULT แล้วไม่อยู่ในรายการนี้แล้วรอบนี้** (เพิ่งพับ): GT-214 · GT-217 · GT-220 · GT-223 · GT-242 · GT-250 · GT-251 · GT-252 · GT-253 · GT-255 · GT-257 · GT-266 · GT-269 · GT-272 · RE-235 · RE-237 · RE-261 · RE-272 (รายละเอียดผล ⇒ หัวใบใน `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md` หรือจดหมายรอบ `rounds/K_20260906_1315_slug54_*.md`)
+🔴 **ใบที่มี RESULT แล้วไม่อยู่ในรายการนี้แล้ว** (พับแล้วรอบ `slug54`/`slug54r2`): GT-214 · GT-217 · GT-220 · GT-223 · GT-224 · GT-242 · GT-249 · GT-250 · GT-251 · GT-252 · GT-253 · GT-255 · GT-257 · GT-266 · GT-269 · GT-272 · RE-235 · RE-237 · RE-261 · RE-272 (รายละเอียดผล ⇒ หัวใบใน `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md` หรือจดหมายรอบ) · 🔴 **`GT-223`/`GT-224`/`GT-249` แก้เข้าใหม่รอบ `slug54r2`** — รอบ `slug54` เคยพลาด (GT-223 เขียนผิดว่า "ไม่มีผล" ทั้งที่มี FAIL จริงจาก R309 · GT-249 ไม่ถูกแตะเลยทั้งที่มี PASS-PARTIAL ค้างเกรด >30 ชม. จาก R312) เพราะจดหมายเหล่านั้นมี `.CONSUMED.txt` จากสายอื่นเพื่อจุดประสงค์อื่นอยู่ก่อนแล้ว — pf-adversary จับได้ ดู `notes_to_chief/20260906_1350_LANE-K-ASK-COO-consumed-marker-collision.md`
 
 ---
 
@@ -17,9 +17,11 @@
 5. **`GT-151` PORT-ROYAL-SEVEN-HOLES-EYES-001 (ค้าง 1/7 จุด)** — ไร้ธง (`/warp 10` หรือ GM staged login) · ใบเก่า (30 ส.ค.) 6 จุดที่เหลือยังไม่ได้เดินตรวจ · ไม่บล็อกใคร
 6. **`GT-178` BG0015-HOSTILE-TWELVE-AGGRO-001** — สรุป ATTENDED ในใบสั้นเกินตัดสินชนิดบูตจากตรงนี้ (อ่านเนื้อใบเต็มก่อนบูต) · ใบเก่า
 
+7. **`GT-276` LEARN-SKILL-RESULT-WALKLOCK-ISOLATE-001** (ใหม่ ตั้งเลขรอบนี้) — ไร้ธง `--*-scenario` (ส่งเฟรมทีละอันผ่านเครื่องมือ dev) · หาว่าเฟรมไหนใน sweep 6 ขั้นของ `GT-249` ทำให้เดินไม่ได้ · เจ้าของใบ/ผู้บริโภคผล = LANE-CS
+
 ## ข. ธง scenario
 
-1. **`GT-249` LEARN-SKILL-RESULT-REAL-KIT-CONTENT-001** — `--learn-skill-result-hypothesis-scenario ...learn_sweep.json` (Gladiator lv1 กด K) · **พ่วงบูตเดียวกับ `GT-243` ไม่ได้จริง (คนละ server args)** · ตรงกับท่อ promotion ข้อ 1 ของ NOW (`skill_attr_hypothesis.py` CS "กด K") · เจ้าของใบ/ผู้บริโภคผล = LANE-CS · กำหนดเดิม 02:21 (เลยแล้ว ยังไม่บูต)
+(ว่างรอบนี้ — `GT-249` ที่เคยอยู่หมวดนี้มี RESULT แล้ว ดูรายการที่หลุดด้านบน)
 
 ## ค. STATIC-ON-BRIDGE (ไม่ต้อง `LOCK_GAME` — attended เป็นทางสำรอง)
 

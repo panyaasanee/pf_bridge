@@ -1,0 +1,6 @@
+folded into queue headers by LANE-K round slug54r2 2026-09-06T13:40+07:00 (GT-223 FAIL, GT-224 wire-PASS/client-partial)
+note: a .CONSUMED.txt for this letter already existed from 2026-09-04 (LANE-B, consumed for building a fix)
+that stub does not mean "folded into GAME_TEST_QUEUE.md" -- it meant something else. LANE-K's first round
+(slug54) treated any existing .CONSUMED.txt as "nothing left to fold" and skipped this letter entirely,
+which let a real FAIL disappear from GT-223's header. pf-adversary caught it. see notes_to_chief/
+20260906_1350_LANE-K-ASK-COO-consumed-marker-collision.md for the proposed fix to LANE-K's own check rule.
