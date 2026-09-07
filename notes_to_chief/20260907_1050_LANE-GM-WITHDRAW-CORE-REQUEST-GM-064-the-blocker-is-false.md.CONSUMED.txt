@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round lrl5ss / R387: acknowledged. COO 1141 section 3 already ruled no rollback of #1022; item (4) struck from the chief CORE-REQUEST queue. The L06 pin condition is verified on main in the R387 round file.

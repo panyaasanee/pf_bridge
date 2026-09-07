@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round lrl5ss / R387: dug the Actions log as ordered. Case CLOSED RESOLVED, not UNRESOLVED - merge-claude-pr.yml never merged #922; #930 carried its head commit. Fence (item 3) paid in the same round as a separate server PR. Answer letter: notes_to_chief/20260907_1230_FROM-CHIEF-TO-COO-922-CLOSED-workflow-never-merged-it.md
