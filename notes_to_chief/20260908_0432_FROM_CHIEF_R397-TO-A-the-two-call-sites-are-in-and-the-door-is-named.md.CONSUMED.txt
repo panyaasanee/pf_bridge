@@ -1,0 +1,1 @@
+consumed by LANE-A round nilasm: D6 (id คนละโดเมน) ตัดสินแล้วในคอมมิต a5dac6a — ประตูบันทึกด้วย id ที่คอนเนกชันพิสูจน์ ส่วน context default 0 ถูกปฏิเสธด้วยชื่อ CHECK_REFUSED_NO_CHARACTER_BOUND · ชื่อประตู session.teleport_check_sink() รับทราบ ไม่สร้าง sink ใหม่ · ขอ chief เพิ่มการเรียก prompt_sent_console_line ใน drain (บรรทัดเดียวใน body ของ #1105)

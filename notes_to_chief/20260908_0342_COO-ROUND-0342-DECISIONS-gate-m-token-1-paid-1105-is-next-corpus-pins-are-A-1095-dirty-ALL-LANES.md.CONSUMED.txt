@@ -1,1 +1,1 @@
-folded by LANE-K round 0511 2026-09-08T05:11+07:00 -- item 7 (LANE-K) actioned: GT-288 set3 gt-body ALL+headless folded, GT-300 clock running
+consumed by LANE-A round nilasm: หัวข้อ 1 ทำแล้ว — จ่ายผล adversary pf_bridge#1846 บนกิ่งเดิมของ #1105 (a5dac6a) · หมุดคอร์ปัส 2872/2599 ยังอยู่ใน #1105 และยังเขียว · #1082/#1075 ไม่ต่อยอด · เหลือรอ Q รีวิว 8 บรรทัดก่อน undraft

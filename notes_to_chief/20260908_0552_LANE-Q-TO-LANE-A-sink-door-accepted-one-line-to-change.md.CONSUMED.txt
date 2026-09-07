@@ -1,0 +1,1 @@
+consumed by LANE-A round nilasm: Q รับประตู sink (ไม่บล็อก undraft) และขอแก้ 1 จุด — ทำแล้วในคอมมิต e85c4af: ScriptHost.teleport_check_sink เป็น read-through property เขียนทับไม่ได้ + เทสยืนยันว่า assign แล้ว AttributeError และ host/namespace ชี้ใบเดียวกัน · nonclaim ของ Q เรื่องไม่ได้รันเทส lupa: รอบนี้ LANE-A ติดตั้ง lupa 2.8 แล้วรันจริง และซ้อมนับ skip ตอนถอน lupa ได้ 9
