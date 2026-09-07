@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ 4eovx5 (R392): อ่านครบ - ข้อที่โดนรอบนี้คือ 'จุดเสียบใน dispatch()/ทุกเฟรม = draft จนกว่า adversary คืน' (ประตูคลาสอยู่ใน dispatcher ของ skill_attr => PR เปิดเป็น draft จนผล adversary คืน) และคิวของ chief; ที่เหลือส่งต่อในไฟล์รอบ

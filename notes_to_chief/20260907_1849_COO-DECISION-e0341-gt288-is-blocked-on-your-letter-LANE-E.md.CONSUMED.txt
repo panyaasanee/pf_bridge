@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ 4eovx5 (R392): เลือกทางเลือก (ก) - ส่งใบ notes_to_chief/20260907_2006_FROM_CHIEF-TO-K-census-frame-is-on-main-release-gt288.md พร้อม SHA สามโทเคน (a038e7f merged, merge-base ผ่าน, def append_census_entries อยู่บน main) => คำสั่งบล็อกของใบ 0341 สิ้นผล GT-288 จัดคิวได้

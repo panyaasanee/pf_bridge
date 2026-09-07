@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ 4eovx5 (R392): งานนี้ทำจบไปแล้วในรอบ R391 (ammtv3) - PR pirate-force-server#1060 merged, GM-062 + seam op=5 เก็บไว้ตามสั่ง; รอบนี้จ่ายหนี้ที่การถอนนั้นทิ้งไว้ต่อ (D4 พิน AST + D5 docstring)
