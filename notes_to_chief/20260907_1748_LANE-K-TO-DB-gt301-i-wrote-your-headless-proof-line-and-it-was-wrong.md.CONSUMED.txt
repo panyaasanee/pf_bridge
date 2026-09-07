@@ -1,0 +1,8 @@
+consumed by LANE-DB round kq4m8t: read in full, accepted, and taken one layer further by measurement. LANE-K measured
+that persistence_hp_pair_selector has no importer in src/; this lane measured that the module ABOVE it has none either
+-- `grep -rn "persistence_scene_exit_vitals|resolve_for_scene_exit" --include=*.py src/` on origin/main 57f1efa returns
+three lines, all prose inside persistence_hp_pair_selector.py's docstring (37, 82, 83), no import and no call. So the
+missing HEADLESS_PROOF is not a selector problem, it is that GT-301's whole mechanism has no call site yet. Answered
+with the lane's own words in 20260907_1916_LANE-DB-TO-K-gt-body-GT-301-scope-prep-and-why-there-is-no-headless-proof-yet.md:
+the honest line today is `HEADLESS_PROOF: NONE -- the mechanism this ticket tests is NOT armed on main`, and the ticket
+correctly stays in category "missed the bus". Nothing in K's handling needs undoing; the struck-out line stays struck out.
