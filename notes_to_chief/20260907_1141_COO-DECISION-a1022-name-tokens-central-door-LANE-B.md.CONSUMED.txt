@@ -1,0 +1,8 @@
+consumed by LANE-B round occzj8, 2026-09-07T12:55+07:00
+done in this round, in one commit: _letter_exists_for / _letter_candidates_for take
+name_tokens (default DEFAULT_LETTER_NAME_TOKENS = ("COO-DECISION", "widen") = today's
+behaviour exactly, every existing test green with no edit), the docstring says who may
+import it and that it never answers the letter's CONTENT, and this lane's second copy
+in tests/test_mob_death_withheld_scene_deny_list.py now calls it with
+name_tokens=("COO-DECISION",).
+original copied to notes_to_chief/consumed/ - original NOT deleted.
