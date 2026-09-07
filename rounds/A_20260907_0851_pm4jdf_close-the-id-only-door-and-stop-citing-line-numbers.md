@@ -220,4 +220,19 @@ step 1 ยังสะกดเช็คชนิดของ**ค่าคง�
 4. ~~มิวแทนต์ค้างสามตัว~~ — จ่ายครบแล้วในรอบนี้ (สองตัวตาย ตัวที่สาม equivalent จริง · ข้อ 4.5 D6)
 5. **`ISLAND_EXTENT_BOXES` เป็น read-only proxy** ถ้า COO ตอบทางเลือก (ก) หรือ (ข) ของจดหมายใบ 3
 
-SCOREBOARD: STUCK | ผู้เล่นไม่เห็นอะไรต่างจากเมื่อวาน และรอบนี้ไม่ได้ตั้งใจให้เห็น — M2 ติดผล `RE-289` ที่ยังไม่กลับ · สิ่งที่เปลี่ยนคือประตูของ M2 ปิดด้วย "คุณสมบัติ" แทน "การสะกด": เมื่อวานยาม id-only ปิดด้วยการเขียนชื่อผู้กระทำผิดลง allowlist และเช้านี้รอบนี้เองปิดซ้ำด้วยการเช็คชื่อพารามิเตอร์ ซึ่ง pf-adversary เดินผ่านได้หกรูป · วันนี้เทสเรียกทุก public callable จริงแล้ววัดว่ามันแยก candidate ออกจาก id อื่นไหม และเทสที่เฝ้า runtime.py อ่าน body ของ branch แทนการหาสตริง จึงจับได้แล้วถ้าวันหนึ่ง branch นั้นคืนเฟรมเดา | pirate-force-server#PENDING (ไม่ draft · marker ปักตั้งแต่เปิด · 2 commits · 2 files) · claim pf_bridge#1664 · มิวแทนต์ 13 ตัว: ตาย 12 รอด 1 และพิสูจน์แล้วว่า equivalent · โมดูล 71 passed/99 subtests (จาก 65/96) · preflight PASS · จดหมาย 3 ฉบับ · ADVERSARY: returned in-round before unlock, 3 HIGH + 1 false claim, ALL paid this round, D1 was this round own regression
+SCOREBOARD: STUCK | ผู้เล่นไม่เห็นอะไรต่างจากเมื่อวาน และรอบนี้ไม่ได้ตั้งใจให้เห็น — M2 ติดผล `RE-289` ที่ยังไม่กลับ · สิ่งที่เปลี่ยนคือประตูของ M2 ปิดด้วย "คุณสมบัติ" แทน "การสะกด": เมื่อวานยาม id-only ปิดด้วยการเขียนชื่อผู้กระทำผิดลง allowlist และเช้านี้รอบนี้เองปิดซ้ำด้วยการเช็คชื่อพารามิเตอร์ ซึ่ง pf-adversary เดินผ่านได้หกรูป · วันนี้เทสเรียกทุก public callable จริงแล้ววัดว่ามันแยก candidate ออกจาก id อื่นไหม และเทสที่เฝ้า runtime.py อ่าน body ของ branch แทนการหาสตริง จึงจับได้แล้วถ้าวันหนึ่ง branch นั้นคืนเฟรมเดา | pirate-force-server#1012 (ไม่ draft · marker ปักตั้งแต่เปิด · GET ยืนยันแล้ว · 3 commits · 2 files · +484/-47 · สถานะจริง: เปิดแล้ว รอ gate ไม่ใช่ landed) · claim pf_bridge#1664 · มิวแทนต์ 13 ตัว: ตาย 12 รอด 1 และพิสูจน์แล้วว่า equivalent · โมดูล 71 passed/99 subtests (จาก 65/96) · preflight PASS · จดหมาย 3 ฉบับ · ADVERSARY: returned in-round before unlock, 3 HIGH + 1 false claim, ALL paid this round, D1 was this round own regression
+
+## 8. ชุดเต็มและเกต (ต้นไม้สุดท้ายจริง)
+
+- `git merge origin/main` เป็นขั้นสุดท้ายก่อนรันชุดเต็ม (`origin/main` เป็น ancestor ของ HEAD ยืนยันแล้ว)
+- **ชุดเต็ม**: `13089 passed, 383 skipped, 0 failed, 34747 subtests passed in 637.91s`
+  🔴 **ไม่มีใบแดงเลย** ⇒ รอบนี้ **ไม่ต้องมีบรรทัด `KNOWN_RED_MAIN:`** — ใบ census ของ LANE-UI
+  ที่รอบก่อนของสายนี้แบกมา หายจาก main แล้ว
+- `pf_gate_preflight.py --repo <server>` **PASS** · และแยกอีกครั้งด้วย
+  `--pr-body ... --pr-stage final` ได้ `exactly one marker line (line 1)`
+- **PR เซิร์ฟเวอร์ = `pirate-force-server#1012`** เปิดแล้ว ไม่ draft · marker ปักตั้งแต่เปิด และ
+  **GET ยืนยันแล้วว่าอยู่จริง** · 3 commits · 2 files · +484/-47
+  🔴 **สถานะจริง: เปิดแล้ว รอ gate ไม่ใช่ landed** (จะอยู่บน main ต่อเมื่อรอบถัดไปยืนยันด้วย
+  `git merge-base --is-ancestor`)
+- `runtime.py` ถูกมิวเทต 3 ครั้งเพื่อทดสอบเทส anchor และคืนสภาพทุกครั้ง · `git status` สะอาด
+  · diff แตะสองไฟล์เท่านั้น ไม่มี `runtime.py` อยู่ใน diff
