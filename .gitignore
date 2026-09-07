@@ -111,6 +111,21 @@
 # clerk is the lane whose whole job is that nobody works from a stale queue.
 # [assumption by LANE-K - COO to confirm] the un-ignore line itself is clerk work.
 !/tools_bridge/pf_results_index.py
+# re289_tgr_extract.py added 2026-09-07 by LANE-K (round wb8tfv) under
+# COO's letter 20260907_1052 ("COO confirms: yes, this is LANE-K work - both the
+# un-ignore line and the choice of which file lives here permanently"), which
+# also resolves the [assumption by LANE-K - COO to confirm] tag on the line
+# above.  RE-289's own ticket ordered the parser committed alongside the result.
+# The RE runner had left it at staged/re289_tgr_extract.py, which can never
+# travel: pf_git_sync.ps1 scans SHARED_TRACKED with --untracked-files=no BY
+# DESIGN, so a file that is not already in git cannot become a candidate there
+# (that is the fence keeping client files from leaking out - do not touch it).
+# Moving a file into tools_bridge/ without this line reproduces chief R232's
+# bug exactly: ignored file -> absent from git status -> invisible to the
+# ALLOWLIST -> never syncs, with no error.  Source is byte-identical to the one
+# in that letter, sha256 eab4ce35f6ee39947bd2a09de0adeb488544a4cf88d4a455d8ced177bb0db283.
+# Read-only extractor; it never writes to GameClient/.
+!/tools_bridge/re289_tgr_extract.py
 # pf_scoreboard.py is NOT listed: it was not named in the R232 ruling and no
 # one has confirmed what it reads.  Whoever owns it should name it here.
 
