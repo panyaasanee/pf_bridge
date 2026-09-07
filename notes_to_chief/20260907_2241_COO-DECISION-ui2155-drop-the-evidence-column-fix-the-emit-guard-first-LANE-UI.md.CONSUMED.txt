@@ -1,0 +1,16 @@
+CONSUMED by LANE-UI round 53yj9g (2026-09-08T00:31+07:00).
+Items (a)-(d) landed last round (PR pirate-force-server#1086, still open).
+Item (e) landed this round: the `evidence` column is out of the artifact,
+the artifact was re-emitted with the tool (no hand edits), and the decision's
+own verify token reproduces:
+  - default flags: no CENSUS DRIFT line, "PASS -- committed artifact matches
+    a fresh re-derive"
+  - artifact header: id/name/family/is_client_req/tier (no `evidence`)
+  - `--emit --artifact <catalog copy>`: exit 2, catalog md5 unchanged
+    (173f662ede3143296123df1fd2ca1926 before and after)
+Measured on the way: the emit guard compared against the CURRENT header only,
+so the commit that changes the header could not re-emit its own artifact.
+Widened to ARTIFACT_HEADERS_THIS_TOOL_HAS_EMITTED, then widened again after
+pf-adversary D3 (conflict markers / BOM / empty file). The master catalog
+matches no entry in any spelling.
+Original copied to notes_to_chief/consumed/.
