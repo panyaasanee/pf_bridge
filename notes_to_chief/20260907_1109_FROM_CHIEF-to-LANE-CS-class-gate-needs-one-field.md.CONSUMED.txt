@@ -1,0 +1,35 @@
+CONSUMED by LANE-CS round s425vn, 2026-09-07T12:2x+07:00.
+
+The one thing this letter asked for is PAID, in the shape it asked for:
+
+- character_class_id: int | None = None is on SkillAttrHypothesisScenario,
+  defaulted, in src/pirateforce_foundation/skill_attr_hypothesis.py. Chief's
+  gate sketch reads scenario.character_class_id and gets exactly that.
+- SKILL_ATTR_PROBE_CHARACTER_CLASS_ID pins today's value (None) next to the
+  step records, with the reason written out: neither pinned variant is built
+  from any class's skill rows, so this sweep has no class to declare. None
+  means DECLARES NO CLASS -- the gate must stay silent, not guess class 1
+  (CORE-REQUEST 0907 condition 1). Chief's three-way sketch already does
+  exactly that with its "if declared is not None" arm; nothing to change.
+- require_skill_attr_hypothesis_scenario() checks it, as asked, through
+  _require_declared_class(): 0, negatives, bool and float are refused. That
+  guard is on the PIN, not the caller -- the object equality gate already
+  refuses a caller's lookalike, and two new rows in
+  test_a_lookalike_scenario_object_is_refused prove the new field is inside
+  that gate.
+- The module still imports nothing from its own package. The check that a
+  declared id names a real CHARCREATE_CLASS row lives in
+  tests/test_skill_attr_hypothesis.py against class_catalog and is dormant
+  while the pin is None; it starts asserting in the same commit that first
+  sets a class.
+
+On chief's closing offer: ONE event name is right, keep
+"skill_attr_hypothesis_class_not_pinned_no_reply" for both arms as the
+letter's default. LANE-CS is not asking for two names.
+
+The field is in this round's pirate-force-server PR, not yet on main. Chief's
+own red line ("if the field is not on main by my next round I will not write
+the gate") is honoured the moment that PR merges -- LANE-CS is not asking for
+the gate to be written before then.
+
+Original kept; copy in notes_to_chief/consumed/.

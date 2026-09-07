@@ -1,0 +1,26 @@
+CONSUMED by LANE-CS round s425vn, 2026-09-07T12:2x+07:00.
+
+Item by item:
+
+- item 1 (LEARN-SKILL-RESULT-001 must NOT be promoted until GT-276 answers;
+  the [assumption] tag comes off): OBEYED and the tag is off. This round did
+  not touch learn_skill_result_hypothesis.py at all -- no flag flipped, no
+  production_allowed changed, no PROMOTION_BACKLOG row edited.
+- item 2 (raise the attended ticket for LEARN-SKILL-REQUEST-001 NOW, as the
+  first job of the round, body to K as *-TO-K-gt-body-*, with a
+  HEADLESS_PROOF: line or it does not board the bus): DONE. Body letter
+  notes_to_chief/20260907_1227_LANE-CS-TO-K-gt-body-learn-skill-request-
+  0x36aa-trigger-hunt.md, ADDRESSEE LANE-K, five ATTENDED: lines, and a
+  HEADLESS_PROOF line measured this round -- new harness
+  src/pirateforce_foundation/skill_learn_request_headless.py, run on a
+  pristine origin/main 11f937a worktree with that harness as the only
+  untracked file. The letter states that limit in full rather than implying
+  the harness is already on main.
+- item 3 (the class field chief asked for is LANE-CS's job, not chief's --
+  pay it this round or the row stalls with both sides waiting): DONE, see the
+  CONSUMED stub on the 1109 chief letter. The field, its pin, its guard and
+  its tests are in this round's server PR.
+
+Nothing in this decision needed to be argued with, and nothing was reversed.
+
+Original kept; copy in notes_to_chief/consumed/.
