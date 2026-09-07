@@ -706,6 +706,14 @@ Q1 ตอบว่าไบต์ **ไม่ตรง** (มอนไม่ไ�
 
 ## 🔬 RE-248 SELECTACTOR-0x5DFF60-TWO-U16-TAG-0x12-WHICH-IS-SCENE-001  [🔧 **PASS/DONE — พับโดย LANE-K รอบ `ek1gk9` 2026-09-07T09:5x+07:00** คำต่อคำจากห... -- archived 20260907 (PASS/DONE; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260907_closed.md`)
 ## 🔬 RE-256 ADDSURVEYDATA-OUTER-PRESENCE-BYTE-VALUE-001  [✅ **DONE -- ตอบแล้ว 2026-09-05 10:07 +07:00** · ปิดหัวโดย chief (LANE-E) รอบ `pv4zg1`/R352 ต... -- archived 20260907 (DONE; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260907_closed.md`)
+
+<!-- LANE-K round kq7m3d addendum 2026-09-07T18:5x+07:00: the six lines below were carried into archive/CLIENT_RE_QUEUE_ARCHIVE_20260907_closed.md by mistake when the RE-256 move over-ran its block; restored here byte-identical to 87267dd:989-994. They are the pointer stubs for RE-259 and RE-260, archived in round spppsd. -->
+---
+
+- ~~RE-259 UPDATEATTRVITAL-0X309A-IS-IT-EVER-SENT-FOR-CNETNPC-001~~ -> `archive/CLIENT_RE_QUEUE_ARCHIVE_20260907_closed.md` (PASS -- LANE-DB ปิดแล้ว 2026-09-05, ดู pf_bridge/notes_to_chief/202609 ... · ย้ายทั้งก้อนคำต่อคำโดย LANE-K รอบ `spppsd` 2026-09-07T14:22+07:00 · ไม่มีอะไรถูกลบ)
+
+- ~~RE-260 ACTORATTR-0X99-0X9A-CONCRETE-OWNER-CLASS-001~~ -> `archive/CLIENT_RE_QUEUE_ARCHIVE_20260907_closed.md` (DONE -- LANE-DB ปิดแล้ว 2026-09-05, ดู pf_bridge/notes_to_chief/202609 ... · ย้ายทั้งก้อนคำต่อคำโดย LANE-K รอบ `spppsd` 2026-09-07T14:22+07:00 · ไม่มีอะไรถูกลบ)
+
 ## RE-261 STALL-AND-GUILD-STORAGE-FIELD-SEMANTICS-FROM-A-REAL-SESSION-001  [🔧 LANE-K แก้ผล `slug54r2` — แก้คำ "CAPTURED" ที่เติมเองรอบก่อน (adversary จับได้): จดหมายเขียนว่า **"ได้ 1 เฟรมใหม่"** (ร่วมกับ RE-235) — R320 §RE-235/261 · GT คู่ = GT-262 · จาก notes_to_chief/20260906_0155_KA1A-R320-*.md · OPEN -- 🔺 `[NEEDS-ATTENDED-CAPTURE]` (จดหมายต้นทางระบุเองว่า **ปิดจาก static เดี่ยวไม่ได้**) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-UI** · ใบ GT คู่ของมัน = **`GT-262` (chief จองเลขไว้แล้วรอบ `pv4zg1`/R352 · LANE-UI เป็นผู้เขียนเนื้อใบ GT ในรอบถัดไป)** ตาม `AGENTS.md` §7 (`COO-DECISION 20260904_2142` ข้อ 3) -- **ผู้เทสอ่าน `GAME_TEST_QUEUE.md` เท่านั้น ไม่เคยอ่านไฟล์นี้** ถ้าไม่มีใบ GT จะไม่มีใครเห็นใบนี้ตลอดกาล] -- moved to `tickets/RE-261.md` (>8,192 B, verbatim, per `PANYA-ORDER 1448` + `.gitignore !/tickets/` merged R373 · LANE-K round `x91eo8` 2026-09-06T18:10+07:00)
 ## RE-263 PAIR-RELATION-ZERO-GATE-REACHABILITY-AND-DEFAULT-BIT-001  [**CLOSED BOUNDED-NEGATIVE** 2026-09-05T13:12+07:00 โดย LANE-GM รอบ `0dlc07` (ผู้ท... -- archived 20260907 (CLOSED BOUNDED-NEGATIVE; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260907_closed.md`)
 
@@ -1251,9 +1259,16 @@ owner: LANE-GM · ผู้ทำ: สาย RE (static บนเครื่อ
 > 1. **`UPDATE_ATTR_VITAL_VERSION_CONFIRMED = 0` ที่ `gm/attr_wire.py:410` ถูกต้อง** — ctor `0x005E5D30` เขียน `0` ลง `+0x10` จริง ⇒ **ไม่ต้องย้อนอะไร ไม่ต้องแจ้งสายไหนว่าเฟรมเก่าถูกทิ้ง**
 > 2. **ค่าไม่ได้ "ลู่เข้า 0"** — วัดครบทั้ง 519 คลาสแล้ว: **326 คลาส = 0 แต่ 38 คลาสเป็นค่าอื่น** (1,2,3,4,5,6,8,64) ⇒ **ห้ามยืมข้ามคลาสตลอดไป** ตามที่เจ้าของใบสงสัยไว้ถูกแล้ว
 > 3. **ไม่มีตารางต่อคลาส** — เป็น literal ที่ ctor เขียนตรง ๆ ทุกคลาส ⇒ ได้มาทีเดียวด้วยการสแกน ctor (ทำให้แล้วในใบนี้) ไม่ต้องเปิดใบทีละคลาสอีก
-> ข้อ 3 (`TeleportVital`): ctor **`0x005E53D0`** · `mov byte ptr [esi+0x10], 4` ที่ **`0x005E5425`** ⇒ **`TELEPORT_VITAL_VERSION_PROVEN_BY_RE129 = 4` ถูกต้อง**
+> ข้อ 3 (`TeleportVital`): ctor **`0x005E53D0`** · `mov byte ptr [esi+0x10], 4` ที่ **`0x005E5425`** (**immediate ไม่ใช่รีจิสเตอร์** — คำในจดหมาย ซึ่งเป็นสิ่งที่แยกแถวนี้ออกจาก 11 คลาสที่จดหมายไม่สรุป) ⇒ **`TELEPORT_VITAL_VERSION_PROVEN_BY_RE129 = 4` ถูกต้อง**
 > 🔴 **ของแถมที่กระทบงานที่กำลังทำอยู่: `TriggerVital` = 1 ไม่ใช่ 0** — ถ้ามีสายไหนส่ง `TriggerVital` ด้วย `vital_version=0` ไคลเอนต์จะทิ้งเฟรมทั้งใบและขึ้น error `0xE0000031` · เช่นเดียวกับ `CreateActorVital`=8, `DeleteActorVital`=1, `InstanceVital`=5, `ActorAttr`=2, `FightAttr`=3
-> **BUILD_IMPACT** (คำของจดหมาย): "**ไม่ต้องแก้อะไรใน `attr_wire.py`** — ค่า `0` ที่ใช้อยู่ถูกต้อง เปลี่ยนจาก **"สมมติของสาย รอ COO ยืนยัน"** เป็น **"วัดแล้ว static, VA ปักครบ"** ⇒ ลบป้ายสมมติออกได้" · "ไม่มี CORE-REQUEST จากรอบนี้"
-> nonclaims ของจดหมาย (ยกหัวข้อ ไม่ย่อ): ไม่อ้างว่าเป็นค่าที่ **เซิร์ฟเวอร์เดิม** ส่งจริง (อ้างว่าเป็นค่าที่ **ไคลเอนต์ตัวนี้ยอมรับ**) · **120 คลาสที่ ctor ไม่เขียน `+0x10` ไม่ได้แปลว่าเป็น 0** · 11 คลาสที่ค่ามาจากรีจิสเตอร์ + 6 คลาสขอบฟังก์ชันไม่ชัด = **ไม่สรุปทั้ง 17 ตัว** · สำมะโนตั้งบนสมมติฐาน "ctor คือฟังก์ชันที่เขียน vtable" ซึ่งยืนยันด้วยตาเพียง 4 คลาสจาก 519 · **ไม่ได้แตะข้อขัดแย้ง "ประตูสามบานแช่แข็ง" กับ `COO-DECISION 1541`** — เรื่องนั้นเป็นของ COO/LANE-GM
+> **BUILD_IMPACT** (คำของจดหมาย ทั้งสามข้อ ไม่ตัด): "**ไม่ต้องแก้อะไรใน `attr_wire.py`** — ค่า `0` ที่ใช้อยู่ถูกต้อง เปลี่ยนจาก **"สมมติของสาย รอ COO ยืนยัน"** เป็น **"วัดแล้ว static, VA ปักครบ"** ⇒ ลบป้ายสมมติออกได้" · "ห้ามยืมค่าข้ามคลาสอีกต่อไป — ตารางข้างบนใช้แทนการเปิดใบทีละคลาสได้ทันที" · "ไม่มี CORE-REQUEST จากรอบนี้"
+> nonclaims ของจดหมาย **ครบทั้ง 6 ข้อ** 🔴 [แก้โดย addendum รอบ `kq7m3d` 18:5x หลัง `pf-adversary` D4 — ฉบับ 18:2x ยกมา 5 ข้อและตัดครึ่งที่ใช้ทำงานได้ออกจากสองข้อ]:
+> 1. ไม่อ้างว่าค่าที่ ctor เขียนคือค่าที่ **เซิร์ฟเวอร์เดิม** ส่งจริง — อ้างว่าเป็นค่าที่ **ไคลเอนต์ตัวนี้ยอมรับ** (**exact equality ที่ `0x005F3EFC`**) ซึ่งเป็นสิ่งที่ใบถาม
+> 2. 120 คลาสที่ ctor ไม่เขียน `+0x10` = สืบทอดจาก base ctor · **ไม่ได้แปลว่าเป็น 0** รอบนี้ไม่ได้ไล่ base ให้ (ไม่ได้ถาม) — **ถ้าสายไหนต้องใช้คลาสในกลุ่มนี้ ต้องขอเพิ่มทีละตัว**
+> 3. 11 คลาสที่ค่ามาจากรีจิสเตอร์ยังไม่รู้ค่า · 6 คลาสขอบฟังก์ชันไม่ชัด — **ไม่สรุปทั้ง 17 ตัว**
+> 4. สำมะโนนี้ตั้งอยู่บนสมมติฐานว่า "ctor คือฟังก์ชันที่เขียน vtable ของคลาสลงออบเจ็กต์" ซึ่งจริงกับทุกคลาสที่ตรวจ**ด้วยตา**รอบนี้ (**4 ตัว**) แต่ไม่ได้ยืนยันด้วยตาทั้ง 519 ตัว
+> 5. ไม่ได้แตะข้อขัดแย้งเรื่อง "ประตูสามบานแช่แข็ง" กับ `COO-DECISION 1541` — เรื่องนั้นเป็นของ COO/LANE-GM
+> 6. read-only ล้วน · ไม่แตะ `GameClient/`, `external/`, `gamedata/`, `SERVER/` หรือไฟล์คิว
+> 🟡 **ข้อสังเกตเลขของ K (ไม่ใช่คำตัดสิน · `pf-adversary` D6)**: ประโยค "วัดครบทั้ง 519 คลาส" กับตารางสำมะโนของจดหมายเองบวกได้ **375 + 120 + 6 = 501** ⇒ **ต่างกัน 18 คลาส** · จำนวนคลาสที่ค่าไม่ใช่ 0 นับได้ **38 ตัวตรงตามจดหมาย** · K ไม่แก้ประโยคของผู้ทำ (พับ = คัดลอก) — **LANE-GM กับสาย RE ต้องเป็นคนกระทบยอด**
 > 🔵 **คำถามใบซ้ำที่ K ตั้งไว้ในรอบ `k7q3mv` ตอบแล้วโดยผู้ทำ** คำต่อคำ: *"อ่านใบเก่าก่อนหยิบตามที่ LANE-K สั่งใน addendum: `RE-198` (DONE/BOUNDED-NEGATIVE) และ `RE-222` Q0 อ่านแล้ว — **ไม่ทับซ้อน** ... ⇒ ใบนี้ไม่ใช่ SUPERSEDED"* ⇒ **ใบไม่ถูกยุบ** · การตัดสินขั้นสุดท้ายยังเป็นของ LANE-GM ตามเดิม
 > 🟡 **สิ่งที่ K ไม่ทำ**: ไม่ปิด/ไม่แก้ `RE-198` และ `RE-222` · ไม่ลบป้าย "สมมติของสาย" ใน `attr_wire.py` (โค้ดไม่ใช่เขตเสมียน) · ไม่แจ้งสายที่ส่ง `TriggerVital` แทน LANE-GM — **ผู้บริโภคผล = LANE-GM** ตามหัวใบ
