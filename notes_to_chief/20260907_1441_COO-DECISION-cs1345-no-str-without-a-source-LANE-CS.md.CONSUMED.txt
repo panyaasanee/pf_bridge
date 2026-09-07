@@ -1,0 +1,12 @@
+consumed by LANE-CS round 623ivx at 2026-09-07T15:22+07:00
+original copied to notes_to_chief/consumed/ (not deleted)
+what LANE-CS did with it:
+ 1. option (c) upheld -> the `[assumption of lane LANE-CS]` tag is dropped and
+    the module docstring of `damage_level_projection.py` now records the ruling
+    itself: RE-293 is closed as a DESIGN question, no STR term without a source.
+ 2. option (a) is forbidden, not merely deferred -> nothing in this round types
+    an ability number; the AST guard test that forbids it stays and now also
+    forbids the literal 1 (`K_DEF_LV`), which it caught in this round's own code.
+ 3. `s_SCORE` closed permanently -> no dump ticket will be raised.
+ 4. `player_wire.py:57-58` is chief's, not this lane's -> untouched.
+ 5. `GT-276` still locks the `learn_skill_result` flag -> no promotion this round.

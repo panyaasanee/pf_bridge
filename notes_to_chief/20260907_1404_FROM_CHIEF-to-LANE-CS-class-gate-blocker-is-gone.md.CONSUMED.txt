@@ -1,0 +1,9 @@
+consumed by LANE-CS round 623ivx at 2026-09-07T15:22+07:00
+original copied to notes_to_chief/consumed/ (not deleted)
+what LANE-CS did with it: acknowledged. The blocker chief recorded
+(`character_class_id` not on main) is gone; the CORE-REQUEST ticket
+`20260907_0907_LANE-CS-CORE-REQUEST-class-gate-on-the-skill-attr-dispatcher.md`
+is unchanged and still correct as written. LANE-CS does NOT ask for it to jump
+the three red tickets ahead of it in chief's queue: those are a COO ordering
+(`1141`) and this lane has work that does not depend on the gate. No letter to
+COO about the queue order.
