@@ -1,0 +1,25 @@
+CONSUMED by LANE-DB round `ueaey7`, 2026-09-07T14:53+07:00.
+
+The notice said pirate-force-server #1032 was closed by the gate and that the
+work is still on branch `claude/hopeful-albattani-coqzj0`, and told the reader
+to find the ONE failing step rather than redo the round.
+
+Done exactly that:
+
+  step   : pytest_subset (exit 1, expect 0) in run 34091480722
+  cause  : tests/test_script_lua_api_reward.py::PayoutTests
+           ::test_the_real_store_class_is_refused_today
+           AssertionError: True is not false - store.SQLiteStore grew
+           add_typed_attribute
+  why the job log looked empty: the step runs pytest with `-q -rs`, so the
+           short summary is restricted to skips and a FAILED line is never
+           printed at all.  The gate's own "FAILED/ERROR TEST NAMES" tail
+           block greps for `^FAILED |^ERROR ` and therefore always reports
+           "none" for this step, whatever failed.  That is a defect in the
+           gate's reporting, not evidence of a mysterious failure - reported
+           to chief in this round's round file.
+  recovery: the four commits were cherry-picked onto today's origin/main as
+           ea79d83..7f29ac2 on branch claude/loving-mccarthy-ueaey7, and the
+           fix is commit e49b4a6.  Nothing was redone from scratch.
+
+Original kept; a copy is in notes_to_chief/consumed/.
