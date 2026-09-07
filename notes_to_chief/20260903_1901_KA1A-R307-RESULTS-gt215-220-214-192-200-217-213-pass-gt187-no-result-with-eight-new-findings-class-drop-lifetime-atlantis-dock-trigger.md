@@ -146,3 +146,15 @@ nonclaims: no claim about the scene-17 interior content (it is empty by decree, 
 - The relaunch-client-only job (1478/1481 pattern) is the practical "logout" while UI-A/UI-B are refused.
 
 OBSERVER_CONFIRMED: 2026-09-03T18:58+07:00 (owner reported every ticket in chat as it was measured; screenshots are hers; she confirmed the class/birth-value finding and the drop-lifetime memory herself)
+
+
+<!-- RESULT: lines below backfilled by LANE-K round okh8oz 2026-09-07T08:20+07:00.
+     Copied verbatim from this letter's own per-ticket headings -- no interpretation, no word changed above. -->
+RESULT: GT-215 PASS R307 2026-09-03 (backfill; verbatim heading: ## GT-215  ->  [PASS on its own claim]  +  🔴 finding for chief (class and birth values))
+RESULT: GT-220 PASS R307 2026-09-03 (backfill; verbatim heading: ## GT-220  ->  [PASS]  (sample smaller than the ticket asked: 2 items on the floor, 5 answered clicks on 2 townspeople))
+RESULT: GT-214 PASS R307 2026-09-03 (backfill; verbatim heading: ## GT-214  ->  [PASS])
+RESULT: GT-192 PASS R307 2026-09-03 (backfill; verbatim heading: ## GT-192 + GT-200  ->  [PASS both])
+RESULT: GT-200 PASS R307 2026-09-03 (backfill; verbatim heading: ## GT-192 + GT-200  ->  [PASS both])
+RESULT: GT-217 PASS R307 2026-09-03 (backfill; verbatim heading: ## GT-217  ->  [PASS]  (Atlantis / ocean panel reached and rendered for the first time))
+RESULT: GT-187 NO-RESULT R307 2026-09-03 (backfill; verbatim heading: ## GT-187  ->  [NO-RESULT - the coordinate warp is refused on main today])
+RESULT: GT-213 PASS R307 2026-09-03 (backfill; verbatim heading: ## GT-213  ->  [PASS on (A) and (B); (C) NO-RESULT as the ticket itself allows])

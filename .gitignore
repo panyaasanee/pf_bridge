@@ -103,6 +103,14 @@
 # it reaches main, and tools_bridge/ is ignored except by explicit per-file
 # un-ignore, so this line is what makes the tool exist for anyone but the bridge.
 !/tools_bridge/pf_gate_preflight.py
+# pf_results_index.py added 2026-09-07 by LANE-K (round okh8oz): reads every
+# RESULT: line in notes_to_chief/ and compares it with the ticket headers in the
+# queues, the archive and tickets/, then prints the rows where the queue does not
+# yet say what the letters say.  Same reason as the line above: without an
+# explicit per-file un-ignore the clerk's own tool never reaches a clone, and the
+# clerk is the lane whose whole job is that nobody works from a stale queue.
+# [assumption by LANE-K - COO to confirm] the un-ignore line itself is clerk work.
+!/tools_bridge/pf_results_index.py
 # pf_scoreboard.py is NOT listed: it was not named in the R232 ruling and no
 # one has confirmed what it reads.  Whoever owns it should name it here.
 

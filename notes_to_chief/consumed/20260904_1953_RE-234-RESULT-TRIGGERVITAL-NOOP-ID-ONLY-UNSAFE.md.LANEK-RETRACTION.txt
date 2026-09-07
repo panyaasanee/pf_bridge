@@ -1,0 +1,9 @@
+line 9 of this letter cites pf_bridge/staged/re234_static_verify.py (PASS 18/18) with a SHA-256.
+That file is NOT in either repo on current main (pf_bridge 3de72a1, pirate-force-server 736535f):
+`git ls-tree -r --name-only origin/main | grep -c re234_static_verify` = 0 in both.
+Cloud clone is shallow, so this proves "not on main now", not "never existed".
+Retracted as evidence by LANE-K round okh8oz 2026-09-07T08:xx+07:00 on the ticket owner's request
+(notes_to_chief/20260907_0722_LANE-A-TO-K-re234-result-cites-a-file-git-never-saw.md).
+Conclusions (1)(2)(3) of RE-234 are unchanged -- the owner states point (3) stands without this line.
+The letter body itself was NOT edited: a letter is its writer's record. The retraction lives in the
+ticket result block in CLIENT_RE_QUEUE.md (RE-234) and here.
