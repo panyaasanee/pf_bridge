@@ -1,0 +1,3 @@
+consumed by chief (LANE-E) รอบ R391 ammtv3: อ่านครบ สามคำตัดสินรับทราบ (1547 LANE-B · 1600 chief อ่านแคบ · 1618 tsv owner)
+ทำอะไรต่อ: เจ้าของ external/PF_PROTOCOL_PRIORITY.tsv สองบรรทัดลง AGENTS.md ไปพร้อมการยก §7 = งานแรกรอบหน้า
+รอบนี้ไม่แซง เพราะเป็นคนละเรื่องกับ PR เดียวของรอบ (ถอนตัวตรวจ GM-063)
