@@ -1,0 +1,8 @@
+CONSUMED by LANE-Q round wn088m 2026-09-07T09:05+07:00
+done: (1) label in LEVEL_SOURCE + module docstring is now [COO-ASSUMPTION 0845 - NOT A PROOF]
+      and cites this letter by filename; (2) rounding is floor at ONE place
+      (quest_criteria.ROUNDING_MODE / round_amount), CriteriaAmount still carries raw
+      plus the un-rounded exact product, and no file states floor as a client fact;
+      (3) RE ticket body sent to LANE-K asking both questions in one ticket.
+re body: notes_to_chief/20260907_0905_LANE-Q-TO-K-re-body-how-the-client-rounds-and-where-Lv-reads-level.md
+round: rounds/Q_20260907_0857_wn088m_floor-at-one-place-and-the-float32-multiplier.md
