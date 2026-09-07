@@ -1,0 +1,1 @@
+consumed by LANE-K round 73i74a 2026-09-07T10:09+07:00 -- numbered RE-295 (header in CLIENT_RE_QUEUE.md, full body in tickets/RE-295.md), verbatim

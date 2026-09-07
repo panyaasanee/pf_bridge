@@ -57,6 +57,25 @@ ANSWERED_WORD = "ANSWERED"
 ANSWERED_NEGATIONS = ("UNANSWERED", "UN-ANSWERED", "NOT ANSWERED",
                       "ANSWERED-DIFFERENTLY")
 
+# PASS is the same lesson as ANSWERED, learned again on 2026-09-07.
+# The queue's authors close static tickets with the tester's own word, and
+# for a bounded-positive RE ticket that word is PASS, not DONE.  RE-248 was
+# folded "PASS/DONE" and is masked only by the DONE half; RE-289 was folded
+# "PASS / BOUNDED-POSITIVE" this round and this tool reported it as work
+# every run -- the exact failure the CLOSED_WORDS comment above describes.
+#
+# It is NOT put in CLOSED_WORDS, for two measured reasons:
+#   1. plain substring PASS also matches PASS-PARTIAL, and GT-249's header
+#      really does read "**PASS-PARTIAL (box P4)** later READY" -- a ticket
+#      that passed one box of four is not a closed ticket.
+#   2. this queue writes two-layer verdicts, so a header can pass the static
+#      layer and still say the client-observable layer is OPEN.
+# So PASS closes a ticket on the same terms ANSWERED does: not negated, and
+# nothing in the same live header still claims it is open or pending.
+PASS_WORD = "PASS"
+PASS_NEGATIONS = ("PASS-PARTIAL", "PASSPARTIAL", "PARTIAL-PASS",
+                  "NOT PASS", "NO-PASS", "BYPASS", "PASSED-OVER")
+
 # [D] MANDATORY SEARCH ROW UNFILLED.  CLIENT_RE_QUEUE.md rule 4 makes one
 # search the first step of every RE ticket: look in pf_bridge\external\ and
 # gamedata\ BEFORE disassembling anything, because a hit converts the ticket
@@ -81,6 +100,21 @@ ANSWERED_NEGATIONS = ("UNANSWERED", "UN-ANSWERED", "NOT ANSWERED",
 PLACEHOLDER = "\u0e2a\u0e32\u0e22 RE \u0e01\u0e23\u0e2d\u0e01"
 SEARCH_WORD = "\u0e04\u0e49\u0e19"
 SEARCH_TREES = ("external", "gamedata")
+
+
+def pass_means_closed(head_live):
+    """True only for a header whose PASS is not contradicted by itself.
+
+    Same layer-aware rule as answered_means_closed: PASS-PARTIAL is not a
+    pass, and a header that still carries OPEN/PENDING is still open no
+    matter which layer passed.
+    """
+    if PASS_WORD not in head_live:
+        return False
+    upper = head_live.upper()
+    if any(n in upper for n in PASS_NEGATIONS):
+        return False
+    return not any(s in head_live for s in STATUS_TAGS)
 
 
 def answered_means_closed(head_live):
@@ -153,7 +187,8 @@ def audit(queue_path, notes_dir, min_num):
         route = [r for r in ROUTE_TAGS if r in head_live]
         status = [s for s in STATUS_TAGS if s in head_live]
         closed = (any(w in head_live for w in CLOSED_WORDS)
-                  or answered_means_closed(head_live))
+                  or answered_means_closed(head_live)
+                  or pass_means_closed(head_live))
         letter = has_result_letter(t["id"], names)
 
         # a block that carries two consumer-contract sections has swallowed

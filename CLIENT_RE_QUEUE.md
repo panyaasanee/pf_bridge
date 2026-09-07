@@ -1135,7 +1135,7 @@ bounded negative ⇒ LANE-DB ยังคง **ไม่** เติม `RESEND_
 
 ## RE-270 SAILING-RESULT-STORE-KEY-COLUMN-DERIVATION-001  [✅ **CLOSED / BOUNDED-POSITIVE (static answered)** · คำต่อคำจากจดหมาย `notes_to_chief/202609... -- archived 20260907 (CLOSED / BOUNDED-POSITIVE (static answered); verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260907_closed.md`)
 
-## RE-266 0X709E-DOWNSTREAM-AND-GETWORLDINFO-REPLY-WAIT-001  [🔧 **BOUNDED-NEGATIVE / STATIC ANSWERED — พับโดย LANE-K รอบ `ek1gk9` 2026-09-07T09:5x+07:00** คำต่อคำจากบรรทัดสถานะของจดหมายผล `notes_to_chief/20260905_2242_RE-266-RESULT-NO-DIRECT-SELECT-UI-NO-GETWORLD-REPLY-FLAG.md` (RE runner บนเครื่อง Panya 2026-09-05T22:42+07:00): “สถานะ: BOUNDED-NEGATIVE / STATIC ANSWERED (ไม่เขียน DONE เพราะไม่มี client-observable ตามเกณฑ์ใบ)” · 🔴 ผู้เทสเขียนเองว่า **ไม่ใช่ DONE** — ห้ามอ่านเป็น PASS · K คัดลอกคำของผู้เทส ไม่ได้ตัดสินเอง · 🟠 บันทึกเดิมก่อนพับ (ไม่ลบ): 🔴 **OPEN** · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-UI** · ตั้งเลขโดย chief (LANE-E) รอบ `rz1fxh`/R358 ตาม `COO-DECISION 20260905_1845` ข้อ 4 · เนื้อใบเต็มเขียนโดย LANE-UI รอบ `4j99rh` (`notes_to_chief/20260905_1405_LANE-UI-RE-TICKET-0x709E-handler-gate-already-answered-by-re075-real-gap-is-getworldinfo-wait.md`) · ป้ายชั้น: **ข้อ 1 = `[STATIC-ON-BRIDGE]`** (artifact ที่ commit แล้ว) · **ข้อ 2 = `[STATIC-ON-BRIDGE]` และมีแนวโน้มสูงที่จะจบด้วย `[NEEDS-CLIENT-IMAGE]`** · **ตัวบล็อกของ `GT-184`/`GT-186`** (ทั้งสองใบพลิกเป็น `BLOCKED-ON-RE-266` รอบเดียวกัน)]
+## RE-266 0X709E-DOWNSTREAM-AND-GETWORLDINFO-REPLY-WAIT-001  [🔧 **BOUNDED-NEGATIVE / STATIC ANSWERED — พับโดย LANE-K รอบ `ek1gk9` 2026-09-07T09:5x+07:00** คำต่อคำจากบรรทัดสถานะของจดหมายผล `notes_to_chief/20260905_2242_RE-266-RESULT-NO-DIRECT-SELECT-UI-NO-GETWORLD-REPLY-FLAG.md` (RE runner บนเครื่อง Panya 2026-09-05T22:42+07:00): “สถานะ: BOUNDED-NEGATIVE / STATIC ANSWERED (ไม่เขียน DONE เพราะไม่มี client-observable ตามเกณฑ์ใบ)” · 🔴 ผู้เทสเขียนเองว่า **ไม่ใช่ DONE** — ห้ามอ่านเป็น PASS · K คัดลอกคำของผู้เทส ไม่ได้ตัดสินเอง · 🟠 บันทึกเดิมก่อนพับ (ไม่ลบ ขีดฆ่าไว้ตามธรรมเนียมบ้าน = ถอนแล้วโดยเจตนา ไม่ใช่สถานะสด): ~~🔴 **OPEN**~~ · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-UI** · ตั้งเลขโดย chief (LANE-E) รอบ `rz1fxh`/R358 ตาม `COO-DECISION 20260905_1845` ข้อ 4 · เนื้อใบเต็มเขียนโดย LANE-UI รอบ `4j99rh` (`notes_to_chief/20260905_1405_LANE-UI-RE-TICKET-0x709E-handler-gate-already-answered-by-re075-real-gap-is-getworldinfo-wait.md`) · ป้ายชั้น: **ข้อ 1 = `[STATIC-ON-BRIDGE]`** (artifact ที่ commit แล้ว) · **ข้อ 2 = `[STATIC-ON-BRIDGE]` และมีแนวโน้มสูงที่จะจบด้วย `[NEEDS-CLIENT-IMAGE]`** · **ตัวบล็อกของ `GT-184`/`GT-186`** (ทั้งสองใบพลิกเป็น `BLOCKED-ON-RE-266` รอบเดียวกัน)]
 
 **ทำไมต้องมีใบนี้**: `COO-DECISION 20260905_1352` ข้อ 3 สั่งใบ RE แคบใบเดียวสองคำถาม หลัง R311+R319 วัดเป็นลบบนจอ (HYP-PF-040 FALSIFIED) · LANE-UI ค้นก่อนแล้วพบว่าคำถาม (ก) ของ `1352` **ถูกตอบไปแล้วโดย `RE-075`** ใบนี้จึงเหลือเฉพาะปลายที่ `RE-075` ไม่ได้เดิน กับคำถาม (ข) ที่ยังไม่มีใครตอบเลย
 
@@ -1163,7 +1163,7 @@ bounded negative ⇒ LANE-DB ยังคง **ไม่** เติม `RESEND_
 > 🔴 **ห้ามสายอื่นใช้เลข `RE-266`** · numbering: `RE-266` = 0 hit ทั้งสามที่ (`CLIENT_RE_QUEUE.md` · `GAME_TEST_QUEUE.md` · `archive/*QUEUE*ARCHIVE*`) ก่อนตั้ง **[วัดแล้ว รอบ `rz1fxh`/R358]** · ใบนี้มีหัวข้อ "ค้นแล้วก่อนเปิดใบ" ตาม `AGENTS.md` §98 ตามที่ RE runner ท้วงใน `1932`
 
 ## RE-272 ITEMOPERATEVITALREQ-EQUIP-FROM-BAG-RESPONSE-001  [🔧 LANE-K พับผล รอบ `slug54` 2026-09-06T13:15+07:00 — CAPTURED (ครบ 3 ซ้ำ payload เหมือนกัน op=5 value=8 identity=0x4) — R321... -- archived 20260906 (closed; verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260906_closed.md`)
-## RE-273 TRIGGER-ID-TO-LUA-SCRIPT-FILE-MAPPING-001  [🔴 **OPEN** · 🔺 `[STATIC-ON-BRIDGE]` เป็นเส้นทางแรก และ `[NEEDS-ATTENDED-CAPTURE]` เป็นเส้นทางที่สอง (สองเส้นทาง หนึ่งใบ ตาม `COO-DECISION 20260906_0146` ข้อ 2) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-Q** · ตั้งเลขโดย chief (LANE-E) รอบ `xcbnbn`/R364 ตาม `COO-DECISION 20260906_0256` ข้อ 1 · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_0155_LANE-Q-RE-TICKET-trigger-id-to-lua-file-mapping.md` คำต่อคำ · **ตัวบล็อกเดียวที่เหลือของเกณฑ์ charter สาย Q** ("ผู้เทสแล่นเรือชนทริกเกอร์แล้วสคริปต์ทำงาน")] [🔎 **เกณฑ์ (ข) ตรวจแล้วโดย LANE-K รอบ `dmef5j` 2026-09-07T04:09+07:00 — ยังอยู่บนรถบัส ไม่ถอน** · ไฟล์ที่ใบเอ่ยถึง `src/pirateforce_foundation/lua_api/trigger.py` **เปลี่ยน 3 คอมมิตหลังใบถูกเขียน** (`24b058ca` 2026-09-07T00:25 · `06a9d17d` 2026-09-07T03:08 "message-wire: Player.ShowMessage + Trigger.TriggerShowMessage real" · `09580096` 2026-09-07T03:30) ⇒ ตัวเลข **"state machine 5/17 real"** ในเนื้อใบ **น่าจะล้าสมัยแล้ว** — ขอ **LANE-Q (เจ้าของใบ)** ยืนยัน/แก้ตัวเลขในรอบถัดไปของตัวเอง · **ไม่ถอนจากสแนปช็อต** เพราะเส้นทางแรกของใบเป็น `[STATIC-ON-BRIDGE]` (ไม่กินเวลาเครื่องเจ้าของ) และคำถามของใบอยู่ฝั่งไคลเอนต์ ไม่ได้วัด `trigger.py` ⇒ การถอนไม่ประหยัดเวลาเจ้าของแม้แต่นาทีเดียว ซึ่งเป็นเหตุผลเดียวของ `PANYA-ORDER 0159` ข้อ 2 (LANE-K ไม่แตะเนื้อใบ)]
+## RE-273 TRIGGER-ID-TO-LUA-SCRIPT-FILE-MAPPING-001  [🔧 **PARTIAL (เส้นทาง 1 ตอบแล้ว / เส้นทาง 2 ยังไม่ต้องเดิน) — พับโดย LANE-K รอบ `73i74a` 2026-09-07T10:09+07:00** คำต่อคำจากหัวข้อ "สถานะที่ขอให้ chief พิจารณา" ของจดหมายผล `notes_to_chief/20260906_1340_RE-273-RESULT-TGR-FILE-IS-THE-TRIGGER-ID-TO-LUA-TABLE.md` (RE runner 2026-09-06T13:40+07:00): "`RE-273` → **PARTIAL (เส้นทาง 1 ตอบแล้ว / เส้นทาง 2 ยังไม่ต้องเดิน)** · checkpoint = **time+scope checkpoint ไม่ใช่ method ceiling** ... ขอให้ **LANE-Q ตัดสิน** ว่าจะให้ต่อในใบนี้หรือแยกใบใหม่" · K คัดลอกคำของผู้ทำ **ไม่ได้ตัดสินเอง** · 🔴 **ใบนี้ยังอยู่บนรถบัสตาม `COO-DECISION 20260907_0445` ข้อ 3 ("ติดธง ไม่ถอน") — การพับหัวใบไม่ได้ถอนใบ** แต่ก่อนหน้านี้หัวใบเขียน `OPEN` ทั้งที่จดหมายผลถูก consume ไปตั้งแต่ 13:40 ของเมื่อวาน · 🔴 **ผู้อ่านต้องรู้ก่อนหยิบไปรัน**: "เส้นทาง 1" ของใบนี้เดินด้วย `staged/re273_tgr_parse.py` ซึ่ง **ไม่อยู่ในรีโป** (K วัดเองรอบ `73i74a`: `ls staged/*.py` คืนไฟล์เดียวคือ `re059_extract_capture.py`) และ `pf_git_sync.ps1` ทำให้ไฟล์ใหม่ใต้ `staged/` ขึ้นมาเองไม่ได้ ⇒ ต้องมีคนบนเครื่องสะพาน `git add` ให้ · 🟠 บันทึกเดิมก่อนพับ (ไม่ลบ ขีดฆ่าไว้ตามธรรมเนียมบ้าน = ถอนแล้วโดยเจตนา ไม่ใช่สถานะสด): ~~🔴 **OPEN**~~ · 🔺 `[STATIC-ON-BRIDGE]` เป็นเส้นทางแรก และ `[NEEDS-ATTENDED-CAPTURE]` เป็นเส้นทางที่สอง (สองเส้นทาง หนึ่งใบ ตาม `COO-DECISION 20260906_0146` ข้อ 2) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-Q** · ตั้งเลขโดย chief (LANE-E) รอบ `xcbnbn`/R364 ตาม `COO-DECISION 20260906_0256` ข้อ 1 · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_0155_LANE-Q-RE-TICKET-trigger-id-to-lua-file-mapping.md` คำต่อคำ · **ตัวบล็อกเดียวที่เหลือของเกณฑ์ charter สาย Q** ("ผู้เทสแล่นเรือชนทริกเกอร์แล้วสคริปต์ทำงาน")] [🔎 **เกณฑ์ (ข) ตรวจแล้วโดย LANE-K รอบ `dmef5j` 2026-09-07T04:09+07:00 — ยังอยู่บนรถบัส ไม่ถอน** · ไฟล์ที่ใบเอ่ยถึง `src/pirateforce_foundation/lua_api/trigger.py` **เปลี่ยน 3 คอมมิตหลังใบถูกเขียน** (`24b058ca` 2026-09-07T00:25 · `06a9d17d` 2026-09-07T03:08 "message-wire: Player.ShowMessage + Trigger.TriggerShowMessage real" · `09580096` 2026-09-07T03:30) ⇒ ตัวเลข **"state machine 5/17 real"** ในเนื้อใบ **น่าจะล้าสมัยแล้ว** — ขอ **LANE-Q (เจ้าของใบ)** ยืนยัน/แก้ตัวเลขในรอบถัดไปของตัวเอง · **ไม่ถอนจากสแนปช็อต** เพราะเส้นทางแรกของใบเป็น `[STATIC-ON-BRIDGE]` (ไม่กินเวลาเครื่องเจ้าของ) และคำถามของใบอยู่ฝั่งไคลเอนต์ ไม่ได้วัด `trigger.py` ⇒ การถอนไม่ประหยัดเวลาเจ้าของแม้แต่นาทีเดียว ซึ่งเป็นเหตุผลเดียวของ `PANYA-ORDER 0159` ข้อ 2 (LANE-K ไม่แตะเนื้อใบ)]
 
 **คำถามของใบ**: อะไรคือตาราง/เส้นทางโค้ดที่แม็ป trigger id ของเฟรม `TriggerVital` (`0x1FB2`) ไปเป็นไฟล์ `.lua` ที่ไคลเอนต์ต้นฉบับรันสำหรับทริกเกอร์นั้น · มีสคริปต์ทริกเกอร์ที่ ship มา 309 ไฟล์ (`gamedata/lua/t_*.lua`) แต่ไม่มีสิ่งที่ commit ไว้ที่ไหนบอกว่า id ไหนยิงไฟล์ไหน · `lua_api/trigger.py` (state machine **8/17 real** — วัดสดรอบ `02mkqc` 2026-09-07T07:05+07:00 จาก `len(trigger.REAL_METHODS)`/`len(REAL_METHODS)+len(STILL_STUBBED)` บน `origin/main` `550a36d`: `GetTeiggerStatus` · `GetTriggerStatus` · `NextStatus` · `QuestActiveProgress` · `QuestFinishProgress` · `SetStatus` · `SetTriggerStatus` · `TriggerShowMessage` · เลขเดิม "5/17 รอบ `456vso`" ล้าสมัยตามที่ LANE-K รอบ `dmef5j` ชี้ และ `COO-DECISION 20260907_0445` ข้อ 5 สั่งให้เจ้าของใบแก้ — **เลขนี้ไม่เปลี่ยนคำถามของใบ** ซึ่งอยู่ฝั่งไคลเอนต์ ไม่ได้วัด `trigger.py`) พร้อมถูกเรียกแล้ว ขาดแค่เส้นทาง dispatch สดที่ป้อน trigger id จริงให้มัน
 
@@ -1200,7 +1200,7 @@ ATTENDED: บูต = บูตไคลเอนต์ปกติเข้า�
 > 🔴 **ห้ามสายอื่นใช้เลข `RE-273`** · numbering: คำสั่งนับเลขของบ้าน (ข้อ ② หัวไฟล์นี้) รันสดรอบ `xcbnbn`/R364 คืน **272** ⇒ เลขว่างตัวถัดไปคือ **273** [วัดแล้ว รอบนี้] · ตรวจ 0 hit ของ `GT-273`/`RE-273` ทั้งสามที่ (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/*QUEUE*ARCHIVE*.md`) ก่อนวาง
 > 🔴 **ใบ GT คู่ของมันยังไม่มี และยังไม่ควรมี** — ใบนี้เป็นคำถาม static เส้นทางแรก ยังไม่มีสิ่งที่ผู้เทสจะเห็นบนจอจนกว่าจะรู้การแม็ป · เมื่อใบนี้ตอบแล้ว LANE-Q เปิดใบสร้าง + ใบ GT ในรอบเดียวกัน หรือเขียน `NO_FEATURE_WAITING:` (`COO-DECISION 20260906_0146` ข้อ 5)
 
-## RE-278 LV-LIVE-UPDATE-FRAME-001  [🔴 **OPEN** · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-GM** · ตั้งเลขโดย LANE-K รอบ `n3s0rg` 2026-09-06T14:10+07:00 ตาม `COO-DECISION 20260906_1346` ข้อ 3(ก) · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_0434_LANE-GM-TO-CHIEF-slash-lv-lands-gt-body-and-re-question.md` ข้อ 2 คำต่อคำ]
+## RE-278 LV-LIVE-UPDATE-FRAME-001  [🔧 **DONE (static) / POSITIVE + BOUNDED-NEGATIVE — พับโดย LANE-K รอบ `73i74a` 2026-09-07T10:09+07:00** คำต่อคำจากหัวจดหมายผล `notes_to_chief/20260906_2313_RE-278-RESULT-LEVEL-ONLY-TRAVELS-IN-BASICATTR-MASK-BIT-0x0002-RESEND-THE-WHOLE-MASK.md` (RE runner บนเครื่อง Panya 2026-09-06T23:13+07:00): "**สถานะ: DONE (static) / POSITIVE + BOUNDED-NEGATIVE · ชั้น client-observable เป็นของ `GT-200`/ใบเทสของสาย GM ไม่ใช่ใบนี้**" · K คัดลอกคำของผู้เทส **ไม่ได้ตัดสินเอง** และไม่ได้แตะเนื้อใบ · 🟠 บันทึกเดิมก่อนพับ (ไม่ลบ ขีดฆ่าไว้ตามธรรมเนียมบ้าน = ถอนแล้วโดยเจตนา ไม่ใช่สถานะสด): ~~🔴 **OPEN**~~ · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-GM** · ตั้งเลขโดย LANE-K รอบ `n3s0rg` 2026-09-06T14:10+07:00 ตาม `COO-DECISION 20260906_1346` ข้อ 3(ก) · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_0434_LANE-GM-TO-CHIEF-slash-lv-lands-gt-body-and-re-question.md` ข้อ 2 คำต่อคำ]
 
 **คำถาม**: เฟรม server->client เฟรมไหนที่ทำให้ไคลเอนต์ v141 อัปเดต **เลเวลของตัวผู้เล่นเอง** ระหว่าง session โดยไม่ต้อง relog — และถ้าเป็น `UpdateAttrVital` (`0x309A`) จริง ต้องส่งกี่ฟิลด์ (mask ไหนบ้าง) ถึงจะไม่ตกอยู่ในรูปแบบ sparse ที่ `GT-193`/`GT-218` วัดว่าฆ่าไคลเอนต์
 
@@ -1215,11 +1215,19 @@ ATTENDED: บูต = บูตไคลเอนต์ปกติเข้า�
 **links**: `RE-117` (layout ฟิลด์ level) · `RE-222` (full-object copy apply) · `GT-193`/`GT-218` (sparse `0x309A` ฆ่าไคลเอนต์) · `GT-200` (ค้าง, คำถามเดียวกันว่าไคลเอนต์วาดจากฟิลด์นี้จริงไหม) · `GT-277` (`/lv` เขียนแถวได้แล้ว, ใบนี้ต่อยอดถามเรื่อง live-update ไม่ต้อง relog)
 
 ### result:
-(ว่าง)
+**DONE (static) / POSITIVE + BOUNDED-NEGATIVE** -- พับโดย LANE-K รอบ `73i74a` 2026-09-07T10:09+07:00 · คัดลอกจาก `notes_to_chief/20260906_2313_RE-278-RESULT-LEVEL-ONLY-TRAVELS-IN-BASICATTR-MASK-BIT-0x0002-RESEND-THE-WHOLE-MASK.md` คำต่อคำ
+
+> **สถานะ: DONE (static) / POSITIVE + BOUNDED-NEGATIVE · ชั้น client-observable เป็นของ `GT-200`/ใบเทสของสาย GM ไม่ใช่ใบนี้**
+>
+> **คำตอบสองบรรทัด**
+> 1. ไม่มีเฟรมไหนพา "เลเวลอย่างเดียว" — ฟิลด์เลเวลอยู่ที่ `BasicAttr+0x5E` (u16, tag `0x12`) และถูกส่ง **ก็ต่อเมื่อ**บิต `0x0002` ของ mask u16 ที่ `+0x70` ถูกเซ็ต · โคเดกของคลาสนี้มี **ตัวเดียวทั้งอิมเมจ** (`0x004656F0`, ถูกอ้างที่เดียวคือสล็อต vtable `0x00F0E794`) ⇒ ทุกเฟรมที่พา `BasicAttr` ใช้ทางเดียวกันหมด
+> 2. เหตุที่ sparse ฆ่าไคลเอนต์: **ตัวอ่านไม่ได้ zero-fill** — มันข้ามฟิลด์ที่บิตไม่เซ็ตไปเฉย ๆ · ศูนย์มาจาก "อ็อบเจกต์ถูกสร้างใหม่ (ทุกไบต์ 0) ก่อนอ่าน" + apply เป็น full-object copy (`RE-222` Q0) ⇒ **บิตไหนไม่ส่ง = ฟิลด์นั้นกลายเป็น 0 บนไคลเอนต์** ⇒ ต้องส่ง mask ชุดเดียวกับตอนล็อกอิน ค่าปัจจุบันครบทุกช่อง เปลี่ยนแค่ `+0x5E`
+
+🟡 **ชั้นที่ขาด (K ไม่ปั๊มให้ครบ)**: จดหมายเขียนเองว่าชั้น **client-observable ยังไม่วัด** และเป็นของ `GT-200`/ใบเทสของสาย GM ⇒ ใบนี้ปิดในฐานะใบ static เท่านั้น
 
 > 🔴 **ห้ามสายอื่นใช้เลข `RE-278`** · numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน **277** (`GT-277`, วางพร้อมกันรอบเดียว) ⇒ ใบนี้ **278** · ตรวจ 0 hit ของ `GT-278`/`RE-278` ทั้งสามที่ (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/`) ก่อนวาง [ตรวจโดย LANE-K รอบ `n3s0rg`]
 
-## RE-280 ITEMOPERATEVITALRES-EQUIP-WORN-FLAG-AND-W9-CROSSCHECK-001  [🔴 **OPEN** · 🔥 **PANYA-ORDER `20260906_0156` เส้นตาย 23:00 — บล็อกแขน (ข)** · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-DB** · ตั้งเลขโดย LANE-K รอบ `zqq4qz` 2026-09-06T16:09+07:00 ตาม `COO-DECISION 20260906_1547` ข้อ 4(1) ("ตั้งเลข RE ของ DB `1449` ก่อนใบอื่นทั้งหมด") · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_1449_LANE-DB-RE-TICKET-itemoperatevitalres-equip-worn-flag-and-w9-crosscheck.md` คำต่อคำ · จากสาย: LANE-DB รอบ `xqi5p4` ต่อจาก `rounds/DB_20260906_1316_rjqssc_...md` §7]
+## RE-280 ITEMOPERATEVITALRES-EQUIP-WORN-FLAG-AND-W9-CROSSCHECK-001  [🔧 **DONE (ask 1 + ask 2 + ask 3) — พับโดย LANE-K รอบ `73i74a` 2026-09-07T10:09+07:00** คำต่อคำจากหัวจดหมายผล `notes_to_chief/20260906_2258_RE-280-RESULT-0x39-IS-A-SHIFT-BIT-INDEX-FF-MEANS-NOT-EQUIPPED.md` (RE runner บนเครื่อง Panya 2026-09-06T22:58+07:00): "**สถานะ: DONE (ask 1 + ask 2 + ask 3) / static ล้วน · ชั้น client-observable ยังเป็นของบล็อก ATTENDED ในใบเอง**" · K คัดลอกคำของผู้เทส **ไม่ได้ตัดสินเอง** และไม่ได้แตะเนื้อใบ · 🟠 บันทึกเดิมก่อนพับ (ไม่ลบ ขีดฆ่าไว้ตามธรรมเนียมบ้าน = ถอนแล้วโดยเจตนา ไม่ใช่สถานะสด): ~~🔴 **OPEN**~~ · 🔥 **PANYA-ORDER `20260906_0156` เส้นตาย 23:00 — บล็อกแขน (ข)** · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-DB** · ตั้งเลขโดย LANE-K รอบ `zqq4qz` 2026-09-06T16:09+07:00 ตาม `COO-DECISION 20260906_1547` ข้อ 4(1) ("ตั้งเลข RE ของ DB `1449` ก่อนใบอื่นทั้งหมด") · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_1449_LANE-DB-RE-TICKET-itemoperatevitalres-equip-worn-flag-and-w9-crosscheck.md` คำต่อคำ · จากสาย: LANE-DB รอบ `xqi5p4` ต่อจาก `rounds/DB_20260906_1316_rjqssc_...md` §7]
 
 **หัวเรื่อง**: ItemOperateVitalRes (0x4C13) สำหรับ "สวมอาวุธ" (op=5): field `ItemAttr@+0x39` worn-flag ความหมายคืออะไร + cross-check ว่า W9 คือ plain itembag codec จริงหรือไม่สำหรับฟังก์ชันนี้โดยเฉพาะ
 
@@ -1340,7 +1348,13 @@ nonclaims ของบล็อกนี้ (จาก LANE-DB คำต่อ�
    เกณฑ์ผ่าน (ต่างจากร่างเดิมของ `1651` โดยเจตนา)
 
 ### result:
-(ว่าง)
+**DONE (ask 1 + ask 2 + ask 3)** -- พับโดย LANE-K รอบ `73i74a` 2026-09-07T10:09+07:00 · คัดลอกจาก `notes_to_chief/20260906_2258_RE-280-RESULT-0x39-IS-A-SHIFT-BIT-INDEX-FF-MEANS-NOT-EQUIPPED.md` คำต่อคำ
+
+> **สถานะ: DONE (ask 1 + ask 2 + ask 3) / static ล้วน · ชั้น client-observable ยังเป็นของบล็อก ATTENDED ในใบเอง**
+>
+> **คำตอบหนึ่งบรรทัดสำหรับแขน (ข):** เฟรมตอบต้องส่ง `ItemAttr+0x39 = N` โดย **N ไม่ใช่ `0xFF`** — client เอา N ไปทำ `mask = 1 << N` ตรง ๆ (`0x005833F9`/`0x005833FE`) ไม่มีการ lookup ตารางใด ๆ ระหว่างทาง ⇒ **N คือดัชนีบิตของช่องอุปกรณ์ ไม่ใช่รหัส equip-type**
+
+🟡 **ชั้นที่ขาด (K ไม่ปั๊มให้ครบ)**: จดหมายเขียนเองว่าชั้น **client-observable ยังเป็นของบล็อก `ATTENDED:` ในใบเอง** ⇒ ใบนี้ปิดในฐานะใบ static เท่านั้น
 
 > 🔴 **ห้ามสายอื่นใช้เลข `RE-280`** · numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน **279** (`GT-279`, ตั้งเลขรอบ `rsmsia`) ⇒ ใบนี้ **280** · ตรวจ 0 hit ของ `GT-280`/`RE-280` ทั้งสามที่ (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/*QUEUE*ARCHIVE*.md`) ก่อนวาง [ตรวจโดย LANE-K รอบ `zqq4qz`] · เร่งด่วน: `PANYA-ORDER 0156` เส้นตาย 23:00 +07:00 คืนนี้ (`COO-DECISION 20260906_1547` ข้อ 4(1) สั่งตั้งเลขนี้ก่อนใบอื่นทั้งหมด)
 
@@ -1395,7 +1409,7 @@ s_SCORE หกตัวเลขคืออะไร (ลำดับ STR/CON/D
 
 ## RE-283 GMUI-THREE-PAGES-BUTTON-TO-OPCODE-MAP-001  [✅ **ปิดครบทั้ง 5 ข้อแล้ว** (คำของจดหมายเอง) · `notes_to_chief/20260907_0331_RE-283-RESULT-FINAL-... -- archived 20260907 (CLOSED (owner LANE-GM consumed FINAL, asked head closed); verbatim in `archive/CLIENT_RE_QUEUE_ARCHIVE_20260907_closed.md`)
 
-## RE-285 TRIGGER-GETCONTACTMODE-ARGUMENT-SEMANTICS-001  [🔧 **CLOSED / BOUNDED-NEGATIVE — พับโดย LANE-K รอบ `ek1gk9` 2026-09-07T09:5x+07:00** คำต่อคำจากบรรทัดสถานะของจดหมายผล `notes_to_chief/20260906_2303_RE-285-RESULT-TRIGGER-NAMESPACE-DOES-NOT-EXIST-IN-THE-CLIENT-AT-ALL.md` (2026-09-06T23:03+07:00): “สถานะ: CLOSED / BOUNDED-NEGATIVE ทั้งสองเส้นทาง (static-on-bridge + client-image) · checkpoint = method ceiling — ห้าม rerun อิมเมจเดิมกับคำถามนี้” · 🔴 **ห้าม rerun อิมเมจเดิมกับคำถามนี้** (คำของผู้เทส) · K คัดลอก ไม่ได้ตัดสินเอง · 🟠 บันทึกเดิมก่อนพับ (ไม่ลบ): 🔴 **OPEN** · 🔺 `[STATIC-ON-BRIDGE]` เป็นเส้นทางแรก และ `[NEEDS-CLIENT-IMAGE]` เป็นเส้นทางที่สอง (สองเส้นทาง หนึ่งใบ เหมือนรูปแบบ `RE-273`) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-Q** · ตั้งเลขโดย LANE-K รอบ `zqq4qz` 2026-09-06T16:09+07:00 · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_0435_LANE-Q-RE-TICKET-DRAFT-getcontactmode-trigger22-semantics-unknown.md` คำต่อคำ (จดหมายจ่าหน้าถึง LANE-E/chief แต่รูปแบบไฟล์ตรง `*RE-TICKET*` ตามนิยามคำขอเลขใบของ `prompts/LANE-K.md`)]
+## RE-285 TRIGGER-GETCONTACTMODE-ARGUMENT-SEMANTICS-001  [🔧 **CLOSED / BOUNDED-NEGATIVE — พับโดย LANE-K รอบ `ek1gk9` 2026-09-07T09:5x+07:00** คำต่อคำจากบรรทัดสถานะของจดหมายผล `notes_to_chief/20260906_2303_RE-285-RESULT-TRIGGER-NAMESPACE-DOES-NOT-EXIST-IN-THE-CLIENT-AT-ALL.md` (2026-09-06T23:03+07:00): “สถานะ: CLOSED / BOUNDED-NEGATIVE ทั้งสองเส้นทาง (static-on-bridge + client-image) · checkpoint = method ceiling — ห้าม rerun อิมเมจเดิมกับคำถามนี้” · 🔴 **ห้าม rerun อิมเมจเดิมกับคำถามนี้** (คำของผู้เทส) · K คัดลอก ไม่ได้ตัดสินเอง · 🟠 บันทึกเดิมก่อนพับ (ไม่ลบ ขีดฆ่าไว้ตามธรรมเนียมบ้าน = ถอนแล้วโดยเจตนา ไม่ใช่สถานะสด): ~~🔴 **OPEN**~~ · 🔺 `[STATIC-ON-BRIDGE]` เป็นเส้นทางแรก และ `[NEEDS-CLIENT-IMAGE]` เป็นเส้นทางที่สอง (สองเส้นทาง หนึ่งใบ เหมือนรูปแบบ `RE-273`) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-Q** · ตั้งเลขโดย LANE-K รอบ `zqq4qz` 2026-09-06T16:09+07:00 · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_0435_LANE-Q-RE-TICKET-DRAFT-getcontactmode-trigger22-semantics-unknown.md` คำต่อคำ (จดหมายจ่าหน้าถึง LANE-E/chief แต่รูปแบบไฟล์ตรง `*RE-TICKET*` ตามนิยามคำขอเลขใบของ `prompts/LANE-K.md`)]
 
 **หัวเรื่อง**: `Trigger.GetContactMode` semantics unknown -- last of `lua_api/trigger.py`'s twelve stubbed names with no cross-lane dependency once its return value is known
 
@@ -1466,17 +1480,64 @@ number it returns MEANS.
 
 > 🔴 **ห้ามสายอื่นใช้เลข `RE-285`** · numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน **284** (`GT-284`, ตั้งเลขรอบเดียวกัน `zqq4qz`) ⇒ ใบนี้ **285** · ตรวจ 0 hit ของ `GT-285`/`RE-285` ทั้งสามที่ก่อนวาง [ตรวจโดย LANE-K รอบ `zqq4qz`]
 
-## RE-289 BG3001-TGR-ISLAND-CONTACT-DISCRIMINATOR-001  [🔴 **OPEN** · 🔺 `[STATIC-ON-BRIDGE]` (อ่านไฟล์ข้อมูลไคลเอนต์บนเครื่องสะพาน read-only -- **ไม่ใช่ attended ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่กินเวลาเครื่องเจ้าของ** ⇒ ไม่มีบล็อก `ATTENDED:` และไม่ต้องมี `HEADLESS_PROOF:` ตาม `NOW.md` `0159` ซึ่งบังคับเฉพาะใบ attended) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-A (WORLD)** · ผู้ทำ = RE runner บนเครื่องสะพาน · ตั้งเลขโดย LANE-K รอบ `70l5du` 2026-09-07T05:10+07:00 (ภายในรอบที่เห็นคำขอ) · เนื้อใบมาจากจดหมาย `notes_to_chief/20260907_0426_LANE-A-TO-K-gt-body-re-bg3001-tgr-island-discriminator.md` คำต่อคำ · เปิดตาม `COO-DECISION 20260907_0405` ข้อ 3 (TIER 3 ต้องมี discriminator วัดจริงว่า "เกาะ != น้ำเปล่า" = ตัวบล็อก M2 ใน `NOW.md`)] -- moved to `tickets/RE-289.md` (เนื้อใบ 8,806 B > เพดาน 8,192 B ของ body ในคิว เจ้าของใบวัดมาเอง, verbatim, per `PANYA-ORDER 1448` + `.gitignore !/tickets/`)
+## RE-289 BG3001-TGR-ISLAND-CONTACT-DISCRIMINATOR-001  [🔧 **PASS / BOUNDED-POSITIVE — พับโดย LANE-K รอบ `73i74a` 2026-09-07T10:09+07:00** คำต่อคำจากหัวจดหมายผล `notes_to_chief/20260907_0955_RE-289-RESULT-ordinal-2-and-3-exist-as-point-boxes-discriminator-is-real.md` (RE runner บนเครื่องสะพาน รอบ `RE-RUNNER-20260907_0942` 2026-09-07T09:55+07:00): "สถานะ: **PASS / BOUNDED-POSITIVE** — ตอบครบทั้งสองข้อของเกณฑ์ผ่าน และได้ตารางครบทุกเรคคอร์ด (52/52 ไม่มี `PARSE_FAILED`)" · K คัดลอกคำของผู้เทส **ไม่ได้ตัดสินเอง** และไม่ได้แตะเนื้อใบ · 🟠 บันทึกเดิมก่อนพับ (ไม่ลบ ขีดฆ่าไว้ตามธรรมเนียมบ้าน = ถอนแล้วโดยเจตนา ไม่ใช่สถานะสด): ~~🔴 **OPEN**~~ · 🔺 `[STATIC-ON-BRIDGE]` (อ่านไฟล์ข้อมูลไคลเอนต์บนเครื่องสะพาน read-only -- **ไม่ใช่ attended ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่กินเวลาเครื่องเจ้าของ** ⇒ ไม่มีบล็อก `ATTENDED:` และไม่ต้องมี `HEADLESS_PROOF:` ตาม `NOW.md` `0159` ซึ่งบังคับเฉพาะใบ attended) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-A (WORLD)** · ผู้ทำ = RE runner บนเครื่องสะพาน · ตั้งเลขโดย LANE-K รอบ `70l5du` 2026-09-07T05:10+07:00 (ภายในรอบที่เห็นคำขอ) · เนื้อใบมาจากจดหมาย `notes_to_chief/20260907_0426_LANE-A-TO-K-gt-body-re-bg3001-tgr-island-discriminator.md` คำต่อคำ · เปิดตาม `COO-DECISION 20260907_0405` ข้อ 3 (TIER 3 ต้องมี discriminator วัดจริงว่า "เกาะ != น้ำเปล่า" = ตัวบล็อก M2 ใน `NOW.md`)] -- moved to `tickets/RE-289.md` (เนื้อใบ 8,806 B > เพดาน 8,192 B ของ body ในคิว เจ้าของใบวัดมาเอง, verbatim, per `PANYA-ORDER 1448` + `.gitignore !/tickets/`)
 
 ### result:
-(ว่าง)
+**PASS / BOUNDED-POSITIVE** -- พับโดย LANE-K รอบ `73i74a` 2026-09-07T10:09+07:00 · คัดลอกจาก `notes_to_chief/20260907_0955_RE-289-RESULT-ordinal-2-and-3-exist-as-point-boxes-discriminator-is-real.md` คำต่อคำ · **K ไม่ได้รันอะไรเองและไม่ได้ตัดสินผล**
+
+> ## สถานะ: **PASS / BOUNDED-POSITIVE**
+> ตอบครบทั้งสองข้อของเกณฑ์ผ่าน และได้ตารางครบทุกเรคคอร์ด (52/52 ไม่มี `PARSE_FAILED`)
+>
+> **(1) ordinal 2 และ 3 มีอยู่จริงในไฟล์นี้** — ทั้งคู่เป็น `Trigger TELCHK_LV`, `model = null`, `script = T_TELCHK_LV.lua`
+>
+> **(2) ทั้งคู่เป็นกล่องเฉพาะจุด ไม่ใช่กว้างเท่าฉาก**
+>
+> | ordinal | pos x, y, z | extent x, y, z | % ของกรอบฉาก (x / y) |
+> |---|---|---|---|
+> | **2** | -5426.19, 5129.33, 86.01 | 2000 x 2000 x 500 | **10.6% / 10.6%** |
+> | **3** | -1916.55, -6137.92, 86.02 | 1800 x 1800 x 500 | **9.6% / 9.6%** |
+>
+> เกณฑ์ใบคือ < 20% ทั้งสองแกน ⇒ **ผ่านทั้งคู่**
+>
+> ⇒ ในชั้นข้อมูลไคลเอนต์ **มีกล่องเฉพาะจุดให้จำแนกจริง** · `world_m2_trigger_vital_response.ISLAND_CONTACT_DISCRIMINATOR` (วันนี้ `None`) มีของให้เติมแล้ว · ทาง `.tgr` **ไม่ปิด**
+
+🔴 **nonclaims ของใบและของผล — K ยกมาครบ ห้ามอ่านบล็อกข้างบนโดยไม่อ่านสี่ข้อนี้** (คัดลอกคำต่อคำจากจดหมายผลและจาก `tickets/RE-289.md`)
+1. `tickets/RE-289.md` หัวข้อ "สิ่งที่ใบนี้ **ไม่** ถาม" ข้อ 1: *"⇒ ผลใบนี้ **ยังไม่พอ** เติม `ISLAND_CONTACT_DISCRIMINATOR` ด้วยตัวเอง"* — 🔴 **ประโยค "มีของให้เติมแล้ว" ข้างบนไม่ใช่ใบอนุญาตให้ assign ชื่อลงไปหนึ่งบรรทัด**
+2. nonclaim ของผล: *"ไม่ได้พิสูจน์ว่า `trigger_ordinal` = wire trigger id ของ `TriggerVital 0x1FB2` tag `0x0F`"* — 🔴 ห้ามจับคู่กับ `+0x3C` ของ `RE-286` เพราะเลขเท่ากัน
+3. nonclaim ของผล: *"ไม่ได้พิสูจน์ว่ากล่องสามใบนั้น 'คือเกาะ' — การเรียกมันว่าเกาะเป็นการตีความของ LANE-A ไม่ใช่ของผล"*
+4. `BUILD_IMPACT` ของผล ข้อ 2: **`Player.TeleportCheck` เป็น `STUB_NOOP` บนเซิร์ฟเวอร์** — สคริปต์ที่กล่องทั้งสามเรียก **วันนี้ยังไม่ทำอะไร**
+
+🟡 **ชั้นที่ขาด (K ไม่ปั๊มให้ครบ)**: nonclaim ข้อ 4 ของจดหมายเขียนเองว่า *"ผลนี้เป็นชั้น wire/DB-side static ล้วน **ไม่มีชั้น client-observable**"* ⇒ ใบนี้ปิดในฐานะใบ static เท่านั้น เหมือน `RE-278`/`RE-280`
+
+🔴 **ถอนการอ้าง artifact สามชิ้น — ไม่มีชิ้นไหนอยู่ในรีโป และ "รอ sync" เป็นคำตอบที่ผิด** (K วัดเองรอบ `73i74a` หลังผล `pf-adversary`)
+จดหมายผลอ้างสามไฟล์พร้อม sha256 · `ls staged/*.py` บนโคลนนี้คืน **`staged/re059_extract_capture.py` ไฟล์เดียว**:
+
+| ไฟล์ที่จดหมายอ้าง | สถานะจริงในรีโป |
+|---|---|
+| `staged/re289_tgr_extract.py` (3,873 B) | **ไม่มี** |
+| `staged/RE-289_Bg3001_tgr_full_dump.txt` (19,089 B) | **ไม่มี** — 🔴 **นี่คือไฟล์ที่ถือ "ตารางครบทุกเรคคอร์ด" ซึ่งเป็นเกณฑ์ผ่านของใบเอง** (`tickets/RE-289.md`: "ไม่ผ่าน = รายงานเฉพาะ ordinal 2-3 โดยไม่ให้ตารางเต็ม") |
+| `staged/re273_tgr_parse.py` (2,406 B) | **ไม่มี** — อยู่ในตาราง "SHA (ก่อน = หลัง ตรวจแล้ว)" ของจดหมาย ทั้งที่ git ไม่เคยถือไฟล์นี้ |
+
+🔴 **"รอ sync ของสะพานพามาก่อน" ที่ K เขียนไว้ตอนแรกในบล็อกนี้ = ผิด ถอนทิ้งแล้ว** · `pf_git_sync.ps1` **ออกแบบมาให้เป็นไปไม่ได้**: `staged` ไม่อยู่ใน `$ALLOWLIST` (บรรทัด 165-167 = รายการเดียวที่สแกนด้วย `--untracked-files=all`) และ `$SHARED_TRACKED` (บรรทัด 188) สแกนด้วย `--untracked-files=no` ซึ่งคอมเมนต์ของตัวมันเองบรรทัด 712-715 อธิบายว่า *"a file that is not already in git cannot appear here"* ⇒ **ไฟล์ใหม่ใต้ `staged/` ไม่มีทางขึ้นมาเองตลอดกาล**
+⇒ **ทางเดียวคือมีคนบนเครื่องสะพาน `git add` ไฟล์นั้นตรง ๆ** · K ทำแทนไม่ได้ (ไม่มีไฟล์) · **ปฏิบัติแบบเดียวกับที่ K ทำกับ `RE-234` เมื่อ 08:35**: หลักฐานส่วนที่อ้างไฟล์เหล่านี้ **ไม่มี artifact ที่ commit แล้วรองรับ** — สถานะ `PASS` ข้างบนยังเป็นคำของผู้เทสคำต่อคำ (K ไม่ถอนคำตัดสินของใคร) แต่ **ผู้อ่านต้องรู้ว่าตรวจซ้ำจากรีโปไม่ได้**
+🔴 **ครั้งที่สามติดกันของสาเหตุเดียวกัน**: `RE-234` (`staged/re234_static_verify.py`) · `RE-273` (`staged/re273_tgr_parse.py`) · `RE-289` (สามไฟล์ข้างบน) ⇒ K ยกเป็นคำถามเชิงระบบถึง COO ในจดหมายรอบ `73i74a`
+🔸 K ตรวจตัวเลขในผลเองด้วย: จดหมายเขียน `52/52` · ตารางในจดหมายแสดง **23 แถว** และร้อยแก้วบอกว่า "ที่เหลืออีก **27** แถว (ord 32, 71-98)" แต่ `1 + 28 = 29` ไม่ใช่ 27 (23+29 = 52 ถูก) ⇒ **เลข 27 คลาดสอง** · K ไม่แก้คำในจดหมาย และ **ตรวจซ้ำไม่ได้** เพราะไฟล์ dump ไม่อยู่ในรีโป
+
+**ข้อที่สองที่จดหมายขอ**: MEMORY ของ RE runner เข้าไม่ถึงจากเซสชันของผู้ทำ — เป็นคำขอถึง Panya ไม่ใช่งานเสมียน
 
 > numbering: ตัวนับร่วมสองคิว + `archive/*ARCHIVE*` + `tickets/` คืนสูงสุด **288** (`GT-288`, ตั้งเลขรอบ `6rj6h1`) ⇒ ใบนี้ **289** · ตรวจ 0 hit ของ `GT-289`/`RE-289` ทั้งสามที่ + `notes_to_chief/` + `NOW.md` ก่อนวาง [ตรวจโดย LANE-K รอบ `70l5du`]
 
-## RE-286 TRIGGERRESULT-DIRECTION-AND-CALLER-CHAIN-001  [🔴 **OPEN** · 🔺 `[STATIC-ON-BRIDGE]` (ต้องมี `GameClient.local.bin` จริง -- ไม่ใช่ attended, ไม่ต้องเปิดเกม, ไม่ต้องจับ `LOCK_GAME`) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-UI** · ตั้งเลขโดย LANE-K รอบ `camatf` 2026-09-06T22:17+07:00 · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_2124_LANE-UI-TO-K-re-body-triggerresult-direction-and-caller.md` คำต่อคำ] -- moved to `tickets/RE-286.md` (>8,192 B, verbatim, per `PANYA-ORDER 1448` + `.gitignore !/tickets/` merged R373 · เขียนตั้งแต่รอบ `camatf` แต่เขียนสตับคิวไม่ได้เพราะเซสชันนั้นไม่มี git (ดู `notes_to_chief/20260906_2217_LANE-K-ASK-COO-tool-write-ceiling.md`) -- เติมสตับให้จริงโดย LANE-K รอบ `hf1gs9` 2026-09-06T23:17+07:00)
+## RE-286 TRIGGERRESULT-DIRECTION-AND-CALLER-CHAIN-001  [🔧 **DONE (ตอบครบทั้ง 3 ข้อ) — พับโดย LANE-K รอบ `73i74a` 2026-09-07T10:09+07:00** คำต่อคำจากหัวจดหมายผล `notes_to_chief/20260907_0326_RE-286-RESULT-INBOUND-TRIGGER-STATE-APPLY-NO-COMMON-CONFIRM-IN-THREE-LEVELS.md` (RE runner บนเครื่อง Panya 2026-09-07T03:26+07:00): "**สถานะ: DONE (ตอบครบทั้ง 3 ข้อ) · static ล้วน ไม่เปิดเกม ไม่จับ `LOCK_GAME`**" · K คัดลอกคำของผู้เทส **ไม่ได้ตัดสินเอง** และไม่ได้แตะเนื้อใบ · 🟠 บันทึกเดิมก่อนพับ (ไม่ลบ ขีดฆ่าไว้ตามธรรมเนียมบ้าน = ถอนแล้วโดยเจตนา ไม่ใช่สถานะสด): ~~🔴 **OPEN**~~ · 🔺 `[STATIC-ON-BRIDGE]` (ต้องมี `GameClient.local.bin` จริง -- ไม่ใช่ attended, ไม่ต้องเปิดเกม, ไม่ต้องจับ `LOCK_GAME`) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-UI** · ตั้งเลขโดย LANE-K รอบ `camatf` 2026-09-06T22:17+07:00 · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_2124_LANE-UI-TO-K-re-body-triggerresult-direction-and-caller.md` คำต่อคำ] -- moved to `tickets/RE-286.md` (>8,192 B, verbatim, per `PANYA-ORDER 1448` + `.gitignore !/tickets/` merged R373 · เขียนตั้งแต่รอบ `camatf` แต่เขียนสตับคิวไม่ได้เพราะเซสชันนั้นไม่มี git (ดู `notes_to_chief/20260906_2217_LANE-K-ASK-COO-tool-write-ceiling.md`) -- เติมสตับให้จริงโดย LANE-K รอบ `hf1gs9` 2026-09-06T23:17+07:00)
 
 ### result:
-(ว่าง)
+**DONE (ตอบครบทั้ง 3 ข้อ)** -- พับโดย LANE-K รอบ `73i74a` 2026-09-07T10:09+07:00 · คัดลอกจาก `notes_to_chief/20260907_0326_RE-286-RESULT-INBOUND-TRIGGER-STATE-APPLY-NO-COMMON-CONFIRM-IN-THREE-LEVELS.md` คำต่อคำ (จดหมายมี `.CONSUMED.txt` ของ LANE-UI แล้ว หัวใบเป็นส่วนที่ยังค้าง)
+
+> **สถานะ: DONE (ตอบครบทั้ง 3 ข้อ) · static ล้วน ไม่เปิดเกม ไม่จับ `LOCK_GAME`**
+>
+> **คำตอบสามบรรทัด**
+> 1. **inbound จริง** — handler `0x006018A0` เป็น handler **เฉพาะตัว** (ไม่แชร์กับใครใน 519 คลาส) และมัน **อ่านฟิลด์ที่มาจากสาย** (`+0x3C`, `+0x3E`, `+0x3F`, `+0x5C`) แล้วเอาไปแก้สถานะทริกเกอร์ในฉาก · ไม่มีโค้ดฝั่งไคลเอนต์ที่ไหนสร้างอ็อบเจ็กต์นี้เพื่อส่งออกเลย
+> 2. **ไม่ใช่ candidate ของ "รายงานกัปตัน"** — เดิน caller/callee graph **3 ชั้น** จาก handler แล้ว **ไม่พบทั้ง opener `0x005AB5F0` และสตริง `"Common_Confirm"` (`0x00F19F44`) / `"Common_Confirm%d"` (`0x00F2BE9C`)**
+> 3. `+0x18` (qword tag `0x32`) **ไม่ใช่** ตัวเดียวกับ `+0x12` ของ `AddSurveyData` — **ตัวที่ทำหน้าที่ "trigger/dock id" คือ `+0x3C` (u16, tag `0x0F`)** ซึ่ง apply เอาไป lookup ทริกเกอร์จริง · `+0x18` ไม่ถูกอ่านในเส้นทางรับเลย
 
 > numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน **285** (`RE-285`, ตั้งเลขรอบ `zqq4qz`) ⇒ ใบนี้ **286** · ตรวจ 0 hit ของ `GT-286`/`RE-286` ทั้งสามที่ (live สองคิว + `archive/*QUEUE*ARCHIVE*` + `tickets/`) ก่อนวาง [ตรวจโดย LANE-K รอบ `camatf`]
 
@@ -1598,3 +1659,14 @@ aimเดียว: **call ที่ตามหลัง prefix ที่ติ
 
 > numbering [LANE-K รอบ `4af3qf`]: ต่อจาก `RE-293` ในรอบเดียวกัน ⇒ ใบนี้ **294** · ตรวจ 0 hit ครบสี่ที่ก่อนวาง
 > 📌 [LANE-K รอบ `4af3qf`] หมายเหตุของเจ้าของใบถึง COO ที่ **ไม่ใช่เนื้อใบ** แต่ห้ามให้หาย: `external/PF_PROTOCOL_PRIORITY.tsv` มีคอลัมน์ `OPEN`/`CLOSED` + ชื่อเหตุผลต่อคลาส ครบ 519 คลาส แต่ **ไม่ได้อยู่ในแผนที่สามไฟล์ที่ `prompts/COMMON_LANE_ROUND.md` สั่งให้ทุกสาย grep ก่อนออกใบ RE** ⇒ ทุกสายกำลังออกใบโดยไม่เห็นคอลัมน์ที่บอกว่า "ข้อนี้ปิดไปแล้วหรือยัง" · เจ้าของใบขอให้พิจารณาเพิ่มเป็นไฟล์ที่สี่ · K ส่งต่อในจดหมายรอบถึง COO (`prompts/` แก้ได้เฉพาะ Panya ตาม `NOW.md`)
+
+## RE-295 QUEST-REWARD-ROUNDING-AND-LV-LEVEL-SOURCE-001  [🔴 **OPEN** · 🔺 `[STATIC-ON-BRIDGE]` (อ่าน client image ที่มีอยู่แล้วบนเครื่องสะพาน read-only — **ไม่ใช่ attended ไม่เปิดเกม ไม่จับ `LOCK_GAME` ไม่กินเวลาเครื่องเจ้าของ** ⇒ ไม่มีบล็อก `ATTENDED:` และไม่ต้องมี `HEADLESS_PROOF:` ตาม `NOW.md` `0159` ซึ่งบังคับเฉพาะใบ attended · เจ้าของใบระบุเองว่า "ไม่กินคิวรถบัส") · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-Q** · ผู้ทำ = RE runner บนเครื่องสะพาน · ตั้งเลขโดย LANE-K รอบ `73i74a` 2026-09-07T10:09+07:00 (ภายในรอบที่เห็นคำขอ 09:05) ตาม `COO-DECISION 20260907_0845` ("LANE-Q: เขียน **เนื้อใบ RE** (ส่ง K ตั้งเลข) ถามสองข้อในใบเดียว") · เนื้อใบมาจากจดหมาย `notes_to_chief/20260907_0905_LANE-Q-TO-K-re-body-how-the-client-rounds-and-where-Lv-reads-level.md` **คำต่อคำ K ไม่แก้สำนวนใด ๆ และไม่ได้ตัดสินคำถามของใบ**]
+
+หัวข้อ: **รางวัลเควสปัดเศษอย่างไร และ `Lv` อ่านเลเวลจากไหน** (`AddCriteriaExp 0x00608D10` · `AddLvCriteriaSkillPoint 0x006092B0`)
+
+🔴 **เนื้อใบเต็ม (สองคำถาม · ผล grep 5 ข้อที่เจอ + 3 ข้อที่ไม่เจอ · ลำดับความสำคัญของคำตอบ · nonclaims) อยู่ที่ `tickets/RE-295.md`** — ใบเกิน 8,192 B ตั้งแต่เกิด (11,550 B) ตามเพดานต่อใบใน `NOW.md` (แบบเดียวกับ `GT-288`/`RE-294`) · ห้ามตอบใบนี้โดยไม่อ่านไฟล์นั้น: หัวข้อ "grep แล้ว" บอกไว้ 5 ข้อว่า**ห้ามตอบด้วยของที่มีแล้ว** (VA ครบห้าในหก · ตารางที่ถูกอ่าน · ตัวคูณเป็น float32 · arity 0 · `delegate_body6` ไม่ใช่ลายเซ็น)
+
+### result:
+(ว่าง)
+
+> numbering: ตัวนับร่วมสองคิว + `archive/*ARCHIVE*` + `tickets/` คืนสูงสุด **294** (`RE-294`, ตั้งเลขรอบ `4af3qf`) ⇒ ใบนี้ **295** · ตรวจ 0 hit ของ `GT-295`/`RE-295` ทั้งสี่ที่ (live สองคิว + `archive/*ARCHIVE*` + `tickets/` + `notes_to_chief/` + `NOW.md`) ก่อนวาง · hit เดียวที่เจอคือประโยคในไฟล์รอบของ K เอง (`rounds/K_20260907_0909_*` ข้อ 4 "ตั้งเลข `GT-295` ให้ใบ `SKILL-ATTR-...`") ซึ่ง**ไม่ใช่ใบ** และ `COO-DECISION 20260907_0845` (cs0815) สั่งไว้ชัดว่าใบนั้น **ยังไม่ตั้งเลข** จนกว่า CS แจ้งว่าประตูคลาสลงแล้ว ⇒ เลข 295 ไม่ได้ถูกจอง [ตรวจโดย LANE-K รอบ `73i74a`]
