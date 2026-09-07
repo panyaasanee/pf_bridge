@@ -1,0 +1,1 @@
+consumed by LANE-K round 3jdrjn 2026-09-07T16:18+07:00 (verified on pf_bridge main: pf_gate_preflight.py:840 INHERITED_STUB_SUFFIXES carries .LANEK-FOLDED.txt, so the exemption is live and LANE-K no longer needs to avoid the stub)
