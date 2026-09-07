@@ -1,6 +1,6 @@
 # NOW — สถานะปัจจุบัน (ประวัติอยู่ใน `COO-ROUND-*`)
 
-ตรวจล่าสุด: 2026-09-07 11:41 +07:00 โดย COO (รอบ `1141` ×8 ใบ):
+ตรวจล่าสุด: 2026-09-07 12:45 +07:00 โดย COO (รอบ `1245` ×3 ใบ):
 - 🔴 **`HEADLESS_PROOF:` ทุกใบ attended** (PANYA `0159`): ในบล็อก `ATTENDED:` = โทเคนคอนโซลจาก headless **บน main ปัจจุบัน** ว่ากลไกติดอาวุธในฉากเป้าหมาย + คอมมิต (≤3 วัน) · ไม่มี = ไม่ขึ้นรถ · เติมใน **2 รอบของเจ้าของ** · ka1-A รันไม่ตรง = ตัดใบ · กลไกติดแฟล็ก = SKIPPED + `FLAGGED_MECHANISM_PROOF:`
 - 🔴 **คัดใบ attended = LANE-K** (`0159`): (ก) >7 วัน (ข) โค้ดที่ใบพึ่งพาเปลี่ยน (ค) มีผลใหม่ครอบคลุม → ถอนจากสแนปช็อต เจ้าของยืนยัน/ยกเลิก (K ยกเลิกเองไม่ได้) · `[STATIC-ON-BRIDGE]` = ติดธง ไม่ถอน
 - 🔴 **`.claude/settings.json` = COO+chief** (PANYA `0316`) · สายอื่นแตะ = แดง
@@ -10,11 +10,12 @@
 ## รอ Panya ติ๊ก  ← คุณดูหัวข้อนี้หัวข้อเดียวพอ
 (ห้ามเกิน 5 ข้อ · ติ๊กแล้วลบทั้งข้อ)
 - **routine K ต้องได้ environment มี git ทุกรอบ** — `camatf` มีแต่ MCP เขียนคิวไม่ได้ (K `2217`)
+- 🔴 **สะพานตาย** — heartbeat ค้าง `10:44` (121 นาที) · ปลุก `pf_git_sync` บนเครื่องคุณ · PR ยัง merge แต่ attended/GT นิ่ง
 - **`bg0002` ย้ายไปกฎ `cline` ไหม?** ตรง census (12) แต่ **ลบ template `103` ที่คุณเขียนเอง** — ไม่ย้ายจนกว่าคุณเคาะ (`0845`)
-- **เพดานไฟล์ในพรอมป์ K ≠ เกต** (300/200 KB vs 2.4 M/409,600) — ยึดเลขเกต · `prompts/` คุณแก้คนเดียว
+- **แก้ `prompts/` (คุณคนเดียว)**: เพดานไฟล์ K ≠ เกต — ยึดเลขเกต · COMMON heartbeat 60 นาที = ตรวจนาฬิกา ไม่ใช่เกตห้าม push
 
 ## รอเครื่องคุณ (คิวจริง = `QUEUE_STATUS_SNAPSHOT.md`)
-1. **`GT-288` (B) ใบแรก** — รอ B พลิก READY
+1. **`GT-288`** ชุด 2 พร้อม `1255` — รอ K พลิก READY
 2. ถัดไป `GT-276` CS · `GT-220`/`GT-223` · M2 ยังไม่มีใบ
 
 ## กติกาของไฟล์นี้ (ห้ามลบสี่บรรทัดนี้)
@@ -22,7 +23,7 @@
 - **"เสร็จ" ติ๊กได้โดย Panya คนเดียว** — สูงสุดที่ COO ไปถึงได้ = `รอเจ้าของยืนยัน` (ขึ้น main ไม่ใช่ "เสร็จ" · `production_allowed = False` ไม่นับว่าขยับ)
 - **COO เตือน** — ย้ายข้อที่คิดว่าเสร็จขึ้น `รอ Panya ติ๊ก` ในรอบที่ตัดสิน · ค้าง >6 ชม. = ทวงทางที่เธอเห็น
 - เพดาน **12 KB / 60 บรรทัด** (PANYA `2039` · เกต preflight) · ข้อที่ปิดแล้ว **ลบทิ้ง** · กฎบ้านอยู่ `AGENTS.md §7` + `prompts/COMMON_LANE_ROUND.md` — NOW ไม่เก็บกฎซ้ำ ยกเว้นที่ยังไม่ลง §7
-- 🔴 ยังไม่ลง §7: **`GameMaster.dll` ติดถาวร ห้าม rollback** · **reaper ปิดเอง**: claim ผี >3 ชม. / `SUPERSEDED-BY:`/`DUPLICATE-OF:` · **ห้าม `rm -r`** · grep ที่ห้า `reference_codex_attr/` · **pin แดงตาม docstring = กลับ pin ในใบเดียวกัน** · grep กลไกไม่ใช่การสะกด · เพดานต่อใบ 8,192 B · 🔴 **allowlist/skip pin/xfail ปิดผล adversary = ยังไม่จ่าย** (`0945`) เว้นแต่เขียนเหตุ + งานแรกรอบหน้า · 🔴 `1041`: **`require(cls)`/`SkipTest` ใน `setUpClass` ห้าม = `require(self)` ต่อเมธอด** · **`[วัดแล้ว]` ต้องมีคำสั่งรันซ้ำได้ในใบ** · 🔴 `1141`: **`CORE-REQUEST` ไม่มีโทเคนว่าบล็อกมีจริง = chief ตีกลับได้**
+- 🔴 ยังไม่ลง §7: **`GameMaster.dll` ติดถาวร ห้าม rollback** · **reaper ปิดเอง**: claim ผี >3 ชม. / `SUPERSEDED-BY:`/`DUPLICATE-OF:` · **ห้าม `rm -r`** · grep ที่ห้า `reference_codex_attr/` · **pin แดงตาม docstring = กลับ pin ในใบเดียวกัน** · grep กลไกไม่ใช่การสะกด · เพดานต่อใบ 8,192 B · 🔴 **allowlist/skip pin/xfail ปิดผล adversary = ยังไม่จ่าย** (`0945`) เว้นแต่เขียนเหตุ + งานแรกรอบหน้า · 🔴 `1041`: **`require(cls)`/`SkipTest` ใน `setUpClass` ห้าม = `require(self)` ต่อเมธอด** · **`[วัดแล้ว]` ต้องมีคำสั่งรันซ้ำได้ในใบ** · 🔴 `1141`: **`CORE-REQUEST` ไม่มีโทเคนว่าบล็อกมีจริง = chief ตีกลับได้** · 🔴 `1245`: **heartbeat ค้าง = push ต่อ + บันทึกตัวเลข ห้ามหยุดรอบ** · **early-return ต่างแพลตฟอร์ม = "ไม่ได้วัด" ไม่ใช่ "ผ่าน" ต้องมีเทสปัก**
 - 🔴 **ตัววัด**: `*RESULTS*`/`OBSERVER_CONFIRMED` ไม่มี `.LANEK-FOLDED.txt` >6 ชม. = escalation K (แถว `NONE` ของ K ไม่ใช่ความเงียบ)
 - 🔴 **shared world**: โลกต่อฉากใน process แชร์ทุก session · A = registry · B เขียน combat state ลง registry ของ A · DB ไม่รับงานโลก · ทุก PR ตอบ `TWO_SESSIONS_SAME_SCENE:`
 - 🔴 **PANYA `0039` หลักถาวร: โลกใบเดียว + ฟิลเตอร์มองเห็น NPC ต่อผู้เล่น** · `Player.MobAppear` = **ธงต่อผู้เล่น ไม่ใช่ spawn** · **rank 0 = ธง · rank>0 = ลงโลกร่วม** · ส่งให้คนนี้ = (ไม่ผูกเควส ∧ `n_MOB_APPEAR=1`) ∨ เควส `s_QUEST_BEGIN/END` ∨ ธง true · **ออกแบบฟิลเตอร์ก่อนแตะ MobAppear** (A)
@@ -38,11 +39,11 @@
 ## งานด่วนตอนนี้
 - **หาง P-1**: ปิดด้วย `GT-223` · หนี้ `DropLedgerCell` ข้ามฉาก · ห้ามลบแถว ledger
 - **P-2 สีชื่อ (= M3)**: ค่าจริงจาก `GT-288` · สี = คู่ (คนดู, มอน) `NPCAttr+0x98` · ห้าม faction-only/hardcode
-- **LANE-GM** (`0641`: ผู้อ่าน = คน cp874): **GM-064 ถอนเอง `1050` — เทสปลาย retained เขียนเองในเขต GM** · P-3 `GT-279`: `capture_raw_gm_command` ไม่เขียนไฟล์ · host-property แดงซ้ำ = หยุด เขียน COO
-- **M4 · LANE-B**: **1b: ห้าม regenerate bg0002/ลบ `103` · ตัวจริง = `;` ใน `s_OUTFIT` ⇒ ใบ RE outfit งานหน้า** → 2 `2032` parser (ห้ามแตะ wire) → respawn 120 s → สมุดโลก · `apply_hp_damage` พัก · **`0945` graft = WARN (`.git/shallow`) ที่เหลือแดง · `1141` `name_tokens` ให้ `_letter_exists_for` ใน 2 รอบ · ห้ามแทรกก่อน** `GT-288` พลิก READY + `HEADLESS_PROOF:`
-- **chief (หนึ่งงานต่อรอบ · ลำดับเต็ม = ใบ `1141`)**: (1) log `#922` รอบเดียว = `UNRESOLVED` → (2) **CORE-REQUEST สามใบแดง PR เดียว** GM-062→GM-063→DB op5 (stub ≤6 ไฟล์) → (3) `gate-windows` เช็คเอาต์ `pf_bridge` + `fetch-depth: 0` → (4) `#997` → (5) `-rfEs` + รันแดงจริง → (6) `skip_unless_present()` + T1/T2 → (7) ตัวกรอง + D3 `[skips]` → (8) `lane_hooks` ครอบ `BaseException` → (9-13) ใบ `0641` · **GM-064: ขยับพิน L06 คอมมิตเดียวกัน ไม่งั้นถอย PR**
-- **LANE-A** (`0945`): tier 3 อ่านอย่างเดียว · **เทสห้ามเขียน global (`IslandContactEvidence`)** · **`1141` discriminator ว่างจนกว่า crosswalk ordinal↔wire ตอบ · งานแรก = เนื้อใบ RE crosswalk → K (มีบาร์ผ่าน) · ปิด `registry=` ก่อนเติม** · **ห้ามส่งเฟรมเดา**
-- **LANE-UI**: งานแรก `2032` แถบ n/327 · **`1141` `--where` = ไฟล์เดียวคงไว้ · `--where-all`+stderr อนุมัติล่วงหน้า (stdout 1 บรรทัด · re-derive เอง · 46→11)** · **CS `1141`: 1 ห้ามโปรโมตจนกว่า `GT-276` · 2 ออกใบ attended รอบหน้า · 3 จ่ายฟิลด์คลาสให้ chief** · `#1002` ห้ามใส่ marker คืน · สูตรเปลี่ยน = ขยับ pin 891 คอมมิตเดียวกัน
+- **LANE-GM** (`0641`: ผู้อ่าน = คน cp874): **เทสปลาย retained เขียนเองในเขต GM** · P-3 `GT-279`: `capture_raw_gm_command` ไม่เขียนไฟล์ · host-property แดงซ้ำ = หยุด เขียน COO
+- **M4 · LANE-B**: **1b: ห้าม regenerate bg0002/ลบ `103` · ตัวจริง = `;` ใน `s_OUTFIT` ⇒ ใบ RE outfit งานหน้า** → 2 `2032` parser (ห้ามแตะ wire) → respawn 120 s → สมุดโลก · `apply_hp_damage` พัก · **`1141` `name_tokens` ให้ `_letter_exists_for` ใน 2 รอบ = งานแรก** (`GT-288` ชุด 2 จ่าย `HEADLESS_PROOF:` แล้ว `1255`)
+- **chief (หนึ่งงานต่อรอบ · ลำดับเต็ม = ใบ `1141`)**: **ลำดับ 1-13 อยู่ในใบ `1141`** — (1) log `#922` = `UNRESOLVED` ถ้าไม่ชี้ขาด → (2) CORE-REQUEST สามใบ PR เดียว → (3) `gate-windows` เช็คเอาต์ `pf_bridge`+`fetch-depth: 0` · **GM-064: ขยับพิน L06 คอมมิตเดียวกัน ไม่งั้นถอย PR**
+- **LANE-A** (`0945`): tier 3 อ่านอย่างเดียว · **เทสห้ามเขียน global** · **`1245` crosswalk ตอบแล้ว (13 จุด `GT-228`) · discriminator ยัง `None` จนวัด `rx112 id=35` (น้ำเปล่า) · งานแรก = ปิด `registry=`** · **ห้ามส่งเฟรมเดา**
+- **LANE-UI**: งานแรก `2032` แถบ n/327 · **CS `1141`: 1 ห้ามโปรโมตจนกว่า `GT-276` · 2 ออกใบ attended รอบหน้า · 3 จ่ายฟิลด์คลาสให้ chief** · `#1002` ห้ามใส่ marker คืน · สูตรเปลี่ยน = ขยับ pin 891 คอมมิตเดียวกัน
 
 ## ห้ามทำจนกว่า P-2 ปิด
 - GT-146 + ใบเทสตีมอนทุกใบ · ยกเว้น `ATTACK-POSE-ONE-FIELD-AB-001` (`0904_2115`) + `GT-274` (`0645`)
