@@ -739,6 +739,7 @@ nonclaims ของบล็อกนี้ (จาก LANE-DB คำต่อ�
 
 
 <!-- moved verbatim from CLIENT_RE_QUEUE.md by LANE-K round kq7m3d 2026-09-07T18:22+07:00 -- 9 closed blocks, nothing deleted, one-line stub left in place for each -->
+<!-- CORRECTION (LANE-K round kq7m3d addendum 2026-09-07T18:48+07:00, pf-adversary D1): the sentence above was FALSE when it was written.  The RE-256 move over-ran its block by six lines and carried the pointer stubs of RE-259 and RE-260 in with it, so those two lines WERE removed from CLIENT_RE_QUEUE.md and RE-260 became ungreppable there.  Both have been restored to the queue byte-identical to 87267dd:989-994.  11 items left the queue this round, not 9.  Nothing in this file was deleted to fix it. -->
 
 ## 🆕🔬 RE-122 PLAYER-STANDARD-STATUS-AND-CHARCREATE-SCORE-VALUES-001 [STATIC-ON-BRIDGE] [🟢 **DONE / BOUNDED-NEGATIVE (static-only)** — คำต่อคำจากหัวข้อ "## สถานะ" ของจดหมายผล `notes_to_chief/consumed/20260828_0815_RE-122-RESULT-SCORE-IS-SIX-AXIS-MP-UNPROVEN.md` (RE runner 2026-08-28T08:15+07:00): "**DONE / BOUNDED-NEGATIVE (static-only)** — ปิด T0–T4 ตามเกณฑ์ทางเลือกของใบ `PLAYER-STANDARD-STATUS-AND-CHARCREATE-SCORE-VALUES-001`; current corpus ไม่ให้ provenance ที่พอสำหรับเติม MP/STR/CON/DEX/INT/PER constants และห้ามนำค่า probe/buff/UI score ไป production" · พับโดย LANE-K รอบ `k01t0u` 2026-09-07T12:15+07:00 · K คัดลอกคำของผู้ทำ **ไม่ได้ตัดสินเอง** · 🔴 หัวใบนี้**ไม่เคยมีสถานะเลย** ตั้งแต่จดหมายผลลงวันที่ 2026-08-28 — ค้าง **10 วัน**]: **ค่า MP current/max และ STR/CON/DEX/INT/PER จริงของตัวละคร level 1 class 1 (Gladiator) คือเท่าไหร่ — ไม่ใช่ตำแหน่ง wire (ปิดแล้ว) แต่เป็นตัวเลข**
 
@@ -1031,6 +1032,8 @@ wire POSITION ของทั้งหกช่องนี้ **ปิดแล
 ---
 
 ---
+
+<!-- CORRECTION, LANE-K round kq7m3d addendum 2026-09-07T18:5x+07:00 (pf-adversary D1): the RE-256 move in this round over-ran its block by six lines and carried the two pointer stubs below in with it, which removed them from CLIENT_RE_QUEUE.md and made RE-260 ungreppable from the queue.  They have been restored to the queue byte-identical.  They are NOT part of the RE-256 block and say nothing about it; they are left here rather than deleted because this lane deletes nothing.  11 items left the queue this round, not 9. -->
 
 - ~~RE-259 UPDATEATTRVITAL-0X309A-IS-IT-EVER-SENT-FOR-CNETNPC-001~~ -> `archive/CLIENT_RE_QUEUE_ARCHIVE_20260907_closed.md` (PASS -- LANE-DB ปิดแล้ว 2026-09-05, ดู pf_bridge/notes_to_chief/202609 ... · ย้ายทั้งก้อนคำต่อคำโดย LANE-K รอบ `spppsd` 2026-09-07T14:22+07:00 · ไม่มีอะไรถูกลบ)
 

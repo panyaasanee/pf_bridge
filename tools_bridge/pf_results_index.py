@@ -14,6 +14,19 @@ else, so ticket titles (Thai) are never echoed -- only ids, status tokens and
 letter names, and every printed line is escaped to ASCII in main() before it
 reaches stdout (callers that use build_report() as a library do not get that).
 
+!! AGREEMENT WAS WIDENED IN ROUND kq7m3d (2026-09-07) -- READ THIS BEFORE
+TRUSTING ANY "agrees" BELOW.  closure_verdict() lets a header whose current
+status is the BARE bookkeeping word CLOSED also agree with a verdict written
+within 40 characters after it, so "CLOSED -- FAIL" stops disagreeing with its
+own FAIL letter.  Effect measured on the two live queues that day: 9 (header,
+status) pairs flipped False -> True and one row left the clerk worklist
+(GT-218).  The first cut of the rule ALSO agreed with a verdict belonging to a
+DIFFERENT ticket ("CLOSED -- see RE-198 PASS", "CLOSED-DUPLICATE of GT-216
+which is PASS"); pf-adversary found it the same round and it now refuses a
+qualified closure word, a ticket id in the gap, or decision prose in any case.
+The 49-of-551 figure below was measured BEFORE that rule and has not been
+recomputed.
+
 !! STILL A FLOOR, NOT PROOF (pf-adversary, LANE-K round okh8oz 2026-09-07) !!
 Round ek1gk9 fixed the three findings COO ordered first (NOW.md 0845):
   D1  agreement reads the header's CURRENT status (the first status word), not a
@@ -292,30 +305,49 @@ def _with_qualifier(up: str, idx: int, word: str) -> str:
 # A header may close a ticket with a bookkeeping word and then write the
 # verdict immediately after it ("**CLOSED** -- **FAIL** OBSERVER_CONFIRMED ...").
 # current_status() reports the FIRST status word, so such a header used to
-# disagree with its own verdict.  Only the two words that say nothing about the
-# outcome are paired this way -- CANCELLED / SUPERSEDED / DUPLICATE are real
-# decisions about the ticket and must keep diverging from a tester verdict, so
-# a cancelled ticket carrying a PASS letter still reaches a clerk.
-CLOSURE_WORDS = ("CLOSED", "ARCHIVED")
+# disagree with its own verdict.
+#
+# !! pf-adversary D2, round kq7m3d: the first cut of this rule only checked that
+# the FIRST word was a closure word, so "CLOSED-DUPLICATE of GT-216 which is
+# PASS" and "CLOSED -- see RE-198 PASS" both scored "agrees" -- matching a
+# verdict that belongs to a DIFFERENT ticket, which is the exact thing the
+# comment promised to block.  The pairing now refuses in every direction it
+# cannot read: a qualified closure word, another ticket id between the two
+# words, or a decision word in any case.  Refusing sends the row to a clerk,
+# which is the direction that fails closed.
+CLOSURE_WORDS = ("CLOSED",)
 # how far after the closure word the verdict may sit and still be that closure's
 # own verdict.  Short on purpose: a header line runs for thousands of characters
 # and carries the words of every earlier round.
 CLOSURE_PAIR_WINDOW = 40
+# any ticket id inside the window means the verdict may be that OTHER ticket's
+TICKET_ID_RE = re.compile(r"\b(?:GT|RE)-\d+")
+# a decision about THIS ticket, written in any case, is not bookkeeping -- a
+# cancelled/superseded/duplicate ticket carrying a tester PASS must keep
+# diverging.  "covered"/"see" mark the verdict as somebody else's.
+DECISION_PROSE_RE = re.compile(
+    r"(?i)\b(duplicate|superseded|supersedes|cancelled|canceled|covered|see)\b")
 
 
 def closure_verdict(header_rest: str):
-    """The verdict a closure word carries, or ("", -1).
+    """The verdict a bookkeeping closure word carries, or ("", -1).
 
-    Returns the first status word that is NOT a closure word and starts within
-    CLOSURE_PAIR_WINDOW characters after a current status that IS one.
+    Returns the first status word that starts within CLOSURE_PAIR_WINDOW
+    characters after a current status that is a BARE closure word, and only when
+    the text in between names no other ticket and no decision about this one.
     """
     word, idx = current_status(header_rest)
-    if not word or word.split("-")[0] not in CLOSURE_WORDS:
+    # a qualified closure word (CLOSED-DUPLICATE) is a decision, not bookkeeping
+    if word not in CLOSURE_WORDS:
         return ("", -1)
+    kept = strip_struck(header_rest)
     tail_at = idx + len(word)
-    tail = strip_struck(header_rest)[tail_at:tail_at + CLOSURE_PAIR_WINDOW]
+    tail = kept[tail_at:tail_at + CLOSURE_PAIR_WINDOW]
     nxt, nxt_idx = current_status(tail)
     if not nxt or nxt.split("-")[0] in CLOSURE_WORDS:
+        return ("", -1)
+    between = tail[:nxt_idx]
+    if TICKET_ID_RE.search(between) or DECISION_PROSE_RE.search(between):
         return ("", -1)
     return (nxt, tail_at + nxt_idx)
 
@@ -559,8 +591,21 @@ def selftest():
     assert current_status(closed_fail)[0] == "CLOSED", current_status(closed_fail)
     assert closure_verdict(closed_fail)[0] == "FAIL", closure_verdict(closed_fail)
     assert header_agrees(closed_fail, "FAIL")
-    # and it must not manufacture agreement with a DIFFERENT verdict
-    assert not header_agrees(closed_fail, "PASS")
+    # NEGATIVE CONTROLS (pf-adversary D2: the first cut had none that could fail
+    # -- its only "wrong verdict" input contained no verdict at all).  Each line
+    # below carries a REAL verdict word that the rule must refuse to borrow.
+    borrowed = " [**CLOSED** -- see `RE-198` **PASS**, this one was never run]"
+    assert current_status(borrowed)[0] == "CLOSED", current_status(borrowed)
+    assert closure_verdict(borrowed) == ("", -1), closure_verdict(borrowed)
+    assert not header_agrees(borrowed, "PASS"), "verdict borrowed from another ticket"
+    qualified = " [**CLOSED-DUPLICATE** of `GT-216` which is **PASS**]"
+    assert closure_verdict(qualified) == ("", -1), closure_verdict(qualified)
+    assert not header_agrees(qualified, "PASS")
+    lower_prose = " [**CLOSED** -- duplicate of that one (**PASS** there)]"
+    assert closure_verdict(lower_prose) == ("", -1), closure_verdict(lower_prose)
+    assert not header_agrees(lower_prose, "PASS")
+    # and a plain bookkeeping close with its own verdict still pairs
+    assert closure_verdict(" [**CLOSED** **DONE** 2026-09-05]")[0] == "DONE"
     # CANCELLED is a decision about the ticket, not bookkeeping: a PASS letter
     # against a cancelled header still has to reach a clerk (real GT-204).
     cancelled = " [\u274c **CANCELLED - covered by GT-216** -- `GT-216` PASS on screen]"
