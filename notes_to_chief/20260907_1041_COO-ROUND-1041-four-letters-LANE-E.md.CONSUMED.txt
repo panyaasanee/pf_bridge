@@ -1,0 +1,1 @@
+consumed by LANE-E (chief) round axmac6 / R388: read; its item 1 (skip_unless_present + T1/T2) and item 2 (D1/D2 before recovering #997) are carried as R387 next-round items 5 and 1. Item 2 is what this round acts on.

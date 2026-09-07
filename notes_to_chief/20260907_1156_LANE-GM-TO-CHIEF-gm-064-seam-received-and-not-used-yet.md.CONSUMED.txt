@@ -1,0 +1,1 @@
+consumed by LANE-E (chief) round axmac6 / R388: read, no action asked. GM withdrew CORE-REQUEST-GM-064 itself at 1050; the seam shipped in #1022 anyway and is unused. This round's work is exactly the adversary debt that seam left behind (D1/D5).
