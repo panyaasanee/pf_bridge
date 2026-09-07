@@ -54,8 +54,11 @@ HEADER_DIRS = ("archive", "tickets")
 
 # "RESULT: GT-281 PASS R322B 2026-09-07 00:55 (...)"
 RESULT_RE = re.compile(r"^RESULT:\s+(GT|RE)-(\d+)\s+([A-Za-z0-9][A-Za-z0-9+/._-]*)\s*(.*)$")
-# "## GT-281 <thai title> [<thai status blob>]"  -- emoji/markup before the id is allowed
-HEADER_RE = re.compile(r"^##\s+\S*\s*(GT|RE)-(\d+)\b(.*)$")
+# "## GT-281 <thai title> [<thai status blob>]"  -- emoji/markup before the id is
+# allowed.  The negative lookahead keeps GT-030-R3 / GT-084-R2 out: they are
+# separate round-2/round-3 tickets, and folding them onto GT-030 / GT-084 made
+# this tool grade each one against the other's header.
+HEADER_RE = re.compile(r"^##\s+\S*\s*(GT|RE)-(\d+)(?!-R\d)\b(.*)$")
 # stamp at the head of a letter file name: 20260907_0725_...
 STAMP_RE = re.compile(r"(\d{8})_(\d{4})")
 # round token inside a RESULT tail: "R321", "R322B", "UA1"
@@ -141,7 +144,12 @@ def current_status(header_rest: str):
         while idx != -1:
             before = up[idx - 1] if idx else " "
             after = up[idx + len(word)] if idx + len(word) < len(up) else " "
-            if not (before.isalnum() or before == "-") and not (after.isalnum() or after == "-"):
+            # "_" is never a boundary, or test_pass_client in a header reads as
+            # PASS.  "-" blocks on the LEFT only, so PASS inside PARTIAL-PASS is
+            # rejected while REFUTED-ON-SCREEN still reads as REFUTED; a longer
+            # known word at the same index already won, because STATUS_WORDS is
+            # ordered longest first and the index test below is strict.
+            if not (before.isalnum() or before in "-_") and not (after.isalnum() or after == "_"):
                 if idx < best_idx:
                     best_word, best_idx = word, idx
                 break
@@ -376,6 +384,15 @@ def selftest():
     d1 = {"GT-213": ("202609070055", "FAIL", "l.md", "")}
     lines, diverged = build_report(d1, {"GT-213": [("GAME_TEST_QUEUE.md", gt213)]})
     assert diverged == 1 and any("HDR-ELSE" in ln for ln in lines), lines
+
+    # a hyphenated compound the house really writes, and a python identifier
+    assert current_status(" [primary hypothesis REFUTED-ON-SCREEN (R318)]")[0] == "REFUTED"
+    assert current_status(" [green -- test_pass_client is pinned]")[0] == ""
+    assert current_status(" [PARTIAL-PASS after retry]")[0] == "PARTIAL-PASS"
+    assert current_status(" [PASS-CLIENT confirmed]")[0] == "PASS-CLIENT"
+    # a round-2 ticket is a different ticket, not a header for the round-1 one
+    rr = parse_headers("## GT-030 a [OPEN]\n## GT-030-R3 b [PASS]\n## GT-084-R2 c [DONE]\n")
+    assert rr == [("GT", 30, " a [OPEN]")], rr
 
     # --- D2: a clerk touch must not buy immunity -----------------------------
     touched = " [READY -- reviewed by the clerk 2026-09-07, still open]"
