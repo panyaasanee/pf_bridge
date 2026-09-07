@@ -1,10 +1,10 @@
 # NOW — สถานะปัจจุบัน (ประวัติอยู่ใน `COO-ROUND-*`)
 
-ตรวจล่าสุด: 2026-09-07 06:41 +07:00 โดย COO (รอบ `0641` ×5 ใบ):
+ตรวจล่าสุด: 2026-09-07 07:41 +07:00 โดย COO (รอบ `0741` ×3 ใบ):
 - 🔴 **`HEADLESS_PROOF:` ทุกใบ attended** (PANYA `0159`): ในบล็อก `ATTENDED:` = โทเคนคอนโซลจาก headless **บนคอมมิต main ปัจจุบัน** ว่ากลไกติดอาวุธในฉากเป้าหมาย + คอมมิต/วันที่ (≤3 วัน) · ไม่มี = ไม่ขึ้นรถบัส · ใบบนรถบัสเติมใน **2 รอบของเจ้าของ** · ka1-A รันซ้ำ ไม่ตรง = ตัดใบ
 - 🔴 **คัดใบ attended = LANE-K** (`0159`): (ก) >7 วัน (ข) โค้ดที่ใบพึ่งพาเปลี่ยน (ค) มีผลใหม่ครอบคลุม → ถอนจากสแนปช็อต เจ้าของยืนยัน/ยกเลิก (K ยกเลิกเองไม่ได้) · **ถอนแล้ว ยังรอตอบ = `GT-272` DB ใบเดียว** (`GT-151`/`GT-193` ยกเลิก `0603`) · `[STATIC-ON-BRIDGE]` = ติดธง ไม่ถอน
 - 🔴 **`.claude/settings.json` = เขต COO+chief** (PANYA `0316`) · สายอื่นแตะ = preflight แดง
-- 🔴 **แดงบนโคลนคลาวด์ ≠ เกตแดง** · census derive=160 (`#988`) พิน=161 ⇒ UI ปิดสองใบในคอมมิตเดียว
+- 🔴 **แดงบนโคลนคลาวด์ ≠ เกตแดง**
 - 🔴 **PANYA `1910`**: GT-233 ปิด ห้าม trial `AddSurveyData` · ห้ามขอเครื่องเจ้าของเพื่อ M2 จนมีเฟรมอ้าง binary · ชื่อใหม่ ≤100 (เกตบังคับ) ห้าม rename ของเก่า · **เลขใบ/เนื้อใบ/พับผล/archive/snapshot = LANE-K** เนื้อใบส่ง `*-TO-K-gt-body-*`
 
 ## รอ Panya ติ๊ก  ← คุณดูหัวข้อนี้หัวข้อเดียวพอ
@@ -32,7 +32,7 @@
 - ✅ **M1/v1** ประกาศแล้ว (R249)
 - ⏳ **M2 "ออกจากเมืองได้" ← อยู่ตรงนี้ · ทาง (ก) `1910`**: ตัวบล็อก = เฟรมตอบ `0x1FB2` trigger 2/3 (`RE-286`: `TriggerResult` · A ต่อสาย) · TIER 3 ต้องมี discriminator ว่า "เกาะ ≠ น้ำเปล่า" — เฟรมเปล่าไม่ปลดล็อก · เกณฑ์ผ่าน: ใกล้เกาะ → "รายงานกัปตัน" → กด → วาปเข้า **เกาะ 2 และ 3 บนจอ** · ห้าม server ส่ง `EnterInstanceVital` เอง · ห้ามเช็คเลเวล
 - **M3 = P-2** (ชั้นแรก ✅ GT-281 · ชั้นสอง = `GT-288`) · **M4 "ตีได้ตายได้"**: มอนตีกลับ HP ลด · ตาย · ศพไม่ค้าง · เกิดใหม่ (B `GT-224`) · **M5** เก็บได้+รอด relog · **M final** ครบวงจร
-- 🔴 **LANE-DB**: แขน (ข) seam `1452` (`RE-282`: `POTENTIAL` ว่าง) · `0x309A` RE-blocked · `GT-272` ถูกถอน — ตอบ K ว่ายังวัดของเดิมไหม + `HEADLESS_PROOF:` · **`GT-291` รันโทเคนซ้ำบน main** (`0641`) · ใบสร้าง A/DB: ออก 126 คืน HP · BoatHealth ≠ -1
+- 🔴 **LANE-DB**: แขน (ข) seam `1452` (`RE-282`: `POTENTIAL` ว่าง) · `0x309A` RE-blocked · `GT-272` ถูกถอน — ตอบ K ว่ายังวัดของเดิมไหม + `HEADLESS_PROOF:` · **`GT-291` = `#991` ขึ้น main ก่อน แล้วโทเคน** (`0741`) · ใบสร้าง A/DB: ออก 126 คืน HP · BoatHealth ≠ -1
 - **Q** (`0641`: ยาม `lupa` + `RE-273` ปิด · `TriggerResult` ไม่ใช่ของ Q): **งานแรก = 5 exp-level ครึ่งอ่าน** `Protocol`+`STUB_DEFAULT` (ข) · ครึ่งเขียน = ขอคอลัมน์ DB · `Player.MobAppear` = A หลัง P-2 · `CastSkill*` encoder = CS ทำเมื่อ Q ขอ
 - **LANE-K**: พับ `RE-286` · `GT-258` กลับสแนปช็อต · เกณฑ์ (ค) · archive · ticket ใหญ่→`tickets/` · **ห้ามวางสตับปิดปากสแกนเนอร์**
 
@@ -41,7 +41,7 @@
 - **P-2 สีชื่อ (= M3)**: ค่าจริงจาก `GT-288` · สี = คู่ (คนดู, มอน) `NPCAttr+0x98` · ห้าม faction-only/hardcode
 - **LANE-GM** (`0641`: ผู้อ่าน = คน cp874 · หยุดชุบแข็ง · `_Mirror`/`lane_hooks` = chief): ดัน PR `vxr32s` ให้เขียว · P-3 `GT-279`: ปุ่มส่ง `0x51E9` จริง แต่ `capture_raw_gm_command` ไม่เขียนไฟล์ · host-property แดงซ้ำ = หยุด เขียน COO
 - **M4 · LANE-B**: **1b R322B: `bg0002.HOSTILE_PLACEMENTS` 17 แถว vs roster rank-1 12 ตัว → regenerate จาก roster จริง** → 2 `2032` parser (ห้ามแตะ wire) → respawn 120 s → สมุดโลก · `apply_hp_damage` พักจน Door B · **`_letter_exists_for` สองราก `notes_to_chief/`+`archive/` งานแรก · ลบยาม `require(cls)` ถูกแล้ว (`0641`)** · `GT-288` พลิก READY + `HEADLESS_PROOF:`
-- **chief (`0641` หนึ่งงานต่อรอบ)**: **(1) `require(cls)` = `TypeError` ไม่ใช่ skip บนโคลนไร้สะพาน ⇒ ตายทุกเครื่อง + เทสกวาด `setUpClass` (ปิด PR 3 ใบ)** → (2) job checkout สองรีโป + `PF_BRIDGE_DIR` → (3) ตัวกรองสแกนผลยังไม่พับ (เฉพาะใบอ้าง `GT-`/`RE-`) → (4) `_Mirror`: encoding จริง + เขียนอะตอมมิก (ห้ามแตะ v141) → (5) `lane_hooks.fire()` ครอบ `BaseException` re-raise `KeyboardInterrupt` → (6-11) `AGENTS.md`<30 KB · §7(+host-property) · preflight ฝั่ง server · coverage `make_show_message` · #948 seed · เพดานชื่อยกเว้น 180
+- **chief (`0641` หนึ่งงานต่อรอบ)**: **(1) `require(cls)` = `TypeError` ไม่ใช่ skip บนโคลนไร้สะพาน ⇒ ตายทุกเครื่อง + เทสกวาด `setUpClass` (ปิด PR 3 ใบ)** → (2) กู้ `#997`: ตัด `yaml` · deps เท่าเกต · แดงถ้า 0 เทส · pin ก่อน blocking → (3) ตัวกรองสแกนผลยังไม่พับ (เฉพาะใบอ้าง `GT-`/`RE-`) → (4) `_Mirror`: encoding จริง + เขียนอะตอมมิก (ห้ามแตะ v141) → (5) `lane_hooks.fire()` ครอบ `BaseException` re-raise `KeyboardInterrupt` → (6-11) `AGENTS.md`<30 KB · §7(+host-property) · preflight ฝั่ง server · coverage `make_show_message` · #948 seed · เพดานชื่อยกเว้น 180
 - **LANE-A**: TIER 3 รับแล้ว → เนื้อใบ RE `Bg3001.tgr` ให้ K ตั้งเลข → ใบ attended · `TriggerResult` (`RE-286`) เป็นของ A ไม่ใช่ Q · **ห้ามส่งเฟรมเดา**
 - **LANE-UI**: **งานแรก = พิน 160 + `--emit` คอมมิตเดียว ก่อน `#987`** (`0641`) · งาน 2 `2032` แถบ n/327 · tool ข้าม docstring ด้วย AST · express/community ยังห้าม · **CS**: ใบ RE หา STR ผู้เล่น + `CORE-REQUEST` ครึ่ง level · เปลี่ยนสูตร = ขยับ pin 891 คอมมิตเดียวกัน · ห้ามปลดแฟล็ก 6 เฟรม
 
