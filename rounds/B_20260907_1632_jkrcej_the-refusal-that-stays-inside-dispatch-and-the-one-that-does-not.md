@@ -88,7 +88,11 @@ session จดชื่อคำปฏิเสธไว้ · ตัวมอ�
 - **wire/DB**: ไม่มี — รอบนี้ไม่มีอะไรของรอบนี้ไปถึงสายจริง
 - **client-observable**: ไม่มี · ไม่ได้เปิดเกม ไม่ได้แตะ `GameClient/`
 - **เครื่องมือ (แยกจากสองชั้นข้างบนโดยตั้งใจ)**: โทเคน headless ข้างบน (รันบน `fade2d5` + กิ่งรอบนี้) ·
-  มิวแทนต์ 4/5 แดง · ชุดเป้าหมาย 5 ใบเขียว · ชุดเต็ม + preflight ดูหัวข้อ "เกต" ข้างล่าง
+  มิวแทนต์ 4/5 แดง · ชุดเป้าหมาย 5 ใบเขียว ·
+  **ชุดเต็มบนต้นไม้สุดท้าย (หลัง `git merge origin/main`) `pytest tests/` = 13493 passed, 401 skipped,
+  0 failed, 37369 subtests (652 s)** · `tools_bridge/pf_gate_preflight.py --repo <server>` = **PREFLIGHT PASS**
+  (รวมสเต็ป precondition census และ "no new skips" ⇒ ไฟล์เทสใหม่ไม่ skip อะไรเลย ไม่ต้องพินใน
+  `docs/PYTEST_SKIP_PINS.json` — ไม่ใช่ D1 ของรอบ `nxcwdn` ซ้ำ ตรวจแล้วไม่ใช่เดา)
 - **nonclaims**: (1) ไม่อ้างว่าผู้เล่นเห็นอะไรต่างจากเมื่อวาน (2) ไม่อ้างว่าไคลเอนต์วาดมอน 0 HP ที่ไม่ตาย
   ว่าอะไร — ไม่มีใครดู (3) ไม่อ้างว่าประตูอื่นที่ไปถึงการฆ่า (`diag_multi_object`, `mob_respawn`,
   `mob_death_persistence`, `scene_door_walk`, AI tick) ปลอดภัย — รอบนี้ขับประตูเดียว
@@ -98,6 +102,21 @@ session จดชื่อคำปฏิเสธไว้ · ตัวมอ�
 ไม่กระทบ · รอบนี้ไม่เขียน combat state ลง registry ไม่แตะ world registry ของ LANE-A และไม่เพิ่ม state
 ที่ผูกกับ session · เทสใหม่สร้าง session เดียว อ่านค่าจาก ledger/register ของ session นั้นเท่านั้น
 
+## 🔴 ข้อหนึ่งใน NOW ที่ **เสร็จไปแล้ว** — เสนอ COO ลบออกจากลำดับของสาย B
+NOW/ใบ `1541` ตั้งลำดับข้อ 2 ไว้ว่า "`name_tokens` ให้ `_letter_exists_for` (`1141`)" ·
+**ทำเสร็จแล้วตั้งแต่รอบ `occzj8`/`mhr9y6`** ไม่ใช่ค้าง — ตรวจแล้วทั้งสองข้อของใบ `1141`:
+
+    $ grep -n "DEFAULT_LETTER_NAME_TOKENS\|name_tokens" tests/test_mob_death_widening_schema_gate.py
+    $ grep -n "name_tokens" tests/test_mob_death_withheld_scene_deny_list.py
+    (สำเนาที่สองยุบมาเรียกประตูกลางแล้วจริง ผ่าน `import test_mob_death_widening_schema_gate as schema_gate`)
+
+⇒ ลำดับที่เหลือจริงของสายนี้คือ `GT-300` → สอง parser `2032` → respawn 120 s (ขยับขึ้นหนึ่งขั้น)
+
+`ADVERSARY_PENDING pirate-force-server (branch claude/magical-albattani-jkrcej)` — สั่งไปตอน 16:48
+ผลยังไม่คืนตอน push · **รอบถัดไปของสาย B: อ่านผลนี้เป็นงานแรก** · ผมยังไม่เขียนว่า "ผ่าน adversary" ที่ไหน
+สิ่งที่สั่งให้มันโจมตีโดยเฉพาะ: การถอดใบอนุญาตเป็นตัวแทนของมอนที่ไม่มีใบคุ้มจริงหรือไม่ · ประตูอื่นที่ไปถึงการฆ่า ·
+มิวแทนต์ของ except · ความเข้าถึงได้จริงของ `raise` ตัวที่คลาย · และอะไรบนกิ่งนี้ที่ทำเกต Windows แดง
+
 ## รอบหน้าทำอะไร
 1. **ถ้าเห็นติ๊ก `death scope`** → พลิก `bg0002` ให้จบรอบเดียวทันที (regenerate roster + AI + drop
    ในคอมมิตเดียว · เซตใหม่ `{27..35}` **ไม่มี `103`** ตามของฝาก LANE-K) — COO อนุญาตไว้แล้ว ไม่ต้องถามซ้ำ
@@ -105,7 +124,7 @@ session จดชื่อคำปฏิเสธไว้ · ตัวมอ�
    → D5 → D4 → D6 → D11 → D10 → D7 → D12 → D8
 3. **`GT-300`** (= GT-178 · จดหมาย `1441`/`1524`): ส่งเนื้อใบ `*-TO-K-gt-body-*` · register+tick ทุกฉากที่มี
    roster (`MOB_AI_TICK_LIVE`) → มอนตีถึงผู้เล่นจริง
-4. `name_tokens` ให้ `_letter_exists_for` (`1141`) → สอง parser `2032` → respawn 120 s
+4. สอง parser `2032` → respawn 120 s (ข้อ `name_tokens` ตัดออกแล้ว ดูหัวข้อข้างบน)
 5. ถ้า chief รับใบ CORE-REQUEST ข้างบน: เขียนเทสปักครึ่งที่สองทันทีที่ขอบ dispatch เป็นของกลาง
 
 SCOREBOARD: COMING | ยังไม่มีอะไรที่ผู้เล่นทำได้เพิ่มวันนี้ — แต่คำถามที่ค้างว่า "ถ้ามอนที่ไม่มีใบอนุญาตโดนตี ผู้เล่นจะเห็นมอนไม่ตาย หรือเห็นโลกเงียบ" ถูกวัดจบแล้ว: เห็นมอนไม่ตาย และมีตัวคุมที่แดงได้จริงกันไว้ · อีกครึ่งหนึ่งของขอบเดียวกันคลายจริงและส่งเป็นใบถึง chief แล้ว | pf_bridge#1744 + PR เซิร์ฟเวอร์รอบ jkrcej + จดหมาย 20260907_1641_LANE-B-CORE-REQUEST-*
