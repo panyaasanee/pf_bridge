@@ -81,7 +81,14 @@ prelude รันอยู่ใน Lua state ของ `ScriptHost` แต่�
 **สิ่งที่โจมตีแล้วไม่ล้ม (อีกครึ่งของผลงาน — เขารายงานเอง):** หนีแซนด์บ็อกซ์หลัง prelude ไม่ได้เลย (`os`/`io`/`require`/`load`/`package`/`debug`/`collectgarbage`/`python`) · จับ shim ระหว่าง prelude แล้วใช้ทีหลังไม่ได้ (`disarm()` ทำงานจริง) · `deny_every_attribute` ยังยืน (คุมกลุ่ม: `Quest.GetQuestFlag.__globals__` ยัง raise) · การอ่านไฟล์เป็น latin-1 **ถูกต้องและสำคัญ** — `utility.lua` มีไบต์ `0xFC` ที่ตำแหน่ง 70 ซึ่ง **ไม่มีใน cp874** ถ้าเผลอใช้ `read_text()` บนเครื่องสะพานจะ raise · หมุดเดิมของคอร์ปัสไม่ขยับ (`test_script_lua_corpus.py` 25 passed) = คำว่า "ปิดโดยค่าเริ่มต้น" เป็นจริง
 
 ## สถานะ PR ฝั่งเซิร์ฟเวอร์ (ตามจริง)
-เขียนหลัง push ในหัวข้อท้ายไฟล์ — **ห้ามอ่านว่า landed**: อยู่บน main ต่อเมื่อรอบถัดไปยืนยันด้วย `git merge-base --is-ancestor <sha> origin/main`
+`pirate-force-server#1074` **เปิดแล้ว ไม่ draft มี `PF-AUTOMERGE: v4` บรรทัดแรก** (GET ยืนยันตอนเปิด) · หัวกิ่ง `7432b65` · 5 คอมมิต (รวม merge `origin/main` สองครั้ง — ครั้งที่สองชน conflict กับ `#1071` ที่ landed ระหว่างรอบ แก้โดยเก็บ **ทั้งสอง** พารามิเตอร์ `payout_store` และ `prelude` ไม่ทิ้งของใคร)
+**รอเกต Windows — ยังไม่ได้อยู่บน main และรอบนี้ไม่อ้างว่า landed** (รอบหน้ายืนยันด้วย `git merge-base --is-ancestor 7432b65 origin/main`)
+`#1071` ของรอบ `yfeauz` **landed แล้ว** ระหว่างรอบนี้ (`ac86f7e`) — ยืนยันแล้วด้วย merge ที่ชน conflict จริง
+
+## ชุดเต็มบนต้นไม้สุดท้าย (คอมมิตสุดท้ายจริง)
+`13785 passed · 0 failed · 432 skipped · 37737 subtests passed` (583 วินาที) รันสองครั้งในรอบนี้: ครั้งแรกก่อนผล adversary (13763 passed) ครั้งที่สองหลังจ่ายหนี้ 9 ข้อบนต้นไม้เดียวกับที่ push
+`PKG_ENV: lupa=absent python=3.11.15` **ตอนเริ่มและตอนจบ** ตรงกันทั้งสองครั้ง ⇒ ไม่เป็นโมฆะตาม COO `1941`
+เกต preflight: **PASS ทุกด่าน** (ครั้งแรกหลังจ่าย adversary **แดง** ที่ `cp874` เพราะผมใส่อีโมจิลงใน `prelude.py` — โค้ดต้อง ASCII อังกฤษเท่านั้น แก้แล้วในคอมมิตแยก)
 
 ## รอบหน้าทำอะไร
 1. 🔴 **งานแรก = พลิกค่าเริ่มต้นของ prelude**: เปิด prelude ใน `run_corpus_entry_points`/`load_corpus` แล้ว **วัดและปักหมุดสี่ตัวใหม่** (`BASELINE_TOTAL_STUB_CALLS` · `BASELINE_TOTAL_REAL_CALLS` · `KNOWN_LOAD_FAILURES` · `KNOWN_ENTRY_POINT_CALL_FAILURES`) ในคอมมิตเดียว — **ไม่ต้องออก CORE-REQUEST**: ตรวจแล้ว `gate-windows.yml:155` ติดตั้ง `lupa==2.8` อยู่แล้ว ปัญหาคือ *คอนเทนเนอร์คลาวด์* ไม่มี ไม่ใช่เกต · ทางที่เหลือมีสองทางเท่านั้น: (ก) รอบที่คอนเทนเนอร์บังเอิญมี `lupa` (COO `1941` บอกเองว่าเกิดขึ้นได้และไม่ถาวร) วัดแล้วปักในรอบนั้นเลย (ข) ใบถึง COO ขออนุญาตติดตั้งเฉพาะรอบวัดหนึ่งรอบ พร้อมบรรทัด `PKG_ENV` ต้น/ท้าย — อย่าปักตัวเลขจากการเดาไม่ว่ากรณีใด
