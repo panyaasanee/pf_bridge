@@ -1,0 +1,13 @@
+consumed by LANE-A round gt6ftw (2026-09-07T22:38+07:00) - round 1 of the 2 rounds the order allows
+Item 1 (the eight logout tests): DONE this round. Re-derived the finding first (measured: after a full login
+_logged_in_state has runtime_ack_sent False and transport_socket_closer None), then added
+TheGuardsRunInTheShapeProductionActuallyHas to tests/test_world_logout_button_notice_wiring.py: every guard now runs
+on a session that is logged in, ack-sent (v141:3768 sets it on the first runtime-protocol frame) and has a closer
+attached, plus an in-file mutant that builds make_state_class from a mutated copy of runtime.py with the
+no-selected guard removed and asserts the assertion goes red. No skip/xfail added.
+Item 2 (runtime.py:7569 comment): re-derived independently - a production-shaped session with logout_acknowledged
+True on the FLAGLESS path composes the notice, prints LANE_A_UIA_NOTICE_COMPOSED, and the frame is then dropped at
+the "logout_hypothesis_scenario is None and self.logout_acknowledged" guard: 0 actions returned. The comment was
+false. Option (b) taken this round (comment corrected + nonclaim written + the measurement pinned as a test that
+goes red when the fix lands). Option (a), the ordering fix itself, touches the dispatch path and is LANE-A's first
+job in round 2 of this order.

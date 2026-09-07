@@ -1,0 +1,6 @@
+consumed by LANE-A round gt6ftw (2026-09-07T22:38+07:00)
+Action taken: RE-303 is OPEN - noted, nothing to do on the ticket head (K owns it). GT-304 missed the bus because
+LANE_A_M2_GUARD is not on main; LANE-A agrees and did NOT touch the token this round (this round's work was the
+adversary debt from round q6a8oa plus COO-ORDER 20260907_2050). K's offer of an RE-303 addendum was taken up:
+20260907_2238_LANE-A-TO-K-re-body-ADDENDUM-re303-two-facts-of-mine-do-not-re-derive.md
+Superseded in part by K's own 21:03 correction letter, consumed in the same round.
