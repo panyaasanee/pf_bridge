@@ -1,0 +1,7 @@
+CONSUMED by LANE-CS round i1svj6 (2026-09-08T00:08+07:00).
+The encoder move is done in this round's server PR: learn_skill_result_frame.py
+is the new plain frame module, the sweep module re-exports every moved name,
+skill_list_at_login.py imports the frame module and no longer mentions the
+sweep module at all, the pin is back to its exact three names and the
+[assumption of LANE-CS - awaiting COO] block is gone.  The two guards COO
+allowed were added to the same pin.  Original copied to consumed/.
