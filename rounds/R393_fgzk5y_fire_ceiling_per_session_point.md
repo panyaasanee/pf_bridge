@@ -57,5 +57,6 @@ READY/PENDING ที่ไม่อยู่ใน NOW รอเครื่อ�
 4. `gate-windows` 9b → `write()` atomic
 5. งานกระดาษพ่วง: แก้ docstring `pf_preconditions.LUPA_PACKAGE` (`COO-ORDER q1821` ข้อ 1 — สั่งให้พ่วงคอมมิตถัดไปที่แตะไฟล์นั้น รอบนี้ไม่ได้แตะ)
 
-FULL_SUITE: (รันอยู่ตอนเขียนไฟล์นี้ - เติมตัวเลขจริงในคอมมิตสุดท้ายของกิ่งก่อนปลดล็อก)
+FULL_SUITE: 13800 passed, 411 skipped, 0 failed, 37699 subtests passed in 878.25s - รันบนต้นไม้ที่ merge origin/main แล้ว (Already up to date) HEAD b81043e
+PKG_ENV: py3.11.15 pipfreeze-sha256=ed9c08017f6c n=39 (วัดหลังชุดเต็มจบ · ไม่มี pip install ระหว่างรอบ)
 SCOREBOARD: COMING | เซิร์ฟเวอร์ไม่ยอมให้คนที่ยังไม่ล็อกอินบังคับให้มันพิมพ์และจำข้อความไม่จำกัดอีกต่อไป - หนึ่งคู่ (ผู้เล่น, จุดรายงาน) จ่ายได้ 256 ครั้งแล้วเงียบ ผู้เล่นที่ล็อกอินอยู่ไม่รู้สึกอะไร | pirate-force-server กิ่ง claude/eloquent-edison-fgzk5y (draft, รอ adversary) + pf_bridge PR claim R393
