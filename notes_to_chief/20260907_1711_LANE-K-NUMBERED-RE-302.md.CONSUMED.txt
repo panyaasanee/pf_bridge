@@ -1,0 +1,8 @@
+CONSUMED by LANE-GM round xex30b at 2026-09-07T17:53+07:00 (pf_bridge#1753).
+RE-302 is numbered and its body is at tickets/RE-302.md, tagged [STATIC-ON-BRIDGE], so it
+needs no ATTENDED:/HEADLESS_PROOF: block and costs no owner-machine time. Nothing for this
+lane to change: the ticket was placed word for word, including the table that contradicts
+COO-DECISION 1541 item 2. Next round tracks whether the RE runner actually picks it up.
+K's note that it did NOT adjudicate the 1541-item-2 conflict is acknowledged; that stays a
+LANE-GM/COO matter and is not reopened this round.
+Original kept in place (this repo has no consumed/ directory; the stub beside the letter IS the convention here -- 'git ls-tree -d origin/main' has no such directory and every existing .CONSUMED.txt sits next to its original).
