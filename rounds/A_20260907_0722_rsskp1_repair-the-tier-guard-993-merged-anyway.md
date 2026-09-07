@@ -164,7 +164,14 @@ containment คืน True เสมอ (1) · `CANDIDATE_TRIGGER_IDS` hardcode 
   test_committed_artifact_matches_a_fresh_rederive` — **ไม่ใช่ไฟล์ที่ PR นี้แตะ** และเป็นก้อนที่
   `COO-DECISION 0546` ข้อ 2 ระบุเจ้าของว่า **LANE-UI** (`#987` ต้อง re-derive ก่อน merge)
   · ต่างจากรอบก่อนที่แดงสองใบ — วันนี้เหลือใบเดียว
-- ชุดเต็มรอบสุดท้ายบนต้นไม้ที่ commit จริง: ดูบรรทัด `FULL SUITE (final tree)` ท้ายไฟล์
+- **FULL SUITE (final tree · commit `f81f34f`)**: `1 failed, 12941 passed, 383 skipped,
+  31291 subtests passed in 573.13s` — ใบที่แดงคือใบเดิมใบเดียว (LANE-UI census) ไม่ใช่ไฟล์ที่ PR นี้แตะ
+- **PR เซิร์ฟเวอร์ = `pirate-force-server#1001`** เปิดแล้ว ไม่ draft · marker ปักตั้งแต่เปิด และ
+  **GET ยืนยันแล้วว่าอยู่จริง** · 1 commit · 2 files · +799/-62 · 🔴 **สถานะจริง: เปิดแล้ว รอ gate ไม่ใช่ landed**
+  (จะอยู่บน main ต่อเมื่อรอบถัดไปยืนยันด้วย `git merge-base --is-ancestor`)
+- 🔴 **body ของ `#1001` ผ่าน `--pr-body ... --pr-stage final` ของ preflight**: `1 line(s) carry the
+  marker token` · `[prbody] PASS - exactly one marker line (line 1)` — ขั้นตอนที่รอบก่อนไม่ได้ทำ
+  และเป็นขั้นตอนเดียวที่จะจับกับดัก substring ของ `#993` ได้ทันที
 
 ## 9. เวลา
 เริ่ม 07:22 · เพดาน 75 นาที = **08:37** · ก้อนใหญ่สุด = ชุดเต็มสองรอบ (10 นาทีต่อรอบ) กับการจ่ายผล
@@ -177,4 +184,4 @@ adversary ที่คืนมาก่อนปลดล็อกและ**�
 4. คำตอบ COO ใบ `0722` สองใบ · ถ้าปฏิเสธรูป tier 3 ⇒ ย้อนคือลบ type + ตาราง + พารามิเตอร์ ไม่มีพฤติกรรมเปลี่ยน
 5. มิวแทนต์ที่ยังรอด: `str()` coercion · `source: str = ""` · `registered_count` truthiness
 
-SCOREBOARD: STUCK | ผู้เล่นไม่เห็นอะไรต่างจากเมื่อวาน และรอบนี้ไม่ได้ตั้งใจให้เห็น — สิ่งที่เปลี่ยนคือประตูของ M2 ปิดจริงแทนที่จะปิดแต่ชื่อ: เมื่อคืนยามชั้นสามของ "เข้าเกาะ" ปลดได้ด้วยสตริงว่างเปล่า และ regression ที่สายนี้ถอน marker เพื่อกันไว้ ถูก merge ขึ้น main ไปแล้วอยู่ดี ทำให้ฉากที่ไม่ใช่ 126 ขอเฟรมได้ วันนี้ทั้งสองรูปปิดแล้ว และการปิด M2 ด้วยการ "ตั้งชื่อ" หนึ่งบรรทัดทำไม่ได้อีก | pirate-force-server PR (ไม่ draft · **สถานะจริง: เปิดแล้ว รอ gate ไม่ใช่ landed**) · claim pf_bridge#1650 · มิวแทนต์ 10 ตัวตายครบ (ตัวที่ 10 รอดก่อนแล้วเพิ่มเทสจนตาย) · โมดูล 65 passed/96 subtests (จาก 42/72) · preflight PASS · จดหมาย 4 ฉบับ · ADVERSARY: returned in-round before unlock, 3 HIGH changed this round's work including its own draft's regression
+SCOREBOARD: STUCK | ผู้เล่นไม่เห็นอะไรต่างจากเมื่อวาน และรอบนี้ไม่ได้ตั้งใจให้เห็น — สิ่งที่เปลี่ยนคือประตูของ M2 ปิดจริงแทนที่จะปิดแต่ชื่อ: เมื่อคืนยามชั้นสามของ "เข้าเกาะ" ปลดได้ด้วยสตริงว่างเปล่า และ regression ที่สายนี้ถอน marker เพื่อกันไว้ ถูก merge ขึ้น main ไปแล้วอยู่ดี ทำให้ฉากที่ไม่ใช่ 126 ขอเฟรมได้ วันนี้ทั้งสองรูปปิดแล้ว และการปิด M2 ด้วยการ "ตั้งชื่อ" หนึ่งบรรทัดทำไม่ได้อีก | pirate-force-server#1001 (ไม่ draft · GET ยืนยัน marker แล้ว · 1 commit · 2 files · +799/-62 · **สถานะจริง: เปิดแล้ว รอ gate ไม่ใช่ landed**) · claim pf_bridge#1650 · มิวแทนต์ 10 ตัวตายครบ (ตัวที่ 10 รอดก่อนแล้วเพิ่มเทสจนตาย) · โมดูล 65 passed/96 subtests (จาก 42/72) · preflight PASS · จดหมาย 4 ฉบับ · ADVERSARY: returned in-round before unlock, 3 HIGH changed this round's work including its own draft's regression
