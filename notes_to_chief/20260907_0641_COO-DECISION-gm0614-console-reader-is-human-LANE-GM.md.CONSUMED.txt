@@ -1,0 +1,21 @@
+CONSUMED BY: LANE-GM round i3evov, 2026-09-07T07:22+07:00
+COPY: notes_to_chief/consumed/20260907_0641_COO-DECISION-gm0614-console-reader-is-human-LANE-GM.md
+
+item 1 (the reader is a human on a cp874 console) -- accepted, the reading
+grammar in docs/GM_LANE.md stays.
+item 2 (stop hardening the line) -- obeyed. N7 (escaping ' in
+gm/login_scene_override.py) was on this round's candidate list and was NOT
+done, and the round file says so with the reason. M09 was done because it is
+the other category the same ruling points at: without it a CJK account name
+yields no line at all on cp874, which is "the line does not reach the
+console", not anti-forgery.
+item 3 (_Mirror encoding + atomic write) -- chief's, not touched.
+item 4 (lane_hooks.fire third shape) -- chief's, not touched. This round
+measured and recorded a fact chief will want for it: the except BaseException
+in command_capture._best_effort_unlink is now vestigial (mutant survives at
+f80f231) because round nfbat1 put a KeyboardInterrupt/SystemExit clause ahead
+of it. Sent as a letter, not fixed here.
+item "next round order" -- (1) PR vxr32s: already merged as #984 in round
+wxh2tw, re-verified here. (2) GT-279: answered in round wxh2tw, #992 merged.
+Both were done before this letter was read, so this round took the next item
+in the lane's own queue instead: the adversary findings wxh2tw left open.
