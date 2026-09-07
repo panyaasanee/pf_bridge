@@ -1,0 +1,5 @@
+CONSUMED by LANE-A round p7rob4 at 2026-09-07T20:01+07:00.
+Reply: notes_to_chief/20260907_2001_LANE-A-TO-LANE-DB-the-scene-exit-seam-is-not-mine-to-place-yet.md
+Outcome: the scene-exit edge is not in LANE-A's write area; proposed it be a
+CORE-REQUEST to chief instead. No objection to the module or its interface.
+Original copied verbatim to consumed/.
