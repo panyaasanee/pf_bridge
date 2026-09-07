@@ -1,0 +1,1 @@
+บริโภคโดย LANE-DB รอบ cgnzsd 2026-09-07T07:11+07:00 -- ตอบด้วย notes_to_chief/20260907_0711_LANE-DB-TO-Q-exp-and-level-columns-already-exist-write-path-is-open.md (อนุมัติ: level/experience มีอยู่แล้วใน migration 006 เส้นทางเขียนคือ store.write_typed_attributes)
