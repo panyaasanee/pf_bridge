@@ -1025,27 +1025,23 @@ diff <(sed -n '10,$p' notes_to_chief/20260907_1916_LANE-DB-TO-K-re-body-does-op5
 ```
 🔴 **[เพิ่ม 20:55 · `pf-adversary` M2/M1]** โทเคนเดิมเช็คแค่การมีอยู่ของสตริง ⇒ ไฟล์เปล่าที่มีคำนั้นคำเดียวก็ผ่าน · โทเคนใหม่เทียบกับจดหมายต้นฉบับจริง และ **บรรทัดที่ 17 คือจุดเริ่มเนื้อใบหลังบล็อกคำอธิบายของเสมียน** (บล็อกนั้นมีการคืนสองบรรทัดที่ K เคยตัดทิ้ง — อ่านที่หัวไฟล์ `tickets/RE-305.md`) · K รันแล้วผ่าน ณ 2026-09-07T21:0x
 
-## RE-310 BEHAVIOUR-PREDICATE-0x0045C160-NAME-COLOUR-FIELD-READ-001  [🔴 **OPEN (static-on-bridge)** · เปิดโดย LANE-K รอบ `0109` 2026-09-08T01:16+07:00 ตามคำสั่งตรงของ `COO-ORDER 20260907_2342_COO-ORDER-panya2325-gt288-set3-is-all-withdraw-gt306-open-re-behaviour-predicate-LANE-K.md` ข้อ 3 (ส่งต่อ `PANYA-ORDER 20260907_2325`) — **เนื้อใบข้างล่างนี้คำต่อคำจากคำสั่ง COO ไม่ใช่ของ K แต่ง** · `[STATIC-ON-BRIDGE]` ตาม `NOW.md` `0159` (ไม่ใช่ attended ไม่มีบล็อก `ATTENDED:` ไม่ต้อง `HEADLESS_PROOF:`) · **เจ้าของใบ/ผู้บริโภคผล = LANE-B (COMBAT)** · ผู้ทำ = RE runner (Codex) บนเครื่องสะพาน ให้ทำคู่ขนานกับบูต `GT-288` ชุด 3 ไม่ต้องรอผลจอ]
+## RE-310 BEHAVIOUR-PREDICATE-0x0045C160-NAME-COLOUR-FIELD-READ-001  [✅ **ANSWERED (static-on-bridge)** · เนื้อใบเต็ม + ผลคำต่อคำ ย้ายไป `tickets/RE-310.md` โดย LANE-K รอบ `0511` 2026-09-08T05:11+07:00 (ใบเดิม >8,192 B ต่อใบตามเพดานจัดคิวของ K — เตรียมไว้แล้วโดยรอบ `ugr4cx` แต่ยังไม่ได้แก้หัวใบนี้จนรอบนี้) · ผลพับโดย LANE-K รอบ `ugr4cx` 2026-09-08T03:15+07:00 จาก `notes_to_chief/20260908_0032_RE-behaviour-predicate-0x0045C160-RESULT-ahead-of-numbering-LANE-K.md` · **เจ้าของใบ/ผู้บริโภคผล = LANE-B (COMBAT)**]
 
-> numbering [LANE-K รอบ `0109`]: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` + `tickets/` + เลขจองใน `NOW.md`/`FROM_CHIEF_*`/`COO-DECISION`/`LANE-K-NUMBERED-*` สูงสุด **309** (`GT-309` วางในรอบเดียวกัน) ⇒ เลขว่างถัดไป **310** · ตรวจ 0 hit ของ `GT-310`/`RE-310` ครบทุกที่ก่อนวาง
+owner: LANE-B (COMBAT) · body: `tickets/RE-310.md` (เนื้อใบเต็ม + ผล · ย้ายออกจากคิวเพราะเกิน 8,192 B ต่อใบ)
 
-## คำถามเดียวของใบ
-behaviour predicate ที่ VA `0x0045C160` (ตัวที่ไคลเอนต์เรียกก่อนเลือกสูตรสีชื่อ) **อ่านฟิลด์ไหนของ `NPCAttr`/`BasicAttr`** ก่อนตัดสินใจว่าจะใช้สูตรสีของ "ผู้เล่น" (เทียบ `s_ENEMY`) หรือสาขาอื่น
+---
+## RE-311 KNOWLEDGEGURU-SHARED-PREFIX-0069F980-WRITES-BYTES-OR-NOT-001  [🔴 **OPEN (static-on-bridge)** · เปิดโดย LANE-K รอบ `0511` 2026-09-08T05:11+07:00 · เนื้อใบเต็ม (คำถาม/anchors/grep/nonclaims) ย้ายไป `tickets/RE-311.md` เพราะเกิน 8,192 B ต่อใบ — คำต่อคำจาก `notes_to_chief/20260908_0200_LANE-UI-TO-K-re-body-knowledgeguru-shared-prefix-0069F980.md` (LANE-UI รอบ `splep7`) · `[STATIC-ON-BRIDGE]` — อ่าน client image บนเครื่องสะพาน read-only ไม่ใช่ attended ไม่มีบล็อก `ATTENDED:` ไม่ต้อง `HEADLESS_PROOF:` · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-UI** · อ้างแถวในแผน `docs/UI_LANE.md` แถวสุดท้ายของตาราง หัวข้อ `KnowledgeGuru_`]
 
-## ที่มา (อ้างจากคำสั่ง COO คำต่อคำ)
-`RE-222` Q1–Q3 + ผล `GT-288` ชุด 1 (faction ไม่ใช่ตัวเลือกสูตร — ทั้ง NPC และมอนได้สูตรผู้เล่นเหมือนกัน) + ชุด 2
-(actor_type/สกิน ไม่ใช่ตัวเลือกสูตร) + `PANYA-ORDER 20260907_2325` — ทั้งสองชุดตัดตัวเลือกที่ชัดเจนออกแล้ว
-เหลือฟิลด์อื่นของ `NPCAttr`/`BasicAttr` ที่ยังไม่ถูกตัด
+> numbering [LANE-K รอบ `0511`]: คำสั่งค้นหาเดียวตามกฎ ② ที่หัวไฟล์นี้ (`grep -ohE '\b(GT|RE)-[0-9]{3,4}\b' GAME_TEST_QUEUE.md CLIENT_RE_QUEUE.md archive/*QUEUE*ARCHIVE*.md tickets/*.md 2>/dev/null | grep -oE '[0-9]{3,4}$' | sort -n | tail -1`) คืน **310** · เลขจองในจดหมาย (`NOW.md`/`FROM_CHIEF_*`/`COO-DECISION`/`LANE-K-NUMBERED-*`) สูงสุดก็ **309** ⇒ เลขว่างถัดไป **311** แล้ว **312** (ใบถัดไปของ LANE-UI ในรอบเดียวกัน) · ตรวจ 0 hit ของ `GT-311`/`RE-311`/`GT-312`/`RE-312` ครบทุกที่ก่อนวางทั้งคู่
 
-## ส่งมอบ (คำต่อคำจากคำสั่ง — ต้องมีครบ)
-1. รายชื่อฟิลด์ + offset ที่ predicate `0x0045C160` อ่านจริง (จาก disassembly/static เท่านั้น ห้ามอ้างผลเดา)
-2. ลำดับสาขา (branch order) ที่ predicate เดินก่อนถึงจุดเลือกสูตรสีผู้เล่น
-3. ค่า/เงื่อนไขที่ทำให้ตัวละครหลุดออกจากสูตรผู้เล่น (คือเงื่อนไขที่ยังไม่มีใครวัดได้จากผลจอ)
+owner: LANE-UI · body: `tickets/RE-311.md` (เนื้อใบเต็ม · ย้ายออกจากคิวเพราะเกิน 8,192 B ต่อใบ)
 
-## nonclaims (ของ K ไม่ใช่ของคำสั่ง — เพื่อไม่ให้ runner อ่านผิดเป็นคำตอบสำเร็จรูป)
-- ใบนี้ไม่ได้บอกว่าฟิลด์ไหนคือคำตอบ — เป็นคำถามที่เปิดล่วงหน้าคู่ขนานกับการบูต ALL ไม่ใช่ผลจากการบูตนั้น
-- ห้ามอ้างผลเดา (ย้ำคำสั่งเดิม) — ต้องเป็น VA/offset ที่ตรวจได้จริงจาก disassembly
+---
 
-owner: LANE-B (COMBAT) · body: (เต็มอยู่ในหัวใบ + สองหมวดข้างบน — ยังไม่เกินเพดาน)
+## RE-312 UI-EIGHT-VITALS-INBOUND-HANDLER-CENSUS-001  [🔴 **OPEN (static-on-bridge)** · เปิดโดย LANE-K รอบ `0511` 2026-09-08T05:11+07:00 · เนื้อใบเต็ม (คำถาม/grep/เกณฑ์ผ่าน/nonclaims) ย้ายไป `tickets/RE-312.md` เพราะเกิน 8,192 B ต่อใบ — คำต่อคำจาก `notes_to_chief/20260908_0336_LANE-UI-TO-K-re-body-what-the-client-does-when-it-RECEIVES-the-eight-ui-vitals.md` (LANE-UI รอบ `gws4gs` · claim `pf_bridge#1844`) · ประเภท: static RE จาก client image ที่ commit แล้ว (ไม่ต้องบูตเกม) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-UI** · อ้างแถวในแผน `docs/UI_LANE.md` แถว `Community/Party/Trade (8 classes)` (สถานะรอบ `gws4gs`: SEAM OPEN, NOTHING ANSWERED YET) — คอลัมน์ "ขั้นถัดไป" ของแถวนั้นชี้มาที่ใบนี้โดยตรง]
+
+> numbering [LANE-K รอบ `0511`]: ต่อจาก `RE-311` ในรอบเดียวกัน (ดูบล็อก numbering ของ `RE-311` สำหรับคำสั่งค้นหาเต็ม) · ตรวจ 0 hit ของ `RE-312`/`GT-312` แล้วในบล็อกเดียวกัน
+
+owner: LANE-UI · body: `tickets/RE-312.md` (เนื้อใบเต็ม · ย้ายออกจากคิวเพราะเกิน 8,192 B ต่อใบ)
 
 ---
