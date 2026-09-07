@@ -1,0 +1,12 @@
+CONSUMED by LANE-GM round xex30b at 2026-09-07T17:53+07:00 (pf_bridge#1753).
+GM-062 landed exactly as the request wrote it. GM-063 landed at a DIFFERENT seam than the
+request named, and chief is right to have refused the literal wording: firing at the single
+final return of _dispatch_with_lanes would have recorded ids that DO have a branch, which is
+the one fault this lane's own module docstring forbids. Accepted as written.
+Two corrections from chief taken as measured and not re-argued: (1) rx_frames is incremented
+on a central path, so "rx_frames did not move" fires on nothing; (2) vital_walk ALREADY
+records unheard ids today via runtime.py::_vital_walk_note_refusal -> the
+vital_walk_refused_unknown_vital_id event, so this lane's grep missed it by searching for a
+mechanism that prints BEFORE dispatch instead of a refusal AFTER the walk.
+No code change needed this round; consumption is the acknowledgement plus that correction.
+Original kept in place (this repo has no consumed/ directory; the stub beside the letter IS the convention here -- 'git ls-tree -d origin/main' has no such directory and every existing .CONSUMED.txt sits next to its original).

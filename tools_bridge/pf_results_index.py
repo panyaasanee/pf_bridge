@@ -289,10 +289,45 @@ def _with_qualifier(up: str, idx: int, word: str) -> str:
     return word + "-" + suffix
 
 
+# A header may close a ticket with a bookkeeping word and then write the
+# verdict immediately after it ("**CLOSED** -- **FAIL** OBSERVER_CONFIRMED ...").
+# current_status() reports the FIRST status word, so such a header used to
+# disagree with its own verdict.  Only the two words that say nothing about the
+# outcome are paired this way -- CANCELLED / SUPERSEDED / DUPLICATE are real
+# decisions about the ticket and must keep diverging from a tester verdict, so
+# a cancelled ticket carrying a PASS letter still reaches a clerk.
+CLOSURE_WORDS = ("CLOSED", "ARCHIVED")
+# how far after the closure word the verdict may sit and still be that closure's
+# own verdict.  Short on purpose: a header line runs for thousands of characters
+# and carries the words of every earlier round.
+CLOSURE_PAIR_WINDOW = 40
+
+
+def closure_verdict(header_rest: str):
+    """The verdict a closure word carries, or ("", -1).
+
+    Returns the first status word that is NOT a closure word and starts within
+    CLOSURE_PAIR_WINDOW characters after a current status that IS one.
+    """
+    word, idx = current_status(header_rest)
+    if not word or word.split("-")[0] not in CLOSURE_WORDS:
+        return ("", -1)
+    tail_at = idx + len(word)
+    tail = strip_struck(header_rest)[tail_at:tail_at + CLOSURE_PAIR_WINDOW]
+    nxt, nxt_idx = current_status(tail)
+    if not nxt or nxt.split("-")[0] in CLOSURE_WORDS:
+        return ("", -1)
+    return (nxt, tail_at + nxt_idx)
+
+
 def header_agrees(header_rest: str, status: str) -> bool:
     """True when the header's CURRENT status is the RESULT status family."""
     family = _norm(status)
-    return bool(family) and current_status(header_rest)[0] == family
+    if not family:
+        return False
+    if current_status(header_rest)[0] == family:
+        return True
+    return closure_verdict(header_rest)[0] == family
 
 
 def header_mentions_elsewhere(header_rest: str, status: str) -> bool:
@@ -514,6 +549,28 @@ def selftest():
     lines, diverged = build_report(
         {"GT-000": ("202609081200", "PASS", "fake.md", "R400 2026-09-08")}, {"GT-000": both})
     assert diverged == 1 and len([ln for ln in lines if ln.startswith("GT-000")]) == 1, lines
+
+    # --- closure word + verdict written next to it (LANE-K round kq7m3d) ---
+    # measured on the real GAME_TEST_QUEUE.md GT-218 stub, which reported
+    # HDR-ELSE against its own OBSERVER_CONFIRMED FAIL letter before this rule.
+    closed_fail = (" [**CLOSED** -- \u274c **FAIL \u00b7 OBSERVER_CONFIRMED"
+                   " 2026-09-03T16:51+07:00** -- archived 20260906 (closed;"
+                   " verbatim in `archive/GAME_TEST_QUEUE_ARCHIVE_20260906_closed.md`)")
+    assert current_status(closed_fail)[0] == "CLOSED", current_status(closed_fail)
+    assert closure_verdict(closed_fail)[0] == "FAIL", closure_verdict(closed_fail)
+    assert header_agrees(closed_fail, "FAIL")
+    # and it must not manufacture agreement with a DIFFERENT verdict
+    assert not header_agrees(closed_fail, "PASS")
+    # CANCELLED is a decision about the ticket, not bookkeeping: a PASS letter
+    # against a cancelled header still has to reach a clerk (real GT-204).
+    cancelled = " [\u274c **CANCELLED - covered by GT-216** -- `GT-216` PASS on screen]"
+    assert current_status(cancelled)[0] == "CANCELLED", current_status(cancelled)
+    assert closure_verdict(cancelled) == ("", -1)
+    assert not header_agrees(cancelled, "PASS")
+    # the window is short: a verdict far down the same header is not paired
+    assert closure_verdict(" [**CLOSED**" + " x" * 60 + " **FAIL**]") == ("", -1)
+    # a header with no closure word is untouched by the new rule
+    assert closure_verdict(" [**PASS** folded]") == ("", -1)
 
     # --- D12: PARTIAL is a status word both clerk tools can read ---
     assert "PARTIAL" in STATUS_WORDS
