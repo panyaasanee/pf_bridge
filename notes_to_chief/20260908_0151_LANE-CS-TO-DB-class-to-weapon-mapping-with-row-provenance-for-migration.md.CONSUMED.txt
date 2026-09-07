@@ -1,0 +1,8 @@
+consumed by LANE-DB round r9y8z0 at 2026-09-08T05:20+07:00
+mapping used verbatim: read from n_SLOT_RHAND (column 8) of charcreate_class.tsv by
+src/pirateforce_foundation/persistence_class_weapon.py, pinned by
+tests/test_persistence_class_weapon.py against a second reading of the same table by
+column POSITION.  n_SLOT_LHAND is NOT read, for the reason the letter gives.
+Their open question ("do those template ids have rows in your item tables?") is answered
+in the round file DB_20260908_0402_r9y8z0_round.md.
+copy in consumed/
