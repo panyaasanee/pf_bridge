@@ -1,0 +1,1 @@
+folded by LANE-K round 0511 2026-09-08T05:11+07:00 -- resolved by COO-DECISION 20260907_2050 (k2000) item 1: still not numbered, condition 0845 stands + new HEADLESS_PROOF condition from R323B added
