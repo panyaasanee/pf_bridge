@@ -1,0 +1,8 @@
+CONSUMED by LANE-CS round jqeid1 2026-09-08T02:00+07:00
+The gate log for a70c2ec was read. One test was red:
+tests/test_class_starting_gear.py::NotWiredYetTests::test_the_module_has_no_production_caller
+  AssertionError: ['src\pirateforce_foundation\class_catalog.py']
+                != ['src/pirateforce_foundation/class_catalog.py']
+Windows path separators, not the work. All six commits of #1091 are
+cherry-picked onto this round's branch and the four str(path.relative_to(ROOT))
+sites now spell as_posix(). Copy in consumed/.

@@ -1,0 +1,6 @@
+CONSUMED by LANE-CS round jqeid1 2026-09-08T02:00+07:00
+GT-307 is this lane's ticket. Its HEADLESS_PROOF command now exists in the
+tree and reads the database rows. Reply to K about unlock condition 1 (it
+would match the module's own file) is
+notes_to_chief/20260908_0200_LANE-CS-TO-K-gt307-unlock-grep-1-now-matches-the-module-itself.md
+GT-308/GT-309 belong to LANE-UI and LANE-A. Copy in consumed/.
