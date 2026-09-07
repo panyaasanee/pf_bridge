@@ -43,7 +43,7 @@
   ไม่สนใจว่าใครเอคโค่ (แดง 2)
 - `pf_gate_preflight.py --repo pirate-force-server` = **PREFLIGHT PASS**
 - `verify_hypothesis_ledger.py` PASS entries=50 · `verify_functional_coverage.py` รันแล้วไม่มี diff
-- ชุดเต็ม `pytest tests/`: ผลอยู่ในหัวข้อล่างสุด (รันบนต้นไม้ที่ merge origin/main แล้ว)
+- ชุดเต็ม `pytest tests/` บนต้นไม้ที่ merge origin/main แล้ว: **14249 passed · 436 skipped · 0 failed · 38975 subtests · 810 วินาที** (รอบแรกแดง 3 ตัว = เหตุของคอมมิตแก้ shadowing)
 
 ## TWO_SESSIONS_SAME_SCENE
 sink สร้างต่อ connection (lazy ต่อ session object) และ `take` กรองด้วย `character_id`
@@ -59,10 +59,40 @@ sink สร้างต่อ connection (lazy ต่อ session object) แล�
    จนกว่าประตู `ScriptHost` ของ LANE-A จะลง (D2) จุดเสียบขาออกจึงยังไม่มีผู้เรียกจริง
    **พูดตรง ๆ ว่านี่คือครึ่งเดียวของโซ่** ขาเข้ามีผู้เรียกแน่นอน (ไคลเอนต์) ขาออกยังรอ A
 
-## ADVERSARY
-`ADVERSARY_PENDING pirate-force-server#<PR ของรอบนี้>` — สั่งตั้งแต่ต้นรอบพร้อมเริ่มงาน
-ผลยังไม่คืนตอน push · **ห้ามอ่านใบนี้ว่า "ผ่าน adversary"** · รอบถัดไปของ chief สั่ง adversary
-บนกิ่งนี้เป็นงานแรกตามกฎเดียวกับ PENDING
+## ADVERSARY — คืนผลในรอบ และ **ไม่สะอาด** (12 ข้อ · HIGH 3)
+สั่งตั้งแต่ต้นรอบพร้อมเริ่มงาน ผลคืนก่อนปลดล็อก จึงอ่านและบันทึกเต็มในรอบนี้
+**PR เซิร์ฟเวอร์ของรอบนี้ = pirate-force-server#1109 เป็น draft และ body ไม่มี marker** (กฎ `1849` + reaper ไม่แตะใบไร้ marker)
+— ตั้งใจให้ไม่ merge จนกว่าหนี้ข้างล่างจะจ่าย
+
+**D1 HIGH บล็อก — ตัวแก้ shadowing ของรอบนี้เอง สร้างรีเพลย์ที่ docstring บอกว่ากันไว้**
+วัดบน dispatcher จริง: ออร์เดอร์ใบเดียว เอคโค่ `V136_MARKER1_CONFIRM_PC` สองครั้ง
+⇒ เฟรมเดินทางออก **สองครั้ง** — ครั้งแรก `LANE_A_M2_TELEPORT_CHECK_TRANSPORT` จาก seam
+ครั้งที่สอง `V137_...TRANSPORT_PROBE_ONCE` จากเส้น v141 ที่ latch ของมันยังไม่ยิง
+(seam กินออร์เดอร์ไปแล้ว เอคโค่ที่สองจึงตกลงเส้นเดิม) · ก่อนคอมมิต `84def44` เคสนี้เกิดไม่ได้
+เพราะสาขากลืน id ไว้ — คือแลกบั๊กหนึ่งกับอีกบั๊กหนึ่ง ไม่ใช่แก้
+
+**D2 HIGH — `print()` ห้าจุดบนเส้น dispatch ไม่มียาม**
+`game_listener` ของ v141 ครอบ `state.dispatch()` ด้วย `try:` ที่**ไม่มี `except`** (มีแต่ `finally`)
+⇒ exception จาก print (เช่น `ValueError: I/O operation on closed file` ที่
+`ground_empty_trial.py` ระบุชื่อไว้แล้ว) ฆ่า accept loop ของ **ทุก session** ไม่ใช่แค่คนเดียว
+ซ้ำ: การระบายคิวล้าง `unsent` ก่อนวนลูป ⇒ raise ที่ใบแรกทำให้ใบ 2-3 ไม่ถูกส่ง ไม่ถูกนับ
+แต่ยังไถ่ได้ด้วยเอคโค่ทีหลัง · และ raise หลัง `take()` = ผู้เล่นกด OK ออร์เดอร์หาย ไม่มีเฟรมออก
+
+**D3 HIGH — การระบายคิวอยู่นอกยาม logout**
+`_teleport_check_drain_prompts` อยู่ท้าย `dispatch()` หลัง `_dispatch_with_lanes` จบแล้ว
+⇒ ข้ามยาม "ห้ามเขียนผ่าน session ที่ปิดแล้ว" · วัดแล้ว: `logout_acknowledged=True`
+ยังมี `LANE_A_M2_TELEPORT_CHECK_PROMPT` ออกไป ขณะ event trail เขียนว่าเฟรมนั้นไม่มีการตอบ
+
+**MEDIUM ที่ต้องจ่ายด้วย**: D4 ออร์เดอร์ที่ drain ปฏิเสธไม่ยอมส่ง ยังไถ่ transport ได้ ·
+D5 Cancel ทิ้งออร์เดอร์ค้างตลอดอายุคอนเนกชัน (ไคลเอนต์ auto-ack ได้เองโดยไม่มีหน้าต่าง RE-303 6.1) ·
+D6 ประตูบันทึกกับประตูกินใช้ id คนละโดเมน (`lua_api/player.py` บันทึก `context.character_id`
+ค่า default `0` · ตัวกินใช้ `foundation.selected.id`) ⇒ หน้าต่างเปิดแล้วไปไหนไม่ได้ = อาการ R307 เป๊ะ ·
+D7 บันทึกซ้ำ = สองหน้าต่าง สองเที่ยว และ `refusals` ไม่มีใครอ่านเลยทั้งไฟล์ ·
+D8 ห้าประโยคใน docstring ไม่จริงแล้ว (โดยเฉพาะ "v141 ไม่เคยตอบ" — มันตอบ · และ
+"RE-303 วัด id" — nonclaim 6 บอกว่า **อ้าง** ไม่ใช่วัด) · D9 seam ไม่เขียน `events` เลย ·
+D10 เทสที่ตั้งชื่อว่าเฝ้า fall-through จับการถอด fall-through ไม่ได้จริง (มิวแทนต์รอด 14/14)
+**ที่ adversary ลองแล้วหักไม่ได้**: การนับ `rx_frames` หนึ่งครั้งต่อเฟรมทั้งสองเส้น ·
+การแยก sink ต่อคอนเนกชัน · ชนิดของ action tuple · การอ้าง `dd1a169` และเวลาของ COO `0242`
 
 ## งานเครื่องมือที่ทำในรอบเดียวกัน (≤30 นาที)
 `tools_bridge/pf_gate_preflight.py` `SKIP_MARKERS` เติมสองสตริง `skip_unless_present`
@@ -80,13 +110,17 @@ sink สร้างต่อ connection (lazy ต่อ session object) แล�
 ตอนนี้คือใบซ้ำที่ไม่มีบล็อก `ATTENDED:` ที่ใช้ได้ · ไม่มีใบไหนถูกลบหรือย้ายในรอบนี้
 READY/PENDING ที่ไม่อยู่ใน NOW รอเครื่องคุณ: ไม่มีใบใหม่จากรอบนี้
 
-## รอบหน้าทำอะไร (chief)
-1. สั่ง `pf-adversary` บนกิ่งรอบนี้เป็นงานแรก (PENDING) แล้วจ่ายผล
-2. **ใบ workflow เดียว** ตาม COO `0142` ข้อ 2 / `0242` หัวข้อ 2 ที่ยังไม่ได้ทำรอบนี้:
-   reaper **ห้าม `gh pr ready` ให้ใครทั้งสิ้น** (draft เกิน 75 นาที = `::warning::` บรรทัดเดียวแล้วไม่แตะ)
-   + ท้าย log ดึง `AssertionError`/`TimeoutExpired`
-3. `AGENTS.md` ย้ายประวัติให้ ≤30,720 ไบต์ → `#1076` hash → `#1084` marker
-4. CORE-REQUEST ที่ยังค้าง: UI `2020` · A `2104` · CS `2135`/`2237` · DB `0206`
-   (CS `1937` ถูกถอนโดย `2206` ของสายเอง)
+## รอบหน้าทำอะไร (chief) — งานแรกคือจ่ายหนี้ D1-D3 บนกิ่งนี้ ไม่ใช่ของใหม่
+1. **D1**: เอคโค่ที่ seam ตอบไปแล้ว ต้องไม่ตกไปให้เส้น v141 จ่ายซ้ำ — ทางที่คิดไว้คือ
+   ตอน seam ส่ง transport ให้ปิด latch ของเส้นเดิมด้วย (`v137_marker1_transport_sent`)
+   แล้วเทสด้วยเคสของ adversary ตรง ๆ (record marker 1 · เอคโค่ `V136_MARKER1_CONFIRM_PC` สองครั้ง
+   ⇒ ต้องได้เฟรมเดินทาง **หนึ่ง** เฟรม) · **ห้ามเชื่อทางนี้จนวัด** — ยังไม่ได้ลอง
+2. **D2**: ห่อ `print()` ทั้งห้าจุดแบบเดียวกับ `ground_empty_trial._say` + ระบายคิวทีละใบ
+   (ถอดออกจาก `unsent` เมื่อส่งสำเร็จ) ไม่ใช่ล้างทั้งคิวก่อนวน
+3. **D3**: ย้ายจุดระบายให้อยู่หลังยาม logout เดียวกับสาขาขาเข้า
+4. D6 (โดเมน id) ต้องคุยกับ A/Q — เขียนใบ `ADDRESSEE: LANE-A` แนบผล ไม่แก้ในไฟล์ของเขา
+5. หลังจ่ายครบ: adversary รอบสองบนกิ่งเดิม → ถอด draft + เติม marker
+6. ค่อยไปต่อ: ใบ workflow (reaper ห้าม `gh pr ready` + log tail) → `AGENTS.md` ≤30,720 →
+   `#1076` hash → `#1084` marker → CORE-REQUEST 5 ใบ (UI `2020` · A `2104` · CS `2135`/`2237` · DB `0206`)
 
-SCOREBOARD: COMING | กด OK บนหน้าต่าง "รายงานกัปตัน" แล้วเซิร์ฟเวอร์ส่งเฟรมวาปกลับ แทนที่จะนับเฟรมแล้วเงียบเหมือนเดิม | pirate-force-server PR ของรอบ phv1ag (จุดเสียบสองจุดที่ #1101 ขอ) + tests/test_m2_teleport_check_seam_wiring.py 13 เทส
+SCOREBOARD: STUCK | จุดเสียบสองจุดของ "รายงานกัปตัน" เขียนและพิสูจน์ headless แล้ว แต่ยังไม่ถึงมือผู้เล่น: adversary พบรีเพลย์ที่จ่ายเที่ยวเดินทางสองครั้ง PR จึงเป็น draft ไร้ marker จนกว่าจะจ่ายหนี้ | pirate-force-server#1109 (draft ไร้ marker) + rounds/R397 หัวข้อ ADVERSARY
