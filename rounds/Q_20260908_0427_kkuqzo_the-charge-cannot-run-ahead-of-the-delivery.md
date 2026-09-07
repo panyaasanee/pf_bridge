@@ -48,8 +48,19 @@ property อ่านอย่างเดียวโดยตั้งใจ �
 - `scan_groups` union สองแหล่ง dedup ด้วย (เซลล์, จุดเรียก) — ไม่มีสมาชิกซ้ำ
 - มิเรอร์ `quest_column_groups.tsv` **32 -> 34 แถว · 2 -> 3 สคริปต์ที่ผูกกัน**
 
-**ผลที่ผู้เล่นได้**: `Quest.Var2` ของ `q_boat_health` เดินผ่านประตูครึ่งธุรกรรมแล้ว ⇒ คืน stub default
-⇒ `Player.AddCash(stub * -1)` ขยับเงินไม่ได้ · **ค่าซ่อมเรือหักไม่ได้อีกจนกว่า `Player.BoatHealth` จะเป็นของจริง**
+**ผลที่ผู้เล่นได้ — วัดบนแถวที่เกมส่งมาจริง ไม่ใช่ fixture**:
+```
+q_boat_health quest ids: (3189, 3244)
+  quest 3189 -> unpayable_group_for(n_VARI_2): ('Accept_Run', ('Player.BoatHealth',))
+  quest 3244 -> unpayable_group_for(n_VARI_2): ('Accept_Run', ('Player.BoatHealth',))
+Quest.Var2 ผ่านประตูของ namespace -> 0            (STUB_DEFAULT)
+Quest.Var2 คำตอบดิบของตาราง (ไม่ผ่านประตู)  -> 100
+LUA_QUEST_GROUP_REFUSED n_VARI_2 quest=3189 group=Q_BOAT_HEALTH.Accept_Run \
+    blocked_on=Player.BoatHealth call_site=Quest/q_boat_health.lua:20
+```
+⇒ สองแถวเควสนี้เก็บค่าซ่อม **100 cash ต่อครั้ง** · ตอนนี้ `Quest.Var2` คืน `0` (`STUB_DEFAULT = 0`)
+⇒ `Player.AddCash(0 * -1)` = `AddCash(0)` **เงินไม่ขยับ** และมีคอนโซลหนึ่งบรรทัดบอกว่าใครบล็อก
+**ค่าซ่อมเรือหักไม่ได้อีกจนกว่า `Player.BoatHealth` จะเป็นของจริง**
 
 🔴 **ข้อจำกัดที่ต้องเขียนให้ตรง — ยังไม่ถึงมือผู้เล่นวันนี้**: เส้นทางนี้เข้าถึงได้เมื่อ `Player.GetCash` เป็นของจริง
 (`q_boat_health.lua:17` คือ `if Player.GetCash() >= Quest.Var2`) วันนี้ `GetCash` เป็นสตับ กิ่ง else จึงเดินแทน
