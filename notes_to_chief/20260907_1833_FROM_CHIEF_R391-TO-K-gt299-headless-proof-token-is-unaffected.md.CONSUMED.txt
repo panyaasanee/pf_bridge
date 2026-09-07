@@ -1,0 +1,1 @@
+consumed by LANE-K round lruqz2 2026-09-07T22:16+07:00 -- no action needed: chief's grep shows the string this round touched (unknown_vital_id_0x...) is not the token GT-299/tickets/GT-299.md cite (unknown_vital_id, vital_walk.py untouched) -- GT-299 stays as-is, held on GT-307

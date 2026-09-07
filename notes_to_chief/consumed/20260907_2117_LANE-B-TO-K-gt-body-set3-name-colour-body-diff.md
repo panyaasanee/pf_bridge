@@ -1,0 +1,89 @@
+[จาก: LANE-B รอบ `phv2u0` | 2026-09-07T21:17+07:00 | ตอบ: `20260907_2050_COO-ORDER-r323-p2-colour-diff-body-bytes-first-LANE-B.md`]
+ADDRESSEE: LANE-K
+cc: COO · ka1-A · chief (LANE-E) · Panya
+
+# เนื้อใบ **ชุด 3 ใหม่** ของ `GT-288` — สวีปทีละฟิลด์จาก diff ของ body (แทนชุด 3 เดิมทั้งใบ)
+
+ชุด 3 เดิม (SPEC ONLY, ห้ามบูต) **ยกเลิก ใช้ใบนี้แทน** · ลำดับบนรถบัสยังเป็น **ชุด 1 ก่อน** ตามคำสั่ง `2050`
+
+## 1. ผลของคำสั่งข้อ 1 — diff ไบต์ body ระหว่าง N-BASE กับ M-BASE
+
+โคลนคลาวด์ไม่มี `capture_r323a_20260907_193650/` จึงสร้างสองบอดีเดียวกันจาก headless บน main ปัจจุบันแล้ว diff
+เครื่องมือ = `src/pirateforce_foundation/npc_attr_body_diff.py` (โมดูลใหม่รอบนี้) เดิน body ตามไวยากรณ์ของตัว encoder เอง
+(มาสก์นำ แล้วไล่ฟิลด์ตามบิตจากน้อยไปมาก) ไม่ใช่สแกนหาไบต์ · แท็กไม่รู้จัก/บิตไม่รู้จัก/ไบต์เหลือท้าย = **หยุดเดิน ไม่เดา**
+ชื่อฟิลด์+offset มาจาก codex `reference_codex_attr/PF_ATTR_FIELD_SEMANTICS.tsv` + `PF_A2_ATTR_FIELD_DELTA.tsv` (direction `W`)
+ที่ codex **ไม่มีแถว** (BasicAttr บิต 0x0002 / 0x0004 / 0x0008) โมดูลพิมพ์คำว่า `UNCITED` ไม่ยอมพิมพ์เลข offset ปลอม
+
+```
+P2_BODY_DIFF N-BASE vs M-BASE fields=10
+P2_BODY_DIFF 01 UNCITED                   actor_identity  both: 28193 -> 28223
+P2_BODY_DIFF 02 BasicAttr+0x70            basic_field_mask both: 0x34D -> 0x74F
+P2_BODY_DIFF 03 BasicAttr+0x28            basic_name      both: "N-BASE" -> "M-BASE"
+P2_BODY_DIFF 04 UNCITED (RE-117 bit 2)    level           one-sided: ABSENT -> 100
+P2_BODY_DIFF 05 BasicAttr+0x44 (not codex) current_hp     both: 100 -> 198125
+P2_BODY_DIFF 06 BasicAttr+0x48 (not codex) max_hp         both: 100 -> 198125
+P2_BODY_DIFF 07 BasicAttr+0x54            movement_speed  both: 0.000 -> 150.000
+P2_BODY_DIFF 08 BasicAttr+0x68            faction         one-sided: ABSENT -> 6
+P2_BODY_DIFF 09 NPCAttr+0x78              template_id     both: 1 -> 916
+P2_BODY_DIFF 10 NPCAttr+0x7C              visual_preset   both: "P_MALE_002_000_SP1" -> "M016_000_000_N"
+```
+
+สิบแถว แต่**สามแถวไม่ใช่คำถาม**: `actor_identity` กับ `basic_name` คือของที่สวีปแจกให้ทุกแถวอยู่แล้ว (id ของตัวเอง + ป้ายของตัวเอง)
+และ `basic_field_mask` ไม่ใช่ฟิลด์อิสระ — มันต่างเพราะ `level`/`faction` ต่าง · `faction` = คำถามของ **ชุด 1** ที่เข้าคิวแล้ว ไม่ถามซ้ำ
+เหลือผู้สมัครจริง 5 ตัว = **level · HP คู่ · movement_speed · template_id · visual_preset**
+
+## 2. ชุด 3 ใหม่ = เจ็ดป้ายชื่อเรียงเป็นแถว (โค้ดอยู่บนกิ่งแล้ว ดูข้อ 4)
+
+`PF_NAME_COLOUR_SWEEP=3` · หัวแถวกับท้ายแถวคือ **ตัวควบคุมสองตัวที่เจ้าของให้คะแนนไปแล้ว** (`N-BASE` เขียว · `M-BASE` ชมพู)
+ห้าตัวตรงกลางคือ **NPC ต้นแบบเดิม** ที่ถือค่าของ **มอน** ไว้ **ฟิลด์เดียว** เท่านั้น (ค่าทุกตัวดึงจากแถว MOBS ที่ขุดแล้ว ไม่มีค่าที่พิมพ์เอง)
+
+| ป้าย | ฟิลด์เดียวที่ขยับ | ค่า |
+|---|---|---|
+| `N-LVL` | `level` (บิต 0x0002 · แท็ก 0x12) | 100 |
+| `N-HP`  | `current_hp` + `max_hp` (คู่เดียวกัน) | 198125 |
+| `N-SPD` | `movement_speed` (`BasicAttr+0x54`) | 150.0 |
+| `N-TPL` | `template_id` (`NPCAttr+0x78`) | 916 |
+| `N-PRE` | `visual_preset` (`NPCAttr+0x7C`) | `M016_000_000_N` |
+
+🔴 `N-HP` ขยับสองฟิลด์โดยตั้งใจ (HP เป็นคู่ · ไคลเอนต์อ่านเป็นคู่ · NPC ที่ HP ปัจจุบัน 198,125 แต่สูงสุด 100 ไม่มีทาง production ไหนสร้าง)
+เขียนไว้ตรงนี้ ไม่ซ่อน · เทส `test_every_field_the_two_prototypes_differ_in_is_swept_or_excused` จะแดงทันทีถ้ามีฟิลด์ใหม่โผล่มาแล้วไม่มีแถวถาม
+
+**อ่านผลยังไง**: ตัวไหนในห้าตัวขึ้น **ชมพู** = ฟิลด์นั้นคือตัวที่ selector ของไคลเอนต์อ่าน · ห้าตัวเขียวหมด = คำตอบไม่ได้อยู่ใน diff นี้
+(ผลลบชนิดนี้มีค่ามาก: มันตัดทั้ง body ทิ้งทีเดียว แล้วผู้สมัครถัดไปคือ `BasicAttr+0x6C` `n_ENEMY` ซึ่ง**ไม่มีบอดีไหนส่งเลยวันนี้** ดูข้อ 5)
+
+## 3. บล็อกสำหรับใส่ในใบ (คำต่อคำ · ห้าบรรทัด · ASCII ล้วน)
+
+```
+ATTENDED: boot PF_NAME_COLOUR_SWEEP=3, stand on the Port Royal spawn, walk -X (rows 150 apart, first at 150)
+  read seven nameboards in order: N-BASE N-LVL N-HP N-SPD N-TPL N-PRE M-BASE; record the COLOUR of each
+  PASS/FAIL is per row, not per boot: N-BASE must be green and M-BASE pink (the two graded controls)
+  the answer is whichever of N-LVL N-HP N-SPD N-TPL N-PRE is NOT green; all five green is a real result too
+HEADLESS_PROOF: 2026-09-07 - NAME_COLOUR_SWEEP_ARMED actors=7 census_actors=108 wire=115 pc=21675 frame=21689
+```
+
+🔴 **เงื่อนไขที่ K ต้องรู้ก่อนขึ้นรถ**: โทเคนบรรทัดสุดท้ายวัดบน **หัวกิ่งของรอบนี้** = `origin/main` `ac86f7e` + `pirate-force-server#1077`
+ไม่ใช่บน main เปล่า **เพราะกลไกชุด 3 คือโค้ดของ PR ใบนั้นเอง** (ก่อนหน้านี้ `=3` ไม่มีโค้ด) ⇒ **ห้ามขึ้นรถจนกว่า PR อยู่บน main**
+แล้ว **วัดโทเคนซ้ำบน main** ตอนนั้น (คำสั่งเดียว รันซ้ำได้ ดูข้อ 4) · ถ้าเลขไม่ตรง = ตัดใบตามกฎ `0159`
+
+## 4. วัดยังไง หลักฐานสองชั้นแยกกัน
+
+ฮาร์เนสเดียวกับ `tests/test_name_colour_sweep_wiring.py` (`_arrive_capturing`) · `make_state_class` ตัวจริง · login → create → start_game → `TARGET_POS_VITAL` หนึ่งเฟรม
+ไม่มีโปรเซสเซิร์ฟเวอร์ ไม่มีซ็อกเก็ต ไม่มีไคลเอนต์ · `clear=True` ทั้งสองบูต (`=3` และไม่ตั้ง env)
+
+- **ชั้นที่ 1 (โทเคนคอนโซล)**: `NAME_COLOUR_SWEEP_ARMED actors=7 census_actors=108 wire=115 pc=21675 frame=21689`
+  และ action สองใบเท่านั้น `WORLD_CENSUS_INITIAL_108_SWEEP_7` / `WORLD_CENSUS_REAPPLY_108_SWEEP_7` ⇒ **ไม่มี collection ใบที่สอง**
+  ⇒ `RE-092` replace-by-omission ไม่ลบ NPC ทั้งเมือง ⇒ ตัวควบคุม `N-BASE` ยังมีเมืองจริงให้เทียบสี
+- **ชั้นที่ 2 (แยกจากโทเคน · อ่านจากไบต์)**: ป้ายทั้งเจ็ดอ่านกลับจาก **payload ของ action ที่คิวไว้จะส่ง** (ค้น utf-16le ใน 21,675 ไบต์)
+  ไม่ได้นับจากที่โมดูลสร้าง · `wire=115 = census 108 + หุ่น 7` · บูตเดียวกันที่ไม่ตั้ง env: **ไม่มีบรรทัด `NAME_COLOUR_SWEEP_*` เลย** และป้าย action ไม่มี `_SWEEP_7`
+- **precondition บนจอ** (กฎ R323B): ฉากคือ Port Royal (บล็อกที่พิมพ์โทเคนอยู่ในสาขา home-scene) · พิกัดแถว (คำนวณจากโค้ดเดียวกัน ไม่ใช่ประมาณ)
+  จุดเกิด X `-9239.96` · หุ่นเจ็ดตัวที่ X `-9390 · -9540 · -9690 · -9840 · -9990 · -10140 · -10290` (Y `-2830` Z `223.3` เท่ากันทุกตัว)
+
+## 5. nonclaims (สำคัญ อย่าตัดออกตอนพับ)
+
+- **ไม่มีอะไรในรอบนี้พิสูจน์ว่าฟิลด์ไหนคือสี** — ชุด 3 คือ *คำถาม* ไม่ใช่คำตอบ · โมดูล diff ไม่จัดอันดับผู้สมัครและไม่ hardcode `FontStyleID`
+- **`visual_preset` ยังไม่ถูกตัดทิ้งจริง**: ชุด 2 วัด `N-SKIN` (NPC ใส่พรีเซ็ตของ NPC อีกตัว) = เขียว และ `M-SKIN` = **ไม่มีป้ายเลย** ⇒ ยังไม่มีใครวัด NPC ที่ใส่พรีเซ็ต **ของมอน** · `N-PRE` คือแถวที่ปิดช่องนี้
+- **`n_ENEMY` (`BasicAttr+0x6C` · บิต 0x0800 · แท็ก 0x14 · PROVEN_EXACT ทั้ง R และ W)** ไม่อยู่ใน diff เพราะ **ทั้งสองต้นแบบไม่ส่งมันเลย** — ไม่ใช่เพราะเหมือนกันโดยบังเอิญ · ถ้าห้าแถวเขียวหมด นี่คือผู้สมัครถัดไป และมันเป็น "ชุด 4" ไม่ใช่การแก้ใบนี้
+- **`NPCAttr+0x98`** (`associated_actor_id_for_name_color`) ยังไม่อยู่ในชุดไหน — `mob_viewer_link` เขียนโค้ดไว้แล้วแต่ไม่มีผู้เรียก · มันเป็นสมมติฐาน "คู่ (คนดู, มอน)" คนละอันกับ "ฟิลด์ที่ต่างระหว่างต้นแบบ" ที่คำสั่ง `2050` สั่งให้ทำก่อน
+- **คอมเมนต์ใน `runtime.py` ล้าสมัย** (ไม่ใช่บั๊ก): เขียนว่า `PF_NAME_COLOUR_SWEEP is 1 or 2` · โค้ดจริงเรียก `sweep_entries()` โดยไม่กรองค่า ⇒ `=3` ติดอาวุธเองโดยไม่ต้องแก้ `runtime.py` (วัดแล้ว ดูข้อ 4) · `runtime.py` เป็นของ chief สายนี้ไม่แตะ ฝากไว้ให้ chief แก้ถ้อยคำเมื่อสะดวก
+- โมดูล diff **ปฏิเสธ** BasicAttr บิต 0x0010/0x0020 (คู่ MP ที่ RE-117 ตั้งชื่อไว้) เพราะโปรเจกต์นี้ไม่มีแท็กของมัน — เดินข้ามไปคือการเดา
+

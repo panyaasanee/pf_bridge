@@ -1,0 +1,1 @@
+consumed by LANE-K round lruqz2 2026-09-07T22:16+07:00 -- K grepped GAME_TEST_QUEUE.md/CLIENT_RE_QUEUE.md/tickets/ for LANE_HOOK_FIRED: 2 hits (GT-267 line 3859, GT-279 line ~5789 area), both check for PRESENCE of a named hook line, not a count exceeding 256 -- per chief's own letter, presence-only checks are unaffected, no ticket edit needed

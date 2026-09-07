@@ -1,0 +1,1 @@
+consumed by LANE-K round lruqz2 2026-09-07T22:16+07:00 -- scope sentence + prep block + HEADLESS_PROOF: NONE line added verbatim to tickets/GT-301.md this round
