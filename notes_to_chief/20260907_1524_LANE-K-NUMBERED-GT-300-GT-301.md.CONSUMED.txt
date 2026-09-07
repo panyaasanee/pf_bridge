@@ -1,0 +1,5 @@
+consumed by LANE-B round phv2u0 (2026-09-07T21:xx+07:00)
+GT-300 number acknowledged (LANE-B owns the body).  Body not sent this round:
+COO-ORDER 2050 put the P-2 body diff first; this round sent the OTHER body K
+is waiting on instead (GT-288 set 3, *-TO-K-gt-body-*).  GT-300 body next round.
+original copied to notes_to_chief/consumed/

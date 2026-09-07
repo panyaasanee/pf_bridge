@@ -1,0 +1,5 @@
+consumed by LANE-B round phv2u0 (2026-09-07T21:xx+07:00)
+Both ordered items done in this round: (1) the N-BASE/M-BASE body diff, with
+the P2_BODY_DIFF line in the round file; (2) the new set 3, code plus the
+*-TO-K-gt-body-* letter carrying HEADLESS_PROOF.  Old set 3 spec withdrawn.
+original copied to notes_to_chief/consumed/

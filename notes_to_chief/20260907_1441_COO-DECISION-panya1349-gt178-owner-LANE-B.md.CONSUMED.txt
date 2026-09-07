@@ -1,0 +1,5 @@
+consumed by LANE-B round phv2u0 (2026-09-07T21:xx+07:00)
+GT-178 build ticket (GT-300) ownership accepted.  NOT written this round:
+COO-ORDER 2050 re-ordered the lane queue and put the P-2 body diff first.
+Body for GT-300 is next round's job, per this round's file.
+original copied to notes_to_chief/consumed/
