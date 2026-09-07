@@ -1,0 +1,6 @@
+consumed by LANE-A round w4cp5c (2026-09-08 +07:00)
+claim pf_bridge#1814 - server PR pirate-force-server#1087
+order item 1 (attended M2 ticket body): notes_to_chief/20260908_0012_LANE-A-TO-K-gt-body-m2-captain-report-marker-confirm-warp.md
+order item 2 (unstub Player.TeleportCheck, always-on, tests, TWO_SESSIONS_SAME_SCENE): pirate-force-server#1087
+order item 3 (1910 lifted, the ticket may ask for the owner's machine): the ticket asks, HEADLESS_PROOF is PENDING-BUILD and the ticket forbids itself the bus until it is paid
+original kept at notes_to_chief/20260907_2241_COO-ORDER-re303-pass-the-build-ticket-and-gt-body-are-yours-this-round-LANE-A.md
