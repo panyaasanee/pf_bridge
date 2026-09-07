@@ -41,7 +41,19 @@ longer dropped.  Where it stands:
     is reported for a clerk) instead of agreeing.  Measured:
     header_agrees(" [**PASS-PARTIAL (box P4)**]", "PASS") was True and is now
     False; REFUTED-ON-SCREEN still agrees with REFUTED.
-  - STILL OPEN: 102 headers take their status from the archival boilerplate
+  - CLOSED (round k01t0u, from pf-adversary D1/D12): the search is now CASE
+    SENSITIVE, so lower-case English prose in a header is not a verdict.  The
+    live example the reviewer found: tickets/GT-288.md carries the clerk's own
+    pointer sentence "(steps / pass criteria / ...)", which an uppercased search
+    read as ('PASS', 137).  A RESULT: GT-288 PASS would then have matched that
+    source, scored "agrees" and been SUPPRESSED while the live queue header still
+    said PENDING.  Reproduced and re-measured: the row is now reported.  The same
+    change stops the 102 archival-boilerplate headers below from counting the
+    lower-case bookkeeping word "closed" as a verdict -- they now report as clerk
+    work.  PARTIAL was also added to STATUS_WORDS: RE-273 was folded to PARTIAL
+    and NEITHER clerk tool could read it, so both called the ticket OPEN.
+  - WAS STILL OPEN, now covered by the case rule: 102 headers take their status
+    from the archival boilerplate
     "-- archived <date> (closed; verbatim in archive/...)", where "closed" is
     filesystem bookkeeping, not a verdict.  Those all count as TERMINAL, so one
     clerk edit that dates such a stub with yyyy-mm-dd re-opens D2 through D1.
@@ -126,7 +138,7 @@ STATUS_WORDS = (
     "PASS-WIRE-ONLY", "PASS-CLIENT", "PASS-AGAIN", "PARTIAL-PASS",
     "CAPTURED-AGAIN", "NOT-MEASURED", "NOT-RUN", "NO-RESULT",
     "BOUNDED-NEGATIVE", "REFUTED", "CANCELLED", "SUPERSEDED", "DUPLICATE",
-    "BLOCKED", "ANSWERED", "CAPTURED", "NEGATIVE", "MIXED", "READY",
+    "BLOCKED", "ANSWERED", "CAPTURED", "NEGATIVE", "PARTIAL", "MIXED", "READY",
     "RUNNING", "PENDING", "CLOSED", "PASS", "FAIL", "DONE", "OPEN",
 )
 
@@ -230,10 +242,22 @@ def current_status(header_rest: str):
     house has measured to be a location or a repeat rather than a narrowing of
     the verdict, and only those collapse back to the base word.
     """
-    up = strip_struck(header_rest).upper()
+    # D1-prose (pf-adversary round k01t0u): the search is CASE SENSITIVE against
+    # the header as written.  This house writes a verdict in capitals; ordinary
+    # English prose in a header is lower case, and an uppercased blob let the
+    # phrase "pass criteria" -- what a clerk naturally writes when pointing at a
+    # ticket body -- read as a live PASS.  Measured on the real tickets/GT-288.md
+    # header: uppercased search returned ('PASS', 137), case-sensitive returns
+    # the header's actual status.  This also stops the 102 headers whose only
+    # status word is the lower-case "closed" of the archival boilerplate
+    # "-- archived <date> (closed; verbatim in archive/...)" from counting that
+    # bookkeeping word as a verdict; they now report as clerk work, which is the
+    # direction that fails closed.
+    kept = strip_struck(header_rest)
+    up = kept.upper()
     best_word, best_idx = "", len(up) + 1
     for word in STATUS_WORDS:
-        idx = up.find(word)
+        idx = kept.find(word)
         while idx != -1:
             before = up[idx - 1] if idx else " "
             after = up[idx + len(word)] if idx + len(word) < len(up) else " "
@@ -244,7 +268,7 @@ def current_status(header_rest: str):
                 if idx < best_idx:
                     best_word, best_idx = _with_qualifier(up, idx, word), idx
                 break
-            idx = up.find(word, idx + 1)
+            idx = kept.find(word, idx + 1)
     return (best_word, best_idx) if best_word else ("", -1)
 
 
@@ -419,12 +443,12 @@ def build_report(results, headers, show_all=False):
     lines.append("-" * 78)
     lines.append("results indexed: %d   rows needing a clerk: %d" % (len(results), diverging))
     lines.append("WARNING: the D1 rule ('first status word = current status') is still a"
-                 " guess about prose, wrong on about 121 of 551 headers -- 102 read a"
-                 " status out of archival boilerplate and 19 out of English prose or a"
-                 " filename.  Two false-GREEN paths were closed in round k01t0u"
-                 " (~~struck-out~~ spans, and PASS-PARTIAL reading as PASS) and NEITHER"
-                 " changed a row of this output.  D2's narrowing holds; D3/D4/D10 are not"
-                 " fixed.  Every 'agrees' is still unproven.")
+                 " guess about prose.  Four false-GREEN paths were closed in round k01t0u"
+                 " (~~struck-out~~ spans; PASS-PARTIAL reading as PASS; lower-case English"
+                 " prose such as 'pass criteria' reading as PASS; PARTIAL unreadable) and"
+                 " NONE of them changed a row of this output.  What is still unfixed: the"
+                 " 19 headers that take a status from a filename in the title, D3, D4 and"
+                 " D10.  Every 'agrees' is still unproven.")
     lines.append("WARNING: this count is a floor, not proof, and every 'agrees' is unproven"
                  " (LANE-K letters 20260907_0900 and 20260907_0950). Never use as a gate.")
     lines.append("SECOND SOURCE: tools_bridge/pf_re_queue_taglint.py reads letters with no"
@@ -478,6 +502,22 @@ def selftest():
     # a qualifier that only says where/how often still collapses
     assert current_status(" [**REFUTED-ON-SCREEN (R318)**]")[0] == "REFUTED"
     assert header_agrees(" [**REFUTED-ON-SCREEN (R318)**]", "REFUTED")
+
+    # --- D1-prose: English prose in a header is not a verdict ---
+    prose = " [PENDING] -- this file is the ticket body (steps / pass criteria / nonclaims)"
+    assert current_status(prose)[0] == "PENDING", current_status(prose)
+    assert not header_agrees(prose, "PASS"), "lower-case prose read as a verdict"
+    assert current_status(" -- archived 20260906 (closed; verbatim in archive/x.md)")[0] == ""
+    assert current_status(" [**PASS** folded]")[0] == "PASS"
+    # a header source with no verdict must not lend one to a sibling source
+    both = [("GAME_TEST_QUEUE.md", " [PENDING]"), ("tickets/GT-000.md", prose)]
+    lines, diverged = build_report(
+        {"GT-000": ("202609081200", "PASS", "fake.md", "R400 2026-09-08")}, {"GT-000": both})
+    assert diverged == 1 and len([ln for ln in lines if ln.startswith("GT-000")]) == 1, lines
+
+    # --- D12: PARTIAL is a status word both clerk tools can read ---
+    assert "PARTIAL" in STATUS_WORDS
+    assert current_status(" [\U0001F527 **PARTIAL (route 1 answered)** was OPEN]")[0] == "PARTIAL"
 
     # --- the verdict is read off the ROW, not off the report's legend ---
     struck_rows = {"GT-999": ("202609071215", "BLOCKED", "l.md", "R400 2026-09-07")}
