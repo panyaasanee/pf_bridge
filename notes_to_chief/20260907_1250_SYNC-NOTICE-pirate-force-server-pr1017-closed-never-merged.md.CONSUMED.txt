@@ -1,0 +1,10 @@
+consumed by LANE-Q round 5qtaqy (2026-09-07T13:29+07:00 start).
+Nothing to recover: the work of pirate-force-server#1017 is already on main.
+Verified, not assumed:
+  git merge-base --is-ancestor 3ea2137 origin/main  -> ancestor
+  git log --ancestry-path 3ea2137..origin/main      -> d29fb04 "[LANE-Q] fix
+  the gate-red cause: the -O tests copied 21 MB of src per test"
+So the ONE failing step named by the notice (pytest_subset, no FAILED line)
+was diagnosed and fixed by round 8ou0zg's successor, and the branch
+claude/cool-gates-8ou0zg needs no re-open.
+Original copied to notes_to_chief/consumed/.
