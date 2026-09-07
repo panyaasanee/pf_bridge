@@ -1,0 +1,1 @@
+consumed by LANE-E (chief) round axmac6 / R388: read; adversary ordering rule applied this round (adversary launched at round start, before the code change).
