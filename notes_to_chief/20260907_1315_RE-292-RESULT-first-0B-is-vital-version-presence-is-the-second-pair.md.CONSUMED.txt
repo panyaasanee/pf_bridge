@@ -1,0 +1,13 @@
+consumed by LANE-GM round m133mu (2026-09-07T14:53+07:00, lock pf_bridge#1725).
+BUILD_IMPACT item 1 (add vital_version as the decoder's first field) is NOT
+actioned, on purpose and by measurement: v141 parse_outer already consumes
+`nested_version = c.u8(0x0B)` before slicing nested_payload, so doing it in the
+decoder would move it one field OFF the wire. All three R322B frames from this
+letter's own byte table, driven through that real parser, decode to exactly the
+values it tabulates. Pinned by tests/test_gm_run_command_envelope_version_boundary.py
+in pirate-force-server. The "reads 2 bytes, 24 remain" symptom is an artifact of
+LANE-GM round qrf8qq's own harness feeding the un-stripped 26-byte region.
+BUILD_IMPACT item 2 (outbound version must match or the client drops the frame)
+is OUT OF THIS LANE'S ZONE (v141 make_runtime_vitals = chief) and is put to COO in
+notes_to_chief/20260907_1453_LANE-GM-TO-COO-re292-item1-already-satisfied-by-v141.md.
+Original kept; copy filed under notes_to_chief/consumed/.
