@@ -1,6 +1,6 @@
 # LANE-A (WORLD) รอบ `3rkk2u` — 2026-09-07T13:25+07:00
 
-claim PR `pf_bridge#1710` · PR เซิร์ฟเวอร์ `pirate-force-server#PENDING` (เติมเลขท้ายไฟล์)
+claim PR `pf_bridge#1710` · PR เซิร์ฟเวอร์ `pirate-force-server#1033` (เปิดแล้ว ไม่ draft มี marker ยืนยันด้วย GET · รอ gate)
 ล็อกรอบ: list `[LANE-A] round` open = **0 ใบ** ⇒ ล็อกว่าง ไม่ได้ takeover ใคร
 heartbeat `13:08` ห่างจากเวลาเริ่มรอบ 17 นาที ⇒ สะพานฟื้นแล้ว (NOW.md ข้อ "สะพานตาย" ขยับเอง)
 
@@ -100,7 +100,7 @@ commit **ทั้งสามแถว** ไม่ใช่แถวเดี�
 - skip ไม่ขยับ (เทสใหม่ 1 ตัวไม่มี guard) ⇒ `docs/PYTEST_SKIP_PINS.json` ไม่แตะ
 
 ## ADVERSARY
-`ADVERSARY_PENDING` — สั่งต้นรอบพร้อมเริ่มงาน สั่งให้ล่าสาเหตุเกตแดงเป็นข้อแรกและตรวจ D2 เป็นข้อสอง
+`ADVERSARY_PENDING pirate-force-server#1033` — สั่งต้นรอบพร้อมเริ่มงาน สั่งให้ล่าสาเหตุเกตแดงเป็นข้อแรกและตรวจ D2 เป็นข้อสอง
 ผลยังไม่คืนตอน push ⇒ push ตามเดิม · **ยังไม่เขียนว่า "ผ่าน adversary"** · รอบหน้าสั่ง adversary บนกิ่งนี้เป็นงานแรกตามกฎ
 
 ## บริโภคใบอะไรบ้าง (วาง `.CONSUMED.txt` ครบ 5 ใบ)
@@ -126,5 +126,7 @@ commit **ทั้งสามแถว** ไม่ใช่แถวเดี�
    ⚠️ `gc.get_referents(proxy)` ยังคืน dict ข้างหลังได้ ⇒ ถ้าจะปิดให้จริงต้องเลิกใช้ dict เป็นฐาน ไม่ใช่แค่ `del` ชื่อ
 4. ถ้ายังตัน: ออกใบ attended ของ `remote_player_hypothesis` (ท่อ promotion ข้อ 1 · `0945`)
 
-RESULT_FULL_GATE_SHAPE_PY314: <เติมท้ายรอบ>
+RESULT_FULL_GATE_SHAPE_PY314: **12367 passed / 190 skipped / 32647 subtests / exit 0** (643.05s)
+  ทรงเดียวกับเกตเป๊ะ: `uv` py3.14.0rc2 · worktree ที่พ่อแม่ไม่มี `pf_bridge` · `--ignore` 48 โมดูลที่ derive ด้วยสูตรเดียวกับ workflow
+  เทียบกับกิ่งเดิม **ก่อนแก้** ในทรงเดียวกัน: py3.11 `12301 passed` exit 0 (มองไม่เห็น) · py3.14 ตก 4 ทาง
 SCOREBOARD: COMING | ยังไม่มีอะไรที่ผู้เล่นทำได้เพิ่ม แต่งานที่ปิดประตู `registry=` ของ M2 กลับมามีทางขึ้น main อีกครั้งหลังถูกปิดทิ้งไปทั้งรอบ และหาเหตุเจอแล้วว่าเกตแดงเพราะเกตรันไพธอนคนละเวอร์ชันกับที่ทุกสายรันเทส | pf_bridge#1710 · กู้จากกิ่ง claude/dreamy-archimedes-9r1ang (server#1026 ที่ถูกปิด) · gate run 34086718298
