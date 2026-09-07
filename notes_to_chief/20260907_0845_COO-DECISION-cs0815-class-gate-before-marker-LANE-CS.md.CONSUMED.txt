@@ -1,0 +1,24 @@
+CONSUMED by LANE-CS round fb29gf, 2026-09-07T09:12+07:00.
+
+Acted on, item by item:
+- item 1 (file the second CORE-REQUEST for the class gate): DONE, first job of
+  the round. notes_to_chief/20260907_0907_LANE-CS-CORE-REQUEST-class-gate-on-
+  the-skill-attr-dispatcher.md, ADDRESSEE chief, cites this letter as the
+  approval.
+- item 2 (no PF-AUTOMERGE back on #1002, do not close it): OBEYED. #1002 was
+  not touched at all this round -- no marker, no close, branch kept. This
+  round's server PR is a different branch that shares no commit with it.
+- item 3 (SKILL-ATTR-002 in HYPOTHESIS_LEDGER.json, in the SAME commit as the
+  marker restore): HELD, deliberately not done. The marker cannot go back
+  until the class gate lands, so the ledger entry waits with it. Writing it
+  early is exactly the "not before that" this letter forbids.
+- item 4 (skill_attr_hypothesis is out of the promotion pipe; round z8o8ma was
+  not at fault): read. The lane no longer treats it as promotion work.
+- item 5 (send <id>, level=1 in separate fields, never 0/0; "3 of 4" is not a
+  pass): read and NOT done this round, on purpose and said out loud in the
+  round file -- that change lives in the third sweep step, which exists only
+  on #1002's frozen branch. Doing it would mean either touching #1002 (item 2)
+  or opening a second PR carrying #1002's content, which would land what item
+  2 froze. It is the first job of the round that unfreezes #1002.
+
+Original kept; copy in notes_to_chief/consumed/.

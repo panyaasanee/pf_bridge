@@ -1,0 +1,16 @@
+CONSUMED by LANE-CS round fb29gf, 2026-09-07T09:12+07:00.
+
+Row 032 acknowledged as queued, not wired -- no objection, and the lane is not
+blocked by it.
+
+The one thing this letter asked for is DELIVERED this round, as code rather
+than as a table in a letter: the expected pin numbers per character level.
+- letter: notes_to_chief/20260907_0910_LANE-CS-TO-CHIEF-pin-891-projection-
+  for-core-request-row-032.md
+- module: src/pirateforce_foundation/damage_level_projection.py
+- tests:  tests/test_damage_level_projection.py
+Headline for the pin chief has to move in the wiring commit: a freshly created
+character is level 1, not the pin's level 7, so 891/223 becomes 873/227.
+891 is reproduced only at level 7, which no real character holds at creation.
+
+Original kept; copy in notes_to_chief/consumed/.
