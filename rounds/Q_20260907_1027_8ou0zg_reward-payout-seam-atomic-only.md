@@ -100,7 +100,11 @@ store ที่ทำอะตอมมิกไม่ได้ = **ถูกป
   + `npc_interaction_wire`) = **`175 passed, 29 skipped, 5444 subtests passed`**
 - `pf_gate_preflight.py --repo <server>` = **PREFLIGHT PASS** (cp874 · ไม่มี skip ใหม่ ·
   main อยู่ในกิ่ง · census ตรง · ชื่อไฟล์ไม่เกิน 100)
-- ซ้อม `pf_pytest_precondition_census.py --run` ในสำเนาที่ **ไม่มี `pf_bridge` ข้าง ๆ`**
+- ซ้อม `pf_pytest_precondition_census.py --run` ในสำเนาที่ **ไม่มี `pf_bridge` ข้าง ๆ** (บังคับ
+  เพราะรอบนี้เพิ่มไฟล์เทสใหม่) = **`RESULT: PASS` · "every skip is declared, named and pinned"**
+  · ไฟล์เทสใหม่ `test_script_lua_api_reward.py` **ไม่ต้องการพินเลย** เพราะไม่ติดการ์ดตัวไหน —
+  ไม่พึ่ง `lupa` ไม่พึ่งคลังสคริปต์ ไม่พึ่งกระจกฝั่งสะพาน (ทั้ง 22 เทสรันจาก TSV ที่ vendor แล้ว)
+  · เทส `-O` subprocess สี่ตัวใน `test_script_lua_api_spec.py` ก็เช่นกัน
 - **ชุดเต็ม `pytest tests/`** บนต้นไม้ที่ merge `origin/main` แล้ว (`e4ae180` = already up to date):
   **`13193 passed, 384 skipped, 36779 subtests passed` · 683.81 s · ไม่มีใบแดงเลยแม้แต่ใบเดียว**
   🔴 น่าบันทึก: รอบ `wn088m` ชุดเต็มมี **สองใบแดงของ `test_ui_wire_name_census`** (LANE-UI) ที่
@@ -110,8 +114,21 @@ store ที่ทำอะตอมมิกไม่ได้ = **ถูกป
 
 ## ADVERSARY
 
-สั่ง `pf-adversary` **ต้นรอบก่อนเขียนโค้ดบรรทัดแรก** ตามกฎ · ผลอยู่ท้ายไฟล์นี้ (หัวข้อ "ผล adversary")
-· ถ้าคืนหลังปลดล็อก = **งานแรกของรอบถัดไป**
+สั่ง `pf-adversary` **ต้นรอบก่อนเขียนโค้ดบรรทัดแรก** ตามกฎ (บรีฟให้ไล่ทั้ง D10-D14 บนทรีปัจจุบัน
++ ให้ derive ตัวเลขพาดหัวของรอบ `wn088m` ใหม่เอง + ให้รันมิวแทนต์)
+
+🔴 **`ADVERSARY_PENDING pirate-force-server#1017`** — ผลยังไม่คืนตอน push
+ตามกฎ COMMON ("ผลยังไม่คืนตอน push ⇒ push ตามเดิม บันทึก `ADVERSARY_PENDING <PR>`")
+**ห้ามอ่านไฟล์รอบนี้ว่า "ผ่าน adversary" — ยังไม่ผ่าน ยังไม่มีผล**
+⇒ **งานแรกของรอบถัดไปคือสั่ง adversary บนกิ่ง `claude/cool-gates-8ou0zg` แล้วบริโภคผล**
+
+**self-review ที่ทำแทนระหว่างรอ** (ตามข้อกำหนดกรณี PENDING/UNAVAILABLE):
+อ่านทุก hunk ใน `git diff --cached` ก่อน commit ทีละไฟล์ · รันมิวแทนต์ด้วยมือสองตัวและทั้งคู่ถูกจับ:
+(ก) เอา `if not _has_atomic_add(store)` ออก ⇒ `test_a_store_without_the_atomic_add_is_refused_not_worked_around`
++ `test_the_real_store_would_be_refused_by_pay_not_worked_around` แดง
+(ข) เปลี่ยน `_stem_index` ให้ไม่แคช ⇒ `test_the_corpus_is_walked_once_per_root_not_once_per_dispatch` แดง
+🔴 **ของที่ self-review เจอเองและแก้ในรอบนี้**: บั๊ก `relative_to()` ที่อธิบายข้างบน —
+พบตอนอ่าน hunk ของตัวเอง ไม่ใช่ตอนรันเทส (เทสเขียนตามหลังเพื่อตรึงมัน)
 
 ## TWO_SESSIONS_SAME_SCENE
 
