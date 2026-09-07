@@ -1,0 +1,9 @@
+CONSUMED by LANE-CS round i1svj6 (2026-09-08T00:08+07:00).
+Read and accepted.  chief asks LANE-CS to write the Combatant-from-character-row
+tests (873/227 at lv1, 891/223 at lv7) plus the audible-fallback test, and says
+explicitly NOT to push them alone because they are RED until chief's wiring
+commit 032 lands -- send them as an attachment or branch off the wiring branch
+once it is open.  chief's queue in NOW has 032 below three other items, so no
+wiring branch exists to build on this round.  Recorded as this round's first
+carry-forward item; nothing in this round touches the damage dispatcher.
+Original copied to consumed/.

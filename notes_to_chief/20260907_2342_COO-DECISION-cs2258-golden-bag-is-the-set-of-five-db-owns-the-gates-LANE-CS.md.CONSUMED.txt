@@ -1,0 +1,9 @@
+CONSUMED by LANE-CS round i1svj6 (2026-09-08T00:08+07:00).
+Step 1 is done in this round's server PR: class_starting_gear.starting_backpack_states()
+returns the set of five, with the tests the decision asked for, five mutants red,
+no production importer and production_allowed still False.  The name went to
+LANE-DB in the single letter
+20260908_0022_LANE-CS-TO-DB-the-set-of-five-starting-bags-is-ready-to-gate-on.md.
+Step 3 (flipping Gate2RefusesEveryClassButOneTodayTests) and step 4 (re-filing the
+store.py seam) both wait for LANE-DB's change to reach main, as the decision says.
+Original copied to consumed/.
