@@ -132,14 +132,18 @@ ACTION /staged    LANE_GM_CHAT_STAGED_READBACK_LOCAL_TALK_NOTICE  len(pc)=56 len
 - มิวแทนต์รอบสองหลังแก้ (§1b) **6 ตัว ตาย 6**: ป้ายแบบ attribute · ป้ายใต้คอมเมนต์ที่มีวงเล็บ ·
   ป้ายเป็นสตริงลิเทอรัล · ทูเพิลว่าง (ตายที่ positive control) · เลขคู่ในย่อหน้าเดียวกันสองตัว
 - control เขียวทุกครั้ง
-- ชุดเต็ม `pytest tests/` บนต้นไม้สุดท้ายจริงที่ push (`3bd44ae` · `git merge origin/main`
-  = already up to date ⇒ หัวกิ่งคือต้นไม้ที่รัน):
-  **`14498 passed, 446 skipped, 0 failed`** (42,192 subtests · 718 วินาที)
+- ชุดเต็ม `pytest tests/` **รันสองครั้ง เพราะผล adversary มาแก้โค้ดหลังครั้งแรก**:
+  1. บน `3bd44ae` (ก่อนจ่าย D-1..D-6): **`14498 passed, 446 skipped, 0 failed`**
+     (42,192 subtests · 718 วินาที)
+  2. บน **`cd7211e` = หัวกิ่งที่ push จริง** (หลังจ่ายครบ · `git merge origin/main`
+     = already up to date ⇒ หัวกิ่งคือต้นไม้ที่รัน): **`14500 passed, 446 skipped, 0 failed`**
+     (42,194 subtests · 692 วินาที) — +2 คือเทสใหม่ของ §1b (positive control + split)
   · 🔴 **ตัวเลข skip เป็นค่าเฉพาะเครื่อง ห้ามใช้เป็นหมุด**: ผู้ตรวจวัดต้นไม้เดียวกันได้
   `14299 passed, 645 skipped` (ยอดรวม 14,944 เท่ากันเป๊ะ) ⇒ ต่างกันที่สภาพแวดล้อม ไม่ใช่ที่โค้ด ·
   หลักฐานจริงของ "ไม่เพิ่ม skip" คือ `[skips] PASS - no new skip markers vs origin/main`
   ของ preflight ไม่ใช่ตัวเลขนี้ (`ubmvj1` เคยพลาดแบบเดียวกัน)
-- `pf_gate_preflight.py --repo <server>`: **PREFLIGHT PASS** (รวม `[modebits] PASS` ·
+- `pf_gate_preflight.py --repo <server>` บนหัวกิ่งสุดท้าย `cd7211e`: **PREFLIGHT PASS**
+  (รวม `[skips] PASS - no new skip markers vs origin/main` · `[modebits] PASS` ·
   `[consumedstub] PASS` · `[filenamelen] PASS` · `[claudecfg] PASS` · main อยู่ในกิ่งแล้ว)
 - **ไม่เพิ่มไฟล์เทสใหม่** (ต่อท้ายสองไฟล์ที่มีอยู่) · **ไม่เพิ่ม/ย้าย/ลบ skip** ·
   ไม่แตะ canonical DB · ไม่แตะ `runtime.py`/`app.py`/v141 (อ่านเป็นข้อความอย่างเดียว) ·
@@ -171,7 +175,7 @@ ACTION /staged    LANE_GM_CHAT_STAGED_READBACK_LOCAL_TALK_NOTICE  len(pc)=56 len
 ## §5 สถานะ PR ตามจริง (ห้ามเขียนว่าเสร็จ/landed)
 - **`pirate-force-server#1118`** ใบของรอบนี้ — **เปิดแล้ว ไม่ draft · รอ gate** ·
   `PF-AUTOMERGE: v4` เป็นบรรทัดแรกของบอดี้ตั้งแต่เปิด และ **GET ยืนยันแล้วว่า marker อยู่จริง**
-  · หัวกิ่ง `3bd44ae` · ตัดจาก `origin/main` `7a064e7` · **ยังไม่ยืนยันว่าอยู่บน main**
+  · หัวกิ่ง `cd7211e` (สองคอมมิต: `3bd44ae` งานหลัก + `cd7211e` จ่าย adversary) · ตัดจาก `origin/main` `7a064e7` · **ยังไม่ยืนยันว่าอยู่บน main**
 - **`pf_bridge#1863`** — claim ของรอบนี้ เติม marker ตอนจบ = ปลดล็อก
 - **`pf-adversary` เรียก 1 ครั้ง (จากเพดาน 2) บนกิ่ง `claude/zealous-hawking-2rk98y`** ·
   **ผลคืนก่อนปลดล็อก ⇒ จ่ายในรอบนี้ ไม่มี `ADVERSARY_PENDING`** (ดู §1b) ·
@@ -191,4 +195,4 @@ ACTION /staged    LANE_GM_CHAT_STAGED_READBACK_LOCAL_TALK_NOTICE  len(pc)=56 len
    ที่ไม่มีแถวของคำสั่ง GM ใหม่เลย
 6. **ยังไม่ทำและยังไม่มีใครขอ**: `staged` ของบัญชีอื่น · `warp <ชื่อ> #<n>` (ชื่อซ้ำ)
 
-SCOREBOARD: COMING | คำสั่ง `/warp <ฉาก>` ข้ามฉากของ GM บอกบนคอนโซลแล้วว่า **ประโยคบนจอออกไปหรือไม่** (`notice=sent|none`) ผู้ปฏิบัติงานไม่ต้องเดาจาก "บรรทัดที่หายไปหนึ่งบรรทัด" อีก และไบต์ที่ส่งจริงมีตาเฝ้าแล้ว: มิวแทนต์สลับ pc/frame (GM ไม่เห็นอะไรแต่คอนโซลบอกว่าส่งแล้ว) · หน่วง 3 วินาทีทั้งคอนเนกชัน · ประโยค `WARP DONE!!!` ที่อ้างว่าย้ายตัวละครทั้งที่ไม่ย้าย — สามตัวนี้เคยรอดทั้งชุด ตอนนี้ตายหมด · และวัด `HEADLESS_PROOF:` ของวงจร `/warp` -> `STAGED RELOG` -> `/staged` -> `SCENE 000278` ได้เป็นครั้งแรกบน main จริง จึงออกใบ attended ที่จะให้คนดูจอยืนยันได้ (ไม่ใช่หลักฐานว่า M2 ผ่าน) | `pirate-force-server#1118` (เปิดแล้ว รอ gate · สองคอมมิต) + `pf_bridge#1863` + `HEADLESS_PROOF:` บน `origin/main` `7a064e7` + เนื้อใบ attended `20260908_0552_LANE-GM-TO-K-gt-body-*` + ผล `pf-adversary` คืนก่อนปลดล็อก **NOT clean และจ่ายครบในรอบเดียวกัน** (D-1 คือเทสของรอบนี้เองที่แดงไม่ได้ · ~~"6 ตัว ตาย 6"~~ ที่จริงคือ 5 ตาย 1 รอด · หลังแก้วัดซ้ำ 6 ตาย 6 พร้อม positive control ตัวใหม่) + ชุดเต็มบนต้นไม้สุดท้ายจริง ดู §4
+SCOREBOARD: COMING | คำสั่ง `/warp <ฉาก>` ข้ามฉากของ GM บอกบนคอนโซลแล้วว่า **ประโยคบนจอออกไปหรือไม่** (`notice=sent|none`) ผู้ปฏิบัติงานไม่ต้องเดาจาก "บรรทัดที่หายไปหนึ่งบรรทัด" อีก และไบต์ที่ส่งจริงมีตาเฝ้าแล้ว: มิวแทนต์สลับ pc/frame (GM ไม่เห็นอะไรแต่คอนโซลบอกว่าส่งแล้ว) · หน่วง 3 วินาทีทั้งคอนเนกชัน · ประโยค `WARP DONE!!!` ที่อ้างว่าย้ายตัวละครทั้งที่ไม่ย้าย — สามตัวนี้เคยรอดทั้งชุด ตอนนี้ตายหมด · และวัด `HEADLESS_PROOF:` ของวงจร `/warp` -> `STAGED RELOG` -> `/staged` -> `SCENE 000278` ได้เป็นครั้งแรกบน main จริง จึงออกใบ attended ที่จะให้คนดูจอยืนยันได้ (ไม่ใช่หลักฐานว่า M2 ผ่าน) | `pirate-force-server#1118` (เปิดแล้ว รอ gate · สองคอมมิต) + `pf_bridge#1863` + `HEADLESS_PROOF:` บน `origin/main` `7a064e7` + เนื้อใบ attended `20260908_0552_LANE-GM-TO-K-gt-body-*` + ผล `pf-adversary` คืนก่อนปลดล็อก **NOT clean และจ่ายครบในรอบเดียวกัน** (D-1 คือเทสของรอบนี้เองที่แดงไม่ได้ · ~~"6 ตัว ตาย 6"~~ ที่จริงคือ 5 ตาย 1 รอด · หลังแก้วัดซ้ำ 6 ตาย 6 พร้อม positive control ตัวใหม่) + ชุดเต็มบนหัวกิ่งจริง `cd7211e` = `14500 passed, 446 skipped, 0 failed` + PREFLIGHT PASS
