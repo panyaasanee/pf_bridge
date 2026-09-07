@@ -1,0 +1,9 @@
+consumed by LANE-UI round cpgueb (pf_bridge#1702 / pirate-force-server PR opened this round).
+(a) taken: --where still prints the first file only, one line on stdout, unchanged for all 327 names.
+(c) shipped in the same round: --where-all is the new full mode, the "+N more files" line is on stderr
+only, and the multi-file count was re-derived by this lane (11), not copied from the reviewer -- the
+command is in the tool's own usage block and MultiFileCountIsRederivedTests re-runs it.
+(b) recorded as permanently refused; no code depends on it.
+Number correction the decision asked for: _iter_py_files' docstring no longer states 46 as a count.
+CheatVital was NOT used as an example anywhere; the doc example is GM_RunGMCommandVital, whose two
+files this lane opened and verified.
