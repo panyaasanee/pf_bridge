@@ -48,19 +48,36 @@ M2 ยังอยู่ที่ LANE-A (`TriggerResult`/`0x1FB2`) · M3 ที
 รอบนี้ **ไม่แตะ `GAME_TEST_QUEUE.md`** — และเหตุผลเป็นกติกา ไม่ใช่ความขี้เกียจ: `PANYA 1910` + `NOW 0159` ย้าย **เลขใบ · เนื้อใบ · พับผล · archive · snapshot ไปเป็นของ LANE-K** และรอบนี้ไม่ได้ผลิตอะไรที่ต้องดูจอ (รั้วในเครื่องมือเทส + ถ้อยคำของกฎ ไม่มีสิ่งที่ผู้เล่นเห็นได้)
 READY/PENDING ที่ไม่อยู่ใน NOW รอเครื่องคุณ: ตาม `NOW.md` = `GT-288` (B) ใบแรก · ถัดไป `GT-276` (CS) · `GT-220`/`GT-223` — ทุกใบต้องมี `HEADLESS_PROOF:` · chief ไม่ได้ตั้งเลขใบหรือถอนใบไหนรอบนี้
 
-## adversary
+## adversary — **ผลคืนก่อนปลดล็อก จึงจ่ายในรอบนี้ ไม่ใช่ addendum** · **ไม่ clean** 5 ข้อ (2 HIGH)
+🔴 สองข้อ HIGH ทั้งคู่คือ **ของที่ผมเพิ่งแก้ในรอบนี้เอง กลับพังในทางใหม่** — เป็นเหตุผลที่ห้ามเขียน "ผ่าน adversary" ก่อนผลคืน
+- **A1 [HIGH]** `__test__ = False` เป็น**ขนบของ pytest เท่านั้น** ไม่มีใน `unittest/loader.py` ⇒ D5 ที่ผมแก้ทำให้ผีหายจาก pytest **แต่กลายเป็นเทสแดงถาวรใต้ `python -m unittest discover -s tests`** ซึ่งเป็นคำสั่งชุดเต็มอีกตัวที่บ้านนี้ใช้จริง (adversary วัด: `FAILED (failures=1)` exit 1 · ก่อนแก้ `Ran 13 OK`) — **แดงในไฟล์ที่สายผู้รันไม่ได้แตะ = รูปเดียวกับที่รั้วนี้มีไว้กัน**
+  แก้: `FakeCase` ไม่มี `runTest` และไม่มีเมธอด `test*` เลย ⇒ **ทั้งสอง runner เก็บอะไรจากคลาสนี้ไม่ได้** (วัดแล้ว: pytest 14 passed · `unittest discover` Ran 14 OK · รันไฟล์ตรง ๆ OK)
+- **A2 [HIGH]** `assertIn("setUp", message)` **ล้มไม่ได้** เพราะคำว่า `setUpClass` ในครึ่งที่ไม่มีเงื่อนไขมีสตริงนั้นอยู่แล้ว ⇒ มิวแทนต์ที่ **ลบคำแนะนำของ D2 ทั้งก้อน** ยังเขียว 14 passed · แก้เป็นปักทั้งประโยค ⇒ มิวแทนต์เดียวกันตอนนี้ **4 failed**
+- **A3** เส้นทาง key ที่เป็นสตริงเปล่าถูกบอกว่า "precondition นี้ไม่มี decorator โดยตั้งใจ" ซึ่ง **เท็จ** สำหรับ `BRIDGE_GAMEDATA` และไร้ความหมายกับ `str` ⇒ แยกเป็นสามทาง สตริงไม่ได้ประโยคเรื่อง decorator เลย
+- **A4** เทส unparseable ของผม **ไม่ได้พิสูจน์ว่า sweep เดินต่อ** — fixture เรียงไฟล์ที่อ่านไม่ได้ไว้ท้าย ⇒ `continue` → `break` ยังเขียวทั้งชุดขณะที่รั้วรายงาน offender = 0 ทั้งที่มี offender อยู่ · เพิ่มไฟล์ที่สามที่เรียงหลังสุดและเป็น offender จริง ⇒ มิวแทนต์ตอนนี้ **1 failed**
+- **B1** คำอ้าง "`#990` ใบเดียว" **รอด**การโจมตี (adversary กวาด AST ของ 1,650 blob ใน 519 คอมมิต + `git log --all -S` ได้ 3 คอมมิต) แต่มีขอบที่ผมไม่ได้เขียน: **โคลนนี้ shallow** ⇒ เติมขอบลง docstring แล้ว · และตระกูล decorator/พิน ใน `PYTEST_SKIP_PINS.json` **ใหญ่กว่าที่ผมยกมา** (`#710` `#847` `#852` `#952`) ⇒ เขียนให้เลิกอ่านเป็นการแจงนับ
+- **B2** โทเคน `#990` ในข้อความ failure ชี้ไปที่หลักฐานที่อยู่ใน **สะพาน** ซึ่งเกตไม่มี ⇒ ชี้ `tests/test_name_colour_sweep.py` ที่อยู่ในรีโปเดียวกันแทน
+
+🔴 **A5 ไม่ได้แก้ และเป็นคำถามออกแบบ ไม่ใช่การลืม**: `Precondition.skip_unless_present()` **แช่ `present` ตอน decorate** ซึ่งเป็นเหตุผลเดียวกับที่ `HistoricalGitObject` ปฏิเสธจะมี decorator
+⇒ guard ตอนนี้แตกกิ่งด้วย predicate "อ็อบเจกต์มี decorator ไหม" ไม่ใช่ "คำตอบตอน import ถูกต้องกับ precondition ตัวนี้ไหม" · สำหรับคลาสที่สร้าง precondition ของตัวเองใน `setUpClass` **ไม่มีรูปไหนถูกทั้งสองรูป** ⇒ ใบ ASK-COO ออกรอบนี้ (`20260907_0922_LANE-E-ASK-COO-neither-form-is-legal-in-setupclass.md`) ไม่รอคำตอบ
+
+## หลักฐานที่วัดรอบนี้ (ไม่ใช่ความเห็น)
+- ชุดเต็มบนต้นไม้ที่ merge `origin/main` แล้ว: **13084 passed · 383 skipped · 34744 subtests passed** (9m02s) — คอมมิตหลังจากนั้นแตะเฉพาะสองไฟล์เทสนี้และรันซ้ำครบสาม runner + สองมิวแทนต์
+- `pf_gate_preflight.py --repo <server>` PASS · `--pr-body ... --pr-stage final` PASS (marker หนึ่งบรรทัด)
+
+## adversary (โจทย์ที่สั่ง)
 สั่ง `pf-adversary` ตอนที่ diff ของสองไฟล์พร้อม พร้อมโจทย์เจ็ดข้อที่ให้ **หักล้าง** (มิวแทนต์ทั้งสอง `except` + เส้น offender · `__test__ = False` บน `python -m unittest` ด้วยไหม · `getattr(precondition, "key", ...)` เปลี่ยนข้อความของใครไหม · **คำอ้าง "#990 ใบเดียว" ที่ผมเพิ่งแก้เป็นตัวมันเองผิดอีกไหม** · ของที่พึ่งลายเซ็นเดิม/สตริงเดิม/จำนวนเทสเดิม · พฤติกรรม `write_bytes` บน windows-latest · precondition ที่มี decorator แต่ decorator ใช้ไม่ได้จริง)
-สถานะตอนปลดล็อกอยู่ในหัวข้อ "สถานะ PR" — 🔴 **ห้ามอ่านไฟล์นี้ว่า "ผ่าน adversary" จนกว่าผลจะคืน**
+ผลคืน **ก่อน** ปลดล็อก ⇒ จ่าย A1-A4 + B1/B2 ในคอมมิตที่สองของ `#1014` ทันที ไม่โยนให้รอบหน้า · **A5 ยังค้าง** (คำถามออกแบบ ส่ง COO)
 
 ## รอบหน้าทำอะไร
-1. **ผล `pf-adversary` ของรอบนี้** ถ้าคืนหลังปลดล็อก = งานแรก (ตาม COMMON) — โดยเฉพาะข้อที่ 4 ของโจทย์ ถ้ามันหักล้าง "#990 ใบเดียว" ได้อีก ต้องแก้ทันทีในรอบนั้น
+1. **A5 ของ adversary** ถ้า COO ตอบมาแล้ว = งานแรก (ไม่มีรูปไหนถูกสำหรับคลาสที่สร้าง precondition ใน `setUpClass`) · ถ้ายังไม่ตอบ ข้ามไปข้อ 2 ห้ามรอ
 2. **ปิดคดี `#922`**: อ่าน log ของรันที่ merge มัน (ดูข้อ 3 ข้างบน) แล้วส่งผลถึง COO — เจอหรือไม่เจอก็ต้องเขียน ห้ามเดา ห้ามแก้ workflow ในใบเดียวกัน
 3. **ข้อ (1) ที่ค้างจาก `0641`: กู้ `#997`** — cherry-pick `df7c2b2` จากกิ่ง `claude/eloquent-edison-3py8sa` เป็น **PR ใบใหม่ ห้ามเปิด `#997` ใหม่** พร้อมเงื่อนไข `e0820` ครบชุด (ถอด `yaml` ออกจากเทสของตัวเอง · แดงถ้า derive ได้ 0 ไฟล์ · pin SHA **ก่อน** พลิก blocking และบังคับด้วยโค้ด ไม่ใช่คอมเมนต์)
 4. D3: ให้ `pf_gate_preflight.py` ด่าน `[skips]` เห็นรูปที่ทำชุดเต็มแดงจากคอมเมนต์ (วันนี้มันดูแค่ `@unittest.skip`/`pytest.mark.skip`/`self.skipTest`/`pytest.skip(`)
 5. ข้อ (3) ตัวกรองสแกนผล → (4) `_Mirror` → (5) `lane_hooks.fire()` ครอบ `BaseException` re-raise `KeyboardInterrupt`
 
 ## สถานะ PR (ตามจริง ห้ามเขียนว่าเสร็จ)
-- **`pirate-force-server#PENDING`** (สองไฟล์ `tests/pf_preconditions.py` + `tests/test_precondition_require_argument.py`): เปิดแล้ว ไม่ draft มี automerge marker ตั้งแต่เปิด — **รอ gate** ยังไม่อยู่บน main (รอบถัดไปยืนยันด้วย `git merge-base --is-ancestor <sha> origin/main`)
+- **`pirate-force-server#1014`** (`0e19f6e` · สองไฟล์ `tests/pf_preconditions.py` + `tests/test_precondition_require_argument.py`): เปิดแล้ว ไม่ draft มี automerge marker ตั้งแต่เปิด — **รอ gate** ยังไม่อยู่บน main (รอบถัดไปยืนยันด้วย `git merge-base --is-ancestor <sha> origin/main`)
 - `pf_bridge#1671` = claim ของรอบนี้ ปลดล็อกด้วยการเติม marker หลัง PR เซิร์ฟเวอร์เปิดครบ
 - `pirate-force-server#997` ยังปิดอยู่ ไม่ merge · กิ่ง `claude/eloquent-edison-3py8sa` (`df7c2b2`) ยังอยู่ ⇒ ข้อ 3 ของรอบหน้า
 
