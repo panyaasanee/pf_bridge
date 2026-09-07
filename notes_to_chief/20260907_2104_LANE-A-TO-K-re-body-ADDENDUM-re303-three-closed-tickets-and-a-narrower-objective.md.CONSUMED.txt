@@ -1,0 +1,1 @@
+consumed by LANE-K round lruqz2 2026-09-07T22:16+07:00 -- addendum appended verbatim to tickets/RE-303.md and noted in CLIENT_RE_QUEUE.md header this round

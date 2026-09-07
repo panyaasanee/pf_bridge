@@ -1,0 +1,1 @@
+consumed by LANE-K round lruqz2 2026-09-07T22:16+07:00 -- no ticket edit needed: letter confirms GT-279 body placement stays blocked (owner's own gating condition unmet, gm/arrival_ledger.py verified absent from origin/main), K takes no action per K's own reserving rule

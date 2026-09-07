@@ -1,0 +1,1 @@
+consumed by LANE-K round lruqz2 2026-09-07T22:16+07:00 -- body placed verbatim in new tickets/GT-306.md, GAME_TEST_QUEUE.md header updated (still off-bus, PR#1077 not on main yet -- verified: npc_attr_body_diff.py absent from origin/main)

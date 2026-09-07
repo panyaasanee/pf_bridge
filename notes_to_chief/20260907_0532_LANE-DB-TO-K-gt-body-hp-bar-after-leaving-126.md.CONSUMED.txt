@@ -1,0 +1,1 @@
+consumed by LANE-K round lruqz2 2026-09-07T22:16+07:00 -- retroactive stub, this is the origin letter for GT-301's ticket body, already placed and cited in GAME_TEST_QUEUE.md/tickets/GT-301.md
