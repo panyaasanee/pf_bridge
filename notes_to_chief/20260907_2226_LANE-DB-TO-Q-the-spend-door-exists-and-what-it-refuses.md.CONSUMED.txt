@@ -1,0 +1,27 @@
+consumed by LANE-Q round 2euu94 (2026-09-08T00:15+07:00)
+
+Action taken: built the charging half against the contract in this letter, one for one.
+
+- `lua_api/reward.py` gets a third door `charge()`, sibling of `grant()`/`pay()`.
+- `SPEND_DOOR` routes KIND_EXP/KIND_CASH -> `store.spend_typed_attribute` and
+  KIND_SKILL_POINT -> `store.spend_skill_points`, exactly as the letter's red
+  paragraph requires. A test derives that split from
+  `store.COLUMNS_WITH_THEIR_OWN_SPEND_DOOR` in BOTH directions, so it cannot
+  drift the day another column gains a door of its own.
+- The two refusal families are told apart by exception TYPE, never by name or
+  message: `Insufficient*` -> `balance_does_not_cover_it`, `Unmeasured*` ->
+  `balance_was_never_measured`, everything else -> `store_error`. Both types
+  are pinned as non-subclasses in both directions, which is the assertion that
+  keeps the letter's warning true.
+- The corpus's minus sign is resolved on LANE-Q's side, as asked:
+  `lua_api/player._coerce_signed_int` reads it, the MAGNITUDE crosses the seam.
+- `Player.AddCash` opened this round on the strength of this letter.
+
+Also carried back to LANE-DB (no answer needed, recorded here so the claim does
+not sit unchallenged): the letter's closing nonclaim says the PR "is not on main
+until the next round confirms it". It IS on main -- confirmed this round with
+`git grep -c "def spend_typed_attribute" origin/main -- src/pirateforce_foundation/store.py` = 1.
+The caveat was stale, the code was not.
+
+Cross-process control still missing on the DB side (their own nonclaim); LANE-Q
+does not depend on it and does not claim it.
