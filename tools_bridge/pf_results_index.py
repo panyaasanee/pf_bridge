@@ -14,13 +14,21 @@ else, so ticket titles (Thai) are never echoed -- only ids, status tokens and
 letter names, and every printed line is escaped to ASCII in main() before it
 reaches stdout (callers that use build_report() as a library do not get that).
 
-!! NOT TRUSTWORTHY YET (pf-adversary, LANE-K round okh8oz 2026-09-07) !!
-Every "not stale" verdict here is a substring or a max()-of-dates over a header
-blob that already carries several contradicting status words, so a real
-regression can be reported as "agrees" and the count can print 0 while the queue
-is stale.  Read the count as a floor, never as proof, and never wire this into a
-gate.  Findings and the fix order: notes_to_chief/20260907_0900_LANE-K-ADVERSARY-
-okh8oz-index-not-trustworthy-yet.md
+!! STILL A FLOOR, NOT PROOF (pf-adversary, LANE-K round okh8oz 2026-09-07) !!
+Round ek1gk9 fixed the three findings COO ordered first (NOW.md 0845):
+  D1  agreement reads the header's CURRENT status (the first status word), not a
+      substring of a blob that carries several contradicting verdicts at once.
+  D2  hdr-newer needs THIS ticket's own terminal decision, dated next to that
+      decision -- an ordinary clerk touch no longer buys immunity.
+  D12 --strict exits 2 when rows still need a clerk.
+Not fixed, so a clean run still does NOT mean the queue is true: D3 (a round
+token in a header does not prove that letter was read), D4 (a twin in
+consumed/ wins on an equal stamp), D9 (a two-layer status is reported by its
+positive half), D10 (a malformed RESULT: line is dropped with no counter).
+🔴 Never wire this into a gate (COO 0845 item 1).  Letters with no RESULT: line
+are invisible here -- tools_bridge/pf_re_queue_taglint.py is the second source
+and today sees 18 rows this tool cannot.  Findings and the full fix order:
+notes_to_chief/20260907_0900_LANE-K-ADVERSARY-okh8oz-index-not-trustworthy-yet.md
 
 Usage:
     python3 tools_bridge/pf_results_index.py [--repo DIR] [--all] [--selftest]
@@ -58,6 +66,18 @@ ROUND_RE = re.compile(r"\b(R\d{2,4}[A-Z]?|UA\d+)\b")
 NON_RESULTS = ("NOT-RUN", "NO-RESULT", "NOT-MEASURED")
 # any yyyy-mm-dd inside a header or a RESULT tail
 DATE_RE = re.compile(r"(?<!\d)(\d{4}-\d{2}-\d{2})(?!\d)")
+
+# A header standing on one of these words has had a decision taken ON THIS
+# TICKET, which may legitimately post-date a tester letter (cancelled, folded
+# shut, superseded).  Any other current status means the queue is merely being
+# maintained, and maintenance must never buy immunity from a new result.
+TERMINAL_WORDS = (
+    "CANCELLED", "SUPERSEDED", "DUPLICATE", "CLOSED", "ANSWERED", "REFUTED",
+)
+# how far after the current status word a date still counts as that decision's
+# own date -- a header line here runs for thousands of characters and carries
+# the dates of every earlier verdict, so the window has to be short.
+DECISION_DATE_WINDOW = 200
 
 # Status words a tester/ticket owner may write.  Longest first so that
 # "PASS-CLIENT" is not shortened to "PASS".
@@ -100,9 +120,53 @@ def parse_headers(text: str):
     return out
 
 
+def current_status(header_rest: str):
+    """(family, offset-into-uppercased-header) the header currently stands on.
+
+    D1: the house writes the live verdict first and the history after it, so the
+    FIRST status word in the header is the ticket's current status.  Matching a
+    substring against the whole blob instead -- what this tool did until now --
+    makes a header that carries PASS, FAIL, NO-RESULT and READY at once agree
+    with all four of them, so a fresh FAIL on a ticket that says PASS today was
+    reported as "agrees".  Measured on the real GT-213 header.
+
+    Longest word wins at a tie (STATUS_WORDS is ordered longest first), and a
+    match only counts on a word boundary, so PASS does not fire inside
+    PASS-CLIENT or PARTIAL-PASS.
+    """
+    up = header_rest.upper()
+    best_word, best_idx = "", len(up) + 1
+    for word in STATUS_WORDS:
+        idx = up.find(word)
+        while idx != -1:
+            before = up[idx - 1] if idx else " "
+            after = up[idx + len(word)] if idx + len(word) < len(up) else " "
+            if not (before.isalnum() or before == "-") and not (after.isalnum() or after == "-"):
+                if idx < best_idx:
+                    best_word, best_idx = word, idx
+                break
+            idx = up.find(word, idx + 1)
+    return (best_word, best_idx) if best_word else ("", -1)
+
+
 def header_agrees(header_rest: str, status: str) -> bool:
-    """True when the header text already carries the RESULT status family."""
-    return _norm(status) in header_rest.upper()
+    """True when the header's CURRENT status is the RESULT status family."""
+    family = _norm(status)
+    return bool(family) and current_status(header_rest)[0] == family
+
+
+def header_mentions_elsewhere(header_rest: str, status: str) -> bool:
+    """True when the family is written in the header but is NOT its status now.
+
+    Reported as its own verdict rather than folded into DIVERGES: the clerk is
+    looking at a header whose history already contains this word, which is the
+    exact shape that used to be silently called "agrees", so it deserves to be
+    read rather than skimmed.  It is still clerk work either way.
+    """
+    family = _norm(status)
+    if not family or header_agrees(header_rest, status):
+        return False
+    return family in header_rest.upper()
 
 
 def round_of(tail: str) -> str:
@@ -128,13 +192,27 @@ def newest_date(text: str) -> str:
 
 
 def header_is_newer(header_rest: str, tail: str) -> bool:
-    """True when the header itself records a decision later than the RESULT.
+    """True when THIS ticket's own current decision post-dates the RESULT.
 
-    A ticket cancelled or re-closed after the tester's letter is not stale: the
-    queue is ahead of the letter, which is the direction that is allowed.
+    A ticket cancelled or folded shut after the tester's letter is not stale:
+    the queue is ahead of the letter, which is the direction that is allowed.
+
+    D2: until now this compared the newest date ANYWHERE in the header blob with
+    the newest date in the RESULT tail.  Every clerk touch writes a fresh date
+    into the header, so the more a ticket was maintained the more permanently
+    immune it became to a new negative result -- 6 of 29 tickets already had
+    that shape.  The date now has to belong to this ticket's own current
+    decision: the header must currently STAND ON a terminal word, and the date
+    must be written next to that word, not anywhere in its history.
     """
-    head_date, res_date = newest_date(header_rest), newest_date(tail)
-    return bool(head_date) and bool(res_date) and head_date > res_date
+    word, idx = current_status(header_rest)
+    if word not in TERMINAL_WORDS:
+        return False
+    res_date = newest_date(tail)
+    if not res_date:
+        return False
+    head_date = newest_date(header_rest.upper()[idx:idx + DECISION_DATE_WINDOW])
+    return bool(head_date) and head_date > res_date
 
 
 def stamp_of(filename: str) -> str:
@@ -213,21 +291,29 @@ def build_report(results, headers, show_all=False):
             verdict = "cites-rnd"
         elif any(header_is_newer(rest, tail) for _q, rest in rows):
             verdict = "hdr-newer"
+        elif any(header_mentions_elsewhere(rest, status) for _q, rest in rows):
+            verdict = "HDR-ELSE"
         else:
             verdict = "DIVERGES"
-        if verdict in ("DIVERGES", "NO-HEADER"):
+        if verdict in ("DIVERGES", "NO-HEADER", "HDR-ELSE"):
             diverging += 1
         elif not show_all:
             continue
         lines.append("%-8s %-18s %-9s %s" % (key, _norm(status)[:18], verdict, letter[:34]))
     lines.append("-" * 78)
     lines.append("results indexed: %d   rows needing a clerk: %d" % (len(results), diverging))
-    lines.append("WARNING: non-stale verdicts are substring heuristics and can hide a real"
-                 " regression -- this count is a floor, not proof (see LANE-K adversary letter"
-                 " 20260907_0900). Never use as a gate.")
-    lines.append("verdicts: agrees=header says it | cites-rnd=header quotes that round,"
-                 " wording differs | hdr-newer=queue decided later than the letter"
-                 " | not-run=nothing measured | DIVERGES/NO-HEADER=clerk work")
+    lines.append("WARNING: D1/D2 fixed (round ek1gk9): agreement now reads the header's"
+                 " CURRENT status and hdr-newer needs this ticket's own terminal decision."
+                 " D3/D4/D9/D10 are NOT fixed, so this count is still a floor, not proof"
+                 " (see LANE-K letter 20260907_0900). Never use as a gate.")
+    lines.append("SECOND SOURCE: tools_bridge/pf_re_queue_taglint.py reads letters with no"
+                 " RESULT: line and sees rows this tool cannot. Run both; neither alone is"
+                 " the queue's truth.")
+    lines.append("verdicts: agrees=header STANDS ON it | cites-rnd=header quotes that"
+                 " round, wording differs | hdr-newer=this ticket's own terminal decision"
+                 " is dated later | not-run=nothing measured"
+                 " | HDR-ELSE=word is in the header history but is not the status now"
+                 " | DIVERGES/NO-HEADER=clerk work")
     return lines, diverging
 
 
@@ -274,6 +360,38 @@ def selftest():
     assert diverged == 1 and any("DIVERGES" in ln for ln in lines)
     lines, diverged = build_report(res, {"GT-281": [("GAME_TEST_QUEUE.md", " [PASS]")]})
     assert diverged == 0, lines
+    # --- D1: a header standing on PASS must not agree with a fresh FAIL -------
+    # shape of the real GT-213 header: PASS first, then NO-RESULT, then READY.
+    gt213 = " [LANE-K folded R307 -- PASS on (A) and (B) - (C) NO-RESULT - READY (R306)]"
+    assert current_status(gt213)[0] == "PASS", current_status(gt213)
+    assert header_agrees(gt213, "PASS")
+    assert not header_agrees(gt213, "FAIL")
+    assert not header_agrees(gt213, "READY")
+    assert header_mentions_elsewhere(gt213, "READY")
+    assert not header_mentions_elsewhere(gt213, "PASS")
+    assert not header_mentions_elsewhere(gt213, "FAIL")
+    assert current_status(" [PARTIAL-PASS today]")[0] == "PARTIAL-PASS"
+    assert current_status(" [no status word here]")[0] == ""
+    assert not header_agrees(" [no status word here]", "PASS")
+    d1 = {"GT-213": ("202609070055", "FAIL", "l.md", "")}
+    lines, diverged = build_report(d1, {"GT-213": [("GAME_TEST_QUEUE.md", gt213)]})
+    assert diverged == 1 and any("HDR-ELSE" in ln for ln in lines), lines
+
+    # --- D2: a clerk touch must not buy immunity -----------------------------
+    touched = " [READY -- reviewed by the clerk 2026-09-07, still open]"
+    assert not header_is_newer(touched, "R303 2026-09-02")
+    far = " [CANCELLED by owner] " + ("x" * DECISION_DATE_WINDOW) + " 2026-09-07"
+    assert not header_is_newer(far, "R303 2026-09-02"), "date outside the window counted"
+    near = " [CANCELLED by owner LANE-A round lnq6xy 2026-09-07T06:03+07:00]"
+    assert header_is_newer(near, "R303 2026-09-02")
+    assert not header_is_newer(near, "R303 2026-09-08"), "older header must not win"
+    d2 = {"GT-999": ("202609070055", "FAIL", "l.md", "R303 2026-09-02")}
+    lines, diverged = build_report(d2, {"GT-999": [("GAME_TEST_QUEUE.md", touched)]})
+    assert diverged == 1 and any("DIVERGES" in ln for ln in lines), lines
+
+    # --- D12: --strict is the only thing that returns non-zero ---------------
+    assert TERMINAL_WORDS and "PASS" not in TERMINAL_WORDS and "READY" not in TERMINAL_WORDS
+
     here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     if os.path.isfile(os.path.join(here, "GAME_TEST_QUEUE.md")):
         src = header_sources(here)
@@ -288,16 +406,25 @@ def main(argv=None):
     parser.add_argument("--repo", default=os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     parser.add_argument("--all", action="store_true", help="also list agreeing tickets")
     parser.add_argument("--selftest", action="store_true", help="run built-in assertions")
+    parser.add_argument("--strict", action="store_true",
+                        help="exit 2 when any row still needs a clerk (D12). For a human"
+                             " running the tool by hand -- this tool is a floor, not proof,"
+                             " so it must not be wired into any gate (COO 0845 item 1).")
     args = parser.parse_args(argv)
     if args.selftest:
         return selftest()
     results = collect_results(args.repo)
     headers = collect_headers(args.repo)
-    lines, _diverging = build_report(results, headers, show_all=args.all)
+    lines, diverging = build_report(results, headers, show_all=args.all)
     for line in lines:
         # the bridge console is cp874: never let a Thai ticket title or an emoji
         # that slipped into a letter name reach stdout as itself.
         print(line.encode("ascii", "backslashreplace").decode("ascii"))
+    # D12: main() used to return 0 whatever it found, so a caller could not tell
+    # a clean run from a stale queue.  Non-zero is opt-in via --strict so that
+    # nothing already calling this tool changes behaviour underneath it.
+    if args.strict and diverging:
+        return 2
     return 0
 
 
