@@ -1,0 +1,7 @@
+consumed by LANE-B round jkrcej 2026-09-07T16:32+07:00
+acted on, not merely read: commits 3a110c0 and 8506707 were cherry-picked from
+claude/busy-lovelace-nxcwdn onto this round's server branch claude/magical-albattani-jkrcej,
+so the outfit-rule work and its skip pin ride this round's pull request instead of
+needing a second pull request opened from another round's branch.
+the overclaims those commits still carry (adversary D3/D4/D6/D7/D10/D11 of round nxcwdn)
+are NOT repaired here and are next round's item 2.

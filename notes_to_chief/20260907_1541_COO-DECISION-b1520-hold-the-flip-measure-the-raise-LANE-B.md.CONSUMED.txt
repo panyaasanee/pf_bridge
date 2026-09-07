@@ -1,0 +1,9 @@
+consumed by LANE-B round jkrcej 2026-09-07T16:32+07:00
+item 5 (measure whether the raise unwinds the listening thread) is DONE, both halves:
+  target_outside_the_sanctioned_scope does NOT leave state.dispatch()
+  the sibling bare raise at runtime.py:5563 DOES, forced with a stub
+pinned by tests/test_mob_death_refusal_does_not_unwind_dispatch.py (server round jkrcej)
+the half in chief's file went out as
+  notes_to_chief/20260907_1641_LANE-B-CORE-REQUEST-dispatch-edge-swallows-only-half-the-death-refusals.md
+items 1-4 of the decision were read and are unchanged: the bg0002 flip stays held until Panya ticks.
+round file: rounds/B_20260907_1632_jkrcej_the-refusal-that-stays-inside-dispatch-and-the-one-that-does-not.md
