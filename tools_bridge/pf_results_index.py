@@ -21,23 +21,36 @@ Round ek1gk9 fixed the three findings COO ordered first (NOW.md 0845):
   D2  hdr-newer needs THIS ticket's own terminal decision, dated next to that
       decision -- an ordinary clerk touch no longer buys immunity.
   D12 --strict exits 2 when rows still need a clerk.
-!! THE D1 RULE IS ITSELF WRONG ON ~1 IN 4 HEADERS (pf-adversary, round ek1gk9,
-re-measured by LANE-K) !!  "The house writes the live verdict first" is not a
-convention the queue files are linted against, it is a guess about their prose,
-and it lands on the wrong word for roughly 154 of 548 header lines:
-  - 37 headers put the first status word inside ~~strikethrough~~, i.e. on the
-    one verdict the house explicitly RETRACTED.  header_agrees() therefore still
-    has a false-GREEN path: a RESULT carrying a struck-out status is reported as
-    "agrees" and the row is suppressed.  This is D1's own disease, not removed.
-  - 102 headers take their status from the archival boilerplate
+!! THE D1 RULE IS STILL A GUESS ABOUT PROSE, BUT TWO OF ITS FALSE-GREEN PATHS
+ARE NOW CLOSED (found by pf-adversary in round ek1gk9; closed and re-measured
+by LANE-K in round k01t0u) !!  "The house writes the live verdict first" is not
+a convention the queue files are linted against.  Measured over 551 headers on
+2026-09-07: 49 of them now resolve to a different family than before -- 35
+because a struck span no longer counts, 16 because a hyphenated qualifier is no
+longer dropped.  Where it stands:
+  - CLOSED (round k01t0u): 35 headers put the first status word inside
+    ~~strikethrough~~, i.e. on the one verdict the house explicitly RETRACTED.
+    strip_struck() blanks those spans before the search, so a RESULT carrying a
+    retracted status is no longer reported as "agrees".  Measured:
+    header_agrees(" [~~[BLOCKED]~~ ~~[READY]~~ **[PASS]**]", "BLOCKED") was
+    True and is now False, and the same header still agrees with PASS.
+  - CLOSED (round k01t0u): the boundary rule let "-" pass on the right, so
+    PASS-PARTIAL and PASS-PERSISTENT-SURVIVAL read as plain PASS.  A trailing
+    qualifier is now part of the family unless it is listed in
+    QUALIFIERS_THAT_DO_NOT_NARROW, so an unknown qualifier fails CLOSED (the row
+    is reported for a clerk) instead of agreeing.  Measured:
+    header_agrees(" [**PASS-PARTIAL (box P4)**]", "PASS") was True and is now
+    False; REFUTED-ON-SCREEN still agrees with REFUTED.
+  - STILL OPEN: 102 headers take their status from the archival boilerplate
     "-- archived <date> (closed; verbatim in archive/...)", where "closed" is
     filesystem bookkeeping, not a verdict.  Those all count as TERMINAL, so one
     clerk edit that dates such a stub with yyyy-mm-dd re-opens D2 through D1.
-  - 19 take it from English prose or a filename in the title ("does the window
-    finally open", "...M1P-RESULT-PASS-*.md").
-  - the boundary rule lets "-" pass on the right, so PASS-PARTIAL and
-    PASS-PERSISTENT-SURVIVAL now read as plain PASS.  That WIDENS D9 and is a
-    regression this round introduced.
+  - STILL OPEN: 19 take it from English prose or a filename in the title ("does
+    the window finally open", "...M1P-RESULT-PASS-*.md").
+!! NEITHER CLOSURE CHANGED A SINGLE ROW OF TODAY'S OUTPUT !!  Before and after,
+this tool reports the same two rows (GT-204, GT-218).  What was fixed is a path
+that would have gone false-GREEN on some future letter, not a wrong answer being
+given today.  Do not read the closures as evidence the queue got truer.
 The two rows this fix first reported (GT-204, GT-218) were both FALSE ALARMS,
 re-measured: GT-218's header and letter agree (CLOSED wrapping FAIL), and
 GT-204 was cancelled after its letter but carries no yyyy-mm-dd date at all, so
@@ -117,13 +130,30 @@ STATUS_WORDS = (
     "RUNNING", "PENDING", "CLOSED", "PASS", "FAIL", "DONE", "OPEN",
 )
 
+# Suffixes measured in this house to say WHERE or HOW OFTEN a verdict was
+# reached, not to narrow it: REFUTED-ON-SCREEN is still REFUTED.  Everything
+# else after a "-" narrows the verdict (PASS-PARTIAL is not PASS), so it stays
+# part of the family and the row is reported for a clerk to read.  This is an
+# enumeration, not a rule -- a new suffix defaults to "narrows", which is the
+# direction that fails closed.
+QUALIFIERS_THAT_DO_NOT_NARROW = frozenset({
+    "ON-SCREEN", "ON-CLIENT", "ON-WIRE", "MEASURED", "AGAIN", "CONFIRMED",
+    "OBSERVED", "V2", "V3", "R2", "R3",
+})
+
 
 def _norm(token: str) -> str:
-    """Reduce a status token to the coarse family the header must show."""
+    """Reduce a status token to the coarse family the header must show.
+
+    Uses the same qualifier rule as current_status(), so a letter that reports
+    PASS-PARTIAL is compared against the header's PASS-PARTIAL and not against
+    a plain PASS.  Without this the two halves of the comparison disagree about
+    what a family is and a narrowed verdict silently matches the broad one.
+    """
     up = token.upper()
     for word in STATUS_WORDS:
         if up.startswith(word):
-            return word
+            return _with_qualifier(up, 0, word)
     return up
 
 
@@ -147,6 +177,34 @@ def parse_headers(text: str):
     return out
 
 
+def strip_struck(header_rest: str) -> str:
+    """Blank out every ~~struck-out~~ span, keeping the string's length.
+
+    D1-strike, measured by pf-adversary in round `ek1gk9` and re-measured by
+    this lane on 37 real headers: the house retracts a verdict by striking it
+    through and writing the live one after it, so the FIRST status word in the
+    raw header is frequently the one word the house has explicitly withdrawn.
+    header_agrees() then reported a RESULT carrying that withdrawn status as
+    "agrees" and suppressed the row -- D1's own false-GREEN path.
+
+    Spans are replaced by spaces rather than deleted so that every offset
+    header_is_newer() computes against the uppercased header stays valid.  An
+    unpaired "~~" closes nothing and is left alone, because a header with an odd
+    number of markers is malformed and guessing where the author meant the strike
+    to end would be a second guess on top of the one this function removes.
+    """
+    out = list(header_rest)
+    i = header_rest.find("~~")
+    while i != -1:
+        j = header_rest.find("~~", i + 2)
+        if j == -1:
+            break
+        for k in range(i, j + 2):
+            out[k] = " "
+        i = header_rest.find("~~", j + 2)
+    return "".join(out)
+
+
 def current_status(header_rest: str):
     """(family, offset-into-uppercased-header) the header currently stands on.
 
@@ -157,11 +215,22 @@ def current_status(header_rest: str):
     with all four of them, so a fresh FAIL on a ticket that says PASS today was
     reported as "agrees".  Measured on the real GT-213 header.
 
+    Struck-out spans are removed first (see strip_struck), so a retracted
+    verdict can no longer be read as the live one.
+
     Longest word wins at a tie (STATUS_WORDS is ordered longest first), and a
     match only counts on a word boundary, so PASS does not fire inside
     PASS-CLIENT or PARTIAL-PASS.
+
+    D9: a "-" on the RIGHT is no longer waved through as a boundary.  A word
+    followed by "-<qualifier>" is returned as the FULL hyphenated token, so
+    PASS-PARTIAL is its own family and can never satisfy a plain PASS result.
+    That fails CLOSED: an unknown qualifier reports as clerk work instead of a
+    silent agreement.  QUALIFIERS_THAT_DO_NOT_NARROW lists the suffixes this
+    house has measured to be a location or a repeat rather than a narrowing of
+    the verdict, and only those collapse back to the base word.
     """
-    up = header_rest.upper()
+    up = strip_struck(header_rest).upper()
     best_word, best_idx = "", len(up) + 1
     for word in STATUS_WORDS:
         idx = up.find(word)
@@ -169,16 +238,31 @@ def current_status(header_rest: str):
             before = up[idx - 1] if idx else " "
             after = up[idx + len(word)] if idx + len(word) < len(up) else " "
             # "_" is never a boundary, or test_pass_client in a header reads as
-            # PASS.  "-" blocks on the LEFT only, so PASS inside PARTIAL-PASS is
-            # rejected while REFUTED-ON-SCREEN still reads as REFUTED; a longer
-            # known word at the same index already won, because STATUS_WORDS is
-            # ordered longest first and the index test below is strict.
+            # PASS.  "-" blocks on the LEFT, so PASS inside PARTIAL-PASS is
+            # rejected; on the RIGHT it is handled by _with_qualifier below.
             if not (before.isalnum() or before in "-_") and not (after.isalnum() or after == "_"):
                 if idx < best_idx:
-                    best_word, best_idx = word, idx
+                    best_word, best_idx = _with_qualifier(up, idx, word), idx
                 break
             idx = up.find(word, idx + 1)
     return (best_word, best_idx) if best_word else ("", -1)
+
+
+def _with_qualifier(up: str, idx: int, word: str) -> str:
+    """The family for a status word, widened to include a narrowing qualifier."""
+    rest = up[idx + len(word):]
+    if not rest.startswith("-"):
+        return word
+    m = re.match(r"-([A-Z0-9]+(?:-[A-Z0-9]+)*)", rest)
+    if not m:
+        return word
+    suffix = m.group(1)
+    if suffix in QUALIFIERS_THAT_DO_NOT_NARROW:
+        return word
+    for known in QUALIFIERS_THAT_DO_NOT_NARROW:
+        if suffix.startswith(known + "-"):
+            return word
+    return word + "-" + suffix
 
 
 def header_agrees(header_rest: str, status: str) -> bool:
@@ -334,11 +418,13 @@ def build_report(results, headers, show_all=False):
         lines.append("%-8s %-18s %-9s %s" % (key, _norm(status)[:18], verdict, letter[:34]))
     lines.append("-" * 78)
     lines.append("results indexed: %d   rows needing a clerk: %d" % (len(results), diverging))
-    lines.append("WARNING: the D1 rule ('first status word = current status') is itself"
-                 " wrong on about 154 of 548 headers -- 37 land inside a ~~struck-out~~"
-                 " verdict, so 'agrees' can still go GREEN on a status the house retracted."
-                 " D2's narrowing holds; D3/D4/D9/D10 are not fixed and D9 was WIDENED by"
-                 " this round's boundary change (PASS-PARTIAL now reads as PASS).")
+    lines.append("WARNING: the D1 rule ('first status word = current status') is still a"
+                 " guess about prose, wrong on about 121 of 551 headers -- 102 read a"
+                 " status out of archival boilerplate and 19 out of English prose or a"
+                 " filename.  Two false-GREEN paths were closed in round k01t0u"
+                 " (~~struck-out~~ spans, and PASS-PARTIAL reading as PASS) and NEITHER"
+                 " changed a row of this output.  D2's narrowing holds; D3/D4/D10 are not"
+                 " fixed.  Every 'agrees' is still unproven.")
     lines.append("WARNING: this count is a floor, not proof, and every 'agrees' is unproven"
                  " (LANE-K letters 20260907_0900 and 20260907_0950). Never use as a gate.")
     lines.append("SECOND SOURCE: tools_bridge/pf_re_queue_taglint.py reads letters with no"
@@ -369,6 +455,37 @@ def selftest():
     assert header_agrees(" [green PASS-CLIENT closed]", "PASS-CLIENT")
     assert not header_agrees(" [OPEN]", "PASS")
     assert stamp_of("20260907_0725_LANE-K-ROUND-4af3qf.md") == "202609070725"
+
+    # --- D1-strike: a retracted verdict must never be the current status ---
+    struck = " [~~[BLOCKED]~~ ~~[READY]~~ **[PASS]** folded]"
+    assert strip_struck(struck).count("~") == 0
+    assert len(strip_struck(struck)) == len(struck), "offsets must survive"
+    assert current_status(struck)[0] == "PASS"
+    assert not header_agrees(struck, "BLOCKED"), "struck verdict read as live"
+    assert not header_agrees(struck, "READY")
+    assert header_agrees(struck, "PASS")
+    assert strip_struck(" [~~unclosed PASS]") == " [~~unclosed PASS]"
+
+    # --- D9: a narrowing qualifier is part of the family, both sides ---
+    partial = " [**PASS-PARTIAL (box P4)** later READY]"
+    assert current_status(partial)[0] == "PASS-PARTIAL"
+    assert not header_agrees(partial, "PASS"), "PASS-PARTIAL satisfied a plain PASS"
+    assert header_agrees(partial, "PASS-PARTIAL")
+    assert _norm("PASS-PARTIAL") == "PASS-PARTIAL", "_norm must use the same rule"
+    assert _norm("PASS") == "PASS"
+    # an unknown qualifier fails closed rather than agreeing with the base word
+    assert not header_agrees(" [**PASS-SOMETHING-NEW**]", "PASS")
+    # a qualifier that only says where/how often still collapses
+    assert current_status(" [**REFUTED-ON-SCREEN (R318)**]")[0] == "REFUTED"
+    assert header_agrees(" [**REFUTED-ON-SCREEN (R318)**]", "REFUTED")
+
+    # --- the verdict is read off the ROW, not off the report's legend ---
+    struck_rows = {"GT-999": ("202609071215", "BLOCKED", "l.md", "R400 2026-09-07")}
+    lines, diverged = build_report(struck_rows, {"GT-999": [("GAME_TEST_QUEUE.md", struck)]})
+    row = [ln for ln in lines if ln.startswith("GT-999")]
+    assert len(row) == 1, lines
+    assert row[0].split()[2] in ("DIVERGES", "HDR-ELSE"), row[0]
+    assert diverged == 1, diverged
     assert stamp_of("no-stamp.md") == "000000000000"
     assert round_of("R322B 2026-09-07 00:55 (x)") == "R322B"
     assert round_of("2026-09-07 no round") == ""
