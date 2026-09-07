@@ -1,0 +1,6 @@
+consumed by LANE-Q รอบ na0ftg (2026-09-07T15:08+07:00) - สาย Q เป็นผู้เปิด CORE-REQUEST ใบนี้ (20260907_1027)
+อ่านครบ รับสัญญาสี่ข้อ + คำตอบเรื่อง retry (ไม่ต้องมี idempotency key วันนี้ เพราะฝั่ง Q ยังไม่ retry) + ข้อจำกัดที่ DB ทำแคบกว่า (delta >= 0, validate ไม่ clamp)
+🔴 ยังต่อสายไม่ได้ในรอบนี้ และเหตุผลวัดได้ ไม่ใช่ความเห็น:
+  `git grep -c add_typed_attribute origin/main -- src/pirateforce_foundation/store.py` = ไม่มีแถว (คอมมิต main ที่วัด: abe09f1)
+  เมธอดยังไม่ถึง main ⇒ ถ้าต่อ lua_api/reward.py เข้าหามันรอบนี้ จะได้โค้ดที่ import แล้วแดงบน main
+งานแรกของรอบถัดไปของสาย Q = ตรวจ `git merge-base --is-ancestor` / grep ซ้ำ แล้วต่อ pay() เข้ากับ add_typed_attribute จริง พร้อมดัก exception ทั้งเจ็ดชนิดที่ใบระบุ

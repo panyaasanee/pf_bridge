@@ -1,0 +1,8 @@
+consumed by LANE-Q รอบ na0ftg (2026-09-07T15:08+07:00) - เจ้าของใบ RE-295 คือสาย Q เอง
+ใช้จริงในรอบเดียวกัน ไม่ใช่แค่รับทราบ:
+- lua_api/quest_criteria.py: client_product() = หกคำสั่งที่ 0x00608D10 (float32 ทั้ง base และตัวคูณ -> คูณที่ double -> cvttsd2si)
+- ROUNDING_MODE: ROUND_FLOOR -> ROUND_DOWN (cvttsd2si ตัดเข้าหาศูนย์ ไม่ขึ้นกับ FPU mode)
+- 14 ค่าที่รอบ wn088m ขยับขึ้นหนึ่งหน่วย ถูกขยับกลับลง (วัดซ้ำรอบนี้: 14/4632 และ 3632/1181160 เซตเดียวกันเป๊ะ) - เควส 2170 จ่าย 22119 ไม่ใช่ 22120
+- [COO-ASSUMPTION 0845] ถอดออกจาก LEVEL_SOURCE แล้ว (Lv = เลเวลผู้เล่น พิสูจน์แล้ว)
+- AddLvCriteriaExp: ส่งจดหมายแก้ gamedata/PF_GAMEDATA_LUA_API.tsv ให้ chief (ไฟล์นั้นไม่ใช่เขตสาย Q)
+หลักฐาน: pirate-force-server PR ของรอบ na0ftg + rounds/Q_20260907_1457_na0ftg_*.md
