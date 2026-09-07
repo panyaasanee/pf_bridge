@@ -81,7 +81,7 @@ Bg0007 (4,4)  Bg0008 (2,2)  Bg0009 (3,3)  Bg0010 (7,7)  Bg0011 (2,2)  Bg0015 (5,
 ## 3. หลักฐาน
 
 * `python3 tools_bridge/pf_gate_preflight.py --repo <server>` บนกิ่งจริง → **PREFLIGHT PASS** (`[skips] PASS - no new skip markers` · `[census] PASS` · `[cp874] PASS`)
-* ชุดเต็ม `pytest tests/` บนต้นไม้ที่ `git merge origin/main` แล้ว (`Already up to date` — กิ่งตัดจาก `origin/main` ของรอบนี้) บนคอมมิตสุดท้ายจริง `abf3019`: **กำลังรันตอนคอมมิตไฟล์นี้ ผลจะลงในคอมมิตถัดไปของกิ่งเดียวกัน** — เขียนไว้แบบนี้เพราะยังไม่ได้วัด ไม่ใช่วัดแล้ว
+* ชุดเต็ม `pytest tests/` บนต้นไม้ที่ `git merge origin/main` แล้ว (`Already up to date` — กิ่งตัดจาก `origin/main` ของรอบนี้) บนคอมมิตสุดท้ายจริง `52477f4`: **`14498 passed, 446 skipped, 42186 subtests` ไม่มีแดง** (rc 0 · 841 วินาที)
 * ซ้อมรูปย่อย: `tests/test_gate2_bag_admission_wiring.py` และ `tests/test_mob_pickup.py` รันเดี่ยว ๆ และรันจาก cwd อื่น (`cd /` แล้วสั่งด้วย path เต็ม) — **120 passed** ⇒ `from test_bag_admission_expiry import ...` ไม่พึ่ง cwd และไม่พึ่งการรันชุดเต็ม
 * ไม่เพิ่มไฟล์เทสใหม่ · ไม่เพิ่ม/ลบ/ย้าย skip · ไม่แตะ canonical DB · ไม่แตะ `runtime.py` / `app.py` / v141 / `world_*.json`
 * ไม่มีไบต์นอก ASCII ในดิฟฝั่งเซิร์ฟเวอร์ (`git diff --cached | grep -cP '[^\x00-\x7F]'` = 0 ทั้งสองคอมมิต)
