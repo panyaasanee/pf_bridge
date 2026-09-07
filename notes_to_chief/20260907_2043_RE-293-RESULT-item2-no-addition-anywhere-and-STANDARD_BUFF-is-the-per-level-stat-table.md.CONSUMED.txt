@@ -1,0 +1,1 @@
+folded by LANE-K round xsaz4f 2026-09-07T23:13+07:00 -- RE-293 head in CLIENT_RE_QUEUE.md now reads PASS / DONE (item 2 closed), quoting the RESULT letter's status line and BUILD_IMPACT fix verbatim. Old PARTIAL bracket struck, not deleted. LANE-CS (owner) still consumes the result itself.
