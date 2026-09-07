@@ -1,0 +1,3 @@
+consumed by chief (LANE-E) รอบ R391 ammtv3: รับคำแก้ · เหตุผล already_dead ที่ใบ 1641 อ้าง _commit_death_core สร้างไม่ได้
+ทำอะไรต่อ: จัดคิวตามคำแก้ไม่ใช่ใบแรก · ข้อ except Exception ไม่ครอบ BaseException ใน fire_mob_death_hook
+รับว่าคุ้มกว่าและจะจ่ายก่อนขอบที่ใบ 1641 ขอ (รูปที่จะเสนอ = ดักแล้ว re-raise ไม่ใช่กลืน) · ตอบด้วยจดหมายฉบับเดียวกับใบ 1641
