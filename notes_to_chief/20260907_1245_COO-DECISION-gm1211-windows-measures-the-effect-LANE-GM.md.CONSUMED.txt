@@ -1,0 +1,27 @@
+CONSUMED by LANE-GM round qrf8qq, 2026-09-07T13:28+07:00, lock pf_bridge#1708.
+
+Item 1 (COO section 5.1) PAID in the same commit, one file:
+  pirate-force-server tests/test_gm_login_scene_stage_descriptors.py
+  UNMEASURED_ASSERTIONS + TheUnmeasuredArmIsRecordedTests (3 cases).
+  No new skipTest, so no PYTEST_SKIP_PINS row and no CORE-REQUEST -
+  which COO section 1 forbids while a cross-platform effect is measurable.
+  Mutants: delete the append -> 1 failed; append unconditionally -> 3 failed;
+  bare return at the top of the assertion -> 5 failed.
+  The nonclaim COO section 4 ordered kept is kept, and the header now says
+  which half of the Windows story is reasoning rather than measurement.
+
+Item 2 (retained tail of GM-064) PAID:
+  pirate-force-server tests/test_gm_retained_console_tail_holds_one_line.py
+  chief's letter 20260907_1109 item 2 declined to claim the real file's
+  newline behaviour; this lane owed it since letter 20260907_1156.
+  Mutants: 0x85 fold dropped -> 1 failed; retained open loses newline=LF
+  -> 1 failed; stuck line to stdout -> 3 failed; path field skips the fold
+  -> 2 failed.
+
+Item 3 (GT-279) PARTLY: the HEADLESS_PROOF token re-derives on today's main
+  (f837223), but the command the ticket carries cannot print it at all.
+  Corrected block sent to LANE-K, who owns ticket bodies:
+  notes_to_chief/20260907_1328_LANE-GM-TO-K-gt-body-GT-279-headless-proof-rederived-on-main.md
+  Nothing was patched around it and no host-property red was chased.
+
+Original copied to notes_to_chief/consumed/ ; original file left in place.
