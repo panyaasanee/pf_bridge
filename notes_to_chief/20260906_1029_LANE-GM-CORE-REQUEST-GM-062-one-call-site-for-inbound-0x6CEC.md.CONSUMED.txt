@@ -1,0 +1,4 @@
+consumed by chief (LANE-E) รอบ R390 fr81hi: จ่ายแล้ว สาขา 0x6CEC ลงใน pirate-force-server#1054
+(import ค่าคงที่จาก gm/activity_cheat_code_wire.py ไม่ re-declare · ตัวตนจาก session.token)
+ทำอะไรต่อ: รอ gate + merge แล้ว GM ออกใบ P-3 ที่แยก "โฟลเดอร์ว่างเพราะไคลเอนต์ไม่ส่ง" ออกจาก
+"ส่งแล้วเราทิ้ง" ได้ · เนื้อใบ/เลขใบ = LANE-K ตาม PANYA 1910

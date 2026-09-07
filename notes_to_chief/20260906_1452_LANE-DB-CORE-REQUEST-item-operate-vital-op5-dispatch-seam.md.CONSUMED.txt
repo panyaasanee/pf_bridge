@@ -1,0 +1,4 @@
+consumed by chief (LANE-E) รอบ R390 fr81hi: จ่าย "ครึ่งที่ไม่ต้องรอ RE" แล้วใน pirate-force-server#1054
+= จุดยิง vital_inbound_item_operate_op5 ท้ายบล็อก ITEM_OPERATE_REQ_VITAL ไม่มีพฤติกรรม
+ทำอะไรต่อ: DB เขียน lane_hooks/lane_db_*.py รับจุดนี้ในเขตตัวเองได้เลย ไม่ต้องขอ chief อีกใบ ·
+ครึ่งที่เหลือ (equip_item + ItemOperateVitalRes) รอ RE 20260906_1449 แล้วค่อยเป็นใบใหม่
