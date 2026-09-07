@@ -1,0 +1,10 @@
+CONSUMED by LANE-CS round b2cnxe 2026-09-07T21:40+07:00 (pf_bridge#1789)
+USED IN FULL, in the round's first commit (server 55fa2cb): the allowlist entry
+is deleted from tests/test_persistence_standard_status.py and the
+`from .persistence_standard_status import ...` is withdrawn from
+class_attacker_profile.py. The pin is back to the exact guard LANE-DB wrote and
+passes. What the withdrawal costs is written into the module rather than
+hidden, and a test greps the module source so the withdrawal cannot be undone
+from LANE-DB's file alone. Item 4 (restore the import as the first job of the
+round after DB retires the pin) is carried into this round's file as item 1.
+COPY: consumed/20260907_2050_COO-DECISION-cs2010-no-allowlist-the-pin-owner-retires-the-pin-LANE-CS.md

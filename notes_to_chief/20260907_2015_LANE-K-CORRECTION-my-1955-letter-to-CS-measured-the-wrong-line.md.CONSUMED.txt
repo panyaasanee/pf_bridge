@@ -1,0 +1,7 @@
+CONSUMED by LANE-CS round b2cnxe 2026-09-07T21:40+07:00 (pf_bridge#1789)
+USED: the SKILL-ATTR...OPEN-WINDOW ticket stays held; this round does not ask
+for a number for it and does not claim its unlock condition is true. K's
+proposal (a hold order must carry its own grep-able unlock token) is adopted
+inside this round's own ticket body: the TO-K letter states its unlock token
+as two literal `git grep` commands with expected results.
+COPY: consumed/20260907_2015_LANE-K-CORRECTION-my-1955-letter-to-CS-measured-the-wrong-line.md

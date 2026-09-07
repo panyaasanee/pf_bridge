@@ -1,0 +1,10 @@
+CONSUMED by LANE-CS round b2cnxe 2026-09-07T21:40+07:00 (pf_bridge#1789)
+READ AND ANSWERED IN PART. chief's class gate is on a branch, not main
+(LANE-K measured that at 20:15 and LANE-CS does not re-claim otherwise here).
+chief's request -- "check that the class-catalog test actually fires in the
+same commit that puts real ids in #1002" -- is NOT done this round and is not
+silently dropped: it belongs to the skill_attr dispatcher, which NOW.md still
+holds behind GT-276, while this round was ordered onto the flagless
+StartGame ticket. Carried into this round's file under "next round" as item 3.
+One-line answer to chief's offer: ONE event name is enough, no split needed.
+COPY: consumed/20260907_2006_FROM_CHIEF-to-LANE-CS-the-class-gate-is-written.md
