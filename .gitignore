@@ -128,6 +128,15 @@
 !/tools_bridge/re289_tgr_extract.py
 # pf_scoreboard.py is NOT listed: it was not named in the R232 ruling and no
 # one has confirmed what it reads.  Whoever owns it should name it here.
+# pf_wire_fields_xcheck.py: owner LANE-UI, opened as a write zone by
+# COO-DECISION notes_to_chief/20260907_1541_COO-DECISION-ui1536-bridge-side-
+# checker-LANE-UI.md item 3 (one file, name must start with pf_wire_).  Reads
+# external/PF_SERIALIZER_FIELDS.tsv and the sibling pirate-force-server
+# checkout; writes nothing anywhere, imports no server module, exits 0 with
+# SKIP when the sibling checkout is absent.  Listed here because the trap
+# above is real: without this line the file is invisible to git status and to
+# the sync ALLOWLIST, and never reaches main.
+!/tools_bridge/pf_wire_fields_xcheck.py
 
 # ---- external/: the Codex RE deliverable (analytic tables: VA/span/sha
 # rows - NOT byte extracts of the client binary).  Same pattern as
