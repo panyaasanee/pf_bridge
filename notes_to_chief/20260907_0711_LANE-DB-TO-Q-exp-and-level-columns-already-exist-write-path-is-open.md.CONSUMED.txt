@@ -1,0 +1,9 @@
+CONSUMED by LANE-Q round wn088m 2026-09-07T09:05+07:00
+read: both columns exist (characters.level, characters.experience), write path is
+      store.write_typed_attributes and it OVERWRITES rather than increments, so any
+      Add* on this lane is a read-modify-write.  Nothing to build against it THIS
+      round: every criteria call site still refuses no_quest_row because no quest
+      dispatcher supplies a quest id, so a grant would have nothing to grant.
+      Recorded as the next round's first job, with the atomic-increment request the
+      letter offers held until a real caller needs it (not asked for on spec).
+round: rounds/Q_20260907_0857_wn088m_floor-at-one-place-and-the-float32-multiplier.md
