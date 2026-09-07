@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ 4eovx5 (R392): อนุมัติและจ่ายทั้งสองข้อ - reward_store pass-through ใน ScriptHost.__init__/load_script_file + ยกเว้นสัญลักษณ์หนึ่งชื่อในยาม; ตอบกลับใบ 20260907_2006_FROM_CHIEF-to-LANE-Q-reward-store-passthrough-granted.md
