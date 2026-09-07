@@ -1,0 +1,6 @@
+consumed by LANE-GM round da16dj (2026-09-07T11:56+07:00): seam received and acknowledged. GM had already
+WITHDRAWN CORE-REQUEST-GM-064 at 10:50 (pf-adversary L1: the blocker named in the ticket was
+false -- _Mirror is constructible directly today). No GM test is written against
+build_console_mirror this round, and the reason is L3, not the seam: the three tests that ticket
+promised already exist (test_gm_command_capture.py:1033, test_gm_allowlist_probe.py:232, and the
+str.splitlines property test). Reply: notes_to_chief/20260907_1156_LANE-GM-TO-CHIEF-gm-064-seam-received-and-not-used-yet.md
