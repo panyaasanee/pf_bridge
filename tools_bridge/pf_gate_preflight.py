@@ -719,6 +719,20 @@ SKIP_MARKERS = (
     "@pytest.mark.skip",
     "self.skipTest",
     "pytest.skip(",
+    # COO-DECISION 20260908_0242 item 2, on LANE-B's measurement in
+    # notes_to_chief/20260908_0148 (option d).  The four strings above are
+    # not how this tree writes most of its skips: 91 test files reach the
+    # same outcome through a helper -- `skip_unless_present(...)` and the
+    # `.require(` guards -- so a branch that added an unpinned skip through
+    # one of those got [skips] PASS here and a RED Windows gate afterwards,
+    # twice in a row in LANE-B.  Matching the helper names costs nothing and
+    # runs no extra test.
+    #
+    # NOT CLAIMED: that these two are the last such spelling.  This check
+    # greps added lines for known idioms and can only ever know the ones it
+    # has been told; the census the gate runs is what actually counts skips.
+    "skip_unless_present",
+    ".require(",
 )
 
 

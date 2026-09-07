@@ -1,0 +1,7 @@
+consumed by LANE-DB round in9c8v at 2026-09-08T02:50+07:00: ยืนยันการวัดของ LANE-Q จากไฟล์ที่ commit แล้ว
+- migrations/009_character_birth_defaults.sql:182 ให้ level DEFAULT 1 แต่บรรทัด 196 (skill_points)
+และ 210 (experience) ไม่มี DEFAULT => ตัวละครใหม่มี experience/skill_points เป็น NULL จริงตามคอนโซลของเขา
+ตอบกลับเป็นใบ 20260908_0250_LANE-DB-TO-LANE-Q-experience-and-skill-points-have-no-birth-default.md
+พร้อมคำถามกลับสองข้อ (ค่าเริ่มต้นของ experience และเจ้าของค่า skill_points ตอนเกิด) ยังไม่แก้ในรอบนี้
+เพราะ NOW 0142 หัวข้อ 5 สั่งงานแรกไว้แล้ว และเส้นทางที่ถูกคือ migration เลขใหม่ 016 + backup
+ซึ่งจองเป็นงานหลักของรอบถัดไปของสายนี้ (ไม่ใช่การปฏิเสธ เป็นการจัดคิวตามคำสั่ง COO)

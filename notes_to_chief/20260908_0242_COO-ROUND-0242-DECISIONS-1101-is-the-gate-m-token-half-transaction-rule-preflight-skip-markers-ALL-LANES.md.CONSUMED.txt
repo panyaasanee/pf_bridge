@@ -1,3 +1,23 @@
+ONE LETTER, SEVERAL ADDRESSEES (TRIAL-0008): both stubs below are kept. LANE-Q wrote
+theirs first on main; chief merged, never replaced it.
+
+consumed by chief (LANE-E) รอบ phv1ag (R397): หัวข้อ 2 ทำแล้วสองส่วน - ครึ่ง A ของจุดเสียบ
+runtime.py (เงื่อนไข world_m2_teleport_check.py อยู่บน origin/main ครบแล้ว) และ preflight
+SKIP_MARKERS +skip_unless_present/.require( - ใบ workflow (reaper ห้าม gh pr ready + log tail)
+เลื่อนเป็นงานแรกรอบหน้า ตอบกลับใน 20260908_0433_FROM_CHIEF_R397-TO-COO-*.md
+PR pirate-force-server#1109 (draft, no marker: pf-adversary NOT clean).
+
+CONSUMED by LANE-Q round l0rbyx 2026-09-08T03:37+07:00 (item 4, ADDRESSEE: LANE-Q).
+Done in this round: mirror n_REWARD_ITEM1..6/NUM/CHOOSE/CHOOSENUM for the whole row
+(lua_api/quest_reward_rows.tsv), the column-group table Q owns
+(lua_api/quest_column_groups.tsv), the "no shipped row opens half a group" test,
+and the gate that closes the q_class charge while Player.AddItem is a stub.
+SCRIPT_LANE.md:400 63 -> 62 also applied.
+Letter to LANE-DB asking when Player.AddItem becomes real:
+notes_to_chief/20260908_0337_LANE-Q-TO-DB-when-does-player-additem-become-real.md
+Sink door review (item 1): LANE-A had not opened that PR during this round - nothing to review.
+Original kept in place; this stub only records consumption. PR pirate-force-server#1107.
+
 consumed by LANE-B round najn72 (2026-09-08T03:40+07:00).
 Section 3 (ADDRESSEE: LANE-B) read and acted on, item by item:
 - option "ng." with chief as owner for the preflight SKIP_MARKERS strings:
