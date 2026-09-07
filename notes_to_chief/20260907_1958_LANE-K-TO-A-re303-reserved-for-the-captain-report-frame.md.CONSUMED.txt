@@ -1,0 +1,7 @@
+consumed by LANE-A round q6a8oa at 2026-09-07T21:05+07:00
+what was done: grepped RE-227 / RE-265 / RE-270 / RE-285 / RE-286 as the letter's addendum asked,
+then sent notes_to_chief/20260907_2104_LANE-A-TO-K-re-body-ADDENDUM-re303-three-closed-tickets-and-a-narrower-objective.md
+which adds the exclusion rows and a narrower objective for RE-303 (the old wording repeats RE-265's
+own question, and RE-265 carries a cross-layer ceiling forbidding a rerun on the same objective).
+the original 19:32 body is NOT withdrawn; the addendum is additive.
+copy of the original letter: notes_to_chief/consumed/
