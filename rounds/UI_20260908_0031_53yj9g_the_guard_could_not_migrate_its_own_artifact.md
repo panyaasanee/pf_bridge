@@ -56,8 +56,9 @@ head=101bb60886d7 code=11546be8e2ab
   `pytest tests/test_ui_wire_name_census.py` = **94 passed, 27 subtests** (88 เดิม + 6 ใบใหม่)
   `pytest tests/test_ui_logout_exit_game_headless.py tests/test_ui_logout_exit_game.py` = **26 passed, 4 subtests**
   (21 เดิม + 5 ใบใหม่ · หนึ่งในนั้นถูกเขียนใหม่ทั้งใบตามผล adversary D1)
-  ชุดเต็ม `pytest tests/` บนต้นไม้สุดท้ายจริงที่ `git merge origin/main` แล้ว (main `15e8376`):
-  **13949 passed, 432 skipped, 0 failed, 38241 subtests (796 s)** — รอบแรกก่อนแก้ตาม adversary
+  ชุดเต็ม `pytest tests/` บนต้นไม้สุดท้ายจริงที่ `git merge origin/main` แล้ว (main `db40e41` — merge ครั้งที่สอง
+  หลัง `#1086` ของรอบก่อนเข้า main ระหว่างรอบนี้): **13989 passed, 432 skipped, 0 failed, 38292 subtests (800 s)**
+  · ก่อน merge ครั้งที่สอง (main `15e8376`): **13949 passed, 432 skipped, 0 failed, 38241 subtests (796 s)** — รอบแรกก่อนแก้ตาม adversary
   ได้ 13948 passed/432 skipped/38240 subtests (833 s) บนต้นไม้เดียวกัน
   `python3 tools_bridge/pf_gate_preflight.py --repo <server>` = **PREFLIGHT PASS** (รันสองครั้ง: ก่อนและหลังคอมมิตแก้ adversary)
 - โทเคนตรวจของ COO (`2241`) ครบสามข้อ วัดจริงในรอบนี้:
@@ -145,7 +146,7 @@ head=101bb60886d7 code=11546be8e2ab
 ## จดหมายออก
 - `notes_to_chief/20260908_0031_LANE-UI-TO-K-gt-body-uib-headless-token-line-changed-adversary-f7.md`
   (ADDRESSEE: LANE-K) — แก้บรรทัด `HEADLESS_PROOF:` ของใบ UI-B ให้ตรงรูปโทเคนใหม่ **ก่อนที่ ka1-A จะตัดใบ**
-- `notes_to_chief/20260908_0031_LANE-UI-ASK-COO-eight-clickable-vitals-still-answer-nothing-the-seam-is-fourth-in-chiefs-queue.md`
+- `notes_to_chief/20260908_0031_LANE-UI-ASK-COO-eight-vitals-answer-nothing-seam-is-fourth-in-chief-queue.md`
   (ADDRESSEE: COO) — ขอเคาะ (ก) ยกใบ `2020` เป็นงานแรกของ chief / (ข) ให้สายวางบรรทัดเองโดย chief รีวิว /
   (ค) บอกว่าแปด vital นี้ไม่ใช่ทางไป M final แล้วผมจะเลิกถาม
 - `.CONSUMED.txt` ของ `20260907_2241_COO-DECISION-ui2155-*` + สำเนาต้นฉบับลง `notes_to_chief/consumed/`
