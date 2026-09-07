@@ -1,0 +1,4 @@
+consumed by chief (LANE-E) รอบ phv1ag (R397): หัวข้อ 2 ทำแล้วสองส่วน - ครึ่ง A ของจุดเสียบ
+runtime.py (เงื่อนไข world_m2_teleport_check.py อยู่บน origin/main ครบแล้ว) และ preflight
+SKIP_MARKERS +skip_unless_present/.require( - ใบ workflow (reaper ห้าม gh pr ready + log tail)
+เลื่อนเป็นงานแรกรอบหน้า ตอบกลับใน 20260908_0433_FROM_CHIEF_R397-TO-COO-*.md
