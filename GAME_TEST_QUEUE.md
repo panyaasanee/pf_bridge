@@ -6086,7 +6086,7 @@ LANE-K may never author a HEADLESS_PROOF line. The owner's own words are quoted 
 
 🔴 **ทำไมใบนี้ยังไม่ขึ้นรถบัส capture (กฎ `PANYA-ORDER 20260907_0159` · K วัดเอง ไม่ใช่ความเห็น)**: บล็อก `ATTENDED:` **มีบรรทัด `HEADLESS_PROOF:` ครบ** และมีบรรทัดควบคุมสองบรรทัด แต่โทเคนถูกวัดบน **กิ่ง** `claude/nice-ramanujan-p7rob4` คอมมิต `f38287d` ซึ่ง **ยังไม่อยู่บน `origin/main` ของ `pirate-force-server`** ขณะวางใบ:
 - `git grep -l "LANE_A_M2_GUARD" origin/main` = **ว่าง** (main head `2df49cc` วัด 2026-09-07T20:3x+07:00)
-- คุมด้วยโทเคนที่มีจริง: `git grep -l "LANE_A_TRIGGER_VITAL" origin/main` = **3 ไฟล์** ⇒ วิธีเกรปใช้ได้จริง ไม่ใช่คำสั่งพัง
+- คุมด้วยโทเคนที่มีจริง: `git grep -l "LANE_A_TRIGGER_VITAL" origin/main` = **5 ไฟล์** (`lane_hooks/lane_a_island_trigger_log.py` · `world_m2_trigger_vital_response.py` · `tests/test_lane_a_island_trigger_log.py` · `tests/test_lane_a_trigger_vital_dispatch_wiring.py` · `tests/test_lane_q_trigger_vital_dispatch.py`) ⇒ วิธีเกรปใช้ได้จริง ไม่ใช่คำสั่งพัง · 🔴 **[แก้ 2026-09-07T20:55 หลัง `pf-adversary` H1 · K วัดซ้ำเองแล้ว] เลขเดิมที่เขียนไว้คือ ~~3 ไฟล์~~ และมัน**เท็จ** — มันคือผลของ `| head -3` ในคำสั่งที่ K รันเอง ไม่ใช่จำนวนไฟล์จริง** · ตัวเลขคุมที่ผิดทำลายเหตุผลที่ตัวเลขคุมมีอยู่ (ให้คนอื่น re-derive แล้วเชื่อผลข้างเคียงได้)
 - `git merge-base --is-ancestor f38287d origin/main` = ตอบไม่ได้บนโคลนนี้ (`git cat-file -e f38287d` = **ไม่มีคอมมิตในโคลน** · โคลนคลาวด์เป็น shallow) ⇒ K **ไม่อ้าง**ผลจาก `merge-base` และใช้ผลเกรปข้างบนแทน
 - คอมมิตฐานที่เจ้าของใบอ้าง (`origin/main` `e08a9a6`) **อยู่บน main จริง** — K วัดได้ ⇒ ที่ขาดคือกิ่งของรอบ ไม่ใช่ทั้งเส้น
 ⇒ ใบเข้าหมวด **"ตกรถ: ไม่มี HEADLESS_PROOF (บน main ปัจจุบัน)"** ใน `QUEUE_STATUS_SNAPSHOT.md` พร้อมชื่อเจ้าของใบ · **K ไม่เขียน/ไม่แก้/ไม่ต่ออายุโทเคนแทนเจ้าของ** (พับ = คัดลอก) · ใบขึ้นหมวด ก. เองในรอบแรกที่ K เกรปแล้วเจอโทเคนบน main
@@ -6099,4 +6099,25 @@ owner: LANE-A (WORLD) · ผู้ทำ: ka1-A (attended) · ผู้บริ
 
 result: (ยังไม่มีผล)
 
-RECHECK: `cd ../pirate-force-server && git grep -l "LANE_A_M2_GUARD" origin/main` (ว่าง = ใบยังตกรถจริงตามหัวใบ · เจอไฟล์ = หัวใบล้าสมัย K ต้องย้ายใบขึ้นหมวด ก. รอบนั้นทันที)
+🔴 **[แก้ 2026-09-07T20:55 หลัง `pf-adversary` S1 · K วัดซ้ำเองแล้วและ adversary ถูก] บรรทัด `RECHECK:` เดิมของใบนี้เป็นกับดักที่บ้านนี้เพิ่งเสีย `GT-301` ไปเมื่อไม่กี่ชั่วโมงก่อน** — มันเช็คแค่ว่า "สตริงโผล่ในทรี" ไม่ใช่ "บูตแล้วพิมพ์บรรทัดออกมา" · K วัดเองบน main `2df49cc`:
+- `git grep -l "world_m2_trigger_vital_response" origin/main -- 'src/*'` = **ไฟล์ตัวมันเองไฟล์เดียว** ⇒ **ไม่มีผู้เรียกใน `src/`**
+- `git show origin/main:src/pirateforce_foundation/world_m2_trigger_vital_response.py | grep -cE "print\(|_say\(|TOKEN"` = **0** ⇒ **ไม่มีบรรทัดใดพิมพ์ออกมา**
+⇒ ถ้ามีคอมมิตที่เติมแค่สตริง `LANE_A_M2_GUARD` (หรือเทสที่ assert ชื่อโทเคน) เข้าโมดูลกำพร้าตัวนี้ **เกรปเดิมจะเขียวโดยที่บูตไม่พิมพ์อะไรเลย** ⇒ ka1-A เผาหน้าต่าง attended ของเจ้าของฟรีหนึ่งครั้ง
+~~RECHECK เดิม: `cd ../pirate-force-server && git grep -l "LANE_A_M2_GUARD" origin/main`~~ **ถอน — เก็บไว้ไม่ลบตามกติกา**
+
+RECHECK (สามเงื่อนไข ต้องผ่านครบ ไม่ใช่ข้อเดียว · รันจากรากรีโป `pf_bridge`):
+```
+cd ../pirate-force-server \
+ && git grep -l "LANE_A_M2_GUARD" origin/main -- 'src/*' \
+ && git grep -l "world_m2_trigger_vital_response" origin/main -- 'src/*' | grep -v "world_m2_trigger_vital_response.py" \
+ && git grep -nE "print\(|_say\(" origin/main -- 'src/pirateforce_foundation/world_m2_trigger_vital_response.py'
+```
+RECHECK-VERBATIM (เนื้อใบตรงกับจดหมายเจ้าของใบไหม · รันจากรากรีโป `pf_bridge` · ต้องพิมพ์ `VERBATIM_OK`):
+```
+diff <(sed -n '12,55p' notes_to_chief/20260907_2001_LANE-A-TO-K-gt-body-m2-guard-verdict-on-the-console.md | sed 's/GT-<เลข>/GT-304/') \
+     <(awk 'NR>=10' tickets/GT-304.md) && echo VERBATIM_OK
+```
+(K รันแล้วผ่าน ณ 2026-09-07T21:0x — เพิ่มตาม `pf-adversary` M2)
+
+ว่าง/ล้มข้อใดข้อหนึ่ง = ใบยังตกรถจริงตามหัวใบ · **ผ่านครบสามข้อ** = โทเคนติดอาวุธจริงบน main ⇒ K ย้ายใบขึ้นหมวด ก. รอบนั้นทันที
+🔴 **ห้ามก๊อปคำสั่งเกรปจากย่อหน้าอธิบายข้างบนไปใช้แทนบรรทัดนี้** — คำสั่งในย่อหน้าอธิบายไม่มี `cd` ถ้ารันในรีโป `pf_bridge` มันจะเจอไฟล์ของคิว/จดหมาย/ไฟล์รอบเอง **5 ไฟล์** แล้วอ่านเป็น "โทเคนอยู่บน main" ทันที (`pf-adversary` วัดให้แล้ว) · และถ้ารัน `RECHECK` จากซับไดเรกทอรี `cd ../pirate-force-server` จะล้มเงียบ ๆ แล้วอ่านเป็น "ว่าง" ⇒ **รันจากรากรีโปเท่านั้น**
