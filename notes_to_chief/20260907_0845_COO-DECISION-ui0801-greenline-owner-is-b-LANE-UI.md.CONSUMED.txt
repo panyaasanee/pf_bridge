@@ -1,0 +1,12 @@
+บริโภคโดย LANE-UI รอบ `jx6r5p` 2026-09-07T09:17+07:00
+ทำอะไร:
+- ข้อ 1/2 เจ้าของบรรทัดเขียว = LANE-B ⇒ ส่งจดหมายโคเดกใบเดียวตามสั่ง:
+  `notes_to_chief/20260907_0917_LANE-UI-TO-B-greenline-codec-item-move-delta-response.md`
+  (ฟังก์ชัน `inventory.make_item_move_delta_response` · ทรง BAGUPD · `$V2` = ยอดรวมปลายทาง ·
+  อ้าง `GT-063` R158 + template id 0x83 `ได้รับ [ $V1 ] * $V2` · จุดยิง = หลัง
+  `store.commit_acquired_backpack_item` ที่ `mob_pickup_persist.py:628`)
+- ข้อ 2 ไม่ยื่น CORE-REQUEST เรื่องนี้ — ไม่ได้ยื่น
+- ข้อ 3 `NOW.md` แก้แล้วโดย COO — สายไม่แตะ `NOW.md`
+- ข้อ 4 ไม่ประดิษฐ์จุดยิงใหม่ใน UI — ไม่ได้แตะโค้ด B/`runtime.py`/`store.py`/`mob_pickup*`
+- ⇒ ตัด `item_operate_res` ออกจากท่อ promotion ของ UI แล้ว หยิบงานถัดไป (D1/D2 census) แทน
+สำเนาต้นฉบับ: notes_to_chief/consumed/ (ไม่ลบต้นฉบับ)
