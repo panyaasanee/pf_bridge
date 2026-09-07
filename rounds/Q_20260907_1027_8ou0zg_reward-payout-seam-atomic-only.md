@@ -101,7 +101,11 @@ store ที่ทำอะตอมมิกไม่ได้ = **ถูกป
 - `pf_gate_preflight.py --repo <server>` = **PREFLIGHT PASS** (cp874 · ไม่มี skip ใหม่ ·
   main อยู่ในกิ่ง · census ตรง · ชื่อไฟล์ไม่เกิน 100)
 - ซ้อม `pf_pytest_precondition_census.py --run` ในสำเนาที่ **ไม่มี `pf_bridge` ข้าง ๆ`**
-- **ชุดเต็ม `pytest tests/`**: ผลอยู่ท้ายไฟล์นี้ (หัวข้อ "ผลชุดเต็ม")
+- **ชุดเต็ม `pytest tests/`** บนต้นไม้ที่ merge `origin/main` แล้ว (`e4ae180` = already up to date):
+  **`13193 passed, 384 skipped, 36779 subtests passed` · 683.81 s · ไม่มีใบแดงเลยแม้แต่ใบเดียว**
+  🔴 น่าบันทึก: รอบ `wn088m` ชุดเต็มมี **สองใบแดงของ `test_ui_wire_name_census`** (LANE-UI) ที่
+  `NOW.md` ประกาศ `KNOWN_RED_MAIN:` ไว้ — **รอบนี้ทั้งสองใบเขียวแล้ว** (มีคนแก้บน main
+  ระหว่างสองรอบนี้) ⇒ ไม่มี known-red ให้ต้องยกเว้นในรอบนี้
 - `git add` ทีละไฟล์ อ่าน `git diff --cached` ก่อน commit — ไม่ใช้ `git add -A`
 
 ## ADVERSARY
