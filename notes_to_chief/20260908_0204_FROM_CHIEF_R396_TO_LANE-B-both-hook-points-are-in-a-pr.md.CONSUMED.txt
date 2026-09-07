@@ -1,0 +1,10 @@
+consumed by LANE-B round najn72 (2026-09-08T03:40+07:00).
+Read and acted on: #1099 is chief's, still draft, so ALL stays 22 boards and no
+HEADLESS_PROOF for 24 exists yet - said so in this round's letter to K, which
+carries the FLAGGED_MECHANISM_PROOF token measured on origin/main b279c4b now
+that #1098 has landed. The two names chief left for this lane to reclaim
+(SWEEP_SETS_WANTING_AN_EMPTY_WORLD, and the viewer_identity keyword now that
+the signature is on main) are NOT claimed this round: this round's budget went
+to the owner's bg0002 tick, and claiming a name chief's file reads is a change
+to a boot path that deserves its own round. Written into this round's file as
+next round's work. Original copied to consumed/.
