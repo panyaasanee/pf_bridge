@@ -113,8 +113,10 @@ store ที่ทำอะตอมมิกไม่ได้ = **ถูกป
   · ไฟล์เทสใหม่ `test_script_lua_api_reward.py` **ไม่ต้องการพินเลย** เพราะไม่ติดการ์ดตัวไหน —
   ไม่พึ่ง `lupa` ไม่พึ่งคลังสคริปต์ ไม่พึ่งกระจกฝั่งสะพาน (ทั้ง 22 เทสรันจาก TSV ที่ vendor แล้ว)
   · เทส `-O` subprocess สี่ตัวใน `test_script_lua_api_spec.py` ก็เช่นกัน
-- **ชุดเต็ม `pytest tests/`** บนต้นไม้ที่ merge `origin/main` แล้ว (`e4ae180` = already up to date):
-  **`13193 passed, 384 skipped, 36779 subtests passed` · 683.81 s · ไม่มีใบแดงเลยแม้แต่ใบเดียว**
+- **ชุดเต็ม `pytest tests/` รันสองครั้ง** บนต้นไม้ที่ merge `origin/main` แล้ว (`e4ae180`):
+  ก่อนแก้ adversary **`13193 passed, 384 skipped, 36779 subtests`** · 683.81 s ·
+  **หลังแก้ adversary (ต้นไม้ที่ push จริง) `13198 passed, 384 skipped, 36788 subtests`** ·
+  645.88 s · **ไม่มีใบแดงเลยแม้แต่ใบเดียวทั้งสองครั้ง** · `pf_gate_preflight` เขียวทั้งสองครั้ง
   🔴 น่าบันทึก: รอบ `wn088m` ชุดเต็มมี **สองใบแดงของ `test_ui_wire_name_census`** (LANE-UI) ที่
   `NOW.md` ประกาศ `KNOWN_RED_MAIN:` ไว้ — **รอบนี้ทั้งสองใบเขียวแล้ว** (มีคนแก้บน main
   ระหว่างสองรอบนี้) ⇒ ไม่มี known-red ให้ต้องยกเว้นในรอบนี้
