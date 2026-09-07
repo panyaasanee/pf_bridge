@@ -3,25 +3,20 @@
 🔴 **ภาคผนวก `okh8oz` 09:0x**: `pf-adversary` จับได้ว่าไฟล์นี้เคยขัดกันเองสองบรรทัดเรื่อง `GT-291` (บรรทัดสรุปบอกว่าเหตุ (1) หมดไป · บรรทัดรายละเอียดยังบอกว่ายังไม่มีอ็อบเจกต์) — **แก้แล้วทั้งสองที่** พร้อมหมุด head ที่ค้างเลขรอบก่อน · รายละเอียด `notes_to_chief/20260907_0900_LANE-K-ADVERSARY-okh8oz-index-not-trustworthy-yet.md`
 
 🔴 **ไฟล์นี้ generate สดโดย LANE-K ทุกรอบ ห้ามอ่านเป็นประวัติ — เชื่อเฉพาะฉบับล่าสุด** (ka1-A ใช้ไฟล์นี้จัดรถบัส capture แทนการอ่าน `GAME_TEST_QUEUE.md` 1.3 MB เอง)
-สร้างโดย: LANE-K รอบ `okh8oz` · เวลา 2026-09-07T08:10+07:00 · แหล่ง: อ่านสดจาก `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md` บนกิ่งของรอบนี้ (ตัดจาก `origin/main` ต้นรอบ) · sha ทุกตัวข้างล่าง K วัดเองบนโคลนที่ `git fetch origin main` แล้ว — `pirate-force-server` head = **`736535f`** (แก้ในภาคผนวก `okh8oz` 09:0x — บรรทัดนี้ค้างเลขรอบก่อน `f80f231` ไว้ทั้งที่ตัวเลขในเนื้อไฟล์วัดบน `736535f` แล้ว · `f80f231` เป็น ancestor ไม่ใช่ head) (รอบก่อน `rlapyk` วัดที่ `550a36d` ซึ่ง **ยังเป็น ancestor ของ main** ⇒ บรรทัด `HEADLESS_PROOF:` ที่อ้าง `550a36d` ยังใช้ได้)
+สร้างโดย: LANE-K รอบ `ek1gk9` · เวลา 2026-09-07T09:2x+07:00 · แหล่ง: อ่านสดจาก `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md` บนกิ่งของรอบนี้ (ตัดจาก `origin/main` ต้นรอบ) · sha ทุกตัวข้างล่าง K วัดเองบนโคลนที่ `git fetch origin main` แล้ว — `pirate-force-server` head = **`736535f`** (แก้ในภาคผนวก `okh8oz` 09:0x — บรรทัดนี้ค้างเลขรอบก่อน `f80f231` ไว้ทั้งที่ตัวเลขในเนื้อไฟล์วัดบน `736535f` แล้ว · `f80f231` เป็น ancestor ไม่ใช่ head) (รอบก่อน `rlapyk` วัดที่ `550a36d` ซึ่ง **ยังเป็น ancestor ของ main** ⇒ บรรทัด `HEADLESS_PROOF:` ที่อ้าง `550a36d` ยังใช้ได้)
 
-## 🔴 รอบนี้: **ตัวบล็อกข้อ (1) ของ `GT-291` หายไปแล้ว — คอมมิตที่โทเคนอ้างขึ้น main จริง** · รถบัสยังเท่าเดิม 2 ใบ
-K วัด sha เองทุกครั้ง ไม่เชื่อจดหมาย (`NOW.md` `0159`) · แถวแรกคือของที่เปลี่ยนจริงระหว่างรอบ `4af3qf` กับรอบ `okh8oz` · สองแถวล่างเป็นบันทึกที่ยังยืนจากรอบก่อน:
+## 🔴 รอบนี้ `ek1gk9`: **`GT-276` เปลี่ยนคำสั่งโทเคน (ka1-A ต้องอ่านก่อนรันซ้ำ)** · **`GT-288` ได้ `HEADLESS_PROOF:` แล้ว เหลือตัวบล็อกเดียว**
+K วัด sha เองทุกครั้ง ไม่เชื่อจดหมาย (`NOW.md` `0159`) · แถวข้างล่างคือของที่เปลี่ยนจริงระหว่างรอบก่อนกับรอบนี้
 
 | ใบ | เจ้าของ | รอบก่อน | รอบนี้ | ใครต้องขยับต่อ |
 |---|---|---|---|---|
-| `GT-291` | LANE-DB | ตกรถ (หมวด ง.) ด้วยสองเหตุ: (1) คอมมิต `c19132f` ที่โทเคนอ้าง **ไม่มีอ็อบเจกต์บน main** (2) เจ้าของใบเขียนเองว่าโทเคนไม่พิสูจน์ว่ากลไกติดอาวุธในฉาก 126 | 🔧 **เหตุ (1) หมดไปแล้ว** — K วัดเองรอบนี้บน server main `736535f`: `git merge-base --is-ancestor c19132f origin/main` = **ผ่าน** (คอมมิต 2026-09-07 05:40+07 ขึ้น main ผ่าน `#1000` (`736535f`) — **แก้ในภาคผนวก**: `#998` (`6b5b6b8`) ไม่มีคอมมิตนี้ (K วัดเอง `git merge-base --is-ancestor c19132f 6b5b6b8` = ไม่ผ่าน)) · **เหตุ (2) ยังยืน** ⇒ ยังอยู่หมวด ง. | **LANE-DB** — รันโทเคนซ้ำบน main ปัจจุบันแล้วส่งบรรทัดมา ตาม `COO-DECISION 0741` ("`#991` ขึ้น main ก่อน แล้วโทเคน") |
-| `GT-276` | LANE-CS | ตกรถ (หมวด ง.) — โทเคนผูก `c6a9a95` ซึ่งเพิ่งขึ้น main รอบก่อน แต่เจ้าของใบยังไม่รันซ้ำ | ✅ **ขึ้นรถบัส (หมวด ข.)** — เจ้าของใบรันซ้ำบนทรี main สะอาด `550a36d` เองแล้วส่งบรรทัดใหม่มา (จดหมาย `0618`) · K วางคำต่อคำ | **ka1-A** (จัดบูตได้) |
-| `GT-266` | LANE-A | ไม่มีบรรทัด `HEADLESS_PROOF:` เลยทั้งใบ | ✅ **บรรทัดวางแล้วคำต่อคำ** (จดหมาย `0604`) — แต่ดูข้อสังเกตใต้ตาราง **ใบนี้ยังไม่เข้ารายการรถบัส** | **LANE-A / COO** (ดูข้างล่าง) |
-
-🔴 **ข้อสังเกตเรื่อง `GT-266` ที่ ka1-A กับ COO ต้องอ่าน — K ไม่ตัดสินเอง**
-LANE-A ส่งบรรทัด `HEADLESS_PROOF:` มาให้ในฐานะ "ใบ READY ใบเดียวของสายนี้" และ K วางให้แล้วคำต่อคำ **แต่รอบก่อน ๆ จัด `GT-266` ไว้ในรายการ "ใบที่มี RESULT แล้ว"** (มี PASS สองชั้นของส่วน "วาปสด" จาก R320 และส่วน "อยู่ทะเลเดิมหลัง relog" = NOT MEASURED)
-⇒ ตามกติกาข้อ 4 ของสายนี้ (**ใบที่มี RESULT แล้วห้ามอยู่ในรายการรถบัส**) K จึง**ไม่ยก `GT-266` เข้ารายการ** และ**ไม่ลบมันออกจากรายการใบที่มี RESULT** ด้วย — ทั้งสองอย่างเป็นการตัดสิน ไม่ใช่การคัดลอก
-**ใครเคาะ**: ถ้าจะวัดส่วน relog ที่ยัง NOT MEASURED ต้องมีคนพลิกหัวใบหรือเปิดใบใหม่ — หัวใบเขียนเองว่าเป็นของ **chief/LANE-GM** (คำถามที่ Panya ฝากใน R320) · ถามไว้ในจดหมายรอบ `notes_to_chief/20260907_0725_LANE-K-ROUND-4af3qf.md`
+| `GT-276` | LANE-CS | บนรถบัส · โทเคนผูก `550a36d` และ **ต้องตั้ง `PYTHONPATH=src` เอง** | **ยังบนรถบัส · โทเคนใหม่ผูก `6b5b6b8` และรันได้บนเช็คเอาต์เปล่า** — `python3 src/pirateforce_foundation/skill_learn_step_headless.py` | **ka1-A**: ใช้คำสั่งใหม่เท่านั้น · คำสั่งเก่าบนเช็คเอาต์เปล่าให้ `ModuleNotFoundError` = ตัดใบทั้งที่กลไกติดอาวุธจริง |
+| `GT-288` | LANE-B | ตกรถ (หมวด จ.) — ยังไม่มี `HEADLESS_PROOF:` เลย | **ยังตกรถ แต่เหลือตัวบล็อกเดียว** — โทเคนชุด 1 มาแล้ว (`6b5b6b8`) และ K ยืนยัน sha เอง (`merge-base --is-ancestor` ผ่าน) | **COO**: ตอบว่าการวัดของ LANE-B แทน "ใบยืนยันของ chief" ได้ไหม · ตอบว่าได้ = K พลิกขึ้นหมวด ก. รอบถัดไปทันที |
+| `RE-248` `RE-266` `RE-285` | LANE-DB / LANE-UI / LANE-A | หัวใบเขียน `OPEN` ทั้งที่มีจดหมายผลตอบแล้ว | **พับแล้ว** ตามคำของผู้เทสคำต่อคำ (`PASS/DONE` · `BOUNDED-NEGATIVE / STATIC ANSWERED` · `CLOSED / BOUNDED-NEGATIVE`) | ไม่มี — ปิดแล้ว · เหลืออีก **15 แถวจาก 18** ของ `pf_re_queue_taglint.py` |
+| `RE-227` `RE-234` | LANE-A | หัวใบก้อนที่สองยังเขียน `OPEN` ไม่มีคำเตือน RE runner หยิบไปรันซ้ำได้ | **มีบรรทัดชี้ทางแล้ว** ("ก้อนนี้ถูกแทนที่ · อย่าหยิบไปรัน") ตาม `COO-DECISION 0845` ข้อ 3 | **LANE-A**: ยุบก้อนซ้ำเองภายในสองรอบของสาย (จดหมายส่งแล้วรอบนี้) |
 
 ## รถบัสวันนี้ = **2 ใบ attended** (`GT-258` · `GT-276`) + **1 ใบ static ไม่กินเครื่องเจ้าของ** (`RE-273`)
-**เท่ารอบก่อน** — รอบ `okh8oz` ไม่มีใบไหนขึ้นหรือลงรถบัส · สิ่งที่เปลี่ยนคือ `GT-291` เหลือตัวบล็อกเดียว (เหตุ 2) จากเดิมสอง และคนที่ปลดได้คือ **LANE-DB** ไม่ใช่ K
-
+**เท่ารอบก่อน** — รอบ `ek1gk9` ไม่มีใบไหนขึ้นหรือลงรถบัส · สิ่งที่เปลี่ยนคือ **คำสั่งโทเคนของ `GT-276`** (ka1-A ต้องอ่านก่อนรันซ้ำ ไม่งั้นตัดใบผิด) และ **`GT-288` เหลือตัวบล็อกเดียว** รอ COO เคาะหนึ่งบรรทัด
 ---
 
 ## ก. ไร้ธง / env (บูตมาตรฐานหรือ env variable — ไม่ใช่ `--*-scenario`)
@@ -33,7 +28,9 @@ LANE-A ส่งบรรทัด `HEADLESS_PROOF:` มาให้ในฐา
 ## ข. ธง scenario
 
 1. 🆕 **`GT-276` LEARN-SKILL-RESULT-WALKLOCK-ISOLATE-001** — เจ้าของใบ/ผู้บริโภคผล = **LANE-CS** · ✅ **`HEADLESS_PROOF:` ผ่านเกณฑ์ `PANYA-ORDER 0159` แล้ว** (โทเคนรันบนทรี `main` สะอาด `550a36d` ซึ่ง K ยืนยันเองว่ายังเป็น ancestor ของ main วันนี้)
-   บรรทัดในใบ (คำต่อคำจากเจ้าของใบ): `HEADLESS_PROOF: 2026-09-07 main 550a36d | cmd (บน 550a36d): PYTHONPATH=src python3 -m pirateforce_foundation.skill_learn_step_headless | LEARN_SKILL_STEP_ARMED_SUMMARY steps=6 one_frame_each=yes RESULT=PASS`
+   🆕 **บรรทัดในใบ รอบ `ek1gk9` (คำต่อคำจากเจ้าของใบ จดหมาย `20260907_0746`)**: `HEADLESS_PROOF: 2026-09-07 main 6b5b6b8 | cmd: python3 src/pirateforce_foundation/skill_learn_step_headless.py | LEARN_SKILL_STEP_ARMED_SUMMARY steps=6 one_frame_each=yes RESULT=PASS`
+   🔴 **ka1-A: ใช้คำสั่งข้างบนเท่านั้น ไม่ต้องตั้ง env ใด ๆ** · K วัดเอง: `merge-base --is-ancestor 6b5b6b8 origin/main` ผ่าน · `git cat-file -e origin/main:src/pirateforce_foundation/skill_learn_step_headless.py` ผ่าน · K **ไม่ได้** รันโมดูลเอง (ค่าโทเคน = คำของเจ้าของใบ)
+   (บรรทัดเดิม เก็บไว้ไม่ลบ) บรรทัดในใบ (คำต่อคำจากเจ้าของใบ): `HEADLESS_PROOF: 2026-09-07 main 550a36d | cmd (บน 550a36d): PYTHONPATH=src python3 -m pirateforce_foundation.skill_learn_step_headless | LEARN_SKILL_STEP_ARMED_SUMMARY steps=6 one_frame_each=yes RESULT=PASS`
    🔴 **ka1-A ต้องรู้ก่อนรันซ้ำ (คำของเจ้าของใบ ไม่ใช่ของ K)**: บน `550a36d` คำสั่ง **ต้องมี `PYTHONPATH=src`** — ไม่งั้นได้ `ModuleNotFoundError: No module named 'pirateforce_foundation'` ซึ่งเป็น **ช่องว่างของคำสั่ง ไม่ใช่กลไกไม่ติดอาวุธ** (อย่าตัดใบทิ้งเพราะข้อนี้) · ถ้า PR รอบ `t04sgo` ของ LANE-CS เข้า main แล้ว ใช้ `python3 src/pirateforce_foundation/skill_learn_step_headless.py` ได้ โทเคนเหมือนกันทั้งสองฟอร์ม
    บูต: **หนึ่งขั้น = หนึ่งบูต** · `py -3 -u -m pirateforce_foundation.app --db state\run_gt276_<stamp>.sqlite3 --learn-skill-result-hypothesis-scenario scenarios\learn_skill_result_hypothesis_learn_step_<label>.json` · `<label>` เรียง: `count0_trail0` · `count1_trail0` · `count1_trail1` · `count3_trail0` · `count3_trail1` · `count4_real_skill_ids_class1_trail0`
    nonclaim ของเจ้าของใบที่ห้ามตัด: โทเคนพูดได้แค่ฝั่งเซิร์ฟเวอร์ · **ไม่พูดถึงไคลเอนต์แม้คำเดียว** ⇒ "ขั้นไหนล็อกการเดิน" ยังเป็นคำถามเปิดทั้งใบ · ไม่มีการปลดแฟล็ก (ไฟล์ขั้นทั้งหกยัง `test_only: true`)
@@ -69,6 +66,9 @@ LANE-A ส่งบรรทัด `HEADLESS_PROOF:` มาให้ในฐา
   · 🔴 **ชุด 2 (`PF_NAME_COLOUR_SWEEP=2`) ยังห้ามบูตอยู่ดี**: ผู้สมัคร `actor_type 3` → 5 (`CAvatarNPC`) อยู่ใน `pirate-force-server#990` ซึ่งถูกปิดโดยไม่ merge (gate RED) — งานยังอยู่บนกิ่ง `claude/magical-albattani-b08g3z` ไม่หาย
   · 🔴 และแม้ #990 กลับมา **ยังไม่รู้ว่า AT5 มีป้ายชื่อหรือเปล่า** — คำถามนั้น = **`RE-290`** ยังไม่มีคำตอบ · ถ้าคำตอบคือ "ไม่มีป้าย" ชุด 2 ต้องถอนผู้สมัครทั้งอัน (คำของเจ้าของใบ)
   · ⇒ **ชุด 1 (8 ตัว) คือส่วนที่พร้อมก่อน** เมื่อ B ส่งโทเคนมา
+  · 🆕 **รอบ `ek1gk9`: B ส่งโทเคนมาแล้ว** (จดหมาย `20260907_0741`) — `HEADLESS_PROOF: 2026-09-07 · commit 6b5b6b8 (origin/main) · boot PF_NAME_COLOUR_SWEEP=1 · NAME_COLOUR_SWEEP_ARMED actors=8 census_actors=108 wire=116` · วางคำต่อคำใน `tickets/GT-288.md` แล้ว · K วัด sha เอง: `merge-base --is-ancestor 6b5b6b8 origin/main` **ผ่าน**
+  · 🔴 **ยังตกรถอยู่ เหลือตัวบล็อกเดียว**: เงื่อนไขที่ K ตั้งไว้เองรอบ `70l5du` ข้อ (1) คือ **จดหมายจาก chief ว่าเฟรมเดียวลง main แล้ว** — วันที่ 7 ก.ย. ยังไม่มีใบนั้นหลังใบถอน `0345` · และเจ้าของใบเองติดป้าย `[สมมติของสาย LANE-B - รอ COO ยืนยัน]` ว่าการวัดของตนแทนใบ chief ได้ไหม ⇒ **คำสองปาก เสมียนไม่ตัดสิน** ถาม COO แล้วรอบนี้
+  · nonclaim ของเจ้าของใบ (ห้ามตัด): โทเคนเป็น **ชั้น wire ล้วน** ไม่ใช่ client-observable · ไม่ได้พิสูจน์ว่าไคลเอนต์**วาด**หุ่นแปดตัวขึ้นจอ · "ไม่เห็นหุ่นเลย" ยังเป็นผลลบที่มีค่า
 
 ## ฉ. ถอนจากรถบัสชั่วคราว — รอเจ้าของใบยืนยันซ้ำ (`PANYA-ORDER 0159` ข้อ 2)
 
@@ -88,9 +88,10 @@ LANE-A ส่งบรรทัด `HEADLESS_PROOF:` มาให้ในฐา
 ## 🔴 ใบที่มี RESULT/ปิดแล้ว — ห้ามอยู่ในรายการรถบัสข้างบน
 GT-178 · GT-214 · GT-217 · GT-220 · GT-223 · GT-224 · GT-233 · GT-242 · GT-249 · GT-250 · GT-251 · GT-252 · GT-253 · GT-255 · GT-257 · GT-262 (CANCELLED) · **GT-266** (ดูข้อสังเกตหัวไฟล์ — บรรทัด `HEADLESS_PROOF:` วางแล้วรอบนี้ แต่ K ไม่ย้ายใบเอง) · GT-269 · GT-274 · GT-277 · GT-279 (มีผล R322B · เจ้าของใบขอวัดซ้ำ ดูหมวด ง.) · GT-281 · GT-287 · **GT-193** (🆕 CANCELLED + archive รอบนี้) · GT-151 · RE-283
 **archive รอบนี้ (ยังอ่านได้ครบทุกตัวอักษร เหลือสตับหนึ่งบรรทัดในคิว)**: `GT-193` → `archive/GAME_TEST_QUEUE_ARCHIVE_20260907_closed.md`
-**ยัง BLOCKED**: `GT-284` WORLD-SCENE-STATE-SURVIVES-RELOGIN-001 · `RE-280`/`RE-285`/`RE-286`/`RE-289`/`RE-290`/`RE-292`/`RE-293`/`RE-294` เป็นใบ RE runner (static/client-image) ไม่ใช่ใบ attended-capture — ไม่เข้าเกณฑ์สแนปช็อตนี้
+**ยัง BLOCKED**: `GT-284` WORLD-SCENE-STATE-SURVIVES-RELOGIN-001 · `RE-280`/~~`RE-285`~~ (**CLOSED/BOUNDED-NEGATIVE พับรอบ `ek1gk9`** — ห้าม rerun อิมเมจเดิมกับคำถามนี้ ตามคำผู้เทส)/`RE-286`/`RE-289`/`RE-290`/`RE-292`/`RE-293`/`RE-294` เป็นใบ RE runner (static/client-image) ไม่ใช่ใบ attended-capture — ไม่เข้าเกณฑ์สแนปช็อตนี้
 **`GT-079` ยังคงสถานะเดิม (`BLOCKED-BY-PLACEHOLDER`) — K ห้ามแตะทั้งใบตาม `COO-DECISION k2217 (1/2)`** จนกว่า chief จะเติม placeholder แล้วส่ง `*-TO-K-*` มา
 
 ## จดหมายที่รอบนี้ส่งออก (ทุกฉบับอยู่ใน `notes_to_chief/`)
-- `20260907_0810_LANE-K-TO-DB-gt291-commit-c19132f-is-on-main-now.md`
-- `20260907_0810_LANE-K-ROUND-okh8oz.md`
+- `20260907_0925_LANE-K-TO-A-re227-re234-collapse-your-duplicate-blocks.md`
+- `20260907_0925_LANE-K-ROUND-ek1gk9.md`
+(รอบก่อน `okh8oz`: `20260907_0810_LANE-K-TO-DB-gt291-commit-c19132f-is-on-main-now.md` · `20260907_0810_LANE-K-ROUND-okh8oz.md`)
