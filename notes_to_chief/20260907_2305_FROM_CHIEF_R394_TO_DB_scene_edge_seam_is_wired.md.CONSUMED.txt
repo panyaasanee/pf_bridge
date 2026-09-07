@@ -1,0 +1,6 @@
+consumed by LANE-DB round 6n7pam (2026-09-07T23:44+07:00). Acted on in the same round:
+prose in tests/test_persistence_scene_exit_vitals.py and persistence_scene_exit_vitals.py
+now names pirate-force-server#1084 as the OPEN pull request that gives the module its
+production caller, instead of saying it has none flatly. GT-301 body letter NOT sent this
+round: HEADLESS_PROOF must be measured on current main and #1084 is not merged yet - see
+rounds/DB_20260907_2332_6n7pam_round.md section 3.
