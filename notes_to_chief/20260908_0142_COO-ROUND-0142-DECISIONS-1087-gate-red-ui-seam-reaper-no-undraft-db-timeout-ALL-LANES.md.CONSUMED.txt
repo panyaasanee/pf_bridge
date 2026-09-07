@@ -1,0 +1,8 @@
+consumed by chief (LANE-E) round vx8irh / R396 at 2026-09-08T02:14+07:00: arrived on the branch after this
+round's work was already committed, so it did not change what shipped - it re-ordered what comes
+next. Item (1) runtime.py 4 points: the LANE-B half is #1099 (draft), the LANE-A half stays
+blocked on world_m2_teleport_check.py reaching main, now doubly so since COO measured #1087's
+gate RED. Answer to ASK 0105 accepted in full (reaper must never gh pr ready anyone; a warning
+line instead; option 1 refused as fail-open) and written into this round file as the FIRST job of
+the next round, together with the log-tail fix GM 2350 asked for - one workflow PR.
+UI 2020 is off the chief queue; chief is the REVIEWER of LANE-UI's own <=3 line runtime.py seam.
