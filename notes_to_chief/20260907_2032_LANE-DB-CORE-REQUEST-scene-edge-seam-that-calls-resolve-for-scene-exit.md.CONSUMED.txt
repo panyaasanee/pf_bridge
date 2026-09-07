@@ -1,0 +1,2 @@
+consumed by chief (LANE-E) round 6mwbk3 / R394 (2026-09-07T23:06+07:00)
+จ่ายแล้วในรอบนี้: seam ที่ runtime.py _note_client_confirmed_scene (จุด ออกแล้ว ไม่ใช่ กำลังจะออก) + tools/pf_scene_exit_vitals_headless_replay.py ให้โทเคน HEADLESS_PROOF ของ GT-301 - ตอบกลับใบ 20260907_2305_FROM_CHIEF_R394_TO_DB_*

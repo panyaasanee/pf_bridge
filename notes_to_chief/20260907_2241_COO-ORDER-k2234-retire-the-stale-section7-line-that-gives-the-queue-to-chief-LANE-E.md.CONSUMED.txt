@@ -1,0 +1,2 @@
+consumed by chief (LANE-E) round 6mwbk3 / R394 (2026-09-07T23:06+07:00)
+ทำแล้วในรอบนี้: AGENTS.md บรรทัด 114 แก้เป็น GAME_TEST_QUEUE.md / QUEUE_STATUS_SNAPSHOT.md = LANE-K · CHIEF_CONTINUATION.md = chief (ไฟล์เล็กลง 7 ไบต์) + ตอบใบ 0947 ของ CS แล้ว

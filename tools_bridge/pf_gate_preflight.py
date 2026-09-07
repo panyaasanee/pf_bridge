@@ -804,6 +804,235 @@ def check_new_skips(repo, base):
     return True
 
 
+# COO-DECISION 20260907_2148, answering LANE-GM's `2058` ask: a diff that
+# adds an assertion about POSIX mode bits, in a file that never determines
+# whether THIS filesystem carries them, is what closed server PR #1066 on
+# windows-latest (two `assertEqual(...st_mode & 0o777, ...)` lines).  A WARN,
+# never RED, and the order says why: RED here would block every older file
+# that already carries the same shape, and this lane does not sweep the house
+# in one round.
+#
+# WHY THE MATCHER IS NOT THE SUBSTRING `st_mode`, and this is a MEASURED
+# correction to the count in the order itself.  `git grep -l "st_mode"
+# origin/main -- tests` answers 8 files (LANE-GM counted 9 at another sha).
+# Five of those eight hold no mode bits at all: they are test METHOD NAMES -
+# `def test_modes_mutually_exclusive`, `def test_modes_are_mutually_exclusive`,
+# `def test_models_named_reports_the_offenders_not_a_boolean`,
+# `def test_mode s_and_explicit_...`, `def test_list_mode_prints_...` - each
+# carrying `st_mode` inside `te-st_mode-s`.  Measured at
+# pirate-force-server origin/main 52c5d56:
+#     git grep -lE "\.st_mode|\bS_IMODE\b|stat\.S_I" origin/main -- tests
+#   = 3 files (test_gm_command_capture.py, test_gm_commands.py,
+#     test_gm_login_scene_stage.py) - and all three already branch on
+#     `os.name`.
+# So a substring scanner would have opened this round warning about five
+# files that cannot fail on Windows, and the real population is three, not
+# eight.  The regex below matches the ATTRIBUTE and the `stat` module's own
+# constants, never a bare word inside an identifier.
+_MODE_BITS_USE_RE = re.compile(
+    r"\.st_mode\b|\bS_IMODE\b|\bS_IRWX[UGO]\b|\bstat\.S_I[A-Z]+\b")
+
+# What counts as "this file determined, at run time, whether the mode bits
+# survive here".  Deliberately a set of RUNTIME determinations and not a
+# proof: the tool cannot see which branch an assertion sits in, and a check
+# that claimed it could would be the same overclaim this repository keeps
+# paying for.  What it CAN say honestly is "this file never asks the
+# question at all", which is exactly the shape #1066 had.
+#
+# `MODE_BITS_PROBED` is the declared escape hatch, in a comment or a name:
+# a file that probes by chmod-then-stat round trip and branches on the
+# result is invisible to any regex, so the lane writing it says so and the
+# WARN stops.  An escape hatch a scanner cannot be argued out of is how this
+# stays a warning rather than a nag.
+_MODE_BITS_PROBE_RE = re.compile(
+    r"\bos\.name\b|\bsys\.platform\b|\bplatform\.system\b"
+    r"|skipUnless|skipIf|skipTest|MODE_BITS_PROBED")
+
+MODEBITS_SELF_TEST_CASES = 6
+
+
+def check_mode_bits_probe(repo, base="origin/main"):
+    """WARN (print only - never appears in main()'s `results`, so it can
+    never make PREFLIGHT RED or INCONCLUSIVE by itself) for every file this
+    branch ADDS a POSIX-mode-bit read to while that file holds no runtime
+    determination of whether this OS carries such bits.
+
+    Returns the number of WARN lines printed (0 means PASS), or None when
+    the diff could not be taken - the one case this says nothing.
+
+    NOT CLAIMED, twice over.  (1) A file that passes this check can still go
+    red on Windows: the probe token may sit in a different test than the new
+    assertion, and nothing here reads control flow.  (2) A file that WARNs
+    may be perfectly correct - `src/` code that reads `st_mode` to make a
+    decision, rather than to assert on it, is not a gate risk at all.  This
+    names a shape a human then judges, which is the whole contract of an
+    advisory row.
+    """
+    try:
+        diff = subprocess.run(
+            ["git", "--no-optional-locks", "-C", str(repo), "diff",
+             "--unified=0", base + "...HEAD", "--", "tests/", "src/",
+             "tools/"],
+            check=True, capture_output=True, text=True, errors="replace",
+        ).stdout
+    except (subprocess.CalledProcessError, OSError) as exc:
+        print("[modebits] could not diff against %s: %s" % (base, exc))
+        return None
+    added = {}
+    current = None
+    for line in diff.split("\n"):
+        if line.startswith("+++ b/"):
+            current = line[6:]
+            continue
+        if line.startswith("+") and not line.startswith("+++"):
+            if current and _MODE_BITS_USE_RE.search(line):
+                added.setdefault(current, []).append(line[1:].strip()[:110])
+    warned = 0
+    for relpath in sorted(added):
+        text = None
+        candidate = pathlib.Path(repo) / relpath
+        if candidate.is_file():
+            try:
+                text = candidate.read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                text = None
+        if text is None:
+            shown = subprocess.run(
+                ["git", "--no-optional-locks", "-C", str(repo), "show",
+                 "HEAD:" + relpath],
+                capture_output=True, text=True, errors="replace")
+            if shown.returncode != 0:
+                # The path is gone from both the working tree and HEAD (a
+                # rename inside this same diff).  Nothing to read means
+                # nothing honest to say about it.
+                continue
+            text = shown.stdout
+        if _MODE_BITS_PROBE_RE.search(text):
+            continue
+        print("[modebits] WARN - %s adds %d POSIX mode-bit read(s) and the"
+              % (relpath, len(added[relpath])))
+        print("           file never asks whether this OS keeps those bits:")
+        for line in added[relpath][:3]:
+            print("               %s" % line)
+        print("           windows-latest runs the same suite. `os.chmod`"
+              " there honours only the")
+        print("           write bit, so `stat.S_IMODE(p.stat().st_mode)`"
+              " answers 0o666/0o444")
+        print("           whatever you asked for - that is what closed"
+              " server PR #1066. Assert the")
+        print("           mode you REQUESTED unconditionally, and the bits"
+              " the file HOLDS only")
+        print("           under `if os.name == \"posix\":` (see"
+              " tests/test_gm_command_capture.py), or")
+        print("           write MODE_BITS_PROBED in the file if you probe"
+              " the round trip yourself.")
+        warned += 1
+    if warned == 0:
+        print("[modebits] PASS - no new POSIX mode-bit read lands in a file"
+              " without a platform probe.")
+    return warned
+
+
+def _modebits_git_root(tmp, dirname, relpath, body):
+    """A real git repo whose `main` holds an empty tests/ tree and whose
+    `feature` branch adds one file - the shape `base...HEAD` reads.
+    """
+    root = pathlib.Path(tmp) / dirname
+    root.mkdir()
+    (root / "tests").mkdir()
+    subprocess.run(["git", "init", "-q", "-b", "main", str(root)], check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.email", "t@t"],
+                   check=True)
+    subprocess.run(["git", "-C", str(root), "config", "user.name", "t"],
+                   check=True)
+    (root / ".keep").write_text("x\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
+    subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "base"],
+                   check=True)
+    subprocess.run(["git", "-C", str(root), "checkout", "-q", "-b", "feature"],
+                   check=True)
+    target = root / relpath
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(body, encoding="utf-8")
+    subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
+    subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "work"],
+                   check=True)
+    return root
+
+
+def _modebits_self_test_cases(tmp):
+    """Drive check_mode_bits_probe() against synthetic server roots.
+
+    Six shapes, and the third is the reason this check exists in this form:
+    the incident (an unguarded assertion - 1 WARN); the same assertion under
+    `if os.name == "posix":` (0); a file whose ONLY `st_mode` is inside the
+    method name `test_modes_mutually_exclusive`, which is five of the eight
+    files a substring scanner reports on main (0 - this is the false-positive
+    class, measured, not imagined); `stat.S_IMODE` written without the
+    attribute (1 - the other real spelling); the declared escape hatch (0);
+    and a base ref that does not resolve (None, never 0).
+    """
+    unguarded = (
+        "import unittest\n\n\n"
+        "class T(unittest.TestCase):\n"
+        "    def test_mode(self):\n"
+        "        self.assertEqual(self.p.stat().st_mode & 0o777, 0o600)\n"
+    )
+    guarded = (
+        "import os\nimport unittest\n\n\n"
+        "class T(unittest.TestCase):\n"
+        "    def test_mode(self):\n"
+        "        if os.name == \"posix\":\n"
+        "            self.assertEqual(self.p.stat().st_mode & 0o777, 0o600)\n"
+    )
+    name_only = (
+        "import unittest\n\n\n"
+        "class T(unittest.TestCase):\n"
+        "    def test_modes_mutually_exclusive(self):\n"
+        "        self.assertRaises(ValueError)\n"
+    )
+    simode = (
+        "import stat\nimport unittest\n\n\n"
+        "class T(unittest.TestCase):\n"
+        "    def test_mode(self):\n"
+        "        self.assertEqual(stat.S_IMODE(self.m), 0o700)\n"
+    )
+    hatch = (
+        "import unittest\n\n\n"
+        "# MODE_BITS_PROBED: this suite chmods a temp file and reads it back\n"
+        "# before it asserts; the branch is invisible to a regex.\n"
+        "class T(unittest.TestCase):\n"
+        "    def test_mode(self):\n"
+        "        self.assertEqual(self.p.stat().st_mode & 0o777, 0o600)\n"
+    )
+    cases = [
+        ("unguarded mode assertion (the #1066 shape)",
+         "tests/test_a.py", unguarded, "main", 1),
+        ("same assertion under os.name == posix",
+         "tests/test_b.py", guarded, "main", 0),
+        ("st_mode only inside a test METHOD NAME",
+         "tests/test_c.py", name_only, "main", 0),
+        ("stat.S_IMODE spelling, no probe",
+         "tests/test_d.py", simode, "main", 1),
+        ("declared MODE_BITS_PROBED escape hatch",
+         "tests/test_e.py", hatch, "main", 0),
+        ("base ref that does not resolve",
+         "tests/test_f.py", unguarded, "no-such-base", None),
+    ]
+    failures = 0
+    ran = 0
+    for index, (label, relpath, body, base, expected) in enumerate(cases):
+        root = _modebits_git_root(tmp, "modebits%d" % index, relpath, body)
+        got = check_mode_bits_probe(root, base=base)
+        ran += 1
+        ok = got == expected
+        failures += 0 if ok else 1
+        print("  case %d %-58s expected=%-5s got=%-5s %s"
+              % (ran, label[:58], expected, got, "ok" if ok else
+                 "SELF-TEST RED"))
+    return failures, ran
+
+
 # COO-DECISION 20260906_1846 item 1, answering SYNC_STUCK 20260906_1816:
 # AGENTS.md section 7 has said "filenames <= 100 characters, every pile"
 # since before this tool existed, but nothing ever checked it mechanically.
@@ -2512,6 +2741,9 @@ def _self_test():
         cc_failures, cc_ran = _claudecfg_self_test_cases(tmp)
         failures += cc_failures
         ran += cc_ran
+        mb_failures, mb_ran = _modebits_self_test_cases(tmp)
+        failures += mb_failures
+        ran += mb_ran
     if failures:
         print("SELF-TEST RED: %d of %d case(s) wrong." % (failures, ran))
         return 1
@@ -2521,7 +2753,7 @@ def _self_test():
         + BRIDGESIZE_SELF_TEST_CASES + FILENAMELEN_SELF_TEST_CASES
         + QUEUEGROWTH_SELF_TEST_CASES
         + CONSUMEDSTUB_SELF_TEST_CASES + SCOREBOARD_MANUAL_SELF_TEST_CASES
-        + CLAUDECFG_SELF_TEST_CASES
+        + CLAUDECFG_SELF_TEST_CASES + MODEBITS_SELF_TEST_CASES
     )
     if ran != expected_cases:
         # pf-adversary R328 D3: the old green line was the string "9 cases",
@@ -2710,6 +2942,10 @@ def main():
     # `results` - a forgotten .CONSUMED.txt stub is a warning, not a reason
     # to block a push that is otherwise clean.
     check_consumed_stub_warning(base=args.base)
+    # Advisory only, by the order that asked for it (COO-DECISION
+    # 20260907_2148): WARN, never RED, so the seven older files carrying the
+    # same shape do not block a lane that never touched them.
+    check_mode_bits_probe(repo, base=args.base)
     if args.pr_body is None:
         # Open skip with a reason, never a silent one (AGENTS.md section 7).
         # Not appended to `results`: most callers run this tool for the cp874

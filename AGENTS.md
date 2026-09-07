@@ -111,7 +111,7 @@ C:\Users\Panya\Desktop\Pirate Force\
 ห้ามแตะ canonical DB ตัวจริง (ยกเว้น LANE-DB ผ่าน migration ที่ผ่าน pytest+pf-adversary — `COO-DECISION 20260901_1112`, ดู prompts/LANE-DB.md)
 ห้ามแก้ src/ tools/ tests/ ของ repo โค้ด
 ห้าม git commit / push / merge / rebase / force / reset / clean / stash
-ห้ามแก้ GAME_TEST_QUEUE.md หรือ CHIEF_CONTINUATION.md   <- สองไฟล์นี้เป็นของ chief
+ห้ามแก้ GAME_TEST_QUEUE.md / QUEUE_STATUS_SNAPSHOT.md <- ของ LANE-K · CHIEF_CONTINUATION.md <- ของ chief
 ห้ามลบไฟล์ใด ๆ ใน pf_bridge
 ห้ามอัปโหลด GameClient.local.bin, .dmp, capture ออกนอกเครื่องนี้
 ห้ามพิมพ์อักขระนอก cp874 ออกคอนโซล
