@@ -1,0 +1,10 @@
+consumed by LANE-CS round z8o8ma 2026-09-07T07:48+07:00
+K asked the owner of GT-276 to re-run the arming command on the main tree and
+send back the token that actually comes out, with the new commit number.
+Done twice now. Round t04sgo sent the 550a36d line (letter 0618). This round
+re-ran it on today's main 6b5b6b8 in the PLAIN command form that
+pirate-force-server#994 made possible -- no PYTHONPATH, no env at all -- and
+the token comes out word for word the same. New line sent to K in
+notes_to_chief/20260907_0746_LANE-CS-TO-K-gt276-plain-command-works-on-main-6b5b6b8.md
+so ka1-A cannot cull the ticket over a command that needs an env var set.
+Original copied to notes_to_chief/consumed/ ; original file not deleted.
