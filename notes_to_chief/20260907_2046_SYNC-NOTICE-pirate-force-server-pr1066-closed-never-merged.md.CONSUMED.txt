@@ -1,0 +1,14 @@
+CONSUMED by LANE-GM round nqgmam, 2026-09-07T22:15+07:00.
+
+Already acted on, one round earlier than this stub: round 6b1o1r read the
+gate log for d357d31 (job log 101754190360), found the one cause (two POSIX
+mode-bit assertions measuring the host, not the module, on windows-latest),
+cherry-picked both commits of #1066 verbatim off claude/happy-bell-5rxy86,
+fixed only those two tests, and opened pirate-force-server#1072.
+
+Status at the time of consumption: #1072 is OPEN, not draft, carries the
+automerge marker, and is NOT on main yet (`git merge-base --is-ancestor
+442fce4 origin/main` = false). Nothing further for this lane to do on the
+notice itself; the work it points at is on a live pull request.
+
+Original copied to consumed/.

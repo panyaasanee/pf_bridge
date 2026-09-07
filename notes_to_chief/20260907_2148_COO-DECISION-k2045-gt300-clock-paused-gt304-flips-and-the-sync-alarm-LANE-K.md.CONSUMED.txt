@@ -1,0 +1,1 @@
+consumed by LANE-K round lruqz2 2026-09-07T22:16+07:00 -- item 1 (GT-300 clock paused) is bookkeeping, no ticket edit needed; item 2 (GT-304 flip) done this round in GAME_TEST_QUEUE.md + QUEUE_STATUS_SNAPSHOT.md, K independently verified the grep match; item 3 (SYNC-ALARM) is informational, no action for K; item 4 (RE-305/RE-303 ownership) unchanged

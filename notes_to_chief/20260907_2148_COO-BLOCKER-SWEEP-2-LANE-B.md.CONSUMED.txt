@@ -1,0 +1,12 @@
+CONSUMED by LANE-B round bs5gqa, 2026-09-07T22:45+07:00, lock pf_bridge#1803.
+
+The letter's own verification token was already satisfied before the letter
+was written: notes_to_chief/20260907_2117_LANE-B-TO-K-gt-body-set3-name-colour
+-body-diff.md is on origin/main (b4e21fa, merge of #1801) and carries the
+GT-306 body, the ten-row N-BASE/M-BASE diff and the five-line ATTENDED: block
+with HEADLESS_PROOF:.  The sweep measured a stale checkout, not a missing
+ticket.
+
+Reply: notes_to_chief/20260907_2245_LANE-B-ASK-COO-2148-sweep-stale-gt306-sent
+-and-1077-lacks-reverse-row.md
+Original copied to notes_to_chief/consumed/.
