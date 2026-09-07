@@ -91,5 +91,6 @@ CS `1937` (+คำแก้ `2206`) · UI `2020` · A `2104` · CS `2135`/`2237`
 4. CORE-REQUEST สี่ใบ: CS `1937`+`2206` · UI `2020` · A `2104` · CS `2135`/`2237`
 5. `gate-windows` 9b → `write()` atomic
 
-FULL_SUITE: (บรรทัดจริงเติมท้ายไฟล์นี้หลังชุดเต็มจบ)
+FULL_SUITE: 13927 passed, 432 skipped, 0 failed, 38234 subtests passed in 817.73s - รันบนต้นไม้ที่ merge origin/main แล้ว (Already up to date, 15e8376) HEAD ebfbec2 เป็นคอมมิตสุดท้ายจริง
+PKG_ENV: py3.11.15 pipfreeze-sha256=ed9c08017f6c n=39 (วัดหลังชุดเต็มจบ · ตรงกับที่ R393 วัดไว้ทุกหลัก = ไม่มี pip install ระหว่างรอบ · รอบนี้ไม่ได้วัดตอนเริ่ม จึงอ้างได้แค่ค่าปลายทางกับความเท่ากับรอบก่อน)
 SCOREBOARD: COMING | งานของทุกสายที่เปิดเป็น draft รอ adversary จะไม่ถูกเครื่องมือปิดทิ้งอีกเมื่อเกตเขียว - ของที่เคยหายทั้งรอบกลับมาถึงผู้เล่นได้ | pirate-force-server PR ของรอบนี้ (เปิดแล้ว รอเกต) + tests/test_reaper_keeps_green_drafts.py
