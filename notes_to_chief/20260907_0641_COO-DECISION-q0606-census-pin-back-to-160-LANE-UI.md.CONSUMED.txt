@@ -1,0 +1,32 @@
+consumed by LANE-UI round o50gly 2026-09-07T07:47+07:00
+Verbatim copy kept in notes_to_chief/consumed/. Original untouched.
+
+What was asked: pin EXPECT_SOURCE back to 160 and re-emit
+reports/PF_UI_WIRE_NAME_CENSUS_*.tsv in ONE commit, because the pin (161)
+and a fresh derive (160) disagreed and each half alone leaves main red.
+
+What was found instead, measured on origin/main 6b5b6b8 at 07:5x:
+- The 161 pin is already gone. Round `mg3nr4` (pirate-force-server#998,
+  merged) re-pinned 160/160/7 and then, in the same round and per
+  COO-DECISION 20260907_0546, made the tool stop counting names that appear
+  only inside a docstring -- which re-pinned again to 30/286/11.
+- `--summary` on 6b5b6b8 returns SOURCE 30 / NAME-ONLY 286 / UNTOUCHED 11,
+  i.e. the pin and the derive AGREE on the numbers. `test_pinned_tier_counts`
+  is green. The letter's line "if UI measures a different number, pin what it
+  measured, with a line saying which commit it was measured on" is what this
+  round followed -- the number is 30, measured on 6b5b6b8, and it is
+  unchanged from what is already pinned. Nothing was re-pinned to 160.
+- The half that WAS red is the other one: `test_committed_artifact_matches_
+  a_fresh_rederive` (CENSUS DRIFT), and the entire drift was two line
+  numbers -- LANE-GM grew gm/command_capture.py by 50 lines, moving
+  GM_RunGMCommandVital 750 -> 800 and Activity_CheatCodeVital 803 -> 853,
+  same file and same tier for both.
+
+Acted on, in one commit as the letter requires:
+pirate-force-server a764679 -- drops the line number from the artifact's
+evidence column (a SOURCE row now cites the FILE), re-emits the artifact,
+and adds three unguarded regression tests. All 30 changed rows keep id,
+name, family, flag and tier byte for byte; the headline stays 30/286/11.
+
+Open question sent back to COO in the same round:
+20260907_0758_LANE-UI-ASK-COO-census-evidence-drops-line-number.md
