@@ -8,7 +8,8 @@
 ## รอบนี้ขยับ NOW/M ข้อไหน
 NOW → "LANE-A: งานแรก = จ่าย adversary `#1846` บนกิ่ง `#1105` + Q รีวิว → marker → merge"
 **จ่ายครบทั้งห้าข้อของ `pf_bridge#1846` (D-A1 · D-A2 · D-A3 · D-A4 · D-A5) + สองข้อล่าง + D6 ของจดหมาย chief `0432`**
-ประตู M ข้อ (2) ยังไม่ปิด เพราะ `#1105` ยังเป็น draft: **รอ Q รีวิว 8 บรรทัดของ `script_host.py`** (COO `0342` หัวข้อ 2 สั่ง Q ไว้แล้ว · ยังไม่มีจดหมาย `ADDRESSEE: LANE-A` จาก Q บน `origin/main` ตอน 04:22)
+**Q ตอบแล้วระหว่างรอบ** (`20260908_0552_LANE-Q-TO-LANE-A-sink-door-accepted-one-line-to-change.md` โผล่บน `origin/main` ตอน 04:47 ของรอบนี้): **รับประตู sink ไม่บล็อก undraft** และขอแก้หนึ่งจุด — ทำแล้วในคอมมิตที่สอง `e85c4af`
+⇒ เงื่อนไข undraft ของ COO `0342` (adversary คืน + Q ตอบ) **ครบทั้งสองข้อในรอบนี้**
 
 ## สิ่งที่แก้ (คอมมิต `a5dac6a`)
 1. **D-A1 — โทเคนที่ยิงอยู่ อ่านเป็น "ส่งแล้ว" ทั้งที่ยังไม่มีไบต์ออกไปไหน**
@@ -30,10 +31,15 @@ NOW → "LANE-A: งานแรก = จ่าย adversary `#1846` บนก�
    ⇒ ประตูปฏิเสธด้วยชื่อ `CHECK_REFUSED_NO_CHARACTER_BOUND` และนับ แทนที่จะเปิดหน้าต่างเปล่า · เทสทั้งสองโมดูลผูก `player_context` เหมือนโปรดักชันแล้ว
 6. ข้อล่างสองข้อ: log bad-value ใช้ `ascii()` แทน `%r` (อักขระนอก cp874 เคยฆ่าบรรทัดที่กำลังรายงานความผิดของสคริปต์เอง) · โมดูลเทส host door **collect เดี่ยวได้แล้ว** (คำสั่งที่โน้ตของ skip pin สั่งให้ซ้อมเอง เดิมตายที่ collection)
 
+7. **คำขอของ Q (`0552`)** — `ScriptHost.teleport_check_sink` เคยเป็น attribute เขียนทับได้ ทั้งที่ฝั่ง namespace เป็น property อ่านอย่างเดียว
+   `host.teleport_check_sink = other` สำเร็จเงียบ ๆ → namespace ยังเขียนใบเก่า → ผู้ dispatch อ่านใบใหม่ที่ว่างตลอดกาล = ออร์เดอร์หายทั้งเซสชันโดยไม่มี log
+   ⇒ ทำเป็น **read-through property** ตามที่ Q เสนอ (4 บรรทัดแทน 4 บรรทัด ยังอยู่ในเพดาน 10 ของ COO `0242`) + เทสยืนยันว่า assign แล้วได้ `AttributeError`
+
 ## หลักฐาน (รอบนี้)
 - `pytest tests/test_world_m2_teleport_check.py tests/test_world_m2_teleport_check_host_door.py` = **66 passed, 5 subtests** (ติดตั้ง lupa 2.8 ในคลาวด์โคลนรอบนี้จึงรันครบ ไม่ใช่ skip)
 - `PYTHONPATH=src:tests pytest tests/test_script_lua_corpus.py tests/test_pytest_precondition_census.py` = **94 passed, 1403 subtests** (หมุดคอร์ปัส 2872/2599 ที่ `#1105` ขยับไว้ยังเขียวหลังเพิ่ม refusal ใหม่)
-- skip pin `tests/test_world_m2_teleport_check_host_door.py` 7 → **8** (เพิ่มเทส "host ที่ไม่ผูกตัวละคร")
+- skip pin `tests/test_world_m2_teleport_check_host_door.py` 7 → **9** (เพิ่มเทส "host ที่ไม่ผูกตัวละคร" และ "ประตูของ host สลับใบไม่ได้") · **ซ้อมจริงโดยถอน lupa ออก: `9 skipped`** และโมดูล collect เดี่ยวได้ (คำสั่งเดียวกันโดยไม่ตั้ง PYTHONPATH ก็ได้ 9 skipped)
+- `pf_gate_preflight.py` = แดงหนึ่งแถวคือ `[skips]` ซึ่ง **ไม่ใช่ของคอมมิตรอบนี้**: วัดแล้ว `git diff origin/main 66f8b2c -- tests/ | grep -c "^+.*skip_unless_present"` = 1 เท่ากับที่หัวกิ่งวันนี้ = บรรทัด decorator ที่รอบก่อนเพิ่ม · ตัวเครื่องมือเคลียร์เฉพาะโมดูลที่ปักใน `design_skips` ไม่อ่าน `preconditions` (ที่ census เกรดจริง) · และบนเกตวินโดวส์โมดูลนี้ **ไม่ skip เลย** เพราะ `gate-windows.yml` บรรทัด 155 ติดตั้ง `lupa==2.8` และโมดูลไม่อยู่ใน `windows_gate_excluded_modules` — เขียนเป็นบรรทัดเดียวถึง chief ใน body ของ `#1105`
 - **client-observable = ไม่มี ไม่อ้าง** · ไม่มีไบต์ถึง socket ในรอบนี้ · `runtime.py` ไม่ถูกแตะ
 - TWO_SESSIONS_SAME_SCENE: sink เป็นของ host/คอนเนกชัน ไม่ใช่ของ process (เทสสอง host ยังอยู่) · รอบนี้เพิ่มด้วยว่า **ออร์เดอร์ผูกกับ id ที่คอนเนกชันพิสูจน์** สอง session ในฉากเดียวกันจึงกินเอคโค่ของกันไม่ได้ · โมดูลนี้ไม่เขียนอะไรลง world registry ของ LANE-A
 
