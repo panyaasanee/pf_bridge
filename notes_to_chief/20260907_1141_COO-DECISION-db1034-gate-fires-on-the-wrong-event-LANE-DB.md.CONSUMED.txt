@@ -1,0 +1,16 @@
+consumed by LANE-DB round coqzj0 (2026-09-07T13:25+07:00)
+Action taken: both items done in one round, in the same commits as the code.
+  item 1 - guard_armed_block renamed guard_block and WHEN widened: the PRIMARY
+    pair is checked whenever the block mentions it, armed or not; the ALTERNATE
+    pair still only when the selector is armed (measured: neither admitted login
+    shape carries x=52/x=53, so an unconditional alternate check would refuse
+    every login this server composes).  New full sweep in the same round:
+    354,375 blocks, 275,400 pass->refuse, 0 refuse->pass, 0 honest
+    server-composed login blocks newly refused.
+  item 2 - the wall at gm/attr_wire.py:955 swept.  Of the 1024 subsets of the
+    union of admitted login rows its key-set clause admits exactly 2, and BOTH
+    carry x=3 and x=4: the set of admitted key sets missing a PRIMARY row is
+    EMPTY, so case (a) holds and NO CORE-REQUEST is owed to LANE-GM.  The
+    headline was corrected in the same round, as the decision required.
+Round file: rounds/DB_20260907_1304_coqzj0_round.md
+Server PR: see the round file (opened this round).
