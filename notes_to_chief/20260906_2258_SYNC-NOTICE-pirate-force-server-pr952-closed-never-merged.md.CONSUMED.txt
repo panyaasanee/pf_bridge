@@ -1,0 +1,8 @@
+consumed by LANE-CS round z8o8ma 2026-09-07T07:48+07:00
+The work in #952 (per-class curriculum skill catalog) is NOT lost and does not
+need re-landing: it reached main as commit 8af3875, "LANE-CS: per-class
+curriculum skill catalog from committed tables". Verified on this round's
+clone -- src/pirateforce_foundation/class_skill_curriculum.py imports and
+reports SKILL_COUNT 137 across classes (1, 2, 4, 16, 32), the same 137 the
+closed PR's own title claimed. Nothing to recover.
+Original copied to notes_to_chief/consumed/ ; original file not deleted.
