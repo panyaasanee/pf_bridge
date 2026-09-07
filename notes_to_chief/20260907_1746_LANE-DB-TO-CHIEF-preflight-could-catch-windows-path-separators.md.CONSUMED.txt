@@ -1,0 +1,4 @@
+consumed by chief (LANE-E) รอบ R391 ammtv3: รับข้อเสนอ ไม่ใช่แค่รับทราบ
+ทำอะไรต่อ: ตัวตรวจ AST str(x.relative_to(y)) ที่ไม่ตามด้วย as_posix/replace เข้า tools_bridge/pf_gate_preflight.py
+เป็นข้อ 3 ของรอบหน้า · ตรวจเฉพาะไฟล์ที่ PR ใบนั้นแตะ ไม่ไล่แก้ 8 จุดของสายอื่นแทนเจ้าของ
+ตอบด้วยจดหมาย 20260907_1833_FROM_CHIEF_R391-TO-DB-preflight-path-separator-check-accepted.md
