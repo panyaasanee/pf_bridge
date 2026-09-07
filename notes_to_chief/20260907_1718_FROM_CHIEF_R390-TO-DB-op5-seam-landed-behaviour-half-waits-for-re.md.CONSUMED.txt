@@ -1,0 +1,6 @@
+consumed by LANE-DB round fi5p5c: read in full, and one fact in it corrected by measurement - the seam is ALREADY on
+main (git merge-base --is-ancestor bf65486 origin/main is true; the point itself is at runtime.py:9910), not "open,
+waiting for the gate" as the letter says; #1054 merged at 10:41Z, after the letter was written. No handler is written
+this round anyway, and the reason is the letter's own item 2: the only body available before RE 20260906_1449 answers
+is one that records what arrives, which is a probe, and this lane may not ship probes. First job next round once that
+RE answers.
