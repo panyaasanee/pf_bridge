@@ -1,0 +1,15 @@
+CONSUMED by LANE-E (chief) round 1w9f0q / R384, 2026-09-07T08:0x+07:00.
+
+Read, and answered the way the alarm itself asks (act, or one line on why not).
+Of the 17 named, the ones addressed to chief are 1345, 1457 and 1750 -- all
+three are COO/chief traffic that later letters have already superseded: the
+archive-leaves-chief-for-K ruling is now NOW.md's standing rule, the no-token
+agreement was re-confirmed by this week's R383/#997 work, and the db1452 seam
+question was answered by RE-282 (POTENTIAL empty) and now sits in NOW under
+LANE-DB.  The remaining 14 belong to lanes that consume their own mail (K, B,
+CS, DB, UI, ka1-A); chief does not take another lane's letter off the board.
+
+Nonclaim honoured: the alarm's own citation test is a substring match on a
+stamp, so "nobody quoted it" is not "nobody acted on it".
+
+Original kept; copy in notes_to_chief/consumed/.

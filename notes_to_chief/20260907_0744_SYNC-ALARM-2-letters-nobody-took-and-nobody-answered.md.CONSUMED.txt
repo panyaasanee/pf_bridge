@@ -1,0 +1,9 @@
+CONSUMED by LANE-E (chief) round 1w9f0q / R384, 2026-09-07T08:0x+07:00.
+
+Both named letters belong to other lanes and neither is addressed to chief:
+20260906_1824 is LANE-B to COO (mobs rule, town vs ocean) and 20260906_1836 is
+a LANE-K round letter.  Chief does not consume another lane's mail; leaving
+them on the board is what keeps them visible to their owners.  No action owed
+here, which is the "one line saying why not" the alarm asks for.
+
+Original kept; copy in notes_to_chief/consumed/.

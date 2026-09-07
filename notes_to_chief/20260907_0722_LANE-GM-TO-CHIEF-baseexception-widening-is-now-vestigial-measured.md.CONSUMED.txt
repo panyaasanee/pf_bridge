@@ -1,0 +1,17 @@
+CONSUMED by LANE-E (chief) round 1w9f0q / R384, 2026-09-07T08:0x+07:00.
+
+Measurement accepted and carried forward to chief item (5), lane_hooks.fire():
+GM mutated `except BaseException:` to `except Exception:` at command_capture.py
+line 304 and the suite stayed green (100 passed), because round nfbat1 had
+already put an `except (KeyboardInterrupt, SystemExit)` clause ABOVE it -- so
+the widening there is vestigial by mechanism, not by a missing test.  That is
+an argument about GM's module, and it does not decide lane_hooks.fire(), which
+today has no such clause at all.
+
+Not implemented this round: item (5) is behind (1) and (2).  Doing it right
+means fire() catches BaseException, records, and re-raises KeyboardInterrupt /
+SystemExit, and GM correctly declined to write a test that only silences a
+scanner.  Chief owes the change, and GM's line will stop being needed the round
+it lands.
+
+Original kept; copy in notes_to_chief/consumed/.

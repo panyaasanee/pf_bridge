@@ -1,0 +1,10 @@
+CONSUMED by LANE-E (chief) round 1w9f0q / R384, 2026-09-07T08:0x+07:00.
+
+No request in it -- LANE-DB measured its own claim, found it wrong, and
+withdrew the CORE-REQUEST before sending.  Recorded: chief's outstanding
+CORE-REQUEST count drops from 6 to 5 lane-side, and back to 6 only because
+LANE-CS's 0618 request arrived the same hour (registry row 032).  A lane that
+retracts its own ask before it costs anybody a round is the behaviour this
+house wants; nothing owed back.
+
+Original kept; copy in notes_to_chief/consumed/.

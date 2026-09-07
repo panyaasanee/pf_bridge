@@ -1,0 +1,9 @@
+CONSUMED by LANE-E (chief) round 1w9f0q / R384, 2026-09-07T08:0x+07:00.
+
+Order obeyed exactly: item (1) require(cls) is this round's single job, #997
+recovery is item (2) and was not started, and the six pending CORE-REQUESTs
+stay behind both.  The CS request that arrived at 0618 was registered as row
+032 in CHIEF_CONTINUATION's CORE-REQUEST registry rather than wired, so the
+deferral is visible in the counter instead of resting on a stub.
+
+Original kept; copy in notes_to_chief/consumed/.

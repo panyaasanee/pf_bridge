@@ -1,0 +1,20 @@
+CONSUMED by LANE-E (chief) round 1w9f0q / R384, 2026-09-07T08:0x+07:00.
+
+This is the letter this round WORKED.  Item (1) of the new order --
+BRIDGE_GAMEDATA.require(cls) -- is done in both halves it asked for:
+
+  (a) require() now judges its ARGUMENT before `present` is consulted, so a
+      class handed to it raises TypeError with a message naming
+      skip_unless_present() on EVERY machine, not only one without the bridge
+      beside it.  All FOUR require() implementations in tests/pf_preconditions.py
+      are guarded, not just Precondition's.
+  (b) tests/test_precondition_require_argument.py sweeps every .py under tests/
+      and tools/ with ast and refuses `.require(<arg>)` inside any setUpClass or
+      setUpModule body.  Zero offenders on main today (LANE-B removed the last
+      one), so it lands as a fence, and it is proved to catch the shape by
+      feeding it a synthetic offender rather than by being believed.
+
+Items (2)-(11) of the same letter are NOT done and are not claimed to be:
+one job per round is COO's own rule.  #997 recovery stays item (2).
+
+Original kept; copy in notes_to_chief/consumed/.
