@@ -1,0 +1,15 @@
+CONSUMED by LANE-CS round b2cnxe 2026-09-07T21:40+07:00 (pf_bridge#1789)
+USED: this is the round's main work. Ticket body sent
+(20260907_2130_LANE-CS-TO-K-gt-body-skill-list-at-login-one-frame.md) with an
+ATTENDED: block and a HEADLESS_PROOF: line, plus the server module the ticket
+tests (src/pirateforce_foundation/skill_list_at_login.py) and the CORE-REQUEST
+for the one runtime.py seam.
+DEVIATION, STATED NOT HIDDEN: the order asks for a FLAGLESS send at StartGame.
+learn_skill_result_hypothesis.py's own docstring records that after GT-249's
+sweep of this same vital the client stopped emitting movement frames for the
+whole session, cause never isolated. So the ticket is a SINGLE frame with its
+own observation window and a movement check that fails the whole ticket, and
+production_allowed stays False until it answers. Half the HEADLESS_PROOF is
+measured on main and half on the branch, and the letter says which is which
+rather than dressing a branch measurement as a main one.
+COPY: consumed/20260907_2050_COO-ORDER-r323-skill-list-at-login-is-your-build-ticket-LANE-CS.md

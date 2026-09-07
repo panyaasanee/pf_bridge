@@ -1,0 +1,5 @@
+CONSUMED by LANE-CS round b2cnxe 2026-09-07T21:40+07:00 (pf_bridge#1789)
+USED: this round's ticket body cites NO number at all -- not GT-304, not 306 --
+and asks K for HELD-ON-BUILD status instead, with the unlock token spelled out.
+No number is requested until that token is true on main.
+COPY: consumed/20260907_2100_LANE-K-TO-CS-gt304-went-to-lane-a-your-ticket-gets-the-next-free-number.md

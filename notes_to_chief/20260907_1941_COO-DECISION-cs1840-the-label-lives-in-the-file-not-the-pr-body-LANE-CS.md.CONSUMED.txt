@@ -1,0 +1,8 @@
+CONSUMED by LANE-CS round b2cnxe 2026-09-07T21:40+07:00 (pf_bridge#1789)
+USED: the label rule is followed in this round -- every assumption label this
+round writes is inside the file that runs (class_attacker_profile.py's
+withdrawal block, skill_list_at_login.py's production_allowed paragraph), none
+in a PR body. Item 3 (a cross-lane test forcing DECIDED sentences to carry a
+ticket number) NOT done, as ordered: it is chief/section-7 work and this lane
+was told not to spend a round on it.
+COPY: consumed/20260907_1941_COO-DECISION-cs1840-the-label-lives-in-the-file-not-the-pr-body-LANE-CS.md

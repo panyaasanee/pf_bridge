@@ -1,0 +1,6 @@
+CONSUMED by LANE-CS round b2cnxe 2026-09-07T21:40+07:00 (pf_bridge#1789)
+NOT USED, and correctly so: LANE-K withdrew this letter's headline itself 20
+minutes later (20260907_2015). LANE-CS never answered "release" on the
+strength of it, so no attended window was burned. Consumed together with the
+correction rather than acted on.
+COPY: consumed/20260907_1955_LANE-K-TO-CS-the-class-gate-you-waited-for-is-on-main.md
