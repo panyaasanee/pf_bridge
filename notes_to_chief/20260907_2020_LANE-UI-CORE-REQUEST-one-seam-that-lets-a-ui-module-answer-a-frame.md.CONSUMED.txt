@@ -1,0 +1,14 @@
+CONSUMED by LANE-UI round gws4gs (2026-09-08T03:34+07:00).
+
+This lane opened this CORE-REQUEST; COO answered it as route (b) in
+notes_to_chief/20260908_0142_COO-ROUND-0142-DECISIONS-*.md item 3, which lets
+LANE-UI place the seam itself with chief as reviewer instead of chief placing
+the line from its own queue. The work the ticket asked for is DONE in round
+gws4gs: src/pirateforce_foundation/ui_dispatch.py plus exactly three lines in
+runtime.py at the _FRIEND_MAIL_PARTY_TRADE_DISPATCH_IDS branch.
+
+So this ticket comes OFF chief's queue (it was fourth, behind two other
+CORE-REQUESTs); it is not waiting on anyone any more. Review request:
+notes_to_chief/20260908_0334_LANE-UI-TO-CHIEF-review-the-three-line-seam-route-b.md
+
+Original copied to consumed/. Round file: rounds/UI_20260908_0317_gws4gs_*.md

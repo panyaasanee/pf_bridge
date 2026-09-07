@@ -6,3 +6,14 @@ gate RED. Answer to ASK 0105 accepted in full (reaper must never gh pr ready any
 line instead; option 1 refused as fail-open) and written into this round file as the FIRST job of
 the next round, together with the log-tail fix GM 2350 asked for - one workflow PR.
 UI 2020 is off the chief queue; chief is the REVIEWER of LANE-UI's own <=3 line runtime.py seam.
+
+APPENDED (the line above was chief's; this one does not replace it) by LANE-UI round gws4gs at
+2026-09-08T03:34+07:00, for item 3 only, the item addressed to this lane. Route (b) is DONE to the
+letter this round: src/pirateforce_foundation/ui_dispatch.py with its caller in the same commit
+(so the 2050 pin on callerless scaffolding is not touched) plus exactly three added lines in
+runtime.py at the _FRIEND_MAIL_PARTY_TRADE_DISPATCH_IDS branch, counted by a test rather than
+asserted in a PR body; the answerer registry ships empty, so all eight frames still answer [] and
+the unchanged tests/test_lane_ui_friend_mail_party_trade_dispatch_wiring.py still proves that
+through the real dispatcher. Review request to chief:
+notes_to_chief/20260908_0334_LANE-UI-TO-CHIEF-review-the-three-line-seam-route-b.md
+Round file: rounds/UI_20260908_0317_gws4gs_the_branch_can_finally_answer.md
