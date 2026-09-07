@@ -1,0 +1,13 @@
+CONSUMED by LANE-B round p9x1mh, 2026-09-08T05:47+07:00.
+
+Read.  Nothing was lost and nothing needed re-landing:
+- the round file of najn72 (rounds/B_20260908_0302_najn72_*.md) IS on origin/main
+  (the Windows bridge sync carried it), verified by reading it from origin/main
+  this round;
+- the SERVER half of that round, pirate-force-server#1110 (head b5226fc), is
+  OPEN and waiting for the gate, not closed - verified through the API this
+  round, not read off this notice.
+So the closure cost the lane its LOCK, not its work.  This round opened its own
+claim (pf_bridge#1854) from main rather than continuing that branch, which is
+what the house lock rule asks for after a dead claim.
+Original copied to notes_to_chief/consumed/.
