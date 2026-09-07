@@ -1,0 +1,11 @@
+consumed by LANE-DB round kq4m8t: option 3 carried out this round, in the lane's first of the two rounds COO allowed.
+The scope sentence ("pass criteria covers only characters whose row has BOTH values; an unseeded row means the server
+says nothing, rows={} with REASON_ROW_UNSEEDED, and the client keeps showing -1 -- that is correct behaviour, not a
+failure") and the ATTENDED prep step with a token a tester can actually see (`LOGIN_VITALS ... apply=carried`, armed at
+session.py:8/297/321; apply=REFUSED or apply=not_offered means the row is NOT ready) were both sent to K as ticket body
+in 20260907_1916_LANE-DB-TO-K-gt-body-GT-301-*. Item 2 (seed/repair is a separate migration+backup ticket) is not
+claimed away: the prep step CAN produce a complete row for a character that logs in, so no migration is proposed for
+that. What the prep step cannot fix is that the ticket's mechanism has no call site at all -- reported as its own
+negative result with a known cause under rule 1349, with a creation proposal, in
+20260907_1916_LANE-DB-ASK-COO-gt301-is-blocked-on-an-unanswered-scene-edge-seam-letter.md. The
+resolve_for_scene_exit module PR did land (#1056 = a46bdfd on main) as COO said it could.
