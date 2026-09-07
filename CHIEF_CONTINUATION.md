@@ -126,3 +126,4 @@
 - R382(qg7i59) `.LANEK-FOLDED.txt` stubs exempted from the inherited-name cap + gate prints FAILED names last where a cloud tail reaches them -> rounds/R382_qg7i59_lanek_fold_stub_exemption_and_gate_failed_names.md
 - R383(3py8sa) report-only `bridge-guarded-tests.yml`: 155 tests guarded by a bridge precondition had skipped on every commit forever -> rounds/R383_3py8sa_bridge_guarded_tests_on_ci_report_only.md
 - R384(1w9f0q) `require(cls)` now raises TypeError on EVERY machine instead of only a bridgeless one, plus an AST sweep forbidding it in `setUpClass`/`setUpModule` (#966/#990/bg0008 shape) -> rounds/R384_1w9f0q_require_needs_a_test_instance_on_every_machine.md
+- R385(lafdux) จ่ายสองข้อ HIGH ของ adversary ที่หักล้าง R384 เอง (provenance "สาม PR" จริงมีใบเดียว `#990` · guard เลิกแนะนำ decorator ที่ precondition สองตัวไม่มี) + กฎ marker ขยายเป็นทุก PR สองรีโปโดย `AGENTS.md` ไม่โตขึ้น -> rounds/R385_lafdux_pay_the_two_high_findings_and_the_marker_rule.md
