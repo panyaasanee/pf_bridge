@@ -119,8 +119,8 @@
 - `pytest tests/test_ui_stall_wire.py -q` = **30 passed, 147 subtests passed**
 - `pytest tests/test_ui_wire_name_census.py tests/test_ui_stall_wire.py -q` = **109 passed, 174 subtests**
 - ชุดเต็ม `pytest tests/` บนต้นไม้ที่ `git merge origin/main` แล้ว (`Already up to date`) =
-  **13378 passed, 390 skipped, 37164 subtests passed** (638 s) · รันซ้ำบนหัวสุดท้าย `9566020` หลังแก้
-  docstring เลขแถว — ผลรอบที่สองเขียนใน PR `#1038`
+  **13378 passed, 390 skipped, 37164 subtests passed** (638 s) · รันซ้ำทั้งชุดบนหัวสุดท้าย `9566020`
+  หลังแก้ docstring เลขแถว = **13378 passed, 390 skipped, 37164 subtests passed** (610 s) ตัวเลขเดียวกัน
 - `TWO_SESSIONS_SAME_SCENE:` ไม่เกี่ยว — รอบนี้ไม่แตะโลก/registry/ฉาก ไม่มี state ต่อ process
   โมดูลเป็นฟังก์ชันบริสุทธิ์ ไม่มีตัวแปรระดับโมดูลที่เขียนได้ ไม่มี I/O
 
