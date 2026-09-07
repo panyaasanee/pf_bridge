@@ -21,11 +21,35 @@ Round ek1gk9 fixed the three findings COO ordered first (NOW.md 0845):
   D2  hdr-newer needs THIS ticket's own terminal decision, dated next to that
       decision -- an ordinary clerk touch no longer buys immunity.
   D12 --strict exits 2 when rows still need a clerk.
+!! THE D1 RULE IS ITSELF WRONG ON ~1 IN 4 HEADERS (pf-adversary, round ek1gk9,
+re-measured by LANE-K) !!  "The house writes the live verdict first" is not a
+convention the queue files are linted against, it is a guess about their prose,
+and it lands on the wrong word for roughly 154 of 548 header lines:
+  - 37 headers put the first status word inside ~~strikethrough~~, i.e. on the
+    one verdict the house explicitly RETRACTED.  header_agrees() therefore still
+    has a false-GREEN path: a RESULT carrying a struck-out status is reported as
+    "agrees" and the row is suppressed.  This is D1's own disease, not removed.
+  - 102 headers take their status from the archival boilerplate
+    "-- archived <date> (closed; verbatim in archive/...)", where "closed" is
+    filesystem bookkeeping, not a verdict.  Those all count as TERMINAL, so one
+    clerk edit that dates such a stub with yyyy-mm-dd re-opens D2 through D1.
+  - 19 take it from English prose or a filename in the title ("does the window
+    finally open", "...M1P-RESULT-PASS-*.md").
+  - the boundary rule lets "-" pass on the right, so PASS-PARTIAL and
+    PASS-PERSISTENT-SURVIVAL now read as plain PASS.  That WIDENS D9 and is a
+    regression this round introduced.
+The two rows this fix first reported (GT-204, GT-218) were both FALSE ALARMS,
+re-measured: GT-218's header and letter agree (CLOSED wrapping FAIL), and
+GT-204 was cancelled after its letter but carries no yyyy-mm-dd date at all, so
+hdr-newer is structurally unable to fire for it or for 23 other headers.
+The real fix is a machine-readable status field the queues are linted against,
+not a better guess at prose.  Until then treat every "agrees" as unproven.
+
 Not fixed, so a clean run still does NOT mean the queue is true: D3 (a round
 token in a header does not prove that letter was read), D4 (a twin in
 consumed/ wins on an equal stamp), D9 (a two-layer status is reported by its
 positive half), D10 (a malformed RESULT: line is dropped with no counter).
-🔴 Never wire this into a gate (COO 0845 item 1).  Letters with no RESULT: line
+!! Never wire this into a gate (COO 0845 item 1).  Letters with no RESULT: line
 are invisible here -- tools_bridge/pf_re_queue_taglint.py is the second source
 and today sees 18 rows this tool cannot.  Findings and the full fix order:
 notes_to_chief/20260907_0900_LANE-K-ADVERSARY-okh8oz-index-not-trustworthy-yet.md
@@ -310,10 +334,13 @@ def build_report(results, headers, show_all=False):
         lines.append("%-8s %-18s %-9s %s" % (key, _norm(status)[:18], verdict, letter[:34]))
     lines.append("-" * 78)
     lines.append("results indexed: %d   rows needing a clerk: %d" % (len(results), diverging))
-    lines.append("WARNING: D1/D2 fixed (round ek1gk9): agreement now reads the header's"
-                 " CURRENT status and hdr-newer needs this ticket's own terminal decision."
-                 " D3/D4/D9/D10 are NOT fixed, so this count is still a floor, not proof"
-                 " (see LANE-K letter 20260907_0900). Never use as a gate.")
+    lines.append("WARNING: the D1 rule ('first status word = current status') is itself"
+                 " wrong on about 154 of 548 headers -- 37 land inside a ~~struck-out~~"
+                 " verdict, so 'agrees' can still go GREEN on a status the house retracted."
+                 " D2's narrowing holds; D3/D4/D9/D10 are not fixed and D9 was WIDENED by"
+                 " this round's boundary change (PASS-PARTIAL now reads as PASS).")
+    lines.append("WARNING: this count is a floor, not proof, and every 'agrees' is unproven"
+                 " (LANE-K letters 20260907_0900 and 20260907_0950). Never use as a gate.")
     lines.append("SECOND SOURCE: tools_bridge/pf_re_queue_taglint.py reads letters with no"
                  " RESULT: line and sees rows this tool cannot. Run both; neither alone is"
                  " the queue's truth.")
