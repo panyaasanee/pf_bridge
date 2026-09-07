@@ -53,8 +53,10 @@ Exactly four things are compared, and each has its own line prefix:
 ``XCHECK WIDTH``     same tag on both sides, different payload width.  Only
                      compared when BOTH sides are known: the table's ``len``
                      column is a plain integer AND the emission came from a
-                     fixed-width primitive.  ``N/A``, ``0``, ``4+N_bytes``
-                     and a variable-width helper are silent, not agreeing.
+                     fixed-width primitive.  ``4+N_bytes`` (every string
+                     row) and a variable-width helper are silent, not
+                     agreeing.  ``N/A`` and ``0`` sit only on rows
+                     ``is_real_tag`` already dropped, so they never arrive.
 
 Any of the four exits non-zero with one greppable line per finding naming
 module, function, message, direction and position.
@@ -100,11 +102,24 @@ NON-CLAIMS (read before believing an exit code)
    table's own claim, not a fresh measurement by this tool.
 5. Only MODULE-LOCAL helpers are expanded.  A call into a helper defined in
    another module is invisible: it contributes no emission and raises no
-   ``OPAQUE-BODY``.  No encoder on today's tree does that -- which is why the
-   151 checked functions still agree -- but this is a hole, not a proof, and
-   the next lane round owns closing it.
-6. ``--self-test`` measures this tool against mutants of a real module.  It
-   says nothing about whether the table is right.
+   ``OPAQUE-BODY``.  This is common, not hypothetical -- 78 of the 151
+   compared functions call ``require_exhausted``, which lives in
+   ``ui_social_wire.py``, and the tool assumes every such call writes nothing.
+   ``require_exhausted`` happens to write nothing; the tool cannot know that,
+   and it would make the same assumption about a helper that writes a field.
+   A hole, not a proof.
+6. The comparison is over the tag COLUMN.  Two fields that carry the same tag
+   byte can swap places with nothing to see: ``StallOpenVital`` W really does
+   have three ``0x0F`` rows.  ``--self-test``'s reorder mutant does not cover
+   that shape.
+7. There is no notion of reachability.  A field written under ``if False:`` or
+   under a runtime flag is credited as emitted.
+8. ``is_real_tag`` keeps 3191 of the table's 6931 data rows.  A PASS is
+   agreement with the rows this tool deems wire-bearing, not with the table.
+9. ``--self-test`` measures this tool against mutants of a real module.  It
+   says nothing about whether the table is right, and every mutant in the
+   bank is by construction a shape this tool can already express -- so
+   ``SELFTEST PASS`` is not evidence about the shapes listed in 5-7.
 """
 
 from __future__ import annotations
@@ -156,6 +171,55 @@ REAL_TAG_RE = re.compile(r"^0x[0-9A-Fa-f]{2}$")
 # per line WITH the reason it is here and who owns it.  A ``ui_*`` module of
 # this lane's own must never appear in this list.
 ALLOWLIST: dict[str, str] = {}
+
+# Per-module count of functions this tool actually COMPARED, measured on
+# 2026-09-07 (round ``0bzq9y``).  Regenerate with ``--emit-pin``.
+#
+# WHY THIS EXISTS: without it the tool has three outcomes and only one of them
+# is visible.  A finding is red.  An ``UNRESOLVED`` is green-and-printed.  A
+# function that silently leaves the tool's universe -- ``def`` turned
+# ``async def``, a module renamed off ``*_wire.py``, an annotation added to a
+# tag constant -- was green and printed NOWHERE, and ``XCHECK PASS -- every
+# resolved function agrees with the table`` was still the last line.  Deleting
+# one character from the module glob took the compared set to zero and printed
+# a PASS.  This pin makes "this tool now understands LESS of the tree than it
+# did" a red, per module, so the line names who lost what.
+#
+# A DELIBERATE drop (a module removed, a function renamed on purpose) is closed
+# by regenerating the pin in the same commit that earns it -- not by deleting
+# the pin.
+COVERAGE_PIN: dict[str, int] = {
+    "src/pirateforce_foundation/actor_wire.py": 0,
+    "src/pirateforce_foundation/gm/activity_cheat_code_wire.py": 0,
+    "src/pirateforce_foundation/gm/attr_wire.py": 0,
+    "src/pirateforce_foundation/gm/cheat_wire.py": 0,
+    "src/pirateforce_foundation/gm/command_wire.py": 0,
+    "src/pirateforce_foundation/gm/forbid_to_talk_wire.py": 0,
+    "src/pirateforce_foundation/gm/say_wire.py": 0,
+    "src/pirateforce_foundation/gm/speed_wire.py": 0,
+    "src/pirateforce_foundation/gm/state_wire.py": 0,
+    "src/pirateforce_foundation/gm/teleport_wire.py": 0,
+    "src/pirateforce_foundation/npc_wire.py": 0,
+    "src/pirateforce_foundation/player_wire.py": 0,
+    "src/pirateforce_foundation/ui_activity_wire.py": 14,
+    "src/pirateforce_foundation/ui_buildingcrystal_wire.py": 20,
+    "src/pirateforce_foundation/ui_channel_wire.py": 9,
+    "src/pirateforce_foundation/ui_collectionobj_wire.py": 8,
+    "src/pirateforce_foundation/ui_community_social_wire.py": 32,
+    "src/pirateforce_foundation/ui_dyeing_appraisal_relive_wire.py": 6,
+    "src/pirateforce_foundation/ui_express_wire.py": 6,
+    "src/pirateforce_foundation/ui_friend_wire.py": 4,
+    "src/pirateforce_foundation/ui_gathering_wire.py": 4,
+    "src/pirateforce_foundation/ui_mail_wire.py": 6,
+    "src/pirateforce_foundation/ui_party_wire.py": 4,
+    "src/pirateforce_foundation/ui_pets_wire.py": 20,
+    "src/pirateforce_foundation/ui_social_wire.py": 0,
+    "src/pirateforce_foundation/ui_stall_wire.py": 6,
+    "src/pirateforce_foundation/ui_tracepath_wire.py": 0,
+    "src/pirateforce_foundation/ui_trade_wire.py": 2,
+    "src/pirateforce_foundation/ui_treasurehunt_wire.py": 4,
+    "src/pirateforce_foundation/ui_winemaking_wire.py": 6,
+}
 
 
 def is_real_tag(tag: str) -> bool:
@@ -267,15 +331,22 @@ class Emission:
 def const_ints(tree: ast.Module) -> dict[str, int]:
     out: dict[str, int] = {}
     for node in tree.body:
-        if not isinstance(node, ast.Assign):
+        # ``_TAG_U32 = 0x14`` and ``_TAG_U32: int = 0x14`` are the same
+        # constant.  Reading only the first shape meant one added annotation
+        # dropped every field of six functions with the run still green.
+        if isinstance(node, ast.AnnAssign):
+            targets = [node.target]
+            value = node.value
+        elif isinstance(node, ast.Assign):
+            targets = node.targets
+            value = node.value
+        else:
             continue
-        if not isinstance(node.value, ast.Constant) or not isinstance(
-            node.value.value, int
-        ):
+        if not isinstance(value, ast.Constant) or not isinstance(value.value, int):
             continue
-        for target in node.targets:
+        for target in targets:
             if isinstance(target, ast.Name):
-                out[target.id] = node.value.value
+                out[target.id] = value.value
     return out
 
 
@@ -426,11 +497,13 @@ def check_module(
     tree = ast.parse(path.read_text(encoding="utf-8", errors="replace"), str(path))
     consts = const_ints(tree)
     locals_by_name = {
-        node.name: node for node in tree.body if isinstance(node, ast.FunctionDef)
+        node.name: node
+        for node in tree.body
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
     }
 
     for node in tree.body:
-        if not isinstance(node, ast.FunctionDef):
+        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
             continue
         if not (node.name.startswith("encode_") or node.name.startswith("decode_")):
             continue
@@ -480,8 +553,17 @@ def check_module(
         for index in range(max(len(rows), len(actual))):
             want = rows[index].tag if index < len(rows) else None
             got = actual[index].tag if index < len(actual) else None
-            if got is not None:
-                got = TAG_ALIASES.get(got, got)
+            if got is not None and index < len(actual):
+                # The alias translates the SHAPE the table spells into the byte
+                # the shipped string helper writes.  Applied blindly it also
+                # runs backwards: ``u8tag(0x48, x)`` -- one tagged byte -- would
+                # be rewritten into ``UNTAGGED_WSTRING16LE_LEN32LE`` and match a
+                # length-prefixed UTF-16LE row, with the width check silent
+                # because that row's ``len`` is ``4+N_bytes``.  A fixed-width
+                # primitive has a known width; a string helper does not.  Only
+                # the second may be aliased.
+                if actual[index].width is None:
+                    got = TAG_ALIASES.get(got, got)
             if want == got:
                 # Same tag, different payload width.  ``Row.length`` is the
                 # table's ``len`` column; ``Emission.width`` is known only for
@@ -558,6 +640,7 @@ MUTANTS = (
     "add-field",
     "opaque-helper",
     "narrow-width",
+    "alias-launder",
 )
 
 OPAQUE_HELPER_NAME = "_pfxc_selftest_opaque"
@@ -746,6 +829,19 @@ def _mutate(subject: Subject, kind: str) -> ast.Module | None:
             node.func.attr = swapped[name]
         else:
             node.func.id = swapped[name]
+    elif kind == "alias-launder":
+        # The one mutant that produced a byte-identical PASS after D1/D2/D3:
+        # a length-prefixed UTF-16LE string rewritten as the single tagged
+        # byte TAG_ALIASES translates, with the width check silent because
+        # that row's ``len`` is ``4+N_bytes``.
+        call = _first_string_primitive_call(func)
+        if call is None:
+            return None
+        if isinstance(call.func, ast.Attribute):
+            call.func.attr = "u8tag"
+        else:
+            call.func.id = "u8tag"
+        call.args.insert(0, ast.Constant(value=0x48))
     elif kind == "opaque-helper":
         helper = ast.parse(
             "def %s(buf, offset):\n"
@@ -761,6 +857,15 @@ def _mutate(subject: Subject, kind: str) -> ast.Module | None:
     else:  # pragma: no cover - guarded by MUTANTS
         raise ValueError(kind)
     return ast.fix_missing_locations(tree)
+
+
+def _first_string_primitive_call(func: ast.FunctionDef) -> ast.Call | None:
+    for node in ast.walk(func):
+        if isinstance(node, ast.Call):
+            _q, attr = called_name(node)
+            if attr in WSTRING_PRIMITIVES:
+                return node
+    return None
 
 
 def _first_primitive_call(
@@ -810,10 +915,17 @@ def run_self_test(
     shared = sorted(set.intersection(*[set(_traits(s)) for s in subjects]))
     if shared:
         print(
-            "SELFTEST NARROW -- every subject shares: %s.  This is a property "
-            "of the tree, not a choice: no other module offers a function "
-            "that already agrees with the table and has 3+ tagged fields."
-            % ", ".join(shared)
+            "SELFTEST NARROW -- every subject shares: %s." % ", ".join(shared)
+        )
+        print(
+            "SELFTEST NARROW-CAUSE -- this is THIS BANK'S filter, not a "
+            "property of the tree.  The reorder mutant swaps two top-level "
+            "statements, so a subject needs two of them emitting different "
+            "tags; every decoder on the tree does all its reads inside one "
+            "statement and is rejected here, which is why no decoder and "
+            "nothing under gm/ is ever mutated.  A statement-granularity "
+            "reorder is the wrong strategy for that shape and replacing it is "
+            "the first job of the next round of this lane."
         )
 
     survivors: list[str] = []
@@ -895,6 +1007,13 @@ def _mutant_caught(
                 % (checked, subject.baseline_checked - 1)
             )
         return True, ""
+    if kind == "alias-launder":
+        if not findings:
+            return False, (
+                "a tagged byte was accepted as a length-prefixed string -- "
+                "TAG_ALIASES ran backwards"
+            )
+        return True, ""
     if kind == "narrow-width":
         if not any(line.startswith("XCHECK WIDTH") for line in findings):
             return False, "no XCHECK WIDTH line"
@@ -925,6 +1044,11 @@ def main(argv: list[str]) -> int:
         help="path to the pirate-force-server checkout (default: sibling dir)",
     )
     parser.add_argument(
+        "--emit-pin",
+        action="store_true",
+        help="print a fresh COVERAGE_PIN literal for this tree and exit",
+    )
+    parser.add_argument(
         "--self-test",
         action="store_true",
         help=(
@@ -944,6 +1068,16 @@ def main(argv: list[str]) -> int:
         return 0
     server = find_server(args.repo)
     if server is None:
+        if args.self_test:
+            # A self-test that cannot obtain a subject has measured NOTHING.
+            # Reporting that as success is the exact failure the mode exists to
+            # stop, and a bridge-only checkout is the shape this tool says it
+            # expects, so this is the common case, not the corner.
+            print(
+                "SELFTEST FAIL -- no pirate-force-server checkout to build "
+                "mutants from; zero mutants ran, which is not a pass"
+            )
+            return 1
         print(
             "SKIP -- no pirate-force-server checkout beside this repository; "
             "this tool is advisory and blocks nobody"
@@ -964,17 +1098,51 @@ def main(argv: list[str]) -> int:
     all_unresolved: list[str] = []
     allowlisted: list[str] = []
     checked = 0
+    per_module: dict[str, int] = {}
     for path in modules:
         rel = str(path.relative_to(server)).replace("\\", "/")
         findings, unresolved, count = check_module(
             path, rel, table, present, message_names
         )
         checked += count
+        per_module[rel] = count
         all_unresolved.extend(unresolved)
         if findings and rel in ALLOWLIST:
             allowlisted.extend(findings)
             continue
         all_findings.extend(findings)
+
+    if args.emit_pin:
+        print("COVERAGE_PIN: dict[str, int] = {")
+        for rel in sorted(per_module):
+            print('    "%s": %d,' % (rel, per_module[rel]))
+        print("}")
+        return 0
+
+    regressed = []
+    for rel in sorted(COVERAGE_PIN):
+        was = COVERAGE_PIN[rel]
+        now = per_module.get(rel)
+        if now is None:
+            regressed.append(
+                "XCHECK COVERAGE-LOST %s -- pinned at %d compared function(s), "
+                "the module is not in the run at all now (renamed off "
+                "*_wire.py, moved, or deleted)" % (rel, was)
+            )
+        elif now < was:
+            regressed.append(
+                "XCHECK COVERAGE-DROP %s -- pinned at %d compared function(s), "
+                "now %d; this tool understands less of this module than it did"
+                % (rel, was, now)
+            )
+    for rel in sorted(set(per_module) - set(COVERAGE_PIN)):
+        print(
+            "XCHECK UNPINNED %s -- %d compared function(s), not in COVERAGE_PIN "
+            "(informational; regenerate the pin with --emit-pin)"
+            % (rel, per_module[rel])
+        )
+    for line in regressed:
+        print(line)
 
     for line in all_findings:
         print(line)
@@ -1001,7 +1169,20 @@ def main(argv: list[str]) -> int:
         print("XCHECK FAIL -- see the lines above; each is the debt of the lane "
               "that owns the module named in it")
         return 1
-    print("XCHECK PASS -- every resolved function agrees with the table")
+    if regressed:
+        print(
+            "XCHECK FAIL -- no field disagreement, but coverage went backwards "
+            "in %d module(s) above. A deliberate drop is closed by regenerating "
+            "COVERAGE_PIN (--emit-pin) in the commit that earns it."
+            % len(regressed)
+        )
+        return 1
+    print(
+        "XCHECK PASS -- every COMPARED function agrees with the table and no "
+        "pinned module lost coverage; %d function(s) were not compared at all "
+        "(--show-unresolved names them): unresolved is not agreement."
+        % len(all_unresolved)
+    )
     return 0
 
 
