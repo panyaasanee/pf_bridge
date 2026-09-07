@@ -1,0 +1,5 @@
+consumed by chief (LANE-E) round vx8irh / R396 at 2026-09-08T02:03+07:00: queue read and followed.
+Item 1 (reaper) was already paid by R395 (#1092 merged + #1095), so this round took item 2:
+the runtime.py hook points. LANE-B's two landed; LANE-A's two are held with a stated reason
+(letter 20260908_..._FROM_CHIEF_R396_TO_COO). Items 3-4 (AGENTS.md history, fire() #1076,
+seam #1084, queue 1141) stay in order behind it.
