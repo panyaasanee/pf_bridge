@@ -86,8 +86,12 @@ ACTION /staged    LANE_GM_CHAT_STAGED_READBACK_LOCAL_TALK_NOTICE  len(pc)=56 len
 ## §4 หลักฐาน
 - มิวแทนต์ **6 ตัว รัน 6 ตาย** (สลับ pc/frame · delay 3.0 · `WARP DONE!!!` ·
   `notice=True` ตายตัว · เติมป้ายเข้า `runtime.py` · docstring กลับเป็น "Two") · control เขียว
-- ชุดเต็ม `pytest tests/` บนต้นไม้สุดท้ายจริง: **ดู `SCOREBOARD` ท้ายไฟล์**
-- `pf_gate_preflight.py --repo <server>`: ดูท้ายไฟล์
+- ชุดเต็ม `pytest tests/` บนต้นไม้สุดท้ายจริงที่ push (`3bd44ae` · `git merge origin/main`
+  = already up to date ⇒ หัวกิ่งคือต้นไม้ที่รัน):
+  **`14498 passed, 446 skipped, 0 failed`** (42,192 subtests · 718 วินาที)
+  · 446 skip เท่ากับที่ main มีอยู่แล้ว (เกต `[skips]` ของ preflight ยืนยันว่า **ไม่มี skip ใหม่**)
+- `pf_gate_preflight.py --repo <server>`: **PREFLIGHT PASS** (รวม `[modebits] PASS` ·
+  `[consumedstub] PASS` · `[filenamelen] PASS` · `[claudecfg] PASS` · main อยู่ในกิ่งแล้ว)
 - **ไม่เพิ่มไฟล์เทสใหม่** (ต่อท้ายสองไฟล์ที่มีอยู่) · **ไม่เพิ่ม/ย้าย/ลบ skip** ·
   ไม่แตะ canonical DB · ไม่แตะ `runtime.py`/`app.py`/v141 (อ่านเป็นข้อความอย่างเดียว) ·
   ไม่แตะเขตสาย A/B · ไม่แตะ `tools_bridge/` · ไม่แตะ `.claude/`
@@ -116,10 +120,11 @@ ACTION /staged    LANE_GM_CHAT_STAGED_READBACK_LOCAL_TALK_NOTICE  len(pc)=56 len
 ไม่แตะ registry ที่แชร์ ไม่แตะ roster/HP/ศพ/ของตก
 
 ## §5 สถานะ PR ตามจริง (ห้ามเขียนว่าเสร็จ/landed)
-- **`pirate-force-server`** ใบของรอบนี้ — เปิดแล้ว ไม่ draft · `PF-AUTOMERGE: v4` ในบอดี้
-  ตั้งแต่เปิด · **ยังไม่ยืนยันว่าอยู่บน main**
+- **`pirate-force-server#1118`** ใบของรอบนี้ — **เปิดแล้ว ไม่ draft · รอ gate** ·
+  `PF-AUTOMERGE: v4` เป็นบรรทัดแรกของบอดี้ตั้งแต่เปิด และ **GET ยืนยันแล้วว่า marker อยู่จริง**
+  · หัวกิ่ง `3bd44ae` · ตัดจาก `origin/main` `7a064e7` · **ยังไม่ยืนยันว่าอยู่บน main**
 - **`pf_bridge#1863`** — claim ของรอบนี้ เติม marker ตอนจบ = ปลดล็อก
-- **`ADVERSARY_PENDING`** — สั่ง `pf-adversary` บนกิ่ง `claude/zealous-hawking-2rk98y`
+- **`ADVERSARY_PENDING pirate-force-server#1118`** — สั่ง `pf-adversary` บนกิ่ง `claude/zealous-hawking-2rk98y`
   ต้นรอบ (เรียก 1 ครั้งจากเพดาน 2) · **ไม่มีประโยคไหนในไฟล์นี้เขียนว่า "ผ่าน adversary"**
   · ผลคืนหลังปลดล็อก = รอบถัดไปหยิบเป็นงานแรก
 
@@ -133,3 +138,5 @@ ACTION /staged    LANE_GM_CHAT_STAGED_READBACK_LOCAL_TALK_NOTICE  len(pc)=56 len
 5. **ตอบ K เรื่อง `RE-302`** (ค้างหลายรอบ) + เสนอ chief เรื่อง `docs/FUNCTIONAL_COVERAGE.json`
    ที่ไม่มีแถวของคำสั่ง GM ใหม่เลย
 6. **ยังไม่ทำและยังไม่มีใครขอ**: `staged` ของบัญชีอื่น · `warp <ชื่อ> #<n>` (ชื่อซ้ำ)
+
+SCOREBOARD: COMING | คำสั่ง `/warp <ฉาก>` ข้ามฉากของ GM บอกบนคอนโซลแล้วว่า **ประโยคบนจอออกไปหรือไม่** (`notice=sent|none`) ผู้ปฏิบัติงานไม่ต้องเดาจาก "บรรทัดที่หายไปหนึ่งบรรทัด" อีก และไบต์ที่ส่งจริงมีตาเฝ้าแล้ว: มิวแทนต์สลับ pc/frame (GM ไม่เห็นอะไรแต่คอนโซลบอกว่าส่งแล้ว) · หน่วง 3 วินาทีทั้งคอนเนกชัน · ประโยค `WARP DONE!!!` ที่อ้างว่าย้ายตัวละครทั้งที่ไม่ย้าย — สามตัวนี้เคยรอดทั้งชุด ตอนนี้ตายหมด · และวัด `HEADLESS_PROOF:` ของวงจร `/warp` → `STAGED RELOG` → `/staged` → `SCENE 000278` ได้เป็นครั้งแรกบน main จริง จึงออกใบ attended ที่จะให้คนดูจอยืนยันได้ (ไม่ใช่หลักฐานว่า M2 ผ่าน) | `pirate-force-server#1118` (เปิดแล้ว รอ gate) + `pf_bridge#1863` + ชุดเต็ม `14498 passed, 446 skipped, 0 failed` + PREFLIGHT PASS + มิวแทนต์ 6 ตัว ตาย 6 + `HEADLESS_PROOF:` บน `origin/main` `7a064e7` + เนื้อใบ attended `20260908_0552_LANE-GM-TO-K-gt-body-*` + `ADVERSARY_PENDING pirate-force-server#1118`
