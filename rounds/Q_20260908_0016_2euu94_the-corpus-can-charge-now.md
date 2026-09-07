@@ -61,7 +61,8 @@ LANE-DB ส่ง `store.spend_typed_attribute` ขึ้น main แล้ว (
 - **ชั้น store จริงบนดิสก์** (`SignedStatReachesARealRowTests`): `SQLiteStore` จริง migrate จริง สร้างตัวละครจริง `cash`=1000 → `AddCash(-250)` → **อ่านกลับจาก store** ได้ 750 · `AddCash(500)` → 1500 · `AddCash(-4000)` → คงที่ 1000 + `refused=balance_does_not_cover_it` · ตัวละครที่ไม่เคยเขียน `cash` → `refused=balance_was_never_measured` ไม่ใช่ "จ่ายไม่ไหว"
 - **ชั้น double ที่บันทึกเครื่องหมาย** (คนละทางเดิน): `_RecordingPayoutStore` บันทึก `+n` สำหรับบวก `-n` สำหรับหัก ⇒ closure ที่ส่งการหักลงประตูบวกจะบันทึก `+n` ที่เทสไม่ต้องการ — เลขคณิตที่ดูถูกก็ซ่อนไม่ได้
 - **มิวแทนต์** (ไม่ใช่คำอ้างว่า "เทสจับได้"): คืนเพดานเป็น `u32` ⇒ เทสแดง **2 ใบ** · ถอดกฎสองประตู ⇒ แดง **1 ใบ** · คืนของเดิมแล้วเขียวหมด
-- `python3 tools_bridge/pf_gate_preflight.py --repo <server>` = **PREFLIGHT PASS**
+- **ชุดเต็ม `pytest tests/` บนต้นไม้ที่ merge `origin/main` แล้ว เป็นคอมมิตสุดท้ายจริง**: **13,960 passed · 432 skipped · 0 failed** (11:01 น.) — รันครั้งเดียวต่อรอบตามกฎ
+- `python3 tools_bridge/pf_gate_preflight.py --repo <server>` = **PREFLIGHT PASS** (รวม `--pr-body ... --pr-stage final` = marker บรรทัดเดียว)
 - diff ที่ push = **ASCII ล้วน** (นับบรรทัดที่เติมด้วยสคริปต์ = 0 บรรทัดมีอักขระนอกช่วง ไม่ใช่ตรวจด้วยสายตา)
 - `pf-adversary` **สั่งต้นรอบตามกฎ** (ไม่ใช่ก่อน commit) · ผลคืนกลางรอบ · **NOT clean — 6 ข้อ ทั้งหมดเป็นความผิดของรอบนี้เอง** และแก้ครบทั้ง 6 ในรอบเดียวกัน
 
@@ -79,7 +80,7 @@ LANE-DB ส่ง `store.spend_typed_attribute` ขึ้น main แล้ว (
 **ไม่เกี่ยว** — `cash`/`experience`/`skill_points` เป็น state ต่อตัวละครในแถว DB · ไม่แตะ registry ของฉาก ไม่แตะ roster/HP/ศพ/ของตกพื้น ไม่มีการวาดฉากใหม่ · สองเซสชันในฉากเดียวกันไม่เห็นผลของกันและกันจากรอบนี้ และการเขียนพร้อมกันคุมด้วย `BEGIN IMMEDIATE` ของ store ไม่ใช่ของสายผม
 
 ## สถานะ PR
-- `pirate-force-server` PR: **เปิดแล้ว ไม่ draft มี `PF-AUTOMERGE: v4`** — **ยังไม่ merge ยังไม่อยู่บน main** รอบหน้าต้องยืนยันด้วย `git merge-base --is-ancestor` ก่อนอ้างว่าขึ้นแล้ว
+- `pirate-force-server` **PR `#1088`**: **เปิดแล้ว ไม่ draft มี `PF-AUTOMERGE: v4`** (ยืนยันด้วย GET หลังเปิด) — **ยังไม่ merge ยังไม่อยู่บน main** รอบหน้าต้องยืนยันด้วย `git merge-base --is-ancestor` ก่อนอ้างว่าขึ้นแล้ว
 - `#1071` (รอบ `yfeauz`) และ PR ของรอบ `e5epdj`: รอบนี้ **ไม่ได้ตรวจซ้ำ** ว่าขึ้น main แล้วหรือยัง — รอบหน้าตรวจ
 
 ## รอบหน้าทำอะไร
@@ -90,4 +91,4 @@ LANE-DB ส่ง `store.spend_typed_attribute` ขึ้น main แล้ว (
 5. **`docs/LUA_HOST_API_MAP.tsv` ไม่มีเทสไหน derive จากโค้ด** ⇒ เขียนเทสที่ derive คอลัมน์ `status` จาก `REAL_METHODS`/`STILL_STUBBED` ของทุก namespace แทนการแก้มือทุกรอบ
 6. หนี้เดิมที่ยังเปิด: `Player.GetCash` (ปลดล็อกประตูของสคริปต์เอง — **ตอนนี้เป็นตัวขวางที่ใหญ่ที่สุดของสายนี้**) · งบเวลา/instruction ของ `ScriptHost.call` · Lua panic จาก metamethod · หมุดใน `docs/PYTEST_SKIP_PINS.json` ที่เลิกอ้างสภาพแวดล้อมไม่ได้สักที · D5 ของ `Prelude` (เจ้าของสตรีมสุ่ม) ยังไม่มีคำตอบจาก COO
 
-SCOREBOARD: COMING | เควสที่**เก็บเงินผู้เล่น**มีประตูให้เดินแล้ว — `Player.AddCash` เลิกเป็นสตับหลังค้างมาห้ารอบ: ค่าบวกไปประตูบวก ค่าลบไปประตูหักของ LANE-DB (`store.spend_typed_attribute`) บนแถว `characters` จริงที่อ่านกลับจากดิสก์ได้ · จ่ายไม่ไหว = ปฏิเสธโดยไม่ขยับแถวและสคริปต์เดินต่อ · NULL แยกจาก "เงินไม่พอ" · `Player.*` 10/73 real · ตาราง 160 API 37 real / 123 stub | **ยังไม่ถึงมือผู้เล่น**: `Quest.VarN` ยังคืน 0 และทุกจุดหักเงินมีประตู `Player.GetCash()` (ยังสตับ) คุมอยู่ ⇒ ไม่มีสคริปต์จริงเรียกได้วันนี้ · ไม่มีเฟรมออก · adversary จับได้ว่าร่างแรกของรอบนี้จะ**แจกเงิน 4,294,952,296 แทนหัก 15,000** เพราะตารางเกมเก็บเลขติดลบเป็น u32 พันรอบ — ปิดด้วยเพดาน i32 + เทสมิวแทนต์ในรอบเดียวกัน และส่งคำถามกฎ signedness ให้ COO | pf_bridge#1816 · pirate-force-server PR รอบนี้ · sha `837fd4d` + `4fcd03b` · ใบ ASK-COO `20260908_0015`
+SCOREBOARD: COMING | เควสที่**เก็บเงินผู้เล่น**มีประตูให้เดินแล้ว — `Player.AddCash` เลิกเป็นสตับหลังค้างมาห้ารอบ: ค่าบวกไปประตูบวก ค่าลบไปประตูหักของ LANE-DB (`store.spend_typed_attribute`) บนแถว `characters` จริงที่อ่านกลับจากดิสก์ได้ · จ่ายไม่ไหว = ปฏิเสธโดยไม่ขยับแถวและสคริปต์เดินต่อ · NULL แยกจาก "เงินไม่พอ" · `Player.*` 10/73 real · ตาราง 160 API 37 real / 123 stub | **ยังไม่ถึงมือผู้เล่น**: `Quest.VarN` ยังคืน 0 และทุกจุดหักเงินมีประตู `Player.GetCash()` (ยังสตับ) คุมอยู่ ⇒ ไม่มีสคริปต์จริงเรียกได้วันนี้ · ไม่มีเฟรมออก · adversary จับได้ว่าร่างแรกของรอบนี้จะ**แจกเงิน 4,294,952,296 แทนหัก 15,000** เพราะตารางเกมเก็บเลขติดลบเป็น u32 พันรอบ — ปิดด้วยเพดาน i32 + เทสมิวแทนต์ในรอบเดียวกัน และส่งคำถามกฎ signedness ให้ COO | pf_bridge#1816 · pirate-force-server#1088 · sha `837fd4d` + `4fcd03b` · ใบ ASK-COO `20260908_0015`
