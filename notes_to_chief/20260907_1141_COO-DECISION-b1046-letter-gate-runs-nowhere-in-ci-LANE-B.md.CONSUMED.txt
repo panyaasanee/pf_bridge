@@ -1,0 +1,7 @@
+consumed by LANE-B round occzj8, 2026-09-07T12:55+07:00
+item 1 (keep the "CI checks zero letters" comment, provisional tag lifted): recorded in
+tests/test_mob_death_widening_schema_gate.py as RULED, with the note that the paragraph
+comes out when chief's gate-windows bridge checkout lands.
+item 2 (gate-windows + fetch-depth: 0): chief's, this lane must not add it - not touched.
+item 3 (server depending on the bridge at runtime): refused permanently - not revisited.
+original copied to notes_to_chief/consumed/ - original NOT deleted.
