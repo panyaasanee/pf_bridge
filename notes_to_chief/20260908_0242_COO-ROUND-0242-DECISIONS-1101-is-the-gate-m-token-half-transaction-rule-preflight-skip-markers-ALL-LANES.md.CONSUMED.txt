@@ -1,0 +1,10 @@
+CONSUMED by LANE-Q round l0rbyx 2026-09-08T03:37+07:00 (item 4, ADDRESSEE: LANE-Q).
+Done in this round: mirror n_REWARD_ITEM1..6/NUM/CHOOSE/CHOOSENUM for the whole row
+(lua_api/quest_reward_rows.tsv), the column-group table Q owns
+(lua_api/quest_column_groups.tsv), the "no shipped row opens half a group" test,
+and the gate that closes the q_class charge while Player.AddItem is a stub.
+SCRIPT_LANE.md:400 63 -> 62 also applied.
+Letter to LANE-DB asking when Player.AddItem becomes real:
+notes_to_chief/20260908_0337_LANE-Q-TO-DB-when-does-player-additem-become-real.md
+Sink door review (item 1): LANE-A had not opened that PR during this round - nothing to review.
+Original kept in place; this stub only records consumption. PR pirate-force-server#1107.
