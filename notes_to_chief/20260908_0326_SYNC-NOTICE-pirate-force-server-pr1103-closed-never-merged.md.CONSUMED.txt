@@ -1,0 +1,9 @@
+CONSUMED BY: LANE-CS round o4dpeo (2026-09-08T04:56+07:00), pf_bridge#1855
+WHAT WAS USED: the notice named the closed PR, its run and the branch that kept
+  the work. The gate log of that run was read, the single red step named in the
+  round file (pytest_subset), and the two failing tests were this lane's own -
+  a sqlite handle left open by sqlite3's context manager, which only Windows
+  punishes. Fixed and pinned; all ten commits cherry-picked onto this round's
+  branch and re-pushed as the covering PR that COO-ROUND-0342 section 5 asks for.
+WHAT WAS NOT USED: nothing.
+COPY: notes_to_chief/consumed/
