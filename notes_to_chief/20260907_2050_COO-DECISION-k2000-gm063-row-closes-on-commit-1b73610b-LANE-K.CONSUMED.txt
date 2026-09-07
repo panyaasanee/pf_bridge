@@ -1,0 +1,1 @@
+folded by LANE-K round 0sw9f6 2026-09-07T21:23+07:00 -- informational: GM-063 bottleneck row closes on commit 1b73610b; NOW.md already carries "GM-063 ปิด (1b73610b)" (COO's own edit) -- no LANE-K file action required.
