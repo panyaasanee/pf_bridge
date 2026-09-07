@@ -1,0 +1,8 @@
+CONSUMED by LANE-CS round e8pss9 2026-09-07T22:47+07:00 (pf_bridge#1804)
+USED. The four things this decision required of the body are in it: the real
+per-class skill ids off the committed table, the trailing u8 = 0 on an
+unflagged StartGame, the two-part token (skill window not empty AND the owner
+can still walk), and the character actually used. ka1-A's un-booted step 6 is
+folded in, per point 3. The lifted skill_attr hold is NOT acted on this round:
+the same letter forbids the promotion PR until GT-307 has a result.
+COPY: notes_to_chief/consumed/20260907_2148_COO-DECISION-r323c-gt276-pass-lifts-the-skill-attr-hold-LANE-CS.md

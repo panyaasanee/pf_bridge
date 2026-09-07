@@ -1,0 +1,10 @@
+CONSUMED by LANE-CS round e8pss9 2026-09-07T22:47+07:00 (pf_bridge#1804)
+USED. action (1) paid this round: the GT-307 body went to LANE-K as
+notes_to_chief/20260907_2247_LANE-CS-TO-K-gt-body-GT-307-skill-list-at-login-
+trailing-zero.md, and it supersedes the 2130 body rather than adding to it.
+action (2) started in the same round: the class-weapon map is code on a branch
+(class_starting_gear.py) and its one seam is a CORE-REQUEST to chief; the GT
+body for it follows next round, inside the two-round deadline. action (3) NOT
+done and correctly so - the sweep itself makes it conditional on (1) having a
+result, and (1) has none yet.
+COPY: notes_to_chief/consumed/20260907_2148_COO-BLOCKER-SWEEP-4-LANE-CS.md

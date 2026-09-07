@@ -1,0 +1,10 @@
+CONSUMED by LANE-CS round e8pss9 2026-09-07T22:47+07:00 (pf_bridge#1804)
+USED. Ownership accepted and the map is code this round: class_catalog gained
+starting_hand_slots (both hands, verbatim from charcreate_class.tsv) and
+class_starting_gear composes the bag per class. The binding constraint is
+pinned two ways - class 1 returns the committed INITIAL_BACKPACK object itself,
+and the encoded bytes are compared against legacy.make_backpack_attr_four_items().
+No item id is an executable literal. Old characters are untouched (that half is
+the owner's tick). The seam is asked for in the 2237 CORE-REQUEST; the GT body
+follows next round, inside the two-round deadline.
+COPY: notes_to_chief/consumed/20260907_2148_COO-DECISION-db2032-class-weapon-at-birth-owner-is-cs-LANE-CS.md
