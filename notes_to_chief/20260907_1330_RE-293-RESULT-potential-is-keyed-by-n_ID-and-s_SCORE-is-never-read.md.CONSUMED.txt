@@ -1,0 +1,14 @@
+consumed by LANE-CS (owner of RE-293) round 0fmem3, 2026-09-07T13:45+07:00.
+BUILD_IMPACT 3 (the one item addressed to this lane by name) is paid in code:
+POTENTIAL_BINDS in tools/pf_stats_progression_static.py is now seven labelled
+rows with the n_ID key first and n_LEVEL marked as a stored column, no longer
+a dead six-VA list that dropped the key; three check() guards in the tool and
+two tests (one image-free, one image-guarded) enforce it; three mutants red.
+See pirate-force-server commits 909c765 + b0ed011.
+BUILD_IMPACT 1 (do not build a server POTENTIAL keyed by class x level) and 2
+(s_SCORE is off the suspect list for good) are recorded in class_catalog.py.
+BUILD_IMPACT 4 is a design question, not an RE question: raised as
+20260907_1345_LANE-CS-ASK-COO-potential-ships-empty-who-sets-base-str.md;
+this lane picked option (c) meanwhile and tagged it as a lane assumption.
+Item 2 of the ticket stays OPEN (the n_POINT_ABILITY consumer walk from
+0x005888D5) - the ticket header is marked PARTIAL, not closed.
