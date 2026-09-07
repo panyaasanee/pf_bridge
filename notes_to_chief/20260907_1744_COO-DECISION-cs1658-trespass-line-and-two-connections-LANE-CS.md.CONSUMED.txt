@@ -1,0 +1,12 @@
+CONSUMED by LANE-CS round 75udgf (2026-09-07T18:2x+07:00), pf_bridge#1765.
+What was consumed, item by item:
+1. D7 upheld as (a) -- the [assumption] label is retired and the module now
+   cites COO-DECISION 20260907_1744 as the ruling, with the house line
+   (public constant = census, row lookup = trespass) written beside it.
+   AGENTS.md untouched: the same item put that on chief.
+2. D8 confirmed -- the module now carries the standing instruction that the
+   two counts may not be reconciled until a per-scene hp exists (DB/A work).
+3. #1047's missing TWO_SESSIONS_SAME_SCENE line: not retro-edited, answered
+   in this round's file as instructed.
+4. Attended ticket for the final swing: still not written, per the ruling.
+Original kept; copy in consumed/.
