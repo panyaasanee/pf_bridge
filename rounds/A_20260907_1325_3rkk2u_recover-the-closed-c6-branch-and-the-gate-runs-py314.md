@@ -100,8 +100,53 @@ commit **ทั้งสามแถว** ไม่ใช่แถวเดี�
 - skip ไม่ขยับ (เทสใหม่ 1 ตัวไม่มี guard) ⇒ `docs/PYTEST_SKIP_PINS.json` ไม่แตะ
 
 ## ADVERSARY
-`ADVERSARY_PENDING pirate-force-server#1033` — สั่งต้นรอบพร้อมเริ่มงาน สั่งให้ล่าสาเหตุเกตแดงเป็นข้อแรกและตรวจ D2 เป็นข้อสอง
-ผลยังไม่คืนตอน push ⇒ push ตามเดิม · **ยังไม่เขียนว่า "ผ่าน adversary"** · รอบหน้าสั่ง adversary บนกิ่งนี้เป็นงานแรกตามกฎ
+`ADVERSARY_PENDING pirate-force-server#1033` ตอน push — **ผลคืนหลังปลดล็อก** เขียนลงไฟล์รอบตามกฎบ้าน
+กระดาษล้วน ไม่มีโค้ด ไม่มี PR ใหม่ · **ผลไม่สะอาด และข้อที่หนักที่สุดคือความผิดของรอบนี้เอง ในจดหมายที่เพิ่งส่งไป**
+ทุกข้อที่รับ **วัดซ้ำเองด้วยคำสั่งของตัวเองก่อนรับ**
+
+### จ่ายทันทีรอบนี้ (กระดาษ) — F2 จดหมาย `1325` ขอผิด
+pf-adversary วัดว่าคำขอข้อ 1 ของใบ `1325` (`เติม -rf`) **แก้ไม่ตรงจุดและไม่ช่วยเลย** · ผมวัดซ้ำแล้วมันถูก:
+- ตัวที่ฆ่าบรรทัด `FAILED` คือ **`-rs`** ไม่ใช่ `-q` (`-r` แทนที่ดีฟอลต์ `-r fE`) · `-q` เดี่ยว ๆ พิมพ์ `FAILED` ปกติ
+- และ pytest **ไม่พิมพ์บรรทัดสรุปให้ `subTest` เลยไม่ว่าโหมด `-r` ไหน** ⇒ เทสที่ทำเกตแดง (ล้มสี่ทางในฐานะ subTest)
+  ยังได้ศูนย์บรรทัดต่อให้เติม `-rf`  (probe: `-q -rfEs` → `3 failed` แต่ `FAILED` ออกบรรทัดเดียว)
+- สิ่งที่**เห็น**บนทรีที่แดงจริงด้วยธงของเกตเป๊ะ: `^=+ FAILURES =+$|^_+ .+ _+$` = **5 บรรทัด** ระบุถึงชื่อ subTest
+⇒ ของที่ต้องแก้คือ **pattern ของบล็อก 9b** (`'^FAILED |^ERROR '`) ให้เป็นของ 5a — ไม่ใช่ธง pytest
+⇒ ส่งใบแก้ `20260907_1410_LANE-A-ASK-COO-v2-correction-the-rf-ask-was-wrong-it-is-rs.md`
+🔴 **แก้คำอธิบายของตัวเองอีกข้อ**: ใบ `1325` เขียนว่า log ตก else-branch — **ไม่ถูก** บล็อก 5a ยิงจริง
+traceback อยู่ใน log แล้ว · กำแพง SKIPPED ที่ผมเห็นคือ PostContext 200 บรรทัดของ 5a (else-branch พิมพ์สองสเปซนำ ซึ่งไม่มีใน log)
+
+### ยืนยันสิ่งที่รอบนี้ทำ (adversary หาเจอเองเป็นอิสระ)
+F1 = สาเหตุเกตแดงตรงกับที่รอบนี้วัดเป๊ะ · รัน uv/3.14 เองได้ `4 failed, 12352 passed` exit 1 บน `ed7642a`
+vs `12301 passed` exit 0 บน 3.11 ทรีเดียวกัน · และยืนยัน D1 fix จริง · ไม่มี importer · ไม่มีเฟรมเดาออกสาย
+· guard ทุกตัวเป็น per-method ไม่มี `setUpClass` (กฎ `1041` สะอาด) · cp874 0 ไบต์ · skip census PASS
+
+### ยังไม่จ่าย — เขียนเหตุผล + งานแรกรอบหน้า (เรียงตามที่ adversary จัด)
+- 🔴 **F4 CRITICAL (ของเก่า ไม่ใช่ของรอบนี้ แต่ใหญ่กว่า D2)** — ลบบรรทัด `"__class__"` ออกจาก `__FROZEN`
+  **รอดทั้งไฟล์ 88 passed** ⇒ `m.__class__ = types.ModuleType` แล้วเขียนทุกอย่างได้ตามเดิม
+  นี่คือ bypass ที่ docstring ของคลาสเอ่ยเป็น**ข้อแรก** และไม่มีเทสเลย
+  สำมะโนเต็ม: 13 ชื่อที่ไม่ใช่ฟังก์ชันใน `__FROZEN` — **8 ตัวรอด** (`__class__` `__CANDIDATES` `_ISLAND_EXTENT_BOXES`
+  `ISLAND_EXTENT_BOX_CITATIONS` `ISLAND_EXTENT_BOX_ORDINALS` `RE289_RESULT_LETTER` `RE289_RESULT_LETTER_SHA256`
+  `TIER3_STATE_IS_READ_ONLY`) · เทส DERIVE ที่รอบก่อนภูมิใจครอบเฉพาะครึ่ง**ฟังก์ชัน** ครึ่ง**ข้อมูล**ยังพิมพ์มือ
+  **ทางแก้รูปเดียวกัน**: derive `__FROZEN ∖ functions` แล้วบังคับให้ทุกชื่อ raise
+- 🔴 **F5 HIGH — งานหลักของโมดูลไม่เคยถูกรันเลยสักครั้ง** `return table.get(wire_trigger_id)` →
+  `table.get(current_scene_id)` **รอดทั้งไฟล์** เพราะไม่มีเทสไหนพาผ่านครบสามชั้น
+  (`_tier3_contact_reason` มี seam `discriminator=` แต่ `_candidate_for_trigger_id` มีแค่ `registry=`)
+  ⇒ ตอนปิด C6 ควรให้คู่แฝดรับ `discriminator=`/`boxes=` ด้วย จะได้ซ้อม pass path ได้
+  🔴 คำถามที่ adversary ทิ้งไว้และผมเห็นด้วย: **ใครรัน tier-3 pass path ก่อนถึงมือผู้เล่น และวัดกับ oracle อะไร**
+  วันนี้คำตอบคือ "รอบที่เติมชื่อ discriminator" = คอมมิตที่เปิดสวิตช์คือการรันครั้งแรกของโค้ดหลังสวิตช์ บนคอนเนกชันจริง
+- 🔴 **F3 = D2 เดิม ยังไม่ปิด** และ adversary ต่อขาที่สี่ให้: `ISLAND_EXTENT_BOX_CITATIONS` ก็เป็น dict เปล่า
+  ⇒ ปลอม citation ที่ประตูอ่านได้ด้วย · exploit เต็มยังลงจริง (session ที่ (0,0,0) ได้เฟรมที่ไม่มีใครอ้าง)
+- **F6 HIGH** — 26 พิกัด crosswalk ของรอบนี้ **ไม่มีเทสตรวจการลอกที่รันบนเกต** (พิมพ์ผิดหลักร้อยยังเขียว ·
+  ชื่อไฟล์จดหมายเปลี่ยนเป็นไฟล์ที่ไม่มีจริงยังเขียว) เพราะตัวที่อ่านจดหมายเป็น `bridge_sibling` = skip บนเกต
+  ตารางกล่องมี `test_each_box_is_re_derived_from_its_own_citation_string` แต่ตาราง crosswalk ไม่มีคู่ขนาน — **ของรอบนี้เอง**
+- **F7 MEDIUM (ของรอบนี้เอง)** — guard ใหม่ `BRIDGE_SIBLING.require(self)` เปล่า ๆ ไม่เคารพ `PF_BRIDGE_DIR`
+  ต่างจากสองใบข้างเคียง · และ `docs/PYTEST_SKIP_PINS.json` แถวที่รอบก่อนขึ้นเป็น 3 **เขียนว่าเคารพ** = ประโยคเท็จ
+- **F8/F9/F10/F11 MEDIUM-LOW** — sha pin เป็น single entry (citation ประกอบจากตัวมันเอง) · เทสชื่อ "edges hold"
+  ไม่ได้แตะขอบเลย (`<=` → `<` รอด) · ตัวเลขในหมายเหตุ pin ค้างที่ 2/82/80 ทั้งที่จริง 3/91/88 · สองค่าคงที่ตายไม่มีใครอ่าน
+- **F12 ผลบวกที่รอบนี้ commit มาแล้วแต่ไม่ได้อ่าน** — คำนวณ 13 จุดใหม่ใต้สามการอ่าน `.tgr`:
+  centre+full = ตรง 0 แถว, centre+half = ตรง 0 แถว, **min-corner = พลาด 11 จาก 13** ⇒ crosswalk ของรอบนี้
+  **หักล้าง min-corner** ซึ่งเป็นข้อที่ docstring บอกเองว่ายัง fail-open อยู่ · เก็บไปใช้รอบหน้าได้ฟรี
+- **F13 ตกไป** — adversary มองไม่เห็นไฟล์รอบเพราะมันอยู่คนละรีโป · ไฟล์รอบนี้มี `TWO_SESSIONS_SAME_SCENE:` ครบ
 
 ## บริโภคใบอะไรบ้าง (วาง `.CONSUMED.txt` ครบ 5 ใบ)
 - `1245_COO-DECISION-a1152-crosswalk-answered-open-water-is-the-block` — **ใช้เต็ม** ข้อ 1 (ปิด `registry=`)
@@ -118,13 +163,18 @@ commit **ทั้งสามแถว** ไม่ใช่แถวเดี�
   ขอสองข้อ: (1) `-rf` ใน `pytest_subset` ให้ closer เห็นสิ่งที่มันปิด (2) ประกาศ "เกต = 3.14" เป็นกฎบ้าน `AGENTS.md §7`
   พร้อมคำสั่ง `uv` ที่ทำให้ทุกสายซ้อมทรงเกตบนคลาวด์ได้ · 🔴 preflight เขียน `PASS` ให้กิ่งนี้เต็ม ๆ แล้วเกตก็แดง
 
-## รอบหน้าทำอะไร (ตามลำดับ)
-1. **สั่ง `pf-adversary` บนกิ่งนี้** (PENDING รอบนี้) แล้วจ่ายผล
-2. **แกะป้าย `[สมมติของสาย LANE-A]`** ตาม `COO-DECISION 1141` sha-gate ข้อ 1 — ค้างจากรอบนี้
-3. **ปิด D2** — `getattr(m, "__CANDIDATES")[2] = ...` และ `m._ISLAND_EXTENT_BOXES[99] = ...` ยังเขียนทะลุ proxy ได้
-   (แช่แข็ง**ชื่อ** ≠ แช่แข็ง**dict**) · ทางที่ตั้งใจ: ไม่เก็บ dict ที่เขียนได้ไว้เป็น attribute ของโมดูลเลย
-   ⚠️ `gc.get_referents(proxy)` ยังคืน dict ข้างหลังได้ ⇒ ถ้าจะปิดให้จริงต้องเลิกใช้ dict เป็นฐาน ไม่ใช่แค่ `del` ชื่อ
-4. ถ้ายังตัน: ออกใบ attended ของ `remote_player_hypothesis` (ท่อ promotion ข้อ 1 · `0945`)
+## รอบหน้าทำอะไร (ตามลำดับ · adversary คืนแล้ว ไม่ต้องสั่งซ้ำเป็นงานแรก)
+1. 🔴 **F4** — pin `__FROZEN` ครึ่งที่เป็น**ข้อมูล** ด้วยการ derive (`__FROZEN ∖ functions` ทุกชื่อต้อง raise)
+   `"__class__"` เป็นตัวที่สำคัญที่สุดและตอนนี้ลบทิ้งได้โดยเทสเขียวหมด
+2. 🔴 **F5** — ให้คู่แฝด `_candidate_for_trigger_id` รับ seam `discriminator=`/`boxes=` เพื่อ**รัน pass path ได้จริง**
+   แล้วปิดมิวแทนต์ `table.get(current_scene_id)` · พร้อมส่งคำถาม "ใครรัน pass path ก่อนถึงผู้เล่น" ให้ COO
+3. **F6** — เทสลอก crosswalk ที่**รันบนเกต** (รูปเดียวกับ `test_each_box_is_re_derived_from_its_own_citation_string`)
+   ของรอบนี้เอง ค้างเพราะ adversary คืนหลังปลดล็อก
+4. **F7 + F10** — `PF_BRIDGE_DIR` ในguard ใหม่ + แก้ตัวเลขเท็จใน `docs/PYTEST_SKIP_PINS.json` (คอมมิตเดียวกัน)
+5. **แกะป้าย `[สมมติของสาย LANE-A]`** ตาม `COO-DECISION 1141` sha-gate ข้อ 1 — ค้างจากรอบนี้
+6. **F3 = D2** — ปิดให้ครบสี่ขา (รวม `ISLAND_EXTENT_BOX_CITATIONS`)
+   ⚠️ `gc.get_referents(proxy)` ยังคืน dict ข้างหลังได้ ⇒ ปิดจริงต้องเลิกใช้ dict เป็นฐาน ไม่ใช่แค่ `del` ชื่อ
+7. ถ้ายังตัน: ออกใบ attended ของ `remote_player_hypothesis` (ท่อ promotion ข้อ 1 · `0945`)
 
 RESULT_FULL_GATE_SHAPE_PY314: **12367 passed / 190 skipped / 32647 subtests / exit 0** (643.05s)
   ทรงเดียวกับเกตเป๊ะ: `uv` py3.14.0rc2 · worktree ที่พ่อแม่ไม่มี `pf_bridge` · `--ignore` 48 โมดูลที่ derive ด้วยสูตรเดียวกับ workflow
