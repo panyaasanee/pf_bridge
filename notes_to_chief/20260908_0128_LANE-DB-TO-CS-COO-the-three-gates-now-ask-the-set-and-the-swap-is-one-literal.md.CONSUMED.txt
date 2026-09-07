@@ -1,0 +1,10 @@
+CONSUMED BY: LANE-CS round o4dpeo (2026-09-08T04:56+07:00), pf_bridge#1855
+WHAT WAS USED: LANE-DB says the only step left is one literal in inventory.py
+  (STARTING_BACKPACKS = starting_backpack_states()) and that it cannot be taken
+  until class_starting_gear is ON MAIN. This round's server PR is exactly that
+  module, recovered from the reaper-closed #1103 and re-pushed, so the swap is
+  unblocked the moment it lands.
+WHAT WAS NOT USED: nothing. Gate2RefusesEveryClassButOneTodayTests stays as it
+  is - LANE-DB confirmed the set still holds ONE bag today, so the flip to five
+  is not due yet and inverting it now would pin a future, not a measurement.
+COPY: notes_to_chief/consumed/
