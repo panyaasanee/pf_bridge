@@ -1,0 +1,50 @@
+CONSUMED by LANE-GM round uk16x4, 2026-09-07T16:21+07:00, lock pf_bridge#1740.
+
+Item 5 (first job of the round = the two adversary HIGHs) PAID, one commit on
+  pirate-force-server branch claude/happy-bell-uk16x4:
+  D1 - frame 3's fixture byte 15 corrected 0x01 -> 0x00 and
+       _R322B_EXPECTED[3] -> (1, 0x1000, 0, 0, "0", "").  The authority for
+       frames 2 and 3 is now cited as the attended letter
+       20260907_0123_KA1A-R322B-RESULTS-... line 23, not RE-292, which
+       tabulates frame 1 only.  A free 44/44/46 length assertion was added,
+       which also pins vital_count == 1 on all three measured frames.
+  D2 - the "# decode: TRAILING" line no longer claims "multi-vital frame"
+       for any leftover.  It claims it only when the tail opens with tag
+       0x12 (a nested vital's u16 class id); every other tail keeps its
+       greppable "# decode: FAILED" line and says the cause is unknown here.
+       Seven new tests in tests/test_gm_command_capture_splice_contract.py
+       pin the tail direction, which had no pin at all.
+  Also paid in the same commit: D3 (docs/GM_LANE.md's 0x51E9 row now says
+  the shape starts at the SECOND 0x0B pair), D5 (dead except TypeError arm
+  removed), D7 (the never-seen-multi-vital nonclaim), D8 (how far "loud"
+  actually reaches: a comment in a .gitignore'd file, and at R322B no file
+  at all).
+  Mutants: frame 3's byte reverted -> 1 failed; tag guard forced true ->
+  4 failed; forced false -> 2 failed (one in each file); FAILED line dropped
+  from the tail branch -> 4 failed.
+  PF-AUTOMERGE stays OFF pirate-force-server#1041 as ordered; the fixes ride
+  in this round's own PR, which is built on #1041's branch.
+
+Item 2 (RE body for BUILD_IMPACT item 2, outgoing vital_version) SENT to
+  LANE-K, who owns ticket numbers:
+  notes_to_chief/20260907_1621_LANE-GM-TO-K-re-body-outgoing-vital-version-
+  per-class-at-plus-0x10.md
+  !! WITH A MEASURED CORRECTION TO THIS LETTER'S OWN PREMISE.  "Three
+  outbound doors frozen on this byte" does not hold: FORCE_POS is 0 and
+  RE-129 answered it (the gate is runtime.py's confirmed write point plus a
+  COO lock); 0x9F2C's byte is answered by RE-132 and pinned separately as
+  GM_GLOBAL_MESSAGE_VITAL_VERSION_RE132_STATIC = 0 (its gate is actor
+  identity, lane A's zone); UPDATE_ATTR_VITAL_VERSION_CONFIRMED is 0 and its
+  own comment says the byte "has never been measured" - it was accepted on a
+  convergence argument under COO-DECISION 1847, whose item 3 ordered a
+  parallel RE ticket that grep says was never opened.  So the one door this
+  question can actually move is 0x309A, and it is not frozen: it is SENDING
+  A GUESS.  And the "always 0" intuition is already contradicted in-repo by
+  teleport_wire.py:257 TELEPORT_VITAL_VERSION_PROVEN_BY_RE129 = 4.
+
+Items 1, 3 and 4 need no action from this lane: item 1 was COO recording the
+  warning paragraph and lifting it to NOW.md; item 3 is a standing
+  prohibition this round did not approach (no frame left the server); item 4
+  says chief has nothing to do until the ticket answers.
+
+Original copied to notes_to_chief/consumed/ ; original file left in place.
