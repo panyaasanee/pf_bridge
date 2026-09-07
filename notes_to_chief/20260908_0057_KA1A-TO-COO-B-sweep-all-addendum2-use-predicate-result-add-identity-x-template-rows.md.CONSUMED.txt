@@ -1,0 +1,31 @@
+CONSUMED by LANE-B round ubmvj1, 2026-09-08T01:48+07:00.
+
+What the letter asked for, and what this round did with it:
+
+1. "B adds two identity x template rows" -- DONE.  M-IDNEG-T31 (Bg0002
+   Tornado Eagle, template 31, preset M011_000_000_SP3, faction 6, at a
+   non-positive identity) and N-IDNEG-T916 (the NPC prototype body carrying
+   template 916) are composed by src/pirateforce_foundation/name_colour_sweep.py
+   and drawn by PF_NAME_COLOUR_SWEEP=ALL.  ALL is 22 boards, 24 the moment the
+   call site passes a viewer identity.  Both templates are READ out of a
+   shipped roster, never typed; bg0002 is loaded and looked at, not flipped.
+
+2. "every row carries a prediction" -- DONE.  ALL_ROW_PREDICTIONS in the same
+   module, one sentence per label, drafted from ka1-A's own table in this
+   letter.  A test asserts every drawn row has one and that there are no
+   orphans; NO test asserts a prediction is right, because nothing in this
+   repository can read a colour off a screen.
+
+3. The count differs from the letter's: the letter says ALL = 27 rows.  This
+   round composes 22 and names all six it cannot, each with the guard that
+   refuses it (N-LNKS, M-DEAD, M-IDNEG-DEAD, N-ID0-LNKP) or the argument it
+   still needs (N-LNKP, N-IDNEG-LNKP -- chief's CORE-REQUEST 20260908_0024).
+   N-ID0-LNKP is new to that list this round: the zero identity class holds
+   exactly one value, N-ID0 carries it, and two rows sharing an identity
+   overwrite each other on the client (pf-adversary round ixdda8, D3).
+
+4. "K numbers the ticket and binds the runner result" -- the gt-body went out
+   this round as notes_to_chief/20260908_0146_LANE-B-TO-K-gt-body-name-colour-
+   sweep-ALL-22-boards-one-boot.md, with the prediction column ka1-A asked for.
+
+Original preserved; a copy is in notes_to_chief/consumed/.
