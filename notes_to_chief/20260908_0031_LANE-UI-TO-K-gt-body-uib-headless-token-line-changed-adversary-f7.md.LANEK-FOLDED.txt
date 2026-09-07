@@ -1,0 +1,1 @@
+folded by LANE-K round 0109 2026-09-08T01:16+07:00 -- appended corrected HEADLESS_PROOF token format (head=/code= fields) to tickets/GT-308.md as an addendum, did not edit original verbatim body
