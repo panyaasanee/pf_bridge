@@ -563,3 +563,400 @@ path + sha256 ของภาพ/console/DB :
 CANON_SHA ก่อน/หลัง · integrity_check · sessions · lease_generation · NO-CRASH/CRASH :
 OBSERVER_CONFIRMED  :
 ```
+
+---
+
+> ย้ายมาโดย LANE-K รอบ `4af3qf` 2026-09-07T07:12+07:00 · เหตุผล: CANCELLED โดยเจ้าของใบ LANE-A รอบ `lnq6xy` (จดหมาย `notes_to_chief/20260907_0603_LANE-A-TO-K-gt151-and-gt193-both-cancelled.md`) · เนื้อใบข้างล่างยกมาคำต่อคำ ไม่แก้แม้แต่ตัวอักษรเดียว
+
+## GT-193 SPEED-COMMAND-SPARSE-X7-001  [🟢 READY **เฉพาะขั้น 9 และ 10** · 🔴 **ขั้น 4-7 ยังเป็น `PENDING interface` ห้ามเกรด** -- HOLD ของ R315 ปลดแล้วตาม `COO-DECISION 20260903_0745` ข้อ ② (chief วัด RECHECK ข้อ 6 เองบน `1e184532`) แต่ **ปลดอันตราย ≠ เกรดได้** และ pf-adversary รอบ `pa5pn8` หักล้างว่าผมกำลังจะปล่อยใบที่เผารอบทิ้ง: [🟡 **ถอนออกจาก `QUEUE_STATUS_SNAPSHOT.md` ชั่วคราว โดย LANE-K รอบ `dmef5j` 2026-09-07T04:09+07:00 ตาม `PANYA-ORDER 20260907_0159` ข้อ 2 — เกณฑ์ (ข) โค้ดที่ใบพึ่งพาเปลี่ยนหลังวันเขียนใบ** · ใบเขียน 2026-09-01 · วัดสดบน `origin/main` (คลอน unshallow) `git log --since=2026-09-01 -- <ไฟล์>`: `gm/chat_command_action.py` **36 คอมมิต** · `gm/speed_wire.py` **10** · `docs/FUNCTIONAL_COVERAGE.json` **8** · `tests/test_gm_speed_denied_notice.py` **7** · `persistence_attr_compose.py` **4** · `login_speed.py` **3** · `gm/say_wire.py` **5** — ทั้งเจ็ดไฟล์ที่ใบอ้างถึงเปลี่ยนหมด · คอมมิตที่ชนขั้น 9-10 ของใบตรง ๆ: `28efa1af` (2026-09-03 `PF_SPEED_TRIAL` คีย์รันไทม์ที่เปิด `/speed` ให้ค่าเดียว) · `41e347b3` (2026-09-03 "the sparse `/speed` door closes") · `3bb6b4e4` (2026-09-04 "(b'') becomes the login mask set") · 🔴 **ใบยังเปิดอยู่ทุกตัวอักษร LANE-K ไม่ได้ยกเลิกและไม่ได้แตะเนื้อใบ** — รอ **LANE-A (เจ้าของใบ)** ตอบหนึ่งบรรทัด (ยืนยันซ้ำ ⇒ ใส่กลับรถบัสทันที · หรือยกเลิกพร้อมเหตุผลตามกฎ PANYA `20260903_1934`) · จดหมาย `notes_to_chief/20260907_0409_LANE-K-CULL-B-gt193-gt272-code-changed-after-ticket.md`]
+>
+> 🔴 **ทำไมขั้น 4-7 เกรดไม่ได้วันนี้** -- `gm/speed_wire.py:342` `SPEED_LOGIN_READ_LANDED = False` ⇒ `send_deferred()` (บรรทัด 357) คืน **True** ⇒ `gm/chat_command_action.py:3994` **กันเฟรมไว้ทุกครั้ง ไม่มีไบต์ออกเลย** (chief วัดเองบน `origin/main 1e184532` รอบ `pa5pn8`) ⇒ เกณฑ์ wire ข้อ (ก) (change-mask บิต `0x0040`) และเกณฑ์ client-observable ("เดินเร็วขึ้นไหม") **เป็นจริงไม่ได้ทั้งคู่** — ไม่ใช่ FAIL แต่เป็นเกตที่ทำงานถูกต้อง
+> **ห้ามเกรดขั้น 4-7 เป็น FAIL เด็ดขาด** · ถ้าบูตแล้วเห็นศูนย์ไบต์ = ถูกแล้ว จดว่า `SPEED DEFERRED` แล้วข้ามไปขั้น 9
+>
+> 🔴 **และหน้าจอเงียบ** -- แขนง deferral ไม่ส่ง notice action ใด ๆ (`[ASSUMPTION OF LANE-GM, AWAITING COO]` ในซอร์สเอง) ⇒ เงื่อนไข "ห้ามเงียบ" ของ `COO-DECISION 20260902_0147` ที่ RECHECK ข้อ 5 ปิดไปแล้วสำหรับ*คำปฏิเสธ* **เปิดใหม่สำหรับ*การรับคำสั่ง*** (เกิดหลัง R299 เมื่อ 2026-09-02T18:47) ⇒ บรรทัด "Do NOT promote to READY" ในเนื้อใบ (9906/9930) **ยังยืนสำหรับขั้น 4-7 เท่านั้น**
+>
+> 🟢 **ขั้น 9 (`/speed 1e40`) และขั้น 10 (`/speed fast`) เกรดได้ตามปกติ** -- ทางปฏิเสธอยู่ **เหนือ** เกต deferral (`_speed_denied(...)` ยิงก่อนบรรทัด 3994) ⇒ นี่คือของที่รอบ attended รอบนี้ได้จริง
+>
+> 🔴 **แก้คำของ chief เอง**: R316 ฉบับแรกของผมเขียนว่า "เนื้อใบ ขั้นตอน และเกณฑ์ไม่เปลี่ยนสักข้อจาก R299" -- **เท็จ** ขั้น 10 เพิ่ม R303 · ประโยคในขั้น 6 และ RECHECK ข้อ 6 เพิ่ม R315 · ที่ COO เขียนว่า "ตามเดิมทุกประการ" หมายถึงเทียบกับ**ตอน HOLD** ไม่ใช่เทียบ R299
+>
+> 🔴 **RECHECK ข้อ 6 ไม่ใช่ตัวกันประตูที่ฆ่าตัวละคร** -- อันตรายที่ `GT-193` วัดได้จริงใน R303 คือ**เฟรมขาออกในเซสชัน** (DB ฝั่งเราสะอาด) ประตูนั้นถือโดย `SPEED_LOGIN_READ_LANDED` ไม่ใช่โดยเกตล็อกอิน ⇒ RECHECK ข้อ 6 ถูกเสริมเป็นสามคำในรอบนี้ (ดูข้างล่าง) และมี **ตัวรีล็อกอัตโนมัติ** ที่ใบนี้เคยไม่มี]
+
+RECHECK ข้อ 6 (ตัวปลด/ตัวรีล็อก · เพิ่มโดย chief R315 · **เสริมเป็นสามคำโดย chief R316** หลัง pf-adversary หักล้างว่ารูปเดิมพอใจกับคำใน docstring):
+  🔴 **ทำไมรูปเดิมอ่อน (วัดแล้ว R316)**: `findstr /C:"wire_deferred"` ติดที่ `login_speed.py:90` และ `:379` ซึ่งเป็น **docstring** ⇒ ถอดบรรทัด `held = held_by_the_speed_deferral(fallback)` ที่ 424 ออก แล้วเกตนี้ก็ยัง "ผ่าน" · ห้ามใช้รูปเดิมอีก
+  **ทั้งสามคำต้องเจอครบ จึงถือว่าผ่าน** (รูปเดียวกับ RECHECK ข้อ 2 ของ `GT-218` ที่ chief เขียนไว้เองรอบก่อน):
+  `(cd pirate-force-server && git fetch origin && git show origin/main:src/pirateforce_foundation/login_speed.py | findstr /C:"held_by_the_speed_deferral(fallback)")`
+  `(cd pirate-force-server && git show origin/main:src/pirateforce_foundation/gm/speed_wire.py | findstr /C:"send_deferred")`
+  `(cd pirate-force-server && git show origin/main:src/pirateforce_foundation/gm/chat_command_action.py | findstr /C:"speed_wire.send_deferred()")`
+  **เจอครบสาม** = ประตูล็อกอิน**และ**ประตูขาออกยังปิดทั้งคู่ ⇒ ขั้น 9-10 บูตได้ · **ขาดข้อใดข้อหนึ่ง** = กลับเป็น `[🔴 HOLD]` ทันที ห้ามบูต
+  🔴 **ตัวรีล็อกอัตโนมัติ (ใหม่ R316 · ใบนี้ไม่เคยมี)**: ถ้า
+  `(cd pirate-force-server && git show origin/main:src/pirateforce_foundation/gm/speed_wire.py | findstr /C:"SPEED_LOGIN_READ_LANDED: bool = True")`
+  **เจอ** ⇒ ประตูขาออกเปิดแล้ว ⇒ ใบนี้กลับเป็น `[🔴 HOLD]` **ทันทีและอัตโนมัติ** ห้ามบูตจนกว่ารอบ `GT-218` (ค่า `400` ค่าเดียว พร้อมวิดีโอและกฎ STOP-on-HP-0) จะเกิดและมีผล ตาม `COO 2147` · เหตุผล: ขั้น 4 ของใบนี้พิมพ์ `/speed 800` ซึ่ง **2.67 เท่าของ `300` ที่ฆ่าตัวละครมาแล้ว** และซอร์สวันนี้ **ไม่มี clamp ไม่มี allow-list** (`GT-218` nonclaim 2)
+  สถานะ ณ R316 (2026-09-03T08:3x+07:00): เจอครบสามคำบน `origin/main = 1e184532` (chief วัดเอง) และ `SPEED_LOGIN_READ_LANDED` ยังเป็น `False`
+  🔴 **บรรทัดนี้ไม่ใช่ประวัติ** ยังเป็นเกตของทุกการบูต — โคลนเก่า/สาขาเก่าให้ผลว่างได้ ให้รันเองทุกครั้ง
+  🔴 **แก้บันทึกที่ผิด (chief R316 · หลักฐาน git ไม่ใช่จดหมาย)**: `COO 0745` ข้อ ② เขียนว่าตัวปลดของ chief "เขียวแล้วตั้งแต่ตอนเขียนใบ" และว่า chief วัด `d916725` ที่ "เก่ากว่าหัวจริง" — **ไม่จริง** · `git log -1 75f242f0` = `2026-09-03T00:41:09Z` = **07:41+07** แต่ใบ `CHIEF-REPORT 0715` เขียน **07:15+07** และ `git show d9167254:...login_speed.py | grep -c held_by_the_speed_deferral` = **0** ⇒ ตอน chief เขียนว่า "push แล้ว รอ merge" **นั่นถูกต้อง** เกตยังไม่ขึ้น main อีก 26 นาที · บันทึกไว้ที่นี่เพื่อไม่ให้รอบหลังอ้างผิด
+
+> Opened by chief per direct COO order `notes_to_chief/20260901_1642_COO-ORDER-speed-sparse-x7-chief-open-gt-entry.md`,
+> itself citing `20260901_1640_COO-ORDER-speed-sparse-x7-approved-panya-live-override-of-1447.md` (LANE-DB,
+> approves a sparse x=7-only write path in `persistence_attr_compose.py`, reversing part of COO-ORDER
+> `1447` item 2) and `20260901_1641_COO-ORDER-speed-sparse-x7-lane-gm-wire-chat-command.md` (LANE-GM,
+> wires `/speed <value>` to call it). Both orders record Panya's live confirmation in-session
+> 2026-09-01 16:39+07 to proceed without waiting for the BasicAttr+0x54 player-vs-NPC value RE.
+>
+> **Correction to the source orders' own cross-reference:** `1640` and `1642` both write "RE-193" for
+> the BasicAttr+0x54 player-vs-NPC pilot question that is explicitly NOT a blocker for this entry.
+> Checked directly against `CLIENT_RE_QUEUE.md`: `RE-193` is actually
+> `ACTORATTR-SEVEN-UNKNOWN-FIELDS-CLIENT-DEFAULT-VALUES-001` (unrelated, opened round `liq4ri`/R288).
+> The BasicAttr+0x54 player-vs-NPC pilot RE is `RE-194 BASICATTR-0X54-SPEED-PLAYER-VS-NPC-CONFLICT-001`
+> (chief opened it round `2zr22w`/R290) -- COO-ORDER `1447` itself, when opening that pilot RE, said to
+> number it "after RE-193", i.e. 194 (confirmed again by `COO-DECISION 20260901_1542` item 2, same
+> wording). This entry treats `RE-194` as the correct non-blocking parallel RE. Flag this numbering
+> slip back to COO/chief when consuming this entry -- do not silently repeat "RE-193" as the speed-value
+> ticket.
+>
+> Numbering: highest `GT` at open time is `GT-192`; highest `RE` in `CLIENT_RE_QUEUE.md` is `RE-195`.
+> This entry is `193`.
+
+ATTENDED: บูตด้วยทรี/ธง/env อะไร -- บูตมาตรฐาน **ไม่มีแฟล็ก scenario** ผ่าน `staged/*_boot.ps1` · `-SecondPasswordMode bypass` · run-copy `state\pirateforce_gt193_<stamp>.sqlite3` เท่านั้น (ห้ามชี้ canonical · **คัดลอกครั้งเดียวต่อรอบ**) · บัญชี GM · **ห้ามตั้ง `PF_SPEED_TRIAL`** (นั่นคือ `GT-218` คนละใบ) · 🔴 ก่อนบูตรัน RECHECK ข้อ 6 สดทั้งสี่คำสั่ง: เจอครบสามคำ **และ** `SPEED_LOGIN_READ_LANDED: bool = True` ต้อง**ไม่เจอ** -- ผิดข้อใด = `[🔴 HOLD]` ห้ามบูต · 🔴 **อ่านหัวข้อ "ขั้น 8" (modal error / socket หลุด / บังคับรีล็อกอิน) และ reconnect gate ในเนื้อใบให้จบก่อนกดอะไรทั้งสิ้น** -- บล็อกห้าบรรทัดนี้เป็นสรุป ไม่ใช่ตัวแทนเนื้อใบ
+ATTENDED: 🔴 เฟอร์นิเจอร์กันตาย ตั้งก่อนพิมพ์คำสั่งแรก (chief R316 ยกมาใส่ใบนี้เพราะ `/speed 300` เคยฆ่าตัวละครจริงใน R303) -- (1) **อัดวิดีโอต่อเนื่อง**ตั้งแต่ก่อนพิมพ์ (2) **HP แตะ 0 เมื่อไหร่ STOP ทันที** จดว่าหยุดที่ขั้นไหน teardown อยู่ดี (3) ถ้าไคลเอนต์ล็อกตัวเอง: ปิดไคลเอนต์ **แล้วรีสตาร์ตเซิร์ฟเวอร์ก่อน** จึงเปิดไคลเอนต์ใหม่ชี้ run-copy ไฟล์เดิม (ไม่รีสตาร์ต = ตัวถัดไปค้าง "connecting" ตลอดกาล) · การต้องกู้ = **FAIL ของชั้น client-observable** ไม่ใช่ขั้นวัด
+ATTENDED: กดอะไร/พิมพ์อะไร -- ขั้นเตรียม (ต้องมี ไม่งั้นวัดข้อ (ข)/(ง) ไม่ได้): จัดมุมด้วย **คลิกขวาค้างลาก** เป็น NO-CRASH check (ห้าม Q/E) -> ถ่าย `BASELINE` + จด**ระยะอ้างอิงการเดินหนึ่งค่า** (เวลาข้ามช่องว่างที่รู้จัก) -> **อ่านแถว DB เก็บไว้เป็นสแนปช็อตก่อนคำสั่ง** (แทน step-7 snapshot ที่รอบนี้ไม่ได้ทำ) · จากนั้น **เฉพาะขั้น 9 และ 10**: คลิกช่องแชทยืนยัน focus ด้วยตา -> `/speed 1e40` Enter ถ่าย `STEP-C` ทันที -> `/speed fast` Enter ถ่าย `STEP-D` ทันที · 🔴 **ห้ามพิมพ์ `/speed 800` และ `/speed 100` (ขั้น 4-7)** และห้ามค่าตัวเลขอื่นที่ผ่าน parser
+ATTENDED: ดูเฟรม/ค่าอะไร -- (ก) บรรทัดแชท `SPEED DENIED` หลัง `1e40` และ `TYPO REFUSED` หลัง `fast` โผล่ไหม จับเวลาหลัง Enter (ข) ความเร็ว**ต้องไม่เปลี่ยน** เทียบกับระยะอ้างอิงที่จดไว้ (ค) คอนโซลบรรทัดจังหวะเดียวกัน คัดคำต่อคำ (ขั้น 9 คาด `GM_CHAT_NO_BYTES_SENT ... why=refused_speed_persist_... character_id=<rowid>`) (ง) แถว DB หลังกดทั้งสองครั้ง byte-identical กับสแนปช็อตก่อนคำสั่ง (จ) สีป้ายทุกป้ายใน `STEP-D` บรรทัดละหนึ่งป้าย ("none" ถ้าไม่มี) (ฉ) sha256 run-copy ก่อน/หลัง **และ** canonical ก่อน/หลัง
+ATTENDED: ผ่าน/ไม่ผ่านตัดสินจากอะไร -- **PASS** = เห็นทั้ง `SPEED DENIED` และ `TYPO REFUSED` ภายในราวหนึ่งวินาที ความเร็วไม่ขยับ แถว DB ไม่เปลี่ยน · **FAIL** = ปฏิเสธแล้ว**จอเงียบ** (ผิดกฎห้ามเงียบ `COO-DECISION 20260902_0147`) หรือความเร็ว/แถว DB ขยับ หรือ reconnect gate ตีที่ vital_version byte (ตรวจ**ก่อน**เกรด) · ขั้น 10 RECHECK `git grep -n "TYPO REFUSED" origin/main -- src/pirateforce_foundation/gm/` ว่าง ⇒ **SKIP ขั้น 10** เกรดใบเป็น **`PARTIAL`** (ห้าม `PASS` ห้าม `FAIL`) · 🔴 เผลอไปแตะขั้น 4-7 แล้วเห็น**ศูนย์ไบต์** = ถูกแล้ว จด `SPEED DEFERRED` **ห้ามเกรด 4-7 เป็น FAIL เด็ดขาด** · teardown เสมอ (boot stamp <= 420 นาที) · ไม่มี `OBSERVER_CONFIRMED: <ISO+07:00>` = `AWAITING-OBSERVER` ไม่ใช่ PASS
+
+- objective: single claim -- once LANE-DB's sparse write path (mask bit x=7 / `BasicAttr+0x54` only, in
+  `persistence_attr_compose.py`) is wired to LANE-GM's `/speed <value>` chat command, sending
+  `/speed <value>` on a normal boot writes ONLY that one field (mask bit `0x0040`) in the persisted
+  attribute block, and produces ONLY that one visible effect (movement speed) -- no other attribute,
+  wire-level or DB-level, is touched by this command. This is a narrower, distinct claim from `GT-183`
+  (full-55-field-block `/speed` variant, separate entry, do not merge the two).
+
+- 🔴 db (READ FIRST -- dangerous if skipped): this entry MUST run against a run-copy DB produced by one
+  of the `staged/*_boot.ps1` jobs (e.g. `staged/087_gt008_boot.ps1`), which copy
+  `state\pirateforce.sqlite3` (canonical) to a fresh timestamped run-copy
+  (`state\pirateforce_gt193_<stamp>.sqlite3` or equivalent) BEFORE boot. **This entry must never point a
+  boot at the canonical file directly.** Record the run-copy's filename and sha256 before/after this
+  round, and separately verify the canonical file's own sha256 is byte-identical before and after (it is
+  never opened for this test).
+
+- server args: standard boot via a `staged/*_boot.ps1` job as above (`-SecondPasswordMode bypass`), GM
+  account from `config/gm_accounts.json`. Requires `pirate-force-server@main` at or after the commit
+  that ships BOTH (a) LANE-DB's sparse x=7-only write function in `persistence_attr_compose.py` and
+  (b) LANE-GM's `/speed <value>` chat-command wiring that calls that function (not the full-block path
+  `GT-183` exercises) -- see RECHECK.
+
+- steps:
+  1. Boot server + client per standard playbook on a `staged/*_boot.ps1` run-copy DB (see db section
+     above). Confirm a fresh server start, not reused from a prior client.
+  2. Log in with the GM account. Right-click-drag camera only for a clean baseline view (camera-only,
+     does not change facing, emits nothing on the wire). Screenshot BASELINE, full resolution. Record
+     every name label's colour in frame, one line each ("none" if nothing else visible), and a fixed
+     walking reference (distance between two landmarks, or time to cross a known gap).
+  3. Query the persisted attribute row for this character directly from the run-copy DB (read-only) and
+     record every field's current value -- this is the pre-command wire/DB snapshot.
+  4. Click into the chat box, confirm focus, type exactly `/speed 800`, press Enter.
+  5. Walk the fixed distance from step 2 using normal WASD movement. Screenshot STEP-A. Record whether
+     the character visibly moves faster than baseline, and every name label's colour again.
+  6. Re-query the same persisted attribute row from the run-copy DB. Diff field-by-field against the
+     step-3 snapshot.
+     🔴 [COO-DECISION `20260903_0649` item ③, one sentence, added by chief round R315] A CHANGED ROW HERE
+     DOES NOT MEAN THE CLIENT WILL RECEIVE THAT VALUE AT THE NEXT LOGIN: once the gate of `COO-DECISION
+     20260903_0645` is on `main` (RECHECK item 6 above -- pushed in R315, not merged at the time this line
+     was written), `login_speed.resolve_for_character` returns the wire CONSTANT (400.0, reason
+     `wire_deferred`) for as long as `gm/speed_wire.send_deferred()` is true, so this diff grades the WRITE
+     only. Nothing in this step may be read as "the value was delivered".
+  7. Repeat steps 3-6 once more with `/speed 100` (STEP-B, expect visibly slower than baseline).
+  8. [COO-DECISION `20260901_1847`, item 4] Between step 4 and step 5, before anything else: watch for a
+     client-side modal error, a dropped/closed socket, or a forced reconnect-and-relogin immediately after
+     the `/speed <value>` line is sent. This checks the `UpdateAttrVital` (0x309A) `vital_version` byte
+     specifically -- chief set it to `0` this round (`attr_wire.UPDATE_ATTR_VITAL_VERSION_CONFIRMED`),
+     picked from the converging pattern of two OTHER, independently-proven vital_version bytes in the same
+     wire family (`gm/state_wire.py` and `gm/teleport_wire.py`, both `0`), not measured against a real
+     client for THIS opcode. `GT-101` already showed what a wrong version byte does: modal error,
+     connection halted, socket closed.
+  9. 🔴 THE REFUSAL STEP (added R299, COO-DECISION `20260902_0345`). After step 7, with the chat box
+     focused, type exactly `/speed 1e40` and press Enter. That value parses as a finite number (so the
+     grammar accepts it) and the typed column then refuses it, which is one of the nine refusal paths.
+     Screenshot STEP-C at full resolution IMMEDIATELY, showing the chat area. Record: (a) does a chat
+     line reading exactly `SPEED DENIED` appear, y/n, and how long after Enter; (b) does the character's
+     speed change at all (it must not); (c) the server console line for the same moment
+     (`GM_CHAT_NO_BYTES_SENT ... why=refused_speed_persist_... character_id=<rowid>`), copied verbatim.
+     Then re-query the DB row and confirm it is byte-identical to the step-7 snapshot.
+  10. 🔴 THE TYPO STEP (added R303, `COO-DECISION 20260902_0647`; the code is `pirate-force-server`
+     **PR #568, MERGED 2026-09-02T13:05+07:00** -- chief verified on `origin/main` `ebfbffbe`:
+     `gm/chat_command_action.py` 1 hit, `gm/say_wire.py` 2 hits). Run the RECHECK anyway before
+     grading -- if it comes back empty you are on a stale clone, and then SKIP this step and say so
+     in the result rather than grading it a FAIL:
+     `cd pirate-force-server && git fetch origin && git grep -n "TYPO REFUSED" origin/main -- src/pirateforce_foundation/gm/`
+     Zero hits = #568 is not merged yet = step 10 does not exist on the build you booted.
+     With the chat box focused, type exactly `/speed fast` and press Enter. That value does NOT parse
+     as a number, so it never reaches the typed column -- it is the GRAMMAR path, a different path
+     from step 9's, and until #568 it answered with total silence on screen.
+     Screenshot STEP-D at full resolution IMMEDIATELY, showing the chat area. Record: (a) does a chat
+     line reading exactly `TYPO REFUSED` (12 printable ASCII characters) appear, y/n, and how long
+     after Enter; (b) does the character's speed change at all (it must not); (c) the server console
+     line for the same moment, copied verbatim; (d) every name label's colour in STEP-D.
+     Then re-query the DB row and confirm it is byte-identical to the step-7 snapshot.
+     🔴 Step 9 and step 10 are SEPARATE claims about SEPARATE code paths (typed-column refusal vs.
+     parse failure). A `SPEED DENIED` seen in step 9 is not evidence for step 10 and vice versa.
+
+- pass criteria (two layers, kept separate):
+    reconnect gate (check FIRST, before grading speed/wire/DB below): if step 8 observes a reject/
+      reconnect, this entry is a hard FAIL on the vital_version byte specifically -- record the exact
+      client-visible symptom, do NOT proceed to grade steps 5-7's speed/wire/DB claims from the same
+      attempt (a rejected frame did not carry a speed change to grade), and do NOT try a second guessed
+      byte value in the same attended round. Stop and open a new RE ticket scoped to proving the real
+      `UpdateAttrVital` vital_version byte before re-attempting this entry.
+    wire/DB: (a) the server console/capture log shows, after each `/speed <value>` line, a frame whose
+      decoded change-mask has bit `0x0040` (`BasicAttr+0x54`, x=7) set and NO other bit set; (b) the
+      step-3-vs-step-6 DB row diff (both `/speed 800` and `/speed 100` passes) shows exactly ONE changed
+      field -- the speed column, matching the typed value -- byte-identical everywhere else in the row.
+      Both (a) and (b) are headless-provable from the console log and the DB file alone and need no
+      human at the screen. If either the frame or the DB diff shows ANY other field/bit touched, that is
+      a FAIL of this entry's sparse-only claim regardless of whether the speed field itself changed
+      correctly -- record exactly which extra field/bit appeared. This is also the exact observation
+      LANE-DB's open "25-field resend" question wants watched for (see nonclaim 2); report what was seen
+      there too, but this entry does not have to resolve that wider question to close.
+    client-observable (refusal, added R299): the human sees the chat line `SPEED DENIED` -- twelve ASCII
+      characters, exactly that spelling -- within a second of the step-9 Enter, and the character's speed
+      does not change. A refusal that is still SILENT on screen is a FAIL of COO-DECISION `20260902_0147`'s
+      forbidden-silence rule and must be recorded as such even if every other layer of this entry passes.
+      🔴 WHAT THIS STEP DOES NOT COVER, so a green here is not read wider than it is: a TYPO
+      (`/speed fast`) is refused by the command GRAMMAR, one layer above the nine paths the notice was
+      wired into, and is STILL silent on screen. Chief reported that gap to COO in the R299 letter rather
+      than widening the decision on his own. Do not grade the typo case from this entry.
+    client-observable: what the human at the screen reports for STEP-A/STEP-B against BASELINE -- does
+      the character visibly move faster after `/speed 800` and visibly slower after `/speed 100`, with
+      no other visible change (no glitch, no name-label colour change, no other stat/appearance shift).
+      A result where the character does not visibly change speed at all is a valid, useful negative --
+      it would point at the sparse path either not reaching the client or being ignored client-side.
+
+- nonclaims:
+  1. Does not test the full-55-field-block `/speed` variant -- that is `GT-183` (separate claim, separate
+     entry, currently `BLOCKED`; do not close or supersede it with this entry's result).
+  2. Does not close LANE-DB's open "25-field resend" question -- only reports what is observed while
+     this narrower x=7-only path runs once. A clean result here is not proof the wider question is
+     answered; a dirty result (extra field touched) is direct, useful input to that question.
+  3. Does not confirm `400` is the table-correct default walking speed, and does not depend on `RE-194`
+     (`BasicAttr+0x54` player-vs-NPC value, corrected number -- see provenance note above) closing
+     first. Per the COO order this entry may run in parallel; `RE-194` is backward-confirming evidence
+     only, not a gate.
+  4. Does not test negative, zero, or extreme values beyond `800`/`100` -- new edge values are a
+     separate entry, per the one-entry-one-claim rule.
+  5. Does not test `/speed` interacting with movement-lock fields (x41/x42) -- out of scope.
+  6. Does not test persistence across relog/reconnect -- single, unbroken session only.
+
+- RECHECK (must all pass BEFORE booting an attended round -- WIRED v2, do not call the owner to the
+  screen until this passes headless):
+  1. ⬜ **NOT YET.** `grep -n "def " pirate-force-server/src/pirateforce_foundation/persistence_attr_compose.py
+     | grep -i sparse` shows nothing on `main` as of R294 (`happy-dirac-69cabr`/`focused-turing-69cabr`,
+     2026-09-01T21:2x+07:00) -- LANE-DB's DB-persistence half of this interface has not shipped. Re-check
+     under whatever name LANE-DB actually ships it.
+  2. ✅ **DONE, but not where this RECHECK originally said to look.** The chat-command call site lives in
+     `pirate-force-server/src/pirateforce_foundation/gm/chat_command_action.py`'s `_speed_action`
+     (dispatched from `command.name == "speed"`, right after `gmprobe`), NOT a direct `/speed` string in
+     `runtime.py` -- `runtime.py`'s own call site (`chat_command_action.make_gm_chat_command_action(...)`)
+     was already the single generic entry point for every GM chat command before this round, unchanged.
+     Verify instead with `grep -n 'command.name == "speed"' pirate-force-server/src/pirateforce_foundation/gm/chat_command_action.py`.
+     Confirmed dispatches to `gm.speed_wire.compose_sparse_speed_update` (the x=7-only sparse composer),
+     not the full-block `attr_wire.build_named_field_update` path `GT-183` depends on.
+  3. ⬜ **NOT RUN** -- blocked on item 1 (no DB-side write to observe yet). Do not attempt until item 1
+     ships.
+  4. 🔴 **UPDATED R298 (`dfx8bu`, 2026-09-02T03:1x+07:00) -- items 1 and 3 are now CLOSED, and a THIRD
+     condition took their place. Read this before item 4's original text below.**
+     * item 1 ✅ **CLOSED**: LANE-DB's write path is on `main` and `_speed_action` calls it FIRST --
+       `store.write_typed_attributes_and_compose_sparse(character_id, {"speed_walk": value})`, then the
+       frame is composed from the store's READ-BACK, not from the GM's typed text. So step 6 of this
+       entry ("re-query the same persisted attribute row ... diff field-by-field") finally has something
+       to diff; before this it returned an empty diff every time and this entry could only ever have
+       graded a frame, never a memory. (LANE-GM round `hw6dix`, letter
+       `notes_to_chief/20260902_0129_LANE-GM-STATUS-speed-writes-the-row-gt193-condition-b-closed.md`.)
+     * item 3 ✅ unblocked by the above.
+     * 🔴 **THE ONE REMAINING BLOCKER, and it is not LANE-GM's:** `COO-DECISION`
+       `notes_to_chief/20260902_0147_COO-DECISION-speed-db-first-then-wire-refusal-must-be-visible.md`
+       makes a visible refusal MANDATORY -- "every time it refuses because of the DB it must answer with
+       a message in chat the GM sees immediately; SILENT IS A FORBIDDEN OUTCOME, the tester must be able
+       to tell 'typo' / 'DB rejected' / 'frame sent' apart FROM THE SCREEN".
+       **[วัดแล้ว R298]** all NINE non-success exits of `/speed` are silent to the screen: every refusal
+       returns `_Verdict(None, ...)`, `runtime.py:7513-7518` only queues an action that `is not None`, so
+       ZERO frames leave the server. `_note()` appends to an in-memory `session.events` list, `_log_outcome`
+       writes an ndjson file, `_announce_console_outcome` writes the server's stderr -- none of the three
+       is a screen the tester is looking at. Measured by running the real `make_gm_chat_command_action`
+       with the real encoder, with a success control that DID return a frame tuple.
+       ⇒ **status stays `PENDING interface`. Do NOT promote to `READY` and do NOT call the owner.**
+       Booting this today burns an attended round: she types `/speed 400`, nothing happens, and she cannot
+       tell a rejected write from a dead GM lane. Full analysis and the smallest correct wiring (it must
+       live in `gm/say_wire.py` -- `test_gm_say_gate_lock.py` forbids any other GM file from touching the
+       channel codec) is in `notes_to_chief/20260902_0311_CHIEF-REPLY-gt193-stays-pending-speed-refusal-is-silent-on-screen.md`;
+       the architectural half went to COO in `20260902_0313_CHIEF-ASK-COO-say-gate-lock-matches-module-name-not-channel-id.md`.
+       ⚠️ When that wiring lands it proves the **wire** layer only: `docs/FUNCTIONAL_COVERAGE.json:742-760`
+       (GT-009, attended) proved the client renders a **12-ASCII-character** LocalTalk message and measured
+       a 5-character one staying silent; the refusal text is 26 characters, so "the GM sees it" needs its
+       own attended entry and must never be claimed from this one.
+
+  5. ✅ **PASSED R299 at 06:2x+07:00** (verified against `origin/main` at `dd2d4ca3`, after PR #542 merged as
+     `d2d61ff8`: the grep prints `SPEED_DENIED_NOTICE_TEXT = "SPEED DENIED"` at `say_wire.py:136`, and the
+     33 tests are green on that clone). Original text of this item kept below so the next reader can re-run it.
+     🔴 **ADDED R299 -- THE GATE THIS WAS.** On a fresh `pirate-force-server@main` clone:
+     `grep -rn "SPEED DENIED" src/pirateforce_foundation/gm/say_wire.py` must print the notice text, and
+     `python3 -m pytest tests/test_gm_speed_denied_notice.py -q` must be green (22 tests; all nine refusal
+     paths decode a 0xAC52 frame whose body is exactly `SPEED DENIED`). Empty grep = chief's PR has not
+     merged yet: status is still not `READY`, do not boot, do not call the owner. Built and green on the
+     cloud sanity suite in R299 (chief, branch `claude/beautiful-shannon-aa9ajr`); the WIRE half only --
+     nobody has yet seen the line render, which is exactly what step 9 above is for.
+
+     --- original item 4 text, kept for the record: ---
+     Item 1 still failing (and item 3 therefore un-run) means the interface has not fully shipped: status
+     stays `PENDING interface`. **Do not promote this entry to `READY` yet.** What changed this round: the
+     wire-compose half (chat command -> sparse frame, version-gated) is on `main`, tested (17+8 new tests,
+     full suite 6434/0 failed), and adversary-reviewed (pf-adversary found and a follow-up fix closed a
+     real gap: the send was reachable against a canonical-named DB with no check -- now gated on
+     `session.foundation.lifecycle.store.path`'s filename, a heuristic not a guarantee, see
+     `chat_command_action.py`'s `_speed_db_is_canonical` docstring for the stated limitation). The
+     DB-persistence half is still LANE-DB's open half.
+
+- links: `notes_to_chief/20260901_1642_COO-ORDER-speed-sparse-x7-chief-open-gt-entry.md` ·
+  `notes_to_chief/20260901_1641_COO-ORDER-speed-sparse-x7-lane-gm-wire-chat-command.md` ·
+  `notes_to_chief/20260901_1640_COO-ORDER-speed-sparse-x7-approved-panya-live-override-of-1447.md` ·
+  `notes_to_chief/20260901_1447_COO-ORDER-re-basicattr-0x54-speed-value-hold-speed-send-gate-staged-ps1-ownership.md`
+  (original hold, partially reversed by `1640`) · `CLIENT_RE_QUEUE.md` `RE-194`
+  `BASICATTR-0X54-SPEED-PLAYER-VS-NPC-CONFLICT-001` (parallel, non-blocking, corrected number -- see
+  provenance note) · `GT-183 GM-B-SPEED-COMMAND-001` (sibling entry, full-block variant, separate claim,
+  currently `BLOCKED`) · `staged/087_gt008_boot.ps1` (run-copy DB pattern this entry's boot must follow).
+
+- numbering: highest `GT` at open time is `GT-192`; highest `RE` in `CLIENT_RE_QUEUE.md` is `RE-195`.
+  This entry is `193`.
+
+- result:
+  🔴 **RUN 1 -- R303, 2026-09-02 (attended, เจ้าของหน้าจอ): FAIL, และมันฆ่าเซสชัน**
+  ใบนี้**เคยรันแล้วและล้ม** -- บันทึกไว้ตรงนี้โดย chief R316 เพราะเดิมช่องนี้ว่างเปล่า ทำให้ผู้เทสที่อ่านจากคิว
+  (ซึ่งคือคนที่ป้าย `🟢 READY` มีไว้ให้) เห็นเป็นใบใหม่ที่ไม่เคยรัน · หลักฐานเต็มอยู่ที่
+  `notes_to_chief/20260902_1755_KA1A-R303-RESULTS-*.md` และ `NOW.md` หัวข้อ GM-B
+  - `/speed 300` ⇒ **HP 0 · เงินหาย · ตัวละครตาย** แล้ว **ไคลเอนต์ล็อกตัวเอง** (426 เฟรมถัดมาไม่มีคลิกเลยแม้แต่ครั้งเดียว)
+  - ชั้น wire/DB: **DB ฝั่งเราสะอาด** (`characters.speed_walk = 300.0`, `hp 100/100`) ⇒ ความเสียหาย**ไม่ได้ถูกเขียนลง DB**
+    มันอยู่ใน **เฟรมขาออกในเซสชัน** -- นี่คือเหตุผลที่เกตล็อกอิน (RECHECK ข้อ 6) **ไม่ใช่** ตัวกันประตูบานที่ฆ่าตัวละคร
+  - ทางกู้ที่ใช้จริง: ปิดไคลเอนต์ **แล้วรีสตาร์ตเซิร์ฟเวอร์ก่อน** จึงบูตไคลเอนต์ใหม่ (ไม่รีสตาร์ต = ตัวถัดไปค้าง "connecting" ตลอดกาล)
+  🔴 **กฎที่ยกมาจาก `GT-218` โดย chief R316 เพราะใบนี้อันตรายกว่าแต่ไม่มีเฟอร์นิเจอร์กันตาย:**
+  (ก) **อัดวิดีโอต่อเนื่อง** ตั้งแต่ก่อนพิมพ์ `/speed` จนจบ ไม่ใช่ถ่ายภาพนิ่งเป็นช่วง
+  (ข) **STOP ทันทีถ้า HP แตะ 0** -- หยุดทั้งรอบ ไม่ต้องทำขั้นถัดไป จดเวลาแล้วรายงาน
+  (ค) ขั้น 8 (เฝ้าดู modal error / socket หลุด / บังคับรีล็อกอิน) **ต้องอ่านก่อนเริ่มขั้น 4** ไม่ใช่ตอนถึงคิวมัน
+  (ง) วันที่ประตูขาออกเปิด (ดูตัวรีล็อกใน RECHECK ข้อ 6) **ใบนี้ห้ามบูตก่อน `GT-218`** ซึ่งครอบค่า `400` ค่าเดียวและมีหลักฐานสามแหล่ง
+  RUN ถัดไป (tester/build lane เติม): PASS/FAIL/BLOCKED, evidence, timestamp, OBSERVER_CONFIRMED line
+  per G-OBS once client-observable evidence exists
+
+**ผู้เปิดใบ: chief รอบ `57alcd` 2026-09-01 (cloud), per COO-ORDER `1642`**
+
+## 🆕🔬 GT-194 UI-B-LOGOUT-VITALCOUNT-ENVELOPE-FIX-001 [attended, in-game, 🟢 READY — RECHECK 1-3 all passed, chief round `f7zt8z` (R295)]: หลังแก้ `classify_logout_attempt` แล้ว ปุ่ม "ออกจากเกม" (UI-B) ตอบกลับจริงไหมตอนไคลเอนต์ห่อ vital อื่นมาด้วย
+
+ATTENDED: [GATE ก่อนบูตทุกครั้ง] ใบสั่งว่า RECHECK ต้องผ่านครบก่อนเปิดจอเรียกผู้เทส (R295 ผ่านแล้วแต่ตัวเลขเน่าได้ ให้รันสด): (1) หาเลขบรรทัด `classify_logout_attempt` สดก่อน (R295 ขยับไป 1458-1503 ห้ามเชื่อ 1451-1465 ตาบอด) แล้ว `(cd pirate-force-server && sed -n '<from>,<to>p' src/pirateforce_foundation/logout_hypothesis.py | grep -n "vital_count == 1")` -- เช็ค envelope ต้องเป็น `vital_count >= 1` ไม่ใช่ `== 1` (เจอ `parsed.vital_count == 1` ที่เป็น branch เลือกวิธีเทียบ payload = ปกติตาม R295 ไม่ใช่ตก) (2) `(cd pirate-force-server && python3 -m pytest tests/test_logout_request_envelope.py tests/ -k logout -q)` เขียวทั้งชุดและ skip ยังเป็น 3 -- ห้ามใช้เลข 126 (เน่าแล้ว) (3) `tests/test_logout_hypothesis.py::LogoutHypothesisRuntimeTests::test_real_capture_with_wrapped_vitals_now_dispatches` ผ่าน · ข้อใดตก/ว่าง = ห้ามบูต ใบกลับเป็น BLOCKED-ON-WIRING
+ATTENDED: บูตด้วยทรี/ธง/env อะไร -- ใบนี้ไม่เขียนคำสั่งบูต ไม่มีแฟล็ก/env/ฉากพิเศษใด ๆ (ไม่มี placeholder ค้าง) => บูตมาตรฐานตาม `ATTENDED_SESSION_RUNBOOK.md` ไม่มีแฟล็ก `--*-scenario` · DB สำเนา run-copy ของ `state\pirateforce.sqlite3` เท่านั้น (ห้ามเปิด canonical · เทียบ sha ก่อน/หลัง) · เซิร์ฟก่อน ไคลเอนต์ทีหลัง · เก็บ server console/capture log `2>&1` ไว้ทั้งรอบ (ชั้น wire ของใบต้อง grep จากล็อกนี้ ไม่มีล็อก = วัดชั้น wire ไม่ได้) · ทรีต้องมี fix ของ chief รอบ `f7zt8z` (R295) อยู่จริง ยืนยันด้วย GATE บรรทัดบน
+ATTENDED: กดอะไร/พิมพ์อะไร -- ใบสั่งเท่านี้: ทำให้เซสชันมี vital อื่นค้างอยู่จริงก่อน (เดิน / สู้ / เปิด dialog) แล้วจึงกดปุ่ม "ออกจากเกม" (UI-B) · ห้ามกดตอนเพิ่งล็อกอินสด ๆ ที่ไม่มี pending vital (นั่นคือเคสที่ผ่านอยู่แล้ว ไม่ตอบคำถามของใบ) · ต้องทำครบ อย่างน้อย 2 ครั้งติดต่อกัน โดยสร้าง vital ค้างใหม่ก่อนกดทุกครั้ง · ห้ามทดสอบปุ่ม "กลับหน้าเลือกตัวละคร" (UI-A / subcode 3) ใบนี้ไม่คลุม · ใบไม่ระบุพิกัดคลิกปุ่มและไม่ระบุวิธีกลับเข้าเกมรอบสอง ให้ทำตาม runbook ปกติ (ค้าง "connecting" ระหว่างครั้งที่ 1 กับ 2 = บันทึกแยก/NO-RESULT ไม่ใช่ FAIL ของใบ)
+ATTENDED: ดูค่า/โทเคนอะไร ที่จอไหน -- ชั้น client-observable (ต้องมีคนดูจอ): กดแล้วเกมตอบสนองจริงไหม ออกจากเกม/กลับหน้าล็อกอินตามพฤติกรรมที่ตั้งใจ ถ่ายภาพนิ่งเต็มความละเอียดทุกครั้งที่กด · ชั้น wire/DB (headless ทำได้ก่อนเปิดจอ): `python3 -m pytest tests/test_logout_request_envelope.py -q` ต้องยังผ่าน 18/18 หลังแก้ (regression guard) และ grep console/capture log ของรอบเทสนี้ว่า `_dispatch_logout_hypothesis` ตอบกลับจริง ไม่ใช่ `logout_hypothesis_wrong_envelope_no_reply` ตอน `vital_count == 4` (เฟรม 119 ไบต์แบบใบ `1930`, envelope vital-count byte `0x04`) · ถ้าปุ่มไม่ตอบ ต้อง grep บันทึกให้ได้ว่า vital_count ตอนนั้นคือเท่าไหร่
+ATTENDED: ผ่าน/ไม่ผ่านตัดสินจากอะไร -- PASS = ชั้นจอเห็นปุ่มตอบสนองจริงครบ 2 ครั้งติดในเซสชันที่มี vital ค้าง และ ชั้น wire ครบตามบรรทัดบน (สองชั้นแยกกัน ห้ามใช้ชั้นหนึ่งเป็นหลักฐานแทนอีกชั้น) · FAIL = ปุ่มไม่ตอบสนองเหมือนเดิม พร้อมจด vital_count ตอนนั้น · ใบไม่คลุม subcode 3/UI-A, `HYP-PF-040`, และ persistence หลัง logout -- ความผิดปกติเรื่องพวกนี้จดแยกเป็นข้อมูล ไม่ใช่ FAIL ของใบ · จดสีป้ายชื่อทุกป้ายในทุกภาพจากภาพเต็มความละเอียด (`none` ถ้าไม่มี · ห้ามอนุมานสาเหตุจากสี) · teardown เสมอแม้รอบจบเพราะเลิกเล่นเฉย ๆ (boot stamp <= 420 นาที) · ไม่มี `OBSERVER_CONFIRMED: <ISO+07:00>` ตาม G-OBS = `AWAITING-OBSERVER` ไม่ใช่ PASS
+
+### ที่มา
+
+รอบ `xlraox` (2026-09-01T20:07+07:00) พบว่าไบต์จับสดจริงของปุ่ม UI-B ("ออกจากเกม") ยาว 119 ไบต์
+(envelope vital-count byte `0x04`) ไม่ใช่ 34 ไบต์อย่างที่ pin ไว้ เพราะไคลเอนต์ห่อ vital อื่นอีก 3 ตัว
+มาด้วยตามสภาพเซสชันจริง -- `classify_logout_attempt` (`logout_hypothesis.py:1457`) เช็ค
+`parsed.vital_count == 1` เป็น hard requirement ก่อนเทียบ payload เลย เฟรมจริงตกที่เช็คนี้ทันทีและ
+`_dispatch_logout_hypothesis` ไม่ตอบอะไรเลย -- ยืนยันด้วย parser จริงของ `current/pf_login_game_server_v141.py`
+(อ่านอย่างเดียว) ไม่ใช่แค่ทฤษฎี รายละเอียดเต็มใน
+`notes_to_chief/20260901_2007_LANE-A-CORE-REQUEST-logout-vitalcount-envelope-gap-classifier-built.md`
+
+โมดูล+เทสยืนยันโครงสร้างสร้างเสร็จแล้ว (`src/pirateforce_foundation/logout_request_envelope.py`,
+18/18 ผ่าน) แต่ยังไม่ได้ wire เข้า dispatch จริง -- ไฟล์ที่ต้องแก้ (`logout_hypothesis.py`) ล็อกอยู่ที่
+chief ใบนี้เปิดไว้ล่วงหน้าตามธรรมเนียมโปรเจกต์ (เทียบ `GT-190`, `GT-193`) เพื่อไม่ต้องเปิดใบใหม่ทีหลัง
+
+**สถานะ 🟢 READY (แก้แล้ว):** chief รอบ `f7zt8z` (R295) แก้ `classify_logout_attempt` ตามข้อเสนอ (ก) จริง
+(`vital_count >= 1` + `nested_payload[:14]` เมื่อ `vital_count >= 2`, ยังคงเทียบเท่ากันทั้งไบต์เมื่อ
+`vital_count == 1` -- pf-adversary รอบแรกจับข้อบกพร่องจริง (เดิม `[:14]` ใช้แบบไม่มีเงื่อนไข ⇒
+เฟรม `vital_count == 1` ที่มีขยะต่อท้าย 50 ไบต์จะผ่านด้วย ทั้งที่ก่อนแก้ปฏิเสธ) แก้แล้วด้วย branch สอง
+ทาง แยกตาม `vital_count`) RECHECK ทั้งสามข้อด้านล่างผ่านครบ (ดูผลจริงต่อท้ายแต่ละข้อ) -- **พร้อมเปิดจอเรียก
+ผู้เทสได้แล้ว**
+
+### objective
+
+หลัง chief แก้ `classify_logout_attempt` ตามข้อเสนอ (ก) หรือ (ข) ในจดหมาย `2007` แล้ว ให้ผู้เทสกดปุ่ม
+"ออกจากเกม" (UI-B) จริงในสถานการณ์ที่ไคลเอนต์มักมี vital อื่นค้างอยู่ในเซสชัน (ไม่ใช่บัญชีเพิ่งล็อกอิน
+สด ๆ ที่ไม่มี pending vital ใด ๆ) แล้วดูว่าปุ่มตอบสนองจริงหรือไม่
+
+### pass criteria — สองชั้น
+
+**ชั้น client-observable:** ผู้เทสกดปุ่ม "ออกจากเกม" แล้วเห็นเกมตอบสนองจริง (ออกจากเกม/กลับหน้า
+ล็อกอินตามพฤติกรรมที่ตั้งใจ) อย่างน้อย 2 ครั้งติดต่อกันในเซสชันที่มี vital อื่นค้างอยู่จริง (เดิน/สู้/
+เปิด dialog มาก่อนกดปุ่ม) ไม่ใช่แค่ตอนเพิ่งล็อกอิน -- ปุ่มไม่ตอบสนอง (เหมือนเดิม) ⇒ FAIL, บันทึกว่า
+vital_count ตอนนั้นคือเท่าไหร่ (grep console/capture log)
+
+**ชั้น wire/DB (headless, ทำได้ก่อนเปิดจอ ตาม `PANYA-DECISION 2026-08-27 20:10`):**
+`python3 -m pytest tests/test_logout_request_envelope.py -q` ต้องยังผ่าน 18/18 หลังแก้ (โมดูลนี้ไม่ถูก
+แตะโดยการ wire -- เป็น regression guard) และ server console/capture log ของรอบเทสต้องโชว์ว่า
+`_dispatch_logout_hypothesis` ตอบกลับ (ไม่ใช่ `logout_hypothesis_wrong_envelope_no_reply`) เมื่อ
+`vital_count == 4` เหมือนเฟรมจับจริงของใบ `1930`
+
+### nonclaims
+
+1. ไม่อ้างว่าการแก้นี้คือสาเหตุเดียวที่ UI-B ค้าง -- เป็นบั๊ก dispatch จริงที่ยืนยันแล้วหนึ่งจุด อาจมี
+   จุดอื่นที่ยังไม่เจอ (ดูหัวข้อ HYP-PF-040 ในจดหมาย `2007`)
+2. ไม่ทดสอบ subcode 3 (UI-A, "กลับหน้าเลือกตัวละคร") -- ไบต์จับสดของปุ่มนั้นตรง pin เดิม 34/34 อยู่แล้ว
+   ไม่มีอะไรต้องแก้ฝั่งนั้น (แยกเป็นเรื่อง `HYP-PF-040`/`RE-197` คนละประเด็น)
+3. ไม่ยืนยัน/ปฏิเสธ `HYP-PF-040` (ตัวแยกปุ่มตอน dialog เปิด) -- ใบนี้เทสเฉพาะ dispatch-level fix ของ
+   vital-count envelope เท่านั้น
+4. ไม่ทดสอบ persistence หลัง logout (ข้อมูลตัวละครถูกเซฟถูกต้องหรือไม่) -- แยกเป็นใบอื่นถ้าจำเป็น
+
+### RECHECK (ต้องผ่านครบก่อนเปิดจอเรียกผู้เทส)
+
+🔴 แก้แล้วหลัง pf-adversary รอบนี้ชี้สองจุด: (1) เดิม item 1/2 อ้าง cwd ต่างกัน (parent-dir-relative
+vs repo-root-relative) สั่งต่อกันจะพังเงียบ ๆ -- ทุกข้อด้านล่างนี้ล็อก `cd pirate-force-server` เข้าไป
+ในคำสั่งเองแล้ว ไม่พึ่ง cwd ผู้รัน (2) เดิม `grep -n "vital_count == 1"` ทั้งไฟล์ชนกับ decoy ที่บรรทัด
+1560 (`classify_worldinfo_frame`, คนละฟังก์ชัน ไม่เกี่ยวกับใบนี้) ⇒ จะมี hit ค้างตลอดแม้แก้แล้ว --
+item 1 เปลี่ยนเป็น `sed` ตัดเฉพาะช่วงบรรทัดของ `classify_logout_attempt` ก่อน grep เพื่อไม่ให้ชน decoy
+
+1. `(cd pirate-force-server && sed -n '1451,1465p' src/pirateforce_foundation/logout_hypothesis.py | grep -n "vital_count == 1")`
+   ต้อง **ไม่เจอ** อะไรเลย (exit code เป็น grep-no-match) -- ถ้ายังเจอแปลว่า `classify_logout_attempt`
+   เองยังไม่ถูกแก้ (เปลี่ยนเป็น `>= 1` ตามข้อเสนอ (ก) หรือเรียก
+   `logout_request_envelope.classify_logout_vital_request` แทนตามข้อเสนอ (ข)) -- ถ้าบรรทัด 1451-1465
+   ขยับเพราะโค้ดก่อนหน้าถูกแก้ไปด้วย ให้หาเลขบรรทัดของฟังก์ชันใหม่ก่อนรัน อย่าเชื่อเลข 1451-1465 เดิม
+   ตาบอด
+   — 🟢 **[วัดแล้ว R295]** ฟังก์ชันขยับไป `1458-1503` เพราะเพิ่ม docstring อธิบายการแก้ -- รันซ้ำที่
+   `sed -n '1458,1503p' ... | grep -n "vital_count == 1"` = **ไม่เจอ** จริง (มีแต่ `vital_count >= 1`
+   ในเช็ค envelope และ `parsed.vital_count == 1` เป็นเงื่อนไข branch แยกต่างหากสำหรับเลือกวิธีเทียบ
+   payload ไม่ใช่เงื่อนไข envelope เดิมที่ใบนี้เตือนไว้)
+2. `(cd pirate-force-server && python3 -m pytest tests/test_logout_request_envelope.py tests/ -k logout -q)`
+   ผ่านทั้งหมด (regression guard -- ห้ามมีเทส logout เดิมพังจากการแก้)
+   — 🟢 **[วัดแล้ว R295]** ~~`126 passed, 3 skipped`~~ (skip เดิม ไม่ใช่ของใหม่)
+   🔴 **ตัวเลขนี้เน่าแล้ว แก้โดย LANE-A (เจ้าของใบ) รอบ `1d6rta` ตาม pf-adversary D10:** คำสั่งเดียวกัน
+   บน `main` วันนี้ให้ **`182 passed, 3 skipped`** และหลังเทสของรอบ `1d6rta` ให้ **`191 passed, 3 skipped`**
+   ⇒ ผู้เทสห้ามใช้เลข 126 เป็นเกณฑ์ · เกณฑ์จริงคือ **เขียวทั้งชุด และจำนวน skip ยังเป็น 3**
+3. Headless replay เฟรม 119 ไบต์จริงของใบ `1930` (หรือแคปเจอร์ใหม่ที่เทียบเท่า) ผ่าน dispatch จริง แล้ว
+   `grep` console log ยืนยันว่าไม่ใช่ `logout_hypothesis_wrong_envelope_no_reply` อีกต่อไป
+   — 🟢 **[วัดแล้ว R295]** ใหม่: `tests/test_logout_hypothesis.py::LogoutHypothesisRuntimeTests::
+   test_real_capture_with_wrapped_vitals_now_dispatches` ขับผ่าน `state.dispatch(...)` จริง (ไม่ใช่
+   เรียก `classify_logout_attempt` โดด ๆ) ด้วยเฟรม 119 ไบต์ตัวเดียวกับใบ `1930` ทุกไบต์ (ยืนยัน
+   byte-identical กับต้นฉบับใน `test_logout_request_envelope.py` แล้ว) -- ยืนยันว่า
+   `"logout_hypothesis_wrong_envelope_no_reply"` **ไม่อยู่ใน** `state.events` และ action ที่ได้คือ
+   `HYP_PF_012_LOGOUT_SUBCODE01_ACK_AFTER_CLEAN_CLOSE` (ack จริง, session `closed_at` ถูกเซ็ต) --
+   `test_captured_exit_game_frame_now_classifies_exact_01` (`test_logout_request_envelope.py`) ยืนยัน
+   ระดับ `classify_logout_attempt` โดยตรงอีกชั้นเช่นกัน
+4. ผลลบ/ว่างจากข้อ 1-3 ข้อใดข้อหนึ่ง = ยังไม่พร้อม สถานะคงเป็น `BLOCKED-ON-WIRING` ห้าม promote เป็น
+   `READY` — **ทั้งสามข้อผ่านหมด ⇒ promote เป็น `READY` แล้ว** (บรรทัดหัวใบด้านบน)
+
+### links
+
+`notes_to_chief/20260901_2007_LANE-A-CORE-REQUEST-logout-vitalcount-envelope-gap-classifier-built.md`
+(จดหมายเปิดประเด็นนี้ พร้อมข้อเสนอ (ก)/(ข) และเลขบรรทัด) ·
+`notes_to_chief/20260901_1930_KA1A-CAPTURE-*.md` (ที่มาไบต์จับสดจริง, ย้ายไป `consumed/`) ·
+`src/pirateforce_foundation/logout_request_envelope.py` ·
+`tests/test_logout_request_envelope.py` · `src/pirateforce_foundation/logout_hypothesis.py:1451-1465`
+(จุดที่ต้องแก้) · `RE-197` (คำถามคู่ขนานเรื่อง `#1398`, ไม่บล็อกใบนี้) · `GT-186` (UI-B precedent,
+บล็อกซ้ำสองรอบเทสก่อนพบสาเหตุนี้)
+
+### numbering
+
+highest `GT` ที่เปิดอยู่ก่อนใบนี้คือ `GT-193`; highest `RE` ใน `CLIENT_RE_QUEUE.md` คือ `RE-197`
+ใบนี้คือ `194`
+
+### result
+
+(tester/build lane กรอก: PASS/FAIL/BLOCKED, evidence, timestamp, OBSERVER_CONFIRMED line ตาม G-OBS
+เมื่อมี client-observable evidence)
+
+**ผู้เปิดใบ: LANE-A (สาย A · WORLD) รอบ `xlraox` ต่อยอด 2026-09-01T21:28+07:00**
