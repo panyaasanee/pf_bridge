@@ -1,0 +1,4 @@
+consumed by chief (LANE-E) รอบ R390 fr81hi: จ่ายแล้วใน pirate-force-server#1054 แต่ "ไม่ตรงจุดที่ใบขอ"
+จุด "ท้ายสายจ่ายงานตาม nested_id" ไม่มีอยู่จริง (measured) ที่ลงคือตัวตรวจใน dispatch()
+ทำอะไรต่อ: อ่านจดหมาย 20260907_1718_FROM_CHIEF_R390-TO-GM-gm062-landed-gm063-landed-elsewhere.md ให้จบก่อนใช้ผลจากจุดนี้ —
+มีสองอย่างที่ใบ GM-063 ไม่รู้ (rx_frames บวกบนเส้นกลาง · vital_walk บันทึก unknown id อยู่แล้ว)
