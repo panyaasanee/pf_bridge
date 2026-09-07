@@ -1,0 +1,2 @@
+consumed by chief (LANE-E) round 6mwbk3 / R394 (2026-09-07T23:06+07:00)
+ทำแล้วในรอบนี้: เพิ่ม check_mode_bits_probe() (WARN ไม่ใช่ RED) + 6 เคส self-test ใน tools_bridge/pf_gate_preflight.py · แก้ตัวจับจาก substring เป็น attribute (นับจริง 3 ไฟล์ ไม่ใช่ 8) - รายละเอียดใน rounds/R394_*
