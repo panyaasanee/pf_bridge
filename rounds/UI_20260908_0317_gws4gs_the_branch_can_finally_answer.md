@@ -70,8 +70,8 @@ push แล้ว `8c02f93..145c137` · 🔴 **ยังไม่ยืนยั
   `pytest tests/test_ui_dispatch.py` = **23 passed, 38 subtests** (ไฟล์ใหม่ของรอบนี้)
   `pytest tests/test_lane_ui_friend_mail_party_trade_dispatch_wiring.py` = ตัวพิสูจน์ว่า **ไม่มีอะไรขยับ**
   สำหรับผู้เล่น — ไฟล์นั้นขับทั้งแปดคลาสผ่าน dispatcher จริงและ assert `actions == []` **ไม่ถูกแก้ในรอบนี้**
-  ชุดเต็ม `pytest tests/` บนต้นไม้สุดท้าย (หลัง `git merge origin/main` = already up to date, main `b279c4b`): <FULLSUITE>
-  `python3 tools_bridge/pf_gate_preflight.py --repo <server>` = <PREFLIGHT>
+  ชุดเต็ม `pytest tests/` บนต้นไม้สุดท้าย (หลัง `git merge origin/main` = already up to date, main `b279c4b`): **14273 passed, 436 skipped, 0 failed, 39025 subtests (604 s)**
+  `python3 tools_bridge/pf_gate_preflight.py --repo <server>` = **PREFLIGHT PASS** (รันสองครั้ง ครั้งหลังพร้อม `--pr-body ... --pr-stage final` = `[prbody] PASS`)
   `python3 tools/pf_ui_wire_name_census.py` = `PASS -- committed artifact matches a fresh re-derive` ไม่มี `CENSUS DRIFT`
   (จำเป็นเพราะรอบนี้แก้ `docs/UI_LANE.md` ซึ่งเป็นหนึ่งในสี่แหล่ง NAME-ONLY ที่สำมะโนอ่าน — ไม่ได้เพิ่ม/ลบชื่อ vital
   จึงไม่ขยับตัวเลข)
@@ -235,4 +235,4 @@ push แล้ว `8c02f93..145c137` · 🔴 **ยังไม่ยืนยั
 5. บล็อกเกอร์ที่เช็คแล้ว **ห้ามใช้รอบไปตรวจซ้ำ**: ขั้นแรกของลำดับหยิบงานว่าง (`splep7` หัวข้อ 1) ·
    สำมะโนไม่ดริฟต์ · accessor tracepath = LANE-A · เงิน/กระเป๋า = LANE-DB · `RE-294` พับโดย K
 
-SCOREBOARD: <SCOREBOARD>
+SCOREBOARD: COMING | สาขาที่รับเฟรมแปดอย่างที่ผู้เล่นกดได้จริง (ชวนปาร์ตี้ ขอเป็นเพื่อน ส่งเมล ชวนเทรด ...) **ตอบกลับได้แล้วเชิงโครงสร้าง** — เมื่อวานมันตอบไม่ได้เลยเพราะ `lane_hooks.fire()` คืน `None` โดยการออกแบบ วันนี้มีทางให้โมดูลของสายวางเฟรมตอบลงสายได้ และวันแรกยังไม่ตอบอะไร (ทะเบียนว่าง = พฤติกรรมเท่าเดิมเป๊ะ) ตามที่ COO อนุมัติ · ผู้เล่นยังทำอะไรไม่ได้เพิ่ม จึงเป็น COMING ไม่ใช่ DONE | `pirate-force-server` PR ของรอบนี้ (draft รอ adversary สะอาด ตาม `1849`) · `pf_bridge#1844` · `#1094` แก้ conflict แล้ว `8c02f93..145c137` · ชุดเต็ม 14273 passed 0 failed · จดหมาย `0334` chief / `0336` K / `0408` COO
