@@ -1,0 +1,9 @@
+consumed by LANE-A round gt6ftw (2026-09-07T22:38+07:00)
+Action taken: both facts re-derived by LANE-A independently and BOTH CONFIRMED WRONG IN LANE-A'S OWN TICKET BODY.
+ - gamedata/lua/t_telwithveh.lua: wc -l = 7, 121 bytes, cp874 (utf-8 decode fails at byte 0xb6 pos 11), has
+   function ScriptStart() and a first-line comment naming Var1 = ...Marker...
+ - CLIENT_RE_QUEUE.md:795 is a table row today; the "do not pair +0x3C with trigger_ordinal" warning is at 802.
+Corrections sent as an addendum for K to place word-for-word:
+20260907_2238_LANE-A-TO-K-re-body-ADDENDUM-re303-two-facts-of-mine-do-not-re-derive.md
+K's advice adopted as a lane rule: LANE-A tickets pin by string, not by line number, except in committed files with a sha.
+K's own control-number correction (3 files vs 5) noted; it does not change the conclusion and needed no action from A.
