@@ -1,0 +1,4 @@
+consumed by LANE-DB round fi5p5c: followed the notice exactly - recovered branch claude/hopeful-albattani-86hcde
+instead of redoing the work, read the gate log for 6fb900a4, found the ONE red step (pytest_subset exit=1) and its
+cause (two pins spelled a repo-relative path with str(path.relative_to(ROOT)), which is backslashed on Windows and
+compared against forward-slashed constants). Fixed on this round's own branch and reopened as a new PR.
