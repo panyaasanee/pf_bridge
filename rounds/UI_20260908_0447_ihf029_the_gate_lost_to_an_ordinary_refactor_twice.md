@@ -101,7 +101,9 @@ D-D/D-E/D-G/D-H แก้ครบ
 ## หลักฐาน
 
 - `pytest tests/test_ui_dispatch.py` = **50 passed / 75 subtests** · รวมสวีต wiring/trade/party/logout = 82 / 113
-- ชุดเต็มบนต้นไม้สุดท้าย (merge `origin/main` `37cb3d7` แล้ว): ตัวเลขในบอดี้ `#1117` และหัวข้อ 4
+- **ชุดเต็มบนต้นไม้สุดท้าย** (`64de552` · merge `origin/main` `7a064e7` เป็นคอมมิตสุดท้ายจริง):
+  **14503 passed · 446 skipped · 0 failed · 42214 subtests** (595.6 s) — รันครั้งเดียวต่อรอบตามกฎ
+  🔴 รันก่อนหน้านี้บนต้นไม้กลางทาง (`1 failed`) คือรอบที่จับ regression ของกิ่งเราเองในหัวข้อ 4
 - มิวแทนต์ (คืนค่าทุกตัวหลังรัน) สิบตัว: เกตกลับไปดูผู้ลงทะเบียนอย่างเดียว · ยื่น session ดิบ ·
   ไวยากรณ์ยอม printable · ยอม non-ASCII · เรียกแบบ positional · ลบ stack walk · ลบครึ่ง `fn.__module__` ·
   ทิ้งกฎ stem `lane_` · yield กลับไปดูผู้ลงทะเบียน · ถอด needle ของ stage — **ตายทั้งสิบ**
