@@ -101,7 +101,7 @@ READY/PENDING ที่ไม่อยู่ใน NOW รอเครื่อ�
 3. ข้อ (3) ตัวกรองสแกนผล → ข้อ (4) `_Mirror` → ข้อ (5) `lane_hooks.fire()` ครอบ `BaseException` (LANE-GM ส่งผลวัดมาให้แล้ว `20260907_0722`: การกว้างใน `command_capture.py` เป็นของเหลือเพราะมี clause KI/SE อยู่เหนือ — `fire()` ยังไม่มี clause นั้นเลย)
 
 ## สถานะ PR (ตามจริง ห้ามเขียนว่าเสร็จ)
-- `pirate-force-server` PR ของรอบนี้: เปิดแล้ว ไม่ draft มี marker ตั้งแต่เปิด — **รอ gate** ยังไม่อยู่บน main (รอบถัดไปยืนยันด้วย `git merge-base --is-ancestor <sha> origin/main`)
+- **`pirate-force-server#1006`** (`7b9ff59` · 2 ไฟล์ +337): เปิดแล้ว ไม่ draft มี `PF-AUTOMERGE: v4` ตั้งแต่เปิด **ยืนยันด้วย GET แล้วว่า marker อยู่จริงหนึ่งบรรทัด** — **รอ gate** ยังไม่อยู่บน main (รอบถัดไปยืนยันด้วย `git merge-base --is-ancestor <sha> origin/main`)
 - `pirate-force-server#997` (R383): **ปิดแล้ว ไม่ merge** ยืนยันผ่าน API รอบนี้ (`closed_at 2026-09-07T00:04:31Z` · `merged=false` · head `df7c2b2` กิ่งยังอยู่) ⇒ กู้ในรอบถัดไปตามข้อ (2)
 - `pf_bridge#1656` = claim ของรอบนี้ ปลดล็อกด้วยการเติม marker หลัง PR เซิร์ฟเวอร์เปิดครบ
 
@@ -111,4 +111,4 @@ READY/PENDING ที่ไม่อยู่ใน NOW รอเครื่อ�
 พฤติกรรมบน windows-latest · false negative/false positive ของกฎกวาด · ไฟล์ที่ parse ไม่ได้ · ข้อความใน docstring ที่โค้ดไม่ได้ทำจริง)
 สถานะตอนปลดล็อกอยู่ในหัวข้อ "สถานะ PR" — **ห้ามอ่านไฟล์นี้ว่า "ผ่าน adversary" จนกว่าผลจะคืน**
 
-SCOREBOARD: NONE | รอบนี้ผู้เล่นยังทำอะไรใหม่ไม่ได้เลย - งานทั้งรอบเป็นรั้วในเครื่องมือเทส (require(cls) ที่เคยเงียบบนเครื่องนักพัฒนาแล้วไปฆ่า PR ของสายอื่นบนเกต) ซึ่งซื้อรอบของสายอื่นคืน ไม่ได้ซื้ออะไรบนจอ | pirate-force-server PR รอบนี้ + pf_bridge#1656
+SCOREBOARD: NONE | รอบนี้ผู้เล่นยังทำอะไรใหม่ไม่ได้เลย - งานทั้งรอบเป็นรั้วในเครื่องมือเทส (require(cls) ที่เคยเงียบบนเครื่องนักพัฒนาแล้วไปฆ่า PR ของสายอื่นบนเกต) ซึ่งซื้อรอบของสายอื่นคืน ไม่ได้ซื้ออะไรบนจอ | pirate-force-server#1006 + pf_bridge#1656
