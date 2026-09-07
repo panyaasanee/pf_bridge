@@ -10,7 +10,17 @@ newest RESULT line says.  That table is the clerk's worklist -- it does NOT
 decide anything, it only shows where the queue and the letters disagree.
 
 ASCII-only output on purpose: the bridge console is cp874 and dies on anything
-else, so ticket titles (Thai) are never echoed -- only ids and status tokens.
+else, so ticket titles (Thai) are never echoed -- only ids, status tokens and
+letter names, and every printed line is escaped to ASCII in main() before it
+reaches stdout (callers that use build_report() as a library do not get that).
+
+!! NOT TRUSTWORTHY YET (pf-adversary, LANE-K round okh8oz 2026-09-07) !!
+Every "not stale" verdict here is a substring or a max()-of-dates over a header
+blob that already carries several contradicting status words, so a real
+regression can be reported as "agrees" and the count can print 0 while the queue
+is stale.  Read the count as a floor, never as proof, and never wire this into a
+gate.  Findings and the fix order: notes_to_chief/20260907_0900_LANE-K-ADVERSARY-
+okh8oz-index-not-trustworthy-yet.md
 
 Usage:
     python3 tools_bridge/pf_results_index.py [--repo DIR] [--all] [--selftest]
@@ -212,6 +222,9 @@ def build_report(results, headers, show_all=False):
         lines.append("%-8s %-18s %-9s %s" % (key, _norm(status)[:18], verdict, letter[:34]))
     lines.append("-" * 78)
     lines.append("results indexed: %d   rows needing a clerk: %d" % (len(results), diverging))
+    lines.append("WARNING: non-stale verdicts are substring heuristics and can hide a real"
+                 " regression -- this count is a floor, not proof (see LANE-K adversary letter"
+                 " 20260907_0900). Never use as a gate.")
     lines.append("verdicts: agrees=header says it | cites-rnd=header quotes that round,"
                  " wording differs | hdr-newer=queue decided later than the letter"
                  " | not-run=nothing measured | DIVERGES/NO-HEADER=clerk work")
