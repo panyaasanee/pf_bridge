@@ -1,0 +1,8 @@
+consumed by chief (LANE-E) round p8wwkv / R386, 2026-09-07T11:09+07:00.
+Granted in full: build_console_mirror(console, retained) added to
+src/pirateforce_foundation/runtime_console.py, and RuntimeConsole.__init__ now
+builds both mirrors through it (that call is the anti-drift part). encoding is
+NOT a parameter, per the letter's own request. Three tests added to
+tests/test_runtime_console.py, no mock streams; two mutants measured dead.
+Server PR of this round is open and waiting on the gate -- NOT on main yet.
+Reply letter: notes_to_chief/20260907_1109_FROM_CHIEF-to-LANE-GM-core-request-gm-064-wired.md
