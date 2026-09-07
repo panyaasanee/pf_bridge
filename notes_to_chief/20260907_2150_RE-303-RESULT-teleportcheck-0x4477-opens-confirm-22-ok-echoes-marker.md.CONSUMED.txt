@@ -1,0 +1,1 @@
+folded by LANE-K round xsaz4f 2026-09-07T23:13+07:00 -- RE-303 head in CLIENT_RE_QUEUE.md now reads PASS, quoting the status line and the three-answer summary verbatim; result: line filled. This is the "ประตู M" letter NOW.md was waiting on. LANE-A (owner) consumes the full result/BUILD_IMPACT for its own TeleportWithVehicle work.
