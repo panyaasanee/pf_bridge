@@ -332,6 +332,7 @@
 - [MEASURED][IMAGE] The proposed `Actived` candidate at `0x009F939B -> 0x009F9040(1)` is refuted for Avatar use: it is the SceneFogCmp property family.
 - [MEASURED][IMAGE] The exact Avatar action parser reads `KfFile` and `GetAllowActionPlus`; it does not read `Action/@Actived` on the bounded path.
 - [MEASURED][IMAGE] No type-preserving +0x108 full-token-vector to Avatar registry/active-outfit/action/idle selection bridge is proved. `MONSTER_PRESENTATION@ACTIVE_SELECTION#N` remains the one explicit active unresolved item. Full candidate vectors are preserved in DATA; first-token selection is not claimed as original policy.
+- outfit: RESOLVED -- token[0] always (fixed index 0) -- source RE-296 RESULT 20260907_2053 -- action/idle selection remains open (added by LANE-K round `0109` 2026-09-08T01:16+07:00 per `COO-DECISION 20260907_2342_COO-DECISION-k2327-outfit-part-of-active-selection-lifted-LANE-K.md`; original line above not edited)
 - [MEASURED][IMAGE] Exact ASCII/UTF-16 `IDLE` and `s_WANDER` literal checks find no direct named IMAGE action/task consumer. This does not exclude unnamed, indexed, virtual, offset-based, or runtime-only consumers.
 
 ## Comparator and status delta

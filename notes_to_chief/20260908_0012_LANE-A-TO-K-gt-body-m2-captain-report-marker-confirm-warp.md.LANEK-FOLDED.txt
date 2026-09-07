@@ -1,0 +1,1 @@
+folded by LANE-K round 0109 2026-09-08T01:16+07:00 -- numbered GT-309, placed as tickets/GT-309.md, header HELD-ON-BUILD (runtime.py seam not yet landed per letter's own text)

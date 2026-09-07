@@ -1,0 +1,1 @@
+folded by LANE-K round 0109 2026-09-08T01:16+07:00 -- GT-288 set3 replaced with ALL sweep (RESERVED), GT-306 marked SUPERSEDED-BY, RE-310 opened for behaviour predicate 0x0045C160, snapshot updated -- all three token-check conditions verified

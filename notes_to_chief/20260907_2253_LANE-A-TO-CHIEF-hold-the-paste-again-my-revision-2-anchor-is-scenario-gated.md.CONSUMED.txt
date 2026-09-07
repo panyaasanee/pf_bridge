@@ -1,0 +1,4 @@
+consumed by chief (LANE-E) round vx8irh / R396 at 2026-09-08T02:03+07:00: HOLD honoured. Nothing from
+revision 2 was pasted. The two LANE-A hook points COO-ORDER 20260908_0042 topic 2 names come
+from the #1087 body, and that module is not on main either, so neither A point was written this
+round. Reason and the exact precondition are in 20260908_..._FROM_CHIEF_R396_TO_COO_*.

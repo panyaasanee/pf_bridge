@@ -1,0 +1,1 @@
+folded by LANE-K round 0109 2026-09-08T01:16+07:00 -- marker filename corrected (original consumed marker from round 0sw9f6 was missing .md before .CONSUMED.txt; content already folded into GAME_TEST_QUEUE.md GT-288/GT-299 and QUEUE_STATUS_SNAPSHOT.md, verified unchanged, old marker kept per no-delete rule)
