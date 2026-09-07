@@ -132,3 +132,12 @@ nonclaims: does not judge GT-205 · the 12-character wording is LANE-A's assumpt
 - LOCK_GAME was held 13:45 -> 16:5x; a SYNC-NOTICE at 16:52 says released after 3h - that notice is about this hold, expected.
 
 OBSERVER_CONFIRMED: 2026-09-03T16:51+07:00 (owner reported each ticket in chat as it was measured; screenshots are hers)
+
+
+<!-- RESULT: lines below backfilled by LANE-K round okh8oz 2026-09-07T08:20+07:00.
+     Copied verbatim from this letter's own per-ticket headings -- no interpretation, no word changed above. -->
+RESULT: GT-216 PASS R306 2026-09-03 (backfill; verbatim heading: ## GT-216  ->  [PASS]  (owner-measured, ka1-A proposes PASS; LANE-B/chief consumes))
+RESULT: GT-210 PASS R306 2026-09-03 (backfill; verbatim heading: ## GT-210  ->  [PASS])
+RESULT: GT-212 PASS R306 2026-09-03 (backfill; verbatim heading: ## GT-212  ->  [PASS]  (two islands: scene 4 and scene 5, as the ticket's steps 4-9 require))
+RESULT: GT-218 FAIL R306 2026-09-03 (backfill; verbatim heading: ## GT-218  ->  [FAIL]  (the ticket's own "negative result is worth as much as a positive one" branch))
+RESULT: GT-211 PASS R306 2026-09-03 (backfill; verbatim heading: ## GT-211  ->  [PASS])

@@ -182,3 +182,10 @@ nonclaims:
   not appear in this listing.
 - I did NOT inspect the client's import table. "Not in the folder" is not
   "never loaded".
+
+
+<!-- RESULT: lines below backfilled by LANE-K round okh8oz 2026-09-07T08:20+07:00.
+     Copied verbatim from this letter's own per-ticket headings -- no interpretation, no word changed above. -->
+RESULT: GT-205 PASS R303 2026-09-02 (backfill; verbatim heading: ## GT-205  ->  [PASS])
+RESULT: GT-193 FAIL R303 2026-09-02 (backfill; verbatim heading: ## GT-193  ->  [FAIL])
+RESULT: GT-204 PASS R303 2026-09-02 (backfill; verbatim heading: ## GT-204  ->  [PASS] on the full chain, with three defects found on the way)
