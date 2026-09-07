@@ -135,7 +135,9 @@ D4 (เลข `30/286/11` ลอยในหน้า) **ปิดโดย COO-
   (รวม `--pr-body ... --pr-stage final` = PASS หนึ่งบรรทัด marker บรรทัดที่ 107)
 - `tests/test_ui_wire_name_census.py` เดี่ยว = **53 passed, 6 subtests passed** (เดิม 44)
 - ชุดเต็ม (`pytest tests/`) รันบนต้นไม้หลัง `git merge origin/main` (Already up to date)
-  บนคอมมิตสุดท้ายจริงของรอบ (`3f3a55d`) -- **กำลังรัน ผลเติมในคอมมิตถัดไปของกิ่งนี้**
+  บนคอมมิตสุดท้ายจริงของรอบ (`3f3a55d`) =
+  **`13092 passed, 383 skipped, 34750 subtests passed` · 0 failed** (639 วินาที · exit 0)
+  ⇒ `KNOWN_RED_MAIN:` **ว่าง** จากมุมของสายนี้ · จำนวน skip เท่ารอบก่อน (383) ไม่มี skip ใหม่
   🔴 รอบแรกที่สั่งไว้ถูกยกเลิกทิ้งโดยตั้งใจ เพราะระหว่างรันมีการแก้ docstring ของ tool
   (คอมมิต `3f3a55d`) ⇒ ผลนั้นไม่ได้อยู่บนต้นไม้สุดท้าย จึงรันใหม่แทนที่จะรายงานผลของทรีเก่า
 - ไม่ stage ด้วย `git add -A` · ไม่มี skip ใหม่ · `docs/PYTEST_SKIP_PINS.json` ไม่ถูกแตะ ·
