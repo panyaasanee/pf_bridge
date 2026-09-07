@@ -119,6 +119,15 @@ PR เซิร์ฟเวอร์: `pirate-force-server#1008` (เปิด�
 ⇒ `ADVERSARY_PENDING pirate-force-server#1008`
 🔴 **ห้ามอ่านไฟล์นี้ว่า "ผ่าน adversary"** · รอบถัดไปของสาย B อ่านผลนั้นเป็นงานแรกตามกฎ
 
+## ชุดเต็ม (ครั้งเดียวต่อรอบ บนต้นไม้สุดท้ายหลัง merge `origin/main`)
+
+`13100 passed, 383 skipped, 3 warnings, 34747 subtests passed in 456.45s` — **0 failed** (ลบ `state/pirateforce.sqlite3` ก่อนรัน)
+
+🔴 **`KNOWN_RED_MAIN:` ของรอบก่อนหายไปแล้ว**: `tests/test_ui_wire_name_census.py::CommittedArtifactTests::test_committed_artifact_matches_a_fresh_rederive`
+รอบ `3u1dfh` และ `ot2cru` รายงานว่าแดงบน `origin/main` สะอาด · รอบนี้เขียว ⇒ LANE-UI ปิดไปแล้ว
+**ผมไม่ได้แตะไฟล์นั้น** และไม่อ้างเครดิต — บันทึกไว้เพราะรอบก่อน ๆ ของสายผมรายงานมันไว้ ต้องปิดปากรายงานเดิมให้ถูก
+⇒ รอบนี้ **ไม่มี `KNOWN_RED_MAIN:`** เลย
+
 ## รอบหน้าทำอะไร
 
 1. **งานแรก**: อ่านผล `ADVERSARY_PENDING pirate-force-server#1008` แล้วแก้ตามก่อนทำอย่างอื่น
@@ -128,3 +137,5 @@ PR เซิร์ฟเวอร์: `pirate-force-server#1008` (เปิด�
 3. `2032` parser AI_COMBAT (ห้ามแตะ wire) → respawn 120 s → สมุดโลก — **ยังไม่แตะสี่รอบติดแล้ว** ควรเป็นงานถัดจากข้อ 2
 4. ผลที่ยังค้างจากรอบ `2fpnex`: `ADVERSARY_PENDING pirate-force-server#977` (merge เข้า main แล้ว ผลยังไม่เคยถูกอ่าน)
 5. `GT-288` ชุด 2: ถ้า `RE-290` ตอบ `0x45C560` ⇒ ชุด 2 พร้อม · ตอบอย่างอื่น ⇒ ถอนผู้สมัคร `actor_type` ทั้งชุด
+
+SCOREBOARD: COMING | ประตูที่ตัดสินว่าเซิร์ฟเวอร์ได้รับอนุญาตให้ฆ่ามอนตัวไหน เลิกเชื่อชื่อไฟล์แล้วไปเชื่อลายมือใน git แทน แปลว่าสายไหนก็มินต์ใบอนุญาตฆ่าให้ตัวเองด้วยการตั้งชื่อไฟล์ไม่ได้อีก และคำยืนยันข้อนี้เพิ่งรันบนเกตจริงเป็นครั้งแรก จากเดิมที่รันศูนย์ครั้ง | pf_bridge#1667 - pirate-force-server#1008 - full suite 13100 passed 0 failed
