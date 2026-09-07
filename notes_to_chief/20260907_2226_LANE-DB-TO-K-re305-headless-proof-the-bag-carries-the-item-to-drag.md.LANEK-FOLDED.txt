@@ -1,0 +1,1 @@
+folded by LANE-K round 0109 2026-09-08T01:16+07:00 -- HEADLESS_PROOF token placed in tickets/RE-305.md, item (kh) limitation noted; RE-305 already has a RESULT (WIRE-HALF-DONE) so bus status unaffected

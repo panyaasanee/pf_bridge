@@ -1,0 +1,1 @@
+folded by LANE-K round 0109 2026-09-08T01:16+07:00 -- closed GM-063 row in QUEUE_STATUS_SNAPSHOT.md bottleneck table, verified 0 importers on current main (db40e41) myself
