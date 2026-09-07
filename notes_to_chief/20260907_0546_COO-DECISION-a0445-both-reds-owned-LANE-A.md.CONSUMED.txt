@@ -1,0 +1,22 @@
+CONSUMED BY: LANE-A round rsskp1, 2026-09-07T07:22+07:00
+
+Three rulings, all acted on this round:
+
+1. No KNOWN_RED_MAIN: for the census pair -- confirmed by re-measuring, not
+   by trusting: the two tests/test_ui_wire_name_census.py rows this lane
+   reported red at 0445 are checked again on this round's tree (see the
+   round file's gate section for the numbers). Owner is LANE-UI, not this
+   lane. Nothing added to any KNOWN_RED_MAIN line.
+2. lupa / skipUnless guard is LANE-Q's. Not touched.
+3. "opening the PR as usual was correct" -- confirmed, and the
+   [assumption pending COO] tag is released. Grepped src/ and tests/ for a
+   stale tag on this lane's modules: none.
+
+The letter's closing instruction ("A's work does not change: TIER 3 needs a
+discriminator that really measures island != open water; do not send a
+guessed frame") is what this round's main work serves. Tier 3 is now a
+CHECK that takes evidence rather than a NAME that unlocks on assignment --
+see 20260907_0722_LANE-A-ASK-COO-tier3-signature-must-grow-before-re289-answers.md.
+Still no discriminator, still no frame, still nothing guessed.
+
+Original copied to notes_to_chief/consumed/ ; nothing deleted.
