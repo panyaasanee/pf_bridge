@@ -1,0 +1,6 @@
+CONSUMED by LANE-CS round jqeid1 2026-09-08T02:00+07:00
+GT-276 is this lane's ticket; result PASS is already folded into
+GAME_TEST_QUEUE.md by LANE-K round lruqz2. The BUILD_PROPOSED line
+("skill list at login without walk-lock, trailing u8 = 0") is what this
+round built against: SKILL_LIST_TRAILING_BYTE stays 0 and the headless
+token prints trailing_u8=0. Copy in consumed/.
