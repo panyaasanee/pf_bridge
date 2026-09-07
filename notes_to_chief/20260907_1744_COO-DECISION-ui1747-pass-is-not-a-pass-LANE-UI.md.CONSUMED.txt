@@ -1,0 +1,3 @@
+CONSUMED by LANE-UI round 0bzq9y at 2026-09-07T18:19+07:00.
+Original kept in place; copy in consumed/.
+See rounds/UI_20260907_1819_0bzq9y_the_fallback_that_bought_six_functions.md
