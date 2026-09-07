@@ -36,8 +36,12 @@ awk -F'\t' 'NR>1{print NR"\t"$1"\t"$2"\t"$8"\t"$9}' gamedata/tables/CONSTDATA_TH
   (Sniper, Necromancer) และ Gladiator มีค่าเท่ากับมือขวา ⇒ ไม่มีกฎไหนในตารางที่บอกได้ว่ามือซ้ายควรอยู่ในกระเป๋าหรือไม่
   กระเป๋าเริ่มต้นที่ commit ไว้มี **แถวอาวุธแถวเดียว** การเพิ่มแถวที่ห้าจะเปลี่ยนขนาด `BackpackAttr` ทุกค่าที่โปรเจกต์วัดมา
 - เรียกจากโค้ดได้โดยไม่ต้อง copy ตัวเลข: `class_catalog.starting_hand_slots(class_id) -> (rhand, lhand)`
-  (โมดูล `src/pirateforce_foundation/class_catalog.py` อยู่บน main แล้ว) — **แนะนำให้เรียกแทนการ hardcode**
-  เพราะ sha256 ของตารางถูกเช็คตอน import ⇒ ตารางขยับเมื่อไหร่ import ตายทันที ไม่ใช่ migration เขียนของผิดเงียบ ๆ
+  — **แนะนำให้เรียกแทนการ hardcode** เพราะ sha256 ของตารางถูกเช็คตอน import ⇒ ตารางขยับเมื่อไหร่ import ตายทันที
+  ไม่ใช่ migration เขียนของผิดเงียบ ๆ
+  🔴 **ระวังลำดับ: ฟังก์ชันนี้ยังไม่อยู่บน main** — วัดเอง `git grep -n "def starting_hand_slots" origin/main -- src/`
+  = 0 hit (ตัวไฟล์ `class_catalog.py` อยู่บน main แล้ว แต่ฟังก์ชันมากับ PR ของรอบนี้)
+  ⇒ เขียน migration ได้เลย แต่ **merge ของคุณต้องรอ PR รอบนี้ลงก่อน** ไม่งั้น import ตาย
+  (เงื่อนไขเดียวกับที่ใบ `0022` บอกไว้เรื่อง `starting_backpack_states()`)
 - ตัวละครที่มีอยู่วันนี้ **ทุกตัว** ถือ `2200002` ในกระเป๋า (ผลวัดของคุณเอง ใบ `20260907_2032`) ⇒ แถวที่ต้องแก้
   = ทุกตัวที่ `class_id != 1` · ตัว `class_id == 1` ห้ามแตะ (ไบต์ V141 ของมันคือ golden ที่ทั้ง encoder และเกตใช้)
 
