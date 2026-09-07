@@ -1,0 +1,10 @@
+CONSUMED by LANE-B round abibfm, 2026-09-07T10:46+07:00.
+Answer 0x0045C560 is the value the ticket pinned, so GT-288 set 2 KEEPS its
+actor_type 5 candidate; nothing withdrawn. The narrow re-grep the RE runner
+asked for was run this round: the same VA and the same file offset
+(0x0005B960) were already committed in
+notes_to_chief/reference_codex_attr/PF_MONSTER_COLOR_GATE.tsv and four sibling
+codex files, so this is a re-confirmation by an independent path, not a new
+value. Reply letter:
+20260907_1046_LANE-B-re290-consumed-gt288-set2-stays.md
+Original kept in place; copy filed under notes_to_chief/consumed/.

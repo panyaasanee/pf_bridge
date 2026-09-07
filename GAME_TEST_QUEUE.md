@@ -6512,7 +6512,7 @@ body: `tickets/GT-288.md`
 
 ---
 
-## GT-291 CHARACTER-HP-BAR-RETURNS-AFTER-LEAVING-126-001  [🟡 **OPEN · ยังไม่ขึ้นรถบัส** (`HEADLESS_PROOF:` ยังไม่ผ่านเกณฑ์ `PANYA-ORDER 20260907_0159` -- ดูบล็อก "K วัดอะไรเอง" ท้ายใบ) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-DB** · **ผู้ร่วมเขต (ทางออกจากฉาก) = LANE-A** · ตั้งเลขโดย LANE-K รอบ `rlapyk` 2026-09-07T06:11+07:00 (ภายในรอบที่เห็นคำขอ) · เนื้อใบมาจากจดหมาย `notes_to_chief/20260907_0532_LANE-DB-TO-K-gt-body-hp-bar-after-leaving-126.md` คำต่อคำ · เปิดตามบรรทัด `NOW.md` (COO รอบ `0445`) "ใบสร้าง A/DB: ออก 126 คืน HP · BoatHealth != -1" และคำขอใน `notes_to_chief/20260907_0123_KA1A-R322B-RESULTS-*.md` ให้แยกออกจาก `GT-281`]
+## GT-291 CHARACTER-HP-BAR-RETURNS-AFTER-LEAVING-126-001  [🟡 **OPEN · ยังไม่ขึ้นรถบัส — เหลือช่องว่างเดียว** (โทเคนใหม่บน main `e42ea63` วางแล้วรอบ `73i74a` และ K วัด `merge-base` เอง = ผ่าน · สองเหตุผลเดิมปิดครบ · เหลือคำเดียวของ `PANYA-ORDER 20260907_0159` คือ **"ในฉากเป้าหมาย"** ซึ่งโทเคนชุดนี้ยังไม่แสดง -- ดูบล็อก "K วัดอะไรเอง" ท้ายใบ) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-DB** · **ผู้ร่วมเขต (ทางออกจากฉาก) = LANE-A** · ตั้งเลขโดย LANE-K รอบ `rlapyk` 2026-09-07T06:11+07:00 (ภายในรอบที่เห็นคำขอ) · เนื้อใบมาจากจดหมาย `notes_to_chief/20260907_0532_LANE-DB-TO-K-gt-body-hp-bar-after-leaving-126.md` คำต่อคำ · เปิดตามบรรทัด `NOW.md` (COO รอบ `0445`) "ใบสร้าง A/DB: ออก 126 คืน HP · BoatHealth != -1" และคำขอใน `notes_to_chief/20260907_0123_KA1A-R322B-RESULTS-*.md` ให้แยกออกจาก `GT-281`]
 
 "ออกจาก 126 แล้วหลอด HP ตัวละครต้องกลับมา"
 
@@ -6544,13 +6544,29 @@ ATTENDED:
 5. บูตด้วยทรี `origin/main` ปัจจุบัน ไม่ต้องตั้งธง ไม่ต้องใช้ GM
 
 HEADLESS_PROOF:
-`HP_PAIR_SELECTOR_REPORT character_id=1 primary x=3/4 shows 100/100 | alternate x=52/53 shows -1/1 (client construction default) | alternate_pair_supplied_by_this_server=False` — รัน headless 2026-09-07 บนกิ่ง `claude/loving-mccarthy-o5zblc` คอมมิต `c19132f` (ฐาน `origin/main` `9da75bf`) · 🔴 **พูดตรง**: โทเคนนี้พิสูจน์ว่า **ฝั่ง DB รู้ HP จริงของตัวละคร (100/100) ขณะที่คู่สำรองจะพิมพ์ -1/1** — มัน **ไม่** พิสูจน์ว่ามีกลไก "ติดอาวุธในฉาก 126" เพราะวันนี้ไม่มีเส้นทางส่ง `x=9`/`x=52`/`x=53` เลยทั้งรีโป · ใบนี้เป็น **ใบสังเกตฝั่งไคลเอนต์** (ดูแผง HP) ที่ไม่ต้องติดอาวุธอะไรบนเซิร์ฟก่อน · ถ้า K/COO ตัดสินว่ารูปนี้ไม่พอผ่านกติกา `0159` ให้ตีกลับมาที่ DB ได้เลย เราจะไม่เติมโทเคนปลอมให้ผ่านเกณฑ์
+```
+HEADLESS_PROOF: HP_PAIR_SELECTOR_REPORT character_id=1 | primary x=3/4 shows 100/100 | alternate x=52/53 shows -1/1 (constructor layer: client construction default, what it holds when no frame ever wrote them) | alternate x=52/53 shows 0/0 (frame layer: a frame that arms the selector with these rows absent, RE-222 Q0) | alternate_pair_supplied_by_this_server=False | selector x=9 armed value 8; 0x430E10 is not evaluated here
+cmd: python3 -c "..." -> pirateforce_foundation.persistence_hp_pair_selector.live_hp_pair_report(store, character.id) + format_report  (สร้าง SQLiteStore ชั่วคราว migrate แล้ว create_character หนึ่งตัว · read-only ต่อ DB จริง · ไม่แตะ canonical DB)
+commit: pirate-force-server origin/main e42ea63  (2026-09-07)  [byte-identical output also produced on 3cfe79b and f791fc5 earlier the same round; the token's inputs did not move between them -- `git diff --stat 3cfe79b e42ea63 -- persistence_hp_pair_selector.py gm/attr_wire.py persistence_attr_compose.py store.py migrations/` is empty]
+```
+> 🔁 **บรรทัดนี้แทนที่บรรทัดเดิมทั้งบรรทัด** ตามคำขอของเจ้าของใบ (`notes_to_chief/20260907_0842_LANE-DB-TO-K-gt291-headless-proof-on-main-and-a-correction-to-my-own-ticket.md` ข้อ 4.1) ซึ่งขอให้ **ลบ** ประโยค *"วันนี้ไม่มีเส้นทางส่ง `x=9`/`x=52`/`x=53` เลยทั้งรีโป"* ทิ้ง ไม่ใช่แก้คำ — เจ้าของใบวัดเองแล้วว่า **ครึ่งแรกของประโยคนั้นเป็นเท็จ** (`x=9` อยู่ในทุกรูป login ที่ผ่านกำแพง · `attr_wire.CURRENT_SCENE_SOURCED_ROWS -> [9]`) · วางโดย LANE-K รอบ `73i74a` 2026-09-07T10:09+07:00 **คำต่อคำ ไม่แก้สำนวน**
 
 ### 🔴 K วัดอะไรเอง (ไม่เชื่อจดหมาย · `NOW.md` `0159` "ka1-A รันซ้ำก่อนบูต ไม่ตรง = ตัดใบ")
-วัดสดในรอบ `rlapyk` บนโคลนที่ `git fetch origin main` แล้ว (`pirate-force-server` head `550a36d`):
-- `git cat-file -e 9da75bf^{commit}` = มี · `git merge-base --is-ancestor 9da75bf origin/main` = **ผ่าน** (ฐานอยู่บน main จริง)
-- `git cat-file -e c19132f^{commit}` = **ไม่มีอ็อบเจกต์นี้ในโคลนที่ fetch main แล้ว** ⇒ คอมมิตที่รันโทเคน **ไม่ reachable จาก `origin/main`**
-⇒ สองเหตุผลที่ใบนี้ยังไม่ขึ้น `QUEUE_STATUS_SNAPSHOT.md`: (1) โทเคนไม่ได้มาจากคอมมิต main ปัจจุบัน (2) **เจ้าของใบเขียนเองว่าโทเคนไม่ได้พิสูจน์ว่ากลไกติดอาวุธในฉากเป้าหมาย** ซึ่งเป็นถ้อยคำที่ `0159` บังคับ
+**รอบ `73i74a` 2026-09-07T10:09+07:00 — วัดสดบนโคลนที่ `git fetch origin main` แล้ว (`pirate-force-server` head `b302d55`):**
+- `git merge-base --is-ancestor e42ea63 origin/main` = **ผ่าน** ⇒ คอมมิตที่ผลิตโทเคนใหม่ **อยู่บน main จริง**
+- `git cat-file -e origin/main:src/pirateforce_foundation/persistence_hp_pair_selector.py` = **มี** ⇒ ไฟล์ที่ผลิตโทเคนอยู่บน main
+- `git merge-base --is-ancestor c19132f origin/main` = **ผ่านแล้วในรอบนี้** (รอบ `rlapyk` ยังไม่ reachable · ขึ้น main ระหว่างนั้น)
+- คอมมิต `e42ea63` ลงวันที่ 2026-09-07 ⇒ **อยู่ในระยะ ≤3 วัน** ตาม `0159`
+
+**สองเหตุผลเดิมที่ทำให้ใบนี้ไม่ขึ้นสแนปช็อต — ปิดไปแล้วทั้งคู่:**
+1. ~~โทเคนไม่ได้มาจากคอมมิต main ปัจจุบัน~~ ⇒ **ปิด** (K วัดเอง ข้างบน)
+2. ~~เจ้าของใบเขียนเองว่าโทเคนไม่ได้พิสูจน์ว่ากลไกติดอาวุธในฉากเป้าหมาย~~ ⇒ **เจ้าของใบถอนประโยคนั้นเอง** (จดหมาย `0842` ข้อ 2-3): `x=9` คือแถวที่เซิร์ฟส่งอยู่แล้ว **ทุก login** และเป็นแถวที่ถือ scene ของ session ⇒ กลไกติดอาวุธ **มีจริง** · สิ่งที่รีโปถอดไม่ได้คือ `0x430E10` แปลง `x=9` เป็น 8 หรือไม่ ซึ่งเป็นคำถามของจอ
+
+🟡 **ช่องว่างเดียวที่เหลือ ซึ่ง K ไม่มีสิทธิ์ปิดเอง — และเป็นเหตุผลเดียวที่ใบนี้ยังอยู่หมวด ง. รอบนี้**
+`0159` เขียนว่าโทเคนต้องแสดงว่ากลไกติดอาวุธ **"ในฉากเป้าหมาย"** · โทเคนชุดนี้ผลิตจาก **`create_character` หนึ่งตัวใน SQLiteStore ชั่วคราว** ไม่ใช่จาก session ที่อยู่ในฉาก **126** ⇒ อ่านตามตัวอักษร ยัง**ไม่ครบ**คำว่า "ในฉากเป้าหมาย" แม้จะครบทุกข้ออื่น
+🔴 K **ไม่ยกเว้นให้เอง** (`COO-DECISION 20260907_0641` ข้อ 1: "เสมียนไม่มีสิทธิ์ยกเว้นคำสั่งเจ้าของ ถูกแล้ว และ COO ก็ไม่มี" · `0159` เป็นคำสั่งที่ Panya เคาะเอง) · **ปลดได้สองทาง ทางไหนก็ได้ ไม่ต้องรอกัน**: (ก) LANE-DB เติมโทเคนบรรทัดเดียวที่รันโดย session อยู่ในฉาก `126` แล้วพิมพ์ค่าที่แถว `x=9` ถืออยู่ตอนนั้น ⇒ K พลิกขึ้นหมวด ก. ในรอบที่เห็น (ข) COO/Panya เคาะว่าโทเคน login-wide ของ `x=9` นับว่า "ในฉากเป้าหมาย" แล้ว ⇒ K พลิกในรอบที่เห็นเช่นกัน
+
+**ที่ยังไม่ปิดในเนื้อใบ (K ไม่แตะเนื้อใบ ส่งคืนเจ้าของ)**: บรรทัด nonclaims ข้างบนยังเขียนว่า *"ไม่อ้างว่าเซิร์ฟวันนี้ส่ง `x=9`/`x=52`/`x=53` ให้ไคลเอนต์ — **ไม่มีเส้นทางส่ง**"* ซึ่งเป็น **ประโยคเดียวกันที่เจ้าของใบเพิ่งถอน** · K ลบไม่ได้ (เนื้อใบ = ของเจ้าของใบ) ⇒ แจ้ง LANE-DB ในจดหมายรอบนี้แล้ว
 🔴 **K ไม่ได้ตัดสินว่าใบนี้ผิดหรือใช้ไม่ได้** — K คัดลอกสิ่งที่เจ้าของใบเขียนไว้เอง แล้วยกคำถาม "ใบสังเกตฝั่งไคลเอนต์ล้วนต้องมี `HEADLESS_PROOF:` แบบติดอาวุธไหม" ให้ COO ตัดสิน ตามที่เจ้าของใบขอมาในจดหมายเอง · จดหมาย: `notes_to_chief/20260907_0611_LANE-K-ASK-COO-headless-proof-for-observation-only-tickets.md`
 
 ### result:
