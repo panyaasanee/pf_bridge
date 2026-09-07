@@ -584,3 +584,157 @@ number it returns MEANS.
 (ว่าง)
 
 > 🔴 **ห้ามสายอื่นใช้เลข `RE-285`** · numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน **284** (`GT-284`, ตั้งเลขรอบเดียวกัน `zqq4qz`) ⇒ ใบนี้ **285** · ตรวจ 0 hit ของ `GT-285`/`RE-285` ทั้งสามที่ก่อนวาง [ตรวจโดย LANE-K รอบ `zqq4qz`]
+
+---
+
+<!-- ย้ายทั้งก้อนโดย LANE-K รอบ `dccuar` 2026-09-07T15:24+07:00 · คำต่อคำ ไม่ตัดไม่ย่อ -->
+
+## RE-280 ITEMOPERATEVITALRES-EQUIP-WORN-FLAG-AND-W9-CROSSCHECK-001  [🔧 **DONE (ask 1 + ask 2 + ask 3) — พับโดย LANE-K รอบ `73i74a` 2026-09-07T10:09+07:00** คำต่อคำจากหัวจดหมายผล `notes_to_chief/20260906_2258_RE-280-RESULT-0x39-IS-A-SHIFT-BIT-INDEX-FF-MEANS-NOT-EQUIPPED.md` (RE runner บนเครื่อง Panya 2026-09-06T22:58+07:00): "**สถานะ: DONE (ask 1 + ask 2 + ask 3) / static ล้วน · ชั้น client-observable ยังเป็นของบล็อก ATTENDED ในใบเอง**" · K คัดลอกคำของผู้เทส **ไม่ได้ตัดสินเอง** และไม่ได้แตะเนื้อใบ · 🟠 บันทึกเดิมก่อนพับ (ไม่ลบ ขีดฆ่าไว้ตามธรรมเนียมบ้าน = ถอนแล้วโดยเจตนา ไม่ใช่สถานะสด): ~~🔴 **OPEN**~~ · 🔥 **PANYA-ORDER `20260906_0156` เส้นตาย 23:00 — บล็อกแขน (ข)** · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-DB** · ตั้งเลขโดย LANE-K รอบ `zqq4qz` 2026-09-06T16:09+07:00 ตาม `COO-DECISION 20260906_1547` ข้อ 4(1) ("ตั้งเลข RE ของ DB `1449` ก่อนใบอื่นทั้งหมด") · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_1449_LANE-DB-RE-TICKET-itemoperatevitalres-equip-worn-flag-and-w9-crosscheck.md` คำต่อคำ · จากสาย: LANE-DB รอบ `xqi5p4` ต่อจาก `rounds/DB_20260906_1316_rjqssc_...md` §7]
+
+**หัวเรื่อง**: ItemOperateVitalRes (0x4C13) สำหรับ "สวมอาวุธ" (op=5): field `ItemAttr@+0x39` worn-flag ความหมายคืออะไร + cross-check ว่า W9 คือ plain itembag codec จริงหรือไม่สำหรับฟังก์ชันนี้โดยเฉพาะ
+
+### ค้นใน `pf_bridge\external\` แล้ว: เจอ <อะไร> / ไม่เจอ
+เจอ `external/PF_SERIALIZER_FIELDS.tsv:769-794` (26 แถว ItemOperateVitalRes) และ `external/PF_PROTOCOL_REGISTRY.tsv:47` (vtable/handler/serializer VA) — **ไม่มี layout ที่ครบพอสร้าง encoder** (ดู §1)
+
+### ค้น gamedata แล้ว: เจอ <อะไร> / ไม่เจอ
+ไม่เกี่ยว — นี่คือคำถามระดับ wire/static-image ไม่ใช่ตารางข้อมูลเกม
+
+### บริบท (ทำไมใบนี้เปิด)
+`ItemOperateVitalReq` (0x4BED) op=5 (สวม), value=8, identity=0x4 ("Blade") ยืนยันซ้ำ 3 ครั้งจริง
+(`notes_to_chief/20260906_1255_KA1A-R321-RESULTS-*.md` §2 ภาคผนวก A) แต่ server ไม่ตอบ (RE-272
+CAPTURED). `PANYA-ORDER 20260906_1312` สั่งให้ LANE-DB ตอบ op=5 ด้วย `ItemOperateVitalRes` (0x4C13,
+`VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv:125`, คู่กับ 0x4BED ที่ `:123`) รอบนี้ (`xqi5p4`) พยายาม
+ประกอบ encoder แล้วพบว่ายังไม่พอ — รายละเอียดสองชั้นด้านล่าง
+
+### §1 ชั้น static-image (pf-static-re agent รอบนี้, ไม่ใช้ client binary): NOT PROVABLE จาก TSV อย่างเดียว
+`external/PF_SERIALIZER_FIELDS.tsv:769-794` (26 แถว, ฟังก์ชัน `0x005EDA20-0x005EDC31`): จาก 13 W-order
+field มีแค่ 5 ที่มี tag/size/source ครบ (W1 tag `0x08` size 1 จาก `+0x30` · W2 tag `0x0B` size 1 จาก
+`STACK+0x19` · W4 tag `0x08` size 1 จาก `STACK+0x1A` · W6 tag `0x32` size 8 จาก `DEREF(...)+0x24...+0x10`
+PHI-branched · W8 tag `0x08` size 1 จาก `DEREF(...)+0x24...+0x18` PHI-branched) — อีก 8 แถวเป็น
+`UNKNOWN`: W3/W12 `indirect_call_not_proven_serializer_slot` (`:772,:789`) · W5/W7
+`invalid_parameter_import_call_wire_effect_unproved` (`:775,:778`, CRT `_invalid_parameter_noinfo`) ·
+W9 `direct_call_not_proven_serializer` เรียก `0x0046F4D0` (`:783`) · W10/W11 atomic
+increment/decrement ที่ vtable+0x04/+0x0C (`:785,:787`) · W13 `direct_call_not_proven_serializer` เรียก
+`0x005ED2F0` (`:794`, ไม่มี closure ในทั้ง `pf_bridge` ที่อธิบายที่อยู่นี้เลย)
+
+สถานะโครงการเองยืนยันซ้ำ: `notes_to_chief/reference_codex_attr/PF_V5_P1_OPEN.tsv:77` และ
+`PF_PROTOCOL_PRIORITY.tsv:47` ระบุ `ItemOperateVitalRes` เป็น `OPEN` ทั้ง base/effective
+serializer/structural status, blocker `DYNAMIC_DISPATCH_OR_SUBCALL_UNRESOLVED`,
+`applied_overlay_chain=BASE_ONLY` (ยังไม่ได้ apply overlay ที่ reclassify การเรียก `0x0046F4D0` เป็น
+non-wire แบบที่ `PF_A2_POOL_46F4D0_DELTA.tsv` ทำให้ 4 ข้อความอื่นแล้ว — grep `"ItemOperateVital"` ใน
+ไฟล์ delta นั้น = 0 hit) · `PF_FIELD_VALIDATION.tsv:92` ระบุ capture layer `NOT_OBSERVED` — ไม่เคยมี
+frame 0x4C13 จริงถูกจับจากฝั่ง server เลย (ตรงกับที่ server ไม่เคยตอบ op=5)
+
+### §2 หลักฐานที่แรงกว่า: `tests/test_equip_state_static.py` (commit แล้วในรีโป server, gate ด้วย
+`GAME_INSTALL_TREE.skip_unless_present()` — ต้องเครื่อง Panya ถึงจะรัน แต่ assertion ถูก pin sha256
+ไว้แล้วในไฟล์นี้เอง ไม่ใช่ของใหม่ที่ใบนี้ขอ) ให้ข้อเท็จจริงที่แคบกว่าและตรงประเด็นกว่าทั้ง §1:
+
+1. `test_item_operate_result_optional_bag_is_plain_not_collection` (บรรทัด 316-337): พิสูจน์แล้วว่า
+   ฟังก์ชัน `item_operate_result_codec` (=`0x005EDA20`, ตัวเดียวกับ ItemOperateVitalRes) เรียก
+   `0x46F4D0` (`plain_itembag_factory`) จริง สร้างกล่อง 0x68-byte ("plain ItemBag") ไม่ใช่ 0x90-byte
+   `CollectionBagAttr` — **นี่คือคำตอบของ RE ask #1 ใน §1 สำหรับฟังก์ชันนี้โดยเฉพาะ (ไม่ใช่ analogy
+   ข้ามข้อความแบบที่ `PF_V5_P1_OPEN.tsv` เตือน)** แต่ยังไม่ได้ผูกกลับเข้า `PF_A2_POOL_46F4D0_DELTA.tsv`
+   หรือปลด `OPEN` status ใน `PF_V5_P1_OPEN.tsv:77`/`PF_PROTOCOL_PRIORITY.tsv:47`
+2. `test_character_equipment_ui_requests_collection_bag_not_equipped_bag` (บรรทัด 267-313): ช่อง
+   อุปกรณ์บนจอ (equipment UI) **ไม่ได้อ่านจาก `ItemBagAttr_Equiped`** แต่คำนวณจาก `CollectionBagAttr`
+   ที่ map ทุก `ItemAttr` ใน backpack ที่ byte `+0x39` (ตรงกับ `ItemAttrState.raw_u8_39` ใน
+   `inventory.py`) ผ่าน `mov dl, byte ptr [ecx+0x39]` แล้ว `shl edx, cl` (บรรทัด `0x5833AF`/`0x5833FE`)
+   — คือใช้ค่า `+0x39` เป็น**shift count**สร้าง bitmask ของช่องที่สวมอยู่ ไม่ใช่คอนเทนเนอร์แยก
+3. `notes_to_chief/reference_codex_attr/PF_ATTR_FIELD_SEMANTICS.tsv:478` ยืนยัน `+0x39` ค่า sentinel
+   คือ `0xFF` (ตรงกับ `ItemAttrState.raw_u8_39` default ใน `inventory.py:27`) แต่ "gameplay identity
+   is not uniquely bound to Data or an exact UI slot" — **ความหมายของค่าที่ไม่ใช่ 0xFF (ตัวเลขอะไรคือ
+   'สวมอาวุธ'/'สวมโล่'/ฯลฯ) ยังไม่มีใครพิสูจน์**
+
+### §3 สรุป: คำถามที่เหลือแคบกว่าที่ §1 ทำให้ดูเหมือน (ไม่ใช่ "5 call site ไม่รู้ความหมาย" อีกต่อไป)
+เพราะ §2 ข้อ 1-2 ตอบคำถาม "โครงสร้างเฟรมเป็นยังไง" ไปแล้ว (คือ codec เดียวกับที่ `inventory.py`/
+`item_operate_res_hypothesis.py` พิสูจน์แล้วสำหรับ pickup — ItemAttr ก้อนเดียวในกล่อง plain itembag)
+คำถามที่เหลือจริง ๆ มีข้อเดียวที่ block arm (b): **ต้องตั้งค่า `raw_u8_39` (หรือฟิลด์ไหน) เป็นเลขอะไร
+ในเฟรมตอบ เพื่อให้ client คำนวณ bitmask แล้วโชว์ "Blade" เป็นอาวุธที่สวมอยู่ในช่องอุปกรณ์บนจอ**
+
+### สิ่งที่ขอให้ RE runner ตอบ (เรียงตามลำดับความสำคัญ)
+1. **[หลัก]** ในเครื่อง Panya: หา call site หรือ const-data ที่เขียนค่า `+0x39` ที่ไม่ใช่ `0xFF` ให้
+   `ItemAttr` จริง (grep VA รอบ ๆ `0x5833AF`/`0x5833FE`/`0x46B466` — จุดที่ตั้งค่า sentinel `0xFF` เอง
+   อาจอยู่ใกล้จุดที่ตั้งค่าอื่นด้วย) แล้วตอบ: ค่า N ที่ไม่ใช่ 0xFF หมายถึง "สวมอยู่ที่ shift-bit N" ใช่
+   หรือไม่ และมีตารางแม็ป N → equip-type (weapon/shield/head/...) ที่ไหนไหม (เทียบกับ
+   `n_EQUIPTYPE`/`n_SLOT_RHAND` ใน `src/pirateforce_foundation/data/creation_gear_by_class.tsv` — ค่า
+   value=8 ที่ client ส่งมาใน `ItemOperateVitalReq` op=5 บังเอิญตรงกับ `n_EQUIPTYPE=8` ของ
+   `n_CLASS_ID=16` แถวเดียวในตารางนั้น — **สังเกตการณ์เฉยๆ ไม่ใช่ข้อสรุป** อาจเป็นเรื่องบังเอิญ)
+2. **[รอง, เพื่อปิด status ให้ตรงของจริง ไม่ใช่เพื่อ arm (b)]** ยืนยัน/ปฏิเสธว่า W3/W5/W7/W10/W11/W12/W13
+   ใน `PF_SERIALIZER_FIELDS.tsv:769-794` ล้วนเป็น non-wire lifecycle/refcount/CRT-param-check
+   artifact (ตามรูปแบบที่ `PF_A2_POOL_46F4D0_DELTA.tsv`/`PF_A2_INVALID_PARAMETER_NONWIRE_DELTA.tsv`
+   ทำกับ 4 ข้อความอื่นแล้ว) **เฉพาะสำหรับฟังก์ชันนี้** ไม่ใช่โดย analogy แล้วเติมแถว
+   `ItemOperateVitalRes` เข้าไฟล์ delta ทั้งสอง ถ้าจริง — จะปลด `OPEN` status ใน `PF_V5_P1_OPEN.tsv:77`
+3. resolve `0x005ED2F0` (W13, `:794`) — ไม่มี closure ไหนในทั้ง `pf_bridge` อธิบายที่อยู่นี้เลย
+
+### เกณฑ์ที่ทำให้ตอบได้ (ไม่ต้องเปิดเกม ไม่ต้องแคปเจอร์สด — static ล้วนถ้าเครื่อง Panya มี binary)
+ตอบข้อ 1 อย่างเดียวก็พอให้ LANE-DB เขียน encoder ได้ (มีโครงสร้างเฟรมพร้อมจาก §2 แล้ว เหลือแค่ค่า
+`raw_u8_39` ที่ถูกต้อง) — ข้อ 2/3 เป็นการปิดบัญชี status ให้ตรงความจริง ไม่ block arm (b)
+
+### nonclaims
+1. ไม่อ้างว่า value=8/identity=4 ที่ client ส่งมาคือ n_EQUIPTYPE จริง — สังเกตค่าตรงกันหนึ่งแถวเท่านั้น
+2. ไม่อ้างว่า `test_equip_state_static.py` เคยรันจริงในรอบนี้ (gate ด้วย binary ที่ cloud clone ไม่มี) —
+   อ่านเนื้อไฟล์/assertion ที่ commit ไว้เท่านั้น
+3. ไม่อ้างว่าโครงสร้างเฟรม (tag/size ตาม §2) พิสูจน์แล้วสำหรับ "สวม" โดยเฉพาะ — พิสูจน์แล้วสำหรับ
+   "pickup" (`item_operate_res_hypothesis.py`/RE-059) เท่านั้น ยังไม่มี capture ของเฟรมตอบ "สวม" จริง
+   (`PF_FIELD_VALIDATION.tsv:92`: `NOT_OBSERVED`) — สมมติว่าโครงสร้างเดียวกันใช้ได้กับ "สวม" ด้วย เป็น
+   ข้อสันนิษฐานที่สมเหตุสมผล (โค้ดฝั่ง client ใช้ handler เดียวกันสำหรับทุกกรณีของ 0x4C13) ไม่ใช่ข้อพิสูจน์
+
+**links**: `notes_to_chief/20260906_1316_...rjqssc...md` §7 · `notes_to_chief/20260906_1255_KA1A-R321-
+RESULTS-*.md` §2 · `notes_to_chief/reference_codex_attr/PF_ATTR_FIELD_SEMANTICS.tsv:478` ·
+`notes_to_chief/reference_codex_attr/PF_V5_P1_OPEN.tsv:77` · `notes_to_chief/reference_codex_attr/
+PF_A2_POOL_46F4D0_DELTA.tsv` · `pirate-force-server tests/test_equip_state_static.py:267-337` ·
+`pirate-force-server src/pirateforce_foundation/inventory.py:21-28`
+
+### ATTENDED: (วางโดย LANE-K รอบ `x91eo8` คำต่อคำจากจดหมาย
+`notes_to_chief/20260906_1737_LANE-DB-TO-K-attended-block-RE-280-equip-worn-flag-client-memory-observation.md`
+· ตามที่ `COO-DECISION 20260906_1651` สั่งให้ DB ส่งก่อนปิดรอบ — บล็อกนี้ตอบคำถามหลักของ `RE-280`
+เอง (หา call site ที่เขียนค่า `+0x39`) ไม่ใช่เวอร์ชันเต็มที่ `1651` ร่างไว้ (สลับเฟรมตอบเซิร์ฟเวอร์ 4
+แบบ) ซึ่งยังรอ seam `1452` + encoder ก่อน — DB ตรวจสดแล้วว่ายังไม่มีเฟรมตอบให้เลือกหลายแบบจริง
+[สมมติของสาย LANE-DB - รอ COO ยืนยัน])
+
+1. บูต: ปกติ ไม่มีธง server (ยังไม่มี encoder ให้ตั้งธง) — แนบ debugger/memory-watch ที่ VA `0x5833AF`/
+   `0x5833FE`/`0x46B466` เหมือนชุดจับ RE-272 เดิม
+2. พิมพ์/กด: สวม "Blade" 1 ครั้ง (ลากจากกระเป๋าลงช่องอาวุธ) อ่านค่าที่ breakpoint เขียนลง `ItemAttr+0x39`
+   ทันที — เวลาเหลือทำซ้ำได้สูงสุด 4 ไอเทมคนละช่อง (โล่/หมวก/...) อย่างละครั้ง
+3. ดูค่าอะไร: N (ไม่ใช่ `0xFF`) ที่เขียนต่อไอเทมแต่ละชิ้น จับคู่กับช่องที่จอโชว์เอง (client แสดงเองฝั่ง
+   client ไม่ต้องรอ server ตอบ)
+4. ผ่าน/ไม่ผ่าน: ได้คู่ (item, N) อย่างน้อย 1 คู่ตรงกับช่องบนจอ = ผ่าน พอให้ DB เขียน encoder ได้ ·
+   relog/server-frame-variant ยังทดสอบไม่ได้จนกว่า seam `1452` ขึ้น main (nonclaim ข้างบน)
+
+nonclaims ของบล็อกนี้ (จาก LANE-DB คำต่อคำ):
+1. ไม่อ้างว่านี่คือบล็อกแบบที่ `1651` ขอเป๊ะ (เฟรมตอบเซิร์ฟเวอร์ 4 แบบสลับด้วยแชท/relog) — สิ่งนั้นต้องมี
+   seam `1452` + encoder ก่อน ยังไม่มีทั้งคู่ตรวจสดแล้ว
+2. ไม่อ้างว่า VA `0x46B466` เป็นจุดตั้งค่า sentinel ที่พิสูจน์แล้ว — คัดลอกมาจากคำถามเดิมของ `RE-280` เอง
+   (`1449` §RE ask 1) ยังไม่มีคำตอบ
+3. ไม่อ้างว่า relog จะยังเห็นของสวมอยู่ — ไม่มี wire เขียน DB จริงตอนนี้ ข้อ 4 จึงตัดส่วน relog ออกจาก
+   เกณฑ์ผ่าน (ต่างจากร่างเดิมของ `1651` โดยเจตนา)
+
+### result:
+**DONE (ask 1 + ask 2 + ask 3)** -- พับโดย LANE-K รอบ `73i74a` 2026-09-07T10:09+07:00 · คัดลอกจาก `notes_to_chief/20260906_2258_RE-280-RESULT-0x39-IS-A-SHIFT-BIT-INDEX-FF-MEANS-NOT-EQUIPPED.md` คำต่อคำ
+
+> **สถานะ: DONE (ask 1 + ask 2 + ask 3) / static ล้วน · ชั้น client-observable ยังเป็นของบล็อก ATTENDED ในใบเอง**
+>
+> **คำตอบหนึ่งบรรทัดสำหรับแขน (ข):** เฟรมตอบต้องส่ง `ItemAttr+0x39 = N` โดย **N ไม่ใช่ `0xFF`** — client เอา N ไปทำ `mask = 1 << N` ตรง ๆ (`0x005833F9`/`0x005833FE`) ไม่มีการ lookup ตารางใด ๆ ระหว่างทาง ⇒ **N คือดัชนีบิตของช่องอุปกรณ์ ไม่ใช่รหัส equip-type**
+
+🟡 **ชั้นที่ขาด (K ไม่ปั๊มให้ครบ)**: จดหมายเขียนเองว่าชั้น **client-observable ยังเป็นของบล็อก `ATTENDED:` ในใบเอง** ⇒ ใบนี้ปิดในฐานะใบ static เท่านั้น
+
+> 🔴 **ห้ามสายอื่นใช้เลข `RE-280`** · numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน **279** (`GT-279`, ตั้งเลขรอบ `rsmsia`) ⇒ ใบนี้ **280** · ตรวจ 0 hit ของ `GT-280`/`RE-280` ทั้งสามที่ (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/*QUEUE*ARCHIVE*.md`) ก่อนวาง [ตรวจโดย LANE-K รอบ `zqq4qz`] · เร่งด่วน: `PANYA-ORDER 0156` เส้นตาย 23:00 +07:00 คืนนี้ (`COO-DECISION 20260906_1547` ข้อ 4(1) สั่งตั้งเลขนี้ก่อนใบอื่นทั้งหมด)
+
+- ~~RE-282 CHARCREATE-CLASS-S-SCORE-STARTING-STATS-SEMANTICS-001~~ -> `archive/CLIENT_RE_QUEUE_ARCHIVE_20260907_closed.md` (**CLOSED DONE/BOUNDED-NEGATIVE** 2026-09-06T23:22+07:00 โดย RE runner ... · ย้ายทั้งก้อนคำต่อคำโดย LANE-K รอบ `spppsd` 2026-09-07T14:22+07:00 · ไม่มีอะไรถูกลบ)
+
+
+## RE-286 TRIGGERRESULT-DIRECTION-AND-CALLER-CHAIN-001  [🔧 **DONE (ตอบครบทั้ง 3 ข้อ) — พับโดย LANE-K รอบ `73i74a` 2026-09-07T10:09+07:00** คำต่อคำจากหัวจดหมายผล `notes_to_chief/20260907_0326_RE-286-RESULT-INBOUND-TRIGGER-STATE-APPLY-NO-COMMON-CONFIRM-IN-THREE-LEVELS.md` (RE runner บนเครื่อง Panya 2026-09-07T03:26+07:00): "**สถานะ: DONE (ตอบครบทั้ง 3 ข้อ) · static ล้วน ไม่เปิดเกม ไม่จับ `LOCK_GAME`**" · K คัดลอกคำของผู้เทส **ไม่ได้ตัดสินเอง** และไม่ได้แตะเนื้อใบ · 🟠 บันทึกเดิมก่อนพับ (ไม่ลบ ขีดฆ่าไว้ตามธรรมเนียมบ้าน = ถอนแล้วโดยเจตนา ไม่ใช่สถานะสด): ~~🔴 **OPEN**~~ · 🔺 `[STATIC-ON-BRIDGE]` (ต้องมี `GameClient.local.bin` จริง -- ไม่ใช่ attended, ไม่ต้องเปิดเกม, ไม่ต้องจับ `LOCK_GAME`) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-UI** · ตั้งเลขโดย LANE-K รอบ `camatf` 2026-09-06T22:17+07:00 · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_2124_LANE-UI-TO-K-re-body-triggerresult-direction-and-caller.md` คำต่อคำ] -- moved to `tickets/RE-286.md` (>8,192 B, verbatim, per `PANYA-ORDER 1448` + `.gitignore !/tickets/` merged R373 · เขียนตั้งแต่รอบ `camatf` แต่เขียนสตับคิวไม่ได้เพราะเซสชันนั้นไม่มี git (ดู `notes_to_chief/20260906_2217_LANE-K-ASK-COO-tool-write-ceiling.md`) -- เติมสตับให้จริงโดย LANE-K รอบ `hf1gs9` 2026-09-06T23:17+07:00)
+
+### result:
+**DONE (ตอบครบทั้ง 3 ข้อ)** -- พับโดย LANE-K รอบ `73i74a` 2026-09-07T10:09+07:00 · คัดลอกจาก `notes_to_chief/20260907_0326_RE-286-RESULT-INBOUND-TRIGGER-STATE-APPLY-NO-COMMON-CONFIRM-IN-THREE-LEVELS.md` คำต่อคำ (จดหมายมี `.CONSUMED.txt` ของ LANE-UI แล้ว หัวใบเป็นส่วนที่ยังค้าง)
+
+> **สถานะ: DONE (ตอบครบทั้ง 3 ข้อ) · static ล้วน ไม่เปิดเกม ไม่จับ `LOCK_GAME`**
+>
+> **คำตอบสามบรรทัด**
+> 1. **inbound จริง** — handler `0x006018A0` เป็น handler **เฉพาะตัว** (ไม่แชร์กับใครใน 519 คลาส) และมัน **อ่านฟิลด์ที่มาจากสาย** (`+0x3C`, `+0x3E`, `+0x3F`, `+0x5C`) แล้วเอาไปแก้สถานะทริกเกอร์ในฉาก · ไม่มีโค้ดฝั่งไคลเอนต์ที่ไหนสร้างอ็อบเจ็กต์นี้เพื่อส่งออกเลย
+> 2. **ไม่ใช่ candidate ของ "รายงานกัปตัน"** — เดิน caller/callee graph **3 ชั้น** จาก handler แล้ว **ไม่พบทั้ง opener `0x005AB5F0` และสตริง `"Common_Confirm"` (`0x00F19F44`) / `"Common_Confirm%d"` (`0x00F2BE9C`)**
+> 3. `+0x18` (qword tag `0x32`) **ไม่ใช่** ตัวเดียวกับ `+0x12` ของ `AddSurveyData` — **ตัวที่ทำหน้าที่ "trigger/dock id" คือ `+0x3C` (u16, tag `0x0F`)** ซึ่ง apply เอาไป lookup ทริกเกอร์จริง · `+0x18` ไม่ถูกอ่านในเส้นทางรับเลย
+
+> numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน **285** (`RE-285`, ตั้งเลขรอบ `zqq4qz`) ⇒ ใบนี้ **286** · ตรวจ 0 hit ของ `GT-286`/`RE-286` ทั้งสามที่ (live สองคิว + `archive/*QUEUE*ARCHIVE*` + `tickets/`) ก่อนวาง [ตรวจโดย LANE-K รอบ `camatf`]
+
+
