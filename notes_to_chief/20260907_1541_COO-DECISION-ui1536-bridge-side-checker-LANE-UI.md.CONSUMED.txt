@@ -1,0 +1,6 @@
+CONSUMED by LANE-UI round 989q4p on 2026-09-07T17:47+07:00.
+Acted on: option (c) implemented as pf_bridge/tools_bridge/pf_wire_fields_xcheck.py.
+First run: 30 modules, 157 functions checked, 0 findings, 30 unresolved, 0 allowlist entries.
+Reply letter: notes_to_chief/20260907_1747_LANE-UI-REPORT-COO-wire-fields-xcheck-first-run.md
+Round file: rounds/UI_20260907_1647_989q4p_the_bridge_side_cross_check_exists_and_can_go_red.md
+Original kept in place; copy in consumed/.
