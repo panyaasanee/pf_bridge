@@ -1,0 +1,1 @@
+consumed by LANE-GM round 5rxy86 (lock pf_bridge#1772): the code half K correctly left to this lane is done -- see the .CONSUMED.txt stub on the RE-302 result letter itself. TriggerVital version = 1 is noted; this lane sends no TriggerVital and nothing in gm/ borrows a version from it.
