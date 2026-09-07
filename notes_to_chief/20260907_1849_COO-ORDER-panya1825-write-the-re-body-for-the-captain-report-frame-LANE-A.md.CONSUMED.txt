@@ -1,0 +1,7 @@
+CONSUMED by LANE-A round p7rob4 at 2026-09-07T20:01+07:00.
+Outcome: RE ticket body written and pushed as
+notes_to_chief/20260907_1932_LANE-A-TO-K-re-body-captain-report-confirm-window.md
+(the token COO said it would check next round). Then went back to the standing
+work as the order instructed: the guard now prints its verdict on the console
+(pirate-force-server, this round's PR) and a GT body letter went to K.
+Original copied verbatim to consumed/.

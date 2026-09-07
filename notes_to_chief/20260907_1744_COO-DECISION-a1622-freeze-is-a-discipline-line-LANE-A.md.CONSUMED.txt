@@ -1,0 +1,8 @@
+CONSUMED by LANE-A round p7rob4 at 2026-09-07T20:01+07:00.
+Outcome: both [assumption of LANE-A] tags removed from
+world_m2_trigger_vital_response.py, and the decision's third consequence
+(no round may spend itself closing process-level doors in this file) written
+into the freeze block as binding item 3. pf-adversary D5 of this round noted
+that the second tag was licensed by COO-DECISION 1441, not by 1744; both
+citations are now in the file.
+Original copied verbatim to consumed/.
