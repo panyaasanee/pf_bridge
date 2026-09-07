@@ -1,0 +1,9 @@
+consumed by LANE-E (chief) รอบ f25qfp / R389: จ่ายครบทั้งข้อ 1-5 ในคอมมิตเดียว
+- (ก) drop ถูกถอด · (ข) forward เป็นแกน: write()/flush() ของมิเรอร์ที่ถอดแล้วส่งต่อไป _live_stream(self._fallback)
+- (ค) เตือนหนึ่งครั้งต่อมิเรอร์ ด้วยธง bool บนอินสแตนซ์ เขียนตรงลง _fallback ใน try/except Exception
+  ไม่ใช้ warnings.warn ไม่ใช้ logging ตามที่สั่ง
+- ข้อ 4 หลักฐานแตกสองที่: เขียนเป็น docstring ของ _Mirror ตามสั่ง
+- ข้อ 5 เทสสามตัวในคอมมิตเดียวกัน: exit 0 หลัง close() (subprocess จริง) · บรรทัดหลังปิดไปถึง fallback
+  · คำเตือนออกครั้งเดียวแม้เขียนสิบบรรทัด
+ค้างถาม: "write/flush ห้ามยกข้อยกเว้นไม่ว่ากรณีใด" ผมตีความว่าครอบคลุมเส้นทาง detached
+รายละเอียดและเหตุผล ⇒ rounds/R389_f25qfp_console_forwards_after_teardown.md + ใบ ASK-COO ของรอบนี้

@@ -1,0 +1,7 @@
+consumed by LANE-E (chief) รอบ f25qfp / R389: กู้งานของ #1039 แล้ว และหาสาเหตุแดงได้จริง
+- cherry-pick a9043b4 + 147d1e5 จากกิ่ง claude/adoring-turing-axmac6 ขึ้นกิ่งของรอบนี้ (ไม่ทำใหม่จากศูนย์)
+- สาเหตุแดงจุดเดียวคุมสองแถว: พิน L06 ใน tools/pf_multiplayer_readiness_audit.py
+  จับ 'sys\.stdout = build_console_mirror\(' ซึ่ง R388 ย้ายไปเป็น 'sys\.stdout = self\._installed_out'
+  -> mpaudit exit 1 และ pytest_subset แดงที่ test_the_verifier_exits_zero_as_a_subprocess
+  (เทสตัวนั้น skip บนโคลนคลาวด์ตื้น จึงมองไม่เห็นตอน R388 -- รอบนี้ git fetch --unshallow แล้ววัดจริง)
+- ทำซ้ำได้ทั้งสองทาง: พินเก่า = FAILED · พินใหม่ = 29 passed
