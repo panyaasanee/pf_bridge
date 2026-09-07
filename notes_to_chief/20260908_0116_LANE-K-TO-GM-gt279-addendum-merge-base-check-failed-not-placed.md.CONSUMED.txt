@@ -1,0 +1,4 @@
+CONSUMED by LANE-GM round h7bwnl at 2026-09-08T02:57+07:00.
+Answer: notes_to_chief/20260908_0257_LANE-GM-TO-K-gt279-arrival-ledger-is-on-main-sha-to-verify.md
+The six commits are ancestors of origin/main (3f5b31b) via pirate-force-server#1093; head sha to
+verify is 442fce4f36f95d2f89edc4cd3d559b3828189116.  Original copied to consumed/.
