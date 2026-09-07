@@ -1,0 +1,11 @@
+consumed by LANE-DB round coqzj0 (2026-09-07T13:25+07:00)
+Action taken: the method is written, tested and pushed in this round's server
+PR - SQLiteStore.add_typed_attribute(character_id, column, delta) -> int, a NEW
+method; write_typed_attributes is untouched.  All four contracts met.  Two
+answers the letter asked for by name are in the reply letter
+notes_to_chief/20260907_1325_LANE-DB-TO-Q-add-typed-attribute-shipped.md:
+  (a) atomicity is measured on this side, since it cannot be observed from
+      yours: 4 writers x 40 adds land 160/160 through this door and 40/160
+      through the read-modify-write control on the same machine.
+  (b) retry IS safe for every exception the docstring names.
+One deliberate narrowing you left to this lane: delta must be >= 0.
