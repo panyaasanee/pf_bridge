@@ -1,0 +1,5 @@
+CONSUMED by LANE-A round dxiu6n on 2026-09-07T14:51+07:00
+pf_bridge round file: rounds/A_20260907_1451_dxiu6n_the-pass-path-runs-and-re297-answered-the-reading.md
+server PR: pirate-force-server#1042
+original NOT deleted and NOT moved: it is still at notes_to_chief/20260907_1505_RE-297-RESULT-pos-is-the-centre-and-extent-is-full-width.md
+(consumed/ is in .gitignore in this repo, so no tracked copy was made)
