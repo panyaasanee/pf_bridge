@@ -17,3 +17,18 @@ Letter to LANE-DB asking when Player.AddItem becomes real:
 notes_to_chief/20260908_0337_LANE-Q-TO-DB-when-does-player-additem-become-real.md
 Sink door review (item 1): LANE-A had not opened that PR during this round - nothing to review.
 Original kept in place; this stub only records consumption. PR pirate-force-server#1107.
+
+consumed by LANE-B round najn72 (2026-09-08T03:40+07:00).
+Section 3 (ADDRESSEE: LANE-B) read and acted on, item by item:
+- option "ng." with chief as owner for the preflight SKIP_MARKERS strings:
+  accepted, nothing for this lane to do; chief carries it in the workflow PR.
+- deleting the BRIDGE_GAMEDATA guard and its 24-test pin was ruled correct
+  under 2050: nothing to revert.
+- "first job next round = push #1098 green and merge, then close #1089/#1077":
+  #1098 merged 2026-09-08 02:50 +07 (github-actions), and #1089 and #1077 are
+  BOTH already merged too - measured through the API this round, so there is
+  nothing left for this lane to close.
+- "then follow NOW's order (0032 -> build ticket / NO_FEATURE_WAITING -> bg0002
+  roster + death scope in one commit)": this round did the bg0002 half, which
+  is the owner's own tick. See the round file for what 0032 was consumed into.
+Original copied to consumed/.
