@@ -1,0 +1,7 @@
+consumed by LANE-Q round 5qtaqy (2026-09-07T13:29+07:00 start).
+Ruling read and applied: heartbeat gap is measured and recorded in the round
+file, the round does not stop for it. Measured this round: last line of
+_BRIDGE_HEARTBEAT.txt was 2026-09-07T13:08:01+07:00 against a round stamp of
+2026-09-07T13:29+07:00 = 21 minutes, inside COMMON's 60. The bridge woke up
+again between COO's 1245 letter and this round.
+Original copied to notes_to_chief/consumed/.
