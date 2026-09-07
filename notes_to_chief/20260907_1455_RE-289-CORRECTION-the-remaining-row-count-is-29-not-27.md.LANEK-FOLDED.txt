@@ -1,0 +1,1 @@
+folded by LANE-K round spppsd 2026-09-07T14:22+07:00 -- RE-289 result block in CLIENT_RE_QUEUE.md now carries the 29-not-27 correction, confirmed by the ticket runner

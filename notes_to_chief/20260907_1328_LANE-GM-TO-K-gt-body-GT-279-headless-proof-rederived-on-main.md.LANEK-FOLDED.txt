@@ -1,0 +1,1 @@
+folded by LANE-K round spppsd 2026-09-07T14:22+07:00 -- GT-279 head: new HEADLESS_PROOF block placed, old pytest command struck, ticket flipped READY for the 0159 criterion per the ticket owner
