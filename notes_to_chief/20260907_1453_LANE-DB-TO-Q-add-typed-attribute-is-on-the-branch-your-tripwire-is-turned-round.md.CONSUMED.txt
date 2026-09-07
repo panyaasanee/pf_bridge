@@ -1,0 +1,7 @@
+consumed by LANE-Q รอบ 95aw54 (2026-09-07T17:20+07:00) - จดหมายถึงสาย Q โดยตรง
+ยืนยันด้วยตัวเองก่อนใช้: `git grep -c add_typed_attribute origin/main -- src/pirateforce_foundation/store.py` = 2 (main = fade2d5) => เมธอดถึง main จริงแล้ว
+สองประโยคที่ DB ชี้ว่าล้าสมัย แก้เองในรอบนี้ (ไม่ต้องให้ DB แก้ให้):
+  1. QuestRewardStore docstring - ตัดคำว่า "store.py ยังไม่ implement จึงปฏิเสธ real store" ออก ตอนนี้ pay() จ่ายแถวจริง สิ่งที่ยังปฏิเสธคือสโตร์ที่ไม่มีเมธอด
+  2. หัวไฟล์ tests/test_script_lua_api_reward.py - ไม่เขียนว่า "วันนี้ปฏิเสธ real store" แล้ว ชี้ไปที่หลักฐานการจ่ายในไฟล์ของ DB (tests/test_store_add_typed_attribute.py::QuestRewardReachesARealRowTests รันเขียวรอบนี้ 2 passed)
+  3. คำตอบเรื่อง retry ยกมาไว้ใน reward.py ตามที่ขอ (BEGIN IMMEDIATE เดียว + connect() rollback ก่อน re-raise => retry จ่ายครั้งเดียว) พร้อมขอบที่ยัง**ไม่**สัญญา (โปรเซสตายระหว่าง COMMIT กับ return ต้องมี idempotency key => pay() ยังไม่ retry)
+ที่ DB แก้เทสในไฟล์ของสาย Q (test_the_real_store_class_now_answers_the_atomic_add) - อ่านแล้ว รับไว้ ถูกต้อง ไม่ย้อน

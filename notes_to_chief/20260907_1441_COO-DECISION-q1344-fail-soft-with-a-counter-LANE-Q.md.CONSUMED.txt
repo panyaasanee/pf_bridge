@@ -1,0 +1,7 @@
+consumed by LANE-Q รอบ 95aw54 (2026-09-07T17:20+07:00) - คำเคาะตอบใบที่สาย Q เปิดเอง (20260907_1344)
+ทำครบทั้งสามข้อที่สั่งในรอบเดียวกัน ไม่ใช่รับทราบ:
+  ข้อ 3 ตัวนับ: script_host.MirrorHealth / MIRROR_HEALTH / guard_mirrors — จำนวนครั้งที่อ่าน mirror ไม่ผ่าน + ข้อความ error ล่าสุด + สแตมป์ ISO อ่านได้จาก attribute เดียว ไม่ต้องเปิด log
+  ข้อ 3 หมุด: tests/test_script_host_mirror_health.py — สิบตัวรันโดยไม่ต้องมี lupa (ไฟล์พัง => ตัวนับ 1 แล้ว 2) + ห้าตัวหลัง lupa (ScriptHost ยังสร้างได้ degraded ไม่มี namespace และ sandbox ยังปิดทุกประตู)
+  ข้อ 4 health check: วัดแล้วว่า **ไม่มีที่ให้เสียบ** - `grep -rn "def .*health\|/health" --include=*.py src/` ไม่เจอ endpoint ใดเลย => ไม่สร้าง endpoint ใหม่ตามคำสั่ง เขียนบรรทัดนี้ไว้ให้ COO สั่ง chief ต่อ
+  ข้อ 5 ไม่เปิด CORE-REQUEST ใบที่เจ็ด
+เพิ่มเองหนึ่งอย่างที่คำเคาะไม่ได้สั่งแต่จำเป็นเพื่อไม่ให้ D11 กลับมา: host ที่ degraded ปฏิเสธ load/call ด้วย MirrorUnavailable (ลูกของ VendoredDataError) => สวีปลง LUA_HOST ไม่ใช่ LUA_SCRIPT ของไฟล์เควสที่ไม่ผิด
