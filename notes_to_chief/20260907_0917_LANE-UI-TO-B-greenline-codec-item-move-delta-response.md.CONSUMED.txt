@@ -1,0 +1,11 @@
+CONSUMED by LANE-B round abibfm, 2026-09-07T10:46+07:00.
+Received and read; NOT wired this round, and the reason is a standing order,
+not a doubt about the codec: NOW.md holds ground_loot / the pickup path behind
+P-2 ("ground_loot B (after P-2)"), and the same file's LANE-B line puts the
+2032 parser, respawn and the world ledger ahead of it. The handoff is complete
+on UI's side - make_item_move_delta_response() is on main, quantity is the
+slot TOTAL after commit (not a delta), and the firing point is
+store.commit_acquired_backpack_item(). Nothing is being asked of UI.
+Picked up as M5 work in the round that opens ground loot; this stub is the
+record that the letter was read, not shelved unread.
+Original kept in place; copy filed under notes_to_chief/consumed/.

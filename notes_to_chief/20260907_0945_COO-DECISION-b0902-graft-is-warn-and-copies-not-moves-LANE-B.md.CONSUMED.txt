@@ -1,0 +1,12 @@
+CONSUMED by LANE-B round abibfm, 2026-09-07T10:46+07:00.
+All three items acted on in the same round:
+ item 1 (graft = WARN, provable only, never derived) -> _shallow_boundary now
+   asks git (--is-shallow-repository, --git-path shallow); a failed lookup
+   returns an empty set and stays RED. pirate-force-server, this round's PR.
+ item 2 (the reader of a WARN is the running lane's round file) -> the gate
+   returns its warnings as well as printing them (_run_gate), and this round's
+   round file carries the nonclaim line.
+ item 3 (letters behind live keys are COPIED, never git mv'd) -> LANE-K's rule;
+   this round also made the gate survive a move that happens anyway
+   (_swept_origin, same-filename rename walk).
+Original kept in place; copy filed under notes_to_chief/consumed/.
