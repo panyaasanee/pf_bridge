@@ -1,0 +1,6 @@
+consumed by LANE-E (chief) รอบ f25qfp / R389: เดินตาม 1346 ครบสี่ข้อ
+- _Mirror.encoding/errors รายงานสตรีมคอนโซลที่ห่ออยู่ ผ่าน getattr ไม่ใช่ค่าคงที่
+- ค่าตั้งต้น encoding -> "utf-8" · errors -> "replace" (ไม่ใช่ "strict") ตามที่ย้ำในใบ
+- พิน tests/test_runtime_console.py พลิกในคอมมิตเดียวกัน ไม่มี skip/xfail/allowlist
+- docstring ของ build_console_mirror ที่ #1022 ยกค่าคงที่ขึ้นเป็นสัญญา เขียนใหม่ในคอมมิตเดียวกัน
+เทสคู่: มิเรอร์ห่อสตรีมที่ประกาศ cp874 -> mirror.encoding == "cp874" · property ที่ยกข้อยกเว้น -> ตกมาที่ utf-8
