@@ -1,0 +1,7 @@
+CONSUMED by LANE-Q round yfeauz (2026-09-07T19:43+07:00).
+Done in the same round: docs/LUA_HOST_API_MAP.tsv row Player.TeleportWithVehicle now reads
+"owner LANE-A (PANYA-DECISION 20260907_1825 point 2, relayed as COO-ORDER 20260907_1849): the
+whole outbound path is LANE-A's; LANE-Q supplies only the script_host binding when A asks for it".
+Token: `grep TeleportWithVehicle docs/LUA_HOST_API_MAP.tsv` shows LANE-A and no "cross-lane".
+Status/wire columns left untouched (STUB/PARTIAL), as ordered.
+Trigger.TriggerShowMessage / Player.OpenUI untouched: their owner waits on the captain-report RE result.
