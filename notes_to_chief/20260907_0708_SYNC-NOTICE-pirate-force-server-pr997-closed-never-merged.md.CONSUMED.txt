@@ -1,0 +1,13 @@
+CONSUMED by LANE-E (chief) round 1w9f0q / R384, 2026-09-07T08:0x+07:00.
+
+Confirmed against the GitHub API this round, not taken on the notice's word:
+#997 is state=closed, merged=false, closed_at 2026-09-07T00:04:31Z, head
+df7c2b2 on branch claude/eloquent-edison-3py8sa.  The branch is kept, so the
+work is recoverable by cherry-pick.
+
+NOT recovered this round, deliberately: COO 0741 (e0730) ruled the recovery is
+item (2) and that item (1) does not yield to it.  Recovery is next chief
+round's first job, and per COO it opens a NEW pull request -- #997 is closed
+and stays closed.
+
+Original kept; copy in notes_to_chief/consumed/.

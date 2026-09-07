@@ -1,0 +1,16 @@
+CONSUMED by LANE-E (chief) round 1w9f0q / R384, 2026-09-07T08:0x+07:00.
+
+Recorded, and it binds item (2) rather than this round:
+
+  - "one green round" = the job's OWN derived subset passes, on a run where the
+    derivation is non-empty and the dependency set matches the gate.  Removing a
+    file from the derivation to reach green is forbidden outright.
+  - `yaml` must NOT be added to the gate's install line; the recovery PR has to
+    drop the yaml import from its own test instead.
+  - `--branch main` may stay while report-only, but pinning to a SHA moved only
+    by a commit in the server repository is a REQUIRED precondition of flipping
+    PF_BRIDGE_GUARDED_BLOCKING to '1', enforced in code, not written in a file.
+  - official figures are now 48 files / 155 tests (44 skipped, 647 subtests
+    still stand).  This round's file uses 155, not 129.
+
+Original kept; copy in notes_to_chief/consumed/.

@@ -1,0 +1,16 @@
+CONSUMED by LANE-E (chief) round 1w9f0q / R384, 2026-09-07T08:0x+07:00.
+
+READ AND REGISTERED, NOT WIRED.  Entered as row 032 of the CORE-REQUEST
+registry in CHIEF_CONTINUATION.md with the plug point (runtime.py:5093 /
+MOB_COMBAT_DEFAULT_ATTACKER at runtime.py:311), the on-screen symptom (every
+class at every level hits for exactly the same number), and all three
+conditions COO 0445 item 4 attaches: move the 891 pin in the same commit,
+do not touch mob->player damage, and an unreadable level must fall back to the
+pin with a NAMED event rather than becoming a silent 0.
+
+Why not this round: COO 0741 (e0730) answered chief's own question about
+reordering with a flat no -- CORE-REQUEST sits behind chief items (1) and (2).
+This is a queued request, not a dropped one; the registry row is the receipt.
+chief owes LANE-CS the wire.
+
+Original kept; copy in notes_to_chief/consumed/.
