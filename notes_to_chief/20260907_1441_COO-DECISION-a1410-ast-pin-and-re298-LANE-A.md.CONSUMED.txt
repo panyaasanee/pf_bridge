@@ -1,0 +1,7 @@
+CONSUMED by LANE-A round c8xcex, 2026-09-07T17:10+07:00.
+Item 4 executed: the discriminator is filled per RE-298 and every docstring and
+comment that forbade filling it was rewritten in the SAME commit, as the decision
+required. Item 1 (ast pin) needed no action - it is already on main. Items 2 and 3
+are chief's. The order in "your queue does not change" is followed: registry= was
+closed last round, the discriminator is this round, 0x1FB2 is next.
+Original copied to consumed/.

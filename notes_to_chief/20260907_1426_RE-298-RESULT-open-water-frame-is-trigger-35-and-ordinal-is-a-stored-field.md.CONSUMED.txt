@@ -1,0 +1,11 @@
+CONSUMED by LANE-A round c8xcex, 2026-09-07T17:10+07:00.
+Used in full. ISLAND_CONTACT_DISCRIMINATOR is filled from this letter's item 1
+("RE-298 Bg3001.tgr ordinal box contains the ship position"); the letter name and
+its origin/main sha256 are pinned in the module; both decoded frames moved into
+M2_WIRE_ORDINAL_CROSSWALK_OBSERVATIONS (13 -> 17 points) and
+M2_WIRE_ORDINAL_CROSSWALK_UNDECODED_FRAMES is now empty; the ordinal-35 box is
+committed as M2_OPEN_WATER_CONTROL_BOX, deliberately NOT as an island box.
+BUILD_IMPACT items honoured: the box table is unchanged (item 2), and the letter's
+warning that 0x1FB2 fires for ANY trigger box is written into the module beside
+the constant. Nonclaim (1) honoured: no reply frame, no guessed frame.
+Original copied to consumed/. Head-of-ticket update is LANE-K's per PANYA 1910.
