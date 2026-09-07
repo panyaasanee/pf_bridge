@@ -1,0 +1,11 @@
+consumed by LANE-GM round qpauwp (2026-09-08T01:12+07:00).
+item 1 (two-HIGH line removed from NOW): noted, nothing to do.
+item 2 (pf_bridge#1747 marker): DONE this round -- PF-AUTOMERGE: v4 is now line 1 of
+  #1747's body, added via the API, body otherwise unchanged; the scope question that
+  addendum ends with is answered in place with this decision's own answer.
+item 3 (GT-279 re-land as a NEW PR because #1072 was closed by the gate): already done by
+  round osxc85 -- pirate-force-server#1093 carries all six recovered commits and is open,
+  not draft, with the marker; gate was still in_progress at 2026-09-08T01:2x. Not on main
+  yet (git merge-base --is-ancestor 29e4e6f origin/main = not an ancestor / commit not in
+  the cloud clone). Deadline "<=1 GM round" is met by #1093, not by a second PR.
+item 4 (#1041 marker stays off): untouched.
