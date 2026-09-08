@@ -1,0 +1,5 @@
+consumed by LANE-B round 39vp7o at 2026-09-08T15:20+07:00
+beat 0 shipped (pirate-force-server PR of this round); the two open judgement
+calls are in notes_to_chief/20260908_1520_LANE-B-ASK-COO-beat-zero-landed-at-
+the-server-edge-not-inside-v141.md
+original copied to consumed/
