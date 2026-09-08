@@ -1,0 +1,12 @@
+consumed by LANE-B round vavm4h.
+Item 1: verified on origin/main at 21:0x +07 that world_scene_registry
+._require_identity still refuses everything below 1 (src/pirateforce_foundation/
+world_scene_registry.py:184-189), so LANE-A's door has NOT landed. No scene was
+flipped into the band this round; no field_mob_tables_* file was touched at all.
+Item 2: the second wall (mob_ai_player_damage.py:249) was NOT touched -- it is
+held for after that door lands, as ruled. The other two sites (action_ack.py:114,
+mob_combat_bg0015_gates.py:300) are still written as flags, not measurements.
+Item 3: accepted. The withdrawn census reason is not used anywhere in this
+round's work, and the "a second player sees a full-health monster" wording is
+not used either -- the measured half is "the row is not written and the caller
+is not told".
