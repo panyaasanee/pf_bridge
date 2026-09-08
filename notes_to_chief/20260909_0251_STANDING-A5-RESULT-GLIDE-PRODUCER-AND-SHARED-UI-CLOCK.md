@@ -1,0 +1,39 @@
+งานเป้าหมายยืน — ยังไม่มีเลขใบ ขอให้ LANE-K ตั้งเลขและผูกจดหมายนี้
+
+TO: chief / LANE-K / LANE-B / LANE-UI
+STANDING A5 PARTIAL — GlideInfoEventHandler, EA72/74 and shared UI timestamp
+เวลาเริ่ม 2026-09-09T02:45:57+07:00; static only ไม่มี runtime job/HEAD ที่บูต
+NO_FEATURE_WAITING: ผลนี้แยกทาง Glide และเวลาใน UI ออกจากข้ออ้างจังหวะโจมตี; ยังไม่มีหลักฐานให้เปลี่ยนคูลดาวน์เซิร์ฟเวอร์หรือเปิดฟีเจอร์ใหม่
+
+A — IMAGE, hex VAs; manifest pins end-exclusive spans/file offsets/SHA:
+1. Real handler ownership:5D54A0 constructor calls59D740 then5D54A8 installsF2E1A8; getter5D54C0->107AD50; registrationBDD2F0->descriptor1023134, literal .?AVGlideInfoEventHandler@@. Slots+18=4D8DA0 binding,+28=4D9330 event,+2C=4D8EE0 update,+30=4D9190 notice. Adjacent4D93A0 is not used to name this handler. This is typed local method ownership, not attained UI/event/update scheduling.
+
+4D8DA0 calls AA1750 with exact wide key Button_Fly atF192DC and applies compatibility gate AB73C0/88F2B0 before storing handler14 at4D8DF1. BUTTON_FALL atF192B4 follows the same lookup/type-gate pattern and stores handler18 at4D8E63. Tip_Fly is cached at1C, LABLE_FLYTIME at20. Binding later calls virtual+168(1) on nonnull14/18 and virtual+F4(0) on handler10, then initializes byte24=0. WIDGET-SLOT: PROVEN_ROLE_ONLY. Exact lookup keys and member roles are proved; concrete widget tree, live control identities and the meanings of unresolved widget virtuals remain open. Cached14 and18 are not assumed distinct or nonnull.
+
+2. Event4D9330 first calls59D760 at4D9339; this base routine includes an indirect event callback59D7B4, so mutations/re-entry before subsequent checks are possible. It then compares event.object with CURRENT handler14, and event+8 with global1090DC0. Match calls4D9210 at4D9357 with object and event+0C. Only if that first branch does not match does it compare handler18 and the same event identity; with globalactor present it calls44D260(EA73,0) at4D937C, then handler10 virtual+F4(0). If cached14==18 and event matches, the first branch wins. No physical gesture mapping, unique click delivery or UI-disable enforcement is proved.
+
+3. Direct producer4D9210..4D932E: checks nonnull object and AB73C0/88F2B0 compatibility, globalactor1032EC4, nestedactor14, nested+60 in{3,4}, actor10 bit4. Those values3/4 have no assigned type/job/mode semantics here.4D9286->44AF00 obtains ActionVital; reused constructor74E620/F489EC/get74E690/node108A2BC/regC0C240/descriptor101AD74 binds the type. Following allocation, it rereads CURRENT globalactor and actor10 to select:
+  selector = EA72 + 2 * ((flags &8)!=0 AND (flags &08000000)==0).
+The four bit combinations yield EA72,EA74,EA72,EA72. Store at4D92F3 is object+30. There is no flip of those actor bits in this bounded producer. Two eligible calls with unchanged flags can select the same value; the formula is not proof of toggle behavior. Allocation/indirect effects can change the actor between admission and selection; no stable identity is guaranteed by these reads.
+
+It writes vital38 from427630 (nestedactor14+30 float, fallback0 when nested pointer absent), vital3C/40=0 and44=99999.0 fromF0D778, byte48=0. Optional word4A comes from manager1093198->2C0->C->30.4D931B gets service;4D9322 calls5DD800. No explicit guard/consume write for handler24 precedes this producer; service admission/transport can still reject perA5e. The native signification of these scalar/position values, peer delivery, glide animation/movement and later actor flag changes are not proved by the selector values or class name alone. Literal EA7D is not selected here; broader transitive effects remain open.
+
+4. UI clock path: notice4D9190 compares incoming std::wstring at arg+10 with literal Actor_Glide (F0F64C) using MSVCP90 wstring operator== throughIAT C3B2D0. Match writes handler24=1 at4D91B1; it DOES NOT stamp current time there. Other matching strings Glide_Enable/Glide_Disable call handler10 virtual+F4(1/0). These names are exact local message keys; their callers and delivery times remain open.
+
+Update4D8EE0 reads float argument1. While this instance's24==0 it writes that value to GLOBAL107AD4C at4D8F12. While24!=0 it computes double(argument)-double(globalstamp), compares with exact double1.0 atF09A90. If ordered difference>=1.0 it clears24 and invokes widget14 virtual+FC(1) if present; otherwise invokes+FC(0) if present. This is an exact selected comparison/argument proof, not proof of seconds or of the virtual method's enable/disable semantics. The global timestamp is unbacked in the IMAGE: no initial runtime value inferred. Boundary examples use exact representable input values only; NaN, exceptional/altered arithmetic environments are outside these examples.
+
+The notice does not reset the timestamp. Thus the comparison is measured against the most recent unarmed update, under stable state, not necessarily notice arrival. Timestamp is global but24 belongs to each instance. D counterexample: if armedA has stamp100, an unarmedB update at100.5 overwrites it; A at101 now sees0.5, not1.0. This demonstrates potential cross-instance interference if such instances/order exist, not native attainment. Outer live update scheduling and singleton/multiplicity are not closed. The rest of update contains actor checks and widget/task callbacks and is NOT labelled visual-only. Event and producer do not directly consult24; any gating by widget internals or message delivery needs its own proof. No one-second attack interval, one-shot send or complete absence of retries is established.
+
+5. Remaining raw pool candidate74F4C0..74F4D2 is ActionVital vslot+14 (F48A00), calling44AF00 at74F4CC and returning its result. This binds a virtual factory method, not a command/event producer: its callers, clone/read usage and transitive ancestry remain open. A list of raw E8 pool calls cannot close those indirect uses or establish complete producer coverage.
+
+Search/reuse: initial short hex pattern matched unrelated hashes and output was truncated; it is not an absence proof. Repeated boundary-delimited search for4D9286/74F4C0/EA72/EA74 over gamedata, external, reference_codex_attr, archive and consumed(md/py/txt/tsv) returned no hits. Named search Actor_Glide/Glide_Enable/BUTTON_FALL/LABLE_FLYTIME in those domains also no hits. Filename search found gamedata/lua/t_enablglide.lua; its ASCII code calls Player.EnableGlide(), but no IMAGE crosswalk from that script to this handler is claimed. Reviewer search had external read denials. ExistingA5k EA73 census is reused only as context; new ownership comes from the above IMAGE chain.
+
+Verification:29 spans(22 primary+7 reuse),24 calls/24 mutants,44 pins,7 slots,2 named bindings,1 PE import,7 wide keys;4 selector,8 admission,5 dispatch and6 exact clock examples;2 fixed-flags/shared-timestamp examples;14 actual empty/missing coverage rejections. IMAGE+3 sources before/after. Python translations do not execute native code or prove live cadence. No source code/runtime behavior was changed.
+Rerun from pf_bridge: & 'C:\Users\Panya\AppData\Local\Programs\Python\Python314\python.exe' -B staged\standing_a5n_verify.py
+IMAGE_SHA: 9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623
+MANIFEST_SHA: 270958f634ff5844b60f09155a6b3699194e77bd578623c4c1ba3538852f759e
+VERIFY_SHA: 9d8e2be8d0bf26a205e3bf4cb6b6e9b6aecd40c6d6b648c4435e1b8b1a8cdc16
+LOG_SHA: ec469a0de31849e3b6599a1357acb92fb17fae159f3555da677cd5358e422409
+ADVERSARY: Frozen read-only review found no concrete scoped defect; challenged repeats, widget aliasing, shared timestamp, clock semantics and coverage. No native execution or independent binary re-derivation.
+No native/game/server, DB, ServerProject, lease, Git, queue, external, gamedata or reference changes.
+SCOREBOARD: NONE | Standing A5 IMAGE evidence | no runtime promotion
