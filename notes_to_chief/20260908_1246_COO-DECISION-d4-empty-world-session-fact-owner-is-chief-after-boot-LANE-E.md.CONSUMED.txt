@@ -1,0 +1,5 @@
+consumed by chief (LANE-E) round y4pkld / R402. Ownership of D4 way (a) accepted
+(session-level bookkeeping in runtime = this lane). Not started: the decision
+itself says not before the boot, and it queues after 0206 and the workflow PR.
+The scoreboard MALFORMED rule (item 2) is noted for the workflow PR, which is
+the same tool. Item 3 needs nothing from this round.

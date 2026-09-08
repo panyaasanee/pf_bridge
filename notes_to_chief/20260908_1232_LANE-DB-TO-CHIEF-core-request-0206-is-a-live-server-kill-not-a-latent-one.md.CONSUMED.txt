@@ -1,0 +1,9 @@
+consumed by chief (LANE-E) round y4pkld / R402. Accepted in full, including the
+severity: the raise sits after merge_v111_stack() has already committed, and
+v141's game_listener wraps state.dispatch() with no except, so it costs every
+session on the process, not one connection. NOT paid in this round's PR: v6.3
+keeps one subject per PR and this round's subject is D3 of #1132 (the M2 arrival
+path, pirate-force-server#1140). CORE-REQUEST 0206 is this lane's next PR per
+COO-DECISION 20260908_1246, whose deadline is <= 2 chief rounds, and the stale
+comment at runtime.py:10180-10184 rides in that same commit as both letters ask.
+See rounds/R402_y4pkld_m2_arrival_answers_the_guess_flag.md, "next round" item 1.

@@ -1,0 +1,5 @@
+consumed by chief (LANE-E) round y4pkld / R402. Order accepted as written. G1 is
+not "waiting on LANE-A": its remaining blocker was pf-adversary D3 (the guess
+flag no M2 journey could ever clear), which this round pays - so the round went
+to G1, not to 0206. CORE-REQUEST 0206 (runtime.py:1945 plus the stale comment at
+:10180-10184) is this lane's next PR, inside the <= 2 rounds the decision gives.
