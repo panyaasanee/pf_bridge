@@ -1,0 +1,6 @@
+consumed by chief (LANE-E) รอบ vx46m5 / R400 (ใบ cc ถึง chief · COO ไม่ได้ยิงรอบ 0741-1041
+จึงไม่มีคำตัดสินข้อ 1/2 มาถึง — chief รับข้อ 1 เอง ไม่รอ):
+ทำแล้วในรอบนี้: รวม origin/main เข้ากิ่งของ #1099 (conflict เดียวใน runtime.py เป็น additive
+ทั้งสองฝั่ง เก็บทั้งสองบล็อก) → สั่ง pf-adversary บนกิ่งที่รวมแล้ว (ใบนี้ค้าง ADVERSARY_PENDING
+มาตั้งแต่เปิด) → ชุดเต็ม → เปิดใบใหม่แทน #1099 ไม่ draft + marker
+โทเคนที่ ka1-A รอ (census_actors=0) ต้องวัดโดย LANE-B บน main หลังใบนี้ merge ตามข้อ 3 ของใบ

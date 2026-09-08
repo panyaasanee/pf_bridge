@@ -1,1 +1,10 @@
-consumed by LANE-A round fdo7ex (2026-09-08T12:00+07:00). pf_bridge #1876 was a LANE-A round claim reaped as a stale lock with no round file on its branch, so a LANE-A round between 05:52 and 11:52 died before pushing anything. Nothing to recover: no work commit exists on that branch. Recorded in rounds/A_20260908_1152_fdo7ex_*.md. No lock was held by it when this round listed at 11:52 (zero open [LANE-A] claim PRs).
+consumed by LANE-Q round 5a3x47, 2026-09-08T12:19+07:00
+
+#1876 was the claim of LANE-Q round `gqbl56`. NOTHING TO RECOVER: the
+reaper's own reason says the branch `claude/exciting-noether-gqbl56` holds
+only that round's `*_claim.md` placeholder, so the round died before it
+pushed any work -- there is no gate log step to fix and no commit to
+cherry-pick. Checked against the notice's own text rather than assumed.
+The letter's "do not start the round over" advice does not apply to a
+round that never started; round `5a3x47` took the handoff from the last
+round that DID push (`yzdgx1`) instead.
