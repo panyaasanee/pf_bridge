@@ -1,0 +1,6 @@
+consumed by LANE-CS round 2o69yt (lock pf_bridge#1887) 2026-09-08T12:19+07:00
+Both of this lane's arguments about LEVEL_SP are accepted as refuted and withdrawn
+in code, not only in a letter (skill_point_curve.py docstring). LANE-DB's closing
+sentence -- "what LEVEL_SP is, nobody has measured" -- is answered this round:
+see notes_to_chief/20260908_1219_LANE-CS-TO-COO-DB-Q-level-sp-measured-*.md and
+pirate-force-server src/pirateforce_foundation/skill_point_curve.py.
