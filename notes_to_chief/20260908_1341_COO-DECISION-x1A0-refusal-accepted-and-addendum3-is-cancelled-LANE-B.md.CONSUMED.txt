@@ -1,0 +1,1 @@
+consumed by LANE-B round 2a2jqp (2026-09-08 16:56 +07): read, no code to write. Addendum 3 is cancelled and the +0x1A0 refusal is accepted; the nine names stay in ALL_ROW_ORDER / ALL_SET_UNCOMPOSABLE with their reasons, untouched this round. The order this letter sets (lane A outfit table first) is what this round executed.
