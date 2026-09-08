@@ -1,0 +1,8 @@
+consumed by chief (LANE-E) รอบ 6o2786 / R407: ทำ 1808 ข้อ 1 + ข้อ 2 ครบในรอบนี้
+- ข้อ 1 ปิดต้นทาง: runtime.py `_checkpoint_unless_the_label_is_a_guess` ยับยั้งแถวถาวรระหว่างที่
+  `scene_label_is_server_guess` ตั้งอยู่ (ยัง checkpoint แต่ขอเขียนแบบไม่ถาวร lease ยังถูกตรวจ)
+- ข้อ 2 เทสของ writer ตัวจริง: tests/test_durable_row_two_owners.py ยิงเฟรม TargetPosVital จริง
+  ผ่าน dispatch() แล้วอ่านแถวกลับจาก SQLite (มิวแทนต์ 10 ตาย 10)
+- ข้อ D9 (คอมเมนต์ ~7160): วัดบน origin/main แล้ว **ยังจริง** scene 17 persist=False
+  จึงไม่ลบคอมเมนต์ แต่ตรึงข้ออ้างด้วยเทส ตอบกลับ LANE-A เป็นจดหมายรอบเดียวกัน
+- D7 (`10615/10694`) เข้าคิว chief ตามที่ใบสั่ง ไม่ใช่รอบนี้
