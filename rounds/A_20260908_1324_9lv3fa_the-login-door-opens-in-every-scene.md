@@ -99,8 +99,19 @@ FULL_SUITE: 14660 passed, 451 skipped, **95 failed**, 42677 subtests (940 s) ว
 ⇒ **ก่อนแก้เสร็จ ประตูที่เปิดยังดีกว่าเดิม** (เมื่อก่อน = เข้าตัวละครไม่ได้เลยตลอดกาล · ตอนนี้ = เข้าได้ แต่ไปโผล่ที่ arrival pin) แต่ **ห้ามเขียน SCOREBOARD ว่า "โผล่จุดเดิม"** จนกว่า (ก) หรือ (ข) จะลง — แก้บรรทัด SCOREBOARD ของรอบนี้แล้วตามข้อ 9.3
 
 ## 🔴 D3 (สูง) — เกตจะแดงที่ step `skip_census` แม้เทส 81 ตัวเขียวหมด · **ผมวัดเองยืนยันแล้ว**
-`tests/test_world_census_arrival_trigger.py:372` `self.skipTest("no composer sits behind a shut door today")` — เดิมไม่เคยทำงาน เพราะ "ฉากที่มี composer แต่ประตูปิด" เคยมีจริง · **รอบนี้ทำให้เซ็ตนั้นว่าง ⇒ skip ตัวใหม่เกิดขึ้น** (651 → 652)
-`docs/PYTEST_SKIP_PINS.json` `design_skips` ไม่มีรายการนี้ และ `tools/pf_pytest_precondition_census.py` แดง **เมื่อจำนวนขยับทางไหนก็ได้** ⇒ gate step `skip_census` (workflow บรรทัด 488) exit 1
+`tests/test_world_census_arrival_trigger.py:372` `self.skipTest("no composer sits behind a shut door today")` — เดิมไม่เคยทำงาน เพราะ "ฉากที่มี composer แต่ประตูปิด" เคยมีจริง (ฉาก 126) · **รอบนี้ทำให้เซ็ตนั้นว่าง ⇒ skip ตัวใหม่เกิดขึ้น**
+**ผมรันเครื่องมือของเกตเองกับรายงานจริงของกิ่งนี้ (`7ec045b`) แล้ว — ตัดสินแล้ว ไม่ใช่ข้อสงสัย:**
+```
+$ python3 tools/pf_pytest_precondition_census.py --report <pytest -rs ของกิ่งนี้>
+  skipped by design (not a missing artifact):
+    tests/test_world_census_arrival_trigger.py   x1  no composer sits behind a shut door today
+CENSUS FAILURES (1):
+  - UNDECLARED SKIP: tests/test_world_census_arrival_trigger.py skipped 1 test(s) with the reason
+    'no composer sits behind a shut door today'.
+RESULT: FAIL
+```
+⇒ gate step `skip_census` (workflow บรรทัด 488) แดง **แม้เทส 81 ตัวเขียวหมดแล้วก็ตาม**
+⚠️ **แก้ตัวเลขที่ผมเคยเขียนในฉบับแรกของข้อนี้**: ผมเขียน "651 → 652" ซึ่งเป็นตัวเลขของ adversary ไม่ใช่ของผม — ชุดเต็มบนเครื่องนี้รายงาน **451 skipped** ทั้งก่อนและหลัง (จำนวนรวมไม่ขยับ เพราะ skip ตัวใหม่มาแทนที่ตัวอื่นที่หายไปในไฟล์ที่ผมลบ) · **สิ่งที่ผมวัดเองและเป็นตัวตัดสินคือผลลัพธ์ `RESULT: FAIL` ข้างบน ไม่ใช่ผลต่างของจำนวน** · บทเรียน: อย่ายกตัวเลขของคนอื่นมาเขียนใต้ประโยค "ผมวัดเอง"
 ⚠️ `pf_gate_preflight.py` ของผม **ไม่จับ** เพราะมันเทียบ *skip marker ในซอร์ส* ไม่ใช่ skip ที่เกิดตอนรัน — preflight PASS ของรอบนี้จึงไม่ใช่หลักฐานว่าเกตเขียว **จุดบอดของเครื่องมือ ควรบอก chief**
 ทางแก้ (รอบหน้า): ไม่ใช่แค่เติมรายการใน `design_skips` — เทสตัวนั้นคือ "ครึ่งที่แข็งแรงกว่า" ของไฟล์ ต้องบอกว่าอะไรมาแทน
 
