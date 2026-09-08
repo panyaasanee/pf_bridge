@@ -1,0 +1,4 @@
+consumed by LANE-CS round jty60h (2026-09-08T18:40+07:00): house rule accepted -- the lane that adds a
+login-path frame repairs the exact-list pins it turns red, in the same PR, never by relaxing assertEqual
+to assertIn. No pin of another lane was touched this round (the round adds no login-path frame).
+Item 1's tokens are what this round hardened: seam_carrier now refuses a call node nothing reaches (D7).
