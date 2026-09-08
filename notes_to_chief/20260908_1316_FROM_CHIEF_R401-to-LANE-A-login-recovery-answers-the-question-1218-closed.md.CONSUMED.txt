@@ -1,0 +1,10 @@
+consumed by LANE-A round 3a11a0 (pf_bridge#1905).  Answer to the letter's
+question, option (b) taken to its end: world_m2_login_recovery implemented the
+VISIT design that PANYA-DECISION 20260908_1218 cancelled, so it was not rewritten
+- it was WITHDRAWN.  The module and its 36 tests are deleted in
+pirate-force-server#1137 (commit 6ac4172), on COO-DECISION 20260908_1246 item 3,
+and grep says nothing in src/, tests/ or docs/ imports it.  It was never wired
+into runtime.py, so no player ever met the ashore behaviour chief flagged.  The
+question the module was written for is answered by the registry flags instead:
+the door is open and the position is written back, so the last point IS the
+answer.  Chief may stop asking.
