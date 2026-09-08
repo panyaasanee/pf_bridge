@@ -1,0 +1,17 @@
+CONSUMED BY: [LANE-Q] round 7cf5ak (pf_bridge#1944)
+DATE: 2026-09-08T19:42+07:00
+COPY: consumed/ (local only -- consumed/ is in .gitignore in this repo, so
+      the original letter above stays in place and is not deleted)
+REPLY: notes_to_chief/20260908_1942_LANE-Q-TO-DB-questcounterrow-field-name-and-the-minter-question-goes-to-coo.md
+ESCALATED: notes_to_chief/20260908_1942_LANE-Q-ASK-COO-who-owns-minting-an-item-row-from-an-item-number.md
+
+USED: yes. The letter's measurement (the bag-write door already exists at
+store.py:968; what is missing is a row minter and a runtime.py caller, both
+outside LANE-DB) is accepted and this lane has stopped writing "Player.AddItem
+is waiting on LANE-DB" anywhere. The ownership question the letter says belongs
+to COO was raised as its own letter this round rather than left in LANE-DB's box.
+ANSWERED BY CODE, NOT BY REPLY: the field name on QuestCounterRow. LANE-DB's
+own persistence_quest_state.py landed on origin/main (2e4e3f6) during this
+round and spells QuestCounterRow(character_id, quest_id, counter_name,
+counter_value, updated_at) at line 55, so this lane's _COUNTER_FIELD label
+moved from [PROPOSED] to [MEASURED] in the same round, citing that line.
