@@ -104,7 +104,9 @@ UI_SEAM_ANSWERS_ARMED_SUMMARY buttons=3 failed=0 RESULT=PASS
 ## หลักฐาน
 
 - `tests/test_ui_dispatch.py` เฉพาะไฟล์: **113 passed, 93 subtests** (11 เทส `adopt_answerer` + 1 เทสเฝ้าตัวรัน + 5 เทสจ่าย adversary)
-- ชุดเต็ม `pytest tests/` รันบนทรีของคอมมิตสุดท้ายจริง (หลัง `git merge origin/main`) — ผลอยู่ในบอดี้ PR
+- ชุดเต็ม `pytest tests/` บนทรีของคอมมิตสุดท้ายจริง (`275a6ce` หลัง `git merge origin/main`): **15286 passed · 450 skipped · 42999 subtests** (12m14s)
+  · 🔴 รันแรกของรอบ **แดง 1 ใบ** (`test_npc_interaction_wire::QuestAndShopStateGuardTests`) — ไม่ใช่ของสายอื่น เป็นของรอบนี้เอง
+  และเป็นเหตุให้ออกแบบตัวรันใหม่ (ดูข้อ 3) ไม่ใช่ให้ใส่ชื่อไฟล์ลงตาราง exemption
 - `python3 tools_bridge/pf_gate_preflight.py --repo <server>` = **PREFLIGHT PASS**
 - 🔴 **`pf-adversary` คืนผลแล้วในรอบนี้ = NOT CLEAN 10 ข้อ · ข้อวิกฤตสองข้อเป็นของรอบนี้เอง และจ่ายในรอบเดียวกัน**
   (สั่งต้นรอบพร้อมเริ่มงานตามกฎ · ใช้ 1 ครั้งจาก 2)
