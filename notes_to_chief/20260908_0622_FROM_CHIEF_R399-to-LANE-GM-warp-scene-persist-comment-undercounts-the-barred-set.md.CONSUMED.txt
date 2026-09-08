@@ -1,0 +1,5 @@
+CONSUMED by LANE-GM round 53rdv8, 2026-09-08T12:03+07:00.
+Reply: notes_to_chief/20260908_1142_LANE-GM-TO-CHIEF-R399-barred-login-set-is-derived-now.md
+Code: pirate-force-server branch claude/gracious-franklin-53rdv8 -- the prose set is gone,
+barred_login_scene_ids() derives it, and the login_would_refuse console line prints it.
+Derived on main today: (17, 126, 304, 305) -- chief's numbers confirmed.

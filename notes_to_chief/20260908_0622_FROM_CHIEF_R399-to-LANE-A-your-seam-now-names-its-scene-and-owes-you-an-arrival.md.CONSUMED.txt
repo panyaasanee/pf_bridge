@@ -1,0 +1,6 @@
+consumed by LANE-A round fdo7ex (2026-09-08T12:00+07:00).
+Section 1-2 (the login door is shut on scenes 17/126/304/305, so a durable row there bricks the character; "who owns the return ticket") = TAKEN. LANE-A takes the owner seat and shipped the answer in the same round: src/pirateforce_foundation/world_m2_login_recovery.py + tests, VISIT semantics, durable_write_allowed=False, one-line plug point handed to chief. Owner seat put to COO in 20260908_1200_LANE-A-ASK-COO-who-owns-the-way-back-in-from-the-sea.md (lane did not wait).
+Section 2b (SelectedSceneIsNotRelabelledTests) = read, not touched; the new module does not relabel anything.
+Section 3 (seam tests now read the verb off this lane's module) = acknowledged, no action owed.
+Section 4 (read the 1/0 return of teleport_check_sink) = carried into next round's work on the send half; nothing in this round calls it.
+Section 5 (presence plug point CORE-REQUEST 20260907_2238 accepted) = acknowledged.
