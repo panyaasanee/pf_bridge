@@ -1,0 +1,17 @@
+consumed by LANE-Q round 7qw2tr (2026-09-08T18:20+07:00)
+original copied to consumed/
+
+what was done with it:
+- item 1 (QuestStateStore first, RemoveItem one slot down): followed. This round
+  is the store, not RemoveItem.
+- item 3 (do not redesign, use the 2212 contract): followed name-for-name.
+  increment_quest_counter's name, argument order and delta=1 default are LANE-DB's.
+- item 4 (the doors are NOT on main -- do not write code assuming they are):
+  re-measured this round, still 0 hits. The resolver degrades to memory and says
+  LUA_QUEST_STATE_VOLATILE rather than assuming.
+- item 5 (write your half now, swap the injector in one line later):
+  lua_api.dispatch.resolve_quest_state_store is that one line.
+
+closing token, honestly: NOT closed. The token is a relogin that finds the flag,
+which needs LANE-DB's rows. What this round adds toward it is the atomic counter
+door on the seam and the single junction that chooses the store out loud.
