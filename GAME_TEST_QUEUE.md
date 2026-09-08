@@ -5532,46 +5532,7 @@ ATTENDED: ไม่ผ่าน = กดไม่ติด (รายงาน�
 
 ---
 
-## GT-274 PRODUCTION-ATTACK-POSE-BY-CLASS-CONFIRMED-001  [✅ **PASS ทั้งสองชั้น (arm i เต็ม · arm ii รอ GT-272) — R322B/R322C** 2026-09-07T01:36+07:00 (Gladiator ตี Fighting Fish: จอฟันดาบ · wire `POSE_PRODUCTION class=1 equip_type=1 base=2 behavior=280` (R322B 00:5x) · Paladin look #1 ตี Training Iron Man 916: จอฟาดกระบอง (ดาเมจ 891 ตรงจอ) · wire `POSE_PRODUCTION class=2 equip_type=2 base=3 behavior=284` ×4 (R322C) · arm ii (สวมอาวุธ+relog) ไม่ได้ทำ — GT-272 ยังไม่ผ่าน) · ผลเต็ม `notes_to_chief/20260907_0158_KA1A-R322C-RESULTS-*.md` (`OBSERVER_CONFIRMED 2026-09-07T01:48+07:00`) · พับโดย LANE-K รอบ `2a32q2` 2026-09-07T02:12+07:00 · เดิม: 🟢 **READY -- arm (i) บูตได้ทันที ไม่มีธง (ต้องผ่านกาน "ก่อนบูต (gate)" ด้านล่างก่อน) · arm (ii) พ่วงได้เมื่อ `GT-272` ผ่านก่อนในบูตเดียวกัน** · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-CS** · ผู้ตรวจคู่เนื้อใบ (ท่าเป็นเขต B) = LANE-B ไม่ต้องรอ B ก่อนวาง (`COO-DECISION 20260906_0645`) · เปิดตาม `COO-DECISION 20260906_0645` ข้อ 1 -- **ยกเว้น P-2 ในฐานะผู้สืบทอดใบที่สองของ `ATTACK-POSE-ONE-FIELD-AB-001`/`GT-247`** (วัดชนิดเดียว: ท่าเปลี่ยนตามคลาส ไม่วัดสี/ดาเมจ/ดรอป/ตาย) · เลขนับเลขสดเอง (`0434`, ไม่ต้องรอ chief ตั้ง) · **ไม่ปิด `PANYA-ORDER 20260906_0156`** (ปิดด้วย `GT-272` แขน ข ของ DB) และ**ไม่ใช่เกณฑ์ผ่าน M4** (M4 = `GT-224` ของ LANE-B) · v2 แก้ตาม pf-adversary รอบ `rabwxj-adv` (ดูหมายเหตุ v2 ท้ายใบ) · เนื้อใบวาง (v2 คำต่อคำ) โดย LANE-K รอบ `rsmsia` 2026-09-06T15:09+07:00 จาก `notes_to_chief/20260906_0805_LANE-CS-TO-CHIEF-gt274-v2-supersedes-0749-adversary-found-two-real-gaps.md`]
-
-**คำถามของใบ**: บนบูต production ไม่มีแฟล็ก เมื่อตัวละคร Gladiator (class_id=1) ตี Training Iron Man (`n_ID 916`) หนึ่งครั้งที่ยอมรับ ท่าตีบนจอตรงกับดาบตามที่ `GT-247`/R315 ยืนยันแล้วหรือไม่ (BEHAVIOR 280) -- และเมื่อตัวละครอีกตัวที่สร้างใหม่เลือกอาชีพ Paladin ตอนสร้างตัว (look #1 -- ตัวเลือกแรก/ซ้ายสุดในแผงเลือกหน้าตา ณ จอสร้างตัวละคร ถ้าจอไม่มีตัวเลือกแยกชัดเจนให้ใช้ค่าเริ่มต้นที่จอเลือกไว้แล้วบันทึกว่าเลือกโดยไม่ได้กดเปลี่ยน) ตี Training Iron Man ตัวเดิม ท่าต่างจากตัวแรกอย่างเห็นได้ชัดหรือไม่ (คาด BEHAVIOR 284 ค้อน) -- อ่านคู่กับบรรทัดคอนโซล `POSE_PRODUCTION`/`POSE_REFUSED`/`POSE_NO_EQUIP_PROVENANCE` ของ `combat_pose.py` ที่พิมพ์สดต่อฮิต ไม่ใช่สร้างย้อนหลัง
-
-**ก่อนบูต (gate 0/1/2 -- เนื้อจริง ไม่ใช่แค่ชื่อ)**: arm (i) พึ่ง `pirate-force-server` commit `d52cae3` (`CORE-REQUEST 20260905_2242`, ต่อ `class_id=selected.class_id` เข้า `combat_pose` ที่ `runtime.py` บรรทัด ~5172) ต้องเป็นบรรพบุรุษของคอมมิตที่จะบูต -- ตรวจด้วย `git merge-base --is-ancestor d52cae3 <commit ที่จะบูต>` (ผ่าน = เจอ exit 0) แล้วยืนยันซ้ำด้วย `git grep -n "class_id=selected.class_id" <commit นั้น> -- src/pirateforce_foundation/runtime.py` ต้องเจอ 1 บรรทัด -- ใช้ `tools/pf_resolve_green_boot.py` หา `BOOT_COMMIT` ที่ผ่านเกตแล้วรันสองคำสั่งนี้กับ SHA ที่มันคืนมา ห้ามเดา SHA เอง · **ไม่ผ่านสองคำสั่งนี้ = ห้ามบูต**: ตัวละคร Gladiator จะขึ้น `POSE_NO_EQUIP_PROVENANCE` แทน `POSE_PRODUCTION` ทั้งที่ `combat_pose.py` เองไม่มีปัญหา (คอมมิตที่บูตแค่ยังไม่มีสายที่ป้อน `class_id` เข้าไป) -- นี่คือผลลวงที่เช็คนี้มีไว้กันโดยเฉพาะ
-
-**หมายเหตุ (ไม่ใช่ FAIL)**: `persistence_class_id.py`'s docstring เองบันทึกไว้ว่า capture ของคลาสที่สอง (ไม่ใช่ Gladiator) ยังไม่เคยมีใครยืนยันว่า class-selection ตอนสร้างตัวจับคู่กับแถวถูกต้อง (`GT-226` เปิดอยู่) -- ตัวละคร Paladin ที่คืนค่า `class_id` ผิด/`None` ที่ล็อกอินขึ้น `POSE_NO_EQUIP_PROVENANCE reason=no_class_id` ส่วนที่คืนค่าเป็นคลาสอื่นที่ถูกต้องแต่ผิดคาด (เช่น class=4) จะขึ้น `POSE_PRODUCTION class=4 ... behavior=282` ไม่ใช่ `POSE_NO_EQUIP_PROVENANCE` -- ทั้งสองแบบเป็น**ผลลบจริงของคำถามที่สอง** บันทึกบรรทัดคอนโซลจริงเป็น finding ให้ `persistence_class_id.py`/`GT-226` ไม่ใช่ทำให้ใบนี้ FAIL ทั้งใบ (คำถามแรก Gladiator/280 ยังยืนได้ตามลำพัง -- อาศัย `app.py`'s `backfill_missing_class_ids` ที่รันทุกบูตเติม `class_id` ให้ตัวละครเก่าที่แถวยังว่าง ตรวจแล้วว่ามีจริงในบูตปกติไม่มีแฟล็ก)
-
-**ส่วนขยาย (arm ii, ไม่บังคับ)**: ถ้า `GT-272` (DB แขน ข, สวมอาวุธจากกระเป๋าคงอยู่ข้าม relog) ผ่านแล้วในบูตเดียวกัน ให้ตัวละคร Gladiator ตีหุ่นซ้ำอีกครั้งหลังสวมอาวุธ+relog -- คาดว่าท่ายังเป็นดาบ 280 เหมือนเดิม (`combat_pose.py` อ่านอาวุธเริ่มต้นของคลาสเท่านั้น ยังไม่อ่านช่องอุปกรณ์ที่สวมจริง ตามที่โมดูลระบุเป็นรอยต่อที่ยังไม่ต่อ) -- arm (ii) ไม่ผ่าน/ไม่ได้ทำ **ห้ามบล็อก arm (i)**
-
-ATTENDED: บูตปกติ ไม่มีธง (ผ่านกาน "ก่อนบูต (gate)" ข้างบนก่อน) ล็อกอินตัวละคร Gladiator (class 1, ตัวเดิมจาก `GT-116`/`GT-243`/`GT-249`) เดินไปตี Training Iron Man (`n_ID 916`) หนึ่งครั้งที่ยอมรับ ถ่ายภาพท่าตี + คัดลอกบรรทัดคอนโซล `POSE_*` คู่ฮิตนั้น
-ATTENDED: ล็อกเอาต์ สร้างตัวละครใหม่เลือกอาชีพ Paladin (look #1) หน้าจอสร้างตัวละคร ล็อกอินตัวใหม่ เดินไปตี Training Iron Man ตัวเดิมหนึ่งครั้งที่ยอมรับ ถ่ายภาพท่าตี + คัดลอกบรรทัดคอนโซล `POSE_*` คู่ฮิตนั้น
-ATTENDED: (ถ้า `GT-272` ผ่านแล้วในบูตนี้) ให้ตัวละคร Gladiator สวมอาวุธจากกระเป๋าตาม `GT-272` ขั้น 2 แล้ว relog แล้วตีหุ่นซ้ำหนึ่งครั้ง ถ่ายภาพ + คัดลอกบรรทัดคอนโซลอีกชุด (arm ii ส่วนขยาย ข้ามได้ถ้า `GT-272` ยังไม่ผ่าน)
-ATTENDED: ผ่าน = สองภาพแรกต่างกันจริงบนจอ **และ** คอนโซลตัวแรกอ่าน `POSE_PRODUCTION class=1 ... behavior=280` -- ตัวที่สองอ่าน `POSE_PRODUCTION class=2 ... behavior=284` ถือเป็นผ่านเต็ม ถ้าตัวที่สองอ่านอย่างอื่นถือเป็นผ่านคำถามแรกอย่างเดียว + finding แยกตามหมายเหตุข้างบน (ไม่ใช่ FAIL ทั้งใบ)
-ATTENDED: ไม่ผ่าน = ตัวแรก (Gladiator) ไม่ขึ้น `POSE_PRODUCTION class=1` หรือท่าไม่ใช่ดาบ หรือคอนโซลไม่มีบรรทัด `POSE_*` เลยคู่ฮิตนั้น **หลังผ่านกาน "ก่อนบูต (gate)" แล้ว** -- ไม่ผ่านกานเองไม่นับ FAIL ให้หยุดก่อนบูตตามที่กานสั่ง
-
-**เกณฑ์ผ่านสองชั้น**
-- **client-observable**: ภาพท่าตีของสองตัวละครต่างกันจริงบนจอ (ผู้สังเกตยืนยัน)
-- **wire/DB**: บรรทัดคอนโซล `POSE_PRODUCTION`/`POSE_REFUSED`/`POSE_NO_EQUIP_PROVENANCE` ที่ `combat_pose.production_behavior_for_class` พิมพ์สดต่อฮิต (ค่าเดียวกับ selector ที่ประกอบเป็นเฟรม ไม่ใช่ reconstructed) -- ห้ามอ้างชั้นนี้แทนชั้นบน หรือกลับกัน
-
-**nonclaims**: ไม่วัดสีชื่อ ไม่วัด HP ลด ไม่วัดดรอป ไม่วัดตาย (ขอบเขตยกเว้น P-2 แคบเฉพาะท่า -- พบสีผิดระหว่างเทสให้จดเป็นข้อสังเกตของ P-2 ห้ามนับผ่าน/ตกของใบนี้) · ไม่อ้างว่า `persistence_class_id.py` ยืนยันคลาสที่สองถูกต้องเสมอไป -- capture ของ Paladin ในใบนี้คือครั้งแรก ไม่ว่าผลจะออกทางไหน (ดูหมายเหตุข้างบน) · ไม่อ้างว่าอาวุธที่สวมจาก `GT-272` เปลี่ยนท่า -- `combat_pose.py` อ่านอาวุธเริ่มต้นของคลาสเท่านั้น (module docstring, seam ยังไม่ต่อ) · ไม่อ้างว่าใบนี้ปิด `PANYA-ORDER 0156` หรือผ่านเกณฑ์ M4 · ไม่อ้างว่ามอนอื่นหรือใบตีมอนที่วัดดาเมจ/ดรอป/สีได้รับยกเว้นเดียวกัน (ยกเว้นเฉพาะใบนี้กับ `GT-247`/`ATTACK-POSE-ONE-FIELD-AB-001` เท่านั้น)
-
-### result:
-อ้างจาก `notes_to_chief/20260907_0158_KA1A-R322C-RESULTS-GT274-PASS-mace-284-GT178-NEGATIVE-no-ai-tick-scene14.md` (R322C, ka1-A attended, OBSERVER_CONFIRMED 2026-09-07T01:48+07:00) คำต่อคำ, ต่อจากครึ่งแรกใน R322B:
-
-> ครึ่งแรก (R322B 00:5x): Gladiator (Arena01) ตี Fighting Fish → จอ: ฟันดาบ · wire: `POSE_PRODUCTION class=1 equip_type=1 base=2 behavior=280`
-> ครึ่งหลัง (R322C): สร้างตัวใหม่ **Paladin หน้าตา #1** → ตี Training Iron Man (916) ในเมือง 4 ครั้ง → จอ: **ฟาดกระบอง** (เจ้าของยืนยัน + ภาพ ดาเมจ 891 บนจอ) · wire: `POSE_PRODUCTION class=2 equip_type=2 base=3 behavior=284` ×4 · `damage announced -891, applied 891` HP 192779→189215/198125 ตรงจอ
-> ขั้น 3 ของใบ (สวมอาวุธแล้วตีซ้ำ) ไม่ได้ทำ — GT-272 ยังไม่ผ่าน (RE-280) · `TWO_SESSIONS_SAME_SCENE:` ไม่ได้วัด (ผู้เล่นคนเดียว)
-
-RESULT: GT-274 PASS R322C 2026-09-07 01:36 (Paladin mace pose · POSE_PRODUCTION class=2 behavior=284 · Gladiator half class=1 behavior=280 in R322B)
-
-พับโดย LANE-K รอบ `2a32q2` 2026-09-07T02:12+07:00
-
-TWO_SESSIONS_SAME_SCENE: ไม่เกี่ยว -- ใบนี้อ่าน `class_id` จาก `Character` ที่ผูกกับ session/connection ของผู้ตีเอง (`combat_pose.production_behavior_for_class` ต่อฮิตต่อคน) ไม่แตะ world registry/มอน/ตำแหน่ง/ของพื้น/ศพที่แชร์ข้าม session ตามกฎ shared-world (สอดคล้องกับที่ chief เองตอบไว้ใน `CORE-REQUEST 2242` ที่ใบนี้อ้างอิงโค้ดเดียวกัน)
-
-> 🔴 **ห้ามสายอื่นใช้เลข `GT-274`** · numbering: เลขจองไว้ก่อนหน้า (จดหมาย `0749`/`0805`) ⇒ **274** -- ตรวจซ้ำโดย LANE-K รอบ `rsmsia`: `GT-274`/`RE-274` = 0 hit จริงใน `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md`/`archive/*QUEUE*ARCHIVE*` ก่อนวาง (สองที่ที่ขึ้นตอน grep คือ "จองไว้" ในหัวใบ `GT-276` เท่านั้น ไม่ใช่เนื้อใบซ้ำ)
-
-> v2 (รอบ `rabwxj-adv`): pf-adversary จับได้สองข้อจาก v1 -- (1) ขาดบรรทัด `TWO_SESSIONS_SAME_SCENE:` บังคับตาม `PROCESS_GATES.md` §25 -- เติมแล้วข้างบน (2) วลี "gate 0/1/2 ผ่านก่อนบูต ห้ามเดา SHA" ที่ยกมาจาก `GT-249` เป็นชื่อเปล่าไม่มีเนื้อหา (v1 ไม่มี PR/SHA/grep ให้ตรวจจริง ขณะที่ arm (i) พึ่ง `d52cae3` ที่เพิ่งขึ้น main ~3.5 ชม.ก่อนร่างใบ) -- เติมย่อหน้า "ก่อนบูต (gate)" ให้มีคำสั่งตรวจจริงแล้วข้างบน · แก้เพิ่มสองจุดเล็ก: หมายเหตุ (แยก `POSE_NO_EQUIP_PROVENANCE` ออกจากกรณี class อื่นที่ถูกต้อง) และ "look #1" (นิยามสั้นกันทดสอบเข้าใจผิด)
-
-**ผู้เปิดใบ: LANE-CS (ผ่าน `notes_to_chief/20260906_0749_LANE-CS-TO-CHIEF-gt274-ticket-body-ready-for-numbering.md` + v2 `20260906_0805_*`) -- ตั้งเลข/วาง: LANE-K รอบ `rsmsia` -- ผู้บริโภคผล: LANE-CS**
+- ~~GT-274 PRODUCTION-ATTACK-POSE-BY-CLASS-CONFIRMED-001~~ -> archive/GAME_TEST_QUEUE_ARCHIVE_20260908_closed.md (PASS both layers R322B/R322C · 2026-09-08, archived by LANE-K round `8c7cfo`)
 
 ---
 
@@ -5580,41 +5541,7 @@ TWO_SESSIONS_SAME_SCENE: ไม่เกี่ยว -- ใบนี้อ่า
 owner: LANE-GM · body: `tickets/GT-279.md` (เนื้อใบเต็ม · ย้ายออกจากคิวเพราะเกิน 8,192 B ต่อใบ)
 
 ---
-## GT-281 BASIC-FACTION-EVERY-LOGIN-SCENE-SEA-126-001  [✅ **PASS ทั้งสองชั้น — R322B** 2026-09-07T00:55+07:00 (client-observable: login กลางทะเลผ่าน return ticket → `/warp 2` → Fighting Fish ชื่อชมพู ไม่เขียว คลิกโจมตีติด มอนตาย · wire: `PLAYER_FACTION basic_faction=1 sent_on_flagless_start_game` บน login ทะเล) · หลอดฟ้าใต้ชื่อ/HP -1 ยังอยู่แต่วัดแล้วว่าไม่ใช่เรื่อง faction — แยกเป็นใบสร้างใหม่ของ A/DB (BoatHealth ไม่ถูกตั้งกลับเป็น HP ตัวละครตอนออกจาก 126) ไม่ใช่เกณฑ์ตกของใบนี้ · ปลดล็อก GT-220/GT-223 · ผลเต็ม `notes_to_chief/20260907_0123_KA1A-R322B-RESULTS-*.md` (`OBSERVER_CONFIRMED 2026-09-07T01:05+07:00`) · พับโดย LANE-K รอบ `2a32q2` 2026-09-07T02:12+07:00 · เดิม: 🟢 **READY — ชั้น wire PASS R322A** (`PLAYER_FACTION basic_faction=1` on sea login) · ชั้นจอ NOT MEASURED ยัง เหลือ `/warp 2` ดูสีชื่อมอน (ผล `notes_to_chief/20260906_1909_KA1A-R322A-RESULTS-*.md` · เติมโดย LANE-K รอบ `cu7c2r` ตาม `COO-DECISION 20260906_1955` ข้อ 1) — precondition ปลดแล้ว ตรวจสดโดย LANE-K รอบ `cm9v9y` 2026-09-06T17:10+07:00: `pirate-force-server` PR `#1501` (LANE-A round `q02brx`) merge เข้า `origin/main` (`b9a552d`) แล้ว · `git show origin/main:src/pirateforce_foundation/world_faction_admission.py` ยืนยัน `admits()` ไม่เช็ค registry อีกต่อไป ("every scene a login can legally carry ... is admitted") ตรงเงื่อนไขที่ตั้งไว้ ~~[เดิม: 🔴 BLOCKED-ON-WIRING จนกว่า PR ของรอบนี้ (`pirate-force-server` LANE-A round `q02brx`, แก้ `world_faction_admission.admits` ให้ไม่เช็ค registry — ทุกฉากที่ login ได้ = ได้ faction) จะขึ้น main]~~ · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-A** · ตั้งเลขโดย LANE-K รอบ `zqq4qz` 2026-09-06T16:09+07:00 ตาม `NOW.md` ("P-2 ชั้นแรกเจอต้นเหตุ ... LANE-A งานแรกรอบถัดไป ส่งfaction ทุก login scene + ใบ GT (`1347`)") · เนื้อใบมาจากจดหมาย `notes_to_chief/20260906_1515_LANE-A-TO-K-gt-body-basic-faction-every-login-scene.md` คำต่อคำ · อ้าง: `COO-DECISION 20260906_1347` · `KA1A-R321-RESULTS §1`]
-
-**คำถาม**: login ผ่านตั๋ว relog เข้าฉาก 126 (ทะเล, Atlantis ocean panel) ทำให้ผู้เล่นได้ `basic_faction` เหมือน login บกหรือไม่ — และหลัง `/warp 2` มอนในฉาก 2 ตีได้ปกติหรือไม่ (ก่อนหน้านี้ login ผ่าน 126 ทำให้ผู้เล่นไร้ฝ่ายถาวรทุกฉากจนกว่าจะ login ใหม่บนบก — `KA1A-R321 §1`)
-
-**เกณฑ์สองชั้น**:
-- ชั้น client-observable (บนจอ): `/warp 126` (ต้องเป็นบัญชี GM ที่มีตั๋ว relog) → ออกเกม → login ใหม่ (เกิดกลางทะเล Rising Sun Sea) → `/warp 2` → **ชื่อมอน Fighting Fish ต้องไม่เขียว คลิกโจมตีได้** · **ตัวละครต้องไม่มีหลอดสีฟ้าเหนือหัว**
-- ชั้น wire (เทียบไบต์เฟรม `FOUNDATION_SELECTED_START_GAME` ตอน login เข้า 126): ต้องมี mask `0x074F` (ไม่ใช่ `0x034F`) และมีฟิลด์ `basic_faction=1` (`14 01 00 00 00` หลัง scene block) — เทียบกับ `KA1A-R321` ภาคผนวก B
-
-ATTENDED: กด/พิมพ์: `/warp 126` (บัญชี GM ที่อยู่ใน allowlist) → ปิด client → เปิดใหม่ login → `/warp 2`
-ATTENDED: ดู: ชื่อมอน Fighting Fish ในฉาก 2 (สีเขียว=FAIL, สีอื่น=ผ่านเกณฑ์นี้) · หลอดสถานะเหนือหัวตัวละคร (มี=FAIL)
-ATTENDED: ผ่าน/ไม่ผ่าน: ตัดสินจากสีชื่อมอน + คลิกโจมตีได้ + ไม่มีหลอดฟ้า — ไม่ใช่จากตัวเลข HP (P-2 สีชื่อมอนที่ถูกต้องยังเป็นชั้นแยก B ไม่เกี่ยวกับใบนี้)
-ATTENDED: บูต: ไร้ธง ไร้ env (FLAGLESS) · ต้องมีบัญชี GM ในตั๋ว relog 126 (ดู `tests/test_gm_warp_relog_stage.py`)
-ATTENDED: 🆕 ชั้น wire ผ่าน R322A แล้ว (`PLAYER_FACTION basic_faction=1 sent_on_flagless_start_game` ที่ login 126 ผ่าน return ticket 2026-09-06T18:40+07:00) — เหลือแค่ `/warp 2` ดูสีชื่อมอนบนจอ (ชั้น client-observable) เท่านั้น · เติมโดย LANE-K รอบ `cu7c2r` ตาม `COO-DECISION 20260906_1955` ข้อ 1 · ผล `notes_to_chief/20260906_1909_KA1A-R322A-RESULTS-*.md`
-
-**nonclaims**
-- ไม่ยืนยันสีมอนที่ "ถูกต้อง" ตามเกณฑ์ P-2 (เหลือง/ส้ม/แดง/เทา) — ใบนี้วัดแค่ "ไม่เขียว/ตีได้/ไม่มีหลอดฟ้า" (อาการของ §1) เท่านั้น
-
-**links**: `COO-DECISION 20260906_1347` (`notes_to_chief/20260906_1347_COO-DECISION-ka1a1255-...-LANE-A.md`) · `KA1A-R321-RESULTS §1` (`notes_to_chief/20260906_1255_KA1A-R321-RESULTS-...md`) · PR pf_bridge (claim `[LANE-A] round q02brx`) · PR pirate-force-server (round q02brx)
-
-### result:
-อ้างจาก `notes_to_chief/20260907_0123_KA1A-R322B-RESULTS-GT281-screen-PASS-GT279-execute-0x51E9-x3-bg0002-hostile-gap.md` (R322B, ka1-A attended, OBSERVER_CONFIRMED 2026-09-07T01:05+07:00) คำต่อคำ:
-
-> ขั้น: login Arena01 ฉาก 1 → `/warp 126` (วาปสด) → X → relaunch (1545) → login **ลงทะเล 126 ผ่าน return ticket** (`WORLD_SCENE scene_id=126 … return_ticket=REQUIRED` บรรทัด 1245) → `/warp 2`
-> wire: `PLAYER_FACTION basic_faction=1 sent_on_flagless_start_game` **บน login ทะเล** (บรรทัด 1248) — สิ่งที่ R321 ไม่มี
-> จอ (Panya + ภาพ): Fighting Fish soldier ชื่อ**ชมพู ไม่เขียว** · คลิกโจมตีติด · มอนตาย · wire: `damage announced -966, applied 966, hp 3138 -> 2172` (max HP ตรงตาราง 3138)
-> **หลอดฟ้าใต้ชื่อ + แผงตัวเอง HP -1**: ยังมีอยู่ **ทั้งที่ faction มาครบ** ⇒ **ไม่ใช่เรื่องฝ่าย** — R321 โยงหลอดกับ faction **ผิด** — ขอให้ A แยกเกณฑ์ "ไม่มีหลอดฟ้า" ออกจากใบ 281 ไปเป็นใบสร้างของ A/DB
-> **ปลดล็อก**: GT-220 / GT-223 (BLOCKED จน GT-281 ผ่านจอ) เดินต่อได้
-
-RESULT: GT-281 PASS R322B 2026-09-07 00:55 (sea login ships basic_faction=1 · /warp 2 mob names pink not green · attack+kill OK · blue bar = boat HP not restored, separate ticket)
-
-พับโดย LANE-K รอบ `2a32q2` 2026-09-07T02:12+07:00
-
-> numbering: ตัวนับร่วมสองคิว + `archive/*QUEUE*ARCHIVE*` คืน **280** (`RE-280`, ตั้งเลขรอบเดียวกัน `zqq4qz` ก่อนหน้าใบนี้) ⇒ ใบนี้ **281** · ตรวจ 0 hit ของ `GT-281`/`RE-281` ทั้งสามที่ (`GAME_TEST_QUEUE.md` · `CLIENT_RE_QUEUE.md` · `archive/*QUEUE*ARCHIVE*.md`) + ไม่มี RESERVED ใน `NOW.md` ก่อนวาง [ตรวจโดย LANE-K รอบ `zqq4qz`]
-
-**ผู้เปิดใบ: LANE-A (ผ่าน `notes_to_chief/20260906_1515_LANE-A-TO-K-gt-body-basic-faction-every-login-scene.md`) -- ตั้งเลข/วาง: LANE-K รอบ `zqq4qz` -- ผู้บริโภคผล: LANE-A**
+- ~~GT-281 BASIC-FACTION-EVERY-LOGIN-SCENE-SEA-126-001~~ -> archive/GAME_TEST_QUEUE_ARCHIVE_20260908_closed.md (PASS both layers R322B · unlocked GT-220/GT-223 · 2026-09-08, archived by LANE-K round `8c7cfo`)
 
 ---
 
@@ -5904,8 +5831,16 @@ HEADLESS_PROOF: UI_LOGOUT_EXIT_GAME_ARMED subcode=1 ack=1 lease_closed=1 close_s
 
 ---
 
-## GT-309 M2-CAPTAIN-REPORT-MARKER-CONFIRM-WARP-001  [🟡 **HELD-ON-BUILD: จุดเสียบ `runtime.py` สองจุด (ส่ง prompt · รับ echo `0x4477` แล้วตอบ transport) + PR ของรอบ `w4cp5c`** · เนื้อใบจาก `notes_to_chief/20260908_0012_LANE-A-TO-K-gt-body-m2-captain-report-marker-confirm-warp.md` (LANE-A รอบ `w4cp5c`) **คำต่อคำ** — ใบยาว >8,192 B ⇒ วางที่ `tickets/GT-309.md` · ตั้งเลขโดย LANE-K รอบ `0109` 2026-09-08T01:16+07:00 = รอบแรกที่ K เห็นคำขอ · **เจ้าของใบ = LANE-A** ตาม `COO-ORDER 20260907_2241_COO-ORDER-re303-pass-the-build-ticket-and-gt-body-are-yours-this-round-LANE-A.md` ข้อ 1 · ที่มา: `RE-303` ตอบแล้ว (`0x4477` ฟิลด์เดียว u16 = marker id · confirm 21/22 · Cancel ไม่ส่งอะไร) → ใบสร้าง+GT รอบเดียวกันตามกติกา "RE ตอบแล้ว" ใน `NOW.md` · เจ้าของใบเขียนเองว่า **ไม่พิมพ์โทเคนกลไก** เพราะยังไม่มีจุดเสียบใน `runtime.py` (ของ chief สองจุด บรรทัดขอเขียนไว้ใน body ของ PR รอบนี้แล้ว) ⇒ **K ไม่เขียน `HEADLESS_PROOF:` แทนเจ้าของ** คงหมวด ง. ตกรถ จนกว่า LANE-A ส่งโทเคนสองบรรทัด (`LANE_A_M2_TELEPORT_CHECK PROMPT ...` + `... TRANSPORT ...`) ที่วัดบน main จริง · นี่คือใบที่ `NOW.md` ("รอเครื่องคุณ" ข้อ 2 · "ประตู M" `1825`) รอเป็นโทเคนถัดไปของ M2 — **เจ้าของ = LANE-A ถือตลอดสาย** ตาม `1910`]
+## GT-309 M2-CAPTAIN-REPORT-MARKER-CONFIRM-WARP-001  [🟡 **HELD-ON-BUILD: จุดเสียบ `runtime.py` สองจุด (ส่ง prompt · รับ echo `0x4477` แล้วตอบ transport) + PR ของรอบ `w4cp5c`** · เนื้อใบจาก `notes_to_chief/20260908_0012_LANE-A-TO-K-gt-body-m2-captain-report-marker-confirm-warp.md` (LANE-A รอบ `w4cp5c`) **คำต่อคำ** — ใบยาว >8,192 B ⇒ วางที่ `tickets/GT-309.md` · ตั้งเลขโดย LANE-K รอบ `0109` 2026-09-08T01:16+07:00 = รอบแรกที่ K เห็นคำขอ · **เจ้าของใบ = LANE-A** ตาม `COO-ORDER 20260907_2241_COO-ORDER-re303-pass-the-build-ticket-and-gt-body-are-yours-this-round-LANE-A.md` ข้อ 1 · ที่มา: `RE-303` ตอบแล้ว (`0x4477` ฟิลด์เดียว u16 = marker id · confirm 21/22 · Cancel ไม่ส่งอะไร) → ใบสร้าง+GT รอบเดียวกันตามกติกา "RE ตอบแล้ว" ใน `NOW.md` · เจ้าของใบเขียนเองว่า **ไม่พิมพ์โทเคนกลไก** เพราะยังไม่มีจุดเสียบใน `runtime.py` (ของ chief สองจุด บรรทัดขอเขียนไว้ใน body ของ PR รอบนี้แล้ว) ⇒ **K ไม่เขียน `HEADLESS_PROOF:` แทนเจ้าของ** คงหมวด ง. ตกรถ จนกว่า LANE-A ส่งโทเคนสองบรรทัด (`LANE_A_M2_TELEPORT_CHECK PROMPT_SENT ... sink=... drain=... wired=... taken=...` + `... TRANSPORT ...`) ที่วัดบน main จริง (สตริงแก้โดย LANE-K รอบ `8c7cfo` 2026-09-08T07:11+07:00 ตาม `notes_to_chief/20260908_0606_LANE-A-TO-K-gt-body-gt309-token-line-gains-sink-and-drain-fields.md` — เทียบด้วย prefix `"LANE_A_M2_TELEPORT_CHECK PROMPT_SENT "` ไม่ใช่ทั้งบรรทัดเป๊ะ ดูรายละเอียดเต็มใน `tickets/GT-309.md`) · นี่คือใบที่ `NOW.md` ("รอเครื่องคุณ" ข้อ 2 · "ประตู M" `1825`) รอเป็นโทเคนถัดไปของ M2 — **เจ้าของ = LANE-A ถือตลอดสาย** ตาม `1910`]
 
 > numbering [LANE-K รอบ `0109`]: ต่อจาก `GT-308` ในรอบเดียวกัน (ดูบล็อก numbering ของ `GT-308` สำหรับคำสั่งค้นหาเต็ม) · ตรวจ 0 hit ของ `GT-309`/`RE-309` แล้วในบล็อกเดียวกัน
 
 owner: LANE-A · body: `tickets/GT-309.md` (เนื้อใบเต็ม · ย้ายออกจากคิวเพราะเกิน 8,192 B ต่อใบ)
+
+---
+
+## GT-313 GM-WARP-STAGED-SAYS-ON-SCREEN-AND-RELOG-LANDS-001  [🟢 **READY (attended) — HEADLESS_PROOF: บน main วันนี้** · เนื้อใบจาก `notes_to_chief/20260908_0552_LANE-GM-TO-K-gt-body-staged-warp-says-on-screen-and-relog-lands.md` (LANE-GM รอบ `2rk98y`) **คำต่อคำ** — ใบยาว >8,192 B ⇒ วางที่ `tickets/GT-313.md` · ตั้งเลขโดย LANE-K รอบ `8c7cfo` 2026-09-08T07:11+07:00 = รอบแรกที่ K เห็นคำขอ (`NOW.md` รอบ `0552`: "HEADLESS_PROOF: staged วัดแล้ว → K ตั้งเลขใบ") · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-GM** · K ตรวจ `git merge-base --is-ancestor 7a064e7 origin/main` บนรีโปเซิร์ฟเวอร์ = **ผ่าน** (`origin/main` ปัจจุบัน `776cad9`) ⇒ โทเคนวัดจริงบน main ที่ยังมีชีวิต ไม่ใช่กิ่งตาย · 🔴 nonclaim ของเจ้าของใบ: ใบนี้เทส**เครื่องมือ GM** ไม่ใช่ M2 — ผ่านใบนี้ไม่ใช่ "M2 ผ่าน"]
+
+> numbering [LANE-K รอบ `8c7cfo`]: คำสั่งค้นหาเดียวตามกฎ ② ที่หัวไฟล์นี้ (`grep -ohE '\b(GT|RE)-[0-9]{3,4}\b' GAME_TEST_QUEUE.md CLIENT_RE_QUEUE.md archive/*QUEUE*ARCHIVE*.md tickets/*.md 2>/dev/null | grep -oE '[0-9]{3,4}$' | sort -n | tail -1`) คืน **312** · เลขจองในจดหมาย (`NOW.md`/`FROM_CHIEF_*`/`COO-DECISION`/`LANE-K-NUMBERED-*`) สูงสุดก็ **312** (hit ของ `313` ที่พบเป็น `R313`/`1313` คนละความหมาย — ตรวจด้วยตาแล้ว) ⇒ เลขว่างถัดไป **313** · ตรวจ 0 hit ของ `GT-313`/`RE-313` ครบทุกที่ (คิวสองไฟล์ · `archive/*QUEUE*ARCHIVE*` · `tickets/`) ก่อนวาง
+
+owner: LANE-GM · body: `tickets/GT-313.md` (เนื้อใบเต็ม · ย้ายออกจากคิวเพราะเกิน 8,192 B ต่อใบ)

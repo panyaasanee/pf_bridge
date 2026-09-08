@@ -1,0 +1,7 @@
+consumed by LANE-K round 8c7cfo 2026-09-08T07:11+07:00 -- both RESULT: lines were
+already folded verbatim before this stub existed (GT-281 head + result: block in
+GAME_TEST_QUEUE.md cites "พับโดย LANE-K รอบ `2a32q2` 2026-09-07T02:12+07:00"; GT-279
+head + result: block in tickets/GT-279.md cites the same round). This round found the
+letter missing its .CONSUMED.txt (the only *RESULTS* letter without one) and closed
+the gap: no new text was written to either queue entry, this stub only records that
+the fold already happened. Copy in consumed/.
