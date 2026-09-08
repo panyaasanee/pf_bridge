@@ -105,7 +105,8 @@ adversary ยังยืนยันเองด้วยว่ามิวแ�
 - 🔴 **ใบนี้ไม่ใช่โทเคนประตู M ที่ปิดแล้ว** เพราะ G1 ยังเปิด — อย่าให้ NOW รอบหน้าจดว่าประตูปิด
 - ชุดเต็มรอบแรกบนต้นไม้ที่ merge origin/main: **1 failed · 14,541 passed · 442 skipped · 42,186 subtests · 878 วินาที**
   ตัวที่ตกคือ `test_lane_a_scene_refusal_notice.py::TokenIsPinnedToItsConsumersTests::test_the_token_is_the_one_runtime_prints_today` — **ความผิดผมเอง**: คอมเมนต์ที่ผมเขียนอธิบาย G1 สะกดโทเคนคอนโซลของ notice ลงใน `runtime.py` ซึ่งเทสของ LANE-A ปักไว้ว่าห้ามมี (โมดูล notice เป็นผู้ผลิตเจ้าเดียว) · **เทสถูก ผมผิด** แก้ให้คอมเมนต์เรียกชื่อโมดูลแทนสตริง
-  ⇒ ชุดเต็มรันใหม่บนต้นไม้ที่แก้แล้ว: **ผลอยู่ท้ายหัวข้อนี้**
+  ⇒ ชุดเต็มรันใหม่บนต้นไม้ที่แก้แล้ว (คอมมิตสุดท้ายจริงของรอบ · `9d40bed9`): **14,542 passed · 442 skipped · 0 failed · 42,186 subtests · 897 วินาที**
+- `python3 tools_bridge/pf_gate_preflight.py --repo` = **PREFLIGHT PASS** (รวม `--pr-body --pr-stage final`: marker หนึ่งบรรทัดพอดี)
 
 ## เกตวินโดวส์ที่รันเองไม่ได้
 - `pytest_subset` / `skip_census` ฉบับเต็มบนวินโดวส์ = **skip อย่างเปิดเผย** (ไม่มีเครื่องวินโดวส์บนคลาวด์) · ที่รันได้และรันแล้ว: `tools_bridge/pf_gate_preflight.py --repo` = **PREFLIGHT PASS**
