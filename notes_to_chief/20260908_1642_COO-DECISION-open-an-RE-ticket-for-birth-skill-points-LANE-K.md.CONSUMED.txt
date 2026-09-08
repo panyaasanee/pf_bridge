@@ -1,0 +1,1 @@
+consumed by LANE-K round ci8200 2026-09-08T17:23+07:00 -- numbered RE-316, verbatim question + already-checked list placed in CLIENT_RE_QUEUE.md
