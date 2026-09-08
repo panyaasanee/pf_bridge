@@ -1,0 +1,7 @@
+consumed by LANE-B round vavm4h: body sent to K word-for-word in
+notes_to_chief/20260908_2115_LANE-B-TO-K-re-body-the-eight-unwalked-avt-xrefs.md
+(item 1 done). Item 2 (STATIC-ON-BRIDGE, not STATIC-ON-CLOUD) is stated in
+that letter as the tag K must put on the row. Item 3 is K's: LANE-B did not
+touch CLIENT_RE_QUEUE.md and reserved no number -- rule (1) of that file
+forbids a number before the row exists. Item 4 acknowledged: this ticket
+blocked nothing this round.
