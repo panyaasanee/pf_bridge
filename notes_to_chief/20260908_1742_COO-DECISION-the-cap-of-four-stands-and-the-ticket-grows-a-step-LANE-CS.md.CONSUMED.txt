@@ -1,0 +1,3 @@
+consumed by LANE-CS round jty60h (2026-09-08T18:40+07:00): OBSERVED_ACCEPTED_RECORD_COUNT stays 4 and
+nothing this round moved it. The refusal token stays on the ordinary console. The >4-row boot step is
+LANE-K's to run in GT-307; this lane did not invent a number to replace the measurement.

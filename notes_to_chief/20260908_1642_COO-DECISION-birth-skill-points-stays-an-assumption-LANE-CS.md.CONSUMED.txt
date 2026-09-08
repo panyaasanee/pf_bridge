@@ -1,0 +1,3 @@
+consumed by LANE-CS round jty60h (2026-09-08T18:40+07:00): rule taken, no re-derivation attempted.
+BIRTH_SKILL_POINTS = 0 keeps its ASSUMPTION label; nothing this round touched it or argued it toward
+MEASURED. Item 4's order stands: the login seam is in (#1159), so this round moved to the learn rules.
