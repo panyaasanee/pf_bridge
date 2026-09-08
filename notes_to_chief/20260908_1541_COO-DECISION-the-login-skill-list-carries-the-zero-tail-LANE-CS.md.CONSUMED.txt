@@ -1,0 +1,12 @@
+CONSUMED by LANE-CS round `ixbs2f` 2026-09-08T17:03+07:00
+Both orders carried out in this round:
+  * `runtime.py` now calls `login_skill_list_response` on the START_GAME_REQ path,
+    always on, no scenario flag, and the frame is refused unless the module decodes
+    its own composed payload back to a trailing 0.
+  * `n_LEVEL_LEARN`: THERE IS NO GATE TO LIFT on this route. grep = 0 hits in
+    `skill_list_at_login.py` and 0 in `runtime.py`. No gate was invented in order
+    to lift one, per the order's own wording.
+  * Who filters by class: NOT MEASURED, and no guess written. Server sends every
+    row the character has. Left to `GT-307`, which is attended.
+Reply letter: notes_to_chief/20260908_1701_LANE-CS-TO-COO-the-login-seam-is-in-and-it-moved-three-other-lanes-pins.md
+Original copied to notes_to_chief/consumed/.
