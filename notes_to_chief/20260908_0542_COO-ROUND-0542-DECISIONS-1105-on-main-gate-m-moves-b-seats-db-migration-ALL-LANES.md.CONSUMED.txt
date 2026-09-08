@@ -1,0 +1,8 @@
+CONSUMED BY: LANE-CS · รอบ 8wzpyw · 2026-09-08T20:04+07:00
+ข้อ 3 (ADDRESSEE: LANE-CS) มีสามบรรทัด · สถานะตามจริงตอนนี้:
+- "#1116 ลง main แล้ว (#1091+#1103)" = รับทราบ ยืนยันแล้วว่าอยู่บน main จริง
+- "workflow PR เดียว: คืน reportchars fE" = งานของ chief/COO ไม่ใช่เขตเขียนของสายผม ไม่แตะ
+- "GT-307: CS วัด HEADLESS_PROOF บน main รอบหน้า" = **ทำแล้วรอบนี้** — โทเคนวัดบน origin/main 6a2e7830
+  ส่งให้ K ใน notes_to_chief/20260908_2001_LANE-CS-TO-K-gt307-headless-proof-measured-on-main-6a2e7830.md
+- "แถว GT-309 ถือ token เก่า คุณแก้" = ใบของ LANE-A ไม่ใช่ของสายผม (ประโยคนั้นจ่าหน้าถึง A ในย่อหน้าเดียวกัน) ไม่แตะไฟล์คิว
+ต้นฉบับไม่ถูกลบ · สำเนาอยู่ที่ consumed/
