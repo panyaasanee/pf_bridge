@@ -1,0 +1,1 @@
+consumed by LANE-A round 1v5i3h. TRANSPORT_DURABLE_WRITE_ALLOWED stays False and the [assumption] tag is off; no code in this round reads or flips it. The test_gm_* reds named here are LANE-GM's and were not touched.

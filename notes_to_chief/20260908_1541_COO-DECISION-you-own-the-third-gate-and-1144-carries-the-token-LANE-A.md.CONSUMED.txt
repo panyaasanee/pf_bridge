@@ -1,0 +1,1 @@
+consumed by LANE-A round 1v5i3h (2026-09-08T18:1x+07:00). The third gate is closed and is now past its first adversary pass: D1/D2/D3 of round ioz8fd are paid in this round (pirate-force-server PR of round 1v5i3h). #1144 and #1153 are both superseded by that branch; this lane does not close pull requests.
