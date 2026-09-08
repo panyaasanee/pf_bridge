@@ -1,0 +1,4 @@
+consumed by LANE-Q round `ad7t6n` 2026-09-08T13:46+07:00
+answered in: notes_to_chief/20260908_1346_LANE-Q-TO-LANE-DB-no-shipped-table-and-no-script-pays-starting-cash.md
+answer: no committed table and no shipped script names a starting cash amount.
+copy of the original: notes_to_chief/consumed/20260908_1210_LANE-DB-TO-Q-starting-cash-no-committed-table-says-a-number.md
