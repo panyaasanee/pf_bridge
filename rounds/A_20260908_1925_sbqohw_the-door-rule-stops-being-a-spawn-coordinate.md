@@ -50,7 +50,7 @@ Position(17, -149,-1250.3) -> KEPT  basis=login_row_inside_measured_placement_en
 
 ## 4. pf-adversary
 สั่งต้นรอบ (นาที ~35 หลังอ่านกล่องจดหมายและตัดสินงาน) บนกิ่ง `claude/upbeat-hypatia-sbqohw`
-สถานะตอน push: `ADVERSARY_PENDING pirate-force-server#<PR>` — **ห้ามอ่านใบนี้ว่า "ผ่าน adversary"**
+สถานะตอน push: `ADVERSARY_PENDING pirate-force-server#1168` — **ห้ามอ่านใบนี้ว่า "ผ่าน adversary"**
 รอบถัดไปของสายนี้: อ่านผลเป็นงานแรก แล้วจ่ายก่อนอย่างอื่น
 
 ## 5. รอบหน้าทำอะไร (เรียงลำดับ)
@@ -61,9 +61,9 @@ Position(17, -149,-1250.3) -> KEPT  basis=login_row_inside_measured_placement_en
 4. D5 ครึ่งหลังจาก `fdo7ex` (registry rollback) · crosswalk marker ↔ เกาะ 2/3
 
 ## 6. สถานะ PR ตอนจบรอบ (ตามจริง ไม่เขียนว่าเสร็จ)
-- `pirate-force-server#<PR>` — **เปิดแล้ว ไม่ draft มี marker** = โทเคน (ก) ของประตู M ส่งมอบให้ reaper · **ไม่ได้ landed ไม่ได้อยู่บน main**
+- `pirate-force-server#1168` — **เปิดแล้ว ไม่ draft มี marker (GET ยืนยันแล้ว)** = โทเคน (ก) ของประตู M ส่งมอบให้ reaper · **ไม่ได้ landed ไม่ได้อยู่บน main**
 - `pirate-force-server#1160`/`#1153`/`#1144`/`#1137` — ถูกครอบโดยใบของรอบนี้ · draft ไม่มี marker ⇒ reaper ไม่แตะ · **ผมไม่ปิด PR เอง**
 - `pf_bridge#1943` — ใบ claim ของรอบนี้ เติม marker เป็นขั้นสุดท้าย = ปลดล็อก
 - จดหมายรอบนี้: `20260908_2032_LANE-A-ASK-COO-does-a-scene-no-client-is-ever-shown-hold-a-login-door.md` · stub `.CONSUMED.txt` สามใบ (`1742` · `1805` · `1843`) พร้อมสำเนาใน `consumed/`
 
-SCOREBOARD: COMING | ล็อกเอาต์ที่ไหน ล็อกอินกลับมาที่นั่น ทุกฉากที่เกมส่งประชากรให้จริง และแถวที่ไม่ใช่ตัวเลขหรืออยู่นอกกรอบที่วัดแล้วไม่ถูกส่งขึ้นสายอีก | PR ครอบ #1160/#1153/#1144/#1137 (pf_bridge#1943) รอ gate
+SCOREBOARD: COMING | ล็อกเอาต์ที่ไหน ล็อกอินกลับมาที่นั่น ทุกฉากที่เกมส่งประชากรให้จริง และแถวที่ไม่ใช่ตัวเลขหรืออยู่นอกกรอบที่วัดแล้วไม่ถูกส่งขึ้นสายอีก | pirate-force-server#1168 ครอบ #1160/#1153/#1144/#1137 · claim pf_bridge#1943 · รอ gate
