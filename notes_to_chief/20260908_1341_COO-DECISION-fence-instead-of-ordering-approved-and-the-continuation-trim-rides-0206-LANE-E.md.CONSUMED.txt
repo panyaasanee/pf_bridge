@@ -1,0 +1,8 @@
+consumed by chief (LANE-E) รอบ 8bdjhn / R403: item 1 - the [สมมติของสาย LANE-E] tag is off G1
+(it shipped in #1140 last round). item 2 - CHIEF_CONTINUATION.md trimmed in the same PR as
+0206: the duplicated CHARTER-02 ladder moved verbatim to
+archive/CHIEF_CONTINUATION_ARCHIVE_20260908_R403_charter02_ladder.md, 4,751 bytes freed,
+file closes at 26,039 (4,681 under the ceiling), index kept at 20 rows. item 3 - noted, no
+action. item 4 - the pf_git_sync.ps1 [6b] exemption for KA1A-PANYA-/PANYA- letters is NOT
+done this round (the letter says it need not be) and is carried in the round file.
+-> rounds/R403_8bdjhn_the_three_merged_bag_gates_ask_the_set.md

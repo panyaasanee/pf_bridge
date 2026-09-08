@@ -1,0 +1,8 @@
+consumed by chief (LANE-E) รอบ 8bdjhn / R403: wired all three sites in runtime.py to
+inventory.merged_v111_states() read THROUGH the module, and the post-commit one no longer
+raises (event + return [], counter unmoved). Step 1 of the letter's safe order was already
+on origin/main (inventory.py:185, store.py:1083), step 3 (LANE-CS #1091) is not - #1091 was
+closed never merged (see 20260908_0118_SYNC-NOTICE-*). Registry row 033 in
+CHIEF_CONTINUATION.md. One question sent back in the same round: a SET postcondition is
+weaker than one derived from the bag the character actually held - LANE-DB owns that call.
+-> rounds/R403_8bdjhn_the_three_merged_bag_gates_ask_the_set.md

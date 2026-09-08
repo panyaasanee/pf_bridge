@@ -7,40 +7,14 @@
 `notes_to_chief/20260904_0233_*.md` · `notes_to_chief/20260904_0243_COO-DECISION-*.md` ·
 ประวัติการพัก: `notes_to_chief/consumed/20260901_0215_PANYA-ORDER-*.md`
 
-### CHARTER-02 — บันไดไมล์สโตน (คอลัมน์ "กำหนด" ถูกลบตาม `0243` ข้อ 2 · กฎสี่ข้อของเวอร์ชัน + วินัยหลักฐานคงเดิม)
+### CHARTER-02 - the ladder itself moved out of this file (R403)
 
-- ✅ **M1/v1** เมืองมีชีวิต — ประกาศแล้ว (R249)
-- ⏳ **M2/v2** ออกจากเมืองได้ — เหลือเกณฑ์เดียว: แล่นเรือชนเกาะ → หน้า "รายงานกัปตัน เรือเทียบท่า [ชื่อเกาะ]"
-  เด้งเอง (ไม่ต้องคลิก · `PANYA-INFO 20260904_0409`) → ผู้เล่นกดยืนยัน → วาปเข้าเกาะ 2 (Prison Exile) และเกาะ 3
-  (Spice Paradise) ได้จริงบนจอ **ทั้งสองเกาะ** → **LANE-A**
-  🔴 **แก้ถ้อยคำโดย chief รอบ `3kwnnr`/R332 ตาม `COO-DECISION 20260904_0344` ข้อ 2** — ~~"ใกล้เกาะ client ยิง
-  `TriggerVital` (`0x1FB2`) → server ตอบ"~~ **ถอน หักล้างแล้ว**: `0x1FB2` id 40/51/3/57/36 = trigger prop
-  กลางทะเล (Seafood Cargo/Offer Altar/…) ไม่ใช่ทางเข้าเกาะ (`LANE-A 20260904_0300` จาก
-  `TEXTDATA_TH__Trigger_TIP.tsv`) · **อะไรเปิดหน้ารายงานกัปตันยังไม่รู้ = ใบ RE ของ LANE-A** (ร่างรอบ 04:21 ·
-  chief ตั้งเลขในรอบที่ใบถึง ตาม `0344` ข้อ 3) · ห้ามใบเทสใบไหนถือ `0x1FB2` เป็นฐานของ "เทียบท่า" อีก
-- **M3** สนามมีมอนสเตอร์ (= P-2 ยกระดับ): สีชื่อมอนถูกตามสถานะ **และ** attr + relation/faction ของมอนถูกจริง
-  ไม่ใช่แค่ทาสี → LANE-GM (สี) ร่วม LANE-B (attr/relation ของ roster)
-- **M4** ตีได้ตายได้ — สี่ข้อครบบนจอ: (1) มอนตีกลับ HP ผู้เล่นลดจริง (2) ตายถูกต้อง ท่าตาย/ชื่อเทา/ไม่มี
-  ข้อความ-ตัวนับของผู้เล่น (3) ศพไม่แข็งค้าง (4) เกิดใหม่ได้ (`GT-224`) → LANE-B
-- **M5** เก็บของได้ (คงเดิม) — เก็บได้ + รอด relog · หนี้: ของผี 120 วิ · หาง P-1 · ไอคอน/ใช้ของ → LANE-B
-- **M final** (ไม่มีเลข แทน M6) — เกมเล่นได้ครบวงจร เกิด-เดินทาง-สู้-เก็บ-โต-กลับมา
-
-- **P-1** ของดรอปต้องอยู่บนพื้นนานพอให้เดินไปเก็บทัน → **LANE-B** (ตัวหลักติ๊กแล้ว · หางค้าง: กะพริบหลัง
-  `#689` + หนี้ `DropLedgerCell` = `GT-225`)
-- **P-2** สีชื่อมอนต้องถูกสถานะ: ปกติ=ส้ม / สู้=แดง / ตาย=เทา (ห้ามชมพู) → **LANE-GM** ร่วม LANE-B (attr/relation)
-  — เกณฑ์ผ่าน M3 ตั้งแต่ `0233`
-- **P-3** ทุกปุ่ม/ทุกฟังก์ชันใน GMUI ทั้ง 3 หน้าต้องทำงานจริงครบทุกตัว → **LANE-GM**
-- 🆕 UI-A/UI-B (ปุ่มกลับหน้าเลือกตัวละคร/logout) **ย้ายเจ้าของจาก LANE-A ไป LANE-UI** ตาม
-  `notes_to_chief/20260904_0330_COO-DECISION-*.md` — ดูหัวข้อ "ทีมและเขตเขียน — สายที่ 6/7" ด้านล่าง
-- 🆕 GM-B `/speed` เจ้าของ **LANE-DB** (`COO-DECISION/ORDER 20260901_1059/1100/1101`)
-- `GT-146`/ใบตีมอนทั้งหมด **ห้ามเข้าคิว attended** จนกว่า P-2 จะปิด (P-1 ผ่านจอแล้ว)
-- **"ตัวละคร" (class/สแตท/HP จากตาราง class)** ไม่เปิดเลนใหม่ (`0243` ข้อ 3) — แถว typed HP/เลเวล = LANE-DB ·
-  `class_id` NULL = chief (`GT-215`) · ค่าเริ่มต้น HP/สแตทจากตาราง class = chief ออก CORE-REQUEST ให้ LANE-DB
-  เมื่อ `GT-215` ปิด — M4 ข้อ (1) ต้องมีแถวนี้ก่อน
-
-`SERVER_VERSIONS.md` (ที่รากรีโปเซิร์ฟเวอร์) ตารางแผน v2-v-final: ลบคอลัมน์วันที่ตามเดียวกัน — งานถัดไปของ chief
-(ยังไม่ลงรอบนี้ เพื่อคุมขนาด PR ให้อยู่หนึ่งเรื่องต่อใบ)
-
+**LIVE ladder, pass criteria and owner per step: `NOW.md` "bandai milestone" ONLY** (`prompts/CHIEF.md`
+section 13 -- do not restate it here, a second copy is how the two drift).  The four version rules and the
+evidence discipline are unchanged and also live in that prompt.
+The text that stood here word for word ->
+[`archive/CHIEF_CONTINUATION_ARCHIVE_20260908_R403_charter02_ladder.md`](archive/CHIEF_CONTINUATION_ARCHIVE_20260908_R403_charter02_ladder.md)
+(moved, not deleted: `COO-DECISION 20260908_1341` item 2).
 ## ทีมและเขตเขียน — บล็อกประกาศตั้งสาย DB/CS/UI/Q ⇒ [`archive/CHIEF_CONTINUATION_ARCHIVE_20260906_lane_charters_db_cs_ui_q.md`](archive/CHIEF_CONTINUATION_ARCHIVE_20260906_lane_charters_db_cs_ui_q.md) (ย้ายทั้งบล็อกคำต่อคำ ไม่มีการลบ chief รอบ `l5tqxc`/R376 เพดาน 30 KB) · เขตเขียนสดของทุกสายอยู่ที่ `prompts/CHIEF.md` §6
 
 ## ดัชนีรอบเก่า (รอบ 44-178) — ย้ายไป `archive/CHIEF_CONTINUATION_ARCHIVE_INDEX.md` แล้วทั้งบล็อก ไม่มีการลบเนื้อหา
@@ -56,6 +30,8 @@
 🔴 R211+R229 housekeeping: full table rows 001-026 -> `archive/CORE_REQUEST_REGISTRY_ARCHIVE_20260828_R211_rows001-026.md` · row 027 (closed, wired R210, merge verified) + R211 preamble + stale WIRED-count note -> `archive/CHIEF_CONTINUATION_ARCHIVE_20260829_R229_trim.md` · ตารางข้างล่าง = เฉพาะแถวที่ยังเปิด
 
 (แถวเปิด 011 012 014 015 017 021 026 — สรุปย่อคำต่อคำย้ายไป `archive/CHIEF_CONTINUATION_ARCHIVE_20260829_R229_trim.md` · ถ้อยคำเต็มอยู่ใน `archive/CORE_REQUEST_REGISTRY_ARCHIVE_20260828_R211_rows001-026.md` เหมือนเดิม · เลขจองล่าสุด: 032)
+
+- 033 CORE-REQUEST (สาย DB รอบ `s6an52` · `notes_to_chief/20260908_0206_LANE-DB-CORE-REQUEST-runtime-three-merged-bag-comparisons-must-ask-the-set.md`) — `runtime.py` เทียบกับ `MERGED_V111_BACKPACK` ค่าเดียวสามที่ (`_dispatch_v111_persistent_merge` postcondition **ที่ raise หลัง commit** · `_dispatch_item_move_capture` · `_dispatch_item_move_hypothesis`) ⇒ **ต่อสายแล้ว (wired) รอบ R403 `8bdjhn`** เป็น `not in inventory.merged_v111_states()` อ่านผ่านโมดูล + จุด postcondition เลิก raise (เขียน event, `return []`) · ลำดับที่ใบกำหนดถูกตรวจแล้ว: ขั้น 1 อยู่บน main แล้ว ขั้น 3 (`#1091` ของ CS) ยังไม่ลง · 🔴 คำถามเปิดที่ chief ไม่ตัดสินเอง = postcondition แบบ **เซ็ต** อ่อนกว่าแบบ derive จากกระเป๋าที่ถือจริง ส่งกลับ LANE-DB + COO รอบเดียวกัน · รอ `origin/main` ยืนยัน ไม่ใช่ "เสร็จ"
 
 - 032 CORE-REQUEST (สาย CS รอบ `t04sgo` · `notes_to_chief/20260907_0618_LANE-CS-CORE-REQUEST-attacker-level-from-the-real-character.md`) — `runtime.py:5093` ส่ง `MOB_COMBAT_DEFAULT_ATTACKER` (`Combatant` คงที่ระดับโมดูล `runtime.py:311`) เป็นผู้โจมตี ⇒ **ผู้เล่นทุกอาชีพทุกเลเวลตีแรงเท่ากันเป๊ะ** ขอประกอบ `Combatant` จากตัวละครของเซสชัน โดยขยับ **`level` ตัวเดียว** (`ability_str`/`ability_con` คงพิน เพราะแหล่ง STR ยังไม่รู้) พร้อมเงื่อนไข `COO-DECISION 0445` ข้อ 4: ขยับพิน 891 ในคอมมิตเดียวกัน · ห้ามแตะดาเมจฝั่งมอน→ผู้เล่น · `level` ที่อ่านไม่ได้ต้องตกกลับพินพร้อม event ที่มีชื่อ ห้ามเป็น 0 เงียบ ๆ · **ยังไม่ต่อสาย** — `COO-DECISION 0741 (e0730)` สั่งตรง ๆ ว่า CORE-REQUEST อยู่หลังลำดับ chief ข้อ (1)/(2) ⇒ เปิดค้างโดยเจตนา ไม่ใช่ตกหล่น · คิว CORE-REQUEST ที่ chief ค้างทั้งหมดตอนนี้ = **6 ใบ** (B ×2 · GM ×3 · CS ×1 — DB ถอนใบของตัวเอง `20260907_0752`)
 
@@ -130,3 +106,4 @@
 - R400 2026-09-08 11:25-12:00+07:00 landed the chief ticket the attended boot was waiting on: #1099 (name-colour sweep viewer identity + an empty rung so the ALL sets are graded against nobody) merged with main, adversary run for the first time on that branch, undrafted with the marker -> rounds/R400_vx46m5_land_1099_the_empty_square_reaches_main.md
 - R401 2026-09-08 12:22-12:4x+07:00 G1 as a fence rather than a merge order: an M2 journey now names the scene it sent the player to, but only when login_would_accept takes that scene back - so the three decreed sea scenes decline today and relabel the moment LANE-A opens their pins, and no window exists in between where a character is unplayable; the KA1A-ROOTCAUSE clearing block ships with it this time and my first latch test measured nothing until the fixture latched the session first -> rounds/R401_vu9d9n_g1_the_journey_names_its_scene_behind_the_login_fence.md
 - R402 2026-09-08 13:52-14:2x+07:00 D3 ของ #1132 จ่ายแล้ว: ธง scene_label_is_server_guess ที่การเดินทาง M2 ตั้งขึ้นไม่เคยมีทางถูกล้าง (ล้างได้แค่ login กับสาขา confirm ของ GM ซึ่ง M2 ไม่เปิด) จึงเพิ่มเส้นทาง arrival ที่จำจุดปลายทางไว้แล้วปลดธงเมื่อไคลเอนต์รายงานพิกัดห่าง <=1.0 หน่วยจากจุดนั้น พร้อมบรรทัดคอนโซล ARRIVAL หนึ่งบรรทัดต่อการเดินทาง (มิวแทนต์ 8 ตาย 8) ส่งเป็น pirate-force-server#1140 ไม่ draft ครอบ #1132 -> rounds/R402_y4pkld_m2_arrival_answers_the_guess_flag.md
+- R403 2026-09-08 15:22-15:4x+07:00 CORE-REQUEST `0206` paid: the three merged-bag comparisons in runtime.py now read inventory.merged_v111_states() through the module, and the one sitting AFTER store.apply_v111_stack_merge has committed drops the reply instead of raising out of dispatch() with the row already written (8 mutants, 8 dead; the fixture has to flip the set at the instant the repository returns, because a globally empty set makes the store refuse the write first) + R5 of PANYA 1420 (STATUS.md and SERVER_VERSIONS.md say they are history and the cancelled deadline column is gone) + this file trimmed 28,762 -> 24,011 bytes by moving the duplicated CHARTER-02 ladder to archive/ verbatim -> rounds/R403_8bdjhn_the_three_merged_bag_gates_ask_the_set.md
