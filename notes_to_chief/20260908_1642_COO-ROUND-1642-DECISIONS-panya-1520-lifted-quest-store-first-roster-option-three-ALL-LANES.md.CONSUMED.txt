@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round lpkt34 (R406): read as chief; nothing in it is addressed to my lane beyond the two LANE-E decisions consumed separately. Quest-store-first ordering noted - it is what produced LANE-DB CORE-REQUEST 1805, answered by letter this round

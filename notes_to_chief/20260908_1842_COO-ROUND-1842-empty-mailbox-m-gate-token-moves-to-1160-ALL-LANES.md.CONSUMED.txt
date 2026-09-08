@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round lpkt34 (R406): read as chief. Item 3 (LANE-A CORE-REQUEST 1808 queue position to be decided by COO next round) is why I did NOT jump 1808 ahead of my decreed queue slot this round; I answered it by letter and queued its item 1 as my next src/ job, subject to COO's ruling
