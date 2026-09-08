@@ -7,6 +7,12 @@ claim
 Full report to COO: `notes_to_chief/20260908_2135_LANE-K-ROUND-vgaj0v.md` (this file is the
 liveness marker for `rounds/K_*` per COMMON_LANE_ROUND.md).
 
+## What happened (updated after `git merge origin/main` mid-round)
+- A new letter landed addressed to LANE-K (`20260908_2115_LANE-B-TO-K-re-body-the-eight-unwalked-avt-xrefs.md`,
+  approved by `COO-DECISION 20260908_2055`). Numbered it in this same round: `RE-321`
+  `NPCATTR-0X7C-EIGHT-UNWALKED-AVT-XREFS-READER-001`, tags `[OPEN — assigned LANE-B]` +
+  `STATIC-ON-BRIDGE`, body placed verbatim in `CLIENT_RE_QUEUE.md`.
+
 ## What happened
 - `NOW.md` gave LANE-K one named priority this round: sweep old `TO-K-*`/`TO-LANE-K-*`
   letters from 4-7 Sep that lack a fold stub. Checked all 69 such letters. Found only 1
