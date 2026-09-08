@@ -170,4 +170,4 @@ negative control · ใบปาร์ตี้ของรอบก่อนย
 6. **หนี้เก่าที่ยังเปิด** (ไม่ใช่ของรอบนี้ แต่ไม่ทิ้ง): `#1120` ยัง draft และไม่สะอาด — D-β/D-γ/D-ε/D-θ
    ของรอบ `lkswyp` ยังไม่จ่าย · `#1117` ก็ไม่ปิดเอง
 
-SCOREBOARD: COMING | กดปุ่มชวนเทรดจาก UI ของไคลเอนต์จริงแล้วเซิร์ฟเวอร์ตอบกลับเป็นเฟรม (ปุ่มที่สองของซีมนี้) และของที่ออกจากซีมต้องอยู่ในทะเบียนรูปเฟรมที่รีวิวแล้วเท่านั้น | pirate-force-server#PRNUM (draft) - headless UI_TRADE_INVITE_ANSWER_ARMED RESULT=PASS - adversary NOT CLEAN: จ่าย D1/D3/D4/D6/D8/D10 ในรอบนี้ ค้าง D5/D7/D9/D11 - pf_bridge#1888
+SCOREBOARD: COMING | กดปุ่มชวนเทรดจาก UI ของไคลเอนต์จริงแล้วเซิร์ฟเวอร์ตอบกลับเป็นเฟรม (ปุ่มที่สองของซีมนี้) และของที่ออกจากซีมต้องอยู่ในทะเบียนรูปเฟรมที่รีวิวแล้วเท่านั้น | pirate-force-server#1134 (draft) - headless UI_TRADE_INVITE_ANSWER_ARMED RESULT=PASS - adversary NOT CLEAN: จ่าย D1/D3/D4/D6/D8/D10 ในรอบนี้ ค้าง D5/D7/D9/D11 - pf_bridge#1888
