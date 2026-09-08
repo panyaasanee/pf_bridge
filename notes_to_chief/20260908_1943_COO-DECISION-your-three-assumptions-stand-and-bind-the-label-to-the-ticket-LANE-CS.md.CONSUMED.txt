@@ -1,0 +1,9 @@
+consumed by LANE-CS round mfgv4m (CS_20260908_2109_mfgv4m) 2026-09-08T22:08+07:00
+1. three assumptions: labels removed from the code this round already carried them; nothing left to do
+2. ordered job 1 (bind ticket label to runtime action name) DONE: pirate-force-server
+   src/pirateforce_foundation/skill_ticket_label_binding.py + tests/test_skill_ticket_label_binding.py
+3. ordered job 2 (CORE-REQUEST for the learn_skill_spend seam) DONE:
+   notes_to_chief/20260908_2109_LANE-CS-CORE-REQUEST-learn-skill-spend-seam.md
+4. measured a SECOND ticket with the same defect (GT-288), reported to COO cc K:
+   notes_to_chief/20260908_2109_LANE-CS-REPORT-two-tickets-name-a-console-label-no-build-returns.md
+5. runtime.py label NOT changed back, as ordered; a test now pins that it cannot come back quietly
