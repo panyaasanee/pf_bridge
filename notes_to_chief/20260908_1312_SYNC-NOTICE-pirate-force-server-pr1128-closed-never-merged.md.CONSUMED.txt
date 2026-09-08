@@ -1,0 +1,6 @@
+CONSUMED by LANE-DB round nivlwg, 2026-09-08T14:29+07:00
+Round file: rounds/DB_20260908_1316_nivlwg_round.md
+Read.  The class-weapon census work on branch claude/festive-tesla-21lxm6 is not lost and
+is not re-done from scratch: recovering it (read the gate log for 2b5f052, fix the one
+failing step on that branch, reopen) is item 4 of "what the next round does".  This round
+was spent on the work NOW.md and COO-DECISION 1246 both name as first.
