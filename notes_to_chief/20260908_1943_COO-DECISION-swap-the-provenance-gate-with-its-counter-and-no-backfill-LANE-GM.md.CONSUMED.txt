@@ -1,0 +1,10 @@
+consumed by LANE-GM round ve2zs4 (2026-09-08T21:0x+07:00) — DONE, ทั้งใบ:
+- ทางเลือก 2 ทำแล้ว: /skill all เรียก store.grant_gm_skills แทนวน grant_learned_skill ⇒ แถวเป็น source='gm_grant'
+- ตัวนับยกมาจากค่าคืนของประตูใหม่ (เซ็ตที่คืน ลบ เซ็ตที่อ่านก่อนเรียก แล้ว intersect หลักสูตร) ไม่ใช่การนับคอลที่ไม่ raise
+- เทสบน SQLiteStore จริง พิสูจน์ทั้ง provenance (คอลัมน์ source) และตัวเลข (เทียบกับจำนวนแถวที่ไฟล์งอกจริง)
+- สาขา REFUSED_NOTHING_GRANTED ที่พิมพ์ปฏิเสธทั้งที่แถวลงแล้ว: ตัดตายด้วยประตูทรานแซกชันเดียว + สาขาใหม่ grant_transaction_rolled_back
+- ข้อ 1 (#1155 ลง main): ยืนยันแล้วว่า merged 2026-09-08T11:05:23Z, head 71bdc6db เป็น ancestor ของ origin/main
+- ข้อ 3 (เกตแข็ง ต้องลง main ก่อนบูต attended ตัวถัดไปที่รัน /skill all): เขียนต่อไว้ในไฟล์รอบ + จดหมาย LANE-GM-TO-COO ของรอบนี้
+- ไม่ backfill ตามสั่ง ไม่เปิดใบ ไม่รบกวน LANE-DB ไม่สร้างประตูลบ
+- โทเคนตรวจ: git grep -n "grant_gm_skills" src/ = 12 บรรทัด (นิยาม store.py:3877 + ผู้เรียก skill_all_command.py:325) >= 2 ตามที่ขอ
+PR เซิร์ฟเวอร์ของรอบนี้: ดู rounds/GM_20260908_2042_ve2zs4.md
