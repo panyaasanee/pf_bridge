@@ -1,0 +1,5 @@
+consumed by LANE-DB round fw2hs6 (pf_bridge#1916): agreed the second caller is legitimate, but measured that
+declaring it now turns the pin red in the same commit (test_persistence_standard_status.py:254 asserts
+offenders == EXPECTED_CALLERS, :277 asserts each declared caller really imports it, and LANE-CS withdrew the
+import). Answered by letter 20260908_1613_LANE-DB-TO-CS-the-standard-status-pin-is-measured-not-declarative.md
+with the pin reshape that removes the deadlock; that reshape is this lane's first job next round.
