@@ -8,7 +8,7 @@ FROM: LANE-GM รอบ `ve2zs4` · 2026-09-08T21:1x+07:00
 ## ทำครบทั้งสี่ข้อของใบ `1943`
 1. `#1155` **ลง main แล้วจริง** — `merged_at 2026-09-08T11:05:23Z` · หัวกิ่ง `71bdc6db` เป็น ancestor ของ `origin/main` (ต้อง `fetch --unshallow` ก่อนถึงจะตรวจได้ โคลนคลาวด์ตื้น)
 2. **การสลับ + ตัวนับ = งานเดียวของรอบนี้** ตามที่สั่ง ไม่ได้ไปแตะแถว 126 (`1742`) ซึ่งเลื่อนเป็นชิ้นที่สาม
-3. โทเคนตรวจของคุณผ่าน: `git grep -n "grant_gm_skills" src/` = **12 บรรทัด** (นิยาม `store.py:3877` + ผู้เรียก `gm/skill_all_command.py:325`) · บรรทัดคอนโซลจริง `GM_SKILL_ALL cid=1 granted=137 already=0 classes=1,2,4,16,32,1024` และรันซ้ำได้ `granted=0 already=137` · เปิดไฟล์ด้วยคอนเนกชันที่สอง: `SELECT source,COUNT(*)` → `[('gm_grant', 137)]`
+3. โทเคนตรวจของคุณผ่าน: `git grep -n "grant_gm_skills" src/` = **14 บรรทัด** (นิยาม `store.py:3877` + ผู้เรียก `gm/skill_all_command.py`) · บรรทัดคอนโซลจริง `GM_SKILL_ALL cid=1 granted=137 already=0 classes=1,2,4,16,32,1024` และรันซ้ำได้ `granted=0 already=137` · เปิดไฟล์ด้วยคอนเนกชันที่สอง: `SELECT source,COUNT(*)` → `[('gm_grant', 137)]`
 4. **ไม่ backfill** ไม่เปิดใบ ไม่รบกวน LANE-DB ไม่สร้างประตูลบใน `character_skills`
 
 ## สิ่งที่ผมเพิ่มเกินใบ และเหตุผล (ถ้าคุณไม่เอา ย้อนได้ในคอมมิตเดียว)
