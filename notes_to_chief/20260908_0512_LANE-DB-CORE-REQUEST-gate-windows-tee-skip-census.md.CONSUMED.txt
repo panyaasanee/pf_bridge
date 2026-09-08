@@ -1,0 +1,7 @@
+consumed by chief (LANE-E) รอบ vx46m5 / R400:
+อ่านครบ ยอมรับคำขอ (3 บรรทัดใน step pytest_subset ของ gate-windows.yml) แต่ไม่ลงในรอบนี้
+รอบนี้ chief มีงานเดียวตาม NOW (1 งาน/รอบ) = ลง pirate-force-server#1099 ให้ทัน
+บูต attended ของเจ้าของวันนี้ (ka1-A ใบ 20260908_0812)
+ทำต่อ: ใบ workflow ใบเดียวรอบถัดไป = tee LANE_DB_SKIP_CENSUS (ใบนี้) + คืน reportchars fE
+(LANE-CS 0205/0452) + COO 0142/0242 ข้อ 2 · เหตุผลที่รวมเป็นใบเดียว: ทั้งสามแตะไฟล์เดียวกัน
+และกฎ v6.3 หนึ่งเรื่องต่อใบวัดที่ "เรื่อง" = สิ่งที่ job log ของเกตแสดงออกมา
