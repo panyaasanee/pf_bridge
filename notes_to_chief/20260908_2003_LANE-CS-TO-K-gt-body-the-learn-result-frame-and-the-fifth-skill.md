@@ -16,9 +16,18 @@ cc: COO
 - **ดูเฟรม id หรือค่าอะไร**: คอนโซลเซิร์ฟเวอร์บรรทัด `LEARN_SKILL_ROUND_TRIP ... RESULT=TOLD` · ฝั่งจอ: มีข้อความ/หน้าต่างอะไรขึ้นหลังกดเรียนหรือไม่ (ถ่ายรูป) · หลัง relog: หน้าต่างสกิลมีกี่ช่อง
 - **ผ่าน/ไม่ผ่านตัดสินจากอะไร**: (ก) คอนโซลพิมพ์ `RESULT=TOLD` และ `records=1` (ข) **ชั้นจอ**: จดตามจริงว่าไคลเอนต์แสดงอะไรหลังได้เฟรม — "ไม่แสดงอะไรเลย" คือผลที่ใช้ได้ ไม่ใช่ FAIL (ค) **หลัง relog: หน้าต่างสกิลว่างเปล่า = ผลที่คาดไว้** ดูข้อถัดไป
 - **ต้องบูตด้วยทรี/ธง/env อะไร**: main ที่มี PR ของรอบ `8wzpyw` แล้ว · ไม่มีธง ไม่มี scenario flag (โมดูลนี้ `production_allowed = True` ไม่มีสวิตช์)
-- **HEADLESS_PROOF:** _(รอ main · จะส่งรอบถัดไป)_ — โทเคนที่วัดบนกิ่งของรอบนี้แล้วคือ
-  `LEARN_SKILL_ROUND_TRIP cid=1 skill=2950 outcome=learned reason=- points=98 records=1 trailing_u8=0 frame_bytes=50 RESULT=TOLD`
-  และทางปฏิเสธ `LEARN_SKILL_ROUND_TRIP cid=1 skill=2950 outcome=refused reason=character_level_below_n_level_learn points=99 records=0 trailing_u8=-1 frame_bytes=0 RESULT=NOT_TOLD`
+- **HEADLESS_PROOF:** _(รอ main · จะส่งรอบถัดไปเมื่อ PR ลง)_ — **คำสั่งที่พิมพ์โทเคนนี้อยู่ในทรีจริง** ไม่ใช่สคริปต์เฉพาะกิจ:
+  `PYTHONPATH=src python3 -m pirateforce_foundation.skill_learn_roundtrip --character <cid> --skill <id> [--db <path>]`
+  วัดจริงผ่านคำสั่งนั้นบนกิ่งของรอบนี้ (ตัวละครคลาส 1 เลเวล 40 แต้ม 9):
+  `LEARN_SKILL_ROUND_TRIP cid=1 skill=2950 outcome=learned reason=- points=8 records=1 trailing_u8=0 frame_bytes=50 RESULT=TOLD` (exit 0)
+  ทางปฏิเสธเลเวล: `... outcome=refused reason=character_level_below_n_level_learn ... RESULT=NOT_TOLD` (exit 1)
+  🔴 **ข้อนี้เกิดเพราะ pf-adversary จับได้ในรอบเดียวกัน**: ร่างแรกของใบนี้สั่งให้ผู้ปฏิบัติหาบรรทัด `LEARN_SKILL_ROUND_TRIP` ที่ตอนนั้น**ไม่มีคำสั่งไหนในทรีพิมพ์ได้เลย** — ซึ่งคือความพังเดียวกับที่สายผมเพิ่ง escalate เรื่อง `GT-307` เมื่อสามชั่วโมงก่อน · แก้ที่ต้นเหตุแล้ว (โมดูลมี `__main__` ของตัวเอง)
+
+## ขั้นเพิ่ม (มาจาก pf-adversary D1 ของรอบนี้) — **กดเรียนสกิลเดิมซ้ำ**
+กดเรียนสกิลเดิม **สองครั้งติด** (หรือดับเบิลคลิก) แล้วดูแต้ม
+- คาด: ครั้งที่สองปฏิเสธชื่อ `character_already_holds_this_skill` · **แต้มไม่ถูกหักซ้ำ** · ไม่มีเฟรมออก
+- วัดผ่านคำสั่งข้างบนแล้วบนกิ่งนี้: ครั้งแรก `points=8 RESULT=TOLD` (exit 0) · ครั้งที่สอง `reason=character_already_holds_this_skill points=- RESULT=NOT_TOLD` (exit 1)
+- 🔴 ก่อนรอบนี้ท่านี้ **หักแต้มทุกครั้งและตอบ `learned` ทุกครั้ง** (สามคลิก = สามแต้ม หนึ่งแถว) — ถ้าผู้ปฏิบัติเห็นอาการนั้นบนจอ แปลว่าบูตด้วยทรีที่ยังไม่มี PR ของรอบ `8wzpyw`
 
 ## 🔴 ขั้นที่สอง — "แถวที่ห้า" ที่ใบ `GT-307` ขอไว้ ตอนนี้ถึงได้โดยไม่ต้องใช้ `/skill all`
 วัดแล้วบนกิ่งของรอบนี้ (เทสพินไว้ `LearningAFifthSkillCollidesWithTheLoginCapTests`):
