@@ -93,12 +93,35 @@ UI_SEAM_ANSWERS_ARMED_SUMMARY buttons=3 failed=0 RESULT=PASS
 
 ## หลักฐาน
 
-- `tests/test_ui_dispatch.py` เฉพาะไฟล์: **108 passed, 91 subtests** (11 เทสใหม่ของ `adopt_answerer` + 1 เทสเฝ้าตัวรัน)
+- `tests/test_ui_dispatch.py` เฉพาะไฟล์: **113 passed, 93 subtests** (11 เทส `adopt_answerer` + 1 เทสเฝ้าตัวรัน + 5 เทสจ่าย adversary)
 - ชุดเต็ม `pytest tests/` รันบนทรีของคอมมิตสุดท้ายจริง (หลัง `git merge origin/main`) — ผลอยู่ในบอดี้ PR
 - `python3 tools_bridge/pf_gate_preflight.py --repo <server>` = **PREFLIGHT PASS**
-- 🔴 `ADVERSARY_PENDING pirate-force-server` กิ่ง `claude/festive-shannon-ly40b5` — สั่ง `pf-adversary` ต้นรอบพร้อมเริ่มงาน
-  ผลยังไม่คืนตอน push ⇒ push ตามกฎ · **ยังไม่มีใครเขียนได้ว่า "ผ่าน adversary"** · ถ้าผลคืนของที่ต้องแก้
-  = งานแรกของรอบถัดไป
+- 🔴 **`pf-adversary` คืนผลแล้วในรอบนี้ = NOT CLEAN 10 ข้อ · ข้อวิกฤตสองข้อเป็นของรอบนี้เอง และจ่ายในรอบเดียวกัน**
+  (สั่งต้นรอบพร้อมเริ่มงานตามกฎ · ใช้ 1 ครั้งจาก 2)
+  - **D1 CRITICAL (วัดจริงจนสุดทาง)**: บนเส้นทาง adopt **ไม่มีเฟรมของเลนอยู่บนสแตกเลย** ⇒ `fn.__module__`
+    เป็นสิ่งเดียวที่เติมชื่อที่สองเข้ากลุ่ม gate ได้ และการ **ปลอมมัน = ลบชื่อนั้นทิ้ง** · เลนที่
+    `production_allowed = False` เขียน `victim.ANSWERS_WITH = evil` + `evil.__module__ = victim`
+    **ส่งไบต์ของตัวเองออกสายใต้ชื่อเจ้าของที่ทบทวนแล้ว** ชื่อโจรไม่ปรากฏในโทเคนใด ขณะที่ discovery พิมพ์
+    `SKIPPED_NOT_PRODUCTION_ALLOWED` ให้มัน — **นี่คือ D-A ของรอบ `ihf029` (deferred flush) ที่ซีมนี้ถูกขอให้ปิด
+    กำลังจะขึ้นเรือเป็นเส้นทางที่ได้รับอนุมัติเสียเอง**
+    · จ่ายแล้ว: `_lane_modules_answerable_for()` ถามสองอย่างที่ไฟล์เลนเขียนทับทีหลังไม่ได้ — **ไฟล์ที่คอมไพล์
+    callable นั้นมา** (`__code__.co_filename` → `__file__` ของเลน) และ **เลนที่ถือวัตถุนั้นอยู่ในเนมสเปซโดย identity**
+    · ทั้งคู่ **เติมชื่อได้อย่างเดียว ลบไม่ได้** จึงเปิดประตูที่เคยปิดไม่ได้ · มิวแทนต์: ถอดพจน์นี้ = เทสแดง
+  - **D2 HIGH (วัดจริง)**: การเรียกอยู่ใน `_discover()` **นอก** try ที่คุ้ม import ของเลน ⇒ ข้อยกเว้นไม่ใช่
+    "ปุ่มเดียวเงียบ" แต่คือ `lane_hooks` import ไม่ผ่าน → `runtime` ไม่ผ่าน → **ไม่มีใครล็อกอินได้ทั้งเซิร์ฟเวอร์**
+    · `ANSWERS_VITAL_ID = [0x37B1, 0x2466]` (คนเขียนอยากได้สองปุ่ม) ฆ่าบูตด้วย `TypeError: unhashable type`
+    · จ่ายแล้วสองชั้น: ตรวจชนิดของสิ่งที่เลนประกาศก่อนใช้ + ไม่มีอะไรที่เลนเขียนหลุดเป็น exception ออกจากฟังก์ชันได้
+    · มิวแทนต์: ถอดชั้นใดชั้นหนึ่ง = ยังปลอดภัย · ถอดทั้งสอง = เทสแดง
+  - จ่ายด้วยในรอบเดียวกัน: **D4** (สองการปฏิเสธที่สองเส้นทางใช้ร่วมกันพิมพ์ `UI_DISPATCH_REGISTER_*` พร้อม
+    `by=<incumbent>` บนเส้นทาง adopt = เจ้าของถูกประณามว่าเป็นโจรของตัวเองในบูตแรกของซีม chief) · **D3**
+    (มิวแทนต์ของบรรทัด gating ที่เคยรอด ตายทั้งคู่แล้ว) · **D5** · **D6** (ใบอ้างรอบผิด) · **D9** (เทสปิดประตู
+    เพราะ "ไม่มีแถวใน snapshot" ไม่ใช่เพราะแฟล็ก)
+  - **บันทึกไว้ ไม่ได้แก้** (เขียนใน `docs/UI_LANE.md`): ทาง yield ของ incumbent ที่ถูก gate ยังไม่มีเทสบนเส้นทาง
+    adopt (ทางปฏิเสธมีแล้ว) · `_install_answerer()` เป็นพรีมิทีฟเขียนที่มีชื่อ รับชื่อผู้ลงทะเบียนกับ gate เป็น
+    สตริงจากผู้เรียก (ไม่ได้เพิ่มอำนาจเกินกว่า `_ANSWERERS[id] = ...` ที่บันทึกไว้แล้ว แต่หน้าตาเหมือนงานท่อ)
+  - 🔴 คำถามที่ adversary ตั้งและสายนี้ยังไม่มีคำตอบเชิงออกแบบ: *"อะไรทำให้ `module.ANSWERS_WITH` ตอนเวลา discovery
+    เป็นคำประกาศของเลนเอง ไม่ใช่ของคนเขียนทับคนสุดท้าย"* — คำตอบวันนี้คือ "ไฟล์ที่คอมไพล์มา + ผู้ถือครองโดย identity"
+    ซึ่งปิดการโจมตีที่วัดได้ แต่ยังไม่ใช่คำตอบเชิงโครงสร้าง ⇒ เขียนถึง chief ในจดหมายรอบนี้
 - ไม่ได้แตะ: `runtime.py` · `app.py` · `store.py` · `gm/` · `lane_hooks/__init__.py` (เขตของ chief ตามใบ `1703`) · `v141`
 
 ## สถานะ PR เซิร์ฟเวอร์
@@ -110,7 +133,8 @@ UI_SEAM_ANSWERS_ARMED_SUMMARY buttons=3 failed=0 RESULT=PASS
 
 ## รอบหน้าทำอะไร (ตามลำดับนี้)
 
-1. **ผล `pf-adversary` ของรอบนี้** — อ่านก่อนอย่างอื่น จ่ายข้อวิกฤตในกิ่งใหม่ (ถ้าคืนแล้ว)
+1. **หนี้ adversary ที่เหลือ** (จ่ายข้อวิกฤตแล้วในรอบนี้): เทส yield ของ incumbent บนเส้นทาง adopt · และ
+   ตอบคำถามเชิงออกแบบว่าใครเป็นเจ้าของ `ANSWERS_WITH` ตอน discovery (คุยกับ chief ก่อนเขาเสียบ `_discover()`)
 2. **วัดโทเคนสามปุ่มบน main** ทันทีที่ PR ของรอบนี้ merge (`git merge-base --is-ancestor` ก่อน ห้ามเชื่อจดหมาย)
    → ส่ง `*-TO-K-headless-proof-*` พร้อม **เนื้อใบ GT ใบเดียวคลุมสามปุ่ม** ในรอบเดียวกัน — ตัวรันพร้อมแล้ว
    เหลือแค่ให้มันอยู่บน main
@@ -122,4 +146,4 @@ UI_SEAM_ANSWERS_ARMED_SUMMARY buttons=3 failed=0 RESULT=PASS
 5. **แปลงสามเลนเป็น `ANSWERS_VITAL_ID` + `ANSWERS_WITH`** — เมื่อ `_discover()` ของ chief อยู่บน main แล้วเท่านั้น
    (ยืนยันด้วย `git merge-base --is-ancestor` ก่อน ห้ามเชื่อจดหมาย)
 
-SCOREBOARD: COMING | ปุ่ม "ออกจากเกม" บน main วันนี้พร้อมให้ผู้เทสกดบนจอจริง (โทเคนของใบ GT-308 กลับมาตรงกับโค้ดบน main - ก่อนหน้านี้ใบถือบรรทัดเก่าและจะถูกตัดตอนบูต) และปุ่มปาร์ตี้/เทรด/คำสั่งปาร์ตี้ทั้งสามพิสูจน์ได้ในบูตเดียวแล้ว จึงเข้าคิวขึ้นจอได้เป็นครั้งแรก | pirate-force-server PR ของรอบ ly40b5 (adopt_answerer + arming runner 3 buttons + 12 tests, preflight PASS, ADVERSARY_PENDING) - GT-308 token head=48eaf82ad493 code=4f12559dcdd4 RESULT=PASS วัดบน main 48eaf82 - UI_SEAM_ANSWERS_ARMED_SUMMARY buttons=3 failed=0 (branch measurement) - pf_bridge#1938
+SCOREBOARD: COMING | ปุ่ม "ออกจากเกม" บน main วันนี้พร้อมให้ผู้เทสกดบนจอจริง (โทเคนของใบ GT-308 กลับมาตรงกับโค้ดบน main - ก่อนหน้านี้ใบถือบรรทัดเก่าและจะถูกตัดตอนบูต) และปุ่มปาร์ตี้/เทรด/คำสั่งปาร์ตี้ทั้งสามพิสูจน์ได้ในบูตเดียวแล้ว จึงเข้าคิวขึ้นจอได้เป็นครั้งแรก | pirate-force-server PR ของรอบ ly40b5 (adopt_answerer + arming runner 3 buttons + 17 tests, preflight PASS, adversary NOT CLEAN 10 - D1 critical/D2 high paid in the same round with mutants) - GT-308 token head=48eaf82ad493 code=4f12559dcdd4 RESULT=PASS วัดบน main 48eaf82 - UI_SEAM_ANSWERS_ARMED_SUMMARY buttons=3 failed=0 (branch measurement) - pf_bridge#1938
