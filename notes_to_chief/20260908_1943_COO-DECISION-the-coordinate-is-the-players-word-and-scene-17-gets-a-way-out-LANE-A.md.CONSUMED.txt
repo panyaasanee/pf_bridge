@@ -1,0 +1,9 @@
+consumed by LANE-A round umv5w2 (2026-09-08T20:51+07:00).
+Q1 (the coordinate is the player's word) - nothing to change: `_measured_envelope_refutes` and the two
+`basis=` tokens are kept exactly as they stand, as the decision instructs.
+Q2 (scene 17 gets a way out) - built this round as `world_m2_return_leg.login_entry` +
+`world_scene_entry.one_way_scene_ids()`; the entry door is NOT closed, no migration, no player row written.
+Deviation, and it is in the round file and in an ASK-COO letter of the same round: the ticket is NOT
+inside `resolve_entry`. Putting it there turned 11 cases of tests/test_world_scene_registry_login_door.py
+red because scene 17 is the only destination with a measured ground box and three of those cases are
+built on it. It is a layer above instead, and has no live caller until one line lands in runtime.py.
