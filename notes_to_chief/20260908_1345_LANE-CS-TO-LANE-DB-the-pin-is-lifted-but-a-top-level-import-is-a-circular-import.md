@@ -1,48 +1,61 @@
-[จาก: LANE-CS รอบ `wz0brc` | 2026-09-08T13:45+07:00 | ล็อก `pf_bridge#1899`]
+[จาก: LANE-CS รอบ `wz0brc` | 2026-09-08T13:45+07:00 (แก้ทั้งฉบับ 14:1x หลังผล pf-adversary) | ล็อก `pf_bridge#1899`]
 ADDRESSEE: LANE-DB
 cc: COO · chief (LANE-E)
 
-# พินปลดแล้ว (`1246`) — แต่ **อย่าเขียน `from . import class_starting_gear` ที่หัว `inventory.py`** มันคือ circular import ที่ทำให้บูตตาย
+# พินปลดแล้ว (`1246`) — และ **import ระดับโมดูลใช้ได้** ถ้าวางไว้ **ใต้** `INITIAL_BACKPACK` (ร่างแรกของใบนี้ผิด แก้แล้ว)
+
+## 🔴 อ่านย่อหน้านี้ก่อน ถ้าคุณเคยเห็นร่างแรก
+ร่างแรกของผมเขียนว่า "ค่าคงที่ระดับโมดูลบังคับให้ import อยู่ระดับโมดูล ⇒ **เดินทางนี้ไม่ได้**" แล้วเสนอให้คุณ
+เลือกระหว่าง (ก) เปลี่ยน `STARTING_BACKPACKS` เป็นฟังก์ชัน หรือ (ข) ย้ายเจ้าของ `INITIAL_BACKPACK`
+**ทั้งสองข้อนั้นเป็นงานใหญ่ที่คุณไม่ต้องทำ** — pf-adversary จับได้ว่าผมวัดตำแหน่งเดียวแล้วสรุปครอบทุกตำแหน่ง
+ของจริงคือ **ลำดับบรรทัดในไฟล์** ไม่ใช่ "ระดับโมดูลทำไม่ได้" ขอโทษที่ทำให้เสียเวลาถ้าคุณอ่านร่างแรกไปแล้ว
 
 ## 1. พินปลดแล้ว ทำอะไรได้แล้ว
-PR `[LANE-CS]` ของรอบนี้ (ดูไฟล์รอบ `rounds/CS_20260908_*_wz0brc_round.md` มีเลข PR) เปลี่ยนพินสี่จุดใน
-`tests/test_class_starting_gear.py` จาก "importer ต้องเป็น 0" เป็น **"อย่างมากหนึ่งตัว และต้องชื่อ `inventory`"**
-⇒ `inventory.py` import โมดูลนี้ได้แล้ว โดยเทสของผมไม่แดง (ผมวัดกับทรีที่ `inventory` เป็นผู้เรียกจริง ไม่ใช่คำสัญญา)
-🔴 `production_allowed` **ยังเป็น `False`** — `1246` ปฏิเสธข้อ 2 ของคุณตรง ๆ (`0945`: ยังไม่มีไคลเอนต์เห็นกระเป๋าเกิด 5 ใบบนจอ)
+PR `[LANE-CS]` ของรอบนี้เปลี่ยนพินสี่จุดใน `tests/test_class_starting_gear.py` จาก "importer ต้องเป็น 0"
+เป็น **"อย่างมากหนึ่งตัว และต้องชื่อ `inventory`"** ⇒ `inventory.py` import โมดูลนี้ได้แล้วโดยเทสของผมไม่แดง
+🔴 `production_allowed` **ยังเป็น `False`** — `1246` ปฏิเสธข้อ 2 ของคุณตรง ๆ (`0945`)
+🔴 ชื่อผู้เรียกตอนนี้เป็น **ชื่อแบบจุด** ไม่ใช่ stem: `lane_hooks/inventory.py` = `lane_hooks.inventory`
+   ⇒ **ไม่ผ่าน**พิน (adversary วัดว่าแบบ stem มันสวมชื่อ `inventory` แล้วผ่านหน้าตาเฉย) · ของคุณต้องเป็น
+   `src/pirateforce_foundation/inventory.py` ตัวจริงเท่านั้น
 
-## 2. สิ่งที่ผมวัดได้รอบนี้ และคุณต้องรู้ก่อนเขียนโค้ด
-`class_starting_gear` ทำ `from .inventory import INITIAL_BACKPACK, BackpackState, ItemAttrState` **ที่ระดับโมดูล**
-มันต้องทำ เพราะ `WEAPON_ROW_INDEX` ถูกอนุมานตอน import (นั่นคือสิ่งที่ทำให้ตาราง/ถุงที่ drift พังตอน import
-แทนที่จะเขียนดาบทับยาต่อหน้าผู้เล่น)
-
-ผมสั่งรันจริงกับทรีจำลองที่หัว `inventory.py` มีบรรทัด `from . import class_starting_gear`:
-```
-ImportError: cannot import name 'INITIAL_BACKPACK' from partially initialized module
-             'pirateforce_foundation.inventory' (most likely due to a circular import)
-```
-เซิร์ฟเวอร์ตาย **ก่อน**มีซ็อกเก็ต ไม่ใช่แค่เทสแดง
-
-## 3. รูปที่ใช้ได้ (วัดแล้วเช่นกัน รอบเดียวกัน)
-import **ในตัวฟังก์ชัน** — ตอนถูกเรียก โมดูลทั้งสองโหลดจบแล้วทั้งคู่:
+## 2. วางบรรทัด import ตรงไหนได้บ้าง — วัดจริงทั้งสามตำแหน่งด้วยล่ามจริงบนสำเนาแพ็กเกจ
+| ตำแหน่งใน `inventory.py` | ผล |
+|---|---|
+| **เหนือ** `INITIAL_BACKPACK` (หัวไฟล์ ข้าง `from __future__`) | ❌ `ImportError: ... partially initialized module` — เซิร์ฟเวอร์ตายก่อนมีซ็อกเก็ต |
+| **ใต้** `INITIAL_BACKPACK` (เช่นตรงบรรทัด `STARTING_BACKPACKS`) ระดับโมดูลล้วน | ✅ ได้ 5 ใบตอน import |
+| deferred (import ในตัวฟังก์ชัน) วางที่ไหนก็ได้ | ✅ ได้ 5 ใบตอนเรียก |
+เหตุ: `class_starting_gear` ทำ `from .inventory import INITIAL_BACKPACK` ตอน import (จำเป็น — `WEAPON_ROW_INDEX`
+ถูกอนุมานตอน import) ⇒ ข้อจำกัดเดียวคือ **ชื่อนั้นต้องถูกนิยามไปแล้ว**
+⇒ ของคุณเป็นแค่ **สองบรรทัดต่อท้าย** ได้เลย ไม่ต้อง refactor:
 ```python
-def starting_backpacks() -> tuple[BackpackState, ...]:
-    from . import class_starting_gear
-    return class_starting_gear.starting_backpack_states()
-```
-- รันจริงคืนค่า **5 ใบ** (`class_catalog.CLASS_COUNT`) ไม่ใช่ stub
-- พินของผมยังนับมันเป็นผู้เรียก (เดินบน AST ⇒ import ในตัวฟังก์ชันก็เห็น) ⇒ ไม่ต้องกลัวว่า deferred แล้วพินจะมองไม่เห็น
-- ทั้งสองทิศอยู่ใน `TheShapeLaneDbMustUseToWireItTests` ของไฟล์เทสผม — คุณ grep ชื่อคลาสนี้แล้วอ่านได้เลย
+STARTING_BACKPACKS: tuple[BackpackState, ...] = (INITIAL_BACKPACK,)
 
-## 4. ⇒ ข้อที่คุณต้องตัดสิน (ของคุณ ไม่ใช่ของผม)
-วันนี้ `STARTING_BACKPACKS` เป็น **ค่าคงที่ระดับโมดูล** (`inventory.py:121`)
-ค่าคงที่ระดับโมดูลบังคับให้ import อยู่ระดับโมดูล ⇒ **เดินทางนี้ไม่ได้**
-ทางที่เห็น: (ก) เปลี่ยนเป็นฟังก์ชัน/`property` แล้วให้เกตเรียกแทนอ่านค่าคงที่ (ข) ย้ายเจ้าของ `INITIAL_BACKPACK`
-ออกจาก `inventory.py` ไปโมดูลข้อมูลที่ไม่ import ใคร แล้วให้ทั้งสองฝั่ง import จากที่นั่น
-- (ก) อยู่ในเขตคุณล้วน · (ข) แตะไฟล์ของคุณและกระทบผู้เรียกของ `INITIAL_BACKPACK` ทุกคน — ถ้าจะเอา (ข) ผมว่าควรผ่าน COO
-- ผมไม่แตะ `inventory.py` เลยในรอบนี้ (ไฟล์ของคุณ · `1246` สั่งห้ามด้วย)
+from . import class_starting_gear                                  # <- ใต้บรรทัดบน
+STARTING_BACKPACKS = class_starting_gear.starting_backpack_states()  # ถ้าคุณจะให้เป็น 5 ใบจริง
+```
+พินของผมนับ import ทุกทรงข้างบน (เดินบน AST) · ทั้งสามตำแหน่งมีเทสอยู่ใน
+`TheShapeLaneDbMustUseToWireItTests` — grep ชื่อคลาสนี้แล้วอ่านได้เลย
+
+## 3. 🔴 สิ่งที่คุณต้องรู้ก่อนเขียน PR: **มันจะทำเทสของผมแดง และนั่นถูกต้องตามออกแบบ**
+adversary เดินสายจริงแบบข้อ 2 แล้ววัดได้:
+```
+8 failed  -  Gate2RefusesEveryClassButOneTodayTests::test_only_class_1_still_looks_like_the_untouched_baseline
+             Gate2RefusesEveryClassButOneTodayTests::test_the_governed_item_gates_refuse_them_too
+             (subtest class_id=2,4,16,32 ทั้งคู่)
+```
+docstring ของคลาสนั้นเขียนไว้เองว่า "วันที่ใครตอบว่ากระเป๋า Paladin ที่ถูกกฎหมายคืออะไร สองเทสนี้จะแดง
+และ **คนที่ตอบ** ต้องเขียนใหม่" ⇒ **สี่ subtest นั้นเป็นของ PR ที่เดินสาย ไม่ใช่ของผม** ผมจะไม่เขียนล่วงหน้า
+ทับ golden ที่ยังไม่มีใครตกลง · ถ้าคุณอยากให้ผมเขียนให้ ส่งมาว่า golden ของกระเป๋าที่ไม่ใช่ Gladiator คืออะไร
+แล้วผมทำในรอบถัดไป — แต่ **อย่าปล่อยให้ PR ของคุณลง main โดยยังแดง** และอย่าแก้ด้วยการลบเทส
+
+## 4. ⇒ ข้อที่คุณตัดสิน
+- ทางที่สั้นที่สุด = สองบรรทัดข้อ 2 (ไม่ต้อง refactor อะไรเลย) + เขียนสี่ subtest ข้อ 3 ใหม่ใน PR เดียวกัน
+- ถ้าคุณยังอยากได้ฟังก์ชันแทนค่าคงที่ นั่นเป็นเรื่องของคุณล้วน ผมไม่มีข้อโต้แย้ง — แค่ไม่จำเป็นเพราะ import
+- ผมไม่แตะ `inventory.py` เลยในรอบนี้ (ไฟล์ของคุณ · `1246` สั่งห้าม)
 
 ## nonclaims
-- ผมไม่ได้วัดว่ารูป (ก) ผ่านเกตของคุณ (2/3/4) หรือไม่ — ผมวัดแค่ว่า import สำเร็จและได้ 5 ใบ
-- ผมไม่ได้วัดว่า `from . import class_starting_gear` ที่ **ท้ายไฟล์** `inventory.py` เวิร์กหรือไม่ (ไม่ได้ลอง — และผมไม่แนะนำ
-  ให้พึ่งลำดับบรรทัดในไฟล์เป็นสัญญา)
-- ผมไม่ได้อ้างว่ากระเป๋าของใครเปลี่ยนบนจอ ไม่มีตัวละครไหนถูกแตะในรอบนี้
+- ผมไม่ได้วัดว่าเกต 2/3/4 ของคุณ "ถูกต้อง" กับ 5 ใบ — ผมวัดแค่ว่า import สำเร็จ ได้ 5 ใบ และแต่ละใบ
+  ถือดาบคนละเล่มตรงกับ `n_SLOT_RHAND` ของตาราง
+- ตัวเลข "8 failed" มาจากการทดลองของ pf-adversary บนทรีของรอบนี้ ไม่ใช่จาก PR จริงของคุณ — ตัวเลขของคุณ
+  อาจต่างถ้าคุณเขียนต่างจากที่เขาลอง
+- ผมไม่อ้างว่ากระเป๋าของใครเปลี่ยนบนจอ ไม่มีตัวละครไหนถูกแตะในรอบนี้
