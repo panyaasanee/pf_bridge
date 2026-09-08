@@ -138,7 +138,7 @@ UI_SEAM_ANSWERS_ARMED_SUMMARY buttons=3 failed=0 RESULT=PASS
 
 ## สถานะ PR เซิร์ฟเวอร์
 
-`pirate-force-server` PR ของรอบนี้ **เปิดแล้ว ไม่ draft มี `PF-AUTOMERGE: v4` ตั้งแต่เปิด รอเกต** —
+`pirate-force-server#1167` **เปิดแล้ว ไม่ draft มี `PF-AUTOMERGE: v4` ตั้งแต่เปิด (GET ยืนยันแล้วว่า marker อยู่จริง) รอเกต** —
 ยังไม่อยู่บน main จนกว่ารอบถัดไปจะยืนยันด้วย `git merge-base --is-ancestor <sha> origin/main`
 ไม่เข้าเงื่อนไข draft ของ `1742`: ไม่แตะเส้นบูต/ล็อกอิน/ตัวตน actor และไม่ประกอบเฟรมใหม่ส่งไคลเอนต์
 (`adopt_answerer` ยังไม่มีผู้เรียกในโปรดักชันจนกว่า `_discover()` จะเสียบ)
@@ -158,4 +158,4 @@ UI_SEAM_ANSWERS_ARMED_SUMMARY buttons=3 failed=0 RESULT=PASS
 5. **แปลงสามเลนเป็น `ANSWERS_VITAL_ID` + `ANSWERS_WITH`** — เมื่อ `_discover()` ของ chief อยู่บน main แล้วเท่านั้น
    (ยืนยันด้วย `git merge-base --is-ancestor` ก่อน ห้ามเชื่อจดหมาย)
 
-SCOREBOARD: COMING | ปุ่ม "ออกจากเกม" บน main วันนี้พร้อมให้ผู้เทสกดบนจอจริง (โทเคนของใบ GT-308 กลับมาตรงกับโค้ดบน main - ก่อนหน้านี้ใบถือบรรทัดเก่าและจะถูกตัดตอนบูต) และปุ่มปาร์ตี้/เทรด/คำสั่งปาร์ตี้ทั้งสามพิสูจน์ได้ในบูตเดียวแล้ว จึงเข้าคิวขึ้นจอได้เป็นครั้งแรก | pirate-force-server PR ของรอบ ly40b5 (adopt_answerer + arming runner 3 buttons + 18 tests, preflight PASS, adversary NOT CLEAN 10 - D1 critical/D2 high paid in the same round with mutants) - GT-308 token head=48eaf82ad493 code=4f12559dcdd4 RESULT=PASS วัดบน main 48eaf82 - UI_SEAM_ANSWERS_ARMED_SUMMARY buttons=3 failed=0 (branch measurement) - pf_bridge#1938
+SCOREBOARD: COMING | ปุ่ม "ออกจากเกม" บน main วันนี้พร้อมให้ผู้เทสกดบนจอจริง (โทเคนของใบ GT-308 กลับมาตรงกับโค้ดบน main - ก่อนหน้านี้ใบถือบรรทัดเก่าและจะถูกตัดตอนบูต) และปุ่มปาร์ตี้/เทรด/คำสั่งปาร์ตี้ทั้งสามพิสูจน์ได้ในบูตเดียวแล้ว จึงเข้าคิวขึ้นจอได้เป็นครั้งแรก | pirate-force-server#1167 (adopt_answerer + arming runner 3 buttons + 18 tests, ชุดเต็ม 15286 passed 450 skipped, preflight PASS, adversary NOT CLEAN 10 - D1 critical/D2 high paid in the same round with mutants) - GT-308 token head=48eaf82ad493 code=4f12559dcdd4 RESULT=PASS วัดบน main 48eaf82 - UI_SEAM_ANSWERS_ARMED_SUMMARY buttons=3 failed=0 (branch measurement) - pf_bridge#1938
