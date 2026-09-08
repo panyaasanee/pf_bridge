@@ -23,7 +23,7 @@ claim: `pf_bridge#1945` (ไม่มีใบ `[LANE-B] round <id>: claim` ใ�
 
 วันนี้ย่านเพิ่มขึ้นตาม placement ภายในฉาก และเพิ่มขึ้นตาม scene id ข้ามฉาก ⇒ sort ด้วย identity ได้ลำดับเดียวกับที่ตารางวางมอนไว้
 
-ของที่ลง (PR เซิร์ฟเวอร์ `pirate-force-server#PRNUM`):
+ของที่ลง (PR เซิร์ฟเวอร์ `pirate-force-server#1171`):
 1. `src/pirateforce_foundation/mob_identity_sign.py` — เลขคณิตของย่านเขียนใหม่รอบฐานเดียว `MOB_IDENTITY_BASE` · เพิ่ม `SCENE_ID_CEILING` (เพดานของ**ส่วนฉาก** แบบเดียวกับที่ `SCENE_STRIDE` เป็นเพดานของส่วน placement) · เพิ่ม `scene_band_bounds(scene)` · เพิ่ม `_refuse_scene_id` เป็นประตูเดียวที่ทั้งสองทางเข้าใช้ร่วมกัน
 2. `tests/test_mob_identity_sign.py` — 8 เทสของสัญญาลำดับ/เพดาน + 3 เทสหมุดกำแพงจังหวะ 2
 3. `tests/test_mob_identity_sign_inbound.py` — คลาสที่เคยปักหมุด **การชนกัน** เขียนกลับเป็นคลาสที่ยืนยัน **ลำดับใหม่** ตามที่ docstring ของมันเองสั่งไว้ว่า "ให้เขียนใหม่วันที่มีคนแก้"
@@ -75,11 +75,13 @@ claim: `pf_bridge#1945` (ไม่มีใบ `[LANE-B] round <id>: claim` ใ�
 - `pytest tests/test_mob_identity_sign.py` → 32 passed / 104 subtests
 - `pytest tests/test_mob_identity_sign_inbound.py` → 18 passed
 - มิวแทนต์สองตัว (ข้างบน) → 37 failed / 3 failed ตามลำดับ
-- ชุดเต็ม `pytest tests/` บนต้นไม้ที่ merge `origin/main` แล้ว: _กำลังรัน ตัวเลขเติมก่อน push รอบสุดท้าย_
+- ชุดเต็ม `pytest tests/` บนต้นไม้ที่ merge `origin/main` แล้ว (sha `1682889` = commit สุดท้ายจริง): **15435 passed / 450 skipped / 43096 subtests / 0 failed** (14:00 นาที)
 - `tools_bridge/pf_gate_preflight.py --repo <server>` → **PREFLIGHT PASS** (รันแล้ว 19:47)
 
 ## adversary
-_สั่ง `pf-adversary` ต้นรอบพร้อมเริ่มงานแล้ว ผลยังไม่คืน — สถานะสุดท้ายเติมก่อน push_
+`ADVERSARY_PENDING pirate-force-server#1171` — สั่ง `pf-adversary` ต้นรอบพร้อมเริ่มงานตามกฎ (ไม่ใช่ก่อน commit) บนกิ่ง `claude/wizardly-einstein-6okcq4` ผลยังไม่คืนตอน push จึง push ตามเดิม
+🔴 **ไม่เขียนว่า "ผ่าน adversary"** · PR เซิร์ฟเวอร์เป็น **draft** ตามกฎ (diff แตะตัวตน actor) · **รอบถัดไปของสาย B สั่ง adversary บนกิ่งนั้นเป็นงานแรก** และถอด draft/ติด marker เมื่อจ่ายข้อวิกฤตแล้ว
+self-review ที่ทำแทนระหว่างรอ: อ่านทุก hunk ใน `git diff origin/main..HEAD` · รันมิวแทนต์สองตัวบนไฟล์เทสที่แตะ (ผลข้างบน) · จับเองได้หนึ่งข้อและแก้แล้ว: คอมเมนต์ `SCENE_ID_CEILING` เขียนว่าห่างจากพื้น "หกลำดับขนาด" ซึ่งผิด — อัตราส่วนจริง 2.7e11 = สิบเอ็ดลำดับ (commit `1682889`)
 
 ## สะพาน/นาฬิกา
 `_BRIDGE_HEARTBEAT.txt` บรรทัดล่าสุด = 2026-09-08T16:08+07:00 · เวลาเริ่มรอบ 19:32 = **ห่าง 204 นาที** ⇒ สะพานค้าง ไม่ใช่นาฬิกาผิด
@@ -99,4 +101,4 @@ _สั่ง `pf-adversary` ต้นรอบพร้อมเริ่มง
 2. 🔴 หนี้ adversary 6 ข้อของรอบ `db4o73` — **เช็ก `#1161` ก่อนทุกรอบ** (`git merge-base --is-ancestor <sha> origin/main`) ขึ้น main เมื่อไรคืองานแรกทันที
 3. จ.2 พลิกทีละฉาก + ใบ GT (หลังประตูเปิด) → จ.3 ลบ `0x2000`
 
-SCOREBOARD: _เติมก่อน push_
+SCOREBOARD: COMING | ยังไม่มีอะไรที่ผู้เล่นเห็นต่างจากเมื่อวาน แต่เมื่อวานการพลิกฉากลงย่านมอนแปลว่าไม่มีใครล็อกอินได้เลย (ledger ปฏิเสธ roster ที่เรียงลง) วันนี้ล็อกอินได้ และลำดับที่ ledger/register/เซนซัสเห็นตรงกันเป็นสัญญาที่เขียนไว้แล้ว ไม่ใช่ความบังเอิญ | pirate-force-server#1171 (draft รอ adversary) - sha 1682889 - เทสใหม่ 15 ใบ - มิวแทนต์ 37 failed / 3 failed - ชุดเต็ม 15435 passed / 0 failed - กำแพงจังหวะ 2 วัดแล้วและปักหมุดแล้ว (world_scene_registry ปฏิเสธย่านทั้งย่านแบบไม่ raise) - pf_bridge#1945
