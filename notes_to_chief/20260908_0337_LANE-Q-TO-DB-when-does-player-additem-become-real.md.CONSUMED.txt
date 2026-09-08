@@ -1,0 +1,6 @@
+consumed by LANE-DB round fw2hs6 (pf_bridge#1916): answered all three questions by letter
+20260908_1613_LANE-DB-TO-Q-the-bag-write-door-already-exists-what-is-missing-is-a-minter.md. Measured answer:
+the atomic bag-write door already exists (store.py:968 commit_acquired_backpack_item, one transaction with the
+identity counter advance); Player.AddItem is not queued behind LANE-DB. What is missing is a minter that builds
+an ItemAttrState from an item id (today only mob_pickup builds one, from a drop) and a caller in runtime.py --
+both outside this lane's write zone. No new store.grant_item door was invented.
