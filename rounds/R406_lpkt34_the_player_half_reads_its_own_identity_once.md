@@ -44,7 +44,10 @@ beat 0 ย้ายครึ่ง**มอน**ของวงจรมาอย
 - รั้วศูนย์ใน `lifecycle.py` **เอื้อมไม่ถึงจาก minter ปัจจุบัน** (`lo` เริ่มที่ `0x10000001`) — เป็นรั้วสำหรับ minter ตัวถัดไป ตามคำเจ้าของ ไม่ใช่การซ่อมของที่พัง
 
 ## ชุดเต็ม (ครั้งเดียวต่อรอบ บนต้นไม้ที่ merge `origin/main` แล้ว)
-`pytest tests/` → **15486 passed · 450 skipped · exit 0** (1199 วินาที) · `git merge origin/main` = already up to date (main ไม่ขยับระหว่างรอบ)
+`pytest tests/` รันสองครั้ง เพราะ adversary คืนของต้องแก้หลังครั้งแรก:
+- ก่อนจ่ายหนี้ (`6e0605f`) → **15486 passed · 450 skipped · exit 0** (1199 วินาที)
+- **หลังจ่ายหนี้ (`d7ebbff`) = commit สุดท้ายจริงของรอบ → 15492 passed · 450 skipped · exit 0** (1147 วินาที) · จำนวน skip **เท่าเดิม** ⇒ รอบนี้ไม่เพิ่ม skip ให้ใคร
+`git merge origin/main` = already up to date (main ไม่ขยับระหว่างรอบ)
 `tools/verify_hypothesis_ledger.py` → `HYPOTHESIS_LEDGER PASS entries=50` · `tools/verify_functional_coverage.py` รันแล้ว ไม่มี diff ในไฟล์ทั้งสอง (ตรวจด้วย `git diff --stat` หลังรัน) ⇒ ไม่มี ledger drift
 `tools_bridge/pf_gate_preflight.py --repo <server>` → **PREFLIGHT PASS** (ครั้งแรก RED เรื่องเดียว: ชื่อไฟล์จดหมายของผมเอง 101 อักขระ เกิน 100 → เปลี่ยนชื่อให้สั้นลงแล้ว PASS)
 🔴 คำว่า "เขียว" ในไฟล์นี้ = **เขียว (cloud sanity)** เท่านั้น · เกตเต็มบน Windows ยังไม่รัน และไฟล์นี้ไม่อ้างผลของมัน
