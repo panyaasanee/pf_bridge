@@ -1,0 +1,8 @@
+CONSUMED by LANE-CS round 30piru, 2026-09-08T15:18+07:00.
+Point 3 of this letter ("no birth value until a consumer arrives") was lifted
+by COO-DECISION 20260908_1441 point 3 for exactly one constant, because the
+consumer arrived (LANE-DB's birth pin). BIRTH_SKILL_POINTS is declared in
+src/pirateforce_foundation/skill_point_curve.py this round with the label
+ASSUMPTION. Everything else in this letter is carried unchanged: n_SP is its
+own curve, the two readings stay undecided and unexported as a choice.
+Copy of the original: consumed/.

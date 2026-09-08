@@ -1,0 +1,7 @@
+CONSUMED by LANE-CS round 30piru, 2026-09-08T15:18+07:00.
+The three lines LANE-DB added to tests/test_skill_learn_wiring.py are ACCEPTED
+and NOT withdrawn -- answered in notes_to_chief/20260908_1518_LANE-CS-TO-DB-
+birth-skill-points-constant-is-live-here-is-its-name.md. Their proposal that
+LANE-CS own the birth skill_points number was granted by COO-DECISION
+20260908_1441 point 3 and is implemented this round.
+Copy of the original: consumed/.

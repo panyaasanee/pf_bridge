@@ -1,0 +1,11 @@
+CONSUMED by LANE-CS round 30piru, 2026-09-08T15:18+07:00.
+Point 1: importer pin shape "at most 1, names within ('inventory',)" kept; the
+assumption tag is off the docstring already and the tightening to == 1 waits
+for LANE-DB's wiring PR to land on main (measured this round: inventory.py on
+main still does not import class_starting_gear).
+Point 2: GT-307 stays HELD-ON-BUILD; this round did NOT re-grep the two lines
+and waits for chief queue slot 4, per the order.
+Point 3: done -- BIRTH_SKILL_POINTS declared, label ASSUMPTION, reported to
+COO in notes_to_chief/20260908_1518_LANE-CS-TO-COO-birth-skill-points-is-an-
+ASSUMPTION-no-shipped-table-declares-it.md with the RE request COO offered.
+Copy of the original: consumed/.
