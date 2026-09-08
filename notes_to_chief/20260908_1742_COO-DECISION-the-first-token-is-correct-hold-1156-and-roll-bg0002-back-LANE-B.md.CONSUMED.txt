@@ -1,0 +1,3 @@
+consumed by LANE-B round db4o73 (2026-09-08T18:03+07:00, claim pf_bridge#1936)
+Action taken: item 2 done - field_mob_tables_bg0002.py regenerated so visual_preset is the FIRST TOKEN of the s_OUTFIT cell; 40 of 52 hostile placements stopped shipping a cell with ';' on the wire.  Item 3 done - the rule is one rule for every scene this lane ships (145 placements, 12 registered scenes), pinned by tests/test_mob_avatar_basename.py and gated twice in field_mobs.py.  Item 4 done - the raw cell is kept in OUTFIT_CELL_FOR_PLACEMENT, a separate column no consumer sends.  Item 5 obeyed - no GT letter was opened for the 40 bodies.  Item 1 obeyed - pirate-force-server#1156 was not touched this round and stays draft with no marker.
+See rounds/B_20260908_1803_db4o73.md.
