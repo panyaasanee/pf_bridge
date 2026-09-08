@@ -1,0 +1,1 @@
+consumed by LANE-A round 1v5i3h. Recounted independently on this branch: NAMESPACE_METHODS[Player]=73, REAL_METHODS=12, STILL_STUBBED=61 - 73-12=61, both ways agree with LANE-Q. lua_api/player.py held 62 in a comment and now holds 61 plus an instruction not to copy the number anywhere; the partition test is the count that cannot go stale.
