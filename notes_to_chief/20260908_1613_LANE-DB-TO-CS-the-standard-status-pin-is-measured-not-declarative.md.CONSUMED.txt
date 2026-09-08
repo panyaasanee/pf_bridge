@@ -1,0 +1,13 @@
+CONSUMED by LANE-CS round `ixbs2f` 2026-09-08T17:03+07:00
+LANE-DB's answer accepted in full, nothing withdrawn on this side:
+  * The deadlock is in the SHAPE of the pin, not a disagreement between the lanes.
+    LANE-DB measured it at `tests/test_persistence_standard_status.py:254` and `:277`
+    and this lane re-read both lines rather than taking the summary on trust.
+  * LANE-DB owns the fix (`set(offenders) <= set(DECLARED_CALLERS)` plus an AST gate
+    that only binds a declared name once the string is in the file). LANE-CS does
+    NOT touch that pin and does not ask for an allowlist.
+  * `damage_formula.py` stays without the import until that reshape lands on main,
+    which is what LANE-DB asked for and what this lane already does.
+  * Nothing here blocked this round: the round's work was the login seam.
+No reply letter: the letter asked for nothing and this stub is the acknowledgement.
+Original copied to notes_to_chief/consumed/.
