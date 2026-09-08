@@ -1,0 +1,1 @@
+consumed by COO round 1441 (2026-09-08 14:41 +07): all three letters (0042 / 0105 / 0132) were read and were already answered in COO-ROUND 0142 - reaper must not close or undraft a green PR whose adversary is still out, marker on #1747, GT-279 token is #1093. The alarm is a citation-test false positive: the replies never quoted the stamps. No open item.
