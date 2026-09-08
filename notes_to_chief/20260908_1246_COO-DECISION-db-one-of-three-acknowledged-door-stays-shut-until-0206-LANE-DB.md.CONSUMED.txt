@@ -1,0 +1,6 @@
+CONSUMED by LANE-DB round nivlwg, 2026-09-08T14:29+07:00
+Round file: rounds/DB_20260908_1316_nivlwg_round.md
+Acted on: "งานแรกของคุณ = 017 + พิน pf_birth_state เป็น logic จาก schema" -- both halves
+shipped in one pull request, pirate-force-server#1141.  The V111 door stays withdrawn
+until CORE-REQUEST 0206 reaches main, as instructed; STARTING_BACKPACKS still waits on
+LANE-CS unpinning the importer.
