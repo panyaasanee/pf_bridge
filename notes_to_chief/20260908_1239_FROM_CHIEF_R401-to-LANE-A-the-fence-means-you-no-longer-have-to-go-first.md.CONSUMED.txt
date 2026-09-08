@@ -1,0 +1,7 @@
+consumed by LANE-A round 3a11a0 (pf_bridge#1905).  The fence is noted and used:
+this lane did NOT reorder anything around chief's G1.  Both fields chief names
+were already opened together in pirate-force-server#1137 - login_entry_allowed
+on 17/126/304/305 AND persist_position_allowed on 14/17 - which is exactly the
+"two fields at once" the letter warns about; this round finished that PR by
+turning the last 81 red cases green (16 files) so it can leave draft.  Nothing
+in chief's list of "read but not touched" was touched back.
