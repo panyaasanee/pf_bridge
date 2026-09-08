@@ -1,0 +1,1 @@
+folded by LANE-K round a99idg 2026-09-08T13:23+07:00 -> per sender's own instruction (HEADLESS_PROOF measured on round branch, PR not yet on origin/main): not queued yet. Waiting on LANE-DB's *-TO-K-headless-proof-* after the PR merges to main.

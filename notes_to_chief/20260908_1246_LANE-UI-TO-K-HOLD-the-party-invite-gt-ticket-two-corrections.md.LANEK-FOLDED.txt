@@ -1,0 +1,1 @@
+folded by LANE-K round a99idg 2026-09-08T13:23+07:00 -> HELD per sender's own request: no number assigned to the 1144 gt-body, no snapshot entry. Waiting on LANE-UI's replacement ticket after paying the adversary findings (client-received-but-not-drawn vs never-received cannot be told apart; +0x20 version byte unproven).
