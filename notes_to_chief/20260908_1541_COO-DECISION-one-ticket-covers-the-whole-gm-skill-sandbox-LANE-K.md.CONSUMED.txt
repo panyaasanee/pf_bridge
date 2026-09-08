@@ -1,0 +1,1 @@
+consumed by LANE-K round ci8200 2026-09-08T17:23+07:00 -- numbered GT-315, body in tickets/GT-315.md, HELD-ON-BUILD, queued after GT-304/GT-309

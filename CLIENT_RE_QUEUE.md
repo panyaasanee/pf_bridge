@@ -1046,7 +1046,7 @@ owner: LANE-UI · body: `tickets/RE-312.md` (เนื้อใบเต็ม �
 
 ---
 
-## RE-314 ACTORATTR-0X1A0-CALLER-AND-REAL-ACTOR-APPEAR-FRAME-001  [🅿️ **OPEN (static-on-bridge)** · ตั้งเลขโดย LANE-K รอบ `lhrmkq` 2026-09-08T15:14+07:00 = รอบแรกที่ K เห็นคำสั่ง (`COO-DECISION 20260908_1341` ข้อ 3 ลงกล่อง 13:41) · เนื้อใบคำต่อคำจากคำสั่งของ COO ในจดหมายนั้น (COO เป็นผู้เขียนเนื้อใบเอง ไม่ใช่สายผู้เปิด) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = สาย RE/static — ไม่ใช่ LANE-B** (คำสั่ง COO ข้อ 3 คำต่อคำ: "ห้ามใส่เป็นเงื่อนไขของใบ attended ใบไหน — นี่เป็นงาน static ล้วน ไม่กินเวลาเจ้าของ") · ที่มา: ภาคผนวก 3 ของ `KA1A-TO-COO` (`notes_to_chief/20260908_1140_KA1A-TO-COO-B-sweep-all-addendum3-send-actorattr-0x1A0-rows-per-RE310.md` — เก้าแถว `ActorAttr +0x1A0`) **ถูกยกเลิกโดย `COO-DECISION 1341` ข้อ 2 ตาม `1934`** (LANE-B วัดแล้วว่าประกอบไม่ได้ · ผล `R324A` ตอบคำถามที่ภาคผนวกมีไว้ถามอยู่แล้ว) · **K ตรวจแล้ว: ภาคผนวก 3 ไม่เคยถูกเติมเข้า `tickets/GT-288.md` หรือคิวใดเลย ⇒ ไม่มีอะไรให้ถอน** · ใบนี้แทนที่ภาคผนวก 3 ด้วยงาน RE ล้วน] [🔴 **แก้โดย LANE-K รอบ `adv2k9` 2026-09-08T15:31+07:00 ตาม pf-adversary**: ข้อ 2 ของเนื้อใบมีประโยค "ต้องตอบว่าไฟล์ไหนถูก" ต่อท้ายซึ่ง**ไม่มีในจดหมายต้นทาง** (`COO-DECISION 1341` ข้อ 3 จบที่ "สองไฟล์ในรีโปขัดกันเอง") — ตัดออกแล้ว เหลือเนื้อใบคำต่อคำจริง]
+## RE-314 ACTORATTR-0X1A0-CALLER-AND-REAL-ACTOR-APPEAR-FRAME-001  [✅ **DONE/PASS — jobs 1-3 closed** พับโดย LANE-K รอบ `ci8200` 2026-09-08T17:xx+07:00 จากจดหมายผล `notes_to_chief/20260908_1552_RE-314-RESULT-UPDATEATTR-0X309A-CALLS-ACTORATTR-CODEC.md` — ผลเต็มอยู่ท้ายบล็อกนี้ · แก้ตัวสะกด route tag เป็น `[STATIC-ON-BRIDGE]` ตัวใหญ่ตามที่จดหมายผลขอ (เดิมพิมพ์ `static-on-bridge` ตัวเล็กทำ taglint หาไม่เจอ)] [🅿️ ประวัติป้ายเดิมก่อนพับ (ไม่ลบ): ~~OPEN (static-on-bridge)~~ · ตั้งเลขโดย LANE-K รอบ `lhrmkq` 2026-09-08T15:14+07:00 = รอบแรกที่ K เห็นคำสั่ง (`COO-DECISION 20260908_1341` ข้อ 3 ลงกล่อง 13:41) · เนื้อใบคำต่อคำจากคำสั่งของ COO ในจดหมายนั้น (COO เป็นผู้เขียนเนื้อใบเอง ไม่ใช่สายผู้เปิด) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = สาย RE/static — ไม่ใช่ LANE-B** (คำสั่ง COO ข้อ 3 คำต่อคำ: "ห้ามใส่เป็นเงื่อนไขของใบ attended ใบไหน — นี่เป็นงาน static ล้วน ไม่กินเวลาเจ้าของ") · ที่มา: ภาคผนวก 3 ของ `KA1A-TO-COO` (`notes_to_chief/20260908_1140_KA1A-TO-COO-B-sweep-all-addendum3-send-actorattr-0x1A0-rows-per-RE310.md` — เก้าแถว `ActorAttr +0x1A0`) **ถูกยกเลิกโดย `COO-DECISION 1341` ข้อ 2 ตาม `1934`** (LANE-B วัดแล้วว่าประกอบไม่ได้ · ผล `R324A` ตอบคำถามที่ภาคผนวกมีไว้ถามอยู่แล้ว) · **K ตรวจแล้ว: ภาคผนวก 3 ไม่เคยถูกเติมเข้า `tickets/GT-288.md` หรือคิวใดเลย ⇒ ไม่มีอะไรให้ถอน** · ใบนี้แทนที่ภาคผนวก 3 ด้วยงาน RE ล้วน~~] [🔴 **แก้โดย LANE-K รอบ `adv2k9` 2026-09-08T15:31+07:00 ตาม pf-adversary**: ข้อ 2 ของเนื้อใบมีประโยค "ต้องตอบว่าไฟล์ไหนถูก" ต่อท้ายซึ่ง**ไม่มีในจดหมายต้นทาง** (`COO-DECISION 1341` ข้อ 3 จบที่ "สองไฟล์ในรีโปขัดกันเอง") — ตัดออกแล้ว เหลือเนื้อใบคำต่อคำจริง]
 
 > numbering [LANE-K รอบ `lhrmkq`]: คำสั่งค้นหาเดียวตามกฎ ② (`grep -ohE '\b(GT|RE)-[0-9]{3,4}\b' GAME_TEST_QUEUE.md CLIENT_RE_QUEUE.md archive/*QUEUE*ARCHIVE*.md tickets/*.md 2>/dev/null | grep -oE '[0-9]{3,4}$' | sort -n | tail -1`) คืน **313** · เลขจองในจดหมาย (`NOW.md`/`FROM_CHIEF_*`/`COO-DECISION`/`LANE-K-NUMBERED-*`) สูงสุดก็ **313** ⇒ เลขว่างถัดไป **314** · ตรวจ 0 hit ของ `GT-314`/`RE-314` ครบทุกที่ก่อนวาง
 
@@ -1066,3 +1066,44 @@ owner: RE/static (ไม่ใช่ LANE-B) · body below (เนื้อใ�
 ## nonclaims (จากคำสั่ง COO ห้ามตัดออก)
 - ไม่อ้างว่า `0x0043BB80` คือผู้เรียกจริง — เป็นแค่สิ่งที่รีจิสทรีปัจจุบันชี้ และเป็นสตับ `ret 8` ซึ่งน่าสงสัย
 - ไม่อ้างว่าภาคผนวก 3 (เก้าแถว) เคยถูกใช้ตัดสินผลใดของ `GT-288` — `R324A` ปิดคำถามที่ภาคผนวกมีไว้ถามไปแล้วก่อนใบนี้เปิด
+
+<!-- RE-314 result folded by LANE-K round ci8200 2026-09-08T17:xx+07:00 -->
+## RE-314 RESULT — DONE/PASS, jobs 1-3 closed [พับโดย LANE-K รอบ `ci8200` 2026-09-08T17:xx+07:00 คำต่อคำจากบรรทัด "สถานะที่เสนอ" ของจดหมายผล `notes_to_chief/20260908_1552_RE-314-RESULT-UPDATEATTR-0X309A-CALLS-ACTORATTR-CODEC.md` (ไม่มีบรรทัด `RESULT:` แบบมาตรฐาน — ใบนี้เขียนโดยสาย RE/static ไม่ใช่ ka1-A จึงอ่านหัวข้อ "Status" แทนตามกฎข้อ 1 ของ K)]
+**Status: DONE/PASS — jobs 1-3 closed** (จดหมายเขียนเอง คำต่อคำ)
+- Job 1: ผู้เรียกของ `0x00466230` คือ generic attribute-container codec `[0x00463DE0,0x00463FA2)` เรียกจาก `UpdateAttrVital` serializer wrapper `0x005E42C0` — ไม่ใช่ `0x0043BB80` (สตับ `ret 8` เดิมในรีจิสทรี)
+- Job 2: `ActorAttr@0x1A0` = `Navy_Pirate_icon_selector` (`PROVEN_EXACT`) ไม่ใช่ input ของ name-colour selector `0x00443F50` — สองไฟล์ในรีโปไม่ได้ขัดกันจริง เป็นคนละชั้น (semantic consumer `0x0053E8B5` vs wire sink `0x0046664C`)
+- Job 3: ผู้เรียกยืนยันเป็น `UpdateAttrVital 0x309A` จริง (job 1 พิสูจน์แล้ว) · `CreateActorVital 0x36CF` ไม่ใช่เส้นทางทดแทนของ ActorAttr codec นี้
+- Route note ของจดหมาย: หัวใบสะกด `static-on-bridge` ตัวเล็กทำ taglint หา tag ไม่เจอ ทั้งที่เนื้อใบมี `[STATIC-ON-BRIDGE]` อยู่แล้ว — K แก้ตัวสะกดหัวใบ RE-314 ด้านบนเป็นตัวใหญ่ให้ตรงกันแล้ว
+- Nonclaims เต็มอยู่ในจดหมายต้นทาง (ไม่คัดลอกซ้ำที่นี่ตามกฎพับ = อ้างที่มา ไม่ใช่ก็อปเนื้อทั้งหมด)
+
+<!-- RE-316 opened by LANE-K round ci8200 2026-09-08T17:23+07:00 -->
+## RE-316 BIRTH-SKILL-POINTS-CHARCREATE-FIELD-VALUE-001  [🅿️ **OPEN** · ตั้งเลขโดย LANE-K รอบ `ci8200` 2026-09-08T17:23+07:00 = รอบแรกที่ K เห็นคำสั่ง (`COO-DECISION 20260908_1642_COO-DECISION-open-an-RE-ticket-for-birth-skill-points-LANE-K.md` ตอบใบ `20260908_1518_LANE-CS-TO-COO-birth-skill-points-is-an-ASSUMPTION-no-shipped-table-declares-it.md`) · เนื้อใบคำต่อคำจากคำสั่งของ COO ในจดหมายนั้น (COO เขียนเนื้อใบเอง ไม่ใช่สายผู้เปิด) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-CS** (CS ห้ามไล่ค้นซ้ำสิ่งที่ทำแล้วด้านล่าง — ทำงานแรกของตัวเองต่อ) · **ห้ามติดธง `[STATIC-ON-BRIDGE]`** (ต้องการ client image binary ซึ่งบนคลาวด์ไม่มี — ถ้าไม่มีใครมีอิมเมจ ให้ค้างในคิวตามปกติ ไม่ใช่ปิดเป็นผลลบ)]
+
+> numbering [LANE-K รอบ `ci8200`]: คำสั่งค้นหาเดียวตามกฎ ② (`grep -ohE '\b(GT|RE)-[0-9]{3,4}\b' GAME_TEST_QUEUE.md CLIENT_RE_QUEUE.md archive/*QUEUE*ARCHIVE*.md tickets/*.md notes_to_chief/*.md 2>/dev/null | grep -oE '[0-9]{3,4}$' | sort -n | tail -1`) คืน **315** (เพราะ `GT-315` ตั้งไปแล้วในรอบเดียวกันก่อนหน้านี้) ⇒ เลขว่างถัดไป **316** · ตรวจ 0 hit ของ `GT-316`/`RE-316` ครบทุกที่ก่อนวาง
+
+owner: LANE-CS (ตอบ) · ตั้งเลข/วางคิว = LANE-K · body below (เนื้อใบคำต่อคำจาก `COO-DECISION 1642`)
+
+---
+
+## คำถามของใบ (คำเดียว ห้ามขยาย)
+ไคลเอนต์/เซิร์ฟเวอร์ต้นฉบับให้ตัวละครที่เพิ่งสร้างถือแต้มสกิลเท่าไร — ฟิลด์ไหนในบล็อกตัวละครที่เส้นทาง `CharCreate`/`CreateChar` เขียนตอนสร้าง
+
+## ที่ CS ไล่แล้วและไม่เจอ (ใส่ลงใบ เพื่อไม่ให้ใครไล่ซ้ำ)
+- หัวตาราง `CONSTDATA_TH__CHARCREATE_{CLASS,PACKAGE,LOOK,SKIN}` ครบทีละคอลัมน์ — ไม่มีคอลัมน์แต้มสกิล (`s_SKILL_1..4` = รหัสสกิลเกิด ไม่ใช่จำนวนแต้ม)
+- `gamedata/tables/*.tsv` ทุกใบที่มี `SP`/`SKILL_POINT`: `n_SP` · `n_QUEST_SP` · `n_PVP_SP` · `f_SP` · `f_REWARD_SP` · `f_RATIO_SP` · `n_Get_GuildSkill_Point_at_GuildLV*` — **ทุกตัวเป็นต่อเลเวล/ต่อมอน/ต่อเควส/กิลด์/PVP ไม่มีตัวไหนแปลว่าค่าเกิด**
+- grep ครบสี่ที่ตาม §7: `external/` · `archive/` · `notes_to_chief/consumed/` · `gamedata/tables/` — ไม่เจอ
+- `SetSkillPoint` ไม่ปรากฏใน `gamedata/` ทั้งไดเรกทอรี มีแต่ `AddSkillPoint`/`Quest.AddCriteriaSkillPoint`/`AddLvCriteriaSkillPoint`
+
+## ที่ยังไม่ได้ไล่ และเป็นเนื้อของใบ
+เส้นทาง `CharCreate`/`CreateChar` ในอิมเมจไคลเอนต์ — ต้องมี binary ⇒ ใบนี้ **ห้ามติดธง `[STATIC-ON-BRIDGE]`** ว่าตอบได้บนคลาวด์ ถ้าไม่มีใครมีอิมเมจ ให้ค้างในคิวตามปกติ ไม่ใช่ปิดเป็นผลลบ
+
+## ประเภทงาน
+ต้องการ client image binary (ไม่มีบนคลาวด์) — ค้างในคิวจนกว่าจะมีผู้เข้าถึงอิมเมจ · ไม่ใช่ attended ไม่มีบล็อก `ATTENDED:` และไม่ต้อง `HEADLESS_PROOF:`
+
+## ใครทำอะไรต่อ
+CS แก้สองบรรทัด (`BIRTH_SKILL_POINTS` + ป้ายเป็น `MEASURED` พร้อมชื่อตาราง) เมื่อใบนี้ตอบ — ประตู `birth_skill_points()` จะบังคับให้แก้ครบเอง · CS **ห้ามไล่ซ้ำ** สิ่งที่บันทึกไว้ข้างบนแล้ว
+
+## nonclaims
+- ไม่อ้างว่าไม่มีค่าเกิดจริง — เพียงแค่ยังไม่พบตารางที่ shipped ประกาศไว้หลังไล่ครบสี่ที่
+- ไม่อ้างว่า `s_SKILL_1..4` แปลว่าแต้มสกิล — เป็นรหัสสกิลเกิด คนละความหมาย
+- ไม่อ้างว่า CS ทำงานผิด — CS ไล่ครบตามที่ COO สั่งแล้วไม่เจอจริง
