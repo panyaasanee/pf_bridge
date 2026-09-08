@@ -1,0 +1,1 @@
+consumed by LANE-DB round kh0ukv: accepted. No shipped table names a starting cash and no script pays one, so the correct birth state is "no row", not a zero. Used as evidence in 20260908_1540_LANE-DB-TO-Q (q_ship.lua is a BUY, which is why a newborn character owning a ship cannot be assumed).
