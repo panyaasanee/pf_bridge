@@ -67,13 +67,16 @@
 
 ## 3. เทส
 
-`tests/test_ui_dispatch.py` **91 เทส / 89 subtests** (จาก 72/87) — คลาสใหม่สามคลาส
+`tests/test_ui_dispatch.py` **92 เทส / 89 subtests** (จาก 72/87) — คลาสใหม่สามคลาส
 `TheAllowanceBelongsToTheSessionTests` (D-B + D-F) · `TheReviewedShapesArePinnedTests` (D-C หมุดอิสระ) ·
 `EveryRefusalInComposeIsReachedTests` (D-C ห้า `raise`) · `tests/test_lane_ui_party_invite_answer.py` **25/10** ·
 `tests/test_lane_ui_trade_invite_answer.py` **16/5**
-- **มิวแทนต์ 9 ตัว ตายทั้ง 9**: `max_frame_bytes`→พันล้าน (2 แดง) · ลบด่านอ่านงบก่อนเรียกตัวตอบ (1) · ลบการตัดงบ (4) ·
+- **มิวแทนต์ 10 ตัว ตายทั้ง 10**: `max_frame_bytes`→พันล้าน (2 แดง) · ลบด่านอ่านงบก่อนเรียกตัวตอบ (1) · ลบการตัดงบ (4) ·
   weakref fail-closed→fail-open (1) · ลบ `raise` ป้ายไม่มีแถว (2) · ลบ `raise` เวอร์ชัน (1) · ลบ `raise` งบเฟรม (1) ·
-  ลบ `if shape is None` ของเลนปาร์ตี้ (1) · ของเลนเทรด (1)
+  ลบ `if shape is None` ของเลนปาร์ตี้ (1) · ของเลนเทรด (1) · ปิดสาขา `session_budget_spent`
+  ที่จุดตัดงบ (1)
+- 🔴 **สาขาที่ `answer()` เข้าไม่ถึงเพราะอ่านงบก่อนแล้ว ก็มีเทสไปถึง** — ยิงที่ `_charge_session_answer` ตรง ๆ
+  (ครึ่งหลังของคู่ read-then-charge) · บทเรียน D-C ใช้กับโค้ดของรอบตัวเอง ไม่รอให้ adversary บอก
 
 ## 4. สิ่งที่รอบนี้ไม่ทำ และเหตุผล (nonclaims)
 
@@ -120,4 +123,4 @@ marker คือสิ่งที่ส่งใบให้ reaper ใบท�
    `_ANSWERER_OWNERS` + `_OUTBOUND_FRAME_SHAPES` ในคอมมิตเดียวกับตัวตอบ
 5. **หนี้เก่าที่ยังเปิด**: `#1120` ยัง draft และไม่สะอาด (D-β/D-γ/D-ε/D-θ ของรอบ `lkswyp`) · `#1117` ไม่ปิดเอง
 
-SCOREBOARD: COMING | ผู้เล่นคนหนึ่งกดปุ่มชวนปาร์ตี้/เทรดรัวๆ ไม่ทำให้ปุ่มของผู้เล่นคนอื่นเงียบทั้งเซิร์ฟเวอร์อีกต่อไป — งบคำตอบเป็นของเซสชันใครเซสชันมัน และการปฏิเสธไม่เสียงบ | pirate-force-server#1151 (draft, ต่อยอด #1143/#1134/#1129) - เทส 91/89 + 25/10 + 16/5 - มิวแทนต์ 9 ตัวตาย 9 - ชุดเต็ม 14995 passed - pf_bridge#1913
+SCOREBOARD: COMING | ผู้เล่นคนหนึ่งกดปุ่มชวนปาร์ตี้/เทรดรัวๆ ไม่ทำให้ปุ่มของผู้เล่นคนอื่นเงียบทั้งเซิร์ฟเวอร์อีกต่อไป — งบคำตอบเป็นของเซสชันใครเซสชันมัน และการปฏิเสธไม่เสียงบ | pirate-force-server#1151 (draft, ต่อยอด #1143/#1134/#1129) - เทส 92/89 + 25/10 + 16/5 - มิวแทนต์ 10 ตัวตาย 10 - ชุดเต็ม 14995 passed - pf_bridge#1913
