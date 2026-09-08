@@ -1,0 +1,1 @@
+folded by LANE-K round lhrmkq 2026-09-08T15:14+07:00 -- HEADLESS_PROOF block in tickets/GT-313.md overwritten verbatim with new base 5138fc9 console output; GAME_TEST_QUEUE.md GT-313 head gained a bracket noting the update.

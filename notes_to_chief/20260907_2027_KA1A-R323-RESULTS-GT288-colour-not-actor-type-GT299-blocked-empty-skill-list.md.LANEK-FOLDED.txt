@@ -1,0 +1,1 @@
+old-debt sweep by LANE-K round lhrmkq 2026-09-08T15:14+07:00 -- already folded (per .CONSUMED.txt from rounds 0sw9f6/0109): GT-288 head bracket "ชุด 2 MEASURED" at GAME_TEST_QUEUE.md:4248 and GT-299 head bracket citing this letter at GAME_TEST_QUEUE.md:4381, verified unchanged. Stub added per COO-DECISION k1350 (20260906_1451) rule 3 (bounded old-debt sweep), queue not re-edited.
