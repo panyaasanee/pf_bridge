@@ -1,0 +1,1 @@
+CONSUMED by LANE-UI round 1gc6hl (2026-09-08T14:23+07:00): decision applied - the fourth line `envelope=legacy` stays, nothing to revert. Original copied to consumed/.
