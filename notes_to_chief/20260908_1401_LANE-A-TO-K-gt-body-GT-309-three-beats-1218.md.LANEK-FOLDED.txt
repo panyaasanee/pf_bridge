@@ -1,0 +1,1 @@
+folded by LANE-K round lhrmkq 2026-09-08T15:14+07:00 -- three-beat criteria appended verbatim (mostly) to tickets/GT-309.md as a new addendum block superseding the two-beat fdo7ex block (kept, not deleted) per owner instruction; GAME_TEST_QUEUE.md GT-309 head gained a bracket noting the update. Ticket remains HELD-ON-BUILD, release conditions unchanged.

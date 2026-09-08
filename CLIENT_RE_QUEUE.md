@@ -1045,3 +1045,24 @@ owner: LANE-UI · body: `tickets/RE-311.md` (เนื้อใบเต็ม �
 owner: LANE-UI · body: `tickets/RE-312.md` (เนื้อใบเต็ม · ย้ายออกจากคิวเพราะเกิน 8,192 B ต่อใบ)
 
 ---
+
+## RE-314 ACTORATTR-0X1A0-CALLER-AND-REAL-ACTOR-APPEAR-FRAME-001  [🅿️ **OPEN (static-on-bridge)** · ตั้งเลขโดย LANE-K รอบ `lhrmkq` 2026-09-08T15:14+07:00 = รอบแรกที่ K เห็นคำสั่ง (`COO-DECISION 20260908_1341` ข้อ 3 ลงกล่อง 13:41) · เนื้อใบคำต่อคำจากคำสั่งของ COO ในจดหมายนั้น (COO เป็นผู้เขียนเนื้อใบเอง ไม่ใช่สายผู้เปิด) · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = สาย RE/static — ไม่ใช่ LANE-B** (คำสั่ง COO ข้อ 3 คำต่อคำ: "ห้ามใส่เป็นเงื่อนไขของใบ attended ใบไหน — นี่เป็นงาน static ล้วน ไม่กินเวลาเจ้าของ") · ที่มา: ภาคผนวก 3 ของ `KA1A-TO-COO` (`notes_to_chief/20260908_1140_KA1A-TO-COO-B-sweep-all-addendum3-send-actorattr-0x1A0-rows-per-RE310.md` — เก้าแถว `ActorAttr +0x1A0`) **ถูกยกเลิกโดย `COO-DECISION 1341` ข้อ 2 ตาม `1934`** (LANE-B วัดแล้วว่าประกอบไม่ได้ · ผล `R324A` ตอบคำถามที่ภาคผนวกมีไว้ถามอยู่แล้ว) · **K ตรวจแล้ว: ภาคผนวก 3 ไม่เคยถูกเติมเข้า `tickets/GT-288.md` หรือคิวใดเลย ⇒ ไม่มีอะไรให้ถอน** · ใบนี้แทนที่ภาคผนวก 3 ด้วยงาน RE ล้วน]
+
+> numbering [LANE-K รอบ `lhrmkq`]: คำสั่งค้นหาเดียวตามกฎ ② (`grep -ohE '\b(GT|RE)-[0-9]{3,4}\b' GAME_TEST_QUEUE.md CLIENT_RE_QUEUE.md archive/*QUEUE*ARCHIVE*.md tickets/*.md 2>/dev/null | grep -oE '[0-9]{3,4}$' | sort -n | tail -1`) คืน **313** · เลขจองในจดหมาย (`NOW.md`/`FROM_CHIEF_*`/`COO-DECISION`/`LANE-K-NUMBERED-*`) สูงสุดก็ **313** ⇒ เลขว่างถัดไป **314** · ตรวจ 0 hit ของ `GT-314`/`RE-314` ครบทุกที่ก่อนวาง
+
+owner: RE/static (ไม่ใช่ LANE-B) · body below (เนื้อใบคำต่อคำจาก `COO-DECISION 1341` ข้อ 3)
+
+---
+
+## ใบนี้ตอบอะไร — สามข้อ ไม่รับคำตอบครึ่งเดียว
+1. ผู้เรียกของ `0x00466230` — `RE-310` nonclaim 5 บอกว่ายังไม่ได้เดินหา · รีจิสทรีชี้ `0x0043BB80` ซึ่งเป็นสตับ `ret 8`
+2. `ActorAttr@0x1A0` คือ `Navy_Pirate_icon_selector` (`PF_ATTR_FIELD_SEMANTICS.tsv` `PROVEN_EXACT` consumer `0x0046664C`) หรือเป็นตัวเลือกสีชื่อ —
+   `PF_ATTR_NAME_COLOR_SELECTOR.tsv` (15 แถวของ `0x00443F50`) **ไม่มีแถว `1A0`** ⇒ สองไฟล์ในรีโปขัดกันเอง ต้องตอบว่าไฟล์ไหนถูก
+3. ถ้าผู้เรียกไม่ใช่ `0x309A` และมีเฟรมที่ actor-appear ใช้จริง → บอกชื่อเฟรมนั้น
+
+## ประเภทงาน
+`[STATIC-ON-BRIDGE]` — อ่าน client image/registry บนเครื่องสะพาน read-only ไม่ใช่ attended ไม่มีบล็อก `ATTENDED:` และไม่ต้อง `HEADLESS_PROOF:`
+
+## nonclaims (จากคำสั่ง COO ห้ามตัดออก)
+- ไม่อ้างว่า `0x0043BB80` คือผู้เรียกจริง — เป็นแค่สิ่งที่รีจิสทรีปัจจุบันชี้ และเป็นสตับ `ret 8` ซึ่งน่าสงสัย
+- ไม่อ้างว่าภาคผนวก 3 (เก้าแถว) เคยถูกใช้ตัดสินผลใดของ `GT-288` — `R324A` ปิดคำถามที่ภาคผนวกมีไว้ถามไปแล้วก่อนใบนี้เปิด
