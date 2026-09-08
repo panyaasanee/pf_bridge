@@ -43,10 +43,31 @@ UI_LOGOUT_EXIT_GAME_ARMED_SUMMARY cases=2 failed=0 head=48eaf82ad493 code=4f1255
 
 - โทเคนปุ่มที่หนึ่งของซีมแปด vital วัดบน main ได้ด้วยในรอบเดียวกัน:
   `UI_PARTY_INVITE_ANSWER_ARMED answered=1 label=UI_PARTY_INVITE_ANSWERED frame_bytes=58 frame_matches=1 echo_is_the_players_bytes=1 junk_refused=1 RESULT=PASS`
-- 🔴 **ที่ยังไม่มีและไม่แสร้งว่ามี**: `grep -rn "UI_TRADE_INVITE_ANSWER_ARMED\|UI_PARTY_CMD_ANSWER_ARMED" src/` บน main
-  = **0 hit** — มีตัวรัน headless ตัวเดียว (`ui_party_invite_answer_headless.py`) ⇒ ปุ่มที่สองและสามยังไม่มีโทเคน
-  แม้โค้ดตอบจะอยู่บน main แล้ว ⇒ **ยังไม่ส่งเนื้อใบ GT สามปุ่มรอบนี้** และขอ K อย่าเพิ่งตั้งเลข (ใบที่มีโทเคน
-  ปุ่มเดียวแล้วบูตไปเจอสองปุ่มเงียบ = รถบัสเสียเที่ยว ซึ่งเป็นเหตุผลที่กฎ `0159` มีอยู่)
+- 🔴 **ช่องโหว่ที่เจอระหว่างวัด และปิดในรอบเดียวกัน**: `grep -rn "UI_TRADE_INVITE_ANSWER_ARMED\|UI_PARTY_CMD_ANSWER_ARMED" src/`
+  บน main = **0 hit** — โค้ดตอบของปุ่มที่สอง (`TradeInviteVital 0x3700`) และที่สาม (`PartyCmdVital 0x2466`) อยู่บน main
+  ตั้งแต่รอบ `xqxadg`/`m54yxh` แต่ **ไม่มีตัววัด** ⇒ สองปุ่มที่ทำงานได้จริงไม่มีบรรทัดที่จะใส่ในใบ GT ได้เลย
+  ⇒ รอบนี้ขยาย `ui_party_invite_answer_headless.py` ให้ขับทั้งสามปุ่มในบูตเดียว (ดูข้อ 3)
+
+## 3. งานที่สาม (โค้ด): ตัวรัน arming ขับครบสามปุ่มแล้ว ไม่ใช่ปุ่มเดียว
+
+`src/pirateforce_foundation/ui_party_invite_answer_headless.py` + เทสเฝ้าใน `tests/test_ui_dispatch.py`
+
+```
+UI_PARTY_INVITE_ANSWER_ARMED answered=1 label=UI_PARTY_INVITE_ANSWERED frame_bytes=58 frame_matches=1 echo_is_the_players_bytes=1 junk_refused=1 RESULT=PASS
+UI_TRADE_INVITE_ANSWER_ARMED answered=1 label=UI_TRADE_INVITE_ANSWERED frame_bytes=58 frame_matches=1 echo_is_the_players_bytes=1 junk_refused=1 RESULT=PASS
+UI_PARTY_CMD_ANSWER_ARMED answered=1 label=UI_PARTY_CMD_ANSWERED frame_bytes=43 frame_matches=1 echo_is_the_players_bytes=1 junk_refused=1 RESULT=PASS
+UI_SEAM_ANSWERS_ARMED_SUMMARY buttons=3 failed=0 RESULT=PASS
+```
+
+- บูตเดียวขับทั้งสาม: ใช้ 6 ครั้งจากงบ 32 ต่อเซสชัน · การใช้ล็อกอินร่วมกันเป็นคำกล่าวที่ **แข็งกว่า** สามบูตแยก
+  เพราะมันบอกว่าสามปุ่มตอบในโปรเซสเดียว เซสชันเดียว โดยไม่แย่งช่องกันเอง
+- ตัววัดย้ายเข้า `_measure()` เนื้อเดิมไม่เปลี่ยน (เทียบเฟรม · ตรวจ echo แบบโครงสร้างที่มาแทน substring ของ D10 ·
+  ตัวคุมเฟรมขยะ) ⇒ ปุ่มที่สองและสาม **ถูกวัดด้วยเกณฑ์เดียวกับปุ่มแรก ไม่ใช่เกณฑ์ที่อ่อนกว่า**
+- เทสเฝ้าใหม่: id ที่ถูกทบทวนใน `_ANSWERER_OWNERS` และมีเลนโหลดอยู่ **ต้องถูกเอ่ยชื่อในซอร์สของตัวรัน**
+  ⇒ ปุ่มที่สี่จะลงโดยไม่มีตัววัดไม่ได้อีก · ฆ่ามิวแทนต์แล้ว (ชี้เคส trade ไปที่ id ของ party = เทสแดง)
+- 🔴 **ตัวเลขข้างบนคือ `BRANCH_MEASUREMENT` ไม่ใช่ `HEADLESS_PROOF:`** และสายนี้จะไม่เรียกมันผิดชื่อ: กลไกอยู่บน main
+  จริงทั้งสาม แต่ **ตัวรัน** ยังไม่อยู่ ⇒ ka1-A รันซ้ำก่อนบูตไม่ได้ ซึ่งเป็นหัวใจของกฎ `0159` · โทเคนจริงวัดบน main
+  ได้ในรอบถัดไปทันทีที่ PR นี้ merge แล้วส่งพร้อมเนื้อใบ GT ใบเดียวคลุมสามปุ่ม
 
 ## 2. งานที่สอง (โค้ด): `adopt_answerer()` — ครึ่งที่ chief รออยู่
 
@@ -72,7 +93,7 @@ UI_LOGOUT_EXIT_GAME_ARMED_SUMMARY cases=2 failed=0 head=48eaf82ad493 code=4f1255
 
 ## หลักฐาน
 
-- `tests/test_ui_dispatch.py` เฉพาะไฟล์: **107 passed, 91 subtests** (มี 11 เทสใหม่ของ `adopt_answerer`)
+- `tests/test_ui_dispatch.py` เฉพาะไฟล์: **108 passed, 91 subtests** (11 เทสใหม่ของ `adopt_answerer` + 1 เทสเฝ้าตัวรัน)
 - ชุดเต็ม `pytest tests/` รันบนทรีของคอมมิตสุดท้ายจริง (หลัง `git merge origin/main`) — ผลอยู่ในบอดี้ PR
 - `python3 tools_bridge/pf_gate_preflight.py --repo <server>` = **PREFLIGHT PASS**
 - 🔴 `ADVERSARY_PENDING pirate-force-server` กิ่ง `claude/festive-shannon-ly40b5` — สั่ง `pf-adversary` ต้นรอบพร้อมเริ่มงาน
@@ -90,9 +111,9 @@ UI_LOGOUT_EXIT_GAME_ARMED_SUMMARY cases=2 failed=0 head=48eaf82ad493 code=4f1255
 ## รอบหน้าทำอะไร (ตามลำดับนี้)
 
 1. **ผล `pf-adversary` ของรอบนี้** — อ่านก่อนอย่างอื่น จ่ายข้อวิกฤตในกิ่งใหม่ (ถ้าคืนแล้ว)
-2. **ตัวรัน arming ให้ครบสามปุ่ม** (`0x37B1` มีแล้ว · `0x3700` · `0x2466` ยังไม่มี) โครงเดียวกัน ต่างที่ id/version/
-   payload → แล้วส่งเนื้อใบ GT **ใบเดียวคลุมสามปุ่ม** พร้อมโทเคนครบสามบรรทัด (ค้างมาห้ารอบเพราะโค้ดไม่อยู่บน main
-   ซึ่งตอนนี้ไม่ใช่เหตุผลอีกแล้ว)
+2. **วัดโทเคนสามปุ่มบน main** ทันทีที่ PR ของรอบนี้ merge (`git merge-base --is-ancestor` ก่อน ห้ามเชื่อจดหมาย)
+   → ส่ง `*-TO-K-headless-proof-*` พร้อม **เนื้อใบ GT ใบเดียวคลุมสามปุ่ม** ในรอบเดียวกัน — ตัวรันพร้อมแล้ว
+   เหลือแค่ให้มันอยู่บน main
 3. **D13** — สามปุ่มไม่มีแถวใน `docs/FUNCTIONAL_COVERAGE.json` · **บันทึกไว้ว่าราคาของมันคืออะไร ครั้งเดียว**:
    ไฟล์นั้นถูกพินด้วย digest ใน `tests/test_foundation_legacy_seam.py` ⇒ เพิ่มแถว = ต้องคำนวณ digest ใหม่ +
    เขียนบล็อกร้อยแก้วอธิบายการขยับตามธรรมเนียมของไฟล์นั้น (ไม่ใช่แค่เติม JSON) รอบนี้จึงไม่หยิบ เพราะจะกินเวลา
@@ -101,4 +122,4 @@ UI_LOGOUT_EXIT_GAME_ARMED_SUMMARY cases=2 failed=0 head=48eaf82ad493 code=4f1255
 5. **แปลงสามเลนเป็น `ANSWERS_VITAL_ID` + `ANSWERS_WITH`** — เมื่อ `_discover()` ของ chief อยู่บน main แล้วเท่านั้น
    (ยืนยันด้วย `git merge-base --is-ancestor` ก่อน ห้ามเชื่อจดหมาย)
 
-SCOREBOARD: COMING | ปุ่ม "ออกจากเกม" บน main วันนี้พร้อมให้ผู้เทสกดบนจอจริงแล้ว - โทเคนของใบ GT-308 กลับมาตรงกับโค้ดที่อยู่บน main (ก่อนหน้านี้ใบถือบรรทัดเก่าและจะถูกตัดตอนบูต) และ discovery ได้ฟังก์ชันที่มันต้องใช้เพื่อเลิกให้เลนลงทะเบียนปุ่มของตัวเอง | pirate-force-server PR ของรอบ ly40b5 (adopt_answerer + 11 tests, preflight PASS, ADVERSARY_PENDING) - โทเคน head=48eaf82ad493 code=4f12559dcdd4 RESULT=PASS วัดบน main 48eaf82 - pf_bridge#1938
+SCOREBOARD: COMING | ปุ่ม "ออกจากเกม" บน main วันนี้พร้อมให้ผู้เทสกดบนจอจริง (โทเคนของใบ GT-308 กลับมาตรงกับโค้ดบน main - ก่อนหน้านี้ใบถือบรรทัดเก่าและจะถูกตัดตอนบูต) และปุ่มปาร์ตี้/เทรด/คำสั่งปาร์ตี้ทั้งสามพิสูจน์ได้ในบูตเดียวแล้ว จึงเข้าคิวขึ้นจอได้เป็นครั้งแรก | pirate-force-server PR ของรอบ ly40b5 (adopt_answerer + arming runner 3 buttons + 12 tests, preflight PASS, ADVERSARY_PENDING) - GT-308 token head=48eaf82ad493 code=4f12559dcdd4 RESULT=PASS วัดบน main 48eaf82 - UI_SEAM_ANSWERS_ARMED_SUMMARY buttons=3 failed=0 (branch measurement) - pf_bridge#1938
