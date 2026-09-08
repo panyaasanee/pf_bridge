@@ -73,10 +73,12 @@ claim: `pf_bridge#1945` (ไม่มีใบ `[LANE-B] round <id>: claim` ใ�
 แต่ **สมุดที่ทำให้สองเซสชันเห็นตรงกันคือ `world_scene_registry`** และรอบนี้วัดว่ามันปฏิเสธย่านทั้งย่าน (หัวข้อ "กำแพง" ข้างบน) ⇒ ณ วันที่พลิกฉาก คำตอบของบรรทัดนี้จะกลายเป็น "ไม่เห็นตรงกัน" ทันที ถ้าประตูยังไม่เปิด · นี่คือเหตุผลที่ใบถามถูกเขียนเป็นใบด่วนแทนที่จะเป็นหมายเหตุ
 
 ## เทส
-- `pytest tests/test_mob_identity_sign.py` → 32 passed / 104 subtests
-- `pytest tests/test_mob_identity_sign_inbound.py` → 18 passed
-- มิวแทนต์สองตัว (ข้างบน) → 37 failed / 3 failed ตามลำดับ
-- ชุดเต็ม `pytest tests/` บนต้นไม้ที่ merge `origin/main` แล้ว (sha `1682889` = commit สุดท้ายจริง): **15435 passed / 450 skipped / 43096 subtests / 0 failed** (14:00 นาที)
+- `pytest tests/test_mob_identity_sign.py` → 35 passed / 113 subtests (หลังจ่าย D5/D6/D8)
+- `pytest tests/test_mob_identity_sign_inbound.py` → 19 passed (ตัวเลข "18" ในฉบับแรกผิด adversary D9 · ที่ HEAD หลังจ่ายคือ 19)
+- มิวแทนต์สองตัว (ข้างบน) → **38** failed / 3 failed ตามลำดับ (ตัวเลข "37" ในฉบับแรกวัดที่ `8e6c999` ก่อนเพิ่มเทส — adversary D9)
+- ชุดเต็ม `pytest tests/` รอบแรก บนต้นไม้ที่ merge `origin/main` (sha `1682889`): **15435 passed / 450 skipped / 43096 subtests / 0 failed** (14:00 นาที)
+- ชุดเต็มรอบสอง **บนต้นไม้ที่จ่ายหนี้ adversary แล้ว** (sha `4a5d94b` = commit สุดท้ายจริง): **15440 passed / 450 skipped / 43105 subtests / 0 failed** (14:18 นาที)
+- มิวแทนต์เพิ่มหลังจ่าย D7: ลบ sort ใน `mob_ai_control.open_register` → **แดง** (ก่อนจ่ายคือเขียว = เทสมองไม่เห็น sort ที่มันบอกว่าปักหมุดอยู่)
 - `tools_bridge/pf_gate_preflight.py --repo <server>` → **PREFLIGHT PASS** (รันแล้ว 19:47)
 
 ## adversary — **NOT CLEAN 13 ข้อ (HIGH 2) · จ่าย 11 ข้อในรอบเดียวกัน**
@@ -120,4 +122,4 @@ claim: `pf_bridge#1945` (ไม่มีใบ `[LANE-B] round <id>: claim` ใ�
 2. 🔴 หนี้ adversary 6 ข้อของรอบ `db4o73` — **เช็ก `#1161` ก่อนทุกรอบ** (`git merge-base --is-ancestor <sha> origin/main`) ขึ้น main เมื่อไรคืองานแรกทันที
 3. จ.2 พลิกทีละฉาก + ใบ GT (หลังประตูเปิด) → จ.3 ลบ `0x2000`
 
-SCOREBOARD: COMING | ยังไม่มีอะไรที่ผู้เล่นเห็นต่างจากเมื่อวาน แต่เมื่อวานการพลิกฉากลงย่านมอนแปลว่าไม่มีใครล็อกอินได้เลย (ledger ปฏิเสธ roster ที่เรียงลง) วันนี้ล็อกอินได้ และลำดับที่ ledger/register/เซนซัสเห็นตรงกันเป็นสัญญาที่เขียนไว้แล้ว ไม่ใช่ความบังเอิญ | pirate-force-server#1171 (draft รอ adversary) - sha 1682889 - เทสใหม่ 15 ใบ - มิวแทนต์ 37 failed / 3 failed - ชุดเต็ม 15435 passed / 0 failed - กำแพงจังหวะ 2 วัดแล้วและปักหมุดแล้ว (world_scene_registry ปฏิเสธย่านทั้งย่านแบบไม่ raise) - pf_bridge#1945
+SCOREBOARD: COMING | ยังไม่มีอะไรที่ผู้เล่นเห็นต่างจากเมื่อวาน แต่เมื่อวานการพลิกฉากลงย่านมอนแปลว่าไม่มีใครล็อกอินได้เลย (ledger ปฏิเสธ roster ที่เรียงลง) วันนี้ล็อกอินได้ และลำดับที่ ledger กับ register เห็นตรงกันเป็นสัญญาที่เขียนไว้แล้ว ไม่ใช่ความบังเอิญ | pirate-force-server#1171 (ไม่ draft มี marker ยืนยันด้วย GET) - sha 4a5d94b - เทสใหม่ 20 ใบ - มิวแทนต์ 38/3/1 แดง - ชุดเต็ม 15440 passed / 0 failed - adversary NOT CLEAN 13 จ่าย 11 ในรอบเดียวกัน (สอง HIGH คือคำกล่าวเท็จของรอบนี้เอง) - กำแพงจังหวะ 2 พบสองบานและปักหมุดทั้งคู่ - pf_bridge#1945
