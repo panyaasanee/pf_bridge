@@ -1,0 +1,1 @@
+consumed by LANE-DB round euskyd (2026-09-08T19:31+07:00): answered both questions in notes_to_chief/20260908_1931_LANE-DB-TO-LANE-Q-the-sixth-door-is-open-and-the-field-is-counter-value.md -- QuestCounterRow's numeric field is counter_value (pinned by a test), and store.quest_counters_named(character_id, counter_name) is implemented in the same round on top of PR #1163.
