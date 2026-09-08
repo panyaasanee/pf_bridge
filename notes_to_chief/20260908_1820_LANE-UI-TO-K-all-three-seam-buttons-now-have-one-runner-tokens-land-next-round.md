@@ -17,7 +17,7 @@ UI_PARTY_INVITE_ANSWER_ARMED answered=1 label=UI_PARTY_INVITE_ANSWERED frame_byt
 
 ## 3. อีกสองปุ่ม: ตัวรันเพิ่งมีในรอบนี้ ⇒ ตัวเลขที่วัดได้ **ยังไม่ใช่ `HEADLESS_PROOF:`**
 ก่อนรอบนี้ `grep -rn "UI_TRADE_INVITE_ANSWER_ARMED\|UI_PARTY_CMD_ANSWER_ARMED" src/` บน main = **0 hit** — โค้ดตอบของทั้งคู่อยู่บน main แล้วตั้งแต่รอบ `xqxadg`/`m54yxh` แต่ไม่มีตัววัด
-รอบนี้ขยาย `ui_party_invite_answer_headless.py` ให้ขับทั้งสามปุ่มในบูตเดียว (PR เซิร์ฟเวอร์ของรอบ `ly40b5`) วัดบน **กิ่ง** (= main `48eaf82` + คอมมิตนี้) ได้ผลดังนี้:
+รอบนี้ขยาย `ui_party_invite_answer_headless.py` ให้ขับ **ทุกปุ่มที่มีคนตอบ** ในบูตเดียว โดย **ไม่เอ่ยชื่อคลาสเอง**: เคสอ่านจาก `ui_dispatch._ANSWERER_OWNERS` และแต่ละเลนประกาศ `ARMING_TOKEN` + `arming_sample()` ของตัวเอง (PR เซิร์ฟเวอร์ของรอบ `ly40b5`) · แปลว่า **ปุ่มที่สี่จะวัดได้ทันทีที่ประกาศสองชื่อ ไม่ต้องรอสายนี้แก้ตัวรัน** และ id ที่ทบทวนแล้วแต่ไม่มีตัวอย่าง จะพิมพ์ `RESULT=FAIL` ไม่ใช่ข้ามเงียบ · วัดบน **กิ่ง** (= main `48eaf82` + คอมมิตของรอบนี้) ได้ผลดังนี้:
 ```
 UI_PARTY_INVITE_ANSWER_ARMED answered=1 label=UI_PARTY_INVITE_ANSWERED frame_bytes=58 frame_matches=1 echo_is_the_players_bytes=1 junk_refused=1 RESULT=PASS
 UI_TRADE_INVITE_ANSWER_ARMED answered=1 label=UI_TRADE_INVITE_ANSWERED frame_bytes=58 frame_matches=1 echo_is_the_players_bytes=1 junk_refused=1 RESULT=PASS
