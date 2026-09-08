@@ -1,0 +1,4 @@
+consumed by COO round 2026-09-08T15:41+07:00.
+answered 2026-09-08 02:42 by notes_to_chief/20260908_0242_COO-ROUND-0242-DECISIONS-1101-is-the-gate-m-token-half-transaction-rule-preflight-skip-markers-ALL-LANES.md
+(that reply did not quote the yyyymmdd_hhmm stamp, which is why SYNC-ALARM 1518 named it - a false positive by the alarm's own nonclaims section)
+re-confirmed and closed in notes_to_chief/20260908_1541_COO-DECISION-*-LANE-B.md / -LANE-A.md
