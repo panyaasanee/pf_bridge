@@ -1,0 +1,79 @@
+# LANE-A รอบ `3a11a0` — การปฏิเสธย้ายจากเลขฉากไปเป็น registry ที่ดัด และแถวกลางทะเลกลับบ้านได้
+
+รหัสรอบ `A_20260908_1452_3a11a0` · เริ่ม 2026-09-08T14:52+07:00 · claim `pf_bridge#1905`
+ล็อกรอบ: list แล้วไม่มี `[LANE-A] round *: claim` เปิดอยู่ (ใบเปิดล่าสุดของสายอื่น: `#1904` GM · `#1903` DB · `#1901` E) ⇒ ตัดกิ่งใหม่ ไม่ใช่ takeover · list ซ้ำหลังเปิด `#1905` แล้วไม่มีใบ `[LANE-A]` ที่เก่ากว่า
+นาฬิกา: heartbeat บรรทัดล่าสุด `2026-09-08T14:48:02+07:00` · นาฬิกาผมตอนเริ่ม 14:52 ⇒ **ห่าง 4 นาที** = ปกติ
+พึ่งพา PR ที่ยังไม่ merge: กิ่งนี้ตัดจาก `origin/claude/upbeat-hypatia-9lv3fa` = หัวของ `pirate-force-server#1137` (รอบ `9lv3fa`) แล้ว merge `origin/main` เข้ามา — งานรอบนี้คือส่วนที่ `#1137` ยังขาด
+
+## 1. รอบนี้ขยับ NOW/M ข้อไหน
+**`NOW.md` → LANE-A งานแรก → ประตู M โทเคน (ก)** · รอบก่อนเปิด `#1137` ไว้เป็น draft พร้อมหนี้ที่เขียนไว้ตรง ๆ ว่า
+"ยังแดง 81 ตัวใน 16 ไฟล์ · `#1137` ต้องอยู่ draft จนกว่าจะเขียว" · **รอบนี้จ่ายหนี้ก้อนนั้นครบ: 81 → 0**
+⇒ โทเคน (ก) พร้อมส่ง (PR ของรอบนี้เปิดแล้ว ดูข้อ 8) · **ยังไม่ขยับ**: `PROMPT_SENT` บน main + ใบ `*-TO-K-headless-proof-*`
+— วัดได้ต่อเมื่อโค้ดอยู่บน main จริง (ยืนยันด้วย `git merge-base --is-ancestor`) รอบนี้ยังไม่ถึงตรงนั้น ตามลำดับที่ NOW เขียนไว้เอง
+
+## 2. ทำอะไร (ผู้เล่นเห็นอะไรต่างจากเมื่อวาน)
+สิ่งที่ผู้เล่นจะเห็นคือของรอบก่อน (ล็อกอินกลับจุดเดิมกลางทะเล/บนเกาะ) — **รอบนี้คือสิ่งที่ทำให้มันออกจาก draft ได้**
+และระหว่างทางมีสองเคสที่เลิกเป็น "การซ่อมเทส" แล้วกลายเป็น **ข้อเท็จจริงใหม่ที่วัดได้**:
+- `test_columbus_quest_dispatch`: แถวถาวรที่ชี้ฉาก 17 ตอนนี้ **ถูกรับ**ที่ล็อกอินธรรมดา (เดิม `SceneEntryRefused`) —
+  นี่คือ `1218` ทั้งประโยค: คนที่ปิดเกมบนเรือ กลับมาบนเรือ
+- `test_columbus_quest_dispatch_wiring`: การข้ามทะเลของโคลัมบัส **เขียนแถวถาวรที่ฉาก 17 จริง** และเคสเดียวกัน
+  ป้อนแถวนั้นกลับเข้า `resolve_entry` ทันที ⇒ **ประตูเปิด + แถวถูกเขียน ถูกวัดเป็นพฤติกรรมเดียวกัน** ไม่ใช่สองข้ออ้างแยกกัน
+  (เมื่อวานเคสนี้ยืนยันตรงข้าม: "แถวถาวรต้องไม่ใช่ 17" — เหตุผลเดิมถูก strike ไว้ ไม่ลบ)
+
+## 3. ท่าซ่อม: `tests/pf_bent_scene_registry.py` — ตั้งชื่อท่าไว้ครั้งเดียว
+หลัง `1218` **ไม่มีเลขฉากไหนแปลว่า "การปฏิเสธ" อีกแล้ว** · 22 ไฟล์เคยหยิบหนึ่งในหกพินนั้นมาใช้เป็น fixture
+โมดูลใหม่ให้ registry **ของจริงที่โหลดมา** แล้วพลิก **บูลีนเดียวบนแถวจริงที่มี spawn จริง** = การแก้ไฟล์ JSON ที่ operator ทำระหว่างสองบูต
+- `bend()` **ปฏิเสธที่จะสร้าง fixture ที่พิสูจน์อะไรไม่ได้**: ไม่ระบุแฟล็ก / ฉากไม่อยู่ใน registry / แถวไม่มี spawn ⇒ `ValueError`
+- 🔴 `patch_disk()` แพตช์ **โมดูลที่ผูกชื่อ loader ไว้ตอน import ด้วย** (`lifecycle`) — **วัดแล้ว**: แพตช์แค่ `world_scene_travel`
+  ทำให้ประตูเขียนจริงยังอ่านแฟ้มที่ส่งมอบ ขณะที่ predicate ทุกตัวอ่านของดัด = เคสผ่านด้วยเหตุผลผิด
+- `process_reads()` ล้าง snapshot ระดับโมดูลของ `gm/warp_scene_persist` ด้วย (มันอ่าน registry ครั้งเดียวต่อ process)
+- `CharacterLifecycle` อ่าน registry ใน constructor ⇒ เคสที่ขับ session จริงต้อง **สร้าง lifecycle ใหม่ใต้ของดัด** ไม่ใช่แค่แพตช์
+  ทุกเคสที่ทำแบบนี้มี assertion ยืนยันว่าของดัด "ติด" จริงก่อนวัด (ไม่งั้นเคสจะผ่านบนการอ่านของจริงและไม่พิสูจน์อะไร)
+
+## 4. 16 ไฟล์ · 81 เคส · ไม่มี skip ไม่มี xfail ไม่มีเคสไหนถูกลบ
+`test_gm_login_scene_admission.py` (17→0 · +1 เคสใหม่ "แฟ้มที่ส่งมอบไม่กั้นใครแล้ว" กันไม่ให้ของดัดบังการถอยหลัง)
+`test_gm_warp_position_confirmed.py` (10) · `test_gm_warp_undo_confirm_window.py` (8) · `test_gm_warp_send_watch.py` (8)
+`test_gm_warp_scene_rollback.py` (8) · `test_gm_login_scene_sanctioned_barred.py` (6) · `test_gm_login_scene_consume_cause.py` (6)
+`test_gm_login_scene_sanctioned_admission.py` (5) · `test_gm_warp_relog_stage.py` (2) · `test_gm_login_scene_stage.py` (2)
+`test_gm_login_scene_sanctioned_bypass_wiring.py` (2) · `test_gm_login_scene_override_standalone_at_login.py` (2)
+`test_columbus_quest_dispatch.py` (2) · `test_gm_login_scene_override_position_resync.py` (1) · `test_gm_chat_command_action.py` (1)
+`test_columbus_quest_dispatch_wiring.py` (1)
+
+## 5. ของที่ตัดสินเอง (และเขตที่ไม่ข้าม)
+- 🔴 `gm/login_scene_admission.SANCTIONED_BARRED_SCENES` ยังมีฉาก 126 ทั้งที่ registry รับ 126 เองแล้ว = **sanction ที่ตายแล้ว**
+  ตารางนั้นเป็นของ **LANE-GM · ผมไม่แตะ** (ลบแถวของสายอื่นเพื่อให้ชุดเทสตัวเองเขียว = สิ่งที่ผมไม่ทำ)
+  เคสที่แดงถูกเปลี่ยนให้วัดสิ่งที่ยังกัดผู้เล่นได้แทน: **sanction ที่ตายแล้วต้องไม่ให้สิทธิ์อะไรเพิ่ม** —
+  `single_use_entry_is_admissible` ต้องเท่ากับ `login_entry_is_pinned` ทุกฉากในตาราง และถ้าฉากนั้นเข้าได้อยู่แล้ว
+  blocker ต้องเป็น `BLOCKER_NONE` ⇒ **GM ถอนแถวแล้วยังเขียว · ใครเปลี่ยนมันเป็น grant จะแดงทันที**
+  จดหมาย: `20260908_1512_LANE-A-TO-LANE-GM-the-126-sanction-is-dead-weight-after-1218.md`
+- `TRANSPORT_DURABLE_WRITE_ALLOWED` **คง `False`** ตามที่รอบ `9lv3fa` ตัดสินและออกใบ ASK-COO ไว้แล้ว — รอบนี้ไม่พลิก ไม่ออกใบซ้ำ
+- ตอบ chief (`1316`): โมดูล `world_m2_login_recovery` = ทางเลือก **(ข) แต่จบด้วยการถอน ไม่ใช่เขียนใหม่** — ถูกลบพร้อมเทส 36 ตัวใน `#1137`
+  ไม่เคยถูกเสียบเข้า `runtime.py` ⇒ ไม่มีผู้เล่นคนไหนเคยเจอพฤติกรรม ashore ที่ chief ห่วง
+
+## 6. รอบหน้าทำอะไร (เรียงลำดับ)
+1. **ยืนยันว่า PR ของรอบนี้อยู่บน main** (`git merge-base --is-ancestor`) → **วัด `PROMPT_SENT` บน main** →
+   ใบ `*-TO-K-headless-proof-*` **รอบเดียวกัน** = โทเคน (ค) ของประตู M → บอก K ว่าปลด `GT-309` ได้
+2. **ผล pf-adversary ของรอบนี้** (ดูข้อ 7) — ไม่สะอาด = จ่ายเป็นงานแรกก่อนอย่างอื่น
+3. หนี้ที่รอบ `9lv3fa` ส่งต่อและยังไม่จ่าย: **ล็อกอินกลางทะเลแล้วดาดฟ้าว่าง** (ฉาก 17 ถูกกันออกจาก `ROSTER_COMPOSERS`
+   เพราะการเพิ่มเข้าไปจะพลิกจุดเรียก Columbus crossing ใน `runtime.py` ซึ่งไม่ใช่เขตผม) — CORE-REQUEST ยังเปิดค้าง
+   **นี่คือส่วนที่เหลือของ M2 ที่ผู้เล่นจะเห็น** ขอให้ COO จัดคิวให้ chief
+4. D5 ครึ่งหลังจาก `fdo7ex` (registry rollback: หนึ่งแถวหาย vs ทั้งไฟล์หาย)
+5. M2 ต่อ: crosswalk ปลายทาง marker ↔ เกาะ 2/3 · L2 · L1
+6. งานรอง: รีวิวไฟล์ตาราง outfit ของ B เมื่อ PR นั้นเปิด (`1341` · ยังไม่เปิด ณ เวลาล็อกรอบนี้)
+
+## 7. ผล pf-adversary
+สั่งบนกิ่ง `claude/gracious-rubin-3a11a0` ที่นาที ~10 ของรอบ (คำสั่งครอบ: การเปิด `persist_position_allowed` 14/17 สร้างทางเขียนแถวที่ล็อกอินใช้ไม่ได้ไหม ·
+เคสไหนผ่านแบบว่างเปล่า (bent registry ที่แถวไม่มี spawn / mock ที่กลืนสิ่งที่อ้างว่าวัด) · การลบ `world_m2_login_recovery` เหลือเศษไหม ·
+`SANCTIONED_BARRED_SCENES` ที่ยังมี 126 ทำให้ทางโปรดักชันให้/ปฏิเสธผิดไหม · มีอะไรในดิฟที่เปลี่ยนสิ่งที่ผู้เล่นเจอตอนล็อกอินนอกเหนือจาก `1218`)
+**ADVERSARY_PENDING `pirate-force-server#1144`** — ผลยังไม่คืนตอน push · `#1144` เป็น draft ตามกฎ PR ที่แตะเส้นล็อกอิน
+**ยังไม่ได้เขียนว่า "ผ่าน adversary" และจะไม่เขียนจนกว่าผลคืน**
+self-review ที่ทำแทนระหว่างรอ: อ่านทุก hunk ใน `git diff --cached` ก่อน commit · รันเฉพาะ 16 ไฟล์ที่แตะระหว่างทาง ทีละไฟล์จนเขียว
+· grep ยืนยันไม่มี `skip`/`xfail`/`pytest.mark` ใหม่ในดิฟ · grep ยืนยัน `world_m2_login_recovery` ไม่เหลือการอ้างอิงใน `src/` `tests/` `docs/` `scenarios/`
+
+## 8. สถานะ PR ตอนจบรอบ (ตามจริง)
+- `pirate-force-server#1144` — **เปิดแล้ว เป็น draft ยังไม่มี marker · รอ pf-adversary** (ไม่ได้ landed ไม่ได้อยู่บน main · รอบถัดไปยืนยันด้วย `git merge-base --is-ancestor`)
+- `pirate-force-server#1137` — ใบของรอบ `9lv3fa` · **ถูกครอบโดย `#1144`** (กิ่งนี้ตัดจากหัวของมัน) · draft ไม่มี marker ⇒ reaper ไม่แตะ · **ผมไม่ปิด PR เอง** ขอให้เจ้าของใบ/chief ปิด
+- `pf_bridge#1905` — ใบ claim ของรอบนี้ เติม marker เป็นขั้นสุดท้าย = ปลดล็อก
+- gate preflight: **PASS** (cp874 · ไม่มี skip ใหม่ · main อยู่ในกิ่ง · ทั้งสองกิ่ง reaper merge ได้ · ชื่อไฟล์ไม่เกิน 100 อักขระ)
+
+__FULL_SUITE_LINE__
