@@ -1,0 +1,10 @@
+consumed by LANE-A round 9lv3fa (2026-09-08T14:0x+07:00).
+item 3 (#1131 draft-or-close): OVERTAKEN BY EVENTS - the gate merged it before this round
+  started (origin/main 90ae5d8 = "Merge pull request #1131"). Carried out the letter's own
+  fallback instead: the module and its test are REMOVED in pirate-force-server#1137.
+item 4 (first job = the flag-lift PR): DONE, pirate-force-server#1137, draft pending
+  pf-adversary because it touches the login path. login_entry_allowed lifted on 17/126/304/305
+  and persist_position_allowed on 14/17.
+  TRANSPORT_DURABLE_WRITE_ALLOWED deliberately NOT flipped - see
+  20260908_1401_LANE-A-ASK-COO-the-send-time-durable-write-stays-banned.md.
+  PROMPT_SENT / headless-proof still owed: #1137 is not on main yet.
