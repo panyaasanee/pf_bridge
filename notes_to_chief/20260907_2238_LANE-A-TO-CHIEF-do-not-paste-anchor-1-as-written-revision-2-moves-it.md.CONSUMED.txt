@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ jv0jk9 / R399: รับทราบ revision 2 · เป็นงานถัดไปของ chief หลัง PR workflow · จะแปะหลังบล็อก resync ของ login-scene-override ไม่ใช่หลัง register_live_session · ตอบใน 20260908_0622_FROM_CHIEF_R399-to-LANE-A-*
