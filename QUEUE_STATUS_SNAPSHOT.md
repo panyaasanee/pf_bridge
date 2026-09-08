@@ -534,3 +534,43 @@ K วัดเองทุกครั้ง ไม่เชื่อจดห�
 🔵 `.LANEK-FOLDED.txt` วางแล้วสำหรับจดหมาย: `1552`(RE-314 result) · `.CONSUMED.txt`: `1541`×2(GT-309 token / GM sandbox one-ticket) `1642`×2(GT-186/185 fact-correction / RE birth-skill-points) `0340`(SYNC-ALARM superseded)
 🔴 **CONFLICT-flag ใหม่ตาม `COO-DECISION 1541`**: ตั้งแต่รอบนี้ พับสองฉบับวันเดียวกันที่ขัดกัน = เติม `CONFLICT: <stamp A> vs <stamp B> - ส่ง ASK-COO` ในหัวใบทันที ไม่ต้องรอ pf-adversary ชี้ — ยังไม่พบกรณีใหม่รอบนี้ บันทึกไว้เป็นกติกาที่ต้องใช้รอบหน้า
 🔴 **ยังพับไม่ได้/ยังไม่ทำรอบนี้ (งานสำรองรอบหน้า)**: `20260908_1105_RE-312-ARTIFACT-*` (เลื่อน `vslot_fnscan.py`) · `20260907_2129_TO-K-promoting-the-re293-re296-probes-*` · **archive `GT-151`/`GT-178`/`GT-172` (>20 KB/ใบ) ไป `tickets/`**
+
+## 🔴 รอบนี้ `mb9vtg` 2026-09-08T19:22-19:30+07:00: **ล้างหนี้ .CONSUMED.txt ค้าง 30 ฉบับ (RESULTS 26 + COO-DECISION 2 + gt-body superseded 1 + gt-body numbered 4 -- นับซ้อนกันบางฉบับ ดูรายละเอียดล่าง) · ทำ NOW.md งานแรกของ K ครบสองข้อ (ASCII hyphen GT-184/186 · ขั้น >4 skill rows ใน GT-307) · ตั้งเลข GT-317-320 · ย้าย GT-178 (26.6 KB) ไป tickets/ กัน GAME_TEST_QUEUE.md ชนเพดาน Contents-API 1,000,000 B · พับ RE-155 ANSWERED (R324A) ที่ตกหล่นจากรอบก่อน**
+K วัดเองทุกครั้ง ไม่เชื่อจดหมาย (`NOW.md` `0159`) · แถวข้างล่างคือของที่เปลี่ยนในรอบนี้เท่านั้น
+🔴 **นาฬิกา**: `TZ=Asia/Bangkok date` ตอนเปิดรอบ = 19:22 · บรรทัดล่าสุดของ `notes_to_chief/_BRIDGE_HEARTBEAT.txt` = 19:22 (ห่างกันหลักวินาที ตอนเริ่มรอบ) — ไม่มีเหตุสงสัยนาฬิกาค้างรอบนี้
+
+### 1. งานแรกของ K ตาม `NOW.md` (ทำก่อนพับปกติ)
+| งาน | คำสั่ง | รอบนี้ทำอะไร |
+|---|---|---|
+| คืนขีด ASCII `GT-184`/`GT-186` | `COO-DECISION 20260908_1742_...ascii-hyphen-back...` | แทน U+2011 (‑) ทั้ง 15 จุดในข้อความประวัติที่ขีดฆ่าของทั้งสองใบด้วยขีดกลาง ASCII ปกติ (-) ใน `GAME_TEST_QUEUE.md` · ตรวจด้วยชุดคำสั่งใหม่ของ COO ครบ: `grep -n "BLOCKED-ON-RE-266" GAME_TEST_QUEUE.md \| grep -v "~~"` = ไม่มีบรรทัด (ผ่าน) · `grep -c "NEEDS-NEW-BODY: LANE-UI" GAME_TEST_QUEUE.md` = 2 (ผ่าน) |
+| ขั้น >4 skill rows ใน `GT-307` | `COO-DECISION 20260908_1742_...gt307-grows-a-step...` | เติมขั้น 6-9 ท้ายบล็อก `ATTENDED:` ใน `tickets/GT-307.md` คำต่อคำจากจดหมาย COO (บูตตัวละครแถวสกิล >4 · รายงาน (ก)/(ข) · โทเคนปฏิเสธเพดาน · ต้องอยู่บูตเดียวกับใบ `1455`) · หัวคิวใน `GAME_TEST_QUEUE.md` แก้ชี้ตามด้วย |
+
+### 2. พับผล (queue rule ①)
+`RE-155` — พับ **ANSWERED** จากบรรทัด `RESULT:` ท้าย `notes_to_chief/20260908_1315_KA1A-R324A-RESULTS-*.md` ("both halves in one boot: NPC yellow and mob orange/red") ที่ตกหล่นจากรอบก่อน (`GT-288` ชุด 3 ของจดหมายเดียวกันถูกพับไปแล้ว แต่ `RE-155` เองยังไม่ถูกแตะ) — วางใน `CLIENT_RE_QUEUE.md`
+
+### 3. ตั้งเลข (queue rule ②) — สี่ใบ gt-body ค้างไม่มีเลขมาถึง 3 วัน (ไม่มี `.CONSUMED.txt` เลยแม้แต่ฉบับเดียวก่อนหน้านี้)
+| เลข | ชื่อใบ | เจ้าของ | สถานะที่วาง |
+|---|---|---|---|
+| `GT-317` | BASIC-FACTION-EVERY-LOGIN-SCENE-SEA-126-001 | LANE-A | 🟡 ตกรถ: ไม่มี HEADLESS_PROOF (บน main) — K วัดเอง: กลไกขึ้น `origin/main` `23f712f` แล้วจริง แต่จดหมายเก่ากว่ากฎ headless-proof |
+| `GT-318` | UI-PARTY-INVITE-BUTTON-FIRST-SERVER-ANSWER-001 | LANE-UI | 🟡 ตกรถ: ไม่มี HEADLESS_PROOF (บน main) — K วัดเอง: ไฟล์กลไกขึ้น main แล้ว โทเคนวัดบนกิ่งเก่า |
+| `GT-319` | CENSUS-CHARACTERS-CLASS-ID-WEAPON-READ-ONLY-001 | LANE-DB | 🟡 ตกรถ: ไม่มี HEADLESS_PROOF (บน main) — โมดูลขึ้น main แล้ว ต้องวัดบนฐานเจ้าของจริง (เครื่อง Panya เท่านั้น) |
+| `GT-320` | GM-WARP-NAME-REFUSAL-PRINTS-THE-SCENES-IT-FOUND-001 | LANE-GM | 🟡 BLOCKED-ON-BUILD — K grep เอง = 0 hit บน main จริง โค้ดยังไม่ลง |
+
+ประกาศเลขในจดหมาย `notes_to_chief/20260908_1929_LANE-K-NUMBERED-GT-317-GT-318-GT-319-GT-320.md`
+
+### 4. archive/ย้ายเนื้อใบยาว (queue rule ③)
+`GT-178` (26,573 B ในไฟล์คิว) ย้ายไป `tickets/GT-178.md` คำต่อคำ ไม่มีการลบ — เหตุ: `GAME_TEST_QUEUE.md` ใกล้เพดาน Contents-API 1,000,000 B (996,602 B ก่อนย้าย ตามที่รอบก่อนธงไว้ว่า "ควร archive รอบหน้าเป็นงานแรก") หลังย้าย = **970,446 B**
+
+### 5. เก็บกวาดจดหมายค้างรอบนี้: 30 ฉบับ
+- พับผล RE/GT ที่ยืนยันแล้วว่าเนื้อหาอยู่ในคิว/tickets ครบแต่ไม่มี `.CONSUMED.txt` มาก่อน (ผลค้างพับที่แท้จริงคือแค่ 1 ฉบับ — `RE-155` ข้างบน): **26 ฉบับ RESULTS** (R303-R321 รายตัว + R322A/B/C + R323C/D + R324A) — ทุกฉบับตรวจแล้วว่าเนื้อหาถูกพับเข้าคิว/tickets/archive ไปแล้วโดยรอบก่อนหน้า (citation ตรงกับชื่อไฟล์/เวลา) เหลือแต่ไม่มีสตับ ⇒ วางสตับให้ครบ
+- COO-DECISION ที่ทำตามแล้วรอบนี้: 2 ฉบับ (ASCII hyphen · GT-307 >4 rows)
+- gt-body ตั้งเลขใหม่: 4 ฉบับ (GT-317-320)
+- gt-body superseded: 1 ฉบับ (GT-276 corrected-boot — ใบปิดไปแล้วด้วย PASS R323C ก่อนจดหมายนี้ถูกใช้จริงอยู่แล้ว)
+
+### 6. ยังพับไม่ได้/ยังไม่ทำรอบนี้ (งานสำรองรอบหน้า)
+🔴 กล่องจดหมายยังมีค้างจำนวนมาก (`TO-K-gt-body-*`/`RE-TICKET*` เก่าตั้งแต่ 4-7 ก.ย. ที่ citation-check บอกว่าเนื้อหาอยู่ในคิวแล้ว แต่ K ยังไม่ได้ตรวจทีละฉบับให้ครบทุกฉบับรอบนี้ — เวลารอบไม่พอ) — รอบหน้าเดินหน้าต่อจากรายการที่เหลือด้วยวิธีเดียวกัน (citation-check ก่อนวางสตับ)
+🔴 `GT-317`/`GT-318`/`GT-319`/`GT-320` รอโทเคน `HEADLESS_PROOF:` บน main จากเจ้าของใบก่อนขึ้นรถบัส — K ไม่วัดแทน
+
+🟢 **รถบัสวันนี้ไม่เปลี่ยน = 4 ใบ attended** (`GT-258` · `GT-304` · `GT-308` · `GT-313`) **+ 1 ใบ static** (`RE-273`) — ไม่มีใบเข้า/ออกรอบนี้ (สี่ใบใหม่ทั้งหมด HELD/ตกรถ)
+🔴 **ยังตกรถ (หมวด ง.)**: `GT-307` (มีขั้นใหม่แล้ว ยังรอ HEADLESS_PROOF บน main) · `GT-309` · `GT-301` · `GT-315` · `GT-317`/`GT-318`/`GT-319`/`GT-320` (ใหม่)
+🔵 **ขนาดไฟล์หลังรอบ**: `GAME_TEST_QUEUE.md` **970,446 B** (ลดจาก 996,602 B หลังย้าย `GT-178`) · `CLIENT_RE_QUEUE.md` **270,031 B** (เพดาน 409,600 B)
