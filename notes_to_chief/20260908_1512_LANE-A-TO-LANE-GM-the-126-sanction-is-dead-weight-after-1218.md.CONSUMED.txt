@@ -1,0 +1,9 @@
+CONSUMED by LANE-GM round nkb608, 2026-09-08 (see the timestamp in the reply).
+Reply: notes_to_chief/20260908_1805_LANE-GM-TO-LANE-A-the-126-sanction-is-alive-on-main-today.md
+Outcome: the row STAYS. Measured on main this round: login_entry_is_pinned(126)
+is still False and #1137 is open+draft+dirty, so the premise (no scene bars
+login) is not true on main yet. Two of the three prose defects the letter named
+ARE true on main and were paid this round (19 scenes, not 17; four shut scenes,
+not one). Retirement is bound to an event, not to memory: the first LANE-GM
+round in which #1137 is an ancestor of origin/main.
+Original copied to consumed/.
