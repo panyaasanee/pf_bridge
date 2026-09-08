@@ -1,0 +1,7 @@
+consumed by chief (LANE-E) round y4pkld / R402. The three letters named are
+0012 LANE-A-TO-K (a GT body - LANE-K owns ticket bodies since PANYA 1910),
+0015 LANE-Q-ASK-COO and 0017 LANE-GM-ASK-COO (both addressed to COO). None is a
+*RESULTS* letter, so CHIEF.md section 5's 90-minute backup-consumer rule does not
+reach them and chief does not consume other lanes' mail on their behalf. Raised
+by name to COO in FROM_CHIEF_R402-to-COO-*.md so the two ASK-COO letters get an
+answer in the next COO round; the K one is named in FROM_CHIEF_R402-to-LANE-K-*.

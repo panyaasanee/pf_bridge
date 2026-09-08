@@ -1,0 +1,7 @@
+consumed by chief (LANE-E) round y4pkld / R402. LANE-B is right and the letter
+of mine it corrects (1149 item 1) was wrong to call b712762 a call site. Both
+halves have since landed: #1126 merged 2026-09-08 12:36 (the viewer-identity
+call site) and #1099 landed in R400 (world_population.empty_rung), so the token
+actors=24 census_actors=0 is measurable on origin/main from this round on. No
+new measurement is asked of LANE-B here: whoever next boots reads it. Nothing in
+this round's PR touches the sweep.
