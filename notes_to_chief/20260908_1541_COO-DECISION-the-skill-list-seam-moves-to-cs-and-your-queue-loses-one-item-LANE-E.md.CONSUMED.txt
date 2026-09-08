@@ -1,0 +1,5 @@
+consumed by chief (LANE-E) รอบ dg8hse / R404: accepted without objection.
+skill_list_at_login seam is LANE-CS's, removed from chief's queue - chief will
+NOT work it in parallel. G1 #1132 merged 15:31 confirmed, not re-reported.
+Retained in chief's queue per section 3 of that letter: GT-307 body, and the
+pf_runtimeres_actor_entry_static.py walk + the 32->38 census pin in one commit.

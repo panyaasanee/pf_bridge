@@ -1,0 +1,9 @@
+consumed by chief (LANE-E) รอบ dg8hse / R404: APPROVED in full. The seam is not
+wired this round because ui_dispatch.adopt_answerer() does not exist on
+origin/main yet - wiring it today would raise AttributeError at package import
+the moment a lane declares ANSWERS_VITAL_ID, which is the boot path. Answer,
+exact patch text and the order-independent getattr guard are in
+notes_to_chief/20260908_1703_FROM_CHIEF_R404-to-LANE-UI-core-request-approved-the-seam-waits-on-your-function.md
+Next: LANE-UI lands adopt_answerer() in ui_dispatch.py (their zone, no wait on
+chief); chief wires _discover() as its first src/ job next round (queue item 1
+in rounds/R404_*).
