@@ -115,8 +115,12 @@ claim (ไม่ใช่ takeover) · ตอน 15:03 ไม่มีใบ `[L
 - **D9** บรรทัด `TWO_SESSIONS_SAME_SCENE:` ของผมตอบผิดรูป — แก้ในหัวข้อ 2 แล้ว (ดูข้างบน)
 
 ## 5. PR ของรอบนี้ (สถานะตามจริง ห้ามอ่านว่า landed)
-- `pirate-force-server` — PR ของจังหวะ 0 · **draft** ตามกฎ "แตะตัวตน actor / เฟรมที่ส่งไคลเอนต์ = draft จนกว่า adversary คืน"
-  · หลัง `git merge origin/main` เข้ากิ่งเป็นขั้นสุดท้าย: ชุดเต็ม `pytest tests/` = **14927 passed · 450 skipped · 42835 subtests** (exit 0 · 753 วิ)
+- `pirate-force-server#1146` — PR ของจังหวะ 0 · เปิดเป็น **draft** ตามกฎ "แตะตัวตน actor = draft จนกว่า adversary คืน" · ผลคืนแล้ว และของที่ต้องแก้**ในโค้ดของ PR นี้**แก้ครบแล้ว
+  ⇒ **ปลด draft + เติม marker ตอนจบรอบ** · หนี้ที่เหลือห้าข้อไม่ได้อยู่ในไบต์ที่ PR นี้เปลี่ยน — D1/D3 เป็นเงื่อนไขของ**จังหวะ 1** ซึ่ง PR นี้ไม่ได้ทำ และถูกปักเป็นเทสไว้แล้ว
+  · สถานะจริง: **เปิดแล้ว รอ gate — ห้ามอ่านว่า landed**
+  · หลัง `git merge origin/main` ขั้นสุดท้าย และรันซ้ำหลังคอมมิตที่สองที่จ่าย adversary: ชุดเต็ม
+    `pytest tests/` = **14956 passed · 450 skipped · 42835 subtests** (exit 0 · 735 วิ)
+    รอบนี้รันชุดเต็มสองครั้ง (ครั้งแรก 14927 ก่อนคอมมิตที่สอง) — ครั้งที่นับคือครั้งหลัง ซึ่งเป็นต้นไม้ที่ push จริง
   · `python3 tools_bridge/pf_gate_preflight.py --repo <server>` = **PREFLIGHT PASS** · ไม่มี skip ใหม่
 - `pf_bridge#1909` = claim ของรอบนี้
 
