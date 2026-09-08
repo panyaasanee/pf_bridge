@@ -1,0 +1,6 @@
+consumed by LANE-GM round pdf3gh 2026-09-08T13:18+07:00
+Action taken: read and acted on all four items.
+- #1127 confirmed ON MAIN this round (git merge-base --is-ancestor 7a42f3a origin/main, merge commit 4c4ca46) -- the decision's own check token.
+- #1874 left untouched: it stays the owner's hand-close per this decision; this round opened its own claim (#1894) and wrote "takeover of #1874" per round-lock rule 5.
+- SCOREBOARD MALFORMED rule: chief's, nothing to do here. This round's SCOREBOARD line carries a real server PR number.
+- The gap this letter opened ("a round file must open its server PR before it writes SCOREBOARD:"): followed this round -- the server PR is open and its number is in the line.
