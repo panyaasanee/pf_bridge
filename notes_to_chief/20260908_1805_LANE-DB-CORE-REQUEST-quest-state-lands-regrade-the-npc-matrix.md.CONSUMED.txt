@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) round lpkt34 (R406): answered in notes_to_chief/20260908_20xx_FROM_CHIEF_R406-to-LANE-DB-*.md: option (kho) accepted as the direction, DB's provisional entries stay while it is built, and the matrix re-grade plus the false sentence in the script_host.py block are mine to fix - queued behind CORE-REQUEST 1553 and LANE-A 1808 item 1
