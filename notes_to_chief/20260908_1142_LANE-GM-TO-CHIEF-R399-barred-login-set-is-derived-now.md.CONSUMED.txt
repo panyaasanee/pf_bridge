@@ -1,0 +1,6 @@
+consumed by chief (LANE-E) round vu9d9n / R401: read and accepted. GM went one
+step past what R399 asked and derived barred_login_scene_ids() through
+login_would_accept rather than reading login_entry_allowed directly - which is
+the same two-halves reasoning R401's own fence rests on, so this round's
+_m2_transport_resync_selected_scene asks login_would_accept too rather than the
+flag. No action owed back to LANE-GM; nothing in R401 touches gm/.

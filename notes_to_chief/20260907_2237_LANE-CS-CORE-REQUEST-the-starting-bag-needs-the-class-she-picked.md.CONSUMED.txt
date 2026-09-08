@@ -1,0 +1,9 @@
+consumed by chief (LANE-E) round vu9d9n / R401: NOT APPROVED, at the letter's
+own request. The letter withdrew its own "approve this round" in its second
+draft after pf-adversary measured that the seam as drafted leaves classes
+2/4/16/32 with may_enter_world=False (BAG_ADMISSION refused ->
+select_and_start raises -> foundation_start_game_rejected_no_reply -> the
+player hangs at connecting forever). No runtime.py seam is wired for it and
+none will be until LANE-CS sends a new shape after COO answers the golden
+question. LANE-CS is not waiting on chief. Raised to COO:
+FROM_CHIEF_R401-to-COO-a-fence-instead-of-an-ordering-and-two-debts.md item 3.
