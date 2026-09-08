@@ -1,0 +1,157 @@
+# R401 · vu9d9n · 2026-09-08 12:22 → 12:37+07:00 +07:00 · [LANE-E]
+
+ล็อกรอบ: `pf_bridge#1890` (`[LANE-E] round vu9d9n: claim`) · ไม่มีใบ `[LANE-E]` เปิดค้างตอน 12:22 (list ทั้ง 21 ใบ open ของ pf_bridge)
+เวลาเทียบสะพาน: `_BRIDGE_HEARTBEAT.txt` บรรทัดล่าสุด 12:08:03 +07 · นาฬิกาผมอ่าน 12:22 ⇒ **ห่าง 14 นาที** ปกติ ไม่ต้องตรวจหลักฐานอิสระ
+`VITAL_REGISTRY_FROM_CLIENT_BINARY_20260817.tsv` มีจริง (11,388 ไบต์) · ไม่มี `LOCK_*.txt` โผล่ใน `git status` ทั้งสองรีโป
+
+## รอบนี้ขยับ NOW ข้อไหน
+**บันไดไมล์สโตน · ประตู M (`1825`/`1218`) โทเคน (ข)** = "chief G1 PR ย้ายจริง + เขียนถาวร บน main"
+และบรรทัด **chief (1 งาน/รอบ)** ของ NOW: `PR แทน #1099 (R400 ✅) → G1 PR → adversary → undraft+marker`
+ทำ G1 ครบในรอบนี้ · **ยังไม่ถึง main** — ใบเปิดแล้วเป็น draft ตามกติกา (ดูหัวข้อ "สถานะ PR ตามจริง")
+
+## จดหมายที่บริโภครอบนี้
+- `20260908_1218_PANYA-DECISION-...-ALL-LANES.md` หัวข้อ 2 (ADDRESSEE: chief) = โจทย์ทั้งรอบ · ใบ ALL-LANES **ไม่วาง `.CONSUMED.txt` ร่วม** ตาม NOW `0442` ⇒ อ้างเลข `1218` ที่นี่แทน
+- `20260908_1142_LANE-GM-TO-CHIEF-R399-barred-login-set-is-derived-now.md` (ADDRESSEE: chief) — บริโภค + stub ในคอมมิตเดียวกัน
+- `20260908_1214_SYNC-ALARM-4-letters-nobody-took-and-nobody-answered.md` (ไม่มีเจ้าของชัด ⇒ ของ chief) — บริโภค + stub
+
+## สิ่งที่ทำ — G1 หนึ่งชิ้น หนึ่งใบ (2 ไฟล์ ไม่นับไฟล์รอบ/จดหมาย)
+`runtime.py` ปลายทางของ echo OK (สาขาที่ตอบด้วย `encode_transport`) เรียกเมธอดใหม่
+`_m2_transport_resync_selected_scene(order.pending)`:
+1. อ่าน `world_m2_teleport_check.transport_relocation(pending)` (โมดูลของ LANE-A — ไฟล์นี้ไม่ derive อะไรเอง)
+2. คืนก่อนพร้อม event ที่มีชื่อ ถ้าไม่มี position หรือฉากปลายทาง = ฉากปัจจุบัน
+3. 🔴 **ปฏิเสธการ relabel เว้นแต่ `gm.warp_scene_persist.login_would_accept(scene_id)` = True**
+4. ถ้าผ่าน: เขียน `selected.position.scene_id` (ฉากอย่างเดียว) · `scene_label_is_server_guess = True` · แล้วรัน **บล็อก KA1A-ROOTCAUSE ครบ**
+
+`_checkpoint_exact_target` **ไม่ถูกแตะเลย** — แถวถาวรถูกเขียนที่ `TargetPos` แรกตามปกติของการเดิน ผ่านเกต
+`is_position_persist_allowed` ที่อยู่ใน `lifecycle.checkpoint` อยู่แล้ว · **ไม่มีแฟล็ก ไม่มีกิ่ง VISIT ไม่มีการกันเขียนถาวร** ตาม `1218` ข้อ 2
+
+## รั้ว: ทำไมใบนี้ลงก่อนหรือหลัง PR ของ LANE-A ก็ได้ (เบี่ยงจากลำดับที่ COO เขียน และนี่คือเหตุผล)
+COO เขียนไว้ในใบ `1218` (ถึง A) ว่า "ถ้า chief G1 ลงก่อนคุณ = ช่อง brick เปิดชั่วคราว ดังนั้นคุณต้องไปก่อน"
+**ผมไม่ได้ขอให้สลับลำดับ — ผมเอาช่องนั้นออกจากโค้ด**: เมธอดนี้ relabel เฉพาะฉากที่ล็อกอินรับกลับได้
+⇒ วันนี้ (วัดเอง: `login_entry_allowed` ของ 17/126/304/305 ยังเป็น `false` บน origin/main) มันปฏิเสธพอดีสามฉากที่จะ brick
+⇒ วันที่ PR ของ A ลง มันย้ายทั้งสามฉากทันที โดยผมไม่ต้องแก้อะไรอีก
+รั้วนี้ **ไม่ใช่แฟล็กใหม่** — เป็น `login_would_accept` ตัวเดียวกับที่ `gm/warp_scene_persist.persist_warp_scene` ถามอยู่แล้ว
+ที่ seam คู่ขนาน และเป็นกลไกที่ `1218` ข้อ 1 สั่ง **ให้คงไว้** เป็นรั้วของฉากไร้ spawn ในอนาคต
+
+**และรั้วเดียวกันนี้จ่ายความเสียหายของ G2 ในบรรทัดเดียวกัน**: `login_would_accept` fail-closed ให้ปลายทางที่
+ไม่ได้ pin / นอกช่วง wire / ไม่ใช่ int / ไม่มี spawn ⇒ `PendingCheck` ที่ถือปลายทางที่ไม่มีใคร resolve
+ไม่สามารถส่งเลขฉากมั่วเข้า `Position` ได้อีก (R399 วัดได้ว่ามันทำได้ และตัวนอกช่วงไป raise
+ออกจาก `is_position_persist_allowed` ที่เฟรมเดินถัดไป)
+
+## หลักฐานสองชั้น — แยกกัน ไม่อ้างข้ามชั้น
+- **ชั้น server state**: ปลายทางถูกปิด ⇒ ป้ายไม่ขยับ `scene_label_is_server_guess` ยัง False และการปฏิเสธ **มีชื่อ**
+  (`lane_a_m2_transport_resync_refused_login_barred_<scene>`) · ปลายทางเปิด ⇒ ป้ายขยับ ธง guess ติด
+  และ `lane_a_m2_transport_census_latch_cleared_<scene>` ยิง
+- **ชั้น wire/DB**: บน registry ที่เปิด ล็อกอิน — เดินทาง + หนึ่งก้าว ⇒ `character_positions` ชี้ฉากปลายทาง ·
+  บน registry อะไรก็ตามที่รันจริง — แถวที่เก็บได้ต้องเป็นฉากที่ `login_would_accept` รับ และ `StartGame` ยังตอบ
+  (ข้ออ้างที่ relabel แบบไร้รั้วทำพัง)
+
+## เทส + มิวแทนต์
+`tests/test_m2_teleport_check_seam_wiring.py` — คลาส `SelectedSceneIsNotRelabelledTests` เดิมถูกเขียนใหม่เป็น
+`SelectedSceneIsRelabelledOnlyWhenTheLoginCanTakeItBackTests` · **50 passed**
+ครึ่ง "registry เปิด" พิสูจน์ด้วย registry ที่ดัดแทนการรอ PR ของ A (เทสที่รันได้ก็ต่อเมื่อใบคนอื่น merge = พิสูจน์ตามตารางของคนอื่น)
+มิวแทนต์ที่ฆ่าได้รอบนี้ (วัดจริง ไม่ใช่คาด):
+| มิวแทนต์ | ผล |
+|---|---|
+| ถอดรั้ว `login_would_accept` | 3 failed |
+| ถอดบล็อก KA1A-ROOTCAUSE ทั้งก้อน | 1 failed |
+| relabel x/y/z ด้วย | 1 failed |
+| ตั้ง `scene_label_is_server_guess` ก่อน relabel | 1 failed |
+| ไม่บวก `mob_combat_announced_membership_generation` | 1 failed |
+
+🔴 **ความผิดของผมเองที่จับได้ในรอบ ไม่ใช่รอบหน้า**: ฉบับแรกของเทส census latch **วัดอะไรไม่ได้เลย** —
+บนเซสชันใหม่ฟิลด์พวกนั้น falsy อยู่แล้ว ถอดบล็อกทั้งก้อนออกก็ยังเขียว 50/50 · แก้ด้วยการ latch เซสชันก่อน
+(ตั้ง `world_census_sent=True` ฯลฯ) แล้วมิวแทนต์ถึงตาย — รูปเดียวกับที่ R399 เขียนไว้เองว่าเคยพลาด
+
+## adversary — สั่งต้นรอบ ผลคืนในรอบ · **NOT clean · CRITICAL 3 ข้อ**
+สั่งครั้งเดียว (เพดาน 2 ครั้ง/รอบ) พร้อมโจทย์ให้หักล้างสี่ข้ออ้างโดยตรง
+ลูกมือทำงานใน `git worktree` แยก ยืนยันคืนที่เช็คเอาต์สะอาด และ**บอกเองว่าไฟล์เทสเปลี่ยนใต้มือสามครั้ง**
+มันรันชุดเต็มเองด้วย: `14458 passed, 649 skipped` **ไม่มีอะไรแดง** — ข้อบกพร่องทั้งหมดข้างล่างจึงเป็นของที่ชุดเทสมองไม่เห็น
+มิวแทนต์ของมันเอง 13 ตัว: ตาย 10 **รอด 3** (`M4` same-scene · `M10` จำกัดการ relabel ไว้แค่สามฉากทะเล · `M11` การ์ด position None)
+
+### จ่ายในรอบนี้ (ทั้งหมดอยู่ในใบเดียวกัน ไม่ผลักไปรอบหน้า)
+| ข้อ | เรื่อง | สิ่งที่ทำ |
+|---|---|---|
+| **D1 CRITICAL** | รั้วอ่านทะเบียนคนละก้อนกับ login ⇒ ปิดช่อง brick ได้แค่ "ลำดับ merge" ไม่ใช่ "ลำดับ deploy" · วัดจริง: บูตตอนธงปิด → deploy JSON ไม่รีสตาร์ต → snapshot ถูกอ่านครั้งแรก**หลัง**แก้ ตอบ True → เขียนแถว → login ที่ค้างตั้งแต่บูตปฏิเสธ ⇒ `StartGame` ตอบ `[]` | **ติดตั้ง `CORE-REQUEST-GM-056`** (`use_boot_scene_registry(scene_entry_registry)` ที่ boot factory) — ใบนั้นถูกอนุมัติตั้งแต่ 5 ก.ย. และค้างเพราะ `runtime.py` ไม่มี `from .gm import warp_scene_persist` ซึ่ง**รอบนี้เพิ่มไปแล้ว** ⇒ เหลือบรรทัดเดียว · ทั้งสองฝั่งอ่านออบเจกต์เดียวกัน ช่องไม่มีที่อยู่ |
+| **D4 MAJOR** | รั้วถามแค่คำถามล็อกอิน ไม่ถามคำถามเขียน · marker 14 → ฉาก 14 = `login=True persist=False` ⇒ ป้ายขยับแต่ `lifecycle.checkpoint` เงียบ ๆ ไม่เขียน ⇒ **ป้ายในหน่วยความจำแยกจากแถวถาวรถาวร** และ event เขียวทับฟีเจอร์ที่ไม่ได้เกิด | เพิ่ม **รั้วที่ 2**: `is_position_persist_allowed(scene_id, scene_entry_registry)` · `1218` ข้อ 2 ขอ **แถวถาวร**ให้ตรง ฉากที่เขียนแถวไม่ได้จึงให้ผลลบล้วน · 🔴 รูนี้จะเปิดกับ 17/126/304/305 ทันทีถ้า A พลิกคอลัมน์เดียว |
+| **D5 MAJOR** | "Never raises" เป็นเท็จ — มีแค่ `transport_relocation` อยู่ใน `try` · จุดเรียกอยู่ระหว่าง `answered.add` กับ `return` ⇒ ระเบิดที่นี่ฆ่าเธรดผู้ฟัง **และ**ฆ่าการเดินทางถาวร (order ถูก pop แล้ว retry ถูกปฏิเสธ) | ย้าย**ทั้งบอดี้**เข้า `try` (`_m2_transport_resync_inner`) + event `..._refused_raised` + เทสที่ทำให้ `login_would_accept` raise จริง |
+| **D6 MAJOR** | คอนโซลเงียบทั้งสองสาขา ⇒ คนเทสอ่านบรรทัด `TRANSPORT ... scene=126` เหมือนกันเป๊ะไม่ว่า relabel หรือปฏิเสธ · `transport_resync_console_line` ของ LANE-A มีอยู่แล้วและไม่มีใครเรียก | เรียกมันจริงทั้งสองสาขา + ต่อท้าย `applied=0/1` (คำว่า "ปฏิเสธ" เป็นข้อเท็จจริงของไฟล์นี้ ไม่ใช่ของโมดูล A) · แก้เทส `ConsoleLinesTests` ให้เป็นสามบรรทัด |
+| **D8 MINOR** | คอมเมนต์ "Four paths ... put the session in a new scene" ค้างในคอมมิตที่เพิ่มประตูที่ห้า | แก้เป็น FIVE + ชื่อประตูใหม่ |
+| **D9 MINOR** (มิวแทนต์รอดสามตัว) | `M4`/`M10`/`M11` ไม่มีเทสจับ · **`M10` คือตัวสำคัญ**: ไม่มีเทสไหนขับ seam นี้ด้วย marker อื่นนอกจาก 17/343/345 | เพิ่มเทสห้าตัว: marker 2 (relabel จริงบนทะเบียนที่ส่งจริง ไม่ดัด) · marker 14 (รั้วที่ 2) · same-scene marker 1 · raise · position None (เรียกเมธอดตรง ๆ และ**บอกข้อจำกัดนั้นไว้ในเทส**) |
+
+### 🔴 D2 CRITICAL — ข้ออ้างของผมเองในคอมมิตแรก **ผิด** และผมแก้ข้อความ ไม่ใช่แก้ตัว
+ผมเขียนว่า "วันนี้มันปฏิเสธพอดีสามฉากที่จะ brick" · ลูกมือวัดว่า `marker_destination` ปัก 15 marker และ
+`login_would_accept` ตอบ True ให้ฉาก 1-11 กับ 14 ⇒ **การ relabel ทำงานอยู่จริงกับ marker ธรรมดา 12 ตัวตั้งแต่วันนี้**
+และหลับเฉพาะสามแถวทะเล — **กลับด้านกับที่คอมมิตผมเขียน** · พฤติกรรมนั้นถูกต้องในตัวมันเอง (ฉากธรรมดาก็ควรถูก relabel)
+แต่ **ไม่มีเทสแตะเลย** จนมิวแทนต์ `M10` รอด ⇒ รอบนี้เพิ่มเทส marker 2 และแก้ทั้ง PR body และ docstring ให้ตรงกับที่วัดได้
+
+### 🔴 ไม่จ่ายในรอบนี้ และนี่คือเหตุผลที่ใบยัง draft
+**D3 CRITICAL — `scene_label_is_server_guess` ล็อกค้าง True ตลอดเซสชัน** · ในไฟล์นี้มีที่ล้างธงสองแห่ง:
+ตอน login และ**ในสาขา `gm_warp_confirm_window_open` เท่านั้น** — การเดินทาง M2 ไม่เปิดหน้าต่างนั้น
+⇒ หลังเดินทางหนึ่งครั้ง `client_confirmed_scene` **ค้าง None ตลอดเซสชัน** (วัดพร้อม control: เซสชันที่ไม่เดินทาง = 1)
+กระทบ `CLIENT_CONFIRMED_SCENE_FIELD` ของ LANE-GM และ **m2 survey trial ของ LANE-A เอง** (`runtime.py:13134`)
+ซึ่งถูกติดอาวุธด้วยธง guess แล้วถูกธงเดียวกันกันไม่ให้ re-arm
+🔴 **นี่ต้องมีกลไก confirm ของ M2 เอง** (ไคลเอนต์รายงานจากปลายทาง = ล้างธง) ซึ่งเป็นของใหม่ ไม่ใช่การแก้บรรทัด
+ผม**ไม่แตะในรอบนี้โดยเจตนา** — ออกแบบผิดตอนเหลือเวลา 30 นาทีคือวิธีที่ R399 พังมาแล้ว
+⇒ **ใบ `#1132` ยัง draft ไม่มี marker · D3 คือเงื่อนไขปลด draft ไม่ใช่ adversary ที่คืนแล้ว**
+
+**D7 MODERATE — ไม่เรียก `_mob_loot_cross_scene_boundary`**: ลูกมือชี้ถูกว่าเหตุผลที่ผมลอกมาจาก Columbus
+ทิ้งข้อที่รับน้ำหนักจริง ("ฉาก 17 ไม่มีแถว ground โดยคำสั่ง") และฉากปลายทาง M2 ทุกฉากมี folder ของตัวเอง
+⇒ บรรทัดฐานไม่ถ่ายทอด · ตัวการรั่วเองลูกมือติดป้าย `[PROPOSED]` วัดได้แค่ว่าไม่มีการเรียก
+⇒ ของ LANE-B ตามลำดับเจ้าของ ผมส่งจดหมาย ไม่ตัดสินแทน
+
+### มิวแทนต์หลังจ่าย (วัดใหม่ทั้งชุด)
+`M4` same-scene = **1 failed** · `M10` จำกัดสามฉาก = **2 failed** · `M11` position None = **ตายแล้ว**
+`M14` ถอนรั้วที่ 2 = **1 failed** · `M15` หด `try` กลับ = **8 failed** · `M16` ถอนบรรทัดคอนโซลสาขาปฏิเสธ = **1 failed**
+
+## สถานะ PR ตามจริง
+- `pirate-force-server#1132` — **เปิดแล้ว draft ไม่มี marker** head `a12eafc` · **เหตุผลของ draft เปลี่ยนระหว่างรอบ**:
+  ตอนเปิดคือ "รอ adversary" (COMMON ข้อ 2) · ตอนนี้คือ **D3 ยังไม่จ่าย** — adversary คืนแล้วและ NOT clean · **ไม่ได้อยู่บน main** และจะพูดได้ว่าอยู่ต่อเมื่อรอบถัดไปยืนยันด้วย `git merge-base --is-ancestor`
+- `pf_bridge#1890` — ใบ claim ของรอบนี้ เติม marker ตอนจบรอบ = ปลดล็อก
+- เกต: `pf_gate_preflight.py --repo <server>` = **PREFLIGHT PASS** (cp874 · ไม่มี skip ใหม่ · main อยู่ในกิ่ง · census ตรง)
+  🔴 รอบแรกมันแดงที่ `[skips]` เพราะผมใส่ `self.skipTest` — NOW `2050` ห้าม skip/xfail/allowlist ทั้งสาม
+  แก้ด้วยการ **ดัดแถวให้ปิด** แทนการ skip (fixture เดียวกันอ่านกลับด้าน) ⇒ สาขาปฏิเสธยังถูกเทสหลัง A ปลดธงด้วย
+- ชุดเต็ม `pytest tests/` บนต้นไม้ที่ `git merge origin/main` แล้ว (main `a92086c` เป็น ancestor ของ HEAD): ผลอยู่ท้ายไฟล์นี้
+
+## QUEUE_TRIAGE:
+เลขใบ · เนื้อหัวใบ · การพับผล = **LANE-K** ตั้งแต่ NOW `1910` ⇒ รอบนี้ chief **ไม่แก้ `GAME_TEST_QUEUE.md` เอง** โดยเจตนา
+สิ่งที่ต้องเปลี่ยนคือ **หัวใบ `GT-309`** (เงื่อนไขปลด: โทเคน (ก)(ข)(ค)) — โทเคน (ข) เกิดแล้วในรูป PR draft ยังไม่ถึง main
+⇒ ส่งจดหมาย `*-to-LANE-K-*` ให้ K ขยับหัวใบ พร้อมประโยคที่ K วัดซ้ำเองได้ (`merge-base --is-ancestor`)
+ไม่มีใบใหม่ที่ควรเปิดจากงานรอบนี้: G1 ไม่มีอะไรให้คนหน้าจอตัดสินจนกว่าโทเคน (ก) และ (ค) จะครบ — `GT-309` ครอบอยู่แล้ว
+**READY/PENDING ที่ไม่อยู่ใน NOW รอเครื่องคุณ:** ไม่มีใบใหม่ที่ chief เปิดรอบนี้ · รายการรถบัสจริง = `QUEUE_STATUS_SNAPSHOT.md` ของ K
+(`GT-288` ชุด 3 · `GT-304` · `GT-299`/`GT-307` · `GT-309` HELD) — ตรงกับ NOW "รอเครื่องคุณ" ทั้งสองข้อ ไม่มีใบตกหล่น
+
+## หนี้แม่บ้าน (§9) ที่ผมวัดแล้วแต่ไม่จ่ายในรอบนี้ และบอกตรง ๆ ว่าทำไม
+- `CHIEF_CONTINUATION.md` = **29,949 ไบต์** เพดาน 30,720 · ดัชนีมี **9 บรรทัด** (กติกาให้เก็บ 20) ⇒ **ตัดดัชนีไม่ช่วย** น้ำหนักอยู่ที่ §0
+  บรรทัดของรอบนี้พาไปราว 30,4xx = ยังใต้เพดาน แต่เหลือที่ให้อีกแค่ ~1 รอบ · **นี่คืองานแรกของ chief รอบหน้า** (ใบเล็กแยก แก้ §0 ไม่ใช่ดัชนี)
+- `GAME_TEST_QUEUE.md` = 975 KB (เพดาน 300 KB) — หนี้เก่า เจ้าของ archive = LANE-K ตาม `1910` ไม่ใช่ของผมที่จะไปตัด
+
+## ของที่โผล่มาตอน merge main ท้ายรอบ (ไม่ได้ไปไล่ตรวจงานสายอื่น)
+`#1131` ของ LANE-A ลง main พร้อม `src/pirateforce_foundation/world_m2_login_recovery.py`
+docstring เขียนคำตอบว่า **"A RECOVERY IS A VISIT, NOT A MOVE"** และผู้เล่นกลับมา **ashore**
+🔴 ซึ่งเป็นคำตอบที่ `PANYA 1218` **ยกเลิกไปแล้วด้วยคำตอบตรงข้าม** ("โผล่จุดล่าสุดก่อน logout" · "VISIT `1142` ยกเลิก"
+· ตั๋วขากลับ "ปิด ไม่ต้องออกแบบ") · รอบ `fdo7ex` ของ A เริ่ม 11:52 คำเคาะออก 12:18 ⇒ อธิบายได้ ไม่ใช่การจงใจ
+**ยังไม่ถูกเสียบ** (`grep world_m2_login_recovery runtime.py` = ว่าง) ⇒ ยังไม่มีผู้เล่นเจอ ยังแก้ทัน
+⇒ เปิดใบ "ตรวจก่อน" ตามกติกา §12 ไม่ใช่สั่งแก้: จดหมาย `*-to-LANE-A-login-recovery-answers-the-question-1218-closed.md`
+
+## รอบหน้าทำอะไร (เรียงแล้ว)
+1. 🔴 **D3 (guess flag ล็อกค้าง) เป็นงานแรก** — ออกแบบกลไก confirm ของ M2 (ไคลเอนต์รายงานจากปลายทาง = ล้างธง)
+   แล้ว **undraft `#1132` + marker** = โทเคนประตู M (ข) · adversary รอบนี้คืนแล้ว ไม่ต้องสั่งซ้ำเพื่อของเดิม
+2. `CHIEF_CONTINUATION.md` §0 ลงใต้เพดานอย่างมีที่เหลือ (ใบเล็กแยก)
+3. **ใบ workflow ใบเดียว** (ค้างสามรอบ · COO `0642` ข้อ 1 + `0542` หัวข้อ 6): reportchars `fE` + tee `LANE_DB_SKIP_CENSUS`
+4. จุดเสียบ presence ของ LANE-A (`20260907_2238` revision 2) · จุดเสียบสกิลของ LANE-CS ตามรูปใหม่ (`0623`)
+5. กู้ `#1095` ด้วย cherry-pick (`0728`) → `#1084` D1/D3 → `AGENTS.md` ≤30,720 → `#1076`
+
+## nonclaims
+- **[วัดแล้ว] ฝั่งเซิร์ฟเวอร์เท่านั้น** — ไม่มีใครเห็นไคลเอนต์วาดการมาถึงหลังการแก้นี้ นั่นคือ `GT-309` จังหวะ (ค) ซึ่ง HELD
+- ใบนี้เป็นโทเคน **(ข)** ของประตู M ไม่ใช่ตัวประตู · (ก) และ (ค) เป็นของ LANE-A
+- ไม่เรียก `_mob_loot_cross_scene_boundary` โดยเจตนา ตามบรรทัดฐานที่ docstring ของมันเองวางไว้ให้ทางข้าม Columbus
+- `TRANSPORT_DURABLE_WRITE_ALLOWED` ถูกอ่าน ไม่ถูกพลิก — `1218` ให้ LANE-A เป็นเจ้าของค่าคงที่นั้น
+- **TWO_SESSIONS_SAME_SCENE:** เมธอดนี้แตะเฉพาะสถานะต่อ connection (`foundation.selected` · ฟิลด์ census latch ·
+  generation ของ membership) ไม่เอื้อมถึง registry ของ A · สองเซสชันที่เดินทางไปฉากเดียวกันต่างคน relabel แถวของตัวเอง
+  และต่างคน re-arm census ของตัวเอง ไม่มีอะไรใช้ร่วมกัน และไม่มีบรรทัดไหนเขียนลง world registry ของ A
+
+## ชุดเต็ม (บนต้นไม้ที่ merge origin/main แล้ว)
+FULL_SUITE: `pytest tests/` = **14791 passed - 450 skipped - 42708 subtests passed** in 710.74s (11:50) on `a12eafc`, the tree with `origin/main` (`90ae5d8`) merged in, as the last real commit. No new skips (preflight `[skips]` PASS). Earlier run before the adversary fixes: 14657 passed on `5adeb1a`.
+
+SCOREBOARD: COMING | ผู้เล่นที่เดินทางออกทะเลจะไม่ถูกเซิร์ฟเวอร์จำผิดฉากอีก และวันที่ประตูทะเลเปิด เขาจะล็อกอินกลับมาที่จุดเดิมแทนที่จะโผล่กลางเมือง โดยไม่มีช่วงเวลาไหนที่ตัวละครล็อกอินไม่ได้เลย | pirate-force-server #1132 (draft, ADVERSARY_PENDING) · GT-309 โทเคน (ข) · rounds/R401_vu9d9n_g1_the_journey_names_its_scene_behind_the_login_fence.md

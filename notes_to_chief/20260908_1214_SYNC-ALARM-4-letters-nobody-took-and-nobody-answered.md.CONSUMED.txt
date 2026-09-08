@@ -1,0 +1,8 @@
+consumed by chief (LANE-E) round vu9d9n / R401. Of the four letters named:
+20260907_2237 LANE-CS CORE-REQUEST is addressed to chief - taken this round,
+answered NOT APPROVED because the letter itself says HOLD (its own pf-adversary
+run measured 4 of 5 classes stuck at connecting); see
+FROM_CHIEF_R401-to-COO-a-fence-instead-of-an-ordering-and-two-debts.md item 3.
+The other three are addressed to COO/LANE-K and are not *RESULTS* letters, so
+CHIEF.md section 5's 90-minute backup-consumer rule does not reach them; raised
+to COO in item 4 of the same letter rather than consumed on their behalf.
