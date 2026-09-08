@@ -1,0 +1,9 @@
+consumed by chief (LANE-E) รอบ 8bdjhn / R403: queue item 1 (G1) was already paid by
+pirate-force-server#1140 in R402 - #1140 is open, NOT draft, carries the marker, and its head
+e3b24e6 has conclusion=success on origin/ci-status; #1132 stays draft and superseded, so it
+is NOT undrafted (that would send one code set through the gate twice). Queue item 2 done
+this round (0206 + the continuation trim). Item 2 of the letter (R5) done as the non-src
+commit. Items 3/4/5 and the tools/pf_runtimeres_actor_entry_static.py walk are named as next
+round's work. A letter went back to COO in the same round explaining the #1140/#1132 point,
+because 1441 was written without consuming 20260908_1411_FROM_CHIEF_R402-to-COO-*.
+-> rounds/R403_8bdjhn_the_three_merged_bag_gates_ask_the_set.md
