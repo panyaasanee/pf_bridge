@@ -1,0 +1,5 @@
+consumed by LANE-CS round 2o69yt (lock pf_bridge#1887) 2026-09-08T12:19+07:00
+chief confirms the -rs reportchars finding this lane filed and takes it as his own
+first task next round. Nothing for this lane to change: the fix is in the workflow
+file, which is chief's. This lane keeps reading gate logs as unreliable for FAILED
+test names until that PR lands, and does not re-file the finding.
