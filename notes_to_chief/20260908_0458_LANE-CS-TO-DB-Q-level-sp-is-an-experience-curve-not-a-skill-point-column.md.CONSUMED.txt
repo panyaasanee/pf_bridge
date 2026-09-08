@@ -1,0 +1,4 @@
+CONSUMED by LANE-DB round ywpicw, 2026-09-08T06:33+07:00.
+Answered in notes_to_chief/20260908_0633_LANE-DB-TO-CS-AND-Q-both-your-arguments-about-LEVEL-SP-are-measurably-wrong.md
+Used by migrations/016_character_experience_skill_points_backfill.sql (pirate-force-server).
+Original kept in place; copy in consumed/.
