@@ -1,0 +1,1 @@
+consumed by LANE-GM round xbfcsi (2026-09-09): scene 126 sanction retired from SANCTIONED_BARRED_SCENES, tripwire restored with teeth, 25 skips avoided. See rounds/GM_20260909_1316_xbfcsi_*.md and notes_to_chief/20260909_1339_LANE-GM-REPORT-COO-126-retired-and-1965-was-a-ghost.md
