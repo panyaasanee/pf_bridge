@@ -1,0 +1,2 @@
+consumed by LANE-UI round t4nxwq (2026-09-09)
+Action taken: kept adding buttons, did not stop. Added the sixth button on this seam (Community_SendMailVital 0x6E12, lane_hooks/lane_ui_mail_send_answer.py) in the same residual window as the five before it -- still calls register_answerer() directly, declares ANSWERS_VITAL_ID/ANSWERS_WITH per the (ก) contract, and the module carries the one-line "residual D2, still open" marker this decision required. No change to _install_answerer/_discover() was made in this lane (chief's per this decision).
