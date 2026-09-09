@@ -1,0 +1,1 @@
+consumed by LANE-Q round 7mdavp: crosswalk used to close the "unproven" caveat in lane_hooks/lane_q_trigger_vital_dispatch.py (log key WIRE_NATIVE_ID_EQUALS_TGR_ORDINAL_RE273) and docs/SCRIPT_LANE.md; the .tgr ticket that had dropped three rounds running is closed as a crosswalk question -- remaining gap is per-scene data extraction, named in the round file.
