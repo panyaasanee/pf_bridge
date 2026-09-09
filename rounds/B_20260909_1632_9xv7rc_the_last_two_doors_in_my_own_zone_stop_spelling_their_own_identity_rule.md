@@ -104,7 +104,7 @@ __ADVERSARY_STATUS__
 ## เทส
 - targeted: `tests/test_mob_aggro.py` + `tests/test_mob_combat_bg0015_gates.py` = **84 passed / 58 subtests**
 - ใบใหม่: `tests/test_mob_identity_band_end_to_end.py` = **10 passed**
-- ชุดเต็มบนต้นไม้สุดท้าย (หลัง `git merge origin/main` = Already up to date): __FULLSUITE__
+- ชุดเต็มบนต้นไม้สุดท้าย (หลัง `git merge origin/main` = Already up to date): **15766 passed / 450 skipped / 0 failed / 43470 subtests passed** (1055 s)
 - `python3 tools_bridge/pf_gate_preflight.py --repo ../pirate-force-server` = **PREFLIGHT PASS**
 
 ## nonclaims
@@ -138,4 +138,4 @@ __ADVERSARY_STATUS__
 5. ถ้ายังติดทั้งสอง ⇒ root cause ของ `GT-223` (`mob_death_persistence.py` / `mob_drop_presence.py`)
    ซึ่งรอบ `k1hsp0` ชี้ไว้แล้วว่าเป็นต้นตอจริง และเป็น "หาง P-1" ใน NOW
 
-SCOREBOARD: STUCK | ถอดกำแพงสองบานสุดท้ายในเขตตัวเองที่จะทิ้งมอนทั้งฉากเงียบ ๆ วันที่เลขประจำตัวมอนพลิกเป็นค่าลบ — ผู้เล่นยังไม่เห็นอะไรต่างวันนี้ เพราะตัวจ่ายยังไม่พลิก และประตูสุดท้ายที่ขวางอยู่เป็นไฟล์ของสาย A ที่สายนี้ถูกสั่งห้ามแตะ | pirate-force-server#____ - sha f828239 - 84 passed targeted + 10 passed (four-in-one) + __FULLSUITE_SHORT__ - จดหมาย notes_to_chief/20260909_1649_LANE-B-ASK-COO-one-door-left-before-the-allocator-can-flip.md
+SCOREBOARD: STUCK | ถอดกำแพงสองบานสุดท้ายในเขตตัวเองที่จะทิ้งมอนทั้งฉากเงียบ ๆ วันที่เลขประจำตัวมอนพลิกเป็นค่าลบ — ผู้เล่นยังไม่เห็นอะไรต่างวันนี้ เพราะตัวจ่ายยังไม่พลิก และประตูสุดท้ายที่ขวางอยู่เป็นไฟล์ของสาย A ที่สายนี้ถูกสั่งห้ามแตะ | pirate-force-server#____ - sha f828239 - 84 passed targeted + 10 passed (four-in-one) + 15766 passed/450 skipped/0 failed (full suite) - จดหมาย notes_to_chief/20260909_1649_LANE-B-ASK-COO-one-door-left-before-the-allocator-can-flip.md
