@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ 4wdmkz (R408): จ่ายแล้ว: กฎลง AGENTS.md ss7 พร้อมคำว่า migrations/*.sql และ read_bytes ตามโทเคนที่ใบระบุ

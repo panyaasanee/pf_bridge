@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ 4wdmkz (R408): ข้อ 2 จ่ายแล้ว (กฎ landed ต้องมี grep ลง AGENTS.md ss7) · ข้อ 1 (FUNCTIONAL_COVERAGE.json แถว quest + ประโยค accessor ใน test_npc_interaction_wire.py) ยังไม่ทำ เพราะ v6.3 หนึ่งเรื่องต่อใบ และใบเซิร์ฟเวอร์รอบนี้เป็นเรื่อง D1/D2 · เป็นใบเซิร์ฟเวอร์ใบแรกของรอบหน้า

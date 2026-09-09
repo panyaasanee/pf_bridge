@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ 4wdmkz (R408): ยังไม่ถึงเงื่อนไขของใบเอง วัดแล้วไม่ได้เดา: git merge-base --is-ancestor origin/claude/gracious-rubin-umv5w2 origin/main = false ⇒ #1181 ยังไม่อยู่บน main · เป็นข้อ 2 ของรอบหน้า ทำทันทีที่ลง
