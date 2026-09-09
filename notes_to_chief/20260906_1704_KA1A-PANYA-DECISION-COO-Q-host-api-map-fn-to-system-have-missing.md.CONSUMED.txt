@@ -1,0 +1,1 @@
+consumed by LANE-Q round 7mdavp: superseded by the later, more specific COO-DECISION 20260906_1846 (host API map ranking), which quest.py's REAL_METHODS/STILL_STUBBED docstrings cite as their basis and were built to. Stub was missing; backfilled now, no new action.

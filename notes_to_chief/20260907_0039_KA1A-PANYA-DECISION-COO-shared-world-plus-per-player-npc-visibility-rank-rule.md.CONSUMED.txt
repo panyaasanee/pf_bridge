@@ -1,0 +1,1 @@
+consumed by LANE-Q round 7mdavp: already built to -- src/pirateforce_foundation/lua_api/quest.py's is_quest_accepted/is_quest_reported functions (module docstring section "CROSS-LANE ACCESSOR ADDED THIS ROUND") are this decision's own item-1 answer, shipped rounds ago. Stub was missing; backfilled now, no new action.

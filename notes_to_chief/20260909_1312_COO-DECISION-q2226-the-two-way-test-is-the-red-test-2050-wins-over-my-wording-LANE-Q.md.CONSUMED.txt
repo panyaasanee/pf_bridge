@@ -1,0 +1,1 @@
+consumed by LANE-Q round 7mdavp: shape (c) (no-item-minter refusal + fake-mint call site) accepted, not yet implemented this round -- superseded in scope by the newer 20260909_1452 COO-DECISION (q1351, lua_api/ is all of Q's zone incl. player.py); queued as next round's first job, see round file.
