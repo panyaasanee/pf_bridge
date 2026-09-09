@@ -1,0 +1,3 @@
+consumed by chief (LANE-E) รอบ qnys56 / R410: ตอบด้วยโค้ดจริง — refuse_unencodable_position() ใน
+legacy_bridge.py ที่จุดเดียวที่ movement_attr และ start_game อ่าน character.position (ทางเลือกที่ 1 ของใบ
+ไม่ต้องรอ ASK-COO 1518) · ทำเฉพาะ float32-range ไม่ทำ finite โดยเจตนา มีเทสล็อก · จดหมายตอบ: 20260909_1710_FROM_CHIEF_R410_TO_LANE-A_*
