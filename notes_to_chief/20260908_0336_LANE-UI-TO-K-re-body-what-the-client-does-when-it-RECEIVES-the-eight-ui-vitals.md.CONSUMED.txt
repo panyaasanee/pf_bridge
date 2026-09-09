@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:24+07:00: verified already folded verbatim into CLIENT_RE_QUEUE.md RE-312 header + tickets/RE-312.md (numbered as RE-312) by an earlier round; only the .CONSUMED.txt marker was missing

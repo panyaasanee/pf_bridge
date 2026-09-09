@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:27+07:00: applied — latest GT-308 token (head=104004da58f7 code=45948fb90412) + behavioral-field comparison criterion folded into GAME_TEST_QUEUE.md GT-308 header; owner (LANE-UI) confirmed they already edited tickets/GT-308.md themselves for the token and the X-step body addition

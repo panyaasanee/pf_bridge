@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:27+07:00: superseded by round asw0n3's remeasurement (main moved, code= field drifted from unrelated merges) — folded together with 2000/2132 into one GAME_TEST_QUEUE.md GT-308 update block this round

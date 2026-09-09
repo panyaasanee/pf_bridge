@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:33+07:00: applied — status confirmation (HELD unchanged, PR ixbs2f not yet merged) plus the count-4-coincidence bonus note folded into tickets/GT-307.md
