@@ -231,25 +231,44 @@ env:
   # nothing, so its drafts go quiet, and quiet past PF_STALE_CLOSE_HOURS is
   # exactly the corpse the close paths exist for.
   #
-  # HELD means exactly two things are forbidden, and only those two: CLOSING the
-  # pull request, and flipping its draft flag with `gh pr ready`.  A held pull
-  # request that is ready, marked and clean STILL MERGES -- measured need, not
-  # theory: #1198 ([LANE-DB] mint_class_weapon) was opened at 16:39 +07, one
-  # minute after the hold, and LANE-A/LANE-B are waiting on that door for the
-  # 20260909_1455 test range.  Blocking merges too would have made this guard
-  # cost more work than the reaper it protects against.
+  # HELD means the pull request is left COMPLETELY alone: not merged, not closed,
+  # not un-drafted.
+  #
+  # [pf-adversary D1, and it was right] The first version of this guard allowed a
+  # clean held pull request to still MERGE, reasoning from the LANE-E order alone,
+  # which only says "must not be closed".  The four sibling COO-HOLD letters
+  # written in the same minute -- 20260909_1640_COO-HOLD-*-LANE-{UI,DB,GM,CS}.md,
+  # item 5 of each -- say `ปล่อยไว้ ห้ามปิด ห้าม merge` (leave it, do not close,
+  # DO NOT MERGE) and each tells its lane `reaper = chief กันไว้ให้`: this guard is
+  # exactly what those lanes were promised.  Letting mid-flight work from a lane
+  # that was ordered to stop land on main is the one outcome those letters rule
+  # out, and the lane cannot object -- it is not allowed to run a round.
+  # Consequence, stated rather than hidden: server #1198 ([LANE-DB]
+  # mint_class_weapon, opened one minute after the hold) does not merge while the
+  # hold stands, even though LANE-A and LANE-B are waiting on that door.  That is
+  # the owner's call to reverse, not this file's.
   #
   # Matched against the TITLE ONLY, never the body.  A body match would be a
   # trap: any later round whose pull request DESCRIBES this mechanism would
-  # shield itself by accident and hang its own lane lock forever.  Every round
-  # pull request in this project already starts with its lane tag, and the order
-  # asked for the plain word "in the head of the PR" for anything else.
+  # shield itself by accident and hang its own lane lock forever.
   #
-  # TO LIFT THE HOLD: blank PF_HOLD_LANE_TAGS and PF_HOLD_PR_NUMBERS.  Empty
-  # values make the guard inert with no other edit -- that, and not a revert, is
-  # the undo the order names ("yon = thot pai / allowlist ton plot HOLD").
-  # Space-separated, matched as literal substrings, so the brackets matter:
-  # `[LANE-DB]` cannot match `[LANE-DBX]`.
+  # There is no third "label" variable.  One was tried (PF_HOLD_WORD:
+  # 'HOLD-CODEX') and removed the same round: pf-adversary D3 measured that a
+  # bare token matched as a title substring shields any lane whose round title
+  # merely NAMES the letter that announced it -- a real title shape in this
+  # project ("[LANE-Q] round 95aw54: consume COO-DECISION 1441 and ...") -- and
+  # D2 measured that it survived the documented undo, because the undo names two
+  # variables and there were three.  It was also redundant: a held lane's own
+  # HANDOFF pull request carries that lane's tag, which is what shields it.
+  #
+  # TO LIFT THE HOLD: blank PF_HOLD_LANE_TAGS and PF_HOLD_PR_NUMBERS.  Those two
+  # are the whole mechanism, so empty values make the guard inert with no other
+  # edit -- that, and not a revert, is the undo the order names.  BLANK them, do
+  # not DELETE the lines: `on_hold` uses `${VAR:-}` so a deletion is survivable,
+  # but a blank line keeps the mechanism documented where the next reader looks.
+  # Space-separated, matched as literal substrings (globbing is disabled inside
+  # on_hold for exactly this reason), so the brackets matter: `[LANE-DB]` cannot
+  # match `[LANE-DBX]`.
   PF_HOLD_LANE_TAGS: '[LANE-UI] [LANE-DB] [LANE-GM] [LANE-CS]'
   # Space-separated pull request numbers in THIS repository, for a held pull
   # request whose title carries no lane tag.  These are the pf_bridge addenda the
@@ -258,9 +277,6 @@ env:
   # its title -- kept so that the order can be checked against this file by
   # number without reading any title.
   PF_HOLD_PR_NUMBERS: '1676 1659 1781 1699 1642 1629'
-  # A plain word a held lane can put in its own pull request TITLE when it pushes
-  # a HANDOFF draft during the pause, so it does not need a new number here.
-  PF_HOLD_WORD: 'HOLD-CODEX'
 
 jobs:
   merge:
@@ -310,17 +326,29 @@ jobs:
           # for what "held" is allowed to stop (closing, un-drafting) and what it
           # must not stop (merging a clean one).  TITLE ONLY, on purpose.
           on_hold() {
-            local n="$1" title="$2" t
-            for t in ${PF_HOLD_LANE_TAGS}; do
-              case "$title" in *"$t"*) return 0 ;; esac
+            local n="$1" title="$2" t rc=1
+            # [pf-adversary D7, MEASURED this round] `set -f` is load-bearing:
+            # `[LANE-UI]` is a valid glob BRACKET EXPRESSION, and an unquoted
+            # `for t in ${VAR}` does pathname expansion as well as word
+            # splitting.  With a checkout in the working directory and a file
+            # named `E` in it, `[LANE-UI]` expands to `E` and every title
+            # containing an E becomes held -- "shield everything", i.e. every
+            # lane lock hangs at once.  Neither job checks out today, which is
+            # the only reason this was latent; that is luck, not a guard.
+            # [pf-adversary D8] `:-` so that DELETING the env lines (rather than
+            # blanking them) cannot kill the whole job at the first call under
+            # `set -u`.  A reaper that dies is a lock on every lane.
+            # No early `return` inside the loops on purpose: globbing has to be
+            # restored on every exit path.
+            set -f
+            for t in ${PF_HOLD_LANE_TAGS:-}; do
+              case "$title" in *"$t"*) rc=0 ;; esac
             done
-            for t in ${PF_HOLD_PR_NUMBERS}; do
-              if [ "$n" = "$t" ]; then return 0; fi
+            for t in ${PF_HOLD_PR_NUMBERS:-}; do
+              if [ "$n" = "$t" ]; then rc=0; fi
             done
-            if [ -n "${PF_HOLD_WORD}" ]; then
-              case "$title" in *"${PF_HOLD_WORD}"*) return 0 ;; esac
-            fi
-            return 1
+            set +f
+            return "$rc"
           }
 
           META=$(api "repos/${REPO}/pulls/${PR}")
@@ -353,15 +381,20 @@ jobs:
             *) echo "body does not carry the marker '${PF_MARKER}' - skipped, ON PURPOSE"; exit 0 ;;
           esac
 
-          # [PANYA 20260909_1638 / COO-ORDER 1640 item 3] Decide once, here, and
-          # read the answer at the two close paths below.  A held pull request
-          # walks the whole merge path exactly as before; only the two closes at
-          # the end of it are withheld.
+          # [PANYA 20260909_1638 / COO-ORDER 1640 item 3] A held pull request is
+          # left COMPLETELY alone: not merged, not closed, not un-drafted.
+          # [pf-adversary D1, and it was right] The first version of this guard
+          # let a clean held pull request still merge, reasoning from the LANE-E
+          # order alone, which only says "must not be closed".  The four sibling
+          # COO-HOLD letters written in the same minute say `ปล่อยไว้ ห้ามปิด
+          # ห้าม merge` -- leave it, do not close, DO NOT MERGE -- and each of
+          # them tells its lane `reaper = chief กันไว้ให้`, i.e. THIS guard is
+          # what they were promised.  Letting mid-flight work from a lane that
+          # was ordered to stop land on main is the one outcome those letters
+          # rule out, and the lane cannot object: it is not allowed to run.
           if on_hold "$PR" "$TITLE"; then
-            HELD=yes
-            echo "#${PR} is HELD (owner's 20260909_1638 pause) - it may still merge if it is clean, but this job will not close it"
-          else
-            HELD=no
+            echo "#${PR} is HELD (owner's 20260909_1638 pause) - left completely alone: not merged, not closed, not un-drafted"
+            exit 0
           fi
 
           # [MEASURED, #1079, LANE-CS 20260904_0755]: a round claim PR (title
@@ -457,8 +490,6 @@ jobs:
           done
 
           if [ "$MERGEABLE" != "true" ]; then
-            [ "$HELD" = "no" ] || {
-              echo "#${PR} does not merge cleanly (mergeable=${MERGEABLE}) but is HELD - left open, NOT closed (owner's 20260909_1638 pause)"; exit 0; }
             gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
               "**This pull request does not merge cleanly (\`mergeable=${MERGEABLE}\`) - closing it.**" \
               "" \
@@ -558,8 +589,6 @@ jobs:
             echo "the synchronize event for the new head runs this job again, and reap is the backstop"
             exit 0
           fi
-          [ "$HELD" = "no" ] || {
-            echo "::warning::merge of #${PR} failed (exit ${MRC}) but it is HELD - left open, NOT closed (owner's 20260909_1638 pause)"; exit 0; }
           echo "::warning::merge of #${PR} failed (exit ${MRC}) - closing it to release the round lock"
           gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
             "**The merge call failed - closing this pull request to release the round lock.**" \
@@ -676,23 +705,43 @@ jobs:
           # PF_HOLD_* block at the top of this file for why a body match would be
           # a trap.
           on_hold() {
-            local n="$1" title="$2" t
-            for t in ${PF_HOLD_LANE_TAGS}; do
-              case "$title" in *"$t"*) return 0 ;; esac
+            local n="$1" title="$2" t rc=1
+            # [pf-adversary D7, MEASURED this round] `set -f` is load-bearing:
+            # `[LANE-UI]` is a valid glob BRACKET EXPRESSION, and an unquoted
+            # `for t in ${VAR}` does pathname expansion as well as word
+            # splitting.  With a checkout in the working directory and a file
+            # named `E` in it, `[LANE-UI]` expands to `E` and every title
+            # containing an E becomes held -- "shield everything", i.e. every
+            # lane lock hangs at once.  Neither job checks out today, which is
+            # the only reason this was latent; that is luck, not a guard.
+            # [pf-adversary D8] `:-` so that DELETING the env lines (rather than
+            # blanking them) cannot kill the whole job at the first call under
+            # `set -u`.  A reaper that dies is a lock on every lane.
+            # No early `return` inside the loops on purpose: globbing has to be
+            # restored on every exit path.
+            set -f
+            for t in ${PF_HOLD_LANE_TAGS:-}; do
+              case "$title" in *"$t"*) rc=0 ;; esac
             done
-            for t in ${PF_HOLD_PR_NUMBERS}; do
-              if [ "$n" = "$t" ]; then return 0; fi
+            for t in ${PF_HOLD_PR_NUMBERS:-}; do
+              if [ "$n" = "$t" ]; then rc=0; fi
             done
-            if [ -n "${PF_HOLD_WORD}" ]; then
-              case "$title" in *"${PF_HOLD_WORD}"*) return 0 ;; esac
-            fi
-            return 1
+            set +f
+            return "$rc"
           }
 
           NOW=$(date -u +%s)
           LIMIT=$(( PF_STALE_MINUTES * 60 ))
           CLOSE_LIMIT=$(( PF_STALE_CLOSE_HOURS * 3600 ))
           STALE_CLAIM_LIMIT=$(( PF_REAP_STALE_CLAIM_HOURS * 3600 ))
+
+          # [pf-adversary D6] The hold is the only leave-open in this file with
+          # no age bound, so at minimum it must be COUNTED and NAMED once per
+          # sweep -- otherwise the shielded set can grow without anyone seeing
+          # it, and nothing at HEAD answers "which pull requests is PF_HOLD_*
+          # keeping alive today".  This line is that answer.
+          HELD_COUNT=0
+          HELD_LIST=""
 
           OPEN=$(api "repos/${REPO}/pulls?state=open&per_page=100" | jq -r '.[].number')
           if [ -z "${OPEN}" ]; then echo "no open pull requests"; exit 0; fi
@@ -719,20 +768,19 @@ jobs:
             # What deliberately does NOT exit here is a held pull request that is
             # marked and ready: it walks the ordinary merge path, and only the
             # three closes at the end of that path read $HELD.
-            HELD=no
+            # [PANYA 20260909_1638 / COO-ORDER 1640 item 3; corrected after
+            # pf-adversary D1] ONE exit, at the top, before any path that could
+            # merge, close, or un-draft.  Every later action in this loop is one
+            # of those three, and the sibling COO-HOLD letters forbid all three
+            # (`ปล่อยไว้ ห้ามปิด ห้าม merge`).  Deciding it here rather than in
+            # front of each call site is also what closes pf-adversary D10: the
+            # marker-less closer `reap_close` used to be protected only by a
+            # second, independent copy of the marker test forty lines away.
             if on_hold "$PR" "$TITLE"; then
-              HELD=yes
-              if [ "$DRAFT" = "true" ]; then
-                echo "--- #${PR} ${HEAD_REF}: HELD (owner's 20260909_1638 pause) - draft left exactly as it is: not readied, not closed"
-                continue
-              fi
-              case "$BODY" in
-                *"$PF_MARKER"*) : ;;
-                *)
-                  echo "--- #${PR} ${HEAD_REF}: HELD (owner's 20260909_1638 pause) and unmarked - left alone, no stale-claim or supersede close"
-                  continue
-                  ;;
-              esac
+              HELD_COUNT=$(( HELD_COUNT + 1 ))
+              HELD_LIST="${HELD_LIST} #${PR}"
+              echo "--- #${PR} ${HEAD_REF}: HELD (owner's 20260909_1638 pause) - left completely alone: not merged, not closed, not un-drafted"
+              continue
             fi
             # [COO-DECISION 20260905_0847 item 4, option (a); chief round pv4zg1]
             # A pull request whose head is NOT `claude/*` is invisible to this
@@ -994,9 +1042,6 @@ jobs:
                   elif [ "$AGE" -lt "$LIMIT" ]; then
                     echo "--- #${PR} ${HEAD_REF}: '${TITLE}' carries the marker with only ${CHANGED} changed file(s) and no round file - within ${PF_STALE_MINUTES}m, left alone (see #1079)"
                     continue
-                  elif [ "$HELD" = "yes" ]; then
-                    echo "--- #${PR} ${HEAD_REF}: unripe claim (see #1079) but HELD (owner's 20260909_1638 pause) - left open, NOT closed"
-                    continue
                   else
                     echo "--- #${PR} ${HEAD_REF}: '${TITLE}' carries the marker with only ${CHANGED} changed file(s) and no round file past ${PF_STALE_MINUTES}m - no round work ever arrived; closing (see #1079)"
                     gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
@@ -1166,10 +1211,6 @@ jobs:
                 echo "::warning::#${PR} left open - head moved ${HEAD_SHA} -> ${NOW_SHA} at age $(( AGE / 60 ))m (bound ${PF_STALE_MINUTES}m)"
                 continue
               fi
-              if [ "$HELD" = "yes" ]; then
-                echo "::warning::merge of #${PR} failed (exit ${MRC}) but it is HELD - left open, NOT closed (owner's 20260909_1638 pause)"
-                continue
-              fi
               echo "::warning::merge of #${PR} failed (exit ${MRC}) - closing it to release the lane lock"
               gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
                 "**The merge call failed - closing this pull request to release the lane lock.**" \
@@ -1186,10 +1227,6 @@ jobs:
             if [ "$MERGEABLE" = "null" ]; then echo "  mergeable still null - left for the next tick"; continue; fi
             # mergeable=false: main moved underneath and the two disagree.  It
             # will never resolve itself, and waiting only keeps the lane locked.
-            if [ "$HELD" = "yes" ]; then
-              echo "--- #${PR} ${HEAD_REF}: mergeable=${MERGEABLE} but HELD - left open, NOT closed (owner's 20260909_1638 pause)"
-              continue
-            fi
             gh pr comment "$PR" --repo "$REPO" --body "$(printf '%s\n' \
               "**This pull request does not merge cleanly (\`mergeable=${MERGEABLE}\`) - closing it to release the lane lock.**" \
               "" \
@@ -1199,3 +1236,10 @@ jobs:
               || echo "::warning::could not comment - closing anyway"
             if gh pr close "$PR" --repo "$REPO"; then echo "  not mergeable -> closed; branch kept"; else echo "::error::COULD NOT CLOSE #${PR}. The lane lock is STUCK until a human closes it."; fi
           done
+
+          echo ""
+          if [ "$HELD_COUNT" -gt 0 ]; then
+            echo "HELD this sweep: ${HELD_COUNT} pull request(s) --${HELD_LIST} (PF_HOLD_* / owner's 20260909_1638 pause; none was merged, closed or un-drafted)"
+          else
+            echo "HELD this sweep: 0 (PF_HOLD_LANE_TAGS='${PF_HOLD_LANE_TAGS:-}' PF_HOLD_PR_NUMBERS='${PF_HOLD_PR_NUMBERS:-}')"
+          fi
