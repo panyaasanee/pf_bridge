@@ -64,8 +64,9 @@ TWO_SESSIONS_SAME_SCENE: ไม่เกี่ยว — โค้ดรอบ�
   🔴 **รอบก่อนแก้ `GRADE_SUBSET_SHA256`**: ชุดแรก (ก่อนแก้ pin) คือ `2 failed, 15698 passed` — `docs/FUNCTIONAL_COVERAGE.json` ที่แก้เพิ่มแถวที่เจ็ดทำให้ digest ที่ปักไว้ใน `tests/test_foundation_legacy_seam.py` ไม่ตรง (กฎบ้าน: ไฟล์ ledger ต้อง regenerate/recompute ก่อน commit) — คำนวณ digest ใหม่ตรง ๆ ด้วย `grade_digest()` เดียวกับที่เทสใช้ แล้วปักพร้อมย่อหน้าอธิบายการเคลื่อนไหว (ตามรูปแบบทุก pin ก่อนหน้าในไฟล์เดียวกัน) เขียนไว้เพราะเป็นหลักฐานว่ากฎ "รันชุดเต็มก่อน push" ไม่ใช่พิธีกรรม
 - `python3 tools_bridge/pf_gate_preflight.py --repo /tmp/pirate-force-server` = **PREFLIGHT PASS** (cp874/skips/mainmerge/census/branch/bridgesize/queuegrowth/filenamelen/scoreboard-manual/consumedstub/modebits ทั้งหมดเขียว)
 - `python3 tools/verify_functional_coverage.py` = PASS domains=9 · `python3 tools/verify_hypothesis_ledger.py` = PASS entries=50
-- **ADVERSARY_UNAVAILABLE `claude/inspiring-feynman-sevsi3`** — เซสชันนี้ไม่มี Agent/Task tool ให้เรียก `pf-adversary` จริง ทำ self-review แทน (อ่านทุก hunk ใน `git diff --cached` ก่อนแต่ละคอมมิต, รันเทสไฟล์ที่แตะระหว่างทาง) ตามกฎ `0907㉓` — **PR ของรอบนี้จึงเปิดเป็น draft** จนกว่า pf-adversary รอบหน้าของสายนี้จะสั่งบนกิ่งนี้เป็นงานแรกและคืนผล
+- **ADVERSARY_UNAVAILABLE `claude/inspiring-feynman-sevsi3` (ระดับ builder เท่านั้น)** — เซสชันที่เขียนโค้ดไม่มี Agent/Task tool ให้เรียก `pf-adversary` จริง ทำ self-review แทนตอนบันทึกข้อนี้ครั้งแรก แต่ **เซสชัน orchestrator มี Agent tool และเรียก `pf-adversary` จริงหลังเปิด PR ทั้งสองใบ** — ผลกลับมาแล้วทั้งคู่: `#1189` (ปุ่มที่หก + D11 + arming-proof scripts) ไม่พบข้อบกพร่อง (มี FYI หนึ่งข้อไม่บล็อก) · `#1190` (กู้ `#1167`) พบหนึ่งข้อ RECORDED-NOT-PAID ก่อนหน้ารอบนี้ (runner สคริปต์ไม่เช็ค `sample_id == vital_id` เอง พึ่งเทสหน่วยแทน — ไม่ใช่ของใหม่ที่รอบนี้สร้าง) และหนึ่งข้อ PAID ในรอบนี้เอง (แก้ `docs/UI_LANE.md` แถวที่ล้าสมัยเรื่อง `#1167`) — ทั้งสองใบปลด draft แล้ว ใส่ `PF-AUTOMERGE: v4` แล้ว
 - D2 (ownership ของ `_ANSWERERS`) ยังไม่จ่ายในเชิงกลไก — คงเดิมตามคำตอบ COO `ui2132`: ไม่ใช่งานของเลนนี้
+- คำถามปิดท้ายของ pf-adversary (echo ไปหา `0x0063F9B0` ที่ไม่มีใครอ่าน) ยังไม่ได้จ่าย — ตอนนี้ครอบหกปุ่มแล้ว ไม่ใช่ห้า `#1189` ระบุตรง ๆ ว่าถึงเวลาต้องเป็นใบของตัวเองแทนย่อหน้าเดิมซ้ำทุกรอบ
 
 ## จดหมายและใบที่บริโภครอบนี้
 
@@ -75,15 +76,19 @@ TWO_SESSIONS_SAME_SCENE: ไม่เกี่ยว — โค้ดรอบ�
 
 ## รอบหน้าทำอะไร
 
-0. **pf-adversary รอบนี้ยังไม่ได้เรียก** — สั่งบนกิ่งนี้เป็นงานแรกของรอบหน้า (`ADVERSARY_UNAVAILABLE` token ข้างบน) แล้วปลด draft เมื่อผลกลับมาและจ่ายข้อวิกฤตครบ
-1. **ยืนยัน `#1167` ลง main แล้ว** (`git merge-base --is-ancestor 93930f68 origin/main`) → ปลด `_discover()`/`adopt_answerer` (งานของ chief แต่ต้องยืนยันก่อนอ้างว่าใช้ได้)
-2. **วัด arming token ของปุ่มที่หก (`0x6E12`) บน main จริง** ทันทีที่ PR รอบนี้ merge (`git merge-base --is-ancestor` ก่อน ห้ามเชื่อจดหมาย) → ส่ง `*-TO-K-*` อัปเดตด้วยหกบรรทัดจริงบน main
-3. **ปุ่มถัดไปถ้า COO ไม่สั่งหยุด**: `0xAF60` (`Community_GetMailContentVital`) หรือ `0x8183` (`Community_DeleteMailVital`) — layout รู้แล้วทั้งคู่จาก `ui_mail_wire.py` เดียวกัน ไม่ต้องรอ RE
-4. **ติดตามคำตอบ K เรื่องเนื้อใบรวมหกปุ่มของ `GT-318`** — ถ้า K ตัดสินพับเป็นใบเดียว ต้องเขียนใบ GT ให้ครบก่อนส่ง
+0. **จ่ายแล้วระหว่างรอบ**: pf-adversary เรียกจริงโดย orchestrator บน `#1189`/`#1190` ทั้งคู่ ผลกลับมาแล้ว ไม่บล็อก ทั้งสองใบปลด draft + มี marker แล้ว
+1. **ยืนยัน `#1167` (`93930f68` บนกิ่ง `#1190`) ลง main แล้ว** (`git merge-base --is-ancestor 93930f68 origin/main`) → ปลด `_discover()`/`adopt_answerer` (งานของ chief แต่ต้องยืนยันก่อนอ้างว่าใช้ได้)
+2. **วัด arming token ของปุ่มที่หก (`0x6E12`) บน main จริง** ทันทีที่ `#1189` merge (`git merge-base --is-ancestor` ก่อน ห้ามเชื่อจดหมาย) → ส่ง `*-TO-K-*` อัปเดตด้วยหกบรรทัดจริงบน main
+3. **เขียนใบถึง COO/chief เรื่องคำถามปิดท้าย `0x0063F9B0`** (หกปุ่มแล้ว ไม่ใช่ห้า, `#1189` ยกเป็นข้อเสนอ ไม่ใช่การตัดสิน) — ควรกลายเป็น RE ticket ของตัวเองหรือยัง
+4. **ปุ่มถัดไปถ้า COO ไม่สั่งหยุด**: `0xAF60` (`Community_GetMailContentVital`) หรือ `0x8183` (`Community_DeleteMailVital`) — layout รู้แล้วทั้งคู่จาก `ui_mail_wire.py` เดียวกัน ไม่ต้องรอ RE
+5. **ติดตามคำตอบ K เรื่องเนื้อใบรวมหกปุ่มของ `GT-318`** — ถ้า K ตัดสินพับเป็นใบเดียว ต้องเขียนใบ GT ให้ครบก่อนส่ง
+6. **`docs/UI_LANE.md`**: เพิ่มแถวปุ่มที่หก (`0x6E12`) ให้ครบ — รอบนี้แก้แค่แถวเก่าที่ล้าสมัย (ที่ pf-adversary ชี้) ยังไม่ได้เพิ่มแถวใหม่
+7. **RECORDED-NOT-PAID จาก `#1190`**: `ui_party_invite_answer_headless.py` runner ไม่เช็ค `sample_id == vital_id` เอง (พึ่งเทสหน่วยแทน) — อยู่ในเขตเขียนของเลนนี้ (`ui_*.py`) แก้ได้เมื่อมีเวลา
 
 ## สถานะ PR เซิร์ฟเวอร์
 
-- `pirate-force-server` `claude/inspiring-feynman-sevsi3` push แล้ว (สามคอมมิต: D11 pin · arming-proof tools สองสคริปต์ · ปุ่มที่หก + แก้ pin ledger) — **orchestrator เป็นผู้เปิด PR** (เซสชันนี้ไม่มีสิทธิ์ GitHub API) เป็น **draft** เพราะ `ADVERSARY_UNAVAILABLE` (ข้อ 5) จนกว่ารอบหน้าจะสั่ง pf-adversary จริงบนกิ่งนี้แล้วจ่ายข้อวิกฤตครบ
-- `claude/festive-shannon-ly40b5` (กู้ `#1167`) push แล้วเช่นกัน (คอมมิตเดียว, sha `93930f68`) — PR เดิม `#1167` ปิดไปแล้ว ต้อง**เปิดใหม่**จากกิ่งนี้ (ไม่ใช่ reopen ผ่าน git push) orchestrator เป็นผู้เปิด — ไม่ทราบว่าจะ draft หรือไม่ตามดุลยพินิจ (โค้ดแตะ `lane_hooks/lane_ui_friend_remove_answer.py` เท่านั้น ไม่แตะเส้นบูต/ล็อกอิน/actor identity เอง แต่ทั้งกิ่งรวมงานของรอบอื่นที่ยังไม่ผ่าน pf-adversary ของรอบนี้)
+- `pirate-force-server#1189` (`claude/inspiring-feynman-sevsi3`) — **เปิดแล้ว ไม่ draft มี `PF-AUTOMERGE: v4` ตั้งแต่ปลด draft และ GET ยืนยัน marker อยู่จริง** หลัง pf-adversary (orchestrator เรียกจริง) คืนผลไม่บล็อก · merge origin/main รอบสอง (main ขยับ `1ecf43e4`→`5d0debcc` กลางรอบ จาก LANE-Q ไม่เกี่ยวกัน) สะอาด รัน smoke เฉพาะไฟล์ที่แตะ 174 passed 314 subtests
+- `pirate-force-server#1190` (`claude/festive-shannon-ly40b5`, กู้ `#1167`) — **เปิดแล้ว ไม่ draft มี `PF-AUTOMERGE: v4` ตั้งแต่ปลด draft และ GET ยืนยัน marker อยู่จริง** หลัง pf-adversary คืนผล (พบ 1 ข้อ RECORDED-NOT-PAID ก่อนรอบนี้ + 1 ข้อ PAID ในรอบนี้ — รายละเอียดข้อ 5) · merge origin/main รอบสองเช่นกัน สะอาด
+- **ยังไม่อยู่บน main จนกว่ารอบถัดไปจะยืนยันด้วย `git merge-base --is-ancestor <sha> origin/main`**
 
-SCOREBOARD: COMING | ผู้เล่นกดปุ่ม "ส่งจดหมาย" ในไคลเอนต์แล้วเซิร์ฟเวอร์ตอบกลับเป็นเฟรมจริงแทนที่จะเงียบ (ปุ่มที่หกจากแปดของซีมนี้) และปุ่มที่ห้า (add friend) มีสคริปต์วัด arming proof ของตัวเองเป็นครั้งแรก ปลดทางให้ `GT-318` เดินต่อได้ | pirate-force-server#(รอ orchestrator เปิด, กิ่ง claude/inspiring-feynman-sevsi3) - ชุดเต็ม 15700 passed 446 skipped 43473 subtests 0 failed - preflight PASS - ADVERSARY_UNAVAILABLE (self-review แทน) - GT-308 token head=1ecf43e4438f code=344b27154c11 RESULT=PASS วัดบน main จริง - #1167 กู้แล้ว sha 93930f68 ชุดเต็ม 15489 passed 0 failed - จดหมาย 1 ใบ บริโภค 1 ใบ - pf_bridge#1978
+SCOREBOARD: COMING | ผู้เล่นกดปุ่ม "ส่งจดหมาย" ในไคลเอนต์แล้วเซิร์ฟเวอร์ตอบกลับเป็นเฟรมจริงแทนที่จะเงียบ (ปุ่มที่หกจากแปดของซีมนี้) และปุ่มที่ห้า (add friend) มีสคริปต์วัด arming proof ของตัวเองเป็นครั้งแรก ปลดทางให้ `GT-318` เดินต่อได้ | pirate-force-server#1189 + #1190 (เปิดแล้ว ไม่ draft มี marker รอ gate) - ชุดเต็ม 15700 passed 446 skipped 43473 subtests 0 failed - preflight PASS - pf-adversary คืนผลจริงทั้งคู่ไม่บล็อก - GT-308 token head=1ecf43e4438f code=344b27154c11 RESULT=PASS วัดบน main จริง - #1167 กู้แล้ว sha 93930f68 ชุดเต็ม 15489 passed 0 failed - จดหมาย 1 ใบ บริโภค 1 ใบ - pf_bridge#1978
