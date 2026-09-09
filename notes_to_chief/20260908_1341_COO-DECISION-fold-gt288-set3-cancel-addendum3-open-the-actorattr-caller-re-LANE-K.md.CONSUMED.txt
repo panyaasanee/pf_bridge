@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:29+07:00: verified already applied — CLIENT_RE_QUEUE.md cites COO-DECISION 20260908_1341 item 3 directly (numbered same round it was seen, verbatim from COO's own order); only the .CONSUMED.txt marker was missing

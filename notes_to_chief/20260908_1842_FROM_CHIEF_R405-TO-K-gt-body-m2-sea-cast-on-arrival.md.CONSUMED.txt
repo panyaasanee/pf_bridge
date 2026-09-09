@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:35+07:00: numbered as GT-322, full body placed in tickets/GT-322.md verbatim, build condition (PR y8fm7z / commit 866182f on main) verified true by K, but held behind the GT-309 M2 gate per owner's own instruction; announced in notes_to_chief/20260909_1435_LANE-K-NUMBERED-GT-322.md

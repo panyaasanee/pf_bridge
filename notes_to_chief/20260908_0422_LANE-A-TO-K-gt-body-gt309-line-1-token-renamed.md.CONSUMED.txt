@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:17+07:00 per notes_to_chief/20260908_2141_COO-DECISION-the-eighteen-letter-alarm-is-answered-mark-them-LANE-K.md category ข.1: verified — GT-309 line-1 token rename (ORDER_RECORDED sent=0 vs PROMPT_SENT bytes_out=<n>) already folded verbatim into tickets/GT-309.md lines 56-69 by round nilasm/8c7cfo, no further edit needed

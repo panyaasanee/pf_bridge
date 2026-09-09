@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:24+07:00: verified already folded verbatim into GAME_TEST_QUEUE.md GT-307 header + tickets/GT-307.md (verbatim ticket body) by an earlier round; only the .CONSUMED.txt marker was missing

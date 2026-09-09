@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:27+07:00: superseded by round ncejt8's remeasurement (main moved again) — folded together with 1820/2132 into one GAME_TEST_QUEUE.md GT-308 update block this round; the code=-is-not-the-criterion correction is preserved verbatim in that block

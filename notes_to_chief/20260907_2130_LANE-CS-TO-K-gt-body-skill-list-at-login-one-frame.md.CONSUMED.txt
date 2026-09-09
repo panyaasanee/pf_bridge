@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:24+07:00: verified already folded verbatim into superseded verbatim by GT-307's later body, cited in GAME_TEST_QUEUE.md/tickets/GT-307.md header (K explicitly does not double-number letter 2130) by an earlier round; only the .CONSUMED.txt marker was missing

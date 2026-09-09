@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:29+07:00: verified already folded verbatim into tickets/GT-309.md; only the .CONSUMED.txt marker was missing
