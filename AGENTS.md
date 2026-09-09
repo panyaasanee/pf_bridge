@@ -66,33 +66,24 @@
 
 ## 7. ห้ามทำ — ไม่มีข้อยกเว้น
 
-🔴 **เป้าหมายเราคือ MMORPG ที่เล่นได้จริง (MMO = หลาย session/หลายผู้เล่นพร้อมกัน) ทุกการออกแบบ ทุกโค้ดตั้งแต่ตอนนี้ต้องออก logic ที่รองรับ multiplayer** (`PANYA-DECISION 20260905_1224` ข้อ 3 · `COO-DECISION 20260905_1248` ข้อ 3 · ประโยคนี้เป็นบรรทัดแรกของ §7 มาก่อนกฎทุกข้อข้างล่าง)
+🔴 **เป้าหมาย MMO จริง (หลาย session พร้อมกัน) — ทุกโค้ดใหม่ต้องรองรับ multiplayer** (`PANYA-DECISION 20260905_1224` ข้อ 3)
 
-🔴 **หน้าที่ถาวรของ COO — ไล่หาคอขวดเอง** (`PANYA 20260907_1830` · `COO-ORDER 1849`): ประตู M ทุกรอบใน `NOW.md` (เจ้าของ+โทเคน+อายุ) · โทเคนนิ่ง 3 รอบ = COO ลงมือ · รอบผู้บริหาร = ใบ `COO-BLOCKER-SWEEP-<n>` เสมอ · ไม่แน่ใจอำนาจ = ทำก่อนแล้ว `AUTO-DECIDED:` (ห้ามแตะ: หลักออกแบบถาวร · บันได M · กฎที่ Panya เคาะ · เครื่องเจ้าของ · เฟรมเดา · death scope · "รอ Panya ติ๊ก") — ฉบับเต็ม ⇒ 0907 ㉑
+🔴 **COO ไล่คอขวดเองถาวร** (`PANYA 1830`) — โทเคน/สวีป/ข้อห้ามเต็ม ⇒ E-DOC
 
-🔴 **ห้ามเสียรอบเปล่า** (`PANYA 20260907_1846` · `COO-ORDER 1941` · คำเจ้าของ ห้ามตีความ) ห้าข้อ:
-- **นิยาม**: รอบไม่มีการพัฒนา = `git diff --stat origin/main..HEAD -- src/` ของเซิร์ฟเวอร์ไม่มีบรรทัดที่ทำให้ผู้เล่นทำอะไรได้เพิ่ม (เทส/tools/docs/เครื่องวัด/addendum ไม่นับ) **หรือ** `SCOREBOARD: NONE`
-- **ห้ามจบรอบในสภาพนั้น**: งานหลักติด ⇒ **รอบเดียวกัน** หยิบ (ก) ปลดแฟล็ก 1 ตัวจาก `docs/PROMOTION_BACKLOG.md` (ข) `## งานสำรอง` ในไฟล์สาย (ค) ระบบถัดไปของ M5/M final — สายเลือกเอง · `"ว่างเพราะรอ …"` ต้องตามด้วย `"จึงทำ <งาน> แทน: <PR>"`
-- **งานกระดาษ/เครื่องมือ/หนี้ adversary ≤ 30 นาที** ที่เหลือเป็นโค้ดตามข้อบน · ต้องใช้ทั้งรอบ = COO สั่งรายกรณี · `NONE` **2 รอบติด = COO ลงมือ** · เป้า ≤10%/สาย/วัน
-- **งานสำรองไม่แซงงานหลักที่ยังทำได้** · ไม่ยกเลิก adversary/เกต · ไม่เปลี่ยนลำดับ M · ไม่ใช่ใบอนุญาตให้เดาเฟรม (`1910`)
+🔴 **ห้ามเสียรอบเปล่า** (`PANYA 1846`): รอบที่ `src/` ไม่มีอะไรให้ผู้เล่นทำได้เพิ่ม หรือ `SCOREBOARD: NONE` = ห้ามจบเฉยๆ ต้องหยิบงานสำรอง (backlog/`## งานสำรอง`/ระบบถัดไป M5-final) แล้วเขียน "จึงทำ ... แทน: PR" ⇒ E-DOC
 
-🔴 **ห้ามสาย `pip install` ระหว่างรอบ** (`COO-ORDER 1941` ใบ `q1821` ข้อ 3) — ต้องการแพ็กเกจ = `CORE-REQUEST` เข้า `gate-windows.yml` · ชุดเต็มต้องมี `PKG_ENV:` วัดตอนเริ่มและจบ ไม่ตรง = โมฆะ · ห้ามเขียน docstring ที่รับประกันสภาพแวดล้อมของล่าม
+🔴 **ห้าม `pip install` ระหว่างรอบ** — ต้องการแพ็กเกจ = `CORE-REQUEST` เข้า `gate-windows.yml` ⇒ E-DOC
 
-🔴 **สี่บรรทัดของ `PANYA-ORDER 20260905_2038` ข้อ 7** (คนละเรื่อง คนละบรรทัด ตามที่สั่ง):
-- `prompts/` เป็นของเจ้าของ Panya เท่านั้น — ห้ามทุกสายแก้ไฟล์ในไดเรกทอรีนี้ (จดหมาย `20260905_1910`)
-- ใบที่ต้องการเครื่องเจ้าของ (attended) ต้องมีบล็อก `ATTENDED:` ≤5 บรรทัดก่อนเข้าคิว READY — ไม่มี = ตีกลับสายเจ้าของ ไม่จัดคิว (`PANYA-ORDER 20260905_2038` ข้อ 5)
-- ทุกไฟล์รอบต้องจบด้วยบรรทัด `SCOREBOARD:` (รูปแบบใน `prompts/COMMON_LANE_ROUND.md`) — ไม่มีบรรทัดนี้ = รอบไม่นับ
-- แถว `manual` ใน `SCOREBOARD_FACTS.tsv` เขียนได้เฉพาะ Panya/ka1-A เท่านั้น ต้องมี `GT-<เลข>` PASS + คอลัมน์วันที่ ไม่งั้นขึ้น `MALFORMED` (ไม่ลบ) · ไม่หมดอายุตามเวลา · `pf_gate_preflight.py` ปฏิเสธ PR สายอื่นที่แตะแถวนี้ (`COO-DECISION 20260906_0042`)
-- เพดานขนาดไฟล์กลาง — **บังคับด้วยเกต ไม่ใช่กฎ**: `tools_bridge/pf_gate_preflight.py` (`BRIDGE_FILE_SIZE_CEILINGS` = แหล่งเดียวของตัวเลข · regression-only: แดงเมื่อไฟล์ที่เกินเพดานอยู่แล้ว**โตขึ้น**บนกิ่งนี้) · ฉบับเต็ม ⇒ [`archive/AGENTS_HISTORY_20260906.md`](archive/AGENTS_HISTORY_20260906.md)
+🔴 **`PANYA-ORDER 20260905_2038` ข้อ 7**: `prompts/` ของ Panya เท่านั้น · attended ต้องมีบล็อก `ATTENDED:` ≤5 บรรทัดก่อนเข้า READY · ทุกไฟล์รอบต้องมี `SCOREBOARD:` · แถว `manual` เขียนได้เฉพาะ Panya/ka1-A + ต้องมี `GT-<เลข>` PASS · เพดานไฟล์กลางบังคับด้วย `pf_gate_preflight.py` (`BRIDGE_FILE_SIZE_CEILINGS`) ⇒ E-DOC
 
-🔴 **เขตเขียนของ LANE-Q (SCRIPT/QUEST — สายใหม่ตั้งแล้ว `COO-DECISION 20260905_2055`/`2112`)**: `src/pirateforce_foundation/script_*.py` · `src/pirateforce_foundation/lua_api/` · `tests/test_script_*` · `docs/SCRIPT_LANE.md` · `lane_hooks/lane_q_*` (pf_bridge) `rounds/Q_*` — อ่าน `gamedata/lua/` ได้ ห้ามแก้ · charter เต็ม `prompts/LANE-Q.md`
+🔴 **เขต LANE-Q**: `src/pirateforce_foundation/script_*.py` · `src/pirateforce_foundation/lua_api/` **ทั้งโฟลเดอร์ทุกไฟล์** (`player.py`/`trigger.py` รวมอยู่ — `COO-DECISION q1351`) · `tests/test_script_*` · `docs/SCRIPT_LANE.md` · `lane_hooks/lane_q_*` · `rounds/Q_*` — อ่าน `gamedata/lua/` ได้ ห้ามแก้
 
-🔴 **ยื่นอ็อบเจกต์ Python เข้าตัวแปลภาษา/สคริปต์เอนจินอื่น (Lua · `eval` · template) เมื่อไหร่ ต้องปิด attribute access ที่ระดับ runtime (ไม่ใช่ blocklist ชื่อ) และเทสต้องปักที่ *ค่าที่ถูกคืนกลับมา* ไม่ใช่แค่ที่ตัวอ็อบเจกต์ที่ยื่นเข้าไป** · `pf-adversary` บังคับทุก PR ที่แตะขอบนั้น (ที่มา ⇒ 0907 ⑨ · LANE-Q `20260905_2201` · `COO-DECISION 20260905_2249` · `docs/SCRIPT_LANE.md`)
+🔴 **ยื่นอ็อบเจกต์ Python เข้าล่ามภาษาอื่น (Lua/`eval`/template) ต้องปิด attribute access ระดับ runtime + เทสปักที่ค่าที่คืนกลับมา** ไม่ใช่ตัวอ็อบเจกต์ที่ยื่นเข้า · `pf-adversary` บังคับทุก PR ที่แตะขอบนี้ ⇒ E-DOC
 
-🔴 **บรรทัด `SCOREBOARD:` — ฟิลด์ที่สาม (หลักฐาน) บังคับ** (`<สถานะ> | <ประโยคผู้เล่น> | <หลักฐาน>`) · `tools_bridge/pf_scoreboard.py` ต่อบรรทัดที่ตัดขึ้นบรรทัดใหม่ให้เอง ห้ามแก้ไฟล์รอบเพื่อเอาใจเครื่องมือ · ไม่มีฟิลด์ที่สาม = แถว `MALFORMED` ใน `PLAYER_STATUS.html` · ฉบับเต็ม ⇒ 0907 ㉔
+🔴 **`SCOREBOARD:` ฟิลด์ที่สาม (หลักฐาน) บังคับ** — ไม่มี = แถว `MALFORMED` ⇒ E-DOC
 
 ```
-ห้ามแตะ canonical DB ตัวจริง (ยกเว้น LANE-DB ผ่าน migration ที่ผ่าน pytest+pf-adversary — `COO-DECISION 20260901_1112`, ดู prompts/LANE-DB.md)
+ห้ามแตะ canonical DB ตัวจริง (ยกเว้น LANE-DB ผ่าน migration ที่ผ่าน pytest+pf-adversary)
 ห้ามแก้ src/ tools/ tests/ ของ repo โค้ด
 ห้าม git commit / push / merge / rebase / force / reset / clean / stash
 ห้ามแก้ GAME_TEST_QUEUE.md / QUEUE_STATUS_SNAPSHOT.md <- ของ LANE-K · CHIEF_CONTINUATION.md <- ของ chief
@@ -101,67 +92,37 @@
 ห้ามพิมพ์อักขระนอก cp874 ออกคอนโซล
 ```
 
-- 🔴 **ห้ามแก้ไฟล์ tracked และห้ามสร้างไฟล์บน path ที่ tracked จาก mount** (OPS-003 · R174) ไม่ว่าผู้เทสหรือ COO · ที่ของเครื่องมือฝั่งคลาวด์ที่แตะ mount ได้คือ `staged\` `outbox\` `_to_delete\` (untracked โดยตั้งใจ) · ของที่ต้องเข้ารีโปจริง ⇒ **วางจ็อบให้สะพาน commit บน Windows**
-- 🔴 **ป้ายเวลาทุกจดหมายต้องมาจาก `TZ=Asia/Bangkok date` เท่านั้น** (PANYA-ORDER 2026-08-27 · R193) ห้ามคำนวณ/เดา/พิมพ์ด้วยมือ · ก่อน push เทียบกับบรรทัดล่าสุดของ `notes_to_chief/_BRIDGE_HEARTBEAT.txt` **ต่างเกิน 60 นาที = หยุดแล้วรายงาน**
-- 🔴 **ก่อน commit ไฟล์ generated/ledger ใด ๆ: regenerate แล้วตรวจว่า diff ว่าง** (PANYA-ORDER ข้อ 5 · R193/R194) — ไฟล์ที่มีคำว่า pin/digest/ledger/checksum/GRADE_SUBSET ในชื่อ ให้รันตัวสร้างของมันเองใหม่แล้วเทียบ **ห้ามเชื่อเลขเดิมจากรอบก่อน**
-- 🔴 **ก่อนเปิดใบ RE ต้อง grep ชื่อคลาส/สแปน/VA ที่จะถามใน `external/` และ `archive/` ก่อน แล้วเขียน "ผลการ grep" ลงในใบ** (`COO-DECISION 20260905_0646` ข้อ 2 · ถ้อยคำ chief R350) — เขียนทั้งที่ **เจอ** และที่ **ไม่เจอ** พร้อม path:บรรทัด · สิ่งที่ค้นเจอแล้ว **ต้องถูกตัดออกจากคำถามของใบ** ใบเหลือเฉพาะข้อที่ยังไม่มีใครวัด · ใบที่ไม่มีช่องนี้ **ตีกลับ ไม่ต้องส่งให้ RE runner**
-  🔴 เวลา RE runner คือทรัพยากรชั้นเดียวกับเวลา attended — ใบละหนึ่งรอบเครื่อง Panya
-  · `HYPOTHESIS_LEDGER.json` และ `FUNCTIONAL_COVERAGE.json` pin ด้วย hash ที่คำนวณมือ ไม่มี generator CLI ⇒ แตะเมื่อไหร่ (รวม `tests/test_foundation_legacy_seam.py`) ต้องรันทั้งคู่ก่อน push: `python3 tools/verify_hypothesis_ledger.py` · `python3 tools/verify_functional_coverage.py` (exit 0 + `PASS` = ไม่มี drift)
-  · 🔴 **สองคำสั่งนี้รันบน clone คลาวด์ได้เลย ไม่ต้องเข้าคิว `STATIC-ON-BRIDGE` ไม่ต้องรอสะพาน** ⇒ ไม่มีข้ออ้างให้ข้าม
-- 🔴 **ห้ามตั้งชื่อสาขาเอง — ใช้สาขา `claude/*` ที่ระบบสุ่มให้ ทั้งสองรีโป · หนึ่งเซสชัน = หนึ่งสาขา · เปิด PR ทีละหนึ่งใบต่อรีโป** · ฉบับเต็ม ⇒ 0907 ㉒
-  · รอบที่ต้องรวมหลายเรื่องในใบเดียวเพราะข้อจำกัดนี้ ⇒ เขียนเหตุผลในไฟล์รอบ + **แยกคนละคอมมิตต่อเรื่อง** · เต็ม ⇒ [`PROCESS_GATES.md`](PROCESS_GATES.md) §24
-- 🔴 **วางจดหมายด้วยชื่อสุดท้าย — ห้าม rename หลังวาง** (`COO-DECISION 20260905_0847` ข้อ 7(ข) · `COO-DECISION 20260905_0852` · ka1-A `0845` · กลไก+เหตุการณ์ ⇒ 0907 ⑪)
-  ชื่อผิดแล้วทำยังไง: **วางไฟล์ใหม่ด้วยชื่อที่ถูก แล้วทิ้ง stub ชี้จากชื่อเดิม** ห้าม `git mv`/rename บนสะพาน (การย้ายเข้า `archive/` ผ่าน PR ยังทำได้ตามเดิม — นั่นคนละทางกับ rename บน mount)
-- 🔴 **ก่อนประกาศว่า "ไม่มี / ไม่มี cast / ไม่มีตาราง / ไม่เคยวัด" ต้อง grep ให้ครบสี่ที่ก่อน** (`COO-DECISION 20260905_0847` ข้อ 6 · จาก `LANE-A 0750` ข้อ 3): **ทุกไฟล์ใน `gamedata/tables/` ที่มีคอลัมน์คีย์ที่เกี่ยว + `external/` + `archive/` + `notes_to_chief/consumed/`** แล้วเขียนผล (เจอ/ไม่เจอ **พร้อม path:บรรทัด**) ลงในใบหรือจดหมายนั้น
-  · (⇒ 0907 ⑫) · รายชื่อแหล่งของแต่ละโดเมนเป็นของ**สายเจ้าของโมดูล** (WORLD = `CREATURE_LINE_SOURCES` ของ LANE-A) · ประกาศ "ไม่มี" ที่ไม่มีช่องนี้ = **ตีกลับ**
-- 🔴 **"ต่อสายแล้ว / WIRED" แปลว่า observed ไม่ใช่ named** (`COO-DECISION 20260905_0947` ข้อ 1 · ถ้อยคำจาก chief `0902` · บังคับทุกสายทันทีสำหรับคำว่า "ต่อสายแล้ว/wired" ในจดหมาย ไฟล์รอบ และ PR body) — ครบสามข้อจึงเขียนคำนี้ได้:
-  (ก) **มิวแทนต์ที่ทำให้ฟีเจอร์ตายใน production แต่ชื่อยังอยู่ในไฟล์ ต้องทำให้เทสแดง**
-  (ข) **ยามต้องปักที่ side effect ที่มีผู้เขียนที่เดียวในโค้ดเบส** ไม่ใช่ชื่อ / substring / AST-name
-  (ค) **`getattr(...) is not None` และ `callable(...)` ไม่นับเป็นยามของจุดต่อสาย**
-  🔴 **ห้ามยกกฎนี้ย้อนไปรื้อเทสเก่าทั้งรีโป** ใช้กับ **จุดต่อสายใหม่** และ **จุดที่ adversary ชี้** เท่านั้น (`0947` ท้ายใบ) · นิยาม WIRED v2 เดิม ⇒ [`EVIDENCE_GATES.md`](EVIDENCE_GATES.md)
-- 🔴 **restore DB ต้องทั้งไฟล์เท่านั้น — ห้าม restore บางตาราง ไม่ว่าจากเครื่องมือไหน** (COO-DECISION 2026-08-29T13:44 ตอบใบ chief 1332 · R227)
-  ห้ามแก้มือใน DB ตรง ๆ ทุกกรณี — เคสที่พังไปแล้วจริง ใช้เครื่องมือกู้ attended-only เท่านั้น (ใบใน `GAME_TEST_QUEUE.md`)
-  · เพราะอะไร (เหตุผลเต็ม/ตัวนับ identity/ด่าน 2) ⇒ archive `AGENTS_HISTORY_20260828.md` §11
-
-- 🔴 **รอบที่รัน `pf-adversary`: ห้าม `git add -A` ทั้งรอบ — stage ทีละไฟล์ · อ่าน `git diff --cached` ก่อน commit · ก่อน push อ่านทุก hunk ที่ตัวเองไม่ได้ตั้งใจเขียน** (COO-DECISION 2026-08-29T14:44 ตอบใบสาย B 1410 · R228)
-  · ตัวกันถาวร (pf-adversary รันบน git worktree ของตัวเองเท่านั้น) ⇒ archive `AGENTS_HISTORY_20260828.md` §11
-
-- 🔴 **เซสชันที่มี Agent/Task tool ต้องเรียก `pf-adversary` จริง** · ไม่มีให้เรียก = `ADVERSARY_UNAVAILABLE <PR/กิ่ง>` + self-review + สั่งบนกิ่งนั้นเป็นงานแรกรอบถัดไป · ฉบับเต็ม ⇒ 0907 ㉓
-- 🔴 **ถ้อยคำเวลาของ `pf-adversary` (COO-DECISION 20260903_2345 · ⇒ 0907 ⑬) — สามข้อ แทนกฎ "ต้องมีผลก่อน push เสมอ" เดิม:**
-  1. สั่ง `pf-adversary` **ต้นรอบพร้อมเริ่มงาน** ไม่ใช่ก่อน commit (⇒ 0907 ⑭)
-  2. ผลยังไม่คืนตอน push ⇒ **push ตามเดิม ห้ามถือล็อกรอ** · ไฟล์รอบบันทึก `ADVERSARY_PENDING <PR>` · **รอบถัดไปของสายเดียวกันหยิบผลเป็นงานแรก ก่อน claim งานใหม่ใด ๆ** · เจอบั๊กจริงที่ตอนนั้นอยู่บน main แล้ว = เปิดใบแก้ตัดจาก main ทันที ไม่รอคิว
-  3. **ห้ามเขียน "ผ่าน adversary" ในไฟล์รอบหรือ PR body ขณะผลยังไม่คืน** — เขียนได้เฉพาะ `ADVERSARY_PENDING` หรือผลจริงที่คืนแล้วเท่านั้น
-  "รอนานแล้ว/รอบยาวเกินไป" ไม่ใช่ข้อยกเว้นของข้อ 3 (การรออนุญาตคือข้อ 2)
-
-- 🔴 **ผล RE ที่ขอ attended capture ⇒ ผู้บริโภคผลเปิดใบ GT ในรอบเดียวกัน ขอเลขจาก chief** (`COO-DECISION 20260904_2142` ข้อ 3 · `PANYA` ผ่าน ka1-A `2133`)
-  ห้ามปิดด้วยเหตุผล "ใบ RE เดิมเสนอ capture ไว้แล้วในตัวเอง" — **`CLIENT_RE_QUEUE.md` ไม่ใช่คิวของผู้เทส** ผู้เทสอ่าน `GAME_TEST_QUEUE.md` + `NOW.md` "รอเครื่องคุณ" เท่านั้น
-- 🔴 **ขยายกฎ RE→GT ข้างบน: RE ที่ "ตอบแล้ว" และปลดล็อกฟีเจอร์ผู้เล่น ⇒ ผู้บริโภคผลเปิดใบสร้าง (CORE-REQUEST หรือ PR ของสายตัวเอง) + ใบ GT ยืนยันบนจอ ในรอบเดียวกัน** (`PANYA-DECISION 20260905_1130` ข้อ 1-2 · `COO-DECISION 20260905_1148` ข้อ 4 · ⇒ 0907 ⑮)
-  ไม่มีฟีเจอร์รอ = เขียนบรรทัด `NO_FEATURE_WAITING: <เหตุผล>` แทนใบสร้าง · กรณีแรกที่เข้าเกณฑ์นี้ = GO! auto-walk (`LANE-UI 1151`)
-  🔴 **ตัวตรวจของกฎนี้มีบรรทัดของตัวเอง — ห้ามยืมโทเคน `QUEUE_TRIAGE:` ข้างล่าง**  (ที่มา ⇒ archive §RE_TO_BUILD): chief ตรวจทุก 6 ชม. แล้วเขียนบรรทัด `RE_TO_BUILD_TICKET_AUDIT: ตรวจ N ใบ RE ที่ปิดในช่วงนั้น · มีใบสร้างคู่/มี NO_FEATURE_WAITING <เลข…> · ขาด <เลข…>` แยกจาก `QUEUE_TRIAGE:` เสมอ — ไม่ตรวจเมื่อครบ 6 ชม. = นับ "ไม่ส่งงาน" เหมือน `QUEUE_TRIAGE:`
-- 🔴 **"shared world": สถานะโลกต่อฉาก (roster/ตำแหน่งมอน · เลือดมอน · ศพ/เกิดใหม่ · ของพื้น+อายุ) อยู่ใน หน่วยความจำ process เซิร์ฟเวอร์ แชร์ทุก session ในฉากเดียวกัน — reboot = โลกใหม่ ไม่ต้องกู้ของพื้น/เลือดมอน/ศพจาก DB หรือจากที่ไหน ลง DB เฉพาะของตัวละคร/บัญชี** (`PANYA-DECISION 20260905_1057` ข้อ 1 + `1140` แก้ถ้อยคำ · `COO-DECISION 20260905_1148` ข้อ 1)
-  เจ้าของ: **LANE-A = world registry · LANE-B = combat state เขียนลง registry ของ A · LANE-DB ไม่รับงานโลก** · "ทะเบียนต่อ session" และ "relogin แล้วรีเซ็ต" = ข้อบกพร่อง
-  เกณฑ์ผ่านเดียว (`1140` ข้อ 3): **session ที่สอง หรือ relogin โดยเซิร์ฟไม่ reboot เห็นเลือดมอน/ตำแหน่งมอน/ศพ/ของพื้นเหมือน session แรก** · ใบ GT ใช้ relogin ได้ (เครื่อง Panya มี client เดียว)
-- 🔴 **กฎ delta: เฟรมที่เกิดจากการกระทำของผู้เล่นคนเดียว ห้ามทำให้ client ลบ/วาดโลกใหม่ทั้งฉาก — ส่งเฉพาะส่วนต่าง** (`PANYA-DECISION 20260905_1057` ข้อ 2 · `COO-DECISION 20260905_1148` ข้อ 2)
-  · checklist บังคับที่ผูกสองข้อบนนี้ (`TWO_SESSIONS_SAME_SCENE:`) ⇒ [`PROCESS_GATES.md`](PROCESS_GATES.md) §25 · `pf-adversary` ตรวจเป็นข้อบังคับข้อ 14
-- 🔴 **คัดกรองใบ attended = หน้าที่ต่อเนื่องของ chief (เจ้าของ `GAME_TEST_QUEUE.md`)** (`PANYA-DECISION 20260904_2148` · `COO-DECISION 20260904_2159`)
-  ทุกรอบที่ chief แตะคิว และ**อย่างน้อยทุก 6 ชม.** · ไฟล์รอบต้องมีบรรทัด `QUEUE_TRIAGE: ตรวจ N ใบ · ยกเลิก <เลข…> · คงไว้ <เลข…> เพราะ <เหตุผลสั้น>` · ไม่ตรวจเมื่อครบ 6 ชม. = นับ "ไม่ส่งงาน"
-  · เกณฑ์คัดออก: คำถามถูกตอบโดยผลอื่น / production เปลี่ยน / คำเคาะของ Panya / ใบอื่นครอบ ⇒ `CANCELLED - refuted by / covered by / no longer needs proving because <อ้างอิง>` (`1934`) · **ยกเลิกไม่ใช่ลบ**
-  · **ใบที่ chief ไม่แน่ใจว่ายังจำเป็นไหม ห้ามคงไว้เงียบ ๆ** — เขียนถาม COO หนึ่งบรรทัดในจดหมายรอบนั้น COO ตัดสิน · ใบที่เปิดตาม `PANYA-ORDER` โดยตรง chief ยกเลิกเองไม่ได้ ต้องให้ COO/Panya เคาะ
-  · จดหมายรอบของ chief ทุกรอบต้องมีบรรทัด `READY/PENDING ที่ไม่อยู่ใน NOW รอเครื่องคุณ: <เลข…>` (`2142` ข้อ 5)
-
-- 🔴 **ชื่อไฟล์ใหม่ทุกไฟล์ใน `pf_bridge` ≤100 ตัวอักษรรวมนามสกุล** (`PANYA-ORDER 20260906_1910` ข้อ 3.3 ผ่าน `COO-DECISION 1955`) — ไฟล์เพิ่ม/เปลี่ยนใน PR ที่ชื่อยาวเกิน = เกตแดงพร้อมบอกชื่อ (`tools_bridge/pf_gate_preflight.py` `check_new_filename_length`) · regression-only: **ไฟล์เก่าห้าม rename** (⇒ 0907 ⑯)
-- 🔴 **`GT-233` ปิดแล้วสถานะ `NEGATIVE-v3`** (R322A 18:57 ผ่าน `PANYA-ORDER 1910`/`COO-DECISION 1955`) — **ห้ามบูต trial `AddSurveyData` (`PF_M2_SURVEY_TRIAL`) อีกทุกสาย** · M2 เดินทาง (ก): เซิร์ฟตอบ `TriggerVital 0x1FB2` trigger 2/3 เอง · ห้ามขอเครื่องเจ้าของสำหรับ M2 จนกว่าจะมีเฟรมผู้สมัครที่อ้าง binary ได้
-- 🔴 **ใบ `20260907_1441_COO-TO-CHIEF-section7-block` ยกลงคำต่อคำ R389**: **`GameMaster.dll` ติดถาวร ห้าม rollback** · **reaper ปิดเอง**: claim ผี >3 ชม. / `SUPERSEDED-BY:`/`DUPLICATE-OF:` · **ห้าม `rm -r`** · grep ที่ห้า `reference_codex_attr/` · **pin แดงตาม docstring = กลับ pin ในใบเดียวกัน** · grep กลไกไม่ใช่การสะกด · เพดานต่อใบ 8,192 B · 🔴 **allowlist/skip pin/xfail ปิดผล adversary = ยังไม่จ่าย** (`0945`) เว้นแต่เขียนเหตุ + งานแรกรอบหน้า · 🔴 `1041`: **`require(cls)`/`SkipTest` ใน `setUpClass` ห้าม = `require(self)` ต่อเมธอด** · **`[วัดแล้ว]` ต้องมีคำสั่งรันซ้ำได้ในใบ** · 🔴 `1141`: **`CORE-REQUEST` ไม่มีโทเคนว่าบล็อกมีจริง = chief ตีกลับได้** · 🔴 `1245`: **heartbeat ค้าง = push ต่อ + บันทึกตัวเลข ห้ามหยุดรอบ** · **early-return ต่างแพลตฟอร์ม = "ไม่ได้วัด" ไม่ใช่ "ผ่าน" ต้องมีเทสปัก**
-- 🔴 **ใบผลที่มี `NEGATIVE-MEASURED` + สาเหตุ + ข้อเสนอใบสร้าง ⇒ COO ต้องตั้งเจ้าของ หรือปฏิเสธพร้อมเหตุผล**ในรอบถัดไป · **เงียบ = ผิดกฎ** (กฎถาวรของเจ้าของ `1349` ผ่าน ka1-A) · LANE-K ขึ้นหมวด "ผลลบที่ยังไม่มีเจ้าของใบสร้าง" ในสแนปช็อตทุกรอบจนกว่าจะปิด
-  ที่มา ⇒ 0907 ⑰
-- 🔴 **เกต = CPython 3.14 · โคลนคลาวด์ = 3.11** — แดงเฉพาะบนเกตให้ซ้อมด้วย `uv run --python 3.14 ... -m pytest` ก่อนสรุปว่าเป็นเรื่องแพลตฟอร์ม (รายละเอียด ⇒ ใบ `20260907_1441_COO-DECISION-a1410-gate-py314-and-9b-LANE-E`)
-- ประวัติ/เหตุผลใต้กฎของ §7 ที่ย้ายออกไปแล้ว ⇒ [`archive/AGENTS_HISTORY_20260906.md`](archive/AGENTS_HISTORY_20260906.md) (R376) · **`⇒ 0907 ①..⑳` = [`archive/AGENTS_HISTORY_20260907.md`](archive/AGENTS_HISTORY_20260907.md)** (R392) · คำต่อคำ ไม่มีการลบ
-- 🔴 **migration ที่แตะ canonical ต้องหมุน `CANON_SHA.txt` ใน PR เดียวกันเสมอ ห้ามแยกสองรอบ** (`COO-DECISION 20260901_1241` ข้อ ② · เหตุผล ⇒ archive §CANON_SHA) · ข้อ ①/③ ยังเป็นช่องว่างไม่มีเจ้าของ ⇒ [archive](archive/CHIEF_CONTINUATION_ARCHIVE_20260906_lane_charters_db_cs_ui_q.md)
-- 🔴 **ช่องค้นบังคับของใบ RE ผูก*ผู้บริโภคผล*ด้วย ไม่ใช่ผู้เขียนใบฝ่ายเดียว** — ต้องตามการอ้างอิงในช่องค้นก่อนสั่งงานต่อ (`LANE-A 20260905_0430` · ตัวอย่างถูก `RE-256`)
-### 🔴 วิธีเปิด PR (บังคับทุกสาย) ⇒ [`HOWTO_OPEN_A_PR.md`](HOWTO_OPEN_A_PR.md) · ผู้เทสไม่เปิด PR ตาม §7 · marker `PF-AUTOMERGE: v4` เป๊ะ · ห้าม merge/ปิด PR เอง · ขนาด ≤ ~6 ไฟล์ต่อใบ · 🔴 **สตริง marker ห้ามอยู่ใน body ของ PR ใบใด ทุกใบทั้งสองรีโป** เว้นเป็นบรรทัด marker จริงของใบที่ต้องการให้ merge (claim = ห้ามมีจนจบรอบ) · **ห้ามสะกดสตริงเพื่ออธิบายว่าถอนมันแล้ว ให้เรียกว่า automerge marker** · ท่าหยุด PR มาตรฐาน = ถอน marker → convert to draft → GET body กลับมา grep ตัวเอง (`COO-DECISION 20260907_0845` · `#993`)
-- 🔴 **"เปิดแล้ว/landed/ส่งแล้ว" ต้องมาพร้อมคำสั่ง `grep` ที่รันซ้ำได้ + คอมมิต** ไม่มี = เขียนได้แค่ "จะเปิดในรอบนี้" (`COO-DECISION 20260908_1943` ②)
-- 🔴 **ป้ายสถานะชั่วคราว (`[สมมติของสาย ... - รอ COO ยืนยัน]`) ห้ามอยู่ในไฟล์ `migrations/*.sql`** — checksum ผูกกับไบต์ทั้งไฟล์ (`sha256(path.read_bytes())`) แก้คอมเมนต์ตัวเดียว = DB ของเจ้าของบูตไม่ขึ้น · ที่อยู่ที่ถูก = ไฟล์เทส/ดอกสตริงพิน · ป้ายที่ค้างใน migration ที่ apply แล้ว **ปล่อยไว้** (`COO-DECISION 20260908_2055`)
-- 🔴 **PR addendum ต้องมี automerge marker เหมือน PR ปกติ** — ไม่มี = ผีถาวร reaper ไม่แตะ ผล adversary ไม่ถึง main รอบหน้า grep ไม่เจอและจ่ายหนี้ซ้ำ (วัด: 16 ใบค้าง เก่าสุด ~45 ชม. · `ls rounds/ | grep -c addendum` = 0) · ใบของสายไหน สายนั้นเติมเอง (`COO-BLOCKER-SWEEP 20260908_2141` ②)
+- 🔴 ห้ามแก้ไฟล์ tracked/สร้างไฟล์บน path tracked จาก mount (OPS-003) — เครื่องมือคลาวด์แตะได้เฉพาะ `staged\` `outbox\` `_to_delete\` ⇒ E-DOC
+- 🔴 ป้ายเวลาทุกจดหมายจาก `TZ=Asia/Bangkok date` เท่านั้น · ต่างจาก heartbeat เกิน 60 นาที = หยุดแล้วรายงาน
+- 🔴 ก่อน commit ไฟล์ generated/ledger/pin/digest/checksum: regenerate แล้วตรวจ diff ว่าง ห้ามเชื่อเลขรอบก่อน
+- 🔴 ก่อนเปิดใบ RE ต้อง grep `external/`+`archive/` ก่อน เขียนผลเจอ/ไม่เจอพร้อม path:บรรทัดลงในใบ — ไม่มีช่องนี้ = ตีกลับ ⇒ E-DOC
+  · `HYPOTHESIS_LEDGER.json`/`FUNCTIONAL_COVERAGE.json`: แตะแล้วต้องรัน `tools/verify_hypothesis_ledger.py` + `tools/verify_functional_coverage.py` ก่อน push (รันบน clone คลาวด์ได้เลย)
+- 🔴 ห้ามตั้งชื่อสาขาเอง ใช้ `claude/*` ที่ระบบสุ่มให้ · หนึ่งเซสชันหนึ่งสาขา · PR หนึ่งใบต่อรีโปต่อรอบ ⇒ E-DOC · หลายเรื่องในใบเดียว = แยกคนละคอมมิต ⇒ [`PROCESS_GATES.md`](PROCESS_GATES.md) §24
+- 🔴 วางจดหมายด้วยชื่อสุดท้าย ห้าม rename หลังวาง — ชื่อผิด = วางไฟล์ใหม่ + stub ชี้จากชื่อเดิม ⇒ E-DOC
+- 🔴 ก่อนประกาศ "ไม่มี/ไม่เคยวัด" ต้อง grep ครบสี่ที่: `gamedata/tables/` ที่เกี่ยว + `external/` + `archive/` + `notes_to_chief/consumed/` เขียนผลพร้อม path:บรรทัด — ไม่มีช่องนี้ = ตีกลับ ⇒ E-DOC
+- 🔴 "ต่อสายแล้ว/WIRED" = observed ไม่ใช่ named — ครบสามข้อ: (ก) มิวแทนต์ทำฟีเจอร์ตาย production ต้องเทสแดง (ข) ยามปักที่ side effect ผู้เขียนที่เดียว ไม่ใช่ชื่อ/substring (ค) `getattr(...) is not None`/`callable(...)` ไม่นับเป็นยาม · ใช้กับจุดต่อสายใหม่/จุดที่ adversary ชี้เท่านั้น ⇒ [`EVIDENCE_GATES.md`](EVIDENCE_GATES.md)
+- 🔴 restore DB ต้องทั้งไฟล์เท่านั้น ห้าม restore บางตาราง ห้ามแก้มือใน DB ตรงๆ ทุกกรณี ⇒ archive `AGENTS_HISTORY_20260828.md` §11
+- 🔴 รอบที่รัน `pf-adversary`: ห้าม `git add -A` — stage ทีละไฟล์ อ่าน `git diff --cached` ก่อน commit ⇒ archive `AGENTS_HISTORY_20260828.md` §11
+- 🔴 เซสชันที่มี Agent/Task tool ต้องเรียก `pf-adversary` จริง — ไม่มี = `ADVERSARY_UNAVAILABLE <PR/กิ่ง>` + self-review + สั่งบนกิ่งนั้นเป็นงานแรกรอบถัดไป ⇒ E-DOC
+- 🔴 จังหวะ `pf-adversary` สามข้อ: (1) สั่งต้นรอบพร้อมเริ่มงาน (2) ผลไม่คืนตอน push = push ตามเดิม บันทึก `ADVERSARY_PENDING <PR>` รอบถัดไปหยิบผลก่อนงานใหม่ (3) ห้ามเขียน "ผ่าน adversary" ก่อนผลคืน ⇒ E-DOC
+- 🔴 ผล RE ที่ขอ attended capture ⇒ ผู้บริโภคผลเปิดใบ GT รอบเดียวกัน ขอเลขจาก chief — `CLIENT_RE_QUEUE.md` ไม่ใช่คิวผู้เทส ⇒ E-DOC
+  · ขยาย: RE ที่ตอบแล้วปลดล็อกฟีเจอร์ผู้เล่น ⇒ เปิดใบสร้าง (CORE-REQUEST/PR) + ใบ GT รอบเดียวกัน หรือ `NO_FEATURE_WAITING: <เหตุผล>` ⇒ E-DOC
+  · chief ตรวจทุก 6 ชม. เขียน `RE_TO_BUILD_TICKET_AUDIT:` แยกจาก `QUEUE_TRIAGE:` เสมอ
+- 🔴 shared world: สถานะโลกต่อฉาก (roster/เลือดมอน/ศพ/ของพื้น) อยู่ในหน่วยความจำ process แชร์ทุก session — reboot = โลกใหม่ ลง DB เฉพาะตัวละคร/บัญชี · เจ้าของ: A = world registry · B เขียน combat state ลง registry ของ A · เกณฑ์ผ่าน: session ที่สอง/relogin ไม่ reboot เห็นสภาพเดิม ⇒ E-DOC
+- 🔴 กฎ delta: เฟรมจากผู้เล่นคนเดียวห้าม client ลบ/วาดโลกใหม่ทั้งฉาก ส่งเฉพาะส่วนต่าง — `TWO_SESSIONS_SAME_SCENE:` บังคับทุก PR ⇒ [`PROCESS_GATES.md`](PROCESS_GATES.md) §25
+- 🔴 คัดกรองใบ attended = หน้าที่ต่อเนื่องของ chief ทุกรอบที่แตะคิว + อย่างน้อยทุก 6 ชม. — ไฟล์รอบต้องมี `QUEUE_TRIAGE: ตรวจ N ใบ · ยกเลิก <เลข> · คงไว้ <เลข> เพราะ <เหตุผล>` · ยกเลิกไม่ใช่ลบ (`CANCELLED - refuted by/covered by <อ้างอิง>`) · ไม่แน่ใจ = ถาม COO · จดหมายรอบต้องมี `READY/PENDING ที่ไม่อยู่ใน NOW รอเครื่องคุณ: <เลข>` ⇒ E-DOC
+- 🔴 ชื่อไฟล์ใหม่ทุกไฟล์ ≤100 ตัวอักษรรวมนามสกุล — เกตแดงพร้อมชื่อไฟล์ (`check_new_filename_length`) · ไฟล์เก่าห้าม rename
+- 🔴 `GT-233` ปิดแล้ว `NEGATIVE-v3` — ห้ามบูต trial `AddSurveyData` (`PF_M2_SURVEY_TRIAL`) อีก · ห้ามขอเครื่องเจ้าของสำหรับ M2 จนมีเฟรมอ้าง binary
+- 🔴 ใบ `1441_COO-TO-CHIEF-section7-block` (R389): `GameMaster.dll` ติดถาวรห้าม rollback · reaper ปิด claim ผี >3 ชม./`SUPERSEDED-BY:`/`DUPLICATE-OF:` เอง · ห้าม `rm -r` · grep ที่ห้า `reference_codex_attr/` · **pin แดงตาม docstring = กลับ pin ในใบเดียวกัน** · เพดานต่อใบ 8,192 B · allowlist/skip/xfail ปิดผล adversary = ยังไม่จ่าย เว้นเขียนเหตุ+งานแรกรอบหน้า · `require(cls)`/`SkipTest` ใน `setUpClass` ห้าม ใช้ `require(self)` ต่อเมธอด · `[วัดแล้ว]` ต้องมีคำสั่งรันซ้ำได้ · **`CORE-REQUEST` ไม่มีโทเคนบล็อกจริง = chief ตีกลับได้** · heartbeat ค้าง = push ต่อ+บันทึกตัวเลข ห้ามหยุดรอบ · early-return ต่างแพลตฟอร์ม = "ไม่ได้วัด" ต้องมีเทสปัก ⇒ E-DOC
+- 🔴 **ใบ `NEGATIVE-MEASURED` + สาเหตุ + ข้อเสนอใบสร้าง ⇒ COO ต้องตั้งเจ้าของหรือปฏิเสธพร้อมเหตุผลรอบถัดไป — เงียบ = ผิดกฎ** (`1349`) ⇒ E-DOC
+- 🔴 **เกต = CPython 3.14 · โคลนคลาวด์ = 3.11** — แดงเฉพาะบนเกตให้ซ้อมด้วย `uv run --python 3.14 ... -m pytest` ก่อนสรุปว่าเป็นเรื่องแพลตฟอร์ม
+- ประวัติ/เหตุผลของ §7 ทั้งหมด ⇒ [`archive/AGENTS_HISTORY_20260906.md`](archive/AGENTS_HISTORY_20260906.md) · [`archive/AGENTS_HISTORY_20260907.md`](archive/AGENTS_HISTORY_20260907.md) · [`archive/AGENTS_HISTORY_20260909_ye14ia_docround.md`](archive/AGENTS_HISTORY_20260909_ye14ia_docround.md) (E-DOC — คำต่อคำ ไม่มีการลบ)
+- 🔴 migration ที่แตะ canonical ต้องหมุน `CANON_SHA.txt` ใน PR เดียวกันเสมอ
+- 🔴 ช่องค้นบังคับของใบ RE ผูกผู้บริโภคผลด้วย ไม่ใช่ผู้เขียนใบฝ่ายเดียว ⇒ E-DOC
+### 🔴 วิธีเปิด PR (บังคับทุกสาย) ⇒ [`HOWTO_OPEN_A_PR.md`](HOWTO_OPEN_A_PR.md) · marker `PF-AUTOMERGE: v4` เป๊ะ · ห้าม merge/ปิด PR เอง · ขนาด ≤ ~6 ไฟล์ต่อใบ · **สตริง marker ห้ามอยู่ใน body ของ PR ใบใด** เว้นบรรทัด marker จริงของใบที่ต้องการ merge (claim ห้ามมีจนจบรอบ) — เรียกว่า automerge marker ห้ามสะกดเพื่ออธิบาย · ท่าหยุด PR = ถอน marker → draft → GET ยืนยัน
+- 🔴 "เปิดแล้ว/landed/ส่งแล้ว" ต้องมาพร้อม `grep` รันซ้ำได้ + คอมมิต ไม่มี = เขียนได้แค่ "จะเปิดในรอบนี้"
+- 🔴 ป้ายสถานะชั่วคราว (`[สมมติของสาย...]`) ห้ามอยู่ใน `migrations/*.sql` — checksum ผูกไบต์ทั้งไฟล์ · ที่อยู่ที่ถูกคือไฟล์เทส/ดอกสตริงพิน
+- 🔴 PR addendum ต้องมี automerge marker เหมือน PR ปกติ — ไม่มี = ผีถาวร reaper ไม่แตะ ใบของสายไหนสายนั้นเติมเอง
 
 ---
 
