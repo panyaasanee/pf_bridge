@@ -4267,13 +4267,20 @@ result: (ยังไม่มีผล)
 ⇒ ถ้ามีคอมมิตที่เติมแค่สตริง `LANE_A_M2_GUARD` (หรือเทสที่ assert ชื่อโทเคน) เข้าโมดูลกำพร้าตัวนี้ **เกรปเดิมจะเขียวโดยที่บูตไม่พิมพ์อะไรเลย** ⇒ ka1-A เผาหน้าต่าง attended ของเจ้าของฟรีหนึ่งครั้ง
 ~~RECHECK เดิม: `cd ../pirate-force-server && git grep -l "LANE_A_M2_GUARD" origin/main`~~ **ถอน — เก็บไว้ไม่ลบตามกติกา**
 
-RECHECK (สามเงื่อนไข ต้องผ่านครบ ไม่ใช่ข้อเดียว · รันจากรากรีโป `pf_bridge`):
+🔴 **[แก้ 2026-09-09T13:xx+07:00 โดย LANE-A รอบ `949y62` (เจ้าของใบ) ตาม `PANYA-ORDER 20260908_2155` (ka1-A) และ `COO-DECISION 20260909_1312` ข้อ 3] เงื่อนไขข้อ 3 เดิมชี้ผิดไฟล์ ⇒ ไม่มีทางเขียวได้เลยไม่ว่าโค้ดจะดีแค่ไหน** — ka1-A รันเองก่อนเสนอบูตแล้วข้อ 3 คืนค่าว่าง เพราะมันสั่งหา `print(` ใน `world_m2_trigger_vital_response.py` ซึ่งเป็น **ตัวตัดสิน** และไม่มีบรรทัดพิมพ์เลยแม้แต่บรรทัดเดียว **โดยการออกแบบ** · ตัวที่ **พิมพ์จริง** คือ hook: `lane_hooks/lane_a_island_trigger_log.py:102` (`GUARD_TOKEN = "LANE_A_M2_GUARD"`) และ `:344` (บรรทัดที่ประกอบข้อความ) · สถาปัตยกรรมถูกแล้ว (ตัดสินแยกจากพิมพ์) **ที่ผิดคือบรรทัดตรวจ ไม่ใช่โค้ด**
+🔴 **เจตนาเดิมไม่ทิ้ง** — ยังต้องกันโทเคนปลอมจากโมดูลกำพร้าแบบที่บ้านนี้เสีย `GT-301` ไป: บรรทัดใหม่ผูกกับ **โทเคนจริงในไฟล์ที่พิมพ์จริง** (ต้องเจอทั้งบรรทัดนิยาม *และ* บรรทัดที่ประกอบข้อความ — คอมมิตที่เติมแค่สตริงเปล่าจะไม่ผ่าน) และกับ **การเรียกตัวตัดสินจากไฟล์ hook**
+~~RECHECK เดิม (สามเงื่อนไข) ข้อ 3: `git grep -nE "print\(|_say\(" origin/main -- 'src/pirateforce_foundation/world_m2_trigger_vital_response.py'`~~ **ถอน — เก็บไว้ไม่ลบตามกติกา · เหตุผล: ชี้ไปที่ไฟล์ตัวตัดสินซึ่งไม่มีวันพิมพ์อะไรโดยการออกแบบ**
+
+RECHECK (สี่เงื่อนไข ต้องผ่านครบ ไม่ใช่ข้อเดียว · รันจากรากรีโป `pf_bridge`):
 ```
 cd ../pirate-force-server \
  && git grep -l "LANE_A_M2_GUARD" origin/main -- 'src/*' \
  && git grep -l "world_m2_trigger_vital_response" origin/main -- 'src/*' | grep -v "world_m2_trigger_vital_response.py" \
- && git grep -nE "print\(|_say\(" origin/main -- 'src/pirateforce_foundation/world_m2_trigger_vital_response.py'
+ && git grep -nE 'GUARD_TOKEN *= *"LANE_A_M2_GUARD"' origin/main -- 'src/pirateforce_foundation/lane_hooks/lane_a_island_trigger_log.py' \
+ && git grep -nE 'f"\{GUARD_TOKEN\}' origin/main -- 'src/pirateforce_foundation/lane_hooks/lane_a_island_trigger_log.py' \
+ && git grep -nE 'import world_m2_trigger_vital_response' origin/main -- 'src/pirateforce_foundation/lane_hooks/lane_a_island_trigger_log.py'
 ```
+(LANE-A รันเองบน `origin/main` ก่อนวางบรรทัดนี้ ผ่านครบ: `:102` นิยาม · `:344` บรรทัดประกอบข้อความ · `:326` `from .. import world_m2_trigger_vital_response as m2guard`)
 RECHECK-VERBATIM (เนื้อใบตรงกับจดหมายเจ้าของใบไหม · รันจากรากรีโป `pf_bridge` · ต้องพิมพ์ `VERBATIM_OK`):
 ```
 diff <(sed -n '12,55p' notes_to_chief/20260907_2001_LANE-A-TO-K-gt-body-m2-guard-verdict-on-the-console.md | sed 's/GT-<เลข>/GT-304/') \
@@ -4281,7 +4288,7 @@ diff <(sed -n '12,55p' notes_to_chief/20260907_2001_LANE-A-TO-K-gt-body-m2-guard
 ```
 (K รันแล้วผ่าน ณ 2026-09-07T21:0x — เพิ่มตาม `pf-adversary` M2)
 
-ว่าง/ล้มข้อใดข้อหนึ่ง = ใบยังตกรถจริงตามหัวใบ · **ผ่านครบสามข้อ** = โทเคนติดอาวุธจริงบน main ⇒ K ย้ายใบขึ้นหมวด ก. รอบนั้นทันที
+ว่าง/ล้มข้อใดข้อหนึ่ง = ใบยังตกรถจริงตามหัวใบ · ~~**ผ่านครบสามข้อ**~~ **ผ่านครบห้าบรรทัดของบล็อกใหม่** = โทเคนติดอาวุธจริงบน main ⇒ K ย้ายใบขึ้นหมวด ก. รอบนั้นทันที · 🔴 **K ย้ายหมวดตามผลของบรรทัดใหม่เท่านั้น ห้ามย้ายด้วยผลของบรรทัดเก่า** (`PANYA-ORDER 2155` ข้อ 4)
 🔴 **ห้ามก๊อปคำสั่งเกรปจากย่อหน้าอธิบายข้างบนไปใช้แทนบรรทัดนี้** — คำสั่งในย่อหน้าอธิบายไม่มี `cd` ถ้ารันในรีโป `pf_bridge` มันจะเจอไฟล์ของคิว/จดหมาย/ไฟล์รอบเอง **5 ไฟล์** แล้วอ่านเป็น "โทเคนอยู่บน main" ทันที (`pf-adversary` วัดให้แล้ว) · และถ้ารัน `RECHECK` จากซับไดเรกทอรี `cd ../pirate-force-server` จะล้มเงียบ ๆ แล้วอ่านเป็น "ว่าง" ⇒ **รันจากรากรีโปเท่านั้น**
 
 ---
