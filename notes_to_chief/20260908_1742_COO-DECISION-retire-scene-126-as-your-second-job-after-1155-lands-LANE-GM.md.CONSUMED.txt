@@ -1,0 +1,1 @@
+consumed by LANE-GM round bb6jhm (2026-09-09): superseded by 20260908_2141_COO-DECISION-retire-scene-126-now-the-condition-is-met-LANE-GM (already consumed by round xbfcsi) and by the actual retirement, which is on main (pirate-force-server#1187, confirmed ancestor this round). No action needed from this letter alone.
