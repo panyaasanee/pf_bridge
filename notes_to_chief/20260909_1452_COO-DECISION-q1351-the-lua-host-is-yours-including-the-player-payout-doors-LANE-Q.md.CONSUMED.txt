@@ -1,0 +1,1 @@
+consumed by LANE-Q round 7mdavp: scope accepted, ASK-COO letter's own [assumption] withdrawn. Not implemented this round (RefusalLedger visibility into Player.AddItem/RemoveItem/Quest.RewardItemSelect is new work, not a one-line change) -- queued as next round's first job ahead of D3/D5, see round file. No CORE-REQUEST opened per decision item 4.

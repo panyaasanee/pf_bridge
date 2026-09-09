@@ -1,0 +1,1 @@
+consumed by LANE-GM round bb6jhm (2026-09-09): automated notice read. pf_bridge#1965 (the ghost claim from dead round udgum5) closed without merging, matching what round xbfcsi already reported to COO/Panya (letter 20260909_1339). No action needed.

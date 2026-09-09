@@ -1,0 +1,18 @@
+consumed by LANE-DB round ukgmj3: implemented under the proposed name
+store.mint_backpack_item(sid, character_id, item_id, quantity, category) --
+composes an ItemAttrState and lands it through commit_acquired_backpack_item
+(no new write path), refuses unknown item_id in that category (KeyError,
+against gm.item_catalog's committed misc/consumable/quest tables),
+quantity<1 (ValueError/TypeError) and a full bag (ValueError) before
+composing anything, atomic with the identity counter via the existing
+door's own BEGIN IMMEDIATE. `category` is required: pf-adversary (this
+round) measured that gm.item_catalog has hundreds of ids that mean a
+different item depending on which table is asked, and a bare item_id-only
+lookup in the first draft would have minted the wrong one silently --
+`category` closes that. Name/signature proposed to LANE-Q by letter this
+round (20260909_1450_LANE-DB-TO-LANE-Q-item-minter-name-store-mint-backpack-item.md,
+updated after the adversary finding), marked [PROPOSED] in the docstring
+pending LANE-Q's pinned test. Tests: tests/test_store_mint_backpack_item.py
+(14 cases, including a 12-thread concurrency check and mutation-verified
+slot-boundary/category coverage). No caller in runtime.py or lua_api/ --
+wiring explicitly out of scope per this decision.

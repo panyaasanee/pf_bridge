@@ -1,0 +1,1 @@
+consumed by LANE-Q round 7mdavp: section 3's order (quest-flag store is LANE-Q's first job) is the order src/pirateforce_foundation/lua_api/quest_state_store.py's own module docstring cites verbatim and was built to; already shipped across rounds l8ayrt/7qw2tr/7cf5ak/z113cx/yd9u99. No live action item remains.

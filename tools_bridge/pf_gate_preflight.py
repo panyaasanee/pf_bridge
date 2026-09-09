@@ -818,6 +818,119 @@ def check_new_skips(repo, base):
     return True
 
 
+# Advisory only (LANE-GM, notes_to_chief/20260909_1416_LANE-GM-TO-CHIEF-
+# preflight-cannot-see-a-flipped-skipIf.md -> pf-adversary D1 on server
+# round xbfcsi/PR #1187, measured at commit 8c46237): `check_new_skips`
+# above greps ADDED lines for known skip-marker spellings. A branch that
+# flips an EXISTING `skipIf(COND, ...)` from False to True by editing the
+# constant/table COND reads - in a DIFFERENT file, adding no marker text at
+# all - is invisible to it. That exact shape turned 25 cases in
+# tests/test_gm_login_scene_sanctioned_admission.py into silent skips while
+# both `[skips]` and the old `[census]` row (which only ran the census
+# tool's OWN unit test with synthetic input, never the real count) printed
+# PASS on that commit. `tools/pf_pytest_precondition_census.py --run`
+# caught it - but `--run` always executes the full `tests` directory for
+# real (see run_pytest() in that file), and this suite is thousands of
+# cases; making that mandatory on every push would make this "fast
+# pre-push sanity check" as slow as the Windows gate it exists to save a
+# round-trip against. Windows already runs the full suite on every PR
+# (AGENTS.md section 7's `pf_gate_preflight.py` row is a LOCAL sanity
+# check, not a replacement for it), so a drift this row misses is still
+# caught there - just a round-trip later than a lane would like.
+#
+# The trade made here: a cheap, DIRECT-import heuristic, not a real
+# dependency graph. It reads each test file's own `import`/`from ... import`
+# lines, resolves them to `src/`-relative paths, and flags a test file when
+# THIS branch's diff touches a file it imports directly. A test file two
+# imports away from the change (import A, A imports B, branch touches B) is
+# NOT caught - NOT CLAIMED, same trade `SKIP_MARKERS` above already makes
+# (a spelling list, not a parser). It is advisory (WARN, never RED, never
+# added to `results` in main() - same convention as
+# `check_consumed_stub_warning` and `check_mode_bits_probe`): it names a
+# test file worth re-running for real before push, it does not block one,
+# because a false positive here (an unrelated same-named import) must never
+# cost every lane a red gate for a file they never touched.
+_IMPORT_LINE_RE = re.compile(
+    r"^\s*(?:from\s+(pirateforce_foundation(?:\.\w+)*)\s+import\s+"
+    r"([\w, ]+)|import\s+(pirateforce_foundation(?:\.\w+)*))"
+)
+
+
+def _direct_import_paths(test_text):
+    """Every `src/`-relative path this test file's own import lines name."""
+    paths = set()
+    for line in test_text.splitlines():
+        m = _IMPORT_LINE_RE.match(line)
+        if not m:
+            continue
+        if m.group(1):
+            pkg = m.group(1)
+            paths.add("src/" + pkg.replace(".", "/") + ".py")
+            for name in m.group(2).split(","):
+                name = name.strip().split(" as ")[0].strip()
+                if name:
+                    paths.add("src/" + pkg.replace(".", "/") + "/"
+                              + name + ".py")
+        elif m.group(3):
+            pkg = m.group(3)
+            paths.add("src/" + pkg.replace(".", "/") + ".py")
+    return paths
+
+
+def check_skip_condition_drift(repo, base):
+    """WARN when this branch touches a file a test imports directly, and
+    that test also guards itself with a skip helper - so a skip this branch
+    silently flipped would not show up in `check_new_skips` above.
+
+    Advisory only. See the long comment above `_IMPORT_LINE_RE` for why.
+    """
+    try:
+        changed = subprocess.run(
+            ["git", "--no-optional-locks", "-C", str(repo), "diff",
+             "--name-only", base + "...HEAD"],
+            check=True, capture_output=True, text=True, errors="replace",
+        ).stdout.splitlines()
+    except subprocess.CalledProcessError as exc:
+        print("[skipdrift] could not diff against %s: %s" % (base, exc))
+        return
+    changed = set(p.strip().replace("\\", "/") for p in changed if p.strip())
+    if not changed:
+        print("[skipdrift] PASS - no diff vs %s to check" % base)
+        return
+    tests_dir = pathlib.Path(repo) / "tests"
+    if not tests_dir.is_dir():
+        print("[skipdrift] INCONCLUSIVE - %s has no tests/ directory"
+              % repo)
+        return
+    flagged = []
+    for test_path in sorted(tests_dir.glob("test_*.py")):
+        try:
+            text = test_path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        if not any(marker in text for marker in SKIP_MARKERS):
+            continue
+        rel_test = str(test_path.relative_to(repo)).replace("\\", "/")
+        if rel_test in changed:
+            continue  # check_new_skips already covers edits to the file itself
+        hit = _direct_import_paths(text) & changed
+        if hit:
+            flagged.append((rel_test, sorted(hit)))
+    if not flagged:
+        print("[skipdrift] PASS - no skip-guarded test imports a file this"
+              " branch touched")
+        return
+    print("[skipdrift] WARN - %d skip-guarded test(s) import a file this"
+          " branch changed:" % len(flagged))
+    for rel_test, sources in flagged:
+        print("    %s  <-  %s" % (rel_test, ", ".join(sources)))
+    print("        This is advisory, not RED: run")
+    print("        `python3 tools/pf_pytest_precondition_census.py --run`"
+          " for real before")
+    print("        push if any of the above is plausibly what your diff"
+          " changed.")
+
+
 # COO-DECISION 20260907_2148, answering LANE-GM's `2058` ask: a diff that
 # adds an assertion about POSIX mode bits, in a file that never determines
 # whether THIS filesystem carries them, is what closed server PR #1066 on
@@ -2960,6 +3073,9 @@ def main():
     # 20260907_2148): WARN, never RED, so the seven older files carrying the
     # same shape do not block a lane that never touched them.
     check_mode_bits_probe(repo, base=args.base)
+    # Advisory only (LANE-GM 20260909_1416 -> COO-ORDER e1428): see the long
+    # comment above check_skip_condition_drift for why this is WARN, not RED.
+    check_skip_condition_drift(repo, base=args.base)
     if args.pr_body is None:
         # Open skip with a reason, never a silent one (AGENTS.md section 7).
         # Not appended to `results`: most callers run this tool for the cp874

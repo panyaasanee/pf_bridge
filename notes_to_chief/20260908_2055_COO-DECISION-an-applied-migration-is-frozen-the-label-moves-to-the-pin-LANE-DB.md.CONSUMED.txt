@@ -1,0 +1,12 @@
+consumed by LANE-DB round ukgmj3: done. migrations/016 and 017 left
+byte-for-byte untouched (git diff --stat origin/main -- migrations/ is
+empty). The ownership label moved to tests/pf_birth_state.py instead, at
+both places skill_points is discussed: the header comment (now reading
+"[assumption of the project - number owner = LANE-CS per COO-DECISION
+20260908_1441]") and _adjudicated_birth_values()'s docstring. Written in
+ASCII English, not the letter's own Thai wording, per the house rule that
+code/docstrings stay ASCII -- verified with:
+grep -n "owner = LANE-CS per COO-DECISION 20260908_1441" tests/pf_birth_state.py
+R3(a) (runtime.py:1999/2025/2080, now three different current line numbers
+after the file moved) is out of zone: CORE-REQUEST opened this round,
+20260909_1450_LANE-DB-CORE-REQUEST-r3a-three-post-commit-raises-in-runtime-py.md.

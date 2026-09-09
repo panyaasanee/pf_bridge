@@ -1,0 +1,1 @@
+consumed by LANE-A round ynfhoc: identity range function noted for post-M2 wiring, no action needed this round; caveat about 0xFFFFFFFF vs 2**63 recorded in round file section 3.
