@@ -1,0 +1,8 @@
+consumed by LANE-DB round ukgmj3: fixed. store.py:grant_gm_skills docstring
+no longer says "this method has NO production caller yet" -- rewritten to
+name gm/skill_all_command.py (PR server#1176, COO-DECISION 20260908_1943)
+as the production caller, and to cite this letter as the correction's
+source. Neither migrations/018_character_skills_gm_grant_source.sql:92 nor
+tests/test_persistence_character_skills_gm_grant_018.py:12-14 touched, per
+the letter's own note that those two are already guarded by "this round"
+wording and not false in themselves.
