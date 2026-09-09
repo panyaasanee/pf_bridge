@@ -1108,7 +1108,7 @@ CS แก้สองบรรทัด (`BIRTH_SKILL_POINTS` + ป้ายเ�
 - ไม่อ้างว่า `s_SKILL_1..4` แปลว่าแต้มสกิล — เป็นรหัสสกิลเกิด คนละความหมาย
 - ไม่อ้างว่า CS ทำงานผิด — CS ไล่ครบตามที่ COO สั่งแล้วไม่เจอจริง
 
-## RE-321 NPCATTR-0X7C-EIGHT-UNWALKED-AVT-XREFS-READER-001  [🅿️ **OPEN — assigned LANE-B** · `STATIC-ON-BRIDGE` (ไม่ใช่ `STATIC-ON-CLOUD` — ต้องมีอิมเมจไคลเอนต์ ซึ่งไม่มีบนโคลนคลาวด์) · ตั้งเลขโดย LANE-K รอบ `vgaj0v` 2026-09-08T21:37+07:00 = รอบแรกที่ K เห็นคำสั่ง (คำขอเข้ากล่อง 21:15 · อนุมัติ `COO-DECISION 20260908_2055_COO-DECISION-the-eight-unwalked-avt-xrefs-get-an-re-ticket-send-k-the-body-LANE-B.md`) · เนื้อใบคำต่อคำจาก `notes_to_chief/20260908_2115_LANE-B-TO-K-re-body-the-eight-unwalked-avt-xrefs.md` K ไม่แก้สำนวนแม้คำเดียว · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-B**]
+## RE-321 NPCATTR-0X7C-EIGHT-UNWALKED-AVT-XREFS-READER-001  [🟢 **DONE/PASS — STATIC-ON-BRIDGE** (พับโดย COO แทน LANE-K (ใบ `1705`) 2026-09-09T17:25+07:00 จาก `notes_to_chief/20260909_1343_RE-321-RESULT-npcattr-7c-feeds-final-avt-xref-whole.md` · ผลบอกเอง "complete 8/8; no incomplete source path" · BUILD_PROPOSED → LANE-B) · เดิม: 🅿️ OPEN — assigned LANE-B · `STATIC-ON-BRIDGE` (ไม่ใช่ `STATIC-ON-CLOUD` — ต้องมีอิมเมจไคลเอนต์ ซึ่งไม่มีบนโคลนคลาวด์) · ตั้งเลขโดย LANE-K รอบ `vgaj0v` 2026-09-08T21:37+07:00 = รอบแรกที่ K เห็นคำสั่ง (คำขอเข้ากล่อง 21:15 · อนุมัติ `COO-DECISION 20260908_2055_COO-DECISION-the-eight-unwalked-avt-xrefs-get-an-re-ticket-send-k-the-body-LANE-B.md`) · เนื้อใบคำต่อคำจาก `notes_to_chief/20260908_2115_LANE-B-TO-K-re-body-the-eight-unwalked-avt-xrefs.md` K ไม่แก้สำนวนแม้คำเดียว · **เจ้าของใบ/ผู้เขียนเนื้อใบ/ผู้บริโภคผล = LANE-B**]
 
 > numbering [LANE-K รอบ `vgaj0v`]: คำสั่งค้นหาเดียวตามกฎ ② ที่หัว `GAME_TEST_QUEUE.md` (`grep -ohE '\b(GT|RE)-[0-9]{3,4}\b' GAME_TEST_QUEUE.md CLIENT_RE_QUEUE.md archive/*QUEUE*ARCHIVE*.md tickets/*.md notes_to_chief/*.md 2>/dev/null | grep -oE '[0-9]{3,4}$' | sort -n | tail -1`) คืน **320** ⇒ เลขว่างถัดไป **321** · ตรวจ 0 hit ของ `GT-321`/`RE-321` ครบทุกที่ (คิวสองไฟล์ · `archive/` · `tickets/` · กล่องจดหมาย) ก่อนวาง
 
@@ -1149,3 +1149,63 @@ owner: LANE-B (เจ้าของใบ/เขียนเนื้อใบ/
 - ใบนี้ **ไม่ถาม** ว่าเบสเนมชี้ไปยังไฟล์ที่ ship จริงไหม — ไม่มีใครฝั่งเซิร์ฟเวอร์ตอบได้ และไม่ใช่คำถามนี้
 - ใบนี้ **ไม่ถาม** ว่าใครเป็นศัตรู — นั่นคือ `n_RANK` + `n_AI_COMBAT` และไม่มีอย่างอื่น (PANYA `1313`)
 - ใบนี้ **ไม่ได้อ้าง** ว่าวันนี้มีบอดี้วาดไม่ขึ้น — ยังไม่มีใครวัดเรื่องนั้น การส่งเบสเนมเดียวเป็นคำสั่ง COO-DECISION `2026-09-08T17:42` ไม่ใช่ข้อสรุปจากการวัดฝั่งไคลเอนต์
+
+### result — พับคำต่อคำจาก `notes_to_chief/20260909_1343_RE-321-RESULT-npcattr-7c-feeds-final-avt-xref-whole.md` โดย COO แทน LANE-K (ใบ `1705`) 2026-09-09T17:25+07:00
+RESULT: **DONE/PASS — STATIC-ON-BRIDGE** — all eight previously unwalked `%s%s.avt` xrefs were walked to their source strings.
+
+## Direct answer
+
+**(a) Yes.** Exactly one of the eight remaining xrefs reaches the `basic_string<wchar_t>` at `NPCAttr+0x7C`: the `%s%s.avt` use whose literal dword is at **VA `0x0078AB08` / file offset `0x00389F08`** (the `push` starts at `0x0078AB07`).
+
+The complete same-object chain is:
+
+1. `NPCAttr` binds to `CNetNPC+0x358` at `0x004697DD..0x004697EB`.
+2. `0x0045DB4E` loads `[CNetNPC+0x358]`; `0x0045DB54` takes `NPCAttr+0x7C`; `0x0045DB58..0x0045DB5B` assigns the full wstring to presentation descriptor `+0x60`.
+3. The descriptor constructor at `0x0045C220` installs vtable `0x00F0DF3C`; vtable slot `+0x14` at `0x00F0DF50` is `0x0078AA50`.
+4. `0x0078AAF4` takes `c_str()` directly from descriptor `+0x60`; `0x0078AAFD` pushes that pointer as the second `%s`; `0x0078AB07` pushes `L"%s%s.avt"`; `0x0078AB0D` formats the path.
+
+**(b) The `.avt` path uses the whole wire string as its basename.** There is no semicolon, tab, or space tokenizer between descriptor `+0x60` and the format call. A list cell such as `A;B` would therefore be formatted literally as `.\Data\GC\V\A;B.avt`, not reduced to `A` at this xref.
+
+The same upstream function also splits `NPCAttr+0x7C` on underscore (`L"_"` at `0x00F0E07C`) at `0x0045DB61..0x0045DB96`, takes token index 0, and assigns that separate result to `CNetNPC+0x338` at `0x0045DB9C..0x0045DBA2`. That token does **not** feed the `.avt` format: the `.avt` vfunc reads the earlier full copy at descriptor `+0x60`.
+
+Question (c) does not apply because a positive reader was found. The actual route is nevertheless pinned above so the field does not remain an unexplained wire value.
+
+## Build consequence
+
+The existing single-basename wire rule is now backed by the actual `NPCAttr+0x7C` consumer: a raw multi-value cell must be reduced before it is written to this field. The client does not split `;`, tab, or space on the `.avt` route.
+
+BUILD_PROPOSED: replace the RE-321-open wording in `mob_avatar_basename.py` and generated roster provenance with this static proof while retaining the existing single-basename wire guard | LANE-B (COMBAT) | `py -3 -m pytest tests/test_mob_avatar_basename.py -q`
+
+## nonclaims
+
+1. This does not prove which basename a server should select from a multi-value `s_OUTFIT` cell; it proves only that `NPCAttr+0x7C` must already contain the one complete basename the client will use. RE-296 separately proves index 0 for the client's own `MOBS.s_OUTFIT` table path.
+2. This does not claim the internal `+0x28` or `+0xF8` fields belong to `NPCAttr`; their concrete classes remain unnamed here.
+3. This does not claim every `.avt` path in the image comes from `NPCAttr`; seven of these eight do not.
+4. The underscore split in `0x0045DAE0` feeds `CNetNPC+0x338`; it is not evidence that the `.avt` basename is underscore token 0.
+5. This is static IMAGE evidence only. It does not prove that any particular basename exists on disk, renders a body, or matches a server-side gameplay choice.
+
+(ตารางสำมะโน 8 เส้น + proof spans 14 แถว + trap test อยู่ในจดหมายต้นฉบับ ไม่คัดลอกซ้ำ — sha256 จดหมาย = 300d592899afadd40c41ef1467399ba8fb266d6b8078cb661466768af267e39f)
+
+## RE-325 STANDING-LOG-A-COMBAT-ANIMATION-AND-ACTOR-STATE  [🟣 **OPEN-STANDING** · `STANDING-LOG` ชุด A · owner: reference · ตั้งเลขโดย COO แทน LANE-K (ใบ `1705`) 2026-09-09T17:50+07:00 ตาม `COO-DECISION 20260909_1452` k1317 (หนึ่งเลขต่อชุดตัวอักษร ไม่ใช่ 32 ใบ)]
+
+> numbering [COO แทน LANE-K (ใบ `1705`)]: สูงสุดก่อนวาง = `GT-324`/`RE-321` ⇒ ชุด A/B/C/D = **RE-325/326/327/328** · `grep -rhoE "\b(GT|RE)-32[5-8]\b"` ทั้ง 5 ที่ = 0 hit ก่อนวาง
+
+owner: reference · body: `tickets/RE-325.md` = **ดัชนี** ฉบับละบรรทัด (32 ฉบับ · stamp · หัวเรื่อง · cc · ใบที่อ้าง) — ฉบับใหม่ต่อบรรทัดในไฟล์นั้น · ปิดเมื่อ Panya เลิกงานยืน
+
+## RE-326 STANDING-LOG-B-ITEM-EQUIP-AND-REPLY-WIRE  [🟣 **OPEN-STANDING** · `STANDING-LOG` ชุด B · owner: reference · ตั้งเลขโดย COO แทน LANE-K (ใบ `1705`) 2026-09-09T17:50+07:00 ตาม `COO-DECISION 20260909_1452` k1317 (หนึ่งเลขต่อชุดตัวอักษร ไม่ใช่ 20 ใบ)]
+
+> numbering [COO แทน LANE-K (ใบ `1705`)]: สูงสุดก่อนวาง = `GT-324`/`RE-321` ⇒ ชุด A/B/C/D = **RE-325/326/327/328** · `grep -rhoE "\b(GT|RE)-32[5-8]\b"` ทั้ง 5 ที่ = 0 hit ก่อนวาง
+
+owner: reference · body: `tickets/RE-326.md` = **ดัชนี** ฉบับละบรรทัด (20 ฉบับ · stamp · หัวเรื่อง · cc · ใบที่อ้าง) — ฉบับใหม่ต่อบรรทัดในไฟล์นั้น · ปิดเมื่อ Panya เลิกงานยืน
+
+## RE-327 STANDING-LOG-C-GROUND-NAME-COLOUR  [🟣 **OPEN-STANDING** · `STANDING-LOG` ชุด C · owner: reference · ตั้งเลขโดย COO แทน LANE-K (ใบ `1705`) 2026-09-09T17:50+07:00 ตาม `COO-DECISION 20260909_1452` k1317 (หนึ่งเลขต่อชุดตัวอักษร ไม่ใช่ 2 ใบ)]
+
+> numbering [COO แทน LANE-K (ใบ `1705`)]: สูงสุดก่อนวาง = `GT-324`/`RE-321` ⇒ ชุด A/B/C/D = **RE-325/326/327/328** · `grep -rhoE "\b(GT|RE)-32[5-8]\b"` ทั้ง 5 ที่ = 0 hit ก่อนวาง
+
+owner: reference · body: `tickets/RE-327.md` = **ดัชนี** ฉบับละบรรทัด (2 ฉบับ · stamp · หัวเรื่อง · cc · ใบที่อ้าง) — ฉบับใหม่ต่อบรรทัดในไฟล์นั้น · ปิดเมื่อ Panya เลิกงานยืน
+
+## RE-328 STANDING-LOG-D-NPC-ACTORATTR-AND-CACHE  [🟣 **OPEN-STANDING** · `STANDING-LOG` ชุด D · owner: reference · ตั้งเลขโดย COO แทน LANE-K (ใบ `1705`) 2026-09-09T17:50+07:00 ตาม `COO-DECISION 20260909_1452` k1317 (หนึ่งเลขต่อชุดตัวอักษร ไม่ใช่ 5 ใบ)]
+
+> numbering [COO แทน LANE-K (ใบ `1705`)]: สูงสุดก่อนวาง = `GT-324`/`RE-321` ⇒ ชุด A/B/C/D = **RE-325/326/327/328** · `grep -rhoE "\b(GT|RE)-32[5-8]\b"` ทั้ง 5 ที่ = 0 hit ก่อนวาง
+
+owner: reference · body: `tickets/RE-328.md` = **ดัชนี** ฉบับละบรรทัด (5 ฉบับ · stamp · หัวเรื่อง · cc · ใบที่อ้าง) — ฉบับใหม่ต่อบรรทัดในไฟล์นั้น · ปิดเมื่อ Panya เลิกงานยืน

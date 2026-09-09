@@ -1,5 +1,24 @@
 # QUEUE_STATUS_SNAPSHOT — สแนปช็อตใบ READY + มี `ATTENDED:` + ยังไม่มี `RESULT`
 
+## 🔴 รอบนี้ COO แทน LANE-K (ใบ `1705`) 2026-09-09T18:00+07:00 — ก้อน C: STANDING-LOG `RE-325..328` · stub 35 ใบบีบ · **คิว 230,060 B ใต้เพดาน 307,200**
+ที่มา: `notes_to_chief/20260909_1800_COO-AS-K-ROUND-C-*.md` · เครื่องมือก่อน/หลัง: 352 ใบสถานะไม่เปลี่ยน + 4 แถวใหม่ `RE-325..328` (OPEN-STANDING)
+
+| ใบ | เจ้าของ | รอบก่อน | รอบนี้ | ใครต้องขยับต่อ |
+|---|---|---|---|---|
+| 🆕 `RE-325` A · `RE-326` B · `RE-327` C · `RE-328` D | reference | 59 ฉบับ `STANDING-*-RESULT-*` ไม่มีที่อยู่ (SYNC-ALARM ×3) | ดัชนี `tickets/RE-32n.md` ฉบับละบรรทัด · `.CONSUMED.txt` 59 | ฉบับใหม่ = ต่อบรรทัดในดัชนี (K/Codex) ไม่ตั้งเลข |
+| stub 35 ใบ (`GT-060`…`GT-324`) | เจ้าของเดิม | หัวยาว 162 KB | หัว ≤1 KB + `ATTENDED:`/`HEADLESS_PROOF:` คงเดิม · หัวเดิมต่อท้าย `tickets/` | — |
+
+## 🔴 รอบนี้ COO แทน LANE-K (HOLD `1705`) 2026-09-09T17:30+07:00 — ก้อน B: ใบ >8 KB ครบ 33/33 · PLAYBOOK ออก · `GT-324` เกิด · `RE-321` ปิด
+ที่มา: `notes_to_chief/20260909_1730_COO-AS-K-ROUND-B-*.md` · เครื่องมือ `pf_queue_status.py` ก่อน/หลัง: 351 ใบสถานะไม่เปลี่ยน · `drift-missing=91` = สารบัญมือถูกลบ (Panya 16:00) รอ chief แก้เครื่องมือ (`1600`) ไม่ใช่ drift จริง
+
+| ใบ | เจ้าของ | รอบก่อน | รอบนี้ | ใครต้องขยับต่อ |
+|---|---|---|---|---|
+| 🆕 `GT-324` LEARN-SKILL-RESULT-FRAME-AND-FIFTH-ROW-001 | LANE-CS (HOLD) | คำขอ `20260908_2003` ค้าง 21 ชม. ไม่มีเลข | **ตั้งเลขแล้ว · HELD-ON-BUILD** — `#1175` ลง main (`96cf0be`) แต่ `HEADLESS_PROOF:` บน main ยังไม่มี | Codex/เจ้าของส่งโทเคนบน main → K พลิก READY · **ตกรถ** จนกว่านั้น |
+| `RE-321` | LANE-B | 🅿️ OPEN | **DONE/PASS — STATIC-ON-BRIDGE** (8/8 xref เดินครบ · `NPCAttr+0x7C` ใช้ทั้งสตริงที่ xref `0x0078AB08`) | LANE-B: `BUILD_PROPOSED` แก้ถ้อยคำ RE-321-open ใน `mob_avatar_basename.py` (หลัง R4 ตาม `1420`) |
+| `GT-158` `GT-166` `GT-171` `GT-177` `GT-180` `GT-272` | เจ้าของเดิม | เนื้อเต็มในคิว | stub + `tickets/GT-nnn.md` คำต่อคำ · สถานะเดิมทุกใบ | — |
+| PLAYBOOK ×2 · บทเรียนเครื่องมือ ×3 | chief (เอกสาร) | ในคิว 67 KB | `archive/GAME_TEST_QUEUE_PLAYBOOK_20260909.md` | — |
+คิว: `GAME_TEST_QUEUE.md` **352,264 B** (เพดาน 307,200 · เหลือเกิน 45 KB → ก้อน C บีบ stub เก่า 33 ใบ) · `CLIENT_RE_QUEUE.md` 282,963 B
+
 สร้างโดย: LANE-K รอบ `kq7m3d` · เวลา 2026-09-07T18:2x+07:00 (ฉบับก่อน: รอบ `k7q3mv` 2026-09-07T17:11+07:00 + addendum 17:48) · แหล่ง: อ่านสดจาก `GAME_TEST_QUEUE.md`/`CLIENT_RE_QUEUE.md` บนโคลนที่ `git fetch origin main` แล้ว
 🔴 **sha ที่ K วัดเองรอบนี้**: `pirate-force-server` head = **`588abf4`** · `git merge-base --is-ancestor f837223 origin/main` = **ผ่าน** (โทเคน `GT-279`) · `git merge-base --is-ancestor 9d2d1c0 origin/main` = **ผ่าน** (โทเคน `GT-288` ชุด 2)
 🔴 **sha ทุกตัวข้างล่าง K วัดเองรอบนี้** บนโคลนที่ `git fetch origin main` แล้ว — `pirate-force-server` head = **`6ec5add`** (รอบก่อน `e4ae180` ซึ่งยังเป็น ancestor) · `pf_bridge` main = **`e19873a`**

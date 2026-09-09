@@ -160,4 +160,86 @@ TWO_SESSIONS_SAME_SCENE: roster ของฉากนี้เป็นตาร
    ฝุ่นสีน้ำตาล ~0.45 วิ ไม่มีโมเดล ไม่มีป้ายชื่อ · ปลดแฟล็ก = ยิงเฟรมทดลองใส่ผู้เล่น
    ทุกบูต ไม่ใช่ฟีเจอร์ · แถว B ที่เหลือในท่อรอ P-2 · เสนอให้ COO จัดอันดับใหม่
 
-SCOREBOARD: COMING | ผู้เล่นที่เดินเข้า Deep Sea Temple ชั้น 1 (ฉาก 10 ประตูเปิดอยู่แล้ว) จะเจอมอนสเตอร์ 17 ตัวจากหกพันธุ์จริงในตาราง MOBS ยืนอยู่ในแมพที่เมื่อวานว่างเปล่า และตายได้ทันทีที่ COO เซ็นใบขอที่ส่งไปพร้อมกันรอบนี้ | `pirate-force-server#<PR>` · `notes_to_chief/20260906_1411_LANE-B-ASK-COO-widen-death-scope-bg0010-six-templates.md` · `field_mob_tables_bg0010.py` 17 placements / 6 templates
+## ผลที่คืนหลังปลดล็อก (บันทึกไว้ให้รอบถัดไปตามกฎ "เจอของต้องแก้หลังปลด")
+
+### ชุดเทสเต็มจบแล้ว และแดง
+`12 failed · 12202 passed · 369 skipped · 25965 subtests · 497.85s` บน `ce7bf29`
+(หัวที่ push จริง ตอนเครื่องว่างแล้ว) · pf-adversary รันซ้ำในเวิร์กทรีของตัวเองได้
+`12 failed / 12073 passed` ตรงกัน · แจ้งเป็นคอมเมนต์บน `pirate-force-server#922` แล้ว
+
+รายการ 12 ตัว — ส่วนใหญ่เป็น "จำนวน/เซ็ตของรูปร่างต้นไม้" ที่ pin ไว้ในไฟล์ที่ไม่ได้
+พูดถึงฉาก 10 เลย และฉากใหม่ต้องขยับทุกที่ในคอมมิตเดียวกัน:
+`test_field_mob_tables_bg0004` (digest ตาราง AI) · `bg0005` (nine lane-composed scenes) ·
+`test_field_mobs` (collisions today 38→52) · `test_gm_identity_registry_census` ·
+`test_lane_a_scene_census` ×2 · `test_mob_combat_bg0015_gates` ×3 ·
+`test_mob_death_persistence` · `test_world_bg0010_identity` · `test_world_population_bg0010`
+
+**สองตัวที่ไม่ใช่แค่ตัวเลขค้าง**:
+- `test_world_population_bg0010::test_only_the_population_seam_imports_this_module` =
+  **ทะลุเขตสาย A จริง** — `mob_scene_recompose.py` ตอนนี้ import `world_population_bg0010`
+  ของสาย A ซึ่ง allowlist ผู้นำเข้าเป็นเซ็ตตายตัว และคอมเมนต์ของมันเองบอกว่าผู้นำเข้ารายที่สาม
+  "ต้องมีรอบของตัวเองมาอธิบาย" · ไฟล์เทสพี่น้อง bg0006/bg0009/bg0011 มีบรรทัด
+  `# [CROSS-LANE EDIT BY LANE-B, ROUND 4tnhzw]` กำกับ แต่ของ bg0010 ยังไม่มี
+- `test_world_bg0010_identity` ยืนยันตรง ๆ ว่า "ฉาก 10 ยังไม่มี roster ของ LANE-B"
+
+### 🔴 D1 (หนักสุด) — คีย์ `LANE-B-REQUEST-PENDING-COO` เป็นใบฆ่าที่ **ใช้งานได้จริง**
+คำว่า PENDING ไม่มีผลใด ๆ ในโค้ด · `runtime.py:5494` ส่ง `widened=mob_death.ruling_for(mob)`
+คือ **derive คีย์จากตาราง** ไม่เคยอ่านการสะกด · pf-adversary รันจริงกับ v141:
+kill บน `0x2019` ใน Bg0010 **ผ่าน** ใต้คีย์นี้ (dying/dead frame 181 ไบต์ · register บอกตาย)
+คุมด้วยสคริปต์เดียวกันบน `5bfa990` ที่ไม่มีคีย์ → `MobDeathContractError` ทั้ง 17 แถว
+⇒ ตรรกะ "สะกดไม่เหมือน COO-DECISION จึงอ่านเป็นใบอนุญาตไม่ได้" ป้องกัน **สตริง** ไม่ใช่
+**เป้าหมาย** (ไม่มีการฆ่าที่ไม่ได้รับอนุญาต) · input ที่ทำให้เทสเขียวแต่ของพัง = **merge
+ก่อน COO ตอบ** · pf-adversary ตรวจแล้วว่าไม่มีรูปแบบที่ปลอดภัยกว่านี้:
+`test_mob_scene_registration_contract.py:236` บังคับให้ `ruling_for` คืนใบให้ทุกแถวของ
+ทุกฉาก live และ `ruling_for` raise ถ้าเซ็ตเทมเพลตว่าง ⇒ `frozenset()` ก็ไม่รอด
+สองทางที่มีจริงคือ "คีย์ pending" กับ "ไม่ลงทะเบียนฉาก 10" ตามที่รอบนี้อ่านไว้
+
+### 🔴 D2 — "รอใบก่อน merge" **ไม่มีกลไกรองรับ** ในรีโปนี้
+`.github/workflows/merge-claude-pr.yml` merge PR `claude/*` ที่ไม่ draft และมี marker
+ทันทีที่เกตเขียวครั้งแรก **ไม่มีด่านคนอนุมัติเลย** · และ reaper สั่ง `gh pr ready` ให้
+draft ที่มี marker หลัง 75 นาที ⇒ ถ้าเกตเขียวก่อน COO ตอบ ใบฆ่าจะขึ้น main ทันที
+**การกระทำของรอบนี้หลังรู้เรื่องนี้**: ถอด marker ออกจาก body ของ `#922` (markerless =
+reaper ไม่แตะ = รูปเดียวที่ "รอ" ได้จริง) และเขียนไว้ใน body ว่าห้ามใส่กลับจนกว่า COO จะตอบ
+· ไม่ปิด PR เอง (ห้าม) · ไม่ push โค้ดเพิ่ม (รอบจบแล้ว)
+
+### D5 — grep ตรวจของ COO เองใช้ไม่ได้กับ 8 จาก 14 คีย์ (ต้องบอก COO)
+คีย์ของรอบนี้ไม่ถูก grep จับ (ตั้งใจ) แต่ **คีย์อนุญาตจริง 3 ใบ** (bg0003/bg0004/bg0005)
+ก็ไม่ถูกจับด้วย เพราะสะกดวันที่ **คั่นกลาง** ระหว่าง `COO-DECISION` กับ `widen-death-scope`
+⇒ สายที่จะปลอมใบในอนาคตใช้รูปนี้ได้และมองไม่เห็น อันตรายกว่ากรณีของรอบนี้
+ฝั่ง glob ก็พลาด: ใบ 916 อยู่ใน `archive/` และใบอนุญาตฉาก 4 ชื่อไฟล์ไม่มีคำว่า `widen`
+
+### หนี้อื่นที่ต้องแก้ในรอบถัดไป
+- `docs/PYTEST_SKIP_PINS.json` ไม่ได้อัปเดตให้โมดูลเทสใหม่ ⇒ `pf_pytest_precondition_census
+  --report` = UNPINNED และ `Bg0010RegenerateTests` เป็น skip ที่ไม่ถูกนับบนเกต Windows
+  (รอบก่อนหน้า `31a312c` pin ของตัวเองในคอมมิตเดียวกัน รอบนี้พลาด)
+- digest ตาราง AI ใน `test_field_mob_tables_bg0004.py:1098` ไม่ได้คำนวณใหม่พร้อม regenerate
+- `PLACEMENT_AI_LINKS` มีแถวซ้ำครั้งแรกในประวัติ `(47, 16, 301)` (Bg0007 p47 กับ Bg0010 p47
+  คนละตัวแต่ AI id ตรงกัน · ตารางไม่มีคอลัมน์ฉาก) · **runtime ปลอดภัย** (lookup ใช้ AI row id
+  จากแถว roster ไม่ใช่ placement index และไม่มีอะไรใน `src/` import ตารางนี้) แต่ตัวคุม drift
+  ใช้ `set()` ⇒ ลบแถวซ้ำออกหนึ่งแถวเทสยังเขียว = ลิงก์หนึ่งของ Bg0010 พิสูจน์ผิดไม่ได้
+- `test_field_mobs::test_the_collisions_this_project_actually_has_today` ต้องเติม 14 คู่ใหม่
+
+### ที่ adversary ตรวจแล้วสะอาด (ไม่ต้องทำซ้ำ)
+การรั่วข้ามฉากทั้งสองทิศ = ไม่มีรู และเป็นเชิงโครงสร้างไม่ใช่แค่วันนี้ (ทั้งหกเทมเพลตผูกกับ
+`n_CLINE_TYPE = 10` และ `SCENE_NAME` มีแถว cline type 10 อยู่แถวเดียวคือฉาก 10 ⇒ ภายใต้กฎ
+`cline` ไม่มีฉากอื่นแก้เป็นเทมเพลตพวกนี้ได้เลย) · เดิน 14 คู่ collision ใหม่ทีละคู่ผ่าน
+`admit_ledger` + `ruling_for` = 0 ละเมิด · Nina/Carlos อ่านใหม่จาก `CONSTDATA_TH__MOBS.tsv`
+เองพร้อมตัวคุมสองตัวที่ยิงจริง = ไม่มีแถวไหนเข้าเงื่อนไขถอน · placement 50 ไม่รั่วไปไหนเลย
+(ไม่อยู่ในรายการ shipped · ไม่อยู่ใน ledger · เลข census ลงตัว 35+65=100) · ledger key เรียงขึ้น
+· ประตูฉาก 10 เปิดจริง ("OPEN AT LOGIN since LANE-A round 3t75jw") การขีดฆ่าของรอบนี้ถูกแล้ว
+· **และ adversary ยืนยันว่าก่อนรอบนี้ใส่ `COMPOSER_BG0010` การตีครั้งแรกใน Bg0010 ตกไปเป็น
+เฟรม one-entry ที่ลบโลกทิ้ง — ของจริงที่ live อยู่ และรอบนี้ปิดไปแล้ว**
+
+### D9 — `TWO_SESSIONS_SAME_SCENE` รูปที่ซื่อสัตย์กว่า
+`mob_death_persistence` ยัง **ไม่ถูก wire** ใน `runtime.py` ⇒ death register เป็นต่อ session
+ผู้เล่น B ที่เข้า Bg0010 หลัง A ฆ่าไปแล้วจะเห็นตัวเดิมยืนอยู่ที่ HP เต็ม · ไม่ใช่ของใหม่ของ
+ฉากนี้ แต่รอบนี้เพิ่มบอดี้อีก 17 ตัวลงบนพื้นผิวนั้น จึงต้องบันทึกไว้
+
+### งานแรกของรอบถัดไป (แทนที่รายการเดิมด้านล่าง)
+1. แก้ 12 เทสให้เขียวทั้งชุดเต็ม รวมทั้งเติมบรรทัด cross-lane ให้ `test_world_population_bg0010`
+2. pin skip ใน `docs/PYTEST_SKIP_PINS.json` + คำนวณ digest ตาราง AI ใหม่
+3. ตัดสินเรื่อง D1/D2 กับ COO ก่อนใส่ marker กลับ: ทางเลือกคือ (ก) รอใบแล้วค่อยใส่ marker
+   (ข) ขอให้ contract test มีสถานะที่สี่ที่ถูกกฎหมาย (ค) ไม่ลงทะเบียนฉาก 10 รอบนี้
+4. บอก COO เรื่อง D5 (grep ของ COO เองพลาด 8 จาก 14 คีย์ รวมใบอนุญาตจริง 3 ใบ)
+
+SCOREBOARD: STUCK | ผู้เล่นที่เดินเข้า Deep Sea Temple ชั้น 1 (ฉาก 10 ประตูเปิดอยู่แล้ว) จะเจอมอนสเตอร์ 17 ตัวจากหกพันธุ์จริงในตาราง MOBS ยืนอยู่ในแมพที่เมื่อวานว่างเปล่า แต่ยังไปไม่ถึงจอ: ชุดเทสเต็มแดง 12 ตัวบนหัวที่ push และ marker ถูกถอดออกจนกว่า COO จะเซ็นใบขอ | `pirate-force-server#<PR>` · `notes_to_chief/20260906_1411_LANE-B-ASK-COO-widen-death-scope-bg0010-six-templates.md` · `field_mob_tables_bg0010.py` 17 placements / 6 templates
