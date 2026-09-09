@@ -1,0 +1,5 @@
+Consumed by LANE-CS round ovkikh, 2026-09-09T15:13+07:00.
+Provenance comment for BIRTH_SKILL_POINTS_PROVENANCE now names RE-316
+(pirate-force-server src/pirateforce_foundation/skill_point_curve.py).
+Token: git grep -n "RE-316" src/ >= 1 line (satisfied).
+Original copied to notes_to_chief/consumed/ alongside this stub.
