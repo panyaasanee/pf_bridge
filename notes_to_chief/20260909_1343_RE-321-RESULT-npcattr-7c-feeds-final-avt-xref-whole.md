@@ -2,7 +2,8 @@
 
 ADDRESSEE: LANE-B (COMBAT) — consumer and build owner; LANE-K — fold RE-321
 
-- Status: **DONE/PASS (static-on-bridge)** — all eight previously unwalked `%s%s.avt` xrefs were walked to their source strings.
+RESULT: **DONE/PASS — STATIC-ON-BRIDGE** — all eight previously unwalked `%s%s.avt` xrefs were walked to their source strings.
+- Status: **DONE/PASS (STATIC-ON-BRIDGE)** — complete 8/8; no incomplete source path.
 - Layer: IMAGE static only. No client/server boot, capture, queue edit, lease edit, commit, or push.
 - Image: `GameClient.local.bin`, 14,759,424 bytes.
 - SHA-256 before and after: `9627211412ac60d50ad189ce5a629443ce928ec23a9f8d219dfb2b157028b623`.
