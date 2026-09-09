@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:37+07:00: numbered as GT-323, full body placed in tickets/GT-323.md verbatim, both unlock grep conditions verified still 0 hit on origin/main so status stays HELD-ON-BUILD as owner requested; announced in notes_to_chief/20260909_1437_LANE-K-NUMBERED-GT-323.md

@@ -90,16 +90,47 @@ def commit_times(paths):
     an exception, because ordering must not be able to stop the round.
     """
     out = {}
+    # COO-BLOCKER-SWEEP `20260908_2141` item 1, MEASURED there and re-measured
+    # here before the fix: 386 of 448 rows carried ONE identical stamp (86%),
+    # which made the two questions the executive round asks -- "how many rows
+    # moved into DONE in the last 12 hours" and "the three longest-standing
+    # STUCK rows" -- unanswerable.  The cause is not the tool's ordering, it
+    # is what a SHALLOW clone shows: every cloud round clones shallow, so the
+    # graft point at the bottom of the history has no parent to diff against
+    # and `--name-only` reports it as ADDING every file in the tree at once.
+    # Each round file older than the clone's depth therefore takes the graft
+    # commit's own time, and they all take the same one.
+    #
+    # So the boundary commits are skipped rather than believed, and the files
+    # they "add" fall through to the filename-stamp branch below, which is the
+    # fallback this function already had for an uncommitted file.  That stamp
+    # is the round's own clock (COMMON_LANE_ROUND pins it to `TZ=Asia/Bangkok
+    # date`), one round per file, so it answers the ordering question the
+    # graft time destroys.  Not a workaround for shallow: a commit that adds
+    # 10,447 files at once is not evidence about any one of them, whatever
+    # made it look that way.
+    boundary = set()
+    try:
+        shallow_file = os.path.join(ROOT, ".git", "shallow")
+        with open(shallow_file, "r", encoding="utf-8") as handle:
+            boundary = {line.strip() for line in handle if line.strip()}
+    except Exception:
+        # A full clone has no `.git/shallow`, and a worktree/submodule has a
+        # `.git` file rather than a directory.  Both mean "no graft point",
+        # which is the ordinary case and not an error.
+        boundary = set()
     try:
         raw = subprocess.check_output(
-            ["git", "-C", ROOT, "log", "--format=%x00%cI", "--name-only",
+            ["git", "-C", ROOT, "log", "--format=%x00%H %cI", "--name-only",
              "--", "rounds/"],
             stderr=subprocess.DEVNULL).decode("utf-8", "replace")
         stamp = ""
+        skipping = False
         for line in raw.splitlines():
             if line.startswith("\x00"):
-                stamp = line[1:]
-            elif line.strip():
+                sha, _, stamp = line[1:].partition(" ")
+                skipping = sha in boundary
+            elif line.strip() and not skipping:
                 base = os.path.basename(line.strip())
                 out.setdefault(base, stamp)
     except Exception:
@@ -575,6 +606,21 @@ def main():
               % files_seen)
         return 1
 
+    # COO-BLOCKER-SWEEP `2141` item 1, the residual said out loud rather than
+    # left for the next executive round to rediscover.  Skipping the shallow
+    # graft commit stops 86% of the rows carrying one false stamp, but it does
+    # not INVENT a date: a chief round file is named `R<N>_<id>_<subject>.md`
+    # and carries no timestamp, so any chief round older than the clone's
+    # depth now has an empty date column instead of a wrong one.  Empty is the
+    # honest answer and it is answerable-adjacent (the round number orders
+    # those rows), but a reader must be told the count, because a blank cell
+    # is exactly what a broken collector also produces.
+    undated = [r for r in allrows if not r[-1]]
+    if undated:
+        print("scoreboard: %d row(s) have no date -- a round file with no "
+              "timestamp in its name, committed below this shallow clone's "
+              "graft point.  Not an error; not orderable by date either."
+              % len(undated))
     print("scoreboard: %d round files, %d rows (%d DONE, %d COMING, %d STUCK, "
           "%d NONE), %d manual, %d malformed"
           % (files_seen, len(rows),

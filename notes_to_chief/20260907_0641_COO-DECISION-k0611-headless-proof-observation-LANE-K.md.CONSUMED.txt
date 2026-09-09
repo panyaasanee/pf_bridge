@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:29+07:00: verified already applied — GAME_TEST_QUEUE.md cites COO-DECISION 20260907_0641 items 1-2 directly (clerk has no authority to grant exemptions, ticket stays in category d pending Panya's NO_MECHANISM_TO_ARM: exception); only the .CONSUMED.txt marker was missing

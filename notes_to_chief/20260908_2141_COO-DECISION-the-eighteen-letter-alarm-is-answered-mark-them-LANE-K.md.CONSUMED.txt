@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:38+07:00: closure marker for the instruction letter itself — the 15 letters it named in category ก and the 3 in category ข were all folded/verified this round (16-letter increase in the .CONSUMED.txt count met, deadline token satisfied)

@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:32+07:00: applied verbatim — RE-316 folded to DONE/PASS (bounded negative) in CLIENT_RE_QUEUE.md, [STATIC-ON-BRIDGE] tag added retroactively with the reasoning noted inline, BIRTH_SKILL_POINTS kept as ASSUMPTION not MEASURED, .LANEK-FOLDED.txt written alongside the result letter

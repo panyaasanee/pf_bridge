@@ -34,23 +34,7 @@
 - chief อยู่บนคลาวด์และเป็นคนออกใบสั่ง คุณรันแล้วส่งผลกลับ
 - ใบสั่งผิดหรือรันไม่ได้ = **รายงานว่ารันไม่ได้ ห้ามแก้ใบสั่งเอง ห้ามเดาเจตนา**
 
-## 2. แผนที่
-
-```
-C:\Users\Panya\Desktop\Pirate Force\
-  pf_bridge\                      <- ศูนย์ประสานงาน (คุณอยู่ตรงนี้)
-    inbox\  outbox\  done\  staged\
-    GAME_TEST_QUEUE.md            <- ใบสั่งเทสทั้งหมด
-    notes_to_chief\               <- กล่องจดหมาย
-    docs\UI_LANE.md               <- 🆕 เขตเขียนของ LANE-UI · สายอื่นห้ามแตะ · LANE-UI สร้างเอง
-                                     (COO-DECISION 20260905_1949 ข้อ 2 · จดทะเบียนรอบ R358 · ยังไม่มีไฟล์)
-    LOCK_GAME.txt  LOCK_GIT.txt   <- ธง (ไม่อยู่ใน git โดยเจตนา)
-    CANON_SHA.txt                 <- sha ของ canonical DB ที่ถูกต้อง
-  Pirate Force ServerProject\     <- repo โค้ด (อ่านได้ ห้ามแก้)
-    state\pirateforce.sqlite3     <- 🔴 canonical DB ห้ามแตะตัวจริง
-    scenarios\
-  GameClient\                     <- ตัวเกม + capture (อ่านอย่างเดียว)
-```
+## 2. แผนที่ ⇒ [`archive/AGENTS_HISTORY_20260909_map_and_known_issues.md`](archive/AGENTS_HISTORY_20260909_map_and_known_issues.md) (ย้ายคำต่อคำ R408 · ไม่ใช่กฎ ไม่มีอะไรถูกลบ)
 
 ---
 
@@ -175,15 +159,13 @@ C:\Users\Panya\Desktop\Pirate Force\
 - 🔴 **migration ที่แตะ canonical ต้องหมุน `CANON_SHA.txt` ใน PR เดียวกันเสมอ ห้ามแยกสองรอบ** (`COO-DECISION 20260901_1241` ข้อ ② · เหตุผล ⇒ archive §CANON_SHA) · ข้อ ①/③ ยังเป็นช่องว่างไม่มีเจ้าของ ⇒ [archive](archive/CHIEF_CONTINUATION_ARCHIVE_20260906_lane_charters_db_cs_ui_q.md)
 - 🔴 **ช่องค้นบังคับของใบ RE ผูก*ผู้บริโภคผล*ด้วย ไม่ใช่ผู้เขียนใบฝ่ายเดียว** — ต้องตามการอ้างอิงในช่องค้นก่อนสั่งงานต่อ (`LANE-A 20260905_0430` · ตัวอย่างถูก `RE-256`)
 ### 🔴 วิธีเปิด PR (บังคับทุกสาย) ⇒ [`HOWTO_OPEN_A_PR.md`](HOWTO_OPEN_A_PR.md) · ผู้เทสไม่เปิด PR ตาม §7 · marker `PF-AUTOMERGE: v4` เป๊ะ · ห้าม merge/ปิด PR เอง · ขนาด ≤ ~6 ไฟล์ต่อใบ · 🔴 **สตริง marker ห้ามอยู่ใน body ของ PR ใบใด ทุกใบทั้งสองรีโป** เว้นเป็นบรรทัด marker จริงของใบที่ต้องการให้ merge (claim = ห้ามมีจนจบรอบ) · **ห้ามสะกดสตริงเพื่ออธิบายว่าถอนมันแล้ว ให้เรียกว่า automerge marker** · ท่าหยุด PR มาตรฐาน = ถอน marker → convert to draft → GET body กลับมา grep ตัวเอง (`COO-DECISION 20260907_0845` · `#993`)
+- 🔴 **"เปิดแล้ว/landed/ส่งแล้ว" ต้องมาพร้อมคำสั่ง `grep` ที่รันซ้ำได้ + คอมมิต** ไม่มี = เขียนได้แค่ "จะเปิดในรอบนี้" (`COO-DECISION 20260908_1943` ②)
+- 🔴 **ป้ายสถานะชั่วคราว (`[สมมติของสาย ... - รอ COO ยืนยัน]`) ห้ามอยู่ในไฟล์ `migrations/*.sql`** — checksum ผูกกับไบต์ทั้งไฟล์ (`sha256(path.read_bytes())`) แก้คอมเมนต์ตัวเดียว = DB ของเจ้าของบูตไม่ขึ้น · ที่อยู่ที่ถูก = ไฟล์เทส/ดอกสตริงพิน · ป้ายที่ค้างใน migration ที่ apply แล้ว **ปล่อยไว้** (`COO-DECISION 20260908_2055`)
+- 🔴 **PR addendum ต้องมี automerge marker เหมือน PR ปกติ** — ไม่มี = ผีถาวร reaper ไม่แตะ ผล adversary ไม่ถึง main รอบหน้า grep ไม่เจอและจ่ายหนี้ซ้ำ (วัด: 16 ใบค้าง เก่าสุด ~45 ชม. · `ls rounds/ | grep -c addendum` = 0) · ใบของสายไหน สายนั้นเติมเอง (`COO-BLOCKER-SWEEP 20260908_2141` ②)
 
 ---
 
-## 8. ⚠️ ปัญหาที่รู้อยู่แล้ว — อ่านก่อนโทษตัวเอง
-
-- **อินพุตสังเคราะห์ไม่น่าเชื่อถือเป็นช่วง ๆ** ⇒ ถ่ายภาพก่อนคลิกทุกครั้ง · zoom ยืนยันพิกัด · **คลิกไม่ติด 3 ครั้ง = หยุดแล้วรายงานว่าเป็นปัญหาอินพุต ห้ามสรุปว่าปุ่มไม่ทำงาน**
-- **หน้าต่าง elevated ที่ทับจอทำให้เทสตาย** (Windows ห้าม process ธรรมดาแตะทุกช่องทาง) ⇒ **ปิดหน้าต่าง elevated ทุกบานก่อนเริ่ม** (`TEMPLATE_preflight_unattended.ps1` ตรวจให้)
-
----
+## 8. ⚠️ ปัญหาที่รู้อยู่แล้ว — อ่านก่อนโทษตัวเอง ⇒ [`archive/AGENTS_HISTORY_20260909_map_and_known_issues.md`](archive/AGENTS_HISTORY_20260909_map_and_known_issues.md) (ย้ายคำต่อคำ R408 · ไม่ใช่กฎ ไม่มีอะไรถูกลบ)
 
 ## 9. เลือกใบเทสยังไง — รับได้ทุกใบ ไม่มีใบต้องห้าม
 

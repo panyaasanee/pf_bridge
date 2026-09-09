@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:27+07:00: applied verbatim — renamed console token in tickets/GT-307.md step 4 from the old action name to SKILL_LIST_AT_LOGIN (grep tokens both verified: old=0, new>=1)

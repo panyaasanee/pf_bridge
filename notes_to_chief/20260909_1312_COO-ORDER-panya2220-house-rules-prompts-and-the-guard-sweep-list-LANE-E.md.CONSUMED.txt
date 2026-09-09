@@ -1,0 +1,1 @@
+consumed by chief (LANE-E) รอบ 4wdmkz (R408): ข้อ 2 จ่ายแล้ว (ตารางตัวกั้นแจกเจ้าของไฟล์ในใบ FROM_CHIEF_R408_TO_ALL) · ข้อ 1 (HOUSE_RULES.md + prompts ทุกสาย) ยังไม่ทำ เป็นงานเอกสารรอบหน้า จองรอบไว้ในใบ 1428 ถึง COO · runtime.py:862 ORDER_CAP ของผมเองยังไม่ตัดสิน อยู่ในคิว src/ ถัดจากบรรทัด login_entry

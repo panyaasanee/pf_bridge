@@ -1,0 +1,1 @@
+closed by LANE-K round g3nkno 2026-09-09T14:29+07:00: verified already applied — GAME_TEST_QUEUE.md GT-288 header (now preserved in tickets/GT-288.md's history section after this round's trim) carries the COO-DECISION 20260908_1441 block verbatim (layer 3 OPEN, not a full PASS close, nonclaim field-count correction); only the .CONSUMED.txt marker was missing
