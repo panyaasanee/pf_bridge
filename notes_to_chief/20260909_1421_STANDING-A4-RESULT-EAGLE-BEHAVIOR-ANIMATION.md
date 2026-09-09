@@ -52,6 +52,8 @@ SKILL_CONTEXT มีแถวทั้งห้าและแต่ละแถ
 
 **ขอบเขตสำคัญ:** การอ่าน `CHASE(n)` ว่า “slot n ของ MOBS.s_SKILLS” ยังเป็นสมมติฐาน D ตามคำตัดสิน Panya `2032` และ module `mob_ai_rules.py` ก็เก็บ integer โดยไม่ resolve. ดังนั้นตารางข้างบนพิสูจน์ selector→animation เมื่อ selector ถูกเลือกแล้ว แต่ยังไม่พิสูจน์ว่า original server เลือกแถวใดในแต่ละ AI_COMBAT condition. ชื่อ `range`, `area`, `HIT`, `emit` เป็นชื่อคอลัมน์ต้นทาง ไม่ใช่หลักฐาน damage/target/FX ที่เห็นจริง
 
+Whole-image UTF-16 literal/xref census รองรับเพดานนี้: `s_CONDITOIN` และ `s_ACTION` ไม่มี literal; `AI_COMBAT` มีหนึ่ง occurrence ซึ่งเป็น suffix ของ `n_AI_COMBAT` และ VA ของ suffix `0xF15178` ไม่มี absolute-dword xref. ตรงกันข้าม `n_AI_COMBAT` มี loader xref เดียวที่ `0x4A31B8` และ `s_SKILLS` มีสอง xref โดย loader อยู่ที่ `0x4A3218`. นี่เป็น bounded direct-literal negative ว่า image นี้ไม่มี named AI_COMBAT interpreter ให้ตามต่อ ไม่ใช่ global proof ว่าไม่มี indirect consumer หรือ original server logic
+
 ## Reproducibility
 
 จาก `pf_bridge`:
@@ -60,10 +62,10 @@ SKILL_CONTEXT มีแถวทั้งห้าและแต่ละแถ
 & 'C:\Users\Panya\AppData\Local\Programs\Python\Python314\python.exe' -B .\staged\standing_a4r_verify.py
 ```
 
-ผล: `PASS rows=12 raw_row_hashes=12 binary_spans=7 calls=6 pins=3 known_answers=5 traps=2`; verifier เป็น stdlib-only และตรวจ image/source ก่อน-หลัง
+ผล: `PASS rows=12 raw_row_hashes=12 binary_spans=7 calls=6 pins=13 known_answers=5 traps=2`; verifier เป็น stdlib-only และตรวจ image/source ก่อน-หลัง
 
-- verifier SHA-256 `40ad5776cf813e4d7129d43770d148b072a79d53b9c19d8e67df6b1d3dcffaeb`
-- verifier log SHA-256 `536e66bc6befe8b72271e08b8c039c985fa053d71194519377d9b9aad20f3854`
+- verifier SHA-256 `c7c6d160bcb1d724cf28b2eed3ff3720b367ee0adabab2680b7371b1e93e1fd5`
+- verifier log SHA-256 `ebaac3b6d435f666c571a9459327bff8a5e9b66d989987d5717921d5efe47599`
 - data probe SHA-256 `26a7cc36c494e0b499c9505226e915e068c484fd6179080331576cc826603105`
 - data probe log SHA-256 `3d351717d712a0335c71090c99033d620796bfcf8841cb25697c2083ce0338d7`
 
