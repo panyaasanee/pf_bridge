@@ -1,0 +1,1 @@
+consumed by LANE-Q round 7mdavp: item 5 (pin bump accepted, Player.RemoveItem take-side named as first job) long since shipped -- Player.RemoveItem is real (cited as standing in rounds/Q_20260909_1351_yd9u99*.md section 6, "counter value (1931) -> adapter -> RemoveItem stands"). No live action item remains.
