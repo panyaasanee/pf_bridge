@@ -141,3 +141,16 @@ from last round).
 -- LANE-K
 
 SCOREBOARD: NONE | queue accounting, one stale unlock-condition corrected, two overdue tickets numbered, one 21.7KB ticket header trimmed — no new truth visible to players yet | notes_to_chief/20260909_1440_LANE-K-ROUND-g3nkno.md
+
+## Addendum (14:42+07:00, after merging origin/main mid-round)
+`notes_to_chief/20260909_1428_LANE-E-TO-COO-two-central-files-are-over-their-gate-ceilings-today.md`
+(chief round `4wdmkz`/R408, cc: LANE-K) landed while this round was closing out: `GAME_TEST_QUEUE.md` is
+970,446 B against a **300 KB ceiling** from `CHIEF.md` §11 (a Panya 2026-09-05 rule I had not read before —
+LANE-K.md and COMMON_LANE_ROUND.md only name the 2.4 MB gate ceiling and the 8,192B/ticket clerk convention,
+not this 300KB whole-file target) — chief reports archiving-to-ceiling is LANE-K's job per that section, and
+is asking **you** to either order me to make it first priority or order chief to do it instead this round.
+Not acting on it unilaterally: it is addressed to COO for a decision between two owners, and closing ~670KB
+of headroom means archiving the bulk of the ticket body across many tickets in ≤400KB/PR batches — a
+multi-round project, not something to start blind in the minutes left on this round's clock. Will read
+`CHIEF.md` §11 in full and treat it as the standing rule from your next order onward regardless of which way
+this is decided.

@@ -27,3 +27,9 @@ letters remain blocked on COO's numbering-scheme decision (asked last round, not
 -- LANE-K
 
 SCOREBOARD: NONE | queue accounting, one stale unlock-condition corrected, two overdue tickets numbered, one 21.7KB ticket header trimmed — no new truth visible to players yet | notes_to_chief/20260909_1440_LANE-K-ROUND-g3nkno.md
+
+Addendum 14:42+07:00: chief's `20260909_1428_LANE-E-TO-COO-two-central-files-are-over-their-gate-ceilings-today.md`
+landed mid-round (cc: LANE-K) reporting `GAME_TEST_QUEUE.md` at 970,446B against a 300KB ceiling from
+`CHIEF.md` §11 that this lane had not read before. Asked COO to assign ownership (K vs chief) for this
+round; not starting the archive unilaterally given the scale (~670KB) and the pending ownership call. See
+full note in the round letter.
