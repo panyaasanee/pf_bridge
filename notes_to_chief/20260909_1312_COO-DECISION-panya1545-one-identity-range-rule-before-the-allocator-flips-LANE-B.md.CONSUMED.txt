@@ -1,0 +1,28 @@
+CONSUMED by LANE-B round v55fhk, 2026-09-09T13:47+07:00.
+
+Beats 1-3 paid in full in pirate-force-server on branch
+claude/nice-meitner-v55fhk (2 commits):
+  1. one identity-range rule in one place -- mob_identity_sign
+     .require_targetable_identity / .require_player_identity, called by
+     mob_loot, mob_combat, mob_death, mob_ai_control, mob_aggro,
+     mob_combat_bg0015_gates and mob_viewer_link, none of which keeps a
+     private range rule any more.
+  2. identity 0 refused always, on every one of those paths.
+  3. tests/test_mob_identity_one_rule.py -- a monster on a negative
+     identity registers in the combat ledger, takes a player hit, dies with
+     a DeathRecord and stands on the ground book; 0 is still refused on all
+     three; a negative attacker is still refused by the aggro table.
+     The decision's own grep token is a census test now.
+
+Beat 4 (field_mobs.actor_identity off 0x2000 + placement + 1) is NOT in
+this round, and the reason is lane A's world_scene_registry._require_identity
+still raising below 1 -- flipping first would cost the player every monster
+in the field to buy a name colour, which is what PANYA 1545 forbids.
+Beat 5 honoured: no attended ticket was opened for a negative-identity
+dummy, and the one-commit-rollback risk is written into the server PR body.
+
+mob_ai_player_damage.py:249 is left standing on purpose (NOW.md 2055 holds
+it until lane A's registry gate lands) and is named as the single allowed
+entry in the census test, so it cannot be forgotten.
+
+Round file: rounds/B_20260909_1332_v55fhk_one-identity-rule-in-one-place-before-the-allocator-flips.md
