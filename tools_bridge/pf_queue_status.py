@@ -8,8 +8,13 @@
 # and says so.  Never copy one over the other by hand.
 # Rules implemented:
 #  - live file wins over archive; ticket present in BOTH with open-status in live but closed in archive => CONFLICT flag
-#  - open tickets missing from the hand index => DRIFT list
-#  - index lines whose ticket is closed => DRIFT list
+#  - the hand index is OPTIONAL since PANYA ticked 2026-09-09 16:00 (LANE-K deletes
+#    it from GAME_TEST_QUEUE.md).  Present => the three index-vs-body DRIFT
+#    sections below are produced as before.  Absent => all three are SKIPPED as a
+#    block and one line says so; they are never printed as "(none)", because
+#    "nobody asked" and "asked, found nothing" are not the same answer.
+#  - open tickets missing from the hand index => DRIFT list   (only when present)
+#  - index lines whose ticket is closed => DRIFT list         (only when present)
 # Run:  python3 tools_bridge/pf_queue_status.py   (from pf_bridge root; also works with Windows py -3)
 import re, sys, glob, os, datetime, subprocess
 
@@ -185,14 +190,40 @@ for p in ARCH:
         arch.setdefault(t, v + (os.path.basename(p),))
 
 # hand index section of GAME_TEST_QUEUE.md
+# [PANYA ticked 20260909_1600 -> COO-ORDER 1600 -> chief round qnys56] The hand
+# index is being DELETED from the queue by LANE-K.  When it is gone, every one
+# of the three index-vs-body DRIFT sections below becomes a lie of the loudest
+# possible kind: "open but not in the hand index" would list EVERY open ticket,
+# on every run, forever.  So the index is now OPTIONAL, and its absence is a
+# state this tool names once instead of a difference it reports per ticket.
+# INDEX_PRESENT is the single switch; nothing below re-parses to ask again.
+INDEX_PRESENT = False
+INDEX_STATE = "deleted"   # deleted | present | unreadable
 idx_ids = set()
+txt = ""
 try:
     txt = open(LIVE[0], encoding="utf-8", errors="replace").read()
+    # [pf-adversary D5, reproduced] Key on TICKET IDS, not on the heading phrase.
+    # Keying on the phrase means the first person who writes a tombstone line
+    # naming the thing that was deleted ("## สารบัญใบที่ยังไม่ปิด (ลบแล้ว)") re-arms
+    # the exact disaster this switch exists to prevent: measured in a worktree,
+    # one such heading put all 91 open tickets back in the DRIFT list.  An index
+    # with no ticket in it is not an index.
     m = re.search(r"สารบัญใบที่ยังไม่ปิด(.*?)(?:\n\*\*🎮|\n## )", txt, re.S)
     if m:
         idx_ids = set(TID.findall(m.group(1)))
-except OSError:
-    pass
+        if idx_ids:
+            INDEX_PRESENT = True
+            INDEX_STATE = "present"
+except OSError as exc:
+    # [pf-adversary D5] "could not read the file" is NOT "the index was deleted",
+    # and the Windows sync holding GAME_TEST_QUEUE.md open raises PermissionError,
+    # which is an OSError.  Naming the wrong cause with a citation is worse than
+    # saying nothing, so this state has its own name and its own printed line.
+    INDEX_STATE = "unreadable"
+    print("WARNING: could not read %s (%s) -- the index sections below are skipped "
+          "because the FILE could not be read, which is NOT the same as the index "
+          "having been deleted." % (os.path.basename(LIVE[0]), exc))
 
 # index-line statuses (the hand index can be NEWER than the body -- e.g. GT-080 unblock lived only there)
 idx_status = {}
@@ -240,8 +271,10 @@ for t in allids:
 open_rows = [r for r in rows if r[1] not in CLOSED and r[2].startswith("live")]
 placeholder_rows = [r[0] for r in open_rows if live_flags.get(r[0], (False, False))[0]]
 no_attended = [r[0] for r in open_rows if not live_flags.get(r[0], (False, False))[1]]
-missing_idx = [r[0] for r in open_rows if r[0] not in idx_ids]
-closed_in_idx = sorted(i for i in idx_ids if i in dict((r[0], r[1]) for r in rows) and dict((r[0], r[1]) for r in rows)[i] in CLOSED)
+# No index => no index drift.  Not "zero drift found": no question asked.  The
+# distinction is printed, not hidden, by NO_INDEX_LINE below.
+missing_idx = [r[0] for r in open_rows if r[0] not in idx_ids] if INDEX_PRESENT else []
+closed_in_idx = sorted(i for i in idx_ids if i in dict((r[0], r[1]) for r in rows) and dict((r[0], r[1]) for r in rows)[i] in CLOSED) if INDEX_PRESENT else []
 
 try:
     now = subprocess.check_output(["date", "+%Y-%m-%dT%H:%M:%S+07:00"], env={**os.environ, "TZ": "Asia/Bangkok"}).decode().strip()
@@ -270,11 +303,21 @@ out.append("|---|---|---|---|")
 for r in sorted(open_rows, key=lambda x: x[0]):
     out.append("| %s | %s | %s | %s |" % (r[0], r[1], r[2], r[3]))
 out.append("")
-out.append("## DRIFT -- open แต่ไม่มีในสารบัญมือ (%d)" % len(missing_idx))
-out.append(", ".join(missing_idx) if missing_idx else "(none)")
-out.append("")
-out.append("## DRIFT -- อยู่ในสารบัญมือแต่สถานะจริงปิดแล้ว (%d)" % len(closed_in_idx))
-out.append(", ".join(closed_in_idx) if closed_in_idx else "(none)")
+if INDEX_STATE == "unreadable":
+    NO_INDEX_LINE = ("อ่าน %s ไม่ได้รอบนี้ -- สามหมวด DRIFT ที่เทียบกับสารบัญถูกข้ามเพราะ**อ่านไฟล์ไม่ได้** "
+                     "ไม่ใช่เพราะสารบัญถูกลบ (ห้ามอ่านบรรทัดนี้เป็นคำยืนยันว่าสารบัญหายไปแล้ว)"
+                     % os.path.basename(LIVE[0]))
+else:
+    NO_INDEX_LINE = ("สารบัญมือถูกลบ 2026-09-09 (PANYA 16:00) -- สถานะอ่านจากหัวใบเท่านั้น "
+                     "(สามหมวด DRIFT ที่เทียบกับสารบัญถูกข้ามทั้งก้อน ไม่ใช่ 'ตรวจแล้วไม่พบ')")
+if INDEX_PRESENT:
+    out.append("## DRIFT -- open แต่ไม่มีในสารบัญมือ (%d)" % len(missing_idx))
+    out.append(", ".join(missing_idx) if missing_idx else "(none)")
+    out.append("")
+    out.append("## DRIFT -- อยู่ในสารบัญมือแต่สถานะจริงปิดแล้ว (%d)" % len(closed_in_idx))
+    out.append(", ".join(closed_in_idx) if closed_in_idx else "(none)")
+else:
+    out.append("## DRIFT -- (ข้าม) " + NO_INDEX_LINE)
 out.append("")
 out.append("## CONFLICT -- live เปิดแต่ archive ปิด (%d)" % len(conflicts))
 out.extend(conflicts if conflicts else ["(none)"])
@@ -285,9 +328,10 @@ for t, ist in sorted(idx_status.items()):
     if bst and bst != "UNKNOWN" and ist != bst and not (ist in CLOSED and bst in CLOSED):
         mismatch.append("%s: index=%s vs body=%s -- อ่านทั้งสองที่ก่อนใช้ (ฝั่งไหนใหม่กว่าดูป้ายรอบ/เวลาในบรรทัด)" % (t, ist, bst))
 out.append("")
-out.append("## DRIFT -- สารบัญกับหัวใบบอกสถานะไม่ตรงกัน (%d)" % len(mismatch))
-out.extend(mismatch if mismatch else ["(none)"])
-out.append("")
+if INDEX_PRESENT:
+    out.append("## DRIFT -- สารบัญกับหัวใบบอกสถานะไม่ตรงกัน (%d)" % len(mismatch))
+    out.extend(mismatch if mismatch else ["(none)"])
+    out.append("")
 out.append("## BLOCKED-BY-PLACEHOLDER -- open แต่เนื้อใบยังมี <PLACEHOLDER> (%d)" % len(placeholder_rows))
 out.append("ห้ามบูต ไม่ว่าหัวใบจะเขียน READY หรือไม่ -- เผานัด attended (LANE-A `1041` ข้อ 4)")
 out.append(", ".join(placeholder_rows) if placeholder_rows else "(none)")
@@ -331,4 +375,4 @@ if not ours:
     print("this generator's banner, so somebody else wrote it (LANE-K writes a")
     print("hand-authored snapshot at that path).  Wrote QUEUE_STATUS_SNAPSHOT.generated.md")
     print("instead.  Read that one, and do not copy it over the other by hand.")
-print("wrote %s: %d tickets, %d open, drift-missing=%d, drift-closed-in-index=%d, conflicts=%d" % (os.path.basename(dest), len(allids), len(open_rows), len(missing_idx), len(closed_in_idx), len(conflicts)))
+print("wrote %s: %d tickets, %d open, drift-missing=%d, drift-closed-in-index=%d, conflicts=%d%s" % (os.path.basename(dest), len(allids), len(open_rows), len(missing_idx), len(closed_in_idx), len(conflicts), "" if INDEX_PRESENT else " (index=%s: the three index DRIFT sections were skipped, not measured)" % INDEX_STATE))
