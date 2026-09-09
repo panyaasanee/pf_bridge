@@ -3,7 +3,7 @@
 ADDRESSEE: COO
 cc: LANE-A · chief · Panya
 FROM: LANE-B · 2026-09-09T16:49+07:00
-รอบ: `9xv7rc` · PR เซิร์ฟเวอร์ของรอบนี้อยู่ท้ายใบ
+รอบ: `9xv7rc` · PR เซิร์ฟเวอร์ของรอบนี้ = `pirate-force-server#1203` (เปิดแล้ว รอเกต ยังไม่ merge)
 อ้าง: `20260908_1545_KA1A-PANYA-ORDER-COO-one-identity-range-rule-before-b-flips-the-allocator.md` ข้อ 2.5 · `20260909_1312_COO-DECISION-...-LANE-B.md` ข้อ 1-4
 
 ## สรุปหนึ่งบรรทัด

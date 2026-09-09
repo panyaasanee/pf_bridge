@@ -12,7 +12,7 @@ HEAD ที่บูต: `pirate-force-server` origin/main `2e28496` · `pf_brid
 list `[LANE-B] round *: claim` ที่เปิดอยู่ = **ไม่มี** (ใบ LANE-B ที่เปิดค้างทั้งห้าใบเป็น `addendum` ไม่ใช่ claim)
 ⇒ เปิด claim เอง `pf_bridge#1999` · ไม่ใช่ takeover
 
-## รอบนี้ทำอะไร (`pirate-force-server#____` · `claude/nice-meitner-9xv7rc` · sha `f828239` + `7046dac`)
+## รอบนี้ทำอะไร (`pirate-force-server#1203` · `claude/nice-meitner-9xv7rc` · sha `f828239` + `7046dac`)
 
 งานตามลำดับที่ COO เคาะ: `COO-DECISION 20260909_1312` ข้อ 1-3 (= `PANYA-ORDER 20260908_1545` ข้อ 2.1/2.2/2.5)
 **"หนึ่งฟังก์ชัน หนึ่งกติกา หนึ่งที่" ก่อนแตะตัวจ่าย** — รอบก่อน (`k1hsp0`) ปิดสตริง wiring ไปแล้ว
@@ -140,7 +140,12 @@ list `[LANE-B] round *: claim` ที่เปิดอยู่ = **ไม่�
 ## เทส
 - targeted: `tests/test_mob_aggro.py` + `tests/test_mob_combat_bg0015_gates.py` = **84 passed / 58 subtests**
 - ใบใหม่: `tests/test_mob_identity_band_end_to_end.py` = **10 passed**
-- ชุดเต็มบนต้นไม้สุดท้าย (หลัง `git merge origin/main` = Already up to date): **15766 passed / 450 skipped / 0 failed / 43470 subtests passed** (1055 s)
+- ชุดเต็ม **รอบแรก** (ก่อนจ่ายหนี้ adversary · sha `f828239`): 15766 passed / 450 skipped / 0 failed (1055 s)
+- ชุดเต็ม **บนต้นไม้สุดท้ายจริง** (หลังจ่ายครบหกข้อ + `git merge origin/main` = Already up to date · sha `7046dac`):
+  **15774 passed / 450 skipped / 0 failed / 43470 subtests passed** (1019 s)
+- มิวแทนต์คุมสี่ตัว (แต่ละตัวมี control รันคู่): เปิดประตูของ A ⇒ D1 แดง 2 เคส · `is_player_identity`
+  → `identity_is_drawn` ⇒ D4 แดง · ประตู bg0015 = `if False:` ⇒ D3 แดง 3 เคส · ใส่ `__import__`
+  ของ `runtime` ลงพี่น้อง ⇒ D5 แดง · คืนไฟล์ครบทั้งสี่แล้วรันเขียวใหม่
 - `python3 tools_bridge/pf_gate_preflight.py --repo ../pirate-force-server` = **PREFLIGHT PASS**
 
 ## nonclaims
@@ -152,6 +157,7 @@ list `[LANE-B] round *: claim` ที่เปิดอยู่ = **ไม่�
 - ไม่ได้ยืนยันว่า `7046dac` อยู่บน main (ยังไม่ merge) — รอบหน้ายืนยันด้วย
   `git merge-base --is-ancestor`
 - ไม่ได้ตรวจว่าห้าใบ addendum ที่เติม marker จะผ่านเกตจริง — ส่งมอบให้ reaper แล้วคือจบหน้าที่
+- `#1203` **เปิดแล้ว รอเกต ยังไม่ merge ยังไม่อยู่บน main** — ห้ามอ่านใบนี้ว่า landed
 - ไม่ได้บริโภคจดหมายที่จ่าหน้าถึง LANE-B ที่ค้างอยู่ **23 ใบ** (ดูหัวข้อถัดไป)
 
 ## หนี้ที่ยกให้รอบหน้าอย่างเปิดเผย
@@ -174,4 +180,4 @@ list `[LANE-B] round *: claim` ที่เปิดอยู่ = **ไม่�
 5. ถ้ายังติดทั้งสอง ⇒ root cause ของ `GT-223` (`mob_death_persistence.py` / `mob_drop_presence.py`)
    ซึ่งรอบ `k1hsp0` ชี้ไว้แล้วว่าเป็นต้นตอจริง และเป็น "หาง P-1" ใน NOW
 
-SCOREBOARD: STUCK | ถอดกำแพงสองบานสุดท้ายในเขตตัวเองที่จะทิ้งมอนทั้งฉากเงียบ ๆ วันที่เลขประจำตัวมอนพลิกเป็นค่าลบ — ผู้เล่นยังไม่เห็นอะไรต่างวันนี้ เพราะตัวจ่ายยังไม่พลิก และประตูสุดท้ายที่ขวางอยู่เป็นไฟล์ของสาย A ที่สายนี้ถูกสั่งห้ามแตะ | pirate-force-server#____ - sha 7046dac - 84 passed targeted + 10 passed (four-in-one) + 15766 passed/450 skipped/0 failed (full suite) - จดหมาย notes_to_chief/20260909_1649_LANE-B-ASK-COO-one-door-left-before-the-allocator-can-flip.md
+SCOREBOARD: STUCK | ถอดกำแพงสองบานสุดท้ายในเขตตัวเองที่จะทิ้งมอนทั้งฉากเงียบ ๆ วันที่เลขประจำตัวมอนพลิกเป็นค่าลบ — ผู้เล่นยังไม่เห็นอะไรต่างวันนี้ เพราะตัวจ่ายยังไม่พลิก และประตูสุดท้ายที่ขวางอยู่เป็นไฟล์ของสาย A ที่สายนี้ถูกสั่งห้ามแตะ | pirate-force-server#1203 - sha 7046dac - 84 passed targeted + 10 passed (four-in-one) + 15774 passed/450 skipped/0 failed (full suite, final tree) - จดหมาย notes_to_chief/20260909_1649_LANE-B-ASK-COO-one-door-left-before-the-allocator-can-flip.md
