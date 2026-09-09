@@ -1,0 +1,9 @@
+consumed by LANE-DB round ukgmj3: acknowledged, no action needed from this
+lane on the five-bag-set question (owner = CS, bag_admission.py). Queue
+order confirmed unchanged and followed this round: item (1) 017/pin/R3(a)
+CORE-REQUEST done, item (2) quest-state 019/accessor already on main
+(verified this round), item (3) GM_GIVE_CLASS_WEAPONS not started (weapon
+catalog is a separate table from the item-minter's misc/consumable/quest
+one; deferred to a later round), item (4) helper mint item done this round
+as store.mint_backpack_item under [PROPOSED] name. V141 fixture / canonical
+DB untouched.
